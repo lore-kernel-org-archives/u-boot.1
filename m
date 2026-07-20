@@ -4,61 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73FFEC44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 06:21:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73449C4451B
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 06:23:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E072E82991;
-	Mon, 20 Jul 2026 08:21:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 83D0E82991;
+	Mon, 20 Jul 2026 08:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pYdDg9oe";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pAMvIUA9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9599283E76; Mon, 20 Jul 2026 08:21:19 +0200 (CEST)
+ id 3166284105; Mon, 20 Jul 2026 08:23:43 +0200 (CEST)
 Received: from BYAPR05CU005.outbound.protection.outlook.com (unknown
  [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41A7580517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 08:21:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD35780517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 08:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s8BRoBZAECJAHk6yMyNje70A9yRFmTV22uHHRs4SHHQikoVLpugOhkdmVdcl6I2z7I2sxtUgkn0zg0kBNgnhGE+b5Eo+PqEl8fHCA6ztaHldLZX5OsvU+gRF55l5ykm0Ah+av/8zRykqkEGHK8ocb+qCvZS79LDdLf6GaVBPb6f/dPC7y7FQqTKCtCnbHRINt9JH/itt87KM24E14OAxQCclcUtLmYChJtlJ6nKpb7QJqk+SBceMcdFVo0hP3YRJQO023JitxShtC5ilr0OqmlbBirzmR3L7XTzSDTQjBqTXkVQ3RAnWJFzHTZrHyT17Fkf90eQlpAnP+cyqxuUZwg==
+ b=v86yM4ndvvcOip1UvzHBAbl+mVg8SrVonPHlG9lIU0fN/H3HWNVrNt40rK1qkW4d+xIYaOM6jr0UumaqnjqNnCKhiQmYylCNV5r+PB2DxY3CzgPNU8ER0NwmtKhOrVOuFUJ8hXLH50O/3+QLHmxOPWhIbNqZpA4DHG3UGpFKII8EBmlswzoP0JxY9uwSfs/HmhbKZ6/71yXh0/73v5qwM/fLjHb9ovDcadI0OB2aUZJQ6cIhb34QzmTb03jOdBY3yNGUFGJ+yfVrowIJu+hT/ytQqo8c+sAI0wW70BBgdyHDDSXSF2yez4fypRYZvSdKZA4u1Sn14vA4NNv+/F3+cA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MP91Yt7iWzZZLqLJbCsGGpEoP/jf6TY0B9/0d3S+BQ0=;
- b=Fqu065RegCZYgyhoHi0Q5IscHV6WLjGFwIzJ+qGA9tY+FttimBy39UN0m2XEuGWhVj6tgin15s1i92kbHeFUSZaSo8SkjWki3oRISz6J9PAncvjBG/TCrQpJn3e6R7s0hB/a/AlngkN57QN2ugIIgQzcMIA4lH8cju5BBCj+JaXeioCn6sSWa69rJ58xewDmDU74Tg5W/wWNXISPfudj7zP3yPlV5w9N0GenaziIVmwREoq/id+R5tT9OD/PvZt39bRTxpnytD9jXqbJhaC3UDDfGvwWH5olhAXHSS/W4UFwlFVR8/3lK5AmT6MX+bDRYbHfcaN0A066AJfYcJejaA==
+ bh=uZj5n7/IeXNkC95KlfsZtO4T3P55/QlAhmgM5gDPtPo=;
+ b=Shmr0tTxiKyXfwwGkoU1IDwn+H2ybE2VdurI0QdJf8EpE3c9br9rX3usxHGJnqTU7Ym4oCTscIoQQjjZOUBB66yW2q5mUKMhs8FsCZGQk6LNQasNikXYYPeQJEVwq34HKkTAcl6SFchOCZYA8r05+XaAPTDHP6nc7G9y9PUppkL21OLqXdvteHnohcA/QE0W29mbXI7X2v6Z52Fpi/oZuzeLvO+GxVkHtAwTMFXtI2Pc5mDbusUnaNdVRl87bZCcl1fcl2ODho3TtzWTa8KC5mdm9LF3rxAUjsHEt25G3zl2trP97fF2HXsUXrxKFTTtJSsRZrVjjtnVl9uZnURJbw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MP91Yt7iWzZZLqLJbCsGGpEoP/jf6TY0B9/0d3S+BQ0=;
- b=pYdDg9oeWFESaq/WOkQiXMsCpSRUQsdsK8N9+N5W7/yjQJlEWO4n0EbMUxO5L27xsNdBs4S2OGJdl1TwT4d4WrKY8yXYg4y+ECvQOSN1BBwg8j1GP2Kbcer+pYhbDYDh4bzxUjrPW5MuDg6gbIVSBIe90JOzf49copupWJ8i4PU=
+ bh=uZj5n7/IeXNkC95KlfsZtO4T3P55/QlAhmgM5gDPtPo=;
+ b=pAMvIUA9pCdw5UOharuD3kC6FnDLWjY3ecc3DHAeZBROqMjrE6uWWU0jMJ28WGYzYShYFPhB5sFyG3rZkmNOZVBcFg2mdIQHvivVAN5rg+Vh4fBeOL26olu2d2YI+dS8kROh0v0d6YCOqIU5ohTbAf0fHmppRPR2FdznloZUKJk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
  by SN7PR12MB7201.namprd12.prod.outlook.com (2603:10b6:806:2a8::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.16; Mon, 20 Jul
- 2026 06:21:08 +0000
+ 2026 06:23:35 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0223.013; Mon, 20 Jul 2026
- 06:21:08 +0000
-Message-ID: <d38109ed-eab4-4fd1-9e61-9e5a3268ebd5@amd.com>
-Date: Mon, 20 Jul 2026 08:21:04 +0200
+ 06:23:35 +0000
+Message-ID: <e756f5b9-9d48-4d15-b120-d4246fecfd5a@amd.com>
+Date: Mon, 20 Jul 2026 08:23:29 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] arm64: versal2: Make hardware.h assembly safe
+Subject: Re: [PATCH v2] board: xilinx: Generate FWU capsule dfu_alt_info from
+ fwu_platform_hook()
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@amd.com
-Cc: Padmarao Begari <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
-References: <de4de47ea457b285c5870e7ba25b4baf554561e7.1783493630.git.michal.simek@amd.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Pranav Sanwal <pranav.sanwal@amd.com>,
+ Pranav Tilak <pranav.vinaytilak@amd.com>,
+ Suraj Kakade <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <33c118b8177f8d0dc182a6f4c5cffedca4e02448.1782986903.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -104,75 +111,75 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <de4de47ea457b285c5870e7ba25b4baf554561e7.1783493630.git.michal.simek@amd.com>
+In-Reply-To: <33c118b8177f8d0dc182a6f4c5cffedca4e02448.1782986903.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR03CA0217.namprd03.prod.outlook.com
- (2603:10b6:a03:39f::12) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR05CA0047.namprd05.prod.outlook.com
+ (2603:10b6:a03:33f::22) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SN7PR12MB7201:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1598edf7-9dd0-4916-c3e8-08dee627164a
+X-MS-Office365-Filtering-Correlation-Id: d1987e1e-6d56-4383-3b96-08dee6276da9
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|23010399003|1800799024|376014|10067099003|56012099006|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: LIIna3VoGW2A8TXmBGD0eI0XLAB0AWTVK9vtwjg9QsXHq9Jz4bix3aDxNATjOxK2D3JScou62huM7MlwX/w+f3m11WDEgHRA6gPo0wcM0m+q75JMZxdVQzz9PVv5xiK9H8pv/2/qPU6AJ1xHZhuvYH8mtdro+BwOVEMNMSlicwZxpoRO+fvgGd84eA1E3AZgCPdSjDIW6rdnaAm2tKiSiHAxFbEYZiQM8cLqxHsEg+/QYFu3nnIpR3TWLFDrN44Nvrl674Odh+T932qIpP02u9AAhCC/cJMYo0K/nkM2MMsP0RfiroajBZCwKgN58Flms4wrmPlu430MVZ5ZbFQaheqTEUlJ2SWLYGFxsgqdDDMdA40eD9zNwS3cHohx8oTjPHcmEB48PgLFDRPsHn58ytPAMjxX2O2YqX93gyTHLl3WjSbIe8t0AlP3H9hYWOAgaXFzs6OopHVOfG9NOitToFG8Q7BMFsR1Kc2MLVYUGqBAhfLjYrff2qd+9pfVtkFlzlCuL+Q3PxH9+VjgHnyR+430LiUFkx2epbVmNb2oHMxOTSBfzwz2nSqd/BeEUwjCzJHQo0Cg8qkll/eZIwLxX9iM/eQKUl50A1OO2Av16cm/aDC6xergxQqpgOeN/fumSgw1hrKmeksgiW1QUk+BYKuB8P13gbpD/dLf0mQfprA=
+X-Microsoft-Antispam-Message-Info: yV0WhSXZ93wyrqkOUheHAZ+cNKRt1+kybDrKBD1tzZ1y2P74gddACzzZS19cS82ZxVbV3UgfSw50rz6BHipTzwBS5x8BrERFrnxhp3n5tX0Vb0z1hkDjLFpNttWAY5HzhXrdysjkUWostO+iY1x0mIf6jz38rZWl5kU1o39s/YUXUbvJ8z8eUcattYijbX/SWTdvu5vgCTm5S37mFlm5aW2fz/q74AGR8DQ9YzzayLFnNjpbSuxwHc90CYjNB/HSjsnkmx19Tg0MhH4rRe5PK2h0HQ+FWweSWylwJgIZnouEb0CrLu98RX/buXS3gcEbXF84M946ZpHV01SqntV16hj5EB3jYz3GFmxxA2J/hVjR6lZCoUFOU/6Zh9sfToyLDa3ed6yKsxET0y+BkbjcD8aC+He1C+eP1DKgSUn8Tgax2hwaRvMKjGRq6uRrltTexxIHjdjRXCqcdkxwiakmJgZs/IPtIbmIbP7JU+rJNwBBYGwrm/zS6ApNnHTtXJSO1g5zOr5oTJBVCEDt8ZMs02F0456NQvEfVHt8ORL17fJEGDdv3b1HrBfpk+gwabxijKZJc+qwEj5n6zjpumQyD2420A1wa3sPhqDkJfQXr7L299EfmNiHOyFzdHFloJdCoDtOGQORBKnUy/S0LNVv+et3LWQ2jRxEmVhuTob2TF0=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dTM0aWdibi9XcTFlR3BvWG9UQjVSMktiaTR1UFVCK1d2UDNFb2V5ODM4YW1J?=
- =?utf-8?B?STdZNjRzMWFDWlVyUzNMRTh1cE9zc0ozQXlzOVBZRXNPeXI1UTdaYkN6WGJv?=
- =?utf-8?B?dVhsWkFjKzJSVDl0eXluRVBoTDNTT0dibStDQ3RYdVdrUFF0YmNxUkRnSXg4?=
- =?utf-8?B?Mjh1aWVjYkxVRTdNR2taNDlkT2FEcmZBQVNLaHNsZDdnaGFuVVhxRUdSU1Na?=
- =?utf-8?B?VzFFdzFYL1RFWEZ4ckFZTlV0SFo1cjErTWRGUktPWGlXVW8zZkJBV3lQb01z?=
- =?utf-8?B?WTUvWkhLQW9lUXdiNm9RbEpkSUcvaHBJVnNQVXpKMEd1TmN3dU5WTGwvcklh?=
- =?utf-8?B?VnAvMEUrUGk4SzNUVDZtRC8vNG9seWJycGRTTlhqWEdRbE5iZ3NxRnF6UjJI?=
- =?utf-8?B?NGdsenBjR3k2SE5XeUNBampLV2VvbCtmclNWTE1lYXRPSkQrK1dCOHJHZTIv?=
- =?utf-8?B?QllPUWF4VmpHUjFzVHROeXNwSG1DdHFzbDNDSGhjUCtDYmFqTmsvdmZtU2Q4?=
- =?utf-8?B?dXE5TU5QRy95Vmh0aTB2Ym0xQVhMTm56Z3lqSndhT2MveHFMdWEySVA4eGZL?=
- =?utf-8?B?T2o2RWJydzl5T3NwV1V2OFg5RVc1ZWppNHJhdXE3aElPang3TktYVFB6YjJu?=
- =?utf-8?B?cDg4WVczQmRPNUhGVG92dlo1SXRoa1JWWXFmZzdaV0tiSHlxSTJ0Q1hITDJH?=
- =?utf-8?B?UUkwdWdtK0FSTE96MnVJakV5R2IwaEQ5cTdWanEzQllGcVVrRlpXb1dRK2ps?=
- =?utf-8?B?YTVsMVVDaDVmT2taQkNIZzJQN2t1cFJtUHB3eFhkdTVBK2EzQXVtNlhySkEz?=
- =?utf-8?B?MkRtakhJRmFuSG1lRTFoSGNibWRDMXBON2hFRndHMVhQK0NJRzg2QXFLU1Bq?=
- =?utf-8?B?L0lLVGhIdlVoTE9HelhPczhQOGcybUpJRUM2b2hSN1B0Wm0vS0J1bm93VUlv?=
- =?utf-8?B?RkhyZkhic0tJQXBDb1lxa25hdm13aXp3RUVmZkE4MExiM05RS2hlWEZKVmp0?=
- =?utf-8?B?WjV1Y3ZPcFRHOFpTczBwQTAwdUprbEJZNkVPek95ZDFLZDdtZU5EdkhDbEl1?=
- =?utf-8?B?b3ZMSWtkQjBKRDNvYW9iMkVSMzZWekp2UC9QRlBlam5QNTg2NUZLMWl3YWFu?=
- =?utf-8?B?dWdEMWFDekx0ZW1Jam01bFdvM3RTZXlGV1ZicGk2dk51NU5jaTg5V0tia1pi?=
- =?utf-8?B?VmhHK25YZmlQanU1MnFOeEIvODZrWmhyM29kTituVUNCazZheS9PSjQ1ZkFu?=
- =?utf-8?B?anpJbk12cGRRbXh2QmNIUXBKT3lNelJaZkVvcDF5QXFXSUZlVTdpTTZpcXVZ?=
- =?utf-8?B?MEdYNHBDMm1BQnI4QTZVQlF1L1VGRTJsTjJCZkxXZktJbDNEZTRFajByMmhx?=
- =?utf-8?B?MjBUUjBlZk1TK21nWlhESmJ2WkwwM2w1cG5pWjFIWjdwMy8venV2WEpEYzRD?=
- =?utf-8?B?MTJKdE0zUjl0Q1V4S2l5cTgvcjBWQ29wSktzQllhZW00Y0ExdGx6dmpSUmhQ?=
- =?utf-8?B?OGh0VXUwb1FoWWduK3RwME5vanVxaHdDVmw1TU9sMWZDcEttdnRRYzV2bzhr?=
- =?utf-8?B?S3c0WmRzZlVRelVoYnpXZmlZZ2hLK0hNeVd5RWd5N0tYN2VrYnBRdFZCdW0y?=
- =?utf-8?B?cm9JdXl2bFVhd0Z3TEV4VkZUUUlQS3Q3MVFaOW5oTDlOa0IrYXV3QVB2UW9r?=
- =?utf-8?B?QzF2a1AyYjY5NEI4aW9SclBtUEJra1ZnTnFBem5YU3B2L09CT1gwM2J0NDdL?=
- =?utf-8?B?dHRyTXp1Qkp5VUJYWENENjVsVTRmdFo5RTdJamtSZnBUNUdGS2MySTlhbGdX?=
- =?utf-8?B?bTVncmtZazRsL1oxd3FLanV0NEs2K3pOWGlOcnhzTjFlbmxPalcwUk9pUXdF?=
- =?utf-8?B?eFhBV3JCbVlEMnM0ODcxVG5BZVhDdWlBVUg1dEs1MkYrbWtBc1VlaTBxeXE0?=
- =?utf-8?B?aWljWUk2bU4yUDN5S1E0enlzUkxhL1NROFZMN2p6N2hJY3NEM1Q0RWlIZjFa?=
- =?utf-8?B?U2Y1RWlMY2dPZHB6Z2tvcklkaDU3Tnl0NGs2SVdsTHhVZjRlZnc2enk5WDYx?=
- =?utf-8?B?YVVST2J1aURzNWRBNzNUUFhFVVpPUTFVMER6bUNYMWFQUDN0OUM3SmtOL3o5?=
- =?utf-8?B?b0ZpZ2E0bFhGSDQ4cTZxd2V6Zk82b1VjN0hEbUNzOWxpUlJ2STNmQUdEcWNT?=
- =?utf-8?B?dDZ6OGhGczdqcEFPd2xXWjA3UURWcUZLRnRwdW5xaUFaOUx1WnV5TmFudWtu?=
- =?utf-8?B?eC9XTFBobnZ3Y2RyN1EzOFJHMmxEYno3ZXVOMnFtSlRBQ25qc0dBSnoxd0Rk?=
- =?utf-8?Q?gX7hRzRxzUzge3K2iL?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bzlFY1BYQi8rUFVKVE5QZzRFZmpMMDc2dmJsd3dYRXFNRjB2RE1zWDR3T3Z3?=
+ =?utf-8?B?RWJ2RVg1MFBFM1ZjMHlDY2dPNDM4ZyszVE5MVGtoeTQwbkZZVmNLeHdjeDAy?=
+ =?utf-8?B?aFlaaFlaV0pSZVpHRDhCZ1FBQS9GRHBMUEJQTHNPWUIvN1lEd2RvN3JLYnV2?=
+ =?utf-8?B?bFBtVmxGTW5DT05aY1d3SUlncnBDUHN5aEdiLzhZaGxPSjRGbDI4UXdBdmNp?=
+ =?utf-8?B?NzFZNTk5QTVLc3VsNnd0VUg4SjVaczZiSnBXNWd3R2JIRUU0UE9mZUIycC9l?=
+ =?utf-8?B?bm44VDNnWHVkNmEyeWdMZWNiVWRUTW92UzJMUDdaRWVqU1NSWTdCK3I0RXVr?=
+ =?utf-8?B?anZ1V1M3RCtydkRTdm1kWE5ObHZ4dXltWkovd0pULytuc2xEcVJldTBERStG?=
+ =?utf-8?B?TVYrMXJTamE4cHBGRkRNbjdzNGFISnJLYmpIZ1BON01JTjFlZWtLKzA4ZHNw?=
+ =?utf-8?B?KzR5dTJIV29EUDBLTHhzNVBBU1oyemk0TkVZMXhGYlhVRkd1RStiKzVKU25Y?=
+ =?utf-8?B?SVA5bVVCb1cxR1lOK2loN3lxcS9OM2dOaFBWbEdtOG5PVlpEN1AvNHJZMWxO?=
+ =?utf-8?B?VWJwR0N1c2ZDQ2E4cTFKR1NtVVBVKzZDbWF6YVBiazRidUNOWWVOT0NNL3BL?=
+ =?utf-8?B?THp5ak5yYzBZS3RtWUNLcnhLRE0za1R0S0FHLzVCdzVQZmVuazQ4ZmVBUUNs?=
+ =?utf-8?B?NExDNjNpMkoycDdweHhsV25YMFFocDBoSFNIbklUU01uWTBIWitFdkQ2a1ZE?=
+ =?utf-8?B?VWdhbzFOK1RGeHJLQmFtdkQ2L3RhN0R2dkpsZVo3SWE2ckx1T0laZFEvRzRN?=
+ =?utf-8?B?eXFRbDhtK2xWZHIvSWtna0RpQk1hSGhZblA0eGw0cGxGNnFGOGwzNlVLK1Zk?=
+ =?utf-8?B?QXhmVXVZVGJlc1pINlVXQklMMlZpVlE2bm1RSktLSTkvNnBFWU9XU2tsMWNK?=
+ =?utf-8?B?VXVrK3MrTUdRTWNqQmNXTFV5a3JtTWxiMlY0YnlzaXhDOU9xMUxSZE9aczdK?=
+ =?utf-8?B?d2QyV1Yrak5GOWlmNUdmcThTTTNNK0J1SU5wbkhHdkQwSWpMSGduVUJsUUZn?=
+ =?utf-8?B?V3lCZVdKSTZ5UktJbnNRT3Y2V3orYUEzNXJsMVV1TFV5VTNOVitYeG9MWlBz?=
+ =?utf-8?B?em9lM3dobG5RalhCUm4yWC96NlAzZkJqNDUvUGNUaFNReEtReXkwUC90Q1pR?=
+ =?utf-8?B?NUZJQ1YxNkprZWMwZHU2WStpa0VJU2RpU2RnK3ZEWkNPTHl5TGVoOCszRW1r?=
+ =?utf-8?B?b1RBQ05NWnEyUW9YWWhkS3NzWDZOU2ZQNnJ3K2RCc0dqVDBxRGtteTNKL0VH?=
+ =?utf-8?B?MGJpVUJQbG91N3B0TUx3NGlIVXZwcHY3bVBnUEJyT3ExZW5WTFg1OFdwOEdT?=
+ =?utf-8?B?U2dqdDNlOUNmeTl6bExWSG9WOUdPdGxFMDVxdC9Rb1ArendpM2hDdUFXc0pJ?=
+ =?utf-8?B?dWNHUExBU3IxWnFCOGdyaEJpaWFOOHZHL3ZtbUJ4WGhkblpNSFQycnJOZGwv?=
+ =?utf-8?B?ZnVvSXJubm5DN1NpWnUveUtqNEpjRkhvQ0dyb2QxblgwbXlGbzhjK04xaEly?=
+ =?utf-8?B?c2I5cmpFUEV2YjR2d3RYQmlZOCtKaW1CSG96dDhodm9GOTNua1Izb1A5YVFX?=
+ =?utf-8?B?MUVNSFhMbnR2YmVzbjJVMVRtdHNLaXZvYUFiRXFsY0dJRDJ5ZXRZN09PV0xT?=
+ =?utf-8?B?YjBjRkpaWGVjZFNsMFNHeHpydFd4UVBmZGR5WEJzdWVqblhRN1RtV3RkMW5K?=
+ =?utf-8?B?NmR5RDRtem9FdjJKWFFNOFJNVUdoZ0tJbytOVWUrSVF5NHp6elUzcTdGcklX?=
+ =?utf-8?B?L25uMHJUME0rQjdvOVg2MHRGd0xpNzBYS0owa2RmcUtGSmtZbjFlT3M1bUR4?=
+ =?utf-8?B?bUo1eWJvK2NEWG9qWFY2eGpwR3dxN3Vkc1U4SGM0REtQZTRaTmtlWTZReHoy?=
+ =?utf-8?B?dFh0UGFENGkrRWsvN3RxUnl6WE5mQlc4NXZTRXJMUkRuSDZ3bm5WbjRGNHlu?=
+ =?utf-8?B?RUVsOHk1Yno0UkRhcTFtSVN6OHpYL2VFOUh2TGpKUDI2azBiRUpqNy9nL3R3?=
+ =?utf-8?B?dEJDbVlaQVI4YU92NU9xMnF6YTdmUnQ4SnZyVStnSVh0M2M2YWlJZjkxU2JI?=
+ =?utf-8?B?aDZLMjNuTStDL3gwNU11N3ZxWThjeExzSzllZTBQZVdLbURDcDlvTWc2VVJ2?=
+ =?utf-8?B?U3lYNzBGNUt2RC9vNFpjSWJIRzFrTUhZNFFJRk9FQkxudXlXYWtOTlhCRGYz?=
+ =?utf-8?B?aVBranVIRm12NFdyU0VhZmVkSjdFemlTWERNczk5RnFGZHJsNXI4cTZmcXNy?=
+ =?utf-8?B?MUNKUXhZcEJBd283eWc1R1Fzd1hKT1Y1aGFycDBOTlhqb3hjbmJ0QT09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1598edf7-9dd0-4916-c3e8-08dee627164a
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1987e1e-6d56-4383-3b96-08dee6276da9
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 06:21:08.6526 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 06:23:35.3473 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Rq0fAys71koQER4f7LsHnp9jgtRPb0YeHXDh2qhJ8Svo9E2/vvt8M73uOCT6Fzft
+X-MS-Exchange-CrossTenant-UserPrincipalName: pZ5asHDy1Od5ZmWaYwcsC6rwmqPq8/L7zKYEILGau9H+NST0wHJSEI//YwrcngWR
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7201
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -192,143 +199,236 @@ X-Virus-Status: Clean
 
 
 
-On 7/8/26 08:53, Michal Simek wrote:
-> The register address and bootmode defines in this header are useful from
-> early assembly (e.g. lowlevel_init reading PMC_TAP_IDCODE), but the file
-> could not be included from .S because the C-only declarations were not
-> guarded.
+On 7/2/26 12:08, Michal Simek wrote:
+> Commit 371a6c1744f3 ("board: xilinx: Add capsule and FWU support") and
+> commit 818c06faa119 ("board: amd: Add capsule and FWU support")
+> introduced a separate set_dfu_alt_info() for the FWU multi-bank case
+> (Versal and Versal Gen 2 respectively) which set the dfu_alt_info
+> environment variable directly, while configure_capsule_updates() handled
+> the non-FWU case by filling update_info.dfu_string.
 > 
-> Reorder the header so all plain address/value defines are visible to both
-> C and assembly, and move every C-only construct (the linux/bitops.h
-> include, the register structs, the base pointer-cast macros and the
-> platform enum) into a single #ifndef __ASSEMBLY__ block.
-> 
-> No functional change for C consumers.
+> Fold the FWU multi-bank generation (fwu_gen_alt_info_from_mtd() over the
+> nor0 MTD partitions) into fwu_platform_hook() and drop the
+> standalone set_dfu_alt_info().
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
 > Changes in v2:
-> - new patch in series
+> - Do not setup dfu_string in board_late_init() which is too early because
+>    fwu is initialized after preboot.
+> - Update commit message
 > 
->   arch/arm/mach-versal2/include/mach/hardware.h | 82 +++++++++----------
->   1 file changed, 41 insertions(+), 41 deletions(-)
+>   board/amd/versal2/board.c   | 39 -------------------------------------
+>   board/xilinx/common/board.c | 37 ++++++++++++++++++++++++++++++++++-
+>   board/xilinx/versal/board.c | 39 -------------------------------------
+>   3 files changed, 36 insertions(+), 79 deletions(-)
 > 
-> diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
-> index 1bebf20910a0..7977529fd6c1 100644
-> --- a/arch/arm/mach-versal2/include/mach/hardware.h
-> +++ b/arch/arm/mach-versal2/include/mach/hardware.h
-> @@ -4,34 +4,6 @@
->    * Copyright (C) 2022 - 2025, Advanced Micro Devices, Inc.
->    */
+> diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
+> index 489b1fa9dca2..1855226398a9 100644
+> --- a/board/amd/versal2/board.c
+> +++ b/board/amd/versal2/board.c
+> @@ -11,7 +11,6 @@
+>   #include <env.h>
+>   #include <efi_loader.h>
+>   #include <fdtdec.h>
+> -#include <fwu.h>
+>   #include <init.h>
+>   #include <env_internal.h>
+>   #include <log.h>
+> @@ -506,8 +505,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
 >   
-> -#ifndef __ASSEMBLY__
-> -#include <linux/bitops.h>
+>   #define DFU_ALT_BUF_LEN		SZ_1K
+>   
+> -#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && \
+> -	!defined(CONFIG_FWU_MULTI_BANK_UPDATE)
+>   static void mtd_found_part(u32 *base, u32 *size)
+>   {
+>   	struct mtd_info *part, *mtd;
+> @@ -584,42 +581,6 @@ void configure_capsule_updates(void)
+>   	update_info.dfu_string = strdup(buf);
+>   	debug("Capsule DFU: %s\n", update_info.dfu_string);
+>   }
 > -#endif
 > -
-> -struct crlapb_regs {
-> -	u32 reserved0[67];
-> -	u32 cpu_r5_ctrl;
-> -	u32 reserved;
-> -	u32 iou_switch_ctrl; /* 0x114 */
-> -	u32 reserved1[13];
-> -	u32 timestamp_ref_ctrl; /* 0x14c */
-> -	u32 reserved3[108];
-> -	u32 rst_cpu_r5;
-> -	u32 reserved2[17];
-> -	u32 rst_timestamp; /* 0x348 */
-> -};
+> -#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
 > -
-> -struct iou_scntrs_regs {
-> -	u32 counter_control_register; /* 0x0 */
-> -	u32 reserved0[7];
-> -	u32 base_frequency_id_register; /* 0x20 */
-> -};
+> -/* Generate dfu_alt_info from partitions */
+> -void set_dfu_alt_info(char *interface, char *devstr)
+> -{
+> -	int ret;
+> -	struct mtd_info *mtd;
 > -
-> -struct crp_regs {
-> -	u32 reserved0[128];
-> -	u32 boot_mode_usr;	/* 0x200 */
-> -};
+> -	/*
+> -	 * It is called multiple times for every image
+> -	 * per bank that's why enough to set it up once.
+> -	 */
+> -	if (env_get("dfu_alt_info"))
+> -		return;
 > -
->   #define VERSAL2_CRL_APB_BASEADDR		0xEB5E0000
->   #define VERSAL2_CRP_BASEADDR			0xF1260000
->   #define VERSAL2_IOU_SCNTR_SECURE		0xEC920000
-> @@ -41,10 +13,6 @@ struct crp_regs {
->   #define IOU_SWITCH_CTRL_DIVISOR0_SHIFT		8
->   #define IOU_SCNTRS_CONTROL_EN			1
+> -	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
+> -	memset(buf, 0, DFU_ALT_BUF_LEN);
+> -
+> -	mtd_probe_devices();
+> -
+> -	mtd = get_mtd_device_nm("nor0");
+> -	if (IS_ERR_OR_NULL(mtd))
+> -		return;
+> -
+> -	ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
+> -	if (ret < 0) {
+> -		log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
+> -		return;
+> -	}
+> -	log_debug("Make dfu_alt_info: '%s'\n", buf);
+> -
+> -	env_set("dfu_alt_info", buf);
+> -}
+> -#endif
 >   
-> -#define crlapb_base ((struct crlapb_regs *)VERSAL2_CRL_APB_BASEADDR)
-> -#define crp_base ((struct crp_regs *)VERSAL2_CRP_BASEADDR)
-> -#define iou_scntr_secure ((struct iou_scntrs_regs *)VERSAL2_IOU_SCNTR_SECURE)
+>   int spi_get_env_dev(void)
+>   {
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index aff28cdd9b64..6fd0369a675e 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -1,7 +1,7 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   /*
+>    * (C) Copyright 2014 - 2022, Xilinx, Inc.
+> - * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
+> + * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+>    *
+>    * Michal Simek <michal.simek@amd.com>
+>    */
+> @@ -14,6 +14,8 @@
+>   #include <init.h>
+>   #include <jffs2/load_kernel.h>
+>   #include <log.h>
+> +#include <memalign.h>
+> +#include <mtd.h>
+>   #include <asm/io.h>
+>   #include <asm/global_data.h>
+>   #include <asm/sections.h>
+> @@ -22,6 +24,7 @@
+>   #endif
+>   #include <dm/uclass.h>
+>   #include <i2c.h>
+> +#include <linux/err.h>
+>   #include <linux/sizes.h>
+>   #include <malloc.h>
+>   #include <memtop.h>
+> @@ -65,6 +68,8 @@ struct efi_capsule_update_info update_info = {
+>   	.images = fw_images,
+>   };
+>   
+> +#define DFU_ALT_BUF_LEN		SZ_1K
+> +
+>   #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>   
+>   #define EEPROM_HEADER_MAGIC		0xdaaddeed
+> @@ -847,6 +852,36 @@ int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
+>   	/* Copy image type GUID */
+>   	memcpy(&fw_images[0].image_type_id, &img_entry->image_type_guid, 16);
+>   
+> +	/*
+> +	 * Generate the capsule DFU string from the FWU metadata. This has to
+> +	 * happen here, and not in configure_capsule_updates() called from
+> +	 * board_late_init(), because the FWU data is only populated by
+> +	 * fwu_boottime_checks() at EVT_POST_PREBOOT.
+> +	 */
+> +	{
+> +		ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
+> +		struct mtd_info *mtd;
+> +		int ret;
+> +
+> +		memset(buf, 0, DFU_ALT_BUF_LEN);
+> +
+> +		mtd_probe_devices();
+> +
+> +		mtd = get_mtd_device_nm("nor0");
+> +		if (IS_ERR_OR_NULL(mtd))
+> +			return -ENODEV;
+> +
+> +		ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
+> +		if (ret < 0) {
+> +			log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
+> +			return ret;
+> +		}
+> +		log_debug("Make dfu_alt_info: '%s'\n", buf);
+> +
+> +		update_info.dfu_string = strdup(buf);
+> +		debug("Capsule DFU: %s\n", update_info.dfu_string);
+> +	}
+> +
+>   	if (IS_ENABLED(CONFIG_EFI_ESRT)) {
+>   		efi_status_t ret;
+>   
+> diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+> index 1ba6f3feca45..2cd34544a329 100644
+> --- a/board/xilinx/versal/board.c
+> +++ b/board/xilinx/versal/board.c
+> @@ -10,7 +10,6 @@
+>   #include <env.h>
+>   #include <efi_loader.h>
+>   #include <fdtdec.h>
+> -#include <fwu.h>
+>   #include <init.h>
+>   #include <env_internal.h>
+>   #include <log.h>
+> @@ -377,8 +376,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
+>   
+>   #define DFU_ALT_BUF_LEN		SZ_1K
+>   
+> -#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && \
+> -	!defined(CONFIG_FWU_MULTI_BANK_UPDATE)
+>   static void mtd_found_part(u32 *base, u32 *size)
+>   {
+>   	struct mtd_info *part, *mtd;
+> @@ -455,39 +452,3 @@ void configure_capsule_updates(void)
+>   	update_info.dfu_string = strdup(buf);
+>   	debug("Capsule DFU: %s\n", update_info.dfu_string);
+>   }
+> -#endif
 > -
->   #define PMC_TAP	0xF11A0000
->   
->   #define PMC_TAP_IDCODE		(PMC_TAP + 0)
-> @@ -76,15 +44,6 @@ struct crp_regs {
->   #define PMC_MULTI_BOOT_REG	0xF1110004
->   #define PMC_MULTI_BOOT_MASK	0x1FFF
->   
-> -enum versal2_platform {
-> -	VERSAL2_SILICON = 0,
-> -	VERSAL2_SPP = 1,
-> -	VERSAL2_EMU = 2,
-> -	VERSAL2_QEMU = 3,
-> -	VERSAL2_SPP_MMD = 5,
-> -	VERSAL2_EMU_MMD = 6,
-> -};
+> -#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
 > -
->   #define VERSAL2_SLCR_BASEADDR	0xF1060000
->   #define VERSAL_AXI_MUX_SEL	(VERSAL2_SLCR_BASEADDR + 0x504)
->   #define VERSAL_OSPI_LINEAR_MODE	BIT(1)
-> @@ -108,3 +67,44 @@ enum versal2_platform {
->   
->   #define PMC_GLOBAL_PGGS3_REG	0xF111005C
->   #define PMC_GLOBAL_PGGS4_REG	0xF1110060
-> +
-> +#ifndef __ASSEMBLY__
-> +#include <linux/bitops.h>
-> +
-> +struct crlapb_regs {
-> +	u32 reserved0[67];
-> +	u32 cpu_r5_ctrl;
-> +	u32 reserved;
-> +	u32 iou_switch_ctrl; /* 0x114 */
-> +	u32 reserved1[13];
-> +	u32 timestamp_ref_ctrl; /* 0x14c */
-> +	u32 reserved3[108];
-> +	u32 rst_cpu_r5;
-> +	u32 reserved2[17];
-> +	u32 rst_timestamp; /* 0x348 */
-> +};
-> +
-> +struct iou_scntrs_regs {
-> +	u32 counter_control_register; /* 0x0 */
-> +	u32 reserved0[7];
-> +	u32 base_frequency_id_register; /* 0x20 */
-> +};
-> +
-> +struct crp_regs {
-> +	u32 reserved0[128];
-> +	u32 boot_mode_usr;	/* 0x200 */
-> +};
-> +
-> +#define crlapb_base ((struct crlapb_regs *)VERSAL2_CRL_APB_BASEADDR)
-> +#define crp_base ((struct crp_regs *)VERSAL2_CRP_BASEADDR)
-> +#define iou_scntr_secure ((struct iou_scntrs_regs *)VERSAL2_IOU_SCNTR_SECURE)
-> +
-> +enum versal2_platform {
-> +	VERSAL2_SILICON = 0,
-> +	VERSAL2_SPP = 1,
-> +	VERSAL2_EMU = 2,
-> +	VERSAL2_QEMU = 3,
-> +	VERSAL2_SPP_MMD = 5,
-> +	VERSAL2_EMU_MMD = 6,
-> +};
-> +#endif /* __ASSEMBLY__ */
+> -/* Generate dfu_alt_info from partitions */
+> -void set_dfu_alt_info(char *interface, char *devstr)
+> -{
+> -	int ret;
+> -	struct mtd_info *mtd;
+> -
+> -	/*
+> -	 * It is called multiple times for every image
+> -	 * per bank that's why enough to set it up once.
+> -	 */
+> -	if (env_get("dfu_alt_info"))
+> -		return;
+> -
+> -	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
+> -	memset(buf, 0, sizeof(buf));
+> -
+> -	mtd_probe_devices();
+> -
+> -	mtd = get_mtd_device_nm("nor0");
+> -	if (IS_ERR_OR_NULL(mtd))
+> -		return;
+> -
+> -	ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
+> -	if (ret < 0) {
+> -		log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
+> -		return;
+> -	}
+> -	log_debug("Make dfu_alt_info: '%s'\n", buf);
+> -
+> -	env_set("dfu_alt_info", buf);
+> -}
+> -#endif
 > ---
-> base-commit: 3278a671cb521d898e6f49d35f6bc034b2ac4d46
-> branch: debian-sent3
+> base-commit: 2c1b572ff2a1e54b22f6d9de77fc8bdcca7f3e7b
+> branch: master-next-test
 > 
 
-Applied all.
+Applied.
 M
