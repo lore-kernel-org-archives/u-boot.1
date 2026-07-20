@@ -1,118 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A14C44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 425EAC44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:05:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 64DC2606C6;
-	Mon, 20 Jul 2026 18:05:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EF866406BE;
+	Mon, 20 Jul 2026 18:05:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TTG3u9WhT3ah; Mon, 20 Jul 2026 18:05:31 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1Oe6XiSirbQR; Mon, 20 Jul 2026 18:05:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9BF8560708
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CDE1640620
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784570731;
-	bh=FegLAxNDuRR4YSCCV1mSzPu1oUaICxZCWZsO9mOyWdo=;
+	d=lists.u-boot-project.org ; s=default; t=1784570755;
+	bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
 	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=pMoYzYBI38TANWdXHjPI/TJ78UiyY0zCW/9a12n3JMsHl5IdBQkpgsVmzt+Smp5DT
-	 aEszUuApmsbLuYl0F1VHEBOtpiUI3m1O1t6hhkq7TIy/tCo3c9nFkyjV7l0Rh/Tzbu
-	 BDDamU1XLnpcgzctyDzN1QBN8JaJcZkhyGtWrLwpaRNpDdryxOrnZpIGn3uJtvJKOH
-	 CsHdobVG5jZ0WEw3LtFCcjeqouenJPdJZeBIIXXjgbnpxLe8q1zHScAeAqPZzq2dpg
-	 lsSH26jDgZV4R86+6lCE1qcfXM4acMxZeEU9HFzmGIjO12ewBiH7H+0DNakcQ+wafP
-	 JY5oL3Z+NfFVw==
+	b=DIbMwGS+tgppFVcV7BaLmaWIJlf2SSSqTn8430Xz8rUYjRB8l5i1CCoMMAzNhGq53
+	 CQXzuArqkeVhCsVaXTR/fa4EjvivnrrK/DDrF+XGIP7zEHX4/E7CWFs8y4K7WA6a9e
+	 LO07IsnLYEbcfvWF2utjMS6LtvtwmTw3U4ug5Z100YZVA5r2hdi0UCJuLlmhXpeJiA
+	 LnRaaaTSLmnNPsoR9axIP4OwLho7zaORoOzaJThH1J5O6OJZSJzmKQ+qhLSFBEvxUN
+	 qPgX7U7/0+HvLeC05E3lBnSYSRn0AQRgZCVo8MYeSw7rmtuTHy9ejJ3obadq187MC3
+	 Bqx93xdcEvyqA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9BF8560708;
-	Mon, 20 Jul 2026 18:05:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id A4280313
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CDE1640620;
+	Mon, 20 Jul 2026 18:05:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 72D342E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8A714606D6
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 64D366060E
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tUGiypWyPaaM for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 18:05:29 +0000 (UTC)
+ id HrNl0zxTpK03 for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 18:05:53 +0000 (UTC)
 Received-SPF: Neutral (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 405176060E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 405176060E
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 2F3DE606D6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2F3DE606D6
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 405176060E
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2F3DE606D6
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:53 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3764842FC; Mon, 20 Jul 2026 20:05:27 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 88A3D80433; Mon, 20 Jul 2026 20:05:51 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20BF080433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:05:25 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-c15e03c2763so949423966b.0
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:05:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784570724; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id 2A4F280433
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:05:49 +0200 (CEST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2cc7e86e7aeso76934365ad.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:05:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784570747; cv=none;
  d=google.com; s=arc-20260327;
- b=qSutCyZyIlZofBSlv9hWLTTfpLZxGnoZ/2Uhznu/LAFjTfAGJz6A8rZeoRuthELGei
- Be+jZ6CjEuef7NMVvlBz851+v5rqGtDBrpwfMKTAA24WTlhemvNHyYI36okCJf8XMnsH
- N9lRW+CoOk1QmgSFqzhbOXBMItze+crn6fH585MOJDfbsl6Fzi831u4aR7B+0YHvIvv7
- 18NzRoMJrJzhdxxwchT+RMdKtvbEQD4GNuqJ9wbiTAUO64MAcJfHxpN+YMpTltvLqVBP
- eiQHa+vHGzwUX8KAuAhXpqnXhjSS84u9saVSzg4eKZ5hhGbGXN+NsGkwIbxR5IUJEgTF
- 9B7A==
+ b=aKGSHlecGP6QjCS3LiSeZU8jDL6FY0z0pePLG0y5EsrhAPhvF8fnGamPx7ueRVVW0u
+ O+NTy2moPEvZ4hef3ZLxNKReOLWJ6PKPRe6p2YvUjOiMSxvXVvvgcCfwkDxTsSm2TsgR
+ 9nRrKcOT1fJQ1Sg0IjMLqERrJuiYSB7rph4QNJlsOU7yfVpai2t3CfSN8ONVowSKOaNc
+ ZxJqfxXiNA0arOquSUhGGKrz8Y6PW9vaIgiQQGkup7sWIKyv+KOrHptTG8Y1C9RkSVDt
+ qP/0FzeFF0OSnb8bJwQIQQlJl4q6RwvmApk3sKuoP3oALQzFrdLfbQOT/fmjiw2xgjru
+ gJ8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FegLAxNDuRR4YSCCV1mSzPu1oUaICxZCWZsO9mOyWdo=;
+ bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
  fh=S5IsS0p2q/mDhy6CofKU3XdI4SX18ALJnocWEeQR4Xw=;
- b=ImRk4VNTBHk8oatUqq3tKoAms/7mBnIxJ2uOlUwf9w9LqFehas4WtG3U5vMF0SoGdb
- 46EdOV5lGB6vx429REe15DuIi3uh2UxQ9y0F9PYpRvDfoHsF2o/LQQgnkTgZt5dTkPfC
- dC41ek9b8oA22x4N+IUv+NlefGoyL3xun5mvoHwCuguYue6VH9C1PvF2iNnMWXZWCssa
- c6auFvMrixs6E1GQ/mSGazD2mzBzc5ajFdB7q7XfJ9aKF//YWdcnRCeM9r95l25xMoKl
- /h0Psr46b95CStwev2f3CvEFhPEclc/AOuHWJbRiiVtu45h8r3OOtKHnBnxf9PmxSso4
- a8CQ==; darn=lists.denx.de
+ b=e1br/Aus0ZWLcGycbhUM0n4K7hFtgsIEKjEFoP6GwNQmLyXsZGpxN9d56p3TVJNne3
+ X+mwfEOjnLcuT77AbQg3cl5LWfQZMSghI/Sh9Zo6Q00rHw6dgsg4DExfQ1To5XPpuoed
+ CRn+/DjPjK7XFaWbc7ReggXIWMjRYaqNBrcjSV/NAhx3oAGgavsWkLBE+Xkh3yuM4fER
+ ykqOy86lozjLk+DNlSbw7wzDf5ZgBz0lUDtL2UHqyE6jTKAnz4s3h3JG+7cuTJ5bW10M
+ Uj71f2aULuDW372TYjl6uVyAmCJgHcEwLcB6TXgiVLMVguMDyFgusHju7iQMPEZoD0Ek
+ jFow==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784570724; x=1785175524;
+ d=1e100.net; s=20251104; t=1784570747; x=1785175547;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=FegLAxNDuRR4YSCCV1mSzPu1oUaICxZCWZsO9mOyWdo=;
- b=eISVmfSS5/B1xxP0/nihg9Hk14yI1w4h4OMyqK2FfT+K+dWIlQYfOnOtVRXSEDLRpw
- eyJfMOGgY6D5YnMPj0BFBzznWpJwy1ZmU0ddD6BIMyF4tgRZq6p3Ev5fA/s8BVy7jouI
- Z+3c6B9qZkTLsjqjUJlvPoTONLhAbHa1Lh0vy6LpecfjOOZE74CoSa2P+xcMPGaUmMBf
- n6RjFzTV6qQHHw3mqsIUybWLtA2o0cVJZ9FyYTmIf/yGhBPUdT7BHd0HC9Bi4mxxNzG1
- vKH4MlnBco/qB/+7Lt0ev22hQ7E/nNBF4u9Qedxr7nU+RuatOq5xBO9qQzeaJQRqpm0k
- NtaA==
-X-Gm-Message-State: AOJu0Yy8F7zPCiDKP2K8LTX4DF1ufl3/4h21SahNPoTHEe8MRco3H+S+
- ElKCTSUeE5ArYdREJet5MggH073XmCG0lkR58dSyqtVudHtif1DaIocm4pY03PJ7r3ugRSH+9xd
- 3xnH6kqh+cBXSiFzW2kSyHaItz4t0N/4ebPafVu0i755GzJDswDc=
-X-Gm-Gg: AfdE7ckMcu3w3x44YPJ+AjensZuHbRw6MHU6SKb1hG0HqiuB6OV2lRFz2gC5Ty306et
- Igv7ITL1k5jn1pW0hqcMCeTFgMSA8CEvztR3FIFDB4KArVsEEeGn8z/1nWs7DH4VuGMiPRJuprJ
- TpNGT9QJ86VWStAe/gMFogQXKGCp7KpYq9EE3NSnGPpszHr63ZQk45EoUAYwQpiUDULDwZhwvrT
- WqHIbg97Atrw/WgYSw/gx0ogfavGffE0VzLqPtf4d2KSf8eKeqt4jzWBTt+
-X-Received: by 2002:a17:907:3e93:b0:c12:b68f:1a72 with SMTP id
- a640c23a62f3a-c169240e51fmr880983166b.24.1784570724583; Mon, 20 Jul 2026
- 11:05:24 -0700 (PDT)
+ bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
+ b=DdRQwGj/3q6u4zLD5eZOBv4u/YN6JZgzrIa4RHWzlKYs+iGbzPQSImA0oXwDvO+EZz
+ ZckLyl7yi/4rHUddQrg+CFTrhZlruO4uUcMJG0CCgQt5a0kVdEmN7BeJHaij/ykkc6Ld
+ lGToRktwQyuPeEn/tAFeA2FMnAxKef8MiQDYmShegmDbFVJizMDcAtaa81/QLohpRSuC
+ 3mfJ4DmHQPemurkGNaWIdoQFoCbzi3ZLgkQrZVcuPQOKo6w96z6BNAVSfqY961z0LXwJ
+ mRmZRHxhY72BovYkXgtcts1snNDx8QSQLSlyDQMuWi/tYaZPsXgM2D88V0pb+gj62TSk
+ 8Oyw==
+X-Gm-Message-State: AOJu0YzS3cw8ZAVucrWqJZrq43QIBNOhZqYzVS/pRgQlMl78Va8reVDU
+ FPHqM4Z25LRjfWg3d9y0o+WgxInafYarMhHWmO5GoY3lp9kc/lEgqqsSiC+q6jC8T7kzzJczj5k
+ cNbeD9EodU3WCYEjtUh2EPiFpLXdFzSxz73/N17Iw
+X-Gm-Gg: AR+sD10TuntyMWAjaQ6yAMI2Vajkj30lHwF9X30Nph3QGy4JMrcX6jCYk7fVG+/olmp
+ Bz28PnpNKo7XpTJctwjc6ZW6Ob2Zh3+mf/I4whifmfat6FbSxhYDLWiePsDS5upL7vpPSe/sDw+
+ N60+4dkPxRYXUFmFRdfPoecyxkgsB1IBFsu/fdXXQzZwHvShUzmP4dfVeI/3IGxXrIvaItkoZ48
+ IiiLvz175nXp/slrpW8iQo00lrYphvQUDmYzR0QYfhTRpE7gOOrLE2vaq/n
+X-Received: by 2002:a17:903:a8f:b0:2ce:a600:6022 with SMTP id
+ d9443c01a7336-2cf34850c21mr166073245ad.7.1784570747542; Mon, 20 Jul 2026
+ 11:05:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
- <20260713-rk3576-boost-v1-4-9d23aa08f674@flipper.net>
-In-Reply-To: <20260713-rk3576-boost-v1-4-9d23aa08f674@flipper.net>
-Date: Mon, 20 Jul 2026 12:05:05 -0600
-X-Gm-Features: AUfX_mwEc0VGfz8DFq847YkPiPRFcGBgYVhJ9OHwUSpCy28Pg4gh4I4CesusQ0k
-Message-ID: <CAFLszTiOhpH1b9=_WbSBSQjMjbLcWUj-kieM8NqOnFhSRuf6sA@mail.gmail.com>
-Subject: Re: [PATCH 4/7] rockchip: mkimage: Add option to change image offset
- alignment
+ <20260713-rk3576-boost-v1-7-9d23aa08f674@flipper.net>
+In-Reply-To: <20260713-rk3576-boost-v1-7-9d23aa08f674@flipper.net>
+Date: Mon, 20 Jul 2026 12:05:20 -0600
+X-Gm-Features: AUfX_mzEFvXI6rtuwE132WjFjNvvWHZmfzfM_HyZAk8ygEgIP7QVQbcG0mz3kRk
+Message-ID: <CAFLszTjBfASHbKd2xivHghrACR6TR1ESyyPw9nLbox5fGnR71g@mail.gmail.com>
+Subject: Re: [PATCH 7/7] rockchip: mkimage: Add rk3576 align and sd-card
+ workaround
 To: alchark@flipper.net
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
  Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
@@ -124,21 +124,20 @@ Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784570724; x=1785175524; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784570747; x=1785175547; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=FegLAxNDuRR4YSCCV1mSzPu1oUaICxZCWZsO9mOyWdo=;
- b=MEaUEFX+Tc1Mngj+65CzQ1hneynrRh/x8KyTod32JJ/vd1sNtHEgrYD/qKCY3cYcwf
- PP/szp3IADsH7AmhuG7/cyU23x2nJpz9SvdssRDC8qgDAX2ZKdJWNKgX2aRjQS0lYTKI
- o4fPhCzSVzTcHLUqMTD2bGgEQ53aFO2Qsm0mY=
+ bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
+ b=mMQUZ/Vq7Aei5rLG2FBzSC5yYSuycdXquz+R78wKpj125JiLnBr1XABwseMWOvT2zh
+ Iq21MhsGCrdOBdKc2+jbXsB3wx3DV9d2doIFwQWtAuJZ1vqLaeS0Oo1lDbsbg86z9+lb
+ iFCKP44HMo/KpMoiH3BC8l88fF1cp38fdupWw=
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=MEaUEFX+
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=mMQUZ/Vq
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -146,7 +145,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="MEaUEFX+";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="mMQUZ/Vq";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -164,53 +163,81 @@ Reply-To: Simon Glass <sjg@chromium.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Jonas,
+Hi Alexey,
 
 On 2026-07-13T10:02:41, Alexey Charkov <alchark@flipper.net> wrote:
-> rockchip: mkimage: Add option to change image offset alignment
+> rockchip: mkimage: Add rk3576 align and sd-card workaround
 >
-> The vendor boot_merger tool support a ALIGN parameter that is used to
-> define offset alignment of the embedded images.
+> The BootROM on RK3576 has an issue loading boot images from an SD-card.
+> This issue can be worked around by injecting an initial boot image
+> before TPL that:
 >
-> Vendor use this for RK3576 to change offset alignment from the common
-> 2 KiB to 4 KiB, presumably it may have something to do with UFS.
-> Testing with eMMC has shown that using a 512-byte alignment also work.
+>   writel(0x3ffff800, 0x3ff803b0)
 >
-> Add support for overriding offset alignment in case this is needed for
-> e.g. RK3576 in the future.
+> Prepend an image containing binary code that does this and return to
+> BootROM to load next image, TPL.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> [switch from pre-built binary to from-source build via existing Makefiles,
+> add commentary on what the magic write does based on JTAG debugging of
+> the boot process]
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 >
-> tools/rkcommon.c | 75 ++++++++++++++++++++++++++++++++++++--------------------
->  tools/rkcommon.h |  2 --
->  2 files changed, 49 insertions(+), 28 deletions(-)
+> arch/arm/mach-rockchip/rk3576/Makefile       | 10 +++++++++
+>  arch/arm/mach-rockchip/rk3576/rk3576-boost.c | 31 ++++++++++++++++++++++++++++
+>  tools/rkcommon.c                             | 22 +++++++++++++++++++-
+>  3 files changed, 62 insertions(+), 1 deletion(-)
+
+> diff --git a/arch/arm/mach-rockchip/rk3576/Makefile b/arch/arm/mach-rockchip/rk3576/Makefile
+> @@ -7,3 +7,13 @@
+> +quiet_cmd_rk3576boost = BOOST   $@
+> +      cmd_rk3576boost = $(CC) -nostdlib -ffreestanding -Os -c -o $@.o $< && \
+> +                     $(OBJCOPY) -O binary -j .text $@.o $@
+
+Since the object is never linked, any relocations end up unapplied in
+the output binary. Toolchains defaulting to -fstack-protector-strong or
+PIE can emit references to __stack_chk_guard or GOT loads, which
+objcopy silently bakes in as broken code. Please can you add
+-fno-stack-protector and -fno-pic (or reuse the kbuild flags)?
+
+Also, nothing guarantees that _start() is at offset 0 of .text if a
+second function is ever added to this file - a comment on that
+constraint would help. The intermediate $@.o file also needs adding to
+clean-files.
+
+> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576-boost.c b/arch/arm/mach-rockchip/rk3576/rk3576-boost.c
+> @@ -0,0 +1,31 @@
+> +     uint32_t *sram = (void *)(SYS_SRAM_BASE + OFFSET);
+
+This is effectively an MMIO-style poke into live ROM state, so please
+make it a volatile pointer (writel() semantics) rather than relying on
+the optimiser keeping a plain store.
 
 > diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-> @@ -140,6 +140,7 @@ struct spl_info {
->       const uint32_t spl_size;
->       const bool spl_rc4;
->       const uint32_t header_ver;
-> +     const uint32_t align;
->  };
+> @@ -288,6 +288,26 @@ int rkcommon_check_params(struct image_tool_params *params)
+> +     if (!strcmp(params->imagename, "rk3576")) {
+> +             char *boost = "arch/arm/mach-rockchip/rk3576/rk3576-boost.bin";
 
-The struct comment above documents each member, so please can you add
-an @align line too, mentioning the units (512-byte blocks, matching the
-vendor ALIGN parameter) and that 0 means the default 2 KiB alignment?
+As mentioned on the cover letter, mkimage is shipped standalone (e.g.
+as u-boot-tools) and is documented for creating idbloader.img by hand,
+so with this change any rk3576 image can only be created from a U-Boot
+build tree containing this file. Passing the boost binary in as a
+normal datafile from the build system would keep the tool independent
+of the source layout. Also, just to check: this path is shared by rksd
+and rkspi, so the workaround is prepended to SPI images as well - is
+that intended, given the issue is SD-card specific?
+
+If binman is used to create the image, it could pass mkimage a
+parameter pointing to the file.
 
 > diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-> @@ -625,7 +647,7 @@ int rkcommon_vrec_header(struct image_tool_params *params,
->        * 4 bytes of these images can safely be overwritten using the
->        * boot magic.
->        */
-> -     tparams->header_size = RK_SPL_HDR_START;
-> +     tparams->header_size = rkcommon_get_header_size(params);
+> @@ -288,6 +288,26 @@ int rkcommon_check_params(struct image_tool_params *params)
+> +             for (i = ARRAY_SIZE(spl_params.images) - 1; i > 0; i--)
+> +                     spl_params.images[i] = spl_params.images[i - 1];
 
-The comment above this line still says "The header is always at 0x800",
-but that is exactly what this patch changes - with an align override
-the payload moves to 0x1000, as happens for rk3576 later in the series.
-Please can you update it to say the header size depends on the header
-version and the per-SoC alignment?
+Patch 5 allows four input files; if all four slots are used, this shift
+silently drops the last image. Please can you error out when images[3]
+is already set?
 
 Regards,
 Simon
