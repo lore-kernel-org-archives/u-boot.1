@@ -4,86 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC29C4452A
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD54C44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:14:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37B84844F6;
-	Mon, 20 Jul 2026 15:13:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 90728848A1;
+	Mon, 20 Jul 2026 15:14:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gCHKX1JR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GvE+9fJC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1718384659; Mon, 20 Jul 2026 15:13:38 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 3C8D08498B; Mon, 20 Jul 2026 15:14:36 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 255E0838D7
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:13:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F2DF848A1
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:14:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso11611835e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:13:36 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-47f703a9e5dso425261f8f.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:14:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784553215; x=1785158015; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=qtht9tfhTV3b0iiDMIW8Y8SGK+kHLdco2dg7cvmcEfs=;
- b=gCHKX1JRxb+uoYJrqRO0Q4cPwPZzzyrmMIvv1OyN4pDWLIruWMDs2DHX1lnVBVREeU
- NjHVsSdqy0Eki4FLPj8amXbwCnIPK2NtuqTZv1IMTyZxGjcrkYDrdoX2dZi6wly49/gy
- cYRgkMPaTrs2e6x4JC2SSFaq8bivTPGxkjKlxg7EbSub8eXEjCRAb4SJoODS4H+ef9a2
- TrD1ZJL+vISWAKVLEWnudjPBqI4WyXfC7ETq+jcEbkjngU/Cj2bqXMBlNAypJx50wQNW
- Y6HzZ0BdZ+E4KBDB74GcwtNsLH8cKSQ3TVC+g8ruUaZClWx6fcx0Vx6iWFdiz8ayXFBk
- ZjHw==
+ d=linaro.org; s=google; t=1784553274; x=1785158074; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=NaAgez9Zqkk8Ur46+kmVp21ZxHYk+VbiG1OfIiXkYNA=;
+ b=GvE+9fJCqsHuXOQbnYsZklpeAHGNfTvK2CDb7TwmiUTeLqtQ6NL4zW72PQ7fTuekk4
+ tfcCmpME0dVO0EUZ57QM2zAA2uQ1Jas5VfnOPfzzYwOEInPg14s7Vu2cGi4xNUpNu2Nb
+ SE7jsiasR5L/Lx36HE71zwz00KgFl7IzX+FkPOBTQN91o/9PlFu/C4IOdD53DHkAEbqv
+ sFDIC/wWpM/Gq3NPmTdH1Q2ZEaeBRO/9YrE8/8Ui1zxctWiq1fsAhICFpr7iSVm/GQUg
+ R2v1foFD6ieDsL23oqEx97j2k0NY7OJIfRGLtlQCT0HxItWNT6rt0W06tvCVEUNlfvj1
+ CxMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784553215; x=1785158015;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1784553274; x=1785158074;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=qtht9tfhTV3b0iiDMIW8Y8SGK+kHLdco2dg7cvmcEfs=;
- b=BDEEorOn7vecrU5l+pnOt/uUXZlB0z70uDgoXlVHcUUIdM6Z1dO3WpIdCyRc3DcySl
- x5YEbvbeRAlCJviHJ4utmBiTdrkqOE62kkjCLHmpDD4FoYvYDNjFyD4k/ycFoBo9BCEm
- qA/oKascQJMMlSdznmnsrbS3KrrxFWDbQJafGg5a+3FFmP8qFUHYpbb1HdepfP8QtrYK
- g2yf/jH0ESWxQTXRtqE7cvNEFWjMJtaOsNlNSvJOGShNrBJx6bmsscDt6vVtgaDHWE1c
- 6ZQTPY1JZpopcoQOJRoMMv9a90ULzytXDGwEmVhvHC5/HIJZ0pzDaUbd3pPQbDuLaXNk
- H+dQ==
+ bh=NaAgez9Zqkk8Ur46+kmVp21ZxHYk+VbiG1OfIiXkYNA=;
+ b=DbHbI8/ZX5msSNFSlJmzfKe3QZ+7oSeScpJ55SiWb34OLkPEx8fJgUx5ncObDagZBI
+ trcWlE0ukRjqzrLDVE4538A38bltg3ZCuK5MQLidGY46pP+tbDMqDu9dcdKMlhklac0H
+ yejSKgXtocRDsyT24eCVLM8fBsr50nxZwjKuuWKP+NskcVklLI0xOTXEcjFiFMljJBXz
+ Rfz64L/J6bhEVxTlTvT+abUI51qOszktPcPGlyBRKuDrL+kg3qDkvZP/KXL5GflEm4QN
+ dCrH2ApKVznepH6K0n7OfeINBWqcgWwUlIC6nOz2CZjLWCOk/uoa6bJPhJ5I0DF9g1l0
+ KOUw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqJrfdSogmsCQR+WgIZIPJbFV+h3zzH5PdVs15RcIay7rps530rfVlJUK3C/i72ZoJJxQ5Kz8Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRJ+KgI9a++CDNlkDMbiGOPJuDJh/HX2dWmY+77ciAveJSLmfC
- V/0CUBGrhe5nBa383L2Msoc+QqEe5o/xnbkqeap+iSHWo6yxc0FMBG+RV4AatXX7H1w=
-X-Gm-Gg: AfdE7cmI9fiY0Dix4+/OkNcDWo388Higv6nv88qALtre+BA5G7bH/aOICu0dbi8cEvh
- qwh6hrR7Yjegqgj+8SNY2sFxyb0VlcYzurfhYjRIz+aE2XwT6QQmwbS/9Z0+wOcchIvIE7zCMMC
- 8OzWFx1UVChYyad7Ya1VPZ0jN1HflYsZbmLB9Qt54unpLsJswWjS6xPLUBMVLVorsPolQf3E5wi
- zAPPA72TOR9bGtZrdw41SSX1z6VoNZp389RG2ZDqJR0S80G0jCsU0EZA0iC+fMr6pcx7ShegtGV
- 0aEsNKoXd1i9gINSbHic5LFtHFcOSP965tzJAzZPZ1EqvrjUrpyQkTNlvkhI6ARBK1LXCRBNLX9
- BJiiVAkmLYxQ86VnGXHtG/KsZf0c/ScHPWIaaj277GRXkgPM+roHPZYM4pON7i/Wb2hsYIyEDZV
- cPQFqfQtjUMqwfuBzwFY8QfFW2sDVZAg==
-X-Received: by 2002:a05:600c:285:b0:494:596e:e8c4 with SMTP id
- 5b1f17b1804b1-4954a3fd583mr108160785e9.17.1784553215522; 
- Mon, 20 Jul 2026 06:13:35 -0700 (PDT)
-Received: from toyger.tail248178.ts.net
+ AHgh+RoS7fsi2RPfdJcwyUtSOO1A9Gqy3j87EM0WqCTQBlDqCL9QwheHNC6dmkLMGnSa7TGfJIBrBIU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwrZpN8SjLFNTlLRSXceDqL+a/tl7yI44CI52DeXwqJ+mlj0OwY
+ HkqoQz7oWQu3SxcS/ebmkjOip3+MK9Js4cR9lJ3uaW3Oqohr/98M25SXHvyYLX+KZJs=
+X-Gm-Gg: AR+sD131yj7um4yXf+ya07QzVIYmdJYGoumlUlak6ceoCCv7E6QujKd8F2jOIg9qDNM
+ 2cq2AFuxHfTdjUwUcHN+EliZnu1RyR0tJ533RsksoJd67JfgNWP9n4/GlUmS+UKleAqw4ta7srR
+ Mg9QdW9V0pjBdpBZWqyw10cPxyoGOhZB+XKoiNEjDYSJlMtQYFba95TP91XVUS7J0ZVMEcxibjt
+ vcBW6ZlhuOZ5uKiDLTazKypfudFVvPwZd6y/MFr8uzcOfcAewn1s91mlv8Z6d0PCmkHaFevwPFQ
+ O845SJHLNjm671NPNaUa9oz5jrlGdJsP8s/L435VMGs2a55abZfW0b24B9H0SUt9q06a3P+j5+S
+ BfWcFLYNeMxb3FXpBZhhPmEovwm5m+BTpfbUk5be1Fy1+3ei0hmKadXjX1tPNcjHq6KUPwkE1o2
+ /SczJBssOtaxx8ZvSihrCmDwXLTCFY45mNWJpij8nPnY1GKkPUbJ69PlvaZGo=
+X-Received: by 2002:a05:6000:2c10:b0:477:80fa:f474 with SMTP id
+ ffacd0b85a97d-47f6232700cmr17151814f8f.38.1784553273707; 
+ Mon, 20 Jul 2026 06:14:33 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:1d11:1101:a3b4:4010:a727:b812?
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495499a5847sm202578675e9.2.2026.07.20.06.13.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 06:13:34 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
-	u-boot@lists.denx.de
-Subject: [PATCH] CI: install python-cryptography for world build
-Date: Mon, 20 Jul 2026 14:13:22 +0100
-Message-ID: <20260720131325.37436-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.55.0
+ ffacd0b85a97d-47f6b85970esm23811496f8f.15.2026.07.20.06.14.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Jul 2026 06:14:33 -0700 (PDT)
+Message-ID: <3be820f2-be69-45a3-9a64-dfba21dc33c3@linaro.org>
+Date: Mon, 20 Jul 2026 14:14:31 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: qcom_defconfig: Enable EFI variable runtime
+ storage
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20260720-runtime-v1-1-7f904b4cb3ed@oss.qualcomm.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260720-runtime-v1-1-7f904b4cb3ed@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,46 +109,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mkmbn Python tool used for some Qualcomm platforms needs the
-cryptography module, make sure it's installed so the world build can
-succeed.
+Hi Balaji,
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- .azure-pipelines.yml | 2 +-
- .gitlab-ci.yml       | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+On 7/20/26 11:25, Balaji Selvanathan wrote:
+> Allow SetVariable at runtime on U-Boot's in-RAM EFI variable
+> store so the OS can write EFI variables via efivarfs. With this
+> enabled U-Boot also advertises EFI_RT_SUPPORTED_SET_VARIABLE and
+> exposes the RTStorageVolatile and VarToFile variables, which
+> userspace tools such as efivar use to persist runtime changes
+> back to the ubootefi.var store on the ESP across reboots.
+> 
+> EFI_RT_VOLATILE_STORE depends on EFI_VARIABLE_FILE_STORE; select
+> it explicitly so the option is not silently dropped if that
+> default changes.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 4417ef4e5a50..562c5747c9d3 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -733,9 +733,9 @@ stages:
-           python3 -m venv /tmp/venv
-           . /tmp/venv/bin/activate
-           pip install -r tools/binman/requirements.txt \
-             -r tools/buildman/requirements.txt \
--            setuptools
-+            setuptools cryptography
-           if [[ "${BUILDMAN}" != "" ]]; then
-               ret=0;
-               tools/buildman/buildman -o /tmp -PEWM ${BUILDMAN} ${OVERRIDE} || ret=$?;
-               if [[ $ret -ne 0 ]]; then
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 245e422d72fa..eb13fde82b86 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -153,9 +153,9 @@ build all platforms in a single job:
-     - python3 -m venv /tmp/venv;
-       . /tmp/venv/bin/activate;
-       pip install -r tools/binman/requirements.txt
-         -r tools/buildman/requirements.txt
--        setuptools
-+        setuptools cryptography
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
-       ./tools/buildman/buildman -o /tmp -PEWM -x xtensa || ret=$?;
-       if [[ $ret -ne 0 ]]; then
--- 
-2.55.0
+Thanks, nice to get this enabled!
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+> ---
+>   configs/qcom_defconfig | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index c52f619850d..01c70c25c66 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -10,6 +10,8 @@ CONFIG_SYS_LOAD_ADDR=0xA0000000
+>   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>   CONFIG_EFI_CAPSULE_ON_DISK=y
+>   CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> +CONFIG_EFI_VARIABLE_FILE_STORE=y
+> +CONFIG_EFI_RT_VOLATILE_STORE=y
+>   CONFIG_BUTTON_CMD=y
+>   CONFIG_FIT=y
+>   CONFIG_FIT_VERBOSE=y
+> 
+> ---
+> base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
+> change-id: 20260720-runtime-4b0d467f5b73
+> 
+> Best regards,
 
