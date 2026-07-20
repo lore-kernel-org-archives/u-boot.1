@@ -1,103 +1,103 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE09C44529
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1EE0C44529
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6901D607FF;
-	Mon, 20 Jul 2026 18:10:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6C994406F4;
+	Mon, 20 Jul 2026 18:10:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id md-bX6bFYQ0s; Mon, 20 Jul 2026 18:10:38 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GwvGDR5xoXkI; Mon, 20 Jul 2026 18:10:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DD5186073C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1275040702
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571038;
-	bh=OStFY9BR8FfIjZREzO97CeaR2ZyD9Nhv6dlVXM+o66g=;
+	d=lists.u-boot-project.org ; s=default; t=1784571039;
+	bh=3ZMP5mony9BNcF83cuLiACntos9AEkOO1poFvGtoC28=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=0OZuz6LO7SkPleZ/3+HB5nS/vRoeJ9G0vt1uM2ihcFN/iNRQOYHICvccMuihCW+FZ
-	 T4QaDitALZ8fk9X79bmthUkxUVhFXcnJZ+dCmeQeM+fFByB/a7CYevzArNv7TlT85P
-	 /c0gDVfpjRQg9QFvXCRlGehcbyn2xkznDKc7jMjzJgx9kKu8snVelSHavxxgZjCEkb
-	 UcrT/bPcV08fFe4hB/1TBlX8yv2YYnpjgc76BvumepQjn/qfTZcMnSa9vCMZRLC4Aa
-	 ZQ2CRdnyrP6a/et3fbEiuHmnGZj5AGD6Wc0tW4dqWyK+f2YO+hWP+I1g93LxThiYBR
-	 MFHunfwjMdXMQ==
+	b=LuWegX+kQgrgE0W6M2SIFfdUwco7DYgQKWV2yBwb7cqqmkL05+CdzJMYxYLLUKMzk
+	 UZL+ftv1K1awDsx+UxOe8vLKzeEF79YaBDVIbmskldx/rEHnay0VCLRVSZiQva1nZE
+	 NI3NwkDJvphF3Jk2t9nINX2Z35j+w3akLLhueZdLls8PCVjxVhM4U6mcnl87+WvrOO
+	 xwNO4qnwgTr4xif3ScySL+oRj49CACFaHum3zflbrqa7giLdYn0Zed1Omy9m4gFCWG
+	 vsYs+x8MIYaKB2VMiEk63qgyJU3dOoZvhG4lKomYQCD0pYKDec8xkm2UiInA0PsB37
+	 EqTxqUP2QLBKg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DD5186073C;
-	Mon, 20 Jul 2026 18:10:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1275040702;
+	Mon, 20 Jul 2026 18:10:39 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 54331132C
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B18EA1DC1
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3997980D1D
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A374880BFF
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aVn3dmQ5PLkE for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
+ id Lg0oY2Na6vSA for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2878580BFF
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2878580BFF
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 7431D80BFA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7431D80BFA
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2878580BFF
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7431D80BFA
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9996484A0A; Mon, 20 Jul 2026 18:41:28 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 7C8F284A30; Mon, 20 Jul 2026 18:41:44 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8148F8484A
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:26 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4953e04ef16so45249185e9.2
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:26 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 466A28484A
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:42 +0200 (CEST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4954dff6536so19282825e9.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565686; x=1785170486;
+ d=1e100.net; s=20251104; t=1784565702; x=1785170502;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OStFY9BR8FfIjZREzO97CeaR2ZyD9Nhv6dlVXM+o66g=;
- b=JIcwH9BvMz1x7yBNl8O4mWEbi24iGuvti8pbVBqCctDft+BKUImNBnFQZ+jVnzlK54
- zxswxA4TZSQ17vRPSbmrGKH+7JP4i9aNL0EUSHvhljTODep8ykec9t/SSGSLbO9Rfgyw
- wTClhUZ9gM1FxgRAH25+b1tWGV1sUe++gtxL4KuZRz3RILNycheKbFiRka9i176A42vy
- Z5BRDLzejai79F74H6sxzgn+G3ThYq04q56nBy/VRCAQtRy73Ho8+3YMSZY7fT5KIjtt
- YdnNfu9idZJuZq8q2UwnR5ayvKsbhtdTBBNHdPum0WcyAyKn0dQR0gGObBNP9m32/4j6
- g3YQ==
-X-Gm-Message-State: AOJu0YwgjMNzEkmxtxSGLeATDkHqcGacHWZql3KVFZU4M3RGGYfceB88
- BqNcaO7MyC4QxcQsakKxVTwy2G/ZHXeRVUZru7BaSWCQ6N9N/OpBifborc6MBZAhfhU=
-X-Gm-Gg: AfdE7ckjZplanHMEVYTnsbmm43/W5llZRv/9n59t8Mh0u6aQkhaNuthoC3mjAjjRnIg
- 65brDLdR8XG73JzCxucLC6Gy8LPqkhSsX//0luC2cmzma+r5TOLzoivZutahwbDNUWJqshYH7j9
- T+E9JF60I31L4KD8REqVaCmXXcqTu9BKn5x0bwin5nsg/SPgWSH0NPjDlpiCfGyz64FHbEYl6Do
- m1vVvWYSPAGKefhjcaZ4j1K9j43r8zjDLXzGXDN6Zbsu8CU2bN6iyuiIccjTQNkZZGYJyGB55l5
- 4JPTR0Ji0ZjcSFef0nuOAqC7npARCDHc+eTSuQtjklIuFLMmDD1yO+VrsOrKfq/SFuqXOlqHPjq
- vt7r1/Cgql2p3BiZbMh7t2ZjgHF/NWET/ceDUWtAuclM4A20bxdjyw7riOEWx1z/k+bJGS7LHcU
- LWytwBcdSXwdPXmESKMo6q47XI3G4Pvw==
-X-Received: by 2002:a05:600c:630e:b0:495:4856:2659 with SMTP id
- 5b1f17b1804b1-4954a3db6b0mr169935805e9.9.1784565685921; 
- Mon, 20 Jul 2026 09:41:25 -0700 (PDT)
+ bh=3ZMP5mony9BNcF83cuLiACntos9AEkOO1poFvGtoC28=;
+ b=fXSsgmttM5bOxoN1PK0LEzlESnAdNNcA0+nwC9N2ZrQGmIc8WkEK48ZOcB58HCC475
+ flzX5jLnimLcH3Mvz93HCDd01AXBS3ENE+sslvCPEsV46yl7DdciYqiU+B07ciS5rxXh
+ SD4UcmNvWbIlKOFmgFzMpw2YZo7Z2hVPMcwvxOhZiMjcx5ESH6X55Dfhc4pSgGiwkgcR
+ dJXW8dLT5Y6vzpcsCCU55Impok/E9Zj7p4V5DC4tgueHW3XuWHGRUn76LQ7aWy4B4w7o
+ 9jsxJ7Vbg3Sox1QNJ1tIg4ibr01Onq56BVWOcOlR3a/k70NZLvpRR8xPmzAxn760SFwU
+ 3FAA==
+X-Gm-Message-State: AOJu0YzyFbQcBdVxyzrnsxnTzlg55KW/WjcIhAVjRftylX8zO8uKoLkq
+ 8naHvi0sFUemgstHU5Agb1afUUwhlN5X5wNfilANjyWfnngCkAW3Ognu1JGp7BTQ57U=
+X-Gm-Gg: AfdE7cmfLD3c0Oby24S6Ws2sekfHWdHruYMyoXOt32cTX6Y6+KcJBUCGBishwRmmgcf
+ LDSTN6QH/CllHxhPEKoE5pRdK4GZVjgDclGSXcrJSEjVh5z2rAWwKsgAeNoLIOeyI4LE4bchdcI
+ 8WL3GjeT85zuM42y5A4Cev6BuipjtV1bNg+mSBZchdEjFpPQ864lzCZo7pHzh4i1xyoSepFZQ5D
+ gCfcdaAa0tzbTLTxoCHDLxnNub1XplFE94Atxh9mxTuhMrUMTH9Db93nRmJuzNTCBOqsvpO//fy
+ nD6MMOlgowzkK0HhyRITvdWLTteBR0N+rAv8UgZv31Hu+Ymw89cYP3uBkSHWyA0DjpSuV6VkPB5
+ nkSUMQ5HHLDL48l7nqdeVuT+RRUjcbyB4Mzaxwf55cy22vNsc9caXLBVVup75qBt0nkoMUur2eA
+ 5FZuDxPE2ItDg/e9GtD6bDA6N/JMYrPA==
+X-Received: by 2002:a05:600c:19cc:b0:493:b877:fbc with SMTP id
+ 5b1f17b1804b1-4954a402fcdmr193365345e9.21.1784565701626; 
+ Mon, 20 Jul 2026 09:41:41 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.23
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:41:25 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:40:42 +0100
-Subject: [PATCH 15/36] clk/ccf: optimise orphan clock handling
+ Mon, 20 Jul 2026 09:41:40 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:40:48 +0100
+Subject: [PATCH 21/36] clk/ccf: add CCF_FULL port of clk_sandbox
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-casey-ccf-upstream-july-v1-15-8fece1b0333d@linaro.org>
+Message-Id: <20260720-casey-ccf-upstream-july-v1-21-8fece1b0333d@linaro.org>
 References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -146,45 +146,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3318;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7715;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=yRfYmU23VgPDB/44B4/gNGg7P/vRVrwNS/lrGqIh66k=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+DBH2grbL2WyD0EP8znP52V7J80DNLjb5/F
- vnIO+vebaCJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PgwAKCRAFgzErGV9k
- tkFRD/0YZKE0M8K3D+MFJ/5+tyUuxTyMy1HV1imY/aW12kL+0FkYtN1Vq42q550Qd4qQWM98wd2
- btVlxB1gEZxX5DUNspfSH9dbCDc4J8Z/PZz7KEn61JJjGmS6PoSwpE04Lx4cI3L0jhiph8t9xXD
- FjF80JU8mcoGSWs1PqDRLGCY8u9MUGN3MmEMK6UH99+JxRdf5Ui8pIM5I5nHJaEyW530hyPY12F
- Nhxm5glHZyJh7s+VUAqagmXwjBa/g/IEqYsD2GB+FgiJXc6wSANhshzrOu/ADaQd7P51cMTydk+
- mt/dtVFQ87DKltevN76wP/UiBe/YrGvPLbCmv81vM+sAuobGnJBBRxnamUuCmkM0QFRLkxmDGFX
- Jbev9cPnXwyMgjXrZmeiJvvCI1ZcRkCq1rL4CLqgxxww7gUVrD5HD51XrN2QW3CMYw861QAZ3mO
- TdFptJchpXOgqHfs+UKMUifS7szR2Lqh3JM4Kl4K1XXV/TTTQ1uoFzo7GeEpv/OQIpZ0pDfHLas
- PakjUWNw+NxtsGRwS9iKZiZxvH1JzaXyqQ5cvTUMCuNqlcDE9a5AdlUDu3kSv2A0DWci3l6hDfZ
- fxhWoy1PFo/biHrQt0uS7G41jYTI5VZ79fe5Bg+WNhmSOqrSBaaJwLSIQG4LOCv/50SH+AVdqdg
- rQxGuA8QahDS1QA==
+ bh=/XlDaFrFyDbEpNZcmkFUz2LM/gDSB8ZsD8soz7Gz0bY=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+EYmKP1tXmFKYf0LJAlHVQ3q5VCWMYOtoAP
+ RQUKfMuyX6JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PhAAKCRAFgzErGV9k
+ th3FD/0Yj/DhZ9BOoF/YbmjaavviATEpuUJiVo6uBTZLZH7pTZqGdGZxvX2bMyJgrIwl2hpBvJe
+ UysltnPfSOa+fxxQtplrdb71ldcYKfy6ryeN00ivAy3pAZF8xEn3cUXQbb8jjezCUw65OxFVqgL
+ BAMvgr1LgBFrcrp4wBlnTwS7Hqz7+xt0MDH7OvhypYTsIzBb9sOjhJs85UNMOyj4DC2idjl+IW/
+ GWc+vKhff25y02mXHl+vp2vq4PZrqL3R3HCfkvtCZFt70IM2bwbysQvi65uh2Zw4c6HxH+A5r46
+ gJACp9TKCYOA7XNff4T4CGcbBzrxRgr27vlI1rpy2p58lFMdU91rtjNX6lsWR9f+S1d71vqkcfO
+ 3N0ZhoUeXZpIrfEPUevVSysZAzr88RGtqybuZwgAZOIE47UzgvWgR1izpkArDRPaAmrF1Asq2WW
+ lu4PGYCHeiQGcWJO8Esd1ucyd3g3y1Ff4RMgB6LjnEQGSm/pEP9BXypvquretCfs/f5alGGkzgd
+ c1Cz9lP1/k7IsYKj3Re8Kh6qa1tBT7tk9NVc9RI6VCbwsxUvpUmHxVYG76ABhhWYT1SB0ZKScgr
+ 4WfiX1axh22LYpJecc3km8l+ji/zVgGdYHkcK1IW6qLC+4jNOIJETPK/wHZFS1qxXT8VrJ2YX2I
+ zknxUPDLMiwFv8Q==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565686; x=1785170486; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784565702; x=1785170502; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OStFY9BR8FfIjZREzO97CeaR2ZyD9Nhv6dlVXM+o66g=;
- b=BvtkibbmJNpPlTA1hoOWGXP3Ay1obf3iWs+T9ukMLypoWAPZ9BkdK51Ssi33eXa7/r
- wtaH+XI7IH8hDOaSN3+r4sxBxk3ijtmRPPErNksGiJcTsOPvnNnI4YZQxdws/pACZfoN
- N2Etry6fxpwxEz/OrDw0G1VlZ2jTf0/wYu8EarSagcf2XvVkGPOH+29pE1A52lT59ZjK
- FNIPDRkJpm2zj6WdoeD3efVDMtSNOh5X9xGeJ99hLQpSXxJ1+aOxjF46BLoS8DzhNrtd
- OD/Ae9fU1lb8i68TSHlqGxTQDMNxxAtrRXvFudxE/Wyxi93e43aPNpKkJ/S6akYSAAM7
- vrAg==
+ bh=3ZMP5mony9BNcF83cuLiACntos9AEkOO1poFvGtoC28=;
+ b=QNXpZHMq9nMz2LtsELc5tq15NJrldTEV6jXsfp42xG0Th01+NpoN83Kz/8FQ/fySXV
+ PpmmlhLF0kdZcU/1VeqNTmzqY74RFeXyxLeevjT7BkXZZz1cYbPD0Xx1cz4DOW0A1T8e
+ B3hiLAWCZn/J2URC6v3G1Hs/9c1BANBKTrdG3ZpYdQU2ne50U2jWYYobpvBR1ZnqJu7Y
+ oDi3mXVCIKmhRGOZQm31VV0MPDkFI8R0uPT4p/8IIAcVaJ3TxbFjZmFVtfMoFmuL5F1B
+ TSAYwB6AQ3cwcunvZCY4lD1rTitmzB4Xm83Zv0iWuMPO58imqPEbY7osK85SLMyiPpK5
+ HrDQ==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Bvtkibbm
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=QNXpZHMq
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -192,7 +191,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bvtkibbm"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="QNXpZHMq"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -210,100 +209,313 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-In Linux, CCF quite aggressively attempts to reparent orphan clocks,
-doing so every time a new clock is registered. This makes sense in a
-dynamic system where modules could be loaded at any point, but is much
-less necessary in U-Boot.
-
-In U-Boot we don't have to worry about kernel modules being loaded later
-during boot, we also probe clock provider devices on-demand. As a result
-there are only two cases where we will fail to find a parent clock:
-either the clock provider device doesn't actually provide any clocks
-in which case the clock will be an orphan forever, or the parent clock
-is provided by the same device and just hasn't been registered yet, in
-which case it will be available when the device registers itself as an
-of_provider after all of its clocks have been registerd.
-
-With this is mind, we can avoid a bunch of spurious calls to reparent
-orphans and of_clk_get_hw_from_clkspec() by stashing the error and
-bailing early if we know this clock can't be found.
+It isn't possible to reuse UCLASS_CLK drivers with full CCF, so
+introduce a full CCF port of clk_sandbox. This behaves the same and is
+used by the generic clk tests when CCF_FULL is enabled.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/ccf/clk.c | 32 ++++++++++++++++++++++++++++++--
- 1 file changed, 30 insertions(+), 2 deletions(-)
+ drivers/clk/ccf/Makefile      |   1 +
+ drivers/clk/ccf/clk_sandbox.c | 281 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 282 insertions(+)
 
-diff --git a/drivers/clk/ccf/clk.c b/drivers/clk/ccf/clk.c
-index 83d435dce02b..28692fbc7798 100644
---- a/drivers/clk/ccf/clk.c
-+++ b/drivers/clk/ccf/clk.c
-@@ -53,9 +53,17 @@ struct clk_parent_map {
- 	const struct clk_hw	*hw;
- 	struct clk_core		*core;
- 	const char		*fw_name;
- 	const char		*name;
--	int			index;
-+	int			index : 20;
-+	/*
-+	 * U-Boot: Avoid repeatedly trying to probe
-+	 * missing clock parents. Since we lazily
-+	 * probe clock providers, if we get an error
-+	 * then trying again later will never work since
-+	 * we don't support loadable modules.
-+	 */
-+	int			error : 12;
- };
+diff --git a/drivers/clk/ccf/Makefile b/drivers/clk/ccf/Makefile
+index 2d319eb24fff..aa97c74066ec 100644
+--- a/drivers/clk/ccf/Makefile
++++ b/drivers/clk/ccf/Makefile
+@@ -15,4 +15,5 @@ obj-y += clk.o \
  
- struct clk_core {
- 	const char		*name;
-@@ -285,16 +293,32 @@ static void clk_core_fill_parent_index(struct clk_core *core, u8 index)
+ obj-$(CONFIG_CLK_COMPOSITE_CCF) += clk-composite.o
  
- 	/* Only cache it if it's not an error */
- 	if (!IS_ERR(parent))
- 		entry->core = parent;
-+	/*
-+	 * U-Boot: save the error so we avoid trying to get this parent again.
-+	 * -EPROBE_DEFER probably means the parent is in the same clock device
-+	 * and just isn't available yet.
-+	 */
-+	else if (PTR_ERR(parent) != -EPROBE_DEFER) {
-+		entry->error = PTR_ERR(parent);
-+	}
- }
- 
- static struct clk_core *clk_core_get_parent_by_index(struct clk_core *core,
- 							 u8 index)
- {
- 	if (!core || index >= core->num_parents || !core->parents)
- 		return NULL;
- 
-+	/*
-+	 * U-Boot: if we failed to get a parent before we don't need to
-+	 * try again, unlike Linux we don't have modules.
-+	 * The only reason this might happen is due to a driver issue.
-+	 */
-+	if (core->parents[index].error)
-+		return NULL;
+ obj-$(CONFIG_SANDBOX_CLK_CCF) += clk_sandbox_ccf_full.o
++obj-$(CONFIG_SANDBOX) += clk_sandbox.o
+diff --git a/drivers/clk/ccf/clk_sandbox.c b/drivers/clk/ccf/clk_sandbox.c
+new file mode 100644
+index 000000000000..57cc0fc07649
+--- /dev/null
++++ b/drivers/clk/ccf/clk_sandbox.c
+@@ -0,0 +1,281 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * (C) Copyright 2015 Google, Inc
++ */
 +
- 	if (!core->parents[index].core)
- 		clk_core_fill_parent_index(core, index);
- 
- 	return core->parents[index].core;
-@@ -1956,9 +1980,13 @@ static int __clk_core_init(struct clk_core *core)
- 			goto out_list_del;
- 		}
- 	}
- 
--	clk_core_reparent_orphans_nolock();
-+	/*
-+	 * U-Boot: since we probe clk providers on-demand it's enough to only reparent
-+	 * orphans when adding providers not for every single clock.
-+	 */
-+	//clk_core_reparent_orphans_nolock();
- out_list_del:
- 	if (ret)
- 		hlist_del(&core->hashtable_node);
- out:
++#include <clk-uclass.h>
++#include <dm.h>
++#include <dm/devres.h>
++#include <errno.h>
++#include <malloc.h>
++#include <asm/clk.h>
++#include <linux/clk-provider.h>
++
++struct sandbox_clk_hw {
++	struct clk_hw hw;
++	enum sandbox_clk_id id;
++};
++
++static ulong sandbox_clk_recalc_rate(struct clk_hw *hw, ulong parent_rate)
++{
++	struct sandbox_clk_hw *shw = container_of(hw, struct sandbox_clk_hw, hw);
++	struct sandbox_clk_priv *priv = dev_get_priv(hw->clk->dev);
++	ulong id = shw->id;
++
++	if (!priv->probed)
++		return -ENODEV;
++
++	if (id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	return priv->rate[id];
++}
++
++static long sandbox_clk_round_rate(struct clk_hw *hw, ulong rate, ulong *parent_rate)
++{
++	struct sandbox_clk_hw *shw = container_of(hw, struct sandbox_clk_hw, hw);
++	struct sandbox_clk_priv *priv = dev_get_priv(hw->clk->dev);
++	ulong id = shw->id;
++
++	if (!priv->probed)
++		return -ENODEV;
++
++	if (id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	if (!rate)
++		return -EINVAL;
++
++	return rate;
++}
++
++static int sandbox_clk_set_rate(struct clk_hw *hw, ulong rate, ulong parent_rate)
++{
++	struct sandbox_clk_hw *shw = container_of(hw, struct sandbox_clk_hw, hw);
++	struct sandbox_clk_priv *priv = dev_get_priv(hw->clk->dev);
++	ulong old_rate;
++	ulong id = shw->id;
++
++	if (!priv->probed)
++		return -ENODEV;
++
++	if (id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	if (!rate)
++		return -EINVAL;
++
++	old_rate = priv->rate[id];
++	priv->rate[id] = rate;
++
++	return 0;
++}
++
++static int sandbox_clk_enable(struct clk_hw *hw)
++{
++	struct sandbox_clk_hw *shw = container_of(hw, struct sandbox_clk_hw, hw);
++	struct sandbox_clk_priv *priv = dev_get_priv(hw->clk->dev);
++	ulong id = shw->id;
++
++	if (!priv->probed)
++		return -ENODEV;
++
++	if (id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	priv->enabled[id] = true;
++
++	return 0;
++}
++
++static void sandbox_clk_disable(struct clk_hw *hw)
++{
++	struct sandbox_clk_hw *shw = container_of(hw, struct sandbox_clk_hw, hw);
++	struct sandbox_clk_priv *priv = dev_get_priv(hw->clk->dev);
++	ulong id = shw->id;
++
++	if (!priv->probed)
++		return;
++
++	if (id >= SANDBOX_CLK_ID_COUNT)
++		return;
++
++	priv->enabled[id] = false;
++}
++
++static int sandbox_clk_request(struct clk_hw *hw)
++{
++	struct sandbox_clk_hw *shw = container_of(hw, struct sandbox_clk_hw, hw);
++	struct sandbox_clk_priv *priv = dev_get_priv(hw->clk->dev);
++	ulong id = shw->id;
++
++	if (id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	priv->requested[id] = true;
++	return 0;
++}
++
++static struct clk_ops sandbox_clk_ops = {
++	.round_rate	= sandbox_clk_round_rate,
++	.recalc_rate	= sandbox_clk_recalc_rate,
++	.set_rate	= sandbox_clk_set_rate,
++	.enable		= sandbox_clk_enable,
++	.disable	= sandbox_clk_disable,
++	.init		= sandbox_clk_request,
++};
++
++static struct sandbox_clk_hw sandbox_clk_hws[SANDBOX_CLK_ID_COUNT] = {
++	{
++		.hw.init = &(struct clk_init_data) {
++			.name = "spi",
++			.ops = &sandbox_clk_ops,
++		},
++		.id = SANDBOX_CLK_ID_SPI,
++	},
++	{
++		.hw.init = &(struct clk_init_data) {
++			.name = "i2c",
++			.ops = &sandbox_clk_ops,
++		},
++		.id = SANDBOX_CLK_ID_I2C,
++	},
++	{
++		.hw.init = &(struct clk_init_data) {
++			.name = "uart1",
++			.ops = &sandbox_clk_ops,
++		},
++		.id = SANDBOX_CLK_ID_UART1,
++	},
++	{
++		.hw.init = &(struct clk_init_data) {
++			.name = "uart2",
++			.ops = &sandbox_clk_ops,
++		},
++		.id = SANDBOX_CLK_ID_UART2,
++	},
++	{
++		.hw.init = &(struct clk_init_data) {
++			.name = "bus",
++			.ops = &sandbox_clk_ops,
++		},
++		.id = SANDBOX_CLK_ID_BUS,
++	},
++};
++
++struct clk_hw *sbox_get_hw(struct ofnode_phandle_args *clkspec, void *data)
++{
++	struct sandbox_clk_hw *shws = data;
++	unsigned int idx = clkspec->args[0];
++
++	if (idx >= SANDBOX_CLK_ID_COUNT) {
++		pr_err("%s: invalid index %u\n", __func__, idx);
++		return ERR_PTR(-EINVAL);
++	}
++
++	return &shws[idx].hw;
++}
++
++static int sandbox_clk_probe(struct udevice *dev)
++{
++	struct sandbox_clk_priv *priv = dev_get_priv(dev);
++	struct sandbox_clk_hw *shws;
++	int ret;
++
++	/* We can't re-use the struct clk_hw since it will be modified. This driver may be probed multiple times. */
++	shws = devm_kcalloc(dev, SANDBOX_CLK_ID_COUNT, sizeof(struct sandbox_clk_hw), GFP_KERNEL);
++	if (!shws)
++		return -ENOMEM;
++
++	priv->probed = true;
++
++	for (int i = 0; i < SANDBOX_CLK_ID_COUNT; i++) {
++		memcpy(&shws[i], &sandbox_clk_hws[i], sizeof(struct sandbox_clk_hw));
++		ret = devm_clk_hw_register(dev, &shws[i].hw);
++		if (ret)
++			return ret;
++	}
++
++	return devm_of_clk_add_hw_provider(dev, sbox_get_hw, shws);
++}
++
++static const struct udevice_id sandbox_clk_ids[] = {
++	{ .compatible = "sandbox,clk" },
++	{ }
++};
++
++U_BOOT_DRIVER(sandbox_clk) = {
++	.name		= "sandbox_clk",
++	.id		= UCLASS_NOP,
++	.of_match	= sandbox_clk_ids,
++	.probe		= sandbox_clk_probe,
++	.priv_auto	= sizeof(struct sandbox_clk_priv),
++};
++
++ulong sandbox_clk_query_rate(struct udevice *dev, int id)
++{
++	struct sandbox_clk_priv *priv = dev_get_priv(dev);
++
++	if (id < 0 || id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	return priv->rate[id];
++}
++
++int sandbox_clk_query_enable(struct udevice *dev, int id)
++{
++	struct sandbox_clk_priv *priv = dev_get_priv(dev);
++
++	if (id < 0 || id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++
++	return priv->enabled[id];
++}
++
++int sandbox_clk_query_requested(struct udevice *dev, int id)
++{
++	struct sandbox_clk_priv *priv = dev_get_priv(dev);
++
++	if (id < 0 || id >= SANDBOX_CLK_ID_COUNT)
++		return -EINVAL;
++	return priv->requested[id];
++}
++
++static int clk_fixed_rate_probe(struct udevice *dev)
++{
++	ofnode node = dev_ofnode(dev);
++	const char *clk_name;
++	struct clk_hw *hw;
++	u32 rate = 0;
++	int ret;
++
++	ofnode_read_u32(node, "clock-frequency", &rate);
++
++	clk_name = ofnode_read_string(node, "clock-output-names");
++	if (!clk_name)
++		clk_name = ofnode_get_name(node);
++
++	hw = clk_hw_register_fixed_rate(dev, clk_name, NULL, 0, rate);
++	if (IS_ERR(hw))
++		return PTR_ERR(hw);
++
++	ret = of_clk_add_hw_provider(node, of_clk_hw_simple_get, hw);
++	if (ret) {
++		clk_hw_unregister_fixed_rate(hw);
++		return ret;
++	}
++
++	return 0;
++}
++
++static const struct udevice_id sandbox_clk_fixed_rate_match[] = {
++	{ .compatible = "sandbox,fixed-clock" },
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(sandbox_fixed_clock) = {
++	.name = "sandbox_fixed_clock",
++	.id = UCLASS_NOP,
++	.of_match = sandbox_clk_fixed_rate_match,
++	.probe = clk_fixed_rate_probe,
++};
 
 -- 
 2.55.0
