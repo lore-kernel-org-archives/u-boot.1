@@ -1,102 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6FF5C44529
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF14FC44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8559D4066E;
-	Mon, 20 Jul 2026 18:10:26 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OC9i48IjJMf5; Mon, 20 Jul 2026 18:10:23 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F01D640707
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571023;
-	bh=D3AlHdiYSL6VJWWkYTDBsECcn24qaXE5oBvz5keOQWQ=;
-	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=k0RgKsfOjPkH1FHUeES/zXnRhbrz13/DdDsYlHOV835rjge4u676cDTYvoZpwhHik
-	 +eZ3F14eHMdDLANNxesXV9v2bB+/Nd6PZgnWJYHLqn8sijBk5ou3TISWdjjMOOGvn4
-	 solgTsF4SXIpKsHRJFGv1+9PLsEai58m6R211s9PfdOrqO2wNMOleUnnEfWl/M/+jK
-	 ADs8uMuGHRsJic0ZXdSrVBa2YitJQdJfjuJ1S3s0m2yWgn8Kx8869zBLi7q8cvJqzi
-	 qgKdSIhik6Ziq44pJoUMbh5W3QCv9BhXcOGleQPKq9YrvmwJS3NC1G+MxOd4EYw8Zc
-	 xiPcnfERqmF6g==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F01D640707;
-	Mon, 20 Jul 2026 18:10:22 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 61BFC1DF3
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5436160716
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6FD1C60786;
+	Mon, 20 Jul 2026 18:10:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xZ7hmSOszMeF for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
+ id ixnaEjgXfSzQ; Mon, 20 Jul 2026 18:10:24 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DE8156079F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784571022;
+	bh=GZCyGQOYX+8KFxTEJvgN+MGa+rsqZQWWNJfeY8VTn4k=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=0CLDgVzHqxau1Uw1SbNSrpOR4E91uzWkpFTTA56mryYBPdLJ28AgeV72fMhRbXbtV
+	 RaH47SiyPOEXTbcrJP5G+Wp/r3DaHk8RwcVZ5idJBcZPtNcYw3dCC/OmfDBfCds0/S
+	 8aXOb7WkIEvvgrC6mN/DzCTJvoqTF2Az1XnHwcbCkc6wNCpebhI99P4q1esMquuHex
+	 wpJOzOoO8w7CPFiWsc0Ic4LvXYfXUSmCzTl7arPRU3KpuDE5tmnCatOwh98MWTZ7/d
+	 iEAwrk+GXv7l4K9DDx4B9xk7duxsMV3JXm0LFlSA0qSVdPLmZkxm+WANm52FSvF+Cv
+	 vLzfNbhiCtZUA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id DE8156079F;
+	Mon, 20 Jul 2026 18:10:21 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6253F1331
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 54215606C6
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:06 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tm73nxmzit_X for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=casey.connolly@linaro.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 399746071F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 399746071F
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 6AFBC6060E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6AFBC6060E
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 399746071F
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6AFBC6060E
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3666A849BC; Mon, 20 Jul 2026 18:41:26 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 57A19846A4; Mon, 20 Jul 2026 18:40:55 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19F678484A
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:24 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4954df200ddso17635205e9.0
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:24 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 231C4844F6
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:40:51 +0200 (CEST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so79144305e9.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:40:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565683; x=1785170483;
+ d=1e100.net; s=20251104; t=1784565650; x=1785170450;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=D3AlHdiYSL6VJWWkYTDBsECcn24qaXE5oBvz5keOQWQ=;
- b=DqPXIdTACFB8s2OqKPHju5DauCT0ayBj/L0WKldHfFWTnUohtUsf+TfN98yY3mxCtv
- hl2EctDVOB0LC24UNxpcfnB4euN/Qp3FcMnmKTa86OVprqDOSiDBi07syRvwScxdrYSM
- gIcidMh54cWNcMfoR0EEKDaYmql+2qrUsgnM7Ae3uCEleotkDX+JePm5WnG2wTfnTaAm
- zGSIWGT93iKGaiUmpIppvOA81h49JIeHRD1oSUCG1SOpSgbRtbD+ZIekpc1qKVnbzgeL
- eV4iqsKs2UXQMTT58Pj7FOCrkicVbfxAKS8gPqJjuKISt1CCHDXKMlEZdQioHrR//RAu
- h3BQ==
-X-Gm-Message-State: AOJu0Yw/knbrU25qrzsCrHjhJ/08j8N/hOCp/WBHTQjx9WaliuXhDB98
- VyExdl/Ltm8EbkCZMa4Y1ma4U9oxFhvldgXaj0eJdwoGL9UVlp92+A3+SlyUaBk57jw=
-X-Gm-Gg: AfdE7cliYRKsLtT2cugym8nyZ44lmMzNjQBIPzLgrg5+1ISOBr0yj8E0tEm3T+9ndol
- YcMbwPJBK0gfhRrj+Ddg+yMd6JkWO88iKQiaxmrpGWPEuMD2wwTmhHKL2QZIItXTDdxJbPjEJmK
- f9ieGz22GkdA69GOrIOakx7uNzJlUcgPosOXu73OUsrPRbd0SIJJf5oomWa1tevjXj4qZ0WFx67
- kydUfHNuZZjQmAiSoa8IlNo58N1oTrdxTS298hkZ3OLupiz3i2bogPMcIRh1XYphtmKrqMi1eGF
- ZtOq7TvnKXyrNIihhMs/Qqa7m3nGp41RFWGLkntMIqyVsmpxXk9ihuq+wcZMOZRittM7tSZzTCX
- 3AS2HmuNeghPwQXeQWSgz/xAvlphQno+0WsJ81bhMqoRStV9ecDrQ8dRHQGAns/5j/m95vicNC1
- tgTMn8LBGoeCS2N9cDKIc0Zb2tB/FjmQ==
-X-Received: by 2002:a05:600c:3baa:b0:493:b730:8d78 with SMTP id
- 5b1f17b1804b1-4954a514007mr206346065e9.31.1784565683505; 
- Mon, 20 Jul 2026 09:41:23 -0700 (PDT)
+ bh=GZCyGQOYX+8KFxTEJvgN+MGa+rsqZQWWNJfeY8VTn4k=;
+ b=N72QwvXm4zhvCbGX6OGS0kLDIsKE8kY4kDxSXSzHX0O+wq+EAmCkVjEpzMR3iLomk3
+ 5/UFHMZ85HeHh2ym+SWGkn5gPTiKKof6jj6Ios9C3RHhAGZX4sp18eYh2BOJjvWvYO6q
+ M7N/Tx0YK+FMRPxPHw0SQnlusKVKdtIxPDvIgciIfctOzXiaonD9tyIgWpwRMtBrLq4L
+ ijZad62Uhf9SoFvdPSkpOJZh9/KaVl9n6aW6RcOFwb8QuW+1IJNqu0evyjAnhxmsWVBL
+ 2mfTNsGYh2dipnhDv6zN0j7N+FUrbVOKBeol0j/cDalArM9vqtsa8g/U7O35MnxHEAaT
+ O2qg==
+X-Gm-Message-State: AOJu0YyPzqMcYCl95/gl24rzYRZYTHlSWRDmE/i7A/Szck2Xr1H3O7cY
+ 7wAaKoB66uqhtnxJjAAz8eAIRm/sGrwvFm3PsaNskWYI9kLv+N/Aho7CVBIqmp55U5w=
+X-Gm-Gg: AfdE7clza1x6fhJz0hfe2bcy2v4ZAa6SAPjgsz9XjL5HxHe8gv0rlo4lYiMPpndPsoW
+ S+Mn6Sw7ZPkj7IS+iHXvOHXT3mchDXUXL1joE2oLnhaOWzoJrOpod0Tmo9ymhNRtHH2jhOwaGOM
+ Q4IAO/33Qm12jRtU0oB88vxug9OLwqTx9z3rvghym2uHpOg3jkN2qI0DUHQCYfkxeMnh5ynQNlx
+ T4cAzmnZzRS1rqigA4yLbzL7aFwHcrLqa7k4P6RqWPNZr77yyhso6meFyJkReF4kjSx6NjtjFKg
+ uWYNZqFSTEfZGp9Mv1VPnjLGwLE5hugz0+LA1y8h6xaLgbTrVZspG/4oLHbNKGDsLry0LruGjjL
+ E3og83X6ig4TBS69dJMUA5T7HkPCOp4r5kTdh5B7wAq1nMV9SwoXapnp+09gpw9q1iJmvijEDGa
+ vHzbMInwODeqOoXqISpsPm3hGhnrBusg==
+X-Received: by 2002:a05:600c:3ba5:b0:495:4b42:8677 with SMTP id
+ 5b1f17b1804b1-4954b42873emr175037265e9.18.1784565650570; 
+ Mon, 20 Jul 2026 09:40:50 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.21
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.40.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:41:22 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:40:41 +0100
-Subject: [PATCH 14/36] clk/common: add CCF_FULL support
+ Mon, 20 Jul 2026 09:40:49 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:40:30 +0100
+Subject: [PATCH 03/36] clk: move fixed clocks to clk/basic
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-casey-ccf-upstream-july-v1-14-8fece1b0333d@linaro.org>
+Message-Id: <20260720-casey-ccf-upstream-july-v1-3-8fece1b0333d@linaro.org>
 References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -145,44 +145,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4353;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2099;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=DkxGnpemrFJ4DESGb2/CIw06B19pgadx2pvnR5kdV9s=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+DSz9sFzt/GVgPg6XyZSggFTpGKa/WwrIjC
- YaHNvkMphiJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PgwAKCRAFgzErGV9k
- tuVoD/0dxY0VCuavqDf/rrgV96bOvW214dW2ppchfcF/v7bG447VypiPJ73nO6SKkOp2QfJFGRy
- oeFhMxMg7djYiHKHoNUzwR+R0P4s7Z0fWRusp2YNv0R3jWAUORMlTMn/RuybPodalE+Qdqw8N4q
- 3ouqP4LWLH0epkfbJYp9GR+OGmUdmgHgcG2J/FhmX8xj3cZVvr+E0u8NFQ3YISKIhwYIPz8rL0R
- +f41R2U1cOKb20ZldEJQXa31+rAzqtX4VTdGFfbD3YZLH88IwI73ckGK/aZ+qq8XxSTVBI/Pjhu
- SEt8p0g/mFuf5HmayG3coHjKMqkZ+jUmnNJxGx1SL90XR+arllL83Wn0i1TYWUtb3PUcifllfx+
- BJ51mRCXul63cvve1kvbffFpKvIYzXMAG7vRxrccIwWnmxE1qrvB9YlR02wWt8icRN1dD+MEI5u
- /xAyZ3nh+OgSG7FMRD0jnBk+/gmyTyLsQ+xPoh8q6wUZX6CKHTogHy4Bj69ERVib1iiTUnlChf3
- y4qgsd+DD02ipL/X+3LvYSKIC8PBGbwumCfucL5UpZdTbXOqbIeW1bL8R9ES4F4saUOK2102RWT
- pWDgh8mOwmMocPr6TnfPd5G6L6mrNpZYShAGxIMHkizqgOy2z6rn3NBjxP+n0TG4fDNLZJoonlI
- s9vBsTfUwjV47pQ==
+ bh=iaJMzmGqn3WlQwJyPBCduRSzMj5ZyvuxjJQpqvEm5NY=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+AvAs1McNG/9L8GpQobLzAoR9QCs2me7Fnn
+ Qd/H16qrzmJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PgAAKCRAFgzErGV9k
+ thZMD/40lr+oVa2xLQhmPDEwIWWb6nPC0Z/DtPmvVCW/fYZsYfCtsrXXEjFq0NP2x2Bj6dPZb3x
+ 4k3pMauKbQ+XiH85gfmdF6JqRecPc6M7ejhIulvcq/FgggBu24gjNd2Kzil5ZIbGpx66C0lBH/f
+ yRyC0Focg336zNyYJxn+VTnbwSMU/yQO32qkP/Skk4j+sS6R4gMp/sxMa5tqNyJXci/gDehvSfG
+ fjjBCU0+IeLjQeoFnthGISbQaYGCH8nYWrKXQN3+aTuJCjMckV0sEXm3GwpOFsizvokNX9f0Rbz
+ wCe4L8XDx7ObPLb55q3eLXxKYrMXn+KoCOPwQFhDwq9bDRAiPWUxlJzw1vR2Dxbri77uHBzBG1M
+ AxG7ohaGTLFjas6GmjprHtP7zBSzwyrCeN4iqJqMnt/LgTJM3+GhZQTPqJjv4POc/6W1uaP98NE
+ ybkxp1tApdD20QQqTR/kAEDNsKMF+tLExwJ9pNs9poDwjPZd8ZGxS5UmN5R4sTHhfAdEkB2i7Ux
+ zzG9werjJKpBnpIoBXlBBBnMZjsSwbYYo48rSNQAPJ1K8h/H8QdB+V69FPDeXsDrsTw/WuwjAGm
+ LArIIG42FTppNet46ERQ57Xg3wQYPFtMaB5rguYHfoUlus8zDfvLoQgUigeDLlKItdrHYpUKCg7
+ beTogDME9XLfvaQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565683; x=1785170483; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784565650; x=1785170450; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=D3AlHdiYSL6VJWWkYTDBsECcn24qaXE5oBvz5keOQWQ=;
- b=bTJebHl+El7rBd1mnHkqYBQN/ufYug9wzEmJ9uOm0foOmhNH5fWyQeyfe1vlm6H4ec
- GRGdxVtDs4HD8nXAa6xPOsPZreuXaNAqmbz2mLqCVadtMWmhcfCDYmtAnMP4ld9Kf5DZ
- gh7fVvaZUX8NXXltf7eJYk/Nlu3eSNAsPks0eOUYHGs7yIJfacMH4d8K4p72nDkmik/c
- ECfrtUcQ+jAENKPxG6he8lYYgzs2B/uR/Ta9sItX3Et6NIHwI8gBRrLEH2myDYcNZb+N
- ieMxwIHwM6oz4m/pQDzFrMpPOl5XdcVbxLGeSGwDh1JuO6gPnNCIxS9BXXESCEg9Jgmv
- kk/w==
+ bh=GZCyGQOYX+8KFxTEJvgN+MGa+rsqZQWWNJfeY8VTn4k=;
+ b=vx2ZiOpWS3ZmkSF6U6/hSSebVGWaCYD5qlDCKISU2LpcRM71UlpxaBny306OCtufqZ
+ vQSgRGWDMnS+zo2AeVdwVd9YQL7jna2Vz7RpxvxRKhr+SwylJ1DY7AWOV42G9+FLjQY9
+ Oz2RubbyLaCncuWeI8vri7zgP5Ed5oj7JrVXNKyVdlFd2g+WVS49qXZotmPdewHGQwYy
+ FqIaicosKSag4yblpwH824FXvKiYkXbqK9Y3npO43/wdWnSB4wc2u/7+5M5TEoxYD6B4
+ uZXk9We27r41qEJonJF85BBWbIe50Ba6taBSq10CmhxGeoI/qY8do0UpjErQ+ctodt2e
+ j02A==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=bTJebHl+
+ header.a=rsa-sha256 header.s=google header.b=vx2ZiOpW
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -190,7 +190,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="bTJebHl+"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="vx2ZiOpW"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -208,156 +208,66 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-With CCF the implementation of functions like clk_get_* and
-clk_set_defaults() changes. Introduce support for calling the CCF
-implementations when it is enabled. When disabled this dead code will be
-compiled out.
-
-Additionally, adjust the Makefile so that we no longer build
-clk-uclass.c when CCF is enabled. This removes all the conflicting
-implementations of clk_enable() and friends as well as ensuring that
-we don't even try and probe any UCLASS_CLK drivers as they are not
-supported.
+Linux CCF has incompatible implementations of fixed-rate/fixed-factor
+clocks, move the U-Boot versions of these drivers to clk/basic and only
+build them if CCF_FULL is not enabled.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/Makefile     |  2 +-
- drivers/clk/clk-common.c | 61 +++++++++++++++++++++++++++++++++++++-----------
- 2 files changed, 49 insertions(+), 14 deletions(-)
+ drivers/clk/Makefile                       | 8 ++++++--
+ drivers/clk/basic/Makefile                 | 7 +++++++
+ drivers/clk/{ => basic}/clk_fixed_factor.c | 0
+ drivers/clk/{ => basic}/clk_fixed_rate.c   | 0
+ 4 files changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index ee06bffaef72..4bec2e4c61a8 100644
+index e9a0759e93aa..35a5f81202e1 100644
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
-@@ -3,9 +3,8 @@
- # Copyright (c) 2015 Google, Inc
+@@ -4,16 +4,20 @@
  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
  #
  
--obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
- obj-$(CONFIG_$(PHASE_)CLK) += clk-common.o
+ obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
+-obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_rate.o
+-obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_factor.o
  obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
  obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
  
-@@ -15,8 +14,9 @@ obj-y += ccf/
- else
- # U-Boot basic fixed clocks, full CCF has a
- # different and incompatible implementation
- obj-y += basic/
-+obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
  # U-Boot/IMX "micro" CCF port
  obj-$(CONFIG_$(PHASE_)CLK_CCF) += uccf/
- endif
  
-diff --git a/drivers/clk/clk-common.c b/drivers/clk/clk-common.c
-index 7f30ad496da2..a24878d7302e 100644
---- a/drivers/clk/clk-common.c
-+++ b/drivers/clk/clk-common.c
-@@ -22,8 +22,10 @@
- #include <linux/bug.h>
- #include <linux/clk-provider.h>
- #include <linux/err.h>
- 
-+#include <linux/clk/clk-conf.h>
-+#include "ccf/clk.h"
- #include "clk-common.h"
- 
- #if CONFIG_IS_ENABLED(OF_REAL)
- int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
-@@ -32,16 +34,23 @@ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
- }
- 
- int clk_get_by_index_nodev(ofnode node, int index, struct clk *clk)
- {
--	struct ofnode_phandle_args args;
--	int ret;
-+	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
-+		struct clk_hw *hw;
- 
--	ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
--					     index, &args);
-+		hw = of_clk_get_hw(node, index, NULL);
-+		return clk_hw_create_clk_uboot(clk, hw);
-+	} else {
-+		struct ofnode_phandle_args args;
-+		int ret;
- 
--	return clk_get_by_index_tail(ret, node, &args, "clocks",
--				     index, clk);
-+		ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
-+						index, &args);
++# U-Boot basic fixed clocks, full CCF has a
++# different and incompatible implementation
++ifndef CONFIG_CLK_CCF_FULL
++obj-y += basic/
++endif
 +
-+		return clk_get_by_index_tail(ret, node, &args, "clocks",
-+					index, clk);
-+	}
- }
- 
- int clk_get_bulk(struct udevice *dev, struct clk_bulk *bulk)
- {
-@@ -77,9 +86,18 @@ bulk_get_err:
- }
- 
- int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
- {
--	return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
-+	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
-+		struct clk_hw *hw;
+ obj-y += adi/
+ obj-y += airoha/
+ obj-y += analogbits/
+ obj-$(CONFIG_MACH_IMX) += imx/
+diff --git a/drivers/clk/basic/Makefile b/drivers/clk/basic/Makefile
+new file mode 100644
+index 000000000000..4cf9469d2312
+--- /dev/null
++++ b/drivers/clk/basic/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (c) 2026 Linaro Ltd.
++#
 +
-+		hw = of_clk_get_hw(dev_ofnode(dev), 0, name);
-+		if (IS_ERR(hw))
-+			return -ENOENT;
-+		return clk_hw_create_clk_uboot(clk, hw);
-+	} else {
-+		return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
-+	}
- }
- #endif /* OF_REAL */
- 
- int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
-@@ -139,15 +157,19 @@ int clk_set_defaults(struct udevice *dev, enum clk_defaults_stage stage)
- 			return 0;
- 
- 	debug("%s(%s)\n", __func__, dev_read_name(dev));
- 
--	ret = clk_set_default_parents(dev, stage);
--	if (ret)
--		return ret;
-+	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
-+		return of_clk_set_defaults(dev_ofnode(dev), false);
-+	} else {
-+		ret = clk_set_default_parents(dev, stage);
-+		if (ret)
-+			return ret;
- 
--	ret = clk_set_default_rates(dev, stage);
--	if (ret < 0)
--		return ret;
-+		ret = clk_set_default_rates(dev, stage);
-+		if (ret < 0)
-+			return ret;
-+	}
- 
- 	return 0;
- }
- 
-@@ -217,4 +239,17 @@ int clk_disable_bulk(struct clk_bulk *bulk)
- 	}
- 
- 	return 0;
- }
-+
-+#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+long clk_get_parent_rate(struct clk *clk)
-+{
-+	struct clk *pclk;
-+
-+	if (!clk)
-+		return -EINVAL;
-+
-+	pclk = clk_get_parent(clk);
-+	return clk_get_rate(pclk);
-+}
-+#endif
++obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_rate.o
++obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_factor.o
+diff --git a/drivers/clk/clk_fixed_factor.c b/drivers/clk/basic/clk_fixed_factor.c
+similarity index 100%
+rename from drivers/clk/clk_fixed_factor.c
+rename to drivers/clk/basic/clk_fixed_factor.c
+diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/basic/clk_fixed_rate.c
+similarity index 100%
+rename from drivers/clk/clk_fixed_rate.c
+rename to drivers/clk/basic/clk_fixed_rate.c
 
 -- 
 2.55.0
