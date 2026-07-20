@@ -1,137 +1,105 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE81EC44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 22:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F41C44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 22:24:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3A8CE60728;
-	Mon, 20 Jul 2026 22:22:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C48F4406F9;
+	Mon, 20 Jul 2026 22:24:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RjRFhMO688wE; Mon, 20 Jul 2026 22:22:14 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aT6lPMdk1SZL; Mon, 20 Jul 2026 22:24:07 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EC5FA6070B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2F3AA406FB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784586134;
-	bh=xR+5Wek4cI/BS0jx0Qem2h+2mYTlfeq8RCZr4FhLcyw=;
-	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=dLVq8m+t+B9ruG9/Ch2P5LXcGKJssnH3CtC2KzuwHtalrx3S8Hu0xrkn+Prk2GPxB
-	 rFQ2uL6+j6S6rHyUIwJ5E8l6t3XQMtOSzk14x54I1+p28x6+IyvXexMEMy1esZz3bO
-	 o7Sx4wfjttF8Ljo9U/h7fSuEeEgxRD8WX4PHm8imwRi1+G6s15PeHWcOr35OY7JoVC
-	 cn4qRXwKkgPiNZ0AYLKPbYlChpqe71qQ7/5m+R7O/RKpDW9KirKfEwG6bj/pvOTjWI
-	 G3HyHcU0HS4j2Ha7gh/+2AY71Q8BxQ5BFS05HMZ/HCvGzbALbMzLx75ueg8Wv3t1px
-	 YtNynbla35C/A==
+	d=lists.u-boot-project.org ; s=default; t=1784586247;
+	bh=Jii4da1bmteLEPwJfuuobK4L5YvQa0M4s+Xp23cbM48=;
+	h=Date:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=sVEf26LtxRLHO33hWRMU1lzmmh+OP0QX8KWh4Dco1Y9/GJE4K/YUzi/7kUEkwh9+S
+	 UTQzV6L+29JeDst2R68upryUw0HUKnlGXh0CpAimvIIGPGN1WQ841skWXpL/2gB4Qo
+	 gt83RO/YETI94wawyZkr5BcpWLy69sksxsUxDzJn3oKYPz8oCTQJ1gxlRN2GqJrvaV
+	 jWUefj3gVUplCx3Z9kWZNNs1CAWRCAHnvJcjnJB9YCRaAZJYEK4JSL619kkMIKZ51N
+	 Oh7j94XPZ4kMxIronKSwO7snz9iHDQtEgjX5hSsVCK3mD/6m+wvmMkWsxlD6Ko/z/P
+	 N3/md4iFkum1w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EC5FA6070B;
-	Mon, 20 Jul 2026 22:22:13 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 52924DF0
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 22:22:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2F3AA406FB;
+	Mon, 20 Jul 2026 22:24:07 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A0C8E96C
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 22:24:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 38FB180D58
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 22:22:12 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8628680D80
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 22:24:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ez44FBvUosqX for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 22:22:11 +0000 (UTC)
+ id kIlVmpAgG5yT for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 22:24:03 +0000 (UTC)
+X-Greylist: delayed 573 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 20 Jul 2026 22:24:02 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 446BA80D7C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 446BA80D7C
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0302180D4F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0302180D4F
+ envelope-from=anoduck@protonmail.com; receiver=<UNKNOWN> 
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0302180D4F
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 22:22:10 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 446BA80D7C
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 22:24:02 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3EC3847AF; Tue, 21 Jul 2026 00:22:08 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B04A84659; Tue, 21 Jul 2026 00:14:28 +0200 (CEST)
+Received: from mail-43102.protonmail.ch (mail-43102.protonmail.ch
+ [185.70.43.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0069D8484A
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 00:22:03 +0200 (CEST)
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-6a377223171so5127837eaf.2
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:22:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784586122; x=1785190922;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=xR+5Wek4cI/BS0jx0Qem2h+2mYTlfeq8RCZr4FhLcyw=;
- b=YdpvAury+QOW0PXaoyOdqOSgEvRLjvG3xQgCKE0iPZNsU8UnZ84rwG9REikwHJKoCF
- R5ofC0rfkM0CbpKQWXui/bwPPTTvmuPJWfcIsiaHYRAkFkML43+/xLAo564dkx3eFJJm
- 79GkyQQHFTLgGgqNEa4ffFgRcYXfDoSexQmdCvJ3Boy+ZaevAHCeP6QHWlOd4h3G0ty3
- 35hQo/+wy8ws4IUVvOLEzfV3cLyJimyUSw4WL6kDHBJfLmNFYs4ING77vvVcfrjP+8Rh
- 9Jwo/vwpHYBAHHD/++0Wf4fY5vHc4azN2avFXUD1lm5ZxKssk87P7i6yZKfStIJYoKjG
- qyDw==
-X-Gm-Message-State: AOJu0Ywb1t37oya50hY+NEPi7CuLBezxbgY8OcfQXoi0wPAhivGI0ZvW
- 4bU/XWoP0cSECzR2V3DtO63jVPM6vSrCF3uqufuw4/WR6MCP73fiaW3w92nrKp0mojw=
-X-Gm-Gg: AfdE7ck8wx49Sh13z8/12ayu98kVXXq9aAAF7tmLGzg4mrtxxsVq54yRL1iS/yRxJb5
- 8+A7Ea/OkY7U/MOt1He0Wiidpy35GoocdMlExHzRSFlnsu44GQUVnxbfWE8OYGxTkV8rVHmoZvM
- oGo+tw3HlPl46OQV7ZfJhNS93xRfqw08FYOIKUIgKSKoBO97GErMqdzfNtP2y8FE6toNidikh0E
- EFiywoisHSdP6NhJ3oZcLwCWfEM1JhXOBnCY450mpQghVgls5QZjRBEJkeUGPlsox1qJzqDs3Q7
- flxctihdkmxbw9o57MUp51kly7sG/LmQRDB7dvdREsXM2PAhm88POBoRHVjrrB8xqbgsUl8Sndw
- TbOUYWC3fWLSB4+whL4+MhUKCeocTCfsSGCDc6/1TsLfElTlIkxoPXCSwjC1F/Kr4aGq3YeLd36
- nDa8Yk4EKWDIvR2Z/wzaUzGo/vE/Tz2x6LC6lwSz4WyD0RhrMtUfRx09cToZzYx4odg1GrR6iSl
- n7pbd1IEg7OlSnE0iQcHLPfVJj+pkq1qvT/VQ==
-X-Received: by 2002:a05:6820:a508:10b0:6a5:fd5f:e0a6 with SMTP id
- 006d021491bc7-6a5fd5fe73dmr3141085eaf.12.1784586121657; 
- Mon, 20 Jul 2026 15:22:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a516be4647sm9618205eaf.6.2026.07.20.15.22.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 15:22:00 -0700 (PDT)
-Date: Mon, 20 Jul 2026 16:21:58 -0600
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: u-boot@lists.denx.de, u-boot-board-maintainers@lists.denx.de,
- u-boot-custodians@lists.denx.de
-Subject: Re: [ANN] Mailing list migration to lists.u-boot-project.org
-Message-ID: <20260720222158.GL749385@bill-the-cat>
-References: <20260715173119.GL749385@bill-the-cat>
- <87ldb5sen1.fsf@bloch.sibelius.xs4all.nl>
+ by phobos.denx.de (Postfix) with ESMTPS id AF0C383C14
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 00:14:24 +0200 (CEST)
+Date: Mon, 20 Jul 2026 22:14:12 +0000
+To: u-boot@lists.denx.de
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Tom Rini <trini@konsulko.com>, anoduck <anoduck@protonmail.com>
+Subject: [PATCH] Added Device Tree Files for Pine64 PineTab-V
+Message-ID: <20260720-device-tree-pinetabv-v1-1-8ba97c68020c@protonmail.com>
+Feedback-ID: 3493375:user:proton
+X-Pm-Message-ID: 8d1d4a70e359ce1515e682fdaed5de317c754cf2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U5zSbhrVqtDA/vdo"
-Content-Disposition: inline
-In-Reply-To: <87ldb5sen1.fsf@bloch.sibelius.xs4all.nl>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784586122; x=1785190922; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=xR+5Wek4cI/BS0jx0Qem2h+2mYTlfeq8RCZr4FhLcyw=;
- b=Yv9M9LJ6g26NSC+eziSOHmbB64K3dAyEcDroyIUOBnnz2XdfiTIYS3/VAnySQRH9nR
- J6Oqs2kjCAAudhiWCIkYxBYV94sCCLIBKPJGNwBrkygiGv+L7+reuVVE45kY+ZasFHTF
- NAIl4QQqFA0CDfSaeByVFsmh0pVF86UcJJWAA=
+ d=protonmail.com; 
+ s=protonmail3; t=1784585662; x=1784844862;
+ bh=Jii4da1bmteLEPwJfuuobK4L5YvQa0M4s+Xp23cbM48=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=n3qSyScTKo9n/ArlF+A/mNmfCmGdmE+wPiHfya0mXkT5cUiun2KpqANkhbKFX0wb2
+ wSMXSNThXDyO/jCOQbp7OvRkNjfjiK8aYtbsXmO+7n9fxlDM7VHADwGMN0IAr0TN3J
+ VL8Xn+0KnH91HUP4f9j3qzDij3gsA5dSSbdOmbmnThTy2qAiY5YNrEHF6OXDWp61nC
+ ylb7FbKiL/tBg3q+1zpXZEyfidnYulcvXUsqDdaLnn1/q4JqC9HzQxuJ8Zq/ZlGCSr
+ oa+tbGWxqH5jonSJxksJ+xCs47lN+88Hx5sFW3c2b12PQGDPdziR28MbGqd1kSamxV
+ 3NWGmmy+eL+zQ==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Yv9M9LJ6
+ dkim=pass (2048-bit key,
+ unprotected) header.d=protonmail.com header.i=@protonmail.com
+ header.a=rsa-sha256 header.s=protonmail3 header.b=n3qSyScT
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=trini@konsulko.com
+ smtp.mailfrom=anoduck@protonmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yv9M9LJ6";
+ dkim=pass (2048-bit key;
+ secure) header.d=protonmail.com header.i=@protonmail.com header.b="n3qSyScT"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -144,71 +112,1998 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Tom Rini via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Tom Rini <trini@konsulko.com>
+From: anoduck via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: anoduck <anoduck@protonmail.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Support is split between two separate files.
 
---U5zSbhrVqtDA/vdo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+1. `-u-boot.dtsi`: Community Contributions
+  - audio codec
+  - Accelerometer
 
-On Mon, Jul 20, 2026 at 08:24:34PM +0200, Mark Kettenis wrote:
-> > Date: Wed, 15 Jul 2026 11:31:19 -0600
-> > From: Tom Rini <trini@konsulko.com>
->=20
-> Hi Tom,
->=20
-> > Hey all,
-> >=20
-> > As I've mentioned in previous release emails, we'll be migrating our
-> > lists over to lists.u-boot-project.org. The news now is that we have a
-> > date. This coming Monday the 20th of July, we'll be turning off the
-> > receiving side of lists.denx.de and then importing everything over to
-> > lists.u-boot-project.org.
-> >=20
-> > What do you need to do? Nothing much. All active subscribers and their
-> > preferences will be moved. This includes how lore and patchwork are
-> > linked, so all of that will work. We are going to try and ensure no new
-> > emails get lost in the migration.
-> >=20
-> > Based on feedback from the test migration, we believe we know what was
-> > missing to ensure that the archive links are stable, and so that should
-> > be the case when we go live again.
-> >=20
-> > I'll send out a reminder about this Sunday.
-> >=20
-> > Thanks all!
->=20
-> Sadly it seems that the new list is (mis)configured to rewrite the
-> From: header to something like:
->=20
->   "John Doe via U-Boot <u-boot@lists.u-boot-project.org>"
->=20
-> Does it have to be that way?
+2. `.dts`: Further Support Provided
+  - SD-Card Support
+  - EMMC Support
 
-So the answer is kinda. Whereas back on DENX we never "munged" emails
-this is also why we likely often had big piles of unsubscribed due to
-bounces (which was due to rejection from being incorrectly set as spam)
-on the big providers. So now mailman is configured to munge the headers
-*only* from senders which have a enforcing DMARC policy set, which
-xs4all.nl has. And because we're on shared resources our lists not
-following the DMARC rules would mess up all of the other lists.
+---
+##Added Device Tree files for Pine64 PineTab-V Risc-V 64bit Tablet
 
+As requested, division of contribution split among two files, a `dtsi`
+and a `dts` file.
+
+1. Suffixed `-u-boot.dtsi` file:
+  Community contributions derived from precompiled `dtb` file.
+  Contributions include:
+    - Audio codec support
+    - Support for Accelerometer.
+
+2. Standard `.dts` file:
+  Further contributions focused on providing support for the board.
+  Contributions include:
+    - SD-Card support and SD-Card Power Support
+    - EMMC Device Support
+
+## Versions & Revisions:
+
+* V0: Incorrectly formatted stub file.
+* V1: Wrong Location in source tree.
+* V2: Misconfigured B4 branch lead to unintended inclusion of revision
+  history.
+* V3: Correctly configured B4 branch, split into two files, and located
+  in the correct place.
+
+Thank you, for your patience and kindness.
+
+Signed-off-by: anoduck <anoduck@protonmail.com>
+---
+ arch/riscv/dts/jh7110-pine64-pinetabv-u-boot.dtsi | 1756 +++++++++++++++++=
+++++
+ arch/riscv/dts/jh7110-pine64-pinetabv.dts         |  116 ++
+ 2 files changed, 1872 insertions(+)
+
+diff --git a/arch/riscv/dts/jh7110-pine64-pinetabv-u-boot.dtsi b/arch/riscv=
+/dts/jh7110-pine64-pinetabv-u-boot.dtsi
+new file mode 100644
+index 00000000000..581bd54d71d
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-pine64-pinetabv-u-boot.dtsi
+@@ -0,0 +1,1756 @@
++/dts-v1/;
++
++/ {
++=09compatible =3D "starfive,jh7110";
++=09#address-cells =3D <0x02>;
++=09#size-cells =3D <0x02>;
++
++=09cpus {
++=09=09#address-cells =3D <0x01>;
++=09=09#size-cells =3D <0x00>;
++=09=09timebase-frequency =3D "", "=3D\t";
++=09=09phandle =3D <0x43>;
++
++=09=09cpu@0 {
++=09=09=09compatible =3D "sifive,s7", "riscv";
++=09=09=09reg =3D <0x00>;
++=09=09=09device_type =3D "cpu";
++=09=09=09i-cache-block-size =3D <0x40>;
++=09=09=09i-cache-sets =3D <0x40>;
++=09=09=09i-cache-size =3D <0x4000>;
++=09=09=09next-level-cache =3D <0x01>;
++=09=09=09riscv,isa =3D "rv64imac_zba_zbb";
++=09=09=09riscv,isa-base =3D "rv64i";
++=09=09=09riscv,isa-extensions =3D "i", "m", "a", "c", "zba", "zbb", "zicnt=
+r", "zicsr", "zifencei", "zihpm";
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x05>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09compatible =3D "riscv,cpu-intc";
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09interrupt-controller;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x0d>;
++=09=09=09};
++=09=09};
++
++=09=09cpu@1 {
++=09=09=09compatible =3D "sifive,u74-mc", "riscv";
++=09=09=09reg =3D <0x01>;
++=09=09=09d-cache-block-size =3D <0x40>;
++=09=09=09d-cache-sets =3D <0x40>;
++=09=09=09d-cache-size =3D <0x8000>;
++=09=09=09d-tlb-sets =3D <0x01>;
++=09=09=09d-tlb-size =3D <0x28>;
++=09=09=09device_type =3D "cpu";
++=09=09=09i-cache-block-size =3D <0x40>;
++=09=09=09i-cache-sets =3D <0x40>;
++=09=09=09i-cache-size =3D <0x8000>;
++=09=09=09i-tlb-sets =3D <0x01>;
++=09=09=09i-tlb-size =3D <0x28>;
++=09=09=09mmu-type =3D "riscv,sv39";
++=09=09=09next-level-cache =3D <0x01>;
++=09=09=09riscv,isa =3D "rv64imafdc_zba_zbb";
++=09=09=09riscv,isa-base =3D "rv64i";
++=09=09=09riscv,isa-extensions =3D "i", "m", "a", "f", "d", "c", "zba", "zb=
+b", "zicntr", "zicsr", "zifencei", "zihpm";
++=09=09=09tlb-split;
++=09=09=09operating-points-v2 =3D <0x02>;
++=09=09=09clocks =3D <0x03 0x01>;
++=09=09=09clock-names =3D "cpu";
++=09=09=09#cooling-cells =3D <0x02>;
++=09=09=09cpu-supply =3D <0x04>;
++=09=09=09phandle =3D <0x06>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09compatible =3D "riscv,cpu-intc";
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09interrupt-controller;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x0e>;
++=09=09=09};
++=09=09};
++
++=09=09cpu@2 {
++=09=09=09compatible =3D "sifive,u74-mc", "riscv";
++=09=09=09reg =3D <0x02>;
++=09=09=09d-cache-block-size =3D <0x40>;
++=09=09=09d-cache-sets =3D <0x40>;
++=09=09=09d-cache-size =3D <0x8000>;
++=09=09=09d-tlb-sets =3D <0x01>;
++=09=09=09d-tlb-size =3D <0x28>;
++=09=09=09device_type =3D "cpu";
++=09=09=09i-cache-block-size =3D <0x40>;
++=09=09=09i-cache-sets =3D <0x40>;
++=09=09=09i-cache-size =3D <0x8000>;
++=09=09=09i-tlb-sets =3D <0x01>;
++=09=09=09i-tlb-size =3D <0x28>;
++=09=09=09mmu-type =3D "riscv,sv39";
++=09=09=09next-level-cache =3D <0x01>;
++=09=09=09riscv,isa =3D "rv64imafdc_zba_zbb";
++=09=09=09riscv,isa-base =3D "rv64i";
++=09=09=09riscv,isa-extensions =3D "i", "m", "a", "f", "d", "c", "zba", "zb=
+b", "zicntr", "zicsr", "zifencei", "zihpm";
++=09=09=09tlb-split;
++=09=09=09operating-points-v2 =3D <0x02>;
++=09=09=09clocks =3D <0x03 0x01>;
++=09=09=09clock-names =3D "cpu";
++=09=09=09#cooling-cells =3D <0x02>;
++=09=09=09cpu-supply =3D <0x04>;
++=09=09=09phandle =3D <0x07>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09compatible =3D "riscv,cpu-intc";
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09interrupt-controller;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x0f>;
++=09=09=09};
++=09=09};
++
++=09=09cpu@3 {
++=09=09=09compatible =3D "sifive,u74-mc", "riscv";
++=09=09=09reg =3D <0x03>;
++=09=09=09d-cache-block-size =3D <0x40>;
++=09=09=09d-cache-sets =3D <0x40>;
++=09=09=09d-cache-size =3D <0x8000>;
++=09=09=09d-tlb-sets =3D <0x01>;
++=09=09=09d-tlb-size =3D <0x28>;
++=09=09=09device_type =3D "cpu";
++=09=09=09i-cache-block-size =3D <0x40>;
++=09=09=09i-cache-sets =3D <0x40>;
++=09=09=09i-cache-size =3D <0x8000>;
++=09=09=09i-tlb-sets =3D <0x01>;
++=09=09=09i-tlb-size =3D <0x28>;
++=09=09=09mmu-type =3D "riscv,sv39";
++=09=09=09next-level-cache =3D <0x01>;
++=09=09=09riscv,isa =3D "rv64imafdc_zba_zbb";
++=09=09=09riscv,isa-base =3D "rv64i";
++=09=09=09riscv,isa-extensions =3D "i", "m", "a", "f", "d", "c", "zba", "zb=
+b", "zicntr", "zicsr", "zifencei", "zihpm";
++=09=09=09tlb-split;
++=09=09=09operating-points-v2 =3D <0x02>;
++=09=09=09clocks =3D <0x03 0x01>;
++=09=09=09clock-names =3D "cpu";
++=09=09=09#cooling-cells =3D <0x02>;
++=09=09=09cpu-supply =3D <0x04>;
++=09=09=09phandle =3D <0x08>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09compatible =3D "riscv,cpu-intc";
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09interrupt-controller;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x10>;
++=09=09=09};
++=09=09};
++
++=09=09cpu@4 {
++=09=09=09compatible =3D "sifive,u74-mc", "riscv";
++=09=09=09reg =3D <0x04>;
++=09=09=09d-cache-block-size =3D <0x40>;
++=09=09=09d-cache-sets =3D <0x40>;
++=09=09=09d-cache-size =3D <0x8000>;
++=09=09=09d-tlb-sets =3D <0x01>;
++=09=09=09d-tlb-size =3D <0x28>;
++=09=09=09device_type =3D "cpu";
++=09=09=09i-cache-block-size =3D <0x40>;
++=09=09=09i-cache-sets =3D <0x40>;
++=09=09=09i-cache-size =3D <0x8000>;
++=09=09=09i-tlb-sets =3D <0x01>;
++=09=09=09i-tlb-size =3D <0x28>;
++=09=09=09mmu-type =3D "riscv,sv39";
++=09=09=09next-level-cache =3D <0x01>;
++=09=09=09riscv,isa =3D "rv64imafdc_zba_zbb";
++=09=09=09riscv,isa-base =3D "rv64i";
++=09=09=09riscv,isa-extensions =3D "i", "m", "a", "f", "d", "c", "zba", "zb=
+b", "zicntr", "zicsr", "zifencei", "zihpm";
++=09=09=09tlb-split;
++=09=09=09operating-points-v2 =3D <0x02>;
++=09=09=09clocks =3D <0x03 0x01>;
++=09=09=09clock-names =3D "cpu";
++=09=09=09#cooling-cells =3D <0x02>;
++=09=09=09cpu-supply =3D <0x04>;
++=09=09=09phandle =3D <0x09>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09compatible =3D "riscv,cpu-intc";
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09interrupt-controller;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x11>;
++=09=09=09};
++=09=09};
++
++=09=09cpu-map {
++
++=09=09=09cluster0 {
++
++=09=09=09=09core0 {
++=09=09=09=09=09cpu =3D <0x05>;
++=09=09=09=09};
++
++=09=09=09=09core1 {
++=09=09=09=09=09cpu =3D <0x06>;
++=09=09=09=09};
++
++=09=09=09=09core2 {
++=09=09=09=09=09cpu =3D <0x07>;
++=09=09=09=09};
++
++=09=09=09=09core3 {
++=09=09=09=09=09cpu =3D <0x08>;
++=09=09=09=09};
++
++=09=09=09=09core4 {
++=09=09=09=09=09cpu =3D <0x09>;
++=09=09=09=09};
++=09=09=09};
++=09=09};
++=09};
++
++=09opp-table-0 {
++=09=09compatible =3D "operating-points-v2";
++=09=09opp-shared;
++=09=09phandle =3D <0x02>;
++
++=09=09opp-375000000 {
++=09=09=09opp-hz =3D <0x00 0x165a0bc0>;
++=09=09=09opp-microvolt =3D "", "\f5";
++=09=09};
++
++=09=09opp-500000000 {
++=09=09=09opp-hz =3D <0x00 0x1dcd6500>;
++=09=09=09opp-microvolt =3D "", "\f5";
++=09=09};
++
++=09=09opp-750000000 {
++=09=09=09opp-hz =3D <0x00 0x2cb41780>;
++=09=09=09opp-microvolt =3D "", "\f5";
++=09=09};
++
++=09=09opp-1500000000 {
++=09=09=09opp-hz =3D <0x00 0x59682f00>;
++=09=09=09opp-microvolt =3D <0xfde80>;
++=09=09};
++=09};
++
++=09thermal-zones {
++
++=09=09cpu-thermal {
++=09=09=09polling-delay-passive =3D <0xfa>;
++=09=09=09polling-delay =3D <0x3a98>;
++=09=09=09thermal-sensors =3D <0x0a>;
++
++=09=09=09cooling-maps {
++
++=09=09=09=09map0 {
++=09=09=09=09=09trip =3D <0x0b>;
++=09=09=09=09=09cooling-device =3D <0x06 0xffffffff 0xffffffff 0x07 0xfffff=
+fff 0xffffffff 0x08 0xffffffff 0xffffffff 0x09 0xffffffff 0xffffffff>;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09trips {
++
++=09=09=09=09cpu-alert0 {
++=09=09=09=09=09temperature =3D <0x14c08>;
++=09=09=09=09=09hysteresis =3D <0x7d0>;
++=09=09=09=09=09type =3D "passive";
++=09=09=09=09=09phandle =3D <0x0b>;
++=09=09=09=09};
++
++=09=09=09=09cpu-crit {
++=09=09=09=09=09temperature =3D <0x186a0>;
++=09=09=09=09=09hysteresis =3D <0x7d0>;
++=09=09=09=09=09type =3D "critical";
++=09=09=09=09};
++=09=09=09};
++=09=09};
++=09};
++
++=09dvp-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "dvp_clk";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x46cf710>;
++=09=09phandle =3D <0x35>;
++=09};
++
++=09gmac0-rgmii-rxin-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "gmac0_rgmii_rxin";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x7735940>;
++=09=09phandle =3D <0x31>;
++=09};
++
++=09gmac0-rmii-refin-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "gmac0_rmii_refin";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x2faf080>;
++=09=09phandle =3D <0x30>;
++=09};
++
++=09gmac1-rgmii-rxin-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09bootph-pre-ram;
++=09=09clock-output-names =3D "gmac1_rgmii_rxin";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x7735940>;
++=09=09phandle =3D <0x27>;
++=09};
++
++=09gmac1-rmii-refin-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09bootph-pre-ram;
++=09=09clock-output-names =3D "gmac1_rmii_refin";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x2faf080>;
++=09=09phandle =3D <0x26>;
++=09};
++
++=09hdmitx0-pixel-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "hdmitx0_pixelclk";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x11b3dc40>;
++=09=09phandle =3D <0x37>;
++=09};
++
++=09i2srx-bclk-ext-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "i2srx_bclk_ext";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0xbb8000>;
++=09=09phandle =3D <0x19>;
++=09};
++
++=09i2srx-lrck-ext-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "i2srx_lrck_ext";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x2ee00>;
++=09=09phandle =3D <0x1a>;
++=09};
++
++=09i2stx-bclk-ext-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "i2stx_bclk_ext";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0xbb8000>;
++=09=09phandle =3D <0x23>;
++=09};
++
++=09i2stx-lrck-ext-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "i2stx_lrck_ext";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x2ee00>;
++=09=09phandle =3D <0x24>;
++=09};
++
++=09mclk-ext-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "mclk_ext";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0xbb8000>;
++=09=09phandle =3D <0x18>;
++=09};
++
++=09oscillator {
++=09=09compatible =3D "fixed-clock";
++=09=09bootph-pre-ram;
++=09=09clock-output-names =3D "osc";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x16e3600>;
++=09=09phandle =3D <0x20>;
++=09};
++
++=09rtc-oscillator {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "rtc_osc";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x8000>;
++=09=09phandle =3D <0x32>;
++=09};
++
++=09stmmac-axi-config {
++=09=09snps,lpi_en;
++=09=09snps,wr_osr_lmt =3D <0x0f>;
++=09=09snps,rd_osr_lmt =3D <0x0f>;
++=09=09snps,blen =3D <0x100 0x80 0x40 0x20 0x00 0x00 0x00>;
++=09=09phandle =3D <0x2d>;
++=09};
++
++=09tdm-ext-clock {
++=09=09compatible =3D "fixed-clock";
++=09=09clock-output-names =3D "tdm_ext";
++=09=09#clock-cells =3D <0x00>;
++=09=09clock-frequency =3D <0x2ee0000>;
++=09=09phandle =3D <0x16>;
++=09};
++
++=09soc {
++=09=09compatible =3D "simple-bus";
++=09=09interrupt-parent =3D <0x0c>;
++=09=09#address-cells =3D <0x02>;
++=09=09#size-cells =3D <0x02>;
++=09=09ranges;
++
++=09=09timer@2000000 {
++=09=09=09compatible =3D "starfive,jh7110-clint", "sifive,clint0";
++=09=09=09reg =3D <0x00 0x2000000 0x00 0x10000>;
++=09=09=09bootph-pre-ram;
++=09=09=09interrupts-extended =3D <0x0d 0x03 0x0d 0x07 0x0e 0x03 0x0e 0x07 =
+0x0f 0x03 0x0f 0x07 0x10 0x03 0x10 0x07 0x11 0x03 0x11 0x07>;
++=09=09=09phandle =3D <0x44>;
++=09=09};
++
++=09=09cache-controller@2010000 {
++=09=09=09compatible =3D "starfive,jh7110-ccache", "sifive,ccache0", "cache=
+";
++=09=09=09reg =3D <0x00 0x2010000 0x00 0x4000>;
++=09=09=09interrupts =3D <0x01 0x03 0x04 0x02>;
++=09=09=09cache-block-size =3D <0x40>;
++=09=09=09cache-level =3D <0x02>;
++=09=09=09cache-sets =3D <0x800>;
++=09=09=09cache-size =3D <0x200000>;
++=09=09=09cache-unified;
++=09=09=09phandle =3D <0x01>;
++=09=09};
++
++=09=09interrupt-controller@c000000 {
++=09=09=09compatible =3D "starfive,jh7110-plic", "sifive,plic-1.0.0";
++=09=09=09reg =3D <0x00 0xc000000 0x00 0x4000000>;
++=09=09=09interrupts-extended =3D <0x0d 0x0b 0x0e 0x0b 0x0e 0x09 0x0f 0x0b =
+0x0f 0x09 0x10 0x0b 0x10 0x09 0x11 0x0b 0x11 0x09>;
++=09=09=09interrupt-controller;
++=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09#address-cells =3D <0x00>;
++=09=09=09riscv,ndev =3D <0x88>;
++=09=09=09phandle =3D <0x0c>;
++=09=09};
++
++=09=09serial@10000000 {
++=09=09=09compatible =3D "starfive,jh7110-uart", "snps,dw-apb-uart";
++=09=09=09reg =3D <0x00 0x10000000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x92 0x03 0x91>;
++=09=09=09clock-names =3D "baudclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x53 0x03 0x54>;
++=09=09=09interrupts =3D <0x20>;
++=09=09=09reg-io-width =3D <0x04>;
++=09=09=09reg-shift =3D <0x02>;
++=09=09=09status =3D "okay";
++=09=09=09bootph-pre-ram;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x12>;
++=09=09=09phandle =3D <0x45>;
++=09=09};
++
++=09=09serial@10010000 {
++=09=09=09compatible =3D "starfive,jh7110-uart", "snps,dw-apb-uart";
++=09=09=09reg =3D <0x00 0x10010000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x94 0x03 0x93>;
++=09=09=09clock-names =3D "baudclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x55 0x03 0x56>;
++=09=09=09interrupts =3D <0x21>;
++=09=09=09reg-io-width =3D <0x04>;
++=09=09=09reg-shift =3D <0x02>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x46>;
++=09=09};
++
++=09=09serial@10020000 {
++=09=09=09compatible =3D "starfive,jh7110-uart", "snps,dw-apb-uart";
++=09=09=09reg =3D <0x00 0x10020000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x96 0x03 0x95>;
++=09=09=09clock-names =3D "baudclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x57 0x03 0x58>;
++=09=09=09interrupts =3D <0x22>;
++=09=09=09reg-io-width =3D <0x04>;
++=09=09=09reg-shift =3D <0x02>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x47>;
++=09=09};
++
++=09=09i2c@10030000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x10030000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8a>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x4c>;
++=09=09=09interrupts =3D <0x23>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09clock-frequency =3D <0x186a0>;
++=09=09=09i2c-sda-hold-time-ns =3D <0x12c>;
++=09=09=09i2c-sda-falling-time-ns =3D <0x1fe>;
++=09=09=09i2c-scl-falling-time-ns =3D <0x1fe>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x13>;
++=09=09=09phandle =3D <0x48>;
++=09=09};
++
++=09=09i2c@10040000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x10040000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8b>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x4d>;
++=09=09=09interrupts =3D <0x24>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x49>;
++=09=09};
++
++=09=09i2c@10050000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x10050000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8c>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x4e>;
++=09=09=09interrupts =3D <0x25>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "okay";
++=09=09=09clock-frequency =3D <0x186a0>;
++=09=09=09i2c-sda-hold-time-ns =3D <0x12c>;
++=09=09=09i2c-sda-falling-time-ns =3D <0x1fe>;
++=09=09=09i2c-scl-falling-time-ns =3D <0x1fe>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x14>;
++=09=09=09phandle =3D <0x4a>;
++=09=09};
++
++=09=09spi@10060000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x10060000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x83 0x03 0x83>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x45>;
++=09=09=09interrupts =3D <0x26>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x15>;
++=09=09=09phandle =3D <0x4b>;
++=09=09};
++
++=09=09spi@10070000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x10070000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x84 0x03 0x84>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x46>;
++=09=09=09interrupts =3D <0x27>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x4c>;
++=09=09};
++
++=09=09spi@10080000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x10080000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x85 0x03 0x85>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x47>;
++=09=09=09interrupts =3D <0x28>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x4d>;
++=09=09};
++
++=09=09tdm@10090000 {
++=09=09=09compatible =3D "starfive,jh7110-tdm";
++=09=09=09reg =3D <0x00 0x10090000 0x00 0x1000>;
++=09=09=09clocks =3D <0x03 0xb8 0x03 0xb9 0x03 0xba 0x03 0xbb 0x03 0x11 0x1=
+6>;
++=09=09=09clock-names =3D "tdm_ahb", "tdm_apb", "tdm_internal", "tdm", "mcl=
+k_inner", "tdm_ext";
++=09=09=09resets =3D <0x03 0x69 0x03 0x6b 0x03 0x6a>;
++=09=09=09dmas =3D <0x17 0x14 0x17 0x15>;
++=09=09=09dma-names =3D "rx", "tx";
++=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x4e>;
++=09=09};
++
++=09=09i2s@100e0000 {
++=09=09=09compatible =3D "starfive,jh7110-i2srx";
++=09=09=09reg =3D <0x00 0x100e0000 0x00 0x1000>;
++=09=09=09clocks =3D <0x03 0xb0 0x03 0xaf 0x03 0x12 0x03 0x11 0x18 0x03 0xb=
+3 0x03 0xb5 0x19 0x1a>;
++=09=09=09clock-names =3D "i2sclk", "apb", "mclk", "mclk_inner", "mclk_ext"=
+, "bclk", "lrck", "bclk_ext", "lrck_ext";
++=09=09=09resets =3D <0x03 0x63 0x03 0x64>;
++=09=09=09dmas =3D <0x00 0x17 0x18>;
++=09=09=09dma-names =3D "tx", "rx";
++=09=09=09starfive,syscon =3D <0x1b 0x18 0x02>;
++=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x4f>;
++=09=09};
++
++=09=09pwmdac@100b0000 {
++=09=09=09compatible =3D "starfive,jh7110-pwmdac";
++=09=09=09reg =3D <0x00 0x100b0000 0x00 0x1000>;
++=09=09=09clocks =3D <0x03 0x9d 0x03 0x9e>;
++=09=09=09clock-names =3D "apb", "core";
++=09=09=09resets =3D <0x03 0x60>;
++=09=09=09dmas =3D <0x17 0x16>;
++=09=09=09dma-names =3D "tx";
++=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x1c>;
++=09=09=09phandle =3D <0x41>;
++=09=09};
++
++=09=09usb@10100000 {
++=09=09=09compatible =3D "starfive,jh7110-usb";
++=09=09=09ranges =3D <0x00 0x00 0x10100000 0x100000>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x01>;
++=09=09=09starfive,stg-syscon =3D <0x1d 0x04>;
++=09=09=09clocks =3D <0x1e 0x04 0x1e 0x05 0x1e 0x01 0x1e 0x03 0x1e 0x02>;
++=09=09=09clock-names =3D "lpm", "stb", "apb", "axi", "utmi_apb";
++=09=09=09resets =3D <0x1e 0x0a 0x1e 0x08 0x1e 0x07 0x1e 0x09>;
++=09=09=09reset-names =3D "pwrup", "apb", "axi", "utmi_apb";
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x50>;
++
++=09=09=09usb@0 {
++=09=09=09=09compatible =3D "cdns,usb3";
++=09=09=09=09reg =3D <0x00 0x10000 0x10000 0x10000 0x20000 0x10000>;
++=09=09=09=09reg-names =3D "otg", "xhci", "dev";
++=09=09=09=09interrupts =3D <0x64 0x6c 0x6e>;
++=09=09=09=09interrupt-names =3D "host", "peripheral", "otg";
++=09=09=09=09phys =3D <0x1f>;
++=09=09=09=09phy-names =3D "cdns3,usb2-phy";
++=09=09=09=09phandle =3D <0x51>;
++=09=09=09};
++=09=09};
++
++=09=09phy@10200000 {
++=09=09=09compatible =3D "starfive,jh7110-usb-phy";
++=09=09=09reg =3D <0x00 0x10200000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5f 0x1e 0x06>;
++=09=09=09clock-names =3D "125m", "app_125m";
++=09=09=09#phy-cells =3D <0x00>;
++=09=09=09phandle =3D <0x1f>;
++=09=09};
++
++=09=09phy@10210000 {
++=09=09=09compatible =3D "starfive,jh7110-pcie-phy";
++=09=09=09reg =3D <0x00 0x10210000 0x00 0x10000>;
++=09=09=09starfive,sys-syscon =3D <0x1b 0x18>;
++=09=09=09starfive,stg-syscon =3D <0x1d 0x148 0x1f4>;
++=09=09=09#phy-cells =3D <0x00>;
++=09=09=09phandle =3D <0x3a>;
++=09=09};
++
++=09=09phy@10220000 {
++=09=09=09compatible =3D "starfive,jh7110-pcie-phy";
++=09=09=09reg =3D <0x00 0x10220000 0x00 0x10000>;
++=09=09=09#phy-cells =3D <0x00>;
++=09=09=09phandle =3D <0x3d>;
++=09=09};
++
++=09=09clock-controller@10230000 {
++=09=09=09compatible =3D "starfive,jh7110-stgcrg";
++=09=09=09reg =3D <0x00 0x10230000 0x00 0x10000>;
++=09=09=09clocks =3D <0x20 0x03 0x36 0x03 0x08 0x03 0x5f 0x03 0x02 0x03 0x3=
+7 0x03 0x06 0x03 0x0b>;
++=09=09=09clock-names =3D "osc", "hifi4_core", "stg_axiahb", "usb_125m", "c=
+pu_bus", "hifi4_axi", "nocstg_bus", "apb_bus";
++=09=09=09#clock-cells =3D <0x01>;
++=09=09=09#reset-cells =3D <0x01>;
++=09=09=09phandle =3D <0x1e>;
++=09=09};
++
++=09=09syscon@10240000 {
++=09=09=09compatible =3D "starfive,jh7110-stg-syscon", "syscon";
++=09=09=09reg =3D <0x00 0x10240000 0x00 0x1000>;
++=09=09=09phandle =3D <0x1d>;
++=09=09};
++
++=09=09serial@12000000 {
++=09=09=09compatible =3D "starfive,jh7110-uart", "snps,dw-apb-uart";
++=09=09=09reg =3D <0x00 0x12000000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x98 0x03 0x97>;
++=09=09=09clock-names =3D "baudclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x59 0x03 0x5a>;
++=09=09=09interrupts =3D <0x2d>;
++=09=09=09reg-io-width =3D <0x04>;
++=09=09=09reg-shift =3D <0x02>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x52>;
++=09=09};
++
++=09=09serial@12010000 {
++=09=09=09compatible =3D "starfive,jh7110-uart", "snps,dw-apb-uart";
++=09=09=09reg =3D <0x00 0x12010000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x9a 0x03 0x99>;
++=09=09=09clock-names =3D "baudclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x5b 0x03 0x5c>;
++=09=09=09interrupts =3D <0x2e>;
++=09=09=09reg-io-width =3D <0x04>;
++=09=09=09reg-shift =3D <0x02>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x53>;
++=09=09};
++
++=09=09serial@12020000 {
++=09=09=09compatible =3D "starfive,jh7110-uart", "snps,dw-apb-uart";
++=09=09=09reg =3D <0x00 0x12020000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x9c 0x03 0x9b>;
++=09=09=09clock-names =3D "baudclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x5d 0x03 0x5e>;
++=09=09=09interrupts =3D <0x2f>;
++=09=09=09reg-io-width =3D <0x04>;
++=09=09=09reg-shift =3D <0x02>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x54>;
++=09=09};
++
++=09=09i2c@12030000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x12030000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8d>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x4f>;
++=09=09=09interrupts =3D <0x30>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x55>;
++=09=09};
++
++=09=09i2c@12040000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x12040000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8e>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x50>;
++=09=09=09interrupts =3D <0x31>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x56>;
++=09=09};
++
++=09=09i2c@12050000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x12050000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8f>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x51>;
++=09=09=09interrupts =3D <0x32>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "okay";
++=09=09=09clock-frequency =3D <0x186a0>;
++=09=09=09i2c-sda-hold-time-ns =3D <0x12c>;
++=09=09=09i2c-sda-falling-time-ns =3D <0x1fe>;
++=09=09=09i2c-scl-falling-time-ns =3D <0x1fe>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x21>;
++=09=09=09phandle =3D <0x57>;
++
++=09=09=09pmic@36 {
++=09=09=09=09compatible =3D "x-powers,axp15060";
++=09=09=09=09reg =3D <0x36>;
++=09=09=09=09interrupt-controller;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x58>;
++
++=09=09=09=09regulators {
++
++=09=09=09=09=09dcdc1 {
++=09=09=09=09=09=09regulator-boot-on;
++=09=09=09=09=09=09regulator-always-on;
++=09=09=09=09=09=09regulator-min-microvolt =3D <0x325aa0>;
++=09=09=09=09=09=09regulator-max-microvolt =3D <0x325aa0>;
++=09=09=09=09=09=09regulator-name =3D "vcc_3v3";
++=09=09=09=09=09=09phandle =3D <0x59>;
++=09=09=09=09=09};
++
++=09=09=09=09=09dcdc2 {
++=09=09=09=09=09=09regulator-always-on;
++=09=09=09=09=09=09regulator-min-microvolt =3D <0x7a120>;
++=09=09=09=09=09=09regulator-max-microvolt =3D <0x177fa0>;
++=09=09=09=09=09=09regulator-name =3D "vdd_cpu";
++=09=09=09=09=09=09phandle =3D <0x04>;
++=09=09=09=09=09};
++
++=09=09=09=09=09aldo4 {
++=09=09=09=09=09=09regulator-boot-on;
++=09=09=09=09=09=09regulator-always-on;
++=09=09=09=09=09=09regulator-min-microvolt =3D <0x1b7740>;
++=09=09=09=09=09=09regulator-max-microvolt =3D <0x325aa0>;
++=09=09=09=09=09=09regulator-name =3D "emmc_vdd";
++=09=09=09=09=09=09phandle =3D <0x5a>;
++=09=09=09=09=09};
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09eeprom@50 {
++=09=09=09=09compatible =3D "atmel,24c04";
++=09=09=09=09reg =3D <0x50>;
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09pagesize =3D <0x10>;
++=09=09=09};
++=09=09};
++
++=09=09i2c@12060000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x12060000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x90>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x52>;
++=09=09=09interrupts =3D <0x33>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "okay";
++=09=09=09clock-frequency =3D <0x186a0>;
++=09=09=09i2c-sda-hold-time-ns =3D <0x12c>;
++=09=09=09i2c-sda-falling-time-ns =3D <0x1fe>;
++=09=09=09i2c-scl-falling-time-ns =3D <0x1fe>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x22>;
++=09=09=09phandle =3D <0x5b>;
++=09=09};
++
++=09=09spi@12070000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x12070000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x86 0x03 0x86>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x48>;
++=09=09=09interrupts =3D <0x34>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x5c>;
++=09=09};
++
++=09=09spi@12080000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x12080000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x87 0x03 0x87>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x49>;
++=09=09=09interrupts =3D <0x35>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x5d>;
++=09=09};
++
++=09=09spi@12090000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x12090000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x88 0x03 0x88>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x4a>;
++=09=09=09interrupts =3D <0x36>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x5e>;
++=09=09};
++
++=09=09spi@120a0000 {
++=09=09=09compatible =3D "arm,pl022", "arm,primecell";
++=09=09=09reg =3D <0x00 0x120a0000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x89 0x03 0x89>;
++=09=09=09clock-names =3D "sspclk", "apb_pclk";
++=09=09=09resets =3D <0x03 0x4b>;
++=09=09=09interrupts =3D <0x37>;
++=09=09=09arm,primecell-periphid =3D <0x41022>;
++=09=09=09num-cs =3D <0x01>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x5f>;
++=09=09};
++
++=09=09i2s@120b0000 {
++=09=09=09compatible =3D "starfive,jh7110-i2stx0";
++=09=09=09reg =3D <0x00 0x120b0000 0x00 0x1000>;
++=09=09=09clocks =3D <0x03 0xa2 0x03 0xa1 0x03 0x12 0x03 0x11 0x18>;
++=09=09=09clock-names =3D "i2sclk", "apb", "mclk", "mclk_inner", "mclk_ext"=
+;
++=09=09=09resets =3D <0x03 0x65 0x03 0x66>;
++=09=09=09dmas =3D <0x17 0x2f>;
++=09=09=09dma-names =3D "tx";
++=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x60>;
++=09=09};
++
++=09=09i2s@120c0000 {
++=09=09=09compatible =3D "starfive,jh7110-i2stx1";
++=09=09=09reg =3D <0x00 0x120c0000 0x00 0x1000>;
++=09=09=09clocks =3D <0x03 0xa9 0x03 0xa8 0x03 0x12 0x03 0x11 0x18 0x03 0xa=
+c 0x03 0xae 0x23 0x24>;
++=09=09=09clock-names =3D "i2sclk", "apb", "mclk", "mclk_inner", "mclk_ext"=
+, "bclk", "lrck", "bclk_ext", "lrck_ext";
++=09=09=09resets =3D <0x03 0x67 0x03 0x68>;
++=09=09=09dmas =3D <0x17 0x30>;
++=09=09=09dma-names =3D "tx";
++=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x61>;
++=09=09};
++
++=09=09pwm@120d0000 {
++=09=09=09compatible =3D "starfive,jh7110-pwm", "opencores,pwm-v1";
++=09=09=09reg =3D <0x00 0x120d0000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x79>;
++=09=09=09resets =3D <0x03 0x6c>;
++=09=09=09#pwm-cells =3D <0x03>;
++=09=09=09status =3D "disabled";
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x25>;
++=09=09=09phandle =3D <0x62>;
++=09=09};
++
++=09=09temperature-sensor@120e0000 {
++=09=09=09compatible =3D "starfive,jh7110-temp";
++=09=09=09reg =3D <0x00 0x120e0000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x82 0x03 0x81>;
++=09=09=09clock-names =3D "sense", "bus";
++=09=09=09resets =3D <0x03 0x7c 0x03 0x7b>;
++=09=09=09reset-names =3D "sense", "bus";
++=09=09=09#thermal-sensor-cells =3D <0x00>;
++=09=09=09phandle =3D <0x0a>;
++=09=09};
++
++=09=09spi@13010000 {
++=09=09=09compatible =3D "starfive,jh7110-qspi", "cdns,qspi-nor";
++=09=09=09reg =3D <0x00 0x13010000 0x00 0x10000 0x00 0x21000000 0x00 0x4000=
+00>;
++=09=09=09interrupts =3D <0x19>;
++=09=09=09clocks =3D <0x03 0x5a 0x03 0x57 0x03 0x58>;
++=09=09=09clock-names =3D "ref", "ahb", "apb";
++=09=09=09resets =3D <0x03 0x3e 0x03 0x3d 0x03 0x3f>;
++=09=09=09reset-names =3D "qspi", "qspi-ocp", "rstc_ref";
++=09=09=09cdns,fifo-depth =3D <0x100>;
++=09=09=09cdns,fifo-width =3D <0x04>;
++=09=09=09cdns,trigger-address =3D <0x00>;
++=09=09=09status =3D "okay";
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09phandle =3D <0x63>;
++
++=09=09=09flash@0 {
++=09=09=09=09compatible =3D "jedec,spi-nor";
++=09=09=09=09reg =3D <0x00>;
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09cdns,read-delay =3D <0x02>;
++=09=09=09=09spi-max-frequency =3D <0x5f5e100>;
++=09=09=09=09cdns,tshsl-ns =3D <0x01>;
++=09=09=09=09cdns,tsd2d-ns =3D <0x01>;
++=09=09=09=09cdns,tchsh-ns =3D <0x01>;
++=09=09=09=09cdns,tslch-ns =3D <0x01>;
++=09=09=09=09phandle =3D <0x64>;
++
++=09=09=09=09partitions {
++=09=09=09=09=09compatible =3D "fixed-partitions";
++=09=09=09=09=09#address-cells =3D <0x01>;
++=09=09=09=09=09#size-cells =3D <0x01>;
++
++=09=09=09=09=09spl@0 {
++=09=09=09=09=09=09reg =3D <0x00 0xf0000>;
++=09=09=09=09=09};
++
++=09=09=09=09=09uboot-env@f0000 {
++=09=09=09=09=09=09reg =3D <0xf0000 0x10000>;
++=09=09=09=09=09};
++
++=09=09=09=09=09uboot@100000 {
++=09=09=09=09=09=09reg =3D <0x100000 0xf00000>;
++=09=09=09=09=09};
++=09=09=09=09};
++=09=09=09};
++=09=09};
++
++=09=09clock-controller@13020000 {
++=09=09=09compatible =3D "starfive,jh7110-syscrg";
++=09=09=09reg =3D <0x00 0x13020000 0x00 0x10000>;
++=09=09=09bootph-pre-ram;
++=09=09=09clocks =3D <0x20 0x26 0x27 0x23 0x24 0x19 0x1a 0x16 0x18 0x28 0x0=
+0 0x28 0x01 0x28 0x02>;
++=09=09=09clock-names =3D "osc", "gmac1_rmii_refin", "gmac1_rgmii_rxin", "i=
+2stx_bclk_ext", "i2stx_lrck_ext", "i2srx_bclk_ext", "i2srx_lrck_ext", "tdm_=
+ext", "mclk_ext", "pll0_out", "pll1_out", "pll2_out";
++=09=09=09#clock-cells =3D <0x01>;
++=09=09=09#reset-cells =3D <0x01>;
++=09=09=09assigned-clocks =3D <0x03 0x00 0x03 0x05 0x03 0x04 0x03 0x5a 0x03=
+ 0x01 0x28 0x00>;
++=09=09=09assigned-clock-parents =3D <0x28 0x00 0x28 0x02 0x28 0x02 0x03 0x=
+59>;
++=09=09=09assigned-clock-rates =3D <0x00 0x00 0x00 0x00 0x1dcd6500 0x59682f=
+00>;
++=09=09=09phandle =3D <0x03>;
++=09=09};
++
++=09=09syscon@13030000 {
++=09=09=09compatible =3D "starfive,jh7110-sys-syscon", "syscon", "simple-mf=
+d";
++=09=09=09reg =3D <0x00 0x13030000 0x00 0x1000>;
++=09=09=09phandle =3D <0x1b>;
++
++=09=09=09clock-controller {
++=09=09=09=09compatible =3D "starfive,jh7110-pll";
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09clocks =3D <0x20>;
++=09=09=09=09#clock-cells =3D <0x01>;
++=09=09=09=09phandle =3D <0x28>;
++=09=09=09};
++=09=09};
++
++=09=09pinctrl@13040000 {
++=09=09=09compatible =3D "starfive,jh7110-sys-pinctrl";
++=09=09=09reg =3D <0x00 0x13040000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x70>;
++=09=09=09resets =3D <0x03 0x02>;
++=09=09=09interrupts =3D <0x56>;
++=09=09=09interrupt-controller;
++=09=09=09#interrupt-cells =3D <0x02>;
++=09=09=09gpio-controller;
++=09=09=09#gpio-cells =3D <0x02>;
++=09=09=09phandle =3D <0x39>;
++
++=09=09=09i2c0-0 {
++=09=09=09=09phandle =3D <0x13>;
++
++=09=09=09=09i2c-pins {
++=09=09=09=09=09pinmux =3D <0x9001439 0xa00183a>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09i2c2-0 {
++=09=09=09=09phandle =3D <0x14>;
++
++=09=09=09=09i2c-pins {
++=09=09=09=09=09pinmux =3D <0x3b007803 0x3c007c02>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09i2c5-0 {
++=09=09=09=09bootph-pre-ram;
++=09=09=09=09phandle =3D <0x21>;
++
++=09=09=09=09i2c-pins {
++=09=09=09=09=09pinmux =3D <0x4f00a813 0x5000ac14>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09bootph-pre-ram;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09i2c6-0 {
++=09=09=09=09phandle =3D <0x22>;
++
++=09=09=09=09i2c-pins {
++=09=09=09=09=09pinmux =3D <0x5600b810 0x5700bc11>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09mmc0-0 {
++=09=09=09=09phandle =3D <0x2a>;
++
++=09=09=09=09mmc-pins {
++=09=09=09=09=09pinmux =3D <0x440 0x441 0x442 0x443 0x444 0x445 0x446 0x447=
+ 0x448 0x449>;
++=09=09=09=09=09bias-pull-up;
++=09=09=09=09=09drive-strength =3D <0x0c>;
++=09=09=09=09=09input-enable;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09mmc1-0 {
++=09=09=09=09phandle =3D <0x2b>;
++
++=09=09=09=09clk-pins {
++=09=09=09=09=09pinmux =3D <0xff37000a>;
++=09=09=09=09=09bias-pull-up;
++=09=09=09=09=09drive-strength =3D <0x0c>;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++
++=09=09=09=09mmc-pins {
++=09=09=09=09=09pinmux =3D <0x2c394c09 0x2d3a500b 0x2e3b540c 0x2f3c5807 0x3=
+03d5c08>;
++=09=09=09=09=09bias-pull-up;
++=09=09=09=09=09drive-strength =3D <0x0c>;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09pcie0-0 {
++=09=09=09=09phandle =3D <0x3b>;
++
++=09=09=09=09clkreq-pins {
++=09=09=09=09=09pinmux =3D <0xff00041b>;
++=09=09=09=09=09bias-pull-down;
++=09=09=09=09=09drive-strength =3D <0x02>;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++
++=09=09=09=09wake-pins {
++=09=09=09=09=09pinmux =3D <0xff000420>;
++=09=09=09=09=09bias-pull-up;
++=09=09=09=09=09drive-strength =3D <0x02>;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09pcie1-0 {
++=09=09=09=09phandle =3D <0x3e>;
++
++=09=09=09=09clkreq-pins {
++=09=09=09=09=09pinmux =3D <0xff00041d>;
++=09=09=09=09=09bias-pull-down;
++=09=09=09=09=09drive-strength =3D <0x02>;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++
++=09=09=09=09wake-pins {
++=09=09=09=09=09pinmux =3D <0xff000415>;
++=09=09=09=09=09bias-pull-up;
++=09=09=09=09=09drive-strength =3D <0x02>;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09pwmdac-0 {
++=09=09=09=09phandle =3D <0x1c>;
++
++=09=09=09=09pwmdac-pins {
++=09=09=09=09=09pinmux =3D <0xff1c0021 0xff1d0022>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09drive-strength =3D <0x02>;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09pwm-0 {
++=09=09=09=09phandle =3D <0x25>;
++
++=09=09=09=09pwm-pins {
++=09=09=09=09=09pinmux =3D <0xff18242e 0xff19283b>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09drive-strength =3D <0x0c>;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09spi0-0 {
++=09=09=09=09phandle =3D <0x15>;
++
++=09=09=09=09mosi-pins {
++=09=09=09=09=09pinmux =3D <0xff200034>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09};
++
++=09=09=09=09miso-pins {
++=09=09=09=09=09pinmux =3D <0x1c000435>;
++=09=09=09=09=09bias-pull-up;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09};
++
++=09=09=09=09sck-pins {
++=09=09=09=09=09pinmux =3D <0x1a1e0030>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09};
++
++=09=09=09=09ss-pins {
++=09=09=09=09=09pinmux =3D <0x1b1f0031>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09};
++=09=09=09};
++
++=09=09=09uart0-0 {
++=09=09=09=09phandle =3D <0x12>;
++
++=09=09=09=09tx-pins {
++=09=09=09=09=09pinmux =3D <0xff140005>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09drive-strength =3D <0x0c>;
++=09=09=09=09=09input-disable;
++=09=09=09=09=09input-schmitt-disable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++
++=09=09=09=09rx-pins {
++=09=09=09=09=09pinmux =3D <0xe000406>;
++=09=09=09=09=09bias-disable;
++=09=09=09=09=09drive-strength =3D <0x02>;
++=09=09=09=09=09input-enable;
++=09=09=09=09=09input-schmitt-enable;
++=09=09=09=09=09slew-rate =3D <0x00>;
++=09=09=09=09};
++=09=09=09};
++=09=09};
++
++=09=09watchdog@13070000 {
++=09=09=09compatible =3D "starfive,jh7110-wdt";
++=09=09=09reg =3D <0x00 0x13070000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x7a 0x03 0x7b>;
++=09=09=09clock-names =3D "apb", "core";
++=09=09=09resets =3D <0x03 0x6d 0x03 0x6e>;
++=09=09};
++
++=09=09memory-controller@15700000 {
++=09=09=09compatible =3D "starfive,jh7110-dmc";
++=09=09=09reg =3D <0x00 0x15700000 0x00 0x10000 0x00 0x13000000 0x00 0x1000=
+0>;
++=09=09=09bootph-pre-ram;
++=09=09=09clocks =3D <0x03 0x01>;
++=09=09=09clock-names =3D "pll";
++=09=09=09resets =3D <0x03 0x26 0x03 0x27 0x03 0x28>;
++=09=09=09reset-names =3D "axi", "osc", "apb";
++=09=09};
++
++=09=09crypto@16000000 {
++=09=09=09compatible =3D "starfive,jh7110-crypto";
++=09=09=09reg =3D <0x00 0x16000000 0x00 0x4000>;
++=09=09=09clocks =3D <0x1e 0x0f 0x1e 0x10>;
++=09=09=09clock-names =3D "hclk", "ahb";
++=09=09=09interrupts =3D <0x1c>;
++=09=09=09resets =3D <0x1e 0x03>;
++=09=09=09dmas =3D <0x29 0x01 0x02 0x29 0x00 0x02>;
++=09=09=09dma-names =3D "tx", "rx";
++=09=09=09phandle =3D <0x65>;
++=09=09};
++
++=09=09dma-controller@16008000 {
++=09=09=09compatible =3D "arm,pl080", "arm,primecell";
++=09=09=09arm,primecell-periphid =3D <0x41080>;
++=09=09=09reg =3D <0x00 0x16008000 0x00 0x4000>;
++=09=09=09interrupts =3D <0x1d>;
++=09=09=09clocks =3D <0x1e 0x0f>;
++=09=09=09clock-names =3D "apb_pclk";
++=09=09=09resets =3D <0x1e 0x03>;
++=09=09=09lli-bus-interface-ahb1;
++=09=09=09mem-bus-interface-ahb1;
++=09=09=09memcpy-burst-size =3D <0x100>;
++=09=09=09memcpy-bus-width =3D <0x20>;
++=09=09=09#dma-cells =3D <0x02>;
++=09=09=09phandle =3D <0x29>;
++=09=09};
++
++=09=09rng@1600c000 {
++=09=09=09compatible =3D "starfive,jh7110-trng";
++=09=09=09reg =3D <0x00 0x1600c000 0x00 0x4000>;
++=09=09=09clocks =3D <0x1e 0x0f 0x1e 0x10>;
++=09=09=09clock-names =3D "hclk", "ahb";
++=09=09=09resets =3D <0x1e 0x03>;
++=09=09=09interrupts =3D <0x1e>;
++=09=09=09phandle =3D <0x66>;
++=09=09};
++
++=09=09mmc@16010000 {
++=09=09=09compatible =3D "starfive,jh7110-mmc";
++=09=09=09reg =3D <0x00 0x16010000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5b 0x03 0x5d>;
++=09=09=09clock-names =3D "biu", "ciu";
++=09=09=09resets =3D <0x03 0x40>;
++=09=09=09reset-names =3D "reset";
++=09=09=09interrupts =3D <0x4a>;
++=09=09=09fifo-depth =3D <0x20>;
++=09=09=09fifo-watermark-aligned;
++=09=09=09data-addr =3D <0x00>;
++=09=09=09starfive,sysreg =3D <0x1b 0x14 0x1a 0x7c000000>;
++=09=09=09status =3D "okay";
++=09=09=09max-frequency =3D <0x5f5e100>;
++=09=09=09assigned-clocks =3D <0x03 0x5d>;
++=09=09=09assigned-clock-rates =3D <0x2faf080>;
++=09=09=09bus-width =3D <0x08>;
++=09=09=09bootph-pre-ram;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x2a>;
++=09=09=09phandle =3D <0x67>;
++=09=09};
++
++=09=09mmc@16020000 {
++=09=09=09compatible =3D "starfive,jh7110-mmc";
++=09=09=09reg =3D <0x00 0x16020000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5c 0x03 0x5e>;
++=09=09=09clock-names =3D "biu", "ciu";
++=09=09=09resets =3D <0x03 0x41>;
++=09=09=09reset-names =3D "reset";
++=09=09=09interrupts =3D <0x4b>;
++=09=09=09fifo-depth =3D <0x20>;
++=09=09=09fifo-watermark-aligned;
++=09=09=09data-addr =3D <0x00>;
++=09=09=09starfive,sysreg =3D <0x1b 0x9c 0x01 0x3e>;
++=09=09=09status =3D "okay";
++=09=09=09max-frequency =3D <0x5f5e100>;
++=09=09=09assigned-clocks =3D <0x03 0x5e>;
++=09=09=09assigned-clock-rates =3D <0x2faf080>;
++=09=09=09bus-width =3D <0x04>;
++=09=09=09bootph-pre-ram;
++=09=09=09cap-sd-highspeed;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x2b>;
++=09=09=09phandle =3D <0x68>;
++=09=09};
++
++=09=09ethernet@16030000 {
++=09=09=09compatible =3D "starfive,jh7110-dwmac", "snps,dwmac-5.20";
++=09=09=09reg =3D <0x00 0x16030000 0x00 0x10000>;
++=09=09=09clocks =3D <0x2c 0x03 0x2c 0x02 0x03 0x6d 0x2c 0x06 0x03 0x6f>;
++=09=09=09clock-names =3D "stmmaceth", "pclk", "ptp_ref", "tx", "gtx";
++=09=09=09resets =3D <0x2c 0x00 0x2c 0x01>;
++=09=09=09reset-names =3D "stmmaceth", "ahb";
++=09=09=09interrupts =3D <0x07 0x06 0x05>;
++=09=09=09interrupt-names =3D "macirq", "eth_wake_irq", "eth_lpi";
++=09=09=09rx-fifo-depth =3D <0x800>;
++=09=09=09tx-fifo-depth =3D <0x800>;
++=09=09=09snps,multicast-filter-bins =3D <0x40>;
++=09=09=09snps,perfect-filter-entries =3D <0x100>;
++=09=09=09snps,fixed-burst;
++=09=09=09snps,no-pbl-x8;
++=09=09=09snps,force_thresh_dma_mode;
++=09=09=09snps,axi-config =3D <0x2d>;
++=09=09=09snps,tso;
++=09=09=09snps,txpbl =3D <0x10>;
++=09=09=09snps,rxpbl =3D <0x10>;
++=09=09=09starfive,syscon =3D <0x2e 0x0c 0x12>;
++=09=09=09status =3D "disabled";
++=09=09=09phy-handle =3D <0x2f>;
++=09=09=09phy-mode =3D "rgmii-id";
++=09=09=09phandle =3D <0x69>;
++
++=09=09=09mdio {
++=09=09=09=09#address-cells =3D <0x01>;
++=09=09=09=09#size-cells =3D <0x00>;
++=09=09=09=09compatible =3D "snps,dwmac-mdio";
++
++=09=09=09=09ethernet-phy@0 {
++=09=09=09=09=09reg =3D <0x00>;
++=09=09=09=09=09phandle =3D <0x2f>;
++=09=09=09=09};
++=09=09=09};
++=09=09};
++
++=09=09ethernet@16040000 {
++=09=09=09compatible =3D "starfive,jh7110-dwmac", "snps,dwmac-5.20";
++=09=09=09reg =3D <0x00 0x16040000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x62 0x03 0x61 0x03 0x66 0x03 0x6a 0x03 0x6b>;
++=09=09=09clock-names =3D "stmmaceth", "pclk", "ptp_ref", "tx", "gtx";
++=09=09=09resets =3D <0x03 0x42 0x03 0x43>;
++=09=09=09reset-names =3D "stmmaceth", "ahb";
++=09=09=09interrupts =3D <0x4e 0x4d 0x4c>;
++=09=09=09interrupt-names =3D "macirq", "eth_wake_irq", "eth_lpi";
++=09=09=09rx-fifo-depth =3D <0x800>;
++=09=09=09tx-fifo-depth =3D <0x800>;
++=09=09=09snps,multicast-filter-bins =3D <0x40>;
++=09=09=09snps,perfect-filter-entries =3D <0x100>;
++=09=09=09snps,fixed-burst;
++=09=09=09snps,no-pbl-x8;
++=09=09=09snps,force_thresh_dma_mode;
++=09=09=09snps,axi-config =3D <0x2d>;
++=09=09=09snps,tso;
++=09=09=09snps,txpbl =3D <0x10>;
++=09=09=09snps,rxpbl =3D <0x10>;
++=09=09=09starfive,syscon =3D <0x1b 0x90 0x02>;
++=09=09=09status =3D "disabled";
++=09=09=09phandle =3D <0x6a>;
++=09=09};
++
++=09=09dma-controller@16050000 {
++=09=09=09compatible =3D "starfive,jh7110-axi-dma";
++=09=09=09reg =3D <0x00 0x16050000 0x00 0x10000>;
++=09=09=09clocks =3D <0x1e 0x1b 0x1e 0x1c>;
++=09=09=09clock-names =3D "core-clk", "cfgr-clk";
++=09=09=09resets =3D <0x1e 0x05 0x1e 0x06>;
++=09=09=09interrupts =3D <0x49>;
++=09=09=09#dma-cells =3D <0x01>;
++=09=09=09dma-channels =3D <0x04>;
++=09=09=09snps,dma-masters =3D <0x01>;
++=09=09=09snps,data-width =3D <0x03>;
++=09=09=09snps,block-size =3D <0x10000 0x10000 0x10000 0x10000>;
++=09=09=09snps,priority =3D <0x00 0x01 0x02 0x03>;
++=09=09=09snps,axi-max-burst-len =3D <0x10>;
++=09=09=09phandle =3D <0x17>;
++=09=09};
++
++=09=09clock-controller@17000000 {
++=09=09=09compatible =3D "starfive,jh7110-aoncrg";
++=09=09=09reg =3D <0x00 0x17000000 0x00 0x10000>;
++=09=09=09clocks =3D <0x20 0x30 0x31 0x03 0x08 0x03 0x0b 0x03 0x6c 0x32>;
++=09=09=09clock-names =3D "osc", "gmac0_rmii_refin", "gmac0_rgmii_rxin", "s=
+tg_axiahb", "apb_bus", "gmac0_gtxclk", "rtc_osc";
++=09=09=09#clock-cells =3D <0x01>;
++=09=09=09#reset-cells =3D <0x01>;
++=09=09=09phandle =3D <0x2c>;
++=09=09};
++
++=09=09syscon@17010000 {
++=09=09=09compatible =3D "starfive,jh7110-aon-syscon", "syscon";
++=09=09=09reg =3D <0x00 0x17010000 0x00 0x1000>;
++=09=09=09#power-domain-cells =3D <0x01>;
++=09=09=09phandle =3D <0x2e>;
++=09=09};
++
++=09=09pinctrl@17020000 {
++=09=09=09compatible =3D "starfive,jh7110-aon-pinctrl";
++=09=09=09reg =3D <0x00 0x17020000 0x00 0x10000>;
++=09=09=09resets =3D <0x2c 0x02>;
++=09=09=09interrupts =3D <0x55>;
++=09=09=09interrupt-controller;
++=09=09=09#interrupt-cells =3D <0x02>;
++=09=09=09gpio-controller;
++=09=09=09#gpio-cells =3D <0x02>;
++=09=09=09phandle =3D <0x3f>;
++=09=09};
++
++=09=09power-controller@17030000 {
++=09=09=09compatible =3D "starfive,jh7110-pmu";
++=09=09=09reg =3D <0x00 0x17030000 0x00 0x10000>;
++=09=09=09interrupts =3D <0x6f>;
++=09=09=09#power-domain-cells =3D <0x01>;
++=09=09=09phandle =3D <0x36>;
++=09=09};
++
++=09=09csi@19800000 {
++=09=09=09compatible =3D "starfive,jh7110-csi2rx", "cdns,csi2rx";
++=09=09=09reg =3D <0x00 0x19800000 0x00 0x10000>;
++=09=09=09clocks =3D <0x33 0x07 0x33 0x06 0x33 0x08 0x33 0x09 0x33 0x0a 0x3=
+3 0x0b>;
++=09=09=09clock-names =3D "sys_clk", "p_clk", "pixel_if0_clk", "pixel_if1_c=
+lk", "pixel_if2_clk", "pixel_if3_clk";
++=09=09=09resets =3D <0x33 0x09 0x33 0x04 0x33 0x05 0x33 0x06 0x33 0x07 0x3=
+3 0x08>;
++=09=09=09reset-names =3D "sys", "reg_bank", "pixel_if0", "pixel_if1", "pix=
+el_if2", "pixel_if3";
++=09=09=09phys =3D <0x34>;
++=09=09=09phy-names =3D "dphy";
++=09=09=09status =3D "disabled";
++=09=09=09assigned-clocks =3D <0x33 0x07>;
++=09=09=09assigned-clock-rates =3D <0x11b3dc40>;
++=09=09=09phandle =3D <0x6b>;
++
++=09=09=09ports {
++=09=09=09=09#address-cells =3D <0x01>;
++=09=09=09=09#size-cells =3D <0x00>;
++
++=09=09=09=09port@0 {
++=09=09=09=09=09reg =3D <0x00>;
++=09=09=09=09};
++
++=09=09=09=09port@1 {
++=09=09=09=09=09reg =3D <0x01>;
++=09=09=09=09};
++=09=09=09};
++=09=09};
++
++=09=09clock-controller@19810000 {
++=09=09=09compatible =3D "starfive,jh7110-ispcrg";
++=09=09=09reg =3D <0x00 0x19810000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x33 0x03 0x34 0x03 0x35 0x35>;
++=09=09=09clock-names =3D "isp_top_core", "isp_top_axi", "noc_bus_isp_axi",=
+ "dvp_clk";
++=09=09=09resets =3D <0x03 0x29 0x03 0x2a 0x03 0x1c>;
++=09=09=09#clock-cells =3D <0x01>;
++=09=09=09#reset-cells =3D <0x01>;
++=09=09=09power-domains =3D <0x36 0x05>;
++=09=09=09phandle =3D <0x33>;
++=09=09};
++
++=09=09phy@19820000 {
++=09=09=09compatible =3D "starfive,jh7110-dphy-rx";
++=09=09=09reg =3D <0x00 0x19820000 0x00 0x10000>;
++=09=09=09clocks =3D <0x33 0x03 0x33 0x04 0x33 0x05>;
++=09=09=09clock-names =3D "cfg", "ref", "tx";
++=09=09=09resets =3D <0x33 0x02 0x33 0x03>;
++=09=09=09power-domains =3D <0x2e 0x01>;
++=09=09=09#phy-cells =3D <0x00>;
++=09=09=09phandle =3D <0x34>;
++=09=09};
++
++=09=09clock-controller@295c0000 {
++=09=09=09compatible =3D "starfive,jh7110-voutcrg";
++=09=09=09reg =3D <0x00 0x295c0000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x3a 0x03 0x3d 0x03 0x3e 0x03 0x3f 0x03 0xa5 0x3=
+7>;
++=09=09=09clock-names =3D "vout_src", "vout_top_ahb", "vout_top_axi", "vout=
+_top_hdmitx0_mclk", "i2stx0_bclk", "hdmitx0_pixelclk";
++=09=09=09resets =3D <0x03 0x2b>;
++=09=09=09#clock-cells =3D <0x01>;
++=09=09=09#reset-cells =3D <0x01>;
++=09=09=09power-domains =3D <0x36 0x04>;
++=09=09=09phandle =3D <0x6c>;
++=09=09};
++
++=09=09pcie@940000000 {
++=09=09=09compatible =3D "starfive,jh7110-pcie";
++=09=09=09reg =3D <0x09 0x40000000 0x00 0x1000000 0x00 0x2b000000 0x00 0x10=
+0000>;
++=09=09=09reg-names =3D "cfg", "apb";
++=09=09=09linux,pci-domain =3D <0x00>;
++=09=09=09#address-cells =3D <0x03>;
++=09=09=09#size-cells =3D <0x02>;
++=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09ranges =3D <0x82000000 0x00 0x30000000 0x00 0x30000000 0x00 0x800=
+0000 0xc3000000 0x09 0x00 0x09 0x00 0x00 0x40000000>;
++=09=09=09interrupts =3D <0x38>;
++=09=09=09interrupt-map-mask =3D <0x00 0x00 0x00 0x07>;
++=09=09=09interrupt-map =3D <0x00 0x00 0x00 0x01 0x38 0x01 0x00 0x00 0x00 0=
+x02 0x38 0x02 0x00 0x00 0x00 0x03 0x38 0x03 0x00 0x00 0x00 0x04 0x38 0x04>;
++=09=09=09msi-controller;
++=09=09=09device_type =3D "pci";
++=09=09=09starfive,stg-syscon =3D <0x1d>;
++=09=09=09bus-range =3D <0x00 0xff>;
++=09=09=09clocks =3D <0x03 0x60 0x1e 0x0a 0x1e 0x08 0x1e 0x09>;
++=09=09=09clock-names =3D "noc", "tl", "axi_mst0", "apb";
++=09=09=09resets =3D <0x1e 0x0b 0x1e 0x0c 0x1e 0x0d 0x1e 0x0e 0x1e 0x0f 0x1=
+e 0x10>;
++=09=09=09reset-names =3D "mst0", "slv0", "slv", "brg", "core", "apb";
++=09=09=09status =3D "disabled";
++=09=09=09perst-gpios =3D <0x39 0x1a 0x01>;
++=09=09=09phys =3D <0x3a>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x3b>;
++=09=09=09phandle =3D <0x6d>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09#address-cells =3D <0x00>;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09interrupt-controller;
++=09=09=09=09phandle =3D <0x38>;
++=09=09=09};
++=09=09};
++
++=09=09pcie@9c0000000 {
++=09=09=09compatible =3D "starfive,jh7110-pcie";
++=09=09=09reg =3D <0x09 0xc0000000 0x00 0x1000000 0x00 0x2c000000 0x00 0x10=
+0000>;
++=09=09=09reg-names =3D "cfg", "apb";
++=09=09=09linux,pci-domain =3D <0x01>;
++=09=09=09#address-cells =3D <0x03>;
++=09=09=09#size-cells =3D <0x02>;
++=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09ranges =3D <0x82000000 0x00 0x38000000 0x00 0x38000000 0x00 0x800=
+0000 0xc3000000 0x09 0x80000000 0x09 0x80000000 0x00 0x40000000>;
++=09=09=09interrupts =3D <0x39>;
++=09=09=09interrupt-map-mask =3D <0x00 0x00 0x00 0x07>;
++=09=09=09interrupt-map =3D <0x00 0x00 0x00 0x01 0x3c 0x01 0x00 0x00 0x00 0=
+x02 0x3c 0x02 0x00 0x00 0x00 0x03 0x3c 0x03 0x00 0x00 0x00 0x04 0x3c 0x04>;
++=09=09=09msi-controller;
++=09=09=09device_type =3D "pci";
++=09=09=09starfive,stg-syscon =3D <0x1d>;
++=09=09=09bus-range =3D <0x00 0xff>;
++=09=09=09clocks =3D <0x03 0x60 0x1e 0x0d 0x1e 0x0b 0x1e 0x0c>;
++=09=09=09clock-names =3D "noc", "tl", "axi_mst0", "apb";
++=09=09=09resets =3D <0x1e 0x11 0x1e 0x12 0x1e 0x13 0x1e 0x14 0x1e 0x15 0x1=
+e 0x16>;
++=09=09=09reset-names =3D "mst0", "slv0", "slv", "brg", "core", "apb";
++=09=09=09status =3D "disabled";
++=09=09=09perst-gpios =3D <0x39 0x1c 0x01>;
++=09=09=09phys =3D <0x3d>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x3e>;
++=09=09=09phandle =3D <0x6e>;
++
++=09=09=09interrupt-controller {
++=09=09=09=09#address-cells =3D <0x00>;
++=09=09=09=09#interrupt-cells =3D <0x01>;
++=09=09=09=09interrupt-controller;
++=09=09=09=09phandle =3D <0x3c>;
++=09=09=09};
++=09=09};
++=09};
++
++=09aliases {
++=09=09ethernet0 =3D "/soc/ethernet@16030000";
++=09=09i2c0 =3D "/soc/i2c@10030000";
++=09=09i2c2 =3D "/soc/i2c@10050000";
++=09=09i2c5 =3D "/soc/i2c@12050000";
++=09=09i2c6 =3D "/soc/i2c@12060000";
++=09=09mmc0 =3D "/soc/mmc@16010000";
++=09=09mmc1 =3D "/soc/mmc@16020000";
++=09=09serial0 =3D "/soc/serial@10000000";
++=09};
++
++=09chosen {
++=09=09stdout-path =3D "serial0:115200n8";
++=09};
++
++=09memory@40000000 {
++=09=09device_type =3D "memory";
++=09=09reg =3D <0x00 0x40000000 0x01 0x00>;
++=09=09bootph-pre-ram;
++=09};
++
++=09gpio-restart {
++=09=09compatible =3D "gpio-restart";
++=09=09gpios =3D <0x39 0x23 0x00>;
++=09=09priority =3D <0xe0>;
++=09};
++
++=09leds {
++=09=09compatible =3D "gpio-leds";
++
++=09=09led-0 {
++=09=09=09gpios =3D <0x3f 0x03 0x00>;
++=09=09=09phandle =3D <0x6f>;
++=09=09};
++=09};
++
++=09audio-codec {
++=09=09compatible =3D "linux,spdif-dit";
++=09=09#sound-dai-cells =3D <0x00>;
++=09=09phandle =3D <0x42>;
++=09};
++
++=09sound {
++=09=09compatible =3D "simple-audio-card";
++=09=09simple-audio-card,name =3D "StarFive-PWMDAC-Sound-Card";
++=09=09#address-cells =3D <0x01>;
++=09=09#size-cells =3D <0x00>;
++
++=09=09simple-audio-card,dai-link@0 {
++=09=09=09reg =3D <0x00>;
++=09=09=09format =3D "left_j";
++=09=09=09bitclock-master =3D <0x40>;
++=09=09=09frame-master =3D <0x40>;
++
++=09=09=09cpu {
++=09=09=09=09sound-dai =3D <0x41>;
++=09=09=09=09phandle =3D <0x40>;
++=09=09=09};
++
++=09=09=09codec {
++=09=09=09=09sound-dai =3D <0x42>;
++=09=09=09};
++=09=09};
++=09};
++
++=09__symbols__ {
++=09=09cpus =3D "/cpus";
++=09=09S7_0 =3D "/cpus/cpu@0";
++=09=09cpu0_intc =3D "/cpus/cpu@0/interrupt-controller";
++=09=09U74_1 =3D "/cpus/cpu@1";
++=09=09cpu1_intc =3D "/cpus/cpu@1/interrupt-controller";
++=09=09U74_2 =3D "/cpus/cpu@2";
++=09=09cpu2_intc =3D "/cpus/cpu@2/interrupt-controller";
++=09=09U74_3 =3D "/cpus/cpu@3";
++=09=09cpu3_intc =3D "/cpus/cpu@3/interrupt-controller";
++=09=09U74_4 =3D "/cpus/cpu@4";
++=09=09cpu4_intc =3D "/cpus/cpu@4/interrupt-controller";
++=09=09cpu_opp =3D "/opp-table-0";
++=09=09cpu_alert0 =3D "/thermal-zones/cpu-thermal/trips/cpu-alert0";
++=09=09dvp_clk =3D "/dvp-clock";
++=09=09gmac0_rgmii_rxin =3D "/gmac0-rgmii-rxin-clock";
++=09=09gmac0_rmii_refin =3D "/gmac0-rmii-refin-clock";
++=09=09gmac1_rgmii_rxin =3D "/gmac1-rgmii-rxin-clock";
++=09=09gmac1_rmii_refin =3D "/gmac1-rmii-refin-clock";
++=09=09hdmitx0_pixelclk =3D "/hdmitx0-pixel-clock";
++=09=09i2srx_bclk_ext =3D "/i2srx-bclk-ext-clock";
++=09=09i2srx_lrck_ext =3D "/i2srx-lrck-ext-clock";
++=09=09i2stx_bclk_ext =3D "/i2stx-bclk-ext-clock";
++=09=09i2stx_lrck_ext =3D "/i2stx-lrck-ext-clock";
++=09=09mclk_ext =3D "/mclk-ext-clock";
++=09=09osc =3D "/oscillator";
++=09=09rtc_osc =3D "/rtc-oscillator";
++=09=09stmmac_axi_setup =3D "/stmmac-axi-config";
++=09=09tdm_ext =3D "/tdm-ext-clock";
++=09=09clint =3D "/soc/timer@2000000";
++=09=09ccache =3D "/soc/cache-controller@2010000";
++=09=09plic =3D "/soc/interrupt-controller@c000000";
++=09=09uart0 =3D "/soc/serial@10000000";
++=09=09uart1 =3D "/soc/serial@10010000";
++=09=09uart2 =3D "/soc/serial@10020000";
++=09=09i2c0 =3D "/soc/i2c@10030000";
++=09=09i2c1 =3D "/soc/i2c@10040000";
++=09=09i2c2 =3D "/soc/i2c@10050000";
++=09=09spi0 =3D "/soc/spi@10060000";
++=09=09spi1 =3D "/soc/spi@10070000";
++=09=09spi2 =3D "/soc/spi@10080000";
++=09=09tdm =3D "/soc/tdm@10090000";
++=09=09i2srx =3D "/soc/i2s@100e0000";
++=09=09pwmdac =3D "/soc/pwmdac@100b0000";
++=09=09usb0 =3D "/soc/usb@10100000";
++=09=09usb_cdns3 =3D "/soc/usb@10100000/usb@0";
++=09=09usbphy0 =3D "/soc/phy@10200000";
++=09=09pciephy0 =3D "/soc/phy@10210000";
++=09=09pciephy1 =3D "/soc/phy@10220000";
++=09=09stgcrg =3D "/soc/clock-controller@10230000";
++=09=09stg_syscon =3D "/soc/syscon@10240000";
++=09=09uart3 =3D "/soc/serial@12000000";
++=09=09uart4 =3D "/soc/serial@12010000";
++=09=09uart5 =3D "/soc/serial@12020000";
++=09=09i2c3 =3D "/soc/i2c@12030000";
++=09=09i2c4 =3D "/soc/i2c@12040000";
++=09=09i2c5 =3D "/soc/i2c@12050000";
++=09=09axp15060 =3D "/soc/i2c@12050000/pmic@36";
++=09=09vcc_3v3 =3D "/soc/i2c@12050000/pmic@36/regulators/dcdc1";
++=09=09vdd_cpu =3D "/soc/i2c@12050000/pmic@36/regulators/dcdc2";
++=09=09emmc_vdd =3D "/soc/i2c@12050000/pmic@36/regulators/aldo4";
++=09=09i2c6 =3D "/soc/i2c@12060000";
++=09=09spi3 =3D "/soc/spi@12070000";
++=09=09spi4 =3D "/soc/spi@12080000";
++=09=09spi5 =3D "/soc/spi@12090000";
++=09=09spi6 =3D "/soc/spi@120a0000";
++=09=09i2stx0 =3D "/soc/i2s@120b0000";
++=09=09i2stx1 =3D "/soc/i2s@120c0000";
++=09=09pwm =3D "/soc/pwm@120d0000";
++=09=09sfctemp =3D "/soc/temperature-sensor@120e0000";
++=09=09qspi =3D "/soc/spi@13010000";
++=09=09nor_flash =3D "/soc/spi@13010000/flash@0";
++=09=09syscrg =3D "/soc/clock-controller@13020000";
++=09=09sys_syscon =3D "/soc/syscon@13030000";
++=09=09pllclk =3D "/soc/syscon@13030000/clock-controller";
++=09=09sysgpio =3D "/soc/pinctrl@13040000";
++=09=09i2c0_pins =3D "/soc/pinctrl@13040000/i2c0-0";
++=09=09i2c2_pins =3D "/soc/pinctrl@13040000/i2c2-0";
++=09=09i2c5_pins =3D "/soc/pinctrl@13040000/i2c5-0";
++=09=09i2c6_pins =3D "/soc/pinctrl@13040000/i2c6-0";
++=09=09mmc0_pins =3D "/soc/pinctrl@13040000/mmc0-0";
++=09=09mmc1_pins =3D "/soc/pinctrl@13040000/mmc1-0";
++=09=09pcie0_pins =3D "/soc/pinctrl@13040000/pcie0-0";
++=09=09pcie1_pins =3D "/soc/pinctrl@13040000/pcie1-0";
++=09=09pwmdac_pins =3D "/soc/pinctrl@13040000/pwmdac-0";
++=09=09pwm_pins =3D "/soc/pinctrl@13040000/pwm-0";
++=09=09spi0_pins =3D "/soc/pinctrl@13040000/spi0-0";
++=09=09uart0_pins =3D "/soc/pinctrl@13040000/uart0-0";
++=09=09crypto =3D "/soc/crypto@16000000";
++=09=09sdma =3D "/soc/dma-controller@16008000";
++=09=09rng =3D "/soc/rng@1600c000";
++=09=09mmc0 =3D "/soc/mmc@16010000";
++=09=09mmc1 =3D "/soc/mmc@16020000";
++=09=09gmac0 =3D "/soc/ethernet@16030000";
++=09=09phy0 =3D "/soc/ethernet@16030000/mdio/ethernet-phy@0";
++=09=09gmac1 =3D "/soc/ethernet@16040000";
++=09=09dma =3D "/soc/dma-controller@16050000";
++=09=09aoncrg =3D "/soc/clock-controller@17000000";
++=09=09aon_syscon =3D "/soc/syscon@17010000";
++=09=09aongpio =3D "/soc/pinctrl@17020000";
++=09=09pwrc =3D "/soc/power-controller@17030000";
++=09=09csi2rx =3D "/soc/csi@19800000";
++=09=09ispcrg =3D "/soc/clock-controller@19810000";
++=09=09csi_phy =3D "/soc/phy@19820000";
++=09=09voutcrg =3D "/soc/clock-controller@295c0000";
++=09=09pcie0 =3D "/soc/pcie@940000000";
++=09=09pcie_intc0 =3D "/soc/pcie@940000000/interrupt-controller";
++=09=09pcie1 =3D "/soc/pcie@9c0000000";
++=09=09pcie_intc1 =3D "/soc/pcie@9c0000000/interrupt-controller";
++=09=09led_status_power =3D "/leds/led-0";
++=09=09pwmdac_codec =3D "/audio-codec";
++=09=09sndcpu0 =3D "/sound/simple-audio-card,dai-link@0/cpu";
++=09};
++};
+diff --git a/arch/riscv/dts/jh7110-pine64-pinetabv.dts b/arch/riscv/dts/jh7=
+110-pine64-pinetabv.dts
+new file mode 100644
+index 00000000000..47a429a7393
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-pine64-pinetabv.dts
+@@ -0,0 +1,116 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2026 T Anoduck <anoduck@protonmail.com>
++ * Through the Graces of: E Shattow <e@freeshell.de>
++ */
++
++/dts-v1/;
++#include "jh7110-common.dtsi"
++#include "jh7110-pine64-pinetabv-u-boot.dtsi"
++
++/ {
++=09compatible =3D "pine64,pinetabv", "starfive,jh7110";
++=09model =3D "Pine64 PinetabV";
++
++=09soc {
++=09=09i2c@10030000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x10030000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8a>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x4c>;
++=09=09=09interrupts =3D <0x23>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "okay";
++=09=09=09clock-frequency =3D <0x186a0>;
++=09=09=09i2c-sda-hold-time-ns =3D <0x12c>;
++=09=09=09i2c-sda-falling-time-ns =3D <0x1fe>;
++=09=09=09i2c-scl-falling-time-ns =3D <0x1fe>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x17>;
++
++=09=09=09audio-codec@11 {
++=09=09=09=09compatible =3D "everest,es8316";
++=09=09=09=09reg =3D <0x11>;
++=09=09=09=09clocks =3D <0x18>;
++=09=09=09=09clock-names =3D "mclk";
++=09=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09=09papower-gpio =3D <0x19 0x32 0x00>;
++=09=09=09=09hp-det-gpio =3D <0x19 0x24 0x00>;
++=09=09=09=09phandle =3D <0x64>;
++=09=09=09};
++
++=09=09=09accelerometer@18 {
++=09=09=09=09compatible =3D "silan,sc7a20";
++=09=09=09=09reg =3D <0x18>;
++=09=09=09=09mount-matrix =3D "0", "0", "-1", "1", "0", "0", "0", "-1", "0"=
+;
++=09=09=09};
++=09=09};
++=09sd_vcc: sd-vcc {
++=09=09compatible =3D "regulator-fixed";
++=09=09regulator-name =3D "sd_vcc";
++=09=09regulator-min-microvolt =3D <3300000>;
++=09=09regulator-max-microvolt =3D <3300000>;
++=09=09gpio =3D <0x19 0x23 0x00>;          /* TODO: Replace 0x?? with the E=
+N GPIO from schematic page 7 =3D> GPIO35? */
++=09=09enable-active-low;               /* Change to enable-active-low if t=
+he circuit uses active-low enable */
++=09=09regulator-boot-on;
++=09=09regulator-always-on;
++=09};
++
++=09=09mmc@16010000 {
++=09=09=09compatible =3D "starfive,jh7110-mmc";
++=09=09=09reg =3D <0x00 0x16010000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5b 0x03 0x5d>;
++=09=09=09clock-names =3D "biu", "ciu";
++=09=09=09resets =3D <0x03 0x40>;
++=09=09=09reset-names =3D "reset";
++=09=09=09interrupts =3D <0x4a>;
++=09=09=09fifo-depth =3D <0x20>;
++=09=09=09fifo-watermark-aligned;
++=09=09=09data-addr =3D <0x00>;
++=09=09=09starfive,sysreg =3D <0x1f 0x14 0x1a 0x7c000000>;
++=09=09=09status =3D "okay";
++=09=09=09max-frequency =3D <0x5f5e100>;
++=09=09=09assigned-clocks =3D <0x03 0x5d>;
++=09=09=09vmmc-supply =3D <&sd_vcc>;
++=09=09=09assigned-clock-rates =3D <0x2faf080>;
++=09=09=09bus-width =3D <0x08>;
++=09=09=09cap-mmc-highspeed;
++=09=09=09mmc-ddr-1_8v;
++=09=09=09mmc-hs200-1_8v;
++=09=09=09non-removable;
++=09=09=09cap-mmc-hw-reset;
++=09=09=09post-power-on-delay-ms =3D <0xc8>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x3c>;
++=09=09=09vqmmc-supply =3D <&sd_vcc>;
++=09=09};
++
++=09=09mmc@16020000 {
++=09=09=09compatible =3D "starfive,jh7110-mmc";
++=09=09=09reg =3D <0x00 0x16020000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5c 0x03 0x5e>;
++=09=09=09clock-names =3D "biu", "ciu";
++=09=09=09resets =3D <0x03 0x41>;
++=09=09=09reset-names =3D "reset";
++=09=09=09interrupts =3D <0x4b>;
++=09=09=09fifo-depth =3D <0x20>;
++=09=09=09fifo-watermark-aligned;
++=09=09=09data-addr =3D <0x00>;
++=09=09=09starfive,sysreg =3D <0x1f 0x9c 0x01 0x3e>;
++=09=09=09status =3D "okay";
++=09=09=09max-frequency =3D <0x5f5e100>;
++=09=09=09assigned-clocks =3D <0x03 0x5e>;
++=09=09=09assigned-clock-rates =3D <0x2faf080>;
++=09=09=09bus-width =3D <0x04>;
++=09=09=09no-sdio;
++=09=09=09no-mmc;
++=09=09=09cd-gpios =3D <0x19 0x29 0x01>; /* SD Card detect - active low */
++=09=09=09cap-sd-highspeed;
++=09=09=09post-power-on-delay-ms =3D <0xc8>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x3e>;
++=09=09};
++=09};
++};
+
+---
+base-commit: ece349ade2973e220f524ce59e59711cc919263f
+change-id: 20260720-device-tree-pinetabv-6b1017cb9280
+
+Best regards,
 --=20
-Tom
+anoduck <anoduck@protonmail.com>
 
---U5zSbhrVqtDA/vdo
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal6fhgAKCRAr4qD1Cr/k
-CiB/AQDAezPw+6jqo+ohAl0q5QnQMYRmRaxopA6PnAWucS1X0AD/So5yAQXSAcOo
-t2krMg1u9ZDYc36LpYEPE3/nnDrD8Q8=
-=Yvb4
------END PGP SIGNATURE-----
-
---U5zSbhrVqtDA/vdo--
