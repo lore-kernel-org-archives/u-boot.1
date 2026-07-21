@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D13C4451C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 18:09:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A1DC4451C
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 18:09:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AEFD4608D1;
-	Tue, 21 Jul 2026 18:09:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EA711608DA;
+	Tue, 21 Jul 2026 18:09:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1-NzCX2-n55C; Tue, 21 Jul 2026 18:09:35 +0000 (UTC)
+ id 9NZunveg9ozK; Tue, 21 Jul 2026 18:09:38 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DDF5E608C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 34715608EA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784657366;
-	bh=FL3VliOGNKRIQxsbdbRrDoIRsQ5oaxR+SmrETbkyXkk=;
+	d=lists.u-boot-project.org ; s=default; t=1784657368;
+	bh=qHmD5fMrK9tXWfqbjxTZnXhUVoGXUPu2RJPMWbjHedA=;
 	h=Date:Subject:References:In-Reply-To:To:CC:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=PIRhtSPwyn7sIcN3ZHbLwhHiFel5cWfjtD8+o3wqaJqcUYybpEyeul7lv83skM3Fp
-	 06Gv2kQqNGd09mA7j2l4+b+d40nm6Kv4PNVGT10/fFWPthvU0V1zQJL1su7xTwusJ3
-	 d4fqkCmvVtngkQ1pf0LLZvJw0tjtoHz8LQaXF37QGtIkI90wDAVYtmSitO9rwAQnmw
-	 kWMSaWgKkXAZdjKiSd1m88GsPkNWZoQCtlRUUP095MeYcevM9Azz8yXEMONcYSVIcX
-	 myY4K8i/4i3k1kMe5yYnYXQ+dd78247nQUpuHeZWgGrryYkHjOUQK+kURqzUY1MjCx
-	 QhbQrK2U4uv6w==
+	b=MtLADF/+2wJRvLiLmgu+yxmW9J//CEelNtpiupxz+HhvNcUb63RU6u457bSeC/x9e
+	 8LqJVcQPyIaEp0MP3WJwq8JLhI5A0NBHHD0gXfch6fCdXy7rOJeouvbDlu6qHPzg9T
+	 7vvvCvzbgxP9iJGP8+UD1/OrxYs27VQX1CsbjyJHSnZ8NmP+eeQymxhyTEOdD2M5O2
+	 EdNmX5Ds3gMBvemYGteuwdyzRsE3DaLANglaqIP+3mqN1t2BiIbJ77816q93L6h8Oq
+	 Y0WUTiYcPWH/EF48VE7JMt1JDgTHS5H5j7iQE+x2TnHzcTZ7gPR1PPErxIjaHQgDLr
+	 8cvPlHFrhq6Ow==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DDF5E608C7;
-	Tue, 21 Jul 2026 18:09:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 34715608EA;
+	Tue, 21 Jul 2026 18:09:28 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7AA25EB
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:27:27 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 76926109F
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:27:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 56DDC40275
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:27:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5D04640167
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:27:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5Ph_qtMduq0N for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 16:27:25 +0000 (UTC)
+ id UK1T-okDcgPw for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 16:27:56 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
  helo=mx0b-0002e601.pphosted.com; envelope-from=bb@ti.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5DCEF40167
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5DCEF40167
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E46E040277
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E46E040277
 Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
  [148.163.154.28])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5DCEF40167
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:27:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E46E040277
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:27:55 +0000 (UTC)
 Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
  by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66LDjZwx987014; Tue, 21 Jul 2026 10:31:01 -0500
-Received: from bl2pr02cu003.outbound.protection.outlook.com
- (mail-eastusazon11011023.outbound.protection.outlook.com [52.101.52.23])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fj7pvsjvu-1
+ 66LDjTDH986919; Tue, 21 Jul 2026 10:30:57 -0500
+Received: from ch5pr02cu005.outbound.protection.outlook.com
+ (mail-northcentralusazon11012064.outbound.protection.outlook.com
+ [40.107.200.64])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fj7pvsjvc-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 21 Jul 2026 10:31:01 -0500 (CDT)
+ Tue, 21 Jul 2026 10:30:57 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Npj78lZj1GmOvgGxaEGp7F16KDuKGhz7lU9gcI9AxdFyxkK3RllHZdpo2fu8AqhcEhuApe2XiWffU8xSL1twBu8pUMBfR5sz98k0/UMd3wYuhhoZWjWwCMTuFltVi0CfvFazJnyok44hqD1U7kBEe8Xzyap3ScPifUddQiCLB72jrB22tG8EKl0upxqIO3ekwVHIl2IpeIGI1H2tFkb3fB89C0BQf9X89EgjYeYCxfcyRq9BA+WCaM9m13kY3SBYq9i0qaybnAxVR7ujcL73vd+LipycMeSTFcK4npVmU58fRsMMQV76N7GbnLzpG0e7Sy12g33F5RlIwyEonQA9vA==
+ b=TsQajRr502OqvmkKBn18cjaJ8zI8NYrScwdIY18c0vUwaiwKqZ1QhwMJHV+lC+/308TDGeJrksUiaOm1lFP4lbH9cNLKeUy67B6/eT1mEkv5Els4j9OQCzwGS7U8CDRCHHlMIa5TYSiPowk54bkepuQP7iq822Mgs93L6SWCMxvBkBxi2RbY1eZmfH6mkZMojtvVJfcnGLnUY2jzm3SFSvPn+3cRIFDLnmc9pUXWZIYggbG9zL36unh51FYi/xeHrme9sJ+XTTARzVt0JeloOWqFq0NA53sDOhi8XXteUBngvtFjviEtelh/aTw6mvtkQ3KJJrNUJFN0ZnbjDuYypg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FL3VliOGNKRIQxsbdbRrDoIRsQ5oaxR+SmrETbkyXkk=;
- b=ogYCDhjFfZGxRkjOQI33Nr9HcjSVdwyc3JPpFOQKIL2cKATR8VcTEac+T9QMg6x1+JUCwsTrOnvCu9ZGkUzI9mHiYZoC8aTkBDeNiSwkrz7WgCWx4r+63MZD+P6CYTuR5hTotcbwRNUAUOFoYzyJJN4qg8uXoeQJXIp1CAvtR56eS0RNsjkuT6aYNTwu0TYgs6g7GDby2de1eRBFP87Q8Q8Jna6Cu8C60qYUgT/FOl6TOtAH+IGOVBt6ixCRqv6zDuG8HTtoI3GT+eskMQL+JzLHCNIMJICsNjQHd7YSl1n3R7HQ/UR2IrVPlzP7t3yR3vkieTA5j7Nwa5Gm5XOW/A==
+ bh=qHmD5fMrK9tXWfqbjxTZnXhUVoGXUPu2RJPMWbjHedA=;
+ b=FG2DKIKzgVAN1KnUC4HAHqj+XuP3o8innLzCyTRCeBlLlfhX03tWA4jnq2OTSKcBXHvJWn4kWidzNKQYn9LURfuAl00LPxvZlWXZOgf5l5JmUOzn45ZwEuCzePSFVi9cEKFW8e4qyNGWmSi9WslYHNqQStLv5PKirFEHXO6k23F+y3QKyaSZuhqEfOczRnkcsMVaz+hbsTfJgROStEiu4YRhaEDuNVLFLd809twpHCio+AeI4SyNnTLBc4sFriR5/1LXNFl7LtQAQqVjJKJtxGTNvybx1IcGIJBi28qdsqlFx1s+6OmEihNY7ZK/jRPcChUP4eRjLLbp7CWT7lyx3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.195) smtp.rcpttodomain=linaro.org smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
-Received: from SJ0PR13CA0039.namprd13.prod.outlook.com (2603:10b6:a03:2c2::14)
- by IA0PR10MB6820.namprd10.prod.outlook.com (2603:10b6:208:437::11)
+Received: from MW4PR04CA0337.namprd04.prod.outlook.com (2603:10b6:303:8a::12)
+ by PH0PR10MB5818.namprd10.prod.outlook.com (2603:10b6:510:140::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Tue, 21 Jul
- 2026 15:30:57 +0000
-Received: from SJ5PEPF000001CB.namprd05.prod.outlook.com
- (2603:10b6:a03:2c2:cafe::5) by SJ0PR13CA0039.outlook.office365.com
- (2603:10b6:a03:2c2::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.9 via Frontend Transport; Tue, 21
- Jul 2026 15:30:55 +0000
+ 2026 15:30:54 +0000
+Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
+ (2603:10b6:303:8a:cafe::81) by MW4PR04CA0337.outlook.office365.com
+ (2603:10b6:303:8a::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.10 via Frontend Transport; Tue,
+ 21 Jul 2026 15:30:53 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -85,30 +86,30 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF000001CB.mail.protection.outlook.com (10.167.242.40) with Microsoft
+ SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.245.5 via Frontend Transport; Tue, 21 Jul 2026 15:30:54 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet201.ext.ti.com
+ 15.21.245.5 via Frontend Transport; Tue, 21 Jul 2026 15:30:52 +0000
+Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 21 Jul
  2026 10:30:22 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 21 Jul
  2026 10:30:22 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
  Transport; Tue, 21 Jul 2026 10:30:22 -0500
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66LFUMih1031822;
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66LFUMHq1655311;
  Tue, 21 Jul 2026 10:30:22 -0500
-Date: Tue, 21 Jul 2026 10:30:20 -0500
-Subject: [PATCH v2 05/11] arm: mach-k3: Add initial am62lx SoC support
+Date: Tue, 21 Jul 2026 10:30:22 -0500
+Subject: [PATCH v2 07/11] arm: dts: k3-am62lx: Add binman support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260721-am62lx-v2-5-33ff580c267d@ti.com>
+Message-ID: <20260721-am62lx-v2-7-33ff580c267d@ti.com>
 References: <20260721-am62lx-v2-0-33ff580c267d@ti.com>
 In-Reply-To: <20260721-am62lx-v2-0-33ff580c267d@ti.com>
 To: <u-boot@lists.denx.de>, <u-boot@lists.u-boot-project.org>
@@ -137,49 +138,49 @@ X-Mailer: b4 0.16-dev-d5d98
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CB:EE_|IA0PR10MB6820:EE_
-X-MS-Office365-Filtering-Correlation-Id: 480fef0f-1d89-4a29-fa5c-08dee73d0dc1
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|PH0PR10MB5818:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d85552a-a361-43a9-40e0-08dee73d0cbd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|23010399003|36860700016|7416014|376014|1800799024|3023799007|56012099006|10067099003|13003099007|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: K9j28tzbABEX8NM2gjmxBdXf5d7dOvojxQ9ajcBIOEH//sbPlIksGPqCDSwL3JgufwIFb/lzjC5YtKfrwDTXcV/cY6bFVCMy5yjU2psjg2toioaNJE/024dYBrUtBO0U1eGXMjEWntREP8oVV4Ixk3wvAVPSf1L1zgJ+F/CYE3T0LYNr9RHx1O8tea3CywWxNvlqM3IOUHu7tJn1n76waak7yEGsQq9XJJsSW3AGc4AWIK0fkrUEQszxEO3yHuSxvwyyZt8a4CxgPXWMLBxHnAaRQ5wsnIJfBhjeGDPWUOsb0SGCmRkdCsUs8nb2Vk0p/RrMZIbxnytX9tGwVH5iS+ZsarZttuxKyZY9vQDZGvaVS5vZIdWhp9hvRqEwmE+A52S2Sg7qko4nD13EUQsY22Hasexjp1WD9VYe+UeSqipU+c4BLwoCpGzk2aEl1L2zqC8M76qbOfBealIFJw4638JTeQGA3+43hs/Kqp/lpoQT2JqXUnKNj+fIzwRwAYfbuzFkhH7frKYgzKW+PVtr8fpkKa/gkUXxCO51fCBNTsD9fVhKADWkuyO5/YgJa6WVJoCw2znJSrSknrz2I1Xa8rkvxkFmupJGbu7lQrYsYQ9lZdoN19z+f7AiQ/8w5ZXu2KfKH95ock6XoCopLu0pGg==
+ ARA:13230040|1800799024|376014|7416014|23010399003|82310400026|36860700016|13003099007|6133799003|22082099003|18002099003|3023799007|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info: OkRnIeLeuw+L87ssiaMtkxxRxxNq6Eb1GPQquBt/ZtTeOr996kpqmr4f1+lQPZroa4vuA1K91WS1cGl0mXKS8CJCZo3YAymoumIx1aZVmK5nRWPcZhozB5NSB2T0fcTr6NI2/eoDZxHoF/5qMztFz7FfrfoxebU8PwSWi1hU3X2pu+0xfm74HBBdJ9vHEyuUPoEvngC0lH5CQQa33wS3OsrgxlJMAyq7js/3TKaxUDuXHcUkPDBjaLRcM6Tzda7KYZC/J5yofam9XbFw7CgLUZeeCHsphQ/rU+9T1abcP15A1SoBFG7Ct7lfPeBXQc68TsIupoVB5e1IdnJVZrXqcqDlTeB2SnF5eH/PgSPX5zl+ycWtSEsZ9gA084M31Ea/53jFwE/Mo+vSz5M9yuv322ul+OTGPjg63DyuS8YfGu1pDDXtajgC+cOSGcMOnFhgyH8RAdHi+ZW3oXBsHFGk7FzZUkZwFcsiFcW8N2CSCYvhRSMa6CcWSJqWsOaOJgBOiFVkzR6Q4XeTtDV/pCb9rAOgcdGdGZA+PyiZI4TsKKzImiTuaJPmmp6Q9emzqBZDTeZLfj/6R+cIWJ88iM8s6XrSIGZtruljPT8iFCR/bhCiEwb0UdAY34pAKwwLzeQeO+8C3miGw1OJwOxkrfVz7g==
 X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(23010399003)(36860700016)(7416014)(376014)(1800799024)(3023799007)(56012099006)(10067099003)(13003099007)(22082099003)(18002099003)(6133799003);
+ SFS:(13230040)(1800799024)(376014)(7416014)(23010399003)(82310400026)(36860700016)(13003099007)(6133799003)(22082099003)(18002099003)(3023799007)(56012099006)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: f1BFGciDdMpzLMvOS5UoqEhc1TxXbtCFdD2D5pp2f2bWM3naNpJPe6/Ysp82AN2PSB+ibxjgwBKXaCXc/CNHzzVJvyqXjUzpg/iHiplrc27TxwYMSQag4rGf0zyf5BGisjuhqyIXJfz/trHAqOS0cnqm4l3yHgguDKTElCKygFsgiZr7fcdwoCHj5CQ29T1anYyvIMl6KqCGLdgEckZOS8Z3lmzuP7BpoPQronvaMyRjTiXESVJFP0B9pX6PhoGty4Msm7NNIZfZeg+YGpgl28e/4r4SWAPC0LMPhp9NtXazxWgd0zqwwHRBHE+JqeWh0OyIqHnR9dHF3cNXY7xKpDBSToDn0lA1adCyhe0JExI1jgiIlxHCvoe3mfWGrG9Kj20inWAtY2aiCnJryVWoIeOgoisn+769MLG+7691xTXBERcK38Y3zBsJoquYbIVo
-X-Exchange-RoutingPolicyChecked: ZtTCnGYfRbKY2bBD4mKefyRH+4uwvUImV8PnKaYacLZtYtW1uiX0c5H+Bu/MvFRQGJ3B0P+twUvkiIP3/zonkGccrTRGDf9XHhJZqmNpiEozQz1J+XWYSIRfSB2bfvMHtfrmoUJ4tJfsXhKcFCDpo1y5qEWuqrQfBQIAAAJrRS+724sFWfOxWgfAiBye/VnFrORwKi8wg1kz2eKQYzcYcEVYymdNS6L7H7yPSSQAdEilXLfkceQZlX8+kyWpgesNrcONF4endOxgMBIX0IeIoje13NotMVceDq6BOebywKj9g36wlABCkhNznyv1pys4AAcCHrSAdYuKq2yCEUkgRA==
+X-MS-Exchange-AntiSpam-MessageData-0: tc4OOp9VBAAWqUR3Kck1z4KQfNrC8ynu9UyTU51ebdPjaHOnOKrvZUzIFSH/sg2pPK8czVus3+MVcD3mkt+w3sBCvscqia+iEBdl8J/q9qZK2KnIg7qm3BgpKgaf3/G/+nFFzZtdroHm5aqBaU/f5zldIt67MlsG/r2VYtYdT7D+YYqqBaMUdqWTdGa8m1l56dBKJkYqHLCZ6/901OiD5oiaQiCiu+3HDwNQt0hfSKVJ292Se0zTh5nFq1WCAFmAYpjHSGmAPvKgnhopMHl+dB2DanX7poNxWVInnYtgiyPjd77AG/SPVhV+P8lWBwafkMLerpP6BO5cj0hallj1Kpj00DyIRSQ9bg8mboJLkX/WRcQ9dUPrN9sIOZANJHP6tX7I/ELDYKkRSJHg+LRXr5xRoLGTMjNz6A3WE/a7qOAA/wYqmByjLcM9WQJWh6LV
+X-Exchange-RoutingPolicyChecked: Xr6fMzC3ndIkR7Tg5/H3DGhmvoZjRlAtVaRyJ9TY1WsDvp4H0auut9850+YTNwkGwdzBBNUUhGhuGXCXeYJPF5KF0739T/O01NE55ewQxlTOro0TaPHpri2FGX9h464A9S9NY9++TZe4VKTzoXDlSdIkYgJiqyzNcHWe3WeUo1/zagXvMvPtDiDayJWjvhRUij28ctWo/e6h13oj7An7QvtnOzXpV4v9mFDFnOu2GhRoIQiMHVQGkLNCk6lI7Hv+4no3n7pXhrisSZ3+Y+pZfYndzubjbo9V4lmg14Sc1zMYefh7y+8rXkHBMDV/8ohgie8kKug/3S9iV4w3oA5Atw==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 15:30:54.1787 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 480fef0f-1d89-4a29-fa5c-08dee73d0dc1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 15:30:52.4559 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d85552a-a361-43a9-40e0-08dee73d0cbd
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
  Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CB.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB6820
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE2NCBTYWx0ZWRfX195VnDtIYH26
- vn8rPl0fyitEVerzEM6mm9daIZr8nfL3vhiiAL9PV0/RQPrTh7+WI5oK3BXsbgR5pZu8/nKCuE4
- QjPyJ3oivmFPA24Dp0XquADGrGFwiiI=
-X-Proofpoint-ORIG-GUID: V0vGgZlmmpbnknt5E8YYoqXrgWrwUBUD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE2NCBTYWx0ZWRfX9N7mJliHUXNO
- u4UhOMKw+D+BhLZ3sbpslPkuvN0hye939sXjswIWmMD4Y6pKZAeS1V4n6FUvAWjmswDHz4QiPU5
- b4LUDYJBpOW1Nbr1M88GgAsVE/hWNh2T7GAY2CZKTwqonTP42L33PlVF2QmReb9a1WNCRi6GlYG
- 693GB0W4yHGMzuUBJMkyOVPpAe8dZOgl8esJW5P8mjEONJ/uaak+Z2Ei6U7n3ngTBjraDMxXEEX
- zPC8l0Qhf3x6UScJh37kn1NAX2SIc7C6tjdYn943/MIdco4vWWr5A9oBhPzB8ZK4lNpTh9fFoZl
- ulQDI99fBlQ5+u4Vro2pQ9uTHvtdjGzqNgkD3JKOj0Sib7Cscs6C4wmthdGqep36LdosE35ZrMf
- FYOQBrSbuDE1xcVTITXvwC7HYgPKbVdYoLGyPkaQlO0khXCakdMHW6uLkEPsU3QSISRtVg6K614
- nJ+VYcxNOh2nlLA9HQA==
-X-Proofpoint-GUID: V0vGgZlmmpbnknt5E8YYoqXrgWrwUBUD
-X-Authority-Analysis: v=2.4 cv=MbFcfZ/f c=1 sm=1 tr=0 ts=6a5f90b5 cx=c_pps
- a=g4Zu/129bcKSj1q/f/8ScQ==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5818
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE2NCBTYWx0ZWRfX0Y8ZPb08K6th
+ 1ODdtLt8jUvHmIQkx1C3s9aRzmsqFAXU9RoXYbe6n5ERpRlvAp0a7t8Eh/0aThO6TOJbA30WusC
+ cd1ZbjDvlMskjh9furIa9xndqgUu3zA=
+X-Proofpoint-ORIG-GUID: jXqwSdvwRhCoKgjvtZCGERp-6DGovp4c
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE2NCBTYWx0ZWRfXxxnTsJJBZbJ2
+ jZq73nfdIWA479hxw/NkgwPMLr0T8LoV9lAbas1J8hyd1v+wJSZX9FA4J0W+0vEYLJoNHaWG5di
+ dL/EijLAp3EwsQkM84uK0asme9/L+S+6YVMevrjZ+s7N5s6WsF/J8wYYX7y7OBz/d22bl2PgoJT
+ ezRYHjL0v02F7LVVwFo73IacppXfljgsAYD6S8NQuZk4Fp7IjaADL0eU/F7VfWw4rssxW+AaJ3P
+ V2s/KLS5uOkefjWoiE4yRXOg+UG6oCXbvl5SDZOoW8fvXYsn6kG8zCmsRMqIz2JjSENANEHPqa5
+ E/NhNwCBaqh+xqc155n7vouugApME3JV+K+VDsvLWcPneKnGGSdNqD3g8xOaetiiSsvhqjqUMsh
+ oriVuDNZJ5vLo1w+F7MbVl3R5x3SuP5gtYcMoNyJHbq/8SkJfHnookK1rZBJa/9mlISKlenKl3P
+ +GWAt10D2imG4eB0Evg==
+X-Proofpoint-GUID: jXqwSdvwRhCoKgjvtZCGERp-6DGovp4c
+X-Authority-Analysis: v=2.4 cv=MbFcfZ/f c=1 sm=1 tr=0 ts=6a5f90b1 cx=c_pps
+ a=/CYSPFcZsPiriMCSbh9ShQ==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
  a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
  a=jwouBfj2j3NM8CExmVVE:22 a=VwQbUJbxAAAA:8 a=sozttTNsAAAA:8
- a=GtdckPxdew9VLt8R6-AA:9 a=y2g2RT_9uU666ETu:21 a=QEXdDO2ut3YA:10
+ a=6G3Wt455AjdQPmq9yuUA:9 a=QEXdDO2ut3YA:10
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-21_03,2026-07-20_03,2025-10-01_01
@@ -194,27 +195,27 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ti.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=FL3VliOGNKRIQxsbdbRrDoIRsQ5oaxR+SmrETbkyX
- kk=; b=A2+Qu3qnPXll4XBkGgA87RFAUk32ycHrrl/dU+FXYNfNlv4tBwGZ4iQC2
- l1Zx8MLVhmrdMirlq5qXEolfC5VSU/6ZakArVRxzfS0acah0KTcNj7gu5R00QfGK
- yC7cdcnSxvAoBCORftV89abgfHPOXE40Ye0e/T6Cad9LoQCtKLSY9cXx7bi76fZo
- s586vSzk7lkOklthK9PVmmPAWmGR1HpL+kcvvhv7WfQmBSzB5zVdWMZ6QpDPoMpZ
- I7LRsGSNNdrpasX53rgS9ahhYQbiyeI0T6/jMY8zBkrPk/DHFaIIOsA6JBav9NW3
- zIN578xTqItkkOjvBVQhSLBKkDEFA==
+ proofpoint-05-2026; bh=qHmD5fMrK9tXWfqbjxTZnXhUVoGXUPu2RJPMWbjHe
+ dA=; b=h0QhUz1eCeTp2AaRo2UAJ9xJGDMBx1sKndTHPMW8A+FDkMPRqzuvpLXWu
+ ZOzV5w25bUeDTFHzNPUUXirtuEfxXJ2Sahy/3z9gXTwMX83VdaNlL0qdfXif0XzU
+ b/SeI7yZIHbUVpWsuIXhqEQEQG04ykVTJTmWAAMgJOeCoiWuCUNenQDSMfktZLYv
+ o26TLfP8UY+EWPN+g0q54fBSikKKrynd3thJfeA7NE69jA1EHQ/IlCJxSSt6NCBU
+ C/NSux0LMQgsROZNa9FixgRnfurpItf+GM4nqFiyuQOHpbRV52l7fLLBqNPYioow
+ 8gzDofx/RqrtsoBhQl71a0z+y7mWw==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ti.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FL3VliOGNKRIQxsbdbRrDoIRsQ5oaxR+SmrETbkyXkk=;
- b=YZVgKgxVABwUKtTvI5NoTGVfcaYqYP+mqYsdHEJepcROc0EAklqERljBdw/RRWK2ITCDf/yLLxrtm2ynLdpO9+YJJNNUIEL/jTxOfnCy5ioBkAN8wemlVhVTSpg18sJkheS4I5ogd9S5ntgJNABECfMwMsXA6C8rQ9shmLZfl7s=
+ bh=qHmD5fMrK9tXWfqbjxTZnXhUVoGXUPu2RJPMWbjHedA=;
+ b=jHROnm7kkAbMZEOha1qM3PVC3WW1l52/DL1KJOMYq8H/cOWksD4/6TochoOTjKtTWb8HZ8wqa30Lk+BFnEPOlUGUwHYU7EhNOOuV0xCW06ttczQ7rC0yxHzHYOvNd3TMkFnwyYcDYUj6dcMw7uDswRsdo9HClcrzmiSnlxSyGU0=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=ti.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=A2+Qu3qn; 
+ header.s=proofpoint-05-2026 header.b=h0QhUz1e; 
  dkim=pass (1024-bit key,
  unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=YZVgKgxV
+ header.s=selector1 header.b=jHROnm7k
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -231,890 +232,305 @@ Reply-To: Bryan Brattlof <bb@ti.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add initial mach-k3 files needed to support boards based on the AM62L
-family of SoCs
+From: Vignesh Raghavendra <vigneshr@ti.com>
 
+Add the initial configuration to build the boot binaries for the AM62L
+family of devices
+
+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
 Changes in v2:
-Coalesced boot parameter table Kconfig address
-Link to v1: https://lore.kernel.org/r/20260717-am62lx-v1-0-b9830633afb8@ti.com
+- Removed bootph from scmi{} node
+- Removed signatures from u-boot fit image
+- Link to v1: https://lore.kernel.org/r/20260717-am62lx-v1-0-b9830633afb8@ti.com
 ---
- arch/arm/mach-k3/Kconfig                       |  16 +-
- arch/arm/mach-k3/Makefile                      |   2 +
- arch/arm/mach-k3/am62lx/Kconfig                |  23 ++
- arch/arm/mach-k3/am62lx/Makefile               |   7 +
- arch/arm/mach-k3/am62lx/am62l3_fdt.c           |  12 +
- arch/arm/mach-k3/am62lx/am62l3_init.c          |  58 ++++
- arch/arm/mach-k3/am62lx/boot.c                 |  82 +++++
- arch/arm/mach-k3/am62lx/schema.yaml            | 427 +++++++++++++++++++++++++
- arch/arm/mach-k3/include/mach/am62l_hardware.h |  48 +++
- arch/arm/mach-k3/include/mach/am62l_spl.h      |  41 +++
- arch/arm/mach-k3/include/mach/hardware.h       |   4 +
- arch/arm/mach-k3/include/mach/spl.h            |   4 +
- include/configs/am62l3_evm.h                   |  14 +
- 13 files changed, 734 insertions(+), 4 deletions(-)
+ arch/arm/dts/k3-am62l3-evm-binman.dtsi | 218 +++++++++++++++++++++++++++++++++
+ arch/arm/dts/k3-am62l3-evm-u-boot.dtsi |  12 ++
+ arch/arm/mach-k3/Kconfig               |  21 ++++
+ 3 files changed, 251 insertions(+)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index a32ed3a9683f..351ff3c19f1c 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -10,6 +10,15 @@ config SOC_K3_AM625
- config SOC_K3_AM62A7
- 	bool "TI's K3 based AM62A7 SoC Family Support"
- 
-+config SOC_K3_AM62L3
-+	bool "TI's K3 based AM62L3 SoC Family Support"
-+	select CLK_SCMI
-+	select SPL_CLK_SCMI
-+	select SCMI_FIRMWARE
-+	select SCMI_POWER_DOMAIN
-+	select SPL_SCMI_POWER_DOMAIN
-+	select SYSRESET_PSCI
-+
- config SOC_K3_AM62P5
- 	bool "TI's K3 based AM62P5 SoC Family Support"
- 
-@@ -81,11 +90,9 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
- 	default 0x41cffbfc if SOC_K3_J721E || SOC_K3_J7200
- 	default 0x41cfdbfc if SOC_K3_J721S2 || SOC_K3_J784S4
- 	default 0x701bebfc if SOC_K3_AM642
--	default 0x43c3f290 if SOC_K3_AM625
-+	default 0x43c3f290 if SOC_K3_AM625 || SOC_K3_AM62L3 || SOC_K3_AM62P5 || SOC_K3_J722S
- 	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
- 	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
--	default 0x43c4f290 if SOC_K3_AM62P5
--	default 0x43c7f290 if SOC_K3_J722S
- 	help
- 	  Address at which ROM stores the value which determines if SPL
- 	  is booted up by primary boot media or secondary boot media.
-@@ -124,7 +131,7 @@ config K3_EARLY_CONS_IDX
- 
- config K3_ATF_LOAD_ADDR
- 	hex "Load address of ATF image"
--	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
-+	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S || SOC_K3_AM62L3)
- 	default 0x70000000
- 	help
- 	  The load address for the ATF image. This value is used to build the
-@@ -206,6 +213,7 @@ source "arch/arm/mach-k3/am65x/Kconfig"
- source "arch/arm/mach-k3/am64x/Kconfig"
- source "arch/arm/mach-k3/am62x/Kconfig"
- source "arch/arm/mach-k3/am62ax/Kconfig"
-+source "arch/arm/mach-k3/am62lx/Kconfig"
- source "arch/arm/mach-k3/am62px/Kconfig"
- source "arch/arm/mach-k3/j721e/Kconfig"
- source "arch/arm/mach-k3/j7200/Kconfig"
-diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
-index b2fd5810b67c..66ae20143b6f 100644
---- a/arch/arm/mach-k3/Makefile
-+++ b/arch/arm/mach-k3/Makefile
-@@ -6,9 +6,11 @@
- obj-$(CONFIG_ARM64) += arm64/
- obj-$(CONFIG_CPU_V7R) += r5/
- obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
-+
- obj-y += common.o security.o k3-ddr.o
- obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
- obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
-+obj-$(CONFIG_SOC_K3_AM62L3) += am62lx/
- obj-$(CONFIG_SOC_K3_AM625) += am62x/
- obj-$(CONFIG_SOC_K3_AM642) += am64x/
- obj-$(CONFIG_SOC_K3_AM654) += am65x/
-diff --git a/arch/arm/mach-k3/am62lx/Kconfig b/arch/arm/mach-k3/am62lx/Kconfig
+diff --git a/arch/arm/dts/k3-am62l3-evm-binman.dtsi b/arch/arm/dts/k3-am62l3-evm-binman.dtsi
 new file mode 100644
-index 000000000000..d9609a91993a
+index 000000000000..3f7e2097e521
 --- /dev/null
-+++ b/arch/arm/mach-k3/am62lx/Kconfig
-@@ -0,0 +1,23 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+
-+if SOC_K3_AM62L3
-+
-+choice
-+	prompt "TI K3 AM62Lx based boards"
-+	optional
-+
-+config TARGET_AM62L3_EVM
-+	bool "TI K3 based AM62L5 EVM"
-+	select ARM64
-+	select BINMAN
-+	select OF_UPSTREAM
-+	select OF_SYSTEM_SETUP
-+
-+endchoice
-+
-+source "board/ti/am62lx/Kconfig"
-+
-+endif
-diff --git a/arch/arm/mach-k3/am62lx/Makefile b/arch/arm/mach-k3/am62lx/Makefile
-new file mode 100644
-index 000000000000..c97ffe27492f
---- /dev/null
-+++ b/arch/arm/mach-k3/am62lx/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+obj-$(CONFIG_OF_SYSTEM_SETUP) += am62l3_fdt.o
-+obj-$(CONFIG_SPL_BUILD) += am62l3_init.o
-+obj-y += boot.o
-diff --git a/arch/arm/mach-k3/am62lx/am62l3_fdt.c b/arch/arm/mach-k3/am62lx/am62l3_fdt.c
-new file mode 100644
-index 000000000000..da8c2d18ba86
---- /dev/null
-+++ b/arch/arm/mach-k3/am62lx/am62l3_fdt.c
-@@ -0,0 +1,12 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
++++ b/arch/arm/dts/k3-am62l3-evm-binman.dtsi
+@@ -0,0 +1,218 @@
++// SPDX-License-Identifier: GPL-2.0-only or MIT
 +/*
 + * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
 + */
 +
-+#include <asm/arch/k3-common-fdt.h>
-+#include <fdt_support.h>
++/ {
++	binman: binman {
++		multiple-images;
++	};
++};
 +
-+int ft_system_setup(void *blob, struct bd_info *bd)
-+{
-+	return fdt_fixup_reserved(blob);
-+}
-diff --git a/arch/arm/mach-k3/am62lx/am62l3_init.c b/arch/arm/mach-k3/am62lx/am62l3_init.c
-new file mode 100644
-index 000000000000..ee2a50f808d0
---- /dev/null
-+++ b/arch/arm/mach-k3/am62lx/am62l3_init.c
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * AM62Lx: SoC specific initialization
-+ *
-+ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+ */
++&binman {
++	custMpk {
++		filename = "custMpk.pem";
 +
-+#include <asm/arch/hardware.h>
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <dm/uclass-internal.h>
-+#include <hang.h>
-+#include <spl.h>
-+
-+#include "../common.h"
-+
-+void board_init_f(ulong dummy)
-+{
-+	int ret;
-+
-+	ret = spl_early_init();
-+	if (ret) {
-+		debug("spl_early_init() failed: %d\n", ret);
-+		hang();
-+	}
-+
-+	preloader_console_init();
-+	debug("am62lx_init: %s done\n", __func__);
-+}
-+
-+u32 spl_boot_device(void)
-+{
-+	return get_boot_device();
-+}
-+
-+u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+		MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+		MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_EMMC:
-+		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+			return MMCSD_MODE_EMMCBOOT;
-+		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+			return MMCSD_MODE_FS;
-+		return MMCSD_MODE_EMMCBOOT;
-+	case BOOT_DEVICE_MMC:
-+		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-+			return MMCSD_MODE_RAW;
-+	default:
-+		return MMCSD_MODE_FS;
-+	}
-+}
-+
-diff --git a/arch/arm/mach-k3/am62lx/boot.c b/arch/arm/mach-k3/am62lx/boot.c
-new file mode 100644
-index 000000000000..a0d3387cb40d
---- /dev/null
-+++ b/arch/arm/mach-k3/am62lx/boot.c
-@@ -0,0 +1,82 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+#include <asm/io.h>
-+#include <asm/arch/hardware.h>
-+#include <asm/arch/am62l_spl.h>
-+
-+static u32 get_backup_bootmedia(u32 devstat)
-+{
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BACKUP_BOOT_DEVICE_UART:
-+		return BOOT_DEVICE_UART;
-+
-+	case BACKUP_BOOT_DEVICE_MMC:
-+		if (bootmode_cfg)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BACKUP_BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BACKUP_BOOT_DEVICE_DFU:
-+		if (bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
++		custmpk_pem: blob-ext {
++			filename = "arch/arm/mach-k3/keys/custMpk.pem";
++		};
 +	};
 +
-+	return BOOT_DEVICE_RAM;
-+}
++	custMpk-crt {
++		filename = "custMpk.crt";
 +
-+static u32 get_primary_bootmedia(u32 devstat)
-+{
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
++		custmpk_crt: blob-ext {
++			filename = "arch/arm/mach-k3/keys/custMpk.crt";
++		};
++	};
 +
-+	switch (bootmode) {
-+	case BOOT_DEVICE_XSPI_FAST:
-+	case BOOT_DEVICE_XSPI:
-+	case BOOT_DEVICE_OSPI:
-+	case BOOT_DEVICE_QSPI:
-+	case BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
++	custMpk-key {
++		filename = "custMpk.key";
 +
-+	case BOOT_DEVICE_EMMC:
-+		return BOOT_DEVICE_MMC1;
++		custmpk_key: blob-ext {
++			filename = "arch/arm/mach-k3/keys/custMpk.key";
++		};
++	};
 +
-+	case BOOT_DEVICE_SPI_NAND:
-+		return BOOT_DEVICE_SPI_NAND;
++	board-cfg {
++		filename = "board-cfg.bin";
 +
-+	case BOOT_DEVICE_MMC:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
++		bcfg_yaml: ti-board-config {
++			config = "board-cfg.yaml";
++			schema = "arch/arm/mach-k3/am62lx/schema.yaml";
++		};
++	};
 +
-+	case BOOT_DEVICE_DFU:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
-+		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
++	sec-cfg {
++		filename = "sec-cfg.bin";
 +
-+	case BOOT_DEVICE_NOBOOT:
-+		return BOOT_DEVICE_RAM;
-+	}
++		sec_yaml: ti-board-config {
++			config = "sec-cfg.yaml";
++			schema = "arch/arm/mach-k3/am62lx/schema.yaml";
++		};
++	};
 +
-+	return bootmode;
-+}
++	combined-tifs-cfg {
++		filename = "combined-tifs-cfg.bin";
 +
-+u32 get_boot_device(void)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmode = *(u32 *)(K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
++		ti-board-config {
++			bcfg_yaml_tifs: board-cfg {
++				config = "board-cfg.yaml";
++				schema = "arch/arm/mach-k3/am62lx/schema.yaml";
++			};
 +
-+	if (bootmode == K3_PRIMARY_BOOTMODE)
-+		return get_primary_bootmedia(devstat);
-+	return get_backup_bootmedia(devstat);
-+}
-diff --git a/arch/arm/mach-k3/am62lx/schema.yaml b/arch/arm/mach-k3/am62lx/schema.yaml
++			sec_yaml_tifs: sec-cfg {
++				config = "sec-cfg.yaml";
++				schema = "arch/arm/mach-k3/am62lx/schema.yaml";
++			};
++		};
++	};
++
++	tiboot3.bin {
++		filename = "tiboot3.bin";
++
++		ti-secure-rom {
++			content = <&bl1>, <&tifs_enc>, <&tifs_data>, <&tifs_cert>;
++			combined;
++			sysfw-inner-cert;
++			keyfile = "custMpk.pem";
++			sw-rev = <1>;
++			content-sbl = <&bl1>;
++			content-sysfw = <&tifs_enc>;
++			content-sysfw-data = <&tifs_data>;
++			content-sysfw-inner-cert = <&tifs_cert>;
++			load = <0x70800000>;
++			load-sysfw = <CONFIG_K3_TIFS_LOAD_ADDR>;
++			load-sysfw-data = <CONFIG_K3_TIFS_DATA_LOAD_ADDR>;
++			core-opts = <160>;
++		};
++
++		bl1: atf-bl1 {
++		};
++
++		tifs_enc: tifs-enc.bin {
++			filename = "ti-sysfw/ti-fs-firmware-am62lx-hs-enc.bin";
++			type = "blob-ext";
++		};
++
++		tifs_data: sysfw-data.bin {
++			filename = "combined-tifs-cfg.bin";
++			type = "blob-ext";
++		};
++
++		tifs_cert: tifs-cert.bin {
++			filename = "ti-sysfw/ti-fs-firmware-am62lx-hs-cert.bin";
++			type = "blob-ext";
++		};
++	};
++
++	tispl.bin {
++		filename = "tispl.bin";
++
++		ti-secure-rom {
++			content = <&atf>, <&tifs_enc2>, <&tifs_data2>,
++				  <&tifs_cert2>, <&tee>, <&spl>;
++			combined;
++			sysfw-inner-cert;
++			dm-data;
++			keyfile = "custMpk.pem";
++			sw-rev = <1>;
++			content-sbl = <&atf>;
++			content-tee = <&tee>;
++			content-sysfw = <&tifs_enc2>;
++			content-sysfw-data = <&tifs_data2>;
++			content-sysfw-inner-cert = <&tifs_cert2>;
++			content-dm-data = <&spl>;
++			load = <CONFIG_K3_ATF_LOAD_ADDR>;
++			load-sysfw = <CONFIG_K3_TIFS_LOAD_ADDR>;
++			load-sysfw-data = <CONFIG_K3_TIFS_DATA_LOAD_ADDR>;
++			load-dm-data = <CONFIG_SPL_TEXT_BASE>;
++			load-tee = <CONFIG_K3_OPTEE_LOAD_ADDR>;
++		};
++
++		atf: atf-bl31 {
++		};
++
++		tifs_enc2: tifs-enc2.bin {
++			filename = "ti-sysfw/ti-fs-firmware-am62lx-hs-enc.bin";
++			type = "blob-ext";
++		};
++
++		tifs_data2: sysfw-data2.bin {
++			filename = "combined-tifs-cfg.bin";
++			type = "blob-ext";
++		};
++
++		tifs_cert2: tifs-cert2.bin {
++			filename = "ti-sysfw/ti-fs-firmware-am62lx-hs-cert.bin";
++			type = "blob-ext";
++		};
++
++		tee: tee-os {
++		};
++
++		spl: section {
++			u-boot-spl-nodtb {
++			};
++
++			u-boot-spl-pubkey-dtb {
++				algo = "sha512,rsa4096";
++				required = "conf";
++				key-name-hint = "custMpk";
++			};
++		};
++	};
++
++	u-boot.img {
++		filename = "u-boot.img";
++		pad-byte = <0xff>;
++
++		fit {
++			description = "U-Boot fitImage for AM62Lx SK";
++
++			images {
++				uboot {
++					description = "U-Boot for AM62Lx SK";
++					type = "firmware";
++					os = "u-boot";
++					arch = "arm";
++					compression = "none";
++					load = <CONFIG_TEXT_BASE>;
++
++					blob {
++						filename = "u-boot-nodtb.bin";
++					};
++
++					hash {
++						algo = "sha512";
++					};
++				};
++
++				fdt-0 {
++					description = "k3-am62lx-evm";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++
++					u-boot-dtb {
++					};
++
++					hash {
++						algo = "sha512";
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am62lx-evm";
++					firmware = "uboot";
++					loadables = "uboot";
++					fdt = "fdt-0";
++				};
++			};
++		};
++	};
++};
+diff --git a/arch/arm/dts/k3-am62l3-evm-u-boot.dtsi b/arch/arm/dts/k3-am62l3-evm-u-boot.dtsi
 new file mode 100644
-index 000000000000..c1dcd9ced403
+index 000000000000..d48b478b89c4
 --- /dev/null
-+++ b/arch/arm/mach-k3/am62lx/schema.yaml
-@@ -0,0 +1,427 @@
-+# SPDX-License-Identifier: GPL-2.0-only OR MIT
-+#
-+# Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Config schema for TI AM62L devices
-+#
-+
-+---
-+
-+definitions:
-+    u8:
-+        type: integer
-+        minimum: 0
-+        maximum: 0xff
-+    u16:
-+        type: integer
-+        minimum: 0
-+        maximum: 0xffff
-+    u32:
-+        type: integer
-+        minimum: 0
-+        maximum: 0xffffffff
-+
-+
-+
-+type: object
-+properties:
-+    pm-cfg:
-+        type: object
-+        properties:
-+            rev:
-+                type: object
-+                properties:
-+                    boardcfg_abi_maj:
-+                        $ref: "#/definitions/u8"
-+                    boardcfg_abi_min:
-+                        $ref: "#/definitions/u8"
-+    board-cfg:
-+        type: object
-+        properties:
-+            rev:
-+                type: object
-+                properties:
-+                    boardcfg_abi_maj:
-+                        $ref: "#/definitions/u8"
-+                    boardcfg_abi_min:
-+                        $ref: "#/definitions/u8"
-+            control:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    main_isolation_enable:
-+                        $ref: "#/definitions/u8"
-+                    main_isolation_hostid:
-+                        $ref: "#/definitions/u16"
-+
-+            bm_writer_cfg:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    allowed_host:
-+                        $ref : "#/definitions/u8"
-+
-+            reserved:
-+                type: array
-+                minItems: 7
-+                maxItems: 7
-+                items:
-+                    $ref: "#/definitions/u8"
-+
-+            debug_cfg:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    trace_dst_enables:
-+                        $ref: "#/definitions/u16"
-+                    trace_src_enables:
-+                        $ref: "#/definitions/u16"
-+
-+    sec-cfg:
-+        type: object
-+        properties:
-+            rev:
-+                type: object
-+                properties:
-+                    boardcfg_abi_maj:
-+                        $ref: "#/definitions/u8"
-+                    boardcfg_abi_min:
-+                        $ref: "#/definitions/u8"
-+
-+            processor_acl_list:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    proc_acl_entries:
-+                        type: array
-+                        minItems: 32
-+                        maxItems: 32
-+                        items:
-+                            type: object
-+                            properties:
-+                                processor_id:
-+                                    $ref: "#/definitions/u8"
-+                                proc_access_master:
-+                                    $ref: "#/definitions/u8"
-+                                proc_access_secondary:
-+                                    type: array
-+                                    minItems: 3
-+                                    maxItems: 3
-+                                    items:
-+                                        $ref: "#/definitions/u8"
-+            host_hierarchy:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    host_hierarchy_entries:
-+                        type: array
-+                        minItems: 32
-+                        maxItems: 32
-+                        items:
-+                            type: object
-+                            properties:
-+                                host_id:
-+                                    $ref: "#/definitions/u8"
-+                                supervisor_host_id:
-+                                    $ref: "#/definitions/u8"
-+
-+            otp_config:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    otp_entry:
-+                        type: array
-+                        minItems: 32
-+                        maxItems: 32
-+                        items:
-+                            type: object
-+                            properties:
-+                                host_id:
-+                                    $ref: "#/definitions/u8"
-+                                host_perms:
-+                                    $ref: "#/definitions/u8"
-+                    write_host_id:
-+                        $ref: "#/definitions/u8"
-+
-+            dkek_config:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    allowed_hosts:
-+                        type: array
-+                        minItems: 4
-+                        maxItems: 4
-+                        items:
-+                            $ref: "#/definitions/u8"
-+                    allow_dkek_export_tisci:
-+                        $ref: "#/definitions/u8"
-+                    rsvd:
-+                        type: array
-+                        minItems: 3
-+                        maxItems: 3
-+                        items:
-+                            $ref: "#/definitions/u8"
-+
-+            sa2ul_cfg:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    rsvd:
-+                        type: array
-+                        minItems: 2
-+                        maxItems: 4
-+                        items:
-+                            $ref: "#/definitions/u8"
-+                    enable_saul_psil_global_config_writes:
-+                        $ref: "#/definitions/u8"
-+                    auth_resource_owner:
-+                        $ref: "#/definitions/u8"
-+
-+            sec_dbg_config:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    allow_jtag_unlock:
-+                        $ref: "#/definitions/u8"
-+                    allow_wildcard_unlock:
-+                        $ref: "#/definitions/u8"
-+                    allowed_debug_level_rsvd:
-+                        $ref: "#/definitions/u8"
-+                    rsvd:
-+                        $ref: "#/definitions/u8"
-+                    min_cert_rev:
-+                        $ref: "#/definitions/u32"
-+                    jtag_unlock_hosts:
-+                        type: array
-+                        minItems: 4
-+                        maxItems: 4
-+                        items:
-+                            $ref: "#/definitions/u8"
-+
-+
-+            sec_handover_cfg:
-+                type: object
-+                properties:
-+                    subhdr:
-+                        type: object
-+                        properties:
-+                            magic:
-+                                $ref: "#/definitions/u16"
-+                            size:
-+                                $ref: "#/definitions/u16"
-+                    handover_msg_sender:
-+                        $ref: "#/definitions/u8"
-+                    handover_to_host_id:
-+                        $ref: "#/definitions/u8"
-+                    rsvd:
-+                        type: array
-+                        minItems: 4
-+                        maxItems: 4
-+                        items:
-+                            $ref: "#/definitions/u8"
-+
-+    rm-cfg:
-+        type: object
-+        properties:
-+            rm_boardcfg:
-+                type: object
-+                properties:
-+                    rev:
-+                        type: object
-+                        properties:
-+                            boardcfg_abi_maj:
-+                                $ref: "#/definitions/u8"
-+                            boardcfg_abi_min:
-+                                $ref: "#/definitions/u8"
-+
-+                    host_cfg:
-+                        type: object
-+                        properties:
-+                            subhdr:
-+                                type: object
-+                                properties:
-+                                    magic:
-+                                        $ref: "#/definitions/u16"
-+                                    size:
-+                                        $ref: "#/definitions/u16"
-+                            host_cfg_entries:
-+                                type: array
-+                                minItems: 0
-+                                maxItems: 32
-+                                items:
-+                                    type: object
-+                                    properties:
-+                                        host_id:
-+                                            $ref: "#/definitions/u8"
-+                                        allowed_atype:
-+                                            $ref: "#/definitions/u8"
-+                                        allowed_qos:
-+                                            $ref: "#/definitions/u16"
-+                                        allowed_orderid:
-+                                            $ref: "#/definitions/u32"
-+                                        allowed_priority:
-+                                            $ref: "#/definitions/u16"
-+                                        allowed_sched_priority:
-+                                            $ref: "#/definitions/u8"
-+                    resasg:
-+                        type: object
-+                        properties:
-+                            subhdr:
-+                                type: object
-+                                properties:
-+                                    magic:
-+                                        $ref: "#/definitions/u16"
-+                                    size:
-+                                        $ref: "#/definitions/u16"
-+                            resasg_entries_size:
-+                                        $ref: "#/definitions/u16"
-+                            reserved:
-+                                        $ref: "#/definitions/u16"
-+
-+            resasg_entries:
-+                type: array
-+                minItems: 0
-+                maxItems: 468
-+                items:
-+                    type: object
-+                    properties:
-+                        start_resource:
-+                            $ref: "#/definitions/u16"
-+                        num_resource:
-+                            $ref: "#/definitions/u16"
-+                        type:
-+                            $ref: "#/definitions/u16"
-+                        host_id:
-+                            $ref: "#/definitions/u8"
-+                        reserved:
-+                            $ref: "#/definitions/u8"
-+
-+    tifs-rm-cfg:
-+        type: object
-+        properties:
-+            rm_boardcfg:
-+                type: object
-+                properties:
-+                    rev:
-+                        type: object
-+                        properties:
-+                            boardcfg_abi_maj:
-+                                $ref: "#/definitions/u8"
-+                            boardcfg_abi_min:
-+                                $ref: "#/definitions/u8"
-+
-+                    host_cfg:
-+                        type: object
-+                        properties:
-+                            subhdr:
-+                                type: object
-+                                properties:
-+                                    magic:
-+                                        $ref: "#/definitions/u16"
-+                                    size:
-+                                        $ref: "#/definitions/u16"
-+                            host_cfg_entries:
-+                                type: array
-+                                minItems: 0
-+                                maxItems: 32
-+                                items:
-+                                    type: object
-+                                    properties:
-+                                        host_id:
-+                                            $ref: "#/definitions/u8"
-+                                        allowed_atype:
-+                                            $ref: "#/definitions/u8"
-+                                        allowed_qos:
-+                                            $ref: "#/definitions/u16"
-+                                        allowed_orderid:
-+                                            $ref: "#/definitions/u32"
-+                                        allowed_priority:
-+                                            $ref: "#/definitions/u16"
-+                                        allowed_sched_priority:
-+                                            $ref: "#/definitions/u8"
-+                    resasg:
-+                        type: object
-+                        properties:
-+                            subhdr:
-+                                type: object
-+                                properties:
-+                                    magic:
-+                                        $ref: "#/definitions/u16"
-+                                    size:
-+                                        $ref: "#/definitions/u16"
-+                            resasg_entries_size:
-+                                        $ref: "#/definitions/u16"
-+                            reserved:
-+                                        $ref: "#/definitions/u16"
-+
-+            resasg_entries:
-+                type: array
-+                minItems: 0
-+                maxItems: 468
-+                items:
-+                    type: object
-+                    properties:
-+                        start_resource:
-+                            $ref: "#/definitions/u16"
-+                        num_resource:
-+                            $ref: "#/definitions/u16"
-+                        type:
-+                            $ref: "#/definitions/u16"
-+                        host_id:
-+                            $ref: "#/definitions/u8"
-+                        reserved:
-+                            $ref: "#/definitions/u8"
-diff --git a/arch/arm/mach-k3/include/mach/am62l_hardware.h b/arch/arm/mach-k3/include/mach/am62l_hardware.h
-new file mode 100644
-index 000000000000..7791511ff2a2
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/am62l_hardware.h
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * AM62Lx SoC definitions, structures etc.
-+ *
-+ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#ifndef __ASM_ARCH_AM62L_HARDWARE_H
-+#define __ASM_ARCH_AM62L_HARDWARE_H
-+
-+#include <config.h>
-+#ifndef __ASSEMBLY__
-+#include <linux/bitops.h>
-+#endif
-+
-+#define CTRL_MMR0_BASE				0x00100000
-+#define WKUP_CTRL_MMR0_BASE			0x43000000
-+#define WKUP_CTRL_MMR1_BASE			0x43010000
-+
-+#define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR1_BASE + 0x30)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK	GENMASK(9, 7)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT	7
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK	GENMASK(12, 10)
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT	10
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK	BIT(13)
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT	13
-+
-+/* Primary Bootmode MMC Config macros */
-+#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK	BIT(2)
-+#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT	2
-+#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK	BIT(0)
-+#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_SHIFT	0
-+
-+/* Primary Bootmode USB Config macros */
-+#define MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT	1
-+#define MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK	BIT(1)
-+
-+/* Backup Bootmode USB Config macros */
-+#define MAIN_DEVSTAT_BACKUP_USB_MODE_MASK	BIT(0)
-+
-+/* address boot rom leaves its boot structure */
-+#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM		0x70816e70
-+
-+static const u32 put_core_ids[] = {};
-+
-+#endif /* __ASM_ARCH_AM62L_HARDWARE_H */
-diff --git a/arch/arm/mach-k3/include/mach/am62l_spl.h b/arch/arm/mach-k3/include/mach/am62l_spl.h
-new file mode 100644
-index 000000000000..52d702d179c6
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/am62l_spl.h
-@@ -0,0 +1,41 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/dts/k3-am62l3-evm-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
 + */
 +
-+#ifndef _ASM_ARCH_AM62L_SPL_H_
-+#define _ASM_ARCH_AM62L_SPL_H_
++#include "k3-am62l3-evm-binman.dtsi"
 +
-+/* Primary BootMode devices */
-+#define BOOT_DEVICE_SPI_NAND		0x00
-+#define BOOT_DEVICE_RAM			0xFF
-+#define BOOT_DEVICE_OSPI		0x01
-+#define BOOT_DEVICE_QSPI		0x02
-+#define BOOT_DEVICE_SPI			0x03
-+#define BOOT_DEVICE_UART		0x07
-+#define BOOT_DEVICE_MMC			0x08
-+#define BOOT_DEVICE_EMMC		0x09
-+#define BOOT_DEVICE_USB			0x0A
-+#define BOOT_DEVICE_DFU			0x0A
-+#define BOOT_DEVICE_GPMC_NAND		0x0B
-+#define BOOT_DEVICE_XSPI_FAST		0x0D
-+#define BOOT_DEVICE_XSPI		0x0E
-+#define BOOT_DEVICE_NOBOOT		0x0F
-+
-+/* U-Boot used aliases */
-+#define BOOT_DEVICE_MMC2		BOOT_DEVICE_MMC
-+#define BOOT_DEVICE_MMC1		BOOT_DEVICE_EMMC
-+/* Invalid Choices for the AM62Lx */
-+#define BOOT_DEVICE_MMC2_2		0x1F
-+#define BOOT_DEVICE_ETHERNET		0x1F
-+
-+/* Backup BootMode devices */
-+#define BACKUP_BOOT_DEVICE_USB		0x01
-+#define BACKUP_BOOT_DEVICE_DFU		0x01
-+#define BACKUP_BOOT_DEVICE_UART		0x03
-+#define BACKUP_BOOT_DEVICE_MMC		0x05
-+#define BACKUP_BOOT_DEVICE_SPI		0x06
-+
-+#define K3_PRIMARY_BOOTMODE		0x0
-+
-+#endif /* _ASM_ARCH_AM62L_SPL_H_ */
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 6b86f6ed12e6..cbf43deaa3fc 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -16,6 +16,10 @@
- #include "am62a_hardware.h"
- #endif
++/ {
++	aliases {
++		mmc1 = &sdhci1;
++	};
++};
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 351ff3c19f1c..6e8ea2cdc7f2 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -129,6 +129,26 @@ config K3_EARLY_CONS_IDX
+ 	  Use this option to set the index of the serial device to be used
+ 	  for the early console during SPL execution.
  
-+#ifdef CONFIG_SOC_K3_AM62L3
-+#include "am62l_hardware.h"
-+#endif
++config K3_TIFS_LOAD_ADDR
++	hex "Load address of TI's Foundational Security (TIFS) firmware"
++	default 0x40000
++	help
++	  The load address for TI's Foundation Security firmware. This value is
++	  used to build the x509 certificate to tell boot ROM where to place the
++	  TIFS firmware in memory.
 +
- #ifdef CONFIG_SOC_K3_AM62P5
- #include "am62p_hardware.h"
- #endif
-diff --git a/arch/arm/mach-k3/include/mach/spl.h b/arch/arm/mach-k3/include/mach/spl.h
-index a47441ae6a59..ff0b5d41b9f1 100644
---- a/arch/arm/mach-k3/include/mach/spl.h
-+++ b/arch/arm/mach-k3/include/mach/spl.h
-@@ -46,4 +46,8 @@
- #include "j722s_spl.h"
- #endif
++	  Unless you know what you're doing. Do not change this value.
++
++config K3_TIFS_DATA_LOAD_ADDR
++	hex "Load address of TIFS configuration data"
++	default 0x6c000
++	help
++	  The load address for TI's Foundation Security configuration data. This
++	  value is used to build the x509 certificate to tell ROM where to place
++	  the TIFS firmware.
++
++	  Unless you know what you're doing. Do not change this value.
++
+ config K3_ATF_LOAD_ADDR
+ 	hex "Load address of ATF image"
+ 	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S || SOC_K3_AM62L3)
+@@ -148,6 +168,7 @@ config K3_ATF_RESERVED_SIZE
  
-+#ifdef CONFIG_SOC_K3_AM62L3
-+#include "am62l_spl.h"
-+#endif
-+
- #endif /* _ASM_ARCH_SPL_H_ */
-diff --git a/include/configs/am62l3_evm.h b/include/configs/am62l3_evm.h
-new file mode 100644
-index 000000000000..181d450daf10
---- /dev/null
-+++ b/include/configs/am62l3_evm.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Configuration header file for K3 AM62L SoC family
-+ *
-+ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+ *
-+ */
-+
-+#ifndef __CONFIG_AM62L3_EVM_H
-+#define __CONFIG_AM62L3_EVM_H
-+
-+#include <configs/ti_armv7_common.h>
-+
-+#endif /* __CONFIG_AM62L3_EVM_H */
+ config K3_OPTEE_LOAD_ADDR
+ 	hex "Load address of OPTEE image"
++	default 0x80200000 if SOC_K3_AM62L3
+ 	default 0x9e800000
+ 	help
+ 	  The load address for the OPTEE image. This value defaults to 0x9e800000
 
 -- 
 2.54.0
