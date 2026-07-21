@@ -1,91 +1,152 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13ED6C4451C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 15:55:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 775D2C4451C
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 16:01:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C7A336088C;
-	Tue, 21 Jul 2026 15:55:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jz-mB4SNX2tk; Tue, 21 Jul 2026 15:55:50 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8CA746086B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784649350;
-	bh=RduhReR6wnWMfPesYQ6R516Q/n5Tx2qXA0muaA1jMMA=;
-	h=Date:To:CC:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=cW9vRMxVi0dTMIlHvBMhU76fTaKHF0EyJEovOVgzN27KjPDHa5j2nDzoWxa5XUej1
-	 QAFIUgSjX3HmAuBhqn8rPlr85kIvEls9MhcpBPt7KG5sjP2oFbqwwNFsHB5lExlnvA
-	 zTxJ99rcSdAnSogBlVBBdoaBAjDmSvbi7teIgdtAbsE0awVZzDCHFHIF2/N09XSxKx
-	 n5iy5C09gxuCLooCay1biFUAT0mfGlWnM+Cl0YW1SHwsvejN/h8SSorted/3okKHNC
-	 756vg/yAZHjW7mNOGP7UOost7/ks8epie7rDseoysmPIxv4i4teoTmKvFNNHQwV5pS
-	 DMZT2zOtCFP4Q==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8CA746086B;
-	Tue, 21 Jul 2026 15:55:50 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id B0B67109F
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:26:05 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A228F80D09
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:26:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1A69080DC9;
+	Tue, 21 Jul 2026 16:01:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wduwOroKXzpZ for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 15:26:01 +0000 (UTC)
-X-Greylist: delayed 2078 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 21 Jul 2026 15:25:58 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org A804F80B49
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A804F80B49
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=220.128.198.184;
- helo=atcsqr.andestech.com; envelope-from=tim609@andestech.com;
- receiver=<UNKNOWN> 
-Received: from Atcsqr.andestech.com (atcsqr.andestech.com [220.128.198.184])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A804F80B49
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:25:57 +0000 (UTC)
-Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
- by Atcsqr.andestech.com with ESMTP id 66LEpXW7024915
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 22:51:33 +0800 (+08)
- (envelope-from tim609@andestech.com)
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 66LEoiKN024551
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 21 Jul 2026 22:50:44 +0800 (+08)
- (envelope-from tim609@andestech.com)
-Received: from swlinux01 (10.0.15.55) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 21 Jul
- 2026 22:50:44 +0800
-Date: Tue, 21 Jul 2026 22:50:37 +0800
-To: <trini@konsulko.com>
-CC: <u-boot@lists.u-boot-project.org>, <guodong@riscstar.com>,
- <raymond.mao@riscstar.com>, <tanmay.kathpalia@altera.com>,
- <junhui.liu@pigmoral.tech>, <peng.fan@nxp.com>, <leo.liang@sifive.com>,
- <sszhang@vsit.ai>, <oyst.lnx@gmail.com>
-Subject: [GIT PULL] Please pull riscv-for-v2026.10-rc1
-Message-ID: <jf3kajqvl7zz3xgrhxsmwlki6el6udc3r5drlzuylfrxj4g4u3@uhy5mr6b2cd7>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.0.15.55]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 66LEpXW7024915
-X-Mailman-Approved-At: Tue, 21 Jul 2026 15:55:46 +0000
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=andestech.com
+ id f7R_ZmogMHIg; Tue, 21 Jul 2026 16:01:04 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 02A3680DA6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784649664;
+	bh=1pc0vEWWKwdQhCleOop9pFo9bxiMnjnnMIBhSC5zNkk=;
+	h=Date:Subject:Cc:To:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=hQQfT2E/2EgoorCBhcTplzZMkwIyTrnme0h9P4ksCi4QytkAEcYV63h37C1tZG0EK
+	 Z9Ieo9pNIoakW/St0WU1AkFo0B4EH0YidYqKOi8Q+9P4cMGOtsHoEEle8EfzuLuqQ1
+	 YeC87TQbN6zcZ29CeOZnW/bkBY0S4IkR8ANMPL4PYd2H6m585Iq4/L5D5/AEIpHFn+
+	 ZRYZjEe/5GOa0YzeibIYjCoKeIE3K/+KJ3G3v82xCLmxFYDKimK+7zbACmZXB13/G/
+	 O3eD0Kya1J6GBAjS/9K43K5q5n2L/8jxpOf53LJbtwnVjkooHz3n+5T0VYNw/xt5a9
+	 Y9+fMX7nDsbEw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 02A3680DA6;
+	Tue, 21 Jul 2026 16:01:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 45093DF0
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:01:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2AF5440167
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:01:03 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oXmH-hh9cKyM for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 16:01:02 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2B82A40071
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2B82A40071
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2B82A40071
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 16:01:00 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BE28A846A4; Tue, 21 Jul 2026 18:00:58 +0200 (CEST)
+Received: from mail-wr2-x01.google.com (mail-wr2-x01.google.com
+ [IPv6:2a00:1450:4864:30::1])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 264A8803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 18:00:56 +0200 (CEST)
+Received: by mail-wr2-x01.google.com with SMTP id
+ ffacd0b85a97d-46cbf263216so4133127f8f.1
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 09:00:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784649655; x=1785254455;
+ h=in-reply-to:references:content-transfer-encoding:mime-version:from
+ :to:cc:subject:message-id:date:content-type:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=1pc0vEWWKwdQhCleOop9pFo9bxiMnjnnMIBhSC5zNkk=;
+ b=U+Nx27qCUqUAr/YIOTdy1RA9GAcuFt6RoCJkiB8id0yWjYWwyhQj8cNbsgSKMxz4ex
+ 54ejzevtkRRNpU53/fw+ZujkD2ry9965F6ymTWRiMNNsGoHpuZwQtZO/xTqQMGsFnmnT
+ HxM6tfwqXCyeQ/Kat+iv8LR3bfs5VkYUAhhQeCiDLHun6+swL5kP5sdyaHLZBTDOgSpu
+ Da+s0i7AVsTC2YEwkaACHTDI/jZwt1eCzC1noiqy9OY8jeCvrOOw7ktD+9sMwrEH/WXu
+ E8x+wDzZjrRV64QHITWTP8PMrLjvte1r7EddB6VOLbrem5knuDSfvBBJsZh/rnEZwKCO
+ rfZQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rrxg0QTSoUJyMwsAqzQ05gJe4EqVIrT5Gu94MGF65xARG8ucIJSHjQGzoPo/sw60EX00GEYNgs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6ufiqn2JuzmNp5YjdDnTXkBJ8uDj8LaJNo1B1WhB58qnus9KE
+ XfEn4twgrnQ4lVUcKdML2HRNQU6P+EjXMIHfHbXGQoZYu9YP9nY/6SFLLMJUf2xGoSs=
+X-Gm-Gg: AR+sD13mvGv5YLka0JkKJWsxY+xorBBRjODa+bEzjCjfK5vrVuUsUhOgnlyr5dDKJI4
+ p4bCluFyyIiGOe3pAy9L2RGiAePOd6+wxnt2qElB4BG1hfYy7yDI+BzZNbxoRmc7+DlXXFp0LSy
+ vAIuDbr6s/cc0wTmJQbDIW1pJM2PplHCYY2sY+/W6rUzy96USuiWyXphhMQtBmhFxNrzVLkXeOE
+ ArXG9Pj4oHWEk2oiFiCcMaTr2KooV4pSmEMXMuFE0UybNRaYpY5hQIcPrT5y5zLzSCCPza8pjBB
+ rE4u0tm2y5p4TomHNTgPBNulGOp/7GnphnwiqDtFB6U/xuFydYLzvcYuexj5UwNP0HhzNW0ZzpD
+ jK1ENt9cNfWM9eO8W3VUMRp/x9Z6gKVQYnT/A4p6PYjR2wXgb3sdiIo8ZK3aezXibLFR3yDTPRI
+ tyVP8G9rA/LlvzWtdF3qzO7cdiYAQop86OCDsdg1I/8AlMEFlHUWHkjta4z2JOFHKzs/Q=
+X-Received: by 2002:adf:fa05:0:b0:47e:9f03:e542 with SMTP id
+ ffacd0b85a97d-47f62338c89mr18797760f8f.45.1784649655322; 
+ Tue, 21 Jul 2026 09:00:55 -0700 (PDT)
+Received: from localhost (host-87-0-90-136.retail.telecomitalia.it.
+ [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f63e496afsm41972813f8f.1.2026.07.21.09.00.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jul 2026 09:00:54 -0700 (PDT)
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 21 Jul 2026 18:00:54 +0200
+Message-Id: <DK4DI4TBW04W.2DN95RZF2H4XO@baylibre.com>
+Subject: Re: [PATCH 4/4] doc: board: mediatek: document Genio 700 SPL boot
+Cc: "Ryder Lee" <ryder.lee@mediatek.com>, "Weijie Gao"
+ <weijie.gao@mediatek.com>, "Chunfeng Yun" <chunfeng.yun@mediatek.com>,
+ "Igor Belwon" <igor.belwon@mentallysanemainliners.org>, "Julien Stephan"
+ <jstephan@baylibre.com>, "Macpaul Lin" <Macpaul.Lin@mediatek.com>, "Tom
+ Rini" <trini@konsulko.com>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Julien Masson" <jmasson@baylibre.com>,
+ "Johan Jonker" <jbx6244@gmail.com>, "Quentin Schulz" <u-boot@0leil.net>,
+ "Marek Vasut" <marek.vasut+renesas@mailbox.org>, "Vitor Sato Eschholz"
+ <vsatoes@baylibre.com>
+To: "David Lechner" <dlechner@baylibre.com>, "Carlo Caione"
+ <ccaione@baylibre.com>, "GSS_MTK_Uboot_upstream"
+ <GSS_MTK_Uboot_upstream@mediatek.com>, <u-boot@lists.denx.de>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: aerc 0.21.0
+References: <20260718-ccaione-upstream-mt8390-spl-v1-0-1256b6dfda3f@baylibre.com>
+ <20260718-ccaione-upstream-mt8390-spl-v1-4-1256b6dfda3f@baylibre.com>
+ <7ec5f838-e62c-4a35-afaa-8320901cd8d3@baylibre.com>
+ <DK47KU0R1WUG.1SFYMAO1PAA7B@baylibre.com>
+ <2ca02789-5806-4672-99fd-30ea217fe5f5@baylibre.com>
+In-Reply-To: <2ca02789-5806-4672-99fd-30ea217fe5f5@baylibre.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1784649655; x=1785254455; darn=lists.denx.de;
+ h=in-reply-to:references:content-transfer-encoding:mime-version:from
+ :to:cc:subject:message-id:date:content-type:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=1pc0vEWWKwdQhCleOop9pFo9bxiMnjnnMIBhSC5zNkk=;
+ b=N9J+Y+c3q9T0MtGR9z3BWNUcPB6EQ0/MT/VGZwvOdnxvPc6x36GD5dj9OOgf6t0CXb
+ ihm8EZudgtXJlJUt5Fn6pGyq+38mYgOCdwnf4A55svrPuuy2+TdSk/0/q/QA+rJvKpDU
+ JNIPr8BWnws4GBzQf4I6KkWo491zlaRoHNg16+UyqmWCMvjAD86vkLqFmlFR4u4Q/3vb
+ cMTi3VKyKQXgH2QW0N7/8OWIC4D+qKnNr0QMZSN8xuZFmHIuBsyVwArUqrI/3Q6+DGUS
+ FwmY2+ffUmyVfOONutrKvwHC1qy7roIGEI4HVvws8c1wXOuUiNVNDIRdpAf2n2fBlJPk
+ Y2bw==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=N9J+Y+c3
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=ccaione@baylibre.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ secure) header.d=baylibre.com header.i=@baylibre.com header.b="N9J+Y+c3"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -97,183 +158,57 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Tim Ouyang via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Tim Ouyang <tim609@andestech.com>
+From: Carlo Caione via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Carlo Caione <ccaione@baylibre.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Tom,
+On Tue Jul 21, 2026 at 4:50 PM CEST, David Lechner wrote:
 
-This is my first RISC‑V PR. It adds support for the SpacemiT K1 and
-updates the MAINTAINERS.
+>>>> +Using Genio Tools
+>>>> +~~~~~~~~~~~~~~~~~
+>>>
+>>> Probably deserves an external link on where to get genio-tools and pre-=
+build
+>>> images.
+>>=20
+>> I'll add a link for the genio-tools. About the pre-build images there is
+>> no place the user can download them from (for now), they are currently
+>> compiled as part of the yocto image / distro.
+>>=20
+> I was thinking of https://genio.mediatek.com/doc/iot-yocto/latest/sw/yoct=
+o/download.html
 
-CI result:
-https://git.u-boot-project.org/u-boot/custodians/u-boot-riscv/-/pipelines/676
+Ok, I'm just realizing that I was probably not clear enough on this
+point.
 
-Thanks,
-Tim Ouyang
+That prebuilt image you can download at that link, is indeed usable as
+the image directory passed to genio-flash: it provides the partition
+metadata and the lk.bin download bootstrap. We have tested that
+arrangement, overriding the primary boot artifacts with the newly built
+mtk-boot.bin and bootloaders.img (output from this patchset) and it
+works correctly.
 
-The following changes since commit 042e45e026c77227319a426940577856ffe62e7b:
+It cannot, however, provide the external DDR-loader input required to
+build these new images. The currently published image contains bl2.img,
+which is the legacy monolithic TF-A BL2. After initializing DDR it loads
+and parses fip.bin; it does not copy an appended U-Boot SPL from the
+fixed offset and enter it at CONFIG_SPL_TEXT_BASE. It therefore cannot
+be used as ddr-loader.bin.
 
-  global: Switch from source.denx.de to git.u-boot-project.org (2026-07-20 11:13:21 -0600)
+The Yocto integration I mentioned generates the compatible DDR loader
+and the remaining inputs for the new boot chain (and inputs to the
+binman processing in U-Boot), but that work is not merged or published
+yet (but it will be, hopefully soon :)
 
-are available in the Git repository at:
+So bottom line is that if you want to use this new SPL, you also need
+some kind of special DDR loader firmware that is generated by a not-yet
+but soon-to-be available yocto release.
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-riscv.git tags/riscv-for-v2026.10-rc1
+I'll try to clarify better this point in V2 (and I hope this is more
+clear now).
 
-for you to fetch changes up to 0926356edd68e180bbb214f0bb277037d9415129:
+Cheers,
 
-  MAINTAINERS: update RISC-V maintainers (2026-07-21 17:47:52 +0800)
-
-----------------------------------------------------------------
-Guodong Xu (12):
-      reset: spacemit: k1: introduce syscon-bound reset driver
-      clk: spacemit: k1: spawn reset device from per-syscon clock drivers
-      configs: bananapi-f3: enable Spacemit K1 clock driver
-      dts: k1: switch BPI-F3 build to upstream DT
-      dts: k1: drop legacy local DT files
-      reset: spacemit: k1: drop legacy spacemit,k1-reset driver
-      dt-bindings: reset: drop spacemit-k1-reset.h
-      clk: spacemit: k1: prune SPL clock tree
-      doc: spacemit: add K1 SPL build and test guide
-      spl: k1: enable SPI NOR flash detection and boot
-      spacemit: k1: Add multiple device tree support
-      configs: k1: enable pinctrl and gpio
-
-Junhui Liu (1):
-      clk: spacemit: Add support for K1 SoC
-
-Raymond Mao (18):
-      spacemit: k1: support multi-board infrastructure
-      spacemit: k1: enable SPL with debug UART
-      configs: k1: enable early timer support
-      configs: k1: add default option for clock driver in SPL
-      dts: k1: enable clocks in SPL
-      board: k1: initialize clock and serial devices in SPL
-      i2c: k1: add I2C driver support
-      spacemit: k1: add TLV EEPROM support in SPL
-      spacemit: k1: Add DDR firmware support to SPL
-      power: pmic: add support for Spacemit P1 PMIC
-      power: regulator: add support for Spacemit P1 SoC
-      board: k1: enable pmic in spl
-      mtd: spi: select SPL_SPI_FLASH_TINY in SPL stage
-      mtd: spi: enable spi_nor_remove() in soft reset config
-      spi: fsl: add support for Spacemit K1 SoC
-      riscv: binman: Always set default configuration in FIT image
-      pinctrl: add pinctrl driver for Spacemit K1 SoC
-      gpio: add gpio driver for Spacemit K1 SoC
-
-Tim Ouyang (1):
-      MAINTAINERS: update RISC-V maintainers
-
- MAINTAINERS                                     |    4 +-
- arch/riscv/Kconfig                              |    8 +-
- arch/riscv/cpu/k1/Kconfig                       |    6 +
- arch/riscv/dts/Makefile                         |    1 -
- arch/riscv/dts/binman.dtsi                      |    2 -
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi       |  113 +++++++++++
- arch/riscv/dts/k1-bananapi-f3.dts               |   28 ---
- arch/riscv/dts/k1-musepi-pro-u-boot.dtsi        |  273 ++++++++++++++++++++++++++
- arch/riscv/dts/k1-pinctrl.dtsi                  |   19 --
- arch/riscv/dts/k1.dtsi                          |  480 ----------------------------------------------
- board/spacemit/bananapi-f3/MAINTAINERS          |    6 -
- board/spacemit/bananapi-f3/Makefile             |    5 -
- board/spacemit/{bananapi-f3 => k1}/Kconfig      |    6 +-
- board/spacemit/k1/MAINTAINERS                   |   14 ++
- board/spacemit/k1/Makefile                      |   28 +++
- board/spacemit/{bananapi-f3 => k1}/board.c      |    0
- board/spacemit/k1/spl.c                         |  391 ++++++++++++++++++++++++++++++++++++++
- board/spacemit/k1/tlv_codes.h                   |   22 +++
- configs/bananapi-f3_defconfig                   |   24 ---
- configs/spacemit_k1_defconfig                   |   95 ++++++++++
- doc/board/spacemit/bananapi-f3.rst              |    2 +-
- doc/board/spacemit/index.rst                    |    1 +
- doc/board/spacemit/k1-spl.rst                   |  243 ++++++++++++++++++++++++
- drivers/clk/Kconfig                             |    5 +-
- drivers/clk/Makefile                            |    1 +
- drivers/clk/spacemit/Kconfig                    |   23 +++
- drivers/clk/spacemit/Makefile                   |    7 +
- drivers/clk/spacemit/clk-k1.c                   | 1878 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/clk/spacemit/clk_common.h               |   79 ++++++++
- drivers/clk/spacemit/clk_ddn.c                  |   93 +++++++++
- drivers/clk/spacemit/clk_ddn.h                  |   53 ++++++
- drivers/clk/spacemit/clk_mix.c                  |  403 +++++++++++++++++++++++++++++++++++++++
- drivers/clk/spacemit/clk_mix.h                  |  224 ++++++++++++++++++++++
- drivers/clk/spacemit/clk_pll.c                  |  157 +++++++++++++++
- drivers/clk/spacemit/clk_pll.h                  |   81 ++++++++
- drivers/gpio/Kconfig                            |    8 +
- drivers/gpio/Makefile                           |    1 +
- drivers/gpio/spacemit_gpio.c                    |  253 ++++++++++++++++++++++++
- drivers/i2c/Kconfig                             |    7 +
- drivers/i2c/Makefile                            |    1 +
- drivers/i2c/k1_i2c.c                            |  523 ++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/i2c/k1_i2c.h                            |   69 +++++++
- drivers/mtd/spi/Makefile                        |    5 +-
- drivers/mtd/spi/sf_probe.c                      |    8 +-
- drivers/pinctrl/Kconfig                         |    1 +
- drivers/pinctrl/Makefile                        |    1 +
- drivers/pinctrl/spacemit/Kconfig                |    9 +
- drivers/pinctrl/spacemit/Makefile               |    2 +
- drivers/pinctrl/spacemit/pinctrl-k1.c           |  550 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/power/pmic/Kconfig                      |    8 +
- drivers/power/pmic/Makefile                     |    1 +
- drivers/power/pmic/pmic_spacemit_p1.c           |   94 +++++++++
- drivers/power/regulator/Kconfig                 |    7 +
- drivers/power/regulator/Makefile                |    1 +
- drivers/power/regulator/spacemit_p1_regulator.c |  464 ++++++++++++++++++++++++++++++++++++++++++++
- drivers/reset/Kconfig                           |    7 -
- drivers/reset/Makefile                          |    2 +-
- drivers/reset/reset-spacemit-k1.c               |  548 ----------------------------------------------------
- drivers/reset/spacemit/Makefile                 |    5 +
- drivers/reset/spacemit/reset-spacemit-k1.c      |  289 ++++++++++++++++++++++++++++
- drivers/spi/fsl_qspi.c                          |    9 +
- include/configs/bananapi-f3.h                   |   13 --
- include/configs/k1.h                            |   20 ++
- include/dt-bindings/reset/spacemit-k1-reset.h   |  118 ------------
- include/power/spacemit_p1.h                     |  163 ++++++++++++++++
- include/soc/spacemit/k1-reset.h                 |   23 +++
- include/soc/spacemit/k1-syscon.h                |  149 +++++++++++++++
- 67 files changed, 6864 insertions(+), 1270 deletions(-)
- create mode 100644 arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/k1-bananapi-f3.dts
- create mode 100644 arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/k1-pinctrl.dtsi
- delete mode 100644 arch/riscv/dts/k1.dtsi
- delete mode 100644 board/spacemit/bananapi-f3/MAINTAINERS
- delete mode 100644 board/spacemit/bananapi-f3/Makefile
- rename board/spacemit/{bananapi-f3 => k1}/Kconfig (79%)
- create mode 100644 board/spacemit/k1/MAINTAINERS
- create mode 100644 board/spacemit/k1/Makefile
- rename board/spacemit/{bananapi-f3 => k1}/board.c (100%)
- create mode 100644 board/spacemit/k1/spl.c
- create mode 100644 board/spacemit/k1/tlv_codes.h
- delete mode 100644 configs/bananapi-f3_defconfig
- create mode 100644 configs/spacemit_k1_defconfig
- create mode 100644 doc/board/spacemit/k1-spl.rst
- create mode 100644 drivers/clk/spacemit/Kconfig
- create mode 100644 drivers/clk/spacemit/Makefile
- create mode 100644 drivers/clk/spacemit/clk-k1.c
- create mode 100644 drivers/clk/spacemit/clk_common.h
- create mode 100644 drivers/clk/spacemit/clk_ddn.c
- create mode 100644 drivers/clk/spacemit/clk_ddn.h
- create mode 100644 drivers/clk/spacemit/clk_mix.c
- create mode 100644 drivers/clk/spacemit/clk_mix.h
- create mode 100644 drivers/clk/spacemit/clk_pll.c
- create mode 100644 drivers/clk/spacemit/clk_pll.h
- create mode 100644 drivers/gpio/spacemit_gpio.c
- create mode 100644 drivers/i2c/k1_i2c.c
- create mode 100644 drivers/i2c/k1_i2c.h
- create mode 100644 drivers/pinctrl/spacemit/Kconfig
- create mode 100644 drivers/pinctrl/spacemit/Makefile
- create mode 100644 drivers/pinctrl/spacemit/pinctrl-k1.c
- create mode 100644 drivers/power/pmic/pmic_spacemit_p1.c
- create mode 100644 drivers/power/regulator/spacemit_p1_regulator.c
- delete mode 100644 drivers/reset/reset-spacemit-k1.c
- create mode 100644 drivers/reset/spacemit/Makefile
- create mode 100644 drivers/reset/spacemit/reset-spacemit-k1.c
- delete mode 100644 include/configs/bananapi-f3.h
- create mode 100644 include/configs/k1.h
- delete mode 100644 include/dt-bindings/reset/spacemit-k1-reset.h
- create mode 100644 include/power/spacemit_p1.h
- create mode 100644 include/soc/spacemit/k1-reset.h
- create mode 100644 include/soc/spacemit/k1-syscon.h
+--
+Carlo Caione
