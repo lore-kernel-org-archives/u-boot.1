@@ -1,160 +1,137 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28B2C44532
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 15:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA92C4451C
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 15:55:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6E9F980CCD;
-	Tue, 21 Jul 2026 15:32:44 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ShDnV-yAeEya; Tue, 21 Jul 2026 15:32:43 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 69B3080D36
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784647963;
-	bh=dnz42tK7WH4EO2IaJRsx0pqe46gbjvOwKNFbVo5K+zY=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=nmuORsVVAWD3xPQpJEfLULC/+ZWWUvgCoBuNYInVcQ/Mur6KaBVjQPmi1ZMqT12Oz
-	 bqhieB2Bj0jOvqFZUbCN7BK/SA68fgRPJKg9HEVjN9DgzImwzHkylBm5X9j09U7Het
-	 5XVQbLVNeziTC6rpxaXrw8ACnWNMhfsJc07tBq9hRHBz2zPyfXdxN7OLAsKfMFv/qu
-	 KtS1ollhBDcupbmEGrZEd1I4oWVc13ZGNv9P4TWy9Vi/tiYMO9VQFc/+B0sFjtG+LV
-	 NJHs1naRtQOkoUaehPVXQO3xfgWXpU4XmNJM0ZC/FMiZLi3ecNX+db9tk146Jq6MDw
-	 OB9jK/iD6fqFA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 69B3080D36;
-	Tue, 21 Jul 2026 15:32:43 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id A9B0A313
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:32:41 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 89CD260843
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:32:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 944BF60863;
+	Tue, 21 Jul 2026 15:55:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QjwgFewd7WlP for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 15:32:40 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 5B7916062C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5B7916062C
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5B7916062C
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:32:40 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C0176846A4; Tue, 21 Jul 2026 17:32:38 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id TYEoS17xslct; Tue, 21 Jul 2026 15:55:39 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 042876084A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784649339;
+	bh=wYUaTPFopoy5UgVVNeSVJsW+15Bnnd0VrZt+Lj0AG7M=;
+	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=y1c1p3/u+YbFLTBtmaZ2h8Niz+V65m6eR4h934+8JiNQfH322FVU3UW40L6gCxOFk
+	 qmMjcqgsL+A7BOc4b0nKfLOC9EDrjudbZw2oVqeZH4QuqKXIpX0U+woF5Q/XqgXJB/
+	 haRjgyhEttWqN6KEU9R7ik0NQ4s7M44Nl1seESJortCLXdLiRxHwWBbKkVwjDnYEAZ
+	 Ci1ka5fA6xQ8ZHGWHxiySO02xWrY8/x4+kUSJIrnMHjMyuT4F8fQgdY5dBUVimZ8aV
+	 D32AJTDyo1uFnGDZmx3grpeK6nroPAj4xOPf+9QMDlMsbvd7YQaHo1kXN1wz8sSSyr
+	 mI7lInafbT2+Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 042876084A;
+	Tue, 21 Jul 2026 15:55:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 569DE109F
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:21:44 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4864F80DFB
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:21:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hD323RAf1v6D for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 15:21:43 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E330180D91
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E330180D91
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E330180D91
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:21:42 +0000 (UTC)
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 819E8803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 17:32:36 +0200 (CEST)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-69e2266b07fso9450959a12.2
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 08:32:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784647956; cv=none;
- d=google.com; s=arc-20260327;
- b=rlo3078vi9lNT/hCyl/goFzVqFM7G/gE93kqFUYTtkEAEqB4igkDrE9OdHvXlgWBRT
- KsKlAWgN+Npdt43DQBO7Ao3/fcj/srikE96aOWyOPT3YmpL7eJl7cxp4DEwyQQqk7XPp
- XcGgwj2kfAZxQBeh0vlR+CGSCVyE7iFh4WayYzWjWjGA9ks/9qyn1BVlvfFuhSUxwv32
- xBoKzMdIuxr8qDtqnuvFw3voNUzLxP/HF+4NealGmQsLOOgln1F1iaaqkffaPMx2KZX4
- Zrtxu+xaKqS6WfK46cunXCf0PbPLkDJFZLprLL43yDhhBtX6XV/a0XF+jKmP3Ic+/GDk
- Kq0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=dnz42tK7WH4EO2IaJRsx0pqe46gbjvOwKNFbVo5K+zY=;
- fh=KKqG79PHnrSYl5nHTWBC74wbbL97VYb/Q8O5t+e6clk=;
- b=gcFuoVJ2HZoTbSUfMf/sR4XxLo87jCgrUKrWsN24RuaaRfk48cXsWtPIXs2avgsemF
- xYFc4OebyvFrDjMglW8wdFxpfIusScnKiQJMr1i4ZV73WtOS59OEo3XGT/E9dROffX2f
- PB+BXafAYrpqldY9BVCD8OzCLBEsqWHjf7JP8r0ZEFV3pxy6c7CesPHNXMe51wDjVXqD
- 6Mgp7hNFu+Ej9NjgFKLbWjlV4dNDGMqO3Fk8lLtln2/sNN5eevzgz54KisWECPsoVomf
- fwojC8XGICW3qDLhGgWhGigpfqAlkHR0KR2c+b3pheBUZrtHHxS3mH8P2YnSgO1+1bb4
- jaxw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 449983F982
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 15:21:41 +0000 (UTC)
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2cea6a46766so176721945ad.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:21:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784647956; x=1785252756;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=dnz42tK7WH4EO2IaJRsx0pqe46gbjvOwKNFbVo5K+zY=;
- b=IvsYMLnVgfHupU2U1ky2BnnfVnEZsW7GSy80pI/n9O7fuHhpEyKYc0wIMBPXoC7/CD
- 2T33p6aPwkIGIrlUPsioZEg3vYIXjn5kIEdIJ8viGdmDW2VSpemtHFmRz/k3ccustzVb
- lNEbB7fmmUc6WFty/e2wPl5aJyaWPfqymd4oRk47i2Ne4nSi+ICHzcTeVi0AAkyv93Ev
- XSgRnYgawKwtoeSywNjhVXpEKPBlWEiY30R/PV3N507loFndvqJc6dUKD98LQf39sw/Q
- 5dD5iWtLnSJGDSGOHxbrVASXHL1ySzejZt8BlMZvUfZL5KAc+lOMQQNK3acYzPiav0HP
- aIhA==
+ d=1e100.net; s=20251104; t=1784647300; x=1785252100;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=wYUaTPFopoy5UgVVNeSVJsW+15Bnnd0VrZt+Lj0AG7M=;
+ b=Pzb50wl/f+ox8qjXVO5LNxD+2JlIIyrOU9z8N5NhgI+ISP3VLWoaVB1ljJF9vo/+aG
+ HPTBiLkg5rnGMan5q/xG4x9yYOkO52dXNpJffNDwjDlo4lrWa3QStiDJr6zUiVE7m3yu
+ n6S3jlb5FuBZ5AFAJbFUWR14IlRhfQmcFT0xUr67jB8xj986HSw0AsFS2f9a69PL06A3
+ xR6GGIbVy189+E8kRh6KxnZTgwB84GR72GIar/YXXhC1XdQIntmig2X3wDFyOWpE9LZD
+ pE1mCB8SYCDdbAUBYFKXQME66VlaIN1O0nM3vO6ztq2eTEMG3QAxhcqSV6igeYs8gKfX
+ renA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqVmdrMRLLMtJlnuMOgEoyd6RJsLgGtG0iI6RiDTHpsH0S/B6kKggKuRW6FvnCbXlkk+7F5i8A=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKe7XX30JwiDlC3ibW7maAuhLliJRFiozTkhrRdtLNGPKfaE32
- w4Kt2tBCqW2cuiJfGo1fE/rmH1OoSpT1MgfJAdUHiZ3xifDzyGLKHXfX7NAYN+4AwpBb31Gu0KB
- KnrO8QfKY/ik7s9fJ8ZBbD/YKWtHbKiND3oy39f8RUA==
-X-Gm-Gg: AR+sD10nXbHntuoqAua21jZOE4VMacN6d9vdgKwvlwEV9mSHGJ4XJ2WvFfY+gd7CZEE
- Rwn4fp34bgwJdvo8Sy7moHJSd6uXTkI5805EnWpnzhbZ269k4P+k8+7sIZFJQMDEYt8n7doAnJG
- RBkOt1DAnvIPQ7yiRUUeWsfoYsSStOehDMSRDUInZffqftxLpsxS34NPJH748N9oQufPZE5/UQU
- HiWY2+f/mSt6id2THfTw4tkpFrUzoz1QC9mu0Y/iq/zNmt/2pbdvS55o+D3mAUS5DoTRSmqm24/
- U8xKQf0iOPwSxB8Lvg==
-X-Received: by 2002:a17:906:fd82:b0:c15:f4bb:e663 with SMTP id
- a640c23a62f3a-c16b469ac2cmr838828066b.10.1784647955764; Tue, 21 Jul 2026
- 08:32:35 -0700 (PDT)
+ AHgh+RrOk5BNiC0IE9n2Vcc6fH/KUbZ+igJtw6Ucmh3oM6P5M96j69SUI9l3p1iUXo5YpVDu1LPUMso=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yw1OFUAJbPaXX2iwKYbLJSKrvUuZly4dZWR2uda7xOaykzmqCtU
+ Xh7v77WasHcNk7BNFsWQWRcjxmWPHXkfxNV6schbc9UBBhFNNK4xuP99vyMFI2JTgAFnNX2ev2J
+ rY+PZ2vjs0jH7TX9cdOWwchdxIiKUawvTtiJ6oPFe4m39uIivN3QC/Y7gKPycvHpirRQCHLbgTA
+ WsBBgopzPTfyMngUMO6g==
+X-Gm-Gg: AR+sD10xbLUmfYuaWtrNu3Djqv2psQFeisBxh/bdV36U2R+IoNxykVPxcWDjmKpVc+s
+ fexBnl/MS/pah9YGkTZXfSqj4IX2kxSXrVyS5VRI3y8WtsOpMxghUGOm4URYoKKVPLHNdYTU7K5
+ GZYbYkoQ6Ku4YN1AXofoyOKhvtnh45mDvSefpvi9N+peQkeT4dY2TxSbbmSNcAogH/L14/4v7Dk
+ l/ca7Addlj9XOwspadfvfK0T374hYxKI8jHHBPIQbsneaYIcNCMCgZ1BLfj93nNMAXrAzEsNGvF
+ ax2w3ter4Z6DbZGYYmG/fP9ky3E16mV+pXx/RK1ZIk8V0jnSE0AEVigsshgymuR13uttBongm9v
+ 1ksybSpJWLLjN/ktxnp6alo7INMgXYfEixichB2Xufer6a8XceElon0Alo0zTAC9k8nA=
+X-Received: by 2002:a17:903:18d:b0:2ca:619f:9733 with SMTP id
+ d9443c01a7336-2cf348f9f5amr213112665ad.17.1784647299529; 
+ Tue, 21 Jul 2026 08:21:39 -0700 (PDT)
+X-Received: by 2002:a17:903:18d:b0:2ca:619f:9733 with SMTP id
+ d9443c01a7336-2cf348f9f5amr213112305ad.17.1784647298982; 
+ Tue, 21 Jul 2026 08:21:38 -0700 (PDT)
+Received: from noble-uboot.tail872496.ts.net
+ (211-75-139-218.hinet-ip.hinet.net. [211.75.139.218])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2cf347119dfsm77733775ad.56.2026.07.21.08.21.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jul 2026 08:21:38 -0700 (PDT)
+To: u-boot@lists.denx.de
+Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v3 6/7] test: fit: cover mkimage load address overlap detection
+Date: Tue, 21 Jul 2026 15:21:05 +0000
+Message-ID: <20260721152110.283998-7-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260721152110.283998-1-aristo.chen@canonical.com>
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20260721152110.283998-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
-References: <20260427-rk3576-usb-gadget-v1-1-982fd1de08db@flipper.net>
- <13650571778172129@c82c52a0-4efd-47b9-b2a9-5a9057476b1d>
- <CAKTNdwG-Keu5Gf9EA5TUw7mG-KGBLumOco54Gm=iRM2Oif-F7w@mail.gmail.com>
- <1e9104cd-2ccf-473d-a510-b1188aca5617@cherry.de>
- <fd7c7076-568c-4186-b37b-0b3783f5de5c@cherry.de>
-In-Reply-To: <fd7c7076-568c-4186-b37b-0b3783f5de5c@cherry.de>
-Date: Tue, 21 Jul 2026 19:32:24 +0400
-X-Gm-Features: AUfX_mwqoj9V8XXGlfvQoyKwLdh4tQ7upAAa0GDIpx1qA4pRTDDZEuM6HQ9304k
-Message-ID: <CAKTNdwGJCHHzXqztAiVnCpHno3Ta9=O4+tgG2zUcLqtct=KCdQ@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: rk3576: Properly handle USB controller takeover
- from BootROM
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Anton Burticica <mouse@ya.ru>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 21 Jul 2026 15:55:37 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1784647956; x=1785252756; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=dnz42tK7WH4EO2IaJRsx0pqe46gbjvOwKNFbVo5K+zY=;
- b=yRUnHrZQhfe/zmHz3hfV66ViW/HkGHlqv9tyqRkFXgISUYe2j+AxWVFZ8LQNFRtMGa
- 1i7cEmy4e+fH06odlmTAEhQMBAXg7HXxpNZx81mNP6qpqcLy0/lo1L3jnLRwrapMCwsN
- sWqVse6f/M8JQwfSaqLBsopJWEknuTPdquNrTTtw2WaaxX/FtgXSMMuLPoGmunHsEyI5
- aglT5L+iqWd/96TqefMZCV9yjQ8t69mhJK4DVo/o6dkR/l41NWKJFndSCS6Rc+m5byOX
- fYTxJWH+kbqPuDL9M1v0qIoPkVxVCRkir2KZ/zBi+8OG9JGyX3Ou0mcZz8xRuZh9OxJf
- 6DPw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=yRUnHrZQ
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=alchark@flipper.net
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=flipper.net header.i=@flipper.net header.b="yRUnHrZQ"; 
- dkim-atps=neutral
+ d=canonical.com; s=20251003; t=1784647301;
+ bh=wYUaTPFopoy5UgVVNeSVJsW+15Bnnd0VrZt+Lj0AG7M=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=LIEEcCEd5/dweB1Qt5YvUsXY5kwGUm7OT3vE7JgohAbsE5OvnbjfzzxWv9VEnXNT4
+ ygT1+eXPxU6025xYadqM2UqHAy2qNumaen4iJglqVMkyJ592tnaynPkJf0vZ5OJL/S
+ 7WCsExZOq64ncqzh/tUCpbzfE2xY7+BPXi5d0Q2OjoobK2Dwj5GZFN7/rrA6pw1yKJ
+ +N995YFD17FcDew4knFgwE+bMx6oO6ao/j40mzhXJkqYAn5t5kuBWc6x55PauSLGQW
+ 3YENcPVqXnVEC5H0uQtc5yrZ/V6P5FPRQhykA9da+ixUSyKL12UJ3PIbwj/B+WUgrk
+ PovdzGHHjm1vIU0+LjFr0JARI2h4bo7NZva5CSwIEGA+30z5ZkaSjuPZ/SnIqjhPje
+ aT/9V41C8+kDsuhFyHce/TwclUW1g9lYBgtMbBQv4DUv6z3Fca0JI6rQb+1B5XYGyT
+ 7QfKeQnyiLo1UZ29HBCmHP2pB/3vN5AQ6CKriH12aG5e3rIY+SCFNDf5K9waVxTLDW
+ lDGuyuGtcN7NwlrjBXmMQAvqGmJIIHhfjeY2dojh+yM4PZoV7UIUAITD8gr1z7oZcx
+ BcIRJx02Z7N41IZscDkB6wA8qggxCFr8H0BQEGx1EeP+XM9ZLmU3l06KXxCQ5yobHj
+ jFhyzyhT0MjSiMXoIHtXbua8=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=LIEEcCEd
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -166,90 +143,170 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Alexey Charkov via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Alexey Charkov <alchark@flipper.net>
+From: Aristo Chen via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Quentin,
+Add a test that mkimage rejects a FIT image whose configuration
+references a kernel and an FDT with the same load address, and that
+the error message names the offending configuration and images.
 
-On Tue, Jul 21, 2026 at 7:23=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
->
-> Hi Alexey,
->
-> On 5/8/26 4:59 PM, Quentin Schulz wrote:
-> > Hi Alexey,
-> >
-> > On 5/8/26 10:21 AM, Alexey Charkov wrote:
-> >> On Thu, May 7, 2026 at 8:48=E2=80=AFPM Anton Burticica <mouse@ya.ru> w=
-rote:
-> >>>
-> >>> The original idea was to _not_ disable USB3 OTG port when booted from
-> >>> USB:
-> >>>
-> >>> https://eur02.safelinks.protection.outlook.com/?
-> >>> url=3Dhttps%3A%2F%2Fgithub.com%2Fflipperdevices%2Fu-
-> >>> boot%2Fpull%2F20%2Fchanges&data=3D05%7C02%7Cquentin.schulz%40cherry.d=
-e%7C2646189b068342c152fe08dead126988%7C5e0e1b5221b54e7b83bb514ec460677e%7C0=
-%7C0%7C639138491747796890%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsI=
-lYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%=
-7C%7C&sdata=3DxX4POW%2Be7JMSMo1g2aYdZekD5qwLAuXTtSyRuD6QVlY%3D&reserved=3D0
-> >>
-> >> Hi Anton, thanks for the context!
-> >>
-> >> It seems, however, that the minimal change out of your original pull
-> >> request which fixes the observed initialization issue is just the
-> >> assertion of the reset line. The rest may be helpful but is apparently
-> >> not directly relevant to what I'm trying to fix here - thus the
-> >> significantly trimmed down patch body compared to your original
-> >> version (one change at a time).
-> >>
-> >>> There is a possibility that with already running analogue blocks,
-> >>> disabling the port will leave the controller in some weird state and
-> >>> it's not possible to fully reset it via exposed reset lanes without
-> >>> full SoC reset.
-> >>
-> >> Could be. However, having a different initial hardware state by the
-> >> time the driver loads, depending on the original bootsource, sounds
-> >> like future pain.
-> >>
-> >> The Linux driver(s) also seem to be able to properly reinitialize the
-> >> relevant hardware blocks regardless of where the boot ROM and U-boot
-> >> left them, so I don't think we are dealing with a case of
-> >> "unrecoverable weird state requiring full SoC reset". We just need to
-> >> figure out what we are missing here, out of the substantial difference
-> >> between the two codebases.
-> >>
-> >
-> > There's an attempt at synchronizing the codebase with Linux v6.16-rc7,
-> > see https://eur02.safelinks.protection.outlook.com/?
-> > url=3Dhttps%3A%2F%2Flore.kernel.org%2Fu-boot%2F20260507092843.358908-1-
-> > jens.wiklander%40linaro.org%2F&data=3D05%7C02%7Cquentin.schulz%40cherry=
-.de%7C2646189b068342c152fe08dead126988%7C5e0e1b5221b54e7b83bb514ec460677e%7=
-C0%7C0%7C639138491747835058%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWU=
-sIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7=
-C%7C%7C&sdata=3DbrdZsVC2x7KFqDMx5h476YybGJP0hEVubzQIixpSPjY%3D&reserved=3D0=
-. Maybe this is something you could give a try and see if it makes things b=
-ehave any different?
-> >
->
-> Just to let you know I have marked this as "Changes requested" in
-> patchwork. Please send a v2 once the DWC syncing has happened if the
-> issue still happens (and maybe help with the effort if you can in some
-> ways). I'll not monitor this patch here anymore.
+Also add a companion test for the intended escape hatch: two images
+may use the same load address as long as no single configuration
+references both of them. Only one configuration is selected at
+runtime, so such images never coexist in memory. This mirrors the TI
+K3 tispl layout after commit c85bf61b14f9 ("arm: k3: select tifsstub
+via board_fit_config_name_match"), where each security state has its
+own configuration and all tifsstub variants share one load address.
 
-This patch becomes unnecessary if/when the DWC sync lands (confirmed
-on my RK3576 setup). I tested an early version of that and provided my
-Tested-by along with a link back to this issue, but Marek was
-skeptical about attaching the T-b to individual commits (given that
-they can't be tested individually by construction) so those were
-dropped in later iterations :)
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ test/py/tests/test_fit_mkimage_validate.py | 134 +++++++++++++++++++++
+ 1 file changed, 134 insertions(+)
 
-Even if the DWC sync doesn't end up being applied, the better fix
-(which I'm currently carrying in my local tree) is changing the
-ordering of reset vs. phy probe in the DWC init function, rather than
-a platform-specific change like this one.
+diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
+index 5922f071dd8..0475e89827b 100644
+--- a/test/py/tests/test_fit_mkimage_validate.py
++++ b/test/py/tests/test_fit_mkimage_validate.py
+@@ -160,3 +160,137 @@ def test_fit_auto_basename_dotted_directory(ubman, dtb_relpath, expected_desc):
+     assert desc == expected_desc, (
+         f"Expected /images/fdt-1 description {expected_desc!r}, got {desc!r}"
+     )
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.requiredtool('dtc')
++def test_fit_load_addr_overlap(ubman):
++    """Test that mkimage fails when images in one config overlap in memory"""
++
++    its_fname = fit_util.make_fname(ubman, "overlap.its")
++    itb_fname = fit_util.make_fname(ubman, "overlap.itb")
++    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
++    fdt = fit_util.make_dtb(ubman, '''
++/dts-v1/;
++/ {
++    model = "Test FDT";
++    compatible = "test";
++};
++''', 'test')
++
++    # Write ITS with kernel and FDT sharing the same load address
++    its_text = '''
++/dts-v1/;
++
++/ {
++    images {
++        kernel@1 {
++            description = "Test Kernel";
++            data = /incbin/("kernel.bin");
++            type = "kernel";
++            arch = "sandbox";
++            os = "linux";
++            compression = "none";
++            load = <0x40000>;
++            entry = <0x40000>;
++        };
++        fdt@1 {
++            description = "Test FDT";
++            data = /incbin/("test.dtb");
++            type = "flat_dt";
++            arch = "sandbox";
++            os = "linux";
++            compression = "none";
++            load = <0x40000>;
++            entry = <0x40000>;
++        };
++    };
++
++    configurations {
++        default = "conf@1";
++        conf@1 {
++            kernel = "kernel@1";
++            fdt = "fdt@1";
++        };
++    };
++};
++'''
++
++    with open(its_fname, 'w') as f:
++        f.write(its_text)
++
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    cmd = [mkimage, '-f', its_fname, itb_fname]
++
++    result = subprocess.run(cmd, capture_output=True, text=True)
++
++    assert result.returncode != 0, "mkimage should fail due to memory overlap"
++    assert "has overlapping load regions" in result.stderr
++    # Check that it identifies the specific overlapping components
++    assert "kernel@1" in result.stderr and "fdt@1" in result.stderr
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.requiredtool('dtc')
++def test_fit_same_load_addr_different_configs(ubman):
++    """Test that images may share a load address across configurations
++
++    Only one configuration is selected at runtime, so images that are
++    referenced by different configurations never coexist in memory. This
++    mirrors the TI K3 tispl layout, where each security state has its own
++    configuration and all tifsstub variants use the same load address.
++    """
++
++    its_fname = fit_util.make_fname(ubman, "exclusive.its")
++    itb_fname = fit_util.make_fname(ubman, "exclusive.itb")
++    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
++
++    its_text = '''
++/dts-v1/;
++
++/ {
++    images {
++        kernel@1 {
++            description = "Test Kernel HS";
++            data = /incbin/("kernel.bin");
++            type = "kernel";
++            arch = "sandbox";
++            os = "linux";
++            compression = "none";
++            load = <0x40000>;
++            entry = <0x40000>;
++        };
++        kernel@2 {
++            description = "Test Kernel GP";
++            data = /incbin/("kernel.bin");
++            type = "kernel";
++            arch = "sandbox";
++            os = "linux";
++            compression = "none";
++            load = <0x40000>;
++            entry = <0x40000>;
++        };
++    };
++
++    configurations {
++        default = "conf@1";
++        conf@1 {
++            kernel = "kernel@1";
++        };
++        conf@2 {
++            kernel = "kernel@2";
++        };
++    };
++};
++'''
++
++    with open(its_fname, 'w') as f:
++        f.write(its_text)
++
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    cmd = [mkimage, '-f', its_fname, itb_fname]
++
++    result = subprocess.run(cmd, capture_output=True, text=True)
++
++    assert result.returncode == 0, (
++        f"mkimage should accept same load address in different configs:\n"
++        f"stderr:\n{result.stderr}"
++    )
+-- 
+2.43.0
 
-Best regards,
-Alexey
