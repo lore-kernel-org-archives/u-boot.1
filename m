@@ -1,200 +1,155 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B47E4C44529
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 07:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8197DC44529
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 08:00:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 318B840878;
-	Tue, 21 Jul 2026 07:54:05 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bbb5H_3Yh6qG; Tue, 21 Jul 2026 07:54:03 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0078040860
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784620443;
-	bh=6mulna19PUXWlQOTkpZzdB3Li2V+f0/87PaNwpKJ1gM=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=HDOCv2+GfZHZj39sPw/XffPZZFsGMIj0kVubgjGcDzG8H7x0b+fhYiV9+A8H+TDL7
-	 DknuVzMhN6nHwSXsIVMbJea7oEl99qoO+brvZud73Rg+gfZ64A6uRSUjxjsP4HMF90
-	 gFk62Q3fSwm1NigZCNIeiC8fcz2wZpKGvjFMQsT1/DjEecTHliI6C0BxyFUJPixk1Z
-	 YEJT0j/Cj07ZlMYO9/tEFQKJ4Dr9WdXTlnbYLW92igJtNqnYUP7wW6lAvoMGzKKbbt
-	 k/IJoKkf6ItUL0DcYgxs/hDny6rclV35/J8jC9JlFveAEkCqvAxacDwSyGe3iwOoSy
-	 0ewPpY3oLgS4A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0078040860;
-	Tue, 21 Jul 2026 07:54:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EF4131093
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:54:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E0D14607FA
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:54:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2755060817;
+	Tue, 21 Jul 2026 08:00:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1oE9P2D-tRxe for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 07:54:01 +0000 (UTC)
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ id 3l01dV3bVd7M; Tue, 21 Jul 2026 08:00:35 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 080066080C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784620835;
+	bh=Bz7rHdUjkWL0jTzZNPpWHyvTQ/s7apH8M3kXEgBkOf8=;
+	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=Ul8R0Z+RLLZWvlArNgtMot+I2UcKKNSbIVQkVYjIkKD3t9LJ/nT4hJ3Iq0ZKC28u3
+	 efDHCqTVrxbnuYgZNvki5rPdMEERfj2r4aBmVA9zIfwPJhwHG8VIBxJIxTD58rE87F
+	 W3uAemyooVMeNP2+2VpvmLp4BWvp/9paXujvZNBuOJ4GjZ1tgbjISE1r+qaT2OSCIW
+	 DGLhyuiQlWUlW7XcFL2CzNaxrBh+1/r1Vi2IP8ZA5YSgx8FrWCFIBvjp6wmFJOAhMD
+	 OWv0oPRsbDPqBvmEZoTNtD+3vVh2dMng0FgNZfku731yKnz897i3w5Z6W1k18H3v9o
+	 dKwQkHD7/T2dA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 080066080C;
+	Tue, 21 Jul 2026 08:00:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6D7B642A
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:00:33 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6B13C80DF3
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:00:33 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ldm2ElRt12x9 for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 08:00:32 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 864B760808
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 864B760808
+ envelope-from=clamor95@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2B3DE80DEE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2B3DE80DEE
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 864B760808
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2B3DE80DEE
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:00:32 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3438C846A4; Tue, 21 Jul 2026 09:53:58 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8B711844F6; Tue, 21 Jul 2026 10:00:30 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53E2E849EB
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 09:53:55 +0200 (CEST)
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MkYXm-1xQLD42rrK-00ihJU; Tue, 21
- Jul 2026 09:53:52 +0200
-Message-ID: <ea7db0e4-d88a-4295-9a46-f2fdb114dbfd@gmx.de>
-Date: Tue, 21 Jul 2026 09:53:51 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A8E22803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 10:00:27 +0200 (CEST)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-caf45fc5202so7696838a12.1
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 01:00:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784620826; cv=none;
+ d=google.com; s=arc-20260327;
+ b=IrTJwrbVOkbWwvesn7oPzqL/AgtRcqWl0QoqYg4boF0JldpjZ2pvKa1lmjHj/Vudiq
+ /dza5C2hDpu2fxhLvtXmuzDANpJ7Rrf+7dwlGE+sy/hh+Hhc11yzs5OEmG2Jo38vAJum
+ eS+JXiyepXgV7uBHJsIFgNa73Z8ukOOqrnMW7wC/LvkyNAknpyC1jeeCkz9Rt4mAD+xV
+ rdXQLtqGqtf2PO3Czxr2YS5MoPdXlJ5e4FQzj/tHwWIw+fEhNivYzCTnxLCsPeedEX4m
+ mEpowgnuEbc1WvNkIyn0ZNTseEwI6ZU3RSDAKjVGX7YjDuD9gB498GcXLsogtB2zaGUA
+ 4f/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Bz7rHdUjkWL0jTzZNPpWHyvTQ/s7apH8M3kXEgBkOf8=;
+ fh=cpUGXydLUNzyDKeZrCkRbAJvyRRfulgXrvM9rBuka1A=;
+ b=FnDXLEgryurfD2KOzUlP0q8v/uGy/CQi4ndsSHdV4BqWLxairk4nVVl29ntPyTpFgx
+ YblkYONIdmKXHbCFilgPcquE+6FmyRBVAsoJCifaWz1VgsqicIWhyZTzCa8lKHyYThVI
+ VoCksK/R2jubYgqXB9MbRSGnROLAZZArwRvpKnijtzzdKAJbNWswVc6M8gQSBEfXxq8D
+ FPKU/dW3NaKMeAhX9AgTTUsjPuUbD3UW/Swu9ARiUyW52U1JrKpWoUn31Hnr7e2kwxIf
+ RrzIQeRbtMULowv1YfNqEHu2LvtOPmC1UeD3y5mneIQrmxbssNYQmFpzxVgP2lZpPVWc
+ Y8Xw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784620826; x=1785225626;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Bz7rHdUjkWL0jTzZNPpWHyvTQ/s7apH8M3kXEgBkOf8=;
+ b=ciNNCFql9x/s644s1i159X7bZOXPn4kk9u6KbzdA8/4tHVH4K8kuF0ivd6d6z5nRTu
+ 9S49wAJF7EzwS3jrLnyYWjEteVnlBOEODi6T4Zz7QtVtVIJXv2dqVwP64xAtN98/QXY0
+ 4BV5NSN8/AVEddQXyPuH1VtimO5qzBuwitjNt5KvKtkOfGFhHeZkxi6WNA52p5iGgwcG
+ VG9N+LDast3eLc6xxTKRGBf/75n3shxGfLFna3ewXD+NOBLA2JzC2bDUBu3CwS28mCeP
+ /GhuBK9+JJgh8FuVqxS5MhBYx4BM44hBX7uKwGuPobK8sII/mT76HrqymO8m4eQgP9jO
+ mgCA==
+X-Gm-Message-State: AOJu0YzLJnss1z267DZoQhTEg3WKNGGf7JsJYri1fbs9DDdcNFqVY6T+
+ okKrsgEi33JSe1f+ysdHMM4SDvFVMkYrK1qGF/2b9onRYV+Ds7ppbJbDi6F46YIFS08X9UvATMQ
+ DxYuvQGy+pPjvnubet+6rNtu2IPuMSKc=
+X-Gm-Gg: AfdE7cmjacTHkFvsehhdNLTs0ELQi3q/tV465sYhcKyc+dSm2VTUNa78NkS6A7X1zR2
+ 9BRsKDL1lHPc/tidy+tpk5EGxpTHcDceI0DBo4wxMMTCxkXMcT9d8eAyIReftr4GAf2RVDqK+Xe
+ 7LQNJ2uby7+rbtc3IuBrqurTNF6ZT42BpoDtwJu6H8WzSd3x/1Er+bo4D3+fJHW5Wrbeii0Nz3L
+ 4gaoma6WtnhHwS7Q9ZCtvdSGpWoI16Cq1jmYMMdBEIbIxvyKh5zvaAsScWWnmgYjWvtYUYPkdPK
+ o2hY7kJt2HssIc+Pils=
+X-Received: by 2002:a05:6a21:a8d:b0:3c3:9c4e:de3a with SMTP id
+ adf61e73a8af0-3c3ad5b1bd4mr19364915637.6.1784620825494; Tue, 21 Jul 2026
+ 01:00:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8] tools: mkeficapsule: Rework pkcs11 support
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Wojciech.Dubowik@mt.com, trini@konsulko.com, u-boot@lists.denx.de,
- marex@nabladev.com, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Franz Schnyder <fra.schnyder@gmail.com>,
- Fabio Estevam <festevam@nabladev.com>, ilias.apalodimas@linaro.org
-References: <20260718105627.625235-1-festevam@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260718105627.625235-1-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20260716110318.97757-1-advaitd@mechasystems.com>
+In-Reply-To: <20260716110318.97757-1-advaitd@mechasystems.com>
+Date: Tue, 21 Jul 2026 11:00:13 +0300
+X-Gm-Features: AUfX_mx5NZX3VkBz3VMdA6QI1-xtK-tya8ZhPURpoyRfFBcYOheuTWT4yK4W02c
+Message-ID: <CAPVz0n0zSAwzx5=xTBcitECQnmrjS+Fh5UboFC=igup=Sump6g@mail.gmail.com>
+Subject: Re: [PATCH v3] video: add ChipWealth CH13726A AMOLED panel driver
+To: Advait Dhamorikar <advaitd@mechasystems.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Ion Agorria <ion@agorria.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Rasmus Villemoes <ravi@prevas.dk>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:yI2i5f1YlDwG03NIAUiOt6sR5cSjmWzDb1gSRJ6wxCzWRMYrkB2
- HMs+0j0D2ka/wqTRf0Ibg36ju6K6AeDUN+4e9QkXLhPkUuC3iNzm1sEkGa7UP/H8MKZR3rN
- dHXgkrxuLM/4YaBJr5EXiN8t3fzGP5H14LRksh+Ahq8TEZJG0nZLGL2JmC4dn8NdoX85mAK
- RGp/BwwVLv2ATb4K/B9EQ==
-UI-OutboundReport: notjunk:1;M01:P0:HjaJobZ+UsA=;c2jyOs1FqHqEjLcpiS01txShD9a
- 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
- Mo6ipWVAr40Q5gwv/as6f4J0nBsHC/65ug==
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmx.de; 
- s=s31663417; t=1784620432; x=1785225232; i=xypron.glpk@gmx.de;
- bh=6mulna19PUXWlQOTkpZzdB3Li2V+f0/87PaNwpKJ1gM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=siMIJq760twHEBdtwO8mhHHFkFzOi7VWcrqYcGr0QDSg47WYrf4uhPXQVCNqmzm7
- CLnt39sls79jkaJMZHjhW5hsR+k5V741GEVy4YX2ejXAeOpob6C4RSD+EhJ+7ZOlE
- ryzv9VD202agDvfLcQMNrJ2klLKEURlQ7FZEt4w1aybjIn3np9PaPvGSi7yqUL9tI
- jUFGb9wN6hED2myaLLJNmYkoIW93AVZiNjcvfMNavtuVAVc0oucGXzaTE0EPy0Su6
- 7BzSaiqCek2iNID3LiLa4XmMAXPEXr/SA6RY8eQBcvATHLLKn1AvpABl9qcxK4bzU
- oCBSn3P2zEIRDlugjg==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=gmx.de
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de
- header.a=rsa-sha256 header.s=s31663417 header.b=siMIJq76
+ d=gmail.com; s=20251104; t=1784620826; x=1785225626; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Bz7rHdUjkWL0jTzZNPpWHyvTQ/s7apH8M3kXEgBkOf8=;
+ b=oaNnYac6KqCQ3X4Kxs1N7T/vWfC6Bv3T7D4dsYpl9lkcJljvvpOOQghHOaUgy67nnd
+ JF4/Xv3Jxsc6umFi4TQd+c17nd8okR/qOhHpbrYlKCSK3O8AO13ZAmgzCPiXsPm1BKCB
+ /H7d0iHvD+gcmZ3AFhFIuea7DY/0QRzt82HU15YyrKcsL9GTNvnr0luazWMpeF/UDsSq
+ myuu4DBtKrfNosAGENcc2gRilQWgQilzALVu23ULTMEYw8g7NY0oLkRuoCEdQlVxIEHp
+ uAeAzbLoT3hB+q7+twTP/Uo2NyGcheYX80wv0pl7ynNPvgDzEg7VVKQEGdLv6S6YSwwj
+ Wl0w==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=oaNnYac6
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=gmx.de
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=xypron.glpk@gmx.de
+ smtp.mailfrom=clamor95@gmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="siMIJq76"; 
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="oaNnYac6"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -207,248 +162,312 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Heinrich Schuchardt via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+From: Svyatoslav Ryhel via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Svyatoslav Ryhel <clamor95@gmail.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 7/18/26 12:56, Fabio Estevam wrote:
-> From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
->=20
-> Some distros like OpenEmbedded are using gnutls library
-> without pkcs11 support and linking of mkeficapsule will fail.
-> It would make maintenance of default configs a hurdle.
-> Add detection of pkcs11 support in gnutls so it's enabled
-> when available and doesn't need to be set explicitly.
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> Cc: Franz Schnyder <fra.schnyder@gmail.com>
-> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+=D1=87=D1=82, 16 =D0=BB=D0=B8=D0=BF. 2026=E2=80=AF=D1=80. =D0=BE 14:03 Adva=
+it Dhamorikar <advaitd@mechasystems.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Add support for AMOLED panels based on the ChipWealth CH13726A
+> MIPI DSI display driver IC.
+>
+> The driver configures the MIPI DSI interface for 4 data lanes in RGB888
+> video mode, performs the panel reset sequence, sends the vendor-specific
+> initialization commands required by the controller, and enables the
+> panel using the standard MIPI DCS Sleep Out and Display On commands.
+>
+> This driver is based on an earlier implementation by Pratham Malaviya.
+>
+> Signed-off-by: Advait Dhamorikar <advaitd@mechasystems.com>
 > ---
-> Changes since v7:
-> - Also handle gnutls_global_deinit() and gnutls_pkcs11_deinit() - Ilias.
->=20
->   tools/Makefile       |   5 ++
->   tools/mkeficapsule.c | 111 ++++++++++++++++++++++++++++++++-----------
->   2 files changed, 89 insertions(+), 27 deletions(-)
->=20
-> diff --git a/tools/Makefile b/tools/Makefile
-> index 1a5f425ecda..e85f5a354b8 100644
-> --- a/tools/Makefile
-> +++ b/tools/Makefile
-> @@ -271,6 +271,11 @@ mkeficapsule-objs :=3D generated/lib/uuid.o \
->   	$(LIBFDT_OBJS) \
->   	mkeficapsule.o
->   hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) +=3D mkeficapsule
-> +GNUTLS_SUPPORTS_P11KIT =3D $(shell pkg-config --libs gnutls --print-req=
-uires-private \
+>
+> v1->v2
+> - Expand CC list based on get_maintainer.pl output.
+>
+> v2 -> v3
+> Link to v2: https://lore.kernel.org/all/20260702151325.290749-1-advaitd@m=
+echasystems.com/
+> - Add regulator support using the U-Boot regulator framework.
+> - Minor code cleanup.
+>
+>  drivers/video/Kconfig               |   8 +
+>  drivers/video/Makefile              |   1 +
+>  drivers/video/chipwealth-ch13726a.c | 221 ++++++++++++++++++++++++++++
+>  3 files changed, 230 insertions(+)
+>  create mode 100644 drivers/video/chipwealth-ch13726a.c
+>
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index c2acc13139c..a214626f376 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -762,6 +762,14 @@ config VIDEO_LCD_SPI_MISO
+>         option takes a string in the format understood by 'sunxi_name_to_=
+gpio'
+>         function, e.g. PH1 for pin 1 of port H.
+>
+> +config VIDEO_PANEL_CHIPWEALTH_CH13726A
+> +       bool "ChipWealth CH13726A AMOLED panel support"
+> +       depends on PANEL && BACKLIGHT
+> +       select VIDEO_MIPI_DSI
+> +       help
+> +         Say Y here if you want to enable support for AMOLED panels
+> +         based on the ChipWealth CH13726A MIPI DSI display driver IC.
+> +
+>  source "drivers/video/meson/Kconfig"
+>
+>  config VIDEO_MVEBU
+> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+> index 082b8967982..efa7e288691 100644
+> --- a/drivers/video/Makefile
+> +++ b/drivers/video/Makefile
+> @@ -77,6 +77,7 @@ obj-$(CONFIG_VIDEO_LCD_SSD2828) +=3D ssd2828.o
+>  obj-$(CONFIG_VIDEO_LCD_TDO_TL070WSH30) +=3D tdo-tl070wsh30.o
+>  obj-$(CONFIG_VIDEO_LCD_SONY_L4F00430T01) +=3D sony-l4f00430t01.o
+>  obj-$(CONFIG_VIDEO_LCD_SAMSUNG_S6E63M0) +=3D samsung-s6e63m0.o
+> +obj-$(CONFIG_VIDEO_PANEL_CHIPWEALTH_CH13726A) +=3D chipwealth-ch13726a.o
+>  obj-$(CONFIG_VIDEO_MCDE_SIMPLE) +=3D mcde_simple.o
+>  obj-${CONFIG_VIDEO_MESON} +=3D meson/
+>  obj-${CONFIG_VIDEO_MIPI_DSI} +=3D mipi_dsi.o
+> diff --git a/drivers/video/chipwealth-ch13726a.c b/drivers/video/chipweal=
+th-ch13726a.c
+> new file mode 100644
+> index 00000000000..18f1dbc2e78
+> --- /dev/null
+> +++ b/drivers/video/chipwealth-ch13726a.c
+> @@ -0,0 +1,221 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * ChipWealth CH13726A DSI panel driver
+> + *
+> + * Copyright (C) 2026 Mecha Systems
+> + * Author(s):
+> + *   Advait Dhamorikar <advaitd@mechasystems.com>
+> + *   Pratham Malaviya  <prathamm@mechasystems.com>
+> + */
+> +
+> +#include <backlight.h>
+> +#include <dm.h>
+> +#include <mipi_dsi.h>
+> +#include <panel.h>
+> +#include <asm/gpio.h>
+> +#include <linux/delay.h>
+> +#include <log.h>
+> +
+> +struct ch13726a_panel_priv {
+> +       struct udevice *vdd;
+> +       struct udevice *vddio;
+> +       struct udevice *vdd1v2;
+> +       struct udevice *avdd;
+> +       struct udevice *reg;
 
-Shouldn't we throw a build warning indicating that the created=20
-mkeficapsule will be incomplete due to missing PKCS11 support?
+I must have missed this previously, sorry. The reg udevice pointer
+seems not to be used anywhere.
+Else seems fine, with this fixed.
 
-> +			 2> /dev/null | grep p11-kit-1)
-> +ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
-> +HOSTCFLAGS_mkeficapsule.o +=3D -DMKEFICAPSULE_PKCS11
-> +endif
->  =20
->   include tools/fwumdata_src/fwumdata.mk
->  =20
-> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-> index ec640c57e8a..df64e1b7497 100644
-> --- a/tools/mkeficapsule.c
-> +++ b/tools/mkeficapsule.c
-> @@ -207,6 +207,81 @@ static int write_capsule_file(FILE *f, void *data, =
-size_t size, const char *msg)
->   	return 0;
->   }
->  =20
-> +#ifdef MKEFICAPSULE_PKCS11
-> +static int pkcs11_init(void)
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
+
+> +       struct udevice *backlight;
+> +       struct gpio_desc reset;
+> +};
+> +
+> +static const struct display_timing default_timing =3D {
+> +       .pixelclock.typ                 =3D       59832000,
+> +       .hactive.typ                    =3D       1080,
+> +       .hfront_porch.typ               =3D       12,
+> +       .hback_porch.typ                =3D       12,
+> +       .hsync_len.typ                  =3D       28,
+> +       .vactive.typ                    =3D       1240,
+> +       .vfront_porch.typ               =3D       2,
+> +       .vback_porch.typ                =3D       2,
+> +       .vsync_len.typ                  =3D       2,
+> +};
+> +
+> +#define dcs_write_seq(dev, cmd, seq...)                                \
+> +({                                                             \
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);   \
+> +       const u8 d[] =3D { cmd, seq };                            \
+> +       int ret;                                                \
+> +                                                               \
+> +       ret =3D mipi_dsi_dcs_write_buffer(plat->device,           \
+> +                                       d, ARRAY_SIZE(d));      \
+> +       if (ret < 0)                                            \
+> +               log_err("failed to write dcs sequence: %d\n", ret);\
+> +       ret;                                                    \
+> +})
+> +
+> +static int ch13726a_hw_init(struct udevice *dev)
 > +{
-> +	const char *lib;
-> +	int ret;
+> +       int ret;
 > +
-> +	lib =3D getenv("PKCS11_MODULE_PATH");
-
-Nowhere in our documentation we describe this environment variable. How=20
-should a user know what value is expected?
-
-I guess doc/mkeficapsule.1 and doc/develop/uefi/uefi.rst need an update.
-
-> +	if (!lib) {
-> +		fprintf(stdout,
-> +			"PKCS11_MODULE_PATH not set in the environment\n");
-> +		return -1;
-> +	}
+> +       ret =3D dcs_write_seq(dev, MIPI_DCS_WRITE_CONTROL_DISPLAY, 0x00);
+> +       if (ret < 0) {
+> +               log_debug("%s: Init command failed (%d)\n",
+> +                         __func__, ret);
+> +               return ret;
+> +       }
 > +
-> +	gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
-> +	gnutls_global_init();
+> +       ret =3D dcs_write_seq(dev, MIPI_DSI_V_SYNC_END, 0x00);
+> +       if (ret < 0) {
+> +               log_debug("%s: Init command failed (%d)\n",
+> +                         __func__, ret);
+> +               return ret;
+> +       }
 > +
-> +	ret =3D gnutls_pkcs11_add_provider(lib, "trusted");
-> +	if (ret < 0) {
-> +		fprintf(stdout, "Failed to add pkcs11 provider\n");
-> +		return -1;
-> +	}
+> +       mdelay(120);
 > +
-> +	return 0;
+> +       ret =3D dcs_write_seq(dev, MIPI_DSI_GENERIC_LONG_WRITE, 0x00);
+> +       if (ret < 0) {
+> +               log_debug("%s: Init command failed (%d)\n",
+> +                         __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       return 0;
 > +}
 > +
-> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_conte=
-xt *ctx)
+> +static void ch13726a_reset(struct udevice *dev)
 > +{
-> +	gnutls_pkcs11_obj_t *obj_list;
-> +	unsigned int obj_list_size =3D 0;
-> +	int ret;
+> +       struct ch13726a_panel_priv *priv =3D dev_get_priv(dev);
 > +
-> +	ret =3D gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
-> +						 ctx->cert_file, 0);
-> +	if (ret < 0 || obj_list_size =3D=3D 0)
-> +		return -1;
-> +
-> +	gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
-> +
-> +	return 0;
+> +       dm_gpio_set_value(&priv->reset, true);
+> +       mdelay(10);
+> +       dm_gpio_set_value(&priv->reset, false);
+> +       mdelay(10);
+> +       dm_gpio_set_value(&priv->reset, true);
+> +       mdelay(5);
 > +}
 > +
-> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_contex=
-t *ctx)
+> +static int ch13726a_set_backlight(struct udevice *dev, int percent)
 > +{
-> +	return gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
+> +       struct mipi_dsi_device *device =3D plat->device;
+> +       u8 brightness;
+> +
+> +       if (percent < 0)
+> +               percent =3D 0;
+> +       else if (percent > 100)
+> +               percent =3D 100;
+> +
+> +       brightness =3D (percent * 255) / 100;
+> +
+> +       return mipi_dsi_dcs_set_display_brightness(device, brightness);
 > +}
 > +
-> +static void pkcs11_deinit(void)
+> +static int ch13726a_panel_enable_backlight(struct udevice *dev)
 > +{
-> +	gnutls_global_deinit();
-> +	gnutls_pkcs11_deinit();
-> +}
-> +#else
-> +static int pkcs11_init(void)
-> +{
-> +	fprintf(stderr, "Pkcs11 support is disabled\n");
-> +	return -1;
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
+> +       struct mipi_dsi_device *device =3D plat->device;
+> +       int ret;
+> +
+> +       ret =3D mipi_dsi_attach(device);
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       ch13726a_reset(dev);
+> +
+> +       ret =3D ch13726a_hw_init(dev);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D mipi_dsi_dcs_exit_sleep_mode(device);
+> +       if (ret)
+> +               return ret;
+> +
+> +       mdelay(120);
+> +
+> +       ret =3D mipi_dsi_dcs_set_display_on(device);
+> +       if (ret)
+> +               return ret;
+> +
+> +       return 0;
 > +}
 > +
-> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_conte=
-xt *ctx)
+> +static int ch13726a_panel_get_display_timing(struct udevice *dev,
+> +                                            struct display_timing *timin=
+gs)
 > +{
-> +	fprintf(stderr, "Pkcs11 support is disabled\n");
-> +	return -1;
+> +       memcpy(timings, &default_timing, sizeof(*timings));
+> +       return 0;
 > +}
 > +
-> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_contex=
-t *ctx)
+> +static int ch13726a_panel_of_to_plat(struct udevice *dev)
 > +{
-> +	fprintf(stderr, "Pkcs11 support is disabled\n");
-> +	return -1;
+> +       struct ch13726a_panel_priv *priv =3D dev_get_priv(dev);
+> +       int ret;
+> +
+> +       if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
+> +               ret =3D device_get_supply_regulator(dev, "vdd-supply",
+> +                                                 &priv->vdd);
+> +               if (ret && ret !=3D -ENOENT)
+> +                       return ret;
+> +
+> +               ret =3D device_get_supply_regulator(dev, "vddio-supply",
+> +                                                 &priv->vddio);
+> +               if (ret && ret !=3D -ENOENT)
+> +                       return ret;
+> +
+> +               ret =3D device_get_supply_regulator(dev, "vdd1v2-supply",
+> +                                                 &priv->vdd1v2);
+> +               if (ret && ret !=3D -ENOENT)
+> +                       return ret;
+> +
+> +               ret =3D device_get_supply_regulator(dev, "avdd-supply",
+> +                                                 &priv->avdd);
+> +               if (ret && ret !=3D -ENOENT)
+> +                       return ret;
+> +       }
+> +
+> +       ret =3D gpio_request_by_name(dev, "reset-gpios", 0,
+> +                                  &priv->reset,
+> +                                  GPIOD_IS_OUT);
+> +       if (ret) {
+> +               log_err("%s: cannot get reset GPIO (%d)\n",
+> +                       __func__, ret);
+> +               if (ret !=3D -ENOENT)
+> +                       return ret;
+> +       }
+> +
+> +       return 0;
 > +}
 > +
-> +static void pkcs11_deinit(void)
+> +static int ch13726a_panel_probe(struct udevice *dev)
 > +{
-> +}
-> +#endif
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
 > +
->   /**
->    * create_auth_data - compose authentication data in capsule
->    * @auth_context:	Pointer to authentication context
-> @@ -229,9 +304,6 @@ static int create_auth_data(struct auth_context *ctx=
-)
->   	gnutls_pkcs7_t pkcs7;
->   	gnutls_datum_t data;
->   	gnutls_datum_t signature;
-> -	gnutls_pkcs11_obj_t *obj_list;
-> -	unsigned int obj_list_size =3D 0;
-> -	const char *lib;
->   	int ret;
->   	bool pkcs11_cert =3D false;
->   	bool pkcs11_key =3D false;
-> @@ -243,19 +315,8 @@ static int create_auth_data(struct auth_context *ct=
-x)
->   		pkcs11_key =3D true;
->  =20
->   	if (pkcs11_cert || pkcs11_key) {
-> -		lib =3D getenv("PKCS11_MODULE_PATH");
-> -		if (!lib) {
-> -			fprintf(stdout,
-> -				"PKCS11_MODULE_PATH not set in the environment\n");
-> -			return -1;
-> -		}
-> -
-> -		gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
-> -		gnutls_global_init();
-> -
-> -		ret =3D gnutls_pkcs11_add_provider(lib, "trusted");
-> +		ret =3D pkcs11_init();
->   		if (ret < 0) {
-> -			fprintf(stdout, "Failed to add pkcs11 provider\n");
->   			return -1;
->   		}
->   	}
-> @@ -301,14 +362,12 @@ static int create_auth_data(struct auth_context *c=
-tx)
->  =20
->   	/* load x509 certificate */
->   	if (pkcs11_cert) {
-> -		ret =3D gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
-> -							 ctx->cert_file, 0);
-> -		if (ret < 0 || obj_list_size =3D=3D 0) {
-> -			fprintf(stdout, "Failed to import crt_file URI objects\n");
-> +		ret =3D  import_pkcs11_crt(&x509, ctx);
-> +		if (ret < 0) {
-> +			fprintf(stderr, "error in import_pkcs11_crt(): %s\n",
-> +				gnutls_strerror(ret));
-
-So here you are printing in sequence:
-
-"Pkcs11 support is disabled\n"
-"error in import_pkcs11_crt(): %s}\n"
-
-This message would better be thrown in the functional version of=20
-import_pkcs11_crt(). For a user of mkeficapsule the function name=20
-import_pkcs11_crt() is irrelevant. Instead, please, describe that the=20
-import of a PKCS11 certificate failed.
-
->   			return -1;
->   		}
-> -
-> -		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
->   	} else {
->   		ret =3D gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
->   		if (ret < 0) {
-> @@ -320,9 +379,9 @@ static int create_auth_data(struct auth_context *ctx=
-)
->  =20
->   	/* load a private key */
->   	if (pkcs11_key) {
-> -		ret =3D gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
-> +		ret =3D import_pkcs11_key(&pkey, ctx);
->   		if (ret < 0) {
-> -			fprintf(stderr, "error in %d: %s\n", __LINE__,
-> +			fprintf(stderr,	"error in import_pkcs11_key(): %s\n",
->   				gnutls_strerror(ret));
-
-Same here.
-
-Best regards
-
-Heinrich
-
->   			return -1;
->   		}
-> @@ -403,10 +462,8 @@ static int create_auth_data(struct auth_context *ct=
-x)
->   	 *   gnutls_free(signature.data);
->   	 */
->  =20
-> -	if (pkcs11_cert || pkcs11_key) {
-> -		gnutls_global_deinit();
-> -		gnutls_pkcs11_deinit();
-> -	}
-> +	if (pkcs11_cert || pkcs11_key)
-> +		pkcs11_deinit();
->  =20
->   	return 0;
->   }
-
+> +       plat->lanes =3D 4;
+> +       plat->format =3D MIPI_DSI_FMT_RGB888;
+> +       plat->mode_flags =3D MIPI_DSI_MODE_VIDEO |
+> +                       MIPI_DSI_MODE_VIDEO_BURST |
+> +                       MIPI_DSI_MODE_LPM;
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct panel_ops ch13726a_panel_ops =3D {
+> +       .enable_backlight       =3D       ch13726a_panel_enable_backlight=
+,
+> +       .set_backlight          =3D       ch13726a_set_backlight,
+> +       .get_display_timing     =3D       ch13726a_panel_get_display_timi=
+ng,
+> +};
+> +
+> +static const struct udevice_id ch13726a_panel_ids[] =3D {
+> +       { .compatible   =3D       "chipwealth,ch13726a" },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(ch13726a_panel) =3D {
+> +       .name           =3D       "ch13726a_panel",
+> +       .id                     =3D       UCLASS_PANEL,
+> +       .of_match       =3D       ch13726a_panel_ids,
+> +       .ops            =3D       &ch13726a_panel_ops,
+> +       .of_to_plat     =3D       ch13726a_panel_of_to_plat,
+> +       .probe          =3D       ch13726a_panel_probe,
+> +       .plat_auto      =3D       sizeof(struct mipi_dsi_panel_plat),
+> +       .priv_auto      =3D       sizeof(struct ch13726a_panel_priv),
+> +};
+> --
+> 2.43.0
+>
