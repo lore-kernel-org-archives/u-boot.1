@@ -1,160 +1,190 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FCB7C4451C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 12:52:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17A6EC4452F
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 12:56:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3C743408E3;
-	Tue, 21 Jul 2026 12:52:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C706D80DBD;
+	Tue, 21 Jul 2026 12:56:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6bhUPeUSlpSq; Tue, 21 Jul 2026 12:52:07 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KSwThcivYkwu; Tue, 21 Jul 2026 12:56:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E034B40840
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E35EF80DD7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784638327;
-	bh=p9EJ8ktiySQRHo3N1MEeGTVrItSD3tGcCyjrnOdSCn4=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784638574;
+	bh=hIVzT8uy6hLiArYBtkq07XHQ0WkerH2zHRmQaIEsics=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=MKW32izkO1VVe0ghu4MA9ejmzMDrcKsn9ubXAjIqXG2XL78r7A7eBLXt8joI3fqGo
-	 H1NP2zrK1gq8iXbUd40P7qt0jvb2ZN5phWB10YeREQWr1F9rTwBgbr/qq4weTBa6a/
-	 dmXaKsVAP2LW1Cg7fEdHpyptoCB8+j2kS7g1kHpEDW29xAquc/Y8jCLvfP1NFPtr5x
-	 +pd8iZOWAstAcALr6m2/lL/L8EkRDxLqS2+jCEtavtI81pR1fRcrY5WQCfP8+Y4/qr
-	 JTT7rBXJRlhfBQkP130ASnLKRM4Dnjej8ffnCM0zgF7YYuMU9uSKQjk1nYGdUqIHgy
-	 bTw2Ogzbi2d7g==
+	b=JeukbXkrgYeUfQRe6TgsOdGxHmsl0l5Nehba5tx2zhwx9aZ1U9LM8CSTxXWpcs7ln
+	 mAU7ECuclAtcC8zaQUH6d4XF0t3+2hrlhIIVUjzPq61CtkTQurIob1Ybp/6CAflui0
+	 8cq1jDKUu8s7BGyUPqjZhrI59VbTwkGnrCrvllqnKLzZtv0pYZqVIMKPctTa3ou9PD
+	 Oc51ID2WuV+MQVUF1OwuokW8rpc7fecrFYlF3I9jTKxUcWT/PE0g7jwH31gShxixKW
+	 oCVDz/tlwtODqwNmO6c7RutzyLpJSf6j6E1D04KIQUIU9apq0ktcf+Cult4mLDRCDw
+	 1wkcMA94x/hnQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E034B40840;
-	Tue, 21 Jul 2026 12:52:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9B68C224
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 12:52:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E35EF80DD7;
+	Tue, 21 Jul 2026 12:56:13 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E30E41099
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 12:56:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8CF20607FF
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 12:52:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C8A26400FE
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 12:56:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A59Sri0aw5oZ for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 12:52:05 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 80C1D60646
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 80C1D60646
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 80C1D60646
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 12:52:04 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UHcqE4_Z4qE1 for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 12:56:11 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=quentin.schulz@cherry.de;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 75F7E400F8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 75F7E400F8
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 75F7E400F8
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 12:56:10 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0129484659; Tue, 21 Jul 2026 14:52:02 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9B32382991; Tue, 21 Jul 2026 14:56:08 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC843803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 14:51:59 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c15f47e6297so817274166b.0
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 05:51:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784638319; cv=none;
- d=google.com; s=arc-20260327;
- b=VRrx2tUQ7ayc+ZOhvR6OK3eh989OnIw9wzZ0EcmOefBujJan8XdxtMX0wY862B0zxN
- qSQL5RkGvs7pQ2FHQGL/ohqfds6pxkcmLazBfl4C8bBKuHpaur1Kpq+mfPmai2a3R9oP
- wHSKg9NulMiZi3bS9v4W779EO5t14U26nQzENW3k86FtXoIvwrOGiunM0Ev7qGwc8Woj
- 03LZkZqrn2GF/d0HaTIKzr0Vn+AaMapmev5tV+IyyA1Fqw75kjSp8svJPMNIO9wR6sL4
- vaqfZIGVfuM/DweyPeuK1LNvYdF3A+IHuutFUitrlGz4zAwtGtvOZ8huG1FfySNXSJQ/
- 2Rsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=p9EJ8ktiySQRHo3N1MEeGTVrItSD3tGcCyjrnOdSCn4=;
- fh=OuowzhnSXj1Fq0buMNvfvwCFCBmsDZM9xd1zaiexQbw=;
- b=FC4s8aiD67QODQkcQD8EN1y1eXeQ+bgYH/kuUmirrR8zUYzlgVOfbERh1f6a0FSXSY
- MYan0YhBRJBVnTRiyKGIH2NoQDIRkdB6QtyU8A4zc7/Y5zFDhz/QSP1701ik5OK6bvmI
- 9Q50LO2ZPkkF4lzNXO6WiL7NTkGOuL/YztdGij1lSykJQVtiF4ghhdUqRU3ikAKyELP+
- FEtfH+pBFgGTMb0EA0V+eA9K2KuStm5uBX8yzM7Er7xbaZjgpIy1akrlCVy1k4UdArfp
- O6rVzrGsOD8mnQ1Zcf36xuAqjqOlNF51mbrrCF6CN0SZ0f6ykOTRpaEJAvAcnAW2GmaX
- P2mw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784638319; x=1785243119;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=p9EJ8ktiySQRHo3N1MEeGTVrItSD3tGcCyjrnOdSCn4=;
- b=sYpB47xiqePNH95FHIlqWGjHH7QA5NduTJe2F/Mkrjsh+NLx2Jr4j1s+2ZHE1dxKfy
- 6a+hUWoxxDP/mGBogxT4VLZlyvcDutjcNwq4UYN5XsAbMbWhC3j7xedHYEm3FB6KU1aT
- EeX1TV71oKeNCIf7d8JVL9+pGcim/qaLGzyh+OQcfItGNXF1wTefSEqpyIsxUFZYnrzC
- 8vZ0Cg/3D+lZ94HIAsxsCH5ntPl73Ggx5Yp1tWuIgiU8hFGI6nX8SZ5sLOIG3fmkrBio
- +Nw4sOsx4s1yKKOlx7KJnXRKa9X69sa2AKgl4nPx4QqFRn4UIh820TPB1kL+TgyXTYKU
- chxw==
-X-Gm-Message-State: AOJu0Yz9uBwRkuQ8SQjp7qe2XjCsLJOvhfrrAUHKkrEhcWHUDpYTvASS
- bXb+K0oFErmaaGCJFbAu00q31tEG6zM4pkqhYfpQ+TCwb7M8/Jp6hm682XctP2gvrCwFPmaasB9
- YhX35W6jhxr/8PAxZcOC4GFksU4y1pPCHZwbYUnRvZw==
-X-Gm-Gg: AR+sD116u2wrLhzGg/To+POI4rQdNWfExVr3WSncrooS3655OoYU7Q4+NygtwmFu3VA
- ejKK9BPp6RHHgSU2vn6f2A51DzkkTIGJ9kQ4l2Oedt+gLAjdNQM01VSeReKwNANi2fQorl/XfdA
- z+6X7607PmepkmzHcxmoYfJOSjFdQFKxMYfANpstHHvYjZYsWTwOpFpg62Jrmvt7msgu8W5t/u5
- opyazpkVMhYrEmwGG2YH1G3zyv2Y/XQEiFAvHWUo1cqOLSWv+Z8o0Jr3ysRXTqILZZot3vNR2jJ
- 0AnPpxUHCDLZQ7rhBA==
-X-Received: by 2002:a17:907:746:b0:c15:f26a:342f with SMTP id
- a640c23a62f3a-c16b4737d65mr691581266b.23.1784638319112; Tue, 21 Jul 2026
- 05:51:59 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
- <20260713-rk3588-fracpll-v1-3-cdf47f2ca0b8@flipper.net>
- <f2dc4c58-20a9-46d3-90ca-497d473519a3@cherry.de>
-In-Reply-To: <f2dc4c58-20a9-46d3-90ca-497d473519a3@cherry.de>
-Date: Tue, 21 Jul 2026 16:51:45 +0400
-X-Gm-Features: AUfX_mx66-3HyFhVpq-utu-SE9De4cr7VKaV8mMAAn00tJoMKnVMi4ZtbGsRtJI
-Message-ID: <CAKTNdwFkqckWyEhnFy1jk8bnGCOutAhWJ0T1g=R3HWBATJtFCw@mail.gmail.com>
-Subject: Re: [PATCH 3/6] clk: rockchip: pll: fix RK3588 frac PLL result for
- k=-32768
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
- Jagan Teki <jagan@edgeble.ai>, Lukasz Majewski <lukma@denx.de>,
- Simon Glass <sjg@chromium.org>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ by phobos.denx.de (Postfix) with ESMTPS id 5B980803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 14:56:06 +0200 (CEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=j/CEFg1wyjPEneKYDSiS13crlI6pp4g4FgV9JpZZCQORz+/+XYhxTaluh6j7YfYXuG/ZtFWdWQmP39NLSyHVMNOrN+Ij/JB+Zs9Cvb0Pe3Dl6O0TuMIbzwLay0aIkXCZFyUB4DzGUejE+XGorsz+UEwjJjcJcNohnUrY/qXUhuUW4yq8zh/OcfNvvDpNi0Jkq/kzUnjpXjjrU1asaSgoKQ7npdBX0LVgOVbQ8nJxUtWml0DiNaW+Uk1iQAZCHtgWClct92Ott3ujr7P19zo9km4ePL0DAaAE2Yn4t37db/eHhDxyJx4ElJJ8NgqocnRpyNIYclxApVayKd7fQrXtBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hIVzT8uy6hLiArYBtkq07XHQ0WkerH2zHRmQaIEsics=;
+ b=fLC9DeNtFGiSlaY1C740UdUaOBWtsGKkaZTT1YimhCWgCPKUk8pYP73/A7qLK3KnCT0QCLmg0fwLOtd5fyIsmMJXXLCJUblHjawpNouYrooiXQPGZNTfNdFGmZhEMlZsUK26IAEGq5mEEaN/GIK6xklMiJ6jLwrRqM5rF6lprj4aviOTiY2+6wQAerPCMe9COFEMioUE9aINItzSy177iAhg5aP7b3KYYpeqz/dUE/GI1rhSdDSYhXY4JP5wovZ4L2mbkErQwPEM29fSSZJVuKpubcS4/33D+11iyW7KYeHvZI0ZPKL4dQPAGgrFDH7//VJjwNYLZTs8Why8jrTB/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by PA1PR04MB10205.eurprd04.prod.outlook.com (2603:10a6:102:465::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Tue, 21 Jul
+ 2026 12:56:02 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0223.012; Tue, 21 Jul 2026
+ 12:56:02 +0000
+Message-ID: <c6beb0ac-0155-4437-a398-0e01241f0e47@cherry.de>
+Date: Tue, 21 Jul 2026 14:56:00 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/6] clk: rockchip: pll: fix overflow and drop manual
+ two's complement in rk3588_pll_get_rate
+To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de,
+ Elaine Zhang <zhangqing@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>
+Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Finley Xiao <finley.xiao@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
+ <20260713-rk3588-fracpll-v1-6-cdf47f2ca0b8@flipper.net>
+Content-Language: en-US
+In-Reply-To: <20260713-rk3588-fracpll-v1-6-cdf47f2ca0b8@flipper.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIVP296CA0035.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:356::18) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PA1PR04MB10205:EE_
+X-MS-Office365-Filtering-Correlation-Id: 896aae4f-70be-435b-36cb-08dee7276b3f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|23010399003|366016|7416014|376014|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: upoSEKzo0HrUUGjXHF6idmuVyEYbVLVFqao/z4wBCnm0iEfM5PFKKCYehnzuHasvC9W21EC4ZV6t6o5BagDx6WEu1/2aqsiMHUxXmR4IpYD2eyjQ4XDOKTKUWr8qp9KaWg00vP/jJ+tc7dCoag8pXn8Xip323J5PUXP1bqrdE0KSudSRyxW7J1ylIaKbdlONqY6/1Csp7ZyG+H7P4ND6W5cECLJLqAv+obRMAu0lPGwdRHdrX+KhZWAQxHNZgUGC0cJQ1xTOcMzTp7KXNEeriFri9DREh3x2oWLyXEgisCAXfyzB4m1NzKK7wEAdMCAO91D46eDb6CFPLZ+43JQpUVryLW0gEDBpiDJo/fG8IZsu0Ae8p4K4c5IDYECb8yupzDTiHjSx11yRxd5fKoCJRzsBLsY4Gp5gu2rkgJzOYZqJW0gkA3bNTHuhCekOJSyJ+WA5SOLxiM9ovDhwjPh3uDRX9KFcrN8BkBMV+JICd1AqvTz4QNM1YWJ3+8EsDX+UFS79rNnsREghRQLTxRiTZICJtZcKdKJb4s8AYCcPLkc+8UPZE/9qWLUxXGKfkM5r4/gpW5SDZWDMpxagPNhK26Dh4V+gEJbCwISsEJRY7dGEnp8ivbIwFMW0Df9n4R3x
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(366016)(7416014)(376014)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WnVGZ0lYM1Z5QWN1dlJrRVNuWnRZYVdQd2wzQXRWOEpZNEtXUnoxYXBzbEY2?=
+ =?utf-8?B?RzZZYnJEL3VtMUdYVmVncUZudktNbTBLbnFpR3pJUkVqekNEc2pJYXMzWkRi?=
+ =?utf-8?B?WFVsZytkUCtxK2tXTnBremQ5RFE2dHBJZEVlK0Y2bXdiZGViUVN5OG0yVXpy?=
+ =?utf-8?B?S3Q5VTR2TDJ2dDByUVJZRXI4YjJ2VUN5VGNVQWtQWHJJdU1YeUc3VHBNYWo5?=
+ =?utf-8?B?NUtSbXZXYXdMUFo1TlRLSCs0U1NpSEgxTk1wQkNtWFBlRHBKSEt6bFVvWjNQ?=
+ =?utf-8?B?MlN5a29WYlN6M05xYmE2UC9YeG9IQThVK3VmcEtsc2p0WjNIUmlDUHBaZzl2?=
+ =?utf-8?B?K0l1WWlJQnEzd0c0MTRSNHhEZTZHUVVIbkFkV1ZkeWRzYWdvQVdPa3psc0ds?=
+ =?utf-8?B?VWxod25zcVo4Qk9DRTluWEE5cHBQV1JRYzZ0TnRLc0VnVlNJdTZvSXQxZjJR?=
+ =?utf-8?B?elpXdWN0SWlSTjJJcGtRaHV5bXZQTUcvNEErSm40Nm5SdU9iaXV0eUVia2p4?=
+ =?utf-8?B?NWhrN2xic3NBNlN0cDcyZHdWb1RwNDZOcmo0dkFObGkwV253b1prakpBdUt0?=
+ =?utf-8?B?OWNJTkh6RnJLOFJmNGN1eTNxc1h0c29tKzZHUmdWZHpBYWpzWDZ0RlZSZTlT?=
+ =?utf-8?B?TGxrU3J0UUNCOFRQa0Rod2p0R0xoVkpZTmlZU0E2cjQ4cjd0U2FWZ0NBOUVB?=
+ =?utf-8?B?c3o5UFhOU1JBMVAvSUM3SU9CSTNnRGp3SUFEak1NUFFWbWw4Q0daSENnbHYx?=
+ =?utf-8?B?SHBTYVpFcjNRcEpCb3FHMzI5cE92TUNKL3lBZkdRc2RTaEFVRnRuWHpCaXd5?=
+ =?utf-8?B?aUlaaEZyK0tqNnlZN0xsRzZmNEFWK0ZqQVNvWE15WUtDN2hDcjU2TlpNd2Uv?=
+ =?utf-8?B?eER4SmhVcG5iSG0xY202c24zVHVaemRvK0RYaG8yU0NGSmhLRWlKVm15SlN0?=
+ =?utf-8?B?U1QzelVMREVaelNld05UdjZUZWt0R3FNMmd4ODA5bkVwTk1sME84OWdlUGNC?=
+ =?utf-8?B?ZFRtTzNkQnFxNHE4UE90c3dJTG5kU1NIWmpEY1YrL0gvVTlKV1JvMkFKTC9R?=
+ =?utf-8?B?bXdjL1hvaVlIbVA0TjhvZHNhZkZQbXNFMkQ5azJzdE9LSDdZYXF0eWwrYzJw?=
+ =?utf-8?B?UU9KWUdMU2JDV2c2UHZqY2I3UkhiRS9LdlF1Qk4rRUJnNFZTaFdjTTAyNVFQ?=
+ =?utf-8?B?d0MrVGs2Nmc3bzlVUUp3cDlNZFBaN253Y3I0MHlKdHZrTlpQSWNWYk5HZko3?=
+ =?utf-8?B?dVRsSVRpc2pveTFPZlova2I3Zld2RFRER0JHUUxwSGtRREgvN3RXaEx6VGE0?=
+ =?utf-8?B?Q3hMUGxiOTVrc2VSU2dNRGE5M0E5bzRuQlpicjZSdHhIZ2pWY00ybE1HWkxm?=
+ =?utf-8?B?TklzNTFjNWJmQWJVN1RHajdPL05rU2dCblA0bHJpbEZBUUgvV214cklGeG1J?=
+ =?utf-8?B?UU8zZzRlRi9hVldRNjdpV1lVVnNCQ2ZkWVJ4K1FBVUxPalZoMWhBbnljeGp4?=
+ =?utf-8?B?S0Y0K0g2Qng2b1dOdEN5WGNaTE9DNU5qTGZXVjdZdHRXZTQ0Y2M3ckp1SUVl?=
+ =?utf-8?B?MW00aFNxQk00QUVvWEJ4MEhqMm1GeTVLUWZweWlKcDNDa08xL2ZpYmt0YzVZ?=
+ =?utf-8?B?R0ViU3lMSUZRZm5INFpTYUhUbkVqZTNObEg1emFEMy9ZM3ZUd0JwN3NWV3Vm?=
+ =?utf-8?B?RGp5TWVadnUzVCtwakpQREN1WFJXQ3pqTG1tb1JldXhxbDZ3UFVDcmpOaHRE?=
+ =?utf-8?B?QzdJSVdXZXRKZkVkSUZIRmg4TTczYko1WlpRTm1keUJKS0N6VVh5Qk9BY1lh?=
+ =?utf-8?B?SkpWNFFlemtSSWttSS9QTHNjZFF4SGUwTGczS3U5NEU5UVZnalFVcklDUVdU?=
+ =?utf-8?B?MnpFK2JmWmZDYVZURE9heWdNaklKMkIxczN6andoWHlnR2Vhc09KdEN1T1NH?=
+ =?utf-8?B?VDFXZ3NHSkNBL2lsSmpiYVlnOUxURW1ITFJzVC94cWFyb214TURWcnJBRWxx?=
+ =?utf-8?B?aTMxVXpsOUFJQWcyY1VIVkVPSmd4aG1YRVhvRytDZGhNMTd2bm4rUUZEODJY?=
+ =?utf-8?B?N01PdUg4YTBaa2NWSDNGWWhrNzUyQmpOVGpiWWZBc280ZG9hRWV4aVpnZGV5?=
+ =?utf-8?B?cTZqbmxTR0ZURStMS1B2OEd5cVc4ak01ZnQ4dFdzaWgrWW02STJaVTdQSWwr?=
+ =?utf-8?B?eGtPemlFV3ByY2ZPRDdZQkcxZzRUZzlXamRvRWtScklyZjJXNDl1V0RCSm5Y?=
+ =?utf-8?B?NnRUMzRmSm1zZEcxTVd5cW5uTG4rMDllYXRQcXlnMVk4ZkY1TnRNZU1MbEtm?=
+ =?utf-8?B?SVUrc2tab1EzMlgzd203YXgrVlN0clgvLzRmOFMxdjZWamhTTWxxZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 896aae4f-70be-435b-36cb-08dee7276b3f
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 12:56:02.3335 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gm+V7UaELAQZZIJxewrKgTxOSS5+j3S7W98QZxGQluMsh0TzAbz3HOnZS7fUT1dXkB+O/eeZTujU/n1ysmCxhK7V+RKHt1TXJljHczsD1qM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10205
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1784638319; x=1785243119; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=p9EJ8ktiySQRHo3N1MEeGTVrItSD3tGcCyjrnOdSCn4=;
- b=btXj1pnH3TGrFNTIhDvEA8Njqnk4OlF7Kwm61N/t0WLjIp9L2T4MZgVZ1IJnTIyOJZ
- +Ja05TTdRM0NESPR/4SR5JwPckAA5Z9pmm0dtDwRFYOJNIR13k3XSV0j6Fw3KNWZMMVj
- nO0gqCSHjTz+aPF9l4toG0HjaLPMfVQ9NNdewlV6zEAPp8Sj7h0lWi6ruMYVLHe72cS7
- DNuahv9q34tEO/BWTKBS6RY+W3dhNPOlAZrYFU4cGH8j5d6h/K8MnqQc7R0ThS34WePF
- HAXDMOtElCW1qfAukTHl1AjDcpsNcjsM3ftdS6fygx+aMq3QfsXXjkFp1kf5YlQLgqVp
- hcRg==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hIVzT8uy6hLiArYBtkq07XHQ0WkerH2zHRmQaIEsics=;
+ b=gqD98cE5OSRIg5KK/G7x3CRQymLhRaAgPOoLHjb523VpatAuCIlVeQDP+uC24AMG+2sn/fJ8QMJV57cr5JrS/W5l3FQgmEyEJtQKniqGKLhj0yfxcxOh1V2+8XBQSlrFOhms5G6zZQQF4qzCFdfVVEDfjaktGdFQ7QFIQOL+zsE=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=btXj1pnH
+ header.from=cherry.de
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=gqD98cE5
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ header.from=cherry.de
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=alchark@flipper.net
+ smtp.mailfrom=quentin.schulz@cherry.de
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=flipper.net header.i=@flipper.net header.b="btXj1pnH"; 
+ dkim=pass (1024-bit key;
+ unprotected) header.d=cherry.de header.i=@cherry.de header.b="gqD98cE5"; 
  dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -166,101 +196,32 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Alexey Charkov via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Alexey Charkov <alchark@flipper.net>
+From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Quentin Schulz <quentin.schulz@cherry.de>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Quentin,
+Hi Alexey,
 
-On Tue, Jul 21, 2026 at 4:16=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
->
-> Hi Alexey,
->
-> On 7/13/26 8:35 PM, Alexey Charkov wrote:
-> > Current code needlessly sets the k value to 0 when it is calculated as
-> > -32768, which is a valid value for the RK3588 frac PLL. This results in
-> > the PLL output frequency being higher than requested when the requested
-> > frequency is exactly halfway between two integer-multiplier PLL output
-> > frequencies.
-> >
-> > Negative k values can never go below -32768 either, because that case i=
-s
-> > handled just above this code, so the check for k > 32767 is redundant.
-> >
->
-> and because we add 1 to m, which is eventually multiplied by 65536 and
-> thus if k is >32767 before adding 1 to m, it can only be <=3D32768 after
-> adding 1 to m as we also invert the sign of k.
->
-> > What remains of the if statement is a hand-rolled two's complement
-> > negation of the result, so write it out as such for clarity, and return
-> > the true S16 type of k as specified in the TRM.
-> >
-> > Fixes: 6bfb37e70209 ("clk: rockchip: rk3588: fix up the frac pll calcul=
-ation")
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> > ---
-> >   drivers/clk/rockchip/clk_pll.c | 10 +++-------
-> >   1 file changed, 3 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_=
-pll.c
-> > index 69d2d182dcb5..c6fbeb71c77a 100644
-> > --- a/drivers/clk/rockchip/clk_pll.c
-> > +++ b/drivers/clk/rockchip/clk_pll.c
-> > @@ -167,11 +167,11 @@ rockchip_pll_clk_set_by_auto(ulong fin_hz,
-> >       return rate_table;
-> >   }
-> >
-> > -static u32
-> > +static s16
-> >   rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
-> >   {
-> >       u64 fref, ffrac;
-> > -     u32 k =3D 0;
-> > +     int k;
-> >
-> >       fref =3D fin_hz / p;
-> >       ffrac =3D fvco - (m * fref);
-> > @@ -181,11 +181,7 @@ rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64=
- fin_hz, u64 fvco)
-> >               /*
-> >                * Round up to avoid overshooting requested rate for nega=
-tive k
-> >                */
-> > -             k =3D DIV64_U64_ROUND_UP(ffrac * 65536, fref);
-> > -             if (k > 32767)
-> > -                     k =3D 0;
-> > -             else
-> > -                     k =3D ~k + 1;
-> > +             k =3D -(int)DIV64_U64_ROUND_UP(ffrac * 65536, fref);
->
-> I don't like migrating k to s16 in multiple commits, especially since
-> there's also a mix of int/s16 in there. It's quite confusing.
+On 7/13/26 8:35 PM, Alexey Charkov wrote:
+> Current code calculates the fractional component in 32 bits before
+> assigning it to a 64-bit holding variable, causing overflow for real-world
+> values of k, given that OSC_HZ is 24000000U. It also does bitwise manual
+> massaging of an unsigned representation of what is actually a two's
+> complement signed value, which is confusing and makes the code harder to
+> read.
+> 
+> Read k into a properly signed type and promote operands to avoid overflow,
 
-It is somewhat. I did it primarily to make the derivations of all the
-maths churn easy to follow, and I've double-checked that all the sign
-extension and signed->unsigned promotion works out correctly. It might
-be easier to squash the whole thing though :)
+I'm not sure this is correct? Converting an unsigned integer (readl 
+returns an u32 and con is a u32) to signed (k is s16) is 
+implementation-defined as far as I understood (c.f. 
+https://en.cppreference.com/c/language/conversion). I'm sure I 
+misunderstood the spec but considering signed integer overflow is 
+undefined (and I guess one could understand casting a u32 storing a 
+number bigger than S16_MAX into an s16 to be some kind of overflow), I'm 
+a bit concerned here. I probably forgot important stuff I learned a 
+decade ago :) Can you point me where/what I misunderstood?
 
-> It's kinda bad to store the return value of this function and then do
-> some additional based on its value and set the rate_table based on it.
-> Considering the next patch, I think it also itches you :)
-> I'm thinking to move the whole rate_table->X assignment within
-> rockchip_rk3588_pll_k_get(), also pass rate_table pointer as argument
-> and simply return 0 if it worked, 1 (or -EINVAL or whatever) otherwise
-> and have the for-loop return rate_table if rockchip_rk3588_pll_k_get()
-> returns 0.
->
-> Keep the current type when moving the assignments into the function,
-> then migrate rate_table->k to be an s16 (including the struct
-> definition) in another commit, then fix the k=3D-32768 case. I think it's
-> clearer that way and avoid implicit casts and a mix of signed and
-> unsigned types.
-
-Sounds good, let me try that in v2. Thanks for the suggestion!
-
-Best regards,
-Alexey
+Cheers,
+Quentin
