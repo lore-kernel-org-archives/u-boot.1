@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E512C4452D
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 06:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55571C4452D
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 06:16:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D99E480E36;
-	Tue, 21 Jul 2026 06:16:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7333180E50;
+	Tue, 21 Jul 2026 06:16:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dxjFAsdcYT1o; Tue, 21 Jul 2026 06:16:43 +0000 (UTC)
+ id yzL941kM6U7V; Tue, 21 Jul 2026 06:16:45 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BF88C80E1D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4197780E3E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784614603;
-	bh=d0PXVZtftiEm8491TxZNS2WLkeSiniZ0yRwHpsMToSc=;
+	d=lists.u-boot-project.org ; s=default; t=1784614605;
+	bh=UNUeUhIfktQI9l4LwFUOAv3T7bDgu7YIxdIA5SENr3Q=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=A6Rp8bughWlq/1/B7NmjMcri8TSRj3tUoNvOEvuF0y79cZnmSejahKPBkH/MMKTtG
-	 3oqW+dprCvpwWXns4vDDsR9AAGJB5biU5Ybj4x9POnqkxE8PWyH5sI7IqH6znfo31v
-	 mfQHkIe01PnLv/H+CmOpXF61Y7Vg25OTrsOinRwRwHa+JvCnNb12Hh5odPQQiF/pvd
-	 1WzEM5NZrDuhsOlsQUrxXd96Pmkw9dJHwJJ7t1S6dF9ZMsWAeRGXMbx3O5chpdNn3e
-	 LGrg47zejd4QBo8vv8uymCYDKZQQX79oWVev5CT4u8tz8Gj+gkWSL1YvMA3/udrUEf
-	 2WRRrwemkloaw==
+	b=n7xAvYBzj5KFVfNft0jwln0QsheF8gdhEmgtAcuxDPkX0XewEV2c459VOfaCKOFkn
+	 DEySNyzLy46lrRgs/J5035Ve2TjM+KGkC9JotH3GpClUZw4k2bgG0wmPWLeDKd9wdl
+	 z7OdgXmI9+lgORL7wM9dK7r/QB9Txns2gm5lbpmL5C55rUo0id/aY3tz5i26A5pJoM
+	 jI5YV7VVJmJsRDJvfNn6LpeAFZt5bhqNDndS6vlfLR5LIzOUUI/U1asWBffl1/gd3Q
+	 uCTG9B0mxhykXI2L+R+31tsJibuaY6CsafvSKo7DiTaUd4x04ZcEXkBCzrdjeKFAgp
+	 IJduKSPVBRZVA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BF88C80E1D;
-	Tue, 21 Jul 2026 06:16:43 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0FA1E1099
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4197780E3E;
+	Tue, 21 Jul 2026 06:16:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5847CEB
  for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EBCDF80E19
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:41 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4A68C607D8
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O_fdprOHwSvx for <u-boot@lists.u-boot-project.org>;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TEk6yMlJVPdh for <u-boot@lists.u-boot-project.org>;
  Tue, 21 Jul 2026 06:16:41 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=dinesh.maniyam@altera.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E286080E1F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E286080E1F
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E286080E1F
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=dinesh.maniyam@altera.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org DB673607DB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DB673607DB
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DB673607DB
  for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:40 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E069F803F6; Tue, 21 Jul 2026 08:16:38 +0200 (CEST)
+ id 3A996844F6; Tue, 21 Jul 2026 08:16:39 +0200 (CEST)
 Received: from DM5PR21CU001.outbound.protection.outlook.com
  (mail-centralusazlp170110009.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEC84844F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 08:16:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2077E846A4
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 08:16:37 +0200 (CEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nWesCYWiZTfP8IQp+K18tVRFov3fuT3wCvxtQLcqm6HKrT8/gElt2hagvtvGPnnvMFGTqDnQR9n2Oc3j2RkFw+u7VmZIsY5AAlouFthlB1PuKpl8pTUa33TXAM/WQQi4l5bphxhLMpAS0/oPBRBNcxi8WPdxdl+jJtWbaq6nJ6OzOOlQxlS9iOMDWct9AbPc9uDwMNcOM7OgTfU+fz2K57elb8HG0jW1tQYlHmPE4Ia+dc2S+cemyMmGtK7e0U3C+KAp2dS4qNUrzLLGnj0qrw/cLInuL0qV3oLzm/FLeZiliFrnUfdMoKpRQ4RE89rCMqLJl29sHaUcHbiFPvBiPw==
+ b=kao5KolYf51op+Z7H2IvqTG38jyBjVzuJDQLgowXQwPhjSFrMxLh1h80Yt4t4YJarymX3wP5dA64/k6WQWyyFN9bXeBlj1rm0jgkpGUWHtseCyrpPPgzW/a3AKcEQzTh29CiI3FHZNOIk3h6mZGF7ithaupOKbDzaag6y6q0jwGrPA5RGQytuQrxdfK3tAAl0+pLxbizB8FhUMC8exBioyj79zuBakCEnZB8ot4iT2DEqohvS5pBG1TNlrem58vay8ZcvBuWMy7ZeKJu6t6GDPKU/D6NFpZr1qmRZ3uvrhoxqb8OVNt2tjG9qO0cwEfA3I2EOBUA72nXs7YQMiM6eA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d0PXVZtftiEm8491TxZNS2WLkeSiniZ0yRwHpsMToSc=;
- b=yPN4MRiOc1XGTY+6zmef+Z1D39/Funp07jstP5VqGtPP/1zUZ9pzjyBFaEU06I4Kn/cGX83vMB90XVT3qL2c6PthLMjC0tm7Ucp8DFWzEkEc5sWgc9TqGgbIvmisfQB8NrkguBvK9zRe0Y6TCYwB0sEEgpPi4/xp6M0QKkMDzJWFyreN3mw7tifmekoanqrcNVVmJO9uQDkOSzXWWkyy9FWYnl6nbuXBBuR94LIOOjhqS8tPBX9XyBlVKYL5fXhczXME+Xoi9ealvYNcckLtsz8YzqKpt6W8iM7HmoPsACvR9gpMoRACDiLV7FLK+gpRq4MDt/bFNsFLtuZhemWxgw==
+ bh=UNUeUhIfktQI9l4LwFUOAv3T7bDgu7YIxdIA5SENr3Q=;
+ b=st8pM2VJwCu9GsRxHHld3wS+BoDbB2P53XiPgBc9RDCyHSYp33myrGJXrHzrWGAWQ38Jplqg0JB9qCyUTqNkezarlK3WnzP5KdAW1IoZKoE9DCPun7qBH/Ge8x6X9SXCm+0PZKW5iE+cPrrtRuH7VnYSVHEgpmvdlfmyiE1theM7hmozN0SNjadQz04WmtIfi0iVKIPdIHNexqtWVN0QxIkXZcgH1G8KKbjvXaptB2i1I6UqiptAP+jNTrNrmOlBw473A7FO0ti7I9wTl1zmyQmOCO7f3CSmLLGPMAIvMnxstDZy+xCPpHa46oSYrGpm0R3TgHgGnMVynwYS7qGT6Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
@@ -72,11 +73,11 @@ Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
  by SA1PR03MB7031.namprd03.prod.outlook.com (2603:10b6:806:337::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Tue, 21 Jul
- 2026 06:16:30 +0000
+ 2026 06:16:33 +0000
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a%6]) with mapi id 15.21.0245.009; Tue, 21 Jul 2026
- 06:16:30 +0000
+ 06:16:33 +0000
 To: u-boot@lists.denx.de
 Cc: Dinesh Maniyam <dinesh.maniyam@altera.com>, Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
@@ -86,9 +87,9 @@ Cc: Dinesh Maniyam <dinesh.maniyam@altera.com>, Marek Vasut <marex@denx.de>,
  Chen Huei Lok <chen.huei.lok@altera.com>,
  Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
  Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH v2 1/3] arm: socfpga: Use custom header target buffer in SPL
-Date: Tue, 21 Jul 2026 14:16:11 +0800
-Message-Id: <20260721061613.8615-2-dinesh.maniyam@altera.com>
+Subject: [PATCH v2 2/3] arm: socfpga: Add SPL fitImage config match
+Date: Tue, 21 Jul 2026 14:16:12 +0800
+Message-Id: <20260721061613.8615-3-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20260304033029.10825-1-dinesh.maniyam@altera.com>
 References: <20260304033029.10825-1-dinesh.maniyam@altera.com>
@@ -100,72 +101,72 @@ X-ClientProxiedBy: SJ0PR13CA0131.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|SA1PR03MB7031:EE_
-X-MS-Office365-Filtering-Correlation-Id: cbf845c4-d2c1-44a0-205f-08dee6ef9aa7
+X-MS-Office365-Filtering-Correlation-Id: 9ae098e0-b4a0-4beb-e7f6-08dee6ef9cc1
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|56012099006|11063799006|10067099003|22082099003|55112099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 5MwJ6Q2CRlu5UN+8qkkide5W0Zbw/e8ePy2vsuk5jalKjQHMk5k5zwPSvTjRHyIc8upcG7Bup94TF4BE1lOaHGF3ued/N2ZscPSvk2QreVkkFljeBd+rFsA2CT6oucyF4PL3zWR5Sju0G9ulXry0tThCcUTkyrs6rh3nFhnxc9mor7M4BMI8fPEgyFLcBcOWE2QSHmX17x6Nqzl5JAaH3kgl6FFMVtFqwZK0yV+0gSuqPmhMzxm3vgiXXrPh/cjgJc+8a1J/wobdj+Tz+PIqfeXMDqCoItf13XbRnJ1VTOnsOHWdYZT3/wzHY8cbuBkYuglMKZdbfgA9Fu25uSIpL2WB/Jqi5EAKm3dyAJig0+WH5c3YLf9OxIRFrbwhMB0l5KDf13TKRCOXtOR+sgl1wMPjmNCp/sA6dpG4jhMiUVjS0wDfwWC6VY1HLg1s4Y47tzXr4WHO3nudltxcF43QJGZ17jzJG/qBs41tz4GcuyWamiiwso7JXrrQkLOfT8x+2dxhnKU+/D5ZU/lQ9eFE00u33cPaNdmgbwvnpRoVYRUOIUdS1Wzj66A0god5Wyna2Ql1J7imiTzmQHrzSMb3zl6cGGDjsWagP+MVWW7Ju26sN9aDBveNDtm9BYVu0rLeMwjrp7s2MXrGRCtN95LlwxSTP4brGfG1Tjc59hgICAY=
+ ARA:13230040|23010399003|376014|366016|1800799024|6133799003|56012099006|11063799006|10067099003|22082099003|55112099003|18002099003;
+X-Microsoft-Antispam-Message-Info: yLetPgVytgj40vchruelhhudPc2TUxaZow/Bkpq3Hrm+KWOnOHl4fw9yNg81vtTFIdJh+jWeetffVV3JnpsAmBWycYncfRi8UHJQZIu3bL8ZkjCA9DIaRgkOE9xVvx0ffiyqDfHdHImzyLBKU5xPcmwzQNFGpTCDFAvS3nDljZBC14Ai3Qino/HpL1jkbLs3+45kD2oKOuAP4V3T2dYEpJbWrhEuvqtcWe7jo5E/z8bY1Qm1EbFHpGhGsYkQZooOX25oEUBhwLxpdtQrNwyT12KKSMFtbu3lTfh15ShW89/nG6VGBP6yfqTuecqfoP7soScIXb7m0zj1JjA00Rpz2Kw766YZrBUby3sFkZcf4UfVplrlqwHHk79c6zOB6A/cG2UzNYJlK5Cpn9cXfqgVZUf+iJBw45dxaRnOi9KcqP/hiNAdcUI9Qfr0M3uamH939vRfUkmyZtEH+SN8sY948keg84iiGwa5QCKyXDeDUX28hK/6TkkW/h1DcxduVmqY3+WPhTEnZ7cNGVPXeMBvYnqhK0r174xG+vEyRvEouqrED5EqHM/43ECmNC3TmrhyF+1mNW8VorCtMbA7IPM8plhgXT6YzBFZaqqYapXyTKwHZvEoJxhRIzOpWYP7ZlIzzEcy+HeCAxOfYI3CYMuTzZP1Xsy2LLVz+Efa1Upzy5s=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(11063799006)(10067099003)(22082099003)(55112099003)(18002099003);
+ SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(22082099003)(55112099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Sg2benOtYo5yTxuuQcjefhl2FgYuFadBDjiZFZ2hG1twITdzq2yVD9RRW9cU?=
- =?us-ascii?Q?N/WJ+CdctDyJoiVUPGvI4Kw+R1nLMDVueEFibfAksp+pIuDZktqy/FK4104B?=
- =?us-ascii?Q?PgwxDWd7cErhRex8falXjuNkiXqSMRDS12eiJYLUCb4SME/XRLui6j+QAOTX?=
- =?us-ascii?Q?jOZl3sUvWcfKCX5EU//rohntI4sKznD+ZSlQYCne03Mvc6aa6TA96X3sBZIS?=
- =?us-ascii?Q?LK0t5Dfe2A7RWJsv3EwIfwUblHO0OMgV8sKBkHdlFjoWrMAWI46EB145Jgf3?=
- =?us-ascii?Q?VqF9fz2Fcj48oyeUccKElV8PxLYu7zRI0CNsS8C9LgXOhJROgua/rIgSQWui?=
- =?us-ascii?Q?JnfZFmFwHHZkR4URYqGVwCOBgoW/oAwsQjn6T+38g38h0t+Tghsg8q8ewilo?=
- =?us-ascii?Q?v4JIoirlhJUex+43KDda1Lb26YFgiFYYIuF3jXAiYwVxPOYtXdpCbO5oaliS?=
- =?us-ascii?Q?x7oVccI0hUGnpMFuyUsmLHirHfzDFPBhlpfvFCnqEavTZw5oWyll/PfNl5Az?=
- =?us-ascii?Q?XPp1f1Vw+s62gcKogfWwNIRYzI7re2W3KfQbGcn4Q0kVEUwNeEE6W5WFhTnS?=
- =?us-ascii?Q?T11WIBvU8WdhxxCXE8haMLopuU9Ym+L6N1Z0gKPxe5VgZ0sTEsjerFjFqFSM?=
- =?us-ascii?Q?S0fkrtJV5X5uJWAHufZmUvT2327hqml4P2tPFgNDWFYjHf1MwNYOzsKGpKmq?=
- =?us-ascii?Q?meja6vnOgPeFhZz42AuGngbar/z9ZZbjjcpXtHxtBhNwCnioTixsGdVqex7B?=
- =?us-ascii?Q?mfOC3TH93VV524k2qpo7WmY5YBQyl2qphKBoozn0vozZQPsIOz6YgedhOPMI?=
- =?us-ascii?Q?dp1zgk/dPlrdmTxdWQ76Y0Wr1DRzDWcIbO1gZhojOLcB485NX5ljUhDoQOfr?=
- =?us-ascii?Q?zwfsUv31jKGU8nCHkrhK/CSRN0WQI/B//4A+b61J7BYaB1Jr0YIeT86j5jM0?=
- =?us-ascii?Q?LbfXTI+Bvw7DMB3J8orZzlah4dZ80MyovKEOJFXbAjU5XvSesNjiZPAgtQ5o?=
- =?us-ascii?Q?GaiwVkgkQ4euxhfT5avd88uIPeb0U6uD/Ef2go05jrshYnFOCLnIFj4aOy9x?=
- =?us-ascii?Q?hMCiCxP4y97m9sxMYlgMipZmbRoSVrqdO63+mYw06ztjDLmAnPPhnN2cA5hP?=
- =?us-ascii?Q?/fy1giV3Y4MW7CqRgeiVjcuDzhwe1LFscWIrlAJ+YfOy2sn7qlcur8Li/UZ4?=
- =?us-ascii?Q?v5dDU+FffKcp7yD+11f0XFJmIlYYNTIvf3kQHptpb/tVGs0Rq6zTbCi9dkKk?=
- =?us-ascii?Q?RVKB0XNLmYmOx6R/pquRRvZG3pg8M788c9O4SBrdQnS4Qoc+SEwJ2UWhCjnU?=
- =?us-ascii?Q?2oM6lsasHtRTPRW7Ifw4RkVOImr4Ib2kSKwCKeytPB3EC/biurgCM8WckP2f?=
- =?us-ascii?Q?txDtnKhK2VVK1wKKAOCES29xwfbM7pZFR8jt+L2uy2wbVLljplaJ4CtnoDTj?=
- =?us-ascii?Q?AHa2Q5AmZYUilyZM+grpNzeeae+5p0xU2j70WNY/TEu041eYmXNTSuXFI3kn?=
- =?us-ascii?Q?J6JkVa2X8PTHCmIbDJPk8OkrQmYPUOdIbktuRKuwRXLpUOs5degi+0j20gkJ?=
- =?us-ascii?Q?XlQysornmuvx2JwEh+LV6EccfSWcreDMJ6WSHwH6dEBSZ/ZpzRMrrk28kRQl?=
- =?us-ascii?Q?HYyZQZt5HkCp2FOdKs1jxo5S1zWqcTeHHJVSmjhF96VVhe9SwVVvnjFpPRIh?=
- =?us-ascii?Q?t+nHmGmFPLQvCaM7atAa6l4zMDpRXP3rJens166dbNgLxL30P0mdQPDp72DO?=
- =?us-ascii?Q?O3xibz2kIzLPOx80eCo2B7tb88WBGbY=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gQNTachHUZ36TkAeXmYJ3NeVlc0tTyyFs+PzNC/VVtKVr4KrGsXFrxRvKTkj?=
+ =?us-ascii?Q?+MpScEErmHuC/Usm4pO+TqLHW+6H5thNms1DTRbYKDP7dnRVylHh80kFPJtJ?=
+ =?us-ascii?Q?H85mrBA+hUwSYgx2Of2SOixxQg56SkYLHZBAs7Y9/PW3WHbFZRInpSoi+1ej?=
+ =?us-ascii?Q?AZLjBVidNAD/D2G1pfQX5LXWw8YSjAI0WAu6WkosH45H8CxpjbpFY4ozcx6U?=
+ =?us-ascii?Q?BDLyHTISas+1h0ukcomPO51gW5BKEvVk0G9CjuS/AfBB1njbueOaMbz4D2Ts?=
+ =?us-ascii?Q?Bo20Olt5wJ7v0i1avyGJNhRtogogmWXVusxO/GnM2pDQnO736b+cnQplUJ3a?=
+ =?us-ascii?Q?NxIhwfKqb94Ghl6J5ATA/XephZqrnXuXongqhuTtbDd8tO9drGO9Xj1D47r9?=
+ =?us-ascii?Q?VomMXwKn22gMNP9QxH/M9NlNUS7Z8+psJxjkebuBrDlC9KSC5y0VZiCVj/gv?=
+ =?us-ascii?Q?OxoxCt4MNSfxmbAfV5TSD3LBd87l2Fn5KJc+G3+knT4PPPoCmUuas/Fl30iq?=
+ =?us-ascii?Q?CzYRS/OpY4o00D1YtI8+5ngeSveS087bHtBRLt37C70o2hNojwQAMsWuYSLj?=
+ =?us-ascii?Q?kQtcJIFnX6Fwsu9JVaqA7jM/kzCQaklJmEKdmYvjRBQQkjKl+YoWYcJJxK22?=
+ =?us-ascii?Q?MbGpsLZfo65yfzkyg2iMIcvLaDNsQklCUdOXz3l0mMyPI7fB/sLMKTlgxBDs?=
+ =?us-ascii?Q?H/htrVXK7q0gRkNGIT/fcj9eLYsKnXBqPrpUdcAmuQGMnmmFIX8hVXW6dj6O?=
+ =?us-ascii?Q?KNlZaUp2k34vETiaYgpsIkhFapoJVFEFUO7B5vsYwnHs28pxcj5MA/k995n7?=
+ =?us-ascii?Q?3Vb9PNitk3ts91n94KD8Fg2xtfpsdYRI/xDYu4+OSJClRp88+J2ttYB9uCx0?=
+ =?us-ascii?Q?sSaRLCPuFvfvVJncDCcA2lg6DUWBkkWgIextQqB5u+GAE3/nh17anujMgtHZ?=
+ =?us-ascii?Q?3PbkjpGFDpdrTVn2uT7XrnmxECPBgrgBRhzLZodyCn8jlflse3xl6hbyV8qz?=
+ =?us-ascii?Q?4UPT+IpnjxjiVryKwxA7aMXEleFuVhj9MGidWZYn+n/dqNzyIb4VxFKjTChU?=
+ =?us-ascii?Q?F5YoJSsasA9dp3nXLhAtiyJw4652cxaUYW9dkC0RJKmyfVv69bCaHIznEp3+?=
+ =?us-ascii?Q?wOYVCzKiNO9v6+9RBTUGOSXxb4BENy3dQa+VgO3cj4oBrtRKVUxLoinP8h4n?=
+ =?us-ascii?Q?nUUMbX673GZ70JHrFjbi0j9onetUxUmDZh6dgzgDqHAvwOJyjrv1V9gkP1IM?=
+ =?us-ascii?Q?3jOtTp8mmRKc87GZuEJ6lnosG02xWEVsoF2c/vwJ1A29YIn/HrehCPGrQh1d?=
+ =?us-ascii?Q?rEtcB4HOHRK3pFmVnLlqvryJ4O6TZU4UV1LWB27JRUL8i9QrkuEzO956t0K+?=
+ =?us-ascii?Q?J+lSQvRrKwy/CtAw/FYnii2ynpo5H1C5GeaRZcXNpxKqffwnaHQiU2raehmA?=
+ =?us-ascii?Q?d5Jgk/Q3dnUvSCHhsvOiBx7/6StQxRaBdV0maw0dL9niMstwdyVsuRuKopVD?=
+ =?us-ascii?Q?UHprCw+n7g/sHO3Uywn0lBZ2sYtO6ok1Uwmy5K92CYHjoVDda3EbAsQ9wBrG?=
+ =?us-ascii?Q?sVYSS12Wrk2xAi8P905IvL5nL+x+xxeMxzt6TvSGl6HAibtpW+iErIUTc3Nz?=
+ =?us-ascii?Q?jIdP9ZxL8j0byExTZa5wQPRgfGFdGW+yXnD02O6qD04qCm0P6hbT2G/pdUSO?=
+ =?us-ascii?Q?6CMbgZpM6Xnb4Nqxyn6UXmG0NZEQU4bOsy7ZAPKYllQfF/7M4OHxQl/l6rnU?=
+ =?us-ascii?Q?ojZK1FRIgFBysCT7j/xaM8TT9V98c/g=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cbf845c4-d2c1-44a0-205f-08dee6ef9aa7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ae098e0-b4a0-4beb-e7f6-08dee6ef9cc1
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 06:16:30.2080 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 06:16:33.7347 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X0Ynizbyx8/EmTyTqkgK/mEQl0Y/V8cKe6fHoCnXLH4YofhItJpILef5f/tZw8hprjN2DLK2wZF8gXqlLN0twtmJBrzHFbvQhLvhGE/C8r8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8ik3fCZ6y76DEeh4OEH+0D0eXb2dw8uTjHRiBPF+4G829O+Y56L+IColikbFlT4P8sS8Yx01vHwHvf3RseMOkI55qDXncNyBvNj+5hoyrE4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB7031
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=altera.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d0PXVZtftiEm8491TxZNS2WLkeSiniZ0yRwHpsMToSc=;
- b=JsH0bMCGNou05Mtf1kPy1O2okTJh4vXXJK4dFTmFq00gwyHjfLELUo8kpCXx6EeGDQNIYMwjzwh+bean5wHqSpu1Olb2Pw4S8kv2yvWi0uoa+o3PyXsrLCt7NnJiU5p83NwSQg6blz/JqhO/oyF33ZS2fq+zrYj4Es9HX7eKMArW/eLdfwf5NYKFu12oAKCtj6gwipMxhin27L61AjYBS86HPNoUr6G70Hp1Uhz0MrljOxBI20+3XkmF/PisgaDMZJeDUBrZY/BPDEz9RKomejSxwphkci2MBPAf+c9ltJVTAEZIxxAsQU/N3egoNymlssAw3yUQJtY0Z/W7WaZRSQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=UNUeUhIfktQI9l4LwFUOAv3T7bDgu7YIxdIA5SENr3Q=;
+ b=fURKBBbcpokvn8Wbn4SjjralIXJ0GcAs66tGWqfqEQYya9OhN4pPPTH76XALeFGn+OtKlt/OKGlhELW/FP+xd91LIL7FSGynGE4m7ZMjnRrChsixw7yIyHw3pFG81igAsTCZ6/7ApSVXrdOHidUqGHPWbXLa1B8U8e26KcsOfQGhqf8r0yZcmV1jqKU91qpflnT49qpuFc/0RHAat+RBItqnKZM2W8AumhpO8dyhaw7wftJY2BT3u4B+iLC240Rqed19XO+/QwrE1V95mYKSFX8fF4ii8Fe+4qAi8YmDq54L31Q6ENl8Yb5g+vX0QVQIROrYiVNFoq11jUrz3KyEdQ==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=altera.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=JsH0bMCG
+ header.s=selector2 header.b=fURKBBbc
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none)
  header.from=altera.com
@@ -173,7 +174,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dinesh.maniyam@altera.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=altera.com header.i=@altera.com header.b="JsH0bMCG"; 
+ unprotected) header.d=altera.com header.i=@altera.com header.b="fURKBBbc"; 
  dkim-atps=neutral
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
@@ -195,60 +196,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Reserve the upper half of DRAM for image headers in SPL on Arria10.
-This allows SPL to load the fitImage header, parse it, extract the
-FPGA core bitstream section from it, and program the FPGA.
-
-Compute the buffer from gd->ram_base + gd->ram_size / 2, honor the
-offset argument, bounds-check against the reserved region, and return
-a 64-byte-aligned address.
+Add empty SPL fitImage configuration match. This can be extended
+if there is ever need to support multiple boards with single SFP
+image.
 
 Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 ---
- arch/arm/mach-socfpga/spl_a10.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ arch/arm/mach-socfpga/spl_a10.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/arch/arm/mach-socfpga/spl_a10.c b/arch/arm/mach-socfpga/spl_a10.c
-index c20376f7f8e..a0729ece4b4 100644
+index a0729ece4b4..a6c4ca39f71 100644
 --- a/arch/arm/mach-socfpga/spl_a10.c
 +++ b/arch/arm/mach-socfpga/spl_a10.c
-@@ -284,3 +284,35 @@ void spl_board_prepare_for_boot(void)
- 	writel(FSBL_IMAGE_IS_VALID, socfpga_get_sysmgr_addr() +
- 	       SYSMGR_A10_ROMCODE_INITSWSTATE);
+@@ -30,6 +30,7 @@
+ #include <mmc.h>
+ #include <memalign.h>
+ #include <linux/delay.h>
++#include <log.h>
+ 
+ #define FPGA_BUFSIZ	16 * 1024
+ #define FSBL_IMAGE_IS_VALID	0x49535756
+@@ -315,4 +316,12 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+ 
+ 	return (struct legacy_img_hdr *)addr;
  }
 +
-+#if CONFIG_IS_ENABLED(LOAD_FIT) && CONFIG_IS_ENABLED(SPI_LOAD)
-+struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
++int board_fit_config_name_match(const char *name)
 +{
-+	uintptr_t hdr_base, addr;
-+	size_t hdr_size;
++	/* Just empty function now - can't decide what to choose */
++	debug("%s: %s\n", __func__, name);
 +
-+	if (offset < 0)
-+		return NULL;
-+
-+	/* Need DRAM initialized and sized */
-+	if (!gd->ram_size)
-+		return NULL;
-+
-+	/*
-+	 * Reserve the upper half of DRAM for FIT/uImage header parsing so
-+	 * the buffer scales with DDR size and stays clear of early SPL use
-+	 * of low memory.
-+	 */
-+	hdr_base = gd->ram_base + gd->ram_size / 2;
-+	hdr_size = gd->ram_size / 2;
-+
-+	if (size > hdr_size || (size_t)offset > hdr_size - size)
-+		return NULL;
-+
-+	addr = ALIGN(hdr_base + (size_t)offset, 64);
-+	if (addr < hdr_base || addr - hdr_base + size > hdr_size)
-+		return NULL;
-+
-+	return (struct legacy_img_hdr *)addr;
++	return 0;
 +}
-+#endif
+ #endif
 -- 
 2.43.7
 
