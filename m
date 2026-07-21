@@ -1,102 +1,103 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0411C4451C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 07:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AF4C44529
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 07:53:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6A140607DB;
-	Tue, 21 Jul 2026 07:53:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 73D0A407DB;
+	Tue, 21 Jul 2026 07:53:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FVza753k-Imc; Tue, 21 Jul 2026 07:53:06 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h_3TjZE0S1al; Tue, 21 Jul 2026 07:53:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A2877607FA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E1B0D40843
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784620386;
-	bh=YYX40zdSX7sBhxGrWdyr8Ei6g54bQAQ4VO+LtZNfxS8=;
+	d=lists.u-boot-project.org ; s=default; t=1784620437;
+	bh=/5eO0ORDUPm2lwIgB0NvGw0IuMuoY8u73UsEl23BJDM=;
 	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=jLU0HFSdPD14TTq29Pw1W6gy3+FHIsAq44iMPUtu0xJfyCcDc2y+TTY2RThWfqKG4
-	 567DGvEeTwlayLrWZ0e5P+HsDoOVnrg6jx4Iubb/WREwBSowriXpCsQdlJOxWfU3ML
-	 HlSOy89u5N/jkBCoIu4L5DzrCMwHr408CbepxqRyVL2NYyi5hcaGZlJLz1FeSEspdT
-	 J3hpEI5e6vr/QSoRQHlmmTCCANABfG8dgRmL8BMfhQ8hRTEms7gIP9z7/6kFb+MzZY
-	 OA8QZGqXwIDnnCZ8+yftfhNL/RLhCIft0KJPDZ8da90h51t1E5kbQVFGtgEn+QtKJs
-	 Z1s9YMCTAEQKA==
+	b=oHck4W8JjmKcD2sAMmVEihlFlC3suqQNGoKiw4MOuEEpNfEHg1j5y0CBuFbVN3giE
+	 2Jn1fkkbpXU8QMTc/2UpGASbb2V8FH22Sg39yxSMhSg5pkoB8P53EM41dlIViZmqN0
+	 +aDEAQq5J90buCO2yqIFXCDQfMDH69D4E+T+P+unNTd3tsk3OQJg/HEKKvI6yf+aRs
+	 6K/nEaZuDLgxUCOYMEmn+i9zKLzNjgFQTqdtFTaw8FbowDJsQZDdrG66DHkVwV01+z
+	 DLEi+zJXlSv7t3v3WC2+f2jzRIuUNNFfOlYKypDVsnz0Mzn/EMfTvjcv40EtTjhvkw
+	 tGPrlRtF41MtA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A2877607FA;
-	Tue, 21 Jul 2026 07:53:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 189B11093
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E1B0D40843;
+	Tue, 21 Jul 2026 07:53:56 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 258AE1093
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id F2C3C607FA
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:04 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0B9CA402F0
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PvnHap9kuGZF for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 07:53:04 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=neil.armstrong@linaro.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org EF216607DB
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EF216607DB
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EF216607DB
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:03 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M7SWc6NPjgTr for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 07:53:55 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org BF91B402ED
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BF91B402ED
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BF91B402ED
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:53:54 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EEB684659; Tue, 21 Jul 2026 09:53:02 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 2C948849EB; Tue, 21 Jul 2026 09:53:53 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CC2B803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 09:53:00 +0200 (CEST)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so47173965e9.3
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 00:53:00 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 20309844F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 09:53:51 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-49554ebb87dso26113465e9.3
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 00:53:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784620380; x=1785225180;
+ d=1e100.net; s=20251104; t=1784620430; x=1785225230;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=YYX40zdSX7sBhxGrWdyr8Ei6g54bQAQ4VO+LtZNfxS8=;
- b=P5Fq+iuuOhNuB7thxWDVjInNNg6wtuO/5h+rt7hXK2/dXSXe87EGaif2YuZQPw+Wmb
- z52R9OGwpFzb+RDmHjZiLxnPx0ImtM9coY+A1QJlTs8TkLv/XcKGCHlNghUXJ5CrtXDM
- R/IPeCdNyL9AYMu2Fuvb19vp02z1MfFNzJ61N1Ont4aP3tl2q+dkeRfP3gM9pHkPYvVS
- EVRlnaKUkI2Nxi455WVHw8qRvr7q/JcmcI2SOblp8WgFqzFUnuZsi5p72Sjm686EnfKl
- QVLKKuBFgPRhZQJKp2Sgj3TsgL8Q6jzjJLzxIhrLRcn/NAuL5B86NiQBS1XmyDwMKprF
- 7nkQ==
-X-Gm-Message-State: AOJu0Ywp/2Bw1xuQH7+R74sRnYZaDZp5MZkJdpc1g3zB1rj9Jfzg9j2H
- kPn+ITDWvh9lA2NUGw871rZAPOheWEfiED+kV2oWSUjDyROrUNF1jOAjtIrw0pg/B98=
-X-Gm-Gg: AfdE7clTeXJ089XnYXbI83S1H3oxHeHeinFjUyTsE89zL/MQAm2CtYjoppSIGi5Z7C5
- zZvi9AS3JzpgfHaOvau+GNm+LlBQDgP7kmn3Cmi4KuzaLElczdg1VJbSQud3zg73WlfOqNlg6Qz
- hQn2OJLUwnkeWQppDgiJvn+f7zjQEWPoPlif1oTjRuT4ceDAd+ay0t553esJRqT1MzIXcQsQi4I
- 7Cl4HCQ40JJXmzJsB8ZpCkwmRZNv3eLWBMDkoehiOekkiNUz/vQe0do5GjYatYncPar50U9Fnbk
- Y9GW1tkzEz6lSw6wRLXCDPdkerJQQgYkEdmO4pL5t3Y1Do3yqq5U8EOvMupgCrfobuboUW8YGju
- xnuDvZm2B4DPlWP6CFGsRcayJ0RQKxMYkCNP+vna2ZPAAySbKWeocedx5e1JD0/MjfFkZ2Vhlkm
- y+aS/JrYwpxkkX7jCtJB0Zm3I2NRi1YmxlkYfnIurJMPQ/xVCXkt2JogZE+0yWVVBfimUu
-X-Received: by 2002:a05:600c:b96:b0:493:f6f0:d66b with SMTP id
- 5b1f17b1804b1-4954a3ec771mr190603255e9.1.1784620379566; 
- Tue, 21 Jul 2026 00:52:59 -0700 (PDT)
+ bh=/5eO0ORDUPm2lwIgB0NvGw0IuMuoY8u73UsEl23BJDM=;
+ b=EYDsHs36PmnPPSAPZ2ZXMv4m+qhjq0A0o1wE0DPt+YH02qSWoujchPnlCZGD0V0pTw
+ UtVu1V/9IzOVAz6dvONzBufdZFF1hTfTkFv8q3PrGn8ImzqtHCm1cz0Hptm+Me3fiH6S
+ j6DgE+0FMmBCiveGIKGlZoXC9MoyLb5wFLEL863TVt5+F1B+35+UWu5AZk0DTdMnV4Op
+ zWfQMTxRkx1/gxmG/0vumWEDHTKV02bOBlntw1/vchyrMzhYb1YOD3r9bzQmAniPQY/Z
+ Sx64eKImqTR4PIElbBnvu9K5xufwuLJ3nCqzUc8cuQwvEUHgkQ4FgmtTXYEhFYlIRBfP
+ 2GxA==
+X-Gm-Message-State: AOJu0YzK0FcKCCYO6/eM3gPilZ49p+8IEkK0V8DlCN5bMblxgYZyS3pu
+ G75p4LHMslyMHFBqICmddjxDNPBh5iR9t03wUKY1hRLMntA8EqWloMthFmzIzGV+qU4=
+X-Gm-Gg: AfdE7clr2SW2JIZNtQ598IU1jq7kdYghpY6Bbz3Sjr+shFbcTY35TNaSpax8qH0oEY/
+ h0SP1iyGWfuoqfw0E2TXjlVAZm0cKUeVM8vNSAqk/UwktYSQmUUAGkoTH5qRuG6ck+bMInX7Fl7
+ /sP+JI1zZC0XzxMPJ51r8eyyIXPPaaz13gosmBUgC28aFYk73VjL4dwEHsWgznk8PIh979TmKO5
+ qzdRdzSlJnZcszNUk4g21t+5L8b8Ebg47R0REq1varAFq/Ow9TNGGycZmtbgSf2+zpjG1ZHNEMc
+ HeI/Tmnky2tnvnvWwZ7ZCQelay5NldCa70gObeBPFEvTgIvxfm3RatkG4bN0zF4H3Jn4JIcU5CW
+ YACSkOkjLJaB9nghm2YrFTu7gLt/YMc38URjSTjMOiGm7Jww0lHgnXG7/F2trF+8fOdghUZcVDg
+ elgdwanOafPT6sYm/svOPfcGHiG3JXiqaU0d7mKzJMyq6PBwGr+B2VP5uoX2WWokGTqJD3
+X-Received: by 2002:a05:600c:19cf:b0:493:a438:7f98 with SMTP id
+ 5b1f17b1804b1-4954aa1a116mr203979165e9.18.1784620430436; 
+ Tue, 21 Jul 2026 00:53:50 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:77c9:2d2d:bb1f:99c1?
  ([2a01:e0a:106d:1080:77c9:2d2d:bb1f:99c1])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49548e075d4sm248841935e9.1.2026.07.21.00.52.58
+ 5b1f17b1804b1-49563e60fd9sm52314465e9.0.2026.07.21.00.53.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jul 2026 00:52:59 -0700 (PDT)
-Message-ID: <9c8ad68c-d1ad-43a3-b3d0-e960e9c5720c@linaro.org>
-Date: Tue, 21 Jul 2026 09:52:58 +0200
+ Tue, 21 Jul 2026 00:53:50 -0700 (PDT)
+Message-ID: <ca997b48-7473-4057-a358-b3e4d3dfda71@linaro.org>
+Date: Tue, 21 Jul 2026 09:53:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 4/7] ufs: rpmb: retry SECURITY PROTOCOL on power-on
- UNIT ATTENTION
+Subject: Re: [PATCH v1 5/7] ufs: rpmb: bounce unaligned frames through a
+ DMA-aligned buffer
 To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, trini@konsulko.com, 
  jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
  bhupesh.linux@gmail.com, n-francis@ti.com, marek.vasut+renesas@mailbox.org,
@@ -107,7 +108,7 @@ To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, trini@konsulko.com,
  j-mcarthur@ti.com, venkyada@qti.qualcomm.com, hayashi.kunihiko@socionext.com
 Cc: u-boot@lists.denx.de, sumit.garg@kernel.org
 References: <20260720085202.537019-1-jorge.ramirez@oss.qualcomm.com>
- <20260720085202.537019-5-jorge.ramirez@oss.qualcomm.com>
+ <20260720085202.537019-6-jorge.ramirez@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -134,31 +135,31 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260720085202.537019-5-jorge.ramirez@oss.qualcomm.com>
+In-Reply-To: <20260720085202.537019-6-jorge.ramirez@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784620380; x=1785225180; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784620430; x=1785225230; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=YYX40zdSX7sBhxGrWdyr8Ei6g54bQAQ4VO+LtZNfxS8=;
- b=pn4Dd5tt46azxaCsJqoHLPHiAvExhYAUKEYZfy+6XwR2eiFWkeSr2GaAqoIzYXS2Aq
- 2jvb9RAuNfbwuALbRpaa+7UTj0UYupBE/sxT/ZX1NWHGTT9kHcahf9lP65cSgaJ2Uh7r
- /nUn27AH6BrwPROeaDxqbSEXFOo0Mpk+2hKsMohCe5dEr/jKf0lLpabXSfFgKmCc+j8h
- W4uiyPsjUFWu92ArSonoizEEeTbht4D1Cd0TDztha28WkK7RP/6vKrOE9P7GR26IZ9EM
- A6nYmbtNAT4ZKMfDiXuBr7EXys2jJbaUfbERy/nHuLK6lxfZioWYrtLRdZ7mc6PLUepE
- hSEw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=/5eO0ORDUPm2lwIgB0NvGw0IuMuoY8u73UsEl23BJDM=;
+ b=kIT7kobU68d9+m1o5JunZZWVBEPaRXdqjq6TBEXmdfu12JfOV5zJLGd9ESXCjL7e6V
+ zkdVyep2Nf4Vc4r73ocY0cZN3bsZIkFYbexz7nSnuEOjTyU/q1bGgIotTMfCG4pGBuCS
+ Irkn10yMIsROT2AJOrOrwJBDhj5nP0cXO5xpMqF8cpW+3i3X9fk9C8uxmrrhV2Z5eQ8v
+ LtAFveg7vFjl5UVowahJ3S0RGMGCOZN6Xiqs42spGMIh+cXvarNWoNGXSNXE75fqG7DY
+ hNjnnww5USXe3twstXNpjQMNBJQk+XldBxiDPeqSNDZ7m8NWjePs2NyPQW3HttN1I2kr
+ DRHA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=pn4Dd5tt
+ header.s=google header.b=kIT7kobU
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -166,7 +167,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=neil.armstrong@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="pn4Dd5tt"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="kIT7kobU"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -185,58 +186,82 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 7/20/26 10:51, Jorge Ramirez-Ortiz wrote:
-> The RPMB Well-Known LUN is untouched during boot, so its first SECURITY
-> PROTOCOL command after power-on is answered with a CHECK CONDITION
-> carrying a power-on UNIT ATTENTION, which ufs_scsi_exec() surfaces as
-> -EINVAL. U-Boot has no SCSI mid-layer to auto-retry, so the first RPMB
-> frame OP-TEE sends (the write-counter read that verifies the key) was
-> lost. Reporting the UNIT ATTENTION clears it, so retry the command once.
+> The UFS controller requires DMA buffers aligned to ARCH_DMA_MINALIGN,
+> but the RPMB supplicant may hand the transport an unaligned frame (for
+> example the status-result frame built on the stack). DMAing from an
+> unaligned address corrupts the frame and OP-TEE reports the RPMB device
+> as failed.
 
-OK just squash this change with patch 2.
+Same as previous, I don't see why it's not part of patch 2, and the change is fine.
 
+Thanks,
 Neil
 
 > 
 > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
 > ---
->   drivers/ufs/ufs-rpmb.c | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
+>   drivers/ufs/ufs-rpmb.c | 22 +++++++++++++++++++++-
+>   1 file changed, 21 insertions(+), 1 deletion(-)
 > 
 > diff --git a/drivers/ufs/ufs-rpmb.c b/drivers/ufs/ufs-rpmb.c
-> index 7919162ddae..1434161682b 100644
+> index 1434161682b..6a02803edd9 100644
 > --- a/drivers/ufs/ufs-rpmb.c
 > +++ b/drivers/ufs/ufs-rpmb.c
-> @@ -19,6 +19,8 @@
->   
->   #define RPMB_FRAME_REQ_OFFSET	510
->   
-> +#define UFS_RPMB_UA_RETRIES	3
-> +
->   static u16 rpmb_frame_request(const void *frame)
->   {
->   	const u8 *p = frame;
-> @@ -34,6 +36,8 @@ static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
+> @@ -2,10 +2,12 @@
+>   #include <dm.h>
+>   #include <hexdump.h>
+>   #include <log.h>
+> +#include <malloc.h>
+>   #include <scsi.h>
+>   #include <ufs.h>
+>   #include <vsprintf.h>
+>   #include <u-boot/blake2.h>
+> +#include <asm/cache.h>
+>   #include <asm/unaligned.h>
+>   #include <linux/errno.h>
+>   #include <linux/string.h>
+> @@ -36,9 +38,21 @@ static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
 >   	struct scsi_cmd pccb;
 >   	u32 len = nframes * RPMB_FRAME_SIZE;
 >   	u16 spsp = (region << 8) | UFS_RPMB_SEC_PROTOCOL_ID;
-> +	int retries;
-> +	int ret = 0;
+> +	void *dma_buf = buf;
+> +	void *bounce = NULL;
+>   	int retries;
+>   	int ret = 0;
 >   
+> +	if (!IS_ALIGNED((uintptr_t)buf, ARCH_DMA_MINALIGN)) {
+> +		bounce = memalign(ARCH_DMA_MINALIGN,
+> +				  ALIGN(len, ARCH_DMA_MINALIGN));
+> +		if (!bounce)
+> +			return -ENOMEM;
+> +		dma_buf = bounce;
+> +		if (dir == DMA_TO_DEVICE)
+> +			memcpy(bounce, buf, len);
+> +	}
+> +
 >   	memset(&pccb, 0, sizeof(pccb));
 >   	pccb.lun = UFS_UPIU_RPMB_WLUN;
-> @@ -54,7 +58,13 @@ static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
+>   	pccb.cmd[0] = opcode;
+> @@ -54,7 +68,7 @@ static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
+>   	pccb.cmd[10] = 0;
+>   	pccb.cmd[11] = 0;
+>   	pccb.cmdlen = 12;
+> -	pccb.pdata = buf;
+> +	pccb.pdata = dma_buf;
 >   	pccb.datalen = len;
 >   	pccb.dma_dir = dir;
 >   
-> -	return scsi_exec(scsi_dev, &pccb);
-> +	for (retries = UFS_RPMB_UA_RETRIES; retries > 0; retries--) {
-> +		ret = scsi_exec(scsi_dev, &pccb);
-> +		if (!ret)
-> +			break;
+> @@ -64,6 +78,12 @@ static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
+>   			break;
+>   	}
+>   
+> +	if (bounce) {
+> +		if (!ret && dir == DMA_FROM_DEVICE)
+> +			memcpy(buf, bounce, len);
+> +		free(bounce);
 > +	}
 > +
-> +	return ret;
+>   	return ret;
 >   }
 >   
->   static int ufs_rpmb_send(struct udevice *scsi_dev, unsigned int region,
 
