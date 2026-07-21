@@ -1,194 +1,192 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D02DC44529
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 06:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE4D2C44529
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 06:59:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E37EE607FF;
-	Tue, 21 Jul 2026 06:53:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7D4D9407E3;
+	Tue, 21 Jul 2026 06:59:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UX2YzPJtXc3l; Tue, 21 Jul 2026 06:53:09 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gWaT9fiW88FQ; Tue, 21 Jul 2026 06:59:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CFFC86076D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CC838407E4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784616788;
-	bh=wNm5ZSv/jwpBImhuywdBTQwhpOXOeNbTzo5+DW6nRyk=;
-	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784617182;
+	bh=XiBYiJbdinLvohhnONEQQhBVNtQPkaXSYKd4qr7cqK4=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=OZt68S9Q9R/hIuwVselkimGV89kdRTAECFgthgeddys6S0PXrxaHQzbgoAx9Zg+Tg
-	 Swpj00p5fKLPPKQg04uuFC6X/19WoMaHIk6f75Np/V4n8kxZG8mJlSeyBucDQiPnJS
-	 QO/r4y9opfLJbSokeiQnzuMWLseG8bkjriWGdtALrzD3MYfwvyw5pOW1zrQpk8pmi2
-	 rrK3a56A913fvsetZQBh9O6qtxPgrB2BkU/P+kK5KVAXKVauYmZlwdRhJVqaijxMK3
-	 PzZhj4I4KrZLJP7Zgwgx8h85amA7ZnKEpRgSHeLkhw2YAxcrCRj5m00fp2y/Pu10LP
-	 UENdMTINsr2mA==
+	b=M5Oi6Kttwe41NoLeg+FFeIclFLeIveM3L3adgiNP4qpBotvV19Aht8/AmZn4ldMFb
+	 mKytzIJCwZPGgDLs216/bCKiVsY92BkbCEbUVDe6YyCLvLPv/rvlluiZ1W5R7oidby
+	 TA7DqIYYkJWpCpRid6/3ZDZG0k1aU5dw0/1grdLKhs9fOz6lC8tl/cQVrDXmctU7fe
+	 5laas6vQnUYYWudL9dJn1JsLZioT13FEkRNeVERtJoj56ce7TTQKGg9J+fPqtmW34A
+	 XYoYz28tMTWO3TxXEhwXUtgYyKsUl3Lt9MqxZZ9v/qMx/sRBes4NmvBXVsOiS8U3hV
+	 6ye6DqDMbJqpw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CFFC86076D;
-	Tue, 21 Jul 2026 06:53:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B04BE1099
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:53:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC838407E4;
+	Tue, 21 Jul 2026 06:59:42 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BF8491093
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:59:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A19C24029F
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:53:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A95B880B33
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:59:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id n4w8aGSbodJE for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 06:53:06 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com;
- envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A9167400C2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A9167400C2
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A9167400C2
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:53:06 +0000 (UTC)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66L2T5uD092220
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:53:06 GMT
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj01a8ydf-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:53:05 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-ca7c1e22995so16726392a12.3
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:53:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784616785; x=1785221585;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=wNm5ZSv/jwpBImhuywdBTQwhpOXOeNbTzo5+DW6nRyk=;
- b=ibh9MSAfQdd47Er88O+I4k699SJA0V9ZGPuzZZEQJcgXpvgkQfjLdFpmEHusVGse1o
- OP3foup+xsdZY4v2rIc8v6itTxouVMlVdLj5IFvGeUQusK4RyiAcTldY7RsCoxT9YboN
- y8++x9uA9deeHcVzDnrG2HpOGGE5yu9tAPa4vBKABOSI4Hm6p/pmFWuExRUC95SHvSP4
- GJ77SJcTYUXhnzDMaj4nXGGwwDJiSQHUj8FP2TLLKRgsBZ0yERbdp1XfuiNnITpyR9OZ
- 6hggamwaFs7qMNZzVkDtgynL/Y1A8ToQWXu/ipEqMnnnTM4Ano1+JXt4QzVlyaJOGZ4J
- Un2w==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpA95mHOrjSGKYr6lxjllRsQEztfrEi+IIUdaELLjXQq48SlT1UKkscWbFvxhTZ4xadBsQUHQI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yw8gtmu6lXeF2iKubee48c9Z4H0sO/Dv9pfeFTG5NKnX6eBYldm
- cTNg2RCa+Ah0qyT9jhfD3Mx5ER/Glo5OM7ruNRh3cKH5smkfEZlfwyr/Op5T9oDTZvUpTRyuDcG
- xKksBok1QJC2YxVAJFLemBRIviWqAmiZlu2QH8IEegeU8uwGtccBeDmYRU781WXE0jfwFBGg=
-X-Gm-Gg: AfdE7cm2yxIDp8JehcoP0sjbvD/GcsbWqFkfyabr2T5za64HqVsrWWHNIrGSIpjZXi3
- C8853Gpej08jL1euyEVYUOCPBgULnxyWNmNGvhbqBcN67MTLpufb90GcCvtHXWw2dCVR539y2wr
- EnWDrQJE2Y76NBKgbx8rmK72jGpazL3N84NhaLSXEIE2ICfHKgv3iddfi1UnvLF2VI5jcIEuV3C
- Xp93wCmtyoFANPqr2QYBLK0yPGIWhZpt2tonH7WFtI6jKfkAJBURPG2fvrPfNvVx3mMkIBaSZn5
- uX352xcS2f8T0UDoywK2Yjtjo6HXxaCCAwaNmiEgzW3u62SIrgVPyAxfDTdGDEKvlldfIbTuLIt
- Sc5WyyfTZOQGUXFX9YcY6vFGZ86ZxxMlst+DjfSUa1IBzyNNg/M6nTN5ZZPUSQFb71Y5+iuNuoM
- yKB9CEs8Xpg/iAQEibAwZSEM8n1GUJ
-X-Received: by 2002:a05:6300:218d:b0:3c0:9c19:65b3 with SMTP id
- adf61e73a8af0-3c3ada61e6cmr20792277637.75.1784616785216; 
- Mon, 20 Jul 2026 23:53:05 -0700 (PDT)
-X-Received: by 2002:a05:6300:218d:b0:3c0:9c19:65b3 with SMTP id
- adf61e73a8af0-3c3ada61e6cmr20792241637.75.1784616784771; 
- Mon, 20 Jul 2026 23:53:04 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3142a1dde81sm73931642eec.21.2026.07.20.23.53.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 23:53:04 -0700 (PDT)
-Date: Tue, 21 Jul 2026 12:22:44 +0530
-Subject: [PATCH v3 3/3] configs: qcom_defconfig: Limit MMC transfer size to
- prevent controller timeout
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ygZRfiIkCsY0 for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 06:59:41 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=dinesh.maniyam@altera.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org C499880A5C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C499880A5C
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C499880A5C
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:59:40 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5B986846A4; Tue, 21 Jul 2026 08:59:38 +0200 (CEST)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 27C63803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 08:59:36 +0200 (CEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NTCUkhVKXJ87/HuBs7+NIKKFpmcSQSNoXVlzIcbhpeCXwhEHPsr+s2TOKZOeop6JWq9sx+NYPUS5vmDhgUKMKDeFWJthJONKfdcPmCvdUzkVZ66pZYydr2H9O8M4Q3+H5BrglhM1lXHmJzB3B6t4sShykwBbrR96lQRpcdCFZTwNJeNskjJgjKjuSMegdA0jM0UkqO20KLaM3482ESqPD9XmZGhpgvQ3oYDX08h65ngkkvzcs/I86f2ilrid7GxxEoQfmN/Fes+E9uaYSRDVcDgFHOWfipJVgXiT1pLzxGn2JzMsCUMQQCkFqDo3ysQ3LPs7Gd6SLmIsOTfFp6DBaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XiBYiJbdinLvohhnONEQQhBVNtQPkaXSYKd4qr7cqK4=;
+ b=K3cb9ZQL3XJ7TVtZwRZA3srh7sa20dHkPdQuEGylwv4jLY+JyEZLzf0jQUzPZq9W5elkZwYrHsiRYYaEiuOFcLGcfZbpV+fKRsFEU1BcWi0CKG9TKBiB58s5IJHlJrDDNwVwmoDa/l1WDIzWh+AMf8BP/gow02B9woVsSzvX8dUwy+MEXWSSkctMksiY3AyGu3ImCRGKXiKvqLQAmZbgRV0WOxYwdSjblggXwQErdgCCRuY5abpskDfEZAqlVAqFLJY9QI0gSAgU30biF7Zd0o6XCalcDc5NFVtfgNQgSo/NGmBIZ3ibYWhTPBwfxpqvP2uEtuMrvbZCU3PAKU6xZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by LV3PR03MB7336.namprd03.prod.outlook.com (2603:10b6:408:19e::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Tue, 21 Jul
+ 2026 06:59:31 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%6]) with mapi id 15.21.0245.009; Tue, 21 Jul 2026
+ 06:59:31 +0000
+Message-ID: <811e93fb-9e4d-4fd5-bc16-831a4c748cb7@altera.com>
+Date: Tue, 21 Jul 2026 14:59:25 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: socfpga: Enable MMC secure transaction in SPL.
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Ye Li <ye.li@nxp.com>, Kok Kiang <kok.kiang.hea@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
+References: <20260311050003.20955-1-dinesh.maniyam@altera.com>
+ <19dc7d12-f4d7-441b-b00f-0f2ec41945d6@altera.com>
+Content-Language: en-US
+In-Reply-To: <19dc7d12-f4d7-441b-b00f-0f2ec41945d6@altera.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PH7P221CA0061.NAMP221.PROD.OUTLOOK.COM
+ (2603:10b6:510:328::15) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260721-emmc-v3-3-35cebc036994@oss.qualcomm.com>
-References: <20260721-emmc-v3-0-35cebc036994@oss.qualcomm.com>
-In-Reply-To: <20260721-emmc-v3-0-35cebc036994@oss.qualcomm.com>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Biswapriyo Nath <nathbappai@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784616764; l=845;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=Ae59jbhrLAfg7buGYz715Y7ZuX33rSge9eZ6/qZ+IsQ=;
- b=G2Xpbyy7cNo2QmJcROSSE1CG+eOEY0d/QPoeolV82f1nVLjSVraVvx5XpKoxp5WV2ZxQnfJBB
- uSRE/CEzaPQC6KOOe9S+Z2+sR61ygcrA8CXMGPRlB4BDTxQBMTRWdTF
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Authority-Analysis: v=2.4 cv=BL6DalQG c=1 sm=1 tr=0 ts=6a5f1751 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=1OQmJc6SjKDH_2_2jscA:9 a=QEXdDO2ut3YA:10 a=ZXulRonScM0A:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA3MCBTYWx0ZWRfX5XW6l5F9e9R+
- X8j6krvUUYR6v7oCufBtyFkjOYzkO5ysOl9FUs6EK4kOPsN6zCUL8sD8kREuo4YmDM7rkRUkMvU
- 8VUFxTeFgIphqX3IezH+eZIatxmfiWz9qvGa1AvI4s2ycPijS/NV6cJE1hRA+MGV6dumEmez5Ev
- VWqah9aoAjBl9VUQtFw9USh+FalmglB7UShIS/kSCBfWF+wq0fjtgAu2YWErfP4rRir+XDZhRFk
- A0jRW/xQAAOYXCOBWVUgFPg8T7vXIqnWWDwgh80O5J0XOKh07+/roWLbgm8y3nOadYNSnatYu4h
- KUv4N1bExEWdoucvkyT+wQaPxy5/RF3ys8Ij3Ily1BI9ZHs4g5cjuXJY00C71EWtskUQTjsaH1R
- ODpP9v+CdSw0hvjQO/A/ndGXqDpCh+9QR3Ce8u5rCfDXkcgXizsNj5Xu6y7tdKK5+RotqgIYmic
- TbJxg32RXxyEoX/Dk5g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA3MCBTYWx0ZWRfX+WmMzD4P0BwU
- IoWuIzMYed25UJOnZ+1mxid+tGlJcAR0EhMKfHiv8CjLX0IguB6YTLCzIcJHR1WvTbx6v4e5tbY
- fuEAYvyEQ3Pf0j4w7uehSYa5sPTd+Us=
-X-Proofpoint-ORIG-GUID: r4pYkx_C64Xy3qdNMerXoNpwadvEbIVa
-X-Proofpoint-GUID: r4pYkx_C64Xy3qdNMerXoNpwadvEbIVa
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-20_06,2026-07-20_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 malwarescore=0 suspectscore=0 adultscore=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210070
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|LV3PR03MB7336:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4094a364-5bfa-423e-2e48-08dee6f59d5e
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|23010399003|376014|18002099003|22082099003|55112099003|11063799006|4143699003|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info: QdndGPLVZEbXTwMMGA7u9yRAn8EkypQn6S9Wxh4FLYeCYie2apNtue7DbXv408/p33PyCYDsnSlNfF+t2lkWjN6NXQN2HH57Ef2OkzhZzDxJbQ2ljGuXjBwXgIR2z69MjSk3SZYjdCyRBL5NWMgNozScDr8L8BKLjUu9CjoTyjgTVpNWBt6PrUsZiDqCXdvnuFhtm8lkmFV413/JdoogM90BHHekiWrVEqUNdYcASsg1hT1I+7tlnEx0IiT0wJ+MXUfDiMUw/LGfyw/pSu9vyNEZtLFhptUOyV4Toud2OMAj5KijUZ/52rMgQTwLbY3URC4K4T+yD9Wky8KHh+35ocQgP3lEqq/BOSUPC/ORWERSzUnxONb221TtLkkcS3PEZZ4g4H51LZ2vDpoDWDkcyOymIqE1ZlT7KjmUmchwhehPzmob8bYiYUskRj/CxNPTVuiikQvq7A0L3BpTOfl0Hr0j9XzoPZYcJOTNiomVXsyIgCwfA5z6Y/ZyztQZPl//1eVa3Ny/NxKPUmx3YD7b86VdTRck8kp3vzaHvGkJuRkuWED6iWefljrlNGcCXnhC5FjouH4LE5BPD3AVc3M8pYM4a3S4NIPi6KbRneFlAKCpYzTi0Ix1nDirQKnaL+cVwTHxvtwulgD/DXiLKj0a97mVIorJnZwKCk4see6iwmw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(18002099003)(22082099003)(55112099003)(11063799006)(4143699003)(56012099006)(10067099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z2F1elA3eWpBNDVGZ1REMjhUZGRYaGgwZzQ1R1A2NU9KSG4zMHBHcEhzWldQ?=
+ =?utf-8?B?SzJ3bXFEMG13T2lURDhuNnZhS2dNcDB4UHhkOUdrUG44V0pPVVgvYldNcGl6?=
+ =?utf-8?B?cU1ObFJVd3hRQ2VCWkIvWnl4V3BLRFdxbEgrM0xzYUhIWXhOdGZZaTRqNTV2?=
+ =?utf-8?B?QmtJdlpxNDBpNWh4TkFGN3MrYVpFcVdPNytHczlBL3pxUG90N05wQ2ZmT2tZ?=
+ =?utf-8?B?ZC9HWW9MVjY4ZkF5RFg0T2VrY21YL3pyeGZRSCtzajg1dityL0FOYUpnL2Nh?=
+ =?utf-8?B?T05QQWtVZUlpL3duWEN0VnUzL1YreDBzN1Z2eE5wZnp4Tk8vcEttZjVmeDZw?=
+ =?utf-8?B?a0ZlMzgvN2IyOElQU2gxWS9CYVJ2MVJ3a3UwWUp0VmpqTStpNEZJSzFRVCtB?=
+ =?utf-8?B?U0FhVXFCd1NNNjEyTDFsNXA2YmpKL0E1WTdsVm5lWncySjVlSERBOGg0UGpX?=
+ =?utf-8?B?TVBDZVRSNzZxRHZpcE5uS2o1dkdOSjNQdWFKRFJUdGo4dmdoT3BoNlZqMTFR?=
+ =?utf-8?B?U0FWOTZVU1p3L2NCcFVKUzVXOEFHMWsvRzNWUlVlMDNLVCt3WERmTU1kRml3?=
+ =?utf-8?B?WUVGeWlZNEwyT1h2VzJlM2JVR3dWTEcySXdwT0FNN1VRaUwvSU1PcTh3amRi?=
+ =?utf-8?B?UW43KzdpQUEzMG5kL0VzeVFXOU92NHFSYzNFSUQrZUVuTW9velBMY2lzb21N?=
+ =?utf-8?B?aTFUd1U2bmV0Q0c5dVhTUUlqcHRqSkF5eW1pcVV2STVYcnVxK3VXdDFPRjRy?=
+ =?utf-8?B?VUtWdTB1c1E1emJRMVpjYzdnQXpEalNqaWpZTjhxMkNEWlNDN3RTWTlwcFVO?=
+ =?utf-8?B?aWtBRk9qZjJRNHdlMHJYN2ZLUFRUOENOZjNEMUdEUlRCTHRTUG1jV2x1VVAr?=
+ =?utf-8?B?NUhwQ21TOFRSczYyWG9zbXNaWDQ5QTQ0SWd6K092ME5Cam5tdysyQkMwb3JK?=
+ =?utf-8?B?dDQ1MlR4MUFDZkdpUS9NMENrSnpydG5rbFFNemhSaTJPOEljUk5HV2FIRm10?=
+ =?utf-8?B?YmwyV1RKTTg2THFjdDJsYmFIODU2M2RsUnJNcnhrVktjT2VpMWtjeFNCMVdm?=
+ =?utf-8?B?MG82dWRDWFNIUm1OQ0RQWUl3VWs3OG1LblBJa2JJVGk0bFlGblJsdlpKK2Ez?=
+ =?utf-8?B?clRkRm9heEJUbi94bzdlbEZOVEdPVUV6ZXBGdGtCd1BNd1ZwLytObTFjMzFo?=
+ =?utf-8?B?UG15SHhneGlTMkd6UUlwZktWSGVVcERvTjBvdmFQQTlROU9ReEY0NEV5RXQz?=
+ =?utf-8?B?ZEhaaWRhVUc0clU0VE1VZzZqTEdtRVZMNGtuclM4U09tNXoySFJuRjh3cVp3?=
+ =?utf-8?B?MXU5UXFTOW5LYWl4V3FEWVltY0xFNUloKytXT2pKZCtVQmlVQXdQLzJ1cUxx?=
+ =?utf-8?B?NjJmMFNiSEtlWlZjUkxuQ1RGbkxMN3lydzBoZ3I5Ny9oNVV3U0tvNnMrVTdY?=
+ =?utf-8?B?ZlhoMno2c1JGSVpYZHdST1FjVWthNjg1KzU3Wmp3U1pQV3NmSmVjY2NVTEt5?=
+ =?utf-8?B?Sk5vcGgxdkJPNCtPbTdOb0NTZGtTVzNPTklhakRzcFJEOWJxZ3JJWWc3NWw2?=
+ =?utf-8?B?TCtvZzNBY3QxNjBOQ3JoRzdWTUFTRDltTWpScGgzMWhGWmRLNFVobEJwZi92?=
+ =?utf-8?B?dVcwV2lyT0wya3pPSWtaeDlsZXROb21Rem5EcXMrMmM4K1htN0tXVnA0TStu?=
+ =?utf-8?B?V09jeHlWWjFadTZINGVJWTFZSjVZSStCOHZXYU04THpkWmoyalVpYjZ0NGtN?=
+ =?utf-8?B?VGdtVlBRWDdITG5LVjZpYi9hYTlxRWVISVlpOEx1MjdWR1Eyc3IzRzJQcmFJ?=
+ =?utf-8?B?Skg4R1pZRThnVklkVVU0ZGJBZHd6clBHYjZJQWphZEd3V2dtZUpocnk3OWdM?=
+ =?utf-8?B?UXZ3VDBGeXJMQUpFVENBMkw4K3IweGlsRVZxSUxFZEZhZVAzZy8yb1dndUEy?=
+ =?utf-8?B?bjdSNVdmUjJnQlRoSFVZQ05RQlpNU3BWbEU3QjdtS2ZWK25WdStJN3daQ09F?=
+ =?utf-8?B?a2VzTit6YzNCbTNjdU83SUJZVnM4bVY4dU9QTjh0cUNhODhQVmdpMlJGUmJl?=
+ =?utf-8?B?QzN2MEtkZ2FoVGlBTUJSM3RuMmsrMnpzbHc2bllpY1dKTnJVcDc1cU9tN2p3?=
+ =?utf-8?B?akJ2MzFVR1dxeWowV0F0aXpZSElJZG1MSEhIY25Hb2hvMWx0N0pBSHVzZUNa?=
+ =?utf-8?B?Nm54bmZuMGZzRGF5cFhWY3pwMXBFMGlrTVgxd0ZuVHkrZEZOWCtaNThWYkx5?=
+ =?utf-8?B?RHk5NGVudGdUSHdPYzRydm40TEkzb3hDSnJhNSt5RWFpMXN3dVBJclJIS1gw?=
+ =?utf-8?B?Z2I4WjJzdG1BbUYwMHpPSVhZZTVBdEIrK0p0Z0M0aUs3VFFLdGoyTS9TL09C?=
+ =?utf-8?Q?5LasvXNvu8uxBe4o=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4094a364-5bfa-423e-2e48-08dee6f59d5e
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 06:59:31.6275 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IjtYrWfH12NMNaAH5dQ4zbhTQ9fiSk4cfxkHtvtOMoGtV8S4PaIx7U6YHY2DUGx0B7Eq6V1gZQv4pN+iVr5rw9dtyU0PWl3T+CS+OJ47yrs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7336
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- wNm5ZSv/jwpBImhuywdBTQwhpOXOeNbTzo5+DW6nRyk=; b=SEnq5kfksNn48Jeg
- KbVTkYwi4RnxCKgE/Z5mGwCGVCWpF23eJFAzmVSKEWJz0xjtOK4W3Q9IFi9HDgOp
- VJO/uG3BQaitIqQ0lyiEWDtoiY9G+OOyOOyBUTXvR7ktP0dl6l+Q6vTLyqVZj9CB
- R4pp26Jwpbmb0yTSE0P+JVnAP9qZzrkSGQZjeCAKSFo49tqmNPJipxHfoP14zdlj
- WaVYJ7JHQZvbRRtwprP0gE/gTnl5wGjVO9/lkpcAWlDIM7qGF523zv0+zX4G5OKH
- y5YYshm4vb3LLA71/oDLuSmCYx8qj2WP3fHIkCeRZg65It0LOCijAvtU2676ntPF
- BSldnw==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784616785; x=1785221585;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=wNm5ZSv/jwpBImhuywdBTQwhpOXOeNbTzo5+DW6nRyk=;
- b=aZDBvB81ZWglOdQqogkTROWQSD5EmD25t/OI+M6TLhzNnwTqv09jomnbbWcEaZ/r8a
- rkhyiLb+AP+Ch3X0SrgxHU6RmtrpJpb5ky07sdcNh3NIrcm4xywbE4awmvCw7pAX5Vco
- oaYrs7rdyVAS4Geq4tlujqogbGxWfBfR9u44Jql9br2O2v+stK+Lz8OLRy7mdlWLPqzi
- lP0GZ7HRMulQkkbsYfs+fMVCkCwM4O/y7n7A/NoZK59L55Vwt0Of5tOoOuXL5/i+UvDl
- Rxg2xS0Qz8QgSWsbnknLtnCH7R+xyC/KnmoNNhtOwsiOkN880w2RUKHQq26jJiu7glCf
- q9Jw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=SEnq5kfk; 
+ d=altera.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XiBYiJbdinLvohhnONEQQhBVNtQPkaXSYKd4qr7cqK4=;
+ b=khYdLjyfhzv5AN5YmZzo3Ld3qY/DH/KZq+Akc2DGZAuWnFUspA0aghurBzLuN2Z9cFSao1IpKY6CwAe6zDqFHEpH23aH37EqfjKdYxMg6OonY8lOX9SdQNMWXYEBUxHFt8MH7whhpOlCvMJyjpWzNk6QBoNaAsTJYnbcULNgUM+Xlwbv6icUWgpI9yNebg7Si6dDzCFuMdbDBaFKYC+AVZ2cobhCjjCDT9CAdmqppKXl2c3jyDdc/vVKpAjBQaDl/wjxbaAZvPfcaxGFRS2W6RL7+3eOO5yOwiyRpkCBcFB5enb7B0q+sA7DDr1vGVAwOi55DnFXUoHt1JfIV3CjpQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=altera.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=aZDBvB81
+ unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
+ header.s=selector2 header.b=khYdLjyf
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none)
+ header.from=altera.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dinesh.maniyam@altera.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=altera.com header.i=@altera.com header.b="khYdLjyf"; 
+ dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -200,39 +198,72 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Balaji Selvanathan via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+From: "Maniyam, Dinesh via U-Boot" <u-boot@lists.u-boot-project.org>
+Reply-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Set CONFIG_SYS_MMC_MAX_BLK_COUNT to 16384 blocks to limit the
-maximum transfer size per operation. This prevents controller timeouts.
+Hi Tien Fong,
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v3:
-- No changes in v3
+On 16/4/2026 11:30 am, Chee, Tien Fong wrote:
+> Hi Dinesh,
+> 
+> 
+> On 11/3/2026 1:00 pm, dinesh.maniyam@altera.com wrote:
+>> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> 
+> 
+> The subject could say Agilex 5 explicitly (spl_agilex5) so it is obvious 
+> it is not all SoCFPGA.
+> 
+> 
+>>
+>> Program SECURE_TRANS_REG when CONFIG_SPL_MMC is enabled
+>> to allow ATF loaded from MMC to access the secure DDR region.
+>>
+>> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+>> ---
+>>   arch/arm/mach-socfpga/spl_agilex5.c | 8 ++++++++
+>>   1 file changed, 8 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-socfpga/spl_agilex5.c b/arch/arm/mach-socfpga/spl_agilex5.c
+>> index 1be347360f5..d0c2af795de 100644
+>> --- a/arch/arm/mach-socfpga/spl_agilex5.c
+>> +++ b/arch/arm/mach-socfpga/spl_agilex5.c
+>> @@ -110,6 +110,14 @@ void board_init_f(ulong dummy)
+>>   		}
+>>   	}
+>>   
+>> +	/*
+>> +	 * Set secure transaction for mmc, so ATF image from mmc can be loaded
+> 
+> 
+>   capitalize MMC, minor grammar (“so an ATF image loaded from MMC can …”).
+> 
+> 
+>> +	 * to secure region reserved for ATF in DDR.
+>> +	 */
+>> +	if (IS_ENABLED(CONFIG_SPL_MMC))
+>> +		writel(SECURE_TRANS_SET, SECURE_TRANS_REG);
+>> +	}
+> 
+> 
+> That extra } would be a syntax error
+> 
+> 
+> Best regards,
+> 
+> Tien Fong
+> 
 
-Changes in v2:
-- Set CONFIG_SYS_MMC_MAX_BLK_COUNT to deal with controller timeout.
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Thanks for the review.
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index c52f619850d..14ff0164ff4 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -100,6 +100,7 @@ CONFIG_MISC=y
- CONFIG_NVMEM=y
- CONFIG_QCOM_GENI=y
- CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_MMC_MAX_BLK_COUNT=16384
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
+I'll update the subject to arm: socfpga: spl_agilex5: ..., fix the
+comment wording (MMC / grammar), and remove the extra '}' that would
+cause a syntax error.
 
--- 
-2.34.1
+Will send v2.
+
+Best regards,
+Dinesh
 
