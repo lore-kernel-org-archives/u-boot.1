@@ -1,145 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6F1C4452B
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 08:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5311CC4451C
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 08:14:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F34E340640;
-	Tue, 21 Jul 2026 08:13:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EC3A260810;
+	Tue, 21 Jul 2026 08:14:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iv2Q8bcctaZp; Tue, 21 Jul 2026 08:13:47 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kmy2KKAJRbni; Tue, 21 Jul 2026 08:14:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1B47540845
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 315F5607FA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784621627;
-	bh=PFnUSnTYIqs4/NNB8WkzIk/IPtN5d2ikSdJ52xYvSBY=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784621660;
+	bh=YLwPYYoAJuVTwFMMJHNBdlzsOiT+gSNb1dBJNG9n0GY=;
+	h=To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=KrBEvXG3OnWaubhSEb3i3zTi9d8y88PaNAOBM2vPdIWUnlLxLXvTlMEtLSHNYp4IB
-	 3UhdkEoYOQVXyHZ9e1rbotBHvtIo6TRQMpFXub+B35MF/orxSOBzwhRDIuwMvMgJ8/
-	 e8uLIAA3FZSfZrAC79wCHfJyW/ISEYHd8Sr2pPnhWCAvMzxdK0oZ4T28WgQkbc2sV2
-	 XSHEZE/UMDZB7xayNtrlCkVeRqoKpGEb9z6poqC7FrKTXRenKNFe9jcvlxAMChjGQy
-	 crF9YV/Zn+grz85wFz77+qlZm5R9y1nxmbLUmQHSXiy6PHxQMUx7ccoakVtuFyXo2M
-	 m6t3Cx0BKrNRg==
+	b=NaQmbOWKXYxAw4DECDhJ6mC/f8PXBWnWdmmjsF91cqQdNihmbE/HAPXG09/XITQjE
+	 1r3bDfi4ByyPp6w3lR7QPMSK6po7BYqZY1AWSu0aoMJayMtOK+VPjVvTsesD1RBKle
+	 i2LZxP3cXfJxGdNnmXdwlD+uQH/F7v8DY42g38QfGTAMPf/iNpypBzVlwAXShNpyGy
+	 6O2sE3T4Wnqr9jsarv3t8LLFj7SnyQgKt37//8lRtZ7SVOk/mdjMR+CohppFmJF/aU
+	 CZAWNVaisL1xkFGkRl7KgEXUoWaJn1DK3JNFeo+8JvCl2qUUtuAjUxR1dDa5n6oAju
+	 bRIN3jCIkVvSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B47540845;
-	Tue, 21 Jul 2026 08:13:47 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1AC3E96C
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:13:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 315F5607FA;
+	Tue, 21 Jul 2026 08:14:20 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D672C42A
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:14:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0AEE180C16
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:13:46 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C8C16607E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:14:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KlNFzcpMThzY for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 08:13:45 +0000 (UTC)
-X-Greylist: delayed 592 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 21 Jul 2026 08:13:44 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org AC28B80BF7
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AC28B80BF7
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AC28B80BF7
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:13:44 +0000 (UTC)
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pHf9j-T8L3Rc for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 08:14:17 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 06D2F607FA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 06D2F607FA
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 06D2F607FA
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:14:16 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 69866844F6; Tue, 21 Jul 2026 10:14:15 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E836D3F62F
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 08:03:49 +0000 (UTC)
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-4629f312a67so10276499f8f.2
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 01:03:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784621029; x=1785225829;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=PFnUSnTYIqs4/NNB8WkzIk/IPtN5d2ikSdJ52xYvSBY=;
- b=FVe4C2onmEQ4/V7hWHjxPV0PW542potUgYVDgWeWpj8RQX1TeDRLlflwlozzmKdMGZ
- X76ZUSiNAUkJJ4BOOVzhsQBBrD72oAzBVc1oBWH7kWV8r1sL1A7xRJmRf3Uu5/bDsPjM
- KSVnj99OWVHcPeocq/DS6bgMeYnM1awzS3EA17/RjEHfGnZTeUhr6kC/Cy29s83YPX9p
- AYvi/fIw0NoLA/wrCYwQ3pTOHR23eX8qnvnuhH9MhjWt91gUTyKU++/Z1wRAOtLacmuv
- wLju6nVQ+2uqm4EL8bOH++UXUO4CNenEXIWrW/YALxUHF29qi21Bj+txYd/Vz0zxIA+C
- X1Og==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpQuGR9sonIEfeoawATjvR4961USSpVTs/Swf8rR5cS+92FtqjtwzZ9ASEdu/aHm9aOHCGNQJo=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwYekrr6mahc81uzR2weH4N4JbTNPSSF/ER4xR45sFaGWeFI10F
- tKwC/kwL0+5HdQGwGhXZwzIVK31oUr41kYwxAZREYlTsFcO1/uJjMbxMJcfZc0ccKnudpbIKf1d
- mcJOfPYya2zaFpahIwumPefW/M52pubkQL9Fw6ELKyaq0kaLcZUTrCGLEkDUxHtwqDhXJ3ijFIJ
- 9WmFHtjXSsZQ==
-X-Gm-Gg: AR+sD12xnN8z8DatfOionumfJpvuC9hsDU2SEFi/IPVMW4SextXt2HDuaWr5fE0m6S4
- mKtzfA3eYzXiE9L+LDBFrl8HVg01geoXepHeeDIxLy0+9mW/QSSRphVMkahnS7jQx1EkHToN0ph
- 2nITPbub7fgcWZcAZPMe1fkxnvU+YrrR57OihixOkce0wuGswG+R+pzAMllySFarXwlDNkwBwOx
- HsqnWIdOx94SkS8GZv9vh/9gJ/8s/0hhnBV+oiXCnJYQ8E+18a2GW29OTDLBbfO0UVyHf4hqiLt
- Z7TxZzQ3CSPKQ7ju8MkpDAEK+iv3vLp+7IQt1u3ls7+ZaOyrizZofjuWY0l6YwvV2UFcRTAs2Qk
- u7gWOJMk3FSbejbe6Oz4PMlf6otzU7e8id7CGd1iwoTrVgB3BGhHeErKi7OSAt72yXQR7Y/fuT1
- Xn9qoSqB9/gw6+LeACRJAFPMvFQjgxm8/w
-X-Received: by 2002:a05:6000:2991:20b0:47f:70f1:a577 with SMTP id
- ffacd0b85a97d-47f70f1a665mr9573085f8f.17.1784621029265; 
- Tue, 21 Jul 2026 01:03:49 -0700 (PDT)
-X-Received: by 2002:a05:6000:2991:20b0:47f:70f1:a577 with SMTP id
- ffacd0b85a97d-47f70f1a665mr9573029f8f.17.1784621028764; 
- Tue, 21 Jul 2026 01:03:48 -0700 (PDT)
-Received: from [192.168.103.136]
- (ip-084-119-040-110.um24.pools.vodafone-ip.de. [84.119.40.110])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63e51c33sm31561048f8f.12.2026.07.21.01.03.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jul 2026 01:03:48 -0700 (PDT)
-Message-ID: <e62b0956-a7bf-4f92-b794-277aaef52713@canonical.com>
-Date: Tue, 21 Jul 2026 10:03:46 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 58AC5803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 10:14:13 +0200 (CEST)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 089D960A9B;
+ Tue, 21 Jul 2026 08:14:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2FABE1F000E9;
+ Tue, 21 Jul 2026 08:14:11 +0000 (UTC)
+To: Anshul Dalal <anshuld@ti.com>, Guo Hao <guohaoprc@163.com>
+Cc: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de, Bryan
+ Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>,
+ Patrice
+ Chotard <patrice.chotard@foss.st.com>, Vishal Mahaveer <vishalm@ti.com>,
+ Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH] board: ti: am62x: Fix build without TI_I2C_BOARD_DETECT
+In-Reply-To: <178418750029.393743.12900440415467707713.b4-review@b4>
+References: <20260715-am62x-no-board-detect-v1-1-2969faec1001@163.com>
+ <178418750029.393743.12900440415467707713.b4-review@b4>
+Date: Tue, 21 Jul 2026 10:14:08 +0200
+Message-ID: <87a4rkkbe7.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_loader: set correct frame buffer address
-To: Simon Glass <sjg@chromium.org>
-Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, peng.fan@nxp.com,
- patrice.chotard@foss.st.com, me@ziyao.cc, bmeng.cn@gmail.com,
- u-boot@lists.u-boot-project.org, Mark Kettenis <mark.kettenis@xs4all.nl>
-References: <20260501150550.228937-1-heinrich.schuchardt@canonical.com>
- <ea87842c-75ce-4d39-9ae4-0f8b3b913ad0@canonical.com>
- <871pfudqns.fsf@bloch.sibelius.xs4all.nl>
- <CAFLszTiz7YtBtO3yMgVbRxfOSG3J9A+3oTCYuko9me5ona3ZGg@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAFLszTiz7YtBtO3yMgVbRxfOSG3J9A+3oTCYuko9me5ona3ZGg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1784621029;
- bh=PFnUSnTYIqs4/NNB8WkzIk/IPtN5d2ikSdJ52xYvSBY=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=QxszjfMlP5zhkuvYaXP4xVDWr7q6fR/hRgc5wP76maBvlAaTSYlGxtkPVJueYv6z5
- jtab9vMptEDXgtPFpZv33YMDVjrbZ8FmP9/uh9IBBfYKO0y/DS3Mc1vdSvm9PFqDcA
- iATb3if7KZuoDAwoCWHX31W2PlnJqeFAA7KjDsZoR2PET7W9VSZHlgqus+ebrNkpNQ
- GjgQ63H3V/N3y5ig5fRjlPx2zMzHf6GF4C9J3zQIDb1GhU4BPlVhs81JOtIaDFmEZv
- mablD40YN3KLCfjJ+9cFFoBkl9uleonkGw20r5wtEj2IJmEllXOCZ+iTW8LkW+EzCC
- QBLqZ7mqCs5nEVK45+7ElUhpECVh6wHJughoHthNV36WSen2dJwQDxEVb30uFkrv8R
- XfaEkmIllTQQjKAJ8aWqQZHvZmqO0dbaHXeet9Vs1jJoRL2FCRrQKgWkAPpOiQ37OQ
- 6TlV6q3ZJ+y1DSy/YPDGSl6Auug68gp8W+H01PPxz67ZY7h55Y85/6zZa4qMPamCZU
- 3GZdxG5o6X/B3uhgqzMDsTA7WcYzCeKBe/0rjSK8Ek2sdDGK2VTjZjOPVIsUj6zApd
- EjPqlafrqNOXtQ0X1Hscf7xf5C24s7SUI48B2vSnL2luZOCMoe2dAr+xk4UoDt+9fc
- RJ8eSnfl6DEEq7Y90VRW9q04=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=QxszjfMl
+ d=kernel.org; s=k20260515; t=1784621651;
+ bh=YLwPYYoAJuVTwFMMJHNBdlzsOiT+gSNb1dBJNG9n0GY=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=QfQ+c58SFlnTpCAM09EvgdzPqXe9HwWum3zGoCjSuRN3EAYFnz8/PggNfd5q+CBdq
+ GtJUk780RbYK8H6IBOdAKpPnJra1gspZm4PNL335Njjmm0chiNKFNGnTq/tE5SNy75
+ /B53B1Dw9qt4mExFpdUqhqaambM6bTz7RNgbwDSua3VpoQgVOIQVS7XQKiIAinYnL3
+ XcaQ7NgHBrtzMi8AZ+nQhkPE1w9JKssCqS9nSIpmYB5Y60Zet/bB8S55uZrWNCrSpy
+ LfoWcHM0Z2LuRinE8ydtL46AfHy4p3TT2jvy8V0rjSofaQIlJCpCAuJRHArADmujn9
+ XTGnTEGxNfOqg==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=QfQ+c58S
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mkorpershoek@kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="QfQ+c58S"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,178 +117,37 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Heinrich Schuchardt via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+From: Mattijs Korpershoek via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 5/2/26 15:04, Simon Glass wrote:
-> Hi Heinrich, Mark,
-> 
-> On Sat, 2 May 2026 at 04:58, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
->>
->>> Date: Sat, 2 May 2026 09:28:56 +0200
->>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>
->> Hi Heinrich,
->>
->>> On 5/1/26 17:05, Heinrich Schuchardt wrote:
->>>> If we use video copy, bit image transfers need to write to the in memory
->>>> copy of the physical frame buffer. Damage control will sync the changes
->>>> to the physical frame buffer.
->>>>
->>>> Cyclic video copy will catch all changes done by EFI applications directly
->>>> accessing the frame buffer copy.
->>>>
->>>> gopobj->mode.fb_base must be a valid pointer to memory and not a virtual
->>>> sandbox address.
->>>>
->>>> With this change the block image transfer test works again on the sandbox.
->>>>
->>>>       setenv efi_selftest block image transfer
->>>>       bootefi selftest
->>>>
->>>> Fixes: a75cf70d23ac ("efi: Correct handling of frame buffer")
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> ---
->>>>    lib/efi_loader/efi_gop.c | 7 +++----
->>>>    1 file changed, 3 insertions(+), 4 deletions(-)
->>>>
->>>> diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
->>>> index 9403e09691e..ae44d140289 100644
->>>> --- a/lib/efi_loader/efi_gop.c
->>>> +++ b/lib/efi_loader/efi_gop.c
->>>> @@ -471,7 +471,7 @@ efi_status_t efi_gop_register(void)
->>>>    {
->>>>      struct efi_gop_obj *gopobj;
->>>>      u32 bpix, format, col, row;
->>>> -   u64 fb_base, fb_size;
->>>> +   u64 fb_size;
->>>>      efi_status_t ret;
->>>>      struct udevice *vdev;
->>>>      struct video_priv *priv;
->>>> @@ -490,7 +490,6 @@ efi_status_t efi_gop_register(void)
->>>>      row = video_get_ysize(vdev);
->>>>
->>>>      plat = dev_get_uclass_plat(vdev);
->>>> -   fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
->>>>      fb_size = plat->size;
->>>>
->>>>      switch (bpix) {
->>>> @@ -528,7 +527,7 @@ efi_status_t efi_gop_register(void)
->>>>      gopobj->mode.info = &gopobj->info;
->>>>      gopobj->mode.info_size = sizeof(gopobj->info);
->>>>
->>>> -   gopobj->mode.fb_base = fb_base;
->>>> +   gopobj->mode.fb_base = (uintptr_t)priv->fb;
-> 
-> Don't you want to use copy_fb (if VIDEO_COPY is enabled) so you get
-> the hardware address?
-> 
->>>
->>> I discussed the value of FrameBufferBase with Simon.
->>>
->>> The code before the patch is incorrect, as on the sandbox it does not
->>> provide a pointer value but a sandbox virtual address. EFI applications
->>> may use the pointer for directly writing to the frame buffer. This would
->>> lead to a crash on the sandbox.
->>
->> I still think this means that EFI on sandbox is fundamentally broken.
->> The identity virtual-to-physical mapping assumption is just too deeply
->> engrained in the ecosystem since that is the documented handoff state
->> for most architectures.
-> 
-> The ACPI tables have the same issue (needing to pass a pointer within
-> sandbox's emulated RAM buffer) and we use nomap_sysmem() to handle
-> that.
-> 
-> In what way is it broken?
-> 
->>
->>> For the case of CONFIG_VIDEO_COPY=y it is problematic to pass the memory
->>> buffer address here, as Linux has an EFI framebuffer driver and would
->>> write to the buffer instead of the physical framebuffer. But our memory
->>> buffer is neither reserved memory not is it copied to the physical
->>> framebuffer after ExitBootServices.
->>
->> Right.
->>
->>> If we pass the physical framebuffer address here, then an EFI
->>> application might write to it and the cyclic video sync would overwrite
->>> the changed pixels.
->>>
->>> Setting PixelBltOnly in field Mode.PixelFormat forbids EFI applications
->>> to directly write to the framebuffer.
->>
->> That means the framebuffer becomes unusable as soon as the EFI
->> application calls ExitBootServices() since an EFI application can't
->> call Blt() after that
->>
->>> So if plat->copy_base is set we should pass PixelBltOnly as PixelFormat
->>> and copy_base as FrameBufferBase.
->>
->> If PixelFormat is PixelBtlOnly, FrameBufferBase is meaningless and
->> probably should be set to 0 instead.
->>
->> Anyway, as far as I can tell there aren't a lot of OSes that support
->> PixelBltOnly.  OpenBSD certainly doesn't.  And as far as my reading of
->> Linux's efistub code is correct, it doesn't support it either.  And neither does u-boot's own efi_video driver.
->>
->> I've always seen PixelBltOnly as a way to support weird hardware that
->> didn't support a linear framebuffer with a sane pixel format.  Not as
->> a way to support a shadow framebuffer like CONFIG_VIDEO_COPY
->> implements.  Note that CONFIG_VIDEO_COPY itself assumes a linear
->> framebuffer with a sane pixel format as it just does a straight copy
->> of the pixels.
->>
->> Instead of using PixelBltOnly, can we just disable the shadow
->> framebuffer as soon as we hand over control to an EFI application?  Or
->> maybe at the point where the EFI application uses the GOP protocol?
-> 
-> This seems like a good idea to me - the latter would be best since it
-> won't impact apps which only use console output. The impact would be
-> that U-Boot will need to read from the hardware framebuffer with
-> write-combining enabled (slow on x86) but at least it is correct.
-> 
->>
->>
->>> We the aforementioned change we will need to change function
->>> gop_get_bpp() to not rely on PixelFormat. Instead we need to pass
->>> priv->format in a private field of the graphics protocol.
->>>
->>>
->>>>      gopobj->mode.fb_size = fb_size;
->>>>
->>>>      gopobj->info.version = 0;
->>>> @@ -553,7 +552,7 @@ efi_status_t efi_gop_register(void)
->>>>      }
->>>>      gopobj->info.pixels_per_scanline = col;
->>>>      gopobj->bpix = bpix;
->>>> -   gopobj->fb = map_sysmem(fb_base, fb_size);
->>>> +   gopobj->fb = priv->fb;
->>>
->>> priv->fb is also the value used by the TrueType drivers.
->>>
->>> Best regards
->>>
->>> Heinrich
->>>
->>>>      gopobj->vdev = vdev;
->>>>
->>>>      return EFI_SUCCESS;
-> 
-> It would be worth testing this on a real x86 laptop to make sure it
-> can still boot Ubuntu, etc.
+On Thu, Jul 16, 2026 at 13:08, Anshul Dalal <anshuld@ti.com> wrote:
 
-(resending as the the first mail had the old u-boot list mail address).
+> On Wed, 15 Jul 2026 11:32:26 +0800, Guo Hao <guohaoprc@163.com> wrote:
+>> setup_board_eeprom_env() and setup_serial_am6() are only available when
+>> TI_I2C_BOARD_DETECT is enabled.
+>> 
+>> IS_ENABLED() does not remove the guarded statements during preprocessing,
+>> so disabling TI_I2C_BOARD_DETECT results in an implicit function
+>> declaration error. Use a preprocessor condition to match the condition
+>> used for the function definition.
+>> 
+>> Fixes: ff1b83c095c2 ("board: am62x: Add support for reading eeprom data")
+>> Signed-off-by: Guo Hao <guohaoprc@163.com>
+>
+> This is a valid fix however I wonder if there's an actual use-case where someone
+> might want to disable TI_I2C_BOARD_DETECT on an EVM board.
 
-Do you have a real x86 laptop using U-Boot?
+I agree with Anshul here. What's the use use-case for disabling i2c
+board detection?
 
-Best regards
+Also, if we really want it disabled, we could also create stub functions
+instead of replacing this.
 
-Heinrich
-
-> 
-> Regards,
-> Simon
-
+>
+> Also, it looks like the same issue exists for other platforms too (AM64x, AM65x,
+> J721s2 ...).
+>
+> -- 
+> Anshul Dalal <anshuld@ti.com>
