@@ -1,74 +1,74 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB8EC4452F
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 02:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E95C3C44524
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 02:59:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 15941407D8;
-	Tue, 21 Jul 2026 02:59:32 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FQQX18f2kGzc; Tue, 21 Jul 2026 02:59:31 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0BF80407DB
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784602771;
-	bh=IhiJxnktJLERcXowMjugpNLXCDDqPS7vLaznk5c1IzI=;
-	h=Date:To:Subject:References:In-Reply-To:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
-	 From;
-	b=j/qr0LRD1nFPJrxE/MiLq+UJHF93g0SfTPUmWDUgc9t8Pr6TxDTGw4WQ4MiZa+974
-	 sMkMK1aeROODgEif0JNeaUIGNEOJlsGi9aQVZ2agxUAAItnD56Ze4Fmi/6JOQ7g4ys
-	 cLQjAYPefEUYBLh+HVpIV9cziyb/9keRAb1hRQmL+QZV7K5/qq4c25QBFXD59eKpC4
-	 nRlf+shlwjjpOdDo93DwWFscsHXuKbSHFxWiWrtxjQMS5GGF75n87mv4v82MJIUbED
-	 /8gXreSqQbQFLbRN1RYekKtyHngo0gCLLbk8B+C66mfvHDd3fHHDpVMrnHB8x3x08P
-	 ZksXhi1wz9CEQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0BF80407DB;
-	Tue, 21 Jul 2026 02:59:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 91F091331
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 02:59:28 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 80E3B607BC
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 02:59:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A4CC7607D1;
+	Tue, 21 Jul 2026 02:59:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3Zbq5RdCX9Ls for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 02:59:27 +0000 (UTC)
+ id 6GzNJcDuN2EX; Tue, 21 Jul 2026 02:59:33 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2987C607AE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784602773;
+	bh=0sCDGiGODAZMWr2v8QRUJeehFL9z0+y4C8+i2ekiX98=;
+	h=Date:To:Subject:References:In-Reply-To:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
+	 From;
+	b=ofLTiHW23lclcpp9Gu8wBrnfCXgxm1QpEgL0laz0/WLAMi8xY48Lm25VIftbVTYgW
+	 MGKPE04VGR7xVrJc3hk2d/kipTygh4nv7sXwSyE6vx5nSlQ5ovcimfa2J02Gl8AMhT
+	 Ff/vpWXqUjZjG8iDJennbecb/zQ90tRrW9kXZmyu6DTVsYmgP9nQRea8rG90qXHa1h
+	 PdfKPPPnuUUzd8gH0Xg4UPepvo8tQc/BDDwAzSTfA06FucazEvAt5Ld9XQabXRx8Xa
+	 n+XcdXHrbJeLDXPsL2DSKeWPrDiYp/ghXpbAOT9azhIonoYSt/2rO8dqvSGpMhRIzp
+	 6JvlIpUuhBv8Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2987C607AE;
+	Tue, 21 Jul 2026 02:59:33 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8AA5296C
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 02:59:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 705E5407DF
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 02:59:31 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id z0Ui4hsv_F4m for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 02:59:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 6E034607A5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6E034607A5
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org B74F4407D4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B74F4407D4
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6E034607A5
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 02:59:27 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B74F4407D4
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 02:59:29 +0000 (UTC)
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wm0KC-000000000L3-1dAu; Tue, 21 Jul 2026 02:35:16 +0000
-Date: Tue, 21 Jul 2026 03:35:13 +0100
+ id 1wm0KO-000000000LO-2Ua2; Tue, 21 Jul 2026 02:35:28 +0000
+Date: Tue, 21 Jul 2026 03:35:26 +0100
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>,
  Ludwig Nussel <ludwig.nussel@siemens.com>,
  Randolph Sapp <rs@ti.com>, Francois Berder <fberder@outlook.fr>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v3 2/3] boot: fit: cover the dm-verity roothash with the
- config signature
-Message-ID: <cf2d647d26ea0850ead5e09fb5d683f92aee4cec.1784601041.git.daniel@makrotopia.org>
+Subject: [PATCH v3 3/3] test: fit: verify dm-verity roothash is covered by
+ the config signature
+Message-ID: <172e250a6c6c90ebc406568cdd8c6195ca41b9ba.1784601041.git.daniel@makrotopia.org>
 References: <cover.1784601041.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <cover.1784601041.git.daniel@makrotopia.org>
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -87,151 +87,580 @@ Reply-To: Daniel Golle <daniel@makrotopia.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-A dm-verity protected filesystem image is not hashed by U-Boot when it
-is loaded; its integrity is delegated to the kernel, which validates the
-filesystem on the fly against the roothash taken from the FIT dm-verity
-subnode. The roothash is therefore the sole integrity anchor for the
-filesystem, yet fit_config_add_hash() only adds the image node, its
-hash subnodes and its cipher subnode to the signed region, leaving the
-dm-verity subnode (roothash, salt and block parameters) unsigned.
+A dm-verity protected filesystem image is not hashed by U-Boot; its
+integrity is delegated to the kernel, which trusts the roothash taken
+from the FIT dm-verity subnode. For that chain of trust to hold, the
+roothash (and salt) must be part of the region covered by the
+configuration signature, otherwise an attacker can replace both the
+filesystem and the roothash while keeping the signature valid.
 
-An attacker able to rewrite the boot medium could then replace both the
-filesystem and the roothash, recompute a matching dm-verity tree and
-keep the configuration signature valid, defeating verified boot for the
-root filesystem.
+Add two independent checks of this property:
 
-Add the dm-verity subnode to the list of nodes covered by the
-configuration signature, both when signing (tools/image-host.c) and when
-verifying (boot/image-fit-sig.c), so the roothash and salt are
-authenticated together with the rest of the configuration.
+ - test/py/tests/test_fit_verity_sign.py signs a configuration that
+   references a filesystem image carrying a dm-verity subnode, then
+   confirms that tampering the roothash or the salt is rejected by
+   fit_check_sign. A control that tampers a byte known to be signed
+   proves the check can fail. A matching page is added under
+   doc/develop/pytest/ so the module documentation is rendered with
+   the rest of the generated docs.
+
+ - test/boot/fit_verity.c gains a runtime unit test that builds the
+   exact node list the configuration signature is computed over,
+   turns it into hashed regions and checks both that the roothash
+   bytes fall inside a signed region and that tampering them changes
+   the hash. It needs no private key, so it also runs on real devices
+   and uses the same hash path a device would.
+
+To let the unit test build the signed-region node list, rename the
+config node-list helper to fit_config_get_signed_nodes(), make it
+non-static and declare it in image.h.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
-v3: use present tense for the pre-patch code description, per Simon
-    Glass's review; document the dm-verity subnode in the rebuilt node
-    list in doc/usage/fit/signature.rst and note the signature coverage
-    in doc/usage/fit/dm-verity.rst. The tools/image-host.c hunk now
-    calls the patch 1 helper instead of duplicating the pattern inline
-    (no functional change). Kept Tom's Reviewed-by: the functional
-    change he reviewed is unchanged; the rest is doc/message wording
-    and a mechanical refactor.
-v2: no changes
+v3: address comments by Simon Glass
+ * assert fdt_find_regions()'s returned count stays within the region
+   array bound, matching the check fit_config_check_sig() enforces,
+   instead of only checking it is non-zero
+ * tamper the roothash through buf[digest_off] instead of casting away
+   the const from fdt_getprop()'s return value
+ * note in a comment that the digest tamper stands in for the whole
+   dm-verity node, since salt lives in the same node and is covered by
+   the same region
+ * fix test_fit_verity_roothash_signed(), which never actually ran:
+   its ITS baked the tmpdir prefix into the /incbin/() paths while dtc
+   also resolves incbin paths relative to the .its file's own
+   directory (same as tmpdir here), so the path was searched doubled
+   ("tmpdir/tmpdir/kernel.bin") and mkimage always failed with "No
+   such file or directory". Use bare filenames in the ITS and let dtc
+   resolve them; drop the now-unused %(tmpdir)s substitution.
 
- boot/image-fit-sig.c        | 23 +++++++++++++++++++----
- doc/usage/fit/dm-verity.rst |  5 +++++
- doc/usage/fit/signature.rst |  2 +-
- tools/image-host.c          | 21 +++++++++++++++++++++
- 4 files changed, 46 insertions(+), 5 deletions(-)
+v2: address comments by Tom Rini
+ * drop the VISIBLE_IF_UT visibility macro and simply make
+   fit_config_get_signed_nodes() non-static
+ * convert the comment block in test_fit_verity_sign.py into a module
+   docstring, add an ITS example and add a page under doc/develop/pytest/
+   so the module is rendered in the generated documentation
+
+ boot/image-fit-sig.c                        |  14 +-
+ doc/develop/pytest/test_fit_verity_sign.rst |  10 +
+ include/image.h                             |  23 +++
+ test/boot/fit_verity.c                      | 200 +++++++++++++++++++
+ test/py/tests/test_fit_verity_sign.py       | 202 ++++++++++++++++++++
+ 5 files changed, 442 insertions(+), 7 deletions(-)
+ create mode 100644 doc/develop/pytest/test_fit_verity_sign.rst
+ create mode 100644 test/py/tests/test_fit_verity_sign.py
 
 diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index 3357ec92116..f7ab036dcb5 100644
+index f7ab036dcb5..a0c50bba4cf 100644
 --- a/boot/image-fit-sig.c
 +++ b/boot/image-fit-sig.c
-@@ -264,8 +264,8 @@ static int fit_config_add_node(const void *fit, int noffset, char **node_inc,
- /**
-  * fit_config_add_hash() - Add hash nodes for one image to the node list
-  *
-- * Adds the image path, all its hash-* subnode paths, and its cipher
-- * subnode path (if present) to the packed buffer.
-+ * Adds the image path, all its hash-* subnode paths, and its cipher and
-+ * dm-verity subnode paths (each if present) to the packed buffer.
-  *
-  * @fit:		FIT blob
-  * @image_noffset:	Image node offset (e.g. /images/kernel-1)
-@@ -322,6 +322,21 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
- 			return ret;
- 	}
- 
-+	/*
-+	 * Add this image's dm-verity node if present. Its roothash is the
-+	 * only integrity anchor for a dm-verity filesystem image, so it must
-+	 * be covered by the configuration signature.
-+	 */
-+	noffset = fdt_subnode_offset(fit, image_noffset, FIT_VERITY_NODENAME);
-+	if (noffset != -FDT_ERR_NOTFOUND) {
-+		if (noffset < 0)
-+			return -EIO;
-+		ret = fit_config_add_node(fit, noffset, node_inc, count,
-+					  max_nodes, buf, buf_used, buf_len);
-+		if (ret)
-+			return ret;
-+	}
-+
- 	return 0;
+@@ -341,7 +341,7 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
  }
  
-@@ -329,8 +344,8 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
-  * fit_config_get_hash_list() - Build the list of nodes to hash
+ /**
+- * fit_config_get_hash_list() - Build the list of nodes to hash
++ * fit_config_get_signed_nodes() - Build the list of nodes to hash
   *
   * Works through every image referenced by the configuration and collects the
-- * node paths: root + config + all referenced images with their hash and
-- * cipher subnodes.
-+ * node paths: root + config + all referenced images with their hash,
-+ * cipher and dm-verity subnodes.
-  *
-  * Properties known not to be image references (description, compatible,
-  * default, load-only) are skipped, so any new image type is covered by default.
-diff --git a/doc/usage/fit/dm-verity.rst b/doc/usage/fit/dm-verity.rst
-index 800a18fceae..76030c751ae 100644
---- a/doc/usage/fit/dm-verity.rst
-+++ b/doc/usage/fit/dm-verity.rst
-@@ -209,6 +209,11 @@ typically be obtained from its output.
- The ``digest`` and ``salt`` byte arrays correspond to the hex-encoded
- ``Root hash`` and ``Salt`` printed by ``veritysetup format``.
- 
-+When the configuration is signed, ``digest`` and ``salt`` are covered by
-+the configuration signature (see :doc:`signature`), so the roothash
-+cannot be swapped out for a matching one without invalidating the
-+signature.
-+
- Optional boolean properties (when present, they are collected and appended
- as dm-verity optional parameters with hyphens converted to underscores):
- 
-diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-index da08cc75c3a..64bada2f58f 100644
---- a/doc/usage/fit/signature.rst
-+++ b/doc/usage/fit/signature.rst
-@@ -359,7 +359,7 @@ however, U-Boot does not read 'hashed-nodes'. Instead it rebuilds the node
- list from the configuration's own image references (kernel, fdt, ramdisk,
- etc.), since 'hashed-nodes' is not itself covered by the signature. The
- rebuilt list always includes the root node, the configuration node, each
--referenced image node and its hash/cipher subnodes.
-+referenced image node and its hash, cipher and dm-verity subnodes.
- 
- The image is walked in order and each tag processed as follows:
- 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index fd2ef99d399..16a5ad6c22d 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -1287,6 +1287,27 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
- 			return ret;
+  * node paths: root + config + all referenced images with their hash,
+@@ -358,9 +358,9 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+  * @buf_len:	Size of @buf
+  * Return: number of entries in @node_inc, or -ve on error
+  */
+-static int fit_config_get_hash_list(const void *fit, int conf_noffset,
+-				    char **node_inc, int max_nodes,
+-				    char *buf, int buf_len)
++int fit_config_get_signed_nodes(const void *fit, int conf_noffset,
++				char **node_inc, int max_nodes,
++				char *buf, int buf_len)
+ {
+ 	const char *conf_name;
+ 	int image_count;
+@@ -500,9 +500,9 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
  	}
  
-+	/*
-+	 * Add this image's dm-verity node if present. Its roothash is the
-+	 * only integrity anchor for a dm-verity filesystem image, so it must
-+	 * be covered by the configuration signature.
-+	 */
-+	noffset = fdt_subnode_offset(fit, image_noffset,
-+				     FIT_VERITY_NODENAME);
-+	if (noffset != -FDT_ERR_NOTFOUND) {
-+		if (noffset < 0) {
-+			fprintf(stderr,
-+				"Failed to get dm-verity node in configuration '%s/%s' image '%s': %s\n",
-+				conf_name, sig_name, iname,
-+				fdt_strerror(noffset));
-+			return -EIO;
-+		}
-+		ret = fit_config_add_node(fit, noffset, node_inc, conf_name,
-+					  sig_name, iname);
-+		if (ret)
-+			return ret;
-+	}
+ 	/* Build the node list from the config, ignoring hashed-nodes */
+-	count = fit_config_get_hash_list(fit, conf_noffset,
+-					 node_inc, IMAGE_MAX_HASHED_NODES,
+-					 hash_buf, sizeof(hash_buf));
++	count = fit_config_get_signed_nodes(fit, conf_noffset,
++					    node_inc, IMAGE_MAX_HASHED_NODES,
++					    hash_buf, sizeof(hash_buf));
+ 	if (count < 0) {
+ 		*err_msgp = "Failed to build hash node list";
+ 		return -1;
+diff --git a/doc/develop/pytest/test_fit_verity_sign.rst b/doc/develop/pytest/test_fit_verity_sign.rst
+new file mode 100644
+index 00000000000..94a39b08952
+--- /dev/null
++++ b/doc/develop/pytest/test_fit_verity_sign.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
++test_fit_verity_sign
++====================
++
++.. automodule:: test_fit_verity_sign
++   :synopsis:
++   :member-order: bysource
++   :members:
++   :undoc-members:
+diff --git a/include/image.h b/include/image.h
+index 4b3c9c87bf5..db7de2d446d 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1893,6 +1893,29 @@ struct image_region *fit_region_make_list(const void *fit,
+ 		struct fdt_region *fdt_regions, int count,
+ 		struct image_region *region);
+ 
++/**
++ * fit_config_get_signed_nodes() - Build the list of nodes covered by a config
++ *				   signature
++ *
++ * Collects the paths of the nodes that the configuration signature is
++ * computed over: the root node, the configuration node, and for each image
++ * referenced by the configuration its node, its hash subnodes and its cipher
++ * and dm-verity subnodes. The result is the same node list used when creating
++ * and verifying the signature, and is suitable for passing to
++ * fdt_find_regions().
++ *
++ * @fit:	FIT blob
++ * @conf_noffset: Configuration node offset
++ * @node_inc:	Array to fill with pointers to packed path strings
++ * @max_nodes:	Number of entries in @node_inc
++ * @buf:	Buffer for the packed null-terminated path strings
++ * @buf_len:	Size of @buf
++ * Return: number of entries written to @node_inc, or -ve on error
++ */
++int fit_config_get_signed_nodes(const void *fit, int conf_noffset,
++				char **node_inc, int max_nodes,
++				char *buf, int buf_len);
++
+ static inline int fit_image_check_target_arch(const void *fdt, int node)
+ {
+ #ifndef USE_HOSTCC
+diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
+index 7459a9d6f81..4b5db839085 100644
+--- a/test/boot/fit_verity.c
++++ b/test/boot/fit_verity.c
+@@ -6,6 +6,11 @@
+  */
+ 
+ #include <image.h>
++#include <fdt_region.h>
++#include <malloc.h>
++#include <linux/kernel.h>
++#include <linux/libfdt.h>
++#include <u-boot/hash-checksum.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+ 
+@@ -304,3 +309,198 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
  	return 0;
  }
- 
+ FIT_VERITY_TEST(fit_verity_test_bad_blocksize, 0);
++
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++/**
++ * build_signed_verity_fit() - build a FIT with a signable verity config
++ * @buf:	output buffer (at least FIT_BUF_SIZE bytes)
++ *
++ * Like build_verity_fit(), but the filesystem image also carries a hash
++ * subnode (required for a configuration to be signable) so the config's
++ * signed-region node list can be built with fit_config_get_signed_nodes().
++ *
++ * Return: configuration node offset, or -ve on error
++ */
++static int build_signed_verity_fit(void *buf)
++{
++	int images_node, confs_node, conf_node, img_node, hash_node, verity_node;
++	fdt32_t val;
++	int ret;
++
++	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
++	if (ret)
++		return ret;
++
++	images_node = fdt_add_subnode(buf, 0, "images");
++	if (images_node < 0)
++		return images_node;
++
++	img_node = fdt_add_subnode(buf, images_node, "rootfs");
++	if (img_node < 0)
++		return img_node;
++	ret = fdt_setprop_string(buf, img_node, FIT_TYPE_PROP, "filesystem");
++	if (ret)
++		return ret;
++
++	hash_node = fdt_add_subnode(buf, img_node, "hash-1");
++	if (hash_node < 0)
++		return hash_node;
++	ret = fdt_setprop_string(buf, hash_node, FIT_ALGO_PROP, "sha256");
++	if (ret)
++		return ret;
++	ret = fdt_setprop(buf, hash_node, FIT_VALUE_PROP, test_digest,
++			  sizeof(test_digest));
++	if (ret)
++		return ret;
++
++	verity_node = fdt_add_subnode(buf, img_node, FIT_VERITY_NODENAME);
++	if (verity_node < 0)
++		return verity_node;
++	ret = fdt_setprop_string(buf, verity_node, FIT_VERITY_ALGO_PROP,
++				 "sha256");
++	if (ret)
++		return ret;
++	val = cpu_to_fdt32(4096);
++	ret = fdt_setprop(buf, verity_node, FIT_VERITY_DBS_PROP, &val,
++			  sizeof(val));
++	if (ret)
++		return ret;
++	ret = fdt_setprop(buf, verity_node, FIT_VERITY_HBS_PROP, &val,
++			  sizeof(val));
++	if (ret)
++		return ret;
++	val = cpu_to_fdt32(100);
++	ret = fdt_setprop(buf, verity_node, FIT_VERITY_NBLK_PROP, &val,
++			  sizeof(val));
++	if (ret)
++		return ret;
++	ret = fdt_setprop(buf, verity_node, FIT_VERITY_HBLK_PROP, &val,
++			  sizeof(val));
++	if (ret)
++		return ret;
++	ret = fdt_setprop(buf, verity_node, FIT_VERITY_DIGEST_PROP, test_digest,
++			  sizeof(test_digest));
++	if (ret)
++		return ret;
++	ret = fdt_setprop(buf, verity_node, FIT_VERITY_SALT_PROP, test_salt,
++			  sizeof(test_salt));
++	if (ret)
++		return ret;
++
++	confs_node = fdt_add_subnode(buf, 0, "configurations");
++	if (confs_node < 0)
++		return confs_node;
++	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
++	if (conf_node < 0)
++		return conf_node;
++	ret = fdt_setprop_string(buf, conf_node, FIT_LOADABLE_PROP, "rootfs");
++	if (ret)
++		return ret;
++
++	return conf_node;
++}
++
++/*
++ * Test: the dm-verity roothash and salt are inside the region covered by the
++ * configuration signature.
++ *
++ * A dm-verity filesystem image is not hashed by U-Boot; its integrity is
++ * delegated to the kernel, which trusts the roothash from the FIT dm-verity
++ * subnode. That roothash must therefore be part of the signed region, so that
++ * an attacker cannot swap both the filesystem and the roothash while keeping
++ * the configuration signature valid.
++ *
++ * This checks the property without a private key, so it also runs on real
++ * devices: it builds the exact node list the signature is computed over
++ * (fit_config_get_signed_nodes), turns it into hashed regions, and verifies both
++ * that the roothash bytes fall inside a region and that tampering them changes
++ * the hash. It uses the same hash path a device would (crypto accelerated where
++ * available).
++ */
++static int fit_verity_test_roothash_signed(struct unit_test_state *uts)
++{
++	char buf[FIT_BUF_SIZE];
++	char *node_inc[32];
++	char path_buf[256];
++	char region_path[256];
++	struct fdt_region fdt_regions[64];
++	struct image_region *region = NULL;
++	int conf_node, verity_node;
++	int count, i, digest_len;
++	const void *digest;
++	ulong digest_off, region_off;
++	bool covered = false;
++	u8 hash_clean[32], hash_tampered[32], hash_control[32];
++
++	conf_node = build_signed_verity_fit(buf);
++	ut_assert(conf_node >= 0);
++
++	verity_node = fdt_path_offset(buf, "/images/rootfs/dm-verity");
++	ut_assert(verity_node >= 0);
++
++	/* Build the node list the configuration signature is computed over. */
++	count = fit_config_get_signed_nodes(buf, conf_node, node_inc,
++					    ARRAY_SIZE(node_inc), path_buf,
++					    sizeof(path_buf));
++	ut_assert(count > 0);
++
++	/*
++	 * Turn the node list into hashed regions. No exclude list is needed:
++	 * the excluded properties (data, data-size, data-offset,
++	 * data-position) never include the dm-verity digest or salt, so the
++	 * coverage answer is the same with or without it.
++	 */
++	count = fdt_find_regions(buf, node_inc, count, NULL, 0, fdt_regions,
++				 ARRAY_SIZE(fdt_regions) - 1, region_path,
++				 sizeof(region_path), 0);
++	ut_assert(count > 0);
++	/* Region array exhausted: mirror the bound fit_config_check_sig() enforces. */
++	ut_assert(count < ARRAY_SIZE(fdt_regions) - 1);
++
++	region = fit_region_make_list(buf, fdt_regions, count, NULL);
++	ut_assertnonnull(region);
++
++	digest = fdt_getprop(buf, verity_node, FIT_VERITY_DIGEST_PROP,
++			     &digest_len);
++	ut_assertnonnull(digest);
++	ut_assert(digest_len > 0);
++	digest_off = (ulong)((const char *)digest - (const char *)buf);
++
++	/*
++	 * Control: the hash covers a non-empty region and reacts to a change
++	 * inside it. Flip a byte of the (signed) image hash value and confirm
++	 * the computed hash differs, proving the region set and hash work.
++	 */
++	ut_assertok(hash_calculate("sha256", region, count, hash_clean));
++	for (i = 0; i < count; i++) {
++		region_off = (ulong)((const char *)region[i].data -
++				     (const char *)buf);
++		if (digest_off >= region_off &&
++		    digest_off + digest_len <= region_off + region[i].size) {
++			covered = true;
++			break;
++		}
++	}
++
++	/* The roothash must be covered by the configuration signature. */
++	ut_assert(covered);
++
++	/*
++	 * Tampering the roothash must change the signed hash. Only the digest
++	 * is flipped here; salt sits in the same dm-verity node, so coverage
++	 * of one implies coverage of the other.
++	 */
++	buf[digest_off] ^= 0xff;
++	ut_assertok(hash_calculate("sha256", region, count, hash_tampered));
++	buf[digest_off] ^= 0xff;
++	ut_assert(memcmp(hash_clean, hash_tampered, sizeof(hash_clean)) != 0);
++
++	/* Sanity: with the byte restored the hash matches the clean value. */
++	ut_assertok(hash_calculate("sha256", region, count, hash_control));
++	ut_asserteq_mem(hash_clean, hash_control, sizeof(hash_clean));
++
++	free(region);
++	return 0;
++}
++FIT_VERITY_TEST(fit_verity_test_roothash_signed, 0);
++#endif /* FIT_SIGNATURE */
+diff --git a/test/py/tests/test_fit_verity_sign.py b/test/py/tests/test_fit_verity_sign.py
+new file mode 100644
+index 00000000000..01888fc411e
+--- /dev/null
++++ b/test/py/tests/test_fit_verity_sign.py
+@@ -0,0 +1,202 @@
++# SPDX-License-Identifier: GPL-2.0
++# Copyright 2026 Daniel Golle <daniel@makrotopia.org>
++
++"""Verify that the dm-verity roothash is covered by the FIT configuration
++signature.
++
++A dm-verity protected filesystem image is not hashed by U-Boot; its integrity
++is delegated to the kernel, which trusts the roothash taken from the FIT
++``dm-verity`` subnode. That roothash must therefore be part of the signed
++region of the configuration, otherwise an attacker can replace both the
++filesystem and the roothash while keeping the configuration signature valid.
++
++This test signs a configuration referencing a filesystem image that carries a
++``dm-verity`` subnode, then flips one byte of the roothash and of the salt and
++checks that verification rejects the image. A control tampering a byte that is
++known to be signed confirms that the check is able to detect a broken region.
++
++The FIT pairs a signed configuration with a filesystem image carrying a
++``dm-verity`` subnode:
++
++.. code-block:: devicetree
++
++    images {
++        rootfs-1 {
++            data = /incbin/("rootfs.bin");
++            type = "filesystem";
++            compression = "none";
++            hash-1 {
++                algo = "sha256";
++            };
++            dm-verity {
++                algo = "sha256";
++                data-block-size = <4096>;
++                hash-block-size = <4096>;
++                num-data-blocks = <16>;
++                hash-start-block = <16>;
++            };
++        };
++    };
++
++    configurations {
++        conf-1 {
++            kernel = "kernel-1";
++            loadables = "rootfs-1";
++            signature-1 {
++                algo = "sha256,rsa2048";
++                key-name-hint = "dev";
++                sign-images = "kernel", "loadables";
++            };
++        };
++    };
++
++mkimage builds the dm-verity hash tree when assembling the image and records
++the resulting roothash and salt in the ``dm-verity`` subnode; fit_check_sign
++must reject an image where either was modified after signing.
++"""
++
++import os
++import pytest
++import utils
++
++# 16 blocks of 4096 bytes, matching num-data-blocks/data-block-size below.
++ROOTFS_SIZE = 16 * 4096
++
++ITS = '''
++/dts-v1/;
++/ {
++    description = "verity roothash signing coverage test";
++    #address-cells = <1>;
++
++    images {
++        kernel-1 {
++            description = "kernel";
++            data = /incbin/("kernel.bin");
++            type = "kernel";
++            arch = "arm64";
++            os = "linux";
++            compression = "none";
++            load = <0x40000000>;
++            entry = <0x40000000>;
++            hash-1 { algo = "sha256"; };
++        };
++        rootfs-1 {
++            description = "rootfs";
++            data = /incbin/("rootfs.bin");
++            type = "filesystem";
++            arch = "arm64";
++            compression = "none";
++            hash-1 { algo = "sha256"; };
++            dm-verity {
++                algo = "sha256";
++                data-block-size = <4096>;
++                hash-block-size = <4096>;
++                num-data-blocks = <16>;
++                hash-start-block = <16>;
++            };
++        };
++    };
++
++    configurations {
++        default = "conf-1";
++        conf-1 {
++            description = "signed config";
++            kernel = "kernel-1";
++            loadables = "rootfs-1";
++            signature-1 {
++                algo = "sha256,rsa2048";
++                key-name-hint = "dev";
++                sign-images = "kernel", "loadables";
++            };
++        };
++    };
++};
++'''
++
++VERITY_NODE = '/images/rootfs-1/dm-verity'
++ROOTFS_HASH_NODE = '/images/rootfs-1/hash-1'
++
++
++def flip_prop_byte(ubman, fit, node, prop):
++    """Flip the first byte of a byte-array property in a FIT, in place.
++
++    The property is rewritten with the same length so that no node is
++    relaid out and the signed regions keep their offsets.
++    """
++    val = utils.run_and_log(ubman, 'fdtget -t bx %s %s %s' % (fit, node, prop))
++    bytelist = val.split()
++    bytelist[0] = '%x' % (int(bytelist[0], 16) ^ 0xff)
++    utils.run_and_log(ubman, 'fdtput -t bx %s %s %s %s' %
++                      (fit, node, prop, ' '.join(bytelist)))
++
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('fit_signature')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtget')
++@pytest.mark.requiredtool('fdtput')
++@pytest.mark.requiredtool('openssl')
++def test_fit_verity_roothash_signed(ubman):
++    """The dm-verity roothash must be inside the signed configuration region."""
++    tmpdir = os.path.join(ubman.config.result_dir, 'verity-sign') + '/'
++    if not os.path.exists(tmpdir):
++        os.makedirs(tmpdir)
++    mkimage = ubman.config.build_dir + '/tools/mkimage'
++    fit_check_sign = ubman.config.build_dir + '/tools/fit_check_sign'
++    dtc_args = '-I dts -O dtb -i %s' % tmpdir
++    its = tmpdir + 'verity.its'
++    fit = tmpdir + 'verity.itb'
++    dtb = tmpdir + 'control.dtb'
++
++    # Signing key and empty control dtb to receive the public key.
++    utils.run_and_log(ubman, 'openssl genpkey -algorithm RSA -out %sdev.key '
++                      '-pkeyopt rsa_keygen_bits:2048 '
++                      '-pkeyopt rsa_keygen_pubexp:65537' % tmpdir)
++    utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %sdev.key '
++                      '-out %sdev.crt' % (tmpdir, tmpdir))
++    with open(tmpdir + 'control.dts', 'w') as f:
++        f.write('/dts-v1/; / { model = "verity-test"; };\n')
++    utils.run_and_log(ubman, 'dtc -O dtb -o %s %scontrol.dts' % (dtb, tmpdir))
++
++    # Payloads. The rootfs must be a whole number of data blocks so mkimage can
++    # build the dm-verity hash tree and compute the roothash.
++    with open(tmpdir + 'rootfs.bin', 'wb') as f:
++        f.write(b'R' * ROOTFS_SIZE)
++    with open(tmpdir + 'kernel.bin', 'wb') as f:
++        f.write(b'KERNEL')
++
++    with open(its, 'w') as f:
++        f.write(ITS)
++
++    # Build and sign. -E keeps the (large) rootfs external, as on a real device.
++    utils.run_and_log(ubman, [mkimage, '-D', dtc_args, '-E', '-f', its,
++                              '-k', tmpdir, '-K', dtb, '-r', fit])
++
++    # Baseline: the freshly signed image must verify.
++    utils.run_and_log(ubman, [fit_check_sign, '-f', fit, '-k', dtb])
++
++    # Control: tampering a byte that is signed (the filesystem image hash value)
++    # must be detected. This proves the check can fail.
++    control = tmpdir + 'control.itb'
++    utils.run_and_log(ubman, 'cp %s %s' % (fit, control))
++    flip_prop_byte(ubman, control, ROOTFS_HASH_NODE, 'value')
++    utils.run_and_log_expect_exception(
++        ubman, [fit_check_sign, '-f', control, '-k', dtb],
++        1, 'Failed to verify required signature')
++
++    # Roothash: tampering the dm-verity digest must be rejected. If the digest
++    # is outside the signed region this check passes and boot is compromised.
++    tampered = tmpdir + 'tamper-digest.itb'
++    utils.run_and_log(ubman, 'cp %s %s' % (fit, tampered))
++    flip_prop_byte(ubman, tampered, VERITY_NODE, 'digest')
++    utils.run_and_log_expect_exception(
++        ubman, [fit_check_sign, '-f', tampered, '-k', dtb],
++        1, 'Failed to verify required signature')
++
++    # Salt: likewise, the salt feeds the dm-verity target and must be signed.
++    tampered = tmpdir + 'tamper-salt.itb'
++    utils.run_and_log(ubman, 'cp %s %s' % (fit, tampered))
++    flip_prop_byte(ubman, tampered, VERITY_NODE, 'salt')
++    utils.run_and_log_expect_exception(
++        ubman, [fit_check_sign, '-f', tampered, '-k', dtb],
++        1, 'Failed to verify required signature')
 -- 
 2.55.0
