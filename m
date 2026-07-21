@@ -1,130 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168A6C44529
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 11:36:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7141EC44529
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 11:47:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B8C5660611;
-	Tue, 21 Jul 2026 11:36:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2F26080EB3;
+	Tue, 21 Jul 2026 11:47:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1JOsf-iuvVUC; Tue, 21 Jul 2026 11:36:21 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MhyufhaN330Y; Tue, 21 Jul 2026 11:47:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C254E6062C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4208E80E18
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784633780;
-	bh=tretGQGGPHfPshVu4T38kvP+YG2spWdAJ+f7egUzjl4=;
-	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784634453;
+	bh=ceXPfOHt26ZnYf1SDnyZybse6zjH6MYqNIMLbDQGJbg=;
+	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=E0ZEIVxnXZBrfLNOSn6z7h9lvhaHQi+P8FFnpk6iZ+fi+NbY36CFo59AG+4jV/cTM
-	 1iUocjJV2W6wqqrKQHtD/DpspOfMLUFGenZppO5FM0S7C7pikxsW5bfZhjIEvHY0mu
-	 /i4w5A3ouxxYk+xhQGkJ92WDAf30L+v912+XlsISIkJMoyBfghfcW1Pz4EZm8EmQq0
-	 7hTOLSmX/LxTGc/Zg4j0jEA2Kr8UDRNJToEI4s5BNaE3hpf9++XpRvG759HvMvcVhM
-	 vXjI31KfP1eqso3gZTIdWD9gXu/8mVyKRiQ336hqyujj0TVzwlCsq/+CC7zcm2TKj2
-	 JGMg0RftEeZ2w==
+	b=Ml58KiLZTKYGWEPrJd2Aq4kBiNQ7TK/zMfpmdjVHJ+6Hb6DMKLGzm0jj3VuJHnrli
+	 uBKNNIdO8PShnBUESVlXU4aKiC81az/9TAkjHsrsyOqNcURW3rIq/FivTvWyfx2PmI
+	 A2Blmy46yrd4H1pS12iJLEX7NBPG3fKgKCapetGazd8kNOSG/2BBbAAUAFaZueh3I7
+	 zR+yVXaCAfjai5G0RUt5xFzc1tTEhxiHjdAUohu7NxVBSihIB5wAQunsvkx8KZkBXR
+	 pwhvVLlDaG2qlcEBR/y9Vu4osD3x/Js7q8NQzytPqyYmj9j9P+6wEHUNlrl2B8UHUF
+	 PkltgtgaWg9Rw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C254E6062C;
-	Tue, 21 Jul 2026 11:36:20 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id BDC19FCE
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 11:36:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4208E80E18;
+	Tue, 21 Jul 2026 11:47:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 03E14224
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 11:47:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id AF59B400FE
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 11:36:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id DE31380E18
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 11:47:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2-j_NAAzvkLA for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 11:36:18 +0000 (UTC)
-Received-SPF: Neutral (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=romain.gantois@bootlin.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5AD66400D5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5AD66400D5
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5AD66400D5
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 11:36:17 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 21CD084659; Tue, 21 Jul 2026 13:36:16 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EEC4803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 13:36:13 +0200 (CEST)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 0A39B1A1135;
- Tue, 21 Jul 2026 11:36:13 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id C7B5560368;
- Tue, 21 Jul 2026 11:36:12 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3EEEA11BD3A3F; 
- Tue, 21 Jul 2026 13:36:02 +0200 (CEST)
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>,
- Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Herve Codina <herve.codina@bootlin.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
-Subject: Re: [PATCH v2 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
- support
-Date: Tue, 21 Jul 2026 13:35:57 +0200
-Message-ID: <2l1ctkP4Ro2Q97CaOnt-yg@bootlin.com>
-In-Reply-To: <CAFLszThwLCFR+HwhOVa69oGv7NTwcjXvHGtgbFsJ4kbPOweRFA@mail.gmail.com>
-References: <20260702-rzn1-usbf-v2-0-00ceecebaea6@bootlin.com>
- <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
- <CAFLszThwLCFR+HwhOVa69oGv7NTwcjXvHGtgbFsJ4kbPOweRFA@mail.gmail.com>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Y7nnoOM21Q2j for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 11:47:31 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::12f; helo=mail-lf1-x12f.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org C01CB80DD8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C01CB80DD8
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C01CB80DD8
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 11:47:30 +0000 (UTC)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5aebd52488cso11743878e87.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 04:47:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784634448; cv=none;
+ d=google.com; s=arc-20260327;
+ b=c1oH45k0XmMIGt5UFjk9XJsWEKP+4E5YFRcskScim9v77ajU6IWLJMuZj/7K3W5/Ue
+ Udw6IpJParQSWMjkvbpStpqMjP7s4oHba8sAkrk3ECHUkat3IBIZHthngl3dMTTp5BP9
+ 2yXu3GlTuDHrVPxfEGlt7/B+6lmUuY3aRj59kBm3kmAYrgiMQ6qESIZX38F4idxQKO2H
+ 4Fa+SVlCnwQoSrPQTyBig/h/6IG0k7mLGVAD/VDg15UoKE+fk913PUNKG19fI+w4ecjP
+ W12NT4kKMSOWL+PYPGQjunT8MqMW8uCXexky2xp0x6uyD/jAZ0KTtHIeBOGcdhf8zbAI
+ Z5Zg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ceXPfOHt26ZnYf1SDnyZybse6zjH6MYqNIMLbDQGJbg=;
+ fh=kgmXD09yDQCUOmVWHt5ku5TyveYnep525rEIa2yxBW4=;
+ b=esEhMmido+/tC3zPlLV7D7Cu8DRuIkHMxwCoh3OhQjmRAoOac0Vh8v36rVTjtzL7C1
+ 633R9YUXqXxoRTGzxg6V3nKm37Dolo2Mj9IyRl++bi3L4DRXkqdOuXU/j5X6r4kmzIho
+ YKH2m/sHaWsLMQUw6+rMFYmMsPophmXtTylyBJ564QNqXYMQefQvAhzpMaLQNIxqJWpk
+ 2PHOHsXnTEC4mtiixhR5Z//dMflQe/y4wrXKMk9gJpZAfAMx4Hsj0w1RllKw+xgLCWJq
+ 5l5KREh1descfuEpwzX8AkJLTUC+FhInOB0ylzHoyst32/IhJ1pP7vuAOgMB9qgGTyxy
+ /qDA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784634448; x=1785239248;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ceXPfOHt26ZnYf1SDnyZybse6zjH6MYqNIMLbDQGJbg=;
+ b=kfGoFaQCkT3CSVOUirOeXGvz/4HdizirW0afXOAjeVp3KU3RolG08QuZWtpQ5TGIGK
+ /8YbEuxXglKDUOQzYWvyFKMJYvuazp7ZAvNiWmTeCBXz11WP8paCJrS2qSMmde35LXkv
+ qKNpNtbsOr7QnMDErb5V5tuIPq6QtzFamm0j2qJHkUoem7s7OrSfwM0WkD/iJ/Qka86x
+ QCgvQ0EFgmiAVkTFwGre+HrfJHrYs4XxMr0/8ct00t7ZFQ+N5rrvL2hUELF5Wil0lrbT
+ ZhPzQDLkkoiLX/JNHAsKDerWW1yq/iHIV7JhztioxR8rQPIDGowqWwvQ6c/WPz3IVqgp
+ M00Q==
+X-Gm-Message-State: AOJu0YyzC4va/pJnQRHsT9l4RzP7jnxf6usPcBWGZfw+SdvFDpm1SAWp
+ bCYv8+XLDniQQQqdOTcWZBRSiNt2BS1PlHEJoQum5BjGsvXlfXvOlVwphccsOvleP80F7uNUKjh
+ Np+EAb26CTtFU5o6IWfbMcWo8YtTJprk=
+X-Gm-Gg: AR+sD12ukjebBCXdCaZbJSyVKy2uCiXmBJ2B3be2LmEHXEC9A8R7FQXIWEEDtZQIWFd
+ fy5HoEOmGBikyIjBFfe+aiLQh3GK0MPYTrMSKdHIKJgIU6V/gv0q72GlTrgHn51ewcwM9GwkWr6
+ En/BnULh52Tv4IJ4m3yTSPjSk7Fp/nhxvAqpvfcjBsaqUbW/iLF4q1AWpr5QzdqibkNOxWHjb2W
+ BcPXbakGfyWTR2hKivRk8fZxtPOAMbvuafFjyUje3AWLVy1qJI16dcARAIXHPJCNmfARx11Wbqh
+ C3eqxsT9pUWjQRz96oNs7s72giLvWX5YUAk7boZOEsE6/TmFzxz6rif3jSmq
+X-Received: by 2002:a05:6512:1451:10b0:5b0:23cb:91ea with SMTP id
+ 2adb3069b0e04-5b28f87e34fmr2640063e87.22.1784634447873; Tue, 21 Jul 2026
+ 04:47:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPartyM2to9gQSFmVRKZm-G--gw";
- micalg="pgp-sha512"; protocol="application/pgp-signature"
-X-Last-TLS-Session-Version: TLSv1.3
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+References: <20240930035531.27079-4-peng.fan@oss.nxp.com>
+ <b80b20b3-1d30-4a2e-81c0-d974f91f48c7@kd-solutions.pl>
+In-Reply-To: <b80b20b3-1d30-4a2e-81c0-d974f91f48c7@kd-solutions.pl>
+Date: Tue, 21 Jul 2026 08:47:16 -0300
+X-Gm-Features: AUfX_my8Lr_2fxJ9B9hZdTAJ7lGGk7Ypy2iAqurEoIeK1eA4izrFDZ4E94AYnaU
+Message-ID: <CAOMZO5D-8Ti+j3fUBAztkFY7wYZJsLcDQaFmcvH6cSgPXB23tQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] power: regulator: ADD PMIC PF9453 support
+To: =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>, 
+ Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bootlin.com; s=dkim; 
- t=1784633771; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=toZtiiiSYU3FFfoTZciGefq7d7VUfHC8yyqQhsZ4O40=;
- b=MPDEZ4jQctDjLRWFPYfydqupEOKKDlgrjN1nRfpdssetkiuD9mMnpCeahgSHxsVm6VGHkW
- 56M0F6uTj7R7CGo7qOmPkhUfwXoSh2UYwmJ7lk6Wig/atoYHZatB+KDOOCsAkDPa8NyA77
- k0ljzUZjWTEabmrdhtXxgI7ypdAKJkYAuL4W/6ebHeBzeZ6V8lvdVYwVMK4LQ/KQDgryGw
- yGo84Bn9E7ED3ptMipIcphaStz1qjTkdrNdPgsDXKR/zA918ELXTMiZPZYtgUEA7u4Yy9e
- YjnzFswftc3X1M+q41WRLUniZhwX+5vEAsPM6osBLzf7TjbPKE8tZMvkken0fA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=bootlin.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=gmail.com; s=20251104; t=1784634448; x=1785239248;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ceXPfOHt26ZnYf1SDnyZybse6zjH6MYqNIMLbDQGJbg=;
+ b=gSlt/g7qByKz1xicsZKdcC+7BCgJOTh56cEX/X0y918L04tNjxzFj2VMiHOwuqFFqc
+ lDkci9BvmhvgcfcGtIZrtmmsdzwPkniAic8701jACtv4Isz2TtHLLldDpXKYMylkmOBb
+ Ins/j18H8tDV8RQqkxchL/HdwhugJi7hicWJJ2tQ4zta2zU2jeUV3EPmQ7AUWiVStXyK
+ 1ZKJRlqVFNFMzaehnnoAT2CQn3pdDTloVubQqucOn4UC3wDs5/RLcaa4V0AH44hPwobD
+ S7v3Na7YQRtXul93HS6Q6IU+vc6tL2akDKMFk7WcACgOOt3nk+tVGeA5M6XaGiKISen7
+ 4hPQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=MPDEZ4jQ
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none)
- header.from=bootlin.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=romain.gantois@bootlin.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="MPDEZ4jQ"; 
- dkim-atps=neutral
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=gSlt/g7q
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,79 +142,33 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Romain Gantois via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Romain Gantois <romain.gantois@bootlin.com>
+From: Fabio Estevam via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Fabio Estevam <festevam@gmail.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
---nextPartyM2to9gQSFmVRKZm-G--gw
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Romain Gantois <romain.gantois@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Jul 2026 13:35:57 +0200
-Message-ID: <2l1ctkP4Ro2Q97CaOnt-yg@bootlin.com>
-In-Reply-To:  <CAFLszThwLCFR+HwhOVa69oGv7NTwcjXvHGtgbFsJ4kbPOweRFA@mail.gmail.com>
-MIME-Version: 1.0
+Hi Krzysztof,
 
-Hi Simon,
+On Tue, Jul 21, 2026 at 7:59=E2=80=AFAM Krzysztof Drobi=C5=84ski via U-Boot
+<u-boot@lists.u-boot-project.org> wrote:
+>
+> [1] is required to fix PMIC access on u-boot 2026.07 then both [2] and
+> [3] works fine for me.
+>
+>
+> [1]
+> https://github.com/kd-solutions-pl/rozalin/blob/main/meta-rozalin/recipes=
+-bsp/u-boot/u-boot-rozalin/imx91sfrdm/0011-power-Fix-access-to-LDO-SNVS.pat=
+ch
+>
+> [2]
+> https://lists.u-boot-project.org/pipermail/u-boot/2024-September/566287.h=
+tml
+>
+> [3]
+> https://lists.u-boot-project.org/pipermail/u-boot/2024-September/566288.h=
+tml
 
-On Monday, 13 July 2026 15:10:48 CEST Simon Glass wrote:
-> Hi Romain,
-> 
-...
-> > diff --git a/drivers/usb/gadget/renesas_usbf.c
-> > b/drivers/usb/gadget/renesas_usbf.c @@ -0,0 +1,3036 @@
-> > +static int usbf_remove(struct udevice *dev)
-> > +{
-> > +     struct usbf_udc *udc = dev_get_priv(dev);
-> > +
-> > +     usb_del_gadget_udc(&udc->gadget);
-> > +
-> > +     return 0;
-> > +}
-> 
-> Just to check - if the device is removed while the pull-up is still
-> asserted, D+ stays driven and interrupts remain enabled at the EPC
-> level. Would it be worth calling usbf_detach() here so remove() always
-> leaves the hardware quiescent? What do you think?
+Care to resend these patches?
 
-Sorry for the late response, things have been a bit too busy :).
-
-Sure, while the UDC core does call detach on the device, there are other code 
-paths  which could call remove() directly, so it's probably better to call 
-detach here just to be safe.
-
-Thanks,
-
--- 
-Romain Gantois, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
-
---nextPartyM2to9gQSFmVRKZm-G--gw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEIcCsAScRrtr7W0x0KCYAIARzeA4FAmpfWZ4ACgkQKCYAIARz
-eA5/TQ/+KGbNZHq5+ylqrOlylJSF0oZ1yZvlesnUZ8oQWZ+NMn+Y7qBQCNvFokZN
-wAH1MV75eKJjiTKEbx7EPU0CI2qu9eWjA9xMZD5BN0gTl5JTVjkaNLAYNDUduNGd
-jfovkchn76hffdMVQgaSLQZrDYCEXIKfH3Nb33UU+IaxXzjS30QQutZBMyhYD68B
-LtpftKFESqZ/Un2AUc3QgubFaaUp1RUtMHhqS3Dl94Uly/x4sClVwEHeHHZKFpR2
-viDBDrngApxAiDcuxho5dU94EpiGDVwNAwrGrUjYRh04hGO8JJA/MZa7zcCeNtQ/
-IhhdpoH3rqJr2I0de3+IkkpMgOXwWFag2qCdRMBVEuaF6nkZfVCACW3m8VN2gsc9
-2TBDNhXK4qNBVyRDcoc5m4T64sJphEWVVXYytbqcFiHufd9jQoPKPLj6xO/2hlFN
-vM/MRHZx4usNHQTbP5zLZqxyytmYy9fpPlkfmRWV1tyowKpyaddRs9r6x8AzdTi6
-wdy7ISloWAGcgKEZiLzbKL/z40fGZXuSCrVQqwZcKIFOliQ56LH20k3SLqAUKARu
-I6TihkKMvJXTkJqMbXc37kV/gAcuxgPnaoW2LPlILTbJLc5Cs51WmCeGLHI44LGu
-a60ctgcru5dQYN+EKV8EUCIW8k3DeBuqH9IfPr34CZaUoF1U464=
-=lUnu
------END PGP SIGNATURE-----
-
---nextPartyM2to9gQSFmVRKZm-G--gw--
-
-
-
+Thanks
