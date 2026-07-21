@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B75DC44529
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 07:47:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28128C44529
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 07:52:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5E2140831;
-	Tue, 21 Jul 2026 07:47:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D16094084E;
+	Tue, 21 Jul 2026 07:52:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oRsubxalqI1v; Tue, 21 Jul 2026 07:47:09 +0000 (UTC)
+ id ge1k62LKT5U6; Tue, 21 Jul 2026 07:51:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D4F1B40743
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6D1FF4082A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784620029;
-	bh=tCanwTh/89YhuALsQ2Zhn4omISAnxYtoHhSeXufuyrU=;
+	d=lists.u-boot-project.org ; s=default; t=1784620319;
+	bh=eqjTy7o3Ok2j3EYdJTLSdJ+N6c5MXOriLtriSo9GUBQ=;
 	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=X2qiGw2UCWsCuNGwnH/YFwSoEJYhGsphkORyq2xEyIy7bbdEgnTxWRPbLoGOFxOJY
-	 yQMtnoPkU7WfiS544YL0+l1CPAike0Y4Mum5EHZju9KqYIt+u7vlIVV4n+0zVM8fNV
-	 eXMFMFg94jd+2Pcgrj8ppe9iKq9erNgkQbLWK+tSghb/uHQDH5yP2JxvtDc20KGAwt
-	 mSPlm/Tb8s5bj+1GvRFgfOnWBMSFm9dGI2WxqUw1+ub8Tlu6Ydeh3PvKQPL9nCUOow
-	 1ErXGisEMxpfYR+7Ut1QY94fFql5m7Ggjbt8Xcfg00a3yBWGrB9/29VdbIR5vwacJD
-	 CDMUWUUvS6QPA==
+	b=DZm/ZOKvUWZ6b4ZjIfqtb2IMx85380sN71zIBKotGNPepqlAxcLrpgvPYN3BEh6Vj
+	 BAzN7SnEDUghq999FbyssuWpB9d+VynaUqEpqI2zgVuOG8xKtalMK3LNRoxW75MtmA
+	 DInHG5SsySSL+E/SI5Usm/KwYtxNQo6AWSdFun8bqf6CQ7X1XDb5wbFnblxRKMPN3e
+	 hmMpzPTqQzQ2HTL7KKITe16e09VuVRWUzvEyVHX0TpS3yF7lQ2PwmOsv8Mp4eD3sH7
+	 0foxU06ZNWyMSwNXgxIg09vbpC8OdfnGQ5Fs34HrAQOVuRUIX7XTAIq5BuiVlZVAMO
+	 1Et7DvRZtiTLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D4F1B40743;
-	Tue, 21 Jul 2026 07:47:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B3B8DF0
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:47:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6D1FF4082A;
+	Tue, 21 Jul 2026 07:51:59 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8527D109C
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:51:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0D127607F0
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:47:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6274580E7F
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:51:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 26GGxNE1CnPG for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 07:47:06 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4QFptBMyFufw for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 07:51:56 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 969A3607EA
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 969A3607EA
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0B27880E86
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0B27880E86
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 969A3607EA
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:47:05 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0B27880E86
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 07:51:55 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFDDB84659; Tue, 21 Jul 2026 09:47:03 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 4D57A84659; Tue, 21 Jul 2026 09:51:54 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5220803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 09:46:57 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-49548e01d02so17793495e9.0
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 00:46:57 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AF0C803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 09:51:52 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4955aa106b1so18251395e9.0
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 00:51:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784620017; x=1785224817;
+ d=1e100.net; s=20251104; t=1784620311; x=1785225111;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=tCanwTh/89YhuALsQ2Zhn4omISAnxYtoHhSeXufuyrU=;
- b=IAAfk5nEl/lpAycRq81Bj0IRTkUCU2HwTUoDtoKF2u4oihtHxDZI/h6fS3nuPy1KR8
- tr/ZdXtenLhzwp1d2+NULbalJNtuj9g7PBJfvqkg6SJbgO/GR9CV+sxiqHxVgnd/vPA8
- akjGPEi4nnbUe+AG9WSOufq20iQu5p0B6Zkmr+tejJZLHTDdPDVMFAib47GZi4QGjuYq
- Qbfed9KyPQ9GVlc11bDpWKvWSJ6eG/plAwh+n8uluGDvpUBXLtIil7iOgRQxvG4H3wqY
- 3d6IcnAMDeLVcy33C/wonPgzYXqlVS6IIf5RzwYtxJaol5f4QdjYFx2fRQleStQHCntV
- tl5g==
-X-Gm-Message-State: AOJu0YwWvF4Gu2clESo3r33aCt3qUad4RV2xrBtQNNTYOkcu0OhauKry
- 3Xy4LouPazVRjUQeoZvYiofjiHZ8TjDI/NBT6s2Yyo8TwHb/abzM3l3InAwi9Tl3je8=
-X-Gm-Gg: AfdE7cnMslCeJo4NVvmY4Ka+86fwxDx5MXcRvkzidQWSWXx4/6TIaQGk4Joozp3Ofc7
- uV0EUAdS/CxSALbcNJerbV15hXpFl3VhQBPdplNxBJs4LtPT8bzXpWeid8T8aas5jH8QR09MSEp
- RS62CsMxAWNubbmx+vgvBfycWUWDvDd4nzj50zTyaLgMPPwxu4DnspVKRcnrDclWER6jAhFJIWq
- ccCPVzm+gFa+XafpdXPco0aMFZahfpNKanaF5ot+XzinSz3Tmkxf3SawGXx7T6I3Swpw+4uLvn2
- m8VGP1P54CSnm+7+RQrQqiSuNkzVzgjss7uhYIXWm9SF15VHF//I1EwOsl0bbJOXqFBi2YLmJGg
- c1nGe8u+SzgLfcpZmksV62+i6uG35wWLymIPq1w310PxJlnBaKGD3czGfyRQmL8JUEShQ+qQpr+
- yPo7KDtu2TIKBChZMN/RuA9hZ1MnQnHzAGPLHtUsf5f0DZ2MdiDcCpkxdeaA==
-X-Received: by 2002:a05:600c:524c:b0:495:4e12:6ae5 with SMTP id
- 5b1f17b1804b1-4954e126afamr188343165e9.26.1784620016779; 
- Tue, 21 Jul 2026 00:46:56 -0700 (PDT)
+ bh=eqjTy7o3Ok2j3EYdJTLSdJ+N6c5MXOriLtriSo9GUBQ=;
+ b=sTRmaLvEsHirwRjWPi0vn1TavI33ggkC0zYOaHrak6Kgx0uzk4rstId31ET1w6T8R1
+ iI2L2UOnSCD6xrdEIqoK0ughkXd0kOq0Z8l2cPRMHq9HT/Dee6cNFgF9SBZiM/bwlqP+
+ m36NFeiIzok5/IOwYL6CHRhs3u3/r8AYmcxCK59dyw9sTKtUMJdhHLUUN5OMmqe/nwEN
+ uxxYQl8WtcVMGqzR0bUcNgNYe+KVwwQNDD24+gw6rfj3GBrZH+SWFpX/cyvub5EIVtoH
+ Ht8lw5pxtyGe1ln1uwB2vd0k7abLCrd2E160SkiDFeCX9qE/9kbEAvd0u1xplS3jFoVE
+ ZmUg==
+X-Gm-Message-State: AOJu0Yw4YetgQCHdqD6CEFMByl32zmAV90y8ErxsFkQpXyNwgewqM3vy
+ FJRMWuMUtP9SKTiunLgRYnLgrZW4gtDLnKOYB+aJSsGrI9JJi4BeWbuhM1bvp8nOIvM=
+X-Gm-Gg: AfdE7ckoHA+qm4cunLoFYbTp8t+vDCwaaJ6FrLLLCnUDkn/oT1rBAhypAMSjywlBgHt
+ f2A8ymgMeiy9tnXyj5Z3pcfQlfy/eDXF9upuMQV8ozFW6ACUXO1mQ8w/bdb3JkmUYJUbCqrB58/
+ QgFLMNC+MSIs307FWjS61Mycm6arWn6I9JixYNbvSI4j/YrYWTdEyQ2BjyUE96eggEbXGiCUEkK
+ RToxy0XKFofLLw8hZuWlbMfkrvWPWMwm0m7jcxQF9baBn8PYEk7nSN42E/linvHhkdcQGdrqG5m
+ VBLHMuRUnuW9fVxcQu0+EOQ2dczeshnRNLxwGGtCwEI+I/a8zZsDnmNbJQ1bcM4jHC4Lj2HLWzZ
+ sBJCgpsuOwEiUNJAhOMPqhVAWDFrzNwOEkQTZN5JD5PRNWmU8dwEy9guNy47nIruSgwyu3jG4OM
+ tKrxWJa6ovMxX5SDPMlzWNdcgYjdu800hk4ivU+Of6UfXWz+egSU3Hl1Zf8w==
+X-Received: by 2002:a05:600c:4f93:b0:493:e404:3727 with SMTP id
+ 5b1f17b1804b1-4954a40ebe1mr202300655e9.23.1784620311215; 
+ Tue, 21 Jul 2026 00:51:51 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:77c9:2d2d:bb1f:99c1?
  ([2a01:e0a:106d:1080:77c9:2d2d:bb1f:99c1])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495653c8760sm43837305e9.14.2026.07.21.00.46.55
+ 5b1f17b1804b1-4956547323bsm49957025e9.4.2026.07.21.00.51.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jul 2026 00:46:56 -0700 (PDT)
-Message-ID: <6655cb53-fe79-4163-b148-377ee35fbee8@linaro.org>
-Date: Tue, 21 Jul 2026 09:46:55 +0200
+ Tue, 21 Jul 2026 00:51:50 -0700 (PDT)
+Message-ID: <3bf19531-058b-485a-aa43-74cd09caa9e3@linaro.org>
+Date: Tue, 21 Jul 2026 09:51:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/7] ufs: add RPMB transport over SCSI SECURITY PROTOCOL
+Subject: Re: [PATCH v1 3/7] ufs: rpmb: derive the per-region RPMB CID and size
+ for OP-TEE
 To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, trini@konsulko.com, 
  jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
  bhupesh.linux@gmail.com, n-francis@ti.com, marek.vasut+renesas@mailbox.org,
@@ -107,7 +108,7 @@ To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, trini@konsulko.com,
  j-mcarthur@ti.com, venkyada@qti.qualcomm.com, hayashi.kunihiko@socionext.com
 Cc: u-boot@lists.denx.de, sumit.garg@kernel.org
 References: <20260720085202.537019-1-jorge.ramirez@oss.qualcomm.com>
- <20260720085202.537019-3-jorge.ramirez@oss.qualcomm.com>
+ <20260720085202.537019-4-jorge.ramirez@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -134,31 +135,31 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260720085202.537019-3-jorge.ramirez@oss.qualcomm.com>
+In-Reply-To: <20260720085202.537019-4-jorge.ramirez@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784620017; x=1785224817; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784620311; x=1785225111; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=tCanwTh/89YhuALsQ2Zhn4omISAnxYtoHhSeXufuyrU=;
- b=OwbEOmF4fJ6ENtzWGIUyM5tNAqejbktloJMXH6fUgEs4ygeyrJHBk+HrrsOdXfx/aX
- DXQpWq80f8ixpEo8xuxdoSS3yf1n+DPJf2VoUW/UKWUaym34SRf862177xsMQS4VBWb1
- RwgFmu0djgBBcrAtZAA5sf/4sTEOTz1vFo+lHiri67WoC9azAj5ctLvbZ9Z1MmkZRcz1
- 1MTiZw87j00n9RlsPvR8aIgH7luDIspvxNS+DpcGnRQ5g6CBrYV9VyfJ+vy2J3hP9SVK
- zzrNMYpI/xMByPCFp30Ph7Q8Vl0luhbk6gHkWlc9clNeMC4+ePuFn1c2j8dd/nponIGy
- 1gbg==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=eqjTy7o3Ok2j3EYdJTLSdJ+N6c5MXOriLtriSo9GUBQ=;
+ b=LjhV075YMXlDP3vAv89G+xrdhtNcbyR/TP/CprL7UCxJcTGvZmovhLvb5nVby0n05X
+ BUFTZucPtbD6jGQG5Azq73KZ0JXPVZGJGKOfgx/UUL1b7fXckZDLwIDc7Hd1RK4YHlV/
+ gr35C2q5gIhu75NzNJgifYtImK5w2QH5DR+xytdRMtSymNuMOGusCBD4qViJECML6VO1
+ FAF/ANyOLOb0b1G5LWo37CYVibDVFaAUSD+8hqys9yWWqrYEUbDdLxqqdrRnAeiCVHQv
+ fN+1eswsLq96JS65uviNpDYZ5Ma9o6c09cg69844F1UZqGiJSF5/ZpR5KPG4gWTeXEeJ
+ sZXQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=OwbEOmF4
+ header.s=google header.b=LjhV075Y
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -166,7 +167,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=neil.armstrong@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="OwbEOmF4"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="LjhV075Y"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -185,284 +186,254 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi,
+
 On 7/20/26 10:51, Jorge Ramirez-Ortiz wrote:
-> Add a UFS RPMB transport that moves fully-formed JEDEC RPMB frames to and
-> from the RPMB Well-Known LUN using SCSI SECURITY PROTOCOL IN/OUT commands,
-> exposed through ufs_rpmb_route_frames() for the OP-TEE RPMB supplicant and
-> guarded by CONFIG_SUPPORT_UFS_RPMB.
+> Read the UFS device, unit and geometry descriptors to report each RPMB
+> region's size and reliable-write count, and build a 16-byte CID by
+> BLAKE2b-hashing the same device-id string the Linux kernel derives
+> (ufshcd_create_device_id() plus a "-R<region>" suffix), so OP-TEE derives
+> an RPMB key that matches Linux. Exposed via ufs_rpmb_get_region_info().
 > 
 > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
 > ---
->   drivers/ufs/Kconfig      |  13 ++++
->   drivers/ufs/Makefile     |   1 +
->   drivers/ufs/ufs-rpmb.c   | 146 +++++++++++++++++++++++++++++++++++++++
->   drivers/ufs/ufs-uclass.c |   6 ++
->   drivers/ufs/ufs.h        |  13 ++++
->   include/ufs.h            |   8 +++
->   6 files changed, 187 insertions(+)
->   create mode 100644 drivers/ufs/ufs-rpmb.c
+>   drivers/ufs/ufs-rpmb.c   | 135 ++++++++++++++++++++++++++++++++++++++-
+>   drivers/ufs/ufs-uclass.c |   4 +-
+>   drivers/ufs/ufs.h        |  11 ++++
+>   include/ufs.h            |   6 +-
+>   4 files changed, 151 insertions(+), 5 deletions(-)
 > 
-> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> index 49472933de3..d39fcda42dc 100644
-> --- a/drivers/ufs/Kconfig
-> +++ b/drivers/ufs/Kconfig
-> @@ -92,4 +92,17 @@ config UFS_TI_J721E
->   	  This selects the glue layer driver for Cadence controller
->   	  present on TI's J721E devices.
->   
-> +config SUPPORT_UFS_RPMB
-> +	bool "Enable UFS RPMB (Replay Protected Memory Block) support"
-> +	depends on UFS && OPTEE && !SUPPORT_EMMC_RPMB
-> +	select BLAKE2
-> +	help
-> +	  Route OP-TEE RPMB requests to the UFS RPMB Well-Known LUN using
-> +	  SCSI SECURITY PROTOCOL IN/OUT commands. Required for OP-TEE secure
-> +	  storage (CFG_RPMB_FS) on UFS-based platforms that have no eMMC.
-> +	  BLAKE2 is used to derive the fixed-length RPMB CID that matches the
-> +	  Linux kernel UFS device_id ABI. The OP-TEE supplicant handles a
-> +	  single RPMB transport, so this is mutually exclusive with the eMMC
-> +	  RPMB supplicant (SUPPORT_EMMC_RPMB).
-> +
->   endmenu
-> diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-> index e7f3c1d30c4..d60440ca119 100644
-> --- a/drivers/ufs/Makefile
-> +++ b/drivers/ufs/Makefile
-> @@ -13,3 +13,4 @@ obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
->   obj-$(CONFIG_UFS_RENESAS_GEN5) += ufs-renesas-rcar-gen5.o
->   obj-$(CONFIG_UFS_ROCKCHIP) += ufs-rockchip.o
->   obj-$(CONFIG_UFS_TI_J721E) += ti-j721e-ufs.o
-> +obj-$(CONFIG_SUPPORT_UFS_RPMB) += ufs-rpmb.o
 > diff --git a/drivers/ufs/ufs-rpmb.c b/drivers/ufs/ufs-rpmb.c
-> new file mode 100644
-> index 00000000000..636ccb6e74f
-> --- /dev/null
+> index 636ccb6e74f..7919162ddae 100644
+> --- a/drivers/ufs/ufs-rpmb.c
 > +++ b/drivers/ufs/ufs-rpmb.c
-> @@ -0,0 +1,146 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +#include <dm.h>
-> +#include <log.h>
-> +#include <scsi.h>
-> +#include <ufs.h>
-> +#include <linux/errno.h>
-> +#include <linux/string.h>
-> +#include "ufs.h"
-> +
-> +#define RPMB_REQ_KEY		1
-> +#define RPMB_REQ_WCOUNTER	2
-> +#define RPMB_REQ_WRITE_DATA	3
-> +#define RPMB_REQ_READ_DATA	4
-> +#define RPMB_REQ_STATUS		5
-> +
-> +#define RPMB_FRAME_REQ_OFFSET	510
-> +
-> +static u16 rpmb_frame_request(const void *frame)
-> +{
-> +	const u8 *p = frame;
-> +
-> +	return ((u16)p[RPMB_FRAME_REQ_OFFSET] << 8) |
-> +		p[RPMB_FRAME_REQ_OFFSET + 1];
-> +}
-> +
-> +static int ufs_rpmb_secprot(struct udevice *scsi_dev, unsigned int region,
-> +			    u8 opcode, void *buf, unsigned int nframes,
-> +			    enum dma_data_direction dir)
-> +{
-> +	struct scsi_cmd pccb;
-> +	u32 len = nframes * RPMB_FRAME_SIZE;
-> +	u16 spsp = (region << 8) | UFS_RPMB_SEC_PROTOCOL_ID;
-> +
-> +	memset(&pccb, 0, sizeof(pccb));
-> +	pccb.lun = UFS_UPIU_RPMB_WLUN;
-> +	pccb.cmd[0] = opcode;
-> +	pccb.cmd[1] = SEC_PROTOCOL_UFS;
-> +	pccb.cmd[2] = (spsp >> 8) & 0xff;
-> +	pccb.cmd[3] = spsp & 0xff;
-> +	pccb.cmd[4] = 0;
-> +	pccb.cmd[5] = 0;
-> +	pccb.cmd[6] = (len >> 24) & 0xff;
-> +	pccb.cmd[7] = (len >> 16) & 0xff;
-> +	pccb.cmd[8] = (len >> 8) & 0xff;
-> +	pccb.cmd[9] = len & 0xff;
-> +	pccb.cmd[10] = 0;
-> +	pccb.cmd[11] = 0;
-> +	pccb.cmdlen = 12;
-> +	pccb.pdata = buf;
-> +	pccb.datalen = len;
-> +	pccb.dma_dir = dir;
-> +
-> +	return scsi_exec(scsi_dev, &pccb);
-> +}
-> +
-> +static int ufs_rpmb_send(struct udevice *scsi_dev, unsigned int region,
-> +			 void *frames, unsigned int nframes)
-> +{
-> +	return ufs_rpmb_secprot(scsi_dev, region, SECURITY_PROTOCOL_OUT,
-> +				frames, nframes, DMA_TO_DEVICE);
-> +}
-> +
-> +static int ufs_rpmb_recv(struct udevice *scsi_dev, unsigned int region,
-> +			 void *frames, unsigned int nframes)
-> +{
-> +	return ufs_rpmb_secprot(scsi_dev, region, SECURITY_PROTOCOL_IN,
-> +				frames, nframes, DMA_FROM_DEVICE);
-> +}
-> +
-> +int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
-> +			  void *req, unsigned long reqlen, void *rsp,
-> +			  unsigned long rsplen)
-> +{
-> +	unsigned int n_req = reqlen / RPMB_FRAME_SIZE;
-> +	unsigned int n_rsp = rsplen / RPMB_FRAME_SIZE;
-> +	u16 request;
-> +	int ret;
-> +
-> +	if (!scsi_dev || reqlen % RPMB_FRAME_SIZE ||
-> +	    rsplen % RPMB_FRAME_SIZE || !n_req)
-> +		return -EINVAL;
-> +
-> +	request = rpmb_frame_request(req);
-> +
-> +	switch (request) {
-> +	case RPMB_REQ_KEY:
-> +	case RPMB_REQ_WRITE_DATA: {
-> +		u8 status_frame[RPMB_FRAME_SIZE];
-> +
-> +		ret = ufs_rpmb_send(scsi_dev, region, req, n_req);
-> +		if (ret)
-> +			return ret;
-> +
-> +		memset(status_frame, 0, sizeof(status_frame));
-> +		status_frame[RPMB_FRAME_REQ_OFFSET] = RPMB_REQ_STATUS >> 8;
-> +		status_frame[RPMB_FRAME_REQ_OFFSET + 1] = RPMB_REQ_STATUS & 0xff;
-> +		ret = ufs_rpmb_send(scsi_dev, region, status_frame, 1);
-> +		if (ret)
-> +			return ret;
-> +
-> +		if (n_rsp < 1)
-> +			return -EINVAL;
-> +		return ufs_rpmb_recv(scsi_dev, region, rsp, 1);
-> +	}
-> +	case RPMB_REQ_WCOUNTER:
-> +	case RPMB_REQ_READ_DATA:
-> +		ret = ufs_rpmb_send(scsi_dev, region, req, 1);
-> +		if (ret)
-> +			return ret;
-> +		if (n_rsp < 1)
-> +			return -EINVAL;
-> +		return ufs_rpmb_recv(scsi_dev, region, rsp, n_rsp);
-> +	default:
-> +		debug("ufs-rpmb: unsupported request 0x%x\n", request);
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +struct udevice *ufs_rpmb_get_scsi_dev(int dev_id)
-> +{
-> +	struct udevice *scsi_dev;
-> +	int ret;
-> +
-> +	ret = uclass_get_device(UCLASS_SCSI, dev_id, &scsi_dev);
-> +	if (ret) {
-> +		debug("ufs-rpmb: no SCSI device for dev_id %d: %d\n",
-> +		      dev_id, ret);
-> +		return NULL;
-> +	}
-> +	return scsi_dev;
-> +}
+> @@ -1,8 +1,12 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   #include <dm.h>
+> +#include <hexdump.h>
+>   #include <log.h>
+>   #include <scsi.h>
+>   #include <ufs.h>
+> +#include <vsprintf.h>
+> +#include <u-boot/blake2.h>
+> +#include <asm/unaligned.h>
+>   #include <linux/errno.h>
+>   #include <linux/string.h>
+>   #include "ufs.h"
+> @@ -130,9 +134,8 @@ struct udevice *ufs_rpmb_get_scsi_dev(int dev_id)
+>   	return scsi_dev;
+>   }
+>   
+> -int ufs_rpmb_read_geometry(struct udevice *scsi_dev, u8 *rpmb_rw_size)
+> +static int ufs_rpmb_read_rw_size(struct ufs_hba *hba, u8 *rpmb_rw_size)
 
-This is a wrapper on uclass_get_device(), why not using uclass_get_device()
-from the caller code ?
+Why ?
 
+>   {
+> -	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
+>   	u8 desc[QUERY_DESC_GEOMETRY_DEF_SIZE];
+>   	int ret;
+>   
+> @@ -144,3 +147,131 @@ int ufs_rpmb_read_geometry(struct udevice *scsi_dev, u8 *rpmb_rw_size)
+>   	*rpmb_rw_size = desc[GEOMETRY_DESC_RPMB_RW_SIZE];
+>   	return 0;
+>   }
 > +
-> +int ufs_rpmb_read_geometry(struct udevice *scsi_dev, u8 *rpmb_rw_size)
+> +static int ufs_rpmb_read_region_sizes(struct ufs_hba *hba, u16 spec_ver,
+> +				      u8 sizes[UFS_RPMB_NUM_REGIONS])
 > +{
-> +	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
-> +	u8 desc[QUERY_DESC_GEOMETRY_DEF_SIZE];
+> +	u8 unit[QUERY_DESC_UNIT_DEF_SIZE] = { };
 > +	int ret;
 > +
-> +	ret = ufshcd_read_descriptor(hba, QUERY_DESC_IDN_GEOMETRY, 0,
-> +				     desc, sizeof(desc));
+> +	ret = ufshcd_read_descriptor(hba, QUERY_DESC_IDN_UNIT,
+> +				     UFS_UPIU_RPMB_WLUN, unit, sizeof(unit));
 > +	if (ret)
 > +		return ret;
 > +
-> +	*rpmb_rw_size = desc[GEOMETRY_DESC_RPMB_RW_SIZE];
+> +	memset(sizes, 0, UFS_RPMB_NUM_REGIONS);
+> +
+> +	if (spec_ver > UFS_RPMB_LEGACY_SPEC_VER) {
+> +		sizes[0] = unit[RPMB_UNIT_DESC_REGION0_SIZE];
+> +		sizes[1] = unit[RPMB_UNIT_DESC_REGION1_SIZE];
+> +		sizes[2] = unit[RPMB_UNIT_DESC_REGION2_SIZE];
+> +		sizes[3] = unit[RPMB_UNIT_DESC_REGION3_SIZE];
+> +	} else {
+> +		u64 region = (get_unaligned_be64(unit +
+> +					RPMB_UNIT_DESC_LOGICAL_BLK_COUNT)
+> +			      << unit[RPMB_UNIT_DESC_LOGICAL_BLK_SIZE])
+> +			     >> UFS_RPMB_REGION_UNIT_SHIFT;
+> +
+> +		sizes[0] = region > 0xff ? 0xff : region;
+> +	}
+> +
 > +	return 0;
 > +}
-> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-> index 4d10e0b11fe..962b6093762 100644
-> --- a/drivers/ufs/ufs-uclass.c
-> +++ b/drivers/ufs/ufs-uclass.c
-> @@ -1712,6 +1712,12 @@ static inline int ufshcd_read_desc(struct ufs_hba *hba, enum desc_idn desc_id,
->   	return ufshcd_read_desc_param(hba, desc_id, desc_index, 0, buf, size);
->   }
->   
-> +int ufshcd_read_descriptor(struct ufs_hba *hba, enum desc_idn desc_id,
-> +			   int desc_index, u8 *buf, u8 size)
+> +
+> +static void ufs_rpmb_string_to_ascii(const u8 *raw, char *out, size_t outsz)
 > +{
-> +	return ufshcd_read_desc_param(hba, desc_id, desc_index, 0, buf, size);
-
-Why you don't expose & use ufshcd_read_desc_param() directly ?
-
+> +	int nchars = ((int)raw[QUERY_DESC_LENGTH_OFFSET] - QUERY_DESC_HDR_SIZE);
+> +	int i, n = 0;
+> +
+> +	nchars = nchars > 0 ? nchars / 2 : 0;
+> +	for (i = 0; i < nchars && n < (int)outsz - 1; i++) {
+> +		u16 c = get_unaligned_be16(raw + QUERY_DESC_HDR_SIZE + i * 2);
+> +
+> +		out[n++] = (c >= 0x20 && c <= 0x7e) ? (char)c : ' ';
+> +	}
+> +	out[n] = '\0';
 > +}
 > +
->   static int ufshcd_read_device_desc(struct ufs_hba *hba, u8 *buf, u32 size)
+> +static int ufs_rpmb_build_cid(struct ufs_hba *hba, const u8 *dev_desc,
+> +			      unsigned int region, u8 *cid)
+> +{
+> +	u8 raw[QUERY_DESC_MAX_SIZE];
+> +	char model[MAX_MODEL_LEN * 8];
+> +	char serial_hex[QUERY_DESC_MAX_SIZE * 2 + 1];
+> +	char idstr[QUERY_DESC_MAX_SIZE * 3];
+> +	u8 serial[QUERY_DESC_MAX_SIZE] = { };
+> +	u16 manf_id, spec_ver, dev_ver, manf_date;
+> +	u8 blen;
+> +	int ret;
+> +
+> +	manf_id = get_unaligned_be16(dev_desc + DEVICE_DESC_PARAM_MANF_ID);
+> +	spec_ver = get_unaligned_be16(dev_desc + DEVICE_DESC_PARAM_SPEC_VER);
+> +	dev_ver = get_unaligned_be16(dev_desc + DEVICE_DESC_PARAM_DEV_VER);
+> +	manf_date = get_unaligned_be16(dev_desc + DEVICE_DESC_PARAM_MANF_DATE);
+> +
+> +	ret = ufshcd_read_descriptor(hba, QUERY_DESC_IDN_STRING,
+> +				     dev_desc[DEVICE_DESC_PARAM_PRDCT_NAME],
+> +				     raw, sizeof(raw));
+> +	if (ret)
+> +		return ret;
+> +	ufs_rpmb_string_to_ascii(raw, model, sizeof(model));
+> +
+> +	ret = ufshcd_read_descriptor(hba, QUERY_DESC_IDN_STRING,
+> +				     dev_desc[DEVICE_DESC_PARAM_SN],
+> +				     raw, sizeof(raw));
+> +	if (ret)
+> +		return ret;
+> +	blen = raw[QUERY_DESC_LENGTH_OFFSET];
+> +	if (blen < QUERY_DESC_HDR_SIZE)
+> +		return -EINVAL;
+> +	memcpy(serial, raw + QUERY_DESC_HDR_SIZE, blen - QUERY_DESC_HDR_SIZE);
+> +	bin2hex(serial_hex, serial, blen);
+> +	serial_hex[blen * 2] = '\0';
+> +
+> +	snprintf(idstr, sizeof(idstr), "%04X-%04X-%s-%s-%04X-%04X-R%u",
+> +		 manf_id, spec_ver, model, serial_hex, dev_ver, manf_date,
+> +		 region);
+> +
+> +	if (blake2b(cid, UFS_RPMB_CID_SIZE, idstr, strlen(idstr), NULL, 0))
+> +		return -EIO;
+> +
+> +	return 0;
+> +}
+> +
+> +int ufs_rpmb_get_region_info(struct udevice *scsi_dev, unsigned int region,
+> +			     u8 *size_mult, u8 *rel_wr, u8 *cid)
+> +{
+> +	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
+> +	u8 dev_desc[QUERY_DESC_DEVICE_DEF_SIZE] = { };
+> +	u8 sizes[UFS_RPMB_NUM_REGIONS];
+> +	u16 spec_ver;
+> +	int ret;
+> +
+> +	if (region >= UFS_RPMB_NUM_REGIONS)
+> +		return 0;
+> +
+> +	ret = ufshcd_read_descriptor(hba, QUERY_DESC_IDN_DEVICE, 0,
+> +				     dev_desc, sizeof(dev_desc));
+> +	if (ret)
+> +		return ret;
+> +	spec_ver = get_unaligned_be16(dev_desc + DEVICE_DESC_PARAM_SPEC_VER);
+> +
+> +	ret = ufs_rpmb_read_region_sizes(hba, spec_ver, sizes);
+> +	if (ret)
+> +		return ret;
+> +	if (!sizes[region])
+> +		return 0;
+> +
+> +	ret = ufs_rpmb_read_rw_size(hba, rel_wr);
+> +	if (ret)
+> +		return ret;
+> +	if (!*rel_wr)
+> +		*rel_wr = 1;
+> +
+> +	ret = ufs_rpmb_build_cid(hba, dev_desc, region, cid);
+> +	if (ret)
+> +		return ret;
+> +
+> +	*size_mult = sizes[region];
+> +	return 1;
+> +}
+> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+> index 962b6093762..f5e5bfd2e27 100644
+> --- a/drivers/ufs/ufs-uclass.c
+> +++ b/drivers/ufs/ufs-uclass.c
+> @@ -1800,8 +1800,8 @@ out:
+>   	return err;
+>   }
+>   
+> -static int ufs_get_device_desc(struct ufs_hba *hba,
+> -			       struct ufs_dev_desc *dev_desc)
+> +int ufs_get_device_desc(struct ufs_hba *hba,
+> +			struct ufs_dev_desc *dev_desc)
 >   {
->   	return ufshcd_read_desc(hba, QUERY_DESC_IDN_DEVICE, 0, buf, size);
+>   	int err;
+>   	size_t buff_len;
 > diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-> index 0f6c93fbce7..e66d2c5f533 100644
+> index e66d2c5f533..cf89bbc2008 100644
 > --- a/drivers/ufs/ufs.h
 > +++ b/drivers/ufs/ufs.h
-> @@ -10,6 +10,16 @@
->   struct udevice;
+> @@ -20,6 +20,15 @@ struct udevice;
+>   #define UFS_RPMB_SEC_PROTOCOL_ID	0x01
 >   
->   #define UFS_CDB_SIZE	16
+>   #define GEOMETRY_DESC_RPMB_RW_SIZE	0x17
 > +
-> +#define UFS_UPIU_RPMB_WLUN		0xC4
-> +#define RPMB_FRAME_SIZE			512
+> +#define RPMB_UNIT_DESC_LOGICAL_BLK_SIZE		0x0A
+> +#define RPMB_UNIT_DESC_LOGICAL_BLK_COUNT	0x0B
+> +#define RPMB_UNIT_DESC_REGION0_SIZE		0x13
+> +#define RPMB_UNIT_DESC_REGION1_SIZE		0x14
+> +#define RPMB_UNIT_DESC_REGION2_SIZE		0x15
+> +#define RPMB_UNIT_DESC_REGION3_SIZE		0x16
+> +#define UFS_RPMB_LEGACY_SPEC_VER		0x0220
+> +#define UFS_RPMB_REGION_UNIT_SHIFT		17
 
-Can this be declared in a common rpbm header ?
+Maybe move them to ufs-rpmb or create a new ufs-rpmb.h ?
 
-> +
-> +#define SECURITY_PROTOCOL_IN		0xA2
-> +#define SECURITY_PROTOCOL_OUT		0xB5
-
-Those are SCSI indentifiers, move the, to sci headers.
-
-> +#define SEC_PROTOCOL_UFS		0xEC
-> +#define UFS_RPMB_SEC_PROTOCOL_ID	0x01
-
-Those are not UFS internal identifiers, move them to the ufs-rpmb code like Linux.
-
-> +
-> +#define GEOMETRY_DESC_RPMB_RW_SIZE	0x17
 >   #define UPIU_TRANSACTION_UIC_CMD 0x1F
 >   #define UIC_CMD_SIZE (sizeof(u32) * 4)
 >   #define RESPONSE_UPIU_SENSE_DATA_LENGTH	18
-> @@ -809,4 +819,7 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
+> @@ -822,4 +831,6 @@ int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
+>   int ufshcd_read_descriptor(struct ufs_hba *hba, enum desc_idn desc_id,
+>   			   int desc_index, u8 *buf, u8 size);
 >   
->   int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
->   
-> +int ufshcd_read_descriptor(struct ufs_hba *hba, enum desc_idn desc_id,
-> +			   int desc_index, u8 *buf, u8 size);
+> +int ufs_get_device_desc(struct ufs_hba *hba, struct ufs_dev_desc *dev_desc);
+
+Why ?
+
 > +
 >   #endif
 > diff --git a/include/ufs.h b/include/ufs.h
-> index f6e27d90e43..90c6aebcec1 100644
+> index 90c6aebcec1..79573e02278 100644
 > --- a/include/ufs.h
 > +++ b/include/ufs.h
-> @@ -20,4 +20,12 @@ int ufs_probe(void);
+> @@ -20,12 +20,16 @@ int ufs_probe(void);
 >    */
 >   int ufs_probe_dev(int index);
 >   
-> +struct udevice *ufs_rpmb_get_scsi_dev(int dev_id);
+> +#define UFS_RPMB_CID_SIZE	16
+> +#define UFS_RPMB_NUM_REGIONS	4
 > +
-> +int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
-> +			  void *req, unsigned long reqlen, void *rsp,
-> +			  unsigned long rsplen);
-> +
-> +int ufs_rpmb_read_geometry(struct udevice *scsi_dev, u8 *rpmb_rw_size);
-> +
+>   struct udevice *ufs_rpmb_get_scsi_dev(int dev_id);
+>   
+>   int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
+>   			  void *req, unsigned long reqlen, void *rsp,
+>   			  unsigned long rsplen);
+>   
+> -int ufs_rpmb_read_geometry(struct udevice *scsi_dev, u8 *rpmb_rw_size);
+> +int ufs_rpmb_get_region_info(struct udevice *scsi_dev, unsigned int region,
+> +			     u8 *size_mult, u8 *rel_wr, u8 *cid);
+>   
 >   #endif
 
 Thanks,
