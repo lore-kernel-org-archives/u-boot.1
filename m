@@ -1,134 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A22C44529
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 14:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF11C44529
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 14:14:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CFD16408A9;
-	Tue, 21 Jul 2026 14:14:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DB2A380AAB;
+	Tue, 21 Jul 2026 14:14:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id glfNqfanYE9v; Tue, 21 Jul 2026 14:14:09 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0dVpayIX6REp; Tue, 21 Jul 2026 14:14:29 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ED03C408CD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 10D1180AD5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784643249;
-	bh=cdVKmeahVfrqLrz59UuW60DJGKhQKMSpA9C6uCrDrB0=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=m3WtToka5PQMvLC8rqpZq/6CUa6NACX8sBq7H//fijsN4Pqpkxm+8qvB8Hgwlem4+
-	 PNQbJiKR1kDFESLHoIiNvU19qpO4suCPrjUBLUdsWuVRWLXYHODeUX1qo2aEaV57Bh
-	 5im4D74vxB86u4j3WM0NffbmloHcxtN9cWJ60sr+8MNLykYLwhtdRDaaiU5557VuSK
-	 kIKjUe6THgV0UEypd2khDN5m/z98Qk7gNQNGIbXhvhX/MT/zKGvaUdrNvslFQ8ffuU
-	 lVbqbhBJO5r7fS0JsjB3HTnwptS9zDdSV8Nv3n9QbDGzwLpYiApyqbh9XW8hfogyv1
-	 ql736ZrE0X7mg==
+	d=lists.u-boot-project.org ; s=default; t=1784643269;
+	bh=3rGuPDJMdhBGBSq44pWyrOz1HnBa05Rz46FctNzdJlY=;
+	h=To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=rSew532BEMNC09cCkhpnx3hUtyJyiz4qlhk75Bn2MPvYDPO0vbKUyVBkVrO+mB+Pk
+	 4odf51mXtAxJJC/fmnuTW2qnBeszyg+N98CrXUkp5e2VCw+IexvGpuZCqlKodXqtt6
+	 KgPPr+QIMC6KiQHS3bU3mEZqSIZU0ZH1wuZJY8FknsDhC5HR6s61DD/tSdBvl8JXQ7
+	 BlPdIcVX7ZXmrnou7B4jL3kvRxosw4nc66N410BIFAoBYVBZD5KKEZvVO4ZVof+Xxi
+	 Xtue8tcSOkPMJZJw5CDvp3p51z3VEFeO3njaVXxApVeLSTQ0v9bkPK3Y5vHUFLPjZP
+	 DSgUd9XJQYo0g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ED03C408CD;
-	Tue, 21 Jul 2026 14:14:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 026B4109B
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 14:14:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 10D1180AD5;
+	Tue, 21 Jul 2026 14:14:29 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8B01C109B
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 14:14:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DC84D6083B
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 14:14:06 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7912480838
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 14:14:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4Xh5rkHInFxx for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 14:14:06 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T0bdVe-PSr3M for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 14:14:26 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org A533A607F7
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A533A607F7
+ helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 4755680A95
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4755680A95
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A533A607F7
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 14:14:05 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4755680A95
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 14:14:26 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E5C884659; Tue, 21 Jul 2026 16:14:03 +0200 (CEST)
-Received: from mail-vk1-xa2e.google.com (mail-vk1-xa2e.google.com
- [IPv6:2607:f8b0:4864:20::a2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A97AF84659; Tue, 21 Jul 2026 16:14:24 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9880F803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 16:14:00 +0200 (CEST)
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-5bf8e1edc3aso3674145e0c.0
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 07:14:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784643239; x=1785248039;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=cdVKmeahVfrqLrz59UuW60DJGKhQKMSpA9C6uCrDrB0=;
- b=osii1DgiElJ+3R/aPKDu1B0KvdQQScBxIpdsHLSrUgK8+hqAOLaeFcXw1rYtMpDAZJ
- tTaP9JA/A4SrG0SRKP5nWVQHWLooCoAseLazGTpug+S5oe5FxldEWhK+trzYEOkpMp+E
- uQoo5XSYdDERrNJI+yKAiaoJOwct74ZJ/2yfvqBhe+oaBk4r2Xh9imZzF6TyvlrEsel/
- 1fHSsIfN9BdZM7tT936rrkQ9RBR9v+IstMHR1UVzQ2WYi84yeGdbg1hO/r5RDLeyPqdj
- UpKES3A6CEYNpj0+X8z/j1mqu1tVGtHCMof4b6GR658QCi/zLuPNddKcAyEKqGVbnzcl
- SkTw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrcA1vpFlAlOUUMdhUcwM7rrQcmCSOrE1JfO58exjeuQXm8czSgctuK8hi/u0TOawaYE04EMNE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLMJLapepDYsDvzrcE3eNkIVx8RnOVG5gyAnCR14IfiQKIULOB
- AEwOyb9uYM6CBeQ6wxP/gc3Pxrg3Fdq6N5ldo8G/Q47JqsoTX+vr8ZsU
-X-Gm-Gg: AR+sD12wqksN4QRszFj7eX48KFA7zQDh5o8/Xi5261de5vcjYpOdLf+rfR9JBxbxZxs
- 5euKETSv4EZMmi5sVwCVtd+2i99GUEJDpbSLLx6k7k3ZyK+u/67nd8MVYXvrJm3HqX3AMIX8Dkf
- VDqsEcn3QlQ2t4hixkkrpVQVm7sRUgnOfiDLitaZvhsdxmKouvPG/M86GM3oRCz4KC99myd/JTA
- 67VCuzb/GDYdDR+gruzluoV6U71HpN6yqB3ezkGdAUJWWaE3BFMqxlp7eAVgS1oKGZ07d6Uw+IM
- 07nFFxTwxfLnNTtidoKq7qlcN7mrlTYzSmC5iv2uJDn3OQXU6xw4QbCOmxshT7E88vTPEf6R3/c
- 1bX0mAQ1DZ3GxotmL8oUF1SOdXLvDDml+59VNcZpBMPfJvRBpNHEwKvPj5nuvANhQoIKe1KBSjA
- 8LOkmdOk72U4WCnWnBKSoJdXiKyrFf5SVxS9CPt9m8JT1HcQogig==
-X-Received: by 2002:a05:6122:4085:b0:55b:d85:5073 with SMTP id
- 71dfb90a1353d-5c1b6646347mr5877668e0c.4.1784643239054; 
- Tue, 21 Jul 2026 07:13:59 -0700 (PDT)
-Received: from fabio-X870-EAGLE-WIFI7..
- ([2804:1b3:a801:a24:fdfe:648c:2808:d17c])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5c1e6c71300sm15053018e0c.0.2026.07.21.07.13.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Jul 2026 07:13:58 -0700 (PDT)
-To: xypron.glpk@gmx.de
-Cc: trini@konsulko.com, ilias.apalodimas@linaro.org, sjg@chromium.org,
- quentin.schulz@cherry.de, marex@nabladev.com, dwmw2@infradead.org,
- Wojciech.Dubowik@mt.com, fra.schnyder@gmail.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v9] tools: mkeficapsule: Rework pkcs11 support
-Date: Tue, 21 Jul 2026 11:13:50 -0300
-Message-ID: <20260721141350.45800-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 14873803F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 16:14:22 +0200 (CEST)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 269B243480;
+ Tue, 21 Jul 2026 14:14:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A9021F000E9;
+ Tue, 21 Jul 2026 14:14:19 +0000 (UTC)
+To: =?utf-8?B?5Zu96LGq?= <guohaoprc@163.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>
+Cc: Anshul Dalal <anshuld@ti.com>, "Guillaume La Roque (TI.com)"
+ <glaroque@baylibre.com>, u-boot@lists.denx.de, Bryan Brattlof <bb@ti.com>,
+ Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Vishal Mahaveer <vishalm@ti.com>, Peng Fan
+ <peng.fan@nxp.com>
+Subject: Re:Re: [PATCH] board: ti: am62x: Fix build without TI_I2C_BOARD_DETECT
+In-Reply-To: <7b7be0c1.8185.19f841a7a0c.Coremail.guohaoprc@163.com>
+References: <20260715-am62x-no-board-detect-v1-1-2969faec1001@163.com>
+ <178418750029.393743.12900440415467707713.b4-review@b4>
+ <87a4rkkbe7.fsf@kernel.org>
+ <7b7be0c1.8185.19f841a7a0c.Coremail.guohaoprc@163.com>
+Date: Tue, 21 Jul 2026 16:14:17 +0200
+Message-ID: <87v7a8ig5i.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784643239; x=1785248039; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=cdVKmeahVfrqLrz59UuW60DJGKhQKMSpA9C6uCrDrB0=;
- b=amUGtrNfb3q2y7Rn1W+3TLDiO1l/mkL7phsiuAoendF40XmSDTk9gROwA2dajKSrYV
- Y0eKBxSfWDbL0xuLhTryh4/rKx4KOwzhzYGM7S7BmI4hVGHB0u+jgGFHHZDKVZZMkkj1
- 4x5iF2IyIUM19ST9O8sdd4D7aQ2mUj7rwao6dqYU3JH9uFZhHAo+ThOSNBya8TFsYWwD
- LrmXFJBVdl1nq6CO0xSq5BeLwSl1OH06vw1ISUuV1bQ7NanVbtVi6vYWs9FNsoxPTMM0
- O6FvySXMSHOoKWYwOB8QAOTOgNZdW1MyN5GqEP//8nv3GvOwqwIPzs+Fi4kzafp+WGGh
- vBCw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=kernel.org; s=k20260515; t=1784643260;
+ bh=3rGuPDJMdhBGBSq44pWyrOz1HnBa05Rz46FctNzdJlY=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=gfvLDMsbZNbkElpu1jb7yQzfB41uSnrxK1j0osy+yLPfMA/Zh4fNA8Zz8eBIvKcc5
+ fBeC5od3g4zqh4l4qVqCl4UAske5bpo8CrkgYVWps8VAgQMM3WSLKwB4Hkc10HwVed
+ rcTIDO8uODKu4PnSAIkEIIUzALt9au64SBf8Z11emzrh4983dkI5hjT3dVcZBmFoW5
+ l4FfKsrZLAvyAcPlFDiTNjLCak/QBwiLjfqjYygXJkJoGD47Ki5LROqq6Fb9Rg/3MO
+ MCl6nqeg0X+C03n8U/k1xI6yD0i9SmDvUrDkI2+PDj8x3sYYm4JREqPjjBKD2ICW4D
+ J+ymUnL4rM9pA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=amUGtrNf
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=gfvLDMsb
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=festevam@gmail.com
+ smtp.mailfrom=mkorpershoek@kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="amUGtrNf"; 
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="gfvLDMsb"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -141,310 +118,115 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Fabio Estevam via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Fabio Estevam <festevam@gmail.com>
+From: Mattijs Korpershoek via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+On Tue, Jul 21, 2026 at 17:55, =E5=9B=BD=E8=B1=AA  <guohaoprc@163.com> wrot=
+e:
 
-Some distributions, such as OpenEmbedded, build GnuTLS without
-PKCS #11 support, which causes mkeficapsule to fail at link time.
+> Hi,
+>
+>
+> Thanks for the question.
+>
+>
+> My use case is a third-party board based on the AM6254 SoC, rather than a=
+ TI
+> EVM. The board reuses the common AM62x EVM boot flow, but it does not hav=
+e a TI
+> AM6-compatible board EEPROM. Its board identity and device tree selection=
+ are
+> fixed by the board configuration.
 
-Detect whether GnuTLS was built with p11-kit support and enable
-PKCS #11 functionality only when available. Emit a build warning
-when mkeficapsule is built without this functionality.
+I see, thanks for the explanation.
+I think that this should be mentioned in the commit message.
 
-When PKCS #11 is available, rely on GnuTLS and p11-kit for automatic
-provider discovery, allowing PKCS #11 URIs to be used without the
-PKCS11_MODULE_PATH environment variable.
+>
+>
+> I verified this behavior on the board. With TI_I2C_BOARD_DETECT enabled, =
+U-Boot
+> probes I2C addresses 0x50 and 0x51, and both probes fail. The AM62x late-=
+init
+> code then sets:
+>
+>
+>         board_name=3Dam62x_skevm
+>         board_rev=3Dunknown
+>         board_software_revision=3Dunknown
+>         board_serial=3Dunknown
+>         serial#=3D0000000000000000
+>
+>
+> This information is incorrect for the third-party board. Its configuration
+> therefore uses:
+>
+>
+>         CONFIG_BOARD_LATE_INIT=3Dy
+>         # CONFIG_TI_I2C_BOARD_DETECT is not set
+>
+>
+> This keeps the board late-init hook, including the fdtfile setup, while
+> disabling the TI EVM EEPROM detection.
+>
+>
+> The submitted patch fixes the build error for this valid configuration. I=
+ am
+> also fine with the suggested no-op stubs, provided they preserve the beha=
+vior
+> of not applying EVM fallback information or setting a serial number when =
+board
+> detection is disabled.
 
-Document the use of PKCS #11 URIs for private keys and certificates.
+I have a slight preference for adding setup_board_eeprom_env() and
+setup_serial_am6() as no-op stubs. But I'm not the TI board maintainer
+so I let them decide.
 
-Suggested-by: Tom Rini <trini@konsulko.com>
-Cc: Franz Schnyder <fra.schnyder@gmail.com>
-Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
----
-Sorry for the resend. I forgot to CC the list.
-
-Only built-tested.
-
-Changes since v8:
-- Removed Quentin's and Simon's review tags due to the significant changes
-  introduced in this version.
-- Warn when mkeficapsule is built without PKCS#11 support.
-- Rely on GnuTLS and p11-kit for automatic PKCS#11 provider discovery,
-  removing PKCS11_MODULE_PATH and manual initialization/deinitialization.
-- Improve user-facing errors for PKCS#11 certificate and key imports.
-- Document the use of PKCS#11 URIs in mkeficapsule.1 and the UEFI
-  documentation.
-- Remove PKCS11_MODULE_PATH from the SoftHSM test to verify automatic
-  provider discovery through GnuTLS and p11-kit.
-
- doc/develop/uefi/uefi.rst | 13 ++++++
- doc/mkeficapsule.1        | 25 ++++++++--
- tools/Makefile            |  9 ++++
- tools/binman/ftest.py     |  3 +-
- tools/mkeficapsule.c      | 98 +++++++++++++++++++++++----------------
- 5 files changed, 102 insertions(+), 46 deletions(-)
-
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 3ca22b572a92..cf7f638f2c23 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -597,6 +597,19 @@ and used by the steps highlighted below.
-       [--fit | --raw | --guid <guid-string] \
-       <image_blob> <capsule_file_name>
- 
-+If ``mkeficapsule`` was built with PKCS #11 support, the private key and
-+certificate arguments can instead be PKCS #11 URIs. GnuTLS automatically
-+discovers PKCS #11 providers configured through p11-kit. For example:
-+
-+.. code-block:: console
-+
-+    $ mkeficapsule --monotonic-count 1 \
-+      --private-key 'pkcs11:token=U-Boot;object=capsule-key;type=private' \
-+      --certificate 'pkcs11:token=U-Boot;object=capsule-cert;type=cert' \
-+      --index 1 --instance 0 \
-+      [--fit | --raw | --guid <guid-string] \
-+      <image_blob> <capsule_file_name>
-+
- Anti-rollback Protection
- ************************
- 
-diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
-index ed296730eeb9..dfa9b805ca32 100644
---- a/doc/mkeficapsule.1
-+++ b/doc/mkeficapsule.1
-@@ -108,12 +108,12 @@ With signing,
- are all mandatory.
- 
- .TP
--.BI "-p\fR,\fB --private-key " private-key-file
--Specify signer's private key file in PEM
-+.BI "-p\fR,\fB --private-key " private-key-file-or-URI
-+Specify the signer's private key as a PEM file or PKCS #11 URI.
- 
- .TP
--.BI "-c\fR,\fB --certificate " certificate-file
--Specify signer's certificate file in EFI certificate list format
-+.BI "-c\fR,\fB --certificate " certificate-file-or-URI
-+Specify the signer's certificate as a PEM file or PKCS #11 URI.
- 
- .TP
- .BI "-m\fR,\fB --monotonic-count " count
-@@ -124,6 +124,23 @@ at every firmware update.
- .B "-d\fR,\fB --dump-sig"
- Dump signature data into <capsule-file-name>.p7 file
- 
-+.SH "PKCS #11"
-+If
-+.B mkeficapsule
-+was built with PKCS #11 support, a PKCS #11 URI can be used in place of the
-+private key or certificate filename. PKCS #11 providers configured through
-+p11-kit are discovered automatically by GnuTLS.
-+
-+For example:
-+
-+.EX
-+mkeficapsule --monotonic-count 1 \\
-+  --private-key 'pkcs11:token=U-Boot;object=capsule-key;type=private' \\
-+  --certificate 'pkcs11:token=U-Boot;object=capsule-cert;type=cert' \\
-+  --index 1 --instance 0 --guid <guid-string> \\
-+  <image-blob> <capsule-file>
-+.EE
-+
- .SH "GUIDGEN OPTIONS"
- 
- .TP
-diff --git a/tools/Makefile b/tools/Makefile
-index 1a5f425ecdaa..c156af9fc5e9 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -271,6 +271,15 @@ mkeficapsule-objs := generated/lib/uuid.o \
- 	$(LIBFDT_OBJS) \
- 	mkeficapsule.o
- hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
-+ifeq ($(CONFIG_TOOLS_MKEFICAPSULE),y)
-+GNUTLS_SUPPORTS_P11KIT = $(shell pkg-config --libs gnutls --print-requires-private \
-+			 2> /dev/null | grep p11-kit-1)
-+ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
-+HOSTCFLAGS_mkeficapsule.o += -DMKEFICAPSULE_PKCS11
-+else
-+$(warning Building mkeficapsule without PKCS#11 support)
-+endif
-+endif
- 
- include tools/fwumdata_src/fwumdata.mk
- 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index bf98b268ac15..d8f4d4ab2439 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7588,8 +7588,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self.assertIsNotNone(softhsm2_lib)
- 
-         with unittest.mock.patch.dict('os.environ',
--                                      {'SOFTHSM2_CONF': softhsm2_conf,
--                                       'PKCS11_MODULE_PATH': softhsm2_lib}):
-+                                      {'SOFTHSM2_CONF': softhsm2_conf}):
-                 softhsm2_util.run_cmd('--init-token', '--free', '--label',
-                                       'U-Boot token', '--pin', '1111',
-                                       '--so-pin', '222222')
-diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-index ec640c57e8a5..b81c295f91e5 100644
---- a/tools/mkeficapsule.c
-+++ b/tools/mkeficapsule.c
-@@ -81,8 +81,8 @@ static void print_usage_mkeficapsule(void)
- 		"\t-i, --index <index>         update image index\n"
- 		"\t-I, --instance <instance>   update hardware instance\n"
- 		"\t-v, --fw-version <version>  firmware version\n"
--		"\t-p, --private-key <privkey file>  private key file\n"
--		"\t-c, --certificate <cert file>     signer's certificate file\n"
-+		"\t-p, --private-key <file|URI>  private key file or PKCS#11 URI\n"
-+		"\t-c, --certificate <file|URI>  certificate file or PKCS#11 URI\n"
- 		"\t-m, --monotonic-count <count>     monotonic count\n"
- 		"\t-d, --dump-sig              dump signature to <output file>.p7\n"
- 		"\t-A, --fw-accept  firmware accept capsule, requires GUID, no image blob\n"
-@@ -207,6 +207,58 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
- 	return 0;
- }
- 
-+#ifdef MKEFICAPSULE_PKCS11
-+static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
-+{
-+	gnutls_pkcs11_obj_t *obj_list;
-+	unsigned int obj_list_size = 0;
-+	int ret;
-+
-+	ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
-+						 ctx->cert_file, 0);
-+	if (ret < 0) {
-+		fprintf(stderr, "Failed to import PKCS#11 certificate: %s\n",
-+			gnutls_strerror(ret));
-+		return ret;
-+	}
-+	if (!obj_list_size) {
-+		fprintf(stderr,
-+			"Failed to import PKCS#11 certificate: no matching object\n");
-+		return -1;
-+	}
-+
-+	gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
-+
-+	return 0;
-+}
-+
-+static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
-+{
-+	int ret;
-+
-+	ret = gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
-+	if (ret < 0)
-+		fprintf(stderr, "Failed to import PKCS#11 private key: %s\n",
-+			gnutls_strerror(ret));
-+
-+	return ret;
-+}
-+#else
-+static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
-+{
-+	fprintf(stderr,
-+		"Cannot import PKCS#11 certificate: support is disabled\n");
-+	return -1;
-+}
-+
-+static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
-+{
-+	fprintf(stderr,
-+		"Cannot import PKCS#11 private key: support is disabled\n");
-+	return -1;
-+}
-+#endif
-+
- /**
-  * create_auth_data - compose authentication data in capsule
-  * @auth_context:	Pointer to authentication context
-@@ -229,9 +281,6 @@ static int create_auth_data(struct auth_context *ctx)
- 	gnutls_pkcs7_t pkcs7;
- 	gnutls_datum_t data;
- 	gnutls_datum_t signature;
--	gnutls_pkcs11_obj_t *obj_list;
--	unsigned int obj_list_size = 0;
--	const char *lib;
- 	int ret;
- 	bool pkcs11_cert = false;
- 	bool pkcs11_key = false;
-@@ -242,24 +291,6 @@ static int create_auth_data(struct auth_context *ctx)
- 	if (!strncmp(ctx->key_file, "pkcs11:", strlen("pkcs11:")))
- 		pkcs11_key = true;
- 
--	if (pkcs11_cert || pkcs11_key) {
--		lib = getenv("PKCS11_MODULE_PATH");
--		if (!lib) {
--			fprintf(stdout,
--				"PKCS11_MODULE_PATH not set in the environment\n");
--			return -1;
--		}
--
--		gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
--		gnutls_global_init();
--
--		ret = gnutls_pkcs11_add_provider(lib, "trusted");
--		if (ret < 0) {
--			fprintf(stdout, "Failed to add pkcs11 provider\n");
--			return -1;
--		}
--	}
--
- 	if (!pkcs11_cert) {
- 		ret = read_bin_file(ctx->cert_file, &cert.data, &file_size);
- 		if (ret < 0)
-@@ -301,14 +332,9 @@ static int create_auth_data(struct auth_context *ctx)
- 
- 	/* load x509 certificate */
- 	if (pkcs11_cert) {
--		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
--							 ctx->cert_file, 0);
--		if (ret < 0 || obj_list_size == 0) {
--			fprintf(stdout, "Failed to import crt_file URI objects\n");
-+		ret = import_pkcs11_crt(&x509, ctx);
-+		if (ret < 0)
- 			return -1;
--		}
--
--		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
- 	} else {
- 		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
- 		if (ret < 0) {
-@@ -320,12 +346,9 @@ static int create_auth_data(struct auth_context *ctx)
- 
- 	/* load a private key */
- 	if (pkcs11_key) {
--		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
--		if (ret < 0) {
--			fprintf(stderr, "error in %d: %s\n", __LINE__,
--				gnutls_strerror(ret));
-+		ret = import_pkcs11_key(&pkey, ctx);
-+		if (ret < 0)
- 			return -1;
--		}
- 	} else {
- 		ret = gnutls_privkey_import_x509_raw(pkey, &key, GNUTLS_X509_FMT_PEM,
- 						     0, 0);
-@@ -403,11 +426,6 @@ static int create_auth_data(struct auth_context *ctx)
- 	 *   gnutls_free(signature.data);
- 	 */
- 
--	if (pkcs11_cert || pkcs11_key) {
--		gnutls_global_deinit();
--		gnutls_pkcs11_deinit();
--	}
--
- 	return 0;
- }
- 
--- 
-2.43.0
-
+>
+>
+> I limited this patch to AM62x, which is the platform I tested. I agree th=
+at the
+> same pattern should be addressed for the other affected platforms as well.
+>
+>
+> Best regards,
+> Guo Hao
+>
+>
+>
+> At 2026-07-21 16:14:08, "Mattijs Korpershoek" <mkorpershoek@kernel.org> w=
+rote:
+>>On Thu, Jul 16, 2026 at 13:08, Anshul Dalal <anshuld@ti.com> wrote:
+>>
+>>> On Wed, 15 Jul 2026 11:32:26 +0800, Guo Hao <guohaoprc@163.com> wrote:
+>>>> setup_board_eeprom_env() and setup_serial_am6() are only available when
+>>>> TI_I2C_BOARD_DETECT is enabled.
+>>>>=20
+>>>> IS_ENABLED() does not remove the guarded statements during preprocessi=
+ng,
+>>>> so disabling TI_I2C_BOARD_DETECT results in an implicit function
+>>>> declaration error. Use a preprocessor condition to match the condition
+>>>> used for the function definition.
+>>>>=20
+>>>> Fixes: ff1b83c095c2 ("board: am62x: Add support for reading eeprom dat=
+a")
+>>>> Signed-off-by: Guo Hao <guohaoprc@163.com>
+>>>
+>>> This is a valid fix however I wonder if there's an actual use-case wher=
+e someone
+>>> might want to disable TI_I2C_BOARD_DETECT on an EVM board.
+>>
+>>I agree with Anshul here. What's the use use-case for disabling i2c
+>>board detection?
+>>
+>>Also, if we really want it disabled, we could also create stub functions
+>>instead of replacing this.
+>>
+>>>
+>>> Also, it looks like the same issue exists for other platforms too (AM64=
+x, AM65x,
+>>> J721s2 ...).
+>>>
+>>> --=20
+>>> Anshul Dalal <anshuld@ti.com>
