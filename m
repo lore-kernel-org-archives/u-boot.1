@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D74C44529
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 06:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E512C4452D
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jul 2026 06:16:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E48A680E23;
-	Tue, 21 Jul 2026 06:16:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D99E480E36;
+	Tue, 21 Jul 2026 06:16:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oX1Yez0P1d15; Tue, 21 Jul 2026 06:16:39 +0000 (UTC)
+ id dxjFAsdcYT1o; Tue, 21 Jul 2026 06:16:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9163380E19
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BF88C80E1D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784614599;
-	bh=6aEFO0RQDrn7RB12m2jUPwQnh0Fpo6Vdfelwi+7BECk=;
+	d=lists.u-boot-project.org ; s=default; t=1784614603;
+	bh=d0PXVZtftiEm8491TxZNS2WLkeSiniZ0yRwHpsMToSc=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=NALQvJvBJGh12+V7v5ewuQB8xdxmeaXeScpiEya9CF1dE47F3TP2g6jbZWHh/yDnj
-	 iLG2Y/Hpxs1XHqUl1mpAYMOKY5w5Bq+bJgsM7UMuRboJYq/W3o91jnAoss37Jkeh53
-	 Evd2OKdI42xNgwECs69FLAklLvN41Aa6sS4Wd3jz5cF2qdSYOkChZKXxhIIuxqETNI
-	 QCwuyl3g+g7JHKVfr9GmkGzBaQRRM+Cu9OG7/ZcNcj0Tbdgx3WbJ6ERG21x3wjWMwj
-	 mTCjZhB5tkem0UGTrqUhugDkUZ89lM942dzRgKFg1F4LfBn4jy4nmVYG6zBZwsVFae
-	 38zayEEeeaajQ==
+	b=A6Rp8bughWlq/1/B7NmjMcri8TSRj3tUoNvOEvuF0y79cZnmSejahKPBkH/MMKTtG
+	 3oqW+dprCvpwWXns4vDDsR9AAGJB5biU5Ybj4x9POnqkxE8PWyH5sI7IqH6znfo31v
+	 mfQHkIe01PnLv/H+CmOpXF61Y7Vg25OTrsOinRwRwHa+JvCnNb12Hh5odPQQiF/pvd
+	 1WzEM5NZrDuhsOlsQUrxXd96Pmkw9dJHwJJ7t1S6dF9ZMsWAeRGXMbx3O5chpdNn3e
+	 LGrg47zejd4QBo8vv8uymCYDKZQQX79oWVev5CT4u8tz8Gj+gkWSL1YvMA3/udrUEf
+	 2WRRrwemkloaw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9163380E19;
-	Tue, 21 Jul 2026 06:16:39 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B46B7EB
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BF88C80E1D;
+	Tue, 21 Jul 2026 06:16:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0FA1E1099
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9A54140819
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EBCDF80E19
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rPuCgA1WojZj for <u-boot@lists.u-boot-project.org>;
- Tue, 21 Jul 2026 06:16:36 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=dinesh.maniyam@altera.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2E3A840817
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2E3A840817
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2E3A840817
- for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:35 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O_fdprOHwSvx for <u-boot@lists.u-boot-project.org>;
+ Tue, 21 Jul 2026 06:16:41 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=dinesh.maniyam@altera.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E286080E1F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E286080E1F
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E286080E1F
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 06:16:40 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21354848BA; Tue, 21 Jul 2026 08:16:33 +0200 (CEST)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id E069F803F6; Tue, 21 Jul 2026 08:16:38 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85716803F6
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 08:16:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEC84844F6
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 08:16:36 +0200 (CEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=erA0kHHI/KpADXaY7FEdafzMeUjBN6a9Ru+W46V1jhaV/5DsqglcEWcUtfbVbZb75ADv1S6E8xkOHKmUC8+tGYKUBkQkLd5XFanm4Qyxhy7NEHiJIRYfAqWK3li14sLBct+uBRU7kXTiu+GlmH5IZbCBYPfcI0AoXjvhc5ce+345XKe4OSPSSTtPA8hZm8cCWwJLIrXrlN27cgUXQNlPXKcxYnjgNe2DgZdoNBRQKJChiHFMdXfUp4ZLa/dUP/i2Cw/tXqerfCi1dLHukKoUTOKPBhDJa/vILIm22sD82cgBoUCofR0VxogzSL04/wOGgG+2bJu8q4KDZI+5Rc/1zw==
+ b=nWesCYWiZTfP8IQp+K18tVRFov3fuT3wCvxtQLcqm6HKrT8/gElt2hagvtvGPnnvMFGTqDnQR9n2Oc3j2RkFw+u7VmZIsY5AAlouFthlB1PuKpl8pTUa33TXAM/WQQi4l5bphxhLMpAS0/oPBRBNcxi8WPdxdl+jJtWbaq6nJ6OzOOlQxlS9iOMDWct9AbPc9uDwMNcOM7OgTfU+fz2K57elb8HG0jW1tQYlHmPE4Ia+dc2S+cemyMmGtK7e0U3C+KAp2dS4qNUrzLLGnj0qrw/cLInuL0qV3oLzm/FLeZiliFrnUfdMoKpRQ4RE89rCMqLJl29sHaUcHbiFPvBiPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6aEFO0RQDrn7RB12m2jUPwQnh0Fpo6Vdfelwi+7BECk=;
- b=w9p124FR9N2k+4U8aRDTlq+yNBXu2TXiOgMHGZ9L4ydwUMEycR8qCOEduX62OPTJB57xktwXcrP+dxjVzRou7SHg2qvpWZJmAkxzvL9KXz21O3cOwPTIbVIgg91CEyWxSNLboEd6KepchOfJBuOchgJCgsKao9ZqHknuHOdGnulNeiSWHATPGPoPBEKmWuR/Zbbn+NKpyA9kIUcbRWkyAXuzUcq2/ePg+RL1UqRojZ9fCOkp0xUfK91eFwvJMEs6JqLh4dXSVm1C4UD1Q/F1U961eN4hq62V+elKexekLNdCzL1MPquUmjTjZOkSRzebQPWKNcKkiPkX8kqcq1E/xQ==
+ bh=d0PXVZtftiEm8491TxZNS2WLkeSiniZ0yRwHpsMToSc=;
+ b=yPN4MRiOc1XGTY+6zmef+Z1D39/Funp07jstP5VqGtPP/1zUZ9pzjyBFaEU06I4Kn/cGX83vMB90XVT3qL2c6PthLMjC0tm7Ucp8DFWzEkEc5sWgc9TqGgbIvmisfQB8NrkguBvK9zRe0Y6TCYwB0sEEgpPi4/xp6M0QKkMDzJWFyreN3mw7tifmekoanqrcNVVmJO9uQDkOSzXWWkyy9FWYnl6nbuXBBuR94LIOOjhqS8tPBX9XyBlVKYL5fXhczXME+Xoi9ealvYNcckLtsz8YzqKpt6W8iM7HmoPsACvR9gpMoRACDiLV7FLK+gpRq4MDt/bFNsFLtuZhemWxgw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
@@ -73,11 +72,11 @@ Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
  by SA1PR03MB7031.namprd03.prod.outlook.com (2603:10b6:806:337::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Tue, 21 Jul
- 2026 06:16:26 +0000
+ 2026 06:16:30 +0000
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a%6]) with mapi id 15.21.0245.009; Tue, 21 Jul 2026
- 06:16:26 +0000
+ 06:16:30 +0000
 To: u-boot@lists.denx.de
 Cc: Dinesh Maniyam <dinesh.maniyam@altera.com>, Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
@@ -85,10 +84,11 @@ Cc: Dinesh Maniyam <dinesh.maniyam@altera.com>, Marek Vasut <marex@denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
  Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
-Subject: [PATCH v2 0/3] arm: socfpga: Arria10 SPL FIT support for SPI/NAND boot
-Date: Tue, 21 Jul 2026 14:16:10 +0800
-Message-Id: <20260721061613.8615-1-dinesh.maniyam@altera.com>
+ Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>
+Subject: [PATCH v2 1/3] arm: socfpga: Use custom header target buffer in SPL
+Date: Tue, 21 Jul 2026 14:16:11 +0800
+Message-Id: <20260721061613.8615-2-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20260304033029.10825-1-dinesh.maniyam@altera.com>
 References: <20260304033029.10825-1-dinesh.maniyam@altera.com>
@@ -100,72 +100,72 @@ X-ClientProxiedBy: SJ0PR13CA0131.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|SA1PR03MB7031:EE_
-X-MS-Office365-Filtering-Correlation-Id: c7dbf36e-557f-4bdc-7163-08dee6ef986f
+X-MS-Office365-Filtering-Correlation-Id: cbf845c4-d2c1-44a0-205f-08dee6ef9aa7
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|6133799003|56012099006|11063799006|10067099003|22082099003|55112099003|18002099003;
-X-Microsoft-Antispam-Message-Info: jWTS5DPceQfoH4j+Z70eVtPOaqJX4dOHm4uBjdkJJZZ8B5mYHbrK0TkdKIhknhev1r/GOUTs0W0CiRkSLNiZ5Mzwl7RpkZKm6cN8QjIuMnPGnkIXdQUbOD54HIWAL9b5jWW3GB8/vkWDh1LRldwnSGnlRVpI1hS01ftnL0OtkRcgTfX0M96mIlSTAFXHjztkZZUV+kC20OpgngKbTH7TARFAUWv7hQk6NCnNu1urrGxjK037qSorLHIvcHL2+eSR6eGbQ5WFQSvCsS3piWYoGmzUHlvUK/eGLFUJyAMJmA0BUOdlqDyyD52hUNwM7Zk59o1tn1IRDUS6NXqVW/qHi/n91FHuFFffzaqkF1gQRek29DC6K+Cu5H3jp627dfq1wcVN8diRM8Mv2uCCA4p0W2fvhaQuRl7ykEiXWji0GR0A6ocBtLq/9poALmOnj/HN7wjKQINoqvWQAuR14yJzjV1YqpkqKfNQwerdDobm7IDVH8R3w5GTj1YJEybuR1BAHpl9Y8oJhGC4Z07/lRaT/thCQTVw4EwyBCfhjmbekKtgLZfOtyKfBhDLvQQmiThWkhj/OZ5Y6eHRftYPDRtUXW41eTNFcdS4KfJWmM5kkEqcGOjqwqBJpGjLOuKoR7XydFM0jB5ndcsfrgOQvlU3pbSpd4avDWwitKJc0XSzQSg=
+ ARA:13230040|23010399003|376014|366016|1800799024|56012099006|11063799006|10067099003|22082099003|55112099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 5MwJ6Q2CRlu5UN+8qkkide5W0Zbw/e8ePy2vsuk5jalKjQHMk5k5zwPSvTjRHyIc8upcG7Bup94TF4BE1lOaHGF3ued/N2ZscPSvk2QreVkkFljeBd+rFsA2CT6oucyF4PL3zWR5Sju0G9ulXry0tThCcUTkyrs6rh3nFhnxc9mor7M4BMI8fPEgyFLcBcOWE2QSHmX17x6Nqzl5JAaH3kgl6FFMVtFqwZK0yV+0gSuqPmhMzxm3vgiXXrPh/cjgJc+8a1J/wobdj+Tz+PIqfeXMDqCoItf13XbRnJ1VTOnsOHWdYZT3/wzHY8cbuBkYuglMKZdbfgA9Fu25uSIpL2WB/Jqi5EAKm3dyAJig0+WH5c3YLf9OxIRFrbwhMB0l5KDf13TKRCOXtOR+sgl1wMPjmNCp/sA6dpG4jhMiUVjS0wDfwWC6VY1HLg1s4Y47tzXr4WHO3nudltxcF43QJGZ17jzJG/qBs41tz4GcuyWamiiwso7JXrrQkLOfT8x+2dxhnKU+/D5ZU/lQ9eFE00u33cPaNdmgbwvnpRoVYRUOIUdS1Wzj66A0god5Wyna2Ql1J7imiTzmQHrzSMb3zl6cGGDjsWagP+MVWW7Ju26sN9aDBveNDtm9BYVu0rLeMwjrp7s2MXrGRCtN95LlwxSTP4brGfG1Tjc59hgICAY=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(22082099003)(55112099003)(18002099003);
+ SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(11063799006)(10067099003)(22082099003)(55112099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?fbMT5bu7U3DNctUWwnZD557yv3hp7VwSDsqGL/MFJuVZIIK+YvcHm6XF5/JZ?=
- =?us-ascii?Q?CAesAehQhYWNmwOcbbV6deNkXM8XE8FLAq8VWSURyBpDgqsHbEZ1AY2/sF/I?=
- =?us-ascii?Q?HDn5RUpqAfkxUiLacRPX8uzsku1KRg5d3bDxDh2AY3+y/HbGR9BrULoUnxgY?=
- =?us-ascii?Q?5DRXqDzNjdCQIYuANPqhMQlqsbSzYghRopeKHCkQewz4kbvQQrmd4FJMKPdo?=
- =?us-ascii?Q?r4d1cJNuA3nhKCnxNVJ66rLUyfHonjROSf2k4McolP2oe/c3oOuWA7wInmBY?=
- =?us-ascii?Q?sv1cNwqiqW691hWt897JZYF/ZFWeYrzfW6BFv3SHl67hc1lVylgpA6TcXEVo?=
- =?us-ascii?Q?nBGi6U9QO/gbM/P1y5CcQLIK+nADmbNfYyGinDeo7dTnOpOf2EFwNd/3V43n?=
- =?us-ascii?Q?xSgTpaf/9Bd/gLz3IQ2etWBN1y2R9vGEPoncGZWS5E3CJ9YrkytHiDp2zUnT?=
- =?us-ascii?Q?crBSWWuDcKPmS/09OYIn1T9eeA1bacTYhExjfFCAfWSyGyjWeE3f69Qyql68?=
- =?us-ascii?Q?Y9ZdtYAfeZ1nJzL47JqUPGLIr8y6g/+teYjplAucnp2/dR0wx4YdcA6Asdw2?=
- =?us-ascii?Q?YeKHNW9rCHlSEdmhg20FjVQ6jxO+veYX2etaXHpkDQWpqKihI4b30faqtLnW?=
- =?us-ascii?Q?UWVQc08QOrWGd+aiKRvTWm5oAa7NOYr+1MUzpZ8CqNjE46o2b9wAal8SavSl?=
- =?us-ascii?Q?EYMKqFQOfThToDahePMFjud5a3z0VJWckgiLlq8qu301C+JwClpUFB6XJqqP?=
- =?us-ascii?Q?JTkpMUig5JnGodkEh0EdWHvHDLS52uq0N8G3v31HZVER9EOzd49SKuX4v8OX?=
- =?us-ascii?Q?WNAOkj/66HNN5Ib6Cclfo/ZvX0tmZE1qbLbTck/jmxIu5EEGI7F4u+8xCkKT?=
- =?us-ascii?Q?mpNtLFa4SmBR7d0iZOZwJQbYtiLIAKjEZrKyBM8g5oI/KSgceYB0n3kub29b?=
- =?us-ascii?Q?2MMLX0rWp6jOSLnyEQTNFSLjntDuMQeB3BveamfhaJ5Usbk//oZwSWnV0Mfx?=
- =?us-ascii?Q?9P0kowU6X3KW4pE+3Jd0If+XxhGAuczqf73V/nNRM5Ek9fkYYfMU01xkWhzQ?=
- =?us-ascii?Q?+oQ8qhoBOXXyl1mHW7VHypXzLxLkHWvSHRxjsoyrT54P9SYWaFYcwx8AlXUV?=
- =?us-ascii?Q?LQCBRydDGGl15s603EFyV+Y77iLLX/eVKQimBXqhj0aMIrnNhr5Alwi+XDxS?=
- =?us-ascii?Q?/T41TnPZJ9/fVdcjpt8zgYMyBKGtNZfVNdpbX+JjAblVFoo4yApdtt2Eqn37?=
- =?us-ascii?Q?o5rJlZIAT+0i7CDHVjWQJVidM6lpRygkRFHlhnmgnqiuPp0n5HhZhgDBM3UV?=
- =?us-ascii?Q?7/HJye/ghWMdTn+zBvHFbAFEs/7uXkTPILr+av4vU3z1jod8vMPdkYKxDz8h?=
- =?us-ascii?Q?zTEHiF7b8VBNrINrOHKWndfbhFfh4ALc4PSv+a4PpoDPfKXTx5NJlAfBg+Z/?=
- =?us-ascii?Q?L97XG8fL3lQb5LNDkvbhfTU5+3hyMkW/dblnQ5psOWoSC+b21htu3ScmSjfK?=
- =?us-ascii?Q?jjUosNbKZ5KBUEBV9pRQCkCWOHSmiNGWcqFAgmE9vS+hbTCDM9pHg/bN7YXg?=
- =?us-ascii?Q?4uCgWax2L1pj7MJ1SliN1nKC2YsX+WCIUe0CHdMtIXltGr2jmSGb17TzAUwT?=
- =?us-ascii?Q?Tv2+vvdGnL8W6TBZByMqVIV9a8Hn6/hplElnShso9aPfP8i4yyDkV4KwSryU?=
- =?us-ascii?Q?7XnEXDkuOJt4g09lwRUlvRs3ivt6qzsfRUDnYK0YUTapduPPFiTg8MnnQzwO?=
- =?us-ascii?Q?DbNROzFIay41/9d30Ww7o+YBUsW+OVc=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Sg2benOtYo5yTxuuQcjefhl2FgYuFadBDjiZFZ2hG1twITdzq2yVD9RRW9cU?=
+ =?us-ascii?Q?N/WJ+CdctDyJoiVUPGvI4Kw+R1nLMDVueEFibfAksp+pIuDZktqy/FK4104B?=
+ =?us-ascii?Q?PgwxDWd7cErhRex8falXjuNkiXqSMRDS12eiJYLUCb4SME/XRLui6j+QAOTX?=
+ =?us-ascii?Q?jOZl3sUvWcfKCX5EU//rohntI4sKznD+ZSlQYCne03Mvc6aa6TA96X3sBZIS?=
+ =?us-ascii?Q?LK0t5Dfe2A7RWJsv3EwIfwUblHO0OMgV8sKBkHdlFjoWrMAWI46EB145Jgf3?=
+ =?us-ascii?Q?VqF9fz2Fcj48oyeUccKElV8PxLYu7zRI0CNsS8C9LgXOhJROgua/rIgSQWui?=
+ =?us-ascii?Q?JnfZFmFwHHZkR4URYqGVwCOBgoW/oAwsQjn6T+38g38h0t+Tghsg8q8ewilo?=
+ =?us-ascii?Q?v4JIoirlhJUex+43KDda1Lb26YFgiFYYIuF3jXAiYwVxPOYtXdpCbO5oaliS?=
+ =?us-ascii?Q?x7oVccI0hUGnpMFuyUsmLHirHfzDFPBhlpfvFCnqEavTZw5oWyll/PfNl5Az?=
+ =?us-ascii?Q?XPp1f1Vw+s62gcKogfWwNIRYzI7re2W3KfQbGcn4Q0kVEUwNeEE6W5WFhTnS?=
+ =?us-ascii?Q?T11WIBvU8WdhxxCXE8haMLopuU9Ym+L6N1Z0gKPxe5VgZ0sTEsjerFjFqFSM?=
+ =?us-ascii?Q?S0fkrtJV5X5uJWAHufZmUvT2327hqml4P2tPFgNDWFYjHf1MwNYOzsKGpKmq?=
+ =?us-ascii?Q?meja6vnOgPeFhZz42AuGngbar/z9ZZbjjcpXtHxtBhNwCnioTixsGdVqex7B?=
+ =?us-ascii?Q?mfOC3TH93VV524k2qpo7WmY5YBQyl2qphKBoozn0vozZQPsIOz6YgedhOPMI?=
+ =?us-ascii?Q?dp1zgk/dPlrdmTxdWQ76Y0Wr1DRzDWcIbO1gZhojOLcB485NX5ljUhDoQOfr?=
+ =?us-ascii?Q?zwfsUv31jKGU8nCHkrhK/CSRN0WQI/B//4A+b61J7BYaB1Jr0YIeT86j5jM0?=
+ =?us-ascii?Q?LbfXTI+Bvw7DMB3J8orZzlah4dZ80MyovKEOJFXbAjU5XvSesNjiZPAgtQ5o?=
+ =?us-ascii?Q?GaiwVkgkQ4euxhfT5avd88uIPeb0U6uD/Ef2go05jrshYnFOCLnIFj4aOy9x?=
+ =?us-ascii?Q?hMCiCxP4y97m9sxMYlgMipZmbRoSVrqdO63+mYw06ztjDLmAnPPhnN2cA5hP?=
+ =?us-ascii?Q?/fy1giV3Y4MW7CqRgeiVjcuDzhwe1LFscWIrlAJ+YfOy2sn7qlcur8Li/UZ4?=
+ =?us-ascii?Q?v5dDU+FffKcp7yD+11f0XFJmIlYYNTIvf3kQHptpb/tVGs0Rq6zTbCi9dkKk?=
+ =?us-ascii?Q?RVKB0XNLmYmOx6R/pquRRvZG3pg8M788c9O4SBrdQnS4Qoc+SEwJ2UWhCjnU?=
+ =?us-ascii?Q?2oM6lsasHtRTPRW7Ifw4RkVOImr4Ib2kSKwCKeytPB3EC/biurgCM8WckP2f?=
+ =?us-ascii?Q?txDtnKhK2VVK1wKKAOCES29xwfbM7pZFR8jt+L2uy2wbVLljplaJ4CtnoDTj?=
+ =?us-ascii?Q?AHa2Q5AmZYUilyZM+grpNzeeae+5p0xU2j70WNY/TEu041eYmXNTSuXFI3kn?=
+ =?us-ascii?Q?J6JkVa2X8PTHCmIbDJPk8OkrQmYPUOdIbktuRKuwRXLpUOs5degi+0j20gkJ?=
+ =?us-ascii?Q?XlQysornmuvx2JwEh+LV6EccfSWcreDMJ6WSHwH6dEBSZ/ZpzRMrrk28kRQl?=
+ =?us-ascii?Q?HYyZQZt5HkCp2FOdKs1jxo5S1zWqcTeHHJVSmjhF96VVhe9SwVVvnjFpPRIh?=
+ =?us-ascii?Q?t+nHmGmFPLQvCaM7atAa6l4zMDpRXP3rJens166dbNgLxL30P0mdQPDp72DO?=
+ =?us-ascii?Q?O3xibz2kIzLPOx80eCo2B7tb88WBGbY=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c7dbf36e-557f-4bdc-7163-08dee6ef986f
+X-MS-Exchange-CrossTenant-Network-Message-Id: cbf845c4-d2c1-44a0-205f-08dee6ef9aa7
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 06:16:26.5933 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 06:16:30.2080 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: woBRk3xbACKGrNdkTtnrYS+OH6w78ylzACH6Not7rCeCdQI69WT6fAVFsMs3U/uxwYNkNna3DyWHyMcSf0ua8BmiAvAuW4j88oBzzR4SlKU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: X0Ynizbyx8/EmTyTqkgK/mEQl0Y/V8cKe6fHoCnXLH4YofhItJpILef5f/tZw8hprjN2DLK2wZF8gXqlLN0twtmJBrzHFbvQhLvhGE/C8r8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB7031
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=altera.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6aEFO0RQDrn7RB12m2jUPwQnh0Fpo6Vdfelwi+7BECk=;
- b=sCU61SjZK5MqbPV/vzNr0PgCwQRoRYPhEGsNAskoSmqYIPFgdrcJZi+wEh/fsipOt5bXKW6PkxrkGEVIFklm0M9UInY45Xi6lYtZ92F9YN9F2WpTDmcvUIa4mtXiMyYnT7jUksDQerng5jByLCToXX4W9+E6jyIaaWGktBO4IduXh8NQ1heudXprjlf6j1eNPzmuFz6ZKCcIlIVRQjaJP/PYGJr7pstEAfkrlz398c7PWO6JXkpIU5gR2lpj516cANX7AFCw62WHMbAcbA6NP7fkO+U4/Res80iY+uKDm7iwT1uNcl3aMgCZnoE+PG/sEv/fP1eC8ns7bddA2EAoyw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=d0PXVZtftiEm8491TxZNS2WLkeSiniZ0yRwHpsMToSc=;
+ b=JsH0bMCGNou05Mtf1kPy1O2okTJh4vXXJK4dFTmFq00gwyHjfLELUo8kpCXx6EeGDQNIYMwjzwh+bean5wHqSpu1Olb2Pw4S8kv2yvWi0uoa+o3PyXsrLCt7NnJiU5p83NwSQg6blz/JqhO/oyF33ZS2fq+zrYj4Es9HX7eKMArW/eLdfwf5NYKFu12oAKCtj6gwipMxhin27L61AjYBS86HPNoUr6G70Hp1Uhz0MrljOxBI20+3XkmF/PisgaDMZJeDUBrZY/BPDEz9RKomejSxwphkci2MBPAf+c9ltJVTAEZIxxAsQU/N3egoNymlssAw3yUQJtY0Z/W7WaZRSQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=altera.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=sCU61SjZ
+ header.s=selector2 header.b=JsH0bMCG
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none)
  header.from=altera.com
@@ -173,7 +173,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dinesh.maniyam@altera.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=altera.com header.i=@altera.com header.b="sCU61SjZ"; 
+ unprotected) header.d=altera.com header.i=@altera.com header.b="JsH0bMCG"; 
  dkim-atps=neutral
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
@@ -195,36 +195,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-This series enables basic SPL FIT support for Arria10 SoCFPGA when
-booting from SPI or NAND.
+Reserve the upper half of DRAM for image headers in SPL on Arria10.
+This allows SPL to load the fitImage header, parse it, extract the
+FPGA core bitstream section from it, and program the FPGA.
 
-It provides an SPL load buffer for FIT headers in the upper half of
-DRAM and a minimal board_fit_config_name_match() implementation,
-allowing SPL to load, parse, and handle FIT images during early boot.
+Compute the buffer from gd->ram_base + gd->ram_size / 2, honor the
+offset argument, bounds-check against the reserved region, and return
+a 64-byte-aligned address.
 
-The changes are limited to Arria10 SPL and are required for FIT-based
-boot flows from SPI and NAND.
+Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+---
+ arch/arm/mach-socfpga/spl_a10.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-Changes in v2:
-- 1/3: fix spl_get_load_buffer to use ram_base, honor offset/bounds,
-  align, and drop unused includes (review feedback); use
-  CONFIG_IS_ENABLED(LOAD_FIT)/SPI_LOAD so the helpers actually build
-  in SPL
-- 2/3, 3/3: unchanged aside from the corrected CONFIG_IS_ENABLED names
-
-History:
---------
-[v1] https://patchwork.ozlabs.org/project/uboot/cover/20260304033029.10825-1-dinesh.maniyam@altera.com/
-
-Dinesh Maniyam (3):
-  arm: socfpga: Use custom header target buffer in SPL
-  arm: socfpga: Add SPL fitImage config match
-  arm: socfpga: Include required functions for FIT implementation in
-    NAND
-
- arch/arm/mach-socfpga/spl_a10.c | 42 +++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
-
+diff --git a/arch/arm/mach-socfpga/spl_a10.c b/arch/arm/mach-socfpga/spl_a10.c
+index c20376f7f8e..a0729ece4b4 100644
+--- a/arch/arm/mach-socfpga/spl_a10.c
++++ b/arch/arm/mach-socfpga/spl_a10.c
+@@ -284,3 +284,35 @@ void spl_board_prepare_for_boot(void)
+ 	writel(FSBL_IMAGE_IS_VALID, socfpga_get_sysmgr_addr() +
+ 	       SYSMGR_A10_ROMCODE_INITSWSTATE);
+ }
++
++#if CONFIG_IS_ENABLED(LOAD_FIT) && CONFIG_IS_ENABLED(SPI_LOAD)
++struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
++{
++	uintptr_t hdr_base, addr;
++	size_t hdr_size;
++
++	if (offset < 0)
++		return NULL;
++
++	/* Need DRAM initialized and sized */
++	if (!gd->ram_size)
++		return NULL;
++
++	/*
++	 * Reserve the upper half of DRAM for FIT/uImage header parsing so
++	 * the buffer scales with DDR size and stays clear of early SPL use
++	 * of low memory.
++	 */
++	hdr_base = gd->ram_base + gd->ram_size / 2;
++	hdr_size = gd->ram_size / 2;
++
++	if (size > hdr_size || (size_t)offset > hdr_size - size)
++		return NULL;
++
++	addr = ALIGN(hdr_base + (size_t)offset, 64);
++	if (addr < hdr_base || addr - hdr_base + size > hdr_size)
++		return NULL;
++
++	return (struct legacy_img_hdr *)addr;
++}
++#endif
 -- 
 2.43.7
 
