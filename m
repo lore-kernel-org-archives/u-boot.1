@@ -4,167 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E646C44539
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 15:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3076BC44536
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 15:07:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B92674053D;
-	Wed, 22 Jul 2026 15:02:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CAF694087A;
+	Wed, 22 Jul 2026 15:07:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vbra-JmA9xWf; Wed, 22 Jul 2026 15:02:04 +0000 (UTC)
+ id k9WcFp5xTw51; Wed, 22 Jul 2026 15:07:29 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D1980406C3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BB6A24085D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784732523;
-	bh=M9T/ZAx9WZavaGxo912gJzmaPL/VkI3/MrL+aCmRK7k=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=qadOyxVevuBpH08AXq6FVlSaCqkPhx3UsHCnoGenYSkUFmY7uONdM0VIF4Uhnta6u
-	 4ud/Z7fjpV0y6djkMGF8wSkmp5MOR0jpWj/1SJ4rVwNPqkWzioYmCdaAJd++NORhY8
-	 Jk0dE8Bd8gKRYTutxIhryFs8H3pWx2ne1mVkGBVhRCaTatalospy5d+uNja/T/cFIK
-	 tBnxTVzXe4GyG0uTfKxRbyXsHnft/PMMk2pPmLVNlsVJmgoYv4QKzvRjF4/z1Q8Unt
-	 YeAVsrjhyQDOkelO7Rph5djMW3hFWGbKMLMkY/RuS6eHDGl1z08GzMiReyYNTnijAR
-	 +5JDOVnePdJhA==
+	d=lists.u-boot-project.org ; s=default; t=1784732849;
+	bh=NYp0qM+ZXj+PyuJd7s2j0moSMKKC6iATSLqe4qz9iG8=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=HhnwHPz25Vdb0D8TVFLhzf6MkKLGMr2YWGe2R7jUkNsNa8ruz+aJFTWjIvFtOJu6e
+	 ZC15Mqxzd6jn2jJaJSDa7wW3MiicTjhSAiW95Zg9q4eCwfQQRU5KYdHYczuxMzah4P
+	 SN2iTbP1gIE+3ETyANnVE/qJns1PaeKq8brCD0gfU0dHyhpzo9cFGleiIQwXv+3rfk
+	 TDZSUIL9FZb+EcQGls7SE3dFtzsFVjO7al0wXBHzu+Fv3+pVZv7JNh2rwyt5+QDIDV
+	 MDUhTpBzltN8TRe1PUH3OqoiUMqJ24m/JizVj9hcVPCNDbs7/pGQ790O2FIsbZaGom
+	 jG2ZsEy2BCnBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D1980406C3;
-	Wed, 22 Jul 2026 15:02:03 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 05A861093
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:02:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BB6A24085D;
+	Wed, 22 Jul 2026 15:07:29 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id ACA62224
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id EB20940100
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:02:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 92E2C80EFB
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eESGHkiUFWLL for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 15:02:01 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::6;
- helo=am0pr02cu008.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org BC506400BD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BC506400BD
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BC506400BD
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:02:00 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C1UPKWtTjkruZ4onEyyMr7iWSBBtOmgknw36btodn+Oz4Qv6TE9G2uVjZtomTcLv/kQAKYb5lMBMxkxTGk3Sws6ybuXUrfn9X6lWWKYjiprMAgNj/+ONgdPXEhQA0EOZ+nZ1jrvLWqxMy1/PqUO6TaJT5RNbQ5dH24IfA0AI8LJHDXbqQ0koIsD6WGzp6pcuOSFYuaFCMwCpg/GPY0lcV+7EfazOtRuDHKjL0p774/lxAzknvrDXrsWOzVYDdchslXImkDvBeok3jZhanl3YN1hhGoPr1y5KYWczIqaw6o75mZ858avCvWKD1u1VsuWS519GUvCANbuylPPmexfLmw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M9T/ZAx9WZavaGxo912gJzmaPL/VkI3/MrL+aCmRK7k=;
- b=hmrsnjuL2uRSHTt1HwlcUo4ezQu33Mn3MPCYpw2Lg60xoy6ZfRM9DhW827dfebzob9MHtTezfuu7l6SuGDpIHZIt+onmi5YwS0HC0iGI6uXBspwbQ7Mm9zRTs3vV622eGYR7x6DSG6lE2AH5i7p5bbGg0dYBPBri1pHuRgL64ZAttgDIQdZDnwoLAJz0epN6CyZp7CurqUUeCN3lxZy/CVuqvRSQX6wIWxUBEBj3ZWm+ErFNDgqAqZOYf13m5lvz1sXjod+e7VK987db9k2LzQ4jD8tXJ52ma+gN2p7ihcM/qGi8oawZgZAlGrCRBgzuxSH1m0CVkHjYN+EqVqgBlA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by DBBPR04MB7820.eurprd04.prod.outlook.com (2603:10a6:10:1ec::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
- 2026 15:01:53 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0223.017; Wed, 22 Jul 2026
- 15:01:53 +0000
-Message-ID: <d8434754-6505-4526-849e-98f8ba0d2255@cherry.de>
-Date: Wed, 22 Jul 2026 17:01:51 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] rockchip: rk3399: Enable UMS on ROC-PC-PLUS
-To: Fabio Estevam <festevam@gmail.com>
-Cc: djw@t-chip.com.cn, sjg@chromium.org, kever.yang@rock-chips.com,
- u-boot@lists.u-boot-project.org, trini@konsulko.com,
- Fabio Estevam <festevam@nabladev.com>
-References: <20260722013642.1011666-1-festevam@gmail.com>
- <20260722013642.1011666-4-festevam@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260722013642.1011666-4-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM9P195CA0001.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:21f::6) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QJn80VNGABC7 for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 15:07:27 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3585A80F0B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3585A80F0B
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3585A80F0B
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:25 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 96D128494B; Wed, 22 Jul 2026 17:07:23 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 77F9E848BA
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 17:07:20 +0200 (CEST)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-38e041ea211so10487222a91.0
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 08:07:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784732838; x=1785337638;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=NYp0qM+ZXj+PyuJd7s2j0moSMKKC6iATSLqe4qz9iG8=;
+ b=bfujyvqyfS3v2WOE3LasPPyXo/s9HUrGo5u/sECQAJkOoFrPdAO3mSz9/9UaYPt8/C
+ 43iL8jyaHZkx0X2F/TERtV0jZqsDDbizTxaeCh0DimuDQDI/TPYkwtAYjM5UnqSz8dC6
+ aqwC62c1L2idKJIEAZo0TkFESTBjIqfLCbLM525Xc7gDBhkasiCnetPZcrszXBcQ9JRX
+ ASFEu5jmcSS8/XWuSvQuyj75IgoZ345+DQYD5uoS8od90Zy8GXLIJ6sHKVY+Uc4Z6a0I
+ eWuismskVWTJDRp9qAO+HM76I5+IWsZJKmH7DUgOjxvGgIVAq6AnbyB1MGF673eECj38
+ vMcQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqOrpLzoiJu/FKawjVnGvUWTg+Pjz8uOEBlMKZasohcAT+ru3hpxrQJqmlSd1G68huXh7STbFk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxaOydlRodhwk3FGrHIaQUQrg8Ef08l7YAuMi05xZZFcH78kWo7
+ Fk8rlN897+ffgkply8kMaPeKaoUGgF+2z51NdL3eDemrjbVHpuXl9VqERUzvJi6ieZs=
+X-Gm-Gg: AR+sD12upQV3225bAYGaCFKKYc1iEawxO9jNQzGdiBD8D/ijpAxPvVTTxndbheymdjA
+ s+KYSkMrkffAJbGFV0LcYuIsgVyJ9bZDpbAYH1B26tx2sJFuapcOdCvCEOvWUJy3qrgYzmJ58ec
+ 3R1CUO/fjwVPVUdMNFkG6r1HpbNyyYQcwy8z6UP62egzuXfCDOXmSh9g3fOO2UzoDRvZMZbJPr5
+ EsBwX61BVWUn7/IAEn1WGWEBCH9glfzOFs+z+cc8bL8e1cj7zBXl8SGtPCLAmUWVvYqDTFd6/Wn
+ dzavP5t9EoP3uawk1Ki0QB0RQvt5f00sOnk1spjHsnGddoSxtqSt4AxWrSUU6k8sB9om0Bh4Nh4
+ m84VORnGtlkVddJXvsoAxq8eGbemiujuj5y20pHNrRtW1M9Pu9S9TE6ezTpghgaG/yw05/Q36i+
+ +qGqN4nIT7SfEecV7MnaIxwzOaGJ/RQV324t7ecgc53pdHRNjmhtqA3wNZtjaHEvvwniMFC6xa2
+ IcRe+fjTJgu0u6X1nxDl3UIEvxwFXFKKqKCsTQwP9R0t1eiPs4W+g==
+X-Received: by 2002:a17:90b:2f0b:b0:381:18c3:1b99 with SMTP id
+ 98e67ed59e1d1-38e4b51bfbcmr24933928a91.23.1784732838523; 
+ Wed, 22 Jul 2026 08:07:18 -0700 (PDT)
+Received: from [127.0.1.1] ([209.170.101.129])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3147e088d3fsm10622267eec.25.2026.07.22.08.07.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jul 2026 08:07:17 -0700 (PDT)
+Subject: [PATCH v5 0/9] spacemit mmc driver
+Date: Wed, 22 Jul 2026 23:06:56 +0800
+Message-Id: <20260722-m4-v5-0-c41a951e5157@riscstar.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|DBBPR04MB7820:EE_
-X-MS-Office365-Filtering-Correlation-Id: bfa41fdc-e681-4735-0a50-08dee8022a2b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|23010399003|376014|6133799003|11063799006|56012099006|4143699003|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 9+Y86dF+hRFnYk1n4jH0XZSgviK1ateMoPIc/kXUeFWmtOGCIscoOJxYFXPmbvJPft8qsAdMTcjYS805VKjOHyl2MYjzCVJ2qZB8Orb5zCL2T8DOpS0dyqOOOiMKUIMkOC7BNLz+5jb/Adl25W0Sah1enjYFCy3W3K6+XXPT3cpZQXHtK4m+XJ5oN4pkZFW6Zbo3lzLGGRyxpo0WdR3YsiAN+XemUxl20nE1Evbvo1SVf2Wj8hzRvlQMvzGi9WyKO3qVo4qlaqjV/jD/CqdB2rks2Pb6Qo9liiwkZsPa3q1mGDQJTLA4V9CqEyl3oC4/FhyzIPy7vyIuonmtY9zSTrtYRvinzWd+Yr8EK3DeMTVazx16WBkicTlK/wiTXyRay1Kldo2b68tAb3L2S4zNgp6fzV6jqITbbsJd9weBizhXix3wcEittAObk4o4v0hJ/M7/Igsl9XOX4opIZbro7nTHv7XIrTl6v0pyUkb3xWmNFIlHAuZjf3hHifD1ZU2po2uYV1aDeazjl60KZpFIB6v0CF2Oj0xCzLICOGrCq+rVWqx8/DC7a25eKENjQit+7DKygNQt1T0HCkOqmRTmevj8yjs8Q21jldA2O4rcZt5O7SLEF8bCdY0Zo0ox6R3B0k26AfH6ooBrR18XrPAMkVFUVQfpu6LbJH5n8n0SG/o=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(6133799003)(11063799006)(56012099006)(4143699003)(10067099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T21xdXFqeE5PMzBoN1BTT3RoMERoU29ZcGhoc29IWXErNlFwOEZqOTNKOEJo?=
- =?utf-8?B?TUNJbVlKci9pUkVDMmZCc2kvazhLSmJIYlNZd3VXU2ZPcStYWlFTK2VCWlZI?=
- =?utf-8?B?T2Z6NlpPN2VSUks3OFdPR2ZoeXFtMWNSRGRxMnZPcVdqMGNYZ0xHemJmTWk2?=
- =?utf-8?B?c0tlNlNYdG45dUorSXU1c216SG5JaStlT1ZZNnh6c0s5RUVaR3A0MWlYUHZK?=
- =?utf-8?B?QjFRS0x4UmppR2xMelM3NlZyOTJPNG9BUE9abDlDWGhFUm5LWXNucG5EUnJr?=
- =?utf-8?B?ckpYa2NsQVBQR0ppZndUK2cxMzZNK2ZsZ2N5M2tTYWlNZ2FmYzIrU1VOTnh3?=
- =?utf-8?B?QjN1alR0TXF5RW8vREsvWVNJM2pnMEpLVXl2dmloZzNwTzkvYkJzTWJsNGdL?=
- =?utf-8?B?TWt1ZjFDV1p2WkVnTWlZUTVhZzROYlpROWFCUHFzQm1aOXNhejZsMkNmUzM0?=
- =?utf-8?B?V0VLZ05XWnl1M1JaV2J2Y3RwZzBzN3hKbkNuSjJNZFVwQ09kTUlHdFdaNDFR?=
- =?utf-8?B?THI4eldubHlxTGlpWE1FY1h4dysvbzVyZjBNaitsdmNqV0N2Q0trLzRad1hu?=
- =?utf-8?B?QjcwZWdmVjhBaUxtOEE2RU9OUUJZajB5MDFMVzJyaldNaVY4UFNrMFpUZjAw?=
- =?utf-8?B?MWVUSW5pZEk0NmhHUm5mRHRHQWtRSHl0OHZZYXNCbi9xQUE2Zi9RODlBRTI1?=
- =?utf-8?B?TzM4YndDMFUrNmRENVN5MjhWdkV1ZUpCRFpUSHMrZUF6aEFJVFF6enkxNlpY?=
- =?utf-8?B?SDRReDIxbnJRWlNnYVFUb0JLWDRDclp5YjMwVHZtdmgyUUhHRFpmUmVZZTVX?=
- =?utf-8?B?U0ZFRkNSbWhHZDV3MDNGYWZUVFpvVXRtWTBqa01CaFdLeklqZjM1R0d4WUlw?=
- =?utf-8?B?TzVUWkVhQ3hDVEZyM3V6ZVpoaWFrMjlscjZqNUcrb0o2cDNxUzZ2eWZMTnlC?=
- =?utf-8?B?YWd5cTZocUd6ellYYW1CRG9WNzhHbjJqTWZBeE0vREFqdWJ1dU11MHdaeWw5?=
- =?utf-8?B?WlAvTS9aZHNEa2tKUkhaY3N6VStTUjFQVW5PalZ4OFB0V0p2WUpzdHpVQnVZ?=
- =?utf-8?B?eGE2UVhVUzFjeW4zajlyd1R2bG5vYVRrYkNqb21NQTFBQWRnbFRDc1JUaTIy?=
- =?utf-8?B?U3o2eTF5UmhCSkVzVDdMMlZYTkVsaHVrSG9CZ3pVSnoyOEQ1b0xUSmNxR0tJ?=
- =?utf-8?B?b01sb0g5UDlVK1FRWU1pMUtWSnJVVGVObmJzMW0rQmxRWit2aUpzbWhkZ3hx?=
- =?utf-8?B?czRvWnFISUpyNzV2dlJRL1dDVHhjMVp6ckFCWWh5WCs2YTU2VVdsZkxXSXZu?=
- =?utf-8?B?bVVOZG9UN1Awc1RaWjVGOW1zSHlaYUV1MzdlTzUrRjFTTHZTWE1YTjcyNHpi?=
- =?utf-8?B?Qkl1MVNMdHN1TjYrelhiTUpCRFQ3ODdDRk0yTWZUd3BZMEpEVzlib1JLd05E?=
- =?utf-8?B?ODRGcEg0YUk3QTYyY3lpZjZCYTRqWEcxRkFCUjRnZ3haaDJiU2ZMWXN1bi9L?=
- =?utf-8?B?QXFvV3JDbWhqWUFLcnd4TEdQamtURjIzbTlHcDU3VWxjdmhyUkw4UjF2aVhr?=
- =?utf-8?B?anVrKzdGODhDTWpoZGZHcFlOaW91TS8wZW1xcGZtVy9IaE4rMnl4Q0lvbHdR?=
- =?utf-8?B?dGo3UVBUeThiTXBULzltWkorTGlVWHM4N3dKTW0wR1EzaDQydm9iZWlBQXBk?=
- =?utf-8?B?Tnd2ZHRkN2E2enN1VFd4NUdIMnA5QTgrK2NVaUNLeC9lOEFhZXhMZW9sWGNy?=
- =?utf-8?B?RFVwbGp0ckZFYVFuM2gyQzhLL3k4UDdXaDM0KzZ1V0J6Tk96ZHR6NDByRjI1?=
- =?utf-8?B?VW9yc2F0ZGM3VEJHZHNjTkU2b1pUcUFodDA1UW9PM1Nkak41SHJjWEwreU9G?=
- =?utf-8?B?aFRqbjJNcVh6ekk2RlYvOXkvL1ZOelgzQjAzcXQzUjltbUhZWHhKOFRtalZ0?=
- =?utf-8?B?U0NZaWhQaFhNMDRCK1JBYzdFb1ZlMlN6Q2tKdmpHTUxrbGl5ZTBtcHZramRP?=
- =?utf-8?B?N011b09XMElWRHhQT1lwS25PTnhuZFB6UzRJNW5aTDI1L0pFc0JEV3BTajlO?=
- =?utf-8?B?NW5Pck9CSFZtWW1YaGdOSm9DaHUwanV3S1dVQ2RpeGo0QVhRcFRJanFkMm8v?=
- =?utf-8?B?YjU0Q0IvMnFJU3FQNHhtV0RpcFd2dzVmMmNWT1ZSbE0vV3RxeE1pTXpnNnFB?=
- =?utf-8?B?d0hCR2lzZVZVeHl3Umx0Rm5UbzlOZ0Zuam03OXBlMlVZZWk4R01LclpJOVZh?=
- =?utf-8?B?a1JZcENvaUJMeGhYa05ESW5oTzNJWUlaODdheGR2UVVGcTJRMkQ3UHdpNGpL?=
- =?utf-8?B?VHBsbkNkcElmaW0xNnpod2FxWkJOaDk5WWQvc3dWT0pTSmFEcGhpQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: bfa41fdc-e681-4735-0a50-08dee8022a2b
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 15:01:52.9319 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 03TsLq5QklKH8g2sQGDOLUoDBCOAAUoA8iCNcpZbRG/kZwd97NZdTPrDZAPiRQyZmvGlNOhNq1Qbdd9rOwkw09daHrQFjdTobhPCY1N1+Ao=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7820
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJHcYGoC/23NzW7DIBAE4FeJOJeIxQZDTnmPKAezLDWVEkfgo
+ FSR373YOfTPx5Hmm3myTClSZofdkyUqMcfxWoN62zEc+us78ehrZlJILbS0/NJya0iAVjZQcKw
+ Wb4lCfKwjp/Mr57v7IJwWuTSGmKcxfa4vBZber8ECXPAeIBjfWk1aHlPMmKc+7XG8sGWzyP9KV
+ oUOLaB2pvFmQzXfqhNqVU1VqrcOuyBVQLWh2p+qW1VblXdeABgVLMAfNc/zFxJBb4lLAQAA
+X-Change-ID: 20260629-m4-98e01659fefb
+To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>, 
+ Yanir Levin <yanir.levin@tandemg.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Johan Jonker <jbx6244@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
+X-Mailer: b4 0.15.2
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M9T/ZAx9WZavaGxo912gJzmaPL/VkI3/MrL+aCmRK7k=;
- b=QsJguZ3geUh64pHfevs+jYvsH8Uep2KTXo/4bVf+jsUJBvXo3xtHn8jZInUatEYAkqTi6PJgXwp8HFOl4Z1YSi25q4Qg7CxK6QG4NNB69eFBi19jztoY3d3ZhV5Ug3dLAh5iKNJ4XH9kt7bOc4JhlFgiz7MMAfRqb4YYE9UXRxg=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=QsJguZ3g
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1784732838; x=1785337638;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=NYp0qM+ZXj+PyuJd7s2j0moSMKKC6iATSLqe4qz9iG8=;
+ b=XeqXFy02ApSQtEDK0yW3Xl4eifst7IfO7rLomsJgNHCk019R21KjmbVFXWLUXpjNxF
+ W2dXp6M82uIDo6dMm7XS1kRyP6kKf54Ge3NPw2jtYSvj+TPSj1bigC6fuKSwO4KGrJaD
+ JcaSeKe89cMGuODZeGY3wAkn6wXYEO/BZ7VWFzermc20+e4CMdTnMygJ4DY2z9Vro/9k
+ cCmPWZJl2F8ROLWjDRF6rr81uB/ZobH1KIBxPXOoqBgE2hem1o5CiT6T/ddT0BTVxXfb
+ SwhqohLJh7U7fpQVh+SdrZADwz84RpO5nDvSKTD0FYxad6h2wjqkbU8X+IbY83w9R9RX
+ R5zA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=fail (p=none dis=none)
+ header.from=riscstar.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=XeqXFy02
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none)
+ header.from=riscstar.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=eric.chung@riscstar.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.b="XeqXFy02"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -176,57 +165,128 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <quentin.schulz@cherry.de>
+From: Eric Chung via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Eric Chung <eric.chung@riscstar.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Fabio,
+This series adds MMC support for the SpacemiT K1: an SDHCI platform
+driver, the SD card device-tree overlay, defconfig options, and SPL
+boot-device selection from the SoC strap/config registers. The SDHCI
+driver is usable in both SPL and U-Boot proper.
 
-On 7/22/26 3:36 AM, Fabio Estevam via U-Boot wrote:
-> From: Fabio Estevam <festevam@nabladev.com>
-> 
-> Describe the USB3 OTG controller as a USB role switch and make
-> peripheral mode the default when no external role provider has selected
-> host mode. This retains OTG operation and both PHYs inherited from the
-> SoC devicetree.
-> 
-> Enable the ums command so the onboard eMMC can be exposed as USB mass
-> storage to a host.
-> 
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-> ---
-> Changes since v1:
-> - Add the same OTG description as submitted upstream:
-> https://lore.kernel.org/linux-arm-kernel/20260721030043.84691-1-festevam@gmail.com/
-> 
+A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
+write images to eMMC.
 
-Thank you for sending this to the Linux kernel ML!
+This series sits on top of three series still under review, and must be
+applied after them, in this order:
 
->   arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi | 6 ++++++
->   configs/roc-pc-rk3399_defconfig             | 1 +
->   2 files changed, 7 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-> index c80529a62b97..73027335446e 100644
-> --- a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-> @@ -1,3 +1,9 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   
->   #include "rk3399-roc-pc-u-boot.dtsi"
-> +
-> +&usbdrd_dwc3_0 {
-> +	dr_mode = "otg";
-> +	role-switch-default-mode = "peripheral";
-> +	usb-role-switch;
-> +};
+  1. K1 clock/reset/dts migration [1]    (8 patches)
+  2. K1 SPL bring-up v4 [2]              (14 patches)
+  3. K1 pinctrl/GPIO and SPI NOR v2 [3]   (9 patches)
+  Then this series                        (10 patches)
 
-Since this is not an important bug fix, I would prefer we wait it 
-appears in devicetree-rebasing and cherry-pick then.
+For each series:
 
-If there's a v3 (please note this series here is actually v3, you forgot 
-to bump the version :) ), please drop it.
+  b4 am <cover-msgid>
+  git am ./*.mbx
 
-Cheers,
-Quentin
+Link: https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/ [1]
+Link: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc [2]
+Link: https://lore.kernel.org/u-boot/20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com/ [3]
+
+---
+Changes in v5:
+- mmc: Split CMD23 support out.
+- mmc: Use read_poll_timeout().
+- mmc: Set pinctrl state based on selected timing mode.
+- mmc: Remove the condition based on quirks.
+- pinctrl: Fix power source argument.
+- dts: Add missing power source on mmc pins.
+- Link to v4: https://patch.msgid.link/20260707-m4-v4-0-dbd01185f911@riscstar.com
+
+Changes in v4:
+- mmc: Add CMD23 for write.
+- mmc: Fix CMD23 only for CMD18.
+- mmc: Update bulk release operations on reset and clocks for spacemit
+  platform driver.
+- MAINTAINER: update the maintainer of Spacemit K1.
+- Link to v3: https://patch.msgid.link/20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com
+
+Changes in v3:
+- pinctrl: Fix "fast" by "uhs".
+- pinctrl: Add syscon dependency.
+- mmc: Fix quick by capability.
+- doc: Add SD boot support.
+- Link to v2: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc
+
+Changes in v2:
+- cmd: drop patches on eminfo & tlv_eeprom.
+- configs: Enable ADMA and SYSCON support.
+- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
+- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
+  read/write, correct pinctrl state from "fast" to "uhs".
+- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
+  transfers.
+- pinctrl: k1: Add new IO power domain configuration support for
+  dual-voltage GPIO banks.
+- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
+- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
+
+To: u-boot-spacemit@groups.io
+To: u-boot@lists.denx.de
+Cc: Huan Zhou <pericycle.cc@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Tim Ouyang <tim609@andestech.com>
+Cc: Leo Liang <leo.liang@sifive.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Han Xu <han.xu@nxp.com>
+Cc: Yanir Levin <yanir.levin@tandemg.com>
+Cc: Christoph Stoidner <c.stoidner@phytec.de>
+Cc: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+Cc: Daniel Palmer <daniel@thingy.jp>
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+
+---
+Eric Chung (9):
+      spacemit: k1: select boot device via config registers
+      pinctrl: k1: add IO power domain configuration support
+      mmc: k1: add sdhci platform driver
+      dts: k1: add SD card support in u-boot overlay
+      configs: k1: enable SD and eMMC support
+      MAINTAINER: update Spacemit K1 entry
+      doc: spacemit: flash on K1 SoC based boards
+      config: k1: enable ENV support for eMMC
+      spacemit: k1: load product name from environment variable
+
+ arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  91 +++-
+ arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  86 +++-
+ board/spacemit/k1/MAINTAINERS             |   5 +-
+ board/spacemit/k1/spl.c                   | 122 ++++--
+ configs/spacemit_k1_defconfig             |  26 +-
+ doc/board/spacemit/index.rst              |   1 +
+ doc/board/spacemit/k1-mmc.rst             | 320 ++++++++++++++
+ drivers/mmc/Kconfig                       |   7 +
+ drivers/mmc/Makefile                      |   1 +
+ drivers/mmc/spacemit_sdhci.c              | 681 ++++++++++++++++++++++++++++++
+ drivers/pinctrl/spacemit/Kconfig          |   2 +-
+ drivers/pinctrl/spacemit/pinctrl-k1.c     |  86 +++-
+ 12 files changed, 1376 insertions(+), 52 deletions(-)
+---
+base-commit: e7a6b33b153be98fcca16729e189f90c2d91a98c
+change-id: 20260629-m4-98e01659fefb
+
+Best regards,
+--  
+Eric Chung <eric.chung@riscstar.com>
+
