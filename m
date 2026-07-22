@@ -4,101 +4,213 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DC5C44512
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 05:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DCCAC4452D
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 05:31:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0869460632;
-	Wed, 22 Jul 2026 05:20:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2EE2B60750;
+	Wed, 22 Jul 2026 05:31:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PeMWmG5E-qUv; Wed, 22 Jul 2026 05:20:58 +0000 (UTC)
+ id OqDBnlcsw4U6; Wed, 22 Jul 2026 05:31:01 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EB17860704
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 10EFA60724
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784697658;
-	bh=J1SJzUcyCjTkh0HmopxxbTkvbfcAblh3SrCn2QwYXfI=;
+	d=lists.u-boot-project.org ; s=default; t=1784698261;
+	bh=8K5cHizTmxDSjdzf4zcaWtzgCCvbcbdLoVp+c/4/FCc=;
 	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=C7CaFPdRt/7vuhDpMYoqNgCPUmn2JOBVJ9BJ3UbEopaDqS+MdRpePLBYphj6Mut6d
-	 Go+E0aXFievjUhGpDZWQxNKoeGFw7i13bemCeX9S85x0Z3EH4jGbYyUXexBNcHt0A/
-	 IZX02HUOYBPTMhdQJG5attw2LbT9946ewz1PknhrpSK7+f6UbZhvy6D31kdtDt1SCc
-	 jTQ7J+49BkrH3whGvt6uG3D6GnW1bJdlp1pxWRTNXelhtmzxKqElo+7sbNBC33AQh6
-	 vO9lAaoqYocaivJpgybz/HnCAK1r6bBR7dQmekpAZwYLi4dgXkiUmMkFQUGEG8n9qn
-	 LwwBhjaU+99sw==
+	b=RELEsYAZU/odT9IGccpC6M8q4B+33/6hm9O4EX/pO+sA6BpWZjtpbVyeTsdgQmGyu
+	 s9l3vw98oeaPmhJ2TStqWwN3PUcL223JuhdWK2Ih1aaTT+fb7OcCMHzxz1OPQWvsDi
+	 8qiJwY7FHSfqNdZY7B8mST1j+qXvIjcIGnBDxAz+uw6ywvRX7z+3FbFPRtQgB9BqfE
+	 UaJt9exkqbKsfYty2TV7ti7MSP/VFgRrMKRtq1IPXhhbcfOGt4NgsXdDnc2OQ8DuSu
+	 qJHfAbcLXZQd60PsaJrByUWzqICK1DmYCL8uIZsW34xqV/TmpZKoLlFisrHOmoel/C
+	 3ylTEmBY0OBOQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EB17860704;
-	Wed, 22 Jul 2026 05:20:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id EA4EA9E5
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:20:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 10EFA60724;
+	Wed, 22 Jul 2026 05:31:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C1AB109C
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:30:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DC505406FC
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:20:56 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E5DF580C59
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:30:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N8BMAYzOaVw2 for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 05:20:56 +0000 (UTC)
-X-Greylist: delayed 573 seconds by postgrey-1.37 at util1.osuosl.org;
- Wed, 22 Jul 2026 05:20:55 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 737D3406FB
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 737D3406FB
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id osMqCaj77n73 for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 05:30:58 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
- envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 737D3406FB
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:20:55 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 37C4011A3B3; Wed, 22 Jul 2026 07:20:47 +0200 (CEST)
-Message-ID: <09824d1e-c2ea-8d66-a670-b57c911e2ed4@nabladev.com>
-Date: Wed, 22 Jul 2026 07:20:19 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH 2/2] i2c: mtk_mt8195_i2c_ddc: add new driver
+ client-ip=2a01:111:f403:c112::5;
+ helo=cy7pr03cu001.outbound.protection.outlook.com;
+ envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B556180C31
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B556180C31
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B556180C31
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:30:56 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pkvEeuClR/J4TIfDKPldW9/G6mpZRbQgLHtPlmjeCDW8nc3CNtnxlR5XHW5fc9s2WhqgxG7TOQ+Z7Z0lAseA0E03kL1eFMEHqa6VuFnF299ZaXsgWMU2KEbIEMEu7nlyicenP9jwJbdgk5raCrtqticCdN7ITEDyDVW1pymo053/9TUNLYAGpuGvs5oB+tEtj/v6iGxC3c357IOZ8seuQr6HxrbV9mWrt20QPxoGvr4/LvHbkPNWLOTM+IE4MhVTi9L0QHajNol53ugn1rXY9E2v8pewgCDIQ1JLnqV90/GjIZUETs7M2Oqd0zcA0kPSNVMfUWOZ+KgyFsy7WV9NFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8K5cHizTmxDSjdzf4zcaWtzgCCvbcbdLoVp+c/4/FCc=;
+ b=rmVKzI4c0/8C0QeSX41loyHvEvkZ1NtT5mQ9LLsSH6DcxC3DrMNpQ3iwcqIWUtNOnqITXCg7mCs79sAIM7koXEYy0Awbu4S5yWBok/t/o3RFgl5qk4gQg0ngVH/J099wFnCYiX8YKeJa7d8DGcjlcb+MXoqNf63s9f6ERLrQiziaDilq8wxPOfIiATM+3xzh2eSUL0SA+G8SEY7fLXqKcG7U9iDGDbU8di9J1KzX2GRuYh+0Nvp+Sw+9GRXyZz6b9V8Sr0A3LwfoM0fokCB7qQC3TjqM5u6hnMP7GPkbsrHtDEop9eWan2GHGCnYNx0sO7bO6boyp+e/Qs3k7W19GA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by DS7PR12MB5717.namprd12.prod.outlook.com (2603:10b6:8:70::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
+ 2026 05:30:51 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0245.009; Wed, 22 Jul 2026
+ 05:30:50 +0000
+Message-ID: <853abbc7-4f45-44f4-a935-64cebb4479e2@amd.com>
+Date: Wed, 22 Jul 2026 07:30:44 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/4] i3c: dw: fix slave device setup and probe issues
+To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>,
+ Pranav Tilak <pranav.vinaytilak@amd.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: git@amd.com, padmarao.begari@amd.com, u-boot@lists.u-boot-project.org
+References: <20260709091357.1860417-1-pranav.vinaytilak@amd.com>
+ <5c6ba716-263c-4a79-aaaf-ccf714050b75@amd.com>
+ <d0788bac-8527-4236-91d0-476479a92fb3@altera.com>
 Content-Language: en-US
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- David Lechner <dlechner@baylibre.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
- Johan Jonker <jbx6244@gmail.com>
-References: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
- <20260717-mt8188-add-ddc-i2c-driver-v1-2-e89ccd173567@baylibre.com>
-In-Reply-To: <20260717-mt8188-add-ddc-i2c-driver-v1-2-e89ccd173567@baylibre.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <d0788bac-8527-4236-91d0-476479a92fb3@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR13CA0012.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::17) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DS7PR12MB5717:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3b605b29-e995-4fe9-7320-08dee7b263c6
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|23010399003|22082099003|18002099003|4143699003|10067099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: Z8qu3FUgy3GiOaHY7oLKui/x4Lb7e4AOlNijkBxehb9LXtsbTjvE8I+22MoX1Ff7yzZoQmAzWhzZtHwl3BW/6+SNDZrjIHoC+CFOREYjin9jlilJTz1FVhbT5Zfy4zMMrzm5n1D4CC/hVQstpwJQIZDv74/mYMOQ5KZu6kTi7W5pV2JYLHx7WW92TGtmbPwJGL9aiwyt/2lya++pzQ0RUDEfFy2bNqbKnTn1/FfI9so6cy3J5nN+75YFQ1Iq+B1cVm7J0zQrGKTp05bWt/zU+xylGmkMzs9q38XCkGj0s6CofBYWCVW9ANOLianpKygRhDH3X5X5mAgPN5/Xh7V4bUOkdBGAO5uNpAgQMXe6sT//hIHN6m2mMRU9wuj0wB0r9vZAeFm7uSQ1ewovIp4r4ij7CyU40pWz9xSggtK6TMwoMaV0TNiIxPO4V9cWlfuSiS6vG78QNhB1c2QzL9dq0NMJzO3S+zHArwOC2BWEMlLkuPCPFRZxECgvh7k9i/yAzqVPL1EywoA0WptLr3bI60PDb/X5s2znlNnh6ja/WBavieLr61x+WKibk/bQpY6cJryBAi8GDL1uEc1oHtzw6W3Xp13H/PN2ulv28L09cwzA3KvhVo1cphoZyaiz0N1/RbcB38BBpyhhRh5CrEov4bZaFYTjKktyCCUx0pOKoCI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(22082099003)(18002099003)(4143699003)(10067099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGdxRUJnVjdvSE9mbHNVVEZneU42RGhKQ0dIR1NLTUY3WnE5SXlaNlA5OFFO?=
+ =?utf-8?B?NTk0NXVxM0lSTEpuUGZpNDdPb294OS9rNHUyT2N1TjBlRkhmcnUvMTlIL1lG?=
+ =?utf-8?B?alkzbmhmcFZuSStVeTRPTEFXZ3dIeVJNeFlzSDVMa3BML3RnQ3I2Q2FCREZo?=
+ =?utf-8?B?eUFCcndXS0R2TzFiblJDVmtmS2ZJRk9vQmFuQ0hpc2pYZ1R1bi91eDgzbUw3?=
+ =?utf-8?B?eUF2Y1EyQnJQQzVvWTNLQmV5dnlYKzN5aG9nQ1lTQktvVjlyYmNWTlVpdGNV?=
+ =?utf-8?B?alBhc0JjUXY4NUVFQXVaU3NZOUF3cnQ5Z1UyUENveHF1L21ZVmpJK3FXSjIz?=
+ =?utf-8?B?VzN5aTRkR1Q2N0NsSDFDM0hjS0RXV2QvYnk0MnNsT0trd2tDVERRdm1URG5C?=
+ =?utf-8?B?Zk5NK0NOUHpxUWFhSnlpbFdpOWlrYVJwWWNucy9xY3cxWEZuRXVkWk55N3Y3?=
+ =?utf-8?B?MVV1bTZOa3ZOOEFEUitPRkNRa1lnWk1zN1ZHODU2VEdtbXNsNzFuNGErMDg3?=
+ =?utf-8?B?WmcrWWhORUJGTFV4WEtIKzZZNk05emkzcDMvbWF0TlFCS0xiZUFVaXNMZGVy?=
+ =?utf-8?B?dFM0RE4vOFRZeDdjaGdaZDlDQjhwLytaNzkxVzNJRGtPb2xkSlhWaDZRSVVD?=
+ =?utf-8?B?THkxTXd1U2ZoSUZUdjdVTTlrNHlKTk5odWhlanpQT1k0RGtmS3FjWHM5RG81?=
+ =?utf-8?B?aUJxT05RZ3ZqS1FveHZUUkJNelV3amxqdmhBRjZZM25tdXBTMlFuWUJNRWhE?=
+ =?utf-8?B?YUt5eWZCb0w3eHdwa3paV3AzMXp2UlhUQ29NbVI1S1AyaWVoVWFkYm0vUUNi?=
+ =?utf-8?B?eXFuRFNnTUMyTXFYRGswVGdCS0l5L1l3T3pTTkNjU2Nxd0dKdmhHRVQyNHZx?=
+ =?utf-8?B?aFQ4ejZraVI4Z1hZU3lXZnQ2UnVOVVZJSVBRZVArdnVNdlk1WERtSHlQeGFr?=
+ =?utf-8?B?K2M0bTFJNjRDczV0d1VBNEpHMkR0NGJlSHZVRWZUaldWUVF4eUZ4Mm45aG14?=
+ =?utf-8?B?ZURmRnZnOUhMblp0Qll4b3NtQW5TYU5WdVF0MXFSM09QN3NscjRNY2NvUWZq?=
+ =?utf-8?B?M3NSNEplTS91bnBFOXlhdmQ1Z3JvUzFnblVpVVVpRFM5aFhqOHF3SXhvREk0?=
+ =?utf-8?B?S3FacUhyRjlpTzA0cEVxemV2dm9aUmVtNVFOWTlHcE90TGxrNEI2dm1YVHR6?=
+ =?utf-8?B?VVU0c2Vva2s5YjY0OVFsMmNRMHB6dVM4bnRqbzFSZG1iN2d1YkkzUnU4UmhV?=
+ =?utf-8?B?STdoZVdKREJvbksrWkVnbzR2RWNNYXhDQjVSV3B2dm9xK0trWm91VVdnc2Rv?=
+ =?utf-8?B?QVQrSFVFL0JpTWthMjZVUElPQi80MVk2bFlkTW1jQytHcENxTG9NelRNQXE3?=
+ =?utf-8?B?V05sMEFtejZYMUh4VEtVdnhrSkhZYVFGdUVnVmNHSmQyaEhXenE3VGtLTllF?=
+ =?utf-8?B?WXZFR25KRURNdS91eUVYcDRlRHNaSENkYUZZWGdJbWdQN05iZzQwWWUzOWFz?=
+ =?utf-8?B?d2pkdkV0dkdYQ29URUwycDBmUUZ2UktXUldodnd0SDgzTGRDbTFZTzlVRlZi?=
+ =?utf-8?B?Q1dxWmxZWCtOVXNZYW5Ec09CTU5RdzYrODBmZUlZRmNVcjdZK2I2RG91M1Jt?=
+ =?utf-8?B?V2h2VGRlZWIzUU5WQ0F3TmNxbmFPSVg1blpoSDdFZGpOZG9sTDdTemsxZ2ll?=
+ =?utf-8?B?MXdOWVNZVUNZV3cwbXdiM29hMWNoRGRQWFhKUnU5WFg2a1ZLc2tZK3lPU3FI?=
+ =?utf-8?B?Q043MWVWeTBkRWxXOHFrcW91TTg2M0YwTzNySkUza2g0Z2t4QjRBQklvOG5D?=
+ =?utf-8?B?dVRPOUpxUXMxVWFNc1lqMmt3REZWVlQrMCtCOHVCd1dLNS9GNk5uQ2syVHNu?=
+ =?utf-8?B?MW5uNnM2bXJ1NEt1Z05vMVNDV0k2QUJUb29ZRDZ4Tk0rajliYXFieEM2SE1D?=
+ =?utf-8?B?bGIzMGdpUlNtT3ZHYkYzZUFJUEdzTnBscm93OVhMSW9tYTN6NCs1RW00M2lE?=
+ =?utf-8?B?aW9WUVlKZmVodzRqQWx2R2NqbC8rZ3BtNmo4T1hCNThwT2hCc2NwS01JdTNk?=
+ =?utf-8?B?a1BVZ0N3YkUxbTlob00vSzVPVXZHbEcwWmJxMHdZOWU2SnFaRkVOZVZNRDVn?=
+ =?utf-8?B?MGhiaUdEQTZ0a2l3ZFFZT0ZzMytCUkorRUk3aXhKakp3ZjRzclRKMHhPNEd0?=
+ =?utf-8?B?Umc0cCtHc2wrNFRFRlZoUU5URmdQU2lGM3pOWGw3NkVuQUVBaU9nYWhhK2xs?=
+ =?utf-8?B?THJ6b0dvdEhTTnQwRDQyTmkyblB5NTB1bkludDZzNzhxek5zM3phdUlsZFpE?=
+ =?utf-8?B?c2J4MDhCZzdsT3VTK1pHS2FOdzEvdHhTL09RaG9Hc1ZMRWpvaEtWdz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b605b29-e995-4fe9-7320-08dee7b263c6
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 05:30:49.9037 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jAKHRG4qRUgKT/RXXcmsePj5FqfAVwY+6GbStyu6FtlFSuYBT7fTM0J4aAs0LlbD
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5717
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nabladev.com; s=dkim; t=1784697653;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=J1SJzUcyCjTkh0HmopxxbTkvbfcAblh3SrCn2QwYXfI=;
- b=PKIPecwS38sgCyv5oijU8YtT5/VNNb2n9zIsKXSD5cfT0gAZvfn2Xog3j91zEqfTc2Ykhg
- iCUWjyU8xmSyRQY2+LKNRt8whKSc76zBiMED1oI+roRm986060XiF/1H4Hfd3YlLluAyzl
- /WEK6KQCEnX3FR+QtfQsvr/iz44kiBnlcb47YempugSsp6cKOv0gg+5EHIrYwfE5iey2Hx
- JB2pISpn+BsYhSsRZHHznRcpZ3yVoZGnjdTA8igSJpp2vd4G90giCbyT1VQ4vNwYwK1kP2
- HJylEZhO62P0xwgPg4t6HYB+ZoYXka6dJHXTyqYlIO6/WRI7TM8UarTf+m6sYg==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=PKIPecwS
+ d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8K5cHizTmxDSjdzf4zcaWtzgCCvbcbdLoVp+c/4/FCc=;
+ b=VaVPFa8aK5kOTJCWOqU6Iw+WrBs3ezmXkyEbuPQLRkjnoTP07XMj/etxqYvfuZuXBS2SU9mrx1nvanRATdJHzPMg0dhjbjlFVtdSmUn2b/2j9aZfTHNAyBdWqcJ+A5DrGlLXl4K2dr5wu6XnnL7KZCgj9lINNog4T1JZtzhIIVY=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=amd.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=VaVPFa8a
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -110,455 +222,54 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Heiko Schocher via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Heiko Schocher <hs@nabladev.com>
+From: Michal Simek via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Michal Simek <michal.simek@amd.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hello Julien,
+Hi,
 
-(used the new u-boot ml address u-boot@lists.u-boot-project.org and
-dropped the old denx one)
-
-On 17.07.26 14:33, Julien Stephan wrote:
-> Add a new driver for HDMI DDC channel reading for MT8195 based SoCs.
-> The driver is based on the corresponding kernel driver.
+On 7/22/26 05:56, Maniyam, Dinesh wrote:
+> Hi Michal Simek,
 > 
-> Signed-off-by: Pavlo Yadvychuk <pyadvychuk@baylibre.com>
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->   drivers/i2c/Kconfig              |  11 ++
->   drivers/i2c/Makefile             |   1 +
->   drivers/i2c/mtk_mt8195_i2c_ddc.c | 398 +++++++++++++++++++++++++++++++++++++++
->   3 files changed, 410 insertions(+)
+> On 21/7/2026 4:07 pm, Michal Simek wrote:
+>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+>>
+>> Hi Dinesh,
+>>
+>> On 7/9/26 11:12, Pranav Tilak wrote:
+>>> This series fixes several issues in the DW I3C master driver and
+>>> related infrastructure that prevented I3C read/write operations,
+>>> and enables I3C support for Versal Gen 2.
+>>>
+>>> Changes in v2:
+>>> - Use -ENOTSUPP instead of -EOPNOTSUPP as the reset stub in
+>>>     include/reset.h returns -ENOTSUPP when CONFIG_DM_RESET=n
+>>>
+>>> Pranav Tilak (4):
+>>>     i3c: dw: make resets optional in probe
+>>>     cmd: i3c: fix list and current needing pre-selected controller
+>>>     configs: versal2: enable I3C support
+>>>     i3c: dw: fix slave device setup after DAA
+>>>
+>>>    cmd/i3c.c                          | 11 ++++++-----
+>>>    configs/amd_versal2_virt_defconfig |  3 +++
+>>>    drivers/i3c/master.c               |  1 -
+>>>    drivers/i3c/master/dw-i3c-master.c |  7 ++++---
+>>>    4 files changed, 13 insertions(+), 9 deletions(-)
+>>>
+>>
+>> Dinesh: Can you please look at 1/4 and 4/4 patches?
+>>
+>> Thanks,
+>> Michal
 > 
-[...]
-> diff --git a/drivers/i2c/mtk_mt8195_i2c_ddc.c b/drivers/i2c/mtk_mt8195_i2c_ddc.c
-> new file mode 100644
-> index 00000000000..7b6e57929a9
-> --- /dev/null
-> +++ b/drivers/i2c/mtk_mt8195_i2c_ddc.c
-> @@ -0,0 +1,398 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2021 MediaTek Inc.
-> + * Copyright (c) 2026 BayLibre, SAS
-> + *
-> + */
-> +
-> +#include <asm/io.h>
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <edid.h>
-> +#include <i2c.h>
-> +#include <linux/delay.h>
-> +#include <time.h>
-> +
-> +#define DDC2_CLOCK 572 /* BIM=208M/(v*4) = 90Khz */
-> +#define DDC2_CLOCK_EDID 832 /* BIM=208M/(v*4) = 62.5Khz */
+> Reviewed. Thanks!
 
-What is v ?
+Thanks.
 
-> +
-> +#define SCDC_I2C_SLAVE_ADDRESS 0x54
-> +
-> +#define HDCP2X_DDCM_STATUS 0xC68
-> +
-> +#define SCDC_CTRL 0xC18
-> +
-> +#define CLEAR_FIFO 0x9
-> +
-> +#define CLOCK_SCL 0xA
-> +
-> +#define ENH_READ_NO_ACK 0x4
-> +
-> +#define DDC_CMD GENMASK(31, 28)
-> +#define DDC_CMD_SHIFT (28)
-> +#define DDC_CTRL 0xC10
-> +#define DDC_DATA_OUT GENMASK(23, 16)
-> +#define DDC_DATA_OUT_SHIFT (16)
-> +#define DDC_DELAY_CNT GENMASK(31, 16)
-> +#define DDC_DELAY_CNT_SHIFT (16)
-> +#define DDC_DIN_CNT_SHIFT (16)
-> +#define DDC_I2C_BUS_LOW BIT(11)
-> +#define DDC_I2C_IN_PROG BIT(13)
-> +#define DDC_I2C_NO_ACK BIT(10)
-> +#define DDC_OFFSET_SHIFT (8)
-> +#define DDC_SEGMENT GENMASK(15, 8)
-> +#define DDC_SEGMENT_SHIFT (8)
-> +
-> +#define HPD_DDC_CTRL 0xC08
-> +#define HPD_DDC_STATUS 0xC60
-> +
-> +#define SEQ_READ_NO_ACK 0x2
-> +#define SEQ_WRITE_REQ_ACK 0x7
-> +
-> +#define SI2C_CTRL 0xCAC
-> +#define SI2C_ADDR_READ (0xF4)
-> +#define SI2C_ADDR_SHIFT (16)
-> +#define SI2C_WDATA GENMASK(15, 8)
-> +#define SI2C_WDATA_SHIFT (8)
-> +#define SI2C_CONFIRM_READ BIT(2)
-> +#define SI2C_RD BIT(1)
-> +#define SI2C_WR BIT(0)
-> +
-> +#define HDCP2X_POL_CTRL 0xC54
-> +#define HDCP2X_DIS_POLL_EN BIT(16)
-> +
-> +struct mtk_hdmi_ddc {
-> +	struct udevice *udev;
-> +	struct clk clk;
-> +	void __iomem *regs;
-> +};
-> +
-> +enum sif_bit_t_hdmi {
-> +	SIF_8_BIT_HDMI, /* 8 bits data address */
-> +	SIF_16_BIT_HDMI, /* 16 bits data address */
-> +};
-> +
-> +static inline unsigned int mtk_ddc_read(struct mtk_hdmi_ddc *ddc,
-> +					unsigned int reg)
-> +{
-> +	return readl(ddc->regs + reg);
-> +}
-> +
-> +static inline void mtk_ddc_write(struct mtk_hdmi_ddc *ddc, unsigned int reg,
-> +				 unsigned int val)
-> +{
-> +	writel(val, ddc->regs + reg);
-> +}
-> +
-> +static inline void mtk_ddc_mask(struct mtk_hdmi_ddc *ddc, unsigned int reg,
-> +				unsigned int val, unsigned int mask)
-> +{
-> +	unsigned int tmp;
-> +
-> +	tmp = readl(ddc->regs + reg) & ~mask;
-> +	tmp |= (val & mask);
-> +	writel(tmp, ddc->regs + reg);
-> +}
+Tom: Are you going to take it directly? Or do you want me to collect it?
+In patchwork it is assigned to you.
 
-May you want to use clrsetbits_* instead?
-
-> +
-> +static void mtk_ddc_disable_hdcp_polling(struct mtk_hdmi_ddc *ddc)
-> +{
-> +	mtk_ddc_mask(ddc, HDCP2X_POL_CTRL, HDCP2X_DIS_POLL_EN,
-> +		     HDCP2X_DIS_POLL_EN);
-> +}
-> +
-> +static void ddc_wr_one(struct mtk_hdmi_ddc *ddc, unsigned int addr_id,
-> +		       unsigned int offset_id, unsigned char wr_data)
-> +{
-> +	if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) & DDC_I2C_BUS_LOW) {
-> +		mtk_ddc_mask(ddc, DDC_CTRL, (CLOCK_SCL << DDC_CMD_SHIFT),
-> +			     DDC_CMD);
-> +		udelay(300);
-> +	}
-> +	mtk_ddc_mask(ddc, HPD_DDC_CTRL, DDC2_CLOCK << DDC_DELAY_CNT_SHIFT,
-> +		     DDC_DELAY_CNT);
-> +	mtk_ddc_write(ddc, SI2C_CTRL, SI2C_ADDR_READ << SI2C_ADDR_SHIFT);
-> +	mtk_ddc_mask(ddc, SI2C_CTRL, wr_data << SI2C_WDATA_SHIFT, SI2C_WDATA);
-> +	mtk_ddc_mask(ddc, SI2C_CTRL, SI2C_WR, SI2C_WR);
-> +
-> +	mtk_ddc_write(ddc, DDC_CTRL,
-> +		      (SEQ_WRITE_REQ_ACK << DDC_CMD_SHIFT) +
-> +		      (1 << DDC_DIN_CNT_SHIFT) +
-> +		      (offset_id << DDC_OFFSET_SHIFT) + (addr_id << 1));
-> +
-> +	udelay(1250);
-> +
-> +	if ((mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) &
-> +	     (DDC_I2C_NO_ACK | DDC_I2C_BUS_LOW))) {
-> +		if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) & DDC_I2C_BUS_LOW) {
-> +			mtk_ddc_mask(ddc, DDC_CTRL,
-> +				     (CLOCK_SCL << DDC_CMD_SHIFT), DDC_CMD);
-> +			udelay(300);
-> +		}
-> +	}
-> +}
-
-This magic delays... are they documented somewhere?
-
-> +
-> +static unsigned int
-> +ddcm_read_hdmi(struct mtk_hdmi_ddc *ddc, unsigned int u4_clk_div,
-> +	       unsigned char uc_dev, unsigned int u4_addr,
-> +	       unsigned char *puc_value, unsigned int u4_count)
-> +{
-> +	unsigned int i, temp_length, loop_counter;
-> +	unsigned int uc_read_count = 0, uc_idx;
-> +	unsigned long ddc_start_time, ddc_end_time, ddc_timeout;
-> +
-> +	if (!puc_value || !u4_count || !u4_clk_div)
-> +		return 0;
-> +
-> +	if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) & DDC_I2C_BUS_LOW) {
-> +		mtk_ddc_mask(ddc, DDC_CTRL, (CLOCK_SCL << DDC_CMD_SHIFT),
-> +			     DDC_CMD);
-> +		udelay(300);
-> +	}
-> +
-> +	mtk_ddc_mask(ddc, DDC_CTRL, (CLEAR_FIFO << DDC_CMD_SHIFT), DDC_CMD);
-> +
-> +	if (u4_count >= 16) {
-> +		temp_length = 16;
-> +		loop_counter = u4_count / 16 + ((u4_count % 16 == 0) ? 0 : 1);
-> +	} else {
-> +		temp_length = u4_count;
-> +		loop_counter = 1;
-> +	}
-> +
-> +	if (uc_dev >= EDID_ADDR && u4_clk_div < DDC2_CLOCK_EDID)
-> +		u4_clk_div = DDC2_CLOCK_EDID;
-> +
-> +	mtk_ddc_mask(ddc, HPD_DDC_CTRL, u4_clk_div << DDC_DELAY_CNT_SHIFT,
-> +		     DDC_DELAY_CNT);
-> +
-> +	for (i = 0; i < loop_counter; i++) {
-> +		if (i == (loop_counter - 1) && i != 0 && u4_count % 16)
-> +			temp_length = u4_count % 16;
-> +
-> +		/* EDID_ADDR(0x50) + 1 .. 0x53 select an EDID segment */
-> +		if (uc_dev > EDID_ADDR && uc_dev <= 0x53) {
-> +			mtk_ddc_mask(ddc, SCDC_CTRL,
-> +				     (uc_dev - EDID_ADDR)
-> +				     << DDC_SEGMENT_SHIFT,
-> +				     DDC_SEGMENT);
-> +			mtk_ddc_write(ddc, DDC_CTRL,
-> +				      (ENH_READ_NO_ACK << DDC_CMD_SHIFT) +
-> +				      (temp_length << DDC_DIN_CNT_SHIFT) +
-> +				      ((u4_addr + i * temp_length)
-> +				       << DDC_OFFSET_SHIFT) +
-> +				      (EDID_ADDR << 1));
-> +		} else {
-> +			mtk_ddc_write(ddc, DDC_CTRL,
-> +				      (SEQ_READ_NO_ACK << DDC_CMD_SHIFT) +
-> +				      (temp_length << DDC_DIN_CNT_SHIFT) +
-> +				      ((u4_addr + i * 16)
-> +				       << DDC_OFFSET_SHIFT) + (uc_dev << 1));
-> +		}
-> +		udelay(5500);
-> +		ddc_start_time = get_timer(0);
-> +		/* timeout in ms: about 1 ms per byte plus some margin */
-> +		ddc_timeout = temp_length + 5;
-> +		ddc_end_time = ddc_start_time + ddc_timeout;
-> +		while (1) {
-> +			if ((mtk_ddc_read(ddc, HPD_DDC_STATUS) &
-> +			     DDC_I2C_IN_PROG) == 0)
-> +				break;
-> +
-> +			if (time_after(get_timer(0), ddc_end_time)) {
-> +				dev_err(ddc->udev, "DDC transfer timeout\n");
-> +				return 0;
-> +			}
-> +			udelay(1500);
-> +		}
-> +		if ((mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) &
-> +		     (DDC_I2C_NO_ACK | DDC_I2C_BUS_LOW))) {
-> +			if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) &
-> +			    DDC_I2C_BUS_LOW) {
-> +				mtk_ddc_mask(ddc, DDC_CTRL,
-> +					     (CLOCK_SCL << DDC_CMD_SHIFT),
-> +					     DDC_CMD);
-> +				udelay(300);
-> +			}
-> +			return 0;
-> +		}
-> +
-> +		/* get the DDC data from the FIFO */
-> +		for (uc_idx = 0; uc_idx < temp_length; uc_idx++) {
-> +			/* latch the FIFO output */
-> +			mtk_ddc_write(ddc, SI2C_CTRL,
-> +				      (SI2C_ADDR_READ << SI2C_ADDR_SHIFT) +
-> +				      SI2C_RD);
-> +
-> +			/* read FIFO output value from DDC_STATUS */
-> +			puc_value[i * 16 + uc_idx] =
-> +				(mtk_ddc_read(ddc, HPD_DDC_STATUS) &
-> +				 DDC_DATA_OUT) >> DDC_DATA_OUT_SHIFT;
-> +
-> +			/* increment FIFO read pointer, un-latch the FIFO */
-> +			mtk_ddc_write(ddc, SI2C_CTRL,
-> +				      (SI2C_ADDR_READ << SI2C_ADDR_SHIFT) +
-> +				      SI2C_CONFIRM_READ);
-> +			/*
-> +			 * if the hdmi block was reset while reading, the DDC
-> +			 * speed falls back below DDC2_CLOCK: abort
-> +			 */
-> +			if (((mtk_ddc_read(ddc, HPD_DDC_CTRL) >> 16) &
-> +			     0xFFFF) < DDC2_CLOCK)
-> +				return 0;
-> +
-> +			uc_read_count = i * 16 + uc_idx + 1;
-> +		}
-> +	}
-> +
-> +	return uc_read_count;
-> +}
-> +
-> +static unsigned int vddc_read(struct mtk_hdmi_ddc *ddc,
-> +			      unsigned int u4_clk_div, unsigned char uc_dev,
-> +			      unsigned int u4_addr,
-> +			      enum sif_bit_t_hdmi uc_addr_type,
-> +			      unsigned char *puc_value, unsigned int u4_count)
-> +{
-> +	unsigned int u4_read_count = 0;
-> +
-> +	if (!puc_value || !u4_count || !u4_clk_div)
-> +		return 0;
-> +	if (uc_addr_type > SIF_16_BIT_HDMI)
-> +		return 0;
-> +	if (uc_addr_type == SIF_8_BIT_HDMI && u4_addr > 255)
-> +		return 0;
-> +	if (uc_addr_type == SIF_16_BIT_HDMI && u4_addr > 65535)
-> +		return 0;
-> +
-> +	if (uc_addr_type == SIF_8_BIT_HDMI)
-> +		u4_read_count = 255 - u4_addr + 1;
-> +	else if (uc_addr_type == SIF_16_BIT_HDMI)
-> +		u4_read_count = 65535 - u4_addr + 1;
-> +
-> +	u4_read_count = min(u4_read_count, u4_count);
-> +
-> +	return ddcm_read_hdmi(ddc, u4_clk_div, uc_dev, u4_addr, puc_value,
-> +			      u4_read_count);
-> +}
-> +
-> +static int fg_ddc_data_read(struct mtk_hdmi_ddc *ddc, unsigned char b_dev,
-> +			    unsigned char b_data_addr,
-> +			    unsigned int b_data_count, unsigned char *pr_data)
-> +{
-> +	mtk_ddc_disable_hdcp_polling(ddc);
-> +	if (vddc_read(ddc, DDC2_CLOCK, b_dev, b_data_addr, SIF_8_BIT_HDMI,
-> +		      pr_data, b_data_count) != b_data_count)
-> +		return -EREMOTEIO;
-> +
-> +	return 0;
-> +}
-> +
-> +static int fg_ddc_data_write(struct mtk_hdmi_ddc *ddc, unsigned char b_dev,
-> +			     unsigned char b_data_addr,
-> +			     unsigned int b_data_count,
-> +			     unsigned char *pr_data)
-> +{
-> +	unsigned int i;
-> +
-> +	mtk_ddc_disable_hdcp_polling(ddc);
-> +	for (i = 0; i < b_data_count; i++)
-> +		ddc_wr_one(ddc, b_dev, b_data_addr + i, *(pr_data + i));
-> +
-> +	return 0;
-> +}
-> +
-> +static int mtk_hdmi_ddc_xfer(struct udevice *dev, struct i2c_msg *msgs, int num)
-> +{
-> +	struct mtk_hdmi_ddc *ddc = dev_get_priv(dev);
-> +	unsigned char offset = 0;
-> +	int ret;
-> +	int i;
-> +
-> +	if (!msgs)
-> +		return -EINVAL;
-> +
-> +	if (!ddc || !ddc->regs)
-> +		return -EINVAL;
-> +
-> +	for (i = 0; i < num; i++) {
-> +		struct i2c_msg *msg = &msgs[i];
-> +
-> +		if (!msg->buf || !msg->len)
-> +			return -EINVAL;
-> +
-> +		if (msg->flags & I2C_M_RD) {
-> +			/*
-> +			 * The underlying DDC hardware always issues a write
-> +			 * request that assigns the read offset as part of the
-> +			 * read operation, so use the offset value stored on
-> +			 * the previous write request.
-> +			 */
-> +			ret = fg_ddc_data_read(ddc, msg->addr, offset,
-> +					       msg->len, &msg->buf[0]);
-> +		} else {
-> +			ret = fg_ddc_data_write(ddc, msg->addr, msg->buf[0],
-> +						msg->len - 1, &msg->buf[1]);
-> +
-> +			/*
-> +			 * store the offset requested by the EDID/SCDC
-> +			 * framework for use by subsequent read requests
-> +			 */
-> +			if ((msg->addr == EDID_ADDR ||
-> +			     msg->addr == SCDC_I2C_SLAVE_ADDRESS) &&
-> +			    msg->len == 1)
-> +				offset = msg->buf[0];
-> +		}
-> +
-> +		if (ret) {
-> +			dev_err(dev, "ddc transfer failed: %d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int mtk_hdmi_ddc_probe(struct udevice *dev)
-> +{
-> +	struct mtk_hdmi_ddc *ddc = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	ddc->udev = dev;
-> +	/* the ddc node sits below the hdmi node, which holds the registers */
-> +	ddc->regs = dev_read_addr_ptr(dev->parent);
-> +	if (!ddc->regs)
-> +		return -EINVAL;
-> +
-> +	ret = clk_get_by_index(dev, 0, &ddc->clk);
-> +	if (ret) {
-> +		dev_err(dev, "failed to get ddc clk: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = clk_enable(&ddc->clk);
-> +	if (ret) {
-> +		dev_err(dev, "failed to enable ddc clk: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct dm_i2c_ops mtk_hdmi_ddc_ops = {
-> +	.xfer	= mtk_hdmi_ddc_xfer,
-> +};
-> +
-> +static const struct udevice_id mtk_hdmi_ddc_ids[] = {
-> +	{ .compatible = "mediatek,mt8195-hdmi-ddc", },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_i2c_ddc) = {
-> +	.name		= "mtk_i2c_ddc",
-> +	.id		= UCLASS_I2C,
-> +	.of_match	= mtk_hdmi_ddc_ids,
-> +	.probe		= mtk_hdmi_ddc_probe,
-> +	.priv_auto	= sizeof(struct mtk_hdmi_ddc),
-> +	.ops		= &mtk_hdmi_ddc_ops,
-> +};
-> 
-
-beside the nitpicks
-
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
-
-Thanks!
-
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+Thanks,
+Michal
