@@ -1,197 +1,197 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E83C44539
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 11:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E649C44536
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 11:40:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F2D0880D7C;
-	Wed, 22 Jul 2026 11:39:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DFE424080A;
+	Wed, 22 Jul 2026 11:40:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6sDC_IresdfX; Wed, 22 Jul 2026 11:39:51 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2e2kOao6lxG6; Wed, 22 Jul 2026 11:40:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DBDFD80D92
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2431C40718
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784720391;
-	bh=6tkWS27aQv5uZNJQwhKbz+7xsl6uV19noeZ4l1IGwwc=;
-	h=Date:Subject:To:References:In-Reply-To:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
-	 From;
-	b=VXTZNObisJzMt+ikjrlA8LswHKFF1nUAVsJyXlxUr3UIyF2VxkAhQkvVHdJGY9MZo
-	 RyEKH4n9HYsVE6NbNP2A7dgXXjU9yGvAUNM4ptbKF41l4OUsiMlXh99stBCeKtnVQp
-	 8qnlee8a/UIilQxg+8y1fg/y7TJUF+6I3yE1GESN3Qcu32T5dovSFEhpkog7pBcEJr
-	 LEG+ieh7bzdBY4CsNQW2AQwF+MzqDhD7745Vyb6m1FMq/lSwJCY0Aste3QxqF9EUdD
-	 /Ju534xP3Ly5Uhleq6nYsHlnJR5WwQhFHlNt2/HDEayfIRZxeulN93r8/Gg7Kf/zQf
-	 Jq0jVpFcaAJFQ==
+	d=lists.u-boot-project.org ; s=default; t=1784720434;
+	bh=mdLpfVFwCoqcW3cTXT1HbdGaLzLc8XceYkNj5jqVhDw=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=xS7qRkCShTvar1gfecr0hUjWHRFTJBXwvVCUEJFASSqffAhDalgcQBGdOWEp4J7Kj
+	 v7AH9s49W5tfgMMoRNTNkXa4SSAnAn+Eff7bljwgoby7HwDNp2jqqhtd66+4tIPz1X
+	 teT8apG/9TPVw7kFfTu34DrOOynJTrcWuNpBNOXJqpabwT0oof0fsnnKseG1xGHcvv
+	 n3kzDOtzAccXd3bkIeEUpoeOT7XWHiJpVFFpUUB/VOEMyvWbZb+5UWf+RaT6UmgMFy
+	 oQF3kSlZWnlkhldRDpu2Cg5b7/hJ23YIdom5XO/8eIDp2zVHv14ukp0ENZAhuapocg
+	 CAkA00iXOfoBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DBDFD80D92;
-	Wed, 22 Jul 2026 11:39:50 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5DC8B224
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:39:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2431C40718;
+	Wed, 22 Jul 2026 11:40:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DAB91EB
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:40:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4324180D92
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:39:49 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C0E6D40718
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:40:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vd84ZPgyc73g for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 11:39:48 +0000 (UTC)
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=boogiepop@gmx.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 86F7B80D21
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 86F7B80D21
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 86F7B80D21
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:39:46 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gstJTPevymb0 for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 11:40:32 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=varadarajan.narayanan@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org CF5C740704
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF5C740704
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CF5C740704
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:40:31 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E46C5848BA; Wed, 22 Jul 2026 13:39:43 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id D4C61848BA; Wed, 22 Jul 2026 13:40:29 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D78F803F6
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 13:39:41 +0200 (CEST)
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1N5VD8-1x2M4n0QZO-015s2A; Wed, 22
- Jul 2026 13:39:39 +0200
-Message-ID: <48672330-0a41-46a9-83f3-031d5eea8e06@gmx.com>
-Date: Wed, 22 Jul 2026 13:39:38 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id AA67D803F6
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 13:40:27 +0200 (CEST)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66M8x1W3523799
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 11:40:25 GMT
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjrtt161t-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 11:40:25 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-cb5cc1e13f8so6017020a12.3
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 04:40:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784720425; x=1785325225;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=mdLpfVFwCoqcW3cTXT1HbdGaLzLc8XceYkNj5jqVhDw=;
+ b=N3e7LJjWd3Q3Qxts4Q1T3XEB6uPnmvXHF8SrNZz8Kf2QE/gyl5OknOgCsa2Vn+EFmq
+ Jo9OdMAEqKmoOIPsYU7YlziQyzNL9Vg0ZT4KtQNyO1DGlUhC0vkWDCZvTe4iGImWmF13
+ mI3CvQeVGsjR5TQQDVGcrUPO2oQGErriS/H6jEC4owr8lSBz5wvLA5ZGejGyqJHWPINL
+ +9VtuARfGTgHxjAs4mKGn1mxcJ1rUk1/fkJbHNox/12kPIpDZBTUIrIAWJlij4o2lBxD
+ qZKOpPGu+qV2j+QrO3WMpYsyQ+SjcrbbYQisyIJC+4rRSEvkMnbcXzJg3TkC8XGhgti2
+ 0o7g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rot7ktPA4kJgSyPafWwQ9qMJc3x5RK1f6gGT00QpCCCAc4dNmtLq/le6eGDY9uecHizeM+mf6s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0O467jbhy5UJVukoOJyZvZ/4AsECkc/tv71KPoze5JBAMaKk2
+ igab/spAnYHKzJ7mHfFtcZrcR86BxX6P12udjtJJs8NDAui34x2Qu2+RwxxsK8zyT5w8ynZcp2Q
+ Ijzs4MZnvqKy+nZbJ2hOO7R7xC7nrWopfrvUh8nW7uGgQ/saE6vIinYJO
+X-Gm-Gg: AR+sD11kb6m7KDSkiVUzotTDLCm19HSSk56WpQgxgWsm0Z4Im/hJLT93GcSpyANI0yG
+ 1/4/eOVpa9bR/87ueS5D87kllvmUiCFN9BLbwytnHSsfmL2r+WqNvvQCN6t95CR0f9T049Qxaoj
+ 7ZvPfsgrze8COqiPcJjbPvmvK+VB6nMWY598DsD77r049YuHR/vwss6zDIoYduzgouvupVlsUyD
+ xWePRIxv5MhGrYjoMaom0qcgPOJQQz2rxlHrs3p3alTre+7S2a5XK3V0Xy+VbOqntCkZdGWWsgc
+ YUrgTrVWzcfYc8NnS5S+MFtFe3rFwxb+ciCbHdTIE45l1ErwKnshJJWQwhAzLkgP7AT4mDFglaz
+ gaDjmBvkHmbj0hv1QRkJizG1m07CwCNp6/QR7c/cR9HCZQ4sviqf8Y4KdUoqjyysvgW1vb047uo
+ xROKU//CV52ypAvzWaWm6ge6jperRT5Q==
+X-Received: by 2002:a05:6a20:430f:b0:3c4:3454:38a7 with SMTP id
+ adf61e73a8af0-3c434543beemr2293176637.54.1784720425087; 
+ Wed, 22 Jul 2026 04:40:25 -0700 (PDT)
+X-Received: by 2002:a05:6a20:430f:b0:3c4:3454:38a7 with SMTP id
+ adf61e73a8af0-3c434543beemr2293135637.54.1784720424668; 
+ Wed, 22 Jul 2026 04:40:24 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3147e0818e4sm9119004eec.22.2026.07.22.04.40.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jul 2026 04:40:24 -0700 (PDT)
+Date: Wed, 22 Jul 2026 17:10:16 +0530
+To: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
+ lukma@denx.de, michal.simek@amd.com, luca.weiss@fairphone.com,
+ danila@jiaxyga.com, adrian@mainlining.org,
+ aswin.murugan@oss.qualcomm.com, david.wronek@mainlining.org,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v4 2/4] pinctrl: qcom: Add ipq9650 pinctrl driver
+Message-ID: <amCsIG2c43bBoQs0@hu-varada-blr.qualcomm.com>
+References: <20260722104624.3842833-1-badhrinath.s@oss.qualcomm.com>
+ <20260722104624.3842833-3-badhrinath.s@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mtd: nand: raw: rockchip_nfc: fix ecc setup
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Johan Jonker <jbx6244@gmail.com>
-References: <e108fe69-533a-4734-8728-b17b172c4be9 () cherry ! de>
- <68f9f2bc-485e-4cbe-9ed7-8f34efdd8440@gmx.com>
- <e9100f97-91a0-4166-b62e-d639d41f6ac2@cherry.de>
-Content-Language: en-US
-In-Reply-To: <e9100f97-91a0-4166-b62e-d639d41f6ac2@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:W0cxXUFAMS6zsfSVW1c/CmlPG2YaI7BqeWH2RI0krysbRuuR391
- 3tFyTLBEgolAYk+UBfMR4q1298JXvZ3MSCEXH4VMjRnLaztmVvkWfdFBVAXlTkqv+3BLpc5
- eGZp0Xq03RCoG0AWJxrTrT7l3gCIoLMUij+vVUSNYgBWztmqyjoplgVA9hr6uZS8Ewb0XKa
- 4GdgqwES/4BViQ/TZsoaA==
-UI-OutboundReport: notjunk:1;M01:P0:DRdUeETyYZY=;AJG7g8utoWcmGRizLBKj7Khv3l3
- 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
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260722104624.3842833-3-badhrinath.s@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: X8bj3_TYRBRk2U4nOOkAjRv7gcV3Y4s6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDExMyBTYWx0ZWRfXxhoNLv8x45Uu
+ eyVQji5W+1hdcKcryRJHQKDtL/D2bh0WVRtQ45hnj1b+aOsUEwMNC+r/GHBfldTjkDF3cVmH8H7
+ ojcBWFkSdsXyvKBc9oEhyNLbm13U1CBkIzJNj0bYDNdxPIE/JDCTNkKUfm7EJB+fsDoWn30wwSy
+ 0OnQDq7hT9zof5msTAoZh/e2ffMIujA13pApHmPuYifl0iZ+KotPrUGrvEs0YfyBcEiHdK+AR8c
+ q5cazH6+nTU9hTvgAJBX9l+zqyue/5huFUiQ+kbbBQo06i9gRydnGq/+xuQ79B/A04MNoFJuQk2
+ ZULXmJfXnTzzM+g8OOib+idT1mvmN0bQzZ+PZdclnxdX1Qt1tGIiIWrEa6Khhl1YNp2fe6mcfm3
+ d0T7juEVk8jBr0OmPWWk8vSX2paeDIWsARXZpVWioIOfwinRMLqtjpAHL+r1hmD9aFLtYWkxKsr
+ mZ05yufadr0VohU97eQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDExMyBTYWx0ZWRfX6xzTWlIAN4Fe
+ nqoiTWEggxAQHVFqfZ3jnZ1VDLc0sKT+rghVr+8T/3mzxkEsnNy91jE/4Nc1DpxJ5OrVWyowwbk
+ pXkVdTRVcr4x7Iewtm4qmGQZKdnqPxM=
+X-Proofpoint-GUID: X8bj3_TYRBRk2U4nOOkAjRv7gcV3Y4s6
+X-Authority-Analysis: v=2.4 cv=V8lNF+ni c=1 sm=1 tr=0 ts=6a60ac29 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=ZKDt5Znw961Hpe79zl0A:9 a=CjuIK1q_8ugA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_03,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0 impostorscore=0
+ adultscore=0 priorityscore=1501 malwarescore=0 clxscore=1015 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220113
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmx.com; 
- s=s31663417; t=1784720379; x=1785325179; i=boogiepop@gmx.com;
- bh=6tkWS27aQv5uZNJQwhKbz+7xsl6uV19noeZ4l1IGwwc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=WGTlwvR6wZ63Px7GSKOhrGNBGY/jFkE7fOnoFEaq5zDOQMknKJmYEjWMJKbF6hL9
- ivNWa/5Nqm+UqRRYpA8Kh/Xcessd7tFcWGtIP2p9+tmHTxI458j/C59G26NOglg5e
- zIENj4CVCx1cvzniEwwAxKk5ccAWccfK1gmNyzy1hnvmUGI1juXlQ4FBodRTcRHgu
- +ZTUAgkVTc+3kdvmOxcZJlFQJFsliab5AlKPAQVlP0kXMO0CML3VXATzEbsiURIC5
- rGsbF93JSE8WsD3ZigRQYNl2UPtYlE/XSXAiC5MOzR9ckErymR7UU5v5MqyaphLxj
- m0lDjA2mIp8ZUL4yMg==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=gmx.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmx.com header.i=boogiepop@gmx.com
- header.a=rsa-sha256 header.s=s31663417 header.b=WGTlwvR6
+ d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=mdLpfVFwCoqcW3cTXT1HbdGa
+ LzLc8XceYkNj5jqVhDw=; b=RhTR3Me90W3nkaEID4rpiKgClFMasW9PJprhW0Wd
+ yRlfhFm79NS3WjHYm/tDgpdCW27i1krqGTyad1bNDWwoCZvVqIZrPgYAYacUR+i4
+ cg0BySFkOxKbrR1ZkMO1HbGFAgQJ+AlQP0shSUvfrp1Gn7CyeDulnQwrBzo6UTwp
+ b9q5Y1V4UXBxKO4dDqnbE6zdZ/InwMjd3jrsiYgYURJie91Znl64WyfVFKv1iqbT
+ WjVt1gh17qJhLx4mncAc5xZyp7/2/8NuX6JFN5ScM6d80Dsxe70oakbEIRBRPTpE
+ 7VcjdQ/T0/uA+uqOkpjJYqzqFD24Kva8592Mph6GcIJPuA==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784720425; x=1785325225; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=mdLpfVFwCoqcW3cTXT1HbdGaLzLc8XceYkNj5jqVhDw=;
+ b=VIcCkzr+1a0kv/CH2wo+N11juSGrJHhVQOx6Sn5/zJEEArvpp1TbZfoRKEk9xCfKqT
+ Z/uKK2iSQU8d+7x4pKWq6WCLgV/6sWHT0Nw2xKPjD+vv1eyRMXsLPtBqF93kcVDvz3QB
+ CvgFOoYsy+B6U3uOxkgzXWZWQ72PCP53tzly/RMYxDbdGU97TGcqo/5TPbp41rbeGUJA
+ Oy6QBnH5ouk2ODKa0ur7hp9ZxR6qqVK9480paspAJ7fWWEbJHqex5IJNlXbBntxlCfUj
+ zTtaTPCvqryJmJ3zgSRZgN285iXt8X8wkwc74oo5bhbl9gjOpPwY5pZEtecrjyKSf9ed
+ Jzfw==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=RhTR3Me9; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=VIcCkzr+
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=gmx.com
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=boogiepop@gmx.com
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- secure) header.d=gmx.com header.i=boogiepop@gmx.com header.b="WGTlwvR6"; 
+ unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="RhTR3Me9";
+ dkim=pass (2048-bit key;
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.b="VIcCkzr+"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -204,163 +204,18 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Boogie via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Boogie <boogiepop@gmx.com>
+From: Varadarajan Narayanan via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Quentin
+On Wed, Jul 22, 2026 at 04:16:22PM +0530, Badhrinath S via U-Boot wrote:
+> Add pinctrl driver for TLMM block found in the Qualcomm IPQ9650 SoC.
+>
+> This driver supports 54 GPIO pins with various pin functions including
+> UART, SPI, I2C, SDCC, PCIe, and other peripherals.
+>
+> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 
-On 7/22/26 11:28, Quentin Schulz wrote:
-> Hi H=C3=BCseyin, Johan,
->=20
-> On 7/22/26 12:56 AM, Boogie wrote:
->> [You don't often get email from boogiepop@gmx.com. Learn why this is=20
->> important at https://aka.ms/LearnAboutSenderIdentification ]
->>
->> Hello Quentin
->>
->> I had reported this bug to Johan so i can give detailed explanation.
->>
->> The bug was really the lock of "&& nfc->selected_bank =3D=3D 0" not exi=
-sting
->> for write_page_* variants.
->>
->> When rockchip nfc was reading, it required bootblks to be a part of the
->> first nand chip only with the condition "nfc->selected_bank =3D=3D 0". =
-But
->> when writing it interpreted 'all' nand chips first boot_blks as boot=20
->> blocks.
->>
->=20
-> OK ECC strength mismatch between what's written and read.
->=20
->> The practical problem. I had mentioned this in V1 and give more explici=
-t
->> details here.
->>
->> I have 2 nand chips, and a partition (linux below) starts in nand chip =
-1
->> (CS=3D0 in below) and ends in chip2 (CS=3D2 below). And i am using UBI =
-on
->> top of that mtd.
->>
->> nand@0 {
->> =C2=A0=C2=A0=C2=A0=C2=A0 reg =3D <0>, <2>;
->> =C2=A0=C2=A0=C2=A0=C2=A0 label =3D "rk-nand-0";
->> =C2=A0=C2=A0=C2=A0=C2=A0 nand-bus-width =3D <8>;
->> =C2=A0=C2=A0=C2=A0=C2=A0 nand-ecc-mode =3D "hw";
->> =C2=A0=C2=A0=C2=A0=C2=A0 nand-ecc-step-size =3D <1024>;
->> =C2=A0=C2=A0=C2=A0=C2=A0 nand-ecc-strength =3D <40>;
->> =C2=A0=C2=A0=C2=A0=C2=A0 nand-is-boot-medium;
->> =C2=A0=C2=A0=C2=A0=C2=A0 rockchip,boot-blks =3D <8>;
->> =C2=A0=C2=A0=C2=A0=C2=A0 rockchip,boot-ecc-strength =3D <24>;
->>
->> =C2=A0=C2=A0=C2=A0=C2=A0 // block 14 - end
->> =C2=A0=C2=A0=C2=A0=C2=A0 linux@1C00000 {
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 label =3D "linux";
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reg =3D <0x0 0x1C00000=
- 0x3 0xFE400000>;
->> =C2=A0=C2=A0=C2=A0=C2=A0 };
->> };
->>
->> When i create the UBI volume the middle of this partition where the
->> blocks are at 2nd chip block0-7, will be written in boot block strength
->> [ECC:1024/24] but will be read with normal strength [ECC:1024/40].
->>
->> This causes first UBI creation to be successful, and next scan to fail
->> due to written strength is different that read.
->>
->> You dont actually need to use UBI at all, any time you write those
->> sectors, you wont be able to read them. A workaround it to mark them
->> bad, but this is not nice, since the blocks are completely fine.
->>
->> Rockchip NFC technically as minimum needs to know rockchip,boot-blks, &
->> rockchip,boot-ecc-strength props only. Currently the checking condition
->> is rockchip,boot-blks & applied affect is rockchip,boot-ecc-strength.
->>
->> The bug is this is only applicable to first chip not all chips.
->>
->=20
-> "is only applied" I think you meant here instead? Or are you implying=20
-> that you want chip 0 to have rockchip,boot-blks and rockchip,boot-ecc-=
-=20
-> strength applied to it, but NOT chip 2 even though they are listed in=20
-> the same node?
->=20
-
-Yes boot-blks and rockchip,boot-ecc-strength must be applied to only to=20
-the chip CS=3D0. This is how the bootrom works, bootrom does not look for=
-=20
-an idb image [tpl/spl] in a chip which is not CS =3D=3D 0.
-
->> NAND_IS_BOOT_MEDIUM is actually coming from mainline linux. Similar
->> bootrom tricks are also available in other socs. And detection of boot
->> rom blocks is not always straight forward as rockchip's
->> rockchip,boot-blks, they have to do some "if" case acrobatics to detect
->> those. For simplicity reasons mainline linux introduced a global flag
->> NAND_IS_BOOT_MEDIUM and it is applied to other socs as well.
->>
->=20
-> rockchip,boot-blks and rockchip,boot-ecc-strength properties explicitly=
-=20
-> require nand-is-boot-medium property to be set in order to be used=20
-> (though they don't enforce it via YAML/JSON schema; although it is=20
-> enforced by the kernel driver). So a device tree that doesn't follow=20
-> those restrictions is deemed invalid and we are not aiming at supporting=
-=20
-> them. This means that the last sentence in Johan's commit log:
->=20
-> It is now the users responsibility to apply the device tree
-> property "nand-is-boot-medium" to only NAND chip 0.
->=20
-> is redundant, as we already expect the users to set it for the=20
-> appropriate NAND chip(s). (just adding this piece of information here,=
-=20
-> not disputing anything either of you said)
->=20
->> Since this "&& nfc->selected_bank =3D=3D 0" fix is exactly at the same =
-line
->> with mainline changes of NAND_IS_BOOT_MEDIUM check, i think Johan also
->> integrated both at the same line.
->>
->=20
-> @Johan, can you please reorder the condition in rk_nfc_write_page_hwecc=
-=20
-> and rk_nfc_read_page_hwecc to match the order in the Linux kernel=20
-> driver? (the NAND_IS_BOOT_MEDIUM is last).
->=20
->> In u-boot only mk808 is using nfc with boot blocks and it is already
->> marking the nand device as boot medium, so the code change should not
->> break existing devices.
->>
->=20
-> Correct.
->=20
->> Additional note: Linux mainline also is lacking the "nfc->selected_bank
->> =3D=3D 0" check, so i think similar patch should got to linux as well.
->>
->=20
-> Not sure what you mean here as Johan removed both checks in the patch.
-
-You are right, sorry for misleading, we had discussed to put a lock to=20
-with "&& nfc->selected_bank =3D=3D 0" for both read and write to uniform.=
-=20
-But now i noticed that this patch only syncs with mainline and=20
-downgrades the ECC to bootrom strength for all chips first boot blocks.=20
-This also works, but of course the side affect is reduced ecc strength=20
-(if your current one is higher, and most likely is).
-
->=20
-> [...]
->=20
-> As far as I could tell, Johan's patch makes U-Boot behave the same as=20
-> the Linux kernel for a multi-chip node, so with the reorder I asked=20
-> above and a much more precise commit log providing the usecase and=20
-> misbehavior, and also pointing at the Linux kernel doing the exact same=
-=20
-> thing as this patch, I think we're going in the right direction.
->=20
-> Cheers,
-> Quentin
+Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 
