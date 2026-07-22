@@ -1,97 +1,99 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEECEC4451C
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 430E0C44512
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:07:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5A25C80DC2;
-	Wed, 22 Jul 2026 07:02:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DE53C40708;
+	Wed, 22 Jul 2026 07:07:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OzS1ohPJePTD; Wed, 22 Jul 2026 07:02:34 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YOKOS1_pb_10; Wed, 22 Jul 2026 07:07:15 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5A73680DB3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E7FF3406F6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784703754;
-	bh=3M8lb4d7qzGuBIqdflc+K7O/anV2xrq/tEcE8VAoEis=;
+	d=lists.u-boot-project.org ; s=default; t=1784704035;
+	bh=BzK1PRh2TaxChJ5pcBkmyHqCoNDclObIJYjqvZcqAC8=;
 	h=To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=OaRrnlGquR9xbAmkPtPz/tDkpplf09vf7CSOzWXX/9BOQbR5ALvMFP9PzbTTGLGuJ
-	 bwspuDnIQsfFnKNMXBAz+zOJ+wWyR542MswTSImrVgoh0lOOZsitOK2B+qE/WCWUfK
-	 qPMQ2SlofCT9qaAzFeG3EwkcMzTF9lkYsH6IX84PH8pmnqFlQTpMkj94G0mXcTz5Hy
-	 WYcJWq2E59i29T21Btf9H1AkfsVwge/EonCMefPzYz4oasaMd8owbXhTf5yvFOjE4Z
-	 +VikjBOUHrBkR5IVFPp5tZulRdTMFaKAtZGL/PuFsMjJyAPDNI9OAn0ksSFzaI56qy
-	 Q81m+6t0m+Vqw==
+	b=RJ06rpYsiNiO29gk+9RlvDGWbNZ4EDtWKmiuueuQ08iE4ETKZF/Aej1+I4abcdOlm
+	 b2q3zzsKB5L9+1FZbm/oZsq+KZo++iMflZvKvJRQDf0U0BxEm2R/RFe1OaBYQUADbQ
+	 +1Li2bnnaV0y/nEPox+yfu01rG6mQoe84EZlhpRzwguLSX+KutR2AQ85S57UQwaFFC
+	 X9A4DgMsDbbCb35Qz9WidGL3CZ8i7p+/ysRM6cGGNVMvaWfqZT/idpCbiGEMxLZR4o
+	 N+VwNv+P9vfCzakedQ/NSNsnIBAFzUilGEXmttxdzu1njV5BiKyok+RaejbxBvN6UR
+	 GGnoz+6ZN4pNw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5A73680DB3;
-	Wed, 22 Jul 2026 07:02:34 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C215D9E5
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:02:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E7FF3406F6;
+	Wed, 22 Jul 2026 07:07:14 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 819E4313
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:07:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A871A400D8
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:02:32 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7E88180CC8
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:07:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id buoe1cCwI_3P for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 07:02:31 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yUqQ1Id0xNqC for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 07:07:13 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 3AFC1400F3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3AFC1400F3
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 776D580C9D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 776D580C9D
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3AFC1400F3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:02:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 776D580C9D
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:07:13 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83E4C848BA; Wed, 22 Jul 2026 09:02:29 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id ACA0D848BA; Wed, 22 Jul 2026 09:07:11 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A94C803F6
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 09:02:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66F6A803F6
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 09:07:09 +0200 (CEST)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id D854E404EA;
- Wed, 22 Jul 2026 07:02:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 306B41F000E9;
- Wed, 22 Jul 2026 07:02:24 +0000 (UTC)
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@nabladev.com>, Tom
- Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: Re: [PATCH 0/2] usb: gadget: dwc2: Prepare for UDC core migration
-In-Reply-To: <178470329692.163835.8025542216110715157.b4-ty@b4>
-References: <20260703-usb-prep-dwc3-sync-v1-0-1352bc238c9b@kernel.org>
- <178470329692.163835.8025542216110715157.b4-ty@b4>
-Date: Wed, 22 Jul 2026 09:02:23 +0200
-Message-ID: <87mrvjik1s.fsf@kernel.org>
+ by sea.source.kernel.org (Postfix) with ESMTP id F389D42ADE;
+ Wed, 22 Jul 2026 07:07:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 329B01F00A3A;
+ Wed, 22 Jul 2026 07:07:07 +0000 (UTC)
+To: Safae Ouajih <souajih@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Alexey Charkov <alchark@flipper.net>
+Cc: Tom Rini <trini@konsulko.com>, "Guillaume La Roque (TI.com)"
+ <glaroque@baylibre.com>, Guillaume Ranquet <ranquet.guillaume@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] boot: android: fix out-of-bounds access in bootconfig
+ parsing
+In-Reply-To: <178470329989.163835.6163607000590154751.b4-ty@b4>
+References: <20260708-image-android-oob-fix-v1-1-a96de8ccd25e@flipper.net>
+ <178470329989.163835.6163607000590154751.b4-ty@b4>
+Date: Wed, 22 Jul 2026 09:07:04 +0200
+Message-ID: <87jyqnijtz.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1784703745;
- bh=3M8lb4d7qzGuBIqdflc+K7O/anV2xrq/tEcE8VAoEis=;
+ d=kernel.org; s=k20260515; t=1784704027;
+ bh=BzK1PRh2TaxChJ5pcBkmyHqCoNDclObIJYjqvZcqAC8=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=cOwWftJ7Az83NMoIXX/IDlCAmUQQ0kpWeqI6D9x+MrvvcOwzJv8jzzMNSCbOFvxR3
- /C5Cn6UbSS0BMXY0hefdBeFgp9BBClpP09jSBSktsyuzNKy6bM+Edj3YTE7IZv2TD8
- yDzd3r6sRpiTM77raJ+nYl1SXZVlvSQ7SMeKaxt/3OZLMBT/oQXHPARpxLNkVLr/5r
- Jb4ta5Ucfs89WbA8LntsiOhAiWLkdTKwX17ijAz5DrY296lJMyv+p79sxqK8s1Z6LJ
- APL72jCTK+BbKni96535Mm+bO/+xFxw4ofHaVsKuK34CGkI0e5/cp3EqW2jR4+SCsC
- X/4NttbHDEDqw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=BSr2VLd2Kz6vU2Y+IuakaJuKTWU/HkT6YnhAVCSxT0yePD742b0M383fN2oySmnqt
+ VS6PiGBqoUjYDFu+LBAG8HmJddn3bn+Gq19vJSINb2JTI5HpTY2x4h1rruetljQw1J
+ PFKLvCn8zFAZvTC2gY76nVQIQwh5duovLwI4NisNy2IrOfrS0SQnrbipOcNMRQ7DVh
+ Ow7kqgNOkOrD4ie0EWvphRkM9hxbVZ4boP1l5EWsYKY2gp/YkyhpBIWYUK+jHOSN7x
+ jDQRX7ae25Xiq9htZDPV+qA9RBa2XGNDruoMkkDBDzlnjYUvE2PGHh9i9YxmEKFUpo
+ 5kZqlKsKSeXiQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=cOwWftJ7
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=BSr2VLd2
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
@@ -99,7 +101,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=mkorpershoek@kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="cOwWftJ7"; 
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="BSr2VLd2"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -117,34 +119,29 @@ Reply-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Wed, Jul 22, 2026 at 08:54, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+On Wed, Jul 22, 2026 at 08:54, Mattijs Korpershoek via U-Boot <u-boot@lists.u-boot-project.org> wrote:
 
 > Hi,
 >
-> On Fri, 03 Jul 2026 15:29:35 +0200, Mattijs Korpershoek wrote:
->> Jens Wiklander started to migrate the DWC3 driver to a more recent
->> version of linux (v6.16) [1].
->> 
->> This migration also updates the UDC core and most notably how drivers
->> perform their endpoint matching.
->> 
->> While testing Jens' series on a Khadas VIM3 board, I reported [2] that
->> I can no longer bind the fastboot gadget to the dwc2 otg driver.
+> On Wed, 08 Jul 2026 21:32:07 +0400, Alexey Charkov wrote:
+>> When android_image_get_vendor_bootimg_size is called, its buffer is only
+>> allocated with enough space for the bootconfig header, but the
+>> android_vendor_boot_image_v3_v4_parse_hdr helper attempts to append a
+>> bootconfig trailer to it, causing an out-of-bounds access and heap
+>> corruption in some cases (e.g. triggered in sandbox test builds when
+>> extra bootmeths are added, resulting in a segfault of the sandbox
+>> process).
 >> 
 >> [...]
 >
 > Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 >
-> [1/2] usb: gadget: dwc2: Use usb_ep_set_maxpacket_limit() for fifo sizes
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/6f9c431a20627db34e0c41ea865c611f0d2c2016
-> [2/2] usb: gadget: dwc2: Set endpoint capabilities via .caps field
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c5c4cc4c6b9887858e168d5106f8f1d3dfb6c3e8
+> [1/1] boot: android: fix out-of-bounds access in bootconfig parsing
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/ee3ab6988860d568b0ba0b568e57335cca2809d4
 
-Err, my automation is not up to date.
-I can confirm the patches have been applied to the new u-boot location:
+Also applied to new location:
 
-https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/6f9c431a20627db34e0c41ea865c611f0d2c2016
-https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/c5c4cc4c6b9887858e168d5106f8f1d3dfb6c3e8
+https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/ee3ab6988860d568b0ba0b568e57335cca2809d4
 
 >
 > --
