@@ -1,123 +1,194 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE9BC44532
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 00:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF436C44532
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 00:52:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CBFC3608D7;
+	by smtp4.osuosl.org (Postfix) with ESMTP id DE6AE409F2;
 	Thu, 23 Jul 2026 00:52:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jQqXWmWP-xTv; Thu, 23 Jul 2026 00:52:22 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iOparvnWVOoA; Thu, 23 Jul 2026 00:52:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E32D2608D1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A97A6409BB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784767942;
-	bh=vdWY0ZTuwPgVe5EpHJU2TRSJfK8hstSrxSEGTz2+vss=;
-	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=sZIVSDuxZgaAX6NSgytRiIW5txK6Nf603XFW9W6aygwEdTpA+DiE5VjPc5VA+wkG4
-	 UR63e1+6kx71YoCDUMXGJ4wA72Tx41fYx2GL2hH/kJoaVpHnGaBeKFHNjMBUqtsidN
-	 MlJAZuqeFA04wOJfLmthVuBiku+AY0FJKY677kfM8ZPPRfPLZymw/ynKrUVp7HNTwi
-	 kHbDFwARCqECa87M/mhhCw1NhsBiSOBdATzzgBY2AQKlYaFq4QKnheHrz7/IL/+nqQ
-	 WjqrKYozmEaF/0zJKp48K/hxy7t0roi6Q7dgn+cp4Fs/L9JnclaAdGzljhjk1Qe/ak
-	 X4nZa2azuI5Sg==
+	d=lists.u-boot-project.org ; s=default; t=1784767939;
+	bh=33JMVz9Y3GKW7zEX821I2SZXZdbAZGenx1LPPkuCFMs=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=J909+HzdSzs0YXe9EaTf2x8TI1cepcOnF5Gk0VSJ1bX2cD6L9frE9dZmRkvSXz9QN
+	 BLN9DlQNSH9PSiOQd1GIIsSUcR46yTDs62TwzicZo+CesQGW2ioWjvF9jpJvbWB+5g
+	 n/gYZuRh6xsbhL/uCjvIY61nncg4sYGNeC0Iz/rq9XT5LhQ2SBIVqyI+H/X9jSttp8
+	 Z290CuDrPdKbhZiZ7cYMU0sPIgfd6jo9SqC/YWKgsyGXakab3Er9WYZ0HMORFeVFDn
+	 wx8tHhyIEp3hZBrQXl9hO75igs910KHtrmzKojYUnh7wQjbBPhDNZg5n1h5j9piPws
+	 9KEJL+vLSR/Tw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E32D2608D1;
-	Thu, 23 Jul 2026 00:52:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A97A6409BB;
+	Thu, 23 Jul 2026 00:52:19 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2369E2E5
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:42:48 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 9CDD442A
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 14:21:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 09AC2607E3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:42:48 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 834E0607D9
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 14:21:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w3W4nvF5V1Yr for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 15:42:47 +0000 (UTC)
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ id 5xOSL8zVHONu for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 14:21:37 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=prvs=656eedf95=jamie.gibbons@microchip.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org AAD25607DC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AAD25607DC
+ envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3D26F607C4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3D26F607C4
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id AAD25607DC
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:42:45 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3D26F607C4
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 14:21:37 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D80BF8494B; Wed, 22 Jul 2026 17:42:42 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 182C8849BC; Wed, 22 Jul 2026 16:21:35 +0200 (CEST)
+Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com
+ [IPv6:2607:f8b0:4864:20::a35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2176F848BA
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 17:42:39 +0200 (CEST)
-X-CSE-ConnectionGUID: 6XP81SuIQaqI50N8poLatQ==
-X-CSE-MsgGUID: 2A83FQjxRe20Q0V/Z60zgw==
-X-IronPort-AV: E=Sophos;i="6.25,178,1779174000"; d="scan'208";a="70467178"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 22 Jul 2026 08:42:37 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Wed, 22 Jul 2026 08:42:36 -0700
-Received: from jamie-dev.microchip.com (10.10.85.11) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 22 Jul 2026 08:42:34 -0700
-From: Jamie Gibbons <jamie.gibbons@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
- <valentina.fernandezalanis@microchip.com>, Tom Rini <trini@konsulko.com>,
- "Leo Yu-Chi Liang" <ycliang@andestech.com>, Sughosh Ganu
- <sughosh.ganu@arm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Martin
- Herren <sputnik@on-the-web.ch>, Michal Simek <michal.simek@amd.com>,
- <jamie.gibbons@microchip.com>
-Subject: [PATCH v2 0/6] MPFS: add hardware RNG support and fix RNG consumers
-Date: Wed, 22 Jul 2026 16:45:43 +0100
-Message-ID: <20260722154602.3373184-1-jamie.gibbons@microchip.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id B24CE8495B
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 16:21:30 +0200 (CEST)
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-5bf94664327so4652095e0c.1
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 07:21:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784730089; cv=none;
+ d=google.com; s=arc-20260327;
+ b=m8VLJwzrDpSeTaB+63moEl+USmnXZ7JQzj41wb8CIJTm2W5tdxKavRdMaM2x6Car83
+ sQYpFm0y80HGI0YUb3ijwKQlrDzC4c2UCME/2g6ZTYTo3mUMpwncyTzka+Apj19gbSO/
+ 2QJdNnZm3Bxldr8zvWuZIoq3/y3vi8B2PdMckLoXrpLcrtK3nLGLAFDXQSODV38Ij+/a
+ 4W/+bH30w8rqNaxtE9uc03ZWGHWgg0IZQgofXtO/k0XLsKDJlvNY3YawhgGa4HhPu/9I
+ vgfdK/NhSXBWoLYID9QnxSwcsnb7m39PtuGYGTHRAA1c7EzaHly79PAPFYLDHdB5ZzOC
+ lJ9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=33JMVz9Y3GKW7zEX821I2SZXZdbAZGenx1LPPkuCFMs=;
+ fh=xaYwXkM4t5YFDbUDkt4aYRljMMobQ2lQaNgAMpPb44Q=;
+ b=HEO9bskWEz/G+8sMCzkPYugn4tLkEFFlxto4+gzQNY9GDKsWXwzYiqPXVC3DR54tGa
+ efYgtysfouRhdCNj8ejJszKLkehuSK0wkpli6NdAQPF1CSuvSjItGc7LJMY5Dd+wg5zs
+ A2WBP726KJbxS6Ba7dc5GFllpjsCVLgvWvPByIsaeFg6ellFSr72Vwfi2zhQ5eC0DYRI
+ xuPEItp8dReH4XFHDBREmLZqEzF78F7pGHGFJQw4nUSxpepwSc2bTMNxK7R6JUY5rxBp
+ 9H8GZxsmPKT1g0aSovlNnvxcn0JZlS1x4ywrK8Rm0BpkXq5+Vz+eQFLRwZ1+RM7ttlQA
+ 5H7w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784730089; x=1785334889;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=33JMVz9Y3GKW7zEX821I2SZXZdbAZGenx1LPPkuCFMs=;
+ b=TfKGhQ+HQ4Ih9jdEx0Y9flKHPkIyG2ppwFIqoH8uSN32bTo+A/JcYl8lpuYtYmEqyz
+ Qkpz0+5sBmO6h6Iwqob5vH48Mit9iefRtKPqpi5zTqC0QCntjbEdDYSteClANkKynKJ2
+ P4lLoaRAvFDahk0rx+tmA3OuDwuHXAh2pkunCX3KViKHI3qaLqy/tPy+wE5N1CpMfD46
+ DjFEtMelf7wM5MwIslGiFMTFF0dw7j7kcZYM6w5Yj152B6xUJ5T5BciIzv/3YAGXENQh
+ qE7wJdwEWqCdJL0AojcsQKxtW7/5KJjFNh+AONzSqTgsVf3Et50zembrg8KuHDSLqQgS
+ QGSw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoWrHN7g3EW7AAO95QpoF9KkDalm1N3Gf23LwOyXeaaO2XMW7Z1sq8l6tLTP9+yG81kMfU+ab4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1bKPxxyKQhfDOQAEhuTp3X0LMBnGWNOycw/IDh0Nq8ChGkYV9
+ VtqWDCpjJdDj+EnxQDc6KgOojJdxFSWL9AehhbH0O8Wmi7OawrRbFTeK+1FzRSSnC1qPqw7Zdt0
+ xf+epKLlvjeA69JCY7f/rXc0ohWApxh8=
+X-Gm-Gg: AR+sD10a8lXCi7whAWcMFyFZlOLDAbIiRwKAw0f/iYsbk4ze3yYEtfyWQW+yFq7yXoB
+ Wu6q2dGaFRoZ1vRKrWZ+TYnMu/UfmfVG8m1e2J6ggGxu48Lc1euTGNNk2gdK64eprMY7G+vQDyl
+ yN+EqcZGHoS3886SexVu1WjUfxv3Cd6cuNJfag1AaKQ3Fkj3HgpLxRyznCD+QM202nx9eQh/LZi
+ rZNwdIQpCM/XUuI4tvKypwwAFDU7c/V4njDBKxWi/q2k3X/vT9/6SxqJ2zyFiWBKuzC875vP0S3
+ 0xroQ2xbbJFx57wHg9RmUTH+2YwFOPmVXF95czIG1ARcfmQ0f/g+7K1p1Q0DvcpAdXZBGgg06si
+ 0mYKQ+G+aGlG6FAYYI+6B45S3CQ+5aV9a2sQ7lA==
+X-Received: by 2002:a05:6122:3b8a:b0:5bf:6cfa:7743 with SMTP id
+ 71dfb90a1353d-5c1bf942107mr6759015e0c.13.1784730089262; Wed, 22 Jul 2026
+ 07:21:29 -0700 (PDT)
 MIME-Version: 1.0
+References: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
+ <20260719-submit-ce-series-v2-v5-4-3c41f66d4522@gmail.com>
+ <20260720233023.GP749385@bill-the-cat>
+In-Reply-To: <20260720233023.GP749385@bill-the-cat>
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Wed, 22 Jul 2026 08:21:17 -0600
+X-Gm-Features: AUfX_mw_B6n_jxC36Glcf00IRiSqdB83kk0COiTs4X0mwQLtu0tPp330TOK4H9s
+Message-ID: <CADvTj4qHHW6pvRENss206Q6-UG0RJOgftvYeZviaJrh6bcKLLg@mail.gmail.com>
+Subject: Re: [PATCH v5 04/14] crypto: hash: allow DM hash in SPL
+To: Tom Rini <trini@konsulko.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
+ u-boot@lists.denx.de, 
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Chen-Yu Tsai <wens@kernel.org>, 
+ Samuel Holland <samuel@sholland.org>, Simon Glass <sjg@chromium.org>, 
+ Thierry Reding <treding@nvidia.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <u-boot@0leil.net>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marek.vasut@mailbox.org>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>,
+ Aristo Chen <aristo.chen@canonical.com>, 
+ Anton Ivanov <anton@binarly.io>, Daniel Golle <daniel@makrotopia.org>, 
+ Francois Berder <fberder@outlook.fr>, Peng Fan <peng.fan@nxp.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Randolph Sapp <rs@ti.com>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Alexey Charkov <alchark@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Anshul Dalal <anshuld@ti.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Francesco Valla <francesco@valla.it>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michael Walle <mwalle@kernel.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, E Shattow <e@freeshell.de>, 
+ Enric Balletbo i Serra <eballetbo@kernel.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Vincent Jardin <vjardin@free.fr>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Thu, 23 Jul 2026 00:52:16 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1784734960; x=1816270960;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=lUVZmt5lm1hpQkWR8jVnM8OZRl6bPk/mUOxk4J/M0pg=;
- b=IGHJWTVBxosVZD+EQIxJylReO6GR/ftyalVz1yMFdyyfhvaczpYq8Wwg
- JhcSUfVTUEG+HTUsUKIYeJgGy1mKwUqM0t97rrnx8KqbvRzzN53T6BVi0
- ysbZciMsVLTQCFngvBOwsxE+t3zjVxnWI6QeVfgijNZsdgmBInNVLy3Rq
- +ixFPQZUPBVZ850H0IGb2WM7+UXOd6testtVDXJKEITQF+p3vQwv3fVa5
- yd0z08cDJ0E/8DiE5eLdClceSyIimgAdkQQjeeeS0dbkiThM+pkQgztWo
- ZJVjxcvJQrc8ibry7JBvy2dXXgg9JWE7hAkZ4bX5VbVFKNo32NRtGPg8S
- w==;
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1784730089; x=1785334889; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=33JMVz9Y3GKW7zEX821I2SZXZdbAZGenx1LPPkuCFMs=;
+ b=qolQBiRIn6joUGzH7/HKaLdICiG13nExuX6c5GnTJwgVQkAQgUjtKaruTads5Ej3A0
+ ETIE23VNhAtgxMIoyhNtmdYRStaW/DdCWql9ylCmfZb/4D6zQYtmCZ2VPnIa6pucvzOC
+ BARYakhAVFZBytnXMyvPKSUruYRnC3s42/6L2QpbIPNKJXl33/V0BLD5y0c3w6jjwYwH
+ NxT6yG3ElmYXVe0kHJVVQcMeSGHoBUJyB9mjhJ8L/AIT9pQdEh7z6eyTn4JwZUj03sIp
+ ats5rJJysCmduFRtWfyfs4KPdeuh2jxNfU97Z5NXOhb8yLPgcjSNGPfbwbPnb3otYScq
+ T0mQ==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=microchip.com
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=IGHJWTVB
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=qolQBiRI
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none)
- header.from=microchip.com
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=656eedf95=Jamie.Gibbons@microchip.com
+ smtp.mailfrom=james.hilliard1@gmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.b="IGHJWTVB"; 
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="qolQBiRI"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -133,78 +204,51 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi all,
+On Mon, Jul 20, 2026 at 7:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Sun, Jul 19, 2026 at 10:13:48PM -0600, James Hilliard wrote:
+> > The hash uclass is currently keyed only by CONFIG_DM_HASH, so SPL canno=
+t
+> > enable UCLASS_HASH independently. Any SPL code using hash_digest*() has=
+ to
+> > rely on U-Boot proper also enabling DM_HASH, and the FIT hash path sele=
+cts
+> > the driver-model implementation with a non-phase-aware preprocessor che=
+ck.
+> >
+> > Add SPL_DM_HASH, build the hash uclass from CONFIG_$(PHASE_)DM_HASH and=
+ use
+> > CONFIG_IS_ENABLED(DM_HASH) when selecting the FIT hash implementation. =
+This
+> > lets SPL FIT verification use a UCLASS_HASH provider without requiring =
+the
+> > U-Boot proper hash uclass.
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> > ---
+> > Changes v2 -> v3:
+> >   - Remove the bare software-hash fallback scope
+> >     (suggested by Simon Glass)
+> >   - Document that SPL_DM_HASH needs a hardware provider unless a
+> >     phase-aware software hash provider is added
+> >     (suggested by Simon Glass)
+> > ---
+> >  boot/image-fit.c             | 50 +++++++++++++++++++++++-------------=
+--------
+> >  drivers/crypto/hash/Kconfig  | 13 ++++++++++++
+> >  drivers/crypto/hash/Makefile |  2 +-
+> >  3 files changed, 40 insertions(+), 25 deletions(-)
+>
+> The changes in here make me worry a bit about platforms relying on the
+> current behavior (because of the Makefile change), did you put this
+> through CI? https://docs.u-boot-project.org/en/latest/develop/ci_testing.=
+html
 
-This series adds support for the hardware random number generator (RNG) on
-the Microchip PolarFire SoC (MPFS) and fixes several related issues
-uncovered during integration and testing.
+Looks fine to me when I ran it through CI:
+https://github.com/u-boot/u-boot/pull/1014/checks
 
-The MPFS hardware RNG is accessed indirectly via the MPFS system
-controller using the mailbox interface. Unlike typical memory-mapped RNGs,
-the system controller mailbox is shared and non‑reentrant, which
-introduces integration challenges in U‑Boot’s synchronous, polled
-execution model during early boot.
-While integrating the RNG support, testing revealed that mailbox requests
-issued during autoboot could fail spuriously due to transient mailbox
-BUSY states. Investigation showed that the MPFS mailbox BUSY indication
-reflects multiple phases of the underlying IHC handshake, allowing
-U-Boot’s polled model to observe intermediate states that Linux’s
-interrupt-driven model normally hides.
-
-This series addresses those challenges in various ways.
-1. Adds missing infrastructure in the MPFS system controller driver to
-explicitly receive mailbox responses.
-2. Binds the MPFS RNG as a sub‑device of the system controller, mirroring
-Linux behaviour and avoiding the need for a device tree node.
-3. Introduces a new MPFS RNG driver implementing UCLASS_RNG.
-4. Enables RNG support in the Microchip PolarFire SoC generic defconfig.
-5. Replaces unbounded polling loops with regmap_read_poll_timeout().
-6. Replaces an immediate -EBUSY return with a bounded wait for BUSY to
-clear, before issuing requests, avoiding spurious early-boot mailbox
-failures and allowing KASLR seed generation to complete successfully
-during autoboot.
-
-The resulting behaviour matches Linux semantics where practical while
-remaining appropriate for U-Boot’s single-threaded execution model.
-Interactive RNG usage and boot-time KASLR seed generation both work
-reliably after the mailbox sequencing fixes.
-
-All changes have been tested on the PolarFire SoC Icicle Kit ES.
-
-Regards,
-Jamie.
-
-v1 -> v2:
-- Removal of patch 1/8 (cmd: rng: fix error handling for dm_rng_read())
-  after correcting the MPFS RNG driver to follow existing UCLASS_RNG
-  semantics (0 on success, negative errno on failure).
-- Removal of patch 8/8 (boot: fdt: downgrade KASLR RNG failure to warning)
-  after the mailbox sequencing fixes resolved the early-boot RNG failure
-  along with the correct return value fix above.
-- Moved `DM_RNG` selection into the defconfig enablement patch.
-- Removed special-casing of `-EBUSY` in the system controller path.
-- Removed informational RNG registration logging.
-- Added review/ack tags where applicable.
-
-Jamie Gibbons (6):
-  misc: mpfs_syscontroller: add mailbox RX helper for service responses
-  misc: mpfs_syscontroller: bind RNG sub-device
-  rng: add Microchip PolarFire SoC hardware RNG driver
-  configs: microchip_mpfs_generic: enable MPFS RNG support
-  mailbox: mpfs-mbox: replace unbounded BUSY polling with bounded waits
-  mailbox: mpfs: add bounded wait for BUSY to clear before sending
-    request
-
- configs/microchip_mpfs_generic_defconfig |   3 +
- drivers/mailbox/mpfs-mbox.c              |  27 ++++--
- drivers/misc/mpfs_syscontroller.c        |  36 +++++++-
- drivers/rng/Kconfig                      |   7 ++
- drivers/rng/Makefile                     |   1 +
- drivers/rng/mpfs_rng.c                   | 101 +++++++++++++++++++++++
- include/mpfs-mailbox.h                   |   2 +
- 7 files changed, 165 insertions(+), 12 deletions(-)
- create mode 100644 drivers/rng/mpfs_rng.c
-
--- 
-2.43.0
-
+>
+> --
+> Tom
