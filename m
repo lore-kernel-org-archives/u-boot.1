@@ -4,141 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D95D6C44533
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 08:15:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DEEC44539
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 08:21:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F2D12407DE;
-	Wed, 22 Jul 2026 08:15:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 48E52404EE;
+	Wed, 22 Jul 2026 08:21:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OyW7lZHho2Oj; Wed, 22 Jul 2026 08:15:48 +0000 (UTC)
+ id 5SJO1LWu8GXU; Wed, 22 Jul 2026 08:21:16 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8769C40842
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5921D404F2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784708148;
-	bh=vBjZPejt2dlNcIbLjW4+XzPGg9BWUzMI1UCjr/A1oSY=;
-	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=YkoPrC8TOvvwH7z7YSLXDiEcwHhQfRvceLw23iRPqtpoT3FKC29uNCzVpw+HPT33q
-	 9mVSILGYk7Q2CijHWrD+cvD8gNQKPm31g7HXPnVNFXuXX1RG2H1bkScGFRNRCvYKD/
-	 nS/3vuHznN0uygmh7dRpsRrNRy3ZnVLqnLZRnDOnraXs/esE70MgF5eUQJcDtEumd7
-	 OuwwDHiSM5/rbT3M3prj6osu7cBrxXgIquk45LQqcDUNgGqjelGxO1bT7gvlvXVDwR
-	 NyH8C+KcuImB7UUAgngIekPRYadLTN/S298Mlz0TO928ifLqtAydY1+CzGMuWo9WDs
-	 G7rVMfaKOmPTg==
+	d=lists.u-boot-project.org ; s=default; t=1784708476;
+	bh=ODgsihVb695BoM/Dc+CHRSZkQWKx4a7nLVjGzZZhNbw=;
+	h=Date:Subject:To:References:In-Reply-To:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
+	 From;
+	b=GDJKR11C+JsN/8672cWBliTD5aC87cqH8zjYKeSyYXriCtyfcLC3I52pshsOm7VeD
+	 szqFYNvmeEkU3/M//GZOxTxE7TOBNJ6XDCm7PWvPFQfIG8snqDzJ0+lWQ+C7XxQx1p
+	 yGNkguffLeyhpHVRaL7n1tQU0ayCal+lOAHijWCLWP4ZqCjnKcQ6FemrZuZpoc7eVB
+	 B5t4YzA/svQqUv1Dh7K2/x14rLNT9/V3Dlwe1XuoFinkdwwkmRauJc8ZuG2hrxkYNy
+	 lAn0BzYWm+gvhfOWJt4Dhry6OObhAED07LdhJAixradtty7LRMdmoTK6GN8dbDC3+Q
+	 tuY7mTXA0kp4Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8769C40842;
-	Wed, 22 Jul 2026 08:15:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 95B5710A3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:10:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5921D404F2;
+	Wed, 22 Jul 2026 08:21:16 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6772C109C
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:21:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 87DE2406F1
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:10:27 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4CD54607AA
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:21:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ur5uf0sVQ9Uv for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 07:10:26 +0000 (UTC)
-Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4ADCE40702
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4ADCE40702
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4ADCE40702
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:10:26 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fZYgBMDzYjNA for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 08:21:14 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org C69916078E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C69916078E
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C69916078E
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:21:10 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0975848BA; Wed, 22 Jul 2026 09:10:24 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id C4D368493F; Wed, 22 Jul 2026 10:21:07 +0200 (CEST)
+Received: from mail-wr2-x02.google.com (mail-wr2-x02.google.com
+ [IPv6:2a00:1450:4864:30::2])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1154803F6
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 09:10:22 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c15e2dab83eso1421031166b.1
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 00:10:22 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CFBE803F6
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 10:21:05 +0200 (CEST)
+Received: by mail-wr2-x02.google.com with SMTP id
+ ffacd0b85a97d-47825ef4012so3717744f8f.1
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 01:21:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784704222; x=1785309022;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=vBjZPejt2dlNcIbLjW4+XzPGg9BWUzMI1UCjr/A1oSY=;
- b=qNjknBwCT6T2n1ilF5jCVe01SHl9/9EmJeFXnItCmwv4Piuywp24YoiCyGhiTUxYBD
- /XQOBzPW/8twXqEm2b+7tIeFmz2tQLosla/kyBNzTS4Ak3HZlopA1OHO3Wy9UYh20FTx
- bkjAMS7Tj1myialb4Z/GLa4LNk9UzeHGnJA1DKcVKB89Y0Ma4CBsM4ijmvj3gsEW0Smb
- MKAWubnMK8dAWHJjSI6+HVoUXpwLs4cwluMK0A8XT9DUxkhFgh9x2BMfUCvDWlgCsnDd
- XsoUltMWb37Ryi7uG7VvKfapb00LeGSzKffDiqNt/9RhTFm0OxH1QH0cQMmwziPB4A4I
- 21Bw==
-X-Gm-Message-State: AOJu0YzofLPcfe3xSFdak52LGUKKiQi+duTepYMr8sPO8wQIo2gTK4dC
- Dpzw3Z9MR6MHI9H0MrHzDaWgoIpHTvU+MVnJKRD1oMBSPFMIwNfsNVXNnZhaX1gHUgw=
-X-Gm-Gg: AR+sD13qKeiuYGNOPx+2UegurD/Db93uzDWskqADKFWvIc8bxam6z8+8If3rMQTWQ7f
- PYw71ovx+pimkGlmNXRvtb4A3evuWYz1yl4rpPh9kYQz968homzVniF+eE1L4xTXUIbfcDG7qg3
- eIyEscER+sQFsyXAFReTXeBDkTQPTZjRnMnKRleiBYULRBOibUzrhRqIGMjhSLUn0ID2IOpfQVm
- UB/Ubsh9dtA0n5U6jtAWdmUJhZyGQ+f4Zd7LfzzdPdy5i+WMoHWcNz1TVKCM3Rw5bBJmW3pC+FG
- yQG80hPJSY0N2zdfgg9+g607f0gJE//VUS1qaSUT1Zvedv0LHfzytM6x3bH1KjMbIGJFhzFrkg7
- f+KEOARVG9WvvbjJX3vCjMh9PrJ4rDs/qJibkV/fN+PfuCdTKtmj2l5wnjpgOuVCEUxfkuTFDNP
- z+0Q3YJuy9hCDKrOJ4h1KlNhJQu+1tm9PtdiXGc9mW8F2ATnON2BYEfo3PoAU5UusGUQ==
-X-Received: by 2002:a17:907:94c8:b0:c12:695b:8876 with SMTP id
- a640c23a62f3a-c16b4727031mr1005970966b.5.1784704222259; 
- Wed, 22 Jul 2026 00:10:22 -0700 (PDT)
-Received: from [127.0.1.1]
- (p200300ff0f0aed000709884cf8c8be3b.dip0.t-ipconnect.de.
- [2003:ff:f0a:ed00:709:884c:f8c8:be3b])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1c32a74811sm60780666b.5.2026.07.22.00.10.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 00:10:20 -0700 (PDT)
-Date: Wed, 22 Jul 2026 09:10:11 +0200
-Subject: [PATCH 2/2] test: video: add regression test for RLE8 bmp overflow
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-video-oob-fix-v1-2-d6943f687c50@byteray.co.uk>
-References: <20260722-video-oob-fix-v1-0-d6943f687c50@byteray.co.uk>
-In-Reply-To: <20260722-video-oob-fix-v1-0-d6943f687c50@byteray.co.uk>
-To: u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Wayen Yan <win847@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Argus <argus@byteray.co.uk>, 
- shj <shahriyar@byteray.co.uk>
-X-Mailer: b4 0.15.2
+ d=1e100.net; s=20251104; t=1784708465; x=1785313265;
+ h=in-reply-to:references:from:to:subject:message-id:date:content-type
+ :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ODgsihVb695BoM/Dc+CHRSZkQWKx4a7nLVjGzZZhNbw=;
+ b=oIdVjPTo1hjSRuIbgLcGmJ1VGOPe5giZ+RqnsqwsDpmrlhbEmKKg9QEK068lc9uzML
+ bmBJAyvFHWO2bw2MeL3s7orrCqLwkT+yL8yQbBJVVN9fmfi5uHqEB9RguaN5ACkFCpDc
+ Lp1EygeKDqw0YYbSkpcMjO2zi7+IMibv1wv/eoxGeUDnk+UVxyz9S2BFnDPbRzVmqnvp
+ SWpzer7NAcpdAP/aO0LyAXQDVtsFPPF/50I493FsNtyOldizSovtklQbXTO4i+ahpw4q
+ T2VV5oSjCC+hsmMYsNupkWXIGNpc2gsRKN+IAMmxnTGdrFV76X0HnTK2os38M1leYGCQ
+ R5Cw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr7ZcQswH0M7Ugn+8s2M8mQN37ouq1lVBAL4DsvRij6qRjvsRK0jwBUtUV5sCEwftvcXBZjwSY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzO0D1Q6y5BZlb9f1+KLASrYlJaRR1HXYjOo1oi5JIwoVJIg0fF
+ 1z+jgTqyYUg6Z0OtUf6JoxpdR9tRKP5vCAssp+KduklLBvl5n6JuheGFiBKkirlj1OZFz4vUt7q
+ gVL1ZX5Xt2jj/Avo=
+X-Gm-Gg: AR+sD12zKZ6Zz2Y3YDoxpe7IdO7Bd13xtTMG4Qhh2fXHBMtd4OT7wUA9MDxSjyMxYBA
+ 0FOFn6lBI6DZ5K0VANsqF2sav5hK2OzpM3sOPR5IKMcB92Eh8NajBCzuZUNSB7psmhtxeeJL9+G
+ 6rn438Sq6y/UzPDMzNgjNwjXSHc9RfXTGI5mAExBLU6oy4NtRmzvqAS8omIdwjuvlmmUBXk9uNH
+ Sj0hYsh5YxdJQ/oHs/IMVM4D6YvQnpgrOmuaYOCf6AJCGsp2OI+ddrjnf/QiXSUfoEQx+bnsC1t
+ Gf49uVNqUII5/ZPTys9APQxrGl02CoL9mJe9PWrdT3jkC/MxA5KjPVKP7l4mCO8o14ZZPZjzXpl
+ MlwtRg/B4a4OPCDkRv8IUMtuIiv/DMQAlCurzDE/Bj431svX/5BSE3WXsbYwJHsaIJSodgQcj+f
+ V1FXZcDhObsOa+m9AH9wPfPCya+paksFsGVcEsPx/EzGJ6D4JZHrlERr8a
+X-Received: by 2002:a05:600c:19cc:b0:493:b877:fbc with SMTP id
+ 5b1f17b1804b1-4954a402fcdmr278536895e9.21.1784708464692; 
+ Wed, 22 Jul 2026 01:21:04 -0700 (PDT)
+Received: from localhost (host-87-0-90-136.retail.telecomitalia.it.
+ [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f85bc62basm3756954f8f.13.2026.07.22.01.21.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Jul 2026 01:21:04 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 22 Jul 2026 10:21:02 +0200
+Message-Id: <DK4YCL8ZC0DS.2FCC2V5ZDBKO1@baylibre.com>
+Subject: Re: [PATCH v2] fit: prefer the default configuration on best-match
+ ties
+To: "Carlo Caione" <ccaione@baylibre.com>, <trini@konsulko.com>,
+ <sjg@chromium.org>, <quentin.schulz@cherry.de>, <u-boot@lists.denx.de>,
+ <dlechner@baylibre.com>, <jstephan@baylibre.com>,
+ <GSS_MTK_Uboot_upstream@mediatek.com>
+X-Mailer: aerc 0.21.0
+References: <20260709104940.75514-1-ccaione@baylibre.com>
+In-Reply-To: <20260709104940.75514-1-ccaione@baylibre.com>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-X-Mailman-Approved-At: Wed, 22 Jul 2026 08:15:34 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1784704222; x=1785309022;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ d=baylibre.com; s=google; t=1784708465; x=1785313265; darn=lists.denx.de;
+ h=in-reply-to:references:from:to:subject:message-id:date:content-type
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=vBjZPejt2dlNcIbLjW4+XzPGg9BWUzMI1UCjr/A1oSY=;
- b=r5cnUcsJbcY4cblGDfJ/cWKwK92mkP8IvxqGsK2Lt/KAR5WKsyyqj663HONgZ2Guwk
- KCpbIc0siPhL3h1p6R47yp+UJ/BUUa8UCBRScbFvb2ZMAD7/5ELLexVC2yV6PCAxhO25
- GCxg07ITteaZFzsUseUpWdxXTjQHXW5aLf3YX5DGDZ8ApWFPMa8eNxTyz/oQNKe4vtLF
- OT72dnO3Hsz3R9y/c3h9cNOd9LqPuxxeCSaS5MSrUE8ncdCPlYVwSfCIMwEL33lUedlM
- N3aqudoVmWp7FDtTKKolwfCMQMDG0yjYJyo7sL4EWhGsJTEKbMt/bhz+JibjVPhq53ln
- 9yuw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=ODgsihVb695BoM/Dc+CHRSZkQWKx4a7nLVjGzZZhNbw=;
+ b=CO6suQeMU9htdSw33ys0dKurzOp41gxv1DeykV16pGwbJ3Mvv8F7RgrawVQjaQN5uS
+ mg3jI7HgaTuCgf7hPrLLh97ZbtYhl50jNOyHxec6uyGceSsTDC/nkzl8iQyhvXwPWKsx
+ M2CTnpvH1JAI2b5wC4G+XP4GX1tYg4ImaVCwTc+WDbuAdxHtmlazbdSKeyHqjjMjz6HM
+ DXTJCJh/plj1QigQ+thOzNVD0up11eRydcMOwxomXFceD9Pa2OqiaDfJs38yhKSLMptd
+ swCPmvrVB7Kf8oFTdsFiJda8Wf2AUysWlJhXY7IZ2zfnuy2MXjl/5axXfBC/8dV4lWxh
+ XZCg==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
- header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=r5cnUcsJ
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=CO6suQeM
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none)
- header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=shahriyar@byteray.co.uk
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=ccaione@baylibre.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.b="r5cnUcsJ"; 
+ secure) header.d=baylibre.com header.i=@baylibre.com header.b="CO6suQeM"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -151,83 +146,42 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: shj via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: shj <shahriyar@byteray.co.uk>
+From: Carlo Caione via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Carlo Caione <ccaione@baylibre.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add a DM test that displays a crafted RLE8 bitmap whose decode cursor
-is driven below the framebuffer.  Without the preceding fix
-video_bmp_display() writes out of bounds and returns success; with it
-the image is rejected with -EINVAL.
+On Thu Jul 9, 2026 at 12:48 PM CEST, Carlo Caione wrote:
+> With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
+> configuration matching the most specific U-Boot compatible string; on
+> equal matches the first listed configuration wins and the configurations
+> node 'default' property is never consulted.
+>
+> A FIT whose configurations all share the same base devicetree compatible
+> (e.g. one manifest carrying a base tree plus overlay combinations for a
+> single board) therefore always boots the first configuration, silently
+> ignoring the default chosen by the manifest author.
+>
+> Break score ties in favour of the default configuration. A strictly
+> better compatible match still wins over it, and FITs without a default
+> keep the current first-listed behaviour.
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+> ---
+>  boot/Kconfig                       |  2 +
+>  boot/image-fit.c                   | 20 ++++++++-
+>  doc/usage/fit/overlay-fdt-boot.rst |  6 +++
+>  include/image.h                    |  4 ++
+>  test/boot/image.c                  | 68 ++++++++++++++++++++++++++++++
+>  5 files changed, 98 insertions(+), 2 deletions(-)
 
-Signed-off-by: shj <shahriyar@byteray.co.uk>
----
- test/dm/video.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+FWIW this is the link to the PR changing the spec [0]
 
-diff --git a/test/dm/video.c b/test/dm/video.c
-index ecf74605..48ec60c4 100644
---- a/test/dm/video.c
-+++ b/test/dm/video.c
-@@ -424,6 +424,56 @@ static int dm_test_video_bmp8(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_video_bmp8, UTF_SCAN_PDATA | UTF_SCAN_FDT);
- 
-+/*
-+ * A crafted RLE8 bitmap whose decode cursor is driven outside the
-+ * framebuffer. Two End-Of-Line escapes move the cursor a full framebuffer
-+ * below priv->fb while the scanline index y stays in range, then an
-+ * unencoded run attempts to write there. The geometry (1366x3, 8bpp on the
-+ * 16bpp sandbox display) makes the underflow happen after exactly two EOL
-+ * escapes. video_bmp_display() must reject the image rather than write out
-+ * of bounds.
-+ */
-+static const u8 rle8_oob_bmp[] = {
-+	'B', 'M',			/* signature */
-+	0x46, 0x00, 0x00, 0x00,		/* file size */
-+	0x00, 0x00, 0x00, 0x00,		/* reserved */
-+	0x3a, 0x00, 0x00, 0x00,		/* data offset (58) */
-+	0x28, 0x00, 0x00, 0x00,		/* info header size (40) */
-+	0x56, 0x05, 0x00, 0x00,		/* width (1366) */
-+	0x03, 0x00, 0x00, 0x00,		/* height (3) */
-+	0x01, 0x00,			/* planes */
-+	0x08, 0x00,			/* bit count (8) */
-+	0x01, 0x00, 0x00, 0x00,		/* compression (BI_RLE8) */
-+	0x0c, 0x00, 0x00, 0x00,		/* image size */
-+	0x00, 0x00, 0x00, 0x00,		/* x pixels per m */
-+	0x00, 0x00, 0x00, 0x00,		/* y pixels per m */
-+	0x01, 0x00, 0x00, 0x00,		/* colours used */
-+	0x00, 0x00, 0x00, 0x00,		/* colours important */
-+	0x00, 0x00, 0x00, 0x00,		/* palette entry 0 */
-+	0x00, 0x00,			/* end of line */
-+	0x00, 0x00,			/* end of line */
-+	0x00, 0x03,			/* unencoded run of three pixels */
-+	0x00, 0x00, 0x00,		/* pixel data */
-+	0x00,				/* padding to word boundary */
-+	0x00, 0x01,			/* end of bitmap */
-+};
-+
-+/* A crafted RLE8 image must be rejected, not written out of bounds */
-+static int dm_test_video_bmp_rle8_oob(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	void *bmp;
-+
-+	ut_assertok(video_get_nologo(uts, &dev));
-+	bmp = map_sysmem(0, 0);
-+	memcpy(bmp, rle8_oob_bmp, sizeof(rle8_oob_bmp));
-+
-+	ut_asserteq(-EINVAL, video_bmp_display(dev, 0, 0, 0, false));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_video_bmp_rle8_oob, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
- /* Test drawing a bitmap file on a 16bpp display */
- static int dm_test_video_bmp16(struct unit_test_state *uts)
- {
+[0] https://github.com/open-source-firmware/flat-image-tree/pull/59
 
--- 
-2.43.0
+Cheers,
 
+--
+Carlo Caione
