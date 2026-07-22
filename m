@@ -1,170 +1,168 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D32C44532
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 10:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76816C44539
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 10:58:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CC9CD80DD8;
-	Wed, 22 Jul 2026 10:52:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nhO1O4QQ2avv; Wed, 22 Jul 2026 10:52:51 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 23EB380D3D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784717571;
-	bh=NG7+CiIYAe9z3OgH+UN23MI8fDsqunJZGmyPftsSh3U=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=iwec1QxQgZt3BeVRZf2d4miZAfh9FAVJFZcj3cP5dtCzG6bOdWKTAgxu7EKEyzVE/
-	 xkl8BhU/xhTTaFoObi4MDbdHXzcAMMV9PJX5OZZqPtUP93lbsM9gfuWMgCEIe+Kgej
-	 KGMgz5/xZfFpaQ2+raS3TNUAJImiwZSPSAwKjWoT4jKr2ZrKStAASbU4RqNpOG2zk5
-	 y/3UBE12R2KxhlujNKZSqQQGaZaoMhcPMj++Mq6F14KCURyAzw3/pqdowhxDnpZP7Z
-	 PRw/qoKNcFMEGpCHpi1AEf9qThx7bNY0W0mJ62W1YzZ7bTN17D9QAmrGnKQkbI5NPK
-	 IwXAwJLVRXq/A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 23EB380D3D;
-	Wed, 22 Jul 2026 10:52:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1CE5B390
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 10:52:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0327040874
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 10:52:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1C73540874;
+	Wed, 22 Jul 2026 10:58:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id azez4hdS42Fl for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 10:52:49 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c207::3;
- helo=mrwpr03cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1F8F840873
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1F8F840873
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1F8F840873
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 10:52:48 +0000 (UTC)
+ id ga0dizY2102p; Wed, 22 Jul 2026 10:58:28 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 417EE40880
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784717908;
+	bh=+c7bByuxeEhsNuslwGmPj9916Q7kGnSmxhHvTk6EPak=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=w9X0Wz2W8IPTPAWpmtM6uOZr1Sdg9L6zPu3G88H5vzZW6ZPMk215QxKFgV0PPN6Gv
+	 +UIzC9uc8VqdK8Rqs8KuPIB1TueFWnIp80QURIH7vHNRPognYrR89hj5vBbaUGYAJg
+	 1OBalQRffeCaB7b4HhbI+jLjU7DY9X0Sy4xXBDyGLp7sgU0e/Y3Ri/tdQr1lOcTktv
+	 aNtkiqsOdojdMoxdPFb3BCbzSQ7CFYNaWaT9rSxayHbgdf9vNXEjg8xtRGvpOU+CK5
+	 pRc9cN7WIn0iwL55LAeiwCRFRuorgLrSWiL9l15WGD3e/qqTX9gq9qqisXSCgf5HCU
+	 1ySLEWzGjtM7A==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 417EE40880;
+	Wed, 22 Jul 2026 10:58:28 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C7391099
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 10:58:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id F1C6540080
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 10:58:26 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vEbb_AIJp9Ky for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 10:58:26 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=juuso.rinta@nokia.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org AB0494007A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AB0494007A
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AB0494007A
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 10:58:25 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CB658848BA; Wed, 22 Jul 2026 12:58:23 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C12018493F
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 12:58:21 +0200 (CEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=krfR7Ei8xaIgGpeQIbMnzl0FsKYCUaYtLEqGv05XL83cOLb7E0/2dM3aQPj7Q8VVnRujG+fV+BvIXuw600k2PSmVBKP51Ds4eRXa+mTfzCdyH7TKThFWRlExgKQs5ifMnZbrq9wAgcrhKuoExzWjZJyjnxCfgL8teyag2G8xFCl/DKU3YNu3oHwLp1ENBcQVAiK7YccXio5IBjjcVldHHP3wzLzCDnqyV3Y5GBV2HJnooCIQBVtqbitjHXv4FX+/A2EtiXjDwp6yCR6uviP8aP2mq6vqHOiwonuxdJ96zowJLDqcbu0FrE2kQwN1UDLvTN3JxooNL8PW174wpDtUFQ==
+ b=JuFaIlcvHwLLgce459PlhaEDgPsmvbTFLADWsEAn9HWKIsx991INiItbSo+4IvoZyIDvxpCub+OHK9PFrbQRMgmabawsY9GLmhyaiN4bHRYNvREDZT9GoC1l73L3iFtCuXp1Sn3+qKW0+ifwVdq9w6Aatg/gnkUv8OLkRYjt5Gms7ZUYgNPl1Cihb0SXcUSFWsvmha7s6U0Sac5zqrMyuj6ciTzS/sRtG+iNqfRjSFY6Eh4qhpEcwi4BzwGCXF5DmwQu7ZhFlQtKm+ZvY9IwqH/OvpVMXCkfkUqsL5WELaasRTPZvdgWigoi4s1nvT6wlr54H8FijV95M9hwg5NLDg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NG7+CiIYAe9z3OgH+UN23MI8fDsqunJZGmyPftsSh3U=;
- b=etfYu29VmEL4c7UPkRrAcbLGDBHuCZ+omp48izUZQ2p8a29FyGet0pOWohRBwVYR8OIJvAK4mzWubwZvyzuuAgjfCFUIgDvKFrk7HtKxo7mUBZRdH5zutfMUgUJBqX9r3nYfSYnCLKmeahezvoFxTYOrrBY1VOpRWB17Vjt4yfBLEIJkjIKQ+wcgPjPrS60befwVKzxKXC8Nw+FLSNxJeYx2f9OF97mpsfLS8vd58V1LWzzDbhDLeOFqzUnaFvoz7gR+P54EKSwvJhJEkMpScUmGUiEAdgjNd5H2MWnd/+vr6ruOFffyFsEb/sL4F4rPGw3whBKSkhjt2jA282cbcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by PA2PR04MB10513.eurprd04.prod.outlook.com (2603:10a6:102:416::15)
+ bh=+c7bByuxeEhsNuslwGmPj9916Q7kGnSmxhHvTk6EPak=;
+ b=sDunkDighaKwSCvae0MFhW6OGbNY+uwiqM+PqFnh+i7Wg7PhYCc9lTI7oYYYyHPAlv5yVk+vnYANcJzsUMzz8YBMyR6L4fYVnWMpoX6iePvUuYbcS2q81mqoYuWlUMGXACDVH3vYtpOh3DJNkkjCVuDGv6BOZE+1Cum/r8DeNPSKtB1Y067c70aQ0aWPA8+qtYEhd/C+H8c0KemtqCcuGK3DigUvYzhCkqCpxbzw58W3mdAD8/i7svToOarikLkhMXlkMOK46pxYx7fasppXGRKIXoUraFE0RU+G5/dHaWgQDGek8HM+lF42kk49NXtJCFzmcZ7VIGzQVfVtd0Y1/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 131.228.2.84) smtp.rcpttodomain=chromium.org smtp.mailfrom=nokia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nokia.com;
+ dkim=none (message not signed); arc=none (0)
+Received: from AM0P309CA0001.EURP309.PROD.OUTLOOK.COM (2603:10a6:20b:28f::35)
+ by AM0PR07MB6292.eurprd07.prod.outlook.com (2603:10a6:20b:152::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
- 2026 10:52:44 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0223.017; Wed, 22 Jul 2026
- 10:52:42 +0000
-Message-ID: <1bedb50c-6f99-4f6f-946e-2dec47d20624@cherry.de>
-Date: Wed, 22 Jul 2026 12:52:41 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] mtd: spi-nor-ids: Add XMC XM25QH128C
-To: Fabio Estevam <festevam@gmail.com>
-Cc: djw@t-chip.com.cn, sjg@chromium.org, kever.yang@rock-chips.com,
- u-boot@lists.u-boot-project.org, trini@konsulko.com,
- Fabio Estevam <festevam@nabladev.com>, Vignesh R <vigneshr@ti.com>,
- Takahiro Kuwano <takahiro.kuwano@infineon.com>
-References: <20260722013642.1011666-1-festevam@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260722013642.1011666-1-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIUP296CA0020.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:34e::9) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.4; Wed, 22 Jul
+ 2026 10:58:19 +0000
+Received: from AMS1EPF00000093.eurprd05.prod.outlook.com
+ (2603:10a6:20b:28f:cafe::c) by AM0P309CA0001.outlook.office365.com
+ (2603:10a6:20b:28f::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5 via Frontend Transport; Wed, 22
+ Jul 2026 10:58:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.2.84)
+ smtp.mailfrom=nokia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nokia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nokia.com designates
+ 131.228.2.84 as permitted sender) receiver=protection.outlook.com;
+ client-ip=131.228.2.84; helo=fihe01smtplvp01.emea.nsn-net.net; pr=C
+Received: from fihe01smtplvp01.emea.nsn-net.net (131.228.2.84) by
+ AMS1EPF00000093.mail.protection.outlook.com (10.167.242.90) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.5
+ via Frontend Transport; Wed, 22 Jul 2026 10:58:19 +0000
+Received: from updev-hifix-1-5g.devops-fwk.dynamic.nsn-net.net
+ (10-175-3-186.he-pi-os-dhn-100.nesc.nokia.net [10.175.3.186])
+ by fihe01smtplvp01.emea.nsn-net.net (Postfix) with ESMTP id BB74880000AE;
+ Wed, 22 Jul 2026 13:58:18 +0300 (EEST)
+Date: Wed, 22 Jul 2026 13:58:03 +0300
+Subject: [PATCH v2 5/5] test: wdt: add a test for max_timeout_ms
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260722-rinta-watchdog-gettime-v2-5-39e249500543@nokia.com>
+References: <20260722-rinta-watchdog-gettime-v2-0-39e249500543@nokia.com>
+In-Reply-To: <20260722-rinta-watchdog-gettime-v2-0-39e249500543@nokia.com>
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, 
+ Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Aaro Koskinen <aaro.koskinen@nokia.com>, 
+ Juuso Rinta <juuso.rinta@nokia.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784717898; l=4403;
+ i=juuso.rinta@nokia.com; s=20260428; h=from:subject:message-id;
+ bh=Q5UICXGr9TroOg1obVrNc4woBqdUBo9Q4zm827KakqI=;
+ b=5Qevm1i1MzemEdSehSCWwCej5NAZoFDuTLhNyZABdJzUv69gpQX80wuGQRZBEHBQOxj68ZQV5
+ R6s6EvRNEjsDjkyAKgoAv9sbJOLuWVezJQwln45TgsZqtIgq2Fmcuc6
+X-Developer-Key: i=juuso.rinta@nokia.com; a=ed25519;
+ pk=CnH7U1WPlQ4t8gHpzhFvPnTjoealqDnbmbLMYEd5GDQ=
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|PA2PR04MB10513:EE_
-X-MS-Office365-Filtering-Correlation-Id: b3205174-f1a4-4273-4ac4-08dee7df5aea
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000093:EE_|AM0PR07MB6292:EE_
+X-MS-Office365-Filtering-Correlation-Id: eff357ba-ee2a-46eb-bebf-08dee7e023d7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|23010399003|376014|10067099003|11063799006|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: GieFg4q0JYQTQdOMP3MtrDcju/gD/gk/TmqG2B63tGJpLwQWVk4HPUkYCtICwZe8JB8aPPQajvN0eTm4qliWEbINRiHl8vR6nj2NIcJeyjzym8hvmy1Uyekz8rIQtm1UJJ1Nn/PUKTBMIbkwkFWn76XRFbb5hw2nt+0hmn4/RfpMzVa3Mn+c1yNJzuRBcJ8MkvA33OyHAw0YY049L6zBQOC97P04qeVgU62Sh6GIXuOzL/m23IuAZmugEtIzA+zdGSBMWXz3JwIYsKSsndIxqg+9geCfUQNDhBWr0EnPSYBUvns+ayZhrWiCtB4TkYWZWGZxPNxEaT/dZzvuAeYZGaJ47w6CktXC2VZQx4jtIfUd+u/Q1T3NkfHze4Uo4lLVmzp/KTH9ax7f+ryckzNQ9R4JFef0uqC8JRIGzz7FGohPJKS5IOBQSJmqj0v3rQSUDixUkJ+NgslR6CcdQPSBwahuMPmnvM0xKU6uEpY6GiHQKYCQILQ4rPiJB9cRO6BYjjzUNuBwwS6bnPNzZefb3UwitGdfpf20s5K0qTRF5C9BODx0GCdhDQ0RjF5ctvkzr9eB+9bp9CLG5yyS5JO4JjzYnASm41o8SbeAN/Ux1KtQYA3QKj5C13+CTKqSZb1dKtDbcypuMtbXfRmeODLREAYqj9dvbZkqtVu9oQ2iLHE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003);
+ ARA:13230040|23010399003|82310400026|376014|1800799024|36860700016|6133799003|11063799006|56012099006|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 6P7bOfbupxF43SIorg4Y7k1Gnl4zu7Zhx/RqSEL5yBCmP5IidaEuGteqTFuVQl54JgAplZby8FiESdRbRmlCNv0+MevZGREyU1bkl96qncliQ5ikSt1S0++eVjtnf6i8zPSgcqfQFoeqH3+s8Dfp8zzY6U6FZ/gb6KgFYG7YgZztBifBPpTQ0THD8sSl1bzCJ+GGAexQmBPmOaV60qxYl6Q2QeIJZXB9WJAXuHnL77qPJDBaszgICULmRENL3jKt5jxBb/SFsY9szaNc44WrajvUEicggc5u7QU8D9Yxzfy3B5FIwPnd0MxcNYT3rf5WTmsVo3T6GdfhpK4YGw1qUdE7qKw9ANFf5W3BZtFB50eJ8gytIOAy7VQwU5on9U1CbgTYnBhu5aTEAR3KW+H5YMblK/peUFOW3C9TD4AI/6h5/mf9hBBgT2+SIM8KEMLf6CSDEQ+RUem8lovuBDuhT+kaX37NHOOxvIDZawTb8EW1o+KRkKPOAVceD3BGKcSgI9qLPjSh7E/WHzlY54BR14jiX9M5X5PMdED8jqQYgyD/DrROHyAEBOhlbyTR3uOZLI9nO/6CwLimB2IGT2fIMF+m+aMVP8Bi+uaYyDWTC3QtfCpI9vtVIVnmhLB7iRSROVOdVG1v5AR+oFkOo3w9nW28IqJGV1EVGBf9zYEAO5dwriiiDAj/a4dClj1ljSaB
+X-Forefront-Antispam-Report: CIP:131.228.2.84; CTRY:FI; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:fihe01smtplvp01.emea.nsn-net.net;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(23010399003)(82310400026)(376014)(1800799024)(36860700016)(6133799003)(11063799006)(56012099006)(10067099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cGNJaVFxeDcvbGtRemtMekdRcjJrOXlyTXNFUmNHU3BzaUdTZHFoR1NOWEs3?=
- =?utf-8?B?aGFjNGpWdFgrSmJiS25xU1hwUFVPZ04wTjFlWll1Mjh6aTNIOFFVc1FaQXRC?=
- =?utf-8?B?T3ZYNjczdkN2bVgzQTR4cGZZQ3BaVlU2YnN6bUM4QlQwWmkvMmFHVUdPc1Y1?=
- =?utf-8?B?N0V5b05UQlBvMC9oZGh3R2ZJTjBWTm9uM2Fib2JDeGVpU1JDWnNuLy9JK3Fa?=
- =?utf-8?B?QWFnSjBxZnlOdGtxaTY1YUcvcHE3YWxEdG5PSEpidFBiV0paMHdIOGRSdSsw?=
- =?utf-8?B?emJ1U2lWai9zdk9WaXRJQTFxSEU4YnlUQUx5ZXZGdzgzVi96QVRNbHIyK21z?=
- =?utf-8?B?Kyt6WXlzcFJaelJuaU5IZG9iV0owUHFsZVl0WnB3b2ZxcGJTcktpRzlkS0ox?=
- =?utf-8?B?T3N4NzhKRkdxK2JQKzlKbkV0WUZiMXdPNVRBczBabXQzRGdvUEE2MVN0R3Vh?=
- =?utf-8?B?MnQ1SVo4R0VMWG1kT0hIaEdEYkxwNDRuem0ydVU3dFlHWHo4WThmM1M4cGl2?=
- =?utf-8?B?T01DZGNERHNhTUhKYnk0TXRQVVhMLzZEenczMEk0VkRZK2VHa2FXMkN4QmRm?=
- =?utf-8?B?VXVlYUk2SnczVVltbStkWThNRlJJZFNEZkNKODdoOHAzNVVpQmRpb0lGQU5L?=
- =?utf-8?B?Y0VoU3FHTDNaN1Q3ZCtSWWJjcC9IMVZ1TklmQnVmRTk3c0oza0hxYUg1dElO?=
- =?utf-8?B?VkxHOGJPRjJROWFGNGREYWZOTTcvOG83bTA4bjd5OW1kTXhVVGYvR0M4ZFRB?=
- =?utf-8?B?ajBQTkVEQnAraVYzYzVEWnFCTFdIUndMdHpXOHBXc1RMdHhYdWNKTytCdFA4?=
- =?utf-8?B?a2orejVHWitvUHdqZkJpMjdxY2cxQjl1NGdENlVaODlJc2pJWVU4N0JpUmE5?=
- =?utf-8?B?a0NWNVB3cVhCcUozeHlmMU15QXlSSTN0NEtUai94dGxEbnlnSStsK1F0bWU2?=
- =?utf-8?B?M3h0RzRjb3JiQ3daUm1PLzJrOXI5cTFTc2tZZzJTdWdmRVl5eVdzK3NGVEs2?=
- =?utf-8?B?MSt1SDRVZEdPWDZTenh3alpraVJPQmNlVVBodFQwMW5RSmRINEZHbzlBMUlh?=
- =?utf-8?B?T05MTUxpVmdwei92SVNJR0hjMCtSV3Flb2xPeWJHVGhSYnR6TFZDQTRxdXBl?=
- =?utf-8?B?VjNBQnJoay9YWlRYRllnbkg4SjZCOS9aUys3ZGNDTTVIZk1SUlNhRlFrNHpJ?=
- =?utf-8?B?Q0pwQWpCWTIvWUdIcE81SHpTVVlyWTYrZzhDWTBtSkVOcEhTL0J2bUpncnBO?=
- =?utf-8?B?TVR1Um9ibllDSjF1Ry84NmR0Ri9pOFdBTmJXbEIxbnhrZEsxcHZrajM2bkdT?=
- =?utf-8?B?ZGFsNkpoaWtUeWFhM2toZkZDWGZ2RGg3cC9NbTBsSklabWV5TE1CSThmWmoy?=
- =?utf-8?B?L3ZEU3VnTHdIV0VlZGRVZFNtdWtiV2IybVNGalpoMU1qcllXUDNIaXNvS0sw?=
- =?utf-8?B?elZsaG55MVlPbGpReGhyR1JEMUhHazNwNUR1bjY4UFdKdXN3bDhwZ2orU1JW?=
- =?utf-8?B?b28rSkM4SlBXVkN2QzNpcTdYNjFQTDkyWkRYK1c4ZmpUMFhQRnJSaWIzcWRv?=
- =?utf-8?B?RG9LbStNNnBjNkZiZkxWNzNNVmYveFlVTlorUHdqVUFTYlJuUnlmYUZIRzVi?=
- =?utf-8?B?WUF1ZUJlaGxHeUhvQWtUQ3JqbDNRQXJCN3Q2TWtXMlFoMXFlV2w0bFhraFVl?=
- =?utf-8?B?WkVzV1ozZFFDQ1RkMjNkL3lhV1I1VGR0M2tYNHFicDh4SHVLMHRITGY3d2kz?=
- =?utf-8?B?QS9kVTdQMUJjNC82NGFsRENMM3BuMHNEcFRmNkFLeVlpNFY5cHRrN2ExM2gr?=
- =?utf-8?B?UlJPWWNRMERKTHM3cGkvYWJDQTN6cmg2RHg1b3o0YUNHc1RtOExycEZVL0pK?=
- =?utf-8?B?WHF5azNRc3VyQjMrVGVVZm0xc2t4dFJZaTN1bi8xZHNnbnpFaFQrTEk3ZHZF?=
- =?utf-8?B?V0xESmphcHd1RTQ2NzRXWWpHZitib3cyRXlITG1IelVGUVhyL1VTaGhwVWty?=
- =?utf-8?B?ZDBzUncySEpNeEcrZ3l3RTJiY0FEYzJzb2hHT2Y1cTV4a3duL29vNVQ5b2xj?=
- =?utf-8?B?OXR0WGRjYkZkSnJhZW8yTzZYdjBrNENEMHIvVllzVHVuZWpDZFErTTFZQlJP?=
- =?utf-8?B?NkZvS1BWeFVEbFhONGl3OFFuVERKVzErRXpxRm9LSE15aktPRDFrV2xpWlho?=
- =?utf-8?B?SmNwWGUyRTRmOXVNQW5GK2lRVWs0cGxaejROeGVYaEI5RnVNWm1mQjNwZjNp?=
- =?utf-8?B?Z3UrK0w0Y1dMM1g5QmFZSG4wR0FVaXoyU21rbTNKNnpHK0VOWXdUWStnaHV6?=
- =?utf-8?B?R1lMZXRDRnNsQkFVR1paZitRRWFQeHExYjRJV0o3ODNlQXJhamhvZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b3205174-f1a4-4273-4ac4-08dee7df5aea
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: qBk3+PCUxaQOPOvSt6yowPpFLfTvliBYYxz///ZYFicsy0j4l3sd99ZWZEDNBzq2AnVXQslmpvUdU4nwV8vgNPMSmBfT51U+T7NiilddDPR5yxUBnTJB+PAmWVOpCxcGkv6Wm2wT692ksYMO3XazPn///+I5iqMeVn69tbSVjhGV3OrfPbaXLYOzYikjSm4Gctipzchy6UwuwrKGrF7SyZiaY6s7Fn94qeW8fNnM+AeTABXnj0NsMVYh2DkeBLRarE+fFhP0XRnzXw/KEcaTKr3wCWGO2AUcIJD5wcW1D84kYeCsIcO966ZEw13q2mtANJDEKgHuobYQEQtB9wkf9UVFQ6vm6PBvfkKz/Sj11/l/iblPqgvxoqmktS7bpf2Won/hXz2lTOmbP3Feh/q4OkLSSW6mE31wA+7sYzNbqCxf8trUml/ztO1XoLbh8iCA
+X-OriginatorOrg: nokia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 10:58:19.2059 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eff357ba-ee2a-46eb-bebf-08dee7e023d7
+X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.2.84];
+ Helo=[fihe01smtplvp01.emea.nsn-net.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 10:52:42.6082 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WJphq42Tph20wo/QL9WgYPrF76oVhbojRn1whCg6ykFn4mBTBCBeaaxaklgXH25+Ou7Gx6slgOr88NHsYgambSnsf2e8UU1iTPaeh5UwYIY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10513
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AMS1EPF00000093.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR07MB6292
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
+ d=nokia.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NG7+CiIYAe9z3OgH+UN23MI8fDsqunJZGmyPftsSh3U=;
- b=WiDm3HhQ8OjE71P/PY89711s+xps1p9O02QErMp7IWD8lHOhzsd8bZA72rdAe9Ou/liDnt3BCsyTKsdmX2pMuKO1pn6GvxLU9rF8FsRHcM4RDjNzL9Aw5sGBKpUSo5Q6XAqtZa8OB3+FREkg8LsKPSh/ScaSvwNAi/ZU74gpw/U=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=WiDm3HhQ
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
+ bh=+c7bByuxeEhsNuslwGmPj9916Q7kGnSmxhHvTk6EPak=;
+ b=gLXhNE+PFygec/PXQFHZU25bcd1bo9+LFmP831Fw9o2qlxn0Mk3KeNfBfin3GLZ41HsEzjaKxc2P3TbpJ/cqJWErXeIy46ECNptol5Y1cGsZVDPrp9VZ2Mx8RK2osRMN/vgf23QuN316QtWHspoeBC2Ckl/BBegS29SqFHvvOKcflvsiAzCAdP0re0xn3gd1Bl66kDIEU29cc6ql8OfcecfCLQqjaW3PXdcNe5gx6DJ5uPzbw3CH5qWNV28XeSlJOOZT4+ISTFuOBMo/HAIRT88Ri+Ybw4Kjss8Twb+xynGehHOH42Zh2nZg6eS+CLmvRpfhcGYpJb6+aYNSiLo87A==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=nokia.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=nokia.com header.i=@nokia.com header.a=rsa-sha256
+ header.s=selector1 header.b=gLXhNE+P
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none)
+ header.from=nokia.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=fail
+ smtp.mailfrom=juuso.rinta@nokia.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=nokia.com header.i=@nokia.com header.b="gLXhNE+P"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -176,39 +174,146 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <quentin.schulz@cherry.de>
+From: Juuso Rinta via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Juuso Rinta <juuso.rinta@nokia.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-+Cc SPI-NOR maintainer and reviewer
+Add a DM test for the case where wdt_start() is called with
+a timeout_ms value greater than the (emulated) hardware-supported
+limit.
 
-On 7/22/26 3:36 AM, Fabio Estevam via U-Boot wrote:
-> From: Fabio Estevam <festevam@nabladev.com>
-> 
-> Add the JEDEC ID for the XMC XM25QH128C SPI NOR flash.
-> 
-> This is a 128Mbit device using 64KiB sectors and supporting 4KiB
-> erase, dual read and quad read, matching the other XM25QH128 variants.
-> 
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-> ---
-> Changes since v1:
-> - None.
-> 
->   drivers/mtd/spi/spi-nor-ids.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-> index 31a2ba49a87c..90aa1025176c 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -673,6 +673,7 @@ const struct flash_info spi_nor_ids[] = {
->   	{ INFO("XM25QH64A", 0x207017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->   	{ INFO("XM25QH64C", 0x204017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->   	{ INFO("XM25QH128A", 0x207018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-> +	{ INFO("XM25QH128C", 0x204018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->   	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->   	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->   	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+Add console-print asserts for both the clamped and unclamped cases,
+as well as for the per-device uclass-plat data max_timeout_ms field.
+
+Add matching tests for the GPIO driver, which does not set the
+max_timeout_ms value.
+
+Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
+---
+ test/dm/wdt.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 47 insertions(+), 2 deletions(-)
+
+diff --git a/test/dm/wdt.c b/test/dm/wdt.c
+index bef29591d5a..d86620b25ab 100644
+--- a/test/dm/wdt.c
++++ b/test/dm/wdt.c
+@@ -3,6 +3,7 @@
+  * Copyright 2017 Google, Inc
+  */
+ 
++#include <console.h>
+ #include <dm.h>
+ #include <time.h>
+ #include <wdt.h>
+@@ -16,34 +17,68 @@
+ #include <u-boot/schedule.h>
+ #include <watchdog.h>
+ 
++static void format_wdt_servicing_str(char *str, size_t len, struct udevice *dev)
++{
++	if (IS_ENABLED(CONFIG_WATCHDOG)) {
++		u32 reset_period = dev_read_u32_default(dev, "hw_margin_ms",
++							4000) / 4;
++
++		snprintf(str, len, " with servicing every %ums ",
++			 reset_period);
++	} else {
++		snprintf(str, len, " without servicing ");
++	}
++}
++
+ /* Test that watchdog driver functions are called */
+ static int dm_test_wdt_base(struct unit_test_state *uts)
+ {
+ 	struct sandbox_state *state = state_get_current();
+ 	struct udevice *dev;
++	struct wdt_uc_plat *plat;
+ 	const u64 timeout = 42;
++	char svc[40];
+ 
+ 	ut_assertok(uclass_get_device_by_driver(UCLASS_WDT,
+ 						DM_DRIVER_GET(wdt_sandbox), &dev));
+ 	ut_assertnonnull(dev);
++
++	/* Sandbox driver sets max_timeout_ms during probe */
++	plat = dev_get_uclass_plat(dev);
++	ut_asserteq(SANDBOX_WDT_MAX_TIMEOUT_MS, plat->max_timeout_ms);
++
+ 	ut_asserteq(0, state->wdt.counter);
+ 	ut_asserteq(false, state->wdt.running);
+ 
++	/* Unclamped timeout path */
++	console_record_reset();
+ 	ut_assertok(wdt_start(dev, timeout, 0));
+ 	ut_asserteq(timeout, state->wdt.counter);
+ 	ut_asserteq(true, state->wdt.running);
++	format_wdt_servicing_str(svc, sizeof(svc), dev);
++	ut_assert_nextline("WDT:   Started %s%s(0s timeout)", dev->name, svc);
++	ut_assert_console_end();
+ 
+ 	uint reset_count = state->wdt.reset_count;
+ 	ut_assertok(wdt_reset(dev));
+ 	ut_asserteq(reset_count + 1, state->wdt.reset_count);
+ 	ut_asserteq(true, state->wdt.running);
+ 
++	/* Clamped timeout path */
++	console_record_reset();
++	ut_assertok(wdt_start(dev, SANDBOX_WDT_MAX_TIMEOUT_MS + 1000, 0));
++	ut_asserteq(SANDBOX_WDT_MAX_TIMEOUT_MS, state->wdt.counter);
++	ut_assert_nextline("WDT:   Started %s%s(%ds timeout, requested %ds)",
++			   dev->name, svc, SANDBOX_WDT_MAX_TIMEOUT_MS / 1000,
++			   (SANDBOX_WDT_MAX_TIMEOUT_MS + 1000) / 1000);
++	ut_assert_console_end();
++
+ 	ut_assertok(wdt_stop(dev));
+ 	ut_asserteq(false, state->wdt.running);
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_wdt_base, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++DM_TEST(dm_test_wdt_base, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ static int dm_test_wdt_gpio_toggle(struct unit_test_state *uts)
+ {
+@@ -53,17 +88,27 @@ static int dm_test_wdt_gpio_toggle(struct unit_test_state *uts)
+ 	 * driver behaves as expected when using the 'toggle' algorithm.
+ 	 */
+ 	struct udevice *wdt, *gpio;
++	struct wdt_uc_plat *plat;
+ 	const u64 timeout = 42;
+ 	const int offset = 8;
+ 	int val;
++	char svc[40];
+ 
+ 	ut_assertok(uclass_get_device_by_name(UCLASS_WDT,
+ 					      "wdt-gpio-toggle", &wdt));
+ 	ut_assertnonnull(wdt);
+ 
++	/* GPIO driver does not set max_timeout_ms */
++	plat = dev_get_uclass_plat(wdt);
++	ut_asserteq(0, plat->max_timeout_ms);
++
+ 	ut_assertok(uclass_get_device_by_name(UCLASS_GPIO, "base-gpios", &gpio));
+ 	ut_assertnonnull(gpio);
++	console_record_reset();
+ 	ut_assertok(wdt_start(wdt, timeout, 0));
++	format_wdt_servicing_str(svc, sizeof(svc), wdt);
++	ut_assert_nextline("WDT:   Started %s%s(0s timeout)", wdt->name, svc);
++	ut_assert_console_end();
+ 
+ 	val = sandbox_gpio_get_value(gpio, offset);
+ 	ut_assertok(wdt_reset(wdt));
+@@ -75,7 +120,7 @@ static int dm_test_wdt_gpio_toggle(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_wdt_gpio_toggle, UTF_SCAN_FDT);
++DM_TEST(dm_test_wdt_gpio_toggle, UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ static int dm_test_wdt_gpio_level(struct unit_test_state *uts)
+ {
+
+-- 
+2.39.2
 
