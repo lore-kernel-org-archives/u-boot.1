@@ -1,157 +1,116 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB9DC4452B
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 01:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB8AAC4452D
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 01:37:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C4DD14056B;
-	Wed, 22 Jul 2026 01:22:37 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id K0KPZzeX4lMG; Wed, 22 Jul 2026 01:22:36 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0722B4070E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784683356;
-	bh=rZnlKbgdn21raTmKYYXR0VvaOdIpKascIyqHJUv6qmc=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=QNtfieqJoGEhVU0ldH+csed6OGbscwwRWZd4IMaitGk82TB4u5QRgtUEP72Vit0wY
-	 4dbuFLLMInOe4Uf1SctDGU4MysBpJgypcAwvcowYwxeQc/SPjQdmSPWFzDMYVTGCvU
-	 1Dbjx/7034ZTZYYRRWsawt6jqLKUDLitvjwxx6ieAcRKNE13HA/rJ1t5ssaUWgOt/Y
-	 okTTi4mNpT2K/UNMdTRyLmebGXBjJFxX16xXnPCW6it/iSb4CldbUBUpWhoNBeIfVo
-	 wEP//zMIXcJtvgE3YaddTbIOtNFbAihbeziGK94CXGzlB5hIdgaQJU1uNUJGUSbQIR
-	 z2+bOoofHA2Sg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0722B4070E;
-	Wed, 22 Jul 2026 01:22:36 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8884710A3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 01:22:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6E21680E7C
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 01:22:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CBE1080E8C;
+	Wed, 22 Jul 2026 01:37:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D7j7VxX153Ay for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 01:22:33 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ id XV6xw9HRI6Zh; Wed, 22 Jul 2026 01:37:02 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1888A80C44
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784684222;
+	bh=DIAIftOjShD0Es4WkfWTbeCEuumftCPZaQHFRJCKMNM=;
+	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=GOwfCj3A4TFyqCmc2RWjTVZlm+C8Rjlpumfv13K3HGGWBWfkPt+OdmK8xCyBVB6RL
+	 9+mR403tK00ho/G9eOVo35+ABESzAmdNY6qAqi8OYguE6/3qM7QHLVr+8Lut0xjDly
+	 ofyXW4G5lo1bB39BCUikLRh2LAr6zklwtg5KqfA6qTUDMmYukaUV95XZ9t2ebKIink
+	 JVowPc4ybpFg31mYVBJC4p68GkFQcCvGSNYL1vHsyyY5+S9B4x1SeCLdW7wZAN2Rtl
+	 +y03u8rsvI/EZqLdx9w+Qb0NJiHqDHY+rLXVCZ6goRxTd+XrfNGIPPo/ufD7mnhBF9
+	 axAAMG8OxHeOw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1888A80C44;
+	Wed, 22 Jul 2026 01:37:02 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4B59E313
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 01:37:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 31573400A8
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 01:37:01 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DIER0XRKxcRP for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 01:37:00 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::112b; helo=mail-yw1-x112b.google.com;
  envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5AA7680E60
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5AA7680E60
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5AA7680E60
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 01:22:33 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C3FCC848BA; Wed, 22 Jul 2026 03:22:31 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6C9784659
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 03:22:29 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5b0117d49dcso11013130e87.3
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 18:22:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784683349; cv=none;
- d=google.com; s=arc-20260327;
- b=EUeA+ANZQSVIEkzPD11XKXJqErebEysl9ARBarw4uTTywAUYo5psL5YcXZC0g+RjpH
- wF589aY1da8Be50eUVXLfdB/MEMzIC9wDtJut7TWqcClyI4e0j7mKXef2GCR2OodBLDG
- O/MAq/OJ35tGPK3VSAYRVxwK8PEOfKnt4SyECq88qW7p2kY0fGN19W9tfzzk1ApvBH8+
- EyECn98vHUxSLaSu7CoOsy38/ZWt4vgnIxEjyRMhe+2dKuCRQH+KaKKbnRzlAr7mKPBn
- XZf0n6aKvjUA8THVPhxN+gS6z/ANsHdewA+ERonEqmtly8DuPtUB0yoLfMJroq9gZrT+
- pEJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=rZnlKbgdn21raTmKYYXR0VvaOdIpKascIyqHJUv6qmc=;
- fh=wnVpA2nSRGe4gaDOBU3WArayGaMW7xRCmJSo0glc0jg=;
- b=HAkQO6uMT3n+eBHhtBn3LtEgKXojA91HtsH1YEN1WslzpEC5taA4cdrtPZ/fJEmGjJ
- NKLsLTABFPYX1UGGGhdOTb9UHAXarpm+PdVhyPB+0HNDiME4rTn7iq+ZR5ZKkjsViTa4
- 2yyiQi1kzMQvqsPJCX5258M09MbeV+fkWnqWE7qJGG49Z0f0SSEnfYlXegIRClUX5aFX
- mJZ8gG3PDIJXAgW1p1l5oQH8bI/6QH5iTZH8bMFt0u5rKYCmNX2nOmdmDfA3MSuNeRzZ
- IOCfcEXjyDsHZImsd3hmCoqcySQ1CQ6CLnQo3HqMfZt2V3UmCgTgopf/cfdhQ9LRy+b9
- Isjg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 759EA4007C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 759EA4007C
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 759EA4007C
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 01:37:00 +0000 (UTC)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-80814edb536so90029257b3.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 21 Jul 2026 18:37:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784683349; x=1785288149;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=rZnlKbgdn21raTmKYYXR0VvaOdIpKascIyqHJUv6qmc=;
- b=n62dsls3031ubOfttMLlr2+F897qqUvKUaIKYnbIcZNeggM4qbn2zDIoxxgiT3cY9i
- xI2TuX1K3Uu1XdJaPURPDeKquIdnNcX4rJ6oEKocZzV/8B/EORI51Se9UA1zjTkz/LuF
- QwcB+nqlV4TH+wL83L4EYNpjyyqAqrtoQ9FnxNKJ1OPQrNGFU3qnhJQY3wknZkQgoZ34
- MRIKzEWMhdnFbygBatLy1dgFIPS+QYzN12vO//yK55Udk/lX8SEUYMXVd/sJIXxWItWE
- zeDkrrHLHPvz13DWlDjqMsUpFbgmF5RtzKmkwcNjHsl52RzIadIvTho2+5mpwEBWOFE3
- PFQg==
+ d=1e100.net; s=20251104; t=1784684219; x=1785289019;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=DIAIftOjShD0Es4WkfWTbeCEuumftCPZaQHFRJCKMNM=;
+ b=FOIGqGLX5fzhrsLED7GjF509r9ElDbjPTN9Agr8aFJ0pJBcizKvx4/L6AqoxgrGDhr
+ cNB87WjHgpxq176onx2cDc+Q3+9kUoXLIw+nZEuUW1+qM9wfvVlspFV4ymXXPMlsttMk
+ 5zikSvqcnCP4fk/nCxkNBwWS6tLd4spRkK7DUB/w08eRCkEmNnVDQkwDYB3szn3+9tYn
+ v1mEhnDCF+lIxCHvj1ACvwkQacwJJI+Y5j5ETO+AYeo+i3vi0l86iAwf/PHpt2GJfuTG
+ 1upeIGODft80U8e8W69S05oXDAAJjhGVxvUMQpF77za8mHvKRRs7kSC98lw1wbjdHMxV
+ Md6g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrX/bYbLBi/oEGeLxSryPW52mWnYDQHVz781tGVBthphtKCWBdT5cUJMYlcJ+KG1yDVBMvhgGw=@lists.denx.de
-X-Gm-Message-State: AOJu0YynUxibcRPEailnmMLjeP+2BLWMhTTvMsnfpeI0xRDX9DBeW4hd
- 9/AaiOvV5N1r1AbPCr93UTrr0kIoZQVvU8LitArl+L2GdJNqBVMY0cctPBEF/7Y8jxpVaA7LBiF
- Pr9DdABQP8ttEa5Z1KOuSt2kJ8vE9dRE=
-X-Gm-Gg: AR+sD13phiUUQU1ovLDzBaZ5LEFXgU2EsWPSU9GGtB6H5AOQZ4gzw1owywCNmM+v7rh
- rA7HrijvWhmVKwlaDtGsLODCVJ/Agq3igYoTYTwr7huUklDFs8LAMWcdFgGH2iUmDU93oL4W7qR
- /cfHDUJxdTP/Z4RHCEOwVdngKWlgjx55LmctFT0lJS0sg2YTSCqrG6Qolr1DPnqxeFEMvodwVQH
- deBvevQQphBQfx3RVyZCuVwdq6p1eNTw1f40D8rNFPrIVLvzp6LdFkw4NE8vllj7o3fC1TIm0ad
- s/4CtQUnX/jzles2Xs1Luzxiw7mMIOGHcHsQoQozXRiEXRiGJHkHCJVm9Vst
-X-Received: by 2002:a05:6512:6d0:b0:5b0:1359:3dd4 with SMTP id
- 2adb3069b0e04-5b28f8471b5mr4867927e87.5.1784683348562; Tue, 21 Jul 2026
- 18:22:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260701175800.40141-1-festevam@gmail.com>
- <57e549ad-4472-4aff-bbe1-c2ad181bf8b1@cherry.de>
-In-Reply-To: <57e549ad-4472-4aff-bbe1-c2ad181bf8b1@cherry.de>
-Date: Tue, 21 Jul 2026 22:22:16 -0300
-X-Gm-Features: AUfX_mwpXMtX0tglUh2pPgLKdfcsl0SodJz_LT5BMt_RFaKMmF-GwR69HQcD_lk
-Message-ID: <CAOMZO5Dt_kCyAW5L3Kh+HZ4gZArhSv-Duajm62SwD9S_GrNS2g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] roc-pc-rk3399: Enable redundant SPI flash
- environment
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: kever.yang@rock-chips.com, djw@t-chip.com.cn, u-boot@lists.denx.de, 
+ AHgh+Rqv+dTuEDPMr6xkPo32xFTpTMmumyYic9b4l0lgczdRLIl36IgQDFG4SL42epHPNub+hI2beyU=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyV/ar9uSOMw7L+Zxzdl4bb4YFNJkmAOCIvni5YEc6BxxtrqbB7
+ HkTqJDNvAFpElVsGY5tEkQMhWmkduB7JOhAJPONc8BsAG2oybQuXSCXB3EQBFQ==
+X-Gm-Gg: AR+sD13lpryr7heqWmSVMx/Uq0CHIvAaNmD3o/Ui9TdJ59wamGoIQIJrOr0k6lhifBj
+ Pjh8vfgi4Pdnh9McFjzGCa03+FS93NKumDeSnXtw+HWl4/QMGM2DKy27bW+Pj4i94zIphGoa/xO
+ TwA0cfJ8LRp/SwqPn+/ohnWqMQF1T0xhXZCbcjXKq8D9NetTNJD1FXL+RpqP2H0TAqvPaoP/aYG
+ W4p7l30pCuWCzsEKJg2emrDWA63hKQQgxHZ8QjhUKnDL7VwyHqmxOx760+mNqGYvbRGiztbz5z8
+ zpRhpJaW75wEBeytSXTHVuMLm9YTzq377TGgO52nNy0ANLZMdYLuU8HB4ztYturzVfJCoQGYrPU
+ 2jukzQaXqrHoSRIezKv+kJMah1aRKLBEYgeFtobXHD1NTuQWSJ1jxq6IVHrIoWYqDLKJvtqFyyX
+ h3AlCtBcGBiWb3NQQ1aTc3AvFK5Lh+FqS/cnMJVL8XlDWp0Zs=
+X-Received: by 2002:a05:690c:dc5:b0:81e:893c:2c23 with SMTP id
+ 00721157ae682-81ef22e08c3mr71726827b3.11.1784684219153; 
+ Tue, 21 Jul 2026 18:36:59 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:1b3:a801:a24:1ad1:7a2c:313f:6408])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-81f33ee52a0sm6372937b3.36.2026.07.21.18.36.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jul 2026 18:36:58 -0700 (PDT)
+To: u-boot@0leil.net
+Cc: djw@t-chip.com.cn, sjg@chromium.org, kever.yang@rock-chips.com,
+ u-boot@lists.u-boot-project.org, trini@konsulko.com,
  Fabio Estevam <festevam@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Subject: [PATCH v2 1/5] mtd: spi-nor-ids: Add XMC XM25QH128C
+Date: Tue, 21 Jul 2026 22:36:38 -0300
+Message-ID: <20260722013642.1011666-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784683349; x=1785288149; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=rZnlKbgdn21raTmKYYXR0VvaOdIpKascIyqHJUv6qmc=;
- b=lVMkPNfs3iLitJWn4NTisBEaVWuv4UNYFpYiCh348HOUcILZ0VGPfSyrJ5kv8Rzh9w
- agnJOuP/GwjKlo4sUwpBTtioveHZiIA18iz6zJmycihN52AyktUT+Wq4yL+oPWlmQen1
- t1qW66QHDWPQ/Uk7E7dyBwGkS8f7XhjL/ePBfsFBGK1IKQuCu6R3uCYEQMts9Fic09w4
- tFkIyqOsQUrAt5Jd9dhyuVCwtGT0x0WqqHZT5y2jRpsG3pdKSsndkR2UMxPDfvzCm6Nh
- /+vm8vlrcYTNtPJgCsqNCpiOFABZZFZQOORXdznLeBYZGn8wueSM/G/KiD6uR3VOigVG
- bRfQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=gmail.com; s=20251104; t=1784684219; x=1785289019;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=DIAIftOjShD0Es4WkfWTbeCEuumftCPZaQHFRJCKMNM=;
+ b=siPtlmh+TChruYVgsghq+NsUd+Eo0YDYtr5Z8hMzwdMBM2GcZIsJOQ/85q5KYzE+q8
+ l40Vw3YrJiassR9RtRb+jZA3FzohN+I1JUHBfcC04yO+SQFkPlgE5IZCBfCTs51aB7QX
+ UlQ0KCtg65h1mpYtBFUsCQC/UQ6tCfYQ5pEzxryeqTa0KhTUkjC47fqyglTelArfGJMk
+ X7V2yquqqgNwvUdIP+YkSxcGZ/r5sy6E5wkhM+qH3bKuszCGW1rs7Tn7+1WTaKk/rnPH
+ BQQIxJwPda7s++jvCLMngkTqnASPoFKtLz79HcMNxVrZmdQ+PR4yuk2Vqc7e+h4ybQop
+ A5iA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=lVMkPNfs
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=festevam@gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="lVMkPNfs"; 
- dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=siPtlmh+
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -168,31 +127,33 @@ Reply-To: Fabio Estevam <festevam@gmail.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Quentin,
+From: Fabio Estevam <festevam@nabladev.com>
 
-On Mon, Jul 20, 2026 at 2:57=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
+Add the JEDEC ID for the XMC XM25QH128C SPI NOR flash.
 
-> Where is this layout defined?
->
-> Considering the env size is 0x1000, the same as the erase block size of
-> the SPI NOR flash you add support for in patch 3... I would have
-> imagined to simply use 0x3f7000 (or 0x3f9000) (or have them aligned with
-> the ones you are trying to use for the ROC-PC-RK3588S, which is 0x40000).
+This is a 128Mbit device using 64KiB sectors and supporting 4KiB
+erase, dual read and quad read, matching the other XM25QH128 variants.
 
-There is no separately defined SPI NOR layout; my commit message was
-misleading in that regard.
+Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+---
+Changes since v1:
+- None.
 
-CONFIG_ENV_SECT_SIZE is 0x1000, but CONFIG_ENV_SIZE is 0x8000.
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Therefore, each environment copy occupies 32 KiB rather than 4 KiB.
-The existing environment starts at 0x3f8000 and occupies
-0x3f8000=E2=80=930x3fffff.
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 31a2ba49a87c..90aa1025176c 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -673,6 +673,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("XM25QH64A", 0x207017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("XM25QH64C", 0x204017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("XM25QH128A", 0x207018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("XM25QH128C", 0x204018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+-- 
+2.43.0
 
-To preserve the existing environment location as the redundant copy, I
-placed the primary copy immediately before it at 0x3f0000. This gives
-two adjacent, non-overlapping 32 KiB regions, both aligned to the 4
-KiB erase-sector size.
-
-I will reword the commit message to describe this explicitly and
-remove the reference to an =E2=80=9Cexisting SPI NOR layout.=E2=80=9D
