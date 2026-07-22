@@ -1,115 +1,210 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE7FC4453A
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 18:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0020C44536
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 18:44:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DA17140A27;
-	Wed, 22 Jul 2026 18:40:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 54B6A80C8F;
+	Wed, 22 Jul 2026 18:44:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nV3-_2I0x7Rs; Wed, 22 Jul 2026 18:40:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jXiIxsg4qdlc; Wed, 22 Jul 2026 18:44:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 690B1409F9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 13F4B80C59
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784745642;
-	bh=u2MT+i3AxMzy8jE9Rb7sRisAqDWVReJFEKzIGyd0MJg=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=PVBPx/JWUNF/YlI27JFG8RZChNgUhVufXDTSWcHV29dmh8te44wpQvzEF1zIeOHRu
-	 xhqml6xvVUILWv/c8l0jwMNIhYE31F/WWTn64RwVBvrxKmFtQE7jShjbWyiwTdxK0E
-	 jdlaWd8ECwgZhPNoGR55uDmMxhoNhEzh0yu/LXopon5dwp7NAWQ2HBGoab/AGLxhwM
-	 E39t1LYuXZjBXMZSRY5b8fHdI5JfTXNpqKVIWitDaFh7scQUm7gUibR0gepEDgA7k4
-	 qRvgJvGm21sahio+o9+CeDmdyTpM3nx7uoYyKLSj790mbVUOHWrtVhU6BOrEgCYAti
-	 RI7QOYnorxDOA==
+	d=lists.u-boot-project.org ; s=default; t=1784745872;
+	bh=NF2kIvaT3Hr38uaZfML4ODJ/941FGdIALc/HFb8V+PM=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=M5cNon/S1iWu6SxpDWVkGS4s0fhp/vkcU8oUWx5M6U8iA7HGhRH1LzyAJXh3tXVuZ
+	 WSgdnqaP3+w4DJ/ZLWeCiXsyosC6ssl7aLIpyyyeKkYOo0zscitEGfOex5eGlNJgO/
+	 WlKD8tl2LqAdCjqa9KXuKjfy/TOCL9UZEbi9zDH//zqC3mrnIS90rPTIdm836q2bi/
+	 EQyzyNdZ4IbjcLkYd+Svtk8Ksid0IvFlrF2hQmfqblmynIqIBRCEdo3sjpflX975yT
+	 Mi0AKUxwWxXq8cMA8Wgjk53UWxKpLS9/+f5NXIdL6owZsFrV9CuFvg5L8XqcibeGkF
+	 CnxOTCz0bYC5Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 690B1409F9;
-	Wed, 22 Jul 2026 18:40:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 13F4B80C59;
+	Wed, 22 Jul 2026 18:44:32 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E3A3A224
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 18:40:41 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id A9B48313
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 18:44:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C906440115
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 18:40:41 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9017D40057
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 18:44:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dG6EVzQb4yuY for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 18:40:41 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b133; helo=mail-yx1-xb133.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C3D7940057
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C3D7940057
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [IPv6:2607:f8b0:4864:20::b133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C3D7940057
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 18:40:40 +0000 (UTC)
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-6682259cb3dso8402797d50.1
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 11:40:40 -0700 (PDT)
+ id n5jvKz-HcgJw for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 18:44:29 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=jorge.ramirez@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2E36F40115
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2E36F40115
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2E36F40115
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 18:44:29 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 940E3848BA; Wed, 22 Jul 2026 20:44:27 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BBF883E76
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 20:44:25 +0200 (CEST)
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66MHr6uI1506686
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 18:44:23 GMT
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjxm11gac-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 18:44:23 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-51c20762d21so130142201cf.0
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 11:44:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784745639; x=1785350439;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=u2MT+i3AxMzy8jE9Rb7sRisAqDWVReJFEKzIGyd0MJg=;
- b=TtfXaiTZMyXnPZ2NrgUDDCSdU3s2WE3ohXmf8iN4rKpgvyAJICAJE+KJSeoySw1nPb
- 7h+O+vDsS4WEp8oXzfdty+IVhEO0EaxAjx1xdu0Wkpt2MJS2/jDJmyDTpuCuLj/xveHG
- 1I18PPjvN3kBWZg2W8e3WqA07MprpAygLMjXBhFiNY22zUgErW5GmRQ03Sg+Ln1tzqky
- o2ZeuyrbX2+5iMC/Y7429h7Bb8f1XIu8270cElesREVJ8f+4+j/3skvi/QibDenve2YT
- Up3G/ue1abdXVw9i7Xs+sHIZT+biBHBa0MqeJce3LKMdt/Th66oppaPbeO9svRTyFvPM
- KeiA==
+ d=1e100.net; s=20251104; t=1784745863; x=1785350663;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:date
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=NF2kIvaT3Hr38uaZfML4ODJ/941FGdIALc/HFb8V+PM=;
+ b=Gb/8e2IJniS4ESZyiWLOdC9rBvl9k2V1LMsQMD/sDh8quO2XMGpr/mrVHVvT4DtoQP
+ AV2/Ko6/VG6hmSOdDXwJOM5biKoqltLZVM94XssrAMk3eieRcJqtaTPiNY69IDi0/DWp
+ c5HIzywV/4BYnVEQk0tIpKkW4xJXKnzZ+W9VMWfRQbOnkIEnhOm21JlWxIRVrCQo39ii
+ 10R0yY/NsXv4PrfMM6giEFpIKwIuTyC+X7VnqG6JtCJ7pQUZeQu1hznS4W8nikqUUqEl
+ W41DejlhJzIvHRSG1fMbdTV5VSPYeB1L+DVsHu3CXFwI0FgbK5+j9h4Gdgkbe3c2m+2l
+ Sd7Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr7TfJRyQWwWFKhjIyviZ0ocbhe05j/5MG1A2+8iAX1cZ9WRW91X5PGeTcO7isR3TUob/GfEoU=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxWj5oedUvE2Phm2jEKjEHR2ORFl+8GaCPkMs5g6hcqw1F0WtN1
- vEQiiewGh2wwoI8RKuMM4/Kfbl7WcG7PTmdW/o8u0TDsVPCfE9lwWshi
-X-Gm-Gg: AR+sD135U9IWeZLPntNjD9VRG5JDiMX9pzF+hJyrtMHfGUmRSQrkRbxu2I3R85v3KCz
- 3iKILd0azqPqIJeJXrLDlUEY6BiEtgJQ6RVC9M5FB/XORVZuuWsXCpHfJnzxgjJt7aRd9MrGt8h
- WxZ5clzqX4imGGbjQdEHHBRkw4YKwqayRwuwATylKqL5NjeJeCBGU+rmwFv1h2kWhIh5l35ERGZ
- KiILFwww5yzuOl2z+vxWqOrIgKlLSX3SuRK7kuJceSV4ppgi7IF8AUn4uH/hPTU3uob14ffTaoH
- zWPEAQ/mNbOjr/cWeFaXOnDdxYk6+UPyfp8k6Tt8K7/HhsTJVlL1zDbhegOrASNeI3+EsYKY2lT
- 9fsTqzaJOEItgjUcb+Cj1bsOM3vRhufGgNa6aEKueGTnTdBKOQMVablzGRt6zX3JDgP1V2H2f0V
- Bu7ejtsTcKUvl471BNJDmcggEdQsPOD+hvC6k2k2Bikb8B4fg=
-X-Received: by 2002:a53:d058:0:10b0:668:8410:2e0c with SMTP id
- 956f58d0204a3-6688ee4d7a4mr1230351d50.47.1784745639426; 
- Wed, 22 Jul 2026 11:40:39 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:1b3:a801:a24:3a9b:51ad:2c34:1075])
- by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-66890521642sm1808508d50.3.2026.07.22.11.40.36
+ AHgh+RpxRIxr40YQaxUQjc+iPp1Tbeg3qFg9vE6EV3s1AVFpjh9uot2hFnBNrDFYMtlzN0SRD53pNQM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5fG95PnlK3bsFDij0L8sNsIBh3OWP6eS924mPfV+hmQxrg0Wc
+ N9wMQJYv9o+bu9M5PNnNqQoxPfhKc6woEnfMNx2G5Gs3wjNFMQ/DOyRqMd9TjxmYnC+eO0rkLBY
+ 5K0cCkOXLfKibmSWxxp7nDVOY4fmBX5y9YwfAGSy2begsYCmhxyg9OHdN
+X-Gm-Gg: AR+sD13lq1dzEavKRk+DbyuyLaWL0UZCLK+YUPyMIoaK9bvhCRCW+mAxMi9c6wEhn3O
+ 7bvrkRtc1JMa7nHswfGITmS0ur019hus+Z5E2kASbB/RLvpsbf1qa3pTuqAg/WZwP8+GW7+ZRwK
+ 2d4xCjCioIaLh5hz849O7uLSeCYvrLj+z5Dy2NdzviyzRheJTaEyd6PKaq5NzPOU6Mmii0B9zYN
+ F/HPTt1oZPM+ISteL/4jCUyX5Ku8S2pq97/PVxPzbomTfIA6Z71nqrxupct97XNqVHEopR+WvQI
+ Wsy0E5CZamdYvWG4Gd1dU+k6hTVSmoWDuwAUMs0Ibkgt4oCb3kXFCplvdOyZlMHBibHxe+YyznT
+ IAd52kPdyFIRe6793C0IS5yc11qouBDKvs1M=
+X-Received: by 2002:a05:622a:a13:b0:527:f19c:734d with SMTP id
+ d75a77b69052e-527f19c876cmr42402531cf.7.1784745862542; 
+ Wed, 22 Jul 2026 11:44:22 -0700 (PDT)
+X-Received: by 2002:a05:622a:a13:b0:527:f19c:734d with SMTP id
+ d75a77b69052e-527f19c876cmr42402031cf.7.1784745861813; 
+ Wed, 22 Jul 2026 11:44:21 -0700 (PDT)
+Received: from trex (182.red-79-144-196.dynamicip.rima-tde.net.
+ [79.144.196.182]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4956a967289sm87759885e9.11.2026.07.22.11.44.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 11:40:38 -0700 (PDT)
-To: u-boot@0leil.net
-Cc: trini@konsulko.com, sjg@chromium.org, kever.yang@rock-chips.com,
- u-boot@lists.u-boot-project.org, Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH v3] rockchip: rk3588s: Add support for ROC-PC-RK3588S
-Date: Wed, 22 Jul 2026 15:40:24 -0300
-Message-ID: <20260722184024.1210447-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ Wed, 22 Jul 2026 11:44:21 -0700 (PDT)
+X-Google-Original-From: Jorge Ramirez <JorgeRamirez-Ortiz>
+Date: Wed, 22 Jul 2026 20:44:19 +0200
+To: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, trini@konsulko.com,
+ jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
+ bhupesh.linux@gmail.com, n-francis@ti.com,
+ marek.vasut+renesas@mailbox.org, shawn.lin@rock-chips.com,
+ igor.belwon@mentallysanemainliners.org,
+ yoshihiro.shimoda.uh@renesas.com, alchark@gmail.com,
+ tuyen.dang.xa@renesas.com, padmarao.begari@amd.com,
+ macpaul.lin@mediatek.com, jstephan@baylibre.com, bb@ti.com,
+ j-mcarthur@ti.com, venkyada@qti.qualcomm.com,
+ hayashi.kunihiko@socionext.com, dlechner@baylibre.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 5/5] optee: implement the RPMB subsystem interface for
+ UFS
+Message-ID: <amEPgwafY1zm1LwF@trex>
+References: <20260722060805.1428110-1-jorge.ramirez@oss.qualcomm.com>
+ <20260722060805.1428110-6-jorge.ramirez@oss.qualcomm.com>
+ <791913b4-d006-44be-8c94-871617418dbc@linaro.org>
+ <amDP5roFBAAdOcYK@trex>
+ <6f5137f9-d358-4c51-ac2c-f667cf126d80@linaro.org>
+ <amEIA0pSVEehZJYt@trex>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <amEIA0pSVEehZJYt@trex>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDE4NCBTYWx0ZWRfX3DaV9ARYj/8Y
+ VE9m5zbbEwVFH2MFrKoahv8cdbznNO+LrEG3wR8PTNwugsPp5q8mxUAf9xMD5n92zfkzMV6jxWV
+ La4KrL4OcLHdBUVDvk1W5LmbjhPl0xc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDE4NCBTYWx0ZWRfX4iwVM+9IMWSR
+ OYdujPJGlnRQ2GXQ9CK7IYt5Z2Blty15lJtj8vnc+IOp23E/7UwyUsMYtQrn5Tm95rQPwdxx8yR
+ 6wpg2o28GgMsEml4Jx+AifNCOYrg1x0uwK9MPKzUlvBdj77qcEhacOMAzj09QKJeyrrQV1utsHl
+ 8utO7YWTAb3HVupM3SvJj9+S+C3wHnbZo8bwBzCHRQRZdK1wMdBzstJi3ZctZqyG8XYbA5ulEj5
+ oLzsU1xbLpZknCZeSwmESgPZaw2xr1jIKvucS/1uC4TqDJ9eWfcIwowjB7Wr+lcgLAsCCLO3Ssf
+ I8lPpq7pD4SJ+bVCLPyDiUQW2BIBYdAxZNN54/DHH7a+AKHtgCw9Y3NogwyUOVFGl+nPAvB62ZP
+ dcn/Rjf+SjlQbfEQVOnenk71OLmV5KKbW3yx5mUUcgkeVLUk6zMjkmkIboFKHW980ybgv0DQPOx
+ rAHpdt7Db9Qt56IyR4Q==
+X-Authority-Analysis: v=2.4 cv=Rsv16imK c=1 sm=1 tr=0 ts=6a610f87 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=2lELrtOEK2EaG96G7mOeag==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=v0AsJYt0KKq4_wKu-noA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: IrK5NibQbLr_bUMJIg2zGSq6aVw8srOf
+X-Proofpoint-ORIG-GUID: IrK5NibQbLr_bUMJIg2zGSq6aVw8srOf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_05,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0 impostorscore=0
+ malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220184
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784745639; x=1785350439;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=u2MT+i3AxMzy8jE9Rb7sRisAqDWVReJFEKzIGyd0MJg=;
- b=AQ6hAhKN6SQAB8ZLI1jBybLOkgFBWl+t1yC9YjSlVtP1QNR6ozePYSPDIEMRQ4CnCD
- 80ho110lixCMhDlHq6la6QgWEe79XjU8tiIamnbIuaatw/X3Fl7ltH/Iq0//8ydgPJy+
- 6K7IpJLcTdNl18LA8GpyyfdjuENTGADwnVgOp2a5/T2l6LP6VDfuXiTHgpQM4kh+fNXl
- F1k5iR2NcvMIgHKAXKvz46Nh9GBYGTWhQwDjx5OXpWSQBEwU2oX2Xif2GVHsUHP+pjle
- 3gjzod5lbsqX/BEadd1+pn3epG/jYKiEV3mve2m4XFx2sakm7/jNpmq6L6ULYxq7oyJd
- UBqw==
+ d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ NF2kIvaT3Hr38uaZfML4ODJ/941FGdIALc/HFb8V+PM=; b=RIXt29A4lXwP4k6N
+ 8/3gbh0ZJo5JCsotiReyyCt6WjTZSKZ0H60I6f4O0tA8tzxmGTVk819Ryxhtqo1H
+ KdBJKIGDPYlewDHMqUZB7ojl1wYLAvm3t7O0EAEnngDp6OjTGLuYMCl9sFue8IZ5
+ FCAJzlSntQnoAf9EkUVxA8aAKnP3Eb3NIPwXDx6AW+z1vCDIWZ8b6Oz6ugkLijMU
+ S3A9EcYbV5W7gnazhIRkrMb5p7bEscLCkATWApL17ufiX6Axlnv+6vnJhxOn15qc
+ JPJMwNYcK0qCBrzGWL9Z6A2fRtKaxgutGSkRyAHWcagxfED61DgUXW1MentAjeII
+ BjwAZQ==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784745863; x=1785350663; darn=lists.denx.de; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:date
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=NF2kIvaT3Hr38uaZfML4ODJ/941FGdIALc/HFb8V+PM=;
+ b=eLgj2fM9vZAbMGhEiGH3r3tnsrvEh33OrwBo7SQnXmvTow3JrULzO1ket0zmceZ38m
+ qbo79P3v88LHjfOPhSSfvcMJwAZ4u+y1EIpZMRllpPNRvJUIWIH6nPKE3vt5Cw/0jc+k
+ wOFnDCdt0aP3kabHbqhAbhLWiR18x9gBO/UriCH/vNOqGowBhQXT2Ndip6m2/Vze4jl8
+ spKUvH9mjTeJnRTJX+8EFSaiKqgZPmlZyztozZHj5EldclIKzkMrs6IslCdxyMOjcZwe
+ paGj+MOi0XFk3tAhSu1ZHK2+ZO6/htnfed04FT5L7Y+uSFQ+z9Xh2GyRnQE+oJR1iI7h
+ C5wA==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=AQ6hAhKN
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=RIXt29A4; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=eLgj2fM9
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="RIXt29A4";
+ dkim=pass (2048-bit key;
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.b="eLgj2fM9"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -121,207 +216,239 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Fabio Estevam via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Fabio Estevam <festevam@gmail.com>
+From: Jorge Ramirez via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Fabio Estevam <festevam@nabladev.com>
+On 22/07/26 20:12:19, Jorge Ramirez wrote:
+> On 22/07/26 17:43:16, Neil Armstrong wrote:
+> > On 7/22/26 16:12, Jorge Ramirez wrote:
+> > > On 22/07/26 10:31:04, neil.armstrong@linaro.org wrote:
+> > > > Hi,
+> > > > 
+> > > > On 7/22/26 08:07, Jorge Ramirez-Ortiz wrote:
+> > > > > OP-TEE's legacy RPMB supplicant interface assumes the RPMB device is eMMC
+> > > > > and derives the key from an eMMC-shaped device ID, so it can never
+> > > > > reproduce the key Linux derives for a UFS device; secure storage on
+> > > > > UFS-only platforms instead needs the transport-agnostic RPMB subsystem
+> > > > > interface, through which the normal world describes the real RPMB device
+> > > > > to OP-TEE. Add a UFS backend for it so OP-TEE derives a key matching Linux
+> > > > > and can use RPMB secure storage on UFS, leaving the legacy eMMC path
+> > > > > untouched.
+> > > > > 
+> > > > > This subsystem backend currently supports UFS drives only; eMMC still uses
+> > > > > the legacy interface. As the legacy interface is dropped in favour of the
+> > > > > subsystem one, an eMMC backend should be added here so both transports are
+> > > > > served through a single RPMB path.
+> > > > > 
+> > > > > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> > > > > ---
+> > > > >    drivers/tee/optee/Makefile               |   1 +
+> > > > >    drivers/tee/optee/optee_msg_supplicant.h |   8 ++
+> > > > >    drivers/tee/optee/optee_private.h        |  41 ++++++++
+> > > > >    drivers/tee/optee/rpmb.c                 | 124 +++++++++++++++++++++++
+> > > > 
+> > > > Why not rpmb_ufs ?
+> > > 
+> > > 
+> > > because in the future (and IMO) rpmb.c should support UFS and EMMC using
+> > > the new probe interface (eventually removing rpmb_legacy).
+> > 
+> > Let's see in the future, if somehow there's need for a common "new"
+> > and emmc only legacy some rework will be needed anyway. The eMMC RPMB
+> > hasn't been updated for a very long time...
+> > 
+> > Using the driver model to register an rpmb device attached to an eMMC
+> > or UFS controller would the cleanest way to handle that, but we're not here now.
+> > 
+> > > 
+> > > > 
+> > > > It's fine to have 2 backend implementations, the emmc is implementing the
+> > > > legacy optee API, just add a comment in the eMMC file about that.
+> > > > 
+> > > > Neil
+> > > > 
+> > > > >    drivers/tee/optee/supplicant.c           |   9 ++
+> > > > >    5 files changed, 183 insertions(+)
+> > > > >    create mode 100644 drivers/tee/optee/rpmb.c
+> > > > > 
+> > > > > diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+> > > > > index 8321cf53a19..7af19834c00 100644
+> > > > > --- a/drivers/tee/optee/Makefile
+> > > > > +++ b/drivers/tee/optee/Makefile
+> > > > > @@ -4,3 +4,4 @@ obj-$(CONFIG_OPTEE) += core.o
+> > > > >    obj-y += supplicant.o
+> > > > >    obj-$(CONFIG_DM_I2C) += i2c.o
+> > > > >    obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb_legacy.o
+> > > > > +obj-$(CONFIG_SUPPORT_UFS_RPMB) += rpmb.o
+> > > > > diff --git a/drivers/tee/optee/optee_msg_supplicant.h b/drivers/tee/optee/optee_msg_supplicant.h
+> > > > > index 963cfd47824..b720d5d7b3f 100644
+> > > > > --- a/drivers/tee/optee/optee_msg_supplicant.h
+> > > > > +++ b/drivers/tee/optee/optee_msg_supplicant.h
+> > > > > @@ -152,6 +152,14 @@
+> > > > >     */
+> > > > >    #define OPTEE_MSG_RPC_CMD_I2C_TRANSFER 21
+> > > > > +#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_RESET	22
+> > > > > +#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_NEXT	23
+> > > > > +#define OPTEE_MSG_RPC_CMD_RPMB_FRAMES		24
+> > > > > +
+> > > > > +#define OPTEE_RPC_SHM_TYPE_APPL		0
+> > > > > +
+> > > > > +#define OPTEE_RPC_RPMB_UFS		1
+> > > > > +
+> > > > >    /*
+> > > > >     * Was OPTEE_MSG_RPC_CMD_SQL_FS, which isn't supported any longer
+> > > > >     */
+> > > > > diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+> > > > > index 1f07a27ee4b..2888257aefe 100644
+> > > > > --- a/drivers/tee/optee/optee_private.h
+> > > > > +++ b/drivers/tee/optee/optee_private.h
+> > > > > @@ -9,6 +9,17 @@
+> > > > >    #include <tee.h>
+> > > > >    #include <log.h>
+> > > > > +#ifdef CONFIG_SUPPORT_UFS_RPMB
+> > > > > +/**
+> > > > > + * struct optee_private - OP-TEE driver private data
+> > > > > + * @rpmb_next_region:	next UFS RPMB region to report on PROBE_NEXT
+> > > > > + * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT
+> > > > > + */
+> > > > > +struct optee_private {
+> > > > > +	unsigned int rpmb_next_region;
+> > > > > +	unsigned int rpmb_cur_region;
+> > > > > +};
+> > > > > +#else
+> > > > >    /**
+> > > > >     * struct optee_private - OP-TEE driver private data
+> > > > >     * @rpmb_mmc:		mmc device for the RPMB partition
+> > > > > @@ -22,6 +33,7 @@ struct optee_private {
+> > > > >    	int rpmb_dev_id;
+> > > > >    	int rpmb_original_part;
+> > > > >    };
+> > > > > +#endif
+> > > > >    struct optee_msg_arg;
+> > > > > @@ -60,6 +72,35 @@ static inline void optee_suppl_rpmb_release(struct udevice *dev)
+> > > > >    }
+> > > > >    #endif
+> > > > > +#ifdef CONFIG_SUPPORT_UFS_RPMB
+> > > > > +void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+> > > > > +				      struct optee_msg_arg *arg);
+> > > > > +
+> > > > > +void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+> > > > > +				     struct optee_msg_arg *arg);
+> > > > > +
+> > > > > +void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
+> > > > > +				 struct optee_msg_arg *arg);
+> > > > > +#else
+> > > > > +static inline void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+> > > > > +						    struct optee_msg_arg *arg)
+> > > > > +{
+> > > > > +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
+> > > > > +}
+> > > > > +
+> > > > > +static inline void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+> > > > > +						   struct optee_msg_arg *arg)
+> > > > > +{
+> > > > > +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
+> > > > > +}
+> > > > > +
+> > > > > +static inline void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
+> > > > > +					       struct optee_msg_arg *arg)
+> > > > > +{
+> > > > > +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
+> > > > > +}
+> > > > > +#endif
+> > > > > +
+> > > > >    #ifdef CONFIG_DM_I2C
+> > > > >    /**
+> > > > >     * optee_suppl_cmd_i2c_transfer() - route I2C requests to an I2C chip
+> > > > > diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
+> > > > > new file mode 100644
+> > > > > index 00000000000..9c3e0f031ad
+> > > > > --- /dev/null
+> > > > > +++ b/drivers/tee/optee/rpmb.c
+> > > > > @@ -0,0 +1,124 @@
+> > > > > +// SPDX-License-Identifier: GPL-2.0+
+> > > > > +
+> > > > > +#include <dm.h>
+> > > > > +#include <tee.h>
+> > > > > +#include <ufs.h>
+> > > > > +
+> > > > > +#include "optee_msg.h"
+> > > > > +#include "optee_msg_supplicant.h"
+> > > > > +#include "optee_private.h"
+> > > > > +
+> > > > > +#define UFS_RPMB_CONTROLLER	0
+> > > > 
+> > > > Can this be a config option instead which defaults to 0 ?
+> > > 
+> > > um, I dont think so - this assumes there is only one controller. If there
+> > > are more than one, we would need a mechanism to select which one from
+> > > the enumerated values (maybe a DT alias (ie ufs-rpmb ?) I think the binding order
+> > > changes as we enable/disable devices)
+> > 
+> > It could collide with other SCSI devices like SATA devices over PCIe.
+> > 
+> > Usually we try not to hardcode the devices ids.
+> 
+> 
+> right...shall I go ahead with a DT alias approach?
 
-The ROC-PC-RK3588S board is an SBC made by Firefly, based on the RK3588S
-SoC.
 
-Add support for it.
+something like this?
 
-Signed-off-by: Fabio Estevam <festevam@nabladev.com>
----
-Changes since v2:
-- Drop the USB device-mode DT changes until they are available through
-  devicetree-rebasing.
-- Drop the corresponding USBDP, DWC3, gadget and UMS options.
-- Run savedefconfig, which drops CONFIG_SYS_HAS_NONCACHED_MEMORY and
-  CONFIG_ENV_OFFSET, as 0x3f8000 is already the Rockchip default.
 
- arch/arm/mach-rockchip/rk3588/Kconfig    |  7 ++
- board/firefly/roc-pc-rk3588s/Kconfig     | 12 ++++
- board/firefly/roc-pc-rk3588s/MAINTAINERS |  6 ++
- configs/roc-pc-rk3588s_defconfig         | 81 ++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst          |  1 +
- include/configs/roc-pc-rk3588s.h         |  8 +++
- 6 files changed, 115 insertions(+)
- create mode 100644 board/firefly/roc-pc-rk3588s/Kconfig
- create mode 100644 board/firefly/roc-pc-rk3588s/MAINTAINERS
- create mode 100644 configs/roc-pc-rk3588s_defconfig
- create mode 100644 include/configs/roc-pc-rk3588s.h
+  8 ⋮  8 │ #include "optee_msg_supplicant.h"
+  9 ⋮  9 │ #include "optee_private.h"
+ 10 ⋮ 10 │ 
+ 11 ⋮    │-#define UFS_RPMB_CONTROLLER        0
+    ⋮ 11 │+static int optee_rpmb_get_scsi_dev(struct udevice **scsi_devp)
+    ⋮ 12 │+{
+    ⋮ 13 │+        struct udevice *ufs_dev, *scsi_dev;
+    ⋮ 14 │+        ofnode node;
+    ⋮ 15 │+        int ret;
+    ⋮ 16 │+
+    ⋮ 17 │+        node = ofnode_get_aliases_node("ufs-rpmb");
+    ⋮ 18 │+        if (ofnode_valid(node))
+    ⋮ 19 │+                ret = uclass_get_device_by_ofnode(UCLASS_UFS, node, &ufs_dev);
+    ⋮ 20 │+        else
+    ⋮ 21 │+                ret = uclass_get_device(UCLASS_UFS, 0, &ufs_dev);
+    ⋮ 22 │+        if (ret)
+    ⋮ 23 │+                return ret;
+    ⋮ 24 │+
+    ⋮ 25 │+        ret = device_get_child(ufs_dev, 0, &scsi_dev);
+    ⋮ 26 │+        if (ret)
+    ⋮ 27 │+                return ret;
+    ⋮ 28 │+
+    ⋮ 29 │+        *scsi_devp = scsi_dev;
+    ⋮ 30 │+
+    ⋮ 31 │+        return 0;
+    ⋮ 32 │+}
+ 12 ⋮ 33 │ 
+ 13 ⋮ 34 │ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+ 14 ⋮ 35 │                                       struct optee_msg_arg *arg)
 
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 675f13ab66d7..841ae490e85a 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -208,6 +208,12 @@ config TARGET_RK3588_NEU6
- 	  IO board and Neu6a needs to mount on top of this IO board in order to
- 	  create complete Edgeble Neural Compute Module 6B(Neu6B) IO platform.
- 
-+config TARGET_ROC_PC_RK3588S
-+	bool "Firefly ROC PC RK3588S"
-+	help
-+	  ROC-PC-RK3588S is a single board computer from Firefly
-+	  using the Rockchip RK3588S.
-+
- config TARGET_ROCK5A_RK3588
- 	bool "Radxa ROCK5A RK3588 board"
- 	help
-@@ -421,6 +427,7 @@ config SYS_SOC
- source "board/armsom/sige7-rk3588/Kconfig"
- source "board/coolpi/genbook_cm5_rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
-+source "board/firefly/roc-pc-rk3588s/Kconfig"
- source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
- source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
- source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
-diff --git a/board/firefly/roc-pc-rk3588s/Kconfig b/board/firefly/roc-pc-rk3588s/Kconfig
-new file mode 100644
-index 000000000000..bded7a2fcba1
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3588s/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ROC_PC_RK3588S
-+
-+config SYS_BOARD
-+	default "roc-pc-rk3588s"
-+
-+config SYS_VENDOR
-+	default "firefly"
-+
-+config SYS_CONFIG_NAME
-+	default "roc-pc-rk3588s"
-+
-+endif
-diff --git a/board/firefly/roc-pc-rk3588s/MAINTAINERS b/board/firefly/roc-pc-rk3588s/MAINTAINERS
-new file mode 100644
-index 000000000000..a0316cab1b92
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3588s/MAINTAINERS
-@@ -0,0 +1,6 @@
-+ROC-PC-RK3588S
-+M:	Fabio Estevam <festevam@nabladev.com>
-+S:	Maintained
-+F:	board/firefly/roc-pc-rk3588s/
-+F:	configs/roc-pc-rk3588s_defconfig
-+F:	include/configs/roc-pc-rk3588s.h
-diff --git a/configs/roc-pc-rk3588s_defconfig b/configs/roc-pc-rk3588s_defconfig
-new file mode 100644
-index 000000000000..226243d79772
---- /dev/null
-+++ b/configs/roc-pc-rk3588s_defconfig
-@@ -0,0 +1,81 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-roc-pc"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ROC_PC_RK3588S=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_ENV_OFFSET_REDUND=0x400000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-roc-pc.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_REDUNDANT=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index b565aea311e9..d56d245dc114 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -155,6 +155,7 @@ List of mainline supported Rockchip boards:
-      - Rockchip EVB (evb-rk3588)
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-+     - Firefly ROC-PC-RK3588S (roc-pc-rk3588s)
-      - FriendlyElec CM3588 NAS (cm3588-nas-rk3588)
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-diff --git a/include/configs/roc-pc-rk3588s.h b/include/configs/roc-pc-rk3588s.h
-new file mode 100644
-index 000000000000..c9316687c38f
---- /dev/null
-+++ b/include/configs/roc-pc-rk3588s.h
-@@ -0,0 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#ifndef __ROC_PC_RK3588S_H
-+#define __ROC_PC_RK3588S_H
-+
-+#include <configs/rk3588_common.h>
-+
-+#endif /* __ROC_PC_RK3588S_H */
--- 
-2.43.0
+────────────────────────────────────────────────────────────────┐
+• 76: void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev, │
+────────────────────────────────────────────────────────────────┘
+ 55 ⋮ 76 │                 return;
+ 56 ⋮ 77 │         }
+ 57 ⋮ 78 │ 
+ 58 ⋮    │-        if (uclass_get_device(UCLASS_SCSI, UFS_RPMB_CONTROLLER, &scsi_dev)) {
+    ⋮ 79 │+        if (optee_rpmb_get_scsi_dev(&scsi_dev)) {
+ 59 ⋮ 80 │                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
+ 60 ⋮ 81 │                 return;
+ 61 ⋮ 82 │         }
+
+─────────────────────────────────────────────────────────────┐
+• 124: void optee_suppl_cmd_rpmb_frames(struct udevice *dev, │
+─────────────────────────────────────────────────────────────┘
+ 103⋮ 124│                 return;
+ 104⋮ 125│         }
+ 105⋮ 126│ 
+ 106⋮    │-        if (uclass_get_device(UCLASS_SCSI, UFS_RPMB_CONTROLLER, &scsi_dev)) {
+    ⋮ 127│+        if (optee_rpmb_get_scsi_dev(&scsi_dev)) {
+ 107⋮ 128│                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
+ 108⋮ 129│                 return;
+ 109⋮ 130│         }
 
