@@ -1,116 +1,170 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D02C44536
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 13:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5567CC44539
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 13:53:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F0997607D9;
-	Wed, 22 Jul 2026 13:27:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C063780F2F;
+	Wed, 22 Jul 2026 13:53:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ud6-E3gPUUsM; Wed, 22 Jul 2026 13:27:47 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oQbchpu5aDAx; Wed, 22 Jul 2026 13:53:45 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C2793607C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0315D80F24
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784726867;
-	bh=oauELqhA6IU0x2XqmeZ/jEIhgb2TwDu2bX2rcpbWTX0=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=dNIXoj2Hic1A66gS/UDTBLILtCqpaBG2H3codPrzOKLA4q0UDjGKaTzZYF1Wpgbqz
-	 D5LDob7pQapjAdRtz4MhtUVYQoVWeM7RSgwynMItolsmYFKJFAt2fwN/yxNT62Vz2I
-	 Gvjoaq5bGPyEaPyj0XCeJO1Ke4aqrPL4oX2AKWPGhOm2vHH347lAK7DJQ+LulDDWny
-	 Cmw431YlhjOkBJStRZ3va9qZpRUWrR+A1psVXyZ2WVtZvJAmGnbXNGjGWeBS3hGsoj
-	 c+aedxlEYh9toVrJ9HY4N/Tgk/9scfN3a658XRZ8sI6qwZ2YY1oqgzZQtZoLwwj60r
-	 WxIsuTVxBiFAw==
+	d=lists.u-boot-project.org ; s=default; t=1784728425;
+	bh=QH6kWALxc2DkoIoMTRKrOJzQfiXORxd8BhxAV1AtTl8=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=MJBB1JJGwOUoZGbuhZXIUuLqm+/FIgrdCqDI6tOoqpiVNKIrDDPg/jlx/Ur1ERph3
+	 L0vf3+lJOxzPeyXlt//tRrYA4IPfkUvDuGfg2GKtymF1laniPgyiC/eAYmQqB/w/2J
+	 v+0WhsQxaiXMMZto7ybc+DXUWpnPb75TJLZieL/2EG/8u7SHVvT6EpEgjROczasQnH
+	 61RSAnU788uYKgdZIuDsNA5JPH64jfMo7L80sr9db32SS0rQ8e6xwjr96wlI3DFLcP
+	 WE0qPZYfSjKnL+o6bBB5ia2OIlsi9xnu4K/1pBSIp1LA9+Thnd82ovZnacJWqB0y99
+	 Z6IETsHPt3OdA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C2793607C1;
-	Wed, 22 Jul 2026 13:27:47 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0A6E32E5
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:27:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0315D80F24;
+	Wed, 22 Jul 2026 13:53:45 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2C93A2E5
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:53:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id F055B401B0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:27:46 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0E32580F24
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:53:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PqqaaWRliM9H for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 13:27:46 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8jvyARrgxPlM for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 13:53:43 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::230; helo=mail-oi1-x230.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C83EB40100
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C83EB40100
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C83EB40100
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:27:45 +0000 (UTC)
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-4a416619cb2so5949725b6e.3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 06:27:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784726865; x=1785331665;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=oauELqhA6IU0x2XqmeZ/jEIhgb2TwDu2bX2rcpbWTX0=;
- b=PayGWIBtW37uckIAxOqRTz/viv850CuJIMSWEgYAWs9KMj2MBChUw+WtHnEMkgf9Kw
- plaEIh8gaEn5wcEPmuq4J8VJi7pUUbW3RzfEUxRuCaCBiAH4jDPA+HOFRKOPoY7h0Zuc
- /HWaBUnAMTC7CoNFSGUafWmTSXPUELnDBSA60p9EvQ+xKlwJxptx0zdVtMB9PGspY2oi
- YcoZfyFVa1yBlm1TNTE1LQj5iGkZDC0UpLoMLxBN5m0HO6Aw/e7f6mz74tpyvWt2RhRm
- jE4x29Y2HbhFk+8gK9Rgyj20xmZvYH9ucIShOhAt4UwKaJoNNq1tgDbMuLJD1HXUUE6D
- J8TA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrHAIWXBk52HAwyiM8qsM/xknE7vlOjFBtw/tDmacrz56cifRHGyUTxB6u0xy5xU3EqJRJUp5M=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyG8KQMjIIMe4CSz7E70wzQH/qYvb94jhrmYj4dEFphQhLWX3F2
- hqZesc5M0zfT5gdxS1tQWJk93ARMks0peqnUEXpqYBR239ZX8js7c7Xz2un8NQ==
-X-Gm-Gg: AR+sD11hqd1hRQSKmhSKs3yQ0g//1jkMaec4Q/eNoBOnkWhMWkPdJF5/0md2JYIy7rn
- FyvaJCslxIFlWmwEOhbuDMSLnU95MuvGUlRH3NBP00VjcAtuV4slWGndxQaMFnrmoB88J980bQE
- UwSqr01+2Wm+JxoCXB4fcu8K2BhLA9d5Ya8vQyEGjiaJyG1CxHwnusOfkQVMf5qEFhNdzZx1EuZ
- TPQ71vBUtlKCdiXdaLgBG7lKSDYIZdnLoHLFZgwomGjX0ZINDOb0AuFqEKvrbAsQrlw1XmuYsjp
- 9CZDjc8y9GT1TUMpUOxeRQ+X3JzNLGggZYRGroWyNzoW5AwjbUT9t6aF5JYox3J3TyX6kbnkN6d
- UDfCTWADpGsVATL6CqKvn/ul6yd0nUjOFIEGl7dqhEyk+cGFVH6+A1kyRHdgYYTkhcZX2N7c8Gx
- N0kDc2GkKxNJRA36T2/KoE1IS8pqSnOhmcqmqqaSMqGJ6Bows=
-X-Received: by 2002:a05:6808:5244:b0:495:effa:f06e with SMTP id
- 5614622812f47-4a4d049cf64mr13065657b6e.42.1784726864499; 
- Wed, 22 Jul 2026 06:27:44 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:1b3:a801:a24:3a9b:51ad:2c34:1075])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4ab0c7a1756sm1094710b6e.3.2026.07.22.06.27.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 06:27:43 -0700 (PDT)
-To: u-boot@0leil.net
-Cc: trini@konsulko.com, sjg@chromium.org, kever.yang@rock-chips.com,
- u-boot@lists.u-boot-project.org, Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH v2] rockchip: rk3588s: Add support for ROC-PC-RK3588S
-Date: Wed, 22 Jul 2026 10:27:28 -0300
-Message-ID: <20260722132728.1093856-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ client-ip=2a01:111:f403:c201::6;
+ helo=am0pr02cu008.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2021380F0B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2021380F0B
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2021380F0B
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:53:42 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=duk6NVnj1b657Tm8UhJwC3P6veiLiRiFFFUc8YHFrS5g46x8F9k2jRX15Dj8424/fD/Bi5vi88j+Ptn3OdF6uZtCQWWWACdr4Y8/mLtbzGiXivgs8NLajyMQo6/JaSzCWb5dUlJi1u0p8pux5djO2dJA4wdVGNHm7Bj2jFp5V6eIxyMfG9/ytB2rePmo1jVDf7O1cKunBosVz3ajZM6Now/jU0nFahLK11auRoC0i5FXjmEpuq52FjGzbiHFPW7jfRNG9ss7dXQcg7yGy4G6sXHlGnqjMj9GFpmKEU1zQ3HYICtMafvrJMRJLXz0mkp0mblx548CACe/Az67yM0GyA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QH6kWALxc2DkoIoMTRKrOJzQfiXORxd8BhxAV1AtTl8=;
+ b=sWZ7UZ6Fj6FvPMVLu4T6C+8v+r/7VzhLXix7X/umOtD8Lb6HKXYktJftSgFvLqLn5yYb4NcVueX6PXnH9Ch+UWYzbgAD7VrrCO5kqIvCJysnMlDaTovRlvZIBUWACL742xZiIbqSbOvOhtv423KBB7nnP7zofQmk2t2A9niBRpEDiCyE+Sm1r1pcIW2uamVf1uAx/z0EZ9rG7AmQ1Q8rUX5L9NlJYoiZ0QHQ/Op66plKYpfSK09BScutH2jV4DaUcaBvIOdKT978uX8wiP1cjPyetN1QdNLzThC9fxqI77RjaM/LyKjCiwhT8v9LRz9jRJXH2SR4zOKTiLtzTNjzBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by VI0PR04MB12638.eurprd04.prod.outlook.com (2603:10a6:800:342::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
+ 2026 13:53:38 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0223.017; Wed, 22 Jul 2026
+ 13:53:37 +0000
+Message-ID: <1c18e3ff-a1af-4ea3-8850-ce41d52a1109@cherry.de>
+Date: Wed, 22 Jul 2026 15:53:36 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] rockchip: rk3399: Remove ROC-PC regulator overrides
+To: Fabio Estevam <festevam@gmail.com>
+Cc: djw@t-chip.com.cn, sjg@chromium.org, kever.yang@rock-chips.com,
+ u-boot@lists.u-boot-project.org, trini@konsulko.com,
+ Fabio Estevam <festevam@nabladev.com>
+References: <20260722013642.1011666-1-festevam@gmail.com>
+ <20260722013642.1011666-2-festevam@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20260722013642.1011666-2-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM0P190CA0014.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:208:190::24) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|VI0PR04MB12638:EE_
+X-MS-Office365-Filtering-Correlation-Id: 88f34bce-a1c4-4a85-56b1-08dee7f8a132
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|23010399003|22082099003|18002099003|3023799007|10067099003|11063799006|4143699003|56012099006;
+X-Microsoft-Antispam-Message-Info: BP8noPgNJ+Po8pfb16SSYa4WSPEu4Ha1ooE2vIqdH7err0JicT/HCeNZ7Qz7IBKK1YOqH3V78TNhat3F5sE8YE7lr1twkM7BQinWPQREm4BTyM4CW5i5AqfBfJA6Y6jBgSyvms8xn4ayDRyFtj0zGYObuRQkUJ0Os4zXWA2/hrjdJKwM0BBkoSJjPI+/gkn3nOtNGAjXj8ctbVkYme940KxUZCyoQAPZaW35B7fGpN8UE4GTvda/28tCzZcp/fSoerwCU2skHAVOGMEUFl0OEzwHz4dltML8wS4WkqXojgPiJFRXIBavj7SPdrmfpX84twJfNW8YijTodC4dXIX63aEYClFuHYO7XXxJLqrWOEmdxZFRJNAMd2yBJeVbFX12HX9wr65jWNyXYAQhY7c+7TXpNh4Xz8iTsa50tQho/ocYtFG8QaDCIcfF0+igg/Ypoo1j0Mnz6QYIQEGB/5GFo0FjSjbEFPuKQO+IyWaINPB7HkmVg/6rFisktVK1sP+TDj/cOaZ4yJ9SvbiT0fUmoqQIuZFZDr/M/2Rvet6uzWAgsWpG+V9jf/eV3hGkpLOGcXHc8cuipQgVsDtlitHInFwQ8lzJY2+thCU/Lz+MvlNY/yfZapUHd6bQ5QydEqCnWvWcXheNI+zpZowdyGvSfWpBQ2yYuBsluwatRtJemHg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(22082099003)(18002099003)(3023799007)(10067099003)(11063799006)(4143699003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ekZxdy9Nam1Td2hQNkluUjdFdmprZzdjZjArUlM0V3dkQTlrbytPTEE2R0Qv?=
+ =?utf-8?B?VHcxZHF3SVRhZjRISi9aNnN3QWM5M2UvVkh6d0ZNNDluS3dWRTBTWWVGb3hC?=
+ =?utf-8?B?SlI2UW95ZlhhK1UrNjhuYTBXRjNGd2JGcHRlQzRHWUhuTVg5OWMydHVqdVZz?=
+ =?utf-8?B?bzlBK0JPQUxNVnhUQjBnT1FSS1VIeHhlUThzejMyT2VsV3B3WlNLWGhDZVQw?=
+ =?utf-8?B?QUErNStMNnQ3WkZNL1NxWHpjaEV4SGs0THk5RVlBVGZSUkZQQUxYUWh3azdt?=
+ =?utf-8?B?bE5vSmtHNk5lZnUrMnZ6cmpleVRtZkw2aTZKZjZLaFdqWHh2WGdXUDlsMHNB?=
+ =?utf-8?B?YzhySEcwdGZvRm9LS3hIY3JmamhoazR4aHdJZFE2U2M1UWdwVmsxTWlrZWF1?=
+ =?utf-8?B?SXl5S0hOUGcwbUxhMmFYbG9LMVZUSHVIZnZTcnc1eUdMZ2JlQ2NpNjNlUWE0?=
+ =?utf-8?B?MHBMK0ZlT1Ira1lVZkpFU0QyZ3FMRjE0ZkNDaVVYRTFwLzdKbnE0Vk5EQ1pl?=
+ =?utf-8?B?d1kzaFQ0WFpqRG9selVZa3hxa1hoYTlhUkNYNlM5T1hSOFhPMHhpcGJNQjBN?=
+ =?utf-8?B?WCt3bXNnekhEUTNicFFDNTlQdmhoYmpRZEtydnZlWnB1RE5SdnRPbWtObUZG?=
+ =?utf-8?B?WVZzN2pxZmJFNTlZck9HMG5iSWpsWk1UMHk1dEM2c1JQVkk3bDBONU93TEpS?=
+ =?utf-8?B?bDFJd0tGY2Z6Q243dU11TDI2T2pqMnNCK1VEY3BZbVRmek5JbEQ3Z3dOZ1d0?=
+ =?utf-8?B?YkpGdTdkekljZHVQd0pLWkdHVTFudExlMVhCZGZtUlJydkRxbnJRU2V6aHlF?=
+ =?utf-8?B?UW1nT1hEWDJNL3lzZjVwUncxbVlTdldqeXc0L3d5Rjh5V29OOG1maEhEbnJL?=
+ =?utf-8?B?QW82blZBRnloajVPck5Cdlc5d1IvamtZNDU1YkVrVHZEcmlKdlA0eUNjUURy?=
+ =?utf-8?B?K01lQ0ZURjlPUjdLem41ek1PbUNDUEh6UnBrcDdYN1B5WFozR1hCT2NxZzRj?=
+ =?utf-8?B?S3IrdkJldENuaXNqRmV0OGFTWlpGSnQxOHFBdUdrRG1NUW5UU1J3VWRsUnpS?=
+ =?utf-8?B?SnNtVVZsVWxKVExvVFdlRmFzZk1NUTFuYzBnWGRGODhjK0t0SGU5WXF1bnNy?=
+ =?utf-8?B?ZlVVWEJ2WDREbGhJWjVqc054Yy9acW52UlpTa1oyeVZ2MmRUQmt4aHMzVUZ6?=
+ =?utf-8?B?R2NlU2FqYTJaOERyUW5uR3I2OUR6czhnK0lpR1ZGdFJUMHdncEpUZUhXNGJ4?=
+ =?utf-8?B?M0l6eTRCbFcrdVczaGttTGZPQTlWZTlaZEJhdlVCeUo4Uk9OYy9ra2dWZ2Y2?=
+ =?utf-8?B?UldJbHdrRHJ1SkdVMUFPbllPNmR6SnFPeEhmSEFIVEpnYmkvL1BTY3ljcmlX?=
+ =?utf-8?B?alEvbTZqSnhCcHdCdnJMaGRPa2NQS0RHdkR2N2FQMERrU2pwcGVSY3NTQkNx?=
+ =?utf-8?B?NVlxOE5ZS0xmcHI1OTJKRGkwb3JPTVZmd3I5TDNOV2VZVTVuc2JRVnh2RlFk?=
+ =?utf-8?B?ZlJXK2Y2R1BIUDBJcEd1N0FmTUEzTjg0UytMOXpOL2kvZWVRVnFNSmtBbWJL?=
+ =?utf-8?B?QnF2eVBuVnR2Q0c4djdzVXBQaldjR3UvaGtJLzBGMFZCWWhXczFRak5sNVRv?=
+ =?utf-8?B?YkZyTEtHNnJDeG1waklNS3ltRlBzWjdGWTVCanYxMFRTalJWMU56T29kb3Vh?=
+ =?utf-8?B?VGVkbitZWGtsTFlmM0g2aENuRkgvalcvTG9zMnpibUNLME45UEhLdlZNMjlp?=
+ =?utf-8?B?WVF2b1RRTms0TFJGQytvRjJSUjN5cFpZUUxGUisxb3gzVXNmOTM3a3ZJUFhQ?=
+ =?utf-8?B?OEdWMlZtZFVoRlBuMHhab0QxZ2Z5QXk1emNFR09CWTV6QzIrd2hnQ2RIOG42?=
+ =?utf-8?B?N0RZOXR5NG9kY1ZXYTdOdWRzdk5tMWpTVW5zMDhUK2Ywa2o3VUdEWUlOR0I5?=
+ =?utf-8?B?T29qd0d4QmduMlBOVlBTdlpoY1oxYmNuV21uT09JdVNvdWZXR2JQYVhvckhr?=
+ =?utf-8?B?VXlyMEQyR05IeWIxTjM1UDdlbmErKzA3Z3ZaUEhIblg5Nmo1bVFONmxVSmJh?=
+ =?utf-8?B?Y0pRWm5IRmt5VmszUGh2RzBqNFBtVm05UnhhQ2Z5RHFrVFBLdGZVaTFNUG43?=
+ =?utf-8?B?VGNTeENHZGJQOXVPR2hCNGtUTHk5VngzeTBqRk96dGhFODhRRUdIazNHUHVS?=
+ =?utf-8?B?UmxuZ01Fc2JuSDd2d0QyWnoxY1pSLzlNN0JCWWNhcjc0dlJzK0NqYTd1TFJN?=
+ =?utf-8?B?Rk5heENwRE84RVBMQTFtNFlaTWZGeituQ3hJeTUvZ0xzamN2SWtyTTkra05B?=
+ =?utf-8?B?Q3UxNGNObzJZdVcycEdUWVpoTkVvZVRnUHNHVFk1RTVET0FNSGpQZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88f34bce-a1c4-4a85-56b1-08dee7f8a132
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 13:53:37.8282 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LxRcZfszzfUpDzQn8JgIq7hFuSmQrux/jRb/aNCHglKig+Q6HkV4DVaDYEx7U7fBJ44j4gR7TTN9GmvTqJFEHAi3sFmWhzgtXvtg67KqIlU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB12638
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784726865; x=1785331665;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=oauELqhA6IU0x2XqmeZ/jEIhgb2TwDu2bX2rcpbWTX0=;
- b=MDMtS3W0lNAPdcgp5S3L7muipOV+SNtkG0NlA+WYpc2hpcR7cjRSjEXbC434GVKLEa
- hXxzWgmozva4gbXhklIst17WRZkZOsCLNIeYjckJzkJp11BSgyss9W1XKzKeopMIWb+2
- mtgYJhVyXvd9SoBFbCaJHex5ZtZGPW7byQSOqza+VzgaDLQZq02YQOmlrrrb7QiZ4R8l
- gEsSmjXyXdq6woqiFFMsIVvbbOHAAZHSedEszd7WOtwFT76E4qrnnEiUHKrxEZG9Ha9j
- eadpL1cNQHcSeXT+XLiatDrSJyIR5Txo6Hacd9NEa2RKM9tpf3FSoY4TLPMd9H3CQR3Y
- DvFA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=MDMtS3W0
+ d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QH6kWALxc2DkoIoMTRKrOJzQfiXORxd8BhxAV1AtTl8=;
+ b=bPcmEA/301roRYpsvdlirC3ZKGs6xnDPlTUhpPm1IPycPlTsoGeJZ71eZtlQZaX0ZEUJ4iDAFMV4BSfHuTGNPo8HQLfJsstHXfVaOHpA8pkkOb5y4XSBbxnZwictK1lL7nhXkqc/dG3S+DJ/tVPclPniWtlcURQES8drN/1A4nI=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=bPcmEA/3
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -122,239 +176,25 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Fabio Estevam via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Fabio Estevam <festevam@gmail.com>
+From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Quentin Schulz <quentin.schulz@cherry.de>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Fabio Estevam <festevam@nabladev.com>
+Hi Fabio,
 
-The ROC-PC-RK3588S board is an SBC made by Firefly, based on the RK3588S
-SoC.
+On 7/22/26 3:36 AM, Fabio Estevam via U-Boot wrote:
+> From: Fabio Estevam <festevam@nabladev.com>
+> 
+> The upstream devicetree already describes dc_12v as the output of the
+> MP8859 regulator and drives the USB hub reset through the vcc5v0_host
+> regulator pinctrl state.
+> 
+> Remove the legacy fixed-regulator overrides and rely on the upstream
+> regulator descriptions.
+> 
 
-Add support for it.
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Signed-off-by: Fabio Estevam <festevam@nabladev.com>
----
-Changes since v1:
-- Use the traditional environment offsets of 0x3f8000 and 0x400000.
-- Keep clock-names in the SPL device tree.
-- Drop CONFIG_RTL8169 as the onboard RTL8211F uses CONFIG_PHY_REALTEK.
-- Add the accepted upstream USB device-mode changes to
-  rk3588s-roc-pc-u-boot.dtsi pending the next devicetree-rebasing sync:
-  https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?h=for-next&id=9d1e32bfdda1aef3291e47c2949b3b9978162a5c
-
- arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi  | 13 ++++
- arch/arm/mach-rockchip/rk3588/Kconfig    |  7 ++
- board/firefly/roc-pc-rk3588s/Kconfig     | 12 ++++
- board/firefly/roc-pc-rk3588s/MAINTAINERS |  7 ++
- configs/roc-pc-rk3588s_defconfig         | 90 ++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst          |  1 +
- include/configs/roc-pc-rk3588s.h         |  8 +++
- 7 files changed, 138 insertions(+)
- create mode 100644 arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
- create mode 100644 board/firefly/roc-pc-rk3588s/Kconfig
- create mode 100644 board/firefly/roc-pc-rk3588s/MAINTAINERS
- create mode 100644 configs/roc-pc-rk3588s_defconfig
- create mode 100644 include/configs/roc-pc-rk3588s.h
-
-diff --git a/arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
-new file mode 100644
-index 000000000000..7d97f64ec7a9
---- /dev/null
-+++ b/arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
-@@ -0,0 +1,13 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588s-u-boot.dtsi"
-+
-+&usb_host0_xhci {
-+	role-switch-default-mode = "peripheral";
-+	usb-role-switch;
-+	status = "okay";
-+};
-+
-+&usbdp_phy0 {
-+	status = "okay";
-+};
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 675f13ab66d7..841ae490e85a 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -208,6 +208,12 @@ config TARGET_RK3588_NEU6
- 	  IO board and Neu6a needs to mount on top of this IO board in order to
- 	  create complete Edgeble Neural Compute Module 6B(Neu6B) IO platform.
- 
-+config TARGET_ROC_PC_RK3588S
-+	bool "Firefly ROC PC RK3588S"
-+	help
-+	  ROC-PC-RK3588S is a single board computer from Firefly
-+	  using the Rockchip RK3588S.
-+
- config TARGET_ROCK5A_RK3588
- 	bool "Radxa ROCK5A RK3588 board"
- 	help
-@@ -421,6 +427,7 @@ config SYS_SOC
- source "board/armsom/sige7-rk3588/Kconfig"
- source "board/coolpi/genbook_cm5_rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
-+source "board/firefly/roc-pc-rk3588s/Kconfig"
- source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
- source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
- source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
-diff --git a/board/firefly/roc-pc-rk3588s/Kconfig b/board/firefly/roc-pc-rk3588s/Kconfig
-new file mode 100644
-index 000000000000..bded7a2fcba1
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3588s/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ROC_PC_RK3588S
-+
-+config SYS_BOARD
-+	default "roc-pc-rk3588s"
-+
-+config SYS_VENDOR
-+	default "firefly"
-+
-+config SYS_CONFIG_NAME
-+	default "roc-pc-rk3588s"
-+
-+endif
-diff --git a/board/firefly/roc-pc-rk3588s/MAINTAINERS b/board/firefly/roc-pc-rk3588s/MAINTAINERS
-new file mode 100644
-index 000000000000..9a2bb4e69e89
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3588s/MAINTAINERS
-@@ -0,0 +1,7 @@
-+ROC-PC-RK3588S
-+M:	Fabio Estevam <festevam@nabladev.com>
-+S:	Maintained
-+F:	arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
-+F:	board/firefly/roc-pc-rk3588s/
-+F:	configs/roc-pc-rk3588s_defconfig
-+F:	include/configs/roc-pc-rk3588s.h
-diff --git a/configs/roc-pc-rk3588s_defconfig b/configs/roc-pc-rk3588s_defconfig
-new file mode 100644
-index 000000000000..0941c3c08236
---- /dev/null
-+++ b/configs/roc-pc-rk3588s_defconfig
-@@ -0,0 +1,90 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_ENV_OFFSET=0x3F8000
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-roc-pc"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ROC_PC_RK3588S=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_ENV_OFFSET_REDUND=0x400000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-roc-pc.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_REDUNDANT=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index b565aea311e9..d56d245dc114 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -155,6 +155,7 @@ List of mainline supported Rockchip boards:
-      - Rockchip EVB (evb-rk3588)
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-+     - Firefly ROC-PC-RK3588S (roc-pc-rk3588s)
-      - FriendlyElec CM3588 NAS (cm3588-nas-rk3588)
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-diff --git a/include/configs/roc-pc-rk3588s.h b/include/configs/roc-pc-rk3588s.h
-new file mode 100644
-index 000000000000..c9316687c38f
---- /dev/null
-+++ b/include/configs/roc-pc-rk3588s.h
-@@ -0,0 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#ifndef __ROC_PC_RK3588S_H
-+#define __ROC_PC_RK3588S_H
-+
-+#include <configs/rk3588_common.h>
-+
-+#endif /* __ROC_PC_RK3588S_H */
--- 
-2.43.0
-
+Thanks!
+Quentin
