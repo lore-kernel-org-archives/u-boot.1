@@ -1,101 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4A7C4453A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB8DC4453C
 	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 21:44:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B9599608C3;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4158E40A57;
 	Wed, 22 Jul 2026 21:44:16 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kR5OMc-DJaHK; Wed, 22 Jul 2026 21:44:16 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CB382608BE
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784756655;
-	bh=s8maGOkvukmMMG86CyUNg/QcrZtys0gXl8LB+UrBX1M=;
-	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=UqYP5ce69kjR0qVxqw3f0XgADCQCvIPNzeCuFG/I+QQnwtEEdMvtAQPs3mHYopIHc
-	 MmVCj53rH1EIb/eeLMcmny2HVZLKMwQjSxNANAOuehi2vIzuigr7vPQhVX76B+/caz
-	 GIK7xIQl/u3j9ZmzZG9bK3sPh0Qz7fQTbf+uyInptX5nO0QiAIb9P/3V7IXxWM5Y7B
-	 lpTOC5m1sLuR/NwmWfvdx2P7DfikHca7VWSKWz6otxWVLbNgzg0o7fxioTzj065djt
-	 ShhiJvQ/mtrdc6nfCr+CeUru/xjv/mZlKyARDm/ioQXfWluwNDw22y4kzFhHo+z1C0
-	 LlBqYtm4Swo+Q==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CB382608BE;
-	Wed, 22 Jul 2026 21:44:15 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7326C3B0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 21:44:13 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 648C3407D0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 21:44:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Y4hLSV1itzPe for <u-boot@lists.u-boot-project.org>;
+ id o1rAmwzzxV33; Wed, 22 Jul 2026 21:44:14 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A3E34407D0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784756654;
+	bh=d+6NUKLw7x5r24/TF3Q4Bm+dtdddbZlwstY0NgcrItQ=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=hUisRMfZRfHT4Iq3iRHI0A3pNRkHa6ISzHmPLpRrLgYvSCKyrVeKUbWX+QUculFf6
+	 UwneVgVbFoWDiy2EngciU1X3RdSppmYYizI/A9GK3NMTRfh+QaW1oA9aWoqzmqLLEG
+	 Y+/PHg7ooSyRzqPC0eRvMmjAyG7jvd1pqUNJHI5plKkEQqJGsI68r0zOU/gz8LIGVI
+	 55Um0s+dhJusFsrE6uJslltKo41OAC6pcwbl0yWLLUGX0AFI0kdE/F5tps1vz2OkJH
+	 23eogVcGrr5FhVNW/UwHa1tECVb2FcU9dzKEKfJAzkf3W/3crnDW8awMYyM2z7tKuJ
+	 6wfbeTyTCgQmQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id A3E34407D0;
+	Wed, 22 Jul 2026 21:44:14 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 71D92313
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 21:44:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6AA9B80F72
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 21:44:13 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JszmOGszRhw5 for <u-boot@lists.u-boot-project.org>;
  Wed, 22 Jul 2026 21:44:12 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:31::9;
- helo=mail-wm2-x09.google.com; envelope-from=ccaione@baylibre.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 7432E407A4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7432E407A4
-Received: from mail-wm2-x09.google.com (mail-wm2-x09.google.com
- [IPv6:2a00:1450:4864:31::9])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7432E407A4
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 21:44:11 +0000 (UTC)
-Received: by mail-wm2-x09.google.com with SMTP id
- 5b1f17b1804b1-493e55619a2so26685415e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 14:44:10 -0700 (PDT)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5DFCC80D83
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5DFCC80D83
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5DFCC80D83
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 21:44:12 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-495635a85d2so29653115e9.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 14:44:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784756649; x=1785361449;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=s8maGOkvukmMMG86CyUNg/QcrZtys0gXl8LB+UrBX1M=;
- b=czt1fRxHoUXWlyQ/6v6ptTpDd+7LynG5ojYrtiKSDmL9IK6UQIZkjI2103EdCWIz6C
- KGZ/JlHtzxgDdW2fmq1FxsiHqiPZZu6mxTiC8s1wc8ErJkobAYjwW38+MvbiHgQVt3X5
- JojDxMg5wSsxfUMNy8EIDApfi6+Wit1gIneNKyfxeA4XL0QUMZtCI2vQSvxbDRmhgGIq
- 8Ae5xzcamVG5q24OLXADRRXwmKJ2F3r5CMdtNEktKfKe6qs+J4IwY3+47FE5nbRQbSRK
- 0BvvFRYXDkZuAj6e5LozVeiP3XNos5r9TOY6j+IEdz1Q7vpF2KgjHDdDaPY/OoG5913v
- V8Fg==
+ d=1e100.net; s=20251104; t=1784756650; x=1785361450;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=d+6NUKLw7x5r24/TF3Q4Bm+dtdddbZlwstY0NgcrItQ=;
+ b=TiZI/9rRrx17QuvGSSFwslasx46DnH4IjAH6u8O0YJrm01OB3pfltbPF2zMEP1DhpX
+ a5zS3Gt4CV//aT9Tsj7UgEwDjTnTjl9CVy0sNxmNiKGAG4htYr4Q6QHiqPreirMNjnjw
+ huH6msBtpRvkOMHVli2KbXhZqZQL8vT0TMJwJXF/5wHFxJJfWuhlQFPjdyBhdL2Zgeyu
+ mH/UCT58ZblVLH8K1t5uASwr+lkLDkNEKciRuttYxh5H+jFkZ4DL6F42zf20iffcwmZv
+ pVEQFlAQplUOdmoGEYggfDsDC7Mr6pYsGYRqGZZVn0s0m0q9CYUbCHc9dvlONmhFfp8Z
+ kXlg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpRxw0TySWSMk0IY5uiSmFh8yDNG/u5b0xCcFPeUORbi9CdM9n8jun1QlkSy9IvhY9HKXo7nvI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzVQ5gmBeBmMi4ANWlfhZgNi4XnZoGYi36nFlE90bMMfUw1Scto
- 93N1FlHg8087NZEqqnIeriGMnUYvVd4Nehpb+vA2UiOkzGT7TP0o9gx7XGehlekWEgU=
-X-Gm-Gg: AR+sD10EolzXGW+72aD++KlGMAPRwZokfWHBN0qMVrPXNEfUWUYa0jo17AjUQkZceKP
- FU8ASqChnWOxsi/x40Km/jG8i3hsXM5PcHWY5mRfEae1+8/VcWdPzDAYmS/r/TOHE9mYiFaw9By
- kMdrr4datqZittIdmhnlZN3iJwc+LCD8suHBzGlYlvjD4UY4/HXCeg3Qrci5bSTEhqUBHrhGDLn
- Xi13ILP2HORfpZPiNRpoMXfucAbF10/PQmgeCq0yTO1AiUagGeRgxUvMpaDYjjbIGtOQLKwJzsj
- 5fVqCDI+E5SPFw/ie+AMEDHnBpkkUQ7RTcaUJ5LktE1z2yUKGEjQiyve9r2+GRzVebtl8dL5Yma
- C9g8VJP0rCjeQgGNhGKg5A7+xSNtbO0lBTl90sc89lGgewZOADZf9tej/2BRS0Fs8W0OetqnX/o
- cP3oRgJS/7nvyyNVzwInxMQGJNujVGCPU4UsH7F1+KGuW+WAENi3koGcfwVjU=
-X-Received: by 2002:a05:600c:1989:b0:495:3f99:849c with SMTP id
- 5b1f17b1804b1-49573cc7cdbmr4064995e9.15.1784756648849; 
- Wed, 22 Jul 2026 14:44:08 -0700 (PDT)
+ AHgh+Ro0ud/7Tethol/+qb3A4vEqlAODl6ZlX0sAQ/P0pVf9/9Aen7HidhnfiKFwdxGAucxEHW3gysI=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzMHIyjwhAu5m3nv4BefsryGtwCj9YY9jc05ebba/aYQXf/AilN
+ +97sZtaKl0ND4AwO73bPKLi7i7NLi/z1Ck2vk7stq/WZ8i0gnrCBfyZDkcU5n5Ly9pM=
+X-Gm-Gg: AR+sD12OagWljP/eQKoU8bNs7Ys+M/GUH8qJknqv0iZYz6y4Xj8o41xRuK6K3A6sEiz
+ Th61wCxzvQ0v2TeKDIWCM5H0uuQY7OpLDuRTyjOUk8eO4L4ifEtKWr/BTeUoLAJR9dlngDUQZV9
+ xxMsU/r9lNzKoQh7Ngfbi40omK0S6LUXK5sIU4ymvLmN1pljtGbPmwRi2yr1MHjudFgiCo10tqA
+ 5GXfPVKSoN1WLZz1BUxtmF9e5JPMkRVGEzn/HpTpMptAK63IkKT4BMucM18YRyQp73pkJ9h3/SX
+ /l44hEPEPO5Qe0nBiibgntPyfXpjYJuNTLmedRBYtTnVVSxl7xvyGenEsKwwURGKM6TRJ1+6aes
+ WV/iMBY3PYpn9pPMisrSPw1m5SGY1NusBVzIKMaExwBdpwo/pFOzT7slJtShRLfGJjMJcwJfAo5
+ U5MdOG1atPW6tiZzR5Z1zVJQ9eiSOe7SoI27+P4PXW2YDakZtr7OQhDLMCyw4=
+X-Received: by 2002:a05:600c:c05a:b0:495:5eca:f9b3 with SMTP id
+ 5b1f17b1804b1-49573d0ccf7mr3840065e9.26.1784756650055; 
+ Wed, 22 Jul 2026 14:44:10 -0700 (PDT)
 Received: from [127.0.0.1] (host-87-0-90-136.retail.telecomitalia.it.
  [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956a967289sm96879285e9.11.2026.07.22.14.44.07
+ 5b1f17b1804b1-4956a967289sm96879285e9.11.2026.07.22.14.44.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 14:44:08 -0700 (PDT)
-Subject: [PATCH v4 0/2] Add support for the MTU3 upstream devicetree
- binding
-Date: Wed, 22 Jul 2026 23:43:57 +0200
-Message-Id: <20260722-ccaione-upstream-mtu3-spl-gadget-v4-0-9719f4cecaeb@baylibre.com>
+ Wed, 22 Jul 2026 14:44:09 -0700 (PDT)
+Date: Wed, 22 Jul 2026 23:43:58 +0200
+Subject: [PATCH v4 1/2] usb: mtu3: support the upstream devicetree binding
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/5XPQW7CMBAF0KsgrzvIHidO01XvUXUxtifBiJDId
- qIilLvXgQ2quoDll77en7mKxDFwEh+7q4i8hBTGcwnV2064A517huBLFijRyEY14ByVCsM8pRy
- ZBhjyrCFNJ+jJ95yBSHvdOvLSkCjMFLkLP7eJr+97TrM9ssubuzUOIeUxXm43LGrrvTC3KFBQN
- 6QZvSS08tPS5RRs5L0bB7EtLvhovj9hYjGbzpQvKoN13f5j6gcT5ROmLmarXNdVlVUG8Y+5rus
- vodCZoI0BAAA=
-X-Change-ID: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
+Message-Id: <20260722-ccaione-upstream-mtu3-spl-gadget-v4-1-9719f4cecaeb@baylibre.com>
+References: <20260722-ccaione-upstream-mtu3-spl-gadget-v4-0-9719f4cecaeb@baylibre.com>
+In-Reply-To: <20260722-ccaione-upstream-mtu3-spl-gadget-v4-0-9719f4cecaeb@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  u-boot@lists.u-boot-project.org
 Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -107,24 +104,24 @@ Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784756649; x=1785361449;
+ d=baylibre.com; s=google; t=1784756650; x=1785361450;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=s8maGOkvukmMMG86CyUNg/QcrZtys0gXl8LB+UrBX1M=;
- b=BpkmqHfT9Ag0LlMFExh2HuOSFmit4dize1rYvF3XnWbeZDKbeeNCPSmSpoywHPgEoa
- b+s7eOzhePrm/3/N5KehH0nuEIpo5kgq5iO32s3dVxu0h7OMqTLTFsVlAIrw/7qGAEr7
- VeqpUG50fQ4+jg3+CISc6PrzfRbHhcxRMOZ+fMc///7s3RpslwuOrw1OK8DgQAZ88poJ
- d/+vz4IsF2kCb2Dq9Xzc+hYKOpLGWS7EScvEezg4C+TN0xHLF1mRcOQ3X1nWg9H7mW47
- M9orQtmorYDDHHUG+i6/oDsroZXbkZspabcqOaFWz5TbLJz9+TEfXW9A8y/tHm7aHrmH
- j/xQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=d+6NUKLw7x5r24/TF3Q4Bm+dtdddbZlwstY0NgcrItQ=;
+ b=poQ2ywZufquQXyagNDcLaAX1Wb1B1yolUDtpaa/zXBM9/asrSsDQHnHe8bL+gaPIz8
+ ktLJG8nzpf7n8dkWWZKJtW99f5Ko0XSQRMAobi8Mg0Gfn/t8/C2aF8Yfxrv+Mo1wWOle
+ MaGfIg6xUQND4y8hX/VFiW+b45mJPkGweWZ0+ikBxSgmLwLOpm8p/sneu9mZEmw8zAgT
+ ds3SZVk2YPFoj5UX0L3kzKCP2djx/StwmW2F8fUne6Hr1rpFbojx480yhfRyPISgPGr8
+ N1Px6M4ILYosAnS49kSgBJ8Am2HJC8eMYaYkkHVMr7AFHFj3z+u5YTfVWuXoVwYVsezW
+ DpIw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=BpkmqHfT
+ header.a=rsa-sha256 header.s=google header.b=poQ2ywZu
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,46 +138,76 @@ Reply-To: Carlo Caione <ccaione@baylibre.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The MTU3 glue driver currently depends on the legacy U-Boot-only
-mediatek,ssusb child node. The upstream binding instead places the gadget
-resources and dr_mode directly on the controller.
+The MTU3 glue driver only supports the legacy U-Boot layout, where a
+synthetic mediatek,ssusb child owns the gadget resources and dr_mode.
+Upstream devicetrees instead place these properties directly on the
+controller node. The gadget therefore cannot bind when U-Boot uses an
+upstream devicetree.
 
-Teach the driver to support both layouts, then convert the MT8183
-devicetree to the upstream representation. MT8512 keeps the legacy layout
-because its compatible is not yet described by the upstream schema.
+Search the controller children for the legacy U-Boot-only node and use
+the controller itself when none is present. This preserves compatibility
+with existing U-Boot devicetrees while allowing the driver to consume the
+upstream binding.
+
+The two bindings also use a different base for the mac resource.
+Normalize the upstream device-block address by SSUSB_DEV_BASE before
+mapping it, while leaving the legacy whole-MAC address unchanged.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
-Changes in v4:
-- Describe mediatek,ssusb as a legacy U-Boot-only binding
-- Fix the MAC resource error and remove redundant ofnode initialization
-- Convert the MT8183 devicetree to the upstream MTU3 binding
-- Link to v3: https://patch.msgid.link/20260720-ccaione-upstream-mtu3-spl-gadget-v3-1-91cff44b1622@baylibre.com
+ drivers/usb/mtu3/mtu3_plat.c | 23 ++++++++++++++++++++---
+ 1 file changed, 20 insertions(+), 3 deletions(-)
 
-Changes in v3:
-- Remove the temporary platform data and derive the binding during probe
-- Use dev_read_addr_name() for the MAC resource
-- Link to v2: https://patch.msgid.link/20260718-ccaione-upstream-mtu3-spl-gadget-v2-1-7f69ca462559@baylibre.com
+diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
+index 26fee141f6e..da617d81c30 100644
+--- a/drivers/usb/mtu3/mtu3_plat.c
++++ b/drivers/usb/mtu3/mtu3_plat.c
+@@ -136,6 +136,7 @@ static void ssusb_ip_sw_reset(struct ssusb_mtk *ssusb)
+ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
+ {
+ 	struct udevice *child;
++	fdt_addr_t mac_addr;
+ 	int ret;
+ 
+ 	ret = device_get_supply_regulator(dev, "vusb33-supply",
+@@ -166,7 +167,17 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
+ 		return ret;
+ 	}
+ 
+-	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
++	mac_addr = dev_read_addr_name(child, "mac");
++	if (mac_addr == FDT_ADDR_T_NONE) {
++		dev_err(dev, "failed to read mac address\n");
++		return -ENODEV;
++	}
++
++	/* Upstream bindings describe the device block, not the whole MAC. */
++	if (ofnode_equal(dev_ofnode(dev), dev_ofnode(child)))
++		mac_addr -= SSUSB_DEV_BASE;
++
++	ssusb->mac_base = map_physmem(mac_addr, 0, MAP_NOCACHE);
+ 	if (!ssusb->mac_base) {
+ 		dev_err(dev, "error mapping memory for mac\n");
+ 		return -ENODEV;
+@@ -317,9 +328,15 @@ static int mtu3_glue_bind(struct udevice *parent)
+ 	ofnode node;
+ 	int ret;
+ 
+-	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
++	/* The mediatek,ssusb child is a legacy U-Boot-only binding. */
++	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
++		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
++			break;
++	}
++
++	/* Upstream bindings keep the gadget resources on the parent node. */
+ 	if (!ofnode_valid(node))
+-		return -ENODEV;
++		node = dev_ofnode(parent);
+ 
+ 	name = ofnode_get_name(node);
+ 	dr_mode = usb_get_dr_mode(node);
 
-Changes in v2:
-- Removed typecast horror
-- Added platform storage to pass around legacy flags and device
-- Link to v1: https://patch.msgid.link/20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com
-
----
-Carlo Caione (2):
-      usb: mtu3: support the upstream devicetree binding
-      arm: dts: mt8183: use the upstream MTU3 binding
-
- arch/arm/dts/mt8183-pumpkin.dts |  4 ----
- arch/arm/dts/mt8183.dtsi        | 12 ++----------
- drivers/usb/mtu3/mtu3_plat.c    | 23 ++++++++++++++++++++---
- 3 files changed, 22 insertions(+), 17 deletions(-)
----
-base-commit: d0c49353a648e135f269a2953dc9326505ba87de
-change-id: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.55.0
 
