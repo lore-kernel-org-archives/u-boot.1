@@ -1,94 +1,94 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5720BC44536
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 20:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F50FC44536
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 20:43:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A76C6089D;
-	Wed, 22 Jul 2026 20:43:37 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BiHFDXjz80wx; Wed, 22 Jul 2026 20:43:35 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6BD316071E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784753015;
-	bh=jY4VNVf6XSr//v7Bx69c24YBuzLdK3Gp2IXMXfLpom0=;
-	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=ODB0pw7lF9WCogFQfvQGNzy/X5x22ecdI1853WY0p4AYv977qeHXjPJaOC38YYHdM
-	 vSdUtUzXBHMNb/Y5gTLCKH3LQkanCfaBBzv2ParUvrTfjlYUH6OdFtYes+KjHzYOjp
-	 4RRLUDUWL9KXmsofQsaxx0M5VXvC3YVvcxZ8n+sQMY5VNpQc46EOOzYPlna2YzoBSi
-	 0to3AzJpFx1oNeBUc7MaamJjs1gjJpoMCEnTIJ2qYDCebRvb5DFj5Zl93IJyO9GwLD
-	 CciX4e5KbdjKy2mflUQbl78B/YrQl7B+cVwohv7riIW3I3mM++rKmaLm5VeXTCe1AV
-	 36IZYmOQJWiTg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6BD316071E;
-	Wed, 22 Jul 2026 20:43:35 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A431E1B8
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 20:43:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 872A780BCC
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 20:43:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 13F5080F63;
+	Wed, 22 Jul 2026 20:43:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pJ03vhkUIrfQ for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 20:43:33 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:31::2;
- helo=mail-wm2-x02.google.com; envelope-from=ccaione@baylibre.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 7369980BB7
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7369980BB7
-Received: from mail-wm2-x02.google.com (mail-wm2-x02.google.com
- [IPv6:2a00:1450:4864:31::2])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7369980BB7
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 20:43:32 +0000 (UTC)
-Received: by mail-wm2-x02.google.com with SMTP id
- 5b1f17b1804b1-49242309566so26152565e9.0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:43:32 -0700 (PDT)
+ id amlpR34rqx6f; Wed, 22 Jul 2026 20:43:38 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8021B80F53
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784753018;
+	bh=PryxGpCcqJEgrr38fnTBBkTcWI0Mg1rz0bKnWPWJ198=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=IWoKAAkKYvEEtI928lW3Xrnf08uQWJkRn5hkwb7j4vDZILdbZM9JaGktMwyw/fjTu
+	 HxiPtbYQnf1QYgsZKwXEceGf2/KEgJFLVsgXQR9XzfJ/1MHw3IFjCsAEjmxvwEdmiD
+	 9M3TCd/cLynP9ygdD2eVGnIT27RIHhJrI1Q9AFQXSMrL5LVdaPFG1ibDmG7POnR0YL
+	 tTI0qRDKeBT+GH/2PpasaaUm3PWUWxXzTtQRvP5juThfqXnCmP2ftTGqojvqux1KXx
+	 hwAEpo+zUqe0IfDlvughELgTSbo2h3ez4pbeKGjXDTx59Vgg9CQskrOJOI59AcB60D
+	 43j0Be/6ewNsQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8021B80F53;
+	Wed, 22 Jul 2026 20:43:38 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 096E8347
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 20:43:35 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id E40576071E
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 20:43:34 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QlBs_89PI7Il for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 20:43:34 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 089C1605E9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 089C1605E9
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 089C1605E9
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 20:43:33 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4954aff6088so38985695e9.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 13:43:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784753010; x=1785357810;
+ d=1e100.net; s=20251104; t=1784753012; x=1785357812;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=jY4VNVf6XSr//v7Bx69c24YBuzLdK3Gp2IXMXfLpom0=;
- b=XqRa52G8ihpaj6Kk6cb2Tjr0hnV59rIGG+HNwvv+bfqGPMRnUh11+TI5aVaUFeyglq
- 6C1q18VA3zyniYybrhHlDzaFQY+egtAyJBAM5E0ai7kj7w6IU+so0lcRUg+m7HRA+OJr
- PqEbT1MuPBPygcCeBUCMooYx+zUz0fh3rLUT4y7wrIs5XCP9Fks2mFUCly/g8EI+9e33
- O79754Va9vXYr13pHLvKc3Ls2UoCSvZqg2DgBuBhdxxABItRScRMVhbs/E6CvCs3kKg7
- tjcsQe8UqnIEeogP79TUdisGF8Xnm4CxX0vczPHxYvWrTbpPQCOV36N3ToeNs6IvbTjD
- /Sgg==
-X-Gm-Message-State: AOJu0YyjEYryNoY6+tX4pMe09eS+iKCY3sLLsEK17NokMF5bP1fpFh1E
- BM+MT5DM05chFMC81PwmKO3slLK85jIy2pXbjbJ3b1KAHwlmtBaXekSIgpZVmtKf8mw=
-X-Gm-Gg: AR+sD11M9rkwTde6Y7ZNr8LEhXYldxPwLus6weFCYX2xIoeMb5Z4ioiCbeJoHjN6Lfy
- TCoEcsUoThjIVM6yHKRGHZsfyoUmva8UFlVYLhgbW66TUGQfWyM+P/XEKQmy0uBrVsoG1bWk4VQ
- PQOwGPHuQ0vek/sFSrs6Qo8mAyEqq6FhnoQs460vUwnO6oJ5nJLiPQU7v1NofXRnOZWP2mQA4Yp
- 6/dr50VxHssg2zg8BZ/QdD+MzB5KyozLdhihxq6SSjFkRIkxdx0qmVt03/CP79j1mH1mtEHM5Iy
- HFKE9/USrtDqvKs3VsNtcMDh30n09pZ+EiDXWlbjscpFTX9JFQUzUfCtYacBBI976hxfMoOQBxE
- pFVngFI4BcDRYMxu6lT+lll09nP0LXxR7UHqqV1skdk1+kazAWn3tgkgpnMYJLLVsyZuUtYZ8cb
- zMhfzMmPrTWTQmU8+yNSyi7nex/GZwix8bblRYHpe1LAhKPw9iah1Q7QVF7kU=
-X-Received: by 2002:a05:600c:2105:b0:495:69bd:17f7 with SMTP id
- 5b1f17b1804b1-49573cf1544mr1387065e9.32.1784753010147; 
- Wed, 22 Jul 2026 13:43:30 -0700 (PDT)
+ bh=PryxGpCcqJEgrr38fnTBBkTcWI0Mg1rz0bKnWPWJ198=;
+ b=D9HdJ8Cg6Uu1U3zH97D0U7U+i/Dt2OOSyjUpHUtO1xvSnQZ1/uYf3nQCbIb7lLYAFs
+ cpCm0vnSVimC9DQI24OMHfB9Rj6qHWFjlZ/xw1pFPzYPyyYDU/CvnY5/3Ptu5BDV9VTH
+ C4yI1/C9GAYe97Yg3oPfR+5Ch05rlt+U3OYa8IPyoQ4YQIB0HPw+HusoBwNVvo/FKnfd
+ zRBDWtnNvmXQ3EL2ox7j8nfPVJYdy3YhLMqcWrjoQ4AWT1XAliBwu5LPx6HbRdD1S7rn
+ fKiXEyjSc/I7YduQhnyZ+i5IR3IF+/gMLJlfDcLdA2HENAKx5RQ6Y930eRWh7Nb8rCO4
+ Sqkw==
+X-Gm-Message-State: AOJu0YwsttlTsi7tvcaO1v3a6hZPVW55NW9V+oXYXgnR6N1dccVWkEgo
+ /811jqPl81DQN7eIFK/TfSy85t401NFELEqLQha0sup4uR0qZrlEZIlmRMUBkcVzgPU=
+X-Gm-Gg: AR+sD12C+Vs+5KSKJ6arjgctWU0yVcUWrRiNkR5ZGFgExZxm2TTs4wuoQSRHOPQFlSW
+ KncRRMIlbrBFAUFhDH8/HYVnqZuXSyVRWItc4Pbv7YyqeV0vHefMmQNrmcX40MRI9ajsvGE84Th
+ FlxQ2Qdm/gW34B+Gk1eVYEp7UeEqKdcRMzl1rRQPDWtOXHsx6hIsB9O5m2HF/JcQWG2Jx94dEED
+ yUjQXNURGSAFwV/L2Wmtjwd12hyvR12Mh0OZe+ZLyg42bZ3ld+36amqL2+ezavw9aynBoB/TTO0
+ ekH6lxoPfwOmWufXV9jP6zk7cxAjutsxVACJuwAFMwkb4Q4J7JJWtDZ64K8KpaoxhfLI31SZeC9
+ /+5IgxK2B/xE5SWhjMlN/aav0j4ETdMJ2XRRMoY9nphRUJerTvMJF8wL/sgRHIIe5Z64a2aMiK+
+ 9JS0LrZ9o1m64cTIF6ARfoqm2fmlJQVNDDlnIijSPqKotjKhsH3008Ogx06qJ4X0oMtdZR9Q==
+X-Received: by 2002:a05:600c:1393:b0:495:6a50:3fb8 with SMTP id
+ 5b1f17b1804b1-49573c8c2b2mr2772755e9.1.1784753011909; 
+ Wed, 22 Jul 2026 13:43:31 -0700 (PDT)
 Received: from [127.0.0.1] (host-87-0-90-136.retail.telecomitalia.it.
  [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956b4e8885sm60775195e9.0.2026.07.22.13.43.27
+ 5b1f17b1804b1-4956b4e8885sm60775195e9.0.2026.07.22.13.43.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 13:43:29 -0700 (PDT)
-Date: Wed, 22 Jul 2026 22:43:03 +0200
-Subject: [PATCH RFC v2 1/5] fastboot: factor out the USB session runner
+ Wed, 22 Jul 2026 13:43:31 -0700 (PDT)
+Date: Wed, 22 Jul 2026 22:43:04 +0200
+Subject: [PATCH RFC v2 2/5] fastboot: use the common handler for USB reboot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-ccaione-upstream-spl-fastboot-v2-1-2ba3f71c42bc@baylibre.com>
+Message-Id: <20260722-ccaione-upstream-spl-fastboot-v2-2-2ba3f71c42bc@baylibre.com>
 References: <20260722-ccaione-upstream-spl-fastboot-v2-0-2ba3f71c42bc@baylibre.com>
 In-Reply-To: <20260722-ccaione-upstream-spl-fastboot-v2-0-2ba3f71c42bc@baylibre.com>
 To: u-boot@lists.u-boot-project.org, 
@@ -110,24 +110,24 @@ Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Heiko Schocher <hs@nabladev.com>, Carlo Caione <ccaione@baylibre.com>
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784753010; x=1785357810;
+ d=baylibre.com; s=google; t=1784753012; x=1785357812;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=jY4VNVf6XSr//v7Bx69c24YBuzLdK3Gp2IXMXfLpom0=;
- b=hma/QW2vHQQUNNPB3Dje+3P3HJtAgf5Aa/1tnzkFSJumPnPB5vUpAUILYUxW7zyMmz
- 6gcwtGihXlbNWnyAvEPcCbnkubLibA+4vaQ8f+LYxHBrmM1s86Bcj2BBfueeoaWiO4Lr
- tRtfL6x99gvZKn+UaJ/7xHUEpm8xN1LbTfaGyXgYu6BShHWZWVzp1smTStFbjE1Co+Qx
- meQ5zfU8AaZhef00UnpYWVFwhjpC61S58FEzgNvOCzQzZjSRnl/aQ+7O2i5jcftxb1+C
- 6lcYFOJC3Mzb/TsVGOqU2b2LU+1luqkogdlIrOYJ+uQP1kxAidehKzcVxZ0S3gQ4ae4Y
- yp1A==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=PryxGpCcqJEgrr38fnTBBkTcWI0Mg1rz0bKnWPWJ198=;
+ b=ommqHBkbwfne3mc1oqjQhKJPRfEnTy6oABfHsemj4Wg8WI52ZNHjeoYlKbvSmWiwDf
+ L/HeOOqSKA2h/zI0KlpoxvwBc9U6PbIF4E5hPWJkNqC/C21kAAKJxZZDgqQ61TN3sad4
+ UlHfjWtd/g0Q0qJ3Yuh6sE/XmieHDYKV9Z6lFdrqji1AvmTNzazdBE4NT89p04FLp5SW
+ flxNThoZspcoDTShMCMoM4W58QrG2wKbE2CGkyT5X1I3XvqgNqRi47g6BsMLscJDBrgd
+ eDF5GAjKvpNj7z18ZEEV5dV3w64pljV5NTjhY3b5MOeZ78BRvu8MujnNi0ZFBCxSyDiN
+ r84g==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=hma/QW2v
+ header.a=rsa-sha256 header.s=google header.b=ommqHBkb
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,227 +144,35 @@ Reply-To: Carlo Caione <ccaione@baylibre.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The fastboot command currently owns USB gadget setup, protocol
-initialization, the service loop and teardown. This prevents callers
-which do not use the command line from starting USB fastboot without
-duplicating the same session lifecycle.
+USB fastboot resets the device directly from its request-completion
+callback, while the network transports route completed commands through
+fastboot_handle_boot(). Keeping reset policy in the transport makes it
+harder to support callers with a different reset interface.
 
-Move that lifecycle into fastboot_usb_start() and leave cmd/fastboot.c
-responsible only for argument parsing and transport selection.
-Initialize network sessions in their transport path so their existing
-behavior is preserved.
+Send the USB reboot completion through the common handler as
+well. U-Boot proper retains the same do_reset() behavior, while
+execution-phase-specific policy can be contained in the shared code.
 
 Signed-off-by: Julien Masson <jmasson@baylibre.com>
 Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- cmd/fastboot.c            | 60 +++++++------------------------------------
- drivers/fastboot/Makefile |  1 +
- drivers/fastboot/fb_usb.c | 65 +++++++++++++++++++++++++++++++++++++++++++++++
- include/fastboot.h        | 10 ++++++++
- 4 files changed, 85 insertions(+), 51 deletions(-)
+ drivers/usb/gadget/f_fastboot.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/fastboot.c b/cmd/fastboot.c
-index f3929f88dfa..b12f9ea0ac4 100644
---- a/cmd/fastboot.c
-+++ b/cmd/fastboot.c
-@@ -7,12 +7,9 @@
-  * Rob Herring <robh@kernel.org>
-  */
- #include <command.h>
--#include <console.h>
--#include <g_dnl.h>
- #include <fastboot.h>
- #include <net.h>
--#include <usb.h>
--#include <watchdog.h>
-+#include <vsprintf.h>
- #include <linux/printk.h>
- #include <linux/stringify.h>
- 
-@@ -63,7 +60,6 @@ static int do_fastboot_usb(int argc, char *const argv[],
+diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
+index 8df0e3f331d..471c0e87042 100644
+--- a/drivers/usb/gadget/f_fastboot.c
++++ b/drivers/usb/gadget/f_fastboot.c
+@@ -422,7 +422,7 @@ static int fastboot_tx_write_str(const char *buffer)
+ static void compl_do_reset(struct usb_ep *ep, struct usb_request *req)
  {
- 	int controller_index;
- 	char *usb_controller;
--	struct udevice *udc;
- 	char *endp;
- 	int ret;
- 
-@@ -82,48 +78,9 @@ static int do_fastboot_usb(int argc, char *const argv[],
- 		return CMD_RET_FAILURE;
- 	}
- 
--	ret = udc_device_get_by_index(controller_index, &udc);
--	if (ret) {
--		pr_err("USB init failed: %d\n", ret);
--		return CMD_RET_FAILURE;
--	}
--
--	g_dnl_clear_detach();
--	ret = g_dnl_register("usb_dnl_fastboot");
--	if (ret)
--		return ret;
--
--	if (!g_dnl_board_usb_cable_connected()) {
--		puts("\rUSB cable not detected.\n" \
--		     "Command exit.\n");
--		ret = CMD_RET_FAILURE;
--		goto exit;
--	}
--
--	while (1) {
--		if (g_dnl_detach())
--			break;
--		if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
--			if (tstc()) {
--				getchar();
--				puts("\rOperation aborted.\n");
--				break;
--			}
--		} else if (ctrlc()) {
--			break;
--		}
--		schedule();
--		dm_usb_gadget_handle_interrupts(udc);
--	}
--
--	ret = CMD_RET_SUCCESS;
--
--exit:
--	udc_device_put(udc);
--	g_dnl_unregister();
--	g_dnl_clear_detach();
-+	ret = fastboot_usb_start(controller_index, (void *)buf_addr, buf_size);
- 
--	return ret;
-+	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
+ 	g_dnl_unregister();
+-	do_reset(NULL, 0, 0, NULL);
++	fastboot_handle_boot(FASTBOOT_COMMAND_REBOOT, true);
  }
  
- static int do_fastboot(struct cmd_tbl *cmdtp, int flag, int argc,
-@@ -167,13 +124,14 @@ NXTARG:
- 		return CMD_RET_USAGE;
- 	}
- 
--	fastboot_init((void *)buf_addr, buf_size);
--
- #if CONFIG_IS_ENABLED(NET_LEGACY)
--	if (!strcmp(argv[1], "udp"))
--		return do_fastboot_udp(argc, argv, buf_addr, buf_size);
--	if (!strcmp(argv[1], "tcp"))
-+	if (!strcmp(argv[1], "udp") || !strcmp(argv[1], "tcp")) {
-+		fastboot_init((void *)buf_addr, buf_size);
-+		if (!strcmp(argv[1], "udp"))
-+			return do_fastboot_udp(argc, argv, buf_addr, buf_size);
-+
- 		return do_fastboot_tcp(argc, argv, buf_addr, buf_size);
-+	}
- #endif
- 	if (!strcmp(argv[1], "usb")) {
- 		argv++;
-diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-index a341af076d1..32e8e072c88 100644
---- a/drivers/fastboot/Makefile
-+++ b/drivers/fastboot/Makefile
-@@ -3,6 +3,7 @@
- obj-y += fb_common.o
- obj-y += fb_getvar.o
- obj-y += fb_command.o
-+obj-$(CONFIG_USB_FUNCTION_FASTBOOT) += fb_usb.o
- obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
- # MMC reuses block implementation
- obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
-diff --git a/drivers/fastboot/fb_usb.c b/drivers/fastboot/fb_usb.c
-new file mode 100644
-index 00000000000..08aba7b5c12
---- /dev/null
-+++ b/drivers/fastboot/fb_usb.c
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2008 - 2009 Windriver, <www.windriver.com>
-+ * Author: Tom Rix <Tom.Rix@windriver.com>
-+ *
-+ * (C) Copyright 2014 Linaro, Ltd.
-+ * Rob Herring <robh@kernel.org>
-+ */
-+
-+#include <console.h>
-+#include <fastboot.h>
-+#include <g_dnl.h>
-+#include <usb.h>
-+#include <u-boot/schedule.h>
-+#include <linux/errno.h>
-+#include <linux/printk.h>
-+
-+int fastboot_usb_start(int controller_index, void *buf_addr, u32 buf_size)
-+{
-+	struct udevice *udc;
-+	int ret;
-+
-+	ret = udc_device_get_by_index(controller_index, &udc);
-+	if (ret) {
-+		pr_err("USB init failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	fastboot_init(buf_addr, buf_size);
-+	g_dnl_clear_detach();
-+
-+	ret = g_dnl_register("usb_dnl_fastboot");
-+	if (ret)
-+		goto err_put;
-+
-+	if (!g_dnl_board_usb_cable_connected()) {
-+		puts("\rUSB cable not detected.\n");
-+		ret = -ENODEV;
-+		goto err_unregister;
-+	}
-+
-+	while (!g_dnl_detach()) {
-+		if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
-+			if (tstc()) {
-+				getchar();
-+				puts("\rOperation aborted.\n");
-+				break;
-+			}
-+		} else if (ctrlc()) {
-+			break;
-+		}
-+		schedule();
-+		dm_usb_gadget_handle_interrupts(udc);
-+	}
-+
-+	ret = 0;
-+
-+err_unregister:
-+	g_dnl_unregister();
-+	g_dnl_clear_detach();
-+err_put:
-+	udc_device_put(udc);
-+
-+	return ret;
-+}
-diff --git a/include/fastboot.h b/include/fastboot.h
-index b106d617749..b7b661b9591 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -125,6 +125,16 @@ void fastboot_set_progress_callback(void (*progress)(const char *msg));
-  */
- void fastboot_init(void *buf_addr, u32 buf_size);
- 
-+/**
-+ * fastboot_usb_start() - run a USB fastboot session
-+ *
-+ * @controller_index: USB gadget controller index
-+ * @buf_addr: Pointer to download buffer, or NULL for default
-+ * @buf_size: Size of download buffer, or zero for default
-+ * Return: 0 on success, or a negative error code
-+ */
-+int fastboot_usb_start(int controller_index, void *buf_addr, u32 buf_size);
-+
- /**
-  * fastboot_boot() - Execute fastboot boot command
-  *
+ static unsigned int rx_bytes_expected(struct usb_ep *ep)
 
 -- 
 2.55.0
