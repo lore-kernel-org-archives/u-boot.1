@@ -4,183 +4,203 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA844C4453A
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 09:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83BECC4453A
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 09:46:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9EA0B40762;
-	Wed, 22 Jul 2026 09:29:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7990D407FA;
+	Wed, 22 Jul 2026 09:46:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h2HPtuawhY7y; Wed, 22 Jul 2026 09:29:03 +0000 (UTC)
+ id vTh4_7JD-YUB; Wed, 22 Jul 2026 09:46:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9204B407C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B0DF640433
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784712543;
-	bh=G5szRJd6pdgNIBayU5UvfFbish6xeqfTNLeZaxS3ah4=;
-	h=Date:Subject:To:References:In-Reply-To:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
-	 From;
-	b=ZN7KzaxVmAZu5cmwveF2AYZJeSeBf9KOgA3sfkIn06BFAOlU8wXKnbwvsieEB2xC9
-	 VDkCxAaXNd0O4CTbpc3pPbOZn9u+1zCn0lp71b3SCfuQ8FLJq+xlfwCukiePYzmpUs
-	 DEzYUgmutlFxPsZwRMfEHUvDqxlpghBWjyW9OTr62xROIPlmxlid49DA3f9iSt5SD2
-	 LiNKmmvjGzw8utP7U2oQZu4ZvI2kLc/YgPKQ30SdAyxG8AYQN6HBnVk9PC7MkmTpsW
-	 hlViWCGjaZo+QJtW8Mof9L0yph4G7aJ25+Ta1N1Z4ZAJHKqLSVQe6DgIgIPqEfyFeJ
-	 gPXy4H+x14bkQ==
+	d=lists.u-boot-project.org ; s=default; t=1784713573;
+	bh=0ZCPiJnBnRnNw5yQbUkVEyNiQZTL2vhiD6XXR/MbtzM=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=wUTxC4bM58Sa0UMxKbu0FUdEmepISRAgyHJGdQfagOThxOmgC6lQsI7DmPSfcCP+c
+	 cnP7ld+Xp6y6ueEt8hjKKwyI0OOnTxNX7R6aym/NtkzPvauUvvb5Jokbqk7oU1BaUE
+	 QAtFAGQDS2sqqpcbSvud9crGSZIxzWEQGONK6dUgmjQxqLCgMvAFwaEvvczMBthmA0
+	 mdZWOpCB/tB8VYeGZrCQOucG7olPj0ICMVvd0gxGwrBTfMGguIcbhQNZ3Kdd7ux50a
+	 bZmopV0Z1NcHqSg6CuTaaZyelEgXcdA7j4BXJgKB0bisOOcVH+kaGz3EB7dkmNCFDd
+	 zO36Ltvc3lDYQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9204B407C1;
-	Wed, 22 Jul 2026 09:29:03 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9F5E9224
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 09:29:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B0DF640433;
+	Wed, 22 Jul 2026 09:46:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6D817109F
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 09:46:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 84EBD407C1
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 09:29:01 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 53323607A3
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 09:46:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O2AJTkZR57fC for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 09:29:00 +0000 (UTC)
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 04B2D40762
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 04B2D40762
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 04B2D40762
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 09:28:58 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v3APa0zbLXHF for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 09:46:11 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=jorge.ramirez@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org E424E60737
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E424E60737
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E424E60737
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 09:46:10 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1C6E848BA; Wed, 22 Jul 2026 11:28:55 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 5A526848BA; Wed, 22 Jul 2026 11:46:09 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 372A8803F6
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 11:28:53 +0200 (CEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XtklHP1bE1AvU9ZthxfEycBQPHVh+I7HkhN6e5Tk3zNmjEuQ3Po5hZvJe6q04/oSjFYaSFaxeN3jCwyEZvwynCJgs6PMep/uFZLsUq6wr1TpDwtoiwCfjHJbRu21144IXbHhprPebHhwRn5orgdtBurdBvcf/UFzvAPzmRikEA9f8RchxluLOHG1sCpwME0Djdjxo6Na78QNR8Wkjv6HgPKXvLD6yqgchmN7LG9XjXBD1CPUGa6v5Kl/fCRGoHMxitCXYyzJnEO5dHgZSL/UqcW+lEy/zGCGeqbF+bwIgyRiuto2bNNuwXS3cMlrW3rHR63JHSm2m/04Ol5pUY7l/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G5szRJd6pdgNIBayU5UvfFbish6xeqfTNLeZaxS3ah4=;
- b=fbEMH7PASpGp0PFnzryDyJY9vznpcItSon2PcEtgGlmt+ktw/y4raHZYfXSqTuBVMoEy231244/AoJxSXWWMV/rHvgQ/360nXg5xnGYHE8QBV6LqmBYtOG0jYL036QbW+7IZldj7Wfx0qjVMvYh5ssINMWeLQg8UhGuX4I+5c6pVsWr/7EHrTbFlfv3DId7wsMPqG1ZCoV5VZgcczHQPHZphOCyIdnYZ/y25b+GAmwSUdkqRUYuv6eSKaRZDPgLPRhOdZPY5Qd6HJBG1+FE4rOQ9kryB3zysnP3cS2LcvsdlOYlPYcDjwEOO1y+OfcYfUdTXpI9xd3e43+bD4ZZGag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by AM0PR04MB7139.eurprd04.prod.outlook.com (2603:10a6:208:19d::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
- 2026 09:28:50 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0223.017; Wed, 22 Jul 2026
- 09:28:50 +0000
-Message-ID: <e9100f97-91a0-4166-b62e-d639d41f6ac2@cherry.de>
-Date: Wed, 22 Jul 2026 11:28:49 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mtd: nand: raw: rockchip_nfc: fix ecc setup
-To: Boogie <boogiepop@gmx.com>, u-boot@lists.denx.de,
- Johan Jonker <jbx6244@gmail.com>
-References: <e108fe69-533a-4734-8728-b17b172c4be9 () cherry ! de>
- <68f9f2bc-485e-4cbe-9ed7-8f34efdd8440@gmx.com>
-Content-Language: en-US
-In-Reply-To: <68f9f2bc-485e-4cbe-9ed7-8f34efdd8440@gmx.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1P191CA0003.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:800:1ba::7) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ by phobos.denx.de (Postfix) with ESMTPS id 323C3803F6
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 11:46:07 +0200 (CEST)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66M8xXfr351336
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 09:46:05 GMT
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6d3ddd-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 09:46:05 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-51ebdfceddcso153450241cf.3
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 02:46:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784713565; x=1785318365;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:date
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=0ZCPiJnBnRnNw5yQbUkVEyNiQZTL2vhiD6XXR/MbtzM=;
+ b=qAvx16wredWdaAvUE1gvnbwZV6lu/jH0Z0QW++y0a/hulq/oi3elYumkfGAPTmGOGN
+ yvCzxU6Oim7KyDneVkLyse3bkmVtpyaqndANdmd3N2Ts6lm5UJ263lzDdRUhc6Um3Vf2
+ 6/z6HOEoHRjQGkZihG4aYUWd6By7AFz/fNtejJM1b8iRVAM3mda/tdnLj50LVFwk33zj
+ XzU2esIYT7cQNfSVKBa7uLrY0CM2zXgZMwGfxEuCdjydEg+AWyVmaoBrpDcqbxEZ7weT
+ flOgAX6bXmn4NcVruB3kUr1n2vBEQpX6Dbj0lwmtGgSqzrJFD5hBkPNZz+POzAoQbfIA
+ YPnA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoRb9zAvrh9DXNRtN4zZmpC0+opKt98XYwSLaaETpT/o05LfFrK3LnKWSzj50BU9sX0z8rV9FQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRp1BEWrnX5wyPRc6uvrGowhNszWpbGe7cMWg6GwM8CMTNRFZW
+ vW0x/SaBukl0mKov0ni8hs6dW+JJlBZtLzvMPpJRipP1fde0AES9wI0Le3ZTCai3hiyCrKqyptO
+ B2HWPf8qDyMO7YIkLHXkdm9p+5Mcx1lDJFvJxWDUkfLpcVQHbgg3CYXK3
+X-Gm-Gg: AR+sD13pQomhc1KyJYcBKc30QZweYD3RCwYOz+k2RjHHmpBAqMH2z8v3MX9JGfwN41Y
+ o3zaSJTz44RGQaq5CJM/7s5HEGmBNmU6fHFVLoIhcflqZhpx0aPevuba+szQ75OhThn1DPdom7F
+ UnoACdnUOyzm0eo4ERXq35SDPHTRPca/aMylkJ//UrvD4cg2gBA049wcsuc4ygJGBU50ni7Rrb7
+ 8CT7H3DIn8I0K+UwP2Bc9FBrHd6Vi/uxjG0FbvcnZ2VqbrdExILwTkIaIUlCSGFtfsO8fZmSOAT
+ NAZsB33pf2+eeoCyVJ8/lUG8YZWTYGnIyrigSzbe4X5WQ2/Fob8hes5D3T1G1HxpSa+tKM9D1zD
+ ZZUhFrmWearnOrOhZP90A5CnPczyTQen9bsU=
+X-Received: by 2002:a05:622a:15c2:b0:51b:f635:9aa1 with SMTP id
+ d75a77b69052e-5213daa1d6dmr202911241cf.48.1784713564659; 
+ Wed, 22 Jul 2026 02:46:04 -0700 (PDT)
+X-Received: by 2002:a05:622a:15c2:b0:51b:f635:9aa1 with SMTP id
+ d75a77b69052e-5213daa1d6dmr202910931cf.48.1784713564086; 
+ Wed, 22 Jul 2026 02:46:04 -0700 (PDT)
+Received: from trex (182.red-79-144-196.dynamicip.rima-tde.net.
+ [79.144.196.182]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4956a63e3a8sm63807285e9.12.2026.07.22.02.46.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jul 2026 02:46:02 -0700 (PDT)
+X-Google-Original-From: Jorge Ramirez <JorgeRamirez-Ortiz>
+Date: Wed, 22 Jul 2026 11:46:00 +0200
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, trini@konsulko.com, 
+ jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
+ bhupesh.linux@gmail.com, n-francis@ti.com,
+ marek.vasut+renesas@mailbox.org, shawn.lin@rock-chips.com,
+ igor.belwon@mentallysanemainliners.org,
+ yoshihiro.shimoda.uh@renesas.com, alchark@gmail.com,
+ tuyen.dang.xa@renesas.com, padmarao.begari@amd.com,
+ macpaul.lin@mediatek.com, jstephan@baylibre.com, bb@ti.com,
+ j-mcarthur@ti.com, venkyada@qti.qualcomm.com,
+ hayashi.kunihiko@socionext.com, dlechner@baylibre.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 4/5] optee: rename rpmb.c to rpmb_legacy.c
+Message-ID: <amCRWI7K4Jj_psYp@trex>
+References: <20260722060805.1428110-1-jorge.ramirez@oss.qualcomm.com>
+ <20260722060805.1428110-5-jorge.ramirez@oss.qualcomm.com>
+ <f73c5fb0-881a-49bf-a5ff-a0120ab3e3b2@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AM0PR04MB7139:EE_
-X-MS-Office365-Filtering-Correlation-Id: 34da0f43-6e94-4f21-cbbb-08dee7d3a39c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|23010399003|366016|22082099003|18002099003|3023799007|11063799006|4143699003|56012099006|10067099003;
-X-Microsoft-Antispam-Message-Info: rooKukxpj7oqppKvrjMAExR8RQSMllqOS64QEDilhd7p6JZO4PrsQra1IUtBr0BSHmq0nfV9saBmtuyPBfh8NNjF9aIp+I2ArxcNy7B1Lcs2bIqP4hQo0ZAfBveEwlTKQcf8+F6X9fYnD9EjZX3FHBmxLpZNmmofPuAVOph9/XT1zLSq/oNj0GuBOkM89TIKxrs5f3hUzQMr5ZAreHMGFUHfsakFRrleS2B34xnq21vvLRe6ymVMdMz7GelCLej2dT9zP2Be4PVErEEqYoYvNX5u5x6xmi2HgEWmE7TPLkqd/8vRI535MEJtlzkg/SHjolJgERyINjHue5Wz6tmvnknD/s7oL/8nsFjS6tg5Mr303f6F0TsDVr4ZaRpwlWLDi9NW6NuxfDcEoUnZK3+UHkG1q6yndpBJxBee+6EIcg5OioOtfZBCjtxY88sTnVUS3v68b5dY+gqyFePjy2/XwgC+nXYfAvgGoDItHVafgYpH651dgi7vgU/NEN9JEpGGCTHjtMluLwQki25rK7iiLIRbq9gNPNX9QZi47dJBVHW0LezsqghpE5bMMjOTVFkJANaa371maah+pPQneO7fkNuHamd/hOclPY0bFK/9dJtnHAKOgWf6OkOfyxFflqqLp7vDVrhWkxjjWBQBZ/Z9Le4NDu6v8Ed7d+5VCIdkuJA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(22082099003)(18002099003)(3023799007)(11063799006)(4143699003)(56012099006)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eFJqZm5mcFhidFRESzRKN0FtT0JnZGhtYndTY3NPREQyZTZjVEVxa3FqVFNx?=
- =?utf-8?B?Q1FHZE1JY0YreUpiLzBVVU9qYU41T0ZlQU1JZVdvb2UvK0x5SkRPaGdXWXdh?=
- =?utf-8?B?ZUlhTm45dDAxL09na3ROZEhUSkRGVDlnQ1lSR2hmbEoxV1QrRDRuakRONmkr?=
- =?utf-8?B?bUVVZUlEUkxLRkJMQTlrb1NkVzJVYVpuYW9qTlZocG9ITlEydnRIcE05eisx?=
- =?utf-8?B?dTJMSUNHanpMZ0Fnb25DTW9IeVRGY0xhMjBJY3VxTjZiNlVMMThMekpKLzlr?=
- =?utf-8?B?dlltQkx1QUpXeWFrVXc5c1VmRis2S3B3YXpLMnhob2k2Ukx4TDZnNHhqVHQ4?=
- =?utf-8?B?K1NpTXc1WlZoNDhXajkxenVtZmZnVmo5WG5uQUZUYkNNL2JEMWxxSVUzcVNL?=
- =?utf-8?B?bGhuZUpFcENFUUtWejF6S3ZMMVQxMldlMUZ5Qk9PaHhLZW80TG1IVmxZMTRL?=
- =?utf-8?B?eVJXeU5LdlpaUWxoODBET3pmMThtSmpZUCttYzhYenlBS3RWSXFKQUFXaUhI?=
- =?utf-8?B?dGtRdVN2ekFnSWtzcG5SRC8xbVZQNWYrVDJZS3k1RkJRNHdpNURXWjg4NUlh?=
- =?utf-8?B?VllZS0xwN1dVY29oaHFYNWZXSTltZjl2Szh4alJ6Um5EMDJnNzVVOTVoYmRa?=
- =?utf-8?B?RVYzSnFISU1TRVBLU2xGOVVHYnJMSnFuZmoxdWNHQ3Y0RmtzZzJ2S1Z3cUtr?=
- =?utf-8?B?OHVZejhHa3NnUXdZNld2Ulh0VnBQaFhMT1Y0bWZWOXp5UmVJdlBJbGE1bTZJ?=
- =?utf-8?B?RU9sTmJkWjZzNFZ3cjM4U0p4bXp4V3g5VjF1cWhmeE5ZL1o2andmSkUvZ0Z0?=
- =?utf-8?B?SmlIK0ZQMTZUOUlBN25DS3ZnRVhFdDh3dm5yZ29LZlJMMWRWY0ZETXJnbi85?=
- =?utf-8?B?TE9kVG43ajh2NXZQMTFTclMvblphOTAyc2FFRWZkakdLVTNTSjd0YmVDSzkr?=
- =?utf-8?B?aVRCTHRHNWVaajcyd24rWXB6LzV5dnVaVCtSalBLck0weGZoUzFmOFFFcGh2?=
- =?utf-8?B?NjVydW05OTVuQ2tod2VZbXV2Nk1iSFNYOStBa2srajlsUFQwaE5mbHcvbElt?=
- =?utf-8?B?V01PL1RZbEdRU2t1clRUSEdPdGludDN4MUxNZjhZSXR1bUNCSmxOQk9RcFVY?=
- =?utf-8?B?bkQ1dmoyT2lVUG5iWTlYSndzVUxhZ1hqSWgreUszVktwdXRmbjdmTFFKNFpM?=
- =?utf-8?B?WFl5S2RuM0ZNSTJNZ1EwVEJhZFo4citZR20zeVlaUHI2UjhvOTM0UGpmOEdj?=
- =?utf-8?B?eEVRN29pMjdYTkpnNTcxaXA5SWo0UHNmZzdTZ05BcFBSR25xRi9uRUNwTEhH?=
- =?utf-8?B?c0JxMncydjAwbXhZRDI4VkQ5RlVqdk5UZG9ReVBTRldQVFpOdCtGU0hlWmxI?=
- =?utf-8?B?QWVST0Uxb1JpWC9HQ3NnT25uRjljQkx5VUdDL3p0ajdNY1M1VVg4V01vQ05w?=
- =?utf-8?B?R3A5aHFyVEpISVFJVmh1T0o0OTAzakw4TkdDL09FVCs2ZFU3Rit1Nk5GOHV0?=
- =?utf-8?B?RGJnaHpyc0N6cFpob21Db2ZvZko5djk0cDJHQXF0SmJmT0FZUktrOFp3RVlK?=
- =?utf-8?B?c1pDQUNYK2NML09oL3VGOGJqUGpVQk85SVlpeVNsVWdZN1IxNm12TlNjb1lC?=
- =?utf-8?B?U1Y2QUpkekxlekxLb2YvcmdaUzZGY2RaOUhaN2cyeGpza2NBNjFxakZuNm9a?=
- =?utf-8?B?dEtHRTRBRWpTMDM1T0t6S1VFYlZmVkU4NWlURnlkaWtBb2FMZFdCT013bXJi?=
- =?utf-8?B?a3hzckgrMWNqYUVHaEdac3VId0VScFVLK0puSTZSQVNxbVVkNFFqTW41bmVT?=
- =?utf-8?B?SDBVWkpxNi9YbEtqVkVXRGV5YTA2bXJMVVpPZnpuZmZZZFI3Z2pkVDRTYkNF?=
- =?utf-8?B?a3NiZ1pTV1VCVkRZY3VEckpnNkVBK2pwMUwwMVNuWjJYeWl2cDNKeFdFNysw?=
- =?utf-8?B?bzhVbHJOSGNPTzFoNFpsNlp1bFpQNHd0U1FXdlkxOVY3RzUrTC9sc3BjRTds?=
- =?utf-8?B?RTFzZlRFa1dKd01GQzRDVUdhOC94WU1FdnRaOXNHU01BTjlJT3hRYXdwdTEw?=
- =?utf-8?B?UFBKSVFSVHYrOU1DN0FXdzhVZWdKWlRraEZlWUo5R285b2FaTEk3TGhWTEZE?=
- =?utf-8?B?bk12TUtHTmpBQmh4d3MyVm9lL2FvWjNEeGRrdlk5U3c3cThadndxT28rTDBx?=
- =?utf-8?B?ZjRvWFg1dGE3YlAvM3prT1ZmYzVQMGNsUXFUQk53TE1Rc2cwYU03aWQvVTN2?=
- =?utf-8?B?dm9UYkxFRW5seGNpb3NDN25maXBGOE5GQUVuWCtFR0JjVmhqRFBncGxmVHoy?=
- =?utf-8?B?SWJRdVZiVXZsREM0M1RPRml6UjhidWp5Z1NMTTF4Znl4UEJPU2lRdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34da0f43-6e94-4f21-cbbb-08dee7d3a39c
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 09:28:50.4704 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KhyBhrljnlXNGaMp/502IUjvt1LQF4Em7DRELH+n9ltgPuVdRF0yL5LrR4XcPvNwUqy8E9l6YRgyCeG2jGboCpOqIS+1cuFQuEFHcHaM/6w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7139
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <f73c5fb0-881a-49bf-a5ff-a0120ab3e3b2@linaro.org>
+X-Proofpoint-GUID: o0K3qz85TGeMs4xHo7FpNb-b2E5WCCcw
+X-Proofpoint-ORIG-GUID: o0K3qz85TGeMs4xHo7FpNb-b2E5WCCcw
+X-Authority-Analysis: v=2.4 cv=XaG5Co55 c=1 sm=1 tr=0 ts=6a60915d cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=2lELrtOEK2EaG96G7mOeag==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=E0F53I8y46Uz1Ggle9wA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA5MiBTYWx0ZWRfX7QClJRGWoe3z
+ pSFE/qp/oq/rXxE2xVj/Ei6V5/hGpclEHYDLbTB6Vn534bvjWq0mbGFg4ac39PBB/IW0vXQMNjj
+ JiTkOBzIUcgmZOmOG6sCSCX/tlLDY7sy1TGGLPLOjwve/GPswuR5ubxyaJXqZ7FtnXkofEzJVP9
+ vQ6ZbEvfDIMH/CNSZBhQBC1elb5rMcS7prv7m1+nyVJmAf+LK3eyI/i//oFxk4P70jx9JWF2NMK
+ 5oSFM8ail9h5eAnUI1Il3QoZwMHxuJMNuPa/F1L3ntdnH8NbpPuZ91edzGkOE9RyG2OhBACQ6nc
+ hIEjzgzg6sBOSeksi4ah+Mb+hqgerEJU5Ag/lqPikjLRcfK+jEQpipc1YF0kQ37LncGV7XQjC0m
+ qR4bamxhuROMWaPUwhwH99SA07At/w4LiWiLeGswdKzWwZzxgmB60cZuyzkSqCGRzMcEZtYJiBi
+ H7PQwbBozQ/U2FBxwig==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA5MiBTYWx0ZWRfX7Eym7QlNqDe1
+ LnuWFmvs8B7uZgR+Q5QQcp71IUIuD71OiH6hSUk3D7V6GOs5blKfKuImOIdz1tQK2F1SW/DLCVQ
+ 4E/mjBYZtpWNN0FRUi1WpG+3Oao4LDk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_03,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0 suspectscore=0
+ bulkscore=0 impostorscore=0 clxscore=1015 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220092
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G5szRJd6pdgNIBayU5UvfFbish6xeqfTNLeZaxS3ah4=;
- b=ncBFBPOIAAqN5Dxo7ED6XpX+dYv7cmEvatknTnLxZ75yTfHHe6rCf9u9SrM3yWbSRcdDF/j3AxHuAMfykaa2hWlC3ns/DrQAZ+urDB8dDCPxGBoAjIQNVg1ADTS2U2PWN68avZXqwsGp5sb+x7eIxtCJWXWdLP/QbGD9LTOHkus=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=ncBFBPOI
+ d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 0ZCPiJnBnRnNw5yQbUkVEyNiQZTL2vhiD6XXR/MbtzM=; b=mxorHL6vA8pOyMpe
+ +30h4y1QqpBdxU54ofJIhPvMF1k1D1LrMOzTNCGDpZw2RE7buVTpsECzGc+dyQSi
+ q9Nljevrgz1FNgLht4lHQzvtK3Jma6WYCo/56XnNMbTqbz4HnxyFoy4y2WUcx7Kp
+ 5+AC+VVnsCb964b6h5CSQZ4rMWfDNpM0qCXvKDc3cI4C0XG/LyfjP56EUi6W8qfy
+ MIPyHIfeNjEoQfIap+jHHTC0TgCvHqXzwJL20d4AUgthOaYCV077jB8Kit7XreLp
+ Awj5j1OaUY4OoCO8XM2OyvhhKm3K1I/i6Aad4EakFaytOQ9cyrukMx7JXEU8Emdu
+ OBaQsA==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784713565; x=1785318365; darn=lists.denx.de; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:date
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=0ZCPiJnBnRnNw5yQbUkVEyNiQZTL2vhiD6XXR/MbtzM=;
+ b=JaL+ly/u7+HpXSIou+q0aSXi/BQOSV/7FAUvXqjNmY8rvP5lqnS25VzM73pqs0dL/r
+ e8hZOKG44eWhv/mRfLALZFhum+dtHmQkHqDLELLTO2812IGq4PsXT5E4SB/6l0/tqqOF
+ 5wFHKRfPvfFCm3WwC/oAMvzzsxuosJyV8/8kzVz1HUlUG2Vahs8uuxY/VnGJnGJ5b9x5
+ hfUVqKlm3VyKa4RW2ouQBYbFaMjTj57lr66K8NOiBq0oEaD3qw+DVsJqLlkWVD4z7aPx
+ RyK/coP1YSnrtToB+sLowTMl5bduNMo536QIDl1l3O3AfJRGpT/DBkdr0L2mbkJoQOkj
+ iang==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=mxorHL6v; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=JaL+ly/u
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@cherry.de
+ smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=cherry.de header.i=@cherry.de header.b="ncBFBPOI"; 
+ dkim=pass (2048-bit key;
+ unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="mxorHL6v";
+ dkim=pass (2048-bit key;
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.b="JaL+ly/u"; 
  dkim-atps=neutral
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -192,131 +212,68 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <quentin.schulz@cherry.de>
+From: Jorge Ramirez via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Hüseyin, Johan,
+On 22/07/26 10:27:22, neil.armstrong@linaro.org wrote:
+> On 7/22/26 08:07, Jorge Ramirez-Ortiz wrote:
+> > This file implements the legacy single-command OPTEE_MSG_RPC_CMD_RPMB
+> > supplicant (eMMC only). Rename it to rpmb_legacy.c so the primary rpmb.c
+> > name is free for the RPMB subsystem interface added next; pure rename plus
+> > its Makefile object, no functional change.
+> > 
+> > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> > ---
+> >   drivers/tee/optee/Makefile                  | 2 +-
+> >   drivers/tee/optee/{rpmb.c => rpmb_legacy.c} | 0
+> >   2 files changed, 1 insertion(+), 1 deletion(-)
+> >   rename drivers/tee/optee/{rpmb.c => rpmb_legacy.c} (100%)
+> > 
+> > diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+> > index 36ac085ef42..8321cf53a19 100644
+> > --- a/drivers/tee/optee/Makefile
+> > +++ b/drivers/tee/optee/Makefile
+> > @@ -3,4 +3,4 @@
+> >   obj-$(CONFIG_OPTEE) += core.o
+> >   obj-y += supplicant.o
+> >   obj-$(CONFIG_DM_I2C) += i2c.o
+> > -obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb.o
+> > +obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb_legacy.o
+> > diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb_legacy.c
+> > similarity index 100%
+> > rename from drivers/tee/optee/rpmb.c
+> > rename to drivers/tee/optee/rpmb_legacy.c
+> 
+> Why not rpmb_emmc ?
+> 
+> Neil
 
-On 7/22/26 12:56 AM, Boogie wrote:
-> [You don't often get email from boogiepop@gmx.com. Learn why this is 
-> important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> Hello Quentin
-> 
-> I had reported this bug to Johan so i can give detailed explanation.
-> 
-> The bug was really the lock of "&& nfc->selected_bank == 0" not existing
-> for write_page_* variants.
-> 
-> When rockchip nfc was reading, it required bootblks to be a part of the
-> first nand chip only with the condition "nfc->selected_bank == 0". But
-> when writing it interpreted 'all' nand chips first boot_blks as boot 
-> blocks.
-> 
+right this is what is confusing about the current abstraction; op-tee has two modes:
 
-OK ECC strength mismatch between what's written and read.
+  1. Legacy mode (legacy_operation = true)
 
-> The practical problem. I had mentioned this in V1 and give more explicit
-> details here.
-> 
-> I have 2 nand chips, and a partition (linux below) starts in nand chip 1
-> (CS=0 in below) and ends in chip2 (CS=2 below). And i am using UBI on
-> top of that mtd.
-> 
-> nand@0 {
->      reg = <0>, <2>;
->      label = "rk-nand-0";
->      nand-bus-width = <8>;
->      nand-ecc-mode = "hw";
->      nand-ecc-step-size = <1024>;
->      nand-ecc-strength = <40>;
->      nand-is-boot-medium;
->      rockchip,boot-blks = <8>;
->      rockchip,boot-ecc-strength = <24>;
-> 
->      // block 14 - end
->      linux@1C00000 {
->          label = "linux";
->          reg = <0x0 0x1C00000 0x3 0xFE400000>;
->      };
-> };
-> 
-> When i create the UBI volume the middle of this partition where the
-> blocks are at 2nd chip block0-7, will be written in boot block strength
-> [ECC:1024/24] but will be read with normal strength [ECC:1024/40].
-> 
-> This causes first UBI creation to be successful, and next scan to fail
-> due to written strength is different that read.
-> 
-> You dont actually need to use UBI at all, any time you write those
-> sectors, you wont be able to read them. A workaround it to mark them
-> bad, but this is not nice, since the blocks are completely fine.
-> 
-> Rockchip NFC technically as minimum needs to know rockchip,boot-blks, &
-> rockchip,boot-ecc-strength props only. Currently the checking condition
-> is rockchip,boot-blks & applied affect is rockchip,boot-ecc-strength.
-> 
-> The bug is this is only applicable to first chip not all chips.
-> 
+  - Uses the original RPC command OPTEE_RPC_CMD_RPMB.
+  - No device enumeration — assumes a single, fixed eMMC RPMB device at
+  - CFG_RPMB_FS_DEV_ID (dev_type = OPTEE_RPC_RPMB_EMMC).
+  - This is the fallback for older supplicants that don't understand the
+    probe protocol    
+  
+  2. Probe / new mode (legacy_operation = false)
 
-"is only applied" I think you meant here instead? Or are you implying 
-that you want chip 0 to have rockchip,boot-blks and 
-rockchip,boot-ecc-strength applied to it, but NOT chip 2 even though 
-they are listed in the same node?
+  - Uses OPTEE_RPC_CMD_RPMB_PROBE_RESET + OPTEE_RPC_CMD_RPMB_PROBE_NEXT
+    to enumerate RPMB devices, then OPTEE_RPC_CMD_RPMB_FRAMES for the
+    actual frame I/O.
+  - Supports multiple RPMB devices
+  - OP-TEE probes all devices first, deferring key provisioning until
+    every device is examined.
 
-> NAND_IS_BOOT_MEDIUM is actually coming from mainline linux. Similar
-> bootrom tricks are also available in other socs. And detection of boot
-> rom blocks is not always straight forward as rockchip's
-> rockchip,boot-blks, they have to do some "if" case acrobatics to detect
-> those. For simplicity reasons mainline linux introduced a global flag
-> NAND_IS_BOOT_MEDIUM and it is applied to other socs as well.
-> 
+This PR adds supports for UFS using the new mode of operation that
+enumerates devices instead of the legacy mode.
 
-rockchip,boot-blks and rockchip,boot-ecc-strength properties explicitly 
-require nand-is-boot-medium property to be set in order to be used 
-(though they don't enforce it via YAML/JSON schema; although it is 
-enforced by the kernel driver). So a device tree that doesn't follow 
-those restrictions is deemed invalid and we are not aiming at supporting 
-them. This means that the last sentence in Johan's commit log:
+In the meantime eMMC continues to use the legacy mode.
 
-It is now the users responsibility to apply the device tree
-property "nand-is-boot-medium" to only NAND chip 0.
+So the super-sets are legacy (for emmc) and probe/default (for UFS and
+eventually eMMC/NVMe and so on).
 
-is redundant, as we already expect the users to set it for the 
-appropriate NAND chip(s). (just adding this piece of information here, 
-not disputing anything either of you said)
-
-> Since this "&& nfc->selected_bank == 0" fix is exactly at the same line
-> with mainline changes of NAND_IS_BOOT_MEDIUM check, i think Johan also
-> integrated both at the same line.
-> 
-
-@Johan, can you please reorder the condition in rk_nfc_write_page_hwecc 
-and rk_nfc_read_page_hwecc to match the order in the Linux kernel 
-driver? (the NAND_IS_BOOT_MEDIUM is last).
-
-> In u-boot only mk808 is using nfc with boot blocks and it is already
-> marking the nand device as boot medium, so the code change should not
-> break existing devices.
-> 
-
-Correct.
-
-> Additional note: Linux mainline also is lacking the "nfc->selected_bank
-> == 0" check, so i think similar patch should got to linux as well.
-> 
-
-Not sure what you mean here as Johan removed both checks in the patch.
-
-[...]
-
-As far as I could tell, Johan's patch makes U-Boot behave the same as 
-the Linux kernel for a multi-chip node, so with the reorder I asked 
-above and a much more precise commit log providing the usecase and 
-misbehavior, and also pointing at the Linux kernel doing the exact same 
-thing as this patch, I think we're going in the right direction.
-
-Cheers,
-Quentin
