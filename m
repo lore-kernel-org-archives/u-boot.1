@@ -1,111 +1,110 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CBFC4452D
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5CCC44533
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:42:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1C7E080DC7;
-	Wed, 22 Jul 2026 07:42:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 99E6840769;
+	Wed, 22 Jul 2026 07:42:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 68t-vG7cNye9; Wed, 22 Jul 2026 07:42:38 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6SafFDmqMB4Y; Wed, 22 Jul 2026 07:42:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 88AC080D7C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CC6CB40776
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784706158;
-	bh=wSTkxLaHNMN7Y7tTSKzNWePHz7fWyTNnwhejoEKQ52U=;
+	d=lists.u-boot-project.org ; s=default; t=1784706169;
+	bh=NBHbDA6Vgc7ZKStBnlt4bmo0AdQZvXMWOkLdwRuMZeg=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=WI4zlwisZGngxqSqpVYj0dd1NMls3AujASZ6XJGSQGtfEDpL56RjNW+61GNpbyBQm
-	 sDibWWS2XY17tChHTCoF83rHs7Wy7R3ezF8sS/FY/9DLaREYVBp9xJ8xTt1yeFYP+r
-	 /mmpS+xVpKmvPHsbhSnlXPeG+7YJK3PgYE0izjRXFDQ9w1ftXeJfk3pWOh4R+Z5zy5
-	 XBnhYSYhbpPe0Dn5qqTWN6A4pSd8L3LvJghGO0tSzEaF/4+usmMQ+WMHrxRoxTmw0G
-	 xczRpjtPISXzXN3C1CFYFriGo6Tz1qKoORL880x86Kjj1T6lrg4lSd/LQosciz2Uvl
-	 QhiSsb0YpWb7w==
+	b=Osw4QOp405ud39t4Us235XirrGyw5DML+0D02HXbllMwa31mx0QAfggGqPxE0TLFE
+	 3frdHxK60XjYymQJ94K0s0f7gYddb99L1PEAfVfg+7OlWg2d8xbn0UiklF89TlsuUr
+	 3TLXsJfPxaGwZ28kv2bZAWu0lX2h6FpP9hNiV1EA2i7cipW8wZI3Oq1H2UgD0Os++c
+	 U2x2ke3b1Gtw9fiVjOfcDYp7KHq7EX/Ao4DgANsLrsrmbhfXMyjyGsdaF/rX8gg8Kr
+	 CUGOEbTYUMU7zcFvUJ8tsd53L8JHCMYuimOqqj2ECiTDNB0PAkQ2urZ7+JEgF9EIou
+	 m3oElg0x1ez4w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 88AC080D7C;
-	Wed, 22 Jul 2026 07:42:38 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1FF26DF0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC6CB40776;
+	Wed, 22 Jul 2026 07:42:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id ED973DB4
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 11C3740173
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:37 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D35F040776
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VxqUSgjHCGzG for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 07:42:36 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZiYWObYpfeSC for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 07:42:47 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com;
  envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 1A23F400D8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1A23F400D8
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1A23F400D8
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:35 +0000 (UTC)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org B2C3340778
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B2C3340778
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B2C3340778
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:46 +0000 (UTC)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66M54JH23769548
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:35 GMT
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjnu4rx73-1
+ 66M53cCs3882982
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:45 GMT
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjntn0xmy-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:35 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2cc8bde6318so217222265ad.3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 00:42:35 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:42:45 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-ca6bd8a190cso17131168a12.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 00:42:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784706155; x=1785310955;
+ d=1e100.net; s=20251104; t=1784706164; x=1785310964;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=wSTkxLaHNMN7Y7tTSKzNWePHz7fWyTNnwhejoEKQ52U=;
- b=EkPMKHS/TV0BS5ENUw+gsGOLumingNFzUifOHI/EQtU61taiL6udZ0jYVYplwabOVv
- PIDSQ3uvzoEoPYv/4Jssp9G894Ma9MDv0m+o3tNHfQtcxWVpxtTBguroZlIItGlKXkB1
- vm4vVraTtGNJ9Z+pFSRfp5jgZDhi3uuNaVmRCkuqv9IbZ8IwYVRFXJsricAgRDR77JzS
- N/cMepUlBTZQEJktS/h4otvJ7m11aCrhaLPt44GTQ8ymObERl2JXGJMdOTNLCWUf6km3
- 07pjQEHgesGXHBafzAZ1wCsflzImthGYE5gYdMx/b7Rtvq13qh7CEYQHdCx0IkzBJfQm
- GAeg==
+ bh=NBHbDA6Vgc7ZKStBnlt4bmo0AdQZvXMWOkLdwRuMZeg=;
+ b=jf2cOL4Q1jtosNwVHVGPR5s9IONLQSpaanWX0blOOvccvKCb+awBoisa/0gty52UJO
+ A3QcbImNkLmt+pMA2EhJTSUPpygH3whMnumuHZyohiNV7vUR/Vabvc3FOCqr2iu+NifR
+ vwnjFWADQdN3SYA8jxvHO06LgIAD9zaxh1vSoNERffK8EXS1HYHJ/JTc2yLjLgDZ8Y/B
+ U3q4z+zGnocTDvy6UZtix1nTCZvyYUC3A+t1xSA4Cm5SWhTBCe13zEI3/twYt2sLcstf
+ wWl4FRrb6yC8s3aucH4uwfgPn2hkEScI5a1kAq0GXiQjllFqvFZwO8j+dOf26adtKY1m
+ TjGg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqTlTY2eSOrktQNlOjGqF+BASzxU/LlL8pxeFqN5XwYdmj8RFHQbFKdUE8PJDxxT9DWLP71WzQ=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yw+0nmNreeVteGT6lC7WIrytRL4P2eTlLnE4N+am2lvXlQfTX/U
- sFC5gpcu5LO94DK5ycuYV/c4r2pxEsaAjXvWc1kNRMOtvpIPTQkhjcroxS56TM7sf9B6zKnjgpq
- DuiMmFPLWbmF1HrUBzOWd66qcF2m44R5rOKwgFB0l3vudsIgHEuH+QhVkeMAropZVXPeHHhE=
-X-Gm-Gg: AR+sD11aBHW7YOnHotSghIzmn1wjtvLtd/Xmy56WHYKjBzqIXOVF7W6RArDAzoRoYlo
- F5P4pI2AhHO6yKCsWN0ZAvN6MHwkUJxBqPVrs0t/s3mx61IkdLwe0efk9WC4xpl3PzdT1FfnfIE
- 8GCVitMpaufjhwzEn8kIdDW+cHz9V3THqrfBWUW+OF/2VHH07RIVx+nYKK0d7sqUrwzjIRrPSh9
- eztXJIzA8yrG8MgrmqSBDwmCS75zCigtQhHrNz0OOMeW0kPAfTnHhXBNw1RerFPQ8oldT1R8LQp
- 2RU+GYWZmG0h/K6D1yZkpR80OzHPL096rD6HHrN6hUtZXDtIh4IPfoYwI/BpArxPrmUJAXeos/+
- PZYXRGA5ROjESSpvVjkEsSiRMSYdW2kEIHvVz3M96LAEIW8pL3HqpNZjlBLzbb1wtQ8/vx/EIKC
- vqi81T0awj7mINyJ3U4Seyct5LVmwDWw==
-X-Received: by 2002:a05:6a21:9206:b0:3bf:a638:4371 with SMTP id
- adf61e73a8af0-3c3ad5d4660mr23770898637.10.1784706154792; 
- Wed, 22 Jul 2026 00:42:34 -0700 (PDT)
-X-Received: by 2002:a05:6a21:9206:b0:3bf:a638:4371 with SMTP id
- adf61e73a8af0-3c3ad5d4660mr23770843637.10.1784706154342; 
- Wed, 22 Jul 2026 00:42:34 -0700 (PDT)
+ AHgh+RpN/ZV8cBrBmxxFpa+5D6T/LPvbFxDZITomsr/kp6oeuM8EUF5Wm5XEcf4qCJfhKU0ULbm6Un0=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwWhPncK6vqvIAT+TWQQfupC1g+Kz4Lq+h6ffBVfnjV8pKIokpC
+ +LyYiwcYUDBdJ864jdOlJNi2Kyx6HlDCKdVOYbzjhIdaCUr9MwQdfv+rwkTue60y73uRpdQPSUU
+ BLizZHhNnXtxjboY0+eegF/d1V2myirILscHHlyPJAuDQ5v2W3qYvfu3Up44w24+B2Z/4VLI=
+X-Gm-Gg: AR+sD12HGOuHlTYG0tDWP7RAGf2SVTd0YSYepZkCY84r2K2nEokzjrD8tNhToeHPjhG
+ fZFAiSa9FWaFJpZrLhEIw8x8CudX3MW5gOMLnBDuH1RVER/UOCfcenyMIuls3oxEi/+7AhO5CUr
+ qpR8p+nKszD9e01F36BIIJw1lVn9LIWC3h7de+5ms4tOd8AbrNzwDoa5d14Nc49fyf/E+3wYVMJ
+ 8TAsaNepSJJD01WDl3Pa0VIT+Gfi157zmO3+thBEUVhM4fTTc7GU22h7+N9IRXEfNGtrZeiWhe9
+ ZvrJueRXh1o4UTAZYTzS0Uczd0vvsnGcvN9dYC+h0tlyUo/NBCbk/SeXdM2ib/WdKmRFHKBt/Q/
+ OD2C0EoWWEIcFLlepQybb/6VuxlFMYyKLyoj8FQQ2Q4XP6ibEqexdPRAfgLu4c4XYzy+CB35Z4e
+ pGfzy8caSj6anDoZM9PnPvrK1wabRJ/A==
+X-Received: by 2002:a05:6a21:828c:b0:3c3:9ed1:2563 with SMTP id
+ adf61e73a8af0-3c3ad9d5b60mr23423001637.42.1784706164066; 
+ Wed, 22 Jul 2026 00:42:44 -0700 (PDT)
+X-Received: by 2002:a05:6a21:828c:b0:3c3:9ed1:2563 with SMTP id
+ adf61e73a8af0-3c3ad9d5b60mr23422957637.42.1784706163632; 
+ Wed, 22 Jul 2026 00:42:43 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3147df09ac0sm5572577eec.16.2026.07.22.00.42.25
+ 5a478bee46e88-3147df09ac0sm5572577eec.16.2026.07.22.00.42.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 00:42:33 -0700 (PDT)
-Date: Wed, 22 Jul 2026 13:11:18 +0530
-Subject: [PATCH v8 07/15] mach-snapdragon: Kconfig: Add rules to create SPL
- images
+ Wed, 22 Jul 2026 00:42:43 -0700 (PDT)
+Date: Wed, 22 Jul 2026 13:11:19 +0530
+Subject: [PATCH v8 08/15] mach-snapdragon: spl: Load next stage FIT image
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-spl-v8-v8-7-cbfa79e85a9d@oss.qualcomm.com>
+Message-Id: <20260722-spl-v8-v8-8-cbfa79e85a9d@oss.qualcomm.com>
 References: <20260722-spl-v8-v8-0-cbfa79e85a9d@oss.qualcomm.com>
 In-Reply-To: <20260722-spl-v8-v8-0-cbfa79e85a9d@oss.qualcomm.com>
 To: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org,
@@ -132,65 +131,65 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Hongyang Zhao <hongyang.zhao@thundersoft.com>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-GUID: i9zSnIK97UYjg870Nz-qh7s6ncf21lRU
-X-Authority-Analysis: v=2.4 cv=KLhqylFo c=1 sm=1 tr=0 ts=6a60746b cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=AJsSZ1gA c=1 sm=1 tr=0 ts=6a607475 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=KPGK5uzhZNYWFyxW8pwA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfX/KA65YR3sV6c
- jVpG9SPbH6e88y0f48f3kQfu9YyZ/usgBJd7lHWOfTmfQ0b/tf3brUvJ7lMie/K2w+I40Zi5Qmf
- yr6at9Ka2b5Y0rr3ubLbIJOxsi/VmG41MgCP0k9tLil5hmF4T6wgt/gAC/L8jJzfor3Z4QoMm4l
- 6TFmTGcAnniGHVtgu6HG+PyDUSUdFfVra4GqX21PxCTRMC7Jr14BPDBKVU99D36p6k1Q3GzYDgS
- wKwyJYG3qDnn/m/K6rkIYPm5WJ42x7n7fhCPbqSBw5dtbfpeQ8mdlLv75eAysWVFIV2W3Ok751p
- ffabPCjooBX/zermAgVp6JoTj8C93k0s+VnBDm22Zc3gfZPz5Ie1gJyy92f6OUFGBtyk3ESURCc
- T3Sd84XhxZo5c88TFfRSbgcRztHGtQ0M51Kg3Qr7uJBrA3r+a3cigD9fz/K75+xh5Q+DML0aH+t
- gPVzmfGU12PEEEhveew==
-X-Proofpoint-ORIG-GUID: i9zSnIK97UYjg870Nz-qh7s6ncf21lRU
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfX0EYpYEwVFYLL
- 1mizLFsHmM+ILwJnTDQJLCUN8Da5wzEBO3Ihx4KxPpiE/f+75qYlSrZALGXna7mIaF+eCXMvIjX
- V7mAP2y7E+CUWCUPFjW0O1wCbTjA8Kg=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=cm27Pg_UAAAA:8 a=ckyOdtNtguyc0zMl90IA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: _qnFW38NlrcG2cmmC448tPSVGnQVkpsA
+X-Proofpoint-ORIG-GUID: _qnFW38NlrcG2cmmC448tPSVGnQVkpsA
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfX6FEmds/4ieDH
+ /BoqU85NtMfpRBplAHKl7vIRpRkqyHxsV+i5YYvUSKE4Z97mzlM0YHt+Ng+v1jc/3MyOhvU4Of5
+ cnTvZRaPQf8IuDBjrv7H/aoqt2ji02k=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfX+c47+EGLHZp/
+ /8oO9gUhZ4y+Vl201rJjKLtZX5wfO8zNl2/gUQaH1qj3AkGTXYqa+UFP92/hLkL9OqtjMHhOzCE
+ g3VUgtixdkmeyFGZOa4WVA42//AmxWD3IR1fA2+OIINnBxXJrrrPM7Jd/Ec8IWPKqGPVcXQyA4h
+ +KnLQXDWT2Ff0rRS75Gkkv5kk7f9expVGOiVbRLBnmygWbr4YJb3F0WmvLDhzpehywJ8Fn8q/SF
+ MY2SNEGqp/wZHagufBmlHlZYSUBieTOsSBhEVqJYPjuSx3jnpp9RKAYvNIq2fxLcxwA1B2y/D34
+ ujN1HGHCG/RDf9rz6LMAboOOlHsI/IKv8um6jGpiFJfyCgpQhuB2xFNlI5b0pkaRqhkMhqSyUyA
+ IqOVK98D8UteqED1jNDM9SkJK98uPxhfg0SJh153ASu90iGAKY4I3Zo7MFgBPDbwhLCB9Cjlc01
+ 0UwkGBqwf54szpieHcw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-22_02,2026-07-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
- priorityscore=1501 malwarescore=0 phishscore=0 adultscore=0 suspectscore=0
+ impostorscore=0 spamscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0
+ bulkscore=0 adultscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220070
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- wSTkxLaHNMN7Y7tTSKzNWePHz7fWyTNnwhejoEKQ52U=; b=BwCboTXl6PZE3b2K
- g/RWlleHQwcuyY+IRA8RTY7HOR/oZ5aTPDfFmuZpTFBcrsBpsQ/bpopl/HHlLa1J
- B8Am1hnnVoXfK4p0oF1ZiWbBbfUlHMWxvT4myeb7udHTONq6S7o92MmjlHwCMRfl
- tDDej5dU76enn921qbchsuKc9ECGihOpsbJ148qzJ7GpkViNpwWQk3zUU6jSqsG0
- JBo7Do2rpOx1bnMyX5+0SXwJDEZDhWOjByR91MfRt4vCulWFZ6b9YWYsMZGDKJL/
- 6noH6royEVx1cJ7OdVcFSd7HkI97KkWbtM6a7/c50APExyhrJY/5D5+frL3yoBan
- lnVWsA==
+ NBHbDA6Vgc7ZKStBnlt4bmo0AdQZvXMWOkLdwRuMZeg=; b=HRmH2bxmKTDzdoVI
+ e5evBW2nYBiOZ26RbE5eCgevejUDX8qX77aUuXyjdQDUaDhuwQ17mxlC2tLE0p/H
+ QIWEJhRhuo7KigV7tBjs6YX5sdtyCeW0iYe+ogqSOhljJLBMLJQmciDp2rc+PT+h
+ 6IhOEA+ePLPWdUkde600Ib/IWKLOEa9KOnNbNsIo/8x2rmbvAPztd6x5nlVOxVil
+ 6Iyl2LLda6gnJlzwbeLLyBqexydqAoA0F24N3jcpP3nT8rNrEV7Hp1wnnWjM7n5X
+ n5hVhiR8YM5kH3n5ZC28uZ9t02MXnJFRRBjRj2W6DMyHW9Tt0bCMnMoT7jtbepV8
+ vBbujQ==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784706155; x=1785310955;
+ d=oss.qualcomm.com; s=google; t=1784706164; x=1785310964;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wSTkxLaHNMN7Y7tTSKzNWePHz7fWyTNnwhejoEKQ52U=;
- b=NYUFn8RSpQ7rxZ0NUgSIs0UNIHhKHdth9xjAnrQD94AQpCSvASgF+MzdIHmbqubXop
- qLMUkYS6tIcIWBHnKHZ4qEBb9z3vGUNSBjQ6FeRDbtCWs63QNnAYd542hescaTAD3Dwe
- 8XLXGXBS/tDZrvTgCQtIgpgqVU9ukRBLGpDYEGIYo0ZOFT2gGDr5ksyszKCNAN5s3MZi
- vnOZp9/noM+cJXPLGHwXyp4TerYkXAWJFpoh5j5zWpZCXseduCnVf1JX9KJ/MzPChz2h
- x44jX2sKQSFiHmMe3zdVAp1R23aqvYuXVn4W7ZUcP43ySFRNDjrUC0uRTVm7e0S3c0Oc
- bBhA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=NBHbDA6Vgc7ZKStBnlt4bmo0AdQZvXMWOkLdwRuMZeg=;
+ b=U40Zzd1Um4NscywcJvbwWA3qa3oWXvAUNBQXFTxHFDcw/EqVlDvwAs5sGgkko7SXkB
+ U02g9AkCmuS4xrEM/DxbwS/vKi34UkgvtH6iM+Rdyp8hwMwDsR7yPrBYblrtft9N3uRW
+ wVG/twEHmqwbQJr3s5+vnKmFbAQwnDYO/EBlCdnNFMsqr9EU/Kfr/cnFcxB8RR6fLRLY
+ puAGYbKBggvpqc+PKZWfGajxcedvoTamyHSVYTdt69hLWgNWIlgR7hNr32iEFIc53wJW
+ Jn0/lZhtM2Eo/N/8fkXbBtzuqPcwp5SxBw5/754E0CHU/hvFvsQoBhrb0kb4JNNUV0Jf
+ zsKA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=BwCboTXl; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=HRmH2bxm; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=NYUFn8RS
+ header.a=rsa-sha256 header.s=google header.b=U40Zzd1U
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -207,71 +206,83 @@ Reply-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The boot rom expects the secondary boot loader in MBN format followed by
-the TME executable. Add rules to board/qualcomm/config.mk to create
-u-boot-spl.mbn and u-boot-spl.melf.
+Identify the boot media loader driver and load the FIT image that has the
+binaries to initialize the DDR, U-Boot proper etc.
 
-u-boot-spl.melf is the combined multi-elf file that has u-boot-spl.mbn
-followed by the TME executable.
-
-Additionally, this patch adds a config option to specify the path
-of the TME executable to be used to create u-boot-spl.melf.
-
+Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- arch/arm/mach-snapdragon/Kconfig |  7 +++++++
- board/qualcomm/config.mk         | 23 +++++++++++++++++++++++
- 2 files changed, 30 insertions(+)
+ arch/arm/mach-snapdragon/board_spl.c | 59 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index ddded0029ef..f1a6e828c3c 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -59,6 +59,13 @@ config QCOM_GENERATE_MBN
- 	  New platforms can be added to tools/qcom/mkmbn/mkmbn.py if they aren't already
- 	  supported.
- 
-+config QCOM_TMEL_ELF
-+	string "TME Elf to concatenate with U-Boot SPL MBN image"
-+	depends on SPL
-+	help
-+	  Path of the TME Elf file to be concatenated to u-boot.mbn to create
-+	  boot rom expected multi-elf image
+diff --git a/arch/arm/mach-snapdragon/board_spl.c b/arch/arm/mach-snapdragon/board_spl.c
+index 25b1779391a..716a21156e7 100644
+--- a/arch/arm/mach-snapdragon/board_spl.c
++++ b/arch/arm/mach-snapdragon/board_spl.c
+@@ -253,3 +253,62 @@ void qcom_spl_malloc_init_f(void)
+ 	mem_malloc_init(gd->malloc_base, gd->malloc_limit);
+ 	gd->flags |= GD_FLG_FULL_MALLOC_INIT;
+ }
 +
- choice
- 	prompt "Qualcomm boot0.h workaround"
- 	optional
-diff --git a/board/qualcomm/config.mk b/board/qualcomm/config.mk
-index 769e4a51ca0..2abecbf8ea5 100644
---- a/board/qualcomm/config.mk
-+++ b/board/qualcomm/config.mk
-@@ -12,3 +12,26 @@ quiet_cmd_mkmbn = MBN     $@
- 
- u-boot.mbn: u-boot.bin FORCE
- 	$(call if_changed,mkmbn)
++/**
++ * spl_get_load_buffer() - Allocate a cache-aligned buffer for image loading.
++ * @offset:	Offset (unused, typically 0 for SPL).
++ * @size:	Size of the buffer to allocate.
++ *
++ * Return: Pointer to the allocated buffer, or NULL on failure.
++ */
++struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
++{
++#ifdef CONFIG_SPL_LOAD_FIT_ADDRESS
++	return (void *)CONFIG_SPL_LOAD_FIT_ADDRESS;
++#else
++	return NULL;
++#endif
++}
 +
-+ifeq ($(CONFIG_QCOM_GENERATE_MBN),y)
++/**
++ * board_spl_fit_buffer_addr() - Get the address of the FIT image buffer.
++ * @fit_size:	Size of the FIT image.
++ * @sectors:	Number of sectors.
++ * @bl_len:	Block length.
++ *
++ * Return: Address of the FIT image buffer.
++ */
++void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
++{
++	return spl_get_load_buffer(0, sectors * bl_len);
++}
 +
-+quiet_cmd_mksplmbn = SPLMBN     $@
-+      cmd_mksplmbn = $(CMD_MKMBN) -o spl/u-boot-spl.mbn -l $(CONFIG_SPL_TEXT_BASE) -s 4 $<
++/**
++ * qcom_spl_loader_pre_ddr() - SPL loader for pre-DDR stage.
++ * @boot_device: Type of boot device.
++ *
++ * Return: 0 on success, or a negative error code on failure.
++ */
++int qcom_spl_loader_pre_ddr(u8 boot_device)
++{
++	struct spl_image_loader *loader, *drv;
++	struct spl_image_info spl_image = { 0 };
++	struct spl_boot_device boot_dev = { .boot_device = boot_device, };
++	int ret = -ENODEV, n_ents;
 +
-+INPUTS-$(CONFIG_SPL) += spl/u-boot-spl.mbn
++	drv = ll_entry_start(struct spl_image_loader, spl_image_loader);
++	n_ents = ll_entry_count(struct spl_image_loader, spl_image_loader);
 +
-+spl/u-boot-spl.mbn: spl/u-boot-spl.bin FORCE
-+	$(call if_changed,mksplmbn)
++	for (loader = drv; loader && (loader != drv + n_ents); loader++) {
++		if (boot_device != loader->boot_device)
++			continue;
 +
-+ifneq ($(wildcard $(CONFIG_QCOM_TMEL_ELF)),)
++		ret = loader->load_image(&spl_image, &boot_dev);
++		if (!ret)
++			break;
 +
-+quiet_cmd_mksplmelf = SPLMELF     $@
-+      cmd_mksplmelf = $(CMD_MKMBN) -o spl/u-boot-spl.melf -m spl/u-boot-spl.mbn,$(CONFIG_QCOM_TMEL_ELF) -s 4 $<
++		printf("%s: Error: %d\n", __func__, ret);
++	}
 +
-+INPUTS-$(CONFIG_SPL) += spl/u-boot-spl.melf
-+
-+spl/u-boot-spl.melf: spl/u-boot-spl.mbn FORCE
-+	$(call if_changed,mksplmelf)
-+endif	# CONFIG_QCOM_TMEL_ELF
-+
-+endif	# CONFIG_QCOM_GENERATE_MBN
++	return ret;
++}
 
 -- 
 2.34.1
