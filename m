@@ -1,111 +1,110 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B14C4453A
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C993C4453D
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:43:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C0FC480CBF;
-	Wed, 22 Jul 2026 07:43:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CE11640758;
+	Wed, 22 Jul 2026 07:43:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ktduzDOhXPBp; Wed, 22 Jul 2026 07:43:33 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KT8lqNociy0G; Wed, 22 Jul 2026 07:43:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9F94280DB3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E58C4407A8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784706213;
-	bh=0q8EJ8QXVFX2fJUz6p81w46E9/Vbcyb2AG+lKV2UuEk=;
+	d=lists.u-boot-project.org ; s=default; t=1784706224;
+	bh=GqjsUNG1NNgDDSPVJUMALHfaZ2onk5hnNEaUeXRvlXc=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=q/pB4ez4Z7yD2inAYVtoA7tuMUeYjWOrou/Ms3ch8rTwxpnp7nc1O72m5nj7JePl9
-	 GHGeziE+nBR1ISuisZxtruE9Lf7vPjW9n2T5Ed/5VWIj3rMp4H6KygJnN6NCWC+WF9
-	 WREAz/XK2Dx4JZOyCkmJYFuD1ehEava4FFmAzXheCgfI3J2pql4j18zaNWeuLMsfxE
-	 Y6EmM0r+eVh4Z2MEoOCZY2d7cDALtSO5zaWzcEt43VagQQOLUgxwZeDjT4bAni750g
-	 PdDBTB7rNCHbz4NuXNXcyZMwvqas291p6qC8hLqMmG41t8Mbh1RADWISi4vTyRHWsN
-	 glw2pez0EAOkg==
+	b=X63BbPgMlcnoj/uYdfiR4dXkP08JTO/yt6K6UD8oHBolsjfzs/uAPC9YUeFPl83gl
+	 foCLmIDlnUL8R/9dNZ/ltUDXNYVSCubxUbw/YRHoOIj5X5iOFvwVaxWaYjVmuPVDsP
+	 4eeRJzPX0xBHGuh0q+qksTWw85yYmOfFHsgAZNihHnJDBr8fPU5dEZPRF2Yc3+pGmp
+	 ctUGOsJs3fX64H2RqM1MKBuBPHITvB+vFe3pyIpxvU0U7AEzI6pxWVR0L41g7CRpZL
+	 GuSdzFIs1qFvvGsVwYxkmRfo3ZS+YlAS/vCgzOOqRPVvBiIaL3r5rOSH7Q0n0xF033
+	 j8uvOjKDoxLrQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9F94280DB3;
-	Wed, 22 Jul 2026 07:43:33 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B3F39109F
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E58C4407A8;
+	Wed, 22 Jul 2026 07:43:43 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2E258DB4
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A5CFA60739
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:32 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1F4F340173
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gU46nlKMMa90 for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 07:43:31 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uu8Eg5JJwxEi for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 07:43:42 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com;
  envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B3BE860740
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3BE860740
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B3BE860740
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:31 +0000 (UTC)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org F01D8400D8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org F01D8400D8
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F01D8400D8
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:41 +0000 (UTC)
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66M61uk5984493
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:31 GMT
+ 66M53hHh3917564
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:40 GMT
 Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
  [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjr838dk5-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6aatpa-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:31 +0000 (GMT)
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:43:40 +0000 (GMT)
 Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2ccbb61893fso258351905ad.0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 00:43:31 -0700 (PDT)
+ d9443c01a7336-2ccd1958e8fso124236135ad.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 00:43:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784706210; x=1785311010;
+ d=1e100.net; s=20251104; t=1784706219; x=1785311019;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=0q8EJ8QXVFX2fJUz6p81w46E9/Vbcyb2AG+lKV2UuEk=;
- b=qDlezQ7qf/73krKAfD3fthAAeu7UYm+SQO6RiiUGpwunPCwIbSfTu4Y9k/yl/sOFJC
- I/BAaB9t8vCH1D/TyxIMvSbbzkIrsj4HdrEGynu4bty3g5yev7xm/RDY8x0B5DAKjzXi
- rZfXdy02lSEa6p/MPAa0GcY7XXvtvdLGcJWY1s+vNrv4aytoli5Gvu6r9Czf9wXZ/3cL
- /eOBYUEoy9Z+j4dj8TEtR5KWWj+Fs7SbgF8aViPNmgPFm5tbxGjQgOlw/eBShukProa7
- qzJt06kn78aDAdDeIhjLJ5/MHEkDuQjLqncPIHjSY5bNLs5xqoK/8DoJpcncRhye3zle
- X3lg==
+ bh=GqjsUNG1NNgDDSPVJUMALHfaZ2onk5hnNEaUeXRvlXc=;
+ b=LyWUHOHskUUyvItJE7knpzPqQjrNUZ0ZSmvULjchYJor+8v3JWRvbZKHFZu8tU+k4B
+ ERL8yfXud9mj+0+VMLWOPhahGASQ40aEXmN2JSqPAeZcSj2P75bo2SbQbu7jWE0a/q0G
+ rrAFmDffChAZSD9MhNkJAiBactiIaeGWkHfOWS8EEkL2MM2PBykapirTMrDm3Un6ouQI
+ hWvRgCAs5p5/z53cFdaofVh7SbmBk3LXwODyipYy6lDW/AA91BWfs/zhNg7F3QmC+ocm
+ QPHTvTTZpP2Jxc0A2PiZi0Z3Lh8aPcV3vXdVxSlGeD1X0cD8T3MVPLLgAdHuTjkiru20
+ s1yA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq/jUJev4OpvNaU1AgioxXzG1hn+4G7wdQOHVx27sM7WWc3MzF9M0/w2zhwahYMWOTDO9I11Pc=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwZ3DTCjViiQ601EQav0ueoumvHD7piC7E+bIbIo8AtTt2SF6vb
- sbsFrmHz/rxI22+ty8XwwbZHNOJH3hTcvNdGZrvvPg7Vi05Q67t/q+ZajRgMO+ytej8DdL1BoWC
- A+MCs3ulYJlE+XVSw0sVl0VYMXde9RWUcDOoPyl8T7wZ5W+SUekH8BFQ94sqOBdp1qseHAQwdZp
- Frbdk=
-X-Gm-Gg: AR+sD12uh+JDk03unEI9mueSF7cnH5t2gPIpVijb1MMaPlIaYZXH5rOPdKzBD3oowwg
- CgfcIDCv0y2iHDjRs5eGWhdxnYqHBgH6IQao6ugmDvn/TutpVe0QMKVziTZ5doS818oK8aAMQ79
- GjOt1STNphgP4Oo4umJRtPopammXP37saKc2kLp97u0r7woBMw10wbl+gkNsZ7qu+G85YBkznOX
- QxVLBa2dpDxBatG+yK/uy5ZV2hBgTFq3kUVEhTyZUD/ODU67o0EgvBylUMOX2T6tT3aUtfIJqxe
- wfcUU2L7M0CG9igThN3z1PxIGoQZeUimh5rBkbpsKHlasSPGvrY6W92sltCuaXy3SpL1PVqQGCa
- KdM0Xyn8G9sAjex7tgVSLpGURT3v7ZMUlmpgUDAXDVv0kdiOR2u1yUE95B4MULD9xgwTjsgDUYi
- bxBqtTywe/K5K/HRCR2+xNLs1oaS4aFQ==
-X-Received: by 2002:a05:6a20:d507:b0:3bf:a1e5:ff62 with SMTP id
- adf61e73a8af0-3c3ad8b3986mr22766445637.47.1784706210293; 
- Wed, 22 Jul 2026 00:43:30 -0700 (PDT)
-X-Received: by 2002:a05:6a20:d507:b0:3bf:a1e5:ff62 with SMTP id
- adf61e73a8af0-3c3ad8b3986mr22766386637.47.1784706209723; 
- Wed, 22 Jul 2026 00:43:29 -0700 (PDT)
+ AHgh+Rp+cDprRqZHFL8XlWrzUU5lqhHBk62qA7SqZH4EAzks9tjs5nl9lKdJoam2DZqbPkEjY/nh6QA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxhVy/scUrhyVEjF/N5d9Uv8OcmJzP7Wuyob438J5RQ/jvKhHX8
+ L4HaQAvQ7CIj+fw2Yh0nOlnaym98K7K4/KqxSfFoDI8TDOfn5eGtn5xVGXJcArXFRroY7VnPFmb
+ bNJjBnsDRYBU4DUzbwBcfAXiYctHN2T63TxRp3I7MpUiUYzLJRdSD9YveqEAeZT5QSCcBjDM=
+X-Gm-Gg: AR+sD11or8CQr/OqYmuuLSW3I0v3KlmUcZFR9w3qjS23ILT3+P8yYKYaJd+snEed5ap
+ x3mGyjE2cT2dRBua1Stg/klIVKO9xV2/k/vrYzOsTYrW1z2NOISfxC6NL4OAHebj91ieIm88b99
+ VfvBD90pXvnxOFzAQAf97e+917Oclo4H01Sk8AU+GjRUY0h2bClaFtYQ36SjWLCmXxaotkkOd6X
+ G8SLNe99yR9hw8up1nJLBrup9kdPm7lk6TT7dh5KqRDv97b5RMAllT55cFodkVrQEG/GDADfvCG
+ qRZQbaTq1VDmOTYVKVjd/0+25X4HRPi3mC2ttmf1gw5FbkcsMOHTmrH33vlaZqVbhZb2qMWWMIl
+ Kw1VvQlNQ4GlJ85jyD67uZZGtUNyEcIQD+618IhULZcb7eGN65vEgvtr3Dhr1lv7phDJJelncxF
+ Qa7RkLb5Fx8ZmUeIdNbwpFWzIZRbXPFg==
+X-Received: by 2002:a17:903:240e:b0:2c9:97a7:f540 with SMTP id
+ d9443c01a7336-2cf349fe337mr247308995ad.38.1784706219418; 
+ Wed, 22 Jul 2026 00:43:39 -0700 (PDT)
+X-Received: by 2002:a17:903:240e:b0:2c9:97a7:f540 with SMTP id
+ d9443c01a7336-2cf349fe337mr247308715ad.38.1784706219018; 
+ Wed, 22 Jul 2026 00:43:39 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3147df09ac0sm5572577eec.16.2026.07.22.00.43.20
+ 5a478bee46e88-3147df09ac0sm5572577eec.16.2026.07.22.00.43.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 00:43:29 -0700 (PDT)
-Date: Wed, 22 Jul 2026 13:11:24 +0530
-Subject: [PATCH v8 13/15] mach-snapdragon: spl: ipq5210: Add SPL support
+ Wed, 22 Jul 2026 00:43:38 -0700 (PDT)
+Date: Wed, 22 Jul 2026 13:11:25 +0530
+Subject: [PATCH v8 14/15] configs: Add qcom_ipq5210_mmc_defconfig
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-spl-v8-v8-13-cbfa79e85a9d@oss.qualcomm.com>
+Message-Id: <20260722-spl-v8-v8-14-cbfa79e85a9d@oss.qualcomm.com>
 References: <20260722-spl-v8-v8-0-cbfa79e85a9d@oss.qualcomm.com>
 In-Reply-To: <20260722-spl-v8-v8-0-cbfa79e85a9d@oss.qualcomm.com>
 To: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org,
@@ -132,65 +131,65 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Hongyang Zhao <hongyang.zhao@thundersoft.com>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-ORIG-GUID: CaoL860rcmJGDPxHgd3AXmEZtO6CuIR_
-X-Authority-Analysis: v=2.4 cv=VfrH+lp9 c=1 sm=1 tr=0 ts=6a6074a3 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfXwP8WldlRhn4i
+ hdTX7vy6Lt+t4Tuqz3aknD7D/tUIuu9lfbsYDQvh2bxaCuYm9jmiov0+J+jfFoKFhVDWqtTeIoU
+ 02wxbBRhLuudXIezwff1W5Rddst8C/ExX/g5DU4N6UUu3zyBpkhvv+x09LgQpr4lm+yhLHM+g6H
+ VHgIxuh/GMOVzCpKCe9rJhfLOsKuQbvaziskWQqCmnIbd54A6dRgJ1JOkfDFRXYnCJDqgiH5ebe
+ xRAEmwLni/I5ppnC4Q0tRsUv+slPMQwcXBZuXbpwvKA+FcjU0qdIAjzBFIhrRQWqfSCRI7+nJdM
+ OlPDixmNx3TWVG3pqu7M8fgv94j7l4yNtID7ydsgzxkTgYfc1jKJpNlA/94Arkw1S5220lPPwU6
+ F1DZUA1NFxRFkYNwTYbdvPQZrG7llMZK5d6+lysTmGtmYlRa4+Q+pDL9LXwT1uc7W9s5ZfyRjiJ
+ yk4vtjxI1rpy0gjP7iw==
+X-Proofpoint-GUID: 0VFzDeK2PlhFmEm2Rpn6dwhy-DEuAtF-
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfX2uGjKhKE1dRA
+ owgRoKu1KQnKmhMBoSobw50pc5XBdJF3d29LRGJDLCnek84h+/Qgdj2L6os9y/ZkPKRKMGTYqec
+ FDyNcPG2D63jvp6Npq6gDHLdNVGdpgs=
+X-Authority-Analysis: v=2.4 cv=HvJG3UTS c=1 sm=1 tr=0 ts=6a6074ac cx=c_pps
  a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=cm27Pg_UAAAA:8 a=szQR6NxcgnduxeX9TVQA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=cm27Pg_UAAAA:8 a=bkeBrEV1CVOi_WhrbfQA:9 a=QEXdDO2ut3YA:10
  a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-GUID: CaoL860rcmJGDPxHgd3AXmEZtO6CuIR_
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfX2WzHp8B1P/gC
- iHWbeGZWA1NKcGMysZGQX4p3iO8tS0NIOKThbDODTDsAws9Kzsz6SsKVpgnoc8bypgfU85urDLs
- NgvEpFzZKS/f4+pDV7xagT8qPTthmyWfVhDSYPHpvEvInX2pXAM7Fev1ynwQUD9UaKyyd8Jyn5o
- QYTGvU6KeDP8RKExwAgQy1ocAYM7KYGGsufrNt9Z/hVCoDG+kTY3rz07rtbFQX1BRapWOPA4Zdu
- gHR+ijECU42ZDbH0YlnekWUJzy7iFV/bkaKcPVaxTXpdAh86vpCtHRTenP40tVoEngDjieTy8QR
- jBe1ZGKym4lN/LHSADmSUtBb7puMUHzX/5Kmrnjtjxijmi46WvSgT57yT/ULBOkUB1wsp6dqvs/
- Our/Vnlj+S++LH9ZF+lohwe2zzU6ms4UIZkbYiR1wHiizBChn2bLhTmseQyAZ0se6HC+YatwUsf
- F1B6D7Lc+BrnMz3aM2w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA3MCBTYWx0ZWRfXwEk1U2v5bnGP
- TzAVYXE7sXhKVQt4uZbvlSzv0xcjXRwkLv82MoBFOQSxYvo41gSSzKLqFtIr62T8H2Wd2vG/NxZ
- P4f8N54/ZVOthQ/KP3f2z8qy2zOjYMg=
+X-Proofpoint-ORIG-GUID: 0VFzDeK2PlhFmEm2Rpn6dwhy-DEuAtF-
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-22_02,2026-07-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015
- priorityscore=1501 spamscore=0 bulkscore=0 impostorscore=0 adultscore=0
+ bulkscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 clxscore=1015
+ adultscore=0 priorityscore=1501 impostorscore=0 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220070
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 0q8EJ8QXVFX2fJUz6p81w46E9/Vbcyb2AG+lKV2UuEk=; b=cBnygLzFD/ASzULG
- 1Rd4pfoc+I7Oh+XTS93XuF1UF5pFMSM40ZAcbE1n1ButzHD6HUTFXWKyB1hZpxA9
- iuQpOBxR1sN19Hc7lxkaEFkd5yMscslaChyCjRKkW6F0gJvMHsj+Pdt4KiNJkXbl
- DYUm/YkZxd1lZ8M7quwZnSTq5bgG9vlfQF9jyD+4vQGxsKMrLbSi+4WVzRSOReOH
- tcNixvnh0C1stPcj7ev8CofeM3PJGDRxnbJ+rti+iS6LaTA01WqJ3TqocJF0+zpJ
- lo0Zt3QV2ILrrMpJNQiK5HwQa6gXBl4+Mak4MBGhRrN7GeT8p8cgV66yueiDJ/5x
- LAfimA==
+ GqjsUNG1NNgDDSPVJUMALHfaZ2onk5hnNEaUeXRvlXc=; b=GdErUMeS/VxYfxGY
+ /9cv/QUAqXueJkd4mFP80utpHXqUypCtqhREFakFotxrRs22i8LpxjtQdSegxEKC
+ tkDgXIyTMXpZHGjQEYrJz2S40DqYm4Lx/wjSNWG8ih8FsProbCreU6veDx/p4/jl
+ MUe0esm5QP7rAI67sKy0aC4Ja06Z5t/cPcwST0yTzB3TE7/USi+U5IAFRxrGoz2i
+ ZpmZ3qGrvZorAyWvrWSf4TAE3aDogSpNfJ5pPbbmLLPyS7K165VuIAhNCdlf9Zzj
+ dWF1TKgZK3FO1Y6M/kEcni0VugMOjlPH+tcVQhhQeNBeh2paTyc/CKqbyQoTlgI2
+ QLHnKg==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784706210; x=1785311010;
+ d=oss.qualcomm.com; s=google; t=1784706219; x=1785311019;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=0q8EJ8QXVFX2fJUz6p81w46E9/Vbcyb2AG+lKV2UuEk=;
- b=AogB7+re2VmX6sVI1MUzlxIXg2cGazh+uvkF+UySoEB2j0+xwvR03kayOVP974bOMG
- 57RXA2Fo8tLQfhjWNqew4GH7SSdcGe9HWrbMZfbeTSCoTAKz3eEn9SwINaeU79iQVbI3
- XVsise8zYg7r7gzlibw8U5F28+Og66xGLL+zNbqWc84HqULZCUgJ90L+uwXLD4HXRknZ
- S8vFodDIQMejBlV68N1fVfOl/WVXWJGcIAGowE32DTPfSRFMPnRfFtrJs3L3ML4FXpY2
- IMmci0GvDZ40HZ9EyX42ObqTWhMM4SvTI3PccYYvYL9Nhq5xdEs+/QSL7rCeWHf5qNyT
- 7Ahw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=GqjsUNG1NNgDDSPVJUMALHfaZ2onk5hnNEaUeXRvlXc=;
+ b=c871+r8D8EkkYhy5UnQo7PnGOyxOjopu9v0E8WB9OQ9jQc3l5w7Hs0ExLLjqmKIIBi
+ n0f/JYOsDCo9txJhebwjqccrqc5KkrSMZUS+dGvAUBZAmeJwxj052VY5CNSTNz0N1aVl
+ oYVExNlM4DKaBSzbn1se2Lzuraj4cPFLSLxU/4SkDC63MD/Zh9M4zypZ2eofd5IyHLBt
+ a3l0DWPsw5j7jbpSjBGURc+J0UGsF1I0SrnOSo0TJ2uJmy1/zb68gOWvujdfaAIY36Tk
+ 5RCuVKIGXjZ+wJlzjqURJ5OwCiE6ZkTeBivS32CvlX2lk6mQFlEYPKm3JzGlzxq4VVlV
+ YAkw==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=cBnygLzF; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=GdErUMeS; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=AogB7+re
+ header.a=rsa-sha256 header.s=google header.b=c871+r8D
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -207,195 +206,135 @@ Reply-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This patch adds the basic board init routines that invoke the common and
-mach-snapdragon specific SPL frameworks to proceed with the hand over from
-boot rom to the next stage i.e. U-Boot proper. This also provides the
-linker script to generate the SPL image in the format expected by the boot
-rom.
+Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
+Presently supports eMMC.
 
 Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- arch/arm/mach-snapdragon/include/mach/spl.h     | 14 ++++
- board/qualcomm/ipq5210/Makefile                 |  3 +
- board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds | 18 +++++
- board/qualcomm/ipq5210/spl-ipq5210.c            | 96 +++++++++++++++++++++++++
- include/configs/ipq5210.h                       | 11 +++
- 5 files changed, 142 insertions(+)
+ configs/qcom_ipq5210_mmc_defconfig | 113 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 113 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/include/mach/spl.h b/arch/arm/mach-snapdragon/include/mach/spl.h
+diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
 new file mode 100644
-index 00000000000..9e09bad82bc
+index 00000000000..56a22ce346a
 --- /dev/null
-+++ b/arch/arm/mach-snapdragon/include/mach/spl.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#ifndef __SPL_H__
-+#define __SPL_H__
-+
-+void qcom_spl_malloc_init_f(void);
-+int qcom_spl_loader_pre_ddr(u8 boot_device);
-+int qclib_post_process_from_spl(void);
-+void qcom_spl_error_handler(void *arg);
-+
-+#endif /* __SPL_H__ */
-diff --git a/board/qualcomm/ipq5210/Makefile b/board/qualcomm/ipq5210/Makefile
-new file mode 100644
-index 00000000000..d808c106524
---- /dev/null
-+++ b/board/qualcomm/ipq5210/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0
-+
-+obj-$(CONFIG_SPL) := spl-ipq5210.o
-diff --git a/board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds b/board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds
-new file mode 100644
-index 00000000000..f0ced6765da
---- /dev/null
-+++ b/board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds
-@@ -0,0 +1,18 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+PHDRS {
-+	ptype PT_LOAD FLAGS(0x7);
-+}
-+
-+ENTRY(_entry)
-+
-+SECTIONS {
-+	. = CONFIG_PLATFORM_ELFENTRY;
-+	_entry = . ;
-+	data : {
-+		*(.data)
-+		. = ALIGN(4);
-+	} :ptype
-+}
-diff --git a/board/qualcomm/ipq5210/spl-ipq5210.c b/board/qualcomm/ipq5210/spl-ipq5210.c
-new file mode 100644
-index 00000000000..e0c52c0a6f6
---- /dev/null
-+++ b/board/qualcomm/ipq5210/spl-ipq5210.c
-@@ -0,0 +1,96 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+#include <hang.h>
-+#include <cpu_func.h>
-+#include <event.h>
-+#include <init.h>
-+#include <image.h>
-+#include <spl.h>
-+#include <spl_load.h>
-+#include <asm/io.h>
-+#include <asm/system.h>
-+#include <asm/sections.h>
-+#include <soc/qcom/smem.h>
-+#include <atf_common.h>
-+#include <linux/err.h>
-+#include <dm/device-internal.h>
-+#include <part.h>
-+#include <blk.h>
-+#include <dm/uclass.h>
-+#include <mach/pbl.h>
-+#include <mach/spl.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#if defined(CONFIG_SPL_BUILD)
-+/**
-+ * board_init_f() - Main entry point for SPL.
-+ * @dummy:	Dummy argument (unused).
-+ */
-+void board_init_f(ulong dummy)
-+{
-+	int ret;
-+
-+	memset(__bss_start, 0, __bss_end - __bss_start); /* Clear BSS */
-+
-+	qcom_spl_malloc_init_f();
-+
-+	ret = spl_early_init();
-+	if (ret) {
-+		pr_debug("spl_early_init() failed (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	event_notify_null(EVT_LAST_STAGE_INIT);
-+
-+	preloader_console_init();
-+
-+	ret = qcom_spl_loader_pre_ddr(spl_boot_device());
-+	if (ret) {
-+		pr_debug("qcom_spl_loader_pre_ddr() failed (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	ret = qclib_post_process_from_spl();
-+	if (ret) {
-+		pr_debug("qclib_post_process_from_spl() failed (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	board_init_r(NULL, 0);
-+
-+fail:
-+	if (ret)
-+		reset_cpu();
-+}
-+#endif /* CONFIG_SPL_BUILD */
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	/*
-+	 * SPL loads the pre-HLOS images from bootldr FIT image
-+	 * as below
-+	 *
-+	 * In board_init_f() - Matches "pre-ddr" configuration node and
-+	 * load the images mentioned in its <loadables>
-+	 *
-+	 * In board_init_r() - Matches "post-ddr" configuration node and
-+	 * load the images mentioned in its <loadables>
-+	 *
-+	 */
-+	if (!(gd->flags & GD_FLG_SPL_INIT)) {
-+		if (!strcmp(name, "pre-ddr")) {
-+			printf("Selected FIT Config: %s\n", name);
-+			return 0;
-+		}
-+	} else {
-+		if (!strcmp(name, "post-ddr")) {
-+			printf("Selected FIT Config: %s\n", name);
-+			return 0;
-+		}
-+	}
-+
-+	return -EINVAL;
-+}
-diff --git a/include/configs/ipq5210.h b/include/configs/ipq5210.h
-new file mode 100644
-index 00000000000..5cbf838af82
---- /dev/null
-+++ b/include/configs/ipq5210.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#ifndef __CONFIGS_IPQ5210_H
-+#define __CONFIGS_IPQ5210_H
-+
-+#include <linux/sizes.h>
-+
-+#endif
++++ b/configs/qcom_ipq5210_mmc_defconfig
+@@ -0,0 +1,113 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
++CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_EVENT=y
++CONFIG_TEXT_BASE=0x87980000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_ENV_SIZE=0x40000
++CONFIG_ENV_OFFSET=0
++CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq5210-rdp504"
++CONFIG_SYS_LOAD_ADDR=0x90000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++# CONFIG_BOOTSTD is not set
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_USE_PREBOOT=y
++CONFIG_SYS_PBSIZE=1024
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PART=y
++CONFIG_EFI_PARTITION=y
++CONFIG_OF_LIVE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_CLK=y
++CONFIG_CLK_QCOM_IPQ5210=y
++CONFIG_MSM_GPIO=y
++# CONFIG_I2C is not set
++# CONFIG_INPUT is not set
++CONFIG_MISC=y
++CONFIG_QCOM_GENI=y
++CONFIG_QCOM_GENI_MINICORE=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++# CONFIG_MMC_SDHCI_ADMA_HELPERS is not set
++# CONFIG_MMC_SDHCI_ADMA is not set
++# CONFIG_MMC_SDHCI_ADMA_FORCE_32BIT is not set
++# CONFIG_MMC_SDHCI_ADMA_64BIT is not set
++CONFIG_MMC_SDHCI_MSM=y
++CONFIG_MTD=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
++CONFIG_PHY=y
++CONFIG_PHY_QCOM_QMP_UFS=y
++CONFIG_PHY_QCOM_QUSB2=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_QCOM_IPQ5210=y
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_MSM_SERIAL=y
++CONFIG_MSM_GENI_SERIAL=y
++CONFIG_SOC_QCOM=y
++CONFIG_SPL=y
++CONFIG_SPL_FRAMEWORK=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_OF_LIBFDT=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_DM_GPIO=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_SMEM=y
++CONFIG_DM_STATS=y
++CONFIG_SPL_SYS_MALLOC_F=y
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SYS_MALLOC_DEFAULT_TO_INIT=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80008000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x20000
++# CONFIG_SPL_SEPARATE_BSS is not set
++# CONFIG_SPL_USE_TINY_PRINTF is not set
++CONFIG_SPL_BSS_MAX_SIZE=0x4000
++CONFIG_SPL_TEXT_BASE=0x08c2e000
++CONFIG_SPL_MAX_SIZE=0x3D000
++CONFIG_SPL_MMC=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_WRITE=y
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x00
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_SPL_STACKPROTECTOR=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_ATF=y
++CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
++CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x08cbe000
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_HAVE_INIT_STACK=y
++CONFIG_SPL_STACK=0x08c2e000
++# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
++CONFIG_SPL_EVENT=y
++CONFIG_SYS_BOARD="ipq5210"
++CONFIG_SPL_REMAKE_ELF=y
++CONFIG_SPL_REMAKE_ELF_LDSCRIPT="board/qualcomm/ipq5210/ipq5210-spl-wrap-elf.lds"
++CONFIG_QCOM_TMEL_ELF="../tmel-ipq52xx-patch.elf"
++CONFIG_QCOM_GENERATE_MBN=y
++CONFIG_SYSRESET_PSCI=y
 
 -- 
 2.34.1
