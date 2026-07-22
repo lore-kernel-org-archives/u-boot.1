@@ -4,117 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F9EC4453A
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 19:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D0DC4453A
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 19:47:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 493CE80FFE;
-	Wed, 22 Jul 2026 19:47:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6BA7D810A4;
+	Wed, 22 Jul 2026 19:47:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id P4Hskz61VIZR; Wed, 22 Jul 2026 19:46:59 +0000 (UTC)
+ id 49fKX9ns4Jtr; Wed, 22 Jul 2026 19:47:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2019980FF9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3DECB80FF7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784749619;
-	bh=GGMEsMq/rRo3/FfGFRE5K6y0vWIdMsFwjU6qouHX2DE=;
+	d=lists.u-boot-project.org ; s=default; t=1784749622;
+	bh=6pYeJonY/8MVe3mVI7gzLOlSCBnmvBkxSjS5m3c65wM=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=oQ/Dx0GTyn+rSNH2LhDG4R4V6DZ12AL6ijxCzrQjN1eLJfQOw3gIEHD9fWrnvXo6D
-	 I1X+e46rytAovuTHaTGZZFWq5gGkMa5faNziVChwz8MGzSZgEVMgDcEV1SgKqyke39
-	 37VhW/x6+Q5T33p310V90Trba4JUCHSmBGEQR68An4vc+iFfl4VKZCQFzmxn6yGqWp
-	 0CZYMBVaPjA/HN1tQYRevFdmdaeVB/gbRRrI11q6BKICU+b8tnDJSzm8v9pswZsh2P
-	 6OobR1J47gxUc+sBy3r9SeWSO1KFozUq+H1ZuEfBHj+H2Z+NJb41KyPFRCsj4+JeLR
-	 7xGzc27W0gQEw==
+	b=hq0YN6rYQUDtnr1piZThSGhywNtjWold7Znva4fVk+a7itvX5LK6ruWVx/Jz1SMPX
+	 9oFiuWDi0NNUv8yQ7sG5aTYfMcqRredtbWIepoeDVBLw/K0vEoNGMvkprvvrvY/R7P
+	 3pOcH24YyMtqXFldg557MCux0fEqU7ACZdB+cfif9cNNehZaGy2SrecAh5/iOChb3B
+	 q+ChxHgm0t0OfRVclZEXvzoD8GGCBllkh5dxCo2lqug/fuEJHfF34uDCY5ggAQxdej
+	 h4EHf6hd+g13Sg2+bGGPOICIUnDUwMUajh5n9c6lZymGEXnQgjP5lPmIlNIfzLLY51
+	 yVxgZ8GPeYI/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2019980FF9;
-	Wed, 22 Jul 2026 19:46:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3DECB80FF7;
+	Wed, 22 Jul 2026 19:47:02 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9529E2E5
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 19:46:57 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E40C12E5
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 19:47:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 873CF40A86
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 19:46:57 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D64D540A91
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 19:47:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wB7RQMWTmisl for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 19:46:57 +0000 (UTC)
+ id J56HMCEbjQ-L for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 19:47:00 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1034; helo=mail-pj1-x1034.google.com;
+ client-ip=2607:f8b0:4864:20::1033; helo=mail-pj1-x1033.google.com;
  envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org E5DEF40A84
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E5DEF40A84
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E5DEF40A84
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 19:46:56 +0000 (UTC)
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-38e08baf860so10687337a91.2
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 12:46:56 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2856640A3E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2856640A3E
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2856640A3E
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 19:46:59 +0000 (UTC)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-38dc69c74b8so10652827a91.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 12:46:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784749616; x=1785354416;
+ d=1e100.net; s=20251104; t=1784749619; x=1785354419;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=GGMEsMq/rRo3/FfGFRE5K6y0vWIdMsFwjU6qouHX2DE=;
- b=iM5dV/Eb2mcXwt1v/0nTlB0VGR3WWhMFk1W8fRFrGD8qwdKiM8OAuCe5be1ZW7dH3W
- +jj75QWvbYTvKpyRJFeD7hkTI3NnXhdvVJo7KUKDjZh0UwRpeEazmrgMnOaQA9pxSuLJ
- zZJ7OK4B1g2g2BG2KmC0Vr/0ab0v04G99OhiAetquur0ssW2waV4XtkIGgvRiZdTKPD3
- ylh08WZ59orKi1fNVevNaTqwd0r+Zb3MaQ10TJi3bh/ynOX5KMHoECWgh7dYtc0xDPKC
- CLjWfZigA1HpoFuU0WIsOnCrSEGJZ3PaRuBNzSrDS4iMtWINoVSHsGT9j8VpttbLLaPZ
- f0sA==
+ bh=6pYeJonY/8MVe3mVI7gzLOlSCBnmvBkxSjS5m3c65wM=;
+ b=hELggzYttoI2k46nAWGYQ08yBjw5NB7dU/FpgiuuxFw25b2tN5w3OSTeW4d1ns1DXg
+ c9slvBXil7SwaA2PmE8lFfuO9+VRe3qxqZ2ofAaVjdyE0sKc2wBk8IMpUXokLxOXLrfr
+ eA4bRXL1iJEotIKSbtoByBBzb85Ocu1zhaE/n2LfV5dnOV+MbG2yb/6W1X7kYaR4aQkp
+ LMLmLKj5sqqmy8Fku3VAtSWoB+S3m0BOyrb2v2qL2ltpNC+L6LRM1M96BtMc50TF/Na9
+ GIf5HrINkk7QiPy38kUKdrmMRimLae9BIgsjgwVvchVl4fbqktEuPTR5A8joXG5EKMwW
+ U4cg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rpp0ijC2ZVI4oKw9rxb3oRy6dIpQQnja4BisfvL8PKRCsK8lSqNZ0jEl1+sHuPVFghkbnFpBzY=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxDMByeFX+Bt6jz0PRJH9AX8G+VE5nfvDWQSJvjymMjiKBm1pT8
- Te3sKEt/ZPgDot993BZYdqeY3pG09o1h0nnLLec7T1PtwHKKK/7oEGjw
-X-Gm-Gg: AR+sD11nzfczChVGXpuQzgzqSG+If3SeZgP/LjuK2wqWvG+FLK3RNd/48izCFUFZWOR
- EuGqSr4JeAN6wkC1ONw7j6OnLx2SRXsFGrx0gQ+hgsUPVgae50nYHXjGOa7Ur0gJ3HKbXOVLXij
- 7u+EgPrwrKrV9h+a7aAZ9epPRHHfm9P+aeps8Ol6BGa5aVo/ueuj6vIFGyHybjsj7yxvaPEcP43
- Ms0DspNGnMCA1uyEipGyHgLb3xfFyoD1XOlNd/L8MW6Owii6iThN8F0pB7jqO+umvnqSZFx2O13
- aig7XuMq/U9SAlk32h/RHJ0wXr8zs0AfAtJuq88BUDw9arM0/1PF16Z3Uxm2/HU+NfdEaYjdNAb
- xNFljsh5Nov/SYdxZcLAdX3beeR8Y+9wTZD6EhF2ZV30Et030S42jJB+XFWnbSLk6/JMD8YmkHW
- bAoheTywj22heq9KUn62V+l6bCSf49kYpWapfuoHGku92QAqc=
-X-Received: by 2002:a17:90b:2b47:b0:36a:5d1f:7b6 with SMTP id
- 98e67ed59e1d1-38ec6453e68mr112425a91.2.1784749615878; 
- Wed, 22 Jul 2026 12:46:55 -0700 (PDT)
+ AHgh+RpThPoLUaSx/D0Lj9Jl2rQoGdG/kao5t55zXuQJEiD2MJOv3LnC+jLUfUfGbEx88DNTfg4MO50=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yx3pg1faXNNdIW6Ysipu+O2xz7rFZzdJ8VvCWwanEAKmmcKGltc
+ II+wbWTlNN3Tbf1s4PgPiwZwVBnnZxKd1pV4VBJKxGTfb80TCfB94f1O
+X-Gm-Gg: AR+sD11FNxTmr/uXuytDirTHmqljNOKNUOR7Wh+9wAiJoq8bLTJvGDSyLUq0185RC8V
+ vKhXzF1VSjd0Ws9NO8SI+nTDIXTAKjZakf/py8LSq1Fw+bQHT3NYzZzHTI577H8yYPMwqVTPWgn
+ SLtZqsBl8vYqALkPRu7n3kvt+YSIEjyAkmeS1PrNQ7+iQV1oBWwaPcC0v7m9a9lMmF7I9nsc/fZ
+ XTQ18D1wTtZuHGuM1kHJSmz9vl4l+LU03NvoADGlurAp8wRXsicbb/O5ztiqPzZyIP1NCbpk0kK
+ vfFNgWu9p5jm0lerqJmW6jY+kRDMJdar2rx0sJGM6I2Xh4Qkk8h6w2O8wjzeVqC89RpA55Ew4WE
+ 1QkrT928W8qsSCQWdPc7AsxegxCp9xOngIfrmRIsoyU4RdhaLHBl8v6qfCUD3BIna2GTre3E5GS
+ ueV/Xr/kQCEZWvD0VJ4vuu5hxst2ijcJebhAkxBUoTem/hNi0=
+X-Received: by 2002:a17:90b:5205:b0:38e:e9b:ffa7 with SMTP id
+ 98e67ed59e1d1-38ec6a51c9dmr48493a91.28.1784749619190; 
+ Wed, 22 Jul 2026 12:46:59 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:1b3:a801:a24:3a9b:51ad:2c34:1075])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13d130f42bbsm9287280c88.14.2026.07.22.12.46.52
+ a92af1059eb24-13d130f42bbsm9287280c88.14.2026.07.22.12.46.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 12:46:55 -0700 (PDT)
+ Wed, 22 Jul 2026 12:46:58 -0700 (PDT)
 To: u-boot@0leil.net
 Cc: trini@konsulko.com, sjg@chromium.org, kever.yang@rock-chips.com,
- u-boot@lists.u-boot-project.org, Fabio Estevam <festevam@nabladev.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v4 2/4] rockchip: rk3399: Remove ROC-PC regulator overrides
-Date: Wed, 22 Jul 2026 16:46:36 -0300
-Message-ID: <20260722194638.1285159-2-festevam@gmail.com>
+ u-boot@lists.u-boot-project.org, Fabio Estevam <festevam@nabladev.com>
+Subject: [PATCH v4 3/4] rockchip: rk3399: Add ROC-PC-PLUS board detection
+Date: Wed, 22 Jul 2026 16:46:37 -0300
+Message-ID: <20260722194638.1285159-3-festevam@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260722194638.1285159-1-festevam@gmail.com>
 References: <20260722194638.1285159-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784749616; x=1785354416;
+ d=gmail.com; s=20251104; t=1784749619; x=1785354419;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=GGMEsMq/rRo3/FfGFRE5K6y0vWIdMsFwjU6qouHX2DE=;
- b=FA+GHo2E4VFleC+sc++EzEK7vgQw/Zbtj6Ds5Jtrjy01jWIjCuxFyjUsch0y+Vme56
- sdPRsWw6/V4CvALZ95wR7KI7yGLiEqYU17VpbqHmfo4Dze8Jl45PKEoMeU5tAqP7j1wz
- QVY59N4HFwDPfTo74c4ruThbRVHASgElVfsGnU8wAvZkBQuGH8pc8Q44NFeNhV7VpPTG
- hGcg4GgtTgnmjR850DovtMhO/gYmT0nyeJJQc+A1bOmf82AZLp78yJjtqpztYfLU1xnV
- ETI6EtPOevZcLskKeV1aowORFlN8BTQnEguvJYbjR6+MDg3BAfbp1Gfmr4Jomx7fAbof
- 5MSg==
+ bh=6pYeJonY/8MVe3mVI7gzLOlSCBnmvBkxSjS5m3c65wM=;
+ b=XUwDVxgQQerZ0b8e+R62sFOs4JmtmvD27TNfCCeBVVkrH0JnCETp753lQqv6YQrroN
+ MXIwZEXfThS8hQoaq12iJG2auiUZdC/N9xg44zfSZrlIEn47L69mnpv3c9WReDTnfIvs
+ uuP3CH4r4kfv5YUnue/ulhJi05ox0qcy+37AguzusF1yj1KD1NnLRqIROykzUFTxbNx9
+ vCJL/QXiVYniY4vHavB2dmJvRs5gfCPQp1c6HCmRBrfAILBX3PA2ZL6JgGsUZZTloZj4
+ hrBjrgpBVwUu+deqPJvWYJtO0ZxVj08S4GXNUXVnOszUgIFJ6pzzO6CB4Lzn6Mhwh4BW
+ NMyw==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=FA+GHo2E
+ header.a=rsa-sha256 header.s=20251104 header.b=XUwDVxgQ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -133,57 +132,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Fabio Estevam <festevam@nabladev.com>
 
-The upstream devicetree already describes dc_12v as the output of the
-MP8859 regulator and drives the USB hub reset through the vcc5v0_host
-regulator pinctrl state.
+The ROC-RK3399-PC has an MP8859 regulator on I2C7 at address 0x66,
+while the ROC-RK3399-PC-PLUS does not. Probe for the regulator in SPL
+and use the result to select the matching devicetree from the U-Boot
+FIT. Fall back to the original board if the I2C bus cannot be probed.
 
-Remove the legacy fixed-regulator overrides and rely on the upstream
-regulator descriptions.
+Build both devicetrees from the existing roc-pc-rk3399_defconfig and
+enable the XMC SPI NOR driver used by the Plus variant. Set fdtfile
+from the selected U-Boot devicetree so the matching Linux devicetree
+is used as well.
 
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 Changes since v3:
-- None. Only added Quentin's Reviewed-by tag.
+- Explicitly sets fdtfile for both PC and PC-PLUS.
 
- arch/arm/dts/rk3399-roc-pc-u-boot.dtsi | 24 ------------------------
- 1 file changed, 24 deletions(-)
+ arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi |  3 ++
+ arch/arm/dts/rk3399-roc-pc-u-boot.dtsi      |  8 +++++
+ board/firefly/roc-pc-rk3399/roc-pc-rk3399.c | 39 +++++++++++++++++++++
+ configs/roc-pc-rk3399_defconfig             |  3 ++
+ doc/board/rockchip/rockchip.rst             |  2 +-
+ 5 files changed, 54 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
 
+diff --git a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
+new file mode 100644
+index 000000000000..c80529a62b97
+--- /dev/null
++++ b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
+@@ -0,0 +1,3 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include "rk3399-roc-pc-u-boot.dtsi"
 diff --git a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-index 883d399a06a3..a85e9549c83e 100644
+index a85e9549c83e..e7e4a2c89072 100644
 --- a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
 +++ b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-@@ -10,30 +10,6 @@
- 	config {
- 		sysreset-gpio = <&gpio1 RK_PA6 GPIO_ACTIVE_HIGH>;
+@@ -12,6 +12,14 @@
  	};
--
--	vcc_hub_en: vcc_hub_en-regulator {
--		compatible = "regulator-fixed";
--		enable-active-high;
--		gpio = <&gpio2 RK_PA4 GPIO_ACTIVE_HIGH>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&hub_rst>;
--		regulator-name = "vcc_hub_en";
--		regulator-always-on;
--	};
--};
--
--/*
-- * should be placed inside mp8859, but not until mp8859 has
-- * its own dt-binding.
-- */
--&dc_12v {
--	compatible = "regulator-fixed";
--	regulator-name = "dc_12v";
--	regulator-always-on;
--	regulator-boot-on;
--	regulator-min-microvolt = <12000000>;
--	regulator-max-microvolt = <12000000>;
--	vin-supply = <&vcc_vbus_typec0>;
  };
  
++&i2c7 {
++	bootph-pre-ram;
++};
++
++&i2c7_xfer {
++	bootph-pre-ram;
++};
++
  &gpio4 {
+ 	bootph-pre-ram;
+ };
+diff --git a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+index 6937a27176f9..a12180e65573 100644
+--- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
++++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+@@ -5,14 +5,24 @@
+ 
+ #include <dm.h>
+ #include <env.h>
++#include <fdtdec.h>
++#include <i2c.h>
++#include <image.h>
+ #include <log.h>
+ #include <spl_gpio.h>
++#include <asm/global_data.h>
+ #include <asm/io.h>
+ 
+ #include <asm/arch-rockchip/cru.h>
+ #include <asm/arch-rockchip/gpio.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ 
++#define ROC_PC_MP8859_BUS	"i2c@ff160000"
++#define ROC_PC_MP8859_ADDR	0x66
++#define ROC_PC_PLUS_FDTFILE	"rockchip/rk3399-roc-pc-plus.dtb"
++
++DECLARE_GLOBAL_DATA_PTR;
++
+ #ifdef CONFIG_XPL_BUILD
+ 
+ #define PMUGRF_BASE	0xff320000
+@@ -54,4 +64,33 @@ void led_setup(void)
+ 	spl_gpio_output(gpio0, GPIO(BANK_B, 5), 1);
+ }
+ 
++static bool is_roc_pc_plus(void)
++{
++	struct udevice *bus, *dev;
++
++	if (uclass_get_device_by_name(UCLASS_I2C, ROC_PC_MP8859_BUS, &bus))
++		return false;
++
++	return dm_i2c_probe(bus, ROC_PC_MP8859_ADDR, 0, &dev);
++}
++
++int board_fit_config_name_match(const char *name)
++{
++	if (is_roc_pc_plus())
++		return strcmp(name, ROC_PC_PLUS_FDTFILE);
++
++	return strcmp(name, CONFIG_DEFAULT_FDT_FILE);
++}
++
+ #endif
++
++int rk_board_late_init(void)
++{
++	if (!fdt_node_check_compatible(gd->fdt_blob, 0,
++				       "firefly,roc-rk3399-pc-plus"))
++		env_set("fdtfile", ROC_PC_PLUS_FDTFILE);
++	else
++		env_set("fdtfile", CONFIG_DEFAULT_FDT_FILE);
++
++	return 0;
++}
+diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
+index 1df5cb03adbb..53182dc8251b 100644
+--- a/configs/roc-pc-rk3399_defconfig
++++ b/configs/roc-pc-rk3399_defconfig
+@@ -26,6 +26,7 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_I2C=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+@@ -37,6 +38,7 @@ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_TIME=y
+ CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIST="rockchip/rk3399-roc-pc rockchip/rk3399-roc-pc-plus"
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+@@ -49,6 +51,7 @@ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XMC=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 9351a5b8eae7..b565aea311e9 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -81,7 +81,7 @@ List of mainline supported Rockchip boards:
+      - 96boards RK3399 Ficus (ficus-rk3399)
+      - 96boards Rock960 (rock960-rk3399)
+      - Firefly-RK3399 (firefly_rk3399)
+-     - Firefly ROC-RK3399-PC
++     - Firefly ROC-RK3399-PC/ROC-RK3399-PC-PLUS (roc-pc-rk3399)
+      - FriendlyElec NanoPC-T4 (nanopc-t4-rk3399)
+      - FriendlyElec NanoPi M4 (nanopi-m4-rk3399)
+      - FriendlyElec NanoPi M4B (nanopi-m4b-rk3399)
 -- 
 2.43.0
 
