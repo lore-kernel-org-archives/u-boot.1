@@ -1,96 +1,210 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40492C44533
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF5FC4452D
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 08:15:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F195180CA2;
-	Wed, 22 Jul 2026 07:57:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 44007407A1;
+	Wed, 22 Jul 2026 08:15:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ga4lSnEZlsYa; Wed, 22 Jul 2026 07:57:55 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sBypJbCVGoWL; Wed, 22 Jul 2026 08:15:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 049E180DCD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 27F664077E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784707075;
-	bh=4nMP2UB+smrsSdA78oRGtJlAiBoHPanibv22wB9uKhg=;
-	h=To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=u+IYfln0GMgy20k/W8Rh1WieLYY23y3+Kr7RLR9xeJyY0R+qFKbTkjdGErp3vLSsw
-	 6l3jvhK934V54KjNCxKNtzZ6rNNbIFGjB4DMxRv7tc9Fn9xHuCLCoc1lZTfNZblPxD
-	 3LiQSz3Hgxh0n1wZ8c6UgXlyLs6xwHdTT3UlWASUOjYcW7wsLfJovMMDWxAnsw4R+8
-	 8BY5WPNWQxTja3QdpcyGU6jlbV3qlXk601ctY8UA/w9R9McW0NiEi/KdxBtMTiwsww
-	 GvfQIFUF0J8HBywCHa97l+b94Sb2g48VTBQl+ihJdSkBaVH3Y6sfV73iVk+Y3MwZ/u
-	 29Fl9kFM8mJ4A==
+	d=lists.u-boot-project.org ; s=default; t=1784708135;
+	bh=w1QsOergX5b3ebL1O1DLji6qZyBJ7rakUP7x6lW5cr4=;
+	h=Date:Subject:To:CC:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=E6xgurh+LqyPVxGSIvkxhvtAxeezepj9Wr+n4fQSWIOzeZKe3YrPLhR8A0fLsA2Hk
+	 YEvkoNkPGTdEHSWVAxKn1a9nYXmiDlomA17YNHQmwx2K/h3l7ksKDzEB9A+P29wE9p
+	 81op0nvm6BVEe4tbnt8EAUnqmO1H2KWaICSIkjUo4HgRB0wkNsaBCS2TZMUeA3u/ch
+	 CLtzGkOrIDW5ei3K5ojw/loKcX/3CcaOKf2cn+4BQ+jdNjQVV+gq6Y19X16nW3A2uY
+	 3gezd/O8DUDJPo1JUftY8X+byrxiCq7LrbeVRR5bvKJSgIlXZPDRi5wfaG/CeHlcVF
+	 AcEtOX+vknPBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 049E180DCD;
-	Wed, 22 Jul 2026 07:57:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 27F664077E;
+	Wed, 22 Jul 2026 08:15:35 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id DB62142A
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:57:53 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 2D831313
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:38:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CD35360739
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:57:53 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 13CE960692
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:38:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NGwqHT0n954s for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 07:57:52 +0000 (UTC)
-X-Greylist: delayed 398 seconds by postgrey-1.37 at util1.osuosl.org;
- Wed, 22 Jul 2026 07:57:52 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 1967660652
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1967660652
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=211.75.126.72;
- helo=rtits2.realtek.com.tw; envelope-from=javen_xu@realsil.com.cn;
+ id SOoNI6H473A7 for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 05:38:01 +0000 (UTC)
+X-Greylist: delayed 2491 seconds by postgrey-1.37 at util1.osuosl.org;
+ Wed, 22 Jul 2026 05:38:00 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org CD7306061D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CD7306061D
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
+ helo=mx0b-0002e601.pphosted.com; envelope-from=gehariprasath@ti.com;
  receiver=<UNKNOWN> 
-Received: from rtits2.realtek.com.tw (rtits2.realtek.com [211.75.126.72])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1967660652
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:57:51 +0000 (UTC)
-X-SpamFilter-By: ArmorX SpamTrap 5.80 with qID 66M7p0Ya93807550,
- This message is accepted by code: ctloc85258
-Received: from RS-EX-MBS4.realsil.com.cn ([172.29.17.104])
- by rtits2.realtek.com.tw (8.15.2/3.29/5.94) with ESMTPS id 66M7p0Ya93807550
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Jul 2026 15:51:00 +0800
-Received: from RS-EX-MBS2.realsil.com.cn (172.29.17.102) by
- RS-EX-MBS4.realsil.com.cn (172.29.17.104) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Wed, 22 Jul 2026 15:50:59 +0800
-Received: from 172.29.37.154 (172.29.37.152) by RS-EX-MBS2.realsil.com.cn
- (172.29.17.102) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
- Transport; Wed, 22 Jul 2026 15:50:59 +0800
-To: <trini@konsulko.com>, <joe.hershberger@ni.com>, <rfried.dev@gmail.com>
-CC: <u-boot@lists.u-boot-project.org>, <nd@arm.com>, Javen Xu
- <javen_xu@realsil.com.cn>
-Subject: [PATCH next v1] net: rtl8169: add support for RTL8126A and RTL8127A
-Date: Wed, 22 Jul 2026 15:50:57 +0800
-Message-ID: <20260722075058.324-1-javen_xu@realsil.com.cn>
-X-Mailer: git-send-email 2.50.1.windows.1
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CD7306061D
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 05:38:00 +0000 (UTC)
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66M4YGca2747977; Tue, 21 Jul 2026 23:56:16 -0500
+Received: from bl2pr02cu003.outbound.protection.outlook.com
+ (mail-eastusazon11011032.outbound.protection.outlook.com [52.101.52.32])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fjpxvr2ag-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 21 Jul 2026 23:56:16 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g115qa94Ou8d+xWe8n5NTYRo+/e9Gz22ypDUXpWpPVkc+SP4+Q7ge0HL/yNvfFhO0zlmzRWE4CytkoX8zRVYKD0sPD4KsWToqCXuEPODwAC+9Y5d3joVz7rh19LC3ZnzCCgK50gVZLZKzl6xelmUrDNBx4RNdtu2A4CYgVoJzfG6IZfkmwABRb1TBBkAG2SbV28aJCzcfl+ncITx+MueDUjY0f3DPGkXE4ZgsuVYN8VGyfsObP9JuQvm0j9dRAqUDi3DgV6jDH7ja5ZSd6vQQ8n84CPkhijqPUbQTufu5vwYDuZKaw4P3QGY0m3sh2QsyEskzYPBISyVYQaoEa2mBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w1QsOergX5b3ebL1O1DLji6qZyBJ7rakUP7x6lW5cr4=;
+ b=C3d4ukKP1xcnacLQNTkTpuesb6xWFxv3EaRiWjOG7uHrGszCDP/iyR3VGfLw35UygLnyTYSzRY9oUy5fKbruumCGAby0y4SGv951s3X2ja0HuOE7jD/vcfrET3iu8zVP1vFzP9FDjFzGGD5VfF21ZhX72FBbHzoGrhfVEXzpQkGYaOcos38kqVVYFP3r/HoBw2kThSq7PLr+Op4N+UIsQByQqlc5xIhYBYXdNDhZ+StiFVgoPpFHflB2I16kF19sUaCEsxoweI43MMUGBxNt8lrhkqIm+43ZrhEIQtB68KUa7pO9FeWA4JF7nmqi1GHsaFDGXUaYbPbKpbPygKP7vQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+Received: from PH7P220CA0142.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:327::12)
+ by PH8PR10MB6480.namprd10.prod.outlook.com (2603:10b6:510:22c::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Wed, 22 Jul
+ 2026 04:56:13 +0000
+Received: from SA2PEPF00003F65.namprd04.prod.outlook.com
+ (2603:10b6:510:327:cafe::8a) by PH7P220CA0142.outlook.office365.com
+ (2603:10b6:510:327::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.10 via Frontend Transport; Wed,
+ 22 Jul 2026 04:56:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SA2PEPF00003F65.mail.protection.outlook.com (10.167.248.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.5 via Frontend Transport; Wed, 22 Jul 2026 04:56:12 +0000
+Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 21 Jul
+ 2026 23:56:12 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 21 Jul
+ 2026 23:56:12 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 21 Jul 2026 23:56:12 -0500
+Received: from [10.249.138.105] ([10.249.138.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66M4u9Ih3016491;
+ Tue, 21 Jul 2026 23:56:10 -0500
+Message-ID: <c1278a52-9499-4a28-bd1a-6b9de603763a@ti.com>
+Date: Wed, 22 Jul 2026 10:26:08 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] clk: qcom: sa8775p: Add SDCC1 clock support with
+ frequency table
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, Sumit Garg
+ <sumit.garg@kernel.org>, <u-boot-qcom@groups.io>,
+ <u-boot@lists.u-boot-project.org>
+CC: Lukasz Majewski <lukma@denx.de>, Casey Connolly
+ <casey.connolly@linaro.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ "Tom Rini" <trini@konsulko.com>
+References: <20260722-lemans_emmc-v2-1-edc56ce7b768@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260722-lemans_emmc-v2-1-edc56ce7b768@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F65:EE_|PH8PR10MB6480:EE_
+X-MS-Office365-Filtering-Correlation-Id: 32ea99c7-aca7-4ad9-37e7-08dee7ad8de3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|82310400026|36860700016|376014|1800799024|10067099003|56012099006|13003099007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: fgiyux3VoDWbxLbhUJWv1hrVl1ibB0ZtgugDiWtxmg1tZGixdiFE4d/O2sxXamtRZ39KTEGvUkAuw0qdhs1+rW/sswXQH+sgDFatMHpxaIm1YOij1RD4qpUXjZDD2DcdJwF9LSg9B4VBaYSbYuEoJ9qH0fESRqhEvdJIuVwIkW9/V2JaXBb8zuUx+EokpxGfyXV3JtfglQiB9T0eeLJUzDUQNB65dBREe/M5RYW+lO2enx9bKE8bK4HzJkhpqBq1ESPsbiKb5rNMwSn7nDVThxBukCEw2je5UAjTNA2v41Udqbi3Vv2bESpzZfwhM+USpeyf7q3vetQEs/tnTJ1MbkpZJCaufbVwa+XH+dx45gsiW8S5LF/Qi5k6v/oVk0xt3PJsLCErwniV9lzFSVipERTxiuAhcGAQFmTmWH3OZU41BLU9T/qJk0PfYTSIU+fyZ9RIo7PTTKIgRbpvDVCWW7UztOt22l+w+v8x7p+jhClBIhA4SzQxANGKzUMgsWC2x1rSouBym9eywqUVXNcSl0T7wW0Of0C2ZpaUx9JkDuN8uKmSKIh1WglZoZEvEZ5oAmXjWWPwiTYhG1WwOYSERHZD6TSrkEmNiAE+BUp1cab1kKmcrOkve0WdCmrgjREqV2NWuF8RDUvJtI9Kb7Oo4Q==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(23010399003)(82310400026)(36860700016)(376014)(1800799024)(10067099003)(56012099006)(13003099007)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: i/NO0pzhhWhyabrhGidTqYZAAg1AnQkAMHGyS4keGd38p0kQmHJ4wBwRKf3M9yA5i6stS+HB6HuHYap5jAk7j2EgG24K1DY7H0XPm4xRTyRzYC6+ESm32Zi1gigxLC1m2ZRElw18lFJGEk3e14wdwRCZDdV+nsz0gzlnjfGiLp9w1xBm574NMc+WVT1TX+0QdicdJB/oBE+gkKNLaHTcyP5U08KNwTruuv0QhfBgy8Jq2ugeYFno/kVI8cqmOgiV/B2LNxKAFFMAbPM3m76y9WWe4P28t/7/JzR3geab0dWiNJpY+bEcFUX8O5QH0pmnN/YFDaDlZqxI0vahCm8NcJt58cBv10tlHc+jU/1EHL5nomoJufy7UNCeU9bOByZLvhjALGrWzai7l57KH3+UfUBIBjnPi7TBiA5/l8qIrQnkKCBxM2BiC0cGAlSpiNy4
+X-Exchange-RoutingPolicyChecked: WEJ4WcBBwtvxFChZBBkgl5nYGVx9h+na5wZrGpZmj1VHEqsV2UMuT3RNI35QOW2A+Jk2F5BaDUBXSUcattIzfEFN9GUTGEp1GZYP6ZmgX0MydXISkKLddsyNnAzOrIiZJklWFNzAt6jqiqAljLISC7LOGs8I6kr4ixM5DyjY2+2psowVqLTtqdagDBgruEl4xx3mmZJ3gqYYjcW58LmY5rWJJ7MCNZMwDN2EMrS3bTCuBiumVoB35yCLMBrP+rg9hZPLQZAVhMdq206EsqW2GU9nPLGyEFn9zIxCjm+IRDIxM+Sg2O/bRswUpUyCyeaAyLabRVd6WTcOBBlGuAYB+A==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 04:56:12.8335 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32ea99c7-aca7-4ad9-37e7-08dee7ad8de3
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003F65.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR10MB6480
+X-Authority-Analysis: v=2.4 cv=J+uaKgnS c=1 sm=1 tr=0 ts=6a604d70 cx=c_pps
+ a=vMZ8N8iCC09X6dpNzQs02g==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22 a=P-IC7800AAAA:8
+ a=EUspDBNiAAAA:8 a=T0Alyp6onfM_nMLPM5YA:9 a=QEXdDO2ut3YA:10
+ a=d3PnA9EDa4IxuAV0gXij:22
+X-Proofpoint-GUID: DmEhylMEe1BQ1vwadTDOGn4hDzV9FrDX
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA0MiBTYWx0ZWRfXxiTuPi0t+LBi
+ l4NfVZHTNF8Ilh2BV1g4aIbIkRYNUPlpGoIwpfXaPcNKJNo99DYu9dRLI4qyCCQ27myXnPvt/yG
+ 1ClVZOmnNNrLstlYGe8KT66o/ah7n4hJxF6I3EmLR3vgHepxaxV6eUWSX9fxl/y+3itSOcKJVD7
+ VECTm71N1xt3BRlid6ktEfjUS6NoGJ8jjLQwjTC4oH5QnBsIegnl64R+jnzeUHWEab4kdoPYqvu
+ nUmxwD+yi//lLTXxp2b0sSqhAR5UOOF7ngY/V3PiG9T7hvCWJqRpoMr/f4Z71jhvxovdRjxKoZ5
+ uXrowAu8PcHxy2CWHcrjz6wzmXLxzKGwVcXKacNKGntRGDh7bPSJytE18jPJSSSuBIwsoJkDaeq
+ 3KQkdvdv4qDVcvq0NZ7DLpjZBSz8/gnUvjzqn22LzdCp8UuCwXU6mMLl5jUHfFS+wAXc1MP87/F
+ UmAMuNxU7e/3Nuh0cNQ==
+X-Proofpoint-ORIG-GUID: DmEhylMEe1BQ1vwadTDOGn4hDzV9FrDX
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA0MiBTYWx0ZWRfX1i6jfx2TL1K1
+ pwzdcwwEgnuS5tST6BvuYfi+WDoYe3MidNBkc9Wj3RV4lo4eMctaZeX2O4H1dScAGAPNOAv59u+
+ io6XMFL4/BljvwSGS8J35uMaYXZdSPg=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_01,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 bulkscore=0 clxscore=1011 priorityscore=1501 phishscore=0
+ adultscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220042
+X-Mailman-Approved-At: Wed, 22 Jul 2026 08:15:34 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=realsil.com.cn; s=dkim; t=1784706660;
- bh=4nMP2UB+smrsSdA78oRGtJlAiBoHPanibv22wB9uKhg=;
- h=From:To:CC:Subject:Date:Message-ID:MIME-Version:
- Content-Transfer-Encoding:Content-Type;
- b=Cuz6gZVASjam0QaH/aHC143hO1vWkm+r228lduQIAu9fMKDMFUIZfvfo5A45j+v2y
- U2c6RIJK+RNvSHz0Fp4DYh8agfYVnzaNC4gJtxz9M0iix4WsJ6ENnntlqqtJsalc4G
- Hdva33pVZRH1ewE66ajXRz2t25UXf6JF37b7sgRMcGIAoKd/Cok8Aue6Swe17Oc8q7
- 0c6lx7zCOI+hint18uyLaHcfBd7q2bM1lk1XyO9xzTnTnYi0q6rCrMJVJ5THJayM38
- 55zb6o9afSqj7XJVpQmZQJEzHcAiAPNRGR5iSPNaI2zHkydA4g8WNIEhdMAmPVCkBn
- vv96WFZIiChFA==
+ d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=w1QsOergX5b3ebL1O1DLji6qZyBJ7rakUP7x6lW5c
+ r4=; b=MYti8SzoH76vtgnyBzelPz3VQihw88z6ZHeV178mijf7Deq9bwimDjm3D
+ /qUnSGxNvYUNmSvDqhq3MSGh7L1nhISJ9dIFmojO/eU9n+srHk6Vu/AkDME36pxa
+ PMlY6LMcAcE1wkGc4pYNTJmUqYa0N6C1ZX/4mm2Tw/Xb2NcH4Ci2g08C1rwu4Uk5
+ HJAjsALXZLfVytl7zcndcBNs+Zzx+xu271A7gdU4GyLiqsHn/3pM7K6V0fMYqrpw
+ P77+ZRDF16qlHML7SOUSPqNHrNnevXN1JXndV24frdbklY47PQSe5FTCMnOALFaR
+ GqR4/jnSvE6rtvqIeRYoaLX2troOg==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ti.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w1QsOergX5b3ebL1O1DLji6qZyBJ7rakUP7x6lW5cr4=;
+ b=HluKz1JN6gG9iUwDdLvSmhbz1pBpIsy0VGeJjqlwKwOsrPL4RZ5gOeUF8KGYYW0l+vorT/9LnzQokjt/v0kiWc9pU8fdpDEx39H+TnZ5J/JBVIfQWTqJE9WgCjsGgjjoPY+oilJuc1/L0l7lFCi2f8Hk6L9EX025WSUVw1gLiSM=
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=realsil.com.cn
+ dmarc=pass (p=quarantine dis=none)
+ header.from=ti.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=realsil.com.cn header.i=@realsil.com.cn
- header.a=rsa-sha256 header.s=dkim header.b=Cuz6gZVA
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=MYti8Szo; 
+ dkim=pass (1024-bit key,
+ unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=selector1 header.b=HluKz1JN
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -102,213 +216,92 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: javen via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: javen <javen_xu@realsil.com.cn>
+From: Hari Prasath G E via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Hari Prasath G E <gehariprasath@ti.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Javen Xu <javen_xu@realsil.com.cn>
+On 7/22/2026 10:04 AM, Balaji Selvanathan via U-Boot wrote:
+> Add support for SDCC1 (eMMC) clock on SA8775P platform.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+>   drivers/clk/qcom/clock-sa8775p.c | 27 +++++++++++++++++++++++++++
+>   1 file changed, 27 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
+> index 7eec4aeae48..a5e84ffba7c 100644
+> --- a/drivers/clk/qcom/clock-sa8775p.c
+> +++ b/drivers/clk/qcom/clock-sa8775p.c
+> @@ -74,6 +74,22 @@ static const struct freq_tbl ftbl_gcc_ufs_phy_unipro_core_clk_src[] = {
+>   	{ }
+>   };
+>   
+> +#define SDCC1_APPS_CLK_CMD_RCGR			0x20014
+> +
+> +/* SDCC1 APPS clock frequency table */
+> +static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
+> +	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
+> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
+> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+> +	F(20000000, CFG_CLK_SRC_GPLL0_EVEN, 5, 1, 3),
+> +	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
+> +	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
+> +	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
+> +	F(192000000, CFG_CLK_SRC_GPLL9, 4, 0, 0),
+> +	F(384000000, CFG_CLK_SRC_GPLL9, 2, 0, 0),
+> +	{ }
+> +};
+> +
+>   static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+>   {
+>   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -94,6 +110,7 @@ static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+>   				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
+>   		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
+>   		return rate;
+> +
+>   	case GCC_UFS_PHY_AXI_CLK:
+>   		freq = qcom_find_freq(ftbl_gcc_ufs_phy_axi_clk_src, rate);
+>   		clk_rcg_set_rate_mnd(priv->base, UFS_PHY_AXI_CLK_CMD_RCGR,
+> @@ -112,6 +129,12 @@ static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+>   	case GCC_UFS_PHY_PHY_AUX_CLK:
+>   		clk_rcg_set_rate(priv->base, UFS_PHY_PHY_AUX_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
+>   		return 19200000;
+> +
+> +	case GCC_SDCC1_APPS_CLK:
+> +		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
+> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+> +		return freq->freq;
+>   	default:
+>   		return 0;
+>   	}
+> @@ -169,6 +192,10 @@ static const struct gate_clk sa8775p_clks[] = {
+>   
+>   	/* EDP reference clock (used by UFS PHY) */
+>   	GATE_CLK(GCC_EDP_REF_CLKREF_EN, 0x97448, 1),
+> +
+> +	/* SDCC1 clocks */
+> +	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x2000c, 1),
+> +	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x20004, 1),
 
-RTL8126A and RTL8127A share most of the register layouts and quirks with
-RTL8125 series, but require explicit desc type and CRC-drop setup during
-init.
+As per the header file at [1], GATE_CLK appears to be deprecated. Can 
+you verify once ?
 
-This patch adds PCI IDs and MAC versions. RTL8126A is 0x66 and RTL8127A
-is 0x6e. And RTL8127A requires Tx Desc V3 format and an additional RADM
-FIFO protection configuration according to vendor driver.
+[1] 
+https://elixir.bootlin.com/u-boot/v2026.07-rc1/source/drivers/clk/qcom/clock-qcom.h
 
-Signed-off-by: Javen Xu <javen_xu@realsil.com.cn>
----
- drivers/net/rtl8169.c | 103 ++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 94 insertions(+), 9 deletions(-)
+Cheers,
+Hari Prasath G.E
 
-diff --git a/drivers/net/rtl8169.c b/drivers/net/rtl8169.c
-index 5b093623619..a24cff97801 100644
---- a/drivers/net/rtl8169.c
-+++ b/drivers/net/rtl8169.c
-@@ -49,6 +49,7 @@
- #include <asm/cache.h>
- #include <asm/io.h>
- #include <pci.h>
-+#include <linux/bitops.h>
- #include <linux/delay.h>
- #include <linux/printk.h>
- 
-@@ -152,8 +153,24 @@ enum RTL8125_registers {
- 	IntrMask_8125 = 0x38,
- 	IntrStatus_8125 = 0x3C,
- 	TxPoll_8125 = 0x90,
-+	RX_DESC_MODE = 0xd8,
-+	MACOCP = 0xb0,
-+	RADMFIFO_PROTECT = 0x0402,
-+	TX_DESC_MODE = 0xeb58,
- };
- 
-+/* MAC OCP indirect access via the MACOCP register */
-+#define RTL8125_OCP_WRITE	0x80000000
-+#define RTL8125_OCP_ADDR_SHIFT	16
-+#define RX_DESC_CRC_DROP	BIT(0)
-+#define RX_DESC_TYPE		BIT(1)
-+
-+/* TX_DESC_MODE (MAC OCP 0xeb58): TX descriptor format select, bits [1:0] */
-+#define TX_DESC_FMT_MASK	GENMASK(1, 0)
-+#define TX_DESC_FMT_STD		BIT(0)
-+#define TX_DESC_FMT_V3		BIT(1)
-+#define RX_PAUSE_SLOT_ON	BIT(11)
-+
- enum RTL8169_register_content {
- 	/*InterruptStatusBits */
- 	SYSErr = 0x8000,
-@@ -271,6 +288,8 @@ static struct {
- 	{"RTL-8168h/8111h",	0x54, 0xff7e1880,},
- 	{"RTL-8125B",		0x64, 0xff7e1880,},
- 	{"RTL-8125d",		0x6a, 0xff7e5880,},
-+	{"RTL-8126A",		0x66, 0xff7e5880,},
-+	{"RTL-8127A",		0x6e, 0xff7e5880,},
- };
- 
- enum _DescStatusBit {
-@@ -355,6 +374,8 @@ static const unsigned int rtl8169_rx_config =
- 
- static struct pci_device_id supported[] = {
- 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8125) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8126) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8127) },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8161) },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8167) },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8168) },
-@@ -398,6 +419,33 @@ int mdio_read(int RegAddr)
- 	return value;
- }
- 
-+/* RTL8125/8126/8127 share the same register layout and quirks */
-+static bool rtl_is_8125(struct pci_child_plat *pplat)
-+{
-+	return pplat->device == 0x8125 || pplat->device == 0x8126 ||
-+	       pplat->device == 0x8127;
-+}
-+
-+static void rtl_mac_ocp_write(u16 reg_addr, u16 value)
-+{
-+	u32 data32;
-+
-+	data32 = (u32)(reg_addr / 2) << RTL8125_OCP_ADDR_SHIFT;
-+	data32 += value;
-+	data32 |= RTL8125_OCP_WRITE;
-+	RTL_W32(MACOCP, data32);
-+}
-+
-+static u16 rtl_mac_ocp_read(u16 reg_addr)
-+{
-+	u32 data32;
-+
-+	data32 = (u32)(reg_addr / 2) << RTL8125_OCP_ADDR_SHIFT;
-+	RTL_W32(MACOCP, data32);
-+
-+	return (u16)RTL_R32(MACOCP);
-+}
-+
- static int rtl8169_init_board(unsigned long dev_iobase, const char *name)
- {
- 	int i;
-@@ -571,12 +619,15 @@ static int rtl_recv_common(struct udevice *dev, unsigned long dev_iobase,
- 		return length;
- 
- 	} else {
--		u32 IntrStatus = IntrStatus_8169;
-+		u32 sts;
- 
--		if (pplat->device == 0x8125)
--			IntrStatus = IntrStatus_8125;
--		ushort sts = RTL_R8(IntrStatus);
--		RTL_W8(IntrStatus, sts & ~(TxErr | RxErr | SYSErr));
-+		if (rtl_is_8125(pplat)) {
-+			sts = RTL_R32(IntrStatus_8125);
-+			RTL_W32(IntrStatus_8125, sts & ~(TxErr | RxErr | SYSErr));
-+		} else {
-+			sts = RTL_R16(IntrStatus_8169);
-+			RTL_W16(IntrStatus_8169, sts & ~(TxErr | RxErr | SYSErr));
-+		}
- 		udelay(100);	/* wait */
- 	}
- 	tpc->cur_rx = cur_rx;
-@@ -636,8 +687,8 @@ static int rtl_send_common(struct udevice *dev, unsigned long dev_iobase,
- 				    ((len > ETH_ZLEN) ? len : ETH_ZLEN));
- 	}
- 	rtl_flush_tx_desc(&tpc->TxDescArray[entry]);
--	if (pplat->device == 0x8125)
--		RTL_W8(TxPoll_8125, 0x1);	/* set polling bit */
-+	if (rtl_is_8125(pplat))
-+		RTL_W32(TxPoll_8125, 0x1);	/* set polling bit */
- 	else
- 		RTL_W8(TxPoll_8169, 0x40);	/* set polling bit */
- 
-@@ -697,6 +748,8 @@ static void rtl8169_set_rx_mode(void)
- 
- static void rtl8169_hw_start(struct udevice *dev)
- {
-+	u8 version = rtl_chip_info[tpc->chipset].version;
-+	u16 tx_desc_mode;
- 	u32 i;
- 
- #ifdef DEBUG_RTL8169
-@@ -719,6 +772,36 @@ static void rtl8169_hw_start(struct udevice *dev)
- 
- 	RTL_W8(Cfg9346, Cfg9346_Unlock);
- 
-+	/*
-+	 * RTL8125D/8126A/8127A require explicit descriptor-type and CRC-drop setup.
-+	 * RTL8125B (0x64) is intentionally excluded to avoid regressing working hardware.
-+	 */
-+	switch (version) {
-+	case 0x6a:
-+	case 0x66:
-+	case 0x6e:
-+		/* Reg 0xD8: Disable CRC drop and force legacy 16-byte RX desc */
-+		RTL_W8(RX_DESC_MODE, RTL_R8(RX_DESC_MODE) & ~(RX_DESC_CRC_DROP | RX_DESC_TYPE));
-+
-+		/* RxConfig 0x44: enable RX pause slot (RTL8125B and later) */
-+		RTL_W32(RxConfig, RTL_R32(RxConfig) | RX_PAUSE_SLOT_ON);
-+
-+		/* MAC OCP 0xEB58: TX descriptor format setup */
-+		tx_desc_mode = rtl_mac_ocp_read(TX_DESC_MODE) & ~TX_DESC_FMT_MASK;
-+
-+		if (version == 0x6e) {
-+			/* RTL8127A specific: Tx desc V3 and RADM FIFO protection */
-+			rtl_mac_ocp_write(TX_DESC_MODE, tx_desc_mode | TX_DESC_FMT_V3);
-+			RTL_W16(RADMFIFO_PROTECT, 0x2001);
-+		} else {
-+			/* RTL8125D / RTL8126A specific: standard Tx desc */
-+			rtl_mac_ocp_write(TX_DESC_MODE, tx_desc_mode | TX_DESC_FMT_STD);
-+		}
-+		break;
-+	default:
-+		break;
-+	}
-+
- 	/* RTL-8169sb/8110sb or previous version */
- 	if (tpc->chipset <= 5)
- 		RTL_W8(ChipCmd, CmdTxEnb | CmdRxEnb);
-@@ -860,8 +943,8 @@ static void rtl_halt_common(struct udevice *dev)
- 	RTL_W8(ChipCmd, 0x00);
- 
- 	/* Disable interrupts by clearing the interrupt mask. */
--	if (pplat->device == 0x8125)
--		RTL_W16(IntrMask_8125, 0x0000);
-+	if (rtl_is_8125(pplat))
-+		RTL_W32(IntrMask_8125, 0x00000000);
- 	else
- 		RTL_W16(IntrMask_8169, 0x0000);
- 
-@@ -1052,6 +1135,8 @@ static int rtl8169_eth_probe(struct udevice *dev)
- 
- 	switch (pplat->device) {
- 	case 0x8125:
-+	case 0x8126:
-+	case 0x8127:
- 	case 0x8161:
- 	case 0x8168:
- 		region = 2;
--- 
-2.43.0
+>   };
+>   
+>   static int sa8775p_enable(struct clk *clk)
+> 
+> ---
+> base-commit: 042e45e026c77227319a426940577856ffe62e7b
+> change-id: 20260721-lemans_emmc-f2ccc04e89d0
+> 
+> Best regards,
 
