@@ -4,112 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 203EFC44533
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 08:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F217EC4451C
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 08:59:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CEADB407D3;
-	Wed, 22 Jul 2026 08:33:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A111F407BC;
+	Wed, 22 Jul 2026 08:59:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1STj8FVboyRW; Wed, 22 Jul 2026 08:33:39 +0000 (UTC)
+ id wsR3kIa9Lvwu; Wed, 22 Jul 2026 08:59:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 10969406F0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BB89C407CA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784709219;
-	bh=VTFJcmKWcTKdkdJHVM90/JWRz2O0OQIwldDzhOvINN4=;
+	d=lists.u-boot-project.org ; s=default; t=1784710743;
+	bh=OS+ZdQB5gC2IKu7TEO7MKkfjEbS5v8nvzFvK5hKbKds=;
 	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=GkpaFiVmdBjXKG33oSWWSqNT3ng2mxAUFk5h51ZfCw+Gq5ktIsu2LuEFAGZQ2e7bM
-	 crQ6n5TCmVUJCLHhWkLW8Ca22iUdt6jUvSt9dMlS4AVChKawDlEdPS7hQefIanvbqi
-	 mcDZRqsGvq+mOB69ap9Q+dpPCK0CFBzL5IGKBAbHfl0dr7/adXRLrA23GKLb+BS972
-	 TVogXMtfggpXCKmxJVKxDj4mXtEPPUkVWP57x5X9d4NkB6DTpNHtVpR3BB1sRmSSW9
-	 9S+eaOmSSqQjS7bpG/+8TmUeJ+quLsQXEASqzWK5JL0TXFXIX74+Vutj2LIR1L/AQ9
-	 N8judkD43kyzQ==
+	b=lV2+3EJT58AKp7crvKJZ+p3zea4o63F5wm8DmwyNk89QwvnVL60LcytWcB7Orwjds
+	 oAAB8FNGJ4JA1Q6IkPdKneNrrNNUloGdvyo8OVCM94jZTJkPQpMipdvxyjEtxDDnI5
+	 9py/uR+5btfnMxa/X4XhrQ7FLoyUEMBpNE3ZuF1TsBhK0f4X725QRTmAZmKvSJDcPh
+	 bo0M+XpajnolFsr2Utex7jrPvwLmSAIsHCJyUZwAERQNNVHxMCbgNm5f5wE0ja9mYb
+	 R+qqAV0PWwUvG/OnhPj/im/nuECBaucOviispQSo6Z8lIRWomTA9WeO+Pzd9BfaLT5
+	 ZVUxa8bJHl1Lw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 10969406F0;
-	Wed, 22 Jul 2026 08:33:39 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5D694109C
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:33:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BB89C407CA;
+	Wed, 22 Jul 2026 08:59:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B8CFBDF0
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:59:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4F904406F0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:33:37 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 9E974607A3
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:59:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m7doKlC3Wo1O for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 08:33:36 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org DDB5E405B0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DDB5E405B0
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DDB5E405B0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:33:35 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SLCDw0g1vcUR for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 08:59:01 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=neil.armstrong@linaro.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 36EF0605DE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 36EF0605DE
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 36EF0605DE
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 08:59:00 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A7A88493F; Wed, 22 Jul 2026 10:33:34 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 916D7848BA; Wed, 22 Jul 2026 10:58:57 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDD5D803F6
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 10:33:31 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4954df200ddso30147755e9.0
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 01:33:31 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 40AEE803F6
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 10:58:54 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4954dff6536so32458765e9.0
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 01:58:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784709211; x=1785314011;
+ d=1e100.net; s=20251104; t=1784710733; x=1785315533;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=VTFJcmKWcTKdkdJHVM90/JWRz2O0OQIwldDzhOvINN4=;
- b=KyHZg9HB4m1lUYuzPgtRWbM+5PEaDFG98e86Xn1mMPfpzDNT0hegb1Nq8tf/87lfCl
- oWIA/rC06QUWHv5Hh8jdggKptKH3E/m0nCd618pNBNdh+2bS0kXvl1jpUyHFGT0HMOQm
- 0EwwHXYW/BpRQad8cSzR6DiYZBQiu5UZBrXu5wrIxcDqeOrUU5t8F2pyaY+BPgPf5X1I
- 3cvc430z1Xvmdd7fg2vms81cz7VUYShsgs7WNrbEp2an2LWbVLLIyFj56g7l5PoBt/47
- UNlAQccqm4ZdIk4A2VAz2OiQG/VKrR2TWOEiV3RhAPxKuBdpPc7SNXOK96d62kCKutTP
- NFKw==
-X-Gm-Message-State: AOJu0Yxquv9x+0PnFyWw8ymBTw3aXWfCN1C+09OmS6Z6KnMMsxUIbIfm
- VSlLZf1dJDgB0bxFTGQId4LzY4SIsXLd0g21f17N8TR497IdECHxPaZy7EWkXEZkepM=
-X-Gm-Gg: AR+sD12eq6mT/LwI07hU7Hal80Rk4X2zRxIMj4CwDmrT5zSq5B42NrZeP4+roLAvXOJ
- ZEEyXhnVkC79GoeiPmt8GnrwzhoAt1Gnma4lhwh8DMv2K9ZonKy3wHy7Y+i3eJKIhsljah2Yd9q
- /cQ3Onaec9Q7po85RJOXSlozYl+Y+50c8jnGclF6wnNZv3HcGz3QEBEgNhsONtHak5UQGLasNI3
- 5H7Y53hgDSlM8sFMeHhKyOLZ+zlyy4YGrL3MYyqWch0iXi2DiRIdxMVTG7p7ul+xt68iqKIuCYN
- +p8tssM0n6u00qNVkJCjTfTJlJJKGA2sFSX1cBZc06cQaotPx6e6HuVnJEUUz7DwsQAP8pU4gPA
- iXU1q+m3bBYtAJZUYQGe9swQFo89fcxkEJdMU0QBz7sPLSogoZZ/uUlxB7qwi/Ct1yaNCdyNyux
- G0zckdsO+rVVSMI1PwrRh17y/VsNyjiDvBIT5tCNrYCGsGv+7r8KFO6Lo=
-X-Received: by 2002:a05:600c:6289:b0:495:636b:e4e9 with SMTP id
- 5b1f17b1804b1-495636be6c7mr101282425e9.22.1784709210417; 
- Wed, 22 Jul 2026 01:33:30 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:51c:217c:79fe:1b0c?
- ([2a01:e0a:106d:1080:51c:217c:79fe:1b0c])
+ bh=OS+ZdQB5gC2IKu7TEO7MKkfjEbS5v8nvzFvK5hKbKds=;
+ b=CnRFPWLQadMilMj7lHVjLCqncIcepPyjx2WblUkiXuOA42PMJ+PXdmGF7i/Y3cAGRO
+ T8ysBKb/+M34VGIG+DHd6WuTgj1uyqvKiq+g7ZfA9DEDaabUdyRJq1UhFc9YuH6fZPdj
+ 5/EqWK2/bpAgQkgiVDxneYSyHQ9PaDCXa7iZoY4SZVMCCWTM/MusL5TvY7WRx/GjvOrY
+ z9h9+UbiQ3x1ITvhWacvlPNHXcoIVHlG/Y+5iy+nR7wxGkQG2/dD7q7Nog7cZeGFsod1
+ ycGLe1fSXejNc7vKJ9OlUIBaO/U6b3v/fAl4XLXTEKEHAoBMPWrbf/PKHYi42zjbuZJc
+ pKnw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rpb4V9PDKBmIocx4RPSi0T8kSAHh5haAlp44QbBh2crVuoJjlt02iJD244jg+rO/7FTugLwPAs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4KfODzu/ivdqMpm80Cl47X8nDALGfKe2TMjyFw9odBAudKpNH
+ 3rCwD+9EGL1sqcH7mta5MSd+cz3Yd+qcJ5o7/k7tFjUlgzFzcQ31iXm7uWNNW+8zZvU=
+X-Gm-Gg: AR+sD13ig02KZM58aOFOUUHtacLGY7ZBW76Yf433NB6Idlq2rPbuOIcQqrkv0anThQM
+ nHpwKnc4PtuPhLE9WboCrGbpMfQlNohNJtTEkaLHcUORdCGvFcUtqaUear5ncvTM4sRjABoF3f2
+ +ac1770DK+XPzXyiAku/tXHotAdXCph+Xb9Vc4L0Kx2QqfzfOJjnA4xfMlAnA8cu+MCsCBIsN2p
+ P8OdD7d9sGjyfyyLkADKn+CkKpz8f4Zjkxs56hGuBuGd0q6MxlKNGsrzAPVbHy0960YcwAbAPEY
+ XxY5XPKd/nPLTTgXGKLAccs2h/sjMAY3ETAiW6Ot1qP7bvJTpl2Ok6MIBMSwanGcakafL39Bk4s
+ KPTNr0PhCTq0y1NJjaIZhQ/4WcbFDBPW2pNZKOGaz/5/MC+qU466G7lslAkbMB5HZEZu9Qk2dWE
+ cvRjFTx0s0tmHoGVV1EmlUxKgiRGloiST4EwkZYBbiYDXyuv8tVxR+zqR2QQ==
+X-Received: by 2002:a05:600c:1554:b0:493:a570:df7d with SMTP id
+ 5b1f17b1804b1-4954a402f91mr272466085e9.20.1784710733199; 
+ Wed, 22 Jul 2026 01:58:53 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:3307:4f92:b0bb:e8cd?
+ ([2a01:e0a:106d:1080:3307:4f92:b0bb:e8cd])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495686a8600sm105173145e9.6.2026.07.22.01.33.29
+ ffacd0b85a97d-47f85b9a659sm4339179f8f.6.2026.07.22.01.58.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2026 01:33:30 -0700 (PDT)
-Message-ID: <32a5043d-d44d-434f-b512-e869b81d10c1@linaro.org>
-Date: Wed, 22 Jul 2026 10:33:29 +0200
+ Wed, 22 Jul 2026 01:58:52 -0700 (PDT)
+Message-ID: <eaca1530-4212-4cbd-8402-7a35c1acf282@linaro.org>
+Date: Wed, 22 Jul 2026 10:58:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] ufs: derive the per-region RPMB CID and size for
- OP-TEE
-To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, trini@konsulko.com, 
- jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
- bhupesh.linux@gmail.com, n-francis@ti.com, marek.vasut+renesas@mailbox.org,
- shawn.lin@rock-chips.com, igor.belwon@mentallysanemainliners.org,
- yoshihiro.shimoda.uh@renesas.com, alchark@gmail.com,
- tuyen.dang.xa@renesas.com, padmarao.begari@amd.com,
- macpaul.lin@mediatek.com, jstephan@baylibre.com, bb@ti.com,
- j-mcarthur@ti.com, venkyada@qti.qualcomm.com,
- hayashi.kunihiko@socionext.com, dlechner@baylibre.com
-Cc: u-boot@lists.denx.de
-References: <20260722060805.1428110-1-jorge.ramirez@oss.qualcomm.com>
- <20260722060805.1428110-4-jorge.ramirez@oss.qualcomm.com>
+Subject: Re: [PATCH] clk: sm8550: Add GCC_CFG_NOC_USB3_PRIM_AXI_CLK support
+To: William Bright <william.bright@imd-tec.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20260721-sm8550-fastboot-clk-v1-1-657a239e3ccc@imd-tec.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -136,31 +130,31 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260722060805.1428110-4-jorge.ramirez@oss.qualcomm.com>
+In-Reply-To: <20260721-sm8550-fastboot-clk-v1-1-657a239e3ccc@imd-tec.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784709211; x=1785314011; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784710733; x=1785315533; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=VTFJcmKWcTKdkdJHVM90/JWRz2O0OQIwldDzhOvINN4=;
- b=UH8MoLfgW2/PY5E1lV/H0R/jGe3+Y1uVzGpRP6U9tJNZdVkAR0X5lgx8tzMDbaPnSC
- ifGs5K3fYmYYuSOZQRxeSDHpbMtTriRfA4oRwtQiEUcnBwQZnaW/fiXF0TqiwOb964l4
- Zloau86otH6I1VFVSrubGrHcaR7MITGdK+t2saCBkxCLW73NludIf6ZF+kwDKaRoCfz1
- AOLUiKiPkbsNVrvMyMvfVlNGmCQ3RKDC8VgJ7YFkeYVdqspflv2U09qGZetCfsIwAkgQ
- ZQY1jJbTbex3JQqgF0AWgTW+vwpMGmcoxiKNcHrg8k40/nEpGcqDOzUh2Y8DteYvzJZx
- naRQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=OS+ZdQB5gC2IKu7TEO7MKkfjEbS5v8nvzFvK5hKbKds=;
+ b=WSDc9XfdgDzJT/mlDm8FwjZ3a5RZIfC9ARf7iyS2uCXl/q28GHl+JtqV/N20moNQjt
+ UBMo9iJftOrIS78b356ms3ahR+Zc6mM5h/RUt2yNlpNQ0xrKnPEJEn6MxwdDRp4/c209
+ Wx8+5NuCAbZFrbRDB4hdZvS8dmiPUqlZQ40ppRzVUEE7RHLGM9dITBzST3H3yoiyEgTy
+ EG/kxOi/IqDN9CMIaXGJ8Qkcc6F2si1mGedvuVkpY9GdqhYx6G3ax2LdL/fWUCbOU9kD
+ v2uEFP2Vl4iryddBD4AwHLLeJjtW2gEW4JoF7okMrxysjQcHP07QuBkGKGRKDvSXD4sO
+ MNJw==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=UH8MoLfg
+ header.s=google header.b=WSDc9Xfd
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -168,7 +162,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=neil.armstrong@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="UH8MoLfg"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="WSDc9Xfd"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -181,50 +175,57 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: "Neil Armstrong \(Linaro\) via U-Boot" <u-boot@lists.u-boot-project.org>
+From: Neil Armstrong via U-Boot <u-boot@lists.u-boot-project.org>
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi,
-
-On 7/22/26 08:07, Jorge Ramirez-Ortiz wrote:
-> Read the UFS device, unit and geometry descriptors to report each RPMB
-> region's size and reliable-write count, and build a 16-byte CID by
-> BLAKE2b-hashing the same device-id string the Linux kernel derives
-> (ufshcd_create_device_id() plus a "-R<region>" suffix), so OP-TEE derives
-> an RPMB key that matches Linux. Exposed via ufs_rpmb_get_region_info().
+On 7/21/26 10:28, William Bright wrote:
+> GCC_CFG_NOC_USB3_PRIM_AXI_CLK is missing and is required for usb_1. The
+> missing clock entry was ported from the upstream Linux sm8550 clock
+> driver.
 > 
-> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> Link: https://github.com/torvalds/linux/blob/b95f03f04d475aa6719d15a636ddf32222d55657/drivers/clk/qcom/gcc-sm8550.c#L1346
+> 
+> Signed-off-by: William Bright <william.bright@imd-tec.com>
 > ---
->   drivers/ufs/ufs-rpmb.c   | 141 +++++++++++++++++++++++++++++++++++++++
->   drivers/ufs/ufs-uclass.c |   4 +-
->   drivers/ufs/ufs.h        |   2 +
->   include/ufs.h            |   6 ++
->   4 files changed, 151 insertions(+), 2 deletions(-)
+> The following warning logs were being printed when starting fastboot on
+> the sm8550-hdk:
+>    fastboot 0
+>    gcc@0x100000: unknown clock ID 11!
+>    gcc@0x100000: unknown clock ID 11!
+>    No USB device found
+>    USB init failed: -19
+> 
+> I found that there was a missing clock entry for
+> GCC_CFG_NOC_USB3_PRIM_AXI_CLK which I have ported from upstream linux.
+> ---
+>   drivers/clk/qcom/clock-sm8550.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/clk/qcom/clock-sm8550.c b/drivers/clk/qcom/clock-sm8550.c
+> index 7c06489b9c4..3d5a410ba33 100644
+> --- a/drivers/clk/qcom/clock-sm8550.c
+> +++ b/drivers/clk/qcom/clock-sm8550.c
+> @@ -122,6 +122,7 @@ static const struct gate_clk sm8550_clks[] = {
+>   	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x770e4, BIT(0)),
+>   	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_HW_CTL_CLK,	0x770e4, BIT(1)),
+>   	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,		0x3908c, BIT(0)),
+> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x39088, BIT(0)),
+>   	GATE_CLK(GCC_CNOC_PCIE_SF_AXI_CLK,		0x52008, BIT(6)),
+>   	GATE_CLK(GCC_DDRSS_GPU_AXI_CLK,			0x71154, BIT(0)),
+>   	GATE_CLK(GCC_DDRSS_PCIE_SF_QTB_CLK,		0x52000, BIT(19)),
+> 
+> ---
+> base-commit: 8a905a58e3b4832c4cd7dc0e8a596a6d7ce19562
+> change-id: 20260720-sm8550-fastboot-clk-86ef12e532de
+> 
+> Best regards,
+> --
+> William Bright <william.bright@imd-tec.com>
 > 
 
-<snip>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-> index e320a6dcfbc..3a0bcd287ea 100644
-> --- a/drivers/ufs/ufs-uclass.c
-> +++ b/drivers/ufs/ufs-uclass.c
-> @@ -1801,8 +1801,8 @@ out:
->   	return err;
->   }
->   
-> -static int ufs_get_device_desc(struct ufs_hba *hba,
-> -			       struct ufs_dev_desc *dev_desc)
-> +int ufs_get_device_desc(struct ufs_hba *hba,
-> +			struct ufs_dev_desc *dev_desc)
-
-I still don't find where ufs_get_device_desc() is used.
-
->   {
->   	int err;
->   	size_t buff_len;
-> diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-> index 9f55735602b..5dae8dbef72 100644
-<snip>
-
+Thanks,
+Neil
