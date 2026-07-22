@@ -4,105 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3076BC44536
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 15:07:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D000C44536
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 15:07:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CAF694087A;
-	Wed, 22 Jul 2026 15:07:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D31014089B;
+	Wed, 22 Jul 2026 15:07:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k9WcFp5xTw51; Wed, 22 Jul 2026 15:07:29 +0000 (UTC)
+ id iU_kcQOwaQFH; Wed, 22 Jul 2026 15:07:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BB6A24085D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 55ED8408A9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784732849;
-	bh=NYp0qM+ZXj+PyuJd7s2j0moSMKKC6iATSLqe4qz9iG8=;
-	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=HhnwHPz25Vdb0D8TVFLhzf6MkKLGMr2YWGe2R7jUkNsNa8ruz+aJFTWjIvFtOJu6e
-	 ZC15Mqxzd6jn2jJaJSDa7wW3MiicTjhSAiW95Zg9q4eCwfQQRU5KYdHYczuxMzah4P
-	 SN2iTbP1gIE+3ETyANnVE/qJns1PaeKq8brCD0gfU0dHyhpzo9cFGleiIQwXv+3rfk
-	 TDZSUIL9FZb+EcQGls7SE3dFtzsFVjO7al0wXBHzu+Fv3+pVZv7JNh2rwyt5+QDIDV
-	 MDUhTpBzltN8TRe1PUH3OqoiUMqJ24m/JizVj9hcVPCNDbs7/pGQ790O2FIsbZaGom
-	 jG2ZsEy2BCnBQ==
+	d=lists.u-boot-project.org ; s=default; t=1784732852;
+	bh=qaBASICGKT+139xNEa0zNRxQvQvPycskiNDeo7LRb0w=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=XSyEeKgtCmaQ7ARdCIMpTmSNy7qm4jZKCxViA7qSDZnf0Mi3VXT3RpikE85ADbSTh
+	 iPPFGG7wxWZSIsuo2Sp7uWX/+UWP0asYCLRvrr3UN8z20J2iUZtSks5dUpDNsCAh3H
+	 04fXgB5aGY+G/WyxbT3nfFPoUecANJzVnXTwqFUNytqvbr/W+RWkkvjyhl25AS8/1X
+	 i2smSzq8nPMMvC48wmdpe6OK65Trlo3wbnNrmcFTbUCChkxg80t4rwVyA+G5mS+mYF
+	 Rs/UCilaOBzbK79laW6/YF+uzJkemJHNjGEiR05C0PDTxF7Kn2mJQF23gwtSiojo3E
+	 QExgHybFqI+cA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BB6A24085D;
-	Wed, 22 Jul 2026 15:07:29 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id ACA62224
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 55ED8408A9;
+	Wed, 22 Jul 2026 15:07:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7FDA21093
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 92E2C80EFB
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:28 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 65C5F400BD
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QJn80VNGABC7 for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 15:07:27 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zif7wEAtZj4X for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 15:07:30 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3585A80F0B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3585A80F0B
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 201FD400B8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 201FD400B8
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3585A80F0B
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 201FD400B8
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 15:07:29 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D128494B; Wed, 22 Jul 2026 17:07:23 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id 8101F8494B; Wed, 22 Jul 2026 17:07:28 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77F9E848BA
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 17:07:20 +0200 (CEST)
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-38e041ea211so10487222a91.0
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 08:07:20 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FC2E848BA
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 17:07:26 +0200 (CEST)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-84862b0d5aeso13792910b3a.2
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 08:07:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784732838; x=1785337638;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=NYp0qM+ZXj+PyuJd7s2j0moSMKKC6iATSLqe4qz9iG8=;
- b=bfujyvqyfS3v2WOE3LasPPyXo/s9HUrGo5u/sECQAJkOoFrPdAO3mSz9/9UaYPt8/C
- 43iL8jyaHZkx0X2F/TERtV0jZqsDDbizTxaeCh0DimuDQDI/TPYkwtAYjM5UnqSz8dC6
- aqwC62c1L2idKJIEAZo0TkFESTBjIqfLCbLM525Xc7gDBhkasiCnetPZcrszXBcQ9JRX
- ASFEu5jmcSS8/XWuSvQuyj75IgoZ345+DQYD5uoS8od90Zy8GXLIJ6sHKVY+Uc4Z6a0I
- eWuismskVWTJDRp9qAO+HM76I5+IWsZJKmH7DUgOjxvGgIVAq6AnbyB1MGF673eECj38
- vMcQ==
+ d=1e100.net; s=20251104; t=1784732844; x=1785337644;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=qaBASICGKT+139xNEa0zNRxQvQvPycskiNDeo7LRb0w=;
+ b=jaIVbO9szg9Y4UiOXxSXEsF/u8LzApYkcXS6LgBa1tFrt2239FjbiclCiPOmF3mcoH
+ 9Tp/zFwJh2YheCHQL+BJ/1fj9jlr4LXkPF+CGtGKWwCVu/0S8fDaGafivpvShwj8n18a
+ tcAthpYR/lgAJI3U716/eQTJ3wCf+6h8s8y0jhAmNCZHzLx89pWONyY7Uoav83SNFScR
+ ROUa1JzVJfjcLry8KW7sC1yZ8dI7EF++3d6MyZuuhJ52p8oHDQUKH/yszqJyF0x48p8y
+ IMa6ExGuJJKYqjSdt4PC7GetApx9iIJiI61d/plueStaq7ckkoRTC+vY3zBvKaIYsQgq
+ 7Wig==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqOrpLzoiJu/FKawjVnGvUWTg+Pjz8uOEBlMKZasohcAT+ru3hpxrQJqmlSd1G68huXh7STbFk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaOydlRodhwk3FGrHIaQUQrg8Ef08l7YAuMi05xZZFcH78kWo7
- Fk8rlN897+ffgkply8kMaPeKaoUGgF+2z51NdL3eDemrjbVHpuXl9VqERUzvJi6ieZs=
-X-Gm-Gg: AR+sD12upQV3225bAYGaCFKKYc1iEawxO9jNQzGdiBD8D/ijpAxPvVTTxndbheymdjA
- s+KYSkMrkffAJbGFV0LcYuIsgVyJ9bZDpbAYH1B26tx2sJFuapcOdCvCEOvWUJy3qrgYzmJ58ec
- 3R1CUO/fjwVPVUdMNFkG6r1HpbNyyYQcwy8z6UP62egzuXfCDOXmSh9g3fOO2UzoDRvZMZbJPr5
- EsBwX61BVWUn7/IAEn1WGWEBCH9glfzOFs+z+cc8bL8e1cj7zBXl8SGtPCLAmUWVvYqDTFd6/Wn
- dzavP5t9EoP3uawk1Ki0QB0RQvt5f00sOnk1spjHsnGddoSxtqSt4AxWrSUU6k8sB9om0Bh4Nh4
- m84VORnGtlkVddJXvsoAxq8eGbemiujuj5y20pHNrRtW1M9Pu9S9TE6ezTpghgaG/yw05/Q36i+
- +qGqN4nIT7SfEecV7MnaIxwzOaGJ/RQV324t7ecgc53pdHRNjmhtqA3wNZtjaHEvvwniMFC6xa2
- IcRe+fjTJgu0u6X1nxDl3UIEvxwFXFKKqKCsTQwP9R0t1eiPs4W+g==
-X-Received: by 2002:a17:90b:2f0b:b0:381:18c3:1b99 with SMTP id
- 98e67ed59e1d1-38e4b51bfbcmr24933928a91.23.1784732838523; 
- Wed, 22 Jul 2026 08:07:18 -0700 (PDT)
+ AHgh+RpivqR5FDEWx5evKq/2zTCiKrSUo/wb7KYvUo/VW5D7e41RDoecgIgiV1CtwL88GxDfPG6O+bA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHiYSBd+VHdO14nby5ScNsR3TFZfDbBgDnATybLooA+gWQvQ1C
+ vZQmerC9FhZHdCYypRIEkPUfZCTvj7oUYA61iFyRhugUobqwxYrrvAmIxsjpi0rjBsA=
+X-Gm-Gg: AR+sD10S/3E7RASNPb9Swptj7alqRt9Q8zdkfCRxWIYPyc146ZXiO9IbjRE+Zi2+V0X
+ DQP2UqJ6GkNya/xOcgBGsAvutZIqtnzGghAjixp2ga/12DoJRCsb/qTRp7uM1k9AAMBQq8K/B6s
+ /lV+x1rDaW7LYrXpeqxiWw6MSOujOKUPS9oHA8lL622pGAiaiktk3Ik/s6E2acdmh0xGiIAAjnS
+ wfqf4xoqBjmI8OGacLPB/RPmQItKzniWkPDe1hXny6BP9vj5ThdvPoTmVy/InvPMDFE5rgTwR87
+ bqU37KZJPzkR/LAHP9AclMlmfSsdIbJn/5Oi3/Nt4DVCpyp1qdkXMC2ID3hxjIHIewHGtkkvJf0
+ 1FLf3qXuYYz+wb3ROWg3HNrtk+vrSbwlwOPGu80hAFKmaZ4xi78MkfSP5CNcXbluYtHvJCVfzB/
+ fRAYnhwwUviACRe3zuUmHIPOWTQqu0ynsH9rtuK/VoKWKmw/QM7W82J3Tb4hxukUIsqWyTh8mC7
+ I/6ICLnbfDgCDJT36xDGN58EqUdvwAtOecqidztIAM=
+X-Received: by 2002:a05:6a21:4591:b0:3b4:7eb0:47a1 with SMTP id
+ adf61e73a8af0-3c3ad62ac62mr24617248637.19.1784732844083; 
+ Wed, 22 Jul 2026 08:07:24 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3147e088d3fsm10622267eec.25.2026.07.22.08.07.12
+ 5a478bee46e88-3147e088d3fsm10622267eec.25.2026.07.22.08.07.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2026 08:07:17 -0700 (PDT)
-Subject: [PATCH v5 0/9] spacemit mmc driver
-Date: Wed, 22 Jul 2026 23:06:56 +0800
-Message-Id: <20260722-m4-v5-0-c41a951e5157@riscstar.com>
+ Wed, 22 Jul 2026 08:07:23 -0700 (PDT)
+Date: Wed, 22 Jul 2026 23:06:57 +0800
+Subject: [PATCH v5 1/9] spacemit: k1: select boot device via config registers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJHcYGoC/23NzW7DIBAE4FeJOJeIxQZDTnmPKAezLDWVEkfgo
- FSR373YOfTPx5Hmm3myTClSZofdkyUqMcfxWoN62zEc+us78ehrZlJILbS0/NJya0iAVjZQcKw
- Wb4lCfKwjp/Mr57v7IJwWuTSGmKcxfa4vBZber8ECXPAeIBjfWk1aHlPMmKc+7XG8sGWzyP9KV
- oUOLaB2pvFmQzXfqhNqVU1VqrcOuyBVQLWh2p+qW1VblXdeABgVLMAfNc/zFxJBb4lLAQAA
-X-Change-ID: 20260629-m4-98e01659fefb
+Message-Id: <20260722-m4-v5-1-c41a951e5157@riscstar.com>
+References: <20260722-m4-v5-0-c41a951e5157@riscstar.com>
+In-Reply-To: <20260722-m4-v5-0-c41a951e5157@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
  Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -124,26 +123,26 @@ X-Mailer: b4 0.15.2
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1784732838; x=1785337638;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1784732844; x=1785337644;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=NYp0qM+ZXj+PyuJd7s2j0moSMKKC6iATSLqe4qz9iG8=;
- b=XeqXFy02ApSQtEDK0yW3Xl4eifst7IfO7rLomsJgNHCk019R21KjmbVFXWLUXpjNxF
- W2dXp6M82uIDo6dMm7XS1kRyP6kKf54Ge3NPw2jtYSvj+TPSj1bigC6fuKSwO4KGrJaD
- JcaSeKe89cMGuODZeGY3wAkn6wXYEO/BZ7VWFzermc20+e4CMdTnMygJ4DY2z9Vro/9k
- cCmPWZJl2F8ROLWjDRF6rr81uB/ZobH1KIBxPXOoqBgE2hem1o5CiT6T/ddT0BTVxXfb
- SwhqohLJh7U7fpQVh+SdrZADwz84RpO5nDvSKTD0FYxad6h2wjqkbU8X+IbY83w9R9RX
- R5zA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=qaBASICGKT+139xNEa0zNRxQvQvPycskiNDeo7LRb0w=;
+ b=qiyQ7JjXfz7GeSCh+YGlGyi62k4ocY3vxbwkC/YB+gKCDlh1H5hmlUQ3AIWJortTIj
+ W3Cz8UbhE/UaC5Zx+hX8gT1Ed+E/8OTFeAHWO2ZTvs/toqq7L4a0kdh7j3S3CBqsviKu
+ H6JYVOjHn6NmaSUDwf8cXeY7rw/IAypcC1inMhQgMHjayfaWDa0P8eKELeHqjfnJAWUX
+ y1/MT8O1dQhoIPYEnK5M7iOsL2f/3Bip7DeF/CWyTyYvsVe62XHcqUR3fCsYXLpengvG
+ V8LAtRpYgfL2EGIiZOyB7OKqOxsrZABbScsRbkiieWUGdeXC7ZWov8SCQkbP9Vz4F8pI
+ u+zg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=fail (p=none dis=none)
  header.from=riscstar.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=XeqXFy02
+ header.s=20251104 header.b=qiyQ7JjX
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none)
  header.from=riscstar.com
@@ -152,7 +151,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
  unprotected) header.d=riscstar-com.20251104.gappssmtp.com
- header.i=@riscstar-com.20251104.gappssmtp.com header.b="XeqXFy02"; 
+ header.i=@riscstar-com.20251104.gappssmtp.com header.b="qiyQ7JjX"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -170,123 +169,128 @@ Reply-To: Eric Chung <eric.chung@riscstar.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series adds MMC support for the SpacemiT K1: an SDHCI platform
-driver, the SD card device-tree overlay, defconfig options, and SPL
-boot-device selection from the SoC strap/config registers. The SDHCI
-driver is usable in both SPL and U-Boot proper.
+Add logic to determine the current boot device by reading the
+SoC's configuration registers, rather than using a hardcoded
+default.
 
-A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
-write images to eMMC.
-
-This series sits on top of three series still under review, and must be
-applied after them, in this order:
-
-  1. K1 clock/reset/dts migration [1]    (8 patches)
-  2. K1 SPL bring-up v4 [2]              (14 patches)
-  3. K1 pinctrl/GPIO and SPI NOR v2 [3]   (9 patches)
-  Then this series                        (10 patches)
-
-For each series:
-
-  b4 am <cover-msgid>
-  git am ./*.mbx
-
-Link: https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/ [1]
-Link: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc [2]
-Link: https://lore.kernel.org/u-boot/20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com/ [3]
-
----
-Changes in v5:
-- mmc: Split CMD23 support out.
-- mmc: Use read_poll_timeout().
-- mmc: Set pinctrl state based on selected timing mode.
-- mmc: Remove the condition based on quirks.
-- pinctrl: Fix power source argument.
-- dts: Add missing power source on mmc pins.
-- Link to v4: https://patch.msgid.link/20260707-m4-v4-0-dbd01185f911@riscstar.com
-
-Changes in v4:
-- mmc: Add CMD23 for write.
-- mmc: Fix CMD23 only for CMD18.
-- mmc: Update bulk release operations on reset and clocks for spacemit
-  platform driver.
-- MAINTAINER: update the maintainer of Spacemit K1.
-- Link to v3: https://patch.msgid.link/20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com
-
-Changes in v3:
-- pinctrl: Fix "fast" by "uhs".
-- pinctrl: Add syscon dependency.
-- mmc: Fix quick by capability.
-- doc: Add SD boot support.
-- Link to v2: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc
-
-Changes in v2:
-- cmd: drop patches on eminfo & tlv_eeprom.
-- configs: Enable ADMA and SYSCON support.
-- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
-- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
-  read/write, correct pinctrl state from "fast" to "uhs".
-- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
-  transfers.
-- pinctrl: k1: Add new IO power domain configuration support for
-  dual-voltage GPIO banks.
-- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
-- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
-
-To: u-boot-spacemit@groups.io
-To: u-boot@lists.denx.de
-Cc: Huan Zhou <pericycle.cc@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Tim Ouyang <tim609@andestech.com>
-Cc: Leo Liang <leo.liang@sifive.com>
-Cc: Raymond Mao <raymond.mao@riscstar.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
-Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Han Xu <han.xu@nxp.com>
-Cc: Yanir Levin <yanir.levin@tandemg.com>
-Cc: Christoph Stoidner <c.stoidner@phytec.de>
-Cc: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
-Cc: Daniel Palmer <daniel@thingy.jp>
-Cc: Anshul Dalal <anshuld@ti.com>
-Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Cc: Angelo Dureghello <angelo@kernel-space.org>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-
+Reviewed-by: Yao Zi <me@ziyao.cc>
 ---
-Eric Chung (9):
-      spacemit: k1: select boot device via config registers
-      pinctrl: k1: add IO power domain configuration support
-      mmc: k1: add sdhci platform driver
-      dts: k1: add SD card support in u-boot overlay
-      configs: k1: enable SD and eMMC support
-      MAINTAINER: update Spacemit K1 entry
-      doc: spacemit: flash on K1 SoC based boards
-      config: k1: enable ENV support for eMMC
-      spacemit: k1: load product name from environment variable
-
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  91 +++-
- arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  86 +++-
- board/spacemit/k1/MAINTAINERS             |   5 +-
- board/spacemit/k1/spl.c                   | 122 ++++--
- configs/spacemit_k1_defconfig             |  26 +-
- doc/board/spacemit/index.rst              |   1 +
- doc/board/spacemit/k1-mmc.rst             | 320 ++++++++++++++
- drivers/mmc/Kconfig                       |   7 +
- drivers/mmc/Makefile                      |   1 +
- drivers/mmc/spacemit_sdhci.c              | 681 ++++++++++++++++++++++++++++++
- drivers/pinctrl/spacemit/Kconfig          |   2 +-
- drivers/pinctrl/spacemit/pinctrl-k1.c     |  86 +++-
- 12 files changed, 1376 insertions(+), 52 deletions(-)
+v5:
+- Add blank lines around the switch statement.
+v2:
+- Use FIELD_GET() to parse boot strap mode.
+- Remove comments on hacking. Since the sequence between eMMC
+  and SD device is exchanged in the upstream DTS. So it isn't
+  a hacking any more.
 ---
-base-commit: e7a6b33b153be98fcca16729e189f90c2d91a98c
-change-id: 20260629-m4-98e01659fefb
+ board/spacemit/k1/spl.c | 71 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 70 insertions(+), 1 deletion(-)
 
-Best regards,
---  
-Eric Chung <eric.chung@riscstar.com>
+diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+index 0db362130e4..cac89bb6844 100644
+--- a/board/spacemit/k1/spl.c
++++ b/board/spacemit/k1/spl.c
+@@ -13,6 +13,7 @@
+ #include <dm/device.h>
+ #include <dm/uclass.h>
+ #include <i2c.h>
++#include <linux/bitfield.h>
+ #include <linux/delay.h>
+ #include <log.h>
+ #include <power/regulator.h>
+@@ -21,6 +22,17 @@
+ #include <tlv_eeprom.h>
+ #include "tlv_codes.h"
+ 
++/* boot mode configs */
++#define BOOT_DEV_FLAG_REG	0xd4282d10
++#define BOOT_PIN_SEL_REG	0xd4282c20
++
++#define BOOT_STRAP_MODE_OFFSET	9
++#define BOOT_STRAP_MODE_MASK	3
++#define BOOT_STRAP_MODE_EMMC	0
++#define BOOT_STRAP_MODE_SPI	1
++#define BOOT_STRAP_MODE_NAND	2
++#define BOOT_STRAP_MODE_SD	3
++
+ #define MUX_MODE4		4
+ #define EDGE_NONE		BIT(6)
+ #define PULL_UP			(6 << 13)       /* bit[15:13] 110 */
+@@ -45,6 +57,17 @@ typedef void (*puts_func_t)(const char *s);
+ typedef int (*ddr_init_func_t)(u64 ddr_base, u32 cs_num, u32 data_rate,
+ 			       puts_func_t puts);
+ 
++enum board_boot_mode {
++	BOOT_MODE_NONE = 0,
++	BOOT_MODE_USB = 0x55a,
++	BOOT_MODE_EMMC,
++	BOOT_MODE_NAND,
++	BOOT_MODE_SPI,
++	BOOT_MODE_SD,
++	BOOT_MODE_SHELL = 0x55f,
++	BOOT_MODE_BOOTSTRAP,
++};
++
+ struct ddr_cfg {
+ 	u32     data_rate;
+ 	u32     cs_num;
+@@ -379,7 +402,53 @@ void board_init_f(ulong dummy)
+ 
+ u32 spl_boot_device(void)
+ {
+-	return BOOT_DEVICE_SPI;
++	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
++	void __iomem *boot_strap = (void __iomem *)BOOT_PIN_SEL_REG;
++	u32 mode, sel, ret = 0;
++
++	mode = readl(boot_dev);
++	if (mode == BOOT_MODE_NONE || mode > BOOT_MODE_SD) {
++		sel = FIELD_GET(BOOT_STRAP_MODE_MASK << BOOT_STRAP_MODE_OFFSET,
++				readl(boot_strap));
++		switch (sel) {
++		case BOOT_STRAP_MODE_EMMC:
++			mode = BOOT_MODE_EMMC;
++			break;
++		case BOOT_STRAP_MODE_NAND:
++			mode = BOOT_MODE_NAND;
++			break;
++		case BOOT_STRAP_MODE_SPI:
++			mode = BOOT_MODE_SPI;
++			break;
++		case BOOT_STRAP_MODE_SD:
++		default:
++			mode = BOOT_MODE_SD;
++			break;
++		}
++	}
++
++	switch (mode) {
++	case BOOT_MODE_EMMC:
++		ret = BOOT_DEVICE_MMC1;
++		break;
++	case BOOT_MODE_NAND:
++		ret = BOOT_DEVICE_NAND;
++		break;
++	case BOOT_MODE_SPI:
++		ret = BOOT_DEVICE_SPI;
++		break;
++	case BOOT_MODE_USB:
++		ret = BOOT_DEVICE_USB;
++		break;
++	case BOOT_MODE_SD:
++		ret = BOOT_DEVICE_MMC2;
++		break;
++	default:
++		ret = BOOT_DEVICE_MMC1;
++		break;
++	}
++
++	return ret;
+ }
+ 
+ void spl_board_init(void)
+
+-- 
+2.51.0
 
