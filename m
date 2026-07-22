@@ -1,111 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E424BC4451C
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D4EC44533
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jul 2026 07:39:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8F4E6808C0;
-	Wed, 22 Jul 2026 07:24:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 185254071D;
+	Wed, 22 Jul 2026 07:39:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GgD-d2HoUfDP; Wed, 22 Jul 2026 07:24:51 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MLA7Ei24jsfZ; Wed, 22 Jul 2026 07:39:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8B34180D2D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1CCBD40733
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784705091;
-	bh=riSNxDUOV6de6/6EkBaDE+dYVxew+n5q6WCBlRYZEAo=;
-	h=To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784705970;
+	bh=fCAKEiJpvEhXFweVprPUCzvw/oXAAE2m75sKyjb3rSA=;
+	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=lCrt67bKD9ZMyaHwWdV7EOWIClKWi2v159lNdFIJiZlwJNeQtWQPKmYq3yvsxxz8X
-	 VOXDvUeDQG5wC/coXv/t3RXmOrPxrrHeq8IEbc1wzvfudaZyITKlaVp0xx3W5zOqbQ
-	 vbNjUkAKlVq7oq11Eg7OVtTEFYyHmO3AfG24/BnfqaWQe85f2NQRMl/qrircU2T/qW
-	 LvPEsi7M0FZdmM9IQ65ZyIc5vJ4GE2ZUwKCZI+ZbirRbtV7T4BMWeEa9Dvkjtix8Cz
-	 aw4k/VOGU5qL6G4wVha+b57dJyP5sqEoQmXLlMw71crPfbDTLx79jQbfTTLMu50ImL
-	 EaYAWJdkLKBcg==
+	b=km2Km49+KjIj735UvzF/SinTGfB7FH4uImAwoxNuLvsU708wWRrmhHaxHuOQ3raHR
+	 GF2gjWR+MHpLI+eM56LTIW7rjuUR6RUDti93VQD7DFAMj8ToUyW2AeRiJgifFhiTbp
+	 CfVPciS9NQuUo6D8WTpTCA+IyVv9Wdf8IuURI2GTtbUN/JC4KpD6ezo/Tui7Ov/TL6
+	 Q49+BTXh14o9BrTMq3vrZy27xYj9Kvje4Qb0eiW/qFbxE5ey/GSVOw9R6d8d09gXPh
+	 dQZOmmkoZWF/E/K6pIhofwwRfq6pyr6UXMdo/1mU7yDMRPeMVrsy/la/MzG6XySUQv
+	 jzFHp/FjPHgYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8B34180D2D;
-	Wed, 22 Jul 2026 07:24:51 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4F0FF10A3
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:24:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1CCBD40733;
+	Wed, 22 Jul 2026 07:39:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D53C310A3
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:39:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 40FF1808C0
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:24:50 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C686E40733
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:39:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BXJrS3goAY8b for <u-boot@lists.u-boot-project.org>;
- Wed, 22 Jul 2026 07:24:49 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 05FC880C79
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 05FC880C79
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 05FC880C79
- for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:24:48 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7458D848BA; Wed, 22 Jul 2026 09:24:47 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEDC1803F6
- for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 09:24:44 +0200 (CEST)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 4557340A2D;
- Wed, 22 Jul 2026 07:24:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 856251F000E9;
- Wed, 22 Jul 2026 07:24:42 +0000 (UTC)
-To: Lothar =?utf-8?Q?Wa=C3=9Fmann?= <LW@KARO-electronics.de>, Petr
- =?utf-8?Q?Bene=C5=A1?= <Petr.Benes@ysoft.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Regression in f_fastboot due to commit 6a92e9827650 ("usb:
- ci_udc: Check ci_ep->desc before use")
-In-Reply-To: <20260715072313.44c3f2b1.LW@KARO-electronics.de>
-References: <20260708071255.13f58e98.LW@KARO-electronics.de>
- <875x2okxcs.fsf@kernel.org>
- <DB9PR04MB8219B75AE3A1D4D750B7C3B880FD2@DB9PR04MB8219.eurprd04.prod.outlook.com>
- <20260715072313.44c3f2b1.LW@KARO-electronics.de>
-Date: Wed, 22 Jul 2026 09:24:40 +0200
-Message-ID: <87ecgvij0n.fsf@kernel.org>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 00vcRrn6bxhI for <u-boot@lists.u-boot-project.org>;
+ Wed, 22 Jul 2026 07:39:28 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 923904071D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 923904071D
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 923904071D
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 07:39:27 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c15f360851aso1350177366b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 22 Jul 2026 00:39:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784705965; cv=none;
+ d=google.com; s=arc-20260327;
+ b=E3euyVk/RKUbyPEgl4L0S9BQlniV1OA4lB6mJ7Y5xeYjc3xqCRcVfMNN/OayqS/M70
+ JJGI7MVETACMfxu+J/iiaTCrtt2m4Adn0voADZNj/KliQmgHEg0ILpjnneyJh6OMbKBg
+ sP390gUB2A/J8xMjCUkcnHEmqbG/2rZoQ8KFzQAPaKA9Lt668k/2Qafh+eeFx4iQP4mD
+ VH401/5dmrBc664LCjZXy/p4CYBC5BIrzuve4RU+TuH3y9XFcaomfsdjxzUADQ6oBiNX
+ R7VNAE9gy5JdXO1+HCHNK1Dcn/66KfKDsYp7yFFLBBxO88vUgE1I0McfHU/qY82DugTp
+ /Drg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=fCAKEiJpvEhXFweVprPUCzvw/oXAAE2m75sKyjb3rSA=;
+ fh=gAEFofJwMzmmys8FTmp9JMRck47sQvrIEpQ6H9kUapM=;
+ b=NoiTNnEAUpmkMtobHAjrFcrjnXgbCE0C5i2Vb2oZr93aJzPJq+ciHg99vmJPurgyVB
+ xLFXRfwTeXCJKcNAJM5qDDiNGL0EowoGjLb3/e5F0LjVtDmfrJBPf6i4g6A9v4fAdPR/
+ Cv1JLfqabEveI6+nHWr9VX8J/aO2faLP1dBoWC+oYbP3fukyiKGb2BWLISCVaW5IJp5a
+ 857FALVQLZg4ASVBEGcwJX+dDRdQGuOSbhXJS/tKqESGX1qDcnyidXcYbPuixqmrzfKi
+ s4SBJVhtyWOlyT1kNIjKjQs0nzxMWsRco61L+qkCEuTnIIIPn/xQMvvoNbbmcSNBT0Ve
+ 6GjA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784705965; x=1785310765;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=fCAKEiJpvEhXFweVprPUCzvw/oXAAE2m75sKyjb3rSA=;
+ b=G05wPYfdSv1sLXpj9xOafS5f3V6EV/TXgOCt6u1bFuYBf+vfwVhv8Sp7Ka+K/CtLpR
+ Q5uRJiZAMaunpmddLddEhclNpILFD7L9oNHkf6qGELlFWkikM9eWzp88D5DxZ2MPupDy
+ H0TqNJ59/LoqHHlS3IRzx1HUYqTWH4YEypuPdV9Kq2gmDzOflrB6fFDNLnYLbH0b2DXI
+ PkGt5wbZ/XNI2Ic8gtY8dFRiPZQSvmAO4/PNVj5ekv3j+jM44PzypkzpvJwcc+AKJtp0
+ tVHj8WVVUknmYoOh+7evvUGgpUeVYpGj1i6P6v7CZax7zBCh3HwLVU5JzqCe6pAyYmZv
+ PZMw==
+X-Gm-Message-State: AOJu0YzQdqmXiycysY2RiWM704paK3zBslrgZ1EEwjrzsD0crdxnqAED
+ mcmPKr8C5t9SAkTZjPHD5BFS5Em6HQQ00ByA+PNNlya7/QxvHlV4ZzxGlM5oQ49vlSgbjGuyVa5
+ gkgoh7DuKDlBRwcLRNsmcVqZYYyvZZFlEIW9yMfXUNg==
+X-Gm-Gg: AR+sD12F42xqkMuOsUCNhnzXeWyVB3L6n++gNE1RzIclxs3Y9ZFCBfanuGwJl4hvK2l
+ RpDJ9RIJMQOA++7PtQLmDY2MaMq5Sp8IkoKAQAEMa1O2Czewq30ImIb0Ibp+B8udBPfbws/R527
+ IbsMJ4rn7glcMLwvodGlFcz3An5+zdXfmtxrHi52UUpej1jmc6JBcpOBf5qs6sjmBqpu5cfshXW
+ zcxBXeNTd1TSsR3v4a2QBreFjnNfViiZo5b9AxGRrSsmFR/dVtlBK6gEbWTn3u/EKPyd53W/Ppg
+ Q6R8bJxU6TwATdhGag==
+X-Received: by 2002:a17:907:845:b0:c16:61d9:1679 with SMTP id
+ a640c23a62f3a-c16b483d4d3mr948848066b.52.1784705965325; Wed, 22 Jul 2026
+ 00:39:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
+ <-mj8gZELtrWJeeFLCaw39rL0jrHYwmGDsHwx9fof5bU-yF18H0CThDfILBU7eQ-8AdiYZfBrbAti-LfJkf0Ky5lyuxNU8zDJAjJTZBszN1Q=@on-the-web.ch>
+In-Reply-To: <-mj8gZELtrWJeeFLCaw39rL0jrHYwmGDsHwx9fof5bU-yF18H0CThDfILBU7eQ-8AdiYZfBrbAti-LfJkf0Ky5lyuxNU8zDJAjJTZBszN1Q=@on-the-web.ch>
+Date: Wed, 22 Jul 2026 11:39:15 +0400
+X-Gm-Features: AUfX_mz5sb63kItjHCOk_aZOy8fyW551XEiZaMGMGR9EPbEg-AHRQPjFMpQbOSA
+Message-ID: <CAKTNdwGD5CR4+YD-HZXdQnKbB==Y4f5NfFtwPfRoAnTZ459jNw@mail.gmail.com>
+Subject: Re: [PATCH 0/7] rockchip: fix boot from SDMMC on RK3576
+To: Martin Herren <sputnik@on-the-web.ch>
+Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1784705083;
- bh=riSNxDUOV6de6/6EkBaDE+dYVxew+n5q6WCBlRYZEAo=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=dGQYme+KgPlWWJGpRWh5QS5KhPV0hADDjSVgT0Y9h7NW1YRdByUJm76gI8I3kx9IQ
- 7Qu4DFU5PWYpk4zlhZ6P+AhFgwA2/g77dDVYSsFj0hbZ2xaZz9w8wa+1HlAIkEw/xk
- ptbxJMXzwsox66aFHfvI5oS7nEMgV6IXJRKWTBXGP2a0Haa9PU7nqiXBmIBTVZpMR8
- 1XV92C4UZoL+qQTObZTp6xcERjBvKi35b0OJdwK6zdQVU9eydXL7BimKFkbIAWhDvo
- 5/8h576XlMycF5VtNQC1h8P6fajc03toCKewN8S2EAecQAQUKFC0Vu5iZMhOpLe+Yw
- 6a6ojbm1Za+Fw==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=flipper.net; s=google; t=1784705965; x=1785310765;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=fCAKEiJpvEhXFweVprPUCzvw/oXAAE2m75sKyjb3rSA=;
+ b=uuV/Wa5CCSKb4XGkdpXjX2t0Hqr8Mej81Dd8t1ARQ/nKhBIWTNC3p2z1aOfk3e/wal
+ 3eTrHddEuLHopABV/HsjbGJM5Cc/RVb5sgnwj0/7WDlv1r52uqWKAJLCVuhPpfB/bBkr
+ yYXDxZ858Y32gGINS/fVvQkF+UGbv2GiX4SqFBuAL3Lpyw7HwsrBwjgF57/ywmmhJcf4
+ oGay2Mky+okf2UtywHIg39tjlvoMnVGJRiQ5YHdU0Vks6xQ6C9BVZqOPz0L3Sncuu/YG
+ WSjHl65h4bTkZW+FQz4GyhHeZPCThN9P35FtBb17FknttXRnN48GB6GIjB7yMzU6ohkZ
+ ph+w==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=dGQYme+K
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=mkorpershoek@kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="dGQYme+K"; 
- dkim-atps=neutral
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=uuV/Wa5C
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -117,125 +147,92 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Mattijs Korpershoek via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+From: Alexey Charkov via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Alexey Charkov <alchark@flipper.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Lothar,
+Hi Martin,
 
-On Wed, Jul 15, 2026 at 07:23, Lothar Wa=C3=9Fmann <LW@KARO-electronics.de>=
- wrote:
-
-> Hi,
+On Wed, Jul 22, 2026 at 12:05=E2=80=AFAM Martin Herren <sputnik@on-the-web.=
+ch> wrote:
 >
-> On Fri, 10 Jul 2026 21:27:48 +0000 Petr Bene=C5=A1 wrote:
->> Hello Lothar and Mattijs,
->>=20
->> I hope web outlook doesn't render my response unreadable.
->> ________________________________________
->> From: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Sent: Thursday, July 9, 2026 17:15
->> To: Lothar Wa=C3=9Fmann; u-boot@lists.denx.de
->> Cc: Petr Bene=C5=A1
->> Subject: Re: Regression in f_fastboot due to commit 6a92e9827650 ("usb: =
-ci_udc: Check ci_ep->desc before use")
->>=20
->> Hi Lothar,
->>=20
->> On Wed, Jul 08, 2026 at 07:12, Lothar Wa=C3=9Fmann <LW@KARO-electronics.=
-de> wrote:
->>=20
->> > Hi,
->> >
->> > commit 6a92e9827650 ("usb: ci_udc: Check ci_ep->desc before use") has
->> > the side effect that an empty buffer is being passed on to
->> > rx_handler_command() in drivers/usb/gadget/f_fastboot.c upon
->> > termination of a fastboot session which leads to a
->> > 'command  not recognized' error message being printed on the console.=
-=20=20
->>=20
->> Thank you for reporting this.
->>=20
->> >
->> > Obviously without the commit the offending USB request had been silent=
-ly
->> > dropped but is now delivered to the upper levels.=20=20
->>=20
->> Well, it was not silently dropped in case of the ethernet gadget, it was=
- silently corrupting memory.
->>=20
->> >
->> > I'm not sure what the correct fix would be.
->> > Should the fastboot driver ignore the empty command buffer or should
->> > the "Moreover, the patch gets rid of possible outstanding requests
->> > if the endpoint's state changes to disabled." part of the commit be
->> > reverted?=20=20
->>=20
->> Hmm, maybe I got it wrong. The endpoint got disabled, so what should hap=
-pen with requests?
->>=20
->> linux/usb/gadget.h reads:
->>=20
->>  * @complete: Function called when request completes, so this request and
->>  *      its buffer may be re-used.
->>  *      Reads terminate with a short packet, or when the buffer fills,
->>  *      whichever comes first.  When writes terminate, some data bytes
->>  *      will usually still be in flight (often in a hardware fifo).
->>  *      Errors (for reads or writes) stop the queue from advancing
->>  *      until the completion function returns, so that any transfers
->>  *      invalidated by the error may first be dequeued.
->>=20
->> Petr, did you observe similar behaviour with the ums gadget?
->>=20
->> I didn't see any wrongdoing of the ethernet gadget.
->> >
->> >
-> I found a solution for the problem. The ci_udc driver checks the req
-> status for -EINPROGRESS in several places, but does never initialize the
-> status to that value.
+> Hej Jonas and Alexey,
 >
-> This patch alleviates the problem:
-> Index: a/drivers/usb/gadget/ci_udc.c
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> --- a/drivers/usb/gadget/ci_udc.c
-> +++ b/drivers/usb/gadget/ci_udc.c
-> @@ -530,6 +530,9 @@ static void ci_ep_submit_next_request(st
->  	head =3D ci_get_qh(num, in);
->=20=20
->  	ci_req =3D list_first_entry(&ci_ep->queue, struct ci_req, queue);
-> +
-> +	ci_req->req.status =3D -EINPROGRESS;
-> +
->  	len =3D ci_req->req.length;
->=20=20
->  	head->next =3D (unsigned long)item;
-> @@ -753,6 +756,9 @@ static void handle_ep_complete(struct ci
->  		ci_ep_submit_next_request(ci_ep);
->=20=20
->  	ci_req->req.actual =3D ci_req->req.length - len;
-> +	if (ci_req->req.status =3D=3D -EINPROGRESS)
-> +		ci_req->req.status =3D 0;
-> +
->  	ci_debounce(ci_req, in);
->=20=20
->  	DBG("ept%d %s req %p, complete %x\n",
+> On Monday, July 13th, 2026 at 12:03 PM, Alexey Charkov <alchark@flipper.n=
+et> wrote:
 >
-> This is similar to how the Linux driver behaves.
+> > This aims to upstream Jonas Karlman's long-standing patch series fixing
+> > the boot from SDMMC on RK3576, which requires a hotfix to the boot ROM'=
+s
+> > global state area before any SDMMC reads are initiated to avoid clobbin=
+g
+> > the ROM's state and breaking the boot process.
+> >
 >
-> I tested with fastboot and mass-storage gadget.
-
-Thank you for investigating this further.
-
-Ye Li <ye.li@nxp.com> has send a similar patch which just got applied here:
-
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/=
-b79147bbd47cd2d50836dc0a57376f4820663637
-
-Can you please check if that works for you as well?
-
+> > The preparatory patches for the image tools are submitted verbatim from
+> > Jonas' version, while the "boost" code doing the actual hotfix is
+> > converted from using a pre-built tiny binary to a from-source build usi=
+ng
+> > the existing U-Boot build system.
+> >
 >
+> > From-source build also alleviates the problem with parallel out-of-tree
+> > builds, which could skip the pre-built binary but which always pick up =
+the
+> > from-source build.
+> >
 >
-> Lothar Wa=C3=9Fmann
+> > Tested on a number of RK3576 boards, including the Rockchip RK3576 EVB1=
+,
+> > ArmSoM Sige5, FriendlyElec NanoPi M5, Luckfox Omni3576, Radxa Rock 4D a=
+nd
+> > Flipper One, all of which fail to boot from SDMMC without this series b=
+ut
+> > boot fine with it applied.
+>
+> Thanks for the original patch and reviving it with this v2 !
+>
+> Comes really at the right time as I'm trying to add Yocto support for the=
+ Radxa 4D board.
+>
+> Successfully tested this serie on my Radxa 4D board, even if already repo=
+rted as tested.
+>
+> Tested it on v2026.07 where it applies directly.
+> Also tested it on v2026.04, in this case 2 additional patches from Jonas =
+already in v2026.07 must be backported, then it also applies without proble=
+ms (little fuzz).
+>
+> In both situations, once flashed to SPI it boots fine from SD !
+
+Great to hear it works!
+
+> Now no need to use the 'WiP' commit on Jonas' branch anymore with the pre=
+-built boost.bin as it is now built with the added commit in new serie.
+>
+> Still SPL is not able to load U-boot proper from SPI (probe failing) and =
+falls back to SD. Saw a few WIP commits on Jonas' kwiboo branches that look=
+ like handling that, couldn't get that to work yet. Anyway that is out of s=
+cope of this patch. So for the scope of this patch it does what it's expect=
+ed to do.
+
+For booting from SPI I've got this patch [1] in my local tree which I
+"think" solved a similar problem for me on a FriendlyElec NanoPi M5 a
+while ago. I haven't found time since then to investigate whether it
+is indeed required (and by the looks of it, it _shoudn't_ be, but it
+needs thorough investigation).
+
+Could you please try and see if anything like it helps with your
+symptoms on a Rock 4D? Except of course you'll need to substitute sfc0
+for sfc1, and <&fspi0_pins &fspi0_csn0> for the pin config.
+
+[1] https://github.com/flipperdevices/u-boot/commit/749a5e430fad2798c948bde=
+db948ebf238263bde
+
+> Will happily test a potential future v3 if that might be of any help.
+
+Appreciated, thanks!
+
+Best regards,
+Alexey
