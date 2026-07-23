@@ -1,102 +1,104 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106ACC531F7
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:04:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36ECAC531D1
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:04:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EB37640A14;
-	Thu, 23 Jul 2026 15:04:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EF1A760A5A;
+	Thu, 23 Jul 2026 15:04:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dIitOFfrFLT6; Thu, 23 Jul 2026 15:04:49 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FjPVsl6jmFJZ; Thu, 23 Jul 2026 15:04:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E25EF409C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1EC4D60A43
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784819089;
-	bh=h/+4LM9P3F7il96BphemaWQoYYU+6cPkExWQTLkjjp0=;
+	d=lists.u-boot-project.org ; s=default; t=1784819093;
+	bh=2ozwOLgMJim2ZkjqIfmz+3gCMv2EX55P8DmhlI+uCrs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mcdgIRGTxM0NokdDgMOSdVNZoshOkUumvczgob0bSJDpq4G5Y1TqHZf80okvFBnmW
-	 AidlSkQZC+9SjgQn+zv+4jDG2bFr8bcPJ9lXEFqf6YmbXfQgZCj7OAdHaf0YSYuMg0
-	 wqW70q7CZTpWK1HV/J70LW3xlVS6FXbTuU7aMGLZqPA2AeFSCpM8yjDZdBMpOkqH/g
-	 0GCe4sNbLRNKrfdoFSvOR2XGA5Q5GfXjfvOtaZvn1ZMelmAq5QA5xOKQ2NNTJBkXxo
-	 NtPGxscSl2EpmHLUN7Hu0+J1OoWXpql0gqH/uFDko0mqhrvwtvucd1jFiP2R+82pqJ
-	 7i6+2BeBeKNAA==
+	b=Ba9+tF21IsO61+Mk/+L3rrg3IjWEyHtl+8gUazd6Qv5lGIwiL74SQAhq8rkiI+cm5
+	 pahTX1ddQ7JtVdR3uRzH6y5YFRBC1KcfvRiBNl1ZFBckKcPVdDzv3d95heIGjyecl1
+	 xJLrDYJ2N1KuZW7uOcBYZqkeX2xef+FSRnVc2doo4jZoDGrkZb6zpQCQnAhuxpOD60
+	 vJrdNkwQoRqgQo+9mdLMisPSNn0QojAfyXQWl7norddXoP7ZwfNRNX1B9bQTRCZ6iG
+	 0vABCjOvzTGiuVyimXOX1rS7AKZVnVfwYS6n+Pe8ofEOH0q+d9am4/SsTbzxpiN0Nx
+	 fuPZtfXep++9A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E25EF409C7;
-	Thu, 23 Jul 2026 15:04:48 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 06BF7429
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1EC4D60A43;
+	Thu, 23 Jul 2026 15:04:53 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 372AB788
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E091180CB1
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:46 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 28FE580DA8
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tQzfRb-Ewb9E for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 15:04:46 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E476280ABD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E476280ABD
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E476280ABD
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:45 +0000 (UTC)
+ id YQird3ZhGntW for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 15:04:51 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3DFCE80F55
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3DFCE80F55
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3DFCE80F55
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:51 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B319803F6; Thu, 23 Jul 2026 17:04:44 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 6F29C80287; Thu, 23 Jul 2026 17:04:49 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24B5E80087
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 17:04:42 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-c1c50c1e29bso110592766b.3
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 08:04:42 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 8658480087
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 17:04:47 +0200 (CEST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-69a5ecbbfb2so1352234a12.2
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 08:04:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784819081; x=1785423881;
+ d=1e100.net; s=20251104; t=1784819087; x=1785423887;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=h/+4LM9P3F7il96BphemaWQoYYU+6cPkExWQTLkjjp0=;
- b=CwLuQRdolFjtCn0svunpxleAEfLihbww6XWeRnNX3zrVpXjd/63X1Lgv9gBjdKERWA
- H/0wfpxm6qOWTnknLFwzQLI1qLKBzgdnwTeoSSGezD9Bne2GISdA30bMElSRYYy+IMcf
- 1ZzqXVWmMhcGodi9EJziT9qh3Uu4jRxnZ+z+e1dmKkx458AEYSO3gSFxYMUiWLuSW4RN
- EHXBMHYyd4vP0P5SsBVNf8xy6ei55ue/Lc13YGk6J0ghVkGmEgcra61MmSX7zskXY6OI
- iD0mbUBjw7HC1jAIEmoqu0b405hgc1/W7+SmDUtdbu3Crh5oVaSIqW3ttaPzBj6pn8i0
- rpzw==
-X-Gm-Message-State: AOJu0YxbLcZzvZ+KGHQG/edLvG9SkjowdCrDzJW2bt98EMj7EWnEDm3D
- 3UFdSflVUe30Lku3cRizfYN8huhH8+FwqWs31iMyYE4IuKOknY3SqGjFQwlY86bFrDs=
-X-Gm-Gg: AR+sD127oDupb2Xgyr8ySdKBJOBZL+N67eU6oxLxa0hXPIGyzUFa5xCWS9zfTrn4GCC
- dJKhPYrw4lI17LHkLTVhszmBMvdrrnQ+af10BRAzNSXkkTAL08TD3vKgPw/HpDTrdOvoEqcmQdJ
- 8MBNJps62OtvSTbabfKYTxpqwLkxaqs5rArfVTKTRakcgfCGxDW29a6NcdGR08y0m3jQ5srtMi6
- H4fka2JuKM03lWB7afs7k9c5HMWmjnBqBhurQNrcmSutgsLCWSN9eD5gWNlLzjemiMMi/x0aadU
- Ga6UdukLy4AyZ5FpHNqikW+LURVeVSKMo94F8wpVFwnvKIlhuEE0lExF8EebGyJf6PFSG7jtapb
- 8rVUj3SD22+zrIlPc3Idxnf9+zPp2ha/qz3wf0RS2l2zQTaQ/DL18VOl1VfwDvMKkQ4ymoraMrN
- 9KyaD/61jSFGylOvJYN+10Ow==
-X-Received: by 2002:a17:907:d64a:b0:c15:deea:a178 with SMTP id
- a640c23a62f3a-c1c507ac77cmr156834266b.25.1784819081491; 
- Thu, 23 Jul 2026 08:04:41 -0700 (PDT)
+ bh=2ozwOLgMJim2ZkjqIfmz+3gCMv2EX55P8DmhlI+uCrs=;
+ b=gRPQob4IkmNf6mFw2nKYg+bdGoHM00KQXI3bNUoyMZZhfyacJh/pVxZ4r4ge5nmwsm
+ 9mVprksYTWESISXZRqgkRD0B3L0hWPBpyz87832o188dQy0hWKwqKPUKFy73ocmWF6S8
+ T1fTkx44J5AOVR3ee0GCeeGd8IlllrCJpZtUYbbZG04+8+UpGBEtje40expVH/TZbhRz
+ Z30We0Z7bJa2UBRKTF0okR1nA9buI1a3u9PntCV/pKqEE+JeAl0zFp7rzLXTPunWrXlK
+ Ft4Iap9/qKDU6/1Awy6gt8SfPcwFrEZiNpnbXQergjsRmCDk4tlnOPLq+WYnqLGTdLRT
+ Ffnw==
+X-Gm-Message-State: AOJu0YzMjFpton+zGF7Rl3tKzKwGnX99OHcjeccBStifKvJ3akyKJhjF
+ erpxljsBh9I8fxihYYFKRDznFeYZS8fWiD1z88QEMJ2tYPoKAC4knLednbKzrRz76Pk=
+X-Gm-Gg: AR+sD10KsHLg6kut0ugqSWsafo5XLuJ4hXlvWvzmBTft43CewvBo0xCpohb7AVzIn8T
+ UZ5vdTKcsi+vu4ZO+swQW1qc9P68ZpaqzLpF/dvXM7xJh8N8EKaUsMyR11lo2NRHAV7Y37mVEDo
+ gdUJX3W7ikxXaYrgyOVHVsvmBFfpFCLBsYXeHZEZW/9KI7dnokoSVd56S2+p0heDb4+SwEt7f9O
+ ZcAOvZHIBC5FvpiKOOliNtS3gHdc561EDFEDa6fqyH2Ww1vyQbrHco2axZcr1c7GzqsSTVGzcPM
+ wvf4p8u08opxWmLcRMSklYy1eK4tmmsOHb/SxSnGmDtCilHw+bqbiZx4MBpU7a3m3ayFT74zfeo
+ sH2JvBUvTrWceMJp6Vp8Fz0+EZB80HswfXogWN8MH4vJDNpJUxuYzmuyh0+qycR9nNMQN0KtEoG
+ IDSI+BQg0gvT5KX1iUFR8tIQ==
+X-Received: by 2002:a17:907:7b95:b0:c15:d091:3e51 with SMTP id
+ a640c23a62f3a-c1c5074aaa3mr180078766b.12.1784819086791; 
+ Thu, 23 Jul 2026 08:04:46 -0700 (PDT)
 Received: from alchark-surface.localdomain ([193.32.126.214])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1c32f1127fsm248769566b.55.2026.07.23.08.04.38
+ a640c23a62f3a-c1c32f1127fsm248769566b.55.2026.07.23.08.04.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 08:04:40 -0700 (PDT)
+ Thu, 23 Jul 2026 08:04:44 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 23 Jul 2026 19:04:23 +0400
-Subject: [PATCH v2 1/5] clk: rockchip: pll: drop misleading fout in
- rockchip_rk3588_pll_k_get()
+Date: Thu, 23 Jul 2026 19:04:24 +0400
+Subject: [PATCH v2 2/5] clk: rockchip: pll: fix rounding of negative k in
+ RK3588 frac PLL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-rk3588-fracpll-v2-1-382d113f3a80@flipper.net>
+Message-Id: <20260723-rk3588-fracpll-v2-2-382d113f3a80@flipper.net>
 References: <20260723-rk3588-fracpll-v2-0-382d113f3a80@flipper.net>
 In-Reply-To: <20260723-rk3588-fracpll-v2-0-382d113f3a80@flipper.net>
 To: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
@@ -110,35 +112,34 @@ Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Quentin Schulz <quentin.schulz@cherry.de>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1335; i=alchark@flipper.net;
- h=from:subject:message-id; bh=VWDigwXp459/OMvyRauAK56LwIr699nL+XgbjsfB6MY=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQl6Vavs19fevT+0tkbF2zifLhI5N2G8zGH7aQ9thusm
- CN+e7X2lo6JLAxiXAyWYoosc78tsZ1qxDdrl4fHV5g5rEwgQ6RFGhiAgIWBLzcxr9RIx0jPVNtQ
- z9BIx1jHiIGLUwCmOoiF4X/Ul9iT60I0L0m0/looZ7/zhsVNcevFBkrf2qTXmpRwXQxlZOhaqWd
- V3eQo3KORan2ZLy7Yq2s931mdM+KTo5y/PrkVzgYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1500; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=4wdjXksWxeDC+x4jByd4AmjxWXpFj9E6FeuPXUkc/6g=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQl6VabcZo+k89inZzo7VukKOqzLeGB83v+5+3e7hf3s
+ a2es9K8YyILgxgXg6WYIsvcb0tspxrxzdrl4fEVZg4rE8gQaZEGBiBgYeDLTcwrNdIx0jPVNtQz
+ NNIx1jFi4OIUgKnOfsrw3/e79CovhbZLS/0ibJ4F9LiW71y5l9VNSlkuJfaN2n2rIwz/E8x/auZ
+ FuDuUadvs+dL9Zdrqo04alqdcV3+N9JjoeEOaEQA=
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1784819081; x=1785423881; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1784819087; x=1785423887; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=h/+4LM9P3F7il96BphemaWQoYYU+6cPkExWQTLkjjp0=;
- b=ve5hrscNw5J3ayjBcBZoqXgPpb9uN19MkNmCyCl9F1zJaYP+Tzmh/ZRNGCo35NWxFk
- bZ4crjYIQ8JD8/nI1S48AOnaO2uLS4ymwlu56nPWVgFQzhIQ3lhCt4j8N9HakxfZ3Jru
- jKvezKPMAk6qty1ym/3lfS++x76gZmDy6GnSWjXnAxQNtpUKtNApFYcL5Q1sF6K64/jm
- 6MzxtUC+FbhgFCnfLwfWATFnJhLpnxS5rVzcyOPOApi7UHFO752awMLUTy2qu87bPFjH
- JkCeo9UrOtKV4G5XrPk8wk7nWCqvy/bI1ovulabUj8TsFcwRM5TYH5ybmnCVfA+e2GpZ
- AGtg==
+ bh=2ozwOLgMJim2ZkjqIfmz+3gCMv2EX55P8DmhlI+uCrs=;
+ b=tUf9uQrBGbH81VbSQl0h+eKPSshQw09PsfnPExYvmG1/vM5epHj1B2EAAqAbSmqTAq
+ 5YAL3R0zjOA4eqLYPZw2p/vsxBPx8X+fOHGpLW5qKrBklIgJhhLkxYXx2papvELkd+en
+ ZMdD+D+jBKsE6ZQ2fbxN5Pmk5HGOaHaZHBsziA48GFM+W/0CUGG0bR9zxT390cbWgvH9
+ jCETJFv2hTsEBDLCrK5Ua6mHCl+xzcdtY/vHucZNMaaihkOCCQ4q/jMt/qzA68huWBBg
+ VGn2WE7KO+Poo99Gbp7o6EGgtKEF6VG4KDCxYTTF6JdhH3KGXz1u+/hWXqKjo4j8oZJX
+ oIhg==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=ve5hrscN
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=tUf9uQrB
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
@@ -146,7 +147,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=alchark@flipper.net
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=flipper.net header.i=@flipper.net header.b="ve5hrscN"; 
+ unprotected) header.d=flipper.net header.i=@flipper.net header.b="tUf9uQrB"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -162,42 +163,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The calculation in rockchip_rk3588_pll_k_get() uses an intermediate
-variable misleadingly named fout, which is not the output frequency.
+Current code uses magical constants when rounding up the magnitude of
+negative fractional PLL component k. This leads to overshooting the
+requested rate when the calculated fractional part has less than 0.3 in
+its decimal part due to failure to round up the fractional part.
 
-Drop it and inline its calculation into the k assignment, which also
-improves clarity. While at that, also drop the redundant reassignment of
-fref which doesn't change within this function.
+Use a proper rounding up function to avoid overshooting the requested
+rate and make the calculation more readable.
 
+Fixes: 6bfb37e70209 ("clk: rockchip: rk3588: fix up the frac pll calculation")
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- drivers/clk/rockchip/clk_pll.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ drivers/clk/rockchip/clk_pll.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index 9dec40b1fe83..d0df3b8fb49d 100644
+index d0df3b8fb49d..69d2d182dcb5 100644
 --- a/drivers/clk/rockchip/clk_pll.c
 +++ b/drivers/clk/rockchip/clk_pll.c
-@@ -169,18 +169,15 @@ rockchip_pll_clk_set_by_auto(ulong fin_hz,
- static u32
- rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
- {
--	u64 fref, fout, ffrac;
-+	u64 fref, ffrac;
- 	u32 k = 0;
+@@ -11,6 +11,7 @@
+ #include <asm/arch-rockchip/hardware.h>
+ #include <div64.h>
+ #include <linux/delay.h>
++#include <linux/math64.h>
  
- 	fref = fin_hz / p;
- 	ffrac = fvco - (m * fref);
--	fout = ffrac * 65536;
--	k = fout / fref;
-+	k = ffrac * 65536 / fref;
+ static struct rockchip_pll_rate_table rockchip_auto_table;
+ 
+@@ -177,7 +178,10 @@ rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
+ 	k = ffrac * 65536 / fref;
  	if (k > 32767) {
--		fref = fin_hz / p;
  		ffrac = ((m + 1) * fref) - fvco;
--		fout = ffrac * 65536;
--		k = ((fout * 10 / fref) + 7) / 10;
-+		k = ((ffrac * 65536 * 10 / fref) + 7) / 10;
+-		k = ((ffrac * 65536 * 10 / fref) + 7) / 10;
++		/*
++		 * Round up to avoid overshooting requested rate for negative k
++		 */
++		k = DIV64_U64_ROUND_UP(ffrac * 65536, fref);
  		if (k > 32767)
  			k = 0;
  		else
