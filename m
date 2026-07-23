@@ -1,105 +1,105 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B71C531C7
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 08:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 704D0C531CB
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 08:36:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 19E5240744;
-	Thu, 23 Jul 2026 08:36:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 357ED60681;
+	Thu, 23 Jul 2026 08:36:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YWjXNv8SDXhS; Thu, 23 Jul 2026 08:36:01 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1RvU_LIlkMKW; Thu, 23 Jul 2026 08:36:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 35DFB407EE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 66D9A6069A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784795761;
-	bh=WkRA+mWhXHL4rmb1Uho6y4HAR9G+cmozATkGat7ZBDg=;
+	d=lists.u-boot-project.org ; s=default; t=1784795792;
+	bh=Joh4ANCqj9dM4v+LZqwizQA+3LY9J5GVENwg7JI/WIk=;
 	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=KyjpPOcptpT9xz3eUlLZEU1rm5o6Gq+SYL2WDyzn73KUy4Htle172qApB59etMF+3
-	 mnoJ2w92JjI3klKIR+RhSFOyjxzS5eaeUPO5hQhHGYdHUH/WfBvA9bcOXCYoLMXJs2
-	 cGNGs2yG2HRz+9rvswA8/VHx+HcTSUmPYyKZ2v49P1WvZ2SPK9z68yMX7jjFoJs/ZR
-	 X0fYb4EFpWklisdGVg5e8Wfv9UObaY5zUrVpC001A73fxnW/EEjjpZkwYzTcmr9WSq
-	 Q0j2JG2rGqZ5YZCeHumQIoF+JyVl8X2iKcQWOdsLWDl9LJpfIAEVwCn3CtYLBimTig
-	 InRsw7v6qrvZg==
+	b=zKA8wk9CQpiaPauIgsBamDKaKhejrg00XInLFjpAQ8II5y4U0LOLJTxFljB4rORrx
+	 rtAWIR9F4EZ9T5oLCYCWxKiHlEOYh6iqvrT8xn6rqtVH6AbTETKUtX2B/8j+FoCoOp
+	 i0w1y5+7D9LnHmH6xoWfc66LatDZL+UuKvCpQJ8iM2CVYjoIk/0/vpYBIi3ii/Z9mo
+	 6jHqnrcgnMeKyi/d8m8G/u2j4lmPzAgezKhhevmu5l2pjeVSytllOoBH5RJ/r25opI
+	 1BxAXqQgJf0JihL7jpQ4D0tayTmAru81nKRz4miuVqj1/YaSYgrENs063K2l54yIID
+	 lItVQ4zDXpNnw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 35DFB407EE;
-	Thu, 23 Jul 2026 08:36:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id C3D29786
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 66D9A6069A;
+	Thu, 23 Jul 2026 08:36:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 04483347
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A98D8407EE
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E9FF86069A
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4bAsiAUzkWTO for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 08:35:59 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DB_fIQ_BFvKy for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 08:36:30 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
  envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 9632340744
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9632340744
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9632340744
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:35:59 +0000 (UTC)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4047460681
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4047460681
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4047460681
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:29 +0000 (UTC)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66N7BgMN3285912
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:35:58 GMT
+ 66N7Bbwr234473
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:29 GMT
 Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
  [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjxm147px-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28xu4ee-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:35:58 +0000 (GMT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 08:36:29 +0000 (GMT)
 Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-3811279d51aso808184a91.1
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 01:35:58 -0700 (PDT)
+ 98e67ed59e1d1-385d2703b64so288835a91.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 01:36:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784795757; x=1785400557;
+ d=1e100.net; s=20251104; t=1784795788; x=1785400588;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=WkRA+mWhXHL4rmb1Uho6y4HAR9G+cmozATkGat7ZBDg=;
- b=n1fBKmGwvbHibTxf3Seq505GiSmuC83S+79b75hpaiUlm0GzVsgiR/x5e5rGvQMIe8
- wTtJbYW6WQTdxOJVP57LNyrRQjBWLCIujvP8Jd3sRgLCQUVDCXkpnCuoI6T66gPuBGCC
- rF2+3nE8KSO3kfQTBT6xkqMH9jya1FlfcybXiXs2xso7/mMeigeIjOav8EKK/TqlS8/w
- qN+618OAEBTaE8AtS1pgnhFcOn5PAZmuszJ0JmgAnDwd8VAFHllvrmuqiYzatgaiVB4X
- jt3eV+WJygodeqxzqx+IQuOmKJmeRHtjjXH0xbirarYSos5b6iAffxHx3kORTVEtoyKV
- wzHw==
+ bh=Joh4ANCqj9dM4v+LZqwizQA+3LY9J5GVENwg7JI/WIk=;
+ b=LZQ9Vt3D4gLhNj2JCPv2wfNjS+9kY0kxTIUyx34UmM5jKoF/6gqeDfZYsoma8my9ch
+ kIBUFPn5p0dQX64lrXZ7DJWsh28g+9KxKhdIiBDLQgyzvVJiPuOCeyIRp9CH2CcTrh3k
+ suxEWLiHNVr/2JesgJs2jTd7XmEgrmKD3EjB7OpIe3fszUVpavTgdB2l+D6GB1r1OqV8
+ dZYKvOgHoIBlU4S7E1wURjyHrWEzO+4y4mwCjYBdB4xEZWXcQzGovo6RlRAOntSJq3dt
+ ROa4wPqYtjUQdFsaEQBW92FL5SOGg0D8tX9+7eFFkjwsWctoeMc3rXLi9U6DVoGiPJvo
+ bsRg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqNzlBlWLRAQowwdwFF38orB04J9UFusJIpj1jrQeyK7FNZmvH4ckiMcowyhj5KxVLvDiYG3Sk=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yz6yZwns5Gt1qnvrui78gBmOaP4ktS8m2xrGoqCuI/df82y0rmI
- xTDP66QLxeJHwQ6nikxS/PoEn/nAOVLjQp1d/ztMUHqoA8qlYfYhoq+HyjvanlPrYCXuqYT1ico
- SnYgtbLCJjQ9Ycw16g64tmA6eK/q2JRa/6Zo0qysPyUyz6qPnvgY71uWJJ/KYWq1ZGLYE5cI=
-X-Gm-Gg: AR+sD10Ha45TsnimhYfOZudCBHDHzmpyNOt7WSW02WknLaxaFzSVQQtuoBuid/FNHjA
- 1KPPA7ny4ZhJ06dTK2roSpkDK2PWDDAXaiDCPoPRLxStKC+gQR1j2tvDQMRs3NU0WGwSgpySGD7
- SohlcPKsBNgyFJAPI7ZKp+4c0RfgdBhLOBenD/ZxXgnb+A+ejbOfCfauF+1jNljsIc/w92+DQo5
- Z8Solm6s4c95oxQMjCnngl6Q+lkRdad4OAq3BLkKXyFq37k+Ajk4xHQOw3LXHsKJB+rrmn9GA9L
- yoT3At0C4KLc3znrM9mzr9twLYHXygIpVH3Q+SbslI7agi5nEYXuvZdUGT1zFr/NP8+bwyMIN8A
- wKqF8+NKj25wM80NZbk3ePsNZnmOfe74ZiJ5pKJkpHEX+6zZaYZxlGohHfLS8HG7SWJo5L6YL6d
- 2jDyyVAQkp6S4T+Kup56vgCi/xPX+tkA==
-X-Received: by 2002:a05:6a21:6e96:b0:3c4:46ca:3348 with SMTP id
- adf61e73a8af0-3c44b2484f4mr2118430637.73.1784795757382; 
- Thu, 23 Jul 2026 01:35:57 -0700 (PDT)
-X-Received: by 2002:a05:6a21:6e96:b0:3c4:46ca:3348 with SMTP id
- adf61e73a8af0-3c44b2484f4mr2118399637.73.1784795756949; 
- Thu, 23 Jul 2026 01:35:56 -0700 (PDT)
+ AHgh+Rp1dKv63dS8miq9YThzR275mg4jnh9j+cCAdXBgfULWdTG38AhCgsnm21JQ9BSdaVONvPIhyaw=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yw6f22Mw890SWo19JPrQdT9ilJCcEEnHW7E6UerhMeTEVrsfrbr
+ +13CzL+4KR4l7584URqDkbH8UCdk7i3f3MfIvri7yiQLh6g0peTGc5eaehtsQyoJAfQ/ngta+wd
+ wRxME+TNKiKFlcIu2U3XbTB/AOnKiop/lIRtgcwkPmMQJZkrC2zXN5Fw906CS6IkoI5wNLuM=
+X-Gm-Gg: AR+sD13AXKEOhIX4tVkFgDgUh+sjfI/G83MR/KRl6tkjzfKOud3jYIfOawuia2EZjFB
+ WJ79QR8Rc5tunqtEz5+3cZw39TFm2DzsNBWYAyXa15e24bWzWtXZoZOiKw+2WGljx4E+QwoMRvl
+ ug/p1aMV6FQk757QPwqnV3cr1qDe+0YE+QLytbQbYZ3hExIRkyjJO12UkcuW/1QDH7v/iZifPZ/
+ wvVIqeh0ixasLojgn2qUR68WxkeQybH5MjApyy7wFfldoktbyfn/B+q+ewROHHLsA2Wh6mkPSsy
+ uG09Ve7zEKSI6fIGyUNSpk1j4/kgDVznA3QhMAx0BCGebhuYj8o0XZpuzhbvGCoA3g4BNeWSWpg
+ bSQngvgbWJXsc0lGg2EgJPTiMr39mc8TYBcxubCs8RoxzqyEtTt49stpoO7PkYMr6hfn/uXFAWA
+ 9due95sSgOGlalAMpzUx93i9LkGP5DOA==
+X-Received: by 2002:a17:90b:380e:b0:37f:e5b1:ec4b with SMTP id
+ 98e67ed59e1d1-38ec83d0c2bmr1833481a91.5.1784795788302; 
+ Thu, 23 Jul 2026 01:36:28 -0700 (PDT)
+X-Received: by 2002:a17:90b:380e:b0:37f:e5b1:ec4b with SMTP id
+ 98e67ed59e1d1-38ec83d0c2bmr1833454a91.5.1784795787830; 
+ Thu, 23 Jul 2026 01:36:27 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3147e1c7ff4sm18757149eec.27.2026.07.23.01.35.53
+ a92af1059eb24-13d130ce035sm13734604c88.13.2026.07.23.01.36.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 01:35:56 -0700 (PDT)
-Date: Thu, 23 Jul 2026 14:05:49 +0530
+ Thu, 23 Jul 2026 01:36:27 -0700 (PDT)
+Date: Thu, 23 Jul 2026 14:06:21 +0530
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
  u-boot@lists.u-boot-project.org, Lukasz Majewski <lukma@denx.de>,
@@ -107,73 +107,73 @@ Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Tom Rini <trini@konsulko.com>, Ajit Singh <blfizzyy@gmail.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH 2/3] clk: qcom: sc7280: use GATE_CLK_POLLED for
+Subject: Re: [PATCH 3/3] clk: qcom: qcs615: use GATE_CLK_POLLED for
  CBCR-backed gate clocks
-Message-ID: <amHSZT5+FMkWSGp/@hu-varada-blr.qualcomm.com>
+Message-ID: <amHShecJ1Irso6Fl@hu-varada-blr.qualcomm.com>
 References: <20260723-clk_gate-v1-0-9549cad4d097@oss.qualcomm.com>
- <20260723-clk_gate-v1-2-9549cad4d097@oss.qualcomm.com>
+ <20260723-clk_gate-v1-3-9549cad4d097@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260723-clk_gate-v1-2-9549cad4d097@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA4NSBTYWx0ZWRfX3bzRQ6tHqb8l
- /9OjJMf8/IBfVaNtilWJKcYhxnDSWOWfjmP/0O9b+GXiXttIY3SpeqhYN0L2kdmMZNPS0kVxzQa
- hgV+z+6tC2bNRRxq580huJMmMyZ624A=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA4NSBTYWx0ZWRfX7w0FtKByc5tZ
- Ik5XGiVIh97ZYZLpTrVkTx3jyLKxppgYCWc7URPnfbLxsKP/w1nK8WVS/Sye+Nxw/lWG3oe++l8
- gJhPucRg8YN7X0MfBgKjMXmqJ4jUbKpeSCChR3HHBwqeQAC7dblIQXgQarxOKQRJk2NRh6jfzLK
- rEBTRR41EENHpZ0vYd1zefvm6ibbf0CAzGwq+MNriFWUdisMnBwsYGq8PWx0RA4oG7KQUFXFeoP
- HBcIyI4YPBgIwUOhJkVwGBAE/i7ZKGE8id3JIVqGw+NFjCX61x23kM9YB8KMsOmDxgBVisO/Une
- FWU9RwSgJlVU0b4LKbe1D+TzVPbJZu2M7Xg0Uj9rgQNKo3vik52zSyWN1hJalu/+VwHo2junyTU
- T2q/juxUkI1DRHL6lqBzBKCudVstnMTET6mDaqGh7drGMcTda3URRWBnY84TldpReQQM6fMDtq+
- o+yBv8f6AZG0NkX2Y+w==
-X-Authority-Analysis: v=2.4 cv=Rsv16imK c=1 sm=1 tr=0 ts=6a61d26e cx=c_pps
+In-Reply-To: <20260723-clk_gate-v1-3-9549cad4d097@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: NxzA1IBjNmW9PsbHuVBcytJWSQ0hGdIY
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA4NSBTYWx0ZWRfX4EehUY5JO1xq
+ YoVsXO7aDRrpGKcfG1ALL96nBbAcobH1JISoLlfIAknt8Dj2WVlkWKpeTiAep0pGttB+uIXtMpJ
+ H7noBBc2Z8co5y5MC2jhIJKFCofcJ/Q=
+X-Proofpoint-GUID: NxzA1IBjNmW9PsbHuVBcytJWSQ0hGdIY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA4NSBTYWx0ZWRfXxa6iM04Z+DGS
+ JQB6ITbHJnp2ylTSdbM69vE4wslnsRyQAduz4e834IwGEqJ291s9CvlgU3GHv8bohfMbFHXwKaR
+ 5ya/rIPr71iJJrswq91pX2Rky2WDnOxI/wkW1XqwYoIS5FS+mGuSykUh6jD8xZHBbp6KeqgItIe
+ TEF1T2qyg75BDCgdClsBk1Ryk8UmNz7NWnVjgAoqbnzd/mwXDzldAO/Fq3mnFI+orQpjVXgxpxj
+ WRHBU5ZpE4d6bqQZtL5jIyQ+/+BSGIaWhGb9jfGruHZk5i2uyH3nYQTx0D1KA7s1lP8NL/Dm8bt
+ NwnXA7cwuQ6k4kedfJphWt6+/WPo6ae8l0K6ppl/9XY3iUFSTgSsJYVpj6piliVo8LSOCOYOXPd
+ 7E4jcCEZDbKlhZYJ1+yi6OSB4v8lizrwPlRsIT6XV8q49jXV9ZgcRO2M0f49/IP494WjrSHUhd7
+ /UF7JVe41FgAOP/LjFQ==
+X-Authority-Analysis: v=2.4 cv=WNxPmHsR c=1 sm=1 tr=0 ts=6a61d28d cx=c_pps
  a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=IdOtJQl2682e3q17SusA:9 a=CjuIK1q_8ugA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=kK-LisVwv4V8z5IJHdIA:9 a=CjuIK1q_8ugA:10
  a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: 5WgG8vn1tP5aBM6robQTssGRpKuAU7FA
-X-Proofpoint-ORIG-GUID: 5WgG8vn1tP5aBM6robQTssGRpKuAU7FA
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_02,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0 impostorscore=0
- malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
+ adultscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 phishscore=0
+ impostorscore=0 suspectscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230085
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
  cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=WkRA+mWhXHL4rmb1Uho6y4HA
- R9G+cmozATkGat7ZBDg=; b=NGdgL0tqbQfb7Q4qReVs0Kbzgoox0VgCrErntk4F
- wgnCXx5m+387u429ndraUA1NeC8m98BSkCgKrqz7WkfuNTurEA4crhE77s8Wau4Y
- IUoPiyed1yf6l+2dJEVditYVHd+lpw8LuQz0ASdplu0SEe9gnM5dIJeIaXjQ70zf
- MkZEeEz/l37e1P8OTDKzCS9TemP60nZwHafpK3TM5kb+eOT7ucI5vspUWwy86D0j
- XzTSneXdLqvf5RDrxWqQGwfSJ9jxQqZ0fKSTXOAaBkh0jeovwlQH3NoXIDvrNSwJ
- Ndo0dYye2KySatY5ASANGp+fpbx8UJ9oA/JdddNGLX6NGg==
+ :references:subject:to; s=qcppdkim1; bh=Joh4ANCqj9dM4v+LZqwizQA+
+ 3LY9J5GVENwg7JI/WIk=; b=PoATLfROVLEi3mU4gmbT1qSL6DoUrGyRzVAoA5/S
+ WUJct0rH/1JobNgb9OYMpiAXQjjuSp9/6s7iTpzwi1dpAIMjKsQKMb7b2kZAFqrp
+ KNHOAPcPl0L4gjwKPB2B6NKvovepRkWlRlUa7gjmz96rHZgwOEGItATMqu3w/d9K
+ yylxdoNsMzYLxyVzkOkKrH+xqJTJHp8bm20El4Pfdy6/y0s4UKuXdog9bgnMicg/
+ RhgPjotPBRKQNXPGMF+ZXMFxSkNxhLwV1RK/dF0HUc20PtM6GMXpMUcJgbek+DfD
+ 8j8YvqkT3TAUFWBFkvXjwqdFyvEPsaE3J+RAJXT7XyXb8w==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784795757; x=1785400557;
+ d=oss.qualcomm.com; s=google; t=1784795788; x=1785400588;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=WkRA+mWhXHL4rmb1Uho6y4HAR9G+cmozATkGat7ZBDg=;
- b=LWnSKe2JJZH8HrujMkTixals+r74egfmEL90OvvbxiFZ5h+dKLKRLoS5oclXk2B6LR
- 1oOkVzmBtAaeGI/HyXWIqk//i4yubkSfF1RLjhRPLl5Z3uS1FsF9xrRfYw8orO8uJ0As
- 3UHnS7lj5UeCOsNeKx298eHd2wu0e+Vk3BzDkyZvcpoB2+nlb2a4/9gZ6QTQCHLK/DaQ
- ruYSga8SkUKD2ukXEbPHWHVRZ45fSBXOlwIotgk5b2Yw5Xoztb+p0JJO/j0C7faPP+Qb
- GKy7/hqBydF9JyobdryPtT5MxZ8G3GlYD5l22tcs0EWeqtIn3lfxhhjhDPAk3wJ/oT7k
- WJBg==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=Joh4ANCqj9dM4v+LZqwizQA+3LY9J5GVENwg7JI/WIk=;
+ b=W80L39Qvl6FmZR+fK/Bgj0Q+n8QRdr67QG6RKZdnbWG/vsSbTzDjBr5oKFukZSIEl8
+ LOpySaYaoCHnp7Dk/hTvKb3Z3evC4V2Zz7ovfIFrhFXeWUIhcki+tfREvKNS/CgrsBoL
+ iciJ6POgzpVMS7iIvRaC0rBIwtrvixEiYSZT5KrXJ4xbPkOvmxqXjdkCwFqQT1ceSHQx
+ FBvAGiIC0JZoBdM1FKKstZHVg3T21g0MlWX8sVjE3a5dOlWPaqkkyhu440rGHywpZ4Dh
+ c7B+Rjb5Cq1malh+MOMmQKkE3FLZSGoFX2sXT+JKzhl3jGaSlmCuPGTP0CUkXrDZadMp
+ oFVA==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=NGdgL0tq; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=PoATLfRO; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=LWnSKe2J
+ header.a=rsa-sha256 header.s=google header.b=W80L39Qv
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -190,11 +190,11 @@ Reply-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu, Jul 23, 2026 at 12:09:47PM +0530, Balaji Selvanathan via U-Boot wrote:
-> Convert the USB3, UFS PHY, and SDCC gate clocks in
-> the sc7280 gate clock table from GATE_CLK() to GATE_CLK_POLLED(), so
-> their enable status is polled against the per-clock CBCR register
-> instead of assuming the enable write completed immediately.
+On Thu, Jul 23, 2026 at 12:09:48PM +0530, Balaji Selvanathan via U-Boot wrote:
+> Convert the USB3, display, and UFS PHY gate clocks in the qcs615 gate
+> clock table from GATE_CLK() to GATE_CLK_POLLED(), so their enable
+> status is polled against the per-clock CBCR register instead of
+> assuming the enable write completed immediately.
 >
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
