@@ -1,131 +1,97 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C170C531CC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 11:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 160A9C4452B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 11:22:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DDB1540888;
-	Thu, 23 Jul 2026 11:13:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0E43780FB5;
+	Thu, 23 Jul 2026 11:22:32 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id o0ZdfCTkpbmu; Thu, 23 Jul 2026 11:22:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E79E780FAE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784805750;
+	bh=7cPN/CJ3i2UJD1gvJqqQV7WT/Olqb4s4x1ssuc0Y9LU=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ixRLwfigLvfb2ca/r3FtcfbMAhI+2w6Sy1etcdjaI4T2l+rE07tOQjj1hvwdg10Ev
+	 KVGYtQLil3V8SBHeB1Nh3b7ErIUGyJHmQZnaGP+EJCe+Y2beJiGK8ZKeIAtmyh7PoU
+	 zOq4/29Gsw/4cfb3rynqQoe1DupJuN5JJGs7OtyUEPJNHz+/hZI1BBeLD3HxMdZfkv
+	 SVOng+XwuyZao30GBCG3c/dVRq7Q+veVkuIMMQNNPtOLe2N6WqLUTETm3XKygLv9T5
+	 z6864xsXy2o60tLeNmQ7oYKgtIjLtzLoSSh9fmWPAoowkurX6po4k4LY7pD2aJMO9v
+	 nu/+aD24h58tA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id E79E780FAE;
+	Thu, 23 Jul 2026 11:22:29 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6D492707
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:22:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5409040944
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:22:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GjiSsLHbCiAa; Thu, 23 Jul 2026 11:13:29 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DC27840889
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784805209;
-	bh=f4ovkd9/Q57yo4DHN/5MlyyloDWOb2R855fegTdRAxA=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=qDLZFSZNkN3waAP9kyITYYNn+EuDRdad80aVLAGl5U6TJ1I4lDcAbo6O4DmOVRnvc
-	 6Qmnr++wFIwApzjkWpt7O1B/WcYj1q07q7yznDb0c8gSzh42P3Ra/lcs+bK48SPB3z
-	 6GxJw0uNWtTaCQZz/Rnmzgn4NhLbGkgL5nOViq0y8O0ryjrc0XRppEHaC1olZ/7Ji/
-	 yKiVpnfZnqsDwWvORGetjKWXC68eEsAGXVKAKxIm1TkgKppZyuVJwg8aQRBanNHciB
-	 maL0n85Ppil4MrlxsHmWLQ31RvDC/asiX2X5FtdAnL5E0SBbrN1LOrJdARIjCSAyzk
-	 Wh4zaV8fPk6vA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DC27840889;
-	Thu, 23 Jul 2026 11:13:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 69485786
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:13:27 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4EBC740026
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:13:27 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IC0jIk--u0J7 for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 11:13:26 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org D0D3A403B6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D0D3A403B6
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D0D3A403B6
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:13:24 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4955de8797cso2865435e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 04:13:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784805202; x=1785410002;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=f4ovkd9/Q57yo4DHN/5MlyyloDWOb2R855fegTdRAxA=;
- b=aUmuJfauWt4j0KAIA2TUJ9LOmxM4GYDzuhrBbdb3iZx3t6tizcRzow+HzXiHcewrKG
- moVnudJBtgVaZ+9ZMHIM70/lt9vw1jUUKteAs3XFuIkb0DFMYs6Q6AlGlJpVtQPbUOGA
- ZKFOemX/cfP1vzw8vHNTEF+Gz9NF98ig/I9VXDV+NSeLPqbS37o07v5klzJ3MVg1wbG9
- bXuRYI8q+qjjBqWsrXXHCR11HwVktprsAD8Kc07AZE5puZVpc1H6+7Y/GOffW32zLhwZ
- OF2o4Rgdl7rD76zi+u7J+J76huVnziYdBH5JqQ1eUQ1CBi3g7lg9Vp0K8mTn9bx62cdV
- tW9Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoUyj1qTIz0jBhVNwvfPfpDU+QtPANiuFm2WyyHIo6m04eJhPOYLikQFwwmGjcTHU/3amgojFQ=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyByiMct6Hs9rb8kDyTUUIz+T37WnbI0Z/IjIdBJeTDESw9dZPN
- kX2a4E1mo6q2lavYlZI6MKUk5cfxwmbAp+d0UW8+CVFAVi31jfQZVYB6TvI7nwiyg1A=
-X-Gm-Gg: AR+sD11o3HhOd9PFuoVgA4lr9/lzxAHeRtQ1cA8EY7VJMc+7u8Dem2DTr7QTtxb7KGJ
- KlOTgk0jEVcBHhqxS38WrS3oh9eUJqk/WWwnhAoXx5f8ZdJghI5ey7h9CYyRMH2iFFb//y9JX5E
- eI03ayIafdnFxBJ6ZLRGO8NuVlxru+Q3yvDd86MC2a7M1wXHBybEIWSo18OnamnDObADpmxdjY+
- cKKh7o4nv7Mf060M5WyfGke7KDv3iNKdmgvGajBG8E6wCoXJruVf5f2EoywLXAN1L5QyxedRj8E
- mguQciIr2bEsqdm3cwGR09U/Jd/gXG0TMHJg/0Ozdzvqepmp7B/wykqWRny51DyEzVGgqqeka8S
- kfBWrDyM32boZJcU1d56cmgNSOWYKxBzEAEiPo7B/JaG7pRcsNu506Dq+TBUeEwPipPWblRwiku
- 9UbPNLUkxfQwkt5EImCykYq6+h6LotVCE7UAFjL40vXxPZZxOdYbEW94WjgLphFL6dBAg4jh3YO
- yN4vhBEfGCi39A=
-X-Received: by 2002:a05:600d:8444:10b0:495:3e81:76fa with SMTP id
- 5b1f17b1804b1-49573c9d45cmr21237815e9.15.1784805202001; 
- Thu, 23 Jul 2026 04:13:22 -0700 (PDT)
-Received: from macbook.homenet.telecomitalia.it
- (host-87-0-90-136.retail.telecomitalia.it. [87.0.90.136])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495653731b2sm220010595e9.4.2026.07.23.04.13.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 04:13:21 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Thu, 23 Jul 2026 13:13:13 +0200
-Subject: [PATCH] clk: mediatek: probe parent providers on demand
+ id TXa_9t_Vp6LY for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 11:22:27 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=153.92.25.144;
+ helo=mail-d15.seohost-mail.eu; envelope-from=krzysztof@kd-solutions.pl;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 81D504093C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 81D504093C
+Received: from mail-d15.seohost-mail.eu (mail-d15.seohost-mail.eu
+ [153.92.25.144])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 81D504093C
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:22:26 +0000 (UTC)
+Received: from 83-168-76-203.static.ipv4.korbank.pl ([83.168.76.203]
+ helo=[192.168.1.202])
+ by h74.seohost.pl with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
+ (Exim 4.99.3) (envelope-from <krzysztof@kd-solutions.pl>)
+ id 1wmrVQ-0000000FdWH-2acW; Thu, 23 Jul 2026 13:22:24 +0200
+Message-ID: <086d67e8-021a-4cca-83fe-281502142339@kd-solutions.pl>
+Date: Thu, 23 Jul 2026 13:22:20 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-ccaione-upstream-fix-clk-probe-v1-1-6091925d72f3@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWNSwrCUAwAr1KyNlDT0odeRVykMWr8tI+8VoTSu
- xt1OTDMLFDUTQvsqwVcX1ZsHAK2mwrkysNF0U7BQDV1daIGRTgUxTmXyZWfeLY3yuOO2cdekVq
- mlLp2R4khItk1hN/gcPxzmfubyvStwrp+AOWqgKiCAAAA
-X-Change-ID: 20260723-ccaione-upstream-fix-clk-probe-24a27764927a
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Tom Rini <trini@konsulko.com>, 
- Sam Shih <sam.shih@mediatek.com>, Carlo Caione <ccaione@baylibre.com>
-X-Mailer: b4 0.15.2
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784805202; x=1785410002;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=f4ovkd9/Q57yo4DHN/5MlyyloDWOb2R855fegTdRAxA=;
- b=SXUQPbrMai/iEDACMA8CEiWkEUhlOwkLu6iQXBoaJJ/OxI6Nk7+snWE1r8zDWr8L/w
- bV+/bajQfqa4y6UlI68yAiqLjcZz637/C9xor0GfvT27lb5YI8Y0p8mjwjXDxZSL2o+0
- 0FP4SrTV8fI5XdqQ2M8LdyVQjWrHzQFiATeDG7se5JN9dQmTESrVWsAcf+d22xv7eaLE
- qt6tPEjXSbGOpzIDlqW0mek3H8f4vTqOWppGIPx2ATv8YhlZ4FAhv88mJCcdhyOoZqYY
- LyiPbYC5bwrrwTvb2R4LLWAdqwQqcvTgbnPuVNcJPpzzwiqPil4kTm7NUF+OfZ7wa2/r
- RsXA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] power: regulator: ADD PMIC PF9453 support
+From: =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>
+To: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.u-boot-project.org
+References: <20240930035531.27079-4-peng.fan@oss.nxp.com>
+ <b80b20b3-1d30-4a2e-81c0-d974f91f48c7@kd-solutions.pl>
+ <CAOMZO5D-8Ti+j3fUBAztkFY7wYZJsLcDQaFmcvH6cSgPXB23tQ@mail.gmail.com>
+ <57257091-5b3e-4249-b7ba-b7d0a7699d51@kd-solutions.pl>
+Content-Language: en-US
+In-Reply-To: <57257091-5b3e-4249-b7ba-b7d0a7699d51@kd-solutions.pl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authenticated-Id: krzysztof@kd-solutions.pl
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; 
+ d=kd-solutions.pl; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=7cPN/CJ3i2UJD1gvJqqQV7WT/Olqb4s4x1ssuc0Y9LU=; b=KvwcVHV1rlr4e2aRvDqp7mUbvj
+ u3cAbBU9mM7cV2u208ms/7FWyhhGiowlA2AQj8Z4kEspzYMy69Aj8yyy5o+csTtgk+JzapLrW7Ac6
+ 3G4bfXNwUHTBx1wO59NudfxKfWbC7kW2+UDtH9WWYfguZjlnGwmzXKmHEW1uxElHuKwu537zyqQ6b
+ i/r2sPgqRvGWs+qvsj31b8Yw91RahRUMOz8q+E9I1Ei+pCsjl3qOp7VsQ56BxB4IwmHWyCrpLUNwj
+ ZbyQrzMSZ/8Pr8tZLtmKQZxsDp3IYH0O7Taln4sOqIT0xy15sC+e1KIoqGysvbMcfS3CcfX0upWxf
+ L0YELI8w==;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kd-solutions.pl
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=SXUQPbrM
+ unprotected) header.d=kd-solutions.pl header.i=@kd-solutions.pl
+ header.a=rsa-sha256 header.s=x header.b=KvwcVHV1
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,90 +106,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-MediaTek splits its clock controllers into separate DM devices
-(apmixedsys, topckgen, infracfg), and a clock in one controller often
-has its parent in another. Cross-controller parent lookup goes through a
-small provider registry that each controller populates when it probes, so
-a provider's registry entry only exists once that provider has probed.
+> Hi Fabio,
+>
+> W dniu 21.07.2026 o 13:47, Fabio Estevam pisze:
+>> Hi Krzysztof,
+>>
+>> On Tue, Jul 21, 2026 at 7:59 AM Krzysztof Drobiński via U-Boot
+>> <u-boot@lists.u-boot-project.org> wrote:
+>>> [1] is required to fix PMIC access on u-boot 2026.07 then both [2] and
+>>> [3] works fine for me.
+>>>
+>>>
+>>> [1]
+>>> https://github.com/kd-solutions-pl/rozalin/blob/main/meta-rozalin/recipes-bsp/u-boot/u-boot-rozalin/imx91sfrdm/0011-power-Fix-access-to-LDO-SNVS.patch 
+>>>
+>>>
+>>> [2]
+>>> https://lists.u-boot-project.org/pipermail/u-boot/2024-September/566287.html 
+>>>
+>>>
+>>> [3]
+>>> https://lists.u-boot-project.org/pipermail/u-boot/2024-September/566288.html 
+>>>
+>> Care to resend these patches?
+>>
+>> Thanks
+> Sure, will do
 
-Providers set DM_FLAG_PROBE_AFTER_BIND to be probed early, but that flag
-only orders a device against its own bind; it does not guarantee that
-every provider peer has been probed before an unrelated early consumer
-requests a parent rate.
-
-Concretely, in the SPL boot flow:
-
-  1. The MMC device needs its clock and probes early.
-  2. That probes topckgen, which registers itself as a provider.
-  3. The MMC source is a topckgen mux whose parent is a PLL in apmixedsys.
-  4. apmixedsys has not been probed yet, so its registry slot is NULL.
-  5. The parent lookup returns -ENOENT and MMC is configured with an
-     invalid source rate.
-
-When a parent type is not registered yet, probe the MediaTek clock
-drivers that declare the common provider bind callback. This preserves
-the small provider registry while making parent lookup independent of
-peer probe order.
-
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
----
- drivers/clk/mediatek/clk-mtk.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
-
-diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index 61d718f162d..3d37d190982 100644
---- a/drivers/clk/mediatek/clk-mtk.c
-+++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -9,6 +9,7 @@
- #include <clk-uclass.h>
- #include <div64.h>
- #include <dm.h>
-+#include <dm/device-internal.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
-@@ -57,9 +58,35 @@ static enum mtk_clk_tree_type mtk_clk_tree_type_from_parent_flags(u16 flags)
- 
- static struct udevice *mtk_clk_tree_get_provider(enum mtk_clk_tree_type type)
- {
-+	struct uclass *uc;
-+	struct udevice *dev;
-+	int ret;
-+
- 	if (!mtk_clk_tree_type_is_provider(type))
- 		return NULL;
- 
-+	if (!mtk_clk_providers[type]) {
-+		ret = uclass_get(UCLASS_CLK, &uc);
-+		if (ret)
-+			return ERR_PTR(ret);
-+
-+		/*
-+		 * An early consumer can be probed before all provider peers
-+		 * marked for automatic probing have been visited.
-+		 */
-+		uclass_foreach_dev(dev, uc) {
-+			if (dev->driver->bind != mtk_common_clk_parent_bind)
-+				continue;
-+
-+			ret = device_probe(dev);
-+			if (ret)
-+				debug("Failed to probe clock device: %d\n", ret);
-+
-+			if (mtk_clk_providers[type])
-+				break;
-+		}
-+	}
-+
- 	return mtk_clk_providers[type] ?: ERR_PTR(-ENOENT);
- }
- 
-
----
-base-commit: d0c49353a648e135f269a2953dc9326505ba87de
-change-id: 20260723-ccaione-upstream-fix-clk-probe-24a27764927a
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+I don't have possibility to test entire patch series which covers also 
+PF5300 there. I assume, I should create new patch series covering only 
+rebased and fixed PF9453 support?
 
