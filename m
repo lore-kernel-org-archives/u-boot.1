@@ -4,105 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A4ABC531CA
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 12:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06F3C531CA
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 13:22:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3AB3660A35;
-	Thu, 23 Jul 2026 12:54:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8D9AD608FC;
+	Thu, 23 Jul 2026 13:22:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ShDfrmS6ghwK; Thu, 23 Jul 2026 12:54:17 +0000 (UTC)
+ id NGdpEOLv41XM; Thu, 23 Jul 2026 13:22:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5F49C608EE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C2F32608F7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784811257;
-	bh=MR5bhVmClHcG+UtS/Fpc2DM9WqbsaDm/IXT+iW7tLhk=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=G3KxKmEl6jxKi7wKk5KcFWIXdZFdo7aJCZw502WNsvyjdHNA4sD/iVo5z2xbDr47C
-	 enhOzBbwiGu4Kq/U5FqZv6YwsYmMDsY3cBPx6ELmBvy5pxKvSVLAGjh/Tvk3SGOG4+
-	 CsbVLErlSOsuF8Y8FuAWcfD1DdLeBlcs6Pm4XlF7h1uEdQq6DFwg7WqnXD6/7gJ7fN
-	 3ttKdbWoV2GsKaxutSQ6R9UbVqrhDKvxTkPmD7e+q2NunK8OkQzrk/Fm3l1w4CQSqt
-	 Y1sTwSwTEzv047eJay3s96l7Ff8G+JV5cfQGbW+UN+bnrii+Fb/3LZs3L3wO9z2zwL
-	 /Xteokm56oxVA==
+	d=lists.u-boot-project.org ; s=default; t=1784812973;
+	bh=vZJjrrfKTqE6TFhXlt97S69+zZSsGJ1OzQaUBSsZPVg=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Bq2YR5FdjUL5kRc97EFmDcSN7mdzkz0FAaXW7u38G4CILyHsp1Sf2XOaQGriEj4P4
+	 vLlALFvAjDnEtr10Wud4mJZL5/OnFC2MkJgKCrnaQPAl4sdjktqc4JRpuBz7V6J37J
+	 H2/6VBps3I/fgvAm1DBCLBv9JJdDZ6mWn+4qOjVmEwcFpQ//tN6X6QBpGEkFmYQ3oW
+	 rhI2OsMXetCdREeGySojOf5ALsbQZ/flTYASUN9eDmBQ894vzyOwwMV5W+J6Zs+9n8
+	 2c2N2xaHfIvNdVTqSINW2tVI0CEmAktzN+d1KrJKmyqpKxIyvVDzDlLdydSTeWCEqD
+	 iaQKPrXu9S5Jw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5F49C608EE;
-	Thu, 23 Jul 2026 12:54:17 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id BE30242A
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 12:54:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C2F32608F7;
+	Thu, 23 Jul 2026 13:22:53 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id F15C82E5
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:27:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AFA4780E3A
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 12:54:15 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E29E480EB9
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:27:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QCUmErv9VRov for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 12:54:14 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 9703680E64
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9703680E64
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9703680E64
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 12:54:14 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C52D803F6; Thu, 23 Jul 2026 14:54:12 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 898CD80117
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 14:54:10 +0200 (CEST)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 669BF600AD;
- Thu, 23 Jul 2026 12:54:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F74E1F000E9;
- Thu, 23 Jul 2026 12:54:06 +0000 (UTC)
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, "Nicolas Belin
- (TI.com)" <nbelin@baylibre.com>, Francois Berder <fberder@outlook.fr>, Sam
- Protsenko <semen.protsenko@linaro.org>, Igor Opaniuk
- <igor.opaniuk@gmail.com>
-Subject: Re: [PATCH 2/2] avb: free mmc_part allocated by get_partition()
-In-Reply-To: <20260712-avb-fix-memory-leaks-v1-2-51d6d5a42631@gmail.com>
-References: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
- <20260712-avb-fix-memory-leaks-v1-2-51d6d5a42631@gmail.com>
-Date: Thu, 23 Jul 2026 14:53:59 +0200
-Message-ID: <878q71989k.fsf@kernel.org>
+ id iihwQATDdOQj for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 09:27:07 +0000 (UTC)
+Received-SPF: None (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6EE9080EBC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6EE9080EBC
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6EE9080EBC
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:27:06 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69f2c67650aso726371a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 02:27:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784798824; x=1785403624;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=vZJjrrfKTqE6TFhXlt97S69+zZSsGJ1OzQaUBSsZPVg=;
+ b=EE1KJij9GIepKglCvRo9t6LocmW8qudXEQnH0FOAkz2qpyMRVSYpfGQVrLuBbcOGKo
+ qxsWWx06J+y7T9i77463Cq6kuF0YNw7JlhbzdaJEwFhqTPOOOUJr3yLpm+g02aqwKTUw
+ ISnKz0Ll6VTCKicyLTGex3rLvW1EJQufhzWN9CAkKycSVFTVKaPPZ1nCGqbNdIcMFGNA
+ 68nX/eXDz9yZdWfdNntfy0hNrK2kPynT9pMWluCQ3MdC4QBw5aNTTaYG+mz3A+2eeBOw
+ iW+CFfU/cOw/rcy1/ffN0q/QcGsbocPosZt+5HUK659Y/Z5mSi+/ot3WT3GvdqBWg+JG
+ cnFQ==
+X-Gm-Message-State: AOJu0YwR0EAp0IoprFlDkOctzqDMH3mwXYEvBcoC156CjtoNkivvfqoa
+ RX+Wyflc6uzDfreu2I0Q3MKQrfKnBGCNa2BILsT9lL7IRMwaDtY0eOzyrfbvu6lZZeE/2ByvHSj
+ ZvN0KxbU=
+X-Gm-Gg: AR+sD1176gypM32VakqQJBtobDmMMQ/h1rh9GpdByBS5LjhQqwIyqGDOI/lEzYwOn+2
+ 4ptsMa13sjuOoHJ7vPnfEZ9IESfph3LCpS38gITXgWF4H3fbr5Fi81okVuW0XhZSVGu52uNy231
+ 7mAy28Gq+XPJMbXOalgIu6GHHlTJtoUaOwiek4i8JaHVRZiDu9PU421uEljWGDRrcku+GVLel2Z
+ ZiYNhL+OqR7WcRGS0PxKY+az9OLIvYct8yHAtuN4w9BAAWoCaLpIcFf/xDaCyhfHH6Cf2qTavOL
+ 27dKjFpN1TD6+3Uk++VDe3Eow23nj6UdItDbDnEUi2LdAl1otCHPtPSwSoGodAPhnZe4Xg9xHgX
+ nFYsSmwNurPMIOptzFNWk2qS/D0YbVRq9Eh3HnDizro6SOazjsUn9XSQScVWzlJU7rbj9fvI/4E
+ fh0XZGv23dER7fFglTe1TJhToip/p8+RY8X4KYV+REMvai7bvQeg/ss4p1tOasUM+f/D8=
+X-Received: by 2002:a17:907:c0b:b0:c16:1a3:9022 with SMTP id
+ a640c23a62f3a-c1c509359b9mr124533266b.38.1784798823907; 
+ Thu, 23 Jul 2026 02:27:03 -0700 (PDT)
+Received: from [127.0.1.1]
+ (p200300ff0f0aed0099e3f3dc2d051096.dip0.t-ipconnect.de.
+ [2003:ff:f0a:ed00:99e3:f3dc:2d05:1096])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c1c32af244asm206455266b.27.2026.07.23.02.27.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Jul 2026 02:27:03 -0700 (PDT)
+From: shj <shahriyar@byteray.co.uk>
+Subject: [PATCH 0/2] fs/squashfs: fix directory table integer overflow
+Date: Thu, 23 Jul 2026 11:26:49 +0200
+Message-Id: <20260723-sqfs-oob-fix-v1-0-4fb6d9a49e8a@byteray.co.uk>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFneYWoC/yWMQQqDMBAAvyJ7dkETicWvFA8xWXV7MG3WFkH8u
+ 1s9zsDMDkKZSaArdsj0Y+G0KNRlAWH2y0TIURlMZVzVGovyGQVTGnDkDUm1d40NNj5Ak3cm1df
+ u2d8s3+FFYf0/4DhOaEj8k3AAAAA=
+X-Change-ID: 20260723-sqfs-oob-fix-e202a643c3d8
+To: u-boot@lists.u-boot-project.org, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Joao Marcos Costa <joaomarcos.costa@bootlin.com>, u-boot@lists.denx.de
+Cc: Richard Genoud <richard.genoud@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Michael Zimmermann <sigmaepsilon92@gmail.com>, 
+ Eric Kilmer <eric.kilmer@trailofbits.com>, Argus <argus@byteray.co.uk>, 
+ shj <shahriyar@byteray.co.uk>
+X-Mailer: b4 0.15.2
+X-Mailman-Approved-At: Thu, 23 Jul 2026 13:22:52 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1784811247;
- bh=MR5bhVmClHcG+UtS/Fpc2DM9WqbsaDm/IXT+iW7tLhk=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=Srtzjv/KP7JCUVKbdOX0LLabwXD7XXAjdyNrX8TSqezZDGW4JCZ/W8/b/ZedReLZB
- 1BGEyfe/GipB6At2+WxXxoYkFDzwSyaT85FAl9gDNx0x3Zj7f6NqJCE+hXBJClLsWz
- rdBYB96V5CLiCkvCZKH3qBeLq9WhE9gzBTEsS6duaE1dtx8HZGoCy3dHWNypbW3vAW
- RszzP4ZceufHgkKUgvVgllreGalqTzOAtiwUyE2Z8ApYeOM+QVHuvlHQcA4Hl+Xx2T
- fQI8zu/nqBuIp8KG/Nsv8PZiP9aIB96Z04PMgoBSf1evwnqzvwqNZ/Zs/viUUtUMSk
- nlJv/IXuccBhQ==
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1784798824; x=1785403624;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=vZJjrrfKTqE6TFhXlt97S69+zZSsGJ1OzQaUBSsZPVg=;
+ b=0QG41V38EADnJd0RXs3PRtWUt2tQ5zMWLMWASsxlZoNOuaHrHKdqD+vIqOQl6oLbov
+ Gw8OIVTAmOPJP7MHqJy3a+WdngRp/ogWjdcr3lh0A5Y9i4ZiPASEkmQgAUEgm4XCUZOE
+ BqADa0lbgOLN3u0yBux6uqmxavvZoi/RHtCWrlWvo9LFluGoaKEK9xjKvcjJ0Jf3GjmU
+ SslPLt9wG3IWWKOejRHY1r+lwC+6Y84PVkaDFvq3TfiY1qRB4vnIBJnQ/jOTPKJajLKL
+ csavuycQ60i6FvWPnEwEbqcMWr96lmRHQ6fU+XneMPSompo763/uG1MooP6nXlSGzhgG
+ 67tg==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ dmarc=none (p=none dis=none)
+ header.from=byteray.co.uk
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=Srtzjv/K
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=mkorpershoek@kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="Srtzjv/K"; 
- dkim-atps=neutral
+ dkim=pass (2048-bit key,
+ unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
+ header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=0QG41V38
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -117,24 +141,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Igor,
+This fixes an integer overflow in the SquashFS directory-table reader
+that leads to a heap out-of-bounds write, and adds a regression test.
 
-Thank you for the patch.
+sqfs_read_directory_table() sizes the directory table with an int
+multiply (metablks_count * SQFS_METADATA_BLOCK_SIZE) that wraps for a
+crafted image, under-allocating the buffer that the fill loop then
+overruns. It is reached by listing or reading the image (sqfsls /
+sqfsload). Patch 1 guards the allocation with __builtin_mul_overflow();
+patch 2 adds a test that a crafted image is rejected.
 
-On Sun, Jul 12, 2026 at 10:50, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
+Based on v2026.07 (fdfe2ec48d5c). A reproducer is available on request.
 
-> get_partition() returns a malloc()'d struct mmc_part and only frees it on
-> its own internal error path. None of its callers - mmc_byte_io(),
-> get_unique_guid_for_partition() and get_size_of_partition() - free the
-> returned pointer, so every partition access leaks one struct mmc_part.
-> A single "avb verify" issues many such accesses (footer, vbmeta and the
-> hashed image chunks), so the leak accumulates quickly.
->
-> Free the descriptor in all three callers. mmc_byte_io() is reworked to
-> use a single exit path so the partition is released on every return.
->
-> Fixes: 3af30e4443aa ("avb2.0: implement AVB ops")
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+Signed-off-by: shj <shahriyar@byteray.co.uk>
+---
+shj (2):
+      fs/squashfs: fix integer overflow in directory table allocation
+      test: squashfs: add directory table overflow regression test
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+ fs/squashfs/sqfs.c                                 | 23 +++++--
+ .../test_fs/test_squashfs/test_sqfs_overflow.py    | 75 ++++++++++++++++++++++
+ 2 files changed, 94 insertions(+), 4 deletions(-)
+---
+base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
+change-id: 20260723-sqfs-oob-fix-e202a643c3d8
+
+Best regards,
+--  
+shj <shahriyar@byteray.co.uk>
 
