@@ -4,144 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDEDC531CC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 20:41:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA031C531CC
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 21:01:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 28E4660AA5;
-	Thu, 23 Jul 2026 20:41:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5655160AEF;
+	Thu, 23 Jul 2026 21:01:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id j_vk91FHa3dx; Thu, 23 Jul 2026 20:41:46 +0000 (UTC)
+ id HnoWjsrSCLwm; Thu, 23 Jul 2026 21:01:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 58EF660AB3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4838060AD5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784839306;
-	bh=1sGD75Zgbcjt4HBLCC0KvMOWseUdd2ELfXEIf1kwqlg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784840513;
+	bh=cZ2QdSTj+KNZdUvd6PXhRDblcytfFugECWhzxdGMo0Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=iUXjIRaUdThaXFCMieOmMj97aojImuk79OhyKK0VyAV1dUujVb/5fwcQRsCR8nNxV
-	 Cj7AtkHxp/bUXtyyEQ7JjH2sNwpJi4r/oJQnaA3yWBLG7ISwsHU1Xt+4kmuGAb1s9k
-	 MnwCOcdw4PN5db06+akJ+2Qp8DyYJwXS3pt2QyWhV+StDVLPyWERUPqCsFh+jUJCx0
-	 IAEOwcmTSXcBv45KIvJU5Q45PtttAsmyCOaAhOQOAKbDt2PCtlQHUxBimUfCT80BFv
-	 0EijBHKBzt2epwMHSdu/xmMHanad0TsnURJn8tphUXqFhcYaPf9/KgKSpvZFBmMnhH
-	 nIe1llcq8Xrtw==
+	b=oa5TE7zMiMN26n19qT90Oe6UKKhb87rdLuA+m2piwYhtxE+LugdDXtlMDrsRwKSuk
+	 c8eIZLaNafsD2bZxrHzZRUHJdixo5YCYd66uaZw42p9dECAgRFVco3tpjdUE3TDO9j
+	 Z0oxa9pHAt0fAd3caGLR7zZzKxDbK0aYQdA7PLV5JKcWK/jrhyP+0l+Srzilz4oHim
+	 g2YP5ubqNtrljjAeXGQDAMLCp/KQG0/C5B/Shy/+dzBSlL83USqt1yOIw+AgDzLc+f
+	 kb80uAXLgx0EiLnxsI6XIrRoXnLlBibsgSrtbv2ssxawyu3LDaXkDG7xb5aL4V+uuH
+	 N5MsZMC3I39OA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 58EF660AB3;
-	Thu, 23 Jul 2026 20:41:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4838060AD5;
+	Thu, 23 Jul 2026 21:01:53 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3906A429
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 20:41:45 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 46C65707
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 21:01:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1EB4760AB3
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 20:41:45 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2C57A60AD5
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 21:01:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lMBiVnhxyGif for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 20:41:44 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=ghidoliemanuele@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org D504660AA5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D504660AA5
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D504660AA5
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 20:41:43 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 67D0F80287; Thu, 23 Jul 2026 22:41:41 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB3AC800AE
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 22:41:37 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4953de5be0aso7495465e9.0
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 13:41:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784839297; x=1785444097;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1sGD75Zgbcjt4HBLCC0KvMOWseUdd2ELfXEIf1kwqlg=;
- b=ojlVZCGpw4pHNy7YCAPLNXKkLLKIYWItVNdDhKp5pY9hqNltAlShdvpA6JnXzOdSWU
- nr6EC0wYZAS3Du9vu7ajjTokgIFRbrqr4yrxHqW8W7bi1LbxCB/oiuaKtdlVm0gDw3cO
- LVSrhuzHXADVecm+iNI8QPwBB64L0xElt+MxM95fRfBcB+oKU4E1W7tueD/4E/HfGn7Z
- dGNQpRb5kbfYve9G2e14HJ6cIbs9CFuHFfGlDLZnZwdiAZeXQHNs15TRxJ6X28MNFT1p
- epbg+Ac+2hM0LvsahSauwZ6YKxI0uyk4yR7PCRdflpr0mELcATB0Zbtj5ONWPaVrusVp
- Gckg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpFtN/qM2nJ+tLxLhM4iM5r7Y6Y0DnEHGsEmCc0RlsfWcWHQuJtaUSlE6FnhMmbGN2w0JYKfBw=@lists.denx.de
-X-Gm-Message-State: AOJu0YweygPKTzOzwtWiCHced2yYXCLDt0Vf8xmGYRrNiH7UJiMaHwiZ
- W3ufra7Pj2dkG+snWgYC7Mro2PSeTL43PuBTIQHhKlSALxyWNengRzej
-X-Gm-Gg: AR+sD10Lt1NTBVB33CL9ftQn4X9MR3r/HB2Ea/8C/jMTpQoogaIOJy5obplPrTf59wG
- bpMT1f4dhdx63jkjD7rcDkwcwX81WYxOg92sfpEblP+uCYdqrE+oDJYLcbrMou8TrZ+Edeer5G/
- FbUXZozB6cF/VTVU6hVGf9QPBTEA1w9OSbx5+qoQ4hsVfJxaw2xKRfHn9Q21/YFz3yNrRivDUMS
- YOxK+REFLicw/oaoWiGOp1x31iH/dFNofcQMse8iKnUZ9bEtlbjQCFMpWXZ7UG6/YamKa+cPQnN
- iCrqpTmXrJ7BiKd3oNNi+iKYv7EAyP2B3VuV0TVPNL/8yCSKVutk1kUB9IY6Lshy7TAvSlXZmWa
- GwiojPj+S/gxLqaRr2VJ8LCkrPv40M1+IvFhQu2EfGA1/0ljN1XVKaxmC22CHNBdvfoyIe2JSfF
- 8ZwGRCSN2ajbJu5KysR8nplrZmw5fnJZXSoT9RW7a/gUNdGeTxVziW6qu99ks=
-X-Received: by 2002:a05:600c:2d8a:b0:493:f318:3bc6 with SMTP id
- 5b1f17b1804b1-49573c9d709mr34909005e9.13.1784839296843; 
- Thu, 23 Jul 2026 13:41:36 -0700 (PDT)
-Received: from [192.168.68.84] (host-87-5-153-198.retail.telecomitalia.it.
- [87.5.153.198]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957bfa79d3sm5792195e9.2.2026.07.23.13.41.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 13:41:36 -0700 (PDT)
-Message-ID: <140e540b-08a7-4fca-a6fa-ee398d92dbea@gmail.com>
-Date: Thu, 23 Jul 2026 22:41:35 +0200
+ id zTt4_i4apzbY for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 21:01:51 +0000 (UTC)
+X-Greylist: delayed 338 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 23 Jul 2026 21:01:50 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BBF2D60873
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BBF2D60873
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:41d0:1004:224b::b2; helo=out-178.mta0.migadu.com;
+ envelope-from=funderscore@postmarketos.org; receiver=<UNKNOWN> 
+Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b2])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BBF2D60873
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 21:01:50 +0000 (UTC)
+Date: Thu, 23 Jul 2026 20:52:26 +0000
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+To: u-boot@lists.u-boot-project.org
+Cc: u-boot-qcom@groups.io,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH 1/7] qcom: capsule: add FIT capsule support with
+ multi-partition
+References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
+ <a4b3eeed-0789-4bec-b29f-d13e3e3b3016@oss.qualcomm.com>
+ <CAC_iWjLQxOVb7H-Mib7NAYLmzumhL5uBi8dZ_ufCksJMrcQ8OQ@mail.gmail.com>
+ <89329f38-d2c5-4014-a1e1-44ccfd09b3bd@linaro.org>
+ <242ab545-c274-4b65-afa9-2c3ab056a918@oss.qualcomm.com>
+ <CAC_iWjK_U_TtNJsXjgVggXa28iHb9212tEQEdQn8wK2XqXmJiQ@mail.gmail.com>
+ <19959cc3-40f6-4e9e-801d-8f7c40edbf70@oss.qualcomm.com>
+ <CAC_iWjJSNekv73X0n3G-qPjh60F88R=CHybxHzBUo1DDgGzrqg@mail.gmail.com>
+ <37b24004-5080-43cd-923d-8db6d09f40ed@oss.qualcomm.com>
+ <CAC_iWj+yLvqqunA_j6WX_0v_DSkf6xwXPSL+kysrUM7G3isSKw@mail.gmail.com>
+ <8de79ca7-e826-4a61-b380-2bdf01c39871@oss.qualcomm.com>
+ <4b344c4d-ef0e-4595-a6ff-10629cfaaa82@linaro.org>
+ <936f99e6-bd6f-4168-bfea-8a8c777b4c52@oss.qualcomm.com>
+ <6748951d-d720-46bd-82bd-19c4d97a6f20@linaro.org>
+ <73fa32f5-0d10-4f95-a02f-2cac91d072d6@oss.qualcomm.com>
+ <013d5bbc-983e-4386-b236-8c63f4406fc0@linaro.org>
+ <aaeb155a-6195-4574-b4b4-fa7d6a88a00f@oss.qualcomm.com> <20feda0
+ 9-ab10-43e4-831b-6a8647f5c62e@linaro.org>
+ <tin7mt.2xum2ewhgltm7@postmarketos.org>
+In-Reply-To: <tin7mt.2xum2ewhgltm7@postmarketos.org>
+Message-ID: <tinbh7.cnq1zhtzztno@postmarketos.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Regression on colibri-imx7 due to commit 9c1b13b3fd27 ("cyclic:
- reduce get_timer_us() calls inside hlist_for_each_entry_safe()")
-To: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Stefan Roese <stefan.roese@mailbox.org>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>
-References: <27d77997-2651-423f-ba1d-652d5a133e39@gmail.com>
- <23084e8e-ad4c-4f37-872a-9d2a8feb325f@mailbox.org>
-Content-Language: en-US
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-In-Reply-To: <23084e8e-ad4c-4f37-872a-9d2a8feb325f@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+X-Migadu-Flow: FLOW_OUT
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784839297; x=1785444097; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=1sGD75Zgbcjt4HBLCC0KvMOWseUdd2ELfXEIf1kwqlg=;
- b=GhC/dLcDQRReYHT1X1p1DkEwSDN72syRptjD06ELxTjzemYE1+v5Gjl+o4aXdJWK3X
- WVclaTQP0CNaA2UnadVGVHY21ogMKITyM8gqk5Hl/isHFaVssBrz3iAT4nuyRL7CbMYg
- yiiq0Gxc201/1QUo8wkYSa+H9SvayUDcd7HWSD692xicUyffAy6DJkKFKFPyXWl0356B
- C3E5P9qf2FAVMqF7unQs2K9JRsG0DSNG1c4Qpf+cgESt54PYsneGmFhGUZeN1HalqhIH
- Q7KQ9ixRDOdSoyMn5aTmq+vBBbGD6Hb6YH/X4SbDwUa5XFr+qRx+AeGKp0cm7fa+8tPr
- IAAg==
+ d=postmarketos.org; s=key1; t=1784840164;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cZ2QdSTj+KNZdUvd6PXhRDblcytfFugECWhzxdGMo0Y=;
+ b=CM1ZVx2RHer8G4bbivqpNFcoiJmz39abt3eLdWhqm76nxksEZ9MDkRbahTL8C24wiknFnK
+ i8/o+PXMcESqI6LwAM2Q+vuloEf4SiDUPtjmlcEDVn69yiYF5Vaqi4ky3DZ2mPh2knhr+4
+ Mxl4HeR5tKaLfDXjue96TAbprZVZ8ELIlZzDYyXhEezMrb65nuQOs/qTXDsZgvxDDe45Ue
+ mSCUyY1eJkqUspLcq29MSn3vShQYZQcT7cAXz5k0Qu6CRX6y1Nc8OXu/zuMwgbEIhGVX5i
+ L9LZg93gVm2lGUzoyDQR3n1xscQYxGopmuzRUqD+BHD8202pmzSPkMvYdy8U+A==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=GhC/dLcD
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=ghidoliemanuele@gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="GhC/dLcD"; 
- dkim-atps=neutral
+ dkim=fail reason="signature verification failed" (2048-bit key,
+ unprotected) header.d=postmarketos.org header.i=@postmarketos.org
+ header.a=rsa-sha256 header.s=key1 header.b=CM1ZVx2R
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,45 +131,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+(It seems I sent to the wrong mailing list, what I wanted to send is below)
 
+On Thu, 23 Jul 2026 19:07, "Casey Connolly via groups.io" <casey.connolly=linaro.org@groups.io> wrote:
+><...>
+>> I feel we are complicating it by trying to go for dynamic fw_images.  
+>> 
+>> Rather than introducing a solution that diverges from the UEFI
+>> specification, shall we use a board-specific static fw_images[]
+>
+>Well, the solution I proposed at the end very much doesn't diverge from
+>the spec, that was kinda the point.
+>
+>> definition. This approach is simpler, remains spec-compliant, and other
+>
+>Simpler for you to implement or simpler to maintain? I think that's
+>quite debatable...
+>
+>> vendors (like NXP, TI) have also implemented static fw_images (in board/
+>> nxp, board/ti).
+>
 
-On 7/23/26 20:35, Marek Vasut wrote:
-> On 7/23/26 4:53 PM, Emanuele Ghidoli wrote:
-> 
-> Hello everyone,
-> 
->> I found that Colibri iMX7 no longer boots when commit 9c1b13b3fd27
->> ("cyclic: reduce get_timer_us() calls inside hlist_for_each_entry_safe()")
->> is applied. Nothing is printed on the serial.
->>
->> I bisected the issue: booting the parent commit works fine, and
->> reverting this patch on top of current main also restores
->> boot. It's not yet obvious to me what in this change causes the
->> regression.
->>
->> Would it make sense to revert it until the root cause is found?
-> 
-> Give Patrice a bit of time to analyze the problem.
-> 
+It is worth noting that mach-snapdragon isn't the only one using dynamic
+fw_images[], Amlogic has also been switched to that approach too, while
+previously hardcoding them per-board (mostly was only done for Libre Computer
+boards with an SPI flash). On Amlogic side though we just use one giant image
+with U-Boot and all the other bootloader stages before it, though with
+U-Boot SPL enabled on GX SoCs this image contains a U-Boot SPL binary and
+embedded FIT image containing everything else.
 
-Hello,
+It really does make it much easier to bring capsule updates easily everywhere
+and I think its advantages will become more appealing to other maintainers
+over time. But just saying, Qualcomm boards are not alone doing this :)
 
-after the regression, get_timer_us() is called on every cyclic_run() call,
-even when the cyclic list is empty. On imx7 this happens earlier than before,
-when the timer has not yet been initialized: get_timer_us() calls get_tbclk(),
-whose value is zero, and uses it as a divisor in tick_to_time_us(), leading to
-a division by zero.
-
-I would fix this by ensuring get_tbclk() returns at least 1 on imx7, but we
-could hide bugs in this way. However, this bug could also be present on other
-architectures, so I would just guard against entering the cyclic loop by
-checking whether the list is empty before doing anything else, so
-get_timer_us() is called "at the same point in time" as before.
-Something like:
-if (hlist_empty(cyclic_get_list())) {
-	gd->flags &= ~GD_FLG_CYCLIC_RUNNING;
-	return;
-}
-
-Kind regards,
-Emanuele
+Best regards,
+Ferass
