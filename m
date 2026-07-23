@@ -1,97 +1,97 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54198C531F7
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF29C531F7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:14:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CD59640A0F;
+	by smtp3.osuosl.org (Postfix) with ESMTP id DCF4560A41;
 	Thu, 23 Jul 2026 15:14:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zHdLC1PaeQIb; Thu, 23 Jul 2026 15:14:00 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5nK7tvHKw0cR; Thu, 23 Jul 2026 15:14:01 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D225D409C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E94D860A5A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784819639;
-	bh=Q2KW6IK91xNw1sdjKAcRZAgeeKGNV+/6pAt63TBJ6yE=;
+	d=lists.u-boot-project.org ; s=default; t=1784819641;
+	bh=FYT3vXcbbIjCWk3tEydG+BkJEyrnRJpytkA/K0XEZOg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=1BwMvl7HC87C1SFUv7nFSi0HSFWzx1SPw5WiMbJAyqBW7sfE6+ipkOEdYRLOggCDz
-	 kfRadm9EHXpZatxjGnIiCEcxs+DPAel1KYcy5ct58sTTBWFmcGCiab1edkoaBa/+fo
-	 Dg+LefZN98tcMnHgFNggctRpzNxhuhJgHwmtVEqkH004GHNvWUvanWGXLm34ziopf5
-	 cf64NsOf3L+I+MEXNdOT07O4Gyg0pEMxr9wFj43OFUeyykHLT3x00O4OlEGupt1pJj
-	 SDZ1dFZRANthT22XMvGR/m6oZR51zOE04RUbUCYduKc6D46xRyzFlSBNVVvUIWJIEs
-	 /Ft3u//eeIHjA==
+	b=MXLf7/Qs8R7m233U8BrPSXOqjeqDea5f+Py0YHi7pSh/GI7HRvETKqLUn+04dclKe
+	 boJefHgFwAxwzTh4zsl+x469y6DFQLMN4R6AOYGH5DCBUrWU8E6+2fuqmOcHh1DiM3
+	 raIMITB7NnsSyHsDhtrvxqztuzWABtxFW4PFvXmk/85akfxBwJssX7L8JFCVYnKYIY
+	 qwqPUfj5UNfZPjtGE+X0Civ5bUAWAQnY+nuwb4MpqJVuLkpUHj2h8DUQzREoQU7W5g
+	 QmmUDBh937v0hxuaSm+a6aKm3Bc4k3TMKKdTchOBG3BD8NWUe6qS0vreb8Vbw490Yk
+	 oskGXW4Lf3wBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D225D409C7;
-	Thu, 23 Jul 2026 15:13:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E94D860A5A;
+	Thu, 23 Jul 2026 15:14:00 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A7BA8786
+ by lists1.osuosl.org (Postfix) with ESMTP id E64593B1
  for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 98A06403EC
+ by smtp2.osuosl.org (Postfix) with ESMTP id D78D6403E4
  for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UTnE5CeZZavE for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 13:30:36 +0000 (UTC)
+ id EawDgbo-s0B7 for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 13:30:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
  envelope-from=tan.siewert@9elements.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 16E80403E4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 16E80403E4
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 16E80403E4
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:35 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4956242332dso5791355e9.2
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 06:30:35 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A7BF2403E9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A7BF2403E9
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A7BF2403E9
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:37 +0000 (UTC)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-47f93b2fe4cso196507f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 06:30:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784813434; x=1785418234;
+ d=1e100.net; s=20251104; t=1784813435; x=1785418235;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Q2KW6IK91xNw1sdjKAcRZAgeeKGNV+/6pAt63TBJ6yE=;
- b=UqsjD2Ykby1dfa9cb8pkKLlZOKoOERcITOwc8aUOfaM/VFS8oYuHdVQJeFbQiEQUkD
- TnDFQhr5D34/49nXaFyt06fDjooSh9FyGFNjzcFIqi83BQ8KebNxj1Vu/iB2kus7ok6A
- VflR9Bq1QeIr2oODKLR69OsqRrQSpXXOANIvumqioL/GCrSRSzBM2v8JoWkh84Uma3Xc
- nxL0cJn3o3j02VayCvhRlaV+uOjBMrkwrcqGnn69S7VcY8lT+bJSgefss19Jf+YjffT/
- t432rJD57Frml9AuLOnKuAE1DJTpzaPJeytdlF522Nqxw8GcshcLAhHM1Uor0VuH88E/
- ONWw==
+ bh=FYT3vXcbbIjCWk3tEydG+BkJEyrnRJpytkA/K0XEZOg=;
+ b=e8hmPK2TaosCF0TmS1PVxzSsmvK4S013ai7N++eZx9QznL6noIboIr6C/5HITcd0NZ
+ itQsLhxdVCh9hy4t4nfQARgPabVhpRctNLS68Vtvl+auiNLe8rHYD+Py67mEHKFZgLE6
+ 9Kmx65oJvkIej8U7+wKZPw9Zr+1m9UajOig2g2Jok4J+k39dsGahUqHgSsOEyO6uhQ7a
+ 6XhxSmahfy7+DaYlJ6Kuz3A6E9MkUYAQ+Kuf1N4caOwGTDFIHJtpCUCflij8YdoBoHpY
+ yiRp+mGtGTHi68NoWzQc/PEhzZiKPxUspqdP5HlSqs0cpmar5A2ixc37bSlBAHVqohYn
+ BKjg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rpvk6CD8wxaHdOc91rfrFuWctIw3BsWaE3S2Tyb7fEe7oiPVivFpm6qAKXKqlGuF5XwXRmpedM=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yw6sMwav8jzxERD3h85SmX8UOIz9BKGpZuTDCSfLXYKSZy+666+
- bsYVbs1vzjvrr0PmXOIwWQGPTUZeeTl60yYKrNQuLrgifoBZ3cMDQbmb81iXTcoGptU=
-X-Gm-Gg: AR+sD1397QV13x18uyEzdyU6HgT2QoCGEGFyn7hT8D8mdjkS143EH6+xNNtf+vK1EgE
- 70a2gVMlMrfJ/Xoarqy6VJcNUPZG58NklGE5FfwStzx6ZKUUEkSr8TtsVyCDcFHSeBvhX7fv56T
- YQsityfN1jHuINhRNYsRF8vZs05FAZEqtOHOqcmBtgEHdFALnxbDxr3CJB79X22/u3xw/QBt1Uc
- BwqVAftwBlLbSSlSPUA/m4ZFhRwX7FMl4ZkRlNv0ZnR7q1H8hW3Nr7mUHbiXOYRyd/Xreccfh5a
- TFtsN7GUQjFgJcvcqv/ud0CWaycFF51AM01/52/hegZOnM/FyyFCf08FoRDrdcGfz7PgkE7dHbV
- YVC4eHdb+O4T4SjSqQwDaPKqYNe87FtF2iUwRNZEAltEk41Gr0lq9/LsKfIf5u4uKeofSOKboru
- KhH0j4GltQRaGIVg==
-X-Received: by 2002:a05:600c:3b0e:b0:495:78af:78e5 with SMTP id
- 5b1f17b1804b1-49578af7abemr8649175e9.1.1784813433659; 
- Thu, 23 Jul 2026 06:30:33 -0700 (PDT)
+ AHgh+RqwEPDN+5d7KqR/KMgv0qD7iFNJX6G25qN/UCKsgHakZuNH2E+fOmGvWn4yQsrI8tqIK5Ntah8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyMWVebrM71rt7x/Yd2kkwK/7mv1ZcLcJJAAPNV5x0ng9+7E40d
+ silsjuSAz4KrBHl61nUmp5QCU9H75NpkF/hFW5gxY/cEqbS+CuQmwOSM3EmcQCdOhyI=
+X-Gm-Gg: AR+sD12kYQhE93CRIIdQFYkdCbsgxx8T2qmxY4Yn7Hekd8526cqkgFT0UyWm3h043cl
+ qRe2UCpz2ip64lhs3gy2adIfJORh4Dx+PS0fBphNpTVDACdgrDwP1uXcbqnfGFOnssY2D8tJUdD
+ eJLQb65EuFRzCtwtZt2jXJxruzvGVGa5qlv5ki4tyfhKNvR9AijbJKpCZJ9YMvsGPwM0uraELA0
+ t4xhXTbBh4ZTeTV14sDQN6uJ3OfNOCoc0Z73WyYhpQIL9hwp4PhZCTDOeaMzmZctt2ve0NqdbyM
+ ovH9k4+++sfAmmGRBbE2ExvAlgIPvVoQy0dkZL5DGQ9XvAKNzS2Uf0GQjF0Kityp/tMqC4nxxYD
+ 3dWUIfpyC5Ae+fumzLP9vMLFQoQdWdDtVyGofSErbNa0stB5IMW2hgilb9fRjhZ/hcXNR9TIIsX
+ SOdBUgXHMfx0EEiA==
+X-Received: by 2002:a05:600c:3111:b0:495:44f3:4576 with SMTP id
+ 5b1f17b1804b1-49573cc2b8bmr33675305e9.7.1784813435608; 
+ Thu, 23 Jul 2026 06:30:35 -0700 (PDT)
 Received: from [10.12.249.172] ([2a01:599:841:3b94:b6c8:2fa:40db:8ecf])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956b043727sm97075405e9.4.2026.07.23.06.30.32
+ 5b1f17b1804b1-4956b043727sm97075405e9.4.2026.07.23.06.30.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 06:30:33 -0700 (PDT)
+ Thu, 23 Jul 2026 06:30:35 -0700 (PDT)
 From: Tan Siewert <tan.siewert@9elements.com>
-Date: Thu, 23 Jul 2026 15:30:03 +0200
-Subject: [PATCH 2/8] misc: add HPE GXP EEPROM driver
+Date: Thu, 23 Jul 2026 15:30:05 +0200
+Subject: [PATCH 4/8] sysinfo: add HPE GXP sysinfo driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-9e-gxp-v1-2-f86e5cea239f@9elements.com>
+Message-Id: <20260723-9e-gxp-v1-4-f86e5cea239f@9elements.com>
 References: <20260723-9e-gxp-v1-0-f86e5cea239f@9elements.com>
 In-Reply-To: <20260723-9e-gxp-v1-0-f86e5cea239f@9elements.com>
 To: u-boot@lists.denx.de, Jean-Marie Verdun <verdun@hpe.com>, 
@@ -100,33 +100,33 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marcello Sylvester Bauer <marcello.bauer@9elements.com>, 
  Tan Siewert <tan.siewert@9elements.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784813429; l=4771;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784813429; l=5333;
  i=tan.siewert@9elements.com; s=20260527; h=from:subject:message-id;
- bh=hk31pY3i50JFv1QaXK3ttNzesEgqPjplI6N9DGuj/Cw=;
- b=9ON6RnL6WkZbHRSzTty8sEStI2Xt2ikHfQPSMmWzicGRRe3ftXOfHrhpqq7rH+p0QWKjm8TQo
- 0Hs0M1lPtO4BFdR4TVzo9Pap7qA3k0R+g436WjqrO8diB9hDsI2bl6O
+ bh=AziD0eSsIYaIa0ogN1BD8X9JMdARqHlcPc35tVi4TGA=;
+ b=+gxzN0e9j/BSWWkpK4CuKX/AJiV6UAArcri+mSECpx1UzsZW+Nb5uSNyZhsmGXgPnRfxjsDfu
+ qprQDaj0js2CtSxa/b7+CKMKovJuV8wvRpCRtwuBBqewQ+hwhYa9SM7
 X-Developer-Key: i=tan.siewert@9elements.com; a=ed25519;
  pk=ORQd/zQf+LsAvJGXP1CjQwVO6t6iEOGq/eGUsmRVTG4=
 X-Mailman-Approved-At: Thu, 23 Jul 2026 15:13:57 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1784813434; x=1785418234;
+ d=9elements.com; s=google; t=1784813435; x=1785418235;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Q2KW6IK91xNw1sdjKAcRZAgeeKGNV+/6pAt63TBJ6yE=;
- b=YMzdBD6sBDAAwCcKhezX9HY4JJDOa+BlaYUkZmTq3osAzKDVH1eD6ktzP8UEitOsoz
- gb0C8TwImWBIQheqTCn6o6upafEpOskFfpDmgc/fujUXgboP2fiJOfM+vnMHcD/0O7ZE
- ka9iLcCkHwEyUTs49d12pJo0xRlyo8H05jzb3wKf9Fbz/6XCvzXimCcX7g0dWr7pH0fx
- h9k2hN2+TEBdJo22ax5sVcuHM178Z49zdYnyhdFTNgm5RbKzgP7fcOR9CyfKNNvG5xdv
- d+UK7Y1UvdwreBhu+q9qjx9A9C1XmUaojXpdIadyNpF4CObRR1TbQ7sn1nx7js9s6mrv
- ZGbQ==
+ bh=FYT3vXcbbIjCWk3tEydG+BkJEyrnRJpytkA/K0XEZOg=;
+ b=dxID0p6pi4Vfnyr2xomBFTfQYC/JY2Cv1HYo9J0jOHHSktQ+gM3H5GVvJzZtfBxEf/
+ i4Gawpmi5U2WBFenOtf779io49C+s4OAW7inuRwgGb6WUyaUnXhIGtvqW1E+wV03/lGw
+ TxHR4dVkkssh+ZLJUhdXEHZtJbKvXeI8gC9I7+GCISuW9yfOBjXlXfLlOxLq6YrNjaPB
+ sB/XISDEAqJ2OChRNwWhB/mcMQVNajtrVJSvikwSCMRdY4QGWv0nr6otAWWFk8tMVArp
+ 4j6du9foc2FDVuSQpvPcNVvKkAgyUPUfjo++hjGEXKdSbtQnPW/+ZbydvvTZCn3S6KGh
+ CSkA==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=9elements.com header.i=@9elements.com
- header.a=rsa-sha256 header.s=google header.b=YMzdBD6s
+ header.a=rsa-sha256 header.s=google header.b=dxID0p6p
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,175 +143,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Marcello Sylvester Bauer <marcello.bauer@9elements.com>
 
-Add driver providing access to the memory-mapped system information
-area on HPE GXP BMC SoCs. The 256-byte region at 0xa0017f00 contains
-board data organized in two 128-byte blocks, each protected by a
-16-bit checksum.
+Add sysinfo driver for HPE GXP BMC SoCs providing board information.
+It reads serial and part numbers from nvmem cells defined in the device
+tree.
 
 Signed-off-by: Marcello Sylvester Bauer <marcello.bauer@9elements.com>
 Signed-off-by: Tan Siewert <tan.siewert@9elements.com>
 ---
- MAINTAINERS               |   1 +
- drivers/misc/Kconfig      |   9 ++++
- drivers/misc/Makefile     |   1 +
- drivers/misc/gxp_eeprom.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 118 insertions(+)
+ MAINTAINERS               |  2 +
+ arch/arm/dts/hpe-gxp.dtsi |  7 ++++
+ configs/gxp_defconfig     |  1 +
+ drivers/sysinfo/Kconfig   |  8 ++++
+ drivers/sysinfo/Makefile  |  1 +
+ drivers/sysinfo/gxp.c     | 99 +++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 118 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 3ecbb50e03a..81ebed7e865 100644
+index 81ebed7e865..323c0777cd1 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -344,6 +344,7 @@ F:	arch/arm/mach-hpe/
- F:	board/hpe/
+@@ -345,6 +345,8 @@ F:	board/hpe/
  F:	configs/gxp_defconfig
  F:	doc/device-tree-bindings/spi/hpe,gxp-spi.yaml
-+F:	drivers/misc/gxp_eeprom.c
+ F:	drivers/misc/gxp_eeprom.c
++F:	drivers/sysinfo/gxp.c
++F:	drivers/sysinfo/gxp.h
  F:	drivers/timer/gxp-timer.c
  F:	drivers/spi/gxp_spi.c
  
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 44415f24ae1..5f22bcb330e 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -83,6 +83,15 @@ config GATEWORKS_SC
- 	  boards to provide a boot watchdog, power control, temperature monitor,
- 	  voltage ADCs, and EEPROM.
+diff --git a/arch/arm/dts/hpe-gxp.dtsi b/arch/arm/dts/hpe-gxp.dtsi
+index fa174bdc582..9c761a675be 100644
+--- a/arch/arm/dts/hpe-gxp.dtsi
++++ b/arch/arm/dts/hpe-gxp.dtsi
+@@ -10,6 +10,13 @@
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
  
-+config GXP_EEPROM
-+	bool "HPE GXP EEPROM driver"
-+	depends on MISC
-+	select NVMEM
-+	help
-+	  Enable access to the memory-mapped system information area
-+	  on HPE GXP BMC SoCs. This region contains board data such as
-+	  MAC addresses, serial number, and part number.
++	sysinfo {
++		compatible = "hpe,gxp-sysinfo";
++		nvmem-cells = <&serial_number>, <&part_number>;
++		nvmem-cell-names = "serial-number", "part-number";
++		bootph-all;
++	};
 +
- config QCOM_GENI
- 	bool "Qualcomm Generic Interface (GENI) driver"
- 	depends on MISC
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index e2170212e5a..9ddbe9cd114 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -38,6 +38,7 @@ obj-$(CONFIG_FSL_IIM) += fsl_iim.o
- obj-$(CONFIG_FSL_SEC_MON) += fsl_sec_mon.o
- obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
- obj-$(CONFIG_GATEWORKS_SC) += gsc.o
-+obj-$(CONFIG_GXP_EEPROM) += gxp_eeprom.o
- obj-$(CONFIG_GDSYS_IOEP) += gdsys_ioep.o
- obj-$(CONFIG_GDSYS_RXAUI_CTRL) += gdsys_rxaui_ctrl.o
- obj-$(CONFIG_GDSYS_SOC) += gdsys_soc.o
-diff --git a/drivers/misc/gxp_eeprom.c b/drivers/misc/gxp_eeprom.c
+ 	cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+diff --git a/configs/gxp_defconfig b/configs/gxp_defconfig
+index 2369b4cd07d..5501f9aefae 100644
+--- a/configs/gxp_defconfig
++++ b/configs/gxp_defconfig
+@@ -27,6 +27,7 @@ CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="run spiboot"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ # CONFIG_DISPLAY_BOARDINFO is not set
++CONFIG_SYSINFO=y
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_PROMPT="gxp# "
+ # CONFIG_BOOTM_PLAN9 is not set
+diff --git a/drivers/sysinfo/Kconfig b/drivers/sysinfo/Kconfig
+index 6922dac9170..00d924a9c15 100644
+--- a/drivers/sysinfo/Kconfig
++++ b/drivers/sysinfo/Kconfig
+@@ -67,4 +67,12 @@ config SYSINFO_TQ_EEPROM
+ 	  Support querying EEPROM of TQ-Systems SOMs to determine board
+ 	  information.
+ 
++config SYSINFO_GXP
++	bool "HPE GXP sysinfo driver"
++	depends on ARCH_GXP && GXP_EEPROM
++	default y if ARCH_GXP
++	help
++	  Support querying board information for HPE GXP BMC SoCs.
++	  Uses the GXP EEPROM driver to retrieve serial and part numbers.
++
+ endif
+diff --git a/drivers/sysinfo/Makefile b/drivers/sysinfo/Makefile
+index d21fb3c2270..ebc239320e7 100644
+--- a/drivers/sysinfo/Makefile
++++ b/drivers/sysinfo/Makefile
+@@ -10,3 +10,4 @@ obj-$(CONFIG_SYSINFO_RCAR3) += rcar3.o
+ obj-$(CONFIG_SYSINFO_SANDBOX) += sandbox.o
+ obj-$(CONFIG_SYSINFO_SMBIOS) += smbios.o
+ obj-$(CONFIG_SYSINFO_TQ_EEPROM) += tq_eeprom.o
++obj-$(CONFIG_SYSINFO_GXP) += gxp.o
+diff --git a/drivers/sysinfo/gxp.c b/drivers/sysinfo/gxp.c
 new file mode 100644
-index 00000000000..0d8c7ede6e4
+index 00000000000..a1f33be11df
 --- /dev/null
-+++ b/drivers/misc/gxp_eeprom.c
-@@ -0,0 +1,107 @@
++++ b/drivers/sysinfo/gxp.c
+@@ -0,0 +1,99 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * HPE GXP EEPROM driver
++ * HPE GXP sysinfo driver
 + *
 + * Copyright (C) 2026 9elements GmbH
 + */
 +
 +#include <dm.h>
-+#include <misc.h>
-+#include <asm/io.h>
++#include <nvmem.h>
++#include <sysinfo.h>
 +#include <dm/device_compat.h>
 +
-+#define GXP_EEPROM_BLOCK_SIZE		128
++#define GXP_SYSINFO_MODEL		"GXP"
++#define GXP_SYSINFO_MANUFACTURER	"Hewlett Packard Enterprise"
 +
-+struct gxp_eeprom_priv {
-+	void __iomem *base;
-+	size_t size;
++/**
++ * struct gxp_sysinfo_priv - GXP sysinfo private data
++ * @serial_cell: NVMEM cell for serial number
++ * @part_cell: NVMEM cell for part number
++ */
++struct gxp_sysinfo_priv {
++	struct nvmem_cell serial_cell;
++	struct nvmem_cell part_cell;
 +};
 +
-+static bool gxp_eeprom_validate_checksum(void __iomem *block)
++static int gxp_sysinfo_detect(struct udevice *dev)
 +{
-+	u8 version;
-+	u16 sum = 0;
-+	int i;
-+
-+	version = readb(block);
-+	if (version != 2 && version != 3)
-+		return false;
-+
-+	for (i = 0; i < GXP_EEPROM_BLOCK_SIZE / sizeof(u16); i++)
-+		sum += readw(block + i * sizeof(u16));
-+
-+	return sum == 0;
++	return 0;
 +}
 +
-+static int gxp_eeprom_read(struct udevice *dev, int offset, void *buf,
-+			   int size)
++static int gxp_sysinfo_get_str(struct udevice *dev, int id, size_t size,
++			       char *val)
 +{
-+	struct gxp_eeprom_priv *priv = dev_get_priv(dev);
-+	u8 *dst = buf;
-+	int i;
++	struct gxp_sysinfo_priv *priv = dev_get_priv(dev);
++	struct nvmem_cell *cell;
++	int ret;
 +
-+	if (offset < 0 || size <= 0 || offset + size > priv->size)
-+		return -EINVAL;
-+
-+	for (i = 0; i < size; i++)
-+		dst[i] = readb(priv->base + offset + i);
-+
-+	return size;
-+}
-+
-+static int gxp_eeprom_probe(struct udevice *dev)
-+{
-+	struct gxp_eeprom_priv *priv = dev_get_priv(dev);
-+	fdt_addr_t addr;
-+	fdt_size_t size;
-+	int i, num_blocks;
-+
-+	addr = dev_read_addr_size(dev, &size);
-+	if (addr == FDT_ADDR_T_NONE) {
-+		dev_err(dev, "failed to get address\n");
-+		return -EINVAL;
-+	}
-+
-+	if (size == 0 || size % GXP_EEPROM_BLOCK_SIZE != 0) {
-+		dev_err(dev, "size must be a multiple of %d bytes\n",
-+			GXP_EEPROM_BLOCK_SIZE);
++	switch (id) {
++	case SYSID_BOARD_MODEL:
++		strlcpy(val, GXP_SYSINFO_MODEL, size);
++		return 0;
++	case SYSID_BOARD_MANUFACTURER:
++		strlcpy(val, GXP_SYSINFO_MANUFACTURER, size);
++		return 0;
++	case SYSID_SM_SYSTEM_SERIAL:
++		if (!priv->serial_cell.nvmem)
++			return -ENODEV;
++		cell = &priv->serial_cell;
++		break;
++	case SYSID_SM_BASEBOARD_PRODUCT:
++		if (!priv->part_cell.nvmem)
++			return -ENODEV;
++		cell = &priv->part_cell;
++		break;
++	default:
 +		return -EINVAL;
 +	}
 +
-+	priv->base = map_physmem(addr, size, MAP_NOCACHE);
-+	if (!priv->base) {
-+		dev_err(dev, "failed to map memory\n");
-+		return -ENOMEM;
-+	}
-+	priv->size = size;
++	if (size <= cell->size)
++		return -ENOSPC;
 +
-+	num_blocks = size / GXP_EEPROM_BLOCK_SIZE;
-+	for (i = 0; i < num_blocks; i++) {
-+		if (!gxp_eeprom_validate_checksum(priv->base +
-+					       i * GXP_EEPROM_BLOCK_SIZE)) {
-+			dev_err(dev, "checksum failed for block %d\n", i);
-+			return -EBADMSG;
-+		}
-+	}
++	ret = nvmem_cell_read(cell, val, cell->size);
++	if (ret)
++		return ret;
++
++	val[cell->size] = '\0';
 +
 +	return 0;
 +}
 +
-+static const struct misc_ops gxp_eeprom_ops = {
-+	.read = gxp_eeprom_read,
++static int gxp_sysinfo_probe(struct udevice *dev)
++{
++	struct gxp_sysinfo_priv *priv = dev_get_priv(dev);
++
++	nvmem_cell_get_by_name(dev, "serial-number", &priv->serial_cell);
++	nvmem_cell_get_by_name(dev, "part-number", &priv->part_cell);
++
++	return 0;
++}
++
++static const struct sysinfo_ops gxp_sysinfo_ops = {
++	.detect = gxp_sysinfo_detect,
++	.get_str = gxp_sysinfo_get_str,
 +};
 +
-+static const struct udevice_id gxp_eeprom_ids[] = {
-+	{ .compatible = "hpe,gxp-eeprom" },
++static const struct udevice_id gxp_sysinfo_ids[] = {
++	{ .compatible = "hpe,gxp-sysinfo" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(gxp_eeprom) = {
-+	.name		= "gxp_eeprom",
-+	.id		= UCLASS_MISC,
-+	.of_match	= gxp_eeprom_ids,
-+	.probe		= gxp_eeprom_probe,
-+	.ops		= &gxp_eeprom_ops,
-+	.priv_auto	= sizeof(struct gxp_eeprom_priv),
++U_BOOT_DRIVER(gxp_sysinfo) = {
++	.name		= "gxp_sysinfo",
++	.id		= UCLASS_SYSINFO,
++	.of_match	= gxp_sysinfo_ids,
++	.probe		= gxp_sysinfo_probe,
++	.ops		= &gxp_sysinfo_ops,
++	.priv_auto	= sizeof(struct gxp_sysinfo_priv),
 +	.flags		= DM_FLAG_PRE_RELOC,
 +};
 
