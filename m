@@ -1,64 +1,64 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B7FC531CB
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 09:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F31C531C7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 09:39:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AE3826089A;
-	Thu, 23 Jul 2026 09:39:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0E58C4088E;
+	Thu, 23 Jul 2026 09:39:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aRStauwW7aXd; Thu, 23 Jul 2026 09:39:00 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ewwzpTckpz6P; Thu, 23 Jul 2026 09:39:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AE39560816
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0C2584088D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784799540;
-	bh=W+QxKErn5OIuMV+E9xILebuOxnypa0BuHDDkLI2AcTE=;
+	d=lists.u-boot-project.org ; s=default; t=1784799543;
+	bh=ekUJrQzmfh7LUfR+59i5yt5c8XI5GWiMYrWkN33kC7Q=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=a75XPplPFLu4mqH2NRPc2i6iOFb5TuHkQ9/GTg8+OnYakgXbfvcZJBWHROa+mf+Ni
-	 lnQi+fl7aKho1fWK3T6pw3utZTdb5FtWQ1WGUzDkmNrsuNPWeDVrn5JcmD5v8DQle4
-	 pqARlKo98hn/Wa8nqhCIJFZlKvl6FaBzbvPZaNKX6LmInX0bq4dAlWHeZI3awQMVLG
-	 sJtqCytgRIqTNxuQLo3hIgzhrPICJnWQM7TbGWwhIH07LiUSZRpayUU3kaPK+YQwcP
-	 T6cxCO2FEPuz5tsYGjNiTytrMjNLbxK+t9bwWId7UeaOkaJma2eadjmlONkOCEr8l4
-	 03IBiX6UhPpvQ==
+	b=u7VjzuiKa9fvy+hzZsklSrWcYSpfjaQkJAbAIaUoJoz2tOrUue3OxFH/zXj4zGIpB
+	 Sl1vxGWnNV6X5+q2dXDBUcgbU9YS0T+4UpfWZyxim7k61C8FvZz76BJexWmcATQjTX
+	 iQwLMvj7wm7QUXHWCgdqUqlyMKIwD4NmjYF1engIrwtIEs0MLK2zLWCegnQ99Z1WUc
+	 gXZsZ3V3CVyV3gxrNmDXJH1oQkM/Q6vuS2MhIEixm8ydYzNdreRUBzvWyGBA2Jup/g
+	 SAegnPv1tKBLqz3v5cOhR/z64eL5sQbOHQ/Vu8UrmDafagORew0zxLObyKanA9ODhw
+	 TnZ0IsI7NQtgg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AE39560816;
-	Thu, 23 Jul 2026 09:39:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0C2584088D;
+	Thu, 23 Jul 2026 09:39:03 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 41E7896C
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:38:52 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 4375836E
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:38:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3EEC040026
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:38:52 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 29DD74025C
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:38:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jW-Gt7msiI3s for <u-boot@lists.u-boot-project.org>;
+ id RSGyO282QJ2V for <u-boot@lists.u-boot-project.org>;
  Thu, 23 Jul 2026 09:38:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c20a::7;
  helo=pa4pr04cu001.outbound.protection.outlook.com;
  envelope-from=rasmus.villemoes@prevas.dk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5A5C54027D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5A5C54027D
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B2C214031F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B2C214031F
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::7])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5A5C54027D
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:38:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B2C214031F
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 09:38:50 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rwFd5oRL1vKCpn66NyutM/bJe12Ta496BXUpZc2Dfv2ElhcW4ZUASrVshbT4O2vFM9m28/4rmgwyCp8PBoBEDboiv2iHxE1Xuv4Ok05LzXr+dPTglp75vaiQ/Xfa8FQn7M/VrEPn95RlFBv+dD/bweqlk6Fp8TzIvvACyQJKaiFruq5hezW0Q73ay2qmHKj6xtHmVTZr2QNzURNWZtMJ/EMqdbe3IMIXx7J7BFge4OHwaQTBLJVD1pPfCYJm0xtIhDEkQRK5or2VRf+XU5L19jrsHNAKADRdUQQgGPwSbfGu9YboIrGvVKREs8UUCeFHkLX3Ebstytrn53nKaaoayg==
+ b=mMuxP33byVCcnMy0J5g4HzJe4T2PjtdLoqLqWC9E8AWMHaYpkL/m9LQINzfKQlZrtsVYlmwa8otKc3YOBhzTBMgM+0YWngREZvE3IUSn0ACfhX9A/AvxhyE11nYs3aZpGT6lMrAn3XBePwITYDZA11YlLys3DMUIMZqME7UUaZW+8ydCBlvhVLnA5gSOZtj2g73J0UWVqJtyL7jdP7Jn7K4lUYm3LCN5cAMJX0FXSzHgym7suoVFDh4H4mB1LOmM5wBTRW2fg7dOc0V8QjNikPgD6QSVSX46V/o5qgmC3UO39Cx9h8w0d8Z9UmzZc3Jr122WcXX31dszumcDLdL6Kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W+QxKErn5OIuMV+E9xILebuOxnypa0BuHDDkLI2AcTE=;
- b=RtBdn4HKyHAp0TyUMTc7kw01MJbKyRFCyxRElDLH29ksIogK/95C8u/6p2sQjEGmpEgkDk6+PyB1ha9ujBATalPom88gmq1fI8xaUHAnNrNVc2jiE3vHweoCKVO7av7DrEe3QoDzw7ycqVINGGKmAJP3wzqMoi0B6il5GLALBZJxf1wVCD+oSSXaIPeWjn7a4yCC2CeBDnAe2yJwOvsA1ZXGvA7KJaqmSrQRuFOAUM0yLCVpxTtgMEKa/f9d8A+FCAI9KNSofPDqiJVbHL+JpHCJyP3VtcQ13p0C5ufw1IVzXSSBb9xsZd8QJ+fr2rZCrvQhglg4KyXVAfjUU2V82Q==
+ bh=ekUJrQzmfh7LUfR+59i5yt5c8XI5GWiMYrWkN33kC7Q=;
+ b=dmGq0LS2WdQAsXnShLPJPjy+cHgJoi6jXx7Kq8dOtVSb1v7qmQzSG3j3XMKZGv0Ewq42d1m9YXLd7BvcczdbLEpSe3t3qdsFgLNTkf7gADXU6pt1ugzrQWfLRxAc7mC9KSYlf8Ov5PjjMX+9hhjM8+VOsShEPZmOl8Y6mUcAyr4JqboH2ZxFx2SPqpSOqEN8whXEQRcEEHSOrA/QHRhyNKE7f+hWOyjkLIWWGbJ12NxGiwko6zl0jdLnUFMkgcfSE3OY+17Ubv9Wcutu0LXLTyfznW7xpSjN3iv1FTND9jWkso4ggQ1AR4L62zQg1LyVcVjW0lybhREKSVFz/O9H5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
@@ -66,93 +66,92 @@ Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by DU4PR10MB8712.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:568::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
- 2026 09:38:48 +0000
+ 2026 09:38:41 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0245.009; Thu, 23 Jul 2026
- 09:38:48 +0000
+ 09:38:41 +0000
 To: u-boot@lists.u-boot-project.org
 Cc: Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v3 7/7] doc: k3.rst: describe use of keyfile and
- distinguished_name binman templates
-Date: Thu, 23 Jul 2026 11:38:29 +0200
-Message-ID: <20260723093830.3132465-8-ravi@prevas.dk>
+Subject: [PATCH v3 4/7] k3-binman.dtsi: add keyfile_template node
+Date: Thu, 23 Jul 2026 11:38:26 +0200
+Message-ID: <20260723093830.3132465-5-ravi@prevas.dk>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260723093830.3132465-1-ravi@prevas.dk>
 References: <20260723093830.3132465-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: CPBP307CA0012.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380:1::7)
- To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: CPAP307CA0004.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:3::17) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU4PR10MB8712:EE_
-X-MS-Office365-Filtering-Correlation-Id: ee5afb2b-d8e0-4860-98a3-08dee89e323b
+X-MS-Office365-Filtering-Correlation-Id: bde32ca6-9b8e-4527-5c4b-08dee89e2e04
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|6133799003|56012099006|11063799006|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: xHXkvT3hg6Xx0D68ocE8YRcKVkjiyDLoiFzeZV+g9N1KOYTUChapzjiPVBsHH6yRHrOvt8e5SQAtuUD4lqfQ6lO3B4qfkyIJ2JlFidgMVrmwAAcljArpuMLPpAntKjBTDyYhJaeGdLM7RYZJxSV+zr7ok6y1A0/9E3OkAsm6Eww62vvYWqARaIT7HePRhvRNJog27xnMgxqkhfcx9WsP8OkKZ2kzEb2LtlfFDII3/5LgrhYRDd11UH2ETh8fUVppHMFZpTRd4EmQSm6hdIyKUg2pmgQ4JhZIKm6whmUAHiL/DYZuHKp3UviCG3kFFfe2xvRtfs2W+JjWueawCvEGFfedjwlG1dGCe9KyYC/58mUFoAwAvssg/9SjlND5Akbc8ThDQOy+68wfmIvHsFA0a8rExTEQX/bCsakpfy1VYW0dXqal3D6jZxivdPz0QR9fiaMbXpBYhIUDneeCA2iTT3aNMunz9sdbdxGpdB+VYiB2YAjG9e8hfzYdUC5BE2i/QPKN/jIXj5/8yDtxDBBWV/gVy4kgUtvPFHW9I7coHssHwJP/726tNWTj8jNeAvAqt27CFvERY3mFdmuKW2BiAXRJr7Kn/Ebhw0WV49oDEd2WMcQeKJkm5gEFX0XHjJXXHOys3LAuIuwuCq1ypqxlDOkIg6FSXxmbYZ4ONeAWGxM=
+ ARA:13230040|23010399003|376014|366016|1800799024|56012099006|11063799006|10067099003|22082099003|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info: XfKHkQGz4Nb/DzicZY3QnqLlEmtvQTdbktrQUygXxq1WsmYwsX2lOrxyPWym+Z13fkFhhoBW1+lWiKqyR5jUf/77hkUKobaClLN2mCsH8cober6NSjfywDTnseQAJht/+01Zrt2nzfeo5F6KYybNTCiz7WiLLlv8lHz9lc9DndRBIJG61IlNRlhhOenqirTwuV00mM4WKWIA1lQo4e5Yg0KfqqpK77ZH4hyXWtueXze+9C+LCbmAPZwHnyzFqT4KZ4lfwP8V4oDWsAljCeX8PArtVjkHmPF83yebhQePVL5DrRDsq2F00xYHa4S/k5dh4ifhsIz9/PaO7zgK5qS+scFFVdADntnj7kYMxwKmxCGeqynBNmmCYJr1ULHvtodEJQcJhXdh/DQXoPC+tsTv2kx/tMG7vFevY/pPnUnKCb2sSV6+mJlKC4wHkMdNclpdvlDFwREvCa70C4sul+DglougJpOP9T6AwcynRvdgUEMYFlgju/gclPWFAL+AUpol+DDizdrINV6UpgNar4dDmjyK75EE4OIipZiQgq/lMlxpuwoCMdoAm/bcZmEpsQS4P/Fhxl9bfBlVlZ7M2W8V2MqFgauxHrwJe19DbC0Fz+p47dWsfbbQ88GQ1t+k1dJLPU9o+WvWfzxYaQP7mollsYVzcy8EQ7sEmOVvv2qSdAg=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003);
+ SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003)(3023799007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dN+UhY5p44sIDQSemCkZNaoaCcpqdYXhzz8qWBpU453sT638s3AIgF8W3fpw?=
- =?us-ascii?Q?xWli2SH7Xi4AmAoHOME47UsOhb72FsTTCGxb4rRkN5R/k0SLsQNBGJwKJ39j?=
- =?us-ascii?Q?cmPq9BmIfHfGXHAZ6RMLZHe+5myjUrRjpP4fmz/y6LkD5g4dWOLoyg/3bCoL?=
- =?us-ascii?Q?5le/iS6sRBVTu5HnfqGjhLBUVl+rx6LcfHvuxi/uFKvIsMY1udTwEmUHlhMa?=
- =?us-ascii?Q?y/Nhswrt43/vq8TCZ4qK944rDYiGfYaZFd1x5yhJqJDr8GXLXfqOKsC6euoz?=
- =?us-ascii?Q?nI8X+uYx7kAfYWNL90hDvpFYiIDf5tB5oxvUdTG5U1totKdpor9eRzo/pCZL?=
- =?us-ascii?Q?oAeCg4SSLEg+as4UVDOvBJT/FTbJgj0TyEtZTKfdLD4NnZ/89WHzdfNzYQ2X?=
- =?us-ascii?Q?4+AiK3N4nHYTsKFO0SI5zzk03ObgfmixcI90DXo27le1DMcVmIVaglZTjULY?=
- =?us-ascii?Q?aKwjzEivDcx4mGwxrmz19iWDSlRJByNrCGRXnuhmozPIsGHmWiPlDUJDrHB4?=
- =?us-ascii?Q?LetKWeVMNuPMe4Uv1iID2mpm1cavzVMLYtN1trnBCe7Yen+XDvLGu5ZkLfL3?=
- =?us-ascii?Q?nYatLdvao9JMlsDpGcIHzioFk+h4/17ACMKMFyKwJHgvE89+x33khF2DZ7uf?=
- =?us-ascii?Q?1DG8zFq9LsvyrIwlnGi4G7A/4PA94zTW/+0O1ovMxOu7oednhh7NdC+i+A60?=
- =?us-ascii?Q?JAaKz6uvPjN9yzljldSRCx6KXmfzrCiqWumMlwWAxR82Wec0IwLU65X3GH/J?=
- =?us-ascii?Q?7j9D36LA8Mbjrngwdnfdztn67qdj65aedpmcCjFBPDFP93pbknVc/yRqqj4+?=
- =?us-ascii?Q?A7UY1aU8SQa5DpShUCmtC4w1X9BWpXSGZ+bwp/2plCnak/61odhcQw9vXcjY?=
- =?us-ascii?Q?SCbTTpPf+SseFreVNO2QB6fhvbfWKoUZI9XcW1iSaAbCTId1JtgKHnJ2dVTN?=
- =?us-ascii?Q?A6LOLozbf5A4CDVMIJEMa2WMzC3WnyvIdMebC95SnEAQ9LUkR3BsdwRDHJsX?=
- =?us-ascii?Q?Sn1IcK7BleY9ew1ZIQEkW6DhEcu2iG6TD3CHgR0Cin+ghjAfOvHuRCWLRgDs?=
- =?us-ascii?Q?FJBNgQcLCRCNKwSUnvDOtCXBNPVl3Fq9oi1AsyU7yjTXZ7+DQ2GIMEreKO73?=
- =?us-ascii?Q?Cz3A1Q3uYqaVr4xl25nuvulGqz582gDECOxdrpILPdwf3Jxrt2M9qapNA5G1?=
- =?us-ascii?Q?vhBgkuUqr6WrhZXg3AG63ywm9sKJCqjC5a13/8kzrMxwk0nJ7RuFWZPwUbb0?=
- =?us-ascii?Q?raUKdby0AE4kC2PexeqNI5KoGU17Wl9NVMe8KZmoRhRpC4FjA5WX4Eexcge3?=
- =?us-ascii?Q?FvJqymmncQdVg7K4gvNvSFR7RTh2xZCJh4pEXOC1LlEFGepehSnXyuvjq1XP?=
- =?us-ascii?Q?vgHzNwZaQ7YoPccb2YVJuFYDJwPqqevkmtD5rtOT7FQqi53JQyFEpSVErzz7?=
- =?us-ascii?Q?JcLQJdmSlRfXsHhAsvCn1dRFypBoNzvTk4/JWbYCfalPlucUTVbwuowQ/0S2?=
- =?us-ascii?Q?TeJP72RFq1lPB2fes4TW2c42jdKiftRvGua7vffMjIlB1r2Sj0lE6lRHgLRj?=
- =?us-ascii?Q?R26vngWVTVkRBYoRRYusKOeGeIHH2BEmwSKoAcdGL9xt5GUqRznnrAPiSXeh?=
- =?us-ascii?Q?9MycK0oAHkF0Rl84gYceMzTPwOVUGBZJv9xzYhS+jlGnQsReZTkVQkWYR7YD?=
- =?us-ascii?Q?DoOLtKtg72a+N4tZXwm2Fst7YXHoWVG1KgDXyMYUs/UpoLBwsIBCrEQV44Il?=
- =?us-ascii?Q?GCRve/sW7iewjA9KJm39VklqAHNXpHE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?J7NXGWb8o+jV3Gk2Kcyw+fj0GrMc16orylG2mcPI35K29+gXkpjp2jUovlIs?=
+ =?us-ascii?Q?jADLNmn0mp6neBQrw0NcoZqogW2zj56kU27CBe4wWludOYHqD0q4q0rUCilI?=
+ =?us-ascii?Q?GNILh8TISEh5YYMIqKdBZty+pmGTo5/XzyOxTt50XqJ7aZWE+laR/w7uy92o?=
+ =?us-ascii?Q?/fdDzi29pGR0nTbUWWPmO+wp2GS3UZ/q9/hLt/0MOvlg9H40+MHzE87kqYOr?=
+ =?us-ascii?Q?WpPEC+176qG6SnXb75kOqvDBnuVXtiZrp3MSHelhctM39qShVdsiYWohbhP6?=
+ =?us-ascii?Q?Y+nYEhXaAamRYUV8eZiGolZidT6j4985TuhiFlAJShI6tOmqbcZnytAtrEsu?=
+ =?us-ascii?Q?Ryi57CYtc/XHWCv7105hc32/Dwy8P+QOokpu1BJ84N76ATaL1XXmwiC3JOj3?=
+ =?us-ascii?Q?NwE8GIKnQJv3dkH3iw36+w2W24rz3F4NVlPLH4vRmi5d9XUpy8/niDgtojY3?=
+ =?us-ascii?Q?O4ZgXNf3W40VI2rbFms6ZY1AVt3hBvkSb5OEhGeyma08vArsjDXxMp0lmHGN?=
+ =?us-ascii?Q?lWtA6g6R3BLKDqRJghaJXY3A9cPlMMNV2OyZ3dHruYOKCOe+9AHuWzNu0RhZ?=
+ =?us-ascii?Q?ORrR7x2jnChKrU8FJcQUFU6u6m48bOiZA1DYPeFKSv0gw+dHp9R7jkA/TVsn?=
+ =?us-ascii?Q?gokZVTGyXPzcIltFQm1/gRxyWOpagaDvV4oTlORuay9PyPp2/dHxxnF/lboe?=
+ =?us-ascii?Q?3NQX6bOLQXpfFc77TN0J+TEtFLsPs4EFsp1wn+sPJRsbw6UXLHpKw/N1B5TU?=
+ =?us-ascii?Q?I+6FDq1shmWfzJHQzt6eV8ysmnJL3SBXBWa7z9mH75GR4q+ohQT51w4HeA0X?=
+ =?us-ascii?Q?vJibvP5P8R1JdoJV18iCDZnusZIFnD9358IbdQKi7QOEt1DbpzVUM6joqtCF?=
+ =?us-ascii?Q?qIXddSXxGfpVGlXYDRUFXMVUZiCwi4ETm23P3kmYR38gsdFzVu1MLqsHNJYv?=
+ =?us-ascii?Q?2ig4wS8VFIHGyjp6GwN9Cgr07TZEH+2k0mqm6zGQkdfZsaKy6pJGJAh0MA8q?=
+ =?us-ascii?Q?pcSDNKW3NySJD9BigI2U9LNjQ5nwu7n1y4I+MzQOTj3BS3fDQ1Q2cURq/kDL?=
+ =?us-ascii?Q?qyIHdog8nP/UIto56uR9NxaFBop/hS0SJh3sCgis+e6Of5khoyqWQz6nKY0i?=
+ =?us-ascii?Q?T0tgUYxpL71XfKTy4JRY2T8evfv+MIn4uPAcWupNZwbbqck10+Wlwe16qDbc?=
+ =?us-ascii?Q?yVcTTh7zIyLdxDx6yVu4NMqLh//0QWOf00JkGCAIn0Uw5w5Sm1PL2UuIEj6M?=
+ =?us-ascii?Q?DdpMMeSsVMVmvkKpotbtw278VERKsWFL/Zz5sow04B8E1povFgm+y+MuzyGD?=
+ =?us-ascii?Q?sG88PokBXmKW4Abh6QZqG2oECkyW6K5i0LbY6du22/4TCqYLdw/8iaZPp60N?=
+ =?us-ascii?Q?ZOAjob8VsShl3DbB9zwsU9bzYsv8XQfCrYz6xjndzhZV8LUPKws0vEjSGgW6?=
+ =?us-ascii?Q?1Rzosv79PFx0GVQ0CWl0O+473WrO+4F4v+2TCN241nKjzSvlIthLtNORLwcj?=
+ =?us-ascii?Q?oH/b1jtIvd7OHdr60Hh0O3TnwjUYZqnuVNfj5NCI6dZtzpFvtTVaa9Qyxwvz?=
+ =?us-ascii?Q?sF+cnfF/NVhj4d0TwGqRQkpFM4luEk6MFboofo//V4WJb1C/vbRNP3t2hUbI?=
+ =?us-ascii?Q?i7JX9XWkXcXZ7mVq45uvsPxjBRmfHTo9yNlOlRCdidyKwBrgNG5XBX6aA+vO?=
+ =?us-ascii?Q?wuWyMvtdb6UaWgSxOLKPDtT17REPFrqr8S6Ra115PR6X4an3zfCbrpio5AMg?=
+ =?us-ascii?Q?Jp/GkVY82ZHMGCk32x4Vnr6pmLbJ4a0=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee5afb2b-d8e0-4860-98a3-08dee89e323b
+X-MS-Exchange-CrossTenant-Network-Message-Id: bde32ca6-9b8e-4527-5c4b-08dee89e2e04
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 09:38:48.3355 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 09:38:41.1860 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hTC0lm95mhR58MXcU3bQR5AU5Yu8vd4yWZRUsd+uRx/J2ajpyzhuQw1EeJe7z+y9pG5A5YMjxgoOoOCxq2s62nxbx1NfcmKeDG97IYWG5Jw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: DpmHGUBXrEN8QGXwolJYUTHxodJHH+66ShbdDJESHqnMm10xs9X7o4tgRSTlNO86w60VryJLUIoJJ7tjrRpKmtYexHxO/lCyCvg/GJVOQKI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8712
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W+QxKErn5OIuMV+E9xILebuOxnypa0BuHDDkLI2AcTE=;
- b=I5w5J4JR1dcamjOaLG6QZBvjRNkS9CVc20MulxRcdhg2c6tKOn5FN2pU8voKCs0ari35q12w1r5aHkgDYwo8R2em+ZHt9q2D0AZ2kWdBoSztjorwgBTtKwTsc831grKUcHXDWHdmyAB31Ii+SN+xWe10n5IUEBmIM0scBs7EPrQ=
+ bh=ekUJrQzmfh7LUfR+59i5yt5c8XI5GWiMYrWkN33kC7Q=;
+ b=fS9Cp0oqYr/t2bW1OK2vqTqPPN1uElE/ockkTIZAXCnisy/wJK8THZoLn2OiVTZHCLwSOvAY+CPBTtAmosmaU3MsMh/mijxZs0ksaQsmxSGAXdKBmOaVceQxRrpYEORFNYXF9wD1Brh8J3I2wmIdbLwzkPLrSIMS0A0HZkOBJ/s=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=prevas.dk
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=prevas.dk header.i=@prevas.dk header.a=rsa-sha256
- header.s=selector1 header.b=I5w5J4JR
+ header.s=selector1 header.b=fS9Cp0oq
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -171,80 +170,51 @@ Reply-To: Rasmus Villemoes <ravi@prevas.dk>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Document how one can use the keyfile_template to specify one's own key
-in a single place, and similarly document the use of the
-distinguished_name_template.
+Currently, it is somewhat tedious for downstream/custom boards to
+override the keyfile used for signing all the various artifacts
+involved in booting on K3 devices to point at their own key. For a key
+stored in a file, one could override node which "generates" (copies)
+custMpk.pem in the build dir from the one in the source dir and point
+that at another filename=. That works, but is a little misleading.
 
-Also mention the ability to use a pkcs#11 uri as "keyfile", and that
-it requires one to provide a suitable openssl configuration file (via
-the OPENSSL_CONF environment variable). Details on how to write such a
-file for one's specific provider is out of scope for this document.
+However, when the "keyfile" needs to be, say, a pkcs#11 uri, one has
+to have overrides in one's .dtsi for each and every ti-secure /
+ti-secure-rom node, and a lot of those do not even have dts labels, so
+one has to use their full /binman/... path.
+
+Add a small dedicated template that only contains the keyfile
+property. In a subsequent patch, we will change nodes that contain an
+explicit 'keyfile = "custMpk.pem"' to instead have this template
+inserted. This way, the downstream board's .dtsi file only needs to
+contain something like
+
+  &keyfile_template {
+    keyfile = "pkcs11:object=my-key-identifier";
+  };
+
+and that will then automatically propagate to all the nodes.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- doc/board/ti/k3.rst | 48 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
+ arch/arm/dts/k3-binman.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index d3ecaf59909..9f87101217a 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -127,6 +127,54 @@ function as in HS-SE, but as there are no customer keys to verify the
- signatures against, the authentication will pass for certificates signed
- with any key.
- 
-+In order to direct the build to use your own signing infrastructure
-+instead of the custMpk.pem dummy key shipped with the U-Boot sources,
-+add something like
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index ad127663d03..69214bb32fb 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -25,6 +25,10 @@
+ 			filename = "arch/arm/mach-k3/keys/ti-degenerate-key.pem";
+ 		};
+ 	};
 +
-+.. code-block:: dts
-+
-+    &keyfile_template {
-+        keyfile = "/path/to/your/key.pem";
-+    };
-+
-+to your board's ``-u-boot.dtsi`` file. You can also customize the
-+Distinguished Name in the generated certificates by including
-+something like
-+
-+.. code-block:: dts
-+
-+    &distinguished_name_template {
-+        distinguished-name {
-+	    C = "DE";
-+	    L = "Berlin";
-+	    O = "Acme Corporation";
-+	    OU = "Cartoon props";
++	keyfile_template: template-keyfile {
++		keyfile = "custMpk.pem";
 +	};
-+    };
-+
-+Ensure that any ``ti-secure`` or ``ti-secure-rom`` nodes defined in
-+your own ``.dts`` files contain
-+
-+.. code-block:: dts
-+
-+    insert-template = <&keyfile_template>, <&distinguished_name_template>;
-+
-+as that will ensure that all certificates use the key and
-+Distinguished Name defined in the templates.
-+
-+If you do not have the private key in a file, but instead use a HSM of
-+some sort, it is also possible to set ``keyfile`` to a PKCS#11 URI, e.g.
-+
-+.. code-block:: dts
-+
-+    &keyfile_template {
-+        keyfile = "pkcs11:object=your-key-identifier";
-+    };
-+
-+For that to work, you must set the ``OPENSSL_CONF`` environment
-+variable appropriately when building, pointing it at a configuration
-+file matching your pkcs#11 provider.
-+
- Chain of trust
- ^^^^^^^^^^^^^^
+ };
  
+ #ifndef CONFIG_ARM64
 -- 
 2.55.0
 
