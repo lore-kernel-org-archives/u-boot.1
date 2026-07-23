@@ -1,179 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AC7C531C7
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 07:33:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03345C44524
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 07:40:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E626F407FB;
-	Thu, 23 Jul 2026 07:33:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A843F60724;
+	Thu, 23 Jul 2026 07:40:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vSoBYwXYVmiW; Thu, 23 Jul 2026 07:33:48 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YoC3GCRO_Z-u; Thu, 23 Jul 2026 07:39:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 430DD407E9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8B66460708
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784792028;
-	bh=udvdkbhGuCAaC2HG7xkPhOwn33A6nN/5VfAo4E5avGk=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784792399;
+	bh=9AfqzHU79cKPkv5ouMlVJKlF/WYjAb/zhlBs9/1XBZQ=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=lWnG4oCZcZe0TDZ4xpL0VJtvoXcbP8sgA1msI8mUIS+y71/A/ZrSjqPeXgh0aGQPP
-	 w0VY6BvumvITbuuBePE97Qrwx+CDCnHmahpf1DFjlVYi/yENnDlCAfewVOnBE1CmfK
-	 fk/ETVDiVGJEx0yKtTMR8H45jTXyiWTpluvM6QuMJH5Rcj2+4RKvVfgox6TIdI0Qsr
-	 9m+lharh2EJtydVjewEvOo/yGmqH4SRWo7cSo660RtmWwAEMcKJm2b1fX1wR3T4bp3
-	 1jBY90JFCaSKOGSSkxUHzP6eG+GsQ3p+CSNCcx+NFUwwYrAq44Lsa8FtfmtP+GuiHu
-	 PIUl+ZSj4HDcg==
+	 From:Reply-To:From;
+	b=ekG3Worr6pfJaiZJB+b3jRv4VhzpHJT/ANYUVS/thCB+TQyeMNCAkAnCy4x4uTV2G
+	 MuxnIDyfZLD+r3wd35nFHbN4AKW5e9yOzyGAhzJHYh3MK3h0qJb8k+SRIM7hbKAZzw
+	 EfsZ2yezIvr+HYn/puYEaoie2XFBAQbf6xaRVcaRCpu3hxOj8TKlQgdR0jIvCcI2h1
+	 ZSbgcjcD5aOdUMDRiLKoJFO2q9vACEHdPo2u0KjQKa9XG52NJg/3i/9TpJ1wW4WqOU
+	 5UZB9IYHgjelrmJyohoGchIJTDivnXTo2v5GQB3Rdgeb2P+euEro0hcw9EFfM0K3/O
+	 XjCvIYX6gmZNQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 430DD407E9;
-	Thu, 23 Jul 2026 07:33:48 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1690636E
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:33:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8B66460708;
+	Thu, 23 Jul 2026 07:39:59 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 640EA2E5
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:39:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 082B1400BB
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:33:47 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4A0F180DB1
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:39:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MhZjeFhyRtzF for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 07:33:46 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Et5YIJwq1vAu for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 07:39:57 +0000 (UTC)
+Received-SPF: Neutral (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 98DB840026
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 98DB840026
+ envelope-from=bastien.curutchet@bootlin.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E7E3B80DB5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E7E3B80DB5
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 98DB840026
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:33:45 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E7E3B80DB5
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:39:56 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA9AF8494B; Thu, 23 Jul 2026 09:33:43 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9ED63846A4; Thu, 23 Jul 2026 09:39:54 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E7583E76
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 09:33:41 +0200 (CEST)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-471eeac43bfso269239f8f.3
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 00:33:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784792020; x=1785396820;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=udvdkbhGuCAaC2HG7xkPhOwn33A6nN/5VfAo4E5avGk=;
- b=bnHf6/USkGqsbnoDDgLD0gh5jucIXBnFEX0PeIszAEvS6gOPEowzdJo9nVuo5EMv6R
- kMLCwToX1B80V0ciOVcm22Le1NT+r8BSmgCmvWHXRcUVsvVbhY0luVwbuVpRM1zZYwv6
- wxSPSIwm1LWuU3nyCsVVnHxN863iGdEeIIvGs6ZwYsM3aFY9kqvfLkSNPYhaDox6cYhT
- CNSiD4rh/6GBOUO1Ra4R3WiIAm6TpmWfbfvqY/pthOzAwZVGFjK0PkxPVdhswGgeCuV9
- uxivIEmqJuCC8SCS3bVlp4m4lEadmdTZLbgvG7xFrOVPrSDSgInaT6LsU9RuOuQB2FZS
- tI0w==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqRX8O7Afm2/We0uXvYinEsQLjCDl+pcXjTdvX7l2QDbxD7AmyQ3H0t4LSGssxvKsU+RGeC0zQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDtZssWCHZ5Rcft/04KZlfaxaTIqGdXuHnitaYXBc8RhfQf+I4
- iXfRbDuVgJ8ufBiZxj8ZbvgeCpV49OrvGvCZerXuMSXRagnyn1PRBR8iX38MYX8QRQ8=
-X-Gm-Gg: AR+sD12WPKb1PKLB357Cl8ch3oc28onTmHbnmlsiziBDgHP0VwkEegn5/Kap0BioV7A
- bExSN1EWuRGKT5vdGTG4a/QiAuuEP9WAxMefDgnxFp6MLL0ciY/A4G06SrmRn9ucx3786fQXzex
- Wn0rhJ3sdLkbaucixK+pVQSG8KCL8JIf8mDnX5vCCJl3mliuzmu2ZCNEwhLDiM6wnODkDpOp6RK
- SFMSCCfBuVP11ftn8ixHuGCMQoT/SUqw1CavlrVG7s/+j0ZQhG28GQPpd5ddJnY2z8TVIU8VYSr
- nPvTARDZJ7eiFLl95edVvzrZCZtmi+iDq4bYaOFirdtgIh9TJqpIjxR4dpCQHmsJNA0clcJ507y
- IpGT4OxHh5yB5me9Zx1RiEQfz8JcYXFquuQO9DRNT3dtg2EsRqw0w0elf5q42wVI5c7qGOor2P0
- 4eOqBfBVUXNv1nCq43Ru9SyNCBNTQwJF7JE4/ctSD+fLNGeCYbu/UtAhhsyQ==
-X-Received: by 2002:a05:6000:4a12:b0:46d:d90b:bbe4 with SMTP id
- ffacd0b85a97d-47f8d76050emr2245801f8f.40.1784792020410; 
- Thu, 23 Jul 2026 00:33:40 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:ab55:6d63:2bdd:9491?
- ([2a01:e0a:106d:1080:ab55:6d63:2bdd:9491])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c532d4sm12455016f8f.22.2026.07.23.00.33.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 00:33:40 -0700 (PDT)
-Message-ID: <4fd9db1d-0194-4f6b-8472-43fffed26371@linaro.org>
-Date: Thu, 23 Jul 2026 09:33:39 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 2171883E76
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 09:39:52 +0200 (CEST)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id A54BB4E40F00;
+ Thu, 23 Jul 2026 07:39:51 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 78C9E602B8;
+ Thu, 23 Jul 2026 07:39:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8421311C10108; 
+ Thu, 23 Jul 2026 09:39:48 +0200 (CEST)
+Message-ID: <a3ca27b1-9100-4de1-864e-4928ea6c601d@bootlin.com>
+Date: Thu, 23 Jul 2026 09:39:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 5/5] optee: implement the RPMB subsystem interface for
- UFS
-To: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
-Cc: trini@konsulko.com, jens.wiklander@linaro.org,
- ilias.apalodimas@linaro.org, bhupesh.linux@gmail.com, n-francis@ti.com,
- marek.vasut+renesas@mailbox.org, shawn.lin@rock-chips.com,
- igor.belwon@mentallysanemainliners.org, yoshihiro.shimoda.uh@renesas.com,
- alchark@gmail.com, tuyen.dang.xa@renesas.com, padmarao.begari@amd.com,
- macpaul.lin@mediatek.com, jstephan@baylibre.com, bb@ti.com,
- j-mcarthur@ti.com, venkyada@qti.qualcomm.com,
- hayashi.kunihiko@socionext.com, dlechner@baylibre.com, u-boot@lists.denx.de
-References: <20260722060805.1428110-1-jorge.ramirez@oss.qualcomm.com>
- <20260722060805.1428110-6-jorge.ramirez@oss.qualcomm.com>
- <791913b4-d006-44be-8c94-871617418dbc@linaro.org> <amDP5roFBAAdOcYK@trex>
- <6f5137f9-d358-4c51-ac2c-f667cf126d80@linaro.org> <amEIA0pSVEehZJYt@trex>
- <amEPgwafY1zm1LwF@trex>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <amEPgwafY1zm1LwF@trex>
+Subject: Re: [PATCH v3 0/6] mtd: rawnand: zynq: Fixes and software ECC support
+To: "Kumar, Love" <love.kumar@amd.com>, Michal Simek <michal.simek@amd.com>,
+ u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Andrea Scian <andrea.scian@dave.eu>, Tom Rini <trini@konsulko.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
+References: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
+ <af5b229e-0466-45cf-9562-434dc0fa383f@amd.com>
+ <6a9f0530-ea41-491b-b4f4-f7d03ee2fd3a@amd.com>
+ <b22d644a-6d11-4ac8-9a38-82fd8ce5d5fb@bootlin.com>
+ <6051fd86-9f84-4a43-9788-1fa07510c4c0@amd.com>
+ <1002cb3a-5f11-4d25-93de-f7965256903f@bootlin.com>
+ <1d8f89c2-3247-4897-a5a9-76fb4fd7c421@amd.com>
+Content-Language: en-US
+In-Reply-To: <1d8f89c2-3247-4897-a5a9-76fb4fd7c421@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784792020; x=1785396820; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=udvdkbhGuCAaC2HG7xkPhOwn33A6nN/5VfAo4E5avGk=;
- b=I4HPsq7HNY73q1OQyc8bXX9K6WUVTGLKPximPN9U61CnZ9mZIzJu2H1aGACEl3EAe4
- ToBrCzmxpg2YoWnjpkor5QOOzUOxHF246+XKzjL5s96r7IlAik37XhmVtsUErjzWDb8i
- oHiTB/eEWLaCmewzVAx0Sv2T57fMvCJDJLCtpWIQkv4Iux8zR5kNCAfABZJts4Ie413z
- MrcFh9fBaFNIRBp1uDF4YqMBl9Jkv/DrCQjfby8W4jFXTIu8DDZOg7MnJPF9d4cRzQKQ
- oF8R0RJLbEt9Za9mcZOZGdURNmcbVwAmRI8KC9s91ANaLd91iiGL/haVCtEU71P7UTiG
- qiNA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=bootlin.com; s=dkim; 
+ t=1784792390; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=9AfqzHU79cKPkv5ouMlVJKlF/WYjAb/zhlBs9/1XBZQ=;
+ b=yvrpXM9xzWzK1kkMXMZiI1ewGI3ikG2sQ6WgNoonfO8zdO0YS87GSVPHJjTpviB+hXrTng
+ 6i+9pZNUAbqO6e/Uhq/XJYRNbGzsPlE0MTQpVnnRQjKHXuyBFmn5N6snVpxBQVsEZr7iTd
+ SbxtrC2Fr/ZvMnN8afkHqNVRRXGRGbtQBeWjU5LOM6I0OEtLNz269//K2nG7foFCm6UYfa
+ f/MWekRBeWICuSjlOv3/DJK1rLwc2CWANL48iFVHxoIDcOZJfacyVn13kxq/qeSTyyKZVS
+ VEUUuyBQ0c1zMbuoaTn40seooKhqiwrAkQq9kqy+fhJK/XzgrKGYT3mJIvLe7w==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=bootlin.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=I4HPsq7H
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=yvrpXM9x
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
+ dmarc=pass (p=reject dis=none)
+ header.from=bootlin.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=neil.armstrong@linaro.org
+ smtp.mailfrom=bastien.curutchet@bootlin.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="I4HPsq7H"; 
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="yvrpXM9x"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -186,244 +130,147 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+From: Bastien Curutchet via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Bastien Curutchet <bastien.curutchet@bootlin.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 7/22/26 20:44, Jorge Ramirez wrote:
-> On 22/07/26 20:12:19, Jorge Ramirez wrote:
->> On 22/07/26 17:43:16, Neil Armstrong wrote:
->>> On 7/22/26 16:12, Jorge Ramirez wrote:
->>>> On 22/07/26 10:31:04, neil.armstrong@linaro.org wrote:
->>>>> Hi,
->>>>>
->>>>> On 7/22/26 08:07, Jorge Ramirez-Ortiz wrote:
->>>>>> OP-TEE's legacy RPMB supplicant interface assumes the RPMB device is eMMC
->>>>>> and derives the key from an eMMC-shaped device ID, so it can never
->>>>>> reproduce the key Linux derives for a UFS device; secure storage on
->>>>>> UFS-only platforms instead needs the transport-agnostic RPMB subsystem
->>>>>> interface, through which the normal world describes the real RPMB device
->>>>>> to OP-TEE. Add a UFS backend for it so OP-TEE derives a key matching Linux
->>>>>> and can use RPMB secure storage on UFS, leaving the legacy eMMC path
->>>>>> untouched.
->>>>>>
->>>>>> This subsystem backend currently supports UFS drives only; eMMC still uses
->>>>>> the legacy interface. As the legacy interface is dropped in favour of the
->>>>>> subsystem one, an eMMC backend should be added here so both transports are
->>>>>> served through a single RPMB path.
->>>>>>
->>>>>> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
->>>>>> ---
->>>>>>     drivers/tee/optee/Makefile               |   1 +
->>>>>>     drivers/tee/optee/optee_msg_supplicant.h |   8 ++
->>>>>>     drivers/tee/optee/optee_private.h        |  41 ++++++++
->>>>>>     drivers/tee/optee/rpmb.c                 | 124 +++++++++++++++++++++++
->>>>>
->>>>> Why not rpmb_ufs ?
->>>>
->>>>
->>>> because in the future (and IMO) rpmb.c should support UFS and EMMC using
->>>> the new probe interface (eventually removing rpmb_legacy).
->>>
->>> Let's see in the future, if somehow there's need for a common "new"
->>> and emmc only legacy some rework will be needed anyway. The eMMC RPMB
->>> hasn't been updated for a very long time...
->>>
->>> Using the driver model to register an rpmb device attached to an eMMC
->>> or UFS controller would the cleanest way to handle that, but we're not here now.
->>>
->>>>
->>>>>
->>>>> It's fine to have 2 backend implementations, the emmc is implementing the
->>>>> legacy optee API, just add a comment in the eMMC file about that.
->>>>>
->>>>> Neil
->>>>>
->>>>>>     drivers/tee/optee/supplicant.c           |   9 ++
->>>>>>     5 files changed, 183 insertions(+)
->>>>>>     create mode 100644 drivers/tee/optee/rpmb.c
->>>>>>
->>>>>> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
->>>>>> index 8321cf53a19..7af19834c00 100644
->>>>>> --- a/drivers/tee/optee/Makefile
->>>>>> +++ b/drivers/tee/optee/Makefile
->>>>>> @@ -4,3 +4,4 @@ obj-$(CONFIG_OPTEE) += core.o
->>>>>>     obj-y += supplicant.o
->>>>>>     obj-$(CONFIG_DM_I2C) += i2c.o
->>>>>>     obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb_legacy.o
->>>>>> +obj-$(CONFIG_SUPPORT_UFS_RPMB) += rpmb.o
->>>>>> diff --git a/drivers/tee/optee/optee_msg_supplicant.h b/drivers/tee/optee/optee_msg_supplicant.h
->>>>>> index 963cfd47824..b720d5d7b3f 100644
->>>>>> --- a/drivers/tee/optee/optee_msg_supplicant.h
->>>>>> +++ b/drivers/tee/optee/optee_msg_supplicant.h
->>>>>> @@ -152,6 +152,14 @@
->>>>>>      */
->>>>>>     #define OPTEE_MSG_RPC_CMD_I2C_TRANSFER 21
->>>>>> +#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_RESET	22
->>>>>> +#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_NEXT	23
->>>>>> +#define OPTEE_MSG_RPC_CMD_RPMB_FRAMES		24
->>>>>> +
->>>>>> +#define OPTEE_RPC_SHM_TYPE_APPL		0
->>>>>> +
->>>>>> +#define OPTEE_RPC_RPMB_UFS		1
->>>>>> +
->>>>>>     /*
->>>>>>      * Was OPTEE_MSG_RPC_CMD_SQL_FS, which isn't supported any longer
->>>>>>      */
->>>>>> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
->>>>>> index 1f07a27ee4b..2888257aefe 100644
->>>>>> --- a/drivers/tee/optee/optee_private.h
->>>>>> +++ b/drivers/tee/optee/optee_private.h
->>>>>> @@ -9,6 +9,17 @@
->>>>>>     #include <tee.h>
->>>>>>     #include <log.h>
->>>>>> +#ifdef CONFIG_SUPPORT_UFS_RPMB
->>>>>> +/**
->>>>>> + * struct optee_private - OP-TEE driver private data
->>>>>> + * @rpmb_next_region:	next UFS RPMB region to report on PROBE_NEXT
->>>>>> + * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT
->>>>>> + */
->>>>>> +struct optee_private {
->>>>>> +	unsigned int rpmb_next_region;
->>>>>> +	unsigned int rpmb_cur_region;
->>>>>> +};
->>>>>> +#else
->>>>>>     /**
->>>>>>      * struct optee_private - OP-TEE driver private data
->>>>>>      * @rpmb_mmc:		mmc device for the RPMB partition
->>>>>> @@ -22,6 +33,7 @@ struct optee_private {
->>>>>>     	int rpmb_dev_id;
->>>>>>     	int rpmb_original_part;
->>>>>>     };
->>>>>> +#endif
->>>>>>     struct optee_msg_arg;
->>>>>> @@ -60,6 +72,35 @@ static inline void optee_suppl_rpmb_release(struct udevice *dev)
->>>>>>     }
->>>>>>     #endif
->>>>>> +#ifdef CONFIG_SUPPORT_UFS_RPMB
->>>>>> +void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->>>>>> +				      struct optee_msg_arg *arg);
->>>>>> +
->>>>>> +void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
->>>>>> +				     struct optee_msg_arg *arg);
->>>>>> +
->>>>>> +void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
->>>>>> +				 struct optee_msg_arg *arg);
->>>>>> +#else
->>>>>> +static inline void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->>>>>> +						    struct optee_msg_arg *arg)
->>>>>> +{
->>>>>> +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
->>>>>> +}
->>>>>> +
->>>>>> +static inline void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
->>>>>> +						   struct optee_msg_arg *arg)
->>>>>> +{
->>>>>> +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
->>>>>> +}
->>>>>> +
->>>>>> +static inline void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
->>>>>> +					       struct optee_msg_arg *arg)
->>>>>> +{
->>>>>> +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
->>>>>> +}
->>>>>> +#endif
->>>>>> +
->>>>>>     #ifdef CONFIG_DM_I2C
->>>>>>     /**
->>>>>>      * optee_suppl_cmd_i2c_transfer() - route I2C requests to an I2C chip
->>>>>> diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
->>>>>> new file mode 100644
->>>>>> index 00000000000..9c3e0f031ad
->>>>>> --- /dev/null
->>>>>> +++ b/drivers/tee/optee/rpmb.c
->>>>>> @@ -0,0 +1,124 @@
->>>>>> +// SPDX-License-Identifier: GPL-2.0+
->>>>>> +
->>>>>> +#include <dm.h>
->>>>>> +#include <tee.h>
->>>>>> +#include <ufs.h>
->>>>>> +
->>>>>> +#include "optee_msg.h"
->>>>>> +#include "optee_msg_supplicant.h"
->>>>>> +#include "optee_private.h"
->>>>>> +
->>>>>> +#define UFS_RPMB_CONTROLLER	0
->>>>>
->>>>> Can this be a config option instead which defaults to 0 ?
->>>>
->>>> um, I dont think so - this assumes there is only one controller. If there
->>>> are more than one, we would need a mechanism to select which one from
->>>> the enumerated values (maybe a DT alias (ie ufs-rpmb ?) I think the binding order
->>>> changes as we enable/disable devices)
->>>
->>> It could collide with other SCSI devices like SATA devices over PCIe.
->>>
->>> Usually we try not to hardcode the devices ids.
->>
->>
->> right...shall I go ahead with a DT alias approach?
-> 
-> 
-> something like this?
-> 
-> 
->    8 ⋮  8 │ #include "optee_msg_supplicant.h"
->    9 ⋮  9 │ #include "optee_private.h"
->   10 ⋮ 10 │
->   11 ⋮    │-#define UFS_RPMB_CONTROLLER        0
->      ⋮ 11 │+static int optee_rpmb_get_scsi_dev(struct udevice **scsi_devp)
->      ⋮ 12 │+{
->      ⋮ 13 │+        struct udevice *ufs_dev, *scsi_dev;
->      ⋮ 14 │+        ofnode node;
->      ⋮ 15 │+        int ret;
->      ⋮ 16 │+
->      ⋮ 17 │+        node = ofnode_get_aliases_node("ufs-rpmb");
->      ⋮ 18 │+        if (ofnode_valid(node))
->      ⋮ 19 │+                ret = uclass_get_device_by_ofnode(UCLASS_UFS, node, &ufs_dev);
->      ⋮ 20 │+        else
->      ⋮ 21 │+                ret = uclass_get_device(UCLASS_UFS, 0, &ufs_dev);
->      ⋮ 22 │+        if (ret)
->      ⋮ 23 │+                return ret;
->      ⋮ 24 │+
->      ⋮ 25 │+        ret = device_get_child(ufs_dev, 0, &scsi_dev);
->      ⋮ 26 │+        if (ret)
->      ⋮ 27 │+                return ret;
->      ⋮ 28 │+
->      ⋮ 29 │+        *scsi_devp = scsi_dev;
->      ⋮ 30 │+
->      ⋮ 31 │+        return 0;
->      ⋮ 32 │+}
->   12 ⋮ 33 │
->   13 ⋮ 34 │ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->   14 ⋮ 35 │                                       struct optee_msg_arg *arg)
-> 
-> ────────────────────────────────────────────────────────────────┐
-> • 76: void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev, │
-> ────────────────────────────────────────────────────────────────┘
->   55 ⋮ 76 │                 return;
->   56 ⋮ 77 │         }
->   57 ⋮ 78 │
->   58 ⋮    │-        if (uclass_get_device(UCLASS_SCSI, UFS_RPMB_CONTROLLER, &scsi_dev)) {
->      ⋮ 79 │+        if (optee_rpmb_get_scsi_dev(&scsi_dev)) {
->   59 ⋮ 80 │                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
->   60 ⋮ 81 │                 return;
->   61 ⋮ 82 │         }
-> 
-> ─────────────────────────────────────────────────────────────┐
-> • 124: void optee_suppl_cmd_rpmb_frames(struct udevice *dev, │
-> ─────────────────────────────────────────────────────────────┘
->   103⋮ 124│                 return;
->   104⋮ 125│         }
->   105⋮ 126│
->   106⋮    │-        if (uclass_get_device(UCLASS_SCSI, UFS_RPMB_CONTROLLER, &scsi_dev)) {
->      ⋮ 127│+        if (optee_rpmb_get_scsi_dev(&scsi_dev)) {
->   107⋮ 128│                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
->   108⋮ 129│                 return;
->   109⋮ 130│         }
-> 
+Hi Love,
 
-No I was just thinking as a Kconfig option along CONFIG_SUPPORT_UFS_RPMB but
-I just didn't find where you added the CONFIG_SUPPORT_UFS_RPMB option...
+On 7/22/26 2:32 PM, Kumar, Love wrote:
+> Hi Bastien,
+> 
+> On 7/17/2026 8:21 PM, Bastien Curutchet wrote:
+>> Hi Love
+>>
+>> On 7/13/26 3:52 PM, Kumar, Love wrote:
+>>> Hi Bastien,
+>>>
+>>> On 7/13/2026 3:18 PM, Bastien Curutchet wrote:
+>>>> Hi Love,
+>>>>
+>>>> On 7/11/26 8:36 AM, Kumar, Love wrote:
+>>>>> Hi Michal,
+>>>>>
+>>>>> On 7/9/2026 11:23 AM, Michal Simek wrote:
+>>>>>> Hi Love,
+>>>>>>
+>>>>>> On 7/2/26 15:08, Bastien Curutchet wrote:
+>>>>>>> This driver is deeply broken in many ways. Miquèl has cleaned it up by:
+>>>>>>> - flagging the most hideous parts (where Micron on-die ECC support is
+>>>>>>>       hardcoded)
+>>>>>>> - enabling DT support, eg. for reading the ECC configuration
+>>>>>>> - fixing software ECC support
+>>>>>>> - aligning the software ECC OOB layout to the rest of the world and
+>>>>>>>       allow a working interoperability in Linux.
+>>>>>>>
+>>>>>>> I then added a patch to fix writes when soft ECC is on.
+>>>>>>>
+>>>>>>> Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
+>>>>>>> Signed-off-by: Bastien Curutchet (DAVE.eu) <bastien.curutchet@bootlin.com>
+>>>>>>> ---
+>>>>>>> Changes in v3:
+>>>>>>> - Add patch 6 to fix write issues in soft ECC.
+>>>>>>> - Link to v2: https://lore.kernel.org/r/20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com
+>>>>>>>
+>>>>>>> Changes in v2:
+>>>>>>> - Fix the sponsor: s/DAVE/DAVE.eu/, no other change.
+>>>>>>> - Link to v1: https://lore.kernel.org/r/20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com
+>>>>>>>
+>>>>>>> ---
+>>>>>>> Bastien Curutchet (DAVE.eu) (1):
+>>>>>>>           mtd: rawnand: nand_base: Don't overwrite read/write_page_raw() for soft ECC
+>>>>>>>
+>>>>>>> Miquel Raynal (DAVE.eu) (5):
+>>>>>>>           mtd: rawnand: zynq: Align the layout structures with the driver namespace
+>>>>>>>           mtd: rawnand: zynq: Add comments about very bad practices
+>>>>>>>           mtd: rawnand: zynq: Make sure an of node is attached
+>>>>>>>           mtd: rawnand: zynq: Do not fail the probe for no reason
+>>>>>>>           mtd: rawnand: zynq: Fix Software ECC engine support
+>>>>>>>
+>>>>>>>      drivers/mtd/nand/raw/nand_base.c |   6 +-
+>>>>>>>      drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
+>>>>>>>      2 files changed, 32 insertions(+), 89 deletions(-)
+>>>>>>> ---
+>>>>>>> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+>>>>>>> change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
+>>>>>>>
+>>>>>>> Best regards,
+>>>>>>
+>>>>>> Please test this series.
+>>>>>
+>>>>> We are again seeing the NAND write issue with zynq-zc770-xm011 board.
+>>>>>
+>>>>> Below is the log snippet:
+>>>>>
+>>>>> Zynq> nand write 0x80000 0x0 0x126f80
+>>>>> nand write 0x80000 0x0 0x126f80
+>>>>> NAND write: device 0 offset 0x0, size 0x126f80
+>>>>> NAND write to offset 0 failed -5
+>>>>>
+>>>> The exact same command works in my setup:
+>>>>
+>>>> ```
+>>>> Zynq> nand write 0x80000 0x0 0x126f80
+>>>>
+>>>> NAND write: device 0 offset 0x0, size 0x126f80
+>>>>    1208192 bytes written: OK
+>>>> ```
+>>>>
+>>>> Can you please share your device-tree / defconfig ? I'd like to dig into this a bit.
+>>>>
+>>>> I'd also be interested in seeing the output of 'mtd list' and 'nand info' on your side.
+>>>
+>>> I have used the xilinx_zynq_virt_defconfig with zynq-zc770-xm011 DT.
+>>> Below are the log snippets for 'nand info' and 'mtd list' commands:
+>>>    Zynq> nand info
+>>>    Device 0: nand0, sector size 128 KiB
+>>>     Page size         2048 b
+>>>     OOB size            64 b
+>>>     Erase size      131072 b
+>>>     ecc strength         0 bits
+>>>     ecc step size     2048 b
+>>>     subpagesize       2048 b
+>>>     options       0x40000000
+>>>     bbt options   0x00028000
+>>>    Zynq> mtd list
+>>> List of MTD devices:
+>>> * nand0
+>>>     - type: NAND flash
+>>>     - block size: 0x20000 bytes
+>>>     - min I/O: 0x800 bytes
+>>>     - OOB size: 64 bytes
+>>>     - OOB available: 38 bytes
+>>>     - 0x000000000000-0x000008000000 : "nand0"
+>>>        - 0x000000000000-0x000001000000 : "nand-fsbl-uboot"
+>>>        - 0x000001000000-0x000003000000 : "nand-linux"
+>>>        - 0x000003000000-0x000003200000 : "nand-rootfs"
+>>> Zynq>
+>>>
+>>
+>> Thank for these information.
+>>
+>> Have you explicitly enabled the soft ECC ? I don't find the nand-ecc-mode property in the upstream zynq-zc770-xm011 DT.
+>>
+> 
+> Yes, tested it by explicitly enabling it with `nand-ecc-mode = "soft";` in zynq-zc770-xm011 DT, observed the same behavior - NAND write fails. Same issue was observed without enabling ecc mode as well.
+> 
+> ```
+> Zynq> nand write 0x80000 0x0 0x80000
+> 
+> NAND write: device 0 offset 0x0, size 0x80000
+> NAND write to offset 0 failed -5
+> 0 bytes written: ERROR
+> Zynq>
+> ```
+> 
+> Am I missing any other configurations?
+> 
+I don't see any other configuration you'd be missing.
 
-Neil
+I had this error once with ECC-soft enabled but that was because I had 
+forgotten to do a prior erase
+
+
+Best regards,
+Bastien
