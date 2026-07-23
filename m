@@ -4,175 +4,263 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B38B3C4453D
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 02:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48FA4C44524
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 03:12:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 63CEE6078D;
-	Thu, 23 Jul 2026 02:43:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E13CC605C7;
+	Thu, 23 Jul 2026 03:12:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZUN0waYNqt5T; Thu, 23 Jul 2026 02:43:35 +0000 (UTC)
+ id waM9VyUGcTtD; Thu, 23 Jul 2026 03:12:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 15FCA606CC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E7DF16078F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784774615;
-	bh=utblVHlC//U9dhoqJDmQeUYHcHXTSLUrTXA8JACVqK0=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=tKLi1r3f3TpM7vUJRbkqDbw68KxGhZIH258TZhsFJZJHYqNtWDrSy71BWHe0/wkrR
-	 ZFEUKevQK1B/TdugSgr+jgxPRlrypNv+i4E+FkKl5e3YTshEwu+rc0t4xdAH4TS6Tp
-	 /lExcVuCmlHDFxvxD+Z6uj6N8f7N1IruM2O1+Wj4d3fkEZFFejjwjLO9bBGlYt/jr2
-	 1bv1G2ZEue+EdrMCx9QcFOWgsHlVk6euva0RmkIOcWP6ty4yPpTtFLOCNQJggS6fWf
-	 mOgJ6UOePYzl65XDF2P9wNQwAc6KPkvVtD7WAk6HQmHO0jIjTx5YPriEz1ogHt+cXW
-	 HarwaQ0H57nug==
+	d=lists.u-boot-project.org ; s=default; t=1784776372;
+	bh=yN8xJOpEykD/kmbJPsSmAurkTpsDLRglMXsxAkJYsic=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=A7l6HLAPSh74YMsAEJBBMXLZceg+D9+lMBp086Ttvvcw1y1Z72CK5Jok1Yi3v4ms5
+	 /YKMkGJxuGGPGi4YIq6geGlzppJk4Q65iiM+eHfb6saf2k23SV7Eh7lSTZcDaU8zuX
+	 vs2Y0TgdpnOBT+jmuY3IxCZYiVwRD75iGnq9GPeA52eHxOHMlU0q6EIxEo83y3SPiD
+	 HJnMWn/3OyL9V7UlenqHZBvUzVtQySN/qfU2aPFKVSydQZ3A006TxuOW0ngW7KzP8K
+	 F8xgwrTEdR7L/xJV34q9HkKPV8C/mrZErL+1OwCprCbxEvIUphlqBuK6ULWkG+nCgk
+	 zFQM+8So2kTlA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 15FCA606CC;
-	Thu, 23 Jul 2026 02:43:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A26C02E5
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 02:43:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E7DF16078F;
+	Thu, 23 Jul 2026 03:12:51 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2CA942A
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 03:12:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 93C7E402A7
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 02:43:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C853980F76
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 03:12:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QG63ORT3764M for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 02:43:33 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=alif.zakuan.yuslaimi@altera.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 6A80E40026
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6A80E40026
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XidFwr_OGP7L for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 03:12:49 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=dmukhin@ford.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5067180F75
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5067180F75
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6A80E40026
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 02:43:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5067180F75
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 03:12:40 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6A128494B; Thu, 23 Jul 2026 04:43:28 +0200 (CEST)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
+ id A3D248498B; Thu, 23 Jul 2026 05:12:38 +0200 (CEST)
+Received: from mx0a-00498f03.pphosted.com (mx0a-00498f03.pphosted.com
+ [148.163.146.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A09A88404D
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 04:43:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8CFB8494B
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 05:12:35 +0200 (CEST)
+Received: from pps.filterd (m0384718.ppops.net [127.0.0.1])
+ by mx0a-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66N0XuHV3598295
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 03:12:33 GMT
+Received: from ch5pr02cu005.outbound.protection.outlook.com
+ (mail-northcentralusazon11012026.outbound.protection.outlook.com
+ [40.107.200.26])
+ by mx0a-00498f03.pphosted.com (PPS) with ESMTPS id 4fk8fr8p0w-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 03:12:33 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Er6QMknE84eKDT9n1OU+sMBlfpX0fsV5VFJESfuq8Fiw/KCY1uVV0Eob8aztlHVx6m9tIva1jmZCBslfbgJaA46ueCFInohyFelhgOA3ZEPHz0fCpUFAaULjMUb0gHOQ0n+kgktH9mIqxGeZQRYfb3YTWQsX9cloOEdBHNqlB/wLNqYCYLu9sOVjOsUHqfjYt9SDevr4wgDJvH5iBaeBYLc2Lox+q96PEHQoVcVd3GPBSzm7QF40mOGPtZ5Las2hdGdETCu7sVVmm/rVn6qQY9SIdwuFtvq2qYebnTxH2oX/MuTBxi8POILWmZN8JU1CNx7FbswjaaHfQWr5D8LjMQ==
+ b=DRLuG711+AonDMJheeUpv1+ML4nxJRBD7JMQ+bTVm1tgEZ8qZ0hUuyVuRuXVwGJHs9AqV/2U9FMr6/y7MJ93QFeJUvUh2/56b6yBpDpwIJxFk1FcMY0qjLc9N2wC+CKQ1eIlHp+Cgazyx6enxkiZW8tKIbTZHuklcDiGoOCYD2PTjBbTc6onwlua6w42Q3KCRQ9vJyfDQmMJC/i00ZODIyjRnuf/KSdKHiHxvKvd3UGFo2cwmAVyRmjkmAVf/6bL8bsVCy8bZpf5f0V28nmPReRgdKQJIeljA2dAUmwfGagXTd/7s4ZW8lBhwP2rnr4xOABqkQXIhI+kPcK3v5t0mg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=utblVHlC//U9dhoqJDmQeUYHcHXTSLUrTXA8JACVqK0=;
- b=UPI8L5dyPpNJkwRaY8/I+5Z9m4nXZChIbKq0tzInQ0nF1CoMn7KUae5bwKZuX6d39phVQT6oNz+oNxeJXFfY33DPvnIX2WCQ9u9sMdHhBvFPQkdVJgumlkMldacYkKh2QnvzHZLa1Z29i45QuviyBTURWAjWjXSGQB1k4FURnK63iisgcfpZ1j8aXeIXmYFRnchsGHSuHmw0Kd7VgCuleY5n1QE2EF/iTrkbg4Hi9BIGM/WgiChV2Xpj/2NR6tJilXtVLD87FP9kIH8/VCipzsvOIPCTLakV1BoHVqy27zo58Om+TYIeUzzxwNwR+UB/+O5Udj3Y/A964mnH2qgpoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by MWHPR03MB989484.namprd03.prod.outlook.com (2603:10b6:303:2a8::15)
+ bh=yN8xJOpEykD/kmbJPsSmAurkTpsDLRglMXsxAkJYsic=;
+ b=hoHby2Nby6NIw8/nvwvqYp9KWKO1Q3BxaCcrYOwGYg5ZAZ5IEaXFw0Cl5x4QLQ4vFK97yIgZAiI87fGKnqhoti4OQa4K3SQnktb/PkzI37ymY2nxTTZUIOxCRWB01sipcuYRf0RqtQiZLQPkyn9rvz0Gx3nmNOg24eiEtXn+D3di8uQgC2Ql9Evf3ZUSiUzBEnVp3qGErNmbob5N/e3BoQKHlCPJt6x+oMj+WomHSjGlJ4/bgnx9ANAxVwP2QQxGbk189rFTzI2CFnjgelV82+80kMNGPcA53oE/yKkVPxMyyHXUCETBr6YhUO77pFqamEdRUjuBdSD9XByKn4rCqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 148.163.138.245) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
+ dkim=pass (signature was verified) header.d=saarlouis.ford.com; dkim=pass
+ (signature was verified) header.d=ford.com; arc=none (0)
+Received: from SJ0PR03CA0386.namprd03.prod.outlook.com (2603:10b6:a03:3a1::31)
+ by PH0PR16MB4311.namprd16.prod.outlook.com (2603:10b6:510:56::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
- 2026 02:43:21 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.21.0245.009; Thu, 23 Jul 2026
- 02:43:21 +0000
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Brian Sune <briansune@gmail.com>, Anshul Dalal <anshuld@ti.com>,
- Simon Glass <sjg@chromium.org>, Johan Jonker <jbx6244@gmail.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH] arm: socfpga: Rename TARGET to ARCH for SoCFPGA
-Date: Thu, 23 Jul 2026 10:43:06 +0800
-Message-ID: <20260723024306.9888-1-alif.zakuan.yuslaimi@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0110.namprd05.prod.outlook.com
- (2603:10b6:a03:334::25) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+ 2026 03:12:27 +0000
+Received: from SJ1PEPF000026C3.namprd04.prod.outlook.com
+ (2603:10b6:a03:3a1:cafe::41) by SJ0PR03CA0386.outlook.office365.com
+ (2603:10b6:a03:3a1::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.10 via Frontend Transport; Thu,
+ 23 Jul 2026 03:12:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 148.163.138.245)
+ smtp.mailfrom=ford.com;
+ dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
+ SJ1PEPF000026C3.mail.protection.outlook.com (10.167.244.100) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
+ via Frontend Transport; Thu, 23 Jul 2026 03:12:25 +0000
+Received: from pps.filterd (m0426316.ppops.net [127.0.0.1])
+ by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66N0XJfM2822617
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 23:12:24 -0400
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [50.112.124.217])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4fgrhbn0d2-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 22 Jul 2026 23:12:24 -0400 (EDT)
+Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
+ id mjrBw9636JrM7mjrCwKDpx; Thu, 23 Jul 2026 03:12:23 +0000
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: mjrBw9636JrM7mjrCwKDpx
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+Date: Wed, 22 Jul 2026 20:12:21 -0700
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: dmukhin@ford.com, u-boot@lists.denx.de, seanga2@gmail.com,
+ sjg@chromium.org, trini@konsulko.com
+Subject: Re: [PATCH v3 0/7] few fixes for NVMe and block devices
+Message-ID: <amGGlR4457jNC8bv@kraken>
+References: <20260716223401.378989-1-dmukhin@ford.com>
+ <c4cfbd8e-e596-471a-bcce-40147be5ab20@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c4cfbd8e-e596-471a-bcce-40147be5ab20@linaro.org>
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-23_01,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ malwarescore=0 phishscore=0 bulkscore=0 suspectscore=0 adultscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607230030
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|MWHPR03MB989484:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8caabf37-f7ae-4a71-1648-08dee8642832
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C3:EE_|PH0PR16MB4311:EE_
+X-MS-Office365-Filtering-Correlation-Id: 78aaf8df-57df-4bd6-44ea-08dee868386f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|23010399003|366016|55112099003|18002099003|3023799007|56012099006|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info: bc1HcwP+GLlho7WhU+Uu8sKLQY1bgjBsTGziHmv9a58xq/mWeuBJeC8xObK1VKyUekhMKpFWmeiWexMVVMbd8Pzrg0fnkJMIbIB71WCjB28Yrfdk3tcE1xuD/v4IiDIyeGWv+mseu2ZxkTk9CGTkFaHlLTb75Q1lP+qTvnO4jzO6HPU7AVF3pAcTd02XvyaeLsbbeVkp18uJnDFwnU07faNScIaFFyq4/qFXex0ycbGHgO7V0urnN/c9z019hUQqsspnktCchJVLwX2PTQ0dNtbkYbwLJQHYeaIlZKWWMOrTVm9e/AKK3B8dtwjH98hIYRvQEoZU9l9g1Xk+/Iib+MKZ2c5R82HrrE3OsrLSOKl5jci0lOSlyi2ZCrY6/iCkWZWeXHUspdMk5la9EddHcnnG60CbjQjAZCg1+3Vy7dkADJ8CoeuHbtJ5HPztWQxbsW6+HMtQrhQAN/OisgS8iPqJy/rxiZnc91xNLtfo2n109n2BxqTQXVHIBwPc6wdiA1nwQ3ac2CynKTOvsa6M4AbX2mAtgiqmVhJDP+5ZmM2X0YpUcyMGIJva0qhurgZ8vnKB8ykZAJ8owPyJruRsmpHGQClt4f67tr/YkPTDD0bmomvtyCokxgME1L4MXxGIgZQlg6cB3ddKzcIIjtZD1gVQOmd17h8rPY5RXquyL1s=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(55112099003)(18002099003)(3023799007)(56012099006)(11063799006)(10067099003);
+ ARA:13230040|23010399003|82310400026|36860700016|1800799024|376014|11063799006|3023799007|4143699003|10067099003|56012099006|13003099007|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: gUIPhcOfiFJDCh53RAhHLt6anW/dsKwjdORwAzrM2vd1bQovm7ZgnVkMo2h17jpTvpXFrq6sPRfovOPfUjIk+1eg6btpCG6GsFyenxC9Oi1eVFCJTKiewH6Uz4BzhpeoVvbHWjVlo+qg16DnQ8MU5CtIssjBYUuI+7Hj03AnFOX26dP452ZsVXdpIxBqOgFk1sovAUn6RLYkOxLSjUSc3sg8NJr1s0Wfjn0CAUSlK6nqWZ6+zpU3+GtMpc0uG7ywKUye6iOYEhPDIlSZm2tq2+k9MhCtvBTC+ZWDuOh//Q8eKAz5B7LlGaPudKVU6MHeanDB+GNRZdxun8DXfnUySzqZss6qLsEY1MRsZDIBh4jGcUz50pYqG71IdupVndzjUVeGfyGe7XGOJmrw108LOxqGmbYTTegZhX5SrKyPfvURWY2DA4y4TZ7XXoDfk/t0V6F7SxCE6YAlyxtMm255P1TYDDJhIqdrc2skK2bOXryAtTKM7NjO9qxR+175uemMOpFffjT89yI9kDVXN32vloYYqspbNIL7PWUcXjlguXBZsXO7Cg65Ff0czIonpuoXms+JwoREMKsm1hIDSiBBEw20xxWwHFbuR0tfUPacCyddyq0OZce/K7apI2w0e+ItA1gpdtYYrbKbygtAYF1RqnwuoXqGRJGCIYmpJkgtIL9uUsvtg/JEqD9AWszz0Z+3nvYIKTgfDSbcZAqMGH+gYA==
+X-Forefront-Antispam-Report: CIP:148.163.138.245; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mx0b-00498f04.pphosted.com;
+ PTR:mx0b-00498f04.pphosted.com; CAT:NONE;
+ SFS:(13230040)(23010399003)(82310400026)(36860700016)(1800799024)(376014)(11063799006)(3023799007)(4143699003)(10067099003)(56012099006)(13003099007)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VtR0guLU1ohu/rThXoqexVwPwrN6MTauBkxVmsKXfiaPpmSKoDaegL08+oKQ?=
- =?us-ascii?Q?ink/e1fnCbmspq05nWdDcDZFCDjT/039nINpivleWJm6XZYT1ko/HobntI3Z?=
- =?us-ascii?Q?4IvrcnOWukNhwfbmLffbCoElLu2T6LZy4mVllg+k7kVwbzdviyUUeCGRJiPf?=
- =?us-ascii?Q?TbyFoLQCcy7r3Opqfn+cCNCUa0QsVVxM1zEbQ6fekDnLAb2ydr9KROYH2dFP?=
- =?us-ascii?Q?Cq6U75zC+bZM2Vmk0fUQykPTmV79HWjfoRqbKCm7xdwJmog3m6yjkGeLZGjv?=
- =?us-ascii?Q?nKU3+vicNMvkAa4O4Oh81on2C1plAsYRneirda4FjRH5lvceYFZn2+xd9wF+?=
- =?us-ascii?Q?H9RmW9HjEkWU8kUh/zGKgzzDISNqaZNn6TcnP/YV7zutaBM4XfP7dDQmeljE?=
- =?us-ascii?Q?0H5j+EltNiZqLIl4u69ZeTqKOMtjo5U/n8mUslIs6CIlORK4G+pgmegajalK?=
- =?us-ascii?Q?iV/aLQpemke5uzetEQIti+WuPJuoPbeG1Yi26Pk4uZxZ/15VWDeZhzKZHBSu?=
- =?us-ascii?Q?yhwekj49KrkeWL1IhQVFctVA/5Glor879JKx+1UbfL3A9cimkcKCD2t/I2Hl?=
- =?us-ascii?Q?n/kv3vz5rfmp2uho9zGn97ozFz/J+MXjiLQH5sDm76WRczBeI8prl/GlToZx?=
- =?us-ascii?Q?1NttFXEKBb1uJsVSKjAKW1AaiwtjgAzChgAPm+fOAllK27zQ2hdZpN+JXoH5?=
- =?us-ascii?Q?TCtm4lez5VLLawHk1ShLt0aw2BezYWphDTHiep+Zgstw7r/uK+ltalV0jyRo?=
- =?us-ascii?Q?hPhjekVqc1sEcGnEQSktKVJMX+6KpiLwUOaQzll1vYK6WNNSAIDyQkula16G?=
- =?us-ascii?Q?7QDJlLcgvfvfy8y1W7GU2fTzq0djNwiOygIXuC6p9NVUOJUTDOd4hWTWslc4?=
- =?us-ascii?Q?Rs/zZmU+6oq1ygEg1DfWURTPeqkXXKaWOveHaOOfHsCrRbkl8eyYNHJCJuM0?=
- =?us-ascii?Q?q9P9LoFo+H5qlciCRNi3x1weTDf/X7IncoWsXzgtEdSr+bpARxTmUH2+IPTH?=
- =?us-ascii?Q?MEIx2lmXPtmMN3WS5MKjVY6Y8eB5/BB4On7NIzlZrkxxgf1kLZTEL1DDhung?=
- =?us-ascii?Q?yIIQ+MO8SUBxMir1lrcChCoSxuC6e2cuwu8FHF0/NfgVUR0MHWjxt7TR/9pa?=
- =?us-ascii?Q?PM6HT7O5DfTGUwDHzP3Ak9zIJnzfm0QAzRcn0ieS39kNuFm8HjNQTqTxn3ml?=
- =?us-ascii?Q?vw1uFaFw5kL8uyf9S9mzGb7mnE1RataYsvolIgAOScUvPgExptmeSn8/HWhL?=
- =?us-ascii?Q?cZkvZuZJiyfdjpZmmvf1pIFRzk+nJa4B8sw/X/z/zu0EEYvQUtjdoKGvl/Yv?=
- =?us-ascii?Q?FPJ96cMkQHNu1lNpH0odoMYSj2CoXUA/PKNK8nO2lyGc6BxoR6eghw7RaRuz?=
- =?us-ascii?Q?+p6chmpmkJB1fLgY+vVcQgUarhYbuhlc12qBEl41usl8LkXbAFKyeWYapxnl?=
- =?us-ascii?Q?DN0e8Gv/RQZnmHS/NcgUN8E14iTm/ng+8A0UftkdFLv1qnvtz6ieN4hlzTSX?=
- =?us-ascii?Q?mq222d2yHDuaoHJ4rxfVXriH2fVv5+1jWFTJF+Rb9a/+ypHCA7GoMJe7Yl36?=
- =?us-ascii?Q?g1P9cAE8vJ+qSH/fuXbr+MODsrm+hNlwNI1GcRoxJ6jPQZ107bDNQzj3OGaS?=
- =?us-ascii?Q?kYDOycOBxbrdmgmUHWjrcEKP50ho09WWd8STuJ7y/QEhp7fcrNGva8nlMlwo?=
- =?us-ascii?Q?lANza9Ki3cFDaewBjiJJRY951HJHDjZ8qZrQdm0h6OS+2SBSUhI6lfeBXO8O?=
- =?us-ascii?Q?L+R/7IjaEahuwQkfy03aSmm7Ag7KynU=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8caabf37-f7ae-4a71-1648-08dee8642832
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 02:43:21.0313 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dWw+mc0PB/OQyQF08RFALyRWt2THVhclgCFDs9VcGsGChJ/EbzCSLwetpGeTUDmQ3u6vay7fOFe1ta7LqSIXKGXb5HaSA3Tos3g3Ni7OovQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR03MB989484
+X-MS-Exchange-AntiSpam-MessageData-0: lSrx8HlE7GMrGYhM13s4jHqEo/XMR9LXO6ib2BA7TgjE5nAmTIneEJ5W4LGSQtSxd0BGIYKoeY0S9N78cazUSMkmemIOBPOzqkQJzRdB9Uq/Fn6A1ck/r8EvAsYdy8Ue7YMeUPOLLfHehlBA7Lsyt3tJEwoUYv5GOeIeOH4/jPiRSawLvDFIyPpMvkV1Gw2Xl6bU/031b199Z85N19neX8OKBQI4R/3oc9Y2O1MNuifaY5kR5xzH7guLxyg+R8JzDvytSCAcau4K7UteG32pC3MM8VV8NbDGVZdn2towex731Uwd3hpdsB1s90//+M+CSDiZwPsrC5z4hLllGzTCm949S/jBYgwRKxfPACq3PvvHa663+iws+vLPiore2BiYZIPtDxP0vhe2dDzQ2hHENPFfqs0EtxX4pT5702DcXpHBEM8vCsr3uI7/3cHNCkWs
+X-Exchange-RoutingPolicyChecked: AypFLE9EvzOn/THTQIPXbekqSC6XfUdBqfzz59zSkOD8QNS5dgDJvP6f2nOC+qyZkBgGhnDf58WMoWoxnmwQcl93W4/CZ9YGyMfVZfqLS4Yr3OJBGFSpNxZ9JMNG5Xdj5I5qNqZVFES8xbrDrtgVFAyc1PTZzFwuodu7jZDs/Jp+z12l+fs9c1P0avIjGvnj7TlQVwTSCKTPH9QrInKy8BS1REzr8uv43C8A/yGwHMpCW8qUddlM+A3P3mVQJJKtdUIxVEdVRRNrInI775XrtXU9dqVBXJWCXeKXlKriGUPico10Puv1Km6Pz67esRRWDoWwQYB9X0uIRRZghA3Swg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: lxo7FImS8/bLl1+6zamuwohOlOzOOQ1Z8tMu8nCtVEskjD0UP3ETl9KABQEZM4SpORLyGvyYRSraiuKpcV49MumHtRK85Lw1rbBiPwNygHVgp4oD5SZ5bVS/HUsiOv1b2uXYihyxSXnY0/XuUqW1h0fptIfgEPcpeKpg/xQvlCBC81/dd74fwu1M5fG/Ypeny1d8WDMTxGWyHBMGXhhN0qeB1ujoDjIK25pvhjcmIJPHjXg6gBYNGq4eHciSLYyHLJm/YXnJ4GdEsPkRfGYpBqpUyBhTEWEK8pocmslLlVJduEmIyPf4O3RB8g/dXyCkFmra6IbLeF1liKFLIzliTrsK5vDRnQ4ZaL2Uluj3otV9iBhD5/aXi24x1Mxtjh6Z9pBwAAOq2Lwt2jB497NsGQO6IUY3h3oRhVeJNin31qCeIfadhlRggZHSYl+6emBIiNwpMNfjhhTCXHOcONVTK7jO8zJwRVBzUYSw0MC1Y0Chhk95x5W+sTgp65oeH9oBiSv3J1suULH1VY0uyCzlCrB0/S58/A/M6jOUCtVtQVKyN3Ap0NhgMhq72GcRKlfBGRrpWEIC2F9FykOPZmIQ6XYdA00rZTfknCEMSw5DkItWdkWRKg5lXLCaRQfaKwcnDR9EYRStgKenprXcJWL+NA==
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 03:12:25.1601 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78aaf8df-57df-4bd6-44ea-08dee868386f
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[148.163.138.245];
+ Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026C3.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR16MB4311
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDAyOSBTYWx0ZWRfX6SC2ezAW4HC3
+ ALFL4JaKODiH8H7ZC52r2zhPt3cBUYvrAbHeYvDLpa9va3yau274njZisvA5ax6mWo5muHalZQJ
+ ujiANYLOCH3hTDp/oinmPJiHIsNzm9oc1jthhvEnG5wfTwLXm0uJ
+X-Proofpoint-ORIG-GUID: ak0qqiavuJcmNbO7VhiVyJByBk9kxZHi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDAyOSBTYWx0ZWRfX+aNjGNpfVqGK
+ AZ7ynb0Ia5guZ8moZ5dQ6au9gnDg6pp9HJEcGLkzZWO38pdPUehgB1MX2OwaPiEGlZ5qW/3UCgL
+ nu94cihH/E0NMmOj5LrMKyC0cA510saL1TOQNBlXwSoN02H7ItEaNg+n7uRaqW//R1nteRBB4Ye
+ A99dpQdkTldeew4nAk4rXFCnCDNM17g1hPCWPZ9+S09MKXg6dijt4zP/u6f8fnK2ld4QWE1rYBP
+ l4oiOBaa8SOq0RJXRdcrVIjkDTtKaK2gwIXZnUpn+YG8v4vpINCfgv/C1+6onYLjAnf45dLNNIg
+ ZOEU3rPsluCvdQeg64NZA5+OW0iIpSfMkHwRyU8/x7SrSeNFyxP89/MVoOLOw+fbu5QmppcCwYY
+ U11jQD8V3AMbdXjgtUPuMxc8c7V5cLSriPZopOb2GdaVQYoi3maJLKMEyTUd7mk4befD6PpdXh/
+ TyQug9VkdLJDDHrXShw==
+X-Authority-Analysis: v=2.4 cv=K/sS2SWI c=1 sm=1 tr=0 ts=6a6186a1 cx=c_pps
+ a=A3soYu1h9hn2xD7k0nk5XA==:117 a=b7IhknPlfT0FN1EembXvig==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10
+ a=3PXLN80vpJUA:10 a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=P_n1zlmtWsCQbjROFjcg:22 a=ARvDHhclS48edyKYUbLB:22
+ a=VwQbUJbxAAAA:8 a=cbNQJ9GKAAAA:8 a=NEAV23lmAAAA:8 a=KKAkSRfTAAAA:8
+ a=6MK0urfzVrqB7U5YXDoA:9 a=CjuIK1q_8ugA:10 a=DqJYxgmhk6moR-_7_KoZ:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: ak0qqiavuJcmNbO7VhiVyJByBk9kxZHi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-23_01,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ lowpriorityscore=0 suspectscore=0 spamscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 clxscore=1015 adultscore=0 impostorscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230029
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=altera.com; s=selector2;
+ d=ford.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=ppford; bh=yN8xJOpEykD/kmbJPsSmAurkTps
+ DLRglMXsxAkJYsic=; b=f5sffUJfErGrt04HO5Sur6oFt31cFdk/4rhxXl/5J8e
+ ZCoEtmYa5jQZNhATZBYJUndnf0BbS9iH2yxanasTgON1uAtDJaANzsvCiMDQlcPf
+ 4c14IMGFprYH82EfUigFr7euYT91J8XVNbyu+5Epoy+Sg+251AtjNPjcsP/+XFFx
+ r8QNSQKTq1DR8fhDrKuZWxqbVzcUjnod/GtRmxoTFqmDRrDfUjj29pXmoce9fZ0E
+ GDKdGar/Ln1CTdb81jiU+Yi9ieYuqmrrWSlrHmcvyrzVQJAA1SNvt024vEtPnwfu
+ l7HU3krFFvdfj1ksGIub6HBql408UMieEYhirxPXH1w==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=utblVHlC//U9dhoqJDmQeUYHcHXTSLUrTXA8JACVqK0=;
- b=Isc32MxlUmvHJwONA2/NroqdbG4lGTI0qNNGEdgnCg6nEDCCfJMOZmauk4Kto1eru/PampdZAhfjS/FpOLcIFpgsIKIYeQkHL8Ijjv+MSlOhnBapcsSgEj0I+NCMqj/zmNnnClmZmJhfXDZIs1yGPmKQhOCXgJ1fBFJ71M7eKUD0HTTZsDJBuYLTp4one+KKsdgzixkULtLYD8qww3SShrOJn9O4Iz1cgPsltV4orsDskQAPNLNoLFrp3SryYDxZSd2jeiWVEals5wZV1nNB2lasb/aVFwzNRDiNYR4FS5FDCTyfhMIJ2KUYYhYAJvt6CAxzN4Qtlbq1arc/n5bZzg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=yN8xJOpEykD/kmbJPsSmAurkTpsDLRglMXsxAkJYsic=;
+ b=FGBK1stCKm6/xlAqDZuvWy4y7q0d/d60PF6ZGvCWGhauVctcyr1IklihQC8clZkivmaO1DgggEY1sUayoi2h8sYTBG7hSn5D3RAzKG8RmZ2DNLjDV408EZltXGKwdOc3r6CAlZmFkIfAjT9/VL3IrbIIAFMZTNqOWW6NHQZSHO4=
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ saarlouis.ford.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=ppserprodsaar;
+ bh=yN8xJOpEykD/kmbJPsSmAurkTpsDLRglMXsxAkJYsic=; b=J4HJPH4vBAn7
+ 8bVGr1P1BGfKib/xGiL/eJN34eZ3UUQeW++f3z+dGujNy7kS8JHFe7jNtEDPadHL
+ e1YtEJ3c/rcyuCS0akObxtjrczR7+xJILJMlcwNB9X+JUxgwf+Rwomooq5sswn/b
+ CmPEQ/DK67g5gQTVKyYGzYAa8eSQNm5ei8ZTYGKJFCM7GV7+Wyh7fBOxZyg4YvGM
+ xUiAj+Jjnkv4Nal8azwZO0jop+5U7gPJVYi/dg6rcIgYxUBBrcOlF2vgc6R0kYw/
+ yBH9FjXN1x4vaqHOOICeLTDP4ykWNurbpJ+22rav2dCJV2gqrzt8ZvQOUu/TsQD+
+ QwdfcmuwGA==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ford.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=ppfserpocford; bh=yN8xJOpEykD/kmbJPsSm
+ AurkTpsDLRglMXsxAkJYsic=; b=Dp9L9jrF4JNZl4q/87DibOmxfUsB89lpPUrY
+ pG2iYFue2yzUcfXELbIqCaFe+EjDJ0zD5cAyzizEGUo40cM3wP732bC00iEtx8WX
+ pEqhBB0GuNtrDXbMLrGbGSsxw6+TPFUk89CkXeQeIVj6g8VQoWEe/vJMM39evn8V
+ 581tD+zjK8XZuBTx5pV12fwMkRuz0t/+AVbG3kl6oPLFTQ2x9bprF/uIjlWhn3Fc
+ EG3lZQBbsEJHcg+6HX50X5PQQNipEu3hmG8AHqCMghO01GcyotifWfUSLW0HpVZ4
+ 5rYJp/G/Z3m630R6812ATWAFTqxXsfg6GHPUcFJzy7ugx2Pv3A==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none)
- header.from=altera.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=Isc32Mxl
+ header.from=ford.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com
+ header.a=rsa-sha256 header.s=ppford header.b=f5sffUJf; 
+ dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com
+ header.i=@azureford.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector2-azureford-onmicrosoft-com header.b=FGBK1stC; 
+ dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com
+ header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar
+ header.b=J4HJPH4v; 
+ dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256
+ header.s=ppfserpocford header.b=Dp9L9jrF
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none)
- header.from=altera.com
+ header.from=ford.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ smtp.mailfrom=dmukhin@ford.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=altera.com header.i=@altera.com header.b="Isc32Mxl"; 
+ unprotected) header.d=ford.com header.i=@ford.com header.b="f5sffUJf"; 
+ dkim=pass (1024-bit key;
+ unprotected) header.d=azureford.onmicrosoft.com
+ header.i=@azureford.onmicrosoft.com header.b="FGBK1stC"; 
+ dkim=pass (2048-bit key;
+ unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com
+ header.b="J4HJPH4v"; 
+ dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com
+ header.b="Dp9L9jrF"; 
  dkim-atps=neutral
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -184,55 +272,79 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Alif Zakuan Yuslaimi via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: alif.zakuan.yuslaimi@altera.com
+From: Denis Mukhin via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: dmukhin@ford.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+On Mon, Jul 20, 2026 at 11:33:02AM +0200, neil.armstrong@linaro.org wrote:
+> Hi,
+> 
+> On 7/17/26 00:33, dmukhin@ford.com wrote:
+> > The series adds few fixes for NVMe subsystem and block device management.
+> > 
+> > Patch 1 adds FUA support for NVMe devices (original effort in [1]).
+> > Patch 2 adds plumbing for blk_flush()/blk_dflush().
+> > Patch 3 introduces NVMe flush command.
+> > Patch 4 enables `flush` subcommand to all the block-uclass front-end
+> >          commands (ide, nvme, pvblock, sata, scsi, usb, virtio) in one go.
+> > Patch 5 makes nvme_shutdown() symbol public to enable use of it from
+> >          board_quiesce_devices()
+> > Patch 6 tiny fixup for QEMU command for manual NVMe tests.
+> > Patch 7 updates tests for flushing block devices.
+> 
+> Thanks for updating, but now you enable FUA, why do you still add the
+> flush infrastructure ?
+> 
+> With FUA enabled, calling flush command would be a no-op.
 
-Commit 62f7a9460209 ("Replace TARGET namespace and cleanup properly")
-replaces the TARGET namespace to ARCH for all SoCFPGA devices.
+I forgot to plumb enabling FUA behind the Kconfig knob, since not
+every bootflow needs to persist data on NVMe...
 
-Some of the TARGET namespaces are still left out, update leftover TARGET
-to ARCH following current SoCFPGA naming.
+re: flush: My understanding that flush() infra in general _could_ be useful.
+That's why I kept it in the series.
+But I agree, w/ NVMe FUA enabled, flush is redundant.
 
-Fixes: 62f7a9460209 ("Replace TARGET namespace and cleanup properly")
-
-Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
----
- arch/arm/mach-socfpga/board.c | 4 ++--
- cmd/Kconfig                   | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/mach-socfpga/board.c b/arch/arm/mach-socfpga/board.c
-index b202ca258bc..b662afc1ad7 100644
---- a/arch/arm/mach-socfpga/board.c
-+++ b/arch/arm/mach-socfpga/board.c
-@@ -210,8 +210,8 @@ void lmb_arch_add_memory(void)
- }
- #endif
- 
--#if (defined(CONFIG_TARGET_SOCFPGA_ARRIA10) || \
--     defined(CONFIG_TARGET_SOCFPGA_GEN5)) && defined(CONFIG_XPL_BUILD)
-+#if (defined(CONFIG_ARCH_SOCFPGA_ARRIA10) || \
-+     defined(CONFIG_ARCH_SOCFPGA_GEN5)) && defined(CONFIG_XPL_BUILD)
- unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 						 unsigned long raw_sect)
- {
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 35ce42f8397..b724f4f8d49 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1911,7 +1911,7 @@ menu "Shell scripting commands"
- 
- config CMD_C5_PL330_DMA
- 	bool "Release Reset DMA Channels for PL330 Handshake"
--	depends on TARGET_SOCFPGA_CYCLONE5
-+	depends on ARCH_SOCFPGA_CYCLONE5
- 	help
- 	  Provides access to Reset Manager Per2ModRst. Enables DMA
- 	  channels for ARM PrimeCell PL330 via reset release.
--- 
-2.43.7
-
+> 
+> Neil
+> 
+> > 
+> > [1] https://lore.kernel.org/u-boot/20211019104049.v3.1.Ic581ec99f46b6dfa2e0b1922e670a333ac859e82@changeid/
+> > [2] Link to v2: https://lore.kernel.org/u-boot/20260529034441.2075305-1-dmukhin@ford.com/
+> > [3] Link to CI: https://github.com/u-boot/u-boot/pull/995
+> > 
+> > Denis Mukhin (7):
+> >    drivers: nvme: Enable Force Unit Access (FUA)
+> >    drivers: block: Introduce blk_flush()/blk_dflush()
+> >    drivers: nvme: Implement flush command
+> >    cmd: Add flush support for all blk devices
+> >    drivers: nvme: Export nvme_shutdown()
+> >    docs: nvme: Update QEMU command for testing
+> >    tests: add blk_dflush() coverage
+> > 
+> >   arch/sandbox/cpu/os.c             |  5 ++++
+> >   cmd/blk_common.c                  | 17 +++++++++++++
+> >   cmd/blkmap.c                      |  2 ++
+> >   cmd/ide.c                         |  1 +
+> >   cmd/nvme.c                        |  1 +
+> >   cmd/pvblock.c                     |  1 +
+> >   cmd/sata.c                        |  1 +
+> >   cmd/scsi.c                        |  1 +
+> >   cmd/usb.c                         |  1 +
+> >   cmd/virtio.c                      |  1 +
+> >   disk/disk-uclass.c                |  6 +++++
+> >   doc/develop/driver-model/nvme.rst |  2 +-
+> >   drivers/block/blk-uclass.c        | 15 +++++++++++
+> >   drivers/block/sandbox.c           |  9 +++++++
+> >   drivers/nvme/nvme.c               | 42 +++++++++++++++++++++++++++++++
+> >   drivers/nvme/nvme.h               | 12 ++++-----
+> >   drivers/nvme/nvme_apple.c         |  1 +
+> >   include/blk.h                     | 26 +++++++++++++++++++
+> >   include/nvme.h                    | 11 ++++++++
+> >   include/os.h                      |  8 ++++++
+> >   include/part.h                    |  8 ++++++
+> >   test/dm/host.c                    |  2 ++
+> >   test/dm/mmc.c                     |  2 ++
+> >   23 files changed, 167 insertions(+), 8 deletions(-)
+> > 
+> 
