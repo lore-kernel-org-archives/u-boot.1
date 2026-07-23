@@ -4,163 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB37C531D0
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 18:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F188C531CC
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 18:54:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AC07D60AD6;
-	Thu, 23 Jul 2026 18:51:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4B90B60AD3;
+	Thu, 23 Jul 2026 18:54:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8gYfSGcvcmZi; Thu, 23 Jul 2026 18:50:59 +0000 (UTC)
+ id OB0A89yGtnsY; Thu, 23 Jul 2026 18:54:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D08D660ACE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8285E608F0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784832658;
-	bh=dGilVmPvuv3UsgK4qb6/mBS8+HrfzSiDepK1RNnLIA4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784832848;
+	bh=YRO4Xt0d36Ka/NjcdqcVu3Yfjcq6cv7KnoYG5d2ldK0=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=00mjHLvOpJ8tU1FY5Gyv84dgQzEiCIXVIS9sWHRG3/Vb13esaYeiN64KtzBdUJLjp
-	 OVMxwLGxyaIog/XL7hdD+zeGc52JVNSbteYyEEW2gW1j6aKxOYIn/2Ys7AokTi9E1k
-	 2lip74z+4feX7Yrb5XtkYHrX8GAaKB1U1jEDT+ZSMb5+P1rKF7n+bCMr9vV2pTdImh
-	 K2vDNDMt2ZoXkfI50qG4ZVvuyjIvvQWMp5jDRa1tUoLy7b9pyJPWPvFg70XYxlik1c
-	 KN2mygIMN2GjKZQ6YgpuwATqzHGaSaUpBnzBQwz2pTEcUGg2lwZCgxJ2M8nex0MrPd
-	 hqhqTnDriIoWA==
+	b=eKc0cc+YfIhaAoaL0UPysDgcIxoz9gRLN1o33oU4ljpFrgg+I3TI/bvIooA6Bq0SW
+	 dPdlmGvOLkSsz38iFIAqQXLmmfiQ8NWkEvjhpLaC2BZRfHFZBFDFNJkD/1nRV3l6Mt
+	 uIRwi0dIOLpDUkLH6c3GzCNy5QpACPvyfow3oxNMRlJ082E+NQpIvNduCaTQH196Nw
+	 jN/1egPwEapCN4kkbm45Ao0SNZihSaYBsPfA0kq9roPdFegfS2uPxRve6p/KLnSUtg
+	 +FqpWv+Ei9nIgCac1wOLLxKd0H9IAAkEJSVEcWShadTD9XuOj8mcZCzKAssg6TO4qx
+	 BPf0uI2PlRF7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D08D660ACE;
-	Thu, 23 Jul 2026 18:50:58 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0B07F42A
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 18:50:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8285E608F0;
+	Thu, 23 Jul 2026 18:54:08 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 789DE1B8
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 18:54:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id F0D4460ACE
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 18:50:56 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5E74C40472
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 18:54:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zY5DPSKLPBu1 for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 18:50:56 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=ilias.apalodimas@linaro.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 98DC660AC9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 98DC660AC9
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 98DC660AC9
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 18:50:55 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2213C80398; Thu, 23 Jul 2026 20:50:53 +0200 (CEST)
-Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
- [IPv6:2607:f8b0:4864:20::b12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BDE5800AE
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 20:50:50 +0200 (CEST)
-Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-6685001353fso839764d50.1
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 11:50:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784832649; cv=none;
- d=google.com; s=arc-20260327;
- b=QFo9DvMaND7J9asNxqGdVxTYtNY8+C344xUcD0Ho3JEXfbeqiuX/nnl428Dqv1qcqS
- c3FieI8Dav3mr42CAmHPmtqk/IMROUV97j4v92Bq3OlZKz4766fA+EG9gCdSjyNA4xBA
- 2VJlwuFIovmtudTdiCL2hS6bUtKGN/kZcVQ41Tg/ty+PWm+Eb6TMzzC6AXVNCskTlE9b
- VKr367jvkoI7PgqA6puNAxvvrf+2zmS+1FyGzRWVfP2D+e1RUfkVKMD8fV39Vh/siBcA
- OLtvfxCR1m5kkWpmUC878tfIfLxqEPXrfGZiNKrYL/+dnTZ0uSV4KE1wzFFDHdjb5FSN
- RkKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=AkZOCQ/lz0cJrQSR5vRmAG6ZarHrYuoiahGhJQ7eWcQ=;
- fh=DG0vC9xYMfPMPCdWMOrewvIZ3JtemwQ6JIsQFuoxmZI=;
- b=K+yEfDqIj+aYaaw/29hVzeEng8FEsXfRbjsYECa5qvaGzimG9DYZ65QYJ6aQ8UC32g
- 86+KetxmzVPAieuHD88g1JNEU9QXstT2R/FW8/sMLw95Vm9AGgrQwEsT8C+Z6faP0Noc
- nUfCqHD8TtwRA6wEgzL3KJYBwLn7nYCeByld+TUHTkRNIlai7fmU5181BrUwP4DvYwdL
- 4K+xazX4+0hyzRplnumJjLbKD0qhUA2PokpOeSdXwO7pRJvTAAZbDKMXrPxR4XazImHY
- 66eKg/G4JC0WrLW+0EY5grdSy5vs5uaQqOkvtFRnJKIOUhov5TFCp4tNybp3qf00+ZGD
- J7cQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Na-Gck2e3kzl for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 18:54:05 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9AE4E40162
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9AE4E40162
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9AE4E40162
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 18:54:05 +0000 (UTC)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7eb42a2f5feso484453a34.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:54:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784832649; x=1785437449;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=AkZOCQ/lz0cJrQSR5vRmAG6ZarHrYuoiahGhJQ7eWcQ=;
- b=rM27crhe2sAvumYxjGOgUtJcrNHzxrOVejw2GTxIe4ieBYKkx7lxEzWJfMyYfN2fJ9
- 5waFb78sO5kZjZlczc/MD6PGh2CUulSpufRBXsF0ZIsEKC4V0j+YXg9O3dQwbojKApcd
- ogUbVR7EHBqnayYHY0COv806EdaeowpJ5u8v71yiMv7p9Vg70Mnzw49+6ZmU8JDgPEzN
- O8gOWGOGxpRKROrw3fF9SGfGaaEwr4S33C0s/i3WttxK1p/an0AlkPPg1VIi7o4daEJf
- CsA5hccmksYmMI4O4IZyYp11867Z2WEM6LYEMqjUjLWDkwaVQiD3NvZPdnVqe3SYXvZ2
- 4MIA==
-X-Gm-Message-State: AOJu0Yy9RICBsR5cPYoEm/aD3Ulu/hHxB8uHxEOKqXqk0wNPBLK18MFO
- KSfI9LvlzcXiwBMzZUwkTALp1yKwB1iddPKLycnCXAD9y/WMHtb99WS7AvF3kFNs8D0mPpk7vxe
- Ql16v84zGctN2FTKvn5I5hx0NJQnyjYjaWY/Nuh/Qxw==
-X-Gm-Gg: AR+sD12M2+h0U5zaL1k5JJP6iZwgNZhMmaDTMv6P5/4CmWFTk+aCQ/8oYlgPmF/+geW
- DxahR4eR9v4QwY25Rp0Tr27KXsami9Dk7tsA687BpRYmvW+T7wAtYQnXVBOa4slZzJ+RnpjUso/
- klcrpWiZ20g65eL9IhumvFZjz8rEsnQ27vHDSkGBqpR9Ck1XK0cFaCKYRyXe0bDKQCrUyc8SbfM
- smKgZ9wsypp3S6IUcn61HKwGyLEamaXRZMIFV/5Y4WMp4T30Y1r9lnGwFbpBtpuazZ9rbesqn2J
- 9yEB5V0vwKVlWMQdoLdJHLL8ujD03yApPIGwhiYY/2o5O5AKqNAsz+vJmJ4q+8LxZfpQuEQWi3T
- twJ/QEjeAKOyNX7WbiMizeOkhq6pEdT9be+Nj8V7g7ULyCsX+HkHCHZK8MFEdA33vHcuHYc167g
- SS8Mrpn5U03lwNzgr9YkwCcP98CgoL51Fp9Y2xyyhzojlJuE25AdsW6xDf989DuvJBIxmiTFjal
- F8k7SXZ2yeyOhTcCtsQjEeU/MEG21ze+ofG424rn4HyiLBOZMdTi0ju0/BIWkf/UN0PbIJtBF5L
- TaHVdqe9xCocfOqdRCwn1+0VllffVxPpBOV95qLHhV5d5FDF0NR4CKfMRk0=
-X-Received: by 2002:a53:acdc:0:20b0:667:bd13:2f54 with SMTP id
- 956f58d0204a3-668a5006179mr1005615d50.88.1784832648571; Thu, 23 Jul 2026
- 11:50:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260710-efi_security_protocol-v1-0-a06cef90057b@redhat.com>
-In-Reply-To: <20260710-efi_security_protocol-v1-0-a06cef90057b@redhat.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 23 Jul 2026 21:50:11 +0300
-X-Gm-Features: AUfX_mxitEsRoGRoE2AY3x4jOxhuxJMx-kCmr_gkkWB-0A17NjOT0vvUsQca8L8
-Message-ID: <CAC_iWj+sHzAbQ79Osr2TiX_S=qo_kJPC=QPdqKU+x5BnMHiaRg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] efi: Implement EFI Security Architecture protocols
-To: Ian Mullins <imullins@redhat.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Enric Balletbo i Serra <eballetbo@kernel.org>, 
- Enric Balletbo Serra <eballetb@redhat.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Michal Simek <michal.simek@amd.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Udit Kumar <u-kumar1@ti.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.30
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784832649; x=1785437449; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ d=1e100.net; s=20251104; t=1784832844; x=1785437644;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=AkZOCQ/lz0cJrQSR5vRmAG6ZarHrYuoiahGhJQ7eWcQ=;
- b=luecxtEYfOR3S68Fl3ujC6IeTKgvz4MyDVKIHFEOa4kytSRchwucfB7B1t18JnfFTF
- R3Rt7kFiB8PjdAkU6OR5fqHBA9mEm2EVZr7wi+rG8ZJc2ovYSPp3ag1W/hOcQqhlbdyM
- 4wfhv4PgecA1x/rIUHXoSbFpTQ/JICGq8MMyi/abq88N7BnxyiEtz1tSDhzdHrCCCgST
- w1ph2P3YQ5MqY1GjRqaYT9ppUAWto7nMeg1HDmhzz6AnR1oq4lvNEmuqCfC7Teavu2tx
- gzSabB9A3U0Zt8F8ZA3j6pnOeJCvjCRWlZysJxEt81LbYn8/A1yvFd63dM7+K8LoQBaZ
- VOXw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=YRO4Xt0d36Ka/NjcdqcVu3Yfjcq6cv7KnoYG5d2ldK0=;
+ b=klSfaTmCGQ+SRCZ/th1ZndMmJveF4mLw04MTHCeRV2JHtCyLnBdCJlLAwbKNGW+pih
+ 45M/kEQn6I93ggjh25sCdOrHyH0B8ho7BBI36ZphQ/zm+phxbaAop0FiQ7dutZQE/Vql
+ 3M6Lv8fXPliciA0z9JA1BHLe2JgcQZmSf/ge3JGgjDjpsh126QIZajGf3x3ub4Jb0F5A
+ dJauFWd+4DavOCbaT3eQY5NRT/fhKm3Wy/k9VlwnTh9SFjh/ypW8Heed2//3kKbgEauD
+ ogZRHikySnc5vk+VSqjnNg7PzUV1YSAwitFmBMkfBIUyE4vQ8587Q/BjrKQvheymyVi0
+ AnlA==
+X-Gm-Message-State: AOJu0YxxIQJgB1LaQzXIrrZU+1/OG/UBVvPBp4SjyH8ohHqhpa1OQBtm
+ ZsZ8Cu0v3TVP6ruOK0xRx0dJbc4c66vvxF5VlwV3ikrAUP016/Y96KybI+fF2XLyQZs=
+X-Gm-Gg: AR+sD13U3L5FVGWWZ742RAsBTGqfn7hGCsZtvwYtHe6jnNGOiTY8BX2XE9bymbDYbgO
+ LfiulOjikE4XkRBWmLEmyZii3KllXhAgYM7So6N5cS3en0kn4RXOGPZnxxaM9XzwtUo1j/2wE+f
+ Jc7kBdo3YEWJyKDYwx3JHpeg7az02yqZ0S2rKAX+Id9IGnKNpPcoqR0eIfUManZ3PyKEr4tN8dR
+ qfHI8pVx3knZr3BV/XPaTemV1fQSIkrKl0hqSOc+rpRMgZR1U03omvp87XnRXqrWg1u8QxLy78n
+ lpYulqou6dXzv/nGnJuau7pF/e9X3/e0fTSlWrReWjrQFRkdu0KLeKO/dShK8b9dMmgl4ndxHgw
+ /KfcRe2VBhQKq0xJ2o3K3MwGFA/L0N3qA8lL4NtLjfxBQdHq+mvU9EXmBOpy0Q6u4D5p9zHvgsa
+ GzgPYhgHBoPEhVJCHIHHJLssEGksThiHrRCfXoLUZMo4x11h6+LcqOJTGDcL/W32u9ZYwQA6ut7
+ GYS0Noj37RKnSC8HYaZqNzMWg==
+X-Received: by 2002:a05:6830:8289:b0:7e7:76f:3ec0 with SMTP id
+ 46e09a7af769-7ee43d0755dmr2643161a34.15.1784832844336; 
+ Thu, 23 Jul 2026 11:54:04 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ee2a108679sm4217667a34.27.2026.07.23.11.54.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Jul 2026 11:54:04 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, GSS_MTK_Uboot_upstream@mediatek.com, 
+ Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
+In-Reply-To: <20260722201522.3930921-1-dlechner@baylibre.com>
+References: <20260722201522.3930921-1-dlechner@baylibre.com>
+Subject: Re: [GIT PULL] Please pull mediatek-for-main-2026-07-22 into main
+Message-Id: <178483284358.3183172.15000440898796253779.b4-ty@konsulko.com>
+Date: Thu, 23 Jul 2026 12:54:03 -0600
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784832844; x=1785437644;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=YRO4Xt0d36Ka/NjcdqcVu3Yfjcq6cv7KnoYG5d2ldK0=;
+ b=uTVlXpeYyx1LYmCZBqQKFEiyuG8zp1XRKAYjGBXQg73l/tFpzzBFv5ZSY5khA83wCX
+ ns/rVqvg02asiY+3+KL+qKKhbS7Wq77V96VR3igSyz7fbP/qCbj30YKR4by0KTiKeJ/+
+ 6XCQ4jhhdXxDQKf02drI5fZpZN72mgcGVdt/s=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=luecxtEY
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=ilias.apalodimas@linaro.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="luecxtEY"; 
- dkim-atps=neutral
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=uTVlXpeY
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -175,81 +127,21 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Ian
+On Wed, 22 Jul 2026 15:08:59 -0500, David Lechner wrote:
 
-Apologies for the late reply.
+> The following changes since commit 1b8283bd3220e898d338fb98929f0b06ed63da84:
+> 
+>   cmd: read: fix unsigned overflow bypassing range check (2026-07-21 13:52:50 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-main-2026-07-22
+> 
+> [...]
 
-I am on PTO, I'll have a look next week
+Merged into u-boot/main, thanks!
 
-Cheers
-/Ilias
+-- 
+Tom
 
-On Fri, 10 Jul 2026 at 16:24, Ian Mullins <imullins@redhat.com> wrote:
 
-> This series implements the EFI_SECURITY_ARCH_PROTOCOL and
-> EFI_SECURITY2_ARCH_PROTOCOL. The primary motivation is to support EFI
-> applications like systemd-stub in Unified Kernel Images (UKI) so they
-> can temporarily override authentication for embedded payloads.
->
-> Note: This work was originally authored by Enric Balletbo i Serra.
-> I am submitting it upstream on his behalf with additional testing.
->
-> ---
-> Testing Performed
->
-> I have validated these patches across various secure boot scenarios on
-> both physical hardware and emulators to ensure the new overrides work
-> without regressing standard secure boot enforcement.
->
-> Hardware: Renesas R-Car S4 (EBBR UKI boot)
-> - [PASS] Unsigned image, Secure Boot disabled, without patch
->   (Boots)
-> - [PASS] Unsigned image, Secure Boot compiled (not enforcing),
->   without patch (Boots)
-> - [PASS] Signed image, Secure Boot enforcing, without patch
->   (Fails to boot as expected)
-> - [PASS] Signed image, Secure Boot enforcing, with patch
->   (Boots successfully)
-> - [PASS] Signed image (wrong keys), Secure Boot enforcing, with patch
->   (Fails to boot as expected)
->
-> Emulator: QEMU (qemu UKI boot)
-> - [PASS] Unsigned image, Secure Boot disabled, without patch
->   (Boots)
-> - [PASS] Unsigned image, Secure Boot enabled, without patch
->   (Boots)
-> - [PASS] Signed image, Secure Boot enabled, without patch
->   (Fails to boot as expected)
-> - [PASS] Signed image, Secure Boot enabled, with patch
->   (Boots successfully)
->
-> Signed-off-by: Ian Mullins <imullins@redhat.com>
->
-> ---
-> Enric Balletbo i Serra (2):
->       efi_loader: implement EFI Security Architecture protocols
->       efi_selftest: add tests for security architecture protocols
->
->  include/efi_api.h                                  |  30 +++
->  include/efi_loader.h                               |  15 +-
->  lib/efi_loader/Kconfig                             |  11 ++
->  lib/efi_loader/Makefile                            |   1 +
->  lib/efi_loader/efi_boottime.c                      |   3 +-
->  lib/efi_loader/efi_image_loader.c                  |  31 ++-
->  lib/efi_loader/efi_security.c                      |  99 ++++++++++
->  lib/efi_loader/efi_setup.c                         |   7 +
->  lib/efi_selftest/Makefile                          |   1 +
->  lib/efi_selftest/efi_selftest_security_arch.c      | 110 +++++++++++
->  .../py/tests/test_efi_secboot/README.security_arch | 208
-> +++++++++++++++++++++
->  .../tests/test_efi_secboot/test_security_arch.py   |  73 ++++++++
->  12 files changed, 580 insertions(+), 9 deletions(-)
-> ---
-> base-commit: 913fedc816570c07bfc7f9c4046dc2a3a55e4099
-> change-id: 20260710-efi_security_protocol-6b9fb0e8da41
->
-> Best regards,
-> --
-> Ian Mullins <imullins@redhat.com>
->
->
