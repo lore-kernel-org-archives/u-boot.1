@@ -1,104 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23F3C531D1
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFFF0C531F8
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:05:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 928B0409D2;
-	Thu, 23 Jul 2026 15:05:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BB9CC60A67;
+	Thu, 23 Jul 2026 15:05:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3HDK_b3PAGCL; Thu, 23 Jul 2026 15:05:02 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Pb3m06zZAu1M; Thu, 23 Jul 2026 15:05:07 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A8FFA409E5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BADBA60A46
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784819102;
-	bh=gluQf3Djp+Po1jvpu6kCqFnNTAgivzl3dLBpboGagVE=;
+	d=lists.u-boot-project.org ; s=default; t=1784819107;
+	bh=RF4R1X93RDLF5TIXFs9CZYyA/1oJZ1MwcTp+RnbXmvc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GC20pc/zgTeYhwjEpY0pmp2CGrR6EPHlpw2CIQmBizycLrLXGVQ6/y56etY28aGI/
-	 EJK2usA8jgQZIx2uONX+cnurZdp2Y1Inxv3ayB4EQTuv1PkrxzTlAy3kHLOJM+V4ky
-	 c6tOsNcd6iEr7YrUAyTVf+HHxEOpfAWgt9yg9jpaVdqaorQM3pttZOuEvF6SV3oaHO
-	 Pr9gmOQpk+THThFomEylYQBJgIXzyNdvWZu268z72/EvPiD1exX6mdFMt63r8WcpfW
-	 z70003rSgNJ4V8SAGqU0GnjJq6mpDITUzK90iz1hatCyPYHPBu9ihYpteL14HA4CP3
-	 m+xCEKTEjpgBg==
+	b=cinUZJwyrgh7MKel/1d96VVnMUlcXOjNrucWqSNB13mLCsTHnEN0V+iUr9OCP6hxh
+	 Uu3OW5vozznjN74OdJ21jyJMldaWGiaw3bH2Pt6FTJSnXh7jkPdLSTB4EvdHg+n3fu
+	 e3vZeM/usPY3BXv++0UmsZzwkGsLW/kQrSSyofk65D9mp7MnahgZaIQEvJWxkoOPCO
+	 By/BXsfvNOhGozZSmWAerUETM8N/3zm4POqm7pcd72CCF3mzqtKPAv6zHVmRdOxlmh
+	 6KCAbUFCSKiUogcdLLwW8kFOba0JOUlOj4R7VPgQAjxV9PWQa/AE++zPMto8pFwW3k
+	 5kk029ryb9J7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A8FFA409E5;
-	Thu, 23 Jul 2026 15:05:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BADBA60A46;
+	Thu, 23 Jul 2026 15:05:07 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9DA213B0
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:05:00 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id BAE98390
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:05:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8F72F403DE
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:05:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id AD184403DE
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:05:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fgZ06N7_rfCQ for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 15:04:59 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5117B4020F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5117B4020F
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5117B4020F
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:04:59 +0000 (UTC)
+ id hYd5Ihi1vtrT for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 15:05:04 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5BF7F401DD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5BF7F401DD
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5BF7F401DD
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 15:05:04 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C56B780287; Thu, 23 Jul 2026 17:04:57 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 998E580287; Thu, 23 Jul 2026 17:05:02 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB0D080087
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 17:04:55 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-c15e03c2763so104591566b.0
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 08:04:55 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1981380087
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 17:05:00 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c167bda216fso108166166b.2
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 08:05:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784819095; x=1785423895;
+ d=1e100.net; s=20251104; t=1784819099; x=1785423899;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=gluQf3Djp+Po1jvpu6kCqFnNTAgivzl3dLBpboGagVE=;
- b=ilx/4KUn2bLwTzkQKKjntFGwavl6eil0I4i2Vfv+xwmp2YVZIaDqZHa/Nu1pVfVwJy
- NRdtASNhAQvFw56/TAqgH4L4qQuOvQ/sxAts5CgzB8ffH56NEFQa3/PLeCl/sFpKFudd
- j3HGEEjQ/k/AghrHdOtegsyuysnRWn0+H1berr2mY5j0ANIK1G1cT40sKhcnaCaDVOQr
- 3R7j9qh2Zpglvl8Eh0aVqKy+kb1uQ2aJMudaeTNtRuC4664gbyYMxJeLMSjq+N3aHFXe
- hRQhsLzTAJ6xY+M5XkrgNqtrv1yfkcB7sphNvAYP2aQgxhvrydgixAcrMJUY77Wf4w6l
- 3qqA==
-X-Gm-Message-State: AOJu0YysJywFCIvBiFYItwsKrHI16HZ49e2yilLd+vdT8R4Ou6ltotK3
- GGoOrXpEa4VBS1PRoqOJ9lHIDZUEuYKMowfQ1UeE6/6hRHtDi8++ud7ldsfGFgTNg54=
-X-Gm-Gg: AR+sD13+7of5wQWR0O6J59ys/xHPsjuhwWMZmbi7rxCNQS++tOSlqqx9Lrh+qplHXwk
- 9MUy5R+rUWcCLWavP+K/+FIskcQRNB2bqO6IdXeJRasSf6yqOO+NX9FBYWKd56QENjhjn6k1eQA
- Q5P8F1w7+ltOLLlxHK49v4Buu9exN5hGFCY6ERD7ambFl1bcZyGHbAOygMtZn7omR4oOq/N/WRC
- OxqaicJU4JAgo0WYKywo3SWH9eIt90795famcG/ZZCfofUfYmuZ5bEHYMZz+MyQ9L/TdskVi3iV
- 7ZkCcGWn/xRunDF82k8yk6lFnVYcKswLKfQuT+y71FCORF3mjVq39ZQ83wypw1ybujEGHRHHays
- 6oluClGJtZTlPliPiVMG7mHzfN+PMVV9PS6mcH0zZ+7uHOZaqDG0z1M+oN25DRmqlbX7MF2OpDA
- 5b2ZJmDNJ0RLbnTroyvVPpB341vHihtw2g
-X-Received: by 2002:a17:907:3e92:b0:c08:5bdb:e904 with SMTP id
- a640c23a62f3a-c1c536bebadmr171337766b.9.1784819095168; 
- Thu, 23 Jul 2026 08:04:55 -0700 (PDT)
+ bh=RF4R1X93RDLF5TIXFs9CZYyA/1oJZ1MwcTp+RnbXmvc=;
+ b=A5e8wU5fcdyATz3ltnSWhv5/vXLL6TFwP8PX3LaehsLOZk3W41B8HakryfDoQyYhtC
+ Vf5bP1wKHcDtalAPJAOOjXWiXUUh6RWwOAALTjzh1Omr+4I7evpLDM6PlhUU6AGhjKuU
+ FiSbvds33FC4ICf/6n6/hGDqVyD5sMUiAruqA7aJ2AOeqMjc2sQi420/Fr2Zc50cTQtX
+ Hijra4Rvnwtun/n9kXuXH3+zNB6ghZQE3R47sTBozkQKhqjSI/rjnMqy3k02xPxmbJf4
+ h54FpOoUBi8cjLiDIfJ3XsbPQ1f/Uh23NQsGzPRzq2Yoyl8H31A+SepJcisxfT0HnZ1b
+ QA8g==
+X-Gm-Message-State: AOJu0Yz/+T91QLrDLNyqeF5RWRte5gmNYeCP0Ca6MFUH9uZRxAmWZf7+
+ ZPfeoGwIXYND4Ds6sMtD0CuXntRO0u0zfUTODnEE/l2zkOMEtOx8hF5IE0NYgQOtcW8=
+X-Gm-Gg: AR+sD13WaziEso0HOBmf3MgUoTcrDa+Z8vm1Gy8WMwM54PCOQeB7FNqrql9iuhedJ9k
+ B7vgBsfmUGVmto1WeiEI6Htb1mb8Ec5+K8VswXQxbKsYhWqTszwL3i2dyyBc7uOSgvryZDU2v0x
+ qP7Tu5RUxLVbXdZWPXyqHJ8iUBka+5TFVIOisqk7fmHddvbVCmOXDKwaHfNVBsjG/S1C9Arhnip
+ c5UsQU8U+Oj40Oev3mIqNNP5m7r5sVIJU4tNp28BnX58fJ2/Hwd003ezyxsnw5hJCJhda01MEHV
+ x4GvEZCigckx8zP1oznps5/XcKbPznEavdmP4jcVkEz84MaaGU/glXKMn7u4WStbwKqeKTLz6eh
+ HUwd7dAtFteyuMKyX/5gHrlDksdESKuW/UDys5qArTpeN22aLR47r0vBqyZzPYJNduiB0oWW4DE
+ 8pQWeO6gZDl3f20AekNptHdA==
+X-Received: by 2002:a17:907:78d:b0:c1c:28e5:652e with SMTP id
+ a640c23a62f3a-c1c509cf853mr147216166b.25.1784819099227; 
+ Thu, 23 Jul 2026 08:04:59 -0700 (PDT)
 Received: from alchark-surface.localdomain ([193.32.126.214])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1c32f1127fsm248769566b.55.2026.07.23.08.04.51
+ a640c23a62f3a-c1c32f1127fsm248769566b.55.2026.07.23.08.04.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 08:04:53 -0700 (PDT)
+ Thu, 23 Jul 2026 08:04:58 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 23 Jul 2026 19:04:26 +0400
-Subject: [PATCH v2 4/5] clk: rockchip: pll: let rockchip_rk3588_pll_k_get
- update m directly
+Date: Thu, 23 Jul 2026 19:04:27 +0400
+Subject: [PATCH v2 5/5] clk: rockchip: pll: fix overflow and drop manual
+ two's complement on RK3588/RK3576
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-rk3588-fracpll-v2-4-382d113f3a80@flipper.net>
+Message-Id: <20260723-rk3588-fracpll-v2-5-382d113f3a80@flipper.net>
 References: <20260723-rk3588-fracpll-v2-0-382d113f3a80@flipper.net>
 In-Reply-To: <20260723-rk3588-fracpll-v2-0-382d113f3a80@flipper.net>
 To: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
@@ -112,34 +110,34 @@ Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Quentin Schulz <quentin.schulz@cherry.de>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2530; i=alchark@flipper.net;
- h=from:subject:message-id; bh=5iRP/gYDRYDdn8zps7urfvniGSutNZR0Q+/5uF6MFM0=;
- b=kA0DAAoWsqLYjxBZ1KUByyZiAGpiLXug///gc2UL5qf3v1FT7L+g2JbunSkdcfNXGQDnfXSde
- oiRBAAWCgA5FiEEnfakPZUyDpq6SEj1sqLYjxBZ1KUFAmpiLXsbFIAAAAAABAAObWFudTIsMi41
- KzEuMTIsMywyAAoJELKi2I8QWdSljiUA/3szjZEWrA83zZN7B+vz40/FFaZRsKDUJV2cdB8/A9k
- AAP9bDy4VQNO7D7WBQtPDYvI/YQ9Q5O2u69DQqqIDkmwhCg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3972; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=G0vN2poFWotueIWZNMZBSD/h2L3ULjnc2bbXxPW9wTc=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQl6da0Jpzed0plp6d/3qIDSkv7WaIv5S+5fuFYg1JBs
+ eC3xistHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
+ oZGOsY4RAxenAEx1qy8jw68NJd2WNy99cVZfsVnoksahDv3YSe9aMo42ci8y12h8asPwP2br25A
+ FxmoC5h7vD32RsfCRiVWe+vKY/9P51z/ey37iwgcA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1784819095; x=1785423895; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1784819099; x=1785423899; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=gluQf3Djp+Po1jvpu6kCqFnNTAgivzl3dLBpboGagVE=;
- b=jO4bkvhKb+ZKsNOwEjKAvgEk9tF0SsZv8eWr0m+wqCkBAxEq54FesyMpPavGeq/WJG
- BkNdkJLo02UJlGHdMAe9HcbQIKhuus/Hi+3Y6PaCsNMPmqwZEkEn/XfaHyzhWrkl1T1/
- 7jOqMVDdQmj7G+P7PS8mjMTVteKMHJGti6SgR7AoEw27qOqdc502O0Vv+RgegjV3wgDw
- gDUvlFfUA4tzIp9N/j+yylD7PZUAAlxLWwMwbRJoc1dTcJkOJAkBD3gUp1aC0xSsgsp1
- KKFsEQh68/1vR2bG4eyPsa0bbIhNzFwSRVFoVsD7hCRZcQGI4zaLDV0mfVD0iX2dZEQc
- uIrQ==
+ bh=RF4R1X93RDLF5TIXFs9CZYyA/1oJZ1MwcTp+RnbXmvc=;
+ b=nSVa6RmbJWoXyXZle5ogaOn9KmHavozG7C+Cq+zMzCCYwTM6R6hzzUV2i5isoRmdxr
+ 4B2Qed1Qn2VLjlWuDc14seaawDaUCei/KH0PznU2wD/q8V4m9sL1RNfb/dVaDk57v7yn
+ sVNwBPf4mW+eRAbbciAGI3M1V3seXV7nBH7WQz7uR9vD4cJxuK+Bhxm+1YN4B6kRiHz3
+ nybmDY6xa+LIONL13Oug8gAmIHjQlJWYMWJgPNGBt3/etKVTVHQx/GQr8wz2gPMfu7RE
+ fiNkYsw4akhRnciU2q4bIvB+tWZcJbTqhinntizvmQJymuFBhUZdXbeLuZ1jUt8oE8BJ
+ HSNA==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=jO4bkvhK
+ header.a=rsa-sha256 header.s=google header.b=nSVa6Rmb
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
@@ -147,7 +145,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=alchark@flipper.net
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=flipper.net header.i=@flipper.net header.b="jO4bkvhK"; 
+ unprotected) header.d=flipper.net header.i=@flipper.net header.b="nSVa6Rmb"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -163,87 +161,125 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Selecting the next integer multiplier m is coupled to setting a negative
-fractional coefficient k. The current code checks for negative k in two
-separate places, which is error-prone.
+The TRM defines the fractional PLL adjustment coefficient as a signed
+two's complement number, 16 bits wide, so store and use it as such to
+avoid confusion and enable proper signed arithmetics, promoting operands
+with automatic sign extension.
 
-Let rockchip_rk3588_pll_k_get update m directly, to make it the single
-source of truth for the final value of the integer multiplier m, which
-also reduces the number of scattered conditional branches in the code.
+This also fixes an overflow when the current rk3588_pll_get_rate
+calculates the fractional component in 32 bits before assigning it to a
+64-bit holding variable, given that OSC_HZ is 24000000U and k can be from
+-32768 to 32767.
 
+Fixes: b851c006a150 ("clk: rockchip: pll: Add pll_rk3588 type for rk3588")
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- drivers/clk/rockchip/clk_pll.c | 31 +++++++++++++------------------
- 1 file changed, 13 insertions(+), 18 deletions(-)
+ arch/arm/include/asm/arch-rockchip/clock.h |  8 +++---
+ drivers/clk/rockchip/clk_pll.c             | 43 +++++++++++++-----------------
+ 2 files changed, 23 insertions(+), 28 deletions(-)
 
+diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
+index 95b08bfd046f..8d3819778eb1 100644
+--- a/arch/arm/include/asm/arch-rockchip/clock.h
++++ b/arch/arm/include/asm/arch-rockchip/clock.h
+@@ -101,10 +101,10 @@ struct rockchip_pll_rate_table {
+ 	unsigned int dsmpd;
+ 	unsigned int frac;
+ 	/* for RK3588 */
+-	unsigned int m;
+-	unsigned int p;
+-	unsigned int s;
+-	unsigned int k;
++	unsigned int m;	/* main divider, 10 bit unsigned */
++	unsigned int p;	/* pre-divider, 6 bit unsigned */
++	unsigned int s;	/* scaler, 3 bit unsigned */
++	s16 k;		/* fractional part, 16 bit two's complement */
+ };
+ 
+ enum rockchip_pll_type {
 diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index 6cef5a36ccfe..94d30ccb1425 100644
+index 94d30ccb1425..f677525bba22 100644
 --- a/drivers/clk/rockchip/clk_pll.c
 +++ b/drivers/clk/rockchip/clk_pll.c
-@@ -167,31 +167,31 @@ rockchip_pll_clk_set_by_auto(ulong fin_hz,
+@@ -167,22 +167,34 @@ rockchip_pll_clk_set_by_auto(ulong fin_hz,
  	return rate_table;
  }
  
--static u32
--rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
-+static void
-+rockchip_rk3588_pll_k_get(struct rockchip_pll_rate_table *rate_table, u64 fref, u64 fvco)
++/*
++ * 2250 MHz <= Fvco <= 4500 MHz
++ * For Fvco > 3 GHz: period jitter +-1% frac PLL, +-0.75% int PLL
++ * For Fvco < 3 GHz: period jitter +-2% frac PLL, +-1.50% int PLL
++ * Fvco = ((m + k / 65536) * Fin) / p
++ * Fout = ((m + k / 65536) * Fin) / (p * 2^s)
++ * Fref = Fin / p
++ * -32768 <= k <= 32767 (only available in frac PLLs, not int PLLs)
++ */
+ static void
+ rockchip_rk3588_pll_k_get(struct rockchip_pll_rate_table *rate_table, u64 fref, u64 fvco)
  {
--	u64 fref, ffrac;
-+	u64 ffrac;
- 	u32 k = 0;
+ 	u64 ffrac;
+-	u32 k = 0;
++	int k;
  
--	fref = fin_hz / p;
--	ffrac = fvco - (m * fref);
-+	ffrac = fvco - (rate_table->m) * fref;
+ 	ffrac = fvco - (rate_table->m) * fref;
  	k = ffrac * 65536 / fref;
  	if (k > 32767) {
--		ffrac = ((m + 1) * fref) - fvco;
-+		rate_table->m += 1;
-+		ffrac = (rate_table->m) * fref - fvco;
++		/*
++		 * The requested rate is closer to the next integer multiplier
++		 * m, so pick it and use a negative fractional coefficient k
++		 */
+ 		rate_table->m += 1;
+ 		ffrac = (rate_table->m) * fref - fvco;
  		/*
  		 * Round up to avoid overshooting requested rate for negative k
  		 */
- 		k = DIV64_U64_ROUND_UP(ffrac * 65536, fref);
- 		k = ~k + 1;
+-		k = DIV64_U64_ROUND_UP(ffrac * 65536, fref);
+-		k = ~k + 1;
++		k = -(int)DIV64_U64_ROUND_UP(ffrac * 65536, fref);
  	}
--	return k;
-+	rate_table->k = k;
+ 	rate_table->k = k;
  }
- 
- static struct rockchip_pll_rate_table *
- rockchip_rk3588_pll_frac_by_auto(unsigned long fin_hz, unsigned long fout_hz)
+@@ -549,9 +561,10 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
+ static ulong rk3588_pll_get_rate(struct rockchip_pll_clock *pll,
+ 				 void __iomem *base, ulong pll_id)
  {
- 	struct rockchip_pll_rate_table *rate_table = &rockchip_auto_table;
--	u32 p, m, s, k;
-+	u32 p, m, s;
- 	u64 fvco;
+-	u32 m, p, s, k;
++	u32 m, p, s;
+ 	u32 con = 0, shift, mode;
+-	u64 rate, postdiv;
++	u64 rate;
++	s16 k;
  
- 	for (s = 0; s <= 6; s++) {
-@@ -202,18 +202,13 @@ rockchip_rk3588_pll_frac_by_auto(unsigned long fin_hz, unsigned long fout_hz)
- 			for (m = 64; m <= 1023; m++) {
- 				if ((fvco >= m * fin_hz / p) &&
- 				    (fvco < (m + 1) * fin_hz / p)) {
--					k = rockchip_rk3588_pll_k_get(m, p, s,
--								      fin_hz,
--								      fvco);
--					if (!k)
--						continue;
- 					rate_table->p = p;
-+					rate_table->m = m;
- 					rate_table->s = s;
--					rate_table->k = k;
--					if (k > 32767)
--						rate_table->m = m + 1;
--					else
--						rate_table->m = m;
-+
-+					rockchip_rk3588_pll_k_get(rate_table,
-+								  fin_hz / p,
-+								  fvco);
- 					return rate_table;
- 				}
- 			}
+ 	con = readl(base + pll->mode_offset);
+ 	shift = pll->mode_shift;
+@@ -578,25 +591,7 @@ static ulong rk3588_pll_get_rate(struct rockchip_pll_clock *pll,
+ 
+ 		rate = OSC_HZ / p;
+ 		rate *= m;
+-		if (k & BIT(15)) {
+-			/* fractional mode */
+-			u64 frac_rate64;
+-
+-			k = (~(k - 1)) & RK3588_PLLCON2_K_MASK;
+-			frac_rate64 = OSC_HZ * k;
+-			postdiv = p;
+-			postdiv *= 65536;
+-			do_div(frac_rate64, postdiv);
+-			rate -= frac_rate64;
+-		} else {
+-			/* fractional mode */
+-			u64 frac_rate64 = OSC_HZ * k;
+-
+-			postdiv = p;
+-			postdiv *= 65536;
+-			do_div(frac_rate64, postdiv);
+-			rate += frac_rate64;
+-		}
++		rate += div_s64((s64)OSC_HZ * k, p * 65536);
+ 		rate = rate >> s;
+ 		return rate;
+ 	case RKCLK_PLL_MODE_DEEP:
 
 -- 
 2.54.0
