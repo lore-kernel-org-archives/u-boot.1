@@ -1,109 +1,109 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB32C531CF
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 13:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76B1C531CB
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 13:23:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C835D60A3A;
-	Thu, 23 Jul 2026 13:23:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6890A40A08;
+	Thu, 23 Jul 2026 13:23:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BuIKOtXUf2va; Thu, 23 Jul 2026 13:23:04 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FmQzyOXfoFWX; Thu, 23 Jul 2026 13:23:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9384660A4D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A3ACF40A1E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784812984;
-	bh=2TrAZghoqCFpCfMye3N1LHoOxi4DLaIDgp3ERy8a02E=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=0uixbqjgqsSVeSsgnmUIQK4/ObLbJxWSrg8yqtH77AAz6vTpkGi3U57WwYuaEf/9Y
-	 2K3IavFGJ/N1UJvPWVT2pOBD3mfIzuYPCVDKF+196AVRX9pKk0Jf+chmCPoNgRV/RB
-	 vmXuCk3E6nLir5bgKq+duBS6+5JB5f4rZCY97dGeWlW7zbQ2Ku6scocT1iGWwq2Ssd
-	 FvvTN3A1VKHt/E9HoPEQdg89u1ck155F7Nc2M0W04IDCLn9raZ7QQlnU48qfzQ+vFl
-	 QW0Otu1PrNBlFlUAxGLY/XUoJE+3kNlFk+q7ml0ujvIEOMwEVzXYTC9uPsIDFbFKpF
-	 FLjeHz08Xz6TQ==
+	d=lists.u-boot-project.org ; s=default; t=1784812986;
+	bh=zPbzsODObm5n3A0U0IZS4baTFGL0NmR/n25iXx5bjp0=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=cDX0whCCpk+2cftEAmrSb9uSoyl32CBVOqd84DYrFUHOuinyq9+1IGUw5XLRQ+tRI
+	 4wwMQQtQspZeJNKiU8QuRbFEwhf9jApOxvvMV0VmhZQOMCepDgTRqzhm600mHcL9nz
+	 JZJfAFY0otAL1vSJFgNxmHSEsihj8mRAV2kd8YEbhIZOJnhCmxTbyg89h/Dyl9HqlC
+	 qTerYpGGFEmiF6i4FXDj3ZKdOiY7ZFrQUrgTpLU3gE4d0MZ7tukN1gutFg6QnMHZfJ
+	 IcHcH2cYSRobGGmd6hWaIGv5jz2qanWtjnkm3/2kVlU8oqGPsO1P1sQ8vou8ZPYdmq
+	 G3EkrcJqr1BOQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9384660A4D;
-	Thu, 23 Jul 2026 13:23:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A3ACF40A1E;
+	Thu, 23 Jul 2026 13:23:05 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id EA42036E
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 10:31:10 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E2B8AEB
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 10:31:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CFEBE608C8
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 10:31:10 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C8C2660816
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 10:31:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GGc7S1HRQjGq for <u-boot@lists.u-boot-project.org>;
+ id 1p7IbHIwLE7m for <u-boot@lists.u-boot-project.org>;
  Thu, 23 Jul 2026 10:31:08 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=william.bright@imd-tec.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 58FCE60816
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 58FCE60816
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 5F1746082B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5F1746082B
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 58FCE60816
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5F1746082B
  for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 10:31:08 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5228803F6; Thu, 23 Jul 2026 12:31:06 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id C0F988498B; Thu, 23 Jul 2026 12:31:06 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7035683E76
+ by phobos.denx.de (Postfix) with ESMTPS id 65E35803F6
  for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 12:31:04 +0200 (CEST)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-47de008b020so283396f8f.1
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-47f904e80eeso392241f8f.1
  for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 03:31:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1784802664; x=1785407464;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=2TrAZghoqCFpCfMye3N1LHoOxi4DLaIDgp3ERy8a02E=;
- b=U/6P+GNsprGHUFYF7RNWHOXTKyrj1UK1OXBL0r/GFkfgPK/y8faZIwidEtavPVtZCY
- AfnYw4RFTKTK00mYwVNsZQ05DdOkmho5Zj6nb+hayhtreSsfIahqqwgzfGAnQmCzwIp3
- MMsGtyZRp/71di0TukDtqb8PZBaJu7EmVuM3v7MVInbdaPGc5DJmS8cKQVHwd2gtkiRv
- 99lLW+JYMWzjyzircvA3etwbofuPYgAeTs77fh5VRDgFKgnbMpyt4U/WSPTA9rC0nKwy
- e0ko6//xAAAfINZhQ5+TQmxqONmL4Qq4FwKwNGhEUHNbigAMzWKi+xNgtGjZ0G5jj0nr
- tzsg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=zPbzsODObm5n3A0U0IZS4baTFGL0NmR/n25iXx5bjp0=;
+ b=f2Jv9yLZwh9/LTub5IP2A+nB1z+l1gbMSjhezyyoHrGwywe+YMMfRO8ND7JuH72vRz
+ EIDUZkMOa4OObeTkawp4fZzkI+CfMlEOzoK0E1T1NG3JZhPJK0zZ4Bz8rs2iWPZQoToE
+ PGIcYZLxF/slT6hpEg7VZhNIXZx7R4xysgFsIxm89IUZRUnKBYnGojFREoggvvtOGC7W
+ g4M/7JmE3SgJAHw31PzpEHXRXOScgr1JbnF1eg3SKeozfWGZthWCw6fFE+J/tsL66cYh
+ Fy+ChvaBKSxDAuer2yYHCYb/+0sn9bq+0oO7apYxIHLaSGWV8j9xBMIEc1xQiKr5dnJq
+ j3EQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq0NkSlpTr1NIMOW+Sd6Py/iyE/ykHYJQXX1b/gcpw04efdgRRY9MyAhmkkZqOZGxoue8AYdZ4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNiZw+LgTfocUAQFVglEPHYKk0mjXozkQrVP3CvsgfPqawaWti
- E/6pR39W0XmR5jSxtwwPvVrSn0KEVU7tcgohNdkudJAO9wwWgGZsWBi1QabDRs4A3rs=
-X-Gm-Gg: AR+sD13IK7BHbLy/PbBw6fqmjnO/jr4TvI7nO14fxk8JOZb7hmaNIKhr7Ir31hAvq1c
- RAf1Yly/VjwLvL4pNdDLGaAPiisnGrMdBC/yH+r2MnfyjrzYkT2yRah7rWwn3WUty+DcRruDITg
- 0aLzTMRWXUbsdoK2060r86xhxKvJb5E05vMUDmcvNdAvWypwZwWAac1TSqOyV6zUil2Ulpy7hAi
- G51PgaY+Zg9icl+uPGwbQPd37dNiDuVRWwpItBJ27LIt1IpeYtRUA9+Nv1F/NqFIWXDsZiqsdBO
- ZNv2h6j+2r3Qv/fllOvbmhf6+yhapj/dXG5wldUBYbpWMB04yaO9O8CtXsYHYPSTrdowzdEEAul
- togO5iGvxHOFadNunTSfhZXOHIaGaSpuK/QgyaIv+YjyqYkZlKR9DEwCaVPsVyJ9pdPYPF0txT1
- AOhxwtZeUdsLNm4mFkrXfrr8y/DfU2PFrzu91ISBREGGN3T6XCk2oqKbdTm7o+cTroBFxVAx/HW
- GjYUmIG/dO0WzExpCmxzWnoANE63RwZqbp7/ib/eBveyxM/DwrbPQ==
-X-Received: by 2002:a05:6000:2606:b0:47f:9158:5924 with SMTP id
- ffacd0b85a97d-47f91586a18mr2071368f8f.9.1784802662988; 
- Thu, 23 Jul 2026 03:31:02 -0700 (PDT)
+ AHgh+RolFv2lF7217y29jx3zBOMMmca9DHnc3QrnbPhUlnWWUo5BQXjshsTb/bfaa6bNBPBUWCVSELM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjBYWoHEDR6nDDfctx5lrr2E4Yc50VMJWbRvu8IE1c02pSI5aR
+ njQRDfOCttqz/V2AcEUPpIuDdnZKfQp1Dh3Kee3+70oFoBZ3jWmucDW4z/NIukWhpEs=
+X-Gm-Gg: AR+sD10T+hafdTi2blXmM64lCJvvj3F1XvbtIl8I0xgmvxgQ7Oi/No1Q9gFfmtmOha/
+ d1mNAIp/5BPX36hcdjQvCNoTX8PskU7ilCLKqJuA1UaKLH0AqRaszga8GddHYTBLZvU9j1+9qb+
+ jbkCT84+rYzXWuFXYK7cb89Zvkbm/v0kjf4zi/o5cb/xK1AGi/KD6nhMq3sKVIuQE6O+GBKLHe9
+ yzyCWwZ7J5HIxdwIhb1fQDMADbAzj93JskAuputV6gQDa+pByUBD9IRIul9vYDrI6s/BrEI2yOV
+ FwMbsiUgtjeAhTMYb46lpFDTGKBN36LjrUgvr1H2CJg6BUN+5g4NOqUtpx4Xs8OVtTA8WCGPo5i
+ kejs6yn5Buvcp2wnzqFppQSWlIvuYZUvffb6DIyPS0S4xoy8gcXLdiy1HEZEf5QSSyqr9UsEjM9
+ g5JL1y2mT8tOLq+pGS6WUAvEeHSR/wJhjO+Ym5mcOlznO9zhIKaU/LN1h6aJ28phijuhNvyuDBX
+ iWrufcAM8O3NMbOlcABmBLGifLRpl/ITBaSjuEKryLfAfRLpp+Zqg==
+X-Received: by 2002:a05:6000:611:b0:47f:73d3:bfc6 with SMTP id
+ ffacd0b85a97d-47f8d761907mr3061270f8f.46.1784802663714; 
+ Thu, 23 Jul 2026 03:31:03 -0700 (PDT)
 Received: from [127.0.1.1] (host86-157-235-39.range86-157.btcentralplus.com.
  [86.157.235.39]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85bdac28sm13439289f8f.16.2026.07.23.03.31.02
+ ffacd0b85a97d-47f85bdac28sm13439289f8f.16.2026.07.23.03.31.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 03:31:02 -0700 (PDT)
+ Thu, 23 Jul 2026 03:31:03 -0700 (PDT)
 From: William Bright <william.bright@imd-tec.com>
-Subject: [PATCH v2 0/2] Add support for SM8550/QCS8550 SoC based platform
-Date: Thu, 23 Jul 2026 11:30:50 +0100
-Message-Id: <20260723-sm8550-hdk-v2-0-78f0ce2adb3c@imd-tec.com>
+Date: Thu, 23 Jul 2026 11:30:51 +0100
+Subject: [PATCH v2 1/2] doc: board: qualcomm: document SM8550/QCS8550
+ building/flashing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAFrtYWoC/22NQQ6CMBBFr0Jm7ZihBYquvIdhAe0gowFMi0RDu
- LsFty5f8v77CwT2wgHOyQKeZwkyDhHUIQHb1cONUVxkUKQKMoow9GWeE3bugSfWRqdN7YpMQxw
- 8Pbfy3mPX6sfh1dzZTlthMzoJ0+g/+9ucbt7f8JwiYZm1ZMwpXpC+SO9wYnu0Yw/Vuq5fu5J9r
- LgAAAA=
-X-Change-ID: 20260720-sm8550-hdk-9e3731bad643
+Message-Id: <20260723-sm8550-hdk-v2-1-78f0ce2adb3c@imd-tec.com>
+References: <20260723-sm8550-hdk-v2-0-78f0ce2adb3c@imd-tec.com>
+In-Reply-To: <20260723-sm8550-hdk-v2-0-78f0ce2adb3c@imd-tec.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -117,23 +117,23 @@ X-Virus-Status: Clean
 X-Mailman-Approved-At: Thu, 23 Jul 2026 13:22:52 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=imd-tec.com; s=google; t=1784802664; x=1785407464; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=2TrAZghoqCFpCfMye3N1LHoOxi4DLaIDgp3ERy8a02E=;
- b=LeJ9N4Il36wZiew/1jYJByHiWhLTEzYGl+3GMkDkD6EpZVzYBCbl4KCudodc+Pr8uN
- YqO8CDyJQvf+9u2xZg67R0ZvVfoGZKdx2MX1y1KlO1jf/7xH8cjkiQAGQSdTw1eVsylZ
- SlxXsIs+yx0fuDR7uC//8esJ6EFf/zE2FvCAUKEnTzgVMH2HwAn1HqJl6JNriIwopl99
- J3z0R1aBf96qyc7GDPXIqRmxvjayQvD35SSNv45kYd0x9o63LCxx+9XeXl9euVpopCfV
- Sibn3LSFXFrZVtRCfmXgZnos37q4F/290Xkp97oo06lKf9ZkN+aoT0upAS4R7YzoKwYB
- rwqQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zPbzsODObm5n3A0U0IZS4baTFGL0NmR/n25iXx5bjp0=;
+ b=QHabTSJsqmwdGTneixdfLEacObj3hRGVZCaszMl3F0xMGQFWuOrEPNeK+NldKuH0VN
+ o+6Yc/DtlP+lXlHAEcZ22rpOlLBGMYeFwxC+vrNGVsQTOUSasEyHWSqMfKmkW8vA1EHu
+ 2eeNznfc/zSHl4C+ZLZ9P+A8qR/eM0XQJVhTsVTibZpg3Ibgsg3dTqEjHNdFWPnLs6Jz
+ ZolJTeoermWPJtRA91rAGSujBk/sg7YBAXFl4yDP8VBvtn4iRa1bXt0CxScUxW0tqcxW
+ 8rbbOU7yJVsbP3/UgbXa+4UQtzGdNL+3HS1spnyFh+5w7mip4wbbbCDDSpzSATvj2T2B
+ ECgA==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=imd-tec.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=imd-tec.com header.i=@imd-tec.com header.a=rsa-sha256
- header.s=google header.b=LeJ9N4Il
+ header.s=google header.b=QHabTSJs
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=imd-tec.com
@@ -141,7 +141,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=william.bright@imd-tec.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=imd-tec.com header.i=@imd-tec.com header.b="LeJ9N4Il"; 
+ unprotected) header.d=imd-tec.com header.i=@imd-tec.com header.b="QHabTSJs"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -157,49 +157,48 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-These patches add support for the SM8550 (Snapdragon 8 Gen 2) and
-QCS8550 (DragonWing Q8). Both of these share SoCs share the same
-codename of kalama and the QCS8550 is a variant of the SM8550 with the
-modem removed.
-
-Please see [1] for details about the SM8550 and [2] for details
-regarding the QCS8550. The upstream kernel patch that added support for
-the QCS8550 can be found at [3].
-
-1 - https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Snapdragon-8-Gen-2-Product-Brief.pdf
-2 - https://docs.qualcomm.com/doc/87-61717-1/87-61717-1_REV_D_Qualcomm_Dragonwing_QCS8550_QCM8550_Processors_Product_Brief.pdf
-3 - https://lore.kernel.org/all/20240618072202.2516025-3-quic_tengfan@quicinc.com/
+Introducing documentation support for Qualcomm SnapDragon Gen 2 SM8550
+and QualComm Dragonwing Q8 QCS8550. Documents the build and flashing
+steps.
 
 Signed-off-by: William Bright <william.bright@imd-tec.com>
 ---
-Changes in v2:
-- Rebased onto u-boot-snapdragon/qcom-next
-- Dropped patch 2 since the recent SMEM changes populate the memory node
-- Moved patch 1 documentation changes into dragonwing.rst
-- Replaced CONFIG_REMAKE_ELF with CONFIG_QCOM_GENERATE_MBN
-- Link to v1: https://patch.msgid.link/20260720-sm8550-hdk-v1-0-84f077937303@imd-tec.com
-
-To: Sumit Garg <sumit.garg@kernel.org>
-To: u-boot-qcom@groups.io
-To: u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: William Bright <william.bright@imd-tec.com>
-
----
-William Bright (2):
-      doc: board: qualcomm: document SM8550/QCS8550 building/flashing
-      configs: add sm8550_defconfig
-
- configs/qcom_sm8550_defconfig     | 20 ++++++++++++++++++++
  doc/board/qualcomm/dragonwing.rst | 13 ++++++++-----
- 2 files changed, 28 insertions(+), 5 deletions(-)
----
-base-commit: 8a905a58e3b4832c4cd7dc0e8a596a6d7ce19562
-change-id: 20260720-sm8550-hdk-9e3731bad643
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-Best regards,
---  
-William Bright <william.bright@imd-tec.com>
+diff --git a/doc/board/qualcomm/dragonwing.rst b/doc/board/qualcomm/dragonwing.rst
+index 028ec340d15..3024c50cdc5 100644
+--- a/doc/board/qualcomm/dragonwing.rst
++++ b/doc/board/qualcomm/dragonwing.rst
+@@ -4,19 +4,22 @@
+ Qualcomm DragonWing
+ ========================================
+ 
+-Qualcomm DragonWing are industrial-grade boards that provides various series
+-of processors such as IQ6 (QCS615), IQ8 (QCS8300) and IQ9 (QCS9100).
+-These SoCs are used for factory/industry based applications.
++Qualcomm DragonWing are industrial-grade boards that provides various series of processors
++such as IQ6 (QCS615), IQ8 (QCS8300), IQ9 (QCS9100) and Q8 (QCS8550). These SoCs are used
++for factory/industry based applications. Note that the QCS8550 is a derivative of the
++SM8550 with the RF modem removed, so the SM8550 defconfig works for both the SM8550 and
++the QCS8550.
+ More information can be found on the `Qualcomm's IQ6 product page`_,
+-`Qualcomm's IQ8 product page`_ and `Qualcomm's IQ9 product page`_.
++`Qualcomm's IQ8 product page`_, `Qualcomm's IQ9 product page`_ and `Qualcomm's Q8 product page`_.
+ 
+ .. _Qualcomm's IQ6 product page: https://docs.qualcomm.com/bundle/publicresource/87-83838-1_REV_A_Qualcomm_IQ6_Series_Product_Brief.pdf
+ .. _Qualcomm's IQ8 product page: https://docs.qualcomm.com/bundle/publicresource/87-83839-1_REV_A_Qualcomm_IQ8_Series_Product_Brief________.pdf
+ .. _Qualcomm's IQ9 product page: https://docs.qualcomm.com/bundle/publicresource/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf
++.. _Qualcomm's Q8 product page: https://docs.qualcomm.com/doc/87-61717-1/87-61717-1_REV_D_Qualcomm_Dragonwing_QCS8550_QCM8550_Processors_Product_Brief.pdf
+ 
+ Installation
+ ------------
+-First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``QCS615``, ``QCS8300`` or ``QCS9100``::
++First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``QCS615``, ``QCS8300``, ``QCS9100`` or ``SM8550``::
+ 
+   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
+   $ make qcom_qcs8300_defconfig
+
+-- 
+2.43.0
 
