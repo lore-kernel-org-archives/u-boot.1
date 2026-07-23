@@ -4,143 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25EBCC531CB
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 11:25:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6F2DC531CF
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 11:27:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B180480FDE;
-	Thu, 23 Jul 2026 11:25:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CBEA680FF7;
+	Thu, 23 Jul 2026 11:27:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id c16j3IY1C1WG; Thu, 23 Jul 2026 11:25:07 +0000 (UTC)
+ id rsLp9go3E-YR; Thu, 23 Jul 2026 11:27:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4E21180FAD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6331580FBC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784805907;
-	bh=i/CEs1HyvxRc5qTQWN+gyhBD02zVVrupI9ucafl72dE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784806064;
+	bh=IsCCP5l3FuB48GDuOAzHGjWcqz05rh0j03jjU0WgMoU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aQw0qSQzCvdyFnnlW8PTYixCr38irXHpaZtpizg2IO/sAAfgcSguBlHUXJO49N+lG
-	 OCOzdpybph1u7MhRB4stEhwaawREUoK0GD5QsFNRjVK8NSaEbM1LbnG734lriCW8H/
-	 TaWkrSqSSrlsdK/7pr9rV/H2JXtycfSb3JMCCla6L2VvLTtQ6MfKZbp9kl2NBRGcG7
-	 S3reS+MqK1u3ffI18MTxF6FnEHmbT6MppF5sSaNqO/yTf9B7FVaoKf6wskiJ8L2rZr
-	 EBAVavEcAW/3/W9vRpxXnZgdLit77bDU/+9Q5JTzTwfPUTOrj3y1blcPQ+kOtiiSjV
-	 otnTnNmzu6C0g==
+	b=SKmt9yHtFeghg6b8vteiGj4n7Sl6VHB4847mPjNHdIKYjE+AZwUE0PtUcy6pmCMO1
+	 q2gxcGslNsFFecv1lvLr/9kkMsTe/YF862aHa2NYQJfTD5ASLntiYr78qp3gMVYAG0
+	 GSIrGy70bZUa4Q/LEwU1zY2SqQoW7mTlIq8Q6onv3SCtBcuDvLIdBMh6TmYqRFB2Rv
+	 GnZCvUe6G5tK3QFdXTUcA/8NTeaETMi0zYWXEflV/5y8r7zoQi4uSUBHkaiugLNwlR
+	 /KPCHC3aFauN7vsh2n51pevzVzTXeVbGhxnWJnKq3410zIqZ3vVpirGz5V+dln3OS5
+	 Ff9Peh6MEBLfw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4E21180FAD;
-	Thu, 23 Jul 2026 11:25:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6331580FBC;
+	Thu, 23 Jul 2026 11:27:44 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4B9E9786
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:25:06 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id AC63D36E
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:27:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3206E40946
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:25:06 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 929FE4088F
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:27:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gfS37z5K2WuL for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 11:25:05 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D688540944
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D688540944
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D688540944
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:25:04 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 829E88493F; Thu, 23 Jul 2026 13:25:01 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 452E8803F6
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 13:24:58 +0200 (CEST)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-47f3b39f2a1so449713f8f.2
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 04:24:58 -0700 (PDT)
+ id 0IoaJ-SUZpQb for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 11:27:41 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::12c; helo=mail-lf1-x12c.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 708DC4081F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 708DC4081F
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 708DC4081F
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 11:27:41 +0000 (UTC)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5aeb59d54b1so549879e87.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 04:27:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784806059; cv=none;
+ d=google.com; s=arc-20260327;
+ b=B0V4ETlsK6SsGdrfhExV73bhhcmDm90dv0L5ZsJhL4z59LL+sRFWlIFSB7S7ieqtTq
+ AvJAhBWkZnPa+HE4kuSZksjD64kErfQJKrvwnM2Cdr65J6glb/zv01WZVoee3U5ZkyCC
+ tcY+vP1sxO036/YQi35TwrelNsVqHr5Mds9LQgdAhfqy357LQUz7VTNrJxPiUSP5/RWi
+ 4pbHZKRWBDZusVb/2XRKUsm5dyJP1Wcjitwm5nSmnTEXIyVaLDN4VgUBGm4ZbS50UBWR
+ IQ98kjzJqkSBIeCOLV6VYk3/rnCpXICybX0PZHATo8g+YFABGeJ0DndJBfU1f0+EQz0m
+ 8AaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=IsCCP5l3FuB48GDuOAzHGjWcqz05rh0j03jjU0WgMoU=;
+ fh=5lcS5Rc0ZTNSUWwpacVdOs+ZwcNFSB6nJL+CSwfxQCA=;
+ b=qYgiQAwFZu5YqgsAHuiGjKRjFZvmaCHj/gZEqyuI4oS9K+5UuWEiSVwCs55VCYSoxW
+ i+fmhBz+t+nD5wJ1hezaWadd4YeMQMcYp+v6HT/TdQKjUjtXvvrxzKPI4TwVanGULYsP
+ N/DI2gBxYCdBlGf8XMUkZFGvUn0EMaM/mnWGIdvoWNQRFQN5X3zU3biuInq/nCwe7/De
+ HdKRVPIjLOTpQTW83NwU6NLgP357cdDULPx4Pqj7k4AuacXx1wa3432Q1f6Jk6RTmhkM
+ +oH7QgazVPAhC53S7BPMZGsgS7WAZNLMtAQtSDXbMn5JPORWXPih57fRKtKbKEki3Jwv
+ HsLQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784805897; x=1785410697;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=i/CEs1HyvxRc5qTQWN+gyhBD02zVVrupI9ucafl72dE=;
- b=oMDoSScBYPeqUxITj3PI6j5c/SyhCQOfP7cN52ByF21jqwapod8j6BTJMhj1XnPJ0z
- nA2PsXf6dmvTyZzJ12rw/7KcjglG8c4pPNROQvde8gx+zvh7vNIO4zstlG8oT1hhx3SE
- eSsQTzhZemDToMgeiK/2GVlBmDPFtOpA/lTonMNxzYgTnDl+gYRUgnqyYhAGCMDxWA2t
- LSiyEBDJ7wyjWzFdTEbdrxnO/YM/NZYSt97pVYwfB8wPhJc2mHlKbc9Zh0nRzcJlRViF
- 3uvCgY3wT2lojCRg3DsyuW2aK/Nb5YaVSITVV0gR7t/8aGPUerTQmml7quW5iI+5pdWF
- MEtQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoPrNt4CxXahZ9B9/3XDuIiYUzxUcajklZmYCuTY8gDvMVaPxqy96swHM46sgVtlmiOJzQZQKw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdHH3I6AQ6M20aZKJNmuRfHsFkOsjFjkJaFBRQANWSaZdDH83j
- /P2nI3YATxT7jGe5lrojP2cHaPLRgp/Fqxk6hdxhj1e5hNFNswjfbFcPvmDs8hUK/vo=
-X-Gm-Gg: AR+sD13zVzcrMB873AzU6nEVxLHZwsziM6RMIjjP7GU6BDOh65WSZPzn4xrhjaHMSOu
- EpdAuIDBRI6M6fn0VG+F4tDNokRnLFUJPfesb4MjQnvSd3qCwCQTytPWLcuQj4+P9qTSLN8zxiD
- NQr48kpTbYhbeb4hWP3wIhdaNypyfeM3DHYBl6+bwTsUNlGdIjoLsG9vK2P6ZRaUWu/M2a/xW2C
- 4FNKkei+qPiY/s/O6KvApKYhEZuivMvoAqt3CEr9i4U8ucQJ8uOsel6WlGiYvFFyDGOsFW4cZQc
- crQhVrJ/tGd9+eOim+U4/7OoQzwVU3oTxkGDn7rH5Yyl3nqFJosnUIAu43G8aWDkHm1Pqed676c
- 9d2qDurrkBEzG7Nwp6eRYtbovRMz0DY0kI+jGcKpeqPAo+/s+QP+1mSaY+hijHjVUec7m/zfFhE
- UxAu/o/f0cO7qgu90Lx3ircNPGjiZRhdTIuG97GPpVBiA9hZmgIDRgl0h2yDJv6lc=
-X-Received: by 2002:a05:6000:2484:b0:47f:8c73:aa7c with SMTP id
- ffacd0b85a97d-47f8d76c5a8mr3463700f8f.52.1784805896719; 
- Thu, 23 Jul 2026 04:24:56 -0700 (PDT)
-Received: from [192.168.1.37] (p549d460b.dip0.t-ipconnect.de. [84.157.70.11])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85b9a5a2sm15908721f8f.7.2026.07.23.04.24.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 04:24:55 -0700 (PDT)
-Message-ID: <0fe5f1c6-d15e-4f7c-9a95-8b87aa7a644c@linaro.org>
-Date: Thu, 23 Jul 2026 13:24:54 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] configs: add sm8550_defconfig
-To: William Bright <william.bright@imd-tec.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20260723-sm8550-hdk-v2-0-78f0ce2adb3c@imd-tec.com>
- <20260723-sm8550-hdk-v2-2-78f0ce2adb3c@imd-tec.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260723-sm8550-hdk-v2-2-78f0ce2adb3c@imd-tec.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784805897; x=1785410697; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ d=1e100.net; s=20251104; t=1784806059; x=1785410859;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=i/CEs1HyvxRc5qTQWN+gyhBD02zVVrupI9ucafl72dE=;
- b=tW+iLl4yClg/3exGiqzM8GSErlVOIKoMU5wPvyDXtdoID9mJgHa0EyEGyJn7wSZ8/R
- SlN7GN+NmaFv7daDxsdjS4hZ6e5bDh2qq1EH/1e6Ugx86PSesQ0ttQ7e/sZpBeNgflks
- KZiB/kHptL5tlGFNZGrhrriVt2iUxS06PAbzzPqUdEgvsVyCkcNa9Pl0/olIT5fcQudy
- qHjnhEfHz3iapVRCjAEVG0xMsDgWQiA0Z4v6/qJvTPAOpg3/C8wGamN+GxynDM7Ljr0u
- lGQlHg0Rnj2Er9LZd6MWpmJFxfD4dna+3FToG5nTh9vPQaOQorRwsKyU195fpF//U4Uf
- BUaQ==
+ bh=IsCCP5l3FuB48GDuOAzHGjWcqz05rh0j03jjU0WgMoU=;
+ b=mYTLOhUlMh0qe8TZZy8hW/onVJZ9lS3+h4afiswiJiGNCmCXr+y/Owgd813aoqT0Lg
+ rCSQGh5zOheIR4H+sLkCaOh/DVQcGHJ/jqfJ/yFlCEP7uRrH4AItZorLG7NvJXh0ceUc
+ HaHYkolPjLRKOnSK30CrJRJQfE45EfxX0UuL4bd5ZblpKXNYQGsZmPHTzOnN6zNQkqD/
+ PnHgL73honbG9S8o2GaeT2/XhUUBaNjmJ3R/ProgwkHA+Gdhj91w1HM0JQjoazRHonBB
+ HK22c4NFLcjRebVr3UqpVJC4/aAwNVstoG7nF6GOlDo3ygNrcQTtk7ylLhhokTTGwACw
+ qc2Q==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrxV7Mj03lSRhJLMOwqwfT98kFNe22KUl3i1cyt+wgL8q7w03e82Dca14byw+G+9jjomuaTDJk=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzOPG9ZYYdORfiHLCsNaqFppraTSHUgR9r3zbh4PU4FhuI80SK8
+ eIgRn6C3bLwGLxJJ8oTv4CUQjJp8fExP3qXwWKIc+FQn/zg4hhyNAV/oW8wQweNtL2Er5ojOJp8
+ zavpLUsX5tbgGOknazemkw6XVimmZ2gM=
+X-Gm-Gg: AR+sD12EPggz4hjrzi8q0gkBzeGQr4etfAuUfGeJfwK6tN6AiEccSVxgBE6FkOtugDW
+ gdmw9DdglqU/6rNwNw8UOFQzxcDh5uzyv5GsHC2xEJnnTgC7nCoENgggWJLWGtqfImNUg3CNPub
+ VX5hqwmmP4reQo+RWa3VATWi3MxKkjakVWNvDa+QYR4wnGFFMOkwndtgRgSiMW1ihCUUCJFMJbH
+ PEWEK9Q+tWKa3BYpvEl3VzVk8TNi7IIy9x6SOvu/TJuchIeACSENHe9B8n4Hcm4WHgl+jWTqGZt
+ 65gLPuBK6CBmhgmsC/sli/J4rM7IOnZZbJmm1jvDduArkHyq/A==
+X-Received: by 2002:a05:6512:3408:b0:5b1:5a2d:55f9 with SMTP id
+ 2adb3069b0e04-5b2b2f66570mr589557e87.21.1784806058585; Thu, 23 Jul 2026
+ 04:27:38 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240930035531.27079-4-peng.fan@oss.nxp.com>
+ <b80b20b3-1d30-4a2e-81c0-d974f91f48c7@kd-solutions.pl>
+ <CAOMZO5D-8Ti+j3fUBAztkFY7wYZJsLcDQaFmcvH6cSgPXB23tQ@mail.gmail.com>
+ <57257091-5b3e-4249-b7ba-b7d0a7699d51@kd-solutions.pl>
+ <086d67e8-021a-4cca-83fe-281502142339@kd-solutions.pl>
+In-Reply-To: <086d67e8-021a-4cca-83fe-281502142339@kd-solutions.pl>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 23 Jul 2026 08:27:25 -0300
+X-Gm-Features: AUfX_myfC_G2juEl5XONuWRCZwbV-vXPPlTrUS6RoYVPW6ebWk_8tRL9opEmLsE
+Message-ID: <CAOMZO5A9SJZ+zA7Z9oOsjm09C8Xz0pT7959UuemfFU8L4QumMA@mail.gmail.com>
+Subject: Re: [PATCH 4/4] power: regulator: ADD PMIC PF9453 support
+To: =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1784806059; x=1785410859;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=IsCCP5l3FuB48GDuOAzHGjWcqz05rh0j03jjU0WgMoU=;
+ b=GqyGjVBHzDi7oYDNCAIW4ABr7m2ovvfAak0OelBPnPA2SMcYFNMPV+BGStqlsjveoH
+ m1/02IMf3NLGR5PUvt7hLkzQ6kF4XMiFYtvVafWmv+zSTTDbNDsb8fp1sr34OuRZ7yKQ
+ t7E91Ao57/9TCfLnhm51D7NrFaV1rTH2NR9SrJDl4qsVZPyneuClaMLwvhjTccN4iAS2
+ bstP8e2I3D9r/2ZAGTY/PQ9JeTlVIverl+BOPUvw4TgtVx+YLMUtG24by5PhBTUVxJi5
+ qhIYpSCR4rnoAZCxLAp3P5tT3uL3BUVEAKNtufgKYUyjnaC+OQSKvxUmNpcQd9CCDkmN
+ YL2A==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=linaro.org
+ header.from=gmail.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=tW+iLl4y
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=casey.connolly@linaro.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="tW+iLl4y"; 
- dkim-atps=neutral
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=GqyGjVBH
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,54 +149,11 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi William,
+On Thu, Jul 23, 2026 at 8:22=E2=80=AFAM Krzysztof Drobi=C5=84ski
+<krzysztof@kd-solutions.pl> wrote:
 
-On 23/07/2026 12:30, William Bright wrote:
-> Introduce a defconfig for SM8550 based boards.
+> I don't have possibility to test entire patch series which covers also
+> PF5300 there. I assume, I should create new patch series covering only
+> rebased and fixed PF9453 support?
 
-Thanks for the respin, this is looking good.
-> 
-> Signed-off-by: William Bright <william.bright@imd-tec.com>
-> ---
->  configs/qcom_sm8550_defconfig | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
-> 
-> diff --git a/configs/qcom_sm8550_defconfig b/configs/qcom_sm8550_defconfig
-> new file mode 100644
-> index 00000000000..5d2fe13df68
-> --- /dev/null
-> +++ b/configs/qcom_sm8550_defconfig
-> @@ -0,0 +1,20 @@
-> +# Configuration for building U-Boot to be flashed
-> +# to the uefi partition of SM8550 dev boards with
-> +# the "Linux Embedded" partition layout (which have
-> +# a dedicated "uefi_a" partition for edk2/U-Boot)
-> +
-> +#include "qcom_defconfig"
-> +
-> +# Otherwise buildman thinks this isn't an ARM platform
-> +CONFIG_ARM=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_DEBUG_UART_ANNOUNCE=y
-> +CONFIG_DEBUG_UART_BASE=0xa9c000
-> +CONFIG_DEBUG_UART_MSM_GENI=y
-> +CONFIG_DEBUG_UART_CLOCK=14745600
-> +
-> +# Address where U-Boot will be loaded
-> +CONFIG_TEXT_BASE=0xaf000000
-> +CONFIG_QCOM_GENERATE_MBN=y
-> +CONFIG_DEFAULT_DEVICE_TREE="qcom/sm8550-hdk"
-> +CONFIG_OF_EMBED=y
-
-Do we need OF_EMBED here? By default the .mbn is built from
-u-boot-dtb.bin so the DTB is appended is already.
-
-Assuming things work ok with that dropped
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> 
-
--- 
-// Casey (she/her)
-
+Yes, that would be appreciated, thanks.
