@@ -1,182 +1,180 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0121C44524
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 07:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AC7C531C7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 07:33:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AD14A6073F;
-	Thu, 23 Jul 2026 07:11:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E626F407FB;
+	Thu, 23 Jul 2026 07:33:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zk6qQGTA5RvQ; Thu, 23 Jul 2026 07:11:30 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vSoBYwXYVmiW; Thu, 23 Jul 2026 07:33:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A5D1160715
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 430DD407E9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784790690;
-	bh=ef5uYKV+rzB5EX6iqhTwhcr/KL08/5qw/tpSE61NHhU=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784792028;
+	bh=udvdkbhGuCAaC2HG7xkPhOwn33A6nN/5VfAo4E5avGk=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=DctXBsRz3uAC3hTcssXE23V6338WydJoz4Ol1Xobd176apoePy/bEPqj4LvFsV2XG
-	 CjXxbSodH0jO84Uf1s9xU42zxiHU8Fj9I4L9EBSyAlr6fLAvGWdgn6i77iE3xTz+S4
-	 EQo+MhKnkaOJetQdzsUCjJqKlJAOBiGch5V06bERZgTTycyfn4QXnkWYah6kluHAv4
-	 J2rT5GxX7grrGdrBQk59vwJYvI6HDDea1qhDtp8cXY8ZJIpBaQpmNCInHc1WvDYWb0
-	 5TuZtxv82ISv+qqTwBNlLUPbAgRWPNjazgEsd3Z9bfaXxedBGogFVA6Wgl8ifk3ZU2
-	 qp+XAX0Yumf8Q==
+	 Reply-To:From;
+	b=lWnG4oCZcZe0TDZ4xpL0VJtvoXcbP8sgA1msI8mUIS+y71/A/ZrSjqPeXgh0aGQPP
+	 w0VY6BvumvITbuuBePE97Qrwx+CDCnHmahpf1DFjlVYi/yENnDlCAfewVOnBE1CmfK
+	 fk/ETVDiVGJEx0yKtTMR8H45jTXyiWTpluvM6QuMJH5Rcj2+4RKvVfgox6TIdI0Qsr
+	 9m+lharh2EJtydVjewEvOo/yGmqH4SRWo7cSo660RtmWwAEMcKJm2b1fX1wR3T4bp3
+	 1jBY90JFCaSKOGSSkxUHzP6eG+GsQ3p+CSNCcx+NFUwwYrAq44Lsa8FtfmtP+GuiHu
+	 PIUl+ZSj4HDcg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A5D1160715;
-	Thu, 23 Jul 2026 07:11:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 7E92B39E
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:11:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 430DD407E9;
+	Thu, 23 Jul 2026 07:33:48 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1690636E
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:33:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 64FF360708
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:11:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 082B1400BB
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:33:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mb8FxsuaPyVI for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 07:11:28 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
- envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 406F8606CC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 406F8606CC
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 406F8606CC
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:11:27 +0000 (UTC)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66N6AdWa3115847
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:11:26 GMT
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28vjv3r-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:11:26 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2cc7e86e7c5so7023625ad.3
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 00:11:26 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MhZjeFhyRtzF for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 07:33:46 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 98DB840026
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 98DB840026
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 98DB840026
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:33:45 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BA9AF8494B; Thu, 23 Jul 2026 09:33:43 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E7583E76
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 09:33:41 +0200 (CEST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-471eeac43bfso269239f8f.3
+ for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 00:33:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784790686; x=1785395486;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ef5uYKV+rzB5EX6iqhTwhcr/KL08/5qw/tpSE61NHhU=;
- b=Is+YtU+a0pbiGLcI012WAjWotdoFUTKkKvLiHFxWs9SlwYArVzOb/4opnvIx26It/X
- 456ndHrHAi5AbVujrOJkyLEgUA1+ZVYlr1clAfJvLm1pnxitZEoSHKjZNFSjJPko+tJA
- ywCK+5XnNRZluQfjXub48rtWyTSzILBYREM3iFzVZYnBNPPmxp6HZg7OMiUMOtbuzSEy
- ytrIrioMBIQZrmdEPlFL3ZxzAG+eAuUZvcpOt7ds3aB/GPf8Q9+z3ZbwkR146LKM0eZg
- blxodiLMwIN6p6ycXiIUkGDYkpScSnFfTWDf0/tZqNO0j3Z0to/fcgYGUYxy3cG8EAAh
- DJJA==
+ d=1e100.net; s=20251104; t=1784792020; x=1785396820;
+ h=content-transfer-encoding:content-type:in-reply-to:organization
+ :autocrypt:content-language:references:cc:to:subject:reply-to:from
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=udvdkbhGuCAaC2HG7xkPhOwn33A6nN/5VfAo4E5avGk=;
+ b=bnHf6/USkGqsbnoDDgLD0gh5jucIXBnFEX0PeIszAEvS6gOPEowzdJo9nVuo5EMv6R
+ kMLCwToX1B80V0ciOVcm22Le1NT+r8BSmgCmvWHXRcUVsvVbhY0luVwbuVpRM1zZYwv6
+ wxSPSIwm1LWuU3nyCsVVnHxN863iGdEeIIvGs6ZwYsM3aFY9kqvfLkSNPYhaDox6cYhT
+ CNSiD4rh/6GBOUO1Ra4R3WiIAm6TpmWfbfvqY/pthOzAwZVGFjK0PkxPVdhswGgeCuV9
+ uxivIEmqJuCC8SCS3bVlp4m4lEadmdTZLbgvG7xFrOVPrSDSgInaT6LsU9RuOuQB2FZS
+ tI0w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpZV0xV0xw3UEr2PgSqhZUvW/t2b5rSKu9dESTuPGYMo/HvHGrZ3VFKIEEJ22KejV3J2oV+RwQ=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yz/qeb61Nd6VFgwTtkzQPX1EPplJP3QKMytcq3KenxfcaWhZVPb
- +gWCHW693kA0CPpMwg0YNuUXITKI4UBkG8oi4Vw3veR2IbvefUS5935ZmieX8Nctcf1SMmCaif3
- xf6lA8YUuRv7DMfuECZUFqSoQcNfRfR5fyoVqu8CJ+E+nW8RSa55f74dEqRuQjE5W/wQ8+5U=
-X-Gm-Gg: AR+sD120ussi9Jbl4vAeMCQ2mqQ2U2lFkxmfgeYZZ+3UqaB/vMyhzudMwUmx03nohjp
- ++pHcDJtSQVxs0VuCXjnWgp7rWixSN740KncFE6aM69YwD1QbzT6mXl7d7Arkt5Bb8gtFtOrjKj
- KssTgDEfXQRW1HIcnwVd984GzTp+tCzC9Tgo8pR/vms6LMJmvvAZkC/Wzfv+8Grn45FbYTVbJvN
- eIY2Ee9iDZG+pPG8w+D6awTvBoHSqBGys40qjir2jaBOaVCY/7yuTCIhndpOHonSIyJlcCAGZUZ
- P3R4XIUHHi7+uQJbBKC9m7lZg899WVq6FrT77Gbvv20WmNXSth+Xd0xbX93qsSPIQMTwPYEMdad
- 6pSLUEByjpHMHqN/5YvoxxxGXp7S1JXzVbm6gAA==
-X-Received: by 2002:a17:903:2449:b0:2cc:e620:e307 with SMTP id
- d9443c01a7336-2cfa6bc1948mr23581555ad.20.1784790685759; 
- Thu, 23 Jul 2026 00:11:25 -0700 (PDT)
-X-Received: by 2002:a17:903:2449:b0:2cc:e620:e307 with SMTP id
- d9443c01a7336-2cfa6bc1948mr23581285ad.20.1784790685291; 
- Thu, 23 Jul 2026 00:11:25 -0700 (PDT)
-Received: from [10.151.41.190] ([202.46.23.19])
+ AHgh+RqRX8O7Afm2/We0uXvYinEsQLjCDl+pcXjTdvX7l2QDbxD7AmyQ3H0t4LSGssxvKsU+RGeC0zQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDtZssWCHZ5Rcft/04KZlfaxaTIqGdXuHnitaYXBc8RhfQf+I4
+ iXfRbDuVgJ8ufBiZxj8ZbvgeCpV49OrvGvCZerXuMSXRagnyn1PRBR8iX38MYX8QRQ8=
+X-Gm-Gg: AR+sD12WPKb1PKLB357Cl8ch3oc28onTmHbnmlsiziBDgHP0VwkEegn5/Kap0BioV7A
+ bExSN1EWuRGKT5vdGTG4a/QiAuuEP9WAxMefDgnxFp6MLL0ciY/A4G06SrmRn9ucx3786fQXzex
+ Wn0rhJ3sdLkbaucixK+pVQSG8KCL8JIf8mDnX5vCCJl3mliuzmu2ZCNEwhLDiM6wnODkDpOp6RK
+ SFMSCCfBuVP11ftn8ixHuGCMQoT/SUqw1CavlrVG7s/+j0ZQhG28GQPpd5ddJnY2z8TVIU8VYSr
+ nPvTARDZJ7eiFLl95edVvzrZCZtmi+iDq4bYaOFirdtgIh9TJqpIjxR4dpCQHmsJNA0clcJ507y
+ IpGT4OxHh5yB5me9Zx1RiEQfz8JcYXFquuQO9DRNT3dtg2EsRqw0w0elf5q42wVI5c7qGOor2P0
+ 4eOqBfBVUXNv1nCq43Ru9SyNCBNTQwJF7JE4/ctSD+fLNGeCYbu/UtAhhsyQ==
+X-Received: by 2002:a05:6000:4a12:b0:46d:d90b:bbe4 with SMTP id
+ ffacd0b85a97d-47f8d76050emr2245801f8f.40.1784792020410; 
+ Thu, 23 Jul 2026 00:33:40 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:ab55:6d63:2bdd:9491?
+ ([2a01:e0a:106d:1080:ab55:6d63:2bdd:9491])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3147e0818e4sm16566435eec.22.2026.07.23.00.11.22
+ ffacd0b85a97d-47f85c532d4sm12455016f8f.22.2026.07.23.00.33.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 00:11:24 -0700 (PDT)
-Message-ID: <31f50fc4-ecfe-4e8c-89d8-7d7e90139e4f@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 12:41:20 +0530
+ Thu, 23 Jul 2026 00:33:40 -0700 (PDT)
+Message-ID: <4fd9db1d-0194-4f6b-8472-43fffed26371@linaro.org>
+Date: Thu, 23 Jul 2026 09:33:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] clk: qcom: sa8775p: Add SDCC1 clock support with
- frequency table
-To: Hari Prasath G E <gehariprasath@ti.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20260722-lemans_emmc-v2-1-edc56ce7b768@oss.qualcomm.com>
- <c1278a52-9499-4a28-bd1a-6b9de603763a@ti.com>
-Content-Language: en-US
-In-Reply-To: <c1278a52-9499-4a28-bd1a-6b9de603763a@ti.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 5/5] optee: implement the RPMB subsystem interface for
+ UFS
+To: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
+Cc: trini@konsulko.com, jens.wiklander@linaro.org,
+ ilias.apalodimas@linaro.org, bhupesh.linux@gmail.com, n-francis@ti.com,
+ marek.vasut+renesas@mailbox.org, shawn.lin@rock-chips.com,
+ igor.belwon@mentallysanemainliners.org, yoshihiro.shimoda.uh@renesas.com,
+ alchark@gmail.com, tuyen.dang.xa@renesas.com, padmarao.begari@amd.com,
+ macpaul.lin@mediatek.com, jstephan@baylibre.com, bb@ti.com,
+ j-mcarthur@ti.com, venkyada@qti.qualcomm.com,
+ hayashi.kunihiko@socionext.com, dlechner@baylibre.com, u-boot@lists.denx.de
+References: <20260722060805.1428110-1-jorge.ramirez@oss.qualcomm.com>
+ <20260722060805.1428110-6-jorge.ramirez@oss.qualcomm.com>
+ <791913b4-d006-44be-8c94-871617418dbc@linaro.org> <amDP5roFBAAdOcYK@trex>
+ <6f5137f9-d358-4c51-ac2c-f667cf126d80@linaro.org> <amEIA0pSVEehZJYt@trex>
+ <amEPgwafY1zm1LwF@trex>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <amEPgwafY1zm1LwF@trex>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA3MCBTYWx0ZWRfXzSOBJZx9oFpA
- ZT5VJLzfnlb1P7hm9tuItQmNHp1u0FNav/8cSS4dFp+zAxqfy6ndd0mkBFtsDZm1c0TyfomReuP
- Tqe/Pl+b/z80Mm0z3Z3Mk9eIeRLO/jA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA3MCBTYWx0ZWRfX3gW1dy3vB2Rt
- Patkp4BRdKvNfR7Z56wLwmDUjw4SWAZlYWNqudaqoJqtnBDqg+yrshVcZrtdsBOEkMtX/WrRaMy
- t4+ZXr3FnZAvX/Vlu4uG8m6ArinzgqiFExQK5zYR2xTOAVEY2h8m9ORV4ncN+2EXV3QFjByY9lB
- ANp0ekC9Ke4JoMjx1xB8/VQLgPMsnwwuIht1naU6h0lsyZjhWSLmiLzy1bolTos6+t3aV5EuY1T
- gnn28HcXzKjVvCf3bIgqoDio1J4pEQHXGxHH9MdH7xD71cc2JRskFSticDsyUJHtg6B9HhupTj5
- ezsLO5Vasp1qqq9kcgkYE2mLSE6vHhJmNQ9NTLDEzRgNQSFLPetrKyMGYxKcTu0JnjMaga/rYgB
- RSPHRZQe9mXAffKZwxATnxAM+SSIrr0mhx4fBPobkdqqiB+Xb0zmJiDKyvRYSB6rmUVwUPb18I+
- giEmIymQ5OC21A5D3Rw==
-X-Proofpoint-ORIG-GUID: g7uq1JycGsx6S97dKWELIXEkjv-ocY6U
-X-Proofpoint-GUID: g7uq1JycGsx6S97dKWELIXEkjv-ocY6U
-X-Authority-Analysis: v=2.4 cv=D4V37PRj c=1 sm=1 tr=0 ts=6a61be9e cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=P-IC7800AAAA:8 a=voM4FWlXAAAA:8 a=EUspDBNiAAAA:8 a=mJjq1tzzTSlCUViq0ssA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
- a=d3PnA9EDa4IxuAV0gXij:22 a=IC2XNlieTeVoXbcui8wp:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_02,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 priorityscore=1501
- phishscore=0 spamscore=0 bulkscore=0 suspectscore=0 impostorscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607230070
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ef5uYKV+rzB5EX6iqhTwhcr/KL08/5qw/tpSE61NHhU=; b=M2nYNI/DbbqeC906
- TzKmIIpeOxS1sDOxEl08zxEeN8P9RyWACz2Mpxt08tx0jl+if95Fb7bpsSVQCY2X
- 99jJo5Y23shh/8Fzm5Ovv0Z/GaII/ixA2n2W0TeSp4zgN41PE+lk8DTkaYdLZFAS
- fnW7HGMgFFB5PKAz4xgYHKQDJBN/GNZKMcU+sDEpZymYuU2Cu5U0O4GUFo4mn9mP
- DNj7iCHe+tYH/myMBDbrt2RRsTHMQCagWbgqNDA1bp5jSsnZTg5ZPs+q+bHrzEnb
- xQU3Outj6X7gTcLiXj9yq8bY7P9sc0I9/0qfjz7/+DeK6mYpTKPQHTZtgHmMYUj5
- Klb9ww==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784790686; x=1785395486;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ef5uYKV+rzB5EX6iqhTwhcr/KL08/5qw/tpSE61NHhU=;
- b=CHGtoOs8CdatiGqbt5O1DWA0KFOPqOZCFfi4KiJsdJxOcNPo9xw0ZpViZv+hvg/cgX
- BeMbGg8yp85e+i0ozsvyd8nTYvi5Gn9Mi1ecarJfa8xfiRX3eppgGM3Tmzy5/aOp6ASZ
- 6SJaTaplWclbWJ5W2+n9HYoaTyuy07i0CdivBY5RI/jTsiG4gZav2t+eGuNS8ze/0SxN
- MmnKQ0ecAql92OCEXXvxSlb7Sons/xShHi1iOs//mZOO8IqpCThqfuejXm61/KlbKfIi
- 3OjCUzJetNy/LhgW1gOfn89Sf3IJEDQAQKh11/7RVnEi5ah8rzcBveDMQoXuE1FR8Uxl
- BEiQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=M2nYNI/D; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=CHGtoOs8
+ d=linaro.org; s=google; t=1784792020; x=1785396820; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:organization
+ :autocrypt:content-language:references:cc:to:subject:reply-to:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=udvdkbhGuCAaC2HG7xkPhOwn33A6nN/5VfAo4E5avGk=;
+ b=I4HPsq7HNY73q1OQyc8bXX9K6WUVTGLKPximPN9U61CnZ9mZIzJu2H1aGACEl3EAe4
+ ToBrCzmxpg2YoWnjpkor5QOOzUOxHF246+XKzjL5s96r7IlAik37XhmVtsUErjzWDb8i
+ oHiTB/eEWLaCmewzVAx0Sv2T57fMvCJDJLCtpWIQkv4Iux8zR5kNCAfABZJts4Ie413z
+ MrcFh9fBaFNIRBp1uDF4YqMBl9Jkv/DrCQjfby8W4jFXTIu8DDZOg7MnJPF9d4cRzQKQ
+ oF8R0RJLbEt9Za9mcZOZGdURNmcbVwAmRI8KC9s91ANaLd91iiGL/haVCtEU71P7UTiG
+ qiNA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=I4HPsq7H
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=neil.armstrong@linaro.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="I4HPsq7H"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -188,106 +186,244 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Balaji Selvanathan via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Hari,
-
-On 7/22/2026 10:26 AM, Hari Prasath G E wrote:
-> On 7/22/2026 10:04 AM, Balaji Selvanathan via U-Boot wrote:
->> Add support for SDCC1 (eMMC) clock on SA8775P platform.
+On 7/22/26 20:44, Jorge Ramirez wrote:
+> On 22/07/26 20:12:19, Jorge Ramirez wrote:
+>> On 22/07/26 17:43:16, Neil Armstrong wrote:
+>>> On 7/22/26 16:12, Jorge Ramirez wrote:
+>>>> On 22/07/26 10:31:04, neil.armstrong@linaro.org wrote:
+>>>>> Hi,
+>>>>>
+>>>>> On 7/22/26 08:07, Jorge Ramirez-Ortiz wrote:
+>>>>>> OP-TEE's legacy RPMB supplicant interface assumes the RPMB device is eMMC
+>>>>>> and derives the key from an eMMC-shaped device ID, so it can never
+>>>>>> reproduce the key Linux derives for a UFS device; secure storage on
+>>>>>> UFS-only platforms instead needs the transport-agnostic RPMB subsystem
+>>>>>> interface, through which the normal world describes the real RPMB device
+>>>>>> to OP-TEE. Add a UFS backend for it so OP-TEE derives a key matching Linux
+>>>>>> and can use RPMB secure storage on UFS, leaving the legacy eMMC path
+>>>>>> untouched.
+>>>>>>
+>>>>>> This subsystem backend currently supports UFS drives only; eMMC still uses
+>>>>>> the legacy interface. As the legacy interface is dropped in favour of the
+>>>>>> subsystem one, an eMMC backend should be added here so both transports are
+>>>>>> served through a single RPMB path.
+>>>>>>
+>>>>>> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+>>>>>> ---
+>>>>>>     drivers/tee/optee/Makefile               |   1 +
+>>>>>>     drivers/tee/optee/optee_msg_supplicant.h |   8 ++
+>>>>>>     drivers/tee/optee/optee_private.h        |  41 ++++++++
+>>>>>>     drivers/tee/optee/rpmb.c                 | 124 +++++++++++++++++++++++
+>>>>>
+>>>>> Why not rpmb_ufs ?
+>>>>
+>>>>
+>>>> because in the future (and IMO) rpmb.c should support UFS and EMMC using
+>>>> the new probe interface (eventually removing rpmb_legacy).
+>>>
+>>> Let's see in the future, if somehow there's need for a common "new"
+>>> and emmc only legacy some rework will be needed anyway. The eMMC RPMB
+>>> hasn't been updated for a very long time...
+>>>
+>>> Using the driver model to register an rpmb device attached to an eMMC
+>>> or UFS controller would the cleanest way to handle that, but we're not here now.
+>>>
+>>>>
+>>>>>
+>>>>> It's fine to have 2 backend implementations, the emmc is implementing the
+>>>>> legacy optee API, just add a comment in the eMMC file about that.
+>>>>>
+>>>>> Neil
+>>>>>
+>>>>>>     drivers/tee/optee/supplicant.c           |   9 ++
+>>>>>>     5 files changed, 183 insertions(+)
+>>>>>>     create mode 100644 drivers/tee/optee/rpmb.c
+>>>>>>
+>>>>>> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+>>>>>> index 8321cf53a19..7af19834c00 100644
+>>>>>> --- a/drivers/tee/optee/Makefile
+>>>>>> +++ b/drivers/tee/optee/Makefile
+>>>>>> @@ -4,3 +4,4 @@ obj-$(CONFIG_OPTEE) += core.o
+>>>>>>     obj-y += supplicant.o
+>>>>>>     obj-$(CONFIG_DM_I2C) += i2c.o
+>>>>>>     obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb_legacy.o
+>>>>>> +obj-$(CONFIG_SUPPORT_UFS_RPMB) += rpmb.o
+>>>>>> diff --git a/drivers/tee/optee/optee_msg_supplicant.h b/drivers/tee/optee/optee_msg_supplicant.h
+>>>>>> index 963cfd47824..b720d5d7b3f 100644
+>>>>>> --- a/drivers/tee/optee/optee_msg_supplicant.h
+>>>>>> +++ b/drivers/tee/optee/optee_msg_supplicant.h
+>>>>>> @@ -152,6 +152,14 @@
+>>>>>>      */
+>>>>>>     #define OPTEE_MSG_RPC_CMD_I2C_TRANSFER 21
+>>>>>> +#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_RESET	22
+>>>>>> +#define OPTEE_MSG_RPC_CMD_RPMB_PROBE_NEXT	23
+>>>>>> +#define OPTEE_MSG_RPC_CMD_RPMB_FRAMES		24
+>>>>>> +
+>>>>>> +#define OPTEE_RPC_SHM_TYPE_APPL		0
+>>>>>> +
+>>>>>> +#define OPTEE_RPC_RPMB_UFS		1
+>>>>>> +
+>>>>>>     /*
+>>>>>>      * Was OPTEE_MSG_RPC_CMD_SQL_FS, which isn't supported any longer
+>>>>>>      */
+>>>>>> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+>>>>>> index 1f07a27ee4b..2888257aefe 100644
+>>>>>> --- a/drivers/tee/optee/optee_private.h
+>>>>>> +++ b/drivers/tee/optee/optee_private.h
+>>>>>> @@ -9,6 +9,17 @@
+>>>>>>     #include <tee.h>
+>>>>>>     #include <log.h>
+>>>>>> +#ifdef CONFIG_SUPPORT_UFS_RPMB
+>>>>>> +/**
+>>>>>> + * struct optee_private - OP-TEE driver private data
+>>>>>> + * @rpmb_next_region:	next UFS RPMB region to report on PROBE_NEXT
+>>>>>> + * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT
+>>>>>> + */
+>>>>>> +struct optee_private {
+>>>>>> +	unsigned int rpmb_next_region;
+>>>>>> +	unsigned int rpmb_cur_region;
+>>>>>> +};
+>>>>>> +#else
+>>>>>>     /**
+>>>>>>      * struct optee_private - OP-TEE driver private data
+>>>>>>      * @rpmb_mmc:		mmc device for the RPMB partition
+>>>>>> @@ -22,6 +33,7 @@ struct optee_private {
+>>>>>>     	int rpmb_dev_id;
+>>>>>>     	int rpmb_original_part;
+>>>>>>     };
+>>>>>> +#endif
+>>>>>>     struct optee_msg_arg;
+>>>>>> @@ -60,6 +72,35 @@ static inline void optee_suppl_rpmb_release(struct udevice *dev)
+>>>>>>     }
+>>>>>>     #endif
+>>>>>> +#ifdef CONFIG_SUPPORT_UFS_RPMB
+>>>>>> +void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+>>>>>> +				      struct optee_msg_arg *arg);
+>>>>>> +
+>>>>>> +void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+>>>>>> +				     struct optee_msg_arg *arg);
+>>>>>> +
+>>>>>> +void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
+>>>>>> +				 struct optee_msg_arg *arg);
+>>>>>> +#else
+>>>>>> +static inline void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+>>>>>> +						    struct optee_msg_arg *arg)
+>>>>>> +{
+>>>>>> +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
+>>>>>> +}
+>>>>>> +
+>>>>>> +static inline void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+>>>>>> +						   struct optee_msg_arg *arg)
+>>>>>> +{
+>>>>>> +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
+>>>>>> +}
+>>>>>> +
+>>>>>> +static inline void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
+>>>>>> +					       struct optee_msg_arg *arg)
+>>>>>> +{
+>>>>>> +	arg->ret = TEE_ERROR_NOT_IMPLEMENTED;
+>>>>>> +}
+>>>>>> +#endif
+>>>>>> +
+>>>>>>     #ifdef CONFIG_DM_I2C
+>>>>>>     /**
+>>>>>>      * optee_suppl_cmd_i2c_transfer() - route I2C requests to an I2C chip
+>>>>>> diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
+>>>>>> new file mode 100644
+>>>>>> index 00000000000..9c3e0f031ad
+>>>>>> --- /dev/null
+>>>>>> +++ b/drivers/tee/optee/rpmb.c
+>>>>>> @@ -0,0 +1,124 @@
+>>>>>> +// SPDX-License-Identifier: GPL-2.0+
+>>>>>> +
+>>>>>> +#include <dm.h>
+>>>>>> +#include <tee.h>
+>>>>>> +#include <ufs.h>
+>>>>>> +
+>>>>>> +#include "optee_msg.h"
+>>>>>> +#include "optee_msg_supplicant.h"
+>>>>>> +#include "optee_private.h"
+>>>>>> +
+>>>>>> +#define UFS_RPMB_CONTROLLER	0
+>>>>>
+>>>>> Can this be a config option instead which defaults to 0 ?
+>>>>
+>>>> um, I dont think so - this assumes there is only one controller. If there
+>>>> are more than one, we would need a mechanism to select which one from
+>>>> the enumerated values (maybe a DT alias (ie ufs-rpmb ?) I think the binding order
+>>>> changes as we enable/disable devices)
+>>>
+>>> It could collide with other SCSI devices like SATA devices over PCIe.
+>>>
+>>> Usually we try not to hardcode the devices ids.
 >>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->>   drivers/clk/qcom/clock-sa8775p.c | 27 +++++++++++++++++++++++++++
->>   1 file changed, 27 insertions(+)
 >>
->> diff --git a/drivers/clk/qcom/clock-sa8775p.c 
->> b/drivers/clk/qcom/clock-sa8775p.c
->> index 7eec4aeae48..a5e84ffba7c 100644
->> --- a/drivers/clk/qcom/clock-sa8775p.c
->> +++ b/drivers/clk/qcom/clock-sa8775p.c
->> @@ -74,6 +74,22 @@ static const struct freq_tbl 
->> ftbl_gcc_ufs_phy_unipro_core_clk_src[] = {
->>       { }
->>   };
->>   +#define SDCC1_APPS_CLK_CMD_RCGR            0x20014
->> +
->> +/* SDCC1 APPS clock frequency table */
->> +static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
->> +    F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
->> +    F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
->> +    F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
->> +    F(20000000, CFG_CLK_SRC_GPLL0_EVEN, 5, 1, 3),
->> +    F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
->> +    F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
->> +    F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
->> +    F(192000000, CFG_CLK_SRC_GPLL9, 4, 0, 0),
->> +    F(384000000, CFG_CLK_SRC_GPLL9, 2, 0, 0),
->> +    { }
->> +};
->> +
->>   static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
->>   {
->>       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
->> @@ -94,6 +110,7 @@ static ulong sa8775p_set_rate(struct clk *clk, 
->> ulong rate)
->>                        5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
->>           clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 
->> 0);
->>           return rate;
->> +
->>       case GCC_UFS_PHY_AXI_CLK:
->>           freq = qcom_find_freq(ftbl_gcc_ufs_phy_axi_clk_src, rate);
->>           clk_rcg_set_rate_mnd(priv->base, UFS_PHY_AXI_CLK_CMD_RCGR,
->> @@ -112,6 +129,12 @@ static ulong sa8775p_set_rate(struct clk *clk, 
->> ulong rate)
->>       case GCC_UFS_PHY_PHY_AUX_CLK:
->>           clk_rcg_set_rate(priv->base, UFS_PHY_PHY_AUX_CLK_CMD_RCGR, 
->> 0, CFG_CLK_SRC_CXO);
->>           return 19200000;
->> +
->> +    case GCC_SDCC1_APPS_CLK:
->> +        freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
->> +        clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
->> +                     freq->pre_div, freq->m, freq->n, freq->src, 8);
->> +        return freq->freq;
->>       default:
->>           return 0;
->>       }
->> @@ -169,6 +192,10 @@ static const struct gate_clk sa8775p_clks[] = {
->>         /* EDP reference clock (used by UFS PHY) */
->>       GATE_CLK(GCC_EDP_REF_CLKREF_EN, 0x97448, 1),
->> +
->> +    /* SDCC1 clocks */
->> +    GATE_CLK(GCC_SDCC1_AHB_CLK, 0x2000c, 1),
->> +    GATE_CLK(GCC_SDCC1_APPS_CLK, 0x20004, 1),
->
-> As per the header file at [1], GATE_CLK appears to be deprecated. Can 
-> you verify once ?
->
-> [1] 
-> https://elixir.bootlin.com/u-boot/v2026.07-rc1/source/drivers/clk/qcom/clock-qcom.h
+>> right...shall I go ahead with a DT alias approach?
+> 
+> 
+> something like this?
+> 
+> 
+>    8 ⋮  8 │ #include "optee_msg_supplicant.h"
+>    9 ⋮  9 │ #include "optee_private.h"
+>   10 ⋮ 10 │
+>   11 ⋮    │-#define UFS_RPMB_CONTROLLER        0
+>      ⋮ 11 │+static int optee_rpmb_get_scsi_dev(struct udevice **scsi_devp)
+>      ⋮ 12 │+{
+>      ⋮ 13 │+        struct udevice *ufs_dev, *scsi_dev;
+>      ⋮ 14 │+        ofnode node;
+>      ⋮ 15 │+        int ret;
+>      ⋮ 16 │+
+>      ⋮ 17 │+        node = ofnode_get_aliases_node("ufs-rpmb");
+>      ⋮ 18 │+        if (ofnode_valid(node))
+>      ⋮ 19 │+                ret = uclass_get_device_by_ofnode(UCLASS_UFS, node, &ufs_dev);
+>      ⋮ 20 │+        else
+>      ⋮ 21 │+                ret = uclass_get_device(UCLASS_UFS, 0, &ufs_dev);
+>      ⋮ 22 │+        if (ret)
+>      ⋮ 23 │+                return ret;
+>      ⋮ 24 │+
+>      ⋮ 25 │+        ret = device_get_child(ufs_dev, 0, &scsi_dev);
+>      ⋮ 26 │+        if (ret)
+>      ⋮ 27 │+                return ret;
+>      ⋮ 28 │+
+>      ⋮ 29 │+        *scsi_devp = scsi_dev;
+>      ⋮ 30 │+
+>      ⋮ 31 │+        return 0;
+>      ⋮ 32 │+}
+>   12 ⋮ 33 │
+>   13 ⋮ 34 │ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+>   14 ⋮ 35 │                                       struct optee_msg_arg *arg)
+> 
+> ────────────────────────────────────────────────────────────────┐
+> • 76: void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev, │
+> ────────────────────────────────────────────────────────────────┘
+>   55 ⋮ 76 │                 return;
+>   56 ⋮ 77 │         }
+>   57 ⋮ 78 │
+>   58 ⋮    │-        if (uclass_get_device(UCLASS_SCSI, UFS_RPMB_CONTROLLER, &scsi_dev)) {
+>      ⋮ 79 │+        if (optee_rpmb_get_scsi_dev(&scsi_dev)) {
+>   59 ⋮ 80 │                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
+>   60 ⋮ 81 │                 return;
+>   61 ⋮ 82 │         }
+> 
+> ─────────────────────────────────────────────────────────────┐
+> • 124: void optee_suppl_cmd_rpmb_frames(struct udevice *dev, │
+> ─────────────────────────────────────────────────────────────┘
+>   103⋮ 124│                 return;
+>   104⋮ 125│         }
+>   105⋮ 126│
+>   106⋮    │-        if (uclass_get_device(UCLASS_SCSI, UFS_RPMB_CONTROLLER, &scsi_dev)) {
+>      ⋮ 127│+        if (optee_rpmb_get_scsi_dev(&scsi_dev)) {
+>   107⋮ 128│                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
+>   108⋮ 129│                 return;
+>   109⋮ 130│         }
+> 
 
-Thanks for the feedback. Corrected this here: 
-https://patchwork.ozlabs.org/project/uboot/patch/20260723-lemans_emmc-v2-1-f6e679e58fe0@oss.qualcomm.com/
+No I was just thinking as a Kconfig option along CONFIG_SUPPORT_UFS_RPMB but
+I just didn't find where you added the CONFIG_SUPPORT_UFS_RPMB option...
 
-Regards,
-
-Balaji
-
->
-> Cheers,
-> Hari Prasath G.E
->
->>   };
->>     static int sa8775p_enable(struct clk *clk)
->>
->> ---
->> base-commit: 042e45e026c77227319a426940577856ffe62e7b
->> change-id: 20260721-lemans_emmc-f2ccc04e89d0
->>
->> Best regards,
->
+Neil
