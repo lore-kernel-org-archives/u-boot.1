@@ -4,129 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FE9C531D1
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278FDC531F7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jul 2026 15:14:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2AB1560AA1;
-	Thu, 23 Jul 2026 15:14:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DEDFC60A59;
+	Thu, 23 Jul 2026 15:14:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vTJ4zp8lSFAL; Thu, 23 Jul 2026 15:14:12 +0000 (UTC)
+ id zq6c9B81SsF8; Thu, 23 Jul 2026 15:14:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3458060A92
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E9CF060A95
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784819652;
-	bh=sigHRYrwVNJyjgL6Gwh/Am1LiZdVvK7vtCJ6htOzboI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QaaVFB4peRPh32lgdgB2rxzC8JGy4TG7QmBr3uJMJXE1HbvX3Dp5z+cq80dvJRZj7
-	 6ILVYwLh9YHUiPJc+uT+jN8ZePcs+XwHHYamc5dXXh7tuCmXwUk5soyQCfbOvPj7l3
-	 jkhiV823WPuYX2FQamL0MSnjYPv/k8XOS6iXZSAx/uYA+LiAXcnsZ2OxymmLivbgTo
-	 28TcFCQnGHERkV4QWJKigr5lKMtxk41SthrPVxa8jJAbOQSplX5b5+0exU3JCu/nVw
-	 6cVM2wipiWo4VTk12KrB4a5PY8rFFoJ49p1uu/8invfYFxTxsTKh3MO04PdmrVJh5a
-	 YEMGkEGbg7u2Q==
+	d=lists.u-boot-project.org ; s=default; t=1784819654;
+	bh=8oOAFMNsz4F4aRBNB/mFTK+Lc+EEKae23uUnmXYuRDw=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=dfzIItMbb+vL7jZCVuiNleLAq7614YqtVj7A/E5e5EYC1OMIl/+a3+iGPNJ6MZMzF
+	 1HpqvrsWCKFeBl5ByQATqml/dt1hjRKythZwpbJAJDThFQR4N/Z0AhLBpTY/ltyK6C
+	 REijXN1lnSXk/rO+6MVq1o9Iw5d5Gqe/mdkZ/9ZKRDJwKOnqy7ocMwrt7skReHZ12g
+	 pJGV7Yu9QoJp/wN9I8VRPFDaIjR6SDz9q4ffy/4MrodiprqslMp7ixI40SzFAkMgL3
+	 ZLgNTok1Jfy7Cvkpt5b6/ACjYBYWRbnoGiizNDonJM58Kbpp21VkiISzx7TiCcndUA
+	 P13tUWXZqISWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3458060A92;
-	Thu, 23 Jul 2026 15:14:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 50052490
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E9CF060A95;
+	Thu, 23 Jul 2026 15:14:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7E9B52E5
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 14:01:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 36476403E4
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 709FD407B4
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 14:01:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Lya-w4NVZEZs for <u-boot@lists.u-boot-project.org>;
- Thu, 23 Jul 2026 13:30:41 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
- envelope-from=tan.siewert@9elements.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DAC82403CD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DAC82403CD
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DAC82403CD
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 13:30:40 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4953de5be0aso4687015e9.0
- for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 06:30:40 -0700 (PDT)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eV7sEl963VAQ for <u-boot@lists.u-boot-project.org>;
+ Thu, 23 Jul 2026 14:01:44 +0000 (UTC)
+Received-SPF: None (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 49AC6407A9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 49AC6407A9
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 49AC6407A9
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 14:01:44 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69c1220bd51so1152833a12.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 23 Jul 2026 07:01:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784813439; x=1785418239;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=sigHRYrwVNJyjgL6Gwh/Am1LiZdVvK7vtCJ6htOzboI=;
- b=NhcbDLieQeQc/H2ovOegdlmIB92L223Blam0MD7edsBkeEy7vx4ofJIBnRDsad8Ib2
- b5BbTNsN2SzOdy9RWT4mKEjeMZMk3rNIQ1f1voW4/kz6zH5fiwKhHXCycEv7XO9PxZBX
- efSTg/s3krGW7iuXaSP5xL1CHrOSZ0zRgq5IA+556eGolbJLZ6Jv2x2f29kX6TfmHlBq
- yL8E2TLtSD5nOmomgvYoL4IJtyduwo8c7rOFsYhrBvZMitxEnq5CQpdwvXb6J5sO+iK2
- inGq3wN3TPdW81tmZkylAQ235XP/6MUJiELpYYrazHFettjgqKNX0wb3aBWFQIyg77W0
- G4HQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoLygJ7dTLacJSWJ3Ve6s29oKhavkI5yqnxM31ilKxWD5eKOE9jROj5HPcaSss0KMMNDKMzH8A=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzJI/Z41i16aexcreLeDAuptJQuRdWZyw0C53FVCIdMkVEERsJU
- OcK8vWneJYVhpRscJodhi3/m8+XSilz6AjUUng4dxYlc5Zz9dvuEGJua1DLUA7/JHWU=
-X-Gm-Gg: AR+sD11TmadLX2aymlMvDpa/RYM80Pkw1VDH2wXKwxlLJFXxnwx0mjVKw6DxmEQdzlb
- LizrK8QTf5bwI3zjhfW6wNv0i9oOqP4L3EZDtL14D9/4AIZG+F9GqNueOXiGZfQg9HemqxXOjRm
- lq0pk1duVDwKMhZZrIMugFV4Huj2gkBR0bwEjITB9ft9ph8WO6pRh1WmmfI5IikbALNdpK089ee
- sMTQTN3n1oITFfaFB3Oo1fV0MNnfFMG08fRmK00QeVUWPIV26WiWMcNfDIrJn/ZvPAlLFJLi32k
- wKHce1WftqkkWgoWzCFgtDQQZK9HyYxyAaKhG6CVmSAord/ZHTeQyeQXwQ+zLe+t7QtMF0zq4gw
- RPxNhXVuF8/MsdLqH08qmDAzUG/ftSl3sWoZoAHqrZ6f1Za3iEYXlRylN5iKC7VuYQavLZfSgeb
- ihNLLx0GnVm6VhQw==
-X-Received: by 2002:a05:600c:1390:b0:495:5a0e:6d8c with SMTP id
- 5b1f17b1804b1-49573ce8e74mr44434595e9.27.1784813438818; 
- Thu, 23 Jul 2026 06:30:38 -0700 (PDT)
-Received: from [10.12.249.172] ([2a01:599:841:3b94:b6c8:2fa:40db:8ecf])
+ d=1e100.net; s=20251104; t=1784815302; x=1785420102;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=8oOAFMNsz4F4aRBNB/mFTK+Lc+EEKae23uUnmXYuRDw=;
+ b=AOI+SbFfMorkb1ofW/3AyXxGzXfSLVniKUGLv32Pr+pngz3UJbNYFFx71rFdR7r6h7
+ FybvEPzwZia2ocjPLzxRtL9VICe7Jy5tvo3BPHZypeLxEJYJ6GMBEZFBXf1QrCsKI7tV
+ f24XYjzosTvlVf0wWTVi6Io7J0Z7JxoymKZq3/MV0c7JkMphnLAGyAeWJ9RxUzEae4J1
+ zeGhEhYnXso6rpnjAPcLI357i6lmRhXP6VWS7z+K/EoCYz+rWYoE+p5ef3G9bUm+Vf9h
+ 6/1U4VtJVJJryGxgMtgf/iH8wh7It8g/cQ7i1YuwNRPKoriz988/YUsnGU+tBNnN6FPl
+ bYcw==
+X-Gm-Message-State: AOJu0YySFjOzI38/N60NjjHxxy8iQfq+dqquanuFVS5D5oLed1KZIUEI
+ I0t8d2+TJfGQVqYmZsFxZfPTZ0Dfl7KcyGSM74OdwV2rjpkzg7rT+pDDzUcnGdcHtl8HxMAwVWl
+ M7VbobvA=
+X-Gm-Gg: AR+sD12e63e2QpoCNHt/qHmzlIDSP3doGzkdwpqQuJUYKLFFkt+kcKXKu9mpVSD50O4
+ tqXNHEIt4l+LxHjfD/TR+ZkBpI8E9gGmPBxkKtcaSkqo/Bz74qBXhib0GhZOry5u4oo4+sAyXV9
+ UI3TpYegSJt9hZOpKBai6cYllzZaI8ZrZm8b3hfVT3uS/qMOCooQz+HLwO9Kq2MmB9Y80oSNega
+ d0reasxeqk+7fpUwggDZyp/n7GiTY1curW9WZrWtq6EZyIuQRwN4ph/aTRqVmQoyO87Lx0D6sox
+ O4L630OtAdo/q+7Iko2hegNy3YOIN5kUkvqNxjUkUHCkXH/BTpCrWZ9gYW77mN3IY/5AMf2xpeO
+ XuJqubw0XBuBApvqie15DHomhwuvGROo3XyRUgLku5yon22duJHhNNaNq1U74+UOPfUw5wpPCEx
+ edcERHgoUARTuj5n7PEuEWtD/XDTR84j0iKvqQm8iUbIhzgvM6AI3w/jiA9mh6NnUdNEh3ACZey
+ NbpKA==
+X-Received: by 2002:a05:6402:448a:b0:698:3b7b:e492 with SMTP id
+ 4fb4d7f45d1cf-69f6c6064f0mr1229845a12.40.1784815301951; 
+ Thu, 23 Jul 2026 07:01:41 -0700 (PDT)
+Received: from [127.0.1.1]
+ (p200300ff0f0aed0099e3f3dc2d051096.dip0.t-ipconnect.de.
+ [2003:ff:f0a:ed00:99e3:f3dc:2d05:1096])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956b043727sm97075405e9.4.2026.07.23.06.30.38
+ 4fb4d7f45d1cf-69f345b1decsm2137178a12.4.2026.07.23.07.01.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 06:30:38 -0700 (PDT)
-From: Tan Siewert <tan.siewert@9elements.com>
-Date: Thu, 23 Jul 2026 15:30:08 +0200
-Subject: [PATCH 7/8] board: hpe: gxp: display product name
+ Thu, 23 Jul 2026 07:01:41 -0700 (PDT)
+From: shj <shahriyar@byteray.co.uk>
+Subject: [PATCH 0/2] tpm: bounds-check device-reported response lengths
+Date: Thu, 23 Jul 2026 16:01:27 +0200
+Message-Id: <20260723-tpm-trunc-resp-v1-0-72a54ac30f4f@byteray.co.uk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-9e-gxp-v1-7-f86e5cea239f@9elements.com>
-References: <20260723-9e-gxp-v1-0-f86e5cea239f@9elements.com>
-In-Reply-To: <20260723-9e-gxp-v1-0-f86e5cea239f@9elements.com>
-To: u-boot@lists.denx.de, Jean-Marie Verdun <verdun@hpe.com>, 
- Nick Hawkins <nick.hawkins@hpe.com>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
- Marcello Sylvester Bauer <marcello.bauer@9elements.com>, 
- Tan Siewert <tan.siewert@9elements.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784813429; l=4810;
- i=tan.siewert@9elements.com; s=20260527; h=from:subject:message-id;
- bh=9mrHw042B2TADD1pAI0fglhEvVXrOyJYpwi3u9kpWpo=;
- b=Eg19NjxXUg5N99NNi8Ij5nAabRa/aizvqHRIpbv6iMDAsuXGDZHPG0o2uAyAbePVsvNdjKfkq
- UHUZDwGgydSAGSauDNiBfGGD+FSIQ6bkdBsMJF46hCKvu8nxDiFVn5v
-X-Developer-Key: i=tan.siewert@9elements.com; a=ed25519;
- pk=ORQd/zQf+LsAvJGXP1CjQwVO6t6iEOGq/eGUsmRVTG4=
+X-B4-Tracking: v=1; b=H4sIALceYmoC/yXMQQqDMBBA0avIrB3QWFLoVcRFEic6haZhJpaCe
+ PdGu3yL/3dQEiaFR7OD0IeV36mibxsIq0sLIc/VYDpju7sZsOQXFtlSQCHNaO3NDd752IcINcp
+ Ckb/XcJz+1s0/KZTzAsfxAzKgYEFyAAAA
+X-Change-ID: 20260723-tpm-trunc-resp-664a3babf1cf
+To: u-boot@lists.u-boot-project.org, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Andy Fleming <afleming@freescale.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Reinhard Pfau <pfau@gdsys.de>, Che-Liang Chiou <clchiou@chromium.org>, 
+ Dirk Eibach <dirk.eibach@gdsys.cc>, Tom Rini <trini@konsulko.com>, 
+ Argus <argus@byteray.co.uk>, shj <shahriyar@byteray.co.uk>
+X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Thu, 23 Jul 2026 15:13:57 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1784813439; x=1785418239;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1784815302; x=1785420102;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=sigHRYrwVNJyjgL6Gwh/Am1LiZdVvK7vtCJ6htOzboI=;
- b=ADQ95JtWxKbsPPnwJgX0jkSvyd9L6uL7FHz1K4P2KOMQ2C/6Hw0M+Pm7iFkMVcnUGP
- 7apM+r6ni+baNCY8dUfaG2ET5cGE8sBvEcQjy//OtF8aOBvW8qlJmtc9qmCDj9PYqjXM
- 8JJJuMFA7VW1srVgmVmoQhzQ3eey3Puvce9RznR52HPCXlTw3wWthgIbsokLMUzHbrW5
- tOdPEXfd6oqs9pj97npgmxhD2kMtux5Vke0bTb4PAWwm7pAKkrOS1TJBI/oGmm/jfCAZ
- sh9ZCCDr8FuPMHXBOj0HFtSfxSo6/Uykc4mm+ApSYvl7vqWpupPdG4n0yvCmAWZa8DIM
- FsbA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=9elements.com header.i=@9elements.com
- header.a=rsa-sha256 header.s=google header.b=ADQ95JtW
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=8oOAFMNsz4F4aRBNB/mFTK+Lc+EEKae23uUnmXYuRDw=;
+ b=MU09s+lYyMWcNN/KdXIHnQlrbRHJrNkVI9qJdnt+jV9eypwKowQ67TvymTfV7IhW6e
+ t5+d3Zz9mm/l9uNvistwBw/3FBB9xpV2ORCvCtedg2aFaprV9hj5q4FfvHdCGRJatyZP
+ vPMAaeHyBp+d5fcgQCwKezkopJo5Tn//yfhRAmnOtJVGq754S6+hJxnXosdoTK/LFKOx
+ ef3Tktu0juJ6oSkL4ayREz9zaD64lQBsPdc17MYMFtc26uw8vC339KhwsfkiXLU8GLCH
+ OOEdi2WIBYnPtiqA47ztp2LHtjisbE8QY1IL549OY/nnCFqBKrkd5RrQvtDwUeq9D9+B
+ brgw==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=byteray.co.uk
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
+ header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=MU09s+lY
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,162 +141,40 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Marcello Sylvester Bauer <marcello.bauer@9elements.com>
+A TPM reply's length is taken from the device and only upper-capped, then
+several callers use it unchecked: the TPM1 OIAP helpers and the TPM2
+GetCapability parser subtract a fixed header length from it, so a reply too
+short underflows the subtraction into a huge memcpy; the GetCapability
+parser then copies that many bytes into the caller's buffer, so a reply
+longer than the buffer overruns it. Because a TPM sits on a physically
+accessible bus, a cheap bus interposer (the kind used to sniff
+disk-encryption keys) can inject such a reply, and on the TPM2 path this
+parsing runs during measured boot, which is exactly the physical attacker
+that measured boot is meant to resist.
 
-Print the product name provided by the Linux device tree during
-ft_board_setup().
+Patch 1 bounds the reported length against the header and, for a properties
+query, the caller's buffer. Patch 2 adds regression tests driving the TPM2
+parser with a truncated and an over-long reply through the sandbox emulator.
 
-Signed-off-by: Marcello Sylvester Bauer <marcello.bauer@9elements.com>
-Signed-off-by: Tan Siewert <tan.siewert@9elements.com>
+Based on v2026.07 (fdfe2ec48d5c). A reproducer is available on request.
+
+Signed-off-by: shj <shahriyar@byteray.co.uk>
 ---
- arch/arm/dts/hpe-gxp.dtsi |  6 ++++--
- board/hpe/gxp/gxp_board.c | 39 ++++++++++++++++++++++++++++++++++++---
- drivers/sysinfo/gxp.c     | 22 +++++++++++++++++++---
- 3 files changed, 59 insertions(+), 8 deletions(-)
+shj (2):
+      tpm: bounds-check the device-controlled response length
+      test: tpm: check malformed capability responses are rejected
 
-diff --git a/arch/arm/dts/hpe-gxp.dtsi b/arch/arm/dts/hpe-gxp.dtsi
-index 9c761a675be..66ddbd924f7 100644
---- a/arch/arm/dts/hpe-gxp.dtsi
-+++ b/arch/arm/dts/hpe-gxp.dtsi
-@@ -12,8 +12,10 @@
- 
- 	sysinfo {
- 		compatible = "hpe,gxp-sysinfo";
--		nvmem-cells = <&serial_number>, <&part_number>;
--		nvmem-cell-names = "serial-number", "part-number";
-+		nvmem-cells = <&serial_number>, <&part_number>,
-+			      <&pca_serial_number>, <&pca_part_number>;
-+		nvmem-cell-names = "serial-number", "part-number",
-+				   "pca-serial-number", "pca-part-number";
- 		bootph-all;
- 	};
- 
-diff --git a/board/hpe/gxp/gxp_board.c b/board/hpe/gxp/gxp_board.c
-index 4a51ff55797..0cd05c00079 100644
---- a/board/hpe/gxp/gxp_board.c
-+++ b/board/hpe/gxp/gxp_board.c
-@@ -73,6 +73,17 @@ int board_fit_config_name_match(const char *name)
- 	return -1;
- }
- 
-+static void ft_board_show_product(void *blob)
-+{
-+	if (CONFIG_IS_ENABLED(DISPLAY_BOARDINFO)) {
-+		const char *model;
-+
-+		model = fdt_getprop(blob, 0, "model", NULL);
-+		if (model)
-+			printf("Product: %s\n", model);
-+	}
-+}
-+
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	struct udevice *dev;
-@@ -81,11 +92,11 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 
- 	ret = sysinfo_get(&dev);
- 	if (ret)
--		return 0;
-+		goto skip_sysinfo;
- 
- 	ret = sysinfo_detect(dev);
- 	if (ret)
--		return 0;
-+		goto skip_sysinfo;
- 
- 	ret = sysinfo_get_str(dev, SYSID_BOARD_MANUFACTURER, sizeof(str), str);
- 	if (!ret)
-@@ -95,10 +106,32 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	if (!ret)
- 		fdt_setprop_string(blob, 0, "serial-number", str);
- 
--	ret = sysinfo_get_str(dev, SYSID_SM_BASEBOARD_PRODUCT, sizeof(str), str);
-+	ret = sysinfo_get_str(dev, SYSID_SM_SYSTEM_PRODUCT, sizeof(str), str);
- 	if (!ret)
- 		fdt_setprop_string(blob, 0, "part-number", str);
- 
-+	/* Populate baseboard (PCA) properties in a subnode */
-+	int bb_off = fdt_add_subnode(blob, 0, "baseboard");
-+
-+	if (bb_off >= 0) {
-+		fdt_setprop_string(blob, bb_off, "compatible",
-+				   "hpe,gxp-baseboard");
-+
-+		ret = sysinfo_get_str(dev, SYSID_SM_BASEBOARD_SERIAL,
-+				      sizeof(str), str);
-+		if (!ret)
-+			fdt_setprop_string(blob, bb_off, "serial-number", str);
-+
-+		ret = sysinfo_get_str(dev, SYSID_SM_BASEBOARD_PRODUCT,
-+				      sizeof(str), str);
-+		if (!ret)
-+			fdt_setprop_string(blob, bb_off, "part-number", str);
-+	}
-+
-+skip_sysinfo:
-+	if (CONFIG_IS_ENABLED(DISPLAY_BOARDINFO))
-+		ft_board_show_product(blob);
-+
- 	return 0;
- }
- 
-diff --git a/drivers/sysinfo/gxp.c b/drivers/sysinfo/gxp.c
-index a1f33be11df..1d242239eb4 100644
---- a/drivers/sysinfo/gxp.c
-+++ b/drivers/sysinfo/gxp.c
-@@ -15,12 +15,16 @@
- 
- /**
-  * struct gxp_sysinfo_priv - GXP sysinfo private data
-- * @serial_cell: NVMEM cell for serial number
-- * @part_cell: NVMEM cell for part number
-+ * @serial_cell: NVMEM cell for system serial number
-+ * @part_cell: NVMEM cell for system part number
-+ * @pca_serial_cell: NVMEM cell for baseboard (PCA) serial number
-+ * @pca_part_cell: NVMEM cell for baseboard (PCA) part number
-  */
- struct gxp_sysinfo_priv {
- 	struct nvmem_cell serial_cell;
- 	struct nvmem_cell part_cell;
-+	struct nvmem_cell pca_serial_cell;
-+	struct nvmem_cell pca_part_cell;
- };
- 
- static int gxp_sysinfo_detect(struct udevice *dev)
-@@ -47,11 +51,21 @@ static int gxp_sysinfo_get_str(struct udevice *dev, int id, size_t size,
- 			return -ENODEV;
- 		cell = &priv->serial_cell;
- 		break;
--	case SYSID_SM_BASEBOARD_PRODUCT:
-+	case SYSID_SM_SYSTEM_PRODUCT:
- 		if (!priv->part_cell.nvmem)
- 			return -ENODEV;
- 		cell = &priv->part_cell;
- 		break;
-+	case SYSID_SM_BASEBOARD_SERIAL:
-+		if (!priv->pca_serial_cell.nvmem)
-+			return -ENODEV;
-+		cell = &priv->pca_serial_cell;
-+		break;
-+	case SYSID_SM_BASEBOARD_PRODUCT:
-+		if (!priv->pca_part_cell.nvmem)
-+			return -ENODEV;
-+		cell = &priv->pca_part_cell;
-+		break;
- 	default:
- 		return -EINVAL;
- 	}
-@@ -74,6 +88,8 @@ static int gxp_sysinfo_probe(struct udevice *dev)
- 
- 	nvmem_cell_get_by_name(dev, "serial-number", &priv->serial_cell);
- 	nvmem_cell_get_by_name(dev, "part-number", &priv->part_cell);
-+	nvmem_cell_get_by_name(dev, "pca-serial-number", &priv->pca_serial_cell);
-+	nvmem_cell_get_by_name(dev, "pca-part-number", &priv->pca_part_cell);
- 
- 	return 0;
- }
+ drivers/tpm/tpm2_tis_sandbox.c | 27 +++++++++++++++++++++++++++
+ include/tpm-v2.h               | 10 ++++++++++
+ lib/tpm-v1.c                   |  6 ++++++
+ lib/tpm-v2.c                   |  8 ++++++++
+ test/dm/tpm.c                  | 41 +++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 92 insertions(+)
+---
+base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
+change-id: 20260723-tpm-trunc-resp-664a3babf1cf
 
--- 
-2.53.0
+Best regards,
+--  
+shj <shahriyar@byteray.co.uk>
 
