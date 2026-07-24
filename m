@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 882B5C531F9
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 03:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B09C531CC
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 03:07:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9570C40A9D;
-	Fri, 24 Jul 2026 03:07:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4943140ABF;
+	Fri, 24 Jul 2026 03:07:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xPqzNhb5-lwk; Fri, 24 Jul 2026 03:07:17 +0000 (UTC)
+ id dY-xaIWH61Aa; Fri, 24 Jul 2026 03:07:22 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E91740A5B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 52B8A40AC1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784862437;
-	bh=d8hXwXr+s7Ayv57nH3tyhetQQKf1wSNoqwzvUB4THDY=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=DAMG9DNXc/utJKGsKT2mIXicNR7VUZTgS/GbKddZRzGvQpd40UO1zSqo5dMIZD6me
-	 br40yOkuzK8/reAfjH6GRi5wuSiGla/TRMVQWY+mZ09d8CzdqJir3fVs08i8LX9nIG
-	 JmJjTm1koT+upH102qVNPgG42bj9nBekL7IP0slUia7PseKQRTzKTvj6Vqy92utBgt
-	 BPr1eeY94XWXffT4KMXUTCnBjj3J6FBmUco1dMUg40r8E+Q22gGWB4PU4t1vOFLf25
-	 yrVT60yQEiJ/214f0ayP70YD8u0Meuhw368aZXffrYUBP3zy05Sw4c8QE0O/sXAKtC
-	 x8QhZzJyB1gyQ==
+	d=lists.u-boot-project.org ; s=default; t=1784862442;
+	bh=obBnECder6V0fR+/A7ffYzBgemGy51KzhYAqP63q41U=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=r7nCpqfXWsQWg1baHIc8/WtWH4WuwppjYdn7GP3fQkLEnDFBbs6VgVnHzDWolF+MD
+	 ock7DKtHWc//gnRA6llHAAhFNDdBb/jkgKiM+B8KgQArYF0XCqce4iZH6FZPbBiL6T
+	 j/QFlKPYf5TQltI5sukAZzHc3FdDjhtNI8FIA/q607QAByhj6+n3FZnNM9+A+N63Cc
+	 qUu/2L3xlNnmeXry501AvI8adOPgHkmlS05sgl9SJK52/JBvMJxOjVbJLD9Miie5Ui
+	 bg2H9kHNoof7jiAqO3SDeaN/Tf+pGwJooE7ymfvzvD3dO0EleWgpITqBSy6PgwecAb
+	 u4hYhComIRa+A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1E91740A5B;
-	Fri, 24 Jul 2026 03:07:17 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 64A572E5
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 52B8A40AC1;
+	Fri, 24 Jul 2026 03:07:22 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 59F54707
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4A68840A5B
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3EF5440AC1
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vuNVycX1319O for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 03:07:14 +0000 (UTC)
+ id quKZT4rLOnO4 for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 03:07:20 +0000 (UTC)
 Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c200::5;
+ helo=duzpr83cu001.outbound.protection.outlook.com;
  envelope-from=alice.guo@oss.nxp.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1198340A48
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1198340A48
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1198340A48
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 260E040A83
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 260E040A83
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 260E040A83
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:19 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O+Z6TZYHV0j5mizak3msQ7FSjfQfFaYb/Pa3jXTF4Ua0azG+dMixN/wwxoWvyJMiildzPzwFsQ7oFfWaIslTPDv8iqlxF48zF72M318uPuxIyqOfrCXB42IXHr39dNI5UIC08w68dlVq27vAPWNPVxb5nuELKwxUwLV8ko+OqHmvCEeBx8ujxqURPGuf5rYfy1YhxMB+fJpA+4rfsWDOCwXOJAQ572Z/XX8tWXjHfFRWXM8NYZz7GPU+X2kvt0/xAvcbsgz5WWolyUZDSNu+I339r/oSGIoziVEpVhKxpc6LakDV+u2xRdLVdVPVxDjbmPyA3yf78d8VZlLRorEz+w==
+ b=fehg4L0Ih6RBjNKlUOU1U0VTpGJLohLa5SRir4UBZvwRY6FygJ0XYuIHV73iJjQ2DNlWIqp1rrQpx3QtDNcW61AYzDc+qcXD6zgmdoqMRt+cWPAlnFiVvqW98CEDtrNibPQk8QTNgqWjHtOvSYmv3+/zzp5pkMmehHO3Otnrci8UX7wBsmiOKTvvLEhtQXDC7QqbjxcMuzomJ2/vyo1EU/y3qZ0+sbUauxoePD848Eg6mMTj0CGJSHEgAlRZoNJEYLNvW/GpbAlTsP/tOdKpSi7KtfYSXNQtOxwTsmaYtKT+QYtgf7K70BKJSVn8wd+dgjW7zQxzR4xccAAmP9FfJQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d8hXwXr+s7Ayv57nH3tyhetQQKf1wSNoqwzvUB4THDY=;
- b=NZoSmLnpfsaqXDkBWHB2SHg9MspDl+XxXUazewx9AIfaibSMDTq40uhZ5SwK0btSR+S6jvpTYKkeyTxGr1K72bbXyVKFOcn5W36MYg20FTqpC7/hd0DAFxOxe4WlISuQe66bPEHAz3o66+1AeUHnesAYJjw974bsN9CAdbEp27DyIvE9ANevy/hE+iNe78lCs1FUQ+mcvk/nPfsa9w0f6aQFxbvzHk3QTzBbNoxNe28EEbMzOcMA19R5T/FknZeZaPFKue2qhqlBKirTWKSJHokGH0NXif/DMqMz1fhs9EAfMKyDPhnk075adM3WFaUi1UXm31FA/glA7zlJhloxNQ==
+ bh=obBnECder6V0fR+/A7ffYzBgemGy51KzhYAqP63q41U=;
+ b=yeQoZ+zr5jfet1pTtfRVA/jfYmwp2UEBoDJ8xgtxAlqjpvYBQsJru8nJCVFi4Ev2zXx9z7cbT4GOKM8sfk1SoUW+6zqX2s0BbG++gohrRXdiCh+AVKSnKXndoL7c7OJHaNTEKMcN/mda0b8EvF4wPewoKKHL4J4yPGcNUA2TlMnQj6G+UuSC7ARp3hw/j6ZMxIAMNS9nNUp/iPl8gjt3YqxoLOar8RgskEC/3uICJ1OWopjat9Ar7BCuBMFIMcsX2PT/w4vAYTcTJOPxa19oWl+TEmy8s6YXt+BoWa0uWufys2BJNfQnmgcZJyDpOHpVVW+wWahaY4HLEdRDXr4YOA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
@@ -65,107 +66,106 @@ Received: from AM9PR04MB8114.eurprd04.prod.outlook.com (2603:10a6:20b:3b7::22)
  by GV4PR04MB11749.eurprd04.prod.outlook.com (2603:10a6:150:2df::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Fri, 24 Jul
- 2026 03:07:08 +0000
+ 2026 03:07:16 +0000
 Received: from AM9PR04MB8114.eurprd04.prod.outlook.com
  ([fe80::cab0:e4b0:6be:b1d1]) by AM9PR04MB8114.eurprd04.prod.outlook.com
  ([fe80::cab0:e4b0:6be:b1d1%4]) with mapi id 15.21.0245.010; Fri, 24 Jul 2026
- 03:07:08 +0000
+ 03:07:16 +0000
 From: alice.guo@oss.nxp.com
-Subject: [PATCH v3 0/3] net: fsl_enetc: Add SGMII 1G for i.MX95
-Date: Fri, 24 Jul 2026 11:10:42 +0800
-Message-Id: <20260724-imx95-v1-0-7131a9e17fe1@nxp.com>
+Date: Fri, 24 Jul 2026 11:10:43 +0800
+Subject: [PATCH v3 1/3] net: fsl_enetc_xpcs_phy: Extract common PMA MMD
+ init sequence into helper function
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALLXYmoC/yWMyw5AMBQFf0XOWhPqFX5FLKoursQjLdJE/LtiO
- ZPJXLBkmCyq4IKhky2vi4c4DKBHtQwkuPMMGck8KmQqeHZlJrSKZap00qo8g283Qz2771PjTND
- 8zh7tRHp/B7jvB7bK4QltAAAA
-X-Change-ID: 20260724-imx95-ca124ac3ba65
+Message-Id: <20260724-imx95-v1-1-7131a9e17fe1@nxp.com>
+References: <20260724-imx95-v1-0-7131a9e17fe1@nxp.com>
+In-Reply-To: <20260724-imx95-v1-0-7131a9e17fe1@nxp.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Jerome Forissier <jerome.forissier@arm.com>, 
  Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, 
  Clark Wang <xiaoning.wang@nxp.com>, Marek Vasut <marex@nabladev.com>, 
  Alice Guo <alice.guo@nxp.com>
 X-Mailer: b4 0.15.2
-X-ClientProxiedBy: MA5P287CA0156.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1d7::12) To AM9PR04MB8114.eurprd04.prod.outlook.com
+X-ClientProxiedBy: MA0PR01CA0122.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:11d::16) To AM9PR04MB8114.eurprd04.prod.outlook.com
  (2603:10a6:20b:3b7::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM9PR04MB8114:EE_|GV4PR04MB11749:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4ab40a58-4402-4e1e-6043-08dee930a57d
+X-MS-Office365-Filtering-Correlation-Id: f64f820b-1946-4b1d-7f44-08dee930a9ac
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|19092799006|56012099006|11063799006|10067099003|18002099003;
-X-Microsoft-Antispam-Message-Info: bufRGDvhbxeckeHgHdKuFANhxJVWHi0qLCx8f4ZUxl9D77im/sGrYmhQN1GWxPJcXv3oGU+rMDbldPvaKjeE6cg1TDV2VjSCDvWszbcIVfBEjrEXKioXPcdcX+gJzrV1fYcf5hWaw7cyrNDqQhcdQ9YXOv4Jyr+4tcflKoHMrmaufLukqU4V1YTz5I5i/iwmwY4Yaj7ciXsvz4vCu0Vknnw59smcFMhPrEplShuTmoS6nZSVYX2ltYD1AuXHWOMTB9lBpB4kJ6geNaRbjcpMl5kjXHXX62CxWgfV8+YAGifpgMZD2YTR2SqOz+2iy5NvQDcTEWpESQ18URmXcr0kJ+4HBASnOeJ6L8JhV5wxRC0p4cEtCCiglg9FRELPFxxeDjv95NUBWruWiH2DRLQKW8aEWBhYHBNPW+E70KDVcoaCdGja/EiovbY8u3ODYeKj0BBrGMf2BzJp0vdtbUWi7vuEvXYLiqXp+qb1BUcOpeFMg2AVR4Etjk7vzfXEjUNgspBPkiW3sow0Wwk4SZZfrnd1vUe8T5Zp8FhjE3VwF2xELdAiW5NNsGSDm9tCrw1bJ3hbn14cy4IBETjspTd7tMTch0aS9pbXo2G5Dg4gVnQsxb/t7sVggOcZYSXxsBCJXprvlgGzLCybIuh4zKUBQu1yln6ZMMbG/FaXeeFNpKI=
+ ARA:13230040|23010399003|366016|1800799024|376014|19092799006|6133799003|56012099006|11063799006|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: ZNUUSMCErXJ/b//z3xk9VOJl6U5jh9G+CI4q6AjHN1Fk9C3iCYUyJEdbIHUh5W75Flwa2ZzTDKvil2SvcBpdwWKR7ijoKLIMv2ObtkXFr/FEcMUJCvfOkm//Y7plY9MQCVolthD5WB2X+997qD4uKht4fY7qXt7wyOu2kwzYvDJlCKBudgew6xSfrAc9QahALcZCgjw6H8EcbXHXt9arAw7Gm8IXgb9nWrJI6Wpv+zI9bCJoOHQ5ua3OHNU93gMTH32muOsyIlWxmG9doQwm0fD17UhJTl4IKcj35Cp1aNUpCqHnH+VHKWYtU/lHqrD89e7zqSZkLR89mTTQF3PIoxa/XhjSQV8CCBOGRXxzR8rRsNLibkmv/WLxVAUTRXAPmWoTi0cudr/fOZw9TdaD2rA2TAKHT+VY8PHQziFYG49YyjY/nA6yZR4PPMXyV6nKNoW6bsLuga04gRdqVzRVCjSl+GGRPNvEQOhYBCvUm7kfu9VYlMx0sdbFuFDggrg/1AKb/+AkhyAMoKDAQtcMeraJKlTT5rtKfHDkGvhH8YeZ9ddFYdiQFVFA80oodIZgVxUAG8e3Bt6108bk8XL+efESae7UejuXXtAEzcPFVlwsmK/P7B2UDOnoQVxpnPiwb6HkWi9cC3XgcZchDXusVOxalSynce5bf+tUbh9ekJc=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB8114.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(19092799006)(56012099006)(11063799006)(10067099003)(18002099003);
+ SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(19092799006)(6133799003)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Mk5VWXYrM3dFakVheU13RGNaSnpybElqUXhZVmdjRjdPdUhJUXpKVG0vUm13?=
- =?utf-8?B?bG5NeHc2eW5PWnNnU1BmNzNwZm5aQ0Zsc1oxZW1pS29mdlRTbmVGMjYzSzNL?=
- =?utf-8?B?NGx2R2tSYzdGWGh4ZG5hSmRxVERhZzdYM1BHSHlHN2ErSzhFb1p2aG5uMkNq?=
- =?utf-8?B?Q2M2WWhZQ3gzMUtLbGJmdFhCaWVoTDA1M2E0OTljMzhGeWwwcGM5bkR0dWZJ?=
- =?utf-8?B?K1RzOHhJd1RaczZXSjd2ZFphaVdqQ0d2a0lETjk3c3Y1Y3N6R0dmdzZaWVhu?=
- =?utf-8?B?Wjk4aFNkZVltbW9EVmVPMVNMMDExYUxZbkJZWENCWEloMWNlTis0QU9VWDR0?=
- =?utf-8?B?UGQyc1Q5QmJROUszcjNvSDhFaU5hRDRoUHJxL1lqZGdhVGVsRU9WNWZlNjIy?=
- =?utf-8?B?MEJDYzhTSE4vWE45SXI5UDBqUWVjMzlyS1ZWNnE2dGdSMElsZEdsVEo4MFVj?=
- =?utf-8?B?b1VsUi9iUW1uMENoMHhLcktCSXl6YjZSUDNpYVVjenZkZUFlUHUzZGYwQzFN?=
- =?utf-8?B?Tkh1R2VRaVhQa1pGeFdpUGNybnFXdnowbDZlOWoxWnNWenZZM2ZmNW5tK0N1?=
- =?utf-8?B?ZGhUdGlSdW5YZy92akdld2FFenU0UEtSWktWUjl4RGZqbkllc2YrbEhRd1Vk?=
- =?utf-8?B?Nm56QnNPVEthSXZzMmFNNC82YnBCWE5CTlNXYlFyRUZzK2FzbHQ2eFZ3QWJs?=
- =?utf-8?B?dVJXSU5lUmxHTTNoaW0yVFd3Si9SYkZXQS9wNmZGalBIdFhvLzY3YVJGS1M3?=
- =?utf-8?B?eHBUR3h5WVoveGJucmZ2cDk0UGZxK2NPVWVRK0N4UE1UQTlCcWU3TWg5S0h1?=
- =?utf-8?B?M3ZtaENjNHlQanJaSGYwLzB1akExcE82UWFJUmF1WkN6ME1mNnVHZ3pmRk4v?=
- =?utf-8?B?SUFpR3luQmZWUUc2WGNtbE5jMVFLYW41ZVRzc1FXNTM2ME5hc2hXQ1ppN29v?=
- =?utf-8?B?ZnFSVE5iaCtRL1B3alRRWWR0dTRUekRpWTVUSVFON0JIZFRhTUZxT2dxS21S?=
- =?utf-8?B?MXN1MUVMaWs0aVN3VTl5d1IrbGIreDNUOG5CQ0pwQWtnQmZXTytWR0dXd3NG?=
- =?utf-8?B?amRUbm9HNHo5U0VBV2kza2NGWkVnVTlYL1lCWndYWUpPRmNHak5jMzg4cHo0?=
- =?utf-8?B?MStOMGZKaGhWYlVKWXNEY3NLMmhpeTBKb0hlK3gxWk9CQzZQZ1hDVGtaRHI0?=
- =?utf-8?B?SmI5dUg4WkFyN1lZVnZEU1V3SC9Xd0V6dEJDMzhqRW4xeWdjUEs4MWl1Wnkz?=
- =?utf-8?B?OHU4a3ZMNjFjVWp4dXdxbjY3WGMxVlBvZ3d4SDNPTDRJMEJpY0xGa1J4Sm1C?=
- =?utf-8?B?bnRzdVd4b2JlYmNpeUNFQi9NZVMwNmFrcGlnMnJXMFU4REVsL3F4NUpreWps?=
- =?utf-8?B?ZWY5czBkUWVnUFVWM3JJeU5xdXEvVHl2N20vcExMSW1vY2dkdDJwV2V4MTcz?=
- =?utf-8?B?VEhTQ0I2L1I5Z0puc0lpT09sMVBsQTFoT0ZOZjA3MUVRWjg2V3cvMGJ1MHNZ?=
- =?utf-8?B?aGxFRE5mZWJvRXJOTDJBUGRDd01nUnIyaVAvd0hyVjBCRjNzRVg1MWRCdmcv?=
- =?utf-8?B?a21yeEtjMU9WSDE1ckV6SW42d1VkYkJnZHdNUHdodHQ1Z3RYNFZra3p5Tzl2?=
- =?utf-8?B?eCtpY3BISkEwRXhKd05rWVc4VnBrY1dWZ05SUEhqd2ovbGFEM0xBbnRaZ3d4?=
- =?utf-8?B?MFFvQW4vVEhYaVJaNUdKZml5UW5zVk9GU0xVYTRHTW4zbUZvT2htVklJUllF?=
- =?utf-8?B?RHJrMy8raHRrQ2lwdW5VMlZRN2RibFNQbzBsUFB1aWJJZXBnQUFjM01UZnhN?=
- =?utf-8?B?SGxOWEpnTWZBSlBFSzBDRDlqME1KMGxyOVFicDNJdTFHOFYxdzNHTTM0MDV4?=
- =?utf-8?B?Tkw3WHpHLzBxbXpSdTF2YStvK1M3WERwMVFmUUVrS1huRkZXY0VEMkVkbzdi?=
- =?utf-8?B?cksyeXN3ZjZQb2ZHeFRONnZXUEF2UmovSXM2b21VdzlUZ1dqcFMxYXNUdDM3?=
- =?utf-8?B?dGJIWFBERU5WcnVKQkYraEI0QVdrNlpIK3EwazU2ZWxqSC9tTC9Yd0Y3K1hU?=
- =?utf-8?B?THhycDJoMXlCQWlPbm5CUk1nYXV1SmE0TGlnVTZUS09PUVp1dWxNYWpzZU51?=
- =?utf-8?B?NWJBaUJaK2pTamd3KzNyZ2NFSHkvbkJaa0ZzZWxOUitGTWdEUlVCZW9aeVFS?=
- =?utf-8?B?Y2tPZCs5ZzA0Uk9EUXJic1NrbU96bzlIbm96T3dpWGZEZWVvNGY4QWgzRjNw?=
- =?utf-8?B?RjYveWJaZHdXa0VPak9iV3NsZWJ3ZlA5a3BPU3NxNlFkVThZYVhvc2dlbGt3?=
- =?utf-8?B?Q1YxeVJRb1c5UHB6Z3NZbklnc2ZPQ1ZjU0FsM2c4eWRqRndwMkZtakc5a2ZW?=
- =?utf-8?Q?dgtSg/AcPsbdPuRTmewaIOvMZ9rnJC9ZVoDCV?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ajN3Z3ZJeDlVc0lodWRtMEk0N1NoUmVOQkdMbGFXRXNCeGpSQzBWdHNSTnIv?=
+ =?utf-8?B?ejRzYmR3VDZIRmtJUHo3TTl3ZkdKM1VNaDRhRGc4ZVpobSs2UCtDUHlhczR2?=
+ =?utf-8?B?Z2tjaUZJak5TdGZpUXdSbFhoc2RsekdReDJsbm51bm0ySVEvemNKQTFkWWhM?=
+ =?utf-8?B?QVVUU0JYaSt6VHJucWxqNFUyanR2cEhRMVN2VWlZSTdkallpcEk1VW5kNTE0?=
+ =?utf-8?B?RzU0OC9SdTkxVE9VRWxIeUtyVnZDZVRtOWpqelpJazkrSWtFZTJmeHJkYStS?=
+ =?utf-8?B?TVRjNnl1TFFVbUcrWHRPbHgyYzI1TkdaMlMrNlJvL1o2TlBKbTVwSXY5TDB5?=
+ =?utf-8?B?SER4dlpIbmpIM3RXZ2g0L3M0TkN5SC8zN09IWlhDam5iVGYzZjJDSDA3YTFj?=
+ =?utf-8?B?dnFlcmFySXJOU3BoR3N5R2s0Q1g1alJQMzlJZnUybjFXYnFsRDZZVFRRT1ZP?=
+ =?utf-8?B?RFZzd0ppajhxK01GbW9HOG44L1FYVTd5WkVMQys5dW9rcXRvdDc2WVR4VGxP?=
+ =?utf-8?B?ZnZCTVVwc2szdHJHTUxodnFHYjR1bXpKV3Zvc2NCVjNRRVVXRjAzOTJrR1RK?=
+ =?utf-8?B?ZjZtb0ZnYXlUbWpEamdjZmFGeHpLSnIyenlTYVBpaERjcmZXVWl1MUNsWFlH?=
+ =?utf-8?B?YjNXeFhMQ3BBYm1jcUdkTjFtWkNEelV1OXFvejNJRkJ2K1FSWXdrYy8yR01s?=
+ =?utf-8?B?STRPZmdaMldZQzRFVHFSNDRuK1FqMVNXVU0vcFNkbnlRVE5GbVp5ZU93ZHRv?=
+ =?utf-8?B?MHl3YW40MWFhendYU1pHUDVpaWxiQmRBSnUybFdMc0xsa2U1QVJSMHJYNVpo?=
+ =?utf-8?B?Yjc3SnJHdWxOTHRBcFZqNjlXdXZzdVJsUlg5S243emtkdW1wZWRSSVlpTWs1?=
+ =?utf-8?B?SloxSjd5WXNSNU9hdE9wdlJhalVadFNUbUE2MTZVWW1oek9CZ3VKTDlmaEV2?=
+ =?utf-8?B?R09zUkVZM1hmYlZuY1dDeUxUeHBOOGpHRU9CSWFCVHdiRldKQVY4R0diZUp4?=
+ =?utf-8?B?Ylc3SUZoNkJSdzJERFVVQnNRS2Rvd3B2SElKWlpXZzBmdDk5VzNHV3NrWWor?=
+ =?utf-8?B?aStSeFBHR1RlZUY1RXZZalFzUG54TFJXWi8rSWtQdGsyZytRZDExd29leS9u?=
+ =?utf-8?B?elNmTmNjcGJ6ZjhxY1VHSDQwRlc0M1MxU2lIWFliQXplUExlNDBDd2Z3dzQr?=
+ =?utf-8?B?RFBFaStzcHdYYlNPSlY0UUY5anRSM0xCQlJTWFpVcVFuVzN0cXRKemE1MXZV?=
+ =?utf-8?B?ejMzLzhVcTVWY3dWdG9vVS9NQTNERThFSmxUc2Y4djlnTHlXNnBreXRUSnhx?=
+ =?utf-8?B?dVFBeUZ6dWdMNUZQdDZaektWelZubDhFcjU5bnljRWNmOFZEckMyWVRweFda?=
+ =?utf-8?B?eDQvcXhKVm45clRZN2UzbkYxTFZFZW10Z0RROVEzaUVJenRiZkxaK3JuYnhR?=
+ =?utf-8?B?WFU2WXN4TnQ2a3lLSi9SRDhNQ0pyUjRhMjAxWEdLQjgyWTVLenREOGhUZUtu?=
+ =?utf-8?B?eGR2cUhKd1ZrQXBxeFkxcGd4NnA1ZHNpT3c3emFJbjVhN0h0dmFCNUYzcDB4?=
+ =?utf-8?B?QXlnTVRmZVlRdE9uWWJld1ZkM1hFZHRwYm5tNHZ0QXVwR0ZFM0JSYnpOVEZR?=
+ =?utf-8?B?VVlHUXhSM2NIZndtWklMZVU0WTFpTEh5NEJPbDRlTHoxNWVzbmZJSDRkL05V?=
+ =?utf-8?B?WjJhazV2TGhQYm5uMkVONEg2M3NtTnQrQkw2SkFQTzE5VUNLN0RLeDVUWXVs?=
+ =?utf-8?B?UGxjdjlvZUQ2dXNuU2VDTVFram1TN3FIVUpYQXJ2UXYzeDFnZXp0ZTFQWi9P?=
+ =?utf-8?B?ZGsrbHJLRXR3Q2FvUlZMV2pYNmRkdW5SNVV1V2t0cnVJZ3lXUjRSb3BCazJH?=
+ =?utf-8?B?MCtHakFZMGFnTFFrakV0dFZtRzFTajVnb1hPZDZLMHNRUUt1UDdJN2xUTk5q?=
+ =?utf-8?B?YXdCM0JWSkRsT016SU1TQXIyOGFGOEx2M2pHZHZPS3lubjJnc3VWanpZdDYx?=
+ =?utf-8?B?ZGhvSUhMOGdycmJiaDhSNFZJcklURHJsMm40Y0FuTGlsT08yL3BERmsvQndE?=
+ =?utf-8?B?bWFnTnZPRGtXemw1aTJuenVaTUxyQ0ViNUhoZFlCKzhHb2ZNaDFTRGNhTHAz?=
+ =?utf-8?B?ME5VSjRaT3BXbUxHT2EyRk5vQzd2a1dxMjZhait5eUNiTjExVk1EMTNwaC8v?=
+ =?utf-8?B?d0FmL28yTjVnVjJJMHppRTIvZElhVVB5eHF3WnhWU2RCRUxuSjgrRFZQQVdh?=
+ =?utf-8?B?S1pWRFJ5MGlwMmlUTHYrdUZrR2krRmhYY3ZHSlhFcjVMcnc5OWhwdWZsWStV?=
+ =?utf-8?B?amhob3ArYUF4cXFKb2U4S21wMHEwRzFFOVdKNU5TOTRkN2hvelprNlIvT1JW?=
+ =?utf-8?Q?+J0k4fq54nAxOrDIfRBVrJkc8n+NAuwGaggTn?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ab40a58-4402-4e1e-6043-08dee930a57d
+X-MS-Exchange-CrossTenant-Network-Message-Id: f64f820b-1946-4b1d-7f44-08dee930a9ac
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8114.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 03:07:08.2064 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 03:07:16.1535 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RIEW3rdXT8/VqaaXhTRoE7qghIjZS20pXY8IPyD+CVCwQCVguuFrOUJPWLwzy+X9V4qZBHw+bu+hiJb9JZDiNb23+TDIPppWFHBDlf6qmbt36+lOGAkgXjZHqXzw3j1T
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8IX1Sd9P9mBlHLD+BhAfGWzKFUXtHsywvd3W9lxsjpk6MzppuPmFYK3jeGM6rncTgsVPc4S+cAWvsMfGBdJVZdFU14ZbqBUa9/EEO7fQyYJc9PxCjMldfHkxJSs8ZB7R
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV4PR04MB11749
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d8hXwXr+s7Ayv57nH3tyhetQQKf1wSNoqwzvUB4THDY=;
- b=d3g/E6Uly4OFBksnOkmUoAsDlqdLwggziMvi9KIZDcgyC3o3KEvPTGz/A2nUUCUinPIxQxaA8d//09iiFN7ePrhAxaAzPjCyDElaLtAwR1SEA0HtFc4RK1X/6KQu6dcIa17wclxESLLy7/uQDiJhUZ2wQJLbogCBlC6W8eGAvH3dg7Z4KnMRtVk97AKawJ/NucdfdkwXjFadUEDT51OaCCcu21/783nAmzBYUu2OEhDYRdRtm5k3X93bXVCeaeTU9xQwv1TB8YIXpNxIdTTHckdL3oTKETTEEXZg+jk8dLcYVkunFZxq36zq/W83gKGk9oybinv3nVSkBceKHHbvVA==
+ bh=obBnECder6V0fR+/A7ffYzBgemGy51KzhYAqP63q41U=;
+ b=jNTeCagqgtheEwHOu9mIOYS2sRI6US+3LD0bnQaqMDbdx+QQIYKtE6srMwTMXJ8q8zvJZV1D8mMAwlxBiijHv7EpXTQiFHz7wCT6vZJQ/WpvUT3ixmMOyBl5WtcWWYaflC5uXVdlTAiQ86akLtB9bVDlSZ3bGr563ZAojLXmxjsrfi8tnnj3hKVCwCOaUWGfjPn2i0xxObdLpEvMw9l0bEXqrYTqKY3E1sPK9EheMj1NiEquftVZiYtXVi64HIgXP9z4jbqSAGoE15lL14uf8bJ6/USaIypwfqk9xsNTyRVK0db/k4RQ8V50uhsmETCGtWYPHeQVSLeWUpSG9JIIdA==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.nxp.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=d3g/E6Ul
+ dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com
+ header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-NXP1-onmicrosoft-com header.b=jNTeCagq
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -182,35 +182,222 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Changes in v2:
-- Fix CI build failure
+From: Alice Guo <alice.guo@nxp.com>
 
-Changes in v3:
-- Replaced #ifdef CONFIG_ARCH_IMX9 guard with a runtime wrapper
-  function, improving code cleanliness
-- Added explicit 1G-only PHY capability restriction for SGMII on i.MX95
-  (no 10/100 support)
-- Added a new public wrapper xpcs_phy_sgmii_1g_config()
-  fsl_enetc_xpcs_phy.c for better abstraction
+Extract steps 1.6-1.13 of PMA MMD initialization from
+xpcs_phy_usxgmii_pma_config() into xpcs_phy_common_init_seq_1() to
+improve code reusability.
 
-CI: https://github.com/u-boot/u-boot/pull/1019/checks
+No functional changes.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
-Alice Guo (3):
-      net: fsl_enetc_xpcs_phy: Extract common PMA MMD init sequence into helper function
-      net: fsl_enetc_xpcs_phy: Add SGMII 1G support for i.MX95 Ethernet PHY Wrapper
-      net: fsl_enetc: Add 1G SGMII mode support for i.MX95
+ drivers/net/fsl_enetc_xpcs_phy.c | 179 +++++++++++++++++++++------------------
+ 1 file changed, 97 insertions(+), 82 deletions(-)
 
- drivers/net/fsl_enetc.c          |  20 ++
- drivers/net/fsl_enetc.h          |   1 +
- drivers/net/fsl_enetc_xpcs_phy.c | 700 ++++++++++++++++++++++++++++++++++-----
- 3 files changed, 639 insertions(+), 82 deletions(-)
----
-base-commit: d7ef23c07b8e34f65b3e15e3b4e7f58d074923c8
-change-id: 20260724-imx95-ca124ac3ba65
+diff --git a/drivers/net/fsl_enetc_xpcs_phy.c b/drivers/net/fsl_enetc_xpcs_phy.c
+index 4039690223d..006a2bd2238 100644
+--- a/drivers/net/fsl_enetc_xpcs_phy.c
++++ b/drivers/net/fsl_enetc_xpcs_phy.c
+@@ -261,6 +261,99 @@ int xpcs_phy_write_pma(struct udevice *dev, int reg, u16 val)
+ 	return xpcs_write(dev, MDIO_MMD_PMAPMD, XPCS_PHY_REG(reg), val);
+ }
+ 
++static int xpcs_phy_common_init_seq_1(struct udevice *dev)
++{
++	ulong begin;
++	u16 val;
++
++	/* 1.6 Turn off C37 auto-negotiation */
++	val = xpcs_read(dev, MDIO_MMD_VEND2, XPCS_PHY_REG(MII_CTRL));
++	val &= ~MII_CTRL_AN_ENABLE;
++	xpcs_write(dev, MDIO_MMD_VEND2, XPCS_PHY_REG(MII_CTRL), val);
++
++	/* 1.7 Assert tx_reset and rx_reset */
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0);
++	val |= PMA_TX_GENCTRL0_TX_RST_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1);
++	val |= PMA_RX_GENCTRL1_RX_RST_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1, val);
++
++	/* 1.8 Wait for more than 1us */
++	udelay(5);
++
++	/* 1.9 Deassert tx_reset and rx_reset */
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0);
++	val &= ~PMA_TX_GENCTRL0_TX_RST_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1);
++	val &= ~PMA_RX_GENCTRL1_RX_RST_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1, val);
++
++	/* 1.10 Power down MPLL */
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_POWER_STATE_CTRL);
++	val = u16_replace_bits(val, 3, PMA_POWER_STATE_CTRL_TX0_PSTATE_MASK);
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_POWER_STATE_CTRL, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_MPLL_CMN_CTRL);
++	val &= ~PMA_MPLL_CMN_CTRL_MPLL_EN_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_MPLL_CMN_CTRL, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0);
++	val &= ~PMA_TX_GENCTRL0_TX_DT_EN_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0, val);
++
++	/* 1.11 Change RX0 power state to P2 */
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL0);
++	val &= ~PMA_RX_GENCTRL0_RX_DT_EN_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL0, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL);
++	val = u16_replace_bits(val, 1, PMA_RX_POWER_STATE_CTRL_RX0_PSTATE_MASK);
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL);
++	val = u16_replace_bits(val, 3, PMA_RX_POWER_STATE_CTRL_RX0_PSTATE_MASK);
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL, val);
++
++	/* 1.12 Assert request of transmit and receive */
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_TX_GENCTRL2);
++	val |= PMA_TX_GENCTRL2_TX_REQ_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_TX_GENCTRL2, val);
++
++	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_RX_GENCTRL2);
++	val |= PMA_RX_GENCTRL2_RX_REQ_0;
++	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_RX_GENCTRL2, val);
++
++	/* 1.13 Poll for acknlowledge */
++	begin = get_timer(0);
++	do {
++		val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_TX_GENCTRL2);
++		if (get_timer(begin) > 500) {
++			dev_err(dev, "Polling timeout, line: %d\n", __LINE__);
++			goto timeout;
++		}
++		mdelay(10);
++	} while (val & PMA_TX_GENCTRL2_TX_REQ_0);
++
++	begin = get_timer(0);
++	do {
++		val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_RX_GENCTRL2);
++		if (get_timer(begin) > 500) {
++			dev_err(dev, "Polling timeout, line: %d\n", __LINE__);
++			goto timeout;
++		}
++		mdelay(10);
++	} while (val & PMA_RX_GENCTRL2_RX_REQ_0);
++
++	return 0;
++
++timeout:
++	return -ETIMEDOUT;
++}
++
+ int xpcs_phy_usxgmii_init_seq_2(struct udevice *dev)
+ {
+ 	ulong begin;
+@@ -436,93 +529,15 @@ timeout:
+ 
+ int xpcs_phy_usxgmii_pma_config(struct udevice *dev)
+ {
++	int ret;
+ 	ulong begin;
+ 	u16 val;
+ 
+ 	xpcs_phy_reg_lock(dev);
+ 
+-	/* 1.6 Turn off C37 auto-negotiation */
+-	val = xpcs_read(dev, MDIO_MMD_VEND2, XPCS_PHY_REG(MII_CTRL));
+-	val &= ~MII_CTRL_AN_ENABLE;
+-	xpcs_write(dev, MDIO_MMD_VEND2, XPCS_PHY_REG(MII_CTRL), val);
+-
+-	/* 1.7 Assert tx_reset and rx_reset*/
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0);
+-	val |= PMA_TX_GENCTRL0_TX_RST_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0, val);
+-
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1);
+-	val |= PMA_RX_GENCTRL1_RX_RST_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1, val);
+-
+-	/* 1.8 Wait for more than 1us */
+-	udelay(5);
+-
+-	/* 1.9 Deassert tx_reset and rx_reset*/
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0);
+-	val &= ~PMA_TX_GENCTRL0_TX_RST_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0, val);
+-
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1);
+-	val &= ~PMA_RX_GENCTRL1_RX_RST_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL1, val);
+-
+-	/* 1.10 Power down MPLLA */
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_POWER_STATE_CTRL);
+-	val = u16_replace_bits(val, 3, PMA_POWER_STATE_CTRL_TX0_PSTATE_MASK);
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_POWER_STATE_CTRL, val);
+-
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_MPLL_CMN_CTRL);
+-	val &= ~PMA_MPLL_CMN_CTRL_MPLL_EN_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_MPLL_CMN_CTRL, val);
+-
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0);
+-	val &= ~PMA_TX_GENCTRL0_TX_DT_EN_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_TX_GENCTRL0, val);
+-
+-	/* 1.11 Change RX0 power state to P2 */
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL0);
+-	val &= ~PMA_RX_GENCTRL0_RX_DT_EN_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_GENCTRL0, val);
+-
+-	/* TODO: check if it is needed */
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL);
+-	val = u16_replace_bits(val, 1, PMA_RX_POWER_STATE_CTRL_RX0_PSTATE_MASK);
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL, val);
+-
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL);
+-	val = u16_replace_bits(val, 3, PMA_RX_POWER_STATE_CTRL_RX0_PSTATE_MASK);
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_25G_RX_POWER_STATE_CTRL, val);
+-
+-	/* 1.12 Assert request of transmit and receive */
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_TX_GENCTRL2);
+-	val |= PMA_TX_GENCTRL2_TX_REQ_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_TX_GENCTRL2, val);
+-
+-	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_RX_GENCTRL2);
+-	val |= PMA_RX_GENCTRL2_RX_REQ_0;
+-	xpcs_phy_write_pma(dev, PMA_MP_12G_16G_RX_GENCTRL2, val);
+-
+-	/* 1.13 Poll for acknlowledge */
+-	begin = get_timer(0);
+-	do {
+-		val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_TX_GENCTRL2);
+-		if (get_timer(begin) > 500) {
+-			dev_err(dev, "Polling timeout, line: %d\n", __LINE__);
+-			goto timeout;
+-		}
+-		mdelay(10);
+-	} while (val & PMA_TX_GENCTRL2_TX_REQ_0);
+-
+-	begin = get_timer(0);
+-	do {
+-		val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_RX_GENCTRL2);
+-		if (get_timer(begin) > 500) {
+-			dev_err(dev, "Polling timeout, line: %d\n", __LINE__);
+-			goto timeout;
+-		}
+-		mdelay(10);
+-	} while (val & PMA_RX_GENCTRL2_RX_REQ_0);
++	ret = xpcs_phy_common_init_seq_1(dev);
++	if (ret)
++		goto timeout;
+ 
+ 	/* 2 Config MPLL for 10G XGMII */
+ 	val = xpcs_phy_read_pma(dev, PMA_MP_12G_16G_25G_REF_CLK_CTRL);
 
-Best regards,
---  
-Alice Guo <alice.guo@nxp.com>
+-- 
+2.34.1
 
