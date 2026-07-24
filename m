@@ -4,152 +4,191 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A687C531C9
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 13:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9F6C531F9
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 14:02:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 287C5406F1;
-	Fri, 24 Jul 2026 13:45:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2C01B40B39;
+	Fri, 24 Jul 2026 14:02:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A9m3xKdeNCpQ; Fri, 24 Jul 2026 13:45:02 +0000 (UTC)
+ id CV1xM29lAqMR; Fri, 24 Jul 2026 14:02:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0A31340B20
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BF4D740871
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784900702;
-	bh=e9YdFSadc2DDexNjXldumZknh72ujlAb0nWDp/bT1Uo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784901730;
+	bh=WKLUVMfLamSKfQ2xU8y6AttHaMYvfRoMYBuCx91Xgek=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=c1bdfq996ObKI9hlm4H+mccZL3PRQlEbYGJtngMHVampPf3hHsKQN76y0cEJtwr15
-	 Vy9CcUrSc3GKLye0TxKKpom2S2/VmBXcejosq7j3bHq0COGlamhV+0w5TBsA60W/kH
-	 90W2ybADmX7tmpsfpwZdz4mNeIMCX/NWleBVeVcKeyZVUDypeioMYhMZWWJpTGbJAB
-	 y/zN3q1+VIvhnaPWpaYpV2PU/Qlun7tH/u1xr/Ty7GQVnGOYYeIG08tuWNBoB8I3Gk
-	 Mef6Ll23pSj7VbriFet9rh9vDJ1lVSiVEB+ASHVoPFbIByMaYBKH6vBXMlfG0RhdW2
-	 KST6rnRx88CUA==
+	b=ME4OT/uuSxT1Sgph4BIHMHnMfqGD7UYvI5rkOLxjFCayt/nO0IXA+Xa0lJCUXUvQX
+	 wB01zv5mtIl0g6XrOMHT+IVCv8NQbPsGw42b+bbrXt8v90x78yW+G33G8zcjeGRbJz
+	 hY3x1udg5+szDflqgrmvGrngfOKNdHO+8ICMD0EDghKUt+MjFV8bVJlXH6EC5kH5Cb
+	 qzdgPsT7IIaA68VZ1R//1OmWrd/vqPb60JYpX0ck+/VWdzv1M6doXqHBzISboAeD6e
+	 /VfdpbzyxQdyqwkpsU+b7AUb23BKddgny/HxUKbqz6k2J996IC18bAyFwOfTIgC3vr
+	 euYiXqTRBTzOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0A31340B20;
-	Fri, 24 Jul 2026 13:45:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0DFA73B1
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 13:45:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BF4D740871;
+	Fri, 24 Jul 2026 14:02:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6084F490
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 06:50:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E7CC660B17
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 13:45:00 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 52FAE407CA
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 06:50:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uY2KfFOBtBO2 for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 13:45:00 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 91A6660B53
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 91A6660B53
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 91A6660B53
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 13:44:59 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c15e03c2763so81951966b.0
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 06:44:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784900697; cv=none;
- d=google.com; s=arc-20260327;
- b=T11zCQ83TxLuDdWlG7MhY9xORnnPo1zEJplvUx9d3SX49ShXoLlOLzxF0EfIXJDUON
- Kp9f+Ip2boRJxEy3H3SDilDT+jG4l+sCdOrbLxZ0yjqOlKns+zexDhUpMUg44YgClk1C
- /+cZkoI1JbIMuaNZpBGfx0ULGPBuPBk99Zs1A9mRsMNYyg7r2SO14MijOcb08qP/4l5b
- yakEP0sDqEcBeyitz9qIzdJyk6NKHg9cXa/UNsEUG9Z7iKnng0bqCUL+QVWRnD7dNs4p
- 0HCef84tWoGRSlYZGRrEJaigKk4YM4BVh2DueOOavuArJb7ZO2OEkq8cRAkFnaxbnpda
- JoAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=e9YdFSadc2DDexNjXldumZknh72ujlAb0nWDp/bT1Uo=;
- fh=KDAfHXCyADuMJT+VtijSnNgl/6ncU0Z38jXC4GOT1Ro=;
- b=dANCBp320Tk3ngsNj2ESi9RfBf8I+aAJvOmMLfC1ycWKAwu/o2M9eVzzXms7VdMeIG
- Pp2iPRdV6TJDvw4bVgsCJ5nIMx8Xu1N8xD80Lvcdxd0Ig4O8VicX3uq0vk0hFW0XxlMn
- OjF75R2XWLhk04lqHM/IXQ0mm5oNMf6Iid6+U6BlHoO4Mjh4R+VLPLG2YwPT44wOvzuA
- vi07hQBNLItiSG9KHuy50vI5ot6G6VKDnYO2X8CzE4/4YlbL2afkBF1f/iT1VP7Pbepm
- GDfaWnrdTaaK0aqWVCZLlZWL6hO0mKKuAnFfgSqfNVbilQ/flMBYeFi+zQGV/ypPMUk0
- etaw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784900697; x=1785505497;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=e9YdFSadc2DDexNjXldumZknh72ujlAb0nWDp/bT1Uo=;
- b=FfrBMJ+jRayPpejdinpMQ6Fa+X01Ud1bhe35MI3JQYDVo2WV8pkGV8pN2ZLCAprzyi
- ILLopxGcV5k4aR1ku8gwGaZjeIgwhqmC5ryKZdaGg7gAvfraK3R0N0Tv/OGdzmi6qBjc
- 8f0YYiIjw2SD5u72unWiAjZ+T//tqDGGTJJow6E6r7/cynpX7fqnncHl7/xI88GPk+ik
- Pbb/3pOpVNLEJg+FH2c8StPRah3HJZkbYIBTRi7b7NpQoSE2MEs8L7io/h1SV5jOZshO
- PfbBq4ehJ4KQKcIpurIsl+8KdOu6+o9Sd3y1JTdE41v0feLs0Ythuncu8s8rZqb4tLkG
- cUiw==
-X-Gm-Message-State: AOJu0YzQJKS5cVDQiG3/07tbIsYemyMeL+Iuh/DBVkFSOZMbzCQE8QxZ
- HmEgZvFGbxA2ixo2PFqmQh5tHMydqm+DsID+jfaoIoTDEdPrKWxGYE4FbYr3X9xf8uuT1U367HZ
- TemA29gSB7cndJ5QXhV+pSnetCxJJyhM2hAuKAIYwSw==
-X-Gm-Gg: AR+sD10vATxLtncboTfc4qDxWvz9JUmzoPIxE/FzWTx4ZjPfWEk+/BR84OiVsCkLoqI
- Nuqz4ubTo8xHFmeHdBu8/tOU02/S1st5DC0SR06oksIDqw26jkvWQBXp/xhLHR+LcQ+bLRSwymc
- 0IHf9WfN2E6irkt+sSY7HmFHtWRs+bG0OiYEPb5LxeKBmfZjSa7rFKe/OZv3k8lYLQXNazbtmUp
- XUHxU3jXpAJLpv0QJ/RobJVzXNQpOUGqs0mKdGRsz21htKNE79tn9ZmuL89nQ==
-X-Received: by 2002:a17:907:8e95:b0:c16:aee0:5422 with SMTP id
- a640c23a62f3a-c1f1338698dmr32842366b.6.1784900697343; Fri, 24 Jul 2026
- 06:44:57 -0700 (PDT)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fuIR93alQYfH for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 06:50:21 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=qijian.guo@nxp.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C1546407C3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C1546407C3
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C1546407C3
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 06:50:20 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6DFA4803F6; Fri, 24 Jul 2026 08:50:18 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EA342800AE
+ for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 08:50:15 +0200 (CEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CStT1SNxPWq7ZZSrejnPi46vnLTpNA7qTR2TIq4rE3vi1zvkpe4bjVLKIQuXt/dNco9McokPtNfNBxP1Oj6/5otibGtRGk6ls/LAoBMNQby3bX5CFKd9vuG8+FM7fq1Ptlk+0FsTZ2jg2FUi8APYGGPwWoZXbhBLtIl4hfuXGZ3FS8hf0Isd7lm41p/vJvCyL/qydKDqD4RfhPnPozj2MZblFPUnvl9VmrGuy5SqwkTkfCDYGHJDq8jmW7KgF/lJcPT/G5dvcocXSJqLzFiz8jKy0WXHOI8Sf+JVhePOEAN/1kg6+QZ1E4KLxv9IElENwE22On7ygFBoSyxT073ThA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WKLUVMfLamSKfQ2xU8y6AttHaMYvfRoMYBuCx91Xgek=;
+ b=KJTTDts+Y+U8R2a2VO5JYz8Ae9Li/AgN8lsPYrofYj0nYVIFlQh/iRPUpkN++jMaWdQBPnHC1wB/R+n7LaOB6iAa2utFSse/RwUM9GB31yEcNmGZWh5h9RMz9ssY3Y0hTedYLn7jiDUyr467SxZ3z0IgbJyMzeG7fTqI7kBIYsHF+NN9lywpeVFXgBH4ShSE3B/XgelB8X7qBGMwcc7MoNBhAlSzRtn4w8UBMScXdyEY+KKH9EMlN7yOzmtjB+rERpaOvGOc2b797sAOD/tnEJlmZ7PW6sPA1s1BDw3auvWIk936460/MD3JyePQZcuTI/ne780KXF49/TMsRWF+Qg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+Received: from MRWPR04MB12117.eurprd04.prod.outlook.com (2603:10a6:501:97::14)
+ by DU2PR04MB8760.eurprd04.prod.outlook.com (2603:10a6:10:2e3::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Fri, 24 Jul
+ 2026 06:50:13 +0000
+Received: from MRWPR04MB12117.eurprd04.prod.outlook.com
+ ([fe80::9a10:5b39:708:7f43]) by MRWPR04MB12117.eurprd04.prod.outlook.com
+ ([fe80::9a10:5b39:708:7f43%4]) with mapi id 15.21.0245.010; Fri, 24 Jul 2026
+ 06:50:13 +0000
+From: Joseph Guo <qijian.guo@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, Lei Xu <lei.xu@nxp.com>,
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>, Peng Fan
+ <peng.fan@nxp.com>, "u-boot@lists.u-boot-project.org"
+ <u-boot@lists.u-boot-project.org>
+Subject: RE: [EXT] Re: [PATCH v3] imx: Add FRDM-IMX95 initial support
+Thread-Topic: [EXT] Re: [PATCH v3] imx: Add FRDM-IMX95 initial support
+Thread-Index: AQHdFM6RRkar+twfoEiCI/kHQkexe7Z7dMoAgACh/nA=
+Date: Fri, 24 Jul 2026 06:50:13 +0000
+Message-ID: <MRWPR04MB121170AD9EADBB588BED27ECF94CF2@MRWPR04MB12117.eurprd04.prod.outlook.com>
+References: <20260716-imx95_frdm-v3-1-bb53481157fc@nxp.com>
+ <CAOMZO5AX2VZJEKw4dyg+d4S=uRNBcOhe4k8ZED9+Q0mv=_a9Lw@mail.gmail.com>
+In-Reply-To: <CAOMZO5AX2VZJEKw4dyg+d4S=uRNBcOhe4k8ZED9+Q0mv=_a9Lw@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MRWPR04MB12117:EE_|DU2PR04MB8760:EE_
+x-ms-office365-filtering-correlation-id: 50abe266-c171-48b8-2514-08dee94fcfe8
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|376014|23010399003|19092799006|366016|6133799003|22082099003|18002099003|38070700021|3023799007|4133799003|56012099006|11063799006|10067099003|4143699003;
+x-microsoft-antispam-message-info: BMeS8bGRtE7cYRn//SFCNsPeg+PK36M47uWm1gZWL7698yEVqM5FRAlMh8xQ9jcW3Zmw9BKNkz4C85kWVCl0G9ZEzCW5LzPIMQtYtEncEwbAlzcS7w7K/0jQAidWneM4MaXKZtQhya/KV4Nq8s7cHJcOtIaSYW6Mj8/ChWO5zmFUN67k23OypAAlgnsfrqlCdGR8wglbZNcECxtZzR5aaB9NRToUnZS+qrHO/7Ki2JkS2NSPLBNax1Dtx7ndT+ZXFuaVVev8bzPgv6oWsYcx3r+070zVMSErdnYnNnEvBNWUugzp4wkAT7kzvLpjEPnAElX5uB2NBfHNbU2n5oSsvXgKZKJe8Aj0/e8PMMIuaasvhlugsoHIcYEcMzFi9xmBvyUGn9P6c9rHBDsUKLxuOczSzR3K/1tgohloblyT7aZVCumKKJIW4Tq+Rp/wFXH5n9wETfkfCQuTOAygpHouTKzpu6mCkp0gnBK0twjQZIkyCRvdYayOMConADq85rX4PcsFavF0a7jkEmAgJ0reT0fh85bfkXryrVEYYwIQxu9IfoqEm3xwhERBiX/kqbxpx5CjMg5HfNUnQNsZes26bziUdMgcKDgH9lqdybrjvjEqp+XXba6g9lCgZ1mbOpjJyNWC1MEwePGF3T2NyDsZfrHcqpy/WN2vAVM9eTghKa0qwbFdpTTHNOmquz2wyMyh8h8qfo1PkCB0lY3yrQW2B08C8b5SjtRRZSYdrlQ+7IY=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:MRWPR04MB12117.eurprd04.prod.outlook.com; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(19092799006)(366016)(6133799003)(22082099003)(18002099003)(38070700021)(3023799007)(4133799003)(56012099006)(11063799006)(10067099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aWNjV094VVU2T043SWhqV3JzbldLWFB5TkpPWCtHdU5oOEJUUmxQQ3ArRUhP?=
+ =?utf-8?B?UnByT09XU0dDaVBKZlVDNFZUb3NBank3RUo1TFpsWGpwY2dDczN5eUNNTlNT?=
+ =?utf-8?B?dnliTDUyTWVRVDF0cU5HRTZRektlbHVvR3lYazFhMmdZVE10WE1HakRCenNa?=
+ =?utf-8?B?b2c1ME94bWJlUWhURmg4Q01IUWt5WU94aEgzNlpsN2h6SFErQjBoUEVTRmZ4?=
+ =?utf-8?B?amd6NDNYbThUUDdMeVl3YkdKQUlVdFV0ZkI0WWtYWG53YVA5cnQxN0JQS2FT?=
+ =?utf-8?B?aFZ5NXVyK3JDcnN1Wjd0S0wyUEhtczYxR0gxd3FiS1RjVnJiYlVJMUpmY3JU?=
+ =?utf-8?B?d2xNRjNDRnFWenhMUzV1bVM0WitraDBkQm1TSnpZd3hzVW0wSk54ZFJhaStZ?=
+ =?utf-8?B?ZDhMb2pId0llQUtmWkM0T1crZ1l2T0ZWU01tYzA5NWNQSDQ3NGs0RDU3TTRD?=
+ =?utf-8?B?M1NoNUZZcEhWNERvZG5YMU5ucXE4MDFkcXNhUEhiWGpUUGxYR1h0ZEdMOS9O?=
+ =?utf-8?B?M1VaWTFkVWl6M2huZVlnM0xJUEdZRzVZZEJvYlRLVnVGZ0diTkhXQnJldlVm?=
+ =?utf-8?B?UzV0YktOaGNRb05oT1pSL0phMy9xeWYwbGJJOW4yQ1RtYll5d0JVRkVaanhi?=
+ =?utf-8?B?TVh3bzYrVERXQTd6TkdCOWNsSjlDVWFXSVkwWUNqaCtESXNvT202bmtJVXZZ?=
+ =?utf-8?B?V0E1N2V4YVpGQmhjTHorb2hPZU9FcDlheHhFSFBUdm9zT2IwMlJiaC9pdUgx?=
+ =?utf-8?B?MFArcUx0MDlxVC9VN3VwK0YwTFQ1ajVCKzQwU3UyaWxJQ3VRNHdDUmMva08v?=
+ =?utf-8?B?MzRRaWk1c0hBUk5QN0h3NGNQUHpzeStuWkN3V2JuZVZyVVJuaFBVZ2thWHJz?=
+ =?utf-8?B?akZ2V05Hc1Awc3pqRGw4N2VCeGpoRy9OV09FM3oxVmMxNW9pVlVkOUVvc0dj?=
+ =?utf-8?B?a3kyZ0QyLzQwSTNTVmdURUNXaXorVHkrTTl6dG9SWG9EM2wvVXJ0aVlxMFhI?=
+ =?utf-8?B?OHlHL3FrMDRiRk9ETGc2RFJWVy9zWWF5UW1VWTV5UFgya1JjK3dVQjJvRThL?=
+ =?utf-8?B?TUE5Rk5iOGFwT0hZZ2htcnVLNVZKV01aUERYa1V6QlR3bEZ6OUowb0FNWk1C?=
+ =?utf-8?B?NHl2Yk41a3VQVm5GcWZIZW0yTlJDNGhNTXpHOVIzUENiR0ozWkdxYXo0aXBT?=
+ =?utf-8?B?Vy8vbThueFBIejF5am5CODlCbWNsTVFIWUZDMkxyVldEaURoV0lUOS82dzky?=
+ =?utf-8?B?MVorV0h2T0h4WFdmVWtvTmk1amdNQ01LMnBvVlJ0MkNRRmtMZVMyNmY3UllG?=
+ =?utf-8?B?NDF5N0UxTHcwSDBqaFpMK203ckRIWndVektmZCszWmI4bFByeGR6UVlueHFP?=
+ =?utf-8?B?OHNjYkJ4bnZTQWMvc0VYZWpKWExZTXg2TjFGMVBVcno4aG92cmFWMGR2S0tm?=
+ =?utf-8?B?citGT3h2NWlnbFcyVXNBc1JjMnhQNGhwbEQ3Mk8yYUhxVVJuU1B3VjcxS1RU?=
+ =?utf-8?B?cnRmL1cyWEY1MHVKeGZaeXp1OUFadzR5SFB1UTEwbnFjTzRteGloTk5Za3FW?=
+ =?utf-8?B?WjQybjVRQ0RXMFhUOE83SFFpT0JHMlNVZ2hPbUozVFhKdG1PRE1WQ1RDQkZa?=
+ =?utf-8?B?WGttaWtzK29zVDVCc0Q2YXpnQVFPcGhkeU1oOW9jTWc3cnNNRHpUbUlyZ0dy?=
+ =?utf-8?B?ZzljRzhDdWNhNmdZeEVjeDFrQjZMS0YrUURWTDBkSTdFR3BBcEFHckVJVkVH?=
+ =?utf-8?B?b2JkSWkya1hHdldtVkxvVlV0YWdZK2VVTzdFdVB6RE04QVBEV2NaTDgzQlpP?=
+ =?utf-8?B?bm1adkhHdUsxdmVqWWtCTmxONTdUSVNvSXEraFVrQkZKVVZ6MnNGMVFJcmhY?=
+ =?utf-8?B?cHR0b1hMQWlOMTJzOVczWFI2ZW9CTDVQNy8wdytleERsdWFhc2V4cXUwNkZy?=
+ =?utf-8?B?bkpWZ3FPa0src2tRRW1OK2J4aUd3UjdUd3VpVU9QVER6Q3ZUbjhVOVEwVGE1?=
+ =?utf-8?B?MlBFWXF1UksxVGVKbFk1NEJrdkxpTTBvcmhWbWZ6blByZDJlaEtOeGxjT2lp?=
+ =?utf-8?B?cGRsQm81bGI2Z3hyS24xMXcydTRzbExNTzZ2dDR3b0Z2QmNkYmpmYkFCM2Yw?=
+ =?utf-8?B?c1pyZ3AvZmllYmhha1B2dGdmTEhhU2ZmTUxZWGR0b1R2Y0pYQnAzVHdaeWpu?=
+ =?utf-8?B?SU9jdnlCS3E5MXlQZHU1U3ZBYmNMRC9yMk5kdm9pcnM0bzNLTFh0YkpRWDRY?=
+ =?utf-8?B?ZmFaZXdSblBacUNkSWpCM0Yvd2N4TXM3WElsZ1RoTzIzd0NTbjBseTFsTDY3?=
+ =?utf-8?Q?XJDBFY8Anj/XK6+tXv?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
- <20260609-atf-falcon-v1-4-2b20c5e83615@flipper.net>
- <baf04b5d-ef0a-4c58-a796-d09edd6c84b7@kwiboo.se>
- <CAKTNdwEQx6SfKgD=RbbznVgLuMLA5P1UbJ3b+KR4j4L4GyCfoA@mail.gmail.com>
- <b8908639-94e7-4538-8a40-d40d00dc57e6@kwiboo.se>
- <CAKTNdwF68AZT6FHSzPCXKy9QBE16eO-AB+0Ggs9oZXicOSp4_Q@mail.gmail.com>
- <e4bcf339-6ced-4f4d-88dd-b033abc431b6@kwiboo.se>
-In-Reply-To: <e4bcf339-6ced-4f4d-88dd-b033abc431b6@kwiboo.se>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 24 Jul 2026 17:44:46 +0400
-X-Gm-Features: AUfX_mwfnpmcaj2uZTP10ygoeVEXv0_fGyp8TN0gbvnOow5y0bAlDbGQZiFM3kI
-Message-ID: <CAKTNdwGUEsz+cWQ8guc7UtLssAWRa_jro_+AinSsm0V9P+w55g@mail.gmail.com>
-Subject: Re: [PATCH 4/4] rockchip: binman: Add support for Falcon mode FIT
- images with ATF+Linux
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12117.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50abe266-c171-48b8-2514-08dee94fcfe8
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jul 2026 06:50:13.2376 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: kos2jXXrF0koLNYPkX4FjV6AMO3vefyzUwfz6w4dO3rPXZfZC6xz/JsuOCoI71mLVAiSHBs44tkCw220BEmxwg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8760
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+X-Mailman-Approved-At: Fri, 24 Jul 2026 14:02:07 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1784900697; x=1785505497;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=e9YdFSadc2DDexNjXldumZknh72ujlAb0nWDp/bT1Uo=;
- b=fGryn9zq/8dLfBQvEk0ouF7JczUe8K6qIsqY1A7fVGXQ1dMN95tCY1hQ7ADQMXR0OX
- pJCOL4TBc3MQ+gk2D4o9HN+7gPu1HYtYHnM5dwHedeGsyT7hJP+F2nmLtu9Wv6AnOI0R
- ZJ5JAhHkgNuvv3ABlDtbluD719QUsEM9JPUzQuH7PBS423Io5z6p2z92ovPws7TfEbP6
- Lwp/T0qvciRN9yDamPzDgMMHnJ/0XUP7hLv7FYXsu26KO7qnw6Dm4dKAf37+0MZAvT/f
- UTH6lYR2QSELU8vnyGBr4A+EfiZ/suyDqhprzKKSHSzY5y8H2hXyBQdOag4VxbooaQz/
- V1oA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WKLUVMfLamSKfQ2xU8y6AttHaMYvfRoMYBuCx91Xgek=;
+ b=HyRPS3OG+FniM+vi/fGa8nC0T4MoVHmP4LrM7qtqYz4DbcRHZBWfwy158w80M336zaRTK79aKr9p0LkVquLc0fOLHrDxYkoNfDYUA2bxgXoRHpkNem9EkFuEetwO96nGlP9to//Po/x/ei6D7ho4KtPcWMZeRJrTWRuOpWdGJ7gdLdvZcIPA58cCZR9Ftux4m13kWLfWcsJKK7Is5Evakr/Vt6yU+bogYw9YmWE5D0hpJhi/FWGw5lAeK9mCJIFD1lV04hw/kAMu2QAHCnwr5xyvlZzZ49M9bOVrZFXhyR7hY3CG/mjkDfzjczgddMVwt2CKb+vGAlcOc0utJiS0nw==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=nxp.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=fGryn9zq
+ unprotected) header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256
+ header.s=selector1 header.b=HyRPS3OG
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=nxp.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=qijian.guo@nxp.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=nxp.com header.i=@nxp.com header.b="HyRPS3OG"; 
+ dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,394 +203,186 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, Jul 24, 2026 at 4:30=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> wro=
-te:
->
-> Hi Alexey,
->
-> On 7/24/2026 11:48 AM, Alexey Charkov wrote:
-> > On Wed, Jun 10, 2026 at 2:06=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se>=
- wrote:
-> >>
-> >> Hi Alexey,
-> >>
-> >> On 6/9/2026 8:26 PM, Alexey Charkov wrote:
-> >>> Hi Jonas,
-> >>>
-> >>> On Tue, Jun 9, 2026 at 9:54=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se=
-> wrote:
-> >>>>
-> >>>> Hi Alexey,
-> >>>>
-> >>>> On 6/9/2026 6:52 PM, Alexey Charkov wrote:
-> >>>>> Modern Rockchip SoCs such as RK3576 require ATF to be running to pr=
-ovide
-> >>>>> firmware services to the OS. To enable booting Linux in Falcon mode=
- on
-> >>>>> such SoCs, add binman support for generation of FIT images containi=
-ng
-> >>>>> appropriately split ATF raw binaries (as is currently done by binma=
-n for
-> >>>>> U-boot proper images), externally preprocessed DTB and a Linux kern=
-el.
-> >>>>>
-> >>>>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> >>>>> ---
-> >>>>>  Makefile                           |   2 +
-> >>>>>  arch/arm/dts/rockchip-u-boot.dtsi  | 109 +++++++++++++++++++++++++=
-++++++++++++
-> >>>>>  tools/binman/etype/falcon_fdt.py   |  26 +++++++++
-> >>>>>  tools/binman/etype/linux_kernel.py |  22 ++++++++
-> >>>>>  4 files changed, 159 insertions(+)
-> >>>>>
-> >>>>> diff --git a/Makefile b/Makefile
-> >>>>> index 4e5c1dd6a1c4..844e5adb7b31 100644
-> >>>>> --- a/Makefile
-> >>>>> +++ b/Makefile
-> >>>>> @@ -1690,6 +1690,8 @@ cmd_binman =3D $(srctree)/tools/binman/binman=
- $(if $(BINMAN_DEBUG),-D) \
-> >>>>>               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
-> >>>>>               -a atf-bl1-path=3D${BL1} \
-> >>>>>               -a atf-bl31-path=3D${BL31} \
-> >>>>> +             -a linux-kernel-path=3D${LINUX_KERNEL} \
-> >>>>> +             -a falcon-fdt-path=3D${FALCON_FDT} \
-> >>>>>               -a tee-os-path=3D${TEE} \
-> >>>>>               -a ti-dm-path=3D${TI_DM} \
-> >>>>>               -a opensbi-path=3D${OPENSBI} \
-> >>>>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockc=
-hip-u-boot.dtsi
-> >>>>> index 4ba6a87e78ab..866a6ab654ca 100644
-> >>>>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> >>>>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> >>>>> @@ -161,6 +161,96 @@
-> >>>>>                       };
-> >>>>>               };
-> >>>>>       };
-> >>>>> +
-> >>>>> +#ifdef CONFIG_SPL_OS_BOOT
-> >>>>> +     fit_falcon_template: template-falcon {
-> >>>>
-> >>>> Not sure it is possible, but this looks to add lots of duplicated
-> >>>> content. Could we try to re-use more, e.g. is it possible to extract
-> >>>> @atf-SEQ, and I also think we may want to support loading of TEE-OS?
-> >>>
-> >>> Makes sense, will try to refactor a bit to reduce duplication.
-> >>>
-> >>>>> +             type =3D "fit";
-> >>>>> +             description =3D "FIT image for Falcon Linux with bl31=
- (TF-A)";
-> >>>>> +             #address-cells =3D <1>;
-> >>>>> +             fit,fdt-list-val =3D "u-boot";
-> >>>>> +             fit,external-offset =3D <CONFIG_FIT_EXTERNAL_OFFSET>;
-> >>>>> +             fit,align =3D <512>;
-> >>>>> +
-> >>>>> +             images {
-> >>>>> +                     @atf-SEQ {
-> >>>>> +                             fit,operation =3D "split-elf";
-> >>>>> +                             description =3D "ARM Trusted Firmware=
-";
-> >>>>> +                             type =3D "firmware";
-> >>>>> +                             arch =3D FIT_ARCH;
-> >>>>> +                             os =3D "arm-trusted-firmware";
-> >>>>> +                             compression =3D "none";
-> >>>>> +                             fit,load;
-> >>>>> +                             fit,entry;
-> >>>>> +                             fit,data;
-> >>>>> +
-> >>>>> +                             atf-bl31 {
-> >>>>> +                             };
-> >>>>> +#ifdef FIT_HASH_ALGO
-> >>>>> +                             hash {
-> >>>>> +                                     algo =3D FIT_HASH_ALGO;
-> >>>>> +                             };
-> >>>>> +#endif
-> >>>>> +                     };
-> >>>>> +
-> >>>>> +                     kernel {
-> >>>>> +                             description =3D "Linux kernel";
-> >>>>> +                             type =3D "kernel";
-> >>>>> +                             arch =3D FIT_ARCH;
-> >>>>> +                             os =3D "linux";
-> >>>>> +                             compression =3D "none";
-> >>>>> +                             load =3D <0x48000000>;
-> >>>>> +                             entry =3D <0x48000000>;
-> >>>>
-> >>>> We should not hard-code these here, they seem to be RK3576 specific.
-> >>>
-> >>> Fair enough. Should probably come from configs.
-> >>>
-> >>>>> +
-> >>>>> +                             linux-kernel {
-> >>>>> +                             };
-> >>>>> +#ifdef FIT_HASH_ALGO
-> >>>>> +                             hash {
-> >>>>> +                                     algo =3D FIT_HASH_ALGO;
-> >>>>> +                             };
-> >>>>> +#endif
-> >>>>> +                     };
-> >>>>> +
-> >>>>> +                     fdt-1 {
-> >>>>> +                             description =3D "falcon-fdt";
-> >>>>> +                             type =3D "flat_dt";
-> >>>>> +                             arch =3D FIT_ARCH;
-> >>>>> +                             compression =3D "none";
-> >>>>> +                             load =3D <0x52000000>;
-> >>>>
-> >>>> Same here.
-> >>>
-> >>> Ack
-> >>>
-> >>>>> +
-> >>>>> +                             falcon-fdt {
-> >>>>> +                             };
-> >>>>
-> >>>> If I am not mistaken we can already inject an external DT to be used=
- as
-> >>>> control fdt during U-Boot build using EXT_DTB env, maybe it is bette=
-r to
-> >>>> use that instead of passing in a new FDT?
-> >>>>
-> >>>> We probably also want to use @fdt-SEQ and @config-SEQ to be able to
-> >>>> dynamically load a config based on e.g. board_fit_config_name_match(=
-)
-> >>>> that some boards already use to select config/fdt for U-Boot proper.
-> >>>
-> >>> Indeed, that would be quite interesting to have to make it all less
-> >>> hardcoded. Does board_fit_config_name_match() also work in SPL?
-> >>
-> >> Yes, that is where I know it is currently being used for Rockchip on
-> >> such boards, e.g. rk3566-zero3 and similar.
-> >>
-> >> spl_load_simple_fit()
-> >> - spl_simple_fit_parse()
-> >>    - fit_find_config_node()
-> >>       - board_fit_config_name_match()
-> >>
-> >> And in U-Boot proper the board model/variant is mostly used to set
-> >> correct fdtfile env var so that correct FDT can be loaded from e.g.
-> >> fdtdir when doing pxe_utils booting.
-> >>
-> >>>
-> >>>>> +#ifdef FIT_HASH_ALGO
-> >>>>> +                             hash {
-> >>>>> +                                     algo =3D FIT_HASH_ALGO;
-> >>>>> +                             };
-> >>>>> +#endif
-> >>>>> +                     };
-> >>>>> +             };
-> >>>>> +
-> >>>>> +             configurations {
-> >>>>> +                     default =3D "config-1";
-> >>>>> +                     @config-SEQ {
-> >>>>> +                             description =3D "RK3576 Falcon Linux =
-via ATF";
-> >>>>
-> >>>> This is rockchip-u-boot.dtsi, drop RK3576 specific parts :-)
-> >>>
-> >>> RK3576 is the whole world to me! :-D
-> >>>
-> >>> Will do, thanks for pointing out
-> >>>
-> >>>>> +                             fit,firmware =3D "atf-1", "kernel";
-> >>>>> +                             fit,loadables;
-> >>>>> +                             fdt =3D "fdt-SEQ";
-> >>>>> +#ifdef FIT_HASH_ALGO
-> >>>>> +                             hash {
-> >>>>> +                                     algo =3D FIT_HASH_ALGO;
-> >>>>> +                             };
-> >>>>> +#endif
-> >>>>> +                     };
-> >>>>> +             };
-> >>>>> +     };
-> >>>>> +
-> >>>>> +     falcon-fit {
-> >>>>> +             filename =3D "u-boot-rockchip-falcon.itb";
-> >>>>
-> >>>> Do we need to export this file? the old .itb-file is exported becaus=
-e
-> >>>> some distro build scripts or flash instructions still use the older
-> >>>> files instead of the preferred u-boot-rockchip.bin.
-> >>>
-> >>> Yes, this is the file you would actually flash onto, say, dedicated
-> >>> UFS LUN to preserve Linux-to-U-boot fallback path.
-> >>>
-> >>> I'm currently overwriting my main U-boot by `rockusb write-file 16384
-> >>> u-boot-rockchip-falcon.itb` but in a normally working setup one
-> >>> wouldn't want to do that, so a pre-packed image with the SPL and the
-> >>> rest is less helpful in Falcon mode. The combo of
-> >>> `idbloader.img`+`u-boot-rockchip-falcon.itb` is what I believe should
-> >>> be used, with the former going to W-LU-A and the latter going whereve=
-r
-> >>> there's enough space for a Linux image.
-> >>>
-> >>>>> +
-> >>>>> +             fit {
-> >>>>> +                     insert-template =3D <&fit_falcon_template>;
-> >>>>> +             };
-> >>>>> +     };
-> >>>>> +#endif
-> >>>>>  #endif /* HAS_FIT */
-> >>>>>
-> >>>>>       simple-bin {
-> >>>>> @@ -260,6 +350,25 @@
-> >>>>>               };
-> >>>>>               };
-> >>>>>       };
-> >>>>> +
-> >>>>> +#ifdef CONFIG_SPL_OS_BOOT
-> >>>>> +     simple-bin-usb472-falcon {
-> >>>>
-> >>>> Do we really need this? As you notice the BootROM loader is not real=
-ly
-> >>>> optimized for large payloads, I thought using a 1-2 MiB payload with
-> >>>> TF-A + U-Boot proper was stretching it, sending a full Linux kernel =
-seem
-> >>>> like a big stretch, as evidenced by the 6 minute load time?
-> >>>
-> >>> It's neat for CI workloads and quick testing to jump straight to Linu=
-x
-> >>> without persistent storage or TFTP servers. I'm hoping to resolve the
-> >>> slow boot ROM execution one way or another, maybe by poking some CRU
-> >>> registers from boost.bin.
-> >>
-> >> On RK3576 the extra long load time could likely be improved by adjusti=
-ng
-> >> core clocks before/after DRAM init runs. I have not tried to figure ou=
-t
-> >> what boost.bin v1.03 does to improve UFS boot speeds but likely some
-> >> clock tuning is going on.
-> >>
-> >>>
-> >>> There have also been attempts at enabling opensource TPL on RK3576 an=
-d
-> >>> RK356x, so if/when they land we would be free to adjust clocks much
-> >>> earlier, hopefully making the boot faster. After all, it works
-> >>> brilliantly when booting from fixed storage, so there isn't much
-> >>> reason for it not to work from Maskrom, apart from the particular boo=
-t
-> >>> ROM on RK3576 being capricious (not sure if it applies to other RK
-> >>> SoCs).
-> >>
-> >> Based on testing on quite a few RK SoCs there seem to be a mix of fast
-> >> and slow crc16 implementations, possible some can be due to slow clock
-> >> speed, but I also fear a few are using a very basic implementation tha=
-t
-> >> starves even cores running at full rates.
-> >>
-> >> E.g. on my decent x86 labgrid exporter using similar basic crc16
-> >> implementation loading 472 image of about 2-3 MiB could take 30-60
-> >> seconds, and using table lookup, it went down to a few seconds.
-> >> I can only imagine load times on some of the weaker SoCs :-)
-> >>
-> >> This is the main reason behind commit 9d3d4d619252 ("rockchip: Reduce
-> >> size of ramboot usb472 payload"), removing 1-2 MiB zero-padding could
-> >> help load time by several seconds, even on faster SoCs that normally
-> >> does not have core clocks adjusted in SPL/proper.
-> >
-> > Hi Jonas,
-> >
-> > I've done some further investigation into why usb472 takes so long
-> > (with my trusty SWD probe). Turns out the boot ROM runs a bit-by-bit
-> > CRC calculation on the usb472 payload, which is not done for any other
-> > boot mode. Since the sole core runs with the MMU and caches off, it
-> > effectively hits full DRAM latency on every byte, and then it spends
-> > dozens of instructions on every byte performing unoptimized bit-by-bit
-> > arithmetic for the checksum.
-> >
-> > The throughput I measured for this calculation is around 124 kB/s on
-> > my RK3576 based Flipper One dev prototype. That's 5.47 min for my 39
-> > MB Falcon Linux + initrd payload.
-> >
-> > On a bright side: if the checksum (last two bytes) in the uploaded
-> > image is set to zero, it skips the whole CRC routine and jumps right
-> > into the uploaded image with no delay.
-> >
-> > Thought this is worth sharing in case more people want to take the shor=
-tcut.
->
-> Nice find!
->
-> I did some quick remote tests with setting crc=3D0 and can confirm this
-> works on rk3506, rk3528, rk3576 and rv1106, so likely also on following
-> RK SoCs:
->
->   ("2207", "110c"),  # RV1106
->   ("2207", "110e"),  # RV1103B
->   ("2207", "110f"),  # RV1126B
->
->   ("2207", "350c"),  # RK3528
->   ("2207", "350d"),  # RK3562
->   ("2207", "350e"),  # RK3576
->   ("2207", "350f"),  # RK3506
->   ("2207", "351a"),  # RK3572
->   ("2207", "351b"),  # RK3538
->
-> Using crc=3D0 does not work on RK3568 or RK3588, will test more once I am
-> closer to all my boards sometime next week :-)
->
-> I tested using labgrid PR1721 and something like following diff:
->
-> @@ -261,7 +262,12 @@ class RKUSBMaskrom:
->              data.append(0)
->
->          # append crc16 of data
-> -        crc =3D crc16_ccitt_false(data)
-> +        if self._dev.idProduct in (0x110c, 0x350c, 0x350e, 0x350f) and \
-> +           len(data) > 0x40000:
-> +            crc =3D 0
-> +        else:
-> +            crc =3D crc16_ccitt_false(data)
-> +        print(f"Loading {code:x} image of size {len(data)} and crc {crc:=
-04x}")
->          data.append(crc >> 8)
->          data.append(crc & 0xff)
-
-Looks great, thanks for sharing!
-
-In the meantime, I've also found another speedup. If I extend the
-from-source boost.bin which we discussed in the separate thread to
-also enable I-cache in EL3, and send it as usb471 before or after the
-DDR init blob, then the CRC routine speeds up from 124 kB/s to 2 MB/s,
-making it way more tolerable!
-
-diff --git a/arch/arm/mach-rockchip/rk3576/rk3576-boost.c
-b/arch/arm/mach-rockchip/rk3576/rk3576-boost.c
-index abccf4cb1b9e..6f42109ec788 100644
---- a/arch/arm/mach-rockchip/rk3576/rk3576-boost.c
-+++ b/arch/arm/mach-rockchip/rk3576/rk3576-boost.c
-@@ -27,5 +27,25 @@ int _start(void)
-         */
-        *(sram) =3D 0x3ffff800;
-
-+       /*
-+        * Enable the EL3 instruction cache before returning to the BootROM=
-.
-+        *
-+        * The ROM runs with MMU and caches off. After a Maskrom USB downlo=
-ad
-+        * to DRAM (command 0x472) it verifies the *entire* image with a
-+        * bit-serial CRC-16 executed from slow, non-cacheable on-chip ROM.
-+        * With the I-cache off, every byte costs ~101 uncached ROM instruc=
-tion
-+        * fetches, so image verification can take noticeable time (~124 KB=
-/s).
-+        * Turning on the EL3 I-cache lets the tiny CRC loop run from L1I,
-+        * measured ~2 MB/s (~16x speedup). The bit persists into the ROM's
-+        * 0x472/CRC path. Harmless for the SD/storage path (small 2nd stag=
-e).
-+        */
-+       {
-+               uint64_t sctlr;
-+
-+               asm volatile("mrs %0, sctlr_el3" : "=3Dr"(sctlr));
-+               sctlr |=3D (1UL << 12);           /* SCTLR_EL3.I:
-I-cache enable */
-+               asm volatile("msr sctlr_el3, %0; isb" :: "r"(sctlr) : "memo=
-ry");
-+       }
-+
-        return 0;
- }
-
-Best regards,
-Alexey
+IA0KPiBIaSBKb3NlcGgsDQo+IA0KSGkgRmFiaW8sDQoNClRoYW5rcyBmb3IgeW91ciBjb21tZW50
+Lg0KPiBbTm8gbmVlZCB0byBoYXZlIHN1Y2ggYSBsb25nIENDIGxpc3QuIFJlZHVjaW5nIGl0XQ0K
+PiANCj4gVGhhbmtzIGZvciB3b3JraW5nIG9uIHRoaXMuDQo+IA0KPiBPbiBXZWQsIEp1bCAxNSwg
+MjAyNiBhdCAxMTo1NeKAr1BNIEpvc2VwaCBHdW8gPHFpamlhbi5ndW9AbnhwLmNvbT4gd3JvdGU6
+DQo+ID4NCj4gPiBBZGQgYm9vdCBzdXBwb3J0IGFuZCBwZXJpcGhlcmFscyBsaWtlIGVNTUMvU0Qs
+IFVBUlQsIEkyQywgR1BJTywNCj4gPiBFTkVUQzAvMSBhbmQgUENJRTAvMSBmb3IgaU1YOTUgMTV4
+MTUgRlJETS4NCj4gPiBVcGRhdGVkIGRvYyBmb3IgYnVpbGQgaW5zdHJ1Y3Rpb25zLg0KPiA+DQo+
+ID4gU2lnbmVkLW9mZi1ieTogTGVpIFh1IDxsZWkueHVAbnhwLmNvbT4NCj4gPiBTaWduZWQtb2Zm
+LWJ5OiBKb3NlcGggR3VvIDxxaWppYW4uZ3VvQG54cC5jb20+DQo+IA0KPiBJIHRlc3RlZCB0aGlz
+IHBhdGNoOg0KPiANCj4gVS1Cb290IFNQTCAyMDI2LjA3LTAwODcyLWdjMjBkYWVhYzI5ZTcgKEp1
+bCAyMyAyMDI2IC0gMTQ6NTI6NDMgLTAzMDApIFNZUw0KPiBCb290IHJlYXNvbjogcG9yLCBvcmln
+aW46IC0xLCBlcnJpZDogLTENCj4gDQo+IEkga25vdyB0aGlzIGlzIG5vdCByZWxhdGVkIHRvIHlv
+dXIgcGF0Y2gsIGJ1dCBwbGVhc2Ugc3VwcHJlc3MgdGhpcyBvcmlnaW4gYW5kDQo+IGVycmlkIGlu
+Zm9ybWF0aW9uLiBUaGV5IGFyZSBqdXN0IG5vaXNlLg0KPiANCg0KSSB3aWxsIGFkZCBhIHBhdGNo
+IHRvIGF2b2lkIHRoaXMuDQoNCj4gV0RUOiAgIFN0YXJ0ZWQgd2F0Y2hkb2dANDI0OTAwMDAgd2l0
+aCBzZXJ2aWNpbmcgZXZlcnkgMTAwMG1zICg0MHMNCj4gdGltZW91dCkNCj4gTm9ybWFsIEJvb3QN
+Cj4gVHJ5aW5nIHRvIGJvb3QgZnJvbSBNTUMyDQo+IExvYWQgaW1hZ2UgZnJvbSBNTUMvU0QgMHhk
+NTgwMA0KPiBOT1RJQ0U6ICBCTDMxOiB2Mi4xMi4wKHJlbGVhc2UpOmxmLTYuMTguMi0xLjAuMA0K
+PiBOT1RJQ0U6ICBCTDMxOiBCdWlsdCA6IDE0OjUxOjM1LCBKdWwgMjMgMjAyNg0KPiANCj4gDQo+
+IFUtQm9vdCAyMDI2LjA3LTAwODcyLWdjMjBkYWVhYzI5ZTcgKEp1bCAyMyAyMDI2IC0gMTQ6NTI6
+NDMgLTAzMDApDQo+IA0KPiBDUFU6ICAgTlhQIGkuTVg5NTk2IFJldjIuMCBBNTUgYXQgMTgwMCBN
+SHoNCj4gQ1BVOiAgIEV4dGVuZGVkIEluZHVzdHJpYWwgdGVtcGVyYXR1cmUgZ3JhZGUgKC00MEMg
+dG8gMTI1QykNCj4gTW9kZWw6IE5YUCBpLk1YOTUgMTVYMTUgRlJETSBib2FyZA0KPiBEUkFNOiAg
+RGVsZXRlIG5vZGUgL3NvYy9wY2llQDRjMzgwMDAwDQo+IERlbGV0ZSBub2RlIC9zb2MvcGNpZS1l
+cEA0YzM4MDAwMA0KPiA3LjggR2lCDQo+IEVSUk9SOiByZXNlcnZpbmcgZmR0IG1lbW9yeSByZWdp
+b24gZmFpbGVkIChhZGRyPTg4MDAwMDAwIHNpemU9ODAwMA0KPiBmbGFncz0yKTogLTIyDQo+IEVS
+Uk9SOiByZXNlcnZpbmcgZmR0IG1lbW9yeSByZWdpb24gZmFpbGVkIChhZGRyPTg4MDA4MDAwIHNp
+emU9ODAwMA0KPiBmbGFncz0yKTogLTIyDQo+IEVSUk9SOiByZXNlcnZpbmcgZmR0IG1lbW9yeSBy
+ZWdpb24gZmFpbGVkIChhZGRyPTg4MDEwMDAwIHNpemU9ODAwMA0KPiBmbGFncz0yKTogLTIyDQo+
+IEVSUk9SOiByZXNlcnZpbmcgZmR0IG1lbW9yeSByZWdpb24gZmFpbGVkIChhZGRyPTg4MDE4MDAw
+IHNpemU9ODAwMA0KPiBmbGFncz0yKTogLTIyDQo+IEVSUk9SOiByZXNlcnZpbmcgZmR0IG1lbW9y
+eSByZWdpb24gZmFpbGVkIChhZGRyPTg4MDIwMDAwIHNpemU9MTAwMDAwDQo+IGZsYWdzPTIpOiAt
+MjINCj4gRVJST1I6IHJlc2VydmluZyBmZHQgbWVtb3J5IHJlZ2lvbiBmYWlsZWQgKGFkZHI9ODgy
+MjAwMDAgc2l6ZT0xMDAwDQo+IGZsYWdzPTIpOiAtMjINCj4gDQo+IFRoaXMgZXJyb3IgaXMgdW5y
+ZWxhdGVkIHRvIHlvdXIgcGF0Y2ggYW5kIG90aGVycyBoYXZlIHJlcG9ydGVkLg0KPiANCj4gQ29y
+ZTogIDI3MiBkZXZpY2VzLCAyMyB1Y2xhc3NlcywgZGV2aWNldHJlZTogc2VwYXJhdGUNCj4gV0RU
+OiAgIFN0YXJ0ZWQgd2F0Y2hkb2dANDI0OTAwMDAgd2l0aCBzZXJ2aWNpbmcgZXZlcnkgMTAwMG1z
+ICg0MHMNCj4gdGltZW91dCkNCj4gTU1DOiAgIEZTTF9TREhDOiAwLCBGU0xfU0RIQzogMSwgRlNM
+X1NESEM6IDINCj4gUmVhZGluZyBmcm9tIE1NQygxKS4uLiBMb2FkaW5nIEVudmlyb25tZW50IGZy
+b20gTU1DLi4uIE9LDQo+IGNsa19yZWdpc3RlcjogZmFpbGVkIHRvIGdldCBoc2lvcGxsIGRldmlj
+ZSAocGFyZW50IG9mIGhzaW9fYmxrX2N0bF9jbGspIFBDSWUgUExMDQo+IGxvY2sgdGltZW91dCBw
+Y2llX2R3X2lteCBwY2llQDRjMzAwMDAwOiBmYWlsZWQgdG8gd2FpdCBwbGwgbG9jaw0KPiANCj4g
+UGxlYXNlIGZpeCB0aGlzIFBMTCBsb2NrIGVycm9yLg0KPiANCg0KUGVuZyBpcyB0cnlpbmcgdG8g
+c29sdmUgdGhpcyBlcnJvci4gDQoNCj4gSW46ICAgIHNlcmlhbEA0NDM4MDAwMA0KPiBPdXQ6ICAg
+c2VyaWFsQDQ0MzgwMDAwDQo+IEVycjogICBzZXJpYWxANDQzODAwMDANCj4gDQo+IEJ1aWxkSW5m
+bzoNCj4gICAtIEVMRSBmaXJtd2FyZSB2ZXJzaW9uIDIuMC4yLTJhMTE4NDU3DQo+IA0KPiBzd2l0
+Y2ggdG8gcGFydGl0aW9ucyAjMCwgT0sNCj4gbW1jMSBpcyBjdXJyZW50IGRldmljZQ0KPiBOZXQ6
+ICAgZXRoMDogZW5ldGMtMCBbUFJJTUVdLCBldGgxOiBlbmV0Yy0xDQo+IEhpdCBhbnkga2V5IHRv
+IHN0b3AgYXV0b2Jvb3Q6IDANCj4gdS1ib290PT4NCj4gDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+
+ICsrKyBiL2FyY2gvYXJtL2R0cy9pbXg5NS0xNXgxNS1mcmRtLXUtYm9vdC5kdHNpDQo+ID4gQEAg
+LTAsMCArMSw4MSBAQA0KPiA+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCsN
+Cj4gPiArLyoNCj4gPiArICogQ29weXJpZ2h0IDIwMjYgTlhQDQo+ID4gKyAqLw0KPiA+ICsNCj4g
+PiArI2luY2x1ZGUgImlteDk1LXUtYm9vdC5kdHNpIg0KPiA+ICsNCj4gPiArLyB7DQo+ID4gKyAg
+ICAgICBhbGlhc2VzIHsNCj4gPiArICAgICAgICAgICAgICAgcGNpMCA9ICZuZXRjX2J1czA7DQo+
+ID4gKyAgICAgICAgICAgICAgIHBjaTEgPSAmbmV0Y19idXMxOw0KPiA+ICsgICAgICAgfTsNCj4g
+PiArfTsNCj4gPiArDQo+ID4gKyZ7L2Jpbm1hbi9tMzMtb2VpLWRkcmZ3L2lteC1scGRkci9pbXgt
+bHBkZHItaW1lbX0gew0KPiA+ICsgICAgICAgZmlsZW5hbWUgPSAibHBkZHI0eF9pbWVtX3YyMDI0
+MDkuYmluIjsgfTsNCj4gPiArDQo+ID4gKyZ7L2Jpbm1hbi9tMzMtb2VpLWRkcmZ3L2lteC1scGRk
+ci9pbXgtbHBkZHItZG1lbX0gew0KPiA+ICsgICAgICAgZmlsZW5hbWUgPSAibHBkZHI0eF9kbWVt
+X3YyMDI0MDkuYmluIjsgfTsNCj4gPiArDQo+ID4gKyZ7L2Jpbm1hbi9tMzMtb2VpLWRkcmZ3L2lt
+eC1scGRkci1xYi9pbXgtbHBkZHItaW1lbS1xYn0gew0KPiA+ICsgICAgICAgZmlsZW5hbWUgPSAi
+bHBkZHI0eF9pbWVtX3FiX3YyMDI0MDkuYmluIjsgfTsNCj4gPiArDQo+ID4gKyZ7L2Jpbm1hbi9t
+MzMtb2VpLWRkcmZ3L2lteC1scGRkci1xYi9pbXgtbHBkZHItZG1lbS1xYn0gew0KPiA+ICsgICAg
+ICAgZmlsZW5hbWUgPSAibHBkZHI0eF9kbWVtX3FiX3YyMDI0MDkuYmluIjsNCj4gLi4uDQo+ID4g
+KyZwaW5jdHJsX3JlZ191c2RoYzJfdm1tYyB7DQo+ID4gKyAgICAgICBib290cGgtcHJlLXJhbTsN
+Cj4gDQo+IFBsZWFzZSBoZWxwIHVwc3RyZWFtIHRoZSBhbGlhcyBhbmQgYm9vdHBoLXByZS1yYW0g
+cHJvcGVydGllcyBpbiB0aGUga2VybmVsLg0KPiANCg0KVGhlIGFsaWFzIG9ubHkgd29ya3Mgb24g
+dS1ib290IHN0YWdlLiBDYW4geW91IGV4cGxhaW4gd2h5IHRoaXMgc2hvdWxkIGJlIHVwc3RyZWFt
+IHRvIGtlcm5lbD8gVGhhbmtzLg0KDQo+ID4gKyNpZiBJU19FTkFCTEVEKENPTkZJR19PRl9CT0FS
+RF9GSVhVUCkgaW50IGJvYXJkX2ZpeF9mZHQodm9pZCAqZmR0KQ0KPiB7DQo+ID4gKyAgICAgICAv
+KiBSZW1vdmUgbm9kZXMgYmFzZWQgb24gZnVzZXMuICovDQo+ID4gKyAgICAgICByZXR1cm4gaW14
+OV91Ym9vdF9maXh1cF9ieV9mdXNlKGZkdCk7DQo+IA0KPiBTaG91bGRuJ3QgdGhpcyBiZSBkb25l
+IGF0IFNvQyBsZXZlbCBpbnN0ZWFkIG9mIHBlciBib2FyZD8NCj4gDQoNCk5vLCB3aGV0aGVyIHRo
+aXMgY29uZmlnX2JvYXJkX2ZpeHVwIG5lZWQgb3Igbm90IGlzIGRldGVybWluZWQgYnkgdGhlIGJv
+YXJkLg0KTm90IGFsbCBib2FyZCBuZWVkIHRvIGVuYWJsZSB0aGlzIGNvbmZpZy4NCg0KPiA+ICsr
+KyBiL2JvYXJkL254cC9pbXg5NV9mcmRtL2lteDk1X2ZyZG0uZW52DQo+ID4gQEAgLTAsMCArMSw5
+MyBAQA0KPiA+ICtzZWNfYm9vdD1ubw0KPiANCj4gQ291bGQgeW91IHBsZWFzZSBhZGQgaS5NWDk1
+IFNlY3VyZSBCb290IHZpYSBhbm90aGVyIHNlcmllcz8NCj4gDQo+IEhhcyBTZWN1cmUgQm9vdCBi
+ZWVuIHRlc3RlZCB3aXRoIG1haW5saW5lIFUtQm9vdD8NCj4gDQo+IElmIHNlY3VyZSBib290IGlz
+IG5vdCBwbGFubmVkIHRvIGJlIGFkZGVkIGZvciBub3csIHBsZWFzZSByZW1vdmUgc2VjX2Jvb3Qu
+DQo+IA0KDQpXaWxsIHJlbW92ZSBpdC4NCg0KPiA+ICtpbXg5NV9mcmRtDQo+ID4gKz09PT09PT09
+PT09PT09PT09PT09PT09DQo+IA0KPiBQbGVhc2UgYWxpZ24gdGhlIHVuZGVybGluZSB3aXRoIHRo
+ZSB0aXRsZSBsZW5ndGg7IG90aGVyd2lzZSwgYnVpbGRpbmcgaHRtbGRvYw0KPiB3aWxsIHdhcm4u
+DQo+IA0KPiBUaGlzIGFwcGxpZXMgZ2xvYmFsbHkuDQo+IA0KPiBGb3IgdjQsIHBsZWFzZSBtYWtl
+IHN1cmUgaXQgcGFzc2VzIENJIGFuZCBzaGFyZSB0aGUgZ3JlZW4gQ0kgVVJMLg0KPiANCg0KT2sg
+c3VyZS4NCg0KPiA+ICsNCj4gPiArVS1Cb290IGZvciB0aGUgTlhQIGkuTVg5NSAxNXgxNSBGUkRN
+IGJvYXJkDQo+ID4gKw0KPiA+ICtRdWljayBTdGFydA0KPiA+ICstLS0tLS0tLS0tLQ0KPiA+ICsN
+Cj4gPiArLSBHZXQgYWhhYi1jb250YWluZXIuaW1nDQo+ID4gKy0gR2V0IEREUiBQSFkgRmlybXdh
+cmUgSW1hZ2VzDQo+ID4gKy0gR2V0IGFuZCBCdWlsZCBPRUkgSW1hZ2VzDQo+ID4gKy0gR2V0IGFu
+ZCBCdWlsZCBTeXN0ZW0gTWFuYWdlciBJbWFnZQ0KPiA+ICstIEdldCBhbmQgQnVpbGQgdGhlIEFS
+TSBUcnVzdGVkIEZpcm13YXJlDQo+ID4gKy0gQnVpbGQgdGhlIEJvb3Rsb2FkZXIgSW1hZ2UNCj4g
+PiArLSBCb290DQo+ID4gKw0KPiA+ICtHZXQgYWhhYi1jb250YWluZXIuaW1nDQo+ID4gKy0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ID4gKw0KPiA+ICtOb3RlOiBzcmN0
+cmVlIGlzIFUtQm9vdCBzb3VyY2UgZGlyZWN0b3J5DQo+ID4gKw0KPiA+ICsuLiBjb2RlLWJsb2Nr
+OjogYmFzaA0KPiA+ICsNCj4gPiArICAgJCB3Z2V0DQo+IGh0dHBzOi8vZXVyMDEuc2FmZWxpbmtz
+LnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3VybD1odHRwcyUzQSUyRiUyRnd3dw0KPiAubnhwLmNv
+bSUyRmxnZmlsZXMlMkZOTUclMkZNQUQlMkZZT0NUTyUyRmZpcm13YXJlLWVsZS1pbXgtMi4wLjIt
+DQo+IDg5MTYxYTguYmluJmRhdGE9MDUlN0MwMiU3Q3Fpamlhbi5ndW8lNDBueHAuY29tJTdDMDI4
+MWUxYjRhOTFkNGYxDQo+IDhlMDE1MDhkZWU4ZTY1ZTBhJTdDNjg2ZWExZDNiYzJiNGM2ZmE5MmNk
+OTljNWMzMDE2MzUlN0MwJTdDMCU3Qw0KPiA2MzkyMDQyNzMyODkwODI4ODYlN0NVbmtub3duJTdD
+VFdGcGJHWnNiM2Q4ZXlKRmJYQjBlVTFoY0draU9uDQo+IFJ5ZFdVc0lsWWlPaUl3TGpBdU1EQXdN
+Q0lzSWxBaU9pSlhhVzR6TWlJc0lrRk9Jam9pVFdGcGJDSXNJbGRVSWpveWYNCj4gUSUzRCUzRCU3
+QzAlN0MlN0MlN0Mmc2RhdGE9VmhaY2NYZ3ZmaiUyQmZvaXBDWEJiN3JWUFY1UnlsaWUyZmENCj4g
+YXFYVldhS3EzdyUzRCZyZXNlcnZlZD0wDQo+ID4gKyAgICQgc2ggZmlybXdhcmUtZWxlLWlteC0y
+LjAuMi04OTE2MWE4LmJpbiAtLWF1dG8tYWNjZXB0DQo+ID4gKw0KPiA+ICtpLk1YOTUgQTAgc2ls
+aWNvbiB2ZXJzaW9uDQo+ID4gKw0KPiA+ICsuLiBjb2RlLWJsb2NrOjogYmFzaA0KPiA+ICsNCj4g
+PiArICAgJCBjcCBmaXJtd2FyZS1lbGUtaW14LTIuMC4yLTg5MTYxYTgvbXg5NWEwLWFoYWItY29u
+dGFpbmVyLmltZw0KPiA+ICsgJChzcmN0cmVlKQ0KPiANCj4gUGxlYXNlIHJlbW92ZSB0aGlzLiBU
+aGVyZSBpcyBubyBBMCBGUkRNIGJvYXJkIGluIHByb2R1Y3Rpb24sIHJpZ2h0Pw0KPiANCj4gS2Vl
+cCBvbmx5IHRoZSBCMCBpbnN0cnVjdGlvbi4NCj4gDQoNCllvdSBhcmUgcmlnaHQuIEkgd2lsbCBy
+ZW1vdmUgQTAgc3VwcG9ydC4NCg0KPiA+ICsNCj4gPiAraS5NWDk1IEIwIHNpbGljb24gdmVyc2lv
+bg0KPiA+ICsNCj4gPiArLi4gY29kZS1ibG9jazo6IGJhc2gNCj4gPiArDQo+ID4gKyAgICQgY3Ag
+ZmlybXdhcmUtZWxlLWlteC0yLjAuMi04OTE2MWE4L214OTViMC1haGFiLWNvbnRhaW5lci5pbWcN
+Cj4gPiArICQoc3JjdHJlZSkNCj4gDQo+ID4gKw0KPiA+ICsgICAkIHN1ZG8gYXB0IC15IGluc3Rh
+bGwgbWFrZSBnY2MgZysrLW11bHRpbGliIHNyZWNvcmQNCj4gPiArICAgJCB3Z2V0DQo+ID4gKw0K
+PiBodHRwczovL2V1cjAxLnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91cmw9aHR0
+cHMlM0ElMkYlMkZkZQ0KPiA+ICsgdmVsb3Blci5hcm0uY29tJTJGLQ0KPiAlMkZtZWRpYSUyRkZp
+bGVzJTJGZG93bmxvYWRzJTJGZ251JTJGMTMuMy5yZWwxJTJGDQo+ID4gKyBiaW5yZWwlMkZhcm0t
+Z251LXRvb2xjaGFpbi0xMy4zLnJlbDEteDg2XzY0LWFybS1ub25lLWVhYmkudGFyLnh6JmRhdA0K
+PiA+ICsNCj4gYT0wNSU3QzAyJTdDcWlqaWFuLmd1byU0MG54cC5jb20lN0MwMjgxZTFiNGE5MWQ0
+ZjE4ZTAxNTA4ZGVlOGU2NQ0KPiBlMGElDQo+ID4gKw0KPiA3QzY4NmVhMWQzYmMyYjRjNmZhOTJj
+ZDk5YzVjMzAxNjM1JTdDMCU3QzAlN0M2MzkyMDQyNzMyODkxMDMyNzclDQo+IDdDVW4NCj4gPiAr
+DQo+IGtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKRmJYQjBlVTFoY0draU9uUnlkV1VzSWxZaU9pSXdM
+akF1TURBdw0KPiBNQ0lzSWxBaQ0KPiA+ICsNCj4gT2lKWGFXNHpNaUlzSWtGT0lqb2lUV0ZwYkNJ
+c0lsZFVJam95ZlElM0QlM0QlN0MwJTdDJTdDJTdDJnNkYXRhDQo+ID02bmRUDQo+ID4gKw0KPiAz
+bXdnR1VSem0zUVZmMCUyRndKJTJCblNlT1pFbkR2RVA4dzBaaEVYR3A4JTNEJnJlc2VydmVkPTAN
+Cj4gDQo+IEkgaGFkIHRvIGluc3RhbGwgMTUuMi5SZWwxIGluc3RlYWQuIFBsZWFzZSB1cGRhdGUu
+DQo+IA0KDQpXaWxsIHVwZGF0ZQ0KPiA+ICsgICAkIHRhciB4dmYgYXJtLWdudS10b29sY2hhaW4t
+MTMuMy5yZWwxLXg4Nl82NC1hcm0tbm9uZS1lYWJpLnRhci54eg0KPiA+ICsgICAkIGV4cG9ydCBU
+T09MUz0kUFdEDQo+ID4gKyAgICQgZ2l0IGNsb25lIC1iIG1hc3Rlcg0KPiBodHRwczovL2V1cjAx
+LnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91cmw9aHR0cHMlM0ElMkYlMkZnaXRo
+dQ0KPiBiLmNvbSUyRm54cC1pbXglMkZpbXgtDQo+IG9laS5naXQmZGF0YT0wNSU3QzAyJTdDcWlq
+aWFuLmd1byU0MG54cC5jb20lN0MwMjgxZTFiNGE5MWQ0ZjE4ZTAxNQ0KPiAwOGRlZThlNjVlMGEl
+N0M2ODZlYTFkM2JjMmI0YzZmYTkyY2Q5OWM1YzMwMTYzNSU3QzAlN0MwJTdDNjM5MjANCj4gNDI3
+MzI4OTExMzE1MCU3Q1Vua25vd24lN0NUV0ZwYkdac2IzZDhleUpGYlhCMGVVMWhjR2tpT25SeWRX
+DQo+IFVzSWxZaU9pSXdMakF1TURBd01DSXNJbEFpT2lKWGFXNHpNaUlzSWtGT0lqb2lUV0ZwYkNJ
+c0lsZFVJam95ZlElM0QNCj4gJTNEJTdDMCU3QyU3QyU3QyZzZGF0YT10Z1VQQU9OQldSWWwlMkJv
+ZTI5d0hCVldJYlZuQjNFbHRKUg0KPiAwbW83JTJCaWNtWG8lM0QmcmVzZXJ2ZWQ9MA0KPiA+ICsg
+ICAkIGNkIGlteC1vZWkNCj4gPiArDQo+ID4gK2kuTVg5NSBCMCBzaWxpY29uIHZlcnNpb24gb24g
+MTV4MTUgTFBERFI0WCBGUkRNIEJvYXJkDQo+ID4gKw0KPiA+ICsuLiBjb2RlLWJsb2NrOjogYmFz
+aA0KPiA+ICsNCj4gPiArICAgJCBtYWtlIGJvYXJkPW14OTVscDR4LTE1IG9laT1kZHIgREVCVUc9
+MSByPUIwIGFsbA0KPiA+ICsgICAkIGNwIGJ1aWxkL214OTVscDR4LTE1L2Rkci9vZWktbTMzLWRk
+ci5iaW4gJChzcmN0cmVlKQ0KPiA+ICsNCj4gPiArR2V0IGFuZCBCdWlsZCBTeXN0ZW0gTWFuYWdl
+ciBJbWFnZQ0KPiA+ICstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+
+ICsNCj4gPiArTm90ZTogc3JjdHJlZSBpcyBVLUJvb3Qgc291cmNlIGRpcmVjdG9yeSBHZXQgU3lz
+dGVtIE1hbmFnZXIgZnJvbToNCj4gPiAraHR0cHM6Ly9ldXIwMS5zYWZlbGlua3MucHJvdGVjdGlv
+bi5vdXRsb29rLmNvbS8/dXJsPWh0dHBzJTNBJTJGJTJGZ2l0DQo+ID4gK2h1Yi5jb20lMkZueHAt
+aW14JTJGaW14LQ0KPiBzbSZkYXRhPTA1JTdDMDIlN0NxaWppYW4uZ3VvJTQwbnhwLmNvbSU3QzAy
+ODENCj4gPg0KPiArZTFiNGE5MWQ0ZjE4ZTAxNTA4ZGVlOGU2NWUwYSU3QzY4NmVhMWQzYmMyYjRj
+NmZhOTJjZDk5YzVjMzAxNjM1JQ0KPiA3QzAlNw0KPiA+DQo+ICtDMCU3QzYzOTIwNDI3MzI4OTEy
+MjcwMCU3Q1Vua25vd24lN0NUV0ZwYkdac2IzZDhleUpGYlhCMGVVMQ0KPiBoY0draU9uUnlkDQo+
+ID4NCj4gK1dVc0lsWWlPaUl3TGpBdU1EQXdNQ0lzSWxBaU9pSlhhVzR6TWlJc0lrRk9Jam9pVFdG
+cGJDSXNJbGRVSWpveWZRJQ0KPiAzRCUNCj4gPg0KPiArM0QlN0MwJTdDJTdDJTdDJnNkYXRhPVlW
+UTdaNmNpQVhZaDczZEFwYzZmSnBkRkEwSnpJSTlHNkduTk1vDQo+IHZBeWNFJTNEJg0KPiA+ICty
+ZXNlcnZlZD0wDQo+ID4gK2JyYW5jaDogbWFzdGVyDQo+ID4gKw0KPiA+ICsuLiBjb2RlLWJsb2Nr
+OjogYmFzaA0KPiA+ICsNCj4gPiArICAgJCBzdWRvIGFwdCAteSBpbnN0YWxsIG1ha2UgZ2NjIGcr
+Ky1tdWx0aWxpYiBzcmVjb3JkDQo+ID4gKyAgICQgd2dldA0KPiBodHRwczovL2V1cjAxLnNhZmVs
+aW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91cmw9aHR0cHMlM0ElMkYlMkZkZXZlbA0KPiBv
+cGVyLmFybS5jb20lMkYtDQo+ICUyRm1lZGlhJTJGRmlsZXMlMkZkb3dubG9hZHMlMkZnbnUlMkYx
+My4zLnJlbDElMkZiaW5yZWwlMkZhcm0tDQo+IGdudS10b29sY2hhaW4tMTMuMy5yZWwxLXg4Nl82
+NC1hcm0tbm9uZS0NCj4gZWFiaS50YXIueHomZGF0YT0wNSU3QzAyJTdDcWlqaWFuLmd1byU0MG54
+cC5jb20lN0MwMjgxZTFiNGE5MWQ0ZjE4DQo+IGUwMTUwOGRlZThlNjVlMGElN0M2ODZlYTFkM2Jj
+MmI0YzZmYTkyY2Q5OWM1YzMwMTYzNSU3QzAlN0MwJTdDNg0KPiAzOTIwNDI3MzI4OTEzMjA2OCU3
+Q1Vua25vd24lN0NUV0ZwYkdac2IzZDhleUpGYlhCMGVVMWhjR2tpT25SDQo+IHlkV1VzSWxZaU9p
+SXdMakF1TURBd01DSXNJbEFpT2lKWGFXNHpNaUlzSWtGT0lqb2lUV0ZwYkNJc0lsZFVJam95ZlEN
+Cj4gJTNEJTNEJTdDMCU3QyU3QyU3QyZzZGF0YT1XVklWNW5TQnglMkZTRDBNOUhOU2tsaVBqUDlE
+aEZ6Zw0KPiBNWnhGQVFXZWNGdk53JTNEJnJlc2VydmVkPTANCj4gPiArICAgJCB0YXIgeHZmIGFy
+bS1nbnUtdG9vbGNoYWluLTEzLjMucmVsMS14ODZfNjQtYXJtLW5vbmUtZWFiaS50YXIueHoNCj4g
+DQo+IE5vIG5lZWQgdG8gaW5zdGFsbCB0aGUgdG9vbGNoYWluIHR3aWNlLg0KPiANCj4gPiArLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gPiArDQo+ID4gK2kuTVg5NSBCMCBzaWxpY29uIHZl
+cnNpb24gb24gMTV4MTUgTFBERFI0WCBGUkRNIEJvYXJkDQo+ID4gKw0KPiA+ICsuLiBjb2RlLWJs
+b2NrOjogYmFzaA0KPiA+ICsNCj4gPiArICAgJCBleHBvcnQgQ1JPU1NfQ09NUElMRT1hYXJjaDY0
+LXBva3ktbGludXgtDQo+ID4gKyAgICQgbWFrZSBpbXg5NV8xNXgxNV9mcmRtX2RlZmNvbmZpZw0K
+PiA+ICsgICAkIG1ha2UNCj4gPiArDQo+ID4gK0NvcHkgaW14LWJvb3QtaW14OTUuYmluIHRvIHRo
+ZSBNaWNyb1NEIGNhcmQ6DQo+ID4gKw0KPiA+ICsuLiBjb2RlLWJsb2NrOjogYmFzaA0KPiA+ICsN
+Cj4gPiArICAgJCBzdWRvIGRkIGlmPWZsYXNoLmJpbiBvZj0vZGV2L3NkW3hdIGJzPTFrIHNlZWs9
+MzIgY29udj1mc3luYw0KPiA+ICsNCj4gPiArQm9vdA0KPiA+ICstLS0tDQo+ID4gKw0KPiA+ICtT
+ZXQgaS5NWDk1IGJvb3QgZGV2aWNlIHRvIE1pY3JvU0QgY2FyZA0KPiANCj4gQmV0dGVyIGV4cGxh
+aW4gdG8gdGhlIHVzZXJzIGhlcmUgaG93IHRvIGZvcmNlIHRoZSBTVzEgc3dpdGNoIHRvIFNEIGNh
+cmQgYm9vdC4NCj4gDQpXaWxsIGFkZCBpdC4NCj4gPiArI2lmbmRlZiBfX0lNWDk1X0VWS19IDQo+
+ID4gKyNkZWZpbmUgX19JTVg5NV9FVktfSA0KPiANCj4gVGhpcyBpcyBub3QgdGhlIEVWSy4NCj4g
+DQpXaWxsIGZpeCBpdC4NCj4gVGVzdGVkLWJ5OiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFp
+bC5jb20+DQo=
