@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB3DC531C9
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 14:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB589C531F9
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 14:02:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1DA0B60BE2;
-	Fri, 24 Jul 2026 14:02:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 659BC60BEE;
+	Fri, 24 Jul 2026 14:02:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nLXdoyRpZngH; Fri, 24 Jul 2026 14:02:34 +0000 (UTC)
+ id 5ctuBaPovwns; Fri, 24 Jul 2026 14:02:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 550B460BC8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 70E8460BC1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784901754;
-	bh=uyEMBVVB1/x9NdfK3js6GuM3Uer0qn7XOKvNF3DVZcI=;
+	d=lists.u-boot-project.org ; s=default; t=1784901757;
+	bh=sBAcjdoMYc3Xzo8quKErVtknpAfnc3Nmo25UGgxSYII=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Sr6l7Sa/ZrDuIUbwHyLRspZVPzQoPaFXfXY7Fs5SrwiofloxUjqliUHhrSQwj6t3v
-	 m6of0xGfIChYM+Lmk/AaoMx0PceSASKV4R7jk9OJik4H+9+RreG209hBQnSJBJOaiL
-	 C96vCc1XMDsKQG7Dzg9E74LZ7VsVf0P8KQ3HEgWp+8ChQsb9zi38B4D3AFUX3qihBw
-	 e/TeJWnSRROpaC6b6IL9/rcvG01SoyEr5wbplnpzIafP/3Wvh34Ffc3YpeCDbaVreb
-	 Vz8n09qrEm/eLwCSJ8efn4l1JpT/gQ4dRLS8Hoz+yu3BriYmA1qe4H1pJG+zB2mXUw
-	 QNLK3al4rV/4Q==
+	b=gb4KwH+luHiTFIbS2pcD88W6d3Aqi6uDrgByq22LNohldameLYOI8lKG5sDKeUSxc
+	 5dgpIw7X2CGtGdmSYkND2bl3dA7IjlQexsWDgwwiKWx/vuZKd1Z6lDW1pS0cEpasF5
+	 rj/MWwG44E6ScnZvzXlujfDUPflre2KmpUjxsFFKE7wy0g9Z8Ue6XDVPfCVPk6xNI4
+	 Dr+kdnqQZAbI5V7doJoqAs3I2MOqpk6L1HFR9fC0GaMwhLUtYmWiIiTw4TAGGWSIGl
+	 gg4tuh1onE1BK9OviKyoOCHe6r2D7iHHJmUwLJsbjuLNmon/PDovzlwH2vnhwunUxR
+	 /Sjg0JBmrs+RA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 550B460BC8;
-	Fri, 24 Jul 2026 14:02:34 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 48ADB224
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:54:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 70E8460BC1;
+	Fri, 24 Jul 2026 14:02:37 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AEECB350
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:54:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 38FCD404D4
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:54:33 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A07D1404D1
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:54:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bvu100aZHb5L for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 12:54:32 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 34996404D1
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 34996404D1
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 34996404D1
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:54:32 +0000 (UTC)
+ id W-nuH-DyKWt9 for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 12:54:50 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org ADE46404D4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org ADE46404D4
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id ADE46404D4
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:54:49 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3B9783E76; Fri, 24 Jul 2026 14:54:29 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 6751E83E76; Fri, 24 Jul 2026 14:54:47 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0445A800AE
- for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 14:54:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BFC6800AE
+ for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 14:54:45 +0200 (CEST)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 83AD8600AA;
- Fri, 24 Jul 2026 12:54:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 703891F000E9;
- Fri, 24 Jul 2026 12:54:25 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 98710600AA;
+ Fri, 24 Jul 2026 12:54:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F1111F000E9;
+ Fri, 24 Jul 2026 12:54:43 +0000 (UTC)
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, "NXP i.MX U-Boot Team"
@@ -84,33 +84,33 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, "NXP i.MX U-Boot Team"
  Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
  Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
  u-boot@ew.tq-group.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 1/2] doc: Switch from setenv to env set
-In-Reply-To: <20260718234617.98664-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 2/2] doc: Switch from printenv to env print
+In-Reply-To: <20260718234617.98664-2-marek.vasut+renesas@mailbox.org>
 References: <20260718234617.98664-1-marek.vasut+renesas@mailbox.org>
-Date: Fri, 24 Jul 2026 14:54:23 +0200
-Message-ID: <87qzks7dkw.fsf@kernel.org>
+ <20260718234617.98664-2-marek.vasut+renesas@mailbox.org>
+Date: Fri, 24 Jul 2026 14:54:42 +0200
+Message-ID: <87o6fw7dkd.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Fri, 24 Jul 2026 14:02:07 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1784897666;
- bh=uyEMBVVB1/x9NdfK3js6GuM3Uer0qn7XOKvNF3DVZcI=;
+ d=kernel.org; s=k20260515; t=1784897684;
+ bh=sBAcjdoMYc3Xzo8quKErVtknpAfnc3Nmo25UGgxSYII=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=fIP/K8yjdvgrCv5AQV8OPq4QCgsIPT8WudekvQZmeXQnozlbK5/Xo3uivvI16jJcZ
- aypT2FOBZv7lYx5rGdN4yD5fSjdxYgXWXmOcd/4b7uXFI5/kB45IJTeFB0/1eAFZyR
- nc17n8fDHmLk5pwDrHcoWI+UADRkWxkZrjbGf3lBxwklan/vDE8L+AJ3QyVILeka7R
- oPFbCsxcoO8CiFVFnJ3+Z1qIDZGL8dkUrOSa8AmsVbNdhMYGj+g50sl1jJxxG9ACG6
- ASgnK7Fes5L0VNHue2dbbe0493O0WUOSQN/cACpAoKONEke9NdqzEJVKKzV5JVoTGJ
- T8HfDAKxhtjcQ==
+ b=Vnb2kELBmXMPqeNFZwSTMLX1Ty4AZ/VMNyAkxEv+8ewNlppSwgTTjOP826CBjqa43
+ umFg0d+aGt5gYitFV7FjvIFCrIu1L2wo71vWrH8rxwe6qVOibDtARZ5FqZGr3aiLd7
+ w+FCvTcfXfCFBvIGGzd5Ecl4sYRGj55lrfXYvVIBlQ3nm4eCojO0LUsOnRH/bH9jYT
+ 15D9qwaaYp8z05Q91oP78XVn6ufs+i7FkoHayYpmkDhH4ht8uUtkLgwOXEgU1OZdNS
+ ljsmv54me5N0r6tZlRYHehuLMtrhQh4eHqZZOKU+IZGJkiJ9MbNCKJJI7Djaj8vF3a
+ Cu/eE1TCKwTcg==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=fIP/K8yj
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=Vnb2kELB
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
@@ -118,7 +118,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=mkorpershoek@kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="fIP/K8yj"; 
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="Vnb2kELB"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -141,21 +141,18 @@ Thank you for the patch.
 On Sun, Jul 19, 2026 at 01:45, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
 > The "env" command is the recommended environment management command,
-> its "set" subcommand is the equivalent replacement for legacy "setenv"
-> command. Update the documentation to use the contemporary "env set"
-> command instead of legacy "setenv" command.
+> its "print" subcommand is the equivalent replacement for legacy "printenv"
+> command. Update the documentation to use the contemporary "env print"
+> command instead of legacy "printenv" command.
 >
-> Note that the "setenv" command is unlikely to be removed from U-Boot
+> Note that the "printenv" command is unlikely to be removed from U-Boot
 > in the near future due to it being integral part of the command line
 > ABI.
 >
 > Implemented using:
-> $ sed -i 's@\<setenv\>@env set@g' $(git grep -li '\<setenv\>' doc/) README
+> $ sed -i 's@\<printenv\>@env print@g' $(git grep -li '\<printenv\>' doc/) README
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-Will there be a follow up to this series to also patch the board, env and
-defconfig files?
 
