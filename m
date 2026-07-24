@@ -4,121 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A99C531C9
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 15:30:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D7FFC531FA
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 15:53:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F29004097C;
-	Fri, 24 Jul 2026 15:30:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 305B740A40;
+	Fri, 24 Jul 2026 15:53:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UTh__uIQZZy5; Fri, 24 Jul 2026 15:30:25 +0000 (UTC)
+ id wcyxSAvrKK-E; Fri, 24 Jul 2026 15:53:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 12BDB40992
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6201F40B38
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784907025;
-	bh=0SaVsSN8ZVrzJFuUoc7NFcQgS6g4G+hzTa61D3y5oUc=;
-	h=Date:To:From:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784908410;
+	bh=2eLRYYxT1+SMtbiPKuIvg/2Dovfg9eYxZs1HmQlTsv4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ajynhV8GcDx16RYoCMXIIm4+FRn1LsKe2IS+uwiQ6lDO8c7Yncp2d8aii8k0OHDvH
-	 feGeh2l1wJnKUaFrnMeFGsxGrzY5N6jIpqf9BSm/9kAUmMStp33mDRK3I2RPSVk81G
-	 6rPgn+rpgxO2xxRdqNWni8vIFxrste6fUjqgqw4yuyRDi8MzskZ6tAvp2xdY9ZL+Wi
-	 5x4DfoUPWb08DlXPs290M0vMxR+jfEEa2flcw0IIzSv2CD3nqHA/+LLTNqHF0+PvRY
-	 1n8RGfEj96uMsPvqLZetd5H7s9uMJrJWLuV3okEGoCrxBpoWg2cg+e1FpCmGkS4+RP
-	 /m9rEOxRkVpkA==
+	b=zd4qJtg/+QbCfB4GCANqrLLJ2hNjpGFlOP7F4F2uZuUiEHqbO2Kfrjv7NXKkXQD7q
+	 f/KmKpb0ts9D/hVHmrxZUzf4b5WqGxE1qTOor47BjJ0ZdQBUZ9tpimzQVkVatzoMbs
+	 48mIIvXZhUKp4R3E73Uybbp022eij7hBg69JARAHdLbbRuUD2azY4xvqfeBFkBbF+/
+	 Sqh2GJ0194wyC1otOxHf9PrP4u/mq1/sLldUYSEZpysf7qTrVHOe8jOnQMAH4Xb1Ty
+	 xCLbjy3dsXwLo5A6H6eeXlB1XWLpYDuksFnVql+RKwUgaF7/hveO4++qgELBpo7nY8
+	 lRcDQyG2e65pg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 12BDB40992;
-	Fri, 24 Jul 2026 15:30:25 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 559913B1
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 15:30:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6201F40B38;
+	Fri, 24 Jul 2026 15:53:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6A79EEB
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 15:53:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3B4E4400F8
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 15:30:24 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5083C40B38
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 15:53:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Yly9mMaEGlRS for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 15:30:23 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GQiLLckgIjno for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 15:53:28 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E14AA400BD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E14AA400BD
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E14AA400BD
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 15:30:21 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-49554ebb87dso5597865e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 08:30:21 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 7112C40A40
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7112C40A40
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7112C40A40
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 15:53:28 +0000 (UTC)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e9ef94c0e2so269913a34.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 08:53:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784907019; x=1785511819;
- h=in-reply-to:references:subject:from:to:message-id:date:content-type
- :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=0SaVsSN8ZVrzJFuUoc7NFcQgS6g4G+hzTa61D3y5oUc=;
- b=J7H8/8i03X4T2hIUKC0XkkcIyNHYtFKrF2l5+p28Dqqz9PWRlgj8sjDt9IZI4QWdsZ
- kQAVzhHl17aK/7QASDDgjsP7ICAQ1DtyWDDyqSJk9LAf4mdW+Uc2dkbEL7/jYkoK9wBl
- XN3L+cPhYyMV+eVrO9hmk+rpkQFhWKHXBj4ZPq8EejsDtFJ7x8qNCANWDY1NZ7JYC3Ci
- yCwdE7vm1n4sKmakSwJAfhSRbVkHkmz6KfjpvqkiLn8gJDxm9iTGyeMH/Y2Vl9bWtLzz
- QbTxrqdLNqP0qyRbqZ9r2vakdMHFOlEOodYknCXeHPy4VgoMQihEWyei+qgw6pSjQfeC
- XQuQ==
+ d=1e100.net; s=20251104; t=1784908407; x=1785513207;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=2eLRYYxT1+SMtbiPKuIvg/2Dovfg9eYxZs1HmQlTsv4=;
+ b=jZ44l4hQR1luBD8SeGah2kilKM+0alPRREXhx/EJvWwpc5mYzgofW+RRCPO7KANuM1
+ E4RaC+DQcIGD02QrMaaKJt2Zkltov0gqo2djOG1p41iEBpoSUmUP3uOnOpfXwwkh3qxT
+ sPtRNvPFSN19ohNhB16/6liGiyFDPWvl38C1i9O3VOiS1kL7RYSM19iE6b9ddIWwQpEt
+ NRrbUeaGA8bd8KJUc5Jfw8hAEwv9N01iLmMceXIGzON/2SHjUkeThYeEolCpVV4yE9qp
+ IKrAJrpszE9qHQ7G1XaO5w1U72xnvRMAwuPjDvU1h4eBVF4kngJQEj22qgYyb0sOG9CI
+ jsyw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpOecIQaAx3NMgVmHexuU8Xn6fURa9zXjBzdgcgYwW7nwnF5q4dpbfGN26E8rBemsDm4hmxYlU=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzMEy2nBZ4g/IeWjHL7H4F1JykKE5U7hNF+4l3Ju6gtBu12XBGY
- Jj8GqVLIHGawQNFf5yp8pehEyWlw7xsr27cfC1qfm7PqtCSZMdXX2Lrg4b6YtYR8ZgE=
-X-Gm-Gg: AR+sD11XIZPnjU0qeZYGArN/szRAoTmN0Qil965yDER9+UxRyJ2+2/ONTfMviZNFo0G
- exp9toanBcFvl5IYmq2/h2oUIJqg1ubquvZ1O1SVL1K77zNA0cKr/OOMrypc2w16fvJLDRsgrr0
- hFVc6HPHNkjFtvg36+L7WQNbn7aa9D8HhcyeADy1WaOBXp6ibD9BVCEEtteJfz4ij4xCklFwopf
- mGRJdHd68A+CH97aTKVG5rzaZPK0tNK7rbuN+FX+s9hF3dMKiU0zF/GWJqgzZe43TngQbHYuWIn
- Sv9PsyS2FAlAC2FZwFz2R4xYHPKI9iiT33dE+EnstUXSdz3NyolETlAJ5Yzni71hRrmEcvzdcyn
- TG3j1Praks/jI/gyeQPpywHKNdGDXvb2Aq+nPF7d3/eHKH211TDQanN0Q0YJM8Vl3d3dWKvChRn
- Vc2+v5p4x0cgFrBwSry3YA03djiqtnkX/r7yDZ2FWsImK1iLS3Z5KDolWJ
-X-Received: by 2002:a05:600c:5718:b0:495:4e89:3f30 with SMTP id
- 5b1f17b1804b1-49573cd069bmr67245255e9.15.1784907019313; 
- Fri, 24 Jul 2026 08:30:19 -0700 (PDT)
-Received: from localhost (host-87-0-90-136.retail.telecomitalia.it.
- [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496b429389dsm858265e9.9.2026.07.24.08.30.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jul 2026 08:30:18 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 24 Jul 2026 17:30:17 +0200
-Message-Id: <DK6WQC5RS7VS.7LJNJHF6LZ2I@baylibre.com>
-To: "Carlo Caione" <ccaione@baylibre.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <quentin.schulz@cherry.de>,
- <u-boot@lists.u-boot-project.org>, <dlechner@baylibre.com>,
- <jstephan@baylibre.com>, <GSS_MTK_Uboot_upstream@mediatek.com>
-From: "Carlo Caione" <ccaione@baylibre.com>
+ AHgh+RrLR9aygXnE2TIQXt7tAw9v72x9uX20q56gwbbkyZ3QplCGPBaeO/CT0bJDLUIoEf624CUDRvM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxFLGWCU10NBT9rwfYPSc+OmJl2rc81BXTAKQi28IDCKgtQo6r+
+ vdqDZ//Mw3D9yRio9EI0JlEH+O7nJPRM8rQ7W8QqUiheTJO52U2M0rOmMv0bX8VhFEgPup8/0lj
+ ModtEv7Q=
+X-Gm-Gg: AR+sD12R03D0e8ndJvAFxTpqmYWWctYrgVFRXwIy0FTXxoPeH6NR95ZVwTbhtcsKaj7
+ nggKEIJJmSSlP9ML2l5JWQjnBv0sqHexL/JpEnVDEoGRbalgPy3kCtrh6NtOsvcfCb4fEpeVgNH
+ NTDGlrcpNBaUqms4r/m8Q/nFBA+NiC0is576M/bghXR9fL9CN32IJZzEEYraYINj9h16dtLk4KI
+ M1sv08ic9ikpjU7hsqatJLXpEW/CPRlc3i4UIG7MxkanNUsq8ZrehTrUz/cP/aurf0XE12TJ2CO
+ TNhug80CjxQGMdDY1odF5EbBTna1xf6OJn6tWfew4AYqiy78vcH6bpdNQ9U0t1ydKY255r9gJ03
+ 7fGLywmua2lGy9tGpJkKv2HzKx/GEftcPe1yjx3Iyx6+to+VmRlB9xQkjTler99EMR8sMaUpJJu
+ qcsowqPTHKJ/up9hQuHHyPDCgntwxpJSpjMpf9DnYCGdqfY5L0co4anLAoc3WGn32F6RIHYJ3il
+ ucGt0DlOEkFEKslFcel/SUsGus=
+X-Received: by 2002:a05:6830:368b:b0:7e7:7de:ca8a with SMTP id
+ 46e09a7af769-7ee43dfd097mr5859523a34.22.1784908407291; 
+ Fri, 24 Jul 2026 08:53:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ee29e0f876sm6116795a34.7.2026.07.24.08.53.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jul 2026 08:53:26 -0700 (PDT)
+Date: Fri, 24 Jul 2026 09:53:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: sjg@chromium.org, quentin.schulz@cherry.de,
+ u-boot@lists.u-boot-project.org, dlechner@baylibre.com,
+ jstephan@baylibre.com, GSS_MTK_Uboot_upstream@mediatek.com
 Subject: Re: [PATCH v2] fit: prefer the default configuration on best-match
  ties
-X-Mailer: aerc 0.21.0
+Message-ID: <20260724155324.GE749385@bill-the-cat>
 References: <20260709104940.75514-1-ccaione@baylibre.com>
-In-Reply-To: <20260709104940.75514-1-ccaione@baylibre.com>
+ <DK6WQC5RS7VS.7LJNJHF6LZ2I@baylibre.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="7IG1vGB+FFIf0lNT"
+Content-Disposition: inline
+In-Reply-To: <DK6WQC5RS7VS.7LJNJHF6LZ2I@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784907019; x=1785511819;
+ d=konsulko.com; s=google; t=1784908407; x=1785513207;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:references:subject:from:to:message-id:date:content-type
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=0SaVsSN8ZVrzJFuUoc7NFcQgS6g4G+hzTa61D3y5oUc=;
- b=WCgezkXEMB88eEwXpzkU9Xm8DOwkzzFsTuirACch4VJj6R4v+AffptPJdAkKITf2Nz
- eMGFyU7taZdth0gvnTXePTU/BRB6RgWDQFhKOBYPw+J1yGrbUA6AzfMHbsDMpCMH2Rjf
- pU8U4opRmJr0cGeTlGd3/6AY3L2x+Nh+QajrybGdXWyKMqdTlZABx3TI7W/HuMgmcmhM
- gas4bTlMy/49QWL4tP1BbB+Bhzceh23HdBlybywPaa7vu6jChinpjNOGoJLS6FyX+zu8
- OXVO7ohCGjPlnJzYmbRFWnUFdCynY2jeostWaz6ROpg0r7JTm1PC2cUycM2CfTlOUY9C
- ejfQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=WCgezkXE
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=2eLRYYxT1+SMtbiPKuIvg/2Dovfg9eYxZs1HmQlTsv4=;
+ b=BaY4uVypaey2LMpxH6mFchLqzRiSJx1/RstzErC7EJIWZsgiTVLMpew73fcKi/ndyK
+ PIeVH3rg0kyfJIOIpksk9vPPgqWI+fcx/V4a2SoXe/X+7M1MKcXsEDz9OkjpZe7qM6Ma
+ gARtRCyItmn2d3dVb/1bZNGZ1pmFHf/5w999Q=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=BaY4uVyp
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -133,30 +135,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu Jul 9, 2026 at 12:48 PM CEST, Carlo Caione wrote:
-> With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
-> configuration matching the most specific U-Boot compatible string; on
-> equal matches the first listed configuration wins and the configurations
-> node 'default' property is never consulted.
->
-> A FIT whose configurations all share the same base devicetree compatible
-> (e.g. one manifest carrying a base tree plus overlay combinations for a
-> single board) therefore always boots the first configuration, silently
-> ignoring the default chosen by the manifest author.
->
-> Break score ties in favour of the default configuration. A strictly
-> better compatible match still wins over it, and FITs without a default
-> keep the current first-listed behaviour.
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 
-Hi Simon and Tom,
-any chance you can pick this up for the next release?
+--7IG1vGB+FFIf0lNT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
+On Fri, Jul 24, 2026 at 05:30:17PM +0200, Carlo Caione wrote:
+> On Thu Jul 9, 2026 at 12:48 PM CEST, Carlo Caione wrote:
+> > With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
+> > configuration matching the most specific U-Boot compatible string; on
+> > equal matches the first listed configuration wins and the configurations
+> > node 'default' property is never consulted.
+> >
+> > A FIT whose configurations all share the same base devicetree compatible
+> > (e.g. one manifest carrying a base tree plus overlay combinations for a
+> > single board) therefore always boots the first configuration, silently
+> > ignoring the default chosen by the manifest author.
+> >
+> > Break score ties in favour of the default configuration. A strictly
+> > better compatible match still wins over it, and FITs without a default
+> > keep the current first-listed behaviour.
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+>=20
+> Hi Simon and Tom,
+> any chance you can pick this up for the next release?
 
---
-Carlo Caione
+Ah, so I had read
+https://github.com/open-source-firmware/flat-image-tree/pull/59#pullrequest=
+review-4663326599
+as requesting a change in wording, but I guess it was acknowledging a
+change in wording you had done, so I should grab this soon then, yes,
+thanks for the reminder.
 
+--=20
+Tom
+
+--7IG1vGB+FFIf0lNT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCamOKcAAKCRAr4qD1Cr/k
+CuElAP9+PpO+r5Ljn3BW7+iUxT97kRsLWWR2H2UIAK4QsX4SNwD+MnjzQOGrBvf1
+DF+UhYse9GDdyqkN53m6JBSE80Ek3AU=
+=CwTu
+-----END PGP SIGNATURE-----
+
+--7IG1vGB+FFIf0lNT--
