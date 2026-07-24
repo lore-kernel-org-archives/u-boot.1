@@ -1,158 +1,188 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B7EFC531C9
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 18:04:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938D6C531C9
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 18:08:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C9A3381222;
-	Fri, 24 Jul 2026 18:04:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CpHoK1W3KIgK; Fri, 24 Jul 2026 18:04:49 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8224780FF8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784916289;
-	bh=pRiVUCteOy2fnTODMY90m8FPML1EkQx0iGJ/VMITAGY=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=XfNntW4SwqPxLoqSWLBERLBOPKea4U21aPwfLriJPZc9AeOTG90fPtFL2l2+SeIRi
-	 vTOxdy+vrIg2Trpj6Koq/VKmH73iw6g3QEzp+IYYZFAHs+t15Mo+bI3MPwSeQO+yi+
-	 OABgz1bVTVBhIkVQ/805tiOE603hCaxg4ABMWNbIC5fHpi+z+9dHtWYPTPX7RffVff
-	 eg1DANF9ZEu5cTylcoEjqJuhSCfnPmOizAiaXqu6bDareklUUSowprjoawwqgVrZem
-	 OXAXghtkqDvpCwGEA09zhH+X++6SZB2rBmI5a12jiR/D4d6yX8BoVXXBALeJ4iO1rA
-	 z8GLtPkEml/ow==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8224780FF8;
-	Fri, 24 Jul 2026 18:04:49 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 70F1F350
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 17:36:04 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 568E8608C1
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 17:36:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 44C1C60B9C;
+	Fri, 24 Jul 2026 18:08:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eKNlfFwG6s98 for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 17:36:03 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c100::f;
- helo=bl2pr02cu003.outbound.protection.outlook.com;
- envelope-from=nathanw@msu.edu; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 55425607A3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 55425607A3
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 55425607A3
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 17:36:03 +0000 (UTC)
+ id QNbv0m-BH1hV; Fri, 24 Jul 2026 18:08:47 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DC4C260B99
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784916527;
+	bh=1rHSz6/EADzl5jeXqyugvXg97JQDF8h8IlH5BjglRWQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZU770uTce1BU/gu5PQSohuqSZoS93EEh2dQ0fKg0cFbNN+zsBR1GDXW490R7fp9y5
+	 LQ1VylJZRdIM5HyHpcDiGqo/zrUGfiPOvcyu/YWF6vlky11tSADAoAigJfmi0tTO9H
+	 A3jy87/wVpaoY33lGmcKcVBgcCmiZ+Ex9FdtSkJGaMRiP5ZeCJ/sEnd8JDFMg2PaIB
+	 cNbt7wjrBEAMB0U6S0UYUcsYC3AvUVuyEg8kgWvX5cCE4NH036jqIORaX2Lcv4IjGv
+	 7/WAI57Plac6HZKHYBE8WXvFeoe9G4FFynoFUS7B5OdvMZbsRHSrLHp8r3IkTj2AEI
+	 A3OEV3Jz/Xafw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id DC4C260B99;
+	Fri, 24 Jul 2026 18:08:46 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BF6293B1
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 18:08:44 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id B0B2A400AF
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 18:08:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YiOb3VGsTsYQ for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 18:08:43 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 65A1A40083
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 65A1A40083
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 65A1A40083
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 18:08:43 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A5A1C846A4; Fri, 24 Jul 2026 20:08:40 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D151800AE
+ for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 20:08:38 +0200 (CEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zElMC2LourtjLzdt9Sv8+vZghovw/UsZiyH3CNtJ/ziWLux5eCVc9Ecjo0mDS5k+lDEAL7SGlZFWC5tMS68lVXT9PVi8BDo21wlrMdBOJATfw+GNCR/7st2+ZqeyEFlBDuuDMBGSQENBmCNAoVua6vJSfmMpq8INohQvWzgsqDj6SD2i281Qnq8ZP5NjhPd08p5DcrPZtIRcUTn34tP0FOJnz8+TevKY3eMChnB46JTZJaJp2uMTnooNYfOhoskg9z29ThPOfs+sx8lPHPtTNMsRowFN0wd6mrLJj3zB6lrT+/Z194EVWr57Bkcc1cSKeKo6gIVUs7a3fQvnQ0K5wg==
+ b=FmDXbpqGUhGax03X++0m+iIOqjXm1OBdK+Efpewl+bui88u74eOUa0kt8Tykp/M0CXJLVmlLSew3OBMwK13kdRY+YD/7ZtX3kVh4FZ5dX1DxRc2dZGvKWgwAwgNFuPaykSaADB6XgYAFsZvkHMxs5FqcmsalQ9XYuvAlZV8rbSmfNTf0ZNQY0XUQ/e2CW5n455vx+d6caxrUU19aJQAy46GJbz3kU0njTBZGEwJ47OlFZFv4ZKi8ZyenaKt9KgC2YpWTfI/r7K3VXDfxdJU5KZo4xR22eRz9vnBp4kFIxRi8gNMsZ4Ti8crR6pYn2X+TaDweItRQEfdseZUD4ATTbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pRiVUCteOy2fnTODMY90m8FPML1EkQx0iGJ/VMITAGY=;
- b=WtQGAItl5EJmCG+qYbLlK5cMpZAG60of9EKo2pZXiugSBruqv+t5+4UddV0CerQnjPlWgynFNDP/3NsWxMCKQ9W85R6byinVafEwXwm2rg+kP3sAfpaLp9h25fPThr+i5wXYC7P9w3SdDoyuiMJtGU3WCmnSSq5MOJGZzt3xZkdGjk+DJU0v2XxUKYmUFFybQ7wKZkymzyILaINOUb1ODZWE6EhyvxGrkkOrHVEO82pcjFKSDCyTlpNlWoAXW46NE68K2JAVpEnupzhssOjbtO6Efc6bF8UVb5F1wRh43Tce+fnuaNDnD7mJhczi+U2bZr3Fw0PWaQgn5HssdiyyEQ==
+ bh=1rHSz6/EADzl5jeXqyugvXg97JQDF8h8IlH5BjglRWQ=;
+ b=g8LEF04WFvy1iRawGXWWA886MB3gxejE+Sv2brKeePELr2T38W1WwZ4Qh+MmNkVrpMHGxvnk500HXTngOlfXng9xZkGcleH8CScsCzO9+k1j9l3vcyniVvP4w9LK6YIsyDElwOSlcohArGyCSXTpVCIrnSxEychuUZcTjfuwQhPbobg9hfa+AED4ElQQeJoZQk1neNsBe8zVxrmqbFpDI6dMK7aRAj3KLLuKMN0fWepE+8MRuwaW0JhjO/RuEMQTM0e9JO1XqvF855ySrFwMJCa6u1Z185JxGyDG2nF8x3XyoNEF+TUkDUXQuCvJPbUjGwekQcz9hNRgYEOm15UWpQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=msu.edu; dmarc=pass action=none header.from=pa.msu.edu;
- dkim=pass header.d=pa.msu.edu; arc=none
-Received: from DM6PR12MB4337.namprd12.prod.outlook.com (2603:10b6:5:2a9::12)
- by MN2PR12MB4045.namprd12.prod.outlook.com (2603:10b6:208:1d6::15) with
- Microsoft SMTP Server (version=TLS1_2,
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AM0PR04MB6913.eurprd04.prod.outlook.com (2603:10a6:208:184::24)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Fri, 24 Jul
- 2026 17:35:55 +0000
-Received: from DM6PR12MB4337.namprd12.prod.outlook.com
- ([fe80::b412:1b80:dfc:18c5]) by DM6PR12MB4337.namprd12.prod.outlook.com
- ([fe80::b412:1b80:dfc:18c5%6]) with mapi id 15.21.0223.017; Fri, 24 Jul 2026
- 17:35:55 +0000
-From: Nathan Whitehorn <nwhitehorn@pa.msu.edu>
-To: u-boot@lists.u-boot-project.org
-Cc: conor.dooley@microchip.com, jamie.gibbons@microchip.com,
- Nathan Whitehorn <nwhitehorn@pa.msu.edu>
-Subject: [PATCH] riscv: mpfs: Read and store FPGA design information on MPFS
- hardware.
-Date: Fri, 24 Jul 2026 13:33:50 -0400
-Message-ID: <20260724173547.77823-1-nwhitehorn@pa.msu.edu>
-X-Mailer: git-send-email 2.54.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: CH2PR20CA0009.namprd20.prod.outlook.com
- (2603:10b6:610:58::19) To DM6PR12MB4337.namprd12.prod.outlook.com
- (2603:10b6:5:2a9::12)
+ 2026 18:08:35 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0223.017; Fri, 24 Jul 2026
+ 18:08:35 +0000
+Message-ID: <f634dce5-0d15-431d-a4f7-68b2252332c4@cherry.de>
+Date: Fri, 24 Jul 2026 20:08:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: rockchuip: rk3568: remove HS400 from device tree
+To: Peter Taylor <me@et1.uk>, u-boot@lists.denx.de,
+ Tianling Shen <cnsztl@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>
+References: <9f135129-b2e2-4030-8a72-8c5facf71f27@et1.uk>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <9f135129-b2e2-4030-8a72-8c5facf71f27@et1.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIUP296CA0119.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:350::12) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4337:EE_|MN2PR12MB4045:EE_
-X-MS-Office365-Filtering-Correlation-Id: ab8adf86-98c6-4ffa-4df2-08dee9aa03eb
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM0PR04MB6913:EE_
+X-MS-Office365-Filtering-Correlation-Id: 946cc9c9-9733-4653-24d8-08dee9ae9459
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|786006|376014|366016|10070799003|1800799024|56012099006|11063799006|10067099003|18002099003;
-X-Microsoft-Antispam-Message-Info: Pl6HUKWWk7sbgSzeM05tu/gmy/mq8uSRCOa4RpSCjrlBhCVml6p21C/dYvcFvsFb780v0detFW2iIDDbLxUfem5pzg+JSyp9Bff0BgUAR5o1tXFLFeiivqQ6fmh+ovHyA9brA+amgZcg3HDDqeUSfPhFSOfZ3ufcuqu6XfUi8bVcDx2F+xLYj7LvptfuALg2v7w8qqn3webelnLkqDrwCIKQ0CUu9LqSDzXUfr9LjDfF7a+GfjzfxCNZc2+VUb47aaIENp37bqwn1b/U+zdKE0JXRAYl/GSkEL8s1mF1z0zpsKDiTh+KYssW/i7Cx7bnSdD9yNiqUBK11G4BxTLtmb2oBLKfb7/6/F3Rrk9An4scNec4Mt8Gjtd6WhnqocbC9w0pWtpVeDRT+5MuHVvyuFmLIS5MIxKZqfAUq+ufOXk1LCXORA+qGUB31x15Lph41nAqIdobJ+S5KprjyjkqjlZQtPrNZjCLa+0/bk2O8qWO0NbuwoMQu/vK1dKJHNhYVwhQNaXylyn7K/8wkCV/jWEG/+bv5BmdZw1aHgxWa9kRFZlJ7ufPB3be4eii2/KodQuuBZminH4KiqN5uT9lzzFnob0Y1iguJWdTdZ930t/AUJi311YU9Noel0REnDfC1jMwGzj+pTh7C88YRC9oqkilT8P8JhjrWgBb/wn4Y00=
+ ARA:13230040|23010399003|366016|376014|1800799024|56012099006|11063799006|10067099003|22082099003|18002099003|4133799003;
+X-Microsoft-Antispam-Message-Info: gbRms3qJGsrdw1H/Kp4Upvv5YKYIHUndLFxv0X2n1slVRhaLDv6mOS2EV7G7c60UG62GQRtQMUuFuqojlH4b4t8BHuHSjvAA5g48Ntt2ahP8pxPagTLvBBRJEKjjxKbROPhUYh9fIh0uw/sNotPSH4cZfiSLAnk/BTMX3YRzc3AE8lOctqxq2efNuf+qX6Ajn0f/e8b8T2I2NX9/Sg5bUUo/+dYE7WlfRLHBthTgmydJ+gWGnDVpWQESuLlWbbea3PTGONF7wuS8p8wdYurgHtNXIc+/CVoHuMBS4/WdY2E9+5G1XFpkLba1EzTD8xbNI8V3lgqJLJdkHa1IMfxEBV+KYHz5zeGt7GTXyrVdzikGG6gRzEixASV1IvM8gqhV6kRHdbibE11P6pKunGI2Yb8xw3jwIXpEmHbK3U3LgAXDZEiWSlz0+yv4BT7m/u/qU8l+dEl5WADer+W7FvTUVBJ+yIUZEcmGPKRFR28ICjUd8gAPAnL0ApSGVKVxRLOKakP4gF8Cr2qCYGVEnqkMgJbeZoo748pYadFW39DUjQfd1iQPp/YU2/UHZ+6FNApHClk4dbIhNY0tkPQvxxGc46CFqqIX5G8im6YLgd0qyeMqI5ek+GvFFjqD9Vok8LiR
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR12MB4337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(786006)(376014)(366016)(10070799003)(1800799024)(56012099006)(11063799006)(10067099003)(18002099003);
- DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003)(4133799003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?cpvrJn10nVVwg5t9HqSIztk2qkRyUVnAQyTdrqV1jc5CALNhsGlmUCSI2o79?=
- =?us-ascii?Q?Tur7Iq//eDPp9sJQrpA3mJVoKrjBTmySnK9L/dbUuWYCioOuSqiDxpUvsJaP?=
- =?us-ascii?Q?8ztaGkmiLyLegF0qfYbOPrnWMmVsGirGdiB+uI8RQRqW+4PWSvniNuPZBEbS?=
- =?us-ascii?Q?A8dFmhTlkvrcTyO7+kD05mReBB+pYV+AocMCEbyuNAjFldqT9s9LACEkL09B?=
- =?us-ascii?Q?hC4wlBNUnN2R/awv5X/DZWHfD3NM4ETUniS3V9bnIs3J30gYpPlTqwD3hB4V?=
- =?us-ascii?Q?mBYiKKBmByVWqOidJS8hTxR9ARP2iWYeVsY5SQTJPu67votWX6e1D5WRYay0?=
- =?us-ascii?Q?SnMO5joke5ynH/yBOAqlvxOcxMc0MFkzeqkezAte49/v86C20k5eB6Vp7PaB?=
- =?us-ascii?Q?BB2cn16OvbTH5HI5VWynFIXvG1xY7W1P2fGx67qdg8teglgK+uYsjFZGvUdJ?=
- =?us-ascii?Q?JS8i5x/bP8Z4T/jJdSQCGSxXx+cOo8DV9jlpPoLQRtkfR6CijRaxrfdlvKv5?=
- =?us-ascii?Q?2/nVBCPUZdlSyM/h/WEUjgzI8LQ8ivi07sVUIWmCQflCQqStexTXWZc+0erq?=
- =?us-ascii?Q?kkDBdni0dqfvAIwQIwtY/QKb6ytNqqcK0kL+4V2kggfJ/GcCnTFAK0t3gLcp?=
- =?us-ascii?Q?u8EmAZD+q9KJRsQkXa73X5NVfxzojOebO0ZVR2UuRdYEXfPX8f3NzA4Baze5?=
- =?us-ascii?Q?Y751h59pOYqYpak9B5mpvzlvGAvX8mjoA7i4tB0RtRU972HEOKSbNR1OskxY?=
- =?us-ascii?Q?9o7WJqiwZfOgcYbGX1WcQLSkUuC5hhmMqB4nTBuYN/FSdVKoqe7DJa+kbkpZ?=
- =?us-ascii?Q?0Wh63ewgdWAAo9RQn/w+QF2DwIE31GGuIdPlptE9pXvgXcESTFm9/kacZPZO?=
- =?us-ascii?Q?SGsSKRc5XxCsJX8zPs03T6GY0dKBs/BsWIxu7RrEMsV/dTpQoraSjDbdaC4c?=
- =?us-ascii?Q?tuIvNFR5NXkUCVm0eP4o0sOBmhzoSVQcQK3ZL3ZthDQOvdCcZmW5f3Vu4XQf?=
- =?us-ascii?Q?MgSXwiFIQEjJmhCtbkVGS8EIxRI7C9/3LLQAk8opxnCiwHwxooM3RXr2ExVw?=
- =?us-ascii?Q?OMtGvos/OFVLM3NNIxmSh/Xae53oaMlP8trLqcm+xIvXhJ5cYk8YAP8INc+9?=
- =?us-ascii?Q?noP/pMXnpi2A6/+m4rBewJVNeLCN2mUwCE06MrXVmlLwEx8HAdYnt63pZM6T?=
- =?us-ascii?Q?KbHFZTZJudTe9QFAqDdxF9PWnRTHytzEbV7pyz6/+q6izR8wrB8cxwlUo9Vs?=
- =?us-ascii?Q?aHeSMxPQZyhRaw8aH1sCirS9/baxBfwIFE2BqwSdjw3S1fDbk9DQE6GVcxxd?=
- =?us-ascii?Q?zhOFyI5DMhOp2KkSHcJnNPZrXO+HayVknAmDe3GhdfOpKzv7HbVSuZfajxOZ?=
- =?us-ascii?Q?uJ+04k0UQPuGJ1j0E3xL8GuNCdoHyxHKdJVRqkpx8Ep7GZr0nbn9YH3OGveL?=
- =?us-ascii?Q?Wo6jVtPC6r7hyHFAe783I0jz8iYU8EnBauJguuMoAHkSrEplkXebjiY+SVfv?=
- =?us-ascii?Q?t6cgJzXDtbYqQLeVpXxDZ9QFTuRTf2Bthw1NJjfmSRb3MxObVU2n73K61//W?=
- =?us-ascii?Q?Gmo6dmzH6IdXMYxX0e+udKZJoV979mBDH0Zoryrg8Rm0yk+D50ZE8EvkRYht?=
- =?us-ascii?Q?dVZ0wC2QGudgRjz/96CXIpvUFzQaFS/q+CsT7jnc/R+hiGVmqW2SGCkurAEa?=
- =?us-ascii?Q?FHTYcYgmVUMdynoBiqAjTmKgbw9uH/CPqlIH5mX3n22aNzXK5WJD9qkfPL5x?=
- =?us-ascii?Q?5rhC12HJdg=3D=3D?=
-X-OriginatorOrg: pa.msu.edu
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab8adf86-98c6-4ffa-4df2-08dee9aa03eb
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB4337.namprd12.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ejI0ZU5LL3NyTHhKQWplcHZjQzRqeTVjb0xSeVV4NzN6RkNrZEw2YjRrSlN6?=
+ =?utf-8?B?cXd2RjNCVHJFZzUwbkRGbERlWEJ2ODYxMzBKVlVBODR4d1J3aWt6WXZTbytn?=
+ =?utf-8?B?NndMOE9QMWZRMmM0UWRKd0gxbUYxaG1lNEliUFFzS04vUUZic1IyakFmSGF1?=
+ =?utf-8?B?Nlord2Q5dUF5L3FyZERGT2ZqQnpVOG1CZFlkVnlLZE9wY3VIUit6Q3hOZDdQ?=
+ =?utf-8?B?UmlmMFpNRG5udDVubWNISVFaR0J2NnBRM09MT21ad1FlOUIzbkFHTmcvQmlH?=
+ =?utf-8?B?TFhUTXIvcitGNUpTSVBlWk5GSXYweUV6eS83a2pSMGFTaEdtd21pZ1JLSERY?=
+ =?utf-8?B?WG81N2Rtb2JiK051d004eVVqZEdxRCtLOGlMZkJIS0xFNElaYUFKT2M2MmNX?=
+ =?utf-8?B?QnlxUTdDZEFhbWtiWVdWRHk2akNlSVB0SXkwMkNqS08wMEJENmFVbG1zTDMr?=
+ =?utf-8?B?aFhwSEJtVW4wR295bkNLQWZyYmNhN3Y0c25hV3BFRnE5RGllWnlGK1ZsUWN6?=
+ =?utf-8?B?RHgwbGZlUEJoQnZ6QTFFempNVUlsSFhLZm85Um9EZ3A4UVpocHRFUTZacFhP?=
+ =?utf-8?B?ZThQMzlEY0QxSU95V0tWdVEwTEFqNmtRNjM3dWJ2MzFqUFB0aW0vTlVOQ3Av?=
+ =?utf-8?B?S1dUdmlJVmxKZ2hkclRmUU9WcXVzK1o5WTJabW5BbGFjR2J0a2E0bjFwRGhU?=
+ =?utf-8?B?ZEFUZUJEeHhLNWhkcnVSbDdia083UWxlaW0rb05EQlBaT0dJVlRET0pkcXZK?=
+ =?utf-8?B?M0l3cXcxQk56VEZYU3pDcEJNZ1VjdTN2cUs5Skg1UkJ1SzV1SmVYMFhNVmt1?=
+ =?utf-8?B?eUVSZGZ5QXdwb2N4Zk1OYjY0WC9ITDFESUlqdFhvSk1tOWRlSVQ5STRTRHc1?=
+ =?utf-8?B?V0U1cXZDR080eklyWDMxWUViN2p2OG9iRzk2N0E1a0RYSUQwMnh6Sm1lbzc4?=
+ =?utf-8?B?RFdEOEpScjU2YkI4QnAwYnlzbVFjc3dUTDNtSnduT1VDbm9uaVVJYkpKcDFj?=
+ =?utf-8?B?UUMvOGR1OVByaDAvdXp1YjBZQ1l1ZE5hTTdySVd1a1JWcmlHMzRHWW9mUTZs?=
+ =?utf-8?B?WTVOb21zY1E5TjdPakdwU05hTk90c2F2VmhFNzlEMU54T1c3ckg5VDN3eUIz?=
+ =?utf-8?B?djFuRlB6ZkpGVTROaHBDaGxWb3dFcW04aEd2UzUvei8vQ01rR3Jhb29MVDho?=
+ =?utf-8?B?ZnlpNXRnK0NjR21uYWZGeHl0WkVvaTJZY3hPczFUalZVMDR0Qi94ellMSFlx?=
+ =?utf-8?B?WU01UDRaN20xdFNJaUFRdDdhVzhlK04wRm90WFpCSmptSmdyN1J3VFJnb1NE?=
+ =?utf-8?B?VC82cWdEcnRXWVNwbkhhZmtuNVpuSVcyc01aaDhoLzBqb2diTzhIdkpJZUdI?=
+ =?utf-8?B?ejY3U1lPVDJmNlVWWlppVlJzTS82dFZrZldBZjAzTnJRdmpURkI2TFVmRW5t?=
+ =?utf-8?B?VXBzai92d0ZEVDhVZEJDRE41cWQrNjZhc2JmMnhhODM0YmEzejhsQUFKR1BJ?=
+ =?utf-8?B?dDBoa2FGL1FQbnZNeDRURGgxYjFDaWJFZFFrS3RKaUNTOWNITGZFa3A1Mk1T?=
+ =?utf-8?B?dUUzQ0R6N2RwMkQ3SUZLMVFCQlBkeWRuMENGdHhZSGsvclZnajZwUCtKcU9H?=
+ =?utf-8?B?TEpucEtrSmhRNGx3YjcyaE5TelVQaHppWEdTMiszY3dVSktKZ3I3K0dYNnVT?=
+ =?utf-8?B?NHd5cThOWDFtcXNWeldFbkdJb3pqNXBqbzFYWXVWY3hDc3huTzF2VzhjSnpj?=
+ =?utf-8?B?SU9pMHlaVTRqTFhYUFM2Sng3WXJvWGwyVjlmYThieEQvdzZudXB5dXZjd1gy?=
+ =?utf-8?B?d3M1aExkbHBMVVJXa2kySHNYaXRiSzQzK1d3bU8vbGVwN25OallPQ2xFcS96?=
+ =?utf-8?B?bGxmaksvTG1COU5TL0kzVlR6KzkrUm9qQzlseUNOR3RIUG8wZ2FnajZodGJO?=
+ =?utf-8?B?ZmtXbjhVN0ljclFtUHNHaXo0NWdWRU1MUTFUb2RURGJnckFhYVdhNFdkNzgw?=
+ =?utf-8?B?Q3c5VFhuR3JZMGVYM2ZzWW9UeWhxaGpnbUl6SlNIZ2RoVGl1QitVQ0ZnUllS?=
+ =?utf-8?B?cm5WcEJaR09FTXpYSFZrazNhUFdSOEtrbGNBVmJmNEtBR0FkM2pqNERrcElz?=
+ =?utf-8?B?RTVYK1BLTXR2TTNJbW14Y2w0RGU5d09GMUQ5OEU4RExxVEI2bkdYYk5Xa3cr?=
+ =?utf-8?B?SEQ5RExnb0NGWFNQU21RcVVsWEFlWmI1eU9QRTdiV1dVRHFmN3lFWXN0a203?=
+ =?utf-8?B?b29GZmlGd0loYVRIcXNpOXFVazNOdG0rS0tKRTY5OE1zOXZEbjY2d243Z2hv?=
+ =?utf-8?B?WUFJSUljQTNjcDhjcWxFcm50dE5vNUtEQzVYRHNnQVNVRDdITXUxQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 946cc9c9-9733-4653-24d8-08dee9ae9459
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 17:35:55.4431 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 18:08:35.6803 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 22177130-642f-41d9-9211-74237ad5687d
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BOtoPduqsjDrY3H0pGgNbKbiW4AEsZZvZW+RyxsUh7yCNZNBZ+g3cSgETOLo2Efy
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4045
-X-Mailman-Approved-At: Fri, 24 Jul 2026 18:04:47 +0000
+X-MS-Exchange-CrossTenant-UserPrincipalName: V6SxJ7tvdLRyBSqyg8uHeiUb17cCKpb11eL8oUy/PtYBpTgZwhUZUey61dZcPh0Qgzi0t1CPJ3VbzjCbAQCyFS60NRxLuHxjey3rL1VkXOg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6913
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=pa.msu.edu; s=selector1;
+ d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pRiVUCteOy2fnTODMY90m8FPML1EkQx0iGJ/VMITAGY=;
- b=zp1KhgmX3Z/EQeuTfAZJAJIIdmbWRrMx1EGTL3bULFx8Sm747eLRt8/NHN8nzzm7n0wglBfGdPam2vu5I+C2LpqHZkv729hlMAgILNzgtH7ebImZnbS7uOEZDuPMho1+0dC8TNISPlFkWwg0tVjNDt7y2gZb3cehDLWXqTavlnLLOCi74W8eq5USyw1yh0xFxmYi8hMeC90k0UVkffpv+91dk2nY8JBOe9eyMFUB7VM+wcJRDMRnUbRO5EBSfoR1xFckKrNah9WigQFGgqW6lDWhWyq6kGeEoErDQAioEPK2tm1jLfN/cbVB8rZSohxY5DMCu6FovP61sM3O/tBqZA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=pa.msu.edu
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=pa.msu.edu header.i=@pa.msu.edu header.a=rsa-sha256
- header.s=selector1 header.b=zp1KhgmX
+ bh=1rHSz6/EADzl5jeXqyugvXg97JQDF8h8IlH5BjglRWQ=;
+ b=fpgzneR/LTgMis4tp2bbG9gP4H/prsiycZMSgrQqWgJn3aBHR9kQIQG6kQxlvR+J/9KgwRlm/5oX634pkSl/MG1fYY+7YLcKSoC2du2E5JIsv5bENF9eFhVDw64Rhm5OCse5VsQXKsDk/OUa8SCK2q473owDdVA1KwDNXTXp/78=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=fpgzneR/
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@cherry.de
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (1024-bit key;
+ unprotected) header.d=cherry.de header.i=@cherry.de header.b="fpgzneR/"; 
+ dkim-atps=neutral
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=pa.msu.edu;
+ header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,168 +197,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-When working with systems with multiple FPGA firmwares, it is sometimes
-useful to be able to use the same U-Boot and script conditional behavior
-based on the FPGA firmware ID and version number. This, allows, for
-example, flashing new FPGA images without flashing the bootloader and
-letting U-Boot and the Linux kernel adapt appropriately.
+Hi Peter,
 
-This does three things with the information:
-1. Prints the FPGA design ID and version to the console as part of U-Boot
-   startup, which is helpful to a human working with the board.
-2. Stores the same information, plus the already-acquired FPGA serial
-   number, in a new set of environment variables (pf_serial_number,
-   pf_design_id, pf_design_ver [the version], and pf_design_backl
-   [minimum-version backlevel]). These can be used in a U-Boot script to
-   load different kernels, device trees, etc. depending on the currently
-   installed firmware, which allows U-Boot and the kernel to adapt
-   cleanly to FPGA firmware updates that change accessible peripherals
-   etc.
-3. Stores the same information in the device tree (under /soc) as
-   fpga-design-version, fpga-design, and fpga-design-version-backlevel.
-   These things are also available through the Linux system-controller
-   driver directly, but it is handy to have them in the device tree as
-   well.
+On 7/24/26 7:09 PM, Peter Taylor wrote:
+> [You don't often get email from me@et1.uk. Learn why this is important 
+> at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Fixes bug when trying to change MMC partition table on linux.
+> 
+>  From the linux-mmc mailing list [1]:
+> 
+> On 22/07/2026 03:54, Shawn Lin wrote:
+>> The RK3566/RK3568 SoCs only claim to support HS200.
+> 
+> Removing the unsupported HS400 lines from the dts fixes the
+> issue inside linux.
+> 
+> [1]:
+> https://eur02.safelinks.protection.outlook.com/? 
+> url=https%3A%2F%2Flore.kernel.org%2Flinux-mmc%2Fb01a6658-e575-42e6-9520- 
+> e8bb55d0329e%40rock- 
+> chips.com%2F&data=05%7C02%7Cquentin.schulz%40cherry.de%7C93fac56f7f5d473701ce08dee9ae0fc9%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639205131301445509%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=3CtLjHYHiAJ4%2Bz0hDQd9ppih5Dme6sENTfMwlYwDtw4%3D&reserved=0
+> 
 
-Signed-off-by: Nathan Whitehorn <nwhitehorn@pa.msu.edu>
----
- board/microchip/mpfs_generic/mpfs_generic.c | 31 ++++++++++++
- drivers/misc/mpfs_syscontroller.c           | 52 +++++++++++++++++++++
- include/mpfs-mailbox.h                      |  1 +
- 3 files changed, 84 insertions(+)
+A similar patch is on its way to the main branch already, see 
+https://lists.u-boot-project.org/pipermail/u-boot/2026-July/626105.html 
+and 
+https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/f079d8059da9eae96c1a4738e2f42c2679d9e09f
 
-diff --git a/board/microchip/mpfs_generic/mpfs_generic.c b/board/microchip/mpfs_generic/mpfs_generic.c
-index f57f5f4046b..469e914e083 100644
---- a/board/microchip/mpfs_generic/mpfs_generic.c
-+++ b/board/microchip/mpfs_generic/mpfs_generic.c
-@@ -114,7 +114,10 @@ int board_late_init(void)
- {
- 	u32 ret;
- 	int node;
-+	int idx;
- 	u8 device_serial_number[16] = {0};
-+	char serialstring[33], designid[33];
-+	u16 designver, designbacklevel;
- 	void *blob = (void *)gd->fdt_blob;
- 	struct udevice *dev;
- 	struct mpfs_sys_serv *sys_serv_priv;
-@@ -144,6 +147,24 @@ int board_late_init(void)
- 		return -EINVAL;
- 	}
- 
-+	/* Store design info and serial number in environment */
-+	ret = mpfs_syscontroller_read_design_info(sys_serv_priv, designid, &designver, &designbacklevel);
-+	if (ret) {
-+		printf("Cannot read device design information\n");
-+		return -EINVAL;
-+	}
-+	designid[32] = 0;
-+	for (idx = 0; idx < 16; idx++)
-+		sprintf(&serialstring[2*idx], "%02x", device_serial_number[idx]);
-+	env_set("pf_serial_number", serialstring);
-+	env_set("pf_design_id", designid);
-+	env_set_ulong("pf_design_ver", designver);
-+	env_set_ulong("pf_design_backl", designbacklevel);
-+
-+	printf("FPGA Design name: %s\n", designid);
-+	printf("FPGA Serial: %s\n", serialstring);
-+	printf("Design version number %d (backlevel %d)\n", designver, designbacklevel);
-+
- 	/* Update MAC address with device serial number */
- 	mac_addr[0] = 0x00;
- 	mac_addr[1] = 0x04;
-@@ -182,6 +203,16 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	u32 ret;
- 	int node;
- 
-+	node = fdt_path_offset(blob, "/soc");
-+	if (node >= 0) {
-+		if (env_get("pf_design_ver") != NULL)
-+			fdt_setprop(blob, node, "fpga-design-version", env_get("pf_design_ver"), strlen(env_get("pf_design_id")) + 1);
-+		if (env_get("pf_design_backl") != NULL)
-+			fdt_setprop(blob, node, "fpga-design-version-backlevel", env_get("pf_design_backl"), strlen(env_get("pf_design_backl")) + 1);
-+		if (env_get("pf_design_id") != NULL)
-+			fdt_setprop(blob, node, "fpga-design", env_get("pf_design_id"), strlen(env_get("pf_design_id")) + 1);
-+	}
-+
- 	node = fdt_path_offset(blob, "/soc/ethernet@20110000");
- 	if (node >= 0) {
- 		ret = fdt_setprop(blob, node, "local-mac-address", mac_addr, 6);
-diff --git a/drivers/misc/mpfs_syscontroller.c b/drivers/misc/mpfs_syscontroller.c
-index f608d5518b0..ef03ce7b262 100644
---- a/drivers/misc/mpfs_syscontroller.c
-+++ b/drivers/misc/mpfs_syscontroller.c
-@@ -129,6 +129,58 @@ int mpfs_syscontroller_read_sernum(struct mpfs_sys_serv *sys_serv_priv, u8 *devi
- }
- EXPORT_SYMBOL(mpfs_syscontroller_read_sernum);
- 
-+/**
-+ * mpfs_syscontroller_read_sernum() - Use system service to read the device serial number
-+ * @sys_serv_priv:	system service private data
-+ * @device_serial_number:	device serial number
-+ *
-+ * Return: 0 if all went ok, else return appropriate error
-+ */
-+int mpfs_syscontroller_read_design_info(struct mpfs_sys_serv *sys_serv_priv, u8 *designid, u16 *designver, u16 *backlevel)
-+{
-+	unsigned long timeoutsecs = 300;
-+	u8 data[36];
-+	int ret;
-+
-+	struct mpfs_mss_response response = {
-+		.resp_status = 0U,
-+		.resp_msg = (u32 *)data,
-+		.resp_size = sizeof(data)};
-+	struct mpfs_mss_msg msg = {
-+		.cmd_opcode = 2,
-+		.cmd_data_size = CMD_DATA_SIZE,
-+		.response = &response,
-+		.cmd_data = CMD_DATA,
-+		.mbox_offset = MBOX_OFFSET,
-+		.resp_offset = RESP_OFFSET};
-+
-+	ret = mpfs_syscontroller_run_service(sys_serv_priv->sys_controller, &msg);
-+	if (ret) {
-+		dev_err(sys_serv_priv->sys_controller->chan.dev, "Service failed: %d, abort\n", ret);
-+		return ret;
-+	}
-+
-+	/* Receive the response */
-+	ret = mbox_recv(&sys_serv_priv->sys_controller->chan, &msg, timeoutsecs);
-+	if (ret) {
-+		dev_err(sys_serv_priv->sys_controller->chan.dev, "Service failed: %d, abort. Failure: %u\n", ret, msg.response->resp_status);
-+		return ret;
-+	}
-+
-+	debug("%s: Read successful %s\n",
-+	      __func__, sys_serv_priv->sys_controller->chan.dev->name);
-+
-+	if (designid != NULL)
-+		memcpy(designid, &data[2], 30);
-+	if (designver != NULL)
-+		memcpy(designver, &data[32], 2);
-+	if (backlevel != NULL)
-+		memcpy(backlevel, &data[34], 2);
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL(mpfs_syscontroller_read_design_info);
-+
- static u16 mpfs_syscontroller_service_spi_copy(struct mpfs_sys_serv *sys_serv_priv, u64 dst_addr, u32 src_addr, u32 length)
- {
- 	int ret;
-diff --git a/include/mpfs-mailbox.h b/include/mpfs-mailbox.h
-index c0ff327a4ce..5c1ade3e918 100644
---- a/include/mpfs-mailbox.h
-+++ b/include/mpfs-mailbox.h
-@@ -59,6 +59,7 @@ struct mpfs_sys_serv {
- 
- int mpfs_syscontroller_run_service(struct mpfs_syscontroller_priv *sys_controller, struct mpfs_mss_msg *msg);
- int mpfs_syscontroller_read_sernum(struct mpfs_sys_serv *sys_serv_priv, u8 *device_serial_number);
-+int mpfs_syscontroller_read_design_info(struct mpfs_sys_serv *sys_serv_priv, u8 *designid, u16 *designver, u16 *backlevel);
- void mpfs_syscontroller_process_dtbo(struct mpfs_sys_serv *sys_serv_priv);
- struct mpfs_syscontroller_priv *mpfs_syscontroller_get(struct udevice *dev);
- 
--- 
-2.34.1
-
+Cheers,
+Quentin
