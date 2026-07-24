@@ -4,107 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA06C531C9
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 12:25:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32CE6C531F9
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 12:34:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5CFD40B0B;
-	Fri, 24 Jul 2026 12:25:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D342740A96;
+	Fri, 24 Jul 2026 12:34:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xtmOmAqfwuUQ; Fri, 24 Jul 2026 12:25:25 +0000 (UTC)
+ id jOHGiy8V2t6o; Fri, 24 Jul 2026 12:34:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0147B40AC1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0966840AD1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784895925;
-	bh=XvAVIcMOOELdxxKWBbQSf+quBl0+tvjpS4grBtDyW48=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784896461;
+	bh=cyY2unD2DYqa4t+LN2U0XZreyXZ58qNKl6oAuAI0Hog=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=P/MAmt/SQ8LYVimqm4L3hMCvfcnBHzg7PnKcm8SEebH/dKxrWnFxwTTsd6EwaImHh
-	 be4iRrSreHpV1udzwRPPCSgl1U9Vj/OQnvLf4usm0Agg7t/QjtEHZ+Ce/lycRDIoDt
-	 YhQUWy155WqP1az7Jk1nSPj+3GSMF3nHNdAuElyeneB5xU/OeH95e9xnjGm43blYF0
-	 PYEx2YXLQoTeLuViXQniPYpP8xwNaCms/EymcDXwB3DK8aDS0oKQuCpuRjJHfc+HLc
-	 MWMy9WHR45eYggHst+yelPajy/l4vMjlLwhnhT6HFWwkLKAw2HrVpCV7B+aNTsTbKR
-	 UIEnekceB4CeA==
+	b=gBGI8XnYO99++u3W+JX3HFDHWBG8GMnWEO4/dfi35GTAWRidyI0ktzl/PmIqKtz1V
+	 Sauhe02sPcrqgEv0YKAdNje3lC294s9BBUwWxkFda6TSzhrTUp0BCpJxeRhoT/TAzo
+	 DlGithczCuo+2bXVzmkTdBmZawFMtmgCO8yGRJ0BZ8xCZjgGf0VWtOxrIUmTjgdBbR
+	 I2N0xTgyASNMx3+5OmLJ60cVvem531ojkG5GcUeKzFly+wJOIu7meNdb+EI2Kk2IRK
+	 ij7c7q+WYoonQmFEFrtLl+nAzrVe/CnyvZX+81DdJC9dwaej7qvxovKXo+HUhvBLJN
+	 Chr0pNFOl5Ocw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0147B40AC1;
-	Fri, 24 Jul 2026 12:25:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1DF90350
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:25:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0966840AD1;
+	Fri, 24 Jul 2026 12:34:21 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CA086429
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:34:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 039618117E
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:25:24 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id B04CD40AD1
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:34:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4gsiyy4hIGMW for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 12:25:23 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B0C1A8117C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B0C1A8117C
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B0C1A8117C
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:25:22 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4597A83E76; Fri, 24 Jul 2026 14:25:20 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E10C800AE
- for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 14:25:17 +0200 (CEST)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 19EE643BB1;
- Fri, 24 Jul 2026 12:25:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E20A1F000E9;
- Fri, 24 Jul 2026 12:25:14 +0000 (UTC)
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-Cc: Dan Tran <Dan.Tran1@synopsys.com>, Marek Vasut <marex@denx.de>, Lukasz
- Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Tejas Narendra Joglekar
- <Tejas.Joglekar@synopsys.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 1/2] usb: gadget: mass_storage: add SuperSpeed
- descriptor support
-In-Reply-To: <amJwynjvYTMyL5dA@vbox>
-References: <cover.1783620779.git.Thinh.Nguyen@synopsys.com>
- <3f9ff728be6806066dd5d5e69d4e177666b46252.1783620779.git.Thinh.Nguyen@synopsys.com>
- <87h5lp99fw.fsf@kernel.org> <amJwynjvYTMyL5dA@vbox>
-Date: Fri, 24 Jul 2026 14:25:11 +0200
-Message-ID: <87zezg7exk.fsf@kernel.org>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5VFPmcsPeZSJ for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 12:34:19 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::12a; helo=mail-lf1-x12a.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A120640A96
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A120640A96
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A120640A96
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 12:34:18 +0000 (UTC)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5b2a8e4c77eso353610e87.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 05:34:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784896456; cv=none;
+ d=google.com; s=arc-20260327;
+ b=TglarYpdJTPDm7KJ7K42r+bRpefCcl27YGj/Cu2TwJ6OmO8p/KvsnAm5SFcdMZrAzt
+ knRRE+I7HyEBFAeWVmuogNmwgi8YiwW0Ri61/LT3pGKv2ZZzeUeHY7cHiec1ne70UnS1
+ NB3aWESXJUd5bunRKgu6rFTfxf9vVh/MWdFKDavFLeC7h50/mQaJHRcahDVd4PgZhQ4E
+ WOnWbS7uB5S+nR8fbA1OXNYFPsuPwtN0ureQqqxyLPmAbqjcjL40GyD43QnS/e6wYPAF
+ uMhYGZM+ME5ZK+SJ1mTCyWAReTdqm/pFv5YD8YjOmaXxEI9+jghnifAtwlVRFHmcfmvZ
+ EXkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=cyY2unD2DYqa4t+LN2U0XZreyXZ58qNKl6oAuAI0Hog=;
+ fh=wS3dsWetpy8mXQVDBBiByd84rIkQ7fcUym8YwGjFPTk=;
+ b=kVX7m1AKwCjlvdXFCCpRUv3ez+wZJZL6JdJc3L+ErkOH1Lu98KIWMrPKWHZho8W0Ub
+ cJPr6ZnP8F9e2mz3BEO4+pKVMXT1zo7iybh9n7DaDYRThDoI5yIO/wrQBiiAiYckIQEN
+ lfb5BVmEbZmztjmolAMf9OlxRcpBBwcdSW9jEUtjvkM7067puOzwqehUuAuerdEgzzqJ
+ zqEhcbt2kXbQ65dUfSRek07OhyySuQillDiuEqUj+Gbiv6IvGxJxDSqUAoujkaIZzwDS
+ yFiimiUFvidWsV0TwnWKGwAy2KgOhZM7bR+wKQo9LKXVLcXuniLctcdPtqClTdZaMVc2
+ eBzQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784896456; x=1785501256;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=cyY2unD2DYqa4t+LN2U0XZreyXZ58qNKl6oAuAI0Hog=;
+ b=am3fRNTISiBIpPcYUheOqAuEMjEigDdTPUn31BQFL4WpSLZJ9JiRuoqibr9vzGeVUI
+ yDFarCFHtXlvaXAlimKEvmIK8nwNV9nvPh/gHIux45Fj4qcNtQdOvjMDVOYyhA1k395m
+ oWk6YiogLATPEkP9VQa8FkKyo61luVhtNrV2bLTdwPdG0yX1J6ZqW7DB1LHNF+XaO0Or
+ +kgCmWc0kFa0ewRPk5tczLoalwk2aBL4w3HQY/UVle5yWWXo5W2QhokEvMVARmNwRTPE
+ t2owIMmhdUwM3Wsru9HBOpiR97Kw+FaoqHv7/I8c9rR9gcD0y4L++uGGkZhTNIigp/Ad
+ F9yg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rqt86+6zIXKntKGF/W4Ygb39eVRE5WX3SUX7JC26lpmFO1WJxCsbZki2tJiMyUZhGYsMko0+kI=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzwD7eIzYrAeT0G2+HQ2YGGl+n9qxyM4VHMVaYmyzbPsTvPCXJX
+ t20I5qa3WIKdxds/aOPHwfrGjGRkzJe6JwhywkjuP5r+8zeyt6My26NlBeWZO5O55+w4sLgVfaV
+ O1ECF6vliyNyK5P24xIGMMM3W+i3Q1Dc=
+X-Gm-Gg: AR+sD11+5GeoL9uH6kGyQhQOcMt9WV9Ctz5cQEzaiedI6jE1DPQa3J6+T/XiDV/LGLM
+ xdeubTjcnjp5ooEHOhSQz4lVO0iSyv/mE27kfyHMWTixTi9Zq4ifw1nUXcrcsPromSt1Tun2a2s
+ FQseAielNOYOEnmuWLbm8fVX5mzhNtp09Swi59k89c1eB+qlaWtldlwmHw8hBP5BC8HprWElLkg
+ 6al5Wg8Cj+23OBUp4Yu/FTOB0Fo1F0T+DFzfsM/5vfGq+4S7pJM74ltMmW+qC5k1lsOSKhchgKS
+ luTE8PCV8j6LvjsqLGv6NnIU1YuJFMF8VFP7H0/HjnRA1sqDv0E=
+X-Received: by 2002:ac2:5dd0:0:b0:5b2:8ce9:10f8 with SMTP id
+ 2adb3069b0e04-5b2b2f4e210mr1240825e87.20.1784896455381; Fri, 24 Jul 2026
+ 05:34:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+References: <20260716-imx95_frdm-v3-1-bb53481157fc@nxp.com>
+ <CAOMZO5AX2VZJEKw4dyg+d4S=uRNBcOhe4k8ZED9+Q0mv=_a9Lw@mail.gmail.com>
+ <MRWPR04MB121170AD9EADBB588BED27ECF94CF2@MRWPR04MB12117.eurprd04.prod.outlook.com>
+In-Reply-To: <MRWPR04MB121170AD9EADBB588BED27ECF94CF2@MRWPR04MB12117.eurprd04.prod.outlook.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 24 Jul 2026 09:34:04 -0300
+X-Gm-Features: AUfX_myk5CR3gfEObcgaCd8i9sbcF0mSlWD2hrJGtNFUFqoWcxyWX4jgiBlw8hQ
+Message-ID: <CAOMZO5Asxi5JFdfXpsJuN1shOg=Q1eGiDvc0Ywak4mm4Odaeuw@mail.gmail.com>
+Subject: Re: [EXT] Re: [PATCH v3] imx: Add FRDM-IMX95 initial support
+To: Joseph Guo <qijian.guo@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ dl-uboot-imx <uboot-imx@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Lei Xu <lei.xu@nxp.com>, Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1784895915;
- bh=XvAVIcMOOELdxxKWBbQSf+quBl0+tvjpS4grBtDyW48=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=aIn29NyTIS9s0z1IOLUFq/p+1Ni1Jfr9T97KKiwvdcnJZG1eUZhyKw2KpcSPtyrvo
- Hf6x5mbeZORYfD4QMcUI4SHvbKB8c5pPmcAc4Rx9bmjxdEJ6ga2Pq3TgGK8Id9SFP7
- O2+0EVhMCIJNufCxNeFFa2hS8C4iFT8N+MTERa3bZsxrvAjAJ3kmTyL/s98f4nKaB0
- flsXQqa7vBTA2ZODT8c18BCuZolz4FE0zG3RdfeCRgMlTpdJhpRlcetG5bviSL/kFg
- gNYhtkuE26FdGJ3FbXkcM9qF8jgz8Rt5w8HonqZNGDfBiKUV6vKx+5EXfljZoytj2T
- ZHl5qN6WCc2hA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=aIn29NyT
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=mkorpershoek@kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="aIn29NyT"; 
- dkim-atps=neutral
+ d=gmail.com; s=20251104; t=1784896456; x=1785501256;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=cyY2unD2DYqa4t+LN2U0XZreyXZ58qNKl6oAuAI0Hog=;
+ b=gTxNNfwMw0uoCXva6MNQRbpYrChAlbuo37bux/4hPDvbOVx+wNHiVsV6do+V56q+Gr
+ aXCMxJwOFDfFSAGxaNyuj8q4ZqsKC7HG28YKRBF8SN0dusUpWEyGDjk4pWkB0/izrKiL
+ fpS4CfIFO1YzQP8spPrxJtbGIRLA03YwgZL1wGJH1GfBwt8lEn9oLo3k60oI7nZY5vXw
+ BCeY3L14iTK0szLJAUkwBIsBcTsZcYV7zKFM381nkvVrkIJrNypM/FoT0z9qm/DUeWbP
+ IpoRfEopl+mA256NkGy08FcfcVefo2xIS3JYEZrhOECtderXJDLIezs2YINhLMeqc/fh
+ k5LA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=gTxNNfwM
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -119,164 +152,25 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Thinh,
+Hi Joseph,
 
-On Thu, Jul 23, 2026 at 20:40, Thinh Nguyen <Thinh.Nguyen@synopsys.com> wrote:
+On Fri, Jul 24, 2026 at 3:50=E2=80=AFAM Joseph Guo <qijian.guo@nxp.com> wro=
+te:
 
-> Hi Mattijs,
+> > Please help upstream the alias and bootph-pre-ram properties in the ker=
+nel.
+> >
 >
-> On Thu, Jul 23, 2026, Mattijs Korpershoek wrote:
->> Hi Thinh,
->> 
->> Thank you for the patch.
->> 
->> On Thu, Jul 09, 2026 at 18:19, Thinh Nguyen <Thinh.Nguyen@synopsys.com> wrote:
->> 
->> > From: Dan Tran <trandan@synopsys.com>
->> >
->> > Add SS bulk endpoint descriptors (1024-byte MPS, bMaxBurst=15) to
->> > storage_common.c to support SuperSpeed connections. Extend fsg_ep_desc()
->> > to select them when operating at SuperSpeed, and wire up ss_descriptors
->> > in fsg_bind(). Free ss_descriptors in fsg_unbind() to match.
->> >
->> > Signed-off-by: Dan Tran <trandan@synopsys.com>
->> > Signed-off-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
->> > ---
->> >  Changes in v2:
->> >  - Removed internal Reviewed-by tags
->> >
->> >
->> >  drivers/usb/gadget/f_mass_storage.c | 25 ++++++++++++--
->> >  drivers/usb/gadget/storage_common.c | 52 ++++++++++++++++++++++++++++-
->> >  2 files changed, 74 insertions(+), 3 deletions(-)
->> >
->> > diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
->> > index 87ed25e8bb3a..a2f34c100482 100644
->> > --- a/drivers/usb/gadget/f_mass_storage.c
->> > +++ b/drivers/usb/gadget/f_mass_storage.c
->> > @@ -2225,14 +2225,16 @@ reset:
->> >  
->> >  	/* Enable the endpoints */
->> >  	d = fsg_ep_desc(common->gadget,
->> > -			&fsg_fs_bulk_in_desc, &fsg_hs_bulk_in_desc);
->> > +			&fsg_fs_bulk_in_desc, &fsg_hs_bulk_in_desc,
->> > +			&fsg_ss_bulk_in_desc);
->> >  	rc = enable_endpoint(common, fsg->bulk_in, d);
->> >  	if (rc)
->> >  		goto reset;
->> >  	fsg->bulk_in_enabled = 1;
->> >  
->> >  	d = fsg_ep_desc(common->gadget,
->> > -			&fsg_fs_bulk_out_desc, &fsg_hs_bulk_out_desc);
->> > +			&fsg_fs_bulk_out_desc, &fsg_hs_bulk_out_desc,
->> > +			&fsg_ss_bulk_out_desc);
->> >  	rc = enable_endpoint(common, fsg->bulk_out, d);
->> >  	if (rc)
->> >  		goto reset;
->> > @@ -2653,6 +2655,7 @@ static void fsg_unbind(struct usb_configuration *c, struct usb_function *f)
->> >  	fsg_common_release(fsg->common);
->> >  	free(fsg->function.descriptors);
->> >  	free(fsg->function.hs_descriptors);
->> > +	free(fsg->function.ss_descriptors);
->> >  	kfree(fsg);
->> >  }
->> >  
->> > @@ -2701,6 +2704,24 @@ static int fsg_bind(struct usb_configuration *c, struct usb_function *f)
->> >  			return -ENOMEM;
->> >  		}
->> >  	}
->> > +
->> > +	if (gadget_is_superspeed(gadget)) {
->> > +		unsigned int max_burst = min_t(unsigned int, FSG_BUFLEN / 1024, 15);
->> 
->> I can see that this looks similar to what we have in Linux with
->> commit 4bb99b7c82ba ("usb: gadget: storage: add superspeed support")
->> 
->> However, the Linux patch added a comment as well:
->> 
->> +               /* Calculate bMaxBurst, we know packet size is 1024 */
->> +               max_burst = min_t(unsigned, FSG_BUFLEN / 1024, 15);
->> 
->> Why can't we do the same here?
->
-> The comment doesn't add much beyond what the code already expresses. The
-> variable name max_burst and the division by 1024 make the intent clear.
->
-> That said, the Linux comment also has a minor inaccuracy: it says
-> "packet size" when it should say "max packet size". If a comment is
-> warranted, I'd prefer to add a corrected one. We can add it if you
-> really think it helps with readability.
+> The alias only works on u-boot stage. Can you explain why this should be =
+upstream to kernel? Thanks.
 
-Overall, my rule of thumb is "keep the code as close as possible to the
-Linux driver to ease maintenance in U-Boot".
+This is not a blocker, and I can accept this u-boot.dtsi for now, but
+we try to keep u-boot.dtsi as minimal as possible.
 
-Please consider adding the corrected comment for v3.
+The bootph- properties are accepted upstream. Take a look at this
+commit, for example:
 
->
->> 
->> > +
->> > +		fsg_ss_bulk_in_desc.bEndpointAddress =
->> > +			fsg_fs_bulk_in_desc.bEndpointAddress;
->> > +		fsg_ss_bulk_in_comp_desc.bMaxBurst = max_burst;
->> > +		fsg_ss_bulk_out_desc.bEndpointAddress =
->> > +			fsg_fs_bulk_out_desc.bEndpointAddress;
->> > +		fsg_ss_bulk_out_comp_desc.bMaxBurst = max_burst;
->> > +		f->ss_descriptors = usb_copy_descriptors(fsg_ss_function);
->> > +		if (unlikely(!f->ss_descriptors)) {
->> > +			free(f->hs_descriptors);
->> > +			free(f->descriptors);
->> > +			return -ENOMEM;
->> > +		}
->> > +	}
->> > +
->> >  	return 0;
->> >  
->> >  autoconf_fail:
->> > diff --git a/drivers/usb/gadget/storage_common.c b/drivers/usb/gadget/storage_common.c
+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/=
+?h=3Dnext-20260723&id=3D06d40112780e79631537496f37958087ce2704f7
 
-[...]
-
->> > +	(struct usb_descriptor_header *)&fsg_ss_bulk_out_comp_desc,
->> > +	NULL,
->> > +};
->> > +
->> >  /* Maxpacket and other transfer characteristics vary by speed. */
->> >  static struct usb_endpoint_descriptor *
->> >  fsg_ep_desc(struct usb_gadget *g, struct usb_endpoint_descriptor *fs,
->> > -		struct usb_endpoint_descriptor *hs)
->> > +		struct usb_endpoint_descriptor *hs,
->> > +		struct usb_endpoint_descriptor *ss)
->> >  {
->> > +	if (g->speed >= USB_SPEED_SUPER)
->> > +		return ss;
->> 
->> I can see that this looks similar to what we have in Linux with
->> commit 4bb99b7c82ba ("usb: gadget: storage: add superspeed support")
->> 
->> However, Linux uses the following diff instead:
->> +       if (gadget_is_superspeed(g) && g->speed == USB_SPEED_SUPER)
->> +               return ss;
->> 
->> Is there a reason for not doing the same here?
->
-> The gadget_is_superspeed() is a hardware capability check. It's
-> redundant when we're already checking g->speed for connected speed.
-
-So does that mean that the dualspeed conditional just below is doing a
-redundant check as well?
-
-As for the previous comment, I'd prefer if we can stay closer to the
-Linux code.
-
-If we can't, I'd like to see a strong justification for not doing so.
-
->
-> BR,
-> Thinh
->
->> 
->> >  	if (gadget_is_dualspeed(g) && g->speed == USB_SPEED_HIGH)
->> >  		return hs;
->> >  	return fs;
->> > -- 
->> > 2.53.0
+If you can help to upstream these bootph- properties, that would be great.
