@@ -1,135 +1,115 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3242C531D0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 01:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4331AC531D0
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 02:53:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9CCD760B56;
-	Fri, 24 Jul 2026 01:02:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8A084409F0;
+	Fri, 24 Jul 2026 02:53:08 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OaZY87bKBIhD; Fri, 24 Jul 2026 02:53:06 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C8BFB409EB
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784861585;
+	bh=H3hJT61iuRtF7hyMOvQWZKXl2o81xLQRjfsbrQZgn8k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=oHzAozbs84i9ON/hFxHYySbuybHEG8fLMfh6Hgs5bldWHEpEMpCF5/C4qrifc1vpU
+	 juC1RVn5Y7bItHxT1EmCj19xGJ4q04RE4DUY11vNOXKfRikusrugJvNBPKfLdJVuUi
+	 bL04cni4CTOm6bpNcK3Uj4WhUgPp5xd3AVRYcGOHmLvbMbBpQq7hqGLdZZMxCLbIOP
+	 P9JZYqRN63QoJ1IfGA1NGPNbYR41HSE3Vn3NkyGx5u17qTWacq/K4lJJyLJTuLqw7u
+	 qlAnNu9xzSHdv9MMoiiwGNOgDxPAK8Hw+scuJSiws+lK2AwyM3pvhtBA65uOn9IzpK
+	 S6AaDdWTWKFcA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id C8BFB409EB;
+	Fri, 24 Jul 2026 02:53:05 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id F1AFF3B1
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 02:53:04 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id E400E60AB6
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 02:53:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SVeix_IIDWlY; Fri, 24 Jul 2026 01:02:34 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 40BD060B31
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784854945;
-	bh=bC320+lKimG+Hp+Nafl8k2amRHfyRmCgHEJoc3M6axs=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=rTBuUXN64mHV/bZo/2FrsnebdXozlpHuJdie1Qsrr/rlR2luGqR2NmxXCrYji0e+7
-	 WsZq+pJycgODrJJK3zIcgU4OOBT7bXdcyKZGTyc7syZaH1nzt+mvapKM6xwkHrqicu
-	 l/4gkVjhBx9bzJbhq24t1rWyhdHxMajex02tJMdKO/1qJsTDZA6FeFivSAfHv22Pxa
-	 8WIIA/rp1Zy6jxsX/+zAv+WeQgIpSS2HKK44jMNvlUNxf/8t8OSYvzN2aZqBhQ5Ifl
-	 nqfL14E0Z+vkdrv1A0+xyPo6adD2p7ZInvzE7W+dyryY1sXbteUaEtkawIeQPX09cN
-	 9REHx5Z+EA2dA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 40BD060B31;
-	Fri, 24 Jul 2026 01:02:25 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A99324BF
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 01:02:16 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A758C40194
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 01:02:16 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rZlq6P6sTMdt for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 01:02:15 +0000 (UTC)
+ id pL6QYbl8WQpu for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 02:53:04 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2F39F40072
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2F39F40072
+ envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org ACFD76073D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ACFD76073D
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2F39F40072
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 01:02:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ACFD76073D
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 02:53:03 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7773D800AE; Fri, 24 Jul 2026 03:02:13 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5EF1803F6; Fri, 24 Jul 2026 04:53:00 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 682BE80117
- for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 03:02:11 +0200 (CEST)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-44cedfaab6bso417058fac.3
- for <u-boot@lists.denx.de>; Thu, 23 Jul 2026 18:02:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784854930; x=1785459730;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=bC320+lKimG+Hp+Nafl8k2amRHfyRmCgHEJoc3M6axs=;
- b=KCYcgJNKOfjiyOi+2HuBmCabb2vJW94sjP2Tnm9jwPIRSMvjv0MQUTBVn6XSxlGouC
- BYhdPuyaUz6XUt6HMhnSd/p2n1YZipGOA5lvY/TQ3AoDc5m3FJXLD1hCGxvOwvnCq9aF
- VBq8VfhmWxo4ZOqQmeeGmreBBc7m688414yeDSX+kQSkUpJvE8PLYubDpRZ/2z3mKudu
- n6B10Q9Ax1BQqYUQSkUNaz8DVLQG5jovIL/OYRvLPnJgygqBPs5UxqsBIPfZygyQIeNn
- 2T6zYIgkONvYAowU1RH8p73DLSrpRwLCNc6JjyLT659VIwcDXjLSK82/xkn9rz51ycLa
- rhUw==
-X-Gm-Message-State: AOJu0Yy7+F96FgenlHkn2e7qBpGVyISm2+Sg8cx86ZfM6uwnU+XTWmND
- sQ6pFhAwlGW610IL2kUHGujtTzEpAXueAm065bmc3M/LOTYUOeAZiLsMuWsZAcb4u68n585d3I5
- CsY0O85o=
-X-Gm-Gg: AR+sD10GPrgTA5Zqbmf7Lg1sIv3rQ92+BLqG848bolheGOUQQm6BTiB+msGTNyYzFXF
- 7YT2TZo14hILNRIq4V6YrPA8Fmmbpr8jDc6m7wD3YsS1sTfAlI3F+B2XocgQDdfu78SW0177Rab
- 8wZcqdaTQ3nEZ+121JJeci6Tj3kLw/iVYzFPE5SfkYB4o4LyKPSPqTR7cRlkLwnIpVdknZ1/viF
- 7dRs/1mDCPxQdE1QY32n15LH1wGIYH91A38NvNxfo1NMgkSn3MuV/EdKzAtxx/sRfi8P6j/QiYn
- 4oLcd2ekU1QrX0CC48fIb2lqC0rT9/z2bVTt9S0IlbyBxHd527SPH+Zq+3Z0vEI8QXJ/Q29eD87
- zzy3IyyLPbAKemCEA1ltMaMwchCSBoO5rmjfW+eEShhsdfYKpPAsN4mbbdjPMIwm/ykhjvaqZSE
- SWG0MWDicv1r6l2O36JDJhiccdoH9eVxHy9k12Kq4gT0ZME8zAOMaQaLRCRe2bo8QLSv7gP8hpH
- pv0TgwPlfZkibExRYRIdT8S0g==
-X-Received: by 2002:a05:6808:c40e:b0:497:da97:8c7a with SMTP id
- 5614622812f47-4ab3571b2bemr2956673b6e.41.1784854930024; 
- Thu, 23 Jul 2026 18:02:10 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4ab0c7a01bbsm4196177b6e.1.2026.07.23.18.02.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2026 18:02:09 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: Chintan Vankar <c-vankar@ti.com>, T Pratham <t-pratham@ti.com>
-In-Reply-To: <20260713-am64x_sw_rst_fix-v2-1-3e0df7c88a96@ti.com>
-References: <20260713-am64x_sw_rst_fix-v2-1-3e0df7c88a96@ti.com>
-Subject: Re: [PATCH v2] mach-k3: am64x: clear MCU_RST_SRC before reset
-Message-Id: <178485492880.3246206.1129607378996362262.b4-ty@konsulko.com>
-Date: Thu, 23 Jul 2026 19:02:08 -0600
+ by phobos.denx.de (Postfix) with ESMTPS id 60DE2800AE
+ for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 04:52:58 +0200 (CEST)
+ARC-Seal: i=1; a=rsa-sha256; t=1784861573; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=TqDL6Xp5mInMGiJA1yxqtw/+9B9uO8MesV1xVcQQ4SJD26QdMFvBcw0Sc35WYF0dy9orm02Dz4l9XtTtnLs0nkUypGu/HHnmIwivB50rtFnIT3eU8Mzk9d8GYqk6BV8OpfiYZIbE+pb2jgRnht8OGHqWCQsI4xiWJv/rzNl/2kg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1784861573;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=H3hJT61iuRtF7hyMOvQWZKXl2o81xLQRjfsbrQZgn8k=; 
+ b=HI/7n9FIUNtS08+CdsNDsBC73pdLqBWuvHlHI6mdGvBM/aINUNIWihAZql2VBsdD+ioWEqT+lN9HXgewTGHw9BMlkhnkN0IWXX3sj5vaLyPZtxMPiYOrvuLRp6gmafK7ea6LGqd2vnUs8Uwo67Ns/HxAzCqG0nsOGlmkEgj0wsA=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+Received: by mx.zohomail.com with SMTPS id 178486156959488.27876170758464;
+ Thu, 23 Jul 2026 19:52:49 -0700 (PDT)
+Date: Fri, 24 Jul 2026 02:52:39 +0000
+From: Yao Zi <me@ziyao.cc>
+To: hehongbo918@gmail.com, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH] sysreset: esp32: add driver for esp32 series chips
+Message-ID: <amLTd8Mau6tsV7o4@pie>
+References: <20260712074817.18856-1-hehongbo918@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260712074817.18856-1-hehongbo918@gmail.com>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/284.849.17
+X-ZohoMailClient: External
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784854930; x=1785459730; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=bC320+lKimG+Hp+Nafl8k2amRHfyRmCgHEJoc3M6axs=;
- b=be8YsZJQRQ6+1iUFEhcH3oNufa+V/zZ8WT5WicUC1r1Ipj6T0Cu4AtHNZ9+Eb85d+b
- 7Lmu7rdHUM86Vx7CqJYb//A4gENvh43+Kg3H5rYq1H8Q5GeDMf9bSRwWesnoqFyViLd7
- 91e1UGiSPf75P/GsKy60qZ9gzlevQiZH7RaIs=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=be8YsZJQ
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; t=1784861573; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=H3hJT61iuRtF7hyMOvQWZKXl2o81xLQRjfsbrQZgn8k=;
+ b=kZ7JJVnUU6dbBcUQZF06uwwtyg+1CdUBbOTX/ZooRHFdrvC+uQck3deIWnAC1+fH
+ UMIqTwh/nH94yE4TXSMDpsJJMzS4z2N4ZGtF15PZC6Kay6Sdsf6KW3NrPFYee60AWyl
+ pFfokjY57zqxuZQwfv/97l3KLkNIC1/J3BPEeAFI=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=kZ7JJVnU
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=trini@konsulko.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=me@ziyao.cc
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="be8YsZJQ";
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="kZ7JJVnU"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -145,20 +125,107 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, 13 Jul 2026 11:07:05 +0530, Anshul Dalal wrote:
-
-> In warm reset, the value of CTRLMMR_MCU_RST_SRC was not being reset.
+On Sun, Jul 12, 2026 at 03:48:16PM +0800, hehongbo918@gmail.com wrote:
+> From: Honbo He <hehongbo918@gmail.com>
 > 
-> This leads to a reset-loop boot failure when a warm reset is triggered
-> from the MAIN domain (by writing 0x2006 to MCU_RST_CTRL).
+> Add system reset driver for Espressif Gen3 and Gen4 RISC-V SoCs.
+> The reset register base address, offset, and bit mask are read
+> from the device tree to support different chip variants without
+> code changes.
 > 
-> 
+> Signed-off-by: Honbo He <hehongbo918@gmail.com>
+> ---
+>  drivers/sysreset/Kconfig          |  9 ++++
+>  drivers/sysreset/Makefile         |  1 +
+>  drivers/sysreset/sysreset_esp32.c | 72 +++++++++++++++++++++++++++++++
+>  3 files changed, 82 insertions(+)
+>  create mode 100644 drivers/sysreset/sysreset_esp32.c
 
-Applied to u-boot/main, thanks!
+...
 
-[1/1] mach-k3: am64x: clear MCU_RST_SRC before reset
-      (no commit info)
--- 
-Tom
+> diff --git a/drivers/sysreset/sysreset_esp32.c b/drivers/sysreset/sysreset_esp32.c
+> new file mode 100644
+> index 00000000000..3d4c619f44f
+> --- /dev/null
+> +++ b/drivers/sysreset/sysreset_esp32.c
+> @@ -0,0 +1,72 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2026, Honbo He <hehongbo918@gmail.com>
+> + *
+> + * System reset driver for Espressif SoCs.
+> + *
+> + * Supported SoCs (Gen3/4):
+> + *  ESP32-C5, ESP32-C6, ESP32-C61, ESP32-H2, ESP32-H21, ESP32-H4,
+> + *  ESP32-P4, ESP32-S31
+> + *
+> + * On the unsupported chips(Gen1/2), the system reset logic resides inside the
+> + * RTC_CNTL peripheral and is only accessible through the boot ROM function
+> + * software_reset_cpu(). The register definitions are not exposed in the SoC headers,
+> + * making it impractical to implement a direct register-based reset
+> + * in U-Boot without reverse-engineering the ROM code.
+> + */
+> +
+> +#include <dm.h>
+> +#include <stdbool.h>
 
+But you make no use of bool, so I guess this could be ommitted
 
+> +#include <sysreset.h>
+> +#include <wait_bit.h>
+
+Not used, either.
+
+> +#include <linux/io.h>
+> +#include <linux/errno.h>
+
+Could you please sort the headers, too?
+
+> +
+> +struct esp32_sysreset_priv {
+> +	void __iomem *base;
+> +	u32 offset;
+> +	u32 mask;
+> +};
+> +
+> +static int esp32_sysreset_request(struct udevice *dev, enum sysreset_t type)
+> +{
+> +	struct esp32_sysreset_priv *priv = dev_get_priv(dev);
+> +
+> +	setbits_le32(priv->base + priv->offset, priv->mask);
+
+And this looks quite compatible with the generic syscon-reboot binding.
+Why not re-use this driver instead?
+
+> +
+> +	return -EINPROGRESS;
+> +}
+> +
+> +static struct sysreset_ops esp32_sysreset = {
+> +	.request = esp32_sysreset_request,
+> +};
+> +
+> +static int esp32_sysreset_probe(struct udevice *dev)
+> +{
+> +	struct esp32_sysreset_priv *priv = dev_get_priv(dev);
+> +
+> +	priv->base = dev_read_addr_ptr(dev);
+> +	if (!priv->base)
+> +		return -EINVAL;
+> +
+> +	priv->offset = dev_read_u32_default(dev, "offset", 0);
+> +	priv->mask = dev_read_u32_default(dev, "mask", 0);
+> +	if (priv->mask == 0)
+> +		return -EINVAL;
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id esp32s31_sysreset_ids[] = {
+> +	{ .compatible = "esp,esp32-sysreset", },
+
+Is the compatible documented anywhere so we could have a stable dt ABI
+as reference? I searched current Linux master but got no luck.
+
+Best regards,
+Yao Zi
