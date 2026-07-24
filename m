@@ -4,113 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4331AC531D0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 02:53:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 882B5C531F9
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jul 2026 03:07:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8A084409F0;
-	Fri, 24 Jul 2026 02:53:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9570C40A9D;
+	Fri, 24 Jul 2026 03:07:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OaZY87bKBIhD; Fri, 24 Jul 2026 02:53:06 +0000 (UTC)
+ id xPqzNhb5-lwk; Fri, 24 Jul 2026 03:07:17 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C8BFB409EB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E91740A5B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784861585;
-	bh=H3hJT61iuRtF7hyMOvQWZKXl2o81xLQRjfsbrQZgn8k=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=oHzAozbs84i9ON/hFxHYySbuybHEG8fLMfh6Hgs5bldWHEpEMpCF5/C4qrifc1vpU
-	 juC1RVn5Y7bItHxT1EmCj19xGJ4q04RE4DUY11vNOXKfRikusrugJvNBPKfLdJVuUi
-	 bL04cni4CTOm6bpNcK3Uj4WhUgPp5xd3AVRYcGOHmLvbMbBpQq7hqGLdZZMxCLbIOP
-	 P9JZYqRN63QoJ1IfGA1NGPNbYR41HSE3Vn3NkyGx5u17qTWacq/K4lJJyLJTuLqw7u
-	 qlAnNu9xzSHdv9MMoiiwGNOgDxPAK8Hw+scuJSiws+lK2AwyM3pvhtBA65uOn9IzpK
-	 S6AaDdWTWKFcA==
+	d=lists.u-boot-project.org ; s=default; t=1784862437;
+	bh=d8hXwXr+s7Ayv57nH3tyhetQQKf1wSNoqwzvUB4THDY=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=DAMG9DNXc/utJKGsKT2mIXicNR7VUZTgS/GbKddZRzGvQpd40UO1zSqo5dMIZD6me
+	 br40yOkuzK8/reAfjH6GRi5wuSiGla/TRMVQWY+mZ09d8CzdqJir3fVs08i8LX9nIG
+	 JmJjTm1koT+upH102qVNPgG42bj9nBekL7IP0slUia7PseKQRTzKTvj6Vqy92utBgt
+	 BPr1eeY94XWXffT4KMXUTCnBjj3J6FBmUco1dMUg40r8E+Q22gGWB4PU4t1vOFLf25
+	 yrVT60yQEiJ/214f0ayP70YD8u0Meuhw368aZXffrYUBP3zy05Sw4c8QE0O/sXAKtC
+	 x8QhZzJyB1gyQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C8BFB409EB;
-	Fri, 24 Jul 2026 02:53:05 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id F1AFF3B1
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 02:53:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1E91740A5B;
+	Fri, 24 Jul 2026 03:07:17 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 64A572E5
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E400E60AB6
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 02:53:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4A68840A5B
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pL6QYbl8WQpu for <u-boot@lists.u-boot-project.org>;
- Fri, 24 Jul 2026 02:53:04 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org ACFD76073D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ACFD76073D
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id ACFD76073D
- for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 02:53:03 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E5EF1803F6; Fri, 24 Jul 2026 04:53:00 +0200 (CEST)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60DE2800AE
- for <u-boot@lists.denx.de>; Fri, 24 Jul 2026 04:52:58 +0200 (CEST)
-ARC-Seal: i=1; a=rsa-sha256; t=1784861573; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=TqDL6Xp5mInMGiJA1yxqtw/+9B9uO8MesV1xVcQQ4SJD26QdMFvBcw0Sc35WYF0dy9orm02Dz4l9XtTtnLs0nkUypGu/HHnmIwivB50rtFnIT3eU8Mzk9d8GYqk6BV8OpfiYZIbE+pb2jgRnht8OGHqWCQsI4xiWJv/rzNl/2kg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1784861573;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=H3hJT61iuRtF7hyMOvQWZKXl2o81xLQRjfsbrQZgn8k=; 
- b=HI/7n9FIUNtS08+CdsNDsBC73pdLqBWuvHlHI6mdGvBM/aINUNIWihAZql2VBsdD+ioWEqT+lN9HXgewTGHw9BMlkhnkN0IWXX3sj5vaLyPZtxMPiYOrvuLRp6gmafK7ea6LGqd2vnUs8Uwo67Ns/HxAzCqG0nsOGlmkEgj0wsA=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 178486156959488.27876170758464;
- Thu, 23 Jul 2026 19:52:49 -0700 (PDT)
-Date: Fri, 24 Jul 2026 02:52:39 +0000
-From: Yao Zi <me@ziyao.cc>
-To: hehongbo918@gmail.com, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH] sysreset: esp32: add driver for esp32 series chips
-Message-ID: <amLTd8Mau6tsV7o4@pie>
-References: <20260712074817.18856-1-hehongbo918@gmail.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vuNVycX1319O for <u-boot@lists.u-boot-project.org>;
+ Fri, 24 Jul 2026 03:07:14 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::1;
+ helo=db3pr0202cu003.outbound.protection.outlook.com;
+ envelope-from=alice.guo@oss.nxp.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1198340A48
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1198340A48
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1198340A48
+ for <u-boot@lists.u-boot-project.org>; Fri, 24 Jul 2026 03:07:13 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=O+Z6TZYHV0j5mizak3msQ7FSjfQfFaYb/Pa3jXTF4Ua0azG+dMixN/wwxoWvyJMiildzPzwFsQ7oFfWaIslTPDv8iqlxF48zF72M318uPuxIyqOfrCXB42IXHr39dNI5UIC08w68dlVq27vAPWNPVxb5nuELKwxUwLV8ko+OqHmvCEeBx8ujxqURPGuf5rYfy1YhxMB+fJpA+4rfsWDOCwXOJAQ572Z/XX8tWXjHfFRWXM8NYZz7GPU+X2kvt0/xAvcbsgz5WWolyUZDSNu+I339r/oSGIoziVEpVhKxpc6LakDV+u2xRdLVdVPVxDjbmPyA3yf78d8VZlLRorEz+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=d8hXwXr+s7Ayv57nH3tyhetQQKf1wSNoqwzvUB4THDY=;
+ b=NZoSmLnpfsaqXDkBWHB2SHg9MspDl+XxXUazewx9AIfaibSMDTq40uhZ5SwK0btSR+S6jvpTYKkeyTxGr1K72bbXyVKFOcn5W36MYg20FTqpC7/hd0DAFxOxe4WlISuQe66bPEHAz3o66+1AeUHnesAYJjw974bsN9CAdbEp27DyIvE9ANevy/hE+iNe78lCs1FUQ+mcvk/nPfsa9w0f6aQFxbvzHk3QTzBbNoxNe28EEbMzOcMA19R5T/FknZeZaPFKue2qhqlBKirTWKSJHokGH0NXif/DMqMz1fhs9EAfMKyDPhnk075adM3WFaUi1UXm31FA/glA7zlJhloxNQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+Received: from AM9PR04MB8114.eurprd04.prod.outlook.com (2603:10a6:20b:3b7::22)
+ by GV4PR04MB11749.eurprd04.prod.outlook.com (2603:10a6:150:2df::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Fri, 24 Jul
+ 2026 03:07:08 +0000
+Received: from AM9PR04MB8114.eurprd04.prod.outlook.com
+ ([fe80::cab0:e4b0:6be:b1d1]) by AM9PR04MB8114.eurprd04.prod.outlook.com
+ ([fe80::cab0:e4b0:6be:b1d1%4]) with mapi id 15.21.0245.010; Fri, 24 Jul 2026
+ 03:07:08 +0000
+From: alice.guo@oss.nxp.com
+Subject: [PATCH v3 0/3] net: fsl_enetc: Add SGMII 1G for i.MX95
+Date: Fri, 24 Jul 2026 11:10:42 +0800
+Message-Id: <20260724-imx95-v1-0-7131a9e17fe1@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALLXYmoC/yWMyw5AMBQFf0XOWhPqFX5FLKoursQjLdJE/LtiO
+ ZPJXLBkmCyq4IKhky2vi4c4DKBHtQwkuPMMGck8KmQqeHZlJrSKZap00qo8g283Qz2771PjTND
+ 8zh7tRHp/B7jvB7bK4QltAAAA
+X-Change-ID: 20260724-imx95-ca124ac3ba65
+To: u-boot@lists.u-boot-project.org
+Cc: Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, 
+ Clark Wang <xiaoning.wang@nxp.com>, Marek Vasut <marex@nabladev.com>, 
+ Alice Guo <alice.guo@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: MA5P287CA0156.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:1d7::12) To AM9PR04MB8114.eurprd04.prod.outlook.com
+ (2603:10a6:20b:3b7::22)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260712074817.18856-1-hehongbo918@gmail.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/284.849.17
-X-ZohoMailClient: External
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1784861573; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=H3hJT61iuRtF7hyMOvQWZKXl2o81xLQRjfsbrQZgn8k=;
- b=kZ7JJVnUU6dbBcUQZF06uwwtyg+1CdUBbOTX/ZooRHFdrvC+uQck3deIWnAC1+fH
- UMIqTwh/nH94yE4TXSMDpsJJMzS4z2N4ZGtF15PZC6Kay6Sdsf6KW3NrPFYee60AWyl
- pFfokjY57zqxuZQwfv/97l3KLkNIC1/J3BPEeAFI=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=kZ7JJVnU
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=me@ziyao.cc
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="kZ7JJVnU"; 
- dkim-atps=neutral
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8114:EE_|GV4PR04MB11749:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ab40a58-4402-4e1e-6043-08dee930a57d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|366016|1800799024|376014|19092799006|56012099006|11063799006|10067099003|18002099003;
+X-Microsoft-Antispam-Message-Info: bufRGDvhbxeckeHgHdKuFANhxJVWHi0qLCx8f4ZUxl9D77im/sGrYmhQN1GWxPJcXv3oGU+rMDbldPvaKjeE6cg1TDV2VjSCDvWszbcIVfBEjrEXKioXPcdcX+gJzrV1fYcf5hWaw7cyrNDqQhcdQ9YXOv4Jyr+4tcflKoHMrmaufLukqU4V1YTz5I5i/iwmwY4Yaj7ciXsvz4vCu0Vknnw59smcFMhPrEplShuTmoS6nZSVYX2ltYD1AuXHWOMTB9lBpB4kJ6geNaRbjcpMl5kjXHXX62CxWgfV8+YAGifpgMZD2YTR2SqOz+2iy5NvQDcTEWpESQ18URmXcr0kJ+4HBASnOeJ6L8JhV5wxRC0p4cEtCCiglg9FRELPFxxeDjv95NUBWruWiH2DRLQKW8aEWBhYHBNPW+E70KDVcoaCdGja/EiovbY8u3ODYeKj0BBrGMf2BzJp0vdtbUWi7vuEvXYLiqXp+qb1BUcOpeFMg2AVR4Etjk7vzfXEjUNgspBPkiW3sow0Wwk4SZZfrnd1vUe8T5Zp8FhjE3VwF2xELdAiW5NNsGSDm9tCrw1bJ3hbn14cy4IBETjspTd7tMTch0aS9pbXo2G5Dg4gVnQsxb/t7sVggOcZYSXxsBCJXprvlgGzLCybIuh4zKUBQu1yln6ZMMbG/FaXeeFNpKI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR04MB8114.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(19092799006)(56012099006)(11063799006)(10067099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Mk5VWXYrM3dFakVheU13RGNaSnpybElqUXhZVmdjRjdPdUhJUXpKVG0vUm13?=
+ =?utf-8?B?bG5NeHc2eW5PWnNnU1BmNzNwZm5aQ0Zsc1oxZW1pS29mdlRTbmVGMjYzSzNL?=
+ =?utf-8?B?NGx2R2tSYzdGWGh4ZG5hSmRxVERhZzdYM1BHSHlHN2ErSzhFb1p2aG5uMkNq?=
+ =?utf-8?B?Q2M2WWhZQ3gzMUtLbGJmdFhCaWVoTDA1M2E0OTljMzhGeWwwcGM5bkR0dWZJ?=
+ =?utf-8?B?K1RzOHhJd1RaczZXSjd2ZFphaVdqQ0d2a0lETjk3c3Y1Y3N6R0dmdzZaWVhu?=
+ =?utf-8?B?Wjk4aFNkZVltbW9EVmVPMVNMMDExYUxZbkJZWENCWEloMWNlTis0QU9VWDR0?=
+ =?utf-8?B?UGQyc1Q5QmJROUszcjNvSDhFaU5hRDRoUHJxL1lqZGdhVGVsRU9WNWZlNjIy?=
+ =?utf-8?B?MEJDYzhTSE4vWE45SXI5UDBqUWVjMzlyS1ZWNnE2dGdSMElsZEdsVEo4MFVj?=
+ =?utf-8?B?b1VsUi9iUW1uMENoMHhLcktCSXl6YjZSUDNpYVVjenZkZUFlUHUzZGYwQzFN?=
+ =?utf-8?B?Tkh1R2VRaVhQa1pGeFdpUGNybnFXdnowbDZlOWoxWnNWenZZM2ZmNW5tK0N1?=
+ =?utf-8?B?ZGhUdGlSdW5YZy92akdld2FFenU0UEtSWktWUjl4RGZqbkllc2YrbEhRd1Vk?=
+ =?utf-8?B?Nm56QnNPVEthSXZzMmFNNC82YnBCWE5CTlNXYlFyRUZzK2FzbHQ2eFZ3QWJs?=
+ =?utf-8?B?dVJXSU5lUmxHTTNoaW0yVFd3Si9SYkZXQS9wNmZGalBIdFhvLzY3YVJGS1M3?=
+ =?utf-8?B?eHBUR3h5WVoveGJucmZ2cDk0UGZxK2NPVWVRK0N4UE1UQTlCcWU3TWg5S0h1?=
+ =?utf-8?B?M3ZtaENjNHlQanJaSGYwLzB1akExcE82UWFJUmF1WkN6ME1mNnVHZ3pmRk4v?=
+ =?utf-8?B?SUFpR3luQmZWUUc2WGNtbE5jMVFLYW41ZVRzc1FXNTM2ME5hc2hXQ1ppN29v?=
+ =?utf-8?B?ZnFSVE5iaCtRL1B3alRRWWR0dTRUekRpWTVUSVFON0JIZFRhTUZxT2dxS21S?=
+ =?utf-8?B?MXN1MUVMaWs0aVN3VTl5d1IrbGIreDNUOG5CQ0pwQWtnQmZXTytWR0dXd3NG?=
+ =?utf-8?B?amRUbm9HNHo5U0VBV2kza2NGWkVnVTlYL1lCWndYWUpPRmNHak5jMzg4cHo0?=
+ =?utf-8?B?MStOMGZKaGhWYlVKWXNEY3NLMmhpeTBKb0hlK3gxWk9CQzZQZ1hDVGtaRHI0?=
+ =?utf-8?B?SmI5dUg4WkFyN1lZVnZEU1V3SC9Xd0V6dEJDMzhqRW4xeWdjUEs4MWl1Wnkz?=
+ =?utf-8?B?OHU4a3ZMNjFjVWp4dXdxbjY3WGMxVlBvZ3d4SDNPTDRJMEJpY0xGa1J4Sm1C?=
+ =?utf-8?B?bnRzdVd4b2JlYmNpeUNFQi9NZVMwNmFrcGlnMnJXMFU4REVsL3F4NUpreWps?=
+ =?utf-8?B?ZWY5czBkUWVnUFVWM3JJeU5xdXEvVHl2N20vcExMSW1vY2dkdDJwV2V4MTcz?=
+ =?utf-8?B?VEhTQ0I2L1I5Z0puc0lpT09sMVBsQTFoT0ZOZjA3MUVRWjg2V3cvMGJ1MHNZ?=
+ =?utf-8?B?aGxFRE5mZWJvRXJOTDJBUGRDd01nUnIyaVAvd0hyVjBCRjNzRVg1MWRCdmcv?=
+ =?utf-8?B?a21yeEtjMU9WSDE1ckV6SW42d1VkYkJnZHdNUHdodHQ1Z3RYNFZra3p5Tzl2?=
+ =?utf-8?B?eCtpY3BISkEwRXhKd05rWVc4VnBrY1dWZ05SUEhqd2ovbGFEM0xBbnRaZ3d4?=
+ =?utf-8?B?MFFvQW4vVEhYaVJaNUdKZml5UW5zVk9GU0xVYTRHTW4zbUZvT2htVklJUllF?=
+ =?utf-8?B?RHJrMy8raHRrQ2lwdW5VMlZRN2RibFNQbzBsUFB1aWJJZXBnQUFjM01UZnhN?=
+ =?utf-8?B?SGxOWEpnTWZBSlBFSzBDRDlqME1KMGxyOVFicDNJdTFHOFYxdzNHTTM0MDV4?=
+ =?utf-8?B?Tkw3WHpHLzBxbXpSdTF2YStvK1M3WERwMVFmUUVrS1huRkZXY0VEMkVkbzdi?=
+ =?utf-8?B?cksyeXN3ZjZQb2ZHeFRONnZXUEF2UmovSXM2b21VdzlUZ1dqcFMxYXNUdDM3?=
+ =?utf-8?B?dGJIWFBERU5WcnVKQkYraEI0QVdrNlpIK3EwazU2ZWxqSC9tTC9Yd0Y3K1hU?=
+ =?utf-8?B?THhycDJoMXlCQWlPbm5CUk1nYXV1SmE0TGlnVTZUS09PUVp1dWxNYWpzZU51?=
+ =?utf-8?B?NWJBaUJaK2pTamd3KzNyZ2NFSHkvbkJaa0ZzZWxOUitGTWdEUlVCZW9aeVFS?=
+ =?utf-8?B?Y2tPZCs5ZzA0Uk9EUXJic1NrbU96bzlIbm96T3dpWGZEZWVvNGY4QWgzRjNw?=
+ =?utf-8?B?RjYveWJaZHdXa0VPak9iV3NsZWJ3ZlA5a3BPU3NxNlFkVThZYVhvc2dlbGt3?=
+ =?utf-8?B?Q1YxeVJRb1c5UHB6Z3NZbklnc2ZPQ1ZjU0FsM2c4eWRqRndwMkZtakc5a2ZW?=
+ =?utf-8?Q?dgtSg/AcPsbdPuRTmewaIOvMZ9rnJC9ZVoDCV?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ab40a58-4402-4e1e-6043-08dee930a57d
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8114.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 03:07:08.2064 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RIEW3rdXT8/VqaaXhTRoE7qghIjZS20pXY8IPyD+CVCwQCVguuFrOUJPWLwzy+X9V4qZBHw+bu+hiJb9JZDiNb23+TDIPppWFHBDlf6qmbt36+lOGAkgXjZHqXzw3j1T
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV4PR04MB11749
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d8hXwXr+s7Ayv57nH3tyhetQQKf1wSNoqwzvUB4THDY=;
+ b=d3g/E6Uly4OFBksnOkmUoAsDlqdLwggziMvi9KIZDcgyC3o3KEvPTGz/A2nUUCUinPIxQxaA8d//09iiFN7ePrhAxaAzPjCyDElaLtAwR1SEA0HtFc4RK1X/6KQu6dcIa17wclxESLLy7/uQDiJhUZ2wQJLbogCBlC6W8eGAvH3dg7Z4KnMRtVk97AKawJ/NucdfdkwXjFadUEDT51OaCCcu21/783nAmzBYUu2OEhDYRdRtm5k3X93bXVCeaeTU9xQwv1TB8YIXpNxIdTTHckdL3oTKETTEEXZg+jk8dLcYVkunFZxq36zq/W83gKGk9oybinv3nVSkBceKHHbvVA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.nxp.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
+ header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=d3g/E6Ul
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,107 +182,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Sun, Jul 12, 2026 at 03:48:16PM +0800, hehongbo918@gmail.com wrote:
-> From: Honbo He <hehongbo918@gmail.com>
-> 
-> Add system reset driver for Espressif Gen3 and Gen4 RISC-V SoCs.
-> The reset register base address, offset, and bit mask are read
-> from the device tree to support different chip variants without
-> code changes.
-> 
-> Signed-off-by: Honbo He <hehongbo918@gmail.com>
-> ---
->  drivers/sysreset/Kconfig          |  9 ++++
->  drivers/sysreset/Makefile         |  1 +
->  drivers/sysreset/sysreset_esp32.c | 72 +++++++++++++++++++++++++++++++
->  3 files changed, 82 insertions(+)
->  create mode 100644 drivers/sysreset/sysreset_esp32.c
+Changes in v2:
+- Fix CI build failure
 
-...
+Changes in v3:
+- Replaced #ifdef CONFIG_ARCH_IMX9 guard with a runtime wrapper
+  function, improving code cleanliness
+- Added explicit 1G-only PHY capability restriction for SGMII on i.MX95
+  (no 10/100 support)
+- Added a new public wrapper xpcs_phy_sgmii_1g_config()
+  fsl_enetc_xpcs_phy.c for better abstraction
 
-> diff --git a/drivers/sysreset/sysreset_esp32.c b/drivers/sysreset/sysreset_esp32.c
-> new file mode 100644
-> index 00000000000..3d4c619f44f
-> --- /dev/null
-> +++ b/drivers/sysreset/sysreset_esp32.c
-> @@ -0,0 +1,72 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026, Honbo He <hehongbo918@gmail.com>
-> + *
-> + * System reset driver for Espressif SoCs.
-> + *
-> + * Supported SoCs (Gen3/4):
-> + *  ESP32-C5, ESP32-C6, ESP32-C61, ESP32-H2, ESP32-H21, ESP32-H4,
-> + *  ESP32-P4, ESP32-S31
-> + *
-> + * On the unsupported chips(Gen1/2), the system reset logic resides inside the
-> + * RTC_CNTL peripheral and is only accessible through the boot ROM function
-> + * software_reset_cpu(). The register definitions are not exposed in the SoC headers,
-> + * making it impractical to implement a direct register-based reset
-> + * in U-Boot without reverse-engineering the ROM code.
-> + */
-> +
-> +#include <dm.h>
-> +#include <stdbool.h>
+CI: https://github.com/u-boot/u-boot/pull/1019/checks
 
-But you make no use of bool, so I guess this could be ommitted
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+---
+Alice Guo (3):
+      net: fsl_enetc_xpcs_phy: Extract common PMA MMD init sequence into helper function
+      net: fsl_enetc_xpcs_phy: Add SGMII 1G support for i.MX95 Ethernet PHY Wrapper
+      net: fsl_enetc: Add 1G SGMII mode support for i.MX95
 
-> +#include <sysreset.h>
-> +#include <wait_bit.h>
-
-Not used, either.
-
-> +#include <linux/io.h>
-> +#include <linux/errno.h>
-
-Could you please sort the headers, too?
-
-> +
-> +struct esp32_sysreset_priv {
-> +	void __iomem *base;
-> +	u32 offset;
-> +	u32 mask;
-> +};
-> +
-> +static int esp32_sysreset_request(struct udevice *dev, enum sysreset_t type)
-> +{
-> +	struct esp32_sysreset_priv *priv = dev_get_priv(dev);
-> +
-> +	setbits_le32(priv->base + priv->offset, priv->mask);
-
-And this looks quite compatible with the generic syscon-reboot binding.
-Why not re-use this driver instead?
-
-> +
-> +	return -EINPROGRESS;
-> +}
-> +
-> +static struct sysreset_ops esp32_sysreset = {
-> +	.request = esp32_sysreset_request,
-> +};
-> +
-> +static int esp32_sysreset_probe(struct udevice *dev)
-> +{
-> +	struct esp32_sysreset_priv *priv = dev_get_priv(dev);
-> +
-> +	priv->base = dev_read_addr_ptr(dev);
-> +	if (!priv->base)
-> +		return -EINVAL;
-> +
-> +	priv->offset = dev_read_u32_default(dev, "offset", 0);
-> +	priv->mask = dev_read_u32_default(dev, "mask", 0);
-> +	if (priv->mask == 0)
-> +		return -EINVAL;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id esp32s31_sysreset_ids[] = {
-> +	{ .compatible = "esp,esp32-sysreset", },
-
-Is the compatible documented anywhere so we could have a stable dt ABI
-as reference? I searched current Linux master but got no luck.
+ drivers/net/fsl_enetc.c          |  20 ++
+ drivers/net/fsl_enetc.h          |   1 +
+ drivers/net/fsl_enetc_xpcs_phy.c | 700 ++++++++++++++++++++++++++++++++++-----
+ 3 files changed, 639 insertions(+), 82 deletions(-)
+---
+base-commit: d7ef23c07b8e34f65b3e15e3b4e7f58d074923c8
+change-id: 20260724-imx95-ca124ac3ba65
 
 Best regards,
-Yao Zi
+--  
+Alice Guo <alice.guo@nxp.com>
+
