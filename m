@@ -4,120 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48916C531C9
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jul 2026 10:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58851C531C9
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jul 2026 11:28:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 96ACA6068C;
-	Sat, 25 Jul 2026 10:42:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0336960686;
+	Sat, 25 Jul 2026 11:28:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RbLMha24FdON; Sat, 25 Jul 2026 10:42:08 +0000 (UTC)
+ id YqZLcqqTfnpL; Sat, 25 Jul 2026 11:28:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D222760675
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 03DE560664
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784976127;
-	bh=QpTO3HLc302Arp9VulXcpWmaxGeODArsxW8P+TsRsYk=;
-	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784978924;
+	bh=QB++/WX9Q8U3V2GbtTrTDwGgU6Bqjp2unR3JJg/o/PQ=;
+	h=Date:To:Cc:In-Reply-To:Subject:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=qliEVYbkbmERwL4iHMtlxrGTZXv53wJw6NMVuLcIxmhUoUxqUEdUgqsfCYzzSqnK5
-	 vA6EzQc2gqmTs+ZNJnTsGN81x4HQrg9i/CFrzsURrpE6FfJ69Xea/omEGz5+iBwRq/
-	 RO1m37I61z/VN5ngrjuTumAfdOIVKJE5Z+rS+7Wrf4YluuJPOy+w3FkWerShUucuyP
-	 nHOA3gSf0hYN49yuSOIanBSvyoqmhfhvLl1iarnsAUejYGGr3+Mj5u8CYM5PVlOm+U
-	 agiP3jQtOLWC46i4rEQXyZ3wIossuQBaKcaG8TnZAcYpbPlPsORgXhKFUxjR/IbpZP
-	 HvsfZIimE2wbQ==
+	b=pe9vGDs20FU3MZt5h/zWWB8WgfBwMqeY7C1FsdkO/L/0pcgyL0cjG9Vx/nq7+6YpF
+	 Tuyfe22MXapQuXLxOtYUbIYDE6SltfKZCtIEPV+u5Ut1CijguP3Xn3KxL+oHj+WcuD
+	 rRdSl8oqp2RSC0zYOYtK2YULNYBeMxNh3ndg3+x8M7sYsZMRwoY+MfpciHxm7V6tTP
+	 F+aG8hnoVV/D+w9F9wJwD86sXJiu3v7Ao37eRhB6VcXMmcGiGmeHej0/BNma3FdTY/
+	 tFEnWrbUEOgMjLTOICZoxGsVsxG/QdCVO2gXV1ZMgt3m81JDng+EW9gjzivn4ZMDXc
+	 KF6NJOYt144aQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D222760675;
-	Sat, 25 Jul 2026 10:42:07 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 575BF36E
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 10:42:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 03DE560664;
+	Sat, 25 Jul 2026 11:28:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8839B39E
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 11:28:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3D0E560655
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 10:42:06 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 662AD409F8
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 11:28:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oD8gCsbOB0c7 for <u-boot@lists.u-boot-project.org>;
- Sat, 25 Jul 2026 10:42:05 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::62b; helo=mail-pl1-x62b.google.com;
- envelope-from=leo.liang@sifive.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 26769605E0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 26769605E0
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 26769605E0
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 10:42:04 +0000 (UTC)
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2cc7ef7ec27so16331325ad.1
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 03:42:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784976124; x=1785580924;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=QpTO3HLc302Arp9VulXcpWmaxGeODArsxW8P+TsRsYk=;
- b=SFA61yBcbGbRiTC8fpSPtVtuBFFi5/mrvMmHwmpfJcH9Eo5Gz2PQcH8X0jczW43oXx
- W3JKg6WdsGs9J10DJ9SPgaFUNtMnxgJLNXbYkSsmkoOQqEO38lijTquXQlodYGsjClt+
- 8tntskjylq/j3fdAD7QGPPI/eJYQnylKAgyEMPI9wu6VhThdp95/05S6+rwRpE6hx0Vn
- b4PseKJE4170hgCP9H/KRUlEfjtSwiFuPBSFOSmHK4UIw9a9mIE7DlSeGviAhgA8JwT7
- 10UXe/KrDSF6mI+aSNMkA95C4Y4VT6PNoZxEuFcjEPRN4V41yTdmUPrxHABaf1RyA20j
- AwjQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqXp6t8eNeE5IlNi+Q9/fmZkpCx009mwYcAZ2Vo9yBwMFAMnhe32il2Ag1BUk9if4qQjiEHdz8=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxxXYtDZsWkk47k87yBRPFek+vomCIytw48zKrBr65hgM3o3Uiw
- 4ujfhWAHILBaJiRehpd7tlIEp93FXXyeeNwWtaReP4/1aYbQY/o9euNSru579ZG2d9A=
-X-Gm-Gg: AR+sD10nogq2lBg4PPP3y8cI/iI1EoVR++4ho/LmKt+RXR1iCiAW7MNTmi1mH3rTZQJ
- Qv79pOhtecj5Me9ZLO1gdvViBxAvrkIDKxnbG3oD7pzGoa2W5I9Rub6IsPcRU3Z70EmfMlyRuw9
- VxXgPs+ModJLUWb5XaAGsWrfxgdas5qoBBFkR/a87pqfQfR/J7KvHm7rq1ZGfCKWE2FJsMIBxkA
- InrtKs/G7e+aeyQ8IyEm9gJ1tfkfkucvBBr9OoEyN7YJyxvN6LpLLpdxc8O8o53UmxaW38BfM+J
- 5q9RD3a8ET6uT/JXGeYHIMZa9IB1W+4ZFu/WyodoZIcQanI9USr89LBPrNZ0zrk3GTTMyR0QNJV
- ksCN7AoJwBbj7iDn/dOhoeZjr07vVgiAToyyFxwLne7QWyja37shzhz1VTY1YOaAAiaxwz9hEJJ
- 71byVhXsQmjqhXajgwlrY=
-X-Received: by 2002:a17:902:fc46:b0:2cc:b480:28ba with SMTP id
- d9443c01a7336-2cfde8a9eafmr20046155ad.44.1784976124080; 
- Sat, 25 Jul 2026 03:42:04 -0700 (PDT)
-Received: from lliang-1876.localdomain ([136.226.240.205])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cfde7ee3b1sm8118455ad.62.2026.07.25.03.42.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jul 2026 03:42:03 -0700 (PDT)
-Date: Sat, 25 Jul 2026 18:41:58 +0800
-To: Charles Perry <charles.perry@microchip.com>
-Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- u-boot@lists.u-boot-project.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hXYFS6vtvAtl for <u-boot@lists.u-boot-project.org>;
+ Sat, 25 Jul 2026 11:28:41 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=mark.kettenis@xs4all.nl; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 9C207409BE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9C207409BE
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9C207409BE
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 11:28:39 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D0DE6800AE; Sat, 25 Jul 2026 13:28:36 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C18708005D
+ for <u-boot@lists.denx.de>; Sat, 25 Jul 2026 13:28:34 +0200 (CEST)
+X-KPN-MessageId: f7673309-881b-11f1-8f54-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id f7673309-881b-11f1-8f54-005056992ed3;
+ Sat, 25 Jul 2026 13:28:32 +0200 (CEST)
+X-KPN-MID: 33|DtlcFR13ux4UjxEHDSLRLFKgigpoeYRdViSliC9tCFztFjRJfLiRvTxmTCAyJY8
+ M6XHNMvGw4N8jQtvoJt0m+oedrgCHFuyxgl4cEeofcB8=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|Acazk5yR9ay5Xs8WeDkTBgUS6CxLmR1NFsoIezv4KuSLu/Ur7GmMe9zlRem8Mz0
+ pMEMj+GONXbxyyqosPWAJNA==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id f6c8f794-881b-11f1-a789-00505699772e;
+ Sat, 25 Jul 2026 13:28:32 +0200 (CEST)
+Date: Sat, 25 Jul 2026 13:28:30 +0200
+Message-Id: <87se57s3z5.fsf@bloch.sibelius.xs4all.nl>
+To: Leo Liang <leo.liang@sifive.com>
+Cc: charles.perry@microchip.com, u-boot@lists.denx.de,
+ rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
+ mchitale@ventanamicro.com, u-boot@lists.u-boot-project.org
+In-Reply-To: <amSS9gMuX1EThezO@lliang-1876.localdomain> (message from Leo
+ Liang via U-Boot on Sat, 25 Jul 2026 18:41:58 +0800)
 Subject: Re: [PATCH] riscv: remove log_debug() in enable_caches()
-Message-ID: <amSS9gMuX1EThezO@lliang-1876.localdomain>
 References: <20260622194308.70639-1-charles.perry@microchip.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260622194308.70639-1-charles.perry@microchip.com>
+ <amSS9gMuX1EThezO@lliang-1876.localdomain>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1784976124; x=1785580924;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=QpTO3HLc302Arp9VulXcpWmaxGeODArsxW8P+TsRsYk=;
- b=K4DPAYY/45r1tSWydzz+tO5paYjD8cnwK2UNEoocjlTVJDsTESuPjZPCU/35vgZpLR
- 3Xs8Zw/ojmEGcWkLO5mN9eZYSgo2ymdg7WDjhnoVT1V0SFT5ZNDH6QJezHqXX+X4W5ZY
- YmF8yC6xUaXyeWeQbcXfyBPX1s8wyHhu6Qo9tn2BvPrl3cu/sR5fJxB9KH9zmeJV2+jA
- YzWImRCooWcWfPNsJJ5svZ3cr3BrhNlDxhwohJmBwBbZj02Msf0UXPHYhdFVWOcIQbeJ
- v30jKvnR76AbWqoW/BIuhsWvQzoLA+dCqTS6dUgisjZYNAedO9KZNhY9zJ5C+SFm/Ctu
- OrsQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=QB++/WX9Q8U3V2GbtTrTDwGgU6Bqjp2unR3JJg/o/PQ=;
+ b=crjGOd0O2pBLFSopBoNm7e+PhSw2BDNET8GOvYwlRQKGlq/Ezbh54JvWfkYymMT4hi87FKu0lE1iC
+ VrguYXHGK0EIWObfXGmNaOPsogUQr84gqf/X4t8baLkLRj8WVwrm9U4MvJOukVg/Hi7x8NwqhfF3JL
+ aLDnv7eazOKjZWr+SWcCHfwbl/xWV0aEwi8uS8MlCOHNFtVMAPN+7SRQlnTYSPzNR9YUABhG7nK8xD
+ 36AziN62BXkfHVzLJqSHzhC4TWEBnBfgzsTkdRVxZeXFcPD4d9zsofWMSYYEppp+kn1B2rOON4Yrfy
+ JGb9UBdQQYEaKWjg9nNe95uQS9Q4btQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none)
- header.from=sifive.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ header.from=xs4all.nl
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
- header.s=google header.b=K4DPAYY/
+ unprotected) header.d=xs4all.nl header.i=@xs4all.nl header.a=rsa-sha256
+ header.s=xs4all01 header.b=crjGOd0O
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none)
+ header.from=xs4all.nl
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mark.kettenis@xs4all.nl
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="crjGOd0O"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -129,29 +121,39 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Leo Liang via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Leo Liang <leo.liang@sifive.com>
+From: Mark Kettenis via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Mark Kettenis <mark.kettenis@xs4all.nl>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, Jun 22, 2026 at 12:43:07PM -0700, Charles Perry wrote:
-> log_debug() cannot be used before log_init() has been called. Remove the
-> log_debug() statement in enable_caches() since it is called after
-> log_init() in initcall_run_r().
+> Date: Sat, 25 Jul 2026 18:41:58 +0800
+> From: Leo Liang via U-Boot <u-boot@lists.u-boot-project.org>
+
+Sorry I didn't spot it before but...
+
+> On Mon, Jun 22, 2026 at 12:43:07PM -0700, Charles Perry wrote:
+> > log_debug() cannot be used before log_init() has been called. Remove the
+> > log_debug() statement in enable_caches() since it is called after
+> > log_init() in initcall_run_r().
+
+This part of the commit message contradicts itself.  Should "after" in
+the second sentence be "before"?
+
+> > 
+> > This fixes a bug where a RISC-V system which does not have the "zicbom"
+> > extension (such as PIC64-HPSC/HX) would get lost in an infinite loop in
+> > log_dispatch().
+> > 
+> > Fixes: 9e859849e2ca ("riscv: cache: Add CBO instructions")
+> > Signed-off-by: Charles Perry <charles.perry@microchip.com>
+> > ---
+> >  arch/riscv/lib/cache.c | 2 --
+> >  1 file changed, 2 deletions(-)
 > 
-> This fixes a bug where a RISC-V system which does not have the "zicbom"
-> extension (such as PIC64-HPSC/HX) would get lost in an infinite loop in
-> log_dispatch().
+> Applied to u-boot-riscv/main, thanks.
 > 
-> Fixes: 9e859849e2ca ("riscv: cache: Add CBO instructions")
-> Signed-off-by: Charles Perry <charles.perry@microchip.com>
-> ---
->  arch/riscv/lib/cache.c | 2 --
->  1 file changed, 2 deletions(-)
-
-Applied to u-boot-riscv/main, thanks.
-
-Reviewed-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
-
-Best regards,
-Leo
+> Reviewed-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
+> 
+> Best regards,
+> Leo
+> 
