@@ -4,150 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC873C531C9
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jul 2026 06:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81927C531C9
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jul 2026 09:10:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0358C60B83;
-	Sat, 25 Jul 2026 06:22:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2535860681;
+	Sat, 25 Jul 2026 09:10:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q2HNVlHZ6idt; Sat, 25 Jul 2026 06:22:15 +0000 (UTC)
+ id WTfpXpDSCABm; Sat, 25 Jul 2026 09:10:51 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3213660AF4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8DAB960684
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784960535;
-	bh=qzUvKzjQMOG2yisAksvbHmK3mHtaYa//0SUt3FxI8dk=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784970651;
+	bh=+CxTdQiiskpmfV7KdjVuWAzkpeyqfGyO0dyQSc7kmaQ=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=nhtUZsJr5t9eYL4W9tUXQDbGNxj36ODLM2wjCj/FJZNdXHRCx3DakHm/yJ3mCXJvi
-	 OLXZERaZwK5I7olMDtJE+V0dbhgn5OTSu+pFIVhXd9MaQQklfoa/O8KYAKDXa2ThNJ
-	 HVe6sy375eU6zNiWIZHm6n+DB8Wc25hr1j3FaHYJ+NDlbeN2SSw4h3dVXBt4vH+EDk
-	 aE+86f9VFQhNfJQC4DnwqZNsN0wA5lRH+xUCy7fxELZJOYNe5/qHDGWEMnD3a3RPNz
-	 nO10BdwbqRuUlnpn3TmJdSKhQOWijQTkVGQxfooNfurh50/1rOC89QxfBrScablNbl
-	 H6IpO0n6HLwWA==
+	b=V9CMbOH3hbW+nPJxZ/VLk7e6/KI2+l6pwpZfZx7wZ8j4y+UtxoZiT2oO0yo4Vbgyd
+	 zvBbE66zxFWG5G4lXiHPiCRRsBspGx0DpX20BCfiqbt1Oc5t0XKfVrzYRNNpbG7p+5
+	 OUJg9wz8bqK/qAejpoJogcnGBIJyzom1Z4ya4r3XVlHCT+D/ycdf2ytbqJRrtHcVgH
+	 auvPST6wZgKOFDMGwTi87UULL3x8vxQNsP7EG6bstwXhQA3KapOd+RwgetS+jCS9Ya
+	 8YxNdrH9RdbRc2So8BANFmZSrPq7Q5WaXGLOvc1ozgEnCh2x8GCtxB6Xmc/bdO7oIg
+	 NTdKpm0iFAmuA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3213660AF4;
-	Sat, 25 Jul 2026 06:22:15 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 92010490
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 06:22:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8DAB960684;
+	Sat, 25 Jul 2026 09:10:51 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D7AC4977
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 09:10:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 77E0D60AF4
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 06:22:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id BD56A60684
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 09:10:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cio-_ozXGlRk for <u-boot@lists.u-boot-project.org>;
- Sat, 25 Jul 2026 06:22:13 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=marek.vasut@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 65214608A5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 65214608A5
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 65214608A5
- for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 06:22:13 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A2D90800AE; Sat, 25 Jul 2026 08:22:11 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 906DF8005D
- for <u-boot@lists.denx.de>; Sat, 25 Jul 2026 08:22:09 +0200 (CEST)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4h6ZX05z0lzKmsG;
- Sat, 25 Jul 2026 08:22:08 +0200 (CEST)
-Message-ID: <8ac0dcf1-fb31-496a-b141-35d77983c3f8@mailbox.org>
-Date: Fri, 24 Jul 2026 17:19:24 +0200
+ id pdwTtftt9vGR for <u-boot@lists.u-boot-project.org>;
+ Sat, 25 Jul 2026 09:10:49 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::531; helo=mail-pg1-x531.google.com;
+ envelope-from=leo.liang@sifive.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 1B19260681
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1B19260681
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1B19260681
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 09:10:48 +0000 (UTC)
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-cbb662575d3so748505a12.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 25 Jul 2026 02:10:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784970648; x=1785575448;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+CxTdQiiskpmfV7KdjVuWAzkpeyqfGyO0dyQSc7kmaQ=;
+ b=rq/iDid3J1wyD/ClrnLhZq4yx3ohOt9SvRUqW8t9EGlBSW5uwhAEO+xGK2TG1/WWs6
+ 0w5ygl+OxEEn+yFBwj77B9DUcWMPZhbJeKbx7fiRJoqdiVuTkrW8CROQ4clS99eUZkHd
+ kGHrZgvrVrJ/Hk3lalq/fE3Vndsj0bCCc6XIWTwa6y0wSHqdUUowYCyVcE6GB1y+v/yW
+ jrkk/AmB81s18IZhjsDBlg3nC0XGhwJXm/kSDZgui6vnDXbafWudx4L3cqbuDWcQnqxm
+ 4iwC6Jmh39onnK0z/zQH4jZkaZuXpUxrzng97MhicyyyxrhM9CY8Phtf7mYh1btUYn13
+ HtjQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoSl/zGBLUDDOSTMADfQw4eZPxm4nr283zP1I8+e8dKkxfQsmGKikGaDL4RNyt0LrTRmbl1wJE=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yy1pOELX9utadHOQmlinaUqLjMGdll7nBpWk0Mmdeyd+AZPzJo8
+ 5vCuLIUysekW8wMFnkd5/NRkJCzdvjxe4UMnfh37NpTikWudoCKqT2tRrUgMN6CkWhk=
+X-Gm-Gg: AR+sD12gMxCGMQ3sozHIx0EGDv0tIHtZlEWpa+F1SLxRQ9Bb3bb38kuHp/y0GnK19hd
+ dh9X6xM9jka4iII+9OI613f9OCHXYO9LHq3TItpaHJ+NLrsZRqIY2KeX7JJG1tzbsDFgz8VpKjj
+ FDCp3he6ypI+1fIyyEt5MAZQwF5uo2VEX3//T20kHnW9S8ZSYW1FLUoCZ56L8UsyKJsYSD7ug9s
+ tIaQ9saN7UfC8PohPeK89jU9uWqBlkji6UeAGijnLqoYb/uvYqnF0LrWLczGsrH85Hz7OKbue/y
+ NrXuIAE1wJE/jeZCw0AaiOW54VM5ETL3oQpydpUBq//5O4oe5pQH4YB3rLp3QR0feAvYfVZCurM
+ FkFLEEjWy0oLhTakj3q7x/8jrGsEJLxBB58x27cNXutpv8amogrHJBZpjq+OmPHBNhNUBYARAsZ
+ TaGiUiXC9e/RahAdXtMMY=
+X-Received: by 2002:a05:6a21:a8e:b0:3c0:9c19:b275 with SMTP id
+ adf61e73a8af0-3c67e027041mr1700141637.67.1784970648272; 
+ Sat, 25 Jul 2026 02:10:48 -0700 (PDT)
+Received: from lliang-1876.localdomain ([136.226.240.206])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-cbbb663452asm1015101a12.14.2026.07.25.02.10.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Jul 2026 02:10:47 -0700 (PDT)
+Date: Sat, 25 Jul 2026 17:10:42 +0800
+To: Francois Berder <fberder@outlook.fr>
+Cc: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] rng: jh7110: Fix invalid usage of dev_read_addr
+Message-ID: <amR9kknwoqJgNSsU@lliang-1876.localdomain>
+References: <FRWP194MB27908D1150FB7424A8C57402DA0B2@FRWP194MB2790.EURP194.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
- support
-To: Romain Gantois <romain.gantois@bootlin.com>, u-boot@lists.denx.de
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>, Peter Robinson
- <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Herve Codina <herve.codina@bootlin.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- David Lechner <dlechner@baylibre.com>, Julien Stephan
- <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>
-References: <20260723-rzn1-usbf-v3-0-34dd7c4ddd99@bootlin.com>
- <20260723-rzn1-usbf-v3-2-34dd7c4ddd99@bootlin.com>
- <32d38204-8f6e-4a56-923e-b73b08eec87b@mailbox.org>
- <31ghNLzIQOah4QfwbFFCUw@bootlin.com>
-Content-Language: en-US
-In-Reply-To: <31ghNLzIQOah4QfwbFFCUw@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: hzwkbgknoudnoyck6nerjqi7eh3a8o9e
-X-MBO-RS-ID: 6446cf6e8f9b56f9ef4
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <FRWP194MB27908D1150FB7424A8C57402DA0B2@FRWP194MB2790.EURP194.PROD.OUTLOOK.COM>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1784960529;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qzUvKzjQMOG2yisAksvbHmK3mHtaYa//0SUt3FxI8dk=;
- b=BR/6AjI8/RlD/nIxKQ/1j4NeCNEKRU12Chvztir9ULKfzT/vP2toSMZ7S2L8e3Hze1WmfQ
- DleSbZKc+LdfgfSgcpKZwF1zQs4jjpH6EHYlOxOCRXCwxWU62TwEw7GYCYv+O7X5suSHpR
- q/++y2ErFr38j48fI9/lWcZnznAEIwFlQlmrztacWh/bJYCi/b0SEiPRtJPt36SKYe2WHE
- w3yOVJYVGgg2zuA2B1UQo7IamiEOhvPqVx0KAF+IsysVU5TIn4FqWbuCSJJMF/qx753OFL
- TZJa6HkT4HfUJ2eTkRCB1tEpc2LGtkI2qmQLCfGS+08S4P8wdDs7Nteu5IRj1Q==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1784960527;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qzUvKzjQMOG2yisAksvbHmK3mHtaYa//0SUt3FxI8dk=;
- b=G4a+6Zie4Dsj1PEGAbQHFd84+3XqbpYZIpuruWL72LfxfWJDOZDT94vXPssvrnMnIz3mq5
- CTpwyVJnmklAS9P2kxfBGuvPB5ikihIoIc1ORCF44wXp9r6uK3aDYD71RHqbAwWEbXcw14
- +yPX/Un4E3BCMvXfJ4E9e3u8siUWIyCVQblzM8ohxxgYiCrNrLCsgw+ARqNOPvTc8nwM/P
- FPG5etwE5YCyXj+vfwQuB2ZGF0JNWDKrjuJ/JM1l0srE1j9lCAxS48uoluUeQdLW+vPAwI
- ndVwDR3H9qK241JQnYFiwh0bgsUjDO248BpeRIJpW3i6YECXnKWCRjSz+YnYgQ==
+ d=sifive.com; s=google; t=1784970648; x=1785575448;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=+CxTdQiiskpmfV7KdjVuWAzkpeyqfGyO0dyQSc7kmaQ=;
+ b=LWxGJarxAtuc22eM7kjpuW6PfA/g4U4KSpF7OR4AU9312l1x2ZIEWlbLlewWnVPDJz
+ tcyZj/PFnI0FD/W77ZKbdSxojt/zCeiKcl8P/Ljz+09hyncoQGygfP7TREr7Xa8dSfUn
+ So8mVQ3euzNru5oTFYdSC1QxjME6rt4bWXtpXa2LjmPTBD/jLCkI3OlwWANU/ZjZwTfJ
+ dSiizy8gZFAYqG/dY1b4EnunjY+Ow3M1MempVavHEDxSilj+ng8TYDEktl9RZEG2vYXc
+ s0n9SLv2rVYFyKlFtfyLc9dgszU+B7IoOiVCTpaOCydAKUQuBp6iJwOgRfatTvK3ic1b
+ 8vBw==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
+ header.from=sifive.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=BR/6AjI8; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=G4a+6Zie
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=marek.vasut@mailbox.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- secure) header.d=mailbox.org header.i=@mailbox.org header.b="BR/6AjI8"; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.b="G4a+6Zie"; 
- dkim-atps=neutral
+ dkim=pass (2048-bit key,
+ unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
+ header.s=google header.b=LWxGJarx
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -159,42 +130,24 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Marek Vasut <marek.vasut@mailbox.org>
+From: Leo Liang via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Leo Liang <leo.liang@sifive.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 7/24/26 7:15 AM, Romain Gantois wrote:
+On Tue, May 26, 2026 at 10:58:13AM +0200, Francois Berder wrote:
+> dev_read_addr returns FDT_ADDR_T_NONE (-1), not NULL,
+> in case of errors.
+> Replace dev_read_addr by dev_read_addr_ptr.
+> Replace error to EINVAL.
+> 
+> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  drivers/rng/jh7110_rng.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Hello Romain,
+Applied to u-boot-riscv/main, thanks.
 
->>> The following features were removed to reduce the memory footprint of the
->>>
->>> driver, and to avoid including features not relevant to U-Boot:
->>>    - Suspend/resume
->>>    - Handling of endpoints > 2
->>
->> The code seems to handle 3 endpoints ?
->>
-> 
-> Yes, I'm talking in terms of USB endpoint numbers here, so endpoints 0-2 are
-> handled.
-> 
->>> +/* Only handle the first three endpoints for now. This is sufficient to
->>> + * expose classic bootloader gadgets such as Fastboot or DFU.
->>> + */
->>> +#define USBF_NUM_ENDPOINTS	3
->>
->> But why not handle the additional endpoints ?
->>
-> 
-> Because I didn't see a major use case for them in U-Boot, and removing their
-> handling allowed a reduction in code and program volume which seems relevant
-> for U-Boot.
-> 
->> Also, can you test whether 'ums 0 mmc 0.1,0.2,0' works to expose eMMC HW
->> BOOT partitions and HW USER partition as three separate UMS devices over
->> the same USB connection ?
-> 
-> Sure, I'll give it a try.
-Thank you !
+Best regards,
+Leo
