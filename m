@@ -1,95 +1,96 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 429FCC531D0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BBE6C54EFC
 	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 17:14:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5680440782;
-	Mon, 27 Jul 2026 17:14:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 172DD80EA7;
+	Mon, 27 Jul 2026 17:14:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nwRP2WZmuQqh; Mon, 27 Jul 2026 17:14:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Xilktvv1Cza1; Mon, 27 Jul 2026 17:14:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 21A3740741
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 568D080E9F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785172473;
-	bh=5c5DW8N4lYtV1DC72gjA6aNx+LydmqV4F4qLGmGR90Y=;
+	d=lists.u-boot-project.org ; s=default; t=1785172475;
+	bh=l4inVWIdSg7Knph/btrdzlhjQ+WBjKain0JoHDoX6k4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cRdKV42dEzvRfUt4k4hTa5ETTc1oXEwwMd92R1rhrzgVL21mL8SKE48yjDNWNpW+T
-	 IOOvt/XQgCF2zEzcrIZBQngQxD2beH1BaXYSTPjeLfgfPFPw4RLyiBrBeAOg1xaj4k
-	 ypTCIEX01ADqB7N2dISH3RH9r5WGQm/IpGroQsCAuO72KqO0gaHukTilZ8udpFH+RC
-	 WLxatRycwYBz4hAIdFJmo+KjK+jZzZEJA2rMPOa3p+bjyn2lOClHbmO1ZWhtepTR1v
-	 e5lRAWx0SyxkUnGHInaESqzU8vltHHhTY74wM8l/LHTLh8vGfgOP/A1H85F9uOtEja
-	 ch45gMhJ50+7w==
+	b=vsia4rraLpNh1WaUZXEuTwbe29HG/vVxgnDXOK/p4M507mowBk9g0bcAzKllXPBle
+	 //nVAMK8q3DJYNFkG7iuAY3cG2H0lk4SZt+9sC7T/swzhJuWwRdD3zY8nlbPRZo8b+
+	 Hu/JLxb8AVmPc/mZTz7gYuMmzYZ+iHGVyj3srDNzzxw2txT+vXopcWkY7e2pj0rJtQ
+	 URg6fIADOnKail2j215+1EUM7mfyGWPpvERrZ06Ey1m62PTY+VatPNW7QRoGQHSojD
+	 7ZyaJIeHfN2DmkQ3gqIAx48wAC09+HzZxjwAfbPdP+1SVuj0TSAepLqZTMqdyL3NQI
+	 4v5bE64VXsa/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 21A3740741;
-	Mon, 27 Jul 2026 17:14:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id BCCEB350
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 568D080E9F;
+	Mon, 27 Jul 2026 17:14:35 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 908162E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id AD934400AC
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 76C5A606EF
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MqijYYbV2ooo for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 17:14:29 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XaZIZoyePOXh for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 17:14:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
+ client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
  envelope-from=igor.opaniuk@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B31AC40055
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B31AC40055
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B31AC40055
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:28 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-47ddf7b09e5so3021962f8f.1
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 10:14:28 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 7A416606D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7A416606D3
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7A416606D3
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:30 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-47f904e80eeso2407099f8f.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 10:14:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785172466; x=1785777266;
+ d=1e100.net; s=20251104; t=1785172468; x=1785777268;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5c5DW8N4lYtV1DC72gjA6aNx+LydmqV4F4qLGmGR90Y=;
- b=A4pnNzbSC7wODDEcFVD7hY+hCwrcJgcJu44tDxuygLKUA96mQUBwQ2LNrnElzT4rHu
- cQZ3qRF3y3HCWcETEgpZuZIsAC1r/GzqUOJ6x/GFPYerf1N7qxtkuzyCyq81zbqrOdge
- N1cXWV7fhWpPLL72rFBTCtY3TyN5Ub3ib/vtxqqWRp11HyPqPTGHpB7Undx9aDj5EDSv
- WYit7e9w1eKeCuyBctCX/QdraGE9U5aUGKhYP+1kMSLLc1WmHHK7lXc98Ptg4BvQxPZR
- z3KnzHezXbHbzBOD2m6kKTLvFzhpqcirQzop+fsa0VlNsdTZI4AjvAUX9zOJmTTZcppu
- TrxA==
-X-Gm-Message-State: AOJu0YyPDlNH5Gp9DLeRyc7K4B3X+JOnuRHGomjcQFavIjVYDNSAgsKh
- C59KJFxVRAyyc6aRYo0eA43F4WFJOhVwAWkloG5GntaLX5eca2YNWbvW
-X-Gm-Gg: AR+sD12GOE9EAnRrAYOR4lBD7J1DbT3E2IXp+uT0/L8N8bcxFmDaHyjLmwCzadecF+H
- 9jnvyslkyN7Th/B8Q8Ju0KVSN8kx6hbji3rf/sNvhNDcg1ZVuHR+H7myhN0iw1rDEJTF8SzxjUP
- bx+S7bpX6ZFw8fYFFkaX6lGfxf2x+D7JBIoFwZcgEHe+NL2Oo4/ZR+Q7KtnEYE1K2RZYmHRHaxt
- sHv9orQ1QKzChsZ5SaILo6GAbWwYKCnO5MaBdBy/QSS7+V792vVpsEsuAsRnoTIdd//Z7d0gCHK
- sOQZT0EYZdQm+Dv6JLrIXgyKXvyWIWazLVp9PVOpnt1BwsKsYLpRKz9OD5mCP/HGQO+cmoon59v
- AhYPo5HXgTbuBz1jTHh2zln+HcnUz6MAyd4ChadmfvOHP5qk1+MxHVKiKJuOjS1HGCxjuaSaLrq
- XFDtVQ13rpLidYy/zFWSwXuzAFrE1i/1RABfSaG4Z9fagoZAdHyrJp9CcRx91SroVF41s9Hw==
-X-Received: by 2002:adf:e198:0:b0:47f:93a1:1126 with SMTP id
- ffacd0b85a97d-47f9feb5dd0mr12380128f8f.61.1785172466469; 
- Mon, 27 Jul 2026 10:14:26 -0700 (PDT)
+ bh=l4inVWIdSg7Knph/btrdzlhjQ+WBjKain0JoHDoX6k4=;
+ b=H8Em140qkAW+DTw2UPqAA9LIstSgj2CydzFSMKd2uizAfVXGFSSLzIZ8iwM7T9SK9/
+ 7kajfLTYnPM1MdVoe2cUgmnQhTbxWO07i9xHWKnZs5tkiZiODzUy7fn/4kjjfzfn8q5N
+ yf/GVodlWZPhKXPD6/8Hg/EgMCmVcjBc/FHXOmFxl3X59l8DixUYBqW3Z4/AzMLmxLeg
+ U+Hs8XklmSdr9Qrad8Zi3YDaRM+O8pkTA+XAk3XnygYldp77TyTmOzMXtIOjBwn/nMld
+ ft2U563moiDidx26vJW/dhQrWWjjT+kdpjCq824J75zatwCVmkwFaib2JtEIhVFPK2bd
+ vwNA==
+X-Gm-Message-State: AOJu0YwXbF75LhxlwPY8MDTC5l1uhI9HxhAKXinUvd7G/u8NVaICSr24
+ sTq0F5x6BULqE2sWmPKtBIKRd+RVio8KW8OjmGm+TCdm0F+PtxHp4KXF
+X-Gm-Gg: AR+sD10Wnv5wIejEkpnRUQs5Jx7h6z8nfWo208SvHtX6f4xDd/oEFmsQB3SAWqPIM0d
+ p81oPDrezfX4lChU/zxCQcbECz1hD1qyihIXVciwzLMdypKbeFlpa0oPpNUk7OxEikAso+XpXWI
+ Q/qwdhcehrF23LdYW3rcjskz5OF887TXbFmXoQP6iLJNN2OjGpyBPyW2vDDsshgUNWicVbe7P4J
+ kP2m7Ctivd5M7mzLm7r3UBoVvtYq5RTAdI+Qn/gqnHy4kyCozckylnatv0ag8BSp5LUa/b7ZILv
+ ImBKUuZlv09iJrCSGuRyV2rCtxCyqfT9yiWKgdVXHJB0LekJh8EKdWJIfQcRbqS9amCWx5wGaxN
+ 2qQBUGaVLWubhyzm96PnrvWw+n2G/aSCn23YtE9Qo+PFISAPZcolvOsw0qAhKELzfc3LoNmFwDb
+ h1+fWvK7P8ac4+CeJFru83tV4nu5//y3NWd27DOlmgC1hxNDdv1CCW6FBXCuEh+jTYf0mC9mtyv
+ c5P+jQi
+X-Received: by 2002:a05:6000:2011:b0:47f:8e50:9412 with SMTP id
+ ffacd0b85a97d-47fafa71bcemr5094f8f.39.1785172468264; 
+ Mon, 27 Jul 2026 10:14:28 -0700 (PDT)
 Received: from [127.0.1.1] (185-164-141-21.cgnat.inetia.pl. [185.164.141.21])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85b9a5a2sm55287391f8f.7.2026.07.27.10.14.25
+ ffacd0b85a97d-47f85b9a5a2sm55287391f8f.7.2026.07.27.10.14.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2026 10:14:26 -0700 (PDT)
+ Mon, 27 Jul 2026 10:14:27 -0700 (PDT)
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Mon, 27 Jul 2026 19:14:13 +0200
-Subject: [PATCH 1/4] avb: make the AVB root key source pluggable
+Date: Mon, 27 Jul 2026 19:14:15 +0200
+Subject: [PATCH 3/4] avb: add board-specific root key provider
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-avb-root-key-pluggable-v1-1-7e27b2b92cc0@gmail.com>
+Message-Id: <20260727-avb-root-key-pluggable-v1-3-7e27b2b92cc0@gmail.com>
 References: <20260727-avb-root-key-pluggable-v1-0-7e27b2b92cc0@gmail.com>
 In-Reply-To: <20260727-avb-root-key-pluggable-v1-0-7e27b2b92cc0@gmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -100,24 +101,24 @@ Cc: Tom Rini <trini@konsulko.com>,
  Igor Opaniuk <igor.opaniuk@gmail.com>
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785172466; x=1785777266;
+ d=gmail.com; s=20251104; t=1785172468; x=1785777268;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5c5DW8N4lYtV1DC72gjA6aNx+LydmqV4F4qLGmGR90Y=;
- b=JIBtqrJEXhbIKlrvpS86SBNxM0kXfhXhqn3g4aCLB+82NXGjdVX6GYw/kPmau4/knS
- 97mHF0Me0mfXl/FIL0ArOjEAvNHM9tyf6cxZ2Nv9VIWKNQkifajGzBlADGo3YNlEzhLh
- fremEZqqgiV2tJZ9hNRqcgbS0hJEfNBH4NbWjWZ93AcfjWCnrZDkcF9QlKHb4cVt4rMl
- zNOwxOHiLcAGHFQd2CWqUABrUhYEkVQXYMB/Z+kOnZTujxDQZ+xEeUZO71U2mavBY9pA
- 02UmDpItND8BFmrnYvfvrKsf+V3Ga9Xqsy02EJ7PKJ/v1ldo5BE7XC3y0ZZxPKy8MC8Y
- 59Yg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=l4inVWIdSg7Knph/btrdzlhjQ+WBjKain0JoHDoX6k4=;
+ b=EwmkfvK9b9gjiLcjJ2gCCJ2P+aAqxyafPkqni6S33V+ZZCdT+voy7ODJjlu9r6p0/l
+ Rupuo90WBELk+CK3PjkDFlTMtBm/oYruN3uq4k9rh3c1EMJKLZo+e2arEdhoqaUIu5xb
+ Ut7mXxVMCrghZPsNrcCPAAcqNpias0jdwjpuKPxCZAFcCtkjg2F8XNze3G7VUQP5w2+8
+ C1k8Pe3WGcuLmYiTF69OMAzLHWom/26bE6PwJSf7oIAjIxI2mu6rMmniGGIaClUbr/QQ
+ +Jiy2kuvPfb2/ZRtzk2FXE16y+QlcFYjwNafxZNih20RArgITdXNTejy0rTAlD8sY1nH
+ H7aA==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=JIBtqrJE
+ header.a=rsa-sha256 header.s=20251104 header.b=EwmkfvK9
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,166 +133,65 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-AVB's whole chain of trust reduces to a single public key, and that key is
-currently hard-coded in U-Boot as the AVB reference/test key, whose private
-half is public. That is fine for bring-up but unusable for a locked
-product, which must anchor its root of trust in something an attacker
-cannot swap out -- a hash fused into the SoC, a secure element -- rather
-than a blob compiled into the bootloader.
+The strongest anchor for the root of trust is a key hash burned into
+hardware (OTP/eFuse), which is inherently SoC-specific and cannot live in
+common code. Give boards a hook to supply it from wherever their hardware
+keeps it.
 
-Make the source of the trusted key digest selectable so a board can decide
-where its root of trust lives, without touching the verification logic and
-with any lookup failure treated as untrusted. The built-in key remains the
-default, so existing users are unaffected; the sources a production device
-actually needs are added in the following patches.
+The default is deliberately fail-closed: a board that has not wired up a
+provider refuses verification rather than silently trusting whatever key it
+is handed. A misconfiguration should stop the boot, not quietly weaken it.
 
 Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 ---
- common/Kconfig       | 18 ++++++++++++++++++
- common/avb_verify.c  | 36 +++++++++++++++++++++++++++++++++---
- include/avb_verify.h | 19 +++++++++++++++++++
- 3 files changed, 70 insertions(+), 3 deletions(-)
+ common/Kconfig      |  9 +++++++++
+ common/avb_verify.c | 13 +++++++++++++
+ 2 files changed, 22 insertions(+)
 
 diff --git a/common/Kconfig b/common/Kconfig
-index 345be4b8ca1..654e78b7b7a 100644
+index 094635bfe57..110eaa0d004 100644
 --- a/common/Kconfig
 +++ b/common/Kconfig
-@@ -881,6 +881,7 @@ config AVB_VERIFY
- 	depends on MMC
- 	depends on PARTITION_UUIDS
- 	depends on FASTBOOT
-+	select SHA256
- 	help
- 	  This option enables compilation of bootloader-dependent operations,
- 	  used by Android Verified Boot 2.0 library (libavb). Includes:
-@@ -904,6 +905,23 @@ config AVB_BUF_SIZE
- 	  AVB requires a buffer for memory transactions. This variable defines the
- 	  buffer size.
+@@ -929,6 +929,15 @@ config AVB_ROOT_KEY_TEE
+ 	  The digest must be provisioned into the TEE beforehand. Integrity is
+ 	  provided by the TEE's (RPMB-backed) storage.
  
-+choice
-+	prompt "Source of the trusted AVB root public key"
-+	default AVB_ROOT_KEY_BUILTIN
++config AVB_ROOT_KEY_BOARD
++	bool "SoC/board specific provider (weak function)"
 +	help
-+	  Selects where validate_vbmeta_public_key() obtains the trusted root
-+	  key digest that the vbmeta signing key is compared against. This is
-+	  the root of trust for the whole AVB chain.
++	  Obtain the trusted root key digest from a board/SoC specific strong
++	  definition of avb_read_root_key_digest() (for example reading a hash
++	  fused into OTP/eFuse). The default weak implementation fails closed,
++	  so a board that forgets to override it will refuse verification
++	  rather than silently trust a wrong key.
 +
-+config AVB_ROOT_KEY_BUILTIN
-+	bool "Built-in key hard-coded in avb_verify.c"
-+	help
-+	  Use the avb_root_pub[] blob compiled into U-Boot. By default this is
-+	  the AVB reference/test key and is intended for development only;
-+	  replace the blob for production use.
-+
-+endchoice
-+
- endif # AVB_VERIFY
+ endchoice
  
- config SCP03
+ config AVB_ROOT_KEY_TEE_NAME
 diff --git a/common/avb_verify.c b/common/avb_verify.c
-index 76c523fd0ba..7c6baa33ed8 100644
+index b8b99628180..b96cd1ebd7b 100644
 --- a/common/avb_verify.c
 +++ b/common/avb_verify.c
-@@ -11,7 +11,9 @@
- #include <part.h>
- #include <tee.h>
- #include <tee/optee_ta_avb.h>
-+#include <u-boot/sha256.h>
- 
-+#if CONFIG_IS_ENABLED(AVB_ROOT_KEY_BUILTIN)
- static const unsigned char avb_root_pub[1032] = {
- 	0x0, 0x0, 0x10, 0x0, 0x55, 0xd9, 0x4, 0xad, 0xd8, 0x4,
- 	0xaf, 0xe3, 0xd3, 0x84, 0x6c, 0x7e, 0xd, 0x89, 0x3d, 0xc2,
-@@ -118,6 +120,7 @@ static const unsigned char avb_root_pub[1032] = {
- 	0xe1, 0x74, 0xa1, 0xa3, 0x99, 0xa0, 0x85, 0x9e, 0xf1, 0xac,
- 	0xd8, 0x7e,
- };
-+#endif /* AVB_ROOT_KEY_BUILTIN */
- 
- const char *str_avb_io_error(AvbIOResult res)
- {
-@@ -654,14 +657,26 @@ static AvbIOResult validate_vbmeta_public_key(AvbOps *ops,
- 					      public_key_metadata_length,
- 					      bool *out_key_is_trusted)
- {
-+	u8 key_digest[SHA256_SUM_LEN];
-+	u8 trusted_digest[SHA256_SUM_LEN];
-+	AvbIOResult rc;
-+
- 	if (!public_key_length || !public_key_data || !out_key_is_trusted)
- 		return AVB_IO_RESULT_ERROR_IO;
- 
-+	/* Default deny: only flip to trusted on a positive digest match. */
- 	*out_key_is_trusted = false;
--	if (public_key_length != sizeof(avb_root_pub))
--		return AVB_IO_RESULT_ERROR_IO;
- 
--	if (memcmp(avb_root_pub, public_key_data, public_key_length) == 0)
-+	/* Digest of the key embedded in the (untrusted) vbmeta. */
-+	sha256_csum_wd(public_key_data, public_key_length, key_digest,
-+		       CHUNKSZ_SHA256);
-+
-+	/* Digest of the trusted root key from the configured source. */
-+	rc = avb_read_root_key_digest(ops, trusted_digest);
-+	if (rc != AVB_IO_RESULT_OK)
-+		return rc;
-+
-+	if (avb_safe_memcmp(key_digest, trusted_digest, sizeof(key_digest)) == 0)
- 		*out_key_is_trusted = true;
+@@ -1091,6 +1091,19 @@ AvbIOResult avb_read_root_key_digest(AvbOps *ops, uint8_t *digest)
  
  	return AVB_IO_RESULT_OK;
-@@ -1040,6 +1055,21 @@ free_name:
  }
++#else /* CONFIG_AVB_ROOT_KEY_BOARD */
++/*
++ * Weak, fail-closed default. A board/SoC selecting CONFIG_AVB_ROOT_KEY_BOARD
++ * must provide a strong avb_read_root_key_digest() (e.g. reading a hash fused
++ * into OTP/eFuse). If it does not, verification fails rather than silently
++ * trusting a wrong key.
++ */
++__weak AvbIOResult avb_read_root_key_digest(AvbOps *ops, uint8_t *digest)
++{
++	printf("%s: board root key provider not implemented\n", __func__);
++
++	return AVB_IO_RESULT_ERROR_NO_SUCH_VALUE;
++}
  #endif
  
-+/**
-+ * ============================================================================
-+ * AVB root key digest providers (selected via CONFIG_AVB_ROOT_KEY_*)
-+ * ============================================================================
-+ */
-+#if CONFIG_IS_ENABLED(AVB_ROOT_KEY_BUILTIN)
-+AvbIOResult avb_read_root_key_digest(AvbOps *ops, uint8_t *digest)
-+{
-+	sha256_csum_wd(avb_root_pub, sizeof(avb_root_pub), digest,
-+		       CHUNKSZ_SHA256);
-+
-+	return AVB_IO_RESULT_OK;
-+}
-+#endif
-+
  /**
-  * ============================================================================
-  * AVB2.0 AvbOps alloc/initialisation/free
-diff --git a/include/avb_verify.h b/include/avb_verify.h
-index 5d998b5a302..66655aab871 100644
---- a/include/avb_verify.h
-+++ b/include/avb_verify.h
-@@ -47,6 +47,25 @@ enum mmc_io_type {
- AvbOps *avb_ops_alloc(int boot_device);
- void avb_ops_free(AvbOps *ops);
- 
-+/**
-+ * avb_read_root_key_digest() - get the SHA-256 digest of the trusted AVB
-+ * root public key
-+ *
-+ * This is the root of trust for AVB: validate_vbmeta_public_key() hashes the
-+ * key embedded in the (untrusted) vbmeta and compares it against the digest
-+ * returned here. The provider is selected via CONFIG_AVB_ROOT_KEY_* and, for
-+ * CONFIG_AVB_ROOT_KEY_BOARD, may be overridden by a SoC/board specific strong
-+ * definition (e.g. reading a hash fused into OTP).
-+ *
-+ * @ops: AvbOps, contains AVB ops handlers (needed by the TEE provider)
-+ * @digest: output buffer of AVB_SHA256_DIGEST_SIZE bytes
-+ *
-+ * @return:
-+ *      AVB_IO_RESULT_OK on success (@digest populated)
-+ *      any other AvbIOResult fails verification closed (key not trusted)
-+ */
-+AvbIOResult avb_read_root_key_digest(AvbOps *ops, uint8_t *digest);
-+
- char *avb_set_state(AvbOps *ops, enum avb_boot_state boot_state);
- char *avb_set_enforce_verity(const char *cmdline);
- char *avb_set_ignore_corruption(const char *cmdline);
 
 -- 
 2.53.0
