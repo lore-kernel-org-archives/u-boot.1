@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13720C53209
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 12:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 262BEC531D0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 12:47:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1120580DEC;
-	Mon, 27 Jul 2026 12:45:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7871D80E1D;
+	Mon, 27 Jul 2026 12:47:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t1SGwZsO0Lob; Mon, 27 Jul 2026 12:45:57 +0000 (UTC)
+ id xKA330RS1-Oo; Mon, 27 Jul 2026 12:47:22 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org ED0F280DE3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 61A9380DE3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785156357;
-	bh=QRd8AcYcWlRyMs3YVRBXfimLqNRg2BSTgkdi7feDX1g=;
+	d=lists.u-boot-project.org ; s=default; t=1785156442;
+	bh=sokg0z38Wp2ecITsAgRifPvE0HPahKz15w/1qSE981c=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZRt5u2oxyWKBXmuSCMiNpnlm1iIe4j9kGtOApYB2gRGan5cVJbq5YDUDL4JBNyrJO
-	 oAbtTe6dd68P5UCjrb5smmC60V4ioo5MqBjSF1Rxfa2H2ZxGXJUh/J5UTogea+KxVR
-	 ZguRqQXSUQv/cl+OsLCIZyz9wyIdO5eAe0UWY4KbINX5r0CnFiKsYLRc6ZeGnhImEK
-	 U2XJ/cfzyIdQRFXP7E7ANwRgADwZLrPxjziD/47yQ4G+b5FQQThK4cGC7r/qkGX8nG
-	 6T4ZfADAj3iOD2NpxEAKA6h1lLZOMdWhloAeVGdr0JB4SBnHrKa+7c/lrnnp74IMUZ
-	 yqTqG/RkJFuOQ==
+	b=oDHPeIawihjAx8/McNKXj1V8k7D5Nm7ZHYvYoPe3+ZKCc7C1+T35Go6xQUmH5ceo0
+	 6wOfI21cDNJPnp7qJEgryV0korsyI+Pn4nnqIPfsuyxsQ+vpjZrvJP8vpI9OEapvXx
+	 pz8Ai9Ay0Jzdu92rGzyzUgTgPOFA/ApIxy9m97ePNaIPQr0dAY4YnmCubc3ibsJcBc
+	 RwNlgWNEKXidlvRPBHN5hFsglfQKLTA+Emofd0SXaWV49mSh8VnWjxk9yixEKiVOlF
+	 wyBh66CDnCdGxsolzS+5BlwEN99smG8SI55Tv1k+HurDoRns5MIVuVQNKoiT9jVdnq
+	 DRt9Pr7YMV7mg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ED0F280DE3;
-	Mon, 27 Jul 2026 12:45:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id F1B7D4C4
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:45:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 61A9380DE3;
+	Mon, 27 Jul 2026 12:47:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B819569
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:47:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D2C1B40693
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:45:54 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9D9074006A
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:47:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id j1JDawVLrp0U for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 12:45:54 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RsvkRl26kSPW for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 12:47:21 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
  envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C2D5540689
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C2D5540689
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C2D5540689
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:45:53 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-49548aebcd8so20146135e9.3
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 05:45:53 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C7E7240015
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C7E7240015
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C7E7240015
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:47:20 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-49548e01d02so13367115e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 05:47:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785156352; x=1785761152;
+ d=1e100.net; s=20251104; t=1785156439; x=1785761239;
  h=content-transfer-encoding:content-type:in-reply-to:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=QRd8AcYcWlRyMs3YVRBXfimLqNRg2BSTgkdi7feDX1g=;
- b=LYJOHF//p7PQTFe4aBCnsTNZ+DC/tbR/q59fNo272OdHu7e8WTP0hNFQh1q3tiarxk
- omYdebTGea7kYPTpzxgg9dvk3SZwhM42FIhxDRAavyGL+Rvb5u4h7JekILklb3zzxKs+
- krFZFmZH4kAhoN+fC0v3P6FXKu4ZHISgYi54h0b08H9aN1bhWHA+q/1VUxDSG/51vIqY
- 1O/BD+L2NbmCD++LNGyMr3btWJ0E0mVH5O7fC5V3JRXHtifDbo/27BkiwQmUzK2QBa7W
- /7T6WxBDKUILoVaX1sMrId1BzyTkEMPs4sf11qHB5HR5u++JM2fBaxQFanSvx3dcUKXx
- iJ1A==
+ bh=sokg0z38Wp2ecITsAgRifPvE0HPahKz15w/1qSE981c=;
+ b=S3ho/TM2e3ei+XTaR1MLBkaIE6LxIBK5XziNz0xlr1yk9fgnLEgjoVzbFTFEOGwXId
+ F4gg8mPN00Ch7e1rUz7J5F0Fb+y88/N+1+Dc4VEe/R55qG0zoxnQwktSxI2IBTeEVhHB
+ j9qx009C6Ehn5oUYTUsTDeW65JK8sDjsr7XsmETKCIcnZPTxv9CiaTLqaTFI1JH9r+DU
+ 5YC9wl9pU89fV/3T/e+0JPJ8egXJ53Ze4zyQmcV6FZvQ6G+NgHOUcy2vFI1LWjVbD8+4
+ a5oF7b5hREfnyXDNWGCAd41nJAIMTLF5zKH61ngfAQ190tvM3wSKPlVlMnGZaC38SAUx
+ T/3A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpRSJsY19y41IwasBtbT1I2JfxhaO1hNJOwpjn/T53fRXeg/x+LEMZnZWIG59XvhUAvcZtCTG8=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yy8GfnjZrESwWHu2fMD6LoA2LMnSQCVFavRm7Y5GO+ZZM6J2POt
- 7qQN1OKWNkXo/7odfqSpml8eGJ8L9KZC7s8adL9mQ7OfX2PCIithOvJOKEmxIp9jY6o=
-X-Gm-Gg: AR+sD108kUFvLpnrQtkYvnqYCkhsfHw1ZSpAkfYHeXQbDV0/1hH5a2HwdpJQp7zamu1
- qPSdvHVBXVicpfF7xxH1pHirW24AEAkHavb6CjzKTDy7UFvflI5uY8zQiRROboMmntL51t0peZr
- bXgfQB19EJl27TovgmptK/rTFxYHQqP9TbYfmLKwUSVAe7ETmOmEk5AAl1H133Xm8331+g3c5MD
- FMo6K/ou1ngyJWlVZS97zUvuDSRSwhLTwp/SUMwaapkT1dgSYhQyqYYhHNJzSdnQG7vLtTHlQQP
- zpPQtNiZL1Z4xDPPg8yknKhk2h2Z6AnQOlXNIfnkLQiOZRP4D3qf4RDHoI8gJeRK34Y46CCui2o
- V73B3VHNB0s/tcM+hsg5dw0AnQ1rEjQJ1UDm+oJ35ywJ9bkH+vO+YKm8tuWHuTEM8sW7tBaDCqv
- JoZ1l/Ktu9y04jZ6oBGTa4/FbQNsAOS5I4+9YAb1f7rg==
-X-Received: by 2002:a05:600c:8b47:b0:493:f176:dc69 with SMTP id
- 5b1f17b1804b1-496b572e886mr119181215e9.37.1785156351402; 
- Mon, 27 Jul 2026 05:45:51 -0700 (PDT)
+ AHgh+RrEXZHn2RGNBpqQW/cfR/Rz6+mgVMYDdkGTHYPFqlOQLk650jbd2ruDFYP+z5PL1Fazh+NzbyQ=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyCC0BGZFfGhV1+CM5M6wIybFvI0no+23w1Ry5WA6fuVyWxcndF
+ dkVn4FRNbX0sq/q0DrMd3vAbIrngRMHszXLZHJTF88qMfdEt5fmeVIEcUF8fYWvNhlc=
+X-Gm-Gg: AR+sD12oegxjEs3Coohl3ciMFWvdxEN1fMiXGqP5eG9QUwie/2DgR2YXB5LWS7W1bKG
+ 4YKCtZC3i71WM+NGK4wb5S0NDGwul3TXodlYgzMcbPHenkTkoeNFUG7YabLMIKU0JagBshny3EY
+ /axEjkw2jIerk44mg52hzFa0+6CS+xkGBqwdvnmf+KQHIY1G3Ly/lfqHXDFXSkwfF3+KdgrWTRs
+ yKu8JGEIi9VvIRUAHhn2MOlvyjTcAJaAJM4JDmujBOFKiLLbKr+DUReFAmXocpK4bv6CVsbjoh/
+ mM9Uhoh1oMaflmMFKC8hxh3MpHmgKNb+XNambbFDPAEx1RjfS3wCenfv08+hX4G+dOODcxUy23i
+ JdlwhpxSiE+MeBAHIADzA6AA57Y78ihw1kXrMrZzCdG6wzqcYmWSGrFH0ilO4PUsSo1lDfBNwKj
+ 7nOIX/s61HhN2ouZ9q9qVwdGZ6UgyHhxs0lq1JgOYJHw==
+X-Received: by 2002:a05:600c:19c8:b0:495:5205:86c with SMTP id
+ 5b1f17b1804b1-496b5747d8dmr114590575e9.22.1785156438603; 
+ Mon, 27 Jul 2026 05:47:18 -0700 (PDT)
 Received: from [192.168.1.37] (p549d460b.dip0.t-ipconnect.de. [84.157.70.11])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496b4ee1d31sm239675455e9.5.2026.07.27.05.45.49
+ 5b1f17b1804b1-496b4ed6b76sm236142965e9.2.2026.07.27.05.47.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 05:45:50 -0700 (PDT)
-Message-ID: <4130d9f0-c06c-46bd-8e74-0eb64d221a32@linaro.org>
-Date: Mon, 27 Jul 2026 14:45:47 +0200
+ Mon, 27 Jul 2026 05:47:17 -0700 (PDT)
+Message-ID: <51d1cc74-ad84-49b0-916a-92200ce547c1@linaro.org>
+Date: Mon, 27 Jul 2026 14:47:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 02/15] mach-snapdragon: Add PBL shared data defines
+Subject: Re: [PATCH v8 04/15] mach-snapdragon: spl: Update boot device
+ information in SMEM
 Content-Language: en-US
 To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
  u-boot@lists.denx.de, u-boot@lists.u-boot-project.org,
@@ -111,31 +112,31 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Hongyang Zhao <hongyang.zhao@thundersoft.com>
 References: <20260722-spl-v8-v8-0-cbfa79e85a9d@oss.qualcomm.com>
- <20260722-spl-v8-v8-2-cbfa79e85a9d@oss.qualcomm.com>
+ <20260722-spl-v8-v8-4-cbfa79e85a9d@oss.qualcomm.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260722-spl-v8-v8-2-cbfa79e85a9d@oss.qualcomm.com>
+In-Reply-To: <20260722-spl-v8-v8-4-cbfa79e85a9d@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785156352; x=1785761152;
+ d=linaro.org; s=google; t=1785156439; x=1785761239;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=QRd8AcYcWlRyMs3YVRBXfimLqNRg2BSTgkdi7feDX1g=;
- b=IM/8EJ0Ln97oFaYC/cfY1ZsNSoQqZld4mpsqEXsjJnX5hfWwf3gS6TUtfa07X8/5Mh
- z4Fi4qtyzC3HCMshFDENKiihcFWvYdClBl/a1pCcp0VnV4AYhGG4w3llp8/ovkRpRJIa
- cSb3yjjO8vI/w0DQhYANy+/vm7E12prDLm7E6YW1cDPgdHVN+lp4NjdWRVIbdIZuZkCK
- 6peppS6HPbRncHWTr2G/jS0SjoRBL7ePDillzarfBikrU2e+b8N0FuO5L2g9JMjZZNm+
- t7sagBGZt3T511f06Gj4UgkLV8qNlsUVYZSklFCR2OYet6pm71gHsqOi8QWqQE+ZPMRV
- neTg==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=sokg0z38Wp2ecITsAgRifPvE0HPahKz15w/1qSE981c=;
+ b=TunRZttCrMCdsRVuWye6CX1Cpic0bbMJ7PyX8CoWbemtp9q48OI9syR/Ba+332x00W
+ wPLiis1eUf2Ykq0L9G7rCOyEUszsfP0KXHIisTkNN6Y2vVGIfMJvu1XIAYJmIKM2zgZb
+ r8bOdICVsqsl5Su5TRnyJRXoDJ5dndV31n3HQ2XtelLW2PdvzzY1Qu+Hngc8WgQ7vzlr
+ 4yuCvBJjesZacaeMngtbM2SFoFlSS7BSHeJmHhQ1GfKaA5pAOO8IJQYCUEY4NpFolsCM
+ d2/kOjlarX8dseWUzwrIcqdfIBL5A9A0SmbQcWqc8crOQZBKGFv2sO73RIw9tJPr7YSG
+ wSIg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=IM/8EJ0L
+ header.s=google header.b=TunRZttC
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,101 +151,80 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Varadarajan,
+
 
 On 22/07/2026 09:41, Varadarajan Narayanan wrote:
-> Add structure and enum definitions to be able to parse the information
-> that is passed from PBL. This will be used to identify the boot medium.
-
-Please add some version identifier here, or at least a comment
-indicating roughly which SoC families/generations this will work on. As
-I understand it older SoCs used a different layout here, and it may
-change in the future too.
-
-An enum describing the version field in the header would be ideal.
-
-This is a case where I would very much like to see a sensible
-abstraction around this data structure maybe in its own file so that we
-can gracefully handle additions and changes to the PBL layout.
-
-To that end, I think it would make sense to have these definitions be
-private with an API exposed instead so we don't leak these
-implementation details everywhere.
-
-Thanks,
-// Casey
-
+> Update the SMEM with the boot device information got from the boot rom.
 > 
 > Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
->  arch/arm/mach-snapdragon/include/mach/pbl.h | 57 +++++++++++++++++++++++++++++
->  1 file changed, 57 insertions(+)
+>  arch/arm/mach-snapdragon/board_spl.c | 46 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 46 insertions(+)
 > 
-> diff --git a/arch/arm/mach-snapdragon/include/mach/pbl.h b/arch/arm/mach-snapdragon/include/mach/pbl.h
-> new file mode 100644
-> index 00000000000..2e6ad13255c
-> --- /dev/null
-> +++ b/arch/arm/mach-snapdragon/include/mach/pbl.h
-> @@ -0,0 +1,57 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
+> diff --git a/arch/arm/mach-snapdragon/board_spl.c b/arch/arm/mach-snapdragon/board_spl.c
+> index 6ae59481ba9..69a32e5d8cf 100644
+> --- a/arch/arm/mach-snapdragon/board_spl.c
+> +++ b/arch/arm/mach-snapdragon/board_spl.c
+> @@ -85,3 +85,49 @@ u32 spl_boot_device(void)
+>  	pr_err("No boot device configured\n");
+>  	return BOOT_DEVICE_NONE;
+>  }
 > +
-> +#ifndef __PBL_H__
-> +#define __PBL_H__
+> +#if IS_ENABLED(CONFIG_SPL_SMEM)
+> +/**
+> + * qcom_spl_populate_smem() - Populate shared memory (SMEM) information.
+> + * @ctx:	Pointer to the global SPL context.
+> + *
+> + * This function initializes and populates various SMEM items with boot-related
+> + * information, such as flash type, try-mode status, and ATF enable status.
+
+ATF? what? where?
+
+> + * Return: 0 on success, or a negative error code on failure.
+> + */
+> +static int qcom_spl_populate_smem(void *ctx)
+> +{
+> +	int ret;
+> +	size_t size;
+> +	struct udevice *smem;
+> +	u32 *fltype;
 > +
-> +enum pbl_shared_data_param_id {
-> +	PSD_ID_PBL_FW_VERSION			= 0x0,	/* PBL firmware version */
-> +	PSD_ID_PBL_PATCH_VERSION		= 0x1,	/* Patch version */
-> +	PSD_ID_RMB_MBOX_BASE_ADDR		= 0x2,	/* Not used */
-> +	PSD_ID_CPU_BOOT_SPEED_HZ		= 0x3,	/* CPU boot speed (Hz) */
-> +	PSD_ID_BOOT_MEDIA_TYPE			= 0x4,	/* Boot media type */
-> +	PSD_ID_IS_EDL_MODE			= 0x5,	/* Emergency Download mode */
-> +	PSD_ID_DEV_PROG_ELF_ENTRY_ADDR		= 0x6,	/* Not used */
-> +	PSD_ID_XBL_CONFIG_ELF_ENTRY_ADDR	= 0x7,	/* Not used */
-> +	PSD_ID_XBL_SC_EXT_ELF_ENTRY_ADDR	= 0x8,	/* Not used */
-> +	PSD_ID_PBL_TIMESTAMPS_BUFFER_ADDR	= 0x9,	/* PBL logs address */
-> +	PSD_ID_PBL_TIMESTAMPS_BUFFER_SIZE	= 0xa,	/* PBL log size */
-> +	PSD_ID_PBL_DEBUG_SHARED_INFO_ADDR	= 0xb,	/* Debug info address */
-> +	PSD_ID_PBL_DEBUG_SHARED_INFO_SIZE	= 0xc,	/* Debug info size */
-> +	PSD_ID_TME_CPU_PBL_ROM_BYPASS_FUSE	= 0xd,	/* Secure boot status */
-> +	PSD_ID_XBL_SC_DEBUG_LOG_ADDR		= 0xe,	/* XBL SC debug log address */
-> +	PSD_ID_XBL_SC_DEBUG_LOG_SIZE		= 0xf,	/* XBL SC debug log size */
-> +	PSD_ID_CURRENT_IMAGE_SET		= 0x10,	/* Booted image set */
-> +	PSD_ID_MEDIA_DATA_INFO_ADDR		= 0x11,	/* Media info pointer */
-> +	PSD_ID_MEDIA_DATA_INFO_SIZE		= 0x12,	/* Media info size */
-> +	PBL_SHARED_DATA_PARAM_MAX,
-> +};
+> +	ret = uclass_get_device(UCLASS_SMEM, 0, &smem);
+
+still not rebased on qcom-next
+> +	if (ret) {
+> +		pr_err("Failed to find SMEM node (%d)\n", ret);
+> +		return ret;
+> +	}
 > +
-> +enum pbl_boot_flash_type {
-> +	PSD_NO_FLASH		= 0,
-> +	PSD_NOR_FLASH		= 1,
-> +	PSD_NAND_FLASH		= 2,
-> +	PSD_ONENAND_FLASH	= 3,
-> +	PSD_SDC_FLASH		= 4,
-> +	PSD_MMC_FLASH		= 5,
-> +	PSD_SPI_FLASH		= 6,
-> +	PSD_PCIE_FLASH		= 7,
-> +	PSD_UFS_FLASH		= 8,
-> +	PSD_RSVD_1_FLASH	= 9,
-> +	PSD_USB_FLASH		= 10,
-> +	PSD_SPI_NAND_FLASH	= 11,
-> +	PSD_SPI_FLASH_GPT	= 12,
-> +};
+> +	size = sizeof(u32);
+> +	ret = smem_alloc(smem, -1, SMEM_BOOT_FLASH_TYPE, size);
+> +	if (ret) {
+> +		pr_err("Failed to alloc item: SMEM_BOOT_FLASH_TYPE (%d)\n", ret);
+> +		return ret;
+> +	}
 > +
-> +struct pbl_shared_data_entry {
-> +	u32 param_id;
-> +	ulong value;
-> +	bool valid;
-> +};
+> +	fltype = (u32 *)smem_get(smem, -1, SMEM_BOOT_FLASH_TYPE, &size);
+> +	if (!fltype) {
+> +		pr_err("Failed to get item: SMEM_BOOT_FLASH_TYPE\n");
+> +		return -ENOENT;
+> +	}
 > +
-> +struct pbl_shared_data {
-> +	u32 version;
-> +	u32 num_of_entries;
-> +	struct pbl_shared_data_entry entry[PBL_SHARED_DATA_PARAM_MAX];
-> +};
+> +	if (IS_ENABLED(CONFIG_SPL_MMC)) {
+> +		*fltype = SMEM_BOOT_MMC_FLASH;
+
+missing wmb() ?
+
+> +		return 0;
+> +	}
 > +
-> +#endif /* __PBL_H__ */
+> +	pr_err("Boot medium not specified\n");
+> +
+> +	return -ENOENT;
+> +}
+> +#endif /* IS_ENABLED(CONFIG_SPL_SMEM) */
 > 
 
 -- 
