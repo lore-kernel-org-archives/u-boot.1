@@ -4,139 +4,200 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5591AC53209
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 13:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E7DDC53209
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 13:04:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F101880E06;
-	Mon, 27 Jul 2026 13:03:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C193E80E38;
+	Mon, 27 Jul 2026 13:04:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v62ULYp0bk5M; Mon, 27 Jul 2026 13:03:48 +0000 (UTC)
+ id lb6cJBj-Bc4s; Mon, 27 Jul 2026 13:04:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1D84E80DF8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2826A80E2C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785157428;
-	bh=KnWrZfLlloaoXkj9/R9ccPdzzFRxSkUB7IFHiQr/tQs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785157444;
+	bh=9bUF/nLfWMrDB5hgsQlRNgBJcMV7xHNbWBQytMW9KbU=;
+	h=Date:Subject:To:References:Cc:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jGoxEhhzP0XrbBR8NN8MrdtNrcXtLdEEQ5xRso2+viAEDbFtaYpckdEGaQanPqkLY
-	 LdCCEzBMPwJdiUW+UvHOtAd7fa0QYL4JK98SOSaq6BZYs2ZxXDX5GQSHTA2UTOdrLA
-	 8zUlxqSCbLZinX4P2gLMfraEb28f5Hun82kYQ4Ji9xEX5RVDVeEmX7jvyFsqOUnvSf
-	 vhlkVGDAbsP6DKNDc731brmHcIln7pTwd9i+faW1OlTtHB9umw3OVjAH99HnOYHM8r
-	 zWuCx00uknPzwP22VbziLo0Ed2IYgh9dQfA6ufZBsl5iFUnJ3v1ns/tUJGoImd9D+7
-	 wUVN8pBwU416Q==
+	b=KGpJq97yYyfl6e8hJSVLSV/mLWOb0uNc+9YlvLe+LnGYIdLgWZpTuHtGW11hh1hrs
+	 BrAlkBWg1+/aICWAuEzYwnp7WZ0DSVZi5iQGCYf9fg6oU+0UU5qMqXSOr5e9DXGLGr
+	 BgBkxYofw7v8j7mlYLX64zt/Exjy0D93yb4Q/cUbJhSG5KFP8mlEYj/UyxTgz9Ni8w
+	 jRV4nXvqD2BbKMnAWUxWkGzLHr2dMY1wDAjZjndrtavUuQU7u71LiW3wjX7xognt92
+	 xl0vLUC57SveMDcRleRvUbpwfS2Ej3dT9xmIxznVECxyRXb1MbwOBpC/0QCPprKTQB
+	 OgITwk+JDmDwQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1D84E80DF8;
-	Mon, 27 Jul 2026 13:03:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2826A80E2C;
+	Mon, 27 Jul 2026 13:04:04 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 67B65194
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:03:46 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B9757350
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:04:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 561C080DEC
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:03:46 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7E33A80E0D
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:04:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fGvwRMQvsyxJ for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 13:03:45 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
- envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 216DB80DEA
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 216DB80DEA
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 216DB80DEA
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:03:44 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba3e6so4243547a12.1
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:03:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785157423; x=1785762223;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=KnWrZfLlloaoXkj9/R9ccPdzzFRxSkUB7IFHiQr/tQs=;
- b=sge+Z39Lo1UdxSZ16uYR+Ioa7stZA6AjEXvIgBiqCYypYWiCtD4Ozx2AIhND71UEsZ
- kX3Yzolcjlxyf3VPfvWQdrTyGIM2FVP10+ss7BA995jOi2i9zOa27+5uB9RkvpNGvJwS
- 5DPBv3aNgoYzioLZhNKvo1QKHS2sZiuv2vwGH/XJQckYx8efIOMjFl1wAinFB+WAa9M9
- VxkWDMuCuYqijS5R1Hak8uyDdfWcbmgTXFGlnp0RoIpOIEQIS5Glm0WhQQMhbbFa13x4
- TyYgUIu8CRemzggsB6ztCclJ9soilf14Yr+gTEO1iS1hNBuXZCP2kWUNxn0fZ7PRShSo
- Tk0Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrTT6R97owOo3yPPZLZbYoDPQ/yEhrhWTk+PBcpQ/Iaj6yitHiExz//A+HN5r9VhdVwWNfMlR4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzGC2o7EhFAmYHnl1riQPWqw64CL9NxVj//EjuKRgF06oCX++M1
- MAfnnbY74zsnSzPvDDvtZCaEdhlHGMRyx1k/cYD0fZGPMZxPs6DiNgo0RK6F2OkNwB0=
-X-Gm-Gg: AR+sD10eI7H938xYZqtC3rYwmKCjFCMV4T8nVTkUmfOYVGmSBiFBMVSaFp4UvJesbmj
- pmkSNzS8GpwhsEWDLe+zYMwGRZsB3H1/xzn2hIUe2OU5+fIfJ5fk4NON7OgKlTFzkKDC4KHBSnn
- Ijccsk5fxBbJ4A/VLHL1MwVGVgAp+Af8NQnX1t5pMpf88lm+VG26g6anutuXA1S3C7ZWHbe3f6G
- 9q7xYAgi5vHjTnjit+9K5LNywPBYQ4Lhasb60huUvmaBP6Tztd1qS8sZL8Yg2d4PgLb0Q2t3ACx
- 8aYY+KkzT537mOKKzi67uWMsC8D6+GKI4mPAPwcjOQN7UWQvFpKh68nc+kTbCD7f+wlCTfMXNyz
- OenDVm9RxO3crDmQWxt0ksSWhy7ofppAG2GYVg3nYRRKFW6McPyuM5eDuDnKEf9rXmLpqisUV2Y
- r79EYMFavfSqbiL0FYDFteZ/4JQ1nYNiQihKLPs64jYw==
-X-Received: by 2002:a05:6402:24da:b0:69a:596f:ba0d with SMTP id
- 4fb4d7f45d1cf-69fc116857dmr2518170a12.33.1785157422598; 
- Mon, 27 Jul 2026 06:03:42 -0700 (PDT)
-Received: from [192.168.1.37] (p549d460b.dip0.t-ipconnect.de. [84.157.70.11])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a0002fa679sm1018179a12.6.2026.07.27.06.03.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jul 2026 06:03:38 -0700 (PDT)
-Message-ID: <8ce66d77-96d6-4574-a1a5-d3442d2233c6@linaro.org>
+ id ERV1go6Hot73 for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 13:04:01 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org DACC880E38
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DACC880E38
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DACC880E38
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:04:00 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C641C84671; Mon, 27 Jul 2026 15:03:57 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C34B782991
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 15:03:55 +0200 (CEST)
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MQvD5-1wZ7Wt09Pb-00P93h; Mon, 27
+ Jul 2026 15:03:40 +0200
+Message-ID: <effdad0f-40d0-478f-9607-6c5e8ca5101a@gmx.de>
 Date: Mon, 27 Jul 2026 15:03:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 05/15] mach-snapdragon: spl: Add support for MMC
- booting in SPL
+Subject: Re: [PATCH] efi_loader: give SimpleTextInputEx its own WaitForKeyEx
+ event
+To: Daniel Golle <daniel@makrotopia.org>
+References: <141397f1be56cf730a3222263c091347fa4cda4e.1784408712.git.daniel@makrotopia.org>
 Content-Language: en-US
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- u-boot@lists.denx.de, u-boot@lists.u-boot-project.org,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tingting Meng <tingting.meng@altera.com>, Anshul Dalal <anshuld@ti.com>,
- Michael Srba <Michael.Srba@seznam.cz>, Johan Jonker <jbx6244@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Lukasz Majewski <lukma@denx.de>, Luca Weiss <luca.weiss@fairphone.com>,
- Danila Tikhonov <danila@jiaxyga.com>, Erikas Bitovtas <xerikasxx@gmail.com>,
- Biswapriyo Nath <nathbappai@gmail.com>,
- Vitalii Skorkin <nikroks@mainlining.org>, Jens Reidel
- <adrian@mainlining.org>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- David Wronek <david.wronek@mainlining.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Hongyang Zhao <hongyang.zhao@thundersoft.com>
-References: <20260722-spl-v8-v8-0-cbfa79e85a9d@oss.qualcomm.com>
- <20260722-spl-v8-v8-5-cbfa79e85a9d@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260722-spl-v8-v8-5-cbfa79e85a9d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Gregor Herburger <gregor.herburger@linutronix.de>,
+ Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <141397f1be56cf730a3222263c091347fa4cda4e.1784408712.git.daniel@makrotopia.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:D192jN6wn6kktygTXUhFLGY/UnnmfCvNSST1/17vY/SCR+C3Fr1
+ Zm2jjbUFEPkGrGKUlSz1PBXDddFPaXQ8xrMH0hblentTkMS5Mn8Le1QTWHksoxLtyelIj4B
+ m+wYVCtoG4f64dMSkMgxSN8LG8qOuqV2hwRftBXaIVpagNQtEd6bgLAyrqyj7jCC0Oz2AED
+ 0o8tP3XoLALO+Lsa1KtYQ==
+UI-OutboundReport: notjunk:1;M01:P0:8czIg3sxODI=;FV9nWPBfLSbRX1IVR0KLyra6VcE
+ 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
+ cT+ygiPN2hcrWOR3ZDppE
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785157423; x=1785762223;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=KnWrZfLlloaoXkj9/R9ccPdzzFRxSkUB7IFHiQr/tQs=;
- b=VXCIgrPu/aD5GOqFlQ2t1wisrxZ6i8JoHB9LHSjWAMqI8IQ5ouY31uP+ppPA0mp/xd
- a2WwmSb9DkRIzNOcuka7NUfyFEr/Hg4qjDpeqEKwSvmcT0rGlHxrvwK1e8PDcBKd7ZAn
- 4sz1ae1S+BuHYIGu6ZXASsbWT30YtIFKU/JpJKDofdvuBCnMJ//c4kQzvKlqe1TBZtjH
- tPjOPmh2/wn4gz09HQNxOCTl/NhyokV7fLVzuidUef2phTGC2iJAQUp5CIwvMkEtNIJa
- nBEFNx4IBRmLIBaMHETvglmYcFt+wJMpT0dOoRtEXydx7ln7adKmwCsKVWF2PhIwS+aP
- WZWQ==
+ d=gmx.de; 
+ s=s31663417; t=1785157420; x=1785762220; i=xypron.glpk@gmx.de;
+ bh=9bUF/nLfWMrDB5hgsQlRNgBJcMV7xHNbWBQytMW9KbU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=j/aoFiWzGfmSmp4TdfmO85M6aG89ezDShlkFkNozKvo9Zv8gHtP7hXaVnDVEz4nJ
+ rfU/c1e0R0mg4ncgnPL4KS1fd392z3vzLieiqu1QHoLwt80E8gc8+D12wbMDJDiOc
+ dWtFmhV+/NLWdjNB1ty6BIJIVfXilChkxL7SrUZMs+XWUo+UbFykcBirXTBF3lYaR
+ F6HQXqOapjj9iKIPbsI3xFb4TTqsDTwvCMpyGuGCIctRG9tA1mwGEsVhnTEP7tFj6
+ GT2c8q2adiPDtf1KcBugwbslXrXtlwPE+gc3if+485iFbLJLcynT6JTweHBOQvIbV
+ JJ4fq6LGnETeGjl9pA==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none)
+ header.from=gmx.de
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=VXCIgrPu
+ dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de
+ header.a=rsa-sha256 header.s=s31663417 header.b=j/aoFiWz
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=gmx.de
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=xypron.glpk@gmx.de
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j/aoFiWz"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,159 +212,98 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+On 7/18/26 23:11, Daniel Golle wrote:
+> The console input used a single wait event for both the
+> EFI_SIMPLE_TEXT_INPUT_PROTOCOL and the EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL
+> by aliasing wait_for_key_ex to wait_for_key. The UEFI specification
+> describes these as separate events, and a client that opens ConInEx and
+> drives WaitForKeyEx independently of the base protocol (the Windows Boot
+> Manager does this) can then desynchronise against the shared object and
+> never observe a keystroke, even though GRUB and systemd-boot, which lean
+> on the base wait event, work.
+>=20
+> Create a distinct WaitForKeyEx event, and signal and clear both events
+> together when a key becomes available or is consumed, so every client
+> sees a consistent wait event regardless of which protocol it uses.
+>=20
+> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
+Hello Daniel,
 
-On 22/07/2026 09:41, Varadarajan Narayanan wrote:
-> Add routines to enable U-Boot SPL to be able to proceed with the boot from
-> MMC partitions.
-> 
-> Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Thank you for addressing this issue.
+
+Could you, please, create a test case in lib/efi_selftest/ that fails=20
+without the patch and succeeds with it.
+
+Best regards
+
+Heinrich
+
 > ---
->  arch/arm/mach-snapdragon/board_spl.c | 107 +++++++++++++++++++++++++++++++++++
->  1 file changed, 107 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board_spl.c b/arch/arm/mach-snapdragon/board_spl.c
-> index 69a32e5d8cf..c5e86458616 100644
-> --- a/arch/arm/mach-snapdragon/board_spl.c
-> +++ b/arch/arm/mach-snapdragon/board_spl.c
-> @@ -131,3 +131,110 @@ static int qcom_spl_populate_smem(void *ctx)
->  	return -ENOENT;
->  }
->  #endif /* IS_ENABLED(CONFIG_SPL_SMEM) */
-> +
-> +#if CONFIG_IS_ENABLED(MMC)
-> +
-> +#define QCOM_SPL_FIT_IMG_PARTITION	"0:BOOTLDR"
-> +
-> +/**
-> + * spl_find_partition_info() - Find partition information by name
-> + * @uclass_id: Device class ID (UCLASS_MMC)
-> + * @device_num: Device number within the class
-> + * @part_name: Name of the partition to find
-> + * @info: Pointer to store partition information
-> + *
-> + * This function provides partition lookup logic for MMC.
-> + * Return: Partition number on success, negative error code on failure
-
-What's missing in the mmc/part framework for this? This "helper" is
-called once and doesn't really seem to justify itself, please elaborate.
-> + */
-> +static int spl_find_partition_info(enum uclass_id uclass_id, int device_num,
-> +				   const char *part_name,
-> +				   struct disk_partition *info)
-> +{
-> +	int ret;
-> +	struct blk_desc *desc;
-> +
-> +	if (!part_name || !info) {
-> +		printf("Invalid parameters for partition lookup\n");
-> +		return -EINVAL;
+>   lib/efi_loader/efi_console.c | 15 +++++++++++++--
+>   1 file changed, 13 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+> index 8d076058280..2c8adfcb2d1 100644
+> --- a/lib/efi_loader/efi_console.c
+> +++ b/lib/efi_loader/efi_console.c
+> @@ -681,6 +681,7 @@ struct efi_cin_notify_function {
+>   static bool key_available;
+>   static struct efi_key_data next_key;
+>   static LIST_HEAD(cin_notify_functions);
+> +static struct efi_simple_text_input_ex_protocol efi_con_in_ex;
+>  =20
+>   /**
+>    * set_shift_mask() - set shift mask
+> @@ -937,6 +938,7 @@ static void efi_cin_check(void)
+>  =20
+>   	if (key_available) {
+>   		efi_signal_event(efi_con_in.wait_for_key);
+> +		efi_signal_event(efi_con_in_ex.wait_for_key_ex);
+>   		return;
+>   	}
+>  =20
+> @@ -949,8 +951,10 @@ static void efi_cin_check(void)
+>   			efi_cin_notify();
+>  =20
+>   			/* Queue the wait for key event */
+> -			if (key_available)
+> +			if (key_available) {
+>   				efi_signal_event(efi_con_in.wait_for_key);
+> +				efi_signal_event(efi_con_in_ex.wait_for_key_ex);
+> +			}
+>   		}
+>   	}
+>   }
+> @@ -1058,6 +1062,7 @@ static efi_status_t EFIAPI efi_cin_read_key_stroke=
+_ex(
+>   	*key_data =3D next_key;
+>   	key_available =3D false;
+>   	efi_con_in.wait_for_key->is_signaled =3D false;
+> +	efi_con_in_ex.wait_for_key_ex->is_signaled =3D false;
+>  =20
+>   out:
+>   	return EFI_EXIT(ret);
+> @@ -1259,6 +1264,7 @@ static efi_status_t EFIAPI efi_cin_read_key_stroke
+>   	*key =3D next_key.key;
+>   	key_available =3D false;
+>   	efi_con_in.wait_for_key->is_signaled =3D false;
+> +	efi_con_in_ex.wait_for_key_ex->is_signaled =3D false;
+>   out:
+>   	return EFI_EXIT(ret);
+>   }
+> @@ -1351,7 +1357,12 @@ efi_status_t efi_console_register(void)
+>   		printf("ERROR: Failed to register WaitForKey event\n");
+>   		return r;
+>   	}
+> -	efi_con_in_ex.wait_for_key_ex =3D efi_con_in.wait_for_key;
+> +	r =3D efi_create_event(EVT_NOTIFY_WAIT, TPL_CALLBACK, efi_key_notify,
+> +			     NULL, NULL, &efi_con_in_ex.wait_for_key_ex);
+> +	if (r !=3D EFI_SUCCESS) {
+> +		printf("ERROR: Failed to register WaitForKeyEx event\n");
+> +		return r;
 > +	}
-> +
-> +	/*
-> +	 * Get block device descriptor
-> +	 */
-> +	desc = blk_get_devnum_by_uclass_id(uclass_id, device_num);
-> +	if (!desc) {
-> +		printf("Block device not found for class %d, device %d\n",
-> +		       uclass_id, device_num);
-> +		return -ENODEV;
-> +	}
-> +
-> +	/*
-> +	 * Initialize partition table if needed
-> +	 */
-> +	if (desc->part_type == PART_TYPE_UNKNOWN) {
-> +		printf("Initializing partition table\n");
-
-Not sure if I even want to know what this is a workaround for, why can't
-this be fixed in the proper place?
-
-> +		/*
-> +		 * Prefer EFI/GPT
-> +		 */
-> +		desc->part_type = PART_TYPE_EFI;
-> +	}
-> +
-> +	/*
-> +	 * Find partition by name
-> +	 */
-> +	ret = part_get_info_by_name(desc, part_name, info);
-> +	if (ret < 0) {
-> +		printf("Partition '%s' not found\n", part_name);
-> +		return -ENOENT;
-> +	}
-> +
-> +	printf("Found partition '%s' at partition number %d\n", part_name, ret);
-
-debug()
-> +	return ret;
-> +}
-> +
-> +/**
-> + * spl_mmc_boot_mode() - Determine the boot mode for MMC
-> + * @mmc:	Pointer to the MMC device
-> + * @boot_device:	Boot device ID
-> + *
-> + * Return: MMCSD_MODE_RAW to use raw partition access
-> + */
-> +u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-> +{
-> +	return MMCSD_MODE_RAW;
-> +}
-> +
-> +/**
-> + * spl_mmc_boot_partition() - Determine which partition to boot from
-> + * @boot_device:	Boot device ID
-> + *
-> + * Return: Partition number to boot from, or default partition on error
-> + */
-> +int spl_mmc_boot_partition(const u32 boot_device)
-> +{
-> +	int ret;
-
-this can have a better name than "ret"
-
-> +	struct disk_partition info;
-> +
-> +	ret = spl_find_partition_info(UCLASS_MMC, 0, QCOM_SPL_FIT_IMG_PARTITION, &info);
-> +#if IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION)
-
-This entire function isn't even called unless this config option is
-enabled, so you can drop this. compile time conditional error checking
-here is incomprehensible
-
-> +	if (ret < 0) {
-> +		printf("Using default MMC partition %d\n",
-> +		       CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION);
-> +		return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION;
-> +	}
-> +#endif
-> +	return ret;
-> +}
-> +
-> +/**
-> + * spl_mmc_get_uboot_raw_sector() - Find the raw sector offset
-> + * @mmc:	Pointer to the MMC device
-> + * @raw_sect:	Sector
-> + *
-> + * Return: 0 if the image is at the starting of the partition without any offset.
-
-this function API is already documented in the header (same for the
-others in this file), if you want a comment (definitely nice!) then
-write a normal one not a doc comment that just rewords the existing API.
-This is noise.
-
-> + */
-> +unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc, ulong raw_sect)
-> +{
-> +	return 0;
-> +}
-> +#endif /* CONFIG_IS_ENABLED(MMC) */
-> 
-
--- 
-// Casey (she/her)
+>   	r =3D efi_create_event(EVT_TIMER | EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
+>   			     efi_console_timer_notify, NULL, NULL,
+>   			     &console_timer_event);
 
