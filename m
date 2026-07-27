@@ -1,67 +1,67 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0CA8C53219
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 09:22:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D717C53219
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 09:24:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3F787606C7;
-	Mon, 27 Jul 2026 09:22:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ACFA680D1F;
+	Mon, 27 Jul 2026 09:24:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3i8HcNIi4VTb; Mon, 27 Jul 2026 09:22:26 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2SS5qJrm4of3; Mon, 27 Jul 2026 09:24:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2CFD560675
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 57D9D80C4E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785144146;
-	bh=qFsZohbsiuTKP80gosbRk7d2kIlw8kl40ow8dDZLR2M=;
+	d=lists.u-boot-project.org ; s=default; t=1785144244;
+	bh=fclnDS+5MVVFwcsdBwJqxnS2qAWjOm0mgO7LbeJ/QkI=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mswOjTgXqrwuoMRR3VN8auWvk3KzD2p3KXJviBxpc/BMRi8+Iz+CB8tXW4FeOrIZl
-	 IhBo0M0NZ/N5nvNP/SmTuyBznxovuykiPtTTEbDuGj3BKv5uz/wdrYerOWnWdqqAgt
-	 np7OKPKpbcu3iAFSp6qstB2U3wIwG1VbAA0y8nEEPaNamN/pEtyU0ecqKEFnK5dRJG
-	 Qv/5kXUuErHzrHXTV3FQxpcgRfJx28U0xe1bzyJhuz5uSaVOEzR2i7ok8HV1OuSja3
-	 VUddXJt8p8ghWe23PgvpAqsYBfP2hQ+B+mgIIZKPacq/5ayrCAKOmQEQxeRVGYwPKf
-	 /DMlhZLiUheuw==
+	b=WjyA9u/QXE6SekBox8MWSg/pRD/OrXRMNGwqGOwpfI3WpP3y7RbX0wjuSgM+sjeGa
+	 whQJRiOUkr4m7L9oUGwJbgRMItOmU+bg6yTw+Vt2lXRMvsRVXwZa0gd4nDn3hW19wV
+	 AY6JfAP3MsmBhZ1dKo7IPswyPyiFCn8ml/AadLKb8YhKqvfcVH3zHgBUi5cTpYtlny
+	 gwdZwNg09j0rYtefefDVPo2GjVnGQoLhb/y4yNJVyy9nsIzqOa6UcFPp7a1BKXcJY3
+	 UTbLhXMivmh9h+Lntz0n1ESCcClnZ4qk4Fe54ZkvBgmIrgSbUEsFzhz7h8QpWHgMQv
+	 Ok93dRKhOyb8A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2CFD560675;
-	Mon, 27 Jul 2026 09:22:26 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 54BAE42A
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 09:22:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 57D9D80C4E;
+	Mon, 27 Jul 2026 09:24:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EA3A126C
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 09:24:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5273F405BB
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 09:22:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DC08640109
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 09:24:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4-GrqWN0emDt for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 09:22:24 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 17C56405A4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 17C56405A4
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 17C56405A4
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 09:22:23 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id f3WoL686bIEd for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 09:24:02 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 977F640106
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 977F640106
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 977F640106
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 09:24:01 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E35E84671; Mon, 27 Jul 2026 11:22:22 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 092B884671; Mon, 27 Jul 2026 11:24:00 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E8AF82991
- for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 11:22:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B82182991
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 11:23:56 +0200 (CEST)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id CBB994387F;
- Mon, 27 Jul 2026 09:22:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2541E1F000E9;
- Mon, 27 Jul 2026 09:22:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 40743601EC;
+ Mon, 27 Jul 2026 09:23:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 401211F000E9;
+ Mon, 27 Jul 2026 09:23:54 +0000 (UTC)
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
  marex@denx.de
@@ -70,32 +70,32 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
  Simon Glass <sjg@chromium.org>, Anders Roxell <anders.roxell@linaro.org>,
  Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH v5 27/75] usb: dwc3: import from kernel v5.3
-In-Reply-To: <20260716134305.614278-28-anders.roxell@linaro.org>
+Subject: Re: [PATCH v5 28/75] usb: dwc3: import from kernel v5.4
+In-Reply-To: <20260716134305.614278-29-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
- <20260716134305.614278-28-anders.roxell@linaro.org>
-Date: Mon, 27 Jul 2026 11:22:16 +0200
-Message-ID: <8733x44wjb.fsf@kernel.org>
+ <20260716134305.614278-29-anders.roxell@linaro.org>
+Date: Mon, 27 Jul 2026 11:23:52 +0200
+Message-ID: <87zezc3hw7.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1785144138;
- bh=qFsZohbsiuTKP80gosbRk7d2kIlw8kl40ow8dDZLR2M=;
+ d=kernel.org; s=k20260515; t=1785144235;
+ bh=fclnDS+5MVVFwcsdBwJqxnS2qAWjOm0mgO7LbeJ/QkI=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=VHmZZnQ1M/JRl4dBf/fEi8R33BTHbT6p6nm3LrDH9bYFFWryN6yhvZ8xdPFPZ5kKU
- T+X063pgVkARsy2fCYKG0COD7Vtqp9WcZX+PCO2RRov342eR/tmlUlvEXNQrJB1wN4
- ElqVhraxGX00pZykxEbbi0Wmabwzu3CHIXMMTR+mYGYCyKNiond1BMPR0JvbvFtnav
- AdT+XBUUGzVdOgdT2Xj4zNUoV/YmFu66yX7YYgxiuRLlICk1axPVT/6f/kWx5Mzhx2
- 2a8cM3/W+jTAbHrehXfJObB8vSqThd9F+8gY768/o34A6SK3EYutYsob6+w2L1H8W0
- z6rl5TVtJswoQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ b=Tqf1Z5e9z9aBJYYBB1X/B8oIPKE89ihqK4pe3VtCAiexZdTQyPjBDeKAZH2+Zfk5L
+ 8EsOgohUfYCk39h8J2Qo+ittmuuS5/OOJsUizmTVOLTOESvHRFJGKLt8pU734j7EV/
+ rhZPSWY0s1rJJTecRsMUiQ6PHxKieSb03rN/ogyDc2xhSDcM3VJYEbHEASbTxoxGBa
+ Cy66+tOtRYdLmWUWs8f47R/53PIz/jM+/KFnuXmRLMKv5vWfmOsBhbQwWBr8tBcRKC
+ k3LO5MazvwiMX2QBvP0a9Ias5XCle4pKUCgBcTBAurfzx16uG+lC0CUw7e8QDwENGr
+ uB72hkEi0p58Q==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=VHmZZnQ1
+ header.a=rsa-sha256 header.s=k20260515 header.b=Tqf1Z5e9
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
@@ -103,7 +103,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=mkorpershoek@kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="VHmZZnQ1"; 
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="Tqf1Z5e9"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -127,7 +127,7 @@ On Thu, Jul 16, 2026 at 15:41, Anders Roxell <anders.roxell@linaro.org> wrote:
 
 > From: Jens Wiklander <jens.wiklander@linaro.org>
 >
-> Sync Linux kernel dwc3 changes from v5.2 to v5.3.
+> Sync Linux kernel dwc3 changes from v5.3 to v5.4.
 >
 > The following files are preserved accross the import:
 > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -142,20 +142,35 @@ On Thu, Jul 16, 2026 at 15:41, Anders Roxell <anders.roxell@linaro.org> wrote:
 > Note that this is a raw import and doesn't build.
 > A fixup commit at the end of the series fixes that.
 >
-> List of commits: git log --oneline v5.2..v5.3
+> List of commits: git log --oneline v5.3..v5.4
 > Commits imported:
-> 332694f8a4f7 Revert "usb:gadget Separated decoding functions from dwc3 driver."
-> 3db1b636c07e usb:gadget Separated decoding functions from dwc3 driver.
-> b3649dee5fbb usb: dwc3: pci: add support for TigerLake Devices
-> aa23ce847dda usb: dwc3: remove unused @lock member of dwc3_ep struct
-> dbb0569de852 usb: dwc3: pci: Add Support for Intel Elkhart Lake Devices
-> 729dcffd1ed3 usb: dwc3: gadget: Add support for disabling U1 and U2 entries
-> 4d20a6107050 usb: dwc3: qcom: Use of_clk_get_parent_count()
-> dc1b5d9aed17 usb: dwc3: Fix core validation in probe, move after clocks are enabled
-> 7f5d6a469617 usb: dwc3: qcom: Improve error handling
-> a6e456209d08 usb: dwc3: qcom: Start USB in 'host mode' on the SDM845
-> 2bc02355f8ba usb: dwc3: qcom: Add support for booting with ACPI
-> f90db10779ad usb: dwc3: meson-g12a: Add support for IRQ based OTG switching
+> d8eca64eec71 usb: dwc3: gadget: fix race when disabling ep with cancelled xfers
+> a7d9874c6f3f usb: dwc3: remove the call trace of USBx_GFLADJ
+> 9bbfceea12a8 usb: dwc3: pci: prevent memory leak in dwc3_pci_probe
+> a51bab592fbb usb: dwc3: select CONFIG_REGMAP_MMIO
+> d819f6584c20 usb: dwc3: Remove dev_err() on platform_get_irq() failure
+> f146b40ba1f0 usb: dwc3: Switch to platform_get_irq_byname_optional()
+> a0a465569b45 usb: dwc3: remove generic PHY calibrate() calls
+> 17b63704ec7c usb: dwc3: gadget: Workaround Mirosoft's BESL check
+> 91f255a26bce usb: common: Separated decoding functions from dwc3 driver.
+> 54fb5ba647f8 usb: dwc3: gadget: Set BESL config parameter
+> 16fe4f304015 usb: dwc3: Separate field holding multiple properties
+> 1cf084d161f4 usb: dwc3: meson-g12a: fix suspend resume regulator unbalanced disables
+> bceb418b65b9 usb: dwc3: st: Add of_dev_put() in probe function
+> e36721b90144 usb: dwc3: st: Add of_node_put() before return in probe function
+> c09b73cfac2a usb: dwc3: don't set gadget->is_otg flag
+> 240b65dc1e89 usb: dwc3: Use clk_bulk_prepare_enable()
+> 03bf32bbb607 usb: dwc3: Use devres to get clocks
+> 3cd703f483d1 usb: dwc3: remove generic PHYs forwarding for XHCI device
+> 4749e0e61241 usb: dwc3: Update soft-reset wait polling rate
+> b2a3974253d3 usb: dwc3: omap: squash include/linux/platform_data/dwc3-omap.h
+> a6e5e6794a53 usb: dwc3: Switch to use device_property_count_u32()
+> 5b76f6a0b0f8 usb: dwc3: keystone: use devm_platform_ioremap_resource() to simplify code
+> 58dd0bad2554 usb: dwc3: omap: use devm_platform_ioremap_resource() to simplify code
+> c6e4999cd930 usb: dwc3: meson-g12a: use devm_platform_ioremap_resource() to simplify code
+> d3523b631403 usb: dwc3: meson-g12a: use devm_platform_ioremap_resource() to simplify code
+> b33f37064b74 usb: Remove dev_err() usage after platform_get_irq()
+> 41b57327b270 usb: dwc3: Switch to use device_property_count_u32()
 >
 > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -166,3 +181,4 @@ looks good to me:
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
+> ---
