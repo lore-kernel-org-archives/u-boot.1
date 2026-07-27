@@ -1,116 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF008C531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 17:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E17BC53209
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 17:14:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1AB7C6073A;
-	Mon, 27 Jul 2026 17:08:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7933C80CA8;
+	Mon, 27 Jul 2026 17:14:30 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4mLEmR8KACpa; Mon, 27 Jul 2026 17:14:29 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B149180CB8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785172469;
+	bh=3r3oF5LIv7CQdk5qNSEVXQWZReO4+JJiNRYX7+MRYTc=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ZCHeBdw2jNSPKfwnZBezpb58GCHrnCFqCXUqFfpI160q4tZF+9WrfjJM64BjEgBP3
+	 dFBNAJRzsRauuvTWeqh5hIfRjH9G3cqdeDxzTZGMA7kMp8rbwf3g9bxkxWPbcxdg9D
+	 sZ07DrRFkWcVFgVsviFDBjQTMPWtUwZCMyJM8obm8Q8SGW4SnI92tJp8Bs7itOBPB1
+	 duR03KGpQ1XAl8ARfOQR3fWg1jkbxRPvGMsbpuJzUet3A6ldLiALMPEan3/ZeyML+G
+	 O6j3chCg7ty4IArQFmH2YXHiso+Ya5lucAfi4+fMu6CHPyLWzlCoBjJTCBwsOD5F8o
+	 aR+ubssc2/tAg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id B149180CB8;
+	Mon, 27 Jul 2026 17:14:29 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id ED4CF39E
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id D74E7606EF
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cKnVNdfWMgh7; Mon, 27 Jul 2026 17:08:01 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 19441606EF
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785172081;
-	bh=DaHUvmPe2et4E0UabXOzoo+LVnbAKwPLotVtH3d2Dj4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=znY/KBP5DNZwCXsKaq2yep5iCouErU1x/cITKEmMhXWp0+dABavJslxadfibhwA7r
-	 zY5ikAUL7wYR2TA2f++I/N9VTVPdZz/1PcOjNd3hPxkAYuvhX/e5b5vE7G5x45MAmk
-	 06XZ5LioST1jzvh+Rt2H+kWUgtc1FzZSIXVax3dEWsYHEqSbphM/IIW/b0DxNhVPmb
-	 3hImi+A/JAuz7mPp3ecjqMPknuf6BzKPfsA58dBRwFtCQz7Nv9X+y52BPFQsiFElfL
-	 LC1E5SOoOnlIDz1ekB6VCVTVKnCHLvMyr/Ea/d4S0J326Gu3Lzx3z9RnH+3QlC4xSG
-	 fdW7veCtOXOng==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 19441606EF;
-	Mon, 27 Jul 2026 17:08:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 78EDD39E
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:08:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5F3E0400AC
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:08:00 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XodTgsV9Okmn for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 17:07:59 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
- helo=sender4-op-o12.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 575C940055
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 575C940055
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 575C940055
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:07:58 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1785172063; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=aBWHSIvObidKYTiRDdu5XwUbq1EXsBh7++Fd/5yLWdbvwIHcpjQnUq50BuCQuKqpK4eCmsXRpw0NYCG8zBhj4HoNAseJoNEU3q9HPgn8S/DVorx8dijWZyhQg42KLiwZwU3WLWkR2j/Z5sQAUDL/IW98B3lMWpsgf3Y1PwnD51w=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1785172063;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=DaHUvmPe2et4E0UabXOzoo+LVnbAKwPLotVtH3d2Dj4=; 
- b=It8Njo3d+Cgv+QNBdxV9lk69BDyOtk214+VFfbUWmoJi27jbE6jT1MrmweHzKdpEKk8rGdhY7Sr0ppj1HDXnJyuXZBgbt5gPfnEHITjFUnRXoExB85B2EYiWxMtDhv4woAk0cHyDHMd2mKPPhzlWToXF+OHt5oryMeD3mndbz5c=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 1785172059341288.149333284249;
- Mon, 27 Jul 2026 10:07:39 -0700 (PDT)
-Date: Mon, 27 Jul 2026 17:07:28 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
-Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Guodong Xu <guodong@riscstar.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
-Message-ID: <ameQUN3zlD0Ei8Jm@pie>
-References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
- <20260727-m4-v6-6-2f58566d48ca@riscstar.com> <amdGSBKT4iRzuh1P@pie>
- <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
+ id zRpltocObjiQ for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 17:14:28 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
+ envelope-from=igor.opaniuk@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org D35CB606D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D35CB606D3
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D35CB606D3
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 17:14:27 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4954dff6536so21767305e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 10:14:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785172466; x=1785777266;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=3r3oF5LIv7CQdk5qNSEVXQWZReO4+JJiNRYX7+MRYTc=;
+ b=YoG+uKfX3qkQtKO61CSZF+0cfXPetbAlh8PTDS5pGmyV4ZVmN50RUkEnZI/6mFF0LJ
+ ypOE0GPQywwYkI+t4aFKFC6wUDECTpy0uaZmGLT6Dw4+OdDcm9RdnwB8UHJhRzjJlN0d
+ RHIdxgkQClPwGDawzWAtarMyFWOzo8TKH8bE098+cItgkGznkcN/MqAwyIAHfjiLcw7k
+ MQUidZ3ptYhjEXndwIcn+1YmBohPPgeoKTJqVL2tvem/6aok8kBJ10c6NB8BWXvFX+gM
+ 6ta+Rn9tCaG3qNDvI8x16G/oFPJhBC7Yj0zyJonI6lVB8tK6psYXNPeqPh2+6dTnVzaU
+ 5eoA==
+X-Gm-Message-State: AOJu0YwwCeA4Oi1fAEUdnfgokki7cxgPS41eP7+HG5l7l29ximbs+0bu
+ B2DxNuAq89IPymn/vMXuHRndt4ILDyxGyiivIVgtySGgWdYn67rBYyFb
+X-Gm-Gg: AR+sD13BqtblqVaaoB/rS6UmiHCAKf5viMS3ledSGB5+u/p2DKPmcb3dB02AMCWKyoa
+ 6fwgQTqc1316FEdPgxTYPp4c4GtP2JPURV0YI+af8YpnQ/PhbjQyACjxa4ztvSEziPhGm75Y2cl
+ Dl52gzex6WtYY9nR1TXGw/y4jWsU2037eZnnJdAVnBB1sZvi9XzRr+HdrlVsVG09O8oKY4JyzV1
+ kBhX3ZrPy1icsJxp5tgbTS1HOKmKgrQhWv67vJbw8abbZsFjgZR8baablpTARwLbLhtZFgoKEES
+ XTNr8kkEJY53eRIycKwjlivujtnH1uKENvZuHOow+bQsZtCDXq9noos4s55jcpHkgfnewGGdiIB
+ g/k9TVh/aUs1qr5ZL5QILtA0v8kXDiFjkJqxd/jlUxBTtgss8qX7vHEqrtQqfT8iwnxJ3J0zcsW
+ +7budUV1Koz+2TJBoUJKDcRAev5lybJ8PFRxGorByBdl3abchDm9L9/UqtN6kT3kPrPNAsAg==
+X-Received: by 2002:a05:600c:6298:b0:493:ee2b:c876 with SMTP id
+ 5b1f17b1804b1-496b572e686mr121041735e9.35.1785172465553; 
+ Mon, 27 Jul 2026 10:14:25 -0700 (PDT)
+Received: from [127.0.1.1] (185-164-141-21.cgnat.inetia.pl. [185.164.141.21])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f85b9a5a2sm55287391f8f.7.2026.07.27.10.14.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jul 2026 10:14:25 -0700 (PDT)
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Subject: [PATCH 0/4] avb: make the AVB root key source pluggable
+Date: Mon, 27 Jul 2026 19:14:12 +0200
+Message-Id: <20260727-avb-root-key-pluggable-v1-0-7e27b2b92cc0@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/285.167.77
-X-ZohoMailClient: External
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1785172063; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=DaHUvmPe2et4E0UabXOzoo+LVnbAKwPLotVtH3d2Dj4=;
- b=Ektocp/BHQqVlo/S4rMmSnhBu6q+QQNzvaSbzZDFwHxTCeR999PUxiTh/V6YVHN7
- Ie+KuNfKH6cXZe7gnG3mqhvrB6UBK9UpJy4ljbqbiApoECgqngEMRFTP/1rNP5wQOKw
- bWbrw5DG+QA41CbDgB9BW4JhTZwmnnNR/m5d0Hnk=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=Ektocp/B
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ6CMBBA4auQWTsJHQk1XoW46M9YRwklLRAJ4
+ e5WWH6L9zbInIQz3KsNEi+SJQ4F6lKBe5khMIovBqqprTVpNIvFFOOEH15x7OcQjO0ZG0dOae+
+ vpG5Q4jHxU77HuHuczrN9s5v+N9j3HyuDmqx6AAAA
+X-Change-ID: 20260727-avb-root-key-pluggable-4c2c17dd3218
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>
+X-Mailer: b4 0.15.2
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1785172466; x=1785777266;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=3r3oF5LIv7CQdk5qNSEVXQWZReO4+JJiNRYX7+MRYTc=;
+ b=Inp4NJZRPr9YbTL6HnS757IEPH+hxeKMUHUf1A3+VM01ir4csbq6pAO2l26R+dPFb+
+ teGhnpbXTcPuiHB/vvXb1aDUu3Qa72zkXUweK0JyTyczIaXlq7BLEmJo6fkJZUHPQvNk
+ Y7zmhm2xLDTd/jIAiZM4k00HQrbm9wa4vNYsl+F8fNylISG/UhS0/6qdbcyE2tDmycqv
+ +AYXZM1NhIamZhd1reoW+KhIqikap9a/U0Lz+ImxjZLrodpkg6ViVZDUpD45p6wL+7xr
+ TU9zHSfApxBSaB779+4CBCKBMGuT+t2n90GlG8u7VZ9gGFIbPf4uX/iz+to1fEpAzJFL
+ A9cQ==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=Inp4NJZR
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,63 +132,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, Jul 27, 2026 at 09:08:52PM +0800, Eric Chung wrote:
-> Hi Yao,
-> 
-> I'm not familiar with the policy for syncing DTS files from the Linux upstream.
-> Could you clarify how this script works?
-> 
-> Does it sync all DTS files from Linux upstream at once, or is it
-> possible to sync
-> only the Spacemit DTS file?
+AVB's entire chain of trust reduces to a single public key, and today that
+key is hard-coded in U-Boot as the AVB reference/test key -- whose private
+half is publicly available. That is fine for development, but it means the
+root of trust for a "locked" device is a key anyone can sign with, and there
+is no way to point AVB at a real, per-device anchor.
 
-update-subtree.sh cherry-picks a commit from the upstream, or
-merge an upstream tag into the subtree. Cherry-picking SD-related
-commits from Linux upstream suits for your case.
+This series makes the source of the trusted root key digest selectable via a
+Kconfig choice (CONFIG_AVB_ROOT_KEY_*), while keeping the actual trust
+decision -- hash the vbmeta key, compare against the trusted digest, fail
+closed on any error -- in one place in validate_vbmeta_public_key():
 
-> If I choose to sync only the Spacemit DTS file and include it in my patch set,
-> would that cause conflicts later when others try to sync all DTS files?
+  - BUILTIN (default): SHA-256 of the built-in avb_root_pub blob. Unchanged
+    behaviour, still the dev/test key, so nothing changes for existing users.
+  - TEE: read the digest from OP-TEE secure storage (the same RPMB-backed
+    store that already holds the rollback indexes and lock state), via the
+    existing AVB TA persistent-value interface. No TA change required.
+  - BOARD: a __weak hook a SoC/board overrides to read the digest from
+    wherever its hardware keeps it (e.g. a hash fused into OTP/eFuse or
+    U-Boot proper dtb). The default fails closed, so a board that forgets
+    to wire it up refuses verification rather than silently trusting a
+    wrong key.
 
-Tom synchronizes the dts subtree with Linux upstream irregularly, there
-should be no conflict or relatively small ones if you cherry-pick the
-changes, while adding downstream nodes in *-u-boot.dtsi might suffer
-from duplication, too, during synchronization.
+The last patch documents the choice and its security caveats in
+doc/android/avb2.rst (built-in key is dev-only; a TEE-stored digest is only
+an anchor if the TA refuses to overwrite it while unlocked; the board
+provider fails closed).
 
-> Best Regards
-> Eric
+Note this only concerns *where the root key comes from*; it does not by
+itself make verification enforcing -- device lock state and rollback
+protection are still only enforced when backed by OP-TEE.
 
-By the way, please avoid top-posting if possible.
+Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+---
+Igor Opaniuk (4):
+      avb: make the AVB root key source pluggable
+      avb: add OP-TEE root key digest provider
+      avb: add board-specific root key provider
+      doc: android: document the AVB root key source
 
-Thanks,
-Yao Zi
+ common/Kconfig       | 50 ++++++++++++++++++++++++++++++++++++
+ common/avb_verify.c  | 72 +++++++++++++++++++++++++++++++++++++++++++++++++---
+ doc/android/avb2.rst | 37 +++++++++++++++++++++++++++
+ include/avb_verify.h | 19 ++++++++++++++
+ 4 files changed, 175 insertions(+), 3 deletions(-)
+---
+base-commit: e6f091a208276db72596c8f7376648856a276d97
+change-id: 20260727-avb-root-key-pluggable-4c2c17dd3218
 
-> On Mon, Jul 27, 2026 at 7:52 PM Yao Zi <me@ziyao.cc> wrote:
-> >
-> > On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
-> > > Add the SDH0 controller node and its pinctrl groups to the u-boot
-> > > overlay. The upstream DTS only contains the eMMC node; the SD card
-> > > controller (sdhci@d4280000) and its MMC1 pinctrl configuration are
-> > > missing. Place the new node inside the storage-bus via path-based
-> > > merge so it inherits the dma-ranges from the parent bus.
-> > >
-> > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-> >
-> > Please cherry-pick upstream devicetree changes from Linux upstream with
-> > tools/update-subtree.sh instead of adding our own copies. Changes for
-> > k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v7.2.
-> >
-> > Best regards,
-> > Yao Zi
-> >
-> > > ---
-> > > v5:
-> > > - Append power source field on eMMC/SD pinctrl.
-> > > v3:
-> > > - Fix SD pinctrl as uhs.
-> > > v2:
-> > > - Use vmmc-supply as vqmmc-supply on SD node.
-> > > - Add alias of mmc0 and mmc1.
-> > > ---
-> > >  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 ++++++++++++++++++++++++++++++-
-> > >  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 ++++++++++++++++++++++++++++-
-> > >  2 files changed, 173 insertions(+), 4 deletions(-)
+Best regards,
+--  
+Igor Opaniuk <igor.opaniuk@gmail.com>
+
