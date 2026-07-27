@@ -1,70 +1,70 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CCD0C531D0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCBBBC531D0
 	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 12:06:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DC942606F5;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4A29880E25;
 	Mon, 27 Jul 2026 12:06:34 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SJCOro_glept; Mon, 27 Jul 2026 12:06:31 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C4DAE606F6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785153991;
-	bh=+ALekMEOnb4nTgAovv6BTWbs5Z7fzytk8AmiNcKhQ/s=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=GGv5ehn65d9r6PUl/Ngaak7C8bol0KKyeHCOUdFN4frGMV8hBWmTcvvTHrnS6gBwh
-	 G4JyA2yU48bCx0U3YkOeLCrGKrWIHnJ7MXkcaTOxNia/cfsNcBh+NZOZKmyIGA79AP
-	 16QEOZQwu4Iq8CX3W0ArTFgjmQTCPVkHTMPjK3shrXoLNUFmfKB7cS6N4Rb5FUy094
-	 fiqLY2mXo7LMYXUR9Vtqpo1o4+bC8frqisOcXDbrkkDO1VCm7M0UO8HfbAHVCSzNmK
-	 5F8RrmzWSU+S95r5qd7DexJv7qVBpDCZ3CRNhBKNZ9Dsq+VxQInSb9FiPHdrZcbgjI
-	 oRHiYFWbKj7UQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C4DAE606F6;
-	Mon, 27 Jul 2026 12:06:31 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5CB1069
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:06:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4E38580D77
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:06:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MOCeXowi4T2X for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 12:06:21 +0000 (UTC)
+ id aN3NyL_6gOaY; Mon, 27 Jul 2026 12:06:33 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E76CC80E1B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785153993;
+	bh=o7RoOq8abzkFf6PzZliBtNSYugHWeDotTPzkC0kBD4o=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=yCgAxvx97NdaBlDysk88ZhCiPfQX8G9jd45rE55xjNJ/E55/NKlkSKHWs7/zeqbBz
+	 UXP3ytGGpyT2qvrQL1CxKcfKNg8yDHgd8uszt0WRxBK5dAG3ZsTh8HPhaHbddGYx6r
+	 pkFqNDDMjRUJ37dcCOkVkn/u8h/zo+xHhjlKrwv++g4FQoT6r/cyw0QhSBZw9fZ3y5
+	 SSwIlxRSU8jYbFFvMq/wbVHtfkDZ7f7Z6aQ6HSzx1FCPVVFr4gtam8U7uLmyicAqom
+	 5BzTzk3KSASss7vHZ/W4eKDB3mZ5VGLOb/gtS1NOevjW/0jxhiOiA2kejtndkrdQrr
+	 2waCAYueDwFcg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id E76CC80E1B;
+	Mon, 27 Jul 2026 12:06:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 110284C4
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:06:23 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id EAB2C40065
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:06:22 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mQcr22iWp7NX for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 12:06:22 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
  helo=www537.your-server.de; envelope-from=max.merchel@ew.tq-group.com;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 79C7480C88
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 79C7480C88
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B431A4006A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B431A4006A
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 79C7480C88
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B431A4006A
  for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 12:06:21 +0000 (UTC)
 Received: from sslproxy03.your-server.de ([88.198.220.132])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1woK66-000JNZ-23; Mon, 27 Jul 2026 14:06:18 +0200
+ id 1woK66-000JO5-3B; Mon, 27 Jul 2026 14:06:19 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1woK66-000I7f-1D; Mon, 27 Jul 2026 14:06:18 +0200
+ id 1woK66-000I7f-2P; Mon, 27 Jul 2026 14:06:18 +0200
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
-Date: Mon, 27 Jul 2026 14:06:19 +0200
-Subject: [PATCH RESEND 5/6] board: tqma6: implement ENET errata workaround
- detection
+Date: Mon, 27 Jul 2026 14:06:20 +0200
+Subject: [PATCH RESEND 6/6] board: tqma6: add kernel device tree handling
+ for environment
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-tqma6_bis_spl-v1-5-27673934830f@ew.tq-group.com>
+Message-Id: <20260727-tqma6_bis_spl-v1-6-27673934830f@ew.tq-group.com>
 References: <20260727-tqma6_bis_spl-v1-0-27673934830f@ew.tq-group.com>
 In-Reply-To: <20260727-tqma6_bis_spl-v1-0-27673934830f@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com, 
@@ -84,18 +84,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID;
- bh=+ALekMEOnb4nTgAovv6BTWbs5Z7fzytk8AmiNcKhQ/s=; b=caVx8EFCypvQgHrRbXwGmL0Li4
- LHUUXCeaajxuhsUfgRLzCK3PXX8VP25MUMOzb68bew0VJs6kz8OQ5nF9VU1srXERabm5nSPu7/iUT
- nSJHBdXO17ON6kldZPkFiQhmCrv5APZjUyguOkFrtrR/u12NR4e4lmDN3RopDe2Dk4L8o2/+UmFNZ
- /6h0QBSEE+8czHFZjFWcwVS1AdKqui3SaoT8Bx17crsn0FDIUTZ5sMtn62BNX0ea0Wl+6Ne72OYM2
- gqpUgzlLgtK8ZfbmFkv9NLWyQRdS/5T5mP1iMiuJlN8Kp2ebYQuKG7NoXr8mtbPt9DLm3SBwpPnZj
- gJ8h8rNA==;
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=o7RoOq8abzkFf6PzZliBtNSYugHWeDotTPzkC0kBD4o=; b=lAmDhshO5UKhrM2GdKPXV9y7ak
+ iHn9rRbOOzV07nqiQku3fLm8NADAZpjKr1ycusKInqxHYvdVzuiotFXu2UIOgF6gVNaqtC5Zs2nag
+ J+fbtAqHHnO3+ulXLV9yiujQwqY6Xr6U+5uieMAaw6DZoTTRWTs7X/sR6rKo+NhtETg3wsN5roLl/
+ NKnWJbScxfIUleLpWHgzfgHLNuUs85eYSqi+ewSjvlxkCK8UF2OeqjCbpSx0TMrOAZtnpSvvzpCRL
+ XL1eo8k2bMEYjJmFIUAO61DOQ3iUHlQ3QAMY/05tqrJhMeS2MnkWYz5qhTnuAJKbrWtJdY023cpAr
+ n5U+vOvw==;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=caVx8EFC
+ header.a=rsa-sha256 header.s=default2602 header.b=lAmDhshO
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -110,132 +110,103 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+From: Paul Gerber <Paul.Gerber@tq-group.com>
 
-TQMa6 SOM beginning with hardware rev. 0200 comes in two flavours:
-With and without a hardware workaround for ENET errata err006687.
-Therefore we need two flavours of device tree. To be able to detect
-the presence of the workaround we need to check GPIO1_6 is connected
-to I2C bus or not. If the I2C bus is detected, the workaround is not
-used and separate I2C buses are used for the SoM and the baseboard.
+Set the environment variable 'fdtfile' depending on ENET workaround
+detection.
 
-Later on this detection will be used to select the correct devicetree
-at runtime.
+The function tqma6_get_fdt_configuration is implemented to be reusable
+for configuration detection in multi-DTB FIT image and therefore returns
+the devicetree name without the '.dtb' ending.
+Set fdtfile only if CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is enabled and it
+is currently unset.
 
+The model string is loaded from the device tree variant. Therefore, the
+overriding of the model string is being removed.
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- board/tq/tqma6/tqma6.c | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++
- board/tq/tqma6/tqma6.h | 13 +++++++++++
- 2 files changed, 71 insertions(+)
+ board/tq/tqma6/tqma6.c | 28 +++++++++++++++++++++++-----
+ board/tq/tqma6/tqma6.h |  1 +
+ 2 files changed, 24 insertions(+), 5 deletions(-)
 
 diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
-index 005f08c4e5f..b740ac7d5b1 100644
+index b740ac7d5b1..f4cd9915185 100644
 --- a/board/tq/tqma6/tqma6.c
 +++ b/board/tq/tqma6/tqma6.c
-@@ -31,6 +31,18 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+/*
-+ * Rev. 0200 and newer optionally implements GIGE errata fix.
-+ * Use a global var to signal presence of the fix. This should be checked
-+ * early. If fix is present, system I2C is I2C1 - otherwise I2C3
-+ */
-+static int has_enet_workaround = -1;
-+
-+int tqma6_has_enet_workaround(void)
-+{
-+	return has_enet_workaround;
-+}
-+
- int dram_init(void)
- {
- 	gd->ram_size = imx_ddr_size();
-@@ -38,6 +50,36 @@ int dram_init(void)
- 	return 0;
+@@ -117,6 +117,16 @@ static const char *tqma6_get_boardname(void)
+ 	};
  }
  
-+#define GPIO_REVDET_PAD_CTRL  (PAD_CTL_PUS_100K_DOWN | PAD_CTL_SPEED_LOW | \
-+			       PAD_CTL_DSE_40ohm | PAD_CTL_HYS)
-+
-+static const iomux_v3_cfg_t tqma6_revdet_pads[] = {
-+	MX6_PAD_GPIO_6__GPIO1_IO06 | MUX_PAD_CTRL(GPIO_REVDET_PAD_CTRL),
-+};
-+
-+void tqma6_detect_enet_workaround(void)
++const char *tqma6_get_fdt_configuration(void)
 +{
-+	int ret;
-+	struct gpio_desc desc;
++	if (is_mx6dq())
++		return !tqma6_has_enet_workaround() ? "imx6q-mba6b" : "imx6q-mba6a";
++	if (is_mx6sdl())
++		return !tqma6_has_enet_workaround() ? "imx6dl-mba6b" : "imx6dl-mba6a";
 +
-+	imx_iomux_v3_setup_multiple_pads(tqma6_revdet_pads,
-+					 ARRAY_SIZE(tqma6_revdet_pads));
-+
-+	ret = dm_gpio_lookup_name("GPIO1_6", &desc);
-+	if (ret) {
-+		pr_err("error: gpio lookup for enet workaround %d\n", ret);
-+		return;
-+	}
-+
-+	ret = dm_gpio_get_value(&desc);
-+	if (ret == 0)
-+		has_enet_workaround = 1;
-+	else if (ret > 0)
-+		has_enet_workaround = 0;
-+
-+	dm_gpio_free(NULL, &desc);
++	return NULL;
 +}
 +
- int board_early_init_f(void)
+ #if CONFIG_IS_ENABLED(DM_PMIC)
+ /* setup board specific PMIC */
+ int power_init_board(void)
+@@ -137,12 +147,25 @@ int power_init_board(void)
+ }
+ #endif
+ 
++#define FDTFILE_STRLEN 32u
+ int board_late_init(void)
  {
- 	return tq_bb_board_early_init_f();
-@@ -99,11 +141,27 @@ int board_late_init(void)
- {
++	char fdtfile[FDTFILE_STRLEN];
++	const char *config = tqma6_get_fdt_configuration();
++
  	env_set("board_name", tqma6_get_boardname());
  
-+	tqma6_detect_enet_workaround();
+ 	tqma6_detect_enet_workaround();
+ 
++	if (!env_get("fdtfile")) {
++		if (config) {
++			snprintf(fdtfile, FDTFILE_STRLEN, "%s.dtb", config);
++			env_set_runtime("fdtfile", fdtfile);
++		} else {
++			pr_err("ENV: Could not set kernel devicetree, ${fdtfile} remains unset\n");
++		}
++	}
 +
  	tq_bb_board_late_init();
  
  	printf("Board: %s on a %s\n", tqma6_get_boardname(),
- 	       tq_bb_get_boardname());
+@@ -169,15 +192,10 @@ int board_late_init(void)
+  * Device Tree Support
+  */
+ #if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
+-#define MODELSTRLEN 32u
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ 	struct mmc *mmc = find_mmc_device(0);
+-	char modelstr[MODELSTRLEN];
  
-+	puts("Enet workaround: ");
-+	switch (tqma6_has_enet_workaround()) {
-+	case 0:
-+		puts("absent");
-+		break;
-+	case 1:
-+		puts("implemented");
-+		break;
-+	default:
-+		puts("Unknown");
-+		break;
-+	};
-+	puts("\n");
-+
- 	return tq_bb_checkboard();
- }
+-	snprintf(modelstr, MODELSTRLEN, "TQ %s on %s", tqma6_get_boardname(),
+-		 tq_bb_get_boardname());
+-	do_fixup_by_path_string(blob, "/", "model", modelstr);
+ 	fdt_fixup_memory(blob, (u64)PHYS_SDRAM, (u64)gd->ram_size);
  
+ 	/* bring in eMMC dsr settings if needed */
 diff --git a/board/tq/tqma6/tqma6.h b/board/tq/tqma6/tqma6.h
-new file mode 100644
-index 00000000000..0cf38a4d1e3
---- /dev/null
+index 0cf38a4d1e3..bc09087e3df 100644
+--- a/board/tq/tqma6/tqma6.h
 +++ b/board/tq/tqma6/tqma6.h
-@@ -0,0 +1,13 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Paul Gerber
-+ */
-+
-+#ifndef __TQMA6_H
-+#define __TQMA6_H
-+
-+int tqma6_has_enet_workaround(void);
-+
-+#endif /* __TQMA6_H */
+@@ -8,6 +8,7 @@
+ #ifndef __TQMA6_H
+ #define __TQMA6_H
+ 
++const char *tqma6_get_fdt_configuration(void);
+ int tqma6_has_enet_workaround(void);
+ 
+ #endif /* __TQMA6_H */
 
 -- 
 2.43.0
