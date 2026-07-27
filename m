@@ -1,114 +1,101 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED23C5321C
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 11:52:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72ECCC531D0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 11:57:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 41C7980DB5;
-	Mon, 27 Jul 2026 11:52:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1F559606E0;
+	Mon, 27 Jul 2026 11:57:52 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 131zNHgubMn0; Mon, 27 Jul 2026 11:57:51 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3F57C606D6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785153471;
+	bh=e110CM0+8WamM4tCqOy2Abz6EsQRUCTbFpywEaRUNFE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=XKEQmKpJSeMKdB2Mi5Nh9bgj1Ebedxo5vn6t/DvVwdblkLLQU5gxtvNQ1bjD4dZJh
+	 lectnsSwIswDzDdFvWaGPZuwGXk9q2xiDPuWSnve9qJ2GvjxrBopkbQU1zBdNiWgyW
+	 AmCAkeIlgoIfTlz8sVAPC1FXrS12iN6fA9e9z24O3+/D7ab7PEKmoIZNtxZM7tIFFa
+	 Z0L8kP0SW8AZ+j185Klu5EkT4BweMaA54nmFMSvf5F8Vxz5SrUAQmx7xzvVn9OCP/X
+	 zbO+7UoEttez5fUHIL5VXGrgQPVhWY9Jl0ze8Za2f27PJvVp3om2N35pvmD8hpkMzz
+	 dDfGpSxqhC0ww==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3F57C606D6;
+	Mon, 27 Jul 2026 11:57:51 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5C05326C
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:57:50 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 47B1C80D47
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:57:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CnSO0gitUZEL; Mon, 27 Jul 2026 11:52:07 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2777980D5C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785153127;
-	bh=CBjlir6eGghQiQqM9xroXfEm3FYowPVmlxn1VK3T/1A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=w0tROQfiojQZ9L/kdse4UZF5s7lh8jleV4prUEGO5m/MYBX8BTl0XiHeufrS6lyIl
-	 fs5ZUjpgsJQMhnfm4pjqaK9FnBtoxmhCvIKz3sQ6DYUoYWruxMouskCzk2pbTRha8X
-	 eCWkWRL/8PZhW94G3sOZnbyCCIV36Z4+WVv6+BvIHXZ6279/3nwrRRF8LqOcl2cq5F
-	 A4ZUYHm7NFdC9j/qTKNAzPYsDafgFra8g9BG9bBRjPtrdSU+wF57n2CBgYPj85hViV
-	 I1LYW2m8kD1gZji0yYOdIdHH9yjOIBHVkB8CSp5wuDFX0n2kjp8rm7fjZbxPe8fBbv
-	 sGKCiWlmvtmBA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2777980D5C;
-	Mon, 27 Jul 2026 11:52:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A76E226C
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:52:05 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8CF82405C9
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:52:05 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lIHOFeMu6zte for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 11:52:04 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
- helo=sender4-op-o12.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 7AE44405A2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7AE44405A2
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7AE44405A2
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:52:04 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1785153109; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=ji9GvfRZjwteBKccMp84hGWTUCq4LbcJTjBdnfzlAbGuz2fLv5QRfAQcry8IJrjmGrBVVcZP8Snz05BUXa+1CxbHlL/XqRjfLbvYk7+PRoBBGERq7P9BsX+h7Zsp0HDLtL0MKDz9ste5L4VcdDDfZjq0QVNSTR4VwMoIIT78qHs=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1785153109;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=CBjlir6eGghQiQqM9xroXfEm3FYowPVmlxn1VK3T/1A=; 
- b=J3+Mvh7J2luETYcvvgIFAZtj0lSN0/2+hAvMeydVMb9wMQ7g9ctnAmITIJNdqIprlaiYN6psMTt4+3Y4M/+hX03t/xe1U51rRYYcIKAZGxOmidfKKrXhyCN969jkkMjtJu0HzxicNT3xj+q+bBMPn3t94GEQib5bOvT/UKC92/4=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 17851531071021009.7379325627114;
- Mon, 27 Jul 2026 04:51:47 -0700 (PDT)
-Date: Mon, 27 Jul 2026 11:51:36 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Eric Chung <eric.chung@riscstar.com>, u-boot-spacemit@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Guodong Xu <guodong@riscstar.com>, Yao Zi <me@ziyao.cc>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
-Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
-Message-ID: <amdGSBKT4iRzuh1P@pie>
-References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
- <20260727-m4-v6-6-2f58566d48ca@riscstar.com>
+ id XLkQ5huTRow1 for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 11:57:49 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
+ helo=www537.your-server.de; envelope-from=max.merchel@ew.tq-group.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3570880D5C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3570880D5C
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3570880D5C
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:57:49 +0000 (UTC)
+Received: from sslproxy03.your-server.de ([88.198.220.132])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1woJxq-000Epq-2U; Mon, 27 Jul 2026 13:57:46 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1woJxq-000Fh8-1Y; Mon, 27 Jul 2026 13:57:46 +0200
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+Date: Mon, 27 Jul 2026 13:57:39 +0200
+Subject: [PATCH RESEND 3/4] arm: dts: tqma6ul: integrate tq,eeprom sysinfo
+ driver
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260727-m4-v6-6-2f58566d48ca@riscstar.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/285.144.37
-X-ZohoMailClient: External
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260727-tqma6ul-eeprom-v1-3-ad1d4e2fa1ae@ew.tq-group.com>
+References: <20260727-tqma6ul-eeprom-v1-0-ad1d4e2fa1ae@ew.tq-group.com>
+In-Reply-To: <20260727-tqma6ul-eeprom-v1-0-ad1d4e2fa1ae@ew.tq-group.com>
+To: u-boot@lists.u-boot-project.org, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com
+Cc: Tom Rini <trini@konsulko.com>, 
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>, 
+ Max Merchel <max.merchel@ew.tq-group.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Alice Guo <alice.guo@nxp.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Max Merchel <Max.Merchel@ew.tq-group.com>
+X-Mailer: b4 0.13.0
+X-Virus-Scanned: Clear (ClamAV 1.4.3/28074/Mon Jul 27 08:25:14 2026)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1785153109; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=CBjlir6eGghQiQqM9xroXfEm3FYowPVmlxn1VK3T/1A=;
- b=WqTCwmAWLvOc6usW8QGBGo1ivkiJZtx08gcghPGoLMeUFacM4iQI5AShg9JzKgKq
- 5uE5TClLzdN4PtzhxKHouz2Dy0B3fiD5mmXLZTvdrkdyDqk00rWRrYiRULq6gzuHN0Z
- Yp8Q9rpLg4ydRUFKc6R3P6go5EXRWdc66k1zyjmg=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ c=relaxed/relaxed; 
+ d=ew.tq-group.com; s=default2602; h=Cc:To:In-Reply-To:References:Message-Id:
+ Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=e110CM0+8WamM4tCqOy2Abz6EsQRUCTbFpywEaRUNFE=; b=TbLQ6yaAR8H9Nwnap5g7YBdo3N
+ tDFB18EQgvTzz8IntDTa48Q1IRoY+rtPJdHYTjaQE9bW8PrRoc/7H4OdMAw/fj1e6AIpUpIwmRjul
+ CPCZInUSY08J79t5UszCR+5buWxzv21b82L6jpFzUaZiTLmpK/LvgtkpASbmxxXnA2M2LtbORIHlr
+ 307aMFpcID+NgMDTWmL02HEZ8GLQfmfEtsETFXfvKbGiPPIUAI9jEdYQmwRTKkQuqmIn0OiWLT2mF
+ LnEvb2/Ke7qU6Q9U/V7zA1shBXoQqzwFWB6NoUqfkzdQrSNBULxwOn8P1BBDsfzqyPmzP/zZAK1ri
+ TrNJVOjw==;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=WqTCwmAW
+ header.from=ew.tq-group.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com
+ header.a=rsa-sha256 header.s=default2602 header.b=TbLQ6yaA
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -123,31 +110,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
-> Add the SDH0 controller node and its pinctrl groups to the u-boot
-> overlay. The upstream DTS only contains the eMMC node; the SD card
-> controller (sdhci@d4280000) and its MMC1 pinctrl configuration are
-> missing. Place the new node inside the storage-bus via path-based
-> merge so it inherits the dma-ranges from the parent bus.
-> 
-> Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+Add sysinfo node for tq,eeprom sysinfo driver.
 
-Please cherry-pick upstream devicetree changes from Linux upstream with
-tools/update-subtree.sh instead of adding our own copies. Changes for
-k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v7.2.
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+---
+ arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Best regards,
-Yao Zi
+diff --git a/arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi b/arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi
+index 1ed44c57f59..c9e6cef38a2 100644
+--- a/arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi
++++ b/arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi
+@@ -14,6 +14,12 @@
+ 		u-boot,mmc-env-offset = <0x100000>;
+ 		u-boot,mmc-env-offset-redundant = <0x110000>;
+ 	};
++
++	sysinfo: sysinfo {
++		compatible = "tq,eeprom-sysinfo";
++		nvmem-cells = <&module_info>;
++		nvmem-cell-names = "device_info";
++	};
+ };
+ 
+ &clks {
 
-> ---
-> v5:
-> - Append power source field on eMMC/SD pinctrl.
-> v3:
-> - Fix SD pinctrl as uhs.
-> v2:
-> - Use vmmc-supply as vqmmc-supply on SD node.
-> - Add alias of mmc0 and mmc1.
-> ---
->  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 ++++++++++++++++++++++++++++++-
->  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 ++++++++++++++++++++++++++++-
->  2 files changed, 173 insertions(+), 4 deletions(-)
+-- 
+2.43.0
+
