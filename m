@@ -1,68 +1,66 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BBE9C53219
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 08:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 795EFC531D0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 08:59:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 67BF840539;
-	Mon, 27 Jul 2026 08:58:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4927E80A9F;
+	Mon, 27 Jul 2026 08:59:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o1nKc2Jdr2NK; Mon, 27 Jul 2026 08:58:21 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BSepfJcjmSmV; Mon, 27 Jul 2026 08:59:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 475A2405DC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6FDF580A53
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785142701;
-	bh=+XXEHbDDiRH2j4k3Sa0cQKhw41O2SCOdnROeFaHSibI=;
+	d=lists.u-boot-project.org ; s=default; t=1785142760;
+	bh=dsT9FFkPivXB23vasggJ0wtWK4zrruVzzYwkC5cjxVo=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Q1XbXkOaBwSU/+GSz+ccqK/8AR4jpk1gigZyc0Tq4x2c3qJkJVj/kuEx0IAW1CmWe
-	 KjtunODJ5BJsZY+3Z1wfWRriWMGyiLOgtROo3lmc6yM/DOBsWlOSoxbX7VEdnhpl59
-	 naRbIzM+ZNABRq6xFddpsxNnbni4hjlg8zlBaAScec9FYo0PMjfSct9OL5CZph4MKc
-	 xY73skJZDX9JL6m5HrocqLWqtk48HReEUgxnJxMyFJb7BDDRAKwjoz0pSwvr5T9DJe
-	 NxYL1znkzqNUZb9taSGSkJKtQCMSB/0/MSzcbM3mzBq+D0EDBw+qzGGzttR/Bd656e
-	 hz5DgqSw6SxJA==
+	b=cKzzvLPdVumgRPg9aG62yVF5d2sCQfiZ83lHCtk2tK98RR/0tL0alxXEH9vsAmAs8
+	 5ssyL7RkPr8t+K3/nVXL1a7vZ00WVXdKtMz4JKm3QPC50wxoUbwJK2h3rmfZRf1b0A
+	 qHI3Kn5HN5CplGj1IMxbVNjOzLE1Ix/NJH47MOeoTV6lZiBNEA/aIZ6m7eJ+kzuS8i
+	 xftv78PwRIY4aBDViGsZ0C4/+/j7zt0hDHxnbpY1cT1lyZUisDPMhhcxyW7gvFXmF7
+	 xg6ZVMpQaddI37aHcjFYv55PwSg90AT2N0MBShzFq9uPxws9dr+HI1Cbgru4WJqUK/
+	 Xcnrs3vAcjnVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 475A2405DC;
-	Mon, 27 Jul 2026 08:58:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9F31C45B
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:58:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6FDF580A53;
+	Mon, 27 Jul 2026 08:59:20 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 64DC7490
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:59:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 917C54005F
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:58:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4AE8B80868
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:59:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EC7-HHXB1D61 for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 08:58:18 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 013D6400D8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 013D6400D8
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 013D6400D8
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:58:17 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IWOHgsjTaGaV for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 08:59:17 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0DD7D80BD3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0DD7D80BD3
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0DD7D80BD3
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:59:16 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 529C084671; Mon, 27 Jul 2026 10:58:16 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 0421A84671; Mon, 27 Jul 2026 10:59:15 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED3A982991
- for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 10:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8D2382991
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 10:59:12 +0200 (CEST)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 819D84122A;
- Mon, 27 Jul 2026 08:58:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B56F31F000E9;
- Mon, 27 Jul 2026 08:58:11 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 185FD4333C;
+ Mon, 27 Jul 2026 08:59:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D1911F000E9;
+ Mon, 27 Jul 2026 08:59:10 +0000 (UTC)
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
  marex@denx.de
@@ -71,32 +69,32 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
  Simon Glass <sjg@chromium.org>, Anders Roxell <anders.roxell@linaro.org>,
  Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH v5 11/75] usb: dwc3: import from kernel v4.8
-In-Reply-To: <20260716134305.614278-12-anders.roxell@linaro.org>
+Subject: Re: [PATCH v5 12/75] usb: dwc3: import from kernel v4.9
+In-Reply-To: <20260716134305.614278-13-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
- <20260716134305.614278-12-anders.roxell@linaro.org>
-Date: Mon, 27 Jul 2026 10:58:09 +0200
-Message-ID: <87fr146c7y.fsf@kernel.org>
+ <20260716134305.614278-13-anders.roxell@linaro.org>
+Date: Mon, 27 Jul 2026 10:59:01 +0200
+Message-ID: <87cxw86c6i.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1785142692;
- bh=+XXEHbDDiRH2j4k3Sa0cQKhw41O2SCOdnROeFaHSibI=;
+ d=kernel.org; s=k20260515; t=1785142751;
+ bh=dsT9FFkPivXB23vasggJ0wtWK4zrruVzzYwkC5cjxVo=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=TCl3XlasEkDOu3/nhJJSFMFy5wobxeTeTyM31rcOqNYmfFYQFnJvP53NXoYnYQ/XC
- fg0iRXA18HLieN4T+C1naUPGZj7FFHiiAkm5XbLlN958MJTcFpxZfjPigzr3cq5Fiw
- 9d5Ky58lWzUvnJxe1VgHZWauXd5k2z96EfF26zRZWJI1Ki6guI+k8HZ+rFGXTCm9mU
- 11+bhgcwZ0TIA3j4JwchVjV0NOIESpC6JNmMH1lQ2p5EeAnRtamIomaz2odrm1iTzR
- zJiPr1prmXYH4Fxh7Q4fdkqh+iSuiF3d7FjrROzmeSsty5bbL5xHR8K7utdYFSp+YM
- EzQ/M5StzPuBA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=C3/rcBcwHZWSafIa1mTRft49tInJoQ5DQYGz7VsaY2qqAHbH50+BiKUkGgkqsjPsc
+ 9mvVoxNutz8EHRIwvC4eWajbZfltuzyGdEinaWQB2jPbhxgsDv1AJX72vmNy/XSiCG
+ FU0zngCdYnV5GTR7HHzAGy2TuIdrafiAmWP9/Pxsn2yeQNq9T5JvDGagC7WRamfQnY
+ mZQOlZjG1y0aTyvCKbcHU1FDYWCxxoGkZ50LJI6h5ec41M2y9anqlcqo9dB7ecr8qe
+ Jo8Ltm886foYoG9Xr4f6WAQxeOrGT6vh3iIaN87w9VgGoGKNwWcmt9v/97iDbmQzmL
+ qZXeBeXzZM2mA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=TCl3Xlas
+ header.a=rsa-sha256 header.s=k20260515 header.b=C3/rcBcw
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
@@ -104,7 +102,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=mkorpershoek@kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="TCl3Xlas"; 
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="C3/rcBcw"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -128,7 +126,7 @@ On Thu, Jul 16, 2026 at 15:41, Anders Roxell <anders.roxell@linaro.org> wrote:
 
 > From: Jens Wiklander <jens.wiklander@linaro.org>
 >
-> Sync Linux kernel dwc3 changes from v4.7 to v4.8.
+> Sync Linux kernel dwc3 changes from v4.8 to v4.9.
 >
 > The following files are preserved accross the import:
 > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -143,94 +141,42 @@ On Thu, Jul 16, 2026 at 15:41, Anders Roxell <anders.roxell@linaro.org> wrote:
 > Note that this is a raw import and doesn't build.
 > A fixup commit at the end of the series fixes that.
 >
-> List of commits: git log --oneline v4.7..v4.8
+> List of commits: git log --oneline v4.8..v4.9
 > Commits imported:
-> 696118c016dd usb: dwc3: pci: fix build warning on !PM_SLEEP
-> 9d7aba7786b6 Revert "usb: dwc3: gadget: always decrement by 1"
-> 6f8245b4e37c usb: dwc3: gadget: always decrement by 1
-> 696fe69d7e63 usb: dwc3: debug: fix ep name on trace output
-> d6011f6fc21b usb: dwc3: gadget: don't rely on jiffies while holding spinlock
-> b74c2d875baa usb: dwc3: core: allow device to runtime_suspend several times
-> f6c274e11e3b usb: dwc3: pci: runtime_resume child device
-> a0ad85ae866f usb: dwc3: gadget: stop processing on HWO set
-> 79d17482a409 usb: dwc3: don't set last bit for ISOC endpoints
-> 4c4f106c032f usb: dwc3: fix missing platform_set_drvdata() in dwc3_of_simple_probe()
-> 4491ed5042f0 usb: dwc3: pci: add Intel Kabylake PCI ID
-> 7c705dfe2ebe usb: dwc3: gadget: always cleanup all TRBs
-> e5b36ae2f851 usb: dwc3: gadget: fix for short pkts during chained xfers
-> c7de57347183 usb: dwc3: gadget: increment request->actual once
-> 322832f2f19e usb: dwc3: host: Fix broken XHCI host
-> 95b57df45062 usb: dwc3: host: use build-in property instead of platform data
-> 72704f876f50 dwc3: gadget: Implement the suspend entry event handler
-> 9522def40065 usb: dwc3: core: cleanup IRQ resources
-> da1410be21bf usb: dwc3: gadget: Add the suspend state checking when stopping gadget
-> 0e146028eebf usb: dwc3: gadget: issue ENDTRANSFER conditional on resource_index
-> 328082376aea usb: dwc3: fix runtime PM in error path
-> b6d4e16e8313 usb: dwc3: gadget: simplify run_stop() break condition
-> f2df679b6c55 usb: dwc3: gadget: avoid while(1) in run_stop()
-> d807bdd02845 usb: dwc3: gadget: remove udelay() from run_stop()
-> 5f82279a0c76 usb: dwc3: core: fixup dr_mode fallback selection
-> e6fe66fe08cd usb: dwc3: pci: add dr-mode for Intel dwc3
-> 21e64bf20df5 usb: dwc3: gadget: rename 'ignore' argument to 'modify'
-> d6dc2e76a860 usb: dwc3: gadget: decrement trbs_left for each sg entry
-> ba62c09d5cc2 usb: dwc3: gadget: start Bulk endpoints more frequently
-> 13fa2e69b1dd usb: dwc3: gadget: disable XFER_NOT_READY
-> 55a0237f8f47 usb: dwc3: gadget: use allocated/queued reqs for LST bit
-> 69450c4dc164 usb: dwc3: gadget: halt and stop based HWO bit
-> 68d34c8a744d usb: dwc3: gadget: keep track of allocated and queued reqs
-> b6b1c6db4c7f usb: dwc3: gadget: update transfer needs transfer resource
-> d18e65470a4d usb: dwc3: remove handling of platform data
-> cf48305de0c6 usb: dwc3: pci: use build-in properties instead of platform data
-> 60cfb37ac9bc usb: dwc3: remove trailing newline from dwc3_trace
-> d2728fb3e01f usb: dwc3: omap: Pass VBUS and ID events transparently
-> 9ab330bf4dfd usb: dwc3: omap: Don't set POWERPRESENT
-> 12da8eae208d usb: dwc3: omap: Mark the interrupt handler as shared
-> 3f586c92d877 usb: dwc3: omap: use request_threaded_irq()
-> 475c8beb35e1 usb: dwc3: add DWC3_GUCTL1 reg for debug
-> e77c561432bc usb: dwc3: Fix DWC3_USB31_REVISION_110A definition
-> 2da9ad761e70 usb: dwc3: Use the correct speed macros for DSTS/DCFG
-> 3de2685f0c39 usb: dwc3: gadget: Fix truncated cast issue
-> 361572b5f7a9 usb: dwc3: gadget: Handle TRB index 0 when full or empty
-> 7d0a038b130c usb: dwc3: gadget: Account for link TRB in TRBs left
-> 32db3d9437b6 usb: dwc3: gadget: Account for max size in TRB space
-> 89bc856e5a74 usb: dwc3: gadget: Don't prepare TRBs if no space
-> 0d25744ad107 usb: dwc3: gadget: Initialize the TRB ring
-> dca0119c3ab6 usb: dwc3: gadget: Simplify skipping of link TRBs
-> 96bedb637a1e usb: dwc3: Endianness issue on dwc3_log_ctrl
-> d07fa665c79d usb: dwc3: gadget: Fix usage of bitwise operator
-> 501058edebf9 usb: dwc3: ep0: Use the correct type for SET_SEL data
-> 958b9fa7f8cf usb: dwc3: ep0: Fix endianness of wIndex passed to dwc3_wIndex_to_dep
-> 71f7e7027028 usb: dwc3: gadget: improve gcmd trace
-> 88811f7b722c usb: dwc3: gadget: remove udelay() from generic cmd
-> 0fe886cdb07a usb: dwc3: gadget: single return point on generic commands
-> 0933df159c5c usb: dwc3: trace: print ep cmd status with a single trace
-> f6bb225bb3ca usb: dwc3: gadget: loop while (timeout)
-> ba1598410eff usb: dwc3: gadget: fix trace output when command fails
-> f75cacc468ed usb: dwc3: trace: fully decode IRQ events
-> 7ab373aadbd0 usb: dwc3: gadget: no more tracking endpoint type with its name
-> 22f2c619a116 usb: dwc3: trace: pretty-print TRB's ctrl field
-> 74674cbf858f usb: dwc3: gadget: add a per-endpoint request queue lock
-> e9af9229098d usb: dwc3: pci: add Power Management dummy hooks
-> fc8bb91bc83e usb: dwc3: implement runtime PM
-> 4cb4221764ef usb: dwc3: gadget: fix for possible endpoint disable race
-> 9cad39fe4e4a usb: dwc3: fix for the isoc transfer EP_BUSY flag
-> ab2a92e7a608 usb: dwc3: gadget: only resume USB2 PHY in <=HIGHSPEED
-> 3f308d17d7ab usb: dwc3: gadget: hold gadget IRQ in dwc->irq_gadget
-> 51f5d49ad6f0 usb: dwc3: core: simplify suspend/resume operations
-> c499ff71ff2a usb: dwc3: core: re-factor init and exit paths
-> bcdb3272e889 usb: dwc3: core: move fladj to dwc3 structure
-> 2eb8801650b3 usb: dwc3: gadget: add a pointer to endpoint registers
-> 2cd4718d0bbe usb: dwc3: gadget: pass dep as argument to endpoint command
-> 4e99472bc10b usb: dwc3: gadget: initialize NUMP based on RxFIFO Size
-> 5ee85d890f8d usb: dwc3: gadget: split __dwc3_gadget_kick_transfer()
-> 6b74289937f6 usb: dwc3: gadget: return 0 if we try to Wakeup in superspeed
-> b43bba96b903 usb: dwc3: gadget: remove udelay(1) when sending ep cmds
-> 6aff48329595 usb: dwc3: gadget: rely on sg_is_last() and list_is_last()
-> 4fae2e3e1515 usb: dwc3: gadget: simplify __dwc3_gadget_kick_transfer()
-> c4233573f6ee usb: dwc3: gadget: prepare TRBs on update transfers too
-> 7f370ed0cfe9 usb: dwc3: core: get rid of DWC3_PM_OPS macro
-> 9f8a67b65a49 usb: dwc3: gadget: fix gadget suspend/resume
-> d7be295243bb usb: dwc3: gadget: re-factor ->udc_start and ->udc_stop
+> 4accb8a1ee7d usb: dwc3: st: add missing <linux/pinctrl/consumer.h> include
+> 9b9d7cdd0a20 usb: dwc3: Fix error handling for core init
+> 51fbc7c06c89 usb: dwc3: Fix size used in dma_free_coherent()
+> d889c23ce4e3 usb: dwc3: gadget: never pre-start Isochronous endpoints
+> a9c3ca5fae6b usb: dwc3: gadget: properly account queued requests
+> b281dc630b41 usb: dwc3: of-simple: add compatible for Cavium
+> 26c9cac402c4 usb: dwc3: of-simple: allow glues without clocks
+> 8d53e6267594 usb: dwc3: of-simple: Fix warning during unbind
+> 5e6c88d28ccb usb: dwc3: fix Clear Stall EP command failure
+> d6e10bf2ba47 usb: dwc3: avoid -Wmaybe-uninitialized warning
+> 9d6173e125d9 usb: dwc3: Fix dr_mode validation
+> 073c47aca7b7 usb: dwc3: ulpi: make dwc3_ulpi_ops constant
+> e6f74849784c usb: ulpi: rename operations {read|write}_dev to simply {read|write}
+> b7cf1dc3414d usb: dwc3: ulpi: use new api
+> 594e121f2568 usb: dwc3: gadget: stop kicking if we run out of space
+> 7ae7df4982af usb: dwc3: gadget: abolish trbs_left
+> 06281d460fc5 usb: dwc3: Add ENDXFER command polling
+> 512e47572f7d usb: dwc3: Add revision numbers for the USB 3.0 IP
+> 00af62330c39 usb: dwc3: core: Move the mode setting to the right place
+> f652191be3f6 usb: dwc3: of-simple: add compatible for rockchip rk3399
+> 00fe081dc3a3 usb: dwc3: add dis_del_phy_power_chg_quirk
+> 32f2ed864dd5 usb: dwc3: make usb2 phy utmi interface configurable
+> 16199f338939 usb: dwc3: add dis_u2_freeclk_exists_quirk
+> dc55c67e9c95 usb: dwc3: gadget: improve increment request->actual
+> f99f53f24d87 usb: dwc3: gadget: remove condition that never happens
+> 1f512119a08c usb: dwc3: gadget: add remaining sg entries to ring
+> 2c78c0295fd8 usb: dwc3: gadget: interrupt on ring full too
+> 0b3e4af3c740 usb: dwc3: gadget: add sg and num_pending_sgs to dwc3_request
+> 31162af447d7 usb: dwc3: gadget: avoid while (1) loop on completion
+> 08a36b543803 usb: dwc3: gadget: simplify __dwc3_gadget_ep_queue()
+> 45438a0cd9c2 usb: dwc3: gadget: simplify dwc3_ep_prev_trb()
+> 737f1ae2556a usb: dwc3: gadget: increment dequeue pointer on completion
+> 4bc48c974708 usb: dwc3: gadget: retire LST bit completely
+> a26a142275c6 usb: remove redundant dependency on USB_SUPPORT
 >
 > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -240,4 +186,5 @@ I've file-compared with the mentioned Linux kernel release, and this
 looks good to me:
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
 
