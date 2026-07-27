@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF2BC531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 06:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB12C531FC
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 06:05:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5E126405FF;
-	Mon, 27 Jul 2026 06:04:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ACD94405D6;
+	Mon, 27 Jul 2026 06:05:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QKl41zHyyUYK; Mon, 27 Jul 2026 06:04:41 +0000 (UTC)
+ id BBJ5uyblbYdj; Mon, 27 Jul 2026 06:05:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8B904405E9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CFE82405F3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785132281;
-	bh=37KnOS4q+9auh0xcSeNO5g0+dK3Z8jghVvnLYwh1F/E=;
+	d=lists.u-boot-project.org ; s=default; t=1785132343;
+	bh=czOMgazdmE0OxSfwB8mBT1SdHRh2r6T2kaD+ij3++ME=;
 	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=cRCaNcIiN78l5ElgDNryPm+9mjFMreV159VUinsnxy6lu096uGB4l0Q/zBWF7+n47
-	 LPV8PoJTzOVt4bvMrxRcR5XpJhFxQXadQMzISy2/HOn0PKS+1C5wXllogzUB09lpKz
-	 DuwnRNAJ4KXeeZlUhm2M/VpS99HtwgNi+/4xOwTNrnJItH3/usJzKWbP3lcnls1+NZ
-	 hN+kUBaelnfe/A/BH8zBRkfmU4KsjaNMD/IIlGHsw9AAJb5/m4KCR9P/P7WplATaGa
-	 cq6JZRR8Zf5WHQTwg3QHwcfNemOzI1SJRbFAOTf+QKTdydEX2a4pc7h/zEkA2NYUYQ
-	 O6Z9KtazX6oTg==
+	b=D7qMtff83+kZ+OZn/LlAgIQQ2R2oBmxoKEq5hG7LINBbupJ+5JRewm71AFYmmn6F4
+	 h3xMfxHXayiLI6+X0oFz48yKuqKlgpasVk8bpolMmIzvLI1iUzjow183KfC3zH9JhR
+	 vk0XRuhx0LXQcsBBKkxQR/LOVNscuxBaYrIWIlTZR21+VpAEB2s1XCVb00pNVYqkJm
+	 ZI3SRXACBfaGq+sg8jBIZUlP4gz2vCEO+Me4Prp+6958fFPc/yP3AYgirpizIv1+uO
+	 Mf4747b9rSvKdPbNs7JOh180qURu13o242rau8C+Er2nyiD9HlNtIsNlh9mpO7gXvA
+	 kC0IufyEWEABg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8B904405E9;
-	Mon, 27 Jul 2026 06:04:41 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id A43A02E5
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:04:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CFE82405F3;
+	Mon, 27 Jul 2026 06:05:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D4B074C4
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:05:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 869AC605F5
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:04:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D208A80BE7
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:05:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nQKXg4qz_Svg for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 06:04:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eQa94GfmDg-3 for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 06:05:42 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::429; helo=mail-pf1-x429.google.com;
+ client-ip=2607:f8b0:4864:20::1033; helo=mail-pj1-x1033.google.com;
  envelope-from=leo.liang@sifive.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8D129605EA
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8D129605EA
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8D129605EA
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:04:39 +0000 (UTC)
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-8486672f03cso2221664b3a.0
- for <u-boot@lists.u-boot-project.org>; Sun, 26 Jul 2026 23:04:39 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 156F580B95
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 156F580B95
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 156F580B95
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:05:41 +0000 (UTC)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-38dcbade417so2429081a91.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 26 Jul 2026 23:05:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785132279; x=1785737079;
+ d=1e100.net; s=20251104; t=1785132340; x=1785737140;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=37KnOS4q+9auh0xcSeNO5g0+dK3Z8jghVvnLYwh1F/E=;
- b=SRSuQfwHfksJ1LkCHjJ4GJlFAub4hatxYZsP8xRWo6WML9ZryFyXQwpU0R/uskqhYf
- 0+f0IPiwNXC9d6d/L9ck2HUnxkBuGanah3ZleEnEObWS+nl6OHzE3TChXh4M2scK9y9j
- Bemvhn/k8ZPLxC3RZeZZnakWJMp/99KEhEKhn031J07ucf2MUrJyrEocg8wy2L4k94P8
- R+3a8xlJhYb++hcdRVQXNcdF/vcNLp1wsb5z7EkcU3I45Z65jVCcKDqihnP4pLzxjqe7
- 4r5wojs4a5h5GVszWYt068wfhC9BgcMFjxcL9gYbBCAfSr9o/2o9pQFhwWMZNTMbLsNS
- 6Pzw==
+ bh=czOMgazdmE0OxSfwB8mBT1SdHRh2r6T2kaD+ij3++ME=;
+ b=aCLXfahiNomUCBZIpjlM94mKTuSsqXITClfAKVqilMaylt0+KO07x/6ALItQlsFv7Y
+ 784pG8SNUyzlTEkGI+WQOLuQWanEsXG94W+wJYmJf7eo1AvMDMqmwVGZUcrDOCuEl8OT
+ VoLx4OIbgojdRBL2TbWPzdOiEiLGonmTU9UDdQvLKNDuRG+3Cul/CDfSCHgfdbwpjbTn
+ IxKdYmyYg4kcR3h4JGFVkG5QeU1f53ra/WRySxlrHaS3LPll9r+JGjhb8YWolGbuxbWc
+ mfKXzfllp2e4J0ihjQj/Y3y3dbpqA5YmLdOmt3hXC5U3mFajlXQxcSKDoT4oTPmb12+A
+ qIDA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp0OxiJBRYX2lG5+159dl4exNfwdtDerK2TjKqmxxgdblz6URE35ZmmdK+DDdKzmRl9wFKxTL4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxcS1DnDU0wtsYlwCzR/5APLQ85fkmuNw6gfbUJjei/ugueXilP
- vDqXaME8yJmsRfrIhxshTT/VizcEA6E632Ya/+FJG4CnfSFyKC/dvCNUXf/a0H2Wtts=
-X-Gm-Gg: AR+sD12uzAI9MNtPyez/EjgiJ3gp2zZjsaWZRkHMFyzSMR8R/XiPTmF1MPSn4b+lmKj
- fjezTKgs7ErqjPt4l53qCaWXk2Yhzh1YeJO7ytmZibI1uvhopxrSmCRVrOaFQ+bjS2/ai/buMDs
- OSR1rs7LAhsizjReg68WiioN1cAH+rYO91Xr9a/41PmEV5dWl2EA22Fm5djaH4nE+PqlXCm+uHU
- b+CbTaczlUFsyMDE5oecWR2gZAUaavOGG5OPYQW+nDS9YPIqiVxq6CLeJQILMlbkdAZHMVQMnWd
- c9jDDsXYQs5BNDrpk5TAbFemm7mq+lnTq4D2gH5RYSdoOQYK1dVEp19g2khERoyxvNri74wE+jW
- CsN3adFcP+AEEQxexZCdk8zOrU7ZLwugV3gV8/ntuihaDMC2MH8XEvSUGMWXGdyEzuk0nhGhG/X
- OpHgrk38XYUC9klxV8imgI
-X-Received: by 2002:a05:6a00:1f1a:b0:847:982e:cca0 with SMTP id
- d2e1a72fcca58-84e594439c8mr5822598b3a.19.1785132278760; 
- Sun, 26 Jul 2026 23:04:38 -0700 (PDT)
-Received: from lliang-1876.localdomain ([136.226.240.187])
+ AHgh+Rria0oSdSanUTkNVjO2CFrvH6IA+A7abbBpwvQYKfnyt9Z1utmJMZ3c2y4JonMDdhsA/uk4Mz0=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxKcQXAlAKXFZPLt6QrLVZS/NHGIVUFyhgj0BRlzC974Rw9BsUR
+ BPn/wnB6EHD9k6G6/ebT3/C/FDXkFidJqnTFcPTUEAPe8Z903TggzNIikuMO9KclxOQ=
+X-Gm-Gg: AR+sD13B4taALP7Fm7lE3r2Mvle4Zk2s6VNHSHeuAgDv5qxFHYSKvDTrGmm5x7QvCHS
+ MAFRO3Ko22DfG6AZQ8mXDKQU909L5vpOYIK/C/BRg1aJSMSHNEjm4JdB6MS5x+EjwyS49YkKol4
+ ruSrtYc8SK1Fay5v8BFJlshzv9gCKjSHHthBXiN+TlHYJM0arBBPRWyClqvWPR5DGf12mixj1ln
+ J2ggIHwy26cNZgwBXHH2sGmCw6AcvaNJKIaa0S4H68XNk/QQtKSHzVS5xV/SwtacrvIo0W7mcgB
+ aVuAzUua2N2KubHn0zwUYB6tNXGoHkfr+10qRxhmEbI5iXOPkvox3WmuMMiHaoWDmCdPg4yy09F
+ ekovbO1Xn0gkF4rXZRFFH5W+/Vye+dsBxw19fvMciQl0qqFsYCKP1a+fNODVlRQ/soswEjjvQxw
+ X2uV2c8KZeX0z6LS+6in2R
+X-Received: by 2002:a17:90b:248e:b0:38f:57f3:4dc5 with SMTP id
+ 98e67ed59e1d1-38f57f34f2amr591616a91.3.1785132340619; 
+ Sun, 26 Jul 2026 23:05:40 -0700 (PDT)
+Received: from lliang-1876.localdomain ([136.226.240.196])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84e53282e6fsm2479016b3a.24.2026.07.26.23.04.33
+ 98e67ed59e1d1-38f2954ab07sm2498422a91.17.2026.07.26.23.05.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jul 2026 23:04:37 -0700 (PDT)
-Date: Mon, 27 Jul 2026 14:04:29 +0800
+ Sun, 26 Jul 2026 23:05:39 -0700 (PDT)
+Date: Mon, 27 Jul 2026 14:05:32 +0800
 To: Hiago De Franco <hfranco@baylibre.com>
 Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>,
  Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -100,35 +100,34 @@ Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>,
  Martin Herren <sputnik@on-the-web.ch>,
  Chen-Yu Yeh <chenyou910331@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH 1/2] board: sophgo: move ethernet driver to common
- directory
-Message-ID: <amb07QJmK3H_DnEU@lliang-1876.localdomain>
+Subject: Re: [PATCH 2/2] board: sophgo: add support for Milk-V Duo 256M
+Message-ID: <amb1LJ78pH-HB1Aa@lliang-1876.localdomain>
 References: <20260710-add-milkv-duo256m-v1-0-0f761100361d@baylibre.com>
- <20260710-add-milkv-duo256m-v1-1-0f761100361d@baylibre.com>
+ <20260710-add-milkv-duo256m-v1-2-0f761100361d@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260710-add-milkv-duo256m-v1-1-0f761100361d@baylibre.com>
+In-Reply-To: <20260710-add-milkv-duo256m-v1-2-0f761100361d@baylibre.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1785132279; x=1785737079;
+ d=sifive.com; s=google; t=1785132340; x=1785737140;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=37KnOS4q+9auh0xcSeNO5g0+dK3Z8jghVvnLYwh1F/E=;
- b=gwBYuAAu9+wje0evQ9xdwvd46qVgod4CnR02GjeTqzo615v30Cmfv4DWUAI2pH42Fq
- 3SSd5MRwHI+wORofJzaIeVvU/T5Jv8678FYkiex6L8BPz/QjvA9UniMAjK8DCP4VYsNT
- Wy0Wk8QH067PJSUnpqByBy3OTjs+dbTSX+5OIy1MffETDPpmz/Mgwwt2cFyoztbSaDow
- nF9PvVuPx8g4Ukh564uEKnds4B7wSxWl2K6RH7vPtzZlwTIl8QgtL4/F4jptr+gON41P
- I/zQQqpto7PAEKvLbcqqrYa0zaPXKzz8oDeSnOwacuGubkMBmmx64qSuSpALiTJaVFDE
- 1RDA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=czOMgazdmE0OxSfwB8mBT1SdHRh2r6T2kaD+ij3++ME=;
+ b=nBnV5vmmo3j5rtDD/wo0dR83Ghx8FVKFlfgCe2QyEuKcLD/JHOHUr+hD9YPyM7qiN1
+ Xu54hOIEahayvxEz07Ezx+X9K2sjhj/BNw0lKmKSOM5Nzj5+7XaRiJixRns/+9p0S/Rc
+ MQOGz1Ks3kAyd0XAJcJHczoIfiqhoH+wXqRbAPVpGhxhxsXYFehg8VB/IU+fA+oTPVnS
+ lRs4cl5dO50IroDIk8WNzODKvGfyOsDYkBfxaDNP/evcZ9PFiKDrKYwf1hgSLzI1udO8
+ kNMXOQsttyjytH4LeDXvyuBewoxSQPNgs5/uBGHxybsRUGy4BdW6zPMEPK/T5L9GcPwW
+ NUuQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=sifive.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
- header.s=google header.b=gwBYuAAu
+ header.s=google header.b=nBnV5vmm
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,18 +144,29 @@ Reply-To: Leo Liang <leo.liang@sifive.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, Jul 10, 2026 at 01:33:55PM -0300, Hiago De Franco wrote:
-> This will make easier for future boards to reuse the same driver (e.g.
-> Milk-V Duo 256MB).
+On Fri, Jul 10, 2026 at 01:33:56PM -0300, Hiago De Franco wrote:
+> Add U-Boot support for Milk-V Duo 256M.
 > 
+> This board has a different SoC compared to the Milk-V Duo 64M, it uses
+> the Sophgo SG2002 instead of the Sophgo CV1800B. Both SoCs share many
+> common IP blocks, so this board reuses the existing cv1800b CPU support.
+> 
+> Link: https://milkv.io/docs/duo/getting-started/duo256m
 > Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
 > ---
->  board/sophgo/{milkv_duo => common}/ethernet.c | 0
->  board/sophgo/{milkv_duo => common}/ethernet.h | 0
->  board/sophgo/milkv_duo/MAINTAINERS            | 1 +
->  board/sophgo/milkv_duo/Makefile               | 2 +-
->  board/sophgo/milkv_duo/board.c                | 2 +-
->  5 files changed, 3 insertions(+), 2 deletions(-)
+>  arch/riscv/Kconfig                             |  4 ++
+>  arch/riscv/dts/Makefile                        |  1 +
+>  arch/riscv/dts/sg2002-milkv-duo256m.dts        | 46 +++++++++++++++
+>  board/sophgo/milkv_duo_256m/Kconfig            | 30 ++++++++++
+>  board/sophgo/milkv_duo_256m/MAINTAINERS        |  5 ++
+>  board/sophgo/milkv_duo_256m/Makefile           |  6 ++
+>  board/sophgo/milkv_duo_256m/board.c            | 19 ++++++
+>  board/sophgo/milkv_duo_256m/milkv_duo_256m.env |  8 +++
+>  configs/milkv_duo_256m_defconfig               | 42 +++++++++++++
+>  doc/board/sophgo/index.rst                     |  1 +
+>  doc/board/sophgo/milkv_duo_256m.rst            | 82 ++++++++++++++++++++++++++
+>  include/configs/milkv_duo_256m.h               | 12 ++++
+>  12 files changed, 256 insertions(+)
 
 Acked-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
 
