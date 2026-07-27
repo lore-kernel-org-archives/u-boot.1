@@ -4,142 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 054D3C531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 11:30:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA5AC531D0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 11:45:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3917480D7C;
-	Mon, 27 Jul 2026 11:30:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 38AB580D77;
+	Mon, 27 Jul 2026 11:45:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id J16XspmnM3EO; Mon, 27 Jul 2026 11:30:07 +0000 (UTC)
+ id RtIxMVMw-BcL; Mon, 27 Jul 2026 11:45:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 30F3D80D3E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0D7BF80D60
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785151807;
-	bh=WiscUSxaRmhOSIUneZY+wKeXRw4fvW7LYKk7PTsQj8o=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Q62bHB/uyFRsm46D92g0i/8af6iufiVf3QFcqxH/ppp5B71jnb959CLjSCzEMNM9j
-	 C02QqTspoPNZy6Hi4VUG/JBJi9n9Hhx0qir9TPikiznfBIgLQ3OiDCyCMbKqjbmLX1
-	 InLr0fFAXkRW/yeh16JcRx8JcWG+dwF4WCMalbQ7f4+uH3Pxuh5iyq7MWWg2uBSBzC
-	 qaseqruw2l7YNGzsDKYITwVn944pqVmXreyzv5sO9TsBy3Cmr6D7oQ9kS3gOZL+aEg
-	 HlCw7hbalpfjFOieUd+Vn4pUMMcok62yViyPAa0NZWzmV4twb+wwEbnZ5nAxCK66wy
-	 7royScU3VCxvA==
+	d=lists.u-boot-project.org ; s=default; t=1785152720;
+	bh=o9k7eLsT9r5b7zJ/JoLLgx9frly/OwGMm6e3olhUuqQ=;
+	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=NbG23y8y4OPpgFUPYdNLgs6WPMKC/8r8VKUsVsidJVI1IEMWiMT5yrAxkUqtW8VwB
+	 xeZJv2EZ3Kbsr4MPC6+mbiLd9BE3JiLL8e7O5Iszh+SnEoG6n+gdoSIWrD0vdbgt9/
+	 eOJCkv6uPxkwHcxPkuOed/sPdd/Ppty54Bp6vYrl9qimK5De8OfBg+OQL8Ye4ZEzMV
+	 HuMzZ9ejQ9bYKgaJ0uv8JgkX7oke8dHvJ3AFMRyp9SdRLDXcgOn31ct9HMpZGPnW+p
+	 8mAPyWKGK1xRoQi40UpxUfH/c9KmLi8+I+EiqCcKM8VVqULoM/IIEDdceFYoEyEGoI
+	 pL+Cec5r8/ORA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 30F3D80D3E;
-	Mon, 27 Jul 2026 11:30:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 54EE1357
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:30:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0D7BF80D60;
+	Mon, 27 Jul 2026 11:45:20 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9EB3C357
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:45:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 52500406F6
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:30:06 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 94157606D6
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:45:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RrGBPZQiNy4S for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 11:30:05 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b12f; helo=mail-yx1-xb12f.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 5DE5C406ED
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5DE5C406ED
-Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
- [IPv6:2607:f8b0:4864:20::b12f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5DE5C406ED
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:30:05 +0000 (UTC)
-Received: by mail-yx1-xb12f.google.com with SMTP id
- 956f58d0204a3-66899c7b57bso2723338d50.1
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 04:30:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785151804; cv=none;
- d=google.com; s=arc-20260327;
- b=PvP5LUxeBbLQSztv4GuJ+1bdc0bS0JXY6nfi7iizC8oBxY0bUQjULfBjJvIt6g8dQt
- k7dloRYDHOriGqfdLhLfeQrU4FrcEKnyeq9u3ORFhOTd+tsglb0vjTXWPV/D3fpEo3PO
- WkYQi75f7rJI6PpRBsU0/kne7G8XY6HdbooURbbJKPU6UlWqaXCm9V00GpMjTxarPSSy
- F3n6IJuVucgR0nItnf63j6Ht5mb7O6Pb2oVh72gbrfHEegyrCttdXDYprLoHNAyrLB8U
- hdSHS8T2233EvR0Jxaku3lE4OsJmAMs1iaE30Y2TsLdfTHEDiOLX0vP58mjozflua+Hz
- q+aQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=WiscUSxaRmhOSIUneZY+wKeXRw4fvW7LYKk7PTsQj8o=;
- fh=7vevgLnTBO4tKOPXf9f+BP46lhSNasABu94JehI9XS8=;
- b=GVBmZjn5t8uF98X/kiDryrYuJFKY9sBWZVWsWdOUQ1oVIbh6i7aEJb9S7hrCRLT02A
- SF6O8pT8vr55qrBTvZ/n78SWJd351BBbzMtfe2LIpGbcVn3LftTTiEoag+iZuPI57M8g
- tnDh2fQgIIsLEYnAQoaoOI8RyOeq1nL5Lh7ujQ+/khq1uM2U0etUZg9pzko22JkuaU9Y
- d92osRjmzynewPHA+SSU+YLzXPysJEVixlNSuHmw82Jo2I6zQDeu1E9avkXUTP3U9YsX
- aaYb6/wCLNclHhasWxNfrJAVId4UjD9NNri4vrFtdd2xtLxxmzQCD5TFfJweqySwSeZW
- g8JQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Um8ajrCyDxsW for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 11:45:17 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 43403606C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 43403606C7
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 43403606C7
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:45:16 +0000 (UTC)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 5BA3B40195
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:45:14 +0000 (UTC)
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4955d314945so18769825e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 04:45:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785151804; x=1785756604;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=WiscUSxaRmhOSIUneZY+wKeXRw4fvW7LYKk7PTsQj8o=;
- b=p+G4326umOVmb2ZXBaw5W5Hz9t9ZaNUnnkYXnUgb+Ab7uruIBf+bbxUj45G7XbqVGW
- xUDAPoQsWV8WXd23F2tnuHauypaGO7XP+xim/NEjGocXc2bprFewwzHxIoLUpn3xB90v
- lgGhMB/SkAvCreJV4lkIrRj/y+M4KsI5/nRAwztcY9yh65YZv+1ryb+MwhdxlH/7jWjN
- v0qX66xubP9Ld11vlbGVyTI4OEgagPXBylEUlGls/0tWe2tpvqdxvQrKV1ESWyDERp+m
- 3JC125znqvEIPSu5RM3bWTUgb+sJfoenm8dWQsNLCUOu99gFUr7uneOvr0ezuN7ir+l7
- VFBw==
+ d=1e100.net; s=20251104; t=1785152714; x=1785757514;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=o9k7eLsT9r5b7zJ/JoLLgx9frly/OwGMm6e3olhUuqQ=;
+ b=ptpLEop/U2y89wPvTWNs/j44Z75jqu3bmXAS3c2O5X5mF9tKj4EKKbRG71lSkz3wib
+ xFfcgum8kQLFmpnQ0rqeWenm5MuYHM1IZVDUOJgNYR8aPly43yRZ1IdKWY2sZ3Svy7K2
+ 7M0YZU/Nf3Okstwshtu2FZeq+fB7t1wDIsjrXwxYFU8kPgZ1Dg8AwiKfvpjN/8bHjfVc
+ /LFqsQ+qo2bqm9UbVDR8fkEjU2OQwPuwW3FTqkHF1PKgC3phhprF6UG/9mHUuaz8pMPi
+ 6gsMzeZ0NLF6rSe4pGavBA4k5KF15xkFG+nf7k4ffTArKzqKjBQnrCF09actaFb6bk8j
+ scdg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqTTixx08M697dGu/qly/cmMEGLiHAbh+++XPHajsTHj665i+O/twj4rQB1aexxArlyYwchB1E=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwpXtJZF/tWSZKqKEDj/cLiLaHW6HHXJi1ZadfIsLfWw/FMgq0p
- zRkcsQWtSmDn7Z/2tcjC9pofQUGOmb582T+3K6afaIrBMPgvixM4P4gRIHFKD7x9kgX8bYdkTNB
- TuFntgggpnVseIFd+2eBosdp5B3k0S6FhYza9iyJM0g==
-X-Gm-Gg: AR+sD13pBL2UJgncxLYNOz3JvYM1WxwwLpgFjeH1ONhND72V1IPF8HZrSkbweY7zlii
- KFYKr5FiumjsOGsthq8hxXm7oOFNxYpiMySeJZxOA9shbQqxMStSxMziTVrQXCjJuwGiR0d8qGa
- jDrLvO2jNeuAkCAqfGgPfbCqflHDorixLPVsOx7JYkVPQ7W2COrvnhBXBkoeQbbxhQ/UZW0faQK
- DDq/YE6Xpo5TuM9bxo+JN8o32ZQJg56+v0CLBvhJCSkMhvmt1kz3hyNN4nU8aZVOK0BjoQt/H2t
- QxCexgNixaqU+eL0LTkBQbb2XYU/MCC0HgjafxwH4n3vT73EIX6Q1yWVQFzNL7PXknXHzcnGWKL
- h7zbjZ1PZZ5UheTTa/KIX2pi1GdUh4oG0tw4gpI2GYm/cRIclKUwRlNNvEC0t8ssqQrWee/F5a3
- 4EqtDiE5NMafklGZJ6MnXUNVwgynVhx4IK0adgmghpjMk/t2MoIpH3oZL705IW5OovWzIzuJXb+
- Ut+docyjPSX21iZ/P0/Sabmjx9PTnJxwQBvq70dq7tCfNw2uDJSCgoUj2afOUbHiae3q9BP2nNQ
- zap+T+thpyNVqbyQRn6L+sdLKhKgLLWBu25aBOL0rPM82RRLEcNmwHoKsJmD
-X-Received: by 2002:a05:690e:e8e:b0:664:c560:996f with SMTP id
- 956f58d0204a3-668fae990b2mr89940d50.59.1785151803728; Mon, 27 Jul 2026
- 04:30:03 -0700 (PDT)
+ AHgh+Ro/G5HKxGGG2bvK+36O07/UzgvlwC++vceI3VTu4l4IQ8Z6IWarqSw4GTu3kBR2NIV+AvXOd9Q=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyCsk+gznqyV+l9wGfHd4PICmIwfAAddCZ+d072FbgaCKE0mh8b
+ GnB8Fbtl2kD4yj98ArhtWncA9HrUgV1Xc40b7vgxeT15JzyZVIO/jFtQlz1VRSRgu5T3Qy2jAaR
+ AN5s/9ljCYXKhOrAR9GHYo1nf70NmzpjTEGsmbUD/aqSf3YPNo63G+osQRi2pC40s5U3sxx/0Vi
+ Gc0SzDggYKpVqT99tPQg==
+X-Gm-Gg: AR+sD13mZ7BL5quNagnR2Umxh/n+TrRxt39GdrG6qoAuz/s5AUh3jNUttlETOz4qCiK
+ 55AQSRdhO6u47fl738VM2WvN73TBii+b/VzoI5KkVGzyQ68tRH8lSJATMH3SuverwQHFZ9n79ur
+ BNC/ePgMrENnXfHFc0e60h/Kr0ohAOcUdoT7fmfmSuODZzEZDUlZaY2QAdIzKD7uGgC5LhTz7zY
+ tNVktsU1YKVl1jIgX/53SJEh9goZbU7VK7lmVmrEgnPiWCB5OxuRe9BWJPSvPgSsaSg35G4fnO0
+ pZD4U3JQc0q2O4vplw5O4fBcnb7kxVOKQzFiYuPXV0EAunm+qqdkNlDd50eigO34q8Px7F0oDz3
+ 4JHPFtXaFPtwXuZavlRgTsPsh6Uxp93S3s9BJ1oB2HLNXHnZTsFhdgBei
+X-Received: by 2002:a05:600c:4687:b0:493:f6c1:2f09 with SMTP id
+ 5b1f17b1804b1-496b57108bfmr106326325e9.6.1785152713890; 
+ Mon, 27 Jul 2026 04:45:13 -0700 (PDT)
+X-Received: by 2002:a05:600c:4687:b0:493:f6c1:2f09 with SMTP id
+ 5b1f17b1804b1-496b57108bfmr106326095e9.6.1785152713567; 
+ Mon, 27 Jul 2026 04:45:13 -0700 (PDT)
+Received: from workstation5 ([2a02:908:1242:30e0:96c0:6fce:32a7:7281])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-496b388d5b4sm161876545e9.3.2026.07.27.04.45.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jul 2026 04:45:12 -0700 (PDT)
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] efi_loader: fix memory leak in
+ efi_sigstore_parse_siglist
+Date: Mon, 27 Jul 2026 13:45:07 +0200
+Message-ID: <20260727114507.225710-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260727110336.71692-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260727110336.71692-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Jul 2026 14:29:27 +0300
-X-Gm-Features: AUfX_mx4TJditLm2ANMtiofCs-L5MTVnRXWndSNNu-oB9eIxG7DTMSHVlIhQmZY
-Message-ID: <CAC_iWj+FgW-iqSLYH8vsdgeEis+Pc_EjKnnU3pMEdPbpgOjSbQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] efi_loader: check efi_deserialize_load_option() in
- get_dp_device()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Peng Fan <peng.fan@nxp.com>, Hem Parekh <hemparekh1596@gmail.com>, 
- Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785151804; x=1785756604;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=WiscUSxaRmhOSIUneZY+wKeXRw4fvW7LYKk7PTsQj8o=;
- b=wcDKezCbdhCkbxhmyJ3ZNcCa8I0e4tPrViLV9QYBzUu0N/2CSUorIfYldN/NfXcpsO
- 2abp42JoFCyw8KZQ7jNGGH2srUihCwv2l89pY3h2zIycTMcuDxavWT0kWklInN2PhqAS
- 3g3O1TEjyRm/jdnmdjGKH1EVMy9BtIVzZCBm1Vs0xsaGiiJxFOH90LsZw8dirgh/AdIq
- F2C2SpxJVyGHK0tk3vIqZqqpiNX/jTrgFq52cScR20qAz3sFVfy2iKmi9xbAbBXpI6Xp
- eRegjArMcZOl8IH1wEkCvROnZBosikuPti6jqTUcgHWEYJ7CZI6kDnHK0dmTP8Lj4F91
- r7yQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=wcDKezCb
+ d=canonical.com; s=20251003; t=1785152714;
+ bh=o9k7eLsT9r5b7zJ/JoLLgx9frly/OwGMm6e3olhUuqQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=m9cR4k/vByr7+wKJSp3Eis/bbe3cVTkdjPh0LM9nClVawkq0M5ct2CHvCvCLdIM7a
+ ai/hRPCOkQfudAW0OGljZkRxbAf8dx3Hf3tLe6iVu0z4tCX7ZPCopvImCY7wiaO4Iu
+ ZTR3XOTbN7fmIZNGQHnsRM4KCV0UMqn7sLYCHSHXZ/JLnac0l2PnStiXt2BpDY265D
+ wYNnL5zJHCBU6loPGM+6mJWpvdHQTdK/P8x/MU4sC5xNKWmKTs/QbhaHha6Ge5Jxr5
+ Dg6rJ4KxB/Tirs2OIwn5GzR4PuzGgY/9HQlgxsyEe1dpomyUqJaMNb2mjcSPth59yZ
+ /2Y0xJjKCFTxmAQTi9F4MJh+aPrwOr0rZJarA25qeeunIfcWXg+7YqkNPhZcCCKZq2
+ j4oHjReAmWTPVcKxIpzftxn5dzAKDOCbWXbfsZXRmpq+h7xHnz4e2qFeTMJK8RaNd3
+ HxzxdjNfTx4P206UWIx9W5en+eArsaQguTP4vz8uOQ7Qu+LnmEXKYlz5MnADPqYgSX
+ gWBGBTSB9XJsU3X0n//3XzzzHdpy95idTlwcMbymM+dXxmotdZPonInWcqoRosBdNG
+ H+sQ/MaNS2KwgAN6zTS5ukUhbc/QaDgENwNXdJot7ITm6fmcdf0n657YNAISCIDXLw
+ RRZOsN7CZ4CEhxXoZ/PMDNRw=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=m9cR4k/v
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,95 +137,74 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Heinrich Schuchardt via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Heinrich
+In case of an error in efi_sigstore_parse_siglist() function
+efi_sigstore_free() is called. Currently it fails to free allocated data
+because siglist->sig_data_list is not set on the error path.
 
-On Mon, 27 Jul 2026 at 14:03, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> From Hem Parekh <hemparekh1596@gmail.com>
+Always update siglist->sig_data_list when a struct efi_sig_data is
+allocated.
 
-This needs a :
+Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Update siglist->sig_data_list inside loop.
+---
+ lib/efi_loader/efi_signature.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
->
-> get_dp_device() reads a Boot#### variable and passes its contents to
-> efi_deserialize_load_option() but ignores the return value. On failure
-> efi_deserialize_load_option() may return without having initialised the
-> caller's struct efi_load_option, and even on a malformed device path it
-> sets lo.file_path before validating it with efi_dp_check_length().
->
-> As a result get_dp_device() can proceed to walk lo.file_path with
-> efi_dp_split_file_path() (via efi_dp_dup()/efi_dp_size()) on a device
-> path that was never validated, or on an uninitialised pointer when the
-> variable is too short to be parsed. A device-path node with a length of
-> zero makes the walk loop forever, and a length below the 4-byte node
-> header leads to an out-of-bounds read. The Boot#### variable is
-> attacker-controlled in threat models where writing EFI variables does
-> not imply the ability to execute firmware code, so this is reachable
-> during capsule-on-disk processing at boot.
->
-> Check the return value and bail out, as every other caller of
-> efi_deserialize_load_option() already does.
->
-> Suggested-by: Hem Parekh <hemparekh1596@gmail.com>
+diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
+index f99a0c29d2b..c2be5cb61b3 100644
+--- a/lib/efi_loader/efi_signature.c
++++ b/lib/efi_loader/efi_signature.c
+@@ -647,7 +647,7 @@ static struct efi_signature_store *
+ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+ {
+ 	struct efi_signature_store *siglist = NULL;
+-	struct efi_sig_data *sig_data, *sig_data_next;
++	struct efi_sig_data *sig_data;
+ 	struct efi_signature_data *esd;
+ 	size_t left;
+ 
+@@ -690,7 +690,6 @@ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+ 	memcpy(&siglist->sig_type, &esl->signature_type, sizeof(efi_guid_t));
+ 
+ 	/* Go through the list */
+-	sig_data_next = NULL;
+ 	left = esl->signature_list_size
+ 			- (sizeof(*esl) + esl->signature_header_size);
+ 	esd = (struct efi_signature_data *)
+@@ -709,6 +708,9 @@ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+ 			goto err;
+ 		}
+ 
++		sig_data->next = siglist->sig_data_list;
++		siglist->sig_data_list = sig_data;
++
+ 		/* Append signature data */
+ 		memcpy(&sig_data->owner, &esd->signature_owner,
+ 		       sizeof(efi_guid_t));
+@@ -721,15 +723,11 @@ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+ 		}
+ 		memcpy(sig_data->data, esd->signature_data, sig_data->size);
+ 
+-		sig_data->next = sig_data_next;
+-		sig_data_next = sig_data;
+-
+ 		/* Next */
+ 		esd = (struct efi_signature_data *)
+ 				((u8 *)esd + esl->signature_size);
+ 		left -= esl->signature_size;
+ 	}
+-	siglist->sig_data_list = sig_data_next;
+ 
+ 	return siglist;
+ 
+-- 
+2.53.0
 
-And you probably dont need this if you want to keep Hem as the author
-
-> Cc: Hem Parekh <hemparekh1596@gmail.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         Use common exit out:
->         Remove invalid Signed-off-by: Hem Parekh <your.real@email.com>
->         Changed error message: remove word 'for'
-> ---
->  lib/efi_loader/efi_capsule.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-> index 52887f7c274..a77810fa15c 100644
-> --- a/lib/efi_loader/efi_capsule.c
-> +++ b/lib/efi_loader/efi_capsule.c
-> @@ -860,7 +860,11 @@ static efi_status_t get_dp_device(u16 *boot_var,
->         if (!buf)
->                 return EFI_NOT_FOUND;
->
-> -       efi_deserialize_load_option(&lo, buf, &size);
-> +       ret =3D efi_deserialize_load_option(&lo, buf, &size);
-> +       if (ret !=3D EFI_SUCCESS) {
-> +               log_err("Invalid load option %ls\n", boot_var);
-> +               goto out;
-
-efi_deserialize_load_option() will only return EFI_INVALID_PARAMETER.
-For the capsule update on disk this seems correct as the EFI spec says
-"Invalid capsule size, or an incompatible set of flags were set in the
-capsule header. In the case of a capsule file, the file size was not
-valid or an error was detected in the internal structure of the file."
-We just have to make sure that we either explicitly set it or
-efi_deserialize_load_option() doesn't return something invalid in the
-future
-
-In any case
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-
-                                                                  =E2=94=82
-
-> +       }
->
->         if (lo.attributes & LOAD_OPTION_ACTIVE) {
->                 efi_dp_split_file_path(lo.file_path, device_dp, &file_dp)=
-;
-> @@ -871,6 +875,7 @@ static efi_status_t get_dp_device(u16 *boot_var,
->                 ret =3D EFI_NOT_FOUND;
->         }
->
-> +out:
->         free(buf);
->
->         return ret;
-> --
-> 2.53.0
->
