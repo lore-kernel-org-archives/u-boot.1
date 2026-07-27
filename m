@@ -4,120 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A159CC531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 20:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81346C531D0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 20:53:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 491BD407C7;
-	Mon, 27 Jul 2026 20:35:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C114E407C1;
+	Mon, 27 Jul 2026 20:53:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id S8yBc50vsRci; Mon, 27 Jul 2026 20:35:14 +0000 (UTC)
+ id tlx6G0tmkJJl; Mon, 27 Jul 2026 20:53:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C731D407A3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 65902407AF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785184513;
-	bh=U/Y2I1bwfec2Y0PuyYDboagR4NU2UWllpaHVaX8JIPI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785185627;
+	bh=+UR60HBrBR0ZuWDMelRUdGTB8KmmMjZQnVUCWj9k/LE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=obbKovpKJxFhMAigcbT6uVh0C+G5OIKNplP9tIRXwMrIw2sSHyEoAg/UM+glXQWoQ
-	 JqHQga+hYNdKuGS0xnUWLSaXcIyp2MRNYL03NnfB5mjInWEB1QpMbe3tcoeSH8q13z
-	 tyjKa0jmGycB4DsyfRoez8gq4mGRws/Nl68ng0awsWJKsgbv3jmIV301wqbc8zzz5/
-	 0BQ/LTtpHHBkNHDH4WcLB7Z9QNiRK/JbPAf0NsposKRFukQHqGnHG/w+gtfeliJvYd
-	 t5t9Nb3RHq8a61cmAVoZt2ft7YsK2jGqpb3ZAihDCJTq1jv0fF139AZhjmD5gS4+3e
-	 BN/RbQW3uQPFg==
+	b=g0kpZa+y8xADGyPhQEgv93WiJyXY8lr6w06kaSBnRP2IJ2lWPSa0fB4EOol6C7HLP
+	 mjnC7D4273p6Xn4Jwx6ww/7O9aT6cb3VeteerQSbDjizJSitkmeXnl8BVLlX+1U6yc
+	 fB4ex0D4RVYXq6L14+HMpjD0QeC3GQTthLWNazKJtDtsP/h5gjjkHDC1kW6k6XRwji
+	 OVvTNt9QYwcrWG6o7Wn8wIwgoDbgiRxWKwVP1hBZsDW9Yv8AE/ZGKK4C3PrQilvWpL
+	 JIOdXvmd8cpo62Y/3uzxHz+chDjk64mECTBYOU0j/6o3f1rfLZLSQLq4Ofg3G5XH1q
+	 GlN9e2ZJa5nIw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C731D407A3;
-	Mon, 27 Jul 2026 20:35:13 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6BE73194
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:35:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 65902407AF;
+	Mon, 27 Jul 2026 20:53:47 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0EE59357
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:53:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 51893401CC
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:35:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E07CB60769
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:53:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id isrmggRqRQMF for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 20:35:10 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::36; helo=mail-oa1-x36.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 392384005F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 392384005F
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 392384005F
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:35:10 +0000 (UTC)
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-45837e52d8aso522797fac.0
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:35:10 -0700 (PDT)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mn7ZLEQnZqu2 for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 20:53:45 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 87E36605E1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 87E36605E1
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 87E36605E1
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:53:44 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4798782991; Mon, 27 Jul 2026 22:53:42 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 74BCD82991
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 22:53:39 +0200 (CEST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-69fe3cd5ee6so3016342a12.2
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 13:53:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785185619; cv=none;
+ d=google.com; s=arc-20260327;
+ b=hCPW3eGQrj9RHF6VIukTem4uMZcN6BHmEeOr5zTfhCMLkbzW6XQLY0kpomz8qcpHkh
+ i3e2L+HBk7Nqavv/2auqfVqqYq8t84aWoFy64J918PQtShoZzKL1r4WYBX/lTNWPIUwy
+ MUbXYT+zO3E45rz4P/ynryn+8EyMFT7HBj/SMJOptdQj6dCQnjLSTLzP/d2QaF0N/EXK
+ NMBO2D1J/tv1iBwaIkiO8pANWS0rZ6DJQAV5jcwqA95Ma+nW71XZYz4AgUtf6tdVv7Fs
+ RrnssQwZdwxEBgkYyd+pgcSptJH0DOp7faTb3PoKf1LO7Ug9SKtrU5UpkZQ+3azSlVXa
+ Df+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=+UR60HBrBR0ZuWDMelRUdGTB8KmmMjZQnVUCWj9k/LE=;
+ fh=gxVxvnmuIiFlvCTejdJRH19Ue1/pdsae4OpqU+qvUWc=;
+ b=AIDiU6ou+NGG5/yP0eeOY/M7XU1ta/9JjOkKdPXBfzekG+TdoMwDGQI0z3/2IVCyI7
+ hilCs0j4RkdXzNyJJgjKY1oF8xfOXdHKfGWRqF/edLHlzbiWO93k8CyOReZ9AdObmH0s
+ BqZgmj8C3pDQiY1q7ntL8VwA/PfRaG39yaYFvU93wmD3xGd4ke96N/8uI5qkwf3yyMnB
+ HBjMHD9bIxSqpbrj17sXPlOTqqM05Oumy1745DhyAA9vliIUt4L+L113zCUzWRSRWfiL
+ x7JYGezeVY/F8OADu3zeu2AOK9/xLuCEJMsnE7jLCnzVy64KtsUGiRKjU0+mDj7/rJK6
+ SlHA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785184509; x=1785789309;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=U/Y2I1bwfec2Y0PuyYDboagR4NU2UWllpaHVaX8JIPI=;
- b=Heo/vsrsjMD8nIRnLntV8hEZYyqFL69GnpWEAscfWaRXxUrsAsHYkmBMyRJzE13QxA
- X5T79wXdFsDQGpcq2Z9351iw9QO6gCzVFC3SKaYTLGpKxhMpWinGgwrslYD7gW/AitOk
- 0mpW1DJxNZVysjbNJdipfGQUCXNB51cpVgOCp/+D0+7hN6SH8OIodoztNa7jyfJBvWuH
- 6AGhXbj8SbFuAVKNdeMr5SB3zigsy6ZciAMxNCNx3wUvGsjSAFfdEIegfpSLQMwxvAVq
- 3ZOethnOYzh1sxs3NOiHCkpGqBs1CH2FQt0DmqWktYOVnsmDZ7b8fsTT9yHpPVyHAANp
- cj5A==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrEMQ22ZTJI7DxXTSWdfzhKdhMJYXXdJwobFBtubRBMQHZ4Lt7uGdCRm4reXy0QF8uZUjplA4M=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzCfRNIHTi+hr1a+wwEujDTYmZDYoZExg9Pb2FTpAFQ5I1+wIG0
- rT3HaqHbSOMn6Q13WRjgoxmdGA6sAD/sdZU7QPdKbij8JXm5Bn5s708zwP63mFHfwbZedpwi11e
- ledTXywY=
-X-Gm-Gg: AR+sD11IHJmZwRt5esiIt3rNXURfs7Prl8cReFb3Lqa5bCu1CFcIPt/Zs+FyIzEX9a4
- 5n6Pb93mhNrA0ROK777afEpIduMP3SWzkH9EmXOIEryx9JLSV5+PFREYJdNe3E+KGvSVfDQgrfN
- 9FiEXUYeROIkUyWZpQZDm2FL1JzmKh3CqhCwg3XFOCq3s1bBZqGhL94y1ykuc3JywWgU+lFUZd0
- 8IkRxRFk/8UVXKAmuFtS4MqRTkwvOQKYzDnwIQ3Yo8EjhYYdPnF2mx15zVpHElCOoZLK0+s8BvC
- nkT9KWb4UlRZjNlhSqQP1sB9kpK710SqW94pGAsLXDPS5kNK8lY+wJFmhfgDrmhYVRskc+cm6vO
- Aw+DeojdaHD/o8YIhRV2Yk3TSy+BCcTMXRqk8jUYjLnqG/h3vF+j9epHV/PCMoxA6dFFbehQXSR
- 3VixXnJmzdzSqERaQWHzDpm3p9fD2GiL+tOoWVge2KRkFxm0P0AD7CC+MVASkZZ7SaccrXO13TM
- Qas8vAesdP1l1K2K+NZfhY0Wyg=
-X-Received: by 2002:a05:6870:b016:b0:457:3f27:4e0d with SMTP id
- 586e51a60fabf-4585e52b6ebmr893204fac.40.1785184508964; 
- Mon, 27 Jul 2026 13:35:08 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4581ac3f9e5sm5395036fac.6.2026.07.27.13.35.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2026 13:35:07 -0700 (PDT)
-Date: Mon, 27 Jul 2026 14:35:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ferass El Hafidi <funderscore@postmarketos.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.u-boot-project.org
-Subject: Re: Mails to old mailing list rejected
-Message-ID: <20260727203505.GP749385@bill-the-cat>
-References: <bd1ea941-a8c7-44f7-8d99-587e702c6163@cherry.de>
- <tiog0q.sgud5ojm2xxy@postmarketos.org>
+ d=1e100.net; s=20251104; t=1785185619; x=1785790419;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=+UR60HBrBR0ZuWDMelRUdGTB8KmmMjZQnVUCWj9k/LE=;
+ b=AmaOY23vXOjcHTJIS9hTJ1m2+XbeE+GVZKtUrPSrpXtjUACDNtBOO9gTLRpQwz5gUw
+ 66UlVYZUPmtOXMj24uk1kiOP914i0ubltyTBsJedeklRi1SYNhiPvCyy9zlxcmnFohRL
+ p9TcBFQ4o+OOhVPikU4IdthVbgG1eDyMBw4m2LbW8Oz5KzYbxjE0zxmU4485+kCCI7Oo
+ 6roG5u/wy26jsbAxfjhR7ZrXylCNF9mL2rilFlj1Lj/gid7ob7aVHcriyLMCbLE3zB1X
+ L3v2I1Af9yD/Mm8gIY/R21264aKYfATCBEiRfQ5R+TMJL7UI7j+PDeD1KkozxY6jGiDS
+ IjKg==
+X-Gm-Message-State: AOJu0Yx+EwhLRNu1Ypeovv6EJj+VJ57us4f8BGpUw1TfDzulA3dZyZtk
+ 0vA6H5XEzDG01W987xQ43GXBOXOiUU7ninQd339SRL9cM5IsIfMlTrS3nhFs2FstkGXpA1fiXiH
+ fKqfBhvWItq8aZcSUMIKjYnEu7I7TerioP4Mxj72n
+X-Gm-Gg: AR+sD13zVeBCt6nlzP/rmgxG4+Jmlv15cmFweOOJC/ZDeEmNKzL0M08CWXUxEv+cSGU
+ 4+rD0IKmvwlKYiik2VeBUZnL3N9pPpedw2lUzzJxXMd7c38EMnVOA7xSiXmwVzIbLtMaHf/qHMo
+ TxK7Q4mivNN+NBQ5GZRE4g2HvbCDU/Q+eaBouBNJzI8Up+L7vyIAJOAWQQpfCJILsDQ0PUeLe3+
+ 3iqV1Loq25zzJzkpr6Q6lDTkxdO5pDcAQHGv/J88CokjOBJE9MwPQlG2+34J2hWiXxkh/o=
+X-Received: by 2002:a05:6402:e03:b0:69a:a81d:d454 with SMTP id
+ 4fb4d7f45d1cf-69fc11078e9mr3978737a12.7.1785185618835; Mon, 27 Jul 2026
+ 13:53:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qCXZfATYHeEFRj+i"
-Content-Disposition: inline
-In-Reply-To: <tiog0q.sgud5ojm2xxy@postmarketos.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260705104231.3846672-1-sjg@chromium.org>
+ <20260705104231.3846672-5-sjg@chromium.org>
+ <CAFLszTgC1SF3rS37GDXu6k1=6mcQTfSEA9UhrRX8nsqCdyLnxA@mail.gmail.com>
+ <al5_HaKU8CpvqSei@ashevche-desk.local>
+In-Reply-To: <al5_HaKU8CpvqSei@ashevche-desk.local>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 27 Jul 2026 14:53:27 -0600
+X-Gm-Features: AUfX_mxJy0lU14yzhaB1shbuzu35kirjMsqeCEfEW1sbE-hvV61Vh3gTLiiKSrk
+Message-ID: <CAFLszTi7rg7Hgn4FCSVmVZkszhjsUvDp-8SU+0Q8OzfxRwvr_w@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] CI: Add an sjg-lab job for the Intel Edison
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785184509; x=1785789309;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=U/Y2I1bwfec2Y0PuyYDboagR4NU2UWllpaHVaX8JIPI=;
- b=FO5q8UDsuPqVvX1EpzXNyOLsb8RcrZcZUk/I1NU77U8AFOOhrfs9l2q/SfOufbLU9w
- jzHSZrB5QGE0pL2MrSxvCRla99uY2o1+xeXFzDCN9i+czEa2ImUrvGOX1ym3yF6BF8qP
- ERtTjtU7NtFV8d0Wmw4QkmjTf9SnUIspB6eeE=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=chromium.org; s=google; t=1785185619; x=1785790419; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+UR60HBrBR0ZuWDMelRUdGTB8KmmMjZQnVUCWj9k/LE=;
+ b=DwRZB9SzwvAoS+HFpwB1/NaiCkGqWNKeBosmc4ZVB44IgoL5Wc6co0xw26NN0rCxnF
+ dRLY0H5qx3sCoWZnm75gaCZcevEsmS1OJfZU0Jzrblt1GzlP4STLuErG1iDB3WmJEJJ+
+ gRgG3HZ0OoiJncWDjKpc5jztSMQmR+ZqKdzjo=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ spf=fail smtp.mailfrom=chromium.org
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=FO5q8UDs
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=DwRZB9Sz
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=sjg@chromium.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (1024-bit key;
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="DwRZB9Sz";
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,68 +161,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Andy,
 
---qCXZfATYHeEFRj+i
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 20 Jul 2026 at 14:03, Andy Shevchenko
+<andriy.shevchenko@intel.com> wrote:
+>
+> On Mon, Jul 20, 2026 at 10:14:01AM -0600, Simon Glass wrote:
+> > On Sun, 5 Jul 2026 at 04:42, Simon Glass <sjg@chromium.org> wrote:
+>
+>
+> > > +# Intel Edison (Merrifield/Tangier); U-Boot sent over DFU into eMMC u-boot0
+> > > +edison:
+> > > +  variables:
+> > > +    ROLE: edison
+> > > +  <<: *sjg_lab_dfn
+> >
+> > Unfortunately somehow the board seems to have died - does not appear
+> > on USB anymore...perhaps it doesn't like all the cycling in the lab?
+>
+> Do you have external power supply connected?
+> It might be this:
+> https://edison-fw.github.io/edison-wiki/edison-fixup
 
-On Fri, Jul 24, 2026 at 11:29:21AM +0000, Ferass El Hafidi wrote:
-> Hi,
->=20
-> On Fri, 24 Jul 2026 10:10, Quentin Schulz <quentin.schulz@cherry.de> wrot=
-e:
-> > Hi,
-> >=20
-> > I (and at the very least also Ferass) am hitting an issue when sending
-> > mail to the old u-boot@lists.denx.de. But only with my personal mail
-> > address (@0leil.net).
-> >=20
-> > I think there's some redirection/forwarding in place from lists.denx.de
-> > to lists.u-boot-project.org mailing lists and it does it incorrectly.
-> >=20
-> > Ferass nicely sent a paste
-> > (https://ircb.dersco.re/uploads/funderscore/a9b0c0b1-f_-paste.txt) of
-> > the mail he received. I essentially have the same content. I believe the
-> > important part is:
-> >=20
-> > Message rejected due to: SPF fail - not authorized
-> >=20
-> > I weirdly don't have this issue with my pro mail address though, and I
-> > don't see how it's different. This tool shows what the SPF entry is for
-> > 0leil.net, postmarketos.org and cherry.de:
-> >=20
-> > https://mxtoolbox.com/SuperTool.aspx?action=3Dspf%3a0leil.net&run=3Dtoo=
-lpage#
-> > https://mxtoolbox.com/SuperTool.aspx?action=3Dspf%3apostmarketos.org&ru=
-n=3Dtoolpage#
-> > https://mxtoolbox.com/SuperTool.aspx?action=3Dspf%3acherry.de&run=3Dtoo=
-lpage#
-> >=20
->=20
-> For what is worth, @postmarketos.org email is hosted by Migadu
-> (https://migadu.com/), so it is not self-hosted. Migadu also hosts
-> @linux.dev email.
->=20
-> If there's something not working right on their side I can probably pass
-> it around.
+Thanks for the pointer...I do see the board power up though ("Ready to
+receive application") so that should mean that power is OK? I don't
+have external power, just relying on USB power (which I can turn on
+and off for this port).
 
-Thanks for the report. This was another configuration problem, specific
-to forwarding from the old host to the new host, and has been resolved
-now.
+I basically see this at present:
 
---=20
-Tom
+$ ub-int edison
+Building U-Boot in current dir for edison
+Bootstrapping U-Boot from dir /tmp/b/edison
+USB resource not available; retrying reset with longer delays
+Recovering Edison via the xfstk BootROM downloader
 
---qCXZfATYHeEFRj+i
-Content-Type: application/pgp-signature; name="signature.asc"
+XFSTK Downloader Solo 0.0.0
+Copyright (c) 2015 Intel Corporation
+Build date and time: May  2 2020 10:22:27
 
------BEGIN PGP SIGNATURE-----
+Intel SoC Device Detection Failed: Attempt #0
+Intel SoC Device Detection Failed: Attempt #1
+Intel SoC Device Detection Failed: Attempt #2
+Intel SoC Device Detection Failed: Attempt #3
+Intel SoC Device Detection Failed: Attempt #4
+Intel SoC Device Detection Failed: Attempt #5
+Intel SoC Device Detection Failed: Attempt #6
+Intel SoC Device Detection Failed: Attempt #7
+Intel SoC Device Detection Failed: Attempt #8
+Intel SoC Device Detection Failed: Attempt #9
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCamfA9QAKCRAr4qD1Cr/k
-CnK2AQDoCAf3AAzTkgm/4igM0s2vwQD8hI/sbXchBZo946srDgEAxj4c6oX9OXX0
-v2U61tJYBP5SfausH5IHyAQAYEAQpww=
-=s66S
------END PGP SIGNATURE-----
+I suppose something could have happened to the relays or cables...
 
---qCXZfATYHeEFRj+i--
+Regards,
+Simon
