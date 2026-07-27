@@ -4,133 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C7FBC531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 20:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B28EC53209
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 21:34:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 41A4D407CA;
-	Mon, 27 Jul 2026 20:55:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9B01840660;
+	Mon, 27 Jul 2026 21:34:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5iFgTxdRi8u1; Mon, 27 Jul 2026 20:55:22 +0000 (UTC)
+ id uU3PPCt7wXi6; Mon, 27 Jul 2026 21:33:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2807B407C4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8CB21407E0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785185722;
-	bh=lb0fcPpuihzr1G3zhJvhNlFmUGmsPcjuHn5ibgN4Xik=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ZMOetxrk9ZPkY7WyDhBO6qHJRsKtfautaK58UCLbAjuhtVOAivxLIeToa43ZCoPMf
-	 64/57cBLdWXPrehm7SXoTnHpX84cuBr9udtdKIaGqVBD0w1EgOwEed/44I6S1D2Qtb
-	 weQdoGLrxyHzmoED1lyw1xYvzHxRkBGJDM+ZfvV1+kC8SH6m8zEShG4rzmKAnJ/z9w
-	 B4hMe6TKtPC+U0kWA33SW4RFfp0AYvXY0VbI8OgqRci9vpscaIZziyWn3gOLo8DOO3
-	 Dv0dMw3C6nSaKM47UksPYpj2WnO6kT4znZrtccGItRnfkqMVN9Fg1RCRl29h5+U31M
-	 zxj9F0chn3hPg==
+	d=lists.u-boot-project.org ; s=default; t=1785188039;
+	bh=vjbPIqJ/eR7O7uJLOQfnFQMOZnNiUN4Ayj7XTryt/1o=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=aam6UKM6MmpXasz0aF293AaKNJs9kmhcGzfns/wXIyp9HSD2qclEA9qLU/HjRFkv/
+	 YNwZyxZzFNuQX/MkiFX+ioti3hVKBcvr76JNfKMvSfPuRmcOdy9NM20zya/zwoajj9
+	 Gl7h9CjgJ8LN3YrPf6QUEOR01mMkm3H0xeHP3e96QyhjZ3zjYISizeMvJOu6nS2jZ/
+	 jLqksdtCPFUeNOFeq6I+AN3iEdDfbQMSjFMUO5y0FsO6U7+rSIrZomfx3CMBIHv5Hz
+	 SvcRkNoTqZc78wyAzNSktLFSdcNvseGc2DjnFo5I2vC4+oplmfahyzSul+ZiERW2qg
+	 eTBaYMesQjRlw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2807B407C4;
-	Mon, 27 Jul 2026 20:55:22 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D4D2024D
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:55:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8CB21407E0;
+	Mon, 27 Jul 2026 21:33:59 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E7623357
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 21:33:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C6789407BE
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:55:20 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CD82680F40
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 21:33:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZW-8iPhbCMuY for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 20:55:20 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sUGDFOUm15_o for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 21:33:57 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8231D406C6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8231D406C6
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8231D406C6
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 20:55:19 +0000 (UTC)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba320so635045a12.1
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 13:55:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785185717; cv=none;
- d=google.com; s=arc-20260327;
- b=AFOm87r1hG9y8GaUY5Sy7f5xUKr3q1azeWxieXG3MqEbZOfXh4EQSiXd56IsHlYSGK
- 17kpToHnbaYRNVN/KupfayHM+n1gnS1ahOd9b7qiUJQ5B2J/yvyjI+ew8KHZ6BE10/PT
- O9SAxthK8Pgm8kJAr6K0/MxNBjBY7ZtW9OYrqsbilNTohUUo+z/oxRrdXOLhhWs9srtS
- O5nxsF8lG551t5+VgjC2/ekHhYSOp7lVHHxFNYm2cFWya1U7OTb2kQG1ht0bOmdyCgiL
- fXFqCtfYrtHud5azIB16XVV3iQZlRrhA+pBBwMDTiqMDr3A+czfRDVp6ofQ13oZ8VoQY
- xY1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=lb0fcPpuihzr1G3zhJvhNlFmUGmsPcjuHn5ibgN4Xik=;
- fh=Hd4x5v2S/v9u9MUnO7K+AwuyyknDFmfu2nym920TzJ8=;
- b=gCHdMTeHxs9SMqFdy/sO8jKvpSPDLlCIacQSy5GpOFruGBbYGojUMPFIz+PLTL/TKE
- 1FH1neXHEa0T2RkFhmVxFoepId+KCSvL6rH6ed9DwuW3W1ldVasxmR84sghDt6kyogJt
- jYKUZQPrILci9+g9eErP69AwhUMxkVuy5YVfaU3gCtfQ8ih6hlwHnZxIB7l8+b93NUQH
- c4QaDPHoFOX/gQ/EgwOKm/ccTOjK27v8DjXXIDQF4w3yUbWzkPZUWnW+n1aH6Y0nXLKw
- Ktmho6wyDt0afIJjS0QochcsYejEv5wEcdsk+OcDLJwPYAJ6XrJvVZh7o5R870m+7SIi
- UNQg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::1033; helo=mail-pj1-x1033.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B600580F3E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B600580F3E
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B600580F3E
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 21:33:57 +0000 (UTC)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-382ef647e20so3248869a91.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 14:33:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785185717; x=1785790517;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=lb0fcPpuihzr1G3zhJvhNlFmUGmsPcjuHn5ibgN4Xik=;
- b=Hq8AiTVvmN0NMIctXuYAWMKbez6UnQup6c5ojn1Tob4oZDrQrBlDuA2rKgBnXZI2TG
- dlIxi0qBSzVHvMNni30VC/zPd7V1t80xW7+aCDH1sFq3BHD4My/qqUTgWWfTDQWAODkD
- sp1bCzxvaZmilo0orjWUf+oRGs4N4RDnsfduqN9ti7RpT6VkjzM0rM0MHe99j4OLJA2o
- U46zQxUO0LSx/U15bpfdPL3QsGYVMvFuwHrgYTD3r4kceoDzwEFxfYtblee1YnbbPhK6
- MfDe5wlsSJiOQDamDFWnvE4ksRHzwPCSSqnuZuZOGKUBbWu6v+PWEYFkQyFNqCYwks8j
- PpAA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrjFLXtITEZrUDlxNCRNHWVAdi7IxBe7haIKjYC2c6fBceQ/LA7zl9JgHEWchEcJqfGnSw3kw8=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yw+IrGl4d93pVxqV+HBh+IZwa9QTpcLqYGANgehzNKbe/XZX0ba
- 3FivlAsZbg/TF3am5mSuZHawzo5XWeUpGXyUjrzwb1/mQFopelB3CMsO93roAr3PqUKl4gc1ZgB
- 9qefyLxLfqcR7f7IgWD5kE1UceUyKMbpahwJ+TyUa
-X-Gm-Gg: AR+sD13zEAad6rdPjYAjslyJ1566Cv38xaOoqb+2JM+bPdHz588efbA298yoj3Qxaph
- wrIbkpvwDO+DoNjhizWI+MD+Z//gKXLdSeBS2Y7lv5eJjUj+9R2fXDAd2FPwiyB8Kp625VmXVzX
- NqoQBsQ/y4jkVHr8fA/wuNKm6TEwvfl9pOgmC7vrB0O/jy32m5i5hOLyNEOhkNMfw1S5LEm09RG
- CsGVnl2FaWLOjMrc2jRV/xjhXmOeU9SlfqhDJqBYzw7MomUX075Hqf5QFWX
-X-Received: by 2002:a05:6402:5c4:b0:69c:5eb6:d913 with SMTP id
- 4fb4d7f45d1cf-6a02e9618a1mr100886a12.14.1785185717145; Mon, 27 Jul 2026
- 13:55:17 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785188037; x=1785792837;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=vjbPIqJ/eR7O7uJLOQfnFQMOZnNiUN4Ayj7XTryt/1o=;
+ b=ARcBfKRKYnDxXFmzizbHOrCBIdqZU+4/ytwzY3y8kWQVR5jd6aJPq/uv3LJJQ6+8g+
+ 7HXGrXCcAKI58ZhV4dCjh0l62K4olIEpW4tskZT8dAR1/7LrvVC8XGcCYh5PhFpOSBFI
+ cnTh+wvidlJiyv3Ps0buYq/2O6aBtdyP6KKiMXEdMKi20KK+0ylsHuMM9hq+Ap0+an7+
+ FAMLXcnUjKFs2It2pY4vrwhMvb9Eb9Ba+5vLUpUZ6lxMdec8m/yZstTjP+4BjzBwktoS
+ oFpFVwlT6Aw937Yeah0ok9Q8ZOqgtIC/lG1R5cnsHTcQnC4hMXaXthAQLHB3XEBq5uXC
+ olIA==
+X-Gm-Message-State: AOJu0YwnA55GeHPFEDdfyqTBjdkE4DyMW9+fsoD/WfHLK9etKBDODe0a
+ A26DgKIvs3O6wY2n6noocDkTA8IfV5tSGGzrrSMvIrJ1mB5Ll7HF56cR
+X-Gm-Gg: AR+sD13OfM9Kd1fENxNmvwB1fT3hiCZh+jaj/3uBjiNifkpIeq+w2sUeHx+1r00WR1m
+ uIkhkkuxQ0OAH2nQhn5Yf+gHYakL0ZVTpUtteJ+j8KOOSTDs2z0mcBb2bSi82nyO7c7mRaQppFU
+ V8Uee6pVYdxYKeRFAKC+rHQdjw+LwVtae1792mE4R5qLoKpdrztvmvmHCyY+gXRetTg7zdKSDs7
+ qCshw8WJbl5EAoLyE2eytCz3VcUvh+7R4BYZQKiUqHkxkXxUytr5Ajky+IaVumjCBoChaU9iYJu
+ W50r5ZU571mJGScUvydQ0vgWntpLNSwxaFAN28eq3f2ikv13VHBdNH4+qf/9MtxtxP+VULSBNDP
+ g7IEbG2KnO+M4AnV8F0L4V67Bl9zMCdtXQS2Z+gDBMUbsbvrZuFz77TkR4b7O6SLq6ltl/PfQN+
+ xL+8fgRkPllghdCyAn88A8FbxGBpnNKSrJiPP83a1AdUc7LjLOFYs=
+X-Received: by 2002:a17:90b:1e0d:b0:38e:dc4:3f64 with SMTP id
+ 98e67ed59e1d1-38f29784460mr8621864a91.38.1785188036638; 
+ Mon, 27 Jul 2026 14:33:56 -0700 (PDT)
+Received: from fabio-X870-EAGLE-WIFI7..
+ ([2804:1b3:a801:60b4:21e4:da15:d321:6b72])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-13e52f0c6f2sm29640388c88.11.2026.07.27.14.33.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jul 2026 14:33:56 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.u-boot-project.org, chris@kleiner.pro, uboot-imx@nxp.com,
+ Max.Merchel@ew.tq-group.com, emanuele.ghidoli@toradex.com, agx@sigxcpu.org,
+ marex@nabladev.com, mathieu.dubois-briand@bootlin.com,
+ shofiqtest@gmail.com, vitor.soares@toradex.com
+Subject: [GIT PULL] Please pull u-boot-imx-main-20260727
+Date: Mon, 27 Jul 2026 18:33:49 -0300
+Message-ID: <20260727213351.2603837-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260501150550.228937-1-heinrich.schuchardt@canonical.com>
- <ea87842c-75ce-4d39-9ae4-0f8b3b913ad0@canonical.com>
- <871pfudqns.fsf@bloch.sibelius.xs4all.nl>
- <CAFLszTiz7YtBtO3yMgVbRxfOSG3J9A+3oTCYuko9me5ona3ZGg@mail.gmail.com>
- <e62b0956-a7bf-4f92-b794-277aaef52713@canonical.com>
-In-Reply-To: <e62b0956-a7bf-4f92-b794-277aaef52713@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 27 Jul 2026 14:55:05 -0600
-X-Gm-Features: AUfX_mzzPEs4H6MWU4khK3pcgxEfqRC9mMnRqFJJnBeFCrDZ9FWikdoixir4ItU
-Message-ID: <CAFLszThFDRqjHPW2ceebfzE9hx_mkJFYiAmsdJ+=szTpKVy3BA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: set correct frame buffer address
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, peng.fan@nxp.com, 
- patrice.chotard@foss.st.com, me@ziyao.cc, bmeng.cn@gmail.com, 
- u-boot@lists.u-boot-project.org, Mark Kettenis <mark.kettenis@xs4all.nl>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785185717; x=1785790517;
+ d=gmail.com; s=20251104; t=1785188037; x=1785792837;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lb0fcPpuihzr1G3zhJvhNlFmUGmsPcjuHn5ibgN4Xik=;
- b=VCbZWOtZ6BhflOPBwngOeTzoM8pbrF/IHL5i48qVi9vkLrR4sMZOKyBNoIMblbdvte
- n0dHVVoE1VPBOJ0kOxlcFZCRPTtq4c5uqzSwtlPaG3Hrh/Ohx150xi+GUSktZoVtqMOO
- b20fFbrx06eyMyp1Xn8PIB1aQrH+Is9Mda3fk=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=vjbPIqJ/eR7O7uJLOQfnFQMOZnNiUN4Ayj7XTryt/1o=;
+ b=CldOC/+7Kx41kH3ro5PZRuHXNOvg5b3oYSYL2rw1a+NJnT5aAR0v4RnN8GbxjNRogs
+ xflcVhO9ZXDvq+wLI8Ns9ct4fW7ikSVWMc/Nz74FelUN5IAdXzKNf8mAtheTO4/4llbZ
+ H/8qelm9PN/hbLTxiDlWOLAtzpGHdnZFARWgj3I3uwyigjf99PbMSO2/NN0DHdawlPJF
+ i40Y2ebjl7PZz9AtHzjATnmk0TSEhVfsa/9E/2itxYHc+p0Yoz9qDNF7fdhKPlA+PFZP
+ eo6P1LLp++AJ24A0wWRBFqGHNjyy4VQAOFzFFFVnj5ena8O8VRb9TEQDGgFQUKJ4M7Ji
+ 7Qgw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=VCbZWOtZ
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=CldOC/+7
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,176 +129,213 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Heinrich,
+Hi Tom,
 
-On Tue, 21 Jul 2026 at 02:03, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 5/2/26 15:04, Simon Glass wrote:
-> > Hi Heinrich, Mark,
-> >
-> > On Sat, 2 May 2026 at 04:58, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >>
-> >>> Date: Sat, 2 May 2026 09:28:56 +0200
-> >>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>
-> >> Hi Heinrich,
-> >>
-> >>> On 5/1/26 17:05, Heinrich Schuchardt wrote:
-> >>>> If we use video copy, bit image transfers need to write to the in memory
-> >>>> copy of the physical frame buffer. Damage control will sync the changes
-> >>>> to the physical frame buffer.
-> >>>>
-> >>>> Cyclic video copy will catch all changes done by EFI applications directly
-> >>>> accessing the frame buffer copy.
-> >>>>
-> >>>> gopobj->mode.fb_base must be a valid pointer to memory and not a virtual
-> >>>> sandbox address.
-> >>>>
-> >>>> With this change the block image transfer test works again on the sandbox.
-> >>>>
-> >>>>       setenv efi_selftest block image transfer
-> >>>>       bootefi selftest
-> >>>>
-> >>>> Fixes: a75cf70d23ac ("efi: Correct handling of frame buffer")
-> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>>> ---
-> >>>>    lib/efi_loader/efi_gop.c | 7 +++----
-> >>>>    1 file changed, 3 insertions(+), 4 deletions(-)
-> >>>>
-> >>>> diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-> >>>> index 9403e09691e..ae44d140289 100644
-> >>>> --- a/lib/efi_loader/efi_gop.c
-> >>>> +++ b/lib/efi_loader/efi_gop.c
-> >>>> @@ -471,7 +471,7 @@ efi_status_t efi_gop_register(void)
-> >>>>    {
-> >>>>      struct efi_gop_obj *gopobj;
-> >>>>      u32 bpix, format, col, row;
-> >>>> -   u64 fb_base, fb_size;
-> >>>> +   u64 fb_size;
-> >>>>      efi_status_t ret;
-> >>>>      struct udevice *vdev;
-> >>>>      struct video_priv *priv;
-> >>>> @@ -490,7 +490,6 @@ efi_status_t efi_gop_register(void)
-> >>>>      row = video_get_ysize(vdev);
-> >>>>
-> >>>>      plat = dev_get_uclass_plat(vdev);
-> >>>> -   fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
-> >>>>      fb_size = plat->size;
-> >>>>
-> >>>>      switch (bpix) {
-> >>>> @@ -528,7 +527,7 @@ efi_status_t efi_gop_register(void)
-> >>>>      gopobj->mode.info = &gopobj->info;
-> >>>>      gopobj->mode.info_size = sizeof(gopobj->info);
-> >>>>
-> >>>> -   gopobj->mode.fb_base = fb_base;
-> >>>> +   gopobj->mode.fb_base = (uintptr_t)priv->fb;
-> >
-> > Don't you want to use copy_fb (if VIDEO_COPY is enabled) so you get
-> > the hardware address?
-> >
-> >>>
-> >>> I discussed the value of FrameBufferBase with Simon.
-> >>>
-> >>> The code before the patch is incorrect, as on the sandbox it does not
-> >>> provide a pointer value but a sandbox virtual address. EFI applications
-> >>> may use the pointer for directly writing to the frame buffer. This would
-> >>> lead to a crash on the sandbox.
-> >>
-> >> I still think this means that EFI on sandbox is fundamentally broken.
-> >> The identity virtual-to-physical mapping assumption is just too deeply
-> >> engrained in the ecosystem since that is the documented handoff state
-> >> for most architectures.
-> >
-> > The ACPI tables have the same issue (needing to pass a pointer within
-> > sandbox's emulated RAM buffer) and we use nomap_sysmem() to handle
-> > that.
-> >
-> > In what way is it broken?
-> >
-> >>
-> >>> For the case of CONFIG_VIDEO_COPY=y it is problematic to pass the memory
-> >>> buffer address here, as Linux has an EFI framebuffer driver and would
-> >>> write to the buffer instead of the physical framebuffer. But our memory
-> >>> buffer is neither reserved memory not is it copied to the physical
-> >>> framebuffer after ExitBootServices.
-> >>
-> >> Right.
-> >>
-> >>> If we pass the physical framebuffer address here, then an EFI
-> >>> application might write to it and the cyclic video sync would overwrite
-> >>> the changed pixels.
-> >>>
-> >>> Setting PixelBltOnly in field Mode.PixelFormat forbids EFI applications
-> >>> to directly write to the framebuffer.
-> >>
-> >> That means the framebuffer becomes unusable as soon as the EFI
-> >> application calls ExitBootServices() since an EFI application can't
-> >> call Blt() after that
-> >>
-> >>> So if plat->copy_base is set we should pass PixelBltOnly as PixelFormat
-> >>> and copy_base as FrameBufferBase.
-> >>
-> >> If PixelFormat is PixelBtlOnly, FrameBufferBase is meaningless and
-> >> probably should be set to 0 instead.
-> >>
-> >> Anyway, as far as I can tell there aren't a lot of OSes that support
-> >> PixelBltOnly.  OpenBSD certainly doesn't.  And as far as my reading of
-> >> Linux's efistub code is correct, it doesn't support it either.  And neither does u-boot's own efi_video driver.
-> >>
-> >> I've always seen PixelBltOnly as a way to support weird hardware that
-> >> didn't support a linear framebuffer with a sane pixel format.  Not as
-> >> a way to support a shadow framebuffer like CONFIG_VIDEO_COPY
-> >> implements.  Note that CONFIG_VIDEO_COPY itself assumes a linear
-> >> framebuffer with a sane pixel format as it just does a straight copy
-> >> of the pixels.
-> >>
-> >> Instead of using PixelBltOnly, can we just disable the shadow
-> >> framebuffer as soon as we hand over control to an EFI application?  Or
-> >> maybe at the point where the EFI application uses the GOP protocol?
-> >
-> > This seems like a good idea to me - the latter would be best since it
-> > won't impact apps which only use console output. The impact would be
-> > that U-Boot will need to read from the hardware framebuffer with
-> > write-combining enabled (slow on x86) but at least it is correct.
-> >
-> >>
-> >>
-> >>> We the aforementioned change we will need to change function
-> >>> gop_get_bpp() to not rely on PixelFormat. Instead we need to pass
-> >>> priv->format in a private field of the graphics protocol.
-> >>>
-> >>>
-> >>>>      gopobj->mode.fb_size = fb_size;
-> >>>>
-> >>>>      gopobj->info.version = 0;
-> >>>> @@ -553,7 +552,7 @@ efi_status_t efi_gop_register(void)
-> >>>>      }
-> >>>>      gopobj->info.pixels_per_scanline = col;
-> >>>>      gopobj->bpix = bpix;
-> >>>> -   gopobj->fb = map_sysmem(fb_base, fb_size);
-> >>>> +   gopobj->fb = priv->fb;
-> >>>
-> >>> priv->fb is also the value used by the TrueType drivers.
-> >>>
-> >>> Best regards
-> >>>
-> >>> Heinrich
-> >>>
-> >>>>      gopobj->vdev = vdev;
-> >>>>
-> >>>>      return EFI_SUCCESS;
-> >
-> > It would be worth testing this on a real x86 laptop to make sure it
-> > can still boot Ubuntu, etc.
->
-> (resending as the the first mail had the old u-boot list mail address).
->
-> Do you have a real x86 laptop using U-Boot?
+Please pull from u-boot-imx/main, thanks.
 
-Yes...but I haven't got around to trying this patch. I also have an
-x86 QEMU test so if this breaks something I will spot it eventually.
-It looks right to me.
+The following changes since commit 574b1adad70a19d95c65e0f37f9c36d94fb5418f:
 
-Regards,
-Simon
+  fit: prefer the default configuration on best-match ties (2026-07-24 10:46:16 -0600)
+
+are available in the Git repository at:
+
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-main-20260727
+
+for you to fetch changes up to ce5793d777fd1f5bb6b0448c6366ba989c4a3509:
+
+  board: gateworks: fsa: bound FSA EEPROM gpio descriptor count (2026-07-27 13:05:07 -0300)
+
+
+u-boot-imx-main-20260727
+------------------------
+
+CI: https://git.u-boot-project.org/u-boot/custodians/u-boot-imx/-/pipelines/749
+
+- Support authenticating signed Mcore container image on i.MX9.
+- Support booting CM70, CM71 and CM33 sync cores on i.MX9.
+- Add i.MX SNVS RTC driver.
+- Detect RAM sizes on Toradex smarc and aquila i.MX95 boards.
+- Add support for the Librem5 devkit.
+- Subtract half a cycle instead of three quarters of a cycle after DQS gating calibration
+on i.Mx6.
+- Several tqma6 improvements.
+- Add product ID support for new Toradex boards.
+----------------------------------------------------------------
+Alexander Feilke (1):
+      configs: tqma6ul: add support for redundant environment
+
+Alexander Koch (1):
+      rtc: snvs: Add i.MX SNVS RTC driver
+
+Alice Guo (1):
+      imx9: bootaux: Support booting CM70, CM71 and CM33 sync cores
+
+Christopher Kleiner (1):
+      board: gateworks: fsa: bound FSA EEPROM gpio descriptor count
+
+Emanuele Ghidoli (2):
+      board: toradex: smarc-imx95: detect RAM sizes
+      board: toradex: aquila-imx95: detect RAM sizes
+
+Guido Günther (1):
+      board: purism: Add support for the Librem5 devkit
+
+Marek Vasut (6):
+      mx6: ddr: Subtract half a cycle instead of three quarters of a cycle after DQS gating calibration
+      arm64: dts: imx8m: Reinstate TEE ifdeffery
+      binman: imx8mimage: Generate FSPI header in binman instead of mkimage
+      arm64: dts: imx8mm: Drop nxp,fspi-header-filename
+      arm64: dts: imx8mn: Drop nxp,fspi-header-filename
+      arm64: imx: Handle both MMC2 and SD2 boot devices on Data Modul i.MX8M Mini eDM SBC
+
+Markus Niebel (2):
+      board: tqma6: change U-Boot device tree fragments
+      board: tqma6: implement ENET errata workaround detection
+
+Mathieu Dubois-Briand (1):
+      imx93_frdm: Add OP-TEE device tree node
+
+Max Merchel (7):
+      sysinfo: tq_eeprom: select NVMEM
+      arm: dts: tqma6ul: add eeprom nvmem-layout
+      arm: dts: tqma6ul: integrate tq,eeprom sysinfo driver
+      boards: tqma6ul: select TQ_COMMON_SYSINFO
+      ARM: dts: tqma6: add boot phase properties
+      dts: tqma6: mba6: remove old device trees
+      board: tqma6: use runtime SoC detection in enet setup
+
+Md Shofiqul Islam (1):
+      ge: common: vpd_reader: fix errloc array size in verify_bch()
+
+Paul Gerber (1):
+      board: tqma6: add kernel device tree handling for environment
+
+Peng Fan (1):
+      imx9: scmi: reset GPIO2 according its node status
+
+Vitor Soares (7):
+      toradex: tdx-cfg-block: Add smarc imx95 0229 pid4
+      toradex: tdx-cfg-block: Add aquila tda4 0230 pid4
+      toradex: tdx-cfg-block: Add apalis imx8qm 64gb emmc pid4s
+      toradex: tdx-cfg-block: Add verdin imx8mp 64gb emmc pid4s
+      toradex: tdx-cfg-block: Add verdin imx8mm 0239 pid4
+      toradex: tdx-cfg-block: Add smarc imx8mp 0240 pid4
+      toradex: tdx-cfg-block: Add verdin am62 0242 pid4
+
+Ye Li (4):
+      imx9: bootaux: Support authenticate signed Mcore container image
+      imx9{4, 5, 52}_evk: power on mcore according to SM config
+      arm: dts: imx943-evk: Add label for gpio expander devices
+      imx9: scmi: Update get mac from fuse for iMX952
+
+ arch/arm/dts/imx6dl-mba6.dtsi                      |  22 -
+ arch/arm/dts/imx6dl-mba6a-u-boot.dtsi              |   8 +
+ arch/arm/dts/imx6dl-mba6a.dts                      |  21 -
+ arch/arm/dts/imx6dl-mba6b-u-boot.dtsi              |   7 +-
+ arch/arm/dts/imx6q-mba6.dtsi                       |  44 -
+ arch/arm/dts/imx6q-mba6a-u-boot.dtsi               |   8 +
+ arch/arm/dts/imx6q-mba6a.dts                       |  20 -
+ arch/arm/dts/imx6q-mba6b-u-boot.dtsi               |   7 +-
+ arch/arm/dts/imx6qdl-mba6-u-boot.dtsi              |  37 +-
+ arch/arm/dts/imx6qdl-mba6.dtsi                     | 535 ------------
+ arch/arm/dts/imx6qdl-mba6a.dtsi                    |  30 -
+ arch/arm/dts/imx6qdl-mba6b.dtsi                    |  49 --
+ arch/arm/dts/imx6qdl-tqma6-u-boot.dtsi             |  54 ++
+ arch/arm/dts/imx6qdl-tqma6a-u-boot.dtsi            |  14 +
+ arch/arm/dts/imx6qdl-tqma6b-u-boot.dtsi            |  18 +
+ arch/arm/dts/imx6ul-tqma6ul-common-u-boot.dtsi     |  18 +
+ arch/arm/dts/imx8mm-u-boot.dtsi                    |   7 +-
+ arch/arm/dts/imx8mn-u-boot.dtsi                    |   7 +-
+ arch/arm/dts/imx8mp-u-boot.dtsi                    |   6 +
+ arch/arm/dts/imx8mq-librem5-devkit-u-boot.dtsi     |  11 +
+ arch/arm/dts/imx8mq-u-boot.dtsi                    |   6 +
+ arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi          |   7 +
+ arch/arm/dts/imx943-evk-u-boot.dtsi                |  28 +
+ arch/arm/include/asm/arch-imx9/imx-regs.h          |  30 +
+ arch/arm/include/asm/arch-imx9/sys_proto.h         |   2 +
+ arch/arm/mach-imx/imx8m/Kconfig                    |   7 +
+ arch/arm/mach-imx/imx9/imx_bootaux.c               | 355 +++++++-
+ arch/arm/mach-imx/imx9/scmi/soc.c                  | 164 +++-
+ arch/arm/mach-imx/mx6/Kconfig                      |   1 +
+ arch/arm/mach-imx/mx6/ddr.c                        |   4 +-
+ board/data_modul/imx8mm_edm_sbc/spl.c              |   2 +-
+ board/gateworks/fsa.c                              |   8 +
+ board/ge/common/vpd_reader.c                       |   2 +-
+ board/nxp/imx94_evk/imx94_evk.c                    |   3 +
+ board/nxp/imx952_evk/imx952_evk.c                  |   3 +
+ board/nxp/imx95_evk/imx95_evk.c                    |   8 +
+ board/purism/librem5-devkit/Kconfig                |  18 +
+ board/purism/librem5-devkit/MAINTAINERS            |   8 +
+ board/purism/librem5-devkit/Makefile               |  13 +
+ .../purism/librem5-devkit/imximage-8mq-lpddr4.cfg  |   9 +
+ board/purism/librem5-devkit/librem5-devkit.c       |  77 ++
+ board/purism/librem5-devkit/librem5-devkit.env     |  20 +
+ board/purism/librem5-devkit/lpddr4_timing.c        | 931 +++++++++++++++++++++
+ board/purism/librem5-devkit/lpddr4_timing_b0.c     | 794 ++++++++++++++++++
+ board/purism/librem5-devkit/spl.c                  | 371 ++++++++
+ board/toradex/aquila-imx95/aquila-imx95.c          |  23 +-
+ board/toradex/common/tdx-cfg-block.c               |  11 +
+ board/toradex/common/tdx-cfg-block.h               |  11 +
+ board/toradex/smarc-imx95/smarc-imx95.c            |  23 +-
+ board/toradex/verdin-am62/verdin-am62.c            |   3 +-
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c        |   3 +-
+ board/toradex/verdin-imx8mp/verdin-imx8mp.c        |   4 +-
+ board/tq/tqma6/tqma6.c                             |  86 +-
+ board/tq/tqma6/tqma6.h                             |  14 +
+ board/tq/tqma6/tqma6_mba6.c                        |  33 +-
+ configs/imx95_evk.config                           |   2 +-
+ configs/librem5-devkit_defconfig                   | 183 ++++
+ configs/tqma6ul_common.config                      |   2 +
+ doc/board/purism/index.rst                         |   1 +
+ doc/board/purism/librem5-devkit.rst                |  56 ++
+ drivers/rtc/Kconfig                                |   7 +
+ drivers/rtc/Makefile                               |   1 +
+ drivers/rtc/snvs-rtc.c                             | 118 +++
+ drivers/sysinfo/Kconfig                            |   1 +
+ include/configs/aquila-imx95.h                     |  15 +-
+ include/configs/librem5-devkit.h                   |  36 +
+ include/configs/toradex-smarc-imx95.h              |  15 +-
+ include/imx_sip.h                                  |   2 +
+ include/scmi_nxp_protocols.h                       |  11 +
+ tools/binman/etype/nxp_imx8mimage.py               |  95 ++-
+ tools/binman/ftest.py                              |  23 +-
+ tools/binman/test/vendor/nxp_imx8m_fspi.dts        |   1 -
+ .../nxp_imx8m_fspi_fail_columnadresswidth.dts      |  19 +
+ ...fail.dts => nxp_imx8m_fspi_fail_devicetype.dts} |   3 +-
+ .../vendor/nxp_imx8m_fspi_fail_flashpadtype.dts    |  19 +
+ .../nxp_imx8m_fspi_fail_readsampleclksrc.dts       |  19 +
+ .../vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts   |  19 +
+ tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts   |   1 -
+ 78 files changed, 3837 insertions(+), 817 deletions(-)
+ delete mode 100644 arch/arm/dts/imx6dl-mba6.dtsi
+ create mode 100644 arch/arm/dts/imx6dl-mba6a-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/imx6dl-mba6a.dts
+ delete mode 100644 arch/arm/dts/imx6q-mba6.dtsi
+ create mode 100644 arch/arm/dts/imx6q-mba6a-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/imx6q-mba6a.dts
+ delete mode 100644 arch/arm/dts/imx6qdl-mba6.dtsi
+ delete mode 100644 arch/arm/dts/imx6qdl-mba6a.dtsi
+ delete mode 100644 arch/arm/dts/imx6qdl-mba6b.dtsi
+ create mode 100644 arch/arm/dts/imx6qdl-tqma6-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6qdl-tqma6a-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6qdl-tqma6b-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mq-librem5-devkit-u-boot.dtsi
+ create mode 100644 board/purism/librem5-devkit/Kconfig
+ create mode 100644 board/purism/librem5-devkit/MAINTAINERS
+ create mode 100644 board/purism/librem5-devkit/Makefile
+ create mode 100644 board/purism/librem5-devkit/imximage-8mq-lpddr4.cfg
+ create mode 100644 board/purism/librem5-devkit/librem5-devkit.c
+ create mode 100644 board/purism/librem5-devkit/librem5-devkit.env
+ create mode 100644 board/purism/librem5-devkit/lpddr4_timing.c
+ create mode 100644 board/purism/librem5-devkit/lpddr4_timing_b0.c
+ create mode 100644 board/purism/librem5-devkit/spl.c
+ create mode 100644 board/tq/tqma6/tqma6.h
+ create mode 100644 configs/librem5-devkit_defconfig
+ create mode 100644 doc/board/purism/librem5-devkit.rst
+ create mode 100644 drivers/rtc/snvs-rtc.c
+ create mode 100644 include/configs/librem5-devkit.h
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_columnadresswidth.dts
+ rename tools/binman/test/vendor/{nxp_imx8m_fspi_fail.dts => nxp_imx8m_fspi_fail_devicetype.dts} (83%)
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_flashpadtype.dts
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_readsampleclksrc.dts
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts
