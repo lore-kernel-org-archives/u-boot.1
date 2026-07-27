@@ -4,141 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78781C531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 08:25:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B6BC531D0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 08:32:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 26940406EC;
-	Mon, 27 Jul 2026 08:25:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7DBE340644;
+	Mon, 27 Jul 2026 08:32:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UVUGar0e_C1k; Mon, 27 Jul 2026 08:25:06 +0000 (UTC)
+ id 7AM5WFkBWagO; Mon, 27 Jul 2026 08:32:07 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 42CC240621
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6254B404E7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785140706;
-	bh=S6rz4h23O1RMtUWpWzAzye6tr/gm1Vj9WBpQFe6i2aU=;
+	d=lists.u-boot-project.org ; s=default; t=1785141127;
+	bh=6UyLPj/hjNgoQQ2rLdMqA08wnSTTyyXq0gJakfxrB/E=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VRAKUKRPQ9KSD6pH5GAh8ONzvgxO6gybvNqoXBVvDegubq3LUDPKfvNv1tZOWuhMC
-	 4t/XWkcc4STYSgfUQKw3FUkpQt+aRLnNjWNdKzciyTvQEjCql6/ZSzesY8sjXhK+2H
-	 DKy+NXm/cx0wGTtHpO4Z/KUvFnBxu4yHtZoSqV6lVYPL6hY4xTAjbPQ3LC04K9X9YW
-	 xu4Q/yRmeXw6PrYXWV4AHL55RDYlXWfnVyYRkcuBoMDEdbwSL7xUnk9fPE83o4VtQy
-	 ZwZx0vrYZWoCOab8L22btEEN7HhAvG6aI0bwkQUv4Kez+fcNejtARaU7nw/BLS4dJp
-	 GvQizv9eK+UFg==
+	b=CPwfA+XGVoDUNdqBmet5YmYMgIMrf1kvB2+DArPQDKRRJhP4LF/LM6D0LWOYXWQBF
+	 fFN54sRjPHkLnf+yM+YgGsfeR5d6EU6Mv0LCWYep03OGDHATbobroiPlh7n6wke07p
+	 F6p69LoPWGPHV6itsH66X4x8AR2Dmx0P8kQHXG0LM4K97p3y8gZUdiOZGgWQdhyr7A
+	 +Lbpd1EyTbbYR8Hstw70vmI0n8puqDsukhmsonb1cfHC88srWnf0Ux57NmwLvwXoBu
+	 lz8Tc/ce3csFcFNFBrGX3rQuvpi82LI7vybz6yHSg0WJJiF+K+Lr5rkUrTgLAtE0zt
+	 wIMRv2Vs47WlA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 42CC240621;
-	Mon, 27 Jul 2026 08:25:06 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 12620490
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:25:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6254B404E7;
+	Mon, 27 Jul 2026 08:32:07 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4D33A45B
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:32:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 04705400FD
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:25:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3EBB0400F3
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:32:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E0oMtYVQKwve for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 08:25:04 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b136; helo=mail-yx1-xb136.google.com;
+ id mCHiJvpft3xd for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 08:32:05 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org BE173400F3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BE173400F3
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BE173400F3
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:25:03 +0000 (UTC)
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-6682259cb3dso3712530d50.1
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 01:25:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785140702; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org D40924005F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D40924005F
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D40924005F
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 08:32:04 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F2A4D84671; Mon, 27 Jul 2026 10:32:01 +0200 (CEST)
+Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
+ [IPv6:2607:f8b0:4864:20::b135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 322A982991
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 10:31:59 +0200 (CEST)
+Received: by mail-yx1-xb135.google.com with SMTP id
+ 956f58d0204a3-6611669cd16so2994914d50.0
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 01:31:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785141118; cv=none;
  d=google.com; s=arc-20260327;
- b=AGDjxHe6l4RTEo1PHd31dmCB0ccqwIU9MCg4tRmBUS68/gzWkf5DU7AUdf/IecVjAV
- TrVEQo4d4ahNq2NY4gwnEAqVHcfOaebsNbGL2HWET5QJYQKMO98G96wSIicw6s0Dnb74
- ExKEZ8MAn+bdr11IkYthRZHl0vpLBS/JI6POti0weStw8D+zQ35gRNkNP+/CCJ25MEJN
- p2U0anGXHomc6ajzE2vhLtXwfYjRBunpvmy6iwolMcuAfckEkKnZDxE2mQBw+rcTpT7J
- llqJ3v0sjZKOVLEdME3wvsrQBmj3c7IPUV/KWHXlpeY8qTej4E5CJxyWPHKTV0TY7rUw
- y7wg==
+ b=q9kAo7tYKbCZB58cjZx5RPUmWLyA4CuWtYJ1NBABk+LoIzmleeQytfPklNuTNqUzmr
+ oPXrfBsxcQPnXm0EeI0zh696huUhkNNmZiOm9Jftn+8t8Pv+lf+o6/sSEmqd8tCZ0M9D
+ 873S1gag/6DkCVGi1oaZ5Sb1ixER+orD7Y95Q5ohS02GR5JKjd2vxQbqBCzQp2FPUo4O
+ CRBpfP7swmCwLbr87ecm2mP8P/H4xg3GYmzufaJ/fR0ABJcojQAxm/1gcF1xBLXEhupC
+ C55Umag8BjftqZd2kW86V0gGm9Bbm9xegchiJ92o5XbEjkwoEW/NClJ1VaWQWt1EKH2t
+ WItA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=WLuEpqXyai4dhup8uM2MHKmQDNuA3uqmnMu/ukNdbAs=;
- fh=5P8CPwYqUsEHzQUhCqLbcS7kMp503PnixvJNaEOE2DQ=;
- b=KvQ/iycZcIy4YjoFXaD39I8pLVMPjImEvbINbESt6D3ZC64AHXirgw5lx99/PN0IMN
- lXwT8p9chWCjGeNaqNlKADlbswJPtSB0JnG+L58RCY+GikXiEc5G+dQdTx1vySV3yRGD
- S8m2GXL6Ev5IbthH5B8p0m+LiY1zYr8L8h/2vVG7U3MkuvDwa5TiZV/mkOzuzV6mEypw
- iCAPgohMsjPdRmDkbPCiYSMlzlqGdueLeJHo/HVKu4BMbgptNky/dehaebASFGma2rmC
- jxVPTOJBVmHq3VlrYPJXBNkGuBbOlV24pWYfAu8Q6hRqUDrtC6L9bsHrEGlefEOEraZT
- GDkg==; darn=lists.u-boot-project.org
+ bh=G/1eR+nx2DM/x8GbDbzlp7Q3ihlWmwkiZwUlueorusw=;
+ fh=FSxL+jN78k26ORP9jf6DsvfZ47USyfVvNOv8WEzo2g4=;
+ b=Zhy4N2CtixhCMsaHVja+WzPzqWWsvIk6yQ38/YruCyGfM7n8BXtSrnZNNJhTy5Nxt/
+ ko/zTDc6Mtu1ENNxSCopf1bhCFSzJLpB50/oYBG/WSm8dndyNpaJUX9D70vvL6GlI3Xl
+ +SKMLYtYVQttwmmzwi7vPiJEOh9lRrF/+rvOR2viAdHA5I6623t+Gm40byC61gUxUs5+
+ Rf0QBswnoLqdsgfDVBhMC6AK0XoT49AsWDz5BQfo0OhnncBG34s6SRyubggdogbGW9FY
+ Dys5Ub6BZxk3xzgdnJIzo3/DLKtrIU8MrrGXqHyd6g7zhoYiZocY8WnltItHbPRfa1iM
+ IcwQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785140702; x=1785745502;
+ d=1e100.net; s=20251104; t=1785141118; x=1785745918;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=WLuEpqXyai4dhup8uM2MHKmQDNuA3uqmnMu/ukNdbAs=;
- b=GTtVSnNzqdUPF6Mo1yvb2eiNS5V2sqDmEDEPn1+cefj0K3tI2OQzK4p1McOEoCxb9F
- r1m+eIan5oSFVg9r073k2nvNwv2jMMH0wybjmEnEejZNyKl+MtYm87bPbJmc4lWId2zA
- 0i13VZb3qldVl2I9+ErMhI38VSlgX+4nbT5LP3JVBgjmu1mqaB1FL8uCWFmleU8oGQ8K
- x/T1S5nN25+BXcCH0+9BLIIDYgw078QxB6NWAgGHqqslE1Y9tTEfxVVqECWLWl+0Asld
- BpTi/eSWlYuxcZREGxw+lQ0cUEMRBykWdNR5/oLUgLsVAr4cbBJ1yX69Y0t3pyUGbKnb
- Mpkw==
-X-Gm-Message-State: AOJu0YzvfYfOFtVmKWN6XKCDLrmX5HdUYmyGdnPMAUXb7BrgDt/cUshs
- VgTMskYKhzZI1qtApPOHrFiMyrLXLqHR0T0EVvaC+eUm1Wr95I6zTCF9JU3g50wTl6f9/SekOST
- rLN5qiDNAkYthSpt6W77QxsWy9Wpp6pI6bk375M9/LkRp8/7oWXu+WZzEtQ==
-X-Gm-Gg: AR+sD12vqjs5T3Y5aitcSheCoMPmc53PFuhKO94S5HQtL80s3burHDPjhngG8TGZRTe
- 0aF20zaVkVPwfHiyZCVt6vuivqDmdaR1MyFVV3j2XgQVVi2473o+I0y7ZOw2sLz/rdkRkMbsoob
- qCMYrbA3AMR1wBehxxuJATdVl8rfNdPXiHRZfD5zHpukzS927XonIfYNUgKWtWQOjxWbzK8r+11
- rq8ryknvPt5lPM7qZ+eq9ZZp3lsSt9vHE1V2idaQ44bcFJG/XIUpdkt8TBdDn6ShZuPfF25J58q
- xqwGQXJdYbvCamUNYT2sT/hkUK7HryMTxT4577AsvL9kDejXY4sV3+CxvADxJRI1n3J8h/MZ12m
- jrCuO1to7595QV13jqWBSKY2DM34K+cpuUWep1+xuQ5difMqSVRH3zc2GGGLU+J+rf3wDw0Yf2g
- +LGeyaG/FudWv4I2TXXgKEYkeh12E9zy6J9pZKdnMdKJnY8ClIkNW84LGNuiR7RHoFNMQuGwyhJ
- jW9G+RX2E27GcIHWINwOYjt0uhSEP0DJvuMvHIB7Ty+6EYxAkhXqyrR1v4/OkYojhGHp7Yq04fu
- bIFwL+Vb5At5B2kAxReRsIuOqFm2YkEBtCjZfnCv55275+06JjGlCVUSEn64
-X-Received: by 2002:a05:690e:4411:b0:667:f4c8:1119 with SMTP id
- 956f58d0204a3-668c7a309a8mr1293153d50.2.1785140702065; Mon, 27 Jul 2026
- 01:25:02 -0700 (PDT)
+ bh=G/1eR+nx2DM/x8GbDbzlp7Q3ihlWmwkiZwUlueorusw=;
+ b=avsXu2iOWOOCJIbhclIO3y4Pa7zA4SQ0ZU55YX3WQCzR0R9BZn2tbXWmAziPzvZXXA
+ EB+vrunnH9xE7F7o+l9IQpgdmcVY2A7wsOOPHoy0PXk4hDGzd4pidEKTCuqYbcXu0SU0
+ 9mRoGp3locUVvh4wZlEQDxr52D1yqisIKCGAlTj2UvcK/E1toIG/VkVX54wkySZCdBuF
+ vJqPli6Yc5aMTSVDvLJjq5595/epopmPamlYPBvHx9FpAa3U9jyCeYlKd/W0mWA2nF8V
+ R8AAusFoA2yf4PwFNN0IvuSklUKbZx317fifqt6K2RWQ9g0eZdmJTTrp61YaUk3Z7Fg8
+ 5ozQ==
+X-Gm-Message-State: AOJu0YzjqevmAmIJFbbiw3OetuAZQwxL2rsc0NkwCRczHRDSRXHwIHXY
+ 2oXtnVvcVX2ALw2Ny4IGx4DHkQRyi/GaxIQ9MxysQOw6Ramt7IV+Uigc+ulJpe/rGztcG2kqReD
+ 2ZwuoEbBuZYyGyXWb3laaA6zhOV7BExYBWQPmOAX6Gg==
+X-Gm-Gg: AR+sD10mlOjV5rMRbZ2PE7oNTqBkMyzmxStsMqpUe9VvRdSGVsa6xVBzbrJio2bVyo5
+ BWQzGO+Dd28DSeuO77jKqPjLwppVNMzhNI7TiZ2sy171vSZO+2AtH/PQwNpE1z6pkWALPB+vqVl
+ kToBku9TIRnsove94kS5I6lxnqLt3KSEtyPTdKNWZ1VAOIM6yn+IfS1MEBcIQ7cpmxwMpTFLGOk
+ 5NeTydbKBSgpF3eeed+R6MjbWOe5cIrljgBgqA33VijBneI8fmTpSm6ORVlupz7vHPRw0AuRZSW
+ 9DKBuAuGYDH4a+DvECJUipMNr+QghBHXp/cs+JcQ2rQCVQXRHvpagCad/1WteIQ8y5P14wqYMX0
+ AaMlVEWCS+QdO+ECgOOQz9mNMEHtjATLTZ4YSyXPf1kxWrCGLLh3mmgb2pRlu4dipcfQqYtKGjx
+ ZN1EMs0oAfQv7v5aDjGhMhquIimBFsMUvWIik4mci9gZ0MoAfpbc+VGNMChrvPtw/c5aAindM3o
+ tRCacefeuKsbQKmmo+rohJ7QXjCazF5Nw8Iif/opbiKgHkodccD0F373C7vFCrKh7X8Qqnv+Hvy
+ g+Vxg95i8K4InsTL9Z709kp+AHhWVwm0UDu574MfV+M6mGmBKSKpPX2cmsH9+dVnAd4awoI=
+X-Received: by 2002:a05:690e:b86:b0:664:ea4b:d1f7 with SMTP id
+ 956f58d0204a3-668c7a100d1mr2506211d50.42.1785141117722; Mon, 27 Jul 2026
+ 01:31:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260724-tpm-trunc-resp-v2-0-381857e959f6@byteray.co.uk>
- <20260724-tpm-trunc-resp-v2-1-381857e959f6@byteray.co.uk>
-In-Reply-To: <20260724-tpm-trunc-resp-v2-1-381857e959f6@byteray.co.uk>
+References: <20260711091559.1842381-1-aristo.chen@canonical.com>
+ <20260724092720.3533-1-aristo.chen@canonical.com>
+ <20260724092720.3533-3-aristo.chen@canonical.com>
+In-Reply-To: <20260724092720.3533-3-aristo.chen@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Jul 2026 11:24:26 +0300
-X-Gm-Features: AUfX_mxf46HTQY9_ctJmlHcR69RT6Od_cq4eyrktrSlTGPh1IDT_VK9Va8_t12c
-Message-ID: <CAC_iWjJFyFyhgiFNiGmqGaCJAq+C41PWzGrG66_JDg9CfMXfxg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] tpm: bounds-check the device-controlled response
- length
-To: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Reinhard Pfau <pfau@gdsys.de>, 
- Che-Liang Chiou <clchiou@chromium.org>, Dirk Eibach <dirk.eibach@gdsys.cc>, 
- Tom Rini <trini@konsulko.com>, Argus <argus@byteray.co.uk>
+Date: Mon, 27 Jul 2026 11:31:22 +0300
+X-Gm-Features: AUfX_my117MpuLsRxY8r2x7kQJ8ESDSel-FGDePKzlKSd-ezOBv_j0gs2FJsFXs
+Message-ID: <CAC_iWjK+qeG2AYMHdAP6_5TsmdHKaW=A6O4gj6oDd354aR80GQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] efi: Print ISA-specific and unknown memory
+ attributes
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.30
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785140702; x=1785745502;
- darn=lists.u-boot-project.org; 
+ d=linaro.org; s=google; t=1785141118; x=1785745918; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=WLuEpqXyai4dhup8uM2MHKmQDNuA3uqmnMu/ukNdbAs=;
- b=EO/MWi0Gihn4gsg7T29+81CAHpyXzKI5ISrOthRpt7pwyN+Bwkl+nrrbPFGWJgaxZ3
- iNIFms7QMm3+71mgRp8pxzdXgtw+bmYZZXFNJmw+5LF4PNUwsGZl9aIM0Lp0h39nirD4
- lJzncPiqfQRciAP7h4pftU3vFO8yw/0zdBKJC25Qg+gJrd3jHZvww93bGHTW9NXJF14i
- 7J2pG1uyf1A3iB681zdonDzxxKCT8XSSLKKjC5XULxJc9UNdVX/FxQ/RwxHwogOHN7Mo
- jtc1GGv2qY2Hu7P/kxQgxYJK8sTIzOA7/t5Sy8ayUxREV6NyWQ2oGESzmBKJ30dMM+Ft
- n+YQ==
+ bh=G/1eR+nx2DM/x8GbDbzlp7Q3ihlWmwkiZwUlueorusw=;
+ b=FhmE02leAUgt4CPEF2p027Ni5cp2wy850yGPbZ+wszPW7Zgfud3vPp9N8NKvWTFmei
+ BharhyQe3MMBkh3O2BjzSPwX4XxjXb7pz6txCPdY4PuFUBGHZP8/CKENE3TxWQuHU0jl
+ iVojsh61T0XemcEipcETOko+CYuJg34K7An0fxYkstrEee4knynSCHrLISYdooJW95OE
+ fp0DI/CTwc/9MT7mfzQNOjjAztqE+kH9u7k0dMGOD/FlEL4cJKI+9/5ZCIceUwRhdb9u
+ DqQPeKurJRtr2Ttl5ZWAoOpVTodcKYtcEiNZzN61uVQZp+jDiroqdb8qF8BhD49UrCqQ
+ BVFQ==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=EO/MWi0G
+ header.s=google header.b=FhmE02le
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=ilias.apalodimas@linaro.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="FhmE02le"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,101 +170,132 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Shahriyar
+On Fri, 24 Jul 2026 at 12:40, Aristo Chen <aristo.chen@canonical.com> wrote:
 
-On Fri, 24 Jul 2026 at 13:34, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-wrote:
-
-> The length of a TPM reply is set by the device: tpm_sendrecv_command()
-> stores the number of bytes received, caps it only at the command buffer
-> size, and reports success whenever the reply's return code is 0. Callers
-> then use that length without checking it:
+> The attribute mnemonic table did not cover EFI_MEMORY_ISA_VALID and the
+> EFI_MEMORY_ISA_MASK field, and attribute bits without a mnemonic were
+> silently dropped, so a memory map carrying ISA-specific, invalid or not
+> yet known attributes displayed incomplete information without any hint
+> that something was missing.
 >
-> tpm2_get_capability() copies response_len - 15 bytes into the caller's
-> buffer. A reply shorter than 15 bytes underflows the subtraction into a
-> huge memcpy; a reply longer than the buffer (sized for prop_count
-> properties) overruns it.
+> Add a mnemonic for EFI_MEMORY_ISA_VALID and print the ISA-specific
+> field as ISA=<value> when it is valid, instead of decoding bits whose
+> meaning U-Boot cannot know. Any remaining bits that match neither the
+> mnemonic table nor the ISA field are printed as a hexadecimal value.
 >
-> tpm1_load_key2_oiap() and tpm1_get_pub_key_oiap() pass response_length
-> - 41 to verify_response_auth(), which a reply shorter than 41 bytes
-> underflows.
->
-> A TPM sits on a discrete SPI/I2C/LPC bus that is physically accessible, so
-> a reply this malformed is reachable by a bus interposer or a faulty part;
-> on the TPM2 path this parsing runs during measured boot.
->
-> Check the reported length against the header before the subtraction, and
-> against the caller's buffer before the GetCapability copy.
->
-> Fixes: 69cd8f0681f4 ("tpm: add TPM2_GetCapability command support")
-> Fixes: be6c1529c1ce ("tpm: add AUTH1 cmds for LoadKey2 and GetPubKey")
-> Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-> Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 > ---
->  lib/tpm-v1.c | 6 ++++++
->  lib/tpm-v2.c | 8 ++++++++
->  2 files changed, 14 insertions(+)
 >
-> diff --git a/lib/tpm-v1.c b/lib/tpm-v1.c
-> index a6727c575fd..5fd22924b28 100644
-> --- a/lib/tpm-v1.c
-> +++ b/lib/tpm-v1.c
-> @@ -757,6 +757,9 @@ u32 tpm1_load_key2_oiap(struct udevice *dev, u32
-> parent_handle, const void *key,
->                 return err;
->         }
->
-> +       if (response_length < TPM_RESPONSE_AUTH_LENGTH)
-> +               return TPM_LIB_ERROR;
-> +
->         err = verify_response_auth(0x00000041, response,
->                                    response_length -
-> TPM_RESPONSE_AUTH_LENGTH,
->                                    4, &oiap_session,
-> @@ -817,6 +820,9 @@ u32 tpm1_get_pub_key_oiap(struct udevice *dev, u32
-> key_handle,
->                         oiap_session.valid = 0;
->                 return err;
->         }
-> +       if (response_length < TPM_RESPONSE_AUTH_LENGTH)
-> +               return TPM_LIB_ERROR;
-> +
->         err = verify_response_auth(0x00000021, response,
->                                    response_length -
-> TPM_RESPONSE_AUTH_LENGTH,
->                                    0, &oiap_session,
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index f443b738f82..aa4d3866d7b 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -519,6 +519,14 @@ u32 tpm2_get_capability(struct udevice *dev, u32
-> capability, u32 property,
->          */
->         properties_off = sizeof(u16) + sizeof(u32) + sizeof(u32) +
->                          sizeof(u8) + sizeof(u32);
-> +       if (response_len < properties_off)
-> +               return TPM_LIB_ERROR;
-> +
-> +       if (capability == TPM2_CAP_TPM_PROPERTIES &&
-> +           response_len - properties_off >
-> +           sizeof(u32) + prop_count * sizeof(struct tpms_tagged_property))
-> +               return TPM_LIB_ERROR;
-> +
->
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Thios doesn't llike a problem for the capabilities only. Can't we
-update tpm_sendrecv_command() with an extra argument of the expected
-response lenght? We can then check that for even invocation in the function
-itself if the *size_ptr != NULL
 
-Thanks
-/Ilias
-
->         memcpy(buf, &response[properties_off], response_len -
-> properties_off);
+> Changes in v2:
+> - New patch, addressing Heinrich's question about invalid bits and
+>   EFI_MEMORY_ISA_VALID/EFI_MEMORY_ISA_MASK
 >
->         return 0;
+>  cmd/efi_common.c      | 20 ++++++++++++++++++--
+>  doc/usage/cmd/efi.rst |  5 ++++-
+>  include/efi.h         |  7 ++++++-
+>  3 files changed, 28 insertions(+), 4 deletions(-)
 >
+> diff --git a/cmd/efi_common.c b/cmd/efi_common.c
+> index 904747c5b32..e57835d3bae 100644
+> --- a/cmd/efi_common.c
+> +++ b/cmd/efi_common.c
+> @@ -58,6 +58,7 @@ static const struct efi_mem_attrs {
+>         {EFI_MEMORY_SP, "SP"},
+>         {EFI_MEMORY_CPU_CRYPTO, "CRYPT"},
+>         {EFI_MEMORY_HOT_PLUGGABLE, "HOTPL"},
+> +       {EFI_MEMORY_ISA_VALID, "ISA_VALID"},
+>         {EFI_MEMORY_RUNTIME, "RT"},
+>  };
+>
+> @@ -91,13 +92,16 @@ static const char *efi_mem_type_name(u32 type)
+>   * efi_print_mem_attrs() - print the names of set EFI memory attributes
+>   *
+>   * Prints the set attribute bits as a '|'-separated list of mnemonics,
+> - * e.g. ' UC|WB|RT', preceded by a space. Prints nothing if no known
+> - * attribute bit is set.
+> + * e.g. ' UC|WB|RT', preceded by a space. When EFI_MEMORY_ISA_VALID is
+> + * set, the EFI_MEMORY_ISA_MASK field is printed as ISA=<value>. Bits
+> + * that have no mnemonic are printed as a hexadecimal value so that
+> + * invalid or not yet known attributes are never dropped silently.
+>   *
+>   * @attributes: memory attributes (EFI_MEMORY_...)
+>   */
+>  static void efi_print_mem_attrs(u64 attributes)
+>  {
+> +       u64 unknown = attributes;
+>         int sep, i;
+>
+>         for (sep = 0, i = 0; i < ARRAY_SIZE(efi_mem_attrs); i++)
+> @@ -109,7 +113,19 @@ static void efi_print_mem_attrs(u64 attributes)
+>                                 sep = 1;
+>                         }
+>                         puts(efi_mem_attrs[i].text);
+> +                       unknown &= ~efi_mem_attrs[i].bit;
+>                 }
+> +
+> +       if (attributes & EFI_MEMORY_ISA_VALID) {
+> +               printf("%sISA=0x%llx", sep ? "|" : " ",
+> +                      (attributes & EFI_MEMORY_ISA_MASK) >>
+> +                      EFI_MEMORY_ISA_SHIFT);
+> +               sep = 1;
+> +               unknown &= ~EFI_MEMORY_ISA_MASK;
+> +       }
+> +
+> +       if (unknown)
+> +               printf("%s0x%llx", sep ? "|" : " ", unknown);
+>  }
+>
+>  void efi_show_memmap(struct efi_mem_desc *map, efi_uintn_t map_size,
+> diff --git a/doc/usage/cmd/efi.rst b/doc/usage/cmd/efi.rst
+> index 3ccdbe9410c..62a2638feca 100644
+> --- a/doc/usage/cmd/efi.rst
+> +++ b/doc/usage/cmd/efi.rst
+> @@ -45,7 +45,10 @@ Start, End
+>
+>  Attributes
+>      The attributes of the region as a '|'-separated list of mnemonics,
+> -    e.g. UC for EFI_MEMORY_UC and RT for EFI_MEMORY_RUNTIME.
+> +    e.g. UC for EFI_MEMORY_UC and RT for EFI_MEMORY_RUNTIME. When the
+> +    region carries ISA-specific attributes (EFI_MEMORY_ISA_VALID is set),
+> +    the ISA-specific field is shown as ISA=<value>. Attribute bits without
+> +    a mnemonic are shown as a hexadecimal value.
+>
+>  efi tables
+>  ~~~~~~~~~~
+> diff --git a/include/efi.h b/include/efi.h
+> index 71234d1b6fe..a4c21d7681d 100644
+> --- a/include/efi.h
+> +++ b/include/efi.h
+> @@ -268,6 +268,9 @@ enum efi_memory_type {
+>  #define EFI_MEMORY_CPU_CRYPTO  ((u64)0x0000000000080000ULL)    /*
+> cryptographically protectable */
+>  #define EFI_MEMORY_HOT_PLUGGABLE \
+>                                 ((u64)0x0000000000100000ULL)    /* hot
+> pluggable */
+> +#define EFI_MEMORY_ISA_MASK    ((u64)0x0FFFF00000000000ULL)    /*
+> ISA-specific attributes */
+> +#define EFI_MEMORY_ISA_SHIFT   44
+> +#define EFI_MEMORY_ISA_VALID   ((u64)0x4000000000000000ULL)    /*
+> ISA_MASK field is valid */
+>  #define EFI_MEMORY_RUNTIME     ((u64)0x8000000000000000ULL)    /* range
+> requires runtime mapping */
+>  #define EFI_MEM_DESC_VERSION   1
+>
+> @@ -686,7 +689,9 @@ void efi_show_tables(struct efi_system_table *systab);
+>   *
+>   * Prints one line per descriptor with the memory type name, the physical
+>   * start and end address and the attributes as a '|'-separated list of
+> - * mnemonics.
+> + * mnemonics. The ISA-specific attribute field is printed as ISA=<value>
+> + * when EFI_MEMORY_ISA_VALID is set, and any remaining bits without a
+> + * mnemonic are printed as a hexadecimal value.
+>   *
+>   * The virtual addresses of the descriptors are not shown: the map is
+>   * identity mapped before SetVirtualAddressMap() is called, so the field
 > --
 > 2.43.0
 >
