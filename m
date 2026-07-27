@@ -1,98 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5167C531FC
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 06:59:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 308C9C531FC
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 06:59:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7126580C10;
-	Mon, 27 Jul 2026 06:59:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DBA3740623;
+	Mon, 27 Jul 2026 06:59:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iRSAC4f-gN5v; Mon, 27 Jul 2026 06:59:31 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iddxwl7mzENT; Mon, 27 Jul 2026 06:59:38 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DCA0480BA2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E07240607
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785135571;
-	bh=x5dMYOObTt0p3kQPxcxabaqoJQ5ul/pm5yoMubiRJnw=;
+	d=lists.u-boot-project.org ; s=default; t=1785135578;
+	bh=xGg+fqLXaT8hj/QnY9jDvL8ij3iAAIrOTEwB2tzqAJo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zzhY3SmHd7K+hvfAUglXUU11KIZqKwjWQY9taVhyEHzlXIDvfuF+HZ4Ob8N+pmg7o
-	 PAxq9hgfRIyH/mtlmYd7qLgL//LP7LE9ywM7TLbRmvDXLjO9KILiXeoy9dtSoxouRr
-	 vPI1HQTXr4xElds5N/n7orH1J9+ValSxauC8N9A7ogF1SBYj4L8jcLLUvlmSh1VdX2
-	 4DlelRhpZ1y1JwArnINwCH78bhKyxl1k+3rwEJysmrCIYjAFXEmS7JktbHKFJxONL6
-	 JDVnq6w1owR86VOUwMdvYFkMxd31/iNeGMQU960LvcVtTb+D01TTlWUxec1VDzzRJt
-	 vXxJ9jfEwnzSA==
+	b=rcNr3HxyU/oieSL8LFxSw+MVuniSOAi9LfduKd/kC61y8DaEFTAyBB7Kh7WgsQm6B
+	 utGgy4ShnNpdEFnoSRAJ45mvLkgNFQ6SUjqsAdTIfjM887aC28D7gQJB/XAw8EOcYJ
+	 +omgG5dLKrHYe5UNIX/Qgz5bR7Z2w7qcwyGXfwKSOcVZZ61OcYOhJ9g+zo4GAWsiuY
+	 cOiHxiTwJ8XQ2KvYXGzTah5caXOuqH9WJMQ5g+DvbVXI4EedUyDOpRoVgxAeNG9VpH
+	 4Nk+glBcdrlrKB/19IlGPo5OnrVJGwcbeTZfZPuvO+5KMrMWaRWNKWB1pyAhAeQ7Xl
+	 4xnbTj6WmsDPA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DCA0480BA2;
-	Mon, 27 Jul 2026 06:59:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 227D12E5
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:59:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1E07240607;
+	Mon, 27 Jul 2026 06:59:38 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E45B469
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:59:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 089C060602
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:59:30 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E274B40607
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:59:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eNpI_zdJq-EX for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 06:59:29 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TjXxTixe1kmP for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 06:59:36 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::533; helo=mail-pg1-x533.google.com;
+ client-ip=2607:f8b0:4864:20::102e; helo=mail-pj1-x102e.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 5A8B0605FC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5A8B0605FC
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5A8B0605FC
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:59:29 +0000 (UTC)
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-ca97d139d8dso1300652a12.2
- for <u-boot@lists.u-boot-project.org>; Sun, 26 Jul 2026 23:59:29 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org DE9F1405E9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DE9F1405E9
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DE9F1405E9
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 06:59:35 +0000 (UTC)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-385ea3ce80dso2380303a91.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 26 Jul 2026 23:59:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785135568; x=1785740368;
+ d=1e100.net; s=20251104; t=1785135575; x=1785740375;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=x5dMYOObTt0p3kQPxcxabaqoJQ5ul/pm5yoMubiRJnw=;
- b=c6LEJDGLQ2H0CipmYoEGSQcL7ldcCiONR3QlU1HlcZAmuujhfm7EhuYOUAylM7OH8H
- URZDRFz9IvaRUDZMJFNrFHD3ZsvgMnAEPrcbBPG422D2Mtq46GTLgyWj0aLiIhXqhFQF
- y/MBMbOp3W/ykvzHJJlVWoZXbUQo8zJcEJAWmP1+y7cniCwaOM6N4274yQqIM+eq8HsP
- CqN6lIaAjAN/z+aXAD1qF5uYqygZ8UCNkUaWDbBWTcmxZv/i71JAkNq/by+J8INioC9Q
- EymO4npAzGa053ueZ2Lca3NaCUP5Sz3YbrfE+2dm1bbO8Krk+Hj41CY94ml1MDIarY5S
- sdQg==
+ bh=xGg+fqLXaT8hj/QnY9jDvL8ij3iAAIrOTEwB2tzqAJo=;
+ b=Efqs2sBCoJhuFLXls9U3+zSkuxIEegNLeFW1JDB3K6HwVpWGwhM9Y9sFGAuK2V6Wgi
+ zVWQDE6rhFk5KwpQmIUdnuOvGlgTMM11g4PYHvOPnHa0pjsZHrg6csMtCAWqnPW1ddgY
+ VjCGDzqM6bZTO8Xz00zAnBuNQF20seer1oUoQL9xQdBJl/5UKviHwF5XyDl+iaEUpGw+
+ UzTKzO22Z2jOA4WoVy4Mql7/4m5o8boFpT8uxHaRjtmC0q8dh+CRIEXqbQQMs7DSjEYs
+ MExEooT+x/Euqz78Ee3j1I0W1F4BmAQF095ohka279FLl8Ac5n7Uo3BozzMt/4rh5ulV
+ TWPw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoL0RFGSQhC7znz1YNpXsGkmEfYi4IGoA7KQ5gPjdhcGvzW1+ZBuaOWXzbyAdjJAffaIvG3m0Q=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxlvlII+T1e2QOi4bU4d52Izi1wrwja7gCyoqFPPIUjLwFutGsB
- mQ1Kpy/ksKTVOMwqqy2Nccy2ujXwzvS/SOvZotPg9umahW0+xStoyN87HAGYBUhCb68=
-X-Gm-Gg: AR+sD11BIAFA9Y4k3g9Q7uClhGAcPI2rCPelBhFiRxgaHz/lLvDE2XNFvgk1wKmE+VX
- /hBf3xOiPvToDlXBoEw6TjZe7LuUBN4Xz+lhCHJg2NHFsTq3gapzgDyQbsecINiVPh+ddoEWKw/
- LOGXTPxP9ze2qQeAF1lNv+od6RVPC1xD6GOdLc1fj8qXafLLuZNF1SkOGMfSySM5Gc1OsWomFzm
- SLRuKfptGi+mZtRUgWoTPFZFFpAskDpDO7PokY31KAUvTyjAPklbS9oZoPPlyfUnYs6eU9Ny7rR
- c3fdrv1QEXp8NwWzRvsSXrmQhMmzS+3BLX3ufQl70uqHmZ+/HLLpjmwbkAHXL5OIgzFgk8gM3UY
- nyLFNCH6qj2yv/Ehs4Wt0oD00AvhefHfnmqfHlHk4H9QtsstDC2sLpZ23azwhl27kC4YJEw9/3M
- tb8b/VVU6tXaPwYrZftAC60rQT7GYlYAmTEisx+kp3vYOpkACklMH75xRGOOW4b1iGiTYzsgWSQ
- D3Au2YsZSLdUVpEn/a8wON5lJ2zRhIt1bobI4TQrzA=
-X-Received: by 2002:a05:6a21:a05:b0:3c3:7c0d:fc85 with SMTP id
- adf61e73a8af0-3c67e0f1c33mr7740224637.76.1785135568589; 
- Sun, 26 Jul 2026 23:59:28 -0700 (PDT)
+ AHgh+RpzaB84CV9Le0y1auCSkALCp8jh5Ojdy+ETkg3za5SgcafYU1M8TlygTvoH5ChodT/9M6luAWc=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwNe+6JY92OPWiCxtpjW+53Ur58M1LVsZGlxIvMQy6FaCDz1fyq
+ fwIsR1RTtBVKQPEcgsc5RjpxWfU3HwahYYop03FM1F/94t0+EKIxXFR5xu//I36XKmw=
+X-Gm-Gg: AR+sD108oqxiqMxVgP6vvUaM01kodrYXxiASkyIMKrjEfhTvNJtLVHGCBeAvOjHvSJG
+ dQXFaJaFwoLhfMKxNWYJeO2uUfWufXAsW2w/bQnCVyHh+23ewEowgg5/BhYeJ01L0epkb2Tn70n
+ 7gdV4OoD4A2911rG8WPp0WZ6UfawPR1ygivVyBzVtIFuHZq/webZwBusQmYl17XkdczMOV3Ajw4
+ V5o8TB0Znwk8lsGlAbI3YLJ05d9idTOXG9wyOkDDHdnn2L4+4LisMFWxTlNyQcRxsMXDYSnLd+M
+ opm286DTVeltGuZmsoK8/oJ0bsGqWq2dfp8maa0GSKiTpOMorHCFqaSw0oqHdaoC9KHIZ+s91V4
+ dQdFALIrgJRLc4WUAyXQaBAjg+8K4Ofb6QTVGnAZlfrkT03GOJ+dn36K3b4v8r+8qlXjC35dlC6
+ 5OIJTNOh2FJ5wFQcQMfrsex3dg6hYjkQ/wBuWPSWcKxIR567ch/gkSM6s8Ct457OfhwL1TFVbBI
+ OKqC4uGl0ZNlDV/l6pVTmCrUZB1xGQOiMkBjt2zc8E=
+X-Received: by 2002:a17:90b:4d:b0:37c:6130:7a5b with SMTP id
+ 98e67ed59e1d1-38f293cf43emr7258933a91.8.1785135575173; 
+ Sun, 26 Jul 2026 23:59:35 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13e52f0c6f2sm22969489c88.11.2026.07.26.23.59.21
+ a92af1059eb24-13e52f0c6f2sm22969489c88.11.2026.07.26.23.59.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jul 2026 23:59:28 -0700 (PDT)
+ Sun, 26 Jul 2026 23:59:34 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Mon, 27 Jul 2026 14:59:04 +0800
-Subject: [PATCH v6 02/11] pinctrl: k1: fix drive strength configuration
+Date: Mon, 27 Jul 2026 14:59:05 +0800
+Subject: [PATCH v6 03/11] pinctrl: k1: fix pull-up/pull-down configuration
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-m4-v6-2-2f58566d48ca@riscstar.com>
+Message-Id: <20260727-m4-v6-3-2f58566d48ca@riscstar.com>
 References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
 In-Reply-To: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -117,25 +117,26 @@ Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
  Eric Chung <eric.chung@riscstar.com>
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1785135568; x=1785740368;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1785135575; x=1785740375;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=x5dMYOObTt0p3kQPxcxabaqoJQ5ul/pm5yoMubiRJnw=;
- b=V09lu76LejSBYt0uwEMbFW9X7faqOqJyRsyIOkRb2oAJNKOjKXCYojcZxUXi/EXz3J
- DwWSMz0DgqZmyH15VYZ8jfzUIGHcFggritGYO1j/Sm0NhJnMISWRXpN1iKNuso1VmFQB
- eJck9p2a+AAvVR2S5mtn4Q/99YfZGs8aQyrmjpqCv/K1v3s4cUxlH48DkgvQpt2TiasY
- 0iH2/UwCzFm4Kcs0bI6kS0ervzPZaPpkIJdRs6RmIOyCkH8D7nkJamwL7KYqJoVNhO2u
- gp5vCvqTbQWnQ/kBHOwzUGWWsQcrx3aIsFaOuSvenxIUxbnfv/X/HFAtk1Ya3qKy2ES2
- etLQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=xGg+fqLXaT8hj/QnY9jDvL8ij3iAAIrOTEwB2tzqAJo=;
+ b=mpTBOw0tX7Rj/k40YZbpBdEBqJQkNRhL+89tVexnqeOpYsFJ62Dt/OEYnaqWLgY3rw
+ 31rnlIauQLgKqzJM+I0UIicKmVwcIOxnX4Vtk0S/sCjRvqQYAD2UqAkcK73s+o1qjiQU
+ EHIJTvQufMa5eH0QZBVEqpQNp4koS4IG++fEpcTz11AOPBob52tufiKKT8vXLAi8Ny/I
+ 4bk9xeSLT7y2ooxVrjFC4B0HX8gjAWQYlw5hziobicvr8Vntea08XK/D33Pm0puj7MLh
+ 3Bdz1jsyeYQYjP591bSAOelhx61kf6ugHqrHfGbpvJkY740E7iGsWhrdtq2D0lXKPAzA
+ AEdA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=riscstar.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=V09lu76L
+ header.s=20251104 header.b=mpTBOw0t
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,75 +151,43 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Fix drive strength configuration by:
-- Using FIELD_PREP() to properly set the PAD_DRIVE mask bits
-- Not overriding io_type with IO_TYPE_EXTERNAL for external pins
-- Returning the pin number instead of 0 from pinmux_property_set
-- Removing redundant zero-initialization of the mask variable
+Fix pull-up/pull-down configuration to honor the argument parameter:
+when argument is non-zero, enable the requested pull direction;
+when argument is zero, clear all pull bits to disable.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
 
 ---
 v6:
-- Fix drive strength configuration.
+- Fix pull-up/pull-down configuration.
 ---
- drivers/pinctrl/spacemit/pinctrl-k1.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
-index a6a22eacac7..6ed511879da 100644
+index 6ed511879da..454bc307ba3 100644
 --- a/drivers/pinctrl/spacemit/pinctrl-k1.c
 +++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
-@@ -9,6 +9,7 @@
- #include <dm/device_compat.h>
- #include <dm/pinctrl.h>
- #include <dm/read.h>
-+#include <linux/bitfield.h>
- #include <linux/bitops.h>
- #include <linux/errno.h>
- #include <linux/io.h>
-@@ -386,10 +387,12 @@ static int spacemit_pinmux_set(struct udevice *dev, unsigned int pin,
- static int spacemit_pinmux_property_set(struct udevice *dev, u32 pinmux_group)
- {
- 	u32 pin, mux;
-+	int ret;
- 
- 	pin = spacemit_dt_get_pin(pinmux_group);
- 	mux = spacemit_dt_get_pin_mux(pinmux_group);
--	return spacemit_pinmux_set(dev, pin, mux);
-+	ret = spacemit_pinmux_set(dev, pin, mux);
-+	return ret ? ret : pin;
- }
- 
- static const struct pinconf_param spacemit_pinconf_params[] = {
-@@ -406,7 +409,7 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 	struct spacemit_pinctrl_data *data;
- 	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
- 	void __iomem *addr;
--	u32 mask = 0;
-+	u32 mask;
- 	unsigned int io_type;
- 	u8 ds;
- 	bool found;
-@@ -433,7 +436,8 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 		for (i = 0; i < priv->nr_io_pins; i++) {
- 			if (priv->io_pins[i].pin != pin_selector)
- 				continue;
--			io_type = priv->io_pins[i].io_type;
-+			if (priv->io_pins[i].io_type != IO_TYPE_EXTERNAL)
-+				io_type = priv->io_pins[i].io_type;
- 			break;
- 		}
- 		if (io_type != IO_TYPE_3V3 && io_type != IO_TYPE_1V8) {
-@@ -441,7 +445,7 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 			return -EINVAL;
- 		}
- 		ds = spacemit_get_drive_strength(io_type, argument);
--		clrsetbits_le32(addr, PAD_DRIVE, ds);
-+		clrsetbits_le32(addr, PAD_DRIVE, FIELD_PREP(PAD_DRIVE, ds));
+@@ -425,11 +425,17 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
  		break;
- 	case PIN_CONFIG_POWER_SOURCE:
- 		for (i = 0, found = false; i < priv->nr_io_pins; i++) {
+ 	case PIN_CONFIG_BIAS_PULL_DOWN:
+ 		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
+-		clrsetbits_le32(addr, mask, PAD_PULLDOWN | PAD_PULL_EN);
++		if (argument)
++			clrsetbits_le32(addr, mask, PAD_PULLDOWN | PAD_PULL_EN);
++		else
++			clrbits_le32(addr, PAD_PULLDOWN | PAD_PULL_EN);
+ 		break;
+ 	case PIN_CONFIG_BIAS_PULL_UP:
+ 		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
+-		clrsetbits_le32(addr, mask, PAD_PULLUP | PAD_PULL_EN);
++		if (argument)
++			clrsetbits_le32(addr, mask, PAD_PULLUP | PAD_PULL_EN);
++		else
++			clrbits_le32(addr, PAD_PULLUP | PAD_PULL_EN);
+ 		break;
+ 	case PIN_CONFIG_DRIVE_STRENGTH:
+ 		io_type = IO_TYPE_1V8;
 
 -- 
 2.51.0
