@@ -1,134 +1,168 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B8AFC531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 11:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0A4AC5321C
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 11:08:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E6422406ED;
-	Mon, 27 Jul 2026 11:04:00 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z2yGpD0J-rkY; Mon, 27 Jul 2026 11:03:59 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0466840651
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785150239;
-	bh=1OF6HhczN1tc4fLoDtN/WEECDDOOfOyeE1NDWjznATs=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=vybVTDompI6ziAsbqGq23u43Qj0+2ZEcPIQqhW96HDOoW6jVi51sG5MrC51TpI1wp
-	 NPdT6CADgHqYdnOpikiLatIWbyOFvJmArVTIU6/dH7m4T8e58udkrrkm0a7Ae+mkST
-	 SLTV109qqAqDFgjRL1ExNwr74gtH/9GxyZVMekY99wki2Seyq6YS5K/XgwCYRYHkrJ
-	 6bcRRZq4KCtg0FI4/zGHJvTc7xWdhnBUjF2tQp4W3PiFWtln1Cn+ZPYhj1H92NFIrE
-	 RfSXBa7nw8iv4Aiu7exdcTFqseBwJk64LsCYVGtOvdvORQbp4HclyWAaeFVYj6qpaC
-	 r3cuJuNVy1kaw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0466840651;
-	Mon, 27 Jul 2026 11:03:59 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5197B357
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:03:57 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 42D42606A7
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:03:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6ACF7606E5;
+	Mon, 27 Jul 2026 11:08:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ng3fIImdbyHz for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 11:03:56 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org CC391606A5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CC391606A5
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CC391606A5
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:03:54 +0000 (UTC)
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ id MEChXQXb6S_2; Mon, 27 Jul 2026 11:08:42 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B925F606A7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785150522;
+	bh=lvpmrojrE4PVjK1ooXn5kpjGFDAvYNvavhII13SZc3k=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qZFagceqgSTaAIvE/S9R5+aeWLBvlKAeDfTBqTN3L0i4hoyFmkvWMx8IR1CUOKySo
+	 ZK/gBAWHBp34G4kasc6nuzOSypPScQP/yiRmf8IkMe8BqzLgp+BiV+uhrTgPO9pigG
+	 GyrdWWD/NLkGdcOaPULJ1nSbz4/g1Tj62X8t0lP29RmEESldFGzs/vV+8XqhjRUbx7
+	 sLDM6O5c4OYcRv+SPF3DClryPCtB+mbRLgdcVaQzmP2Smr5+FHDEsl6Xo75zbt7Ok/
+	 +DIxorBXYr3ozdhg1ZgrXeB7LgJkLYiXz5EgcdesZueBRnwJSAZWcKqRYp17uO5vbP
+	 DrAHyX/BJb0sg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id B925F606A7;
+	Mon, 27 Jul 2026 11:08:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CDC9D26C
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:08:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id B40FE40694
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:08:40 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id swdbodq1IJ7v for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 11:08:40 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 890BB40675
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 890BB40675
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 890BB40675
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:08:39 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1C8C484671; Mon, 27 Jul 2026 13:08:37 +0200 (CEST)
+Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
+ [IPv6:2607:f8b0:4864:20::b12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D45CF400E6
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 11:03:51 +0000 (UTC)
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-49554715277so25072975e9.1
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 04:03:51 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id C2CD182991
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 13:08:33 +0200 (CEST)
+Received: by mail-yx1-xb12a.google.com with SMTP id
+ 956f58d0204a3-664e3ed58bcso3952395d50.1
+ for <u-boot@lists.denx.de>; Mon, 27 Jul 2026 04:08:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785150512; cv=none;
+ d=google.com; s=arc-20260327;
+ b=VEWbDG8jReJknNyogR3kfiAOUghBsEkB8H3d2qnQi7WmGkCpEQsY0eUFSsfWvI7ht+
+ Yevi1onF97MkJ6kWPfGDf8hs+JD8FCpyBQSVz5mazzP2RgkRQBFvG/sbNvLeKO0XKbhF
+ lHFurXX8yaO/5EpnxdZjW/6Gz29aJrVffJBlKu8ulyWqMG8n6D/XdxCAMUUNfZShK104
+ OwL/p9VaL/tF9heWL0Us8taIckrAevbFzs65VxyLS5o0m8yMdScxY+9f3I0/0nF6gWz5
+ 2NHn26hrE5kKbdXeVZwmaq7SmMVNHDjZmkHrVZNYmegA+jRbN4dDvGYYfb1FySd0m/U2
+ PpBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=lvpmrojrE4PVjK1ooXn5kpjGFDAvYNvavhII13SZc3k=;
+ fh=DG0vC9xYMfPMPCdWMOrewvIZ3JtemwQ6JIsQFuoxmZI=;
+ b=XVeHTEMvLSYe4Z3YXhOxoppHNZqptvEWiwUWHOIMejKChxDnSpAbIqQlhf4CrQFNsy
+ +knxVITYetcBDzNe3y7xbNdZce3jHGlfppLBju96lyGdxbCzPgQnPGMhmBkv2GyVpwU7
+ JteFRTRmvY9EUMUyDNw4ig9XMda2xo/pisC2nzn9+cLzQnbx9DB9rNRzv1E1fw0WN3IQ
+ G0LmOTYxAf5s9VsKWWRbMcmlAI0nBnBBItZZporbZMPzs6xQTiEslZhxHkpzuiF1b3Ai
+ DkHmWQo3sdZ/3AuUvTb+8nBXl1yyrePVteZo0wNLPYkb5OX7VvZsBo9NdfBnQLWBRHR6
+ 2u2g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785150231; x=1785755031;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1OF6HhczN1tc4fLoDtN/WEECDDOOfOyeE1NDWjznATs=;
- b=E7rIrz0n6Zoi+BMWs8xTlwgDID1z+K7p8aBbA5S26IAhHi2ImAcpTOTRpw6yOSPRoS
- Lqbb+c41OqLEdUHzdf8zviK9DgC6iOLOtNSlGfZJzgwQR6W23bpN4bnUjkMhWfIsER3O
- E4gs4E7XH5c9yboCEJnelbx134W1Hwc9EL+nqiTSk8W+azJNetDzcEOzAcKaO2sLZQgC
- 7MXwvqnP4ECJCXurXVHsW44ddZhsDjUAjIyLk2o0vIxwCooPHgF6cErNNZ+npHaLD8Da
- m3n94FtvUj2VKlwKzuyKtHCxw5YSO0VSYGx4M1wOO4xeOoMmvR2+vjNzKzbVxtaSXEXP
- 0HvQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrRNgwDK2GKN0YuJf+FpHAHFyqZ2QsDhJy94F2ou709DTtuN2HdpCReTuhZgRz3FUwF9LABK1Y=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwiEtOqMagVhy+5xAGqsIVf61TDV2KWYg4UcwoGCoYkPnKgWYog
- bmUcBRv8eUltzqquQ2ERI7WNY8F68fadNhwAK8qtv61PD3pAAVFc/N/DHNv5fVUDsEB6uSYbRtN
- 2g+6+zIafrQzW93Hu/ayli1a7EL/mWV8t7Ls1Y7OzRgbyHcdhQE9kbhsRp2xOuCn6R5PfGtliSW
- BnvHYBG9fJtA==
-X-Gm-Gg: AR+sD10lqYFD5ZQg6LSb/Fgwo9xAP3HKOQSQfMKIhoW8EyS6JwloZs8l0zYfB2WwJ2Z
- lE0Wgik0b7VtzTc7MC9JVlRVB+1JkP+RTvSNBv8qI1iegMFTozfhK31+eQw2mmIXtJe6vVXeEFK
- koIATmAl8e24EFWaxqw1veKrHuHG4kv8BfG53mGv0tfzGf8B0by0s4ywDnqJcbhi06iqYacGL/j
- o7BgWRs5ObThITwsIxI3kaLx3PhJ9ybE0kTPCbhnd5rhC8YeGzZGigKQQlDxsK4NZJvmNarYo3M
- EeyY61EhXIqYqo78sCvjX7sTvBP30khBNDlRJVgrMVxVbxgKnjWXxRgIXQ6ay8ggDard6MIQV81
- vpiOiHM4RfX1H8Ojr3lBJCVwsG9GPcajtDOrUgrmpSRV9BiJukiLBpEXi
-X-Received: by 2002:a05:600c:8b35:b0:495:6936:120e with SMTP id
- 5b1f17b1804b1-496b57108b3mr98472265e9.39.1785150231499; 
- Mon, 27 Jul 2026 04:03:51 -0700 (PDT)
-X-Received: by 2002:a05:600c:8b35:b0:495:6936:120e with SMTP id
- 5b1f17b1804b1-496b57108b3mr98471745e9.39.1785150230991; 
- Mon, 27 Jul 2026 04:03:50 -0700 (PDT)
-Received: from workstation5 ([2a02:908:1242:30e0:96c0:6fce:32a7:7281])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c631fdsm46630631f8f.28.2026.07.27.04.03.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2026 04:03:50 -0700 (PDT)
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Hem Parekh <hemparekh1596@gmail.com>,
- Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.u-boot-project.org,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] efi_loader: check efi_deserialize_load_option() in
- get_dp_device()
-Date: Mon, 27 Jul 2026 13:03:36 +0200
-Message-ID: <20260727110336.71692-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ d=1e100.net; s=20251104; t=1785150512; x=1785755312;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=lvpmrojrE4PVjK1ooXn5kpjGFDAvYNvavhII13SZc3k=;
+ b=V+Tes5xcAuQAx8bDQZaIiXobMIhNq5mIdfUg0tFxBGktIbxSbFt8MZmbZIvXRq0Det
+ DvSVzU9peigjlsBGpz4GPZjsnRHtya3dnDPNL3RMR5j8vqCicgm+9Dkv3TGJqf4P+8hG
+ rCiSAjZVUodIyHYaQIq9UDem55De75XreQCP1SkOX7ZyGf8vu+r2Dlre4VZli5iW4TZv
+ wTqitiyM8pIXssYHp9XdEtVlUvs4uwKW7hC+8zAFVgzrGvwm1GTJIQ9k0bRrdM+qRXcp
+ g/eGmP5N4GhqqEG+/Hnc8Y9s2GCxHsIfSyl+NvThqKCOKV3rinVgpH0PCwvaHIYBjqFe
+ SW2g==
+X-Gm-Message-State: AOJu0YzGWIbnX/gvSkg/SGw1Tbt7nEQCl+4R4DrpZfLlUedrpuMGZaBL
+ 6uusvQ+9gI+u7habxk947wENrW5jBTSC+D55Iuc+E8Zk/Xl6mshHJNMqDKHYUyZ8654l5haa+t2
+ gOUfZnWwzCXvphvdnKvmlZp9KnciWSiFyH8p314eMOw==
+X-Gm-Gg: AR+sD10c33A/Ffd585ZMMES+FgtORQ6VW7d3bbLFjlzSPrbyFBn92zcyGL63a7a/1mP
+ tUuw4Gj21CMzSjw2OW3SZMe8owvs6Duix4+xh7owkymsREoOh0iecVWh/kJLYT8qrJrqMe1Q6uC
+ XwCyQMt4/kksVnhRqIQ+3Bjy/WHyEGtXdputnHapscUGddzR5CzufVKRqMlTKaPF8IXxaO0vRWQ
+ giuEI/EABMQfJffnYTqOz4DzcqbNzyINYo9khyldYFoZ+ORz2P6nGgh8TZq0Vst3UnMg2lHkN8C
+ HA6RdOLLQYWyQWTcT/nCYaKw8iMijX44K49SZHThWMBg0HDFkbxSE4raqAIjF2l5NkGeDu4WVb/
+ 1E9njAoLc/LIK6obWPTP3p+xmWpjsvKPI79NNgW6/G/fTDcEAk9DsNaaH3qTRJdi2Y1UAYjS/kw
+ XKg96uDeIcScsN5Oyld9UBdElOiU+EPw6OjODwnaksz+95UOiTViFeZRo3lf/5Agf/HIAzm0jmZ
+ ECchOHWMzeNRKIdPKjXd5702ZMOSZMEcymgntvHb1rBxd6DnaZrFSEfLPU850UPgxYuxu5vQqit
+ gfrHaVtPqJL1VxnJBt0waPegFDnom7mTEBDmALByIVyaHYvJzCrVlYA/y7vV
+X-Received: by 2002:a05:690e:12c2:b0:668:8d0:20c with SMTP id
+ 956f58d0204a3-668bfdbc26emr3440528d50.20.1785150510318; Mon, 27 Jul 2026
+ 04:08:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260710-efi_security_protocol-v1-0-a06cef90057b@redhat.com>
+ <20260710-efi_security_protocol-v1-1-a06cef90057b@redhat.com>
+In-Reply-To: <20260710-efi_security_protocol-v1-1-a06cef90057b@redhat.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 27 Jul 2026 14:07:54 +0300
+X-Gm-Features: AUfX_mzrZbt5Jjt2Y3E3mdmRQQakWvbY2tRT5IzaY7Cebtu4VRAwAtNU4bdJoPU
+Message-ID: <CAC_iWjLaDkhrZgSbEQ6Yh7dxD9Zf8MKh0GHg83kwhwXgSas_fQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] efi_loader: implement EFI Security Architecture
+ protocols
+To: Ian Mullins <imullins@redhat.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Enric Balletbo i Serra <eballetbo@kernel.org>, 
+ Enric Balletbo Serra <eballetb@redhat.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Udit Kumar <u-kumar1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1785150231;
- bh=1OF6HhczN1tc4fLoDtN/WEECDDOOfOyeE1NDWjznATs=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=CeGj6DZDv575RQtB9o7womily+2vsBo4VRsiNrJJuAukWu5W/ClrBfzfgflkay9AY
- zM0CTREwH9Edrp4HgDWH91jvtI+v+j6HPUt1ZOYHE04FWVdBc/5RZBi4YXIhyBLyz/
- NuG9/iN9mdDyLOAkYKY/mjJds6zviY6SgTlxjoRs++Np9erIrY7+n6f8auc8nrcY75
- P4LgFXtvFYahP3RLvsPCHNyew5/lFmhCzF97eVJFYLfEmCXAi/ohWAy8fFHLU4vfx/
- 2zAYkdfvlVVMPe2z9+kCr4xHBmqY93cmGHyAWyJ+z0kvRY6XlbOM7lYxW9XBLTZtTc
- SjEpt2lWHY3KGhM6olnbuEqcUhbwNYGdcF/RPsMUI248zB6tGS/mHaOqp1hydHl6U5
- bR4C9keylxmbURldtcYDWk0KJ2K3eloLQO3jBeROwIRWJ9eqBpK79tb9qflACWtxKh
- OvhoHoAst25afNud1e+WnZ87xAzzMmbJQ9+M7NcL9AdnLqrgHdKs4P0YQd6oDEaTA8
- cj+UQTPewCE8wqh4bjXHrjcvMrj5k5/XbMMa3apwF8FIxx/0kmKOWUGjMkFo6q/AmP
- XxO4QGSZlj5N/xWSJ1Y11mNhizoLT4HZPZ1nM/ILxVNOsabMnOXzwnxWH4rlKBn7qv
- RBB9nS45MQVPNnP/xhotplGQ=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=CeGj6DZD
+ d=linaro.org; s=google; t=1785150512; x=1785755312; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=lvpmrojrE4PVjK1ooXn5kpjGFDAvYNvavhII13SZc3k=;
+ b=bfWfnrdADIm1M7lSTuFM5vMYofx/Nj4dP+1lc6tL9GSBwr4QMft8rtcJcODO4Y4qFe
+ c8ZXKGCxSJ/oadIC7+mvgJnRgf6nvNPJ6HNLU/EZ2qlchMeorHgtWX7ONZZNAij4VGyP
+ 5S+eskWSIU5ZzgsNomPOkbCg/ag3lcrgtdzd19jVBMAUG0lmQ/hpX86kGE4BuqPJN7wn
+ fkhFHEokH5lXysRu6LLkdsJG3SpgaN9npJ1x+YW6KqoaH0C5ggZStCupS90G8qAEItx0
+ SoJyzGagWZx+2E3wMF3xDoBI+L4EoP7NiVBOOhTaVOpZJhWv7hfvUNdgAHbhozTHCTpE
+ u66Q==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=bfWfnrdA
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=ilias.apalodimas@linaro.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="bfWfnrdA"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,69 +174,122 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Heinrich Schuchardt via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From Hem Parekh <hemparekh1596@gmail.com>
+Hi Ian
 
-get_dp_device() reads a Boot#### variable and passes its contents to
-efi_deserialize_load_option() but ignores the return value. On failure
-efi_deserialize_load_option() may return without having initialised the
-caller's struct efi_load_option, and even on a malformed device path it
-sets lo.file_path before validating it with efi_dp_check_length().
+Apologies for the late reply, I was off.
 
-As a result get_dp_device() can proceed to walk lo.file_path with
-efi_dp_split_file_path() (via efi_dp_dup()/efi_dp_size()) on a device
-path that was never validated, or on an uninitialised pointer when the
-variable is too short to be parsed. A device-path node with a length of
-zero makes the walk loop forever, and a length below the 4-byte node
-header leads to an out-of-bounds read. The Boot#### variable is
-attacker-controlled in threat models where writing EFI variables does
-not imply the ability to execute firmware code, so this is reachable
-during capsule-on-disk processing at boot.
+I have my doubts whether we should support something from the PI spec,
+since we are trying to keep things confined to the EFI spec, but I'd
+like to hear from Henrich as well. I guess since systemd added it we
+should follow if we want to boot distros ....
 
-Check the return value and bail out, as every other caller of
-efi_deserialize_load_option() already does.
 
-Suggested-by: Hem Parekh <hemparekh1596@gmail.com>
-Cc: Hem Parekh <hemparekh1596@gmail.com>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	Use common exit out:
-        Remove invalid Signed-off-by: Hem Parekh <your.real@email.com>
-        Changed error message: remove word 'for'
----
- lib/efi_loader/efi_capsule.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+[...]
 
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 52887f7c274..a77810fa15c 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -860,7 +860,11 @@ static efi_status_t get_dp_device(u16 *boot_var,
- 	if (!buf)
- 		return EFI_NOT_FOUND;
- 
--	efi_deserialize_load_option(&lo, buf, &size);
-+	ret = efi_deserialize_load_option(&lo, buf, &size);
-+	if (ret != EFI_SUCCESS) {
-+		log_err("Invalid load option %ls\n", boot_var);
-+		goto out;
-+	}
- 
- 	if (lo.attributes & LOAD_OPTION_ACTIVE) {
- 		efi_dp_split_file_path(lo.file_path, device_dp, &file_dp);
-@@ -871,6 +875,7 @@ static efi_status_t get_dp_device(u16 *boot_var,
- 		ret = EFI_NOT_FOUND;
- 	}
- 
-+out:
- 	free(buf);
- 
- 	return ret;
--- 
-2.53.0
 
+> index de57823bd44..934bdd89a69 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -2120,7 +2120,8 @@ efi_status_t EFIAPI efi_load_image(bool boot_policy,
+>         efi_dp_split_file_path(file_path, &dp, &fp);
+>         ret = efi_setup_loaded_image(dp, fp, image_obj, &info);
+>         if (ret == EFI_SUCCESS)
+> -               ret = efi_load_pe(*image_obj, dest_buffer, source_size, info);
+> +               ret = efi_load_pe(*image_obj, dest_buffer, source_size, info,
+> +                                 file_path, boot_policy);
+
+Why do we need the extra argument here? The file path on the loaded
+image protocol isn't enough? If it's not then we can either pass it as
+an extra argument to avoid processing DPs again or retrieve it from
+the loaded image ptr. I am not sure what I prefer though
+
+Something like
+struct efi_handler *handler;
+struct efi_device_path *dp1;
+ret = efi_search_protocol(loaded_image_info->device_handle,
+&efi_guid_device_path, &handler);
+dp1 = handler->protocol_interface;
+
+[...]
+
+> +static efi_status_t EFIAPI
+> +default_file_authentication(const struct efi_security2_arch_protocol *this,
+> +                           const struct efi_device_path *device_path,
+> +                           void *file_buffer, efi_uintn_t file_size,
+> +                           bool boot_policy)
+> +{
+> +       if (efi_image_authenticate(file_buffer, file_size))
+> +               return EFI_SUCCESS;
+> +
+> +       return EFI_SECURITY_VIOLATION;
+> +}
+> +
+> +static struct efi_security_arch_protocol efi_security_arch = {
+> +       .file_authentication_state = default_file_auth_state,
+> +};
+> +
+> +static struct efi_security2_arch_protocol efi_security2_arch = {
+> +       .file_authentication = default_file_authentication,
+> +};
+> +
+> +/**
+> + * efi_security_check_image() - authenticate image via Security2 protocol
+> + *
+> + * Calls the currently installed FileAuthentication callback on the
+> + * EFI_SECURITY2_ARCH_PROTOCOL instance. This may be the default handler
+> + * (which delegates to efi_image_authenticate()) or a custom override
+> + * installed by an EFI application such as systemd-stub.
+> + *
+> + * @file_path:         device path of the image being loaded
+> + * @file_buffer:       pointer to the image data
+> + * @file_size:         size of the image data
+> + * @boot_policy:       true if image is being loaded as a boot option
+> + * Return:             EFI_SUCCESS if authenticated, error code otherwise
+> + */
+> +efi_status_t efi_security_check_image(const struct efi_device_path *file_path,
+> +                                     void *file_buffer, efi_uintn_t file_size,
+> +                                     bool boot_policy)
+> +{
+> +       return efi_security2_arch.file_authentication(&efi_security2_arch,
+> +                                                     file_path, file_buffer,
+> +                                                     file_size, boot_policy);
+
+Can't a different EFI application install that protocol? We are only
+using the local copy here
+
+> +}
+> +
+> +/**
+> + * efi_security_arch_register() - install Security Architecture Protocols
+> + *
+> + * Installs both EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL
+> + * on the root handle during EFI subsystem initialization.
+> + *
+> + * Return:     status code
+> + */
+> +efi_status_t efi_security_arch_register(void)
+> +{
+> +       efi_status_t ret;
+> +
+> +       ret = efi_add_protocol(efi_root, &efi_guid_security_arch_protocol,
+> +                              (void *)&efi_security_arch);
+> +       if (ret != EFI_SUCCESS) {
+> +               log_err("Cannot install EFI_SECURITY_ARCH_PROTOCOL\n");
+> +               return ret;
+> +       }
+> +
+> +       ret = efi_add_protocol(efi_root, &efi_guid_security2_arch_protocol,
+> +                              (void *)&efi_security2_arch);
+> +       if (ret != EFI_SUCCESS)
+> +               log_err("Cannot install EFI_SECURITY2_ARCH_PROTOCOL\n");
+> +
+> +       return ret;
+> +}
+
+[...]
+
+Thanks
+/Ilias
