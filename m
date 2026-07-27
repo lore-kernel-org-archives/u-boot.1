@@ -1,141 +1,119 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC1BC531D0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 07:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94BD4C531FC
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jul 2026 07:36:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 00E62605F5;
-	Mon, 27 Jul 2026 07:15:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3C96A40564;
+	Mon, 27 Jul 2026 07:36:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N-jzEl6TKpEm; Mon, 27 Jul 2026 07:15:11 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ya0r3_pa6YyX; Mon, 27 Jul 2026 07:36:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D2781605FC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4A35040588
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785136510;
-	bh=3mnzO2WJb4xsZBhxYlN9RPkZMrhbtsGov+JQ/3pxD+4=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=eOO/JHKDfYjrntuZ6Tj9qn0r7VKHwjrGcxWVid22u3IwFvoiO1KQ9UtnIpPmjDitZ
-	 ElhzmrZ1n4YdarPsAuMPXQi78brP3286WpCmFlPDj+kXtalj4icgJ4xTi3SlGRuYLd
-	 HBxr0n6aOoX4RPyd4r+rmOVAk+ycWQMZkfKx3gl4Nq+xmw5P8ZVd4Uy2W6l90xzm1z
-	 QT/Tkzc9QJ8yTYBKULXM6TwZgEj5YwtV/sXNx3fls35ruG4FksJQ0oNR9wqAoxN4/I
-	 LXcKgz1pS5O7inGFjU+eMi+1D37uv8ATehDV38SIggvcFhwzsCCRYwLNoTq9EB3oGT
-	 4AzcWgOczLCBg==
+	d=lists.u-boot-project.org ; s=default; t=1785137793;
+	bh=m3uELYi1CWA5TRRfTQrldM3fHDvnORAM0xZKY8Mc9nc=;
+	h=Date:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=1H8osBrbfNSLrOSc519jhUpGg2JmXsS7G55u70GjZ31YCYpv6EmVwRgjrLQiw3JR/
+	 csRsBPnpVBjYlvk0HXE4ze4s1jUBM8e9oJXY1QzWwhM+x5L5wJfuwhZQg8Ex9BFxaA
+	 P6rUqNzQByaTVWCwdgkNmAIMkfUFD01nyFlxdTAOdSBQVDPVIBBP+P8BvqqPClF5m0
+	 W6PrI4S6lX0VQTQluz0selvgnLNR+epKrPBU1wl0eb6h5ob5xRig4HGnMrv118Ub6u
+	 lyI1fDA/q71wSq+TSQ7zvUoV3yewks85HY4Kt2n30zbtT+rgpcZxQ+QLKHURSK1Arm
+	 SQVnNwakgtqRg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D2781605FC;
-	Mon, 27 Jul 2026 07:15:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4A35040588;
+	Mon, 27 Jul 2026 07:36:33 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 494C1350
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 07:15:09 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 598D42E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 07:36:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3BE95605FC
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 07:15:09 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 402D2605F5
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 07:36:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZnBhODUUXqRI for <u-boot@lists.u-boot-project.org>;
- Mon, 27 Jul 2026 07:15:08 +0000 (UTC)
+ id f6JqVqyyLJuR for <u-boot@lists.u-boot-project.org>;
+ Mon, 27 Jul 2026 07:36:31 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::22c; helo=mail-lj1-x22c.google.com;
+ client-ip=2607:f8b0:4864:20::62b; helo=mail-pl1-x62b.google.com;
  envelope-from=leo.liang@sifive.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4BFD8605F5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4BFD8605F5
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4BFD8605F5
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 07:15:08 +0000 (UTC)
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-39f20d19895so15093341fa.2
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 00:15:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785136506; cv=none;
- d=google.com; s=arc-20260327;
- b=cPn8vHoEY4bTXcmxKPEjwGGlUO0ByC5M2JeCH6C5cPU6mdOWp2rzBaityZb47yEAUl
- hBNGw2I5uGPa8Q6+gKU3PTn75yYUATvFrdz5HA29wa9URPMa5GyVjs5ccPrcA8GaMxW0
- RamslWVnOzSeIYfAKWp4l4TDAWNfAm8Bxtz40jrffkgvv6oxrQEZA3RuDU54UapoAct3
- UZk3DXXilxjn2hXdrtmhEuNpv1uVjn1lAY5V1n2uXW6mNf6ly9aMYmP44liFbXnlo/G1
- 8n+TwnA3Gw+9bjRL9hcgOC3DFs4oL+n662XFx0sDNBZcjehGYQtCTKLSNXON/zJcWMRT
- N5eg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=3mnzO2WJb4xsZBhxYlN9RPkZMrhbtsGov+JQ/3pxD+4=;
- fh=zpsbHlI/eAY11kuRQ48E15PTXFh0bupDgsYWtDv5VxE=;
- b=kPABB14MOQSd2UIUgSENEuLFV8fCLz8QbzcAkeVx/32Lb1vMk48SnfJpg06dsW13f4
- HCTc24OxMcTjgy4mPyxnZneEaCto8Slyx1FKExVptJ8/n1VVv+77+ANezhtrzdCF2CkC
- reuqVDKyw20UDnY28W7w5dCSqcFokCe+cEauf92vWKpYyBvbPTZG27Pe7bKJSmvtczQt
- xgw4FO82ABrRPnrP8Z4pErFmkAIm1c5PQ5GB3ncupRHRqG27BCMkjk4d9nE4EhAaLZJo
- ajdxe535hdjeXjF+so62UGOTM4viSXkvhaaz6VC+JhzuhAUJeLsNerK9LcqsPAiN2MhN
- 1CPQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B3719605D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3719605D3
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B3719605D3
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 07:36:30 +0000 (UTC)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2caced6038eso26037615ad.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 00:36:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785136506; x=1785741306;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=3mnzO2WJb4xsZBhxYlN9RPkZMrhbtsGov+JQ/3pxD+4=;
- b=C6/5/MgiQSNgeiZ68V8fgLPJoIjof/odqRQA0maAkNDY+ofYCYNcOKQ8wrri6mnAI1
- SlTfTv9Qo3ftO3gGsjFYv5y+kGn7seVfcMoqGSeyg+Wo5d33VmWuHrNvsQ/Z9TvR04SC
- XNQrTdb9zmPCfihBwjXc9Kr9tL/VWkeWzs8Rn418r9bSdeNV9lSVZFcGi5lO6MsIU3hr
- 664rsUCm5vZNiC6DMliJaZiWRqywPof8gU33Iblkmy/hjBuW0JOtz4p0nlihyvmAXGbg
- e/K8CjD+jC9X+etzEODSldeKGGEBymz4m/OOog47Jn8dvp6/46t47w2PDx0Fjjk3hxSK
- T1Aw==
+ d=1e100.net; s=20251104; t=1785137790; x=1785742590;
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=m3uELYi1CWA5TRRfTQrldM3fHDvnORAM0xZKY8Mc9nc=;
+ b=rz+MzrImxKnvUfQb2Kv/xkRrwl3bL8QafirAWarRfWiGrzTP2jqzeHf1WA7AJoCios
+ QG80cn4qo5wpunZsAuMhixZ2C8CZhq1TJarvhv3D8KJ1D3exLnqJfTQ7QY2SwtjTY7rc
+ xqgiCSV+l7E6n7HBtHScuUi6p3/ue6I6eH8iPfwdAK0/RA8lfrBf9IvGpaXkLPedQEsg
+ Vo71uhV2vO98MU0DjNtOhWG06MFgmOZAo5F6yVGKTE8nKjJm4ZwE/mwk7lMXwnJBsOQk
+ 9fUScsP34sAshNh04AZqfo0XP2cz20/mylLuHzGBv1/8ktumVjcqWfkcu546Mwr+rTy3
+ 4GnQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqHp1JExT94TUH9K+DiDs3RLxBmuT5luQQuCRcA/PzVW97qb807rVjFTP+W+HmSfhiyqWB8ccY=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yz/GdQwgwpHLeVm2Wt/NWoZe5d02qUdrNTfJrwgfhMX7gvSngAn
- NFAWUi1VByPXAbapogOrNje4dRohiLkpDd8uJ3oxpePGqJsUZaoDdrwtqsLpr4uKkK2L7w6vLPs
- wYaiJUoqXAAjZ6VT4jyS4P+n8eWtE9kiFNYxh/CZOYQ==
-X-Gm-Gg: AR+sD13Qv89q89CIe1Zp2Yi9XF8NG+xdnMybKvHupUldLChQA7Hp+vZXR1ErKBwxkmq
- uU4YfGo7a3AZD/tRJOuNS0tx6OT/QTimtu8GyWeyDUUB81TVeSHKUAsAP8orHqXsjfOobYKV9M9
- wHwX3gaKxUIzhLgGT8DppK40x+qFOfTkXlJmaffntL8nYzAG0pLoal1sKHhBGIBR8go+2lSeaUK
- k423xuE+GEZM8QzVIh+N1S57dSy4aqVAhKEwhNC6uSnwjzcsVjhUBQz5Sy0u8+b
-X-Received: by 2002:a05:6512:350d:b0:5ae:b9b3:8ba8 with SMTP id
- 2adb3069b0e04-5b2c1b69db5mr1221302e87.57.1785136505843; Mon, 27 Jul 2026
- 00:15:05 -0700 (PDT)
+ AHgh+Rovmv5PAINOzHxu8OAq67rlz7qoaXXp8a74ylHysFK7zXQv+XztSt4AaslXKuyK9iORkWS/QoY=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxJvXBcqag0NDH3w11KixRR8OMSbkyZ/s2JgX9kedA4NtfhqEZ8
+ BuovTaq7EpDBw2blQn5LfjufKk2rlwjV3a+h2WLxRWX+H/4tQiCviIl/Lskxxed7oXA=
+X-Gm-Gg: AR+sD126UQz5WeubV5U1wPu2zg0gt/n14vlVPV2MF/w0rbCLFswjMGLHuP6myjlCP9j
+ m4247fFs/lHM8HkNjG9x61fDm1uTXyoL93qHyG0yYnKVvBtjFo6cOnIwy1ba2mvrs5R50kXx27+
+ 1tfeg2wP3PZCoE077EisGVeEzwpehikaaoBw9VxZnrEbbVk4EE5fSfEnyNwXz26q2NVX8KVhDc1
+ Esb9e71Va4GFKwx6lUGwPwzqjHLSugxg7Dmm2Gthyjlqc98EDtDhAZI4HFGFeXJ8/rZ4RUU2YdO
+ 6wketr2Nd4qQvIbDLQJNBl//R7FEQm5ijfecaKkS+TIEAvx/wYKriTsCylp23VEy73F9hd3qs8e
+ DKhgh0CDgV1s+/GCez5K+oKUim5hOlp78vYeJ+4vyL8l0D5PSnXvV2WrTPz2rpTYbviRYza7rpP
+ s/Av4A2QfFkW+D68rWCLKF
+X-Received: by 2002:a17:902:d4d1:b0:2ca:d4f:adab with SMTP id
+ d9443c01a7336-2cfd71750bdmr84614035ad.19.1785137789890; 
+ Mon, 27 Jul 2026 00:36:29 -0700 (PDT)
+Received: from lliang-1876.localdomain ([136.226.240.196])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2cfde7f419bsm29632645ad.67.2026.07.27.00.36.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jul 2026 00:36:29 -0700 (PDT)
+Date: Mon, 27 Jul 2026 15:36:24 +0800
+To: trini@konsulko.com
+Cc: me@ziyao.cc, hfranco@baylibre.com, hal.feng@starfivetech.com,
+ michal.simek@amd.com, fberder@outlook.fr,
+ charles.perry@microchip.com, naveen.osdev@gmail.com,
+ u-boot@lists.u-boot-project.org
+Subject: [GIT PULL] u-boot-riscv/main
+Message-ID: <amcKeN3QurHxoqsp@lliang-1876.localdomain>
 MIME-Version: 1.0
-References: <20260722154602.3373184-1-jamie.gibbons@microchip.com>
- <20260722154602.3373184-5-jamie.gibbons@microchip.com>
-In-Reply-To: <20260722154602.3373184-5-jamie.gibbons@microchip.com>
-Date: Mon, 27 Jul 2026 15:14:51 +0800
-X-Gm-Features: AUfX_mzrvbaePenWs00EnL8RRTf5LopOKxvnMspdgdlN3Lu_xCQ7UhVkn1EdTRk
-Message-ID: <CAC7DN2AnNNEj78iT65vOhWrm4P2GkBfHH6sAuM9OEBiQERSo6w@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] configs: microchip_mpfs_generic: enable MPFS RNG
- support
-To: Jamie Gibbons <jamie.gibbons@microchip.com>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>, 
- Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>,
- Tom Rini <trini@konsulko.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Martin Herren <sputnik@on-the-web.ch>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1785136506; x=1785741306;
+ d=sifive.com; s=google; t=1785137790; x=1785742590;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=3mnzO2WJb4xsZBhxYlN9RPkZMrhbtsGov+JQ/3pxD+4=;
- b=TpH1APUmhH9v3IEeor5UGpw1SKhnjZGXXKWBtKEKEt6V9zuktizVdbddaFeL1aRLg5
- GS7xlMiyiDCFlWwXnPpnzWX4ZLWxkDQA7WqB0iXMcYYSY7S3K3IKMvvYp6pn5Tq3PnCv
- 9Xc19iQ6kd41cIgiQpJvXvttat+waajPtEHpsvbz8CtJH7VChe60kYCHdzKsCpXSAj6O
- cbIEK2Jcuib8JVIfpomLH/aF4dmemMBvzWsyk9/gCKyHMA+vhMQe6RVPrEZGt+pE5KAK
- 0EFDSYwG45TWAZRFSQEqhEF2bYueV5JODameToei4TKAT+OuIz37LKjGRu3KH6O3h/yX
- IniQ==
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=m3uELYi1CWA5TRRfTQrldM3fHDvnORAM0xZKY8Mc9nc=;
+ b=VzmB4T1esDm0pOiRdO6zHyouYCKp8WoHKEFspmx77a+E4xWRN+noaDiydlEo1QdQVd
+ FVh9zbPZVMGLnAYX8Bgx1tHMKttfA3ZWuMNHp2fQxoo0y77v9IQAoBn9rStgBbNWPYTG
+ ZDfBhRzGfoxmWOsH1oOvupQBFyfe7DcU9AzQ8mJzyEg+xN9ql5OZjSVzQhufbPGK4rHr
+ VKWpMzDVJjNl9ohbUhG41WJ8x7RnoOpqt/JNDdjaWQ4FNCk9sHMmboVZPcW4u4tKPGEN
+ bU/xauNPN1BSWPKMrsnxzdJ5aG4gxqEsDUxYuFsFzy6B7zSbpWXsGU+FCcVqbfu1UA/S
+ R6ew==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=sifive.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=sifive.com header.i=@sifive.com
- header.a=rsa-sha256 header.s=google header.b=TpH1APUm
+ dkim=pass (2048-bit key,
+ unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
+ header.s=google header.b=VzmB4T1e
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,18 +130,63 @@ Reply-To: Leo Liang <leo.liang@sifive.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu, Jul 23, 2026 at 8:52=E2=80=AFAM Jamie Gibbons
-<jamie.gibbons@microchip.com> wrote:
->
-> Enable the MPFS hardware RNG and associated infrastructure in
-> the Microchip PolarFire SoC generic defconfig.
->
-> Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
-> ---
->  configs/microchip_mpfs_generic_defconfig | 3 +++
->  1 file changed, 3 insertions(+)
+Hi Tom,
 
-Reviewed-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
+The following changes since commit b635d43bca429500cb8ef20aa151cb5773b9a8a5:
 
-Best Regards,
-Leo
+  Merge patch series "fs/squashfs: fix symlink load failure on large images" (2026-07-25 07:55:35 -0600)
+
+are available in the Git repository at:
+
+  git@git.u-boot-project.org:u-boot/custodians/u-boot-riscv.git main
+
+for you to fetch changes up to c201051a9cd3a358cb67cbba9b1c5fa717cf1c40:
+
+  serial: sifive: remove busy-loops from getc and putc ops (2026-07-26 21:04:42 -0700)
+
+CI result shows no issue: https://git.u-boot-project.org/u-boot/custodians/u-boot-riscv/-/pipelines/740
+----------------------------------------------------------------
+- some fixes
+- Add Yao Zi as a reviewer
+----------------------------------------------------------------
+Charles Perry (1):
+      riscv: remove log_debug() in enable_caches()
+
+Francois Berder (1):
+      rng: jh7110: Fix invalid usage of dev_read_addr
+
+Hal Feng (2):
+      configs: visionfive2: Add VisionFive 2 Lite eMMC DT to OF_LIST
+      board: starfive: visionfive2: Support VisionFive 2 Lite eMMC
+
+Hiago De Franco (2):
+      doc: sophgo: licheerv_nano: fix incorrect step numbering
+      riscv: dts: cv18xx: fix spi node name
+
+Michal Simek (3):
+      riscv: Skip riscv_cpu_setup() when CPU driver is disabled
+      riscv: Make RISCV_ACLINT visible
+      riscv: Exclude ACLINT for TARGET_XILINX_MBV
+
+Naveen Kumar Chaudhary (1):
+      serial: sifive: remove busy-loops from getc and putc ops
+
+Yao Zi (1):
+      MAINTAINERS: riscv: Add myself as a reviewer
+
+ MAINTAINERS                                       |  1 +
+ arch/riscv/Kconfig                                |  4 ++--
+ arch/riscv/cpu/cpu.c                              |  3 +++
+ arch/riscv/dts/cv18xx.dtsi                        |  2 +-
+ arch/riscv/lib/cache.c                            |  2 --
+ board/starfive/visionfive2/spl.c                  |  7 ++++++-
+ board/starfive/visionfive2/starfive_visionfive2.c |  6 +++++-
+ configs/starfive_visionfive2_defconfig            |  2 +-
+ configs/xilinx_mbv32_defconfig                    |  2 ++
+ doc/board/sophgo/licheerv_nano.rst                |  4 ++--
+ drivers/rng/jh7110_rng.c                          |  4 ++--
+ drivers/serial/serial_sifive.c                    | 11 ++---------
+ 12 files changed, 27 insertions(+), 21 deletions(-)
+
+ Best regards,
+ Leo
