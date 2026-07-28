@@ -4,113 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80942C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD28C531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:17:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4BF37409AA;
-	Tue, 28 Jul 2026 11:17:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 04E0D409BD;
+	Tue, 28 Jul 2026 11:17:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LvyLk0orUxxZ; Tue, 28 Jul 2026 11:17:28 +0000 (UTC)
+ id VDpp_yDlQtXp; Tue, 28 Jul 2026 11:17:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2361440975
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 32AD64099D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785237448;
-	bh=tjc8xoCnWkBdvz7WMC6QZOnjBjf+p4hWu3mpq67Z/lU=;
+	d=lists.u-boot-project.org ; s=default; t=1785237453;
+	bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nlBGGJ95iy7QfUXBFSrdb6rYBxSzxD37XXj0/rtAxsvOge/xKE1H8mDKm8sDJH0Qo
-	 oyIJUhBUPXbxZ7/z/7l3Vsh+38+8KGMIXRnxhbWMZxx2hdmk7vJphoJK8Pe4kYg1Ma
-	 4aMErwqa0qqhxB39zqkXRWzPeaeHEK74jep6XOVkEV4+z9k3zo4XWNKmj9A79jsRGS
-	 bLh3kt+xJz2nNXi/+pBdIGM/kGIy5r6vXF4MFl70g94S2EjDbrXlpN0h8NXXTj6Wus
-	 OE0eqcbWksMnJx2lR9k319PwnaUrawESOQ8F4E2Kwc0IlqQOpv3daSH+hMvpdgiW1E
-	 fdN1qZPieC9qw==
+	b=VXNccfGtZrD915XT68GsGeDzBJLbs0Gkn/J/VI/o7nZ3KvUSWwAA6WMsS2LwG/LBf
+	 yvBh16IxgxNF7hHSp/5xF8XtepnMVQOlblvvyVdiTadWla+L2S+bBFcIsxEMLDKfxM
+	 ghlstUQ4ENiYsKQ3vCjA52fWrz0aHNz8E3qSwIqvOoPrXBLdNNxMHoXkCqb/7t8fzS
+	 nNdM4LN/LAHgV9zb5wL2gnF/ZH+qJbgQWmWCpGIAzjlHW6VYtVIfHcgRx7cfCoPGCz
+	 9JgVXDIKe4AT86YgSRn/2yIhoLPhC7A4zR2h5a8fxWTMRfJL8PLlTHrK9bCXx8ZfSg
+	 IP7kteOl+XjPg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2361440975;
-	Tue, 28 Jul 2026 11:17:28 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7CA6826C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 32AD64099D;
+	Tue, 28 Jul 2026 11:17:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AB79942A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6F8508128A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9D42F402D8
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LPDry3sCOWdr for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:17:25 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 188B981292
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 188B981292
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 188B981292
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:24 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0H67AFNUdOJ9 for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:17:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 55FA8400D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 55FA8400D3
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 55FA8400D3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:30 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09DE28494B; Tue, 28 Jul 2026 13:17:23 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id A2B4B8494B; Tue, 28 Jul 2026 13:17:28 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 060CD848BA
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:17:21 +0200 (CEST)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-69c108fee7fso5314392a12.3
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:17:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785237440; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id AF86D848BA
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:17:26 +0200 (CEST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-69fc2261f2bso4490784a12.3
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:17:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785237446; cv=none;
  d=google.com; s=arc-20260327;
- b=kZkkycRpQb6MWe20Td20eka0r9dZPQaMSa0UJ9VriHGtPIryAZj0UZNUy0aA8jANqm
- d4qcGhBU89b0BE2VzIq3TRVAUVNCFVKNLXsDqZoRtz4AEg7Yv8/7TMttzJis3/W7y12V
- PXU85bCTl6fSUzBHPWsLKdil4anqR+SOVzf7+32rcvukPbuKyBaXgzn4md6dPgI9TcIc
- WBrLV3eDw9mfIIQSgWhrWUp5TC2db8D4VFevLL5NujUqfRDkf4fiMEjJuVhh/JyQvPLp
- nBIcrvTZjlmDxXAmgsJQpAtYnV4Xhxaayaq9mbyDJvhNg7Z9bGce9//QSTilCNDmJ0ny
- DmGQ==
+ b=IV3Ze6+yzNy9vIjBUAgqvAErv0h60wOhLEtxTDU6DoLZtdGPVbJJ3yJyRpWFUdJMwN
+ kgqn+QcobK3a64gAlur7+/naqYKle88fIb59GwyNSwqSl6COye87VqeQOuD2uJvoylLw
+ RiPEQyCC+m4ZnBRsq+nQR8bGr+slym/xJy7wwrkUBLg5Pk8EFkx1qMf7MmHQsfh1W2Z6
+ fNBb/ryEagLj02Ewjvtd1KKSiPfUUUWTqAtunC5aUJ5P4MheGuPJXQybTYCRwIo6yrdH
+ 1lm/yPKJP/TiCXcXAxVBajetG3FkNgE2k2fNFH89Eb4dS1gojJbFApXeRVU2L2nbNJn6
+ yRAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=tjc8xoCnWkBdvz7WMC6QZOnjBjf+p4hWu3mpq67Z/lU=;
+ bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
  fh=runy5GsEaBbwYs4tLCkIDKGakFI3WhxP+HVdMM9V8MU=;
- b=LWtho4UPPY6no3VaiaVSyIV8/c6f0QQgsO6Mfd2ro6d+x/pPrrqdld+SDY/y2U8sL6
- sQRnT5zPx2jM8mpC7XaujWCfEuSU6j7u5qO/4Ak8ggndu03HuQvXVRxnRbYtxb4zVAB2
- OJPEM2D1letuhbu9Lzz9rMzRE8xKdiIpMuyFeVgXuFCiJLPRIWYSPycjuhURAzcD/s6v
- SmTJUGuOsr9lW0HvAC6Uv1Dh8urgk8po1MlBW1Z6NPFcuM3JozGdAw44RDC/I2lLE77r
- OX2qQwowPcHzyD0QyavLXzJJg2Uh5hIE/xQ97y29Gqu4Cd5YedUUFHS+MEyLgkBY08GG
- 5iIA==; darn=lists.denx.de
+ b=du8WrLNT0pc3/td8A4yKaR1Ae4BJD6MYAKSNffYO0vcrx+Ft4pl+e/KkeOPzsotlnt
+ TF6Ra2ZT8YOJJjqdlWk42d7aLdDZz2nkdaFCZTbpMaE6FJ+kHh0z13getxBHZVWpzhs3
+ YS1H7rFNKzjnk/GVr96FmKs7GR9EFZBjJ4C+ncCepglU8bC+FWwVHHoFUXodFmfz+rxt
+ TZZJDYA0hTowftSV8dla8ME0ZGTwQ0PGyNpPMAYZiDu+AFRZc3syTOZNJcskHHx5Rbka
+ YgI9SZpkviujN2GoYp2LNocZqm0DNHLhHDUc5qzDjigzL99wSuR4auMU1mEZxdYwpi+A
+ 3u/g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785237440; x=1785842240;
+ d=1e100.net; s=20251104; t=1785237446; x=1785842246;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=tjc8xoCnWkBdvz7WMC6QZOnjBjf+p4hWu3mpq67Z/lU=;
- b=Yd+PNKeGmJUGOpKxlqU2ARpl/DDaElPGMT4JsVR5EhbKfMU1LSOipWxa0Iw+khe9gD
- C2jEuZCY36//lAc3oFoWLKDJvg+JceuFl/GcWVu2vY2DeyW6JrCXLbxcBZFyspcU6NIE
- tyHIBqvgKZSlAcc4Q9DAL8+XRO6Gs0Wn1kQRYXQkX5t9/5JrlUrNJ1e+EF9t3hbsTTxs
- EsT4DeRQyt86Nk6n2L0niMaqAToag6f0rs+5m3splEuxxx8fnakrA+W6HKCCwRHekhpj
- Jd959r3WQecrrKFUgFhJQaRc/XvdqSOc9aLMz/7WVxpN/jyUuiETxEovh7uFh8TYv+wJ
- eb6w==
-X-Gm-Message-State: AOJu0Yzk2fenEW8E38uB9LN/w+IObirxOnha18N6UnTy6P6YpTXRY8CA
- s81qC9R5MZz6iKT4Z78tIK9UyY+n+/cwnTDN9K1bkqgOKHJ08biALyJdTgibfzuMI3OpKKwg5i6
- +lAagGgY7E1PqBdzm5QBvpbhyFbk+QP5Hd1FnIv4g
-X-Gm-Gg: AR+sD10B2Qf0LWG2F/NJDyIa7k8F+bwf8RhQ71LkqQOSS6MxoNtN84LGxHpNoca96l8
- C17dZJ8rLWgADDZ08/Eo0pwLLzqd7o8EnwKnQsv8cULdiaJS9qq3tH65vujoJr8tMTCi9lYnh2P
- hbKkRhMGnN8wEc19RlW9EDP8EkFPPH5So2/OUx5RfExqVzFLjDNa3aA9KV+YJVo0y9ZAf2ovTwk
- oayYniHZG+Mmrvb2xTOogL6TOqx7dE9UXHXDaLJkfULSALB3o0lBpI+eovP
-X-Received: by 2002:a05:6402:1474:b0:69f:4c65:86c2 with SMTP id
- 4fb4d7f45d1cf-6a0349bc969mr1061241a12.2.1785237440305; Tue, 28 Jul 2026
- 04:17:20 -0700 (PDT)
+ bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
+ b=olarz1uYAeOIrFFwNck9jJ9b9URhg72EglzXj+4i3tgzbeVzPNeJV0i9XuRJSvYQ1H
+ fSn6IcfCyTjiKXqpVPGWXjM9hzzM8eWSHIjoTGyUSnSOkNB9nqrd9PqKiCq6Qrngp6nO
+ IPFU1q/cmjg0KGUhA6pMm6/09Pj22DW2KC9/etMeclWzAzPI8VZkmBNZ46PrXrPDbyLt
+ DkiJLnGQsvzD/wvBDdP/CXy689Y2bKVDZWaeZlwhMJ2o2j+kX2iGFOz6e4QiJvzHOF7N
+ xdEIFQlY+WrK/MD6emR6N0QIgjqN8X/GOlL53TPJDgM41N3qPFyopmw4SoQ2mCIX7NnV
+ 5WXw==
+X-Gm-Message-State: AOJu0Yz4Ff0AoRzG66U11s7+pE/P78ZBOieUDKZmaECjXCUKtWDRPS5C
+ nbdLO0SrSyHK6lr+1U6kZdAtrXhd4b6sT90epmIc0757VZ/VGaAGedYbmRw7xtvgsLFwS08VqPj
+ n6PccWqcBR2NEXIv1fQIR19PCIBOXrIEsyUBavnwJ
+X-Gm-Gg: AR+sD12tZkrC0tKYeNKYi7R90Px/UGKLJ0qvkZTKDF6q15LcaHke43L3MQ6UlHZbxET
+ sUOVozHYW5PBou7c0cfwFBUGCWwDsZPvv6R+KNPADVOvpFjki1wvmRRwtGMTJ1iHPfhl44Iplh0
+ nyP1n9Y65A7kqQhr6eKPNqx6dpeBwNmntshaiYDrf4x6zw0Vj7lA1PyFZVjQ81aNbkVF+cA8Q0O
+ ks+dCZt3lJpEdEB7SkEszKUQnOZIhLMmkD2JMWJl+yH4jHw+76AFgDXXJl+
+X-Received: by 2002:a05:6402:51cc:b0:69f:e13d:b9de with SMTP id
+ 4fb4d7f45d1cf-6a034a87c75mr1044862a12.36.1785237446107; Tue, 28 Jul 2026
+ 04:17:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260716223401.378989-1-dmukhin@ford.com>
- <20260716223401.378989-3-dmukhin@ford.com>
-In-Reply-To: <20260716223401.378989-3-dmukhin@ford.com>
+ <20260716223401.378989-8-dmukhin@ford.com>
+In-Reply-To: <20260716223401.378989-8-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:17:07 -0600
-X-Gm-Features: AUfX_mxXe_ItkvTipcbR1G8IlT-DcW9RZQMWhqmpBY9L7DM05L9gv8TgBzRgu0M
-Message-ID: <CAFLszTitjYpDnghN+Z8nrxiyKLYHyEp=VYa_NKKQQFcYV0eVhA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/7] drivers: block: Introduce blk_flush()/blk_dflush()
+Date: Tue, 28 Jul 2026 05:17:11 -0600
+X-Gm-Features: AUfX_mw52nq7MbYRZK-mIj4_UlMC-l3xeOme7Cj4-jQWzay4TJHWjXo-krvvYSA
+Message-ID: <CAFLszThCv+jZauSokXt4PchY-iTdV_O+Shx_icYWbCyDz2Nj1g@mail.gmail.com>
+Subject: Re: [PATCH v3 7/7] tests: add blk_dflush() coverage
 To: dmukhin@ford.com
 Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, seanga2@gmail.com, 
  sjg@chromium.org, trini@konsulko.com
@@ -118,22 +120,23 @@ Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785237440; x=1785842240; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1785237446; x=1785842246; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=tjc8xoCnWkBdvz7WMC6QZOnjBjf+p4hWu3mpq67Z/lU=;
- b=abe07pkmTINdUUWxuV2Fy/xkub6WpJ7Iwn4Vyw4rEss9nxfrFpavD3caiKm8JddEyy
- f+8agLW1g12dt4ibz8Jyt+T2DQ3iVnGJ/sXro9tFgBwVxETCPR4lmhHXXCU7SqJlBqA+
- YtOahhuEUszmaBnxtSR7ELhfFz1Y86DB8osUg=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
+ b=H2QgCpKau5u0Bn/joUza0OoXU1iKNaarcOLsCVWFx6FVaY5Gav1YP1JHX1p329sERn
+ IO7pW/CdjCbm0PlNOjdbYHI+vt+IJQCiFl20vR8SJxeGGSq+c77fRHZs2+SXlyg0nwzw
+ O7jIVhPBtSy5DbnbnnL6ePU+cuixI6V027HNc=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  spf=fail smtp.mailfrom=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=abe07pkm
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=H2QgCpKa
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -141,7 +144,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="abe07pkm";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="H2QgCpKa";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -160,68 +163,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Denis,
 
 On 2026-07-16T22:33:54, None <dmukhin@ford.com> wrote:
-> drivers: block: Introduce blk_flush()/blk_dflush()
+> tests: add blk_dflush() coverage
 >
-> Add generic flush operations for committing dirty data to the storage
-> device.
->
-> This provides a common block-layer interface for flushing pending
-> writes, allowing callers to ensure that data buffered by the block
-> device or its backing implementation is written out to the underlying
-> storage.
->
-> Note, flushing a partition device via disk_blk_flush() flushes the entire
-> underlying device, so callers don't expect partition-scoped semantics.
+> Add minimal test invoking new blk_dflush() API.
 >
 > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 >
-> disk/disk-uclass.c         |  6 ++++++
->  drivers/block/blk-uclass.c | 15 +++++++++++++++
->  include/blk.h              | 26 ++++++++++++++++++++++++++
->  include/part.h             |  8 ++++++++
->  4 files changed, 55 insertions(+)
+> arch/sandbox/cpu/os.c   | 5 +++++
+>  drivers/block/sandbox.c | 9 +++++++++
+>  include/os.h            | 8 ++++++++
+>  test/dm/host.c          | 2 ++
+>  test/dm/mmc.c           | 2 ++
+>  5 files changed, 26 insertions(+)
 
-> Note, flushing a partition device via disk_blk_flush() flushes the entire
-> underlying device, so callers don't expect partition-scoped semantics.
+> tests: add blk_dflush() coverage
 
-I suspect you mean 'so callers should not expect partition-scoped
-semantics' - please can you reword this?
+The subject says tests, but this patch also adds os_fsync() and
+implements flush support in the sandbox host block driver. Please can you
+split the sandbox bits into its own sandbox: patch, before the tests?
 
-> diff --git a/include/blk.h b/include/blk.h
-> @@ -239,6 +240,14 @@ struct blk_ops {
-> +     /**
-> +      * flush() - commit all dirty data to storage
-> +      *
-> +      * @dev:        Device to flush
-> +      * @return 0 if OK, -ve on error
-> +      */
-> +     unsigned long (*flush)(struct udevice *dev);
-
-The read/write/erase ops use ulong because they return a block count,
-but flush() only ever returns 0 or an error, so please can you make it
-(and blk_flush(), blk_dflush() and disk_blk_flush()) return int? That
-matches select_hwpart() just below, and avoids errors from drivers
-(e.g. nvme_blk_flush() in patch 3) being silently converted to large
-positive values at each layer.
-
-> diff --git a/disk/disk-uclass.c b/disk/disk-uclass.c
-> @@ -122,6 +122,11 @@ unsigned long disk_blk_erase(struct udevice *dev, lbaint_t start,
-> +unsigned long disk_blk_flush(struct udevice *dev)
+> diff --git a/drivers/block/sandbox.c b/drivers/block/sandbox.c
+> @@ -52,9 +52,18 @@ static unsigned long host_block_write(struct udevice *dev,
+> +unsigned long host_block_flush(struct udevice *dev)
 > +{
-> +     return blk_flush(dev_get_parent(dev));
+
+This should be static, to match host_block_read() and
+host_block_write() - it is only referenced via the ops table.
+
+> diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
+> @@ -139,6 +139,11 @@ int os_close(int fd)
+> +int os_fsync(int fd)
+> +{
+> +    return fsync(fd);
 > +}
 
-The other functions in this file (disk_blk_read() etc.) have a
-function comment. Please can you add one here, mentioning that this
-flushes the whole underlying device, not just the partition? That is
-worth stating at the implementation, not just in the commit message.
+The function comment in os.h says this returns a negative error code,
+but fsync() returns -1 with errno set. Since blk_flush() propagates
+this value to callers, please can you return -errno on failure so the
+caller gets a meaningful error?
 
-> diff --git a/include/part.h b/include/part.h
-> @@ -454,6 +454,14 @@ ulong disk_blk_erase(struct udevice *dev, lbaint_t start, lbaint_t blkcnt);
-> + * Return:   0 success, or -ve error number (see the IS_ERR_VALUE()) macro
+> diff --git a/test/dm/host.c b/test/dm/host.c
+> @@ -62,6 +62,8 @@ static int dm_test_host(struct unit_test_state *uts)
+> +     ut_asserteq(0, blk_dflush(desc));
+> +
 
-The closing paren is misplaced - it should be '(see the IS_ERR_VALUE()
-macro)'. Also '0 on success'.
+This covers the direct blk_dflush() path, but nothing exercises the
+partition-level disk_blk_flush() path added in patch 2, where flushing
+a partition flushes the whole device. Would a test for that be
+worthwhile?
 
 Regards,
 Simon
