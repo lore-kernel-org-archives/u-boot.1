@@ -1,123 +1,121 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D6CC53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 21:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BEAC54F51
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 21:56:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 18C2860A7D;
-	Tue, 28 Jul 2026 21:56:54 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A8VKi54d35zl; Tue, 28 Jul 2026 21:56:53 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E65B260A74
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785275813;
-	bh=J+/mtLWnpvaKlgzTb9e8BfiXNckpJ/cvKs/+yTOPna4=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ZsYS4mVYLTJ182f/YF7FhIztzqSd5X8EM12RZ6fPTzBu3R+Fiz8cLJbdrKppjc1+b
-	 yRmWhrkfvbEY7y3wXuozl+vG6KFTyJ67C2vYmwgBZu8gu1fZAuGdIf2n/ReywH67vK
-	 0BFqKKd5aiO+Kwn4BdZ2BEAWJmiTCBRpwJmctVxMGVQ3qlRYIQvo/BJxQkL7U3fPnf
-	 BE0DLufi+jjofdnBvfHOtLbJg0AUEQklU4jJq6xxw54DlSi8B6Nrqi83+TvvmaCPE+
-	 W1FRRIZ/vL0kUf5Cnp4L1244FMUg0PV4Mbm724qvRwhodfC335meMM7FFv+ZjH4/3h
-	 kI5q6fMqM7zYg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E65B260A74;
-	Tue, 28 Jul 2026 21:56:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id AB0D22E5
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9C77C8144E
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C31B78146F;
+	Tue, 28 Jul 2026 21:56:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U2fIO-v_jAoH for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 21:56:47 +0000 (UTC)
+ id bLzPr5swxdY4; Tue, 28 Jul 2026 21:56:55 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 291248146D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785275815;
+	bh=jSMm9Vr9GVkOH3IgKom+XXX0XV+K9TJ/HGv+NSlBBq0=;
+	h=From:To:In-Reply-To:References:Subject:Date:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=eOB9ZbJZHEXi9F0SrdmVYst2Ntn1jGCgFsLnXAEBuyzSuowkFBCqEUpS9nMmnRd3s
+	 SUu716nf9oFbkichiijZVv/uFVVhYQxEBc9zhuqBE9lzS9oU4shxVIAn+F7yrdz0+C
+	 ZEfSE8oVJPjvg4jEOkLCvYR247XHFjLWqUwOuiPaowVs6iJhi/Ok8ImnBp7BPZklod
+	 +r/4cgS2OOwysPSUS/j9QVY7QYEI1V6cZ8Jaa5GO6de0DBX9asp0YNZoqc/irXLrRq
+	 R+20DmdtDlDvvarF4Mqelw3kiHFMypVxxWEoDeMU6vSBxrCyvVL5nDHw1wVywpKAnb
+	 3qzfR+taRqwDA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 291248146D;
+	Tue, 28 Jul 2026 21:56:55 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D169845B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:48 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id CF242401E3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:48 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KBd8geZYt4QO for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 21:56:48 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2607:f8b0:4864:20::335; helo=mail-ot1-x335.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E930381290
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E930381290
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org D251140051
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D251140051
 Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
  [IPv6:2607:f8b0:4864:20::335])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E930381290
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D251140051
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:47 +0000 (UTC)
 Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7ebd88be784so287113a34.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 14:56:46 -0700 (PDT)
+ 46e09a7af769-7e9ef94c0e2so224595a34.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 14:56:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785275806; x=1785880606;
+ d=1e100.net; s=20251104; t=1785275807; x=1785880607;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=J+/mtLWnpvaKlgzTb9e8BfiXNckpJ/cvKs/+yTOPna4=;
- b=N8Sx08aULs7soOQAyH3/BGeRfgLwY4N0rQLXGagV+8dW6C7YLu+/9u6S+D55SkculO
- jGYn/4noAOnsuMN5giir1236Yetkl+IEv++uNSkzpC56XaUhliuknQxq/JgxPMVML9Je
- 2rCuy8NtcDaLvHUVi4hOp4OI4sAt3JP6fJm9ScbBB+hsm8742+AToVdzFZIo2R/qkiDX
- vtORs2qI/jF8mIUUt5Zkb3NP9lMpv0KPr8Jcfws11sdphZ4IKzKdGsEwALW9bxqxmrGz
- G3zLFa/2jTohzaA47gydHmOC1cmVUhdlxxal1fwpjYr6Xfx5ylrJ/xptKxwjBii2hTHn
- cgzQ==
-X-Gm-Message-State: AOJu0Yzd8SOY8rNSul4W+WySIzJQ/8LZH8C0hLZdRZ/igBrFP5LK5ZIa
- ayW3AfP+b+V9IR886akWwiImQFjILKgJloY3zV30bmVLTXIvS4M/oUEqvpBAuiJh9Y3CN3/jo07
- oLTpOk3o=
-X-Gm-Gg: AR+sD10rSyuwncwRvnoPQ6Yu+SYuoqCCZiKxF5RQ5CS963Rh9mTBBr17i28Z+ZDTGE7
- mTyVqlhA+EjjYJc5umLbPJ4EP0hko7CgnzyWQ1BsDqeCKTTMazmWRQ17zHPXOm0duFkODkQUonZ
- +gULiEOVwjLr3einhRG89UUHLfQjM3moRSeiHiS8E0og+QsoSmLANO2mxQs7HQmbKrEDb1fxvxt
- utTSFeW7qM+OlqRjXgkPKqLYcmqL6q/UB4pFSKdbggoW1TTD8Y9fc6YJRXs7BvHWfLo0nzguSuA
- HK13how1ZQ2SoqlU/xlwvGqdmY8nDzPvkkVRQroUx5b6prkmOBQPrLgLQ2/DCosrA4KS0JA347H
- wtjdp1g5zGZRcZ+OYCo5HCzPSo0w/qBcNyNkB0ejJlbijV8OMIvuFdagFugRZYKas2jRLS1RRYH
- Pbmbe6I5+tqeLr42jXJc+E8AE0tGuk56LaJ2vrqMarvJ/4LJbxrxhg+wK4pv3pQDFvB9c9V2m5K
- jEuXioe/WcGQY31+1TRUHPtCPs0ZEiuPi4YuWPmoz2hE8n+t2LhCiYI/JGVo86vFTHpHXZkDtc+
- uUZGps57dQ==
-X-Received: by 2002:a05:6830:2653:b0:7e6:e114:899b with SMTP id
- 46e09a7af769-7efff26f0dbmr1970334a34.21.1785275805779; 
- Tue, 28 Jul 2026 14:56:45 -0700 (PDT)
+ :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=jSMm9Vr9GVkOH3IgKom+XXX0XV+K9TJ/HGv+NSlBBq0=;
+ b=rEO9+Wtq8AG4Y6AZmWfVRentU9WVS+R9Ts8k7PGEpP9Fq2Q/kR9h6cmvoySX4ozSAq
+ nEupqhOnlmqiFuN3ro9s6rdsr9R33P9dp28bGHyuz9l0VXf0fHeWtJOZXdG7Ce3Wx+ni
+ H3oDxLIhN8QcrJO3+wgZUxVtqiAh4ffMDtado4CVB/BHvi7LJT3FBSBcVA2Ve4XNeCfx
+ PPj1lTqYC+bWBEVsAwnVFKt24gVDHLVSzro/nTEMWcRWM4PMEHXQBVg2tHezRwD0Umiv
+ ExhzJvxSJFjCSYCv9kH3fgU/IDAXRJE+ewOOiHyqMQmShJrF3DAVhq9OPxWTTPA92AMI
+ i+Uw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqArjwwI3fbBm0hLDEo1ZehEeVxWuODoH/SbgGIB3QkjUMdmhEXza+9a2K9smnonTfTJxiG07U=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxNU9J2W+PQCE9S3F2xIoEItSrPT0MZI0rU2Rk7SM+HJOWbyyid
+ B/Y5gKBkYOTVfjpYAbYZjKsEOUPYDCOu0GECNt3i66VvvrinMGq3dis2oHXCiZeAAGA=
+X-Gm-Gg: AR+sD12OWXCov2M39x0dpJsINxBpgd8VXYTiZxUXISLLAnU/qGsITLYdwDx4bnalf8Q
+ 2K7J5pA88WRmY24uzcK8Z6peua4XOCFyrY8w1i1R5qFcsIp9Kre0ObKVpwHu8LqBD7ujEgkYK4/
+ COwZQMgIMc0ZBnvGeflmKU5hhL6GNekYhcuXT4O8MfM27h8+rFkW68j4k3MqQw8Sjl7c8qclTYU
+ KNKCpw5VAdHbX3bz4tsHk9RIDyrMmxLQyOHTAikZM/C4hoa4qVMw/nFJIWeSRSYMnwEf9bWEedX
+ /8/LQTo2eu2YlcgjH5L0/yMykiBy7AqbFKw3pBNSxKYkYtdV3jM+PNnDa7rYexgn+GV5BcW5278
+ bz6YEW5lvp3OXfPE3FiS+ChSxyMXPlFUx3c1QaIAIGuYRsmOfFMOpwKTX8IAKU1rTSR/oIrnJkF
+ q0LsXNCTI1sClIdZMPBC+EGV5MwbvJz8l0nUNbimdyL+AlXlcMGipam2lerD0M4n4Qn7ArYrCBi
+ VdaxoCbgaIVp7KiidVkaSSKBY8C/uJGgkCvjm6BEG0k2QnH1SFsoBF58KLrMxx9uRQ+h7JGWONo
+ s2A/RZLH
+X-Received: by 2002:a05:6830:6085:b0:7e6:f406:2cfa with SMTP id
+ 46e09a7af769-7efff26f0e6mr2362641a34.17.1785275806726; 
+ Tue, 28 Jul 2026 14:56:46 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f00d2d8112sm780106a34.0.2026.07.28.14.56.44
+ 46e09a7af769-7f00d2d8112sm780106a34.0.2026.07.28.14.56.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 14:56:45 -0700 (PDT)
+ Tue, 28 Jul 2026 14:56:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, 
- Caleb Ethridge <Caleb.Ethridge@analog.com>
-Cc: malysagreg@gmail.com, linux@analog.com, philip@philipmolloy.com, 
- Caleb Ethridge <caleb.ethridge@analog.com>
-In-Reply-To: <20260716122649.646-1-Caleb.Ethridge@analog.com>
-References: <20260713174726.12157-1-Caleb.Ethridge@analog.com>
- <20260716122649.646-1-Caleb.Ethridge@analog.com>
-Subject: Re: [PATCH v2] arm: dts: Add SD dts for the sc598 EZKIT
-Message-Id: <178527580495.1742553.14428422549722679990.b4-ty@konsulko.com>
-Date: Tue, 28 Jul 2026 15:56:44 -0600
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, quic_timple@quicinc.com, u-boot-qcom@groups.io, 
+ u-boot@lists.u-boot-project.org, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260715173000.178392-1-aswin.murugan@oss.qualcomm.com>
+References: <20260715173000.178392-1-aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] serial: avoid redundant early UART initialization
+Message-Id: <178527580591.1742553.11945741838403288750.b4-ty@konsulko.com>
+Date: Tue, 28 Jul 2026 15:56:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785275806; x=1785880606;
+ d=konsulko.com; s=google; t=1785275807; x=1785880607;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=J+/mtLWnpvaKlgzTb9e8BfiXNckpJ/cvKs/+yTOPna4=;
- b=cfrl2YQQEZiz13vaNIEKHoehwfv5+uumjKHPa7d4MeRP2jw/6PfSC6ZePMrBM5UAx+
- 9EfGoT9KfYK+kx/Bw29CJ+J8Hj1Cp4LGiwx2yPPgtqfMnPMN9rtHrWG6SmNjP0oZyXhS
- ShEM8Nzs3DUYtkYYp7bpFyPpVIyKtvzbBSePM=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=jSMm9Vr9GVkOH3IgKom+XXX0XV+K9TJ/HGv+NSlBBq0=;
+ b=S1hAnbVl1sLipctlhVCRrWiY0SDN5d5oO5ntE+1K915THkICErB1hRizIRT7y9FbUs
+ bP40Sa2oN0Jc7eAZ6Xf5Di0pgY9wmAZyQ8UgXRpjJ3Z3+63i9J47MjttzEtQpsYRob7g
+ Nr+BhDiX3+bVtxQfTmScOKSI3JpscRkxGI32k=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=cfrl2YQQ
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=S1hAnbVl
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,22 +130,22 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu, 16 Jul 2026 08:26:49 -0400, Caleb Ethridge wrote:
+On Wed, 15 Jul 2026 23:00:00 +0530, Aswin Murugan wrote:
 
-> The eMMC and SD card on the sc598 share pins, so they cannot be
-> used at the same time. Previously, this was managed with a patch applied
-> by the relevant build system, but patches are brittle and have to be
-> maintained. Instead, they have been replaced with two separate device trees
-> , one for eMMC and one for SD card, which inherit a shared base dtsi.
-> The build system can then select between the default device tree which
-> enabled eMMC or the other device tree which enables SD card support.
+> When DEBUG_UART and SKIP_EARLY_DM are enabled, the serial console
+> is still probed before relocation even though DEBUG_UART already
+> configures the UART and provides early console output. The debug
+> UART configuration is sufficient until relocation, making full
+> serial driver initialization at this stage unnecessary.
+> Furthermore, the initialization is slow since it runs with dcache
+> disabled and is repeated again after relocation.
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/1] arm: dts: Add SD dts for the sc598 EZKIT
-      commit: 1a86b8764f8fc13599faf247b4d2f78b4fc6cd3d
+[1/1] serial: avoid redundant early UART initialization
+      commit: 8eb3f9ef9e0de0dcea4aa85d770d6aebdb577f4a
 -- 
 Tom
 
