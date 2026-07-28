@@ -1,134 +1,134 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9914CC53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 18:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E03BC54F54
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 18:43:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6351360A43;
-	Tue, 28 Jul 2026 18:43:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ECDDA40A5A;
+	Tue, 28 Jul 2026 18:43:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id q6Bau7A4buKN; Tue, 28 Jul 2026 18:43:12 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xijf5J6bPOWY; Tue, 28 Jul 2026 18:43:16 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 21E71608E7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3756240A2B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785264192;
-	bh=ZdMRoGanBenlWar7anM5kYk29EgCRNz/Yy8a5dntie8=;
+	d=lists.u-boot-project.org ; s=default; t=1785264196;
+	bh=ho3zMzGx42U5J6sru+edumC4ag9UyhgCwhcR1yznaWw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SnJ6qXyvQrAY/qT/EMQr/ZniHWVtpGGzgDKozXshLCc649iYKFTXXqEAhg6RlMNu6
-	 pcPGtH1HPTGnOrRMyGNrFir5BLvKzWQxAWoZ5j2vyIGXmO38jjRMgf7IfcdcozYHyA
-	 nWzXORLUxj/1fS5kPC+qLMPUkIVGC0hRrmVOlHgFA0LZrjB606+ricl8pUBG2Yoazr
-	 qTjbA/1L2KoO7nlXSRXBsE4CV973Tg5XxEueRKOO9RdrQljjjSfV/UIO1bqm3wnWbX
-	 nCjuktNXP5bXPu5RIMnshk+n7mBKzfnI80FvDisbDtHyHNSgs3FEeys8piVhF7KXmY
-	 NwbU2Lue96G6w==
+	b=KybNBg4/aWMt7aquWt8wBohNeF4HONvzbT+2h/vhDpdnrS+4dLnGV87+rOBSXNBG+
+	 /AQPG1xLBHYhvRz0xU1Q5/wyjQII8n7kLQs6o1aWOuO/aBUK/I+2tril3v4cudZ7T+
+	 mCG1D8nvuMxmUJT8EKPbLOxLOM7D+VqMX5KSq8DgvXZEltifICf8vYPtWd7sEpcE3F
+	 LVpPsLBGkSt2MW5MelDiLHNiV+DIBv8ZKozttlVlDrhvV+saBKumnM1HWt+bcJ29It
+	 QFzJsC6+jb0XNcuB3Y+dDgj5naCngXQNb+NpyJtmT+IFj1/Q7AoRIBpe2sZh9MWZY5
+	 4f34lg9WKsqCw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 21E71608E7;
-	Tue, 28 Jul 2026 18:43:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 77F0426C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:43:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3756240A2B;
+	Tue, 28 Jul 2026 18:43:16 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1ED524BF
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:43:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 69DFB40394
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:43:11 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0E5CE60A37
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:43:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h0aXpoUny3zm for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 18:43:10 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yndMklxjwzSH for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 18:43:14 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
+ client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 405794038E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 405794038E
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 405794038E
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:43:10 +0000 (UTC)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-c15ba3a2b4bso16510666b.1
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:43:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785264188; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org AB0EA60A3E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AB0EA60A3E
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id AB0EA60A3E
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:43:13 +0000 (UTC)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-698acd36d67so144556a12.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:43:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785264192; cv=none;
  d=google.com; s=arc-20260327;
- b=WSn2k6LOXugJBPBPksdKbhtcoKJTYJAsjxImMqGJa6Ov1JWyiVX7Wv0hxIgEr/XHmB
- oJyvQWxjA0wFz76bS5J6Tp46qzXP2Agqzl235NSOe96yOfx+aneA50i56tpc+DJLeiiw
- 6hY0LYu/vsP7XpXhlDEgojMlPc4PErgVyfifHAoIUXCBtykW37rW8n9ayIQpd6T+baGx
- 4ZQi9LspNcfvNRAmCYTVJ3ymN6+lmSsE11JPXZlKL8SHd1pH28chGRA+M4fUiKgZlObQ
- 5l8t+JptRtddJYUG0G6fn2VVd0moex9dEGhFT9NKVIAUuVAhUI3584q3H4HEif+AEuiE
- O2+A==
+ b=i1kRAVQA46Q9+jC69AKaP5Ppl/mSc4o5zl3b8SsHGei9xCDtApwdN4wUagwC53MHvu
+ IRjHjLuXfTmNKteiFqOcpofPPIPVmd2ydcAB5chNwrmYN2xwKf3/bsSVHQfhlEOIANdK
+ jphoybDtwMBkg0PXRdW2X/D6dbstuSCs0dJ2dpY+g11mS674EVdP9q3NthvYVGRGWlSa
+ kSQERaASC2yqQGI3K2Fk37VtcmGdC8yG3BGr+dnfqjeMQ0Who17AIvyasMdg3BwO/OAb
+ PXNzeNsl65q7UrSzkFBBWvswEQqGP88MCoGp5MSXxnRTk2w5yPLCgxQwJzcRWOzAAqV4
+ YsYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ZdMRoGanBenlWar7anM5kYk29EgCRNz/Yy8a5dntie8=;
- fh=KPCGqPWm+Awm/nZxSO85xv6ul+GGgZRPQqXX2nGcrfc=;
- b=FpNXSq+Uj8IMOsIWrugLxrsNVSHNsB9uFxFVj/hwMEodWKwgueytbh2Make30Nk4hG
- gVzmTZIMGxwZohBzBAmQUOspesAgj/m7cx4/+NFedIvixDjEdGPIWkwvFyMT0IGDP5/2
- lU7yJb/G7xQ5KJMQP0gjJrqBnj69G59jvfbflM8meVNVVF7gUOhgZ5FzsXExn/lo/IsK
- rmPjM1cRfw0DC7zoYwLcryvFwSwWcX3hjibmpLi2lpTvO7akqkt/j2Ty0K6w0tvVkQGg
- Frj1158wfHBtg6fH/2yaUDevjzVIan84KW+PoutZfE9xPPeFxnVnpURjDlfnN+KuUOr4
- sbMw==; darn=lists.u-boot-project.org
+ bh=ho3zMzGx42U5J6sru+edumC4ag9UyhgCwhcR1yznaWw=;
+ fh=vQkykPx1R4jk+N11ZqVs9o3Tv8swObzl+A+/Iw/9MYI=;
+ b=Hee09iSLKWJ7rdBXNVREEvloHvf/Cy1tCfCA1ZEqkYD14o6PRLoedCJPDIaztZCM8t
+ CQVzMdLNRiGg+juaUm1B5UpT+SETjNSVHRoQqSS5KDakBHu2sRDtwZyC5VopV/Pugv2m
+ 0UaWuo0DbMus3v+TwHi0DHbI6nZooilYsHyJGWyBKewOU7g7r1tGF9Vj8ZvKy+MHnEHj
+ E810Sgl0PgqC2QPcL7LvPm7yj60abx7MqZRe/gxsl+w9Ro+qgUkxykVVD1LvUy1EX6h0
+ pf0r+7rXp4VFWWxF8wPvfMIdlHqbatcjGKacT/uEZLF42SDnTJo6ywWnbmBAgm8q8So2
+ 1oNg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785264188; x=1785868988;
+ d=1e100.net; s=20251104; t=1785264192; x=1785868992;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=ZdMRoGanBenlWar7anM5kYk29EgCRNz/Yy8a5dntie8=;
- b=XErCqhrGBJjpQlP+9V8M5KTxD3dnPed7nCYGoYtKg4E96vnthmQjnb41oL/LGPw0tM
- SqxQ2A5vkWxN06NviI+S0Z2mjSI3VmYZPhIy50V/TZwq90FzZ7w/w8lmWYtWu2gFcxIP
- iq/y0q5GBKE3jgCG+ZFK/OYJmNgNhdivXYq6TdhJHadE9X6bKJIGkhAZqoXG7aDTrVlQ
- MEqr3+zbQBLUlsqiWL9QOawXNqcJd1SCqa6dqJxeG4Rdmp7LtzA5CKeohmgiydJBRA75
- /mYhBzs3kB2hnIinNiEBaAYxPkNVmH3uoN/n/NetoydzVE6b0K/PYiIXHEP00pamb4ZR
- QNwQ==
+ bh=ho3zMzGx42U5J6sru+edumC4ag9UyhgCwhcR1yznaWw=;
+ b=k5PhaaZXEwgWzDrdMhDnzVlTiU7nUWMJ8gb3nNGjlOlXgFnkIwvh/sR+4gTAEVXljY
+ YMTqL0l5NQDw6oPvXIEyLmBa7G3K8czekZ0oyd5EVss3gPOmO9kjs2Q26LEPHSeYM/CV
+ FKubIbf9ywD4WcNPemn52l3omlmg1uZMRU7tlUyQgVxhKE1H+49LuBHmmlJAFF5E0qQv
+ 5ba20nUOnyNUuAf69tdtX9BSxbTTjlCIIEdnvVtPcEOPnOIvNElIn18zIaF3BjvbOTsf
+ EFPvv6thivodmpFd7FuqdzS+PPSxKvOUgo+fUzCL3LHWsg9zOq1CngPY+Kn/vE8r8cB/
+ dl9Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoKcPlrnP/V7ailh9iKueNwOuez44nYYlNQB7AF3CnWX8XhGc0ZGokNYhauS95/Sj01Sz7Pa5M=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxST6BSwuAIhmSsJ9UOuHQlUEP/k8Yus5GSVlEd/Rr18PSWvkR0
- QWcLfW0X6HaZCHbdWGYKI1ke5o50KdjGnT2AebEqATHnec4/RQAJ1nfs//iLlBIvnxas60yEegx
- 5Ll7NK3SosLpp4fsSHV/Aynw1854gx5yyzZo3bCyZ
-X-Gm-Gg: AR+sD13ErmYV2o52H/bmVdPMBDX+evjlyfz4Mv/wiJ0tfnRZTU5YIl3pbABNkQzZAs3
- sQz9mdGTcpDMXo7En16yRXAunsYzqzBqe2DszX6jKVqCMSl6IiVLatGJIxfpGz8EGBlH+AgvTYM
- Tj6gH2loMmwehirRaDoAiGPkKU64p4iItzTpVlTTL/u/2GeLRW9Wv8EWv/tbJRZndU2HMzuUdRD
- 14yCwuI2RmWWmAN+nBh0IroZhq6MBNMMgB80TucQPzkeDY+DA9juZl357Gn
-X-Received: by 2002:a17:906:eece:b0:c16:12b6:243e with SMTP id
- a640c23a62f3a-c1f72142e48mr220078266b.44.1785264188279; Tue, 28 Jul 2026
- 11:43:08 -0700 (PDT)
+ AHgh+Rrz85V3XjdAQniHrUfVTwhRsiCtyx5+6pMicaierBwZBsB0e3zz1YnUAZ5JGLGRFs94/kQ6tUE=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yw61ElSc84RtmdQoEyrVZ6fUO9OxCh+OT63nWucB8Iwj2q6YVI2
+ Oxh2kU6M8Dg60DbM3kH1cWudknWgZKysAF+/Z0G0JmE1Stjo0OESfrdBMyvV/koGFkJcnjoju+q
+ vjv8ZvT3uhBK59d/OtlNbGQ41iF3e1X7Q3NE4t20+
+X-Gm-Gg: AR+sD13HvIarh+lzo1NI5AB8lyD/VamojakhkJg6EkJC9dRr/3Z7Ns5Fz/5bB5xrzgP
+ CV0WXdgYc/pC66G6AA/39dt5hkfJcN3NuZ4TVK92HQqRQ50gAHrUr1cbflXiqTyTT3Ja1OgGtoA
+ Kg4W5GP906znVbO2c8+7DkOjUphHcC33AgXGIiTWWjG8bEtdAZBho/ddPVVUyorjx6qA1zxhaGm
+ dH7bvNrvvmcADEu8uVzU1hfZVnuc7s+SMMsWkQ9rjlP0ei2EwC/4XaP/FlpR0I4xo/UgVM=
+X-Received: by 2002:a05:6402:5045:b0:69f:4c65:8682 with SMTP id
+ 4fb4d7f45d1cf-6a0349f6ecemr1610882a12.4.1785264191743; Tue, 28 Jul 2026
+ 11:43:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1784601041.git.daniel@makrotopia.org>
- <cf2d647d26ea0850ead5e09fb5d683f92aee4cec.1784601041.git.daniel@makrotopia.org>
-In-Reply-To: <cf2d647d26ea0850ead5e09fb5d683f92aee4cec.1784601041.git.daniel@makrotopia.org>
+ <172e250a6c6c90ebc406568cdd8c6195ca41b9ba.1784601041.git.daniel@makrotopia.org>
+In-Reply-To: <172e250a6c6c90ebc406568cdd8c6195ca41b9ba.1784601041.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 12:42:52 -0600
-X-Gm-Features: AUfX_my6nW2FrasWDoJi_VbuX-3GXZrZj_6_-QK1M9rLr4lPwJMc-BbP5nvnUGM
-Message-ID: <CAFLszTj75c45QMdEk4zf9ckgX_CPrVYeQWY6pZ-kbx-KNC+Fug@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] boot: fit: cover the dm-verity roothash with the
- config signature
+Date: Tue, 28 Jul 2026 12:42:54 -0600
+X-Gm-Features: AUfX_mzSr2a-FOc3rdM0rtis2NRzTyOmheo4bkKjnZTz1govTpMd8mw6dAh0fP8
+Message-ID: <CAFLszTjoV1zrOJLn0T0oJb8TUCWJvQ3Fec7rwU-vLDbDgLEicg@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] test: fit: verify dm-verity roothash is covered by
+ the config signature
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Ludwig Nussel <ludwig.nussel@siemens.com>, Randolph Sapp <rs@ti.com>, 
  Francois Berder <fberder@outlook.fr>, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785264188; x=1785868988;
+ d=chromium.org; s=google; t=1785264192; x=1785868992;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ZdMRoGanBenlWar7anM5kYk29EgCRNz/Yy8a5dntie8=;
- b=SirDwqchSKsnQcrMyXRVTJzCRFaibqn3roT6gsjDRnJLLPEqbvqiRKch9Ax075dyUH
- 8511y9qyQea55V8bbYi/LBPomXokEm+suSAYL8rpIu+F4O6EVw0X+N3jzhC8wgd4BYVd
- g32QP0MQ+BuN/Znn9JoM8pBWVue94fVma7BiE=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=ho3zMzGx42U5J6sru+edumC4ag9UyhgCwhcR1yznaWw=;
+ b=VQpIawpizS1obvVJkF23l39z99WuBKbAZ4bRTX2eyth2juAvHc5mwTaRThyAiyKdec
+ X5FWPydV7meyFL4d3VjUFQGqrFZcJEyoC591aVaR26ScTepDHJwH+m9IhT1ZiRe0v/GJ
+ UbcU9AJ6pIV4kRUSbow2inFGxcaL8MJF1ctCc=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=SirDwqch
+ header.a=rsa-sha256 header.s=google header.b=VQpIawpi
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,33 +144,43 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 2026-07-21T02:34:47, Daniel Golle <daniel@makrotopia.org> wrote:
-> boot: fit: cover the dm-verity roothash with the config signature
+> test: fit: verify dm-verity roothash is covered by the config signature
 >
-> A dm-verity protected filesystem image is not hashed by U-Boot when it
-> is loaded; its integrity is delegated to the kernel, which validates the
-> filesystem on the fly against the roothash taken from the FIT dm-verity
-> subnode. The roothash is therefore the sole integrity anchor for the
-> filesystem, yet fit_config_add_hash() only adds the image node, its
-> hash subnodes and its cipher subnode to the signed region, leaving the
-> dm-verity subnode (roothash, salt and block parameters) unsigned.
+> A dm-verity protected filesystem image is not hashed by U-Boot; its
+> integrity is delegated to the kernel, which trusts the roothash taken
+> from the FIT dm-verity subnode. For that chain of trust to hold, the
+> roothash (and salt) must be part of the region covered by the
+> configuration signature, otherwise an attacker can replace both the
+> filesystem and the roothash while keeping the signature valid.
 >
-> An attacker able to rewrite the boot medium could then replace both the
-> filesystem and the roothash, recompute a matching dm-verity tree and
-> keep the configuration signature valid, defeating verified boot for the
-> root filesystem.
+> Add two independent checks of this property:
 >
-> Add the dm-verity subnode to the list of nodes covered by the
-> configuration signature, both when signing (tools/image-host.c) and when
-> verifying (boot/image-fit-sig.c), so the roothash and salt are
-> authenticated together with the rest of the configuration.
+>  - test/py/tests/test_fit_verity_sign.py signs a configuration that
+>    references a filesystem image carrying a dm-verity subnode, then
+>    confirms that tampering the roothash or the salt is rejected by
+>    fit_check_sign. A control that tampers a byte known to be signed
+>    proves the check can fail. A matching page is added under
+>    doc/develop/pytest/ so the module documentation is rendered with
+>    the rest of the generated docs.
+>
+>  - test/boot/fit_verity.c gains a runtime unit test that builds the
+>    exact node list the configuration signature is computed over,
+>    turns it into hashed regions and checks both that the roothash
+>    bytes fall inside a signed region and that tampering them changes
+>    the hash. It needs no private key, so it also runs on real devices
+>    and uses the same hash path a device would.
+>
+> To let the unit test build the signed-region node list, rename the
+> config node-list helper to fit_config_get_signed_nodes(), make it
+> non-static and declare it in image.h.
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> boot/image-fit-sig.c        | 23 +++++++++++++++++++----
->  doc/usage/fit/dm-verity.rst |  5 +++++
->  doc/usage/fit/signature.rst |  2 +-
->  tools/image-host.c          | 21 +++++++++++++++++++++
->  4 files changed, 46 insertions(+), 5 deletions(-)
+> boot/image-fit-sig.c                        |  14 +-
+>  doc/develop/pytest/test_fit_verity_sign.rst |  10 ++
+>  include/image.h                             |  23 ++++
+>  test/boot/fit_verity.c                      | 200 +++++++++++++++++++++++++++
+>  test/py/tests/test_fit_verity_sign.py       | 202 ++++++++++++++++++++++++++++
+>  5 files changed, 442 insertions(+), 7 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
