@@ -4,148 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD28C531F9
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2928CC531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:18:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 04E0D409BD;
-	Tue, 28 Jul 2026 11:17:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E613740978;
+	Tue, 28 Jul 2026 11:18:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VDpp_yDlQtXp; Tue, 28 Jul 2026 11:17:33 +0000 (UTC)
+ id VDYcIz_3g0ZH; Tue, 28 Jul 2026 11:18:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 32AD64099D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1DE3E40964
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785237453;
-	bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
+	d=lists.u-boot-project.org ; s=default; t=1785237508;
+	bh=sHfXweiG1GFNWJwbmYS2xyQae1iPSsy8GZfHPYn/8qE=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VXNccfGtZrD915XT68GsGeDzBJLbs0Gkn/J/VI/o7nZ3KvUSWwAA6WMsS2LwG/LBf
-	 yvBh16IxgxNF7hHSp/5xF8XtepnMVQOlblvvyVdiTadWla+L2S+bBFcIsxEMLDKfxM
-	 ghlstUQ4ENiYsKQ3vCjA52fWrz0aHNz8E3qSwIqvOoPrXBLdNNxMHoXkCqb/7t8fzS
-	 nNdM4LN/LAHgV9zb5wL2gnF/ZH+qJbgQWmWCpGIAzjlHW6VYtVIfHcgRx7cfCoPGCz
-	 9JgVXDIKe4AT86YgSRn/2yIhoLPhC7A4zR2h5a8fxWTMRfJL8PLlTHrK9bCXx8ZfSg
-	 IP7kteOl+XjPg==
+	b=aRT8KT1qYl7VA9txw8FQBffmIrDpVE3aKNj90VbnKWTBP8gD+tdD4ZfFKDRcRt/LN
+	 1j+5qW49HW/U8241UkFGYGZERCaQumkkfbzZ0BujUrnrBO1CtdrpS3KUDcsPjFHJ0t
+	 Km+IcFbD7ilZBNukoL08gfNcYnN6LkDwZK3FT+VG9SGBSOTl/bJ//qP0k5jlDuSk61
+	 ymbyHecTkK9OvzfAy+YRguJOFC135teB3c32kLfunfDINqPW+7V85AxChxyGCRuwmb
+	 X+dJ6dlptX2fZpGGg0sTsYtNiGLy9AqX1AxlUsb07hW166R3UkXdko2DdyUoXfZqD6
+	 vke1aHD7us10w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 32AD64099D;
-	Tue, 28 Jul 2026 11:17:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id AB79942A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1DE3E40964;
+	Tue, 28 Jul 2026 11:18:28 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 13EF6350
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:18:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9D42F402D8
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:31 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id EF29960724
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:18:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0H67AFNUdOJ9 for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:17:30 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nSQF_9dBbc1M for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:18:26 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 55FA8400D3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 55FA8400D3
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 55FA8400D3
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:30 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A2B4B8494B; Tue, 28 Jul 2026 13:17:28 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF86D848BA
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:17:26 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-69fc2261f2bso4490784a12.3
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:17:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785237446; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 0BCC860674
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0BCC860674
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0BCC860674
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:18:25 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69e8ea2783aso5099045a12.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:18:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785237504; cv=none;
  d=google.com; s=arc-20260327;
- b=IV3Ze6+yzNy9vIjBUAgqvAErv0h60wOhLEtxTDU6DoLZtdGPVbJJ3yJyRpWFUdJMwN
- kgqn+QcobK3a64gAlur7+/naqYKle88fIb59GwyNSwqSl6COye87VqeQOuD2uJvoylLw
- RiPEQyCC+m4ZnBRsq+nQR8bGr+slym/xJy7wwrkUBLg5Pk8EFkx1qMf7MmHQsfh1W2Z6
- fNBb/ryEagLj02Ewjvtd1KKSiPfUUUWTqAtunC5aUJ5P4MheGuPJXQybTYCRwIo6yrdH
- 1lm/yPKJP/TiCXcXAxVBajetG3FkNgE2k2fNFH89Eb4dS1gojJbFApXeRVU2L2nbNJn6
- yRAA==
+ b=UkC5mysvi/VIzdq+LC7dMwrZdOWJqSUVldlNANxNsauH8v5Zdi1ffX8uSq7NdAdacr
+ GnzOi6IKbzx8WnTcaZ9+TxqLKQqIf+0zOtMn0RCCtyXQ8CmFcoVYoMABvAaT7pDLTv/u
+ /96RirooeCfQzu7w4FhQZFXLgU8BUf0+DzUmMEn3e60mApGuoJjRAZlJvrCZ2zNacsz3
+ hXgetJW0ZUNm0F+wSSMuK5au6ZmoOdpFSsTulTs6EWSeTBOS+vnHnOwvRT89jJiMgNAC
+ FPGPxQCHggYs8J6U4yEF5Q19SFz0AbJYFw/0jplc995PSIMzqPJ9COfCTDeRQqV1pzWw
+ 1hbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
- fh=runy5GsEaBbwYs4tLCkIDKGakFI3WhxP+HVdMM9V8MU=;
- b=du8WrLNT0pc3/td8A4yKaR1Ae4BJD6MYAKSNffYO0vcrx+Ft4pl+e/KkeOPzsotlnt
- TF6Ra2ZT8YOJJjqdlWk42d7aLdDZz2nkdaFCZTbpMaE6FJ+kHh0z13getxBHZVWpzhs3
- YS1H7rFNKzjnk/GVr96FmKs7GR9EFZBjJ4C+ncCepglU8bC+FWwVHHoFUXodFmfz+rxt
- TZZJDYA0hTowftSV8dla8ME0ZGTwQ0PGyNpPMAYZiDu+AFRZc3syTOZNJcskHHx5Rbka
- YgI9SZpkviujN2GoYp2LNocZqm0DNHLhHDUc5qzDjigzL99wSuR4auMU1mEZxdYwpi+A
- 3u/g==; darn=lists.denx.de
+ bh=sHfXweiG1GFNWJwbmYS2xyQae1iPSsy8GZfHPYn/8qE=;
+ fh=5M9cRk65zL3LcSWXE9L6dvoV0I5H5nNquwGkaMhxR1Q=;
+ b=gTQ6JE/pbi8tDi3mvitxhT5zq+2U03LSJFr8eirTzO6/5F1c3ZjTqQf4kBnFAF057m
+ AzGV3L9WyUAHhhHcWajb4NGVh18sqY5TjD7r6xGLFS1qF2g3vh4mkJKEjYAkSss5pvpC
+ f3RNlDvL09ceZi8tL8YdCXGbzzPdKpdNPrfyoksFSTZJ8wX9EiY/IfZEbuTYN0lru8ls
+ J+imImqjxzAbH44FENYHK9/daklGZljZyEI5IDJh9zg7r4AkSJyHuqkVa+oFFfoUejD+
+ Blsi9zT3hFt8CopV7aeSSxX2aTtDClRWg32nAVtOv7das0iuEcR/QlcdHjfkphdM+Oag
+ 12/g==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785237446; x=1785842246;
+ d=1e100.net; s=20251104; t=1785237504; x=1785842304;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
- b=olarz1uYAeOIrFFwNck9jJ9b9URhg72EglzXj+4i3tgzbeVzPNeJV0i9XuRJSvYQ1H
- fSn6IcfCyTjiKXqpVPGWXjM9hzzM8eWSHIjoTGyUSnSOkNB9nqrd9PqKiCq6Qrngp6nO
- IPFU1q/cmjg0KGUhA6pMm6/09Pj22DW2KC9/etMeclWzAzPI8VZkmBNZ46PrXrPDbyLt
- DkiJLnGQsvzD/wvBDdP/CXy689Y2bKVDZWaeZlwhMJ2o2j+kX2iGFOz6e4QiJvzHOF7N
- xdEIFQlY+WrK/MD6emR6N0QIgjqN8X/GOlL53TPJDgM41N3qPFyopmw4SoQ2mCIX7NnV
- 5WXw==
-X-Gm-Message-State: AOJu0Yz4Ff0AoRzG66U11s7+pE/P78ZBOieUDKZmaECjXCUKtWDRPS5C
- nbdLO0SrSyHK6lr+1U6kZdAtrXhd4b6sT90epmIc0757VZ/VGaAGedYbmRw7xtvgsLFwS08VqPj
- n6PccWqcBR2NEXIv1fQIR19PCIBOXrIEsyUBavnwJ
-X-Gm-Gg: AR+sD12tZkrC0tKYeNKYi7R90Px/UGKLJ0qvkZTKDF6q15LcaHke43L3MQ6UlHZbxET
- sUOVozHYW5PBou7c0cfwFBUGCWwDsZPvv6R+KNPADVOvpFjki1wvmRRwtGMTJ1iHPfhl44Iplh0
- nyP1n9Y65A7kqQhr6eKPNqx6dpeBwNmntshaiYDrf4x6zw0Vj7lA1PyFZVjQ81aNbkVF+cA8Q0O
- ks+dCZt3lJpEdEB7SkEszKUQnOZIhLMmkD2JMWJl+yH4jHw+76AFgDXXJl+
-X-Received: by 2002:a05:6402:51cc:b0:69f:e13d:b9de with SMTP id
- 4fb4d7f45d1cf-6a034a87c75mr1044862a12.36.1785237446107; Tue, 28 Jul 2026
- 04:17:26 -0700 (PDT)
+ bh=sHfXweiG1GFNWJwbmYS2xyQae1iPSsy8GZfHPYn/8qE=;
+ b=FfssNKpJhF4P0OCk/EV3PMepVLXA8n8l3nas0zqs3RQA6Yj/gsX/vhBlRTKGvEcQ5l
+ B4kC5IpSQCAp3d5o0cVI37RLzc3PRx17dSib/CYX2Z8lsP/BHIWpr3gQKByt9PTMIaUq
+ I61CJiWdKVHWbxnEv9YnDq4Pl29dFtszWdnIM3w276Zt3E2Z+g+49MTpfGcMaC0H4y+q
+ es2io2QQAD86MkExPMtk6oQLTtmBqMi7lzrTatH2sffFtH3IK4crtuAMoYSX8lL/Vcar
+ Pq6ZI6Ss81UCMcz/NATP8blcmG373NaFdm+Krtthv1iKzN4Wt25hh3GIuBiPzFx0GqY5
+ ohfg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoXLTeT08DDxgaC8wtekMXm/hi9EQkCmyaWKnuTI8ZUxAIqnzRuiy3blWgGxjOXyjBel+rjQ+g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxmAEZAu/7InphScN9JjVXN3ckfF1QPY6FaFREeaExLrMBCFOuk
+ d/LU/a04H5pdM2kKG8hlt98cXY91qsBg6wN2LZXv3TAMar2DUUJedHRnE8JTiiuPaWWRf+Fc/Le
+ baMzbiOTPp31Cvob0Rrlnusf/4Yrf0tMx/MIuju4/
+X-Gm-Gg: AR+sD10T7cGlLsscVXMGZTeCNZJOEYnRrRDb0CfJrTCdGtdBqoQjcBPNIEO41T6S/UD
+ j6H6V/5YSyyBuT4Q6td2hikN5IVd9NxbEztIkDy5DAgRBDIrxphzWKe6pO4YSbKvhWROfCpjnMU
+ nTcRy0jLo/DAVvpzKdHr9/fub5Va22sgAg/KDZs4L7bE9EXX4QoL35iNdrL1GYFaVgyqtQnVYVP
+ dn07Gq5F5bXvn8cWU0XO9y6hUvEApWiQoFdlUTV8/QHXjeKN6iFaNILlhnp
+X-Received: by 2002:a05:6402:194e:b0:691:7054:8c6b with SMTP id
+ 4fb4d7f45d1cf-6a034a9e9demr950294a12.19.1785237503930; Tue, 28 Jul 2026
+ 04:18:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260716223401.378989-1-dmukhin@ford.com>
- <20260716223401.378989-8-dmukhin@ford.com>
-In-Reply-To: <20260716223401.378989-8-dmukhin@ford.com>
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20260721152110.283998-1-aristo.chen@canonical.com>
+ <20260721152110.283998-3-aristo.chen@canonical.com>
+In-Reply-To: <20260721152110.283998-3-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:17:11 -0600
-X-Gm-Features: AUfX_mw52nq7MbYRZK-mIj4_UlMC-l3xeOme7Cj4-jQWzay4TJHWjXo-krvvYSA
-Message-ID: <CAFLszThCv+jZauSokXt4PchY-iTdV_O+Shx_icYWbCyDz2Nj1g@mail.gmail.com>
-Subject: Re: [PATCH v3 7/7] tests: add blk_dflush() coverage
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, seanga2@gmail.com, 
- sjg@chromium.org, trini@konsulko.com
+Date: Tue, 28 Jul 2026 05:18:08 -0600
+X-Gm-Features: AUfX_myOiNvcdA_raYPeYK1sKO8jzgg-enpZPCoNRJ60FRdSC8EorOeUFbBvCKI
+Message-ID: <CAFLszTiLg4VUv7Bm1aGWFq921MyqOZR1rJww2dykvCO6qOZGpg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/7] binman: Fix FIT image overlap issues
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785237446; x=1785842246; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1785237504; x=1785842304;
+ darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=4MnEwlCIIhB9u8xHq+o0/wAqVEhVaY5HS2KsADYZjDw=;
- b=H2QgCpKau5u0Bn/joUza0OoXU1iKNaarcOLsCVWFx6FVaY5Gav1YP1JHX1p329sERn
- IO7pW/CdjCbm0PlNOjdbYHI+vt+IJQCiFl20vR8SJxeGGSq+c77fRHZs2+SXlyg0nwzw
- O7jIVhPBtSy5DbnbnnL6ePU+cuixI6V027HNc=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=sHfXweiG1GFNWJwbmYS2xyQae1iPSsy8GZfHPYn/8qE=;
+ b=ggHgvpi8tuKR0P22OATT6FAQw+OrSRiZhQ7TKfvtuSJaJ73le7dlExcjHIBX03nvTF
+ QFvBcm9UHZg4xZ4v7neZbmZZs4KU3BrvZJzZr/6K5YW1YsFaD/NG0+9b4DrfBrMzKN2h
+ 36bned6Bp6bQ+N207kpEJNh6LF+Qt3i6D51Pc=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- spf=fail smtp.mailfrom=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=H2QgCpKa
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sjg@chromium.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="H2QgCpKa";
- dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=ggHgvpi8
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,57 +143,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Denis,
-
-On 2026-07-16T22:33:54, None <dmukhin@ford.com> wrote:
-> tests: add blk_dflush() coverage
+On 2026-07-21T15:21:05, Aristo Chen <aristo.chen@canonical.com> wrote:
+> binman: Fix FIT image overlap issues
 >
-> Add minimal test invoking new blk_dflush() API.
+> Several binman test fixtures describe FIT images whose configuration
+> references both a u-boot firmware image loaded at address 0x0 with a
+> size of 0x2e bytes and a split-elf atf image whose first segment is
+> loaded at 0x10, so the two images overlap in memory. The upcoming
+> mkimage load address overlap check refuses to build such images,
+> which makes the tests that run these fixtures through mkimage fail.
 >
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> Move the u-boot load and entry addresses to 0x2000, clear of the atf
+> segments taken from elf_sections.lds, in the fixtures used by
+> testFitFirmwareLoadables, testFitSignSimple,
+> testFitSignNoSignatureNodes, testFitSignEngineSimple,
+> testFitSignEncryptEngine, testFitSignPKCS11Simple,
+> testFitSignPKCS11Object, testFitSignMultipleKeyPaths and
+> testKeyNameHintIsPathSimpleFit.
 >
-> arch/sandbox/cpu/os.c   | 5 +++++
->  drivers/block/sandbox.c | 9 +++++++++
->  include/os.h            | 8 ++++++++
->  test/dm/host.c          | 2 ++
->  test/dm/mmc.c           | 2 ++
->  5 files changed, 26 insertions(+)
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+>
+> tools/binman/test/fit/firmware_loadables.dts             | 4 ++--
+>  tools/binman/test/fit/key_name_hint_dir_signature.dts    | 4 ++--
+>  tools/binman/test/fit/signature.dts                      | 4 ++--
+>  tools/binman/test/fit/signature_engine.dts               | 4 ++--
+>  tools/binman/test/fit/signature_engine_encrypt.dts       | 4 ++--
+>  tools/binman/test/fit/signature_engine_pkcs11.dts        | 4 ++--
+>  tools/binman/test/fit/signature_engine_pkcs11_object.dts | 4 ++--
+>  tools/binman/test/fit/signature_multi_key.dts            | 4 ++--
+>  tools/binman/test/fit/signature_no_nodes.dts             | 4 ++--
+>  9 files changed, 18 insertions(+), 18 deletions(-)
 
-> tests: add blk_dflush() coverage
-
-The subject says tests, but this patch also adds os_fsync() and
-implements flush support in the sandbox host block driver. Please can you
-split the sandbox bits into its own sandbox: patch, before the tests?
-
-> diff --git a/drivers/block/sandbox.c b/drivers/block/sandbox.c
-> @@ -52,9 +52,18 @@ static unsigned long host_block_write(struct udevice *dev,
-> +unsigned long host_block_flush(struct udevice *dev)
-> +{
-
-This should be static, to match host_block_read() and
-host_block_write() - it is only referenced via the ops table.
-
-> diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
-> @@ -139,6 +139,11 @@ int os_close(int fd)
-> +int os_fsync(int fd)
-> +{
-> +    return fsync(fd);
-> +}
-
-The function comment in os.h says this returns a negative error code,
-but fsync() returns -1 with errno set. Since blk_flush() propagates
-this value to callers, please can you return -errno on failure so the
-caller gets a meaningful error?
-
-> diff --git a/test/dm/host.c b/test/dm/host.c
-> @@ -62,6 +62,8 @@ static int dm_test_host(struct unit_test_state *uts)
-> +     ut_asserteq(0, blk_dflush(desc));
-> +
-
-This covers the direct blk_dflush() path, but nothing exercises the
-partition-level disk_blk_flush() path added in patch 2, where flushing
-a partition flushes the whole device. Would a test for that be
-worthwhile?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
