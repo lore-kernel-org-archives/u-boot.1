@@ -1,139 +1,161 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE6CC53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 04:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61355C53219
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 04:55:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1812860A6B;
-	Wed, 29 Jul 2026 04:55:31 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QgYJx-tqhxEp; Wed, 29 Jul 2026 04:55:30 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C5D5607D1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785300929;
-	bh=ag42QFn1QUhL2dUX5hQFSJeoKpiThHSFC9aoXPi2M40=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=rvfRyHcpUshZqO/1GASMY6WkQcO51DQqHwcxVi8S4SaR92Eu1K+OIKplv/0MEyDZR
-	 ZvctfgrPJ64dK9d/l8LoamlM7FCMRy5FZ11kOS8OrHuW2Vm2H7vdvZSWaimC/52yoJ
-	 9LXyXPY2TcmQyW9jsJalRQKfoPX2hwQHR4GIoIoSIkemQycizHqc6e67kWgos/AmiY
-	 1DmHaOX/4dAGzpOteYplwFjv23UnljC2bjWJ3U/brLxSLGUcpR0nb5s473SqLrD8Fo
-	 vZWmgSqcx7QFPfefoOj5dwAGZOSgTjlrHZ/81ZPEd+6nWYL3Q25USkDrsimbW3b92L
-	 D7QvfYRe63Zfg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C5D5607D1;
-	Wed, 29 Jul 2026 04:55:29 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E2D0D788
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:27:11 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D4C4D812AB
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:27:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2E833810A4;
+	Wed, 29 Jul 2026 04:55:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rMCFWrzJKoE3 for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 17:27:11 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=shofiqtest@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 844DD810F9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 844DD810F9
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 844DD810F9
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:27:10 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C6C68494B; Tue, 28 Jul 2026 19:27:08 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E7918404D
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 19:27:05 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5b01cb18515so3727278e87.2
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 10:27:05 -0700 (PDT)
+ id q55HobNg5kCF; Wed, 29 Jul 2026 04:55:34 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7EDB181068
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785300934;
+	bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=eL7oCHT6jf5aJqarl363Pu0Ay6adOFc0gH10qtyEFjR0qVLb9skbZ/4Pee5PRd50G
+	 NUxsGp6DXsR/3KmtnWhRyfek8PJjK3rmm9UfBROgBrQwVrU+wj7/LMIYyf4RocUjo2
+	 62US7Rx9Y4O9Cqfyi8lSyHQz+dZmZpNIQb6jgbXmc0lxJ/FJmKZ9RoOK7r98q9kJWm
+	 MPq8uOlDosVQOUIYAmSlPvmoINTCBtgsIqS7L6762ShJhm8BcSYCvsT6B18XycM3gv
+	 SsZgMu5KwsBZ8ibxg/7Q1Y4sVNg9uosRCOwYiuJ0v8VzosxIPThsbDwAzrTmn9DFYM
+	 q1UKQVQrDOo6w==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7EDB181068;
+	Wed, 29 Jul 2026 04:55:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4226B490
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:43:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2855E409BB
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:43:59 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OAwjLTeFcfXO for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 17:43:58 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6C9A14096A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6C9A14096A
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6C9A14096A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:43:58 +0000 (UTC)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7eb64085c45so123661a34.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 10:43:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785259624; x=1785864424;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ag42QFn1QUhL2dUX5hQFSJeoKpiThHSFC9aoXPi2M40=;
- b=tWvec+Mo11NwQvgBvcr666UGcBKJhVao16yXfhU6SrjzsHdmwzrwPiTKPJ8FzYCDJJ
- CqIXS6ykwQLv2YpHdhYGrp3aUFuin3T1B7M5cfYkTr4BCcg14WlghotDSp00csxee03q
- 3sMUVFLXqyB7Qevrvoju8oVWhM4lDcZUYi5aHEDftSYXI79yrU+UY0kKf083uoCKu3/R
- 9Mb93XZTFW55Eoe7m+BWNxvuCcp3crcaO52s383gIY1Btre9PQlm6hckzB1XnMG+R11U
- YodZ2jCn5feIl3Q39wFzwCVZb1LWb0vBltT049640NLtw6VaLpnGg1HGQsJ5oLz3AiQk
- 2RVw==
-X-Gm-Message-State: AOJu0YypqFi5HiTC8jRdpwn3ggwM58xI8PZjHpkzpy7MaEveXatTJS38
- H77bIXWcvVctLk15xS30i7geusrU4kSEZoVtJU3M3Nhq13uAIc2ncmKwQWQiJiQcJhdR/A==
-X-Gm-Gg: AR+sD11amCLJNYY9pIVGIMoHpR3sLFZz8aeCaz2J6lDt2BmmtdG6CmszdMB33nbYSui
- yMCaGW/Bk+9CbEDEfnifnAcm8lUU+g32+bRt46b5BTFftF0i6YdggQnSIW+1oazLxV5rkhX2ftE
- YywBtxN266o/oG7pZR5+U77Q/EmYVOZWQOMdCNnq8t2G/6fX1QAITjJi3Vwhb/jkufGCDOpu4j5
- b/gUrMuRZZOycrBhjiSdf7ARxVGVoTsqfzSI+4fMLHIHoyFshyl8jBIRkytdHDiwYN3kMmBGAcz
- uPNosJ4z5VyObofP2R58+ariElENL3Ok2+OUniPFiu7NeJ9mA/BoRLWDmGr4LFUl96IgbP1jC9C
- BZloM/g3vW11+OxaNOHQPMcl5c7rRvaxiiifOxqXSWrnHJP1hTyICkOvrp9Owy2HRrQ+G0hiZpV
- gkEyDy79gvv5rvR+EQQmISqnYnlkStY98lO7Y=
-X-Received: by 2002:a05:6512:693:b0:5ae:bb4b:9357 with SMTP id
- 2adb3069b0e04-5b2d0228e0fmr786763e87.27.1785259623996; 
- Tue, 28 Jul 2026 10:27:03 -0700 (PDT)
-Received: from Shofiq.home (87-92-160-164.rev.dnainternet.fi. [87.92.160.164])
+ d=1e100.net; s=20251104; t=1785260637; x=1785865437;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
+ b=gjxOZvz0k/KJAcu4ipYT8r09dleDSK1kniqqU66+0jT3j4ma2jNb0cih173taeYNBD
+ F4GkhnQgtDhqS6l3AdG9cJevvldk9YTUqKj2NjgNJtu8VeTr7We1OyBdNpkx7dTYWTD6
+ H6zsVyzGXbJPvZS1HKyNfu3qg4pSleApKdn0ZIaxggkKZEGgAWjgX7dyG5hCQh8EZu5J
+ MdqQxLvWjvhVDA51h6N1Kypkb1NHJI1/kTndQzjODoxdKtORwpvVkqkYupMmDafFCNoe
+ D9MHDXzFy9rKU9sXNk4CSRnsI5zlqbfYX1CQMIE8mSnMh5/l+9n+Ek/ditNCwTAAdkrr
+ m8Nw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrE3pHbrSLcrHOpWZPGSGg6wysIm0S0jtwf02ZjMsmC/FAntyiMxczOlG1CIBwVMOHd+6pEmak=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yx0v5TR7SS/b3IEL9S9CZcuYUD0A90eYa5fYusdM4GA1OkNEbFB
+ B1Ul6b912Ptfi85fjV1ewVaL1vGwupRkgPFt+wQkD+nlQihQQgJwfkA7
+X-Gm-Gg: AR+sD12SY3ZwGchSwyMxePK5Sqe2Pomyez/efOKj0VIgDYLgB7zA7RAv/1KwSTCubeu
+ ZelACBxv7u8O/PfvsnfKOWd0qy75bTUWzxRLqhWuz47Pj4lZODuQmzgPoaaRaK93R7hNKT0u60e
+ rlqikk8jWjlBVAU2zqRIhuhtVYXUGDtV/91ExLTXaRnExyy8JFv1q6W2ijMuIGNmTF4YR1JkH8i
+ 558ysIl/GpMHrH1quMdaB00mpytbnVvmyKjrXNqNk1A+vkRrKDUM6WedfWq8wnUFRnDQH239uTt
+ O4wlqrFN9P0SG3vzWjW6q7EGHoYfAIdyaQmcngbzwl4Nz0YyRdUFknW6UgFFXKAThj404jsKt2b
+ 6qPkS2iGL8b4LjMdgHmf9NcNtKLMF5XaVfFjO+VKDKlAyp8xO4DhEIe+WgoxeU47iY0hTHF/d26
+ wT0G8AkRfrdltGdE8S/Hj2gR8XBdZryGvObK1k3hUgxZjbkS1da6EpBHab0iuvJjYWAQOyRgLEt
+ qHO4NG4CmqNzCBYEVWdJbtgWGsyuvwR762MjYpG5LbbbZATZyyti26x
+X-Received: by 2002:a05:6830:6585:b0:7d8:b269:e99b with SMTP id
+ 46e09a7af769-7efff243e9emr1793668a34.17.1785260637245; 
+ Tue, 28 Jul 2026 10:43:57 -0700 (PDT)
+Received: from [127.0.1.1] (71-218-31-69.hlrn.qwest.net. [71.218.31.69])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5b2be1d863bsm2226842e87.53.2026.07.28.10.27.01
+ 46e09a7af769-7f00d94389dsm271103a34.21.2026.07.28.10.43.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 10:27:02 -0700 (PDT)
-From: Md Shofiqul Islam <shofiqtest@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Md Shofiqul Islam <shofiqtest@gmail.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Wang Huan <b18965@freescale.com>,
- Brian Ruley <brian.ruley@gehealthcare.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Heiko Schocher <hs@nabladev.com>, Lukasz Majewski <lukma@nabladev.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v3] board: imx6: guard LDB clock init with appropriate video
- config
-Date: Tue, 28 Jul 2026 20:26:59 +0300
-Message-ID: <20260728172659.387624-1-shofiqtest@gmail.com>
-X-Mailer: git-send-email 2.51.1
+ Tue, 28 Jul 2026 10:43:56 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Tue, 28 Jul 2026 11:41:44 -0600
+Subject: [PATCH v6 01/13] cmd: aes: fix DM operation handling
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260728-submit-ce-series-v2-v6-1-80c1f7daffa5@gmail.com>
+References: <20260728-submit-ce-series-v2-v6-0-80c1f7daffa5@gmail.com>
+In-Reply-To: <20260728-submit-ce-series-v2-v6-0-80c1f7daffa5@gmail.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
+ u-boot@lists.u-boot-project.org
+Cc: Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Thierry Reding <treding@nvidia.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Quentin Schulz <u-boot@0leil.net>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marek.vasut@mailbox.org>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
+ Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
+ Daniel Golle <daniel@makrotopia.org>, Francois Berder <fberder@outlook.fr>, 
+ Peng Fan <peng.fan@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Randolph Sapp <rs@ti.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
+ Alexey Charkov <alchark@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Francesco Valla <francesco@valla.it>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michael Walle <mwalle@kernel.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
+ "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Heiko Stuebner <heiko@sntech.de>, Vincent Jardin <vjardin@free.fr>
+X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Wed, 29 Jul 2026 04:55:22 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785259624; x=1785864424; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=ag42QFn1QUhL2dUX5hQFSJeoKpiThHSFC9aoXPi2M40=;
- b=Vn1xM0TDI/vw1QLAg3sEFCtf4SW0zczzggMJtzUdNP0CPOjBdH3QeRsPaWfQZdvIqG
- CoaQ3jvAAkfdwEk6ju0BeFBIiLgC8i2fyeOnJVaaHsT5gKCxXC07pGsWS9iPCcIR+mEd
- NIJu4lFG2KjeMR+gJre+IaUO8BpUw+fCGyRNjwmAVCVFlv+e9ZmEcXPzWGzozuslr6K8
- BOXAoZCB+617QGznx+YJousJg6nBEnlSxKZTMXKnwNl0rrvWG0XAlu5f0ZONGmhNpcJH
- +06paAeTUWTO50YFfMlQAh/6hxO4+ZP4aIlCwqAwYTmjw/n8XEo3gvbhVIT5yU0CZ6Ad
- 8WaQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=gmail.com; s=20251104; t=1785260637; x=1785865437;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
+ b=XtmJPz9VR0onytawKq3WNtk3qVzRrWWaFb9DLXCBTB8eZVJX+d2cs80td/IkiPFQma
+ hHxRmeqSRw9sb1ftKs35xJSeTpvwwxUfs3SxY72W8gBOhLysdcMlxbHjglsz51JiCeac
+ /gpjjTwQELad4LxME9Xx3wVQRMdGZJ29j9rNoPd3bla7nYbVpa57FTENV3uX8bmpHMAo
+ L4gbjMenjzsi0vY/E460Y++oRj/zw/ekHHSFqP9clazM8vTiWATRA4bOc7Zt8Cac5Cw0
+ d3ZCRV8N2fetVlzyiS6BJpKfYVLpsY1rObRGjBwD+cPOB4ZEIc9LBJVfXPVsI37nQkTh
+ Guhg==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- spf=fail smtp.mailfrom=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Vn1xM0TD
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=shofiqtest@gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vn1xM0TD"; 
- dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=XtmJPz9V
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,60 +170,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Guard select_ldb_di_clock_source() in board_early_init_f() with the
-correct video Kconfig symbol instead of calling it unconditionally.
+The DM AES command path takes operation-specific arguments after the
+common arguments. argv[1] holds the mode, "ecb" or "cbc", while argv[2]
+holds the requested operation, "enc" or "dec".
 
-- board/ge/b1x5v2: guard with CONFIG_SPL_VIDEO -- LDB init is needed
-  in SPL only when display support is enabled
-- board/aristainetos: guard with CONFIG_VIDEO_IPUV3 -- this board does
-  not use SPL so CONFIG_SPL_VIDEO is not the right guard here
+The DM path checked argv[1] for the operation, so the ecb and cbc
+commands always returned CMD_RET_USAGE before running. Parse argv[2]
+instead.
 
-drivers/clk/imx/clk-imx6q.c already guards imx6q_init_ldb_clks() with
-CONFIG_IS_ENABLED(VIDEO), so no change is needed there.
-
-Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
+Fixes: b01444aa14cf ("cmd: aes: Add support for DM AES drivers")
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-v3: Rebased per Fabio's request. Dropped the other two changes from v2:
-    - "imx6: clock: fix clk0/clk1 swap in select_ldb_di_clock_source()"
-      is no longer needed; the same fix already landed in next.
-    - The drivers/clk/imx/clk-imx6q.c guard hunk from patch 1/2 is no
-      longer needed either; that call site is now guarded there with
-      CONFIG_IS_ENABLED(VIDEO). Only the board-file guard below was
-      still missing, so v3 is a single patch instead of two.
+Changes v1 -> v2:
+  - Limit the patch to the argv parsing fix  (suggested by Simon Glass)
+  - State that the commands always returned usage
+    (suggested by Simon Glass)
+  - Add a Fixes tag  (suggested by Simon Glass)
+---
+ cmd/aes.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
- board/aristainetos/aristainetos.c | 2 ++
- board/ge/b1x5v2/b1x5v2.c          | 3 ++-
- 2 files changed, 4 insertions(+), 1 deletion(-)
+diff --git a/cmd/aes.c b/cmd/aes.c
+index 3fd83013ffe..edcd87cf11b 100644
+--- a/cmd/aes.c
++++ b/cmd/aes.c
+@@ -175,9 +175,9 @@ int cmd_aes_ecb(int argc, char *const argv[], u32 key_len)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (!strncmp(argv[1], "enc", 3))
++	if (!strncmp(argv[2], "enc", 3))
+ 		enc = 1;
+-	else if (!strncmp(argv[1], "dec", 3))
++	else if (!strncmp(argv[2], "dec", 3))
+ 		enc = 0;
+ 	else
+ 		return CMD_RET_USAGE;
+@@ -223,9 +223,9 @@ int cmd_aes_cbc(int argc, char *const argv[], u32 key_len)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (!strncmp(argv[1], "enc", 3))
++	if (!strncmp(argv[2], "enc", 3))
+ 		enc = 1;
+-	else if (!strncmp(argv[1], "dec", 3))
++	else if (!strncmp(argv[2], "dec", 3))
+ 		enc = 0;
+ 	else
+ 		return CMD_RET_USAGE;
 
-diff --git a/board/aristainetos/aristainetos.c b/board/aristainetos/aristainetos.c
-index 4a2349e165b..c163b49209e 100644
---- a/board/aristainetos/aristainetos.c
-+++ b/board/aristainetos/aristainetos.c
-@@ -218,7 +218,9 @@ static void set_gpr_register(void)
- 
- int board_early_init_f(void)
- {
-+#if defined(CONFIG_VIDEO_IPUV3)
- 	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
-+#endif
- 	set_gpr_register();
- 
- 	/*
-diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
-index f7751fd6fb1..da7cb880eeb 100644
---- a/board/ge/b1x5v2/b1x5v2.c
-+++ b/board/ge/b1x5v2/b1x5v2.c
-@@ -320,8 +320,9 @@ int overwrite_console(void)
- 
- int board_early_init_f(void)
- {
-+#if defined(CONFIG_SPL_VIDEO)
- 	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
--
-+#endif
- 	return 0;
- }
- 
 -- 
-2.51.1
+2.53.0
 
