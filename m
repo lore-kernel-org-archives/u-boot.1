@@ -1,148 +1,145 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7963EC531F9
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:38:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B005FC531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:40:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 44BC36082B;
-	Tue, 28 Jul 2026 11:38:39 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A5RawzgwIelc; Tue, 28 Jul 2026 11:38:37 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 73BEF60817
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785238717;
-	bh=WMIkfPaFLM2eUBMx7CZMiowx/5TDfVpyRa7TX/8MEhY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ME4e4FZh8/s+SN61Nw6XI+UVDeOPkekDbQNt8hEHRpcEKc3wvnQB7l8BxCnm/goY4
-	 6gVYBPdNX/4dKwUuu2lHFbGjYYXu6oTNS5sVhwo8gKrdOByTb3cKRBkSrGH6LVFLQr
-	 ROYtFKtLEPLfT6t6uAhgtW0rNdg56TidMA9xGyrl9Fpya+we4fUUM8VmpWv7/pyauV
-	 CRSVfFd3BChAwAP17WxxDlk/ahJc3VRNcP9QDfdrYZ/a5K86D3sTjUYhBL1GEwnbFp
-	 Y1zGwtk0vPSklgTsfvJ9bA9BjgruGP+UsYExJijxhuGb6OTyDUFUUB39IZflxLrFCF
-	 5KhWMSuEleYAg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 73BEF60817;
-	Tue, 28 Jul 2026 11:38:37 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7A377357
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:38:36 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6C62840A1F
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:38:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 71FC3409FF;
+	Tue, 28 Jul 2026 11:40:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 05tnjUOzVyiI for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:38:35 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 231AC4099C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 231AC4099C
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 231AC4099C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:38:35 +0000 (UTC)
+ id la0vh4IehPyd; Tue, 28 Jul 2026 11:40:01 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AC292409AB
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785238801;
+	bh=ldipKhM+Z5eRsAu7HPZaAIc/vE9WlQgVRUp+/wfwS3M=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=pgcnqfWqypgxQA4K7v2WgPI9BG9NP+gGkXMzXm6eJm83e4SL+s/Dbg96dGSwzGLcx
+	 0+Jme+sXvWky/UDl8QTql+wnOFteMLsnqb/Kjn4ZLbtebv2QW1LyfZETpAvNAdRoRd
+	 2Iv2HeH2oZ65eo6OZb3RCfZu0+RM0LAJ/2IdQ8sJRIn31+2sDQRK3RHu/h7nZgqb/A
+	 XrMXdhZBOZg2RuaeMJCMqbZ6qtLrlUq8+FX+37N1QME8bqRt7nY6xcJlQPB/O1uxD/
+	 p0WTS1EUt5cwtZrxxAsqdbrB2OY+fNrV0HmcGxXz1X5CaPkJ5ExnVYCTo3xqs6F2uT
+	 7w1pRRi8Dw5KA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id AC292409AB;
+	Tue, 28 Jul 2026 11:40:01 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id BA8A7350
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:39:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id B7C39409AB
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:39:59 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Cao5drZoDSTB for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:39:58 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6E8924099C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6E8924099C
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6E8924099C
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:39:58 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EDBE8494B; Tue, 28 Jul 2026 13:38:33 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id D95A68493F; Tue, 28 Jul 2026 13:39:56 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D54B82991
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:38:31 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-c1c50c1e29bso532157666b.3
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:38:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785238711; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id C975882991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:39:54 +0200 (CEST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69fc9f25118so2954675a12.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:39:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785238794; cv=none;
  d=google.com; s=arc-20260327;
- b=F2ar4ZqZI2mVVGV68qV90U/WpzKepUizgZ7LWdrhMaSicVyzPVRnIizEXhp1d4oH0h
- 98GJ5tQJ1rtBxr50B0ral1ZX2d14jkUFztM09jMLicPN4g0U3ZyBt8VJbVNPNsKbNanW
- PKNzia2PalXP/cWQoI9q87Thta120Ia/y2vSqFjeeTQ2Vppnkz65vyFQ0hYT3hF0vW5L
- ALx2LfBFmag1yx4VLIBD0pLfcVsef/uqlslNgzCtn4mlFWDgz3EslRcdwiayxdl2x20P
- LBNujVr7pxbxJAIATJENLGXJLUtjyn8EgYHNQxDdGo8hai2PsecMQ1Qm2A0UuckEw2XZ
- HiEA==
+ b=AZluAVGF5kEuswTCcXtVJgEihEjlAtmnC8ZXV1dsRYmxRdo064AwHXC60odlUld8Ro
+ tFkSZB0UhKbnepFQ8byYaFVW/NqHpNxO/ApWz+BlQBUtKhNC8foQn8qb1FV4GlQ6iMe2
+ m2GcSeUCPW2SAzbe6GG4jJVBPBdivt8xOItCafbbaomrZOrL/MXqlVhIVMQOcoAwQztp
+ Te/8cCP6YE9bhUWkLco4Cg4hsCN6++fgNMeUTBHxN6yqSlzYWQFppef7mBfrj9LjFgjZ
+ Geqomh981IDQZN714v11B2qGgjZhrMdLRR1zMedJtK9LBN0J7wPfPs4FxWNIfvuG5Ipc
+ oxNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=WMIkfPaFLM2eUBMx7CZMiowx/5TDfVpyRa7TX/8MEhY=;
- fh=xS+HAV6RLXATwINidFWCD1DgEFGVJYhETWrPCO0LWbc=;
- b=GvsLLZta2TcKgYlAYFJ3RulqhVl0Hk1MS90ZqeIJfWlQ+8JC04IsdPqMGSnUiunPWN
- o1JXofUe7npIYrQ8qw11/TpveHRw2kG0USedGevdMAX5aBdyW+00lGegAUoBdjiy/bvj
- j8ZzBPql6r5hgejhFM30bZUuW7XsV2SVH0YSnBno/xuEW1uShEqeRezVe1wR3zzAL6yl
- BQrw7H96wup/FYVv/RcReg0Zox2cp3bOrAsh7YHkchfMTjubgZlAZ5Wk5Bp6Fj+EJ+vT
- kCvfaghWU4AdxWgMm5REi59KegiL2Is/I74nCYLpAjdnAHj3AQcajDKqMk+2BOJjSBCr
- TJQw==; darn=lists.denx.de
+ bh=ldipKhM+Z5eRsAu7HPZaAIc/vE9WlQgVRUp+/wfwS3M=;
+ fh=85skzak5ieIz/MEHSXQ/VBD92QvS8Ot3YiJMkNfZD/M=;
+ b=fxPtpZ1OUQh3Hmh4/Ev01V5U3waAK/tv+8sdBqttmG4XVlglX3r83YypCdIt1AEdqD
+ 81Awpq2m6qybkNP2ZUK6ds7P9ZhQu7DZsewbySRV5Kz2CAu2GwJjlgFfnPh6Qqb0Z1Yg
+ u2fjaSwhZyJ+su2KNb1ib77eJm/+LVqAlnricINUma5wCB7ufOpxBybIVF6MBj/r1lzh
+ ZiGIi7IoEXAu67sfJn9MyBdWpRyVAgRiC0ob5Aq/yEKlMQeS2vNDMll79p7EEuUzSgR9
+ xOi2J/DnaK0CHOTiWaSqaZE+IYBunBg5sMKhnbh9VuFlDdfrps6HwlIU9Lo900xuMB8U
+ vplw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785238711; x=1785843511;
+ d=1e100.net; s=20251104; t=1785238794; x=1785843594;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=WMIkfPaFLM2eUBMx7CZMiowx/5TDfVpyRa7TX/8MEhY=;
- b=oyinGlPuf3/Rh7GK99TG4o+4jQyknES0cB2CdBN3sHd80t1TpAv1H4Zats5MhWlIsG
- ZMQtDl09+xqf2tWw5M/T6Sl08YO4VjKuKv6Tddmki2+Htm0OPLVtikU8ifaBQmMTpOTV
- ve7HlWJwHIQ2mw8XpciHe09b/MXS5+fHbZJ8uZuQ+jxRTYeYGkkNdM93q0wNXUWgj+Xg
- PX8iWPq/hfidMd/piTEJeAyRKArzaP9vnQYTn/eQi7zG6PGs2Pba7Pnd5BqlC8GVftOC
- /EyDlQ0TDyk2b3xYy0FpUafcEXo7r7fN1zccx95izQO81Swis0OpCgdAAgzordMKhumC
- uKSQ==
-X-Gm-Message-State: AOJu0Ywsk0VZcylgdEbWta1hr9Ph6yFVMHXWOnL7mwofYM8uD5zpIcRt
- xj5yCYG2wQQYZWXacLmGI2YzGyzvFi7S1peqLvDkzL16saX0+cU5GmEG+bAFvKKDBmoCxKkLHC1
- Ax5Mv2X+8Nk3NN0Y+MY2nrktQvxKLaH+3UsBheFlL
-X-Gm-Gg: AR+sD10DiXrwwCMrlxa6hPETaWB9xc2hKkHBlu8LdszlgOlPswiU2tJgPnXJ8jagcqS
- NC8+yyZsQDjgilXzBghNtOi9CsgpkDN0A1fBg9Obs/LK08gBKdlOkrWCHrx+iYsLjTkTsTBgvjT
- GrhLjN7h4FXUPO4Kc3HiBwTRkK0nMw1g/1wQUHpaNvVS4vpgBs9RrVfXuyKHTffrxkY1tdIDd0t
- yk4SMIy0CP1aju5cyC2iryRBEhDbOKIK2Ka668M+0YhnkEYYKjSnQ8fEEitN79gIdTL0+4=
-X-Received: by 2002:a17:907:8b98:b0:c16:945:980c with SMTP id
- a640c23a62f3a-c1f7251b895mr99360266b.37.1785238710990; Tue, 28 Jul 2026
- 04:38:30 -0700 (PDT)
+ bh=ldipKhM+Z5eRsAu7HPZaAIc/vE9WlQgVRUp+/wfwS3M=;
+ b=Dhg5WPv4LhR1SH34EIB1QTWQVXrj1n/Vuf7OGfGyORDtuPy/1ay9CkNDpj8n8GtvlY
+ eFc1p1n9x/X0XAhyp687R4j9EcsVgM8p/ZOpnB1v3XBpw7alNNoq/lLagx2cQaWGqRTJ
+ YZ1rNbYEspmo6r5XF9cHV+s9FzKbtWB7nfyzZ/REZb/1uVfM0QqcVweTzkS2my1HGz/G
+ okYp1tZnU0rY1KFYxnNTgPY+9nWQfZ3YZB7dU8VbGf29y6C4L6tmmHwrL5u7BmfqBRIV
+ SX9BczQkez6rbRRVAta0qpfUzSB6OuqjUIxqpobv/ehH5WcDLqFTTe8WBFAOHLxDrGYb
+ mDug==
+X-Gm-Message-State: AOJu0YzS9lxYR6n1LShp3EhDouNCJOW9svnkR4nl7Njg7mgOa07X2vvq
+ s3HGCDcoM/Odxk+u9jkmOqvyN3hqfvF18uFXFtFGVSLgUvpNNEykvMrJ26f1sc9fe9V4iwVw8xI
+ YG6fetqmGTT3IAKrjqsn32i6Kzd/W/qqxtHrnTH+U
+X-Gm-Gg: AR+sD13ywTOZGd6cUTGzLUBPbMZMkz4aMU6hCwf+tUnfBmMAlgmZjBgYxgDjTy1IUHc
+ WTE5I26Eqm0vgPm2mra4c43GHdXkZEtrUTU/6hofosOnp7qrmiiG2Q9oacFrRzUqEOyuafAlTA5
+ p568tiTLvnloyqf+ZItuMZ4Zx0GKjv+QvgnUDGe8tU0nzOKKe73y3Mzy+JXExX7RW09S83ZcU4e
+ FTvV991IQTVSk/hvPI5Wys/VSYqfYZXra8rWUBbxKiPtSvFwYJLYAEG5myP
+X-Received: by 2002:a05:6402:5018:b0:698:ae69:3992 with SMTP id
+ 4fb4d7f45d1cf-6a0349ec697mr1129274a12.16.1785238794227; Tue, 28 Jul 2026
+ 04:39:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260709022904.3226038-1-james.hilliard1@gmail.com>
-In-Reply-To: <20260709022904.3226038-1-james.hilliard1@gmail.com>
+References: <20260711091559.1842381-1-aristo.chen@canonical.com>
+ <20260724092720.3533-1-aristo.chen@canonical.com>
+ <20260724092720.3533-2-aristo.chen@canonical.com>
+In-Reply-To: <20260724092720.3533-2-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:38:19 -0600
-X-Gm-Features: AUfX_mxNCfRkNGU4Q7j1H5t-nHnbQ12Fqo0BLITgd36YIXERmjYFi5lEonHtguI
-Message-ID: <CAFLszTgoOWc-5_pNdPRwjzqdqF3Ga5NyEtKY9cibgMoA9NSEbQ@mail.gmail.com>
-Subject: Re: [PATCH v2] tools: binman: pass KEYDIR to FIT entries
-To: james.hilliard1@gmail.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Aristo Chen <jj251510319013@gmail.com>,
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Date: Tue, 28 Jul 2026 05:39:42 -0600
+X-Gm-Features: AUfX_mwDljGDD_ZgE3s6dics_2GtTTGhGz-slFfJpRVCNbFHU98oNDaKNfqWSpY
+Message-ID: <CAFLszTge=HbSCca1u0dUwjYEAurp-W=eHez15KT=mr+s9pQMFA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] efi: Unify the memory map output of 'efi mem' and
+ 'efidebug memmap'
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785238711; x=1785843511; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1785238794; x=1785843594; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=WMIkfPaFLM2eUBMx7CZMiowx/5TDfVpyRa7TX/8MEhY=;
- b=XVnWIgd9yqUZEO65hiyhQGtOOI9JdGaf/CvHhJ9mofUuB+BmGBRMCS8dbajA7W8ezV
- lYlPmq/rpalva+aqwn/NG0xNlTba3llT/SA4zqQOtIFJtyYDOXCYMl9A/GXrUhwbrapS
- HG4bRHROChMrrSsEuQquzuyyzmw73bu1qIi68=
+ bh=ldipKhM+Z5eRsAu7HPZaAIc/vE9WlQgVRUp+/wfwS3M=;
+ b=FHS5pR+dfj73evFn12zhVNwve6VVfZA9pwk0BvC4J1X3+JPvwAuyQ+qAY6DQ74kjc/
+ qEeRTVaCSs3fJAiH+FyZW4ArLJG4S0qVflaQSgakksARlE3Bzl1UXeSdMPFW0Rdzuf3y
+ LnGd6ZcfonfJXJLNNGtu0Wa5DU63/GV4o87yg=
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  spf=fail smtp.mailfrom=chromium.org
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=XVnWIgd9
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=FHS5pR+d
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -150,7 +147,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="XVnWIgd9";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="FHS5pR+d";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -166,29 +163,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-09T02:29:00, James Hilliard <james.hilliard1@gmail.com> wrote:
-> tools: binman: pass KEYDIR to FIT entries
->
-> U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
-> internal binman FIT builds only receive the generic BINMAN_INDIRS search
-> path. Adding KEYDIR to BINMAN_INDIRS treats it as one more input-file
-> search path: FIT entries still auto-detect a key directory from all
-> include directories, so an explicit KEYDIR may not be the directory that
-> gets passed to mkimage. It also makes a key-only directory part of the
-> generic blob lookup path.
->
-> Forward KEYDIR as a binman entry argument named keydir, matching the
-> existing entry-argument mechanism used for BL31, TEE, of-list and other
-> U-Boot build inputs. FIT entries use that directory directly for
-> mkimage -k when fit,sign or fit,encrypt is enabled, falling back to the
-> include-directory autodetection when keydir is not provided.
->
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
->
-> Makefile                  |  1 +
->  tools/binman/binman.rst   |  5 +++++
->  tools/binman/etype/fit.py | 28 ++++++++++++++++------------
->  tools/binman/ftest.py     | 40 ++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 62 insertions(+), 12 deletions(-)
+Hi Aristo,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Fri, 24 Jul 2026 at 03:40, Aristo Chen <aristo.chen@canonical.com> wrote:
+>
+> The efi and efidebug commands each carried their own code for printing
+> the EFI memory map, with separate tables of memory type and attribute
+> names. The copies had drifted: efidebug knew EFI_PERSISTENT_MEMORY_TYPE
+> while 'efi mem' printed it as '<invalid>', neither table knew
+> EFI_UNACCEPTED_MEMORY_TYPE, and the 'efi mem' printer had misaligned
+> column headers, a broken '<gap>' line and a superfluous Virtual column:
+> the map is identity mapped before SetVirtualAddressMap() is called, so
+> the field carries no information at the time the command can run.
+>
+> Move the printing loop of 'efidebug memmap' into efi_common.c as
+> efi_show_memmap(), which is linked into both commands, and use it from
+> both. The second copy in 'efi mem' is deleted together with
+> efi_print_mem_table() and the private sorting and merging code,
+> including the 'all' argument.
+>
+> The memory type names follow the UEFI specification with the leading
+> 'Efi' and the trailing 'Type' stripped, for example ConventionalMemory
+> for EfiConventionalMemory, and the missing name for unaccepted memory
+> is added. The type column is widened to fit the longest name,
+> MemoryMappedIOPortSpace.
+>
+> The shared function iterates the map with the descriptor size reported
+> by the firmware instead of assuming sizeof(struct efi_mem_desc). This
+> matters for 'efi mem' under EDK II based firmware, which reports a
+> descriptor size of 0x30. The memory map key, which was printed
+> uninitialized on the payload path, is now initialized. The command
+> documentation is updated with output captured from the app running
+> under OVMF, and documents why virtual addresses are not shown.
+>
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> ---
+> Changes in v2:
+> - Supersedes v1's table-only unification: the whole printer is now
+>   shared, the type names follow the UEFI specification, the Virtual
+>   column is dropped and the map is iterated with the firmware-reported
+>   descriptor size
+>
+>  cmd/efi.c             | 221 +-----------------------------
+>  cmd/efi_common.c      | 121 +++++++++++++++++
+>  cmd/efidebug.c        |  96 +------------
+>  doc/usage/cmd/efi.rst | 306 ++++++++++++++++++++----------------------
+>  include/efi.h         |  18 +++
+>  5 files changed, 292 insertions(+), 470 deletions(-)
+
+I'm not seeing this one in patchwork - could you please check and send
+a link if I am missing it?
+
+Regards,
+SImon
