@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82447C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 510D0C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4C858608D7;
-	Tue, 28 Jul 2026 13:00:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9332D60895;
+	Tue, 28 Jul 2026 13:00:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B4DfgcqanLNo; Tue, 28 Jul 2026 13:00:04 +0000 (UTC)
+ id IJXgOVrHyXBJ; Tue, 28 Jul 2026 13:00:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7636B608D1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 29F79608D9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785243604;
-	bh=6iLgklbB9rgpnabiT2sJlzDJHKBuQ2w1eeMcTCCoDhM=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=lmrVv3R8nNLHW26Vft6o7b/N03XRsE/nbwem5n2UijERFfrty/J/dOWisB4pzmtuB
-	 05By4n13FQEQwLeBWJivRkAHRd9iNkpbw6COPQAuxawHUlAh29PREAaN+uqh3VTj1P
-	 PlAB9Y7RQQsOrfpPf/9dYRmMDa7q5svduG1WSe7PBx5TuwyU7uJQvDcjwtMpYJoB1i
-	 CMqeaMJgK8RHsftvG1iH0Q1WbPhUCEr8yDupBCGdN56wjn+uGlK/X1MifvcylQ1oXW
-	 /XEoaY47cQQeu13vl1XfIRWvgz15GgI629HFkuoVpe3Kljd4lef6hvNKLXW3Oy3VWY
-	 isgY+EehuxyYQ==
+	d=lists.u-boot-project.org ; s=default; t=1785243606;
+	bh=kZk9+drPI6jUBWnA4HnSkTBoJtWv8b3psNucIeVDCxU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=1Dr6f/z+AXLrD11Sq4N/q6mXe9+Io8GxNhC7qBlQKfT2xmHxISpF3F+MrghjXNPLE
+	 u5djbK/+50zRKQQVr66+lGi/iX0+DgRYZ2ElxaFrc069wwjpC4qhGQXQBVOVx3jGka
+	 +Ufy9nPhy0m0b9mqsFI3f4tGUFsvM7RvymObXpPru4iI02UKE87CpUi2U/I/JBUTRt
+	 KcgqrCwIsuX0r4LTRGHhLJ+qK1QH71SbxpV9+7HzADr3jpqzyFoD3sH9ds32If1jqz
+	 YMeKyop43U3Wk+oyGe/XBFfAWsdnTOWEyq3hXVrZ34556EabWxwpzgjn2RdY2vDOZ0
+	 0y/RiQwc7RnAA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7636B608D1;
-	Tue, 28 Jul 2026 13:00:04 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id ECF48350
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 29F79608D9;
+	Tue, 28 Jul 2026 13:00:06 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 52B8036E
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CB6154087A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:10 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 39002607F3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1CxfaPMM1S6n for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 07:38:10 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sbrhcoRj5KGt for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 07:38:11 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
+ client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C902B40871
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C902B40871
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C902B40871
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:09 +0000 (UTC)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-69f7130b47dso6184166a12.3
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 00:38:09 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 42EE5607AD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 42EE5607AD
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 42EE5607AD
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:11 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-69fc856b00eso2668493a12.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 00:38:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785224288; x=1785829088;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=6iLgklbB9rgpnabiT2sJlzDJHKBuQ2w1eeMcTCCoDhM=;
- b=KEG4Q2psz4zO/oIz0yRz2FFAWCglmhg8aoCbouJy9HiI6V0EhWFRRpBgg5I3ph8YFP
- qpDFzVGYMCfmeHqZUK4E179xbYDa+GaYwi+BEdnQFv1cqi3KByc+tJWr/c0r4DwkIMmm
- S0yZQT21mUasMvh7rhSjmgA3FpBw5PlUvGrERSFSh7VW8qX2sc0q/pI1yKn1UiE9414Y
- pkjL8xQ0eRlPxL1I2VyjeK2kNT5xuPv2wVV4sk8edbaYo8ZmzArx06+EKtxhuRJmrW5A
- vDwWMOUB5lRAOHpR88aglpK98XT7hlibwI/QGL9njubECQ1u938IXgKZcfRAM1VQT/1O
- aH/A==
-X-Gm-Message-State: AOJu0YzMdYqmJKxYJyUQtB8xig6Jza9E3d7Tb05ef4hbYGEeEpbMB7iJ
- 5yUXH4fMFM+ZsksqaaODGBAwLuvSgR7mCXenaNGCjOAF2jT4ESiey2gHxHDkSNLQSJ4=
-X-Gm-Gg: AR+sD13snJrySWnOD0bgYF6YA42t3eHfF0yoQGCOwpNmmInCyB/Ng0+RMa1CyC9pxnB
- 58XXoI0yhpmD0OymyxaJ3hyX6Nzg+fe4iwcM+xqvvCRps0q/t7SeBqazzlE4mxOCNcGRPWgyHlc
- HI9JcBsn/gpa25FjbUVdleJ6xRxNTtgEGmlk71PbZk8ceMjeAHNRPI1VzS2I4mNy3lKqntj6Zc7
- nraXnTWs0Ug96BD8Wazi0HOTKyIm+gkAM3elD5W9qifO9zTh3pZDDGlPS6K/Zg5NyNURlbyjYRe
- y8p1t/dKFBS3TaEQirM6t17B3/NzDpo4pVylBeWIBTOZvexsYJCnMVdXW5zGMJkZU/aOv0oMHfU
- Xq89AWmyFwFOb09ttFuuEm5oXo63m0Cy3O7SMlEKGQWkCANbnM3191cbE1rwZRMSsNtlgxKVG2/
- zQyC79QLYi8U2Owgw593PX3qRGb+xbK8ST6w4zKymV8K+DPcH3kowthtKP2t7HqsKUbU8=
-X-Received: by 2002:a05:6402:20db:b0:69f:c197:9e8e with SMTP id
- 4fb4d7f45d1cf-6a034a345e5mr508896a12.14.1785224287782; 
- Tue, 28 Jul 2026 00:38:07 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785224289; x=1785829089;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=kZk9+drPI6jUBWnA4HnSkTBoJtWv8b3psNucIeVDCxU=;
+ b=r0XZY4+oNkfzZC99Xq46c9bh7OD3yADTFHQ/52fZfw7KFDOqYzucUkP9e38TQVytMp
+ QW51cPZAHHajU/JTHKxR4205SSGMJG5FOC/z4JAO35PSwjpk8bloDLX7LxQPXjFQmyTl
+ zU695ozqSLYYH92JfXBIn/Dw66Vpt7UfrXphFyMwCVuNWhk4aSl99BcBMrCPjYlPT1kK
+ jb7cs0rgp0j4AWDAQ8PskAedb8hhZUwQzIbCsupUV+ytvoEeMHKjBm7loOYCwvURrNte
+ B3QGfCmBjAtMjUBAd6A55nJb0HGk6uwB+Ml1Pek0lcAloo34nz/8rSkOP6d9IXO2fJVZ
+ /oKQ==
+X-Gm-Message-State: AOJu0YzMqzc5VR1U0rwDGNBra/Ac5ZZ2dXKygAjeEuWBOBfxGTO9EuWW
+ AcB0g9skxC/XYQukDVrEdDpNLzegQDeDCeEk/B1czXuxD+Ujq70k4aYCkYLBcSYE08o=
+X-Gm-Gg: AR+sD12Cw6bILXJ1Ie7zuvh6YETtXe+YzXw6Bn69/O84I8qrYoAxN6WXIdg3OuenP9g
+ HlKGm6PPlrGYMAkMMwYAA/amoMNqdYe/9kBN83YBNiFCYInbIqSetdpjm74Gs1L5VHeu7MNPWlC
+ n7ygXQz9mxPyt87zTfzw/2f8kJ3lI9D0Snb/ZFPqKJg4/OkwmF2hGIshpZS78Bz9kE7o4CGcEs8
+ 6KWi170DP5Cz+xNgj5VuqSnFFr08VePJWSyOc/o5zO5JdNXmES0I9lwD4Hd1GdQ0Vr2kmIOXqvd
+ vUOHPD91E+1gtJtQ/Te4mRu1kqJh/RnX7NIgOj69yeEd61+aCpidZGTzNS4okj4fBnjURZ8Oxcn
+ 1lL9WOhyNaWjurZl38KUCkKOGgQ3tPa8jtAen7+OK40yjLHXjubAts9FG3jXNUcc4s/eyVRxyxu
+ 0JAStj5FBU2+sSa0pYjqIHQUAk/htC21IFCOEIYaIJXheXA19OYJa58NrnQSMAtit2uqQ=
+X-Received: by 2002:a05:6402:280f:b0:699:8397:55ec with SMTP id
+ 4fb4d7f45d1cf-6a0349bc5f1mr516359a12.7.1785224288884; 
+ Tue, 28 Jul 2026 00:38:08 -0700 (PDT)
 Received: from [127.0.1.1]
  (p200300ff0f038f00d97d5688120f3c08.dip0.t-ipconnect.de.
  [2003:ff:f03:8f00:d97d:5688:120f:3c08])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-69fb50bcfdcsm3654045a12.3.2026.07.28.00.38.07
+ 4fb4d7f45d1cf-69fb50bcfdcsm3654045a12.3.2026.07.28.00.38.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 00:38:07 -0700 (PDT)
+ Tue, 28 Jul 2026 00:38:08 -0700 (PDT)
 From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Subject: [PATCH v3 0/2] tpm: bounds-check device-reported response lengths
-Date: Tue, 28 Jul 2026 09:37:52 +0200
-Message-Id: <20260728-tpm-trunc-resp-v3-0-8e20bcfb64c5@byteray.co.uk>
+Date: Tue, 28 Jul 2026 09:37:54 +0200
+Subject: [PATCH v3 2/2] test: tpm: check malformed capability responses are
+ rejected
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAFBcaGoC/3XNSw7CIBgE4KsY1tLw6suV9zAuAH8sGtsGKLFpe
- nehbozG5SQz3yzIg7Pg0WG3IAfRejv0KfD9DulO9lfA9pIyYoRVpGYch/GBg5t6jR34EVeVkFx
- JZag2KI1GB8Y+N/B0fmc/qRvokJXc6KwPg5u3x0hz7y8eKSa4ZrIUUnNihDmqOYCTc6GHYrqjf
- BDZJyF+CJYI3tCmrKEtW1N9E+u6vgC5YozjBQEAAA==
-X-Change-ID: 20260723-tpm-trunc-resp-664a3babf1cf
+Message-Id: <20260728-tpm-trunc-resp-v3-2-8e20bcfb64c5@byteray.co.uk>
+References: <20260728-tpm-trunc-resp-v3-0-8e20bcfb64c5@byteray.co.uk>
+In-Reply-To: <20260728-tpm-trunc-resp-v3-0-8e20bcfb64c5@byteray.co.uk>
 To: u-boot@lists.u-boot-project.org, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
@@ -104,25 +104,25 @@ Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
 X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Tue, 28 Jul 2026 12:59:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785224288; x=1785829088;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785224289; x=1785829089;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=6iLgklbB9rgpnabiT2sJlzDJHKBuQ2w1eeMcTCCoDhM=;
- b=cDwQQij7z3fKIMx8a6N2/6F9clh8ejG4YA22aVTz9YAB9MIJPRYQDOu3fliRVPRPr6
- IJ7wI5i8jj8F2HxtT5VaCScdTWn8pywmjf8GQYVQt6/RF7Z9Iu3KYihWxmMWVnMsz0Fi
- VWU0sFDdMiEulT9bL+CGehruWn5YqdSCvmN1jgFbAh3E6ZFByUm3pibPHO+ZdZJo32Ij
- oN2oV2oOD6dV6UhrSiw/vq/MvFebn7hCejN4lKf1UcIKPL5vjHzVK3jRChc25KCL8LC9
- pkAPe6J4s1l/fD8dvedsjVYPjIWeFeGxnPeRHDP53nLoGB8CiPFmLRTV8S05xL45Iqf1
- i/qw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=kZk9+drPI6jUBWnA4HnSkTBoJtWv8b3psNucIeVDCxU=;
+ b=qxka1XN6aL3td5SlhwQN979rx7pGO7WFRAVY75KAEr0U+9DL8gLkktt/b8hjqcBByr
+ MPGEuvK7xn5zx170Rs4kbykyKwo/xyd7TqHigoEbK6clURU0/prLJGSpxShrXDSKX4+D
+ 8Sb1tjwce13oOvdhixSXClgEAGQxo0DRiv6uD1M4gwBiKDanmfij8FI+L13FqsMba2a6
+ ubJt3zJs4G3t5Sh8bVaPlUpNS0TriyDuDueCm2Xg3tpqSkB83uZTAha9uOgThSNAr8CM
+ fdvRrL1jzXwWPbBPoKuqpEhiwTl1jM6Z4B3Y5S6WPDJ6JsntPzNracuj8akDZRomBkHG
+ 2X/A==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=cDwQQij7
+ header.s=20251104 header.b=qxka1XN6
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -137,55 +137,140 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-A TPM reply's length is taken from the device and only upper-capped, then
-several callers use it unchecked: the TPM1 OIAP helpers and the TPM2
-GetCapability parser subtract a fixed header length from it, so a reply too
-short underflows the subtraction into a huge memcpy; the GetCapability
-parser then copies that many bytes into the caller's buffer, so a reply
-longer than the buffer overruns it. Because a TPM sits on a physically
-accessible bus, a cheap bus interposer (the kind used to sniff
-disk-encryption keys) can inject such a reply, and on the TPM2 path this
-parsing runs during measured boot, which is exactly the physical attacker
-that measured boot is meant to resist.
-
-Patch 1 checks the reported length once in tpm_sendrecv_command(), so every
-command that reads a reply rejects a too-short response, and keeps a buffer
-bound on the GetCapability properties query. Patch 2 adds regression tests
-driving the parser with a truncated and an over-long reply through the
-sandbox emulator.
-
-Based on v2026.07 (fdfe2ec48d5c). A reproducer is available on request.
+The length of a TPM reply comes from the device and cannot be trusted to
+be well-formed. Add tests for two malformed replies: one too short to hold
+the data it advertises, and one advertising more data than the request can
+hold. The sandbox TPM emulator gains two test-only properties that produce
+these replies. One DM test drives a PCRS query with the truncated reply, so
+the only thing rejecting it is the length check in tpm_sendrecv_command();
+the other drives a properties query with the over-long reply, caught by the
+capability-specific buffer bound.
 
 Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 ---
-Changes in v3:
-- Rework per review: check the response length once in
-  tpm_sendrecv_command() instead of at each call site, so every command
-  that reads a reply is guarded. Drop the per-site lower-bound checks; keep
-  the GetCapability buffer bound.
-- Drop Miquel's Acked-by, as the fix changed substantially.
+ drivers/tpm/tpm2_tis_sandbox.c | 28 ++++++++++++++++++++++++++++
+ include/tpm-v2.h               | 10 ++++++++++
+ test/dm/tpm.c                  | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 80 insertions(+)
 
-Changes in v2:
-- Use my real name in the From and Signed-off-by (Miquel Raynal)
+diff --git a/drivers/tpm/tpm2_tis_sandbox.c b/drivers/tpm/tpm2_tis_sandbox.c
+index 50e308e7116..1fae0fc6ce1 100644
+--- a/drivers/tpm/tpm2_tis_sandbox.c
++++ b/drivers/tpm/tpm2_tis_sandbox.c
+@@ -542,6 +542,34 @@ static int sandbox_tpm2_xfer(struct udevice *dev, const u8 *sendbuf,
+ 		property_count = get_unaligned_be32(sent);
+ 		sent += sizeof(property_count);
+ 
++		/*
++		 * Test hook: reply with a truncated (header-only) success
++		 * response so the response parser can be exercised against a
++		 * reply too short to hold the data it promises. Honoured for any
++		 * capability so the check can be tested on a path without a
++		 * capability-specific length bound.
++		 */
++		if (property == TPM2_PT_SANDBOX_SHORT_RESPONSE)
++			return sandbox_tpm2_fill_buf(recv, recv_len, tag,
++						     TPM2_RC_SUCCESS);
++
++		/*
++		 * Test hook: reply with a success response advertising more
++		 * property data than a single-property request can hold, to
++		 * exercise the caller-buffer bound in the parser.
++		 */
++		if (capability == TPM2_CAP_TPM_PROPERTIES &&
++		    property == TPM2_PT_SANDBOX_LONG_RESPONSE) {
++			*recv_len = TPM2_HDR_LEN + sizeof(u8) + sizeof(u32) +
++				    sizeof(u32) + TPM2_PROPERTY_NB *
++				    sizeof(struct tpms_tagged_property);
++			put_unaligned_be16(tag, recv);
++			put_unaligned_be32(*recv_len, recv + sizeof(tag));
++			put_unaligned_be32(TPM2_RC_SUCCESS,
++					   recv + sizeof(tag) + sizeof(u32));
++			return 0;
++		}
++
+ 		switch (capability) {
+ 		case TPM2_CAP_PCRS:
+ 			break;
+diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+index a776d24d71f..8bcc4caeb06 100644
+--- a/include/tpm-v2.h
++++ b/include/tpm-v2.h
+@@ -43,6 +43,16 @@ struct udevice;
+ #define TPM2_CAP_PCRS 0x00000005U
+ #define TPM2_CAP_TPM_PROPERTIES 0x00000006U
+ 
++/*
++ * Sandbox emulator test hooks: a TPM2_GetCapability for these properties makes
++ * the emulated TPM reply with, respectively, a header-only response and one
++ * advertising more property data than a single-property request can hold. They
++ * let tests drive the response parser with a reply shorter or longer than the
++ * data it should carry, as a tampered or faulty TPM on the bus could.
++ */
++#define TPM2_PT_SANDBOX_SHORT_RESPONSE	0x00ffffff
++#define TPM2_PT_SANDBOX_LONG_RESPONSE	0x00fffffe
++
+ /* Definition of (UINT32) TPM2_PT Constants */
+ #define TPM2_PT_GROUP			(u32)(0x00000100)
+ #define TPM2_PT_FIXED			(u32)(TPM2_PT_GROUP * 1)
+diff --git a/test/dm/tpm.c b/test/dm/tpm.c
+index 87c5c416daa..45690dc56b3 100644
+--- a/test/dm/tpm.c
++++ b/test/dm/tpm.c
+@@ -6,6 +6,7 @@
+ 
+ #include <dm.h>
+ #include <tpm_api.h>
++#include <tpm-v2.h>
+ #include <dm/test.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+@@ -197,3 +198,44 @@ static int dm_test_tpm_autostart_reinit(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_tpm_autostart_reinit, UTF_SCAN_FDT);
++
++/*
++ * A TPM sits on a bus a physical attacker can reach, so its responses cannot be
++ * trusted to be well-formed. Check that a reply too short to hold the data it
++ * advertises is rejected, rather than parsed with an underflowed length. A PCRS
++ * query is used so the only thing guarding the copy is the length check in
++ * tpm_sendrecv_command() (the properties query has its own extra bound).
++ */
++static int dm_test_tpm2_get_capability_short(struct unit_test_state *uts)
++{
++	struct udevice *dev;
++	u8 buf[64];
++
++	ut_assertok(get_tpm_version(TPM_V2, &dev));
++	ut_assertok(tpm_auto_start(dev));
++
++	ut_assert(tpm2_get_capability(dev, TPM2_CAP_PCRS,
++				      TPM2_PT_SANDBOX_SHORT_RESPONSE, buf, 1));
++
++	return 0;
++}
++DM_TEST(dm_test_tpm2_get_capability_short, UTF_SCAN_FDT);
++
++/*
++ * Check that a GetCapability reply advertising more data than was requested is
++ * rejected, rather than copied past the end of the caller's buffer.
++ */
++static int dm_test_tpm2_get_capability_long(struct unit_test_state *uts)
++{
++	struct udevice *dev;
++	u8 buf[64];
++
++	ut_assertok(get_tpm_version(TPM_V2, &dev));
++	ut_assertok(tpm_auto_start(dev));
++
++	ut_assert(tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
++				      TPM2_PT_SANDBOX_LONG_RESPONSE, buf, 1));
++
++	return 0;
++}
++DM_TEST(dm_test_tpm2_get_capability_long, UTF_SCAN_FDT);
 
----
-Shahriyar Jalayeri (2):
-      tpm: bounds-check the device-reported response length
-      test: tpm: check malformed capability responses are rejected
-
- drivers/tpm/tpm2_tis_sandbox.c | 28 ++++++++++++++++++++
- include/tpm-v2.h               | 10 +++++++
- lib/tpm-common.c               | 16 +++++++++---
- lib/tpm-utils.h                |  8 +++++-
- lib/tpm-v1.c                   | 59 +++++++++++++++++++++++++-----------------
- lib/tpm-v2.c                   | 52 ++++++++++++++++++++++---------------
- test/dm/tpm.c                  | 42 ++++++++++++++++++++++++++++++
- 7 files changed, 166 insertions(+), 49 deletions(-)
----
-base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
-change-id: 20260723-tpm-trunc-resp-664a3babf1cf
-
-Best regards,
---  
-Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+-- 
+2.43.0
 
