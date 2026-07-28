@@ -1,132 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77F53C54F4C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 12:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C640DC53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 12:10:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D55D260887;
-	Tue, 28 Jul 2026 12:07:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 81D06811DB;
+	Tue, 28 Jul 2026 12:10:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8dUR0yb2A5LS; Tue, 28 Jul 2026 12:07:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id f_-e4mvD82wI; Tue, 28 Jul 2026 12:10:26 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3A6660817
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 51EEE81237
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785240459;
-	bh=80eC0GwSw9QHWUOlvM4aGWWJ2LbLnEmDxJvwS9ODHso=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785240626;
+	bh=ISiyRjOWcO/R0PbhJ6to4Y6W3f35Msvw0AvYIBvcl3c=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=X0JXVs3DR/Rh3RIIHfVoUl4jHXM3Sin1EE7VQimrjBDqa9fs3BAjRJAQqOrNGw3ns
-	 mVJNt/TXWwotzRlO9mKZ7aeGVTazn4QmOkvxgy3Whtf4dCyz37qTqPRppM/rh4q9qA
-	 K3kKOvgI3hBDL6c/PlWBW2qDOUNouQ7/0ptQzOLqG6Elsti0fvVCI6GM+ByHgO51M6
-	 1zgP54lBF08PviVg8y0HW+AGs/MEBKj0i1Nu4uXpMnMazXQwtdWbE1ynaQZKTKhmZp
-	 Br2+Gd7pMyaylWYHVBwuAfN73en/oAbTq8f9gt8yWAor52FJFsqSWXOHKM3BZ3NzEA
-	 Amk99ATFOjwJA==
+	b=KOko9PSFBAILFKQn5Vp0VfA227Npk1MXbswpad+fBMlu1La9x6sHZClym1tQnbmI/
+	 bn/CNbGh9FYAgOgHKXq6V789AoVVk3p2NfoCwRB5X1/OoQUCp1thC9XHWSNI3/GzIC
+	 7xH9en1eD3/wmEtOVdK8rETKjwLEUmDvTIY/uIePEdEMPUdIQj5k8wK2y2kgqOfOAe
+	 62Gsn0jOiEF4kZ/ZSYcWXNO586aAaZc3QBjJZd93GgHbiHV6x4YuYDCbdWGjxBsnGV
+	 es7QONg3gVc3npYnrXXSG/QDz9XjyVbLGZSacMYcnDPoSsd4DQ9Y22CEUGa4FlBP+v
+	 qnC25TVtGWbSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B3A6660817;
-	Tue, 28 Jul 2026 12:07:39 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 64CDE490
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:07:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 51EEE81237;
+	Tue, 28 Jul 2026 12:10:26 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8A5A0490
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:10:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 627B660817
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:07:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6D4E9400D3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:10:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tANoWUlBUQdI for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 12:07:37 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3CCBD607ED
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3CCBD607ED
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3CCBD607ED
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:07:36 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-69f7af97316so6032976a12.0
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 05:07:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785240455; cv=none;
- d=google.com; s=arc-20260327;
- b=f+MqGT88mcf69JPRVfPKxM06aw83uM78HIgygWMCpsp4kdnV9Kb/2r+wsWl7dppoLG
- DEaLEiVnjaYbd3c9+LUkseXkHYMLOCr4HslTXon6o0rGHmZ/fs1D+EXizUag0QOImGfj
- Y1Sy1slSxPj5OPvMK85o0P3gGyXDYn6LfDa5p9w8CAxZUk0n8DJ3/V9dM8FlJfuICDd7
- JGDQ7br8aMupegNhRDCwBxcQ9cKUGqFv7b/KQ4RLvnVpvjNCg3VyQhGQz003p/B+ACNG
- H9VPkSbioeNTNWCsz6MJq97VOnE4T7DfHjpuu8DaPSSts2hKOOLH+bMHS1EyX84r2TcQ
- nfSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=80eC0GwSw9QHWUOlvM4aGWWJ2LbLnEmDxJvwS9ODHso=;
- fh=8c2+NIu9R/BcwmG53Md3ZtZYhq6QDDyKaebB6oY+AIs=;
- b=YJLboieBBufwSULmT/OyvEnZrXs5hpq3k/iQzBA6Ei1IqebzLLVV6gRj3SXomn9GU0
- zCd+Q0Rx/YNSRwnL8MhLLex/daoqnDGPJ2oprnpJnLTQRb/9U8hZKRKE1uQG8INdb3W3
- fQ07P3TfdaYkwQ3+eLrmuk393VZlF9GUBQIjfRfW8Lhz3HxNUq4gzhkwMTJOyz3jb9RQ
- PKqaF94sYA8qrKJdAY0jY8roO/SJYmfFYLDA+SxRUVCJRGpfYYw83K0tPb95eD+5EoQQ
- iK1lbbhCQjAHqeRWNlBZ72dYkoxu69VEgRUnwoRuRNcwlC07dCf4DO9pjHJGphCnzUyp
- e+EQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785240455; x=1785845255;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=80eC0GwSw9QHWUOlvM4aGWWJ2LbLnEmDxJvwS9ODHso=;
- b=i3EbahhN0yJnvFQGMdrutDARudgKUtAvU1GyXQhpD4G7IJf6CS2qr0QyfwYUXt6+DK
- zOSgD9/cXfwI268PgTtLUGiRjOFPNKDy9d86zh+IvCDl9TrP8erE0qLXprLXB2gk0Zbx
- fWHYI4jj7N+9BtqJ4AJ+Yb+p2RYWMrm1BnKAuiIPOWh5QGnPugc3AUZEk9gd9PAh2BoY
- k9qUWQe7CMT8UDPjiia2V8LSb02hlieJPKxDr0YxAIfdSL2MvPVkY+wg3hOhxwsz3TD5
- TsWcpmma+I8UMZNHdmHTmXam0ZQovUd49u8jcNeBvSBLAjk/0ulD2tpqkYfwNfRwhslO
- 5GAg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rop2S2bze9Ki+qaN9NWPbT/4/QZofWvDM3P/60G4FVq4JSK4r6R6MuE13Ee8zKlwUtV/1Xqae4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyBQ6LY6NmOi34O/ihUpYFZTbxY1ODZogFudlwcawz1R+qdSWds
- 1+zJ+UpX8jim7e6mDFQrZwmb/eVA7Lagwy+Gi/ylDnJf0U8MPP0Ogd69GfmEusQKJM9hsVnZDTR
- Ng78/9TUXNOxpA6THciAFJLmzJ5GUpb7Ln2gsTMEw
-X-Gm-Gg: AR+sD12sny8Kkb1mb/clJwkEr+nDAb17ivLthEcsdc4sXrI7lF9kK0hseuUmZaTd49I
- NvtuDH2OzXKNtz7yQ1jjpCoNxnD8GeFDnGIEnwnzpF8GcTp0B568MA2aOraptCqp6hnYFw2FcdM
- BmLLfGmQRX0xW3QJK0hLyskOcMVJuwjfYOF++Et89WF7AbxHh6Fw5v5P8MRD6lFR865cp+UAAB8
- OgwJaAWiifKNxuxIyE4Eu2VfWSuHpiCcFOZXd7OLoOz0+xQwG4RM9/IgFXQxEAdbgxAEmc=
-X-Received: by 2002:a05:6402:1f02:b0:69a:2ee6:4c95 with SMTP id
- 4fb4d7f45d1cf-6a034925818mr1010948a12.0.1785240455133; Tue, 28 Jul 2026
- 05:07:35 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uR8rg8py6Xmv for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 12:10:24 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 4DAC64030C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4DAC64030C
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4DAC64030C
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:10:24 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A64FD8494B; Tue, 28 Jul 2026 14:10:22 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A5B9F82991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 14:10:20 +0200 (CEST)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 882D060AA1;
+ Tue, 28 Jul 2026 12:10:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A79971F000E9;
+ Tue, 28 Jul 2026 12:10:18 +0000 (UTC)
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
+ marex@denx.de
+Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, michal.simek@amd.com, alchark@flipper.net,
+ jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
+ Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [PATCH v5 46/75] usb: dwc3: import from kernel v6.2
+In-Reply-To: <20260716134305.614278-47-anders.roxell@linaro.org>
+References: <20260716134305.614278-1-anders.roxell@linaro.org>
+ <20260716134305.614278-47-anders.roxell@linaro.org>
+Date: Tue, 28 Jul 2026 14:10:16 +0200
+Message-ID: <878q6v1fiv.fsf@kernel.org>
 MIME-Version: 1.0
-References: <20260727182649.7766-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260727182649.7766-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 06:07:23 -0600
-X-Gm-Features: AUfX_mzaElZu7aUEmwfm8IprauURs7CMEdMeLWuHPILG40QOIYQTx14i5Q6yD00
-Message-ID: <CAFLszTh1e438DPj+bHfaBgnBefoSw4idP+Pj6Rmbb-7g5As3gg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] sandbox: fix enum host_platform_flags description
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Denis Mukhin <dmukhin@ford.com>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785240455; x=1785845255;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=80eC0GwSw9QHWUOlvM4aGWWJ2LbLnEmDxJvwS9ODHso=;
- b=Gm46ZKbkPaDRCHP5hX9sZbw6L/nKrHCt05dNcljcrwq3C64hB7uAiRORXVuuP6HRFX
- D/aB4f728hOcAaejkOJ6l0W62Q3wbV8H91yjZX+bkiQ0pM6r2qq116Zb/z24cRDr4Kmg
- 4mStZD5JHOaraiqFqK036ixDllY97W2TD4y/o=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=Gm46ZKbk
+ d=kernel.org; s=k20260515; t=1785240619;
+ bh=ISiyRjOWcO/R0PbhJ6to4Y6W3f35Msvw0AvYIBvcl3c=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=oXkmDFLWV1lrfUSDbsb9BOF+UQLENEx7pPK+xAEs9A7Xd3+QW9xgIH8Ron3L/d0N3
+ 5pVTv2KzT65iAhODM/id85SABVr+jvoF78HzHPSCqsusqOxiPEZntj3TKJbr3h/4+K
+ 6jgVJWM7hkpOtExsqs1TtYwCq/+4wJgLbTXTELCoNhtgKA2nDny7f95A/CsG1s5RTE
+ nhaUtZZaKEPes2U0G+PUeYjMN+m/LxyJZ11Y74qxtLkx0enZaA9F+2BYJGkNs28tDf
+ 4Lx1vgkSgAe/DzteGTrLWFY41H2a0zqFIWHbj5V+Evg5tPXi+aQYIH0suqIphWx/Xh
+ ijMrqrFg75UnA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ spf=fail smtp.mailfrom=kernel.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=oXkmDFLW
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mkorpershoek@kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="oXkmDFLW"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,22 +120,45 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-27T18:26:49, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
-> sandbox: fix enum host_platform_flags description
->
-> `make htmldocs` reports
->
->     ./include/sandbox_host.h:14: warning:
->     cannot understand function prototype: 'enum host_platform_flags '
->
-> Align the description with Sphinx style.
->
-> Fixes: 93e9af685fef ("test: bootdev: scan with a broken high-priority device")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Denis Mukhin <dmukhin@ford.com>
->
-> include/sandbox_host.h | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+Hi Anders,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Thank you for the patch.
+
+On Thu, Jul 16, 2026 at 15:42, Anders Roxell <anders.roxell@linaro.org> wrote:
+
+> From: Jens Wiklander <jens.wiklander@linaro.org>
+>
+> Sync Linux kernel dwc3 changes from v6.1 to v6.2.
+>
+> The following files are preserved accross the import:
+> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+> dwc3-layerscape.c ti_usb_phy.c
+>
+> Skipping unused files:
+> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+>
+> Note that this is a raw import and doesn't build.
+> A fixup commit at the end of the series fixes that.
+>
+> List of commits: git log --oneline v6.1..v6.2
+> Commits imported:
+> eb320f76e31d usb: dwc3: qcom: enable vbus override when in OTG dr-mode
+> 7d80dbd708c1 usb: dwc3: fix extcon dependency
+> c4e3ef568539 usb: dwc3: gadget: Ignore End Transfer delay on teardown
+> e498a0444324 usb: dwc3: xilinx: include linux/gpio/consumer.h
+> 63130462c919 usb: dwc3: core: defer probe on ulpi_read_id timeout
+> 97a48da1619b usb: dwc3: qcom: Fix memory leak in dwc3_qcom_interconnect_init
+> 62c73bfea048 usb: dwc3: Fix race between dwc3_set_mode and __dwc3_set_mode
+> f05f80f217bf usb: dwc3: pci: Update PCIe device ID for USB3 controller on CPU sub-system for Raptor Lake
+> 3205054dc6fe usb: dwc3: improve the config dependency of USB_DWC3_XILINX
+> 049142335613 usb: dwc3: gadget: Reduce TRB IOC settings
+
+Please drop irrelevant commits from the changelog.
+
+With that fixed:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
