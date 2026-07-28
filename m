@@ -1,99 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 634ABC53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 15:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD4E5C54F4C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 15:19:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9C761608D6;
-	Tue, 28 Jul 2026 15:17:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 94EAB409A0;
+	Tue, 28 Jul 2026 15:19:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uRT0g49Swi9j; Tue, 28 Jul 2026 15:17:08 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id p42_nlPPzsu4; Tue, 28 Jul 2026 15:19:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7602D608CB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A7DF44065E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785251828;
-	bh=6sKSH3njrUq0Na+4KZNw/5Lu3EE22fKG+mf+VfdHuM8=;
+	d=lists.u-boot-project.org ; s=default; t=1785251942;
+	bh=oP4iBnLpP2lj4yzd26L7JK/cK/7KsHidxViD/wTPCMs=;
 	h=Date:From:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=BaDdMibuOHXXrizrrSXA29IOfygGG7CQeQgPlKMQaCB48nNxUVyjOn5jzXWccJif5
-	 EVT28PbBGmqs/h0+by3ukSkY5gpXGe5ipzwmkbM4n2NHg71ItUkc4kVp21pvZOm8i8
-	 MB3mtqULAV5y7uZIfmiYvIcKG1yXSvTCDfKF4dkCekTlfAbY1e2urghsw3AsgQcCfR
-	 kIskX9C3M6g6/tfjpzQwCjBoSsqYntgVI30Sws22sVphC4hbI5ZUhC4+gC18L6JuT0
-	 vXxuU0zzR4xru/079oy30nUWw/K7mXu0o0OfkbORjHuMT8LDeUkp6rfYo44t6csZo9
-	 BKfA8fkN3Lb+A==
+	b=TJy0tQuMVUhv2cbsE6oExFOa7GQuD2r/5vnQbw6+haUgmuwIYXoZKstmdiPUhWR/k
+	 ZIJuIyl85Gf458vzaEHTAz80XMAt3xrthWTjaBUrsYDL/k+k1mXiF2upEArRrNzENK
+	 xiIsKQQ6S7dXF5WmZ7/o1Yyfr7nmiUL0ivneFUARgd4DFnCW2KQc60PVOAPbE2acX0
+	 XUwwG4dOhFEthohMmVr7OUk6YSYQCOEoj9vuCs+WJthscRofVKXMQ90otvQ2z5XnBx
+	 44IeoDUf61F+vlI+fW7XjVXSolKdKYXp1K4GLDDnTIZjFqvuBjCsVzeaBevF/SWrMS
+	 2DbPZ4LXVOYpA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7602D608CB;
-	Tue, 28 Jul 2026 15:17:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BFB8B788
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 15:17:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A7DF44065E;
+	Tue, 28 Jul 2026 15:19:02 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id ED06026C
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 15:19:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B11C14033A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 15:17:07 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D2D924033A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 15:19:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5rB15AiFKExl for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 15:17:06 +0000 (UTC)
+ id kXm1hJE8V3N1 for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 15:19:00 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
+ client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5D52940328
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5D52940328
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5D52940328
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 15:17:06 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-47f7027ca11so2247296f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 08:17:06 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 88A5B40328
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 88A5B40328
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 88A5B40328
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 15:18:59 +0000 (UTC)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09e5so3997949f8f.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 08:18:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785251824; x=1785856624;
+ d=1e100.net; s=20251104; t=1785251937; x=1785856737;
  h=content-transfer-encoding:content-type:organization:autocrypt
  :content-language:cc:to:reply-to:subject:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=6sKSH3njrUq0Na+4KZNw/5Lu3EE22fKG+mf+VfdHuM8=;
- b=mjaAh29gJrizTkYQ/OSVQGVbhiBUqpoFuR5G5zc2M4T7ZdpGtxw92BmPrHXofV7ZXP
- gTd/qkNpva10qVqmfS9QzcSZjUKX7O07Uh/M677sIGALV9mbxXFqFAuu3L7nHAYOU+iC
- UDrbe3GiCnAc5HCbCtZ2At65xSUgNrpNjdRkUzdkjyLYVu4RCvPj0TrnpHciVdzDD2cn
- i9FzBqODE9q5wPGKUkdiJ8CeXBRAl6HRU+6OSAE7JRilxRewcTV4eTAeNlv+iudziuJO
- t2nlAbGGRl+jWQXHdC1+OAEvJUesP82fzv8in/Hwq/qeEyguKEdiuHQR0E6Pfl951NxO
- hhkQ==
+ bh=oP4iBnLpP2lj4yzd26L7JK/cK/7KsHidxViD/wTPCMs=;
+ b=AjwElh8d6blLixxiVD4Untcbh04Ryjdd5eeHwB6eJoGWHLgvkOHevACPsMh7332ySV
+ 8tJo/H9drMa5Ld1RsNsnfY5zYjm9TJQK6YilB0lTcFxEtnXDm2V1xwTAuFgHIV/rJMyh
+ Zavc9+VYWWLd4i1QRdEg8g1hQ51HUGOB3joPXLNgDVVAuwWtLdkSnWNQ/1umK4Wsk0PT
+ sQtNrMqR/Wfud4JyQ+TvZm/nR2NKZlg5zsdljUFTB+9000GCS/SwtjKZLlcJdkuVeObv
+ Cg6et8xjwuqMjKd1fTkFsRmgOCTgsbND0Me9XaNDO3lF7bI3Q7JkiqGfkZS7quIPRjR2
+ S3Lw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqy5Hmn+f3JP9hOo16NdNfIzfmFWRlbVkMeoPidLW66AV7rOl9IHGUlVKwvipWCVg8LtPOzvio=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxafZcqiTiZYXYvgBTkTVQ/ukA8HGzxr7Gf6NMYRNALeM1UjORy
- uqvOTtYGdJeTgf7IbSptoUJEZulEeO1IwjJoj6JZm9hPH7jhf64QyD71ao1UPVEg6c8=
-X-Gm-Gg: AR+sD13HFoeezatK6WnNHWvjIc8KZVuzu8y6koDOd+ZfdyZKIjkRLfrGOPx/D2Andqi
- yObLRXQ2OUD/KwN/ugyPimppJs+hjs62RjbBryX81VIX9ZMFJMN7Kq57Cxpf3odK4SVwUPBNyYo
- rIevirxrOdANBRtxWPuZhAqiIaQDz0K/hnhlRNjGZXLhfjMc5tYxjjuR58kcyKQyyWk0KMaptlM
- zuEJKOc5CFcWSDWQRYL1RXbsMygHWMJ37HD7duSTfRAyW5X0qXfQCW+JABw5flqbAaK5jWg0stf
- xebo6BmnKRembqecr0zA83rdGUqKeYd5Jf/8C3+WV1CmynQ89O4JnV6QtfIQxTpfZz4TIzI7CFS
- T2Wq752B8QwcHXsvRbR0WdKDelLpBAdizYI5AR+xeEKZ+N7dihakgWPi/jRl+ipaGlBlM2YCwDj
- QrQj+Qig7zUNorxE0r62igtNYs94tfit/A6qtkC+Yp3pscBGoINCEtnCPYEA==
-X-Received: by 2002:a05:6000:4382:b0:47f:6fbd:8a23 with SMTP id
- ffacd0b85a97d-47fb1e5bcf2mr3479368f8f.9.1785251823949; 
- Tue, 28 Jul 2026 08:17:03 -0700 (PDT)
+ AHgh+RrO126HgrEfX9wo6bVzamOmG8VgBUGRZ18Q+0jLl5RhrPE/+Q2o9VAv/pHei4+owWeBUYBFFLA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzoN/sWnA+odbCYobjCNR7xiPIiGjpb+irC/ZY5r5hVMmN1SPsb
+ azjY49dgRTyXbjDWw4zoJtGXAlrmNi0tp6zGhFTCdBNcdXEw10FVMzpC0XACiVRemL4=
+X-Gm-Gg: AR+sD11ZOFept3HxZMxl/H0mScVNTBD7QAGOyVD0knteut4ZsYQbPzwuFngTaQlL4/4
+ BUtyiEOSHfI8bSZE4tyKx/HMvL5t0MD1NKixheOKTW29QkqtLkAXmw6afxi8lyMdT6SbxOYxo7e
+ J2BPHunLt1J8jY9tg0K4XvM+7+abUixyXb/ZH0DrcrsMU5Td4k3s//KyuSuKXBSpkG4BpmBAe0k
+ nMyIReh2bF62Ij2Fr2RTDR6QDE6rdzXHvZb+oz6EKsysGpceS142W/kCkwP2cw5DQEoFiqRsBlb
+ Eje/PBN4EqsnGYcqB5u1ZfhXwJGk8ZmpPQ8R5BWs94lHmkmWNnY0IHvyyPhFC1ShUoiYF4L2GWF
+ jwa6LJOycI/mDeOZJpqsqNa78RxzuemFaQPJCROQufRnUAjBXKpo7YqwgBOewdu2GZMb/ySPmKi
+ DpsTPCc12T4FCmvEtyuMGHboFIuZI+i5xnCaLWbt7bc0gBSHKiB/PJcY6e2A==
+X-Received: by 2002:a05:6000:186f:b0:47f:853d:4768 with SMTP id
+ ffacd0b85a97d-47fb1e93a79mr3372009f8f.20.1785251937046; 
+ Tue, 28 Jul 2026 08:18:57 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:6843:9af3:9745:9034?
  ([2a01:e0a:106d:1080:6843:9af3:9745:9034])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c52fc0sm59115583f8f.23.2026.07.28.08.17.03
+ ffacd0b85a97d-47f85c532d4sm58121795f8f.22.2026.07.28.08.18.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2026 08:17:03 -0700 (PDT)
-Message-ID: <4f847166-b282-44c2-81a7-b3878f3a9480@linaro.org>
-Date: Tue, 28 Jul 2026 17:17:02 +0200
+ Tue, 28 Jul 2026 08:18:56 -0700 (PDT)
+Message-ID: <142bf69a-7f65-48f9-94ea-c90260f3fa43@linaro.org>
+Date: Tue, 28 Jul 2026 17:18:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-ufs-fixes-20260728
+Subject: [GIT PULL] Please pull u-boot-nvme-next-20260728
 To: trini@konsulko.com
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, u-boot@lists.u-boot-project.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.u-boot-project.org
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -123,26 +122,26 @@ Organization: Linaro
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785251824; x=1785856624;
+ d=linaro.org; s=google; t=1785251937; x=1785856737;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:organization:autocrypt
  :content-language:cc:to:reply-to:subject:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=6sKSH3njrUq0Na+4KZNw/5Lu3EE22fKG+mf+VfdHuM8=;
- b=gTG0HZyLzpoJrZ2r+Y7dMUpmvayADtSGoUJp9BMhhG5acyooCTXX8Y5rZQbR0bhX9c
- EIYVoLhioqFsnLrNhJANXSuC0pto/fgr0Crcxbj6fyLqiIDhVqjWuPX4oxn7pWjw9DIt
- GoQBUCIaImYHWB0JjIK2qXxWAWydF2W0+cctRTWe43JBh2/erO2OO1GRPRyBF2qGl4pg
- u49BByvmfmQl1PPnOyMQj2kUlEtH3VjKs16K7xLqdb3yR6zhHk3bjTRvnUQfclsj/EqE
- oCrfUr0rRV6Z/fgGH6hjzO8zw88xPyDvLHh86+rF5AriD30XySbby9mEUdvzRr3cr6ti
- GjUg==
+ bh=oP4iBnLpP2lj4yzd26L7JK/cK/7KsHidxViD/wTPCMs=;
+ b=VGM9MWCO6P7FOngr7HaNKBLFzIhDq8n6HzkJl5bA7xUp4ci+jTQOTgfJ7rOZF0by8d
+ AcNuEYsA9z8l8P5p/f5MGtAuGHD1pu4Igl+AaalKGuKvpsIvPyQ89V0o2VMgV00LyEgA
+ KKuj31Xe7iEsDPSP5k6T6QKMD06bqmUcRXdbOrLAxN89lQFE3C4dKe3hK8r7XgaVLKLI
+ s+15Hp3FUhQOUrySenR+C2u+X1I8M5c2UJDuKwgHYXBW6AvNl+iBc/KuuV0D69yb9KrB
+ qODZiKKstG5RyfgaS/eCYF+9zkx6G58ouz8UIRnzqKePVOgdqt45h6wH+bdm3kqwyAHV
+ z/gQ==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=gTG0HZyL
+ header.s=google header.b=VGM9MWCO
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,7 +159,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi Tom,
 
-This is small cache fix for UFS reported by Jorge Ramirez-Ortiz.
+This is a single change for Raspberry Pi platforms to use the bus offset
+and make the NVMe usable.
 
 Thanks,
 Neil
@@ -171,18 +171,19 @@ The following changes since commit 042e45e026c77227319a426940577856ffe62e7b:
 
 are available in the Git repository at:
 
-   https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-ufs.git tags/u-boot-ufs-fixes-20260728
+   https://git.u-boot-project.org/u-boot/custodians/neil.armstrong/u-boot-nvme.git tags/u-boot-nvme-next-20260728
 
-for you to fetch changes up to 38bfdf0a770219e2f753023998bc9d0b45254785:
+for you to fetch changes up to 09b1c0f98c0b0fe0291e6dac49d0013e782b438d:
 
-   ufs: invalidate the whole descriptor data segment after a query read (2026-07-21 09:22:58 +0200)
-
-----------------------------------------------------------------
-- ufs: invalidate the whole descriptor data segment after a query read
+   nvme: Fix missing address translation for PCIe inbound access (2026-07-21 13:39:29 +0200)
 
 ----------------------------------------------------------------
-Jorge Ramirez-Ortiz (1):
-       ufs: invalidate the whole descriptor data segment after a query read
+- nvme: Fix missing address translation for PCIe inbound access
 
-  drivers/ufs/ufs-uclass.c | 1 +
-  1 file changed, 1 insertion(+)
+----------------------------------------------------------------
+Torsten Duwe (1):
+       nvme: Fix missing address translation for PCIe inbound access
+
+  drivers/nvme/nvme.c | 73 ++++++++++++++++++++---------------------------------
+  drivers/nvme/nvme.h |  3 +++
+  2 files changed, 31 insertions(+), 45 deletions(-)
