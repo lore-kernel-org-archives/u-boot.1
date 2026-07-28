@@ -1,111 +1,130 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76295C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 621FBC531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:58:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 40A6660881;
-	Tue, 28 Jul 2026 11:57:08 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EIxRjO0pOKIs; Tue, 28 Jul 2026 11:57:06 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 634E060817
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785239826;
-	bh=ULkYgavP+jv13kZu8QAaiI/FUJJa7scRBpRxjenmYX0=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=blNNE3GZlTRYFMs3jW3gi8wiX46xTaa1GgUSl96aWkrnoQ6nDEoEK5jBIxEAzMDAx
-	 K5Dq5e1wINoqRdJmh1eHv1ZCfj4Dr8I9lJxuLZ9r3oxfBiN/tEekNAIp0bEA1+WiIA
-	 Ed74n3SwMlDcuiaKrh14E3d1ezG5xaVhpO5EHxtKZI9c6p3uaWE9CBf1jDCLgf8H0H
-	 0sCIivTo2xtyXXYOAq4189E/SqYIeYQe5Y7F4XW/Tmufeoember0JHNkT9/6Qw6Nid
-	 f7bsTOH3+MTEpM81ItKcNCOjM8ibXYE26i1Oo6eVJ9R+K7RfeYYSMWKKBV2zd83saq
-	 tXGNu5IBqyT1g==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 634E060817;
-	Tue, 28 Jul 2026 11:57:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 04A18357
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:57:05 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EA50881325
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:57:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 57EE181331;
+	Tue, 28 Jul 2026 11:58:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QFjX2OIk-TRW for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:57:04 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 79080812DC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 79080812DC
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 79080812DC
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:57:03 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BD368494B; Tue, 28 Jul 2026 13:57:01 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44E3882991
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:56:59 +0200 (CEST)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id D341760A9B;
- Tue, 28 Jul 2026 11:56:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D04E81F000E9;
- Tue, 28 Jul 2026 11:56:56 +0000 (UTC)
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
- marex@denx.de
-Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
- trini@konsulko.com, michal.simek@amd.com, alchark@flipper.net,
- jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH v5 45/75] usb: dwc3: import from kernel v6.1
-In-Reply-To: <20260716134305.614278-46-anders.roxell@linaro.org>
-References: <20260716134305.614278-1-anders.roxell@linaro.org>
- <20260716134305.614278-46-anders.roxell@linaro.org>
-Date: Tue, 28 Jul 2026 13:56:55 +0200
-Message-ID: <87ecgn1g54.fsf@kernel.org>
+ id dtPHkUdLFqIg; Tue, 28 Jul 2026 11:58:20 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8691E81325
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785239900;
+	bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IlzPu6iaheMx26nja051kzGkLeQPq0n+L2kTGuEQHDn+zrnl/5Kv5wjGYW3pUyzql
+	 +arAIR8wdyZki7xHK6YOgcppNwpsHbgyBULrSAG0bCNYkRsHpyLPgowy9wAsExyZKJ
+	 eU3qlO5cO0ZPQ07SiGbf+nYMxehhtQVUrOfTqmVvp9JyWK3KVNrHSslEFy+ZfyejDm
+	 JAIX/mCC/qiKrcvy+dQw4/dNsRTC85EOQdrtFcC4u9j7HmxgTOcEcb9INsYu13bGCH
+	 WD/oDtTvU1BDYwgtQuJt/yjtzXwqMm+6vJvQD0QbAA/zVCIQmhPXqAIzcy7jkxLjRW
+	 5rF//1PhCsVsg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8691E81325;
+	Tue, 28 Jul 2026 11:58:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7367F45B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:58:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 59DF8400B8
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:58:18 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id x08cQdLr4K8C for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:58:17 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 4E22940085
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4E22940085
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4E22940085
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:58:17 +0000 (UTC)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-69f7af97316so6016690a12.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:58:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785239895; cv=none;
+ d=google.com; s=arc-20260327;
+ b=ZgdIu7+Ldnl3UPwItZ8wgPlzOQp0yLutGZw0UWu1yp3/QjnmTbtvTZa3171/cZLUZS
+ ERe1JeI2XSvFV7X/rGP0ZRLafUECASLQob/MgykOXv3SJx7fl11NK/i8nkzdjk/nwXH7
+ NkzRDEOu92+ULOYmEzF0PycE/waYm4QUdt27BqBrMag9ZLomlViLOHueIOEV+jtw3DYI
+ m9pMl83RzgjYFo36lN/5VWEKeHk4qWje5PrkbQHKBpPH9vkWIeRBenmOe+3GudfFrXjb
+ 55pV23en6dStKFNRJyxNsxno5HXjt4s5VL27cNThFvXM6gtsT15oQh1s1Q7SU3THwyOh
+ BfFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
+ fh=YsOqrmLVmht63zxcDX/pvTK7+2dLBbyowfgIb7LrVa4=;
+ b=UKkuV6TeHDEAPL6ufqfjhLhQkc2EE+d0HngT8s7z6GmBNisjxcKTKehx/ALZXiFZi8
+ wadpOiUrYsA2dozi+xkAlJQ+q8zsIPX/swf2GqxxGZeGbf/QWY8sfK12GqlIzhXtH3t8
+ VFnfLdQmXbXRXsDQfJeZnltZMVKWZN6yJRt30tAHQFTYydEIv5dbt9pP84dvfJg5jMV+
+ YURXB0u4D0Vzi0ucmj6H7dleSvMUo9Jqh9wCMyhv1a0ep06SfYTtFMroF4eLg0ApcwGw
+ yHZpcYmhOeLLiRRSioyabyCQ2R96U9C3I3fFORU0Y+dGEDVf8m/ILK5ejsw5/Wit/nYz
+ m6/A==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785239895; x=1785844695;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
+ b=K/1DvK5HkWXMcowP+CiwprwVl8oxdPo/xRGpqv7hoMxVF/mZoOZ0rDuMFqcB5EHwLr
+ QgyrcZ9YI4+mF4EkOimeDox75TKugX8vopHFl6laHJ6q/zkPotQYZ4VqqtpDkXZwugxv
+ 6oUdT7Ru6HGE1q0p1zpJ7GQcJC385DOOXmnY6Hr9YMf1RqkG0TFo3OQMj7pRZV9PXfDu
+ j6NOZjDiG3m6e3CpFrHLJcWA/QL5HiVvCtAjM629QYr5r7NW+p4cUIKpleaaQ/lb1t2S
+ F1mOpqfKMBMbocFJJmZ5AhnJnL/LiA61X2lfoGKsWjXWP7HRngTAms0ww18o9zzLG5Oq
+ 1GlQ==
+X-Gm-Message-State: AOJu0Yz3MA34ziiTnyMknHcbL3rt5P3URsD9rDljaYKcFSkiVt4LY48b
+ Z9WO1de/Wb2Vn1bu26HLFDWQAQe08iNTeJJKM9Iucgo25cURZpwKMlkg9fWIfZCH8MYJJYOaWHf
+ /I1ZUzWQDXE6sq+U8YLvViO2bcWComkD5JrcyHCQ1
+X-Gm-Gg: AR+sD10ntbsXs1pqF+Vg8wSjJeBOCZN0ES37lAjLuxukUHi0W679GKRiRDpuXmVEm32
+ fbkrnz85m3M1bAmFlnBCnCjNQyZqjHxS+PaBbyiKpL7qdoen7pLh8XmvwsEudpEv4ACignp02y1
+ dN3ORDBKJOyyVU4F1DRxpn4yzFvtVDmYDyHOZ3esybZCvN6zjoti7J2M8sC70uyCFVwO7nXkyXb
+ ZBFd19GVt1GfRtjYcYJUPBycN3B43m7J2zRSDxACjHCSZpfxv3XoQUoPQVV
+X-Received: by 2002:a05:6402:530d:b0:69f:ec6e:89b7 with SMTP id
+ 4fb4d7f45d1cf-6a034a8cf93mr1065617a12.40.1785239895215; Tue, 28 Jul 2026
+ 04:58:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+References: <20260721025327.161856-1-marex@nabladev.com>
+In-Reply-To: <20260721025327.161856-1-marex@nabladev.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 28 Jul 2026 05:58:03 -0600
+X-Gm-Features: AUfX_mz5bzSQGTpcZTbwXkTz8qhhkFh1p7fyaY8w3BYN64ksygXqBBtNp4ranHk
+Message-ID: <CAFLszTiwrXDyim2dTPo5=K1Fm82acJA6GKCiPWBdnRsFZjAQ0A@mail.gmail.com>
+Subject: Re: [PATCH v5] binman: add CST backend selection for i.MX8M signing
+To: Marek Vasut <marex@nabladev.com>
+Cc: u-boot@lists.u-boot-project.org, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1785239817;
- bh=ULkYgavP+jv13kZu8QAaiI/FUJJa7scRBpRxjenmYX0=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=KOkBmhvKjBFC0A5t/heARbWDFqFpb5kpIvK5+zcINUZr/8ZeObNFAx/5gRJpeXQdQ
- EcJd8HlApTJkK4ZfkgJQgfr3oIrFWmAfPQkt7HvyQAlZxfGDOoIfWMmXZur0lw2D0r
- yj/ASRTForyoECNGtDmSOCkwiJWxTyKIo4bJMrPIZAHIEHXeqnTDmNQ1VkDQeBmkX/
- YJnF1yR0ZVDZLZHKybyh5bmnSSlwzFB7Gv2hU24YCjRbtLiADuLrT9vk0ZKo4WzEp6
- 7zGyCa1VvCaezjgGTvkS9Xsu7ITZaE+yeoWFD7gWU/MUEn8t5mjUS5iP5hRjrK1FMQ
- JXJkJinYtoAAQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- spf=fail smtp.mailfrom=kernel.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=KOkBmhvK
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=mkorpershoek@kernel.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="KOkBmhvK"; 
- dkim-atps=neutral
+ d=chromium.org; s=google; t=1785239895; x=1785844695;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
+ b=LCDbvQQTEAAfVaO/GMi9Phh0TQ8bLptVz/UVdS51xmphBBILK4U1hiGBcguBOFuQVp
+ rx4QH6Unj/zEI8a+oj0cN1/WWV6JJHSqwVeqMqhGUV50e1mFTjQRh8Mv+rhOV/FLObL1
+ lkQuPQWW1uwYj6fHjzikNFB/vxZ1vfhIJwGQc=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=LCDbvQQT
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -120,75 +139,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Anders,
+Hi Marek,
 
-Thank you for the patch.
-
-On Thu, Jul 16, 2026 at 15:42, Anders Roxell <anders.roxell@linaro.org> wrote:
-
-> From: Jens Wiklander <jens.wiklander@linaro.org>
+On 2026-07-21T02:52:37, Marek Vasut <marex@nabladev.com> wrote:
+> binman: add CST backend selection for i.MX8M signing
 >
-> Sync Linux kernel dwc3 changes from v6.0 to v6.1.
+> Add support for setting the CST backend, both via DT property and
+> CST_BACKEND environment variable. The CST currently supports two
+> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
+> CST tool is invoked without any -b parameter. Keep 'ssl' backend
+> as the default, but explicitly pass it via the '-b' parameter,
+> unless the user selects 'pkcs11' via either method.
 >
-> The following files are preserved accross the import:
-> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-> dwc3-layerscape.c ti_usb_phy.c
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 >
-> Skipping unused files:
-> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
->
-> Note that this is a raw import and doesn't build.
-> A fixup commit at the end of the series fixes that.
->
-> List of commits: git log --oneline v6.0..v6.1
-> Commits imported:
-> f90f5afd5083 usb: dwc3: gadget: Clear ep descriptor last
-> e0481e5b3cc1 usb: dwc3: exynos: Fix remove() function
-> 3aa07f72894d usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer
-> d68cc25b7c7f usb: dwc3: Do not get extcon device when usb-role-switch is used
-> 5c294de36e7f Revert "usb: dwc3: disable USB core PHY management"
-> ffb9da4a04c6 usb: dwc3: gadget: Return -ESHUTDOWN on ep disable
-> 308c316d16cb usb: dwc3: gadget: Don't set IMI for no_interrupt
-> f78961f8380b usb: dwc3: gadget: Stop processing more requests on IMI
-> 3f53c329b31d usb: dwc3: st: Rely on child's compatible instead of name
-> 4db0fbb60136 usb: dwc3: gadget: Don't delay End Transfer on delayed_status
-> d182c2e1bc92 usb: dwc3: Don't switch OTG -> peripheral if extcon is present
-> 7a84e7353e23 Revert "usb: dwc3: Don't switch OTG -> peripheral if extcon is present"
-> 2adc960ce79d Revert "USB: fixup for merge issue with "usb: dwc3: Don't switch OTG -> peripheral if extcon is present""
-> 2a735e4b5580 usb: dwc3: core: fix some leaks in probe
-> 63d7f9810a38 usb: dwc3: core: Enable GUCTL1 bit 10 for fixing termination error after resume bug
-> a6fc2f1b0927 usb: dwc3: core: add gfladj_refclk_lpm_sel quirk
-> 93440d1fdf0a usb: dwc3: pci: Add PCIe device ID for USB3 controller on CPU sub-system for Alder Lake P
-> ff2d2bee4750 usb: dwc3: pci: Update the macro names for USB PCIe device ID's for Alder Lake platforms
-> d6edcdc1ef06 usb: dwc3: xilinx: fix usb3 non-wakeup source resume failure
-> ec50e114385f usb: dwc3: xilinx: add power management ops support
-> 875296ea8ff2 usb: dwc3: qcom: drop unneeded compatibles
-> 76bff31c7fba usb: dwc3: gadget: Do not clear ep delayed stop flag during ep disable
-> af870d93c706 usb: dwc3: Fix typos in gadget.c
-> 8422b769fa46 usb: dwc3: gadget: Submit endxfer command if delayed during disconnect
-> b353eb6dc285 usb: dwc3: gadget: Skip waiting for CMDACT cleared during endxfer
-> 461ee467507c usb: dwc3: Increase DWC3 controller halt timeout
-> 5265397f9442 usb: dwc3: Remove DWC3 locking during gadget suspend/resume
-> 2b2da6574e77 usb: dwc3: Avoid unmapping USB requests if endxfer is not complete
-> dff981842a0b usb: dwc3: gadget: Continue handling EP0 xfercomplete events
-> 9711c67de748 usb: dwc3: gadget: Synchronize IRQ between soft connect/disconnect
-> e1ee843488d5 usb: dwc3: gadget: Force sending delayed status during soft disconnect
-> 359d5a85a758 usb: dwc3: Do not service EP0 and conndone events if soft disconnected
-> d75807ab9569 usb: dwc3: qcom: clean up icc init
-> b89bffa2efc9 usb: dwc3: qcom: only parse 'maximum-speed' once
-> 808e8bff6fe4 usb: dwc3: trace: add Start of Frame Number to trace event
-> 37a136aac3fe usb: dwc3: debug: show events parameters in hex
-> b44c0e7fef51 usb: dwc3: gadget: conditionally remove requests
+> doc/imx/habv4/guides/mx8m_spl_secure_boot.txt    | 30 +++++++++++++++---------
+>  tools/binman/etype/nxp_imx8mcst.py               | 19 ++++++++++++++-
+>  tools/binman/ftest.py                            | 15 ++++++++++++
+>  tools/binman/test/vendor/nxp_imx8_csf_pkcs11.dts | 27 +++++++++++++++++++++
+>  4 files changed, 79 insertions(+), 12 deletions(-)
 
-Please drop the irrelevant commits from the log here.
-I see st, pci, xilinx, qcom and debug.
+Sorry I missed this earlier...
 
-Maybe there are others.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-With that fixed:
+Thanks for adding the test!
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+Regards,
+Simon
