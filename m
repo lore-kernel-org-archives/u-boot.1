@@ -1,112 +1,112 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E468AC54F4C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B707C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B6D1760A38;
-	Tue, 28 Jul 2026 13:00:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 47D068142F;
+	Tue, 28 Jul 2026 13:00:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N0TWIxHUoxiy; Tue, 28 Jul 2026 13:00:28 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id K9EsNcJDg-kK; Tue, 28 Jul 2026 13:00:31 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E78CF608DE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 61A8881403
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785243628;
-	bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
+	d=lists.u-boot-project.org ; s=default; t=1785243631;
+	bh=S0PLjGAtNvlSUGDmLScXosDQ4GUONx0iuZmDjcUZgqY=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hATmdVd4x7uups5yZUIGlkNktDtafHm5n4GjxdhyRnZcQfhW8mQ31K9RkbXiqGZ5w
-	 mpDs+SWBebaVx58D+5jSSKqRVZ/L3ICMctcpXE6Tev6x3KI9AOBA1ntMGF2Hl5qLaj
-	 Po6JYPw7kEM1/FXOznNpjzQtEkDydWRKoY6Ew6zWQ6oOy7EWG6e7I0DW6IRSYbZgUr
-	 oILipuQHE+JE2gYqSg9JFsQDElRu7Z+21Kzqvbq70T/Trt7DFqfTGA1xAo5GxUUVRt
-	 ThuQdSSHsVzD5NBvWg9+9brP1tDrrZatz6sNDD5StMTwA0eXK9KFVhWtZMMigeafCO
-	 gqxmFrnaI8tag==
+	b=1ASAufY+G1a1uJ1eoPU+CSOzL4H6j9hgB7k0aHUM4fhrE1tSQETXOBHfZrUKCE7Qe
+	 Mut0qYdEGUx8/0nQB0a3fo26nevJ9dJxdJfAiaMgcwV4BgX1bCOVtF4cXE4JYyoNB2
+	 5EkS49sOsdl+ws0+PCqVjvtdlRezQVxDQFtuaVuWRmZj+0tqsUpvimNOdK9y2nqe/0
+	 iOdN2pRzwxSlWa28e0P77VT6f35A8sTDhdNzDXvggUj/Gv0oglcv055N3An9JyrRPe
+	 xSOChF0gx5e1Eqo2QE51nm5ugWlk31cX7ZI8pEL3npXpQqZeMTyH7Aco23/RtSkKkB
+	 3oS5DfQodRohA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E78CF608DE;
-	Tue, 28 Jul 2026 13:00:27 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9027B45B
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 61A8881403;
+	Tue, 28 Jul 2026 13:00:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D8B342E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:25:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 81CDE4099A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:50 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CA29B402D8
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:25:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zpEdG4Zp856O for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:23:49 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eaLW-5L2GRlv for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:25:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4F6DE4097B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4F6DE4097B
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4F6DE4097B
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:49 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-69fe3cd5ee6so3996124a12.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:23:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785237827; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 4F321400D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4F321400D3
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4F321400D3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:25:19 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6984169c126so6267266a12.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:25:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785237917; cv=none;
  d=google.com; s=arc-20260327;
- b=Bek/hWv9UjBGm7QKiqVWNTEvqXRlexp4yQd08ud6rAP2lr+7moXdNAkT3tFe+Ral0U
- hKE51dO5YIoLprdLsgx4jLJC6QN6NnsWGETfQ7jBl7va5PrFupoOCgBMFEWk/R4dhUX3
- LhfaJgm+e+T8I8odsG89SRZomKC5xuFENzZVW+x3gKt3tD3PMsSBdDdMQ24MjxFEl1oW
- gQ4NzVVJDAw5LJjGsd5Fb20SiKrzm4haS8DQ4QJ6vSLEEg7t+WQDiGqV/cOpZRfoQz88
- 2FXJhh4J7wfaWRZOXvv15BrrUSSsgOKu2zQOOKgYi/YWem4/RleKSGiQ6x7ndrvJTqa6
- 2LdA==
+ b=jThECiPs3q092f3+dVaooyB5u0KlbmgIyTdzBN+0p+NHe0dkqAi1cMPrQRiYqKu+c4
+ 5x2MusWtWU+IQ7MGckUx8UbsAT6t13g6tdt9lo9r+XCPhfnBENZbwsEKpERXJGhm3FMH
+ OndmF063P2/vGwwbKV8gVOlnT0jZ8kxXE9pwB7Fbdc4OEx9ZnIkB5p46YCBuglVZE4fZ
+ 6KtpkQmKslb0QXebffiELUWysWcM8qaME9/yt7HHE+GtMqZies+R+6ZGQuSQ28GuiUpt
+ Uzs6a2fPGW9UcTV/aidasYoJApXPC6LLcLnoeCHbOu3srqs3TvnaoVGvGMMU65iKNeIF
+ dR/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
- fh=fKLNsKKNouJCXbiPm4Wqr7QFLhe/H4+/v7KZUfF7G20=;
- b=V/uKY8qFpJpzLU+wTWcgxRxfvL2um5jBqy1XZMGnfQ+2eLj9NE461ijKQu+vEpq2ql
- +TgbzXPAOe/J5B0EccAE+fXx8cOFMUSlG5L3hbUMyyUGWk7SZBtxbzTt6x6523yH48/S
- /hgGnPdcv8uevubMBkmj66Sd0l//3RLi2WEUvmH6EFW2Bngz13ue9l2PBUCeKMQK4Qip
- PXrA8VPfbXm9a31FreQj27hMnDkOyk8Ly3ZcVXZcDE8Yv0Rf7rjoFNA2j8rnXpDhrVKf
- 7j2ZPseq1HEP0qnKDQk/7TtvJi30csuzAQrTcaEVSxOl9PGGziNZtP3lPusv70XelrjD
- uzxQ==; darn=lists.u-boot-project.org
+ bh=S0PLjGAtNvlSUGDmLScXosDQ4GUONx0iuZmDjcUZgqY=;
+ fh=F3A8iYmsBhsOqUPqopAmbO13VrP7+eS+MzeVyCmJKNA=;
+ b=Q411BGVAjnVO6q71jyTIDyMXy/weqUowxdFYVpDfleOpkShtmPr3t4vzKODNiR4Rur
+ OitG/KBEv+SHxsxmUzD23VXY8v1dWyo9fClGHwvgyEIVG9PeRegrLzr7IVQnDO8BWQSF
+ Gm2J2D3w/wNtqw8D1IctyFsFT3FI59+szgraXfchMYNgKM8YrdMTZyHw6WT8LL2DeKJ6
+ NSBdjccfpNqBJw6rC27nNvbZsRvpb7x+bxc9ciXpc69RAIAHkkBmqRB1KkWXJY0wkNXe
+ +RDwFLKX3envgDYNo8V4A3OjUyjiR0UO7WkePpMeghs89lItR/9slQi9/ua7ITuxCvet
+ nazA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785237827; x=1785842627;
+ d=1e100.net; s=20251104; t=1785237917; x=1785842717;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
- b=QCcQZ8McSZ5eaia9A5S8WuenHijyJ8JO3F5QPdNnRYE8PSe0+znOz7R4tPJ5Uh3K0E
- 4nyWP2hGhaR1CLaLApEOourTIeX2TGaJ2lbOUOn0UXulkWhTwLQ9WMX5kV5IXBTcv1Dk
- f39pBLf8gSWUa0lHsNVjKFlaP4iCQXwiEYf/Pcqxw0l/uG5HRSDzckByNV8LDm4denWd
- BNHdcwCtuk//ptRNXUAUel251OSrYT9iVOQiKUL/mLqebzyQhrHo7HN5ycyzRXsveoiZ
- 5NSgwtmm/EW84xjaqaDXA37LkP2LBIkB+D8RS3Q45LXyTpwEEbWTP8dGTuaop/KszU4O
- sWIw==
+ bh=S0PLjGAtNvlSUGDmLScXosDQ4GUONx0iuZmDjcUZgqY=;
+ b=KbCnoyXuk5Fq3ev4BEvrvOBceSKZS5vEkna7POrEaQ4eoj8lYVm1y+MQLdkcN0UGVC
+ eDChYw8Njx3aT28GUwLwdC4FowoT+6VZhSlKK3R81pOuF2HQOgxXFX+rYYRGAwKTeIzE
+ E/t+fVUSbQwMRQl2gMbR99QmnNisDl3skJZS3JLnVxVeyO360HdIMaVsf6iIkrr8ZFW5
+ 9vnSxflNDN+KOMD8IJ0AfyZMypxLpXvQKIdpTu/oxBii1ngkRmKeltZa/k9+7buLMl5k
+ vR65K+4tsG32IRT7qof2lw8NvFWTGjW9mVvl9D7iD7gTn0TMNChCKZPcs7wzjMoH+kX5
+ VSJQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoeBku4vd5ciOgnsa60r4WNrKMhhMHaEDfpZlN6CZVrvi0EoS5wXtahGhiRtqmyIfZ/6FnpmQ0=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwjQsfztaj2xQujJBN+n5j3WXfH2xtr5eq0XtoLWVeQW22KgEAy
- juOgjydQcm6zSXLM2IWsHwCN1CKcbh4znx6K5GSiwc26mBD2hBc/tMBRPUfzJ0d6w9ndBvDXO3i
- DsL7Vhpk+lsNsZPVUDSLLLT5+RA79vjvoAcFLVyBS
-X-Gm-Gg: AR+sD10oxEYqKyGT6mVpbpiheCiqqOWx/7YaLjkiP053NIarcimJ6s1s2OfIDc0zJf4
- pZEc8Xxp44UwA3/Xa8iyjbXpD97lGYe28pMGhvZOYXIy1oiBlT3lKkFj9A5TNTnXjkiSPuxEdro
- xljm//WbQMsuL5CEDdJVNZeqQL5ndhHcMkfMHFSTFgRMmweJYlq14wki38kZQQxRzMioSod0sll
- nA8NId+GoP5G28b/IH0Ln8zwdYToKlTMpWCWlVWQlu/YDXjIiuLRlSdxm/a
-X-Received: by 2002:a17:907:d041:b0:c1c:26fd:4f31 with SMTP id
- a640c23a62f3a-c1f72115624mr96136966b.26.1785237827182; Tue, 28 Jul 2026
- 04:23:47 -0700 (PDT)
+ AHgh+Rrn05XTTYvKsf84Ihbz/0f+4XQwzcD2YMFiSTMmpTCckKf0Asf08P6JsDiWs3xku673+bJzIn8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzoyD27lHneZhUVn4CI14exnVEWbW624c1QVGTl5ot5W1gkCtxJ
+ 3epOMHNBdhhCzijoMFie7BjUAExDIAgA+YOqWOZ8hJRwz5jgoDujaW95iwDW4sR2crZyv+gtCSD
+ yv9vR+kfLz07H20AvKqOJWNwCF4RDTJrLQVBhFoDG
+X-Gm-Gg: AR+sD11rtweph/ipyMpn0xWlCd/e9O1SJHGcJipqA9RjpJJcxQkX3pWZa3eNPAFde8d
+ Ks2YenU8k+uBs0W0K2WelXkUcJoMbyH38jHFgFItYKsRrkALkJGhmlXmLb08VptqQIPOhGrUTJV
+ 7excjb7x7k4zXvRiM68NOPLCoJN8soztxyr9c17oVbkAJE8wX8o6Elr319E6YvxRp6pUP0b1FZt
+ 5bqBOQ+KLfEoGAakONn3A4HDsYR1lLDu5WIurwg64Jrf1BH7PJIXwbC6ZSs
+X-Received: by 2002:a05:6402:2b8d:b0:695:822c:1083 with SMTP id
+ 4fb4d7f45d1cf-6a034a9b550mr1041371a12.28.1785237916887; Tue, 28 Jul 2026
+ 04:25:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
- <20260719-submit-ce-series-v2-v5-7-3c41f66d4522@gmail.com>
-In-Reply-To: <20260719-submit-ce-series-v2-v5-7-3c41f66d4522@gmail.com>
+ <20260719-submit-ce-series-v2-v5-8-3c41f66d4522@gmail.com>
+In-Reply-To: <20260719-submit-ce-series-v2-v5-8-3c41f66d4522@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:23:35 -0600
-X-Gm-Features: AUfX_mz4zcgN3R5yqFxV5lyueulMF_X37ltcpxpAYYvNrbtHFSoEOVRrgxz4s1w
-Message-ID: <CAFLszTjt1kmQOArWZ13Poa_hqw8DsQHfmuDyYjp0b4gmUodFNQ@mail.gmail.com>
-Subject: Re: [PATCH v5 07/14] crypto: aes: add software-key provider dispatch
+Date: Tue, 28 Jul 2026 05:25:03 -0600
+X-Gm-Features: AUfX_mwJ02w6tYz32lzylO3LC0-bhwfBoLNsnLa_zFGoL3v2RckBydqygmgQOGI
+Message-ID: <CAFLszThzQE4F8Zmeb9E-dS8CPUMsSuvkPutCEezRCfJ6ax+ASQ@mail.gmail.com>
+Subject: Re: [PATCH v5 08/14] boot: image: add FIT decrypt-to-buffer helper
 To: james.hilliard1@gmail.com
 Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
  u-boot@lists.denx.de, 
@@ -150,22 +150,21 @@ Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 28 Jul 2026 12:59:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785237827; x=1785842627;
+ d=chromium.org; s=google; t=1785237917; x=1785842717;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
- b=kIcUeCfYKiu2gjWqARD1H6svfV9TSDxA1qpsSEDGnTNlBgUpfzb30vPqA33uEsbZaG
- nr0pvGNFC2ZV3nxtK9Dk8sSd2dF0yaNYic9AMNE1s/NAkgV0TENxIGEeilXbkhlUe/x3
- DHczSb0+xUUS412TqMIodZPHhancnXIZAStw4=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=S0PLjGAtNvlSUGDmLScXosDQ4GUONx0iuZmDjcUZgqY=;
+ b=lBNogRPBxOCab4URA9X++CD7+vLkfwD4UM4bMMVUdvkQSz3bRLrFm/0SoVyKN2d9tZ
+ i86CBofOs13Y/3iulEEvG1LZHD/5H/q+8e8H5s//SzAvsiDTWynbUQ6IPZfgUnHbvAMz
+ pEjc4asKxa+en2ddNqOCSQiN02R/8FHiQm11E=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=kIcUeCfY
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=lBNogRPB
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,30 +179,63 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi James,
+
 On 2026-07-20T04:13:44, James Hilliard <james.hilliard1@gmail.com> wrote:
-> crypto: aes: add software-key provider dispatch
+> boot: image: add FIT decrypt-to-buffer helper
 >
-> Generic callers which supply an AES key need a provider-owned slot policy,
-> since hardware may reserve or preload particular key slots. Selecting only
-> UCLASS_AES device zero also prevents a later provider from handling an
-> operation unsupported by the first device.
+> FIT cipher support currently allocates the output buffer inside the AES
+> helper. SPL often needs to decrypt directly into a caller-selected
+> buffer, for example a load buffer or a scratch buffer used before
+> decompression.
 >
-> Add a callback through which each provider exposes a slot for
-> software-provided keys. Add a CBC decrypt helper which probes providers in
-> order, continuing only when a provider explicitly reports an unsupported
-> operation and preserving hard probe, setup and decrypt failures.
+> Add a decrypt_to callback to the FIT cipher algorithm and wire it up for
+> AES. The existing allocating decrypt path becomes a wrapper around the
+> new helper.
 >
-> Use slot zero for the software provider and avoid Tegra's preloaded SBK
-> slot. Add sandbox coverage for provider fallback and hard-error
-> propagation.
+> Validate the FIT cipher key length, IV length and unciphered-size
+> property while preparing decryption, and build lib/aes/ by phase when
+> FIT_CIPHER is enabled so the target-side decrypt helper is available to
+> SPL builds. Use the DM AES provider helper when enabled, retaining the
+> software implementation only when no provider supports the operation.
 >
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> For U-Boot proper, use decrypt_to for in-place decryption when the FIT
+> payload is already in writable RAM. The encrypted data is no longer
+> needed after hash verification, and this avoids a full-size allocation
+
+Decrypting in place overwrites the encrypted payload, so a second bootm on
+the same FIT re-hashes decrypted bytes (fails with verification on) or
+decrypts twice and boots garbage silently (with verification off). How about
+addding a note, and ideally make the second attempt fail cleanly in
+the unverified case? What do you think?
+
+> [...]
 >
-> drivers/crypto/aes/aes-sw.c      |   6 ++
->  drivers/crypto/aes/aes-uclass.c  |  73 +++++++++++++++++++
->  drivers/crypto/tegra/tegra_aes.c |   7 ++
->  include/uboot_aes.h              |  66 +++++++++++++++--
->  test/dm/aes.c                    | 149 +++++++++++++++++++++++++++++++++++++++
->  5 files changed, 297 insertions(+), 4 deletions(-)
+> boot/image-cipher.c         | 45 ++++++++++++++++++----
+>  boot/image-fit.c            | 33 ++++++++++++++--
+>  include/image.h             | 39 +++++++++++++++++--
+>  include/u-boot/aes.h        | 27 ++++++++++----
+>  lib/Makefile                |  2 +-
+>  lib/aes/aes-decrypt.c       | 91 +++++++++++++++++++++++++++++++++++++--------
+>  test/lib/Makefile           |  3 ++
+>  test/lib/test_aes_decrypt.c | 89 ++++++++++++++++++++++++++++++++++++++++++++
+>  8 files changed, 290 insertions(+), 39 deletions(-)
+
+> diff --git a/lib/aes/aes-decrypt.c b/lib/aes/aes-decrypt.c
+> @@ -4,37 +4,98 @@
+> +#ifdef USE_HOSTCC
+> +     return 0;
+> +#else
+
+This host stub still claims success while leaving *data and *size
+untouched, so a host caller of fit_image_decrypt_data() uses an
+uninitialised pointer. Since image_aes_decrypt_to() already returns
+-ENOSYS on host, please make this one match so a host tool fails
+cleanly rather than silently.
+
+In any case:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
