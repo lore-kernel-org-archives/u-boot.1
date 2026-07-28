@@ -4,106 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 487EDC53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 19:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7D8C54F54
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 19:14:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5B2E40A49;
-	Tue, 28 Jul 2026 19:14:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CD09A40A68;
+	Tue, 28 Jul 2026 19:14:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id COgFF-rv2O2D; Tue, 28 Jul 2026 19:14:29 +0000 (UTC)
+ id 4W_bm1Rp9zof; Tue, 28 Jul 2026 19:14:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A202C40A10
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8FC7A40A41
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785266069;
-	bh=7BwvrBdT8Z+ksBuq8awLHeNtgLrgnQyxyFrVy7ZM1HU=;
-	h=To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:List-Post:
-	 List-Help:List-Subscribe:From:Reply-To:From;
-	b=xWXgY2nRxyc5ufqQt5GkRqDtP23/v9jKBCL1igXTN3j/r3ZwX3/xc2cKDMRJXI/xq
-	 K1ZfCuOvQW3VbaJjnZNib9EIc8pFJssqU4NC01uNQ67ZMc4wSLBZFDfWOzxkYypVQR
-	 ISeL3mUZQVxE9IKO6GPs7GA13CZH6UvimZyOcuKzFXgYiqvA5lsq5SckRlYf0Kbjlp
-	 vfbeC7RAdfRy8dyfbgq0RPpYIOMWyH6cC1n37CDqOryrqAPxWaRruvhbyUmBdlgWMT
-	 CcSVFZzJDhZR8ra/Tzwo1Priu4iDJazbReZEKEBqX4k0L9suBp/Yo4nONt29bTlaeH
-	 4nEQsA0AH22xg==
+	d=lists.u-boot-project.org ; s=default; t=1785266074;
+	bh=da8n/PBD02StScdc42Nm1EbPbxzMaVjBl+b3oZwnDHw=;
+	h=To:Subject:Date:In-Reply-To:References:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
+	 From;
+	b=Hada0l5F1oU6iBeDQkE1LgzkAC8eSq72gbzMmYzT/3LFctSOvl2iGp/a7THXADtUc
+	 TCF2VfYkWw9kw1WsqloDLbsX8U+u4iiP3SE5ZIVXSSDNF6ftNsOUPoXxMvkIOqoSxZ
+	 A0nfa6MxEFJh916D7OckZrLAmO45nvAQoj8f5Hz/Q9NoLdbdspEDbJPuaZUACxpIjl
+	 acwMiFZ1Oh1gMNGIpW8wAu01iUxTZ6g5lyF6hij2W/iRB3mJWiV0UKmK0Iqvu1qxbk
+	 EG9oY5Qp58gNEfxEm2v2M3kFu/r/E9FnzFL4EfdOM6hsorojWqNT2mCQCG1N1qZ9no
+	 jT+QYW4uCOeDQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A202C40A10;
-	Tue, 28 Jul 2026 19:14:29 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DE3D245B
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 19:14:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8FC7A40A41;
+	Tue, 28 Jul 2026 19:14:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4A62C26C
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 19:14:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C451040364
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 19:14:27 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 30DDC80F5A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 19:14:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VMwyQbJibcMk for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 19:14:26 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LXf65g9aqqYF for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 19:14:31 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E99CA40099
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E99CA40099
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 7B89B80CA6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7B89B80CA6
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E99CA40099
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 19:14:25 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7B89B80CA6
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 19:14:30 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CD868494B; Tue, 28 Jul 2026 21:14:22 +0200 (CEST)
+ id 5770A8494B; Tue, 28 Jul 2026 21:14:28 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4FA08404D
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 21:14:18 +0200 (CEST)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by phobos.denx.de (Postfix) with ESMTPS id F35418404D
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 21:14:25 +0200 (CEST)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66SIC2f83578958
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 19:14:17 GMT
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpuygac0c-1
+ 66SIC62Z3715475
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 19:14:24 GMT
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpvtva1e2-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 19:14:17 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-c9fe4c5eb39so64243a12.1
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 12:14:17 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 19:14:24 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-388b404eaa4so209834a91.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 12:14:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785266056; x=1785870856;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=7BwvrBdT8Z+ksBuq8awLHeNtgLrgnQyxyFrVy7ZM1HU=;
- b=eTqG5oZkojqzQusF1klXpKtiq0EadPK6y1l1my3Rhy3SWndvY+8EmXMxQvmi0fYieQ
- wn2pFCyD9BjvCw+oXRboqKtFz1zuEljnebsyMwAEHs/HnSIjme9y9kTxw4RueUZIQywu
- LKLkfdyVPUgyF81y9x9QATYr4V6OEc+NXeUw2zXkDS+KWgKDnhYMECtAymhtazPZFXj1
- DdTac8VTcwoOiYGzgBFrHu+K54cYZAd56CDH7AxyhmDXyVKvlnQ8B68AGu7p/iAu/b9D
- 03wqljCzn99GPf10keWntl5Bf6qHNFmfE/o3+1KtDcsypj6jAdFYDjJgiICWAV5KLpMW
- TlDg==
+ d=1e100.net; s=20251104; t=1785266063; x=1785870863;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=da8n/PBD02StScdc42Nm1EbPbxzMaVjBl+b3oZwnDHw=;
+ b=TyQdt10uZHoWhwAg9QhAwuWvKfcdPceB7QCdBJFbH4qDCfjOvqt776YulzOFBkNCiz
+ yIqCvBI2TzLJT0ykNhHI6AokkK3CwXB63fO8nQhJatiS9ZXSRzU6yNN3qxX1KjLb0Hap
+ MvetSk4A8COhcsNZCkJIH0WeNhETrMHf2L9TU/1pfQtCcZXOt2OnCfv/rEgsAKHNlVMm
+ 0ASRwY2HbTTuEyJ3zzMvZzOjvEEGb1oADR+asU1156VO+VvrQ8dadItb2l1F8EimcIug
+ gUR242EOTu3wNx4RuS6PDwUyfvoLkx9xIjalTuwtKkgks68ftJ7i1BoQYUF0eiTiXx9h
+ 2jMQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoJa5VAj+I9G1MjykDvut7dw35ocDRFZiW+r+4P/ZnZPEzjbAiWb4I7xGk/+EmZXSRmu2kKz2o=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcnSdYMA6u4HF7d2eRZ/Lf61n9yT2qpXF5xbWBjJBb0yyD22oy
- XG38qEKWEA3Ie1YSpRtNc1Q0h2N6r6tTFie7yyYHcxp54qHHL31Ke9C1esYtHXRF+waxlYF4OFB
- i3WPgZhUTK+LJ/d4MCcqEy9o3SoFV78thgxUSjedZrdrnQGxPCxw8Ne1I
-X-Gm-Gg: AR+sD12paTSRdrp3da4aR6zllwhIIc1WqAfVjK5Xv8Xc7yDd5emnR0/4R27C/2pVhh0
- WuiI8rJBGKgRY/bq3aIoCznJ3IZ4hxc3L/ahOD5CbWXIVUtVKFI43sSJH99uAFp1ZbLorIabQXu
- Q8YMRRgSUFg8Jr9904iUBMupNxKlQco1bVwArrbFgC4Jv8/80hdOfVzz9iJvT2ATfaYPZoMgYLe
- cBJw320aBWkjYlhKvU91xAPyW+q2hMmXu8s7p0Sz2eRlckYODzTTu7VvjE6EK9Yst3/2zTKjRSp
- 29cdzyYp3k4Tn8xfa1u/sTkhzwYQyzXl+N+CHXigf+Tl0ICErAp3/Yg+HLjFMcy+oXxZbv0Lw7E
- EJGR5wTfy8ujrZ3n8fVOLG6C8pth7UX8aRfwIv1kl/0BnPKu8mLqPJZt8PP5rNLntRM4TFoLdvn
- JllBfTmKn19mSUg7McBBU=
-X-Received: by 2002:a05:6a21:487:b0:3c0:9c19:65a0 with SMTP id
- adf61e73a8af0-3c8ba63bac4mr4984959637.72.1785266056321; 
- Tue, 28 Jul 2026 12:14:16 -0700 (PDT)
-X-Received: by 2002:a05:6a21:487:b0:3c0:9c19:65a0 with SMTP id
- adf61e73a8af0-3c8ba63bac4mr4984910637.72.1785266055844; 
- Tue, 28 Jul 2026 12:14:15 -0700 (PDT)
+ AHgh+RrYZznZ+k/5Z+dHzgTCXYZxY56LK1uqigV7v/J5BlccxoAUvzm6vq7HQkmC6mNNXnYG7Wss+Gs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzivZGlC5wqi/ICYG67zcptt436lNwKszmURemZbE9AmmFJWU/n
+ LdI8gksRJ6BjgyP7OOHYx6ehnyUg0uKKDaerPHyL9VheR5lrgG//T4EROXToyYqlEMPGw/pbKys
+ 8yTb12k/qDME64iEmvRpsGQe7emDpaDsQwYRG6vxnl70wzb9pTyEwR6PI
+X-Gm-Gg: AR+sD10ncKWbQWc7+mlF+yV9ODCxhy/wpikDE03MhpP5+m6G3GD41hhClenSsh2ogDX
+ 34kHjuoL7958sYv1VwDMHO833HwXzDrapoxWt9IxI99WVDrnfLwifP0txgG7h3INBMjNo3dK6Q7
+ d53OI27T0SRdxqVKsSRRJdYcD491EDUAHGPt+BAQRrbepJYIES5gN2dJp4XwPvK+D36Ys/sGmAS
+ RltqbRmVyXXi21ci52hlXsDBGvPBV4vzegcsjB0ppTy9xcNi1F+TnXub0orqDH2Yj/Xc6J6N9kg
+ MtKcfO62eGh/9l+quFrMZIlb8Pf9ZsKZ6C4ICYmgIqpk4nfCqT3ZgENxPGtDiXVIPAxohGX7Tht
+ BEEtI7USp0+vqrP341wmoEsgaRybI49k3aABWv7JZfxvYRXz3D3zdmViiZLExKx7sZ55gFgA2dU
+ RVdegMF5T0QI1yOtJQUGo=
+X-Received: by 2002:a17:90b:3d46:b0:37f:eda5:5169 with SMTP id
+ 98e67ed59e1d1-38f6a44b293mr3628267a91.13.1785266063246; 
+ Tue, 28 Jul 2026 12:14:23 -0700 (PDT)
+X-Received: by 2002:a17:90b:3d46:b0:37f:eda5:5169 with SMTP id
+ 98e67ed59e1d1-38f6a44b293mr3628241a91.13.1785266062677; 
+ Tue, 28 Jul 2026 12:14:22 -0700 (PDT)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31504d373c3sm1261294eec.23.2026.07.28.12.14.09
+ 5a478bee46e88-31504d373c3sm1261294eec.23.2026.07.28.12.14.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 12:14:15 -0700 (PDT)
+ Tue, 28 Jul 2026 12:14:22 -0700 (PDT)
 To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
  casey.connolly@linaro.org, quic_varada@quicinc.com,
  neil.armstrong@linaro.org, sumit.garg@kernel.org,
@@ -113,74 +114,77 @@ To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
  peng.fan@nxp.com, ycliang@andestech.com, mateuslima.ti@gmail.com,
  jamie.gibbons@microchip.com, quentin.schulz@cherry.de,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v5 0/5] Add FIT multi-DTB selection for Qualcomm
-Date: Wed, 29 Jul 2026 00:43:56 +0530
-Message-Id: <20260728191401.849143-1-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v5 1/5] misc: qcom: Add HW-Info aggregator driver
+Date: Wed, 29 Jul 2026 00:43:57 +0530
+Message-Id: <20260728191401.849143-2-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260728191401.849143-1-aswin.murugan@oss.qualcomm.com>
+References: <20260728191401.849143-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: oIKnsjJS11jrRFaU0Z2cQPufupFMWyHZ
-X-Proofpoint-ORIG-GUID: oIKnsjJS11jrRFaU0Z2cQPufupFMWyHZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDE2NiBTYWx0ZWRfX0iOR0UlV5DTS
- 6XBD0Phd39ERPToGcIXxDEe0hA/Op0CW9pYF2vu0/xrfQ2xFzD/Mm0YLgmHpvF0dbehVn28vZsQ
- IEu1uujPDYMwIhMG/w41p3DlGXHh50uHxIvdAe/hA748pukxqwX+ZczkoomYWnpfr2Uzbs/1qbo
- GV5ck1aBHMyVQPGtTXendByfUF65Ez6ql+SZExmg0GBbbMwpzMgCyF/H+tNZHqNrzP8F77ufd8t
- Q8c4ODKwhdRW0AGx5md/lilTbvHf0flulAru3W4MZ+bnmeQBvqZE4wr5qFdEgX/Hd6xzsI9LBIj
- hbj+c+xoafGG/KXa2AcEqB0nQjqWFmDNbvzvOLAMl35JQe/Xa3c6PYFPbrRdbjNj5+VZ+/1gW2i
- WRhYhKrxQ6qt8vaiN/B6J6TiZZFaGX1P/8sG26KQ4OfjxBjwZGZvUu6/r7khuxtYL6ZhOxOaQM2
- kOToegWRzEXFjS4P8+A==
-X-Authority-Analysis: v=2.4 cv=aoWCzyZV c=1 sm=1 tr=0 ts=6a68ff89 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: UllohroRluoLpk_eIZV12KQ-LmAAwXSa
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDE2NiBTYWx0ZWRfX/WFZ1V6ER0kG
+ 4kdIEaUEKJ7BbUUO401jBpwVgpYrq9z06QBgYnh1lSm57Jb2pY8726lgC2EjXY0TxgPebS5fuDI
+ xTRN56UZmvVNFMFYuetW5gzh/S1kCy8=
+X-Proofpoint-ORIG-GUID: UllohroRluoLpk_eIZV12KQ-LmAAwXSa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDE2NiBTYWx0ZWRfX19EcAyGZjpBo
+ h6larslP/oM/E0U8tqiRkYv0SOwRkjopf9fh5aah8/T8oIpHW1e+mde1x+KtmXNEOGkLMuKFG2D
+ lqoGuGmAswfhoxJQ7VtSznZf5hIuSsY1+lj0Id5BPAUIOhs3kAVVhw1ZusxbBCkvzIsTAbbb+E+
+ 3XRS3XoW7M6yej7ROlLyD3Cq0edEg+Q/sJ5r2BhEtLunKHxc2WgCU126pgsJqWctk/eHfCh57TL
+ kBV/5b1Am3H6a/z3JRSyb7uz0KqhEDMs3sVwbxPF6bbdbFp2G6PQjbgnPTfRTaM/h9XJd0JweT2
+ EkrX0FmBsHmeCcvBlYSjFxOCzpuNqZ5cOYJh4p7TiWIgQeQfMfvtF7PU82pcMnVR5GwDfmHCxPO
+ SvVKlf5498fkJoJOw/qUpkwHLJyS7kya2AaQMmrwMQh4uXjJr/DxBahoWdGuNd7VguqO+LbUOa3
+ 6cdcBfw0vu6QcbWTczw==
+X-Authority-Analysis: v=2.4 cv=dOiWXuZb c=1 sm=1 tr=0 ts=6a68ff90 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=cSziVDP4AAAA:20
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=u38HHJEOLTUlGKIKg8AA:9
- a=3WC7DwWrALyhR5TkjVHa:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDE2NiBTYWx0ZWRfX/O7Xom0YjMLM
- L7LEnqYVrX1+5xs9t2maJPRhTwRZdrUFJUENQzvvP/IuMvfYzzRyHWDTsWaPp+yDnmuQ4lNqP7o
- go55p9K+Lh1eORfFh27ag+n+fK7nJuI=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=nHztRHiazSddbDhVNzsA:9 a=iS9zxrgQBfv6-_F4QbHw:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-28_05,2026-07-28_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 spamscore=0 bulkscore=0
- adultscore=0 malwarescore=0 impostorscore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280166
+ adultscore=0 spamscore=0 bulkscore=0 phishscore=0 lowpriorityscore=0
+ clxscore=1015 impostorscore=0 suspectscore=0 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607280166
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=7BwvrBdT8Z+ksBuq8awLHeNtgLrgnQyxyFr
- Vy7ZM1HU=; b=Hy238cJmGaFeaxslbtDkoPg1hbcxu7Gn4gQ4gGoL463bQVDJovX
- GKnFwir2Kps/2u/u7iWyiTD2dOhZ0KkPc8/D7dprMRU0DsIJzFPPZAGkrq9gLl/0
- yjNeC4z40Zr1pkToAdX5IcenCxIq4h2caYL+LuiT6hDAEOgwXt8Odh9boi1m9YLL
- HifTCMZWbsa5VrXRX2KFzfUBJieS1hZqMfrEmTINP/cvMjzWOOTXuEcsiVHUtvM3
- DFn4lJjoDXWLWTqjviBEmZ5iAkgBSutXMndEL5epBcgLQAJMS4iAVOK/tCxSig3Y
- P9o0ps/iHWIFciPpbazLwq+2o+XuebrqfCQ==
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=da8n/PBD02S
+ tScdc42Nm1EbPbxzMaVjBl+b3oZwnDHw=; b=K0izNQnWyXQN9jsuZ3smTLq7SYx
+ kRXX255DYRpzBRUR/izYSej5Uk1TVZ4Dsz/qpJGtZZBxR0078fkEvRhWHJm4eKPC
+ 6I66CBZIoP9mjarSyAV17RcaKgflNHKdnkqRPyFu4Gr6DC/6qaCJNapl8kD4k3sw
+ 1N502MUtgRtQn13G+ecy3X7gEY8DmJwfSwJozHHdWKMZ+4snqsJsPo8AH5A0e/RE
+ ++/skz72grLxFc/q1hdFEbzoZKC7nlgSeTWdPtrektgXLs+1d+4r/6jnRey62f80
+ KSWNK4qTnwLCZvCis4mi1LcStJzuPZYIev3L2IwkPFZON3hINNdojJmQaVA==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1785266056; x=1785870856; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=7BwvrBdT8Z+ksBuq8awLHeNtgLrgnQyxyFrVy7ZM1HU=;
- b=YcAVdOq3iBYanlJmguEgj95cJ3z/Y8FYXOW9NajcQ0/Dkw2ODmlh21Nmj8kqa6ZPlb
- LYhoTIKwrax6vqP451Jn/QObj5/qtSepQIYFxO9WTfa9izT9H7ov9TXwoXJx41FrljTx
- nTCjdcyokAT+NHejlPca3of+sG/7P/a7yBJlYkv+P6xOIGuBtrPFp4yYkUXJu0KcqPbs
- cqmDc898A2yemLkSXo/5aWKQ+TFCWTyIVDWT57X9uIU4G9ls4//NUNlRZC5AYAqlWuSv
- igfhPo8ARq9ns/IPCS0yV+dOLEr6ruq7IsKAaUie41avm+bxCdXsPlTWIJFL8kd0mipI
- PcjQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=oss.qualcomm.com; s=google; t=1785266063; x=1785870863; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=da8n/PBD02StScdc42Nm1EbPbxzMaVjBl+b3oZwnDHw=;
+ b=XW9T0hUesKD4oG9T6guvsl/RVqpYB47jDdvbScrx5AZ7xBDJOvxD9GW8lV5lJvnuFa
+ PU87OiY72EYAzwZXcPBQRITO6SUHiZVqw8qusHr7QJNY0QHTDyZbEeBTjzLIFcK6Tq3S
+ lUZ3c8lyc8lQN3mZsxpirILpW2CAZVYL/ZYM3uyIDcygXhbjl3SDIKMksgN0j2qONc1g
+ VNevYrYYU6IMiF9E2rQi5noF+jqoGUtF5vgwFYtGKkDH3EQE23+Mhii+St1Pdun+AG2W
+ 3uZFFDRcewLoDP9usYemWQeBLGyPkSG6au6B0Q3y7pC7PTVUZp6QC4P8scOdmghR+a1R
+ eHpA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org; spf=fail
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org; spf=fail
  smtp.mailfrom=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
  header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=Hy238cJm; 
+ header.b=K0izNQnW; 
  dkim=pass (2048-bit key,
  unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=YcAVdOq3
+ header.a=rsa-sha256 header.s=google header.b=XW9T0hUe
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
@@ -188,10 +192,10 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=aswin.murugan@oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Hy238cJm";
+ unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="K0izNQnW";
  dkim=pass (2048-bit key;
  unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.b="YcAVdOq3"; 
+ header.b="XW9T0hUe"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -209,127 +213,335 @@ Reply-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series adds dynamic device tree selection from FIT images for
-Qualcomm Snapdragon platforms, enabling U-Boot to select the
-appropriate DTB based on hardware parameters detected at boot.
+Add a generic driver that binds to a U-Boot-only "qcom,hwinfo" DT
+node holding phandles to the existing IMEM/TCSR syscon nodes plus
+per-SoC offsets. This provides a common interface for reading the
+IMEM boot cookie (used to detect boot storage type) and the TCSR
+SOC_HW_VERSION register.
 
-Qualcomm FIT-based DTB format is documented in [1].
-
-The FIT image contains only DTBs, while the kernel is provided
-separately as part of a UKI image.
-
-The implementation consists of:
-
-1. Hardware detection infrastructure: Introduces the qcom,hwinfo
-   driver and qcom_hwdetect helper to collect hardware identification
-   data from SMEM, IMEM and TCSR into a single qcom_hw_params
-   structure for consumers such as FIT multi-DTB selection.
-
-2. FIT multi-DTB selection: Implements DTB selection based on the
-   aggregated hardware information. The code parses metadata DTBs,
-   matches FIT configurations against detected hardware attributes,
-   applies overlays, and loads the selected DTB for EFI boot.
-
-[1] https://github.com/qualcomm-linux/qcom-dtb-metadata/blob/main/
-    Documentation.md
-
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
-
-Changes in v4:
-1. Drop the SMEM cache infrastructure.
-
-2. misc: qcom: add qcom,hwinfo driver to provide a common interface
-   for reading IMEM boot cookie and TCSR SOC version information.
-
-3. arm: snapdragon: add qcom_hwdetect helper to aggregate hardware
-   information from SMEM, IMEM and TCSR into a single
-   struct qcom_hw_params.
-
-4. Refactor FIT multi-DTB selection to consume qcom_hw_params instead
-   of accessing SMEM, IMEM and TCSR data directly.
-
-5. Separate hardware discovery from FIT parsing and DTB matching
-   logic, reducing complexity and improving code organization.
-
-6. Load FIT images directly from a raw GPT partition and remove the
-   FAT filesystem image based loading approach.
-
-7. Drop IH_TYPE_FATFS, mkimage FAT image generation support and
-   related documentation updates.
-
-8. arm: dts: enable qcom,hwinfo on qcs9100-ride-r3, qcs615-ride and
-   qcs6490-rb3gen2 by adding the required qcom,hwinfo DT nodes and
-   board-specific offsets.
-
-Link to v3:
-https://lore.kernel.org/u-boot/20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com/
-
-Changes in v3:
-1. Runtime IMEM address lookup via DT: Removed CONFIG_QCOM_IMEM_SIZE Kconfig option.
-   Added qcom_imem_table[] mapping SoC compatible strings to IMEM addresses.
-
-2. Split SoC version sources: SoC hardware version now read from TCSR register via
-   qcom_read_tcsr_soc_version(). The soc_info->plat_ver from SMEM is stored separately
-   as board_version. Added socver and boardrev metadata node matching for finer-grained DTB selection.
-
-3. qcom_load_fit_image() returns int: Changed return type from efi_status_t to int,
-   returning standard Linux error codes for consistency with the rest of the driver.
-
-4. Code cleanup: strtok() replaced with strsep(); memcpy + manual null-termination replaced with strlcpy();
-   DDR thresholds use SZ_* macros; compatible matching and FDT loading extracted into dedicated helpers.
-
-5. image: add IH_TYPE_FATFS image type: Added new fatfs image type to represent a raw FAT
-   filesystem partition image, registered in the image type lookup table.
-
-6. mkimage: add fatfs image type for FAT partition images: Added fatimage.c handler that
-   uses mkfs.vfat and mcopy to create FAT images from a directory.
-   New --fat-extra-space, --fat-type, --fat-volume-id, --fat-mkfs-opts long options added
-   to mkimage.
-
-7. doc: document mkimage fatfs type and Qualcomm multi-DTB: Updated 'doc/mkimage.1' for the new
-   fatfs type and options. Added 'doc/board/qualcomm/multi_dtb.rst' covering FIT ITS configuration,
-   QCOM metadata format, socver/boardrev guidelines, and image creation steps.
-
-Link to v2:
-https://lore.kernel.org/u-boot/20260129184817.224101-1-aswin.murugan@oss.qualcomm.com/
-
-Changes in v2:
-1. In v1, a combined DTB format was used for multi-DTB support. Based on
-   feedback, v2 implements FIT-based DTB selection instead.
-Link to v1: https://lore.kernel.org/all/20260106122134.2047864-1-aswin.murugan@oss.qualcomm.com/
-
-
-Aswin Murugan (5):
-  misc: qcom: Add HW-Info aggregator driver
-  arm: snapdragon: Add hardware detection helper
-  arm: snapdragon: Add FIT multi-DTB selection support
-  configs: qcom_defconfig: Enable QCOM_FIT_MULTIDTB
-  arm: dts: Enable qcom,hwinfo on qcs9100-ride-r3, qcs615-ride and
-    qcs6490-rb3gen2
-
- arch/arm/dts/qcs615-ride-u-boot.dtsi         |   10 +
- arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi     |   10 +
- arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi     |   10 +
- arch/arm/mach-snapdragon/Kconfig             |   17 +
- arch/arm/mach-snapdragon/Makefile            |    2 +
- arch/arm/mach-snapdragon/board.c             |    7 +
- arch/arm/mach-snapdragon/qcom_fit_multidtb.c | 1033 ++++++++++++++++++
- arch/arm/mach-snapdragon/qcom_fit_multidtb.h |   61 ++
- arch/arm/mach-snapdragon/qcom_hwdetect.c     |  167 +++
- arch/arm/mach-snapdragon/qcom_hwdetect.h     |   52 +
- configs/qcom_defconfig                       |    2 +
- drivers/misc/Kconfig                         |    9 +
- drivers/misc/Makefile                        |    1 +
- drivers/misc/qcom_hwinfo.c                   |  160 +++
- include/qcom_hwinfo.h                        |  109 ++
- 15 files changed, 1650 insertions(+)
- create mode 100644 arch/arm/mach-snapdragon/qcom_fit_multidtb.c
- create mode 100644 arch/arm/mach-snapdragon/qcom_fit_multidtb.h
- create mode 100644 arch/arm/mach-snapdragon/qcom_hwdetect.c
- create mode 100644 arch/arm/mach-snapdragon/qcom_hwdetect.h
+ drivers/misc/Kconfig       |   9 +++
+ drivers/misc/Makefile      |   1 +
+ drivers/misc/qcom_hwinfo.c | 160 +++++++++++++++++++++++++++++++++++++
+ include/qcom_hwinfo.h      | 109 +++++++++++++++++++++++++
+ 4 files changed, 279 insertions(+)
  create mode 100644 drivers/misc/qcom_hwinfo.c
  create mode 100644 include/qcom_hwinfo.h
 
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index bde5c640de8..b75b2e4c70c 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -93,6 +93,15 @@ config QCOM_GENI
+ 	  for providing a common interface for various peripherals like UART, I2C, SPI,
+ 	  etc.
+ 
++config QCOM_HWINFO
++	bool "Qualcomm HW-Info aggregator driver"
++	depends on MISC
++	select SYSCON
++	select REGMAP
++	help
++	  Reads the IMEM boot cookie and TCSR HW version via a common
++	  "qcom,hwinfo" DT node.
++
+ config ROCKCHIP_EFUSE
+ 	bool "Rockchip e-fuse support"
+ 	depends on MISC
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index e2170212e5a..2a7e3379d83 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -66,6 +66,7 @@ obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
+ obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
+ endif
+ obj-$(CONFIG_QCOM_GENI) += qcom_geni.o
++obj-$(CONFIG_$(PHASE_)QCOM_HWINFO) += qcom_hwinfo.o
+ obj-$(CONFIG_$(PHASE_)ROCKCHIP_EFUSE) += rockchip-efuse.o
+ obj-$(CONFIG_$(PHASE_)ROCKCHIP_OTP) += rockchip-otp.o
+ obj-$(CONFIG_$(PHASE_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
+diff --git a/drivers/misc/qcom_hwinfo.c b/drivers/misc/qcom_hwinfo.c
+new file mode 100644
+index 00000000000..822968234d5
+--- /dev/null
++++ b/drivers/misc/qcom_hwinfo.c
+@@ -0,0 +1,160 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Qualcomm HW-Info aggregator driver
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * Binds to a U-Boot-only DT node (compatible = "qcom,hwinfo") holding
++ * phandles to the existing IMEM/TCSR syscon nodes plus per-SoC offsets.
++ *
++ * Example DT node (arch/arm/dts/<board>-u-boot.dtsi):
++ *
++ *	qcom_hwinfo: qcom-hwinfo {
++ *		compatible = "qcom,hwinfo";
++ *		imem = <&sram>;
++ *		imem-boot-cookie-offset = <0x0>;
++ *		tcsr = <&tcsr>;
++ *		tcsr-hw-version-offset = <0x8000>;
++ *	};
++ */
++
++#include <dm.h>
++#include <log.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <dm/device_compat.h>
++#include <linux/err.h>
++#include <qcom_hwinfo.h>
++
++struct qcom_hwinfo_priv {
++	struct regmap *imem_regmap;
++	u32 imem_cookie_off;
++	struct regmap *tcsr_regmap;
++	u32 tcsr_hwver_off;
++};
++
++int qcom_hwinfo_get_imem_cookie(struct udevice *dev,
++				const struct qcom_hwinfo_imem_cookie **cookie)
++{
++	struct qcom_hwinfo_priv *priv = dev_get_priv(dev);
++	const struct qcom_hwinfo_imem_cookie *c;
++	void *base;
++
++	if (!priv->imem_regmap)
++		return -ENODEV;
++
++	/* IMEM is plain mapped SRAM; safe to dereference directly. */
++	base = regmap_get_range(priv->imem_regmap, 0);
++	if (!base) {
++		dev_err(dev, "Failed to get IMEM regmap range\n");
++		return -ENODEV;
++	}
++
++	c = (const struct qcom_hwinfo_imem_cookie *)((u8 *)base + priv->imem_cookie_off);
++
++	if (c->shared_imem_magic != QCOM_HWINFO_IMEM_MAGIC_NUM ||
++	    c->shared_imem_version < QCOM_HWINFO_IMEM_VERSION_NUM) {
++		dev_warn(dev, "Invalid IMEM cookie magic=0x%x version=%u\n",
++			 c->shared_imem_magic, c->shared_imem_version);
++		return -EINVAL;
++	}
++
++	*cookie = c;
++
++	return 0;
++}
++
++int qcom_hwinfo_get_storage_type(struct udevice *dev, u32 *storage_type)
++{
++	const struct qcom_hwinfo_imem_cookie *cookie;
++	int ret;
++
++	ret = qcom_hwinfo_get_imem_cookie(dev, &cookie);
++	if (ret) {
++		dev_warn(dev, "Failed to get IMEM cookie: %d, defaulting to UFS\n", ret);
++		*storage_type = QCOM_HWINFO_STORAGE_UFS;
++		return 0;
++	}
++
++	switch (cookie->boot_device_type) {
++	case QCOM_HWINFO_UFS_FLASH:
++		*storage_type = QCOM_HWINFO_STORAGE_UFS;
++		break;
++	case QCOM_HWINFO_MMC_FLASH:
++	case QCOM_HWINFO_SDC_FLASH:
++		*storage_type = QCOM_HWINFO_STORAGE_EMMC;
++		break;
++	case QCOM_HWINFO_NAND_FLASH:
++		*storage_type = QCOM_HWINFO_STORAGE_NAND;
++		break;
++	default:
++		dev_warn(dev, "Unknown boot device type: %u, defaulting to UFS\n",
++			 cookie->boot_device_type);
++		*storage_type = QCOM_HWINFO_STORAGE_UFS;
++		break;
++	}
++
++	return 0;
++}
++
++int qcom_hwinfo_get_tcsr_hw_version(struct udevice *dev, u32 *hw_version)
++{
++	struct qcom_hwinfo_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	if (!priv->tcsr_regmap)
++		return -ENODEV;
++
++	ret = regmap_read(priv->tcsr_regmap, priv->tcsr_hwver_off, hw_version);
++	if (ret) {
++		dev_err(dev, "Failed to read TCSR HW version: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++static int qcom_hwinfo_of_to_plat(struct udevice *dev)
++{
++	struct qcom_hwinfo_priv *priv = dev_get_priv(dev);
++
++	priv->imem_regmap = syscon_regmap_lookup_by_phandle(dev, "imem");
++	if (IS_ERR(priv->imem_regmap)) {
++		dev_warn(dev, "Unable to find 'imem' regmap (%ld)\n",
++			 PTR_ERR(priv->imem_regmap));
++		priv->imem_regmap = NULL;
++	} else {
++		priv->imem_cookie_off =
++			dev_read_u32_default(dev, "imem-boot-cookie-offset", 0);
++	}
++
++	priv->tcsr_regmap = syscon_regmap_lookup_by_phandle(dev, "tcsr");
++	if (IS_ERR(priv->tcsr_regmap)) {
++		dev_warn(dev, "Unable to find 'tcsr' regmap (%ld)\n",
++			 PTR_ERR(priv->tcsr_regmap));
++		priv->tcsr_regmap = NULL;
++	} else {
++		priv->tcsr_hwver_off =
++			dev_read_u32_default(dev, "tcsr-hw-version-offset", 0);
++	}
++
++	if (!priv->imem_regmap && !priv->tcsr_regmap) {
++		dev_err(dev, "Neither 'imem' nor 'tcsr' regmap found\n");
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static const struct udevice_id qcom_hwinfo_ids[] = {
++	{ .compatible = "qcom,hwinfo" },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_hwinfo) = {
++	.name = "qcom_hwinfo",
++	.id = UCLASS_MISC,
++	.of_match = qcom_hwinfo_ids,
++	.of_to_plat = qcom_hwinfo_of_to_plat,
++	.priv_auto = sizeof(struct qcom_hwinfo_priv),
++};
+diff --git a/include/qcom_hwinfo.h b/include/qcom_hwinfo.h
+new file mode 100644
+index 00000000000..994a7d0bb20
+--- /dev/null
++++ b/include/qcom_hwinfo.h
+@@ -0,0 +1,109 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Qualcomm HW-Info aggregator driver
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * Reads boot-time hardware info (IMEM boot cookie, TCSR HW version) via
++ * syscon regions, using offsets from the "qcom,hwinfo" DT node.
++ */
++
++#ifndef __QCOM_HWINFO_H__
++#define __QCOM_HWINFO_H__
++
++#include <linux/types.h>
++
++struct udevice;
++
++/*
++ * Storage type values. Match enum mem_card_type in
++ * arch/arm/mach-snapdragon/qcom_fit_multidtb.h.
++ */
++enum qcom_hwinfo_storage_type {
++	QCOM_HWINFO_STORAGE_EMMC = 0,
++	QCOM_HWINFO_STORAGE_UFS = 1,
++	QCOM_HWINFO_STORAGE_NAND = 2,
++	QCOM_HWINFO_STORAGE_SDCARD = 3,
++	QCOM_HWINFO_STORAGE_UNKNOWN,
++};
++
++/* Boot shared IMEM cookie constants */
++#define QCOM_HWINFO_IMEM_MAGIC_NUM    0xc1f8db40
++#define QCOM_HWINFO_IMEM_VERSION_NUM  0x3
++
++/* Boot device types from shared IMEM */
++enum qcom_hwinfo_boot_media_type {
++	QCOM_HWINFO_NO_FLASH         = 0,
++	QCOM_HWINFO_NOR_FLASH        = 1,
++	QCOM_HWINFO_NAND_FLASH       = 2,
++	QCOM_HWINFO_ONENAND_FLASH    = 3,
++	QCOM_HWINFO_SDC_FLASH        = 4,
++	QCOM_HWINFO_MMC_FLASH        = 5,
++	QCOM_HWINFO_SPI_FLASH        = 6,
++	QCOM_HWINFO_PCIE_FLASHLESS   = 7,
++	QCOM_HWINFO_UFS_FLASH        = 8,
++	QCOM_HWINFO_RESERVED_0_FLASH = 9,
++	QCOM_HWINFO_RESERVED_1_FLASH = 10,
++	QCOM_HWINFO_USB_FLASHLESS    = 11,
++};
++
++/*
++ * Boot shared IMEM cookie layout, populated by the bootloader.
++ * Do NOT mark __packed - breaks natural alignment expected by firmware.
++ */
++struct qcom_hwinfo_imem_cookie {
++	u32 shared_imem_magic;
++	u32 shared_imem_version;
++	u64 etb_buf_addr;
++	u64 l2_cache_dump_buff_addr;
++	u32 a64_pointer_padding;
++	u32 uefi_ram_dump_magic;
++	u32 ddr_training_cookie;
++	u32 abnormal_reset_occurred;
++	u32 reset_status_register;
++	u32 rpm_sync_cookie;
++	u32 debug_config;
++	u64 boot_log_addr;
++	u32 boot_log_size;
++	u32 boot_fail_count;
++	u32 sbl1_error_type;
++	u32 uefi_image_magic;
++	u32 boot_device_type;
++	u64 boot_devtree_addr;
++	u64 boot_devtree_size;
++};
++
++/**
++ * qcom_hwinfo_get_imem_cookie() - Get a read-only pointer to the IMEM cookie
++ * @dev: qcom_hwinfo device
++ * @cookie: Returns a const pointer into the live IMEM region
++ *
++ * Validates magic/version before returning. On failure, @cookie is unset.
++ *
++ * Return: 0 on success, -ENODEV if imem regmap unavailable, -EINVAL on
++ *	   magic/version mismatch
++ */
++int qcom_hwinfo_get_imem_cookie(struct udevice *dev,
++				const struct qcom_hwinfo_imem_cookie **cookie);
++
++/**
++ * qcom_hwinfo_get_storage_type() - Detect boot storage type from IMEM cookie
++ * @dev: qcom_hwinfo device
++ * @storage_type: Returns detected storage type
++ *
++ * Wraps qcom_hwinfo_get_imem_cookie(); defaults to UFS on failure.
++ *
++ * Return: 0 always
++ */
++int qcom_hwinfo_get_storage_type(struct udevice *dev, u32 *storage_type);
++
++/**
++ * qcom_hwinfo_get_tcsr_hw_version() - Read the TCSR SOC_HW_VERSION register
++ * @dev: qcom_hwinfo device
++ * @hw_version: Returns the raw register value
++ *
++ * Return: 0 on success, negative error code on failure
++ */
++int qcom_hwinfo_get_tcsr_hw_version(struct udevice *dev, u32 *hw_version);
++
++#endif /* __QCOM_HWINFO_H__ */
 -- 
 2.34.1
 
