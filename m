@@ -4,147 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25DCDC53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:30:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4852FC53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:33:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D45AF4099F;
-	Tue, 28 Jul 2026 11:30:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A89BA409AA;
+	Tue, 28 Jul 2026 11:33:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4qiaQvvBnN8s; Tue, 28 Jul 2026 11:30:58 +0000 (UTC)
+ id rw5wNFBsEyht; Tue, 28 Jul 2026 11:32:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EEA24409A8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A79044098B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785238258;
-	bh=8mgo3UyWh41S5oJ/JA/kdvyJfaj9UltBwhlkseQz0/8=;
+	d=lists.u-boot-project.org ; s=default; t=1785238378;
+	bh=D6upgCPVwI9WQXMZCjjjCV+RTX6WtwMExnRrOB1uOvI=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Uk45mn03xInoRtk+a0uFKW38yx04rjYNFa8f5ZNszuipbIaYpoaJcfhhvm/y4acD/
-	 RRrT1loJTScPQBAuUEBkbz89deN1Q1vdojEJ3DoNqnq4nIkvfFQAqx02Slz/A6/xZ1
-	 9o7Gwys7Kk5/CUApKyJ3HKfV22nOurLuYtKpBHIPsPyZpegMoINy30c0xc+uvNmZYa
-	 Ob78q5GIxWVboJq4Zt8IaYtXAowmxOfEV8JHrYC0KHUNzGE/eRgafoMXPV8WnDH27+
-	 +jTow5gui7bmud1fCjIKEqDYMgZOMS+xLr2QGzU/irO5HCwfFfxJHUrZk+9+G/3J9T
-	 NcaFJhotqPrFg==
+	b=qilz3qXFxD8vD8N47PKu+0g7yzDs56eRSEsucOhcgN0fqTOSzqM0PRPer4Mgspw8f
+	 CPazGPe58fxUIFEQp4sWzcpWv1mVNoHfFcNmSmR5JlP38I6pdSzF3SRol8pLbA10xc
+	 UuyrHzGrQOheWmRZmAjmgxfm4yvSp48gQ2aE4g+H+ss6c6XACQ67jyHSE37R4/NP8y
+	 xLml6QsrMW5Z7gHmt6n+itMv867BTe3kNslUlYwkqjxS0GWQFYnwZEwEcTLVQuxvMK
+	 xSY82tjHn4rZPeblB10gfn+8j0Os5mlR16VSsFCN03nQNrP42thuIaOOnnI3d9PtUi
+	 1fBYpe7uuU0Yg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EEA24409A8;
-	Tue, 28 Jul 2026 11:30:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8321A2E5
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:30:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A79044098B;
+	Tue, 28 Jul 2026 11:32:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id AED702E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:32:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 68A9D409A8
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:30:56 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 94DB0607D0
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:32:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tv-ytyzYl1cb for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:30:54 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C53284099F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C53284099F
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C53284099F
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:30:53 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MszQrfozp8c3 for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:32:56 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 6E6E46077A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6E6E46077A
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6E6E46077A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:32:55 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CBB58494B; Tue, 28 Jul 2026 13:30:52 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id D745F8494B; Tue, 28 Jul 2026 13:32:53 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E41DB82991
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:30:49 +0200 (CEST)
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2cab973140bso49765555ad.3
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:30:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785238248; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id 9A08C82991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:32:51 +0200 (CEST)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-c99eaa1f020so3280955a12.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:32:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785238370; cv=none;
  d=google.com; s=arc-20260327;
- b=QqcnPJ9G7Hhq+K2xN8vx7pSrXPMEIp/rIXUkhBFQqVh2aiKh7ueTv9m1aTIh9HbOzO
- QjhA45Zs0b7ssO+IX7jh7wUNHM1xBhLrLKVc301HsIZUhZaAyUCESt/aqs7pp5kB6C37
- w0cI5EMPBT0paT7AURh9bZuUy1C59bvr/T/YXX++Nf2KmooLOHkvpQuX4zPGbOu5yMCX
- MSDIaaayI//L6AofgI18qGyFk67L3q2/LkzbegTDpV2HDLq5lbT7GQp54p8D77AuuRW4
- L4ERJdH/UduPEiWpnFebqoyK3ie8g9t7iVgcILNbsbOKiA0NuPRCPxMw1gGx4OD8SERX
- bnZg==
+ b=HGQLW/Ur0rVS8guoEMj9X4MeusAb2LjHt5zfb0m3kXr3aaucEAqr645GSAAHg57byP
+ /kZ0aZCWI9atPvl3JgpbqIALA73gGI8/UNKvyhARUHFGVbnIiTgXV4WefupwZDxRXVgD
+ Wt/yZPACyFlDXUsuJvOi0fq0yNkxPbIsFNJCcmvgiGOhWg9SNKQF6mNc3gqsAo1XJmS8
+ 9k42HzbHBYPbR0XcHnm7UVrED8+KIUD9i5IWfiLq9iVNHe4npUIk55Pb9jhNgnUXYGmn
+ eaEZXoWuszBXjc0n44emBD1KCK2aHNCCLTf/QbQ+SGbvO6ARyCFNW9QEkxnAIkGYBqre
+ kgcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=8mgo3UyWh41S5oJ/JA/kdvyJfaj9UltBwhlkseQz0/8=;
- fh=6jQArLb/PaYgRNxaFnBYY+OsKZxfY7ygrIv8Q2AWA2M=;
- b=SPiQEapalBCziG9w/rCUZ1ai8PIV7lv3HTsc9jTwd2jJET66SCN88sCz+HYjxJ1Dzd
- zf1XcczgDyWreuue5kVXT7jpUmH9iD/qSUJAMc1yiwNGXXCnMAfTNRrjKrN2LXMYx2Kt
- AvOXSX+pjFAfL7dCWcJXaxRSaQM7Ltie+uW5oEDy7P5TF2yj4gaeth/aBl59iU9iKZRk
- ir1QZDqisj/MQmp5/PAsE7lV9P7vw/cFeDX7IHhosdTiOCtuG3Z/eD7Jyl14IbOd9BX/
- hDjA8xpVskgt1zIhPldDuYtN63Vb9zUW07+Hv2ui5wRv8x1UJ0ZUnL/x7kTgepL2N3SC
- gdZQ==; darn=lists.denx.de
+ bh=D6upgCPVwI9WQXMZCjjjCV+RTX6WtwMExnRrOB1uOvI=;
+ fh=OviDFb34N0L9bg6OWj5VLvQEdydUGxInOGg/S5H8OMY=;
+ b=DrxxXahvRtKr5n0qCif3upOPICGt/Qn9Ae9lt/sejGofDJqqxjGglWuNzwRLkFARjs
+ ccQqGMySMjRCngT7h4td2gvbqwH5ml0OWwJ8tkFxX++WF2IyGhJFG/7alYWtT4uQpKTU
+ vLTCUwBlmcUym3+zyVhR9iiBC0Xdj6K7oUHMW+bLL8EP2RbOYc26R/tSmp4qK/uubUeC
+ XxpLFGVRLVle/knqcWc7Sn2RgK+UZqEfItXQwXosk0wPy6s2c5NyMuC5w60IXlY8tuqZ
+ ptCwUE2E20sljR5FQyA5LCW1Vc1UmA15uQs6qnyCydceVGvklohajkptQt42qvHlK6oX
+ E8vQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785238248; x=1785843048;
+ d=1e100.net; s=20251104; t=1785238370; x=1785843170;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=8mgo3UyWh41S5oJ/JA/kdvyJfaj9UltBwhlkseQz0/8=;
- b=LscwFTPlIfRQsKwGhUjlSwSVgwMDepRkZ5lg17p+UmV5fgBCApTUL0MILSCK/hKdVs
- CdMbQzZ/IUBgO5rUSKEGrNoR8w1ROE7nIVSvwVhWqglw9aJPsGR5smjVFXWCcX9vN7Lv
- 3tAwi82wOIinwxmJy5/2vtUN+T+ktHkauMx4t1Sbp5GNdpQ6ubM5uATAfGS428SggyOS
- 6DhyyI1Z977FveDkqhBBZpnLdTCRaxPR2XEpQwruzQRg2u3S2bkFzv8fflv3UAfQB9CU
- FZ40IZjETIQ/Br+URRFcXSbTj5glNCAPFn2Dt5WgZFxw3uCpWji/Vok9RXnU6DrXQJvs
- PpAA==
-X-Gm-Message-State: AOJu0Yy4n080nOsDLXtBrTnPuHXsRyWFpR3iWxtHEY1H8QMFYjhGrWbw
- JWEBx6DDDNZRkkz8kGOyEIPyxqyKIKH4qd5OStzqtzbl9DiOMzPRlfbiJ2xOeOpj4hw04dUmMiN
- iiywcCS+wn+wXxvmjjR1j9L+vzCRuYhyNIlb5gxQA
-X-Gm-Gg: AR+sD104KC/38iiFvhCUq5XX2cq8FlVBzhYMNdJzKaVMhrwBnT2GepSJQLYrU4MEIoE
- JWTBcaqRrwaX6L9yBnmfle3aMXgznuo88Xx/Cnsvy82LYTGgya4B/V0SwXNfw763Nz0AXY9M7/p
- 8EELz5iCt1o795agUuWy54hd7Y9eSIaOYxKc/25kbm0fFr1T9geXST97aBeA7NWTo1ZLAI7uHCd
- nvcVRC/Qa7bJfsaz6Vv5QwLW4ALvqSrbBI/RhazC/7H3rWt+EVdMxKyer1F
-X-Received: by 2002:a17:902:da8d:b0:2cf:7882:a444 with SMTP id
- d9443c01a7336-2d015d00c55mr25451515ad.16.1785238248201; Tue, 28 Jul 2026
- 04:30:48 -0700 (PDT)
+ bh=D6upgCPVwI9WQXMZCjjjCV+RTX6WtwMExnRrOB1uOvI=;
+ b=Iyb6fDKMukknnUXF8PLxkdk1wUGmvK6ZvB7Hoo8NO7KGKMYerEBc7213I8RlTqER1g
+ 8dI2GkYoxoI9nxA0KKM9KV7RW0yyrlo3iCV2k9X9sRRtaLwLP/uDUi2SUNBXjoJCEqaG
+ p79hC4rlNJtveoSo5oSAwkslg6dVvq67LKRVQMxIF6XYGWHzq3jbenRQEBpsfbWAyjnY
+ X+ROHLjzLRa4GaVgB5L9TVHwRJnnwcKONSqMPFj5RKAPmh0lcq5uerX9weSAOW2aUpSm
+ 2Z7v25mjpvWitqqu0sUitbyBfqX/LEWwv6FCuG5f1jM8rLhHTKhhOjdYQnAF/pX1vKHU
+ 7pUA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrQTp3pnBAOhKh6Jqf6XqgNTSASBAWE8ELNFL8AIHmrX/Q6J1JdsfhciKbybfGcw2Wo1rlevmo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6mCOTq8VZUseC1JMWlVW9Cmj3UDhEJ5fIOwIxAiwKxO+LWwl7
+ sevL1gtZeYLHk8ZY0iUfghubQHUGPMmbKIjTvDPeJ35Y/vAWqyLgUzSE19zqDCMJ4B+lqSRK8c5
+ GtW0/t4qeUFbnyaK6CRpWYcKE4Ktw/pqkhSTDGeis
+X-Gm-Gg: AR+sD13LPiAZE7/MswisKuKvea5jc6ydoKo019v218WuH4Bt6llqeHGEdol02A1YsFX
+ q73iB0jbVbAKv2S6yHf6TELa+YDSjfHx+NQN8eOQo3ITB1i7ja7Zo0Ozc6gEIwtWnTpQ2qOzmdI
+ /AZUzQVz8rNV10RpKAyLHNzbfPJniEIot3RqlMs4FIC5Q8NlGp0IkTPWcArJPpaEh9tpUWFciah
+ Mi9VFvBh1dku9HLfGTOvi8oHZY2ROW7AjtlBo41mAFOaNgnF32nY/3iuEGJ
+X-Received: by 2002:a17:902:d483:b0:2ca:2073:3119 with SMTP id
+ d9443c01a7336-2d015f31cbcmr22965125ad.32.1785238369848; Tue, 28 Jul 2026
+ 04:32:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260708231711.2609159-1-james.hilliard1@gmail.com>
-In-Reply-To: <20260708231711.2609159-1-james.hilliard1@gmail.com>
+References: <20260713-downgrade-v1-1-183a2300741b@nxp.com>
+In-Reply-To: <20260713-downgrade-v1-1-183a2300741b@nxp.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:30:31 -0600
-X-Gm-Features: AUfX_mzOKK2a2SHS6zeWbG8c7_R13qNOS4VaqFCFt7Ab_gGBVmm_nmr2otJysR0
-Message-ID: <CAFLszThQG8+U1o-3_bpjPy29NBwKVYy=+vnJCqPtnTs8pqaUEw@mail.gmail.com>
-Subject: Re: [PATCH] tools: fit: sign all config image references
-To: james.hilliard1@gmail.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Paresh Bhagat <p-bhagat@ti.com>,
- Bryan Brattlof <bb@ti.com>, 
- Shiva Tripathi <s-tripathi1@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Andrew Davis <afd@ti.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- E Shattow <e@freeshell.de>, 
- Enric Balletbo i Serra <eballetbo@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Aristo Chen <aristo.chen@canonical.com>,
+Date: Tue, 28 Jul 2026 05:32:29 -0600
+X-Gm-Features: AUfX_mzJj9_v8_OvVHAZwchne1ZbbHovavNrgxt94dKrOTwRnOplX-lHNFdYGjs
+Message-ID: <CAFLszTiQ-P_BV+9_-f-_pc8fa+k4C5KQS87agVLHoZ7sF9E-Eg@mail.gmail.com>
+Subject: Re: [PATCH] boot: image-fdt: downgrade -EINVAL reservation failure to
+ debug
+To: qijian.guo@nxp.com
+Cc: Simon Glass <sjg@chromium.org>, Randolph Sapp <rs@ti.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Daniel Golle <daniel@makrotopia.org>, Francois Berder <fberder@outlook.fr>
+ "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785238248; x=1785843048; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1785238370; x=1785843170; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=8mgo3UyWh41S5oJ/JA/kdvyJfaj9UltBwhlkseQz0/8=;
- b=YeKqef859WyCUaaV8f8CEetdA5VhwFoJ2vGgGEaPyOP8TvVdT+LUYYqqJE3NdwJjuj
- E2jGBB7senBaHArjMCvv4R72CBk0YeD2nvlKjlw6LVBwdN/a3FTfhIC92myxhVUfuyKA
- FYulY53H4nmXhHigEh7l/Jmo51iZBMoHQYfmM=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=D6upgCPVwI9WQXMZCjjjCV+RTX6WtwMExnRrOB1uOvI=;
+ b=TGKuGK3cvUQYsksZTUN+FyNflu1FXKEyN18xcdYEFoEjS1j6rrnPi2GIwFAqYTk0yF
+ rV9FHEBJqDfEJ1/ChMcZJRDnA8tUDau3MmXI1Xyk8t09BvnhobqgSnN0d8Nc+OuPs0eT
+ X1J8+PjUW36aubhY+A8cmHajMUtK6bli2HFOk=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  spf=fail smtp.mailfrom=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=YeKqef85
+ header.s=google header.b=TGKuGK3c
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -152,7 +149,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="YeKqef85";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="TGKuGK3c";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -168,100 +165,51 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi James,
+Hi Joseph,
 
-On 2026-07-08T23:17:07, James Hilliard <james.hilliard1@gmail.com> wrote:
-> tools: fit: sign all config image references
+On 2026-07-13T08:45:48, Joseph Guo <qijian.guo@nxp.com> wrote:
+> boot: image-fdt: downgrade -EINVAL reservation failure to debug
 >
-> Target-side configuration verification builds the signed-region list from
-> every image-reference property in the selected configuration. Host-side
-> signing still uses either the signature node sign-images property or the
-> legacy kernel/fdt/script default list.
+> When boot_fdt_handle_region() attempts to reserve a DTS reserved-memory
+> region via lmb_alloc_mem(), it may receive -EINVAL if the region's
+> physical address falls outside the LMB-managed memory range (i.e.
+> below PHYS_SDRAM on platforms where U-Boot does not manage the lower
+> DRAM window).
 >
-> This lets mkimage generate configuration signatures which U-Boot cannot
-> verify when the configuration references other image types, such as
-> firmware, loadables or ramdisk entries. It also lets the host and target
-> disagree when sign-images names only a subset of the configuration images.
+> A typical example is platforms like i.MX95 where PHYS_SDRAM starts at
+> 0x90000000, but remoteproc/rpmsg carveouts (vdev vrings, vdev buffer,
+> resource table) are placed at 0x88xxxxxx by hardware convention. Those
+> addresses are unreachable by U-Boot's allocator anyway, so failing to
+> mark them reserved has no practical consequence -- U-Boot will never
+> accidentally place the initrd or FDT blob there.
 >
-> Build the host-side signing list from the configuration properties in the
-> same way as target-side verification. This makes signed configurations
-> cover the root node, the configuration node, every referenced image node,
-> and its hash/cipher subnodes, regardless of image type.
->
-> Update the signed-configuration documentation to describe the same rule and
-> to stop recommending sign-images as a selection mechanism.
+> Printing ERROR for a condition that is harmless and expected on many
+> platforms is misleading. Downgrade the -EINVAL case to debug() to
+> suppress the spurious output while preserving full visibility under
+> DEBUG/log builds.
 >
 > [...]
 >
-> doc/board/ti/k3.rst                | 10 ++---
->  doc/usage/fit/beaglebone_vboot.rst |  5 +--
->  doc/usage/fit/sign-configs.rst     |  7 +++-
->  doc/usage/fit/signature.rst        | 25 ++++++------
->  doc/usage/fit/uefi.rst             |  2 -
->  tools/fit_image.c                  | 12 +++---
->  tools/image-host.c                 | 82 +++++++++++++++-----------------------
->  7 files changed, 63 insertions(+), 80 deletions(-)
+> boot/image-fdt.c | 3 +++
+>  1 file changed, 3 insertions(+)
 
-> Build the host-side signing list from the configuration properties in the
-> same way as target-side verification. This makes signed configurations
-> cover the root node, the configuration node, every referenced image node,
-> and its hash/cipher subnodes, regardless of image type.
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> @@ -95,6 +95,9 @@ static void boot_fdt_handle_region(u64 addr, u64 size, u32 flags, bool free)
+> +     } else if (ret == -EINVAL) {
+> +             debug("   skipping fdt memory region outside LMB range (addr=%llx size=%llx flags=%x)\n",
+> +                   (unsigned long long)addr, (unsigned long long)size, flags);
 
-Since you are changing mkimage behaviour you may need a test. The existing
-vboot .its files only reference kernel and fdt, so nothing checks that a
-ramdisk, firmware or loadables entry is covered by the signature. Please
-can you extend one of the sign-configs .its files (or add a new one) with
-such an entry and check the resulting hashed-nodes, or that tampering with
-the extra image is detected? It may be worth keeping one file with
-sign-images present, to confirm it is ignored, and dropping it from the
-others.
+Just to note, -EINVAL from _lmb_alloc_addr() is also returned when the
+region only partially overlaps available memory, e.g. a reserved-memory
+node that straddles the start of PHYS_SDRAM or spans a hole between
+banks. Part of such a region is reachable by U-Boot's allocator, so
+silently skipping it means the initrd or FDT could still be placed
+there - exactly what the commit message says cannot happen.
 
-I did check that signing and fit_check_sign work with a ramdisk entry, and
-that the existing check in fit_image.c still catches dangling image
-references, so the silent continue on a missing image node is fine.
-
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -1162,27 +1162,6 @@ static int strlist_add(struct strlist *list, const char *str)
-> -     /* If there is an 'sign-image' property, use that */
-> -     prop = fdt_getprop(fit, noffset, 'sign-images', lenp);
-> -     if (prop) {
-> -             *allow_missingp = 0;
-> -             return *lenp ? prop : NULL;
-> -     }
-
-With this gone, sign-images is silently ignored, so anyone using it to
-sign a subset gets a different signature with no indication of why. Please
-can you add a one-line warning from mkimage when the property is present,
-to help people migrate?
-
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -1306,34 +1286,38 @@ static int fit_config_get_hash_list(const void *fit, int conf_noffset,
-> +             /* Skip properties that are not image references */
-> +             if (!strcmp(prop_name, FIT_DESC_PROP) ||
-> +                 !strcmp(prop_name, FIT_COMPAT_PROP) ||
-> +                 !strcmp(prop_name, FIT_DEFAULT_PROP))
-> +                     continue;
-
-This skip list duplicates the one in fit_config_get_hash_list() in
-boot/image-fit-sig.c and any drift between the two breaks verification,
-which is exactly the bug this patch fixes. Please can you put the list in
-one place, e.g. a shared array or helper declared in image.h? BTW the
-comment on the target-side function mentions 'load-only' being skipped,
-but neither implementation does that, so that needs fixing too.
-
-> diff --git a/doc/usage/fit/sign-configs.rst b/doc/usage/fit/sign-configs.rst
-> @@ -45,8 +45,13 @@ Signed configurations
-> +For signed configurations, mkimage signs every image referenced by the
-> +configuration node, such as `kernel, fdt, ramdisk, firmware and
-> +loadables entries. No sign-images property is required. Older FIT
-> +source files may still include sign-images`, but current mkimage and U-Boot
-> +verification do not use it to limit the signed image list.
-
-Please can you also mention that every referenced image must have at least
-one hash subnode? Images outside the old default list (e.g. loadables
-without hashes) previously signed fine, but fit_config_add_hash() now
-fails with -ENOMSG for them, so this is a new requirement on existing
-source files.
+I see this patch is being dropped in favour of Jonas's version, but the
+same applies there: perhaps only downgrade the message when the region
+has no overlap at all with LMB memory, or clamp the reservation to the
+overlapping portion.
 
 Regards,
 Simon
