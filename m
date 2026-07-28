@@ -1,138 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6BF8C531F9
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21B9C54F4C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 12:03:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 17E4280F1A;
-	Tue, 28 Jul 2026 11:59:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A7AE740A02;
+	Tue, 28 Jul 2026 12:03:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rQsqJ_Y1zncO; Tue, 28 Jul 2026 11:59:18 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HYRXfDEt2xtZ; Tue, 28 Jul 2026 12:03:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E61398132B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D126440935
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785239958;
-	bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
+	d=lists.u-boot-project.org ; s=default; t=1785240192;
+	bh=ITihgS2PToPCbpk3grLoiTYVBDmz8QFQwqBMKsBcHgU=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AmLQHLUwu4duh3FziBHVlrV+QtZ8/+Qg2NVwM1tfih5uhB0mM41l6V0PMYKJs1WeU
-	 apaHhzv3CeoxuqsTKFXd+JjrnWlnNhksSaU4OPLxpka2uYlAMtU0O6kytOSXEuJDw3
-	 uCIyxG9c8ALKyL84m75iEhsmfVoHep9NMvS441lt+4h6yW8ZJj2n9us1JjT7W1Vg9x
-	 mwmPcdvhLUs+7e9C89v4PFjomb+QzpBYV/xGT80GlHk5jXXRWD0mju2mNNx+bTk35k
-	 V2PJla73EePMx94LCDwHmdQ1B+i4CgsGzL8/oDkxLIunKlOrUXUVQjowDJe+HNXXHU
-	 2sTQIE01c2tfA==
+	b=z8R9AuZMbtNXMx5CARPXo1DnZJ0HYq6nEMAY22eLN+GpN0en/QeAqLINqzUT5EaT6
+	 XMA84bP5P+qE5DrvTs1USKgXzT7pi88R/drbTVeBK8bfKYhMi1dZo+TFEvFTnEs3NX
+	 giqddxb/Unsar8E3wADNQJEGY+KLHb1fG+CHrpNEqt+gkeppP9US3hpcaYS91JbS7b
+	 1Uza7kempNa6L8OxoOoAxtOLCzbGQjXe4hog7NJS4kTORzbCKXiG1TixdzqtVd+Naz
+	 BuElA53ZlIY2tk7xE3s6SEcETtjOyYiyepmwnIjNp61ZbJ418/+6cQX2aDNze10Kzd
+	 IJG05rIdXfEpQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E61398132B;
-	Tue, 28 Jul 2026 11:59:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D126440935;
+	Tue, 28 Jul 2026 12:03:12 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id EFA7545B
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:59:15 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CC1F45B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:03:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E1563400D3
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:59:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 08B1F40314
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:03:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3FP7nijMS_EF for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:59:15 +0000 (UTC)
+ id h5vh32A7NT4P for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 12:03:10 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org EEDEF40085
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EEDEF40085
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EEDEF40085
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:59:14 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-69fc856b00eso2949664a12.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:59:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785239953; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 16F1B4030C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 16F1B4030C
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 16F1B4030C
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 12:03:09 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-698bf053053so5552034a12.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 05:03:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785240188; cv=none;
  d=google.com; s=arc-20260327;
- b=U5HLmt9LWFuzJKt5UL4y+LgDHOA8tO+2NvMVaORsz2GU3EJKLjO7SyecCJ7Wz5XAu0
- VHciaqZ9/rTl0S+7h5KZzFY4S63sSkcbA6tOIdzWswtjCdvMbUAXj9W7Cb+esDR9qGK5
- EcXRcyGLhfbApO8Nwxhq7VZNqsu7gR+7L49uuyaFA2OMlctFJXmXBPfKU9ORQKuwr/A5
- WL5KTXnzUW/ajSJ7+fFGqzRUy34eyRzu1qr/haJ2w+cdYFHh7yBUIXn7dH4TMDKzO6I8
- dtNMglQXRNnE1LMKDU4M4ai/PROTBL+cppws/7jlXltv0LIOhQMAH6qYkuRXQRhzoQOX
- ck0A==
+ b=ebbxFqWnboc66DcIUHzYRzcXgrQtqlUGconHTKmF7cxobMnSzHdt9nMnOPO1NeGSg5
+ pk0yMJ9TO1NWs4SrldXYbI7oqoX33DruCYDHxUkzksBt9s5jAy/Q3VVr4SRwHBFPh5uf
+ ZYxy/EFn9G3jeKEzc4CdyBzg6Bn1zprInd38GIs3/MwPXgh2Zws8MbWYRUtYrUisTh+i
+ SxFmt11Dz64jrolqiUclAt1iigIUW2HhYxauPTRtWVFiI+FfY9bqkHyKSOmRjvgaHzl4
+ qSposRxFT2+xGy5Z9xckIr6zdFKr8D0r1CoumeMbCBdZ+yiyfFw+Pbb51hw7nHr8Ptn5
+ U5hg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
- fh=m+/eSa55FaGpgSozVLOm739jx7xTt+qVKPfcydVTKjM=;
- b=sAq6oUk8IC2+yn2RjMaCdpjCizWE6fA9yn/8xhl42FY0OC/kVr2kXC2oX9k7UUOkFx
- omFIFJFFTDwcfnX6I8MGUPum6E04jMo/alLMrOTbpMlE2/oBQBYQeJ9zjdr0uKXNUxx8
- iEnIv+GGPhEmtpc1WyzcHMiggMawpjBWIqErRezyuPmrx81m6U2Jx+oV1pQG45iBFIH5
- OPiko/2pKWhCftMTcGetmYvY1FMR882rgkko64Si7o1OStgWp/VnjXqPVIKOXMAX09ii
- pyJgN7z7jd073koHCUV7VyynMEP3dfb9j+HfquvNPpXEl3lD3HB2ftw0kK9ZBKemvSCt
- fccA==; darn=lists.u-boot-project.org
+ bh=ITihgS2PToPCbpk3grLoiTYVBDmz8QFQwqBMKsBcHgU=;
+ fh=m41YwknmSs6bCih8QVN/ODhKEvb1Xu/eQ/3bXony0yI=;
+ b=cEELfSt4mqDm1xBsG0gDlcD0vnaKDFWcQsdEmlzWQZj8E9E9K5OQUaaQQgH2PtbErc
+ StvLJc0K4TlmFGAWzbiW2WPD1iFWY95W++0AvcRXFv2aLVWxwPGohp2CZHbVeFiWtaJO
+ 07N/g56LGyZNCXQF95rlCIkVOOarLZrowVRSB4DzvHetMcfQKceFmqrqeV7Z2uIAfLz9
+ 29CrDHJ0RLyfIavKfYpPJRrhkGvG0yss3EEYo1b4SlU5giiU/aeQSUmuu4Mi6tzwtW93
+ UxkcKTPr7plTtzIFgQyarnq/1MqCA2SZ+hFw/T1owufBjupKLmN+n/rqVE2i3LzCX48q
+ c9/Q==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785239953; x=1785844753;
+ d=1e100.net; s=20251104; t=1785240188; x=1785844988;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
- b=S0sJMtmR4WKDFgEV2sGsxcCidRrOe/3T1tFCXXONPST/DoGGjM+4vmZ+Nh5CZSDmHl
- AMXKx7F7cckyuGfQYLkKd1i7NXafcK+Db2Q65iHDjsmxpzP4ui8PItZ5zWyMmfYjzCCV
- UMo7rDaMrka05sr/GdY8VyLVmh7sIPAwsaBuHocPmQcO2FUPbbRfLgC9hTOhB3CgH+Jw
- M7FybaokE8pT1zgU/xFONIpc4zmIZ34xsAOi4q5DJytSl0h5+VfBgfcuaCzBhpQ1oDXA
- MgZI/7v77oXNGamUl82IQkUmBJhY2DvFgmpiy2zr7gjCwOSnsYl2C+9HRyC+D2n0/7I7
- KFAw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RooCPqhS5SYsc+hLb1X1JAlVWGqiTyS1vhLLKoUt05Li8toA8mpwUYLRsF2mODP772ACd3fjmc=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyJrv8LxxBVp2gA7kyAiI6NRH0eL3146axOmRCuBVneQ18loRrE
- a5yAXcmsXZL9COXqdaf/OzSvNuh5VystYLG3flN/xpq2mMUS1OuLuge6wAFamYmK+dQFwMh2ctc
- z7SMkdKZyIwX2Zy6MtsJBrex4rIes4k9MugzpNo0U
-X-Gm-Gg: AR+sD120PyHJbUEANiNXqPgHoEFFcBIUhYQMJsiF5M3/Usq7dUkig2y3YzyEUkzenFA
- bSBQXJN/S7Y7rCjjKE/pYPHpY+qPEcZD1b72DVe7dIo2weW6BY7ogTxLKtHpU7xbdg9hFSJy0Ct
- eKLcLTIc+ENG7IoMW1S0+PtBLJ4J9DSpbthv28hXEQLWSE2LhU0n1U6d4zHImyaqKei/fm4RlK3
- 5/SkEN7sjmQrM/F5+C/pnL5EznMfFiagxichj+YW/VKRCjHgpPA5kuwlEBq
-X-Received: by 2002:a17:907:c009:b0:c19:6a94:5bea with SMTP id
- a640c23a62f3a-c1f7223e5e3mr96771466b.40.1785239953005; Tue, 28 Jul 2026
- 04:59:13 -0700 (PDT)
+ bh=ITihgS2PToPCbpk3grLoiTYVBDmz8QFQwqBMKsBcHgU=;
+ b=M+Lpu4wpYAeaIvOEuiJHSRn9Srm1soKRg+CYhucotRCMM3TCwkje66WZBASzmtM1nX
+ +KkoMvij5VDN+pIRIrTjbBWV4InYiKR306EJhDLds9meJuAFn9UhraL4iCTcfbP8lGz2
+ oSOGrv9i83GldzuSHxP7T8hSuRF8xkLBvYVP/oQQTvS36ZAdaaks65Rr0rkJ7v+uv817
+ XCHQwyiioHYQNraIZR8uCIvba8TA5PdEvOXiIY8fZOgKTBDDWK8Zbys47NEgflChdqOQ
+ HYO6RnTX+HcCahy3pGqlDOpWyFBqRVVnbunZwuCYFAnuO2OXA+5R+CZ1B0l/uxlHDQ/s
+ H7aw==
+X-Gm-Message-State: AOJu0Yxje0FqVEbhlryo8FfsIBiOEATNEQ0ExIXQqP3E4SzDMWyDKThP
+ XURbBP3sajVqr5nye/6r3OuLHjMkUaZywlwFW3/o3uovAVg0SmrHS5gMN8Cm3guN+v+pLk0fhDh
+ YKj7se4omHqVrpaBxlZrvzmF2vQRiENGG3cfpajN8
+X-Gm-Gg: AR+sD10p7qvXMD1+Hx78NUGkqJU6OaCaw8rvnVBOTXLk+gwOmS16pSsyc5ZS857eECe
+ RaQJQfCPzpyOxeSXhjS1hsb2nIvevANnPGEr3TU5onjhl8ZxSfD6K5tcl3DY0u2AWNosknLNjbp
+ eJ1LgykCRZgNXYl5UXrX9tO/vIet7jZTy2Tq+btR3YXnzD2fYWa3y/sk9/FqqcwOrXX+hqkC2el
+ X7bpOdkFf5rtWnYAShZtPZisYFfgWpHVzKFWbGtlmLeVnwcfABb/ZuJodwWcXQAqE5TIt0=
+X-Received: by 2002:a05:6402:388e:b0:69e:35ae:8afa with SMTP id
+ 4fb4d7f45d1cf-6a034a544bdmr1043051a12.27.1785240187864; Tue, 28 Jul 2026
+ 05:03:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <141397f1be56cf730a3222263c091347fa4cda4e.1784408712.git.daniel@makrotopia.org>
-In-Reply-To: <141397f1be56cf730a3222263c091347fa4cda4e.1784408712.git.daniel@makrotopia.org>
+References: <20260713074539.32875-1-liulhong617@163.com>
+ <1784776723.232131-1-liulhong617@163.com>
+In-Reply-To: <1784776723.232131-1-liulhong617@163.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:59:01 -0600
-X-Gm-Features: AUfX_mzcKVH8d3mQKogASCCPGo6YtYPcoBUBF-ATlHMvAsDUbOkd_pL4D9pCFTw
-Message-ID: <CAFLszTi3nVrjYq+8NH1wb0iv0oU9f41ZKum1ZoSAMMC=H9p0+Q@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: give SimpleTextInputEx its own WaitForKeyEx
- event
-To: daniel@makrotopia.org
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Gregor Herburger <gregor.herburger@linutronix.de>,
- Casey Connolly <casey.connolly@linaro.org>, 
- u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
+Date: Tue, 28 Jul 2026 06:02:55 -0600
+X-Gm-Features: AUfX_mx4JolEQnV_Gggjr7Qys8ll2a1oO-de4xuTBNJ7Qlfva41Jfp_c0cgb7Xg
+Message-ID: <CAFLszTj-zsJBXvCpqgqyQFOEQ=sOX0bOAyTiPX2H56sXnw5Rog@mail.gmail.com>
+Subject: Re: [PATCH v3] Makefile: depend on OF_LIST dts sources for
+ fit-dtb.blob
+To: liulhong617@163.com
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, sjg@chromium.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785239953; x=1785844753;
+ d=chromium.org; s=google; t=1785240188; x=1785844988;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
- b=DIqRoAII4ZDcXvryWAnTa/MuodYuE4d6ewhfIqRmxKeC/lrOJTQ/sjlRjJhnDSlQmy
- r5QcYOsP68pP0eutrHZZraCahyfhGtenCzlAIGH8nyBYlZ1ocd+jKFX9enDorHb2hU3n
- kgZgQJqeVUYG52vx6NcnluaLsiV7TCw2uj3to=
+ bh=ITihgS2PToPCbpk3grLoiTYVBDmz8QFQwqBMKsBcHgU=;
+ b=AKfXuPfGqPiE8WuZxYisvE+fnuSXXHEOhOTJCgFgnmT+Phm3/xFBvHTYw7IfyVWb1U
+ uYYzzv68lwIBJEwrEsuv7stsM76sC2HWiDLj/kU0x2mG/QpLQfixTwStvhQf0oyPbyz7
+ EaeWenCqz39qXPOdhf/ujEXtqZ2JtC4mRvkE0=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=DIqRoAII
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=AKfXuPfG
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,39 +140,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Daniel,
+Hi Lianghong,
 
-On 2026-07-18T21:11:38, Daniel Golle <daniel@makrotopia.org> wrote:
-> efi_loader: give SimpleTextInputEx its own WaitForKeyEx event
+On 2026-07-23T01:40:21, Lianghong Liu <liulhong617@163.com> wrote:
+> Makefile: depend on OF_LIST dts sources for fit-dtb.blob
 >
-> The console input used a single wait event for both the
-> EFI_SIMPLE_TEXT_INPUT_PROTOCOL and the EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL
-> by aliasing wait_for_key_ex to wait_for_key. The UEFI specification
-> describes these as separate events, and a client that opens ConInEx and
-> drives WaitForKeyEx independently of the base protocol (the Windows Boot
-> Manager does this) can then desynchronise against the shared object and
-> never observe a keystroke, even though GRUB and systemd-boot, which lean
-> on the base wait event, work.
+> When CONFIG_MULTI_DTB_FIT is enabled, fit-dtb.blob is produced by
+> mkimage with one "-b " argument for every entry in CONFIG_OF_LIST.
+> The make rule, however, only listed dts/dt.dtb (i.e. the
+> CONFIG_DEFAULT_DEVICE_TREE blob) as a prerequisite:
 >
-> Create a distinct WaitForKeyEx event, and signal and clear both events
-> together when a key becomes available or is consumed, so every client
-> sees a consistent wait event regardless of which protocol it uses.
+>   fit-dtb.blob: dts/dt.dtb FORCE
+>       $(call if_changed,mkimage)
 >
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> Because FORCE is PHONY, if_changed ignores it and rebuilds only when
+> any-prereq or arg-check is non-empty.  Editing a non-default dts in
+> OF_LIST rebuilds its .dtb (tracked correctly via fixdep), but that
+> .dtb was not a prerequisite of fit-dtb.blob, so $? stayed empty; the
+> mkimage command line was unchanged too, so arg-check was empty as
+> well.  if_changed therefore skipped mkimage and fit-dtb.blob kept the
+> stale dtbs.  u-boot.bin, which appends fit-dtb.blob, then shipped the
+> old device tree and the dts change did not take effect.
 >
-> lib/efi_loader/efi_console.c | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
+> A previous attempt to fix this added every OF_LIST .dtb *output* as a
+> prerequisite.  That is wrong on two counts:
 
-> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-> @@ -681,6 +681,7 @@ struct efi_cin_notify_function {
->  static bool key_available;
->  static struct efi_key_data next_key;
->  static LIST_HEAD(cin_notify_functions);
-> +static struct efi_simple_text_input_ex_protocol efi_con_in_ex;
-
-This is a tentative definition that merges with the initialised one
-further down, so a short comment here noting that the real definition
-is below could be useful. In any case:
+Thanks
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
