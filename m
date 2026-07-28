@@ -1,112 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87DC6C53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 04:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE6CC53200
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 04:55:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D883681069;
-	Wed, 29 Jul 2026 04:55:27 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YgQOw9hsI0TC; Wed, 29 Jul 2026 04:55:27 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0D1608104D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785300927;
-	bh=6SVa0nm3kXkWrIDKAP8GPYF8/s66oxQlt2aOIB1Jquk=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Dg0lOASExV9sOH+Nsy5xboCR4zl+hab4T7E7DaDe0RuF6Zur/sa4SOgHkzgplcg+O
-	 DgRxWaeMQKx1ZBvpbVXyCb/dRNEKjKkdnHo0iIfbs4NYR291YhFLZW8MopU8nuOh3I
-	 DNDWg8D9wuw/CPOY90FJtrYlJanY92SGzsb9WyXWHUGEQQ2dE40/OCrL3hQASwARzO
-	 kedInZgap6V2H+kCne+TrMBtJh3+2FbNgherYAOFUTjInalqJ/9hMliMDZRFEMf3Q6
-	 YlkMQZzsTrPFzXN6CQ/TDCzbwpXb0QKSa4Xkp4VvXm2qYLv5dAmZr4Qv5eioQ1PA9m
-	 /T7Urzx8tT2/A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0D1608104D;
-	Wed, 29 Jul 2026 04:55:27 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 74188788
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:26:39 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 56615606FD
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:26:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1812860A6B;
+	Wed, 29 Jul 2026 04:55:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id utHc4Vv5JsN5 for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 17:26:38 +0000 (UTC)
-X-Greylist: delayed 1200 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 28 Jul 2026 17:26:37 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4013D607C4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4013D607C4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=23.83.209.151;
- helo=quail.birch.relay.mailchannels.net; envelope-from=smoser@brickies.net;
- receiver=<UNKNOWN> 
-Received: from quail.birch.relay.mailchannels.net
- (quail.birch.relay.mailchannels.net [23.83.209.151])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4013D607C4
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:26:37 +0000 (UTC)
-X-Sender-Id: dreamhost|x-authsender|smtp@smoser.brickies.net
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
- by relay.mailchannels.net (Postfix) with ESMTP id B65199419C5;
- Tue, 28 Jul 2026 16:50:29 +0000 (UTC)
-Received: from pdx1-sub0-mail-a229.dreamhost.com
- (100-111-244-85.trex-nlb.outbound.svc.cluster.local [100.111.244.85])
- (Authenticated sender: dreamhost)
- by relay.mailchannels.net (Postfix) with ESMTPA id 5A9B2942E9F;
- Tue, 28 Jul 2026 16:50:25 +0000 (UTC)
-X-Sender-Id: dreamhost|x-authsender|smtp@smoser.brickies.net
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: dreamhost|x-authsender|smtp@smoser.brickies.net
-X-MailChannels-Auth-Id: dreamhost
-X-Ruddy-Print: 6749c08424eb0f35_1785257429629_3746100310
-X-MC-Loop-Signature: 1785257429629:4109123521
-X-MC-Ingress-Time: 1785257429628
-Received: from pdx1-sub0-mail-a229.dreamhost.com (pop.dreamhost.com
- [64.90.62.162]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
- by 100.111.244.85 (trex/8.0.2); Tue, 28 Jul 2026 16:50:29 +0000
-Received: from localhost (unknown [206.169.177.68])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: smtp@smoser.brickies.net)
- by pdx1-sub0-mail-a229.dreamhost.com (Postfix) with ESMTPSA id 4h8hKY0pyHzTY; 
- Tue, 28 Jul 2026 09:50:25 -0700 (PDT)
-From: Scott Moser <smoser@brickies.net>
-To: u-boot@lists.u-boot-project.org
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Scott Moser <smoser@brickies.net>
-Subject: [PATCH] efi_loader: fix use of uninitialized guid in variable
- enumeration loops
-Date: Tue, 28 Jul 2026 09:49:48 -0700
-Message-ID: <20260728164948.821237-1-smoser@brickies.net>
-X-Mailer: git-send-email 2.53.0
+ id QgYJx-tqhxEp; Wed, 29 Jul 2026 04:55:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C5D5607D1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785300929;
+	bh=ag42QFn1QUhL2dUX5hQFSJeoKpiThHSFC9aoXPi2M40=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=rvfRyHcpUshZqO/1GASMY6WkQcO51DQqHwcxVi8S4SaR92Eu1K+OIKplv/0MEyDZR
+	 ZvctfgrPJ64dK9d/l8LoamlM7FCMRy5FZ11kOS8OrHuW2Vm2H7vdvZSWaimC/52yoJ
+	 9LXyXPY2TcmQyW9jsJalRQKfoPX2hwQHR4GIoIoSIkemQycizHqc6e67kWgos/AmiY
+	 1DmHaOX/4dAGzpOteYplwFjv23UnljC2bjWJ3U/brLxSLGUcpR0nb5s473SqLrD8Fo
+	 vZWmgSqcx7QFPfefoOj5dwAGZOSgTjlrHZ/81ZPEd+6nWYL3Q25USkDrsimbW3b92L
+	 D7QvfYRe63Zfg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0C5D5607D1;
+	Wed, 29 Jul 2026 04:55:29 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2D0D788
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:27:11 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id D4C4D812AB
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:27:11 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rMCFWrzJKoE3 for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 17:27:11 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=shofiqtest@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 844DD810F9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 844DD810F9
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 844DD810F9
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:27:10 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7C6C68494B; Tue, 28 Jul 2026 19:27:08 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E7918404D
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 19:27:05 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5b01cb18515so3727278e87.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 10:27:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785259624; x=1785864424;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ag42QFn1QUhL2dUX5hQFSJeoKpiThHSFC9aoXPi2M40=;
+ b=tWvec+Mo11NwQvgBvcr666UGcBKJhVao16yXfhU6SrjzsHdmwzrwPiTKPJ8FzYCDJJ
+ CqIXS6ykwQLv2YpHdhYGrp3aUFuin3T1B7M5cfYkTr4BCcg14WlghotDSp00csxee03q
+ 3sMUVFLXqyB7Qevrvoju8oVWhM4lDcZUYi5aHEDftSYXI79yrU+UY0kKf083uoCKu3/R
+ 9Mb93XZTFW55Eoe7m+BWNxvuCcp3crcaO52s383gIY1Btre9PQlm6hckzB1XnMG+R11U
+ YodZ2jCn5feIl3Q39wFzwCVZb1LWb0vBltT049640NLtw6VaLpnGg1HGQsJ5oLz3AiQk
+ 2RVw==
+X-Gm-Message-State: AOJu0YypqFi5HiTC8jRdpwn3ggwM58xI8PZjHpkzpy7MaEveXatTJS38
+ H77bIXWcvVctLk15xS30i7geusrU4kSEZoVtJU3M3Nhq13uAIc2ncmKwQWQiJiQcJhdR/A==
+X-Gm-Gg: AR+sD11amCLJNYY9pIVGIMoHpR3sLFZz8aeCaz2J6lDt2BmmtdG6CmszdMB33nbYSui
+ yMCaGW/Bk+9CbEDEfnifnAcm8lUU+g32+bRt46b5BTFftF0i6YdggQnSIW+1oazLxV5rkhX2ftE
+ YywBtxN266o/oG7pZR5+U77Q/EmYVOZWQOMdCNnq8t2G/6fX1QAITjJi3Vwhb/jkufGCDOpu4j5
+ b/gUrMuRZZOycrBhjiSdf7ARxVGVoTsqfzSI+4fMLHIHoyFshyl8jBIRkytdHDiwYN3kMmBGAcz
+ uPNosJ4z5VyObofP2R58+ariElENL3Ok2+OUniPFiu7NeJ9mA/BoRLWDmGr4LFUl96IgbP1jC9C
+ BZloM/g3vW11+OxaNOHQPMcl5c7rRvaxiiifOxqXSWrnHJP1hTyICkOvrp9Owy2HRrQ+G0hiZpV
+ gkEyDy79gvv5rvR+EQQmISqnYnlkStY98lO7Y=
+X-Received: by 2002:a05:6512:693:b0:5ae:bb4b:9357 with SMTP id
+ 2adb3069b0e04-5b2d0228e0fmr786763e87.27.1785259623996; 
+ Tue, 28 Jul 2026 10:27:03 -0700 (PDT)
+Received: from Shofiq.home (87-92-160-164.rev.dnainternet.fi. [87.92.160.164])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5b2be1d863bsm2226842e87.53.2026.07.28.10.27.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jul 2026 10:27:02 -0700 (PDT)
+From: Md Shofiqul Islam <shofiqtest@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Md Shofiqul Islam <shofiqtest@gmail.com>,
+ Ian Ray <ian.ray@gehealthcare.com>, Wang Huan <b18965@freescale.com>,
+ Brian Ruley <brian.ruley@gehealthcare.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Heiko Schocher <hs@nabladev.com>, Lukasz Majewski <lukma@nabladev.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v3] board: imx6: guard LDB clock init with appropriate video
+ config
+Date: Tue, 28 Jul 2026 20:26:59 +0300
+Message-ID: <20260728172659.387624-1-shofiqtest@gmail.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Approved-At: Wed, 29 Jul 2026 04:55:22 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brickies.net; s=dreamhost; t=1785257425;
- bh=6SVa0nm3kXkWrIDKAP8GPYF8/s66oxQlt2aOIB1Jquk=;
- h=From:To:Cc:Subject:Date:Content-Transfer-Encoding;
- b=fJUN8hKoMxa2QC+aSFwWYV7usFVooksaPRr0Ttn6DBP5ty157IUv9hEtemj8itgbU
- HQYVFBA++W40JdfkSd/uVJi9CzYBT7lXvcuDYhX7uiY2pD0vPWQ1Vg//7GxehMYl5R
- S+ml3HDFSDf0i59/oerWKegOKe5RHdLKdsUlFCZS20rUk1g1DKi/o0uSfJmGasObKK
- 886fB2fYeLZk+HPKEiMo3iK5XFjn4nOPbpbB0+bMg7Nyw15pKwh4oDaaNi/1nuej8Z
- bYHVQY+4+DcMfSAmp9vsPTdHhqUoeMGdeObUYlQXmIOUFriQKJUC4I/ByNV6e//cgs
- C+sI8NtTfci+w==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=brickies.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=gmail.com; s=20251104; t=1785259624; x=1785864424; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ag42QFn1QUhL2dUX5hQFSJeoKpiThHSFC9aoXPi2M40=;
+ b=Vn1xM0TDI/vw1QLAg3sEFCtf4SW0zczzggMJtzUdNP0CPOjBdH3QeRsPaWfQZdvIqG
+ CoaQ3jvAAkfdwEk6ju0BeFBIiLgC8i2fyeOnJVaaHsT5gKCxXC07pGsWS9iPCcIR+mEd
+ NIJu4lFG2KjeMR+gJre+IaUO8BpUw+fCGyRNjwmAVCVFlv+e9ZmEcXPzWGzozuslr6K8
+ BOXAoZCB+617QGznx+YJousJg6nBEnlSxKZTMXKnwNl0rrvWG0XAlu5f0ZONGmhNpcJH
+ +06paAeTUWTO50YFfMlQAh/6hxO4+ZP4aIlCwqAwYTmjw/n8XEo3gvbhVIT5yU0CZ6Ad
+ 8WaQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ spf=fail smtp.mailfrom=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=brickies.net header.i=@brickies.net header.a=rsa-sha256
- header.s=dreamhost header.b=fJUN8hKo
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=Vn1xM0TD
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=shofiqtest@gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vn1xM0TD"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -121,93 +148,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-efi_bootmgr_delete_invalid_boot_option(), eficonfig_show_boot_selection(),
-and eficonfig_create_change_boot_order_entry() each enumerate all EFI
-variables by repeatedly calling efi_next_variable_name() in a loop,
-passing the same efi_guid_t as both input and output. GetNextVariableName()
-needs the vendor GUID returned by the previous call, together with the
-variable name it returned, to know where to resume.
+Guard select_ldb_di_clock_source() in board_early_init_f() with the
+correct video Kconfig symbol instead of calling it unconditionally.
 
-In each of these loops the efi_guid_t was declared inside the loop body,
-so a new instance comes into scope on every iteration. Relying on it to
-still hold the previous iteration's value depends on the compiler reusing
-the same stack slot across iterations, which is undefined behavior. With
-a compiler that zero-initializes locals by default (e.g. clang, or gcc
-configured with -ftrivial-auto-var-init=zero), the GUID is cleared on
-every iteration, so the lookup of the variable name returned by the
-previous call fails and efi_init_obj_list() aborts:
+- board/ge/b1x5v2: guard with CONFIG_SPL_VIDEO -- LDB init is needed
+  in SPL only when display support is enabled
+- board/aristainetos: guard with CONFIG_VIDEO_IPUV3 -- this board does
+  not use SPL so CONFIG_SPL_VIDEO is not the right guard here
 
-  Cannot initialize UEFI sub-system
-  ** Booting bootflow ... with efi
-  Boot failed (err=-22)
+drivers/clk/imx/clk-imx6q.c already guards imx6q_init_ldb_clks() with
+CONFIG_IS_ENABLED(VIDEO), so no change is needed there.
 
-Move the efi_guid_t declarations out of the loops so the value written
-by the previous efi_next_variable_name() call is preserved across
-iterations.
-
-Fixes: 140a8959d48f ("eficonfig: use efi_get_next_variable_name_int()")
-Signed-off-by: Scott Moser <smoser@brickies.net>
+Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
 ---
- cmd/eficonfig.c              | 4 ++--
- lib/efi_loader/efi_bootmgr.c | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+v3: Rebased per Fabio's request. Dropped the other two changes from v2:
+    - "imx6: clock: fix clk0/clk1 swap in select_ldb_di_clock_source()"
+      is no longer needed; the same fix already landed in next.
+    - The drivers/clk/imx/clk-imx6q.c guard hunk from patch 1/2 is no
+      longer needed either; that call site is now guarded there with
+      CONFIG_IS_ENABLED(VIDEO). Only the board-file guard below was
+      still missing, so v3 is a single patch instead of two.
 
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index 4d060e3007c..cd66f05fb7a 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -1844,6 +1844,7 @@ static efi_status_t eficonfig_show_boot_selection(unsigned int *selected)
- 	struct efimenu *efi_menu;
- 	struct list_head *pos, *n;
- 	struct eficonfig_entry *entry;
-+	efi_guid_t guid = {};
+ board/aristainetos/aristainetos.c | 2 ++
+ board/ge/b1x5v2/b1x5v2.c          | 3 ++-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/board/aristainetos/aristainetos.c b/board/aristainetos/aristainetos.c
+index 4a2349e165b..c163b49209e 100644
+--- a/board/aristainetos/aristainetos.c
++++ b/board/aristainetos/aristainetos.c
+@@ -218,7 +218,9 @@ static void set_gpr_register(void)
  
- 	efi_menu = calloc(1, sizeof(struct efimenu));
- 	if (!efi_menu)
-@@ -1872,7 +1873,6 @@ static efi_status_t eficonfig_show_boot_selection(unsigned int *selected)
- 	var_name16[0] = 0;
- 	for (;;) {
- 		int index;
--		efi_guid_t guid;
+ int board_early_init_f(void)
+ {
++#if defined(CONFIG_VIDEO_IPUV3)
+ 	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
++#endif
+ 	set_gpr_register();
  
- 		ret = efi_next_variable_name(&buf_size, &var_name16, &guid);
- 		if (ret == EFI_NOT_FOUND)
-@@ -2245,6 +2245,7 @@ static efi_status_t eficonfig_create_change_boot_order_entry(struct efimenu *efi
- 	u16 *var_name16 = NULL;
- 	efi_uintn_t size, buf_size;
- 	struct eficonfig_save_boot_order_data *save_data;
-+	efi_guid_t guid = {};
+ 	/*
+diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
+index f7751fd6fb1..da7cb880eeb 100644
+--- a/board/ge/b1x5v2/b1x5v2.c
++++ b/board/ge/b1x5v2/b1x5v2.c
+@@ -320,8 +320,9 @@ int overwrite_console(void)
  
- 	/* list the load option in the order of BootOrder variable */
- 	for (i = 0; i < num; i++) {
-@@ -2265,7 +2266,6 @@ static efi_status_t eficonfig_create_change_boot_order_entry(struct efimenu *efi
- 	var_name16[0] = 0;
- 	for (;;) {
- 		int index;
--		efi_guid_t guid;
+ int board_early_init_f(void)
+ {
++#if defined(CONFIG_SPL_VIDEO)
+ 	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
+-
++#endif
+ 	return 0;
+ }
  
- 		if (efi_menu->count >= EFICONFIG_ENTRY_NUM_MAX - 2)
- 			break;
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 8c9a9b5eb56..3ee47000d23 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -934,6 +934,7 @@ static efi_status_t efi_bootmgr_delete_invalid_boot_option(struct eficonfig_medi
- 	efi_status_t ret = EFI_SUCCESS;
- 	u16 *delete_index_list = NULL, *p;
- 	efi_uintn_t buf_size;
-+	efi_guid_t guid = {};
- 
- 	buf_size = 128;
- 	var_name16 = malloc(buf_size);
-@@ -943,7 +944,6 @@ static efi_status_t efi_bootmgr_delete_invalid_boot_option(struct eficonfig_medi
- 	var_name16[0] = 0;
- 	for (;;) {
- 		int index;
--		efi_guid_t guid;
- 		efi_uintn_t tmp;
- 
- 		ret = efi_next_variable_name(&buf_size, &var_name16, &guid);
 -- 
-2.55.0
+2.51.1
 
