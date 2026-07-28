@@ -4,126 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF6BDC53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 18:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B67AC54F54
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 18:53:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8DDB740A57;
-	Tue, 28 Jul 2026 18:53:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 36AE240A82;
+	Tue, 28 Jul 2026 18:53:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GotpGCkPtfMe; Tue, 28 Jul 2026 18:53:24 +0000 (UTC)
+ id XUF14PVjUoor; Tue, 28 Jul 2026 18:53:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 48C8740A4A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6642F40A79
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785264804;
-	bh=pF9Ka0GRgZWOBczBuH91vr9VM2voqeyNVuxhpio3xB0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785264807;
+	bh=0sCeDPaavpP/Mm8upGLOifqI1fWRi/AdQGedK3sZ68M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cMeLzFkAycnoF/kFPxDpxeRnZukf2QTOAXVAPxOUXnE8sFijQN8Myj0EmK5Wl+ZZn
-	 hJGo8CJoJQsAE+8K5cp08t3LJtpJn+py7PPfEuo7aMF+kEeWWUqtma13yq7qkKafxM
-	 DjTmx7laeXGs264MuFZBl8MqdEvyyfI3dLX6IvHO44A93PTm6oFy56lboG+ATeL64o
-	 rO50j6jf3x2yvlXdocRzphcDtZQwjA1vXORxZRdF7QlfK7RDmHL1j0fhIlPlmLYUJk
-	 blNiqiQDHWu9B9G5Zcwrz0olabcpSBvGRu7TKMKASZSKCCd2CsGWxj0Dw3ajUYkOO6
-	 UxqdxknhhUCRA==
+	b=I7fbEPD/kNVSyZUg58FiCsMHxbYTNzFSuM4hdFTza1Z14iO+gxJLuaJMsJq16xELQ
+	 zLqvIXMo/6dLCp31O82F8MXf6jWRwc5mk3FqVa75j15GKyqAwGsJMOhCHv93M85R/5
+	 iiKlB+kIhCdZQDB3QX8tFuy4XLU2QJUBWmDZt43IAMUW30+pV6N09cBPueF4e/SiNJ
+	 Rym+AhlEyEiuWLGv1HIPl6XWqGXo2rbnBzfDd/aR/2CriLUL+sr+ygw9ULk1HqXrq7
+	 Rqz6MDIDGp+1E41AQxAILOgLBlVmzLr4uArS4e1ph7T+jJW1UzMhPwTrHTy0mvBG1G
+	 Ok+FUdxkcKCpQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 48C8740A4A;
-	Tue, 28 Jul 2026 18:53:24 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0565426C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:53:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6642F40A79;
+	Tue, 28 Jul 2026 18:53:27 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0E449350
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:53:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EBF9460A43
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:53:22 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0009A81296
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:53:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R_EkssVuEKNK for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 18:53:22 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B71FC608FD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B71FC608FD
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B71FC608FD
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:53:21 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-69fe400c14aso124394a12.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:53:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785264800; cv=none;
- d=google.com; s=arc-20260327;
- b=DCdhnNYMdVCubGUs9OCwHLYR7nWQPW6a/Q4Cp620b+TUgNYYAZ8q4adyzF6N1q+vaY
- pCPZQJ+UYN3pysJPnUXtWqYJ0g65tKPf2LA9pEnAyFsiH67SilDOel1Ohq6U8xBkAeJp
- DQWv1jaEVN4GWfpANCYNY7jYK3vUKuB8PDV2DeF8AMe9fevjdkEcOCTHjtXqGjFOTPdE
- +haRhqu9Y2BWfjjFQ+qlo1Ahp8BZmXXJ4Aqm0D6yRjpiOHR0lFw5S0l2oXlPOCgh2Sj2
- Astf3WhGeVQYnzS8WKvSAxlqLVm5a+k0336a5EUhi/k2gwMQld3ozmz1yMONSlIlPHbW
- qOJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=pF9Ka0GRgZWOBczBuH91vr9VM2voqeyNVuxhpio3xB0=;
- fh=bgUFEcBYfJUCcOuYSy1UFwg9ErLTm4lhm55UpG/JFtw=;
- b=nmosmFGq64/f//B2yxqwHoSGEQQIw0h7U0c6S/SkJ0y+YbVNa1cxAwzs5/Go3dRqDt
- Djq5gS2jzzAuvKguXSMUEs6UDa0emS9e6JHlNFVJP2nML7MAlgRaD70HJWw7n+IGZkz4
- IhKCJ9Zr2CIJoxkIoeJg+QfJvPBDA9koyvHDxBvmPxX4Hti/Uit1YwCPzDZB0b/7f9nl
- pDD5IhpJPzbM3pHhXyeWpf/4figPDMtln2y8fv+VFnZlQB+IaaL8ABE7sVlfXpwp57UJ
- S+voaBAaUM1Epm2TyslSPK4k/AYCWKS1PAGGcOJsnS7y+Udzl9jdQzTNsvLIUVvrOL/A
- GsIQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785264800; x=1785869600;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=pF9Ka0GRgZWOBczBuH91vr9VM2voqeyNVuxhpio3xB0=;
- b=EPgXYDQP740KvyFke/wmLFbIJ4JqBX4bEOk5T6RKk+/U2/GLWe+QfRm5Ax8QCQWrKh
- 4G9HogPHUyhMsOh4z/ctglxkOHJRBXHz/7duJssykzcPtsZuuo5xOUKK/Gjs7xjMkm1r
- mLewSFSSho8Cn3tXJvJ0/vMhpuMWufhUGAwODWB1xgRNFl+3cGdohBTNsOhr2SQ6Txlk
- tPruTC2KuhN8/vk1oY2N6Wkjf5II5cS1eZdqGhVrqHgDXVw+Q/zQqvDMK9mLjllFPgah
- HMpIDf3BRsFgG5doqGBUAKeUUoXSQl738HAlU8rB8YtRZZ196L4WNP1IXAwJxwJued/Q
- 39Gw==
-X-Gm-Message-State: AOJu0YweCW5/BvbEn8zsFZqnW/E1uWQuypCyz0/SwSxcVNY+9EmFSkRd
- iloCJQHzkEre2V5pRmNQM6SHe/CRmGwJgAw0HtEmswjS/r8CvXSjk25Z5crLC1WBVm3PvzeLMDU
- Jo7h0CnU2Ww/1MQOdF2uIro6gOkvLF/ZgnxQScnDy
-X-Gm-Gg: AR+sD13MADGlvTgUj+IluY/xRbdt41Mpa3RI7L/p5g9ImZJNiHGzWwPy+JOXq38gHQ4
- usLU3KZYesg4BwGYFaCpbsNpZmBwnZS1LPUZn06aZOge8VYioFl5/X5zeAEEBE8rxYgzVrkc3Ur
- Wzs1ltFNKSYaUQivkb1fk0JAMlVOGdYWjucs8oJ2CZMqRYNEVrICPDkuuqY+CMO4t7eZYm/kKCR
- CQMByE589O3WLa4lY3yc6ItBmGwsxNllF1dmGiu/TKuU6xmq7+oCchBOmIEVadSEd+kJDk=
-X-Received: by 2002:a05:6402:241f:b0:697:cec5:d056 with SMTP id
- 4fb4d7f45d1cf-6a034942cffmr1955135a12.0.1785264799810; Tue, 28 Jul 2026
- 11:53:19 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id z4aq-LZ2A-5D for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 18:53:25 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
+ helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B8E6081316
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B8E6081316
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B8E6081316
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:53:24 +0000 (UTC)
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1womvZ-000000001Gq-1lvG; Tue, 28 Jul 2026 18:53:21 +0000
+Date: Tue, 28 Jul 2026 19:53:19 +0100
+From: Daniel Golle <daniel@makrotopia.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org
+Subject: Re: [v3,0/3] boot: fit: authenticate the dm-verity roothash
+Message-ID: <amj6nyd_JNOQczLt@makrotopia.org>
+References: <cover.1784601041.git.daniel@makrotopia.org>
+ <CAFLszTgMxNnShY+WrNXxTwuZ2RMoqXDj7L5f0CofcDwNeehJOw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20260728175333.90971-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260728175333.90971-1-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 12:53:05 -0600
-X-Gm-Features: AUfX_mxoTgmMgRJiv7BdKtqGPaPF02Z4GNNYZ5_VgKC5wWumuvOjucTeHv3gTUA
-Message-ID: <CAFLszThuErS-TiPwiC-AoK0n1_8nwvn82-uTf0tV7-oHUzFzYw@mail.gmail.com>
-Subject: Re: [PATCH] README: Slightly rephrase env set and env print paragraph
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.u-boot-project.org, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785264800; x=1785869600;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=pF9Ka0GRgZWOBczBuH91vr9VM2voqeyNVuxhpio3xB0=;
- b=OOyEq5eeZkKlGT/4RCVBodPxB/zePkYLRXp6KlnQwxTpRgonPMCTN8dNFDPqw1Og2W
- X0BdC/6PjvS5vstN+2sIUTiTGvtY5sx6E5aBUj2uDoraKC5tzs0BHcc9LUlM9I6dWLN0
- 7S8IsKKG8LQAZGdYel/5xb6bnnn5UiBQni5z4=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=OOyEq5ee
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgMxNnShY+WrNXxTwuZ2RMoqXDj7L5f0CofcDwNeehJOw@mail.gmail.com>
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,38 +83,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, 28 Jul 2026 at 11:53, Marek Vasut via U-Boot
-<u-boot@lists.u-boot-project.org> wrote:
->
-> Adjust the paragraph to make it a bit more readable.
-> No functional change.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.u-boot-project.org
-> ---
->  README | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/README b/README
-> index d6dd6c74619..f740188a4bb 100644
-> --- a/README
-> +++ b/README
-> @@ -753,8 +753,8 @@ The following options need to be configured:
->                 `${name}'; to execute the contents of a variable
->                 directly type `$name' at the command prompt.
->
-> -               Global environment variables are those you use
-> -               env set/env print to work with. To run a command stored
-> +               Global environment variables are those you use "env set"
-> +               or "env print" to work with. To run a command stored
->                 in such a variable, you need to use the run command,
->                 and you must not use the '$' sign to access them.
->
-> --
-> 2.53.0
->
+On Tue, Jul 28, 2026 at 12:45:38PM -0600, Simon Glass wrote:
+> Hi Daniel,
+> 
+> On 2026-07-21T02:34:47, Daniel Golle <daniel@makrotopia.org> wrote:
+> 
+> > v3: address comments by Simon Glass
+> 
+> Thanks for the rework - the doc additions in signature.rst and
+> dm-verity.rst read well, and the test fix is a good catch.
+> 
+> I still think we should state the compatibility break explicitly
+> somehow: because U-Boot rebuilds the node list rather than trusting
+> hashed-nodes, an image signed by an older mkimage that carries a
+> dm-verity subnode stops verifying under this fix, and an image signed
+> by the new mkimage does not verify on an older U-Boot.
+> 
+> The new language in dm-verity.rst documents the security property (the
+> roothash can no longer be swapped out), but it doesn't warn that
+> deployed images must be re-signed after upgrading and that mixed
+> old/new fleets need care.
+> 
+> The break is unavoidable I think and I may be overthinking all this,
+> but it would be nice to avoid people getting confused.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Technically you are right, there could be, but I strongly believe
+there aren't any "deployments" of this right now.
+
+The whole mechanism is built in order to be deployed as part of the
+**upcoming** OpenWrt bootstd method. As of today, there aren't
+currently any deployments using dm-verity on OpenWrt with this
+mechanism (apart from some boards on my desk at least, and people
+who have tried the PoC[1] -- which is/was a PoC and obviously subject
+to changes as part of upstream review and standartization)
+
+[1]: https://github.com/openwrt/openwrt/pull/22177
