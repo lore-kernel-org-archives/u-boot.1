@@ -1,98 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 037B8C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 12:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF54C54F4C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BAF3C813BD;
-	Tue, 28 Jul 2026 12:59:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B9F40608AF;
+	Tue, 28 Jul 2026 12:59:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yJFRo1GI4Ydu; Tue, 28 Jul 2026 12:59:57 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aVdtdpKnRdo1; Tue, 28 Jul 2026 12:59:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BA94B81387
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D5AE3608AA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785243597;
-	bh=18rFFD3pCTgz4sR2RMNCjcB/gynpicHIct6ozNXVvuY=;
+	d=lists.u-boot-project.org ; s=default; t=1785243596;
+	bh=koYc3bzfM/+fc53dngKYzt2TYX9zVljTftQOT6MDVUQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HnPFnHG7ocZJfz4bm7U5R4v9L8JFq60JDGBKibZvfhrvCWns/do5hoZOsYozzz6Lm
-	 Y1RFslp05vpUosxZqTv71oLcDtSp2kOn+CnhJrscQFxEY57UBoLo3w2kKhmBXLNHYr
-	 /6bl+uz0UlkTyZ0v9wZwQRlPKDFtH8vqkgzHe7uA2OQLh9J8MdZdT0I+z96YgVicLH
-	 E7DkCmvoRhftGWnlMRAOIAITv9EF4oZ3CcTqBChYCkD9LilUkpyuEZAvl9wbNawunC
-	 QiNoOXduhOCSbsK1aR77l1o/Xc2s2L6YjhtnwwhR4JNqTrRIcsnsW9Io85utXrg+3b
-	 jyLUrwcfuk12Q==
+	b=XMXvSQ6Be8vu8T2xaNHel387n5aACx6hmNg26UJJqOiTwUgZiH/M5hgXlv6fUwW7C
+	 Hxj/8jVF/chTOPxR3NIggUCHp7WgBRlzcg5Kvk1qLCmxCdAxMlA+q0G+DmY9LjqeMT
+	 mhigsFiDZ2nM4fmHn1oiWbodhU5YjnVOcfSBceHH3lw9IMIiOfXYwYPRd65+xk4cvx
+	 0tVYV0wMZJl8qh/VOyLbb0BhURV+8U3yZYZn1bupQEFTaniax671an3xe3ZGpIuf+a
+	 u46CNTsZF48ENnjFkq0K1uKqonchGyfd4EjOFXwi448od+XQi4rZnGPyq63f3E2Kue
+	 RT5DxX3CYeNBg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BA94B81387;
-	Tue, 28 Jul 2026 12:59:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2B21D263
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D5AE3608AA;
+	Tue, 28 Jul 2026 12:59:55 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DD990357
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1D52A4089D
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D00B881236
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YozG5z2azVDi for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id G8qlIAlXkUje for <u-boot@lists.u-boot-project.org>;
  Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
+ client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 300114089A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 300114089A
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 300114089A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-69fe400c14aso3464274a12.2
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 636EF80C93
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 636EF80C93
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 636EF80C93
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:51 +0000 (UTC)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-69ffb48d599so2690451a12.2
  for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 23:55:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785221750; x=1785826550;
+ d=1e100.net; s=20251104; t=1785221749; x=1785826549;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=18rFFD3pCTgz4sR2RMNCjcB/gynpicHIct6ozNXVvuY=;
- b=jJDmY4KxvnvgcbS//kY/18gOX+NAZqlw3S/ZzmbjkKLpBiUgYB/C/atB9jwLg/ncLa
- Ht+jYi9ssIb1pPECDZ1ua67XEt/gvmiMptUSkB/Gd1wssOFoylp+madyFPBwd1Txg3I9
- Ku2RorqqBJt9R7XgAdZMgT3piBThNzNwAj34FNjHMwEUHdNbU4PzFAGTZ7ll/VAoj5vD
- Hd+ZScu2MJams8w/MDuL8lYO8rnmzcEoc9M/gnk+3HEcF8sjQccjeyvbBTDMSSfx03An
- BfkbiyUVHp+V9wLGRT+h3g9O2Qo8nz1me6tPUvCs78jmaXz/bVUMh9PINAwFpvEdhQLe
- BBlg==
-X-Gm-Message-State: AOJu0Yxhe1C+R8z140d48AM5Cr/YGGJt5FWwRfyHrHrwxXn3z9c2GlnP
- 5NlZXxZqY1OS13gx2mHV4OLcZV8D08Sx8Gy6t4NDk8OMlGY3utSkFTwURBIm+dSC3Os=
-X-Gm-Gg: AR+sD12JgCgDOsZOYG1KKZAm+7bPM1u2Q05HILyGIjKFQswyG7L+SesR19Lq6xIgR8C
- CS2IZVb7AJpBgMEqsRA7zNRUmQzfuHp2FJcskHuoD4U6ryptZr9SVRiFchQp0hoqW83uk7PGCH0
- eXMdIMUtIqedvNwI7Bn3NCFQaoZfAHeGl3DpeKU1AodqkM2upHOwNDz9AGwrzBjoSOxWCkilWtX
- atb4CWDURxjfHi5rz/4+MioDk4eiWP8ANF6XZ7SQQkLKEp7l1MB3mWKJYSDdJRzE+AOhxUZPKDv
- 7q6p61vnCrLXh9aAi7klk3fqN2Ee8kQojDXY/sHirGrFA1cqZg9z8IF4D4WT8NJ4+1FmlbyMlDm
- H9LakOjqvE8ywXuAuGPuQNIT60oTi25chDXaNdP5HenJxleLDExmheczV8WibXpM1iBm8aYGowh
- wALjhoPNkY9WJGlYllaxASZn1NpG/CnR0O44wcvOlWQi8Y0vSbQKAcp+7iKKz6bcKhql0=
-X-Received: by 2002:a05:6402:51ce:b0:69a:aa19:9df with SMTP id
- 4fb4d7f45d1cf-6a034a8e122mr484856a12.32.1785221749951; 
+ bh=koYc3bzfM/+fc53dngKYzt2TYX9zVljTftQOT6MDVUQ=;
+ b=kNp5R3aoGos3ee3Wm0SBlFqIOU6tb4w/hbnCKlZ0Y4P66U3pVeWN0WtI84hO1SIM+m
+ MyJgYScU5o6kf622qEs9FHffyUys84pVlNzKudkg/wAdpvGZH3azxhIiPyQ+ukut+i1j
+ WMU95R+hz8iLEx80/qZxE/62sw1Y4rEX8M5YYEtDG/WbEbxtt6AlQvh+gGFaqa4FtNHn
+ xk31UBejijhJqW/U2TeW9ZDEV3e0AwCBKN0LpOMQtRea9RBSSNrI+4smiEFgvc976KFe
+ RbKfs+seAlZXVHDoBZL5IsdBHgN1cH6JNlQlWGrpGnHwvxR1nP3lDfA56bUnOPp7Hmiz
+ kyCA==
+X-Gm-Message-State: AOJu0YxkZ8Wsd2HJWBnUqhB1AlplKkDAGOA0Ekr2IVcNKl6HBli2RrIL
+ 7TG+tr+niGRC+IdvHDHsWnRAytQUadE2NLBcphVecPUVZz9lGkrweDiGoM8E9yMvL40=
+X-Gm-Gg: AR+sD123plmbf2iuzapx6KAEryaqidQUh0Mqs6jYpjcEd8XErzj/7TIG6l3lU29vaYq
+ Re3KT9KTX/udyEgiB+K4bqfW5iV2PLHzBrhIjh9kowsON0BJ4l2kr2PXlOMR9Duh3dZtwWBA7Z6
+ rJ9duzqhg9iXsv0tYMTn5lOGHlJCT4dXNtFEEPde5oJxBQ57GEi+UcruSUad1X42MmefkCQ+cqd
+ q2EFS5MtcUVXaVfYsBisPL/O83EV9uA09VK97gPW7k+SeAWHZac+hr09mf7tbhudsCyKUy48Rwm
+ zN02JzkabOLC+P6BIGX/JKLLTSwkpPwKUuXMwY4uMj2Flg4Gi9P/71dLDL+l1MgHWJftcbjzvaR
+ 1h2aUQ+d1rMUmZoxDgO+OPWCzlyXff9+tut06/0xDYJM6NMZW9JJp3PznfRa2BJzu2Uz0Q3opmq
+ NxPBekunwqGzMP4eCOv3t2X8HFloWcInEgfRzB9zcwdbB0LtuDU1/F+qSdW8ZqLG6rMjc=
+X-Received: by 2002:a05:6402:4516:b0:699:6415:751b with SMTP id
+ 4fb4d7f45d1cf-6a034a6211dmr427948a12.24.1785221749436; 
  Mon, 27 Jul 2026 23:55:49 -0700 (PDT)
 Received: from [127.0.1.1]
  (p200300ff0f038f00d97d5688120f3c08.dip0.t-ipconnect.de.
  [2003:ff:f03:8f00:d97d:5688:120f:3c08])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-69fb5746e08sm3493586a12.23.2026.07.27.23.55.49
+ 4fb4d7f45d1cf-69fb5746e08sm3493586a12.23.2026.07.27.23.55.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 27 Jul 2026 23:55:49 -0700 (PDT)
 From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Tue, 28 Jul 2026 08:55:40 +0200
-Subject: [PATCH v2 2/2] test: squashfs: add directory table overflow
- regression test
+Date: Tue, 28 Jul 2026 08:55:39 +0200
+Subject: [PATCH v2 1/2] fs/squashfs: fix integer overflow in directory
+ table allocation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260728-sqfs-oob-fix-v2-2-077d9f0e01c4@byteray.co.uk>
+Message-Id: <20260728-sqfs-oob-fix-v2-1-077d9f0e01c4@byteray.co.uk>
 References: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
 In-Reply-To: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
 To: u-boot@lists.u-boot-project.org, 
@@ -107,25 +107,26 @@ Cc: Richard Genoud <richard.genoud@bootlin.com>,
 X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Tue, 28 Jul 2026 12:59:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785221750; x=1785826550;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785221749; x=1785826549;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=18rFFD3pCTgz4sR2RMNCjcB/gynpicHIct6ozNXVvuY=;
- b=ltdoqPtH6fRZNBTPi/ENCYnHi/4ouqbw1ELaInFxSltV8sZcL0gL2u+iCxz7WkhyB6
- /tSQfesTmba4KH4dTWRGPynb2BhX4TLoYvibUr6eqbCXBUjejAcm8maX9lkDH//XzHdY
- iiVOUCJxyzmx0PDd32t1ugwu3gP6jNYPmK8Qd1DbSd98RWlvKW2vMWrmXqsfgmRfDIg7
- /S0v0O4B6Lm0Qj4cMzydDmNQ/nO39YpfQJ8fJQtSNJzd5UzsEW4sPUzCaStOmDirVtF5
- K0ZvTgselk9ug4vQCzmaWZWI1Srb9cqs1Cwfkn1J/joYCpiv4HwSn8YXLCMLVJHK/HQi
- cD5Q==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=koYc3bzfM/+fc53dngKYzt2TYX9zVljTftQOT6MDVUQ=;
+ b=TdR5SI9x9+FwyztgUTUQEPWXvZ03+StrdNfl+Zp1k+cPgcPWK0AOx7JGGfGne50Wd7
+ urTjo0qI1W5rmskRipaU0V5tDW3oRCwrjP1xR8yy/bCg9PH0hxk44XkbUUD9AKi8NmVT
+ TGzZicIeRoLVd5PpFl/HChYpQOTla1GrWVys6ak5S70aVsGJnpxvbhQ1zbS//7YyO2eb
+ 8PrR9paWtu38dYMT1GLOuGhI8WCOrv7SCiP3bRE0TDrTfZSCTBxznEYToJ6Btxjd1rr7
+ /s/c9RvSocSA2jstw/KOenC0h/m0x80fdtFF+BRZZKCrvjcXdSEn66w782fIow2CD4Z7
+ WJrg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=ltdoqPtH
+ header.s=20251104 header.b=TdR5SI9x
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,97 +141,65 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add a Python test that lists a crafted SquashFS image whose directory
-table declares an oversized metadata-block count. Such an image must be
-rejected without corrupting the heap, which the test checks by confirming
-U-Boot is still responsive afterwards.
+sqfs_read_directory_table() allocates the directory table with
+malloc(metablks_count * SQFS_METADATA_BLOCK_SIZE). metablks_count is an
+int and SQFS_METADATA_BLOCK_SIZE is 8192, so the multiply is evaluated in
+int and wraps for metablks_count >= 2^19. metablks_count comes from the
+attacker-controlled superblock (sqfs_count_metablks() grows it by one per
+2-byte metadata header), so a crafted image under-allocates the buffer
+while the fill loop still writes metablks_count metadata blocks into it,
+a heap out-of-bounds write. It is reached by listing or reading the image
+(sqfsls / sqfsload). The position list allocation on the next line has the
+same unchecked-multiply shape.
 
+Size both allocations with __builtin_mul_overflow() and reject the image
+on overflow, as the disk-read buffers earlier in the same function already
+do. Set the error return when either allocation fails so the caller does
+not proceed with a NULL directory table.
+
+Fixes: c51006130370 ("fs/squashfs: new filesystem")
 Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 ---
- .../test_fs/test_squashfs/test_sqfs_overflow.py    | 75 ++++++++++++++++++++++
- 1 file changed, 75 insertions(+)
+ fs/squashfs/sqfs.c | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/test/py/tests/test_fs/test_squashfs/test_sqfs_overflow.py b/test/py/tests/test_fs/test_squashfs/test_sqfs_overflow.py
-new file mode 100644
-index 00000000000..df7f875a58f
---- /dev/null
-+++ b/test/py/tests/test_fs/test_squashfs/test_sqfs_overflow.py
-@@ -0,0 +1,75 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Regression test for the SquashFS directory-table integer overflow.
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 0768fc4a7b2..3aadcdd36ec 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -852,13 +852,28 @@ static int sqfs_read_directory_table(unsigned char **dir_table, u32 **pos_list)
+ 	if (metablks_count < 1)
+ 		goto out;
+ 
+-	*dir_table = malloc(metablks_count * SQFS_METADATA_BLOCK_SIZE);
+-	if (!*dir_table)
++	if (__builtin_mul_overflow(metablks_count, SQFS_METADATA_BLOCK_SIZE,
++				   &buf_size)) {
++		metablks_count = -1;
++		goto out;
++	}
 +
-+import os
-+import struct
-+import pytest
++	*dir_table = malloc(buf_size);
++	if (!*dir_table) {
++		metablks_count = -1;
++		goto out;
++	}
 +
-+# metadata block size (SQFS_METADATA_BLOCK_SIZE) and metadata header size
-+SQFS_METADATA_BLOCK_SIZE = 8192
-+# metablks_count that makes metablks_count * SQFS_METADATA_BLOCK_SIZE wrap a
-+# 32-bit int back down to a tiny value: (2^19 + 1) * 8192 == 2^32 + 8192.
-+NR_METABLKS = (1 << 19) + 1
-+
-+def make_overflow_image(path):
-+    """Build a SquashFS image whose directory table inflates metablks_count so
-+    that metablks_count * SQFS_METADATA_BLOCK_SIZE wraps a 32-bit int, then
-+    writes one block of data one metadata block past the resulting buffer."""
-+    def metahdr(size):
-+        # uncompressed metadata block header (bit 15 set)
-+        return struct.pack('<H', 0x8000 | (size & 0x7fff))
-+
-+    # inode table: one small valid uncompressed metadata block
-+    inode_region = metahdr(32) + b'\x00' * 32
-+    inode_start = 96
-+    dir_start = inode_start + len(inode_region)
-+
-+    # directory table: NR_METABLKS metadata blocks, only block 1 carries data
-+    dir_region = bytearray()
-+    dir_region += metahdr(0)                          # block 0: empty
-+    dir_region += metahdr(200) + b'A' * 200           # block 1: data
-+    dir_region += metahdr(0) * (NR_METABLKS - 2)      # blocks 2..N-1: empty
-+    frag_start = dir_start + len(dir_region)
-+
-+    sb = bytearray(96)
-+    struct.pack_into('<I', sb, 0, 0x73717368)         # s_magic
-+    struct.pack_into('<I', sb, 4, 1)                  # inodes
-+    struct.pack_into('<I', sb, 12, 131072)            # block_size
-+    struct.pack_into('<H', sb, 20, 1)                 # compression = gzip/zlib
-+    struct.pack_into('<H', sb, 22, 17)                # block_log
-+    struct.pack_into('<H', sb, 26, 1)                 # no_ids
-+    struct.pack_into('<H', sb, 28, 4)                 # s_major
-+    struct.pack_into('<Q', sb, 48, frag_start)        # id_table_start
-+    struct.pack_into('<Q', sb, 56, 0xffffffffffffffff)  # xattr_id_table_start
-+    struct.pack_into('<Q', sb, 64, inode_start)       # inode_table_start
-+    struct.pack_into('<Q', sb, 72, dir_start)         # directory_table_start
-+    struct.pack_into('<Q', sb, 80, frag_start)        # fragment_table_start
-+    struct.pack_into('<Q', sb, 88, 0xffffffffffffffff)  # export_table_start
-+
-+    img = bytearray(sb) + inode_region + dir_region
-+    # pad so the directory-table block read stays within the file
-+    need = ((len(img) + 511) // 512 + 1) * 512
-+    img += b'\x00' * (need - len(img))
-+    struct.pack_into('<Q', img, 40, len(img))         # bytes_used
-+
-+    with open(path, 'wb') as f:
-+        f.write(img)
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_squashfs')
-+@pytest.mark.buildconfigspec('fs_squashfs')
-+@pytest.mark.singlethread
-+def test_sqfs_ls_dir_table_overflow(ubman):
-+    """Listing a crafted image whose directory table declares an oversized
-+    metadata-block count must be rejected without corrupting the heap.
-+    """
-+    ubman.restart_uboot()
-+    image_path = os.path.join(ubman.config.build_dir, 'sqfs_dir_table_overflow')
-+    make_overflow_image(image_path)
-+    try:
-+        ubman.run_command('host bind 0 {}'.format(image_path))
-+        ubman.run_command('sqfsls host 0')
-+        # The crafted image must not take the board down.
-+        assert 'alive' in ubman.run_command('echo alive')
-+    finally:
-+        os.remove(image_path)
++	if (__builtin_mul_overflow(metablks_count, sizeof(u32), &buf_size)) {
++		metablks_count = -1;
+ 		goto out;
++	}
+ 
+-	*pos_list = malloc(metablks_count * sizeof(u32));
+-	if (!*pos_list)
++	*pos_list = malloc(buf_size);
++	if (!*pos_list) {
++		metablks_count = -1;
+ 		goto out;
++	}
+ 
+ 	ret = sqfs_get_metablk_pos(*pos_list, dtb, table_offset,
+ 				   metablks_count);
 
 -- 
 2.43.0
