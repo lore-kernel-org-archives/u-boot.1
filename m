@@ -4,109 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFD3C54F4C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E468AC54F4C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0ABDE608C4;
-	Tue, 28 Jul 2026 13:00:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B6D1760A38;
+	Tue, 28 Jul 2026 13:00:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N18kVthLnpvm; Tue, 28 Jul 2026 13:00:25 +0000 (UTC)
+ id N0TWIxHUoxiy; Tue, 28 Jul 2026 13:00:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E43AF608D1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E78CF608DE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785243625;
-	bh=YgL19BY+JMLrLyhmt8noz1fypa038LWGNp72P2x8XmI=;
+	d=lists.u-boot-project.org ; s=default; t=1785243628;
+	bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=myEv6Ht1D9nB8VxUQSm0BEhRIiun97N6GM6aOzJTIsP6Yfli9svHWNh3S9g9OZ0k1
-	 NOA/w9ufIPHUXyy5q2EyYNTERltSIO2jysFSxHJizxQohB0WYYrgi9UZavibs6sFQF
-	 q9X6lRkwQJFxpyX6QCAsmjU7Ta+3GF0Hb9LqsKRRulMvhBI/1nZjJZY7T/PVG3q36E
-	 ElkDei4Ns7PMMqw7eE9S08g9H2SNkrcZaqHx4V/p5RsbysZkQXyIIZH5JF9RQyBSu4
-	 btLZgZ8VWzb8YAU3K2by0TvEpQiwU4WuEix80TdmiJjXJmWLsbPee2Mb4GGJViRRlO
-	 25gkOmAZA1MHQ==
+	b=hATmdVd4x7uups5yZUIGlkNktDtafHm5n4GjxdhyRnZcQfhW8mQ31K9RkbXiqGZ5w
+	 mpDs+SWBebaVx58D+5jSSKqRVZ/L3ICMctcpXE6Tev6x3KI9AOBA1ntMGF2Hl5qLaj
+	 Po6JYPw7kEM1/FXOznNpjzQtEkDydWRKoY6Ew6zWQ6oOy7EWG6e7I0DW6IRSYbZgUr
+	 oILipuQHE+JE2gYqSg9JFsQDElRu7Z+21Kzqvbq70T/Trt7DFqfTGA1xAo5GxUUVRt
+	 ThuQdSSHsVzD5NBvWg9+9brP1tDrrZatz6sNDD5StMTwA0eXK9KFVhWtZMMigeafCO
+	 gqxmFrnaI8tag==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E43AF608D1;
-	Tue, 28 Jul 2026 13:00:24 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D40AE350
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E78CF608DE;
+	Tue, 28 Jul 2026 13:00:27 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9027B45B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BA9CC607D0
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 81CDE4099A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vHUgLqjdKl6F for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:23:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zpEdG4Zp856O for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:23:49 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B36D06077A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B36D06077A
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4F6DE4097B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4F6DE4097B
 Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
  [IPv6:2a00:1450:4864:20::530])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B36D06077A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4F6DE4097B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:23:49 +0000 (UTC)
 Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-698a9f11776so5539688a12.1
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:23:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785237782; cv=none;
+ 4fb4d7f45d1cf-69fe3cd5ee6so3996124a12.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:23:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785237827; cv=none;
  d=google.com; s=arc-20260327;
- b=SsrvT3myUoCQH0WAia6DrUhq12tx1+wtwmjr3F7WcwlsR9FI8YMJEiCMRXaYBqUxr/
- +y1u1eeuVrqzIfVthDY7p5s5hoeM68l+dqf2+inn94ma37ZInHXbbROvUiconFuqXPWu
- rguvyirDN/6uAFsPJR1dm2eGzajIAAeXKxorMTgUK//HnpMz5yZYDcfT3yNLhHr/3Gji
- maklHsvEJpIMiVjINHk/NpSZ+tLuLAD//CZOkZWSjJXHqSoOC6znJeagoRm3BC8zva4F
- 9XARnd1ONNR3K077oDZJdGEJLHGppKqAYc+WlvqOkbj5jeE5j/8QraRn1Dn00oMks5OT
- Hmyw==
+ b=Bek/hWv9UjBGm7QKiqVWNTEvqXRlexp4yQd08ud6rAP2lr+7moXdNAkT3tFe+Ral0U
+ hKE51dO5YIoLprdLsgx4jLJC6QN6NnsWGETfQ7jBl7va5PrFupoOCgBMFEWk/R4dhUX3
+ LhfaJgm+e+T8I8odsG89SRZomKC5xuFENzZVW+x3gKt3tD3PMsSBdDdMQ24MjxFEl1oW
+ gQ4NzVVJDAw5LJjGsd5Fb20SiKrzm4haS8DQ4QJ6vSLEEg7t+WQDiGqV/cOpZRfoQz88
+ 2FXJhh4J7wfaWRZOXvv15BrrUSSsgOKu2zQOOKgYi/YWem4/RleKSGiQ6x7ndrvJTqa6
+ 2LdA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=YgL19BY+JMLrLyhmt8noz1fypa038LWGNp72P2x8XmI=;
- fh=PufDzExcHMp7iZyiCsPJI+HChZUSXyUTs4jQJUJaf7s=;
- b=C8kcfV45fnCTgaNSrViMWvsM0c75PmV7VtYrAW+boZawPaBtRPfsGhzPl24hcgIJWl
- YHFfLwLoF8hkGTyCGe6C5GVLKsGHktqmJ8cgqsBngJwCly8HWmjjS12XgLNdFhvy1ODg
- 8xeZLehQe0fbz8iycAKMd/SDwZCCxfzcbkT5twgM0B6ci1Ljx11oLN2iI+eaiceayBHe
- urKfj9f3b8OLW6LylyodG8aP5ocHKrdi+TQrO7yLJ0uTjPGxfmVGL60Mf1UiUYoj8v9J
- QsXauDoDP9+0VIwVGZ3ng6LtJeJgBVDrHdmsdLaQWjgVeMS8LgSEaSzgBc71KYpGEKD5
- 3sMg==; darn=lists.u-boot-project.org
+ bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
+ fh=fKLNsKKNouJCXbiPm4Wqr7QFLhe/H4+/v7KZUfF7G20=;
+ b=V/uKY8qFpJpzLU+wTWcgxRxfvL2um5jBqy1XZMGnfQ+2eLj9NE461ijKQu+vEpq2ql
+ +TgbzXPAOe/J5B0EccAE+fXx8cOFMUSlG5L3hbUMyyUGWk7SZBtxbzTt6x6523yH48/S
+ /hgGnPdcv8uevubMBkmj66Sd0l//3RLi2WEUvmH6EFW2Bngz13ue9l2PBUCeKMQK4Qip
+ PXrA8VPfbXm9a31FreQj27hMnDkOyk8Ly3ZcVXZcDE8Yv0Rf7rjoFNA2j8rnXpDhrVKf
+ 7j2ZPseq1HEP0qnKDQk/7TtvJi30csuzAQrTcaEVSxOl9PGGziNZtP3lPusv70XelrjD
+ uzxQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785237782; x=1785842582;
+ d=1e100.net; s=20251104; t=1785237827; x=1785842627;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=YgL19BY+JMLrLyhmt8noz1fypa038LWGNp72P2x8XmI=;
- b=DzIbKXp8KvsnrUYRoUkmRIO6OkguY4hHk8eyrGzWmvigyclFA9j0PW6o0NLfkweRzr
- vbfrCds80DaQapTHYp8TY0sKwBA3FR9YFqLqomPwUCrjZMSzoiyf8hiGgM3SuyYwEfAg
- 8OhBXO8Dkj9ThoAU5JsmidM0rbUoPLmxsafsNTa50VBNXOQKnnJzWMVXPHk+N3tP08hX
- UZ2Q8pyh3PRBwF8QgL8rzYEbA8tEMv/oErZF428gFGn3QmfZTJhY78jYTUKW3rn80N+S
- io/7URqT2+7Sa6stCerfTQ/f540n00/Y+yw9+s57cXwPeCD5981+E/HOuK0NvNSkmPW+
- M8rQ==
+ bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
+ b=QCcQZ8McSZ5eaia9A5S8WuenHijyJ8JO3F5QPdNnRYE8PSe0+znOz7R4tPJ5Uh3K0E
+ 4nyWP2hGhaR1CLaLApEOourTIeX2TGaJ2lbOUOn0UXulkWhTwLQ9WMX5kV5IXBTcv1Dk
+ f39pBLf8gSWUa0lHsNVjKFlaP4iCQXwiEYf/Pcqxw0l/uG5HRSDzckByNV8LDm4denWd
+ BNHdcwCtuk//ptRNXUAUel251OSrYT9iVOQiKUL/mLqebzyQhrHo7HN5ycyzRXsveoiZ
+ 5NSgwtmm/EW84xjaqaDXA37LkP2LBIkB+D8RS3Q45LXyTpwEEbWTP8dGTuaop/KszU4O
+ sWIw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp/iwXu1G97fkrYWi162n6dMthiIoMoMZYNB30saUbyGbU2p8EcpIL+mtEjami18KuphPZkC1c=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwRw3HrKLdih23jYa5mTiLAAeRGvU0ypivxEAZ8TlfAoVylnuGa
- 4lq5OElK8KKj8e9jckrsxNzYoWcbzI1mJyyTocmn4FmRSVdzDWmvwqa5pQDTNV6D2Qz8D4VV+6A
- YgYqGJKDqUB/H4zgyzgVXQv6UPZe1kyeNvRjpMmCI
-X-Gm-Gg: AR+sD12dt1f6vsItoJWCqxPUUEHYnN2F+WlFJevbfpQhwSXbVAPh2t+4tc1oOCE9+zN
- A7cORA96u6vRau58FB+KEOmudp9Mqa8tiZRFzkB8y2kR4G0NEItsNGLHAvcoDmT/6Ufk/seRW/G
- lDNxbOe9xnRlXkfple9KlG32sWOxA4DhkDaJjMFL7X7nqYwvZM5cQOspWBeD47EWdOjQvyzKQzp
- SJF3uFZVL+K2kbYnFVWqXyvEuDqhdReucjYlOm5W77tFs4jJu75pso7LWa1
-X-Received: by 2002:a05:6402:159b:b0:69f:4b45:924 with SMTP id
- 4fb4d7f45d1cf-6a0349dcf31mr1062144a12.9.1785237782580; Tue, 28 Jul 2026
- 04:23:02 -0700 (PDT)
+ AHgh+RoeBku4vd5ciOgnsa60r4WNrKMhhMHaEDfpZlN6CZVrvi0EoS5wXtahGhiRtqmyIfZ/6FnpmQ0=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwjQsfztaj2xQujJBN+n5j3WXfH2xtr5eq0XtoLWVeQW22KgEAy
+ juOgjydQcm6zSXLM2IWsHwCN1CKcbh4znx6K5GSiwc26mBD2hBc/tMBRPUfzJ0d6w9ndBvDXO3i
+ DsL7Vhpk+lsNsZPVUDSLLLT5+RA79vjvoAcFLVyBS
+X-Gm-Gg: AR+sD10oxEYqKyGT6mVpbpiheCiqqOWx/7YaLjkiP053NIarcimJ6s1s2OfIDc0zJf4
+ pZEc8Xxp44UwA3/Xa8iyjbXpD97lGYe28pMGhvZOYXIy1oiBlT3lKkFj9A5TNTnXjkiSPuxEdro
+ xljm//WbQMsuL5CEDdJVNZeqQL5ndhHcMkfMHFSTFgRMmweJYlq14wki38kZQQxRzMioSod0sll
+ nA8NId+GoP5G28b/IH0Ln8zwdYToKlTMpWCWlVWQlu/YDXjIiuLRlSdxm/a
+X-Received: by 2002:a17:907:d041:b0:c1c:26fd:4f31 with SMTP id
+ a640c23a62f3a-c1f72115624mr96136966b.26.1785237827182; Tue, 28 Jul 2026
+ 04:23:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
- <20260719-submit-ce-series-v2-v5-6-3c41f66d4522@gmail.com>
-In-Reply-To: <20260719-submit-ce-series-v2-v5-6-3c41f66d4522@gmail.com>
+ <20260719-submit-ce-series-v2-v5-7-3c41f66d4522@gmail.com>
+In-Reply-To: <20260719-submit-ce-series-v2-v5-7-3c41f66d4522@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:22:48 -0600
-X-Gm-Features: AUfX_mynV-00WZz0Vlu0qqRI8o1tOZhjZLQyk-yfWhewaa3NHy4TYwoxHxBbPFI
-Message-ID: <CAFLszTiOKdHZ-gSgCP_-3d3FLCSF7Tmyf+cjswAveEbApH-q2g@mail.gmail.com>
-Subject: Re: [PATCH v5 06/14] crypto: aes: fix software key-size handling
+Date: Tue, 28 Jul 2026 05:23:35 -0600
+X-Gm-Features: AUfX_mz4zcgN3R5yqFxV5lyueulMF_X37ltcpxpAYYvNrbtHFSoEOVRrgxz4s1w
+Message-ID: <CAFLszTjt1kmQOArWZ13Poa_hqw8DsQHfmuDyYjp0b4gmUodFNQ@mail.gmail.com>
+Subject: Re: [PATCH v5 07/14] crypto: aes: add software-key provider dispatch
 To: james.hilliard1@gmail.com
 Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
  u-boot@lists.denx.de, 
@@ -150,22 +150,22 @@ Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 28 Jul 2026 12:59:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785237782; x=1785842582;
+ d=chromium.org; s=google; t=1785237827; x=1785842627;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YgL19BY+JMLrLyhmt8noz1fypa038LWGNp72P2x8XmI=;
- b=jgjtBsllb67TuD9KI98yTFu7o8UqlNMNC204m8b1QaV1u1Yz8XZwMq1nWONNE42HUU
- zCyYZeBu+Drcpa/whHpxSmOO/bIKPlEMdgfo/pdvi7w65i4Vy3nigd6dO7VZpCJuggU2
- ckpXiZuQUgg8BXCxpTObS6v37oGEwtHHirdYs=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=P4y0ui07aAXfeezQBeiXkFMmtoLYC16Z/7aAKk6+8QA=;
+ b=kIcUeCfYKiu2gjWqARD1H6svfV9TSDxA1qpsSEDGnTNlBgUpfzb30vPqA33uEsbZaG
+ nr0pvGNFC2ZV3nxtK9Dk8sSd2dF0yaNYic9AMNE1s/NAkgV0TENxIGEeilXbkhlUe/x3
+ DHczSb0+xUUS412TqMIodZPHhancnXIZAStw4=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=jgjtBsll
+ header.s=google header.b=kIcUeCfY
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,56 +180,30 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi James,
-
 On 2026-07-20T04:13:44, James Hilliard <james.hilliard1@gmail.com> wrote:
-> crypto: aes: fix software key-size handling
+> crypto: aes: add software-key provider dispatch
 >
-> The AES uclass API expresses key sizes in bits, while the common software
-> AES primitives take key lengths in bytes. The software provider passes the
-> uclass value through unchanged, so AES-192 and AES-256 select the AES-128
-> round count and key schedule shape. Key expansion also copies the bit count
-> as a byte count for every key size.
+> Generic callers which supply an AES key need a provider-owned slot policy,
+> since hardware may reserve or preload particular key slots. Selecting only
+> UCLASS_AES device zero also prevents a later provider from handling an
+> operation unsupported by the first device.
 >
-> Validate the uclass key size, convert it to bytes once and retain that byte
-> length for the software operations. Correct the primitive API documentation
-> and add NIST ECB and CBC vectors for AES-128, AES-192 and AES-256.
+> Add a callback through which each provider exposes a slot for
+> software-provided keys. Add a CBC decrypt helper which probes providers in
+> order, continuing only when a provider explicitly reports an unsupported
+> operation and preserving hard probe, setup and decrypt failures.
+>
+> Use slot zero for the software provider and avoid Tegra's preloaded SBK
+> slot. Add sandbox coverage for provider fallback and hard-error
+> propagation.
 >
 > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 >
-> drivers/crypto/aes/aes-sw.c |  43 +++++++++++++-----
->  include/uboot_aes.h         |  20 ++++-----
->  test/dm/aes.c               | 107 ++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 148 insertions(+), 22 deletions(-)
-
-> diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-> @@ -47,30 +47,30 @@ enum {
->   * aes_encrypt() - Encrypt single block of data with AES 128
->   *
-> - * @key_size Size of the aes key (in bits)
-> + * @key_len  Size of the AES key in bytes
-
-I see stale 'with AES 128' wording in both the aes_encrypt() and
-aes_decrypt() headers, though the round count now comes from the key
-length. Please can you drop the '128' so the summary matches the
-parameter you just corrected?
-
-> diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
-> @@ -12,13 +12,23 @@ struct sw_aes_priv {
->  static int prepare_aes(struct sw_aes_priv *priv)
->  {
-> -     if (!priv->selected_key_size) {
-> +     if (!priv->selected_key_len) {
->               log_debug("%s: AES key size not set, setup a slot first\n", __func__);
->               return 1;
->       }
-
-How about returning a proper -errno here - it would tidy things up
-while you are respinning.
-
-In any case:
+> drivers/crypto/aes/aes-sw.c      |   6 ++
+>  drivers/crypto/aes/aes-uclass.c  |  73 +++++++++++++++++++
+>  drivers/crypto/tegra/tegra_aes.c |   7 ++
+>  include/uboot_aes.h              |  66 +++++++++++++++--
+>  test/dm/aes.c                    | 149 +++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 297 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
