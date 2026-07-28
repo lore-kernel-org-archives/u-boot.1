@@ -1,193 +1,228 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F53C54EFC
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C003CC53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:45:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2588D60710;
-	Tue, 28 Jul 2026 11:43:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 83CB981311;
+	Tue, 28 Jul 2026 11:45:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id omsfXWk-0Z61; Tue, 28 Jul 2026 11:43:21 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5KqL32ZYDd9v; Tue, 28 Jul 2026 11:44:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 474FC607D0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8017181300
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785239001;
-	bh=JrSrWrLqDQPWbKRCFBxd3LyS7qk+0sXxBsf+jO5eHGM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785239097;
+	bh=Y6ps9HokZMW7kXr6bP9PrVGQnWqDg6BkmXvi1zlYzfg=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Zbh7CRIjnapW8gkghKHmeBUrOsSPzzLgAfMPres+PdTP9W6YzHS/izwHy2eGe5SNm
-	 hZWgWYMO8GzeRgYA6etaiZ0V9Tk9P0FEATzax9EaLZr+Y8VFJLrDCWZ5mp7gEnjOVc
-	 iz8M84rA+FyG2HvYRBA/xDxjkZUV+jZ0mjSrAZ3EeSrBBXAmZj3zGvVFAztqb09pVz
-	 Na3P7WI3rDmrxns5CtyrD/wu/07GaN44SqtHFot8tBR0YkhxPvgsSZpYf3YeGjXD3J
-	 9uvT5/dae9L1WSxhAB5VG9O6dkg//kIFILG1jCWyK3CdaQDDmIfQS3bZbZ4kssIYob
-	 JhhumEus0+v6Q==
+	 From:Reply-To:From;
+	b=iX9GP4IWcJHFeg3mcl6G9SH/Cu0aBK5ihRpHEFeIzFx7ONIgk614lju5/fVturGr8
+	 YqnmliRb4IAzI8GIazWd5xitrplxmGwojG9p8OEKNu70XRl3ZgxJlW/IvdZHjJ+sjs
+	 jqSxZzR4QZjHkDcOPQAP+eG9tw/ihUym/pbtwlgWHPrCbZ5VM7wP+5G1ufHcGte6ym
+	 EZ7v/zrn8E+nMna+Mugyw42eWFVYedV89xGASaQ6sgHXPpc02SCxUQmDnIkJvQ4ayA
+	 W9jsJdkF4O6URzHxNmZa4n0JwqbHZM/jimA9Ks1hzjH4X77jZ/nlo32eEXaE36yfG7
+	 LznFB9M71DIqA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 474FC607D0;
-	Tue, 28 Jul 2026 11:43:21 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id A7E34357
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:43:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8017181300;
+	Tue, 28 Jul 2026 11:44:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C712350
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:44:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 98ABF607D0
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:43:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6DA0A409D0
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:44:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YYkNhhV2VJ67 for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:43:18 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QlCuWcSXSNGz for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:44:54 +0000 (UTC)
 X-Comment: SPF check N/A for local connections -
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 437D960710
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 437D960710
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 5F40E409C9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5F40E409C9
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 437D960710
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:43:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5F40E409C9
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:44:53 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9996C8494B; Tue, 28 Jul 2026 13:43:13 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id B8B4F8494B; Tue, 28 Jul 2026 13:44:51 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 096C982991
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:43:11 +0200 (CEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sVO2cJGm3MCiNLx9CUraThd7KMliMcPpLomQjh2XdY4XkDcQeW+RAeAZn04iXOV/4QTmjpcEATlzIRFtn6amJ+5cxB8vju1QJX44ZH/+E2Y/s0bU2Q/QsrYMD6mdtWMQDVTn3huHJ7o8Uqr2FUXUfT5rIo12i2QaEG9vccNvtRj732jSAmY5WGS7q9nPDDIANN0eJe0QAcENhg061XKWqmOmu0Io9I3FoPOLullAad5GdqzHQSmkTSQJ0wCPzlJRE063YvjFL8/VPSq2v5PyJ8ZFE8jLi7PcKsDpOxG26lzNNvyTaXgDZ3kuXU0gVtemWjuKzBBmVHtiOKHnOi6lgA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JrSrWrLqDQPWbKRCFBxd3LyS7qk+0sXxBsf+jO5eHGM=;
- b=zVKlsAg8K/MX9rUhUNfXZ3b6lL7ED9xdETQ5aRLXyWK1jUnp7O58apBArQhEtb59oQXEOyUQvTHPW+FaRNlzHQEPzBRSIsN7w/yhzKoYMnuUycFo/8zRYJNLD8XARZGysjo86n4pNA/NMH/e9NHu81wmdrGgS7DoJjLqXNKvCyBMWIiyq9c/rMlgHtdu+7/p7AmLoH6ohP+8AtQAYMMO/a20zSQEjPLAbUNVyNEPWqMWQnWe3qlGsybzNl1Ah+hmQnZfl9sNulCtlee6lwFu0XLrgv9mJSqmLRjauzFm/g27CjYrHub0W0li2thGTYitfM3Xq+tC3Dq5Lf3FlYw8Lg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by PAXPR04MB8544.eurprd04.prod.outlook.com (2603:10a6:102:217::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.13; Tue, 28 Jul
- 2026 11:43:08 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0245.012; Tue, 28 Jul 2026
- 11:43:08 +0000
-Message-ID: <5ca38884-d8f1-4fca-b087-7980c2ea96ed@cherry.de>
-Date: Tue, 28 Jul 2026 13:43:07 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/7] reset: Print reset type on diagnostic console
-To: Simon Glass <sjg@chromium.org>
-Cc: dmukhin@ford.com, u-boot@lists.denx.de, trini@konsulko.com
-References: <20260603070743.1268544-1-dmukhin@ford.com>
- <20260603070743.1268544-4-dmukhin@ford.com>
- <4946b40f-21b1-4a48-a01e-6f81548aafda@cherry.de>
- <CAFLszThwW5Ff6JjCd+xX-fKR6phTD3ZoqtfvS6+hXRc-cH1Oeg@mail.gmail.com>
- <90e62165-aee3-4e36-bd1e-3d5cbb991f11@cherry.de>
- <CAFLszThwRges8dceWdr71KioTR8nZ_mbC0me20EKNsBtuYuvrA@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszThwRges8dceWdr71KioTR8nZ_mbC0me20EKNsBtuYuvrA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIZP296CA0022.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a8::14) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ by phobos.denx.de (Postfix) with ESMTPS id 8435382991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:44:48 +0200 (CEST)
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66SBHtah2606242
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 11:44:46 GMT
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpn19hs71-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 11:44:46 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2cee1ec30f2so48262825ad.3
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:44:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785239085; x=1785843885;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Y6ps9HokZMW7kXr6bP9PrVGQnWqDg6BkmXvi1zlYzfg=;
+ b=KILeTXDpJGBANciqC/cPsHHAEgxt7hditMFUsPOmwNicOKGMnNrLEQtGqoGFjHKMsC
+ t8FyYogPfNPi/Id82Zf1a/5WR9WAw8/vSdEnPLAEl+d6P0of2kSFzi5o2GvtMSMj9lwA
+ uetbWU1STMlK3tTta8nzUfriaTgc8E9DRZ7MXSMGavzUvla5uNBXjM9lvL0hH3cfk7Dx
+ GOwENVOVMcYHoAdwH7uzpDhHXtCp3O4sxmK3QntSyjdHsDvPXt/J0mWY0R7vbQCj64PX
+ qLpprY2tPpc0MlzBOs41nl1cbbbZSr06EToAgm3Jf4IhaSV4lA7FbkVv61Igi+w08wQt
+ N59g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Roo6grn32/plIx1WpPGW+kDRpuwyCTJgRz0CDglhvMyDVFisI0dQJEh7hgOJyB9eiQN8HyuMqs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTWuRWC2Z3RRuY6yf9lRcybqJajmfXCEl0lsSK7THEEA6WM8nw
+ Y50wsRJL6iJ7P+jS2pw7kiuvBGQhLO/GPXQ9g2JECa251nQ/5x8y96PAeCgM6diwNQ64yz+ADlB
+ l7KjF7iJkzZPa+PDbT+vvgRUzzE4MSA4CV3A5i+ENrTFn/mhnZ/VNCx9d
+X-Gm-Gg: AR+sD12xjn9zcxwWg5bjtsnxn5c5NlMZi5Mcy7QEGys28Ps1D6pwyfbYoWHKR4KCXwj
+ 0RG20/aXNdWlR9EMTKGw4BV6ZlIflO4qjzi1wg/4vKfrrzxUZietdkds4bC5EAdbRIWZw8fyjzk
+ WQ3nvbPr2el2Q4/5RGApusp4z/zFxABqnYZfW6j5bDuYgUuB10lYEDotiqxJJ0eVfl4epKsI7Kd
+ vJh+PEC9Q185li9g4VWTg3jFg4rx0wA+Bo2uE/0AZfeqNePebvudmssnBDphNEuaXFz9RIkz7VO
+ G12whb7BLsTeZVO9P7d+GLX5s/ql0JaLtl0WCQ7mYDX3i6XKU8e/L6XkxQdfX+jUWn3hV+KuQUp
+ lzNaBDyf96WiYldcHLe2rmbmiXBnbMOhlHmupEA==
+X-Received: by 2002:a17:902:e94c:b0:2cc:aa36:c04c with SMTP id
+ d9443c01a7336-2d015abd904mr23991875ad.1.1785239085349; 
+ Tue, 28 Jul 2026 04:44:45 -0700 (PDT)
+X-Received: by 2002:a17:902:e94c:b0:2cc:aa36:c04c with SMTP id
+ d9443c01a7336-2d015abd904mr23991455ad.1.1785239084680; 
+ Tue, 28 Jul 2026 04:44:44 -0700 (PDT)
+Received: from [10.152.203.87] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-314fae0eacasm3678437eec.19.2026.07.28.04.44.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jul 2026 04:44:44 -0700 (PDT)
+Message-ID: <e1ca0b58-d38f-46dc-a9e4-e0695e69a950@oss.qualcomm.com>
+Date: Tue, 28 Jul 2026 17:14:36 +0530
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PAXPR04MB8544:EE_
-X-MS-Office365-Filtering-Correlation-Id: 96ad8734-439a-4508-ae13-08deec9d64eb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|23010399003|1800799024|18002099003|22082099003|3023799007|56012099006|4143699003|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info: wk4HEM0UV1HPwy0mi5G8kNkc1WE0fZFHqnwas7FjStaxy/wKD4Pnv/ti58jTqlRKJT17O0khpgeNTdFPJ0fMrApbCfqr1vRCpNFk8xZY9xUqMulzkbelpQECCSsNO6uTtq1HQo/wLt3LowhWz7KfiN737f4O5WLkz2eolwZVlo9VA1qXnzY1vCHkvpBe5XP2pcBzEEsnZWkzV+2yJ/7oHwccPt6u+ijnPzgbGuPnrw66jeGViEfU9UbIGOWsYdsRBmZ1UGTYHhp9SajnCHmzwMGNfVCwId9ET7b7NW+HpVzUaEbjAdKQNMTz2c5duHL5Iu5noE3vgS3rCxWqp2hIbIx3aUSdyszqGaJifjpUSqKAZ98oQbmSEKyBNvPxr2SBSxrSPL/HCxZNqBSKq1389K3/Xx9n8Ivtj42y77EW/f/pSPaJmzgEkQ4VZzHC3Qa7QHSCXxGmOikueYxPh2uE8zRcQOu3F1Sbh/QMcSpLuphOTluL5GEETji0jE+xcsDczlJdj8jJsLomqqtnze2ETmxPiQv0t5AqFb2UTu75u4UGDx9eZcWX5179R50/iCado250EH4EAvx5D92zOjfzMVJJyOVkY9JMXwXp7JPjcBuxUbjOQxMPhLljhSB3RawGrD+ycWh9AeUwEoS2r0T6td+XpRpy1Gb7NJ4aIISuKY0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(18002099003)(22082099003)(3023799007)(56012099006)(4143699003)(11063799006)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dGhEWEZDTWcyb0lQL1N0OWZnV3RpQzB4S0ZBVDJ1VGc4NHVRZ29QSjBqRUZy?=
- =?utf-8?B?ZDBXN3JiaDM5OXI1YjVoSUM1b0FIYnloaFd0WUwraWgzeE1xZFdyekRJZ2hP?=
- =?utf-8?B?dEVqaHhtMjNqSUppWlUyY3laYm9UYVJXTEpSYm9RdHFpbHRhVjVzSUlNWWdo?=
- =?utf-8?B?TzAwSVRtT29IZWRhY2RXMDlIV2N0T05kTVl4dm9DMmRYRWVkN05pbmdNSU1V?=
- =?utf-8?B?VlVmRjl6aG5TNWtsMTVvQ3ArWTIreUIyZmsrbThHNjh1WDZmN01wdkQybDFw?=
- =?utf-8?B?ZUd3cHlMY3VlODVwY1kzUDdxQUp3am5yTGgwUmZ2aGRmWWN0MjB4eEtFQVNK?=
- =?utf-8?B?bGZNUFVuZ3cxaUFiNW5YZ0JLYjhmbzZrZEhsUGFwaUFFZ3JUYzdOaUxkN3BO?=
- =?utf-8?B?dzJ4aUtBNHdYNm9ySDFaMjNqZGxxeXpFM3RSQkxNNDdxeWxId3BYU3pSWmdE?=
- =?utf-8?B?UkQ2bmN0SGZhcGJLTDJGc2tMQlY4eHFad2hkNUxhaW1zTnU1ZXVDQjYxSkdi?=
- =?utf-8?B?QlNIaHNNUnBPY3JJS1FiNm9sTFlSOUZlKy9xcWxWditSU1A4ckFWeU5IbUJ5?=
- =?utf-8?B?bWxabWVVbmZ5ZDQwVUlqSmJwNmw0bHdhL0gzRk03N0F5SE5GbnVJeEh0SmtW?=
- =?utf-8?B?Mkl2ckcrR1I3VmJyZ2pXRStDR0JKVXJIK2UrSTYzRDA5UmZNZnF2cXpxNzlE?=
- =?utf-8?B?eWtjOTc5NExDQ0lrMlZhZFFHQjB6QVU4NndtUVJNRllRaW5DdWYvc1NwTUdB?=
- =?utf-8?B?WHNzUWhEdlp5Q1V4cWxPQ0xoSkpFR2c4K1JSNzRkMk1Sd2UxZVZxQmNmeDJh?=
- =?utf-8?B?QkFCUmRNaU56eWVBSjRqYnBGdzYvMWl5N0JOTnh6bU5TdTBrOVJaS2ZtYkZI?=
- =?utf-8?B?STRjTUpCS1ZYRmRLMVNjTlFHTVBZYWlDRVBMTjY2VW1kZlpqQU1VMmVXSDRy?=
- =?utf-8?B?SldOY2FSczgwN1hGb1JVZ0ZDeFhzTUxhR04zVzEzVmdpR1NXUGlZckwxbEMv?=
- =?utf-8?B?WFNXUkdMU2dGMGN3b2hzR1JrUUphckpPTVRGNTZ3R1QvL0hJeXpkZUk1STlR?=
- =?utf-8?B?amhaVUp0UTdLZTQrQXVJWFA1Q0g4a0p4a2F3QWg5Rms0WkZSeTdQdld3Q3Jq?=
- =?utf-8?B?MDgvSTkvbmh0RDdHNUpoVnNTdWsydjBsZFY1VkxIRlBENEVMZEJvTUtLU2Qv?=
- =?utf-8?B?NldNcysvTGI3eFgyRlpxcldHOEtoMUpOVzFjNHdNRy9PWGRyMEc1QjV6N0RO?=
- =?utf-8?B?T3lxK21Qa29sdVVpVkdJTFg5cWlYMldGQ3pFWEs1QlNHS1RUQ3B0VmZnQ3p3?=
- =?utf-8?B?SFRrclZJQ0d5LzFJZkR0Yi8zb2dzL0wzSktRRzNwY1NNcmJ1eTFwTkl5ZFcw?=
- =?utf-8?B?a2lVdFJGWGtKL3M1d212aUpHd2VQaWdxVmoxZW0zdURGOWZMcEk1MHNDQ2My?=
- =?utf-8?B?aExYL2I0WmwxM0VVaTNkbko3Yk85OXd3dnlFVDVUdk1MUXVlamlMaGp1a0lY?=
- =?utf-8?B?elJrLzdFQ1NLK1VEdzJ2M094LzRkUTl4QUV1Z3AyOC8rYlpLbldqM0JZNVV6?=
- =?utf-8?B?dElZemxab1FMNkt0ZUJ0NWpJSm5Ka3ZXcFFUVFFQUUFyTXEydEQvM24vZlk5?=
- =?utf-8?B?empUNHFJRFZWY3U3NC9UdkRuWm9CS1d2TnkzRysxdVoxZ3oyZTN4TjVwMDZW?=
- =?utf-8?B?clRkbzhkMTVuc1ladDlwem94a2tIVnA1TGptVXRzTTZSME1GWkVXeG5pUHFF?=
- =?utf-8?B?VDFuOThCQmI4bFJvZGJBUUdBa3BmZWIrNXZvUU9oUmhMSHpJUHJldC9jT1hp?=
- =?utf-8?B?clhYYkx1Y002YkFFU1lvcUdkN2NxRlVzNHVFeUZqRnhZcUJNdGlMVWU0Ylk1?=
- =?utf-8?B?TWhQcEFMS0VCRFJ5UXVIMlU1aTBYdmZHd05aVExWT2NXenNYUnZySWlVcjM3?=
- =?utf-8?B?RXcrZnpGV0cvT0Yxa2VWSFVxQ0IweXlUd285VlVpdEx3MUtkSHNSZFduejI4?=
- =?utf-8?B?enNaMVhVTE5DSzF1eEE3U00yWUxXRERibnpyL3hSbVpvSVBFRFpobjZJRU80?=
- =?utf-8?B?UGJaaS94M3hFaGl5ZjRJdHV0WlBvanhMbHJqdml0L1pMS2tSSDE2MkUvMWdJ?=
- =?utf-8?B?TFVqVHkxQllnSTlRK2VSRldkMndTUnZLOHdFMHZ3QnlVdGM4QjNmUU9FM2ZI?=
- =?utf-8?B?a3ZNTndETTJEVnBvdnc1ZFl1Q3pMQ2l5ZWExVmtzZ2ErcHc1S3dEZ2RXeVpR?=
- =?utf-8?B?NUw0dVBjVVpnTnlkRHF5cXR5R2IzY1M3bndEWUE0S3JKcW8raktTMEJ0djE4?=
- =?utf-8?B?anJRVzVieTc1OGRvQXVsaHhmY0kzN0JLWm40ZTFSQ3F4a0pMN2lpQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96ad8734-439a-4508-ae13-08deec9d64eb
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2026 11:43:08.4094 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: W31YJ57tg/XPnAEZNBr/AtAwfrWfgaC38E/XiII/lLIAdXVO9kEHDvTBltppEaG5U2LysQL5oEEZsgN3prQqpKWUWipM4fuaN7oTYmLPjGs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8544
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] qcom: capsule: add FIT capsule support with
+ multi-partition
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
+ <CAC_iWjK_U_TtNJsXjgVggXa28iHb9212tEQEdQn8wK2XqXmJiQ@mail.gmail.com>
+ <19959cc3-40f6-4e9e-801d-8f7c40edbf70@oss.qualcomm.com>
+ <CAC_iWjJSNekv73X0n3G-qPjh60F88R=CHybxHzBUo1DDgGzrqg@mail.gmail.com>
+ <37b24004-5080-43cd-923d-8db6d09f40ed@oss.qualcomm.com>
+ <CAC_iWj+yLvqqunA_j6WX_0v_DSkf6xwXPSL+kysrUM7G3isSKw@mail.gmail.com>
+ <8de79ca7-e826-4a61-b380-2bdf01c39871@oss.qualcomm.com>
+ <4b344c4d-ef0e-4595-a6ff-10629cfaaa82@linaro.org>
+ <936f99e6-bd6f-4168-bfea-8a8c777b4c52@oss.qualcomm.com>
+ <6748951d-d720-46bd-82bd-19c4d97a6f20@linaro.org>
+ <73fa32f5-0d10-4f95-a02f-2cac91d072d6@oss.qualcomm.com>
+ <013d5bbc-983e-4386-b236-8c63f4406fc0@linaro.org>
+ <aaeb155a-6195-4574-b4b4-fa7d6a88a00f@oss.qualcomm.com>
+ <20feda09-ab10-43e4-831b-6a8647f5c62e@linaro.org>
+ <37b8a403-b299-4e0d-98fe-b4b3ae660b13@oss.qualcomm.com>
+ <CAC_iWjLJRk34i4S04L+3bKMVji-JzmieBKrEmYUZmEuc7Jd-4w@mail.gmail.com>
+ <bea27826-0028-4de7-a4c7-94ba3eb2f1b4@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <bea27826-0028-4de7-a4c7-94ba3eb2f1b4@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=TJV1jVla c=1 sm=1 tr=0 ts=6a68962e cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=dw0t6H4-AAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=lZtRBRxhTsicrPJFcJUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22 a=wVJa4CU9-Z26yuRAZDil:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDEwMyBTYWx0ZWRfX57G0/Vy8zHw6
+ 7+bb3CLKuyW3BQRwckqs1AbpwYCnb2wjDK2FuYr58a+MJVA7xSKfNaOYR2fEfEkJvNOZ4xxTQGf
+ e8waOahpehdg/DZQwP1G/EEldb5pMIINMSTNLTrdyylMUzN5kjI8ReL/zAV53Mx0t87qwAhlqrk
+ 68x1dCE0RhaIqzrSjSyBYQ5pgcVdVQ2GaW3AiL/93dRfnUjnl6HjiOTTefk/paH7BCj+ZqZ4DP8
+ v+/8G6MHaJD98WMPkJyABwFXuokrJIzJKmszVYMJ4HWwrSWmczI4loik1/CoivbLhlNU945Gj7Y
+ VTgViH9su4xuRAtxz3NFeWVnW0U0+KDQEfXh73CJAb7nwXYT7EfDQGAiys9tPaJp+0BoESdWGlg
+ dGyjCwXpqhozvolDucOop/H5gl6JOyslHrETKE4qCPJjE6XmUJE0oRzhGgVByhoOQyp34VJu1fY
+ qEpzUwBBQl55szHJtaA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDEwMyBTYWx0ZWRfX7woc43Jd8kbk
+ NTFH8/LEKklK4J6Ki9ZnBU18IqQgNaqaoRT0enWKOERpy/+Ip5Dop8x+zHjIXki3iO3/sHrpudc
+ NesXUGIPAyBlJ9XMNVmTQABaFmHanRo=
+X-Proofpoint-GUID: 1I4UMFmrI3c54aVTQsgWSVC9eQsfcgdO
+X-Proofpoint-ORIG-GUID: 1I4UMFmrI3c54aVTQsgWSVC9eQsfcgdO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-28_03,2026-07-28_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 phishscore=0 clxscore=1015
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607280103
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JrSrWrLqDQPWbKRCFBxd3LyS7qk+0sXxBsf+jO5eHGM=;
- b=PKtM1pV6myE1fC85XgQTMYyr+wZcUR0KB5PHbiK/F998SucQtE+b8CxfmIaclML9md/JqM/KvVz6RN5Pd0Qvk0rnpnBlvMUeTpMLo/Mfk7Fqsi0y8b+A13RQ14Y/cb7LDr4kXaNBxOpCPGIHrFe13L6hsi60s64kggImKqzi1OA=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- spf=fail smtp.mailfrom=cherry.de
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=PKtM1pV6
+ d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Y6ps9HokZMW7kXr6bP9PrVGQnWqDg6BkmXvi1zlYzfg=; b=Hm38kHebJKyDX112
+ 5uCr1ACzIBGWWQqSLO7qBLm54kmjFSsg6f9RT/aKprzLovPbFboZmelUJ750dFlh
+ uQ5IcUtWovLhb04A3p2FitxOFBiNFVtFudaNAEeOtBW4qmMp7M08qVZFhFc36g3b
+ DNpe3ql19/2yCv661xmXjY66naHsGtIPAipfZB5VAnz9g8oGkeLI9iQ5X48xCrjU
+ V7PrgD7Ddq4oEhdsYoYNUxlcFccXsIIJESLXRDYTMmR0gBxG7EqCXjBH9pi0mgfs
+ VE0JnvBmg3ZxNE9vqpPtuqqJFgzE/pApVsiecI7Fqv7JepYsxOK/4N2Rw8vjeZkF
+ zWphIg==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1785239085; x=1785843885; darn=lists.denx.de; 
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Y6ps9HokZMW7kXr6bP9PrVGQnWqDg6BkmXvi1zlYzfg=;
+ b=YgIBKlZmLcRmkIg+QdNxub0izfgLZIVCtDZsFJ+kVaeK6TLWrBN4sRFD8jgE2SrvDW
+ 6Op78HcdOlBoRfyOkQPPjWV9EuhvhkMguxPDRN3Kmd+/4e136SniD3sBUiZtQ2u9Iidu
+ yjKJ1hIUkHpDWWFHJ0x/6qVxVc4LIL5rhfrWFg1j+UVliozxjOt5TSt6RtE32v+c2fES
+ cL7PTWOGZCwVoicPfsxos77wErUOZYvrQLDz+Ae6KClE8W0KA6MYyTs2gJzzHk+xlwMa
+ qobEKKMsEnXeq0/R04kD04eDzos3ZiBXGF++tfGgEk5rm31uIVcI+ZPx+B08pvD3XFHI
+ w7WA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org; spf=fail
+ smtp.mailfrom=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=Hm38kHeb; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=YgIBKlZm
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@cherry.de
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=cherry.de header.i=@cherry.de header.b="PKtM1pV6"; 
+ dkim=pass (2048-bit key;
+ unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Hm38kHeb";
+ dkim=pass (2048-bit key;
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.b="YgIBKlZm"; 
  dkim-atps=neutral
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -199,126 +234,420 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Balaji Selvanathan via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Ilias,
 
-
-On 7/28/26 1:38 PM, Simon Glass wrote:
-> Hi Quentin,
-> 
-> On Thu, 23 Jul 2026 at 10:43, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi Simon,
->>
->> On 6/27/26 10:30 AM, Simon Glass wrote:
->>> Hi Quentin,
+On 7/27/2026 9:57 PM, Balaji Selvanathan wrote:
+> Hi Ilias,
+>
+> On 7/27/2026 6:11 PM, Ilias Apalodimas wrote:
+>> On Mon, 27 Jul 2026 at 13:00, Balaji Selvanathan
+>> <balaji.selvanathan@oss.qualcomm.com> wrote:
+>>> Hi Ilias, Casey,
 >>>
->>> On Fri, 26 Jun 2026 at 16:01, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>>> On 7/24/2026 12:37 AM, Casey Connolly wrote:
+>>>> On 23/07/2026 18:43, Balaji Selvanathan wrote:
+>>>>> Hi Casey,
+>>>>>
+>>>>> On 7/22/2026 8:19 PM, Casey Connolly wrote:
+>>>>>> Hi Balaji,
+>>>>>>
+>>>>>> On 22/07/2026 11:23, Balaji Selvanathan wrote:
+>>>>>>> Hi Casey,
+>>>>>>>
+>>>>>>> On 7/18/2026 4:19 PM, Casey Connolly wrote:
+>>>>>>>> On 7/17/26 18:16, Balaji Selvanathan wrote:
+>>>>>>>>> Hi Casey, Ilias, Simon,
+>>>>>>>>>
+>>>>>>>>> On 5/26/2026 7:05 PM, Casey Connolly wrote:
+>>>>>>>>>> Hi Balaji,
+>>>>>>>>>>
+>>>>>>>>>> On 25/05/2026 13:24, Balaji Selvanathan wrote:
+>>>>>>>>>>> Hi Ilias,
+>>>>>>>>>>>
+>>>>>>>>>>> On 5/23/2026 6:23 PM, Ilias Apalodimas wrote:
+>>>>>>>>>>>> [...]
+>>>>>>>>>>>>
+>>>>>>>>>>>>>>> To support multi-image RAW capsules, we would need to:
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> 1. Enhance mkeficapsule to create multi-image capsules?
+>>>>>>>>>>>>>> There's an equivalent tool in EDKII that can produce a 
+>>>>>>>>>>>>>> capsule
+>>>>>>>>>>>>>> with
+>>>>>>>>>>>>>> multiple payloads. There were also patches posted for
+>>>>>>>>>>>>>> mkeficapsule,
+>>>>>>>>>>>>>> but need some minor tweaks to merge them
+>>>>>>>>>>>>> Can you please point me those patches? I did a search 
+>>>>>>>>>>>>> myself, but
+>>>>>>>>>>>>> couldnt find those patches.
+>>>>>>>>>>>> https://lore.kernel.org/u-boot/20240419065542.1160527-1-
+>>>>>>>>>>>> sughosh.ganu@linaro.org/
+>>>>>>>>>>> This patch you mentioned here can create capsule with only one
+>>>>>>>>>>> payload;
+>>>>>>>>>>> means for multiple binaries we need to create multiple 
+>>>>>>>>>>> capsules. I
+>>>>>>>>>>> have
+>>>>>>>>>>> also asked the person who made this series to respin, but 
+>>>>>>>>>>> havent
+>>>>>>>>>>> heard
+>>>>>>>>>>> back from him.
+>>>>>>>>>>     From a quick look it seems like it would be fairly
+>>>>>>>>>> straightforward to
+>>>>>>>>>> extend mkeficapsule to support multiple images, the capsule 
+>>>>>>>>>> header
+>>>>>>>>>> has
+>>>>>>>>>> an item_offset_list[] array with offsets to each image, today 
+>>>>>>>>>> we just
+>>>>>>>>>> write 1 but it shouldn't be too much of a challenge to put a 
+>>>>>>>>>> loop in
+>>>>>>>>>> here and extend the argument parsing.
+>>>>>>>>>>
+>>>>>>>>>> Given that we a) already use raw capsules and b) they are 
+>>>>>>>>>> part of the
+>>>>>>>>>> EFI spec, I'm gonna try and save us all some time and just 
+>>>>>>>>>> put my
+>>>>>>>>>> foot
+>>>>>>>>>> down here. A single raw EFI capsule file can already support 
+>>>>>>>>>> updating
+>>>>>>>>>> multiple images, U-Boot already has all of the machinery for 
+>>>>>>>>>> it with
+>>>>>>>>>> the
+>>>>>>>>>> exception of mkeficapsule but I expect that's something you can
+>>>>>>>>>> tackle.
+>>>>>>>>>>
+>>>>>>>>>> The upside to this is that you will be able to build capsule 
+>>>>>>>>>> files
+>>>>>>>>>> for
+>>>>>>>>>> updating xbl/tz/hyp/aop that can be consumed by U-Boot and edk2!
+>>>>>>>>> Thanks for the detailed feedback.
+>>>>>>>>>
+>>>>>>>>> We agree — we'll drop the FIT capsule approach and move 
+>>>>>>>>> forward with
+>>>>>>>>> RAW capsules.
+>>>>>>>>>
+>>>>>>>>> Here's the plan:
+>>>>>>>>>
+>>>>>>>>> 1. mkeficapsule tool: Extend Sughosh's multi-payload capsule 
+>>>>>>>>> series
+>>>>>>>>> [1] to support generating multi-image capsules from a config
+>>>>>>>>>       file, so we can build a single capsule covering all the 
+>>>>>>>>> partitions
+>>>>>>>>> we need to update.
+>>>>>>>>> 2. U-Boot (Qualcomm): Today the Qualcomm capsule update code only
+>>>>>>>>> supports a single firmware image (U-Boot itself) via a
+>>>>>>>>>       single-entry fw_images[] array. We'll move to a 
+>>>>>>>>> SoC-specific,
+>>>>>>>>> multi- entry fw_images[] array (defined per board, e.g.
+>>>>>>>>>       board/qualcomm/<board>/fw_images.c), so a single capsule 
+>>>>>>>>> update
+>>>>>>>>> flow can cover multiple firmware components — each with its own
+>>>>>>>>>       ESRT entry and FMP image_index — instead of just U-Boot.
+>>>>>>>> No need for this, just build fw_images[] on the fly derived 
+>>>>>>>> from the
+>>>>>>>> partition table on the board, with an entry for each partition 
+>>>>>>>> that
+>>>>>>>> can be updated. You just need to add a map from partition label to
+>>>>>>>> fw_name string, starting with the xbl/uefi/boot partitions we 
+>>>>>>>> already
+>>>>>>>> handle.
+>>>>>>>>
+>>>>>>>> The entire point of having logic here was to avoid per-board 
+>>>>>>>> stuff, if
+>>>>>>>> you're thinking "ah I'll do this per-board" you should immediately
+>>>>>>>> wonder "but can we do it dynamically instead?".
+>>>>>>>>
+>>>>>>>> Thanks,
+>>>>>>>> Casey
+>>>>>>> Hi Casey, Ilias,
+>>>>>>>
+>>>>>>>      Thanks for the pointer — agreed, building fw_images[] 
+>>>>>>> dynamically
+>>>>>>> from
+>>>>>>> the partition table is the right call, avoids per-target code 
+>>>>>>> entirely.
+>>>>>> Can I talk to a human instead of an LLM please?
+>>>>>>
+>>>>>>>      Plan:
+>>>>>>>      - Keep a fixed table mapping "partition label → fw_name + a 
+>>>>>>> fixed
+>>>>>>> image index", this mapping going to be a superset list for all 
+>>>>>>> the Boot
+>>>>>>> FW images supported in different Qualcomm targets.
+>>>>>> This reads vaguely like a rephrasing of what I proposed, not 
+>>>>>> clear if
+>>>>>> you really understand it though.
+>>>>>>
+>>>>>>>         Sample table:
+>>>>>>>
+>>>>>>> ┌──────────────────┬───────────────┬───────┬────────────────────────┐ 
+>>>>>>>
+>>>>>>>        │ part_base_name         │ fw_name                │ index 
+>>>>>>> │ guid
+>>>>>>> (fixed)                                │
+>>>>>>> ├──────────────────|───────────────|───────-|───────────────────────- 
+>>>>>>> |
+>>>>>>>        │ xbl                                  │ QCOM_XBL │   1
+>>>>>>> │  QCOM_XBL_GUID                  │
+>>>>>>>        │ ubootspl                       │ QCOM_UBOOTSPL│   2   │
+>>>>>>> QCOM_UBOOTSPL_GUID     │
+>>>>>>>        │ uboot                            │ QCOM_UBOOT      │   3
+>>>>>>> │  QCOM_UBOOT_GUID            │
+>>>>>>> └──────────────────┴───────────────┴───────┴────────────────────────┘ 
+>>>>>>>
+>>>>>>>
+>>>>>>>        Target-1 supports xbl and Target-2 supports ubootspl.
+>>>>>>>
+>>>>>>>      - At boot, scan the partition table against this table. Only
+>>>>>>> partitions actually present on that target get an 
+>>>>>>> fw_images[]/ESRT entry
+>>>>>>> — nothing hardcoded per target.
+>>>>>>>
+>>>>>>>      - The image index for each partition type stays fixed and 
+>>>>>>> published,
+>>>>>>> so whoever builds a capsule (mkeficapsule) always knows which 
+>>>>>>> index to
+>>>>>>> target, regardless of what's discovered at runtime.
+>>>>>>>
+>>>>>>>      One wrinkle I want to flag: today's SetImage() path assumes
+>>>>>>> dfu_alt_num = image_index - 1, i.e. it picks the Nth entry in
+>>>>>>> dfu_alt_info purely by
+>>>>>>>      position. If a partition from the middle of the table is 
+>>>>>>> missing on a
+>>>>>>> given target, everything after it would shift by one position 
+>>>>>>> and the
+>>>>>>> wrong
+>>>>>>>      partition would get flashed — silently. Since I'd rather 
+>>>>>>> not touch
+>>>>>>> that logic in common code, my plan is to keep every fixed index's
+>>>>>>> position in
+>>>>>>>      dfu_alt_info stable by inserting a placeholder (U-Boot's 
+>>>>>>> existing
+>>>>>>> virt
+>>>>>>> DFU backend, which just no-ops) wherever a partition is absent, 
+>>>>>>> so the
+>>>>>>> position
+>>>>>>>      math stays correct for everything after it. The missing 
+>>>>>>> partition
+>>>>>>> itself simply won't have an fw_images[]/ESRT entry, so a capsule 
+>>>>>>> can't
+>>>>>>> target it
+>>>>>>>      anyway — it'd get rejected before reaching DFU.
+>>>>>> Skipping past this noise... Ilias probably knows better here but 
+>>>>>> yes the
+>>>>>> way dfu_alt_num is derived from ImageIndex does impose a 
+>>>>>> limitation here
+>>>>>> currently where we need to ensure the indexes always start at 1 and
+>>>>>> count up.
+>>>>>>
+>>>>>> That being said, it's already quite complicated to have to 
+>>>>>> maintain a
+>>>>>> database of the indices for each board, and even more complicated 
+>>>>>> when
+>>>>>> we have boards that may or may not be using U-Boot SPL (for 
+>>>>>> example).
+>>>>>>
+>>>>>> Having fixed ImageIndex values for each image would then seem to 
+>>>>>> make
+>>>>>> the most sense as we could just use fwu to set dfu_alt_num (or 
+>>>>>> another
+>>>>>> platform specific mechanism), however the EFI spec is clear that the
+>>>>>> ImageIndex of EFI_FIRMWARE_IMAGE_DESCRIPTOR must be <= 
+>>>>>> DescriptorCount
+>>>>>> as returned by fmp->GetImageInfo(), so we would need to also have 
+>>>>>> dummy
+>>>>>> entries in the fw_images[] array so it doesn't really solve our 
+>>>>>> problem.
+>>>>>>
+>>>>>> https://uefi.org/specs/UEFI/2.9_A/23_Firmware_Update_and_Reporting.html 
+>>>>>>
+>>>>>>
+>>>>>> Currently, other than for setting dfu_alt_num, the only other place
+>>>>>> where the image index needs to match is in efi_fmp_find() which was
+>>>>>> added by [1] seemingly to prevent an incorrect image index in the
+>>>>>> /capsule/ file causing dfu_alt_num to be set wrong resulting in the
+>>>>>> wrong partition being flashed. In other words, we should be able 
+>>>>>> to find
+>>>>>> a way to safely remove this check.
+>>>>>>
+>>>>>> But alas, it seems like we are stuck with fmp->SetImage() being 
+>>>>>> called
+>>>>>> with the image index from the capsule file per the spec, and it 
+>>>>>> is the
+>>>>>> only way to identify the target partition without doing other hacks.
+>>>>>>
+>>>>>> I'd like to get some feedback from Ilias on this, since adding dummy
+>>>>>> entries really doesn't feel like an acceptable approach to me. 
+>>>>>> The only
+>>>>>> alternatives I can think of also don't seem great... Either:
+>>>>>>
+>>>>>> 1. Sidestep the EFI spec by either caching data in the call to
+>>>>>> GetImageInfo() or by assuming that the void *image pointer 
+>>>>>> immediately
+>>>>>> follows the efi_firmware_management_capsule_image_header (this is 
+>>>>>> true
+>>>>>> for us today but would be a fragile assumption to make).
+>>>>>> 2. Use the internal image index (looked up via the image name and
+>>>>>> type_id) as the index when calling fmp->set_image() - going 
+>>>>>> against the
+>>>>>> spec.
+>>>>>>
+>>>>>> It's not really clear to me what purpose the ImageIndex property 
+>>>>>> serves,
+>>>>>> since GetImageInfo() is meant to match on the ImageTypeId anyway, I
+>>>>>> assume it relates somehow to the fact that there can be multiple
+>>>>>> instances of the firmware management protocol, but in U-Boot we only
+>>>>>> have one.
+>>>>>>
+>>>>>> I think the other way forward would be to use the only included 
+>>>>>> escape
+>>>>>> hatch in the UEFI spec with a custom GUID in the capsule header
+>>>>>> capsule_guid field which would let us have a custom mechanism 
+>>>>>> which in
+>>>>>> our case could just be a soft-fork of the existing spec with minor
+>>>>>> changes so we can just remove/ignore the UpdateImageIndex field 
+>>>>>> in the
+>>>>>> capsule. Maybe this would be the most correct solution?
+>>>>>>
+>>>>>> Hopefully Ilias has some time to chime in on this, I'm sure we 
+>>>>>> can find
+>>>>>> a way to go about this that doesn't involve exposing dummy data.
+>>>>>>
+>>>>>> Thanks,
+>>>>>> // Casey
+>>>>> I feel we are complicating it by trying to go for dynamic fw_images.
+>>>>>
+>>>>> Rather than introducing a solution that diverges from the UEFI
+>>>>> specification, shall we use a board-specific static fw_images[]
+>>>> Well, the solution I proposed at the end very much doesn't diverge 
+>>>> from
+>>>> the spec, that was kinda the point.
 >>>>
->>>> Hi Denis,
+>>>>> definition. This approach is simpler, remains spec-compliant, and 
+>>>>> other
+>>>> Simpler for you to implement or simpler to maintain? I think that's
+>>>> quite debatable...
 >>>>
->>>> On 6/3/26 9:07 AM, dmukhin@ford.com wrote:
->>>>> Add a diagnostic console trace indicating the reset type.
->>>>>
->>>>> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->>>>> ---
->>>>> Changes since v3:
->>>>> - moved get_reset_type_str() next to do_reset()
->>>>> ---
->>>>>     drivers/sysreset/sysreset-uclass.c | 18 +++++++++++++++++-
->>>>>     1 file changed, 17 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
->>>>> index 1ba698b37285..2b7717857ce6 100644
->>>>> --- a/drivers/sysreset/sysreset-uclass.c
->>>>> +++ b/drivers/sysreset/sysreset-uclass.c
->>>>> @@ -161,6 +161,22 @@ static enum sysreset_t sysreset_get_default_type(void)
->>>>>         return SYSRESET_COLD;
->>>>>     }
->>>>>
->>>>> +static const char *get_reset_type_str(enum sysreset_t reset_type)
->>>>> +{
->>>>> +     switch (reset_type) {
->>>>> +     case SYSRESET_WARM:
->>>>> +             return "warm";
->>>>> +     case SYSRESET_COLD:
->>>>> +             return "cold";
->>>>> +     case SYSRESET_POWER:
->>>>> +             return "power";
->>>>> +     case SYSRESET_POWER_OFF:
->>>>> +             return "power off";
->>>>> +     default:
->>>>> +             return "unknown";
->>>>> +     }
->>>>> +}
->>>>> +
->>>>>     int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->>>>>     {
->>>>>         enum sysreset_t reset_type = sysreset_get_default_type();
->>>>> @@ -181,7 +197,7 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->>>>>                 }
->>>>>         }
->>>>>
->>>>> -     printf("resetting ...\n");
->>>>> +     printf("resetting (%s)...\n", get_reset_type_str(reset_type));
+>>>>> vendors (like NXP, TI) have also implemented static fw_images (in 
+>>>>> board/
+>>>>> nxp, board/ti).
+>>>> The decision not to do this for mach-snapdragon was quite intentional
+>>>> and was the motivator behind dynamic generation of image GUIDs:
+>>>> https://lore.kernel.org/u-boot/20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org/ 
 >>>>
->>>> NACK, this is potentially misleading as sysreset drivers can end up
->>>> performing something different (see sysreset_walk_arg() just below).
+>>>>
+>>>> The image index issue was always bound to come up, and it's absolutely
+>>>> something we should be solving and not just sidestepping. We already
+>>>> support dynamic fw_images[] anyway and it's already being used by some
+>>>> devices, so we need to maintain the existing support regardless.
+>>>>
+>>>> As I understand it, Qualcomm also intend to support multiple boot 
+>>>> media
+>>>> (UFS, eMMC, SPI flash) with a single U-Boot binary, so to some extent
+>>>> this array must be dynamic. And since at boot time we have all the 
+>>>> info
+>>>> we need to generate fw_images, keeping a static list per-board is at
+>>>> best lazy and at worst will just make things even more complicated 
+>>>> when
+>>>> we suddenly want to support configurations with/without OP-TEE and
+>>>> with/without SPL.
+>>>>
+>>>> So unless I'm missing something here I think there's a strong case 
+>>>> here
+>>>> to add support for ignoring the capsule provided image index, but 
+>>>> we'll
+>>>> see what Ilias has to say when he's back from vacation.
+>>> Okay Casey.
 >>>
->>> That's always been the case, but it was silent - do you suggest that
->>
->> We only said we are resetting, not which kind.
->>
->>> it prints a new reset message for each type? Bear in mind that when
->>> one succeeds it is unlikely that the serial console will be updated
->>> before the reset happens. In the majority of cases the requested reset
->>> succeeds.
+>>> Hi Ilias,
 >>>
+>>> Request your input on this.
+>> So the problem you are trying to fix here, is that you have boards
+>> with multiple configurations, that their image index might change, but
+>> you want to update them with a single capsule right?
 >>
->> Indeed.
+>> If that's the case, we can have a board specific function that does
+>> nothing by default, but on the qualcomm case, re-arranges the capsule
+>> image indexes *after* the capsule authentication has passed. I think
+>> this still violates the EFI spec, but I am ok with it.
 >>
->>> I quite like showing which reset is being attempted.
->>
->> I don't think it's worth the potential confusion. After all, we may very
->> well NOT do the requested kind of reset. Wording will be important if we
->> really want to do this. We need to be clear something else may be done
->> in the end.
->>
->> We could print before attempting each sysreset type which kind we're
->> trying... I think it's actually a good idea, because it isn't
->> necessarily clear that even if you request a warm reset, you may still
->> get a cold reset (or even a power-off) if no driver supports doing a
->> warm reset. At the same time, we don't have a delay between printing and
->> attempting a reset, so indeed like you said it may never get printed.
->>
->> So, first line in the while-loop in sysreset_walk would say "attempting
->> sysreset <type>" and after the for-loop we check on ret != -EINPROGRESS
->> and then print "no driver could do sysreset <type>, trying more
->> aggressive reset" or something like that. Before return, we check on
->> -EINPROGRESS and tell the user we failed to do any kind of reset. We
->> probably should have some of those messages rather debug messages
->> though, I fear it may be a bit verbose.
-> 
-> The odd thing is that the last thing you would likely see (with this
-> approach) is the reset type before the one that actually succeeded. It
-> could be a bit confusing. But I suppose that would be OK, since we are
-> resetting and people should be aware that this can result in lost
-> serial output.
-> 
+>> Cheers
+>> /Ilias
+> Hi Ilias,
+>
+>   Thanks for the input. Just to make sure we're on the same page:
+>
+>   Our understanding is that we'd add a board-specific hook (default 
+> no-op, so other vendors are unaffected) that runs after the capsule 
+> signature is verified but before dfu_alt_num is
+>   derived from image_index. On Qualcomm boards, this hook would look 
+> at the partitions actually present at boot and remap the capsule's 
+> (fixed, published) image_index to whatever position that image 
+> actually occupies in dfu_alt_info on that specific target — rather 
+> than assuming a fixed 1:1 mapping between image_index and position.
+>
+>   To be clear on scope: we're not ignoring the image_index value 
+> itself — it's still read from the capsule and used as-is to look up 
+> which firmware component (xbl/uboot/etc.) is being
+>
+>   targeted. What we're overriding is the spec's assumption that this 
+> index also encodes position, i.e. that dfu_alt_num = image_index - 1 
+> and that image_index stays within descriptor_count.
+>
+>   Since our FMP descriptor list is built dynamically per-board, a 
+> fixed global index can exceed the descriptor count on boards missing 
+> some partitions, so we remap it to the correct DFU
+>
+>   position ourselves instead.
+>
+> Is that a correct read of what you had in mind?
+>
+> Regards,
+>
+> Balaji
 
-True, that's also misleading. We could flush() also and then hopefully 
-the message really will be printed.
+If the above assumption is correct, then we will have following problems,
 
-> Another approach (perhaps a follow-up to this series) could be to have
-> the driver indicate (e.g. with plat data) which reset types it
-> supports, so we don't bother trying unsupported ones.
-> 
+During authentication, U-Boot performs anti-rollback checks.
 
-We're iterating over all sysreset drivers in increasing power reset 
-levels until we find one that works and do that reset, so filtering for 
-supported levels by drivers... I'm not sure what that would help with 
-here? What am I missing?
+As part of this flow, the Image Index is converted to an Image GUID 
+using fw_images[].
 
-Cheers,
-Quentin
+Since the capsule Image Index does not match the fw_images[] Image Index 
+at this stage, the anti-rollback logic may resolve the wrong GUID or 
+fail to find a matching entry in fw_images[].
+
+Regards,
+
+Balaji
+
+>
+>
+>>> Regards,
+>>>
+>>> Balaji
+>>>
+>>>>> Regards,
+>>>>>
+>>>>> Balaji
+>>>>>
+>>>>>> [1]: 7cf06f09cc51 ("capsule: Put a check for image index before the
+>>>>>> update")
+>>>>>>
+>>>>>>>      Let me know if this approach sounds reasonable.
+>>>>>>>
+>>>>>>> Thanks,
+>>>>>>> Balaji
+>>>>>>>>> Will send an updated series once the mkeficapsule and qcom 
+>>>>>>>>> capsule
+>>>>>>>>> update changes are in shape.
+>>>>>>>>>
+>>>>>>>>> [1] https://lore.kernel.org/u-boot/20240419065542.1160527-1-
+>>>>>>>>> sughosh.ganu@linaro.org/
+>>>>>>>>>
+>>>>>>>>> Regards,
+>>>>>>>>> Balaji
+>>>>>>>>>> Kind regards,
