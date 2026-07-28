@@ -4,115 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E34A9C54EFC
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 09:11:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46356C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 09:12:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9C72E81316;
-	Tue, 28 Jul 2026 09:11:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 116858131B;
+	Tue, 28 Jul 2026 09:12:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JOvPpDd39YX3; Tue, 28 Jul 2026 09:11:06 +0000 (UTC)
+ id 6wVGGsnxXEFx; Tue, 28 Jul 2026 09:12:16 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 894FB812F8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C56C881317
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785229866;
-	bh=bCR7/9/1eFl9YsqqJf1N/num8lRQztqaGtwKRIiQl+E=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785229936;
+	bh=3GDAXy99R0GftTxNaL4/btRUOhWBjsnFUbufaGg07Mo=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BCHRzxhBDDBjGfn048aM/Gt5M3+cBXmCLXeR/zLeDJvNF61UsGBykEdKwdHBasMoq
-	 0zFR5D5n7qtaSLlCwq6ywwGQELQmwL9eigwPt1wZDOCSX4XOYbmihJMkgjzRKhEfVH
-	 G+7wHNb2rmrZYXQPh367qUsF7WMiB+h3xakBZQczhwLQBy7ojLg8ar22Va2UG1DO0h
-	 LUKAqRs+CJoL7g7sgdwGyuCeWhj5L/0CCcAQOYGUXflLzLeDGKhfoYLVceYf5aEGIB
-	 HryWHUJSvmyueCbFbj6JU1ii+RQMhVIUTGaABmpMwgiair1t3mCrb1ukYnQwfAnog7
-	 QJIPP4KN6BAwg==
+	b=ND3CoRfZAIF6yQkT5Heb3r8YsEfM1wCmhafHuoveOBkQCL7I3aqNevyAkfY0FCjuY
+	 FlvRa+xA7Ny0m6ZaWsUU7EgsGwjWyJ/4iVHyxlbQJXW2c+/ZUd1uEiGS+dyPUWS1vE
+	 NQUiriMa6sMOYLsD9Y/gaSErwFQeS9IqaWba34FUr70XMehslX1JjoZwBqMlIDNMKu
+	 I2bSWpXJe86KwDlMFm4HSMmFvLpII4JYO4p9fvN77MWkVwJEZaH8CV4PFh9YGSc6N6
+	 1hLeP4+EA7ccG3xugix6ttQLAbsSP1ekBsh2FpTk8x9sICN9GjBj+QQJ+APQKZ1FYG
+	 ECg0c7AHC5YyQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 894FB812F8;
-	Tue, 28 Jul 2026 09:11:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B0DD626C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 09:11:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C56C881317;
+	Tue, 28 Jul 2026 09:12:16 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4898D42A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 09:12:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9705E60735
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 09:11:04 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2F47760735
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 09:12:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zElCggzppnXQ for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 09:11:02 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
- helo=sender4-op-o12.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org CB083606C2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CB083606C2
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CB083606C2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 09:11:01 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1785229840; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=kiUAQf3rEvAojr0aZ9IxiO7wWr1oU95YEb86RWfdc98Ernzjmtyw4Fb4FBSniYfoX6tPw4cmv2EPr74nxHSeGurk07tWrLtpK22Lj1BpA+CILxr6kuT14Sc7VH5pp0VJrBsHplzAgZvLaozBpFniY4s/I+ISRvFnrfDWvR1C8Ug=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1785229840;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=bCR7/9/1eFl9YsqqJf1N/num8lRQztqaGtwKRIiQl+E=; 
- b=WPPWrnsJ/mB6noAC5heNHQPs0lDZGfuD02fgoO7nb4oLqKCOBasvE+pnckQi64Nsp01svu5DXLXXLbEfUF1/hI4pfWIjaa6nUIbiRM7dBovBOniyRKWJc13RnMGOe/yjgR/UG6S4sPe3PtBVn499baHYnp6xWM3CHtNQCAG6Bts=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 1785229838488573.712737461287;
- Tue, 28 Jul 2026 02:10:38 -0700 (PDT)
-Date: Tue, 28 Jul 2026 09:10:25 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
-Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Guodong Xu <guodong@riscstar.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
-Message-ID: <amhyAULw9Wovuo3z@pie>
-References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
- <20260727-m4-v6-6-2f58566d48ca@riscstar.com> <amdGSBKT4iRzuh1P@pie>
- <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
- <ameQUN3zlD0Ei8Jm@pie>
- <CAH22mJyMqTgRLqyfVZGgSHHNK7XnBTnrkY-R1ix5DN+oiBDEbg@mail.gmail.com>
+ id 6tFAPIbN7Xol for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 09:12:14 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 67516606C2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 67516606C2
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 67516606C2
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 09:12:13 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B9DFD84873; Tue, 28 Jul 2026 11:12:11 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7255F82991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 11:12:09 +0200 (CEST)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id D4C0B40773;
+ Tue, 28 Jul 2026 09:12:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 388101F00ACA;
+ Tue, 28 Jul 2026 09:12:07 +0000 (UTC)
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
+ marex@denx.de
+Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, michal.simek@amd.com, alchark@flipper.net,
+ jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
+ Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [PATCH v5 33/75] usb: dwc3: import from kernel v5.9
+In-Reply-To: <20260716134305.614278-34-anders.roxell@linaro.org>
+References: <20260716134305.614278-1-anders.roxell@linaro.org>
+ <20260716134305.614278-34-anders.roxell@linaro.org>
+Date: Tue, 28 Jul 2026 11:12:05 +0200
+Message-ID: <87cxw732ca.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH22mJyMqTgRLqyfVZGgSHHNK7XnBTnrkY-R1ix5DN+oiBDEbg@mail.gmail.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/285.205.57
-X-ZohoMailClient: External
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1785229840; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=bCR7/9/1eFl9YsqqJf1N/num8lRQztqaGtwKRIiQl+E=;
- b=ZHkUeWbh3RIQ2ccVcG0xFLaLTNk+ToSTsTDcPaBCpbKQ854Za9fZSkrvVSd5en6a
- drpiyivKP0Ns6PkaV7LoMHGrPWM/OFitn4MSjKb0/PaxCQQCSOrxc39vNIbDToB3gFd
- mJmTan29bdbJALuTroLxpxIQFWvbupiv4o8dY4BA=
+Content-Type: text/plain
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel.org; s=k20260515; t=1785229927;
+ bh=3GDAXy99R0GftTxNaL4/btRUOhWBjsnFUbufaGg07Mo=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=FNe2DLIEXgb5O6vywvXQTo7GgI8mmStt1nOHPylwx1jYTrdQhEfzpF7KW1omWTMFe
+ Rnq8HwiB+/6zWWJAXhzSoHcxU9kgVLc1acF32rtYH95o0xcsl18mLCqWq+SV5fgf3B
+ vaLKVrju1mxaypkzWptNptjwHlpiZaE4B3fDAJ337KiTQ7M9XHsmjrJ+fj1qDCtFPA
+ iAk0KUK/S3WHs1H74bfNG5o9dF+lkAHkiCRETKnE0T0VL21MkEeud9cLybxvCZpam0
+ 9+7p4FlyZC1vJsA4J7jigmc9kCy49BoBsYtKIiJ0fcBvbRVUiyZJjV1i6H1Ori6vQb
+ FBRakGS9611EA==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
+ header.from=kernel.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=ZHkUeWbh
+ spf=fail smtp.mailfrom=kernel.org
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=FNe2DLIE
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mkorpershoek@kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="FNe2DLIE"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -127,78 +121,62 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, Jul 28, 2026 at 09:04:52AM +0800, Eric Chung wrote:
-> On Tue, Jul 28, 2026 at 1:08 AM Yao Zi <me@ziyao.cc> wrote:
-> >
-> > On Mon, Jul 27, 2026 at 09:08:52PM +0800, Eric Chung wrote:
-> > > Hi Yao,
-> > >
-> > > I'm not familiar with the policy for syncing DTS files from the Linux upstream.
-> > > Could you clarify how this script works?
-> > >
-> > > Does it sync all DTS files from Linux upstream at once, or is it
-> > > possible to sync
-> > > only the Spacemit DTS file?
-> >
-> > update-subtree.sh cherry-picks a commit from the upstream, or
-> > merge an upstream tag into the subtree. Cherry-picking SD-related
-> > commits from Linux upstream suits for your case.
-> >
-> > > If I choose to sync only the Spacemit DTS file and include it in my patch set,
-> > > would that cause conflicts later when others try to sync all DTS files?
-> >
-> > Tom synchronizes the dts subtree with Linux upstream irregularly, there
-> > should be no conflict or relatively small ones if you cherry-pick the
-> > changes, while adding downstream nodes in *-u-boot.dtsi might suffer
-> > from duplication, too, during synchronization.
-> >
-> 
-> The process is a bit complex. Since my main issue is that the DTS
-> files are out of
-> date, would it be simpler if I just copy the relevant Spacemit DTS
-> files directly
-> from the Linux upstream into the dts/upstream folder?
+On Thu, Jul 16, 2026 at 15:42, Anders Roxell <anders.roxell@linaro.org> wrote:
 
-The answer is simply no.
+> From: Jens Wiklander <jens.wiklander@linaro.org>
+>
+> Sync Linux kernel dwc3 changes from v5.8 to v5.9.
+>
+> The following files are preserved accross the import:
+> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+> dwc3-layerscape.c ti_usb_phy.c
+>
+> Skipping unused files:
+> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+>
+> Note that this is a raw import and doesn't build.
+> A fixup commit at the end of the series fixes that.
+>
+> List of commits: git log --oneline v5.8..v5.9
+> Commits imported:
+> a6498d51821e Revert "usb: dwc3: meson-g12a: fix shared reset control use"
+> df561f6688fe treewide: Use fallthrough pseudo-keyword
+> bc9a2e226ea9 usb: dwc3: gadget: Handle ZLP for sg requests
+> d2ee3ff79e6a usb: dwc3: gadget: Fix handling ZLP
+> 5d187c0454ef usb: dwc3: gadget: Don't setup more than requested
+> db123bea9625 usb: dwc3: convert to devm_platform_ioremap_resource_byname
+> f5e46aa4a124 usb: dwc3: gadget: when the started list is empty stop the active xfer
+> c5a7092f4015 usb: dwc3: gadget: make starting isoc transfers more robust
+> ca14378560db usb: dwc3: gadget: add frame number mask
+> 7a410953d1fb usb: dwc3: meson-g12a: fix shared reset control use
+> 10623b879da3 usb: dwc3: Replace HTTP links with HTTPS ones
+> b789710de583 usb: dwc3: dwc3-qcom: Do not define 'struct acpi_device_id' when !CONFIG_ACPI
 
-> > > Best Regards
-> > > Eric
+Are we actually importing this? Since it's marked as "unused files" in
+the commit message I think we should drop this from the git log
 
-Regards,
-Yao Zi
+> 26ef796f9306 usb: dwc3: dwc3-of-simple: Function headers are not good candidates for kerneldoc
+> 4d72cf0cb9e2 usb: dwc3: dwc3-haps: Function headers are not suitable for kerneldoc
+> 3c373454a9f2 usb: dwc3: dwc3-omap: Do not read DMA status
+> fb678a5a76a4 usb: dwc3: ulpi: File headers are not doc headers
+> 7679defc3e29 usb: dwc3: drd: File headers are not doc headers
 
-> > By the way, please avoid top-posting if possible.
-> >
-> > Thanks,
-> > Yao Zi
-> >
-> > > On Mon, Jul 27, 2026 at 7:52 PM Yao Zi <me@ziyao.cc> wrote:
-> > > >
-> > > > On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
-> > > > > Add the SDH0 controller node and its pinctrl groups to the u-boot
-> > > > > overlay. The upstream DTS only contains the eMMC node; the SD card
-> > > > > controller (sdhci@d4280000) and its MMC1 pinctrl configuration are
-> > > > > missing. Place the new node inside the storage-bus via path-based
-> > > > > merge so it inherits the dma-ranges from the parent bus.
-> > > > >
-> > > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-> > > >
-> > > > Please cherry-pick upstream devicetree changes from Linux upstream with
-> > > > tools/update-subtree.sh instead of adding our own copies. Changes for
-> > > > k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v7.2.
-> > > >
-> > > > Best regards,
-> > > > Yao Zi
-> > > >
-> > > > > ---
-> > > > > v5:
-> > > > > - Append power source field on eMMC/SD pinctrl.
-> > > > > v3:
-> > > > > - Fix SD pinctrl as uhs.
-> > > > > v2:
-> > > > > - Use vmmc-supply as vqmmc-supply on SD node.
-> > > > > - Add alias of mmc0 and mmc1.
-> > > > > ---
-> > > > >  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 ++++++++++++++++++++++++++++++-
-> > > > >  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 ++++++++++++++++++++++++++++-
-> > > > >  2 files changed, 173 insertions(+), 4 deletions(-)
+Same for ulpi and drd here.
+
+> 62fb45d317c5 USB: ch9: add "USB_" prefix in front of TEST defines
+>
+> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+> ---
+>  drivers/usb/dwc3/core.c   |   7 +-
+>  drivers/usb/dwc3/core.h   |   2 +-
+>  drivers/usb/dwc3/debug.h  |   2 +-
+>  drivers/usb/dwc3/ep0.c    |  12 +--
+>  drivers/usb/dwc3/gadget.c | 149 +++++++++++++++++++++++++++++++-------
+>  drivers/usb/dwc3/gadget.h |   4 +-
+>  drivers/usb/dwc3/io.h     |   2 +-
+>  7 files changed, 137 insertions(+), 41 deletions(-)
+>
