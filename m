@@ -1,129 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF643C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 21:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CC6C54F51
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 21:56:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DD94060A4C;
+	by smtp1.osuosl.org (Postfix) with ESMTP id F257D81458;
 	Tue, 28 Jul 2026 21:56:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gBYX2v2aNN1E; Tue, 28 Jul 2026 21:56:51 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m5kwxAm10leL; Tue, 28 Jul 2026 21:56:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4083C60A56
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 262F481455
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785275811;
-	bh=TcqWjs+hAtWG4kmHXN10aHSNgcxqKlok4f2Ur13tAto=;
+	d=lists.u-boot-project.org ; s=default; t=1785275810;
+	bh=xOnGV0A+q/wf3R8vwQc1PJDO4KiHvHnIe8IAzFS/oVc=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lVC3S3i8KyzzVqLnqGqmoXbJTb4DiiEWKhwDBr+Wu/cw75MqDmhKyb5vp53mylBr6
-	 mIQGdDNXFeyPEpoxkxEJJ73eYhC2LyOvSJAuV4QToXWbbhyPjaN1VmT+iZQexemkeq
-	 rm4ZDk0f6MUsiSSUnpmbkAtfprDXzlJiWg+OTrdMi+4ZPIwX2jOpkLCtI6/hUFe0Sn
-	 UktrKeEpUMokVAyfEHW7+7IoCZ2WtiD51PAFixOcIWBY531fbUTIWitiES7GVvd1ux
-	 qUu/5WmFjV8ktVp85E4FmITV3iIuM880Hni45LX3ME2XMyLsQ9l3FC97i0ntIWKXXT
-	 NkKGmpNcE3txQ==
+	b=a4IEo2fbzU2rtiRJwvDlUaY5IKqvH6AkVx0sHZ3ESesCGwzxRPNj2nQm8uPazb4RK
+	 rd5Lmv8X7dLiuNcBWvMMUK+Uxw6pcmwWk4ufoUMJcxfAEJd10KXzpcEOEfWMejjNxm
+	 usa+mEB02y+RG+EINXmJG0m9vdQFT4z496QXvuaYYz4C9eEA7Qgkv6ENOEi99iTUyE
+	 m3tiDAyuI5iuXjjaCF/SAPZsHtGwzbyMr8/3ckKGjOpxnTvz2W1dnxLf+6LiU/uwlr
+	 C6MAJJkJAjNeBCyY/7mF1GyDWt02uo97dUfyQL9lj2tJJwMTVNMXTERghEeMVQC024
+	 +5MFVEJXrg5pQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4083C60A56;
-	Tue, 28 Jul 2026 21:56:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 262F481455;
+	Tue, 28 Jul 2026 21:56:50 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 18952788
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:47 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 55C5D2E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id F2E8F40057
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3BC4140057
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8n_U_hwfhfyu for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 21:56:46 +0000 (UTC)
+ id G4dnl7QAVhLN for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 21:56:44 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C7E6540051
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C7E6540051
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C7E6540051
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:45 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7e6128bd9b3so194345a34.1
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 14:56:45 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 851A240051
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 851A240051
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 851A240051
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:44 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7e6b554044fso343504a34.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 14:56:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785275805; x=1785880605;
+ d=1e100.net; s=20251104; t=1785275803; x=1785880603;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=TcqWjs+hAtWG4kmHXN10aHSNgcxqKlok4f2Ur13tAto=;
- b=Qp39X7dYEKUvM+7NaSnSJGLoWYkK5FT77l9Ks8F3JLl+sZGyuCU24a+GKPkSlZiSqD
- wq+X1l8pcLwzofjUorPKFn3mAOYcZIBeIjpMkKSO1kAGLDbk6tZR7VMIpS69nrchjReI
- TaWVtMcQ5GbKPIiSltiT6Ll15mhFoHFIDPM+eN8CxcNbHkiS0HseQgFnRWVCzV6AnW0X
- f+4EkXe+r8BS/HS9tivrJDmsiHHNeB8xWXLML3Y2zhkrIv/CrNWW41LK64TudQxL2T/w
- MQvCoo7mMjUNVd91iETK7xQQIm7R2FLKp/feCISx0PV/c8m6rSNmt92gcMzWbpg/EoON
- kpig==
-X-Gm-Message-State: AOJu0YyMUgY0RQ3FHOo9oCbcpf+Anr8Liby23J+0XIgMDlsJO1pZzCW2
- OamDSpqtHCbu5H+fF6I/QpCaSCpBi6BtJ0g8+W7KWkyj1qXnIaPWYmGK6UZ/iS1z4ho=
-X-Gm-Gg: AR+sD10onbugCmOVgIiagOzoIc08WUK3LvBwXzjoLmOd9XEBjKNhwEk6CMZpZNyoixp
- bGtVNzLPoWNMK2AZ3h8eTdyvWyS/zSzFABMopPS9Hr2oy4JSTrV55jxdMIaKeqyJP2siyDKmPB/
- 1G0lmvM0JOuMcMJHcDjKuxFrBg5DfP6cNVE2r2P5d4gdobzujCxpnczc3p5Hw6am44Ea8jLsMv6
- WhWjIfbe08Pkm8oUoI5eAGAxgjTofVCfXZBLIvnnT4jGU0UGdB84fkdxb5sBW33hXWil7YjO9Fk
- k7yETdj0jiWvE/gvbm8fgB4RE+SAo+KkVW2YXuVa8bj3qiY7bDspbSFnPvRWAxxhjf7MO/i02qT
- rOjn/U6KoIOz8upyB/eESC7DWVtuo5/GthLzolF6tt1x6uMFyGLz80OvYQqXtjNE++qRgzECO9A
- ClXZNq4UdoroVstfQXQFsL5iiReBS9Hh/Luewng/kudG/1b20Qx1wYBPA4MZGL5dhwyuY91qo59
- 3zjowceO5bau2O8Uk0wstc6ThMxTV/+BR5xmJ8dBdaUKlgRUIwnbNfp/yG5ws8+GdTzS0k37AV9
- i+MIEFbA
-X-Received: by 2002:a05:6830:6688:b0:7e7:7fbc:8e51 with SMTP id
- 46e09a7af769-7efff2d6d46mr2510608a34.24.1785275804810; 
- Tue, 28 Jul 2026 14:56:44 -0700 (PDT)
+ bh=xOnGV0A+q/wf3R8vwQc1PJDO4KiHvHnIe8IAzFS/oVc=;
+ b=rwwjnKmkkuJfHnA9ecrFk2aUI9QkWnkjoAnW8u2lKxyQ298Kj2oLOs6H71549a9+Pu
+ VmkIZRwpCBiB9dcu6bLHvn9XmZ/gDtICKgLKNkFR+LKNPx34aicvrg0/XlBsUCiAm+yX
+ m2CqxJXogibuD7pIe6SiCXla6eR57/PruemeWzSjhat0pC334CsgKC++IBT9peuA4wxp
+ KRw7Aw95NfXEYSMeZ4GuZ/+R6fsh22NvYtC5d8V5wH4vIxQAD2fsv2P6FQv9/B5WS3Ye
+ Q9+d9PIX/iXMzhYO75eBw45H1fSx231Rsq/DhMRMOBiKUmlQy+mCWXp2RMEbZDAAE/ug
+ vImQ==
+X-Gm-Message-State: AOJu0YzkmWdNRTUbpgaJwFp4/SfNKMf8QGv4Bxww/8FQohgvrXNF52Jf
+ djyyX8qUUuYbwGweRYOJ8Dltv/W+qJkW5+cFYNKNRoSbxmfSXKH9RNouloK09p+xxzQ=
+X-Gm-Gg: AR+sD1041XfZhFrVRMImRJFM2Wos/nzKMn72mzaKM9kaB9H6oK1oti8dC+PodvvdDOd
+ 2gxncLAchD2Lv9SiXwOTtALcnUIxAFNH2y09aaM07MjYXFYYF7UtyWsL+rCCq1bwT114vEMI0sL
+ l/voNJygbWSLzz41BDuqZNrbS4IMlJXyUiBSfIeWbfc2AssjNarrw/VoMnifujm06Af5UthN/KM
+ Tf3Ux16JA98xZou/w1RRaFFjk4XtUgPA9LGdTEU7Cy+u9N0v7RqRftF704PnuD0WC+04ExMysYM
+ hw0ZBx8WZXnDsyzKFB2E8R9KGyxlHxna8RF7DcLBPxFuRJfJP4kaflskXRxpKIkzMo3b6sPUmTV
+ 2fizUknvWru63yDBkazSpiYjSIji0egiiQ9u5zrdfiWphjnNHwhXDpNMnso0h4DEuvdyC80cEQy
+ hKaD+tTahtw2MKaH4kd2FV4X9EJSFfqzBZe/90YTIYlHzavDj78TAEqlcbbc2sfwsWJ1KtLuKy0
+ FEgoNfJqizSeA3coSUUGanBN2mDAPqBz2hJ+siqOyPmZyP09Uv5iFLZFA3kDa+SFytkiwdVHuHB
+ dnaRgFwm
+X-Received: by 2002:a05:6830:8292:b0:7e9:d67e:b4e with SMTP id
+ 46e09a7af769-7efff0bacefmr2782199a34.17.1785275803450; 
+ Tue, 28 Jul 2026 14:56:43 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f00d2d8112sm780106a34.0.2026.07.28.14.56.43
+ 46e09a7af769-7f00d2d8112sm780106a34.0.2026.07.28.14.56.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 14:56:44 -0700 (PDT)
+ Tue, 28 Jul 2026 14:56:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, 
- James Hilliard <james.hilliard1@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Aristo Chen <jj251510319013@gmail.com>, 
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-In-Reply-To: <20260709022904.3226038-1-james.hilliard1@gmail.com>
-References: <20260709022904.3226038-1-james.hilliard1@gmail.com>
-Subject: Re: [PATCH v2] tools: binman: pass KEYDIR to FIT entries
-Message-Id: <178527580361.1742553.11015605574666512265.b4-ty@konsulko.com>
-Date: Tue, 28 Jul 2026 15:56:43 -0600
+To: u-boot@lists.u-boot-project.org, Jordi Trepat Mur <yordy1902@gmail.com>
+Cc: sjg@chromium.org, vigneshr@ti.com, nm@ti.com, anshuld@ti.com
+In-Reply-To: <20260625174121.3633162-1-yordy1902@gmail.com>
+References: <20260614103232.3586246-1-yordy1902@gmail.com>
+ <20260625174121.3633162-1-yordy1902@gmail.com>
+Subject: Re: [PATCH v2] pinctrl: single: parse gpio-range as a raw array
+ (O(N^2) -> O(N))
+Message-Id: <178527580263.1742553.11634930266680051980.b4-ty@konsulko.com>
+Date: Tue, 28 Jul 2026 15:56:42 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785275805; x=1785880605;
+ d=konsulko.com; s=google; t=1785275803; x=1785880603;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=TcqWjs+hAtWG4kmHXN10aHSNgcxqKlok4f2Ur13tAto=;
- b=g85cw5yBv3GYOXgQXFtMCxTcaSVHDf5sqWW50TdRwLveHctFagcpyaG4CF9Nw+t6ev
- gZvsDGYWv+gSR/IxoSXhTYLrVE8JUb6RD9KlC64lOagqa4ivjjut951cTg/QxMQFPR2W
- STjPPomutefLCvCyWhkrp43hRFLWC2xNL9xo8=
+ bh=xOnGV0A+q/wf3R8vwQc1PJDO4KiHvHnIe8IAzFS/oVc=;
+ b=gJJNfzaMlbxRe6tyvgoVDgyZ4avvSLn8cgtiOcMTlGvUHqgjoRt895RisTxw2vz5gy
+ kcA/lVkEjQhC1TVDi4pLXV7bLKMVyX4rwgCv1AVyECMRb/UANjiScvoAwebjSc/xUNed
+ jVHQQLr7pfjtJilIOFXrNq2TXq0s/VklXqNhk=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=g85cw5yB
+ header.a=rsa-sha256 header.s=google header.b=gJJNfzaM
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,22 +129,21 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Wed, 08 Jul 2026 20:29:00 -0600, James Hilliard wrote:
+On Thu, 25 Jun 2026 19:41:21 +0200, Jordi Trepat Mur wrote:
 
-> U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
-> internal binman FIT builds only receive the generic BINMAN_INDIRS search
-> path. Adding KEYDIR to BINMAN_INDIRS treats it as one more input-file
-> search path: FIT entries still auto-detect a key directory from all
-> include directories, so an explicit KEYDIR may not be the directory that
-> gets passed to mkimage. It also makes a key-only directory part of the
-> generic blob lookup path.
+> single_add_gpio_func() calls ofnode_parse_phandle_with_args() once per
+> gpio-range entry. With a flat device tree, every call re-iterates the
+> property from index 0 and, because cellname is set, performs an
+> fdt_node_offset_by_phandle() (a full-FDT scan) at every step. The total
+> cost is therefore quadratic in the number of entries and proportional to
+> the size of the device tree.
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/1] tools: binman: pass KEYDIR to FIT entries
-      commit: 18cab277be9cddd9e70f50b1ab77c849a6254d90
+[1/1] pinctrl: single: parse gpio-range as a raw array (O(N^2) -> O(N))
+      commit: 11f5a60ba75af27c8a63e1e0e5d3f6cddaca1c7a
 -- 
 Tom
 
