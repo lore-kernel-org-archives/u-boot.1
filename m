@@ -4,106 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80923C54F4D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 17:54:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE1E3C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 18:07:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2F559608C6;
-	Tue, 28 Jul 2026 17:54:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 10C66606D3;
+	Tue, 28 Jul 2026 18:07:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uF4kxauXz0I9; Tue, 28 Jul 2026 17:54:16 +0000 (UTC)
+ id bT5pk98fK1O8; Tue, 28 Jul 2026 18:07:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4FA2C608D0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 26655608A9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785261256;
-	bh=Yk6XGEED0V/tAmivdZotWlY3/O77+RJG+puPb/JX6pg=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=Cx/1QbK8h/VArv/YBYa64rMugPY4AFsX1122hB/1QeLU6Qcq8p871DmxP68TP3km2
-	 zcIspg5SiMky9820Jofd+5VjpHCyn+oASaBfPDP59LbkIBQyHUolt/jdfAOqvwgNTI
-	 lWe2aK2WC8ZUI8jSAHcIOTXsDrS2Vsr6USSDZ0+bd/wcgLBM2fe+oLlpbq4TA/4KxY
-	 qYiCAJGNa6BWNgp+WEsaQmUyBpiqhyHIfoiqExeUk9CTZzqlsNpjHiNy/T4Oh7GUVt
-	 v7FuJCNDAlCt7ebIvJrywUGUv8dl00zrrvCIimVtsW7rhbdwCE0B6Q+6ajbzhLzTjC
-	 jkdPrbGC2cBfw==
+	d=lists.u-boot-project.org ; s=default; t=1785262070;
+	bh=2NOvKDqZqpw2qhE/dirzeabgVjyYven2rMlMPB/zmcw=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=x54175+Il1FsgfSAyv+yK/Y74nMDNnFlWMdSHFGDUoQKUQDvNWCokYmoiFlUcD57Z
+	 6PC3AfKahtxI0y9XTKgTO7JF9Uo0GTZJB59dk/iWx9A5rW4NNSATJ/GdEnUVJmoeth
+	 L50XAoKebUUOz/X02Sh5DdKi5OXTp1tJCecvj0Kf7imQmiDob3qpiFE831Tuh0nIDk
+	 y12gva1ZW48qX521Nsk9Y6NebvmFW39vA749H2ad9/l0JqAbHCYBFZPxOqYCGC4oHm
+	 kvr+IaAmOGj3pwNzF1l+rDzq44btK56c+C9gu/s77Tjzy44+Z76q1wYOjP+lGDJwMG
+	 kAVBOTAlLmAzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4FA2C608D0;
-	Tue, 28 Jul 2026 17:54:16 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id EBBDB490
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:54:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 26655608A9;
+	Tue, 28 Jul 2026 18:07:50 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 55BC826C
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:07:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D1B5A40975
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:54:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3BEF98116B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:07:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kQwxiLWNnpmM for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 17:54:14 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
- helo=mout-p-202.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4CACB4096A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4CACB4096A
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4CACB4096A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:54:13 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kOh1UvS3VXxk for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 18:07:47 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2A1BA81115
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2A1BA81115
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2A1BA81115
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:07:46 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DBA078494B; Tue, 28 Jul 2026 20:07:44 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4h8jl719LPzMlGM;
- Tue, 28 Jul 2026 19:54:11 +0200 (CEST)
-To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] doc: cmd: gpt: Reinstate gpt setenv
-Date: Tue, 28 Jul 2026 19:53:38 +0200
-Message-ID: <20260728175407.90993-1-marek.vasut+renesas@mailbox.org>
+ by phobos.denx.de (Postfix) with ESMTPS id DF22F8404D
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 20:07:42 +0200 (CEST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5aeb8c19017so82903e87.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 11:07:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785262062; cv=none;
+ d=google.com; s=arc-20260327;
+ b=cXG7BpFL0Iy+c+wHXuPpoo15PaGfOV54vDUR0kjH8MKyUBMPNd5vyh+CenbX2K67p0
+ JfyE5NFMwtigM+Il6GX1WFe/wUfE5Gi+OlIUkxxSFwYd0BtG9bp1wvb4MWaTuEiJTQU5
+ z3CkG+5oAuyp7T+vjNUtcXzDbJ1TE8Tvs4WxhutydvpbAaSkg1p+xUOXLLTO849MQtUq
+ f1bqS50f2BZOZhgW5q/o1s/uDfHSj26uDvaEmQRZlmesBDoWjeGd4Jv7FPE0qqcAOITS
+ YEOp9Zx0+yCMNFM5N8/6AcaTvk0m6xquwZwIqHEQhoOM424EZjgFGaf+rLCq1vDshLOC
+ 4uHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2NOvKDqZqpw2qhE/dirzeabgVjyYven2rMlMPB/zmcw=;
+ fh=bV14b0+pGWbPZ8g597H/PE8P9l7clrtqIVCLolPdark=;
+ b=XBzLCYWgruO1k3vS/sLkPTzmvequEUnfgouAIg3YBKCezP/bvvgdM0nh++M3hAnm9b
+ 8zoikpbrL9uIXJlrH57Higa2Tj95GnMtWG9+FNEGftuT1m6dxL541p1jG2qbOj+Qa2Gs
+ mbrWoz5rwRcq+BbmaLU9Yt9HKdOL50sfhMqYdauxOJKkxBmteX8dTXlq7rr3hbaqVygV
+ kSJUo8FTF1Xd8cYQKvEDnRjiYareCWlXD7kQgwyBBaTuxwNQdp+vL/TkOtAj4ivFE3Rj
+ NO59gg6lUw+ad5PrDaBzaEN23Tb7zLYrY301hfqqrD0ojUY6dGAd6yi/etoMorpGaFO9
+ pBzA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785262062; x=1785866862;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=2NOvKDqZqpw2qhE/dirzeabgVjyYven2rMlMPB/zmcw=;
+ b=AnPBOfvptmFiR3IoZfhj4zDCeZwrf/rpHjoIl+uwvGR8Wq7uy4DNWsgO4r4gefo+Ta
+ yWSvnjMyFbCfTQg/kpahwjnWu+bAQE9qIQ5c+hMzp7dHTaEPmSH4x0nxZZgyyqr6GNWW
+ KHJqCfQ5NMKmbchdLVqwHAWIbWl89gVlJIkp8SKdyvGgQOSp6R+hoUIOF/e1J5bePCp0
+ OfwL0Jkd0kxYFLxct3S7DvX8LV/dpsTq+LF2l5FbY/H47K1AuqKAYmIJEwHCdTrkmwwT
+ ckIiAxtDZmza9OdxNY92tvAKJ8ZMmigj9nlydg80SJ8GTnzmPf+EUyZdFym9ZuMbSJqT
+ H8ow==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpMskeexPnh8TkY6IlrGIEOmEx6Rx9D4TLE8L8zW83xHGCQhqlSG2TQ0yJEnEZ029a/3tapqlw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqTpk/v4o2hJY7TzmIjs/EtjDfZN3x3askZsj/rJMmLX6OTdve
+ JyldL/pwqIEXJ+2s0Wlx1yZFlYNV+0DIaHTnks2Xpachdewov0SFP597sqO0ccscx8wjP2FPibh
+ ERspR3qi2HBdJdlKwe5/SmD0n4NouAcY=
+X-Gm-Gg: AR+sD10804icz2OKD1YU2ibfXHC7rM6I7nSWdZBnAz0g8cBpuma6Nh9VG0/DkiZWgrq
+ BmPCdPlPBPcLgvc2GvSOsKfuDRmARQQ8gZcb4urkmW4E7sbQqOKufWUZZ+QFJW42CwRJ1bicjF8
+ sQy980fe6wIKyIbw2pLOmWFja1aWMzcQL0x+5lIXGksTYATNhjjbuhvW201aMIuiWpFTp2x6Zqu
+ JuXlAt5MTHpVVBVdrBxTnWDZVMZuXE2rbT9S45w2ouAV2EryIfC+CBjlfTKsvExVtRME9cuGgsh
+ PbCvuzp/by2Ksj1N1sEB0ZDE3a/Q6r4qecW4KjJGMHN8aPv0cXE=
+X-Received: by 2002:a05:6512:6181:b0:5ad:55f6:1ec3 with SMTP id
+ 2adb3069b0e04-5b2d0213884mr618357e87.5.1785262061709; Tue, 28 Jul 2026
+ 11:07:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 91sc5uru7bmi1j4bhfbb78gepofedxcn
-X-MBO-RS-ID: 6d2591c10b658a8e7a1
-X-Rspamd-Queue-Id: 4h8jl719LPzMlGM
+References: <20260728060314.3560643-1-qijian.guo@nxp.com>
+ <CAOMZO5ATbaYCmgh_tCSV53dtZux+yqPJ_eOzgdk8KbzxSMb0Ow@mail.gmail.com>
+In-Reply-To: <CAOMZO5ATbaYCmgh_tCSV53dtZux+yqPJ_eOzgdk8KbzxSMb0Ow@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 28 Jul 2026 15:07:30 -0300
+X-Gm-Features: AUfX_my3j22ypFwDAnbuC1v4ixDjNDdgnOYw5_jkxbE8NJwzJQDey5Jak7cPWSo
+Message-ID: <CAOMZO5DLRuqPhzXF0Swm9enkugf7GNNbZjN0=rwTLePJCSD16g@mail.gmail.com>
+Subject: Re: [PATCH] imx: scmi: suppress invalid origin/errid in reset reason
+ print
+To: Joseph Guo <qijian.guo@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Marek Vasut <marex@nabladev.com>, 
+ Fedor Ross <fedor.ross@ifm.com>, open list <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1785261251;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Yk6XGEED0V/tAmivdZotWlY3/O77+RJG+puPb/JX6pg=;
- b=D8M+PGVMmbGJm223Nqt98wdL8IszivrhiCCoIlRyDNOwPjVZY6ducrkHlw7tFrME/2sZZB
- vsJPdffboDFhM++OwdFATSVp+wSsOLYucIVM98XgRReoBTrNMcx73YepIvui57qBU0DuzK
- bkLf6TfYTaR8CyJpZurAdOwiyAv0JOj4pSK2PGYunayCrcBNHFFx3EytmggZW3QbUHyvm5
- 82Q6gf3UXKMWaMIuYFxz5BddNSBFyeJ1nSIXAv051NM3D9REGCvtB64metdiK5jhWsLpr5
- OdNg/VrJUuq1yh/uUylnl1m3fkX02eLCXoMAFk4mvFNCV5fhreUtHfsr1fJ3lQ==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1785261249;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Yk6XGEED0V/tAmivdZotWlY3/O77+RJG+puPb/JX6pg=;
- b=wJajPfRVo53/MRFlV6XjXqmHiFsMKy3Ec5HZOEtSY7HpXwd7m+BuTXWhNYRIXPJPYudd6m
- AXBse6wiDQACyRnTka/cgIWSjNBvmLYrlz1CBVG0WNfr+fDAOKk1fcat4pUbZxYwDoR92G
- YjfixoT8JZS1QZ+0mpzy3H5c6Jd7xgeOeuAItKh375yQ5RotSdNm0MeHOMWgmPXogTqVH+
- mNnibc68epdtR43IpXSx4ZAwUtj33BalQ7XgGtxUZ/73mmPppZ3HFcLQrPY+yWI1ufEFRn
- TwtluZ6AfZuWOHuEfxbM2N8AyTZ1oOk+FzIFQ6RLxaLSLk0M+c8sR4GAHsd4xg==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=D8M+PGVM; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=wJajPfRV
-X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=wJajPfRV;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ d=gmail.com; s=20251104; t=1785262062; x=1785866862; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=2NOvKDqZqpw2qhE/dirzeabgVjyYven2rMlMPB/zmcw=;
+ b=aM7a3qq7laqCRMkpN0cGTJjoVEqw56Pgxd+jL8TAm6EwdVBYDs3LgvVYOtfTcjQiSh
+ 7ZbLGFTbxgfU0fCayLCz+vYaaGtGpxWcZRwUvPFhgBSJcIQI9nwvwPoG1oTmFWXsMMhm
+ RvdjPMG68YHQ2Hnr8m/mCy/BTgYF+IGx6tc9ECSTJsIUQ5VbtzU/03PGiH92em07gq+g
+ esJSih+Aw3TzYgANN1gHsiJLUkIsb/DcGW6Ch4496e1mBbE3J/pvO+BADmpPUVUCaQZD
+ hpaLIuKVhU24k7jqe1b5L34cYQzsoaowstzzG8ai6zFMbVZV4hNckbX+K9O5QBedKaXR
+ ayVA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ spf=fail smtp.mailfrom=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=aM7a3qq7
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=festevam@gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="aM7a3qq7"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -115,76 +169,15 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Commit dc3765ede5a4 ("doc: Switch from setenv to env set") was
-too eager to switch "setenv" to "env set" and also incorrectly
-rewrote "gpt setenv" to "gpt env set". Undo this error.
+On Tue, Jul 28, 2026 at 11:06=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 
-Fixes: dc3765ede5a4 ("doc: Switch from setenv to env set")
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org
----
- doc/usage/cmd/gpt.rst | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+> I don't see this patch in patchwork.
+>
+> Please resend it to the new U-Boot mailing address:
+> u-boot@lists.u-boot-project.org
 
-diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
-index a2f116d05ad..6afc634eb0a 100644
---- a/doc/usage/cmd/gpt.rst
-+++ b/doc/usage/cmd/gpt.rst
-@@ -119,10 +119,10 @@ Sets the bootable flag for all partitions in the table. If the partition name
- is in 'partition list' (separated by ','), the bootable flag is set, otherwise
- it is cleared. CONFIG_CMD_GPT_RENAME=y is required.
- 
--gpt env set
--~~~~~~~~~~~
-+gpt setenv
-+~~~~~~~~~~
- 
--The 'gpt env set' command will set a series of environment variables with
-+The 'gpt setenv' command will set a series of environment variables with
- information about the partition named '<partition name>'. The variables are:
- 
- gpt_partition_addr
-@@ -199,7 +199,7 @@ $gpt_parts::
- 
- Get the information about the partition named 'rootfs'::
- 
--    => gpt env set mmc 0 rootfs
-+    => gpt setenv mmc 0 rootfs
-     => echo ${gpt_partition_addr}
-     2000
-     => echo ${gpt_partition_size}
-@@ -231,19 +231,19 @@ Set the bootable flag for the 'boot' partition and clear it for all others::
- 
- Swap the order of the 'boot' and 'rootfs' partition table entries::
- 
--    => gpt env set mmc 0 rootfs
-+    => gpt setenv mmc 0 rootfs
-     => echo ${gpt_partition_entry}
-     2
--    => gpt env set mmc 0 boot
-+    => gpt setenv mmc 0 boot
-     => echo ${gpt_partition_entry}
-     1
- 
-     => gpt transpose mmc 0 1 2
- 
--    => gpt env set mmc 0 rootfs
-+    => gpt setenv mmc 0 rootfs
-     => echo ${gpt_partition_entry}
-     1
--    => gpt env set mmc 0 boot
-+    => gpt setenv mmc 0 boot
-     => echo ${gpt_partition_entry}
-     2
- 
--- 
-2.53.0
-
+Nevermind. I do see it in patchwork now.
