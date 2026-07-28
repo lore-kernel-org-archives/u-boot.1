@@ -4,158 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7CAC53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 04:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61FDCC53200
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 04:56:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E8F1260AFC;
-	Wed, 29 Jul 2026 04:56:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 297F660ADA;
+	Wed, 29 Jul 2026 04:56:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GeL4D5AFlNIH; Wed, 29 Jul 2026 04:56:01 +0000 (UTC)
+ id aJ_4tSNBz35C; Wed, 29 Jul 2026 04:56:09 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 59BEB60AD3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 17B4460AC7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785300952;
-	bh=31XHkY7roBR0uvMmukxJqeiB16jt7Dd9d/qhR20XBLI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785300959;
+	bh=Mqh2Bsrop/q9QNV92wGC35oUutspZjFH67MZUiy5wss=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vb5rMTfRzuBNz5BnxdLZXOBZlmpTviGHbXtY9Ngfn3/rivEEZrIiShiNJcdlDwYSz
-	 MavL9nd68FwyugYLhqiJugklR7YNClAsMAtnzigIxYjW/rzxgZZxEdL0cL/2q6nvtV
-	 cdSMsWz8ehA1YX9FuBJtH6j5HTb1yBQFtyRGKUZTiKEfJ6CdZTipLFQKsBzHXV9M86
-	 87eVxdPPGy711TzvdLByrQRVxH6RjIZw5F0X1zzIDnP8LkS4pAiCd4IlnUQ8YkyCQB
-	 QzBZ13eZKQFH6H0CMEMiDXFCXUGrLC3UN2iVFhEl8jOJz2sxYIjPXHtdfrR4Rk4key
-	 8Wr9S+vYNs/kg==
+	b=xD7JEP6JFLo23jW3ec7cWlsau+8ZC8r4HwZc2z6yf+TCR4RwsT5mniJOIMinFWpvQ
+	 IMhFFAVw9grABE7lHxk6/I4T0d0WotaC7eLslAEz3x140wtEPjktnqIBuDz3Xw8j5X
+	 L2B1eCzOnGPZDUGT0Nrn3MEx1Et11L3KDx8+ZCA9QW9bAhq5S/RPXHxAzxS9U0pYGC
+	 zzrmxcgR+0JuEY3utjV2MloapwQSE+VenWBIjRo82Q7vEYdJrSK2AuoWHsFkuvKRtG
+	 HpYS1A97KdC/9tYYz4N8isGHH2tAa1y+N5W0BXjS3zB6Ipk9LhHwCf4S4r3H54gUHF
+	 C7aVu2bY35clQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 59BEB60AD3;
-	Wed, 29 Jul 2026 04:55:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 542C9490
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:44:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 17B4460AC7;
+	Wed, 29 Jul 2026 04:55:59 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A4AAD788
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:02:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3AD1E80D9C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:44:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 96DBC40362
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:02:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tLw-DfEQd87w for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 17:44:19 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
- envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D60DD80A50
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D60DD80A50
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D60DD80A50
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 17:44:18 +0000 (UTC)
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7eb64085c45so124029a34.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 10:44:18 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XsLAeWp1uRvO for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 18:02:10 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=mail@conchuod.ie; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0ECB440176
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0ECB440176
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0ECB440176
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 18:02:09 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C78B38494B; Tue, 28 Jul 2026 20:02:07 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AA738404D
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 20:02:05 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-493b966dd74so741605e9.3
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 11:02:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785260658; x=1785865458;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=31XHkY7roBR0uvMmukxJqeiB16jt7Dd9d/qhR20XBLI=;
- b=kMiIK3doSLqry+4p5qEtHpgYgh69k3dGmZ+bjAf/ff5Sm0eCfDv3QdV0QN7K59zl2R
- k3wsCOmW3Blxc9RFpQrU9XiknUIonE3rqKqOy2Zokpb0TMVtlxtWOiXqCaAbijzvfKWt
- wxlyZ536mcM1tMdD8mwUA5zoNh66rPEQ5VhcnM4VoBUvBjHEolGyc6eK42welmNYJZ2P
- dh3ELZKPAFAcP0N7uQRJJk8CYJfrzNkIwe29e7P+6539eDH2H1gRqBZ74IfSGv9+Ei9E
- xKpKUkay28Cy3Bb2Q1zxHmnv12JMnEg5slRHBdxTjoO31js3yjD05JC9l3yomyI/ysXZ
- Ys+g==
+ d=1e100.net; s=20251104; t=1785261725; x=1785866525;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Mqh2Bsrop/q9QNV92wGC35oUutspZjFH67MZUiy5wss=;
+ b=iq+Ip8exbblqY1uh+mtVKs7q9C5Ul4ULq2qk+ttqZpKUcvSDd7rIdSZTbn424hFa4e
+ ggJwhuiNtq9hxGH/26P7ejy2CsUB6WfXD2GguCQrPXZcVss/OT9H+yB8yUpfS2GNFsbz
+ 3u782EblC1XkY0C5SNQHCBNbw+VauQXARRtNt9AGoIfhuWXqCHltexfwCuGgUTg/9h0D
+ ioYEewtRAVMsBCzTpg1JrXWEW4/v3b7fhnJNHyc2b3fEx9B5eFy0+MHr33uuU+c4aw/f
+ asvt1f2aJCEeNgVY+QXO/Ggl6Dbkz31vp167jyBQl5GDIurNlmSWnfdgXbbyv6bIIH9v
+ rU9A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrN3AWVgCV2y5llbzm1KNc1cCWq9J77cTOIAS08JVhk1IkED0zNn9UioU+qU/dh6nBt5r8y18E=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzgE9b0Q6T2X8BFuztk1MlWnwWXqYIBk5XJmlDM5Pl/S8rjVgZ6
- Dc2NAJEVEpTUxqct+nCaTDtP6BA9N7V5efb1I5Kyt1+OACcfn6l9rC45
-X-Gm-Gg: AR+sD103rIoH7Xv+s6YOAoo+3jaOYyJsfgvwTyLjS+zX+WYQCBZr6EiGLqMA/4HS2AJ
- OYfccCzP2trmRs97tJnjg/Oepsa+N+iRtHQQMcoxS+AQhHg2vFkitZ6QEr4PK4Yz96t+1jpxtrm
- nygM96TPPSo46zVZQc9nkr2SwSZpphjgFw0cMGMkekhNY8jpC0laVk9dtCU6+xgy2+Dz1WgfUyG
- bv13svQ4qToKg/rIpWY+VX+69tvW1fC2bSUk0JCPTwrVdTtCPVrr9y/w3Epm81FYH/ugtTBpI+4
- GLsXi+L1o+/FFoPRLbUpafHyHxwOUhzlUXn0qBgmeeARMNiHCbE4A6EPY1nz7/KZHWpN+D2qxX1
- 7EOH6P8imqnKWp6wYoFHKosbH61KMa9SkTYxCndjEFbcIihsxEX9h77acHTwkOnaDhWEiuJZ8AU
- up/bBPEi5JSCRWHXGMDFIdfmrStUPmAqjHwtjZnP0e84SCR+Yf0YqMnqUJEe6SPE9SDi3oTLfze
- QF1dZgqe5elHtA6/QL6kZIMI7ewa9bsQjXCXLx1OBZGyRcasz/82F3B
-X-Received: by 2002:a05:6830:4884:b0:7e5:6c74:b295 with SMTP id
- 46e09a7af769-7efff113070mr1995157a34.14.1785260657538; 
- Tue, 28 Jul 2026 10:44:17 -0700 (PDT)
-Received: from [127.0.1.1] (71-218-31-69.hlrn.qwest.net. [71.218.31.69])
+ AHgh+Ro9EpZLxPYuFziW2iEm9/UXw7pXagcCnRHY3NrdKeqxw9aDEqLcjWI0ONLsOt92KC+KT81NQv8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz688ZKKs+b9teLmMk1+YgMwD50JzBbGgVxowpfDRQolgukQXaL
+ wc0oVj1d11x21Rx0nUofW4U/8JnGcV1xSXES/JSrVsMsVHU94jSd2NdVYRnK8K/hTLI=
+X-Gm-Gg: AR+sD12nonA5ctSvuBDp5oiCRy59MPE0PzHwnDWz0DshdN4PMm/XbO6kk5K8BNAvDHq
+ K+8KvcFkVIzaCZoFbNyIl8edQxvs+2Tedlmql0CFl5SZEKjuu2diDtI5utpe0j5X6GwMLujRyGw
+ XqAkIoY+P/i48Mkmi8xra7tzDZ0WoGbSwOcA5DqcEI1Vb9UBQw0wQ6WYynwN2bJq22jJqLp3EpZ
+ BthtQk6T0fJ6RzmPFYShA6x5KruLqaEoG9R//2muoCDEaedtbwPA3FDZ1AXmyBKZmMrJn4+sX2Y
+ 3jGb0Mxhyt251GPs6r/xaDOLBCY1eYuM01kiuzHG4nTzRDhEqRF3EJa9cye6jg7GvHQoEiNhuT8
+ fJsmVxi/Gh7suDFPP8llJsc/y7GnJcTJ9FwqMy/v4aXDRmp+MVlmcVYzUHDVRUqbq8cyJE18vh8
+ PFaw17Y+2ky0ouIMMTeZnWd+Vl4rd/vWA2AAVTKlFfhm+T6fa4yYfjCvXU+w==
+X-Received: by 2002:a05:600c:c16d:b0:493:c8a6:b517 with SMTP id
+ 5b1f17b1804b1-496c6588c3cmr37096235e9.38.1785261724479; 
+ Tue, 28 Jul 2026 11:02:04 -0700 (PDT)
+Received: from ?IPV6:2a06:5900:80e6:5500:6eb3:11ff:fe1c:7575?
+ ([2a06:5900:80e6:5500:6eb3:11ff:fe1c:7575])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f00d94389dsm271103a34.21.2026.07.28.10.44.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 10:44:17 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 28 Jul 2026 11:41:55 -0600
-Subject: [PATCH v6 12/13] crypto: allwinner: add sun8i-ce ECDSA verifier
+ 5b1f17b1804b1-496c45c338fsm95591865e9.8.2026.07.28.11.02.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jul 2026 11:02:03 -0700 (PDT)
+Message-ID: <7ec9c425-53c5-41a2-95e7-f185e8d340c5@conchuod.ie>
+Date: Tue, 28 Jul 2026 19:02:02 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: VisionFive 2 eMMC boot issues.
+To: Milad <miladh1539@gmail.com>, u-boot@lists.denx.de
+Cc: minda.chen@starfivetech.com, rick@andestech.com,
+ yunhui.liang@starfivetech.com
+References: <CA+H9utw63z8x2Q+AhjWoq5O+aVW2FKEBCgvVtSzX--HJSJHAVA@mail.gmail.com>
+Content-Language: en-US
+From: Conor Dooley <mail@conchuod.ie>
+In-Reply-To: <CA+H9utw63z8x2Q+AhjWoq5O+aVW2FKEBCgvVtSzX--HJSJHAVA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260728-submit-ce-series-v2-v6-12-80c1f7daffa5@gmail.com>
-References: <20260728-submit-ce-series-v2-v6-0-80c1f7daffa5@gmail.com>
-In-Reply-To: <20260728-submit-ce-series-v2-v6-0-80c1f7daffa5@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
- u-boot@lists.u-boot-project.org
-Cc: Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- James Hilliard <james.hilliard1@gmail.com>, 
- Thierry Reding <treding@nvidia.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marek.vasut@mailbox.org>, Rasmus Villemoes <ravi@prevas.dk>, 
- Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
- Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
- Daniel Golle <daniel@makrotopia.org>, Francois Berder <fberder@outlook.fr>, 
- Peng Fan <peng.fan@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Randolph Sapp <rs@ti.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Alexey Charkov <alchark@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>, 
- Francesco Valla <francesco@valla.it>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michael Walle <mwalle@kernel.org>, 
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
- Richard Genoud <richard.genoud@bootlin.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, 
- Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Heiko Stuebner <heiko@sntech.de>, Vincent Jardin <vjardin@free.fr>
-X-Mailer: b4 0.15.2
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Approved-At: Wed, 29 Jul 2026 04:55:22 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785260658; x=1785865458;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=31XHkY7roBR0uvMmukxJqeiB16jt7Dd9d/qhR20XBLI=;
- b=gcOBUi6xAMTjmppcRCM71rTTMUp8VSwXzduR+kPUxq7farUEzl+AYqq4c8GGaz0+bo
- CtkvSLPMoXhDZm/hmmPYeOIfQkz+k/tO4rEw0H3MtVf673eUPiP6Nh/5z67BeKHGHizR
- WtuSho0aJ3DA3x7BPi8loolQFxysTwEIGhfM1EdDKdgXegXf1Nv/EpTUtFRtIXM07O8r
- BgbenAcYRodzsj+/biDSJYhCy4ncnBhc5WIfccEl86uilceVUexn1YbSRVuxQLAGcwwN
- vHsbbo/FvgxTXE6xfN7BpTgbPS0q9sSva3a3WenMyyDwrozDKiBukHnHG8bH3+0lQ+Vs
- gKsA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=gcOBUi6x
+ d=conchuod.ie; s=google; t=1785261725; x=1785866525; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Mqh2Bsrop/q9QNV92wGC35oUutspZjFH67MZUiy5wss=;
+ b=O262jlurWEQQjG4U8ETNTw+t8bBm/lwbxTdZ+KWkq3Mb+XlGjzDeL3quJfIG+I830j
+ C3vRWBZBr2fv9syKeadZOIc3bn6SifJ5pRIypgIHoMyquAtLjfU8F1Z4bA/FCrBb8ZXx
+ 3I/J4rVoXLIBm7rgfecy/Ebz2Vrbnpeiy+9XflydoQjI8wqcvWsqHYZqbE82k1k3n/jV
+ pOo17QICsYtS9nZWX/0f89uIIWLU4w/iR6oHiKHCjaIINfBNq22O3uTaolz1NmoxqoOQ
+ UngWaT+IUiWqiR7NMsWTD8ux8Pt00n4vnmSf033ehvJGXJ8LeCEc29PIoFk5k0vFSygb
+ JpWQ==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=conchuod.ie
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ spf=fail smtp.mailfrom=conchuod.ie
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=conchuod.ie header.i=@conchuod.ie header.a=rsa-sha256
+ header.s=google header.b=O262jlur
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=conchuod.ie
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mail@conchuod.ie
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ secure) header.d=conchuod.ie header.i=@conchuod.ie header.b="O262jlur"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -170,590 +154,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The H6 and H616 Crypto Engines include an ECC engine which can verify
-ECDSA signatures. Add a UCLASS_ECDSA child for the sun8i-ce parent so FIT
-signature verification can use the hardware block from U-Boot proper and
-SPL.
+On 28/07/2026 15:42, Milad wrote:
+> Hello everyone,
+> 
+> Little reminder on this thread regarding my VisionFive 2 MMC boot issue.
+> 
+> Archive link:
+> https://lists.u-boot-project.org/pipermail/u-boot/2026-July/624724.html
+> 
+> Just following up to see if anyone has had a chance to look at the details
+> in my original message on the link.
+> 
+> Thanks!
 
-The CE takes explicit curve parameters for each operation. Provide tables
-for the curves accepted by U-Boot's FIT ECDSA parser: secp224r1,
-prime256v1, secp384r1 and secp521r1. Derive each curve's a = p - 3
-parameter from p instead of storing duplicate constants. Make each curve
-independently selectable for U-Boot proper and SPL. SRAM-constrained
-builds can keep only the curves they need. The task input layout follows
-the ECC verify buffer order used by Allwinner's CE implementation.
+I don't think you CCed anyone that cares about the platform on that
+patch so that's probably the problem there.
 
-The CE input buffer uses fixed-width curve fields. Reuse the parameter
-packing logic for the message digest as well, so wider digests are
-truncated to the leftmost curve-width bytes according to ECDSA rules.
-Map the private input and result through the parent's cacheline-safe DMA
-objects. Round result storage to complete cachelines while keeping the
-descriptor output curve-sized. Submit ECC work on the dedicated asymmetric
-completion channel. After retirement, unmap the result and input exactly
-once before inspecting the result.
+Is this the same issue that Ilya attempted to fix in the upstream version
+of the devicetree for this platform?
+https://lore.kernel.org/all/20260306171939.84568-1-k0tran@altlinux.org/
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
-Changes v4 -> v5:
-  - Let parent submission populate the descriptor transport fields
-  - Name fields in the fixed ECC input sequence and inline the trivial DM
-    verifier wrapper
-  - Reject missing key coordinates, digest or signature before curve lookup
-  - Use shared cacheline-safe DMA mappings and round private result storage
-    to complete cachelines
-  - Unmap the result and input before inspecting the verification result
+My subsequent PR for that lead to issues and it never got applied.
+https://lore.kernel.org/soc/4dd4ffe6-307a-442b-ae99-50c88d4e5b84@freeshell.de/
 
-Changes v3 -> v4:
-  - Enable CE ECDSA for both H6 and H616
-  - Use the dedicated asymmetric channel and shared task-session path
-  - Derive the NIST a = p - 3 parameter instead of storing duplicate arrays
+This happened back in March, and I just have not had the time nor
+inclination to actually sort it out, and nobody else has stepped up.
 
-Changes v1 -> v2:
-  - Document the CE input-buffer layout  (suggested by Simon Glass)
-  - Document ECC byte-sized task length  (suggested by Simon Glass)
-  - Make CE ECDSA curves independently selectable
-    (suggested by Simon Glass)
-  - Use neutral wording in comments and commit log
----
- drivers/crypto/allwinner/sun8i-ce/Kconfig          |  94 +++++
- drivers/crypto/allwinner/sun8i-ce/Makefile         |   1 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  |   6 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 382 +++++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       |   3 +
- 5 files changed, 486 insertions(+)
+I think I will just pick that one patch back up again and resubmit
+it for this cycle. After all, it doesn't change the configuration, just
+the point at which the configuration should be done.
 
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Kconfig b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-index 973c4f3af21..49686d07aa3 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Kconfig
-+++ b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-@@ -39,3 +39,97 @@ config SPL_SUNXI_CE_AES
- 	  Select this option to enable AES decryption in SPL using the Crypto
- 	  Engine found in Allwinner H6 and H616 compatible SoCs. This can be
- 	  used to decrypt FIT images before loading U-Boot proper.
-+
-+config SUNXI_CE_ECDSA
-+	bool "Allwinner sunxi CE ECDSA verifier"
-+	depends on ARCH_SUNXI
-+	depends on ECDSA_VERIFY
-+	depends on CLK && DM_RESET
-+	select SUNXI_CE
-+	help
-+	  Select this option to enable ECDSA signature verification using
-+	  the Crypto Engine found in Allwinner sunxi SoCs. FIT image
-+	  signatures can then be checked by the hardware accelerator in
-+	  U-Boot proper. Digests wider than the selected curve are
-+	  truncated according to ECDSA rules.
-+
-+config SPL_SUNXI_CE_ECDSA
-+	bool "Allwinner sunxi CE ECDSA verifier in SPL"
-+	depends on ARCH_SUNXI
-+	depends on MACH_SUN50I_H6 || MACH_SUN50I_H616
-+	depends on SPL_DM
-+	depends on SPL_OF_CONTROL
-+	depends on SPL_ECDSA_VERIFY
-+	select SPL_CRYPTO
-+	select SPL_SUNXI_CE
-+	help
-+	  Select this option to enable ECDSA signature verification in SPL
-+	  using the Crypto Engine found in Allwinner H6 and H616 compatible
-+	  SoCs.
-+	  This allows SPL FIT image signatures to be checked by the hardware
-+	  accelerator before U-Boot proper is loaded. Digests wider than the
-+	  selected curve are truncated according to ECDSA rules.
-+
-+if SUNXI_CE_ECDSA
-+
-+config SUNXI_CE_ECDSA_SECP224R1
-+	bool "Support secp224r1"
-+	default y
-+	help
-+	  Enable the secp224r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_PRIME256V1
-+	bool "Support prime256v1"
-+	default y
-+	help
-+	  Enable the prime256v1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_SECP384R1
-+	bool "Support secp384r1"
-+	default y
-+	help
-+	  Enable the secp384r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_SECP521R1
-+	bool "Support secp521r1"
-+	default y
-+	help
-+	  Enable the secp521r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+endif
-+
-+if SPL_SUNXI_CE_ECDSA
-+
-+config SPL_SUNXI_CE_ECDSA_SECP224R1
-+	bool "Support secp224r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp224r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_PRIME256V1
-+	bool "Support prime256v1 in SPL"
-+	default y
-+	help
-+	  Enable the prime256v1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_SECP384R1
-+	bool "Support secp384r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp384r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_SECP521R1
-+	bool "Support secp521r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp521r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+endif
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Makefile b/drivers/crypto/allwinner/sun8i-ce/Makefile
-index 2a8778065b1..753ea827a0d 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Makefile
-+++ b/drivers/crypto/allwinner/sun8i-ce/Makefile
-@@ -2,3 +2,4 @@
- 
- obj-$(CONFIG_$(PHASE_)SUNXI_CE) += sun8i-ce-core.o
- obj-$(CONFIG_$(PHASE_)SUNXI_CE_AES) += sun8i-ce-aes.o
-+obj-$(CONFIG_$(PHASE_)SUNXI_CE_ECDSA) += sun8i-ce-ecdsa.o
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-index f22d534caea..4ce1ee70c14 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-@@ -673,6 +673,12 @@ static int sunxi_ce_bind(struct udevice *dev)
- 			return ret;
- 	}
- 
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA)) {
-+		ret = sunxi_ce_bind_child(dev, "sun8i-ce-ecdsa");
-+		if (ret)
-+			return ret;
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c
-new file mode 100644
-index 00000000000..f9b36347e4f
---- /dev/null
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c
-@@ -0,0 +1,382 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 James Hilliard
-+ */
-+
-+#include <crypto/ecdsa-uclass.h>
-+#include <dm.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <string.h>
-+#include <linux/kernel.h>
-+#include "sun8i-ce.h"
-+
-+enum sunxi_ecdsa_field {
-+	SUNXI_ECDSA_FIELD_N,
-+	SUNXI_ECDSA_FIELD_S,
-+	SUNXI_ECDSA_FIELD_E,
-+	SUNXI_ECDSA_FIELD_R,
-+	SUNXI_ECDSA_FIELD_P,
-+	SUNXI_ECDSA_FIELD_A,
-+	SUNXI_ECDSA_FIELD_GX,
-+	SUNXI_ECDSA_FIELD_GY,
-+	SUNXI_ECDSA_FIELD_QX,
-+	SUNXI_ECDSA_FIELD_QY,
-+	SUNXI_ECDSA_FIELD_N2,
-+	SUNXI_ECDSA_FIELD_R2,
-+	SUNXI_ECDSA_FIELD_COUNT,
-+};
-+
-+#define SUNXI_ECDSA_MAX_WORDS						\
-+	(CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP521R1) ? 17 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP384R1) ? 12 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_PRIME256V1) ? 8 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP224R1) ? 7 : 1)
-+#define SUNXI_ECDSA_MAX_BYTES		(SUNXI_ECDSA_MAX_WORDS * sizeof(u32))
-+#define SUNXI_ECDSA_MAX_SRC_BYTES	\
-+	(SUNXI_ECDSA_FIELD_COUNT * SUNXI_ECDSA_MAX_BYTES)
-+#define SUNXI_ECDSA_MAX_DST_BYTES	ALIGN(SUNXI_ECDSA_MAX_BYTES, \
-+					      ARCH_DMA_MINALIGN)
-+
-+struct sunxi_ecdsa_job {
-+	struct sunxi_ce_task task __aligned(ARCH_DMA_MINALIGN);
-+	u8 src[SUNXI_ECDSA_MAX_SRC_BYTES] __aligned(ARCH_DMA_MINALIGN);
-+	u8 dst[SUNXI_ECDSA_MAX_DST_BYTES] __aligned(ARCH_DMA_MINALIGN);
-+};
-+
-+struct sunxi_ecdsa_curve {
-+	/* p, Gx, Gy and n as consecutive big-endian curve-width values. */
-+	const u8 *params;
-+	u16 bits;
-+	u8 bytes;
-+	u8 words;
-+};
-+
-+static const u8 ecdsa_p224_params[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x01,
-+	/* Gx */
-+	0xb7, 0x0e, 0x0c, 0xbd, 0x6b, 0xb4, 0xbf, 0x7f,
-+	0x32, 0x13, 0x90, 0xb9, 0x4a, 0x03, 0xc1, 0xd3,
-+	0x56, 0xc2, 0x11, 0x22, 0x34, 0x32, 0x80, 0xd6,
-+	0x11, 0x5c, 0x1d, 0x21,
-+	/* Gy */
-+	0xbd, 0x37, 0x63, 0x88, 0xb5, 0xf7, 0x23, 0xfb,
-+	0x4c, 0x22, 0xdf, 0xe6, 0xcd, 0x43, 0x75, 0xa0,
-+	0x5a, 0x07, 0x47, 0x64, 0x44, 0xd5, 0x81, 0x99,
-+	0x85, 0x00, 0x7e, 0x34,
-+	/* n */
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x16, 0xa2,
-+	0xe0, 0xb8, 0xf0, 0x3e, 0x13, 0xdd, 0x29, 0x45,
-+	0x5c, 0x5c, 0x2a, 0x3d,
-+};
-+
-+static const u8 ecdsa_p256_params[] = {
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x01,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	/* Gx */
-+	0x6b, 0x17, 0xd1, 0xf2, 0xe1, 0x2c, 0x42, 0x47,
-+	0xf8, 0xbc, 0xe6, 0xe5, 0x63, 0xa4, 0x40, 0xf2,
-+	0x77, 0x03, 0x7d, 0x81, 0x2d, 0xeb, 0x33, 0xa0,
-+	0xf4, 0xa1, 0x39, 0x45, 0xd8, 0x98, 0xc2, 0x96,
-+	/* Gy */
-+	0x4f, 0xe3, 0x42, 0xe2, 0xfe, 0x1a, 0x7f, 0x9b,
-+	0x8e, 0xe7, 0xeb, 0x4a, 0x7c, 0x0f, 0x9e, 0x16,
-+	0x2b, 0xce, 0x33, 0x57, 0x6b, 0x31, 0x5e, 0xce,
-+	0xcb, 0xb6, 0x40, 0x68, 0x37, 0xbf, 0x51, 0xf5,
-+	/* n */
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xbc, 0xe6, 0xfa, 0xad, 0xa7, 0x17, 0x9e, 0x84,
-+	0xf3, 0xb9, 0xca, 0xc2, 0xfc, 0x63, 0x25, 0x51,
-+};
-+
-+static const u8 ecdsa_p384_params[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe,
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+	/* Gx */
-+	0xaa, 0x87, 0xca, 0x22, 0xbe, 0x8b, 0x05, 0x37,
-+	0x8e, 0xb1, 0xc7, 0x1e, 0xf3, 0x20, 0xad, 0x74,
-+	0x6e, 0x1d, 0x3b, 0x62, 0x8b, 0xa7, 0x9b, 0x98,
-+	0x59, 0xf7, 0x41, 0xe0, 0x82, 0x54, 0x2a, 0x38,
-+	0x55, 0x02, 0xf2, 0x5d, 0xbf, 0x55, 0x29, 0x6c,
-+	0x3a, 0x54, 0x5e, 0x38, 0x72, 0x76, 0x0a, 0xb7,
-+	/* Gy */
-+	0x36, 0x17, 0xde, 0x4a, 0x96, 0x26, 0x2c, 0x6f,
-+	0x5d, 0x9e, 0x98, 0xbf, 0x92, 0x92, 0xdc, 0x29,
-+	0xf8, 0xf4, 0x1d, 0xbd, 0x28, 0x9a, 0x14, 0x7c,
-+	0xe9, 0xda, 0x31, 0x13, 0xb5, 0xf0, 0xb8, 0xc0,
-+	0x0a, 0x60, 0xb1, 0xce, 0x1d, 0x7e, 0x81, 0x9d,
-+	0x7a, 0x43, 0x1d, 0x7c, 0x90, 0xea, 0x0e, 0x5f,
-+	/* n */
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xc7, 0x63, 0x4d, 0x81, 0xf4, 0x37, 0x2d, 0xdf,
-+	0x58, 0x1a, 0x0d, 0xb2, 0x48, 0xb0, 0xa7, 0x7a,
-+	0xec, 0xec, 0x19, 0x6a, 0xcc, 0xc5, 0x29, 0x73,
-+};
-+
-+static const u8 ecdsa_p521_params[] = {
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff,
-+	/* Gx */
-+	0x00, 0xc6, 0x85, 0x8e, 0x06, 0xb7, 0x04, 0x04,
-+	0xe9, 0xcd, 0x9e, 0x3e, 0xcb, 0x66, 0x23, 0x95,
-+	0xb4, 0x42, 0x9c, 0x64, 0x81, 0x39, 0x05, 0x3f,
-+	0xb5, 0x21, 0xf8, 0x28, 0xaf, 0x60, 0x6b, 0x4d,
-+	0x3d, 0xba, 0xa1, 0x4b, 0x5e, 0x77, 0xef, 0xe7,
-+	0x59, 0x28, 0xfe, 0x1d, 0xc1, 0x27, 0xa2, 0xff,
-+	0xa8, 0xde, 0x33, 0x48, 0xb3, 0xc1, 0x85, 0x6a,
-+	0x42, 0x9b, 0xf9, 0x7e, 0x7e, 0x31, 0xc2, 0xe5,
-+	0xbd, 0x66,
-+	/* Gy */
-+	0x01, 0x18, 0x39, 0x29, 0x6a, 0x78, 0x9a, 0x3b,
-+	0xc0, 0x04, 0x5c, 0x8a, 0x5f, 0xb4, 0x2c, 0x7d,
-+	0x1b, 0xd9, 0x98, 0xf5, 0x44, 0x49, 0x57, 0x9b,
-+	0x44, 0x68, 0x17, 0xaf, 0xbd, 0x17, 0x27, 0x3e,
-+	0x66, 0x2c, 0x97, 0xee, 0x72, 0x99, 0x5e, 0xf4,
-+	0x26, 0x40, 0xc5, 0x50, 0xb9, 0x01, 0x3f, 0xad,
-+	0x07, 0x61, 0x35, 0x3c, 0x70, 0x86, 0xa2, 0x72,
-+	0xc2, 0x40, 0x88, 0xbe, 0x94, 0x76, 0x9f, 0xd1,
-+	0x66, 0x50,
-+	/* n */
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xfa, 0x51, 0x86, 0x87, 0x83, 0xbf, 0x2f,
-+	0x96, 0x6b, 0x7f, 0xcc, 0x01, 0x48, 0xf7, 0x09,
-+	0xa5, 0xd0, 0x3b, 0xb5, 0xc9, 0xb8, 0x89, 0x9c,
-+	0x47, 0xae, 0xbb, 0x6f, 0xb7, 0x1e, 0x91, 0x38,
-+	0x64, 0x09,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp224r1 = {
-+	.bits = 224,
-+	.bytes = 28,
-+	.words = 7,
-+	.params = ecdsa_p224_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_prime256v1 = {
-+	.bits = 256,
-+	.bytes = 32,
-+	.words = 8,
-+	.params = ecdsa_p256_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp384r1 = {
-+	.bits = 384,
-+	.bytes = 48,
-+	.words = 12,
-+	.params = ecdsa_p384_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp521r1 = {
-+	.bits = 521,
-+	.bytes = 66,
-+	.words = 17,
-+	.params = ecdsa_p521_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve *
-+sunxi_ecdsa_find_curve(const struct ecdsa_public_key *pubkey)
-+{
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP224R1) &&
-+	    !strcmp(pubkey->curve_name, "secp224r1"))
-+		return &sunxi_ecdsa_secp224r1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_PRIME256V1) &&
-+	    !strcmp(pubkey->curve_name, "prime256v1"))
-+		return &sunxi_ecdsa_prime256v1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP384R1) &&
-+	    !strcmp(pubkey->curve_name, "secp384r1"))
-+		return &sunxi_ecdsa_secp384r1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP521R1) &&
-+	    !strcmp(pubkey->curve_name, "secp521r1"))
-+		return &sunxi_ecdsa_secp521r1;
-+
-+	return NULL;
-+}
-+
-+static u8 *sunxi_ecdsa_copy_le_param(u8 *dst,
-+				     const struct sunxi_ecdsa_curve *curve,
-+				     const void *src, size_t len)
-+{
-+	const u8 *p = src;
-+	size_t copy_len;
-+	int i;
-+
-+	copy_len = min_t(size_t, len, curve->bytes);
-+	for (i = 0; i < copy_len; i++)
-+		dst[i] = p[copy_len - 1 - i];
-+
-+	return dst + curve->words * sizeof(u32);
-+}
-+
-+static void sunxi_ecdsa_fill_src(struct sunxi_ecdsa_job *job,
-+				 const struct sunxi_ecdsa_curve *curve,
-+				 const struct ecdsa_public_key *pubkey,
-+				 const void *hash, size_t hash_len,
-+				 const void *signature)
-+{
-+	const u8 *r = signature;
-+	const u8 *s = r + curve->bytes;
-+	const u8 *p = curve->params;
-+	const u8 *gx = p + curve->bytes;
-+	const u8 *gy = gx + curve->bytes;
-+	const u8 *n = gy + curve->bytes;
-+	const void *params[SUNXI_ECDSA_FIELD_COUNT] = {
-+		[SUNXI_ECDSA_FIELD_N] = n,
-+		[SUNXI_ECDSA_FIELD_S] = s,
-+		[SUNXI_ECDSA_FIELD_E] = hash,
-+		[SUNXI_ECDSA_FIELD_R] = r,
-+		[SUNXI_ECDSA_FIELD_P] = p,
-+		[SUNXI_ECDSA_FIELD_A] = p,
-+		[SUNXI_ECDSA_FIELD_GX] = gx,
-+		[SUNXI_ECDSA_FIELD_GY] = gy,
-+		[SUNXI_ECDSA_FIELD_QX] = pubkey->x,
-+		[SUNXI_ECDSA_FIELD_QY] = pubkey->y,
-+		[SUNXI_ECDSA_FIELD_N2] = n,
-+		[SUNXI_ECDSA_FIELD_R2] = r,
-+	};
-+	u8 *dst = job->src;
-+	u32 i;
-+
-+	/*
-+	 * The CE manual specifies this fixed sequence of little-endian
-+	 * curve-width fields for ECC signature verification:
-+	 *
-+	 *   n, s, e, r, p, a, Gx, Gy, Qx, Qy, n, r
-+	 */
-+	for (i = 0; i < ARRAY_SIZE(params); i++) {
-+		u8 *field = dst;
-+		size_t len = i == SUNXI_ECDSA_FIELD_E ? hash_len : curve->bytes;
-+
-+		dst = sunxi_ecdsa_copy_le_param(dst, curve, params[i], len);
-+		if (i == SUNXI_ECDSA_FIELD_A) {
-+			u32 borrow;
-+
-+			/* All supported NIST curves use a = p - 3. */
-+			for (borrow = 3; borrow; field++) {
-+				u8 val = *field;
-+
-+				*field = val - borrow;
-+				borrow = val < borrow;
-+			}
-+		}
-+	}
-+}
-+
-+static void sunxi_ecdsa_fill_task(struct sunxi_ce_priv *priv,
-+				  struct sunxi_ecdsa_job *job,
-+				  const struct sunxi_ecdsa_curve *curve,
-+				  dma_addr_t src, dma_addr_t dst)
-+{
-+	struct sunxi_ce_task *task = &job->task;
-+	u32 bytes = curve->words * sizeof(u32);
-+
-+	task->t_asym_ctl = curve->words |
-+			   (SUNXI_CE_ECC_OP_VERIFY << SUNXI_CE_ECC_OP_SHIFT);
-+	/* The ECC engine uses a byte-sized task length. */
-+	task->t_dlen = SUNXI_ECDSA_FIELD_COUNT * bytes;
-+	task->t_src[0].addr = sunxi_ce_desc_dma_addr(priv, src);
-+	task->t_src[0].len = task->t_dlen / sizeof(u32);
-+	task->t_dst[0].addr = sunxi_ce_desc_dma_addr(priv, dst);
-+	task->t_dst[0].len = curve->words;
-+}
-+
-+static int sunxi_ecdsa_run(struct sunxi_ce_priv *priv,
-+			   struct sunxi_ecdsa_job *job,
-+			   const struct sunxi_ecdsa_curve *curve)
-+{
-+	size_t dst_len = curve->words * sizeof(u32);
-+	size_t src_len = SUNXI_ECDSA_FIELD_COUNT * dst_len;
-+	struct sunxi_ce_dma_buf src_dma = { };
-+	struct sunxi_ce_dma_buf dst_dma = { };
-+	u32 result;
-+	int ret;
-+
-+	ret = sunxi_ce_dma_map(priv, &src_dma, job->src, src_len,
-+			       DMA_TO_DEVICE);
-+	if (ret)
-+		goto out;
-+	ret = sunxi_ce_dma_map(priv, &dst_dma, job->dst, sizeof(job->dst),
-+			       DMA_FROM_DEVICE);
-+	if (ret)
-+		goto out;
-+
-+	sunxi_ecdsa_fill_task(priv, job, curve, src_dma.dma, dst_dma.dma);
-+
-+	ret = sunxi_ce_run_task(priv, SUNXI_CE_CHANNEL_ASYM,
-+				SUNXI_CE_METHOD_ECC, &job->task);
-+
-+out:
-+	sunxi_ce_dma_unmap(&dst_dma);
-+	sunxi_ce_dma_unmap(&src_dma);
-+	if (ret)
-+		return ret;
-+
-+	result = *(u32 *)job->dst;
-+
-+	return result == 1 ? 0 : -EPERM;
-+}
-+
-+static int sunxi_ecdsa_verify_dm(struct udevice *dev,
-+				 const struct ecdsa_public_key *pubkey,
-+				 const void *hash, size_t hash_len,
-+				 const void *signature, size_t sig_len)
-+{
-+	struct sunxi_ce_priv *priv = dev_get_priv(dev_get_parent(dev));
-+	const struct sunxi_ecdsa_curve *curve;
-+	struct sunxi_ecdsa_job *job;
-+	int ret;
-+
-+	if (!priv || !pubkey || !pubkey->curve_name || !pubkey->x ||
-+	    !pubkey->y || !hash || !hash_len || !signature)
-+		return -EINVAL;
-+
-+	curve = sunxi_ecdsa_find_curve(pubkey);
-+	if (!curve || pubkey->size_bits != curve->bits ||
-+	    sig_len != curve->bytes * 2)
-+		return -EINVAL;
-+
-+	job = malloc_cache_aligned(sizeof(*job));
-+	if (!job)
-+		return -ENOMEM;
-+
-+	memset(job, 0, sizeof(*job));
-+	sunxi_ecdsa_fill_src(job, curve, pubkey, hash, hash_len, signature);
-+
-+	ret = sunxi_ecdsa_run(priv, job, curve);
-+	free(job);
-+
-+	return ret;
-+}
-+
-+static const struct ecdsa_ops sunxi_ecdsa_ops = {
-+	.verify = sunxi_ecdsa_verify_dm,
-+};
-+
-+U_BOOT_DRIVER(sun8i_ce_ecdsa) = {
-+	.name = "sun8i-ce-ecdsa",
-+	.id = UCLASS_ECDSA,
-+	.ops = &sunxi_ecdsa_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-index d0035af559a..d5b7edd357d 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-@@ -21,6 +21,9 @@
- #define SUNXI_CE_COMM_INT		BIT(31)
- #define SUNXI_CE_METHOD_AES		0
- #define SUNXI_CE_METHOD_RAES		0x30
-+#define SUNXI_CE_METHOD_ECC		33
-+#define SUNXI_CE_ECC_OP_VERIFY		7
-+#define SUNXI_CE_ECC_OP_SHIFT		16
- #define SUNXI_CE_MAX_SG			8
- #define SUNXI_CE_MAX_CHANS		4
- #define SUNXI_CE_CHAN_ERR_MASK(x)	(0xffU << ((x) * 8))
+If you could let me know if that patch helps, then it would be another
+argument for actually (finally) getting it merged.
 
--- 
-2.53.0
-
+Thanks,
+Conor.
