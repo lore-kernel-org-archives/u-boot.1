@@ -1,121 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18260C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 21:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34070C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 21:57:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DDE488144E;
-	Tue, 28 Jul 2026 21:57:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id F03E660A4E;
+	Tue, 28 Jul 2026 21:57:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id s181jN2A6eHh; Tue, 28 Jul 2026 21:57:09 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4Tu6Ni2VlTHz; Tue, 28 Jul 2026 21:57:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 18D908146A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 51F6560A7B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785275829;
-	bh=MiOtgqOgqhj/Q/Lcm4ol8oEazG7rgQLQR0jgyfynUhs=;
+	d=lists.u-boot-project.org ; s=default; t=1785275830;
+	bh=pD1RvWHVGuWwRs+DaKSecUSHQeZouCu0mHmWfy+iuvw=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=t6cEZcqz0fNDn0XhhZPldc3xqWnwrIls+1MqGqvJWd6cb0iT0bZCGUlrMB9xhq61T
-	 wWuhi470u3tKntXlFY16+HOfzUcWBNlkYH53P65Fm5wICSI3KMXvk2y/p3bjpIs0Vi
-	 OscX824WxjO54N5jFD0RXQlopklgXUSw+wT9hEkPn/m+M2AD56G65NLgTqRl/1pLVo
-	 2orWReUpufiaPiW5zvzAbVaAU1A+jj6hXrdx+uGiTZyiTMr/gA4e4aoIXfd+CbeqGT
-	 jI+4afZYwpX2A9/YPbJP5aumEUfRXPGpBouyReG1FSgWgPTqT2XDjQf3NZ+tv23zAF
-	 90EC430WJQRbA==
+	b=ow45BAyAOdvEKJtBS/PFRUlZRKMHtkdRKWSLN2jCLEMpaJVOZU69ns47yMKCh3JeJ
+	 z5jJWT8lupAyXVtf2XgG4Bx9uO8gsn5og6tJfCmYQS26m6GOvundV4ddaXSlbvaLDm
+	 CY4FYUOxkZ/92l7/uj12ZDyaqaRTH7FVf/Igq7Wm5t2LqZAH38lrdmCuCHW6C9gWm9
+	 kwLiWbP7pHdoOLiY17MWCqH1inMrILkwpTw5UnmttRgSysAZ6fXm8kgu1mahuIzDr1
+	 QI7RtpAt/xnxujnrpYz9u6ecuHCo+tx9O3a2WMC3AyNRd/dczoINEmgsjKqhDUCiaG
+	 GFzarlcUnq32g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 18D908146A;
-	Tue, 28 Jul 2026 21:57:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7C213350
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 51F6560A7B;
+	Tue, 28 Jul 2026 21:57:10 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 683642E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6E301408BC
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 568C98146D
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id x_HXOL_Szzzg for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 21:56:50 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AHEbhOy7GHxW for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 21:56:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
+ client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 5EBAE408AF
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5EBAE408AF
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5EBAE408AF
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2C76C8144E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2C76C8144E
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2C76C8144E
  for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 21:56:50 +0000 (UTC)
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7ee4399c3abso303613a34.2
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e9ef94c0e2so224615a34.3
  for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 14:56:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785275809; x=1785880609;
+ d=1e100.net; s=20251104; t=1785275810; x=1785880610;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=MiOtgqOgqhj/Q/Lcm4ol8oEazG7rgQLQR0jgyfynUhs=;
- b=SHgRrjg2vBSxZidXUxIrffOeiQL0WmXsRIQ8Z2u3VOcrXU6xt00HXKzF8uVvytlbYY
- ijPa8ALPbO2/h2DE/oJgvmszq754B+IK1oD9wzUcIMbedDYAlIoXbwg5GrIN9pF15izf
- fCIJjd9hxM0SsGyCOLE5HO9A0IasD9CaDwKgDtObPS40j2gqTPXo91IwQQPoCLqw71Ax
- y9Nxiud69/7YfgJzlUk2OnR8V/CfcX2nhGvKXlx1lVoiIZzcNInDN02j8Z4daCIDreMP
- WLodLx1ryVRSHgTYjwRIwcnEf31/CIP1cnrvTd3Cw05CIrZ7zyJxaOw0tgvB9eBMVRyZ
- yWSQ==
-X-Gm-Message-State: AOJu0Ywypgk4dtJBOQVufWmZMbN7Bv3Do0xE77ZEbpIq9VUdmzqYHfJZ
- fSPXcp/ppduwgnOsRNhCMqTypYU+B4/WVAwzmVIfxhMUKDExx0A5wW4BlWukjRHFpWI=
-X-Gm-Gg: AR+sD1110NDFPkqpCCMfBW/ktZS9wCfOpPlKxgivH6Y5HMvR1P55uuf+k7BHF2qsMgI
- 6438Hbqiq4OIQJBMOiI3XV4i8oEFomfw5FPTO2gvd32q7p/vmI1qYB6Sw9M5iuq6Z0jn5u5MYP1
- UFZTNKgj4cRLK3QwPGbTJ8eVdvttegwH53bYturrlBLOO9z4120YqMjEmwgGyB2esEDEhK1AENl
- OuIH8uGeQMJPShsJ0SM6osVnwFfy3ojpr7wsYDyy0kiG5d70lE0hwE4S0ytSFRkxWDdNkB9PT6W
- jZQq3WL7E4z5JfE60afjCYVvkupcMbmdI+sHaClpCdA+zVBy6B8ZokbeEq/kJwX84zCxKQch7N+
- z/8myAzTftZYjog8ACz+SIfMVXdChuu4o/6omHk3tRvgIIT52hH0d/PSKy+oJB9wnSvJrKCX7i+
- MJFsvj3LprL8muS0gjwIIm80Y6RntyW1AbfUnt1fLjHuTPiMS6a5ZKxcsA/7KSGgvJICfL2LR6u
- QSAnrZLQgkTfRBIwdhnJYwxga0wa7DuQCyXdwkibpDRfva/977xTY+9raLN00w4LLk4moxCJOH6
- d05BcsLY
-X-Received: by 2002:a05:6830:2653:b0:7e9:f8e8:d905 with SMTP id
- 46e09a7af769-7efff08c630mr2617300a34.16.1785275809243; 
- Tue, 28 Jul 2026 14:56:49 -0700 (PDT)
+ bh=pD1RvWHVGuWwRs+DaKSecUSHQeZouCu0mHmWfy+iuvw=;
+ b=HavtRTrh/626pDIOB2Da2A+vTkJsxBf/c+l4St661r+c00CIS7elNbyA4ALhOm1NsO
+ 0at+Nun8es0bZAAZsCDlgt1Cxebc/oddHza5ULiL0PZfCpN/WBpHBxhuDPlZXyd4+1aa
+ QcWiWvuGvybBoJNdUPsEAdNiCrdSx565DwEw6OmBO+PZyMTgfe+yK0jM7O6KxBIwRlLE
+ cUZ7BnSgPPGnlGe/BIK2jCz7tKEobmRUD90xCcHtqmG3uva2mJKQYX/mz28WQx4O+BJb
+ mwb9hG+fIdS6t/v19QDybOH5a9TAbyx5ygl7Ocg5zJOblkqTdXlovpzaTZPrwIiApkGD
+ 7Mvg==
+X-Gm-Message-State: AOJu0YzIlDHKdQ8cVvbZJBRWLiFVeFFaoP9Y4FHLHGoAYvLZZKAEtK/R
+ Ffz/sxaXYWX4+ZYHb2YCe1vzv0zb+8dt9vCfSAZhLgoMMO8qtsfKlHdZhuc0NBcfLyE=
+X-Gm-Gg: AR+sD10VlGWPXZm6OEv++R4yLxdXZdYudLV9M/ZQ/VThanaadb8y7ka2lCyFryuqEu+
+ TL9xxRgEQq0VAHA7g6m/r2zF0gQCkjj7Nl8n+aEpFl44xUnQxXNrfHc/9AAsyz2yBNMPhmz0JWl
+ PcxnLUhUCdjDMEKTXGyNeXVHVIXinAoqs5dUXm7oRUfeCvz/WUk/36eFAdib1bGlnfl3oAPfgtc
+ RISXNUt/j1rOLPH5k2iM7TyfutklXNl2dfaqyhpr5XcyX0ePNmQmnpENIHnhGSQ6c7Tuk6xqCV3
+ 2szqlA61NFtZaLb2nYWcwqxA2aYQl6mmiiVAitxBg7Ps6BsLlJLyFiuZfNZJmttCN0Fzfx1uX5y
+ Ux3tb4cS1G/IklZ9P/ApiSj0pQjguNtWVOuTDhEnkwe5Caut/e+SwzA8aAV64wTa8xHvuWAKyQF
+ FluWtdeL2SIA1MaopTBUsSt94HLAAePQtNtXUt/87A1INLAokkws2xINzDFXr4bz8Go906IojkX
+ X6M1Q41vSN2G8mX6caR1KJwbYU9t8WL5aV6zgkIqOV36QEec7fFN6lkvH2FjuCOI1QGzccqT59E
+ CI9E2vFu
+X-Received: by 2002:a05:6830:498f:b0:7dc:c749:ade3 with SMTP id
+ 46e09a7af769-7efff07ba9dmr2528020a34.3.1785275810063; 
+ Tue, 28 Jul 2026 14:56:50 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f00d2d8112sm780106a34.0.2026.07.28.14.56.48
+ 46e09a7af769-7f00d2d8112sm780106a34.0.2026.07.28.14.56.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 14:56:48 -0700 (PDT)
+ Tue, 28 Jul 2026 14:56:49 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Bryan Brattlof <bb@ti.com>, 
- Anshul Dalal <anshuld@ti.com>, Chintan Vankar <c-vankar@ti.com>
-Cc: u-boot@lists.u-boot-project.org
-In-Reply-To: <20260716080553.2664147-1-c-vankar@ti.com>
-References: <20260716080553.2664147-1-c-vankar@ti.com>
-Subject: Re: [PATCH v3 0/4] Enable Ethernet boot on SK-AM62A-LP
-Message-Id: <178527580841.1742553.7944517445850799275.b4-ty@konsulko.com>
-Date: Tue, 28 Jul 2026 15:56:48 -0600
+To: u-boot@lists.u-boot-project.org, Bin Liu <b-liu@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>
+In-Reply-To: <20260716143751.1680929-1-b-liu@ti.com>
+References: <20260716143751.1680929-1-b-liu@ti.com>
+Subject: Re: [PATCH] Kconfig: ram: select FDT_64BIT for K3_INLINE_ECC
+Message-Id: <178527580941.1742553.2834298508093051510.b4-ty@konsulko.com>
+Date: Tue, 28 Jul 2026 15:56:49 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785275809; x=1785880609;
+ d=konsulko.com; s=google; t=1785275810; x=1785880610;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=MiOtgqOgqhj/Q/Lcm4ol8oEazG7rgQLQR0jgyfynUhs=;
- b=ZxpuU+Up+NSLd8N0NJb4Tb3IGvFHwTFebu36kQZmELswu8UkQt2gDWmr7YS/TYxV1A
- e3cCVuWixhIJzpidgt3zD+4IjWFCYKswI8SgGdkwYoRps4E5sn3uurrGs4yfvxaoPzHD
- VSyLy11rvz4OXKdxVrSP+f/QuDD1EeQ5kAEp8=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=pD1RvWHVGuWwRs+DaKSecUSHQeZouCu0mHmWfy+iuvw=;
+ b=jB6gb+ndrU290nlAFxUEktVw5RoqiXPLtHMo/c/qkqZMDKWBPt++2Lt5iqlkXog0D8
+ kGYCbWQekBqjzRR9JgfEWvCRrXMEOyzSOsmkdmdx0yimvfzKmx4foFDJgdPqCFIK2yjt
+ MNtsatelALcBHakcSRvaZdz7VBvB10/nOddYM=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=ZxpuU+Up
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=jB6gb+nd
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,29 +127,23 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu, 16 Jul 2026 13:35:49 +0530, Chintan Vankar wrote:
+On Thu, 16 Jul 2026 09:37:51 -0500, Bin Liu wrote:
 
-> This series enables Ethernet boot on SK-AM62A-LP. The series is based on
-> commit 'a18265f1ccb7' of origin/next branch of U-Boot repo.
+> Commit f43f71012254 ("ram: k3-ddrss: Add support for a partial inline
+> ECC region") uses ofnode_get_addr_size() to read memory address and
+> size from devicetree using type fdt_addr_t and fdt_size_t.  However
+> these data types are 32bit if CONFIG_FDT_64BIT is not defined on ARMv7
+> build.
 > 
-> Link to v2:
-> https://lore.kernel.org/all/20260710102229.2980029-1-c-vankar@ti.com/
-> 
-> Logs:
-> https://gist.github.com/chintan013/99c20c1c0773a48cc52a86d3eb86a98a
+> So enable CONFIG_FDT_64BIT to retrieve correct 64bit memory address and
+> size from devicetree.
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/4] configs: am62ax_evm_r5_ethboot: Enable config options required for Ethernet boot
-      commit: 5aec4a2c9099888d5e9334a51bc60cce7eb52b94
-[2/4] configs: am62ax_evm_a53_ethboot: Enable config options required to enable Ethernet boot
-      commit: 707a9b537b2a0d30e6523be9c926796674773a65
-[3/4] arm: dts: k3-am62a7-sk-u-boot: Enable DM services for main_pktdma
-      commit: 3e3dfa33507a2e2ce64e679d6cbb09b59f0cbf53
-[4/4] doc: board: ti: am62ax_sk: Add document for Ethernet boot on AM62x SoC.
-      commit: 179a5619aaf48d127a8b706981ce381e50eea924
+[1/1] Kconfig: ram: select FDT_64BIT for K3_INLINE_ECC
+      commit: 1ca41edced1a7213a9d737c1ced772b91181e9ad
 -- 
 Tom
 
