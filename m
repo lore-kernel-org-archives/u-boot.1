@@ -4,127 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 621FBC531F9
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:58:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6BF8C531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:59:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 57EE181331;
-	Tue, 28 Jul 2026 11:58:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 17E4280F1A;
+	Tue, 28 Jul 2026 11:59:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dtPHkUdLFqIg; Tue, 28 Jul 2026 11:58:20 +0000 (UTC)
+ id rQsqJ_Y1zncO; Tue, 28 Jul 2026 11:59:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8691E81325
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E61398132B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785239900;
-	bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
+	d=lists.u-boot-project.org ; s=default; t=1785239958;
+	bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IlzPu6iaheMx26nja051kzGkLeQPq0n+L2kTGuEQHDn+zrnl/5Kv5wjGYW3pUyzql
-	 +arAIR8wdyZki7xHK6YOgcppNwpsHbgyBULrSAG0bCNYkRsHpyLPgowy9wAsExyZKJ
-	 eU3qlO5cO0ZPQ07SiGbf+nYMxehhtQVUrOfTqmVvp9JyWK3KVNrHSslEFy+ZfyejDm
-	 JAIX/mCC/qiKrcvy+dQw4/dNsRTC85EOQdrtFcC4u9j7HmxgTOcEcb9INsYu13bGCH
-	 WD/oDtTvU1BDYwgtQuJt/yjtzXwqMm+6vJvQD0QbAA/zVCIQmhPXqAIzcy7jkxLjRW
-	 5rF//1PhCsVsg==
+	b=AmLQHLUwu4duh3FziBHVlrV+QtZ8/+Qg2NVwM1tfih5uhB0mM41l6V0PMYKJs1WeU
+	 apaHhzv3CeoxuqsTKFXd+JjrnWlnNhksSaU4OPLxpka2uYlAMtU0O6kytOSXEuJDw3
+	 uCIyxG9c8ALKyL84m75iEhsmfVoHep9NMvS441lt+4h6yW8ZJj2n9us1JjT7W1Vg9x
+	 mwmPcdvhLUs+7e9C89v4PFjomb+QzpBYV/xGT80GlHk5jXXRWD0mju2mNNx+bTk35k
+	 V2PJla73EePMx94LCDwHmdQ1B+i4CgsGzL8/oDkxLIunKlOrUXUVQjowDJe+HNXXHU
+	 2sTQIE01c2tfA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8691E81325;
-	Tue, 28 Jul 2026 11:58:20 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7367F45B
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:58:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E61398132B;
+	Tue, 28 Jul 2026 11:59:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EFA7545B
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:59:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 59DF8400B8
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:58:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E1563400D3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:59:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id x08cQdLr4K8C for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:58:17 +0000 (UTC)
+ id 3FP7nijMS_EF for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:59:15 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
+ client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 4E22940085
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4E22940085
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4E22940085
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:58:17 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-69f7af97316so6016690a12.0
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:58:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785239895; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org EEDEF40085
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EEDEF40085
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EEDEF40085
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:59:14 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69fc856b00eso2949664a12.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:59:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785239953; cv=none;
  d=google.com; s=arc-20260327;
- b=ZgdIu7+Ldnl3UPwItZ8wgPlzOQp0yLutGZw0UWu1yp3/QjnmTbtvTZa3171/cZLUZS
- ERe1JeI2XSvFV7X/rGP0ZRLafUECASLQob/MgykOXv3SJx7fl11NK/i8nkzdjk/nwXH7
- NkzRDEOu92+ULOYmEzF0PycE/waYm4QUdt27BqBrMag9ZLomlViLOHueIOEV+jtw3DYI
- m9pMl83RzgjYFo36lN/5VWEKeHk4qWje5PrkbQHKBpPH9vkWIeRBenmOe+3GudfFrXjb
- 55pV23en6dStKFNRJyxNsxno5HXjt4s5VL27cNThFvXM6gtsT15oQh1s1Q7SU3THwyOh
- BfFA==
+ b=U5HLmt9LWFuzJKt5UL4y+LgDHOA8tO+2NvMVaORsz2GU3EJKLjO7SyecCJ7Wz5XAu0
+ VHciaqZ9/rTl0S+7h5KZzFY4S63sSkcbA6tOIdzWswtjCdvMbUAXj9W7Cb+esDR9qGK5
+ EcXRcyGLhfbApO8Nwxhq7VZNqsu7gR+7L49uuyaFA2OMlctFJXmXBPfKU9ORQKuwr/A5
+ WL5KTXnzUW/ajSJ7+fFGqzRUy34eyRzu1qr/haJ2w+cdYFHh7yBUIXn7dH4TMDKzO6I8
+ dtNMglQXRNnE1LMKDU4M4ai/PROTBL+cppws/7jlXltv0LIOhQMAH6qYkuRXQRhzoQOX
+ ck0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
- fh=YsOqrmLVmht63zxcDX/pvTK7+2dLBbyowfgIb7LrVa4=;
- b=UKkuV6TeHDEAPL6ufqfjhLhQkc2EE+d0HngT8s7z6GmBNisjxcKTKehx/ALZXiFZi8
- wadpOiUrYsA2dozi+xkAlJQ+q8zsIPX/swf2GqxxGZeGbf/QWY8sfK12GqlIzhXtH3t8
- VFnfLdQmXbXRXsDQfJeZnltZMVKWZN6yJRt30tAHQFTYydEIv5dbt9pP84dvfJg5jMV+
- YURXB0u4D0Vzi0ucmj6H7dleSvMUo9Jqh9wCMyhv1a0ep06SfYTtFMroF4eLg0ApcwGw
- yHZpcYmhOeLLiRRSioyabyCQ2R96U9C3I3fFORU0Y+dGEDVf8m/ILK5ejsw5/Wit/nYz
- m6/A==; darn=lists.u-boot-project.org
+ bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
+ fh=m+/eSa55FaGpgSozVLOm739jx7xTt+qVKPfcydVTKjM=;
+ b=sAq6oUk8IC2+yn2RjMaCdpjCizWE6fA9yn/8xhl42FY0OC/kVr2kXC2oX9k7UUOkFx
+ omFIFJFFTDwcfnX6I8MGUPum6E04jMo/alLMrOTbpMlE2/oBQBYQeJ9zjdr0uKXNUxx8
+ iEnIv+GGPhEmtpc1WyzcHMiggMawpjBWIqErRezyuPmrx81m6U2Jx+oV1pQG45iBFIH5
+ OPiko/2pKWhCftMTcGetmYvY1FMR882rgkko64Si7o1OStgWp/VnjXqPVIKOXMAX09ii
+ pyJgN7z7jd073koHCUV7VyynMEP3dfb9j+HfquvNPpXEl3lD3HB2ftw0kK9ZBKemvSCt
+ fccA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785239895; x=1785844695;
+ d=1e100.net; s=20251104; t=1785239953; x=1785844753;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
- b=K/1DvK5HkWXMcowP+CiwprwVl8oxdPo/xRGpqv7hoMxVF/mZoOZ0rDuMFqcB5EHwLr
- QgyrcZ9YI4+mF4EkOimeDox75TKugX8vopHFl6laHJ6q/zkPotQYZ4VqqtpDkXZwugxv
- 6oUdT7Ru6HGE1q0p1zpJ7GQcJC385DOOXmnY6Hr9YMf1RqkG0TFo3OQMj7pRZV9PXfDu
- j6NOZjDiG3m6e3CpFrHLJcWA/QL5HiVvCtAjM629QYr5r7NW+p4cUIKpleaaQ/lb1t2S
- F1mOpqfKMBMbocFJJmZ5AhnJnL/LiA61X2lfoGKsWjXWP7HRngTAms0ww18o9zzLG5Oq
- 1GlQ==
-X-Gm-Message-State: AOJu0Yz3MA34ziiTnyMknHcbL3rt5P3URsD9rDljaYKcFSkiVt4LY48b
- Z9WO1de/Wb2Vn1bu26HLFDWQAQe08iNTeJJKM9Iucgo25cURZpwKMlkg9fWIfZCH8MYJJYOaWHf
- /I1ZUzWQDXE6sq+U8YLvViO2bcWComkD5JrcyHCQ1
-X-Gm-Gg: AR+sD10ntbsXs1pqF+Vg8wSjJeBOCZN0ES37lAjLuxukUHi0W679GKRiRDpuXmVEm32
- fbkrnz85m3M1bAmFlnBCnCjNQyZqjHxS+PaBbyiKpL7qdoen7pLh8XmvwsEudpEv4ACignp02y1
- dN3ORDBKJOyyVU4F1DRxpn4yzFvtVDmYDyHOZ3esybZCvN6zjoti7J2M8sC70uyCFVwO7nXkyXb
- ZBFd19GVt1GfRtjYcYJUPBycN3B43m7J2zRSDxACjHCSZpfxv3XoQUoPQVV
-X-Received: by 2002:a05:6402:530d:b0:69f:ec6e:89b7 with SMTP id
- 4fb4d7f45d1cf-6a034a8cf93mr1065617a12.40.1785239895215; Tue, 28 Jul 2026
- 04:58:15 -0700 (PDT)
+ bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
+ b=S0sJMtmR4WKDFgEV2sGsxcCidRrOe/3T1tFCXXONPST/DoGGjM+4vmZ+Nh5CZSDmHl
+ AMXKx7F7cckyuGfQYLkKd1i7NXafcK+Db2Q65iHDjsmxpzP4ui8PItZ5zWyMmfYjzCCV
+ UMo7rDaMrka05sr/GdY8VyLVmh7sIPAwsaBuHocPmQcO2FUPbbRfLgC9hTOhB3CgH+Jw
+ M7FybaokE8pT1zgU/xFONIpc4zmIZ34xsAOi4q5DJytSl0h5+VfBgfcuaCzBhpQ1oDXA
+ MgZI/7v77oXNGamUl82IQkUmBJhY2DvFgmpiy2zr7gjCwOSnsYl2C+9HRyC+D2n0/7I7
+ KFAw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RooCPqhS5SYsc+hLb1X1JAlVWGqiTyS1vhLLKoUt05Li8toA8mpwUYLRsF2mODP772ACd3fjmc=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyJrv8LxxBVp2gA7kyAiI6NRH0eL3146axOmRCuBVneQ18loRrE
+ a5yAXcmsXZL9COXqdaf/OzSvNuh5VystYLG3flN/xpq2mMUS1OuLuge6wAFamYmK+dQFwMh2ctc
+ z7SMkdKZyIwX2Zy6MtsJBrex4rIes4k9MugzpNo0U
+X-Gm-Gg: AR+sD120PyHJbUEANiNXqPgHoEFFcBIUhYQMJsiF5M3/Usq7dUkig2y3YzyEUkzenFA
+ bSBQXJN/S7Y7rCjjKE/pYPHpY+qPEcZD1b72DVe7dIo2weW6BY7ogTxLKtHpU7xbdg9hFSJy0Ct
+ eKLcLTIc+ENG7IoMW1S0+PtBLJ4J9DSpbthv28hXEQLWSE2LhU0n1U6d4zHImyaqKei/fm4RlK3
+ 5/SkEN7sjmQrM/F5+C/pnL5EznMfFiagxichj+YW/VKRCjHgpPA5kuwlEBq
+X-Received: by 2002:a17:907:c009:b0:c19:6a94:5bea with SMTP id
+ a640c23a62f3a-c1f7223e5e3mr96771466b.40.1785239953005; Tue, 28 Jul 2026
+ 04:59:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260721025327.161856-1-marex@nabladev.com>
-In-Reply-To: <20260721025327.161856-1-marex@nabladev.com>
+References: <141397f1be56cf730a3222263c091347fa4cda4e.1784408712.git.daniel@makrotopia.org>
+In-Reply-To: <141397f1be56cf730a3222263c091347fa4cda4e.1784408712.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:58:03 -0600
-X-Gm-Features: AUfX_mz5bzSQGTpcZTbwXkTz8qhhkFh1p7fyaY8w3BYN64ksygXqBBtNp4ranHk
-Message-ID: <CAFLszTiwrXDyim2dTPo5=K1Fm82acJA6GKCiPWBdnRsFZjAQ0A@mail.gmail.com>
-Subject: Re: [PATCH v5] binman: add CST backend selection for i.MX8M signing
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Tue, 28 Jul 2026 05:59:01 -0600
+X-Gm-Features: AUfX_mzcKVH8d3mQKogASCCPGo6YtYPcoBUBF-ATlHMvAsDUbOkd_pL4D9pCFTw
+Message-ID: <CAFLszTi3nVrjYq+8NH1wb0iv0oU9f41ZKum1ZoSAMMC=H9p0+Q@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: give SimpleTextInputEx its own WaitForKeyEx
+ event
+To: daniel@makrotopia.org
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Gregor Herburger <gregor.herburger@linutronix.de>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785239895; x=1785844695;
+ d=chromium.org; s=google; t=1785239953; x=1785844753;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=UQiqMpm7cF2v4mYEA33r5ZpvO3a3m7Gz8YIMKiPk9dg=;
- b=LCDbvQQTEAAfVaO/GMi9Phh0TQ8bLptVz/UVdS51xmphBBILK4U1hiGBcguBOFuQVp
- rx4QH6Unj/zEI8a+oj0cN1/WWV6JJHSqwVeqMqhGUV50e1mFTjQRh8Mv+rhOV/FLObL1
- lkQuPQWW1uwYj6fHjzikNFB/vxZ1vfhIJwGQc=
+ bh=CltEJvFpTnXi2YdBZzZI7c9eSGis2XjzWD2QgSPaja8=;
+ b=DIqRoAII4ZDcXvryWAnTa/MuodYuE4d6ewhfIqRmxKeC/lrOJTQ/sjlRjJhnDSlQmy
+ r5QcYOsP68pP0eutrHZZraCahyfhGtenCzlAIGH8nyBYlZ1ocd+jKFX9enDorHb2hU3n
+ kgZgQJqeVUYG52vx6NcnluaLsiV7TCw2uj3to=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=LCDbvQQT
+ header.a=rsa-sha256 header.s=google header.b=DIqRoAII
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,31 +147,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Marek,
+Hi Daniel,
 
-On 2026-07-21T02:52:37, Marek Vasut <marex@nabladev.com> wrote:
-> binman: add CST backend selection for i.MX8M signing
+On 2026-07-18T21:11:38, Daniel Golle <daniel@makrotopia.org> wrote:
+> efi_loader: give SimpleTextInputEx its own WaitForKeyEx event
 >
-> Add support for setting the CST backend, both via DT property and
-> CST_BACKEND environment variable. The CST currently supports two
-> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
-> CST tool is invoked without any -b parameter. Keep 'ssl' backend
-> as the default, but explicitly pass it via the '-b' parameter,
-> unless the user selects 'pkcs11' via either method.
+> The console input used a single wait event for both the
+> EFI_SIMPLE_TEXT_INPUT_PROTOCOL and the EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL
+> by aliasing wait_for_key_ex to wait_for_key. The UEFI specification
+> describes these as separate events, and a client that opens ConInEx and
+> drives WaitForKeyEx independently of the base protocol (the Windows Boot
+> Manager does this) can then desynchronise against the shared object and
+> never observe a keystroke, even though GRUB and systemd-boot, which lean
+> on the base wait event, work.
 >
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
+> Create a distinct WaitForKeyEx event, and signal and clear both events
+> together when a key becomes available or is consumed, so every client
+> sees a consistent wait event regardless of which protocol it uses.
 >
-> doc/imx/habv4/guides/mx8m_spl_secure_boot.txt    | 30 +++++++++++++++---------
->  tools/binman/etype/nxp_imx8mcst.py               | 19 ++++++++++++++-
->  tools/binman/ftest.py                            | 15 ++++++++++++
->  tools/binman/test/vendor/nxp_imx8_csf_pkcs11.dts | 27 +++++++++++++++++++++
->  4 files changed, 79 insertions(+), 12 deletions(-)
+> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+>
+> lib/efi_loader/efi_console.c | 15 +++++++++++++--
+>  1 file changed, 13 insertions(+), 2 deletions(-)
 
-Sorry I missed this earlier...
+> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+> @@ -681,6 +681,7 @@ struct efi_cin_notify_function {
+>  static bool key_available;
+>  static struct efi_key_data next_key;
+>  static LIST_HEAD(cin_notify_functions);
+> +static struct efi_simple_text_input_ex_protocol efi_con_in_ex;
+
+This is a tentative definition that merges with the initialised one
+further down, so a short comment here noting that the real definition
+is below could be useful. In any case:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Thanks for adding the test!
 
 Regards,
 Simon
