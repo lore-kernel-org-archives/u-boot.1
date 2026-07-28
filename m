@@ -4,129 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF54C54F4C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82447C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:00:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B9F40608AF;
-	Tue, 28 Jul 2026 12:59:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4C858608D7;
+	Tue, 28 Jul 2026 13:00:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aVdtdpKnRdo1; Tue, 28 Jul 2026 12:59:56 +0000 (UTC)
+ id B4DfgcqanLNo; Tue, 28 Jul 2026 13:00:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D5AE3608AA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7636B608D1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785243596;
-	bh=koYc3bzfM/+fc53dngKYzt2TYX9zVljTftQOT6MDVUQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=XMXvSQ6Be8vu8T2xaNHel387n5aACx6hmNg26UJJqOiTwUgZiH/M5hgXlv6fUwW7C
-	 Hxj/8jVF/chTOPxR3NIggUCHp7WgBRlzcg5Kvk1qLCmxCdAxMlA+q0G+DmY9LjqeMT
-	 mhigsFiDZ2nM4fmHn1oiWbodhU5YjnVOcfSBceHH3lw9IMIiOfXYwYPRd65+xk4cvx
-	 0tVYV0wMZJl8qh/VOyLbb0BhURV+8U3yZYZn1bupQEFTaniax671an3xe3ZGpIuf+a
-	 u46CNTsZF48ENnjFkq0K1uKqonchGyfd4EjOFXwi448od+XQi4rZnGPyq63f3E2Kue
-	 RT5DxX3CYeNBg==
+	d=lists.u-boot-project.org ; s=default; t=1785243604;
+	bh=6iLgklbB9rgpnabiT2sJlzDJHKBuQ2w1eeMcTCCoDhM=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=lmrVv3R8nNLHW26Vft6o7b/N03XRsE/nbwem5n2UijERFfrty/J/dOWisB4pzmtuB
+	 05By4n13FQEQwLeBWJivRkAHRd9iNkpbw6COPQAuxawHUlAh29PREAaN+uqh3VTj1P
+	 PlAB9Y7RQQsOrfpPf/9dYRmMDa7q5svduG1WSe7PBx5TuwyU7uJQvDcjwtMpYJoB1i
+	 CMqeaMJgK8RHsftvG1iH0Q1WbPhUCEr8yDupBCGdN56wjn+uGlK/X1MifvcylQ1oXW
+	 /XEoaY47cQQeu13vl1XfIRWvgz15GgI629HFkuoVpe3Kljd4lef6hvNKLXW3Oy3VWY
+	 isgY+EehuxyYQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D5AE3608AA;
-	Tue, 28 Jul 2026 12:59:55 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DD990357
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7636B608D1;
+	Tue, 28 Jul 2026 13:00:04 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id ECF48350
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D00B881236
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CB6154087A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G8qlIAlXkUje for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 06:55:52 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1CxfaPMM1S6n for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 07:38:10 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 636EF80C93
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 636EF80C93
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 636EF80C93
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:55:51 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-69ffb48d599so2690451a12.2
- for <u-boot@lists.u-boot-project.org>; Mon, 27 Jul 2026 23:55:51 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C902B40871
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C902B40871
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C902B40871
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 07:38:09 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-69f7130b47dso6184166a12.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 00:38:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785221749; x=1785826549;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=koYc3bzfM/+fc53dngKYzt2TYX9zVljTftQOT6MDVUQ=;
- b=kNp5R3aoGos3ee3Wm0SBlFqIOU6tb4w/hbnCKlZ0Y4P66U3pVeWN0WtI84hO1SIM+m
- MyJgYScU5o6kf622qEs9FHffyUys84pVlNzKudkg/wAdpvGZH3azxhIiPyQ+ukut+i1j
- WMU95R+hz8iLEx80/qZxE/62sw1Y4rEX8M5YYEtDG/WbEbxtt6AlQvh+gGFaqa4FtNHn
- xk31UBejijhJqW/U2TeW9ZDEV3e0AwCBKN0LpOMQtRea9RBSSNrI+4smiEFgvc976KFe
- RbKfs+seAlZXVHDoBZL5IsdBHgN1cH6JNlQlWGrpGnHwvxR1nP3lDfA56bUnOPp7Hmiz
- kyCA==
-X-Gm-Message-State: AOJu0YxkZ8Wsd2HJWBnUqhB1AlplKkDAGOA0Ekr2IVcNKl6HBli2RrIL
- 7TG+tr+niGRC+IdvHDHsWnRAytQUadE2NLBcphVecPUVZz9lGkrweDiGoM8E9yMvL40=
-X-Gm-Gg: AR+sD123plmbf2iuzapx6KAEryaqidQUh0Mqs6jYpjcEd8XErzj/7TIG6l3lU29vaYq
- Re3KT9KTX/udyEgiB+K4bqfW5iV2PLHzBrhIjh9kowsON0BJ4l2kr2PXlOMR9Duh3dZtwWBA7Z6
- rJ9duzqhg9iXsv0tYMTn5lOGHlJCT4dXNtFEEPde5oJxBQ57GEi+UcruSUad1X42MmefkCQ+cqd
- q2EFS5MtcUVXaVfYsBisPL/O83EV9uA09VK97gPW7k+SeAWHZac+hr09mf7tbhudsCyKUy48Rwm
- zN02JzkabOLC+P6BIGX/JKLLTSwkpPwKUuXMwY4uMj2Flg4Gi9P/71dLDL+l1MgHWJftcbjzvaR
- 1h2aUQ+d1rMUmZoxDgO+OPWCzlyXff9+tut06/0xDYJM6NMZW9JJp3PznfRa2BJzu2Uz0Q3opmq
- NxPBekunwqGzMP4eCOv3t2X8HFloWcInEgfRzB9zcwdbB0LtuDU1/F+qSdW8ZqLG6rMjc=
-X-Received: by 2002:a05:6402:4516:b0:699:6415:751b with SMTP id
- 4fb4d7f45d1cf-6a034a6211dmr427948a12.24.1785221749436; 
- Mon, 27 Jul 2026 23:55:49 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785224288; x=1785829088;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=6iLgklbB9rgpnabiT2sJlzDJHKBuQ2w1eeMcTCCoDhM=;
+ b=KEG4Q2psz4zO/oIz0yRz2FFAWCglmhg8aoCbouJy9HiI6V0EhWFRRpBgg5I3ph8YFP
+ qpDFzVGYMCfmeHqZUK4E179xbYDa+GaYwi+BEdnQFv1cqi3KByc+tJWr/c0r4DwkIMmm
+ S0yZQT21mUasMvh7rhSjmgA3FpBw5PlUvGrERSFSh7VW8qX2sc0q/pI1yKn1UiE9414Y
+ pkjL8xQ0eRlPxL1I2VyjeK2kNT5xuPv2wVV4sk8edbaYo8ZmzArx06+EKtxhuRJmrW5A
+ vDwWMOUB5lRAOHpR88aglpK98XT7hlibwI/QGL9njubECQ1u938IXgKZcfRAM1VQT/1O
+ aH/A==
+X-Gm-Message-State: AOJu0YzMdYqmJKxYJyUQtB8xig6Jza9E3d7Tb05ef4hbYGEeEpbMB7iJ
+ 5yUXH4fMFM+ZsksqaaODGBAwLuvSgR7mCXenaNGCjOAF2jT4ESiey2gHxHDkSNLQSJ4=
+X-Gm-Gg: AR+sD13snJrySWnOD0bgYF6YA42t3eHfF0yoQGCOwpNmmInCyB/Ng0+RMa1CyC9pxnB
+ 58XXoI0yhpmD0OymyxaJ3hyX6Nzg+fe4iwcM+xqvvCRps0q/t7SeBqazzlE4mxOCNcGRPWgyHlc
+ HI9JcBsn/gpa25FjbUVdleJ6xRxNTtgEGmlk71PbZk8ceMjeAHNRPI1VzS2I4mNy3lKqntj6Zc7
+ nraXnTWs0Ug96BD8Wazi0HOTKyIm+gkAM3elD5W9qifO9zTh3pZDDGlPS6K/Zg5NyNURlbyjYRe
+ y8p1t/dKFBS3TaEQirM6t17B3/NzDpo4pVylBeWIBTOZvexsYJCnMVdXW5zGMJkZU/aOv0oMHfU
+ Xq89AWmyFwFOb09ttFuuEm5oXo63m0Cy3O7SMlEKGQWkCANbnM3191cbE1rwZRMSsNtlgxKVG2/
+ zQyC79QLYi8U2Owgw593PX3qRGb+xbK8ST6w4zKymV8K+DPcH3kowthtKP2t7HqsKUbU8=
+X-Received: by 2002:a05:6402:20db:b0:69f:c197:9e8e with SMTP id
+ 4fb4d7f45d1cf-6a034a345e5mr508896a12.14.1785224287782; 
+ Tue, 28 Jul 2026 00:38:07 -0700 (PDT)
 Received: from [127.0.1.1]
  (p200300ff0f038f00d97d5688120f3c08.dip0.t-ipconnect.de.
  [2003:ff:f03:8f00:d97d:5688:120f:3c08])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-69fb5746e08sm3493586a12.23.2026.07.27.23.55.48
+ 4fb4d7f45d1cf-69fb50bcfdcsm3654045a12.3.2026.07.28.00.38.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2026 23:55:49 -0700 (PDT)
+ Tue, 28 Jul 2026 00:38:07 -0700 (PDT)
 From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Tue, 28 Jul 2026 08:55:39 +0200
-Subject: [PATCH v2 1/2] fs/squashfs: fix integer overflow in directory
- table allocation
+Subject: [PATCH v3 0/2] tpm: bounds-check device-reported response lengths
+Date: Tue, 28 Jul 2026 09:37:52 +0200
+Message-Id: <20260728-tpm-trunc-resp-v3-0-8e20bcfb64c5@byteray.co.uk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260728-sqfs-oob-fix-v2-1-077d9f0e01c4@byteray.co.uk>
-References: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
-In-Reply-To: <20260728-sqfs-oob-fix-v2-0-077d9f0e01c4@byteray.co.uk>
+X-B4-Tracking: v=1; b=H4sIAFBcaGoC/3XNSw7CIBgE4KsY1tLw6suV9zAuAH8sGtsGKLFpe
+ nehbozG5SQz3yzIg7Pg0WG3IAfRejv0KfD9DulO9lfA9pIyYoRVpGYch/GBg5t6jR34EVeVkFx
+ JZag2KI1GB8Y+N/B0fmc/qRvokJXc6KwPg5u3x0hz7y8eKSa4ZrIUUnNihDmqOYCTc6GHYrqjf
+ BDZJyF+CJYI3tCmrKEtW1N9E+u6vgC5YozjBQEAAA==
+X-Change-ID: 20260723-tpm-trunc-resp-664a3babf1cf
 To: u-boot@lists.u-boot-project.org, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Joao Marcos Costa <joaomarcos.costa@bootlin.com>, u-boot@lists.denx.de
-Cc: Richard Genoud <richard.genoud@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, 
- Michael Zimmermann <sigmaepsilon92@gmail.com>, 
- Eric Kilmer <eric.kilmer@trailofbits.com>, Argus <argus@byteray.co.uk>, 
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Reinhard Pfau <pfau@gdsys.de>, Tom Rini <trini@konsulko.com>, 
+ Argus <argus@byteray.co.uk>, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Tue, 28 Jul 2026 12:59:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785221749; x=1785826549;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785224288; x=1785829088;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=koYc3bzfM/+fc53dngKYzt2TYX9zVljTftQOT6MDVUQ=;
- b=TdR5SI9x9+FwyztgUTUQEPWXvZ03+StrdNfl+Zp1k+cPgcPWK0AOx7JGGfGne50Wd7
- urTjo0qI1W5rmskRipaU0V5tDW3oRCwrjP1xR8yy/bCg9PH0hxk44XkbUUD9AKi8NmVT
- TGzZicIeRoLVd5PpFl/HChYpQOTla1GrWVys6ak5S70aVsGJnpxvbhQ1zbS//7YyO2eb
- 8PrR9paWtu38dYMT1GLOuGhI8WCOrv7SCiP3bRE0TDrTfZSCTBxznEYToJ6Btxjd1rr7
- /s/c9RvSocSA2jstw/KOenC0h/m0x80fdtFF+BRZZKCrvjcXdSEn66w782fIow2CD4Z7
- WJrg==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=6iLgklbB9rgpnabiT2sJlzDJHKBuQ2w1eeMcTCCoDhM=;
+ b=cDwQQij7z3fKIMx8a6N2/6F9clh8ejG4YA22aVTz9YAB9MIJPRYQDOu3fliRVPRPr6
+ IJ7wI5i8jj8F2HxtT5VaCScdTWn8pywmjf8GQYVQt6/RF7Z9Iu3KYihWxmMWVnMsz0Fi
+ VWU0sFDdMiEulT9bL+CGehruWn5YqdSCvmN1jgFbAh3E6ZFByUm3pibPHO+ZdZJo32Ij
+ oN2oV2oOD6dV6UhrSiw/vq/MvFebn7hCejN4lKf1UcIKPL5vjHzVK3jRChc25KCL8LC9
+ pkAPe6J4s1l/fD8dvedsjVYPjIWeFeGxnPeRHDP53nLoGB8CiPFmLRTV8S05xL45Iqf1
+ i/qw==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=TdR5SI9x
+ header.s=20251104 header.b=cDwQQij7
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,66 +137,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-sqfs_read_directory_table() allocates the directory table with
-malloc(metablks_count * SQFS_METADATA_BLOCK_SIZE). metablks_count is an
-int and SQFS_METADATA_BLOCK_SIZE is 8192, so the multiply is evaluated in
-int and wraps for metablks_count >= 2^19. metablks_count comes from the
-attacker-controlled superblock (sqfs_count_metablks() grows it by one per
-2-byte metadata header), so a crafted image under-allocates the buffer
-while the fill loop still writes metablks_count metadata blocks into it,
-a heap out-of-bounds write. It is reached by listing or reading the image
-(sqfsls / sqfsload). The position list allocation on the next line has the
-same unchecked-multiply shape.
+A TPM reply's length is taken from the device and only upper-capped, then
+several callers use it unchecked: the TPM1 OIAP helpers and the TPM2
+GetCapability parser subtract a fixed header length from it, so a reply too
+short underflows the subtraction into a huge memcpy; the GetCapability
+parser then copies that many bytes into the caller's buffer, so a reply
+longer than the buffer overruns it. Because a TPM sits on a physically
+accessible bus, a cheap bus interposer (the kind used to sniff
+disk-encryption keys) can inject such a reply, and on the TPM2 path this
+parsing runs during measured boot, which is exactly the physical attacker
+that measured boot is meant to resist.
 
-Size both allocations with __builtin_mul_overflow() and reject the image
-on overflow, as the disk-read buffers earlier in the same function already
-do. Set the error return when either allocation fails so the caller does
-not proceed with a NULL directory table.
+Patch 1 checks the reported length once in tpm_sendrecv_command(), so every
+command that reads a reply rejects a too-short response, and keeps a buffer
+bound on the GetCapability properties query. Patch 2 adds regression tests
+driving the parser with a truncated and an over-long reply through the
+sandbox emulator.
 
-Fixes: c51006130370 ("fs/squashfs: new filesystem")
+Based on v2026.07 (fdfe2ec48d5c). A reproducer is available on request.
+
 Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 ---
- fs/squashfs/sqfs.c | 23 +++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
+Changes in v3:
+- Rework per review: check the response length once in
+  tpm_sendrecv_command() instead of at each call site, so every command
+  that reads a reply is guarded. Drop the per-site lower-bound checks; keep
+  the GetCapability buffer bound.
+- Drop Miquel's Acked-by, as the fix changed substantially.
 
-diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index 0768fc4a7b2..3aadcdd36ec 100644
---- a/fs/squashfs/sqfs.c
-+++ b/fs/squashfs/sqfs.c
-@@ -852,13 +852,28 @@ static int sqfs_read_directory_table(unsigned char **dir_table, u32 **pos_list)
- 	if (metablks_count < 1)
- 		goto out;
- 
--	*dir_table = malloc(metablks_count * SQFS_METADATA_BLOCK_SIZE);
--	if (!*dir_table)
-+	if (__builtin_mul_overflow(metablks_count, SQFS_METADATA_BLOCK_SIZE,
-+				   &buf_size)) {
-+		metablks_count = -1;
-+		goto out;
-+	}
-+
-+	*dir_table = malloc(buf_size);
-+	if (!*dir_table) {
-+		metablks_count = -1;
-+		goto out;
-+	}
-+
-+	if (__builtin_mul_overflow(metablks_count, sizeof(u32), &buf_size)) {
-+		metablks_count = -1;
- 		goto out;
-+	}
- 
--	*pos_list = malloc(metablks_count * sizeof(u32));
--	if (!*pos_list)
-+	*pos_list = malloc(buf_size);
-+	if (!*pos_list) {
-+		metablks_count = -1;
- 		goto out;
-+	}
- 
- 	ret = sqfs_get_metablk_pos(*pos_list, dtb, table_offset,
- 				   metablks_count);
+Changes in v2:
+- Use my real name in the From and Signed-off-by (Miquel Raynal)
 
--- 
-2.43.0
+---
+Shahriyar Jalayeri (2):
+      tpm: bounds-check the device-reported response length
+      test: tpm: check malformed capability responses are rejected
+
+ drivers/tpm/tpm2_tis_sandbox.c | 28 ++++++++++++++++++++
+ include/tpm-v2.h               | 10 +++++++
+ lib/tpm-common.c               | 16 +++++++++---
+ lib/tpm-utils.h                |  8 +++++-
+ lib/tpm-v1.c                   | 59 +++++++++++++++++++++++++-----------------
+ lib/tpm-v2.c                   | 52 ++++++++++++++++++++++---------------
+ test/dm/tpm.c                  | 42 ++++++++++++++++++++++++++++++
+ 7 files changed, 166 insertions(+), 49 deletions(-)
+---
+base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
+change-id: 20260723-tpm-trunc-resp-664a3babf1cf
+
+Best regards,
+--  
+Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 
