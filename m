@@ -4,95 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E67AC54F4C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4173C54F4C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 13:21:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EF8D060895;
-	Tue, 28 Jul 2026 13:21:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 921A8608AD;
+	Tue, 28 Jul 2026 13:21:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sn4JEV5vi4lZ; Tue, 28 Jul 2026 13:21:02 +0000 (UTC)
+ id 5DI1FqnI-md1; Tue, 28 Jul 2026 13:21:05 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D2EAB60887
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EDD3C60890
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785244861;
-	bh=TaliDTzxnTUNXqPFJDu4nG95ht57hYF+ipQQtMB7XdQ=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=w7mM6UgNSygMsCcvsPYA9lShkoqZO1iYX2JrcYxty/nytoMW62AZHhLdchZpVL5Jd
-	 arFk0r7frsEeWRmOKEG80vwceqqAy1gsfJGkV8CvEZPjfa4+oyBEAAFGIbkv2dU0/z
-	 o2qgA+v/brDcLdIQEQcBIn08OHDN5zKPfVhuHQGEclg0YG6Btn2SSbXP1iNlX39h4X
-	 AVOuTAMZiGxaEtEdtzSS42i85uvLStje5mD3Ky5nUx0nW0FdGYkH8XF8padY3kOfrK
-	 Qhh2oWZYHOyXy6i40OxO2SqsrZsfPNXRzIS1Vy7liSeXXYaR/wMNj73uoQI+1+IwGq
-	 HbFkOCtCYu+ow==
+	d=lists.u-boot-project.org ; s=default; t=1785244863;
+	bh=mjSewuVK/LliTSJ5TeIkELL6oetAfiM89wlh7uvovgE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=U3FUdurHXRxbM63dIAuHbWU7X6fKzJzv5HBI+Z1A9jyJhdlQ2s3R9P1sHn+W+RdS5
+	 dGYLLO3JvIgpKtctE+0K3jIkGpORPnVz6dc9Dmgm9gL4b6vnmralyyO+vxu8v2j5tA
+	 Rydg1/lqLXGUSrM2XJMVbB7MDydbjHT5XKBOlu620lMYFZTLF8nrGvmvC5VxrUjNIX
+	 ses/pQNtDeeCPiASreIiazCyANl8OiY+zXOyyHoTvCtRXDVOXD9dRildk/YRNFh7/N
+	 eMUhBiWR9UaDjoL+9df68+sjXMsN5BXC8cPqftKNmZqaRsh21dO68ZQNSIr0Sluiyz
+	 5TsKemhsmLSpA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D2EAB60887;
-	Tue, 28 Jul 2026 13:21:01 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 563ED194
+	by smtp3.osuosl.org (Postfix) with ESMTP id EDD3C60890;
+	Tue, 28 Jul 2026 13:21:02 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A1E4545B
  for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 13:21:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3B78760887
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8718340935
  for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 13:21:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A9tR1iCfy1iA for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id k7S29DykgiB8 for <u-boot@lists.u-boot-project.org>;
  Tue, 28 Jul 2026 13:20:59 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
+ client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 5884260884
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5884260884
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5884260884
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 13:20:57 +0000 (UTC)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-49550ec592cso6212955e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:20:57 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6FB8340927
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6FB8340927
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6FB8340927
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 13:20:59 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-49550ec592cso6213225e9.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 06:20:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785244856; x=1785849656;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=TaliDTzxnTUNXqPFJDu4nG95ht57hYF+ipQQtMB7XdQ=;
- b=BBr0h5V3GQcojRFwTdPwCn4YGufeJM8tCOtOnGWI5Zsamvnn2mhf3yCo9KJsEvLGVu
- LXm8RzbcZf449/GvpDILngYZ+uylz/Vt9vGRPrtrAwivKheD7Oz7pEi0aRSGo6gtwpRx
- RPyTv0RzeVI0icRTCimhYGl/dZ5UH/DuqiNc5aCGSF6ftQDnFlCxRLn4ML5vhe1rNgrx
- wS7zwYdrjE/p5XukvOwmScZlKkeBb7pUFChSzGT9kUZ2icuF90I4D6pOfsedavE1oAQb
- kMPeJLEoDyiuGuc6zGPxJhKCrcQD41c5zm6/EUMu82lj/56tlonJDTFUiwz00cXV7scQ
- lrdw==
-X-Gm-Message-State: AOJu0YwJYE1v43f7Lp7n6lI7oUvGuylj/MtKdhcJn7Hhlms6PQ+a4JLV
- SFaRb6Es527dnFB9wCgS6Eodky/oYkdrHG1BdDCKkmEM5J5pq9B+lg5CUzsfPInLuas=
-X-Gm-Gg: AR+sD10RqL3NNGEpDblgawR3JdrH/aFGIEvWTNZUhKpjt3MWjB8iWfFyrO6atUrdTVE
- jw5OUbvrTYNb7xLSXnmOSXEVAUkoRmsRmlEDH/Q2SRaj3tY13FUOiQdtES/3hhaIA6W1+/df8ND
- Adxy0BXZMm01RYdkeo0o/4Mw45JH8SuKbIl2+ol1GSr7NPijrGVMgKhvjzTzKQNligqI3k0Ddc0
- SJJILwFOZUVj331pP+BvgwDeDTvD51SLh/nR42HFHIIVNWJ/tyFreO1gbQ3SALIr7mOT3fpsKiY
- kprW/augNGVs/g9fA0XYKXS6IOf2eoK+wz4dyCm+4oHGb0qUd9oZVwJCWB+SwmILCCF1fD7uY2A
- S1keex6/6YoYxhKfyM7OcCC8iUxU1VERKa1Pd7OkUbeZSFRv8dIRXVOdfWx7ZHFVkIZD0WiRGDA
- aDYGukUKFh3Gyhgi1vNYZ2DZidQfLstN650rDr+Yb7w0qsGzxHCD4hUDJXFfU=
-X-Received: by 2002:a05:600c:46cf:b0:494:1f7:8057 with SMTP id
- 5b1f17b1804b1-496c641e6dfmr26637785e9.1.1785244855627; 
- Tue, 28 Jul 2026 06:20:55 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785244857; x=1785849657;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=mjSewuVK/LliTSJ5TeIkELL6oetAfiM89wlh7uvovgE=;
+ b=dEz5ER3piZYdSasoFS3oFFnQt0t8qZ9Paxqhnovg+5FJTeSuNHiOZ0DLhESXpEMjDX
+ 0wAjk24mGuZ3fBAaCD/6Fd9agP0OMG4co+2cfELU3PfvBtHlQgcdxvEKL+87U9Ae31/X
+ 3TksDaPMOxkqYv6c23405gWQSaPYo7d9kw7f07ngQdb+xFhODcGWIcPvvwbxc9xcJVwo
+ nFKTCfs+A4Wpr46WArZ3xIrrUFlROTT21TrIlI+dVtW8ClJ+c1gTaDbtTOJfh8qiXDFn
+ nwh/lWPRbbq+H5kQsIemTqb7haC8USn8jqCx2v7CMkFA/nCLLaEkrF0wgjYEqRdLkk2S
+ d13w==
+X-Gm-Message-State: AOJu0YwQwCjpBsAFDJ0kZNdft3ynr90KjKTMNPaYoxs1WInJTElaidUX
+ p7iYquCZHP5LCaQppxiBiaKZSUTe/EFDWH0zt/ePnzWPa0ue/7bYGxQbEICxYjl/zVc=
+X-Gm-Gg: AR+sD10e22Dh7frpniW0iGmJicF019p1w9G9wtxd0U9zPJQZdLcQ1WDH2AiPLlO5Ba4
+ J3cZq4QpjSOS+orhDfMd8FPZxaQY0GGi32UQVU/3j7j2ZJWb5i46IfURHOq9TFzoOvcytJJzmV6
+ kYS83Vp7P6z0Xi+ZwZJWYgmJM6Tpc6hBxBD9J25odRm+rborn75DckW9Bh73m2lwbi8VKW7qnJ9
+ W7tRoJTJjngWbrHDPsai29zf1INDaav28+6xFB2+Sy4UldicKTRCo/Fs2gp1OeOmOxuocc3Lb/+
+ 1UW3IcPVnsUzuBLBdM6yQvvyzYO+TcqEpm8OMFaHOPwqpAFhv/6O0B1MMprDkBcov/e6eYWp2rn
+ sbCzP60EvX7Jr/jaqFx8MoaMsjeJwV+uEVsk6Umb6FyxQZxuykIB8Mu8Ad2IUK3QXYx2Kg+r/Id
+ a2onPb+eVitkEfAB8Au2hYUBaKt1X/Aw5v63tj1gMhRk7h3kRw1ZJNzePRBPzvdBH8bfamZQ==
+X-Received: by 2002:a05:600c:3103:b0:495:6934:4146 with SMTP id
+ 5b1f17b1804b1-496c6575ad5mr24099795e9.11.1785244856983; 
+ Tue, 28 Jul 2026 06:20:56 -0700 (PDT)
 Received: from [127.0.0.1] (host-87-0-90-136.retail.telecomitalia.it.
  [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4957bd9e980sm306898645e9.0.2026.07.28.06.20.54
+ 5b1f17b1804b1-4957bd9e980sm306898645e9.0.2026.07.28.06.20.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 06:20:55 -0700 (PDT)
+ Tue, 28 Jul 2026 06:20:56 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH v2 0/5] firmware-owned devicetree for EBBR / SystemReady IR
-Date: Tue, 28 Jul 2026 15:20:42 +0200
-Message-Id: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
+Date: Tue, 28 Jul 2026 15:20:43 +0200
+Subject: [PATCH v2 1/5] efi_loader: bootmgr: preserve a passed devicetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNTQ6CMBBGr0Jm7ZhatCSuvIdh0RlGGSM/aYFIC
- He34AFcvuR971sgSlCJcM0WCDJp1K5NYA8ZcO3bp6BWicEa60xhHDL7pAiOfRyC+AaFKKA1jnN
- DkvvcQ9r2QR762bv38sdxpJfwsMU2o9Y4dGHej6fT5v37mE5oUIqz5apynuRyIz+/lYIcuWugX
- Nf1Cwaw+0bPAAAA
-X-Change-ID: 20260706-ccaione-upstream-ebbr-206c30be3a3a
+Message-Id: <20260728-ccaione-upstream-ebbr-v2-1-4efb529140d6@baylibre.com>
+References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
+In-Reply-To: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Ahmad Fatoum <a.fatoum@barebox.org>, 
  David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
@@ -109,24 +108,24 @@ Cc: Ahmad Fatoum <a.fatoum@barebox.org>,
  Vincent Jardin <vjardin@free.fr>
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785244856; x=1785849656;
+ d=baylibre.com; s=google; t=1785244857; x=1785849657;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=TaliDTzxnTUNXqPFJDu4nG95ht57hYF+ipQQtMB7XdQ=;
- b=QNwoPf1KNi1cRc1jAkU3NKK7vvg+V834BCtISMwgMIQKYDCQaSsqdaC/1AnOT3I4gQ
- uq7qkC9mit/ZWbjaG+NcYfD+gxPZiiYPWn51Ty0cLAUpltMXt58IniXxDzjCG6aWfegh
- FPNBISD+Ru6n2lH3vMaVGF9tX91ABGnqsAkmifJmR80/owMx9Ij+u4Rz9ytJptVOMa8w
- 40DLmfKL5Xcu03ElLQYhXJijsyVTN2nozLlVh/pzXiaa28nuKW7Sp2yZh6H1vKyAK6cD
- jYqKgJQ7tx2FrgyV0cJdGYeaXM6cZGiQipT4jxir9j04nsDPMUd+vUeC/7ZnEYe341Ig
- 1mGA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=mjSewuVK/LliTSJ5TeIkELL6oetAfiM89wlh7uvovgE=;
+ b=eKWKM3CDWqUx6gc5Ks4Fgq2Hl9LS1qpygzoJFQtr+IlcjOKlHXK/WsKSlsT8uhPVRe
+ bdyTsvMfgoecr0JD3J+p9hucOfr3BjpH91euSy80EpyZNc1jtB12zNIdBByiBAl7wJ7Z
+ T8yQP6EV9FyW3yYCCEchmoyNTKX90RBsUgmFxSL1mRwWhicT4oe/ovLfW5tnSFV1w/IK
+ y6mqM4pLjd+gwzi6Ws7oCjzS3fdY1RzvsiQ47SB3/j8M3ca9gnTQcrj2bOVxOSy/xRar
+ pzX0v9dN4W8XHgtPdAVfwSM/mvwdDhk7lqvwMbkNAxY5wVzCu/pALAmnTU1zgqR/mQt6
+ 50DA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=QNwoPf1K
+ header.a=rsa-sha256 header.s=google header.b=eKWKM3CD
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,97 +140,66 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-EBBR-style firmware (SystemReady IR) owns the devicetree: the OS is
-booted via UEFI and receives the devicetree from the firmware through
-the EFI configuration table instead of shipping its own. U-Boot has
-the handoff mechanism (efi_install_fdt()), but no generic way to say
-which devicetree the firmware owns or where it lives. As a result,
-platforms carry downstream commands to provide it.
+An FDT explicitly passed to efi_bootmgr_run() is currently replaced by
+the FDT referenced by the selected Boot#### load option. This makes an
+operator-supplied devicetree ineffective whenever the boot option carries
+one.
 
-This series adds a generic loader for a firmware-owned devicetree FIT on
-a dedicated GPT partition:
-
-- one FIT ("fdt.itb" by default) carries the base devicetree and its
-  overlays. FIT configurations describe the valid combinations, so a
-  signed configuration authenticates the base, overlay set and ordering;
-
-- a standalone 'u-boot,firmware-fdt-block' control-DT node points to the
-  media device through a 'firmware-fdt-store' phandle. The node selects
-  a partition by type UUID and/or name;
-
-- 'fw_fdt_part' can pin an A/B partition and 'fw_fdt_config' can select
-  an explicit configuration. Otherwise compatible best-match against the
-  control devicetree is used, falling back to the FIT default. Configuration
-  chaining is rejected so each combination remains one authenticated unit;
-
-- one staging helper owns the EFI policy: use fdt_addr_r, enforce the
-  size cap and distinguish an absent source from a configured source
-  which failed. Both the EFI bootmeth and EFI boot manager use it;
-
-- once a source is configured, any failure to assemble the devicetree is
-  fatal rather than silently falling back to an unverified source. Every
-  image is verified up front so a corrupt overlay cannot be silently skipped.
-
-The loader itself does not depend on standard boot. EFI is its first
-consumer, but the source lookup, FIT selection, verification and overlay
-assembly are generic.
-
-Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
-as an independent behaviour fix. Patch 2 adds the loader, binding,
-documentation and shared EFI staging policy. Patches 3 and 4 integrate
-the EFI bootmeth and boot manager. Patch 5 adds sandbox coverage.
+Only consult the load-option FDT when no FDT was passed. Document the
+resulting precedence so the explicit call argument remains the
+highest-priority source.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
-Changes in v2:
-- Make the loader independent of bootstd and describe EFI as its first
-  consumer.
-- Describe the source with a standalone compatible node which points to
-  the backing media through a phandle.
-- Rename 'boot_dtb' to 'fw_fdt_part' and document both environment
-  variables in doc/usage/environment.rst.
-- Factor EFI staging and fail-closed policy into one helper used by all
-  three call sites.
-- Track the assembled FDT's ownership explicitly and own the FIT filename.
-- Select FIT_BEST_MATCH and add explicit compatible-selection coverage.
-- Split the passed-FDT precedence change into its own first patch.
-- Build the entire sandbox source topology at runtime, store mmc11.img in
-  persistent_data_dir and add staging, configuration-chaining and corrupt
-  base/overlay fail-closed coverage.
-- Link to v1: https://patch.msgid.link/20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com
+ lib/efi_loader/efi_bootmgr.c | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
----
-Carlo Caione (5):
-      efi_loader: bootmgr: preserve a passed devicetree
-      boot: add a firmware-owned devicetree source
-      bootmeth: efi: use the firmware-owned devicetree
-      efi_loader: bootmgr: install the firmware-owned devicetree
-      test: boot: add firmware-FDT source tests
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 8c9a9b5eb56..785484abf23 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -1294,9 +1294,9 @@ out:
+  * efi_bootmgr_run() - execute EFI boot manager
+  * @fdt:	Flat device tree
+  *
+- * Invoke EFI boot manager and execute a binary depending on
+- * boot options. If @fdt is not NULL, it will be passed to
+- * the executed binary.
++ * Invoke the EFI boot manager and execute a binary according to its boot
++ * options. The devicetree precedence, from highest to lowest, is an FDT
++ * passed in @fdt, the Boot#### load-option FDT, then the distro/ESP FDT.
+  *
+  * Return:	status code
+  */
+@@ -1305,7 +1305,7 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 	efi_handle_t handle;
+ 	void *load_options;
+ 	efi_status_t ret;
+-	void *fdt_lo, *fdt_distro = NULL;
++	void *fdt_lo = NULL, *fdt_distro = NULL;
+ 	efi_uintn_t fdt_size;
+ 
+ 	/* Initialize EFI drivers */
+@@ -1320,11 +1320,13 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 	}
+ 
+ 	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE)) {
+-		ret = load_fdt_from_load_option(&fdt_lo);
+-		if (ret != EFI_SUCCESS)
+-			return ret;
+-		if (fdt_lo)
+-			fdt = fdt_lo;
++		if (!fdt) {
++			ret = load_fdt_from_load_option(&fdt_lo);
++			if (ret != EFI_SUCCESS)
++				return ret;
++			if (fdt_lo)
++				fdt = fdt_lo;
++		}
+ 		if (!fdt) {
+ 			efi_load_distro_fdt(handle, &fdt_distro, &fdt_size);
+ 			fdt = fdt_distro;
 
- MAINTAINERS                               |   3 +
- boot/Kconfig                              |  24 ++
- boot/Makefile                             |   1 +
- boot/bootmeth_efi.c                       |  45 +++-
- boot/firmware_fdt.c                       | 420 ++++++++++++++++++++++++++++++
- boot/image-fdt.c                          |   3 +-
- boot/image-fit.c                          |   9 +-
- configs/sandbox_defconfig                 |   1 +
- doc/develop/uefi/firmware_fdt.rst         | 112 ++++++++
- doc/develop/uefi/index.rst                |   1 +
- doc/device-tree-bindings/firmware-fdt.txt | 150 +++++++++++
- doc/usage/environment.rst                 |  11 +
- include/firmware_fdt.h                    |  95 +++++++
- include/image.h                           |   4 +-
- lib/efi_loader/efi_bootmgr.c              |  39 ++-
- test/boot/Makefile                        |   1 +
- test/boot/firmware_fdt.c                  | 411 +++++++++++++++++++++++++++++
- test/py/tests/test_ut.py                  | 181 +++++++++++++
- 18 files changed, 1492 insertions(+), 19 deletions(-)
----
-base-commit: b635d43bca429500cb8ef20aa151cb5773b9a8a5
-change-id: 20260706-ccaione-upstream-ebbr-206c30be3a3a
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.55.0
 
