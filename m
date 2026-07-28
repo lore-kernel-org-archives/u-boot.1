@@ -4,138 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A97C53219
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BB76C53219
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:17:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DC04E40975;
-	Tue, 28 Jul 2026 11:16:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CCA5940986;
+	Tue, 28 Jul 2026 11:17:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A6QwuTWSkZHf; Tue, 28 Jul 2026 11:16:58 +0000 (UTC)
+ id St6MK_YL6kOz; Tue, 28 Jul 2026 11:17:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6FE204092A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B75A04092A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785237418;
-	bh=L5i0pKIVcDi/hdW3U6upOZjctYD9DGAEyt3IWf/EjDA=;
+	d=lists.u-boot-project.org ; s=default; t=1785237423;
+	bh=h1OQmBGde7W40EXUgcySyT4M5HKmse3xifKxzWd87Qs=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=C9mobUWroNr7LX6Sx92QG4yfZI285nohl5VlODvZfHw/fqMXN43g+9WytFrunDrY8
-	 677AefSxlpw9QhFbZT11uUL+7aaJbBf6c9+3lh2rN6TjNPxscdS6DN63GMmmwqOxlw
-	 k7qVaU/BBnvlMtT3QY84aARLdFz7KNNMis9fDHJAfNP2riiXotKnkRDFDfy5rzFvv4
-	 BuCeza0fHyEQfwjvzYn2CrkDB0VaRXME3VxRpsgf7hd06OLNv+523ByK8sJ5hQHQ+q
-	 OFRoPD0UcwdBg/uXDq0rPlm3IVB9UOTDf7Tj0Tolv9/aZ6qlJZUmOREtMR6vwbm3wB
-	 1xnI02nZ447UA==
+	b=TjpsgN2KReewiVlsRJuwaI+wrRTHnDcf3nR2UT304P7o+i7YZsCfh6gmbTpkM9mR7
+	 1J40RLI5RDBrnw+45Bt6P5uPkF36tt6WwZmz/1PDZIIZUy3153dJOnnfYk+T7y8HEI
+	 uCUG3wa2Cim5J/7R/myL3MWjC7RjHFx7vi83eQiKebDQq+b/OH/6EOgKIh0z3q/GUE
+	 j9IUQBo9Bze7pUKqkIRgaJVVA9Nmyn2Ozpx5eh+tgid5bLV53mvZ+bAuWvoZ3LEsg3
+	 +OcTQv1Q4yIQV85xB++m/AD/clwIkUa2soEdVyuYwSpqD+cM5xqk+B8js4g/RBp30x
+	 hJzoudFoh5j4g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6FE204092A;
-	Tue, 28 Jul 2026 11:16:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B75A04092A;
+	Tue, 28 Jul 2026 11:17:03 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id A70E842A
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:16:57 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 74336350
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8D45D60724
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:16:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 66CD2607E3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uZRByhxvcNBk for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:16:57 +0000 (UTC)
+ id qbjW0e1BZwGY for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:17:01 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 5B689607B6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5B689607B6
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 030C660724
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 030C660724
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5B689607B6
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:16:56 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 030C660724
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:17:00 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C05708494B; Tue, 28 Jul 2026 13:16:52 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 6C17C8493F; Tue, 28 Jul 2026 13:16:59 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E19C848BA
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:16:50 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c197e7e4e94so634838866b.2
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:16:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785237410; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id 65540848BA
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:16:57 +0200 (CEST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69f7fa1c548so4909504a12.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:16:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785237417; cv=none;
  d=google.com; s=arc-20260327;
- b=DNOj591nTnF1DEayQD11coyTGsImWR7SAdBdUnYmP1MvueQj1XWWjST+yUjcEdrQXX
- pNQNSx06+g2HFqqZeRVIOhTF+si9YWlxednhOQ+smqClzwft+Q1aIB5tpdhJBuNxcOPC
- r8HurDE/6ph7Pcklqsym/lrw4jBffgC07vVIqQZd3rA2lIo6svcjl2WqKjVncLGmMxQw
- Vp4zNhMLwR8ttBAFA4saTVTxY9OrWGY4Bp/zWaspbc+ZaFvN+sCnivXtUL96yVUjaadN
- xWV1jwuDe3wpmWbnkHupYXftFQic19RMNgnAVPLmUzpNvL1De3tX4+6ZQzk7L9+cguOG
- 7dSA==
+ b=BeydyLGw2AFmtuQ77gUUE2dYdz96UvaenCJMpi9kRXMxL5/tUnVPfi3kSjdEw/f4np
+ n/ZWCNeqss/qQgRZ/gakxmRDcuC7YGfqdtFXAAGHPF7ECd6uDdv213FROvhTBWwME34K
+ DMMn+J1gCdznmUEFS8fl6H3J3xf1qvv6B+EwahkGfyIDMsa4o97SBAALhP8rLNggaSVf
+ lIoiLajKRREYKHsBGN3+KuFpQIVdBB7+gsdMyHCfliL/HobTyf3g9ulE/8Ia89IpPNm6
+ jPDP4PaI7qG7rjlUgxRzzF+pM4rbG0KTe1mw5Vcsw4gEawIvv3yOsxArDg+Mqp55zXEZ
+ oIwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=L5i0pKIVcDi/hdW3U6upOZjctYD9DGAEyt3IWf/EjDA=;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=h1OQmBGde7W40EXUgcySyT4M5HKmse3xifKxzWd87Qs=;
  fh=DXUE9OJaaCgaQkmrtI0x9tzf1uYpca3++Vfo8aoG6Uw=;
- b=U0zVabvPR4B+EWMQxGFtvS92UuNhLt+52k1rPrX6GuyE/T0Oh12LMpCUxZVsW277E2
- x4CQ7lOK1fE8NyNxBWSMvEuarzxCzLxsyB6+fhF7sR3vvB97TMXw9V2KjMXsk8zVz3YX
- RC+G9F4b0kmSWZYe1+5hlgQr1mZM8thqtQ7GA8Jcd0Ec7fhC4MiEUw1bN4rligHgsC2i
- YCBnLsPmN8RlCOlXA7iEVH4/RwCtasvQRJVGdqIYiNNbIGt2DlrKx/zjfF7fsRad/JIX
- FjFnlV23pSVFJoNdIjyz6m1/0P45bS54hu+EaAORQHM8jdIzhW2ugUtW0QkGXto/BHer
- C9VQ==; darn=lists.denx.de
+ b=h+XwBtOkpUHtJFnv34ZqLaRYlcxUbolOvYD250CdI87V6nZbsiB6nqvNtP0vNmffac
+ rFgtGoJeTmX/a8pCW3428pCKD16GC/JFC/UpNWcoe10OV5huTZd67OrdMtq3K6RfKha9
+ LULMqjKchcQ/bsqCHzzCw0euex9mGmLTCZKeJSfDgVcQJIc1JK/o5d0ciDbvU8324Wwb
+ VNlt6XWSDd8y93m54toSXBlfk6X5E1yepPJo5vpV6/SwwCGx5fGHpMCf8irvbY6CLqVf
+ v2KGcX2jpiQFaC26KfhVFit902q7jMXmog3cjm0tAV7UBOrBFD9Us/Sk/VuHEHAVZ79p
+ wMLQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785237410; x=1785842210;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=L5i0pKIVcDi/hdW3U6upOZjctYD9DGAEyt3IWf/EjDA=;
- b=pIBnxiVCiCdORKRMjc46XaQ0Pd1hgSBs9JU/9t1JIskUzNb7rx5YZEK4ByjepWo1g6
- HMKDQZ2AzJVoCMH+5hJpTu5ZLDt6V7xxN9SzPX/xwUNCvuT26gflhrI2KBaerVdm9XbE
- ubUahTh6xlM/wCRPB97b10xMqsA7uCCvG5gbRZJPom9G/MRoLmCUvl36fX8alLO3888q
- KiVw0klXPo61LXUGwJhkPmFQGG27h7lWnPZyLctSFc+n0rAIxnZGzTFDfC1futscdV7D
- mRAH2wuM7pVtL0NL0HrzCyw4RZJTxievfx8MG0nFctM5ZKUa4oz685sv1MGpmEjhTOzL
- 9isw==
-X-Gm-Message-State: AOJu0YwQuQ4cRGf+NRkwP08TEzQueG8Lq04905YgXUTrYgkk7PXery9a
- c5VairaAYD2jhWzqP/KugBAPxOVC3ynCOXWyyeROG5cK1zCDgDockGpj4M8A9c+6UczH18ECI+J
- BP8dDEuMCuc06OTxYQMFPD6n4V/pVQSMJP3LxRKOHquWhnCVHV+4=
-X-Gm-Gg: AR+sD11MFJX3MwjOpi2f2YvcRur06codhJ69Cd0STmvGOP4jIm1Tx0MaW/1GeuN3ilP
- gHZqNjnVoWIqan0WsNXBKV/s8/F1Be8HF4RE4RPAA7dTuitIRybenekcoGyOPe9yxUyHyNk23dn
- fhjuLEg8uhn4R4y2FwXiUnLvdp42qkcpk8ERh2LTARRaGkoQ6PHX0dlyQ18SOcDB6pqezdyb1CX
- HC5hk7q5DNC6MRVrY4xQ0u9cTU9ANFslyhnYKjQmOIFuaCPAxjicrGztf0f
-X-Received: by 2002:a17:907:a688:b0:c12:7b74:7812 with SMTP id
- a640c23a62f3a-c1f724889f1mr100220666b.59.1785237409808; Tue, 28 Jul 2026
- 04:16:49 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785237417; x=1785842217;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=h1OQmBGde7W40EXUgcySyT4M5HKmse3xifKxzWd87Qs=;
+ b=q+hGuyeu6t7Fgn9oQQFZ9KCLzzVjtq8nywQW4RzAa4HifiKk5VEeVaDdLA7U2aMF1o
+ 372reWkrqW9i5wQTy5HjS4I7+zVtW5Yg1JVjj2rB25p+MGwo9VioShnFX5g9XMnp/CrB
+ nRKZ02Z/fdBNF2jlnSv9774D9YBvQRMfBz3jyvjLacSRWqh79fAtxpVzjP7WAmi56zsU
+ 1JQHX4ut8yLEMtnror6euHqUIMRm9ZV2w3yaJ4djZhn3usVfodrlMV7f/wZF1GEyp7jc
+ yz3efNH2xElTb75noWxf8ZUyQzbAIxoBDcnWGYPDPNvrxVgzYigAwrdvuq7Rg3FjGcfh
+ 9hXQ==
+X-Gm-Message-State: AOJu0YzTHVhMiOEGXZwZ4FS2mfRGHKLwxhqap8YzeZeU/6vHb9ygi4pX
+ /eSX4SZ00iYvmj1bMYeBEmNUzyMw/y9R3uC1DiYlwjWJ3e/JPYG4TQnbHm1gOqND9MWWsS7hiLq
+ OXBCcKbHrKqgmc4q0WJOmXkzwAh3NuyT7T1z7Dw4J0NoC0xrePME=
+X-Gm-Gg: AR+sD12yVk8uU2Rq7EHpWaYJlm5KRmjF2Gd9knnuM3b5eaT0O6/zhsbX4Ro22sX2gTO
+ Mm9xi1J3WefRBB3tHRPsnO913JaULzQrwPv9pKFucgOdD81QqyA1iiX9E8C9c7TPHv9W7pLDz8d
+ yqcEcX/iuRY5lmR7YO75gnSx3fYWh8Xauq8c++qNoEC/tUqSQOoMl7mULerHaJR5RxZubvAIqLC
+ pZ3jGZskkZAmmfvB+RsSwKb0GSXpUA/d8ziVG3Qlmzj0w0NrCMirRkDnN9p
+X-Received: by 2002:a05:6402:241f:b0:698:585c:f07b with SMTP id
+ 4fb4d7f45d1cf-6a0349e9615mr1001568a12.3.1785237416701; Tue, 28 Jul 2026
+ 04:16:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260717-k3_binman_refactor-v1-0-4089220b4fd4@ti.com>
- <20260717-k3_binman_refactor-v1-1-4089220b4fd4@ti.com>
-In-Reply-To: <20260717-k3_binman_refactor-v1-1-4089220b4fd4@ti.com>
+ <20260717-k3_binman_refactor-v1-2-4089220b4fd4@ti.com>
+In-Reply-To: <20260717-k3_binman_refactor-v1-2-4089220b4fd4@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:16:37 -0600
-X-Gm-Features: AUfX_mzthhKSOkNQQ2e4VknckimRaA0eTc6PhRHFA1UBLHS0TyPyV1zNk5bxwgA
-Message-ID: <CAFLszTh2mAP1COO0V9own5rX8vz1Ly+RvBB=dDAiNNfRKf8wXg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] arm: dts: k3-am625: add template for tiboot3.bin
+Date: Tue, 28 Jul 2026 05:16:40 -0600
+X-Gm-Features: AUfX_myMg-HgMrmV-8FTVl3kuogUaGk-WIXGJfhXEl2Xvy4gzQZhNFC6BQHIyqw
+Message-ID: <CAFLszTi2Rc52TKKoGOicXEHF25GUm09gcyuZz0Y5zTjBw1W+pQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] arm: dts: k3-am625: add template for tispl.bin
 To: anshuld@ti.com
 Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785237410; x=1785842210; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=L5i0pKIVcDi/hdW3U6upOZjctYD9DGAEyt3IWf/EjDA=;
- b=kjOp8HsWJ5Pq+aOIRK6g8pftGp3lIUqMLEqtfNi0URl5Dj4O401GZTqt4oEyR6ld3w
- NM4V8mqPKIjkS2i0C9b+uU0+iIKO8NCE+KbQrkXt9LYXZhGfefxSuIVqTAX4glR/IVtD
- ahnOI9kPQH7JzKEw8U316x5DoedjiEqFEG2Os=
+ d=chromium.org; s=google; t=1785237417; x=1785842217; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=h1OQmBGde7W40EXUgcySyT4M5HKmse3xifKxzWd87Qs=;
+ b=neXI6IYO02Rk6K9O93gdD5OXQVNDYAVf1H4ezz9AJ8dPhHrGlSn2xQPXAEqbAAfYcG
+ VsBBGK7mf/rqH1ZBw31x2UT5IrODzTzUEaULRggO/O36aNvE2gb9lCyZrmwiX0Gw6qWx
+ UEJCHCRCUFZ7MN/VUX1W42KXt8WfHPgFpWvp4=
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  spf=fail smtp.mailfrom=chromium.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=kjOp8HsW
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=neXI6IYO
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -143,7 +140,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="kjOp8HsW";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="neXI6IYO";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -162,88 +159,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Anshul,
 
 On 2026-07-17T10:42:51, Anshul Dalal <anshuld@ti.com> wrote:
-> arm: dts: k3-am625: add template for tiboot3.bin
+> arm: dts: k3-am625: add template for tispl.bin
 >
-> Currently we are duplicating binman nodes responsible for building
-> tiboot3.bin binaries across boards that use TI's AM625 SoC.
+> This patch addresses the duplication of the binman nodes responsible for
+> generating tispl.bin and tispl.bin_unsigned for TI's AM625 SoC based
+> boards.
 >
-> This patch adds a SoC level k3-am625-binman.dtsi with templates for the
-> commonly used tiboot3 variants (i.e hs, hs-fs and gp) which can be
-> inserted by the corresponding board's dtsi to promote reuse.
-
-Please use 'i.e.' rather than 'i.e'.
-
+> The common nodes are factored out into a template in the SoC level
+> k3-am625-binman.dtsi that each board in-turn includes.
 >
-> No functional change is intended from this patch.
+> No functional change is intended from the patch asides from the addition
+> of tifsstub-hs and tifsstub-fs nodes in beagleplay's tispl.bin which
+> should have no consequence asides from growing the binary size by few
+> kilo bytes.
 >
 > Signed-off-by: Anshul Dalal <anshuld@ti.com>
 >
-> arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi      |   2 +-
->  arch/arm/dts/k3-am625-binman.dtsi                 | 123 ++++++++++++++++=
-++++++
->  arch/arm/dts/k3-am625-phycore-som-binman.dtsi     | 116 +---------------=
-----
->  arch/arm/dts/k3-am625-r5-beagleplay.dts           |  33 +-----
->  arch/arm/dts/k3-am625-sk-binman.dtsi              | 117 +---------------=
-----
->  arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi | 116 +---------------=
-----
->  6 files changed, 137 insertions(+), 370 deletions(-)
+> arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi      |  92 +------
+>  arch/arm/dts/k3-am625-binman.dtsi                 | 240 ++++++++++++++++++
+>  arch/arm/dts/k3-am625-phycore-som-binman.dtsi     | 241 +-----------------
+>  arch/arm/dts/k3-am625-sk-binman.dtsi              | 288 ++--------------------
+>  arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi | 185 +-------------
+>  5 files changed, 270 insertions(+), 776 deletions(-)
 
-> diff --git a/arch/arm/dts/k3-am625-binman.dtsi b/arch/arm/dts/k3-am625-bi=
-nman.dtsi
-> @@ -0,0 +1,123 @@
-> +     tiboot3_am625_hs_fs_template: template-tiboot3-hs-fs {
-> +             symlink =3D "tiboot3.bin";
-> +             ti-secure-rom {
+> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> @@ -63,99 +63,11 @@
+>       ti-spl_unsigned {
+> -             filename = "tispl.bin_unsigned";
+> +             insert-template = <&ti_spl_unsigned_am625_template>;
+>               symlink = "tispl.bin";
+> -             pad-byte = <0xff>;
+> -
+>               fit {
+> -                     description = "Configuration to load ATF and SPL";
+> -                     #address-cells = <1>;
+> -
+>                       images {
 
-This bakes a policy into the template - that hs-fs is the default
-tiboot3 - but the hs and gp templates deliberately don't. All three
-callers (sk, verdin, phycore) already set symlink =3D "tiboot3.bin" on
-the hs-fs node themselves, and on the r5 beagleplay the symlink lives
-on the gp node. Would it be OK to drop this line so all three
-templates are symmetric?
+Just to check: the FIT for beagleplay now also contains tifsstub-hs /
+tifsstub-fs entries even though conf-0's loadables only references
+tifsstub-gp. Have you confirmed that the resulting tispl.bin still
+parses cleanly and SPL does not try to load the unused entries? Please
+note the beagleplay boot test in the commit message.
 
-> diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am=
-625-r5-beagleplay.dts
-> @@ -33,38 +33,7 @@
->       tiboot3-am62x-gp-evm.bin {
->               filename =3D "tiboot3-am62x-gp-evm.bin";
->               symlink =3D "tiboot3.bin";
-> -             ti-secure-rom {
-> -                     content =3D <&u_boot_spl_unsigned>, <&ti_fs_gp>,
-> -                             <&combined_tifs_cfg_gp>, <&combined_dm_cfg_=
-gp>;
+I was unable to try this in my lab:
 
-...
-> -                     load =3D <0x43c00000>;
+       arm:  +   am62x_beagleplay_r5
++binman: Node '/binman/tiboot3-am62x-gp-evm.bin/ti-secure-rom': Cannot
+find node for phandle 100
++make[1]: *** [Makefile:1410: .binman_stamp] Error 1
++make: *** [Makefile:189: __sub-make] Error 2
 
-The original hardcodes load =3D <0x43c00000> whereas the template uses
-load =3D <CONFIG_SPL_TEXT_BASE>. These resolve to the same value today
-(the ARCH_K3 && !ARM64 default is 0x43c00000, and no R5 defconfig here
-overrides it), so it is a no-op - but please mention it in the commit
-message under 'No functional change is intended' so the next reader
-doesn't have to chase Kconfig defaults.
+> diff --git a/arch/arm/dts/k3-am625-binman.dtsi b/arch/arm/dts/k3-am625-binman.dtsi
+> @@ -121,3 +121,243 @@
+> +#ifdef CONFIG_ARM64
+> +
+> +&binman {
+> +     tifsstub-hs {
 
-> diff --git a/arch/arm/dts/k3-am625-binman.dtsi b/arch/arm/dts/k3-am625-bi=
-nman.dtsi
-> @@ -0,0 +1,123 @@
-> +     tiboot3_am625_gp_template: template-tiboot3-gp {
-> +             ti-secure-rom {
-> +                     content =3D <&u_boot_spl_unsigned>, <&ti_fs_gp>,
-> +                             <&combined_tifs_cfg_gp>, <&combined_dm_cfg_=
-gp>;
+The three tifsstub-{hs,fs,gp} nodes are unconditional within the
+CONFIG_ARM64 block, so every A53 board including this dtsi will
+produce tifsstub.bin_hs / _fs / _gp regardless of variant. That is
+fine since the blobs are optional, but please confirm this is intended
+and does not regress packaging scripts that consume these artefacts.
 
-Just to check - the property ordering inside ti-secure-rom here
-(content-sbl / load / content-sysfw / load-sysfw / =E2=80=A6 then sw-rev /
-keyfile) differs from the hs and hs-fs templates, which group all
-content-* first and load-* last. Both work, but since you are
-consolidating anyway it would read better if the three followed the
-same layout. What do you think?
+> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+> @@ -392,16 +155,15 @@
+>               };
+>       };
+>  };
+> -
+>  &binman {
+>       u-boot_unsigned {
 
-In any case:
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Please keep the blank line before &binman - the file is easier to scan
+with the separators intact.
 
 Regards,
 Simon
