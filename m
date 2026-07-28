@@ -1,133 +1,142 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14DADC531F9
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:34:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB47C531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:35:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C0D80607ED;
-	Tue, 28 Jul 2026 11:34:08 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WaQn2wDqA-Xi; Tue, 28 Jul 2026 11:34:08 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ECD5C607D5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785238448;
-	bh=YKAoFNI4uNKq4foBs6K8cFKPbkNRSFm2GXNVLbBOf5I=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Fd9BkDih4HeanU0NSOW+lylGA3zTvpBarqHl8RvWCwV0dxDdYA6lmPyj6QmcAE1N0
-	 bINY6CkwET9rKUa22bEFkXMR3BpY6a/ste6yfR9Z9uV8doYZAh8d5Y190UOfsFPVK2
-	 sx9CZn0GahlvvwgOP1qSe6IyX7g7ulsAw2wTS11LNSaLLAYeoZgKRgxNcRZvZ2Lf5g
-	 +xi0N1MQX1wwHQQpMLr3jJqWgefSpdx69J8JlOKXvdpwcqMq3uLx7vgZ3BGP9dfTb4
-	 POEMSQ7a61sTmQk+XFgrC7SHw7pzYf6Cb4iEm7Ymib8fviriVM0X0/BU/9es6rNjmO
-	 RRsp7c2ZEnZPA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id ECD5C607D5;
-	Tue, 28 Jul 2026 11:34:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 764802E5
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:34:06 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5C574409AC
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:34:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BBBFE4099C;
+	Tue, 28 Jul 2026 11:35:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hnaW7lSnw_mv for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:34:05 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 39DFE4099C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 39DFE4099C
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 39DFE4099C
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:34:03 +0000 (UTC)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-69fc856b00eso2922572a12.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:34:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785238442; cv=none;
- d=google.com; s=arc-20260327;
- b=EdG6Fw7+FYemqLx2fh5Z72T+MqfifT/Bfe6PskMiJDonfXnf97Pr5mnjdbVHWvSHoy
- NlkQd7Pkt3Krr9+QhUAVrcQQQXZE1pItjoYzvkxsGmyHhJs9CxLlHHCkBblzcDs6IsHW
- eMD3qxW1cdMpyS0XJ7jm2t8qI29lyi9vcLn60PLGKkypp7u8C2qyprWnT/EXe8mhuQoC
- esyFP7SQ/lfNeX8Dn9oWh1LNwA0N7DHXlokpPPMe8WGtii6M+++VwEM5upsyaF+GDLRI
- 3u1TOfUVNmZkM9+/b/7o/c10weKejHZ4T7ZZtaFKTr0P53KGw8rVAwznm5fE1ssXpPQ6
- vbTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=YKAoFNI4uNKq4foBs6K8cFKPbkNRSFm2GXNVLbBOf5I=;
- fh=iWjKeRrS1rvg6adXYN0MHQ46IcUBT4v1WAmt/XtMJto=;
- b=KIS1HoRo5SHJGw6PqEjHXWOwECvKhSp/smX6PMzGxt5ZKWANInpzqY1dC3zUvXBXGp
- 4oDMaQWtZNc50ZmyyqFmNiAt3N973nkx6g8xMsuFh1WwiiKpdIe0hmSXepQ+oxFZSDeq
- AHjwpxw4s1eOIEOTwGh8f6qh7ZrZRePvKFWj07tatZH5GKxNLzlyFcME5LSoBhFD2S1b
- x87oLqJiCRVh8S3sEHgwcIkDE9PNm8Z2TtjY/Drev4gFqtdRbLVcAZSH7klmPNXPXATS
- EQ5t65ll1tqkoTb/pnOHSu+BBs8JLWxfDGAvuqb2zsQyNPVaMposkwH5V8el2n3iSTxk
- TvlA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id gOhUjkfiQSgI; Tue, 28 Jul 2026 11:35:55 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4FF734099F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785238555;
+	bh=w2FKY2tLO7ZOFdnIA4uwHRNXqaaZhROodpsuT14x/PA=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Zs8u5vAf6LCGVKavOneMODGsWadMuhjaN6miFN43adylacDmGneOdugFI47DyLbj1
+	 NBB4ApFnaglGB4JsYlAI5Dg9DP4zrfIyGtRSpAk4BryjrGjcWAvTRHwuTHDT/JizRv
+	 zcRzKYsVMh+VwmpfarHWqOvS91NSuffy4KJ3GRTEK7X72ZEqqazD2ai48/+SaVv5+c
+	 zSOea+qmOXqqCZOSnRF0zkZmDiIhqO+l3crILLn7c+Fd0UlKN4BMoeoO9FwWy8BFip
+	 Qg9bUUWYTv+9Etp7CkWp5rBLEC8cjs1kP1YqbNxKXWI7eHMinHGCfrQJfQ9NyqvvgW
+	 xEaXwUsfH/jbg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4FF734099F;
+	Tue, 28 Jul 2026 11:35:55 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5A29942A
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:35:54 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3FDBE402D8
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:35:54 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qMIWAlZjeN4i for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:35:53 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=sergio.prado@e-labworks.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5F2D4400D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5F2D4400D3
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5F2D4400D3
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:35:52 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9A02B8494B; Tue, 28 Jul 2026 13:35:50 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EA77482991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:35:47 +0200 (CEST)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-38e07ebd263so2569864a91.1
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 04:35:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785238442; x=1785843242;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=YKAoFNI4uNKq4foBs6K8cFKPbkNRSFm2GXNVLbBOf5I=;
- b=AXncMVd0cM93QUaWxdAjYNBofba7Qjf6ij6H1QxKLYixOjnekQnAQ85XpffxWkVlJu
- u9ZfTb+hSqA271WBampLqLAsM1GbtTV0IPv7kozP49UscX7dqbqGNjkedJHfgpADQQ78
- u5ax44Ep9yzPdAbuLqi8xJM3IEUK9DYziqVFZuIT00f8KNmqWFMH0N0M5keu4AofbOAT
- xBxcq2BFWXNwEY7NhoeIiEY4lrSV46FXwAaX775bWSQZtcsFC88YXzwYNm4/EjnEMKGe
- t9PlJyco3GRod4BdN7kg3cIGBdsrgKhDsrwH0MBiS4WpnHnk4j0Q6joYuEJ96U7oBlA+
- seeA==
-X-Gm-Message-State: AOJu0YyG4O3v+Z9/0JfJIEBJKaEKmir5+U4XRhCT4iKk3Kbz9VyzTw8g
- SMfqNGBkTCTw0rrnmGPxQE5d/Ia6pb1kD7I6VWXhYwq1ce0lMZAM3d0tzHQcve90Q2mHbAKmwR7
- pu+8gUmobSg3ezIWxBBSTI+60VcleepzR76q3GhAD
-X-Gm-Gg: AR+sD12DQeIFIQuLUymMmDhvTgm9iiDYkREEQL98wW8AXIMIjWXnq7o2CvTGFjNOyUK
- y6m6PBYK66OvPsJdDZAhxHomMUXttJYJcMtX2eNWOVLSw6eOg2yIkn5SXtU6p4DM1JZBH3WSKQB
- N/i1pG9hcLJgrdW+jfxK4pXwWKeBDIj6uJcNyXCXrBSa7a4AL5OeDmVnNeGrXJVtRusw7QnsFQL
- EgHzAt4GN0jZaSol+xJ4qjHnmzNc+uMKe9fnQhEL8cVZhxJRJV/8EWSa1OT
-X-Received: by 2002:a05:6402:371a:b0:69f:b032:a257 with SMTP id
- 4fb4d7f45d1cf-6a034a398e7mr1078040a12.22.1785238441957; Tue, 28 Jul 2026
- 04:34:01 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785238546; x=1785843346;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=w2FKY2tLO7ZOFdnIA4uwHRNXqaaZhROodpsuT14x/PA=;
+ b=kfjNJdDBuXQTjgysnb432LKTINYKG3qqDWPeONgX0GtlDP8UGI39ve6UK5rqrH/2W/
+ rAzppgBbEJHgBLgR0E5sStWJLjM1VkT7g1r9eX39bSrZ6Xqa+qh7fmnYUbhfiAZJu2bF
+ Ub9uzJ4I0rWwAB0N63q1vcei9rBXK/+pNN2n8C9HSCfL99zqMlOBsxKzvlArgA66d9Gq
+ p93swgE9RZ1yZS2h9iITvM575U3luvds1yTHA6lWxtaEmuJPWMhpjEgScOY69kqhgLsd
+ QzVQRicFN2ox+uSFdzh6xAL8qormy1I9XNtcWl/p6mzWIqawuoEqCqKek8qP4B4eWE6X
+ VjfQ==
+X-Gm-Message-State: AOJu0Ywu+Yye4YVRtMOECtPEr2ggLDjfUDe2wK7xedoAfctV8bybFdZ2
+ 00Zbm6Df0cq+lYYs9J5dPhjsmlAgE10kDpCqb0tCvOsWJKFB4Ti7le1OuEggCXBRl1vPo5IXzoU
+ t1ALK
+X-Gm-Gg: AR+sD12phiUIAP3S33CIZiqgRxfGuKzFbZHDLK1IVDXVDliv9yrWULgSxE+WXf400oN
+ kWOFJ4eh9o9GHW+Jxe2tYU6yZmMGakBW3uEO/2gpBfxZMf0v59PC3NfkAoTU+i8e7w/Vh3noD18
+ qe4mNIjAvs5dCi3GKfTGo8dCe/XLV2cc4tkL4G7Vr3tjTFoBbEl4z/zutXhVaT5IGEF8HFO/L34
+ IPm7T1nRhU9dW18LFTzvsKQDXAI2i1uW5XAzR2uxGqtA3QBkRVXvwmM0v1vr/Zt1B6ed9kVLLMS
+ GyIm+P1KbLMjApQ/u1B5YIisoh6vEpWWL4BefkK4IcGRhTAWRPYfvn9FrQvfDeiIKUlP7XDg0Pq
+ m/hsSqdZw10A7b4bJpAlb/W6ixde7AM6gsUlO5vbaPcXJzARkFrWLIW5VG1oRC+oKvfa2rmXTFb
+ iq+h49faKT2Q==
+X-Received: by 2002:a17:90b:2809:b0:387:e0db:bc28 with SMTP id
+ 98e67ed59e1d1-38f6a5aa230mr1936704a91.40.1785238546061; 
+ Tue, 28 Jul 2026 04:35:46 -0700 (PDT)
+Received: from desktop.. ([2804:7f0:6400:919d:7be6:2bc2:d3d3:8617])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-314bc419c52sm42603976eec.10.2026.07.28.04.35.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jul 2026 04:35:44 -0700 (PDT)
+From: Sergio Prado <sergio.prado@e-labworks.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
+ marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org,
+ pbrobinson@gmail.com, sughosh.ganu@arm.com, sergio.prado@e-labworks.com,
+ wolfgang.wallner@at.abb.com, xypron.glpk@gmx.de, quentin.schulz@cherry.de,
+ jj251510319013@gmail.com, Wojciech.Dubowik@mt.com
+Subject: [PATCH v6 0/5] binman: add PKCS#11/HSM signing support for X509
+ certificates
+Date: Tue, 28 Jul 2026 08:35:30 -0300
+Message-Id: <20260728113535.128601-1-sergio.prado@e-labworks.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260721020918.150615-1-marex@nabladev.com>
-In-Reply-To: <20260721020918.150615-1-marex@nabladev.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:33:48 -0600
-X-Gm-Features: AUfX_mwfuHtzfVGtGu71JXdehbm4nRza-7CuJ6CVeoHRPk8j11EsjY9XtHFBEK4
-Message-ID: <CAFLszThwmkwpXO6bN2fHzW1Ooo-X9phRS+kuUJm9copMQg=JzA@mail.gmail.com>
-Subject: Re: [PATCH v2] binman: nxp_imx8mcst: Handle FCFB header during SPI
- NOR boot
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.u-boot-project.org, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Simon Glass <sjg@chromium.org>, 
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785238442; x=1785843242;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YKAoFNI4uNKq4foBs6K8cFKPbkNRSFm2GXNVLbBOf5I=;
- b=LlXKKeoYGAVIWqpg/lMvyVYSW5i0oNEQID+YeXDDqWX6YZwSvkzdIWVkaBzyOmzN1O
- 6TxFf4RtAk89Ii7mOxHt8rnKePi039phsbKrtT5/jDBaZBy0EqJzpOv1j8scl4IR5E9j
- Hokx9umvrZS0jzClV3zPfwXINWLS4oXyZ3upc=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=LlXKKeoY
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1785238546; x=1785843346;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=w2FKY2tLO7ZOFdnIA4uwHRNXqaaZhROodpsuT14x/PA=;
+ b=E0ImBOE0ti48kd9RRxW28K7U4A4yKjpM2kINIohP5k6hdT3pgFh46mc0nWsCoiK6HS
+ ZFavnM3mb/p/rnzhFZQdYslGY+IXwEVtBXZ/bzx0eABX/fPLoD3KLQg2YWlu2pLr2G0Y
+ MAozoKwJbJsNdCOTfTiI7rW1fh+BatLHuZB0fW4CCCHCQUU7fjD+6ssULhZV53t35ff2
+ o+J1HhFOBizp5UxEk19aX6FBn10MMoUfk2sFJlRzsfZfQLoJvKqqO255geBsqJ/wKlZn
+ rwLBH1Hg2rAdDvXVhoNPExpz8DQm3XyhlX5GVs+XnloOIDAtoUQPi/7M3LHMu0X3UIII
+ HKsg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org; spf=none
+ smtp.mailfrom=e-labworks.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=e-labworks-com.20251104.gappssmtp.com
+ header.i=@e-labworks-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=E0ImBOE0
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=sergio.prado@e-labworks.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=e-labworks-com.20251104.gappssmtp.com
+ header.i=@e-labworks-com.20251104.gappssmtp.com header.b="E0ImBOE0"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,50 +151,280 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Marek,
+Motivation
+----------
 
-On 2026-07-21T02:09:14, Marek Vasut <marex@nabladev.com> wrote:
-> binman: nxp_imx8mcst: Handle FCFB header during SPI NOR boot
->
-> In case the image that is wrapped in the nxp_imx8mcst already contains
-> an FCFB header which is mandatory for SPI NOR boot, then the IVT is at
-> offset 0x1000 instead of offset 0x0, but the whole image including the
-> FCFB header must be signed to prevent attacker from tampering with any
-> of the headers. Add the FCFB handling.
->
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
->
-> tools/binman/etype/nxp_imx8mcst.py | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
+TI K3 secure boot requires X509 certificates to be signed with a private
+key at build time. For production use, that key should never exist
+unprotected on a build machine - it belongs inside a Hardware Security
+Module (HSM) which enforces access control and keeps the key material
+unexportable.
 
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -101,6 +102,9 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->          # - If it is mkimage'd imx8mimage, then extract to be signed data size
->          #   from imx8mimage header, and calculate CSF blob offset right past
->          #   the SPL from this information.
-> +        # - If it is mkimage'd imx8mimage wrapped in FCFB, then extract to be
-> +        #   signed data size from imx8mimage header past the FCFB header, and
-> +        #   calculate CSF blob offset right past the SPL from this information.
+This series makes binman usable with any PKCS#11-capable HSM (YubiKey,
+TPM, network HSM, SoftHSM2 for development, etc.) when signing X509
+certificates.
 
-Thanks for updating the block comment.
+Design
+------
 
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -114,6 +118,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-> +        elif signtype == MAGIC_NXP_IMX_FCFB: # SPL/imx8mimage with FCFB
-> +            # Sign the payload including FCFB and imx8mimage headers
-> +            # (extra 0x1000 and 0x40 bytes before the payload)
-> +            signbase -= 0x1040
-> +            signsize = struct.unpack('<I', data[4120:4124])[0] - signbase
-> +            # Remove mkimage generated padding from the end of data
-> +            data = data[:signsize]
+As Quentin pointed out during the v5 review, most of this already works:
+the 'keyfile' entry argument is handed straight to 'openssl -key', which
+on OpenSSL 3.x resolves it through the STORE API, so a PKCS#11 URI is
+already accepted today. What was missing was documentation, tests, and a
+convenient way to feed a build with a key and a PIN which do not live in
+the source tree. The series is therefore split in five:
 
-This part is not tested:
+  1/5 documents the Entry_x509_cert properties (unchanged from v5)
 
-tools/binman/etype/nxp_imx8mcst.py                         94      3    97%
+  2/5 documents the PKCS#11 URI support which already exists, together
+      with the OpenSSL configuration it needs and the two ways of
+      supplying the token PIN, and adds tests for it. No code change.
 
-Also 4120 is still an unexplained decimal literal rather than the FCFB
-offset plus the IVT csf-pointer offset. If you don't want to change
-that, perhaps add a comment as to where 4120 comes from?
+  3/5 drops a redundant re-read of the 'keyfile' entry argument from the
+      two TI K3 subclasses of Entry_x509_cert, which would otherwise
+      discard whatever the parent decided. No functional change on its
+      own, but 4/5 depends on it.
 
-Regards,
-Simon
+  4/5 adds the PKCS11_PIN environment variable, so a CI job can pass the
+      PIN as a secret instead of writing it into openssl.cnf or into the
+      URI. It is a fallback: a URI which already names a PIN source is
+      left untouched.
+
+  5/5 adds the BINMAN_X509_KEYFILE make variable, which overrides the
+      'keyfile' of every x509 certificate entry in the build::
+
+          make BINMAN_X509_KEYFILE="pkcs11:token=mytk;object=mykey;type=private" \
+               OPENSSL_CONF=/path/to/openssl.cnf
+
+Two URI forms work on OpenSSL 3.x: the provider path (recommended, via
+the pkcs11-provider package) and the engine path, prefixed with
+org.openssl.engine:<engine>: so that the STORE API routes it to the
+engine. OpenSSL 4.0 removed the ENGINE API altogether, so the engine form
+is specific to 3.x. OpenSSL 1.x is not supported.
+
+PIN precedence
+--------------
+
+Quentin asked in the v5 review what wins when a PIN is configured in more
+than one place. Measured with SoftHSM2 and the pkcs11 provider on OpenSSL
+3.4.1, one freshly-initialised token per case:
+
+  - wrong PIN in openssl.cnf + correct pin-value in the URI: signing
+    succeeds
+  - correct PIN in openssl.cnf + wrong pin-value in the URI: signing
+    fails
+  - with pin-value given twice in the URI, the last one is used
+
+So the URI wins over openssl.cnf, and blindly appending a second
+pin-value - which v5 did - would silently override a PIN the user had
+put in the URI. 4/5 therefore skips the append when the URI already has
+a pin-value or pin-source attribute, and this is documented.
+
+Testing
+-------
+
+Tested on a Toradex Verdin AM62 (verdin-am62_a53_defconfig) with both the
+engine path and the provider path, using SoftHSM2 and a YubiKey 5 NFC.
+
+The binman test suite gains seven tests:
+
+  - testX509CertPkcs11 signs against a SoftHSM2 token with the PIN in the
+    URI
+  - testX509CertPkcs11Pin does the same with the PIN in PKCS11_PIN
+  - testX509CertPkcs11PinEngine checks that an engine-prefixed URI
+    reaches the openssl invocation unchanged, with only the PIN appended;
+    openssl is forced missing so no engine has to be installed
+  - testX509CertPkcs11PinNotUri checks that a keyfile which merely
+    contains 'pkcs11:' rather than starting with it is left alone
+  - testX509CertPkcs11PinSubclass checks that the PIN survives into the
+    TI K3 subclasses, ti-secure and ti-secure-rom, which are the entries
+    this series exists for
+  - testX509CertAddPkcs11Pin unit-tests the URI/PIN combiner, including
+    percent-encoding and the pin-value/pin-source passthrough
+  - testX509CertKeyfile checks that the 'keyfile' property is read and
+    that the entry argument overrides it
+
+The two signing tests skip cleanly when the OpenSSL pkcs11 provider is
+not installed. The whole series was run patch by patch; each commit
+leaves the suite with the same result as the base commit.
+
+Not in this series
+------------------
+
+Quentin also spotted that Bintoolopenssl.x509_cert() takes a 'cn'
+argument which it never uses - the config template says
+CN = {cert_fname} - so the CN of a generic certificate ends up being the
+output temp filename. That is an older bug, unrelated to HSM signing, and
+will be sent as a separate fix.
+
+Changes in v6:
+- Split the feature commit into three: documentation and tests for the
+  PKCS#11 URI support which already works (no code change), the
+  PKCS11_PIN environment variable, and the make variable (Quentin)
+- Drop the redundant 'keyfile' re-read from Entry_ti_secure and
+  Entry_ti_secure_rom, in a preparatory patch. Both re-read the entry
+  argument straight after super().ReadNode() had already read it, which
+  discarded the PIN and left every TI K3 entry - the whole point of the
+  series - still prompting for it. Found by testing v6 on a Verdin AM62;
+  v5 was unaffected because the rewrite happened in GetCertificate(),
+  which the subclasses reach through super()
+- Rename BINMAN_X509_KEY_URI to BINMAN_X509_KEYFILE; it is a generic
+  keyfile override which happens to accept a URI, not a URI-only knob
+  (Quentin)
+- Move the PIN rewrite from GetCertificate() to ReadNode() so that it
+  runs once per entry; the local-variable workaround for
+  ProcessContents() calling GetCertificate() twice is gone (Quentin)
+- Guard the rewrite with startswith(('pkcs11:',
+  'org.openssl.engine:pkcs11:')) instead of testing for 'pkcs11:'
+  anywhere in the value (Simon). The guard sits at the call site in
+  ReadNode(), so that _add_pkcs11_pin() only ever sees a PKCS#11 URI and
+  a plain key file is visibly left alone
+- Leave a URI which already has a pin-value or pin-source attribute
+  untouched, instead of appending a second pin-value which would
+  override it; document the precedence, which was measured rather than
+  assumed (Quentin)
+- Reword the commit message: with a PIN appended the URI is no longer
+  forwarded "as-is" (Simon)
+- Give the PKCS#11 setup its own section in binman.rst and list all the
+  forms 'keyfile' accepts, including a plain key file; the
+  Entry_x509_cert docstring keeps a three-line description of the
+  argument which references that section (Quentin)
+- State plainly that OpenSSL 1.x is not supported, and note that OpenSSL
+  4.0 removed the ENGINE API, so the engine form is 3.x-only (Quentin)
+- Add a test for the engine-prefixed URI form which asserts the prefixed
+  URI reaches the openssl invocation unchanged, without needing an
+  engine installed (Simon)
+- Add security/x509_cert_keyfile.dts, whose 'keyfile' property names a
+  file which does not exist, and a test that the property is read and
+  that the entry argument overrides it. This is a separate image
+  description rather than a change to security/x509_cert.dts, so that a
+  deliberately invalid key cannot trip up the tests which just want a
+  signed certificate (Quentin)
+- Add an integration test which puts the PIN in the URI directly, with
+  no environment variable involved (Quentin)
+- Clarify that PKCS11_PIN is read from the environment by binman itself,
+  which is why it goes before 'make' rather than after it (Quentin)
+- Carry the Reviewed-by tags from Simon and Quentin on patch 1
+
+Changes in v5:
+- Split the Entry_x509_cert docstring expansion into a separate
+  preparatory commit (Simon)
+- Unify URI support under the existing 'keyfile' entry argument
+  rather than introducing a new 'x509-key-uri' arg; drop the
+  Entry_x509_cert state and override logic that v4 added (Quentin)
+- Percent-encode the PIN before appending to the URI using
+  urllib.parse.quote(), per RFC 7512, and add a unit test
+  covering PINs with reserved characters (Simon)
+- Detect the OpenSSL pkcs11 provider via
+  'openssl list -providers -provider pkcs11' rather than discovering
+  the provider .so path manually; drops the 'openssl version -m'
+  MODULESDIR lookup (Quentin)
+- Drop the 'p11-kit print-config' / softhsm2 .so discovery from the
+  test; the simpler openssl.cnf relies on softhsm2 being registered
+  with p11-kit globally (Quentin). As a side effect this also fixes
+  the test on Ubuntu 22.04, where 'p11-kit print-config' is not a
+  valid subcommand
+- Move the test openssl.cnf in-tree as
+  tools/binman/test/fit/openssl_provider.conf and trim it to the
+  minimum needed (no 'module = ', no 'pkcs11-module-path = ') (Quentin)
+- Replace 'pkcs11-tool --keypairgen' with 'softhsm2-util --import' of
+  tools/binman/test/fit/rsa2048.key so the test runs faster and drops
+  the pkcs11-tool dependency (Quentin)
+- Recommend pkcs11-module-token-pin in openssl.cnf as the primary
+  way to deliver the PIN; PKCS11_PIN env var is now documented as
+  the convenience fallback (Quentin)
+- Drop the incorrect claim that PKCS11_PIN keeps the PIN out of
+  shell history (Quentin)
+- Rephrase the URI intro in binman.rst and clarify that
+  'pkcs11-provider' is a Debian package name, not a path (Quentin)
+- Drop the inheritance notes added to Entry_ti_secure and
+  Entry_ti_secure_rom in v4; with the v5 keyfile unification the
+  original motivation (an inherited x509-key-uri property) no
+  longer applies
+
+Changes in v4:
+- Drop the v3 bintool extra_env commit entirely; binman no longer
+  sets any PKCS#11-related environment variables (Quentin)
+- Drop BINMAN_PKCS11_MODULE / pkcs11-module entry argument; the
+  PKCS#11 module path must be configured externally via openssl.cnf
+  (Quentin)
+- Drop provider/engine auto-detection (_pkcs11_use_provider,
+  _build_key_args, _run_cmd_pkcs11) along with the threading.Lock;
+  the user selects provider or engine via OPENSSL_CONF and the URI
+  form (Quentin)
+- Rename the v3 BINMAN_PKCS11_URI / pkcs11-uri to BINMAN_X509_KEY_URI
+  / x509-key-uri to scope the names to x509 certificate entries
+  without locking them to a specific URI scheme (Quentin)
+- Document that the engine path is supported on OpenSSL 3.x by
+  prefixing the URI with org.openssl.engine:<engine_name>: (Quentin)
+- Replace the mocked openssl test with a real SoftHSM2-based
+  integration test using the provider path and OPENSSL_CONF (Quentin)
+- Use 'p11-kit print-config' to locate the softhsm2 library at test
+  time instead of hardcoding a distro-specific path (Quentin)
+- Use 'openssl version -m' (MODULESDIR) to locate the OpenSSL pkcs11
+  provider .so file, so multiarch paths like
+  /usr/lib/x86_64-linux-gnu/ossl-modules on Debian/Ubuntu are handled
+  correctly
+- Generate the test RSA keypair with pkcs11-tool; softhsm2-util has
+  no key-generation action (only --import) and silently exits 0 on an
+  unknown --generate-keypair option, which would leave the token
+  empty and make the openssl step fail with 'Could not read private
+  key'
+- Add self._CheckBintool() to all PKCS#11 test paths so tests skip
+  cleanly when bintools are missing (Quentin)
+- Extract the URI/PIN combiner into Entry_x509_cert._build_pkcs11_key()
+  and add a unit test for it
+- Document that PKCS11_PIN keeps the PIN out of the make command line
+  but is still visible in 'ps' output via the openssl invocation; for
+  improved isolation, configure the PIN in openssl.cnf
+- Document all Entry_x509_cert properties (content, keyfile,
+  x509-key-uri, cert-ca, cert-revision-int, sw-rev) in its docstring
+  (Quentin)
+- Add inheritance notes to Entry_ti_secure and Entry_ti_secure_rom
+  docstrings, pointing out that they extend Entry_x509_cert via
+  super() and therefore accept its properties (notably x509-key-uri)
+  (Quentin)
+
+Changes in v3:
+- Split into two patches: bintool infrastructure (1/2) and x509_cert
+  feature (2/2)
+- Fix global environment mutation: _run_cmd_pkcs11() no longer writes
+  to os.environ directly; it now uses the new extra_env parameter so
+  module paths are scoped to the subprocess only, which is both
+  cleaner and safe under concurrent execution
+- Add module-level threading.Lock to serialise concurrent PKCS#11
+  signing calls and fix intermittent login failures caused by binman's
+  ThreadPoolExecutor
+- Fix URI query string separator: use '&' when the URI already
+  contains '?' (e.g. module-path already present), '?' otherwise
+- Test cases updated
+
+Changes in v2:
+- Add tests for _build_key_args() (PEM path, PKCS#11 provider, PKCS#11
+  engine, PIN appending), _pkcs11_use_provider() (caching),
+  _run_cmd_pkcs11() (with and without module path), and end-to-end
+  x509_cert signing with a PKCS#11 URI (testX509CertPkcs11), ensuring
+  btool/openssl.py and etype/x509_cert.py have 100% test coverage
+
+Sergio Prado (5):
+  binman: x509_cert: document Entry_x509_cert properties
+  binman: x509_cert: document PKCS#11 URI support in keyfile
+  binman: ti_secure: drop the redundant keyfile re-read
+  binman: x509_cert: support PKCS11_PIN environment variable
+  binman: Add BINMAN_X509_KEYFILE to override the signing key
+
+ Makefile                                      |   1 +
+ tools/binman/binman.rst                       |  75 +++++++
+ tools/binman/etype/ti_secure.py               |   3 -
+ tools/binman/etype/ti_secure_rom.py           |   3 -
+ tools/binman/etype/x509_cert.py               |  43 +++-
+ tools/binman/ftest.py                         | 201 ++++++++++++++++++
+ tools/binman/test/fit/openssl_provider.conf   |  14 ++
+ .../test/security/x509_cert_keyfile.dts       |  25 +++
+ 8 files changed, 358 insertions(+), 7 deletions(-)
+ create mode 100644 tools/binman/test/fit/openssl_provider.conf
+ create mode 100644 tools/binman/test/security/x509_cert_keyfile.dts
+
+-- 
+2.34.1
+
