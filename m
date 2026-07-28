@@ -1,134 +1,113 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF01C531F9
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E43C531F9
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jul 2026 11:55:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4422980F58;
-	Tue, 28 Jul 2026 11:54:28 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2DQwAkY7DTU4; Tue, 28 Jul 2026 11:54:27 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 914DC80DB1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785239667;
-	bh=LdHDYTmkpKHE1erT/ssYbr5IGtcMzBA+wAU0WL/VyDs=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0tzApbV9xK1sgJXcOkh7TeMLQYr6fLpjWz2r4lioonhYBiUyhSvyJ1sExxeMeNevG
-	 y9GEp8Ik7sLAxULi7H2EjYQkKioMScU6cfpwoIbdVdYb3Wg3cm/stXK8ja0dW+nvNE
-	 9ZY+XExA08qBes9QKfnZTmjSN68Fj+iolozXlsYWgiJyjinu0leW9hOc2uUmxQR44h
-	 aIsrHDaopJCncv0WrNWXhZhhCsA/mx+MKvTJyftunwaOmOirmHrIAWrLp+uBDfGQCN
-	 ZtQSKXhwrLOfqlQD4brTQsfFBPp6x3GgnMI8Xh9gsO5m5XeZ8dhIYugC2Pm0YeeH+R
-	 57zGnNHNtRvZA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 914DC80DB1;
-	Tue, 28 Jul 2026 11:54:27 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E6FEA788
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:54:23 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D8AED607D5
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:54:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7103160856;
+	Tue, 28 Jul 2026 11:55:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dzECoymmUPiT for <u-boot@lists.u-boot-project.org>;
- Tue, 28 Jul 2026 11:54:23 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org ECBE960710
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ECBE960710
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id ECBE960710
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:54:22 +0000 (UTC)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-698ae09e356so4534523a12.2
- for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 04:54:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785239661; cv=none;
- d=google.com; s=arc-20260327;
- b=OOgko5wzKK0xgJeU5SammxZ0e59GSkBChzCEb/+zqRMdwt8UxcGgTrY7haXvA8W/S9
- durekj0m0vAn7Pd3+Wo9YAv0vMGji2IpHKzpgTyHOC4CSybZAalK/osr1hfEWUEGiKtK
- tjSzn3jvlA2tsXnne7tOyPsiDNYiokIUtyALYa8rftfN+zWoI/xwLJBT+vnv5nH8vN9l
- MRA7m6y9/7+1vSeZLG1nYVgpx4YYTXSIs7owEXZR4RqhUhLxmKz5SImwIaK82+jS4thv
- aYxl6l4fGrB3ibMgpCM/otCpzYCzjxW6MShq4guJympu9gTW98X9Xo7A/uPUHW+2BAZv
- S1wQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=LdHDYTmkpKHE1erT/ssYbr5IGtcMzBA+wAU0WL/VyDs=;
- fh=nQ9gGeks0E2bZ6YExEJCNOUNcszcWqrR9p5J9QmLags=;
- b=V6UyxXqtqYT+VspNg8j81CCKzu4JBXr7cTjF1hwjyrk0UenWtBB/BkwAoAxQjVEU5r
- i8Zc9RNQggLp3roH035MesYGUWAiI7HYiuW+n2LJXtYOMOxXyeZLUrJ6VF317S8iJ4tz
- E9rDfqidARmogcomgZ1S/aMgMd9D4Zt3Ep+JUe9kon57N2qr0u9B4ia8CoyaDVl4fbFE
- beZx0ZDGD4fSbUML0GIknxfjP6x98GsukrfXb74ducsbu2MJq5VkziMJdtGjZMh3zkr4
- qx4HLK6+vACB2BQSIAqNKvSHmzl8yZnUY3kbCcZfZHe4bzOZMqgxp7vWKvNRRydnIxht
- Xkew==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785239661; x=1785844461;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=LdHDYTmkpKHE1erT/ssYbr5IGtcMzBA+wAU0WL/VyDs=;
- b=ftCtVfIsnzI+vDcDwMbW5dbXySG3bwZOdWzFwvyEJWzMUBthDXL9Unw7PYVNb660fI
- 9GPuXTzmA7BLHXZuzQS5tB09piDjzlvhD0lQrR6j+Chli2g6cFRfU2euGAkUl+h1Qmhb
- wmxV42CS2jShVffqCPQGkWi+hpBDQGaNv0Sfr1xagr0AC0Q2jS/UtmQIS8ql+e9Br24s
- RFzZitbiNF/a2scvR+S6IDfKVAUY6obVb+tnLaXBS8vdPdSq2Jf6v9JvFl8qwpCVZU0z
- YuDiZd+E7t2eIk13zt3LhZM/gqHwi1BSU9juBG1fnwh8HI/sfON3xaTqlE6n7m9ZTkbD
- Bg7Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrUtN/819LAzfEtx35s890GeieNaqI/Z5SwWf/AJYnSjo5sE5k34e+zJc62bDaQYm6GBOBBCRo=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yz0qQg37aRd0vAPvh5xJaMyKyNqb++rgQWFMEpsz42kQ7wPe7b3
- fHhXPB0qfoL36F/eEAxLy/HleL6aptVgg4TNjWPMcu0HwxzhxdmCklmQA14zg/y5CzbL6v+sOk2
- uzLt7FiruRguT/p993MjVIQEpan+0Aj6wRjlftzTp
-X-Gm-Gg: AR+sD11smRJKzl7cNOVdkNc3nkg8iL6vBUtpddZdALFu3XJIFOKKkC5hZhJY1RRhOcU
- kEmMOWKJ9xHsbl8DFguX3ZRMFywL28j/hkkmwCd0k8uJinJADIR9JpQdM+FACst5o6LlIuYAU3k
- VTK6X0H/ZEeSUVpAUGWXrKj2y730MHTNh6gZCXbcDyoxwukl2aDrgAIxHtDFBviMjOLS931AVJP
- fjBF8rYiSMy/j8nK59eJWdDkmSusLQro6rZ+seCjCYmtGCCySG9xwnG9JbIU+yUfBw3r5E=
-X-Received: by 2002:a05:6402:194e:b0:691:7054:8c6b with SMTP id
- 4fb4d7f45d1cf-6a034a9e9demr1021318a12.19.1785239660880; Tue, 28 Jul 2026
- 04:54:20 -0700 (PDT)
+ id REa2raye8Ez2; Tue, 28 Jul 2026 11:55:45 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3CBEF60817
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785239745;
+	bh=8bcSJD174zDXuYa5rSmgkdTS7DO3YZjXLbZ2VHCkqN8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=nXnGAwrZlDqi6jMUcv+Nkt22kIL9JqdxxXf8uLKbII5OLwfkbZKiJ+YiU28gjdsO6
+	 zdIoJ7BVFAPDF+Ip+eJSHXHtymOkEcTeGvUAC/AStdkmcjYJ/CI+46FcKLrQwZFhgl
+	 Z0fT2nTIpl0L4ndD30raLqHFkEkESAHRDXiKxDKsZxRG4ju5mhZSBXhY32I3PmklrM
+	 tpOstWD6XPTPek3wZuQX6/l/ijF+TN08TOPt3ViJ2m0QNXvNQK43ushAdP7kmO2RwE
+	 8clOT5wjr40Agg0T/vipjfis1Le9S6liDQHpV2zGIFy54nA8MSVpu0wySA5TdXnaG/
+	 ZXkj/lKqI7aUA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3CBEF60817;
+	Tue, 28 Jul 2026 11:55:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3180F2E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:55:44 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2329460817
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:55:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6Dubdg86j7gV for <u-boot@lists.u-boot-project.org>;
+ Tue, 28 Jul 2026 11:55:43 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8CF78607D5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8CF78607D5
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8CF78607D5
+ for <u-boot@lists.u-boot-project.org>; Tue, 28 Jul 2026 11:55:42 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 38A398494B; Tue, 28 Jul 2026 13:55:40 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BA11882991
+ for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 13:55:37 +0200 (CEST)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 3E01860A9E;
+ Tue, 28 Jul 2026 11:55:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 457A91F000E9;
+ Tue, 28 Jul 2026 11:55:35 +0000 (UTC)
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
+ marex@denx.de
+Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, michal.simek@amd.com, alchark@flipper.net,
+ jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
+ Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [PATCH v5 44/75] usb: dwc3: import from kernel v6.0
+In-Reply-To: <20260716134305.614278-45-anders.roxell@linaro.org>
+References: <20260716134305.614278-1-anders.roxell@linaro.org>
+ <20260716134305.614278-45-anders.roxell@linaro.org>
+Date: Tue, 28 Jul 2026 13:55:33 +0200
+Message-ID: <87h5lj1g7e.fsf@kernel.org>
 MIME-Version: 1.0
-References: <20260722-video-oob-fix-v1-0-d6943f687c50@byteray.co.uk>
- <20260722-video-oob-fix-v1-2-d6943f687c50@byteray.co.uk>
-In-Reply-To: <20260722-video-oob-fix-v1-2-d6943f687c50@byteray.co.uk>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jul 2026 05:54:06 -0600
-X-Gm-Features: AUfX_myKUTXunCh2UB6hJjobvBA2Cnm7h-qVpzG2wCvbBmCY1QJFTqgGmLK2iGM
-Message-ID: <CAFLszTi5aG1PZX6vrppu_v1UASjpxAUG9=NiJw0c2bcGXrHWsA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] test: video: add regression test for RLE8 bmp overflow
-To: shj <shahriyar@byteray.co.uk>
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Wayen Yan <win847@gmail.com>,
- Simon Glass <sjg@chromium.org>, 
- Argus <argus@byteray.co.uk>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785239661; x=1785844461;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=LdHDYTmkpKHE1erT/ssYbr5IGtcMzBA+wAU0WL/VyDs=;
- b=fScXOiE02TJ3eO16cf0qcZ0ZP0+5ttO/zdH6I9Hzv49o4/wSJVQu6qpxpwUZT/GKwG
- Wx1SHpHgB2OmPHz0QV22qCVDVHRmLzvcECLFJfAyMm7B7hfARbFQL778cepu/BaGjUFv
- 5oegw5ypyfUIgYGFwdZf6eDm7mgEnm5I/bMcQ=
+ d=kernel.org; s=k20260515; t=1785239736;
+ bh=8bcSJD174zDXuYa5rSmgkdTS7DO3YZjXLbZ2VHCkqN8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=R5SUZBM9RfEuH/6LFfu0DcbB2fh/2cKKjyXiJImVrqiwlnR1e7jHC4ukXVNPCUWYi
+ FE4uqfLX9XYzS8r9ozNKLIRqZ9m1fjUYp0MI4yAQ+EwpL7OfEhqg6BBsl1QMA/yl2H
+ R2Wheq+EItf+33XdCBQR7MGnIP84qgEjNiuMDGNCwMrqFlJmZreNxz0CNYyTF8CP4Q
+ u9T6ZGVWoSZAIE1Qt6zCDNFG2dso5gZ17BRuGG3s9rPzLNfWI+MI97eBqpAy4cctwI
+ KRbhYNlM49+MT/DWr4pHg0ls1ThB4jXoN1nWpcDJ28PovlO4S9rB2QZeNL1le0R4wH
+ JV/5K+w9mhV2g==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=fScXOiE0
+ spf=fail smtp.mailfrom=kernel.org
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=R5SUZBM9
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mkorpershoek@kernel.org
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="R5SUZBM9"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,17 +122,68 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-22T07:10:10, shj <shahriyar@byteray.co.uk> wrote:
-> test: video: add regression test for RLE8 bmp overflow
->
-> Add a DM test that displays a crafted RLE8 bitmap whose decode cursor
-> is driven below the framebuffer.  Without the preceding fix
-> video_bmp_display() writes out of bounds and returns success; with it
-> the image is rejected with -EINVAL.
->
-> Signed-off-by: shj <shahriyar@byteray.co.uk>
->
-> test/dm/video.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 50 insertions(+)
+Hi Anders,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Thank you for the patch.
+
+On Thu, Jul 16, 2026 at 15:42, Anders Roxell <anders.roxell@linaro.org> wrote:
+
+> From: Jens Wiklander <jens.wiklander@linaro.org>
+>
+> Sync Linux kernel dwc3 changes from v5.19 to v6.0.
+>
+> The following files are preserved accross the import:
+> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+> dwc3-layerscape.c ti_usb_phy.c
+>
+> Skipping unused files:
+> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+>
+> Note that this is a raw import and doesn't build.
+> A fixup commit at the end of the series fixes that.
+>
+> List of commits: git log --oneline v5.19..v6.0
+> Commits imported:
+> f5c5936d6b4d usb: dwc3: st: Fix node's child name
+> 91062e663b26 usb: dwc3: core: leave default DMA if the controller does not support 64-bit DMA
+> 6000b8d900cd usb: dwc3: disable USB core PHY management
+> e41a88f38d87 usb: dwc3: qcom: suppress unused-variable warning
+> 040f2dbd2010 usb: dwc3: gadget: Avoid duplicate requests to enable Run/Stop
+> bad0d1d726ac usb: dwc3: pci: Add support for Intel Raptor Lake
+> ac6928f83f8d usb: dwc3: qcom: clean up suspend callbacks
+> e3fafbd8e365 usb: dwc3: qcom: fix wakeup implementation
+> c5f14abeb52b usb: dwc3: qcom: fix peripheral and OTG suspend
+> 6498a96c8c9c usb: dwc3: qcom: fix runtime PM wakeup
+> a872ab303d5d usb: dwc3: qcom: fix use-after-free on runtime-PM wakeup
+> c06795f114a6 usb: dwc3: qcom: fix gadget-only builds
+> 762e744922b5 Revert "usb: dwc3: qcom: Keep power domain on to retain controller status"
+> d2ac7bef95c9 usb: dwc3: fix PHY disable sequence
+> 69bb3520db7c usb: dwc3: qcom: fix missing optional irq warnings
+> 07903626d988 usb: dwc3: core: Do not perform GCTL_CORE_SOFTRESET during bootup
+> 5e76ee96be8f usb: dwc3: ep0: Properly handle setup_packet_pending scenario in data stage
+> 8affe37c525d usb: dwc3: gadget: fix high speed multiplier setting
+> 23385cec5f35 usb: dwc3: gadget: refactor dwc3_repare_one_trb
+> babfcd947eba usb: dwc3: gadget: fix a kernel-doc warning
+> ad44cf402486 usb: dwc3: document async_callbacks field
+> d9be8d5c5b03 usb: dwc3: qcom: Keep power domain on to retain controller status
+> 6895ea55c385 usb: dwc3: qcom: Configure wakeup interrupts during suspend
+> 360e8230516d usb: dwc3: qcom: Add helper functions to enable,disable wake irqs
+> 649f5c842ba3 usb: dwc3: core: Host wake up support from system suspend
+> afbd04e66e5d usb: dwc3: core: Deprecate GCTL.CORESOFTRESET
+> fb119dcb97f4 Revert "usb: dwc3: Remove the checks of -ENOSYS"
+> 3085d1bd47f2 usb: dwc3: Fix typos in Kconfig
+> d1b39dd5819a usb: dwc3: Fix a repeated word checkpatch warning
+> ca80ca61863f usb: dwc3: Fix bare use of unsigned checkpatch warning
+> df22ecc41b54 usb: dwc3: Remove the checks of -ENOSYS
+> 3497b9a5c8c3 usb: dwc3: add power down scale setting
+
+Drop the st, qcom, pci changes from the changelog since we did not apply
+these to U-Boot.
+
+With that fixed:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
