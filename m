@@ -1,127 +1,139 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDEFC53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 16:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B65C53200
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 16:29:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2CF7A60667;
-	Wed, 29 Jul 2026 16:18:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C8E3E40789;
+	Wed, 29 Jul 2026 16:29:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ga1yfketgb-F; Wed, 29 Jul 2026 16:18:03 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wrISDI6cilfW; Wed, 29 Jul 2026 16:29:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 82798605E5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DDAD940763
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785341883;
-	bh=m6i3qURXc7jN8FH9yiK2RdV2TI7wihyaV97DPEE8ZDk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785342564;
+	bh=SmVLyD3hAz3ccMgxCwgLXLOW4LECUINQOp3DhHjaWpw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sGl1vPSATXcERHXMalaIVuOuxW9l7jDhAlR83Qf2AgpXdKV8LcSOWaOv0ei8HADlW
-	 uBrXFhIcLzNnEwC0q7ccTh0hiJrdxUbESrlhPCu+Nf6LvxTyDlSzyzCIKa12Q5U/KV
-	 ZCafO9f/WYK2CWfbOmmt4yZSQ515wZvD9qdK1GLarQplWfUswbTdjU+X2MxbNtMcxt
-	 QssCCmH1pmdmbuaeG014BF5VkrrvHCIPDEWPMFuM6uSOdRRIoo6lgRM0r2kKGhaLOf
-	 037UZ0A5KgR0GM3NaY0ZU6yaeRsLX37HfN2Gjp5u9hNdxFoAIntac/DE9nB8Ie42WX
-	 IXqXWktjXHdlA==
+	b=yDNWmDog/FVHhaNmQQKhu0mOl38Su3To30gekrqQlUhGfZBxudxFjs6QTUhJT/0Hp
+	 nJekj8CMCmr3aINOuMbBlfs1sBVWoPwTjOybAd9agZbuwkmzB3PyCOJll8MHBdwbMp
+	 lKPtXkhYmD4vGya/mLjSd+u5CmlpmxM/7dffuVsXRI6aqYSotOLBG4P2ibJMcVjhD/
+	 p526xGVDjcMOpQJHlDCCZYkG41PWtn0JDsQacraN5P/uXM8YAjRVJ6yyiJuqXJgjXw
+	 NOylnPhk+zp6b850A2yCaTVl6AynOPWofRVeuVE14MV3XCAZc7gQWzu4YA2xkfi4n4
+	 IWWpuackfbjPQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 82798605E5;
-	Wed, 29 Jul 2026 16:18:03 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 09810788
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:18:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DDAD940763;
+	Wed, 29 Jul 2026 16:29:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2394A42A
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:29:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EF857605E5
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:18:01 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0A07E4014E
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:29:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t5gYeY28KoLa for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 16:18:01 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ibx_wLE_VpMH for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 16:29:21 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2b; helo=mail-oo1-xc2b.google.com;
+ client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BEDB8605B1
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BEDB8605B1
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BEDB8605B1
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:18:00 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-6ab021f1daeso460026eaf.2
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:18:00 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C647C4009F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C647C4009F
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C647C4009F
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:29:20 +0000 (UTC)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7eb63dbd229so42290a34.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:29:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785341879; x=1785946679;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=m6i3qURXc7jN8FH9yiK2RdV2TI7wihyaV97DPEE8ZDk=;
- b=fuXlsU1eaRISbfON6kQWGJm8ReUmwDzsc/H6APmxuByI4yitC+lbFV1boSeNYX94Ef
- F5XjJlPNby4WTEF09VGV8h0UP+GANyRzgebtMd2fdkTfuNCiYJU73UqC7LAQLWRW2Oo9
- K46LLUFUYtQ/08GrEKs0QnbdpX5iAdiR6zqEoYB/sUG3OX6QGF0VIrty62fH87u5JbMm
- A/e9VVOZviOHKByRjp/ODq+yFJ1JJktOg+XckmJpWX1C7V2nh3FhY1Rxcsgrk8K0yAnY
- OUWm4GLR3w/7AuVk6I375ubYel1c4i5wC51OygWcplYHpv48eJgVSHJyVKqocmVazOuB
- SB0A==
+ d=1e100.net; s=20251104; t=1785342559; x=1785947359;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=SmVLyD3hAz3ccMgxCwgLXLOW4LECUINQOp3DhHjaWpw=;
+ b=dQpM3QahKX1wRz/b7DNWMYDPMw4KNSblV5viTBpOH6kpXGIdlj992Tk8FN/S98YgHz
+ dkf1lo3+MLMTQhRi9f8ApncAywzKgs9gefbqATMgftCBqnK8IYTMzwRivH9Ofhr0GFrl
+ 7OSakQdYAr9gfZpitzyC7Y86LmOGglx83SbD/oTX97LeRs1Xj4HLBxV+MMUu6ygaUjTM
+ 5dZZC2CTxFu5oIW/hLazDOHY+X6wfa0ZvAHQgI703+77Tk53hvovt2IrC1tbzOV+ytOQ
+ MhPJxyxdUTcKP5W8qhSkhIrI9Jybd+mt/wxIkKbwAkOms3koiWbcvU9TgD4k4PjCYaNf
+ 8I8Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqYCWf9Y4yBFHxhAzoNuIs7Rf7BWLlYODOv8g++BoaLcjkCshXbxmHl8f7qEQqEjhLVWsfuFoQ=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzkAd3CTCg5pRDTmuzdFUM3MMJ2sM1C1xfELUv/Dd4/EhyD98/M
- H7KbeTL/KerpMzAL+1dB5it+IFZ78UM5ikX3elPteDQNFQJvBcuHlLA9hw7MYioPSZ8=
-X-Gm-Gg: AR+sD123a1XWj9JzXSIUx6ZclXeKCpN6wqWXh22JkzELOuba1sax4oOeE4NaIzICc91
- Gc3p6O9XQBDkp/Mc9CtM5oThHStcnnYHTlp0std0LMPsxyvePJX/Bmikt9glImydcp/hB8irc7v
- UiVDTzwQ/nbw7YwaMVXUDhkLAry9/1jsG3qTGLBCBogSMYk0+TJY+GvCjKRB7U7+rtgfreb5M24
- Of0eiVpL4MDt6x4nAHNW52M0DulAPiwLO/lP3rmLoEnYsR+Pr6tZQ9EwpiU2wKsbJRECO4lA2eH
- u1kQI5+HdDOhqaOAdseDu7Hn63Dvc1uXnHx5qLLDc8Fc0fT1zyxzG68xv1puiki9E0ajQcI0vmB
- t7gBleqAeTVp40nb1eWfidN1zMSrMvnEssKe1HJVAgkUtXJU7eIaVmNT8mCFGNuak3iMQ27lJ9N
- IVQ02ipHY2/JL/vClDKW3vpgJtvUfFtJuBOU3VjIE5RrMrs8HrHAEeYKFV/fubtvQ=
-X-Received: by 2002:a05:6820:4df3:b0:6aa:de29:647 with SMTP id
- 006d021491bc7-6acb61ecb78mr183673eaf.29.1785341879328; 
- Wed, 29 Jul 2026 09:17:59 -0700 (PDT)
-Received: from freyr.lan ([2600:8803:e7e4:500:3096:ee5f:6f57:afe1])
+ AHgh+RrAI5zYw3J0iRI6mBiCa3UomZGoRRs4DzGWIOreeKaJBCN5+LwZNIdKZsa3KUG6VEX78NitQaI=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyKKXisuul3ecOaNXQ4AEeFHcJW+5Hskllme1MWG8/TXN7pBMgp
+ czcmoSdxAfhYhFbiPMNVGWa8EFsdABGWtWiJgFlD4lLvU7SBO4k12Q5p4cG8BxZKj1c=
+X-Gm-Gg: AR+sD11VThFS+AyvIEjFI9JGaHOZROp/1iRwf2NiTAook0TZC3GS8/drzaEBang2U7t
+ z+SM9lpEetfWuaXfN/S1CSHdk+QsN+e5M6HYPJs8J4Y9vJrkFzBnXDEpyCkdo9LdexpZgB89xtA
+ pXx72S+skbMYRY4x5wZ48Mo0BO9IJHkrgobALPcE3uhChyPnKIB+gCDpV5XUCeRzYjTpIbQYu37
+ TSqGXgFzS/6TJPzbp18ADE8JgpgWX+iVxrg1d0bVLVvhvJ542wBYl5dkYmBs94mMeiLrcvQF97U
+ 9JDPOfbx7LTPqsu3l4CFptr9jMitBvlgK5qm74Mu3VWT4HmI+vSh/J22Cq0gQ6s/XNCpmFTFuW5
+ VOPDC6rLRGzHw1A5OyFwkmBMw6lNvo4kioYBN1hETA++HUDiPn1eajKFacLWAc1KTh0gm3Y1l7w
+ 0zYYLzX0KOhLshEcYojRyA/RQPh50Qr7jExh4yQkkqBN171N/vFCSwzdEBSyfa6wZH3lOLttHZu
+ QB81fy++O7c1ZtxKFjeBE3ecv4/5yxf3pDL+BQ=
+X-Received: by 2002:a05:6830:7082:20b0:7e9:ca12:37bf with SMTP id
+ 46e09a7af769-7f014155e9amr912955a34.7.1785342559373; 
+ Wed, 29 Jul 2026 09:29:19 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3096:ee5f:6f57:afe1?
+ ([2600:8803:e7e4:500:3096:ee5f:6f57:afe1])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45886469a49sm2675401fac.6.2026.07.29.09.17.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 09:17:58 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.u-boot-project.org, Carlo Caione <ccaione@baylibre.com>
-Cc: David Lechner <dlechner@baylibre.com>, Lukasz Majewski <lukma@denx.de>,
+ 46e09a7af769-7f00d94d7desm2722520a34.22.2026.07.29.09.29.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Jul 2026 09:29:18 -0700 (PDT)
+Message-ID: <afb92523-90a9-456d-b0c5-66042627854d@baylibre.com>
+Date: Wed, 29 Jul 2026 11:29:17 -0500
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] i2c: mtk_mt8195_i2c_ddc: add new driver
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Heiko Schocher <hs@nabladev.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Chunfeng Yun <chunfeng.yun@mediatek.com>,
  Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Julien Stephan <jstephan@baylibre.com>, Tom Rini <trini@konsulko.com>,
- Sam Shih <sam.shih@mediatek.com>
-Subject: Re: [PATCH v2 1/2] clk: mediatek: probe parent providers on demand
-Date: Wed, 29 Jul 2026 11:17:42 -0500
-Message-ID: <178534172705.998601.16883937333293973375.b4-ty@b4>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260724-ccaione-upstream-fix-clk-probe-v2-1-ebcef2e94e9d@baylibre.com>
-References: <20260724-ccaione-upstream-fix-clk-probe-v2-1-ebcef2e94e9d@baylibre.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+ Casey Connolly <casey.connolly@linaro.org>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
+ Justin Swartz <justin.swartz@risingedge.co.za>,
+ Johan Jonker <jbx6244@gmail.com>
+References: <20260727-mt8188-add-ddc-i2c-driver-v2-0-bf1c45fcd588@baylibre.com>
+ <20260727-mt8188-add-ddc-i2c-driver-v2-2-bf1c45fcd588@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260727-mt8188-add-ddc-i2c-driver-v2-2-bf1c45fcd588@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785341879; x=1785946679;
+ d=baylibre.com; s=google; t=1785342559; x=1785947359;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=m6i3qURXc7jN8FH9yiK2RdV2TI7wihyaV97DPEE8ZDk=;
- b=QlwA9EorDp1Z0+Dqrexx+ft+PnXY1AEP/xWJYlBrHUbqmMw17lzN169bRp1D9TvtIK
- KsnIHPRzcz2sFtrHARf4bwRxYQNVCX0pTT2KfnfXvY6l4wrrmZJBCUeirkqSzpr81LpV
- YhwskUkkBQuZGO1dB8YlEGRdMHoefuG7EN7m9VF94XGc0Ihg18ckskM9UTJmC7hhCfAm
- lO0La9cNzCI5Ru+KwYpnP1AvkIcZa6p6KYu0Yasd7AFRYFc6QCqu9wvl+KPQiqarn4q0
- WtaLefQ3Tk8jVwy51iDTwOdioxaNAyYgEXRUUj1SED9hGcaXeO4FxWmB6ArEYmDbAOr3
- PZdQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=SmVLyD3hAz3ccMgxCwgLXLOW4LECUINQOp3DhHjaWpw=;
+ b=VbVAs2X6CkrqJiDv5/7ev78pbELwQyReyMdZoNx06aD1FR7jA3KGdJhp9Gd36reLtd
+ 6DkTTI10aMD0E+1WNxjeJpzLafWrhjsFDFZ2D10A9SKhYNsnirZVdFpbGgFKvny0ME5v
+ iY/F1ST0OWXQMeq8nu9fdKrOPUw9AlATJ7s5YjzNv2R4u+P4B5jBUgMjRMFfdLw6aE+S
+ 7SsURsT9VogVkjp+N1Ep+f9FBXx+BXGPEA3CG63ByujOoUBvQzVr7xIBtAnTKmIaUWug
+ 0Et9D4rc0HL6Jgmo5ZorsOByYqvGmuLBk+XfmGlCXbozL5LwNa0QFQWDZHyvvbTm+vMg
+ eOPA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=QlwA9Eor
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=VbVAs2X6
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,28 +148,17 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, 24 Jul 2026 10:36:05 +0200, Carlo Caione wrote:
-> MediaTek clock trees can reference parents provided by a different clock
-> controller. The provider registry is populated when each controller
-> probes, so an early consumer can request a parent before its provider has
-> been registered.
+On 7/27/26 3:43 AM, Julien Stephan wrote:
+> Add a new driver for HDMI DDC channel reading for MT8195 based SoCs.
+> The driver is based on the corresponding kernel driver.
 > 
-> When lookup misses, find the MediaTek clock device whose operations and
-> clock-tree type match the requested provider, then probe that device.
-> This removes the probe-order dependency without probing unrelated clock
-> controllers or treating a driver's bind callback as a type marker.
-> 
-> [...]
 
-Fixed some merge conflicts while applying.
+...
 
-Applied to mediatek-for-main, thanks!
+> +#define DDC2_CLOCK 572 /* BIM=208M/(v*4) = 90Khz */
+> +#define DDC2_CLOCK_EDID 832 /* BIM=208M/(v*4) = 62.5Khz */
+> +
+Do we need to do anything about [1] here? (about math not adding
+up for 90Khz comment.)
 
-[1/2] clk: mediatek: probe parent providers on demand
-      commit: 976b12414c18cb7d601f073dcb2282bac1924197
-[2/2] clk: mediatek: drop probe-after-bind provider setup
-      commit: bf75f80082a194a95eb2aef039a746c5765ba8d1
-
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+[1]: https://patchwork.ozlabs.org/project/uboot/patch/20260717-mt8188-add-ddc-i2c-driver-v1-2-e89ccd173567@baylibre.com/#3728771
