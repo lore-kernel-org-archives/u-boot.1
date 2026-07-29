@@ -1,161 +1,162 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55407C54F51
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 14:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED443C54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 14:23:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BB2DC408A3;
-	Wed, 29 Jul 2026 14:05:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 53DC780E65;
+	Wed, 29 Jul 2026 14:23:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nbH1A-6r3ivw; Wed, 29 Jul 2026 14:05:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v3750DirGDHM; Wed, 29 Jul 2026 14:23:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8297840B07
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7448A80E43
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785333933;
-	bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
+	d=lists.u-boot-project.org ; s=default; t=1785334988;
+	bh=4FRxEURqlaWgs++lTqoE2KIWnhh5c/yhZJAXSx9VJmk=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CVpd16au1FENfZh0syD3d3RnrixY7ssCVR9y57prpmFi/tmd5GQtaB0P4dIAYw0hH
-	 2IInU6qduLxDqR0HnGyq5Tg+jo0R+IbkNclOqdGYzLj3CTHI/tO7Eb1xXMmjrhLgr3
-	 1Pq1q/+KV1Ms1qTu/vzxDE0ly32pw5IcF5QkpgbM3WuH87TaHYDeZ3drb/R1OjIaNW
-	 gYta0fZwBv7mqPYNyd/xrYmUcI2gsMT6MVuarh+IIMDdEaqKO+BhvJGvtxbHhvS/FV
-	 NP2AwaFS3fYFmh/55eTbSMsDfpDNdKtEaM5a5cc9xpSNdKHgvfE6BqxFEgnyHHPrFa
-	 e4tNalrpt+L2g==
+	b=hyQtoE8F73plRAkOP55vtjprjwImZR8XWeSdwM0ANQTni0FMSUNpLPWcdaKUUil13
+	 d0wY2k7EWHmyEa79gj65JLx/Ha1yCkd30+fjwEwz5hwJfbR6uhGUX4vImPCnK7NbeL
+	 7ATZWghY7EkOqOjT5SCIvGpNlvvt/7pcBkQRGjWx6Y1i7OXs+z3PE8Zq2VCafa7lW8
+	 69YsGYIAqQJJ//Ax78t2fmIS8/6mrXs1OOIYPaiEuB+nR9dzIuwHt8O+oWSfxcwyFA
+	 WyIwCjZGTOtLPcighsD2qhRmi7MeeGX3sNbvh9pj6R/+/leaTuXUQL9dVJH/7+HJvk
+	 /zuJHOLPPwF4g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8297840B07;
-	Wed, 29 Jul 2026 14:05:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B879194
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:05:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7448A80E43;
+	Wed, 29 Jul 2026 14:23:08 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C9C793B1
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:23:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0C8F040267
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:05:32 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id BB4A06060A
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:23:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UmJpu3EgNm2J for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 14:05:31 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::129; helo=mail-lf1-x129.google.com;
- envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E88DA40074
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E88DA40074
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E88DA40074
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:05:30 +0000 (UTC)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5aeb98460c6so919712e87.2
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:05:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785333928; cv=none;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4QJRoJJbOThx for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 14:23:06 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 537DF60609
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 537DF60609
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 537DF60609
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:23:05 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3F7628494B; Wed, 29 Jul 2026 16:23:03 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B952982991
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 16:23:00 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-c15e03c2763so188329266b.0
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 07:23:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785334980; cv=none;
  d=google.com; s=arc-20260327;
- b=dlyQiIReNEU9Fx59i90OP3+IBQXvMSOKSmSqknwCWMfTHsCg5mZ5yuhd6U9WPnv86E
- KosOZIPMusS9x7KFYuATlNa8e5SzO4ADvk5eGsUpFcZnzd25aW3NTYA6AJIg+27/cvg9
- nqF833rA56E8WD5r1VFWo9Vrfl6F9wu+Vf5gN7Fa/CqJNEnW65V0X2OCnE+SxRwmwJG0
- Pn6PU8NJMtyaVN4dM0xIY9fGWY42IL+2p7LYABGRnROnDo3+6ejtipdESy+0COU99FDV
- YRfPHmN3qFNioZB4GyK2VjF0f8T3AY87rNyoyFHyax4ux3NtxSI65zynPakdrxVAoT0l
- 9WIg==
+ b=CS+1jvhUV0y+Kve8DtSHv6RX6sviRtUqSy8Zs5ckK2Waytz5QRhaN38zhjwHkqLp/3
+ 77PwZ+Xd4NC0b70n0n74PVas73CN1JCF1XLI0HP98BpBqK51TYlGsum/N35+1FMf6DMq
+ qbX70nv7/ab1ENNvrcZOWoi6eS4sNqLP3oMPNuQps/BruL5wX5+g/8hsLIv5IXN54wNp
+ 8u1k+pImPILq2ePLDsT8NH+UTketiAxnr6MBB2HSL432YGnj4q1KE/baaLvEwp7Na/4R
+ mi2IHT+RHdEanUJBOAiywwkuDU5ksM43N8q40ir9rRuLxJX6FPCV+Q7PMRLHZsob8GkT
+ brBg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
- fh=vSfkEd6RapT6KDy195vRPFzrFfySQXIaOmo0/M0zGFI=;
- b=Q4bmM7byTKKcBBzWIFalr8lyzuVRdTMejaugLrwvVVHwVlqSgjfcA4eCiD6MPFSeV9
- dQAZugYzCmMBqAATj1H/fSFhanm13rScuKp7KYZGf1bK7Sz7lorCjDHiXh3j2+edTnC3
- m4sR9b4T2YmChU5EGVqjW96/LKqSLtyJExtLY5IcN0yfMk7xiIXClfi4fHUJYQEiDV2E
- omt8L9Afg0HHiwMHhlnOFzTR6wXPBJrfeV3Q5dFDktEEhNU4uGdKaunvAjEh9FR+VSrZ
- 4KhiBJioLqSuj36Nb051ZZkNdbt5bqS5Xsi2VeY7pFbC75VEq8P3W+hLpUPwYK0HGJA/
- Hbvg==; darn=lists.u-boot-project.org
+ bh=4FRxEURqlaWgs++lTqoE2KIWnhh5c/yhZJAXSx9VJmk=;
+ fh=K663HywGznuJkoJlEa8tCn6crA+DM6R47ZAwn7hwWr8=;
+ b=MS93jWu3TFkAUXkJ9S63ZvnRPpF9sVxpincKLTs5hp8zwTuF2t7d4Qdowm3ZNVWybA
+ 0pnrvSzBb96AVc/8ngwTOjoibkSFdBMcP3i/69qt8/x31S2VbWNNly3/A32ogu4uN259
+ tx0x1uo67gz05mAlPeLj/Lmukm6KY6wshMke9NH2ZxpE5spQ5kPEJr0CQp7Ce42PzGSG
+ KvBMlKbmUSTDaLUpzzfb0wylVYMH/l9ZS3+D0UZ+iX+NdoUMakZjKs40pa7A/2JEHya2
+ pnssKSf/UaU5Ufia+X0iXriDVnEp9EyjWLqB0nvYpAPJ91X2M9vRq7MSyCHaHo5O/hb/
+ hCqw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785333928; x=1785938728;
+ d=1e100.net; s=20251104; t=1785334980; x=1785939780;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
- b=L7wLURYGZwrgnwd6TPi3Ag1lvPL3/clLbisQ5whQ2st+nTPVSRj1tWvGVb5YlMz6bA
- dalw20/a/smyQnFX8lbGc906wkVgC+NJyue0s1ImVchYxfMo5LSkdDAgxFkpFsVuJODV
- fTwWlLRlm72+CWyCk3Mu2UvZo7GLKRWygzXV1c1u8i2MsekbiZqcW8RjuZ5JpZOoEyHj
- 8GH4sMgjGL5/+VjVtp1hQ4XQI+hor/XJteKnS5KtwapKSB+3wov1dM8w6jJt6bgT/ejc
- xyflS925+prTJLXzJPIVPIxXZINrJI8Rz3KJdc9MsUD1CzT9NxzojrpVYUNtn9BvOxha
- Kvnw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpuEGV/fVOCAB2AFCT7BdGDifaJBtuCXNTwU0Kwunl0eq7PudTFTy+5a8HXVRIWESjWm0g41Ps=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwoIW/XpEBN8RQDEriBKQD2NzwRz3+x6moNVKJKQ0VRJLVB7OHg
- yGmEg8yqlJeF9aVw5M5vm5jzuBVADm8iMSg9xDylGxqFFTNwtENvJmyfoHFmane43NdhQSeyJ1w
- JKf+z4bkqww3k8Q/TBAND0os3tkMiLOvCLSecv8gtTw==
-X-Gm-Gg: AR+sD12xg/lqYmJ8m7PhtsokByCoqJlD31SirpGfx+52seazdLF3LeBz11gs2uNw23C
- 2wrrR4u0hgp7JL+tdXey/Z30Zt9bWbMYs3eMYUF3EjerM5S6Yo+7QvLOZFI3QBdfgN2G+mfm+H7
- j0ekGe5ANtg3mO5hMvFXp89pRT6Ga9DEg8y5k1B5WfcBCbngxyvIFl8A+dq24u5XZPBhkSZd9Jm
- IEo9NuRQvlmwQTn3uj2ImSTXNIKhbMXp1hELdOAiKuAVFStHKs+kPCJqlEXovI4CgAcwy72coWj
- D5wKXDbUpdLkpEsi8mp+PSU4VYWeNsDdJwIcVfvnC5F6K1w321H6oE52hVuPXfYBbHQDRKgRJZ9
- /JRQftaKboqVNJ683TLXwgFjUrh0+T9KHs4C39l60gFSK74H43dOCC/XiK3R8ZHFBLpGhWIl8Sq
- 57n2EDVNurxNyO
-X-Received: by 2002:a05:6512:1151:b0:5b1:5f28:2198 with SMTP id
- 2adb3069b0e04-5b2d020fed2mr1490360e87.3.1785333928206; Wed, 29 Jul 2026
- 07:05:28 -0700 (PDT)
+ bh=4FRxEURqlaWgs++lTqoE2KIWnhh5c/yhZJAXSx9VJmk=;
+ b=VdSFOAu8Mr6MGO4Vjs1gIKjZZ2INMjr+YXP365z4HSVukZ91INkEohdKtUxfLNJ3rx
+ +RcJ1V/LAK6ieYZVHf2OjOJDp3RQW4Nh+J8jATaPdmWPNrDZoEDKmSN+HQwTyoFcVC/Q
+ COdGZK6/z8bZZY3Kpk0OXG593sULp1LnAbhRmnkj0gnJZwDf/CmZd70LZHgiormiL2gg
+ ZWqPjYJVgLQZdqM+aeBSTWACs1s5rsl6HWAC/vCxh+0jLFw3ZuHzkHqUkVRkOHBiDwCn
+ YRH9My7pQEvIetbxtl9Szl7vtli7bda7GdZ0JS3mtsLERwm/oiI8M98K04uIqGAf7tK0
+ vaaw==
+X-Gm-Message-State: AOJu0YxnY+jnFs+DCYBDiMdcNo7MADLdNqZ6Fdm5xgmxI5r4w8RHG9Yd
+ DfwuVTEQRmBL5TPmS3YihpWvVpCDh8USkDI+BaaaQqz3hbNYsb45+XTamr8isaFVXhwBJ7txMj1
+ XQ9ahapk+m1uSYwRfYf2aUCpX8XGOT/y+hJzkXuw6GTJlODlUrXrIqT0=
+X-Gm-Gg: AR+sD11u5ToNDkOVYzvnVqqcUOgNjnluzg0etxFBG8dPlr48HfO4EQ11wMlt8WW/wvU
+ Y434EMDJccgSNfqTulHx4+9hvOHcAHNs6A5KcMmw65PItwh0ErCPwRCPj8X1q/MmiaJGECbYQuT
+ sE0TojDZrAw9UOKnzDhJpn15JMbiMZ9K1gZ52SP4zkM1NDDXxZXLSSCZ4s485Du0RraOniBWMvt
+ qEbX1XCM3OdpgoKS1tKJAtIM8jzXK3Oy/ChRKgzgveWj9n5MOxzPXCA+raMzALtcCWmvEdLLcNm
+ ZT9B1KgVbQU4OxSWiir/aMEbP7MZmI12gYJFv5vPAtaN8k8Rq+VSz2ddUMCYTHI1JGIO31WNzxY
+ =
+X-Received: by 2002:a17:907:f497:b0:c16:aee0:5422 with SMTP id
+ a640c23a62f3a-c1f8cbcff84mr159030466b.6.1785334980087; Wed, 29 Jul 2026
+ 07:23:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
- <20260727-m4-v6-6-2f58566d48ca@riscstar.com> <amdGSBKT4iRzuh1P@pie>
- <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
- <ameQUN3zlD0Ei8Jm@pie>
- <CAH22mJyMqTgRLqyfVZGgSHHNK7XnBTnrkY-R1ix5DN+oiBDEbg@mail.gmail.com>
- <amhyAULw9Wovuo3z@pie>
-In-Reply-To: <amhyAULw9Wovuo3z@pie>
-From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 29 Jul 2026 22:05:14 +0800
-X-Gm-Features: AUfX_myratUIMNxziYDUDPYas-IAQ6Q95tOa9o7aAndXzXSN0Y1sJzBTTZYZErk
-Message-ID: <CAH22mJyyExBuUrDNgRg=WU4f6RkN7M0QhtuUAgXiUf8b84TaCQ@mail.gmail.com>
-Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
-To: Yao Zi <me@ziyao.cc>
-Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
- Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>, 
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>, 
- Johan Jonker <jbx6244@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Guodong Xu <guodong@riscstar.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
+References: <20260723-rk3588-fracpll-v2-0-382d113f3a80@flipper.net>
+In-Reply-To: <20260723-rk3588-fracpll-v2-0-382d113f3a80@flipper.net>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Wed, 29 Jul 2026 18:22:45 +0400
+X-Gm-Features: AUfX_mzCKCBoLTuo_syPPX9fq4n7WKQI4DHCBE1NJpPL1u2tl-r7fRRQ4vVQO9g
+Message-ID: <CAKTNdwGXzbNSqDxVGi6Z0+MrxYbBkNhM60AcUxV2=Q-PCO7R2w@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] clk: rockchip: pll: fixes and simplification of
+ maths in RK3588 frac PLL
+To: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
+ Jagan Teki <jagan@edgeble.ai>
+Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <u-boot@0leil.net>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Finley Xiao <finley.xiao@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1785333928; x=1785938728;
- darn=lists.u-boot-project.org; 
+ d=flipper.net; s=google; t=1785334980; x=1785939780; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
- b=YjCQ2v5xRQ1E7zu4s6BtpEHTz1l+VaJkOcvqYsvsJKLY9ZemxTGqA0MEsaYxz/flB1
- Gr4DkOIV/Zbtmks0H2MJmcLGbVabTog/i9PC4NXaiokMzaSq3QnXHJAhE+2F6wGcS+o5
- UV+aN6rRVDtWRGy1DjjytN0+2x2UwSccbNZTtb8pd3hCmHEWKg1zBquh2zPnzA6JPwpy
- XPUlayCc5gamzYDMefmjYrXEmUIna8FAoOk8LtXTsUmsLHMqZ1XC6jQi+MWPU28+x0ng
- VHHuQhP09k6ACBRdhfLonNUMS4KRB2Xz1NrdTObmYXl8EITVfDQbFUbWGwOpIMOCvj50
- Ijzg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=riscstar.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=4FRxEURqlaWgs++lTqoE2KIWnhh5c/yhZJAXSx9VJmk=;
+ b=5oLPXl31oBMiYZS3UifVn/uWNpztdWZL2j72ESboZH37pbp5oh3moOSLOtP1jJk6TL
+ +MQekFy7zfrATEMQ79SphfA8xHRLZMoK1blJ2qGVWMOtukyaajlWvmTzkIhkqhvEI6vn
+ O1lSklEjrZpiIzTZl8DEewppnvotcCoJ0XzkxkBL93Dd5CLq1qBpHtJAVmp86IwDTNgg
+ ZUqBhCYT8RoocFGS0FXo3fVtKjMkkeZ1pxPEFOIZIxwiofIgSpb1vDvtzoM0zoKi1udM
+ u3P2twdLIQ4DFKKJtr9e8MIqewvQ65Uc29zlq2urk2wyGSb4SwczTJ3hh3lu+siVVyNz
+ gBCg==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ spf=fail smtp.mailfrom=flipper.net
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=riscstar-com.20251104.gappssmtp.com
- header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=YjCQ2v5x
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=5oLPXl31
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=alchark@flipper.net
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=flipper.net header.i=@flipper.net header.b="5oLPXl31"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -170,97 +171,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, Jul 28, 2026 at 5:11=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
->
-> On Tue, Jul 28, 2026 at 09:04:52AM +0800, Eric Chung wrote:
-> > On Tue, Jul 28, 2026 at 1:08=E2=80=AFAM Yao Zi <me@ziyao.cc> wrote:
-> > >
-> > > On Mon, Jul 27, 2026 at 09:08:52PM +0800, Eric Chung wrote:
-> > > > Hi Yao,
-> > > >
-> > > > I'm not familiar with the policy for syncing DTS files from the Lin=
-ux upstream.
-> > > > Could you clarify how this script works?
-> > > >
-> > > > Does it sync all DTS files from Linux upstream at once, or is it
-> > > > possible to sync
-> > > > only the Spacemit DTS file?
-> > >
-> > > update-subtree.sh cherry-picks a commit from the upstream, or
-> > > merge an upstream tag into the subtree. Cherry-picking SD-related
-> > > commits from Linux upstream suits for your case.
-> > >
-> > > > If I choose to sync only the Spacemit DTS file and include it in my=
- patch set,
-> > > > would that cause conflicts later when others try to sync all DTS fi=
-les?
-> > >
-> > > Tom synchronizes the dts subtree with Linux upstream irregularly, the=
-re
-> > > should be no conflict or relatively small ones if you cherry-pick the
-> > > changes, while adding downstream nodes in *-u-boot.dtsi might suffer
-> > > from duplication, too, during synchronization.
-> > >
-> >
-> > The process is a bit complex. Since my main issue is that the DTS
-> > files are out of
-> > date, would it be simpler if I just copy the relevant Spacemit DTS
-> > files directly
-> > from the Linux upstream into the dts/upstream folder?
->
-> The answer is simply no.
->
+Hi Quentin,
 
-OK. I'll keep using my own overlay DTS file.
-I tried upstream DTS file. It only gave me more bugs. I could switch to
-upstream DTS file when Tom syncs it.
+On Thu, Jul 23, 2026 at 7:04=E2=80=AFPM Alexey Charkov <alchark@flipper.net=
+> wrote:
+>
+> Current fractional PLL code for RK3588 (also applies to RK3576) has two
+> issues causing it to overshoot the requested frequency for some negative
+> values of the fractional coefficient: one due to rounding, the other due
+> to treating -32768 as an invalid value where it is actually valid. It
+> also overflows the calculation of the fractional PLL rate when reading
+> it back, causing the function to return wrong PLL frequencies for non-
+> trivial values of the fractional coefficient.
+>
+> Fix all three, and also use native signed integer arithmetics to avoid
+> manual bitwise operations on the unsigned representation of the fractiona=
+l
+> coefficient, which simplifies the code and makes it easier to read.
+>
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+> Changes in v2:
+> - Pass a pointer to the full table entry to rockchip_rk3588_pll_k_get()
+>   to make it the single source of truth for both m and k in the fractiona=
+l
+>   PLL auto-calculation path (thanks Quentin)
+> - Do the unsigned->signed conversion in a single patch instead of
+>   scattering it across several smaller changes (thanks Quentin)
+> - Use s16 to hold the value of k in the rate table, in line with what
+>   the hardware uses and also with my similar change submitted to Linux
+> - Add a comment in code with the actual clock rate formulas for easier
+>   future reference
+> - Link to v1: https://patch.msgid.link/20260713-rk3588-fracpll-v1-0-cdf47=
+f2ca0b8@flipper.net
+>
+> To: u-boot@lists.denx.de
+> To: Elaine Zhang <zhangqing@rock-chips.com>
+> To: Jagan Teki <jagan@edgeble.ai>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Alexey Charkov <alchark@flipper.net>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jonas Karlman <jonas@kwiboo.se>
+> Cc: Finley Xiao <finley.xiao@rock-chips.com>
+>
+> ---
+> Alexey Charkov (5):
+>       clk: rockchip: pll: drop misleading fout in rockchip_rk3588_pll_k_g=
+et()
+>       clk: rockchip: pll: fix rounding of negative k in RK3588 frac PLL
+>       clk: rockchip: pll: fix RK3588 frac PLL result for k=3D-32768
+>       clk: rockchip: pll: let rockchip_rk3588_pll_k_get update m directly
+>       clk: rockchip: pll: fix overflow and drop manual two's complement o=
+n RK3588/RK3576
+>
+>  arch/arm/include/asm/arch-rockchip/clock.h |  8 +--
+>  drivers/clk/rockchip/clk_pll.c             | 86 +++++++++++++-----------=
+------
+>  2 files changed, 41 insertions(+), 53 deletions(-)
 
-> > > > Best Regards
-> > > > Eric
->
-> Regards,
-> Yao Zi
->
-> > > By the way, please avoid top-posting if possible.
-> > >
-> > > Thanks,
-> > > Yao Zi
-> > >
-> > > > On Mon, Jul 27, 2026 at 7:52=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
-> > > > >
-> > > > > On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
-> > > > > > Add the SDH0 controller node and its pinctrl groups to the u-bo=
-ot
-> > > > > > overlay. The upstream DTS only contains the eMMC node; the SD c=
-ard
-> > > > > > controller (sdhci@d4280000) and its MMC1 pinctrl configuration =
-are
-> > > > > > missing. Place the new node inside the storage-bus via path-bas=
-ed
-> > > > > > merge so it inherits the dma-ranges from the parent bus.
-> > > > > >
-> > > > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-> > > > >
-> > > > > Please cherry-pick upstream devicetree changes from Linux upstrea=
-m with
-> > > > > tools/update-subtree.sh instead of adding our own copies. Changes=
- for
-> > > > > k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v7.2.
-> > > > >
-> > > > > Best regards,
-> > > > > Yao Zi
-> > > > >
-> > > > > > ---
-> > > > > > v5:
-> > > > > > - Append power source field on eMMC/SD pinctrl.
-> > > > > > v3:
-> > > > > > - Fix SD pinctrl as uhs.
-> > > > > > v2:
-> > > > > > - Use vmmc-supply as vqmmc-supply on SD node.
-> > > > > > - Add alias of mmc0 and mmc1.
-> > > > > > ---
-> > > > > >  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 +++++++++++++++=
-+++++++++++++++-
-> > > > > >  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 +++++++++++++++=
-+++++++++++++-
-> > > > > >  2 files changed, 173 insertions(+), 4 deletions(-)
+I see that Heiko applied the Linux version of related patches [1]. Is
+this one good to go, or would you like any changes first?
+
+[1] https://lore.kernel.org/linux-rockchip/178532348703.455945.487247881971=
+0322236.b4-ty@sntech.de/T/#t
+
+Best regards,
+Alexey
