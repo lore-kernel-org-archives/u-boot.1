@@ -1,99 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE0D4C54F51
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 21:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E851C54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 21:52:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B361180BDB;
-	Wed, 29 Jul 2026 21:52:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 39133407CB;
+	Wed, 29 Jul 2026 21:52:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pq04p0F57JnV; Wed, 29 Jul 2026 21:52:20 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uXbb6UgV8R9D; Wed, 29 Jul 2026 21:52:22 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BA8E380F5D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DD906407F8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785361940;
-	bh=lyu+DFUDVAoC9QBD1QiDXC/B1UxHwJ+c5yzmWZo9kaE=;
+	d=lists.u-boot-project.org ; s=default; t=1785361942;
+	bh=bP/mZhZRX726JsHEnsnXMVrBqvA8fbTzyFncaK1sWWU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=z6wkiGPYzfpY2PT2kQdRpWTFhNXuoyjUny6u5ApwdRfJTOuyjDcvLLJ9le6tmQ9kz
-	 CsYbAUTcOIUOoCFuWtIPvjRnYBs2BRMOXxUs+LW9DvyRJbwMNpvmGPkFC1oTaO51LG
-	 GzmzK8pginRRqbXEfX6TBA4m5YJbNcxdqQDVhoCWKBWJergExj9zu3KxEjAAb0Yfyt
-	 lAJ0I8hJFrpn7bNL6i95HNEyANIHKiy6x7zGX955igvZgiSCNh6ed1+gL9Yw6lzmje
-	 NsFgBeDGHX7iNbY7df0Xz4QFJa/0UFwrs/3QyMcTukVea32egwAsWaxPhpTPvADWUM
-	 JT1FQyIAxalqw==
+	b=sPscJtnH9Jd3yndf0iFcD/Q2qf1zj1QjNDtbv1gMHr+FrSDDYnQs0RIwuP2yaokwa
+	 dSLegPKRIY5fFJtsqnN3QVkVEaGm4AY0r8mH8VMEE0APVseJGdPIOVn9y2GEOsLkkJ
+	 8qGVeSzjDpEB2tpM1UEJi7PPk8DOQrzEe8xk/cWZVd+xAkEbrSzqauhbgZ1TEWZhKy
+	 C7nj2Ghj16XA8dCHHVYwqUjJsMTmnEeXeyg47z0alGDOdQd6dI3upYG+Ig3/T0mRWM
+	 Z6RvL7aZCTisTt9YYgNdCfp0jpGFioAesMveihxFDQCb2x32ld+0p5qsK40gWYGTgj
+	 69xYaJyofAG5w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BA8E380F5D;
-	Wed, 29 Jul 2026 21:52:20 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2581B28E
+	by smtp4.osuosl.org (Postfix) with ESMTP id DD906407F8;
+	Wed, 29 Jul 2026 21:52:21 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5A48628E
  for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:25:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0307980ED9
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4C13D405B3
  for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:25:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FbHC4_mdtOYm for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GSbKl5I14J1k for <u-boot@lists.u-boot-project.org>;
  Wed, 29 Jul 2026 18:25:38 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E26B580A9B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E26B580A9B
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E26B580A9B
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 535D54040B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 535D54040B
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 535D54040B
  for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:25:37 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c15ca7a7ca9so133843966b.0
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c12614b81c9so232550666b.3
  for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:25:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785349536; x=1785954336;
+ d=1e100.net; s=20251104; t=1785349535; x=1785954335;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lyu+DFUDVAoC9QBD1QiDXC/B1UxHwJ+c5yzmWZo9kaE=;
- b=cj9rh2xBC6/htogUlsFOfUEaZQINBEXP4vlmA0I9V6o/VMSyff8Fjm3HQ+0MAZ96yb
- cFmsoYlmUt0kxga7FLmCtK0yLgCs6WT8vJbeyxQPszAbGEIZHqMj4ZRhZo1lJTMP2GoK
- JDqUONYtjCNhoIlABvr7556Eabv0S9rnBlc/J2Px4Ihc/XFji2kw0La+MN7fa8F5YwWH
- DqB6Spqm9PnM02aeyBHEBsF8SLeCF5tzviMDE7cdqLmrKyE9Lyfbf5EPX5fIm8BNlNYx
- WvAoHsUyMue54j2s33HkBslHtYuRvCistnE74KbA21cv6exORLVw33U/0ERIi5lMMjrj
- xL7A==
-X-Gm-Message-State: AOJu0YxZzcb+0Xz04dWygiwSZE6DZ/prmbXl567BdMTuXcrCpvnlRLz7
- Z22FHDYR9z5KbIkfwyPxHDst7YRZkQrlkdjuzLVaNddIduMPbFFO881XJsVVWepHCiI=
-X-Gm-Gg: AR+sD13PxHcugtysOCrhwC3Va63vReRXffL9cITy6eizX6Epi6DZd1X7VuthyZeWusj
- FXU2G4OrfVzcnCzFPmg4HMu7CVuVaWlrN1Hf75sHO00FKeT2jy8FCE/kClkxpBJa9q5pRrezSj+
- Txyx67K67EiZS8/Ng8KgNITo8iFbswAcTfDSBtMY7W0lmkQOh8k8vGqoIxSHTOL4SZHylsEg8k2
- BQ7cvu+GtcgqpVnJmE0ezs4qznl4pKQvjpsn+uUpSyPZSfVuRNY6uqUcilj0rgsJO8XDjGJKK3t
- 6srNwFQWRossHamLNMsrJJ8W93DXI9abb06Pbr1xv97NKckImyPetfjUfAbvyf8EodB6aTXyuTM
- Hp42NDZZj3cHtYgAfRMFxWNisxN8xSlw4hPFKboGrCx0pxuovX9cZ2fSao2almJML1Nd35eB20m
- IzRZTIzifEARgv2xPNAjjHV02egXsivhuYU6eHMnHyfl7qAUGoqxgx6rWqA47ypUuo5Ed6ZthjK
- jIfqjiqjYyR6TaBvniBD4w+6U5ebbk2zqB1LBXZ1sraObyJVDa4SQ==
-X-Received: by 2002:a17:907:a0c8:b0:c16:9ef6:b7da with SMTP id
- a640c23a62f3a-c1f727be1bdmr400516366b.59.1785349535850; 
+ bh=bP/mZhZRX726JsHEnsnXMVrBqvA8fbTzyFncaK1sWWU=;
+ b=dTyWJemP5fKjmWcuQyty3Udl6fgbzkfDg7FigxtSPykb6UHejmEKM5i/lTSI2Z5JPg
+ FOX+qI0hi2Xk502WuzB2CEK91+pz4F1/5AEruj+DW8eWR8GoS7u/PVmWDvzvf3YNMzcl
+ ADAG7Mg5m1NY3t048l+ATdZEsNm1Vf8/fDhM+1IO0xj8SyXd+dwnVutvL/XGct1lRQap
+ B16jnDBL4vfaDSkXNPzxFEVxInFBSpGeAgU85Qq6fztJmEZkP0VAbrLo18+5eRzNxLcM
+ M+IXHDuq93z+ZbyxfUBjqvD7yhefRUJLjcLWADrcim3WtuAtpuRtXNJCXj5CGYfsHLFO
+ wWNA==
+X-Gm-Message-State: AOJu0YxRJ3cy1HVCoiHERFrtbL3TSgXLwEHgzJPaj/b3XjzxottCV6y6
+ rGhqOEffk1gh+7J7ZYLQ7XU47CDgBgqXPaT/A8qjLWprB7rSFHB9R6saFaYdj3Ttc5w=
+X-Gm-Gg: AR+sD12AyvdhuSB276MIaL9CiBFtUzRECZ0ntiGgmb46PkKKqUupVbJRWIGSxLh7Ccs
+ vky2daGcJ2/2Vo4eFVwskjoxks3yKvH6l73Izc039eEoqwhCJ4oK8kK5qTCxP4RQ9uWe/RUzwe7
+ jcztl9Mu6+eGIGjLsBmqEwNAKV6jgCbVMBOGw6ckhEhuS//6vny//fnkxDiNxdCj1sCqvRRwD6I
+ AZuIBd9Rq+UjLjLDCJanTIVWUqvDZAycumJYCYTdDKFjDj+VTLdsviseQ7Hr0zScPdlmrcaM/Vj
+ dQQqUBGeFMHUIn7GkwZ3xalM0d88E+Gi/KIeh07eTlwJoFho8qi7GfaK+xL1uU9hisuf0MDptcr
+ TChX4bPmyzwV3ZHa30zzpPPhtrp8TIopKgaQSa0Xl1V2u4HT6u5XuYt0nGSykLczyFY7IxJgz5U
+ nHUTbkbZRbQBLtfqo+LpBDENVzMJy1rbSX+VOiIzEZjWl2QGjUDYSCFf2m26LTntDVoUhzIPsTI
+ cqbz0WRGiuWkoZF3DSnMqXrJH2BjfElwloBTj9E1EbSp0Pi/m1Nfw==
+X-Received: by 2002:a17:906:99cb:b0:c15:f6b6:18f4 with SMTP id
+ a640c23a62f3a-c1f71dc3eedmr412664266b.24.1785349535254; 
  Wed, 29 Jul 2026 11:25:35 -0700 (PDT)
 Received: from [127.0.1.1]
  (p200300ff0f038f0047bee160d2cc76b5.dip0.t-ipconnect.de.
  [2003:ff:f03:8f00:47be:e160:d2cc:76b5])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1f83f4dd91sm145977866b.39.2026.07.29.11.25.35
+ a640c23a62f3a-c1f83f4dd91sm145977866b.39.2026.07.29.11.25.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 11:25:35 -0700 (PDT)
+ Wed, 29 Jul 2026 11:25:34 -0700 (PDT)
 From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Wed, 29 Jul 2026 20:25:23 +0200
-Subject: [PATCH v4 2/2] test: tpm: check malformed capability and OIAP
- responses are rejected
+Date: Wed, 29 Jul 2026 20:25:22 +0200
+Subject: [PATCH v4 1/2] tpm: bounds-check the device-reported response length
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260729-tpm-trunc-resp-v4-2-5dd1a634ea4d@byteray.co.uk>
+Message-Id: <20260729-tpm-trunc-resp-v4-1-5dd1a634ea4d@byteray.co.uk>
 References: <20260729-tpm-trunc-resp-v4-0-5dd1a634ea4d@byteray.co.uk>
 In-Reply-To: <20260729-tpm-trunc-resp-v4-0-5dd1a634ea4d@byteray.co.uk>
 To: u-boot@lists.u-boot-project.org, 
@@ -105,26 +104,26 @@ Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
 X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Wed, 29 Jul 2026 21:52:12 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785349536; x=1785954336;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785349535; x=1785954335;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lyu+DFUDVAoC9QBD1QiDXC/B1UxHwJ+c5yzmWZo9kaE=;
- b=m+36ZdDCY+vZtSDFcLHzJlMX119ej/uA7V8B0L9v6Lr/o/tGYeeqOr1T6Fr3Lwlujk
- glph++kICdjhsU5aE94cp2bQBLzPwg+p1iTXL5pjIdv4qmHX1wbuSUQGhPz7rq6/q/x5
- PjRbeoJhHquU2+g0cfSMMb7DGfZbjENRiTECzSH71gAgG7DDcM8zfUZ12OlF3JWoO8Kg
- 7h+P1ryhtPh8T7uOhuAOO+FVfSNEkBBq4TS62t8P1P9k0fzCZxijPk7rjmdnBmpK7/y4
- ucrH2XH7RrD6LBteonbphCz2+HxExmrI5yfoMekogRFjWsTYkndAW/AzL5+TtUhKGCta
- LsHw==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=bP/mZhZRX726JsHEnsnXMVrBqvA8fbTzyFncaK1sWWU=;
+ b=zTfsj/r9NevFZlTDYmRaotf+GDglNzCXdle0P6MIQu/i1pLfJEpR03lWWZYN/gzSCe
+ y2R5I6wj9NUfh41jUBH5Jq7fzyonylngXVdaCiCDm2RvU3VhBq299UHMS/0YwGD6t4IC
+ TYI74kxM0OnvPeR+eqWS8vnInsidc7D1E8du6QBlxM2mpmwqXxiUGpBNmhvrNoEMU8Rs
+ msJXlH1pzMBp8QcgrCIpwddjspsU1fK/9d3Dnct9x9HjQQqw/bQ5lmb5OpTHl6vWHyRA
+ x/e6ZB5eVQ8PoDVfyvNsj8n2T9oKS9W+Y50s3RWC1K5juBsL0kiQIwis6V6qokh5YTUv
+ WhSQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=m+36ZdDC
+ header.s=20251104 header.b=zTfsj/r9
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,227 +138,657 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The length of a TPM reply comes from the device and cannot be trusted to
-be well-formed. Add DM tests for the malformed replies that the length
-checks reject.
+The length of a TPM reply is set by the device: tpm_sendrecv_command()
+stores the number of bytes received, caps it only at the command buffer
+size, and reports success whenever the reply's return code is 0. Callers
+then use that length unchecked. The clearest damage is in the parsers that
+compute response_length - <header> and index the result (the TPM1 OIAP
+helpers and tpm2_get_capability): a reply shorter than the header
+underflows the subtraction into a huge memcpy.
 
-For TPM2 GetCapability: one reply too short to hold its header, and one
-advertising more data than the caller's buffer holds. The sandbox emulator
-gains two test-only capability properties that produce them; the short
-reply is caught by the length check in tpm_sendrecv_command(), the
-over-long one by the caller's buffer bound.
+Rather than guard each caller, check the length once at the choke point.
+tpm_sendrecv_command() gains a min_response_len argument and rejects a
+reply shorter than the caller says it needs, before the caller parses it;
+every command that reads a response now declares its minimum.
 
-For the TPM1 OIAP helpers tpm1_load_key2_oiap() and
-tpm1_get_pub_key_oiap(): a reply too short to hold the auth trailer that
-their length arithmetic subtracts. The emulator answers OIAP with a zeroed
-session and both commands with a truncated reply, so the length check
-rejects them before the subtraction underflows. These paths need
-CONFIG_TPM_AUTH_SESSIONS, enabled here in the sandbox config.
+tpm2_get_capability() additionally copies response_len - 15 bytes into the
+caller's buffer, but was never told how big that buffer is, so a reply
+longer than it overruns it. Give the function a buf_size argument and
+reject a reply that would not fit, so the copy is bounded for every
+capability rather than for the properties query alone.
 
+A TPM sits on a discrete SPI/I2C/LPC bus that is physically accessible, so
+a reply this malformed is reachable by a bus interposer or a faulty part;
+on the TPM2 path this parsing runs during measured boot.
+
+Fixes: 69cd8f0681f4 ("tpm: add TPM2_GetCapability command support")
+Fixes: be6c1529c1ce ("tpm: add AUTH1 cmds for LoadKey2 and GetPubKey")
 Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 ---
- configs/sandbox_defconfig      |  1 +
- drivers/tpm/tpm2_tis_sandbox.c | 28 ++++++++++++++
- drivers/tpm/tpm_tis_sandbox.c  |  9 +++++
- include/tpm-v2.h               | 10 +++++
- test/dm/tpm.c                  | 88 ++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 136 insertions(+)
+ cmd/tpm-v2.c              |  4 +++-
+ include/tpm-v2.h          |  5 ++--
+ lib/efi_loader/efi_tcg2.c |  9 ++++---
+ lib/tpm-common.c          | 16 ++++++++++---
+ lib/tpm-utils.h           |  8 ++++++-
+ lib/tpm-v1.c              | 59 +++++++++++++++++++++++++++-------------------
+ lib/tpm-v2.c              | 60 ++++++++++++++++++++++++++++-------------------
+ lib/tpm_api.c             |  4 +++-
+ 8 files changed, 106 insertions(+), 59 deletions(-)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 79f46317e45..db26b6813de 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -394,6 +394,7 @@ CONFIG_ECDSA=y
- CONFIG_ECDSA_VERIFY=y
- CONFIG_RSASSA_PSS=y
- CONFIG_TPM=y
-+CONFIG_TPM_AUTH_SESSIONS=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
- CONFIG_TEST_FDTDEC=y
-diff --git a/drivers/tpm/tpm2_tis_sandbox.c b/drivers/tpm/tpm2_tis_sandbox.c
-index 50e308e7116..1fae0fc6ce1 100644
---- a/drivers/tpm/tpm2_tis_sandbox.c
-+++ b/drivers/tpm/tpm2_tis_sandbox.c
-@@ -542,6 +542,34 @@ static int sandbox_tpm2_xfer(struct udevice *dev, const u8 *sendbuf,
- 		property_count = get_unaligned_be32(sent);
- 		sent += sizeof(property_count);
+diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+index 847b2691581..5c591b30119 100644
+--- a/cmd/tpm-v2.c
++++ b/cmd/tpm-v2.c
+@@ -211,7 +211,9 @@ static int do_tpm_get_capability(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	data = map_sysmem(simple_strtoul(argv[3], NULL, 0), 0);
+ 	count = simple_strtoul(argv[4], NULL, 0);
  
-+		/*
-+		 * Test hook: reply with a truncated (header-only) success
-+		 * response so the response parser can be exercised against a
-+		 * reply too short to hold the data it promises. Honoured for any
-+		 * capability so the check can be tested on a path without a
-+		 * capability-specific length bound.
-+		 */
-+		if (property == TPM2_PT_SANDBOX_SHORT_RESPONSE)
-+			return sandbox_tpm2_fill_buf(recv, recv_len, tag,
-+						     TPM2_RC_SUCCESS);
-+
-+		/*
-+		 * Test hook: reply with a success response advertising more
-+		 * property data than a single-property request can hold, to
-+		 * exercise the caller-buffer bound in the parser.
-+		 */
-+		if (capability == TPM2_CAP_TPM_PROPERTIES &&
-+		    property == TPM2_PT_SANDBOX_LONG_RESPONSE) {
-+			*recv_len = TPM2_HDR_LEN + sizeof(u8) + sizeof(u32) +
-+				    sizeof(u32) + TPM2_PROPERTY_NB *
-+				    sizeof(struct tpms_tagged_property);
-+			put_unaligned_be16(tag, recv);
-+			put_unaligned_be32(*recv_len, recv + sizeof(tag));
-+			put_unaligned_be32(TPM2_RC_SUCCESS,
-+					   recv + sizeof(tag) + sizeof(u32));
-+			return 0;
-+		}
-+
- 		switch (capability) {
- 		case TPM2_CAP_PCRS:
- 			break;
-diff --git a/drivers/tpm/tpm_tis_sandbox.c b/drivers/tpm/tpm_tis_sandbox.c
-index d7341062b31..1f63e60cbaa 100644
---- a/drivers/tpm/tpm_tis_sandbox.c
-+++ b/drivers/tpm/tpm_tis_sandbox.c
-@@ -226,6 +226,15 @@ static int sandbox_tpm_xfer(struct udevice *dev, const uint8_t *sendbuf,
- 		*recv_len = 12;
- 		memset(recvbuf, '\0', *recv_len);
- 		break;
-+	case 0x0a: /* TPM_ORD_OIAP: hand out a zeroed auth session for tests */
-+		*recv_len = TPM_HDR_LEN + sizeof(uint32_t) + 20;
-+		memset(recvbuf, '\0', *recv_len);
-+		break;
-+	case 0x21: /* TPM_ORD_GetPubKey: truncated reply, for the length check */
-+	case 0x41: /* TPM_ORD_LoadKey2: truncated reply, for the length check */
-+		*recv_len = TPM_HDR_LEN;
-+		memset(recvbuf, '\0', *recv_len);
-+		break;
- 	default:
- 		printf("Unknown tpm command %02x\n", code);
- 		return -ENOSYS;
+-	rc = tpm2_get_capability(dev, capability, property, data, count);
++	rc = tpm2_get_capability(dev, capability, property, data,
++				 sizeof(u32) + count * sizeof(struct tpms_tagged_property),
++				 count);
+ 	if (rc)
+ 		goto unmap_data;
+ 
 diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index 4f5082f2234..648dfa2aec8 100644
+index a776d24d71f..4f5082f2234 100644
 --- a/include/tpm-v2.h
 +++ b/include/tpm-v2.h
-@@ -43,6 +43,16 @@ struct udevice;
- #define TPM2_CAP_PCRS 0x00000005U
- #define TPM2_CAP_TPM_PROPERTIES 0x00000006U
+@@ -550,12 +550,13 @@ u32 tpm2_pcr_read(struct udevice *dev, u32 idx, unsigned int idx_min_sz,
+  * @capability	Partition of capabilities
+  * @property	Further definition of capability, limited to be 4 bytes wide
+  * @buf		Output buffer for capability information
+- * @prop_count	Size of output buffer
++ * @buf_size	Size of @buf in bytes
++ * @prop_count	Number of properties to request
+  *
+  * Return: code of the operation
+  */
+ u32 tpm2_get_capability(struct udevice *dev, u32 capability, u32 property,
+-			void *buf, size_t prop_count);
++			void *buf, size_t buf_size, size_t prop_count);
  
-+/*
-+ * Sandbox emulator test hooks: a TPM2_GetCapability for these properties makes
-+ * the emulated TPM reply with, respectively, a header-only response and one
-+ * advertising more property data than a single-property request can hold. They
-+ * let tests drive the response parser with a reply shorter or longer than the
-+ * data it should carry, as a tampered or faulty TPM on the bus could.
-+ */
-+#define TPM2_PT_SANDBOX_SHORT_RESPONSE	0x00ffffff
-+#define TPM2_PT_SANDBOX_LONG_RESPONSE	0x00fffffe
-+
- /* Definition of (UINT32) TPM2_PT Constants */
- #define TPM2_PT_GROUP			(u32)(0x00000100)
- #define TPM2_PT_FIXED			(u32)(TPM2_PT_GROUP * 1)
-diff --git a/test/dm/tpm.c b/test/dm/tpm.c
-index 87c5c416daa..eb6e55c3ab0 100644
---- a/test/dm/tpm.c
-+++ b/test/dm/tpm.c
-@@ -6,6 +6,8 @@
+ /**
+  * tpm2_get_pcr_info() - get the supported, active PCRs and number of banks
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 5f9bbe97455..e15a2340e83 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -154,7 +154,8 @@ static int tpm2_get_max_command_size(struct udevice *dev, u16 *max_command_size)
  
- #include <dm.h>
- #include <tpm_api.h>
-+#include <tpm-v1.h>
-+#include <tpm-v2.h>
- #include <dm/test.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -197,3 +199,89 @@ static int dm_test_tpm_autostart_reinit(struct unit_test_state *uts)
- 	return 0;
+ 	memset(response, 0, sizeof(response));
+ 	ret = tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
+-				  TPM2_PT_MAX_COMMAND_SIZE, response, 1);
++				  TPM2_PT_MAX_COMMAND_SIZE, response,
++				  sizeof(response), 1);
+ 	if (ret)
+ 		return -1;
+ 
+@@ -180,7 +181,8 @@ static int tpm2_get_max_response_size(struct udevice *dev,
+ 
+ 	memset(response, 0, sizeof(response));
+ 	ret = tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
+-				  TPM2_PT_MAX_RESPONSE_SIZE, response, 1);
++				  TPM2_PT_MAX_RESPONSE_SIZE, response,
++				  sizeof(response), 1);
+ 	if (ret)
+ 		return -1;
+ 
+@@ -205,7 +207,8 @@ static int tpm2_get_manufacturer_id(struct udevice *dev, u32 *manufacturer_id)
+ 
+ 	memset(response, 0, sizeof(response));
+ 	ret = tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
+-				  TPM2_PT_MANUFACTURER, response, 1);
++				  TPM2_PT_MANUFACTURER, response,
++				  sizeof(response), 1);
+ 	if (ret)
+ 		return -1;
+ 
+diff --git a/lib/tpm-common.c b/lib/tpm-common.c
+index b592c22bfc1..e4a620990fa 100644
+--- a/lib/tpm-common.c
++++ b/lib/tpm-common.c
+@@ -159,7 +159,8 @@ u32 tpm_return_code(const void *response)
  }
- DM_TEST(dm_test_tpm_autostart_reinit, UTF_SCAN_FDT);
+ 
+ u32 tpm_sendrecv_command(struct udevice *dev, const void *command,
+-			 void *response, size_t *size_ptr)
++			 void *response, size_t *size_ptr,
++			 size_t min_response_len)
+ {
+ 	int err, ret;
+ 	u8 response_buffer[COMMAND_BUFFER_SIZE];
+@@ -190,11 +191,20 @@ u32 tpm_sendrecv_command(struct udevice *dev, const void *command,
+ 	if (err < 0)
+ 		return err;
+ 
++	ret = tpm_return_code(response);
 +
-+/*
-+ * A TPM sits on a bus a physical attacker can reach, so its responses cannot be
-+ * trusted to be well-formed. Check that a reply too short to hold its header is
-+ * rejected by tpm_sendrecv_command(), rather than parsed with an underflowed
-+ * length.
-+ */
-+static int dm_test_tpm2_get_capability_short(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 buf[64];
++	/*
++	 * The response length is reported by the (untrusted) TPM. Reject a
++	 * successful reply too short to hold what the caller will parse, so it
++	 * cannot read past the end of a truncated response. A TPM error reply
++	 * is a bare header with no body; let its return code reach the caller.
++	 */
++	if (!ret && size_ptr && response_length < min_response_len)
++		return TPM_LIB_ERROR;
 +
-+	ut_assertok(get_tpm_version(TPM_V2, &dev));
-+	ut_assertok(tpm_auto_start(dev));
+ 	if (size_ptr)
+ 		*size_ptr = response_length;
+ 
+-	ret = tpm_return_code(response);
+-
+ 	log_debug("TPM response [ret:%d]: ", ret);
+ 	for (i = 0; i < response_length; i++)
+ 		log_debug("%02x ", ((u8 *)response)[i]);
+diff --git a/lib/tpm-utils.h b/lib/tpm-utils.h
+index a519e182353..fcff8b8beef 100644
+--- a/lib/tpm-utils.h
++++ b/lib/tpm-utils.h
+@@ -76,9 +76,15 @@ u32 tpm_return_code(const void *response);
+  * @param size_ptr	output buffer size (input parameter) and TPM
+  *			response length (output parameter); this parameter
+  *			is a bidirectional
++ * @param min_response_len	minimum acceptable response length in bytes,
++ *			including the 10-byte header. When @size_ptr is not NULL
++ *			and the TPM returns fewer bytes, the command fails rather
++ *			than let the caller parse a truncated reply. Pass 0 when
++ *			the response body is not parsed.
+  * Return: return code of the TPM response
+  */
+ u32 tpm_sendrecv_command(struct udevice *dev, const void *command,
+-			 void *response, size_t *size_ptr);
++			 void *response, size_t *size_ptr,
++			 size_t min_response_len);
+ 
+ #endif /* __TPM_UTILS_H */
+diff --git a/lib/tpm-v1.c b/lib/tpm-v1.c
+index a6727c575fd..a0ebe924311 100644
+--- a/lib/tpm-v1.c
++++ b/lib/tpm-v1.c
+@@ -44,7 +44,7 @@ u32 tpm1_startup(struct udevice *dev, enum tpm_startup_type mode)
+ 			     mode_offset, mode))
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, buf, NULL, NULL);
++	return tpm_sendrecv_command(dev, buf, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_resume(struct udevice *dev)
+@@ -57,7 +57,7 @@ u32 tpm1_self_test_full(struct udevice *dev)
+ 	const u8 command[10] = {
+ 		0x0, 0xc1, 0x0, 0x0, 0x0, 0xa, 0x0, 0x0, 0x0, 0x50,
+ 	};
+-	return tpm_sendrecv_command(dev, command, NULL, NULL);
++	return tpm_sendrecv_command(dev, command, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_continue_self_test(struct udevice *dev)
+@@ -65,7 +65,7 @@ u32 tpm1_continue_self_test(struct udevice *dev)
+ 	const u8 command[10] = {
+ 		0x0, 0xc1, 0x0, 0x0, 0x0, 0xa, 0x0, 0x0, 0x0, 0x53,
+ 	};
+-	return tpm_sendrecv_command(dev, command, NULL, NULL);
++	return tpm_sendrecv_command(dev, command, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_auto_start(struct udevice *dev)
+@@ -148,7 +148,7 @@ u32 tpm1_nv_define_space(struct udevice *dev, u32 index, u32 perm, u32 size)
+ 			     size_offset, size))
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, buf, NULL, NULL);
++	return tpm_sendrecv_command(dev, buf, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_nv_set_locked(struct udevice *dev)
+@@ -175,7 +175,8 @@ u32 tpm1_nv_read_value(struct udevice *dev, u32 index, void *data, u32 count)
+ 			     index_offset, index,
+ 			     length_offset, count))
+ 		return TPM_LIB_ERROR;
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + dataSize(4) = 14 */
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 14);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "d",
+@@ -214,7 +215,7 @@ u32 tpm1_nv_write_value(struct udevice *dev, u32 index, const void *data,
+ 			     length_offset, length,
+ 			     data_offset, data, length))
+ 		return TPM_LIB_ERROR;
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 0);
+ 	if (err)
+ 		return err;
+ 
+@@ -241,7 +242,8 @@ u32 tpm1_extend(struct udevice *dev, u32 index, const void *in_digest,
+ 			     in_digest_offset, in_digest,
+ 			     PCR_DIGEST_LENGTH))
+ 		return TPM_LIB_ERROR;
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + digest(20) = 30 */
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 30);
+ 	if (err)
+ 		return err;
+ 
+@@ -271,7 +273,8 @@ u32 tpm1_pcr_read(struct udevice *dev, u32 index, void *data, size_t count)
+ 			     0, command, sizeof(command),
+ 			     index_offset, index))
+ 		return TPM_LIB_ERROR;
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + digest(20) = 30 */
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 30);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "s",
+@@ -294,7 +297,7 @@ u32 tpm1_tsc_physical_presence(struct udevice *dev, u16 presence)
+ 			     presence_offset, presence))
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, buf, NULL, NULL);
++	return tpm_sendrecv_command(dev, buf, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_finalise_physical_presence(struct udevice *dev)
+@@ -303,7 +306,7 @@ u32 tpm1_finalise_physical_presence(struct udevice *dev)
+ 		0x0, 0xc1, 0x0, 0x0, 0x0, 0xc, 0x40, 0x0, 0x0, 0xa, 0x2, 0xa0,
+ 	};
+ 
+-	return tpm_sendrecv_command(dev, command, NULL, NULL);
++	return tpm_sendrecv_command(dev, command, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_read_pubek(struct udevice *dev, void *data, size_t count)
+@@ -319,7 +322,8 @@ u32 tpm1_read_pubek(struct udevice *dev, void *data, size_t count)
+ 	u32 data_size;
+ 	u32 err;
+ 
+-	err = tpm_sendrecv_command(dev, command, response, &response_length);
++	/* tag(2) + size(4) + rc(4) = 10 */
++	err = tpm_sendrecv_command(dev, command, response, &response_length, 10);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "d",
+@@ -343,7 +347,7 @@ u32 tpm1_force_clear(struct udevice *dev)
+ 		0x0, 0xc1, 0x0, 0x0, 0x0, 0xa, 0x0, 0x0, 0x0, 0x5d,
+ 	};
+ 
+-	return tpm_sendrecv_command(dev, command, NULL, NULL);
++	return tpm_sendrecv_command(dev, command, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_physical_enable(struct udevice *dev)
+@@ -352,7 +356,7 @@ u32 tpm1_physical_enable(struct udevice *dev)
+ 		0x0, 0xc1, 0x0, 0x0, 0x0, 0xa, 0x0, 0x0, 0x0, 0x6f,
+ 	};
+ 
+-	return tpm_sendrecv_command(dev, command, NULL, NULL);
++	return tpm_sendrecv_command(dev, command, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_physical_disable(struct udevice *dev)
+@@ -361,7 +365,7 @@ u32 tpm1_physical_disable(struct udevice *dev)
+ 		0x0, 0xc1, 0x0, 0x0, 0x0, 0xa, 0x0, 0x0, 0x0, 0x70,
+ 	};
+ 
+-	return tpm_sendrecv_command(dev, command, NULL, NULL);
++	return tpm_sendrecv_command(dev, command, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_physical_set_deactivated(struct udevice *dev, u8 state)
+@@ -377,7 +381,7 @@ u32 tpm1_physical_set_deactivated(struct udevice *dev, u8 state)
+ 			     state_offset, state))
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, buf, NULL, NULL);
++	return tpm_sendrecv_command(dev, buf, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_get_capability(struct udevice *dev, u32 cap_area, u32 sub_cap,
+@@ -405,7 +409,8 @@ u32 tpm1_get_capability(struct udevice *dev, u32 cap_area, u32 sub_cap,
+ 			     cap_area_offset, cap_area,
+ 			     sub_cap_offset, sub_cap))
+ 		return TPM_LIB_ERROR;
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + capSize(4) = 14 */
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 14);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "d",
+@@ -438,7 +443,8 @@ u32 tpm1_get_permanent_flags(struct udevice *dev,
+ 	u32 err;
+ 	u32 data_size;
+ 
+-	err = tpm_sendrecv_command(dev, command, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + dataSize(4) = 14 */
++	err = tpm_sendrecv_command(dev, command, response, &response_length, 14);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "d",
+@@ -478,7 +484,8 @@ u32 tpm1_get_permissions(struct udevice *dev, u32 index, u32 *perm)
+ 			     0, command, sizeof(command),
+ 			     index_offset, index))
+ 		return TPM_LIB_ERROR;
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + respSize(4) + nvPublic(60) + attributes(4) = 78 */
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 78);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "d",
+@@ -510,7 +517,7 @@ u32 tpm1_flush_specific(struct udevice *dev, u32 key_handle, u32 resource_type)
+ 			     resource_type_offset, resource_type))
+ 		return TPM_LIB_ERROR;
+ 
+-	err = tpm_sendrecv_command(dev, buf, response, &response_length);
++	err = tpm_sendrecv_command(dev, buf, response, &response_length, 0);
+ 	if (err)
+ 		return err;
+ 	return 0;
+@@ -667,7 +674,7 @@ u32 tpm1_terminate_auth_session(struct udevice *dev, u32 auth_handle)
+ 	if (oiap_session.valid && oiap_session.handle == auth_handle)
+ 		oiap_session.valid = 0;
+ 
+-	return tpm_sendrecv_command(dev, request, NULL, NULL);
++	return tpm_sendrecv_command(dev, request, NULL, NULL, 0);
+ }
+ 
+ u32 tpm1_end_oiap(struct udevice *dev)
+@@ -695,7 +702,8 @@ u32 tpm1_oiap(struct udevice *dev, u32 *auth_handle)
+ 	if (oiap_session.valid)
+ 		tpm1_terminate_auth_session(dev, oiap_session.handle);
+ 
+-	err = tpm_sendrecv_command(dev, command, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + authHandle(4) + nonceEven(20) = 34 */
++	err = tpm_sendrecv_command(dev, command, response, &response_length, 34);
+ 	if (err)
+ 		return err;
+ 	if (unpack_byte_string(response, response_length, "ds",
+@@ -750,7 +758,8 @@ u32 tpm1_load_key2_oiap(struct udevice *dev, u32 parent_handle, const void *key,
+ 				  parent_key_usage_auth);
+ 	if (err)
+ 		return err;
+-	err = tpm_sendrecv_command(dev, request, response, &response_length);
++	/* nonceEven(20) + continueAuthSession(1) + resAuth(20) = 41 */
++	err = tpm_sendrecv_command(dev, request, response, &response_length, 41);
+ 	if (err) {
+ 		if (err == TPM_AUTHFAIL)
+ 			oiap_session.valid = 0;
+@@ -811,7 +820,8 @@ u32 tpm1_get_pub_key_oiap(struct udevice *dev, u32 key_handle,
+ 				  request + sizeof(command), usage_auth);
+ 	if (err)
+ 		return err;
+-	err = tpm_sendrecv_command(dev, request, response, &response_length);
++	/* tag(2) + size(4) + rc(4) + nonceEven(20) + continueAuthSession(1) + resAuth(20) = 51 */
++	err = tpm_sendrecv_command(dev, request, response, &response_length, 51);
+ 	if (err) {
+ 		if (err == TPM_AUTHFAIL)
+ 			oiap_session.valid = 0;
+@@ -907,8 +917,9 @@ u32 tpm1_get_random(struct udevice *dev, void *data, u32 count)
+ 				     0, command, sizeof(command),
+ 				     length_offset, this_bytes))
+ 			return TPM_LIB_ERROR;
++		/* tag(2) + size(4) + rc(4) + randomSize(4) = 14 */
+ 		err = tpm_sendrecv_command(dev, buf, response,
+-					   &response_length);
++					   &response_length, 14);
+ 		if (err)
+ 			return err;
+ 		if (unpack_byte_string(response, response_length, "d",
+diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+index f443b738f82..9a567b29293 100644
+--- a/lib/tpm-v2.c
++++ b/lib/tpm-v2.c
+@@ -180,7 +180,7 @@ u32 tpm2_startup(struct udevice *dev, bool bon, enum tpm2_startup_types mode)
+ 	 * Note TPM2_Startup command will return RC_SUCCESS the first time,
+ 	 * but will return RC_INITIALIZE otherwise.
+ 	 */
+-	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ 	if ((ret && ret != TPM2_RC_INITIALIZE) || !bon)
+ 		return ret;
+ 
+@@ -196,7 +196,7 @@ u32 tpm2_self_test(struct udevice *dev, enum tpm2_yes_no full_test)
+ 		full_test,
+ 	};
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_auto_start(struct udevice *dev)
+@@ -252,7 +252,7 @@ u32 tpm2_clear(struct udevice *dev, u32 handle, const char *pw,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_nv_define_space(struct udevice *dev, u32 space_index,
+@@ -307,7 +307,7 @@ u32 tpm2_nv_define_space(struct udevice *dev, u32 space_index,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
+@@ -358,7 +358,7 @@ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_nv_read_value(struct udevice *dev, u32 index, void *data, u32 count)
+@@ -391,7 +391,8 @@ u32 tpm2_nv_read_value(struct udevice *dev, u32 index, void *data, u32 count)
+ 	u16 tag;
+ 	u32 size, code;
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len);
++	/* tag(2) + size(4) + rc(4) + paramSize(4) + nvSize(2) = 16 */
++	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len, 16);
+ 	if (ret)
+ 		return log_msg_ret("read", ret);
+ 	if (unpack_byte_string(response, response_len, "wdds",
+@@ -442,7 +443,7 @@ u32 tpm2_nv_write_value(struct udevice *dev, u32 index, const void *data,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, response, &response_len);
++	return tpm_sendrecv_command(dev, command_v2, response, &response_len, 0);
+ }
+ 
+ u32 tpm2_pcr_read(struct udevice *dev, u32 idx, unsigned int idx_min_sz,
+@@ -472,7 +473,8 @@ u32 tpm2_pcr_read(struct udevice *dev, u32 idx, unsigned int idx_min_sz,
+ 			     17 + pcr_sel_idx, pcr_sel_bit))
+ 		return TPM_LIB_ERROR;
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len);
++	/* tag(2) + size(4) + rc(4) + pcrUpdateCounter(4) = 14 */
++	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len, 14);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -492,7 +494,7 @@ u32 tpm2_pcr_read(struct udevice *dev, u32 idx, unsigned int idx_min_sz,
+ }
+ 
+ u32 tpm2_get_capability(struct udevice *dev, u32 capability, u32 property,
+-			void *buf, size_t prop_count)
++			void *buf, size_t buf_size, size_t prop_count)
+ {
+ 	u8 command_v2[COMMAND_BUFFER_SIZE] = {
+ 		tpm_u16(TPM2_ST_NO_SESSIONS),		/* TAG */
+@@ -508,7 +510,8 @@ u32 tpm2_get_capability(struct udevice *dev, u32 capability, u32 property,
+ 	unsigned int properties_off;
+ 	int ret;
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len);
++	/* tag(2) + size(4) + rc(4) + moreData(1) + cap(4) = 15 */
++	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len, 15);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -519,6 +522,11 @@ u32 tpm2_get_capability(struct udevice *dev, u32 capability, u32 property,
+ 	 */
+ 	properties_off = sizeof(u16) + sizeof(u32) + sizeof(u32) +
+ 			 sizeof(u8) + sizeof(u32);
 +
-+	ut_assert(tpm2_get_capability(dev, TPM2_CAP_PCRS,
-+				      TPM2_PT_SANDBOX_SHORT_RESPONSE, buf,
-+				      sizeof(buf), 1));
++	/* the reply length is set by the TPM; do not overrun the caller's buf */
++	if (response_len - properties_off > buf_size)
++		return TPM_LIB_ERROR;
 +
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm2_get_capability_short, UTF_SCAN_FDT);
-+
-+/*
-+ * Check that a GetCapability reply larger than the caller's buffer is rejected,
-+ * rather than copied past the end of it.
-+ */
-+static int dm_test_tpm2_get_capability_long(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 buf[16];
-+
-+	ut_assertok(get_tpm_version(TPM_V2, &dev));
-+	ut_assertok(tpm_auto_start(dev));
-+
-+	ut_assert(tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
-+				      TPM2_PT_SANDBOX_LONG_RESPONSE, buf,
-+				      sizeof(buf), 1));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm2_get_capability_long, UTF_SCAN_FDT);
-+
-+#if CONFIG_IS_ENABLED(TPM_AUTH_SESSIONS)
-+/*
-+ * A TPM1 OIAP reply carries an auth trailer that is subtracted from a
-+ * device-controlled length. Check that a LoadKey2 reply too short to hold that
-+ * trailer is rejected, rather than parsed with an underflowed length.
-+ */
-+static int dm_test_tpm1_load_key2_oiap_short(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 key[8] = {0};
-+	u8 auth[20] = {0};
-+	u32 handle;
-+
-+	ut_assertok(get_tpm_version(TPM_V1, &dev));
-+	ut_assertok(tpm_init(dev));
-+
-+	ut_assert(tpm1_load_key2_oiap(dev, 0, key, sizeof(key), auth, &handle));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm1_load_key2_oiap_short, UTF_SCAN_FDT);
-+
-+/*
-+ * The GetPubKey OIAP helper subtracts the same auth trailer from the same
-+ * device-controlled length. Check that a reply too short to hold the trailer
-+ * is rejected, rather than parsed with an underflowed length.
-+ */
-+static int dm_test_tpm1_get_pub_key_oiap_short(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 auth[20] = {0};
-+	u8 pubkey[8] = {0};
-+	size_t pubkey_len = sizeof(pubkey);
-+
-+	ut_assertok(get_tpm_version(TPM_V1, &dev));
-+	ut_assertok(tpm_init(dev));
-+
-+	ut_assert(tpm1_get_pub_key_oiap(dev, 0, auth, pubkey, &pubkey_len));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm1_get_pub_key_oiap_short, UTF_SCAN_FDT);
-+#endif
+ 	memcpy(buf, &response[properties_off], response_len - properties_off);
+ 
+ 	return 0;
+@@ -641,7 +649,7 @@ u32 tpm2_send_pcr_allocate(struct udevice *dev, const char *pw,
+ 		offset += sel->size_of_select;
+ 	}
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len);
++	ret = tpm_sendrecv_command(dev, command_v2, response, &response_len, 0);
+ 	if (!ret)
+ 		tpm_init(dev);
+ 
+@@ -659,7 +667,8 @@ static int tpm2_get_num_pcr(struct udevice *dev, u32 *num_pcr)
+ 
+ 	memset(response, 0, sizeof(response));
+ 	ret = tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
+-				  TPM2_PT_PCR_COUNT, response, 1);
++				  TPM2_PT_PCR_COUNT, response,
++				  sizeof(response), 1);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -680,7 +689,8 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
+ 	size_t i;
+ 	u32 ret;
+ 
+-	ret = tpm2_get_capability(dev, TPM2_CAP_PCRS, 0, response, 1);
++	ret = tpm2_get_capability(dev, TPM2_CAP_PCRS, 0, response,
++				  sizeof(response), 1);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -767,7 +777,7 @@ u32 tpm2_dam_reset(struct udevice *dev, const char *pw, const ssize_t pw_sz)
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_dam_parameters(struct udevice *dev, const char *pw,
+@@ -816,7 +826,7 @@ u32 tpm2_dam_parameters(struct udevice *dev, const char *pw,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ int tpm2_change_auth(struct udevice *dev, u32 handle, const char *newpw,
+@@ -861,7 +871,7 @@ int tpm2_change_auth(struct udevice *dev, u32 handle, const char *newpw,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_pcr_setauthpolicy(struct udevice *dev, const char *pw,
+@@ -916,7 +926,7 @@ u32 tpm2_pcr_setauthpolicy(struct udevice *dev, const char *pw,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_pcr_setauthvalue(struct udevice *dev, const char *pw,
+@@ -962,7 +972,7 @@ u32 tpm2_pcr_setauthvalue(struct udevice *dev, const char *pw,
+ 	if (ret)
+ 		return TPM_LIB_ERROR;
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_get_random(struct udevice *dev, void *data, u32 count)
+@@ -989,8 +999,9 @@ u32 tpm2_get_random(struct udevice *dev, void *data, u32 count)
+ 				     0, command_v2, sizeof(command_v2),
+ 				     sizeof(command_v2), this_bytes))
+ 			return TPM_LIB_ERROR;
++		/* tag(2) + size(4) + rc(4) + randomSize(2) = 12 */
+ 		err = tpm_sendrecv_command(dev, buf, response,
+-					   &response_length);
++					   &response_length, 12);
+ 		if (err)
+ 			return err;
+ 		if (unpack_byte_string(response, response_length, "w",
+@@ -1029,7 +1040,7 @@ u32 tpm2_write_lock(struct udevice *dev, u32 index)
+ 		tpm_u16(0),			/* auth_size */
+ 	};
+ 
+-	return tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	return tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ }
+ 
+ u32 tpm2_disable_platform_hierarchy(struct udevice *dev)
+@@ -1057,7 +1068,7 @@ u32 tpm2_disable_platform_hierarchy(struct udevice *dev)
+ 	};
+ 	int ret;
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ 	log_info("ret=%s, %x\n", dev->name, ret);
+ 	if (ret)
+ 		return ret;
+@@ -1070,7 +1081,7 @@ u32 tpm2_disable_platform_hierarchy(struct udevice *dev)
+ u32 tpm2_submit_command(struct udevice *dev, const u8 *sendbuf,
+ 			u8 *recvbuf, size_t *recv_size)
+ {
+-	return tpm_sendrecv_command(dev, sendbuf, recvbuf, recv_size);
++	return tpm_sendrecv_command(dev, sendbuf, recvbuf, recv_size, 0);
+ }
+ 
+ u32 tpm2_report_state(struct udevice *dev, uint vendor_cmd, uint vendor_subcmd,
+@@ -1086,7 +1097,8 @@ u32 tpm2_report_state(struct udevice *dev, uint vendor_cmd, uint vendor_subcmd,
+ 	};
+ 	int ret;
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, recvbuf, recv_size);
++	/* tag(2) + size(4) + rc(4) + subCmd(2) = 12 */
++	ret = tpm_sendrecv_command(dev, command_v2, recvbuf, recv_size, 12);
+ 	log_debug("ret=%s, %x\n", dev->name, ret);
+ 	if (ret)
+ 		return ret;
+@@ -1111,7 +1123,7 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
+ 	};
+ 	int ret;
+ 
+-	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL);
++	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL, 0);
+ 	log_debug("ret=%s, %x\n", dev->name, ret);
+ 	if (ret)
+ 		return ret;
+diff --git a/lib/tpm_api.c b/lib/tpm_api.c
+index 576d601e5ff..a26b8c7671c 100644
+--- a/lib/tpm_api.c
++++ b/lib/tpm_api.c
+@@ -271,7 +271,9 @@ u32 tpm_get_capability(struct udevice *dev, u32 cap_area, u32 sub_cap,
+ 	if (tpm_is_v1(dev))
+ 		return tpm1_get_capability(dev, cap_area, sub_cap, cap, count);
+ 	else if (tpm_is_v2(dev))
+-		return tpm2_get_capability(dev, cap_area, sub_cap, cap, count);
++		/* @count is the buffer size in bytes, as tpm1 expects */
++		return tpm2_get_capability(dev, cap_area, sub_cap, cap, count,
++					   count);
+ 	else
+ 		return -ENOSYS;
+ }
 
 -- 
 2.43.0
