@@ -1,135 +1,130 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1F8C54FCD
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 21:52:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45F0C54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 21:52:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C87FA80F59;
-	Wed, 29 Jul 2026 21:52:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 69D8B60838;
+	Wed, 29 Jul 2026 21:52:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O9gZ0Nce2cYc; Wed, 29 Jul 2026 21:52:16 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9OdAyJCSUJu2; Wed, 29 Jul 2026 21:52:19 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C140980F48
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8E7FE607DE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785361936;
-	bh=4iTpJncp8igwedFPD8nyaTrf2H/PS/j5lo85MZ6wEcc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=AklW5lfbWCFLia2TNVAn/Cn8FpR+7PCIiIbld62+WheRD8XQ4v3bw/XSRGiLQmUFR
-	 YLcJc91lHx4UhcUUDEfjHgn9LKzKYNQ9L0xC5m5KyOV3vEeuQAl69Y03LUh+TTqFeJ
-	 ptzWd6AAYcK7ftkTyBFJaOZ98st5iJw4+zcvKyzqglUma99ZQy4XI5VQhfVT2K0nKT
-	 fgKlvRhSjYWvEbZozAkvpmZXfrko3QkhI2Db3EJJRIOQV3Fr84gxEf3NJHRbWBJDSa
-	 GUQbxY9kGfa3K+fIhNGVqwIzJ7xanwwy7oIG4INT4WNy/J+EFgcBSF+tH5B9iXbZ0E
-	 FKuDFO7GyDLqA==
+	d=lists.u-boot-project.org ; s=default; t=1785361939;
+	bh=EfiF5QOb6H9lXOo8XrvwkF/5zBby2swHfEXJKKo8MOY=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=mQ7MsuYvFm4xGV08pDya0A9gIC72tJQABo+toWX6WuhPt5tboxZwn3llQC+a6MKtg
+	 78N9MH8I4htLmvsXYPbv2e+Ol3NXz8ay3i6E6pEAB2b7IniV40/0CejQCb381KlQq7
+	 8uG6Ev94k87Z/+4s4UyJU20LDb2WLAw+KwhZMsuddtZSLgb52Alr5OflDt4iGWOZXy
+	 x5Mvb1ojbi1FtEtGftT2OQ31ZOIJtvElLxWcVyNS2L0RU0j2SXY9ztprqqLCqnwXOC
+	 wPgdNRDTAS+DCva3AY9lWEPAWPepo2saPcSXekYWS+/Db0JCPk11tiG45/JthGoZ5w
+	 SXPc8Cby4wVaw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C140980F48;
-	Wed, 29 Jul 2026 21:52:16 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E2DE22E5
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8E7FE607DE;
+	Wed, 29 Jul 2026 21:52:19 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D6F9C197
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:25:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C8F5A80C06
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CB6EE606EF
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:25:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SbG0kwXpAttC for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 16:47:59 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PS38TLAQSARv for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 18:25:37 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B7F138064C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B7F138064C
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B7F138064C
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:58 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-495437bb891so581785e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:47:58 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8C6D1606E9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8C6D1606E9
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8C6D1606E9
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:25:36 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c1f758014b8so114217066b.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:25:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785343676; x=1785948476;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=4iTpJncp8igwedFPD8nyaTrf2H/PS/j5lo85MZ6wEcc=;
- b=D8ui9URV+zR2z6Ff6TSv3M1TZf+GQf6V8d2apMrzAnZhpv3oVsCPWl+G6dEaSerWW1
- CzhKGMQQMSPjCuxNzunZt50Gou6L46RvM3g8Qq1dZk6xm/73V9f5H3UV1miXGCeJzCdm
- TjOyjLHVAX1AI1Ra5+e0gPHDIihvMjeTDYVkfa565qfWugJ+/CSl/EotQOq6lA8B1VYD
- miAcDzbMG4v9+F6F8rBBVPOnjUTw5Ukt1z9z6jv6BZxYwn17WhuDO8ygX4OdovrKW1mT
- GnFJVZbC8QeO5ga9BGoT5T25+Cw7cJh97ETRpY/DIqBRWb8sPNtgBb7VMqP9eZ1ZG/ob
- niRw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrDIJ2G2yJ7AJ1uPMPsmvsdmb0EDVfU7+6Asfq1tk9XZJ9GwBXu8ANgQqPRKiStRpid7VXx420=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzRIyba+SjZ4We6zTRgvFnd3B0KUi+lRTd2QzciY6/znyYxHsT0
- mI+trqfVyb3K4+nmbp3kJKdW7DW5OCjlu9/b8L/BMitQmKDdQSv62QmeEv3H0r3L0GE=
-X-Gm-Gg: AR+sD13wPyBbr9SZBHGI4mYGw0dkkeI4TJeFLnfg6IeTFOPBljODy06staU3/lVRa7Q
- pF3ZevnLtr/NWGCGpXPfpI2X08BIg0PaMRHWB0OXz2jTJigQ55Q7KHvB8/UUYGfrNvyjAo7zU64
- iVzZzUUPTyfJaJChR7vLGxZPxKg+7pi24jtJeSM2yhhSpZrBV+M9tKQQSHn15FNt5crHt4/uJJk
- ORcxE9zBH3OIJE1LO//DChKAGDlGh6zlmwE9ezoVZZYhH0HsO1BbX74mirieAHafbhozLbYbbpv
- x+IDwq6249nnULS19URAf8Y3IhBVLihqVbmbeCRaJaQpw43yFlXJkJC1zfDiEJTiKnUQJY+Sibe
- iMdIBB+dvVNo5nwCZ2F4+qSOzCQf1ZnEK2mfTXhe5x8Owf0SRS/bmhC9IJnacmwvAHq+pIx2t+C
- Py7x2RSWPQGzR6mUpfGSWzLupa/suEU+M3Krrfe+sXe+mxwV8HyZgL72rPGcHbh9ZYWF/Z/DkiA
- GEy3lu/MZa3gY+mJrPNJVRQZjubACw0v5E/Nf9kBxZBdaCbGbUEgTw94rDsf6zxuhlguILNprri
- icJQ4U6O2gSWiMRDWfWGa2CA7n4zFTTlCs+3NYJfNd9E9wKh+yecRxRi
-X-Received: by 2002:a05:600c:6d15:b0:495:636b:e50b with SMTP id
- 5b1f17b1804b1-497fd2de69fmr28081785e9.6.1785343676592; 
- Wed, 29 Jul 2026 09:47:56 -0700 (PDT)
-Received: from ?IPV6:2003:ff:f03:8f00:4cb1:53a4:7b38:3d18?
- (p200300ff0f038f004cb153a47b383d18.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:4cb1:53a4:7b38:3d18])
+ d=1e100.net; s=20251104; t=1785349534; x=1785954334;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=EfiF5QOb6H9lXOo8XrvwkF/5zBby2swHfEXJKKo8MOY=;
+ b=BKZyHv1pV6AyAr52tG5qLRc1TK+XXTxBW9BgMoUH/0rC+wiCQCcoc+WdXS6/LJXNjd
+ 5C6g0gRx1N3Be7+6JTwzR2gIfurXtVgCggI3TT9JKCmKeVbiZXYgVPXSAKMQREHY4sd4
+ NIlWRS61AzohL0XiKFspjdv3zuzxwoqOdMxE6ZZbQIbEWKxAznOaBuFC9Vz1PAQUEF3R
+ DLe7K74AbuDKFKe9gCmRVtw0h7E0Wh1UmH1Bp2hp0HV1m2gGPde7EMRP4cG0KHuki0Z1
+ Ukgxx5muUz+YnCz1xL+Jm/+22hntCuFCIePdX6RL6L+1PIRTesdfWGWz2S8Wgh59Z2pV
+ E2CQ==
+X-Gm-Message-State: AOJu0YyW6y+XXFw+dCphB3kxuMH1+42maipyDIdmzzNcczHOhTtGj5Kq
+ qlkBPwybNqrDA9Lsmse5JSlfw/wk13lBSh/xCx2emmjhll3UyqwVhgRFixRBGHPwOqg=
+X-Gm-Gg: AR+sD13A3otc12wi/eftrlJ8ILBWmxYluJjla33VCbqvSFy5lng1iBRILBi+33XNhyX
+ Vyv3jAj7pYa3nRBUCP5/O02RgS2XNqHTJOi/SBdcNKC1s07Ws9wfHWKmcR5IaA398G/MKWg+ucY
+ JJtO7OcYfN0uC+dAOyMfNUrji4QanS6Hv+lC7S3VaMz569NGmC4ecoIIl7s/hd7zIxllh/ytyQ5
+ aLhpFjDEHXbaHafj5CwXmsAFcx9Nu6WTtv8lRGt32Iv8NEV/FgL3orJnqV+T4WMBNqhvd0UNQ8q
+ IVxsINT3k7ijJuaR8H5mWTMM+jTUDCHH38UZ2zNGHN3k8mX3zl5cL/yTZ3H7+sM3WzrhqK9jAFH
+ PucA9GCAxIFjfd1HbN/t0we5Y5+ctrIpBgg85bYMOrghGyyo72HhROTGFXW1uueibJpkBiad4yo
+ GY4X6RFgzkSLrMOPbfyTpfcu87DPbkk4U+n6iEo3dL7ffHSJjf+IUFr627HRPNx+/1cZGDL2B69
+ fWdN37H0wj33Abf3pmf9c/pBy6aRv7xybBzpX7LNjVggKlEGTz1iA==
+X-Received: by 2002:a17:907:e008:10b0:c16:739e:e836 with SMTP id
+ a640c23a62f3a-c1f72148021mr302654666b.35.1785349534514; 
+ Wed, 29 Jul 2026 11:25:34 -0700 (PDT)
+Received: from [127.0.1.1]
+ (p200300ff0f038f0047bee160d2cc76b5.dip0.t-ipconnect.de.
+ [2003:ff:f03:8f00:47be:e160:d2cc:76b5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fb647a8d4sm9550505f8f.0.2026.07.29.09.47.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 09:47:55 -0700 (PDT)
-Message-ID: <8f45a6ec-db43-407b-89ad-0dbbdcefdb4f@byteray.co.uk>
-Date: Wed, 29 Jul 2026 18:47:55 +0200
+ a640c23a62f3a-c1f83f4dd91sm145977866b.39.2026.07.29.11.25.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2026 11:25:34 -0700 (PDT)
+From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+Subject: [PATCH v4 0/2] tpm: bounds-check device-reported response lengths
+Date: Wed, 29 Jul 2026 20:25:21 +0200
+Message-Id: <20260729-tpm-trunc-resp-v4-0-5dd1a634ea4d@byteray.co.uk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] video: bmp: bound RLE8 decode writes to the
- framebuffer
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Tom Rini <trini@konsulko.com>, Wayen Yan <win847@gmail.com>,
- Argus <argus@byteray.co.uk>, u-boot@lists.u-boot-project.org
-References: <20260722-video-oob-fix-v1-0-d6943f687c50@byteray.co.uk>
- <20260722-video-oob-fix-v1-1-d6943f687c50@byteray.co.uk>
- <CAFLszTjsdYu-JoN1jvOfcWDR-nyEN2CkmCVwx2m6WjMN2mVzXA@mail.gmail.com>
-Content-Language: en-US
-From: shj <shahriyar@byteray.co.uk>
-In-Reply-To: <CAFLszTjsdYu-JoN1jvOfcWDR-nyEN2CkmCVwx2m6WjMN2mVzXA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJFFamoC/3XN0Q6CIBgF4FdxXIdDQNSueo/WBdBPUksdoMs53
+ z20G5d1ebZzvjMhD86CR8dkQg4G623bxMAPCdK1bG6A7TVmRAkVpKAMh+6Jg+sbjR34DgvBJVN
+ SmUwbFEedA2NfK3i+fLLv1R10WJSlUVsfWjeuj0O29P7iQ4YJLqjMudSMGG5Oagzg5JjqNu0fa
+ DkY6JbgO4JGgpVZmRdQ5ZURvwi2JcodwSJRAiVKGyW4zr+JeZ7fqL23XkgBAAA=
+X-Change-ID: 20260723-tpm-trunc-resp-664a3babf1cf
+To: u-boot@lists.u-boot-project.org, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Reinhard Pfau <pfau@gdsys.de>, Tom Rini <trini@konsulko.com>, 
+ Argus <argus@byteray.co.uk>, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Wed, 29 Jul 2026 21:52:12 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785343676; x=1785948476;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785349534; x=1785954334;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=4iTpJncp8igwedFPD8nyaTrf2H/PS/j5lo85MZ6wEcc=;
- b=JmIK4ea7u36oNujcQ3kSbvTysHLyEsDKoKobTCoNTdtTyCyPLXw7rEglNIqeE9UYe9
- EjzgwzQS7s1T0/uSixPrPCBSlGOMNW6Ra6q60vuWP3pUspIsZsqlUqdwLtH8x9h6ZYzN
- CUtWbTPJ4vlacT/4st9PHaE0YcoD92UPioC2H8n8F6qkfjFzS3lW9pA+6mPW3DvODcf7
- d4bmF5S+YEKh/ClWxKSsMIH61GS2+q7wbQK+yOlKW5sAFnYgWRDow5/O2uFs6fu6r6iB
- M12LCFu/JRAkq31PWvH9njoGvFmNL0pt8zndMyJ/jipliGnHkYmyLSzomCgcnxtxdlF2
- 9TkA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=EfiF5QOb6H9lXOo8XrvwkF/5zBby2swHfEXJKKo8MOY=;
+ b=UFxs8dwOxiqRHDboDf80mOVALTr1NH+9nrsTDZ9O7k8BuaQiILN35+bkTcQf9ml4Dv
+ 5M7h6cTyjetNmgSvjfiQavErD0wHPywU/+zg1I77VBJEzB9ZD5m7INPensstFf7xUgzJ
+ +tqeGrGh3nZ+P4Vhk4bjMasA5dYfRWjosaw8Xzw+YidArkv+XsYj9kHRMjxf9dVX7M4O
+ bhawI6U0Sd3rcNxxXvSUcw0Y9SL0IkjRf8lBiSZG7VskXkhaADS6Hog3g/RIBX9uddro
+ pdJd8rrgHIgMR2dZ/BpUwpaphpq5gNvvps7tZ5KVIDOuKzIK5BhvH7hM0c/s41tJdbDH
+ 2xtw==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=JmIK4ea7
+ header.s=20251104 header.b=UFxs8dwO
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,74 +139,70 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Simon,
+A TPM reply's length is taken from the device and only upper-capped, then
+several callers use it unchecked: the TPM1 OIAP helpers and the TPM2
+GetCapability parser subtract a fixed header length from it, so a reply too
+short underflows the subtraction into a huge memcpy; the GetCapability
+parser then copies that many bytes into the caller's buffer, so a reply
+longer than the buffer overruns it. Because a TPM sits on a physically
+accessible bus, a cheap bus interposer (the kind used to sniff
+disk-encryption keys) can inject such a reply, and on the TPM2 path this
+parsing runs during measured boot, which is exactly the physical attacker
+that measured boot is meant to resist.
 
-Thanks! Fixed in v3.
+Patch 1 checks the reported length once in tpm_sendrecv_command(), so every
+command that reads a reply rejects a too-short response, and passes the
+caller's buffer size to tpm2_get_capability() so its copy cannot overrun for
+any capability. Patch 2 adds regression tests driving the GetCapability
+parser and the TPM1 OIAP helpers with truncated and over-long replies
+through the sandbox emulator.
 
-And good catch on the unbounded RLE reads. I'll send that as a separate 
-follow-up.
+Based on v2026.07 (fdfe2ec48d5c). A reproducer is available on request.
 
+Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+---
+Changes in v4:
+- tpm2_get_capability(): bound the copy by the caller's buffer size, passed
+  in as a new buf_size argument, instead of a prop_count-derived guess; this
+  covers every capability, not just the properties query. Document @buf_size
+  and @prop_count. (Simon Glass)
+- Add regression tests for the TPM1 OIAP tpm1_load_key2_oiap() and
+  tpm1_get_pub_key_oiap() length checks; enable CONFIG_TPM_AUTH_SESSIONS in
+  the sandbox config so they build. (Simon Glass)
 
-Thanks,
-Shah
+Changes in v3:
+- Rework per review: check the response length once in
+  tpm_sendrecv_command() instead of at each call site, so every command
+  that reads a reply is guarded. Drop the per-site lower-bound checks; keep
+  the GetCapability buffer bound.
+- Drop Miquel's Acked-by, as the fix changed substantially.
 
-On 28.07.26 13:54, Simon Glass wrote:
-> Hi shj,
->
-> On 2026-07-22T07:10:10, shj <shahriyar@byteray.co.uk> wrote:
->> video: bmp: bound RLE8 decode writes to the framebuffer
->>
->> video_display_rle8_bitmap() moves the framebuffer cursor fb up by a
->> full row plus a scanline on each End-Of-Line escape, with no
->> lower-bound check.  Repeated EOL escapes desynchronise fb from the
->> scanline index y: after height - 1 escapes y is back in range while fb
->> has drifted about one framebuffer below priv->fb, and the decoder
->> writes pixel data before the start of the framebuffer.  The DELTA
->> escape recomputes fb from an unchecked y as well.  A crafted RLE8
->> image displayed from the splash-screen or PXE-menu path can therefore
->> write out of bounds.
->>
->> Check the cursor against [priv->fb, priv->fb + fb_size) before each
->> run and reject the image with -EINVAL if a write would fall outside
->> it.
->>
->> Signed-off-by: shj <shahriyar@byteray.co.uk>
->>
->> drivers/video/video_bmp.c | 26 +++++++++++++++++++-------
->>   1 file changed, 19 insertions(+), 7 deletions(-)
->> diff --git a/drivers/video/video_bmp.c b/drivers/video/video_bmp.c
->> @@ -337,8 +347,10 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
->> -                             video_display_rle8_bitmap(dev, bmp, bpix, palette, fb,
->> -                                                       x, y, width, height);
->> +                             if (video_display_rle8_bitmap(dev, bmp, bpix,
->> +                                                           palette, fb, x, y,
->> +                                                           width, height))
->> +                                     return -EINVAL;
-> This now returns a proper error code, so please propagate it rather
-> than flattening every non-zero value to -EINVAL:
->
->      int ret;
->      ...
->      ret = video_display_rle8_bitmap(dev, bmp, bpix, palette, fb,
->                                      x, y, width, height);
->      if (ret)
->          return ret;
->
-> With this:
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
->> diff --git a/drivers/video/video_bmp.c b/drivers/video/video_bmp.c
->> @@ -176,6 +178,9 @@ static void video_display_rle8_bitmap(struct udevice *dev,
->> +                                             if (fb < fb_start ||
->> +                                                 fb + cnt * bytes_per_pixel > fb_end)
->> +                                                     return -EINVAL;
-> BTW this bounds the writes correctly, but the reads from the RLE
-> stream (bmap) are still unbounded: the decoder advances bmap and the
-> encoded-run aggregation reads bmap[2]/bmap[3] with no check against
-> the end of the loaded image, so a crafted image from the same
-> splash/PXE path can still drive an out-of-bounds read. That is beyond
-> the scope of this patch, so a follow-up is fine.
->
-> Regards,
-> Simon
+Changes in v2:
+- Use my real name in the From and Signed-off-by (Miquel Raynal)
+
+---
+Shahriyar Jalayeri (2):
+      tpm: bounds-check the device-reported response length
+      test: tpm: check malformed capability and OIAP responses are rejected
+
+ cmd/tpm-v2.c                   |  4 +-
+ configs/sandbox_defconfig      |  1 +
+ drivers/tpm/tpm2_tis_sandbox.c | 28 ++++++++++++++
+ drivers/tpm/tpm_tis_sandbox.c  |  9 +++++
+ include/tpm-v2.h               | 15 ++++++-
+ lib/efi_loader/efi_tcg2.c      |  9 +++--
+ lib/tpm-common.c               | 16 ++++++--
+ lib/tpm-utils.h                |  8 +++-
+ lib/tpm-v1.c                   | 59 ++++++++++++++++------------
+ lib/tpm-v2.c                   | 60 ++++++++++++++++------------
+ lib/tpm_api.c                  |  4 +-
+ test/dm/tpm.c                  | 88 ++++++++++++++++++++++++++++++++++++++++++
+ 12 files changed, 242 insertions(+), 59 deletions(-)
+---
+base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
+change-id: 20260723-tpm-trunc-resp-664a3babf1cf
+
+Best regards,
+--  
+Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+
