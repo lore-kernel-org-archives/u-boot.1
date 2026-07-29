@@ -1,196 +1,144 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92438C53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 06:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A655EC53219
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 07:10:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 470A940ACD;
-	Wed, 29 Jul 2026 06:01:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4AB6981130;
+	Wed, 29 Jul 2026 07:10:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Wf8nrDwMm2_O; Wed, 29 Jul 2026 07:10:41 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 58AA981119
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785309041;
+	bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ubedxnI6QLEgm/TNu7LLCNUw033az/kkz9jpPBmLcNpP52iR1X+8OUmTyI4lv8/pp
+	 35G4uBeB3OnNeh1mw1X9/XdDj0buJuDWi3O8fOaJlSLyr5Sq1kQFyAB+Ddoiy5MoYi
+	 Z7JrKX/b5nktaf9bmswRU7ugWvhp/HE9d7QbeV7sXs+ynoHlyel01ZtEeaKxm+Cbd4
+	 r0Acj7Arm87Wt9L6rvEAuD94BWy6xpC9ljuwuzzbuScE+trBTtPxD+J6gPdAK+Eu3T
+	 g4E6oBjeOAg60jQZxXLeLOfLU0HZGwDFPz/2Oxc4HYDY9CzQOgUBwdAWhLT57z+GBZ
+	 r/HJMAbmGzrwQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 58AA981119;
+	Wed, 29 Jul 2026 07:10:41 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DFCC145B
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:10:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id D1F6D40A3B
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:10:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id S1IurLX8ey3p; Wed, 29 Jul 2026 06:01:41 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A164F40A81
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785304901;
-	bh=PRM/GmldSlQvFYK73UGplESamOkG3Co+VcrGWKBSJ4E=;
-	h=To:Subject:Date:In-Reply-To:References:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
-	 From;
-	b=HuV8U4s8dmkdDOkJi5azz6wK8N7ClLv2iVfTII+U6l1E/Hw2Ch1XujqTm8/wqF536
-	 +8wOtRFTyQVr6Kr1NzBPRItWWXszPS0fMXTEKVRKKubGqhwmEpZ6aqCBXhf3uAnp8o
-	 WcpA/KZM0SfQBc+M+s8O8hYWYkxf8Pvfj9/blV2CcbxF5F98WEP1KEbzCaYiaoZsZP
-	 2vhr5kiyyYEvyFOZH3Rb5P1LU308Gp3syRQBygcFGdl/GjDARepDhaIp3g7+wC9BJP
-	 LxMJYUNSJOZQxEMBKgZcoO3w+TP8bG/uB03S5PLibvDCNIQMMWjQ9xaEfpicmZvKQe
-	 V9/RMRTkZDeWA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A164F40A81;
-	Wed, 29 Jul 2026 06:01:41 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id A775826C
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 06:01:40 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8D85B60A88
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 06:01:40 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2WXdaDxWtIkJ for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 06:01:39 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=badhrinath.s@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4088460A63
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4088460A63
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4088460A63
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 06:01:39 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B6A298494B; Wed, 29 Jul 2026 08:01:37 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97E038404D
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 08:01:35 +0200 (CEST)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66T5bOaT882849
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 06:01:34 GMT
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqbhj82g0-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 06:01:33 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2cfa4e4684bso17308685ad.2
- for <u-boot@lists.denx.de>; Tue, 28 Jul 2026 23:01:33 -0700 (PDT)
+ id Ns04_FGsmKCT for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 07:10:38 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::f29; helo=mail-qv1-xf29.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 485B140B20
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 485B140B20
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 485B140B20
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:10:38 +0000 (UTC)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-907ae240ac3so3148046d6.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 00:10:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785309037; cv=none;
+ d=google.com; s=arc-20260327;
+ b=B7494bfztvPEL7fO00fudtlTHcI8iVl4VWd6ofVy88/U3xW41IcSLgZM1OGV38NdUD
+ zDKPasIHy7MHJGd7JsREE8kd4mRv4Y+YToTkaJSNuZTUhISrINH8uAn07n7QW6+4+Fxa
+ KCJs64bTqwOwrym5sE/h3591DIg46A4odfv6eEhTadDzFtkDMQMGfw6CumTxBMGkUPoe
+ TK4XSI7L6R6HWLIF743GdLlGZun0e4UNsfElCxR3PEyaVJzhVBT4cqJ1pNSttjfuarR+
+ +Voh/YqV33tkEawgMjLXReQhP2ValEi9TtVPtQVkLVr5aAkKU27paV9Z9RCzA6pubR1V
+ EMIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
+ fh=aW1zuOF/2zGjmUXogeV5yF2BqU/n7q0kYg35J4ab9mU=;
+ b=sumXqmta/tv+wYzzNMP0RQoYpN5Ii50pw0AGg2KzoUpS+CnKh+J4WdTWHhX+jinHLl
+ v/A7HYqiWIpH/SBwUONsH1j02r5rhaS2W13GTNDb2sDwPmPnQxUUo2gM+brBzc3QaMaQ
+ WTnyJLbp4EuyUoBjMaUhWc/zeYSKJa7jlWR5WY0gFMC/7SimoOZCrmxmndstMzOjLNur
+ 70TT2zbZWG7KmexAxeA0WvD2boufhHGch9CbFWMwsS1cr35J2Bj9BPfbRcTiWriVeDqY
+ cI/asOZdjAfxIKVrBiY+mpvYLz2D1zHOTd5APZO8V69uT4CHWOyRfOAd7AaxfuczB8S5
+ BsSA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785304893; x=1785909693;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=PRM/GmldSlQvFYK73UGplESamOkG3Co+VcrGWKBSJ4E=;
- b=Z8cUiFxc6C+c5joiWDJ0xNoLVirScnJP0Y5+xzxsbK5f/0TXyR8pZMejFKCovMiFtu
- cIDUAMTUqiZcX/S8mAoGL7oNqdvlotyBcGlZaUF2E1f7BnAmS23t6fy+gQ0NU/9iXvlJ
- 3co/mH6DyggLnj1T1akJU26EhPiU+rYcu0jayycCk/+lfKe3HeY/gURffmYBbYAZNitE
- kxtYXPxov1geqewhFkLizWakZ6+t+hCMlKR1mZIPNHtMujv9ZjaaNF18e82OWu12dYL/
- X+lKOgWBJE3+wx7r6cZfObdWI6QkRQXeUBeBaWYwjZsCG/fQBaheMf+jsX9LVEiFQHu6
- +4gg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqLjAp+YRenO/TMMqlPHEt0APsgdPyD1A0jGpGkI/L6YkkGw2Vuow0LxCcCRcaofK6fCIQjz28=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKNi7E7FER/8mg52EIFEvU9/9mWWsYFo72M1Mp2Vfbr5O0mAGX
- M1PnqFhTb84CyY5+oFOMmE9fFjCSnJpnIkIxu0iegy7t9AoAsfmocR1/ot4Mw5mJmBgQ88uSeVn
- 5bnpCvSSlF3KW7hLzAxWu1SzQhzWiEC6bp7hINLOeYKKRaFejrHlFq07s
-X-Gm-Gg: AR+sD10lk35EawtlnN0j3e0B/tZy0dcxiRxHrrMk8JBdB+1a1tn9NVETV5WXfm7aiQr
- AbO4p9WfncO+/LJMb1Ygi5BJum526SiJl1ndXMG2daKb9/AgxoNKhxMrJFJ7MsSu/Uj5wls8ht/
- n7leh41WUm221oKsJbTKPQdDPFCeImTbIaRK/PZhEv09jo4ygV/OxhDxeolIiqLCjcONVcQpeLC
- vSQgsbl2gYZIXbhr3/NELfR5jE/9KS5imBGPKqlZ0GYn4FFb40VaHKCoekz3Bj2gLqB2JGHbJ5h
- r3OwGIXn9gNGqzKI10x2zAR+sXMZS2LThC4doQpN9SagGsHZ/nfm8VgFDyMlEhHw/FAPMYb2Anp
- SyOWQXwi3BVbawCh3RfsO8kXw1JR2xMPahv9jPmhqpOCM4GOsFANkXdBj3kW8hpSiXltRPaQVW/
- iFwfZXvc9QHnsPVrO7GnCh
-X-Received: by 2002:a05:6a21:112:b0:3c3:7bb9:c93 with SMTP id
- adf61e73a8af0-3c8ba61523bmr6695098637.53.1785304892684; 
- Tue, 28 Jul 2026 23:01:32 -0700 (PDT)
-X-Received: by 2002:a05:6a21:112:b0:3c3:7bb9:c93 with SMTP id
- adf61e73a8af0-3c8ba61523bmr6695057637.53.1785304892305; 
- Tue, 28 Jul 2026 23:01:32 -0700 (PDT)
-Received: from hu-badhrina-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31504dd42a9sm6868367eec.30.2026.07.28.23.01.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2026 23:01:31 -0700 (PDT)
-To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, peng.fan@nxp.com,
- jh80.chung@samsung.com, lukma@denx.de, badhrinath.s@oss.qualcomm.com,
- michal.simek@amd.com, luca.weiss@fairphone.com, danila@jiaxyga.com,
- aswin.murugan@oss.qualcomm.com, david.wronek@mainlining.org,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v5 4/4] configs: Add defconfig for ipq9650 RDP488
-Date: Wed, 29 Jul 2026 11:30:56 +0530
-Message-Id: <20260729060056.2183090-5-badhrinath.s@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260729060056.2183090-1-badhrinath.s@oss.qualcomm.com>
-References: <20260729060056.2183090-1-badhrinath.s@oss.qualcomm.com>
+ d=1e100.net; s=20251104; t=1785309037; x=1785913837;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
+ b=tXSDssYmWJHbLWp0GuAzsa+i6JesvrA596Sf8/bHu0cVWypjohZofZDgQkK6WXCWhN
+ H6w0ibSOz+qaUHBUvif+R3ExlFqzKt5GkdchmiReg0cNJDr6MV4FZEGiDsk2O5BBfpfa
+ ErLnSfnb7QmtCKpnb1KR6vJa4g2josI98gRUl5M06VBh9gS00UW5lBc4HlRU6PKEPggj
+ ASJqXseRevenh+3EEnCJmQkcVxhhji3QoBYwHXr9rbHc/Z20ked6FfbUwRRkwieAxoZg
+ VaPnqRE6aVo1ZQvdhZQtOrI9Q3KzzoiynvHx53EyWuwhN/FTqeE2872SQFmzgV5/Slzo
+ 2nZg==
+X-Gm-Message-State: AOJu0YxHXTgUgX9hD1nORmIJ+hVTCswD5RkNNPf082H5imApoY0rb6tn
+ i2OFhNgDwCuOAHb1pXx5itx+6kcswivFMhfJnKrqO0P7oX4HCcZJP1zGyYYkPSdAM97PCbzsHKD
+ H7Se4GRCYZ7CJtG0uG10cFcA0NMOnUxtJKGfH
+X-Gm-Gg: AR+sD12B9+2pNvWA78m5Nl5CC480Ikp7reazADRa7jpdRqsJbm/hjTDld6Kp77Qz4Mp
+ 6+jdFhNsc+LdzMjp3fKJ0S5bvOkmOSxmgJQa1TD+lOV2O8BBm4PBsVx81gHrseF2WAlJS05JbwQ
+ YolyhKBxTwV+zPhcrsYlY3eJHCcz6xMwovRSc9S7T52uhET7TpfZyiyuM6kJvNGOvFIe0+BVCyc
+ hSYEgP7pVSpPAb03KQw92xYL22uTPDDxVjRPslOmu+wmH+UdVYCy831qgTYQSNVE85vw8lKxVzf
+ 7sX+NidUXs1qBkVF4FROiLLfkKcxi6Dn3JdZ2ID/ZIoBodMcVaoNIu/LLrUHOdMCSvmjM0kSUyN
+ Mx2jsoHmlSCgXvwolfZRmWW1gERfT8mHs+WBKHsSLmZqrvJ3UY4PruxJerk/3WM+J44QzOkBDku
+ NMqioWUtRnWHADnIGoLz1u14sXARYk8L7n9zM0cALQ
+X-Received: by 2002:a05:6214:62e:b0:8ef:ab62:217f with SMTP id
+ 6a1803df08f44-9081706f849mr58619326d6.37.1785309036676; Wed, 29 Jul 2026
+ 00:10:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA0NiBTYWx0ZWRfX4Z+MkM8iZETY
- vIodmZ8D2Ipmej6j50RPR6K8w5ZeT6RmVfEoy0APANuXmqEPAWQz4zp1P2cC2ZnEpDntQ+kM/6U
- Ys7AP2jEduBX8WGwspUxDoFOnKlwP7ocR/LebgXGYUjYHU7+51I/9YIvsxm0bOOaq5KaAJ+rq5f
- XMLe8MexOk7i40g5+IFIB1ysDRm/buuhfbFY4B3153AyvnPpp66DcvZaNnJmqu+trsAvZ/QI+Xu
- YJ6cAZ3TQHBexNpLVcj7DgtV9qKrqH5YuFT+oqKEnhHn5MHKSwqMOlL0qzQwLikRghzt2wQzo1/
- ChC3/NbxyrTyJ/2WcKWjfdU3ZrOKZH9R1dy0PPZHQoXrbxEdA+PZJgsznokVR4W1zIRWG9v5WCV
- mkaEUsxtFip9cnoGRCkcLMdHzI84FVIkQThF8HviQ1Y9+PHXQ03LxUmLZ9ULg4E0qywka2+Eyzs
- fDSjaRnm/p4Aq8ChKEg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA0NiBTYWx0ZWRfX4QS6UHx9WMgX
- X0b/7/4T481xeTM9b4XyhZiObw2vxUs/wQrPDFZd9HBsKGUQhf53XgIWgKk3ZQ6YTg/oDg+W5bQ
- w9V68N0ezTXKFrFgaaG+FADNJQ4M7tk=
-X-Proofpoint-ORIG-GUID: l317IRxt7ai0bmEYYxO2mHbyoQ2xV0d0
-X-Proofpoint-GUID: l317IRxt7ai0bmEYYxO2mHbyoQ2xV0d0
-X-Authority-Analysis: v=2.4 cv=dsvrzVg4 c=1 sm=1 tr=0 ts=6a69973d cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=wHs4SkhdiV1T9ea67W0A:9 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-29_02,2026-07-28_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
- adultscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290046
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
+In-Reply-To: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 29 Jul 2026 08:10:24 +0100
+X-Gm-Features: AUfX_myhOrtP0zolnoB633S-6vpMx90P6KoxCJDlHwfkSSRGYxoGb-hQosbORac
+Message-ID: <CALeDE9NR136ryqa1WZqy7edXcrP4e4FW_QbYTOeAAhd6rwPAyQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] firmware-owned devicetree for EBBR / SystemReady IR
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, Ahmad Fatoum <a.fatoum@barebox.org>, 
+ David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Johan Jonker <jbx6244@gmail.com>,
+ Randolph Sapp <rs@ti.com>, Daniel Golle <daniel@makrotopia.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Aristo Chen <aristo.chen@canonical.com>, 
+ Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=PRM/GmldSlQ
- vFYK73UGplESamOkG3Co+VcrGWKBSJ4E=; b=jVaq7z/Rhtv6lGLDn6nv8T+0/wf
- er62wUkftsAJsX1HpAV6fH3aIhztBX73F6f475J6c7+n+S9n87kCsSuzOvEVe29N
- PZLNHoN8jcoGATJLAidfdyf8mczVr/MiK64vteT0Jcu8F4IwILvMjI9c4Zci4Tud
- Mw87bvk3T4khp1cC/d3dVyagdKLL2J4MFR+/3mSSjs8QbD1yQ4NrGXOMnqxhPsiw
- gG/PXBVNo34y72diHbBtAqjDqyOT7b1FdPQDzgb/let6y6S369GcFy3GKY7Jg5Iy
- LYLnWXnDLl6XlgT0eGL/pPM9vgait0hXz8kYIo7aFsIDTYs9AWtGgrkt59w==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1785304893; x=1785909693; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=PRM/GmldSlQvFYK73UGplESamOkG3Co+VcrGWKBSJ4E=;
- b=SqXwePV5W+aiq9X+3qx+mCgSqmIPdPmpGibYiNeNKXuTgzOogM9O7UDIwtEa8dblDc
- iun4jgdZKtKUML25ASbCm8Sm2gaT70OuAOGpE/QKp22nq3lbrHkkiC2yYPbn05RFEkDG
- Gig9qVhFrqthoYap+ZTujl2JA8CtrqrCb0K3vamVdnF51ke41mv55TE5WJ4IdAqOPRo8
- IJ5QLQAxuf6Y2Ev65C/7vi1PbbxRjWaRHUdqT/aVVJh4ixQN3nKoXCCTcrkOWdWl3Yo2
- +7CD2W9aglnrZSqadxKJ9cFkQ3hwAfnQzyuEAz/2bfhreawqzzxIIIZ98kSgqq1FkkYH
- 9tVA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org; spf=fail
- smtp.mailfrom=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=jVaq7z/R; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=SqXwePV5
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=badhrinath.s@oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="jVaq7z/R";
- dkim=pass (2048-bit key;
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.b="SqXwePV5"; 
- dkim-atps=neutral
+ d=gmail.com; s=20251104; t=1785309037; x=1785913837;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
+ b=N5TYcPDQzdAzxHiQv9e0eJmkPpFZ9ZFc7bl48xNIuMO7KDDmR+aQr6tXUGdcltVVCM
+ 93wOwNcjsuo8pBp2sOmROur0PF05TClFfWw69BZ288D1kMnC+hcVpsDKtaA9cSuF/+y9
+ 2txA/jU7DOBDH5E385pDVDAc9Pqa4unf2YiAlMjfFIlt/89HGEwQDi/znW5fBdbP0CVu
+ qZU8eNPXx9YFCBgFOaG8kJNYoK0Adb//2qACYBIGgp1ylrqBt6Y69+GiEU/4ORA31eoo
+ ZUI2R/v5k3kxsjxzZEjJ1X0TgsAnLzZz26/o/PFFqcQRmFyOmBNr0uMLpND2bV10EOiV
+ m8cQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=N5TYcPDQ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -202,89 +150,108 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Badhrinath S via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add default configuration for the IPQ9650 RDP488 board with eMMC boot
-support.
+On Tue, 28 Jul 2026 at 14:21, Carlo Caione <ccaione@baylibre.com> wrote:
+>
+> EBBR-style firmware (SystemReady IR) owns the devicetree: the OS is
 
-Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
----
- configs/qcom_ipq.config            | 37 ++++++++++++++++++++++++++++++
- configs/qcom_ipq9650_mmc_defconfig | 18 +++++++++++++++
- 2 files changed, 55 insertions(+)
- create mode 100644 configs/qcom_ipq.config
- create mode 100644 configs/qcom_ipq9650_mmc_defconfig
+For reference it's no long SystemReady IR, but SystemReady DT [1] or
+SystemReady DeviceTree.
 
-diff --git a/configs/qcom_ipq.config b/configs/qcom_ipq.config
-new file mode 100644
-index 000000000000..954a97042ba3
---- /dev/null
-+++ b/configs/qcom_ipq.config
-@@ -0,0 +1,37 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_REMAKE_ELF=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_LIVE=y
-+CONFIG_CLK=y
-+CONFIG_MSM_GPIO=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
-+CONFIG_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+
-diff --git a/configs/qcom_ipq9650_mmc_defconfig b/configs/qcom_ipq9650_mmc_defconfig
-new file mode 100644
-index 000000000000..9438f4844d37
---- /dev/null
-+++ b/configs/qcom_ipq9650_mmc_defconfig
-@@ -0,0 +1,18 @@
-+#include "qcom_ipq.config"
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-+CONFIG_TEXT_BASE=0x8a280000
-+CONFIG_NR_DRAM_BANKS=24
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
-+CONFIG_SYS_LOAD_ADDR=0x90000000
-+CONFIG_SYS_PBSIZE=1024
-+CONFIG_CLK_QCOM_IPQ9650=y
-+CONFIG_CMD_MMC=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_PINCTRL_QCOM_IPQ9650=y
-+CONFIG_SYS_MALLOC_LEN=0xC0000
-+
--- 
-2.34.1
+[1] https://www.arm.com/architecture/system-architectures/systemready-compliance-program
 
+> booted via UEFI and receives the devicetree from the firmware through
+> the EFI configuration table instead of shipping its own. U-Boot has
+> the handoff mechanism (efi_install_fdt()), but no generic way to say
+> which devicetree the firmware owns or where it lives. As a result,
+> platforms carry downstream commands to provide it.
+>
+> This series adds a generic loader for a firmware-owned devicetree FIT on
+> a dedicated GPT partition:
+>
+> - one FIT ("fdt.itb" by default) carries the base devicetree and its
+>   overlays. FIT configurations describe the valid combinations, so a
+>   signed configuration authenticates the base, overlay set and ordering;
+>
+> - a standalone 'u-boot,firmware-fdt-block' control-DT node points to the
+>   media device through a 'firmware-fdt-store' phandle. The node selects
+>   a partition by type UUID and/or name;
+>
+> - 'fw_fdt_part' can pin an A/B partition and 'fw_fdt_config' can select
+>   an explicit configuration. Otherwise compatible best-match against the
+>   control devicetree is used, falling back to the FIT default. Configuration
+>   chaining is rejected so each combination remains one authenticated unit;
+>
+> - one staging helper owns the EFI policy: use fdt_addr_r, enforce the
+>   size cap and distinguish an absent source from a configured source
+>   which failed. Both the EFI bootmeth and EFI boot manager use it;
+>
+> - once a source is configured, any failure to assemble the devicetree is
+>   fatal rather than silently falling back to an unverified source. Every
+>   image is verified up front so a corrupt overlay cannot be silently skipped.
+>
+> The loader itself does not depend on standard boot. EFI is its first
+> consumer, but the source lookup, FIT selection, verification and overlay
+> assembly are generic.
+>
+> Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
+> as an independent behaviour fix. Patch 2 adds the loader, binding,
+> documentation and shared EFI staging policy. Patches 3 and 4 integrate
+> the EFI bootmeth and boot manager. Patch 5 adds sandbox coverage.
+>
+> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+> ---
+> Changes in v2:
+> - Make the loader independent of bootstd and describe EFI as its first
+>   consumer.
+> - Describe the source with a standalone compatible node which points to
+>   the backing media through a phandle.
+> - Rename 'boot_dtb' to 'fw_fdt_part' and document both environment
+>   variables in doc/usage/environment.rst.
+> - Factor EFI staging and fail-closed policy into one helper used by all
+>   three call sites.
+> - Track the assembled FDT's ownership explicitly and own the FIT filename.
+> - Select FIT_BEST_MATCH and add explicit compatible-selection coverage.
+> - Split the passed-FDT precedence change into its own first patch.
+> - Build the entire sandbox source topology at runtime, store mmc11.img in
+>   persistent_data_dir and add staging, configuration-chaining and corrupt
+>   base/overlay fail-closed coverage.
+> - Link to v1: https://patch.msgid.link/20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com
+>
+> ---
+> Carlo Caione (5):
+>       efi_loader: bootmgr: preserve a passed devicetree
+>       boot: add a firmware-owned devicetree source
+>       bootmeth: efi: use the firmware-owned devicetree
+>       efi_loader: bootmgr: install the firmware-owned devicetree
+>       test: boot: add firmware-FDT source tests
+>
+>  MAINTAINERS                               |   3 +
+>  boot/Kconfig                              |  24 ++
+>  boot/Makefile                             |   1 +
+>  boot/bootmeth_efi.c                       |  45 +++-
+>  boot/firmware_fdt.c                       | 420 ++++++++++++++++++++++++++++++
+>  boot/image-fdt.c                          |   3 +-
+>  boot/image-fit.c                          |   9 +-
+>  configs/sandbox_defconfig                 |   1 +
+>  doc/develop/uefi/firmware_fdt.rst         | 112 ++++++++
+>  doc/develop/uefi/index.rst                |   1 +
+>  doc/device-tree-bindings/firmware-fdt.txt | 150 +++++++++++
+>  doc/usage/environment.rst                 |  11 +
+>  include/firmware_fdt.h                    |  95 +++++++
+>  include/image.h                           |   4 +-
+>  lib/efi_loader/efi_bootmgr.c              |  39 ++-
+>  test/boot/Makefile                        |   1 +
+>  test/boot/firmware_fdt.c                  | 411 +++++++++++++++++++++++++++++
+>  test/py/tests/test_ut.py                  | 181 +++++++++++++
+>  18 files changed, 1492 insertions(+), 19 deletions(-)
+> ---
+> base-commit: b635d43bca429500cb8ef20aa151cb5773b9a8a5
+> change-id: 20260706-ccaione-upstream-ebbr-206c30be3a3a
+>
+> Best regards,
+> --
+> Carlo Caione <ccaione@baylibre.com>
+>
