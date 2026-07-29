@@ -1,191 +1,202 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDFAC54F51
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 08:52:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E78CC54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 09:14:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C858B607D3;
-	Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a-2rq7f9m5D8; Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EA0B5607E5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785315148;
-	bh=+V00aPytUUUlhPRHGbAQRgOK+RRs9cHaGhs9mm+0mDg=;
-	h=To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:List-Post:
-	 List-Help:List-Subscribe:From:Reply-To:From;
-	b=zkhhOhp8cs9BGHFMbxTrQQp8Hd2Ri+lPUWOejIMqem39x0i7oo+OwJej/AM7OsElk
-	 TYFrB7cy4xG2yM0uJw+Nt9nZQrgrBjPKS58oBXRDlVWQAOE7IY701wVZdOOjTnabgo
-	 9yubYxFmotwmLhyitQdOaHM3H3A4+he+YAn8g3UbGsGSuiLeIm45tdkaasyo2pDC/E
-	 zq9Pgxk2xFAUTrHFjZzQgLWxCuHXLBMpP6Iwk/aaf37rUX2wfAADYJeH/nrNXl6nqv
-	 7bL2ew2WGnNKzRKCQaV2mM/egHsyUHZ+gqgSILFnNE9Q8WTMlQnZvnit+9JFbbZIuL
-	 LpSb3xBTZFuNQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EA0B5607E5;
-	Wed, 29 Jul 2026 08:52:27 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 750E4490
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:26 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5B86B40B11
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2EBD9409EC;
+	Wed, 29 Jul 2026 09:14:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o5vCatjwARYD for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 08:52:25 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=aswin.murugan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 580FE40879
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 580FE40879
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 580FE40879
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:25 +0000 (UTC)
+ id 4OL-HRP3ZacA; Wed, 29 Jul 2026 09:14:14 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BE97F408F2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785316454;
+	bh=js/kIVBcCCFOGSc9klp15bjU5Fmiz6w34BfR4aW9+is=;
+	h=Date:Subject:To:References:In-Reply-To:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
+	 From;
+	b=bkxFhWWfQ6cDHcvhHIEZMmvlsLy7Xq86iwsN+VFtTVQyim5LstDlr54l6QYLctPVj
+	 +Pkr2F88fs/UQrTrrlDgEmNieEBf1m9QOGMzc6QkuUsDTZGNPp2+cN08btzXFKYNui
+	 Sul2ccv2TxSlcHtVOmBQaNDgckUM2OOfDkcDPCvm5R1OwL7HBSHYPEAfpZmu9Rv8os
+	 USE5+gOAe4LsCan+VoesuptP6L1KqUTD4xfs+jcH8wr80KK8y9MQhehaEtvOnA+4j8
+	 +S66ttHma9Qs5E912UtwNtbDgGPXjtisgI7wA/K1640OTlzi6NAgK0nszOEiNRf4qh
+	 jKToecvk6Fhtg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id BE97F408F2;
+	Wed, 29 Jul 2026 09:14:14 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 54EB03B0
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:14:14 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3ADEA4009C
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:14:14 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dqbbhwRx91Cv for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 09:14:11 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=badhrinath.s@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 11FA04004B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 11FA04004B
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 11FA04004B
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:14:10 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D454F8493F; Wed, 29 Jul 2026 10:52:23 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id E9E5B8494B; Wed, 29 Jul 2026 11:14:08 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 884198404D
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 10:52:21 +0200 (CEST)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by phobos.denx.de (Postfix) with ESMTPS id 75E8C8404D
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 11:14:06 +0200 (CEST)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66T7f8ZZ683437
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 08:52:19 GMT
+ 66T7fHSZ1310100
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 09:14:04 GMT
 Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
  [209.85.215.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqbn1rpwg-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqa33153m-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 08:52:19 +0000 (GMT)
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 09:14:04 +0000 (GMT)
 Received: by mail-pg1-f199.google.com with SMTP id
- 41be03b00d2f7-cb5cc1e139bso533818a12.3
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 01:52:19 -0700 (PDT)
+ 41be03b00d2f7-cb48f41343aso1547321a12.1
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 02:14:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785315139; x=1785919939;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=+V00aPytUUUlhPRHGbAQRgOK+RRs9cHaGhs9mm+0mDg=;
- b=bQY7cnZVgw50gZYgmoTDX3bHx4EN0HkZpVE8OnLuVeY8l4KJji3OPXzcuqTI+U2Nu6
- TmsVeNBp8kzojFwgWYsVUy/3cR64XibAeIA1EfjA+yxRGKLNEOcWA4Q6GglYdyhxDDks
- HkN0F1Cc+dMSC3ya2VwG3RzgC1CgO6R1xZY/niAbRr0i0W3r+tY11aDjJmwIEfbpL7cG
- upOZ/EzZhKE8uOf5++LYOZDima/81YfpqEUcZLvVfzCnHGQCoWKm8x5B5tMYzC76CFr4
- iJPSa3ntBrd9fKidqJ19p9pyJr53wnGT3/Y9EQ+NbwmAfl3AG2U03pafqHa6uHnw8NmF
- Q4KA==
+ d=1e100.net; s=20251104; t=1785316444; x=1785921244;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=js/kIVBcCCFOGSc9klp15bjU5Fmiz6w34BfR4aW9+is=;
+ b=kakKoabOhsO7tvtQCjJCE33658WjKHHwFUyTXPOY/3DU4gXIJjxAg7Z8PIM/9Eyac8
+ KnjB9QuDW0ABbGR4lW3eNz6zWf575GPgkIJI7AhrSDZSvmiBJ4dKAwWZmQz0u6xp9jas
+ F3OrDJlICZEBsD4Ya62rX2vutveoveFiouZxH5nJJtHiAPKY0M6SxwusjPQJSXYVC8zH
+ 8ffrWYBxCP32dltGwnWK0Vrma47BmbpfYnydF7CBWGacZ5qML+clbwHt8kt2WOsaOkls
+ CH9C/S3IDsFydb7RAFvqOEKcGxfpBU4ag5uzYhnBAiHJb2hn4vlClMXrKZe6DO0hi6Du
+ Pygw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpK0a04wMnj94SsbctOmIXOsunzFIYwqoLmqqAbua9nBdvmYfmNkvHuwvRMR/DRPS3b7dRPnuo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7CR5aAF4L9eu4D1733t008Vnk9vaj4wXsBbO4gpLsqJNFOhfb
- nY3kmCjnETUW20ECgcHOn8a3B2IE3qiBKtGEL4SY4w8juIbPIcCRq3NA6tzfJLt8Bp2HnjS/Z6q
- RZIk4WabSmvWDLs83gh0Ahpx5iQ/dHfcf3oJ6Tzuxg/KiEJwQvN+OCsGD
-X-Gm-Gg: AR+sD110hCc2nmJOmnG0v2hixASo8hHLq+OSo2wq9O54aMC/t5Q1uPZvLJEpk7G39ZV
- QuX9wLxU645xpNTXW/uoTXRruuhKaW8DglDv+KSvVkDZvrk6G3IQ9LUvFACUxcBwxGfpK/hcnwF
- t0Woy9Bwbd46DZdq5LQGG3w5HY/NWwd5NYN9qBRSnwSZ1qOzFbZHdgQc+qVUn+N6xhHIdYBnsYd
- dpk6NlzFsRRAV0rZQoZGCg6oiqsoUJ/gyaTCtwvH1NDvyphy8GNhHdkI+T5wsMqJ+b8lug+yxdy
- GVNbm6TfcNMliJ7N5RWtBthbh86iSDBzZKcYu7c16Iz8Kj4B6hkjQVwCRAhQR9OCsGGEvoIDP6x
- Tk8cJnBFnh/gs/jNfHQYMzjXi8TeqTih3D5zGqvyFSLEm+Bt7A1h3BBPXf/JZzc0KdrB/cxsq7a
- rNTXX5ZNngnjvGNb3P8gU=
-X-Received: by 2002:a05:6a21:4516:b0:3c4:42d9:58e3 with SMTP id
- adf61e73a8af0-3c8aafa0605mr7195308637.13.1785315138681; 
- Wed, 29 Jul 2026 01:52:18 -0700 (PDT)
-X-Received: by 2002:a05:6a21:4516:b0:3c4:42d9:58e3 with SMTP id
- adf61e73a8af0-3c8aafa0605mr7195269637.13.1785315138266; 
- Wed, 29 Jul 2026 01:52:18 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AHgh+Rpc+M1qLFK1xJCBsfUdL6IaQ0pkd6GhXHVHjgpoiuIzk2MqWv42arUMX/8bDAgDXmXH8D8jgt8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzkdyegygtdyAAxGT0h+RlM+ErCEQ6ZW4v2DlJf8GZ16g78YMl
+ 32zRDxw3L1e+tLFaQO/nWTmVvcOE6LdciEQ0qS/lpuGIn5RgOTKENaUuinyinzr5iFg8VW86PRk
+ 0IkoKifQCeThJ4sMOvru2JE9GL5J136gLUotqw4ESOKX7jW7UQQPqlkiE
+X-Gm-Gg: AR+sD12VzmMBK3w2UFZVNa3NFA5WhnO8E9/lPpjOYDp3yOQ3mWcG3Mwiw9ofozTPuBh
+ eB94tJLWMnx+q7OAoHa1nzrfusspajmEpYI+bemOxHYc+loncOG9tn0lTp8CxoR+z0cwNtlCDwI
+ BoOvcGxbTWU5+HQTjp31/rI3OJtz+9vR8WorVV0MUcsdWhMTJugEhOa0XZLehCben/nnOd3yqSo
+ lRcnEm9IbmuofcVjv4n9kPqMlzRSnefmKLOG4/ytK+pH5487KUOIQZrLyivkvjMQogo31ItvqZ/
+ CZuXqpimGGnhLA26RBg1aedDvJsqcsksTQa+TOmxTGKjLOljL+hp38vOZ3TqF9H/y1eguUw2N6k
+ DpS72SCFofZ5WDZ/RnxV2Un8ktjxRDI8=
+X-Received: by 2002:a05:6a20:734c:b0:3c3:80bc:1540 with SMTP id
+ adf61e73a8af0-3c8e45ceb7fmr1752193637.3.1785316443689; 
+ Wed, 29 Jul 2026 02:14:03 -0700 (PDT)
+X-Received: by 2002:a05:6a20:734c:b0:3c3:80bc:1540 with SMTP id
+ adf61e73a8af0-3c8e45ceb7fmr1752169637.3.1785316443269; 
+ Wed, 29 Jul 2026 02:14:03 -0700 (PDT)
+Received: from [10.152.205.146] ([202.46.23.19])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13e7265547bsm6747719c88.7.2026.07.29.01.52.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 01:52:17 -0700 (PDT)
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, Michael.Srba@seznam.cz,
- ilias.apalodimas@linaro.org, sjg@chromium.org, linux@smankusors.com,
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1] mach-snapdragon: raise block cache limit to cache full GPT
- table
-Date: Wed, 29 Jul 2026 14:22:07 +0530
-Message-Id: <20260729085207.1585073-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ 5a478bee46e88-31504b12cdasm8742827eec.1.2026.07.29.02.13.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Jul 2026 02:14:02 -0700 (PDT)
+Message-ID: <1de37d37-a8c0-4887-9e31-63d98dc66ef2@oss.qualcomm.com>
+Date: Wed, 29 Jul 2026 14:43:55 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/4] configs: Add defconfig for ipq9650 RDP488
+To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
+ peng.fan@nxp.com, jh80.chung@samsung.com, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, lukma@denx.de, michal.simek@amd.com,
+ adrian@mainlining.org, danila@jiaxyga.com,
+ aswin.murugan@oss.qualcomm.com, david.wronek@mainlining.org,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20260716062318.4121929-1-badhrina@qti.qualcomm.com>
+ <20260716062318.4121929-5-badhrina@qti.qualcomm.com>
+ <f1900b5d-5701-41aa-94bc-8145a337dd91@linaro.org>
+Content-Language: en-US
+In-Reply-To: <f1900b5d-5701-41aa-94bc-8145a337dd91@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA3MiBTYWx0ZWRfX5x71c8vBqzN/
- WD2fO5+DMKC0zrVfDux2HsKGMtp2o0995B5TrLKKrZwWtQfj64kGeM0iAwZLu/3aVFSSdpX8Noj
- nsNVK6hGVbJskDJD8UzX76xkTp0sU7k=
-X-Proofpoint-ORIG-GUID: EN1k-o71wq6fauo4vowFtu5y90DGcZNU
-X-Authority-Analysis: v=2.4 cv=csCrVV4i c=1 sm=1 tr=0 ts=6a69bf43 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=J54uKDEkSAFcm6cqkTIA:9 a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA3MiBTYWx0ZWRfX6AtJ9oMzfPMi
- e1M3zXAaVtmKPOdf4aYC6nlkNlB+YK73JXmG6/aVbrcjBXUNjx2ue3EzPHjxpfUSF91q706si1s
- 6kZJpllTp0YH+T5IRUCYFkck7LYrqQNm/VpwXevb1HMl9vf+J1rGWDMfLH+BG5Y50fsNgsr/93k
- EPYY3jw1mvWRibNg16kqq5J6ZjKhOgIjQT5X1S5CnAgL/97RBbMmw/A8a6HigJ6mW7Bn5DVwK/+
- Az+kg7z3sww0BlrrnwuRZbgfpbLj/+RL25ybl1TlLQZgvz15w32IGu2Zt0ncCtHkGbNQxiqjdmt
- FH+48TTkuCrG5Of4MlLNvFsu88WOSP/mysjwIidPkaPXsEX7PXGrgiYv9PlM/RQr+wkTaBjFEDI
- pZgWUqpm9Ez0kXn3vOKAAEBkgdSxu1YdITNDK/vQkNqe/SNeltQ9WwN5AtvqFfE9qSjb0naTgb6
- iJOPqWRWZJzFBzga8UQ==
-X-Proofpoint-GUID: EN1k-o71wq6fauo4vowFtu5y90DGcZNU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA3NSBTYWx0ZWRfX3sVezofTSv/F
+ O3+4qvx6YnJwIyjAYrnoLsFvM0bZrTsqMt2Qn71+wF0W3RZFCTp1tOImwSy0ptDiJto21jdSEgh
+ 8UvAbmvMFqaCM7K8IbE5StAAVeTh7GFen3ox+q7SX4xwIcME/LIbKEFMrqaJ0Ggxx1Ldl46GKk9
+ C+5IgWnoySi2BmBWyoV5/L+8y5QvKjTkkGUO4WyxubioY2Wfqy/wIKdx65v7SdCaAIxiqAIlFJP
+ wNbJNSW+6ihv8MvboBUVTvCNWoJLb5h+rr89wEc7pZMXe0Uo86gADWsh1ns9+Bemtx99kfQUmvp
+ 5rkdaalcdZPZ849W2ahV7F4R2txGsZsiXjFVrFCLyiLPkb4DBMV0MTxly0ZdeKsI3hXFh3zqmyW
+ IIpGIuA86rFWRkUkEJlhuAfoD9uMCMZxKKJ6Z7b21RByHVk/VsC1g0cWrBrs0FX4z0eK5NUQDP/
+ T7s3S8e/5Pd3lzbTllA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA3NSBTYWx0ZWRfX1x5TaicouqNj
+ nb0F/Rp6MhEkqaB8afeE6ydYVExAomOe7IuNN9VZIIRqBasGVUpaDcAroyXlQ/BhqCZfoNWSwwN
+ MYYrAz0hsQAQNdweLXhJRuytac1Z97s=
+X-Proofpoint-ORIG-GUID: DA2wDJ2S51MRv2cgOdkvHAT6ndwijDb6
+X-Authority-Analysis: v=2.4 cv=Ap/eGu9P c=1 sm=1 tr=0 ts=6a69c45c cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=gu6fZOg2AAAA:8 a=EUspDBNiAAAA:8 a=NPwWjleplIkqdMfNX1kA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22 a=2RSlZUUhi9gRBrsHwhhZ:22
+X-Proofpoint-GUID: DA2wDJ2S51MRv2cgOdkvHAT6ndwijDb6
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-29_03,2026-07-28_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 phishscore=0 impostorscore=0 bulkscore=0
- suspectscore=0 malwarescore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ spamscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 bulkscore=0 malwarescore=0 phishscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290072
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290075
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=+V00aPytUUUlhPRHGbAQRgOK+RRs9cHaGhs
- 9mm+0mDg=; b=EIediHmZWTVAaDBnWnzMtL8X5M81CHIF7EK3H+pvecor8x/sgNT
- cen2Z7pykG7duC3+6kvI2dJZvCGZvghujuGJ/spmK5XOsmK/tAC+sOU8J5wiGq86
- qsBDput0hH3Q7d/cryjm2/7pxBIAVXIC3Uivwamr2h6ttBNkzIrou5gAhpTyOQhQ
- 67ROvCILn5K5XjRaecvPbp1SVPMi0mde2RZTnevmUs4ZCVLmcZf2eDl2HqapaYMa
- usuWA3QWz4LK1rOvhi7y+LZOHvz9KSmugrouqGmbXUdVkTnNVqQhXrkO1dsUwBhZ
- A+GPzwaEJ/lt/jkDHbWRL0765YnUJvbUAzQ==
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ js/kIVBcCCFOGSc9klp15bjU5Fmiz6w34BfR4aW9+is=; b=bhD44LoftBJOMDAb
+ 90TNnXd4P4O5ZSs6uEqw/cFR+tpDaOTHJiuySCMdr0Hv63FDVbkf7OOuwkwsO+Mj
+ a8bIvsHkaR6Muyx+rH7GU0GfYw/bUa6EHxPp2H30kukoNLkdsJjG4Kp2pfenPnDD
+ Oriz4pBClIYqrr/n8oqqHevswAMAhvVr2P9Xdb2iNzVNbI54JAlfew+tgMU0iO0B
+ pcJ2e3aU7p96RB+YMqdqfBsWpYYiu7YKbsezsmt/eWYByZ7fehxfApJojHgkvhHU
+ bwwRCK2LV1Zwum8lL9+K7uWqbQVBV+8rqh9gPXV94GmCqcT6p2RiC/dl65/UloAG
+ FCYI1g==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1785315139; x=1785919939; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=+V00aPytUUUlhPRHGbAQRgOK+RRs9cHaGhs9mm+0mDg=;
- b=V2Lo2EbrjsGCKu4QvcAJoWk0A70aHkzm35OWvEKAi8+NU6JOIvNaGj0sA2djMqTCKS
- yxtlX3sD93QnySwDhz2cr+JyoQTmnHK+d1euIEC+dDqA4/xivpo6HVB+AwO4XN4w1+cY
- VXqcY+Vzvkyov5nRoPXnkdlabsnGXpA1JdkQv620bZpvgTS/l+ZtjJryiTyyaFuunKQM
- SIIjGJP7QRXkeTYAWgk53NaXdmDuM+jS3moq4iSOGHGXJqUBpCPb3DHT1GBbGw2qjEiZ
- xBhoH5TEIuCTBO4m0mxHWIVZxH/5lpTDPHeUqkUXUAiJD39EuZ4wIlU1IEDLaNkNwZwc
- 19hA==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=oss.qualcomm.com; s=google; t=1785316444; x=1785921244; darn=lists.denx.de; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=js/kIVBcCCFOGSc9klp15bjU5Fmiz6w34BfR4aW9+is=;
+ b=UxDSm+mM4dsaVGSiXqyD+OGAe6cG1l7ZB2ZEDlTm9pY1QQq0oweDt0D8xs2W6+xKLn
+ 27SawCp+Z1OgkkEw+zfFlybFEtfDgxbg8avaEEK2Ue8oHj9PaQmC/At2umq/nMPPgA2s
+ ESTHc5aGkpu8Cb50qhehzpYGJpi6BDMIvdmxBZ69O4OGo0ZSTUH7uTnMeDnDIako2BZD
+ /piixNQKeOhQgiFdqg6mmz/8KQvNEY40rk2eOcdAzXnqNy4zy1mJ+eA+8+qjNUA0SUan
+ EAbm8zbPRQ8nXtzVyJctuTQg5c9rKnnDm30ObcJbANAkkCzjBp1pha7qEspcVMUvVZ3F
+ ulSQ==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org; spf=fail
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org; spf=fail
  smtp.mailfrom=oss.qualcomm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=EIediHmZ; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=V2Lo2Ebr
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=bhD44Lof; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=UxDSm+mM
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+ smtp.mailfrom=badhrinath.s@oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="EIediHmZ";
+ unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bhD44Lof";
  dkim=pass (2048-bit key;
  unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.b="V2Lo2Ebr"; 
+ header.b="UxDSm+mM"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -198,86 +209,116 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Aswin Murugan via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+From: Badhrinath S via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-part_get_info() calls find_valid_gpt() -> alloc_read_gpt_entries(),
-which re-reads the entire GPT partition entry array from disk on
-every call once per partition while looking up each partition
-during boot.
+Hi Casey,
 
-This happens because blkcache_fill() skips caching reads larger than
-max_blocks_per_entry (default: 8 blocks/4KiB), and the GPT entry
-array is bigger than that, so it never gets cached and every call
-triggers a fresh eMMC read.
-
-Raise the per-entry block-cache limit to cover the full GPT table
-(computed from CONFIG_EFI_PARTITION_ENTRIES_NUMBERS) so it is cached
-after the first read, turning subsequent GPT entry reads into cache
-hits and avoiding redundant eMMC accesses.
-
-Improves boot time by ~800ms on eMMC based devices.
-
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- arch/arm/mach-snapdragon/board.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
-
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 80bf510d31f..223137b1198 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -11,16 +11,19 @@
- #define pr_fmt(fmt) "QCOM: " fmt
- 
- #include <asm/psci.h>
-+#include <blk.h>
- #include <dm/ofnode.h>
- #include <env.h>
- #include <fdt_support.h>
- #include <init.h>
- #include <linux/arm-smccc.h>
- #include <linux/errno.h>
-+#include <linux/kernel.h>
- #include <linux/psci.h>
- #include <linux/sizes.h>
- #include <lmb.h>
- #include <malloc.h>
-+#include <part.h>
- #include <soc/qcom/smem.h>
- #include <sort.h>
- #include <time.h>
-@@ -30,6 +33,12 @@
- enum qcom_boot_source qcom_boot_source __section(".data") = 0;
- enum qcom_memmap_source qcom_memmap_source __section(".data") = 0;
- 
-+/* Number of 512-byte blocks needed to hold the full GPT entry array (entries * entry size) */
-+#define GPT_PTE_SECTOR_SIZE	512
-+#define GPT_PTE_BLOCKS \
-+	DIV_ROUND_UP(CONFIG_EFI_PARTITION_ENTRIES_NUMBERS * GPT_ENTRY_SIZE, \
-+		     GPT_PTE_SECTOR_SIZE)
-+
- #if CONFIG_IS_ENABLED(SYSRESET_PSCI)
- static void show_psci_version(void)
- {
-@@ -153,6 +162,15 @@ int board_init(void)
- {
- #if CONFIG_IS_ENABLED(SYSRESET_PSCI)
- 	show_psci_version();
-+#endif
-+	/*
-+	 * Default cache only covers 8 blocks, too small for the GPT
-+	 * partition-entry array, so it's never cached and gets re-read
-+	 * and CRC-checked on every part_get_info() call. Raise the limit
-+	 * to cache it after the first read.
-+	 */
-+#if CONFIG_IS_ENABLED(BLOCK_CACHE)
-+	blkcache_configure(GPT_PTE_BLOCKS, 32);
- #endif
- 	qcom_board_init();
- 	return 0;
--- 
-2.34.1
-
+On 7/16/2026 4:50 PM, Casey Connolly wrote:
+> Hi Badhrinath,
+>
+> On 7/16/26 07:23, Badhrinath S wrote:
+>> From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+>>
+>> Add default configuration for the IPQ9650 RDP488 board with eMMC boot
+>> support.
+>>
+>> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+>> ---
+>>   configs/qcom_ipq9650_mmc_defconfig | 21 +++++++++++++++++
+>>   configs/qcom_ipqdefconfig          | 37 ++++++++++++++++++++++++++++++
+>>   2 files changed, 58 insertions(+)
+>>   create mode 100644 configs/qcom_ipq9650_mmc_defconfig
+>>   create mode 100644 configs/qcom_ipqdefconfig
+>>
+>> diff --git a/configs/qcom_ipq9650_mmc_defconfig 
+>> b/configs/qcom_ipq9650_mmc_defconfig
+>> new file mode 100644
+>> index 000000000000..de730067359c
+>> --- /dev/null
+>> +++ b/configs/qcom_ipq9650_mmc_defconfig
+>> @@ -0,0 +1,21 @@
+>> +#include "qcom_ipqdefconfig"
+>> +CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
+>> +CONFIG_TEXT_BASE=0x8a280000
+>> +CONFIG_NR_DRAM_BANKS=24
+>> +CONFIG_ENV_SIZE=0x40000
+>> +CONFIG_ENV_OFFSET=0
+>> +CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
+>> +CONFIG_SYS_LOAD_ADDR=0x90000000
+>> +CONFIG_DEBUG_UART_BASE=0x1a98000
+>> +CONFIG_DEBUG_UART_CLOCK=14745600
+>> +CONFIG_SYS_PBSIZE=1024
+>> +CONFIG_CLK_QCOM_IPQ9650=y
+>> +CONFIG_CMD_MMC=y
+>> +CONFIG_ENV_IS_IN_MMC=y
+>> +CONFIG_MMC_SDHCI=y
+>> +CONFIG_MMC_SDHCI_ADMA=y
+>> +CONFIG_MMC_SDHCI_MSM=y
+>> +CONFIG_PINCTRL_QCOM_IPQ9650=y
+>> +CONFIG_DEBUG_UART_MSM_GENI=y
+>
+> Do we really need debug uart in here?
+it's not strictly necessary. I've removed the DEBUG_UART configs in v5 
+'[PATCH v5 0/4] Add U-Boot support for Qualcomm IPQ9650 SoC' - MARC 
+<https://marc.info/?l=u-boot&m=178530478539468&w=2>
+>
+>> +CONFIG_DEBUG_UART_ANNOUNCE=y
+>> +CONFIG_SYS_MALLOC_LEN=0xC0000
+>> diff --git a/configs/qcom_ipqdefconfig b/configs/qcom_ipqdefconfig
+>> new file mode 100644
+>> index 000000000000..6a7f3c1b4ac6
+>> --- /dev/null
+>> +++ b/configs/qcom_ipqdefconfig
+>
+>
+> Does this defconfig build a functional image? Or is it only ever meant 
+> to be included by board specific defconfigs? If it's the latter case 
+> then this should be a config fragment instead (just rename the file to 
+> qcom-ipq.config or something).
+it's only meant for inclusion by board-specific defconfigs, not as a 
+standalone build. I've renamed it to qcom_ipq.config in v5 '[PATCH v5 
+0/4] Add U-Boot support for Qualcomm IPQ9650 SoC' - MARC 
+<https://marc.info/?l=u-boot&m=178530478539468&w=2>
+>
+>> @@ -0,0 +1,37 @@
+>> +CONFIG_ARM=y
+>> +CONFIG_SKIP_LOWLEVEL_INIT=y
+>> +CONFIG_POSITION_INDEPENDENT=y
+>> +CONFIG_ARCH_SNAPDRAGON=y
+>> +CONFIG_DEBUG_UART=y
+>> +CONFIG_REMAKE_ELF=y
+>> +# CONFIG_EFI_LOADER is not set
+>> +CONFIG_FIT=y
+>> +CONFIG_FIT_VERBOSE=y
+>> +# CONFIG_BOOTSTD is not set
+>> +CONFIG_OF_BOARD_SETUP=y
+>> +CONFIG_USE_PREBOOT=y
+>> +# CONFIG_DISPLAY_CPUINFO is not set
+>> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+>> +CONFIG_HUSH_PARSER=y
+>> +CONFIG_CMD_PART=y
+>> +CONFIG_OF_LIVE=y
+>> +CONFIG_CLK=y
+>> +CONFIG_MSM_GPIO=y
+>> +# CONFIG_I2C is not set
+>> +# CONFIG_INPUT is not set
+>> +CONFIG_MISC=y
+>> +CONFIG_QCOM_GENI=y
+>> +CONFIG_MTD=y
+>> +CONFIG_DM_MDIO=y
+>> +CONFIG_DM_ETH_PHY=y
+>> +CONFIG_DWC_ETH_QOS=y
+>> +CONFIG_DWC_ETH_QOS_QCOM=y
+>> +CONFIG_RGMII=y
+>> +CONFIG_PHY=y
+>> +CONFIG_PHY_QCOM_QMP_UFS=y
+>> +CONFIG_PHY_QCOM_QUSB2=y
+>> +CONFIG_PINCTRL=y
+>> +CONFIG_PINCONF=y
+>> +CONFIG_MSM_SERIAL=y
+>> +CONFIG_MSM_GENI_SERIAL=y
+>> +CONFIG_SOC_QCOM=y
+>
