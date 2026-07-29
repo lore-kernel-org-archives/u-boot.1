@@ -1,118 +1,110 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF0AC53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 12:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 469F1C53200
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 12:28:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E106460ACD;
-	Wed, 29 Jul 2026 12:28:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 04655813B6;
+	Wed, 29 Jul 2026 12:28:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v0iFsYrGSi4A; Wed, 29 Jul 2026 12:28:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5MKvkVw0Jikp; Wed, 29 Jul 2026 12:28:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3C8EC60B9A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CD67981242
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785328133;
-	bh=osi1LANQhOEjX2G9IoY7fWp91dS0zsJuKS+K2U8FEhQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=vQSd0EhulV83FaG1TrXZN4fDias5k0RwoUkjz/rmkg74E9c4WQZoqzvXimhrdn9Dn
-	 rWCyz7t/XU+5nHSQnN0NjEzZXp6KYCPsRxJVr6FBjwTbEnUpwSXWzHwHFR9Gnjr4zM
-	 51ZG5NEhbMKOIBArKY+ebGyropqqVPo7ZQLAWSEPpNtmjdpXbn2PTkSM08giackuix
-	 bqodteRDgsCam/a7BpwZgja+v5ogjpddndfPQnB51nffRnvRI4YBGoT7dTUTge/7Wk
-	 riRL9oV19XqciWmcifkS+xejxMG/E4pnro+acPZJIEJdTfB0Grd6MPgtCskWay3aLz
-	 ZRQsVkYeHwvHg==
+	d=lists.u-boot-project.org ; s=default; t=1785328130;
+	bh=M48GLicSDQeqDgSZU3FH5TMU0KoF7vI/1K4C0xwkznY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=GQc5i+FTT3QNLtyohY1LPKsSy3jG7lgwnKVJova/yFDmm53LX3yGw5la+E5TyxG9j
+	 IFrS4er0EfrHeYkHZMV2Y5bbdn03y8HXgU2TL4T2aglI0LQa44SnpSMRS6sEHQw/dQ
+	 8CnimOoqXpFqWpncNi6S37fVaS99YUww2OB3qdA2OEsiXfu6o1VkLOyQDENy9PhZAA
+	 mxKjj3CqB63+DoOSDkkDPb9lCFQpdzxzMvd+UtQGLVDImIG4MfFuovnN071hDmJXF8
+	 KvZKU7hZTFS/Xg4K8lrG63cjndl5czse7/L91cRn28yxoUY9Zs6emYLUBv1gQcbC1g
+	 0aW/S8RuPOzRQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3C8EC60B9A;
-	Wed, 29 Jul 2026 12:28:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B60E9350
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:12:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CD67981242;
+	Wed, 29 Jul 2026 12:28:50 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 93F924BF
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 95BB2401A3
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:12:29 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8475080F78
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hV9PhdVYp5zQ for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 11:12:29 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1031; helo=mail-pj1-x1031.google.com;
- envelope-from=bhimesh.matsa@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C1AB4400EF
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C1AB4400EF
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C1AB4400EF
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:12:28 +0000 (UTC)
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-38dc69c74b8so807516a91.0
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 04:12:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785323548; x=1785928348;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=osi1LANQhOEjX2G9IoY7fWp91dS0zsJuKS+K2U8FEhQ=;
- b=MjjeOKYxW3gs6ZwsSFwHRPkUSGpSY/GjXesqf+O1JgBd3u+4laN0j1289DfgXHQaBC
- fBrWBlJ/MncFj5dGA6a+9YVos9njChEys67bgyboV2DvwQOGnH9SXHuCxcQcju/oDPWZ
- 7Om7SZBzVE0RSJMD7A5aaoUVDJ6UGyc1b6Vk7cxDuSlKh8VW9WP5lnQS0JRGz4kbPTMz
- KKfC0o/olaXfMfnYKUX526OYjlUuW01L4mGoFbgETFy32ZrTWpN9mBpPKizsaiL2/+p5
- kcY6/YOiWGL6J+LYbij1CsTj69Hv8uIvGWKx549wEdqORv7d3lcsh1k268hnWbbofJPq
- DzqA==
-X-Gm-Message-State: AOJu0YxPxcvbTYSKYfW1ZZ6PUPr+BIyMTE4u8UQ4/GmtFjDH8uODoAPs
- FESkyqJrWEgDsMZo6Kpp03bBKNr7Cp6Ow0+cY+zQ1pD7aQKUTEeL9hqcS3Yo05Vs7MKzqA==
-X-Gm-Gg: AR+sD12oeLYiuLQ2wM0szNElpovbtg/hGgzNu2BTMSrVD54eiedYCjvxzSEuX4cf+nv
- 1D+jtDxZ0YILFe+pEXO34H/+RHESNtI7+NmZhP9cpqun9cGQYOEJuHrRRkmT9zBj/pueZsZaFgX
- DrWctudOPAs9uRJvD65YrOsnW0dyEFaJO/v6Yvxjd3m2y8RN0T36jtP8w5/N9VEzCRL+fqRNxrg
- QxlRYEg3Sy3arS3VztfG1xvSmeeBKz2lyIpjpoPnQXjJfQEQs8hgP27a9btwjMA9ZNp/hwadR3r
- f6sGn1pQv3hGsi2+ZvMEXumdxfONY3bnnHEa9ttQdYDCLD+c2YvSZTSpgEFva+mQSOaFWSy6Gul
- jlooT0/reczZxtq8T7+brjhOFhaYBm7j3xrrFgzWqwmVERQ4KUCLp5zjPXIvg1frxMhFl8F53PX
- dLG9dpNle3hXSmUnjCcrwRJ4NkYtcO7slTqVhL5EyeEV/QEhykG6aegsJxz9IHcYNY5EMqAdpDW
- bmGgdTY
-X-Received: by 2002:a17:90b:390d:b0:38d:eaec:4396 with SMTP id
- 98e67ed59e1d1-38f6a33d7dbmr6236437a91.11.1785323547974; 
- Wed, 29 Jul 2026 04:12:27 -0700 (PDT)
-Received: from kumara-Inspiron-15-3530..
- ([2406:7400:63:a95c:e7ae:91b6:90c0:a107])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31504d373c3sm9084394eec.23.2026.07.29.04.12.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 04:12:27 -0700 (PDT)
-From: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: jh80.chung@samsung.com, peng.fan@nxp.com, trini@konsulko.com,
- Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
-Subject: [PATCH] power: pmic: tps65219: fail if regulators node is missing
-Date: Wed, 29 Jul 2026 16:42:18 +0530
-Message-ID: <20260729111218.28598-1-bhimesh.matsa@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A-uMsWVYQzwU for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=harsimransingh.tungal@arm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 1FFC280FA9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1FFC280FA9
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1FFC280FA9
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:27 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9DCD68494B; Wed, 29 Jul 2026 10:52:25 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 8C6268498B
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 10:52:23 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C98CC169C;
+ Wed, 29 Jul 2026 01:52:18 -0700 (PDT)
+Received: from e132995.arm.com (unknown [10.57.65.220])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8A8FD3F66F;
+ Wed, 29 Jul 2026 01:52:21 -0700 (PDT)
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+To: u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
+ Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Subject: [PATCH v4 22/22] doc: bootefi: note two-phase runtime variables
+ selftest
+Date: Wed, 29 Jul 2026 09:51:24 +0100
+Message-Id: <20260729085124.2618817-23-harsimransingh.tungal@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260729085124.2618817-1-harsimransingh.tungal@arm.com>
+References: <20260729085124.2618817-1-harsimransingh.tungal@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Approved-At: Wed, 29 Jul 2026 12:28:13 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785323548; x=1785928348;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=osi1LANQhOEjX2G9IoY7fWp91dS0zsJuKS+K2U8FEhQ=;
- b=jQy0iVaWb8BkNqOsPcsfskrUf+VD94pxWWLjmqGKSdLe2oHb4SbKgHxLHFPSqhNtIZ
- TnY6lngeKOLVPlxzFfRF1uw6QdAgFn2BCdOkZjCwhiITdrSF0JCbR8Uyx1Qe++bj4cnk
- O4ylr4lsUcYWDbFdQXhZe5RdkPL0wN7WGe/goTOOyy7JBg267t0PluJQXTTAzJScVW3j
- zRRzbpeTRAumgPpohhf3UaiHuNUt9809IhJPBP3slSh6Q0GFtVE8Xvn/5LDGySyiCMKA
- Qvv+MVJXTqkE0OpjiVkiMgxtz3h3TRPlZtx0GuHA+AIMeGlJx1txSUcFKwQ4vQ3vbqAe
- mVCQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=arm.com; s=foss; 
+ t=1785315142; bh=DPaYO77GmWfUXJD/Y9BExqflCGi9dc3be56e0rggDMc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=lTHXK8UZQYq0VVTZHPCX5nfhPSZggJVXT0yoBlZElS+CvbupzsUzGqoredyVDfj0q
+ 0YX8udIrslCVXguKbI5muqBu+dgWm4QG5NPKtERM8EelVvRmdSFj8Ev9TITxUx3Fj6
+ sXTdBBewwcgUqSgV/hcC3UBe+Rj5hlOT+eRtjXs4=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=jQy0iVaW
+ header.from=arm.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ spf=fail smtp.mailfrom=arm.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=foss header.b=lTHXK8UZ
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=arm.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=harsimransingh.tungal@arm.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (1024-bit key;
+ unprotected) header.d=arm.com header.i=@arm.com header.b="lTHXK8UZ"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -127,31 +119,63 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The TPS65219 bind function continues when the regulators subnode is
-missing. This causes pmic_bind_children() to be called with an invalid
-ofnode and permits a misleading message indicating that the subnode
-was found.
+The bootefi documentation did not describe how to run the
+runtime-variable selftest, so users had no guidance on its reboot
+requirements or on which flow applies to their configuration.
 
-Return -ENXIO when the regulators subnode is absent, matching the
-behavior of other TI PMIC drivers.
+Document the runtime-variable selftest flow in bootefi.rst. Describe
+the non-volatile path, note the single-run
+CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
+runtime-variable selftest with efi_selftest.
 
-Signed-off-by: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 ---
- drivers/power/pmic/tps65219.c | 1 +
- 1 file changed, 1 insertion(+)
+ doc/usage/cmd/bootefi.rst | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/drivers/power/pmic/tps65219.c b/drivers/power/pmic/tps65219.c
-index 0716af027a3..1fecde84795 100644
---- a/drivers/power/pmic/tps65219.c
-+++ b/drivers/power/pmic/tps65219.c
-@@ -55,6 +55,7 @@ static int tps65219_bind(struct udevice *dev)
- 	if (!ofnode_valid(regulators_node)) {
- 		debug("%s: %s regulators subnode not found!\n", __func__,
- 		      dev->name);
-+		return -ENXIO;
- 	}
+diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
+index 7c5448586b7..0a7800b93ce 100644
+--- a/doc/usage/cmd/bootefi.rst
++++ b/doc/usage/cmd/bootefi.rst
+@@ -160,6 +160,37 @@ environment variable to match one of the listed identifiers
+ Some of the tests execute the ExitBootServices() UEFI boot service and will not
+ return to the command line but require a board reset.
  
- 	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
++When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
++*variables at runtime* completes within one *bootefi selftest* run, so
++it does not depend on preserving state across multiple runs. It still
++executes ExitBootServices(), so a board reset is required afterwards
++before returning to the command line.
++
++::
++
++    => setenv efi_selftest 'variables at runtime'
++    => bootefi selftest
++
++When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
++flow is split into *variables at runtime setup* and
++*variables at runtime verify*. Run the setup test once to create the
++runtime-accessible variable in non-volatile storage, reboot, then run
++the verify test to validate, append, and delete that variable.
++Both phases are on-request tests, so they only run when selected by
++``efi_selftest``.
++
++::
++
++    => setenv efi_selftest 'variables at runtime setup'
++    => bootefi selftest
++
++After reboot:
++
++::
++
++    => setenv efi_selftest 'variables at runtime verify'
++    => bootefi selftest
++
+ Configuration
+ -------------
+ 
 -- 
-2.43.0
+2.34.1
 
