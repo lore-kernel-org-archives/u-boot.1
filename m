@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD895C54FCD
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 09:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74563C54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 09:21:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5372860AE4;
-	Wed, 29 Jul 2026 09:20:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 36D6A60AB3;
+	Wed, 29 Jul 2026 09:21:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id P0CHhQdqYQM1; Wed, 29 Jul 2026 09:20:00 +0000 (UTC)
+ id O0MV8Vgkm61Q; Wed, 29 Jul 2026 09:21:16 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CDE1E60AD1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6B7BF60ADD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785316799;
-	bh=ZQDEDY1+/6sXClTZLP3kFU+HFsctE/unj/gDPEqjPAo=;
+	d=lists.u-boot-project.org ; s=default; t=1785316876;
+	bh=YU04F6iWEt37QDNYYFYz2f9sSQPowedpDasH328MtTI=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EOyqH83PzG/MLJ3eY12+fDQZNpuxyUU3QW5UuvPCcClnOCiIG5CW9KxX5fWb7Msl+
-	 ICBDtDi9M5HFi2pcGpAWq9yAYSvv4L4p242iZAvo0Q/EldzRy0t1kGGtyZDHjOHjL/
-	 g8+mr6w2huodRyvmFRLR77fmxnU+MD/trQ6NJ5ZhsuKOSzJmC4L3QTTdVgUhoN2MjV
-	 ruxOMFhi2P7fh8d9FSh7mZw5ePvTm9XabsDP1wWME0Qx5vtS8fElLzaW+iFPWE/2Dc
-	 x1A5ymqydkqWKBJqPeoh5dYqcruyhdGCVmVP8CJan1m4UFh4kIQPdbhrdUbw8m1OKW
-	 zUTPyIwiDjDBA==
+	b=ZHd51905/uh/tCPcnqYLaN+9YK7bw8ZwoXiQaCVZeEL01uagCNcTKjzU7bdPfReO/
+	 YHBRKO0oHuL/f2oxpdEv6clK0V9qjOKlFeQ9X0Zoq6IGR7DO+8vwQRy/JfPJUGAeJj
+	 rbBNomxBV1dDUJ5magsX5j3ytORzn0yP8DHSollxHri2l2XUCkypdwszkEw5d1Wlbp
+	 +e5+UvkJV4vBYaOaMLOnvpVtIKLfpo58eg4sopsKBimuPF/Ds1X1m8XF2cQVzyI+xb
+	 JZunPcnkCYOjUBa1jFnRMrJxkMqu6MMgbrRpCnraCWMUyii10Ki8NsPZiXTYAHffYW
+	 17sQuQXh0BHbA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CDE1E60AD1;
-	Wed, 29 Jul 2026 09:19:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5AF4545B
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:19:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6B7BF60ADD;
+	Wed, 29 Jul 2026 09:21:16 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id BDDE1788
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:21:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4CE52401A3
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:19:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id AFBBC60AB3
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:21:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wPeBl2k_zJg8 for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 09:19:57 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 38B254009C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 38B254009C
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 38B254009C
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:19:57 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gsEmuC1lp9vh for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 09:21:13 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4820E60ADD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4820E60ADD
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4820E60ADD
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:21:13 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0D8C8494B; Wed, 29 Jul 2026 11:19:55 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id B23718494B; Wed, 29 Jul 2026 11:21:11 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A039F8404D
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 11:19:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D3E38404D
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 11:21:09 +0200 (CEST)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 3C33B60A5E;
- Wed, 29 Jul 2026 09:19:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B4D81F000E9;
- Wed, 29 Jul 2026 09:19:50 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 09833600B1;
+ Wed, 29 Jul 2026 09:21:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 392BB1F000E9;
+ Wed, 29 Jul 2026 09:21:07 +0000 (UTC)
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
  marex@denx.de
@@ -69,34 +69,35 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
  trini@konsulko.com, michal.simek@amd.com, alchark@flipper.net,
  jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: Re: [PATCH v5 50/75] usb: dwc3: import from kernel v6.6
-In-Reply-To: <20260716134305.614278-51-anders.roxell@linaro.org>
+Subject: Re: [PATCH v5 51/75] usb: dwc3: import from kernel v6.7
+In-Reply-To: <20260716134305.614278-52-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
- <20260716134305.614278-51-anders.roxell@linaro.org>
-Date: Wed, 29 Jul 2026 11:19:47 +0200
-Message-ID: <87tspiywy4.fsf@kernel.org>
+ <20260716134305.614278-52-anders.roxell@linaro.org>
+Date: Wed, 29 Jul 2026 11:21:05 +0200
+Message-ID: <87qzkmywvy.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1785316790;
- bh=ZQDEDY1+/6sXClTZLP3kFU+HFsctE/unj/gDPEqjPAo=;
+ d=kernel.org; s=k20260515; t=1785316867;
+ bh=YU04F6iWEt37QDNYYFYz2f9sSQPowedpDasH328MtTI=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=lIrsgn9LNsH8V+vd2YuecZZtk41U8jbJfGUFV+jnN2Mg1l4Qt///eFE8m+GZavflo
- AtX/JDK5jF4Mlu5RxAfYLSxmWcjoxkpPs2qvC2i4rmPusL9wwLlH+GfLe48gIjz1kT
- NV6iLnV92TMu0c1no43514SypUCYF1d6ZR4xFrf7ZJMEqNRKonlv0u9g9CCxogcGw4
- qHA4p7XuyN9sXagfc2fa3Rjv95dv/4mJzPI5P+nbVje1nUaLUp1/14tRrM/RE9t2Tl
- jJsC06NxB3u7mSSwbGKsjCdc8BO4pYVrgn2aPyYEsVQ5z4XDRbXISSwQmwKuN6hgE2
- cnX6pNlY7DBCw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=K1gj1xoYAf3QMxg7fyCip+NK5adMlXLhspcZpKT+su+6eyf9McQx4uWDic09vrgEO
+ kBnaJ0cBPmY4OnJ8sUfkWEIKV3NVmpqZ6k4aZj0dhmlbj8b2Lm/7T8FN4AKjkI/XhK
+ 8QwdwIl958XEfLVY9/+lYRrGJQtHsWKaQ6DjmmvPIUT4zc/E7uglWBymbZuDytDnqz
+ McXHWMQX6pyoyT1n5xlBGBLScbeVt+OQPiKIikDKVXF16d+F+sD0+AtXKdQmNKFzr0
+ EbOfiPpj3YOMdGo+Trh5s90ihf6OlKEInNo//MLofFRMGf7X0jy86fzmDT8A5/bcTQ
+ Vf5GU+oeHcu8g==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  spf=fail smtp.mailfrom=kernel.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=lIrsgn9L
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=K1gj1xoY
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
@@ -104,7 +105,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=mkorpershoek@kernel.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=kernel.org header.i=@kernel.org header.b="lIrsgn9L"; 
+ unprotected) header.d=kernel.org header.i=@kernel.org header.b="K1gj1xoY"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -128,7 +129,7 @@ On Thu, Jul 16, 2026 at 15:42, Anders Roxell <anders.roxell@linaro.org> wrote:
 
 > From: Jens Wiklander <jens.wiklander@linaro.org>
 >
-> Sync Linux kernel dwc3 changes from v6.5 to v6.6.
+> Sync Linux kernel dwc3 changes from v6.6 to v6.7.
 >
 > The following files are preserved accross the import:
 > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -143,25 +144,24 @@ On Thu, Jul 16, 2026 at 15:42, Anders Roxell <anders.roxell@linaro.org> wrote:
 > Note that this is a raw import and doesn't build.
 > A fixup commit at the end of the series fixes that.
 >
-> List of commits: git log --oneline v6.5..v6.6
+> List of commits: git log --oneline v6.6..v6.7
 > Commits imported:
-> 8bea147dfdf8 usb: dwc3: Soft reset phy on probe for host
-> 592d7a4663d2 usb: dwc3: exynos: Add support for Exynos850 variant
-> 8d1de0ebce71 usb: dwc3: remove unnecessary platform_set_drvdata()
-> 1fa206bb764f usb: dwc3: meson-g12a: do post init to fix broken usb after resumption
-> fb57f829beef usb: dwc3: dwc3-octeon: Verify clock divider
-> d9216d3ef538 usb: dwc3: dwc3-octeon: Add SPDX header and copyright
-> 540264746d83 usb: dwc3: dwc3-octeon: Dump control register on clock init failure
-> dc0092ce24dc usb: dwc3: dwc3-octeon: Move node parsing into driver probe
-> c61101631cdc usb: dwc3: dwc3-octeon: Avoid half-initialized controller state
-> 23f87bcac649 usb: dwc3: dwc3-octeon: Pass dwc3_octeon to setup functions
-> 417840663ab8 usb: dwc3: dwc3-octeon: Use _ULL bitfields defines
-> 976f82e8aa3c usb: dwc3: dwc3-octeon: Convert to glue driver
-> 3609699c32aa usb: dwc3-am62: Rename private data
-> 484468fb0f7d usb: Explicitly include correct DT includes
+> 9cf87666fc6e USB: dwc3: qcom: fix ACPI platform device leak
+> 9feefbf57d92 USB: dwc3: qcom: fix software node leak on probe errors
+> 51392a1879ff USB: dwc3: qcom: fix resource leaks on probe deferral
+> aee70a1d7113 USB: dwc3: qcom: simplify wakeup interrupt setup
+> 41f5a0973259 USB: dwc3: qcom: fix wakeup after probe deferral
+> 8bbae288a85a usb: dwc3: set the dma max_seg_size
+> 791cd7afe51b usb: dwc3: add missing of_node_put and platform_device_put
+> 10d510abd096 usb: dwc3: Fix default mode initialization
+> 97789b93b792 usb: dwc3: add optional PHY interface clocks
+> de7ecc4e0570 usb: dwc3: xilinx: add reset-controller support
+> e24bc293a6a6 usb: dwc3: document gfladj_refclk_lpm_sel field
+> e72fc8d6a12a usb: dwc3: core: configure TX/RX threshold for DWC3_IP
+> 34c200483569 usb: dwc3: add Realtek DHC RTD SoC dwc3 glue layer driver
 
-Please drop the commits that were not imported from the changelog (for
-example exynos, octeon)
+Please drop the commits that were not imported (for example qcom,
+xilinx, rtk)
 
 With that fixed:
 
