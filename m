@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853C6C54F51
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 10:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99DEC54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 11:19:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3D41340BA6;
-	Wed, 29 Jul 2026 10:55:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5346340AE0;
+	Wed, 29 Jul 2026 11:19:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6qDc4sGPVEcB; Wed, 29 Jul 2026 10:55:34 +0000 (UTC)
+ id EzvBVdvgUyQy; Wed, 29 Jul 2026 11:19:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 24C3240BA7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7B55B40AE4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785322534;
-	bh=BbturLjGCEP8l5lHMCYbwLqdA7/D0ke1uQokfOEvxrI=;
-	h=From:Date:Subject:References:In-Reply-To:To:CC:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WPxGc45ceQ5V0+TCyVTZ3ODAcNZhf286y50wcdVsd/j2v++vQEbqJrjsoiYRkTONo
-	 S3aWZhpi/IpWMPeBJ1Ht1iKCveD/CTfsAmqxTfI8I0qHZFhP/0tGWUX9gBVEPQNzHb
-	 da/jK7v6p36O9mpnIerJoU7wioIB4u4iFbXUrKPIHexv2mr/eMwlDgo4spt218rXZ6
-	 nJ7ihZTahsVihpdpoWUiDM7j2kkHC7qd+A6Hc3XZONn9fYIrLdN0Akox6uwU2ZQOn1
-	 lS4Raw3QyNOYW398nSulYxtdmy6TL1+kahCDWE6ua06iIA/Pa6ZVuYNc5qv4txKAcv
-	 Z559OJy6S1qBw==
+	d=lists.u-boot-project.org ; s=default; t=1785323944;
+	bh=JYG5KDAaVLNCFJO5PD0UctURK2OaxQuELzNq4T5cc+o=;
+	h=From:Date:Subject:To:CC:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=fIcZwGqDdvWlcnf/yD0tf6yDpd0ZCAHvn4019sQzbAITsTsGahPFuqr1fZy6ITmEu
+	 T8PgUKThusWvh0HOtHcogGzeuIqeLd8wiA2KssA8pgNFuVnhU54uZnwVxttpU9m5iF
+	 PN7DRplkSB4lgHhahrLkCdIpfyAUR2EX6hq6w3ZP5aA5a55Wr+lfOdYubR4YpcYIpp
+	 O7e2cE4nsWGUEhjl8bSYRPiNi+iJPWidEgaJqVFdsB6T8RERgxux4SmvOjj6J6meDc
+	 Gtqnetko29igaeA6sgt00jNVFiB71qUD2OH0fTfHwS8xcQuXwEgdoapjC2zqdQ9IQN
+	 Jr9n/Cq6XjLJw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 24C3240BA7;
-	Wed, 29 Jul 2026 10:55:34 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 247B53B0
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 10:55:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7B55B40AE4;
+	Wed, 29 Jul 2026 11:19:04 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 80B3F3B0
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:19:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 00AE360712
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 10:55:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6686A8119C
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:19:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ujSznjCALCnR for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 10:55:29 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
- helo=mx0a-0002e601.pphosted.com; envelope-from=anshuld@ti.com;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 77KxylJ5HCGA for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 11:19:02 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
+ helo=mx0b-0002e601.pphosted.com; envelope-from=anshuld@ti.com;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 783E660665
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 783E660665
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 783E660665
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 10:55:29 +0000 (UTC)
-Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
- by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66T7eCX73522228;
- Wed, 29 Jul 2026 05:55:20 -0500
-Received: from ch1pr05cu001.outbound.protection.outlook.com
- (mail-northcentralusazon11010014.outbound.protection.outlook.com
- [52.101.193.14])
- by m0384305.ppops.net (PPS) with ESMTPS id 4fq41vuuuj-1
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 9AD6681197
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9AD6681197
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9AD6681197
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 11:19:02 +0000 (UTC)
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66TBAcss2591036; Wed, 29 Jul 2026 06:19:00 -0500
+Received: from ph0pr06cu001.outbound.protection.outlook.com
+ (mail-westus3azon11011055.outbound.protection.outlook.com [40.107.208.55])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fqgdd011m-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 29 Jul 2026 05:55:20 -0500 (CDT)
+ Wed, 29 Jul 2026 06:19:00 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hu183z0WD1pcXw4ksQgm9XS+K7n/KjiDBDJ13GjsompVrezIutachJZoSHGol7t+xy0X+wRkmUFtiTK5qwdCVCkrs57ZbufJxecXShprJbTvtx7lA5zGCMJ3Z1Uk3uWf7AQwAMUmgIwuhjgTnwqSQOkymOM6FPNDA+huMANPTCOagH5fD0cn8jyTiAxJW7IqMXZGefLdbxzbCQW6quGn5HDR7s8tT4LKNyXNTZLgQv7TWdfQ/jM+sbvbRoBpSZ8e0hHSMiD2CQcco9Z90hX+Bz73qzzDMIi1+IjENb9kpWL5hUcAUZxCqnLR8k1UlOwtHml/mNfGcSkqzQvRTR5/8Q==
+ b=LnLhQtcrHpOoZhkHa8ICori8ky5TnZB6TDvpsbxKZ3mCgUua/hKNtVIJ1im5Lu0oHapsiTNfbtmrbKnLGqQ5ULDJyePRrCmLTriSnNLQ4GEtT/lX4IEMqBNUL8mdwqGgEnEZ10cxH+1HV7186urKXUO4UqX71BINKb6fbcbujwJ9bMdurFGiWtAgHGSitFKUSvk3nU/64sWCCy2DzC9/bc2RHcxzOS6HdZ+33paBIJKWZnWR+ROHikEFeJTAOoW2pAsntYLYRAZ/Q9D+MiSStVQEjnpu3n7FfGxZHDVbs46KGNQwACQLFJs7S3XMzbfPhsYdRFCVxn00GbPVUw74PQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BbturLjGCEP8l5lHMCYbwLqdA7/D0ke1uQokfOEvxrI=;
- b=weJ+rfSw6VrGgRJwKIeTiOtob3+FuNrP1+Zz+1eFN8PURgWuVpRp0BQDEkO5rnum75fHE43flUSD5W3Q2fjsi9MIYZASQIIws8akimUBWZTR0xeMi3HAKxFp4drgnSU74MrjDhD234TNEgbE/E5NYR+trdc3Fo63BF58tOROnQlaOBbH9/TihB0eeFXb9iORaH8aNbknNhAzSpubjEAsPAiiKV71iA2ccKrFrPA8/q0VIoLEb2nj22Fjgd+P9mE8wQBly7V0EQoduGW/5y/xbGq4JY7oNZ+W2Rr6gOSYmSrtLg3ariX138Yt8RMudaOYQmJTIqLuA9EZBX7GacYcjg==
+ bh=JYG5KDAaVLNCFJO5PD0UctURK2OaxQuELzNq4T5cc+o=;
+ b=nmWBW47tIfqoLLjofkhdNppI+H0NFxraMo8iZZaF3FfmHm2ZdcdLHqX6iserfS8gsZOJd1FDj9usbIsFoVf+G4JBSpgF4o1VqTBo9kraBpkaj6ZE/+4jNnF5nc4hEaThJp00RWQwVdes9kvmbhQNG2Pi9OtTVoaKzC4s83A0UYgfkXzRL58v+f14Gwd9lDDRR85pp1SATp3Q6bHDRhvXnihycAeeSG+xiATiiPU1PzF+Q/VmlP6oSghmZlQ59/FCVJTR30/1tlikIqxO4HbbwguCVY1h+vNVgA+EGLoHiQWXTGh+XY4G7yy151hILaduXuvRihiNWA1UpIL13bDcxA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.195) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=ti.com; dkim=none (message not signed); arc=none (0)
-Received: from SA0PR11CA0051.namprd11.prod.outlook.com (2603:10b6:806:d0::26)
- by PH7PR10MB6967.namprd10.prod.outlook.com (2603:10b6:510:271::22)
+Received: from CH0PR03CA0344.namprd03.prod.outlook.com (2603:10b6:610:11a::35)
+ by PH8PR10MB997928.namprd10.prod.outlook.com (2603:10b6:510:3d1::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Wed, 29 Jul
- 2026 10:55:15 +0000
-Received: from SA2PEPF000015CD.namprd03.prod.outlook.com
- (2603:10b6:806:d0:cafe::5c) by SA0PR11CA0051.outlook.office365.com
- (2603:10b6:806:d0::26) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 11:18:58 +0000
+Received: from CH1PEPF0000A345.namprd04.prod.outlook.com
+ (2603:10b6:610:11a:cafe::a1) by CH0PR03CA0344.outlook.office365.com
+ (2603:10b6:610:11a::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.13 via Frontend Transport; Wed,
- 29 Jul 2026 10:55:15 +0000
+ 29 Jul 2026 11:18:58 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -87,130 +85,125 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SA2PEPF000015CD.mail.protection.outlook.com (10.167.241.203) with Microsoft
+ CH1PEPF0000A345.mail.protection.outlook.com (10.167.244.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.270.5 via Frontend Transport; Wed, 29 Jul 2026 10:55:14 +0000
+ 15.21.270.5 via Frontend Transport; Wed, 29 Jul 2026 11:18:57 +0000
 Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 29 Jul
- 2026 05:55:09 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE208.ent.ti.com
+ 2026 06:18:56 -0500
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE208.ent.ti.com
  (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 29 Jul
- 2026 05:55:09 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:18:56 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Wed, 29 Jul 2026 05:55:09 -0500
+ Transport; Wed, 29 Jul 2026 06:18:56 -0500
 Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66TAt8j31144404;
- Wed, 29 Jul 2026 05:55:08 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66TBIt9K528152;
+ Wed, 29 Jul 2026 06:18:55 -0500
 From: Anshul Dalal <anshuld@ti.com>
-Date: Wed, 29 Jul 2026 16:25:00 +0530
-Subject: [PATCH v2 2/2] arm: dts: k3-am625: add template for tispl.bin
+Date: Wed, 29 Jul 2026 16:48:55 +0530
+Subject: [PATCH RFC] env: ti: fdt_high: set no DTB relocation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260729-k3_binman_refactor-v2-2-9a66fd170040@ti.com>
-References: <20260729-k3_binman_refactor-v2-0-9a66fd170040@ti.com>
-In-Reply-To: <20260729-k3_binman_refactor-v2-0-9a66fd170040@ti.com>
-To: <upstream@lists.phytec.de>, <u-boot@lists.u-boot-project.org>
-CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Nishanth Menon <nm@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>, "Francesco
- Dolcini" <francesco.dolcini@toradex.com>, Aristo Chen
- <aristo.chen@canonical.com>, Suhaas Joshi <s-joshi@ti.com>, Bryan Brattlof
- <bb@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Ernest Van Hoecke
- <ernest.vanhoecke@toradex.com>, Sparsh Kumar <sparsh-kumar@ti.com>, "Anshul
- Dalal" <anshuld@ti.com>
+Message-ID: <20260729-am62_sip_fdt_fix-v1-1-b0d814983d28@ti.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDcyNL3cRcM6P44syC+LSUkvi0zArdZONE0zQTMzNjc8NUJaC2gqJUoDD
+ YyGilIDdnpViIYHFpUlZqcgnIMKXaWgAcg/42eQAAAA==
+X-Change-ID: 20260729-am62_sip_fdt_fix-c3a5f466371e
+To: <u-boot@lists.u-boot-project.org>
+CC: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, Hari Nagalla
+ <hnagalla@ti.com>, Anshul Dalal <anshuld@ti.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785322504; l=29023;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785323934; l=2309;
  i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=5p6guxIDBa1yqmPymbyjaBqFR63w/fRcudRwl1RLOx0=;
- b=9tLjrFzuAJYFAzj2G9s4lfXZs4XBhiS66vom6miOcpNQgv4WYga9aRXqeXtQOaRnEv6PF25Jb
- o+mrPnXmjPGCZyxekzWex+llG/6ZqHK6PfylUoWC/RnFvmFwx98vw2+
+ bh=joZoh9XiQjroP72rhBmkARhvG+NK52lQ9cBa7KbCZdc=;
+ b=lLcVmtyegby2+4EgKQ9ow/6Hb5bj9VufLfcJ11KcEW1a0NbDS8W8YybXXWjobEoAsUyiWGyiY
+ b+g+6/Hi1YlDJVJwOMJE82QFiJ+b4zz3MiNhFnAb1vGH6f0d+7Y16Up
 X-Developer-Key: i=anshuld@ti.com; a=ed25519;
  pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CD:EE_|PH7PR10MB6967:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4d31613-ef41-4679-752a-08deed5fdeda
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A345:EE_|PH8PR10MB997928:EE_
+X-MS-Office365-Filtering-Correlation-Id: a044f9a2-43cd-4eb8-03c9-08deed632e8f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|82310400026|36860700016|6133799003|18002099003|22082099003|56012099006|10067099003;
-X-Microsoft-Antispam-Message-Info: NiyIpx5wnEPbgwCVCPAs0v1vOoRI+14r4JREMUQiITMk0l1nYzYveGm0HiMHKVNqOMNI39Z3tuRT9R0kmgnFDnRTzWD/2ZkTshurBGTknEPyI8+7OrjUOKg/c3CUA6+hxdVinNDCgs0oE33CGnqHtTqAmaMwwZtKFKDzxdEVkpObrxdZVamwnnZaMjJ7dCrfWYj2d/+Ng0stjZ99u5d3TgiDm8B1swiGJt6nPM9r4EhNyAt3SbNGtP6Ku8bR6Pk7MVYuMF3t6M1VVD0OKCRe7w8MpNjkjc3Jl+nECOOHPUIqZGINJYrFasOzacPenE/eZELD/dtBXOwjVAgw7srTm3l7uyDwIfaJ+vCT2+DOPHn0N9ymQeJ3z0btQT8RduA8nDcCQqJA6rxm+GeTp9YeJpPZqiX1ue8Hg2hJuOEepy+mx8mgFbELjyL4VJhq18B9AAqqVZCOEKgzGFMKTCrfyEWB/+LgGdSobZR3RgComNzrY92vDU/+XTtFNDnExss2MB9yCTxZJJRimA094ShgWHO6YO5hAQTrsniJfr9M/Ua5tOy2DIOSJ0pDiTU+Yd0enCMrukOCSRjNq1+eKcLk2IlnXDYkHynFyXuWiIh1UtbRJ/jC2aOx4yHBVoJic/eaUrw6hOlCf9xNJkZPdaVsaK/gNEsiv1LggWnrehbBH2pGk2MJW3/iKqeWADZ75tz1OcfcQhCPjlDEexYlGl10yA==
+ ARA:13230040|36860700016|23010399003|1800799024|82310400026|376014|10067099003|56012099006|3023799007|18002099003;
+X-Microsoft-Antispam-Message-Info: hc/+bTNkKdAJ7WU6K3AO1axszpsmcNSclYExu6nt02coa+DMuTiAhNZVXXTtjh2HJThryl1ujPXomCRsCUERlozrWNXerihrAy101WhjzGOHcuDxDsZTYOGoqtIW4CkJdYxkoo9kcLPo2cWGiR4W9heprZAjoWQoR+joqrkuwspwjSlnWfQeyt1WzLA2bTTR3o14lyH42XEc/DOcXHcyuulMd0f5GTwh1PPYzGfII1BQ/qiKBfsBtNwRTypZVwSbLwtKdft5eJznMMjd/VaOy9NxC3csi8MtPe8bSxF3lSGYoRkQ6wxB8ZQRPZSgF+QBp7s1uNpKOS6Jh8G14OLFwlU59NLjnkQj28XWrwSjqC8/OelgOHUrGU+WiUx46C8lkz/Q8e4ePfYB94EugW/Vmki+O0t/mKXGgbcf+IuMl5Z81KUPw8refXYEDlw3tPH1iXHx6ukN2YlLIAOTOB1/7Nv2f+oaUfMhZzd04xI4upICE1+sGS73jVYjGSI8zRo78UbouOlqx+IrNlIMkuz6bCbvP/quTSwOeZnA075be3AXhMq/P6vW9TOzLSMyE+7bX6lfD9T+bRUNx9mK93Tgz+Be8WdKHU9FKu7T35oAl+ntdggeuAnuUpQgo2uHl11PEPxZ5F/O3cxUphg/9Ks6EH3/Q8GhbWRp9twAPisbkytmTaZSI5FpCKKt2fVSP6iibpij47PovOrVxmXBR7phnA==
 X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(82310400026)(36860700016)(6133799003)(18002099003)(22082099003)(56012099006)(10067099003);
+ SFS:(13230040)(36860700016)(23010399003)(1800799024)(82310400026)(376014)(10067099003)(56012099006)(3023799007)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: /FQ5I+TUFPLOATal4eSVi7ftWlsqFyWlRgVp9/fHREfontrJMB2t020ZANIb59JQ3RXGz0mScRiYRUp5+I59bq9Xmeu3wZ4IAz5+ph5PEjNEYx5WVyddw4Rfqmaz5JBf6O/5Lf7hmxEPdP7ZdL/0BgmRaAOyYgj2CDWRDqxWUtelFnAHoRSgm2Df/FJfeKb0R0Au2+eqqb3qrQ7lzplAOfwVR89wgQdtPT/9v8FoBADiZztDJI3QxyD3PehPzweWjcM3L0G54iBxXIrZ4rvJ1suySipo4hEKP9xtZq8N2dw2ulqjmNEnmltYt6Ol6eTiSNo8RkOS222SOJ/z30lIYLIE2EftNApFqEFnoIpRpBJwUomaXITTmwbnKeWLBTaochgAhE9JTXQqOoRRoHpuubchbKLXi7iW+e30ga09IF5+E4v4PCgahDXfSXXY2QKI
-X-Exchange-RoutingPolicyChecked: d0DEh9TVrd+SDWKkLHiuSRr93Rp6cnX7S98ajkuTX4gM9PoaCzh4zsLHb78Vbr3RAn/05m/bqYSqrOftxL993+v6vsIAnfWhl+lf9aKKdU2NoL5DZXwPfBfqKMoY4GMkJJQMsUa3CrlsftmWBq59gXRBq3y4PfNVo1T6YCRNeec/86LoVEJAa/WRsZhNLeolLVzcPyTNwu74bJeboEWXIGYpN6q9jBw62AIfSnZLhsTiUTsI1+0LuJmQshg+q0BBw5nBOxyLwtYDpW4BOdLc0a3BrlDv7kVwGCJmKfoJDXMFCCuBK8k838lPSw0QuRRDqX5VDHQNXh9KHmcMY/eorQ==
+X-MS-Exchange-AntiSpam-MessageData-0: ye/qoBZbahoqtAVBEUxAOt9IwkUvds/8Ny9DOjTBuY6X4rTy1hsgbIJ8bM2pS21T/0dBbj3lk5Kg/Ehjq7QwT8tFu4ih80VStcX3X6wX/RU2YCn6LgFw/dIdg91C4kaxCJW+88EwcWJGg63NO/STp8tq20vf+jTCvZqNsTSIMVFZRWkVveRB/DK8mlC76/hqlrnJfeHV2kYf5ch0m9EDZ/W9h28LTrPeqrOJUveLe2lUQ1clZ4yqw7WqYQOi8u14hThyxLAalYaZTJuq7FstcNCsJzybLFkQi3Ja+4682XLlYo0QyJWuTnE5Alx4kECuA6gcuZXYLpinwQ/1pO5/SM6vy+6+jnUUU5O40KVUn7VR27sl8vzxrE0dAEe/X2L3eB0faKKfnTsT3BLuj0Da7VzaWO6kjkRQRhxD3tfL4tjtPAqwbJEme9bD0W8yw+gn
+X-Exchange-RoutingPolicyChecked: oOe3qLcUDFs21/SCn9wafm5m7bk6w/SCBicXCJwgPhBKgThQANtldmDJ3zNdWWYCMbzqhBDKciZYjPUBwj7N38gbCImlKnNf6i/SXYILgdyKtdUsLLvh7pPhKbEshn43Y8Wx2/1lrY64wJIr9m8j6/xWnAN5vMSvUk+Lb4CwvyG641pXUUFP5kILcYqI/Y0f9MLgDZsdX0Of6vWaeP/usd/U7uka8PfQo2mBtXXl1Qa0/1F9RcrS42mqcFY0yC+STK7lg4KV09VM16sM73f3yXNEAyQLAalbn740j9DENRGaN2mmhBUIjrpvTQSf0sQb/1i4q2TwM3LNLptNhurumQ==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2026 10:55:14.9061 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4d31613-ef41-4679-752a-08deed5fdeda
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2026 11:18:57.0871 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a044f9a2-43cd-4eb8-03c9-08deed632e8f
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
  Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CD.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000A345.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6967
-X-Authority-Analysis: v=2.4 cv=D/h37PRj c=1 sm=1 tr=0 ts=6a69dc18 cx=c_pps
- a=gJSDm7Sez3IyWyplfMHn2Q==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR10MB997928
+X-Authority-Analysis: v=2.4 cv=RZCgzVtv c=1 sm=1 tr=0 ts=6a69e1a4 cx=c_pps
+ a=MB7q27p+LIGhC+3RxemCqA==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
  a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=taLDd7a_hP9WKsMzeGRc:22 a=sozttTNsAAAA:8 a=lx77uqg2WqRXEC48TswA:9
+ a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8 a=Jfbps5itsKi2yBLXAWIA:9
  a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: 1zWrrB5WIUh4sl1UfO5mY2s5b-oUKYax
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA5MCBTYWx0ZWRfXwaiZ03BvAu6C
- 43i7FcKUDl2QJPK7I0ohQgSxRGnsnYLzlrQxiUvVCK7tktHfF8MJHfplG/jvfmokEX+oNiTC8Le
- P41BhL6iFNJkKbj1KrJ65KxMrBglMxo=
-X-Proofpoint-ORIG-GUID: 1zWrrB5WIUh4sl1UfO5mY2s5b-oUKYax
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA5MCBTYWx0ZWRfX0OZEtsfNCXr/
- WT1fbXDINtINVfeSpnq8ZsxY76eKdLO7lWqWs2ezh9al2iMW/785yye16A0hppowNU7khtrArS7
- wAPEB65driga+wmh7tcMp2sXKz2jh2vcPHRZoQVc6TjOS5Wz8gytUeefBwJ3oRb+Bud2X6idE0j
- fg1zMbJZyla6WLLK8oBYZ4ie5INzacKvc2+1k1MriSjeQU9S9WE/M6+KjeHCxnLp9JPY758oqRX
- 9ApZHNuemMTNjpihtabmpnSy3QGMnkrwWVm/uXWzW1kgPC5PW+oi0Iuvj7rfazwh/UdQhZX5/nq
- WWsFiAaN5SgDGh0MZvsSy3ggVtbjPphTCuGEqrr4hbEzb41OwgSNS7EsFtQbc8Y3NrWKxw+mKrO
- Vs7VX5shNqvAhReQnc3kOX6gGNMWct/aRODIeBTcVZsl9Diy3Bithh5qxf//Rwi1+gMIRvscTkm
- ki3t1JblRsKfZgPkXVQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA5MyBTYWx0ZWRfX03PBjGv5jBBh
+ Z7jhC9ldPMotJfy8YsTh6M7pFB50bHCIqXWe86SbdFnGZjzQNk0CSOA2tHPAQHVzgwOZ54ZCbAm
+ 1Pepo8zyyv0BHrezJQUmwjbGTd4eZTk=
+X-Proofpoint-GUID: GHhdSzMGYGUgVIwgHJBU306ykzxoNGkB
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA5MyBTYWx0ZWRfX9EuTzGrPA2R6
+ qHwoQnu20rai23Z6uEZYonhWZl3z4qCTAFDyYdmiFcjXxg9/Req2uY1sGDZT2K3FKvlzbI8LEEN
+ l4MNvyFivu1fshYeEgNiROOPVLR1DgWknao8AJbFPeF0NL0rnIVw8KwHXsdyPT/jJRsS/Q4D4F5
+ lqSQI6ebZKKTHFwtir6JIRDj4qL+6eQRo8XKRh7pGPLSOq5GnsSAEUnBXixtGjSOsEgrtxxJz8j
+ yvyGDCJITBUodDkUPS1QVeD31cOVLtQT6JTecoHzblh/FUy5Aj9iGM8XimB7VSYbonXoTCg6PDQ
+ oaavzPRW1fRBEgcpFRCop+KnyGXe5lA1UFnflS6xcTPuQAsWgDDgwIOieiqdA/STFT8AG66fBnl
+ RvzJnQk9fvGaNJjjdV8OizBw4ZyLd6oGAlv78QSShRsXZlyXFtJj74rxZ6FNmDiohddI3j+V/oe
+ DogdbrDrbxgLZI/PSOw==
+X-Proofpoint-ORIG-GUID: GHhdSzMGYGUgVIwgHJBU306ykzxoNGkB
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-29_03,2026-07-28_02,2025-10-01_01
+ definitions=2026-07-29_04,2026-07-28_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 clxscore=1015 phishscore=0 adultscore=0
- impostorscore=0 lowpriorityscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607290090
+ clxscore=1015 priorityscore=1501 impostorscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 malwarescore=0 spamscore=0 bulkscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607290093
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=BbturLjGCEP8l5lHMCYbwLqdA7/D0ke1uQokfOEvx
- rI=; b=oZrilKNJc6BOSpoo64QRsECN8UaGcY6AQ1g1Wb/d3+mIFHkc2loF9mWpz
- KrAxkq7IVUHjh6+QgN3V17GFSUKahYtdKRVLU3uCLdaNpT3AZ+e/rpvTBZ8UPqDm
- WfA1ao3yLhK2WYo4TWSqWNXZJWjWbFSQbQUp7TlnxP4Ev0MuQO7QhNOKRYJR6mvE
- oarzpZSozbZCHsXKp2wSq7btPloSkycgT3I1GT+diApeHA21KebGTRMxSi+HVBcT
- FsmpFV/qcTvmQLTmh4kOEyLDzXxCHjKHyNxysMa7GP287F9gtU9yQXb3W3MyVXav
- cU31PolEolwlI32dYVXPUAgKs5s7A==
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=proofpoint-05-2026; bh=JYG5KDAaVLNCF
+ JO5PD0UctURK2OaxQuELzNq4T5cc+o=; b=TNeaWsIIZoP7xAWhhrABeFjVviZiy
+ FR4hDpv3E5tZ7AuWfX4D87AIQi18YTCuxakCqBLkuUdtOIBObrfINn1eVBbcHIgG
+ zeNUrCYQfdBse0MzGV5QsqSBQIQcQcBhW0GXKAIDx0NcVwn1/25JGQONJzhYMpc6
+ BSRRqVi3KI+wzTtflMteaeyXVfBPF0o6HoiUDZJFJZIueCDxRfLiOLwVwFFkIAmv
+ h7ZmcCtNTWdgAxeBg0z2tmLGVFdEs0PgwniCm5KbIxooRxblDP13XMtlyPuSn3jW
+ tx9MXEEywyXZE6d2+/yqouOJbD4UKbBCl+u+C7SVFXpO+Uhp+KfzEdcHQ==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ti.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BbturLjGCEP8l5lHMCYbwLqdA7/D0ke1uQokfOEvxrI=;
- b=RnYm4o3qjBvVQ7lELpF7GmqtYimmr1mHO+/G+W6R0QyT8meuNs0tAJPAIhR9pwLRKegzxM1CIa3kRZ1cGvBd3DyJJKnthaaVVyXlfeiX9m8XA0keBSJYKMQSltFrP8jpokgkXqhqHW/3uX6KGWgseR2RrC0b9j6BSh6HAG3JdOE=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=JYG5KDAaVLNCFJO5PD0UctURK2OaxQuELzNq4T5cc+o=;
+ b=pd6nlgyKYr3WjrW2eAMPC4KvcYDdezVQjMAyZ1pOQWgp72YfliZrt/Mz4hpauR/5TnNWtPxYsstWaxDI3HOvM7ldA0L/oHlQsGvoJ2IUj6MMVc2q/3Z/xCpgEwrQUHMEKaUry3ZgOIu4Aqt19cVa1G4rspyBHc81RG+r58cWBiE=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=ti.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=oZrilKNJ; 
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=TNeaWsII; 
  dkim=pass (1024-bit key,
  unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=RnYm4o3q
+ header.s=selector1 header.b=pd6nlgyK
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -225,1227 +218,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This patch addresses the duplication of the binman nodes responsible for
-generating tispl.bin and tispl.bin_unsigned for TI's AM625 SoC based
-boards.
+From: Hari Nagalla <hnagalla@ti.com>
 
-The common nodes are factored out into a template in the SoC level
-k3-am625-binman.dtsi that each board in-turn includes.
+AM62-SIP SK boards have only 512 MB SDRAM. u-boot relocates the kernel
+DTB to upper SDRAM region before starting Linux kernel. This region is
+overlapping with the Firmware IPC carveouts. To avoid the overlap, set
+'fdt_high' environment variable in u-boot to prevent relocation of DT
+blob.
 
-No functional change is intended from the patch asides from the addition
-of tifsstub-hs and tifsstub-fs nodes in beagleplay's tispl.bin which
-should have no consequence asides from growing the binary size by few
-kilo bytes.
+without this patch:
+Booting using the fdt blob at 0x88000000
+Working FDT set to 88000000
+Loading Device Tree to 000000009ce49000, end 000000009ce5b8f9 ... OK
+Working FDT set to 9ce49000
+...
+and subsequently during Linux boot carveout reserve memory fails:
 
+Starting kernel ...
+...
+[    0.000000] printk: legacy bootconsole [ns16550a0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: Reserved memory: failed to reserve
+memory for node 'memory@9cc00000': base 0x000000009cc00000, size 14 MiB
+[    0.000000] Reserved memory: created CMA memory pool at
+0x0000000094600000, size 128 MiB
+
+with the patch:
+   Booting using the fdt blob at 0x88000000
+Working FDT set to 88000000
+ Using Device Tree in place at 0000000088000000, end 0000000088013375
+Working FDT set to 88000000
+...
+and subsequent Linux boot
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: Reserved memory: reserved region for
+node 'memory@9cc00000': base 0x000000009cc00000, size 14 MiB
+
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi      |  92 +------
- arch/arm/dts/k3-am625-binman.dtsi                 | 240 +++++++++++++++++
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi     | 241 +----------------
- arch/arm/dts/k3-am625-sk-binman.dtsi              | 313 +++-------------------
- arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi | 185 +------------
- 5 files changed, 282 insertions(+), 789 deletions(-)
+During linux boot on AM62x SIP board, U-Boot relocates the fdt to
+reserved-memory regions for IPC. This causes the kernel to fail when
+trying to reserve said memory regions.
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index 78d69499314e..d06cbd899c2a 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -63,99 +63,11 @@
- #define AM625_BEAGLEPLAY_DTB "dts/upstream/src/arm64/ti/k3-am625-beagleplay.dtb"
- 
- &binman {
--	tifsstub-gp {
--		filename = "tifsstub.bin_gp";
--		ti-secure-rom {
--			content = <&tifsstub_gp>;
--			core = "secure";
--			load = <0x60000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
--			tifsstub;
--		};
--		tifsstub_gp: tifsstub-gp.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
- 	ti-spl_unsigned {
--		filename = "tispl.bin_unsigned";
-+		insert-template = <&ti_spl_unsigned_am625_template>;
- 		symlink = "tispl.bin";
--		pad-byte = <0xff>;
--
- 		fit {
--			description = "Configuration to load ATF and SPL";
--			#address-cells = <1>;
--
- 			images {
--
--				atf {
--					description = "ARM Trusted Firmware";
--					type = "firmware";
--					arch = "arm64";
--					compression = "none";
--					os = "arm-trusted-firmware";
--					load = <CONFIG_K3_ATF_LOAD_ADDR>;
--					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
--					atf-bl31 {
--						filename = "bl31.bin";
--					};
--				};
--
--				tee {
--					description = "OP-TEE";
--					type = "tee";
--					arch = "arm64";
--					compression = "none";
--					os = "tee";
--					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
--					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
--					tee-os {
--						filename = "tee-raw.bin";
--					};
--				};
--
--				tifsstub-gp {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--
--				dm {
--					description = "DM binary";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "DM";
--					load = <0x89000000>;
--					entry = <0x89000000>;
--					ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
--				spl {
--					description = "SPL (64-bit)";
--					type = "standalone";
--					os = "U-Boot";
--					arch = "arm64";
--					compression = "none";
--					load = <CONFIG_SPL_TEXT_BASE>;
--					entry = <CONFIG_SPL_TEXT_BASE>;
--					blob {
--						filename = "spl/u-boot-spl-nodtb.bin";
--					};
--				};
--
- 				fdt-0 {
- 					description = "k3-am625-beagleplay";
- 					type = "flat_dt";
-@@ -166,10 +78,8 @@
- 					};
- 				};
- 			};
--
- 			configurations {
- 				default = "conf-0";
--
- 				conf-0 {
- 					description = "k3-am625-beagleplay";
- 					firmware = "atf";
-diff --git a/arch/arm/dts/k3-am625-binman.dtsi b/arch/arm/dts/k3-am625-binman.dtsi
-index a96a2006a087..78ea422b85d9 100644
---- a/arch/arm/dts/k3-am625-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-binman.dtsi
-@@ -120,3 +120,243 @@
- 		};
- 	};
- };
-+
-+#ifdef CONFIG_ARM64
-+
-+&binman {
-+	tifsstub-hs {
-+		filename = "tifsstub.bin_hs";
-+		ti-secure-rom {
-+			content = <&tifsstub_hs_cert>;
-+			core = "secure";
-+			load = <0x40000>;
-+			sw-rev = <CONFIG_K3_X509_SWRV>;
-+			keyfile = "custMpk.pem";
-+			countersign;
-+			tifsstub;
-+		};
-+		tifsstub_hs_cert: tifsstub-hs-cert.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+		tifsstub_hs_enc: tifsstub-hs-enc.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+	};
-+
-+	tifsstub-fs {
-+		filename = "tifsstub.bin_fs";
-+		tifsstub_fs_cert: tifsstub-fs-cert.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+		tifsstub_fs_enc: tifsstub-fs-enc.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+	};
-+
-+	tifsstub-gp {
-+		filename = "tifsstub.bin_gp";
-+		ti-secure-rom {
-+			content = <&tifsstub_gp>;
-+			core = "secure";
-+			load = <0x60000>;
-+			sw-rev = <CONFIG_K3_X509_SWRV>;
-+			keyfile = "ti-degenerate-key.pem";
-+			tifsstub;
-+		};
-+		tifsstub_gp: tifsstub-gp.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+	};
-+
-+	ti_falcon_am625_template: template-ti-falcon {
-+		insert-template = <&ti_falcon_template>;
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				tifsstub-gp {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	ti_spl_am625_template: template-ti-spl {
-+		insert-template = <&ti_spl_template>;
-+		fit {
-+			images {
-+				atf {
-+					ti-secure {
-+						auth-in-place = <0xa02>;
-+						firewall-1-0 {
-+							insert-template = <&firewall_bg_3>;
-+							id = <1>;
-+							region = <0>;
-+						};
-+						firewall-1-1 {
-+							insert-template = <&firewall_armv8_atf_fg>;
-+							id = <1>;
-+							region = <1>;
-+						};
-+					};
-+				};
-+				tee {
-+					ti-secure {
-+						auth-in-place = <0xa02>;
-+						firewall-1-2 {
-+							insert-template = <&firewall_armv8_optee_fg>;
-+							id = <1>;
-+							region = <2>;
-+						};
-+					};
-+				};
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				tifsstub-gp {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm: ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	ti_spl_unsigned_am625_template: template-ti-spl_unsigned {
-+		insert-template = <&ti_spl_unsigned_template>;
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "tifsstub";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "tifsstub";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				tifsstub-gp {
-+					description = "tifsstub";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-index d09bdf29a95d..12f8acffc4a4 100644
---- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-@@ -50,146 +50,10 @@
- #define AM625_PHYBOARD_LYRA_DTB "u-boot.dtb"
- 
- &binman {
--	tifsstub-hs {
--		filename = "tifsstub.bin_hs";
--		ti-secure-rom {
--			content = <&tifsstub_hs_cert>;
--			core = "secure";
--			load = <0x40000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "custMpk.pem";
--			countersign;
--			tifsstub;
--		};
--		tifsstub_hs_cert: tifsstub-hs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_hs_enc: tifsstub-hs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
--	tifsstub-fs {
--		filename = "tifsstub.bin_fs";
--		tifsstub_fs_cert: tifsstub-fs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_fs_enc: tifsstub-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--
--	};
--
--	tifsstub-gp {
--		filename = "tifsstub.bin_gp";
--		ti-secure-rom {
--			content = <&tifsstub_gp>;
--			core = "secure";
--			load = <0x60000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
--			tifsstub;
--		};
--		tifsstub_gp: tifsstub-gp.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
--
- 	ti-spl {
--		insert-template = <&ti_spl_template>;
--
-+		insert-template = <&ti_spl_am625_template>;
- 		fit {
--
- 			images {
--				atf {
--					ti-secure {
--						auth-in-place = <0xa02>;
--
--						firewall-1-0 {
--							insert-template = <&firewall_bg_3>;
--							id = <1>;
--							region = <0>;
--						};
--
--						firewall-1-1 {
--							insert-template = <&firewall_armv8_atf_fg>;
--							id = <1>;
--							region = <1>;
--						};
--					};
--				};
--
--				tee {
--					ti-secure {
--						auth-in-place = <0xa02>;
--
--						firewall-1-2 {
--							insert-template = <&firewall_armv8_optee_fg>;
--							id = <1>;
--							region = <2>;
--						};
--					};
--				};
--
--				tifsstub-hs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--
--				tifsstub-fs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--
--				tifsstub-gp {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--				dm {
--					ti-secure {
--						content = <&dm>;
--						keyfile = "custMpk.pem";
--					};
--					dm: ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
- 				fdt-0 {
- 					description = "k3-am625-phyboard-lyra-rdk";
- 					type = "flat_dt";
-@@ -338,111 +202,10 @@
- };
- 
- &binman {
--	tifsstub-hs {
--		filename = "tifsstub.bin_hs";
--		ti-secure-rom {
--			content = <&tifsstub_hs_cert>;
--			core = "secure";
--			load = <0x40000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "custMpk.pem";
--			countersign;
--			tifsstub;
--		};
--		tifsstub_hs_cert: tifsstub-hs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_hs_enc: tifsstub-hs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
--	tifsstub-fs {
--		filename = "tifsstub.bin_fs";
--		tifsstub_fs_cert: tifsstub-fs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_fs_enc: tifsstub-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--
--	};
--
--	tifsstub-gp {
--		filename = "tifsstub.bin_gp";
--		ti-secure-rom {
--			content = <&tifsstub_gp>;
--			core = "secure";
--			load = <0x60000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
--			tifsstub;
--		};
--		tifsstub_gp: tifsstub-gp.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
- 	ti-spl_unsigned {
--		insert-template = <&ti_spl_unsigned_template>;
--
-+		insert-template = <&ti_spl_unsigned_am625_template>;
- 		fit {
- 			images {
--				tifsstub-hs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--
--				tifsstub-fs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--
--				tifsstub-gp {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--
--				dm {
--					ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
- 				fdt-0 {
- 					description = "k3-am625-phyboard-lyra-rdk";
- 					type = "flat_dt";
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index 9ac0c36f8645..08edf7f32519 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -46,113 +46,9 @@
- #define AM625_SK_DTB "u-boot.dtb"
- 
- &binman {
--	tifsstub-hs {
--		filename = "tifsstub.bin_hs";
--		ti-secure-rom {
--			content = <&tifsstub_hs_cert>;
--			core = "secure";
--			load = <0x40000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "custMpk.pem";
--			countersign;
--			tifsstub;
--		};
--		tifsstub_hs_cert: tifsstub-hs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_hs_enc: tifsstub-hs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
--	tifsstub-fs {
--		filename = "tifsstub.bin_fs";
--		tifsstub_fs_cert: tifsstub-fs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_fs_enc: tifsstub-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--
--	};
--
--	tifsstub-gp {
--		filename = "tifsstub.bin_gp";
--		ti-secure-rom {
--			content = <&tifsstub_gp>;
--			core = "secure";
--			load = <0x60000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
--			tifsstub;
--		};
--		tifsstub_gp: tifsstub-gp.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
- 	ti-falcon {
--		insert-template = <&ti_falcon_template>;
--
-+		insert-template = <&ti_falcon_am625_template>;
- 		fit {
--			images {
--				tifsstub-hs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--				tifsstub-fs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--				tifsstub-gp {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--				dm {
--					ti-secure {
--						content = <&dm_falcon>;
--						keyfile = "custMpk.pem";
--					};
--					dm_falcon: ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--			};
--
- 			configurations {
- 				default = "conf-hs-fs";
- 				conf-hs-fs {
-@@ -175,109 +71,63 @@
- 	};
- 
- 	ti-spl {
--		insert-template = <&ti_spl_template>;
--
-+		insert-template = <&ti_spl_am625_template>;
- 		fit {
- 			images {
--				atf {
--					ti-secure {
--						auth-in-place = <0xa02>;
--
--						firewall-1-0 {
--							insert-template = <&firewall_bg_3>;
--							id = <1>;
--							region = <0>;
--						};
--
--						firewall-1-1 {
--							insert-template = <&firewall_armv8_atf_fg>;
--							id = <1>;
--							region = <1>;
--						};
--					};
--				};
--
--				tee {
-+				fdt-0 {
-+					description = "k3-am625-sk";
-+					type = "flat_dt";
-+					arch = "arm";
-+					compression = "none";
- 					ti-secure {
--						auth-in-place = <0xa02>;
--
--						firewall-1-2 {
--							insert-template = <&firewall_armv8_optee_fg>;
--							id = <1>;
--							region = <2>;
--						};
-+						content = <&spl_am625_sk_dtb>;
-+						keyfile = "custMpk.pem";
- 					};
--				};
--
--				tifsstub-hs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
-+					spl_am625_sk_dtb: blob-ext {
-+						filename = SPL_AM625_SK_DTB;
- 					};
- 				};
--
--				tifsstub-fs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
-+			};
-+			configurations {
-+				default = "conf-hs-fs";
-+				conf-hs-fs {
-+					description = "k3-am625-sk-hs-fs";
-+					firmware = "atf";
-+					loadables = "tee", "tifsstub-fs", "dm", "spl";
-+					fdt = "fdt-0";
- 				};
--
--				tifsstub-gp {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
-+				conf-hs-se {
-+					description = "k3-am625-sk-hs-se";
-+					firmware = "atf";
-+					loadables = "tee", "tifsstub-hs", "dm", "spl";
-+					fdt = "fdt-0";
- 				};
--
--				dm {
--					ti-secure {
--						content = <&dm>;
--						keyfile = "custMpk.pem";
--					};
--					dm: ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
-+				conf-gp {
-+					description = "k3-am625-sk-gp";
-+					firmware = "atf";
-+					loadables = "tee", "tifsstub-gp", "dm", "spl";
-+					fdt = "fdt-0";
- 				};
-+			};
-+		};
-+	};
- 
-+	ti-spl_unsigned {
-+		insert-template = <&ti_spl_unsigned_am625_template>;
-+		fit {
-+			images {
- 				fdt-0 {
- 					description = "k3-am625-sk";
- 					type = "flat_dt";
- 					arch = "arm";
- 					compression = "none";
--					ti-secure {
--						content = <&spl_am625_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am625_sk_dtb: blob-ext {
-+					spl_am625_sk_dtb_unsigned: blob {
- 						filename = SPL_AM625_SK_DTB;
- 					};
--
- 				};
--
- 			};
--
- 			configurations {
- 				default = "conf-hs-fs";
--
- 				conf-hs-fs {
- 					description = "k3-am625-sk-hs-fs";
- 					firmware = "atf";
-@@ -344,95 +194,6 @@
- 	};
- };
- 
--&binman {
--	ti-spl_unsigned {
--		insert-template = <&ti_spl_unsigned_template>;
--
--		fit {
--			images {
--
--				tifsstub-hs {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--
--				tifsstub-fs {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--
--				tifsstub-gp {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--
--				dm {
--					ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am625-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					spl_am625_sk_dtb_unsigned: blob {
--						filename = SPL_AM625_SK_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-hs-fs";
--
--				conf-hs-fs {
--					description = "k3-am625-sk-hs-fs";
--					firmware = "atf";
--					loadables = "tee", "tifsstub-fs", "dm", "spl";
--					fdt = "fdt-0";
--				};
--				conf-hs-se {
--					description = "k3-am625-sk-hs-se";
--					firmware = "atf";
--					loadables = "tee", "tifsstub-hs", "dm", "spl";
--					fdt = "fdt-0";
--				};
--				conf-gp {
--					description = "k3-am625-sk-gp";
--					firmware = "atf";
--					loadables = "tee", "tifsstub-gp", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
--	};
--};
--
- &binman {
- 	u-boot_unsigned {
- 		insert-template = <&u_boot_unsigned_template>;
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-index c57780d876d6..527b04936fcb 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-@@ -35,146 +35,10 @@
- #define VERDIN_AM62_DTB "u-boot.dtb"
- 
- &binman {
--	tifsstub-hs {
--		filename = "tifsstub.bin_hs";
--		ti-secure-rom {
--			content = <&tifsstub_hs_cert>;
--			core = "secure";
--			load = <0x40000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "custMpk.pem";
--			countersign;
--			tifsstub;
--		};
--		tifsstub_hs_cert: tifsstub-hs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_hs_enc: tifsstub-hs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
--	tifsstub-fs {
--		filename = "tifsstub.bin_fs";
--		tifsstub_fs_cert: tifsstub-fs-cert.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		tifsstub_fs_enc: tifsstub-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--
--	};
--
--	tifsstub-gp {
--		filename = "tifsstub.bin_gp";
--		ti-secure-rom {
--			content = <&tifsstub_gp>;
--			core = "secure";
--			load = <0x60000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
--			tifsstub;
--		};
--		tifsstub_gp: tifsstub-gp.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
- 	ti-spl {
--		insert-template = <&ti_spl_template>;
--
-+		insert-template = <&ti_spl_am625_template>;
- 		fit {
--
- 			images {
--				atf {
--					ti-secure {
--						auth-in-place = <0xa02>;
--
--						firewall-1-0 {
--							insert-template = <&firewall_bg_3>;
--							id = <1>;
--							region = <0>;
--						};
--
--						firewall-1-1 {
--							insert-template = <&firewall_armv8_atf_fg>;
--							id = <1>;
--							region = <1>;
--						};
--					};
--				};
--
--				tee {
--					ti-secure {
--						auth-in-place = <0xa02>;
--
--						firewall-1-2 {
--							insert-template = <&firewall_armv8_optee_fg>;
--							id = <1>;
--							region = <2>;
--						};
--					};
--				};
--
--				tifsstub-hs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--
--				tifsstub-fs {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--
--				tifsstub-gp {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--
--				dm {
--					ti-secure {
--						content = <&dm>;
--						keyfile = "custMpk.pem";
--					};
--					dm: ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
- 				fdt-0 {
- 					description = "k3-am625-verdin-wifi-dev";
- 					type = "flat_dt";
-@@ -260,55 +124,10 @@
- 
- &binman {
- 	ti-spl_unsigned {
--		insert-template = <&ti_spl_unsigned_template>;
-+		insert-template = <&ti_spl_unsigned_am625_template>;
- 
- 		fit {
- 			images {
--				tifsstub-hs {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--
--				tifsstub-fs {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--
--				tifsstub-gp {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9dc00000>;
--					entry = <0x9dc00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--
--				dm {
--					ti-dm {
--						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
- 				fdt-0 {
- 					description = "k3-am625-verdin-wifi-dev";
- 					type = "flat_dt";
+I'm not sure on what's the correct fix here but this RFC addresses the
+problem by disabling relocation to begin with.
+---
+ board/ti/am62x/am6254atl.env | 1 +
+ 1 file changed, 1 insertion(+)
 
--- 
-2.55.0
+diff --git a/board/ti/am62x/am6254atl.env b/board/ti/am62x/am6254atl.env
+index a9187c2b1aa9..d2e263b6fd5d 100644
+--- a/board/ti/am62x/am6254atl.env
++++ b/board/ti/am62x/am6254atl.env
+@@ -8,6 +8,7 @@
+ #endif
+ 
+ rproc_fw_binaries= 0 /lib/firmware/am62-mcu-m4f0_0-fw
++fdt_high=0xffffffffffffffff
+ 
+ name_kern=Image
+ console=ttyS2,115200n8
+
+---
+base-commit: 616c3d79f01cf9204e38738857c4647a730dcb3b
+change-id: 20260729-am62_sip_fdt_fix-c3a5f466371e
+
+Best regards,
+--  
+Anshul Dalal <anshuld@ti.com>
 
