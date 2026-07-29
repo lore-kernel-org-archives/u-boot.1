@@ -1,149 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2386C54F51
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 21:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1F8C54FCD
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 21:52:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A9EAD6079D;
-	Wed, 29 Jul 2026 21:52:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C87FA80F59;
+	Wed, 29 Jul 2026 21:52:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jOu4vN7vtULU; Wed, 29 Jul 2026 21:52:15 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O9gZ0Nce2cYc; Wed, 29 Jul 2026 21:52:16 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B85C7607D5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C140980F48
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785361935;
-	bh=pWALnTxwqx6U2Am8zKLwgYe8dEdm6lCWkzufcZ7E2aQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785361936;
+	bh=4iTpJncp8igwedFPD8nyaTrf2H/PS/j5lo85MZ6wEcc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jWPQAwJvQeQgMSbd7Zgp/qzu26S7E6AgzzJ1bu/wBEKeFKbBdHsQf9+O5vlQW810h
-	 x2k2sCngALqMMhcw4Gq0AiwNoxcog8M8fF/IFuHSJvycqm834MKNBTFRswJ02PNAgk
-	 B4WheUVvZTDrGitSRsS3k2DACWPvAWgb9qLBR57hPMTi1oZB9eM4gLcnJ/kgkaZsda
-	 9VMkrX0KSEFwN3zt+S9VkWiWCfOZUxyEZZL5DUymXsL+e3/bYhzSyGb1nmh7SLRqv2
-	 oC7ZZJGFvs0mrrlFyJW1cP8vrqEqyPw9vUdPGYJ42iiVhW+MHhCNqKeO7eC5D/Mf7B
-	 2nFy3IF7N/QaQ==
+	b=AklW5lfbWCFLia2TNVAn/Cn8FpR+7PCIiIbld62+WheRD8XQ4v3bw/XSRGiLQmUFR
+	 YLcJc91lHx4UhcUUDEfjHgn9LKzKYNQ9L0xC5m5KyOV3vEeuQAl69Y03LUh+TTqFeJ
+	 ptzWd6AAYcK7ftkTyBFJaOZ98st5iJw4+zcvKyzqglUma99ZQy4XI5VQhfVT2K0nKT
+	 fgKlvRhSjYWvEbZozAkvpmZXfrko3QkhI2Db3EJJRIOQV3Fr84gxEf3NJHRbWBJDSa
+	 GUQbxY9kGfa3K+fIhNGVqwIzJ7xanwwy7oIG4INT4WNy/J+EFgcBSF+tH5B9iXbZ0E
+	 FKuDFO7GyDLqA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B85C7607D5;
-	Wed, 29 Jul 2026 21:52:15 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id AA4E13B0
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C140980F48;
+	Wed, 29 Jul 2026 21:52:16 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2DE22E5
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 90C344075C
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:50 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C8F5A80C06
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MAkyIgxeHXVx for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 16:47:49 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SbG0kwXpAttC for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 16:47:59 +0000 (UTC)
+Received-SPF: None (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4ED8F40755
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4ED8F40755
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4ED8F40755
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:49 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 02F8882991; Wed, 29 Jul 2026 18:47:47 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C87FD849A1
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 18:47:44 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-69f7130b47dso1706520a12.3
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 09:47:44 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B7F138064C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B7F138064C
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B7F138064C
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:47:58 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so581785e9.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:47:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785343664; x=1785948464;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=pWALnTxwqx6U2Am8zKLwgYe8dEdm6lCWkzufcZ7E2aQ=;
- b=H3b/f+7pix/seo+lDQI+llM87JYCtx5IK+EMyXv4jDVIyPT/2hSiWBwZ9zJdn6lpES
- RUHZ8qKP8MA0OA5ATpVj/bfsHshvSqTPahUXkS8cCdPVnJxfbrGbdyEZ16lbjAWxq7JI
- CKTIROQ5SrcIYhOtrAKB6x31Rg64lF0Xn9fIF7G1K4LV5776M9yUYi0PFIKe/o7sa9/f
- MlKISEYM4NgPoQ1di/RKCuCeOjQF7VL+pKGz1FqmpoHvGx31D6lgc/A+yahur6qxc/rs
- 3p6AY9dxG0xI5Wu5hcM6YcWwPhWY0UbesWyCTq499Q4yO2C6Yj3rN33grIbbqTFoAUwA
- 0nvA==
-X-Gm-Message-State: AOJu0YwLJ67N8nOBvm1wGvvvGp9AxnNkQGTzB5QSQyd8yIC/mYXh0jYJ
- +P7aEFIbjqWwEKvx7EEZeVik0TFauyrpm6gFXNLe2YuFYaGOYvchI/W5RPGHMSrtvN8=
-X-Gm-Gg: AR+sD118BgV4XpHt9kVrMSJ0NS3686cXABQPJfFV0TzrFno2Na/pB1SV9cOJAd2PiE4
- NdNiFhkt97j30FhIaCXU7LrZcLdn2ag60Ug04cLNRvHRzgVrUAJ5uJ+fvb5H/A7tPBT0nsAeD7M
- SrKS3hEO2SdOPT32+Lg/NbSssBew5o+Ao6bSSdZ+HgajSo7kXGet07WXIV3fCJaWz/mBeZ9L2I0
- CX+4ySgjIl07oCEf5ZGBYyzMfIG8C87hVfYTDt6cPFcx5SsF9GG3FjAH/O/lq0SYKVc6jvZ/8Yj
- uPJIN0HkdJIUCfvFCSwT8ceJ+Qc5DPtnmRnhi7eTY7Rix+RP+7KMkqEyHhUC3mjop23kx+5lfs/
- PGyblaV2G4zqbwwoXaboK4yffFzJjikXRUMnW5Nw8c2xpPLHMP7flixddAz/vdT1Fh5UBjR8IOx
- mC4Tk8GeqVb1wJkgFjwDTijpgjQV14FL6kX9fOSS8X5ZQCQuGFd6Kblhl+1XeUO3bfqV1Lhp1Oz
- uYCIMP4O4Jfh4bzN8JWikqCNKfDL7Oj2W6I6/Jkj9EJAqZntfKSBrhKd+yjRrjx
-X-Received: by 2002:a17:907:7b9b:b0:c16:14d1:b529 with SMTP id
- a640c23a62f3a-c1f7209b680mr451265166b.18.1785343664235; 
- Wed, 29 Jul 2026 09:47:44 -0700 (PDT)
-Received: from [127.0.1.1]
- (p200300ff0f038f0047bee160d2cc76b5.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:47be:e160:d2cc:76b5])
+ d=1e100.net; s=20251104; t=1785343676; x=1785948476;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=4iTpJncp8igwedFPD8nyaTrf2H/PS/j5lo85MZ6wEcc=;
+ b=D8ui9URV+zR2z6Ff6TSv3M1TZf+GQf6V8d2apMrzAnZhpv3oVsCPWl+G6dEaSerWW1
+ CzhKGMQQMSPjCuxNzunZt50Gou6L46RvM3g8Qq1dZk6xm/73V9f5H3UV1miXGCeJzCdm
+ TjOyjLHVAX1AI1Ra5+e0gPHDIihvMjeTDYVkfa565qfWugJ+/CSl/EotQOq6lA8B1VYD
+ miAcDzbMG4v9+F6F8rBBVPOnjUTw5Ukt1z9z6jv6BZxYwn17WhuDO8ygX4OdovrKW1mT
+ GnFJVZbC8QeO5ga9BGoT5T25+Cw7cJh97ETRpY/DIqBRWb8sPNtgBb7VMqP9eZ1ZG/ob
+ niRw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrDIJ2G2yJ7AJ1uPMPsmvsdmb0EDVfU7+6Asfq1tk9XZJ9GwBXu8ANgQqPRKiStRpid7VXx420=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzRIyba+SjZ4We6zTRgvFnd3B0KUi+lRTd2QzciY6/znyYxHsT0
+ mI+trqfVyb3K4+nmbp3kJKdW7DW5OCjlu9/b8L/BMitQmKDdQSv62QmeEv3H0r3L0GE=
+X-Gm-Gg: AR+sD13wPyBbr9SZBHGI4mYGw0dkkeI4TJeFLnfg6IeTFOPBljODy06staU3/lVRa7Q
+ pF3ZevnLtr/NWGCGpXPfpI2X08BIg0PaMRHWB0OXz2jTJigQ55Q7KHvB8/UUYGfrNvyjAo7zU64
+ iVzZzUUPTyfJaJChR7vLGxZPxKg+7pi24jtJeSM2yhhSpZrBV+M9tKQQSHn15FNt5crHt4/uJJk
+ ORcxE9zBH3OIJE1LO//DChKAGDlGh6zlmwE9ezoVZZYhH0HsO1BbX74mirieAHafbhozLbYbbpv
+ x+IDwq6249nnULS19URAf8Y3IhBVLihqVbmbeCRaJaQpw43yFlXJkJC1zfDiEJTiKnUQJY+Sibe
+ iMdIBB+dvVNo5nwCZ2F4+qSOzCQf1ZnEK2mfTXhe5x8Owf0SRS/bmhC9IJnacmwvAHq+pIx2t+C
+ Py7x2RSWPQGzR6mUpfGSWzLupa/suEU+M3Krrfe+sXe+mxwV8HyZgL72rPGcHbh9ZYWF/Z/DkiA
+ GEy3lu/MZa3gY+mJrPNJVRQZjubACw0v5E/Nf9kBxZBdaCbGbUEgTw94rDsf6zxuhlguILNprri
+ icJQ4U6O2gSWiMRDWfWGa2CA7n4zFTTlCs+3NYJfNd9E9wKh+yecRxRi
+X-Received: by 2002:a05:600c:6d15:b0:495:636b:e50b with SMTP id
+ 5b1f17b1804b1-497fd2de69fmr28081785e9.6.1785343676592; 
+ Wed, 29 Jul 2026 09:47:56 -0700 (PDT)
+Received: from ?IPV6:2003:ff:f03:8f00:4cb1:53a4:7b38:3d18?
+ (p200300ff0f038f004cb153a47b383d18.dip0.t-ipconnect.de.
+ [2003:ff:f03:8f00:4cb1:53a4:7b38:3d18])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a050c6c9casm1058292a12.26.2026.07.29.09.47.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 09:47:43 -0700 (PDT)
-From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Wed, 29 Jul 2026 18:47:02 +0200
-Subject: [PATCH v3 2/2] test: video: add regression test for RLE8 bmp overflow
+ ffacd0b85a97d-47fb647a8d4sm9550505f8f.0.2026.07.29.09.47.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Jul 2026 09:47:55 -0700 (PDT)
+Message-ID: <8f45a6ec-db43-407b-89ad-0dbbdcefdb4f@byteray.co.uk>
+Date: Wed, 29 Jul 2026 18:47:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] video: bmp: bound RLE8 decode writes to the
+ framebuffer
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Wayen Yan <win847@gmail.com>,
+ Argus <argus@byteray.co.uk>, u-boot@lists.u-boot-project.org
+References: <20260722-video-oob-fix-v1-0-d6943f687c50@byteray.co.uk>
+ <20260722-video-oob-fix-v1-1-d6943f687c50@byteray.co.uk>
+ <CAFLszTjsdYu-JoN1jvOfcWDR-nyEN2CkmCVwx2m6WjMN2mVzXA@mail.gmail.com>
+Content-Language: en-US
+From: shj <shahriyar@byteray.co.uk>
+In-Reply-To: <CAFLszTjsdYu-JoN1jvOfcWDR-nyEN2CkmCVwx2m6WjMN2mVzXA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260729-video-oob-fix-v3-2-21d3412212cf@byteray.co.uk>
-References: <20260729-video-oob-fix-v3-0-21d3412212cf@byteray.co.uk>
-In-Reply-To: <20260729-video-oob-fix-v3-0-21d3412212cf@byteray.co.uk>
-To: u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Wayen Yan <win847@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Argus <argus@byteray.co.uk>, 
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-X-Mailer: b4 0.15.2
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
 X-Mailman-Approved-At: Wed, 29 Jul 2026 21:52:12 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785343664; x=1785948464;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=pWALnTxwqx6U2Am8zKLwgYe8dEdm6lCWkzufcZ7E2aQ=;
- b=UYzhjz138Q1gVgB083j9XLCJOHivOmwsG6XYwo1n3j3B0v+KZGMe/5KdJZZ4SlQWGV
- SXC7sfhipvzYmpSCxqNov5yBMbs49Tcuytdj7Q5DieEZ2pltRePkwu2kDSGNARy0WV5P
- d7mMQ9aukvMC6RQlp2aHePAhVmG2cfnW2z/cErLks75IO5uNKGTJj1NDlqecpYELcWUb
- PpXwRWDGfvVBYRbS1EYDOsqeQOfQu9xUeoIE1DZy2lGg0j9s/HKs/MLnWps/efpwOOMc
- hhIWQd9fJJJrLhLxDzWZ2Y2ZC2LIKntdBy8bxAKvV0CNYKIJSRtN0a5A46jYlXP6b7FT
- 8Ybw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1785343676; x=1785948476;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=4iTpJncp8igwedFPD8nyaTrf2H/PS/j5lo85MZ6wEcc=;
+ b=JmIK4ea7u36oNujcQ3kSbvTysHLyEsDKoKobTCoNTdtTyCyPLXw7rEglNIqeE9UYe9
+ EjzgwzQS7s1T0/uSixPrPCBSlGOMNW6Ra6q60vuWP3pUspIsZsqlUqdwLtH8x9h6ZYzN
+ CUtWbTPJ4vlacT/4st9PHaE0YcoD92UPioC2H8n8F6qkfjFzS3lW9pA+6mPW3DvODcf7
+ d4bmF5S+YEKh/ClWxKSsMIH61GS2+q7wbQK+yOlKW5sAFnYgWRDow5/O2uFs6fu6r6iB
+ M12LCFu/JRAkq31PWvH9njoGvFmNL0pt8zndMyJ/jipliGnHkYmyLSzomCgcnxtxdlF2
+ 9TkA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org; spf=none
- smtp.mailfrom=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=UYzhjz13
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none)
- header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=shahriyar@byteray.co.uk
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
  unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.b="UYzhjz13"; 
- dkim-atps=neutral
+ header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=JmIK4ea7
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -158,79 +144,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add a DM test that displays a crafted RLE8 bitmap whose decode cursor
-is driven below the framebuffer.  Without the preceding fix
-video_bmp_display() writes out of bounds and returns success; with it
-the image is rejected with -EINVAL.
+Hi Simon,
 
-Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- test/dm/video.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+Thanks! Fixed in v3.
 
-diff --git a/test/dm/video.c b/test/dm/video.c
-index ecf74605b5c..48ec60c4140 100644
---- a/test/dm/video.c
-+++ b/test/dm/video.c
-@@ -424,6 +424,56 @@ static int dm_test_video_bmp8(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_video_bmp8, UTF_SCAN_PDATA | UTF_SCAN_FDT);
- 
-+/*
-+ * A crafted RLE8 bitmap whose decode cursor is driven outside the
-+ * framebuffer. Two End-Of-Line escapes move the cursor a full framebuffer
-+ * below priv->fb while the scanline index y stays in range, then an
-+ * unencoded run attempts to write there. The geometry (1366x3, 8bpp on the
-+ * 16bpp sandbox display) makes the underflow happen after exactly two EOL
-+ * escapes. video_bmp_display() must reject the image rather than write out
-+ * of bounds.
-+ */
-+static const u8 rle8_oob_bmp[] = {
-+	'B', 'M',			/* signature */
-+	0x46, 0x00, 0x00, 0x00,		/* file size */
-+	0x00, 0x00, 0x00, 0x00,		/* reserved */
-+	0x3a, 0x00, 0x00, 0x00,		/* data offset (58) */
-+	0x28, 0x00, 0x00, 0x00,		/* info header size (40) */
-+	0x56, 0x05, 0x00, 0x00,		/* width (1366) */
-+	0x03, 0x00, 0x00, 0x00,		/* height (3) */
-+	0x01, 0x00,			/* planes */
-+	0x08, 0x00,			/* bit count (8) */
-+	0x01, 0x00, 0x00, 0x00,		/* compression (BI_RLE8) */
-+	0x0c, 0x00, 0x00, 0x00,		/* image size */
-+	0x00, 0x00, 0x00, 0x00,		/* x pixels per m */
-+	0x00, 0x00, 0x00, 0x00,		/* y pixels per m */
-+	0x01, 0x00, 0x00, 0x00,		/* colours used */
-+	0x00, 0x00, 0x00, 0x00,		/* colours important */
-+	0x00, 0x00, 0x00, 0x00,		/* palette entry 0 */
-+	0x00, 0x00,			/* end of line */
-+	0x00, 0x00,			/* end of line */
-+	0x00, 0x03,			/* unencoded run of three pixels */
-+	0x00, 0x00, 0x00,		/* pixel data */
-+	0x00,				/* padding to word boundary */
-+	0x00, 0x01,			/* end of bitmap */
-+};
-+
-+/* A crafted RLE8 image must be rejected, not written out of bounds */
-+static int dm_test_video_bmp_rle8_oob(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	void *bmp;
-+
-+	ut_assertok(video_get_nologo(uts, &dev));
-+	bmp = map_sysmem(0, 0);
-+	memcpy(bmp, rle8_oob_bmp, sizeof(rle8_oob_bmp));
-+
-+	ut_asserteq(-EINVAL, video_bmp_display(dev, 0, 0, 0, false));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_video_bmp_rle8_oob, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
- /* Test drawing a bitmap file on a 16bpp display */
- static int dm_test_video_bmp16(struct unit_test_state *uts)
- {
+And good catch on the unbounded RLE reads. I'll send that as a separate 
+follow-up.
 
--- 
-2.43.0
 
+Thanks,
+Shah
+
+On 28.07.26 13:54, Simon Glass wrote:
+> Hi shj,
+>
+> On 2026-07-22T07:10:10, shj <shahriyar@byteray.co.uk> wrote:
+>> video: bmp: bound RLE8 decode writes to the framebuffer
+>>
+>> video_display_rle8_bitmap() moves the framebuffer cursor fb up by a
+>> full row plus a scanline on each End-Of-Line escape, with no
+>> lower-bound check.  Repeated EOL escapes desynchronise fb from the
+>> scanline index y: after height - 1 escapes y is back in range while fb
+>> has drifted about one framebuffer below priv->fb, and the decoder
+>> writes pixel data before the start of the framebuffer.  The DELTA
+>> escape recomputes fb from an unchecked y as well.  A crafted RLE8
+>> image displayed from the splash-screen or PXE-menu path can therefore
+>> write out of bounds.
+>>
+>> Check the cursor against [priv->fb, priv->fb + fb_size) before each
+>> run and reject the image with -EINVAL if a write would fall outside
+>> it.
+>>
+>> Signed-off-by: shj <shahriyar@byteray.co.uk>
+>>
+>> drivers/video/video_bmp.c | 26 +++++++++++++++++++-------
+>>   1 file changed, 19 insertions(+), 7 deletions(-)
+>> diff --git a/drivers/video/video_bmp.c b/drivers/video/video_bmp.c
+>> @@ -337,8 +347,10 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
+>> -                             video_display_rle8_bitmap(dev, bmp, bpix, palette, fb,
+>> -                                                       x, y, width, height);
+>> +                             if (video_display_rle8_bitmap(dev, bmp, bpix,
+>> +                                                           palette, fb, x, y,
+>> +                                                           width, height))
+>> +                                     return -EINVAL;
+> This now returns a proper error code, so please propagate it rather
+> than flattening every non-zero value to -EINVAL:
+>
+>      int ret;
+>      ...
+>      ret = video_display_rle8_bitmap(dev, bmp, bpix, palette, fb,
+>                                      x, y, width, height);
+>      if (ret)
+>          return ret;
+>
+> With this:
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+>> diff --git a/drivers/video/video_bmp.c b/drivers/video/video_bmp.c
+>> @@ -176,6 +178,9 @@ static void video_display_rle8_bitmap(struct udevice *dev,
+>> +                                             if (fb < fb_start ||
+>> +                                                 fb + cnt * bytes_per_pixel > fb_end)
+>> +                                                     return -EINVAL;
+> BTW this bounds the writes correctly, but the reads from the RLE
+> stream (bmap) are still unbounded: the decoder advances bmap and the
+> encoded-run aggregation reads bmap[2]/bmap[3] with no check against
+> the end of the loaded image, so a crafted image from the same
+> splash/PXE path can still drive an out-of-bounds read. That is beyond
+> the scope of this patch, so a follow-up is fine.
+>
+> Regards,
+> Simon
