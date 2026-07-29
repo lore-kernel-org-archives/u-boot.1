@@ -4,157 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D230EC53219
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 18:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9B5CC53219
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 19:21:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 643376070D;
-	Wed, 29 Jul 2026 18:39:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 52E2560733;
+	Wed, 29 Jul 2026 19:21:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QtN1ftZZQJBY; Wed, 29 Jul 2026 18:39:58 +0000 (UTC)
+ id 7ic3OyqRu-T8; Wed, 29 Jul 2026 19:21:29 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9188B606A7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8F41A6071D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785350398;
-	bh=d0j0Ldfes5BNDb4rU7rUu5JZcX5gOfPTsZZMo+htt9E=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785352889;
+	bh=ld4bgbzrd9Qxx3ls1/3LzTJm4W3vjAJPZMXr8WqTHvo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=trPGTMMqtKXMhA9eNqEYhLd0Ht60DgxyFuUHbUxqf2r18qhfcFMKHRQCqmjgXOTX4
-	 xzm6eAs2nOHY1HC8JgA4/4/T9Z6E2MEGJqYmjY0rq/hLo9mYvtMcGmiqi7azfPn5gn
-	 KqPUOWOjSF6cVhjgi5jcbKqXLzKgwAuC9GZnxYLA6RTM0KMwlFaxqT5ioUlMNNZOni
-	 LG5GSrdoVo2HPJm6oJ2oeiKk+1DS+YFtd77CftbBDZIEYLmsoOrUGsukq/fpMXbY6/
-	 +0uRXli8DjUldfGs95Z1OJouYEhCI37W6GIA9ujHo9js6enzRsr29wsBgbnGVfvi/c
-	 5e9/HoXr4Cm8w==
+	b=b/rLMzWwNBDG0CapldZPsl6U9CQ10QY/Z8+9OiQGTuo/O3VzWTbl7eT3ZTLOIdRkt
+	 nQdeMChf3+XvxwVO2gV4s7+eM2t41lJP2umJfRDZEfzcGzhns1Y3YKHVLTIZvpOa9K
+	 HoHnHL5MbeizUmZQ+3D1bB2lP5iOy++K8zxzyvB/2QZKvXswAySExn0xpMM/wrNNia
+	 O2YqJl0iPG/UAV6XOOReyM91rp7uZUcTLBN7o4LLI34zMxL2HJAfobRuoS5T8Lqww9
+	 Jq9r8ISUVgBmxS+1v8azY2cctyEZBW09BqB+7PlhPKD2yrlTHhTVEFsD3PsnonND01
+	 7sGsmiHHjuN3A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9188B606A7;
-	Wed, 29 Jul 2026 18:39:58 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id CC6C4197
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:39:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8F41A6071D;
+	Wed, 29 Jul 2026 19:21:29 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 812A227F
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 19:21:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C9A7F606A7
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:39:56 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 66E156071D
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 19:21:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3ThDZ1byYYJY for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 18:39:56 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B117660671
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B117660671
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B117660671
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 18:39:55 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 489A68493F; Wed, 29 Jul 2026 20:39:53 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5899C803F6
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 20:39:51 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5b14d1f9315so1026340e87.2
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 11:39:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785350390; cv=none;
- d=google.com; s=arc-20260327;
- b=afyD8toJ5S0HbGGwiNS+6aabZcViQtH4kvfWLkcHpwchRrKPF02u47Fu7LiEtNKyp8
- Fx9sDuLvQyCTDQyYBM/d+QH713qEi2H6f8r21j+mAs23HljAWCcWgXtmtk5ehNJy0P7Q
- R2/AT5UyBAHjI2Y3P1aAITYNrN9Fo+bQaEyoAfgkLh0tfQPj4qIxM6WQ8l1LEh0I3p9R
- Z3vYfBWTHFEf0FRVU9fVZ0q8H6UqaNAIDFBiR1Q3C0TR/rqLUlZWbAW8T6F9ebluIZNj
- e0tEvNk3PgiwZPwC3P7YvHIOUgVFGgLCdBo7hymRfy0GgskQAXm7czucV8J6pNlnZKHq
- Nx0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=d0j0Ldfes5BNDb4rU7rUu5JZcX5gOfPTsZZMo+htt9E=;
- fh=noGX9WST+NzpXQai90BC648tcNel1TzzqMuAatYW5+E=;
- b=n1ggQCpjOCw6W4DRLg2CVMaHpz6hZID78hL5HgqGxVzyht6qDfMnwThG2MthiRkU+/
- cMDCR9G5IQ1xSvVNuF31PY5YIukclIH+DSL9c8KjaYtJDm/Gllklw+ibntWpPj4+Ol9G
- Xn8BsJwMoM5asAVqdcaH8vukdBYZiMmz8f6P0e41Tk7F4HVT0NtF9ZDhz6Ai6CaH7gjU
- As1czyp0IIp7Z38a5ea8KI2DP72xedzGTAtjhAWlHh93aTUB/h66/EEghKVpfvfP5QQl
- tK+Wl6jKiuYTNmQm/uRno0+0VmWyrOx0aNNFHTpVpUbBhivfYjy+whdi4+eUV/qk6/fR
- bTGA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id XkarfMIWffgx for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 19:21:26 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 189D5605CF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 189D5605CF
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 189D5605CF
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 19:21:25 +0000 (UTC)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e9fc3de7ceso699597a34.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 12:21:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785350390; x=1785955190;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=d0j0Ldfes5BNDb4rU7rUu5JZcX5gOfPTsZZMo+htt9E=;
- b=Ke2WG2jzlxo+ia/41fOvek5KQ0sExCwEo+BgGDXwU0OuI8rMGT/Sua1dXCXtuksrRY
- mEN0RP0YUdJ1K1jz8q5ahpcXH+QNks5mNAjnjA8PoogNeYghz+wox2fe4ZzrH9paTFr0
- 3f85C6hWGoU7QEhRZazCMwXE5631VBi7ioSgnNLlt8ld37/aWh+p+VlutgTwpkiuOMUV
- EBsiVsCdiapOkHLFxF8qn5LU3k/q+tPxcQJO28n/INQRfl/Xq8IYJy4EW8e00uDm7UVn
- qX8qwGDKiPdm9BSW54FwUEGlpITQNNzdwtfzqpM9JasoPkFSd7WkgiuvAv87JUnjX5sb
- lMjw==
-X-Gm-Message-State: AOJu0YykW4GJL4OZeux+I2RBwQPnRrTBxbj8zgteK8SxLGo/Iut0Gx8k
- QWUp3uCtJ/y15O+oCwapH/Z9PgNcw/yA/qzVzIVmGDr2abp3tMip/IgKx2zuQADHlCawtzlGTCZ
- ayk8ue5NwufH4HBJ6viDv13jcxeO3RqA=
-X-Gm-Gg: AR+sD13twaqgzv0cpf7A2c0+lTs7E9uMDBW1JccmMzaOUPN/kfIUl33wotkYZ3xaw/O
- aP2uB6ISFTHcvKHl8jb9tnCDHaluT2AIcl4eIf8FgtKpQynV8UYE4MXT8twzBbnay3s8fPJqpm8
- uyNmeIFGVyoYvkV49kGxYlWZ15Mi69yBMLWOUtWILWEblCcmc2HJiRXkh56551AwMz8824sL+HL
- NA1JX3XXnVKc5Jes0AEInMYtWo8jsmkqvjdAxVr62NjKxhjonzsYNioJA1rbXcnoc6Sqb0Mwyef
- TvOSUmYamx5/ZciZ9Uu7h+zW2yTpDhOrLpvbA/+co2xagYszU/tGB/jTzCcj1rVwH3F427MW2Cc
- xJOIWN1n73zRMAGK9GOvJZC8UvY9JnvG2yJE=
-X-Received: by 2002:a05:6512:33d1:b0:5ae:aaa8:eb1c with SMTP id
- 2adb3069b0e04-5b2d02136c2mr1494070e87.8.1785350390174; Wed, 29 Jul 2026
- 11:39:50 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785352884; x=1785957684;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ld4bgbzrd9Qxx3ls1/3LzTJm4W3vjAJPZMXr8WqTHvo=;
+ b=jOF7C6Cb4IVmzimWMDMpA8XiykD7iFbJCqO37k0EgR2bE1GVQGfZzK0hsPuRJf5YLY
+ yL/LWuMqjoVD4JU7mFFVfdlOQXyEH1bRNDprUWi/1KIlXv70cph5vVozTzJc00PaocD9
+ FGq+mfFR+huYmVqjablmuq2jkDalImDP10A/e008yM/7tUNgDPzzOoQGW+fydfCm24eq
+ udWf/Publhazpx8s2IMKRnmXJskwy9RPaRBClwqlsTsk1CxO01BrQWZqUUd696iLsODX
+ xmOrcvClJc1DvFO6aP1LALDtnZ4fynwwip4s556rZdpIViw0ITr+micXoy1T2pw0sZNu
+ +vhQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrAplpgiHVn83juoNG96Gq6NsrYDGWgKPBZbNoy4ADUXCqZUYZSLfkF8i3Tp9KFYoW7nwr5veM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwXuzoCpx9SwRgVNfcgo+NdylpEr8jkIXDsJ4B6LfISTR7YCnpJ
+ Qe/RmqpOfl4lckR+K6PXztfQppV75rm7k0snAdwZuJmBy60BSpduDDaO8gwJfXch7nM=
+X-Gm-Gg: AR+sD12jyRv4dO0Woqc327yCxEVzOM+EKH5JX3lWnLctjPU8T7NHevSNi2oo4UFzReT
+ ecyDrvXEuEW0YnpD0GuyTtL41T78ajQYdc1yHV1bEySYOYte3TYJb6qjgHQuCXX+PxCcKNivXWZ
+ 2U/lQUacZmAgAhAdCHEeSxjvAIOebxksRxKkt/8XGSxqwVFTAXn10jA4yNOw0O7MaJ1W900Cwyp
+ uimda8XQpnVV3Za1uQ6jHq1J4fxM2Yo35u96Ja7fRaFX7PmQ5lF8bXLfPIUzZZwp5UEuAez8v6v
+ b6Owt9NN53y22XTORiGtPylI3zwgQZgz+noHaxmOuPb/osvmgrcGBPWyDM58j/1ERmchQkrT/fF
+ e2g+RuNxa2PW8GAz6pbtCOZbMgF+zQCby41nUmr6DloT6jC/qjMMDYwZzIJitFawQLnv7TAN6ag
+ +yYJkZnOF5PEJIYQxvqI9bhGLEOzF7au9S10Bq5c4z8y80PddySHQXDbx59jIk4ilUTM5/H9OYP
+ 2oVdiMQZPEo1PfP6hE0LXfYJGIbCd/bkxR1hUM=
+X-Received: by 2002:a05:6830:8284:b0:7dc:cdea:7d9 with SMTP id
+ 46e09a7af769-7f0282cf605mr28394a34.22.1785352884652; 
+ Wed, 29 Jul 2026 12:21:24 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3096:ee5f:6f57:afe1?
+ ([2600:8803:e7e4:500:3096:ee5f:6f57:afe1])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f00d595321sm3030970a34.6.2026.07.29.12.21.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Jul 2026 12:21:24 -0700 (PDT)
+Message-ID: <c7649d26-4f92-445c-9fad-b9295782e78e@baylibre.com>
+Date: Wed, 29 Jul 2026 14:21:22 -0500
 MIME-Version: 1.0
-References: <20260728172659.387624-1-shofiqtest@gmail.com>
-In-Reply-To: <20260728172659.387624-1-shofiqtest@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 29 Jul 2026 15:39:38 -0300
-X-Gm-Features: AUfX_mxyOZ1Gr-AizekFrEJ4M6_zTwvAsVtGC7t_ISQfMmpYRjPaBPzfXlAfjR0
-Message-ID: <CAOMZO5Ca-0xisa87dQ2ssz6+8vsVg2EB0yW9+2-6WegdsicXPA@mail.gmail.com>
-Subject: Re: [PATCH v3] board: imx6: guard LDB clock init with appropriate
- video config
-To: Md Shofiqul Islam <shofiqtest@gmail.com>
-Cc: u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>, 
- Wang Huan <b18965@freescale.com>, Brian Ruley <brian.ruley@gehealthcare.com>, 
- Martyn Welch <martyn.welch@collabora.com>, Heiko Schocher <hs@nabladev.com>, 
- Lukasz Majewski <lukma@nabladev.com>, Stefano Babic <sbabic@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/13] arm: dts: mt8188: add vdosys1-pipeline node
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
+ Macpaul Lin <Macpaul.Lin@mediatek.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Carlo Caione <ccaione@baylibre.com>, Julien Masson <jmasson@baylibre.com>,
+ Rasmus Villemoes <ravi@prevas.dk>
+References: <20260728-add-genio-510-and-genio-700-hdmi-v1-0-ac54bd75f960@baylibre.com>
+ <20260728-add-genio-510-and-genio-700-hdmi-v1-10-ac54bd75f960@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260728-add-genio-510-and-genio-700-hdmi-v1-10-ac54bd75f960@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785350390; x=1785955190; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=d0j0Ldfes5BNDb4rU7rUu5JZcX5gOfPTsZZMo+htt9E=;
- b=gUep8blp6N1n6aMBEbZLaaTuijssW31XiqJLllZsMn+Sovrd0unBOq4/DGWHqU2tDV
- Dln3fUvcS9oXYlHVB52S8BfYtxKE7opV/Uxu+0nhjfggBgOJZjigvZZGPehg/7yHFzEn
- FvwI2CvmuihwiotsNMImq3ElMmt3yBmEO50znfzUNwnIkW5JYW73TfYXRf9owLDsrzLI
- rWXnAajDhCi0PPypq1t8r4kQJ2SgF5ZH0GEEa3zcNv211jJAGHplHksCUaVfPzIdstxR
- qLSJoATVbzjTLfJW2iws6JI1KcBTPC++Vlz6cjphx9eVSr5pdwjNYdO82iJ6I6wGgIYc
- c8Dg==
+ d=baylibre.com; s=google; t=1785352884; x=1785957684;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ld4bgbzrd9Qxx3ls1/3LzTJm4W3vjAJPZMXr8WqTHvo=;
+ b=Le/3DSxuEnTiP2s0dkNb+2qiqkWKjXBzREEIPnqj0ZqInW+UDInFDHmg2Kh4sBTYI3
+ UHm7p0WBEe4mKXpmUCBKpIIZZ1EpuMJJlV+FqMtwiB/RL830k2pkGLDXTB4Tefh47QSH
+ WOeucP7Pe5tgu301zuHSkFUTSnvzOcoKHZCrMqR02atVT5THAlCKgljAmVQPjVDGIJkd
+ fJtdP5Mdz+jU9ByrSu5wdwssW3B8bQi3vQanXhne/tztDZcjJsERBLWBXQs6oNDwhevS
+ spX8Bq+ZZcSwztUnreMtZuNTrcNFk0JYN2YAPDyumj8XJJelAsSKS4A0Bf8i3FXyIgkH
+ tMug==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- spf=fail smtp.mailfrom=gmail.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=gUep8blp
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=festevam@gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="gUep8blp"; 
- dkim-atps=neutral
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=Le/3DSxu
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -169,22 +148,53 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Md Shofiqul,
+On 7/28/26 7:29 AM, Julien Stephan wrote:
+> The vdosys1 syscon node from the upstream dtsi is bound by the clock
+> driver in U-Boot, so the display routing (SEL_IN/SOUT muxes) of the
+> same register block is described by a separate U-Boot specific node.
+> It also carries the clocks of the HDR back-end path that are not
+> attached to any component node.
 
-On Tue, Jul 28, 2026 at 2:27=E2=80=AFPM Md Shofiqul Islam <shofiqtest@gmail=
-.com> wrote:
+In the U-Boot code (include/syscon.h), I see:
 
-> --- a/board/ge/b1x5v2/b1x5v2.c
-> +++ b/board/ge/b1x5v2/b1x5v2.c
-> @@ -320,8 +320,9 @@ int overwrite_console(void)
->
->  int board_early_init_f(void)
->  {
-> +#if defined(CONFIG_SPL_VIDEO)
->         select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
-> -
-> +#endif
+/*
+ * Linux-compatible syscon-to-regmap
+ * The syscon node can be bound to another driver, but still works
+ * as a syscon provider.
+ */
+struct regmap *syscon_node_to_regmap(ofnode node)
 
-ge_b1x5v2_defconfig does not select CONFIG_SPL_VIDEO.
+So it seems like we should be able to make this work without adding
+this extra device.
 
-What's the motivation for this patch? What exactly are you trying to solve?
+> 
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  arch/arm/dts/mt8188-u-boot.dtsi | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/arch/arm/dts/mt8188-u-boot.dtsi b/arch/arm/dts/mt8188-u-boot.dtsi
+> index 131377d9a97..fd1121a72cd 100644
+> --- a/arch/arm/dts/mt8188-u-boot.dtsi
+> +++ b/arch/arm/dts/mt8188-u-boot.dtsi
+> @@ -4,6 +4,18 @@
+>   * Author: Julien Masson <jmasson@baylibre.com>
+>   */
+>  
+> +/ {
+> +	vdosys1_pipeline: vdosys1-pipeline {
+> +		compatible = "mediatek,mt8188-vdosys1-pipeline";
+> +		reg = <0 0x1c100000 0 0x1000>;
+> +		clocks = <&vdosys1 CLK_VDO1_SMI_LARB3>,
+> +			 <&vdosys1 CLK_VDO1_SMI_LARB2>,
+> +			 <&vdosys1 CLK_VDO1_HDR_VDO_BE>,
+> +			 <&vdosys1 CLK_VDO1_DPI0>,
+> +			 <&vdosys1 CLK_VDO1_DPI1_HDMI>;
+> +	};
+> +};
+> +
+>  &u3phy0 {
+>  	compatible = "mediatek,mt8188-tphy", "mediatek,generic-tphy-v3",
+>  		     "mediatek,generic-tphy-v2";
+> 
+
