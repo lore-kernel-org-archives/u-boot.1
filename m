@@ -1,118 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BD97C53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 13:49:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55407C54F51
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 14:05:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 296DC8120E;
-	Wed, 29 Jul 2026 13:49:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BB2DC408A3;
+	Wed, 29 Jul 2026 14:05:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cY3np64bXnwb; Wed, 29 Jul 2026 13:49:46 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nbH1A-6r3ivw; Wed, 29 Jul 2026 14:05:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E9F22811E2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8297840B07
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785332986;
-	bh=qeWt5EUQpDLr2smPQC42RiwR1EsMQfnARJcgfbGvhk0=;
+	d=lists.u-boot-project.org ; s=default; t=1785333933;
+	bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lVFP2XKLTBpl02ueUaWWKQQvDLR1WbuMtVJslizg5lsiV6BlvjFSkri+GIpwa3dz7
-	 NSF4i+U4p9WLe+iWMUU/rnv/uRbIjVBkl7Ii+lXryLeSulmE+kg21yIxFqpSh3H9eK
-	 LEiS8QVtDxQbLsMHrMjv7ccesmHgVTQzReR/OQg4USwFvrsdC1XvKoiaT9a9kdD+On
-	 upimEGZXforFGaXuKTcZI7x3la3lxN1pbp3FAn1xCax1LCSjYf/a/m/nFRWEwhVX2T
-	 BIyQ6IY7WNvAmgj5WWTSneFiThHV0HAiIItc/8EWdlaMxLMa76o1e4+MvcG+FlUs1H
-	 1m3xzQu6qHPxA==
+	b=CVpd16au1FENfZh0syD3d3RnrixY7ssCVR9y57prpmFi/tmd5GQtaB0P4dIAYw0hH
+	 2IInU6qduLxDqR0HnGyq5Tg+jo0R+IbkNclOqdGYzLj3CTHI/tO7Eb1xXMmjrhLgr3
+	 1Pq1q/+KV1Ms1qTu/vzxDE0ly32pw5IcF5QkpgbM3WuH87TaHYDeZ3drb/R1OjIaNW
+	 gYta0fZwBv7mqPYNyd/xrYmUcI2gsMT6MVuarh+IIMDdEaqKO+BhvJGvtxbHhvS/FV
+	 NP2AwaFS3fYFmh/55eTbSMsDfpDNdKtEaM5a5cc9xpSNdKHgvfE6BqxFEgnyHHPrFa
+	 e4tNalrpt+L2g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E9F22811E2;
-	Wed, 29 Jul 2026 13:49:45 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 582E5788
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 13:49:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8297840B07;
+	Wed, 29 Jul 2026 14:05:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1B879194
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:05:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4345C60AD4
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 13:49:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0C8F040267
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:05:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BRIw9toOwdRH for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 13:49:41 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UmJpu3EgNm2J for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 14:05:31 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::22f; helo=mail-lj1-x22f.google.com;
+ client-ip=2a00:1450:4864:20::129; helo=mail-lf1-x129.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org CEE6160B0F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CEE6160B0F
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CEE6160B0F
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 13:49:40 +0000 (UTC)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-39c86945164so7127451fa.1
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 06:49:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785332978; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E88DA40074
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E88DA40074
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E88DA40074
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 14:05:30 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5aeb98460c6so919712e87.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:05:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785333928; cv=none;
  d=google.com; s=arc-20260327;
- b=HZB9KvBt/ugfrxYIt1oM17PIdiV3QI1punj4G63UzcVY1XCooQA/LecgsxFG6EaGTw
- BZ4PUyZRuOPMuiaO/HI9bxFC07x5b9qeuzyIv1jznnCs7Xx5cTd855WuPGKYTWezNzP/
- b98jQlVZQK0XlvTB3uGzrKO0Q0hdr5BO0EgWYCX/pckQsx1fIcaBrxetBCe9ub1TYqzp
- 0YOF25Op9PunmK3xJ2uA5COLTyVJXfk8sa0AN5XHZ5k83RvrtN4rmNLLL9o58qVa/mB5
- 4ysEDaSNINqOpzrAPia+WlZb0S2RCcIYktX8rg2u3cBvPDhNSMtqZpdmyZkAVTPnBLdb
- qjGQ==
+ b=dlyQiIReNEU9Fx59i90OP3+IBQXvMSOKSmSqknwCWMfTHsCg5mZ5yuhd6U9WPnv86E
+ KosOZIPMusS9x7KFYuATlNa8e5SzO4ADvk5eGsUpFcZnzd25aW3NTYA6AJIg+27/cvg9
+ nqF833rA56E8WD5r1VFWo9Vrfl6F9wu+Vf5gN7Fa/CqJNEnW65V0X2OCnE+SxRwmwJG0
+ Pn6PU8NJMtyaVN4dM0xIY9fGWY42IL+2p7LYABGRnROnDo3+6ejtipdESy+0COU99FDV
+ YRfPHmN3qFNioZB4GyK2VjF0f8T3AY87rNyoyFHyax4ux3NtxSI65zynPakdrxVAoT0l
+ 9WIg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=qeWt5EUQpDLr2smPQC42RiwR1EsMQfnARJcgfbGvhk0=;
- fh=+YGUQGdlQdw4Oal7ArawebLkDslVyjTbsjXJamrr2Kc=;
- b=E0qIY0icE6yZKV/L1h61y2ACx3C7zl2qCDuudGK2tBQKBlMXecZoDzGtLTWdPBr+p3
- pjCLX7oKiyvNYdUFLqPfHfGQk5TvYpaoSO3QfFMZd4hj6xrGJpS0fl4UpmJni+oBLgvC
- rlc3A6Jeqe1af56fa32Z1tmw7kWo/uQF0I9giJOvCEluukJSFek8RhYo/OdcyncyrcO9
- ehH1cgocnbRZN9JV8WfXVbGRKF0yYA94bZ5/7+bBT7ZlKQfilqDuL93QbV96sUImgBm6
- wuhsuADP7IWtOffc5KXot/Lc/Tzou9HWa2wfDzcHqzh6HUjYnIIpxKE+7oyOhMKXO4BV
- g9jw==; darn=lists.u-boot-project.org
+ bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
+ fh=vSfkEd6RapT6KDy195vRPFzrFfySQXIaOmo0/M0zGFI=;
+ b=Q4bmM7byTKKcBBzWIFalr8lyzuVRdTMejaugLrwvVVHwVlqSgjfcA4eCiD6MPFSeV9
+ dQAZugYzCmMBqAATj1H/fSFhanm13rScuKp7KYZGf1bK7Sz7lorCjDHiXh3j2+edTnC3
+ m4sR9b4T2YmChU5EGVqjW96/LKqSLtyJExtLY5IcN0yfMk7xiIXClfi4fHUJYQEiDV2E
+ omt8L9Afg0HHiwMHhlnOFzTR6wXPBJrfeV3Q5dFDktEEhNU4uGdKaunvAjEh9FR+VSrZ
+ 4KhiBJioLqSuj36Nb051ZZkNdbt5bqS5Xsi2VeY7pFbC75VEq8P3W+hLpUPwYK0HGJA/
+ Hbvg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785332978; x=1785937778;
+ d=1e100.net; s=20251104; t=1785333928; x=1785938728;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=qeWt5EUQpDLr2smPQC42RiwR1EsMQfnARJcgfbGvhk0=;
- b=qtCj4IWv2rfuan5fAbNmSq3sXOxygB/cOGDfFxWN8B7Yax6KTos5mCNlZNZMv6H+3f
- OE/GMQvTSyfxtywTMT2vi5yIaFBeL6JpcYeb7EaAmKSFH06GMYnvuYnfPEyvhKuxOfQZ
- 5PqexttAdvwj7tj9KD3HXBJCKHt1fuNAeDvIv8Ig8sU6WfxqKnzYQ2J5FKSC5oXJZ3Rf
- fsQeD+lkxak3fv8nShvojyMQ6RwUNaXP64IZQbTBXTE2GT/1He1jxWJ74T4fxsPQIGJ6
- M/dPSKFT2FC477taH6Rqf9D4eCnjgFmTlVS8Vpspki5Bwh43K4Ghs7DYB6gm+ak3j+La
- F0fw==
+ bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
+ b=L7wLURYGZwrgnwd6TPi3Ag1lvPL3/clLbisQ5whQ2st+nTPVSRj1tWvGVb5YlMz6bA
+ dalw20/a/smyQnFX8lbGc906wkVgC+NJyue0s1ImVchYxfMo5LSkdDAgxFkpFsVuJODV
+ fTwWlLRlm72+CWyCk3Mu2UvZo7GLKRWygzXV1c1u8i2MsekbiZqcW8RjuZ5JpZOoEyHj
+ 8GH4sMgjGL5/+VjVtp1hQ4XQI+hor/XJteKnS5KtwapKSB+3wov1dM8w6jJt6bgT/ejc
+ xyflS925+prTJLXzJPIVPIxXZINrJI8Rz3KJdc9MsUD1CzT9NxzojrpVYUNtn9BvOxha
+ Kvnw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpbSPuEvyK6CpcTZ8EQWRYO7w0HZ22blZ012QVahsCCaBgBl3bSrmmzBvIxdb0fdzEtWW2mrK0=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwpYaHH5elNq7CD1P2So272xxUafssVOaJM2YcCTo2DFj0sjNqM
- Fun+5KvjFyZlijixF2XTgy8xHLJ8ztBEnAUYgY4r6CmMsMvAePpEe1V3yPFoXBqF6mPBOtRgUFq
- 995j+HhRBQXifNRNHGoEgId2L7O+TX+fpb7mJvAFZjg==
-X-Gm-Gg: AR+sD117wllycZT81OXMEu0V3bYQQ/iZQFgWIHSN8m4L49UPVqO+u2LJsnW7mJGeCmz
- rb3ti5FiVCodWIaw55sPpwxSJ6tQ59FRb2MtolLqPetnlT+L1O3z40EFi1tVVLxOOBBYrhhWLz6
- YqIrnmbePus276Pp37KaSqYP/wbVSGjIVzz0vaGF6N82/XOkghsOiVcsSpi3N7x3EfZw+QyYGzg
- NqHZ5z3kUZ8CqJlfYDDHANbnGFFCgwMUDGkkcBgJ0j1QwWev9diqc38N++vMuyxxR0z9H7NK4Jr
- chEIGwC/mQ+jHjGZ/y6f8kqnmH/EN7arqwMpt06nN6W8rxMwRW78EJmwi78BZzNEJiXLO0Ch7nX
- m0cMO541x24UYHV+I8v5DuDA3qCahjPt0B0YAk1+lVrorwUlnu0wAPMqI7uAkvIovvXBFCcZ9FC
- HQ9g==
-X-Received: by 2002:a05:651c:1602:b0:39c:64f5:b91d with SMTP id
- 38308e7fff4ca-39f51ee7746mr13748831fa.38.1785332978126; Wed, 29 Jul 2026
- 06:49:38 -0700 (PDT)
+ AHgh+RpuEGV/fVOCAB2AFCT7BdGDifaJBtuCXNTwU0Kwunl0eq7PudTFTy+5a8HXVRIWESjWm0g41Ps=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwoIW/XpEBN8RQDEriBKQD2NzwRz3+x6moNVKJKQ0VRJLVB7OHg
+ yGmEg8yqlJeF9aVw5M5vm5jzuBVADm8iMSg9xDylGxqFFTNwtENvJmyfoHFmane43NdhQSeyJ1w
+ JKf+z4bkqww3k8Q/TBAND0os3tkMiLOvCLSecv8gtTw==
+X-Gm-Gg: AR+sD12xg/lqYmJ8m7PhtsokByCoqJlD31SirpGfx+52seazdLF3LeBz11gs2uNw23C
+ 2wrrR4u0hgp7JL+tdXey/Z30Zt9bWbMYs3eMYUF3EjerM5S6Yo+7QvLOZFI3QBdfgN2G+mfm+H7
+ j0ekGe5ANtg3mO5hMvFXp89pRT6Ga9DEg8y5k1B5WfcBCbngxyvIFl8A+dq24u5XZPBhkSZd9Jm
+ IEo9NuRQvlmwQTn3uj2ImSTXNIKhbMXp1hELdOAiKuAVFStHKs+kPCJqlEXovI4CgAcwy72coWj
+ D5wKXDbUpdLkpEsi8mp+PSU4VYWeNsDdJwIcVfvnC5F6K1w321H6oE52hVuPXfYBbHQDRKgRJZ9
+ /JRQftaKboqVNJ683TLXwgFjUrh0+T9KHs4C39l60gFSK74H43dOCC/XiK3R8ZHFBLpGhWIl8Sq
+ 57n2EDVNurxNyO
+X-Received: by 2002:a05:6512:1151:b0:5b1:5f28:2198 with SMTP id
+ 2adb3069b0e04-5b2d020fed2mr1490360e87.3.1785333928206; Wed, 29 Jul 2026
+ 07:05:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
- <20260727-m4-v6-9-2f58566d48ca@riscstar.com> <ameUvEoCHjeygBEd@pie>
- <CAH22mJy8_gd2V_DFUT0DQYiBSO6B3u5aX-V=uD20v0G+m1cArw@mail.gmail.com>
- <amh6JjTtUhi57H-b@pie>
-In-Reply-To: <amh6JjTtUhi57H-b@pie>
+ <20260727-m4-v6-6-2f58566d48ca@riscstar.com> <amdGSBKT4iRzuh1P@pie>
+ <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
+ <ameQUN3zlD0Ei8Jm@pie>
+ <CAH22mJyMqTgRLqyfVZGgSHHNK7XnBTnrkY-R1ix5DN+oiBDEbg@mail.gmail.com>
+ <amhyAULw9Wovuo3z@pie>
+In-Reply-To: <amhyAULw9Wovuo3z@pie>
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 29 Jul 2026 21:49:26 +0800
-X-Gm-Features: AUfX_mzNk6UbKMDkdQpk7MJ2Gs2cV8ofR8okpABpGmAtZrFfNIyJxXyWShjkxyo
-Message-ID: <CAH22mJwL+Op+99iBTePTkdGfArRy_inFRXm=DJjG-jJ=sYEi2g@mail.gmail.com>
-Subject: Re: [PATCH v6 09/11] doc: spacemit: flash on K1 SoC based boards
+Date: Wed, 29 Jul 2026 22:05:14 +0800
+X-Gm-Features: AUfX_myratUIMNxziYDUDPYas-IAQ6Q95tOa9o7aAndXzXSN0Y1sJzBTTZYZErk
+Message-ID: <CAH22mJyyExBuUrDNgRg=WU4f6RkN7M0QhtuUAgXiUf8b84TaCQ@mail.gmail.com>
+Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
 To: Yao Zi <me@ziyao.cc>
 Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
  Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
@@ -134,26 +136,26 @@ Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1785332978; x=1785937778;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1785333928; x=1785938728;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=qeWt5EUQpDLr2smPQC42RiwR1EsMQfnARJcgfbGvhk0=;
- b=JXiG6uDmGQ0soOmOGmFH3TshrJwm9Z5sv+hZWhEfyzM1LK8/uHwLYIXChVvdGeDa8+
- Ash9NgORqkHoTYnOCY5Mph6qSGHywJWOvwPsUUJGxD6WRJ6GCZVh82SGRy6e1rnRNOZm
- AIS99wC9LbuPKJ08IAlfT7fLlaxfLVGcz7vjKBZDUnWABQvcYWYj7TklO1w/muNBEq/O
- cCE/f26vHpoWwqsY4lv88shT7IfKE+3eks2QWTLgxph6QbGmZFPL4cg1hTT6Bf3HPSOk
- r3xDj5uBw7n/Gx+0SUYuyCaQ2RFpxnjfluVKEWKM0QRicBI7e2nen3xHZV8vTghhVKrF
- J4Qw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=sJU+ROxdo33pkj4AWYehaglBmU5NkMALTJSYmgHTMGI=;
+ b=YjCQ2v5xRQ1E7zu4s6BtpEHTz1l+VaJkOcvqYsvsJKLY9ZemxTGqA0MEsaYxz/flB1
+ Gr4DkOIV/Zbtmks0H2MJmcLGbVabTog/i9PC4NXaiokMzaSq3QnXHJAhE+2F6wGcS+o5
+ UV+aN6rRVDtWRGy1DjjytN0+2x2UwSccbNZTtb8pd3hCmHEWKg1zBquh2zPnzA6JPwpy
+ XPUlayCc5gamzYDMefmjYrXEmUIna8FAoOk8LtXTsUmsLHMqZ1XC6jQi+MWPU28+x0ng
+ VHHuQhP09k6ACBRdhfLonNUMS4KRB2Xz1NrdTObmYXl8EITVfDQbFUbWGwOpIMOCvj50
+ Ijzg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=riscstar.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=JXiG6uDm
+ header.s=20251104 header.b=YjCQ2v5x
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -168,145 +170,97 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, Jul 28, 2026 at 5:45=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
+On Tue, Jul 28, 2026 at 5:11=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
 >
-> On Tue, Jul 28, 2026 at 08:53:02AM +0800, Eric Chung wrote:
-> > On Tue, Jul 28, 2026 at 1:26=E2=80=AFAM Yao Zi <me@ziyao.cc> wrote:
+> On Tue, Jul 28, 2026 at 09:04:52AM +0800, Eric Chung wrote:
+> > On Tue, Jul 28, 2026 at 1:08=E2=80=AFAM Yao Zi <me@ziyao.cc> wrote:
 > > >
-> > > On Mon, Jul 27, 2026 at 02:59:11PM +0800, Eric Chung wrote:
-> > > > Add document on how to flash images into eMMC of K1 SoC based board=
-s.
+> > > On Mon, Jul 27, 2026 at 09:08:52PM +0800, Eric Chung wrote:
+> > > > Hi Yao,
 > > > >
-> > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+> > > > I'm not familiar with the policy for syncing DTS files from the Lin=
+ux upstream.
+> > > > Could you clarify how this script works?
 > > > >
-> > > > ---
-> > > > v3:
-> > > > - Add document on how to flash images into SD card.
-> > > > ---
-> > > >  board/spacemit/k1/MAINTAINERS |   2 +-
-> > > >  doc/board/spacemit/index.rst  |   1 +
-> > > >  doc/board/spacemit/k1-mmc.rst | 320 ++++++++++++++++++++++++++++++=
-++++++++++++
-> > > >  3 files changed, 322 insertions(+), 1 deletion(-)
+> > > > Does it sync all DTS files from Linux upstream at once, or is it
+> > > > possible to sync
+> > > > only the Spacemit DTS file?
 > > >
-> > > ...
+> > > update-subtree.sh cherry-picks a commit from the upstream, or
+> > > merge an upstream tag into the subtree. Cherry-picking SD-related
+> > > commits from Linux upstream suits for your case.
 > > >
-> > > > diff --git a/doc/board/spacemit/k1-mmc.rst b/doc/board/spacemit/k1-=
-mmc.rst
-> > > > new file mode 100644
-> > > > index 00000000000..b0fe78c75ce
-> > > > --- /dev/null
-> > > > +++ b/doc/board/spacemit/k1-mmc.rst
-> > > > @@ -0,0 +1,320 @@
+> > > > If I choose to sync only the Spacemit DTS file and include it in my=
+ patch set,
+> > > > would that cause conflicts later when others try to sync all DTS fi=
+les?
 > > >
-> > > ...
-> > >
-> > > > +Chapter 2: SD Card Boot
-> > > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> > > > +
-> > > > +
-> > > > +SpacemiT K1 Bianbu SD Card Image Flashing and U-Boot Update Guide
-> > > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > > +
-> > > > +This guide explains how to prepare a bootable SD card with Bianbu =
-OS for
-> > > > +SpacemiT K1 based boards and how to replace the U-Boot binary on t=
-he SD
-> > > > +card with a custom build.
-> > > > +
-> > > > +Prerequisites
-> > > > +~~~~~~~~~~~~~
-> > > > +
-> > > > +- A SpacemiT K1 based development board
-> > > > +- A microSD card (at least 8 GB capacity recommended)
-> > > > +- A card reader for your host computer
-> > > > +- A Linux host system (for ``dd``, ``fdisk``, ``lsblk`` commands)
-> > > > +- The Bianbu SD card image from
-> > > > +   <https://spacemit.com/community/resources-download/Images%20Col=
-lects/K1/Bianbu>
-> > > > +- A custom ``u-boot.itb`` file (device tree blob or U-Boot FIT ima=
-ge) to be
-> > > > +  written to the U-Boot partition
-> > > > +
-> > > > +Prepare the SD Card & the image
-> > > > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > > > +
-> > > > +**1. Download the image**
-> > > > +
-> > > > +Download the released package from the official SpacemiT website:
-> > > > +
-> > > > +<https://archive.spacemit.com/image/k1/version/bianbu/v2.3.5/Bianb=
-u-Minimal-K1-sdcard-V2.3.5-20260601180942.img.zip>
-> > > > +
-> > > > +**2. Extract the image**
-> > > > +
-> > > > +.. code-block:: console
-> > > > +
-> > > > +   $ unzip Bianbu-Minimal-K1-sdcard-V2.3.5-20260601180942.img.zip
-> > > > +
-> > > > +**3. Identify the SD card device**
-> > > > +
-> > > > +Insert the microSD card into your card reader, then run:
-> > > > +
-> > > > +.. code-block:: console
-> > > > +
-> > > > +   $ lsblk
-> > > > +
-> > > > +Compare the output before and after inserting the card to identify
-> > > > +the new device. It will typically appear as ``/dev/sdb``, ``/dev/s=
-dc``,
-> > > > +or ``/dev/mmcblk0``.
-> > > > +
-> > > > +**4. Write the image to the SD card**
-> > > > +
-> > > > +.. code-block:: console
-> > > > +
-> > > > +   $ sudo dd if=3D./Bianbu-Minimal-K1-sdcard-V2.3.5-20260601180942=
-.img of=3D/dev/sdb bs=3D1M status=3Dprogress
-> > > > +
-> > > > +The SD card is now ready as a bootable Bianbu system disk.
-> > >
-> > > This looks out of scope of describing how to create a bootable SD car=
-d
-> > > with U-Boot. In my opinion, you'd better describe the requirements of
-> > > parition layout and image position for SD-card booting, to allow read=
-ers
-> > > to create their own images/bootable medium from scratch more easily,
-> > > instead of sticking to the vendored image.
+> > > Tom synchronizes the dts subtree with Linux upstream irregularly, the=
+re
+> > > should be no conflict or relatively small ones if you cherry-pick the
+> > > changes, while adding downstream nodes in *-u-boot.dtsi might suffer
+> > > from duplication, too, during synchronization.
 > > >
 > >
-> > Creating a bootable SD card from scratch would be valuable, but I'll ad=
-dress
-> > it later due to time constraints.
+> > The process is a bit complex. Since my main issue is that the DTS
+> > files are out of
+> > date, would it be simpler if I just copy the relevant Spacemit DTS
+> > files directly
+> > from the Linux upstream into the dts/upstream folder?
 >
-> In case I didn't make myself clear enough, the documentation *SHOULD*
-> describe how to create bootable devices from scratch, instead of
-> alternating an existing OS image to use mainline U-Boot. I don't think
-> the current documentation helps much for downstream users/distributions
-> to adapt U-Boot for their own use cases, or at least it could be written
-> in a much more clear, vendor-neutral way.
->
-> So here's my NAK for this patch. I'm not sure what you mean by "time
-> constraints", but please keep submitted patches in a good shape.
+> The answer is simply no.
 >
 
-I=E2=80=99m not sure why the documentation insists on walking users through=
- creating a
-bootable SD card from scratch, especially when, at this stage, it
-still depends on
-the vendor=E2=80=99s tools. In practice, we=E2=80=99re required to use the =
-vendor=E2=80=99s
-flashing tool for
-both eMMC and SD devices, and we must adhere to the provided partition tabl=
-e.
+OK. I'll keep using my own overlay DTS file.
+I tried upstream DTS file. It only gave me more bugs. I could switch to
+upstream DTS file when Tom syncs it.
 
-If users prefer to define their own partition layout, nothing prevents
-them from doing
-so on their own. That=E2=80=99s entirely up to them.
-
-The default SD image already includes the vendor=E2=80=99s U-Boot. My
-instructions simply
-explain how to replace it with the upstream version=E2=80=94nothing more.
+> > > > Best Regards
+> > > > Eric
+>
+> Regards,
+> Yao Zi
+>
+> > > By the way, please avoid top-posting if possible.
+> > >
+> > > Thanks,
+> > > Yao Zi
+> > >
+> > > > On Mon, Jul 27, 2026 at 7:52=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
+> > > > >
+> > > > > On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
+> > > > > > Add the SDH0 controller node and its pinctrl groups to the u-bo=
+ot
+> > > > > > overlay. The upstream DTS only contains the eMMC node; the SD c=
+ard
+> > > > > > controller (sdhci@d4280000) and its MMC1 pinctrl configuration =
+are
+> > > > > > missing. Place the new node inside the storage-bus via path-bas=
+ed
+> > > > > > merge so it inherits the dma-ranges from the parent bus.
+> > > > > >
+> > > > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+> > > > >
+> > > > > Please cherry-pick upstream devicetree changes from Linux upstrea=
+m with
+> > > > > tools/update-subtree.sh instead of adding our own copies. Changes=
+ for
+> > > > > k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v7.2.
+> > > > >
+> > > > > Best regards,
+> > > > > Yao Zi
+> > > > >
+> > > > > > ---
+> > > > > > v5:
+> > > > > > - Append power source field on eMMC/SD pinctrl.
+> > > > > > v3:
+> > > > > > - Fix SD pinctrl as uhs.
+> > > > > > v2:
+> > > > > > - Use vmmc-supply as vqmmc-supply on SD node.
+> > > > > > - Add alias of mmc0 and mmc1.
+> > > > > > ---
+> > > > > >  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 +++++++++++++++=
++++++++++++++++-
+> > > > > >  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 +++++++++++++++=
++++++++++++++-
+> > > > > >  2 files changed, 173 insertions(+), 4 deletions(-)
