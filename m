@@ -1,65 +1,66 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D949C53200
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F54DC54F52
 	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 12:28:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DEB1981274;
-	Wed, 29 Jul 2026 12:28:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0B98160B0D;
+	Wed, 29 Jul 2026 12:28:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qnXNgrOlNTqQ; Wed, 29 Jul 2026 12:28:47 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O8EQl_QVPxbW; Wed, 29 Jul 2026 12:28:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5918C812EC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B840460B52
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785328127;
-	bh=IjyMXiehie+Ahs1W9rdagPHmCHwhE3x9f5QuSK+quB4=;
+	d=lists.u-boot-project.org ; s=default; t=1785328129;
+	bh=mXnLvwIB0idbbgdBY5MEwDy3CSL4WUN2VdFwBVXmXYo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RjShHaeIt0AAG+s7vlQBDwRpxPTEBfIwSj43GcpcmJYiYAaMywZN6Jnb+RuveQ5ko
-	 hxYZZDfo/1NVLBBzdHpfTgQC4g0+rCaJ4tD2EB7bB56NYf/5HnFSg4JBnO/6JtJVXC
-	 5SK6lV+/ZrTfgnSdGeEUEQfnuKbywCrRB+obcTMez0cJ+B6ZkfbTL8meU2suTiP91v
-	 khbB8nSHcDBvSi1oJQl/+IywhzNFf7NqH03dkWY5udjioxuvoUFl60CTohywWqr6Mk
-	 uA8srbQWtLVvQmBM5vbZINfJ2ij8G1iirkw+6uHqISfYaQ2HkMKg6u/y4dSpO0os4B
-	 tfETY0PXmtWow==
+	b=e8OruzN0/3AZu0mKYfdXZ14/VoEm4yr/O2SiqTdAgHHm60XCn2kC+bg4g1b7P65aA
+	 p9zGK2rCPnmznfYReXCJEben1YsXIzabYzRbN5vE38/VyqqxbKqwEAj2YppqaF5p8K
+	 UhxuQmki92FpELgQyIzlxLu9oxxqszbic1dKCUxs3BMOunFwDZytSDXfZRDhDa6mEc
+	 yEtqTUwNJB2VPRrATIRwHSu0oC8ZGi5oqlvUXlhugN/tmdhmrmlFuHIdjQvseEqQ2/
+	 b1qEVX9LxnnBJ/A4NDl4GSjQg5ZkvXkR0xhPmcBoOF55LA15orWKOvAGL3VmHq1RsY
+	 3clyt8A86Z6Ew==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5918C812EC;
-	Wed, 29 Jul 2026 12:28:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id E00803B0
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B840460B52;
+	Wed, 29 Jul 2026 12:28:49 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B68023F
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D251840891
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:24 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2DC3840156
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AeV89LjbcJMS for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 08:52:23 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=harsimransingh.tungal@arm.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org DCE7740879
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DCE7740879
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DCE7740879
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:22 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kG6MXo3um5ic for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 08:52:27 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=harsimransingh.tungal@arm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 87DD04009C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 87DD04009C
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 87DD04009C
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:52:26 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53E128493F; Wed, 29 Jul 2026 10:52:21 +0200 (CEST)
+ id 064348404D; Wed, 29 Jul 2026 10:52:25 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7D8BE8404D
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 10:52:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id D81D1849AA
+ for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 10:52:21 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A91C2169C;
- Wed, 29 Jul 2026 01:52:13 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2213A169E;
+ Wed, 29 Jul 2026 01:52:17 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.65.220])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 281433F66F;
- Wed, 29 Jul 2026 01:52:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C0E433F66F;
+ Wed, 29 Jul 2026 01:52:19 -0700 (PDT)
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -68,10 +69,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v4 19/22] efi: selftest: add runtime variable tests with
- non-volatile storage
-Date: Wed, 29 Jul 2026 09:51:21 +0100
-Message-Id: <20260729085124.2618817-20-harsimransingh.tungal@arm.com>
+Subject: [PATCH v4 21/22] doc: arm64: document FF-A runtime path for EFI
+ variables
+Date: Wed, 29 Jul 2026 09:51:23 +0100
+Message-Id: <20260729085124.2618817-22-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260729085124.2618817-1-harsimransingh.tungal@arm.com>
 References: <20260729085124.2618817-1-harsimransingh.tungal@arm.com>
@@ -82,19 +83,19 @@ X-Virus-Status: Clean
 X-Mailman-Approved-At: Wed, 29 Jul 2026 12:28:13 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=arm.com; s=foss; 
- t=1785315137; bh=ypTiAgX3E60cC5hLBwDJVBrJjq0vX2XxPKVVTQn/qGo=;
+ t=1785315141; bh=c5+yXMVBSQ31TlsxdIKW9oRlJ6X9ipSJaPdJaPsQR18=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=kVyTwoeN/x32LB2mV8xcw1XGvQ/Bhb6YlIikLHf+MnIbc89EJFR3mb3CKb3Go+tvH
- w5lU3B4DADLYh+JWBkh9sPFX9YA5Xu/PVWhnj6Vb3vc68GM0TMQJtU0TNZ4BbNbcfg
- sMSmQw66IE5z2qwktMIaSJeTNLv23CYAZHhi//70=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ b=bCBNaOy1PAxgidCyxrgcVfPcFCwEUzxJbqXj5wVSZ8ITKC0atEmECHENdjqQyfVSl
+ t1LTMV2LIGa9Ad006GDJa+Ends9WeJyI11jHtbml5FGI4IPZgO7RNO0mKMhebV54Kp
+ ox35kzDQY8kDjXYZhTwtEPK/8q2AilKbaPqdO8Ig=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=arm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  spf=fail smtp.mailfrom=arm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=kVyTwoeN
+ header.a=rsa-sha256 header.s=foss header.b=bCBNaOy1
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=arm.com
@@ -102,7 +103,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=harsimransingh.tungal@arm.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=arm.com header.i=@arm.com header.b="kVyTwoeN"; 
+ unprotected) header.d=arm.com header.i=@arm.com header.b="bCBNaOy1"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -118,820 +119,176 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Extend runtime variable tests for persistent storage
+The arm64 FF-A documentation still said EFI runtime support was a
+future development, so readers had no description of the current FF-A
+runtime transport or how EFI runtime variable services use it.
 
-Runtime variable selftests already cover the volatile-store path in a
-single run, but non-volatile storage needs state to survive a reboot.
-Make that flow explicit by keeping the existing "variables at runtime"
-test for CONFIG_EFI_RT_VOLATILE_STORE=y and adding on-request
-"variables at runtime setup" and "variables at runtime verify" tests
-for the non-volatile case.
-
-The setup phase runs QueryVariableInfo(), exercises create/delete of a
-runtime variable, prepares the persistent test state, and prompts the
-user to reboot and run the verify test. If an old test variable is
-already present, reuse it only when it matches the expected
-half-payload; otherwise delete it and recreate clean state. The setup
-path also performs a best-effort cleanup if a later check fails.
-
-The verify phase checks the prepared value, appends the remaining
-payload, validates the full contents, deletes the test variable, and
-confirms that it is gone.
+Document the FF-A runtime transport, the shared MM communication path,
+and the EFI runtime variable flow on arm64. Also clarify that the
+armffa command is boot-time only and point readers to the architecture
+documentation for EFI runtime variable services over FF-A.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 ---
- .../efi_selftest_variables_runtime.c          | 715 ++++++++++++------
- 1 file changed, 482 insertions(+), 233 deletions(-)
+ doc/arch/arm64.ffa.rst   | 88 ++++++++++++++++++++++++++++++++++++----
+ doc/usage/cmd/armffa.rst | 11 +++++
+ 2 files changed, 92 insertions(+), 7 deletions(-)
 
-diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi_selftest/efi_selftest_variables_runtime.c
-index fd570d673f0..90ec568ca3a 100644
---- a/lib/efi_selftest/efi_selftest_variables_runtime.c
-+++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
-@@ -3,6 +3,7 @@
-  * efi_selftest_variables_runtime
-  *
-  * Copyright (c) 2019 Heinrich Schuchardt <xypron.glpk@gmx.de>
-+ * Copyright (c) 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * This unit test checks the runtime services for variables after
-  * ExitBootServices():
-@@ -17,294 +18,542 @@
- #define EFI_ST_MAX_VARNAME_SIZE 40
+diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
+index f966f8ba6af..145bb70abce 100644
+--- a/doc/arch/arm64.ffa.rst
++++ b/doc/arch/arm64.ffa.rst
+@@ -15,10 +15,10 @@ application in S-EL0, or a Trusted OS in S-EL1.
+ The U-Boot FF-A support (the bus) implements the interfaces to communicate
+ with partitions in the Secure world aka Secure partitions (SPs).
  
- static const efi_guid_t guid_vendor0 = EFI_GLOBAL_VARIABLE_GUID;
--static const efi_guid_t efi_rt_var_guid = U_BOOT_EFI_RT_VAR_FILE_GUID;
+-The FF-A support specifically focuses on communicating with SPs that
+-isolate portions of EFI runtime services that must run in a protected
+-environment which is inaccessible by the Host OS or Hypervisor.
+-Examples of such services are set/get variables.
++U-Boot's FF-A bus support exposes an optional transport that EFI runtime
++services can use to communicate with Secure partitions. Through this
++interface, EFI services (such as variable access) can request or exchange
++data with the Secure world using FF-A.
  
- /**
-- * execute() - execute unit test
-+ * check_runtime_query_variable_info() - Run QueryVariableInfo() checks
-+ * @phase: test phase string used in failure logs
-+ *
-+ * Run the runtime QueryVariableInfo() checks for the current test phase.
-  *
-- * As runtime support is not implmented expect EFI_UNSUPPORTED to be returned.
-+ * Return: EFI_ST_SUCCESS on success, EFI_ST_FAILURE on failure
-  */
--static int execute(void)
-+static int check_runtime_query_variable_info(const char *phase)
- {
- 	efi_status_t ret;
--	efi_uintn_t len, avail, append_len = 17;
--	u32 attr;
--	u8 v[16] = {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
--		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
--	u8 v2[CONFIG_EFI_VAR_BUF_SIZE];
--	u8 data[EFI_ST_MAX_DATA_SIZE];
--	u8 data2[CONFIG_EFI_VAR_BUF_SIZE];
--	u16 varname[EFI_ST_MAX_VARNAME_SIZE];
--	efi_guid_t guid;
- 	u64 max_storage, rem_storage, max_size;
- 	int test_ret;
+ The FF-A support uses the SMC ABIs defined by the FF-A specification to:
  
--	memset(v2, 0x1, sizeof(v2));
+@@ -26,13 +26,13 @@ The FF-A support uses the SMC ABIs defined by the FF-A specification to:
+ - Access an SP's service through communication protocols
+   e.g. EFI MM communication protocol
+ 
+-At this stage of development only EFI boot-time services are supported.
+-Runtime support will be added in future developments.
 -
- 	if (IS_ENABLED(CONFIG_EFI_VARIABLE_FILE_STORE)) {
- 		test_ret = efi_st_query_variable_common(
- 			EFI_VARIABLE_BOOTSERVICE_ACCESS |
- 			EFI_VARIABLE_RUNTIME_ACCESS);
- 		if (test_ret != EFI_ST_SUCCESS) {
--			efi_st_error("QueryVariableInfo failed\n");
-+			efi_st_error("%s: QueryVariableInfo checks failed\n",
-+				     phase);
- 			return EFI_ST_FAILURE;
- 		}
- 	} else {
- 		ret = st_runtime->query_variable_info(
- 			EFI_VARIABLE_BOOTSERVICE_ACCESS, &max_storage,
- 			&rem_storage, &max_size);
--		if (ret != EFI_UNSUPPORTED) {
--			efi_st_error("QueryVariableInfo failed\n");
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("%s: QueryVariableInfo returned status=%x\n",
-+				     phase, (u32)ret);
- 			return EFI_ST_FAILURE;
- 		}
- 	}
+ The U-Boot FF-A support provides the following parts:
  
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/**
-+ * check_runtime_variable_enumeration() - Check runtime variable enumeration
-+ * @phase: test phase string used in failure logs
-+ *
-+ * Confirm that runtime variable reads and GetNextVariableName() still work
-+ * while the current test state is present.
-+ *
-+ * Return: EFI_ST_SUCCESS on success, EFI_ST_FAILURE on failure
-+ */
-+static int check_runtime_variable_enumeration(const char *phase)
-+{
-+	efi_status_t ret;
-+	efi_uintn_t len;
-+	u32 attr = 0;
-+	u8 data[EFI_ST_MAX_DATA_SIZE];
-+	u16 varname[EFI_ST_MAX_VARNAME_SIZE];
-+	efi_guid_t guid;
-+
-+	len = sizeof(data);
-+	ret = st_runtime->get_variable(u"PlatformLangCodes", &guid_vendor0,
-+				       &attr, &len, data);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("%s: failed to read PlatformLangCodes, status=%lx\n",
-+			     phase, (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	memset(&guid, 0, sizeof(guid));
-+	*varname = 0;
-+	len = sizeof(varname);
-+	ret = st_runtime->get_next_variable_name(&len, varname, &guid);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("%s: GetNextVariableName failed, status=%lx\n",
-+			     phase, (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+#ifdef CONFIG_EFI_RT_VOLATILE_STORE
-+static const efi_guid_t efi_rt_var_guid = U_BOOT_EFI_RT_VAR_FILE_GUID;
-+
-+/**
-+ * execute() - Execute the single-run volatile-store runtime test
-+ *
-+ * Run the runtime variable checks that complete in a single invocation when
-+ * the runtime store is volatile.
-+ *
-+ * Return: EFI_ST_SUCCESS on success, EFI_ST_FAILURE on failure
-+ */
-+static int execute(void)
-+{
-+	efi_status_t ret;
-+	efi_uintn_t len, avail, append_len = 17;
-+	u32 attr = 0;
-+	u8 v[16] = {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
-+		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
-+	u8 v2[CONFIG_EFI_VAR_BUF_SIZE];
-+	u8 data[EFI_ST_MAX_DATA_SIZE];
-+	u8 data2[CONFIG_EFI_VAR_BUF_SIZE];
-+	efi_uintn_t prev_len, delta;
-+	struct efi_var_entry *var;
-+	struct efi_var_file *hdr;
-+
-+	memset(v2, 0x1, sizeof(v2));
-+
-+	if (check_runtime_query_variable_info("runtime") != EFI_ST_SUCCESS)
-+		return EFI_ST_FAILURE;
-+
- 	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
- 				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
- 					       EFI_VARIABLE_RUNTIME_ACCESS,
- 				       3, v + 4);
--	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
--		efi_uintn_t prev_len, delta;
--		struct efi_var_entry *var;
--		struct efi_var_file *hdr;
--
--		/* At runtime only non-volatile variables may be set. */
--		if (ret != EFI_INVALID_PARAMETER) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
+ - A Uclass driver providing generic FF-A methods.
+ - An Arm FF-A device driver providing Arm-specific methods and reusing the Uclass methods.
++- An optional runtime FF-A transport (toggled via CONFIG_ARM_FFA_RT_MODE) that is
++  resident after ExitBootServices() and enables EFI runtime variable services
++  via FF-A helpers and a shared MM communication buffer.
+ - A sandbox emulator for Arm FF-A, emulates the FF-A side of the Secure World and provides
+   FF-A ABIs inspection methods.
+ - An FF-A sandbox device driver for FF-A communication with the emulated Secure World.
+@@ -69,6 +69,12 @@ CONFIG_ARM_FFA_TRANSPORT
+     When using an Arm 64-bit platform, the Arm FF-A driver will be used.
+     When using sandbox, the sandbox FF-A emulator and FF-A sandbox driver will be used.
  
--		/* runtime attribute must be set */
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			3, v + 4);
--		if (ret != EFI_INVALID_PARAMETER) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* At runtime only non-volatile variables may be set. */
-+	if (ret != EFI_INVALID_PARAMETER) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
++CONFIG_ARM_FFA_RT_MODE
++    Enables the FF-A runtime transport. This option depends on
++    CONFIG_ARM_FFA_TRANSPORT and CONFIG_EFI_LOADER, and is enabled by default.
++    When enabled, a minimal set of FF-A operations remains available after
++    ExitBootServices().
++
+ FF-A ABIs under the hood
+ ------------------------
  
--		len = sizeof(data);
--		ret = st_runtime->get_variable(u"RTStorageVolatile",
--					       &efi_rt_var_guid, &attr, &len,
--					       data);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("GetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* runtime attribute must be set */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		3, v + 4);
-+	if (ret != EFI_INVALID_PARAMETER) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
+@@ -158,6 +164,73 @@ they want to use (32-bit vs 64-bit). Selecting the protocol means using
+ the 32-bit or 64-bit version of FFA_MSG_SEND_DIRECT_{REQ, RESP}.
+ The calling convention between U-Boot and the secure world stays the same: SMC32.
  
--		if (len != sizeof(EFI_VAR_FILE_NAME) ||
--		    memcmp(data, EFI_VAR_FILE_NAME, sizeof(EFI_VAR_FILE_NAME))) {
--			data[len - 1] = 0;
--			efi_st_error("RTStorageVolatile = %s\n", data);
--			return EFI_ST_FAILURE;
--		}
-+	len = sizeof(data);
-+	ret = st_runtime->get_variable(u"RTStorageVolatile", &efi_rt_var_guid,
-+				       &attr, &len, data);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("GetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
++FF-A runtime support for EFI variables
++--------------------------------------
++
++U-Boot provides an FF-A runtime transport to keep a minimal set of FF-A operations
++available after ExitBootServices(). This runtime transport is enabled with
++CONFIG_ARM_FFA_RT_MODE. The runtime helpers and data are marked with
++``__efi_runtime`` / ``__efi_runtime_data`` through the
++``__ffa_runtime`` / ``__ffa_runtime_data`` aliases in
++``include/arm_ffa_runtime.h``.
++
++Runtime context is enabled at ExitBootServices(), and the following prerequisites
++are prepared during FF-A bus probe:
++
++- The U-Boot FF-A endpoint ID is discovered at boot time with FFA_ID_GET and
++  stored in the runtime private data.
++- An ExitBootServices() event is registered by the FF-A runtime transport so
++  the resident runtime context is enabled when EFI transitions to runtime.
++
++At runtime, the driver model is no longer available. Runtime users should
++use the helpers exported by ``include/arm_ffa_runtime.h``. In particular,
++``ffa_runtime_context_ready()`` verifies that the resident runtime context
++is available and ``ffa_sync_send_receive_runtime()`` issues direct FF-A
++messages after ExitBootServices().
++
++EFI variable services over FF-A
++-------------------------------
++
++When CONFIG_EFI_MM_COMM_TEE and CONFIG_ARM_FFA_TRANSPORT are enabled, U-Boot
++routes EFI variable services to an MM Secure Partition (SP) over FF-A.
++The MM SP is discovered at boot time using FFA_PARTITION_INFO_GET and its
++partition ID is cached in runtime data.
++
++The data path uses a shared MM communication buffer and a door-bell style
++direct message:
++
++- The communication buffer is located at CONFIG_FFA_SHARED_MM_BUF_ADDR and
++  sized by CONFIG_FFA_SHARED_MM_BUF_SIZE.
++- CONFIG_FFA_SHARED_MM_BUF_OFFSET is sent in the FF-A direct message payload
++  to indicate where the data begins.
++
++After ExitBootServices(), EFI SetVariable()/GetVariable() call paths use the
++runtime MM communication path:
++
++- A pre-reserved shared buffer is used for the MM communication payload.
++- The cached MM SP partition ID and FF-A runtime transport are used to
++  dispatch direct FF-A messages to the Secure world after
++  ExitBootServices().
++
++Configuration notes
++-------------------
++
++Enable FF-A transport and MM communication:
++
++- CONFIG_ARM_FFA_TRANSPORT
++- CONFIG_ARM_FFA_RT_MODE
++- CONFIG_EFI_MM_COMM_TEE
++
++CONFIG_ARM_FFA_RT_MODE is enabled by default. It turns on MM communication for
++EFI runtime and may be disabled when EFI services over FF-A are not required
++after ExitBootServices().
++
++Configure the shared MM communication buffer:
++
++- CONFIG_FFA_SHARED_MM_BUF_ADDR
++- CONFIG_FFA_SHARED_MM_BUF_SIZE
++- CONFIG_FFA_SHARED_MM_BUF_OFFSET
++
+ Requirements for user drivers
+ -----------------------------
  
--		len = sizeof(data2);
--		ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
--					       &attr, &len, data2);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("GetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--		/*
--		 * VarToFile size must change once a variable is inserted
--		 * Store it now, we'll use it later
--		 */
--		prev_len = len;
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			sizeof(v2), v2);
--		/*
--		 * This will try to update VarToFile as well and must fail,
--		 * without changing or deleting VarToFile
--		 */
--		if (ret != EFI_OUT_OF_RESOURCES) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--		len = sizeof(data2);
--		ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
--					       &attr, &len, data2);
--		if (ret != EFI_SUCCESS || prev_len != len) {
--			efi_st_error("Get/SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	if (len != sizeof(EFI_VAR_FILE_NAME) ||
-+	    memcmp(data, EFI_VAR_FILE_NAME, sizeof(EFI_VAR_FILE_NAME))) {
-+		data[len - 1] = 0;
-+		efi_st_error("RTStorageVolatile = %s\n", data);
-+		return EFI_ST_FAILURE;
-+	}
+@@ -256,6 +329,7 @@ For example, when using FF-A with Corstone-1000, debug logs enabled, the output
+ Contributors
+ ------------
+    * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
++   * Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
  
--		/* Add an 8byte aligned variable */
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			sizeof(v), v);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	len = sizeof(data2);
-+	ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+				       &attr, &len, data2);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("GetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	/*
-+	 * VarToFile size must change once a variable is inserted
-+	 * Store it now, we'll use it later
-+	 */
-+	prev_len = len;
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		sizeof(v2), v2);
-+	/*
-+	 * This will try to update VarToFile as well and must fail,
-+	 * without changing or deleting VarToFile
-+	 */
-+	if (ret != EFI_OUT_OF_RESOURCES) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	len = sizeof(data2);
-+	ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+				       &attr, &len, data2);
-+	if (ret != EFI_SUCCESS || prev_len != len) {
-+		efi_st_error("Get/SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
+ .. _`FF-A v1.0 specification`: https://documentation-service.arm.com/static/5fb7e8a6ca04df4095c1d65e
+ .. _`SMC Calling Convention v1.2 specification`: https://documentation-service.arm.com/static/5f8edaeff86e16515cdbe4c6
+diff --git a/doc/usage/cmd/armffa.rst b/doc/usage/cmd/armffa.rst
+index dbe4d5bc842..64571d615cb 100644
+--- a/doc/usage/cmd/armffa.rst
++++ b/doc/usage/cmd/armffa.rst
+@@ -39,6 +39,17 @@ The command also allows to gather secure partitions information and ping these
  
--		/* Delete it by setting the attrs to 0 */
--		ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0, 0,
--					       sizeof(v), v);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* Add an 8byte aligned variable */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		sizeof(v), v);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
+ The command is also helpful in testing the communication with secure partitions.
  
--		/* Add it back */
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			sizeof(v), v);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* Delete it by setting the attrs to 0 */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0, 0,
-+				       sizeof(v), v);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
++Notes
++-----
++
++armffa is a boot-time test command. It relies on the FF-A driver model device
++(UCLASS_FFA) and is not part of the resident FF-A runtime transport used after
++ExitBootServices().
++
++armffa does not provide EFI variable operations. For more information about
++the FF-A runtime transport and EFI runtime variable services over FF-A please see
++:doc:`../../arch/arm64.ffa`.
++
+ Example
+ -------
  
--		/* Delete it again by setting the size to 0 */
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			0, NULL);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* Add it back */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		sizeof(v), v);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
- 
--		/* Delete it again and make sure it's not there */
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			0, NULL);
--		if (ret != EFI_NOT_FOUND) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* Delete it again by setting the size to 0 */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		0, NULL);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
- 
--		/*
--		 * Add a non-aligned variable
--		 * VarToFile updates must include efi_st_var0
--		 */
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			9, v + 4);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--		var = efi_var_mem_find(&guid_vendor0, u"efi_st_var0", NULL);
--		if (!var) {
--			efi_st_error("GetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--		delta = efi_var_entry_len(var);
--		len = sizeof(data2);
--		ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
--					       &attr, &len, data2);
--		if (ret != EFI_SUCCESS || prev_len + delta != len) {
--			efi_st_error("Get/SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* Delete it again and make sure it's not there */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		0, NULL);
-+	if (ret != EFI_NOT_FOUND) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
- 
--		/*
--		 * Append on an existing variable must update VarToFile
--		 * Our variable entries are 8-byte aligned.
--		 * Adding a single byte will fit on the existing space
--		 */
--		prev_len = len;
--		avail = efi_var_entry_len(var) -
--			(sizeof(u16) * (u16_strlen(var->name) + 1) +
--			 sizeof(*var)) -
--			var->length;
--		if (avail >= append_len)
--			delta = 0;
--		else
--			delta = ALIGN(append_len - avail, 8);
--		ret = st_runtime->set_variable(
--			u"efi_st_var0", &guid_vendor0,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_APPEND_WRITE |
--				EFI_VARIABLE_NON_VOLATILE,
--			append_len, v2);
--		if (ret != EFI_SUCCESS) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--		len = sizeof(data2);
--		ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
--					       &attr, &len, data2);
-+	/*
-+	 * Add a non-aligned variable
-+	 * VarToFile updates must include efi_st_var0
-+	 */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		9, v + 4);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	var = efi_var_mem_find(&guid_vendor0, u"efi_st_var0", NULL);
-+	if (!var) {
-+		efi_st_error("GetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	delta = efi_var_entry_len(var);
-+	len = sizeof(data2);
-+	ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+				       &attr, &len, data2);
-+	if (ret != EFI_SUCCESS || prev_len + delta != len) {
-+		efi_st_error("Get/SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/*
-+	 * Append on an existing variable must update VarToFile
-+	 * Our variable entries are 8-byte aligned.
-+	 * Adding a single byte will fit on the existing space
-+	 */
-+	prev_len = len;
-+	avail = efi_var_entry_len(var) -
-+		(sizeof(u16) * (u16_strlen(var->name) + 1) +
-+		 sizeof(*var)) -
-+		var->length;
-+	if (avail >= append_len)
-+		delta = 0;
-+	else
-+		delta = ALIGN(append_len - avail, 8);
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_APPEND_WRITE |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		append_len, v2);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	len = sizeof(data2);
-+	ret = st_runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+				       &attr, &len, data2);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("GetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	if (prev_len + delta != len) {
-+		efi_st_error("Unexpected VarToFile size");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Make sure that variable contains a valid file */
-+	hdr = (struct efi_var_file *)data2;
-+	if (hdr->magic != EFI_VAR_FILE_MAGIC || len != hdr->length ||
-+	    hdr->crc32 != crc32(0,
-+				(u8 *)((uintptr_t)data2 +
-+				       sizeof(struct efi_var_file)),
-+				len - sizeof(struct efi_var_file))) {
-+		efi_st_error("VarToFile invalid header\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Variables that are BS, RT and volatile are RO after EBS */
-+	ret = st_runtime->set_variable(u"VarToFile", &efi_rt_var_guid,
-+		EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			EFI_VARIABLE_RUNTIME_ACCESS |
-+			EFI_VARIABLE_NON_VOLATILE,
-+		sizeof(v), v);
-+	if (ret != EFI_WRITE_PROTECTED) {
-+		efi_st_error("Get/SetVariable failed\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	return check_runtime_variable_enumeration("runtime");
-+}
-+
-+EFI_UNIT_TEST(variables_run) = {
-+	.name = "variables at runtime",
-+	.phase = EFI_SETUP_BEFORE_BOOTTIME_EXIT,
-+	.execute = execute,
-+};
-+#else
-+/**
-+ * execute_setup() - Prepare the non-volatile runtime-variable test state
-+ *
-+ * Create the persistent variable state consumed by execute_verify() after a
-+ * reboot and make the reboot boundary explicit to the caller.
-+ *
-+ * Return: EFI_ST_SUCCESS on success, EFI_ST_FAILURE on failure
-+ */
-+static int execute_setup(void)
-+{
-+	efi_status_t ret;
-+	efi_uintn_t len;
-+	u32 attr = 0;
-+	u8 v[16] = {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
-+		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
-+	u8 data[EFI_ST_MAX_DATA_SIZE];
-+
-+	/* Check if the setup variable already exists in non-volatile storage. */
-+	len = sizeof(data);
-+	ret = st_runtime->get_variable(u"efi_st_var0", &guid_vendor0,
-+				       &attr, &len, data);
-+	if (ret == EFI_SUCCESS && len == sizeof(v) / 2 && !memcmp(data, v, len)) {
-+		efi_st_printf("setup: efi_st_var0 ready, run verify\n");
-+		return EFI_ST_SUCCESS;
-+	}
-+	if (ret == EFI_SUCCESS || ret == EFI_BUFFER_TOO_SMALL) {
-+		/* Delete a stale variable before recreating the setup state. */
-+		if (!attr)
-+			attr = EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+			       EFI_VARIABLE_RUNTIME_ACCESS |
-+			       EFI_VARIABLE_NON_VOLATILE;
-+		ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+					       attr, 0, NULL);
- 		if (ret != EFI_SUCCESS) {
--			efi_st_error("GetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--		if (prev_len + delta != len) {
--			efi_st_error("Unexpected VarToFile size");
-+			efi_st_error("setup: failed to delete stale efi_st_var0, status=%lx\n",
-+				     (ulong)ret);
- 			return EFI_ST_FAILURE;
- 		}
-+	} else if (ret != EFI_NOT_FOUND) {
-+		efi_st_error("setup: failed to inspect existing efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
- 
--		/* Make sure that variable contains a valid file */
--		hdr = (struct efi_var_file *)data2;
--		if (hdr->magic != EFI_VAR_FILE_MAGIC || len != hdr->length ||
--		    hdr->crc32 != crc32(0,
--					(u8 *)((uintptr_t)data2 +
--					       sizeof(struct efi_var_file)),
--					len - sizeof(struct efi_var_file))) {
--			efi_st_error("VarToFile invalid header\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* QueryVariableInfo */
-+	if (check_runtime_query_variable_info("setup") != EFI_ST_SUCCESS)
-+		return EFI_ST_FAILURE;
- 
--		/* Variables that are BS, RT and volatile are RO after EBS */
--		ret = st_runtime->set_variable(
--			u"VarToFile", &efi_rt_var_guid,
--			EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				EFI_VARIABLE_RUNTIME_ACCESS |
--				EFI_VARIABLE_NON_VOLATILE,
--			sizeof(v), v);
--		if (ret != EFI_WRITE_PROTECTED) {
--			efi_st_error("Get/SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
--	} else {
--		if (ret != EFI_UNSUPPORTED) {
--			efi_st_error("SetVariable failed\n");
--			return EFI_ST_FAILURE;
--		}
-+	/* Create and delete a volatile runtime variable. */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_RUNTIME_ACCESS,
-+				       3, v + 4);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("setup: failed to create volatile efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
- 	}
--	len = EFI_ST_MAX_DATA_SIZE;
--	ret = st_runtime->get_variable(u"PlatformLangCodes", &guid_vendor0,
-+
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_RUNTIME_ACCESS,
-+				       0, NULL);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("setup: failed to delete volatile efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Create the non-volatile variable that verify expects after reboot. */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_RUNTIME_ACCESS |
-+					       EFI_VARIABLE_NON_VOLATILE,
-+				       sizeof(v) / 2, v);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("setup: failed to create non-volatile efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Check variable enumeration while the setup variable is present. */
-+	if (check_runtime_variable_enumeration("setup") != EFI_ST_SUCCESS) {
-+		ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+					       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+						       EFI_VARIABLE_RUNTIME_ACCESS |
-+						       EFI_VARIABLE_NON_VOLATILE,
-+					       0, NULL);
-+		if (ret != EFI_SUCCESS)
-+			efi_st_error("setup: enumeration failed and cleanup returned status=%lx\n",
-+				     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	efi_st_printf("Reboot and run 'variables at runtime verify'\n");
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/**
-+ * execute_verify() - Verify the non-volatile runtime-variable test state
-+ *
-+ * Validate the state created by execute_setup(), append the remaining
-+ * payload, confirm the full value, and remove the test variable.
-+ *
-+ * Return: EFI_ST_SUCCESS on success, EFI_ST_FAILURE on failure
-+ */
-+static int execute_verify(void)
-+{
-+	efi_status_t ret;
-+	efi_uintn_t len, append_len;
-+	u32 attr = 0;
-+	u8 v[16] = {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
-+		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
-+	u8 data[EFI_ST_MAX_DATA_SIZE];
-+
-+	/* Validate the non-volatile variable created by setup. */
-+	len = sizeof(v) / 2;
-+	ret = st_runtime->get_variable(u"efi_st_var0", &guid_vendor0,
- 				       &attr, &len, data);
-+	if (ret == EFI_NOT_FOUND) {
-+		efi_st_error("verify: efi_st_var0 missing, run setup first\n");
-+		return EFI_ST_FAILURE;
-+	}
- 	if (ret != EFI_SUCCESS) {
--		efi_st_error("GetVariable failed\n");
-+		efi_st_error("verify: failed to read prepared efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
- 		return EFI_ST_FAILURE;
- 	}
--	memset(&guid, 0, 16);
--	*varname = 0;
--	len = 2 * EFI_ST_MAX_VARNAME_SIZE;
--	ret = st_runtime->get_next_variable_name(&len, varname, &guid);
-+	if (len != sizeof(v) / 2) {
-+		efi_st_error("verify: unexpected prepared variable size=%lu\n",
-+			     (ulong)len);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (memcmp(data, v, len)) {
-+		efi_st_error("verify: prepared variable contents do not match setup payload\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Append the remaining payload. */
-+	append_len = sizeof(v) - len;
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_RUNTIME_ACCESS |
-+					       EFI_VARIABLE_APPEND_WRITE |
-+					       EFI_VARIABLE_NON_VOLATILE,
-+				       append_len, v + len);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("verify: failed to append remaining payload, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Validate the full variable contents after append. */
-+	len = sizeof(v);
-+	ret = st_runtime->get_variable(u"efi_st_var0", &guid_vendor0,
-+				       &attr, &len, data);
- 	if (ret != EFI_SUCCESS) {
--		efi_st_error("GetNextVariableName failed\n");
-+		efi_st_error("verify: failed to read appended efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (len != sizeof(v)) {
-+		efi_st_error("verify: unexpected appended variable size=%lu\n",
-+			     (ulong)len);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (memcmp(data, v, len)) {
-+		efi_st_error("verify: appended variable contents do not match expected payload\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
-+	/* Delete the test variable. */
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_RUNTIME_ACCESS |
-+					       EFI_VARIABLE_NON_VOLATILE,
-+				       0, NULL);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("verify: failed to delete efi_st_var0, status=%lx\n",
-+			     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Make sure the variable is no longer present. */
-+	len = sizeof(data);
-+	ret = st_runtime->get_variable(u"efi_st_var0", &guid_vendor0,
-+				       &attr, &len, data);
-+	if (ret != EFI_NOT_FOUND) {
-+		if (ret == EFI_SUCCESS || ret == EFI_BUFFER_TOO_SMALL)
-+			efi_st_error("verify: efi_st_var0 still exists after delete\n");
-+		else
-+			efi_st_error("verify: failed to confirm deletion, status=%lx\n",
-+				     (ulong)ret);
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	efi_st_printf("verify: runtime variable test passed\n");
-+
- 	return EFI_ST_SUCCESS;
- }
- 
--EFI_UNIT_TEST(variables_run) = {
--	.name = "variables at runtime",
-+EFI_UNIT_TEST(variables_run_setup) = {
-+	.name = "variables at runtime setup",
- 	.phase = EFI_SETUP_BEFORE_BOOTTIME_EXIT,
--	.execute = execute,
-+	.execute = execute_setup,
-+	.on_request = true,
-+};
-+
-+EFI_UNIT_TEST(variables_run_verify) = {
-+	.name = "variables at runtime verify",
-+	.phase = EFI_SETUP_BEFORE_BOOTTIME_EXIT,
-+	.execute = execute_verify,
-+	.on_request = true,
- };
-+#endif
 -- 
 2.34.1
 
