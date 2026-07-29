@@ -1,111 +1,134 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E03C54F51
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 13:25:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AFE2C53200
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 13:40:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 509BA80FF8;
-	Wed, 29 Jul 2026 13:25:16 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R3Y954CI9kWS; Wed, 29 Jul 2026 13:25:15 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F379381016
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785331515;
-	bh=6erGDb/I7mo8A5YXbFEqX8LWSkTVQoK17DXOxGikjNg=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=BzzSCq+3mfDvZsV9qQKxV6yDaWL1JHXOTvqKQeVWEFS8/7L9hWTvcDcUYwyq6EFHJ
-	 aMYtpdOMppcF0N46PiFVgElj03GT4bxqJgFDqYxMtmEIATewgjjO9euwHkwc/fWvZe
-	 4Izwa/bvaeHK4YLfQm/foJd8jFnIMzbZi2ESNXG/1x4lA7wECh23xlOsI6OzleHt8L
-	 UfeKlZXt+HIOtfln9EuDjVKncV5ybclGQ02ynt12s2ef66PSFqug6pP9ig8bmmAweR
-	 Kd4zJXmibCfYKJpR97PAZzyxwmvQaFE+K9y8PRgxxvimhIFegB/z48ab+SJ23UgLRK
-	 8OesdbvqkKObg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F379381016;
-	Wed, 29 Jul 2026 13:25:14 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id C48F62E5
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 12:30:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AB6E940B90
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 12:30:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 949DF40B0D;
+	Wed, 29 Jul 2026 13:40:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i8bpuH1iF4_S for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 12:30:21 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=harsimransingh.tungal@arm.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A0EAE40B32
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A0EAE40B32
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A0EAE40B32
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 12:30:19 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BCBB8494B; Wed, 29 Jul 2026 14:30:17 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A610F82991
- for <u-boot@lists.denx.de>; Wed, 29 Jul 2026 14:30:14 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C24671688;
- Wed, 29 Jul 2026 05:30:09 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.65.220])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 31FBF3F66F;
- Wed, 29 Jul 2026 05:30:11 -0700 (PDT)
+ id lhWxmRXy7iy0; Wed, 29 Jul 2026 13:40:22 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C214240B03
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785332422;
+	bh=+lqUMaElO80jZ6+lPLqxzKYGC6VNkk5BtICmud2eVro=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=w08EM0Vqyt7AycMIwTgd7etUwd0v5Y09s51UteJ9CdA8NdG9US/OkBN9hEsUhLVyC
+	 pxGKqP8T8wrxk5Py+0nz+xXQvi3cD9qGYhv1/EwD+uDNtbW8aQE/gL/0zFFWsIq7lg
+	 kfhGTC0vyoXrePAEXLoJcJsh8HpGt1eu1lzAuKeGrIlGNxmzUDmhEfh6xag4WIca0G
+	 31oIA7fjMFUsWMnNqkSdJ3uFyWS8PoHyPwj7l2ls3sy22yDLPbjxqT5oM4gkylNoCp
+	 GDo1FVYSYxmuAtcSRLVu3/vQ/2nieKvW+OExhItML00NA0JGxFUIK7hI6HILJqaRES
+	 FHIpIUjFX7H6Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id C214240B03;
+	Wed, 29 Jul 2026 13:40:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4C5EC194
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 13:40:22 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3DE0F40267
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 13:40:22 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TAY5ztEeATYD for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 13:40:20 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 4892140074
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4892140074
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4892140074
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 13:40:20 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c197e7e4e94so163022766b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 06:40:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785332418; cv=none;
+ d=google.com; s=arc-20260327;
+ b=C5zmPajcOaqIypx7BadMI83Pk2enRzAmPqOytN+EMCI4Fh2MqwlwUKQo6yfzKoRUA3
+ x8ChAarf28STTMhkvr7X1nkQy36RCBrjNTe1p/29aSoaVZmpbYV70rmv2Rqr4mR8wDVt
+ okNQ+MIjEhTgQSJf6tIxnuq7qpwbzGu3KEaKWQe9G/AxFszXUSJryctiS3SugecjKgDD
+ eJz6o97rw67r1ap2lIu5b4jH4/38uUsf/dlJjLGQM5vOCO0pC1fxQPhW43YC7loyI9YF
+ a4SliTcjVfHAyZzolIuaGYfZQsSTTuHY36oVcEZDWbqBOoK/HYc0CuhLJ2ZadBR08Svn
+ NEWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=+lqUMaElO80jZ6+lPLqxzKYGC6VNkk5BtICmud2eVro=;
+ fh=bHXsLXH0mlNUrLRanskZbIyubYUoA6z721vzsjMwAUc=;
+ b=PDlFnWm4G0oLuqf7FoljH8qJktpjlyMuRvlT9XXmJhNPDA7G4J5tIa4UErFdCy0uNr
+ TA3SaVlS8uP8PVFlv5W6z3QN2Us9jejqAZrnN+yjkGfZQPp2JV8SO+GuiOs1aTFqw7yR
+ 4zXYHD61lBcAfZy+DP+wyltT0GntX/qEC1DSoD7rSZv87XoixiDSBtVPzQkhAFECPezJ
+ BUwSCzhRmV3PX5x4obALC3xtjXbzAPYJJr1Br0zfmHebjPa2t9aZJ3a9WKW7qett9JFN
+ mHVln0bFx4X6oYyHukSiTIBh81LpRWYEJTLHpLLRwQgMmWU1QDLIuNUXNIBfFN7X12uX
+ 9nMA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785332418; x=1785937218;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=+lqUMaElO80jZ6+lPLqxzKYGC6VNkk5BtICmud2eVro=;
+ b=fn+nlk97PELGEC+hMwxfnP1T81nTd56dRS7CQx7OsZtN+dGtzbeUYi5hy7Ozk81G/V
+ BVD068KSNQQZZZxyOcmkitv9AvjwO7j8Uqu3sF3upT35GsyYeO/2X/MzY10p1iDiVBty
+ GCQXUoXLf2GrY7fmeUZGxBu9LK/il0mmvesNfov+Z8qSdk6oDqARWavpdiUmKk5cs4gB
+ zHKs/zD/EV/YDMhsczWu8c6HOFlKWeN8MV4Q+atL/wVlQxS9KDyqEnHk5gpupWGKSGHV
+ DAEZ5MO6YjqOdFOEYE4th8yNu3w5tCfEt714uNiJyr1XNP5Cpf2HOSFG1chEDlHMNOpj
+ 3hbA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq3EBucKojkwgSMbhPsmhJa8weplpX1i6B4ZzU5aaw+UkrlF74J+sYMJGAwvVdvD4/3QLnXxdo=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yy3GGDv0+nvyujj2uonA5sKbG05MflevSErmT25pxVqJlljdMQm
+ lk/+VgnWLBx78/wjan4Kt9m6lwe9qLADIQTRAD4NvOnD3GTavyIAIqHM3K8T1N50j3B4a1bbnbZ
+ CCB4aAoBpH3/4B7Po9Nt2f3+zvYlrdFN/gINPKzIV
+X-Gm-Gg: AR+sD13dYbv4tLlwXdlqEl+JkwykTtzIKkh2MItaU3hoebalqCaHMh7cCCE2nvQ31cq
+ AxdghC1whEuHjXJDDiDDDyIlKVAxjuSTj26wEfnhJqmdKoS+pUQhh3JLTgqQIjf4NamSCcJ8VE7
+ jsimOON8NiZjN2pjhP09chZYO8ZCy06gbSlDUiX41uCJ2NIs+FBJsEaGQNrwXada9BajyuqwCtW
+ uEu5fNVN6vTANZojwDXJsgGSNXQWg5MQ21vyz/5oiNjwYwSFmPw3eepUu3zrnE69OWK7Zx6MsmI
+ pJKNfZcX8ZQlQa7VrnVKrAtYGZcKhxDzTErC2jaoEFw=
+X-Received: by 2002:a17:907:9616:b0:c16:9edc:612e with SMTP id
+ a640c23a62f3a-c1f71e88c37mr372760966b.3.1785332418047; Wed, 29 Jul 2026
+ 06:40:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 00/10] arm64: FF-A runtime transport for EFI variables
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-In-Reply-To: <94efd7bf-e5b9-434b-8e26-e2f9c0c3b579@gmx.de>
-References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
- <94efd7bf-e5b9-434b-8e26-e2f9c0c3b579@gmx.de>
-Date: Wed, 29 Jul 2026 13:30:05 +0100
-Message-Id: <178532820557.3772396.11113090535177986493.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-X-Mailman-Approved-At: Wed, 29 Jul 2026 13:25:14 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=arm.com; s=foss; 
- t=1785328213; bh=+LCno2u+DN+0GyLBLTn1b3SdA7jxck1pztvsVLg6/lU=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=cOXX212QqoifvRH9j3TpE2rODEzkDl0nYd6UR/b/VLBVGgi/D3NRkqWsrVX1+fk2B
- jkOhjOP9uVZeNk/NbzB23NWJbJWN7JYhcM/D+tDEO33f00D1cQ1f1CD3z+Y74yIMqL
- 0fR93cdFy4BASo6deV7GZ7qg2coEdStR19u2HcKE=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+References: <734d54aa-6523-4c2b-ba3a-a51b063a340e@gmail.com>
+ <f7ed1756-6018-4b11-8170-7e6b363295b3@gmail.com>
+In-Reply-To: <f7ed1756-6018-4b11-8170-7e6b363295b3@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 29 Jul 2026 07:40:05 -0600
+X-Gm-Features: AUfX_mzk_0sAiLB1iskYuZXlkC9pzZ5OM4Pgt5Nr992dVWQ-n34GH594ytCZ4uw
+Message-ID: <CAFLszTg_fik=unDGthk4DKGQPtpRiXce6qzfmfm2ZTFfK6qy7w@mail.gmail.com>
+Subject: Re: [PATCH v2 01/11] rockchip: scripts: remove rkmux.py
+To: jbx6244@gmail.com
+Cc: u-boot@0leil.net, kever.yang@rock-chips.com, sjg@chromium.org, 
+ trini@konsulko.com, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1785332418; x=1785937218;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+lqUMaElO80jZ6+lPLqxzKYGC6VNkk5BtICmud2eVro=;
+ b=mx+e0iUOs1PGHXNRxJj+ctPaHIGVJr/zdAi7/gQnUQwZrakpM0ginF/w2xR13YWOE5
+ Z9BPITLJYhV7ihSrVU+Spk5ZBBlQpf8Cb9XUELBBD22btmcA1wkTtYXbchMXHH33V8rz
+ bLr/FBBvzwoLYq9dRsKNiwcUvca9hck8FfBEU=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=arm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- spf=fail smtp.mailfrom=arm.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=foss header.b=cOXX212Q
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=arm.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=harsimransingh.tungal@arm.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=arm.com header.i=@arm.com header.b="cOXX212Q"; 
- dkim-atps=neutral
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=mx+e0iUO
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -120,175 +143,20 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-12 08:33 +0200, Heinrich Schuchardt wrote:
-> On 6/27/26 16:44, Harsimran Singh Tungal wrote:
-> > Hi all,
-> > 
-> > This series adds FF-A runtime transport support so EFI variable runtime
-> > services can communicate with the secure world after ExitBootServices().
-> > It also extends tests, docs, and board configs to validate the runtime
-> > path and keep boot-time behavior aligned with the runtime flow.
-> 
-> Hello Harsiman,
-> 
-> Unfortunately this cover-letter lacks some background information needed 
-> for reviewing the patch series.
-> 
-> Why is this new transport needed? We already have a transport for EFI 
-> variables to the secure world via OP-TEE (see CONFIG_EFI_MM_COMM_TEE).
-> 
-> Where is the EFI variables specific FF-A message protocol specified?
-> 
-> Is there a Linux driver that can communicate via this message protocol?
-> 
-> How can the transport be tested with QEMU and Linux?
-> 
-> Best regards
-> 
-> Heinrich
+On 2026-07-28T06:51:38, Johan Jonker <jbx6244@gmail.com> wrote:
+> rockchip: scripts: remove rkmux.py
 >
+> It's not U-Boot's core business to host a script
+> to create enums from datasheets where it's unknown
+> that it has ever been used for any Rockchip SoCs sold
+> after rk3288. We don't need it to compile, so remove this
+> relict from the past.
+>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+>
+> doc/README.rockchip |   7 --
+>  scripts/pylint.base |   1 -
+>  tools/rkmux.py      | 218 ----------------------------------------------------
+>  3 files changed, 226 deletions(-)
 
-Hello Heinrich,
-
-The motivation is that CONFIG_EFI_MM_COMM_TEE covers the OP-TEE
-transport, but some platforms expose the MM variable service through an
-FF-A secure partition instead of OP-TEE. On those systems U-Boot can use
-FF-A before ExitBootServices(), but the normal driver-model FF-A path is
-not available afterwards. This series adds a resident FF-A runtime
-transport so EFI runtime variable services can still reach the MM secure
-partition after ExitBootServices().
-
-There is no new EFI variable specific FF-A payload protocol introduced
-by this series. FF-A is used only as the transport. The payload remains
-the existing MM communication buffer used by StandaloneMM variable
-services.
-
-Linux continues to call the firmware EFI runtime services through the EFI
-runtime service table. U-Boot then forwards those calls to the MM secure
-partition over FF-A.
-
-For testing, the U-Boot side is covered by sandbox FF-A runtime transport
-tests and by the bootefi runtime-variable selftest. A full QEMU/Linux
-test needs a secure-world setup with an SPMC and an MM secure partition.
-
-Thanks
-Harsimran Singh Tungal
-
-> > 
-> > Changes in this series:
-> > - Add EFI runtime-safe memset helper and FF-A runtime transport support.
-> > - Implement FF-A runtime communication in the EFI variable TEE backend.
-> > - Enable EFI runtime variable operations over the FF-A transport.
-> > - Add sandbox runtime transport tests.
-> > - Extend EFI selftests for runtime variables and bootefi selftest config.
-> > - Document the FF-A runtime transport and selftest behavior.
-> > 
-> > Changes in v3:
-> > 
-> > Address Simon Glass's review comments:
-> > - Move FF-A ExitBootServices event registration to the end of probe and
-> >    clean up RX/TX buffer handling on failure.
-> > - Rename FF-A runtime-context helpers to the ffa_runtime_context_* form.
-> > - Rework FF-A/MM cache maintenance to cover only rounded request and
-> >    response ranges.
-> > - Add SetVirtualAddressMap handling for the FF-A shared buffer.
-> > - Document FF-A shared-buffer ownership and alignment assumptions.
-> > - Add EFIAPI to the TEE runtime GetVariable and GetNextVariableName
-> >    entry points.
-> > - Tighten sandbox FF-A runtime tests and reset runtime state between
-> >    test cases.
-> > - Update FF-A and bootefi documentation for the runtime transport and
-> >    split runtime-variable selftests.
-> > - Rework commit messages to drop redundant information.
-> > 
-> > Address Ilias Apalodimas's review comments:
-> > - Keep efi_var_common.c unchanged and drop commit 6 from v2 patchset.
-> > - Rename the TEE/FF-A runtime handlers to the *_int_runtime form.
-> > - Remove log_*() calls from __efi_runtime FF-A/MM communication paths.
-> > 
-> > Other:
-> > - Fix FF-A memory-share sender_id to use the runtime private endpoint
-> >    ID after rebasing.
-> > - Fix the expected QueryVariableInfo() return status for the
-> >    TEE-backed runtime selftest path.
-> > 
-> > 
-> > Changes in v2:
-> > 
-> > Address Simon Glass's review comments:
-> > - Fix efi_memset_runtime() style, declaration, and byte cast
-> > - Tighten the FF-A runtime context failure path, clean up arm-ffa-runtime.c
-> >    style issues, and move ExitBootServices event registration earlier in probe
-> > - Add shared-buffer bounds/alignment checks, and tightening comments/kernel-doc
-> > - Document the FF-A shared buffer cacheline-alignment requirement and add
-> >    BUILD_BUG_ON() checks for the address
-> > - Cache attributes before the shared buffer is reused, moving the read-only
-> >    check earlier, and split the u16_strsize() related change in separate patch
-> > - Reword commit messages for the runtime helper relocation
-> > - Rework the non-volatile runtime variable selftest into setup/verify phases
-> > - Extend the sandbox FF-A runtime tests with no-context coverage,
-> >    runtime-context reset, and separate errno-mapping coverage
-> > - Refresh the FF-A runtime transport and bootefi documentation
-> > - Drop patch 12 in v1, as ffa_mm_communicate handles both runtime and
-> >    boottime capabilities in v2
-> > - Squash patch 8 and patch 9 from v1
-> > 
-> > Address Ilias Apalodimas's review comments:
-> > - Reuse common MM SP error mapping for boot and runtime paths
-> > - Rename runtime-phase tracking to reflect the ExitBootServices transition
-> > - Collapse duplicated boot-time and runtime MM communication helpers into common
-> >    implementations
-> > - Keep the arm64 cache-maintenance path runtime-safe
-> > - Move FF-A shared-buffer runtime memory-map registration to the end of
-> >    variable-service initialization
-> > 
-> > Link to v2: https://lore.kernel.org/u-boot/20260514124924.1804332-1-harsimransingh.tungal@arm.com/
-> > Link to v1: https://lore.kernel.org/u-boot/20260424173151.371134-1-harsimransingh.tungal@arm.com/
-> > 
-> > Harsimran Singh Tungal (10):
-> >    efi_loader: add runtime memset helper
-> >    arm-ffa: add FF-A bus runtime support
-> >    efi_loader: add FF-A runtime support in EFI variable TEE driver
-> >    efi_loader: enable EFI runtime SetVariable()/GetVariable() using FF-A
-> >      transport
-> >    charset: mark u16_strsize() as __efi_runtime
-> >    corstone1000: enable bootefi selftest
-> >    efi: selftest: add runtime variable tests with non-volatile storage
-> >    test: dm: add sandbox FF-A runtime transport tests
-> >    doc: arm64: document FF-A runtime path for EFI variables
-> >    doc: bootefi: note two-phase runtime variables selftest
-> > 
-> >   arch/arm/cpu/armv8/cache.S                    |   8 +
-> >   arch/arm/cpu/armv8/cache_v8.c                 |  13 +-
-> >   arch/sandbox/include/asm/sandbox_arm_ffa.h    |  16 +-
-> >   configs/corstone1000_defconfig                |   3 +
-> >   doc/arch/arm64.ffa.rst                        |  88 ++-
-> >   doc/usage/cmd/armffa.rst                      |  11 +
-> >   doc/usage/cmd/bootefi.rst                     |  31 +
-> >   drivers/firmware/arm-ffa/Kconfig              |  11 +
-> >   drivers/firmware/arm-ffa/Makefile             |   4 +-
-> >   drivers/firmware/arm-ffa/arm-ffa-runtime.c    | 294 +++++++
-> >   drivers/firmware/arm-ffa/arm-ffa-uclass.c     | 114 +--
-> >   drivers/firmware/arm-ffa/arm-ffa.c            |  16 +-
-> >   drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  49 +-
-> >   include/arm_ffa.h                             |  16 +-
-> >   include/arm_ffa_priv.h                        |  22 +-
-> >   include/arm_ffa_runtime.h                     | 191 +++++
-> >   include/efi_loader.h                          |   3 +
-> >   lib/charset.c                                 |   2 +-
-> >   lib/efi_loader/Kconfig                        |   4 +
-> >   lib/efi_loader/efi_runtime.c                  |  20 +
-> >   lib/efi_loader/efi_variable_tee.c             | 726 +++++++++++++++---
-> >   .../efi_selftest_variables_runtime.c          | 715 +++++++++++------
-> >   test/dm/Makefile                              |   3 +-
-> >   test/dm/ffa.c                                 |   6 +-
-> >   test/dm/ffa_runtime.c                         | 123 +++
-> >   25 files changed, 1997 insertions(+), 492 deletions(-)
-> >   create mode 100644 drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> >   create mode 100644 include/arm_ffa_runtime.h
-> >   create mode 100644 test/dm/ffa_runtime.c
-> > 
-> 
-> 
-
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
