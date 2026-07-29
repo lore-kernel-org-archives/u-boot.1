@@ -1,120 +1,127 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E471C53219
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 15:58:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDEFC53200
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 16:18:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BCEEF80C81;
-	Wed, 29 Jul 2026 15:58:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2CF7A60667;
+	Wed, 29 Jul 2026 16:18:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5xTi-xw379S1; Wed, 29 Jul 2026 15:58:44 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ga1yfketgb-F; Wed, 29 Jul 2026 16:18:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CF0E980B39
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 82798605E5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785340723;
-	bh=5HsEGzXzYkaUIcTW+IbHlQNVl7X9SYA1uohkDe4e/zs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785341883;
+	bh=m6i3qURXc7jN8FH9yiK2RdV2TI7wihyaV97DPEE8ZDk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=K78V/Go4vPY9MelTQhHjst0DMNqm7FCdCTv1RLwpkdc5qdISGei+L4A4W0CE1VU3K
-	 7ztmIvvIw0l+hRqsLv4BjbE5/H4HYdfaNqKpyAekw8GkXq3Prw3Ls5sfwWduESzjpK
-	 yDGn1xdE5O1KrCw9O6VLFPpWfcmVxB0FXq7A7d3XscZWkIZzd3Rv+er3AGOEhNxyoo
-	 fl3d+pWTeUC7UwVLtkVOm+wzMVfN/zW6OsqhNhy374XinH6LgxacD03XM/9Q1p+7eP
-	 tujbyypOw62V77HwtHPkQlrpzSW7WerpMlcn3VFuVJHEEkYfHUmHBuwuSi3k/zhrXT
-	 tpYVYlLx2EoIw==
+	b=sGl1vPSATXcERHXMalaIVuOuxW9l7jDhAlR83Qf2AgpXdKV8LcSOWaOv0ei8HADlW
+	 uBrXFhIcLzNnEwC0q7ccTh0hiJrdxUbESrlhPCu+Nf6LvxTyDlSzyzCIKa12Q5U/KV
+	 ZCafO9f/WYK2CWfbOmmt4yZSQ515wZvD9qdK1GLarQplWfUswbTdjU+X2MxbNtMcxt
+	 QssCCmH1pmdmbuaeG014BF5VkrrvHCIPDEWPMFuM6uSOdRRIoo6lgRM0r2kKGhaLOf
+	 037UZ0A5KgR0GM3NaY0ZU6yaeRsLX37HfN2Gjp5u9hNdxFoAIntac/DE9nB8Ie42WX
+	 IXqXWktjXHdlA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CF0E980B39;
-	Wed, 29 Jul 2026 15:58:43 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2F9B8788
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 15:58:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 82798605E5;
+	Wed, 29 Jul 2026 16:18:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 09810788
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:18:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2165C80C81
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 15:58:43 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id EF857605E5
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:18:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HYa1ane9bgNM for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 15:58:42 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
- helo=sender4-op-o12.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 230D580B39
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 230D580B39
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 230D580B39
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 15:58:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1785340707; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=WMvxDFlpDXgFPffHMyppZsFtRpSGDaLjhdDy45QOeN803wrru8/768WgipDigTu6gRV3kCHyOUzoC3AEpHMJ7OVDMMEbv52A8//jPnDqcawLgoOKMbUmn2LTfPFj+2lUzGXI5nOlvXvpldv9ppoQfi90MDDNxVRNG0omD0OzbGQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1785340707;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=5HsEGzXzYkaUIcTW+IbHlQNVl7X9SYA1uohkDe4e/zs=; 
- b=P41CsXm7zc5C8UupxPd475/xwPomkkkass7cvpkJtxf207nTgX9W6+A1mDEvRABi3Qgfpl//oo+8F/xF489lyKWovGS1CkZiwnxFQeq6tmY31PLwOgWsF0Oba/zdIQuS9bziI4EWDLCnTfxYuvjE2RM4w2WYHKiz4SLmC7/nhPs=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 1785340701692939.8638733419027;
- Wed, 29 Jul 2026 08:58:21 -0700 (PDT)
-Date: Wed, 29 Jul 2026 15:58:02 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
-Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Guodong Xu <guodong@riscstar.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
-Message-ID: <amojCjayE5-wI7iT@pie>
-References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
- <20260727-m4-v6-6-2f58566d48ca@riscstar.com> <amdGSBKT4iRzuh1P@pie>
- <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
- <ameQUN3zlD0Ei8Jm@pie>
- <CAH22mJyMqTgRLqyfVZGgSHHNK7XnBTnrkY-R1ix5DN+oiBDEbg@mail.gmail.com>
- <amhyAULw9Wovuo3z@pie>
- <CAH22mJyyExBuUrDNgRg=WU4f6RkN7M0QhtuUAgXiUf8b84TaCQ@mail.gmail.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id t5gYeY28KoLa for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 16:18:01 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::c2b; helo=mail-oo1-xc2b.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BEDB8605B1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BEDB8605B1
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BEDB8605B1
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:18:00 +0000 (UTC)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-6ab021f1daeso460026eaf.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:18:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785341879; x=1785946679;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=m6i3qURXc7jN8FH9yiK2RdV2TI7wihyaV97DPEE8ZDk=;
+ b=fuXlsU1eaRISbfON6kQWGJm8ReUmwDzsc/H6APmxuByI4yitC+lbFV1boSeNYX94Ef
+ F5XjJlPNby4WTEF09VGV8h0UP+GANyRzgebtMd2fdkTfuNCiYJU73UqC7LAQLWRW2Oo9
+ K46LLUFUYtQ/08GrEKs0QnbdpX5iAdiR6zqEoYB/sUG3OX6QGF0VIrty62fH87u5JbMm
+ A/e9VVOZviOHKByRjp/ODq+yFJ1JJktOg+XckmJpWX1C7V2nh3FhY1Rxcsgrk8K0yAnY
+ OUWm4GLR3w/7AuVk6I375ubYel1c4i5wC51OygWcplYHpv48eJgVSHJyVKqocmVazOuB
+ SB0A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqYCWf9Y4yBFHxhAzoNuIs7Rf7BWLlYODOv8g++BoaLcjkCshXbxmHl8f7qEQqEjhLVWsfuFoQ=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzkAd3CTCg5pRDTmuzdFUM3MMJ2sM1C1xfELUv/Dd4/EhyD98/M
+ H7KbeTL/KerpMzAL+1dB5it+IFZ78UM5ikX3elPteDQNFQJvBcuHlLA9hw7MYioPSZ8=
+X-Gm-Gg: AR+sD123a1XWj9JzXSIUx6ZclXeKCpN6wqWXh22JkzELOuba1sax4oOeE4NaIzICc91
+ Gc3p6O9XQBDkp/Mc9CtM5oThHStcnnYHTlp0std0LMPsxyvePJX/Bmikt9glImydcp/hB8irc7v
+ UiVDTzwQ/nbw7YwaMVXUDhkLAry9/1jsG3qTGLBCBogSMYk0+TJY+GvCjKRB7U7+rtgfreb5M24
+ Of0eiVpL4MDt6x4nAHNW52M0DulAPiwLO/lP3rmLoEnYsR+Pr6tZQ9EwpiU2wKsbJRECO4lA2eH
+ u1kQI5+HdDOhqaOAdseDu7Hn63Dvc1uXnHx5qLLDc8Fc0fT1zyxzG68xv1puiki9E0ajQcI0vmB
+ t7gBleqAeTVp40nb1eWfidN1zMSrMvnEssKe1HJVAgkUtXJU7eIaVmNT8mCFGNuak3iMQ27lJ9N
+ IVQ02ipHY2/JL/vClDKW3vpgJtvUfFtJuBOU3VjIE5RrMrs8HrHAEeYKFV/fubtvQ=
+X-Received: by 2002:a05:6820:4df3:b0:6aa:de29:647 with SMTP id
+ 006d021491bc7-6acb61ecb78mr183673eaf.29.1785341879328; 
+ Wed, 29 Jul 2026 09:17:59 -0700 (PDT)
+Received: from freyr.lan ([2600:8803:e7e4:500:3096:ee5f:6f57:afe1])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-45886469a49sm2675401fac.6.2026.07.29.09.17.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2026 09:17:58 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.u-boot-project.org, Carlo Caione <ccaione@baylibre.com>
+Cc: David Lechner <dlechner@baylibre.com>, Lukasz Majewski <lukma@denx.de>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>, Tom Rini <trini@konsulko.com>,
+ Sam Shih <sam.shih@mediatek.com>
+Subject: Re: [PATCH v2 1/2] clk: mediatek: probe parent providers on demand
+Date: Wed, 29 Jul 2026 11:17:42 -0500
+Message-ID: <178534172705.998601.16883937333293973375.b4-ty@b4>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260724-ccaione-upstream-fix-clk-probe-v2-1-ebcef2e94e9d@baylibre.com>
+References: <20260724-ccaione-upstream-fix-clk-probe-v2-1-ebcef2e94e9d@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH22mJyyExBuUrDNgRg=WU4f6RkN7M0QhtuUAgXiUf8b84TaCQ@mail.gmail.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/285.322.57
-X-ZohoMailClient: External
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1785340707; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=5HsEGzXzYkaUIcTW+IbHlQNVl7X9SYA1uohkDe4e/zs=;
- b=FtXgFdbjWENSmnNUYFcxPUpuTu8KFULIXL5TWyUZsZweU/SNNG6lqdY8MJui/gWw
- LzMaYhD5gbamnYSo3f9uOSyufDZ15uiR1Z74pETYi6aKUcQqZ5BbhxYGxpL7pussPFY
- SHKd/Rh3xqwVgfhXZfhGz3ZZGadOspCdBI1zi7gk=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=FtXgFdbj
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1785341879; x=1785946679;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=m6i3qURXc7jN8FH9yiK2RdV2TI7wihyaV97DPEE8ZDk=;
+ b=QlwA9EorDp1Z0+Dqrexx+ft+PnXY1AEP/xWJYlBrHUbqmMw17lzN169bRp1D9TvtIK
+ KsnIHPRzcz2sFtrHARf4bwRxYQNVCX0pTT2KfnfXvY6l4wrrmZJBCUeirkqSzpr81LpV
+ YhwskUkkBQuZGO1dB8YlEGRdMHoefuG7EN7m9VF94XGc0Ihg18ckskM9UTJmC7hhCfAm
+ lO0La9cNzCI5Ru+KwYpnP1AvkIcZa6p6KYu0Yasd7AFRYFc6QCqu9wvl+KPQiqarn4q0
+ WtaLefQ3Tk8jVwy51iDTwOdioxaNAyYgEXRUUj1SED9hGcaXeO4FxWmB6ArEYmDbAOr3
+ PZdQ==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=QlwA9Eor
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -129,109 +136,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Wed, Jul 29, 2026 at 10:05:14PM +0800, Eric Chung wrote:
-> On Tue, Jul 28, 2026 at 5:11 PM Yao Zi <me@ziyao.cc> wrote:
-> >
-> > On Tue, Jul 28, 2026 at 09:04:52AM +0800, Eric Chung wrote:
-> > > On Tue, Jul 28, 2026 at 1:08 AM Yao Zi <me@ziyao.cc> wrote:
-> > > >
-> > > > On Mon, Jul 27, 2026 at 09:08:52PM +0800, Eric Chung wrote:
-> > > > > Hi Yao,
-> > > > >
-> > > > > I'm not familiar with the policy for syncing DTS files from the Linux upstream.
-> > > > > Could you clarify how this script works?
-> > > > >
-> > > > > Does it sync all DTS files from Linux upstream at once, or is it
-> > > > > possible to sync
-> > > > > only the Spacemit DTS file?
-> > > >
-> > > > update-subtree.sh cherry-picks a commit from the upstream, or
-> > > > merge an upstream tag into the subtree. Cherry-picking SD-related
-> > > > commits from Linux upstream suits for your case.
-> > > >
-> > > > > If I choose to sync only the Spacemit DTS file and include it in my patch set,
-> > > > > would that cause conflicts later when others try to sync all DTS files?
-> > > >
-> > > > Tom synchronizes the dts subtree with Linux upstream irregularly, there
-> > > > should be no conflict or relatively small ones if you cherry-pick the
-> > > > changes, while adding downstream nodes in *-u-boot.dtsi might suffer
-> > > > from duplication, too, during synchronization.
-> > > >
-> > >
-> > > The process is a bit complex. Since my main issue is that the DTS
-> > > files are out of
-> > > date, would it be simpler if I just copy the relevant Spacemit DTS
-> > > files directly
-> > > from the Linux upstream into the dts/upstream folder?
-> >
-> > The answer is simply no.
-> >
+On Fri, 24 Jul 2026 10:36:05 +0200, Carlo Caione wrote:
+> MediaTek clock trees can reference parents provided by a different clock
+> controller. The provider registry is populated when each controller
+> probes, so an early consumer can request a parent before its provider has
+> been registered.
 > 
-> OK. I'll keep using my own overlay DTS file.
-> I tried upstream DTS file. It only gave me more bugs. I could switch to
-> upstream DTS file when Tom syncs it.
+> When lookup misses, find the MediaTek clock device whose operations and
+> clock-tree type match the requested provider, then probe that device.
+> This removes the probe-order dependency without probing unrelated clock
+> controllers or treating a driver's bind callback as a type marker.
+> 
+> [...]
 
-So first of all, please note switching to upstream devicetree doesn't
-mean you must remove all the dts overlays, you could keep small pieces
-like these adding bootph-pre-ram properties, which are
-bootloader-specific and might not get upstreamed in a short period.
+Fixed some merge conflicts while applying.
 
-And I noticed there have been quite a lot code in the overlays, like the
-PMIC code, thus changes to overlays might be huge when cherry-picking,
-if it's the case, this patch is then acceptable, but please mention it
-in the commit message.
+Applied to mediatek-for-main, thanks!
 
-But, if switching to the devicetree with cherry-picked patches for MMC
-leads to bugs, there are likely ABI compatibility issues in your driver,
-which would persist even after the synchronization with upstream v7.2
-tag. Please fix them. From the very start, it's agreed compatibility
-with Linux devicetree ABI is important[1].
+[1/2] clk: mediatek: probe parent providers on demand
+      commit: 976b12414c18cb7d601f073dcb2282bac1924197
+[2/2] clk: mediatek: drop probe-after-bind provider setup
+      commit: bf75f80082a194a95eb2aef039a746c5765ba8d1
 
-So here's my NAK for this series, including v7 of it.
-
-Thanks,
-Yao Zi
-
-[1]: https://lore.kernel.org/all/20260429-glare-anybody-16c98d01184e@spud/
-
-> > > > > Best Regards
-> > > > > Eric
-> >
-> > Regards,
-> > Yao Zi
-> >
-> > > > By the way, please avoid top-posting if possible.
-> > > >
-> > > > Thanks,
-> > > > Yao Zi
-> > > >
-> > > > > On Mon, Jul 27, 2026 at 7:52 PM Yao Zi <me@ziyao.cc> wrote:
-> > > > > >
-> > > > > > On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
-> > > > > > > Add the SDH0 controller node and its pinctrl groups to the u-boot
-> > > > > > > overlay. The upstream DTS only contains the eMMC node; the SD card
-> > > > > > > controller (sdhci@d4280000) and its MMC1 pinctrl configuration are
-> > > > > > > missing. Place the new node inside the storage-bus via path-based
-> > > > > > > merge so it inherits the dma-ranges from the parent bus.
-> > > > > > >
-> > > > > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-> > > > > >
-> > > > > > Please cherry-pick upstream devicetree changes from Linux upstream with
-> > > > > > tools/update-subtree.sh instead of adding our own copies. Changes for
-> > > > > > k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v7.2.
-> > > > > >
-> > > > > > Best regards,
-> > > > > > Yao Zi
-> > > > > >
-> > > > > > > ---
-> > > > > > > v5:
-> > > > > > > - Append power source field on eMMC/SD pinctrl.
-> > > > > > > v3:
-> > > > > > > - Fix SD pinctrl as uhs.
-> > > > > > > v2:
-> > > > > > > - Use vmmc-supply as vqmmc-supply on SD node.
-> > > > > > > - Add alias of mmc0 and mmc1.
-> > > > > > > ---
-> > > > > > >  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 ++++++++++++++++++++++++++++++-
-> > > > > > >  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 ++++++++++++++++++++++++++++-
-> > > > > > >  2 files changed, 173 insertions(+), 4 deletions(-)
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
