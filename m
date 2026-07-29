@@ -4,141 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A655EC53219
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 07:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AFB0C53219
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 07:28:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4AB6981130;
-	Wed, 29 Jul 2026 07:10:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EC7C581134;
+	Wed, 29 Jul 2026 07:28:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Wf8nrDwMm2_O; Wed, 29 Jul 2026 07:10:41 +0000 (UTC)
+ id T2kFT43AUZ2t; Wed, 29 Jul 2026 07:28:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 58AA981119
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E5AA881129
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785309041;
-	bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785310084;
+	bh=vEvnD5g1PdtQz/ZQgNyJq85Vn5Cq8/zLbpdN+jCBl0c=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ubedxnI6QLEgm/TNu7LLCNUw033az/kkz9jpPBmLcNpP52iR1X+8OUmTyI4lv8/pp
-	 35G4uBeB3OnNeh1mw1X9/XdDj0buJuDWi3O8fOaJlSLyr5Sq1kQFyAB+Ddoiy5MoYi
-	 Z7JrKX/b5nktaf9bmswRU7ugWvhp/HE9d7QbeV7sXs+ynoHlyel01ZtEeaKxm+Cbd4
-	 r0Acj7Arm87Wt9L6rvEAuD94BWy6xpC9ljuwuzzbuScE+trBTtPxD+J6gPdAK+Eu3T
-	 g4E6oBjeOAg60jQZxXLeLOfLU0HZGwDFPz/2Oxc4HYDY9CzQOgUBwdAWhLT57z+GBZ
-	 r/HJMAbmGzrwQ==
+	b=L0thh8GyZyEk5levFe/g/XmsZW8uSmq2rlZiXs9qG3+6A2IBx1R94iLTDqOQm5BDQ
+	 r5QAbKZT4S0XoHSqm7kJvS5bBp1D8pVve8dUrnvTixLto4YustiOSekrKxhhbO9kO3
+	 En68GwMkq48ooj2vIoh0lVtW9qn9ufhsD7KcrA7nGNeIPzdXeDXZztXdM69fBWyrD7
+	 YslFLwlwEqbEEakFWOMWgmlJVn1L0iGRhco8ReNN0dAxiiSeASC6/VCmF/oQ8w8fFl
+	 wBLGuqT1B2rLjyv9hF8Kq5r2L3VW/56YNHViRKlh2mikGwBoE5NSY4MwJymp8I/OxM
+	 YwA/fvOdTZqLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 58AA981119;
-	Wed, 29 Jul 2026 07:10:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DFCC145B
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:10:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E5AA881129;
+	Wed, 29 Jul 2026 07:28:03 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3731D45B
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:28:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D1F6D40A3B
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:10:39 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2C93A40132
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:28:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ns04_FGsmKCT for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 07:10:38 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f29; helo=mail-qv1-xf29.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 485B140B20
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 485B140B20
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 485B140B20
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:10:38 +0000 (UTC)
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-907ae240ac3so3148046d6.0
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 00:10:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785309037; cv=none;
- d=google.com; s=arc-20260327;
- b=B7494bfztvPEL7fO00fudtlTHcI8iVl4VWd6ofVy88/U3xW41IcSLgZM1OGV38NdUD
- zDKPasIHy7MHJGd7JsREE8kd4mRv4Y+YToTkaJSNuZTUhISrINH8uAn07n7QW6+4+Fxa
- KCJs64bTqwOwrym5sE/h3591DIg46A4odfv6eEhTadDzFtkDMQMGfw6CumTxBMGkUPoe
- TK4XSI7L6R6HWLIF743GdLlGZun0e4UNsfElCxR3PEyaVJzhVBT4cqJ1pNSttjfuarR+
- +Voh/YqV33tkEawgMjLXReQhP2ValEi9TtVPtQVkLVr5aAkKU27paV9Z9RCzA6pubR1V
- EMIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
- fh=aW1zuOF/2zGjmUXogeV5yF2BqU/n7q0kYg35J4ab9mU=;
- b=sumXqmta/tv+wYzzNMP0RQoYpN5Ii50pw0AGg2KzoUpS+CnKh+J4WdTWHhX+jinHLl
- v/A7HYqiWIpH/SBwUONsH1j02r5rhaS2W13GTNDb2sDwPmPnQxUUo2gM+brBzc3QaMaQ
- WTnyJLbp4EuyUoBjMaUhWc/zeYSKJa7jlWR5WY0gFMC/7SimoOZCrmxmndstMzOjLNur
- 70TT2zbZWG7KmexAxeA0WvD2boufhHGch9CbFWMwsS1cr35J2Bj9BPfbRcTiWriVeDqY
- cI/asOZdjAfxIKVrBiY+mpvYLz2D1zHOTd5APZO8V69uT4CHWOyRfOAd7AaxfuczB8S5
- BsSA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785309037; x=1785913837;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
- b=tXSDssYmWJHbLWp0GuAzsa+i6JesvrA596Sf8/bHu0cVWypjohZofZDgQkK6WXCWhN
- H6w0ibSOz+qaUHBUvif+R3ExlFqzKt5GkdchmiReg0cNJDr6MV4FZEGiDsk2O5BBfpfa
- ErLnSfnb7QmtCKpnb1KR6vJa4g2josI98gRUl5M06VBh9gS00UW5lBc4HlRU6PKEPggj
- ASJqXseRevenh+3EEnCJmQkcVxhhji3QoBYwHXr9rbHc/Z20ked6FfbUwRRkwieAxoZg
- VaPnqRE6aVo1ZQvdhZQtOrI9Q3KzzoiynvHx53EyWuwhN/FTqeE2872SQFmzgV5/Slzo
- 2nZg==
-X-Gm-Message-State: AOJu0YxHXTgUgX9hD1nORmIJ+hVTCswD5RkNNPf082H5imApoY0rb6tn
- i2OFhNgDwCuOAHb1pXx5itx+6kcswivFMhfJnKrqO0P7oX4HCcZJP1zGyYYkPSdAM97PCbzsHKD
- H7Se4GRCYZ7CJtG0uG10cFcA0NMOnUxtJKGfH
-X-Gm-Gg: AR+sD12B9+2pNvWA78m5Nl5CC480Ikp7reazADRa7jpdRqsJbm/hjTDld6Kp77Qz4Mp
- 6+jdFhNsc+LdzMjp3fKJ0S5bvOkmOSxmgJQa1TD+lOV2O8BBm4PBsVx81gHrseF2WAlJS05JbwQ
- YolyhKBxTwV+zPhcrsYlY3eJHCcz6xMwovRSc9S7T52uhET7TpfZyiyuM6kJvNGOvFIe0+BVCyc
- hSYEgP7pVSpPAb03KQw92xYL22uTPDDxVjRPslOmu+wmH+UdVYCy831qgTYQSNVE85vw8lKxVzf
- 7sX+NidUXs1qBkVF4FROiLLfkKcxi6Dn3JdZ2ID/ZIoBodMcVaoNIu/LLrUHOdMCSvmjM0kSUyN
- Mx2jsoHmlSCgXvwolfZRmWW1gERfT8mHs+WBKHsSLmZqrvJ3UY4PruxJerk/3WM+J44QzOkBDku
- NMqioWUtRnWHADnIGoLz1u14sXARYk8L7n9zM0cALQ
-X-Received: by 2002:a05:6214:62e:b0:8ef:ab62:217f with SMTP id
- 6a1803df08f44-9081706f849mr58619326d6.37.1785309036676; Wed, 29 Jul 2026
- 00:10:36 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id op-5jKs6qsmO for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 07:28:02 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=211.75.126.72;
+ helo=rtits2.realtek.com.tw; envelope-from=javen_xu@realsil.com.cn;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5CFE84008A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5CFE84008A
+Received: from rtits2.realtek.com.tw (rtits2.realtek.com [211.75.126.72])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5CFE84008A
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 07:28:00 +0000 (UTC)
+X-SpamFilter-By: ArmorX SpamTrap 5.80 with qID 66T7RiaC6285680,
+ This message is accepted by code: ctloc85258
+Received: from RS-EX-MBS2.realsil.com.cn ([172.29.17.102])
+ by rtits2.realtek.com.tw (8.15.2/3.29/5.94) with ESMTPS id 66T7RiaC6285680
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 29 Jul 2026 15:27:44 +0800
+Received: from RS-EX-MBS3.realsil.com.cn (172.29.17.103) by
+ RS-EX-MBS2.realsil.com.cn (172.29.17.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43; Wed, 29 Jul 2026 15:27:44 +0800
+Received: from RS-EX-MBS3.realsil.com.cn ([172.29.17.103]) by
+ RS-EX-MBS3.realsil.com.cn ([172.29.17.103]) with mapi id 15.02.2562.043; Wed,
+ 29 Jul 2026 15:27:44 +0800
+From: Javen <javen_xu@realsil.com.cn>
+To: Javen <javen_xu@realsil.com.cn>, "trini@konsulko.com"
+ <trini@konsulko.com>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
+ "rfried.dev@gmail.com" <rfried.dev@gmail.com>
+CC: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
+ "nd@arm.com" <nd@arm.com>
+Subject: RE: [PATCH next v1] net: rtl8169: add support for RTL8126A and
+ RTL8127A
+Thread-Topic: [PATCH next v1] net: rtl8169: add support for RTL8126A and
+ RTL8127A
+Thread-Index: AQHdGa7WjxwrHvfw/0OI+BUktl4vlraChQTQ
+Date: Wed, 29 Jul 2026 07:27:44 +0000
+Message-ID: <cf2dfc40c79047618b42324f5b452932@realsil.com.cn>
+References: <20260722075058.324-1-javen_xu@realsil.com.cn>
+In-Reply-To: <20260722075058.324-1-javen_xu@realsil.com.cn>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+x-originating-ip: [172.29.17.210]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
-In-Reply-To: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 29 Jul 2026 08:10:24 +0100
-X-Gm-Features: AUfX_myhOrtP0zolnoB633S-6vpMx90P6KoxCJDlHwfkSSRGYxoGb-hQosbORac
-Message-ID: <CALeDE9NR136ryqa1WZqy7edXcrP4e4FW_QbYTOeAAhd6rwPAyQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] firmware-owned devicetree for EBBR / SystemReady IR
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, Ahmad Fatoum <a.fatoum@barebox.org>, 
- David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
- Vitor Sato Eschholz <vsatoes@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Johan Jonker <jbx6244@gmail.com>,
- Randolph Sapp <rs@ti.com>, Daniel Golle <daniel@makrotopia.org>, 
- James Hilliard <james.hilliard1@gmail.com>,
- Aristo Chen <aristo.chen@canonical.com>, 
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>
-Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785309037; x=1785913837;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=sDeoFnTMGVzTQmq0W7H1/TyyOGhY4/HlKxDYVigrl7Y=;
- b=N5TYcPDQzdAzxHiQv9e0eJmkPpFZ9ZFc7bl48xNIuMO7KDDmR+aQr6tXUGdcltVVCM
- 93wOwNcjsuo8pBp2sOmROur0PF05TClFfWw69BZ288D1kMnC+hcVpsDKtaA9cSuF/+y9
- 2txA/jU7DOBDH5E385pDVDAc9Pqa4unf2YiAlMjfFIlt/89HGEwQDi/znW5fBdbP0CVu
- qZU8eNPXx9YFCBgFOaG8kJNYoK0Adb//2qACYBIGgp1ylrqBt6Y69+GiEU/4ORA31eoo
- ZUI2R/v5k3kxsjxzZEjJ1X0TgsAnLzZz26/o/PFFqcQRmFyOmBNr0uMLpND2bV10EOiV
- m8cQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=realsil.com.cn; s=dkim; t=1785310064;
+ bh=vEvnD5g1PdtQz/ZQgNyJq85Vn5Cq8/zLbpdN+jCBl0c=;
+ h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:MIME-Version;
+ b=rsbAdsAzjuVnlDNXWTUDiCYXNGdKxZtZ58KkWApZEDe6Egzb5JEmAriY/jKgF0bEc
+ lkzK6JtZPb8KRI5fl7a3kD+GtifPr2rIUwa3W9fuQPP51LxKGK9pmMrJXf6gN4FUT4
+ +XztqNl/lcXSlm1u8sW+gE3You7ciDYvU6sAHCauHI/+fcysSAZmJCLBZ9m/5ggPd3
+ AvedYJbfUdB2cJu84b11N4xXX+2EMhO8mdn6L7zy5zBvis2YqNwrsrtQXVN6Rr79uL
+ n5Jfkm4wmAsjA0Jp+/8rT4KE0qk8JnVOIVssPgpBvyLK58rEMRMkKIv8PbdvdqbMBa
+ AJ9cHI/XD/vEg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=N5TYcPDQ
+ header.from=realsil.com.cn
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=realsil.com.cn header.i=@realsil.com.cn
+ header.a=rsa-sha256 header.s=dkim header.b=rsbAdsAz
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,105 +115,227 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, 28 Jul 2026 at 14:21, Carlo Caione <ccaione@baylibre.com> wrote:
+>RTL8126A and RTL8127A share most of the register layouts and quirks with
+>RTL8125 series, but require explicit desc type and CRC-drop setup during i=
+nit.
 >
-> EBBR-style firmware (SystemReady IR) owns the devicetree: the OS is
+>This patch adds PCI IDs and MAC versions. RTL8126A is 0x66 and RTL8127A is
+>0x6e. And RTL8127A requires Tx Desc V3 format and an additional RADM FIFO
+>protection configuration according to vendor driver.
+>
+>Signed-off-by: Javen Xu <javen_xu@realsil.com.cn>
+>---
+> drivers/net/rtl8169.c | 103 ++++++++++++++++++++++++++++++++++++++----
+> 1 file changed, 94 insertions(+), 9 deletions(-)
+>
+>diff --git a/drivers/net/rtl8169.c b/drivers/net/rtl8169.c index
+>5b093623619..a24cff97801 100644
+>--- a/drivers/net/rtl8169.c
+>+++ b/drivers/net/rtl8169.c
+>@@ -49,6 +49,7 @@
+> #include <asm/cache.h>
+> #include <asm/io.h>
+> #include <pci.h>
+>+#include <linux/bitops.h>
+> #include <linux/delay.h>
+> #include <linux/printk.h>
+>
+>@@ -152,8 +153,24 @@ enum RTL8125_registers {
+> 	IntrMask_8125 =3D 0x38,
+> 	IntrStatus_8125 =3D 0x3C,
+> 	TxPoll_8125 =3D 0x90,
+>+	RX_DESC_MODE =3D 0xd8,
+>+	MACOCP =3D 0xb0,
+>+	RADMFIFO_PROTECT =3D 0x0402,
+>+	TX_DESC_MODE =3D 0xeb58,
+> };
+>
+>+/* MAC OCP indirect access via the MACOCP register */
+>+#define RTL8125_OCP_WRITE	0x80000000
+>+#define RTL8125_OCP_ADDR_SHIFT	16
+>+#define RX_DESC_CRC_DROP	BIT(0)
+>+#define RX_DESC_TYPE		BIT(1)
+>+
+>+/* TX_DESC_MODE (MAC OCP 0xeb58): TX descriptor format select, bits [1:0]
+>*/
+>+#define TX_DESC_FMT_MASK	GENMASK(1, 0)
+>+#define TX_DESC_FMT_STD		BIT(0)
+>+#define TX_DESC_FMT_V3		BIT(1)
+>+#define RX_PAUSE_SLOT_ON	BIT(11)
+>+
+> enum RTL8169_register_content {
+> 	/*InterruptStatusBits */
+> 	SYSErr =3D 0x8000,
+>@@ -271,6 +288,8 @@ static struct {
+> 	{"RTL-8168h/8111h",	0x54, 0xff7e1880,},
+> 	{"RTL-8125B",		0x64, 0xff7e1880,},
+> 	{"RTL-8125d",		0x6a, 0xff7e5880,},
+>+	{"RTL-8126A",		0x66, 0xff7e5880,},
+>+	{"RTL-8127A",		0x6e, 0xff7e5880,},
+> };
+>
+> enum _DescStatusBit {
+>@@ -355,6 +374,8 @@ static const unsigned int rtl8169_rx_config =3D
+>
+> static struct pci_device_id supported[] =3D {
+> 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8125) },
+>+	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8126) },
+>+	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8127) },
+> 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8161) },
+> 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8167) },
+> 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8168) }, @@ -398,6 +419,33
+>@@ int mdio_read(int RegAddr)
+> 	return value;
+> }
+>
+>+/* RTL8125/8126/8127 share the same register layout and quirks */
+>+static bool rtl_is_8125(struct pci_child_plat *pplat) {
+>+	return pplat->device =3D=3D 0x8125 || pplat->device =3D=3D 0x8126 ||
+>+	       pplat->device =3D=3D 0x8127;
+>+}
+>+
+>+static void rtl_mac_ocp_write(u16 reg_addr, u16 value) {
+>+	u32 data32;
+>+
+>+	data32 =3D (u32)(reg_addr / 2) << RTL8125_OCP_ADDR_SHIFT;
+>+	data32 +=3D value;
+>+	data32 |=3D RTL8125_OCP_WRITE;
+>+	RTL_W32(MACOCP, data32);
+>+}
+>+
+>+static u16 rtl_mac_ocp_read(u16 reg_addr) {
+>+	u32 data32;
+>+
+>+	data32 =3D (u32)(reg_addr / 2) << RTL8125_OCP_ADDR_SHIFT;
+>+	RTL_W32(MACOCP, data32);
+>+
+>+	return (u16)RTL_R32(MACOCP);
+>+}
+>+
+> static int rtl8169_init_board(unsigned long dev_iobase, const char *name)=
+  {
+> 	int i;
+>@@ -571,12 +619,15 @@ static int rtl_recv_common(struct udevice *dev,
+>unsigned long dev_iobase,
+> 		return length;
+>
+> 	} else {
+>-		u32 IntrStatus =3D IntrStatus_8169;
+>+		u32 sts;
+>
+>-		if (pplat->device =3D=3D 0x8125)
+>-			IntrStatus =3D IntrStatus_8125;
+>-		ushort sts =3D RTL_R8(IntrStatus);
+>-		RTL_W8(IntrStatus, sts & ~(TxErr | RxErr | SYSErr));
+>+		if (rtl_is_8125(pplat)) {
+>+			sts =3D RTL_R32(IntrStatus_8125);
+>+			RTL_W32(IntrStatus_8125, sts & ~(TxErr | RxErr |
+>SYSErr));
+>+		} else {
+>+			sts =3D RTL_R16(IntrStatus_8169);
+>+			RTL_W16(IntrStatus_8169, sts & ~(TxErr | RxErr |
+>SYSErr));
+>+		}
+> 		udelay(100);	/* wait */
+> 	}
+> 	tpc->cur_rx =3D cur_rx;
+>@@ -636,8 +687,8 @@ static int rtl_send_common(struct udevice *dev,
+>unsigned long dev_iobase,
+> 				    ((len > ETH_ZLEN) ? len : ETH_ZLEN));
+> 	}
+> 	rtl_flush_tx_desc(&tpc->TxDescArray[entry]);
+>-	if (pplat->device =3D=3D 0x8125)
+>-		RTL_W8(TxPoll_8125, 0x1);	/* set polling bit */
+>+	if (rtl_is_8125(pplat))
+>+		RTL_W32(TxPoll_8125, 0x1);	/* set polling bit */
+> 	else
+> 		RTL_W8(TxPoll_8169, 0x40);	/* set polling bit */
+>
+>@@ -697,6 +748,8 @@ static void rtl8169_set_rx_mode(void)
+>
+> static void rtl8169_hw_start(struct udevice *dev)  {
+>+	u8 version =3D rtl_chip_info[tpc->chipset].version;
+>+	u16 tx_desc_mode;
+> 	u32 i;
+>
+> #ifdef DEBUG_RTL8169
+>@@ -719,6 +772,36 @@ static void rtl8169_hw_start(struct udevice *dev)
+>
+> 	RTL_W8(Cfg9346, Cfg9346_Unlock);
+>
+>+	/*
+>+	 * RTL8125D/8126A/8127A require explicit descriptor-type and CRC-
+>drop setup.
+>+	 * RTL8125B (0x64) is intentionally excluded to avoid regressing
+>working hardware.
+>+	 */
+>+	switch (version) {
+>+	case 0x6a:
+>+	case 0x66:
+>+	case 0x6e:
+>+		/* Reg 0xD8: Disable CRC drop and force legacy 16-byte RX
+>desc */
+>+		RTL_W8(RX_DESC_MODE, RTL_R8(RX_DESC_MODE) &
+>~(RX_DESC_CRC_DROP |
+>+RX_DESC_TYPE));
+>+
+>+		/* RxConfig 0x44: enable RX pause slot (RTL8125B and later) */
+>+		RTL_W32(RxConfig, RTL_R32(RxConfig) | RX_PAUSE_SLOT_ON);
+>+
+>+		/* MAC OCP 0xEB58: TX descriptor format setup */
+>+		tx_desc_mode =3D rtl_mac_ocp_read(TX_DESC_MODE) &
+>~TX_DESC_FMT_MASK;
+>+
+>+		if (version =3D=3D 0x6e) {
+>+			/* RTL8127A specific: Tx desc V3 and RADM FIFO
+>protection */
+>+			rtl_mac_ocp_write(TX_DESC_MODE, tx_desc_mode |
+>TX_DESC_FMT_V3);
+>+			RTL_W16(RADMFIFO_PROTECT, 0x2001);
+>+		} else {
+>+			/* RTL8125D / RTL8126A specific: standard Tx desc */
+>+			rtl_mac_ocp_write(TX_DESC_MODE, tx_desc_mode |
+>TX_DESC_FMT_STD);
+>+		}
+>+		break;
+>+	default:
+>+		break;
+>+	}
+>+
+> 	/* RTL-8169sb/8110sb or previous version */
+> 	if (tpc->chipset <=3D 5)
+> 		RTL_W8(ChipCmd, CmdTxEnb | CmdRxEnb); @@ -860,8
+>+943,8 @@ static void rtl_halt_common(struct udevice *dev)
+> 	RTL_W8(ChipCmd, 0x00);
+>
+> 	/* Disable interrupts by clearing the interrupt mask. */
+>-	if (pplat->device =3D=3D 0x8125)
+>-		RTL_W16(IntrMask_8125, 0x0000);
+>+	if (rtl_is_8125(pplat))
+>+		RTL_W32(IntrMask_8125, 0x00000000);
+> 	else
+> 		RTL_W16(IntrMask_8169, 0x0000);
+>
+>@@ -1052,6 +1135,8 @@ static int rtl8169_eth_probe(struct udevice *dev)
+>
+> 	switch (pplat->device) {
+> 	case 0x8125:
+>+	case 0x8126:
+>+	case 0x8127:
+> 	case 0x8161:
+> 	case 0x8168:
+> 		region =3D 2;
+>--
+>2.43.0
 
-For reference it's no long SystemReady IR, but SystemReady DT [1] or
-SystemReady DeviceTree.
 
-[1] https://www.arm.com/architecture/system-architectures/systemready-compliance-program
+Hi, all
 
-> booted via UEFI and receives the devicetree from the firmware through
-> the EFI configuration table instead of shipping its own. U-Boot has
-> the handoff mechanism (efi_install_fdt()), but no generic way to say
-> which devicetree the firmware owns or where it lives. As a result,
-> platforms carry downstream commands to provide it.
->
-> This series adds a generic loader for a firmware-owned devicetree FIT on
-> a dedicated GPT partition:
->
-> - one FIT ("fdt.itb" by default) carries the base devicetree and its
->   overlays. FIT configurations describe the valid combinations, so a
->   signed configuration authenticates the base, overlay set and ordering;
->
-> - a standalone 'u-boot,firmware-fdt-block' control-DT node points to the
->   media device through a 'firmware-fdt-store' phandle. The node selects
->   a partition by type UUID and/or name;
->
-> - 'fw_fdt_part' can pin an A/B partition and 'fw_fdt_config' can select
->   an explicit configuration. Otherwise compatible best-match against the
->   control devicetree is used, falling back to the FIT default. Configuration
->   chaining is rejected so each combination remains one authenticated unit;
->
-> - one staging helper owns the EFI policy: use fdt_addr_r, enforce the
->   size cap and distinguish an absent source from a configured source
->   which failed. Both the EFI bootmeth and EFI boot manager use it;
->
-> - once a source is configured, any failure to assemble the devicetree is
->   fatal rather than silently falling back to an unverified source. Every
->   image is verified up front so a corrupt overlay cannot be silently skipped.
->
-> The loader itself does not depend on standard boot. EFI is its first
-> consumer, but the source lookup, FIT selection, verification and overlay
-> assembly are generic.
->
-> Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
-> as an independent behaviour fix. Patch 2 adds the loader, binding,
-> documentation and shared EFI staging policy. Patches 3 and 4 integrate
-> the EFI bootmeth and boot manager. Patch 5 adds sandbox coverage.
->
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
-> ---
-> Changes in v2:
-> - Make the loader independent of bootstd and describe EFI as its first
->   consumer.
-> - Describe the source with a standalone compatible node which points to
->   the backing media through a phandle.
-> - Rename 'boot_dtb' to 'fw_fdt_part' and document both environment
->   variables in doc/usage/environment.rst.
-> - Factor EFI staging and fail-closed policy into one helper used by all
->   three call sites.
-> - Track the assembled FDT's ownership explicitly and own the FIT filename.
-> - Select FIT_BEST_MATCH and add explicit compatible-selection coverage.
-> - Split the passed-FDT precedence change into its own first patch.
-> - Build the entire sandbox source topology at runtime, store mmc11.img in
->   persistent_data_dir and add staging, configuration-chaining and corrupt
->   base/overlay fail-closed coverage.
-> - Link to v1: https://patch.msgid.link/20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com
->
-> ---
-> Carlo Caione (5):
->       efi_loader: bootmgr: preserve a passed devicetree
->       boot: add a firmware-owned devicetree source
->       bootmeth: efi: use the firmware-owned devicetree
->       efi_loader: bootmgr: install the firmware-owned devicetree
->       test: boot: add firmware-FDT source tests
->
->  MAINTAINERS                               |   3 +
->  boot/Kconfig                              |  24 ++
->  boot/Makefile                             |   1 +
->  boot/bootmeth_efi.c                       |  45 +++-
->  boot/firmware_fdt.c                       | 420 ++++++++++++++++++++++++++++++
->  boot/image-fdt.c                          |   3 +-
->  boot/image-fit.c                          |   9 +-
->  configs/sandbox_defconfig                 |   1 +
->  doc/develop/uefi/firmware_fdt.rst         | 112 ++++++++
->  doc/develop/uefi/index.rst                |   1 +
->  doc/device-tree-bindings/firmware-fdt.txt | 150 +++++++++++
->  doc/usage/environment.rst                 |  11 +
->  include/firmware_fdt.h                    |  95 +++++++
->  include/image.h                           |   4 +-
->  lib/efi_loader/efi_bootmgr.c              |  39 ++-
->  test/boot/Makefile                        |   1 +
->  test/boot/firmware_fdt.c                  | 411 +++++++++++++++++++++++++++++
->  test/py/tests/test_ut.py                  | 181 +++++++++++++
->  18 files changed, 1492 insertions(+), 19 deletions(-)
-> ---
-> base-commit: b635d43bca429500cb8ef20aa151cb5773b9a8a5
-> change-id: 20260706-ccaione-upstream-ebbr-206c30be3a3a
->
-> Best regards,
-> --
-> Carlo Caione <ccaione@baylibre.com>
->
+Just a gentle ping for this patch.
+I am reaching out to see if any had a chance to review this patch. I wonder=
+ if there is anything I need to modify, clarify, or if I missed any submiss=
+ion guidelines. Thanks.
+
+BRs,
+Javen Xu
+
