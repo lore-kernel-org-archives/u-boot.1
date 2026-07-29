@@ -4,146 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEEB8C53219
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 08:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CCD6C53219
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 08:17:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B20CB40B4C;
-	Wed, 29 Jul 2026 08:12:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 50ABC40B39;
+	Wed, 29 Jul 2026 08:17:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B6Rk8Ht3O3Ym; Wed, 29 Jul 2026 08:12:48 +0000 (UTC)
+ id VxBisygVitv6; Wed, 29 Jul 2026 08:17:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AADE640B42
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 36CD340A8A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785312768;
-	bh=zyfsRnwg4UYxRktV7JOE7UsHJFtqMU6AIwJRcdA9TE4=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=e9mEurpSXOesrsmoy4qnjs3xohF4BpLH8ryNuZRkR9C4ZIJ1fvcbmoIAQ9fDLtkt1
-	 0yVCq5s7bxSOQ4q9qYWJmJs1SacJT7Ty2SDpwJIwzruhM9nDPMqTe/1M3cmMqv7bHh
-	 uV+MAefB5Sc1uugiHupazlp1bn/oHXA60PBqhTrn/QGnenN7lnTIFrvh12Hi3jDm5K
-	 Z2wieVdTo14DULWsXBgljX6k2kr0KCA6wyYU5S3rYhPblsgKs8DzvQa8TO1lDGCwQB
-	 iypQPMd8uR8SOWPv+qV98MQgsvbaPkZfARWX1SEXq6smxm2N9nChdw6e2POTk+eFLu
-	 AJSrY3u9yR/lQ==
+	d=lists.u-boot-project.org ; s=default; t=1785313057;
+	bh=rkvcxHgAX6K+ikHDvWxd6jgG7JEuuf7tEI6NWhbfp6A=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=QOBSZXfoA7foC4kdH5u0DPLW7HWiQ2xAvIPdUM/XPYdJIr6Ld0eScv/f1AIO1qaYj
+	 9l33dBVtWf18K+lPKfVyEqBqK7rlxvt9nUUYcVBogCbIAIbVoqJHWBtEpMPEKZ2Wje
+	 HxKFWWK8pL64XVcLF/ykeXPTihER+JSqHHAek+PmzqPZKDmO6WtaixiYsBj+AtyabK
+	 setEiiEyGc1dsF6eF4Gi9aicBlPRhuJu3J+78PR85PGXGw9Jf/8AXJwq3DnPW07Wfq
+	 3pzs9SIYKQ/8tYcAM/6zg5aDWeNpTkJSZa1jv499tW18eg5ZwG9v7YA0MSiqO8TtEp
+	 a7ty+7L3O/3DQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AADE640B42;
-	Wed, 29 Jul 2026 08:12:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2DE2A23F
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:12:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 36CD340A8A;
+	Wed, 29 Jul 2026 08:17:37 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 08C7A194
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:17:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2B5EC60ADC
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:12:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EEE968113B
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:17:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h_TrxSuyheXK for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 08:12:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DQ2P0wmqB-5u for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 08:17:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c107::9;
- helo=ph7pr06cu001.outbound.protection.outlook.com;
- envelope-from=pranav.sanwal@amd.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 46B3A60AB9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 46B3A60AB9
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 46B3A60AB9
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:12:41 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t6bFRhsuvO4lkThEUF+87TmAT2PW4nYZWTgUYptLbV5fX+33Oip5dLfCG3mKglegEYnjMtKKK6wiCL6SYtoXsiCjspI1qyPxN7SWONmL4zuSHUKidPmvRtEmxqvcN/E+zW9kckDaNcVJsCss2OPk78oWAfGwJEjKnHE91q4dND0jqIIwuJTwoC1NWnQ1RBwRDpUOosh7QtNj76J6zv9KVYhklzef4vkS62ZFlngJ2mVv/1J6LwKlhLXt6CCoZr4HbbarrxTaPVl2KDrCKJMmMBzlxBZEhiW9OrKLiXlBugZHbP/Ncti0WeZKfJvhzZM153z0XU6bZ3wl6jgBOS7+yg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zyfsRnwg4UYxRktV7JOE7UsHJFtqMU6AIwJRcdA9TE4=;
- b=vq3StbaIq6p+umpY/s5KN2FWSmFfsJbhkLofnEGAz3VF4qRMcpBt9oCfFNeCizia8KDF3c3niikTANmcMCDcTu9TaqiHThECs/G3jqtbX0WXDxD4uiGK2VPSzYf9q6uyd6bU4GqcrZZky4JJpDp1Rf8Mot0wx+BUDe3N5gwKgvxw/ok0KmIV4gwQsKUioUtJ6OH1LB2bsHk24gQPT3R4+tRS/k4QE47EC+wj6MX47QeuHdyLHlQnXBMT9nLGs7SO5ZV44znEetBxGsgbi0nx/Vatd5Fv52dYepsvUFe6GkLyXs7MyUvNWUWX8QrQZ0Y8QlAFnEDk/Q7hS3kGxvRASQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-Received: from CH0P221CA0009.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11c::11)
- by IA0PR12MB9046.namprd12.prod.outlook.com (2603:10b6:208:405::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.13; Wed, 29 Jul
- 2026 08:12:38 +0000
-Received: from CH1PEPF0000A347.namprd04.prod.outlook.com
- (2603:10b6:610:11c:cafe::91) by CH0P221CA0009.outlook.office365.com
- (2603:10b6:610:11c::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.13 via Frontend Transport; Wed,
- 29 Jul 2026 08:12:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH1PEPF0000A347.mail.protection.outlook.com (10.167.244.7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.270.5 via Frontend Transport; Wed, 29 Jul 2026 08:12:37 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 29 Jul
- 2026 03:12:36 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 29 Jul
- 2026 03:12:35 -0500
-Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Wed, 29 Jul 2026 03:12:33 -0500
-From: Pranav Sanwal <pranav.sanwal@amd.com>
-To: <u-boot@lists.u-boot-project.org>
-CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH v2 5/5] gpio: delay: free wrapped real GPIOs on remove
-Date: Wed, 29 Jul 2026 13:42:18 +0530
-Message-ID: <20260729081218.550465-6-pranav.sanwal@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260729081218.550465-1-pranav.sanwal@amd.com>
-References: <20260729081218.550465-1-pranav.sanwal@amd.com>
+ client-ip=2607:f8b0:4864:20::535; helo=mail-pg1-x535.google.com;
+ envelope-from=judge.packham@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org EEBB88113D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EEBB88113D
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id EEBB88113D
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 08:17:34 +0000 (UTC)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-cbb8b54fcf8so577868a12.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 01:17:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785313054; x=1785917854;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=rkvcxHgAX6K+ikHDvWxd6jgG7JEuuf7tEI6NWhbfp6A=;
+ b=K0lRNEisWJ4ltDwJ1mUKMnnOoXpc2c7VQdqRJwUxrJXVB1EFIR1I0HG2TlMXl6roXi
+ IzX16OJ0Ek5V5mHIOSMc5USJmWTM3vk3vQk9/uf3JfZQtZYOREvuQ29vC8jtP7k57BQe
+ MIa8ooXKf1zyvJFn2kzOuEsGht+K2GhRdPljyqsDp5J+IierL7a5Bkz1jfGtnq63Ki7P
+ 9uzjNpBAbSCmZDD5aKmdg0cwFEYff8qNlozOnEZd1rwhknw7RJyiLM7/cJkyfC/yzcwY
+ HnWiJoOj/YHOr/BbtJXfEcd0oFMfzXVwuBgL4QKQVnjmFuOp+0GUXXi4rKXP2Yw6fNfu
+ fDng==
+X-Gm-Message-State: AOJu0Yx+GaBcPJt9er7auALBraPXLH6MhjP0dt1uirZKtGU4bFMq/x/P
+ cCJ+QoT/snC37FUFAdTNTwODE2jDumvds+44mA/4/KoOKPYFYVl5R6r6
+X-Gm-Gg: AR+sD10k/45CwYSI0j1NpIIsD8eWdyN/7ttomUCUlHfoaSS6m38l+qMuWwCDYJ2GB7A
+ qDXeUEMfSnxJxznrS3NjRU/wU0mseYa2zgyKHxOP0s803BbTGUvdBQAFqjXlphalx8MlnY3d2LG
+ C8UliK9Qq1lnNhy+pBaCVf21Rk7d11iKKSJk4AZhEHukQfmrK0rnn6BoqQbYeru6HUEiVt7mtzl
+ wsLHGfxJ7vLTt3LdAN5z/2zDcP8nrTliLGL5UZ29QlsFk0sNUKLtBhvA8NPKmyWWIp4fn77XiDC
+ GAs/6SU0M0UeSD4B8jl3X1tjUO/NndRLtT6aGZS94zJ93qhj/ovLFoPFeQ4+94mvXWkV3IIgTBJ
+ DeU9v1iSGAD4GWCOutGDIcWLH8BH1pTGjpnR1PFFdADAfnXZLLavtDnyyqksRA0DsEudc5wlf1+
+ sUSb7/umeYwz0ZDtvnCjebjyfjLfape0XL8bCTNGTvPC23Rav078b7QBPNP4u/5IIyUz5qO3gF2
+ 2uQAF/5k3sDAgmPDa1UEUQDQZ6fbCM/y1EjwmZix0nBwg==
+X-Received: by 2002:a05:6a20:54a1:b0:3c3:8d86:9855 with SMTP id
+ adf61e73a8af0-3c8aaf80575mr6908654637.7.1785313053977; 
+ Wed, 29 Jul 2026 01:17:33 -0700 (PDT)
+Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:222c:3d14:205a:5f64])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-31504d2ec2asm8499376eec.21.2026.07.29.01.17.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2026 01:17:33 -0700 (PDT)
+From: Chris Packham <judge.packham@gmail.com>
+To: trini@konsulko.com, ilias.apalodimas@linaro.org, stefan.roese@mailbox.org
+Cc: u-boot@lists.u-boot-project.org,
+	Chris Packham <judge.packham@gmail.com>
+Subject: [PATCH] arm: mvebu: Add Allied Telesis x960 board
+Date: Wed, 29 Jul 2026 20:17:19 +1200
+Message-ID: <20260729081719.1074442-1-judge.packham@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A347:EE_|IA0PR12MB9046:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7440994d-cf90-4109-579e-08deed492734
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|36860700016|376014|82310400026|11063799006|10067099003|56012099006|22082099003|18002099003|3023799007;
-X-Microsoft-Antispam-Message-Info: w4DA/oFM0zQtDyEriOEOQtjB5i+5ILhVJOfdxdaGoGHONtfYP0Gw9rT4YvpwKOOqGzLqT14WKI/Yj9whdua6M0LJA0q1MBYdeBZQD9APlBYp8w+PQJe/rsZ1hohNl0ZS2x4mBtxiWI0dVd/F+VLT2hZgtXlSehKh2cBtePu7WR3IcLr9PCRglyu4knHY58cEhAl0rv9nbZKHsUJUTbI81wRfrvKrgdAIs+D29J+TKsJSOTXvvc5vC12it7tJv1cz9uN57GjlHkh/r1BYKpvH/+2iq7EZ4A5bYFKmkOlUK1gYqVWdP/84x2baJlGsGPp2TrbCs6NHXUC37Uyly9teK07HxaLVgASlJRU9dEXsuJcgEky/oZjMQZ5Xm+w0CpSgZKzKjGRJuGsoy1KnGq3YTtxOBt71YV+9PPCG2rItg6gyZgKW6fiuuFPESW6r2esERNIpAfKVilwIV0MMHJZXz6i6rvj/fAnlxB3wQZ1Cl99WJLglyK8u6BqBQ4q/IDxtOuFosJW6+LJPNhdJ2pKGjHLBsvulJnyEHjasS8Q7FLLYaOdaPttqYJtl2aMksbBUKVUThK40ZvLtjRJKxVP2UzeCkxx8jniDw76WSPzTMP8r7c4llfGpaqab5zCkKHzx5zgl13oyB9ESTH6CnfvkG7LL0uvubULcS7cgVa+MpeEOD+SGBIohmn1xtG13CjhH
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(36860700016)(376014)(82310400026)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003)(3023799007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: gfqJcPB60tNAyZhMhdQkVKnHPnCZEDIYt40uWy2OhNhOzpUMgSsgsDU2akCE51GQOvoo7PEaSmKbtZu0iHBrSEXBMEu0yTvRX/al9tHvvHnTCf9xKJoYQ/J1JbA6d06m18F4pMprAhn7J22CFbl0cCM+GRB+htwMbkDvXCNX7vsCi8X8936tG8kTagObi6T0rOIf4UEipsLEMZwEDKS2+kCJLO2iBibJCiV7DubKpDQ9SVhlQ5QvANBq7YdAoXYzxIRH5iHycyBHWw0ds9oL88k8lAIY4MiUMvjLlt2lO2Z06A1ExHor/yUCtQblHBD1Z1GWecVvkOS1qX1RN4EXB6auHGOraSUxgQ1pOhXnW2FWliM639+jA2+kE7m1ACsnHDB4q2RC/ntvEwaGktzTI1JfNgNuljKbK93i6hax0xuTCYMdl4C7UpU5tWw71BzK
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2026 08:12:37.9013 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7440994d-cf90-4109-579e-08deed492734
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000A347.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB9046
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zyfsRnwg4UYxRktV7JOE7UsHJFtqMU6AIwJRcdA9TE4=;
- b=XPepJ+KzJDFeMXG+ElHFD2UTB0+inDZNDX7xUVTj34uc4gZkD4vday2W5MlRWCHeLrhdPsXwZEav5S+BIxvp1haTZuiQ+d/OBIneZO2jBz5FaG1D76q2s0K3yNpYD1SI/sDZBASUupwA6BhGf5ZMEke8Qjdp9hVd+fzgSfgkpiY=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=amd.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=XPepJ+Kz
+ d=gmail.com; s=20251104; t=1785313054; x=1785917854;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=rkvcxHgAX6K+ikHDvWxd6jgG7JEuuf7tEI6NWhbfp6A=;
+ b=f5lVzTKm5bzMkDjJ+iREocyrzYldK54J41od/1DEedL36z6shZihE+8HtoV9bAswgp
+ YS0gNqIKZ54hfdMuk+c8WgN23JnWoUsk+oBcLVVe72RSR80KIfMbKLUKSYf/em0gogMI
+ upHKL4f+N4Z27N2IEM7SgAqLF2VKd/v2Wq2DWprzWzJTVPkk99yGP1M7wJn2jqhu0qXZ
+ zWZ/o5dLUDoTPgsbjAR4kw4mKbTmP+dtM/ZRsWP0XxAiMkiBhrXrtTyGbv/BPV+X1Ekt
+ w2c4dk8XvTw8aNte0vgfc25qKDX/8u5+CoKNHXiZ8c/bcya14pug/Ywqb9Op2g891o1b
+ ayPQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=f5lVzTKm
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -158,60 +124,593 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-gpio_delay_probe() requests the real GPIOs it wraps via
-gpio_request_by_name_nodev(), which strdup()s a label into the real
-GPIO device's own uc_priv->name[] array. The driver had no .remove
-hook, so those requests, and their strdup'd labels, were never
-released when the gpio-delay device was torn down.
+The  x960-28YSQ is a 25G/100G layer 3 switch from Allied Telesis.
 
-Add gpio_delay_remove() to free each wrapped real GPIO. Guard each
-free with device_active() on the real GPIO's device: generic DM
-teardown (e.g. dm_leak_check_end()'s uclass-by-uclass destroy) does
-not guarantee a consumer is removed before the provider it wraps, so
-the real GPIO device may already be inactive with its uclass_priv
-freed by the time this runs.
-
-Fixes: c866f2f197e2 ("gpio: Add GPIO delay driver")
-Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
+Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
+ arch/arm/dts/Makefile                  |   3 +-
+ arch/arm/dts/cn9130-atl-x960-28ysq.dts | 313 +++++++++++++++++++++++++
+ arch/arm/mach-mvebu/Kconfig            |   8 +
+ board/alliedtelesis/x960/MAINTAINERS   |   7 +
+ board/alliedtelesis/x960/Makefile      |   6 +
+ board/alliedtelesis/x960/x960.c        |  19 ++
+ configs/x960_defconfig                 | 104 ++++++++
+ include/configs/x960.h                 |  28 +++
+ 8 files changed, 487 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/cn9130-atl-x960-28ysq.dts
+ create mode 100644 board/alliedtelesis/x960/MAINTAINERS
+ create mode 100644 board/alliedtelesis/x960/Makefile
+ create mode 100644 board/alliedtelesis/x960/x960.c
+ create mode 100644 configs/x960_defconfig
+ create mode 100644 include/configs/x960.h
 
-Changes in v2:
-- New patch.
-
- drivers/gpio/gpio-delay.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/drivers/gpio/gpio-delay.c b/drivers/gpio/gpio-delay.c
-index f6c9c7efb0b..78e79176f3e 100644
---- a/drivers/gpio/gpio-delay.c
-+++ b/drivers/gpio/gpio-delay.c
-@@ -90,6 +90,20 @@ static int gpio_delay_xlate(struct udevice *dev, struct gpio_desc *desc,
- 	return 0;
- }
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index dada5f9eba26..a02dad22f274 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -170,7 +170,8 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
+ 	cn9130-crb-B.dtb			\
+ 	ac5-98dx35xx-rd.dtb			\
+ 	ac5-98dx35xx-atl-x240.dtb		\
+-	cn9130-atl-x250.dtb
++	cn9130-atl-x250.dtb			\
++	cn9130-atl-x960-28ysq.dtb
+ endif
  
-+static int gpio_delay_remove(struct udevice *dev)
-+{
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct gpio_delay_priv *priv = dev_get_priv(dev);
-+	int i;
+ dtb-$(CONFIG_ARCH_SYNQUACER) += synquacer-sc2a11-developerbox.dtb
+diff --git a/arch/arm/dts/cn9130-atl-x960-28ysq.dts b/arch/arm/dts/cn9130-atl-x960-28ysq.dts
+new file mode 100644
+index 000000000000..177d09b25b3b
+--- /dev/null
++++ b/arch/arm/dts/cn9130-atl-x960-28ysq.dts
+@@ -0,0 +1,313 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Allied Telesis Labs
++ */
 +
-+	for (i = 0; i < uc_priv->gpio_count; i++) {
-+		if (device_active(priv->descs[i].real_gpio.dev))
-+			dm_gpio_free(dev, &priv->descs[i].real_gpio);
-+	}
++#include "cn9130.dtsi"
++
++/ {
++	model = "Allied Telesis x960-28YSQ";
++	compatible = "alliedtelesis,x960-28ysq",
++		"marvell,cn9130",
++		"marvell,armada-ap806-quad",
++		"marvell,armada-ap806";
++
++	aliases {
++		serial0 = &uart0;
++		i2c0 = &cp0_i2c0;
++		i2c1 = &cp0_i2c1;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++
++};
++
++/*
++ * AP related configuration
++ */
++&ap_pinctl {
++	/* AP_MPP Pins:
++	 * GPIO & NC [0-10,12]
++	 * UART0 [11,19]
++	 */
++		/*   0 1 2 3 4 5 6 7 8 9 */
++	pin-func = < 0 0 0 0 0 0 0 0 0 0
++		     0 3 0 0 0 0 0 0 0 3 >;
++};
++
++&ap_gpio0 {
++	pp-reset {
++		gpio-hog;
++		gpios = <0 GPIO_ACTIVE_LOW>;
++		output-high;
++		line-name = "pp-reset";
++	};
++
++	usb-en {
++		gpio-hog;
++		gpios = <7 GPIO_ACTIVE_HIGH>;
++		output-high;
++		line-name = "usb-en";
++	};
++
++	fan-en {
++		gpio-hog;
++		gpios = <8 GPIO_ACTIVE_HIGH>;
++		output-high;
++		line-name = "fan-en";
++	};
++};
++
++/*
++ * CP related configuration
++ */
++&cp0_pinctl {
++	/* MPP Bus:
++	 *	[0-1]	DEV
++	 *	[2-8]	GPIO
++	 *	[9]	DEV
++	 *	[10-12]	GPIO
++	 *	[13]	ND_RB
++	 *	[14]	GPIO
++	 *	[15-28]	DEV
++	 *	[29-30]	GPIO
++	 *	[31]	DEV
++	 *	[32-34]	GPIO
++	 *	[35-36]	I2C1
++	 *	[37-38]	I2C0
++	 *	[39-46]	GPIO
++	 *	[47]	SMI
++	 *	[48]	GPIO
++	 *	[49]	SMI
++	 *	[49-55]	GPIO
++	 *	[56-60]	SPI
++	 *	[61-62]	GPIO
++	 */
++		/*   0   1   2   3   4   5   6   7   8   9 */
++	pin-func = < 1   1   0   0   0   0   0   0   0   1
++		     0   0   0   2   0   1   1   1   1   1
++		     1   1   1   1   1   1   1   1   1   0
++		     0   1   0   0   0   2   2   2   2   0
++		     0   0   0   0   0   0   0   8   0   8
++		     0   0   0   0   0   0   6   6   6   6
++		     6   0   0>;
++
++	cp0_i2c0_pins: cp0-i2c-pins-0 {
++		marvell,pins = <37 38>;
++		marvell,function = <2>;
++	};
++
++	cp0_i2c1_pins: cp0-i2c-pins-1 {
++		marvell,pins = <35 36>;
++		marvell,function = <2>;
++	};
++
++	cp0_nand_pins: cp0-nand-pins {
++		marvell,pins = <0 1 9 15 16 17 18 19 20 21 22 23 24 25 26 27 28 31>;
++		marvell,function = <1>;
++	};
++
++	cp0_smi_pins: cp0-smi-pins {
++		marvell,pins = <47 49>;
++		marvell,function = <8>;
++	};
++
++	cp0_nand_rb: cp0-nand-rb {
++		marvell,pins = <13>;
++		marvell,function = <2>;
++	};
++
++	cp0_spi0_pins: cp0-spi-pins-0 {
++		marvell,pins = <56 57 58 59 60>;
++		marvell,function = <6>;
++	};
++};
++
++&cp0_i2c0 {
++	status = "okay";
++	pinctrl-names = "default", "gpio";
++	pinctrl-0 = <&cp0_i2c0_pins>;
++
++	mux@70 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "nxp,pca9546";
++		reg = <0x70>;
++		i2c-mux-idle-disconnect;
++		reset-gpios = <&ap_gpio0 2 GPIO_ACTIVE_LOW>;
++
++		i2c@0 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			reg = <0>;
++
++			hwmon@2d {
++				compatible = "adi,adt7476";
++				reg = <0x2d>;
++				adi,pwm-active-state = <0 0 0>;
++			};
++
++			hwmon@2e {
++				compatible = "adi,adt7476";
++				reg = <0x2e>;
++			};
++
++			rtc:rtc@68 {
++				compatible = "adi,max31343";
++				reg = <0x68>;
++			};
++		};
++
++		/* Switch/EEPROM */
++		i2c@1 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			reg = <1>;
++		};
++
++		/* PSU0 */
++		i2c@5 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			reg = <5>;
++
++			eeprom@51 {
++				compatible = "i2c-eeprom";
++				reg = <0x51>;
++			};
++		};
++
++		/* PSU1 */
++		i2c@6 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			reg = <6>;
++
++			eeprom@51 {
++				compatible = "i2c-eeprom";
++				reg = <0x51>;
++			};
++		};
++
++	};
++};
++
++&cp0_i2c1 {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_i2c1_pins>;
++};
++
++&cp0_comphy {
++	phy0 {
++		phy-type = <COMPHY_TYPE_PEX0>;
++	};
++
++	phy1 {
++		phy-type = <COMPHY_TYPE_IGNORE>;
++	};
++
++	phy2 {
++		phy-type = <COMPHY_TYPE_IGNORE>;
++	};
++
++	phy3 {
++		phy-type = <COMPHY_TYPE_IGNORE>;
++	};
++
++	phy4 {
++		phy-type = <COMPHY_TYPE_IGNORE>;
++	};
++
++	phy5 {
++		phy-type = <COMPHY_TYPE_SGMII0>;
++		phy-speed = <COMPHY_SPEED_1_25G>;
++	};
++};
++
++&cp0_mdio {
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_smi_pins>;
++	status = "okay";
++	cp0_phy0: ethernet-phy@0 {
++		reg = <0>;
++	};
++};
++
++&cp0_ethernet {
++	status = "okay";
++};
++
++&cp0_eth2 {
++	status = "okay";
++	phy = <&cp0_phy0>;
++	phy-mode = "sgmii";
++	phy-reset-gpios = <&cp0_gpio0 10 GPIO_ACTIVE_LOW>;
++};
++
++&cp0_pcie0 {
++	num-lanes = <1>;
++		/* non-prefetchable memory */
++	ranges =<0x82000000 0 0xc0000000 0 0xc0000000 0 0x2000000>;
++	status = "disabled";
++};
++
++&uart0 {
++	status = "okay";
++};
++
++&cp0_utmi0 {
++	status = "okay";
++};
++
++&cp0_usb3_0 {
++	status = "okay";
++};
++
++&cp0_spi0 {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_spi0_pins>;
++
++	spi-flash@0 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "jedec,spi-nor";
++		reg = <0>; /* Chip select 0 */
++		spi-max-frequency = <50000000>;
++		m25p,fast-read;
++	};
++};
++
++&cp0_nand {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_nand_pins &cp0_nand_rb>;
++	nand-ecc-strength = <8>;
++	nand-ecc-step-size = <512>;
++	nand-timing-mode = <4>;
++
++	partitions {
++		compatible = "fixed-partitions";
++		#address-cells = <1>;
++		#size-cells = <1>;
++
++		partition@user {
++			reg = <0x00000000 0x20000000>;
++			label = "user";
++		};
++	};
++};
++
++&cp0_gpio0
++{
++	nand-protect {
++		gpio-hog;
++		gpios = <29 GPIO_ACTIVE_LOW>;
++		output-low;
++		line-name = "nand-protect";
++	};
++};
+diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+index 3465ccfc1510..1a8dbf2792ef 100644
+--- a/arch/arm/mach-mvebu/Kconfig
++++ b/arch/arm/mach-mvebu/Kconfig
+@@ -238,6 +238,11 @@ config TARGET_X220
+ 	bool "Support Allied Telesis x220"
+ 	select 98DX3336
+ 
++config TARGET_X960
++	bool "Support Allied Telesis x960"
++	select ARMADA_8K
++	imply BOOTSTD_DEFAULTS
++
+ config TARGET_DB_XC3_24G4XG
+ 	bool "Support DB-XC3-24G4XG"
+ 	select 98DX3336
+@@ -323,6 +328,7 @@ config SYS_BOARD
+ 	default "x250" if TARGET_X250
+ 	default "x240" if TARGET_X240
+ 	default "x220" if TARGET_X220
++	default "x960" if TARGET_X960
+ 	default "db-xc3-24g4xg" if TARGET_DB_XC3_24G4XG
+ 	default "crs3xx-98dx3236" if TARGET_CRS3XX_98DX3236
+ 	default "mvebu_alleycat-5" if TARGET_MVEBU_ALLEYCAT5
+@@ -349,6 +355,7 @@ config SYS_CONFIG_NAME
+ 	default "x250" if TARGET_X250
+ 	default "x240" if TARGET_X240
+ 	default "x220" if TARGET_X220
++	default "x960" if TARGET_X960
+ 	default "db-xc3-24g4xg" if TARGET_DB_XC3_24G4XG
+ 	default "crs3xx-98dx3236" if TARGET_CRS3XX_98DX3236
+ 	default "mvebu_alleycat-5" if TARGET_MVEBU_ALLEYCAT5
+@@ -375,6 +382,7 @@ config SYS_VENDOR
+ 	default "alliedtelesis" if TARGET_X250
+ 	default "alliedtelesis" if TARGET_X240
+ 	default "alliedtelesis" if TARGET_X220
++	default "alliedtelesis" if TARGET_X960
+ 	default "mikrotik" if TARGET_CRS3XX_98DX3236
+ 	default "Marvell" if TARGET_MVEBU_ALLEYCAT5
+ 
+diff --git a/board/alliedtelesis/x960/MAINTAINERS b/board/alliedtelesis/x960/MAINTAINERS
+new file mode 100644
+index 000000000000..23452b5cbe98
+--- /dev/null
++++ b/board/alliedtelesis/x960/MAINTAINERS
+@@ -0,0 +1,7 @@
++X960 BOARD
++M:	Chris Packham <chris.packham@alliedtelesis.co.nz>
++S:	Maintained
++F:	board/alliedtelesis/x960/
++F:	arch/arm/dts/cn9130-atl-x960.dts
++F:	include/configs/x960.h
++F:	configs/x960_defconfig
+diff --git a/board/alliedtelesis/x960/Makefile b/board/alliedtelesis/x960/Makefile
+new file mode 100644
+index 000000000000..d5c32c02accf
+--- /dev/null
++++ b/board/alliedtelesis/x960/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2026 Allied Telesis
++#
++
++obj-y	+= x960.o
+diff --git a/board/alliedtelesis/x960/x960.c b/board/alliedtelesis/x960/x960.c
+new file mode 100644
+index 000000000000..66c782698ffa
+--- /dev/null
++++ b/board/alliedtelesis/x960/x960.c
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier:    GPL-2.0+
++
++#include <config.h>
++#include <asm/global_data.h>
++#include <linux/io.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define DEVICE_BUS_SYNC_CTRL	0xF27004C8
++
++int board_init(void)
++{
++	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
++
++	/* DEV_READYn is not needed for NVS, ignore it when accessing CS1 */
++	writel(0x00004001, DEVICE_BUS_SYNC_CTRL);
 +
 +	return 0;
 +}
+diff --git a/configs/x960_defconfig b/configs/x960_defconfig
+new file mode 100644
+index 000000000000..f03bca376aee
+--- /dev/null
++++ b/configs/x960_defconfig
+@@ -0,0 +1,104 @@
++CONFIG_ARM=y
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_ARCH_MVEBU=y
++CONFIG_TEXT_BASE=0x00000000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
++CONFIG_TARGET_X960=y
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0xf80000
++CONFIG_ENV_SECT_SIZE=0x40000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="cn9130-atl-x960-28ysq"
++CONFIG_SYS_LOAD_ADDR=0x10000000
++CONFIG_DEBUG_UART_BASE=0xf0512000
++CONFIG_DEBUG_UART_CLOCK=200000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_FIT=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTCOMMAND="run distro_bootcmd"
++CONFIG_USE_PREBOOT=y
++CONFIG_SPL_SILENT_CONSOLE=y
++CONFIG_TPL_SILENT_CONSOLE=y
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++# CONFIG_DISPLAY_CPUINFO is not set
++# CONFIG_DISPLAY_BOARDINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_UBI=y
++CONFIG_MAC_PARTITION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=1
++CONFIG_ARP_TIMEOUT=200
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_IPV6=y
++CONFIG_SYS_64BIT_LBA=y
++CONFIG_GPIO_HOG=y
++CONFIG_DM_I2C=y
++CONFIG_DM_I2C_GPIO=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
++# CONFIG_INPUT is not set
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++# CONFIG_MMC is not set
++CONFIG_MTD_RAW_NAND=y
++CONFIG_SYS_NAND_USE_FLASH_BBT=y
++CONFIG_NAND_PXA3XX=y
++CONFIG_SYS_NAND_ONFI_DETECTION=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_ATMEL=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_SST=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHY_GIGE=y
++CONFIG_E1000=y
++CONFIG_MVPP2=y
++CONFIG_PHY_MARVELL=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_MVEBU=y
++CONFIG_PHY=y
++CONFIG_MVEBU_COMPHY_SUPPORT=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_ARMADA_8K=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_DS1307=y
++CONFIG_RTC_MAX313XX=y
++CONFIG_SCSI=y
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_SYS_NS16550=y
++CONFIG_KIRKWOOD_SPI=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_ETHER_ASIX88179=y
++CONFIG_USB_ETHER_MCS7830=y
++CONFIG_USB_ETHER_RTL8152=y
++CONFIG_USB_ETHER_SMSC95XX=y
++# CONFIG_TOOLS_MKEFICAPSULE is not set
+diff --git a/include/configs/x960.h b/include/configs/x960.h
+new file mode 100644
+index 000000000000..b9699518751e
+--- /dev/null
++++ b/include/configs/x960.h
+@@ -0,0 +1,28 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2026 Allied Telesis
++ */
 +
- static const struct dm_gpio_ops gpio_delay_ops = {
- 	.direction_output = gpio_delay_direction_output,
- 	.direction_input = gpio_delay_direction_input,
-@@ -142,4 +156,5 @@ U_BOOT_DRIVER(gpio_delay) = {
- 	.ops = &gpio_delay_ops,
- 	.priv_auto = sizeof(struct gpio_delay_priv),
- 	.probe = gpio_delay_probe,
-+	.remove = gpio_delay_remove,
- };
++#ifndef __X960_H_
++#define __X960_H_
++
++/*
++ * High Level Configuration Options (easy to change)
++ */
++#define CFG_SYS_TCLK		250000000	/* 250MHz */
++
++/* additions for new ARM relocation support */
++#define CFG_SYS_SDRAM_BASE	0x00000000
++
++#define BOOT_TARGETS	"usb scsi pxe dhcp"
++
++#define CFG_EXTRA_ENV_SETTINGS \
++	"scriptaddr=0x6d00000\0"        \
++	"pxefile_addr_r=0x6e00000\0"    \
++	"fdt_addr_r=0x6f00000\0"        \
++	"kernel_addr_r=0x7000000\0"     \
++	"ramdisk_addr_r=0xa000000\0"    \
++	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
++	"boot_targets=" BOOT_TARGETS "\0"
++
++#endif /* __X960_H_ */
 -- 
-2.43.7
+2.54.0
 
