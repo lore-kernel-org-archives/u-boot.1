@@ -4,136 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B65C53200
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 16:29:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6EB1C53219
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jul 2026 17:07:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C8E3E40789;
-	Wed, 29 Jul 2026 16:29:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 500B3406D9;
+	Wed, 29 Jul 2026 17:07:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wrISDI6cilfW; Wed, 29 Jul 2026 16:29:24 +0000 (UTC)
+ id qD29DjQ2nVwK; Wed, 29 Jul 2026 17:07:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DDAD940763
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 50A95406DE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785342564;
-	bh=SmVLyD3hAz3ccMgxCwgLXLOW4LECUINQOp3DhHjaWpw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yDNWmDog/FVHhaNmQQKhu0mOl38Su3To30gekrqQlUhGfZBxudxFjs6QTUhJT/0Hp
-	 nJekj8CMCmr3aINOuMbBlfs1sBVWoPwTjOybAd9agZbuwkmzB3PyCOJll8MHBdwbMp
-	 lKPtXkhYmD4vGya/mLjSd+u5CmlpmxM/7dffuVsXRI6aqYSotOLBG4P2ibJMcVjhD/
-	 p526xGVDjcMOpQJHlDCCZYkG41PWtn0JDsQacraN5P/uXM8YAjRVJ6yyiJuqXJgjXw
-	 NOylnPhk+zp6b850A2yCaTVl6AynOPWofRVeuVE14MV3XCAZc7gQWzu4YA2xkfi4n4
-	 IWWpuackfbjPQ==
+	d=lists.u-boot-project.org ; s=default; t=1785344860;
+	bh=1T0r1NFHb952isGZjYTTxZnRlbil+slMAmAIxcqmmr4=;
+	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Ruulqar/BLhKJXTND2nzPadvo73316T5jNs0xGcr7hUuo8o/tafJvwv+J+W6s7WIh
+	 3q7UBLGZIEtMhT8hvj+rNlfhpOHXmf3Ckce/LTGnmoVcIdFDt7v4DkoLpBub7LHLwU
+	 20ChiE/w74DK7P+SPI4df3G3eQW3txbUM6mL4MjVmeUnpIX7hVM2SCImmb8JmnRNtU
+	 oddI3ktVI9vvf0rk/PZxDe6UJI7lrcAfTuXzLO4sAAHIAKvhpcDfJGtaC8COURaHxp
+	 tzLnLIaZYFiMMjZprAJGYhfnnaerRQ8ldB/fTVaABKULaLDWQ241We+D9hJqXyXdWu
+	 qw2xq8FnPRk0A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DDAD940763;
-	Wed, 29 Jul 2026 16:29:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 50A95406DE;
+	Wed, 29 Jul 2026 17:07:40 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2394A42A
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:29:22 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B41E43B1
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 17:07:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0A07E4014E
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:29:22 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A58034009F
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 17:07:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ibx_wLE_VpMH for <u-boot@lists.u-boot-project.org>;
- Wed, 29 Jul 2026 16:29:21 +0000 (UTC)
+ id JyfvJ4TYqaAm for <u-boot@lists.u-boot-project.org>;
+ Wed, 29 Jul 2026 17:07:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C647C4009F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C647C4009F
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C647C4009F
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 16:29:20 +0000 (UTC)
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7eb63dbd229so42290a34.1
- for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 09:29:20 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::236; helo=mail-oi1-x236.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 799DA4006E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 799DA4006E
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 799DA4006E
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 17:07:37 +0000 (UTC)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-4a4cb36ae00so689039b6e.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 10:07:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785342559; x=1785947359;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1785344856; x=1785949656;
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SmVLyD3hAz3ccMgxCwgLXLOW4LECUINQOp3DhHjaWpw=;
- b=dQpM3QahKX1wRz/b7DNWMYDPMw4KNSblV5viTBpOH6kpXGIdlj992Tk8FN/S98YgHz
- dkf1lo3+MLMTQhRi9f8ApncAywzKgs9gefbqATMgftCBqnK8IYTMzwRivH9Ofhr0GFrl
- 7OSakQdYAr9gfZpitzyC7Y86LmOGglx83SbD/oTX97LeRs1Xj4HLBxV+MMUu6ygaUjTM
- 5dZZC2CTxFu5oIW/hLazDOHY+X6wfa0ZvAHQgI703+77Tk53hvovt2IrC1tbzOV+ytOQ
- MhPJxyxdUTcKP5W8qhSkhIrI9Jybd+mt/wxIkKbwAkOms3koiWbcvU9TgD4k4PjCYaNf
- 8I8Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrAI5zYw3J0iRI6mBiCa3UomZGoRRs4DzGWIOreeKaJBCN5+LwZNIdKZsa3KUG6VEX78NitQaI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyKKXisuul3ecOaNXQ4AEeFHcJW+5Hskllme1MWG8/TXN7pBMgp
- czcmoSdxAfhYhFbiPMNVGWa8EFsdABGWtWiJgFlD4lLvU7SBO4k12Q5p4cG8BxZKj1c=
-X-Gm-Gg: AR+sD11VThFS+AyvIEjFI9JGaHOZROp/1iRwf2NiTAook0TZC3GS8/drzaEBang2U7t
- z+SM9lpEetfWuaXfN/S1CSHdk+QsN+e5M6HYPJs8J4Y9vJrkFzBnXDEpyCkdo9LdexpZgB89xtA
- pXx72S+skbMYRY4x5wZ48Mo0BO9IJHkrgobALPcE3uhChyPnKIB+gCDpV5XUCeRzYjTpIbQYu37
- TSqGXgFzS/6TJPzbp18ADE8JgpgWX+iVxrg1d0bVLVvhvJ542wBYl5dkYmBs94mMeiLrcvQF97U
- 9JDPOfbx7LTPqsu3l4CFptr9jMitBvlgK5qm74Mu3VWT4HmI+vSh/J22Cq0gQ6s/XNCpmFTFuW5
- VOPDC6rLRGzHw1A5OyFwkmBMw6lNvo4kioYBN1hETA++HUDiPn1eajKFacLWAc1KTh0gm3Y1l7w
- 0zYYLzX0KOhLshEcYojRyA/RQPh50Qr7jExh4yQkkqBN171N/vFCSwzdEBSyfa6wZH3lOLttHZu
- QB81fy++O7c1ZtxKFjeBE3ecv4/5yxf3pDL+BQ=
-X-Received: by 2002:a05:6830:7082:20b0:7e9:ca12:37bf with SMTP id
- 46e09a7af769-7f014155e9amr912955a34.7.1785342559373; 
- Wed, 29 Jul 2026 09:29:19 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:3096:ee5f:6f57:afe1?
- ([2600:8803:e7e4:500:3096:ee5f:6f57:afe1])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f00d94d7desm2722520a34.22.2026.07.29.09.29.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2026 09:29:18 -0700 (PDT)
-Message-ID: <afb92523-90a9-456d-b0c5-66042627854d@baylibre.com>
-Date: Wed, 29 Jul 2026 11:29:17 -0500
+ bh=1T0r1NFHb952isGZjYTTxZnRlbil+slMAmAIxcqmmr4=;
+ b=sDMYWrgTY6vlfvVMmuxlXwk2KKhvMHAcYYm6RucVycmdK0G/V4hxEO1rHu5m6nNyGJ
+ 0JVEj7FU2LxFiiAGKQHHavcqDBFF57tqjoSB/AKDZvtArDw6IXjCmCDRL9vhd31nH3oe
+ UeUO1XsUFb9meREvjpeJ9JbgPzQFdqvUkNq9xTGv3O55Izx5MIfd/rSbv6gQtEY2yB5g
+ BMDRT2CEUy4srwq/gc7l2Xggo2v4JA02zmz3SYlaI79BBe2+hQdZyIfEpJ/NG7YODlwB
+ 1SSzQd682VkYxq2E1W7DA3b7+M7ELKU7gyA2OZ5IFC6KBcNh9x0d/BBHG4hOBlgMm1zr
+ l76g==
+X-Gm-Message-State: AOJu0YyqFE803VUGoKEUgD/pmNO90JtpKXergWGk062v7aBmPjT2WGah
+ 78mlaNNVb1aVBjrSOL0l4pJYYPZIF5sAfCs97NIQsIum5Tb5ZiaZul5NIOnjmr3eJkwYU6XYpGz
+ SvsLZpIQ=
+X-Gm-Gg: AR+sD1185xHefMLlKRN1b+I7zjFq3vUeqDt1vkJxrBrNJlJJpWDtQ1Np3iGNhIe0Zxa
+ xdOSILlVnGD+vUwPiZlZICbsokGuvcG+g54cy4s831+Luauwm5OX/57WOrEdjyK3V/FVwrQjIvV
+ 74atGfWlIeYd2Ios1oFw+4iNCMnJWwBGzEtKgem09ZMcNsTQiIzWaoGnFRq5RtqfFbHfGqiZPt/
+ VhCbfGCl6MogmuqwY6ac9dgcuYYFyiR5knTSrAt52QxKIpE+tBEznLVPqbTj2eWDpyvAY26GwSk
+ GCznz18JDu+LSZ7UEvbi3SrlHHt/1B4dcOOnJtoPpdbTuQVuVYUlJ+BvTaDVFImj5WU9gIUTCEg
+ ON1u3A7kz+asLXvHN3Kx70eMBe4DsVuU19KaGpMMjPfA5EQ4qpiTlkQqhsuth1ooSgh33gkjoSs
+ rWoBsScpjS5Q8v6BaeEnBtV9fe9tufX6U3nAI70iQps6VXjarWFpfl40WN+KHytzuQLma2O7B6S
+ EsLfhN8CRWm4SmsJ+JvInSgc41GkEOvQuNjObMjuryNjmpqyr5h2W9dPGwKBA031uHyqTuPoXNH
+ 0d24HrWVJQ==
+X-Received: by 2002:a05:6808:179d:b0:4a4:dfff:2daa with SMTP id
+ 5614622812f47-4ad5bb23656mr3839289b6e.20.1785344856360; 
+ Wed, 29 Jul 2026 10:07:36 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4ad6ef5cb23sm2192906b6e.11.2026.07.29.10.07.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2026 10:07:35 -0700 (PDT)
+Date: Wed, 29 Jul 2026 11:07:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Pranav Tilak <pranav.vinaytilak@amd.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Raymond Mao <raymond.mao@riscstar.com>, Guodong Xu <guodong@riscstar.com>,
+ Aristo Chen <aristo.chen@canonical.com>,
+ Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20260729170732.GC1773261@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] i2c: mtk_mt8195_i2c_ddc: add new driver
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Heiko Schocher <hs@nabladev.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Pavlo Yadvychuk <pyadvychuk@baylibre.com>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
- Johan Jonker <jbx6244@gmail.com>
-References: <20260727-mt8188-add-ddc-i2c-driver-v2-0-bf1c45fcd588@baylibre.com>
- <20260727-mt8188-add-ddc-i2c-driver-v2-2-bf1c45fcd588@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260727-mt8188-add-ddc-i2c-driver-v2-2-bf1c45fcd588@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="65VTsrMRCKEnFLwy"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785342559; x=1785947359;
+ d=konsulko.com; s=google; t=1785344856; x=1785949656;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SmVLyD3hAz3ccMgxCwgLXLOW4LECUINQOp3DhHjaWpw=;
- b=VbVAs2X6CkrqJiDv5/7ev78pbELwQyReyMdZoNx06aD1FR7jA3KGdJhp9Gd36reLtd
- 6DkTTI10aMD0E+1WNxjeJpzLafWrhjsFDFZ2D10A9SKhYNsnirZVdFpbGgFKvny0ME5v
- iY/F1ST0OWXQMeq8nu9fdKrOPUw9AlATJ7s5YjzNv2R4u+P4B5jBUgMjRMFfdLw6aE+S
- 7SsURsT9VogVkjp+N1Ep+f9FBXx+BXGPEA3CG63ByujOoUBvQzVr7xIBtAnTKmIaUWug
- 0Et9D4rc0HL6Jgmo5ZorsOByYqvGmuLBk+XfmGlCXbozL5LwNa0QFQWDZHyvvbTm+vMg
- eOPA==
+ bh=1T0r1NFHb952isGZjYTTxZnRlbil+slMAmAIxcqmmr4=;
+ b=osAXCzjkIHtNtLH2COSHnXVgU9ifoSlR5FkQCCfhEA3T97hgZW2J+dWc8KJ8xJTG2F
+ 4HUgFCL/j2ox9iF9S/6TKa3YIc0PPXI1ougeB6AUWklvBexCSBsteOC+IXe/vvL9Df7J
+ VOIVdOYIG5sgK0RS2f/0XubpeeBXMWj74sE28=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
+ dmarc=pass (p=none dis=none)
+ header.from=konsulko.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=VbVAs2X6
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=osAXCzjk
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,17 +131,208 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 7/27/26 3:43 AM, Julien Stephan wrote:
-> Add a new driver for HDMI DDC channel reading for MT8195 based SoCs.
-> The driver is based on the corresponding kernel driver.
-> 
 
-...
+--65VTsrMRCKEnFLwy
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> +#define DDC2_CLOCK 572 /* BIM=208M/(v*4) = 90Khz */
-> +#define DDC2_CLOCK_EDID 832 /* BIM=208M/(v*4) = 62.5Khz */
-> +
-Do we need to do anything about [1] here? (about math not adding
-up for 90Khz comment.)
+Hey all,
 
-[1]: https://patchwork.ozlabs.org/project/uboot/patch/20260717-mt8188-add-ddc-i2c-driver-v1-2-e89ccd173567@baylibre.com/#3728771
+Here's the scan report for -rc1.
+
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Wed, Jul 29, 2026 at 12:06=E2=80=AFAM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
+
+   - *New Defects Found:* 6
+   - 5 defect(s), reported by Coverity Scan earlier, were marked fixed in
+   the recent build analyzed by Coverity Scan.
+   - *Defects Shown:* Showing 6 of 6 defect(s)
+
+Defect Details
+
+** CID 651722:       Error handling issues  (CHECKED_RETURN)
+/drivers/power/regulator/pmbus_helper.c: 48           in
+pmbus_regulator_get_value()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 651722:         Error handling issues  (CHECKED_RETURN)
+/drivers/power/regulator/pmbus_helper.c: 48             in
+pmbus_regulator_get_value()
+42     	s64 uv;
+43     	int ret;
+44
+45     	ret =3D pmbus_regulator_select_page(priv);
+46     	if (ret)
+47     		return ret;
+>>>     CID 651722:         Error handling issues  (CHECKED_RETURN)
+>>>     Calling "pmbus_read_byte" without checking return value (as is done=
+ elsewhere 17 out of 18 times).
+48     	pmbus_read_byte(priv->i2c_dev, PMBUS_VOUT_MODE, &vout_mode);
+49     	if (pmbus_read_word(priv->i2c_dev, PMBUS_READ_VOUT, &raw))
+50     		return -EIO;
+51
+52     	if (priv->info)
+53     		uv =3D pmbus_reg2data(priv->info, PSC_VOLTAGE_OUT, raw, vout_mode);
+
+** CID 651721:       Insecure data handling  (TAINTED_SCALAR)
+
+
+___________________________________________________________________________=
+__________________
+*** CID 651721:         Insecure data handling  (TAINTED_SCALAR)
+/drivers/core/ofnode.c: 134             in oftree_new()
+128     		/* register the new tree with a small size */
+129     		fdt =3D malloc(size);
+130     		if (!fdt)
+131     			return log_msg_ret("fla", -ENOMEM);
+132     		ret =3D fdt_create_empty_tree(fdt, size);
+133     		if (ret) {
+>>>     CID 651721:         Insecure data handling  (TAINTED_SCALAR)
+>>>     Passing tainted expression "*fdt" to "dlfree", which uses it as an =
+offset.
+134     			free(fdt);
+135     			return log_msg_ret("fla", -EINVAL);
+136     		}
+137     		oftree_list[oftree_count++] =3D fdt;
+138     		tree.fdt =3D fdt;
+139     	}
+
+** CID 651720:       Memory - corruptions  (OVERRUN)
+/drivers/i3c/master/dw-i3c-master.c: 809           in
+dw_i3c_master_attach_i3c_dev()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 651720:         Memory - corruptions  (OVERRUN)
+/drivers/i3c/master/dw-i3c-master.c: 809             in
+dw_i3c_master_attach_i3c_dev()
+803     		return -ENOMEM;
+804
+805     	data->index =3D pos;
+806     	master->addrs[pos] =3D dev->info.dyn_addr ? : dev->info.static_add=
+r;
+807     	master->free_pos &=3D ~BIT(pos);
+808     	i3c_dev_set_master_data(dev, data);
+>>>     CID 651720:         Memory - corruptions  (OVERRUN)
+>>>     Overrunning array "master->i3cdev" of 11 8-byte elements at element=
+ index 31 (byte offset 255) using index "pos" (which evaluates to 31).
+809     	master->i3cdev[pos] =3D dev;
+810
+811     	writel(DEV_ADDR_TABLE_DYNAMIC_ADDR(master->addrs[pos]),
+812     	       master->regs +
+813     	       DEV_ADDR_TABLE_LOC(master->datstartaddr, data->index));
+814
+
+** CID 651719:       Insecure data handling  (TAINTED_SCALAR)
+
+
+___________________________________________________________________________=
+__________________
+*** CID 651719:         Insecure data handling  (TAINTED_SCALAR)
+/test/boot/vbe_read_fit.c: 136             in build_fit()
+130     		return ret;
+131
+132     	ret =3D fdt_end_node(buf);	/* root */
+133     	if (ret)
+134     		return ret;
+135
+>>>     CID 651719:         Insecure data handling  (TAINTED_SCALAR)
+>>>     Passing tainted expression "buf->size_dt_strings" to "fdt_finish", =
+which uses it as an offset.
+136     	return fdt_finish(buf);
+137     }
+138
+139     /**
+140      * place_fit_on_mmc() - Write a synthetic FIT to mmc1 and
+return its blk dev
+141      *
+
+** CID 651718:       Memory - illegal accesses  (UNINIT)
+/drivers/clk/spacemit/clk_pll.c: 42           in ccu_pll_lookup_best_rate()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 651718:         Memory - illegal accesses  (UNINIT)
+/drivers/clk/spacemit/clk_pll.c: 42             in ccu_pll_lookup_best_rate=
+()
+36     		if (delta < best_delta) {
+37     			best_delta =3D delta;
+38     			best_entry =3D entry;
+39     		}
+40     	}
+41
+>>>     CID 651718:         Memory - illegal accesses  (UNINIT)
+>>>     Using uninitialized value "best_entry".
+42     	return best_entry;
+43     }
+44
+45     static const struct ccu_pll_rate_tbl
+*ccu_pll_lookup_matched_entry(struct ccu_pll *pll)
+46     {
+47     	struct ccu_pll_config *config =3D &pll->config;
+
+** CID 651717:       Insecure data handling  (TAINTED_SCALAR)
+
+
+___________________________________________________________________________=
+__________________
+*** CID 651717:         Insecure data handling  (TAINTED_SCALAR)
+/drivers/power/regulator/pmbus_helper.c: 285             in
+pmbus_regulator_probe_common()
+279     	int ret;
+280
+281     	chip_addr =3D dev_read_addr(dev);
+282     	if (chip_addr < 0)
+283     		return -EINVAL;
+284
+>>>     CID 651717:         Insecure data handling  (TAINTED_SCALAR)
+>>>     Passing tainted expression "chip_addr" to "i2c_get_chip", which use=
+s it as an offset.
+285     	ret =3D i2c_get_chip(dev_get_parent(dev), (u32)chip_addr, 1,
+&priv->i2c_dev);
+286     	if (ret)
+287     		return ret;
+288
+289     	priv->info =3D info;
+290     	priv->page =3D page;
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--65VTsrMRCKEnFLwy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCamozUQAKCRAr4qD1Cr/k
+CvMgAQCiZpiaLRRWjmgb2TMSg50gRabVCnHy9nGJ3WkecVbpAAD/S2w2D4GbHMzI
+80skMwMmaqn539YJyvm8NCpvAFimnwM=
+=se2X
+-----END PGP SIGNATURE-----
+
+--65VTsrMRCKEnFLwy--
