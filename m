@@ -1,170 +1,145 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0E6C55165
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 14:17:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 002E2C55165
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 14:18:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D369740B33;
-	Thu, 30 Jul 2026 14:17:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AF2F3810AA;
+	Thu, 30 Jul 2026 14:18:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y0BqDBN-NYRx; Thu, 30 Jul 2026 14:17:19 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OI7XF8Dn3AUq; Thu, 30 Jul 2026 14:18:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F1A8B40B35
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 422CA8100F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785421039;
-	bh=B3bF601XrkX8xb+BXjgq5n20ivAbtUnnjW34YBCSMwY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=r4BrOwKq4fC62DposRjwxvFpdaaIlQFOZNzfWagmV5zJQeM7DPN5tWPb32sGJ70WS
-	 lgxCF3a6An1ehIaF74byJTV9MICcTBQMhoTjLfaIwjVQC47yW06lgxxINq4Tvn12fY
-	 kDPZccV0wrX2hhof0HeBI/ko0MbWLG8bL5Ys6aFeGe9zTUy6KNwytNohnausH4Eweo
-	 kEaANSmJL3INa4AnATSS62hTMv/uJDAfbc9vIgwz2xY/i6/Pf3XyWMU7UDK/igArSb
-	 h5FQeUPg0/+Pw3KsuXLq+xevcskGayXgJ5PASABWV7mAulOe7t2etVnzFl/yIM2Yzs
-	 uEhSA6FT3dCpQ==
+	d=lists.u-boot-project.org ; s=default; t=1785421112;
+	bh=bpa88baI3apR56Rriwe1wq2h2Tse1ZXwYjIMb/9Id18=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=pATJG0mWuETE55lOfM53gEeJdWB6m9LNH95WkEtErJ4TwOIC4ALDIUfsc8LGrSW1K
+	 5O3h5htNWsVUqY3V2qQQnB/EfRzIniZnlf88Cbid7sD1Sf3n2NbR8PPGFZT2lsBuWf
+	 Ky7UqaGpQgKmN2SVCSBoeoSuIpQM14naEjAwDkTmpQ7xJgXX7u1mwdgxyBHB9Ekz5p
+	 H0egZ/1HWA/vAF9qnZptbzciOT/1xHO5VAt69SwYgQ5cHxwU8k13Ixp9WAQFBVyFGy
+	 0OaUal2tRQHsdMlnbr5ZjQv9imk6RMhUnVb8WyGavSZzXs9h1lzX1olCc47fTzFeUq
+	 d0iAP/RGCs7mw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F1A8B40B35;
-	Thu, 30 Jul 2026 14:17:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 73F5727C
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:17:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 422CA8100F;
+	Thu, 30 Jul 2026 14:18:32 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6AB7869
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 653BA40B35
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:17:18 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5CB1540B3E
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pcPw2xKNBPBg for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 14:17:17 +0000 (UTC)
+ id ut4qJY3fltSU for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 14:18:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8383340B33
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8383340B33
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8383340B33
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:17:17 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OxQUXaAwpLmP17Rm7hzjSVJK8YthnUcyEQlDw/ff1QTZ2FX4ixFZR71SwFKqTLfRsio3F8548+KJfvybnheXzjLxkhBUfqFqrG/ZBK1B0xKnH0gM9LBjiGQQWIbGFp6KxFnsD3+X9evD+UiNmT2KCk2SlhzzdjWu3uUECGXRNu1tUfCoZQih0AcLVT+fy43UdGln42QTGeEhFZwJdDu9EEqozPbRE8BsLwRiLHlY6EDFhRcdUQsY/FyDqBDj3frSvjGOG4u0dmLUR3vftukKbO9b+4Ofw4CAs7BnmY55uCxcY1CzEsXb7qF7ijwqyJRCbEwmu0sBSsC6PkrZQRKKzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B3bF601XrkX8xb+BXjgq5n20ivAbtUnnjW34YBCSMwY=;
- b=qS4gnTV6MyyazGTB7mYpL6MaFj9NZZE5uiCueeY4heuJPtbcIh0pHh6zuUyeraHaMMGOlmffm0b5CM9ij7IDw1RbPGuhpRE6inr7mureWEyHpO5lhSNdxMtbGm9uRBtXc+vGKbu8HkPloP2hSrz3fC/0M0Je2AIwq6ozYgk90s1YJuhDpWkZLV0sgT+Hm6hIsHJ2pHjbnhSsHSpxTAVM1G3UpRDcraY8iYfh6TLtCX+uNnppKa6eBoRz7aXu5pJ4POMa1Iv7gLpqUENj02q8VcpokyvHIyL5MXDFGJgg6a1zsG16KQMEoKvuDLBPH5TC9TsMDxr76cqjMlYTogk2lA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by DBBPR04MB7609.eurprd04.prod.outlook.com (2603:10a6:10:1f7::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.14; Thu, 30 Jul
- 2026 14:17:10 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0270.012; Thu, 30 Jul 2026
- 14:17:10 +0000
-Message-ID: <dd4b848e-6007-4299-8889-56f020c7eb80@cherry.de>
-Date: Thu, 30 Jul 2026 16:17:09 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3576: Disable force_jtag by default
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.u-boot-project.org
-References: <20260730123001.1211166-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260730123001.1211166-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM9P192CA0012.EURP192.PROD.OUTLOOK.COM
- (2603:10a6:20b:21d::17) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2356A40B35
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2356A40B35
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2356A40B35
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:27 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c15cf78d1a2so267197766b.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 07:18:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785421105; x=1786025905;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=bpa88baI3apR56Rriwe1wq2h2Tse1ZXwYjIMb/9Id18=;
+ b=JighiipabYIq9YCG6LQMEn9GQuDwy6+R2Y4l2RMmFi7RKlZoJ2ktQm9MIom/VVo/0m
+ iUjux0XFCliiq5vcrtf0GJp+LEb4UhxkQTtt1799a3kNkJjh/ESGM0JvdX9sy46tu6+g
+ 3wmw3O0tFIDlBGssy+7LUPIndnevuS5bq4F7WqNguzbmPcAUSlxkv6fzydLo9dcPxWAj
+ 7l97EL3wPrEMXzZKItgaFSI0I4Z7OqYW1t8lnoF5QtTqXxluz2put/jQNZX0BLjEij94
+ vvb63445AJf5lO+bLSDtCnZLZUeUp8wWrVvenDr6IESG/up3vU7M06+v31fgy1Fs1rHZ
+ LE1A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpdWyF8ChpPF67BznYG4CxHfw0QzAkz8upYUp1H1JhAAPtXFUfAbGvWIR+uTZrQpAcn4Um8T/g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yza8hNWjAKrlLs3DYSh0rrCYHCtjL/Yl7d8JCIwcmPej3ODWuCJ
+ X9615TKXUdvzRl6qIGjbWuz+jSksjlJfPI5QYm7qblErTfb0S3npqp0DyCghAJSEFfc=
+X-Gm-Gg: AR+sD1120yu2OnEhlv9GlNmnnTgOWyQc16oFsVEoyVBpOaKGjqeyYrbOYpha0pSNxSA
+ 4hv1OAVIYUwybx4YtPhwCQEuklrRppHRh2n11I+oz+PQdIWuW73Px99gB4nh0pIM5f5vWiiZmB4
+ Qujjlsd2NsJmDF7csblMoeFFGLtMcw544emB+D9EeCPAQda1ykUAHu4AUqhJfsgA0So2aurV9cm
+ d+DUKHzN1yDhRpA0+gfsfogJtdw5Rq+PMl8nrTnypoRnCwYZBw8i70ubMzOkJ6pGPykpX+M8y0o
+ PX6rK0RusqR3nYtwKyCuvR7Rh99l08K/+xaWrkmXku45hj8LrNM69Eirhi0mHITodT0g84lTJXC
+ 2/jS9zzGPCIHiTtAjSUs77FV7FuaRR1i0ZEAJCFTJ4rpfWDfaqI8n1VLxq7y5jd84gx6rsrnyG1
+ CaRaiEi1DoHV+a8gRZAX+z7E4cGryYBAhNm98qnx+C3fDohzzdo5OuNChA7OM6joM3LDWl45jho
+ 13syFSgQ42mzep9wKsU+fiYiDa0K1xaRv6d0iuRgDbKnVN3t9VjtSrbOZYfn4kWn76VfTbRZqj3
+ oOe+cQ==
+X-Received: by 2002:a17:906:a353:10b0:c16:3a5:ee6b with SMTP id
+ a640c23a62f3a-c1fa55830fcmr111049166b.4.1785421105390; 
+ Thu, 30 Jul 2026 07:18:25 -0700 (PDT)
+Received: from macbook.homenet.telecomitalia.it
+ (host-212-171-227-71.retail.telecomitalia.it. [212.171.227.71])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c1fa851b369sm78608266b.9.2026.07.30.07.18.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jul 2026 07:18:22 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+Subject: [PATCH v3 0/6] Add Genio 510 and Genio 700 SPL boot support
+Date: Thu, 30 Jul 2026 16:18:06 +0200
+Message-Id: <20260730-ccaione-upstream-mt8390-spl-v3-0-82fb3bca27a4@baylibre.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|DBBPR04MB7609:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d6be017-b213-4e2d-384c-08deee453ea6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|23010399003|1800799024|6133799003|56012099006|11063799006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: FLCAA0gcfSTnnS4c1rPiTKfjVS+cg3RKB24TUPBPlF8r4L1sQ0v+bckNaxwKQS6OJCqzo6TAGt19PXUbWtr3nB5PBbTQsCV2oUDN3z7s1Mb284xu+ujFhnRvwHAP66ceI5cNPaRPXhVftlEMh+RpWFsLZMXn0VYxtb5OPKHqUou2V3t0ml2dEPivgd3DQf7f6LPSviF87THq6OUCbrSsZq0AqBymaD00h5BRqDHA5ijFhwBCnZlBbk0cc28qc5JMdmuP6Pm4Iz/YUlb0nulI+4B1HGMzZkphbTvOPA4iIP6IHbRoyyW0+zZBSJHO8kHTJ2YC+BCKBplwT7rnftcbne7CXhuSvkk54HAbU88mlRVhCxzEMWdDzgadNG+kRmyv9Ml7hxqjzc3WD3K6qFSIqfeiuLc5r9vKJ5V7gAOtUh0nI7bk5WCtOcJ3OuGvpEMVlyclC9qXv5na6x7c94OvTHk9x+5Hu/Csvi2SigmfKEl0PU4+dLkzt/qgnNI8Q3eZ5TN9hgE+36w+DCHiveGvS41Mo7F9r0+Ej+IckkmYQGek0QWA/5SszEKS32df2hffLjazfWWywu3oRW/whO79QUCc/qlBYK8BGI9bo359W1Aod0DR3xxjwa6taa3Pfok2aw+iwu4uHzv1Kv6FbwEfOA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(6133799003)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SkEwN2NxSjRKak9aY0pxb3dTNHBxemdtQnV4QWliV3Z2Vk1TRHRERnZQdWs1?=
- =?utf-8?B?OEtsZWROM05USDBSM0FwbWtJRnRVY3NnamZ1bFJka3VBaDRxZ3Fia21oSTN2?=
- =?utf-8?B?TG5vWU9BVGxLSUdKaDZVM2I0MjBtMThGS0o2bElNVUtoOVJrMjVJVlFNQ3Vt?=
- =?utf-8?B?VFlQQnNZK0dKNEVSNzA3WXJJN3FIdmpQMllTK0pubmYrNGpydUYrODdBTS9K?=
- =?utf-8?B?Vkdta1hOYVJqVjN3QzBKTjRVdTNiREQ3YkJua2RMZy91dHFwbit6cG5qUCtz?=
- =?utf-8?B?SXljSC9XV09CNGtKZGg0aVZzazl5bVFXblJPZjlENERkZ3M5em1ETG5pRU1H?=
- =?utf-8?B?WFVkN2duMWxLRmMvWnNuOVJiaHloaVRQeFk1RFBQZ2d6NnhtOTVWN2JrWnF5?=
- =?utf-8?B?OXFFUDdjT2c0UEhLWUljd0grMlc3Mi92T0lxcS9kS2pVNy9Ca0lhVUJJanF0?=
- =?utf-8?B?WEhaNmk5MnBhdGR0cCsxWmhXTzVGUUozM2crVlFpQVBEeTZZQ1dOeHAvWVB0?=
- =?utf-8?B?ZE4vVGhiNGhBdWRHb3MyN2hvMTU0dEswcXhnUHRwdDV5RERvNXl1NldRdmdv?=
- =?utf-8?B?eTlBQjVuL0hhZEdoTWd0ZjRQWEY4aVBYMDBhRnhsTGRKakxkcHowMS8xOG5Q?=
- =?utf-8?B?OTl1NUVCQzk5MzVJbUhEQTFocmpNcmZwUWRYUUhBNXJWaUNRbG5XN1paNVpq?=
- =?utf-8?B?NzZwV3ZCdTU4Vkc1NEtubExmWEJFYkZPNEdjMFlOQUxZMnBJdjNrdE94WW9l?=
- =?utf-8?B?TGp3OHg1WkxUWWxpWFpQeVhHSjJKelNacG9KSGpxSUFBSDlRRk1CM1FyelIy?=
- =?utf-8?B?bk1LZjZkZklDWkFLWmJOQm9sZEU1b3o0bmdSWmx0dFk4RnlLQjd3bGpqd3RW?=
- =?utf-8?B?SVpld3RVSjU1OGVIamRsdlN4eVRkc1BtZWZLMTVhRE9nLzZhSUF3eEtJQktS?=
- =?utf-8?B?dHhxYWFIWVB1dFRyZDFVaWxZY0t1ZnFiUmtrUS95YkpZSGl6d1RFY2F5bDZh?=
- =?utf-8?B?anhkWGY1aGNuV0FIUTdJRGR3amI4VGYrcUsxZzQ5d1ZaRDBMRjRlMjVxUVNx?=
- =?utf-8?B?eUh4VTBWSHpZTGNBK0lwREFwT0Y1UVBuempCYjcxalBkdVpsV2d1c1ZnUEVM?=
- =?utf-8?B?M3kzME92Q2svU3JOU2JSUmdyTkp1cUtrUzRDU0NNSkg4Um5XM1VYN3F3WHht?=
- =?utf-8?B?cGtLb2xuc1lXcmo4bVJFaktPQ1VjRm16YndEdmx0ZUdITmx0Y2dxNEVyWTVs?=
- =?utf-8?B?ME5TV2RyZ3c4UHg5VklrRjY3WnM4MTVxMVN0d2lXWm9jbTlRZU5KWGtybXNU?=
- =?utf-8?B?ZHZtOThzL3hEY3Z0bEVGWllrQVovS1VCTVFpK2RYeE9GZTlsaFRqMGpSVDRZ?=
- =?utf-8?B?NU5OQTRIRUJ3aTZEZDVla1lYejh6dFBUeXFDd3B4VnNWRTd5aE1TVUpxalNv?=
- =?utf-8?B?dWxjcUtESzlrak1KS1h2VjVMRGtKaDFPOTNtVmFhbWttSmxIRlRJVFl4VkpH?=
- =?utf-8?B?QXNWRmQxa1Jyd0NrTkJHdm9ReEJBUXN4dUVYek4vaEFPdXB1Wms1d0hOOTE4?=
- =?utf-8?B?NHZDSFR1d1Z3WWFSS3dDQlh4M3p2YXgzM2d6YmpaWFo4MXZKMWg5MzJDMWZr?=
- =?utf-8?B?NEt5YitTK0liMHNCVloxOEppQW9XS1ZMTE9LUlNuTW9hd1VIWUxialJSWjFR?=
- =?utf-8?B?Y3k3b3YrNFgzT1ZvVFhFWHZVa3pmY1U5Y3doYmo4bHhSOVB1Qm5mcHA2UWVL?=
- =?utf-8?B?VG9NbFZFd2NBZmIzeUNMK3hKanlxc1VmNEplb2wySVl3SnZReEZwUGlQTzJL?=
- =?utf-8?B?MmR1RzNaMU5GREdGbnZwQStBc0JpMEJMSk5rMnIzb1FNVHh5UlFRS014bGQr?=
- =?utf-8?B?eGlyVDVkcndSZTJwWEg4VC8zRmRlWk9JdGdkbXI5Q0prNmRCN3NuK0RRTGJy?=
- =?utf-8?B?aWd5c0FLSFJIWUxNY0RpRmxBc1g3ZWNNRUhOMGdUNVNyTzNBRENxREVGTTZ1?=
- =?utf-8?B?UDZKVmlFQW41TUxBS0xHNVBtcy82VkhBbGFXaStvMWcvNlRkWU42OTU2T2FB?=
- =?utf-8?B?QnBmWnkxNHlsTnA4enM4SVF0Z2NDdFZyT2Z0M0pVSHJkMHpkSkt3STIwcVFp?=
- =?utf-8?B?Y3VqQUxjQ1FSYXdtV0ZSR2tWRTdpSis0UDZOcnlBTkwwNEZRTTgrOVEzN1VY?=
- =?utf-8?B?SXVwNktEZlRHRHFFdTR1RWVvN2FQcmhxR1hiZ05oT2RzTVZtNWhmL1VLWGth?=
- =?utf-8?B?WWZ4ZXFKOFVzYWsrSDNOWjhVbXYrMW5abXpqTFk4V2srYjVlekFIYXNxVEdZ?=
- =?utf-8?B?ZnJNNnkvY1J3ZHRpcjc4T1lpeXpEV1pFd205U0oybnU0VlRGT3EzZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d6be017-b213-4e2d-384c-08deee453ea6
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 14:17:10.6636 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GqOTl7lcwXHqsGNFcjTscrudse+fL3FRXy+Pfc+5q3z1N1r2K+x+Xw9WA1caxkYckGF6AtFue4uvx5CjJg480vHV4yBDwZ4MYf0xmZaKf1k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7609
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NyQrCMBSF4VcpWRtJ0iHVle8hLjLc2IgdSNpgK
+ X13k4ogLro8cPj+BXlwFjw6ZwtyEKy3fRdHfsiQakR3B2x13IgRVhFOOVZKxAvgafCjA9Hidqz
+ zE8F+eGJuqkIJyrSRGkVhcGDsa9Ovt8/2k3yAGhOZHo31Y+/mLR9o+n1L9W4pUEwwZWUlK220y
+ M1FivlppYOj6luUYoH9cIztcyxyXAhCyrwoOaV/3Lqub0oVuN8qAQAA
+X-Change-ID: 20260717-ccaione-upstream-mt8390-spl-7f64ca12dfbd
+To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ u-boot@lists.u-boot-project.org
+Cc: Julien Masson <jmasson@baylibre.com>, Quentin Schulz <u-boot@0leil.net>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Carlo Caione <ccaione@baylibre.com>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>, 
+ Johan Jonker <jbx6244@gmail.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Alexey Charkov <alchark@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ Suhrid Subramaniam <Suhrid.Subramaniam@mediatek.com>, 
+ Arnaud Ferraris <arnaud.ferraris@collabora.com>, 
+ =?utf-8?q?Pablo_Sun_=28=E5=AD=AB=E6=AF=93=E7=BF=94=29?=
+ <pablo.sun@mediatek.com>
+X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B3bF601XrkX8xb+BXjgq5n20ivAbtUnnjW34YBCSMwY=;
- b=iQ6uH9dK5mlc/HXbejlMK2WnjRC5+lRV6Pr/GXLoFk85UTuG2VmT9GH51XYrJH7zxExKxCsNiEYdDT4tfUDB57sP81XsGbPMTGeBDMf7S2NJK8pbNT+u+Povq6ynMCAsIS5Be6IXdxXHYpXw7TlS2sUYIZHPKo3MjMhfriNtdLU=
+ d=baylibre.com; s=google; t=1785421105; x=1786025905;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=bpa88baI3apR56Rriwe1wq2h2Tse1ZXwYjIMb/9Id18=;
+ b=RYS9KEx47HkUaaCom/atCPIbgJ3/a5iseb8aAbBrEtI7Y0ksid5pikQFBq0D31sLa/
+ hU6jRNA6FKr3HrOG6/3xbqr36cHhlDbOmz5GqOc73KXSy8mdQZB9GPxgpB4fvgOvYlW6
+ VHmCTMGkLTufcMEg9xueqRZAJ8bN0EZWSK+UZmIAAsA2A3cfBw/q2yjHgSJHk7ToHMiF
+ 12dYerfXo1f6HaPFIHqBBB6CXq/D8oC3+ecKCH9N/45U6mIY3YS/GKw7T0wjmYbuLDjX
+ DP7Tsb7wvL4H+jzi8jkSXAQM4tYF29JIFN0HYlHvliF26ZNm7XAq845/KYYkrTo4tKI7
+ wsIw==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=iQ6uH9dK
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=RYS9KEx4
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -179,68 +154,72 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Jonas,
+The Genio 510 and Genio 700 boot chains use a platform DDR loader built
+separately from U-Boot to initialize DRAM before entering U-Boot SPL. Add
+the shared SPL devicetree and configuration needed to initialize the debug
+UART, watchdog, pinctrl and eMMC, then load a conventional FIT from the
+bootloaders GPT partition.
 
-On 7/30/26 2:30 PM, Jonas Karlman wrote:
-> Rockchip SoCs can automatically switch between jtag and sdmmc based on
-> the following rules:
-> - all the SDMMC pins including SDMMC_DET set as SDMMC function in GRF,
-> - force_jtag bit in GRF is 1,
-> - SDMMC_DET is low (no card detected),
-> 
-> Note that the BootROM may mux all SDMMC pins in their SDMMC function or
-> not, depending on the boot medium that were tried.
-> 
-> Because SDMMC_DET pin is not guaranteed to be used as an SD card card
-> detect pin, it could be low at boot or even switch at runtime, which
-> would enable the jtag function and render the SD card unusable.
-> 
-> Or boards using cd-gpios may switch the SDMMC_DET pin to GPIO function,
-> which would enable the jtag function and render the SD card unusable.
-> 
-> With commit d0a838bdc629 ("Subtree merge tag 'v7.1-dts' of dts repo [1]
-> into dts/upstream") there are now RK3576 boards that have changed to use
-> cd-gpios for the SDMMC_DET pin, e.g. NanoPi R76S, that may have issues
-> detecting SD card unless force_jtag is disabled.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
->   arch/arm/mach-rockchip/rk3576/rk3576.c | 7 +++++++
->   1 file changed, 7 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
-> index e3e93f663959..0f41f210a9a5 100644
-> --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
-> +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
-> @@ -26,6 +26,9 @@
->   #define SYS_SGRF_SOC_CON15	0x005C
->   #define SYS_SGRF_SOC_CON20	0x0070
->   
-> +#define TOP_IOC_BASE		0x26044000
-> +#define IOC_MISC_CON		0x00F0
-> +
->   #define FW_PMU1SGRF_BASE	0x26003000
->   #define PMU1SGRF_SLV_LOOKUP0	0x80
->   
-> @@ -190,6 +193,10 @@ int arch_cpu_init(void)
->   	 */
->   	writel(0xffffff00, SYS_SGRF_BASE + SYS_SGRF_SOC_CON20);
->   
-> +	/* Disable JTAG exposed on SDMMC pins (GPIO2A2 and GPIO2A3) */
-> +	if (IS_ENABLED(CONFIG_ROCKCHIP_DISABLE_FORCE_JTAG))
-> +		writel(0x00020000, TOP_IOC_BASE + IOC_MISC_CON);
-> +
+Add an opt-in binman description that generates the images consumed by
+the MediaTek flashing flow:
 
-Please:
-- use a constant (e.g. #define TOP_IOC_FORCE_JTAG BIT(1))
-- use rk_clrreg(TOP_IOC_BASE + IOC_MISC_CON, TOP_IOC_FORCE_JTAG)
+  mtk-boot.bin
+    MediaTek BootROM wrapper containing the platform DDR loader and SPL
 
-It'd be nice to be consistent here and do the same for other writel all 
-over arch/arm/mach-rockchip/ but that's a different kind of task :)
+  mtk-boot-payload.bin
+    Raw DDR-loader and SPL payload for external MediaTek signing tools
 
-With that:
+  bootloaders.img
+    FIT containing BL31, OP-TEE, U-Boot proper, and its control DT
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+---
+Changes in v3:
+- Add Genio 510 support using the shared MT8188-family SPL configuration,
+  pre-RAM devicetree annotations and binman layout.
+- Make complete image packaging opt-in through CONFIG_MTK_BOOT_IMAGES.
+- Keep the binman image description in a separate optional include.
+- Leave SPL binman symbols disabled by default on MT8188.
+- Add optional RSA-3072 signing for the bootloader FIT.
+- Emit the raw BootROM payload required by external MediaTek signing tools.
+- Document component-only, unsigned, and signed build procedures.
+- Link to v2: https://patch.msgid.link/20260722-ccaione-upstream-mt8390-spl-v2-0-7aa005345711@baylibre.com
 
-Thanks!
-Quentin
+Changes in v2:
+- Clarify that the platform DDR loader is built separately from U-Boot.
+- Fix the SPL copy-window wording in patch 2.
+- Keep the SPL annotations board-scoped and drop the unused pericfg_ao tag.
+- Normalize the firmware-stage names in the board documentation.
+- Simplify the documented build commands.
+- Remove the redundant MediaTek documentation maintainer pattern.
+- Add links to Genio Tools and prebuilt images.
+- Link to v1: https://patch.msgid.link/20260718-ccaione-upstream-mt8390-spl-v1-0-1256b6dfda3f@baylibre.com
+
+---
+Carlo Caione (6):
+      arm: dts: mediatek: prepare Genio 510 and 700 devices for SPL
+      configs: mt8188: enable eMMC FIT boot from SPL
+      arm: mediatek: build Genio 510 and 700 boot images with binman
+      arm: dts: mediatek: support signed Genio 510 and 700 bootloader FIT
+      arm: dts: mediatek: emit the Genio 510 and 700 BootROM payload
+      doc: board: mediatek: document Genio 510 and 700 SPL boot
+
+ arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi |   9 +-
+ arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi |   9 +-
+ arch/arm/dts/mt8390-genio-common-binman.dtsi  | 155 +++++++++++++++
+ arch/arm/dts/mt8390-genio-common-u-boot.dtsi  |  94 ++++++++++
+ arch/arm/mach-mediatek/Kconfig                |   8 +
+ board/mediatek/MAINTAINERS                    |   3 +
+ common/spl/Kconfig                            |   1 +
+ configs/mt8188.config                         |  27 +++
+ doc/board/mediatek/index.rst                  |   1 +
+ doc/board/mediatek/mt8188-genio-evk.rst       | 260 ++++++++++++++++++++++++++
+ 10 files changed, 565 insertions(+), 2 deletions(-)
+---
+base-commit: bf75f80082a194a95eb2aef039a746c5765ba8d1
+change-id: 20260717-ccaione-upstream-mt8390-spl-7f64ca12dfbd
+
+Best regards,
+--  
+Carlo Caione <ccaione@baylibre.com>
+
