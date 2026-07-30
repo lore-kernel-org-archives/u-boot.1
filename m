@@ -1,107 +1,106 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D56C55162
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 21:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C229C55162
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 21:55:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 640D380F0D;
-	Thu, 30 Jul 2026 21:55:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D0DCF60A94;
+	Thu, 30 Jul 2026 21:55:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gsn-Cs8Af5hi; Thu, 30 Jul 2026 21:55:07 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U3pqJyogd4r1; Thu, 30 Jul 2026 21:55:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1A39680E81
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 43B7B608AA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785448507;
-	bh=XIdo+oCYcZLNRXR+W9CvX/ZqtiFry8i57phKTjDnLYI=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=H8A6k+zIS3GwYLbLp8hqPL+kGigMNktMO+vpKlxdY9dRp/XQVS/HRgDLI4DDgroTk
-	 49dchnPqvqwvCl/9xlsbC/kuzfNwuFaVf+AT+/vDqlfQZbaK+DiB5i3TeLKjEa92Ky
-	 7tzv1kTfZvuycmFaE11Qpm4qJZVaRp1MiBxIGueZhKSHkjmVn9oUQU+p4M7mg8lNEP
-	 3m9RjplCoed8sBzJvFmYyEHUurUzH0JTExiGN8ZXoztaAavQqVy3dmaVZB1j9CqlF9
-	 jxvvM6lP9vI/tmtkuFaZCC3EAQG8YFBNEzwo8fYZr0j8epyYYdSUFDPhGq7ND/PkKM
-	 MgdWTGdixgJnA==
+	d=lists.u-boot-project.org ; s=default; t=1785448510;
+	bh=o3VIEGm51FV78cRFtY0/N8TNvi2OYoKTVidxiJDesTQ=;
+	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=FMcoUAO+foV4QsUTIUvyeKmRwDEZElJCrcfFj1aEKsRF4ptvorxOT4DyXk0KTnWaS
+	 dBJEsCN7QOuskV4UKjRSlgVsaxTqTi9NeOzum32oYPHXO4WbdPAn4qOXvPTV7HTcI3
+	 CF70D4H/pbNom5yPU1Bd15WNFOZs44QfOSGZ74JX0t1bBFUoo1UrOP7EHn1rwO5U1A
+	 xYSoGFaCSk7HkFAvbCYyMazW5k+VlBL1i7g1b51HjeaysIIMQxMzAdspzQ6SQdVeOH
+	 pHeWrgA+R3U/z33ymdk/46vgj5Vsnaxe30UYJLxjIjOmP41YGdXw4OKjjOarfi/HCy
+	 m0VSPQy0DswgQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A39680E81;
-	Thu, 30 Jul 2026 21:55:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A5D1469
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 21:55:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 43B7B608AA;
+	Thu, 30 Jul 2026 21:55:10 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9046A218
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 21:55:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8B3D640A60
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 21:55:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 762B340101
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 21:55:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id akHfY2WrMlot for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 21:55:05 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v7ht52r2uJe6 for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 21:55:06 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
  helo=mx0a-0002e601.pphosted.com; envelope-from=rs@ti.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org E983140A55
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E983140A55
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C169E4008B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C169E4008B
 Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
  [148.163.150.75])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E983140A55
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 21:55:03 +0000 (UTC)
-Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66ULUUb72272137;
- Thu, 30 Jul 2026 16:54:54 -0500
-Received: from ph7pr06cu001.outbound.protection.outlook.com
- (mail-westus3azon11010046.outbound.protection.outlook.com [52.101.201.46])
- by m0380145.ppops.net (PPS) with ESMTPS id 4frekc042y-1
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C169E4008B
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 21:55:05 +0000 (UTC)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+ by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66UL0vWo3684036;
+ Thu, 30 Jul 2026 16:54:58 -0500
+Received: from bn1pr04cu002.outbound.protection.outlook.com
+ (mail-eastus2azon11010059.outbound.protection.outlook.com [52.101.56.59])
+ by m0384305.ppops.net (PPS) with ESMTPS id 4fre5g0acs-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 30 Jul 2026 16:54:54 -0500 (CDT)
+ Thu, 30 Jul 2026 16:54:57 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sHkdoMcX3kTrsMg0+0LkTPkKl6AHkg+RV9hrkliSjZLdx/1ry2KigjwrAFC06AAWjCM7VdcVGecRusDxW/M8v7xU5ITBKtJJAh/CryCv0lRrK16bbn9e1vFULs/kuPLiyGGXegJtrF6Pewq5I5IZKYOSUqEKEigJ8zGpx32c52ZKwP6krM5ieNmC0nCFzZvlLhpYdt/bnKy/MBYAdLi7hCpMsJszEEkU3lKD9bfuz9L81fLIWlU7Ru7UzkrrsgLqhRJwVW4XYgxzgNmR/4LF9rGJQamYqM5/Svl7U3cAuBAszZ6WgY+t2N116fa/Q5ah79l8L1GJ4bYu/tmWxlU9VA==
+ b=vBoZOuXhvKnyQ9WO9T2INaT7fB6XLBxXuXKrZOFB0aVjZyemrAPxskqyaPSZscjbUSXPQO3R9iJifFI1ppr/8/qFcc+izGbED5IRfTX+8N6DRQN0Z0oRjwnjISgYihnX8ZFadyuKi7HBPQ5ru5M63DreoOn2cMaajLmGtg5MyCa6CVSzWo5OU84edWYvWIau5Jf5hR3CS7VB1CuUZxe1rotUT7lOQXT/XskMxyFII3sD7sTXfDUfTu5zk9YFhHpUpP/sJOfikvjWAeSoeHjIWzK04+5cZUJJmt7vzEAN79l/qXwXvUGKtlQWpvrDejIFjg49y101eSic6tfnDIp0DQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XIdo+oCYcZLNRXR+W9CvX/ZqtiFry8i57phKTjDnLYI=;
- b=U4c7euPycBOO57md5ZAcJd5f1vl9huuUH2PLjfu54xrFHM6MelDdwmlROsiBk4SeWoxL1YHCcpfx7roMdHgpZEv5bSH5KyQJSWZxIrQj2RHegiWpFCn++unmHFt1j4wELToe35ROJVLi/q5NNV5wkuRIsGwPbvFt76YKvrVsx/6Rc4eR3GtrCOQbRLt3k1tZNC1pFdWO8JsqkuaqOM5zHnVqZOYo1ML6YB2JZqLCF+W3Vih7xbef5p9QWXk1rZva1VJCwcU3v6IFUEOz+nWDP03kidoyOU9H+inyHHH6vP8xxqjlHgC4rqcBX1MwLfDgJpmB4XL+NGdxAfYUBq0VIA==
+ bh=o3VIEGm51FV78cRFtY0/N8TNvi2OYoKTVidxiJDesTQ=;
+ b=ileZ39mkDJ58iHVo6+MCJc1F5gC8paB+w8WzRzCHNH9DsVoOhxf5K8SJ/tKCsvzdF9MmfPFQffWT0CCA7bRCBMJFrkV3noJ3y1xi8NXGwwfKZF71VXKKLEiMMTFa/Ml/LI7yPmvz+1kU5/JvdmzOyXBOfDLoXYi/REDrfhuyrVbkcgtAF7yUcvWeC4XswnoEqqVuhZvDnIwsb3NttmB5oKqcNhW0oJBrJFLBPKItRZ/7Mkf/LOsRgoyZLnVpNPQPhqUbB3za7L1oDI26+BoPyXwzcH+C5LVoWh3gBR72kdZSvXK71DrGljGU4jGIeCyKX134E/wFxrUHv97xcm8MGg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.u-boot-project.org
+ 198.47.21.194) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=ti.com; dkim=none (message not signed); arc=none (0)
-Received: from CH2PR08CA0005.namprd08.prod.outlook.com (2603:10b6:610:5a::15)
- by SN4PR10MB5559.namprd10.prod.outlook.com (2603:10b6:806:202::16)
- with Microsoft SMTP Server (version=TLS1_2,
+Received: from DS7PR03CA0155.namprd03.prod.outlook.com (2603:10b6:5:3b2::10)
+ by DS0PR10MB8150.namprd10.prod.outlook.com (2603:10b6:8:203::14) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Thu, 30 Jul
- 2026 21:54:50 +0000
-Received: from CH2PEPF0000009C.namprd02.prod.outlook.com
- (2603:10b6:610:5a:cafe::1) by CH2PR08CA0005.outlook.office365.com
- (2603:10b6:610:5a::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.14 via Frontend Transport; Thu,
- 30 Jul 2026 21:54:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ 2026 21:54:54 +0000
+Received: from DS2PEPF000061C2.namprd02.prod.outlook.com
+ (2603:10b6:5:3b2:cafe::91) by DS7PR03CA0155.outlook.office365.com
+ (2603:10b6:5:3b2::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.13 via Frontend Transport; Thu,
+ 30 Jul 2026 21:54:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CH2PEPF0000009C.mail.protection.outlook.com (10.167.244.24) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ DS2PEPF000061C2.mail.protection.outlook.com (10.167.23.69) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.292.8 via Frontend Transport; Thu, 30 Jul 2026 21:54:49 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.292.8 via Frontend Transport; Thu, 30 Jul 2026 21:54:53 +0000
+Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 30 Jul
  2026 16:54:49 -0500
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 30 Jul
  2026 16:54:48 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
  Transport; Thu, 30 Jul 2026 16:54:48 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66ULsmCp3487016;
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66ULsmCo3487016;
  Thu, 30 Jul 2026 16:54:48 -0500
 From: <rs@ti.com>
 To: Anshul Dalal <anshuld@ti.com>, <robertcnelson@gmail.com>,
@@ -109,95 +108,91 @@ To: Anshul Dalal <anshuld@ti.com>, <robertcnelson@gmail.com>,
  <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
 CC: <u-boot@lists.u-boot-project.org>
-Subject: [PATCHv5 1/3] arm: mach-k3: am62: add &main_uart6 to clock and pwr
- tree
-Date: Thu, 30 Jul 2026 16:53:18 -0500
-Message-ID: <20260730215319.965327-3-rs@ti.com>
+Subject: [PATCHv5 0/3] k3-am62-pocketbeagle2: add board and variant support
+Date: Thu, 30 Jul 2026 16:53:17 -0500
+Message-ID: <20260730215319.965327-2-rs@ti.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260730215319.965327-2-rs@ti.com>
-References: <20260730215319.965327-2-rs@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000009C:EE_|SN4PR10MB5559:EE_
-X-MS-Office365-Filtering-Correlation-Id: f6388978-4495-4c27-e5a2-08deee852d99
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C2:EE_|DS0PR10MB8150:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd7d0bb6-a60d-47b3-4575-08deee853002
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|36860700016|82310400026|1800799024|13003099007|10067099003|56012099006|22082099003|18002099003|3023799007;
-X-Microsoft-Antispam-Message-Info: m3KCOj98s8pxPqmB/c4O5Us/1YZ/X+SzLuUF/cen4ijPK/uPEi4DJCy78UQJ2JE2egSEM6Rmc1ghXyELd9MYB6ytUmASJeze7l1g8C/m/xjWSG7kwrQtLAa+NQA45MbwBltgXB/gO8fCwXt7XY5lLI2xwr60l4Ht/5UXBUKh72B41M/SZu5xKVUaY4MlP39ybh68XdHPPDUDDJhgZwbjySRYp5fokM68TOnX+R9q/Xx4nvHr8qvsMK8kEGAiXa784wfTepXzNghjwU+cN9tkHmYwTLR+xzKCbz3ebuG4VJJAnnDcxASBLt6Fiyo3c71Kehdkw56ktqsXQRcuk6hitse/Uff2LWNaWktDxqv3CXV2sqDY0H89QXE3fCOdgth+52D9NrgerrBIUjfSxEBHqxzY7Wd3P5CWdBiIrb7Ci8C+TLN6URQmF05mco4aad+QV6xnKDMaHXwhhCCFNX6Q9FyioPRPfzyKZCpF6JUETs8qM56Ay+ZjIKJ7wpP17PVLsudVaRUVVRIDP1jGdSVP25slciX8x0sCnWxS43nDKAPYlPEI2gimrOQ2RJ8ZheAa+SMs/snRS/ibQHWay+nhQLcRpFcbgQ/gn8w3/vPtaDbHl3OAx5uKt1KCF8umT4GQFLVIgZEK/XoSZhGEhCToig==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(36860700016)(82310400026)(1800799024)(13003099007)(10067099003)(56012099006)(22082099003)(18002099003)(3023799007);
+ ARA:13230040|1800799024|82310400026|23010399003|36860700016|376014|10067099003|56012099006|3023799007|18002099003|13003099007;
+X-Microsoft-Antispam-Message-Info: o2N+JZ4o/6l3RWlMRhtgSRIUYCCI+OB8OYjxGKr6lZnH87wlbZT/nLYevNuoVjbodm8DyPv9I8bA/N4jcNYad/uXspe7DNJ2nfoifSuPaNo+lijSjPQAqdGc4Y4yTqu7m6rhnFVVA3a1aOSJeSJbwJZ+3Ycxzfi+Mdv0HJ8peQ5lUsf6Jw1Ls/KQvCF0IJpndxMEZ5qMfCwG7obcPyQTJmuSyB6aIEzVIRsPKcz7Xjhc8cpRsRVVof3daxT5iIK0hSDZ4c/6yvq1c/I7QIQQDBA1/P78G/Mb6vcrN6uodHzRI416vNFrdIaGhwBDfZib2UrPwgUdVg/8L1veOi66emfZnDdmEEwSF6S1mH21CmRfQPGgWVMieqwJASDin4JtwsgwAVry7t3bcnmVyAQQl8hu6Ec8LB4hff58y1IL7Hz7ZG8DuvI3pmdJYxrsbKkHGyfEhpH3WdSGFEqatunY30XVKl2LA5+Sh+kWWA3ZcncUneOhwevoMnHmiKolaEBSX8rmciXVKztUK1LDPUcNWL045YtNchB4US1JlnQ/r6xEqGwGney98WJR8lhNUtnCYYZN8r/e74W5GioWKXAj3Jt1cicgRSYcBbyvRtmFQINkqNJiISiyarv+g4LFB90g6MS3YBwL0jr5Sjq9T4Bs5OiP4oqfvvCXSwRoMoiDprA7xzNEdxOHwCdBjM9hk0pKYH1PIU6RY5/xbt4JFk8Org==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(23010399003)(36860700016)(376014)(10067099003)(56012099006)(3023799007)(18002099003)(13003099007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: g93TN8RWK2Jgl472QCn9kKwBsbVKac7m80hLWkSmQYSNN+aZ5CgDUx/eujdGyM6vJjWiGDVjLm6gIuAJP2ePHHqDmYSIiLKAmL7wjeHIFi8jP/voC6Vlv6+HouwnZ1fWm+5PQ2ZdbfsjPyrnwJMqsmkNd8DvAG8l9MvZWbQ/FjmmPW7V1HhSXRmnFyHKXQ6kdc15W1E26c++WxBqijmtXBBNMCQlwFX/l2az4r9ErEKuaAKM6bqDyOHNBtJBHbyFViMbEUCJ11R4emnh0/XCAtZRykeKDDnnKpt6485EXdllOlVf4ZWndDoSb/cTTJsmqNrSRd9+CIoFz0C009TZUm2Y8Oyn2iCuTWwCkqXUHtbHSnCWCfKyv7R/b6ZQPqvHrYVyh6LVxFizWCpXuepSd9KBDmGQWXjbkWkRuiWXLK5G1Dr9gCV00ZDmwxILRnIV
-X-Exchange-RoutingPolicyChecked: p8lM7zth75otitPn5WoO1tj+wJ8wzjrEpp7Yv5CE31sBW2kjsQI3hU8HycD1+m8SgntJ2zUdjiGM6HpyV3qqABRQ4sv4nKPqxRWQMaLfYY16JcXWwlup/JyMY1CktTd0CtTJwk+6EP8sTXTJCymZ5JlpPw+/rI1IMXXhHp0+YP4sPEgHqS3CuuoYde4oG5SLuWloQziylfk2Rw2RGNfc+Vesqj5qVrUs50xoJ6mWq5NNVhfKgyyKNfJ+6Ukj5HHjt6DRpil5p9UreN2IqMu9pokvnPGB9ojsRvelemT5mCYRMa8u8bsM2xTpw8grx8KskWHugmscYs51daZ2O6wUwA==
+X-MS-Exchange-AntiSpam-MessageData-0: M6xijAb5j7hRNClPDmfQ0t3CimcpjsugYQx2gTL7Sd9yXGg+Dep3jViKITNukhjFcTDpfc6yfexrkfWZXED/j+xhMDOdtwWt9vtYQbHpJpjLdPJQ5TI4fBcxJtFNQ0IVyb7DWzq5iBRigaNi0h9TfRCZy0iPm0V+5SNRnu/L9KQzfMaEzYgSP6f31rS96WZ8rXxFjnsmx3yYBsr8F7wLGXBQsEcDZtDNFiByv04Ny23nPEth3q0cYL/9pBE30qPlB+oytYr+1fiepDlZu/7ZQQYiKe2CtJBVxIkOeOkc1QRWIypScbURiWz55RKRXP0A78PxooAw0C7mISjhTInSNzVC48u3pIAdfyaYZpYJOYHvFwElBXyVfsQnDOw8291yM6YRIUhMayBO0jEZfO/L0HKYnRbkVbJVYUsPOKAcx0KJmkh1WC5MVy23x05NVdY+
+X-Exchange-RoutingPolicyChecked: J/VrXOnYUb+n4TI9fuLXi9hU2UPRRxcc3i7KFgtuwYKWHfIYolpiYdLn/5C3zw93ElnOVuBznGHVQKuky2Vmd3VPeOxJx7f6N+XbDY468wKhpebyvtu1Z/nApRZ1h/99ucVNnL3xFeFbShvavw4qXYc5/RyGRFZmkePEu2ApXDnV6pDIJPPjKcKgPMfzWOe1cGBR3epP488DzEK7la1pKni//U+OMyP4vxn3x8WmUTKAKkZy4+fDaHivN/xT4oJvMevnRQ+fhp++NQF8wvhysmVMVDmgEJsFbayIoGHaCAJCHgbltNL1BeAyvux25N5+EKHELawB3mMjqUvAkhi6lw==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 21:54:49.5337 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6388978-4495-4c27-e5a2-08deee852d99
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 21:54:53.5638 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd7d0bb6-a60d-47b3-4575-08deee853002
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF000061C2.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5559
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDE1NyBTYWx0ZWRfXyYaHuEAPzcxr
- uq7D9LWi+iUjakvav7ag5igVG58emhr2adMpWoj07p6Mh4xL9DGrxyCN0SrbOaTXMTGljbHtSdL
- DNUjdGU7ch7MH5W1hd6FUAgPPyVagNLOCngKfTfO2BjMXdFI/plbrK9c0miRn9b3ZIyF2HYWQwc
- UphovUqVPrKgPeNjSGa8PStuvxzm2IJhmamMXk55dcGpEEr6xLQnAvIhNmG7n6iP5jutDaD8rIi
- yUXvznEsw3pC7tLL1SfREjmVLI84KWMpNRKnskAmOGNKCxpPgUe1ZKw+i2GlsemBMSrTmFJeIJB
- iCPhYd7IIpuNdpi1MSDX3k3oHNv5H14RY83RB/lg8cYVC7RC9gdVYLVHKec1J8xIxowFAnW5cIv
- 1DuYZkZ//A6/tqMD7wVKC/X1VefTaZXhwUJfdWui+ZYCSYx9zYnM+ZdJrEUgavrCHa6ImP3/+BA
- +tRN49Nj3K39KOlREIQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDE1NyBTYWx0ZWRfX9roit1OoupGc
- CwtC0zWMg4Y5mKpv7yXP8rAzusWwGBZMzujTej2yMI8wJq7dCoIXZsXcY7fJdQsGj79iwcZ9urL
- mAC35JdJUXyUADeltl8RJtiGGlkLo58=
-X-Authority-Analysis: v=2.4 cv=Z+Lc2nRA c=1 sm=1 tr=0 ts=6a6bc82e cx=c_pps
- a=Sm015RFco05wDkMfClhrzg==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=WtDTEybOK8mIDu76bVQA:9
-X-Proofpoint-GUID: TvJChOAnHDjfeHM3emZ1lVc2W0Bhxqmb
-X-Proofpoint-ORIG-GUID: TvJChOAnHDjfeHM3emZ1lVc2W0Bhxqmb
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB8150
+X-Authority-Analysis: v=2.4 cv=PcrPQChd c=1 sm=1 tr=0 ts=6a6bc831 cx=c_pps
+ a=V2btASzwI3AgjbPAPCrjFw==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=RAioF0-LDSMA:10 a=V5UXEbMT0ywA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22
+ a=VwQbUJbxAAAA:8 a=sozttTNsAAAA:8 a=NEAV23lmAAAA:8 a=fGhLjsSNAAAA:8
+ a=p-9UOXJPfmAuPFXLY40A:9 a=LYKFdyShAPKLkGq8p7WX:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDE1NyBTYWx0ZWRfXzsoyHwxJbX0P
+ E5YzJ8ctQExubJtP19le3uzo9gcCn3fYsckwZNT9S60zqKkjgTmoVnDFEddLSW4FfEiQMKYbBBH
+ c2zKv+Le3HDcfSHLuCr+MaeeSR4xYFQ=
+X-Proofpoint-ORIG-GUID: TkqJf9k_znXHGDsKiwoLbYdBKK3CMY7z
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDE1NyBTYWx0ZWRfX0Rn746PT3Uff
+ UPuwwbeUiCXXht49uJEVMJorUgc8TpqKSM0SEy7FpnIYQlBrehn0c00AkOi5XAFrHYN0fD+FjDF
+ g0gmD0IeKIleHp2w6qmTJHWsIC9lofLl8jpFU6eQpN7KLKm3OoLfkNN2AZNzJEFarn/V38sjc8m
+ OgFuTIjZNKcMwlMmmimA+bsFWKv0gJvfzwInoSjUfTYMHwKUYWcyv639/K/9hky0ilaBZ7b/EWT
+ q89giZ5ZDjs6LMXwM9WJD2V0DVei27Tg4c6EIoo3KxZQGr8SbQ2H6B8mbos8nV38X0DHwRAcLd2
+ rDgIgl9+3QlNAmYQ1GWlnkS5q1mMfSLDwUXWjGYOWHbwFvTPCgpL/t6+11vWlllAEXBlqtNXkxq
+ TwNjOM19JsatxJ1KJM5uLKR1pRyT2cJjUtjV9NwCBUaDLlrUmpLu+F+F7F5tEVSM950JuWkuLRt
+ YxCeJSyDn7NZ18GfyeQ==
+X-Proofpoint-GUID: TkqJf9k_znXHGDsKiwoLbYdBKK3CMY7z
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-30_06,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
- clxscore=1015 impostorscore=0 adultscore=0 phishscore=0 suspectscore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ malwarescore=0 bulkscore=0 adultscore=0 suspectscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300157
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=XIdo+oCYcZLNRXR+W9CvX/ZqtiFry8i57phKTjDnL
- YI=; b=hLYSoH5im9JNVcESijnLHSfwH8bNzzYuIuKG9lj9BaU/Y+39O/wrxc8qm
- qHeCQE3wDKFEDT1B/2USc2cviCRu8q1WYpwin/bkgOQqlA1hLHEkWCUAZaL/6NRN
- enbT3yQlIQ7nHSkxSkXfm0O7TdQ/t9KoRQ0xrrVxoZebGa7JDbCVHZorHa2TqgNq
- Saprw61Uryn8AgM5zNtmND13gH6PF+BG9gB+0kcCrrISY1Tlq9wVs9+gozVnjzF5
- TLG/D44Pri+2acFB1tdKwlLJHptu8QH5aNqYjtAO5MPzCvUV11V6J/PzSoPKwxi2
- snJTG2ekePrI7VU96KHpovRpZDO1A==
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=proofpoint-05-2026; bh=o3VIEGm51FV78
+ cRFtY0/N8TNvi2OYoKTVidxiJDesTQ=; b=ZQMrNklGBZ+62+ZqOBP15BcbaMQ+o
+ CUqUa2/h7+wqIUt23Uq+eRrZAlTtiZVrJNAx68YJv34t5KbjH9GXqImJoP3KW4BD
+ 5ryRMkrnRRzzDsaLzikTu3NUCwKhN6cuA3526pfn9TU1hDgXh4FStygYVRCDxLNg
+ Xnx2/QzEdB0Zf6aYxx/VufG2h2MgrSeUWXzO3nRAfAewZottQ6FVGVi06QniCMyn
+ 7gT6VjpBynSv8sNe98vrPB3j+XCwRusVXMG0/dNehc4riqHgR0GbdNifCfDVNdkV
+ pcHf9h1WOK0/9L+FUutK2nSvtUE9GSIRvnQqDyDJsrdg45447poR9eqSA==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ti.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XIdo+oCYcZLNRXR+W9CvX/ZqtiFry8i57phKTjDnLYI=;
- b=wuTA7txfWoHR9UQ239VcE5XF5HIIcBg8t+LVHoG1vfvzIx3UG3+vJ7HmJb1R8svOVY2SlqcdV27Dy3PTCSWTFnJDTQFgjpjdbpWn4DcYgNBeGxSYjsn1tfILejKDpVHW+lKnslBIWGQT+LVnzxM6Q7RmC+ibHOl5G0s2U8u6TFk=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=o3VIEGm51FV78cRFtY0/N8TNvi2OYoKTVidxiJDesTQ=;
+ b=J2qlqYg3tWA3KRGWS4rRV7VlcvJO3xkABTmtMie6298Ym3VNESp+Hehgmvf9c8HusvCCtKCrwvaE/X3De/Lq7t5KMobMCEwNtKR5aU5RjRDfWkY1iUgSHCI1Ma5H6+zSsfIAoEl5jr2zVnpX4xw+SzYtYXHMjGIHMsF23m2S+lI=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=ti.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=hLYSoH5i; 
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=ZQMrNklG; 
  dkim=pass (1024-bit key,
  unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=wuTA7txf
+ header.s=selector1 header.b=J2qlqYg3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -212,104 +207,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Bryan Brattlof <bb@ti.com>
+From: Randolph Sapp <rs@ti.com>
 
-The pocketbeagle2 uses the main_uart6 as the debug console. To get debug
-console prints at the R5 SPL stage, add the &main_uart6 to the R5 clk
-and dev data so we can configure the uart as early as possible during
-the bootup of the pocketbeagle2
+Resubmitting with a synced rm-cfg.yaml and tuned diff parameters. We desperately
+need to add documentation about how the rm-cfg.yaml is generated here. And the
+beagleplay needs to get it's rm-cfg resynced with am62x at some point.
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- arch/arm/mach-k3/r5/am62x/clk-data.c | 19 +++++++++++++++----
- arch/arm/mach-k3/r5/am62x/dev-data.c |  5 +++--
- 2 files changed, 18 insertions(+), 6 deletions(-)
+Since it's been decided internally to follow along with what Zephyr is doing and
+make a completely separate device tree for the 1GB + eMMC Industrial board, I'm
+resubmitting v3 with the variant support patch dropped. We will circle back to
+enable the Industrial part once the dt has been accepted kernel side.
 
-diff --git a/arch/arm/mach-k3/r5/am62x/clk-data.c b/arch/arm/mach-k3/r5/am62x/clk-data.c
-index d7bfed0e031c..05cced0b313b 100644
---- a/arch/arm/mach-k3/r5/am62x/clk-data.c
-+++ b/arch/arm/mach-k3/r5/am62x/clk-data.c
-@@ -3,9 +3,9 @@
-  * AM62X specific clock platform data
-  *
-  * This file is auto generated. Please do not hand edit and report any issues
-- * to Dave Gerlach <d-gerlach@ti.com>.
-+ * to Bryan Brattlof <bb@ti.com>.
-  *
-- * Copyright (C) 2020-2022 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
- #include <linux/clk-provider.h>
-@@ -125,6 +125,11 @@ static const char * const main_usart0_fclk_sel_out0_parents[] = {
- 	"hsdiv4_16fft_main_1_hsdivout1_clk",
- };
- 
-+static const char * const main_usart6_fclk_sel_out0_parents[] = {
-+	"usart_programmable_clock_divider_out6",
-+	"hsdiv4_16fft_main_1_hsdivout1_clk",
-+};
-+
- static const struct clk_data clk_list[] = {
- 	CLK_FIXED_RATE("osc_26_mhz", 26000000, 0),
- 	CLK_FIXED_RATE("osc_25_mhz", 25000000, 0),
-@@ -210,9 +215,11 @@ static const struct clk_data clk_list[] = {
- 	CLK_MUX("main_gtcclk_sel_out0", main_gtcclk_sel_out0_parents, 8, 0x43008030, 0, 3, 0),
- 	CLK_MUX("main_ospi_ref_clk_sel_out0", main_ospi_ref_clk_sel_out0_parents, 2, 0x108500, 0, 1, 0),
- 	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out0", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x108240, 0, 2, 0, 0, 48000000),
-+	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out6", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x108258, 0, 2, 0, 0, 48000000),
- 	CLK_MUX("wkup_clkout_sel_out0", wkup_clkout_sel_out0_parents, 8, 0x43008020, 0, 3, 0),
- 	CLK_MUX("wkup_clksel_out0", wkup_clksel_out0_parents, 2, 0x43008010, 0, 1, 0),
- 	CLK_MUX("main_usart0_fclk_sel_out0", main_usart0_fclk_sel_out0_parents, 2, 0x108280, 0, 1, 0),
-+	CLK_MUX("main_usart6_fclk_sel_out0", main_usart6_fclk_sel_out0_parents, 2, 0x108298, 0, 1, 0),
- 	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout1_clk", "pllfracf_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040084, 0, 7, 0, 0),
- 	CLK_FIXED_RATE("mshsi2c_wkup_0_porscl", 0, 0),
- 	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
-@@ -336,6 +343,10 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(157, 164, "clk_32k_rc_sel_out0"),
- 	DEV_CLK(157, 165, "gluelogic_rcosc_clkout"),
- 	DEV_CLK(157, 166, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(158, 0, "main_usart6_fclk_sel_out0"),
-+	DEV_CLK(158, 1, "usart_programmable_clock_divider_out6"),
-+	DEV_CLK(158, 2, "hsdiv4_16fft_main_1_hsdivout1_clk"),
-+	DEV_CLK(158, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(161, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(161, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(161, 2, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-@@ -361,7 +372,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 
- const struct ti_k3_clk_platdata am62x_clk_platdata = {
- 	.clk_list = clk_list,
--	.clk_list_cnt = 90,
-+	.clk_list_cnt = 92,
- 	.soc_dev_clk_data = soc_dev_clk_data,
--	.soc_dev_clk_data_cnt = 137,
-+	.soc_dev_clk_data_cnt = 140,
- };
-diff --git a/arch/arm/mach-k3/r5/am62x/dev-data.c b/arch/arm/mach-k3/r5/am62x/dev-data.c
-index 59c95df2a887..ea1e76a8a758 100644
---- a/arch/arm/mach-k3/r5/am62x/dev-data.c
-+++ b/arch/arm/mach-k3/r5/am62x/dev-data.c
-@@ -3,9 +3,9 @@
-  * AM62X specific device platform data
-  *
-  * This file is auto generated. Please do not hand edit and report any issues
-- * to Dave Gerlach <d-gerlach@ti.com>.
-+ * to Bryan Brattlof <bb@ti.com>.
-  *
-- * Copyright (C) 2020-2022 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
- #include "k3-dev.h"
-@@ -61,6 +61,7 @@ static struct ti_dev soc_dev_list[] = {
- 	PSC_DEV(36, &soc_lpsc_list[11]),
- 	PSC_DEV(102, &soc_lpsc_list[11]),
- 	PSC_DEV(146, &soc_lpsc_list[11]),
-+	PSC_DEV(158, &soc_lpsc_list[11]),
- 	PSC_DEV(13, &soc_lpsc_list[12]),
- 	PSC_DEV(166, &soc_lpsc_list[13]),
- 	PSC_DEV(135, &soc_lpsc_list[14]),
+See the following link for more information regarding that decision:
+https://lore.kernel.org/u-boot/DJLTHZL0ERIG.JV1UL67GFIVJ@ti.com/
+
+Add initial board support for the PocketBeagle 2 from BeagleBoard.org. This is
+based on the current official series from Robert Nelson [1] and work from Bryan
+Brattlof [2].
+
+Now that the various memory issues have been resolved we can clearly see at
+runtime that there's an issue with the current device. One of our reservations
+overlaps with the u-boot stack. To get around this we'll need to change the
+relocation address to something we know will not collide.
+
+[1] https://github.com/beagleboard/u-boot/tree/v2026.01-am62-pocketbeagle2
+[2] https://github.com/bryanbrattlof/beagleboot/tree/b4/pb2i
+
+Bryan Brattlof (1):
+  arm: mach-k3: am62: add &main_uart6 to clock and pwr tree
+
+Randolph Sapp (2):
+  k3-am62-pocketbeagle2: add initial board support
+  k3-am62-pocketbeagle2: add support for efi capsules
+
+ arch/arm/dts/Makefile                         |   1 +
+ ...> k3-am62-pocketbeagle2-ddr4-1600MTs.dtsi} |  92 ++---
+ .../arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi | 336 ++++++++++++++++++
+ arch/arm/dts/k3-am62-r5-pocketbeagle2.dts     |  35 ++
+ arch/arm/mach-k3/am62x/Kconfig                |   1 +
+ arch/arm/mach-k3/r5/am62x/clk-data.c          |  19 +-
+ arch/arm/mach-k3/r5/am62x/dev-data.c          |   5 +-
+ board/beagle/pocketbeagle2/Kconfig            |  60 ++++
+ board/beagle/pocketbeagle2/MAINTAINERS        |  10 +
+ board/beagle/pocketbeagle2/Makefile           |   9 +
+ .../board-cfg.yaml                            |   0
+ .../{beagleplay => pocketbeagle2}/pm-cfg.yaml |   0
+ board/beagle/pocketbeagle2/pocketbeagle2.c    |  84 +++++
+ board/beagle/pocketbeagle2/pocketbeagle2.env  |  26 ++
+ .../pocketbeagle2}/rm-cfg.yaml                |   0
+ .../sec-cfg.yaml                              |   0
+ ...onfig => am62_pocketbeagle2_a53_defconfig} |  25 +-
+ ...config => am62_pocketbeagle2_r5_defconfig} |  11 +-
+ doc/board/beagle/am62_pocketbeagle2.rst       | 279 +++++++++++++++
+ doc/board/beagle/index.rst                    |   1 +
+ include/configs/pocketbeagle2.h               |  39 ++
+ 21 files changed, 966 insertions(+), 67 deletions(-)
+ copy arch/arm/dts/{k3-am62x-sk-ddr4-1600MTs.dtsi => k3-am62-pocketbeagle2-ddr4-1600MTs.dtsi} (97%)
+ create mode 100644 arch/arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am62-r5-pocketbeagle2.dts
+ create mode 100644 board/beagle/pocketbeagle2/Kconfig
+ create mode 100644 board/beagle/pocketbeagle2/MAINTAINERS
+ create mode 100644 board/beagle/pocketbeagle2/Makefile
+ copy board/beagle/{beagleplay => pocketbeagle2}/board-cfg.yaml (100%)
+ copy board/beagle/{beagleplay => pocketbeagle2}/pm-cfg.yaml (100%)
+ create mode 100644 board/beagle/pocketbeagle2/pocketbeagle2.c
+ create mode 100644 board/beagle/pocketbeagle2/pocketbeagle2.env
+ copy board/{ti/am62x => beagle/pocketbeagle2}/rm-cfg.yaml (100%)
+ copy board/beagle/{beagleplay => pocketbeagle2}/sec-cfg.yaml (100%)
+ copy configs/{am62x_beagleplay_a53_defconfig => am62_pocketbeagle2_a53_defconfig} (88%)
+ copy configs/{am62x_beagleplay_r5_defconfig => am62_pocketbeagle2_r5_defconfig} (89%)
+ create mode 100644 doc/board/beagle/am62_pocketbeagle2.rst
+ create mode 100644 include/configs/pocketbeagle2.h
+
 -- 
 2.55.0
 
