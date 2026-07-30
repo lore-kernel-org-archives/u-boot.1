@@ -1,125 +1,119 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F989C55160
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 13:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA1BC55160
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 13:38:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DBE8340A96;
-	Thu, 30 Jul 2026 13:36:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 41DAD81046;
+	Thu, 30 Jul 2026 13:38:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dOnR6KxTabUi; Thu, 30 Jul 2026 13:36:29 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jS1xIh8aEpS6; Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 08D1140A82
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 80C908100A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785418589;
-	bh=d3hkankXHedhtzjtFJwmuzVG2pR3j5UcnIMOE9MLzg8=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785418720;
+	bh=B0Y3c1wXlHCwJ4KkEGiasDJHnIsbbGikatE2VSY/as8=;
+	h=From:To:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pwKKpVm7O8m+0+GUgyW6LY4aBRXZ6HaB4seLU6Jo53gSUcZa/AUMnvMa+1j7gdwCU
-	 n8izH8AKmXkdtUvkRXm0F7arIG+FxDb4Q9R+xpkmvDJNErHtByqfvfweIf9PeDm3+r
-	 Uf8AROjQ7Oj8EgOOEoxhC4Nc4pgtRvmGe/T82SUkCT6vA4M7XIY1NYJUnPk1pEstdL
-	 SFH9fMEuoe6AIOqtRLcqY2K8h2YCSfoUGLzoBfNoXDoGUDUuLj9ixi4KC8Cu6l/rgr
-	 b/+PpqVAy3CQ8B6ALz7d8/+4O3DXSu1MSVLOHtXvCUTERbpO9WuCx18Pn0yDhBvijo
-	 L89bocbcgqccA==
+	b=B0x+65l4di8f72yUlTtgFm7QBb1Y1XaF4SMPnhnSZ1HwfNdVbNqWVrBRiH77sqxTm
+	 TZyO7b0uXzaoeP/E3mafURVw/h/S8DFpJ95LNGKUORqpExaTR9BKCZMDrndJ89qLNp
+	 IEz95iaGqHi2WNjJ+jVX/8dBDGQrnhbMaB+4X/FGf/EQ8TvVu4d1XfKbDtppkzzp3r
+	 Txn1q5ovYQpsuq5mxKPX5RyiNQWqYWfjskU5x9veZD4ALa6odin7FegvfmnuyyiPFh
+	 9GXNq1UvKYNa1XGyEjmBCoa5ibji97LyWWvCsC5+WyZ+nyEpzwFU4ovN2Yp9vMl/yU
+	 EI089SdibbIhQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 08D1140A82;
-	Thu, 30 Jul 2026 13:36:29 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A1C7F27B
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:36:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 80C908100A;
+	Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EFD1F197
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9EB4740A82
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:36:27 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E14EF80DB8
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5I9cCvmADREo for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 13:36:26 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vse4hmvMeaTm for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 13:38:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
- envelope-from=jbx6244@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8AF9340A81
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8AF9340A81
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8AF9340A81
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:36:25 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-c1f1f5631f8so20493766b.2
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 06:36:25 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::c35; helo=mail-oo1-xc35.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3AEBA80D9F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3AEBA80D9F
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3AEBA80D9F
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:37 +0000 (UTC)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-6ab06473488so833928eaf.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 06:38:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785418583; x=1786023383;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:subject:from:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=d3hkankXHedhtzjtFJwmuzVG2pR3j5UcnIMOE9MLzg8=;
- b=dgk94KS9mzAp+TnrRV01yzrbv1co9jNRzEDly9l4wXdcK12wgHRlI0Bkv+HnqtaAjp
- oUIn8pnz6IfFmxNXwV8G01FNK+IP0AMBgp2/qgqqcgqcRQlGmG8W4iT1Sd3hT3/LXBlu
- oPTpHsUvWk0YSUmpeElrSYCHaIVJqZmW+maYmDdG5YtEXgItql+ncpR+3J/qvFmxIiKt
- 7c9fOGVkDpWjAUjM7iaolWmeyZXlGOZtMpWUivIRNd7nJeKezHwv5BgMs1LVLCyLcFR+
- UTNvK9MQUlnbAHGeJZd4GgAAKb4ohpGNDkIMOHz5oJX0fkDyM3G/mm6DxUFtuK5XTwXz
- aqSQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Ro1AISFjo1C64ckV3RwsHIZJx29d/wlZDSxdOWy+v7g1omew8k/avlFeEgUP4/myGvMuCnDPiI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwPeodJigfTPGJsDEBTcgqj18cmIpfOE7lgGC2Boknq/5UTkBRV
- pbbkZK/cz39cERGVvkfdhkkqU+DS1ofF3FVwuh+kp4GlwjKQ5tWBDAhi
-X-Gm-Gg: AR+sD13XRUZ/EfWcFRbZmI5yuzlaM7MuF86YM0SNJ985LPfrVoMWuRffnoEl25H0Ymf
- PKnQZioShk3XjBK3AW/tAxOsFOWCBJip/qI7UD7eWpJ6Not9dpKWN9OgFIuF4rHYW3QwRMvhaqV
- 0cdi81TEH0LkGOkET8bo3thYTu/JqY8ll5Bl2hzcWqINHQT8r4/Hln9vghLLr2tmyruOluQSO5e
- CDDwGroK4oRZqh9vDB0+ndpLd5yFMZfTVaOttbmQj1KlnQG6B92fI6zuoxW6NwS2PzxDwr+9LzK
- kOD9AuWaq2/61wbfwp1P/0Sl2bCJCpPkfhcPU23D9+OzmsgoHXKYVLZZiYCkxDWrrROUMyBsiFI
- kTwtREwoEW1gdjWN0W5J7pQ0nKAlr904eNt07I3vv6RqBYLsoRB3JDWOytk6aLmPmcic/1TlUQH
- rfqZa+EFNP/8yjPh4VmLkw/NQKZ3wGaFDE66eRPI+bTLaLiZeY9omRhkESK8oD6ZCCRKRWabgv/
- H1K++qvyRqI9mdo0oQQYeqxr0w=
-X-Received: by 2002:a17:906:6a02:b0:c15:de99:8060 with SMTP id
- a640c23a62f3a-c1fbc7b42d1mr36452666b.0.1785418582854; 
- Thu, 30 Jul 2026 06:36:22 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1fa851b723sm69386566b.12.2026.07.30.06.36.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2026 06:36:22 -0700 (PDT)
-Message-ID: <fad2218c-2b43-44f9-888a-7564fa10864e@gmail.com>
-Date: Thu, 30 Jul 2026 15:36:21 +0200
+ d=1e100.net; s=20251104; t=1785418717; x=1786023517;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=B0Y3c1wXlHCwJ4KkEGiasDJHnIsbbGikatE2VSY/as8=;
+ b=HdSWV+1qKG3dEORkYPJMob8LIr/CS1i+1HS4skxfZD1y/1bhdIpal52euJt0tvrO9a
+ zUSXA+l85fQDkh8amkXuD/Ym9A/Y8RbSV8/OKrOlohzSRZNCvze6LORJX2wSarrDcyhJ
+ 0jZ2OGzKh39BUGAXiICBSgYLLUMTT0Fg/hEmW3dTL+4QRDf01OUv36ig4uWyiiqRNuEO
+ MeOhLuptKXGiRlcqF2H0rYYbvKj9hUoBd/kHW4dmv88Cfw1uycsdpfsCKJYGMkcgfU5E
+ PkU07ARsNJqse7TAM6UcSiheboAjvUlKcPsXRjc3fVNCgiI/DpMKJQJemUF1q3WWBeNb
+ Wrjw==
+X-Gm-Message-State: AOJu0YxX4O41zbP1WhCkeg96IPbhTMbjXm0YqKqEP/PsOkg2pB9uEqa0
+ sbOChPoTSWRnzZ1kdp0RIJWU1HOI3bXq0zc7SUbpNn21wuu7/pVF6dkPJelJnm6Py0ubkRc71Bg
+ 7XoLrAls=
+X-Gm-Gg: AR+sD11BwPsxMWlPjCqr8NKMvcRzXxC5LhPk5lxdn+4eQV6vsMvoMyhcCReDUent2h4
+ jt9qlSsi+uBNgIPGNkqrVzJQTisMeSBZoO4Iht51dUOkW2qa1E6WUtI2X61L86hQnnemLfH4jCy
+ OwvZ8qtY6Xcckd5sNb5cD7yukdcUuAl/9VQiSGhfFEJgdClgpspoTAzTC3uT+hvfNmdmUMaKHgI
+ CMQB4M0ka91S65bOY3GF7+apBuOdfILvku1QZQqBZ2EzLtiVrUkyuaO53CpDYl+lMTYNfgNdMrW
+ 8irq3yy1K+7AC3aTd7HHNN3W6Bi7+4W/rDa8YZpRuxoO2G64x3VqyjxU7HSfb/xcgnL6M0cKVP+
+ eoNHDYIv0I7StpOpIclFtk9jW4bBNrz9GiS1QIOZsXuwhfIbLx2m6c/ws+NIri4obmGti9PmkCl
+ x2Ulmi/oWyjwGPfiaubIXq4DVoAXhibpa459eMFkMhfAHuuZ5MQuJ/ltPqtimvjoVQfIY/DIS1I
+ feWBtPhJM8JJj64/ACkkQ416MmDTvfrIqnAijPQolOgqsVjPft6FwX8Ndx9sckrem5in0IsOSJ9
+ WGvuXoD3HEtaYE9FR/M+
+X-Received: by 2002:a05:6820:a09:b0:6ac:a0db:1a78 with SMTP id
+ 006d021491bc7-6acbbdb9101mr1617179eaf.5.1785418716989; 
+ Thu, 30 Jul 2026 06:38:36 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6acbc554a5esm1457983eaf.10.2026.07.30.06.38.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jul 2026 06:38:34 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260728221231.1745444-1-trini@konsulko.com>
+References: <20260728221231.1745444-1-trini@konsulko.com>
+Subject: Re: [PATCH] CI: Azure: Correctly skip semihosting tests on
+ vexpress_fvp
+Message-Id: <178541871392.2173019.15761963387559933898.b4-ty@konsulko.com>
+Date: Thu, 30 Jul 2026 07:38:33 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 12/12] rockchip: doc: remove README.rockchip
-To: u-boot@0leil.net
-Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
- u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
-References: <5aed2a27-bd7d-4b71-a6c1-0b46b41f3462@gmail.com>
-Content-Language: en-US, ar-EG
-In-Reply-To: <5aed2a27-bd7d-4b71-a6c1-0b46b41f3462@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785418583; x=1786023383;
+ d=konsulko.com; s=google; t=1785418717; x=1786023517;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:subject:from:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=d3hkankXHedhtzjtFJwmuzVG2pR3j5UcnIMOE9MLzg8=;
- b=kRIcRwVNyqfitWp4rzZHmyz9mFefq7FmDas7ADW45HDC829fcdeI4F9CFFaY7qf9QU
- q9qQgbrM9vr9Q5wNGklvggtLb6HHXUDekQK+AbbznhgEVjQUz9ucDyEREwwp4vyv0ZXH
- ydMTySJ8puBTUyr0akeNm4L5Zus/kgt347JKQMQA+GEYHc5LxrAHIURcj5ykZ87rhTe3
- gXMugF4cHTUsS+BO/3MZ+rNF+bOD6Sq5TR7w0O2Cv3ATQbUpWdiKlO94K7MDOFDPvW1W
- IE7WJgkF9BDuRyLbv/hhjpS/wrev2lseKXkmUgi9ZyYho4IjsmMbYC1LdQHzc2SixynF
- sTdg==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=B0Y3c1wXlHCwJ4KkEGiasDJHnIsbbGikatE2VSY/as8=;
+ b=BFJBZHCa5vwX8VERxYQFJdE0Zd+8QwSBBto6XIf/g0BKQ0y1Nj/R3H/GFr8bdcnhom
+ EsD+bnDf0Dk8Kfo+2NbSxCpexTRF8a6oizrvHJivuviTkfQHh5oWYVfpAL0YaQiOwiKV
+ ob12CgvS6BUBBFByzi7xSJNmejZe7X8XjSYKk=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=kRIcRwVN
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=BFJBZHCa
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -134,698 +128,23 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Remove README.rockchip for info that's already in
-rockchip.rst or no longer applicable.
+On Tue, 28 Jul 2026 16:12:31 -0600, Tom Rini wrote:
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
----
- doc/README.rockchip | 677 --------------------------------------------
- 1 file changed, 677 deletions(-)
- delete mode 100644 doc/README.rockchip
+> In commit d75998b476de ("Docker, CI: Add vexpress_fvp /
+> vexpress_fvp_bloblist support") we specifically disable the semihosting
+> tests on FVP using platforms due to upstream issues. With commit
+> 7ffa20af30dd ("Merge patch series "fs: regression-safe load <iface> for
+> null_dev_desc_ok fstypes"") we add a new test that was not caught with
+> "hostfs" because it's a semihosting test. Update the logic in our
+> pipeline to skip all semihosting tests.
+> 
+> [...]
 
-diff --git a/doc/README.rockchip b/doc/README.rockchip
-deleted file mode 100644
-index 5a608ed0bce3..000000000000
---- a/doc/README.rockchip
-+++ /dev/null
-@@ -1,677 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Copyright (C) 2015 Google. Inc
--# Written by Simon Glass <sjg@chromium.org>
--
--U-Boot on Rockchip
--==================
--
--A wide range of Rockchip SoCs are supported in mainline U-Boot
--
--Warning
--=======
--This document is being moved to doc/board/rockchip, so information on it
--might be incomplete or outdated.
--
--Prerequisites
--=============
--
--You will need:
--
--   - Firefly RK3288 board or something else with a supported RockChip SoC
--   - Power connection to 5V using the supplied micro-USB power cable
--   - Separate USB serial cable attached to your computer and the Firefly
--        (connect to the micro-USB connector below the logo)
--   - rkflashtool [3]
--   - openssl (sudo apt-get install openssl)
--   - Serial UART connection [4]
--   - Suitable ARM cross compiler, e.g.:
--        sudo apt-get install gcc-4.7-arm-linux-gnueabi
--
--Building
--========
--
--1. To build RK3288 board:
--
--   CROSS_COMPILE=arm-linux-gnueabi- make O=firefly firefly-rk3288_defconfig all
--
--    (or you can use another cross compiler if you prefer)
--
--2. To build RK3308 board:
--
--   See doc/board/rockchip/rockchip.rst
--
--3. To build RK3399 board:
--
--   Option 1: Package the image with Rockchip miniloader:
--
--   - Compile U-Boot
--
--     => cd /path/to/u-boot
--     => make nanopi-neo4-rk3399_defconfig
--     => make
--
--   - Get the rkbin
--
--     => git clone https://github.com/rockchip-linux/rkbin.git
--
--   - Create trust.img
--
--     => cd /path/to/rkbin
--     => ./tools/trust_merger RKTRUST/RK3399TRUST.ini
--
--   - Create uboot.img
--
--     => cd /path/to/rkbin
--     => ./tools/loaderimage --pack --uboot /path/to/u-boot/u-boot-dtb.bin uboot.img
--
--     (Get trust.img and uboot.img)
--
--   Option 2: Package the image with SPL:
--
--   - Export cross compiler path for aarch64
--
--   - Compile ATF
--
--     => git clone https://github.com/TrustedFirmware-A/trusted-firmware-a.git
--     => cd trusted-firmware-a
--
--     (export cross compiler path for Cortex-M0 MCU likely arm-none-eabi-)
--     => make realclean
--     => make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3399
--
--    (export bl31.elf)
--    => export BL31=/path/to/trusted-firmware-a/build/rk3399/release/bl31/bl31.elf
--
--   - Compile PMU M0 firmware
--
--     This is optional for most of the rk3399 boards.
--
--     => git clone git://git.theobroma-systems.com/rk3399-cortex-m0.git
--     => cd rk3399-cortex-m0
--
--     (export cross compiler path for Cortex-M0 PMU)
--     => make CROSS_COMPILE=arm-cortex_m0-eabi-
--
--     (export rk3399m0.bin)
--     => export PMUM0=/path/to/rk3399-cortex-m0/rk3399m0.bin
--
--   - Compile U-Boot
--
--     => cd /path/to/u-boot
--     => make orangepi-rk3399_defconfig
--     => make
--
--     (Get spl/u-boot-spl-dtb.bin, u-boot.itb images and some boards would get
--      spl/u-boot-spl.bin since it doesn't enable CONFIG_SPL_OF_CONTROL
--
--      If TPL enabled on the target, get tpl/u-boot-tpl-dtb.bin or tpl/u-boot-tpl.bin
--      if CONFIG_TPL_OF_CONTROL not enabled)
--
--Writing to the board with USB
--=============================
--
--For USB to work you must get your board into ROM boot mode, either by erasing
--your MMC or (perhaps) holding the recovery button when you boot the board.
--To erase your MMC, you can boot into Linux and type (as root)
--
--   dd if=/dev/zero of=/dev/mmcblk0 bs=1M
--
--Connect your board's OTG port to your computer.
--
--To create a suitable image and write it to the board:
--
--   ./firefly-rk3288/tools/mkimage -n rk3288 -T rkimage -d \
--	./firefly-rk3288/spl/u-boot-spl-dtb.bin out && \
--   cat out | openssl rc4 -K 7c4e0304550509072d2c7b38170d1711 | rkflashtool l
--
--If all goes well you should something like:
--
--   U-Boot SPL 2015.07-rc1-00383-ge345740-dirty (Jun 03 2015 - 10:06:49)
--   Card did not respond to voltage select!
--   spl: mmc init failed with error: -17
--   ### ERROR ### Please RESET the board ###
--
--You will need to reset the board before each time you try. Yes, that's all
--it does so far. If support for the Rockchip USB protocol or DFU were added
--in SPL then we could in principle load U-Boot and boot to a prompt from USB
--as several other platforms do. However it does not seem to be possible to
--use the existing boot ROM code from SPL.
--
--
--Writing to the eMMC with USB on ROC-RK3308-CC
--=============================================
--For USB to work you must get your board into Bootrom mode,
--either by erasing the eMMC or short circuit the GND and D0
--on core board.
--
--Connect the board to your computer via tyepc.
--=> rkdeveloptool db rk3308_loader_v1.26.117.bin
--=> rkdeveloptool wl 0x40 idbloader.img
--=> rkdeveloptool wl 0x4000 u-boot.itb
--=> rkdeveloptool rd
--
--Then you will see the boot log from Debug UART at baud rate 1500000:
--DDR Version V1.26
--REGFB: 0x00000032, 0x00000032
--In
--589MHz
--DDR3
-- Col=10 Bank=8 Row=14 Size=256MB
--msch:1
--Returning to boot ROM...
--
--U-Boot SPL 2020.01-rc1-00225-g34b681327f (Nov 14 2019 - 10:58:04 +0800)
--Trying to boot from MMC1
--INFO:    Preloader serial: 2
--NOTICE:  BL31: v1.3(release):30f1405
--NOTICE:  BL31: Built : 17:08:28, Sep 23 2019
--INFO:    Lastlog: last=0x100000, realtime=0x102000, size=0x2000
--INFO:    ARM GICv2 driver initialized
--INFO:    Using opteed sec cpu_context!
--INFO:    boot cpu mask: 1
--INFO:    plat_rockchip_pmu_init: pd status 0xe b
--INFO:    BL31: Initializing runtime services
--WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will rK
--ERROR:   Error initializing runtime service opteed_fast
--INFO:    BL31: Preparing for EL3 exit to normal world
--INFO:    Entry point address = 0x600000
--INFO:    SPSR = 0x3c9
--
--
--U-Boot 2020.01-rc1-00225-g34b681327f (Nov 14 2019 - 10:58:47 +0800)
--
--Model: Firefly ROC-RK3308-CC board
--DRAM:  254 MiB
--MMC:   dwmmc@ff480000: 0, dwmmc@ff490000: 1
--rockchip_dnl_key_pressed read adc key val failed
--Net:   No ethernet found.
--Hit any key to stop autoboot:  0
--Card did not respond to voltage select!
--switch to partitions #0, OK
--mmc1(part 0) is current device
--Scanning mmc 1:4...
--Found /extlinux/extlinux.conf
--Retrieving file: /extlinux/extlinux.conf
--151 bytes read in 3 ms (48.8 KiB/s)
--1:      kernel-mainline
--Retrieving file: /Image
--14737920 bytes read in 377 ms (37.3 MiB/s)
--append: earlycon=uart8250,mmio32,0xff0c0000 console=ttyS2,1500000n8
--Retrieving file: /rk3308-roc-cc.dtb
--28954 bytes read in 4 ms (6.9 MiB/s)
--Flattened Device Tree blob at 01f00000
--Booting using the fdt blob at 0x1f00000
--## Loading Device Tree to 000000000df3a000, end 000000000df44119 ... OK
--
--Starting kernel ...
--[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd042]
--[    0.000000] Linux version 5.4.0-rc1-00040-g4dc2d508fa47-dirty (andy@B150) (gcc version 6.3.1 20170404 (Linaro GCC 6.3-209
--[    0.000000] Machine model: Firefly ROC-RK3308-CC board
--[    0.000000] earlycon: uart8250 at MMIO32 0x00000000ff0c0000 (options '')
--[    0.000000] printk: bootconsole [uart8250] enabled
--
--Booting from an SD card
--=======================
--
--To write an image that boots from an SD card (assumed to be /dev/sdc):
--
--   ./firefly-rk3288/tools/mkimage -n rk3288 -T rksd -d \
--	firefly-rk3288/spl/u-boot-spl-dtb.bin out && \
--   sudo dd if=out of=/dev/sdc seek=64 && \
--   sudo dd if=firefly-rk3288/u-boot-dtb.img of=/dev/sdc seek=16384
--
--This puts the Rockchip header and SPL image first and then places the U-Boot
--image at block 16384 (i.e. 8MB from the start of the SD card). This
--corresponds with this setting in U-Boot:
--
--   #define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x4000
--
--Put this SD (or micro-SD) card into your board and reset it. You should see
--something like:
--
--   U-Boot 2016.01-rc2-00309-ge5bad3b-dirty (Jan 02 2016 - 23:41:59 -0700)
--
--   Model: Radxa Rock 2 Square
--   DRAM:  2 GiB
--   MMC:   dwmmc@ff0f0000: 0, dwmmc@ff0c0000: 1
--   *** Warning - bad CRC, using default environment
--
--   In:    serial
--   Out:   vop@ff940000.vidconsole
--   Err:   serial
--   Net:   Net Initialization Skipped
--   No ethernet found.
--   Hit any key to stop autoboot:  0
--   =>
--
--The rockchip bootrom can load and boot an initial spl, then continue to
--load a second-stage bootloader (ie. U-Boot) as soon as the control is returned
--to the bootrom. Both the RK3288 and the RK3036 use this special boot sequence.
--The configuration option enabling this is:
--
--	CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
--
--You can create the image via the following operations:
--
--   ./firefly-rk3288/tools/mkimage -n rk3288 -T rksd -d \
--	firefly-rk3288/spl/u-boot-spl-dtb.bin out && \
--   cat firefly-rk3288/u-boot-dtb.bin >> out && \
--   sudo dd if=out of=/dev/sdc seek=64
--
--Or:
--   ./firefly-rk3288/tools/mkimage -n rk3288 -T rksd -d \
--	firefly-rk3288/spl/u-boot-spl-dtb.bin:firefly-rk3288/u-boot-dtb.bin \
--	out && \
--   sudo dd if=out of=/dev/sdc seek=64
--
--If you have an HDMI cable attached you should see a video console.
--
--For evb_rk3036 board:
--	./evb-rk3036/tools/mkimage -n rk3036 -T rksd  -d evb-rk3036/spl/u-boot-spl.bin out && \
--	cat evb-rk3036/u-boot-dtb.bin >> out && \
--	sudo dd if=out of=/dev/sdc seek=64
--
--Or:
--	./evb-rk3036/tools/mkimage -n rk3036 -T rksd -d \
--		evb-rk3036/spl/u-boot-spl.bin:evb-rk3036/u-boot-dtb.bin out && \
--	sudo dd if=out of=/dev/sdc seek=64
--
--Note: rk3036 SDMMC and debug uart use the same iomux, so if you boot from SD, the
--      debug uart must be disabled
--
--
--Booting from an SD card on RK3288 with TPL
--==========================================
--
--Since the size of SPL can't be exceeded 0x8000 bytes in RK3288, it is not possible add
--new SPL features like Falcon mode or etc.
--
--So introduce TPL so-that adding new features to SPL is possible because now TPL should
--run minimal with code like DDR, clock etc and rest of new features in SPL.
--
--As of now TPL is added on Vyasa-RK3288 board.
--
--To write an image that boots from an SD card (assumed to be /dev/mmcblk0):
--
--    sudo dd if=idbloader.img of=/dev/mmcblk0 seek=64 &&
--    sudo dd if=u-boot-dtb.img of=/dev/mmcblk0 seek=16384
--
--Booting from an SD card on RK3188
--=================================
--
--For rk3188 boards the general storage onto the card stays the same as
--described above, but the image creation needs a bit more care.
--
--The bootrom of rk3188 expects to find a small 1kb loader which returns
--control to the bootrom, after which it will load the real loader, which
--can then be up to 29kb in size and does the regular ddr init.  This is
--handled by a single image (built as the SPL stage) that tests whether
--it is handled for the first or second time via code executed from the
--boot0-hook.
--
--Additionally the rk3188 requires everything the bootrom loads to be
--rc4-encrypted. Except for the very first stage the bootrom always reads
--and decodes 2kb pages, so files should be sized accordingly.
--
--# copy tpl, pad to 1020 bytes and append spl
--tools/mkimage -n rk3188 -T rksd -d spl/u-boot-spl.bin out
--
--# truncate, encode and append u-boot.bin
--truncate -s %2048 u-boot.bin
--cat u-boot.bin | split -b 512 --filter='openssl rc4 -K 7C4E0304550509072D2C7B38170D1711' >> out
--
--Booting from an SD card on Pine64 Rock64 (RK3328)
--=================================================
--
--For Rock64 rk3328 board the following three parts are required:
--TPL, SPL, and the u-boot image tree blob.
--
--  - Write TPL/SPL image at 64 sector
--
--    => sudo dd if=idbloader.img of=/dev/mmcblk0 seek=64
--
--  - Write u-boot image tree blob at 16384 sector
--
--    => sudo dd if=u-boot.itb of=/dev/mmcblk0 seek=16384
--
--Booting from an SD card on RK3399
--=================================
--
--To write an image that boots from an SD card (assumed to be /dev/sdc):
--
--Option 1: Package the image with Rockchip miniloader:
--
--  - Create idbloader.img
--
--    => cd /path/to/u-boot
--    => ./tools/mkimage  -n rk3399 -T rksd -d /path/to/rkbin/bin/rk33/rk3399_ddr_800MHz_v1.20.bin idbloader.img
--    => cat /path/to/rkbin/bin/rk33/rk3399_miniloader_v1.19.bin >> idbloader.img
--
--  - Write idbloader.img at 64 sector
--
--    => sudo dd if=idbloader.img of=/dev/sdc seek=64
--
--  - Write trust.img at 24576
--
--    => sudo dd if=trust.img of=/dev/sdc seek=24576
--
--  - Write uboot.img at 16384 sector
--
--    => sudo dd if=uboot.img of=/dev/sdc seek=16384
--    => sync
--
--Put this SD (or micro-SD) card into your board and reset it. You should see
--something like:
--
--DDR Version 1.20 20190314
--In
--Channel 0: DDR3, 933MHz
--Bus Width=32 Col=10 Bank=8 Row=15 CS=1 Die Bus-Width=16 Size=1024MB
--no stride
--ch 0 ddrconfig = 0x101, ddrsize = 0x20
--pmugrf_os_reg[2] = 0x10006281, stride = 0x17
--OUT
--Boot1: 2019-03-14, version: 1.19
--CPUId = 0x0
--ChipType = 0x10, 239
--mmc: ERROR: SDHCI ERR:cmd:0x102,stat:0x18000
--mmc: ERROR: Card did not respond to voltage select!
--emmc reinit
--mmc: ERROR: SDHCI ERR:cmd:0x102,stat:0x18000
--mmc: ERROR: Card did not respond to voltage select!
--emmc reinit
--mmc: ERROR: SDHCI ERR:cmd:0x102,stat:0x18000
--mmc: ERROR: Card did not respond to voltage select!
--SdmmcInit=2 1
--mmc0:cmd5,20
--SdmmcInit=0 0
--BootCapSize=0
--UserCapSize=60543MB
--FwPartOffset=2000 , 0
--StorageInit ok = 45266
--SecureMode = 0
--SecureInit read PBA: 0x4
--SecureInit read PBA: 0x404
--SecureInit read PBA: 0x804
--SecureInit read PBA: 0xc04
--SecureInit read PBA: 0x1004
--SecureInit read PBA: 0x1404
--SecureInit read PBA: 0x1804
--SecureInit read PBA: 0x1c04
--SecureInit ret = 0, SecureMode = 0
--atags_set_bootdev: ret:(0)
--GPT 0x3380ec0 signature is wrong
--recovery gpt...
--GPT 0x3380ec0 signature is wrong
--recovery gpt fail!
--LoadTrust Addr:0x4000
--No find bl30.bin
--Load uboot, ReadLba = 2000
--hdr 0000000003380880 + 0x0:0x88,0x41,0x3e,0x97,0xe6,0x61,0x54,0x23,0xe9,0x5a,0xd1,0x2b,0xdc,0x2f,0xf9,0x35,
--
--Load OK, addr=0x200000, size=0x9c9c0
--RunBL31 0x10000
--NOTICE:  BL31: v1.3(debug):370ab80
--NOTICE:  BL31: Built : 09:23:41, Mar  4 2019
--NOTICE:  BL31: Rockchip release version: v1.1
--INFO:    GICv3 with legacy support detected. ARM GICV3 driver initialized in EL3
--INFO:    Using opteed sec cpu_context!
--INFO:    boot cpu mask: 0
--INFO:    plat_rockchip_pmu_init(1181): pd status 3e
--INFO:    BL31: Initializing runtime services
--INFO:    BL31: Initializing BL32
--INF [0x0] TEE-CORE:init_primary_helper:337: Initializing (1.1.0-195-g8f090d20 #6 Fri Dec  7 06:11:20 UTC 2018 aarch64)
--
--INF [0x0] TEE-CORE:init_primary_helper:338: Release version: 1.2
--
--INF [0x0] TEE-CORE:init_teecore:83: teecore inits done
--INFO:    BL31: Preparing for EL3 exit to normal world
--INFO:    Entry point address = 0x200000
--INFO:    SPSR = 0x3c9
--
--
--U-Boot 2019.04-rc4-00136-gfd121f9641-dirty (Apr 16 2019 - 14:02:47 +0530)
--
--Model: FriendlyARM NanoPi NEO4
--DRAM:  1022 MiB
--MMC:   dwmmc@fe310000: 2, dwmmc@fe320000: 1, sdhci@fe330000: 0
--Loading Environment from MMC... *** Warning - bad CRC, using default environment
--
--In:    serial@ff1a0000
--Out:   serial@ff1a0000
--Err:   serial@ff1a0000
--Model: FriendlyARM NanoPi NEO4
--Net:   eth0: ethernet@fe300000
--Hit any key to stop autoboot:  0
--=>
--
--Option 2: Package the image with SPL:
--
--  - Prefix rk3399 header to SPL image
--
--    => cd /path/to/u-boot
--    => ./tools/mkimage -n rk3399 -T rksd -d spl/u-boot-spl-dtb.bin out
--
--  - Write prefixed SPL at 64th sector
--
--    => sudo dd if=out of=/dev/sdc seek=64
--
--  - Write U-Boot proper at 16384 sector
--
--    => sudo dd if=u-boot.itb of=/dev/sdc seek=16384
--    => sync
--
--Put this SD (or micro-SD) card into your board and reset it. You should see
--something like:
--
--U-Boot SPL board init
--Trying to boot from MMC1
--
--
--U-Boot 2019.01-00004-g14db5ee998 (Mar 11 2019 - 13:18:41 +0530)
--
--Model: Orange Pi RK3399 Board
--DRAM:  2 GiB
--MMC:   dwmmc@fe310000: 2, dwmmc@fe320000: 1, sdhci@fe330000: 0
--Loading Environment from MMC... OK
--In:    serial@ff1a0000
--Out:   serial@ff1a0000
--Err:   serial@ff1a0000
--Model: Orange Pi RK3399 Board
--Net:   eth0: ethernet@fe300000
--Hit any key to stop autoboot:  0
--=>
--
--Option 3: Package the image with TPL:
--
--  - Write tpl+spl at 64th sector
--
--    => sudo dd if=idbloader.img of=/dev/sdc seek=64
--
--  - Write U-Boot proper at 16384 sector
--
--    => sudo dd if=u-boot.itb of=/dev/sdc seek=16384
--    => sync
--
--Put this SD (or micro-SD) card into your board and reset it. You should see
--something like:
--
--U-Boot TPL board init
--Trying to boot from BOOTROM
--Returning to boot ROM...
--
--U-Boot SPL board init
--Trying to boot from MMC1
--
--
--U-Boot 2019.07-rc1-00241-g5b3244767a (May 08 2019 - 10:51:06 +0530)
--
--Model: Orange Pi RK3399 Board
--DRAM:  2 GiB
--MMC:   dwmmc@fe310000: 2, dwmmc@fe320000: 1, sdhci@fe330000: 0
--Loading Environment from MMC... OK
--In:    serial@ff1a0000
--Out:   serial@ff1a0000
--Err:   serial@ff1a0000
--Model: Orange Pi RK3399 Board
--Net:   eth0: ethernet@fe300000
--Hit any key to stop autoboot:  0
--=>
--
--Using fastboot on rk3288
--========================
--- Write GPT partition layout to mmc device which fastboot want to use it to
--store the image
--
--        => gpt write mmc 1 $partitions
--
--- Invoke fastboot command to prepare
--
--        => fastboot 1
--
--- Start fastboot request on PC
--
--        fastboot -i 0x2207 flash loader evb-rk3288/spl/u-boot-spl-dtb.bin
--
--You should see something like:
--
--        => fastboot 1
--        WARNING: unknown variable: partition-type:loader
--        Starting download of 357796 bytes
--        ..
--        downloading of 357796 bytes finished
--        Flashing Raw Image
--        ........ wrote 357888 bytes to 'loader'
--
--Booting from SPI
--================
--
--To write an image that boots from SPI flash (e.g. for the Haier Chromebook or
--Bob):
--
--   ./chromebook_jerry/tools/mkimage -n rk3288 -T rkspi \
--	-d chromebook_jerry/spl/u-boot-spl-dtb.bin spl.bin && \
--   dd if=spl.bin of=spl-out.bin bs=128K conv=sync && \
--   cat spl-out.bin chromebook_jerry/u-boot-dtb.img >out.bin && \
--   dd if=out.bin of=out.bin.pad bs=4M conv=sync
--
--This converts the SPL image to the required SPI format by adding the Rockchip
--header and skipping every second 2KB block. Then the U-Boot image is written at
--offset 128KB and the whole image is padded to 4MB which is the SPI flash size.
--The position of U-Boot is controlled with this setting in U-Boot:
--
--   #define CONFIG_SYS_SPI_U_BOOT_OFFS	0x20000
--
--If you have a Dediprog em100pro connected then you can write the image with:
--
--      sudo em100 -s -c GD25LQ32 -d out.bin.pad -r
--
--When booting you should see something like:
--
--   U-Boot SPL 2015.07-rc2-00215-g9a58220-dirty (Jun 23 2015 - 12:11:32)
--
--
--   U-Boot 2015.07-rc2-00215-g9a58220-dirty (Jun 23 2015 - 12:11:32 -0600)
--
--   Model: Google Jerry
--   DRAM:  2 GiB
--   MMC:
--   Using default environment
--
--   In:    serial@ff690000
--   Out:   serial@ff690000
--   Err:   serial@ff690000
--   =>
--
--Future work
--===========
--
--Immediate priorities are:
--
--- USB host
--- USB device
--- Run CPU at full speed (code exists but we only see ~60 DMIPS maximum)
--- NAND flash
--- Boot U-Boot proper over USB OTG (at present only SPL works)
--
--
--Development Notes
--=================
--
--There are plenty of patches in the links below to help with this work.
--
--[1] https://github.com/rkchrome/uboot.git
--[2] https://github.com/linux-rockchip/u-boot-rockchip.git branch u-boot-rk3288
--[3] https://github.com/linux-rockchip/rkflashtool.git
--[4] http://wiki.t-firefly.com/index.php/Firefly-RK3288/Serial_debug/en
--
--rkimage
---------
--
--rkimage.c produces an SPL image suitable for sending directly to the boot ROM
--over USB OTG. This is a very simple format - just the string RK32 (as 4 bytes)
--followed by u-boot-spl-dtb.bin.
--
--The boot ROM loads image to 0xff704000 which is in the internal SRAM. The SRAM
--starts at 0xff700000 and extends to 0xff718000 where we put the stack.
--
--rksd
------
--
--rksd.c produces an image consisting of 32KB of empty space, a header and
--u-boot-spl-dtb.bin. The header is defined by 'struct header0_info' although
--most of the fields are unused by U-Boot. We just need to specify the
--signature, a flag and the block offset and size of the SPL image.
--
--The header occupies a single block but we pad it out to 4 blocks. The header
--is encoding using RC4 with the key 7c4e0304550509072d2c7b38170d1711. The SPL
--image can be encoded too but we don't do that.
--
--The maximum size of u-boot-spl-dtb.bin which the boot ROM will read is 32KB,
--or 0x40 blocks. This is a severe and annoying limitation. There may be a way
--around this limitation, since there is plenty of SRAM, but at present the
--board refuses to boot if this limit is exceeded.
--
--The image produced is padded up to a block boundary (512 bytes). It should be
--written to the start of an SD card using dd.
--
--Since this image is set to load U-Boot from the SD card at block offset,
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR, dd should be used to write
--u-boot-dtb.img to the SD card at that offset. See above for instructions.
--
--rkspi
-------
--
--rkspi.c produces an image consisting of a header and u-boot-spl-dtb.bin. The
--resulting image is then spread out so that only the first 2KB of each 4KB
--sector is used. The header is the same as with rksd and the maximum size is
--also 32KB (before spreading). The image should be written to the start of
--SPI flash.
--
--See above for instructions on how to write a SPI image.
--
--Device tree and driver model
------------------------------
--
--Where possible driver model is used to provide a structure to the
--functionality. Device tree is used for configuration. However these have an
--overhead and in SPL with a 32KB size limit some shortcuts have been taken.
--In general all Rockchip drivers should use these features, with SPL-specific
--modifications where required.
--
--GPT partition layout
------------------------------
--
--Rockchip use a unified GPT partition layout  in open source support.
--With this GPT partition layout, uboot can be compatilbe with other components,
--like miniloader, trusted-os, arm-trust-firmware.
--
--There are some documents about partitions in the links below.
--http://rockchip.wikidot.com/partitions
--
----
--Jagan Teki <jagan@amarulasolutions.com>
--27 Mar 2019
--Simon Glass <sjg@chromium.org>
--24 June 2015
---
-2.39.5
+Applied to u-boot/main, thanks!
+
+[1/1] CI: Azure: Correctly skip semihosting tests on vexpress_fvp
+      commit: 9e596aee6855edc7e786b90db07e24a4f263daed
+-- 
+Tom
+
 
