@@ -4,139 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F264FC531D0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 03:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17CD4C531D0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 05:18:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0C11680EFB;
-	Thu, 30 Jul 2026 03:43:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A292A80C80;
+	Thu, 30 Jul 2026 05:18:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8jo9OcnuoYAQ; Thu, 30 Jul 2026 03:43:48 +0000 (UTC)
+ id O9ffTJRQVNZF; Thu, 30 Jul 2026 05:18:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4B9D680ED2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 916BB80E01
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785383028;
-	bh=S739bDWYnr8EGYlECvCgvvrmpXLmLLIYF8UgkLgrnKM=;
-	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=TltiHhMqEYXAYBpQNMJPcy4OLuMgyrUthXWZGTZqN0gt1fDV35eCmjPJtjXLNrNO1
-	 amqfvjBVl0euO5sHe87tdk2AgYqwS9PeehM7ZLGCzVeX+Xvxa/UBxmrur/cC26HZIl
-	 bf9PwA+XlJYq8mzz2qapaHAholkYZWiYYWF9CK3krP/WtQxIs/eQHnC6qqr7ClLnI4
-	 0GeSl4svwAmdGN4McfIct63kPoRmQjdlTIpdsZZSx9SEB9Rx7K7EcM3O1N0LlfiV5r
-	 LCyJxWCh6QJcrLFrDJ2e+8+RH7zyXZuBHWQoDNiDleQjJDl8MM44DAJOpdax4tsUHB
-	 wgYkRN4ZocQqw==
+	d=lists.u-boot-project.org ; s=default; t=1785388713;
+	bh=BDggf69DOJZp3QBM31zmBunQjdjqnUREvzM4xA8eefk=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LRnY+cwhbrz6GJQj0vsJRf0H1UI8v78rdWk3cIxY1Kv5xKdVvhyi92nIte3bWUOj4
+	 Uw1lxUbs4nIxB8nKzY9p3nHE7uNd5Ki0992aj1zec7K5J+83xYBgOtYAOSXRHyUhCL
+	 WbUXjld7u6ZOblzAWlyEXbRgVC41/iIZrbVxUxNIghEDTdINXsearZpG5cu5v2LEYV
+	 t6mKNvu+eHjzWxay8jWgHfUfzSJod3h9RWK6RllZ2tRQyE5BPdPySxK97+UA1oRkQU
+	 0E3Og3j7wOhVy/QatmEZ3XKmYTs8q0fSxQbV1jGpJW178ZGUXVPhrqRc9XdRqyARp0
+	 GfLYzTqtiVGcw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4B9D680ED2;
-	Thu, 30 Jul 2026 03:43:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 7DF7C350
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 03:43:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 916BB80E01;
+	Thu, 30 Jul 2026 05:18:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B099127C
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 05:18:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6426660785
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 03:43:47 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id ADFCC40187
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 05:18:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9MBkI__-zovC for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 03:43:46 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id S5Dif71LuCah for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 05:18:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c111::9;
- helo=dm5pr21cu001.outbound.protection.outlook.com;
- envelope-from=jayaramudu.desapogu@amd.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8E86260618
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8E86260618
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8E86260618
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 03:43:46 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yjTgF6B8gkqASE/7n06ZIwIZR1yP2g8iF4Vb5lWkVMEA2PXYczzP5mywTkCdNXjBQnxiB5OGx+1/sbXfpHx+90QoBikTnvoaka0vMXLcNiiewGR3EdEXNvKPyQImW1i06qOjvWfpkrkNbXakd7VWSUum4uH3g29vacSDpz9kcv0wSkUW7nBj6oD1nNSeNNVW/QmlwOPJInQrAw1gjvfIC8M5Pd85avoaYrHl9F0mNScf2f72AHvpWNitgDd3TwMGdi+gnV/ya/CsPQQ/3ZGRRJFUQFCadfRy0d/PvAbdJ8usSiv5vy1+tCIj9K0NQdMGXRp2P2MLS7OkH2SEJDbI2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S739bDWYnr8EGYlECvCgvvrmpXLmLLIYF8UgkLgrnKM=;
- b=osM0eNEOQJRUYI50bV5d9bfm3eYEi2iETYxYqrFu3gTTV0UKtEU0pxC7ClhqnI71a2/sEM1TR5Pah/bkEJwPaWkXqoJnF7HESTTV4KPBrKAi34zRiiPnUDdqpeITMty9jBoshA2HhPBSHgHjW4WCmqu4EW1+REXrVFXoj2LG9v6iwLTnAa6ltjZxGMIX401zIzSp27ABMawAh/FvwTExVKyEPc0K4JZyGHNDiZpCmX15u+rHMul3UWxWjzGj/h6GlN3NR9udNs2MJbsd5j8JN0RRBobpTd3TgwSiEj+ZgI6PpiVYaMKwZVdyG/Tss5mgTQNZLq+tabkh8cQ3bmtGuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-Received: from BN9PR03CA0568.namprd03.prod.outlook.com (2603:10b6:408:138::33)
- by DS0PR12MB7704.namprd12.prod.outlook.com (2603:10b6:8:138::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.14; Thu, 30 Jul
- 2026 03:43:42 +0000
-Received: from BN3PEPF0000B36F.namprd21.prod.outlook.com
- (2603:10b6:408:138:cafe::a4) by BN9PR03CA0568.outlook.office365.com
- (2603:10b6:408:138::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.13 via Frontend Transport; Thu,
- 30 Jul 2026 03:43:42 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF0000B36F.mail.protection.outlook.com (10.167.243.166) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.292.1 via Frontend Transport; Thu, 30 Jul 2026 03:43:42 +0000
-Received: from BLRJDESAPOG1.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 29 Jul
- 2026 22:43:40 -0500
-From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
-To: <sjg@chromium.org>, <trini@konsulko.com>
-CC: <u-boot@lists.u-boot-project.org>, Desapogu Jayaramudu
- <jayaramudu.desapogu@amd.com>
-Subject: [PATCH v5] serial: coreboot: Accept DBG2 subtype 0x12
-Date: Thu, 30 Jul 2026 09:13:16 +0530
-Message-ID: <20260730034316.26353-1-jayaramudu.desapogu@amd.com>
-X-Mailer: git-send-email 2.43.0
+ client-ip=2a00:1450:4864:20::129; helo=mail-lf1-x129.google.com;
+ envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A4B8B4004D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A4B8B4004D
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A4B8B4004D
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 05:18:29 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5b2aab18795so1559853e87.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 29 Jul 2026 22:18:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785388707; cv=none;
+ d=google.com; s=arc-20260327;
+ b=iM/ajTjHz+3mr0j5OKwBzR/og0EZqD1TmAtoqAwAVHRUZp5Y3c8PO5+Dh5kJsC+Rjb
+ Ux8/pPwSs6RGFUf8sjnRut39CTBdMKklwlZld5pjZQN7Tv3MkxgZKJbO9xEkiULOECz3
+ L+mi5zdDhNSAAxw1yfRcf+IrbZhRHVerQK+JbtziOXnxinxHFRKj0sTVoSwU3oS82c90
+ PBh2+fZ5rK5jB0JaYGQ0AovOYAEPqQk/spK2VveKSeeA0oVfpWuBKduNxhchA/BAZVt0
+ +yxEo0O3sczjK661AMWGf1xwpXAz0JjUeTG9gkJOky0pG5i3XVbGn+A6yuDw6mIrpLJT
+ RNVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=BDggf69DOJZp3QBM31zmBunQjdjqnUREvzM4xA8eefk=;
+ fh=1EqYmiAmoJtQDOaI6AIS3tSckIM65oNDX3ULHybOIB4=;
+ b=sCwkx05d1v71adqzxE1Ipu3wgqbTe+EOZJCqibeoeCV9hRCpfw7RhkZMsEfk09FDHP
+ IDkdz5p+psKqART+bALWQnSrT0+x2k4vpiTImww7S9bjaMt+3CKjelaCLBK7XazPaoEX
+ ippbQKG3he8l21nrAesKivOEr8sxfoqmX4PxoJSP2qPmEl9A+VamQyKXTL6GBx7P1Mnq
+ 86846i65DK639DXoCDSnf4LmN30sb44O/w6YbGRaIky21E8nRWtwbzJevbW8pkwbcO2P
+ 5bYQURmxlMgjrkV3I70S7kkEMzOFqcGMEEKx7rmLD36LFGBesqEYIbMFk4o+9q4LYnVM
+ mTtA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785388707; x=1785993507;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=BDggf69DOJZp3QBM31zmBunQjdjqnUREvzM4xA8eefk=;
+ b=Eea/WCzE43EL+snBWygNUqX6hNa3qk9pPssIEj0GIZ73nO4vbYkCjsc29m2wV0dzK2
+ lYcOaiNEBJTUN8VhyxpyjIDxCCNWPu3cMXVCjLtuDxrpoEn12Yws5yCXvtqSwEkLYtty
+ Yck9DE9jokWJuZQOH21MQ/V7cmn2NWVczKqJopwFNIxJ+dXH9Xd746az+dcv4ffasuwx
+ bq13Ir1UpTU6e6Rzr7kFVOcLCoTFGeVfyC2hyLGY1FIhY3W8oB4qnNcfXNII2QL3694q
+ eCQPhKq6NlEaEj7tUugh75JUvNrwC8FBx3hqaACvaQw8nCFxh0ezo3xXQuycqwPlCSnp
+ aOzQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqHqW01PUfyVbbHvYg3u+zPReV8xrS6HzWxRNQFugkwOc15ISb+4InNEUbuKxHM08UX3jaYamA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzvUXWJqKQNDWqG3w9yiq3UXd1XLoxiHdVhu8I+ezP1HqKpaosz
+ Plt/FayZsVRbAkdscKjaC5x1cB5vpo+tEQHf0BlzO9sXtbSQfZtxUMbththxJaSbzfcm0QBJfGC
+ MNp83pbpet/cTakN8s9gSt4HOh4b6bHVQjR6tZs2z0g==
+X-Gm-Gg: AR+sD12UTT0Z1RX8iNCEtfDvvEGWo4KfOqJCM5ntl+NYTup2NRX6KPp39RF+yXokn/n
+ 1dsqfixUY+pfVUvvXTERGRnxdQV6QIC7SD9OxYEBVIwy+gFVxaCp+zU12IAgdIGAsFhhESB0HzS
+ hjoYO8fHRZ7Jn7NolCuaNoQag+dkmEIAJTM6bllhkYt77ytkHKgm1jFMP3JfuGO5HFJRoirw1BC
+ L+llKB/emR3rDelhc1s5n+u9q1hLObsUO1757WHE0hQ1qdo0KphQOvGHCYmpAKZgbi4qjyXJOGF
+ oAsOEBkKLn4KCg2wJOT020i4g4DR4l0Rd2S6dkINVYjOQqzLxPGjASRabwi/KWgAkXRWEJHsO3O
+ Cv3dwXF+JVE9eZIv0H7s1ZhjrV+bugMi1Ap3ktP4A8wIY5i4nVVrJ+K6/336LixUJpMqEbj8wFq
+ kItw==
+X-Received: by 2002:a05:6512:6695:10b0:5b1:5b10:523a with SMTP id
+ 2adb3069b0e04-5b2db391f3amr100565e87.62.1785388707009; Wed, 29 Jul 2026
+ 22:18:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36F:EE_|DS0PR12MB7704:EE_
-X-MS-Office365-Filtering-Correlation-Id: dd91558e-4c1e-4f94-c5f0-08deedecc03b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|36860700016|82310400026|1800799024|10067099003|11063799006|56012099006|18002099003|3023799007;
-X-Microsoft-Antispam-Message-Info: Y5FWGhNCXU8lp8sCRihc3hhPvkeohRo3rOknntKGMyH0omjucHzrJW4c1NaWtDM2nToNLXz36rgrVHX2//3q0PrvmzelPZQRl6dMKdLE5qmL8MXqpOpwfg9Za2lRmsTcsatsm45va/ziXM7s+kOhac5updy+4vvkUfL4Bg3Zw/x/4MVMGhTt8TZMy95g/ouWInJagegqMyEVXnnElDGUB5b+4QueNUiNukMULm4PeE+3NC715OM79teblL5DIRBGL4b2svfeXMQpRzKyAN/d8USGaQT3iu8iv1CMPW0AkBfCXlx1gNEbpLm3yqErjDRzbS8TT8ybH90kC+axA9fRIBiHCqcJsqulvD/Aig/wlYQlDgjsw99l4+Tc7HVi/iJ2lP90MLAGDT5LJhTvrymhHa4yINrNkdmrBswYRRD6TQQQewyD5z5BTVv9xfjjhQYq/4RwNbVIM1HWU9+MDFsR49eJveXOialJwQ7wjVUTPS+0ZEUETA6D8s2clHkyY+igWFNWa7BFQ9C3MI1Sc9lburdSFbLHLaptqksjgjjjICO9NRFDMxned2UXiEKN674IBUh9unqLV6R+7IW2vIkNPjwVjUBWvmI9oqRjOEjbftHOir7exzr0TuaRy/WIh34BnGPuAxg57idkzgCF1ZjxlhC5nNImvCR8B2iV6aSLnjKVI+9E1CtKJQlJviakf2wMYX+8M1KFWgZwzhy7bFnkNA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(36860700016)(82310400026)(1800799024)(10067099003)(11063799006)(56012099006)(18002099003)(3023799007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: qYAZ8rCzj074+WAfHILwzoIpt10oliRzVN45YnZ5CuF2nT5uTs2gGgrJMnFK0pRPwoWVTtt0AyDUndHEveE4xX12utiZP8SovF/a2t8+L15/OpxUfLHIftcE/8AVoTNjkrr8ScifkYkNuUEmwZRg4wboY7Ak4k4nSrhJGVT+cq8tXFNcV7xlKt4mzR3wZrsBKfHb2RY+7W/lDWLoO2jhW+njqwzHAnr/RC2T2BGsNTROj0aP6RAaMXoNYyihr16FVX+YkAKavgcGJObqzD6QMGxdUDj61VL/vRqjtrrkzcXAqb81k9WZk2kgFh7Jtg/af/BmgdCicqq/ozTJMPYK3VtQeIhnRQ/6ptnOqi7j5SaUXvTClg/yqKxYMb/IK3Agls5DLqlmaLxwGJFzOgG2MaWfYbacZc78Zcqvkf5BCdXWIAvqZXj3iazXpE84IATA
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 03:43:42.5984 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd91558e-4c1e-4f94-c5f0-08deedecc03b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36F.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7704
+References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
+ <20260727-m4-v6-6-2f58566d48ca@riscstar.com> <amdGSBKT4iRzuh1P@pie>
+ <CAH22mJz64S5_em=D0zvt1uUaGpymAb1Ss5uiB5OkutpRcU=6Og@mail.gmail.com>
+ <ameQUN3zlD0Ei8Jm@pie>
+ <CAH22mJyMqTgRLqyfVZGgSHHNK7XnBTnrkY-R1ix5DN+oiBDEbg@mail.gmail.com>
+ <amhyAULw9Wovuo3z@pie>
+ <CAH22mJyyExBuUrDNgRg=WU4f6RkN7M0QhtuUAgXiUf8b84TaCQ@mail.gmail.com>
+ <amojCjayE5-wI7iT@pie>
+In-Reply-To: <amojCjayE5-wI7iT@pie>
+From: Eric Chung <eric.chung@riscstar.com>
+Date: Thu, 30 Jul 2026 13:18:14 +0800
+X-Gm-Features: AUfX_mwXRzIPNIXwgnSYmui_OvUAu--tpzz1TQdcOXyfVMlK8ZwLq2elUTM88MI
+Message-ID: <CAH22mJzTu186fyLfT18WTS7RBL+2u77adGMTmY+0jUFgZdtCgA@mail.gmail.com>
+Subject: Re: [PATCH v6 06/11] dts: k1: add SD card support in u-boot overlay
+To: Yao Zi <me@ziyao.cc>
+Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
+ Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guodong Xu <guodong@riscstar.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S739bDWYnr8EGYlECvCgvvrmpXLmLLIYF8UgkLgrnKM=;
- b=lv583DsnvHue+RhCvYy/5E3aIoyHUNH1I035UsTAbndoD1fdV5QJy9L/hBQP6UKUZA6t1WV5g6fXLTwO1P1BPhBfYuUqyD8/tQkYDO6hdgOg6DX9PdYat49u1/UaXbaAr5tCsfsJXS4ze+lkBdborBpFeLzELnYvMxMfp6fg1vU=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=amd.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=lv583Dsn
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1785388707; x=1785993507;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=BDggf69DOJZp3QBM31zmBunQjdjqnUREvzM4xA8eefk=;
+ b=gMces15TEgXWcIFloPfBIIpx0dhfLDhfcJduJxLPGj1QzS6/+h/VNe3vd7nhDLnpov
+ XXAuJDYc7b7aS1pC8WfWHFUdpvLj0ro56kLi28n3q/x7YyIdeh+owvNxw9S19IAFaGIj
+ 0tUFOM/9n1tHY9U8/nH6vw3Iz0e6gEsdUvV97K6ItQ74TLjVdTHgIYG9CYxjvFJ9PrpD
+ hv6jOjgvfhF4MbIKgpPAts4MHT85CkWIkg/7W9U//RRphCx9kpb1gYGEBZ0K1QnFkE1t
+ IR1hJpR0Ape6NcSiuRShib6HF3GBTg+mAIUV6xbH0+5lifajZpexMfY6mq0XhL+LVr9m
+ wuhg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=riscstar.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=gMces15T
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,57 +172,162 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-U-Boot running as a coreboot payload obtains serial console
-information either from the coreboot table or from the ACPI DBG2
-table.
+On Wed, Jul 29, 2026 at 11:58=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
+>
+> On Wed, Jul 29, 2026 at 10:05:14PM +0800, Eric Chung wrote:
+> > On Tue, Jul 28, 2026 at 5:11=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
+> > >
+> > > On Tue, Jul 28, 2026 at 09:04:52AM +0800, Eric Chung wrote:
+> > > > On Tue, Jul 28, 2026 at 1:08=E2=80=AFAM Yao Zi <me@ziyao.cc> wrote:
+> > > > >
+> > > > > On Mon, Jul 27, 2026 at 09:08:52PM +0800, Eric Chung wrote:
+> > > > > > Hi Yao,
+> > > > > >
+> > > > > > I'm not familiar with the policy for syncing DTS files from the=
+ Linux upstream.
+> > > > > > Could you clarify how this script works?
+> > > > > >
+> > > > > > Does it sync all DTS files from Linux upstream at once, or is i=
+t
+> > > > > > possible to sync
+> > > > > > only the Spacemit DTS file?
+> > > > >
+> > > > > update-subtree.sh cherry-picks a commit from the upstream, or
+> > > > > merge an upstream tag into the subtree. Cherry-picking SD-related
+> > > > > commits from Linux upstream suits for your case.
+> > > > >
+> > > > > > If I choose to sync only the Spacemit DTS file and include it i=
+n my patch set,
+> > > > > > would that cause conflicts later when others try to sync all DT=
+S files?
+> > > > >
+> > > > > Tom synchronizes the dts subtree with Linux upstream irregularly,=
+ there
+> > > > > should be no conflict or relatively small ones if you cherry-pick=
+ the
+> > > > > changes, while adding downstream nodes in *-u-boot.dtsi might suf=
+fer
+> > > > > from duplication, too, during synchronization.
+> > > > >
+> > > >
+> > > > The process is a bit complex. Since my main issue is that the DTS
+> > > > files are out of
+> > > > date, would it be simpler if I just copy the relevant Spacemit DTS
+> > > > files directly
+> > > > from the Linux upstream into the dts/upstream folder?
+> > >
+> > > The answer is simply no.
+> > >
+> >
+> > OK. I'll keep using my own overlay DTS file.
+> > I tried upstream DTS file. It only gave me more bugs. I could switch to
+> > upstream DTS file when Tom syncs it.
+>
+> So first of all, please note switching to upstream devicetree doesn't
+> mean you must remove all the dts overlays, you could keep small pieces
+> like these adding bootph-pre-ram properties, which are
+> bootloader-specific and might not get upstreamed in a short period.
+>
+> And I noticed there have been quite a lot code in the overlays, like the
+> PMIC code, thus changes to overlays might be huge when cherry-picking,
+> if it's the case, this patch is then acceptable, but please mention it
+> in the commit message.
+>
+Yes, it's one of the reasons. Too many related commits exist. I prefer to k=
+eep
+the process simple. When someone syncs the whole DTS, the process is
+much easier and avoids commit conflicts.
 
-When serial console support is disabled in coreboot, the coreboot
-table does not contain serial information. In this case U-Boot falls
-back to parsing the DBG2 table.
+> But, if switching to the devicetree with cherry-picked patches for MMC
+> leads to bugs, there are likely ABI compatibility issues in your driver,
+> which would persist even after the synchronization with upstream v7.2
+> tag. Please fix them. From the very start, it's agreed compatibility
+> with Linux devicetree ABI is important[1].
 
-Some AMD platforms or any other platforms that uses memory-mapped I/O
-advertise the debug UART using DBG2 subtype 0x0012 ("16550-compatible
-with parameters defined in Generic Address Structure"). U-Boot
-currently accepts only subtype 0x0000, causing DBG2 UART detection to
-fail and leaving no console output.
+There are several commits on DTS. Cherry-picking only a few commits is
+not ideal.
+I'm using upstream DTS. I just keep minimal changes in the overlay DTS file=
+.
 
-Accept subtype 0x0012 as well and keep the existing handling logic.
+The cd-gpios property isn't even consistent between bananapi f3 and musepi =
+pro
+board.
 
-Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
----
-v5:
-- removed whitespce
+The sequence of mmc nodes is also inconsistent. SD node is declared
+first, and the
+eMMC node is declared second. However, there is an alias that reverses
+this order.
+In order to make it work, I have to enable CONFIG_DM_SEQ_ALIAS.
 
- drivers/serial/serial_coreboot.c | 3 ++-
- include/acpi/acpi_table.h        | 1 +
- 2 files changed, 3 insertions(+), 1 deletion(-)
+As I said they could be fixed. And I failed to cherry-pick only a few
+commits. So I don't
+want to import commit conflicts when I synchronizing DTS files. I
+prefer it could be
+handled by maintainers. When it's done, I can continue to submit new
+patches for fixes.
 
-diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
-index b1f69f6998cfa1..89da11ffa5241e 100644
---- a/drivers/serial/serial_coreboot.c
-+++ b/drivers/serial/serial_coreboot.c
-@@ -59,7 +59,8 @@ static int read_dbg2(struct ns16550_plat *plat)
- 		log_debug("Not a serial port\n");
- 		return -EPROTOTYPE;
- 	}
--	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE) {
-+	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE &&
-+	    dbg->port_subtype != ACPI_DBG2_16550_WITH_GAS) {
- 		log_debug("Incompatible serial port\n");
- 		return -EPROTOTYPE;
- 	}
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 4895366a6188ec..ac50ea10312e28 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -674,6 +674,7 @@ struct __packed acpi_dmar {
- #define ACPI_DBG2_ARM_SBSA_GENERIC	0x000E
- #define ACPI_DBG2_ARM_DCC		0x000F
- #define ACPI_DBG2_BCM2835		0x0010
-+#define ACPI_DBG2_16550_WITH_GAS	0x0012 /* 16550-compatible UART with GAS */
- 
- #define ACPI_DBG2_1394_STANDARD		0x0000
- 
--- 
-2.43.0
+It should be fixed in Linux. But that doesn't mean I must fix the
+error in Linux first.
+Then I submit this patch set after 6 months, waiting for the fix to
+merge in Linux.
 
+>
+> So here's my NAK for this series, including v7 of it.
+>
+> Thanks,
+> Yao Zi
+>
+> [1]: https://lore.kernel.org/all/20260429-glare-anybody-16c98d01184e@spud=
+/
+>
+> > > > > > Best Regards
+> > > > > > Eric
+> > >
+> > > Regards,
+> > > Yao Zi
+> > >
+> > > > > By the way, please avoid top-posting if possible.
+> > > > >
+> > > > > Thanks,
+> > > > > Yao Zi
+> > > > >
+> > > > > > On Mon, Jul 27, 2026 at 7:52=E2=80=AFPM Yao Zi <me@ziyao.cc> wr=
+ote:
+> > > > > > >
+> > > > > > > On Mon, Jul 27, 2026 at 02:59:08PM +0800, Eric Chung wrote:
+> > > > > > > > Add the SDH0 controller node and its pinctrl groups to the =
+u-boot
+> > > > > > > > overlay. The upstream DTS only contains the eMMC node; the =
+SD card
+> > > > > > > > controller (sdhci@d4280000) and its MMC1 pinctrl configurat=
+ion are
+> > > > > > > > missing. Place the new node inside the storage-bus via path=
+-based
+> > > > > > > > merge so it inherits the dma-ranges from the parent bus.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+> > > > > > >
+> > > > > > > Please cherry-pick upstream devicetree changes from Linux ups=
+tream with
+> > > > > > > tools/update-subtree.sh instead of adding our own copies. Cha=
+nges for
+> > > > > > > k1-bananapi-f3 and k1-muse-pi-pro have both landed in Linux v=
+7.2.
+> > > > > > >
+> > > > > > > Best regards,
+> > > > > > > Yao Zi
+> > > > > > >
+> > > > > > > > ---
+> > > > > > > > v5:
+> > > > > > > > - Append power source field on eMMC/SD pinctrl.
+> > > > > > > > v3:
+> > > > > > > > - Fix SD pinctrl as uhs.
+> > > > > > > > v2:
+> > > > > > > > - Use vmmc-supply as vqmmc-supply on SD node.
+> > > > > > > > - Add alias of mmc0 and mmc1.
+> > > > > > > > ---
+> > > > > > > >  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 91 +++++++++++=
++++++++++++++++++++-
+> > > > > > > >  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 86 +++++++++++=
++++++++++++++++++-
+> > > > > > > >  2 files changed, 173 insertions(+), 4 deletions(-)
