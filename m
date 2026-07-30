@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A68AC54FD2
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 09:48:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586CDC54FDF
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 09:48:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F1C1C80EEE;
-	Thu, 30 Jul 2026 09:48:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C072A80F41;
+	Thu, 30 Jul 2026 09:48:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id s2iNfJeHD51B; Thu, 30 Jul 2026 09:48:44 +0000 (UTC)
+ id VW30k3Cpe2-j; Thu, 30 Jul 2026 09:48:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1A5C780EF7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A847E80EF7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785404924;
-	bh=4K3JHaINw4TdaNxNjYWNujcZYe6SrJK4IbDjavh92qY=;
+	d=lists.u-boot-project.org ; s=default; t=1785404926;
+	bh=EWb2e6c/bfsy8XJxivvmdXjo83Vi7GqAmDTqi8zFLw0=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qHvX/ykI1hd1QQKbSloI9WhA1zZNYfd2TPNmYLQqrbwp/zwIinXrnsEPoSAMtujHz
-	 d9HT2f3Bshb0N7tAn8nZajnXrZLPPjiAZy0IG3rwZbB78naEOmkYxEYIS/Q/+7MrVY
-	 xPrm4u1g+8fSIONQKvJ+ol/afieMUD23dfq4vFh58yisvOGKjuwhr5ksj9o9KgYEjr
-	 obzoojgZ8wd1PO4rf/16lDSV2UVqb1GgTRcgTE0xXVAa7xXxpMNmrKBerEqiflnRaJ
-	 CT5SvQsmxPYIWqs466CG/TXXILG2NQMYQzac+gXduLhOSkN+tDFRAZ33QfOXweVuDD
-	 0V3P9XW7Drugw==
+	b=mNFlgGRKumlPymwFSHo6CJYEr33ZbZY1KIpEnFhKV53dnlXlnfDRkhEY3IMv0wmIp
+	 n5oBlFC5Rl7HduuMYzJRwTbGr6V35oINH5LAuFjTxShJOoEN7c27Kx7yrTSryNmXq+
+	 Q843svHHDp5GAsyhoeNpgbNPnTO6rY1Pxu7M36hF1xmWubu4Sap940P/VKJCrU2J6S
+	 jKblAgKx98KQrL76SG6DcQmkDfvUWgY+lwgqBZXpcsVBg74SG/2ZEGnYVKUNCUK36U
+	 obrBkm9Ap4T4nCdEccuHsTMOKI/pIQuDj8/NtRXboBVXYinb+PocXWWFqjYYMFgm4E
+	 pBQ9egc8URLug==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A5C780EF7;
-	Thu, 30 Jul 2026 09:48:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id CA20A26C
+	by smtp1.osuosl.org (Postfix) with ESMTP id A847E80EF7;
+	Thu, 30 Jul 2026 09:48:45 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E02C642D
  for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 09:48:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BBDD6407FF
+ by smtp1.osuosl.org (Postfix) with ESMTP id D1DBC80ED2
  for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 09:48:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mNFUKbUcM8GS for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wfWgPCuUyCbp for <u-boot@lists.u-boot-project.org>;
  Thu, 30 Jul 2026 09:48:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c110::1;
- helo=bn1pr04cu002.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c007::2;
+ helo=mw6pr02cu001.outbound.protection.outlook.com;
  envelope-from=pranav.sanwal@amd.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2CEC1408ED
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2CEC1408ED
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2CEC1408ED
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 09:48:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 277DE80ECD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 277DE80ECD
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 277DE80ECD
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 09:48:39 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RxtzFOkZUAEVgRhUgIAfis6HlxbUUTE5z05ma2IwflP8sOPri06ehonCe572Z5NX1BJDULFgHlIbysy3y9X7JHaW8m7lEMG30G7GxlF1vCQ9u9GONH/a+1KYdi/YVKA/iagIB+VNzW/s/Vx/t+oNDBieJ9IIUc5s6DGIcY5EXb7nGxTkazG2R5JbcKZCbDQbYl4L//laUBL/Z+zh2HvEvWYyKqwvpwTgmDUDIlRF3H4UZuyI/01PPoy+vdyY+4DgXf/4eSS0rLOo9pxDscR70cvDFwHrGiJZrqBEmtEnU0ik1A0nhtSzEC/VQYioRwEZDgadwE2yC7wsXwzKVl5XOA==
+ b=hutd6Tso6o3/vbpqAhNmwRBVRJdEjK3dqkFF2MMoZF5OMS7G8NEnvmVAMgwKKvwCNWNK3kXyUzDIbHLwJj48fA6AUtqhVlql8V6h16f2Y1wN1d6JInNUb89taiTXR7tQIwDm5FBeUC1bajT4LDlVXqZqDUkRd8hJEDLtD1IoPQcCxRsB9JzEyLu42aRs1qo3/yrYfTBp5f7nM1OcBNe0ACy1pNpjvsC4Ft64vwgJ5z//4ALATbQGXmF7bMPvmL1w9YiwJSHoraXMoHfdFf69PG8BF8kLj0xaih/u5KEvnPcSFzfw/4TyEtiQ8XpIhdYe1PSLnpLZ4guOaZ1xlcdE4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4K3JHaINw4TdaNxNjYWNujcZYe6SrJK4IbDjavh92qY=;
- b=pRw4u+KHKQQhqyww7GtisE3RUTyUV1KUsv7TF5k77VlzPgf7tWMCI1bwlggimaGe1teECHj2RUDPnILbzjlcC4MgMGhaMqv4unQqCIdnfEmWrp94f19yA1mA1nUYp2G4UqobL+LtIZaIvF16fb/Bzo+QmUXF1urVY/7W0CpjB45hyyouj94jL+I6ZKNHffrjeO2E9MN58s9WpVW7lddPhsUycB31PTFSMEY3EXUovXqxn+T7KQQa1Ktq33qPZQO9jSMeGmHHlYDtUPANlBgqz8HwGy9iPV02fqEzuwfp1VnbALkRquXldBhYEdUFgvlV4LU63Z/7kZ8ZAWaoTJ9xpQ==
+ bh=EWb2e6c/bfsy8XJxivvmdXjo83Vi7GqAmDTqi8zFLw0=;
+ b=Wlikr8e+riAYf/byE7TAlMSxkEjem/hKUQbQpaS0iLUObKxCN9kYzIxSmin2ggdHGpvjtbq1Fw0Z1wnDwJ81+xvjvjsdJigH5TTZkZnojDodJs4gdqRsEEItFunsv3iI28342PR/cydteh1q0ROpS4fbn6sF0NzL9zvewyO1vaDl9+dAH7/inWOG6jwuC3KECcZBwwGlFh6DysRSJTbWC8ka2Gni52ksCD9lEaXsPEhyhSgPLm5pEoNhEivJxL10KcPyvVJuele8dfvXPrzKDYU9iDgebMcHBAN8EoYL6dmlhZ1fBjmX+zA+R7qSjnPMer5Li1xIauoYbCKLfNIi1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-Received: from PH7P220CA0076.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:32c::16)
- by SAWPR12MB999291.namprd12.prod.outlook.com (2603:10b6:806:55f::10)
+Received: from PH2PEPF0000384F.namprd17.prod.outlook.com (2603:10b6:518:1::71)
+ by PH7PR12MB6659.namprd12.prod.outlook.com (2603:10b6:510:210::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Thu, 30 Jul
- 2026 09:48:33 +0000
-Received: from SN1PEPF0002BA4E.namprd03.prod.outlook.com
- (2603:10b6:510:32c:cafe::5b) by PH7P220CA0076.outlook.office365.com
- (2603:10b6:510:32c::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.13; Thu, 30 Jul
+ 2026 09:48:36 +0000
+Received: from SN1PEPF0002BA50.namprd03.prod.outlook.com
+ (2a01:111:f403:f90c::) by PH2PEPF0000384F.outlook.office365.com
+ (2603:1036:903:48::3) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.14 via Frontend Transport; Thu,
- 30 Jul 2026 09:48:33 +0000
+ 30 Jul 2026 09:48:36 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -80,23 +80,27 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SN1PEPF0002BA4E.mail.protection.outlook.com (10.167.242.71) with Microsoft
+ SN1PEPF0002BA50.mail.protection.outlook.com (10.167.242.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.292.8 via Frontend Transport; Thu, 30 Jul 2026 09:48:33 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ 15.21.292.8 via Frontend Transport; Thu, 30 Jul 2026 09:48:35 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 30 Jul
- 2026 04:48:31 -0500
+ 2026 04:48:34 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 30 Jul
+ 2026 02:48:33 -0700
 Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Thu, 30 Jul 2026 04:48:30 -0500
+ Transport; Thu, 30 Jul 2026 04:48:32 -0500
 From: Pranav Sanwal <pranav.sanwal@amd.com>
 To: <u-boot@lists.u-boot-project.org>
 CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH 1/3] test: dm: free gpio in dm_test_gpio_requestf()
-Date: Thu, 30 Jul 2026 15:18:15 +0530
-Message-ID: <20260730094817.1937340-2-pranav.sanwal@amd.com>
+Subject: [PATCH 2/3] test: sandbox: enable GPIO_DELAY
+Date: Thu, 30 Jul 2026 15:18:16 +0530
+Message-ID: <20260730094817.1937340-3-pranav.sanwal@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260730094817.1937340-1-pranav.sanwal@amd.com>
 References: <20260730094817.1937340-1-pranav.sanwal@amd.com>
@@ -105,41 +109,41 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4E:EE_|SAWPR12MB999291:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7cfd3593-7c8f-44f2-99d2-08deee1fb806
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA50:EE_|PH7PR12MB6659:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6521246c-81a9-48a4-6e22-08deee1fb97a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|36860700016|82310400026|1800799024|10067099003|11063799006|56012099006|18002099003|22082099003|3023799007;
-X-Microsoft-Antispam-Message-Info: HkhuEHYL9vauted3H80NDoaD9AxyM6D2guP16l4XIBdii56vmhfin/8jqDq9Yl24lJhEvR9JePpdfrUN7KkqJETOuxd+uda8IC57/ZO1OBLL7bAhy8BuzwW6oUU904kX+/miSZhUvVDb0MvU0qFL4YBGWAK9rU50EHbDbC9sMOaK02iwB/ViD6BaGZNjR+P4nkwOXEo0ZN7i2Y9iTV43A5KTL4pnejQSA7O3SjupXezaV9K7cjY9gV4z8xneUCGzr00EdrF/r9na/otjvKwccIBIe4GhHaPXB5xJH/CJohPXXFCGGNIDfJGWCMFcDyWFfi+IzM5Rdv0dZHBoy7vcYcQw2tmHMmJb8mabZBUjN0KZVWu74DSsETwSD9Zf79F1Pp/KpXepBiL23AniWN9A/Omyup5CWmds/pAixtATDWaihrP96or4PuK2a4LRFIfTBMDpdqmLY1gUGL2v1KztsfWqDETrfL/hAS+7WXCN/25dETZ8HSn3TL5taPXyS3fV/yH4MTt5YU1jJPSABtM+k0DaQhI62+yjEUhWtLwXd4yfYaLI7NYPxUW6ddagXuUyU6/MzTaIPTX1tmVhT5fe33bMAvl/4/lZVOxTSbjOq6moIiCrRQflMTrk9bgupXQnKkPioJQLmim9eQ51ECGbPpTT3/T1MhOt+e6ZNTySsv2QJl1Ql/lxO0ataqoMOciCL+QMG78D5R/Xdamt5v1aaQ==
+ ARA:13230040|376014|82310400026|1800799024|23010399003|36860700016|18002099003|22082099003|56012099006|11063799006|10067099003;
+X-Microsoft-Antispam-Message-Info: TJq3Vv1HrL525K55jWuuvSn40V3zCmKNerpPZ32a94X+9TlxpcQeE8rHY4k03xw7Kxmba5fPS2uOVYAeVCqjxt7imBEG7/4sDkJgBECtvh3oJNWEgEbk1bvEaEwbx/8h69Ib27Haz1jhvnp6hMBbZX3u+i3PLiYJO8svrKXQM8Uh0pu0rtUCCWlR1XJl0KGqq4xcduNImLrVvYKSedw0YXikQVMrt6tw/mlBC2TPI05DFFGc6XwqVd3X5/3cwVoVz4ROBV44TkM8GJvix6cyE502XOzQ0YEK3BqRucknA5KbC7vdS334W9viyAPtlT34VSKVH17ryUDskP/XDK3x9cPh2FTUo1yr70Ziep5E77aw6jhj7EnCl4S8Ku6CWziqd4vjulcM4swn6cruevE+tV8uHhFZebM/H2S5IovCog2TVhQqitgvPqM/qyFGEuolG+GVz6X/B34RkaEj5ugTMzTyyDGGuF0iFXWcdeBh9Lt505A43iKdg3me1VBiQivjkbUbLLPxlCHBfC9tCHACykekdbXtIHrySGwQLqKmBIgbH080UCBveDpGGL48/76wLE9izHIVnL6LVY9D22T0X3Xkz+asE/weBCysJJZrnpGXMrYxfyA7Rbj59aHHgbu9M6ZLSbswK1UcrU27Z1pHStA9RldOb0fVAnGroK1PdUWQ116PxwSWgnolSsrlIJiEMxODSIDoPKiC8zNRZGOzIQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(36860700016)(82310400026)(1800799024)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003)(3023799007);
+ SFS:(13230040)(376014)(82310400026)(1800799024)(23010399003)(36860700016)(18002099003)(22082099003)(56012099006)(11063799006)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 7RdVVcqBdglWYdIrvx4nMMmsh8j4nnSAhtqkwmn9ZmII4rcoaw2F51PLhwrsMg5GNe32645hxqTwd/r2i3NTJbFKvxHNym8NlDRJpgNpcYoMf3VupbHKZr00FAXMkneHYa6jVYgQa9gdnl5X51DkNJqnuim5owmdhD7Z/j3G2+tqenwT/dbtWH26MYVrrSpxRRW+gbEE2jMMU3mcY25sS7vgvnM8RIH3wjJmiV7VZ0+emvbcPveiJjQWJT5futQy6D5wBwzEjNXASJlfyWPAqGiFS+J2BeB0dkFCSO7OLX/09zInCS2ebOmR3cj/1SScafR2e4uJrgjDKqCa/AVLdJtbyHgNpdmUjUFtK7JINKkSuLoYZx/zHju42XkbY6qLFj3ruxKDvcx5xwsZR6lIUonguW7jTSdT33aOY82BAaf6fHnAvD9zNq6gFAA7MJFz
+X-MS-Exchange-AntiSpam-MessageData-0: uEyQzNcLuKL8bqCEgfpNYA3mwv40e6Gsvvgu921EkxEcSm7d9kZIQcoEc6AP5z5/CbLoFSo6dZM+EQeB0D4ndbfPKOiCX1Jfoc7kS6S+qimbFtIJoZxUL64vhFqdsha1x74erWbCEgpG3fDH/dsKSjZg61hQkIT2/wbdhf0U3EAofb2Hvl6MY09OAApKAZ2BbLj3eoZhXm0ekdPDZ42kmDZDEVAJ5NnxtqdtrOyQmaT5HWkPB16QkkUQrPTOgbH7Lvn0db/exKsE8DCZNOAJT9c13NtzSYsduvItkJg0zZqhviJPsIXBiX8QrpA00g3Tk9wgvhHydWqFqr1u5TV2/tcevojhJtKYoC4mUd7Af59TvgBBaCHMvxFZrkafzZpGqRvqNGzt6ggeOBvTbwbFEyLjpMsfwSO59RY8qDyXNip76ylLQV3wfhzqBY0tWISZ
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 09:48:33.1336 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7cfd3593-7c8f-44f2-99d2-08deee1fb806
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 09:48:35.5762 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6521246c-81a9-48a4-6e22-08deee1fb97a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA50.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAWPR12MB999291
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6659
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4K3JHaINw4TdaNxNjYWNujcZYe6SrJK4IbDjavh92qY=;
- b=KGuAFocvbpvVj/f5sgvFrVS2ulxn8T5w5qYBo4e6UeeVmS83AQLT6DPLbYV19Ydlu201YJir97bR4vN+meWriiBkCxMjiqiU5AcnM+gLsislliKmXefPLUzxFZIBL3t4e1Em6DBpdYAuBu5qOeDG/wd12ekm2Gxn6U0D/SYgK7M=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=EWb2e6c/bfsy8XJxivvmdXjo83Vi7GqAmDTqi8zFLw0=;
+ b=i1btfGbHh9KiOBnUzCevWZqgVNvKh/NcJFn3i268rj6PNGNq+gpaXEA483x5TRo/pwZGh+9BUscot9gPnRm3XxbZKDNzzcrG2C/9lwwdelbWHuc93R1LRAWTYfJxev287coweBzFy4n/3ZNTpPNKlU0kcvaNo5sKlDVx4amSO08=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=amd.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=KGuAFocv
+ header.s=selector1 header.b=i1btfGbH
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -154,28 +158,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-dm_test_gpio_requestf() requests a GPIO via gpio_requestf() but never
-frees it, unlike every other test in this file. Free it before
-returning.
+Enable CONFIG_GPIO_DELAY on sandbox and sandbox64 so the gpio-delay
+driver gets sandbox coverage, and add a gpio-delay-test node wrapping
+two real GPIO lines (gpio_a 9 and 18), along with test6-gpios and
+test7-gpios consumer properties for use by an upcoming test.
+
+Verified the existing sandbox test suite (ut dm, pytest) still passes
+unchanged with the driver enabled and the new node present.
 
 Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
 ---
- test/dm/gpio.c | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/sandbox/dts/test.dts   | 10 ++++++++++
+ configs/sandbox64_defconfig |  1 +
+ configs/sandbox_defconfig   |  1 +
+ 3 files changed, 12 insertions(+)
 
-diff --git a/test/dm/gpio.c b/test/dm/gpio.c
-index b45946c143c..b872dac9082 100644
---- a/test/dm/gpio.c
-+++ b/test/dm/gpio.c
-@@ -282,6 +282,8 @@ static int dm_test_gpio_requestf(struct unit_test_state *uts)
- 	ut_assertok(gpio_get_status(dev, offset, buf, sizeof(buf)));
- 	ut_asserteq_str("b5: output: 1 [x] testing 1 hi", buf);
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index a2c739a2044..7c2c9ed5103 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -331,6 +331,9 @@
+ 			<&gpio_c 7 (GPIO_ACTIVE_LOW|GPIO_OUT|GPIO_OPEN_SOURCE)>;
+ 		test4-gpios = <&gpio_a 14>, <&gpio_b 4 1 3 2 1>;
+ 		test5-gpios = <&gpio_a 19>;
++		test6-gpios = <&gpio_delay 0 10 20>, <&gpio_delay 1 30 40>,
++			      <&gpio_delay 0 50 60>;
++		test7-gpios = <&gpio_delay 5 10 20>;
  
-+	ut_assertok(gpio_free(gpio));
+ 		bool-value;
+ 		int8-value = /bits/ 8 <0x12>;
+@@ -860,6 +863,13 @@
+ 			gpio-bank-name = "c";
+ 			sandbox,gpio-count = <10>;
+ 		};
 +
- 	return 0;
- }
- DM_TEST(dm_test_gpio_requestf, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++		gpio_delay: gpio-delay-test {
++			compatible = "gpio-delay";
++			gpio-controller;
++			#gpio-cells = <3>;
++			gpios = <&gpio_a 9>, <&gpio_a 18>;
++		};
+ 	};
+ 
+ 	i2c@0 {
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index d3fe64c5a83..2b512a599e3 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -144,6 +144,7 @@ CONFIG_DM_DEMO_SHAPE=y
+ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+ CONFIG_ARM_FFA_TRANSPORT=y
++CONFIG_GPIO_DELAY=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_QCOM_PMIC_GPIO=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 2055321025e..9deeab003c9 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -214,6 +214,7 @@ CONFIG_SYS_FPGA_CHECK_BUSY=y
+ CONFIG_SYS_FPGA_CHECK_CTRLC=y
+ CONFIG_DM_FPGA=y
+ CONFIG_SANDBOX_FPGA=y
++CONFIG_GPIO_DELAY=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_QCOM_PMIC_GPIO=y
 -- 
 2.43.7
 
