@@ -1,98 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30897C55167
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 13:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40039C55160
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 13:35:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D9CB640A9D;
-	Thu, 30 Jul 2026 13:34:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 087EC80A49;
+	Thu, 30 Jul 2026 13:35:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DYAvtx3cEStZ; Thu, 30 Jul 2026 13:34:45 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U0zOmWimR0J5; Thu, 30 Jul 2026 13:35:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 07D2740A6D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0CD0980D8F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785418485;
-	bh=lqLXMfJXIeR0NKpV2aGXEWpBEsJQdyRekzFltQTAZTA=;
+	d=lists.u-boot-project.org ; s=default; t=1785418502;
+	bh=x2h+dFief8CUvC1hqSoAc3vVv0+/pkPTKwdqKt1ZS9M=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ts3y5cPxZQ37ZBgSNqCmqOsHHPWTxPM7ZldSjKXrQz9Or/2xm/sE0OzBfs3N2v7hv
-	 fVC1qnJeVw/MJg4VNc35JVQwnpLwLdmKUKMx8qpeVHwi10Uuw/ig0vl8nQD+BjAFVi
-	 f3a7gO+cUr2oP+eY2p8gt7nMo0INEZNrJWY1fWt+agXKBiYAbTDTFy7jpo3ABTLTFQ
-	 tyezB8qGhlemJ1PRf5SCwLtRKwWVDUoOz4rDLSajzZ6uuyZnH+xXg48CYFuJ+kn9Jq
-	 jrY0WXi8K2ZrTKe+c0kjAxnh+LKfE5s3vVXQXr0p/2jX9+OnQQHLTGuLkQH1vq//9/
-	 B6NOdDAT5JFbA==
+	b=DFjy3/Uh+NtTV7b9ymq3jp4I3bxHBa1tRIT45XJLfMVEcQZink2DT9diQ0q2VR0re
+	 DHZvYZ3HfY1kmFkCiDZzLAduThlbUZCJt1+iML5zW26//jKk6VQUm3vAc82jfnbofC
+	 hr2XrsTXDQkFydW65VWk2gOPjVlf6yfITaLnPPUAQHZl2yvNMMMKyiktcmF1EKxxEe
+	 HyFAZFN6H0YSBjr4VLd0a9TSQ2m03LrqxNoFG2IS9iyT7Jo0mEU9Df1la38wFVfF7R
+	 v55QNWGtiVlgMiUPECd4xhQaAogQX4ftQTfYEen2tCD0qFOLQprKe2at/kouyUZzSQ
+	 dAIypzIe6JH7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 07D2740A6D;
-	Thu, 30 Jul 2026 13:34:45 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1F7AD197
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:34:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0CD0980D8F;
+	Thu, 30 Jul 2026 13:35:02 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8210669
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:35:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 061B460895
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:34:43 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 734A840AA3
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:35:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id juVVPvucxvVe for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 13:34:40 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Id7Ikn85xbiq for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 13:35:00 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
+ client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
  envelope-from=jbx6244@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B28546085F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B28546085F
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B28546085F
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:34:40 +0000 (UTC)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-c1f1f5631f8so20470166b.2
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 06:34:40 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3B8ED40AA0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3B8ED40AA0
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3B8ED40AA0
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:35:00 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c166ec26696so34481566b.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 06:35:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785418479; x=1786023279;
+ d=1e100.net; s=20251104; t=1785418498; x=1786023298;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lqLXMfJXIeR0NKpV2aGXEWpBEsJQdyRekzFltQTAZTA=;
- b=SQvBLjVS1QIP+CJJhTtakkVKcGJWvDSQuF9HLTXccVU5TUvB/SddxLYpn4O6wD6Lwi
- b78vxFtqTwgK0BovkOOUFYzKol8RNQHpu3cr9//hmsYxMXDUZSZA/vMPA+ThMlhAKZfw
- ljtT9omlvwXsFnGCP+dOuCz9SiPW6+VyGcCQe2wk6mQN7uwgUxHAK1cmuBudCf81W2ri
- BazNhQjgU94tlk8Dvsbjb4oK0Z+yt16rz/c/LidOD1BTca/3HH71HmsqGP2hHWGlY5M8
- vscV9Sp36s7x3utVDzNgRmx1UZn//8zNymbh+0leYbm1Uvzys1jlPHNHFpsKHS7scKZo
- WSGg==
+ bh=x2h+dFief8CUvC1hqSoAc3vVv0+/pkPTKwdqKt1ZS9M=;
+ b=bPJjHUpXL3onSf0qtwvfRgnXftM4219c176Q91tfaQBalbq41r6T3aHIQnrhdSwiKH
+ /I3toQo0QGa3CG1HjpwlGqAosv47Crz2B3YvGH1CJO94jUWtT68m8Hyb3PCYCW7leTN1
+ qex7oPCBQIc115DailqZgzpbtO44gEKc3RJFon/0usKyspjZXvRV1kUkXqU+K0HkV6a6
+ 4WuN6p9J5EkH/CxQh3fUYtkXxURSqQ3QU8Te93UepRcx8IzGQgN9mMcYk9kZyH9SuWXS
+ re+pWJEKbaOXytNdOfN4SagwEY3jXnIShx8y5bXl+fzmPaAr6Y0RHL9PzE9pAdIIBx+K
+ HGhg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp2rIHBRgoAAQbmjSz4d2h+kan/KwrjbySn1eUuG75UCkZCmqvBmhBiaYXsk45ECWSYPDWmzX4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwFufLenySJeNrNpqL69Vwv8rMcPagNe9ynf1FvVYC1yFA5DPWz
- mNUTBzQpcAFO+o8FSO1f5tJqeoavJHJtlT8pcj8AXKBIiRnPZRXSvFqC
-X-Gm-Gg: AR+sD10PZPk2VN4UMRSme1U8St4ZvE62njUDF+sv3EW55n5/w8E63ro5yhh1YOoHt6x
- AYSc6bE+2zVfT/Iw4mPAXS5gAdHpUmk0XJtnBD4HywTUTGwLZEjRvCKTxGeg0PkTaSxmqHsTlg2
- QHdGOeVz8y/AioJfImCAfDowhIKU1OSadIQas1Bif81ouU8zzz+ROTHLg31KAcS0+WqzFgOWXSr
- xwhtp3pSvoZKQ22gsAjDjLtp5pcMonU05+jv81CCKPE3RCshz+Hrf7fbppra9Z7JUjq/X0mY+zS
- uCTRY92wFbLxILoiB0dMTzvHIvV44vALvcHy2NTNFSBIjgJQibH/nx0uyYdsJbichtJWz9HCRVL
- FQ+qGQPVVwafEpOBgSjON2XyoyN9NhEqI5nKj5UxApCaLCuX3w1XW+TXQM++JeufLLl1XXj+1HF
- pdjxgyHaIRMRB8gGNk7/e5P4RhWhMc51F6T1VqHYWjgDPgPKqVjNudHUHPhyIw7VNJ4Zi/+6Wt0
- g0+FiEPp2hBOpY2dsgpq+C8I7I=
-X-Received: by 2002:a17:906:6a02:b0:c15:de99:8060 with SMTP id
- a640c23a62f3a-c1fbc7b42d1mr35958866b.0.1785418478475; 
- Thu, 30 Jul 2026 06:34:38 -0700 (PDT)
+ AHgh+RpR3S8EQgz2tpAaLZXVkzPzsH0exmwLynuTR0jiC6ULC360SL2CRxwIcY3IQPKWcOh51/qMnD8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzLGqpnDt9uCyI4PfgIWgojS+6BGrDw0T+e8sYzJdooEemi4YRE
+ PYDLQRzrgWW6v6T9lnK4p3CsZzgxbZ14CJzy6NpmU82ENIXTRysNPMkt
+X-Gm-Gg: AR+sD10N1QkpiDzxX36umO8OomMH0l01ANS7z2oycculeWy584OJ9EHPTKTRKkE+dNY
+ 4lPRFK7qsyuJxueyhDijxap0vbi34W3MIrT+7lp8BMValjyGPMBe3ENK64bvxguK2gMWJxvX7qY
+ 52L/aR3JavN2jikldbfWzCagfoAJz7gFTH/mhQeLoOoF66o9RaDSOB1HcOKHKgr3TayeXnyjb6m
+ P967YHEEAh/IOS2QHoTpi+bIgDAXtmuME79HLmwDzImoP9E/19OX/0PACeeZ7xTpJppcvYGKOCg
+ LDKxCBKq+bumANO9Ymq+tbC67VGUBxDVQNmH7hSnK6HBX41G0W/1OvPeJCvHCPNjW2nc6zdhNxT
+ 1ugrIti8O/erk44s92ISoKvWSeSu1djK//7KP2/kLtvObR8z99m1Sysl3oaeKIk4L+MDU0GMgvL
+ Gsxw4soSLN1+WPXV75T2dB4EhZFp9X0OeqMINwZ+uZl95uemStOuNBFHcXZJbF8XKzr5ziTvn0h
+ c+pVJkbDIMSMNTigCvrt9VtW1A=
+X-Received: by 2002:a17:906:9f89:b0:c15:ccda:26d5 with SMTP id
+ a640c23a62f3a-c1fbcc1e9femr30073866b.4.1785418497604; 
+ Thu, 30 Jul 2026 06:34:57 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1fa8b6dbdesm65456166b.36.2026.07.30.06.34.37
+ a640c23a62f3a-c1fa8bb6dd7sm68582566b.52.2026.07.30.06.34.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2026 06:34:38 -0700 (PDT)
-Message-ID: <44039d61-ca43-4f12-8051-66fcbe0ce5a3@gmail.com>
-Date: Thu, 30 Jul 2026 15:34:37 +0200
+ Thu, 30 Jul 2026 06:34:57 -0700 (PDT)
+Message-ID: <4d7b7705-62d6-4b61-840c-ef1dd28f9435@gmail.com>
+Date: Thu, 30 Jul 2026 15:34:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 06/12] rockchip: doc: add more eMMC program examples
+Subject: [PATCH v3 07/12] rockchip: doc: add boot medium layout text
 To: u-boot@0leil.net
 Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
  u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
@@ -102,24 +102,24 @@ In-Reply-To: <5aed2a27-bd7d-4b71-a6c1-0b46b41f3462@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785418479; x=1786023279;
+ d=gmail.com; s=20251104; t=1785418498; x=1786023298;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=lqLXMfJXIeR0NKpV2aGXEWpBEsJQdyRekzFltQTAZTA=;
- b=fxDVuWikkyp2PQP2w1L2I7IGo9SKMV8IzXMtiXveCzDC64j+6rfog45AdJhDsGwOJI
- xjFAFtoQ9SlWwILTlVmPhiIkUy3YdtGD96VqrbaBzoW9SnW7hvDL/prMZQ6xzN97X6sV
- VZ6SBeunNo9EnJDxNpUXBumlINoKtHg26QQjC2YXVkcThCy5WLN8fCTzLE/XH23IPFQv
- hSbZcwh5NsLslL0B/bS+yf3Xaat2zobk9yW3l6MiOEZc2E2p5TJG06sRABpmGXC2dUlq
- /5MUjbgf+1G7rW+NFsNpnIMv1oiXSJVeEcnlyNnD85fjqke+XVQwOmGMkRvsGNxoNF/k
- kbDA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=x2h+dFief8CUvC1hqSoAc3vVv0+/pkPTKwdqKt1ZS9M=;
+ b=Bhl2F5wqJDEBjDuBhwhANYkUInyzESq3oQ88kWRe3mjlbQR+zc63g8AvStVKhEcY0R
+ 4V7UONVZO6LWAUHZtqfVx0MVJw/DOgWEZj0gvRlHNU1fIDMW6s/f3ssLJfoXWYhT4OxA
+ gWgLLETFgM91BIiA5/ydldFsagojpOoB6orcns9Xx6YHX2feAbFqjF5y2LO1rjK50iin
+ VTXwIEaud0MpzDuBE+oRtlgIqGgPwpjbS5UvZ/gyXxp+hi3+4eOeyT3V+0aCzqIZs+ie
+ sClKEa0MFCLSSqpE3u3/Ua6C9ZJj3IjujPVAHbMKAJWEK61xArOPz5v3pwQE6p8mOk6l
+ QYoA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=fxDVuWik
+ header.a=rsa-sha256 header.s=20251104 header.b=Bhl2F5wq
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -134,90 +134,56 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-There are more tools that can program a eMMC.
-Add more eMMC program examples.
+Add text that explains the boot medium layout options.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
 
 Changed V3:
+wrap
+remove 'the'
 use eMMC
-use list per example
-mention loader matching to SoC
+add unit and block size
 ---
- doc/board/rockchip/rockchip.rst | 47 +++++++++++++++++++++------------
- 1 file changed, 30 insertions(+), 17 deletions(-)
+ doc/board/rockchip/rockchip.rst | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
 diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index af5c00591234..c089419b65e5 100644
+index c089419b65e5..6b9007103257 100644
 --- a/doc/board/rockchip/rockchip.rst
 +++ b/doc/board/rockchip/rockchip.rst
-@@ -393,36 +393,49 @@ To write an image that boots from a SD card (assumed to be /dev/sda):
- eMMC
- """"
+@@ -353,6 +353,32 @@ To build rk3588 boards:
+         make evb-rk3588_defconfig
+         make CROSS_COMPILE=aarch64-linux-gnu-
 
--eMMC flash would probe on mmc0 in most of the Rockchip platforms.
-+* Program example with fastboot for rk3399 and full U-Boot:
-
--Create GPT partition layout as defined in $partitions:
-+  eMMC flash would probe on mmc0 in most of the Rockchip platforms.
-
--.. code-block:: bash
-+  Create GPT partition layout as defined in $partitions:
-
--        mmc dev 0
--        gpt write mmc 0 $partitions
-+  .. code-block:: bash
-
--Connect the USB-OTG cable between the host and a target device.
-+          mmc dev 0
-+          gpt write mmc 0 $partitions
-
--Launch fastboot on the target with:
-+  Connect the USB-OTG cable between the host and a target device.
-
--.. code-block:: bash
-+  Launch fastboot on the target with:
-
--        fastboot 0
-+  .. code-block:: bash
-
--Upon a successful gadget connection the host shows the USB device with:
-+          fastboot 0
-
--.. code-block:: bash
-+  Upon a successful gadget connection the host shows the USB device with:
-
--        lsusb
--        # Bus 001 Device 020: ID 2207:330c Fuzhou Rockchip Electronics Company RK3399 in Mask ROM mode
-+  .. code-block:: bash
-
--Program the flash with:
-+          lsusb
-+          # Bus 001 Device 020: ID 2207:330c Fuzhou Rockchip Electronics Company RK3399 in Mask ROM mode
-
--.. code-block:: bash
-+  Program the flash with:
++Boot media layout
++-----------------
 +
-+  .. code-block:: bash
++The boot ROM only checks a boot medium for a limited number of pages or blocks
++for data. It is not possible to place these blocks randomly.
 +
-+          sudo fastboot -i 0x2207 flash loader1 idbloader.img
-+          sudo fastboot -i 0x2207 flash loader2 u-boot.itb
++* eMMC/SD card:
 +
-+* Program example with rkdeveloptool for rk3308 in BootROM mode:
++  Rockchip uses a unified GPT partition layout for it's open source products.
++  With this GPT partition layout U-Boot can be compatible with other components,
++  like miniloader, trusted-os, arm-trusted-firmware.
 +
-+  Use a loader binary that matches the SoC.
++  There are some documents about partitions in the link below.
++  https://web.archive.org/web/20260501050119/https://opensource.rock-chips.com/wiki_Partitions
 +
-+  .. code-block:: bash
-
--        sudo fastboot -i 0x2207 flash loader1 idbloader.img
--        sudo fastboot -i 0x2207 flash loader2 u-boot.itb
-+          rkdeveloptool db rk3308_loader_v1.26.117.bin
-+          rkdeveloptool wl 0x40 idbloader.img
-+          rkdeveloptool wl 0x4000 u-boot.itb
-+          rkdeveloptool rd
-
- Note:
++  Write u-boot-rockchip.bin to block offset 64 (block size: 512 byte).
++
++* SPI:
++
++  Write u-boot-rockchip-spi.bin to flash offset 0 (unit: bytes).
++
++* NAND:
++
++  The closed source usbplug binaries and RKMTD use the NAND erase blocks [2-6]
++  for TPL/SPL.
++
+ BootROM mode
+ ------------
 
 --
 2.39.5
