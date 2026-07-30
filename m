@@ -1,100 +1,100 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 804CBC5516D
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 18:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FD0C5516D
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 18:41:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3BAC880FA7;
-	Thu, 30 Jul 2026 18:41:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 407D040D10;
+	Thu, 30 Jul 2026 18:41:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id laM9l7W2Rr4q; Thu, 30 Jul 2026 18:41:23 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8rNDkf35OkZR; Thu, 30 Jul 2026 18:41:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3C5D4811E6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 61A0140D04
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785436883;
-	bh=JCRnIs69CABpUsB94SHOgNaXVpUxYNWy8RGkhbQ/b/k=;
+	d=lists.u-boot-project.org ; s=default; t=1785436884;
+	bh=eV7BYD1NTBpuQm6Eyq1vtW7cp4ww6VRaJ0W6aciJ6Es=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DcbyjKCLQ9akjZOOArMWF7CCUZBRKSkBIPYj6hihHJnD0ugyPCRT2VkLl/YP/YZ6r
-	 WcqJUADcgt2HGAG90we/egI5OOA62BGqIRV0etMVK775ouNDP51hyFv1m1VyHK/ZDU
-	 DC9PZwdpv7NHOghC310t41Tznav03CjijsaGaOahGMnMeYMCcFkOR9AujjAS5bVhsL
-	 2GDRKMOFb5Vt9tg3a09Rh25VPFK7yNwlQc0mV0Rtzw+EAPVbpBmP7BExOz3TIuHArJ
-	 a1O5CWdg8VVYfjBsxdHpmh9Xp5FPUoqxdsMP+n3f5O6d6Syxau3dSQcLUoVpNgOx++
-	 V9NzYWJWy1XWA==
+	b=IrOThrfjfAJrpnP6WpckMxOCLS1JBCo/o/xjN/EK+mWjDRCtIZqj/8yDeDjGq0C+y
+	 8e+sAHpXv2tEg/PjOs8ugOEsYCsifclmfGX8EM/mAJdq/pytW46QylwKpgEiAmunLU
+	 iZxQaCFxuC/cubEeig3L2tien2luJrAl32Zp3TZdrHBwyEQx3I2s1M621FrUL44ygY
+	 y0SaM5UPHy9hQwr0b2ka9dHTjnPgDOHBwdUZ5SSamC1BWnGbd/QlbCh3QApyA5FSek
+	 Zorg1SNlyOMfzjrtM1InrwyGbg2DPXldKKOjWucTRwENaxVJ+8P3ChoTfy1x9Vui8P
+	 asAagRRDdxO1w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3C5D4811E6;
-	Thu, 30 Jul 2026 18:41:23 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9F53227C
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:41:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 61A0140D04;
+	Thu, 30 Jul 2026 18:41:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E342869
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:41:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8503940420
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:41:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D56E140090
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:41:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id egZVLINq8lrx for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 18:41:19 +0000 (UTC)
+ id ks1Q480z42eN for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 18:41:21 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 39D3240094
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 39D3240094
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 39D3240094
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:41:19 +0000 (UTC)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-47f904e80eeso38370f8f.1
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 11:41:18 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DF53B40094
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DF53B40094
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DF53B40094
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:41:20 +0000 (UTC)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-471eeac43bfso32020f8f.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 11:41:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785436877; x=1786041677;
+ d=1e100.net; s=20251104; t=1785436879; x=1786041679;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JCRnIs69CABpUsB94SHOgNaXVpUxYNWy8RGkhbQ/b/k=;
- b=Gj3icrMlmBI9hA3pCuyZROvKEQZraKxBURpnuFC1n44W/Q87IPU+DbvFHa+uU4dsKt
- S5hQKZnXNiE6ch75UBrTbxu9ncAFZHW/CIEvJ/B3X+cJsWvYsS1eVmNSJkU69e+Sju5F
- p+XR6RPNmSugFipnx62MdBAWlK15V0lnpzJ2SZGQlwt6Cu3H2SXJTc5iO92Rnjh30Wr+
- bIw1HYYgPIh156YL2zlI5y+Aemb2n2rzvc9nNM6+Y5IHnBOy/QGXcRVDtDJ7qkc4l69h
- TfRi14c1RlxNqma93zMwKO35uStWVNYEaLEdAd/BCUP1Ygk0TSkSUElooCyrwSwDORLB
- 1VIw==
+ bh=eV7BYD1NTBpuQm6Eyq1vtW7cp4ww6VRaJ0W6aciJ6Es=;
+ b=AhUbHPh2boph5rQF3Pn37QD4X7Ui5SosAOmjy3sF6ZF/f0umUm/gmIKmKdNvgxPc3T
+ 8Lp4oBenzOg4k/vJfrBAxKwDWBVO0HUeYEt3isK1R+AQlWaa+DwLgKYY4XXu5fSn9z0z
+ EB1p4EjXXEDA/eLTdvxpa+GgDEsm+1m8bJ/7Q8Ef0iTdbBNqn66R+oC0hHHBu09OTMIy
+ rbObMNAwmA5dGy5vsw4S5y6mfMkERbODRlRKcnsAE5FIXXD+7qoTLeDp9ewPX6XSFXyt
+ 5B147bbn+3abxbjfYf7atvyOEjVEWySBtH4VC5AutQQH0IP91wekOBUdG4QXLV+QZ+4A
+ 4LIw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrhddnvmBRpRgtVJ6EMF2xI+hfP7LbumcEiGljNLdmuC7rXg13PenruelHUV+K2pQ+4qeXuLYw=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwcT5Sx9S0kxrRLoumeN6fDHuicn5jLVOBVXrB5tENCLvDYLOJR
- gteUGl2XA7Oosoq2r+YFTKQXw5f9XjgpoJuitMsYzcSS4vAZWUrp1K3T4YwC3rLKlutFX0OCW5Y
- XAPmgzbaTIA==
-X-Gm-Gg: AR+sD127MGRyikqizNNYbjj5P226pMtR67paiB/CRtLriMJpN/ucoerPu0fHsap8MGc
- rVQPUo6vFy4NPqjnWb1QuY4AkamJiIDtOugLKGdINfS+FZiZ4qAozQzVW9qy6Ha9UnIA6KhXmKl
- lN2sY4ebPcgubzKT/IM5C5q1DPXCS+W5NA6W3QinXkJlXtg/cYXkt7coxiCDTkH28i1dbWrT6Cd
- U7e2Za3f4z9sh93QMqJhOA981E2BOUJcNypcS7FkqP6Pvb4Pwo8dZ5rZJsZHFOt323W6/Knb0Q4
- Ykw15C5XMQ1JtNNFx0jChF6UmKG7Txkz8itL+ZNqQxPAjGrtWjn5lPIzFIiZrNTozBjOExpglsd
- im4RQ9V29zZG/DqYoZb9nSxuRai5FvxUJUg3p8BcfHPNy03bcDzTeIxh1EfLN4AceadFY5B7wfR
- 7lm2ZozqghllserwX2eMIAgkemd+H5oywuOwDQVp+SUeqGIYjd/LuV7b0o6JdIBPfelyFMFRyj3
- nR6J++4eejDdwM07STcJqueQO/auddsAGYOYJhD0g==
-X-Received: by 2002:a05:6000:381:b0:47f:9567:e63b with SMTP id
- ffacd0b85a97d-47fc821713fmr5542458f8f.55.1785436877104; 
- Thu, 30 Jul 2026 11:41:17 -0700 (PDT)
+ AHgh+Rpx9O41Y5BnP7ZSBiq5xF5/3XP7MuwZGpP7pCQsWvrCoY5Qhusmmw03AO0Edt2CPnBgzHRxegY=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwjZWt3u+GyApBu087uW2O02jBfXnHWdIUIRTq6SOZV2lUrGiBG
+ LYDgN/WXguq6GlU2eZakLPz1suiqXKDty4Lfv8Z+VikBq+61kA/+0FRs7g9sfl4cssbJZwjo2U3
+ REf4IQ1PVNw==
+X-Gm-Gg: AR+sD12i4MmUMf+di+WnRojNEPCif6/aKIlbPckdKTafQzfgMsAslB+jc88y2dmLLNa
+ rlQ81EUY6z7zAojPu0ytnRBM0g7JZl4eHLUDg5umHcjrwCm/TbWsvRpZO5KKyNL9LBCCi4n5dro
+ GIUikHMaasfRdfzrL+H7RJIdq6kTMXV1t0wiV7KZkBzRm7+qU2eQSrkSik0hI/mtdWKYN7yLAmt
+ 54WhjMNcQ0bjc0BDJe/B8JyjHtamjcA6q2WHp0/LAWUDeFRqu/cQNVzrvacVg6o5Rv3SL2w7AY7
+ vIhZiFvD5DSbI+lU8AxFYm8JG71EFqPTReJu78gy1YGVYRP/EAZz7AYiU5rOlON4HNUata0c3lB
+ hANcXxGZWGDJQaeZquSF8e0J+Oa3jWFkgU2KO5xZC94p9xJ1bt1SIJ25LnR8WoYBZfQR/u5B7kT
+ DvHlsGCyD0+ING/5Z863/vs3JsaRtiKFahoDx9ypTTr7jcLkBLfd6DqOr09rg6KQ6hQVJnfjInc
+ knbb1EhE2nONllTVdW6MfTAqduBLRfgECllywBK7Q==
+X-Received: by 2002:a05:6000:2889:b0:47f:7346:89df with SMTP id
+ ffacd0b85a97d-47fc81d0e6fmr5467399f8f.24.1785436878790; 
+ Thu, 30 Jul 2026 11:41:18 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
  [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fc88d8d37sm7919603f8f.8.2026.07.30.11.41.15
+ ffacd0b85a97d-47fc88d8d37sm7919603f8f.8.2026.07.30.11.41.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 11:41:16 -0700 (PDT)
+ Thu, 30 Jul 2026 11:41:18 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 30 Jul 2026 22:40:38 +0400
-Subject: [PATCH 1/5] lib: div64: fix off-by-one shift in div64_u64() and
- div64_u64_rem()
+Date: Thu, 30 Jul 2026 22:40:39 +0400
+Subject: [PATCH 2/5] lib: div64: use abs64() for the 64-bit operands of
+ div64_s64()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260730-math64-resync-v1-1-8792d9119d49@flipper.net>
+Message-Id: <20260730-math64-resync-v1-2-8792d9119d49@flipper.net>
 References: <20260730-math64-resync-v1-0-8792d9119d49@flipper.net>
 In-Reply-To: <20260730-math64-resync-v1-0-8792d9119d49@flipper.net>
 To: Peng Fan <peng.fan@nxp.com>, u-boot@lists.u-boot-project.org
@@ -103,34 +103,33 @@ Cc: Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2338; i=alchark@flipper.net;
- h=from:subject:message-id; bh=oLa0qyzvyzp6UGBIt25Bzc8E0ECieWnuRBCDljZs1Nw=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRlzzri5DtP7UsEm80RqVCTjsLNZl2bLuTcv7fXutS0z
- +sN25ZzHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oZGOsY4RAxenAEx1bBPD/2K97oqpX9btuLI3ZDJf7jKdp3Y933Unfgn80TPzo0m85SVGhq1M7FY
- n7/kd9dFjuhywi+2ZVXfF4VrDbPPYI0uZb87z4QIA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1838; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=ls88qcx8Q/l0beQCvioI/5vU3krI7BzEk4KwwdBYx64=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRlzzpy0FLmXslP3dtbN63/w8jsHf9TVDPnM8uOHdN2X
+ 9hl9tRqSsdEFgYxLgZLMUWWud+W2E414pu1y8PjK8wcViaQIdIiDQxAwMLAl5uYV2qkY6Rnqm2o
+ Z2ikY6xjxMDFKQBTffgQw38XN0kmv3mMc3Yb772TqsilH3qOJ1jVzPbadX8mtj3zliYy/E/zFDj
+ wZVd/4JOGY7/lpjc8eXPh3513s5b3NfZlPDF0fMEAAA==
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785436877; x=1786041677;
+ d=flipper.net; s=google; t=1785436879; x=1786041679;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JCRnIs69CABpUsB94SHOgNaXVpUxYNWy8RGkhbQ/b/k=;
- b=N5J5ur6mEnL/OqK/C8fJACa4Meep39zWv7duaVBSmXwCX1en1HOCskEzibSp7Hkg6j
- Y00IvYc5Fo7orjmtsjWQiXsrZZAXLqBu9IJkQ9uFh+CbNGWSEJGGt8eoEj5tuElIKh42
- 1c0z90kzo4ZlmN5AZ3i61OgnnnU2RsHKslRK8FljUq6GK9echziu3+Di/oOmhV1h4dDc
- LobsXsoYLXFbxs3k14uZyNwNbAH7GCixE/XzHvqofPqb47t1s9AqKWLXC41sXeptZD9u
- W54/IJXuEm7fz7tHjNwOPRUJMNXxZ2sK4SMZ+ALGJ64w9bjCk8zoSU+C7yRk/WvqWUxo
- y6yQ==
+ bh=eV7BYD1NTBpuQm6Eyq1vtW7cp4ww6VRaJ0W6aciJ6Es=;
+ b=QlH8N3DQ5Q0nU62IeA27tsRtrvWRcZRDdyi+XjiO/fcRVHx+dBGG3BG+npvCPrO59Q
+ 63tZRotB7MA71nZ/l1nkfQR9YMjnF/oMUnng0xpnKvMUHhXnIeO2i8z8uq/0wIcqPucd
+ YU5RRnA7pwiktkclVW0s3nSk1KkSPWdhHBiGlnxKuMKRrBBw3yOQtGygfM8SdeBvpKf9
+ 3fy+dQv+Vwj+viVbHcOcgVMy1cuOfdNwVwRQFdS23O4TonDa3wIst/2LJG5HZnVJCW7s
+ 7bnrXC3fzyb19W94Ao6pfScR+SfKO8CacZ3oSSDnOhahUdn7LK1qwBGUgpPCiBMjfjxP
+ zkvA==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=N5J5ur6m
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=QlH8N3DQ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,65 +144,53 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-fls() counts bits starting from 1, so shifting the operands right by
-1 + fls(high) discards one more bit of the divisor than intended. Both
-functions estimate the quotient from the shifted operands and then fix
-it up with a single decrement/increment, so an estimate that is off by
-more than one cannot be repaired and the result comes out wrong.
+Both operands of div64_s64() are s64, but U-Boot's abs() is not 64-bit
+safe. Unlike its Linux counterpart, which dispatches on the argument
+type down to long long, U-Boot's abs() evaluates its argument as int
+whenever sizeof(x) != sizeof(long) and yields a long.
 
-This only affects BITS_PER_LONG == 32, where these are the out-of-line
-implementations; on 64-bit the header provides plain C division.
+The header even says so: "abs() should not be used for 64-bit types
+(s64, u64, long long) - use abs64() for those."
 
-The error is only reachable when the quotient is large, which needs a
-divisor just above 2^32. For example:
+So on BITS_PER_LONG == 32 both operands are silently truncated to 32
+bits before the division. Simulating the macro with long narrowed to
+32 bits shows what reaches div64_u64():
 
-  dividend = 15559272575191414037
-  divisor  = 4333540799
-  expected = 3590429465
-  actual   = 3590429468            (off by 3)
+  x=         -4294967296  abs()=          0  abs64()=         4294967296
+  x=         -5000000000  abs()=  705032704  abs64()=         5000000000
+  x=-9223372036854775807  abs()=          1  abs64()= 9223372036854775807
 
-A sweep over 6.4M random operand pairs, stratified by the width of the
-divisor's high word, mismatches a __int128 reference 8260 times before
-this change and never after it. All failures have a divisor with one or
-two significant bits above bit 32; uniformly random 64-bit divisors are
-closer to 2^63 and yield quotients of ~1, which hides the problem.
+A zero from the first case makes the subsequent division a divide by
+zero rather than merely imprecise.
 
-Port of Linux commit cdc94a374931 ("lib/div64.c: off by one in shift"),
-which fixed the same code and cites [1].
+div64_s64() has no in-tree callers today, so this is a latent bug and
+not a regression. Note that the abs() in div_s64_rem() is correct as-is
+and deliberately left alone.
 
-In-tree users of div64_u64() that are built for 32-bit targets include
-the Aspeed, Meson and Cadence TTC PWM drivers, the Versaclock and
-wrpll-cln28hpc clock drivers, and the DWC3 USB core.
-
-Link: https://bugzilla.kernel.org/show_bug.cgi?id=202391 [1]
 Fixes: 0342e335ba88 ("lib: div64: sync with Linux")
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- lib/div64.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ lib/div64.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/lib/div64.c b/lib/div64.c
-index 779d7521f69f..14d402ce4c7e 100644
+index 14d402ce4c7e..f5624279086a 100644
 --- a/lib/div64.c
 +++ b/lib/div64.c
-@@ -109,7 +109,7 @@ u64 div64_u64_rem(u64 dividend, u64 divisor, u64 *remainder)
- 		quot = div_u64_rem(dividend, divisor, &rem32);
- 		*remainder = rem32;
- 	} else {
--		int n = 1 + fls(high);
-+		int n = fls(high);
- 		quot = div_u64(dividend >> n, divisor >> n);
+@@ -171,7 +171,12 @@ s64 div64_s64(s64 dividend, s64 divisor)
+ {
+ 	s64 quot, t;
  
- 		if (quot != 0)
-@@ -147,7 +147,7 @@ u64 div64_u64(u64 dividend, u64 divisor)
- 	if (high == 0) {
- 		quot = div_u64(dividend, divisor);
- 	} else {
--		int n = 1 + fls(high);
-+		int n = fls(high);
- 		quot = div_u64(dividend >> n, divisor >> n);
+-	quot = div64_u64(abs(dividend), abs(divisor));
++	/*
++	 * Unlike Linux, U-Boot's abs() is not 64-bit safe: it evaluates its
++	 * argument as int when sizeof(x) != sizeof(long), so both operands
++	 * need abs64() here.
++	 */
++	quot = div64_u64(abs64(dividend), abs64(divisor));
+ 	t = (dividend ^ divisor) >> 63;
  
- 		if (quot != 0)
+ 	return (quot ^ t) - t;
 
 -- 
 2.54.0
