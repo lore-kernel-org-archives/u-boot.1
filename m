@@ -1,123 +1,124 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B414C5516D
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 18:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67614C5516E
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 18:33:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D4CB2810E8;
-	Thu, 30 Jul 2026 18:13:22 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RGK7GUakl3AY; Thu, 30 Jul 2026 18:13:22 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DEC33811AB
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785435202;
-	bh=02tz6CbCt+sQQWYQ24jRUN2YeCicBxSmCvh6rXfEuwo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=xBy6TH62MLRWQw5SWyXhxLB2naHjEi4gkjUbkmJH5N4DMP6pa0/wNnb+/pwuqSyqL
-	 4vFE8WzTaq6G40c8LJ9W2q4W1o2jOOmrkicrejELyXb1gx23plEZjYNK4PDFKBPV2O
-	 HbDHoPJtFurES3cSv9QZ2QjD4f6BXac1WTsf/I/vb6yepVYCL/2OdxdWhK4ttngHmt
-	 4JXiVyHR/ePk6ab1ILwo34c7TOyFE4wvJkLTFsXzBSac56j68/wWKt3gNX5EO9E5OM
-	 JV8085MQ1HO6CsO2sPe8cKLp+qnDbZRokNNIuNb8hbTQdMq22Qm/1HNyFSg/LF4UIM
-	 nrRdaa0M/++3Q==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DEC33811AB;
-	Thu, 30 Jul 2026 18:13:21 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A01C469
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:13:20 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 854D040CBA
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:13:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8EE3140C96;
+	Thu, 30 Jul 2026 18:33:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MZ3KgrJDGmO0 for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 18:13:19 +0000 (UTC)
+ id C8NdL6Ijsf_Z; Thu, 30 Jul 2026 18:33:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C0D1D40C70
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785436410;
+	bh=TiziaUWzJrqJ3YbQT9nd/SPH70E86SHDBEvdAm9CV10=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=eb1xilyJJFNCfun4YqVZt8Q5BQAKBOZB+4DXuje+bnnyAo20VkclTZy45+9CbwO8j
+	 94+M2KWwEP9llvK4MqPRme/TrnjORYEytpGG1DQADBKYr5RjtZNcyUZkEwP81+Edex
+	 cdyGxJjtVb7R56/jVc9hjvm8aVeCxVflP3u5VSMjbwui2QwLUtSwetee0ddINdHHFZ
+	 GUNVpr0niN+J7s9Mxyxs4SBaRupb3rrPfPSCIq2W50rxiP0UHYiawqoGGsGc4ZlHbx
+	 r+J+Ejap3cddqpYqrkWFpaqKu1MFijDBGlehdmCWjQJnU+zfhPKNx6xK/udR8o2sk9
+	 HJ1nj0vPPezLQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id C0D1D40C70;
+	Thu, 30 Jul 2026 18:33:30 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 98DC442A
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:33:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8A83E60A5C
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:33:28 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id crGXs5trAlc1 for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 18:33:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections -
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=ozndrgt@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 693D940C96
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 693D940C96
+ envelope-from=malysagreg@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 86DA160611
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 86DA160611
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 693D940C96
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:13:19 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 86DA160611
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:33:27 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3DE684A0A; Thu, 30 Jul 2026 20:13:15 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 0E35084A0A; Thu, 30 Jul 2026 20:33:25 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E552849BC
- for <u-boot@lists.denx.de>; Thu, 30 Jul 2026 20:13:13 +0200 (CEST)
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-51c16ac21acso620841cf.0
- for <u-boot@lists.denx.de>; Thu, 30 Jul 2026 11:13:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785435192; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id DD060849BC
+ for <u-boot@lists.denx.de>; Thu, 30 Jul 2026 20:33:22 +0200 (CEST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2cfbbdfa60bso892375ad.3
+ for <u-boot@lists.denx.de>; Thu, 30 Jul 2026 11:33:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785436401; cv=none;
  d=google.com; s=arc-20260327;
- b=N71H1dmgJhYs8SV7t+cP1DTNjgwretY44ROd30PmM8MhcPBQpSR7MOAZ1sHSO8lN3p
- wh8RmEpEpbQlkxFSSN6Y6rYE3CC208aQL/7nh9dt5Az9c346t+yhjN5wImSfAITnDY1p
- +Fcw7srdz6WSYvHzrqs5kw/+wioDvWZN2l6RH8AEavoBBcldNYhTlgmHJqZu0dih+S2B
- pdw+GBUB4igUyQxtY/TFpvUeYe/oUJJPsX1aGrmUCWguk4LT6kVcKbgeCsu0Nekas6pw
- DaMKdvk75QAgVFZyVHzIadxFNT0pyAAYh05eWpA28iAzl5EBR9bSJDgTVSm3cALUvHVp
- SdQQ==
+ b=IPshlfmau1uLEfkmZUO5S+31hTLwnHHT/J3A49/aMs8oWvex0uVlFfZD0bLVQqaLhP
+ JPaTfcqihHjhzpmvq+QmFOGy2w3ESQ4BbmiqyMCeYM6hVAs1MJIkkoSwnZC4ZcxHxAeq
+ +U9DPPQWpt5fE9qW3MVPTkfWCBIRDrMZQUpdGJ4iWDmzyU6rcZ/hYhm2npVZOuaP8RZZ
+ +uzByxx1WSdkczeepU2Eg4Rtn5P7Vt5WD+CoIprLZvXGMPdAyirQiL7Vm6F4eS9JzYAb
+ xh3VLW36uQ9n7fzUqutKc7dxikMFE9D4Wq7sTRluYDIpt48lu4e1TuFuZ1Ie6nLr/vtp
+ pk0g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=02tz6CbCt+sQQWYQ24jRUN2YeCicBxSmCvh6rXfEuwo=;
- fh=1Z4K3hPTDYYn+oG6G2nB4a7hyP/Sdd9knqv9PyMfwjY=;
- b=m1t3SKwFpybUMD7a/P8ruQ5AC+t2+UNl/JBjRrIUXrDuDaynw32rrRb1sXqYhh1vKF
- FTByvRBgTuvRUdaFX30LTzgBaNQRD66O8lY9aroCUxii0ZXRxU8D7PhTohcM1f+HPwfn
- LfFZZCWE1jY+3SQMFpLuqdzNqKZ+psOJje7dfqkXSVzBp1UfNRvNB81DkC4ZYDt903RX
- VT7s+p6t1ZesJ4YD4/7gz480pLWxtaoq8brnyRt45+a9vzTAPgLFb4Bo5IitbWMjI+Hq
- +iLWh2jKTLI8Kn3RefG+7M/B+G0ScpVZ/STgZilpECyqFAyMncpgGbO08mAbzD3IO6Nm
- NiRw==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=TiziaUWzJrqJ3YbQT9nd/SPH70E86SHDBEvdAm9CV10=;
+ fh=atTARv8+jqAFE05we6bsnVR9FdTstuBMVDiHQube0c8=;
+ b=ig6Exwjzj1AG9vZ6hUdF+EQya+LASxxL5V757uuEl0PFK+Tb4AZG81d1x/KrR+7ZrL
+ wR5n+0zZLfksNtHaCE37apECPp3iP1lrDVFB22v/O9/Rr3biCnYPRgvx0opsKMuIM4/T
+ qluRyIHNBQpTVYhHQOvNykZNkTWWdS0Ob5X80HNkdEzCGrnsWmTHdVLBrOrHUqZU9EMH
+ UJYSc8D1vRWp7DRm6SJ11Vbe8qiluZkF2DvKCCqJ6dEGlzqjD56FZjZtGUwXeACMc1Ly
+ IWIlhb1nXga3WxxPT85sctrJ8c4RrSRHoAK5qsVZF/Vst82hoZF0gINqAFROEfV88nhA
+ bM0Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785435192; x=1786039992;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=02tz6CbCt+sQQWYQ24jRUN2YeCicBxSmCvh6rXfEuwo=;
- b=sMwWIztuITv3OPr2rOBJiD5bZPDADGKGcerNMHZBvWGqlAYuFPVwPm5kTpJiNh1CJB
- 9jpCglPW0iSQfZBcOYBQObLhnfSXCWnYLav1VIdA6sKKT/VtykrWHPFSY/alSliKR1u0
- i7JZEKR5URbcciGO1Lk1vF8NPEu/TIh0npvWRWTr+yJnF237lE7EKpgZM4/9UOtDH/SA
- Wg1OIqpsg/0lTqV5T2OPx6iv2DmvE0iXAtNQfUMWr3SicqyTmP8ARwmkoTrw6y1LLBbT
- rDH1B25zvy68bcNyvOJ9GjVw9G8ixWXofWy+M4ELG8l5S66Vx4QzpmgWFp4cort41/bM
- gJ3Q==
+ d=1e100.net; s=20251104; t=1785436401; x=1786041201;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=TiziaUWzJrqJ3YbQT9nd/SPH70E86SHDBEvdAm9CV10=;
+ b=aeuyu6QdXpdrzuiF9JmfL++9zKExF7GqsY41XjPkCU+pFvNZG3yZAUhcZ3iMgRPUDZ
+ IUsWCDroFg/PXO9rlxvK8krgTciwldBkd2ESOSOap5ichNUvAUQS5TFiKFYgYhjF4vjm
+ yn0ttMB/9d1UMf0mD3FSl7FhWxpc3yIzawbUHFKR8J0KQkDg4LjdIM2RTqVNHLh3ayvP
+ zeq0CNKDPAe6/ou8SLcWULh7oqzR3jnzvg295mpw8znFNf+pf9YCwImkcaAgdm6/1jVb
+ +A1llrxdwWeIzjDVylM1668VRe1Rx4baBTt7uquTuUfr1NY7ursVbg5S6Md8GPq8Gz3L
+ kaag==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpNzOpcesnLhNtCVG7OVyltCJG6YL+4COKcfVxCM1cL9T83d4Pn7oXq5EMsHf7Zy7tjkbwxkIY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPUQv91kMgk7dgqhw2/vhXkqmA1jwDLJiBRJTDqoWaDS2Up2yd
- ud2ST4mQdMrQ0qTq7DWZDUTEGIHmKY1q5myO6ntw9NGQoM0Bxj0xnE4u2EhA+Hqrp8X083fYwTo
- EAfvpfFSdhb5FCiDMqYDMC4k3ID6GArA=
-X-Gm-Gg: AR+sD114E/+POxBAX6nQrS+ev/USW37UHT1eBwJFrpY1QJK8uK3qn4ncyE14APtQ1WY
- YepmyFjHkJEcuGr078B2ReYG2SkVJL8Wx7cakqtYgJjYag857+B5U7AkHXa5LXJv6eoW43/2oN1
- h/dY5J/G/Jeq7ZSgt1Ev4DkAeT5rl6r3sJIlN3v3x8ICwKIcctfVtf+7IjS+kfaLzqw1qBieE0Z
- fzBnirmPFjtXhpVqrx9vgEurEI5a3SxIni0ylQye41ZwvLpBpXEHVO+PwstbKU4Yna4/DKbVHuS
- yAZXyOspYGzUYlRmh8gPrRoUaQSJ/yR/jKOmxd2XO1bLXRm5RSK0m3eezDvWWv68mwaR
-X-Received: by 2002:ac8:5801:0:b0:51c:7b12:1209 with SMTP id
- d75a77b69052e-52b386e6bf6mr41178271cf.87.1785435191998; Thu, 30 Jul 2026
- 11:13:11 -0700 (PDT)
+ AHgh+RrqFVNnGHLkxMRk6sCFph5b2a1IQyCUprw8eXQWhpOTfA7M54j/hE5EJsJLp10koK6qdGOOV7I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9g/bFn/47rFI7jpkXM4mFp+dqevgT7O0q2UtcVueEpDSE4e5b
+ k5BvM6hID+r016/6a5K4zGsJ4E3KLqQv7o4leMxUMv09emqaJp+EX54Hv39d7/N2QbYFdTm1a8j
+ UakN7yjak6dcO7BI7bnUWlpysSyOqxw==
+X-Gm-Gg: AR+sD10zdtWWKfwdd5XToICyf4StVJmUKbQ+FB8vSqYhh8OH+x3c68yIKvCICsupAnE
+ u3745nqKLjxAPMdcSVQd7GXQ3mhSyvOLv9itX271drki82zuzz/qRgQaw0uXHkRCRlfyig5G1GU
+ 0j4VxWmwfdPC+bYrbIN8iMbiGT2HEdtQgLhV2+WbSpE7TEQIJyZsgokg6gtL9udn6lsLHv28DAg
+ 9L6W+EQ3L0hest3LqLIhugIA0zmiCdqks5lOGvyurnNfro9WTU6O5JmMWjmB3vjiKo2pOY7Mfu5
+ S8fp58C2ovGEl8KkqQ+KbUaN8YlVRMRW/bxoxfNFMTZdEg37Mchyi7FvOdqJjMsW5TAYEFwp+/V
+ oqZCYkmA01Mc=
+X-Received: by 2002:a05:6a21:6f88:b0:3c6:3c5b:f301 with SMTP id
+ adf61e73a8af0-3c9009c3b22mr3798291637.68.1785436401042; Thu, 30 Jul 2026
+ 11:33:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260730163621.83050-1-ozndrgt@gmail.com>
  <CABdDSeXFiL-aw5BRdH6QSm85L13tCzOEQrri99HOTOpromQpzw@mail.gmail.com>
-In-Reply-To: <CABdDSeXFiL-aw5BRdH6QSm85L13tCzOEQrri99HOTOpromQpzw@mail.gmail.com>
-From: Ozan Durgut <ozndrgt@gmail.com>
-Date: Thu, 30 Jul 2026 20:10:46 +0200
-X-Gm-Features: AUfX_mzAwqzGaD4WLBS3Lybwjh_pvKYjnBBSJO5M80ROIvO0GTPHyTJyAcugCcg
-Message-ID: <CAB6uNiVu31Fq0muZg-3KmquNDJy3r7fUc_PNGY-YfgkN-66Ptg@mail.gmail.com>
+ <CAB6uNiVu31Fq0muZg-3KmquNDJy3r7fUc_PNGY-YfgkN-66Ptg@mail.gmail.com>
+In-Reply-To: <CAB6uNiVu31Fq0muZg-3KmquNDJy3r7fUc_PNGY-YfgkN-66Ptg@mail.gmail.com>
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Thu, 30 Jul 2026 14:32:41 -0400
+X-Gm-Features: AUfX_mz_b7mCwvsvZzus2BMOV3-nmuHIAJCK5i4IOMiKF4Moj49vqnEHcMqVlew
+Message-ID: <CABdDSeWjCaX5uCGWTMsMBQ=3Q39PCnfU9e+SwFjJ7s2QtH76gg@mail.gmail.com>
 Subject: Re: [PATCH] watchdog: adi_wdt: get SEC fault source ID from DT
-To: Greg Malysa <malysagreg@gmail.com>
+To: Ozan Durgut <ozndrgt@gmail.com>
 Cc: Stefan Roese <stefan.roese@mailbox.org>, 
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
  Arturs Artamonovs <arturs.artamonovs@analog.com>, u-boot@lists.denx.de,
@@ -125,37 +126,36 @@ Cc: Stefan Roese <stefan.roese@mailbox.org>,
  Tom Rini <trini@konsulko.com>, UtsavAgarwalADI <utsav.agarwal@analog.com>, 
  Ozan Durgut <ozan.durgut@analog.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785435192; x=1786039992; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=02tz6CbCt+sQQWYQ24jRUN2YeCicBxSmCvh6rXfEuwo=;
- b=rzHZScLFC2xA71yhgmU/INe+ZxuG8jnxIdMozgAl+8MiRDloD2c3CJToxEf53Cang+
- oqy3NsB/sXAWTx17MnjYkveZuE5XyZSY6Ljpuv3cAWo8zjejt19hpn2oZWepssqUJFtm
- p3lrmUXC8PTUQpYggug4Z6QNkTUpvxaH0tRmfkeRQXPyDPfrIOdJh2Sk6aFndIztv5DL
- fS0Yjh5v5vHJ0uOjZE5M4u2RzO2+dr5I0mc/D8npbYgqz3242khZspn7qlNPLpozA/O4
- RsJekylLQyii1yE1uGrqwtLsea6xLMBEefJCaieIapS2fEVJyg1zFmazVrifWpuahEfF
- pxUw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=gmail.com; s=20251104; t=1785436401; x=1786041201; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=TiziaUWzJrqJ3YbQT9nd/SPH70E86SHDBEvdAm9CV10=;
+ b=tHgburos8+QoX6+F8Huv2vER/3yB1Bmqa5R8/fKueY9YQYHH6mVHbQG575udjB29Lk
+ uyC0dvLZbmL5hFnkGuCar8+/j7HwAQ6dSc+JwO8mTsafCjOHSTsvO9wwwSwGmU/xsd72
+ TLA8ynX/hqbPNg2sOcZfaeNTAi+jj37QOJ04nHm4s6flC7x6M3WQRPi+qT5lDGfAsXr2
+ 9fgvkRjwssFRUgZY4BXnf5wquxUe6SmD0uZoPZ2+0wYBt9u9O8NsQYtxduVGh0U3dGqR
+ eIp48dF7KkCsqdrZ7dBEDBI2Q+urnFL1DtLZBg30Nnx7eRReHRz/pXOVSddu7OwKXZKf
+ yaow==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  spf=fail smtp.mailfrom=gmail.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=rzHZScLF
+ header.a=rsa-sha256 header.s=20251104 header.b=tHgburos
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=ozndrgt@gmail.com
+ smtp.mailfrom=malysagreg@gmail.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="rzHZScLF"; 
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="tHgburos"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -171,193 +171,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Greg,
+Hi Ozan,
 
-Thanks for the review.
+>
+> > Also, what do you think about using dev_read_u32_default() with a
+> > default of 3 (appropriately documented) so that any users with
+> > modified or custom board device trees will not be surprised by this if
+> > they update to the latest?
+>
+> Fair point on not surprising existing users. My only hesitation is that
+> the SEC ID isn't really a value with a sensible universal default. It's
+> a fixed per-SoC hardware constant. It's 3 on the current SC5xx parts, but
+> on the upcoming ADSP SoC the watchdog maps to different SEC ID, for example.
+>
+> Defaulting to 3 keeps existing SC5xx device trees working (they all want
+> 3 anyway), so it does address the custom-DT case you raise. The trade-off
+> is that a future SoC whose DT omits the property would then probe
+> "successfully" while programming the wrong SEC source and silently
+> breaking the watchdog->reset path, rather than failing at probe.
+>
+> I'd lean slightly towards keeping it required so a misconfiguration is caught
+> early. But I don't feel strongly, if you'd prefer the default for the
+> custom-DT case,
+> I'm okay to use dev_read_u32_default() with a comment documenting that 3 is
+> the SC5xx value. Which would you prefer?
+>
 
-> We should use a vendor prefix for this property "adi,sec" so that it
-> will be the same as what the kernel will require. That way we will be
-> able to switch to OF_UPSTREAM without a driver change once support
-> lands in the kernel.
-
-Makes sense. I'll rename it to "adi,secid" (the prefixed form of the
-current name) in v2 so it matches what the kernel binding will use.
-
-> I think you should just read it directly into the priv struct without
-> a temporary, i.e. dev_read_u32(dev, "secid", &priv->secid).
-
-Agreed, will do that in v2.
-
-> Also, what do you think about using dev_read_u32_default() with a
-> default of 3 (appropriately documented) so that any users with
-> modified or custom board device trees will not be surprised by this if
-> they update to the latest?
-
-Fair point on not surprising existing users. My only hesitation is that
-the SEC ID isn't really a value with a sensible universal default. It's
-a fixed per-SoC hardware constant. It's 3 on the current SC5xx parts, but
-on the upcoming ADSP SoC the watchdog maps to different SEC ID, for example=
-.
-
-Defaulting to 3 keeps existing SC5xx device trees working (they all want
-3 anyway), so it does address the custom-DT case you raise. The trade-off
-is that a future SoC whose DT omits the property would then probe
-"successfully" while programming the wrong SEC source and silently
-breaking the watchdog->reset path, rather than failing at probe.
-
-I'd lean slightly towards keeping it required so a misconfiguration is caug=
-ht
-early. But I don't feel strongly, if you'd prefer the default for the
-custom-DT case,
-I'm okay to use dev_read_u32_default() with a comment documenting that 3 is
-the SC5xx value. Which would you prefer?
+I think you make a good point. Keep it as is, no default value. I
+would suggest adding a print statement describing the problem in that
+case, so that it is easy to find the issue with a custom DT from
+before this change.
 
 Thanks,
-Ozan
-
-
-On Thu, Jul 30, 2026 at 7:44=E2=80=AFPM Greg Malysa <malysagreg@gmail.com> =
-wrote:
->
-> Hi Ozan,
->
-> On Thu, Jul 30, 2026 at 12:38=E2=80=AFPM Ozan Durgut <ozndrgt@gmail.com> =
-wrote:
-> >
-> > From: UtsavAgarwalADI <utsav.agarwal@analog.com>
-> >
-> > The ADI watchdog drives a reset through a Security (SEC) controller
-> > fault source. The source index was hardcoded to 3 in adi_wdt_start(),
-> > which is only correct for the SC5xx parts that happen to use that
-> > index.
-> >
-> > Read the index from a new "secid" device tree property so boards that
-> > route the watchdog fault to a different SEC source can configure it.
-> >
-> > Set secid =3D <3> in the SC57x, SC58x, SC594 and SC598 device trees to
-> > match the value they relied on before.
-> >
-> > Co-developed-by: Ozan Durgut <ozan.durgut@analog.com>
-> > Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
-> > Signed-off-by: UtsavAgarwalADI <utsav.agarwal@analog.com>
-> > ---
-> >  arch/arm/dts/sc57x.dtsi     | 1 +
-> >  arch/arm/dts/sc58x.dtsi     | 1 +
-> >  arch/arm/dts/sc594-som.dtsi | 1 +
-> >  arch/arm/dts/sc598-som.dtsi | 1 +
-> >  drivers/watchdog/adi_wdt.c  | 9 ++++++++-
-> >  5 files changed, 12 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/arch/arm/dts/sc57x.dtsi b/arch/arm/dts/sc57x.dtsi
-> > index e4cc612959f..794e80c3cf1 100644
-> > --- a/arch/arm/dts/sc57x.dtsi
-> > +++ b/arch/arm/dts/sc57x.dtsi
-> > @@ -113,6 +113,7 @@
-> >
-> >  &wdog {
-> >         clocks =3D <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
-> > +       secid =3D <3>;
-> >  };
-> >
-> >  &eth0 {
-> > diff --git a/arch/arm/dts/sc58x.dtsi b/arch/arm/dts/sc58x.dtsi
-> > index 7b07589de47..d4008ba7988 100644
-> > --- a/arch/arm/dts/sc58x.dtsi
-> > +++ b/arch/arm/dts/sc58x.dtsi
-> > @@ -158,6 +158,7 @@
-> >
-> >  &wdog {
-> >         clocks =3D <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-> > +       secid =3D <3>;
-> >  };
-> >
-> >  &eth0 {
-> > diff --git a/arch/arm/dts/sc594-som.dtsi b/arch/arm/dts/sc594-som.dtsi
-> > index 1c2adc601dd..7a7167fbbba 100644
-> > --- a/arch/arm/dts/sc594-som.dtsi
-> > +++ b/arch/arm/dts/sc594-som.dtsi
-> > @@ -67,6 +67,7 @@
-> >
-> >  &wdog {
-> >         clocks =3D <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
-> > +       secid =3D <3>;
-> >  };
-> >
-> >  &i2c0 {
-> > diff --git a/arch/arm/dts/sc598-som.dtsi b/arch/arm/dts/sc598-som.dtsi
-> > index bc212ef25cb..bca3ff765d6 100644
-> > --- a/arch/arm/dts/sc598-som.dtsi
-> > +++ b/arch/arm/dts/sc598-som.dtsi
-> > @@ -124,6 +124,7 @@
-> >
-> >  &wdog {
-> >         clocks =3D <&clk ADSP_SC598_CLK_CGU0_SCLK0>;
-> > +       secid =3D <3>;
-> >  };
-> >
->
-> We should use a vendor prefix for this property "adi,sec" so that it
-> will be the same as what the kernel will require. That way we will be
-> able to switch to OF_UPSTREAM without a driver change once support
-> lands in the kernel.
->
-> >  &i2c0 {
-> > diff --git a/drivers/watchdog/adi_wdt.c b/drivers/watchdog/adi_wdt.c
-> > index 7d7cf98b55e..8e7ff958121 100644
-> > --- a/drivers/watchdog/adi_wdt.c
-> > +++ b/drivers/watchdog/adi_wdt.c
-> > @@ -36,6 +36,7 @@ struct adi_wdt_priv {
-> >         void __iomem *rcu_base;
-> >         void __iomem *sec_base;
-> >         void __iomem *wdt_base;
-> > +       u32 secid;
-> >         struct clk clock;
-> >  };
-> >
-> > @@ -72,7 +73,7 @@ static int adi_wdt_start(struct udevice *dev, u64 tim=
-eout_ms, ulong flags)
-> >         iowrite32(0xc1, priv->sec_base + SEC_FCTL);
-> >
-> >         /* enable SEC fault source for watchdog0 */
-> > -       setbits_32(priv->sec_base + SEC_SCTL0 + (3*8), 0x6);
-> > +       setbits_32(priv->sec_base + SEC_SCTL0 + (priv->secid * 8), 0x6)=
-;
-> >
-> >         /* Enable SYSCD_RESETb input */
-> >         iowrite32(0x100, priv->rcu_base + RCU_CTL);
-> > @@ -95,6 +96,7 @@ static int adi_wdt_probe(struct udevice *dev)
-> >         struct adi_wdt_priv *priv =3D dev_get_priv(dev);
-> >         int ret;
-> >         struct resource res;
-> > +       u32 secid;
-> >
-> >         ret =3D dev_read_resource_byname(dev, "rcu", &res);
-> >         if (ret)
-> > @@ -111,6 +113,11 @@ static int adi_wdt_probe(struct udevice *dev)
-> >                 return ret;
-> >         priv->wdt_base =3D devm_ioremap(dev, res.start, resource_size(&=
-res));
-> >
-> > +       ret =3D dev_read_u32(dev, "secid", &secid);
-> > +       if (ret)
-> > +               return ret;
-> > +       priv->secid =3D secid;
-> > +
->
-> I think you should just read it directly into the priv struct without
-> a temporary, i.e. dev_read_u32(dev, "secid", &priv->secid).
->
-> Also, what do you think about using dev_read_u32_default() with a
-> default of 3 (appropriately documented) so that any users with
-> modified or custom board device trees will not be surprised by this if
-> they update to the latest?
->
-> >         ret =3D clk_get_by_name(dev, "sclk0", &priv->clock);
-> >         if (ret < 0) {
-> >                 printf("Can't get WDT clk: %d\n", ret);
-> > --
-> > 2.43.0
-> >
->
-> Thanks,
-> Greg
+Greg
