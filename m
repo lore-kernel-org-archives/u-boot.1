@@ -1,119 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA1BC55160
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 13:38:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC6FC55160
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 13:38:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 41DAD81046;
-	Thu, 30 Jul 2026 13:38:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A156E40A81;
+	Thu, 30 Jul 2026 13:38:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jS1xIh8aEpS6; Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MPu-66xTV2sk; Thu, 30 Jul 2026 13:38:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 80C908100A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C492B40A93
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785418720;
-	bh=B0Y3c1wXlHCwJ4KkEGiasDJHnIsbbGikatE2VSY/as8=;
-	h=From:To:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785418723;
+	bh=SE2QJa61TKvwSyidRBUkhqKv2AmRnDEku5a4fClDlpk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=B0x+65l4di8f72yUlTtgFm7QBb1Y1XaF4SMPnhnSZ1HwfNdVbNqWVrBRiH77sqxTm
-	 TZyO7b0uXzaoeP/E3mafURVw/h/S8DFpJ95LNGKUORqpExaTR9BKCZMDrndJ89qLNp
-	 IEz95iaGqHi2WNjJ+jVX/8dBDGQrnhbMaB+4X/FGf/EQ8TvVu4d1XfKbDtppkzzp3r
-	 Txn1q5ovYQpsuq5mxKPX5RyiNQWqYWfjskU5x9veZD4ALa6odin7FegvfmnuyyiPFh
-	 9GXNq1UvKYNa1XGyEjmBCoa5ibji97LyWWvCsC5+WyZ+nyEpzwFU4ovN2Yp9vMl/yU
-	 EI089SdibbIhQ==
+	b=LAtrln5DSQC/N6LWOO0bNYLja5d8HODtViIbREn/KO+rBMXUfDWRBTGb6Y3WI2JHn
+	 4+IYHwxMyTrj2zamUvJo141EX9bznOr/JB5T5yvCVAjlBikfSqHEU+B2g7ztrWDYLp
+	 9wk66ubvkwpHSvrygjDV+4j4yYctAnv5MAPxpWMzhc5EeMFtiFKrXYoHRAedbJklKv
+	 3gEkEPQXCA8pTMVA2ginWo0VFwgC/lCbXz+SaBSQQgIua4OPGn4LQJHSZPA3/L1XrQ
+	 lXPLeY0hxkTT32eXTpgqvs/LjNoqvaHIpbvSqEzVwukgmDRaUtYfgBlxHoCBZ63IzN
+	 UUc9JFGqKtRMQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 80C908100A;
-	Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id EFD1F197
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C492B40A93;
+	Thu, 30 Jul 2026 13:38:43 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C5FCB27C
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E14EF80DB8
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:38 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AC3FD40A83
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vse4hmvMeaTm for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 13:38:38 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ikXa5u8WKJDU for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 13:38:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c35; helo=mail-oo1-xc35.google.com;
+ client-ip=2607:f8b0:4864:20::c2b; helo=mail-oo1-xc2b.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3AEBA80D9F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3AEBA80D9F
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3AEBA80D9F
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:37 +0000 (UTC)
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-6ab06473488so833928eaf.0
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 06:38:37 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 0251B40A82
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0251B40A82
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0251B40A82
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 13:38:39 +0000 (UTC)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-6acb63301acso393389eaf.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 06:38:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785418717; x=1786023517;
+ d=1e100.net; s=20251104; t=1785418719; x=1786023519;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=B0Y3c1wXlHCwJ4KkEGiasDJHnIsbbGikatE2VSY/as8=;
- b=HdSWV+1qKG3dEORkYPJMob8LIr/CS1i+1HS4skxfZD1y/1bhdIpal52euJt0tvrO9a
- zUSXA+l85fQDkh8amkXuD/Ym9A/Y8RbSV8/OKrOlohzSRZNCvze6LORJX2wSarrDcyhJ
- 0jZ2OGzKh39BUGAXiICBSgYLLUMTT0Fg/hEmW3dTL+4QRDf01OUv36ig4uWyiiqRNuEO
- MeOhLuptKXGiRlcqF2H0rYYbvKj9hUoBd/kHW4dmv88Cfw1uycsdpfsCKJYGMkcgfU5E
- PkU07ARsNJqse7TAM6UcSiheboAjvUlKcPsXRjc3fVNCgiI/DpMKJQJemUF1q3WWBeNb
- Wrjw==
-X-Gm-Message-State: AOJu0YxX4O41zbP1WhCkeg96IPbhTMbjXm0YqKqEP/PsOkg2pB9uEqa0
- sbOChPoTSWRnzZ1kdp0RIJWU1HOI3bXq0zc7SUbpNn21wuu7/pVF6dkPJelJnm6Py0ubkRc71Bg
- 7XoLrAls=
-X-Gm-Gg: AR+sD11BwPsxMWlPjCqr8NKMvcRzXxC5LhPk5lxdn+4eQV6vsMvoMyhcCReDUent2h4
- jt9qlSsi+uBNgIPGNkqrVzJQTisMeSBZoO4Iht51dUOkW2qa1E6WUtI2X61L86hQnnemLfH4jCy
- OwvZ8qtY6Xcckd5sNb5cD7yukdcUuAl/9VQiSGhfFEJgdClgpspoTAzTC3uT+hvfNmdmUMaKHgI
- CMQB4M0ka91S65bOY3GF7+apBuOdfILvku1QZQqBZ2EzLtiVrUkyuaO53CpDYl+lMTYNfgNdMrW
- 8irq3yy1K+7AC3aTd7HHNN3W6Bi7+4W/rDa8YZpRuxoO2G64x3VqyjxU7HSfb/xcgnL6M0cKVP+
- eoNHDYIv0I7StpOpIclFtk9jW4bBNrz9GiS1QIOZsXuwhfIbLx2m6c/ws+NIri4obmGti9PmkCl
- x2Ulmi/oWyjwGPfiaubIXq4DVoAXhibpa459eMFkMhfAHuuZ5MQuJ/ltPqtimvjoVQfIY/DIS1I
- feWBtPhJM8JJj64/ACkkQ416MmDTvfrIqnAijPQolOgqsVjPft6FwX8Ndx9sckrem5in0IsOSJ9
- WGvuXoD3HEtaYE9FR/M+
-X-Received: by 2002:a05:6820:a09:b0:6ac:a0db:1a78 with SMTP id
- 006d021491bc7-6acbbdb9101mr1617179eaf.5.1785418716989; 
- Thu, 30 Jul 2026 06:38:36 -0700 (PDT)
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=SE2QJa61TKvwSyidRBUkhqKv2AmRnDEku5a4fClDlpk=;
+ b=NSB6O1mZ0fPDPV9gxZEU40jrTMH3crG/yvQgdVwSLgZWnpAZcN5SF/S0coQVL/MnjE
+ q5qBueawyTsO4TvpvZF7cPEli5+AXQ6xsZTihuCVGNAB+oMAaV4bNZu7hs+W8h49wFgT
+ Z4TUryTH60zB5wn9qBol/haYdqTnDBh2ha8UZsjSay3gXR9PlVzlTSpPpCBTJ+fJAlBN
+ teciJHizOUD6+McBwdJr4T8xyYXbaznWMRUJGPocnFD+Vndr7qWk2U0Br2mAKWLYTgzJ
+ SonR7qloz2ZMBznE6r5CdMBZYOp7nQ8Ls9+jcGOkEnSO4swXpRBsn13i+8LUMdUQFSOr
+ BVjQ==
+X-Gm-Message-State: AOJu0YzvsTktg51VJdSi/02PGGLslrXqA3sDwyjeZJpH895rwWrO4Suw
+ dm13isxQZuC/OL/2e9f4DA98kPH66KKN31e3oMaIE76CmymO+eeq+vkF5j5q9sI3a3fsYaKaC85
+ 8zrdIy9E=
+X-Gm-Gg: AR+sD127eJ3ZN9+JhM3lyeT1wbfcgYhe8KxCM+TD2kBS5RQfuu82wxeFYOCwviuuGfI
+ xWiLXadHW5lx2d+OhmE4lVEi9c7KMBXNuJT5GyNLDtrzGrGpnvwU6/RFmYtZ3REUCq3sa1jRbEi
+ 0WRmW+04I8k298/rAKg2uS/wZMYw86xqe209eXieG/vStx+Yid4Yi1o4w6o6Tq05eNfebppQfqU
+ RaY95MoRX0CN7jaGhweWpWOhmfmRKPqkyEe8gRib2a6U7rQMwuKu3v3HYbbvliIvJZVPptEg1ql
+ 2IcqH+vHDprRiR9OKhPzziFTP4cf0Yq6KYkJwKXz3oES+6Ydv5rdpl+FdfJdTQlJjGg0q5JW/kY
+ 1PqaYYM/V9aCjmgl7dDpm9pHs9OjvlqLl8tRnbuHmUbj4ZQggYn1FvRMeueKZtK/Uffv/aW4wRs
+ yDlkaKR+I3mqh+3WaHvM1JJJF7qzxyTOsbIkjHI4NWPfq3GSr8MimJa+x2/qlLnd/o83b85tYCl
+ WA3gkQmySaCC1dJjmeugtAEwXzHBx3ryTCxfbdegdQSrYu7bVgnJRPXbC+XgXLP2U9bDrhvBhO8
+ omxNcp3u
+X-Received: by 2002:a05:6820:821:b0:6ac:a265:84f4 with SMTP id
+ 006d021491bc7-6acd2dcff61mr155674eaf.29.1785418718946; 
+ Thu, 30 Jul 2026 06:38:38 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6acbc554a5esm1457983eaf.10.2026.07.30.06.38.33
+ 006d021491bc7-6acbc554a5esm1457983eaf.10.2026.07.30.06.38.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 06:38:34 -0700 (PDT)
+ Thu, 30 Jul 2026 06:38:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260728221231.1745444-1-trini@konsulko.com>
-References: <20260728221231.1745444-1-trini@konsulko.com>
-Subject: Re: [PATCH] CI: Azure: Correctly skip semihosting tests on
- vexpress_fvp
-Message-Id: <178541871392.2173019.15761963387559933898.b4-ty@konsulko.com>
-Date: Thu, 30 Jul 2026 07:38:33 -0600
+To: Denis Mukhin via U-Boot <u-boot@lists.u-boot-project.org>
+Cc: sjg@chromium.org, dmukhin@ford.com
+In-Reply-To: <20260723005203.36715-1-dmukhin@ford.com>
+References: <20260723005203.36715-1-dmukhin@ford.com>
+Subject: Re: [PATCH v2] x86: add support for CONFIG_REMAKE_ELF
+Message-Id: <178541871712.2173019.2328046083263926006.b4-ty@konsulko.com>
+Date: Thu, 30 Jul 2026 07:38:37 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785418717; x=1786023517;
+ d=konsulko.com; s=google; t=1785418719; x=1786023519;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=B0Y3c1wXlHCwJ4KkEGiasDJHnIsbbGikatE2VSY/as8=;
- b=BFJBZHCa5vwX8VERxYQFJdE0Zd+8QwSBBto6XIf/g0BKQ0y1Nj/R3H/GFr8bdcnhom
- EsD+bnDf0Dk8Kfo+2NbSxCpexTRF8a6oizrvHJivuviTkfQHh5oWYVfpAL0YaQiOwiKV
- ob12CgvS6BUBBFByzi7xSJNmejZe7X8XjSYKk=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=SE2QJa61TKvwSyidRBUkhqKv2AmRnDEku5a4fClDlpk=;
+ b=ZL66pFxLXrzxI6ECxbIvMJMjeqVGH0PERfrfQnSant4BQog/PObQFYcCNRN2WcNO0A
+ 0gfBL8SX4HHvcPtavo1+KwKLZfS5ZP2iL/V3ItgFktpLWWlvILaF6tSkD09nhHP0D8E8
+ BeMZLmyXRUEFvymryJSIJKih5bhUP4N+GCp5M=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=BFJBZHCa
+ header.s=google header.b=ZL66pFxL
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,22 +129,22 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, 28 Jul 2026 16:12:31 -0600, Tom Rini wrote:
+On Wed, 22 Jul 2026 17:52:03 -0700, Denis Mukhin via U-Boot wrote:
 
-> In commit d75998b476de ("Docker, CI: Add vexpress_fvp /
-> vexpress_fvp_bloblist support") we specifically disable the semihosting
-> tests on FVP using platforms due to upstream issues. With commit
-> 7ffa20af30dd ("Merge patch series "fs: regression-safe load <iface> for
-> null_dev_desc_ok fstypes"") we add a new test that was not caught with
-> "hostfs" because it's a semihosting test. Update the logic in our
-> pipeline to skip all semihosting tests.
+> x86 builds with CONFIG_REMAKE_ELF fail as the following:
+> ...
+> u-boot-elf.o: file not recognized: file format not recognized
+> ...
+> 
+> Fix objcopy/ld parameters for x86 to enable CONFIG_REMAKE_ELF
+> configurations in both SPL and U-Boot proper builds.
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/1] CI: Azure: Correctly skip semihosting tests on vexpress_fvp
-      commit: 9e596aee6855edc7e786b90db07e24a4f263daed
+[1/1] x86: add support for CONFIG_REMAKE_ELF
+      commit: f6a37207b84342441ed8af4226cd85048931cc61
 -- 
 Tom
 
