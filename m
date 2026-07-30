@@ -1,119 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1599FC55162
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 16:06:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78FFEC55160
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 16:38:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DAF0481151;
-	Thu, 30 Jul 2026 16:06:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CBAB440C84;
+	Thu, 30 Jul 2026 16:38:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rNl2tQjDzFxs; Thu, 30 Jul 2026 16:06:20 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qjAySxDCLc3Z; Thu, 30 Jul 2026 16:38:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0F7F281141
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9415E40C48
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785427580;
-	bh=8zX5Ex3NTMEAzer0dCMKzUkUKgDG+Cj5pjEjPL4zDlk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KMFaTXmFhnj+mgg0Uc4UjGp6yRGN6nI06zpXSsaF2gMy/2AANsMfumE9azBVmAiXp
-	 5Ep684bTwuxaOFzV7TBgj9zJT2DdMHZEnIspjb8yCl537rFj53k0AyWMzYFI/Q8zzo
-	 ug/2ZIaiPe7zpq5swT/GS5FSBx7OY9ySGwXt8408J/3xPifdny/qv/7vyx+Qoc0TaJ
-	 pfhJhYn7QkPRAFHDs3Hqta181P3XjOhndnW9kqrOfvvODq1yny9CKE7acsFxpDeiIR
-	 7yQk27TCT+CX8c72qXEdAhWrD8dZuOFKsfFAEDh/8n13d8jLFe9vj4ReYTYgm3eAVw
-	 vbI/nOPY6s10w==
+	d=lists.u-boot-project.org ; s=default; t=1785429528;
+	bh=+VPU0t/+DL9Uu/Xkq5a/RWCL8YqAmfexV8nAYBxZvRo=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=r0ItC//TEOOvGFiTN6Tvow1tD8jiDfG59EGQRuo3pGKo8cZF6WyABwPySEp7rNfBB
+	 VNsQUErUX9qj/zXgLCLTxAYU9zbx47sK263Ospt2uMUAJ/Kk5/CHu1horvLuhdYMtV
+	 gHCl9bjQ29x5FNoR/p7QLEGumDuHMtGEZz0MdEiiu7FiGetrOC4XY4lspHFiSzzHfE
+	 SekDm4fPDAuMYqGm1pS84tcVcnK8sff8/wovoH6ljsLJSLw5A2ZlciM6bfuFQZOQrI
+	 PFHkU6rnC7PeWgFoe63BVfoPGU92YGsoUpTPl+VcCPq0E98NFclj6sMSsvcoebF06H
+	 ZFYejSpEiJadA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0F7F281141;
-	Thu, 30 Jul 2026 16:06:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9415E40C48;
+	Thu, 30 Jul 2026 16:38:48 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id DEB5D197
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:51:26 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 4E23727C
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 16:38:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D0D56608CE
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:51:26 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 341DE608ED
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 16:38:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id g8iL9txF3afe for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 15:51:26 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org DEF5E608CB
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DEF5E608CB
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DEF5E608CB
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:51:25 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4955de8797cso15344535e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 08:51:25 -0700 (PDT)
+ id fy7hmHzH5KLA for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 16:38:46 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=ozndrgt@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 063B9608D8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 063B9608D8
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 063B9608D8
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 16:38:45 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8FB56849F3; Thu, 30 Jul 2026 18:38:42 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 91E85849BC
+ for <u-boot@lists.denx.de>; Thu, 30 Jul 2026 18:38:40 +0200 (CEST)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-47f7854678cso1325296f8f.1
+ for <u-boot@lists.denx.de>; Thu, 30 Jul 2026 09:38:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785426684; x=1786031484;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=8zX5Ex3NTMEAzer0dCMKzUkUKgDG+Cj5pjEjPL4zDlk=;
- b=WEZLxh2VPFY6mHz+Dv1HF36XKuHxSLt7xYRAg/sZnN48/VPzM7x45tBIDcEY/RYMN8
- jJ28cHWrxoksjq0V5bS60hLOk+expPsm68tLz0wSenZy93RiZxFSCA5WWjq9rsZSCC5J
- +/svJ8E7WjRn5YHGhbXe7j24CaHUXEHWFvmbyOu9K/ZXVpUNJT3SxrHOF0anbpiPVBkt
- huKcGc1jTJ5HEOvWV+x6y4fsQEx2g5IlmMoyq9ioEOC8gyGKkrm+7xWT5645UbfKK7LS
- +ark1jgrXMzXeoYFMIpnfq5lk3MC2/enkzcdmUvoZ4jsEnpj+CpGcVcnKG2IVMJvtHLD
- evgw==
-X-Gm-Message-State: AOJu0YwEXrnCKzA94iRAMA4er1uKhC/8f+rgDOyPgAFTcra2KUwroKkD
- 35LKdGJE8JGfPVpDO2C9rSjzW/XNpxylxUOlKNa4OYg6QwQ/A2zznVkcxPVrRQ==
-X-Gm-Gg: AR+sD11AV5iCfycbyNltaaaCQwDNnZN2qlwZPxKGT2pGGD5oXM8VBx0Zs/HNt/YU2Fg
- 7KEYetJRU2ap1DyczIuf0X0Y3u7JneOPSoG8Zm+qwmEc9W4DFsKTzh8CSv7NOFXtsg9XlVvxF9B
- FyLp//l7CnLRmW0OC+M54VMUCK0RBKby5H1lSCI2sHnHTCJCnfxH5JX/PXsVys426jzqqvdcBzL
- clOZyrAMzIeMsaWmV0sk8FnHXLWspCUnYL+/7L7ZRGUQM9IQZ/O6MvTdR1n0KtSS7u50QqqDltA
- R5FL8pVq0XE7it7cm4+lzcIC9hcChgFA9Ddk42JIbKQ1ohLrwOI2aM6HmVQtLgr73FEXBoE4Ea8
- p2OK9OhckyYm3BJH9WEop2T6F1gaBA7KsPZ2nAeKKnPsijxfoBA4bPSwDQEfYGfscVB5xPTsfYZ
- gH2UUHIRvzyQ9Xl8CjHvRdFc+SE9isa5cDMjJ0qpWGr0YTFPORkSUYQmJOOppm9wNMq1Q=
-X-Received: by 2002:a05:600c:154e:b0:495:3e08:ad19 with SMTP id
- 5b1f17b1804b1-49800e7556amr46259995e9.9.1785426683704; 
- Thu, 30 Jul 2026 08:51:23 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
+ d=1e100.net; s=20251104; t=1785429520; x=1786034320;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+VPU0t/+DL9Uu/Xkq5a/RWCL8YqAmfexV8nAYBxZvRo=;
+ b=VOnviTm/jaekpvAVqeqK6h9Ainf8RzcQOpEcwGPQarQug+YBE+n+GPnlAaZajmV6t8
+ OjQE6BgmBo0E1zQRoZM5wk8NBpFe5xeATBL/7NVvD3+F0iMzg+oWECPWsVINrsQy+qC8
+ dVJ3bKXnnT8mUsU8kRyA2Sy6s2zTrPO4JmBdA0U30UclDftQPO/mFh3AWo4upprDBfFG
+ Drxpn5+M7p9qLSzbTCFpW6PdJH2ddzooU3vjmZS0AETAI/QtjrtSYrx7NwU7KTT9SSyQ
+ SS2QFv3c7HmiUakBs1QEcEA+bp7N9GduSmIf25GMAxTBddQUWdz4oYAmwIYtt1fxxxzq
+ /HZg==
+X-Gm-Message-State: AOJu0Yw13/aDK0Tt/sd3DHiwwkPYyHY9i9W9Ue3LxnzNKOMqDT7aDhdV
+ pF+pwJ49VEBVyczo8Md1msglrulqmsNpx9xJ8tzassswrELiSHDETK92
+X-Gm-Gg: AR+sD13Ar31av9tmwsa5VpxiIMLZdn/sT35UdIz/Wt89kQb+oqavAzGbaM5vvFrNLHB
+ 5CJ++hMZAM9nLi6lgjJwn4+kAIxnSCddFGMe3RCSARh0AjqJxSFECUhCFQ71699i9BQtdTICsvG
+ ZJHL8zMpRN+lH2Jch/Wkg9gprYUYRjOn3LqH5i+rEiVrRmrgIV+VXdj3lKeSQPLq700rzbay5vO
+ 0KxP81cfLXv9qpclXbDwDK+QrMKp9yZVRrRomsF+eXbOGnIN57vUqDFt0wk0hRvolPhZW0hvvUo
+ W1p+wiH7R++AhGhxzhjduHo96XXgGyEmb2/CeTrnXsd4pTzOgNzauBuTo/4eXfRX/RXP1GBYQJf
+ uPejTbP7K97BlcRyKUUcolRQpnpUcWAbA9Oo17PyHDS7nwZqk3vC9KUJGsu5M7p0q7w7bGIJmT7
+ bXan3ahkhVsocBBa5U9bLnKtDdSPOngszlGG/Dfo0OemfMiJr8UOOiKJdTCDbCx2TmQ8qHJz6wQ
+ 2zCrB1ckKpPkobumJRUIOcQhqYgMEzrFIvNd+KBu9VLTbJ30ttfJIw=
+X-Received: by 2002:a05:6000:290a:b0:47f:97e9:fe3b with SMTP id
+ ffacd0b85a97d-47fc822d8bcmr4800408f8f.34.1785429519769; 
+ Thu, 30 Jul 2026 09:38:39 -0700 (PDT)
+Received: from hp-15-dh1xxx.tail71a1d0.ts.net
+ (port-92-196-144-227.dynamic.as20676.net. [92.196.144.227])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-496e8e06f7csm146871545e9.0.2026.07.30.08.51.22
+ ffacd0b85a97d-47fc88e424fsm10927291f8f.14.2026.07.30.09.38.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 08:51:23 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH 2/2] test: cmd: add a test for bootd
-Date: Thu, 30 Jul 2026 17:51:19 +0200
-Message-ID: <20260730155119.3328020-3-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260730155119.3328020-1-mehmet.fide@gmail.com>
-References: <20260730155119.3328020-1-mehmet.fide@gmail.com>
+ Thu, 30 Jul 2026 09:38:39 -0700 (PDT)
+From: Ozan Durgut <ozndrgt@gmail.com>
+To: Stefan Roese <stefan.roese@mailbox.org>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>
+Cc: u-boot@lists.denx.de, linux@analog.com, Tom Rini <trini@konsulko.com>,
+ UtsavAgarwalADI <utsav.agarwal@analog.com>,
+ Ozan Durgut <ozan.durgut@analog.com>
+Subject: [PATCH] watchdog: adi_wdt: get SEC fault source ID from DT
+Date: Thu, 30 Jul 2026 18:36:21 +0200
+Message-ID: <20260730163621.83050-1-ozndrgt@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 30 Jul 2026 16:06:15 +0000
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785426684; x=1786031484;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8zX5Ex3NTMEAzer0dCMKzUkUKgDG+Cj5pjEjPL4zDlk=;
- b=r6PO+WfpmxP1/lJrv5ghlklWdi5wIr0Rf52K48/KNyMnL/9gMELS8BAaKXw1iUD5dc
- J+7g9EnSRPZDC/eqXZCQUfo9H2qU+yiCcXU7fiu6SsQvHCD3qAdlGPv0QJkD0CSfO4S5
- GCb5vSdN68TIb65OdMBZcabgAS90gojfTOLQUtLem+b+rl2BVW7+G+lKbAmd/OS/vdT8
- 0LAVXqQK+FFC4x3dioNr2jHk/PlUtBU/BhhShqil5mSvcHmozx4u4XEIpdA4ThEPYKHG
- vgUrt06Yh/jN4bGR+C7HwxeNABETAi/Ie9+Oz6VIp/NQJf9Q1yQ3zSHmuj/u6WDqSNS+
- NQOg==
+ d=gmail.com; s=20251104; t=1785429520; x=1786034320; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+VPU0t/+DL9Uu/Xkq5a/RWCL8YqAmfexV8nAYBxZvRo=;
+ b=q4VWR0YCYx2KXx2K8+6ge2eOGZUexV7el1U5uY51JFo6+BZ3AH7vqQiNObBm51dCyi
+ 1QJMhRzU4XEH2fQ5jUZlDp3qiEIng4ram1Sitcn1bjvOsaE6XCRxxJvrN5GzXZui11gx
+ FfJz5W1PqX4Ylod5mYSP43yGMBD2rduUHJFJc1L+d+90ziA2D84NcRre7EzPFqB+Eaqg
+ dDfMVfz4BO70nc+pjs3Y2pg39+fu53xDo6qKJAAkO4uvwUfxFDbGjViwhesd8uFwoRJq
+ 93ep2HYkHOjeOYUcpmTlNQH9sk+/277dcuG4LS3ZHCC1kj2BbtRMJPbyOa39OMDFur43
+ 0F0Q==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=r6PO+Wfp
+ spf=fail smtp.mailfrom=gmail.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=q4VWR0YC
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=ozndrgt@gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="q4VWR0YC"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,81 +150,119 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+From: UtsavAgarwalADI <utsav.agarwal@analog.com>
 
-There is no test for the bootd command. Add one to the cmd suite that
-covers the documented behaviour: bootd and its "boot" alias run the
-command held in the bootcmd environment variable, and the return value
-of bootd is the one of that command.
+The ADI watchdog drives a reset through a Security (SEC) controller
+fault source. The source index was hardcoded to 3 in adi_wdt_start(),
+which is only correct for the SC5xx parts that happen to use that
+index.
 
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+Read the index from a new "secid" device tree property so boards that
+route the watchdog fault to a different SEC source can configure it.
+
+Set secid = <3> in the SC57x, SC58x, SC594 and SC598 device trees to
+match the value they relied on before.
+
+Co-developed-by: Ozan Durgut <ozan.durgut@analog.com>
+Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
+Signed-off-by: UtsavAgarwalADI <utsav.agarwal@analog.com>
 ---
+ arch/arm/dts/sc57x.dtsi     | 1 +
+ arch/arm/dts/sc58x.dtsi     | 1 +
+ arch/arm/dts/sc594-som.dtsi | 1 +
+ arch/arm/dts/sc598-som.dtsi | 1 +
+ drivers/watchdog/adi_wdt.c  | 9 ++++++++-
+ 5 files changed, 12 insertions(+), 1 deletion(-)
 
-Notes:
-    checkpatch asks for a blank line before CMD_TEST(); test/cmd/command.c and
-    test/cmd/exit.c place the macro directly after the closing brace, so this
-    follows the surrounding tests.
-
- test/cmd/Makefile |  3 +++
- test/cmd/bootd.c  | 35 +++++++++++++++++++++++++++++++++++
- 2 files changed, 38 insertions(+)
- create mode 100644 test/cmd/bootd.c
-
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 8d36463879d..757aefa3e02 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -17,6 +17,9 @@ ifdef CONFIG_CONSOLE_RECORD
- obj-$(CONFIG_CMD_ACPI) += acpi.o
- endif
- obj-$(CONFIG_CMD_BDI) += bdinfo.o
-+ifdef CONFIG_CONSOLE_RECORD
-+obj-$(CONFIG_CMD_BOOTD) += bootd.o
-+endif
- obj-$(CONFIG_CMD_CONFIG) += config.o
- obj-$(CONFIG_COREBOOT_SYSINFO) += coreboot.o
- obj-$(CONFIG_CMD_FDT) += fdt.o
-diff --git a/test/cmd/bootd.c b/test/cmd/bootd.c
-new file mode 100644
-index 00000000000..83dc9ab6ecc
---- /dev/null
-+++ b/test/cmd/bootd.c
-@@ -0,0 +1,35 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for the bootd command
-+ *
-+ * Copyright 2026 Mehmet Fide <mehmet.fide@screeningeagle.com>
-+ */
+diff --git a/arch/arm/dts/sc57x.dtsi b/arch/arm/dts/sc57x.dtsi
+index e4cc612959f..794e80c3cf1 100644
+--- a/arch/arm/dts/sc57x.dtsi
++++ b/arch/arm/dts/sc57x.dtsi
+@@ -113,6 +113,7 @@
+ 
+ &wdog {
+ 	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++	secid = <3>;
+ };
+ 
+ &eth0 {
+diff --git a/arch/arm/dts/sc58x.dtsi b/arch/arm/dts/sc58x.dtsi
+index 7b07589de47..d4008ba7988 100644
+--- a/arch/arm/dts/sc58x.dtsi
++++ b/arch/arm/dts/sc58x.dtsi
+@@ -158,6 +158,7 @@
+ 
+ &wdog {
+ 	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
++	secid = <3>;
+ };
+ 
+ &eth0 {
+diff --git a/arch/arm/dts/sc594-som.dtsi b/arch/arm/dts/sc594-som.dtsi
+index 1c2adc601dd..7a7167fbbba 100644
+--- a/arch/arm/dts/sc594-som.dtsi
++++ b/arch/arm/dts/sc594-som.dtsi
+@@ -67,6 +67,7 @@
+ 
+ &wdog {
+ 	clocks = <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
++	secid = <3>;
+ };
+ 
+ &i2c0 {
+diff --git a/arch/arm/dts/sc598-som.dtsi b/arch/arm/dts/sc598-som.dtsi
+index bc212ef25cb..bca3ff765d6 100644
+--- a/arch/arm/dts/sc598-som.dtsi
++++ b/arch/arm/dts/sc598-som.dtsi
+@@ -124,6 +124,7 @@
+ 
+ &wdog {
+ 	clocks = <&clk ADSP_SC598_CLK_CGU0_SCLK0>;
++	secid = <3>;
+ };
+ 
+ &i2c0 {
+diff --git a/drivers/watchdog/adi_wdt.c b/drivers/watchdog/adi_wdt.c
+index 7d7cf98b55e..8e7ff958121 100644
+--- a/drivers/watchdog/adi_wdt.c
++++ b/drivers/watchdog/adi_wdt.c
+@@ -36,6 +36,7 @@ struct adi_wdt_priv {
+ 	void __iomem *rcu_base;
+ 	void __iomem *sec_base;
+ 	void __iomem *wdt_base;
++	u32 secid;
+ 	struct clk clock;
+ };
+ 
+@@ -72,7 +73,7 @@ static int adi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+ 	iowrite32(0xc1, priv->sec_base + SEC_FCTL);
+ 
+ 	/* enable SEC fault source for watchdog0 */
+-	setbits_32(priv->sec_base + SEC_SCTL0 + (3*8), 0x6);
++	setbits_32(priv->sec_base + SEC_SCTL0 + (priv->secid * 8), 0x6);
+ 
+ 	/* Enable SYSCD_RESETb input */
+ 	iowrite32(0x100, priv->rcu_base + RCU_CTL);
+@@ -95,6 +96,7 @@ static int adi_wdt_probe(struct udevice *dev)
+ 	struct adi_wdt_priv *priv = dev_get_priv(dev);
+ 	int ret;
+ 	struct resource res;
++	u32 secid;
+ 
+ 	ret = dev_read_resource_byname(dev, "rcu", &res);
+ 	if (ret)
+@@ -111,6 +113,11 @@ static int adi_wdt_probe(struct udevice *dev)
+ 		return ret;
+ 	priv->wdt_base = devm_ioremap(dev, res.start, resource_size(&res));
+ 
++	ret = dev_read_u32(dev, "secid", &secid);
++	if (ret)
++		return ret;
++	priv->secid = secid;
 +
-+#include <command.h>
-+#include <env.h>
-+#include <test/cmd.h>
-+#include <test/ut.h>
-+
-+/* Check that bootd and its "boot" alias run the bootcmd variable */
-+static int cmd_bootd_test(struct unit_test_state *uts)
-+{
-+	ut_assertok(env_set("bootcmd", "echo hello bootd"));
-+
-+	ut_assertok(run_command("bootd", 0));
-+	ut_assert_nextline("hello bootd");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("boot", 0));
-+	ut_assert_nextline("hello bootd");
-+	ut_assert_console_end();
-+
-+	/* the return value is the one of the command in bootcmd */
-+	ut_assertok(env_set("bootcmd", "false"));
-+	ut_asserteq(1, run_command("bootd", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(env_set("bootcmd", NULL));
-+
-+	return 0;
-+}
-+CMD_TEST(cmd_bootd_test, UTF_CONSOLE);
+ 	ret = clk_get_by_name(dev, "sclk0", &priv->clock);
+ 	if (ret < 0) {
+ 		printf("Can't get WDT clk: %d\n", ret);
 -- 
-2.54.0
+2.43.0
 
