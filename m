@@ -4,84 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDEBC54FD2
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 10:57:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C563C55162
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 11:32:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F2B4840720;
-	Thu, 30 Jul 2026 10:57:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E108640975;
+	Thu, 30 Jul 2026 11:32:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0-R2fia07XjK; Thu, 30 Jul 2026 10:57:05 +0000 (UTC)
+ id teTAUngVqGiT; Thu, 30 Jul 2026 11:32:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 36CC1408B6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 20D264091F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785409025;
-	bh=u+Wq4j1sla+6LvPde2UM1wpX06ongwLhV4urO9Dmb2c=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=kZiuZp2oInKbvStihOcGCp3N7FEmx4vpRI38OGjEzKieJ/1vzyGknU0P+dTqp6W7m
-	 U8MIodHfcbA95wSQQNQzdRo56GDnWs+m/5LAeyvlAbZQs+zfKyOeHTiq2hAFPW3Tse
-	 RDBSDVFRktCrxYdE/pjta3uo5QyeFo+Jd09j+uCM3VlKkHfAnDUBIeEscYHM5o3t0k
-	 iaowIIK0ypTZLjF8koAuAk8Hrimt/cywDtvFo1Y3URBcYP6xB3TXXVyC5AWT/P8+RV
-	 +D82AfmsHUXV0ke5fcczJIXTNBDGfgYl4TSfvk92KBNholrQOyoVpsqRkpuvoD/ZvP
-	 b8Kuc7jddDePA==
+	d=lists.u-boot-project.org ; s=default; t=1785411143;
+	bh=kjlMhlZMPpoTjd/4B0VHCGcul8fRsTonPS/GVnDtkCA=;
+	h=Date:To:From:Subject:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lIoD2L7HCAnRAqNfdP74207NuD79lcjEoj7RtgFz2OBT8IxZf2RChofkxycTnhagp
+	 xUCEk1/y3MnTkysVeahSe44J25WKgFgJyzFqbHhWwcpa+UUWPueVY6nyRTgqaIU4qR
+	 RG5tSJhY1wdtkeeGYYVoNgy5+X5SHW1JeN8Dz+ARh8N/KnZeC8KmoocIzqE/UFZ05E
+	 AlKKFVdfTkV7DoGWNjotJitQ/5Qu8eHhm2DtRDvRvM/DK3jH6NYzZBGToKDDT2wiEy
+	 fiLBfsNz87RnhLovtbGwgjvckzUrAPY5Zc+V4tydbHfiiCQfGqaXD21n3A6++kUmtB
+	 te7t93dYsNFow==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 36CC1408B6;
-	Thu, 30 Jul 2026 10:57:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 20D264091F;
+	Thu, 30 Jul 2026 11:32:23 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id ABCA336E
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 10:57:03 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1362526E
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 11:32:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9D8DB408B6
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 10:57:03 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 053744091F
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 11:32:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CMdrIqdRV1zY for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 10:57:02 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=109.224.244.104;
- helo=mail-244104.protonmail.ch; envelope-from=rv@rasmusvillemoes.dk;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 78F7040720
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 78F7040720
-Received: from mail-244104.protonmail.ch (mail-244104.protonmail.ch
- [109.224.244.104])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 78F7040720
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 10:57:02 +0000 (UTC)
-X-Pm-Submission-Id: 4h9mLs1lWRz2Sd57
-From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-To: u-boot@lists.u-boot-project.org
-Cc: Stefan Roese <stefan.roese@mailbox.org>,
- Emanuele Ghidoli <ghidoliemanuele@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH 1/2] cyclic: get rid of cyclic_get_list() helper
-Date: Thu, 30 Jul 2026 12:55:14 +0200
-Message-ID: <20260730105515.421677-1-rv@rasmusvillemoes.dk>
-X-Mailer: git-send-email 2.55.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ id SVwlqb7Wq-Xo for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 11:32:20 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 918C54064D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 918C54064D
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 918C54064D
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 11:32:19 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so1737891f8f.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 04:32:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785411137; x=1786015937;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=kjlMhlZMPpoTjd/4B0VHCGcul8fRsTonPS/GVnDtkCA=;
+ b=DJb+FJJFtFoUk8Mb79phnTA6jj84d1s3/o5aJ45nn70Uufe9sTeyFOstPFr50p2Dby
+ gsOU1QqzgIwUuAMvfbNfooT+63+pQRWWf5g6uwkZI788TmjlofNUVAj+QhOkUc+AvHbc
+ Yz0XYtWVLvjUXgW+BX6LnQ5sfcMFCl1HNUtn0ts+Ofn6Vwv3OqDswXPz8o4+kAPBEM9n
+ 1zA/qq39Oy79HySosnDovsp9aPm9t53x/Jq3FFpRUYS7lyQgCBG497AWRFPYGp+vjAzN
+ uZsxGQoPr/NrQkCBK5tqQfOoiGZJ0upKkQY4iFua52sUiQpxUmL6LPatC4ZXD3A3QgDk
+ 1opw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqtNAySbui7FC23rs1YfvszB4ERKeHTKO3SfHqtRcMG2fK8btOd0gHUXM1Hhbv3HAj8bVcgICE=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzvqM3cOZ/2pL2KZ5Be9XwOyv2V+QJKtWCjPpQ1SqvivTiuy3kn
+ cIWslbQSmJFSUSftwpFRLVIqanSQ4wF8Mr/YdnX7HnC5stzqPveJxu9aizX84oK+zNo=
+X-Gm-Gg: AR+sD13/LzNH5fpP1MJDrsIaTHrdLvZH3n3esl06ntvhgyUv30q8HxuajITGSv90jBA
+ +TzAiX0rg9Tj+XshvlDD8XXSQqHCwbq8PQT7OUH1OQ1QJ70b8R0EFHNgV6Nu/5A8vnzLBKsUQjo
+ FUNje/NR/oq/gLceLF+Jv8j3r5qWh4Lhnuwx8J5/699bDSIkxsFh1NRXUduLTz7jnqHnGe27QS0
+ jEwZtpJIVZd7hhoK40OYa9sBuzxohK76GunuL4dKlmpCVQbtUWI5Lo6vJiSE3ujwNP9rKPXoQBh
+ qRH84bpmF7jXeFb2O8334T5dKFr2e5ZGROdpugfMHfMwPpvrcnfuNQbU4rytww6IfrGpv+mLx9e
+ EI8tIa8EOpNQv2fdy2hGsngRkX9C8bkI3N90uL47+BP0BiWZllYuQTsVpMg9c+cmf5oHhb/2dJO
+ 1vpghMeBmkj3Broqfb3PZ7g7rYAYLwYuBhM7ty+jJds7AGMTE8zTDho+irG0nKgxVb8eZi8VOkc
+ ffUsfOy0jk5GGvqNnpROp5zqurKvi8KdAv1dPoevBRLBdfoaMlHvL2j
+X-Received: by 2002:a05:6000:258a:b0:47f:8f8f:db74 with SMTP id
+ ffacd0b85a97d-47fc80c1418mr3341261f8f.12.1785411137114; 
+ Thu, 30 Jul 2026 04:32:17 -0700 (PDT)
+Received: from localhost (host-212-171-227-71.pool212171.interbusiness.it.
+ [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47fc892cc49sm5504101f8f.17.2026.07.30.04.32.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jul 2026 04:32:16 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 30 Jul 2026 13:32:15 +0200
+Message-Id: <DKBVFCI80GJC.1MHZF0Q3E55VX@baylibre.com>
+To: "Julien Stephan" <jstephan@baylibre.com>, "Carlo Caione"
+ <ccaione@baylibre.com>
+From: "Carlo Caione" <ccaione@baylibre.com>
+Subject: Re: [PATCH v2 4/4] doc: board: mediatek: document Genio 700 SPL boot
+Cc: "GSS_MTK_Uboot_upstream" <GSS_MTK_Uboot_upstream@mediatek.com>,
+ <u-boot@lists.u-boot-project.org>, "Ryder Lee" <ryder.lee@mediatek.com>,
+ "Weijie Gao" <weijie.gao@mediatek.com>, "Chunfeng Yun"
+ <chunfeng.yun@mediatek.com>, "Igor Belwon"
+ <igor.belwon@mentallysanemainliners.org>, "David Lechner"
+ <dlechner@baylibre.com>, "Vitor Sato Eschholz" <vsatoes@baylibre.com>,
+ "Macpaul Lin" <Macpaul.Lin@mediatek.com>, "Tom Rini" <trini@konsulko.com>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, "Julien Masson"
+ <jmasson@baylibre.com>, "Johan Jonker" <jbx6244@gmail.com>, "Quentin
+ Schulz" <u-boot@0leil.net>, "Marek Vasut" <marek.vasut+renesas@mailbox.org>
+X-Mailer: aerc 0.21.0
+References: <20260722-ccaione-upstream-mt8390-spl-v2-0-7aa005345711@baylibre.com>
+ <20260722-ccaione-upstream-mt8390-spl-v2-4-7aa005345711@baylibre.com>
+ <CAEHHSvaVY4XB0v6qgopgdyJYNmJqDPMOexdEsFhd3Dztr21CAQ@mail.gmail.com>
+In-Reply-To: <CAEHHSvaVY4XB0v6qgopgdyJYNmJqDPMOexdEsFhd3Dztr21CAQ@mail.gmail.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rasmusvillemoes.dk; 
- s=protonmail; t=1785408918; x=1785668118;
- bh=u+Wq4j1sla+6LvPde2UM1wpX06ongwLhV4urO9Dmb2c=;
- h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
- Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=UyNaTrSYw4owS7IlCQ7KmoTGLwgzWqbp08wR/OdeTqJ3/NKdFhyZ5pMrt5Z8wmqdh
- QQY9+eQLoRM0aqEDxv2X6pNYlXfv2288gPuHFOm0QqNO+ANEYKp3MMo1g1wAFoA8Sp
- nfiNXU12aX1KuhovgAq1GlZ/7mPwsJphGCKTPv5c5FopgjS4yiGiSmcRkkT8UejgqC
- uVmUuUOk3kzmGYs87+1mkyUCwMoXiuAhEVp0omgnmxZzVGyJRZ+EF/CJPLNe9S3gno
- C6ETz/qrum+F0a/S+iVL1BwL0Tri0MhrzmM+bNLGOrYs/rD2AJPT770iUlV3MSnv7x
- TzR+jHDUHmJPw==
+ d=baylibre.com; s=google; t=1785411137; x=1786015937;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=kjlMhlZMPpoTjd/4B0VHCGcul8fRsTonPS/GVnDtkCA=;
+ b=VDQ5ttofcp6/8f17hn8CA8e3TOJZCUWWuUbKKjuQQJJtChDnLLcj7HI5388O8YqoQn
+ NugOa1qMLEWoOKOF0XpDX1bUqyDb87jMuPUimu4va3RcRR5qsUz2d7Uqc2V8LF+o5Yd7
+ oWfS0nKZrNKMoBx29bWuhXEvMS3u6xpKrUc3XKcZZNs0RLjoAP9YQl81NFJ9+QwxHhMc
+ IxC3JF1a0xyQhPjhpjxx1mN8H+YsNjReIDyxWxAVL0tE+4CfNbQ0YNTUyR566U4Wyrjt
+ DKwpqApJRNqxW75D6Ud3Thm/k4HKwfh36bputKELziJebVVmz3iXvCaNexN4wdrIVe/x
+ rmVQ==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=rasmusvillemoes.dk
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk
- header.a=rsa-sha256 header.s=protonmail header.b=UyNaTrSY
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=VDQ5ttof
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -96,116 +143,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-As the comment indicates, this was used to silence a warning without
-having to add casts everywhere gd->cyclic_list was referenced. But
-nowadays gd is not volatile qualified, so this helper is not needed
-and only obfuscates the code somewhat, because the head of the list
-being operated on with the hlist_ or list_ macros is usually not
-obtained via a function call.
+On Tue Jul 28, 2026 at 6:13 PM CEST, Julien Stephan wrote:
+> Le mer. 22 juil. 2026 =C3=A0 23:36, Carlo Caione <ccaione@baylibre.com> a=
+ =C3=A9crit :
+>>
+>> Document the normal eMMC boot chain, external firmware prerequisites,
+>> binman build invocation and generated images.
+>>
+>> Also describe storage mapping, handoff details, verification steps, and
+>> current security and recovery limitations.
+>>
+>> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+>
+> Hi Carlo,
 
-Remove the helper and refer to the list head using the idiomatic
-&gd->cyclic_list.
+Hey Julien,
 
-Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
----
- cmd/cyclic.c     |  5 ++++-
- common/cyclic.c  | 14 ++++----------
- include/cyclic.h |  9 ---------
- 3 files changed, 8 insertions(+), 20 deletions(-)
+> Thank you very much for starting this doc.
+> This was already requested few months ago  [1]. MediaTek, wanted to
+> handle this internally. Did you sync with them?
 
-diff --git a/cmd/cyclic.c b/cmd/cyclic.c
-index 339dd4a7bce..880cd648aae 100644
---- a/cmd/cyclic.c
-+++ b/cmd/cyclic.c
-@@ -16,6 +16,9 @@
- #include <vsprintf.h>
- #include <linux/delay.h>
- #include <linux/kernel.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
- 
- struct cyclic_demo_info {
- 	struct cyclic_info cyclic;
-@@ -64,7 +67,7 @@ static int do_cyclic_list(struct cmd_tbl *cmdtp, int flag, int argc,
- 	struct hlist_node *tmp;
- 	u64 cnt, freq;
- 
--	hlist_for_each_entry_safe(cyclic, tmp, cyclic_get_list(), list) {
-+	hlist_for_each_entry_safe(cyclic, tmp, &gd->cyclic_list, list) {
- 		cnt = cyclic->run_cnt * 1000000ULL * 100ULL;
- 		freq = lldiv(cnt, timer_get_us() - cyclic->start_time_us);
- 		printf("function: %s, cpu-time: %lld us, frequency: %lld.%02d times/s\n",
-diff --git a/common/cyclic.c b/common/cyclic.c
-index 573e715587d..2bc3c773f27 100644
---- a/common/cyclic.c
-+++ b/common/cyclic.c
-@@ -22,17 +22,11 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- void hw_watchdog_reset(void);
- 
--struct hlist_head *cyclic_get_list(void)
--{
--	/* Silence "discards 'volatile' qualifier" warning. */
--	return (struct hlist_head *)&gd->cyclic_list;
--}
--
- static bool cyclic_is_registered(const struct cyclic_info *cyclic)
- {
- 	const struct cyclic_info *c;
- 
--	hlist_for_each_entry(c, cyclic_get_list(), list) {
-+	hlist_for_each_entry(c, &gd->cyclic_list, list) {
- 		if (c == cyclic)
- 			return true;
- 	}
-@@ -52,7 +46,7 @@ void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
- 	cyclic->name = name;
- 	cyclic->delay_us = delay_us;
- 	cyclic->start_time_us = get_timer_us(0);
--	hlist_add_head(&cyclic->list, cyclic_get_list());
-+	hlist_add_head(&cyclic->list, &gd->cyclic_list);
- }
- 
- void cyclic_unregister(struct cyclic_info *cyclic)
-@@ -75,7 +69,7 @@ static void cyclic_run(void)
- 
- 	gd->flags |= GD_FLG_CYCLIC_RUNNING;
- 	now = get_timer_us(0);
--	hlist_for_each_entry_safe(cyclic, tmp, cyclic_get_list(), list) {
-+	hlist_for_each_entry_safe(cyclic, tmp, &gd->cyclic_list, list) {
- 		/*
- 		 * Check if this cyclic function needs to get called, e.g.
- 		 * do not call the cyclic func too often
-@@ -129,7 +123,7 @@ int cyclic_unregister_all(void)
- 	struct cyclic_info *cyclic;
- 	struct hlist_node *tmp;
- 
--	hlist_for_each_entry_safe(cyclic, tmp, cyclic_get_list(), list)
-+	hlist_for_each_entry_safe(cyclic, tmp, &gd->cyclic_list, list)
- 		cyclic_unregister(cyclic);
- 
- 	return 0;
-diff --git a/include/cyclic.h b/include/cyclic.h
-index df8b725e3d0..ec2c53b6ecf 100644
---- a/include/cyclic.h
-+++ b/include/cyclic.h
-@@ -78,15 +78,6 @@ void cyclic_unregister(struct cyclic_info *cyclic);
-  */
- int cyclic_unregister_all(void);
- 
--/**
-- * cyclic_get_list() - Get cyclic list pointer
-- *
-- * Return the cyclic list pointer
-- *
-- * @return: pointer to cyclic_list
-- */
--struct hlist_head *cyclic_get_list(void);
--
- #else
- 
- static inline void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
--- 
-2.55.0
+Oh TIL. No, I didn't sync explicitly on this point but that thread is
+several months old and nothing was done about that so I think we can add
+a bit of documentation, we can revise it later if needed or if MediaTek
+wants to chime in (in CC).
 
+> Also a lot of stuff in this documentation is quite generic, maybe it
+> worth refactoring a bit to share it with other Genio EVKs?
+
+That is unfortunatel not exactly true. We are currently relying
+on an ABI contract between the loader and the SPL that is not yet
+standardized (I'll document it in the next revision).
+
+There is a conversation going on with several parties involved about
+this but this is still pretty much WIP. So also in this case I prefer
+to keep this contained for G510 and G700, we can revisit this once the
+contract has been formalized and extended to all the Gevio platforms.
+
+Cheers,
+
+--
+Carlo Caione
