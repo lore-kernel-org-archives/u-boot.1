@@ -1,172 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09873C55162
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 15:19:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B54BC55162
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 15:21:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9E73440BB9;
-	Thu, 30 Jul 2026 15:19:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0581B608B7;
+	Thu, 30 Jul 2026 15:21:56 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9vuxmp41mABR; Thu, 30 Jul 2026 15:21:54 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DFC44608B1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785424914;
+	bh=3FEz9KAXwXSV0DubdjMTh9RowUCVMIHhMZdC//NuVWY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Ye9xqqIQMpTethyYmEXh/uhCVUSHbBdWnQLIJ4r9qMdZU9QXLJEGcKkr43YVW50zA
+	 BLgYCRJ5Qn/Xr6BHQw+2HHYpKbl0opNIyiupk2ZIayZyMvtcHTdMGMOH6rA98o7une
+	 WNOnohH/pQopqnEPj8T6sza6no+zk+q28AFLOXn3WEXroLNbnFySCzAZVmc4gDGrbI
+	 LvAX7nhaWI8C2gilUtIjelccKsVPJ4/BKf2t2A5x6yrUf8SEBjaLgB4veeGbzNDgDC
+	 uAQn3YBT1yoRm1H0Qzjxy2z48WmI52A7LUk7befZSaiHxXSBmWMMhe/sMC+RxE5nKA
+	 uRhBuUe4ts/Lw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id DFC44608B1;
+	Thu, 30 Jul 2026 15:21:53 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D83EB2CE
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:21:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id BDBEA408CA
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:21:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uG1LTadQh5yQ; Thu, 30 Jul 2026 15:19:13 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CEBE840AED
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785424752;
-	bh=8uvB14JUJalgFoNT/liY6UkpxdnO0xsIZ+JZRzQP/8I=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=T2kcrT3bt4KCUD+6/+f8Lkg6ZhmmfJZ+JS2CAvsgC22hFGKy0/3L1e9H5TEV2oYRG
-	 ZDENGMPDrsa2BLvNaOkpnZbOFAyozbv/0fajhL3w3huKb493/+9UZ/XMhNtCE7nGpY
-	 hBWCc6OI4Ue/KuDO26rq68+yiH+oz06LU1EhRp/MEopOKiqo6i0ZJO29h50x0Cq+yN
-	 qejSD0tkP9qlZB7vrb5YZ3TZS0mI/H5OJPE/cKVpUWA0Nox+c1Gsv+nX1wblzY5Y8O
-	 LXB9h7xt/5RRLJOikqtNvIMsiy3Xd44K9/10AXAFY8FmhfQq7siMptf2OKmIJETRIn
-	 OIXQuG6I8AG4w==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CEBE840AED;
-	Thu, 30 Jul 2026 15:19:12 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 237432CE
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:19:11 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 14F3A80FF5
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:19:11 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 66b7cFppXd4P for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 15:19:10 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D890380FB2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D890380FB2
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D890380FB2
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:19:09 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Incb9OaX13YmS5Mr4bs9W7O38YxPvXNvYxLFIXxqQRatCSgBKpt/D0HQjDGwrO7zL4aYS6x6/HylEHJGsTXM5wlkYs9WABZKON9MXCFr/rhzEs1Rq1eR1ymY/xevaoXofiNE3Z846G40+wfCsZhmJ1No1WZQEVClyHJT55O+SeHw52A1zfmAJLx3JNCjX5BslevgE64Xnb3ICkEHyM9ch1tW9qirzokEHQshE3WYVThsaAS82JQlvrpjHhMCnH7nkSyu6b4Ei3tWbDbOW6KFjmJ/0h41a++mSBSsSVpTpIcsqgWWdKFkL7Iw2w9AGnDw1alvmta1NOoDYAPAhlWuRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8uvB14JUJalgFoNT/liY6UkpxdnO0xsIZ+JZRzQP/8I=;
- b=WG//9p2POykC/Hbi/AtakjvS+01dBiR+4QlhyRnE/f8cwwJRfwzgQnrT6Os49EZwL/9WthAOCyDAOiMC/BSYu5yqqMPp1NBPY0XmFqoJDD5Eg7juojZHcWmarEdnDvBzzVBPQmcXTojWctBSboD/D/O9FHFio10vfU39WO+wx+3rfnquoKTX57iDYpEriyygVPuNOdK1HiwCXRuN2KVHuPRXOkH1gA3p5yrIoLZx0mM355rDM5snaTym4PbKqy/5zomNqPWn8yPn78HFGxzCuYgD2zosnlExzjh0+vc5CW5aZdjSqoO6VMX1TYl0aBUfEYhnCxGe8Aspb5+r6R+lRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by GV2PR04MB11562.eurprd04.prod.outlook.com (2603:10a6:150:2c8::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.12; Thu, 30 Jul
- 2026 15:19:02 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0270.012; Thu, 30 Jul 2026
- 15:19:02 +0000
-Message-ID: <efa0739a-eeee-4e30-97cb-a54c034e7744@cherry.de>
-Date: Thu, 30 Jul 2026 17:19:01 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3576: Disable force_jtag by default
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-References: <20260730123001.1211166-1-jonas@kwiboo.se>
- <dd4b848e-6007-4299-8889-56f020c7eb80@cherry.de>
- <62593683-5bb0-4e14-80eb-08239867ee88@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <62593683-5bb0-4e14-80eb-08239867ee88@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM0P309CA0005.EURP309.PROD.OUTLOOK.COM
- (2603:10a6:20b:28f::26) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ id WUXTlexAtmo4 for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 15:21:50 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
+ helo=sender4-op-o12.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 01B6640657
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 01B6640657
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 01B6640657
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:21:49 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1785424895; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=F2z7sPb7a/Pfj4jjK3bYIldxeJmcDrUXxi82I0OiaZ5PEXzVTXtw9tnbVuZpR5RvqSwkcqvaCWP3xwbSVHwqWUpzghn40ogSPvoRdrdnEZ7Mws0VPptE/Ek3Kcsitu17OC9dqFUKg4ELsTU9zAZpFbglSqqGSDvMRhyhiJBcEyE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1785424895;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=3FEz9KAXwXSV0DubdjMTh9RowUCVMIHhMZdC//NuVWY=; 
+ b=Ui3V3VbNAfvKlH9DHk+PEWF3w/IrOV14ewcaOAOsIK7cSapq4/GOTvLwBb2Sv/AToMSVtL0GEZX2L/aN27u8LumvdCCUX6LTVjBULfImA5dvdRxAe3cTcS/UU9hPzkhl+yWXym6UtgQNUPpGY+rQgZ/aH1k5ha/OmusuQBrY7SU=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+Received: by mx.zohomail.com with SMTPS id 1785424892972784.1568140941549;
+ Thu, 30 Jul 2026 08:21:32 -0700 (PDT)
+Date: Thu, 30 Jul 2026 15:20:52 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
+Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
+ Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>,
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Guodong Xu <guodong@riscstar.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+Subject: Re: [PATCH v6 09/11] doc: spacemit: flash on K1 SoC based boards
+Message-ID: <amtr1G8oFZ9J64Uo@pie>
+References: <20260727-m4-v6-0-2f58566d48ca@riscstar.com>
+ <20260727-m4-v6-9-2f58566d48ca@riscstar.com> <ameUvEoCHjeygBEd@pie>
+ <CAH22mJy8_gd2V_DFUT0DQYiBSO6B3u5aX-V=uD20v0G+m1cArw@mail.gmail.com>
+ <amh6JjTtUhi57H-b@pie>
+ <CAH22mJwL+Op+99iBTePTkdGfArRy_inFRXm=DJjG-jJ=sYEi2g@mail.gmail.com>
+ <amoc8umyQwc6UmXl@pie>
+ <CAH22mJzjH2d6bd+HQhhkCiOYSr9cqYFZDCpB7zECaFPMZHBdVQ@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|GV2PR04MB11562:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8b6029b0-3a1c-4907-0e3c-08deee4de2e0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|23010399003|11063799006|56012099006|4143699003|10067099003|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info: IOyoDAqAF0PDw1prFTdKDn+HIRB88E7vSzGboS8dcRZvMa8jNShcqQCyuHB83KygYgoEsZQm4UJ6ad7ofcPz/+UxH0LFX2v8vMloM9s2RSU5tAFYvPrDS3fYLFLhvkUAuYDnCaGr5oiYsxfmif7tlqfPXaeOQ6TxLFJ87X/F00HLkHSQaWrh3bkM3aMHKDktMwtRqAGfWhFDa9yl6eqlFhFOdxwMEke6pJ8wFIvRh7JoX2+JkjVnuPYvm7n833SC9dyUkEUMpTsdAszWe6HMkK1zCAwwW8QQ+DvRKfqsGJ+ZqEOoWttCjGqtg+9sYKO/Xux2utmR/CFQOTH63SYkKu/52d/a4ZZ9dJKX2p0kwlc1ryZ0ngMtIlFj6cTDEOUdvpfyFSddqJyXljpK4yNno/X6/xl/NnmGaUOh8jAru7DlHCWQjBlKm3LgJOmJjDf/SK5YQ8Ew9a8acVjkHIH5LF+2uQhi8t5gtUtjpxhfGlSSOJh8MPilULIPIWTIxpxXAW6vOwOjzhjnJhTWWZi38S4TRY7pKesvfgy/TGRp2bVxHHPT7oHHZo9H0H47poCd1yf/SCIC6idCu/+1knWKbBv3AeGU0oIdY+6V6YcbQ5Sq/rXYHgrT9n5inrddfJVA61BEK9/tJQF01H8A4sWfow==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(11063799006)(56012099006)(4143699003)(10067099003)(18002099003)(22082099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1RVUW5TbnIreWIzOVN0cFRXTk9ZYUErOU1XMnhZclR0TzdwY1lXRmVlYW1I?=
- =?utf-8?B?b2dsb3QxQ0JKNm5ndGlQV2I3SVNwL0U2YWxSTEw1Z3gxL2YxVDJMaFVPa2NK?=
- =?utf-8?B?bHhEUlZzNStvSm5ub3B1ejJ2bGU2aHVOOEhiZlpKaHFIbk9EVGRCeUNvS21X?=
- =?utf-8?B?VVZzZXZlR1pkd3BSazdKUnhKdHBJSDQ4YzV0QnlILzZWK1o3VytVWHBBbHI0?=
- =?utf-8?B?YWhnZ3ErUlp3Vm1uU1hnQmhFYXduL2ltMVZvVmtYSFNoSjUyWTVkcUlCNHlR?=
- =?utf-8?B?RjJLRHFlU2ZzU0lyeTZTM3hrNWZaZHFFaXJuNmxtNXlhODhINzFFZnc2My9y?=
- =?utf-8?B?SDZSKzdvOUg4TEZscHNJWThrcDgrRDQvcTNiM0ptNDZTcFFzbFFxZldMR3NC?=
- =?utf-8?B?bkJFODY0YUxLUXpYcEV1akhMcmxSZTJMdWFZVVp1TkxDRnJqYklOVmtXcXV5?=
- =?utf-8?B?WUFicXM1MEV4QlFManJmcHNpVFdESEhpZVRaSi84QTJBcFZBazNPMC9PRWZK?=
- =?utf-8?B?Y1Y3dzdHRXJWWWJIc05NZEVROXQzcTdHam5IR1Nzcjk0QXhOYVozYUFWYXBn?=
- =?utf-8?B?OWpyVVdSMnRadTdodXcxQmRNK1hxNGVFNFZaUkZCN3BCa24xUjJsTzJZb05L?=
- =?utf-8?B?ay9DQkEzeTQrL290Q3U3aEF6T3ArbGd0bnJMQ1d4TFd1SzZ5ME04eitkRlJI?=
- =?utf-8?B?ZW55V1Q1bTdWcksvMHJpdHpaL24zMWNrN2NaSVdRU2taUXVTMmtmYjRNZGFN?=
- =?utf-8?B?bUJ4Wm9NdGhSZ2lyRGt0eHR5eml2bnJOVWFVN1RocFZySUNOYkpGQnFmOWdV?=
- =?utf-8?B?ZTZucUNpa2ltMWUrNXE1ckN3MGlXSXBnTEJiQXhoTVpYZXFjY0hKTHFYWU1J?=
- =?utf-8?B?ZE1vVWkxZ202Q01yOTJ3U2s3TGhic3JOQ2ZGbyszQjlHMmwraWViSVpuN05s?=
- =?utf-8?B?NFZmU3JJZVpHK1I1UncvaUdpTjlVdTNYUlhiY0FCR2FrYkkzYW1tanB4QWh1?=
- =?utf-8?B?NmhHT3luc004cGE3RDN1RnZVN1hhcFdZU0dGcTJjSlBJUkZiK1UvMW5VN0dN?=
- =?utf-8?B?dWgwemVlYlFXaWt1Z1o2ZnF1NHZYdkpUZ1RnNUh6WHpaOWIvMEk4STR3Q1gw?=
- =?utf-8?B?TmQ0cVFnWDF6U0NGakxBNTRnQmJadndwcmZjTDB0cGt6NU1zbUJaQ3VFd0wr?=
- =?utf-8?B?clk2RFRmRThzVGxNQ2RUNXZJQzJsWkVXS3haKzFqYWRCTEdmZTdRbFI1TkZh?=
- =?utf-8?B?Ujd6N2FwRklXYlNrSXlkS2k0YVNjWVZ2bGdzUGgzRFNTdHgvYXNyb2l4T3o3?=
- =?utf-8?B?Q2FnM1pIckZZaVR5TmhiVU14bXR1b2pSajdHTkNvb2NsNWI0cERUR3U3Z2NN?=
- =?utf-8?B?VnMrT0luQVVtNTFWMkp6a1lWbTlTTnd1T29tVkZjT3AyNDBnQWZCaHZmWVNJ?=
- =?utf-8?B?anFWZUNzSjNKM2lhemR3V05Gcnlia2lhdjVkLysyR1FwTzZ2eWRlR1JBeUU4?=
- =?utf-8?B?Z1ZKUXNyNm15SlZyUVBueWtXZGFGdkNRY0hqYy9vUURsRTRxd1lVL1JKODcw?=
- =?utf-8?B?amFnOWxVS1BFRTFoYkdUYnAwb3QydDN1dmtEY1BYMGZvaXVvSytDRURyZ1Q5?=
- =?utf-8?B?WkEyRm5wV1JoY1NyZ0M0U0oyK2VYNTdlQUNFNHRQdmxrYjkxcjZmOUpTNjJH?=
- =?utf-8?B?Ym94dTRwN1pIdFR6a2h6ZENXYjQ0WnBncEJSZzVVb3N6Nk1ZK29NMkFPQ0lN?=
- =?utf-8?B?TzNwTHIweHpZaG5MWUUxWVU4TFhhNnlSUStYOVFYUjNoSFYrN0N3MXpQLzNF?=
- =?utf-8?B?RjdFNUJVRkFhNitWN1U3K0dWM2JkSTJnc1pUc2JJNnpXSjFIN1dmNllFNTdR?=
- =?utf-8?B?THZNdGVtTm1pRGpQaUNha3VUUXJCeS9ZOFB1ejgrdzdDNm54VllySDlYY3lP?=
- =?utf-8?B?NWtuUkg1dDB3cURPdDBDK3dmT3d0ajFEb2Q4MGFwZi9nWjdibzAxUjZ0N0Ex?=
- =?utf-8?B?bkVXZ3lXcHlUcmMvZDloWlhFVkovOHR4ejFHYVFFOHdzRXFyc285YXVtZlN5?=
- =?utf-8?B?NndZeEsvZnNEOW5zbjFzcXh1SElaOGE1b05jTVR3RERycXFNV3NyOVY3cVox?=
- =?utf-8?B?Z0xYeEpDS3VwL1RrMHljWGgydXpUUFB3d1dzbjJzTVJpSUhwcFpvZXFlbVpj?=
- =?utf-8?B?Ym5PUjNIK09BTHd1VXJoOU1UbTBaV3pnZzhScHliQ2ZaNmtWbzFMVjZrUGpH?=
- =?utf-8?B?VlNsSW42N3NFOFJqcFN3Y2J3TkJXc1R5R0EwckdHaXdHbGpPUUwvQ1lkUUxz?=
- =?utf-8?B?YklCTnVlZU1zNDVQOStsM0U4SXVjMU5IY0RlcVlwd0RBakYxSG10Zz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8b6029b0-3a1c-4907-0e3c-08deee4de2e0
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 15:19:02.1065 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CPjFE8+c4Euhl8gh0i0yV6/ihMQVQrH06LrCMyDYfrSG7FUXcPQ8QhmvEivVtC4zKJ/m6mfbIMhSd6RnHqUAr7XID3RVVoTUrofa600ErBc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11562
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8uvB14JUJalgFoNT/liY6UkpxdnO0xsIZ+JZRzQP/8I=;
- b=nrMSpyugN0m6Em0Gyx9ZIdX6Snobo+jUf4o5Wa4MrrcZx0BwybyV7WhmL95diOi9xYugRkyUOsO+TqaZBplPzEEfWW6sqJzT+1U9oF/sWSXtrWLwXHjiayf+/9Q5g5i0i9nwqgb/pXhLqxmspMc5NLsmN2jyp5vwbVqavhcCU7A=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAH22mJzjH2d6bd+HQhhkCiOYSr9cqYFZDCpB7zECaFPMZHBdVQ@mail.gmail.com>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/285.416.17
+X-ZohoMailClient: External
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; t=1785424895; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
+ bh=3FEz9KAXwXSV0DubdjMTh9RowUCVMIHhMZdC//NuVWY=;
+ b=O6EN+YAzu8juMPqmu8jlA1VwFvjb/5lz774HgSH4BWsGsVtjOAZAjkTOwYagMEXO
+ unEdYIH31fKWZnRDcfj0K5SwlpAie6/pcdgsr4MW76/jsxKMs6epbfInil01PNFXsxK
+ sKuXuMbBil1UNaTBJKdi7FLKTcdF+q3rm7ORRgBk=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ header.from=ziyao.cc
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=nrMSpyug
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=O6EN+YAz
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,88 +129,224 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Jonas,
-
-On 7/30/26 4:35 PM, Jonas Karlman wrote:
-> Hi Quentin,
+On Thu, Jul 30, 2026 at 02:25:31PM +0800, Eric Chung wrote:
+> On Wed, Jul 29, 2026 at 11:33 PM Yao Zi <me@ziyao.cc> wrote:
+> >
+> > On Wed, Jul 29, 2026 at 09:49:26PM +0800, Eric Chung wrote:
+> > > On Tue, Jul 28, 2026 at 5:45 PM Yao Zi <me@ziyao.cc> wrote:
+> > > >
+> > > > On Tue, Jul 28, 2026 at 08:53:02AM +0800, Eric Chung wrote:
+> > > > > On Tue, Jul 28, 2026 at 1:26 AM Yao Zi <me@ziyao.cc> wrote:
+> > > > > >
+> > > > > > On Mon, Jul 27, 2026 at 02:59:11PM +0800, Eric Chung wrote:
+> > > > > > > Add document on how to flash images into eMMC of K1 SoC based boards.
+> > > > > > >
+> > > > > > > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+> > > > > > >
+> > > > > > > ---
+> > > > > > > v3:
+> > > > > > > - Add document on how to flash images into SD card.
+> > > > > > > ---
+> > > > > > >  board/spacemit/k1/MAINTAINERS |   2 +-
+> > > > > > >  doc/board/spacemit/index.rst  |   1 +
+> > > > > > >  doc/board/spacemit/k1-mmc.rst | 320 ++++++++++++++++++++++++++++++++++++++++++
+> > > > > > >  3 files changed, 322 insertions(+), 1 deletion(-)
+> > > > > >
+> > > > > > ...
+> > > > > >
+> > > > > > > diff --git a/doc/board/spacemit/k1-mmc.rst b/doc/board/spacemit/k1-mmc.rst
+> > > > > > > new file mode 100644
+> > > > > > > index 00000000000..b0fe78c75ce
+> > > > > > > --- /dev/null
+> > > > > > > +++ b/doc/board/spacemit/k1-mmc.rst
+> > > > > > > @@ -0,0 +1,320 @@
+> > > > > >
+> > > > > > ...
+> > > > > >
+> > > > > > > +Chapter 2: SD Card Boot
+> > > > > > > +=======================
+> > > > > > > +
+> > > > > > > +
+> > > > > > > +SpacemiT K1 Bianbu SD Card Image Flashing and U-Boot Update Guide
+> > > > > > > +==================================================================
+> > > > > > > +
+> > > > > > > +This guide explains how to prepare a bootable SD card with Bianbu OS for
+> > > > > > > +SpacemiT K1 based boards and how to replace the U-Boot binary on the SD
+> > > > > > > +card with a custom build.
+> > > > > > > +
+> > > > > > > +Prerequisites
+> > > > > > > +~~~~~~~~~~~~~
+> > > > > > > +
+> > > > > > > +- A SpacemiT K1 based development board
+> > > > > > > +- A microSD card (at least 8 GB capacity recommended)
+> > > > > > > +- A card reader for your host computer
+> > > > > > > +- A Linux host system (for ``dd``, ``fdisk``, ``lsblk`` commands)
+> > > > > > > +- The Bianbu SD card image from
+> > > > > > > +   <https://spacemit.com/community/resources-download/Images%20Collects/K1/Bianbu>
+> > > > > > > +- A custom ``u-boot.itb`` file (device tree blob or U-Boot FIT image) to be
+> > > > > > > +  written to the U-Boot partition
+> > > > > > > +
+> > > > > > > +Prepare the SD Card & the image
+> > > > > > > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > +
+> > > > > > > +**1. Download the image**
+> > > > > > > +
+> > > > > > > +Download the released package from the official SpacemiT website:
+> > > > > > > +
+> > > > > > > +<https://archive.spacemit.com/image/k1/version/bianbu/v2.3.5/Bianbu-Minimal-K1-sdcard-V2.3.5-20260601180942.img.zip>
+> > > > > > > +
+> > > > > > > +**2. Extract the image**
+> > > > > > > +
+> > > > > > > +.. code-block:: console
+> > > > > > > +
+> > > > > > > +   $ unzip Bianbu-Minimal-K1-sdcard-V2.3.5-20260601180942.img.zip
+> > > > > > > +
+> > > > > > > +**3. Identify the SD card device**
+> > > > > > > +
+> > > > > > > +Insert the microSD card into your card reader, then run:
+> > > > > > > +
+> > > > > > > +.. code-block:: console
+> > > > > > > +
+> > > > > > > +   $ lsblk
+> > > > > > > +
+> > > > > > > +Compare the output before and after inserting the card to identify
+> > > > > > > +the new device. It will typically appear as ``/dev/sdb``, ``/dev/sdc``,
+> > > > > > > +or ``/dev/mmcblk0``.
+> > > > > > > +
+> > > > > > > +**4. Write the image to the SD card**
+> > > > > > > +
+> > > > > > > +.. code-block:: console
+> > > > > > > +
+> > > > > > > +   $ sudo dd if=./Bianbu-Minimal-K1-sdcard-V2.3.5-20260601180942.img of=/dev/sdb bs=1M status=progress
+> > > > > > > +
+> > > > > > > +The SD card is now ready as a bootable Bianbu system disk.
+> > > > > >
+> > > > > > This looks out of scope of describing how to create a bootable SD card
+> > > > > > with U-Boot. In my opinion, you'd better describe the requirements of
+> > > > > > parition layout and image position for SD-card booting, to allow readers
+> > > > > > to create their own images/bootable medium from scratch more easily,
+> > > > > > instead of sticking to the vendored image.
+> > > > > >
+> > > > >
+> > > > > Creating a bootable SD card from scratch would be valuable, but I'll address
+> > > > > it later due to time constraints.
+> > > >
+> > > > In case I didn't make myself clear enough, the documentation *SHOULD*
+> > > > describe how to create bootable devices from scratch, instead of
+> > > > alternating an existing OS image to use mainline U-Boot. I don't think
+> > > > the current documentation helps much for downstream users/distributions
+> > > > to adapt U-Boot for their own use cases, or at least it could be written
+> > > > in a much more clear, vendor-neutral way.
+> > > >
+> > > > So here's my NAK for this patch. I'm not sure what you mean by "time
+> > > > constraints", but please keep submitted patches in a good shape.
+> > > >
+> >
+> > In case that I still didn't make myself clear enough, by "bootable SD
+> > card", I mean a minimal medium with only a bootable U-Boot, you could
+> > refer to Rockchip or StarFive's documentation.
+> >
 > 
-> On 7/30/2026 4:17 PM, Quentin Schulz wrote:
->> Hi Jonas,
->>
->> On 7/30/26 2:30 PM, Jonas Karlman wrote:
->>> Rockchip SoCs can automatically switch between jtag and sdmmc based on
->>> the following rules:
->>> - all the SDMMC pins including SDMMC_DET set as SDMMC function in GRF,
->>> - force_jtag bit in GRF is 1,
->>> - SDMMC_DET is low (no card detected),
->>>
->>> Note that the BootROM may mux all SDMMC pins in their SDMMC function or
->>> not, depending on the boot medium that were tried.
->>>
->>> Because SDMMC_DET pin is not guaranteed to be used as an SD card card
->>> detect pin, it could be low at boot or even switch at runtime, which
->>> would enable the jtag function and render the SD card unusable.
->>>
->>> Or boards using cd-gpios may switch the SDMMC_DET pin to GPIO function,
->>> which would enable the jtag function and render the SD card unusable.
->>>
->>> With commit d0a838bdc629 ("Subtree merge tag 'v7.1-dts' of dts repo [1]
->>> into dts/upstream") there are now RK3576 boards that have changed to use
->>> cd-gpios for the SDMMC_DET pin, e.g. NanoPi R76S, that may have issues
->>> detecting SD card unless force_jtag is disabled.
->>>
->>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>> ---
->>>    arch/arm/mach-rockchip/rk3576/rk3576.c | 7 +++++++
->>>    1 file changed, 7 insertions(+)
->>>
->>> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
->>> index e3e93f663959..0f41f210a9a5 100644
->>> --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
->>> +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
->>> @@ -26,6 +26,9 @@
->>>    #define SYS_SGRF_SOC_CON15	0x005C
->>>    #define SYS_SGRF_SOC_CON20	0x0070
->>>    
->>> +#define TOP_IOC_BASE		0x26044000
->>> +#define IOC_MISC_CON		0x00F0
->>> +
->>>    #define FW_PMU1SGRF_BASE	0x26003000
->>>    #define PMU1SGRF_SLV_LOOKUP0	0x80
->>>    
->>> @@ -190,6 +193,10 @@ int arch_cpu_init(void)
->>>    	 */
->>>    	writel(0xffffff00, SYS_SGRF_BASE + SYS_SGRF_SOC_CON20);
->>>    
->>> +	/* Disable JTAG exposed on SDMMC pins (GPIO2A2 and GPIO2A3) */
->>> +	if (IS_ENABLED(CONFIG_ROCKCHIP_DISABLE_FORCE_JTAG))
->>> +		writel(0x00020000, TOP_IOC_BASE + IOC_MISC_CON);
->>> +
->>
->> Please:
->> - use a constant (e.g. #define TOP_IOC_FORCE_JTAG BIT(1))
->> - use rk_clrreg(TOP_IOC_BASE + IOC_MISC_CON, TOP_IOC_FORCE_JTAG)
->>
->> It'd be nice to be consistent here and do the same for other writel all
->> over arch/arm/mach-rockchip/ but that's a different kind of task :)
-> 
-> I know we are inconsistent across multiple SoCs, however in rk3576 we
-> are exclusivity using writel() so I decided to continue to use writel()
-> for this change for consistency with surrounding code, and therefore
-> disagree with your suggested changes :-)
-> 
-> In my opinion mixed used of both writel() and rk_reg() funcs are worse
-> than a consistent use of writel() within same file and function.
-> 
+> I checked Rockchip or StarFive's documentation. And I can't find any mention of
+> creating a bootable SD card.
 
-I understand but this here is quite misleading as it could be understood 
-as "you need to write bit 16 to disable JTAG" which is technically 
-correct, but only because bit 1 is 0 and that is the one that actually 
-matters.
+Please grep SD in doc/rockchip/rockchip.rst. For StarFive, it seems
+the process of creating bootable SDcards has been removed a little
+earlier, but in section "Zero Stage BootLoader" of
+doc/starfive/jh7110_common.rst, the BROM's behavior is still described.
 
-Can we maybe compromise on using
-writel(RK_CLRBITS(TOP_IOC_FORCE_JTAG), TOP_IOC_BASE + IOC_MISC_CON)
-?
+> > > I’m not sure why the documentation insists on walking users through creating a
+> > > bootable SD card from scratch, especially when, at this stage, it
+> > > still depends on
+> > > the vendor’s tools.
+> >
+> > Please explain which tools it depends on. Now U-Boot for your platform
+> > already has its SPL ported, and according to your instructions of
+> > replacing the vendor U-Boot, it seems no extra post-processing is
+> > required for the SoC to identify it.
+> 
+> The flashing process must begin with a USB transfer. The vendor's
+> proprietary tool is required to download the images to the target
+> device. To maintain compatibility with this tool, I need to use the
+> same partition table that it expects.
 
-Cheers,
-Quentin
+So please make it clear whether the proprietary tool is required for
+creating SD-card images, or it's only required for downloading the image
+to the SD card. The latter seems impossible since you described how to
+flash an image to SD with dd in this documentation.
+
+I'm really confused with your description.
+
+> Currently, the SPL (Secondary Program Loader) only boots U-Boot; it
+> has no other function in the boot flow.
+> 
+> >
+> > And after re-reading the documentation, it seems you don't make use of
+> > the upstream SPL when creating the SD-card image, is this intended, and
+> > why?
+> >
+> 
+> Oh, I missed it. I need to append SPL part.
+> 
+> > > In practice, we’re required to use the vendor’s
+> > > flashing tool for
+> > > both eMMC and SD devices,
+> >
+> > Please explain the constraints, it's okay to depend on vendor's tools,
+> > but for creating a SD-card image, I couldn't come up with a reason to
+> > do so, at least by inferring from the current documentation.
+> >
+> 
+> I’m required to use the vendor’s flashing tool, flashserver, for
+> programming SD card images — mainly because it’s the only way I can
+> properly program the RPMB partition.
+
+But you don't do so in the documentation, dd is used. This wouldn't
+program the RPMB partition AFAIK. And does it mean that K1 requires a
+SDcard with RPMB support to boot? This doesn't match my experience with
+the platform.
+
+> The tool supports both eMMC and SD boot modes, and environment
+> variables (ENV) can be stored on either medium. However, it would be
+> unusual to boot from an SD card while loading the ENV from eMMC.
+> Therefore, the simplest and most consistent approach is to keep the
+> same partition layout across all critical components — including FSBL,
+> ENV, and OpenSBI partitions — regardless of the boot medium.
+> 
+> > > and we must adhere to the provided partition table.
+> >
+> > Thus please clearly describe which part of the partition table must be
+> > preserved for the SoC to boot.
+> >
+> 
+> Mentioned above.
+
+Please quote the text, you do provide an example partition table, but
+there's no note describing which partitions are mandatory, and whether
+their offsets could be changed.
+
+If a user could only create their own SDcard images by trial and error,
+this documentation loses its purpose. Please describe what is mandatory,
+or only describe the mandatory parts like Rockchip's documentation.
+
+> > > If users prefer to define their own partition layout, nothing prevents
+> > > them from doing
+> > > so on their own. That’s entirely up to them.
+> > >
+> > > The default SD image already includes the vendor’s U-Boot. My
+> > > instructions simply
+> > > explain how to replace it with the upstream version—nothing more.
+> >
+> > Best regards,
+> > Yao Zi
+
+Frankly, I'm really tired of this discussion, I don't think you
+understand much of my questions, even though I tried to explain myself
+once and once again. And your replies are self-contradictory.
+
+Please make sure you understand my questions and reply with reasonable
+answers. I wouldn't continue to review your patches before you resolve
+questions in this thread.
+
+Best regards,
+Yao Zi
