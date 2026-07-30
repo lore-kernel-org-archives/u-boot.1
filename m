@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08BECC55162
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 14:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78CACC55165
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 14:13:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B982E810E6;
-	Thu, 30 Jul 2026 14:13:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3F55481107;
+	Thu, 30 Jul 2026 14:13:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KT79AOMNNVye; Thu, 30 Jul 2026 14:13:35 +0000 (UTC)
+ id xV9WpQhQfJoD; Thu, 30 Jul 2026 14:13:38 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B662780FFD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7B7CE81109
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785420815;
-	bh=iuvQ04+I1h5xzkYG72E9COxnAP59rkEHl45vVbXCevs=;
+	d=lists.u-boot-project.org ; s=default; t=1785420818;
+	bh=iwHmtUIp8xfvpUgWGNK6I+/PgXDCU1fRSL/2HXhlwaU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xygFGT72O7AbdEFSy1uIlObB1c3a0O8tDJV2+UdLcSICbA2Mns1iZ6THl+CC59Dwx
-	 SdNzezhJAKYf6iiQ7jtQpKD2T8DjQtuuWpINDRSid5LCfTdDz3u8rSkF2w6iN1fj9m
-	 Yz6rGQ4vZmFqZDbPP7S3LxiRaBNd21F4k3+9JqZVCwCCjzbBBqjalDZtRRfiEGysg7
-	 HiY+kS0nQVAbjPJ0MAbgFTNCkRUWeWsNB0Jcd7z6q0KQ+n8f6SOhP+V3YdSHIrScjr
-	 Pe8/pPajZLA/QsCY2T1UTqboOUcDan3espxC2RFjqvoWNfh0UOv3xMwYcOPDvq5sIs
-	 G5V7hmPcIGamw==
+	b=txqmjyOW1blyHsIkEcTy+1n5ONjC6eRMdcIh7hWpM9e3+IJ9V9LNBRtzw334iYwGw
+	 1cw+nF79qavluCCKvis/dmFoRYiS3E1clvdWQlf1tQKT9awF/iQau1HtvzwztbKmjO
+	 4u1PG+cfyudmV6EAorpM1hY3DdXhfzLl3hQVC7uTVXYZfXMzQWUFUdyAYJsvC23Tmp
+	 Ftldt15kPL7KyEAsAZR7KBiE3VdUD2jFSgL0EbJxMhRwMsyGjZtZj8SSeNfj7lMLuQ
+	 uRm1CoA5aOAT5U36NwcPvXDzaasQvHBR+k+SNxhGzfx0NDKaqvkUiUH3WtWdGAbwXw
+	 KrvPxd4Zb75EQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B662780FFD;
-	Thu, 30 Jul 2026 14:13:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7B7CE81109;
+	Thu, 30 Jul 2026 14:13:38 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D8707352
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:13:29 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 6F57A352
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:13:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C332080FF2
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:13:29 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 672E3810C7
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:13:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id plngo7Yf7ACD for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 14:13:27 +0000 (UTC)
+ id 9u8IB09o-vj8 for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 14:13:32 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=f707=fz=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3E9EB81083
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3E9EB81083
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 49E9B810B8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 49E9B810B8
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3E9EB81083
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:13:27 +0000 (UTC)
-X-Forward-Email-ID: 6a6b5c04a254ae338c091716
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 49E9B810B8
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:13:32 +0000 (UTC)
+X-Forward-Email-ID: 6a6b5c09a254ae338c091787
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.12.3
@@ -65,10 +65,9 @@ To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 05/15] clk: rockchip: pll: Limit special rk3588_pll handling
- to RK3588
-Date: Thu, 30 Jul 2026 14:12:54 +0000
-Message-ID: <20260730141308.1218014-6-jonas@kwiboo.se>
+Subject: [PATCH 08/15] clk: rockchip: rk3588: Fix possible divide by zero
+Date: Thu, 30 Jul 2026 14:12:57 +0000
+Message-ID: <20260730141308.1218014-9-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260730141308.1218014-1-jonas@kwiboo.se>
 References: <20260730141308.1218014-1-jonas@kwiboo.se>
@@ -78,18 +77,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1785420806; bh=iuvQ04+I1h5xzkYG72E9COxnAP59rkEHl45vVbXCevs=;
- b=xuQYwVc/lTYhFyQjvQT4LHDjvoI9eETzMxyZKICrIER9B2HkrE1BwHOJN1IPVKWawxpVbmkbR
- FHqPPO3amntmoGLA/BDeh5DGwxkRxWPLd9eSjRIWhU4/wUZ1akjoTkbeNvtPXvSJulr6chG4hlC
- gcABDd1pQ//nXyha26CZQQMGdK29vKHB1zn8o1wSkifZXhRpbUos9/Ql2VHHna65R1jOUz6Oz9T
- fzlySeXIVCb4DBeelTsd992HlAkeOFgWkaNWU6Z90e/n7Dre5NGvCcJWQljJBvyg7iafj7pK+Cg
- nJ/fNh49A3aCrSkAVJUAhYGlgZxy0NEmotCBpjCPE+WA==
+ t=1785420811; bh=iwHmtUIp8xfvpUgWGNK6I+/PgXDCU1fRSL/2HXhlwaU=;
+ b=UUMzUecnIrqCNjIkDqFapYkR5G6xzO3KzxK1H/kqDmzchEFZ3IAZV1EbCC5DBcSet2/92UpE5
+ 8fMKZaRyKHU4FfLB+18sI/9uI2b6ssPaW3h8xshSlypWM3iqa8+HGfB2pUZ6TlkQW3Vkaue0eq0
+ ks5wnGjsYhp+N6p8dNfZlvFBuNiP3xjaorCfpaEp2+uht6ngCVqIlvAf6AJQgHTocbIPsRCP5Yc
+ Akkkir5R8/oQ5/xGg9SZJayu/xTCqTfcFJ1VURTK/11IvDgnWbY8SdkEEu/cAg+3UyQsJaK6TG5
+ 9f6euYOqB62kE1zmboLLAi7MxoSHF0DgNnn2nT5zmONg==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=xuQYwVc/
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=UUMzUecn
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -104,86 +103,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The rk3588_pll_set_rate() function contains special handling intended
-only for PLLs on RK3588 that are also applied to PLLs on RK3576.
-
-This special handling should ideally be moved from the common pll funcs
-into the clk_rk3588 driver. Add IS_ENABLED() guards as an initial step
-to limit this special handling to PLLs on RK3588 targets.
+The best rate handling of rk3588_dclk_vop_set_clk() may unintentionally
+trigger a divide by zero when V0PLL is tested as parent. Instead, fully
+skip rate calculation when testing using V0PLL as parent to avoid a
+divide by zero error.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/clk/rockchip/clk_pll.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ drivers/clk/rockchip/clk_rk3588.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index 5f035eb98adc..76276e1ac1f2 100644
---- a/drivers/clk/rockchip/clk_pll.c
-+++ b/drivers/clk/rockchip/clk_pll.c
-@@ -453,7 +453,7 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- 	 * When power on or changing PLL setting,
- 	 * we must force PLL into slow mode to ensure output stable clock.
- 	 */
--	if (pll_id == 3)
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 3)
- 		rk_clrsetreg(base + 0x84c, 0x1 << 1, 0x1 << 1);
- 
- 	if (!(pll->pll_flags & ROCKCHIP_PLL_FIXED_MODE)) {
-@@ -461,15 +461,15 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- 			     pll->mode_mask << pll->mode_shift,
- 			     RKCLK_PLL_MODE_SLOW << pll->mode_shift);
- 	}
--	if (pll_id == 0)
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 0)
- 		rk_clrsetreg(base + RK3588_B0PLL_CLKSEL_CON(0),
- 			     pll->mode_mask << 6,
- 			     RKCLK_PLL_MODE_SLOW << 6);
--	else if (pll_id == 1)
-+	else if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 1)
- 		rk_clrsetreg(base + RK3588_B1PLL_CLKSEL_CON(0),
- 			     pll->mode_mask << 6,
- 			     RKCLK_PLL_MODE_SLOW << 6);
--	else if (pll_id == 2)
-+	else if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 2)
- 		rk_clrsetreg(base + RK3588_LPLL_CLKSEL_CON(5),
- 			     pll->mode_mask << 14,
- 			     RKCLK_PLL_MODE_SLOW << 14);
-@@ -505,7 +505,7 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- 			     pll->mode_mask << pll->mode_shift,
- 			     RKCLK_PLL_MODE_NORMAL << pll->mode_shift);
- 	}
--	if (pll_id == 0) {
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 0) {
- 		rk_clrsetreg(base + RK3588_B0PLL_CLKSEL_CON(0),
- 			     pll->mode_mask << 6,
- 			     2 << 6);
-@@ -515,7 +515,7 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- 		rk_clrsetreg(base + RK3588_B0PLL_CLKSEL_CON(1),
- 			     RK3588_CORE_DIV_MASK << RK3588_CORE_B13_DIV_SHIFT,
- 			     0 << RK3588_CORE_B13_DIV_SHIFT);
--	} else if (pll_id == 1) {
-+	} else if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 1) {
- 		rk_clrsetreg(base + RK3588_B1PLL_CLKSEL_CON(0),
- 			     pll->mode_mask << 6,
- 			     2 << 6);
-@@ -525,7 +525,7 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- 		rk_clrsetreg(base + RK3588_B1PLL_CLKSEL_CON(1),
- 			     RK3588_CORE_DIV_MASK << RK3588_CORE_B13_DIV_SHIFT,
- 			     0 << RK3588_CORE_B13_DIV_SHIFT);
--	} else if (pll_id == 2) {
-+	} else if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 2) {
- 		rk_clrsetreg(base + RK3588_LPLL_CLKSEL_CON(5),
- 			     pll->mode_mask << 14,
- 			     2 << 14);
-@@ -543,7 +543,7 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- 			     0 << RK3588_CORE_L02_DIV_SHIFT);
- 	}
- 
--	if (pll_id == 3)
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588) && pll_id == 3)
- 		rk_clrsetreg(base + 0x84c, 0x1 << 1, 0);
- 
- 	debug("PLL at %p: con0=%x con1= %x con2= %x mode= %x\n",
+diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+index 157a02e011a5..d03ca9c4ac8d 100644
+--- a/drivers/clk/rockchip/clk_rk3588.c
++++ b/drivers/clk/rockchip/clk_rk3588.c
+@@ -1165,8 +1165,8 @@ static ulong rk3588_dclk_vop_set_clk(struct rk3588_clk_priv *priv,
+ 				pll_rate = priv->aupll_hz;
+ 				break;
+ 			case DCLK_VOP_SRC_SEL_V0PLL:
+-				pll_rate = 0;
+-				break;
++				/* Skip V0PLL as parent for best_rate mode */
++				continue;
+ 			default:
+ 				printf("do not support this vop pll sel\n");
+ 				return -EINVAL;
 -- 
 2.54.0
 
