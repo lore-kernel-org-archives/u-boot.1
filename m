@@ -4,92 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41C2DC55164
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 15:54:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5440C55162
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 16:06:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E4E9F80E0E;
-	Thu, 30 Jul 2026 15:54:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6750F80F90;
+	Thu, 30 Jul 2026 16:06:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3kZHNAs7-P1q; Thu, 30 Jul 2026 15:54:45 +0000 (UTC)
+ id 3BeRRetw6B48; Thu, 30 Jul 2026 16:06:17 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 15BFF80D06
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9109E80F9E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785426885;
-	bh=jvJ33JUvxojqNWFQfXGlZ8Dvns5Er1PBFbeuFfKPOUE=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=przZkrpBzs9tzir3UF6m2fv6/YFcM0h9FDYGCX0yzqw61QtzmgfwjPE9UZ3uk8m+V
-	 vGv+CKpCajEVnOZ6MCj/EYFdFjV6NC7Ylzjfs1T83didgV8LPH1XKtt2PmMy2fmud+
-	 /GX4ySrOmwVDIkxzrcPcuWxNuqlXQtj8hQbmrYSOEkP5gJOICJP7gyn8CbXZuMdVLY
-	 aAICCauuyh0gBoNtuQWX4YFk41k6xWx0fWs5T8O9s18zPQUqZ0QNVa6G6hBZHL3kbH
-	 ZZCzFN0Dg0BnZj0MRNC6Gvpp1zj2KZtKn/kji1ZUHr8SWIds+CaSo9pztAeEWQ+4J2
-	 XHzM+QwGDTd+g==
+	d=lists.u-boot-project.org ; s=default; t=1785427577;
+	bh=pMb5AVz5oL12r/1TSPPXK+LoAH9deSEtCjw5Thpa7sg=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=a34eVY+yVrs6ELe/4pJLDN+Iv7CwzhsSIntwgijLFX8OOxoz2y6Kl9r0Loixqqq+X
+	 vMWPOLaIhEYU761UtAyyQ468+M7yZG8jzC0Ajweh4l66zQhw+z3cAv2RPmd+lRylVB
+	 zPFExMxmvh4yMKjDZ0+MVtojNeO1vhU8cM4JfTEOXsD0pa/w2FGvW2/bGFp4b0TWVm
+	 xFEtpL3CF9oEXKEuubMTDRmbcbdyKevYq55wx32K4ONdI+cS0/IaQtU3Fbj0Pl5Y5t
+	 w+CLvfSR+JSn8nCk7VbHaql9uyM5E7N23RSXzN9m3RGEqqFZbNwr4m8x8+lAVzDyzm
+	 Akp24JbImYhYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 15BFF80D06;
-	Thu, 30 Jul 2026 15:54:45 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8022C69
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:54:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9109E80F9E;
+	Thu, 30 Jul 2026 16:06:17 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id CE38C27C
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:51:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 65A1D40BF2
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:54:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B0C1E810F8
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:51:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sT7uwMhRN_3Q for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 15:54:41 +0000 (UTC)
-X-Greylist: delayed 10162 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 30 Jul 2026 15:54:40 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 20C6B40BB1
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 20C6B40BB1
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.25.13;
- helo=smtp-190d.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-Received: from smtp-190d.mail.infomaniak.ch (smtp-190d.mail.infomaniak.ch
- [185.125.25.13])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 20C6B40BB1
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:54:39 +0000 (UTC)
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4h9v0F16C8z5PH;
- Thu, 30 Jul 2026 17:54:37 +0200 (CEST)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4h9v0D0s1fzHCw; Thu, 30 Jul 2026 17:54:36 +0200 (CEST)
-Message-ID: <f79024bf-9b79-4d21-a008-f46391d903a2@0leil.net>
-Date: Thu, 30 Jul 2026 17:54:35 +0200
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X_0M7aMrQFZU for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 15:51:24 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org CBC5880E37
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CBC5880E37
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CBC5880E37
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:51:23 +0000 (UTC)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-49548e01d02so10696735e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 08:51:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785426682; x=1786031482;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pMb5AVz5oL12r/1TSPPXK+LoAH9deSEtCjw5Thpa7sg=;
+ b=XLqo9OHMqxOkzRpM3pF/o1prh5c/hVjOdx5XvAT+Lnwhkz+gw0roD7u1wunhnS5I5I
+ aClN7NFN0YWCBCx7708ku6p0wyNHLocftVMa71KRV4e3J5t4TXWCoJvJpqzRFO+9Pbsq
+ mc4HJjEL7wyG4zSwmT1EAAqOAEwjfW5/vn9N/vOFR3tU5vAr2m1T3bJxbaicKK6xsctY
+ uBJ9gCW2NGXExgudYfnZ9HquoZdaObkIAlfC8rV4ifvb7QpykLt77ZdajYREtMlsEKnZ
+ YL/yE0/n6th+h3Gm/HA+yxShkMP+CIbuJymdnMTExFp0eri9rW2tv75DDspvEZRGaK0H
+ btug==
+X-Gm-Message-State: AOJu0Yz83gbb8OOwUSaTSblKGEIf6sU6F8pfsRlwOlrkOZccVOGjUQcg
+ 0mtgS/J+7TkSI2Zgo6I0U0ofXK4l7s9Jl9fDimXuYfguj9jOXszojuD7eYJPdQ==
+X-Gm-Gg: AR+sD12trEkIAPK5lir4JhLBXieLd9eV7Hi68+8yYcUEfjdi5s+5kCJB3PWOg7mEnaf
+ ac262WTAjkrL4uNlRU41NopuvbfRX3R62SJEQTtySSoO1mIqv1/XV6e4sza4oOS9Xscn8h6Aq6F
+ /5x5zHrN83AJaUIhEe48hqPaDGU+kTxe+q03JYvY8jihv80LketfPC4Yf22vvGQaYInoxIpQobw
+ Cd+88LLWgHOX6qSZzmDDylRR40tw2ntTxiitEXFnNNs7vrOqOO9R/ZTqY9rPXdtJPdEHkUeEKX3
+ HE7962AZmUxvkbkrb6dtP+fZf45am+Xx+IE1KcGYt9PdCd+d0QAcVciL3vOG7VnzjAZwCpbURMf
+ YYz1E/K/5d1G52W73QU4pn/WrOV1sH+CpTN7gnGsPl0X3+f7fRpIkJVYwvt4DGS0O78431zYAqs
+ EL2FsM32Tt/NTL6TYEMrPz24o4ISA5CllMdCZ8tRIrrrs4pBhd+mFeQNdPLIWYz+FfDaY=
+X-Received: by 2002:a05:600c:4445:b0:493:bb6b:5bb5 with SMTP id
+ 5b1f17b1804b1-49800e77b32mr43021045e9.13.1785426681470; 
+ Thu, 30 Jul 2026 08:51:21 -0700 (PDT)
+Received: from deb05.proceq.com ([213.160.61.66])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-496e8e06f7csm146871545e9.0.2026.07.30.08.51.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jul 2026 08:51:20 -0700 (PDT)
+From: Mehmet Fide <mehmet.fide@gmail.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Mehmet Fide <mehmet.fide@screeningeagle.com>
+Subject: [PATCH 0/2] cmd: allow bootd without bootm
+Date: Thu, 30 Jul 2026 17:51:17 +0200
+Message-ID: <20260730155119.3328020-1-mehmet.fide@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/12] rockchip: doc: change TPL phrase
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
- u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
-References: <5aed2a27-bd7d-4b71-a6c1-0b46b41f3462@gmail.com>
- <0b776c6c-038f-4f13-b95b-0c47b4df62b9@gmail.com>
-Content-Language: en-US
-In-Reply-To: <0b776c6c-038f-4f13-b95b-0c47b4df62b9@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 30 Jul 2026 16:06:15 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0leil.net; s=20231125; t=1785426876;
- bh=jvJ33JUvxojqNWFQfXGlZ8Dvns5Er1PBFbeuFfKPOUE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hrs2asNOnSC0421SYcBoo22HZNcmV2eouP0qtNCFUUVO/xOTcKQ5yISkB4mehSBeu
- G4w8Fhfb4LmXd7J91bOn+FVfd24Y83sA7+eguxeyNQs5EZRVvE/+u98pqXXOkETd4R
- ZcKK3Kvpow8Lnz6zPb3rAxiW7dWJQZZAfVDO13u1q1iQ0DKUspFWlZRwxPZZ2CFojN
- 3bGikFW1MPhPRuCL2O8xkZZy/FppKAqLEdi3cYZUx2bfab/uMpbnoGUVhIGBK/3KRv
- MXVZ1mfxvK7OcoG80qWWM8trzPlQtLlx0Fi7e1TLuqkufzTpc+1VHGYn8XHT60ZE7X
- VSvkMpt2ma3GQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=0leil.net
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=hrs2asNO
+ d=gmail.com; s=20251104; t=1785426682; x=1786031482;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=pMb5AVz5oL12r/1TSPPXK+LoAH9deSEtCjw5Thpa7sg=;
+ b=AscwcHDFHqjrMG3YmNACU/A2byZUSC3SHwW5+U50Wohjl1W2hKJAwHw0jU8wpkdYe7
+ +j7W6UfZhEoNd68AICTF6cFEz5bBfo5YCgd0kdFgGowqkvqKHuOwH5ojGsQpprXxSFaf
+ LDCh97la0Rr8kIos2KZBgUxxlFFu5E/VptXv5MUr0xZ6sFGydUj4NcXDU1ceZGp04IDU
+ DYYvn4bIim1H00liJmg6qxJ4wp0nMqIuru+vgZEn7HjQ7p/KaaWZVLjk84GCKBUQ0WUO
+ WF5hMuOPxQ22NtOSU/Nc2Ak6uIwgFFbKOZY6tYCglqMzlqghmM3a+SiiD/tu/atV3TI+
+ F2qw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=AscwcHDF
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -101,63 +121,43 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <u-boot@0leil.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Johan,
+From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-On 7/30/26 3:33 PM, Johan Jonker wrote:
-> The TPL phrase in rockchip.rst has some spelling and logical
-> problems. Rewrite and add missing structure by changing to a
-> list view to better separate the 2 choices the user has to make.
-> 
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
-> 
-> Changed V3:
-> add commas
-> ---
->   doc/board/rockchip/rockchip.rst | 8 +++++---
->   1 file changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9351a5b8eae7..5144cbccef78 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -219,9 +219,11 @@ For SoCs whose TF-A code is not available as open source, use BL31 binary provid
->   TPL
->   ^^^
-> 
-> -For some SoCs U-Boot sources lack of support to inizialize DRAM.
-> -In these cases, to get a fully functional image following :ref:`PackageWithTPLandSPL`, use DDR binary provided by Rockchip rkbin repository as ROCKCHIP_TPL when building U-Boot.
-> -Otherwise, follow :ref:`PackageWithRockchipMiniloader`.
-> +* For SoCs with U-Boot sources to initialize DRAM, follow
-> +  :ref:`PackageWithTPLandSPL`.
+The bootd command is a two line wrapper around run_command(env_get("bootcmd")),
+but its code lives in cmd/bootm.c, so it only links when CMD_BOOTM is enabled.
+Commit 1fd04cf46baf ("cmd: Correct dependencies for CMD_BOOTD") expressed that
+in Kconfig as "depends on CMD_BOOTM". The build reason is real, but the
+dependency reads as a functional one, and it leaves the boards that disable
+CMD_BOOTM without "boot" or "bootd" even though the implementation works there.
 
-If I remember correctly, it is possible to have an open-source DRAM init 
-in U-Boot and still decide to go for the blob.
+Patch 1 moves the command into cmd/bootd.c and drops the dependency, keeping
+the current default so that no board in tree changes. Patch 2 adds the test
+that bootd never had.
 
-I think the point here is rather, if CONFIG_ROCKCHIP_EXTERNAL_TPL is 
-set, set ROCKCHIP_TPL environment variable to the appropriate *ddr*.bin 
-file you can find in rkbin git repository, which will be the TPL stage.
+While testing I noticed something unrelated that this series does not touch:
+on sandbox the "avoid bootd recursion" guard in cmd_process() never fires, so
+a bootcmd of "bootd" recurses until the stack is exhausted. That behaves
+identically before and after this series.
 
-If not, then TPL will be U-Boot.
+Mehmet Fide (2):
+  cmd: allow bootd without bootm
+  test: cmd: add a test for bootd
 
-> +* For SoCs without U-Boot sources to initialize DRAM use the DDR binary provided
-> +  by the Rockchip rkbin repository as ROCKCHIP_TPL when building U-Boot, then follow
-> +  :ref:`PackageWithRockchipMiniloader`.
-> 
+ cmd/Kconfig       |  3 +--
+ cmd/Makefile      |  1 +
+ cmd/bootd.c       | 30 ++++++++++++++++++++++++++++++
+ cmd/bootm.c       | 24 ------------------------
+ test/cmd/Makefile |  3 +++
+ test/cmd/bootd.c  | 35 +++++++++++++++++++++++++++++++++++
+ 6 files changed, 70 insertions(+), 26 deletions(-)
+ create mode 100644 cmd/bootd.c
+ create mode 100644 test/cmd/bootd.c
 
-This is... completely unrelated? miniloader seems to be appended after 
-the DDR bin blob (see create idbloader.img step), so it simply isn't 
-that. I'm wondering if this isn't some U-Boot proper from Rockchip? I 
-have never used the miniloader knowingly so I don't know what it's 
-supposed to do unfortunately.
 
-In any case, I think the appropriate replacement is simply to mention 
-CONFIG_ROCKCHIP_EXTERNAL_TPL and ROCKCHIP_TPL.
+base-commit: 94b349bd902d9e38e1846c157fadd9054c34680a
+-- 
+2.54.0
 
-Cheers,
-Quentin
