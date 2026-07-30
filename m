@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC99C55165
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 14:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC80C55165
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 14:18:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 067FC810AD;
-	Thu, 30 Jul 2026 14:18:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1EA43810CF;
+	Thu, 30 Jul 2026 14:18:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8rj9LJ0-2r4w; Thu, 30 Jul 2026 14:18:43 +0000 (UTC)
+ id lEgueCwVoeAi; Thu, 30 Jul 2026 14:18:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 06CAD810F8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 116AE81152
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785421123;
-	bh=1HxquT60c463UuvqsAhwFvB0ZpmhZQSQ1UIxMJrE0yw=;
+	d=lists.u-boot-project.org ; s=default; t=1785421126;
+	bh=0mdjnwykf6mexMZcrrfxa3Cf99MqYekgOh2Va7XXrfY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0yYIk3NlwejDcdeJg2IRDA1kyaxVIBzI2HUTVDOdnE2aWpZG+GuC9Ip+1UvPy8cEw
-	 miUFn5L7muY65cUFKptGFqjTSOLbdnNloBgTTtQBqM95OqlKynbyeZIA+CU88NYwuN
-	 BGA+hMB1hypCF3zVEUlLDoZ9h4MhzJ+i78WiVxkcNoQkWzeNAu+pWVrajA80F1RJrJ
-	 xdAmpjXv3MywQO1me7R1vdufVpvdVslUx2Sm0edrB5OiB+RjBRvQcNR3L0mYysafHV
-	 djiqmWVBOWURX8Y29TF8h2f2w2B+vplOh9XTXdxvRzLg0zSxUYGwyMK0Aij3bgJPXV
-	 S4ZXmbawttE0A==
+	b=RMBJIrtQ3cbqgIJvH7FEuP70aK/yc2JDsVqvkJcLYjxxwqwUWcezzzfCFJokRx5uI
+	 nMp7JgcjJcntPq3e2+ZKQOXEfFtWWUUyPbcFAq+bNj2cQ5I8q90V9JnPCZ/zfooLMA
+	 0uola76WdTxulDWrj2AS2RtAvflqKeUyzFwCzgr2b3dEJcD1OgeX1QlQPbTEI/Wu+r
+	 Q6vMmVpsjLbErWiiMRHlsJize6BwADqiqTTUHN/WsXN4XpA189JMR4LPyuUkQLbaB8
+	 AWXaAUYOt7UB5q9AmQYQeiQES9H2Qs0agls3ZhqcyM6TBNxZcGCljKRJlwLJz8Z7os
+	 kR9DBbw1iLlOQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06CAD810F8;
-	Thu, 30 Jul 2026 14:18:43 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id D9501197
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 116AE81152;
+	Thu, 30 Jul 2026 14:18:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3FA0A27C
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CB7E6401A3
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:41 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 259D440BAB
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GgkOj06ySAJC for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 14:18:41 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L2p-YCEzTE1i for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 14:18:43 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62b; helo=mail-ej1-x62b.google.com;
+ client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org BF1414008C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BF1414008C
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BF1414008C
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:40 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-c15f020a223so336886766b.1
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 07:18:40 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2034D40B56
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2034D40B56
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2034D40B56
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 14:18:42 +0000 (UTC)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c15ba3a2b4bso261262366b.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 07:18:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785421119; x=1786025919;
+ d=1e100.net; s=20251104; t=1785421121; x=1786025921;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=1HxquT60c463UuvqsAhwFvB0ZpmhZQSQ1UIxMJrE0yw=;
- b=oTISkwJkKcV5tgx9Sme9zycVus5fRvzij/p2KqdmVQSxeT+4fd7H0PebCSiWxmvPBQ
- Ih0T8fMr56XVUiyntsqh6nxUJBsdkJi/x7mkofBUeG8OoCCjwYyqtp6Sas4vsTjakhAl
- oNsix29xlXAw2dwQcnemt81Vtjk5BUEBPbv+9L/PWnBesf7dt8sa3H4vYD0izj+vPjmP
- lRdRJqj4WMgAxfxnBTP033Pq8J7T4+/WyN0AtG2g2YhSqW1IN9I9mLsQK0NVUW0J3i3X
- UgPQZ1OA81ufycR74CRuOJKzbgk0s9HQuEgorRC11Gp7BmxJkvqUTQBOkkeYyUDanC+t
- ZVLQ==
+ bh=0mdjnwykf6mexMZcrrfxa3Cf99MqYekgOh2Va7XXrfY=;
+ b=Omfc13KBi57D8Uf1PtzspDfGU5DQxYrmQ/fr9jGSOrukZDYrc8IogeJwL0bFCYgnsh
+ FEUEvCiEXC5l6C0v5ySye4RxtMcLN7+hgOJpfvDoE6bRf1jrkfRYE3N1/gOJDUui22FA
+ sKz0yv0renF7657ANzL9ELgHbIEpi04PpGpFWWnT5IOD6Bc4d2lSCK3+xJB+MJOdUhVM
+ dBbOPDoob5VQRMQ8bMr2Nn80wNYGzHK7SZ+TalJQ034RoS1GnujgglYlS3U/XAu/Deoh
+ URqjWZHPElNOEyicypo3O0vPIjzCq58VxcX0OPRe7LcByNcymqloP/+UjytGa7tJLS5z
+ fldw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RorgPMUj2XGcdBpgBiAQnLsauyI2M/cOwnGGyaXb4HOjYYsDDSz9N+AdsGdYxDLPG4pC+GFDn0=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx2C1u8IhK9Y7Ow3msY1slzO7jiqq3OiR7F2BUKO5XQ9adphEtu
- Az0XDEwnpRCnPcuuGOAxNaU2ackfiV+o5cgTxII3x4WRUhylaofE7xmYfJqbS0meOTI=
-X-Gm-Gg: AR+sD11KJU7XnHQ0jIg8ZoOZNUYf1DaUoBA83VZ3+fGv0QcEPvTJRM9XSRtt/RL4SiQ
- PFRyJojjb5weyqIYixAaEElc4vYvR16yCj1g5B2lZV7GMreFWfCE9a0kx3+VsHArRf6GsZhz7oi
- Ewgaue7mJT0WoYxfGXllh1Hr6ZW4O6+HeXzuGhpe+qohQeQwPIBpdaRbefxgSVBNCryxAoGtzgL
- uvb4drCpC3nxkjzstgINxhfgyuz8ctT0zfOE1bIyEXxnIIZuapEnuUeNDXXWQuupio9A2gLUF3e
- sA4TYLZle+K5JSpncmWupLyHKg+SsEZQs4W1NZlXOL7vGUBHCk+Ys/VMWYx/5r7KSTqd3HF0BMH
- npHzm2A7he5vnWowEA2C219XIUxDvE1R71rRZZ4iTln9UlgTjoiwlgp2ZB7O16bvXon8XOiK5IB
- bFn21wX8mmA3qsFCFtuJhToI8ban6pbPxWpeP5NJ5r3ID+eNmRUCpGu81G4oeLtewvCsAGWidwh
- TrJ738mN5BPF/P9UCmq1ohQZrlBwNUAJfNY1kO/PUw/tKlEijEM4W5nahWhmGm3jL9T7dZH29V2
- pln08g==
-X-Received: by 2002:a17:907:3e84:b0:c16:46b1:e0c2 with SMTP id
- a640c23a62f3a-c1fa57b058dmr147192666b.62.1785421118498; 
- Thu, 30 Jul 2026 07:18:38 -0700 (PDT)
+ AHgh+RpBT9i/jUVFAlg+2/W+PZ0fWhXpnuGianZ8TnV1x0Ukb3jA6GdTtTy8BGYcOUn7oRZKT39B2LU=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yz+4f2Azoc0bNQPdh2Ql20ILY1MVCgRsSO70IP9lAguLHb/C7U6
+ VAqCFrEtQ9Yx5G4Ol6yOjGcHA2pCE3TCVtOMYf7YwRYNWlXuVakEh2x0UKOFUBUnK0A=
+X-Gm-Gg: AR+sD121XdDfLJVLRMSSgA4Y7RnUv3pMHO678G9hQDYawWTv/wtf19DOi89tVE9r8Qr
+ ufGSAKlIgXYmLSpI6ImzokDEwcBZseZ9UCWFNzyUpCGTgbddAG+qbFScFofbdopCb56oSHWMj+/
+ bQ+wUOThTehX+6IIZ3V5J2L/LGodV38boG6gj3P9TXUpGu1ORxXJj8f2hQQoCgCWJd0J2JD2oms
+ YSw46v90aD93YEDUahzL8RfCH9I7TAR1eMCO4zg30ne/n6/1LlcobzXotKXpf7lcj/rKgXutWX1
+ 4xJkukFE94qtSZzf0G73wTkvGX0l2LxGiUT73JgoY1r7vcQhauYeFDUgslsli1xL1+ZD46QQQQE
+ eDMnCDa6auAdMq4Ut9uQKWtS2sesdu2OxDxLpLB9tuR53b9YNuMpkWdvjFhfv9bmw/B7iyy2VOS
+ QgFwo0SIKosZf+tNK4ofwqzslELyR6TYZgy/z3+AY/JJ0YFMvovY5CKBDKi1hE7tkXas/USzyPI
+ udF0ERHBWz0xWTkIyBAuaj0P3xDFuQc479l2YQ60UwSEzXAMkjqk2QMKt+64ScS8KoL238d2i2I
+ fXbQHQ==
+X-Received: by 2002:a17:907:e1cd:20b0:c1c:4d19:f733 with SMTP id
+ a640c23a62f3a-c1fbcb4a409mr28632666b.40.1785421121000; 
+ Thu, 30 Jul 2026 07:18:41 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it
  (host-212-171-227-71.retail.telecomitalia.it. [212.171.227.71])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1fa851b369sm78608266b.9.2026.07.30.07.18.35
+ a640c23a62f3a-c1fa851b369sm78608266b.9.2026.07.30.07.18.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 07:18:36 -0700 (PDT)
+ Thu, 30 Jul 2026 07:18:39 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Thu, 30 Jul 2026 16:18:09 +0200
-Subject: [PATCH v3 3/6] arm: mediatek: build Genio 510 and 700 boot images
- with binman
+Date: Thu, 30 Jul 2026 16:18:10 +0200
+Subject: [PATCH v3 4/6] arm: dts: mediatek: support signed Genio 510 and
+ 700 bootloader FIT
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260730-ccaione-upstream-mt8390-spl-v3-3-82fb3bca27a4@baylibre.com>
+Message-Id: <20260730-ccaione-upstream-mt8390-spl-v3-4-82fb3bca27a4@baylibre.com>
 References: <20260730-ccaione-upstream-mt8390-spl-v3-0-82fb3bca27a4@baylibre.com>
 In-Reply-To: <20260730-ccaione-upstream-mt8390-spl-v3-0-82fb3bca27a4@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
@@ -121,25 +121,24 @@ Cc: Julien Masson <jmasson@baylibre.com>, Quentin Schulz <u-boot@0leil.net>,
  <pablo.sun@mediatek.com>
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785421119; x=1786025919;
+ d=baylibre.com; s=google; t=1785421121; x=1786025921;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1HxquT60c463UuvqsAhwFvB0ZpmhZQSQ1UIxMJrE0yw=;
- b=ENMtgrxtJQTEydhIyOtITxNoHCmPCUyPoXYv242bV/d+s4b3b3bt/tw1knEru0CS+4
- ETJ+NujWvhkA7qC2xKz6HFK19zzegXP4c+77HmDq7QgmevJ0eFfurOys9L6ZZaDf9Z70
- HtyR4XHl89XvKoNBDDUftgvybw2xayyt1ODmoWCI/4Cdo2xY/5ck12f+rlgnfXzpe04h
- ATou6TS8PCICL5gxyx6OBYEv5cbEHhMr+Tzw0iIKiYkJT1m5a7EaY6f5fEP1s/NB96lB
- QiyxGhKpNQvnMxTMEN12ZzD+DPzoj0inVmoH/DyfyolXLGNUdjugwYRLZz3Z3w0uu4Gz
- lX4Q==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=0mdjnwykf6mexMZcrrfxa3Cf99MqYekgOh2Va7XXrfY=;
+ b=ARY39MRgZw/NzfcQtD5NS0Em8iSEv9yjm6JDV8gTkWk29i5e+91CbnGfQtYGnD2fA/
+ lUfY0CTMb49NjIIPsqq1P7hPmvj1o43SvzxGwilw11Pmdo2wsot7cN5JeJ0PL3G8uusc
+ N3OIpS03bEeQG5AmJGMkY3j2StSCS/KvHvH2I4/WLmcfohW8IdM6PPKFqLEGiGf7wyGV
+ oqmgkRMLMzAN6OV/iVCaOhlcL9Jz6eZmMYlektWSjYSpsmdGZ5eZ1ngwoaqoEwO/VWBd
+ EIGo9tTmYuneL7d95m88XvbDMkvf87Zdl3V+t2dk8lM5AAyY2FExd5SlWMCJGwEi+GT+
+ koxA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=ENMtgrxt
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=ARY39MRg
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -154,250 +153,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The complete Genio 510 and Genio 700 boot-chain images depend on
-platform firmware built outside U-Boot. Keep image assembly opt-in
-through CONFIG_MTK_BOOT_IMAGES so the default configurations build
-U-Boot proper and SPL without requiring external blobs, while
-integration builds can enable the canonical binman image layout.
+The unsigned bootloader FIT only provides hashes, so SPL cannot establish
+a chain of trust before loading BL31, OP-TEE and U-Boot.
 
-mtk-boot.bin wraps an external DDR loader, padded to its fixed
-0x4b000-byte ABI, followed by a CONFIG_SPL_MAX_SIZE U-Boot SPL region
-in a MediaTek eMMC BootROM image. The external loader copies that
-complete fixed-size SPL window, so pad the region to keep every source
-byte inside the BootROM-loaded payload.
+When SPL FIT signature verification is enabled, sign the complete
+configuration and require its public key in the SPL control devicetree.
+The configuration signature covers the firmware, all loadables and
+U-Boot's control devicetree.
 
-bootloaders.img is a conventional FIT containing BL31, U-Boot proper,
-OP-TEE, and the U-Boot control devicetree. Both boards share this layout,
-with their descriptions supplied by the board-specific U-Boot
-devicetree includes.
+Use binman's u-boot-spl-pubkey-dtb entry to inject the key while
+preserving the fixed SPL region expected by the external DDR loader.
+Unsigned builds keep using the existing image layout.
 
-Use the standard BL31 and TEE binman inputs and obtain ddr-loader.bin
-through BINMAN_INDIRS. Disable SPL binman symbols by default on MT8188
-because SPL does not consume runtime offsets for entries in mtk-boot.bin
-and U-Boot proper lives in a separate storage image. SPL locates U-Boot
-through the GPT FIT partition, so there are no in-image U-Boot offsets
-to publish.
-
-Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi |   7 ++
- arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi |   7 ++
- arch/arm/dts/mt8390-genio-common-binman.dtsi  | 127 ++++++++++++++++++++++++++
- arch/arm/mach-mediatek/Kconfig                |   8 ++
- board/mediatek/MAINTAINERS                    |   1 +
- common/spl/Kconfig                            |   1 +
- 6 files changed, 151 insertions(+)
+ arch/arm/dts/mt8390-genio-common-binman.dtsi | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-index 1a5f45cba6b..fa03e6ac05e 100644
---- a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-+++ b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-@@ -4,4 +4,11 @@
-  * Author: Julien Stephan <jstephan@baylibre.com>
-  */
- 
-+#include <config.h>
- #include "mt8390-genio-common-u-boot.dtsi"
-+
-+#ifdef CONFIG_MTK_BOOT_IMAGES
-+#define MTK_BOOTLOADERS_DESCRIPTION "MediaTek Genio 510 bootloaders"
-+#define MTK_BOOT_CHAIN_DESCRIPTION "Genio 510 boot chain"
-+#include "mt8390-genio-common-binman.dtsi"
-+#endif
-diff --git a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
-index 1a5f45cba6b..f8e7e78a25f 100644
---- a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
-+++ b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
-@@ -4,4 +4,11 @@
-  * Author: Julien Stephan <jstephan@baylibre.com>
-  */
- 
-+#include <config.h>
- #include "mt8390-genio-common-u-boot.dtsi"
-+
-+#ifdef CONFIG_MTK_BOOT_IMAGES
-+#define MTK_BOOTLOADERS_DESCRIPTION "MediaTek Genio 700 bootloaders"
-+#define MTK_BOOT_CHAIN_DESCRIPTION "Genio 700 boot chain"
-+#include "mt8390-genio-common-binman.dtsi"
-+#endif
 diff --git a/arch/arm/dts/mt8390-genio-common-binman.dtsi b/arch/arm/dts/mt8390-genio-common-binman.dtsi
-new file mode 100644
-index 00000000000..c16282027c6
---- /dev/null
+index c16282027c6..1fa5502c17e 100644
+--- a/arch/arm/dts/mt8390-genio-common-binman.dtsi
 +++ b/arch/arm/dts/mt8390-genio-common-binman.dtsi
-@@ -0,0 +1,127 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+/*
-+ * Copyright (c) 2026 BayLibre, SAS.
-+ * Author: Julien Stephan <jstephan@baylibre.com>
-+ * Author: Carlo Caione <ccaione@baylibre.com>
-+ */
+@@ -31,9 +31,25 @@
+ 					size = <0x4b000>;
+ 				};
+ 
++#ifdef CONFIG_SPL_FIT_SIGNATURE
+ 				u-boot-spl {
++					type = "section";
+ 					size = <CONFIG_SPL_MAX_SIZE>;
 +
-+/ {
-+	binman: binman {
-+		multiple-images;
-+	};
-+};
++					u-boot-spl-nodtb {
++					};
 +
-+&binman {
-+	mtk-boot {
-+		filename = "mtk-boot.bin";
-+
-+		mkimage {
-+			args = "-T", "mtk_image",
-+			       "-a", "0x201000",
-+			       "-e", "0x201000",
-+			       "-n", "media=emmc;arm64=1";
-+
-+			section {
-+				pad-byte = <0>;
-+
-+				/* Must match SPL_OFFSET in the external DDR loader. */
-+				ddr-loader {
-+					type = "blob-ext";
-+					filename = "ddr-loader.bin";
-+					size = <0x4b000>;
-+				};
-+
++					u-boot-spl-pubkey-dtb {
++						algo = "sha256,rsa3072";
++						required = "conf";
++						key-name-hint = "bootloaders";
++					};
+ 				};
++#else
 +				u-boot-spl {
 +					size = <CONFIG_SPL_MAX_SIZE>;
 +				};
-+			};
-+		};
-+	};
-+
-+	bootloaders {
-+		filename = "bootloaders.img";
-+
-+		fit {
-+			description = MTK_BOOTLOADERS_DESCRIPTION;
-+			#address-cells = <1>;
-+
-+			images {
-+				uboot {
-+					description = "U-Boot";
-+					type = "firmware";
-+					os = "u-boot";
-+					arch = "arm64";
-+					compression = "none";
-+					load = <CONFIG_TEXT_BASE>;
-+					entry = <CONFIG_TEXT_BASE>;
-+
-+					u-boot-nodtb {
-+					};
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+				};
-+
-+				atf {
-+					description = "ARM Trusted Firmware BL31";
-+					type = "firmware";
-+					os = "arm-trusted-firmware";
-+					arch = "arm64";
-+					compression = "none";
-+					load = <0x54601000>;
-+					entry = <0x54601000>;
-+
-+					atf-bl31 {
-+					};
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+				};
-+
-+				optee {
-+					description = "OP-TEE";
-+					type = "firmware";
-+					os = "tee";
-+					arch = "arm64";
-+					compression = "none";
-+					load = <0x431fffe4>;
-+					entry = <0x43200000>;
-+
-+					tee-os {
-+					};
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+				};
-+
-+				uboot-fdt {
-+					description = "U-Boot control devicetree";
-+					type = "flat_dt";
-+					arch = "arm64";
-+					compression = "none";
-+
-+					u-boot-dtb {
-+					};
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf";
-+
-+				conf {
-+					description = MTK_BOOT_CHAIN_DESCRIPTION;
-+					firmware = "atf";
-+					loadables = "uboot", "optee";
-+					fdt = "uboot-fdt";
-+				};
-+			};
-+		};
-+	};
-+};
-diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-index 5e6c50ca64d..05ba7c209bc 100644
---- a/arch/arm/mach-mediatek/Kconfig
-+++ b/arch/arm/mach-mediatek/Kconfig
-@@ -210,6 +210,14 @@ config MTK_BROM_HEADER_INFO
- 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT8195
- 	default "lk=1" if TARGET_MT7623
++#endif
+ 			};
+ 		};
+ 	};
+@@ -44,6 +60,9 @@
+ 		fit {
+ 			description = MTK_BOOTLOADERS_DESCRIPTION;
+ 			#address-cells = <1>;
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++			fit,sign;
++#endif
  
-+config MTK_BOOT_IMAGES
-+	bool "Build MediaTek firmware images"
-+	depends on TARGET_MT8188 && SPL
-+	select BINMAN
-+	help
-+	  Enable binman to assemble the MediaTek BootROM image and firmware
-+	  FIT from U-Boot and external platform firmware components.
+ 			images {
+ 				uboot {
+@@ -120,6 +139,14 @@
+ 					firmware = "atf";
+ 					loadables = "uboot", "optee";
+ 					fdt = "uboot-fdt";
++#ifdef CONFIG_SPL_FIT_SIGNATURE
 +
- config MTK_TZ_MOVABLE
- 	select ARCH_MISC_INIT
- 	select OF_SYSTEM_SETUP
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index d0d25b096e5..83662079068 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -24,6 +24,7 @@ S:	Maintained
- F:	arch/arm/dts/mt8188-u-boot.dtsi
- F:	arch/arm/dts/mt8390-genio-common-u-boot.dtsi
- F:	arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
-+F:	arch/arm/dts/mt8390-genio-common-binman.dtsi
- F:	arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
- F:	configs/mt8188.config
- F:	configs/mt8370_genio_510_evk_defconfig
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 0618f42c941..e5d0aade7fc 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -194,6 +194,7 @@ config SPL_SHOW_ERRORS
- config SPL_BINMAN_SYMBOLS
- 	bool "Declare binman symbols in SPL"
- 	depends on SPL_FRAMEWORK && BINMAN
-+	default n if TARGET_MT8188
- 	default y
- 	help
- 	  This enables use of symbols in SPL which refer to other entries in
++					signature {
++						algo = "sha256,rsa3072";
++						key-name-hint = "bootloaders";
++						sign-images = "firmware", "loadables", "fdt";
++					};
++#endif
+ 				};
+ 			};
+ 		};
 
 -- 
 2.55.0
