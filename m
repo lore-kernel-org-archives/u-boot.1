@@ -1,128 +1,204 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D90BEC55167
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 22:06:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF52C55167
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jul 2026 22:07:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 879B9811F8;
-	Thu, 30 Jul 2026 22:06:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4509660A6A;
+	Thu, 30 Jul 2026 22:07:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SH9ic2RhrKCZ; Thu, 30 Jul 2026 22:06:32 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bJC4LSn8ZjET; Thu, 30 Jul 2026 22:07:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6005E8120D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3541560A6F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785449192;
-	bh=AHa+37S/qhedhw4AxPkBV8l8Uq/a/Dlu4vWfBun7/oQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785449260;
+	bh=iCWydQ73kSN7zj8XwkOTuZTB9MnyjhbKQ+dAYw+vj1M=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JInEuQLwEGYjX6A4Xc9taTYmNgrqj/nZhiDIdJAvUUE/pKllI2mKobi78Zsnpi99/
-	 wCiZRa9kruDTEJMeeBgjtHVmZK4r2LSLiRtV6oGLD4vJUHsSefYfrBNDSVSvItZzBp
-	 q7uLJABlyU3QKik80WHXW3ZB4pUQ5fW1+vicmCsNagin+Fc8LNR4iG4SaydP2s3I9Y
-	 UCIaXiLTRsQDN9AEpj9JeEDJ8R+i414rEfQFuLrHolZwGhEGsKWPEmmfmrGXQYjmtl
-	 OCAkTUNRnLGqo4A4AkCfik5iW6uCIko40vpg4ksYuXkHqhGBxSqxCb7afqikUg97Hx
-	 bW2krHRExueSg==
+	b=j7opZHEE5XZ+IrZOeK5BklK++HRf3DZw7Y6caX755/8044D09qEKtT+LPu3vAhFJN
+	 xlPGIf04K/GgtzsnUC4ZoIFz6RvIFw6vnCjIeEfYc0F8o7mojhpgJAjJLVG3sTlsCk
+	 K1k9gl5IwwkmminFWgdqMiWMJdoth2wLoR+y2U8krlZfBgQLlnXhrEUbgA/A+NzFSP
+	 Dnrs6mhl9WRymTd6XA0LkonoZwQS+ggCWhY0TiVJpIqZ6TwhVi5zspGaE1XTmxw/3b
+	 nTMluJd5gSvb44w5XHaDHaP0NCfmmsklHmiAntbaKubrQZyOeleosLD+4kdNtcQ670
+	 h3BjLTbAu6x8Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6005E8120D;
-	Thu, 30 Jul 2026 22:06:32 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 32685218
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 22:06:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3541560A6F;
+	Thu, 30 Jul 2026 22:07:40 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 33D0F69
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 22:07:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 15073811FD
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 22:06:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 19CB660A6F
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 22:07:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5X-3Xz7fLPek for <u-boot@lists.u-boot-project.org>;
- Thu, 30 Jul 2026 22:06:29 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2B688811F8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2B688811F8
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2B688811F8
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 22:06:28 +0000 (UTC)
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7ec3b429a3aso277303a34.1
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 15:06:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785449187; x=1786053987;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=AHa+37S/qhedhw4AxPkBV8l8Uq/a/Dlu4vWfBun7/oQ=;
- b=Fb+s7edcdZayCxBWfskyHQB4d6EQq63dpVAct4kdZ+IlZxQpXIS9zjZRnN8v/iR64P
- gNwW2UMkXO9P/YCBN9BExpO1C5Jp7sMzjfdF8Z/aXnCgtAmgPqGZMuAWOP2Tnx9H+GjM
- nw2aEr5unwUIesOjdtHOiDAv3Px7c6L0ESeTJ+Mrud1RWP+Y/XrfS+31CMUU+XPKL+Vy
- V/pDP5im+L3dS9kOv9mDHH7cheGBEbnulZZfrsO8JwLL+gAqg8Nmo3p6qr5BkKfuzCga
- /P9XqjtXBPaVw4oR5jcfRmpgdFGi16nofUC0UnDzhTRllq2bEw39nf4P+cFWC1yB1ps7
- lLXw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqFfNdqYEDZtUZVuK3/5A7DDOvoV/RlgO++svoEQl01ZxZhwyh8/CClVAOMVvyljo+8AJk/K2M=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yyqe8IPuxfzDnjAE4ZgfA5nFbBEFaiwNp03aLLbiGevbBdcmMfL
- UyR8M+nRLtMAxwBlmUgeB//J3mNNO59WXQujVOzADanUWbwjBdJDLEI2TiweAPeD/DI=
-X-Gm-Gg: AR+sD13l3Nls/TTxTNNh84+dmoj3w2rKLE7/Fs3ariGZzM01iLFQXCMb+GRiFCOCf8f
- SecROfVL8wyeJnJx6UwApIPalxBkdot1H4bJOrFN6K/HLWGpsyHd6Oi/GXmIOPWAPlUx898wbmc
- z6GWyJJfu8hESOzG6fgghqJpQQN+7PE2ntSnh0PJZBcOeZsmHhd//tyKIvew7rKWjWgXRdCzX/r
- NyHkdTg7hOIfc3OuTTvAHY+grp4AUzyU+VskbohtZiB5rcc9azyV292k2Dpud8YQ4saJjPIw+sG
- IPdOeBY+7i6Xl4Rcq/3MwfmlDlsC6IWFh9+t9oNu9n6lyDcOv+XKjSaH55KFINajCKoz10ZkqQL
- 6a9xgcoRMYBW8u3rrtV1fhjubgSq5x0hDB/llfhaXIHzVyXIW4wTwBGlruqABgzQ8zR+uPiOJ4h
- AFqX+DzqGI6/st8gTXbJ3O0hvIzKev8BHP0qvPTsiHjVfaWQAZGgj3sTjLMM/F2TIcgEAoqU0JS
- AJl9Ah6Un/LWoHaQUXPbjcVVIqPlXGpE3iJ8mVaAdxZrR262DVvGtz1Sy1CVERjbxOW8CPsKQyZ
- MDzJcial1Q==
-X-Received: by 2002:a05:6820:198d:b0:6aa:ff04:9a2d with SMTP id
- 006d021491bc7-6ad0cb62933mr1332999eaf.72.1785449186916; 
- Thu, 30 Jul 2026 15:06:26 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-458c29d51f9sm3303089fac.16.2026.07.30.15.06.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 15:06:25 -0700 (PDT)
-Date: Thu, 30 Jul 2026 16:06:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Johan Jonker <jbx6244@gmail.com>, kever.yang@rock-chips.com,
- sjg@chromium.org, ilias.apalodimas@linaro.org,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v1] rockchip: spl: replace ifdef by IS_ENABLED for
- timer_init() call condition
-Message-ID: <20260730220623.GI1773261@bill-the-cat>
-References: <cded3ae1-b908-49c6-af92-30b931d160c1@gmail.com>
- <c6530788-e823-4cb4-905a-5473d9c00914@cherry.de>
- <6e43369a-832e-40d3-af23-a0981af84d75@gmail.com>
- <75f48c14-bad9-4250-a4b5-321cc17bc1ec@cherry.de>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MDLzlYS5nNr2 for <u-boot@lists.u-boot-project.org>;
+ Thu, 30 Jul 2026 22:07:38 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
+ helo=mx0a-0002e601.pphosted.com; envelope-from=afd@ti.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 24CC860A6A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 24CC860A6A
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 24CC860A6A
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 22:07:37 +0000 (UTC)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+ by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66UM53IA3804395;
+ Thu, 30 Jul 2026 17:07:29 -0500
+Received: from bn1pr04cu002.outbound.protection.outlook.com
+ (mail-eastus2azon11010032.outbound.protection.outlook.com [52.101.56.32])
+ by m0384305.ppops.net (PPS) with ESMTPS id 4frf3j80hc-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 30 Jul 2026 17:07:27 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sDLrPQrhtjnBiTsBGgulvXW528sVshpH7gDiyIITRjRuSO7Ql7EiHhLEH+ONxfhcGCNVu3b+JQsxxq9PNYYfqZHzAs/HbfrB00dWk/7/0m0rfmWVuBcm8zmIXDV2YPzGLlRu9Izgn+oHw63DT5lBmENyGxyTZe8pzYD1foA0bFXNKOwHZv6ULvHwksOlV4ySsWSg+E8LAzqt4HI+XJ5oaMRFD3jiWKhTwr99G3Fl/tTpN5/aJd8gQFiZAkDQX/8+dvVphyzJMfdk2YbWvLa4q1xc99s9k/kKeuHZ+qYQGPl98OlWDg4+9BCrtjDJKRHRNICjFtdA9jHAZzACAiQYyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iCWydQ73kSN7zj8XwkOTuZTB9MnyjhbKQ+dAYw+vj1M=;
+ b=v3zLXPubk6BxvRZeJ5JfUvtJsmzdVVqXD2e5FYZFTXp91XrcqcqVqnMNZ/uFMqizFRwhXsWOVlM0AJ3f//CiFfdKAu7QmeBEHUSKuBcHOfSeQlJoeDzXh16cxdKMQOHmXMxSvSGruPIVKGF4SQOi7lvbHhdLrAjiG2cLxUFlL/bdPEbtYduOFihYtFSWJyGlLTOMqkB/OkPoH/sJ0vNuRk7ZYFCekUouDziD1TtzIGTAFqFhocfu5SAjEstOeny05AeN8d56ClS6uLj+c5hicKbhAKzJvuZfy043M8YzHWVG+VkqWtr8+Me41+SLPZvmyUEneT3N+VnJQTp/8VUn7A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.u-boot-project.org
+ smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
+ header.from=ti.com; dkim=none (message not signed); arc=none (0)
+Received: from CH5PR02CA0013.namprd02.prod.outlook.com (2603:10b6:610:1ed::27)
+ by IA0PR10MB7254.namprd10.prod.outlook.com (2603:10b6:208:3dc::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Thu, 30 Jul
+ 2026 22:07:19 +0000
+Received: from CH2PEPF00000099.namprd02.prod.outlook.com
+ (2603:10b6:610:1ed:cafe::5d) by CH5PR02CA0013.outlook.office365.com
+ (2603:10b6:610:1ed::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.15 via Frontend Transport; Thu,
+ 30 Jul 2026 22:07:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.292.8 via Frontend Transport; Thu, 30 Jul 2026 22:07:17 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 30 Jul
+ 2026 17:07:17 -0500
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 30 Jul
+ 2026 17:07:17 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 30 Jul 2026 17:07:17 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66UM7GTS4150574;
+ Thu, 30 Jul 2026 17:07:16 -0500
+Message-ID: <d26abcc3-4e46-40b6-ab13-47bf8ce106c3@ti.com>
+Date: Thu, 30 Jul 2026 17:07:16 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Nc6nMlCL5OGjeoq0"
-Content-Disposition: inline
-In-Reply-To: <75f48c14-bad9-4250-a4b5-321cc17bc1ec@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCHv5 2/3] k3-am62-pocketbeagle2: add initial board support
+To: <rs@ti.com>, Anshul Dalal <anshuld@ti.com>, <robertcnelson@gmail.com>,
+ <ayush@beagleboard.org>, <Erik.Welsh@octavosystems.com>,
+ <trini@konsulko.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
+CC: <u-boot@lists.u-boot-project.org>
+References: <20260730215319.965327-2-rs@ti.com>
+ <20260730215319.965327-4-rs@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20260730215319.965327-4-rs@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000099:EE_|IA0PR10MB7254:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27afb35a-0273-4cc2-978b-08deee86eb85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|23010399003|376014|1800799024|82310400026|13003099007|10067099003|56012099006|4143699003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: XHXR6E3TblPfeC3vAmlBzabvhNIfQhMafPqjNp1Pd2fXnGdSUrTuA3K2yMTVZyBjMeQD+AREiQTQRmYIhqtZeZk/dbk26NUq/i4YheNly0wO3TFsaDO0yUuClG0EoPRoCjNGF4yCgLGZXlXDSngSwmupKPqGZZuoNmPGmRKhSa9EhbJm5Nix3/hxRzi7n7J1Fmlk+RwXVDuQhFT8s4Hjxh+imQwRGikyQd0npGk4o/rGHLl5Q5BiNTwBPuz3n02kpMQGKVHQLFxL2sEAqlvQPpNSzlZbJvxwmphJqFqJHtcIopF7po62kkk1tRLk/077cfRHX/Zlp7nl/PRMbRhBtZ2WngA6dUVbamqDJ5ynPECoDIvgBAHdu0Z11DkoxzatMj8RxcCK7h8KTNAS71glpeAjs4puz9dYGNofExoyqJzuVZO6Ak0xjH25UUnIYR4CtY5EOZMQY9dG2ZE8YFatsKxYj0Js1cSJKEBdVYzGvE75tBmsk19AhJo5MkPVLPcq3c9x75iTCWGtQk8ACtnjDqEuVF53916OX/YimwfRPXM/+5AQyLRBZDSw6b8x3imdRD+u+tgmtfRN4271tpT1V6Uhf/DNKF++Hhx4ZbBRu/ErWR9XXxwBD5mGSvnzlMBOtUxIHPjRerNXJ4zY8HERuzy83u8rgezSLLIjuqB/vyWSL/hTg2RKPuTDWH5SDj2YEqlFIkVvHCJmIpnux0xjRA==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700016)(23010399003)(376014)(1800799024)(82310400026)(13003099007)(10067099003)(56012099006)(4143699003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: wSZMTYNVHvu3lloOyEIdutEFsn3ZJ6C6u61YR3heJP/tCwuP5J0sbUyRHRP2Zd+nZRXWBvn0CpuczNSYu0UzOboebTmoR9e00gjzu2tyb05bRE7d8/OkY/jBtLp99KN0Bt4A/5uvR6O8+g9ZzBJ8o7r/ye/Pg3YxOSYGdUl7X5DU+oeq0kbvfS8zqgDl/O1nJ883rTJdweaQMGeqTAWJNL79y16x1TSrenP8GhAWy2OUWS4SILtXwLOWcvOO1W3hPP1RWUcHbZCSiStVjoRhVejwsg/hwmd3kdLPsMZsjUjXWka0q1knABCcBwC2n/Bf0lPaUzJsTO0Ym6bmx+CzbgRj5fWsF2LjYzYH3YKWPgDpDpsnR+yPvomK9quVWS9mhWxjq4ibGVvs4aZdCyaItysDKKrGmCCC/KMIfpReL8S+m9DIQ8ESIdlkT/NmNVpY
+X-Exchange-RoutingPolicyChecked: AzotqBOKe+9/ndomC5B5BJUxHl31Fe0VDvKRGMEEpIc2FhAei/ap49tRZDTPf70U263amcNuosjUkA1F3tIkTk8OcmRbrE2TdWRgZUquf1CtQB2AdQIQ1BzOp0qV1mc1Jm7ouee/8kozi9MITlnuiQ1DtPqRQcdOG9v4B8akHfmKDpHq5cMs82a32ubinDMSi6uj18NeIfnpqRSsQQswn0MCtwg9JFhcBr5FfSLeGpBUJUH5RDwA1EIyRF01mW2E0zjkQiTGXEIOtLIIFJIrhZyDql93J9Acb7imcWvxwO7cror/tmxetKjKIlis5Km8ZQaktVsE2GnoYl/M/QAoSA==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 22:07:17.6693 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27afb35a-0273-4cc2-978b-08deee86eb85
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000099.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB7254
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDE1OCBTYWx0ZWRfX8Zl8jQzICw6z
+ rtiyn7acymCGMtzJ2mWpM11OSN4xkdd/vTHZEFd4J+ThwtOdZX+0zx+Mu8UP9b778jjnt7XutPl
+ FPUlRjYSSuRHpKl+1pWs/40Fl3vXV4o=
+X-Authority-Analysis: v=2.4 cv=Hs5G3UTS c=1 sm=1 tr=0 ts=6a6bcb21 cx=c_pps
+ a=JAdTqqN4+A8LnUbrk8iLvA==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=taLDd7a_hP9WKsMzeGRc:22 a=sozttTNsAAAA:8 a=lLZmtIKjAAAA:8
+ a=4UJxQYhGHt-_XVyZFkkA:9 a=QEXdDO2ut3YA:10 a=q5Nj8NTjyn2D8kUwajRn:22
+X-Proofpoint-GUID: -zeao5kAMoYHZjG8g-VSIjxNCiiGSNkr
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDE1OCBTYWx0ZWRfX6BvVmoGAdaWa
+ f8op+lRKJsBJjP/DhZIBbEEFGCX4Us3krMqc+OXmShB+EbIeOQF/Xczp59CxrqhS6uIQynoqLSs
+ oQm1CCNz7ikSsOJ2vGW5HRTNR9XEC5Oc2UZOwYDUyNQnLSxbN4hp3CkPUctELnL/cZTqq2Zp2N+
+ mtsTDTmkYbcTLTtd7BOPv0qxUi3tTif21dQiixFu2OpRPhcxpbAxoM8ctGdyGuheu5uGMB/sioL
+ GiHXIssxfXrd6pYpnGI5TQagnDebDT52J+2I029ynWOYwVsRJT46zh7VcTzaxsdl0re7E7VdR1n
+ rhB7nQwv8S+bQRixn0NOQ/Z0vJ3TbdG67+qL6b7f2wqfvSEEUdFHwhKnAp2O+JPwC/m8fnavg68
+ o1COhA4/JtPs4l/sDIGN5cIudmFv/DiA7yRGxrYWf+YBXXX1OxRbmeQlKnPRjB4wEs4r3JUehIp
+ sXgConWYHv3jyTflzyg==
+X-Proofpoint-ORIG-GUID: -zeao5kAMoYHZjG8g-VSIjxNCiiGSNkr
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-30_06,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 malwarescore=0 adultscore=0 priorityscore=1501
+ spamscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300158
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785449187; x=1786053987;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=AHa+37S/qhedhw4AxPkBV8l8Uq/a/Dlu4vWfBun7/oQ=;
- b=fhvXyTfeU0rO1JvukrvYdGj8TqCH75y6MhE6/tr5x+1xqkAGBKYab6hJUjkiY7n84R
- scXEtFr4+irLFOxXZVw+pZkC6ELb2f/2TCDYUpzV6rVTajTkOXBrqA257IQbdHmJvyVE
- hEDx5B4A9d3I6kq1pXePGE1OVi7U+zeN70ueM=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=iCWydQ73kSN7zj8XwkOTuZTB9MnyjhbKQ+dAYw+vj
+ 1M=; b=N5thH2WjzovYMD9Yccvn3M3KDzUdLLUsHTHBmBdBBNTpkDhAoCf/yonwT
+ 2j0Ntmk6P3luHTsmWiDZozx5RDJ9gPLmgh18rU4NIKDEyymrfu/dgtYieV97Jl6c
+ Uus8q/xpURtlLAc6Ax13BcDaa1Nqd2b2YJpFu0nODV1yCdkFtSVnpV9CzHoyl8x2
+ I1BOtSZzXXEKhmM78mEMOiwAo/izykxUTAFN762KYUw8IV0zUPxEa/pONjl6m5oB
+ Q5MX31jPOYeWkjX/HlsR0lkp9HTjF3Qwm6UXgyptU1FvLZiGPo0r0qZRftZFVhf/
+ L30BUsP19hI2dMpy6VvFQJl1Hs5og==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ti.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iCWydQ73kSN7zj8XwkOTuZTB9MnyjhbKQ+dAYw+vj1M=;
+ b=FmM4O6oOe3kDrx6HMfX3dcd25+dXD3gIZiptqXXJV8kR96naWA3JhHUmJndot35tg7fghQ+Qr7Fi4ks8s0fyNKVfvBDr5OAcZABoca5F9Hgze9XI31XnsDcuJTPnhnJ+OJRTPSGxsZAdh7Xv8X07ub7l0ObDSnfPMIVwwNG197c=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=ti.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=N5thH2Wj; 
  dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=fhvXyTfe
+ unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=selector1 header.b=FmM4O6oO
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -137,187 +213,59 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+On 7/30/26 4:53 PM, rs@ti.com wrote:
+> From: Randolph Sapp <rs@ti.com>
+> 
+> Add initial board support for the PocketBeagle 2, based on Robert Nelson
+> and Bryan Brattlof's work. Unify all debug consoles to main_uart6. Use
+> DDR config v10.32 from our sysconfig tool [1] for Kingston's memory [2],
+> (4Gb Desnity with a CL of 11 and CWL of 9). Add support for the
+> SPL_TEXT_BASE config parameter. Ensure all files have a summary and SPDX
+> identifier.
+> 
+> Also, use board_get_usable_ram_top() to fixup our relocaddr since
+> otherwise the u-boot stack reservation will collide with the
+> wkup_r5fss0_core0_memory_region.
+> 
+> [1] https://dev.ti.com/sysconfig
+> [2] https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/6465/D2516AN9EXGXN-TU.pdf
+> 
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> ---
+> v3:
+> 	- Use board_get_usable_ram_top
+> v5:
+> 	- Sync rm-cfg.yaml with am62x config. These apparently shouldn't
+> 	  be different between SOCs unless you are doing something
+> 	  application specific that requires unusual resource
+> 	  reservations. The discrepancy here was just due to age.
+> ---
+>   arch/arm/dts/Makefile                         |   1 +
+>   ...> k3-am62-pocketbeagle2-ddr4-1600MTs.dtsi} |  92 +++---
+>   .../arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi | 307 ++++++++++++++++++
+>   arch/arm/dts/k3-am62-r5-pocketbeagle2.dts     |  35 ++
+>   arch/arm/mach-k3/am62x/Kconfig                |   1 +
+>   board/beagle/pocketbeagle2/Kconfig            |  60 ++++
+>   board/beagle/pocketbeagle2/MAINTAINERS        |  10 +
+>   board/beagle/pocketbeagle2/Makefile           |   9 +
+>   .../board-cfg.yaml                            |   0
+>   .../{beagleplay => pocketbeagle2}/pm-cfg.yaml |   0
+>   board/beagle/pocketbeagle2/pocketbeagle2.c    |  58 ++++
+>   board/beagle/pocketbeagle2/pocketbeagle2.env  |  26 ++
+>   .../pocketbeagle2}/rm-cfg.yaml                |   0
+>   .../sec-cfg.yaml                              |   0
+>   ...onfig => am62_pocketbeagle2_a53_defconfig} |  24 +-
+>   ...config => am62_pocketbeagle2_r5_defconfig} |  11 +-
+>   doc/board/beagle/am62_pocketbeagle2.rst       | 279 ++++++++++++++++
+>   doc/board/beagle/index.rst                    |   1 +
+>   include/configs/pocketbeagle2.h               |  14 +
+>   19 files changed, 867 insertions(+), 61 deletions(-)
+>   copy arch/arm/dts/{k3-am62x-sk-ddr4-1600MTs.dtsi => k3-am62-pocketbeagle2-ddr4-1600MTs.dtsi} (97%)
+>   create mode 100644 arch/arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi
 
---Nc6nMlCL5OGjeoq0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Wish we had better templates for the binman stuff so this much didn't need
+cloned for every new AM62 board. Problem for another time I guess. Everything
+else here looks good to me,
 
-On Thu, Jul 30, 2026 at 05:37:52PM +0200, Quentin Schulz wrote:
-> Hi Johan,
->=20
-> On 7/24/26 11:53 AM, Johan Jonker wrote:
-> >=20
-> >=20
-> > On 7/24/26 10:45, Quentin Schulz wrote:
-> > > Hi Johan,
-> > >=20
-> > > On 7/24/26 12:17 AM, Johan Jonker wrote:
-> > > > Not all Rockchip SoC models use the ARM arch timer.
-> > > > Call the function timer_init() only when
-> > > > CONFIG_SYS_ARCH_TIMER is available.
-> > > > Replace the ifdef call condition by IS_ENABLED
-> > > > to increase build coverage and make the code easier to read.
-> > > >=20
-> > > > Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >=20
-> > > > Previous version not needed for serie, so resend separate.
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20220403230659.120=
-39-5-jbx6244@gmail.com/
-> > > >=20
-> > >=20
-> >=20
-> > Hi Quentin,
-> > > You didn't answer Kever's question in the linked patch and I have the=
- same question.
-> >=20
-> > Yes we end up the same code. But...
-> >=20
-> > >=20
-> > > This is essentially the same code, so what's the benefit, are you try=
-ing to fix a specific issue? How does this improve the situation?
-> >   > How does doing that increase code coverage... etc :)
-> >=20
-> > This patch originates around the time this concept as introduced.
-> > We are changing all code to the new norm and we leave this as it is...
-> > Fix this as well as a favor to Simon as part of the review. As we are t=
-here then fix them all as this is the new norm.
-> > https://patchwork.ozlabs.org/project/uboot/patch/20220403230659.12039-6=
--jbx6244@gmail.com/
-> >=20
->=20
-> This doesn't point at what Simon could have said that prompted this patch.
-> The pointed patch did actually fix something, and instead of using
->=20
-> #ifdef CONFIG_SYS_ARCH_TIMER
->=20
-> you used
->=20
->     if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
->=20
-> which is absolutely the correct and "modern" way of doing it.
+Reviewed-by: Andrew Davis <afd@ti.com>
 
-Right, and when it makes sense to and improves the readability of the
-overall code. If it not a must-do every time. There is a judgement call
-to it.
-
-> > The concept:
-> >=20
-> > Currently with #ifdef the compiler sees this code:
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > 	rockchip_stimer_init();
-> >=20
-> > 	ret =3D dram_init();
-> >=20
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > Now the compiler sees this code:
-> >=20
-> >=20
-> > int timer_init(void)
-> > {
-> > 	gd->arch.tbl =3D 0;
-> > 	gd->arch.tbu =3D 0;
-> >=20
-> > #ifdef CFG_SYS_HZ_CLOCK
-> > 	gd->arch.timer_rate_hz =3D CFG_SYS_HZ_CLOCK;
-> > #else
-> > 	gd->arch.timer_rate_hz =3D read_cntfrq();
-> > #endif
-> > 	return 0;
-> > }
-> >=20
-> >=20
-> >=20
-> > 	rockchip_stimer_init();
-> >=20
-> > 	if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
-> > 		timer_init();
-> >=20
-> > 	ret =3D dram_init();
-> >=20
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > By using IS_ENABLED and CONFIG_IS_ENABLED the compiler is able to look =
-further into code and catch possible errors or warnings.
->=20
-> I don't know anything about compilers but I'm surprised this would actual=
-ly
-> do anything different than what we currently have.
->=20
-> If CONFIG_SYS_ARCH_TIMER is not set, then you get
->=20
-> if (0)
->     timer_init();
->=20
-> which the compiler will (hopefully) see as a non-reachable branch and
-> discard it.
->=20
-> Otherwise, it'll be:
->=20
-> if (1)
->     timer_init();
->=20
-> which hopefully the compiler will simply replace without the branch:
->=20
-> timer_init();
->=20
-> Maybe Simon or someone else can teach me something here because my naive
-> view on this is: does not make a difference. What kind of benefits do we
-> have, what do you run to see those benefits?
-
-The compiler benefit that using IS_ENABLED provides is that we will make
-sure that timer_init is declared in a header that is included. That's
-it. It can be useful for more generic code, but it's of course imperfect
-if the include chain brings it on some platforms, but not others (as a
-warning pointed out on IRC today reminded me).
-
-> > There is even a warning for it in ./scripts/checkpatch.pl
-> >=20
->=20
-> I'm aware, I quite often trigger it :)
->=20
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > __weak void rockchip_stimer_init(void)
-> > {
-> > #if defined(CONFIG_ROCKCHIP_STIMER_BASE)
-> >=20
-> > #endif
-> > }
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > There are exceptions like in rockchip_stimer_init where certain defines=
- are missing, so that's still allowed.
-> > In all other settings we use IS_ENABLED and CONFIG_IS_ENABLED.
-> > Hope that explains your questions.
-> >=20
->=20
-> Not really no, sorry.
->=20
-> The commit log is misleading and needs rewording. As far as my understand=
-ing
-> goes, it's clean-up. Maybe there's something helpful for the compiler but
-> you need to prove it because I don't see it (I'm interested to know if it
-> does, so please tell us!).
-
-I agree, at minimum, the commit message isn't clear that we're just
-replacing #ifdef with if (IS_ENABLED()) as a clean-up. I'll defer to
-Quentin on if that's worthwhile doing here, or not.
-
---=20
-Tom
-
---Nc6nMlCL5OGjeoq0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCamvK2wAKCRAr4qD1Cr/k
-Cl+1AP4vzuBMzpHcxOtJUBHR3hWRA4eXvzhRA9mRwroD9vMrXgD+N5UCL6rMIE5G
-ua3S4EAYpvafZMNDb10+6fZPIbK/kQY=
-=m54Z
------END PGP SIGNATURE-----
-
---Nc6nMlCL5OGjeoq0--
