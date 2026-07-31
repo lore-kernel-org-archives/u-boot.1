@@ -1,84 +1,85 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64393C55174
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4397C55173
 	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 18:13:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3F4CA60693;
+	by smtp1.osuosl.org (Postfix) with ESMTP id BAD0780C95;
 	Fri, 31 Jul 2026 18:13:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lVA0bwX5vODJ; Fri, 31 Jul 2026 18:13:48 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AVuO0pvaCgxQ; Fri, 31 Jul 2026 18:13:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B306F60657
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C71C580BCF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785521628;
-	bh=BmltzXVcJQr8wVZbIjy64G8uGBSGZvxOvKMcHozIdH4=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ci1fop7gEM90kYDeW0Ork9HBkr7d+lIF0aKrJmv0t+za+2UW8vUBHmIzZg5Syxyus
-	 g5TCb02EYmxkHzyVaaldk+iRmKI/QUGkV9HqBCIK4LUTu+2c/tm59vLZ2FcIMNXunV
-	 DyZXx4qY+xzs2C/WNoCJgEose+tLy52XL1uV3ack6DAuqCkezCLLczoZaKVDKMn++u
-	 CpmDnzhNl8SDVDGwIHJO9tSicmKAmPhNObuejVGNhaWnSuDs+THfxi/zPqoiE9HxRt
-	 q+LMegqHij5J6z6unLZc3RzpOf31iU7MIiX1xyk+xcpBcv8sdY/yaWnUqM/GPjCZAG
-	 ug538TC1ZU6Og==
+	d=lists.u-boot-project.org ; s=default; t=1785521629;
+	bh=phmDJmfN75fTth1ohvItLBfi48L6SajNc1tmcwOdh3I=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=PqPo2gcfMCZSEqNzxepiSTvlXlwmJ7uXGGRss92yVHm2fs7+tem0t5O9EZm16DIdg
+	 eqPQ1Af6sYEbMJtgiEQfU3JliPqMtCNci87MvI0K4jxPvDXec1FDZ7Y7xoO2v6q9qj
+	 cRct+L6P8JXWtqk3VHwNdHUXAWSkmLmIo6jM7aLAKT4kx9r9E21sjgo77jO/nh71Ft
+	 ZGyg54i9n3iwZ1pxr24u/0CdT0cljaYolO4jgwD7KKOil5aBv5RWyexvX24OcTgWb1
+	 LUAADlcuWYORj51OlruE9uVwTCFf2/xjAY6LgFkdr7n5pP4Tk9Xv2Lfl93zP4xw6vA
+	 +zN4jueouGgiQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B306F60657;
-	Fri, 31 Jul 2026 18:13:48 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id AC8CA3B6
+	by smtp1.osuosl.org (Postfix) with ESMTP id C71C580BCF;
+	Fri, 31 Jul 2026 18:13:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C12A24B0
  for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9E4EC400E9
+ by smtp4.osuosl.org (Postfix) with ESMTP id A7A9840F89
  for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3eiERflYuBi4 for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 18:11:07 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id H3tffKCwNjSw for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 18:11:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections -
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=smtong@axiado.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5C05C40025
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5C05C40025
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 9768640E38
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9768640E38
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5C05C40025
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9768640E38
  for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:07 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A69D84A30; Fri, 31 Jul 2026 20:11:04 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 4D3C580117; Fri, 31 Jul 2026 20:11:04 +0200 (CEST)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAF1880117
+ by phobos.denx.de (Postfix) with ESMTPS id E5A8E84A0F
  for <u-boot@lists.denx.de>; Fri, 31 Jul 2026 20:11:01 +0200 (CEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Qlw8UC+tnzPVpPy+lOrCOSku799bADUnnZfQ2epC/xYmLa8ITF+N1uBUCwUcWf6uwVwezTsHSaI88IT9zVPQOABY/u1E0tOikSFrooJUPqqdWQ7BxDEbXJXHFqoNMxsVgORRjW57fDcYnUAh2lOuhQEo6IMFyD95KRT3xFkYCmBD/C592uRs3GUk88ncUBVAB7Uqdv4e5LnmOS/iQyxV0miQbN3J8bR8XOEwyvn+FzKTd6GEA2GFquzIY+nRI6KCx6HLHNca2Zpsjje2b9pDIlEd7+cPIlyXdgzB8AQEkb2HvxgCiucFNuoBM4OE9uELx0WJX5TrivThFpGjQCmXuQ==
+ b=eyXsUJXGJ0Px8Ta0OXPXB9QPNOFdy/ZwEObUbY8QDMpOlCnJ0F2SjQm5mMox9PmRYLCfa/qd5ix5K8XFi2/p8C1/W+B3QVnFLpsSXCyBr30gfa9I2dzhMy2awPv/dchMMk+4nG5aMbxYXHVsfZOuy1DcdTIUviKcTX5JUiXpcNAJjxyWW/Bs5b4fDhGvjwKUCkrcl1dfgRQXCl9muHV93H+gH/2T67vyTeJMIMMsgE8mbwsWFPjR7cbE2m+R1+JGhlSY9Kz5Yiyk881fwl/WswiPNdv12aNCEa02ou9S+UOrWqpRGXWewJ66hGPr0cGF6HVvZ6Qc9sA59c5yyvbQcQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BmltzXVcJQr8wVZbIjy64G8uGBSGZvxOvKMcHozIdH4=;
- b=PmJ9+opEt3sbwHKD7pG3/2LBEraux4zpKj+ldMAcDyHJFPYzsqEcTMzrZsaItzD3P8TmAyNIX4zSA9gwBR7lOHJeMthx4gVWO6LocUo/POsDXwksdfLSGEjn0cahYRIRHCDYDCZAMdCLFGUi2iv0xX0iz6pRqJXGV3j/dI2ACx10BwLDoIs6Me8jkN4H2Pbz20M1mAbUFbB0Ob46jTdPw8z4erm1LKtbs/QxWb5yVJlqQ3Z8Bl0fKRJ2bTvkkwRoYCpsoLuOn5YlEQnJG0Y7p5A7vK9nMTZTZswtvxyRq7343g6/G9m5zQHBFK3655af5V5V1dEpz4FQp4wNvQwTGQ==
+ bh=phmDJmfN75fTth1ohvItLBfi48L6SajNc1tmcwOdh3I=;
+ b=ai0Y6/8SlQLlYFWOLMkck6Zj9kHyHcDsw8pMxj5EulNP21IAuinJoHj0xqob8NoIm/3BNjDxvNYE8LqzdtgWnrjsU7aYkTbAuuUXkXtTHNrSr5Qe3QQtE1D/ZO3O0CNUTqi8/lquNOKAsMVPzQvg0mAiDbDnZXkBcVjMVIx3ncsm7R5LEh1Q9sjaNAYDUyjfs1AmVphLpLLtOqMv/U6qt6JUjX6VGffh8mRELCNSmurtBfxaVfvXOeu74M7fkAl8skwm6t31DEVD29pTWHMXm4eW37Wsofy+qpeHmc7rqfoKTYm2J3/Q6NkBjxhayzjVnTilqh4xq3eScuVkrpqehw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  64.62.143.114) smtp.rcpttodomain=arm.com smtp.mailfrom=axiado.com; dmarc=none
  action=none header.from=axiado.com; dkim=none (message not signed); arc=none
  (0)
-Received: from BN9P223CA0012.NAMP223.PROD.OUTLOOK.COM (2603:10b6:408:10b::17)
- by SA7PR18MB988375.namprd18.prod.outlook.com (2603:10b6:806:4cf::6)
- with Microsoft SMTP Server (version=TLS1_2,
+Received: from BN9PR03CA0528.namprd03.prod.outlook.com (2603:10b6:408:131::23)
+ by DM4PR18MB4174.namprd18.prod.outlook.com (2603:10b6:5:391::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.16; Fri, 31 Jul
- 2026 18:10:56 +0000
-Received: from BN2PEPF000055DA.namprd21.prod.outlook.com
- (2603:10b6:408:10b:cafe::a2) by BN9P223CA0012.outlook.office365.com
- (2603:10b6:408:10b::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.14 via Frontend Transport; Fri,
- 31 Jul 2026 18:10:56 +0000
+ 2026 18:10:57 +0000
+Received: from BN2PEPF000055E1.namprd21.prod.outlook.com
+ (2603:10b6:408:131:cafe::6b) by BN9PR03CA0528.outlook.office365.com
+ (2603:10b6:408:131::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.15 via Frontend Transport; Fri,
+ 31 Jul 2026 18:10:57 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 64.62.143.114)
  smtp.mailfrom=axiado.com; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=axiado.com;
@@ -86,23 +87,21 @@ Received-SPF: Fail (protection.outlook.com: domain of axiado.com does not
  designate 64.62.143.114 as permitted sender) receiver=protection.outlook.com; 
  client-ip=64.62.143.114; helo=smtp.corp.axiado.com;
 Received: from smtp.corp.axiado.com (64.62.143.114) by
- BN2PEPF000055DA.mail.protection.outlook.com (10.167.245.4) with Microsoft
+ BN2PEPF000055E1.mail.protection.outlook.com (10.167.245.11) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.0
  via Frontend Transport; Fri, 31 Jul 2026 18:10:56 +0000
 Received: from [127.0.1.1] (unknown [10.4.1.117])
- by smtp.corp.axiado.com (Postfix) with ESMTP id C25E94157BE1;
+ by smtp.corp.axiado.com (Postfix) with ESMTP id D7E2940BFE0E;
  Fri, 31 Jul 2026 11:10:55 -0700 (PDT)
 From: Siu Ming Tong <smtong@axiado.com>
-Subject: [PATCH 0/4] Add eMMC support for Axiado SCM3005 board
-Date: Fri, 31 Jul 2026 11:10:48 -0700
-Message-Id: <20260731-dev-scm3005-v1-0-30bea90ac5f7@axiado.com>
+Date: Fri, 31 Jul 2026 11:10:52 -0700
+Subject: [PATCH 4/4] configs: ax3005_scm3005: Enable eMMC support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACjlbGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyNz3ZTUMt3i5FxjAwNT3RQzo2QzS2NTEwNzEyWgjoKi1LTMCrBp0bE
- QfnFpUlZqcgnICKXaWgDjjNdRbwAAAA==
-X-Change-ID: 20260727-dev-scm3005-d62c69354074
+Message-Id: <20260731-dev-scm3005-v1-4-30bea90ac5f7@axiado.com>
+References: <20260731-dev-scm3005-v1-0-30bea90ac5f7@axiado.com>
+In-Reply-To: <20260731-dev-scm3005-v1-0-30bea90ac5f7@axiado.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Prasad Bolisetty <pbolisetty@axiado.com>, 
  Andre Przywara <andre.przywara@arm.com>, Tzu-Hao Wei <twei@axiado.com>, 
@@ -111,59 +110,59 @@ Cc: Tom Rini <trini@konsulko.com>, Prasad Bolisetty <pbolisetty@axiado.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  Siu Ming Tong <smtong@axiado.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2258; i=smtong@axiado.com;
- h=from:subject:message-id; bh=rTl4034jJ6mhhVeGIs3q2AtE7c1ZqH46D0g6zmiKT18=;
- b=owEB7QES/pANAwAKAXwcqHIUQvOOAcsmYgBqbOUu71XD7BD0+8QIQa7gdmxWdvI1ehBN0UWP9
- Rz7dH5d6hGJAbMEAAEKAB0WIQR3Lze7GwS3XzAkT0h8HKhyFELzjgUCamzlLgAKCRB8HKhyFELz
- jmAiC/0dFmwxEwSmrpaomoInlgyRmiuZyy2JGODSWk6LIXCyI3YhcoANX98ya0qf8aEGEdyID7I
- yU0vAIgTfA25Wyye/KDumMsWTDFGJ3YyhzepzS2C8dmm/N8eSkd3Z0BZck5LA0qoTrHy09KAM9s
- g8RxE3fYlwkjv3+62FPurFfKHHLY2wZerPWWTVClIN1Q5si7QPFDSTKg6rp+eEIrVwSfHOHr3dr
- Jxfzj7n2/9IhHITc/O9dGyrG8NYyA1fTTNL4NA9qnlu+XvZ1WNeEoBFgscDQ4dlI/NYovUr5qcT
- Retku/E7yLOtWWPei4hCGkn1CqBHBWNWdtlJeHt7xfHmZlUVVaAKNWHA8yA4RroLRWXsfVM0ttn
- aRTf4fJbVgJ6C8PwGO4I12Qk5u3EXaYbwDesVI0/0y79cQxD68PUM7aed5FtPOywA7EA7bwGjAb
- whSOuqTw15wGFJwiNrSY62JSwdZ5hVeIZs93TEEjSTJ4q88rn42CUqbkiHZEjpu3L7Agc=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1474; i=smtong@axiado.com;
+ h=from:subject:message-id; bh=qlDfCCvv62KAVcaV/kiGq+125AOSAETuIYL7cyC8uQU=;
+ b=owEB7QES/pANAwAKAXwcqHIUQvOOAcsmYgBqbOUvVI2SOIAqetPKQ+Hg05NgPuV3JG4NjfoCG
+ avD4L9wVDCJAbMEAAEKAB0WIQR3Lze7GwS3XzAkT0h8HKhyFELzjgUCamzlLwAKCRB8HKhyFELz
+ jgL4DACGwd0eLfY6d+K0g0f26gDnCjKp68J1WsFuFx+d9BcH6C52Q99/zKGceLScCJ8YHezVCd6
+ oiatgRL2s1YeGyWwjJlf0Js7x7D+CKE7GyligJUDmNxgcQTrkMkjbsIB9/HdRPwkgDZ64EnDYCl
+ qkYPqqnC6Kqi7FRDqhsTiBoIccsu2Upz6D4M8E74dQbU0NiMZ9XYrdnGsUSo/Zsa7WRl0yanQ2C
+ sL02fYeS80GJkDd7T7FgPLxYbHuER/KVIcX0Rrod9y61tfAoQyRw9WphOf5ax6ytN1kmd+IMsHf
+ DTGZCT9mGbdMBQyB3jR7Dpdpdit/VUsUx4n8O9O851Nx243gaTTcg64TKEQOOy5Y2y08hg+/vcl
+ 7HptwbWJt2h7rTEBgR36P3gGzDoNDxoCrM7Et/eyCJzhwUukULUXS6aolAQQRKPBz4LEgt7J/IE
+ p4SXIh/6F5RbqZBU4Lft2La6LuD/vYkPHh2W7IPJrj8eegZLJsW00RNStvdJjfTl4KKzk=
 X-Developer-Key: i=smtong@axiado.com; a=openpgp;
  fpr=772F37BB1B04B75F30244F487C1CA8721442F38E
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DA:EE_|SA7PR18MB988375:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93db40e2-3ac0-4c39-3b21-08deef2f1160
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055E1:EE_|DM4PR18MB4174:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2732ca22-105b-4c25-e0a9-08deef2f116f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|82310400026|1800799024|36860700016|376014|56012099006|10067099003|18002099003|3023799007;
-X-Microsoft-Antispam-Message-Info: Ug7M5CFpbAGLdnn8qyZDWDhQQbtTYNbuBBwpGhd3BeVBaAGvw6PlI0vP9tux4UW+zG2tDKc0MKo7JvKxH/qt9ioKaL617nYGhdklbA3qnhh+CA8A5U8bjkbBpE8y4egvXYAn64um29EoRXG1zweVi/SBB9V2xEfO/dYzmmGK9kqFX0akXSxmR8FNAI/oSK3OT25Lw4GmHZUztuPMd+KhILtcwdtwuqEJBwDqCFAzSn6/uQ1erT3mzLDbFJizIoQdyK006+XaB8wf1RljtayyN0ub0aUYJxEy2SB0RK49DGR9e8tldJmWmHADboypRAY+zqpKUVT/LFnpaI6k4pSCe0YN8EUY7ZqNPIjbm38arjCJ5ywBfKEKEpu5zjeWlb1BNOT8NnqDrj3j1DDLq4r/MaRFdJHye9J/wzR3AnIXjYInnd8YGcO9Q9eMrOQ8WSzN0WhCQbt6WhtLRSbs6nkPlzs82g82s7z0lP8tmc9jLxxdGFbDhyYq3kQIkyYpsVmh0tKiioCOMKFFoM93g1i16g31uGHCDxJTNrK/6DmuErqHm93+P/5+krbjw2gS0W4yI7ATwniB3QA3mAOJMyWX6o2jS9lhOObJmeSyiR4Sm6+SpRFh/DJ6Il+YS/VEWzK1/O6phrawt/N+yUc5h3QQII2+VFsIgjioQdWzM9/fwCs=
+ ARA:13230040|36860700016|82310400026|376014|1800799024|23010399003|56012099006|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: i5b+1u9+Imgn5DlNCXROtoGZRZuPidZCOHMCbTVhHOTE7X/P6w5wIat3r9S1pqW+TpZrCw+XcPCAaCSja7LCYdaTEoVeiM9jtjevhA5dv2TpECqcdWkTmZI7UK0s1TX4cIw7TBP+LVrJWUNrxdpp76kCQrbqSLp438P47HnhuwapdbmvocKoOLb7hCkWH8joOMshuQ1CpXkBEVUKDuOY1uH4/hPjPN2CJ7kGYB2LwxauAK/4cT/XGeG6kicb22wXI8r4fnn41ecbj4YYCFwVFZ0agXUZHCnuNlHdOyeum52U8zUEvM9b7beyC5Qyq7LOyigIHvsvVLKUjT2zUfzV0FQ2k6hQtyrF1AEVhX2aIM5yveyPWZVR2RWryVonpbCupD4Hqv3huYC+/7cQczMxtbV2b4eKmz/Gv6kEolSK2PDslrZB4Iof709JIrt4YTpqLq3PO8Zo6TKufkbUP2r6uaXpv2e0BXr03th/5KTwLa+W9Ejms3ds4ygnXWy4oP2MIsv0cfGIGRT8VT7gSt7ayTOMP8Cq3BMmRT6RmEGQd+Wwx4gdSgRFhirUwql+L7/2i4G0ZLVgFbaXqozmBzJaYHhw/X1Ujs5vrOUv39Bm/UKSsCBKpM24FSiBZwK7xWHxmfnzw6BuXVPYn75SHFkiiz3DnxBR4B/PaHWGvtZuf9c=
 X-Forefront-Antispam-Report: CIP:64.62.143.114; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:smtp.corp.axiado.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(82310400026)(1800799024)(36860700016)(376014)(56012099006)(10067099003)(18002099003)(3023799007);
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(23010399003)(56012099006)(10067099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: f3iR+qdHbkBKHVCscsYCGtw+xP/PrkhLLox2Kok5C9S/ndk44aO/rEEXiy7QtstPKYpJ09Z1aOTvWQtNZeH9YuvqByoDGYswtF9kr+5uRTOpjKnTgB/LNtCO9cmcfUoLF3FdCLx5e7dPwJURqWV/ATGlcwiM28BTwMN3nGZT/nNf+eCjzK6nv1mIhQdCcUwCSd4hIU4q5QNKZGHVJpSZXQqSCE01mb/sbLxCx60uKPDB3SQv+2l0uQCoyA0ucFRHyeBZH20WhdpEiQz9jG+0UJRHNrD5iHYZpNyquHaLHq295vzhY3kUAN54/bcv5lbivTo9nxGcfUaV0gsXRhAKviPvqj7dkqnD+1UU3GySxUM2NFiu/3NrFkUAXVwti4zQlrAXgIZ54M+QYgniz6eZIPyOBer4d9E9or/xG9FPxij64fw7GBaAFFFkRGUAcQuF
+X-MS-Exchange-AntiSpam-MessageData-0: rMjY0M4NO4lsvl97KleZcuftkEhfP6m3SiHnAXFd3EZXPeTctxsT5r3EPESZayNYyBMGSknVW3icJtAF0C1dFlytayMA+cF0Cq8zXFHrw9xcGqhdJF+wERSr9Q8bMUZR2Bk5QywNG4uuCZV26Sio2bbVHCsEoszTmk57upoNa/PbGU8j1bfOmfcdtsJ0U00GSQntqypRV/PAPKkS/ewOzQ/f2utnCmKdzdM6ssxYpYxb/rqNeFHe1RJ73NJ5o73akxcZTlH7ItxTLX9yAwQtKJ34tsLAlqnE/nqxCKSpr3HIhPcOR1MeOZvaicivKfnz/WzjHMAbpJ1Vj8l7n5Z+4PRyn+a8L6lcZL6em/SL3lJiKu8NAPJn2KQ89ArQzWK8FTglWVTm2Hp9gfcKyfbEs8BwV805uKFfbq6qSZw8EMBV3GB0vYsgk0RjEP00g1bC
 X-OriginatorOrg: axiado.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 18:10:56.5469 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93db40e2-3ac0-4c39-3b21-08deef2f1160
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 18:10:56.6490 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2732ca22-105b-4c25-e0a9-08deef2f116f
 X-MS-Exchange-CrossTenant-Id: ff2db17c-4338-408e-9036-2dee8e3e17d7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=ff2db17c-4338-408e-9036-2dee8e3e17d7; Ip=[64.62.143.114];
  Helo=[smtp.corp.axiado.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DA.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055E1.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA7PR18MB988375
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR18MB4174
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Fri, 31 Jul 2026 18:13:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=axiado.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BmltzXVcJQr8wVZbIjy64G8uGBSGZvxOvKMcHozIdH4=;
- b=jeQdcyKwa33ddMRtIJQ7FYUV/X6sQadrprAnQ8F8FH4a9aukzsHV32u77slGHAg/eaD+0/hwjVVxDaQmJVzpIrjPChPqU3wvvvTrd8CIuvevK7EwviYJdXiHlmYWO0ruCnrz8OmVZ9NIjoP2g9RS3wtLSmkUUD/4V1vdqV51cGJCX+wsoa76w5/OyO+ANrpUsBoTvi+z7ZptBdU58ehShji5CXgaQjmfam0jmuO9fWsKxNrUIDtepPDFJab88EPR84ZBwGmKYNjbMyfpEm7ujURiv4AMUGVlYIckvQaIAvmo7Z+0NSTUgqgiKvCl2G3LXYcyT8cCpif+EQKCl8+TcQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=phmDJmfN75fTth1ohvItLBfi48L6SajNc1tmcwOdh3I=;
+ b=IL0s0cGkXdEyBfCdlSzMGxCY6aGN9t/6X2I8rF4JZLmP30mYZt3r+jOTN2EK9Ut/4tBBwBXThmONCQ5dYEJzdUFOmQQ8QB0CuqTShb/XjMfPZbtTtV8LRgIbzrEa2eyS6qfWTBOjawfrf5BvaNsRw/uQ1MtJZkQ5OPaLABbg41yJzqOJjztXeRL6xQnYrv/3Fi0moWXYUXfUYZBj6izGS/jxgCVAb9+kmsjg6JeHmAx8zcuglp9FNz92YI+k5u3f/anJS7zSxje/0ghC26LHWd5as3FLiabA7MN56wxKDbkCgnoFjtOfjGLPm5jqLh10W9Fw4p/vwOImfRaeLhc1HA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=axiado.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=axiado.com header.i=@axiado.com header.a=rsa-sha256
- header.s=selector1 header.b=jeQdcyKw
+ header.s=selector1 header.b=IL0s0cGk
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none)
  header.from=axiado.com
@@ -171,7 +170,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=smtong@axiado.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=axiado.com header.i=@axiado.com header.b="jeQdcyKw"; 
+ unprotected) header.d=axiado.com header.i=@axiado.com header.b="IL0s0cGk"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -187,58 +186,51 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series adds eMMC support for the Axiado SCM3005 board, based on the
-AX3005 SoC, which uses an Arasan SDHCI controller paired with a dedicated
-eMMC PHY.
-
-The series is split as follows:
-
-  - Patch 1 adds the eMMC PHY driver (PHY_AXIADO_EMMC). The PHY provides
-    signal conditioning and DLL functionality required for high-speed
-    operation with data rates beyond 52MHz, and is based on the Arasan
-    PHY.
-
-  - Patch 2 adds the SDHCI host controller driver (MMC_SDHCI_AXIADO) for
-    the Arasan controller. It builds on the generic SDHCI framework and
-    adds SoC-specific signal voltage switching, HS200 tuning and eMMC PHY
-    power sequencing through the generic PHY API.
-
-  - Patch 3 adds the device tree nodes for the SDHCI controller, the eMMC
-    PHY and their supporting fixed clock (clk_xin) to
-    ax3005.dtsi, and enables the SDHCI node in ax3005-scm3005.dts.
-
-  - Patch 4 enables the new drivers in ax3005_scm3005_defconfig, stores
-    the environment in MMC and bumps CONFIG_SYS_MALLOC_LEN to 0x400000 to
-    accommodate MMC operations.
-
-Tested on the Axiado SCM3005 board: the eMMC is detected and enumerated,
-and read/write access through the MMC subsystem works, including
-high-speed modes exercised by the PHY tuning path.
+Enable the Axiado SDHCI (MMC_SDHCI_AXIADO) and eMMC PHY
+(PHY_AXIADO_EMMC) drivers on the SCM3005 board and store the
+environment in MMC (CONFIG_ENV_IS_IN_MMC / CONFIG_ENV_OVERWRITE).
+Increase CONFIG_SYS_MALLOC_LEN to 0x400000 to accommodate MMC
+operations.
 
 Signed-off-by: Siu Ming Tong <smtong@axiado.com>
 ---
-Siu Ming Tong (4):
-      phy: Add Axiado eMMC PHY driver
-      mmc: Add Axiado SDHCI driver
-      arm: dts: ax3005: Add SDHCI, eMMC PHY and clock node
-      configs: ax3005_scm3005: Enable eMMC support
+ configs/ax3005_scm3005_defconfig | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
- MAINTAINERS                      |   2 +
- arch/arm/dts/ax3005-scm3005.dts  |   4 +
- arch/arm/dts/ax3005.dtsi         |  25 ++++
- configs/ax3005_scm3005_defconfig |  10 +-
- drivers/mmc/Kconfig              |   7 +
- drivers/mmc/Makefile             |   1 +
- drivers/mmc/axiado_sdhci.c       | 311 +++++++++++++++++++++++++++++++++++++++
- drivers/phy/Kconfig              |   9 ++
- drivers/phy/Makefile             |   1 +
- drivers/phy/phy-axiado-emmc.c    | 208 ++++++++++++++++++++++++++
- 10 files changed, 576 insertions(+), 2 deletions(-)
----
-base-commit: 02f8b8ab6d6095dccf867d899099322f7430d20d
-change-id: 20260727-dev-scm3005-d62c69354074
+diff --git a/configs/ax3005_scm3005_defconfig b/configs/ax3005_scm3005_defconfig
+index 5dd72d87220..0aa1ec85c36 100644
+--- a/configs/ax3005_scm3005_defconfig
++++ b/configs/ax3005_scm3005_defconfig
+@@ -5,7 +5,7 @@ CONFIG_TEXT_BASE=0x80000000
+ CONFIG_SYS_MONITOR_BASE=0x80000000
+ CONFIG_SYS_LOAD_ADDR=0x80100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+-CONFIG_SYS_MALLOC_LEN=0x20000
++CONFIG_SYS_MALLOC_LEN=0x400000
+ CONFIG_SYS_BOOTM_LEN=0x20000000
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x5000
+@@ -58,12 +58,18 @@ CONFIG_OF_CONTROL=y
+ CONFIG_OF_SEPARATE=y
+ CONFIG_DEFAULT_DEVICE_TREE="ax3005-scm3005"
+ CONFIG_MULTI_DTB_FIT=y
+-# CONFIG_ENV_IS_IN_MMC is not set
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_OVERWRITE=y
+ CONFIG_DM_MMC=y
+ # CONFIG_SUPPORT_EMMC_BOOT is not set
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_MMC_UHS_SUPPORT=y
+ CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AXIADO=y
++CONFIG_PHY=y
++CONFIG_PHY_AXIADO_EMMC=y
+ CONFIG_TARGET_SCM3005=y
+ CONFIG_CLK=y
+ CONFIG_LZMA=y
 
-Best regards,
---  
-Siu Ming Tong <smtong@axiado.com>
+-- 
+2.34.1
 
