@@ -4,144 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E58C54F54
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 15:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A829AC5516F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 15:41:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6A0064113F;
-	Fri, 31 Jul 2026 15:30:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 61DF741144;
+	Fri, 31 Jul 2026 15:41:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FhYV-yB-agkU; Fri, 31 Jul 2026 15:30:38 +0000 (UTC)
+ id x2Z25KhYqjdV; Fri, 31 Jul 2026 15:41:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6288941124
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5F9B541145
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785511838;
-	bh=zyMaR01CZnD+fyeBYNldP/G5Ichz/KM6YH4bZrs1FX8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785512501;
+	bh=UWkcX85Rz6NBeoF5ObASTur/Ol3rU84Cz+5UWh4McmE=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MQnRwaXI3zyY/DUVPRAFifefHVZCLwDI6pOPsIzJGmEC1OjAERChcA+Y5IOiqHbRy
-	 6tozKWWhu6Jw4HOypX9FfmV7hrTdYwIKz6sbNkpA2xzMMUoibcJNaibhvB5b1lqmNe
-	 4tmKiY2qNiuKb9l1noq4kRO1cecIViIsNYUNi5oIGFh97zl2jrymv8xKnUdCWXbd1N
-	 4np5N1/Xlks56apVDMkyF/WD7eEqsic5OxFft1AVwfFcQ62nO86TquPxiiel7S9uLW
-	 TB0+OrAw2dDaNnCPQnWa+D0PJYzG67TmHp7Cj2bg0XvbYs/kh++I314EF3/67piyfc
-	 D62E/fewjc63w==
+	b=vRsCsZHGFQfFTg+gOrbLKnPGwlfmhvUyAxll5SE24sOpcXHSrXLJAcK0Kl5VsFJUg
+	 vivyjn27giIcvehZVHY40oFdBNKAjGRtwOk16B6JScCX+ctbalPnQvaCFfsl2UT/Oj
+	 48VAnvxQrsQR1hc35jNaZG0a0ZALUKCapyLH0ULllGCb6R2getQ3M3W3JIp5Bd61nd
+	 aTp1jK349e/LMcY2NsMGks27j3dJB7aaeYEcjiFCtFuzthWZ+81c+/34sdrso/b1JN
+	 DiRiWehTFLtoNNtBZqk4AqXqvunRI5xJ02+hpQaxXghn+a3ghj/P8v0KYJzK4akJc9
+	 OYHa5YxcCv8Ew==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6288941124;
-	Fri, 31 Jul 2026 15:30:38 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id CA5DA197
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:30:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5F9B541145;
+	Fri, 31 Jul 2026 15:41:41 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id F127336E
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:41:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B0BCF60895
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:30:36 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CF054607C5
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:41:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MqaI6KaWijkz for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 15:30:35 +0000 (UTC)
+ id oOBkNq6EW7A0 for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 15:41:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 779D460816
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 779D460816
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 779D460816
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:30:35 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c169ae1cb26so384160166b.1
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 08:30:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785511833; cv=none;
- d=google.com; s=arc-20260327;
- b=lQwOLhyKBJpTg1B9FmBBFXrTnRBtxs2FAM3mZP4jmeThKnS9Vpa0op0ILrc8n+SSR3
- J3YnIu87yg6dSGdAbvw9JLiMWwbf4jKXgSTvqm0TTGhODEo3ZdN9yycryAmdJCLJNVYs
- rQFmIF+dNAtwCQLYf45dxEQTkXpDNrxmb/UV7kEHo5J9FwZRwHLr+mG93Q8Ojd8WfXuu
- ySkKHYwAm6NvTG0269gtm1YCs/YBpFHmZRFnef8+wJDjiVu7mR6FCiwf6wotRctEKir7
- iplXzWdvmQcBKPXtxYD9ZjabZ+YpYLCsg+ZIPNp6hFkumArZ4MA5XBVPOyKzirdEhUk+
- rkMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zyMaR01CZnD+fyeBYNldP/G5Ichz/KM6YH4bZrs1FX8=;
- fh=NbS+ZXbAEiMFaiNIvS3MM/1ciJNf8n4gkCR6bN4C0eo=;
- b=NFqSxneFeMvB2w9wbmf3K2jMuX4mfE3b8LO+QQoWxGDQIvYptX7MiI2q/yLR2bLYH7
- IxUORB6jUNTl7qIi9Z0L+EWnn06AvNbt+ZiUFNvBua36cNvgs7hGK4idg7yloMLi6TPr
- cSm1kYG8lTfg2RsLtDDmvqcAqEqnkcLKJeXB21Q9fStsh6mT5imqSJv1rYHVSOFhX1Mq
- 15d7YHX/nSQedsZzJ6eenczJMy9BLuGj8x+mrTAOs6Jeoxn3ebNNSyC0tqmejAeE+fN3
- TFMdfdeGvTzyIWMw2W/LA4T/hRPxfoFuTEck5mL15wtEraaFNZGr5fg3bdClIn5n19EE
- 8RMw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ envelope-from=richard.purdie@linuxfoundation.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 0563B6063F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0563B6063F
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0563B6063F
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:41:36 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c1c24ec9525so199713266b.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 08:41:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785511833; x=1786116633;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1785512495; x=1786117295;
+ h=mime-version:user-agent:content-transfer-encoding:content-type
+ :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=zyMaR01CZnD+fyeBYNldP/G5Ichz/KM6YH4bZrs1FX8=;
- b=MAFumFSNl2CDXUOs7GL2YhoIFDPzrxky/3+n8O9zeIlV/9U9TMHqSMiK03s3pqaXSf
- awBplWdFClaZRDsHVhw90Rk/xZhLjzBWhxarSAbhrnSFnk7Bwqmm9YvV1Xq0zDPkpZ7X
- JCXk3KlhzsXkX5LzBKDjuXqGuEEz2LjGZGcjnShDbKY316hSjyF4nJqlB0EmECYIPS2i
- KiBgoaVbtYsaMqhIQqzKaTsNcNZCJn7GcFghBq6ye4ZUYgei+XOd9ijzExxn3yDBVrJh
- 9RnYDCEl4CbNJTTWk9oz2yv6a51SXpj1gjDiNFksPCfLb7Hg1XPwOrLQt8Vttni0JFf1
- dpwg==
-X-Gm-Message-State: AOJu0Yz7dIV+wZMLh2hw4uZa0305XgMn38vt5QSarIbTzhVF3Rpsqkyv
- WV6w1CLnDoF7wLWQMLNtMsiyZCwMoqnby2SsMB5nbfUEeU7hJNFmBxcgnDCb57FjEeH5nfxoHMr
- t31kgpWgOkkaoPuKBoAePDLe/MHt4MYZSNAd7nNjUeof+maddi2zMNSo=
-X-Gm-Gg: AR+sD10DQZU5e/FHHiOa7mNKBtkJrdmB8rN7jXMEez6AZXyVxIpwT6j89MDGMpBlhHu
- oFDcWkU47C2eSXNZqtpyB/IYCOehxACqT4xLWpNjBoxUEJowuKiqz1981ReEfBHuXvmmFe6YeoM
- 7boAnEsOHsLF5ET0l5WkJSKOX1BQyceDme1K1jD2Wm5L09h7IVqiWmjckkVZACcMtkP/og6m8q8
- duP/5uD4UAgC8ECGzpUx30qZb7mvAORJqVxAasVMSQ+s2f+CDPGdFoyz2SMlQWNQZw7mdjSCZuS
- Lr0sN3sDlrXXukUF57e/9Q0/3BDoeFK+Yx3l64bO4nOusXeQPWOw8XG0H9HSb18KouG/1gyivYi
- m
-X-Received: by 2002:a17:906:9c96:b0:c19:7908:c67e with SMTP id
- a640c23a62f3a-c1fd316d26bmr157112166b.4.1785511833129; Fri, 31 Jul 2026
- 08:30:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
-In-Reply-To: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 31 Jul 2026 19:30:22 +0400
-X-Gm-Features: AUfX_mxOiNyxGEdEmtOTk2GPpPF4L2_BdNQSYiy27qqny1VW_74Vyu0vydDpsXY
-Message-ID: <CAKTNdwGG1w9qe82UBWjBx3kWK15b2v4vcdKK8NG7vcEuHJocLg@mail.gmail.com>
-Subject: Re: [PATCH 0/6] disk: Fix the GPT layout on media with large logical
- blocks
-To: u-boot@lists.u-boot-project.org, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
- Javier Martinez Canillas <javierm@redhat.com>, Simon Glass <sjg@chromium.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Jagan Teki <jagan@edgeble.ai>, Heiko Stuebner <heiko.stuebner@cherry.de>, 
- Jonas Karlman <jonas@kwiboo.se>, Klaus Goger <klaus.goger@cherry.de>,
- Tim Lunn <tim@feathertop.org>
+ bh=UWkcX85Rz6NBeoF5ObASTur/Ol3rU84Cz+5UWh4McmE=;
+ b=OB7R+Cyxk+qDnfS5qdPTFOKhjGXej1z7nJIH/afAGYlCKzNfNpypi5ZgoffWrOwSDo
+ QutI+1UchU54NSPWkSzUDQUfb7euIqO2sGdKK8lHos5sq5IF5ysGaCYN0/k/bKdgmfe8
+ o0YpIBaR1swlEjq3FIXbJC2M7/pIF+x8HAZGjjlSIcLg0WupwGqX3kLGX2KwgPpADymW
+ z/ZxHLB8hp76xuxPZASCeHSwEj+bGIuyxuwN0jdXreXruoGqNpUmiPa4ufhNK6xR3SCy
+ sKup7nGSkM0927oikH3vJwf6GXrfaPlJh5gDknEjH78tG3o242l5Da6d0Wju9Di0NfBb
+ AWcw==
+X-Gm-Message-State: AOJu0YzgjnNRYK/vhNSC+mYj4Gmd6JCfgWzK9nw8iFIBDPTcEGGg5A5Z
+ zVMuAePnziGayM0Go2RfRRLMcuaJOyW+1EfHF9Sf1YXFNagrYZcMHl/ORKyP0Ur1xo523h6KQr8
+ fzWXD6mI=
+X-Gm-Gg: AR+sD12RR9gagf31wyINdAwAVKg0J1vBz6rpNHI809RRXWzI6jpoQBGTqPMIAMi2MEU
+ 3feFLwQgRaikPeF7HYm1B0zwbjpcE6an5JdtqslB/KZip9G8gTEDu7STITh6PwxMITdCMrWzjZv
+ /7UjtgJ9eyzBSqjuGQNVLOsKgd0CJ8261PY+KFZy+Y5MYD+mnTj20tHbs9ktCgSk7vpxt4IErTE
+ rQ/SxxePYEmovg6KWGSLzHxGxvjRaKsiFuZx7vhgauxgUeAX8AEtHcBmz1eEGlYK+8tmHZqyEQC
+ 1F/U5pXuex4SMjMjUcqc+7ymhJVUZUr1Gu8X/eHufUImHr5armPDPwjeo+RPxjn5zfuuNzdoV0c
+ /MrdVDPY41icOrtJ3H7bMcJzB1z4xNCazHw3kKYl0XgbMpeeOVndQTOjFiMpd7S0oQC7qDdzeVA
+ l7Qu9urdC46IVwaqJ68tkIAjXVJjLm24OEO0y+9oPFl+BPh/u527wc5My5rEi5IW4TRwYJd9Ut6
+ pp8+RsH4qb7yQl9W82Cs/5C/CiYGCQ4UU4jKG7J8Nsr/hhD8iT60Q==
+X-Received: by 2002:a17:907:9814:b0:c16:afdd:9dad with SMTP id
+ a640c23a62f3a-c1fe7faf429mr8392366b.22.1785512494743; 
+ Fri, 31 Jul 2026 08:41:34 -0700 (PDT)
+Received: from ?IPv6:2001:8b0:aba:5f3c:7f7b:46f5:a0f7:875c?
+ ([2001:8b0:aba:5f3c:7f7b:46f5:a0f7:875c])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c1fd38fde4asm185585566b.0.2026.07.31.08.41.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Jul 2026 08:41:33 -0700 (PDT)
+Message-ID: <e718d218ebacadb1e0579690b322ec88ed7a6a8e.camel@linuxfoundation.org>
+Subject: Re: makefile confusion about configuring u-boot in OE (ARCH and
+ UBOOT_ARCH)
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org
+Date: Fri, 31 Jul 2026 16:41:32 +0100
+In-Reply-To: <20260731153027.GN1773261@bill-the-cat>
+References: <68767aba94c02cab3697b18b65de848cfadb7a2b.camel@linuxfoundation.org>
+ <20260731153027.GN1773261@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-9 
+MIME-Version: 1.0
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785511833; x=1786116633;
+ d=linuxfoundation.org; s=google; t=1785512495; x=1786117295;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=zyMaR01CZnD+fyeBYNldP/G5Ichz/KM6YH4bZrs1FX8=;
- b=QTlZrrGjbGNOz72Uvc58zY2e2EEcqKQCm52aWw4Hb3+O1voreNKd/YNCiFyRKCKtGM
- kt/zhv53U0MNrnkGExowOURR+2etQOJlKNmP4yF2gHSYSwQ5MULvAqSyIY98rifz1i3d
- CpTcrIxVb1A8RMpppPmqUTgQ28n5+QKapQxaM4uq6zO68tSMdEcQsucwC513y31gOCWT
- 4j8xcurhCANka1RYPx6gEm89jM3gPyZiEeWEemXq1ujpwxGkk/utSPV0TF/GnW7/1GDK
- X8fO5biQLpEKTogRCA/5SyzqdwzdwahkeZTig+gTuY9YnyMljKGjNky2YDavZ7orFbGc
- xg3A==
+ h=mime-version:user-agent:content-transfer-encoding:content-type
+ :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=UWkcX85Rz6NBeoF5ObASTur/Ol3rU84Cz+5UWh4McmE=;
+ b=b9T2XhYhIr67fcGBz1IBcNsInSw2stoajR8GvqdSJy8MJhYolBxnszqa14cpf4v2vg
+ oPuN2vVfBDu50Ti3RGSj91XlvQSck2NGOM2nIqM2MaIyn/CpiYRn/qCqifSegtyiKDBb
+ j+Q3YIJJYjroU3R4y/v7A+INlNkDiNmbPKThQ=
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ dmarc=pass (p=none dis=none)
+ header.from=linuxfoundation.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=QTlZrrGj
+ dkim=pass (1024-bit key,
+ unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org
+ header.a=rsa-sha256 header.s=google header.b=b9T2XhYh
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,86 +131,157 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, Jul 31, 2026 at 4:40=E2=80=AFPM Alexey Charkov <alchark@flipper.net=
-> wrote:
->
-> The GPT partition entry array is sized in bytes by the spec, so the
-> number of blocks it takes up depends on the block size of the device.
-> U-Boot got that wrong in gpt_fill_header(), which reserved a fixed 34
-> blocks at each end of the disk. On a device with 4096-byte native
-> sectors, such as UFS flash, the backup entry array ended up 28 blocks
-> short of the backup GPT header instead of immediately before it, and
-> roughly 114 KiB was wasted at each end of the disk.
->
-> Patch 1 calculates the count from the block size and makes the four
-> places that need it share one helper, since they disagreed with each
-> other in different ways. Note that it also changes the 512-byte layout
-> for boards that do not use the default entry count:
-> CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is "default 56 if ARCH_SUNXI" and
-> is set to 64 by a number of Rockchip defconfigs, and on those
-> first_usable_lba moves from 34 to 16 and 18 respectively. Existing
-> tables stay readable, since the entry array is always located from the
-> on-disk partition_entry_lba, and only newly written tables are
-> affected. Partitions given without an explicit start=3D will be placed
-> lower, though, and on sunxi first_usable_lba lands exactly on the 8 KiB
-> SPL offset, so sunxi and Rockchip folks may want to look at patch 1
-> specifically (none of the devices I have override the default).
->
-> Patch 2 is an unrelated big-endian correctness fix in the same file,
-> noticed while auditing it: a few header fields are read without
-> converting from little-endian, and one already-converted value is
-> swapped a second time.
->
-> Patch 3 is another unrelated bug that has to be fixed before any of this
-> can be tested: part_test_mac() reads one block into a 512-byte on-stack
-> buffer, so it corrupts the stack on any device with larger blocks. Since
-> it runs during partition probing on every device, sandbox crashes on any
-> access at all to a device bound with a 4096-byte block size.
->
-> Patches 4 and 6 add the tests. The C test sweeps block sizes from 512 to
-> 32768 against gpt_fill_header()/gpt_fill_pte() with a synthetic
-> descriptor, and the Python test writes a real GPT to a host device with
-> 4096-byte blocks and checks the resulting on-disk headers. Both fail
-> without patch 1.
->
-> Patch 5 is a prerequisite for patch 6: test_gpt_write_part_type() never
-> binds its own disk image and has only worked because an earlier test
-> left host 0 bound, so it breaks as soon as a test binding a different
-> image is added above it.
->
-> One known gap: test_gpt_write and test_gpt_write_part_type hardcode the
-> 128-entry 512-byte layout, so they fail if sandbox is configured with a
-> different CONFIG_EFI_PARTITION_ENTRIES_NUMBERS. The new tests derive
-> their expectations instead, and pass at 56 and 64 entries. No sandbox
-> defconfig upstream uses anything but 128, so I have left the old tests
-> alone.
->
-> Tested by building sandbox (default, flattree, sandbox64, gcc and
-> clang), generic-rk3576 (gcc and clang), sonoff-ihost-rv1126 and
-> A20-OLinuXino_MICRO-eMMC on armv7, and boston32r2 and boston64r2 for
-> MIPS32/MIPS64 big-endian, which is what patch 2 is there for.
->
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> ---
-> Alexey Charkov (6):
->       disk: part_efi: Size the partition entry array from the block size
->       disk: part_efi: Add missing endianness conversions
->       disk: part_mac: Fix stack corruption on devices with large blocks
->       test: dm: part: Check the GPT layout for large sector sizes
->       test: py: gpt: Bind the disk image in test_gpt_write_part_type()
->       test: py: gpt: Test the GPT layout on a device with 4096-byte block=
-s
->
->  disk/part_efi.c           |  55 +++++++++++++++-------
->  disk/part_mac.c           |  12 ++---
->  test/dm/part.c            | 100 +++++++++++++++++++++++++++++++++++++++
->  test/py/tests/test_gpt.py | 116 ++++++++++++++++++++++++++++++++++++++++=
-++++++
->  4 files changed, 261 insertions(+), 22 deletions(-)
+On Fri, 2026-07-31 at 09:30 -0600, Tom Rini wrote:
+> On Fri, Jul 31, 2026 at 04:01:06PM +0100, Richard Purdie wrote:
+> > Hi,
+> >=20
+> > I'm trying to clean up some class code in openembedded-core and I'm
+> > getting confused about what the "docs" say I should do vs. what the
+> > code does (vs. what OE does).
+> >=20
+> > https://github.com/u-boot/u-boot/blob/main/Makefile#L381C1-L399C20
+> > Makefile in u-boot says:
+> >=20
+> > """
+> > # Cross compiling and selecting different set of gcc/bin-utils
+> > # ---------------------------------------------------------------------=
+------
+> > #
+> > # When performing cross compilation for other architectures ARCH shall =
+be set
+> > # to the target architecture. (See arch/* for the possibilities).
+> > # ARCH can be set during invocation of make:
+> > # make ARCH=3Dia64
+> > # Another way is to have ARCH set in the environment.
+> > # The default ARCH is the host where make is executed.
+> >=20
+> > # CROSS_COMPILE specify the prefix used for all executables used
+> > # during compilation. Only gcc and related bin-utils executables
+> > # are prefixed with $(CROSS_COMPILE).
+> > # CROSS_COMPILE can be set on the command line
+> > # make CROSS_COMPILE=3Dia64-linux-
+> > # Alternatively CROSS_COMPILE can be set in the environment.
+> > # Default value for CROSS_COMPILE is not to prefix executables
+> > # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefil=
+e
+> > ARCH		?=3D $(SUBARCH)
+> > """
+> >=20
+> > so that implies that ARCH from the environment would configure u-boot.
+> > Fine.
+>=20
+> But is unfortunately a relic of our "copy the kernel Kbuild files in".
 
-NB: the CI passes all green:
-https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelin=
-es/841
+Ok, I did think that might be the case.
 
-Best regards,
-Alexey
+> > kernel-arch.bbclass in OE exports ARCH and UBOOT_ARCH.
+> >=20
+> > I want to stop u-boot.inc inheriting kernel-arch since I'm not
+> > convinced it is entirely compatible and we need to make changes there
+> > which we don't want to affect u-boot.
+>=20
+> It's not entirely compatible, true. It's largely (for values of being a
+> few years behind in kernel releases, but not as bad as we were at the
+> start of this year).
+>=20
+> > I therefore naively changed u-boot.inc:
+> >=20
+> > -EXTRA_OEMAKE =3D 'CROSS_COMPILE=3D${TARGET_PREFIX} V=3D1'
+> > +EXTRA_OEMAKE =3D 'ARCH=3D${@oe.kernel.map_kernel_arch(d)} CROSS_COMPIL=
+E=3D${TARGET_PREFIX} V=3D1'
+> >=20
+> > This proceeded to break all our u-boot recipes.
+>=20
+> Now that's interesting. For U-Boot, "ARCH" is meaningless. Whereas in
+> the kernel you have to set ARCH, it's just a Kconfig question in U-Boot.
+> Usually it's harmless to set.
+
+That is not my experience. With both MACHINE=3Dfvp-base with meta-arm:
+
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/75/builds/4127
+
+and MACHINE=3Darmuarm64 with oe-core:
+
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/23/builds/4493
+
+it breaks if I put ARCH in EXTRA_OEMAKE (where ARCH is coming in as
+arm64).
+
+> > I think I'm concluding that:
+> >=20
+> > * ARCH from the environment no longer changes u-boot and the comment is=
+ wrong
+>=20
+> The comment is wrong and I don't think it's ever really mattered, but
+> there's times when it's been non-harmful.
+>=20
+> > * OE shouldn't/doesn't need to set ARCH
+>=20
+> Correct.
+
+Ok, good. That is an easy patch then! :)
+
+> > * we should just drop most of this from u-boot
+> >=20
+> > That brings me to UBOOT_ARCH, which takes ARCH and does:
+> >=20
+> > =C2=A0=C2=A0=C2=A0 if=C2=A0=C2=A0 re.match('p(pc|owerpc)(|64)', a): ret=
+urn 'ppc'
+> > =C2=A0=C2=A0=C2=A0 elif re.match('i.86$', a): return 'x86'
+> > =C2=A0=C2=A0=C2=A0 return a
+> >=20
+> > on it.=C2=A0We generally use UBOOT_ARCH with mkimage, e.g. "uboot-mkima=
+ge -A
+> > ${UBOOT_ARCH}". We then have code which does:
+> >=20
+> > =C2=A0=C2=A0=C2=A0 UBOOT_ARCH_DIR =3D "${@'arm' if d.getVar('UBOOT_ARCH=
+').startswith('arm') else d.getVar('UBOOT_ARCH')}"
+> >=20
+> > to find code u-boot which implies UBOOT_ARCH might not be right.
+>=20
+> So, for passing the architecture value to mkimage:
+> https://git.u-boot-project.org/u-boot/u-boot/-/blob/main/boot/image.c?ref=
+_type=3Dheads#L62
+> is the map between strings and values. PowerPC probably still needs a
+> fixup if powerpc64 is something that needs to be mapped.
+
+Ok, I can perhaps document that mapping and point at the definitive
+list of which values it should return, thanks.
+
+> > Am I right in thinking the valid values for UBOOT_ARCH are "ls arch" in
+> > the u-boot tree?=C2=A0
+> > If so, the arm values in that function look dubious in that arm64
+> > shouldn't ever be there for example?
+>=20
+> Exactly. arm64 is a valid UBOOT_ARCH but is under arch/arm/
+
+So UBOOT_ARCH_DIR is a smaller subset of UBOOT_ARCH and is the list in
+"ls arch". I can document that too I guess which should help the next
+person trying to figure this out.
+
+> > I'm no u-boot expert, I do know something about the OE classes and
+> > build processes and this all looks a bit of a mess to me. Can anyone
+> > with a bit more experience tell me if I am missing something obvious
+> > here and if this is as much of a mess as I think it is?
+>=20
+> It's certainly a bit muddy here at times, yes. We use Kconfig to
+> configure things, and we're a little behind but that language doesn't
+> evolve quickly either. We use the Kbuild infrastructure to build, but
+> we're lagging behind and don't use all the features of the kernel
+> either. We likely use little enough of them that it would make more
+> sense to just set CROSS_COMPILE as needed via EXTRA_OEMAKE (unless
+> someone is aiming to build with llvm instead, and so the KERNEL_CC,
+> KERNEL_LD, etc, options).
+
+If someone wants to use llvm these days, changing TOOLCHAIN to clang
+for u-boot would swap all the CC/LD options behind the scenes. I don't
+think u-boot needs to know/care about the KERNEL_CC_* variables and
+friends, as far as I can tell it doesn't currently use them either...
+
+Cheers,
+
+Richard
+
+
+
+
