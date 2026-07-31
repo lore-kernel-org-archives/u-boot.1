@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A17B4C5516F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 17:19:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A20BEC55167
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 17:19:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 00FFF60B18;
-	Fri, 31 Jul 2026 17:19:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CBF4160B36;
+	Fri, 31 Jul 2026 17:19:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TWyGXQXPDIwV; Fri, 31 Jul 2026 17:19:00 +0000 (UTC)
+ id xL4tL8tnThgX; Fri, 31 Jul 2026 17:19:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 99F7B60B1B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A2CED60B25
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785518340;
-	bh=IKTGS7xVZC48GOqYpDam5teNot4t9vWEINlNzYvlAKE=;
+	d=lists.u-boot-project.org ; s=default; t=1785518342;
+	bh=tT22SCqLyAWDfjYtiGFy0C3Pdf2qZyOmpgVmvH60ghg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yey548Pscrt2Ma/M9xxmnrURNZ5TTzUTUhtGNcCq6PNpZ6dgH8kexIFwkIGR7o7no
-	 AqdYBLyiNYmwcXdM2zXfkFY8gV/ojTp/IG48y0LqKaslOtb0fqZrKoLj+mMDw77VQq
-	 mvbHlJYDQ4A/uYc6eWC+g/V1XHV4ASGjAoN1a4UY+fF9Ie8RIu9z/XdVyv5uhj63hT
-	 co/XxhICsvQBBWkMpU/fyAjTflV0Q+Imu3tFcwxYbQ6aWspHverp7WwWQCF7yi8Od5
-	 gBklvHp06rL1noSnmgqQgFdegPLwqnRnJhHO2RfNRWeqJNaBz1faPaxIqiJK2FRQSm
-	 iY0tddckr3RxQ==
+	b=dUtwFlhQFcYHseYZi8kBnDAeItfluAn+6Yx8D4DdZMG0I/lKpNm3MCLarWV66OrvA
+	 6+vJapsznJL0fwZVn8wtZzTjFeN66xXPNuHTggX8NQVR6VvMTrGPZnwm7yla7V9Eu+
+	 eQN98xzCGDg/aVq3b6LosO++1+/Ja+NpQ2YyRTCiIZztanP3Ly8ShUvcZmMOhPZfJg
+	 nZAxjgazubY0XXHO404gCvycR6ZHRr8QuYF9fVXD6atNQqvBty2xYxqprZy/FjxBqo
+	 xrdYqdBvHvX7eZhc3GBXD69pj5B0YB5Szu8Ce62epKYH4n9/CJ7u0OipqpIbvz4CsV
+	 1irjj7PqriAUg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 99F7B60B1B;
-	Fri, 31 Jul 2026 17:18:59 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 25BDE27C
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 17:11:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A2CED60B25;
+	Fri, 31 Jul 2026 17:19:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EE5FD27B
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 17:11:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0C436410FD
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 17:11:44 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D4B4580F2D
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 17:11:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mcqsivn_gXXa for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 17:11:43 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7Xusv13J6cDL for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 17:11:49 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org CD40840877
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CD40840877
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CD40840877
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 17:11:42 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-47c2b362ee2so1191595f8f.1
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 10:11:42 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org A8E8280EA3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A8E8280EA3
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A8E8280EA3
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 17:11:48 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-47db714766aso1423303f8f.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 10:11:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785517901; x=1786122701;
+ d=1e100.net; s=20251104; t=1785517907; x=1786122707;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=IKTGS7xVZC48GOqYpDam5teNot4t9vWEINlNzYvlAKE=;
- b=N7nxSiwueHc2rIzwxc02EnI/4oSdG/xSNHPlPZSJQjhAn4LIIgE0RWBvNscsRRuwlY
- /f6bdmE8y1flYsQ+S6PhZzgYk86l0wJ3dMZoJ+W9gNagzlfAQTZ1ja2qqMs4IfwYfyE/
- taEYZBSTtywHjtjQzVuTiuAJkyb7msOb7z3/llw6PPefuatd7mMfp0E+8PXuBQqqfvud
- zQGuIKQQqpIbKHfetLOiTiVCyKA3GpHigOAzy/Fbr1ulnaurBx0MZaOO+gaqEutjbpQ0
- bVK1Pqn75LdRvQ83lYxugSKDUz4KnvvwQXkRL6rQ2EvEuzeIK5bnbTqBP0ALZShPJ6+a
- T6Gg==
-X-Gm-Message-State: AOJu0YygxH3HNqUYpkPZ6MhxnX4koRc0R5CSg8nS27OoHqlhQprsMQUd
- mzsdE1IM3MrQsSYdleB4UtTtMFGLGbQC7Uft/Sx9fXXAW7wBVK4xYmoKHcpMmCI4UVg=
-X-Gm-Gg: AR+sD12PgxOfCR8rOV1RwWn48fD2908ChnzrcPD6q1gWT4TbXRG9r+Z1buURc1TJqVe
- MnHM2kaqqEZhtjbdCxboDP6Gg7NFPvRRA2WB/vI5a04O3XvTRAN7akuCzqhpmojwQIsp6G/M7sE
- GW7A11Oyl+BeQ0aXOeuRVzHJjmJr2mSVhszBZOQHxCrbcrMlJ15cHDfldkcU+ZoQJz74KltEpIr
- Dnb63O5pt/6I6O/XGlLUzdFS5cFUvLwDzsFxchla1EFdre4Xk1M6YXSFzhIhFgSkCn8UsSR+nQm
- nmJqCX2Wd/S+ChfBJVCoTDsw3J/+wOHuB6ZvSS6rlbr6BYcgNmbQvR4E49QlCLse/iNq9kGe4Bh
- 8m7srif8/hva1v8lCy/JLB508l4C+7RL9F/c+CcBSAWz5IUCYlcxFnyX9tiLH1sVJgKiGpqM8Mj
- FHPWF8F3V/q1nSZXTgLCOpfv26pQPCcDtLpj4tzeZNUnBX0IkuLmRRq3HL/qrOu6bYI4WVmGmXv
- avRB/Gvu5qnx1G7FNLFJT+emWgOxpgCfffuFIeIp5E=
-X-Received: by 2002:a05:6000:2999:10b0:47f:815c:2614 with SMTP id
- ffacd0b85a97d-47fd72e0464mr730370f8f.33.1785517900688; 
- Fri, 31 Jul 2026 10:11:40 -0700 (PDT)
+ bh=tT22SCqLyAWDfjYtiGFy0C3Pdf2qZyOmpgVmvH60ghg=;
+ b=UFm29qyW9bHBR2Fub2YGx5uR9euvY1A5niDAZyTSRY9hfpsit8s38Af5MKd22705+R
+ mN9pLGnj5ekpxw4gDd6b4pr3M5xONc++l3xaf0C5jlfvzxE7A6nNNHgnwJpAnWqXKCp/
+ TY6YJ1NrDBVlIziAqu1iFzxcY3Lzf5/YHNzTy6K12mCNNUuC0CcMia29TWdRZNywBYS5
+ ITmgVoLUYU7DlQZ/ZZaPCTQcgr3zn7FWSZdx52K166WfcKPca9Bt5DJQ/TJ/ZGvtAE5d
+ RbJzvKxxAddVaEEb/bd6xGSNRNnHuCXOyb6Xe5XMyrN51wiSxIA+AqnAUpqDwEeOJxX/
+ Zo9Q==
+X-Gm-Message-State: AOJu0YzdXQ30wC6feQ92OAAT0c6z7ig8bZ37C9CJ5UHk2fa6bndpdrMG
+ vWt0vpZvHKLAUko0DZ4GB25dg3jMZ2AU1w7TUhyibGI9k2XUBzeka9AwaWpIM3/wWSY=
+X-Gm-Gg: AR+sD100jCv8F2gW2VqPxmSY8AWBGw9Od+/oykwwX1+OpA6UCLEg6cn6JPl+SM3v1qs
+ rnKGD1vC/ge7fgI9pHLPyDFkPZdZHFl9Jm+bwljKrcAmFtSylfESx+b//r+jiVQ9gRyO7R6sssm
+ W9+gFp/WKens2eXv9ffWIRvXajg/e5I8OPrjLo58aFFGWVgg5cvo0iASM0OJQtgfZVoSVVOKOFl
+ 4H70pVIq1aZnoB8h0WX10lfWlDm6R88sHpp4lOue4bnHm1lXM5gUd6Xb2VRhKoXTzIL6cXePAJX
+ g1VidOB0woCbsKj3zJf6ydpbX0dBjG94vpkjMdzMoCVud+qK6DtTvdTk3Z1tnZMARAoe53gZaTf
+ nxqVBZUEcX3b14Xut0292DF+9+CneJAkbLg4BjW4j7jlESXr14DpbiF2g69CciYJv+6g4G//JKa
+ dDZ3KMcgJcFadD9YKlIVFs8f1qwZ3lJjNvX8f8+BDv+GmUYQ9VGlUuABjOqaxHDtaxTZBtdtOyF
+ vFigRD14B69dv5Ha5jEJ2ousDqYGTgDGjk5snTZKA==
+X-Received: by 2002:a05:6000:3105:b0:45e:dd32:92fa with SMTP id
+ ffacd0b85a97d-47fd32b9e39mr5554402f8f.12.1785517906520; 
+ Fri, 31 Jul 2026 10:11:46 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
  [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fd41d1a58sm7541484f8f.7.2026.07.31.10.11.35
+ ffacd0b85a97d-47fd41d1a58sm7541484f8f.7.2026.07.31.10.11.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 10:11:40 -0700 (PDT)
+ Fri, 31 Jul 2026 10:11:46 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 31 Jul 2026 21:10:50 +0400
-Subject: [PATCH v2 06/10] binman: Add support for pre-patching FDTs in a
- FIT with a /chosen node
+Date: Fri, 31 Jul 2026 21:10:51 +0400
+Subject: [PATCH v2 07/10] binman: tests: Add test coverage for a FIT with
+ embedded Linux+initrd and /chosen
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260731-atf-falcon-v2-6-acb97c172993@flipper.net>
+Message-Id: <20260731-atf-falcon-v2-7-acb97c172993@flipper.net>
 References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
 In-Reply-To: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
 To: u-boot@lists.u-boot-project.org
@@ -121,34 +121,35 @@ Cc: Tom Rini <trini@konsulko.com>,
  Quentin Schulz <u-boot@0leil.net>, 
  =?utf-8?q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8120; i=alchark@flipper.net;
- h=from:subject:message-id; bh=v+zJOZYa181uysJU7vlshJHgZKa//NkA8RnLWQcM2GY=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTlXFdaKSLuLsYws+sS70Lng10b1vw1Xe6qIGq6bq9h9
- l4uZomZHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oZGOsY4RAxenAEz1zlMM/5RuS+xnvM8t0fyBPzX3gOy2yvypWa6Cx16eN5l9gfv+7EsM/2N2PjM
- 7/7jZo/KU95LL+XN0srltfiv90b3NlLeruVGFmxEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10530; i=alchark@flipper.net; 
+ h=from:subject:message-id;
+ bh=j9BdsjJO+QvCmWZy6GUb+0a2VhC5SAy8+PBu74+SpaE=; 
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTlXFcy4m87N+nC56Kn3UmLGEUtnojZnDi9z/YJfxPLw
+ aMZj8WTOiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ QyMdYx0jBi5OAZjqO3EM//OYH/bNe/TChy3hxC9GgXKuK4aqHd9Od/ZWBsxPOGJ224Thn+r1E9J
+ 1exZ4PTuUsu3ryyWuzGXCnpJ6x7TzHle/3fz2KR8A
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Fri, 31 Jul 2026 17:18:49 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785517901; x=1786122701;
+ d=flipper.net; s=google; t=1785517907; x=1786122707;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=IKTGS7xVZC48GOqYpDam5teNot4t9vWEINlNzYvlAKE=;
- b=v9vyrGOZJOwIH3l21VRJzQuP/nVHslWlIL54Fc3LtuO+5dZvnUHMgcXMGftvK+g6uD
- CKD0lD0ryaaBGcOjEunJAfXFskBf1KlYwwLM2IfgPk7lDKcGWPQTkVDEclbtVohJZSqv
- s6yCAwdnY87Nx6ZV/9WlAC6JRelznW2NeHPo39cnXbpitEOkVe9bAZ6EAQsEGF7VdYib
- m4fcI5BYc97RJhu2v+f/USP9WivfGUiAeXWSW2msq4tuPpvLy+1bbkDMavgLq/mHkHLp
- PaIuu7Lvwup2aEJr6V3jpzOjnzLmRJyPYjAygLhVejggPsqkqG+Cs8+thWUJTGBl5Ga7
- bKng==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=tT22SCqLyAWDfjYtiGFy0C3Pdf2qZyOmpgVmvH60ghg=;
+ b=lWKGSw5xB5XtgYXsfKH9kMRnTSd6ZGKxD/tZlB9s5UiGy09e+c1PBgNIBEcI3C4jha
+ 0iZJY3W5zRz+HjiC9X5oKibQbk8sf6xBGpJtss9vsgpA5geZp65Lh1QM/6Djk8PU6Nda
+ O7YKfnZgUON6r+pb8y07k5MtAUM5LndYY+esY9mYQv9iMfzytWmJPgsmJOONAGrikOIE
+ dX/4e5oNLk48bH56lhX/H/1qlu23g5+WDNnaLuSrwcxAGyS3mRkT6DgMPHHMXmXIfoBK
+ p7Sy4AwSLwt7Ump9Sa0rhHY54RS2Ha2w1dmCXq5GMobqMFgh8mA+Vcn+YmGJS67mAOFo
+ B3Kw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=v9vyrGOZ
+ header.a=rsa-sha256 header.s=google header.b=lWKGSw5x
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -163,181 +164,333 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-When a generated FIT is used to boot Linux directly, bypassing U-Boot
-proper (Falcon mode), there is no runtime code to discover the kernel
-command line and (optional) initrd location and include them in a FDT.
-
-To facilitate easier preparation of a ready-to-boot FIT, add support for
-pre-patching the FDTs in a FIT with a preconfigured /chosen node including
-the bootargs and initrd location.
+Add a test for a FIT image with a fake Linux kernel and initrd, and a
+valid device tree into which a /chosen node is added (containing a
+bootargs property, as is relevant for Falcon mode boot).
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- tools/binman/entry.py     |   8 ++++
- tools/binman/etype/fit.py | 103 ++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 111 insertions(+)
+ tools/binman/ftest.py                          | 107 +++++++++++++++++++++++++
+ tools/binman/test/fit/fit_chosen.dts           |  62 ++++++++++++++
+ tools/binman/test/fit/fit_chosen_no_initrd.dts |  60 ++++++++++++++
+ tools/binman/test/fit/fit_chosen_no_load.dts   |  57 +++++++++++++
+ 4 files changed, 286 insertions(+)
 
-diff --git a/tools/binman/entry.py b/tools/binman/entry.py
-index ce7ef28e94b1..e0dea8bf3a49 100644
---- a/tools/binman/entry.py
-+++ b/tools/binman/entry.py
-@@ -636,6 +636,14 @@ class Entry(object):
-         self.Detail('GetData: size %s' % to_hex_size(self.data))
-         return self.data
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 9553eb6b7366..bc65cb25ef25 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -4397,6 +4397,113 @@ class TestFunctional(unittest.TestCase):
+         self.assertIn("default-dt entry argument 'test-fdt3' not found in fdt list: test-fdt1, test-fdt2",
+                       str(e.exception))
  
-+    def GetNode(self):
-+        """Get the devicetree node which describes this entry
++    def testFitChosen(self):
++        """Test patching /chosen (bootargs + initrd) into generated FIT FDTs"""
++        kernel = b'\x01\x02\x03\x04 kernel'
++        initrd = b'initramfs-contents'
++        self._MakeInputFile('test-kernel.bin', kernel)
++        self._MakeInputFile('test-initrd.bin', initrd)
++        entry_args = {
++            'of-list': 'model1 model2',
++            'default-dt': 'model2',
++            'linux-kernel-path': 'test-kernel.bin',
++            'linux-initrd-path': 'test-initrd.bin',
++        }
++        testdir, _ = self.SetupAlternateDts()
++        data = self._DoReadFileDtb(
++            'fit/fit_chosen.dts', use_real_dtb=True, update_dtb=True,
++            entry_args=entry_args, extra_indirs=[testdir])[0]
++        fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
++        fit = fdt.Fdt.FromData(fit_data)
++        fit.Scan()
 +
-+        Returns:
-+            Node: Node for this entry
-+        """
-+        return self._node
++        # ramdisk is loaded at 0x1000 (see fit_chosen.dts)
++        rd_start = 0x1000
++        rd_end = rd_start + len(initrd)
++        for seq in (1, 2):
++            fnode = fit.GetNode('/images/fdt-%d' % seq)
++            self.assertIsNotNone(fnode)
++            dtb = fdt.Fdt.FromData(fnode.props['data'].bytes)
++            dtb.Scan()
++            chosen = dtb.GetNode('/chosen')
++            self.assertIsNotNone(chosen)
++            self.assertEqual(b'console=ttyS0 root=/dev/ram\0',
++                             chosen.props['bootargs'].bytes)
++            start = int.from_bytes(chosen.props['linux,initrd-start'].bytes,
++                                   'big')
++            end = int.from_bytes(chosen.props['linux,initrd-end'].bytes, 'big')
++            self.assertEqual(rd_start, start)
++            self.assertEqual(rd_end, end)
++            # The initramfs region must be reserved in the FDT
++            fdt_obj = dtb.GetFdtObj()
++            self.assertEqual(1, fdt_obj.num_mem_rsv())
++            _, addr, size = fdt_obj.get_mem_rsv(0)
++            self.assertEqual(rd_start, addr)
++            self.assertEqual(len(initrd), size)
 +
-     def GetPaddedData(self, data=None):
-         """Get the data for an entry including any padding
- 
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index 32caa03a7e16..750ff5b47ed5 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -304,6 +304,40 @@ class Entry_fit(Entry_section):
- 
-     See :ref:`fdtgrep_filter` for more information.
- 
-+    Patching /chosen into the generated device trees
-+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++    def testFitChosenNoInitrd(self):
++        """Test a Falcon-mode FIT where the optional initramfs is not supplied"""
++        self._MakeInputFile('test-kernel.bin', b'\x01\x02\x03\x04 kernel')
++        entry_args = {
++            'of-list': 'model1 model2',
++            'default-dt': 'model2',
++            'linux-kernel-path': 'test-kernel.bin',
++            'linux-initrd-path': '',
++        }
++        testdir, _ = self.SetupAlternateDts()
++        with terminal.capture() as (stdout, stderr):
++            data = self._DoReadFileDtb(
++                'fit/fit_chosen_no_initrd.dts', use_real_dtb=True,
++                update_dtb=True, entry_args=entry_args,
++                extra_indirs=[testdir], allow_fake_blobs=False)[0]
++        self.assertRegex(
++            stderr.getvalue(),
++            "Image '.*' is missing optional external blobs but is still functional: linux-initrd")
 +
-+    When the OS is booted directly from this FIT (e.g. Falcon mode) U-Boot
-+    proper never runs, so its usual runtime /chosen fixups do not happen. Two
-+    optional properties on the `@fdt-SEQ` node make binman patch each generated
-+    device tree at build time:
++        fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
++        fit = fdt.Fdt.FromData(fit_data)
++        fit.Scan()
 +
-+    fit,bootargs
-+        A string written to /chosen/bootargs of every generated device tree
-+        (any existing value is overwritten). Typically set to `CONFIG_BOOTARGS`
-+        via the preprocessed devicetree source.
++        for seq in (1, 2):
++            # The node is still emitted and still listed as a loadable, as is
++            # already the case for an optional OP-TEE which was not supplied
++            # (see testFitFirmwareLoadables), but it carries no data
++            cnode = fit.GetNode('/configurations/config-%d' % seq)
++            self.assertEqual(b'kernel\0', cnode.props['firmware'].bytes)
++            self.assertEqual(['ramdisk'],
++                             fdt_util.GetStringList(cnode, 'loadables'))
++            self.assertEqual(b'', fit.GetNode('/images/ramdisk')
++                             .props['data'].bytes)
 +
-+    fit,initrd
-+        The image name of a loadable (e.g. "ramdisk") to use as the initramfs.
-+        Its `load` address and packed size are written to
-+        /chosen/linux,initrd-start and /chosen/linux,initrd-end (at the width of
-+        the device tree's root #address-cells) and reserved in the FDT
-+        memory-reservation map, mirroring fdt_initrd(). If the referenced image
-+        is absent or empty (e.g. an optional initramfs that was not supplied)
-+        the initrd properties are omitted.
++            # bootargs is still patched in, but the initrd properties are not
++            fnode = fit.GetNode('/images/fdt-%d' % seq)
++            dtb = fdt.Fdt.FromData(fnode.props['data'].bytes)
++            dtb.Scan()
++            chosen = dtb.GetNode('/chosen')
++            self.assertEqual(b'console=ttyS0\0', chosen.props['bootargs'].bytes)
++            self.assertNotIn('linux,initrd-start', chosen.props)
++            self.assertNotIn('linux,initrd-end', chosen.props)
++            self.assertEqual(0, dtb.GetFdtObj().num_mem_rsv())
 +
-+    For example::
++    def testFitChosenNoLoad(self):
++        """Test a fit,initrd image which is missing its load address"""
++        self._MakeInputFile('test-kernel.bin', b'\x01\x02\x03\x04 kernel')
++        self._MakeInputFile('test-initrd.bin', b'initramfs-contents')
++        entry_args = {
++            'of-list': 'model1 model2',
++            'default-dt': 'model2',
++            'linux-kernel-path': 'test-kernel.bin',
++            'linux-initrd-path': 'test-initrd.bin',
++        }
++        testdir, _ = self.SetupAlternateDts()
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFileDtb(
++                'fit/fit_chosen_no_load.dts', use_real_dtb=True,
++                update_dtb=True, entry_args=entry_args,
++                extra_indirs=[testdir])
++        self.assertIn("fit,initrd image 'ramdisk' has no 'load' address",
++                      str(e.exception))
 +
-+        images {
-+            @fdt-SEQ {
-+                description = "fdt-NAME";
-+                type = "flat_dt";
-+                compression = "none";
-+                fit,bootargs = "console=ttyS2,1500000 root=/dev/mmcblk0p2";
-+                fit,initrd = "ramdisk";
-+            };
-+        };
+     def testFitExtblobMissingHelp(self):
+         """Test display of help messages when an external blob is missing"""
+         control.missing_blob_help = control._ReadMissingBlobHelp()
+diff --git a/tools/binman/test/fit/fit_chosen.dts b/tools/binman/test/fit/fit_chosen.dts
+new file mode 100644
+index 000000000000..ae2e4a084af6
+--- /dev/null
++++ b/tools/binman/test/fit/fit_chosen.dts
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-     Generating nodes from an ELF file (split-elf)
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
-@@ -749,6 +783,66 @@ class Entry_fit(Entry_section):
-         return self.fdtgrep.create_for_phase(infile, phase, outfile,
-                                              self._remove_props)
- 
-+    def _patch_fdt_chosen(self, data, bootargs, initrd_name):
-+        """Patch /chosen (bootargs and initrd) into an embedded FDT
++/dts-v1/;
 +
-+        This writes a kernel command line and/or initramfs location into the
-+        /chosen node of a device tree that binman is about to embed in the FIT.
-+        It is used for Falcon-mode images, where U-Boot proper never runs to
-+        perform these fixups itself.
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
 +
-+        Args:
-+            data (bytes): Device-tree contents to patch
-+            bootargs (str or None): Command line to store in /chosen/bootargs,
-+                or None to leave the command line unchanged
-+            initrd_name (str or None): Image name of the loadable to use as the
-+                initramfs. Its 'load' address and packed size are written to
-+                /chosen/linux,initrd-start and /chosen/linux,initrd-end (at the
-+                width of the DTB's root #address-cells) and reserved in the FDT
-+                memory-reservation map, mirroring fdt_initrd(). Ignored when the
-+                referenced image is absent or empty, or when None.
++	binman {
++		u-boot {
++		};
++		fit {
++			description = "test-desc";
++			#address-cells = <1>;
++			fit,fdt-list = "of-list";
 +
-+        Returns:
-+            bytes: The patched device-tree contents
++			images {
++				kernel {
++					description = "Linux kernel";
++					type = "kernel";
++					arch = "arm64";
++					os = "linux";
++					compression = "none";
++					load = <0x100>;
++					entry = <0x100>;
++					linux-kernel {
++					};
++				};
++				ramdisk {
++					description = "ramdisk";
++					type = "ramdisk";
++					compression = "none";
++					load = <0x1000>;
++					linux-initrd {
++					};
++				};
++				@fdt-SEQ {
++					description = "fdt-NAME.dtb";
++					type = "flat_dt";
++					compression = "none";
++					fit,bootargs = "console=ttyS0 root=/dev/ram";
++					fit,initrd = "ramdisk";
++					hash {
++						algo = "sha256";
++					};
++				};
++			};
 +
-+        Raises:
-+            ValueError: the referenced image has data but no 'load' address
-+        """
-+        fdt = libfdt.Fdt(bytearray(data))
-+        fdt.resize(fdt.totalsize() + 1024 + (len(bootargs) if bootargs else 0))
++			configurations {
++				default = "@config-DEFAULT-SEQ";
++				@config-SEQ {
++					description = "conf-NAME.dtb";
++					firmware = "kernel";
++					loadables = "ramdisk";
++					fdt = "fdt-SEQ";
++				};
++			};
++		};
++		u-boot-nodtb {
++		};
++	};
++};
+diff --git a/tools/binman/test/fit/fit_chosen_no_initrd.dts b/tools/binman/test/fit/fit_chosen_no_initrd.dts
+new file mode 100644
+index 000000000000..82468e94dcdb
+--- /dev/null
++++ b/tools/binman/test/fit/fit_chosen_no_initrd.dts
+@@ -0,0 +1,60 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+        chosen = fdt.path_offset('/chosen', libfdt.QUIET_NOTFOUND)
-+        if chosen == -libfdt.FDT_ERR_NOTFOUND:
-+            chosen = fdt.add_subnode(0, 'chosen')
++/dts-v1/;
 +
-+        if bootargs:
-+            fdt.setprop_str(chosen, 'bootargs', bootargs)
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
 +
-+        if initrd_name:
-+            entry = self._priv_entries.get(initrd_name)
-+            initrd = entry.GetData(required=False) if entry else None
-+            size = len(initrd) if initrd else 0
-+            if size:
-+                start = fdt_util.GetInt(entry.GetNode(), 'load')
-+                if start is None:
-+                    self.Raise(f"fit,initrd image '{initrd_name}' has no "
-+                               "'load' address")
-+                end = start + size
-+                # Use the device tree's root #address-cells for the width, as
-+                # fdt_initrd() does (4 bytes per cell)
-+                cells = 4 * libfdt.check_err(
-+                    libfdt.fdt_address_cells(fdt._fdt, 0))
-+                fdt.setprop(chosen, 'linux,initrd-start',
-+                            start.to_bytes(cells, 'big'))
-+                fdt.setprop(chosen, 'linux,initrd-end',
-+                            end.to_bytes(cells, 'big'))
-+                # Reserve the initramfs region so the kernel does not reuse it
-+                libfdt.check_err(
-+                    libfdt.fdt_add_mem_rsv(fdt._fdt, start, size))
++	binman {
++		u-boot {
++		};
++		fit {
++			description = "test-desc";
++			#address-cells = <1>;
++			fit,fdt-list = "of-list";
 +
-+        fdt.pack()
-+        return bytes(fdt.as_bytearray()[:fdt.totalsize()])
++			images {
++				kernel {
++					description = "Linux kernel";
++					type = "kernel";
++					arch = "arm64";
++					os = "linux";
++					compression = "none";
++					load = <0x100>;
++					entry = <0x100>;
++					linux-kernel {
++					};
++				};
++				ramdisk {
++					description = "ramdisk";
++					type = "ramdisk";
++					compression = "none";
++					load = <0x1000>;
++					linux-initrd {
++						optional;
++					};
++				};
++				@fdt-SEQ {
++					description = "fdt-NAME.dtb";
++					type = "flat_dt";
++					compression = "none";
++					fit,bootargs = "console=ttyS0";
++					fit,initrd = "ramdisk";
++				};
++			};
 +
-     def _build_input(self):
-         """Finish the FIT by adding the 'data' properties to it
- 
-@@ -857,6 +951,8 @@ class Entry_fit(Entry_section):
-                     else:
-                         fname = tools.get_input_filename(fdt_fname + '.dtb')
-                     fdt_phase = None
-+                    bootargs = None
-+                    initrd_name = None
-                     with fsw.add_node(node_name):
-                         for pname, prop in node.props.items():
-                             if pname == 'fit,firmware':
-@@ -876,6 +972,10 @@ class Entry_fit(Entry_section):
-                                 fsw.property('compatible', prop.bytes)
-                             elif pname == 'fit,fdt-phase':
-                                 fdt_phase = fdt_util.GetString(node, pname)
-+                            elif pname == 'fit,bootargs':
-+                                bootargs = fdt_util.GetString(node, pname)
-+                            elif pname == 'fit,initrd':
-+                                initrd_name = fdt_util.GetString(node, pname)
-                             elif pname.startswith('fit,'):
-                                 self._raise_subnode(
-                                     node, f"Unknown directive '{pname}'")
-@@ -896,6 +996,9 @@ class Entry_fit(Entry_section):
-                                 data = tools.read_file(phase_fname)
-                             else:
-                                 data = tools.read_file(fname)
-+                            if bootargs is not None or initrd_name is not None:
-+                                data = self._patch_fdt_chosen(data, bootargs,
-+                                                              initrd_name)
-                             fsw.property('data', data)
- 
-                         for subnode in node.subnodes:
++			configurations {
++				default = "@config-DEFAULT-SEQ";
++				@config-SEQ {
++					description = "conf-NAME.dtb";
++					fit,firmware = "kernel", "ramdisk";
++					fit,loadables;
++					fdt = "fdt-SEQ";
++				};
++			};
++		};
++		u-boot-nodtb {
++		};
++	};
++};
+diff --git a/tools/binman/test/fit/fit_chosen_no_load.dts b/tools/binman/test/fit/fit_chosen_no_load.dts
+new file mode 100644
+index 000000000000..7a3d393dd210
+--- /dev/null
++++ b/tools/binman/test/fit/fit_chosen_no_load.dts
+@@ -0,0 +1,57 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		u-boot {
++		};
++		fit {
++			description = "test-desc";
++			#address-cells = <1>;
++			fit,fdt-list = "of-list";
++
++			images {
++				kernel {
++					description = "Linux kernel";
++					type = "kernel";
++					arch = "arm64";
++					os = "linux";
++					compression = "none";
++					load = <0x100>;
++					entry = <0x100>;
++					linux-kernel {
++					};
++				};
++				ramdisk {
++					description = "ramdisk";
++					type = "ramdisk";
++					compression = "none";
++					linux-initrd {
++					};
++				};
++				@fdt-SEQ {
++					description = "fdt-NAME.dtb";
++					type = "flat_dt";
++					compression = "none";
++					fit,initrd = "ramdisk";
++				};
++			};
++
++			configurations {
++				default = "@config-DEFAULT-SEQ";
++				@config-SEQ {
++					description = "conf-NAME.dtb";
++					firmware = "kernel";
++					loadables = "ramdisk";
++					fdt = "fdt-SEQ";
++				};
++			};
++		};
++		u-boot-nodtb {
++		};
++	};
++};
 
 -- 
 2.54.0
