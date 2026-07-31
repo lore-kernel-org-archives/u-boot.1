@@ -1,143 +1,97 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA54EC55167
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 07:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DCC4C54F54
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 07:47:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 69E9480F47;
-	Fri, 31 Jul 2026 07:15:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 94F5D40F11;
+	Fri, 31 Jul 2026 07:47:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id s0aHu0BYpbmg; Fri, 31 Jul 2026 07:14:59 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9vmJ-xA8z-77; Fri, 31 Jul 2026 07:47:45 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A550D80EC4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0B34540EC1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785482099;
-	bh=sowwqNaemjInlLcOKI+yMME+t0nvPp/vZhsT3KkfGYU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785484065;
+	bh=7xPL2XiQYFH1eReYZA34fJJe/pRn++xUg8szc96Kr68=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YbemW3nZxbUJ7FMjUqQv9DR3De7QriaY+08PKri1S1C8qXUgnQdUvuwXHl8BDBMxh
-	 WgaweiyvMXoX9fTg45APHAq6Oy2YSuNSjyh/UzUW7O5XWq2GATBGpUHPNSB9YZgVCE
-	 OqDr5XaHiOCHuKrlBRc8UxKWvqB8p5ArrLdc7SB8fFE1Y1fTSC/yWgrE3oN3aeP1mv
-	 G8/rQGhFHf1+SGjksG6YdAVLctKUOwKdAmR8z220WaRQeX3csF2lvcyKn1kjapxpZk
-	 rFSIVTD+mP6AKxACyPHzbiKaVkzaAIz8/hD9jsYh5tl0CuA/W6Zx+mPxFPm7WB1ioC
-	 1R5kR2nZVwHVQ==
+	b=MPbOGxbexs3t0QK0sDhq4qkDqUXUpoRZnECTZDJRCu6isxGyCX27qsrtuqaxBaSDo
+	 NHkm4VSs/UXkGOH2GLLJgMyvYJoPisADmZC2IDWooay8j3EqS/GpBEBNtYg0bRhQKy
+	 F5jfInGlHryHB1q4g0EE9X5HVcW1vDQLe3EgTaOQEsYTOoSRYf61Pzn7h2KxNyrHq/
+	 FlZpbALy0aoz+qEnXmg1uJIvfTRqI1+itGrp7Lz4jQ5OmbupJmxuQbvh5P+tk0cM3O
+	 vmdfemOngRBvfKnZpn86pXM4lBATxdJ4Sb85C7vxNTTaQKx8JR5/Hrh9nILCsRlLJR
+	 1NuD9ydUv7OIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A550D80EC4;
-	Fri, 31 Jul 2026 07:14:59 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id EAD1927B
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:14:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0B34540EC1;
+	Fri, 31 Jul 2026 07:47:45 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3506D2E9
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:47:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D0C3B607C0
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:14:58 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2CA9040EC1
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:47:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SpdcTeUHWi2r for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 07:14:57 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62c; helo=mail-ej1-x62c.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 36C2B607DE
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 36C2B607DE
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 36C2B607DE
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:14:55 +0000 (UTC)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-c1670dad7a8so78864566b.3
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 00:14:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785482093; cv=none;
- d=google.com; s=arc-20260327;
- b=qiWWLMc7+J8RMZhbDPvpppvn+0rl59ce2Wte34Wm1YRG1twM2HmZfpsnlp8ms7C9mk
- Sz19w6O7LqTDJMVd6UCyNAcZwc8huW3iZuUDyW49AtbV7c4WOpaeQCoTSSLiDuDWE66y
- 9+QRIONpub1WXB0RJ2UpN0lQWikcF7g/w2+qEefBhWraQgMDJOtjE32YNL1i39xFFAoO
- 9xPOalLworjV1flH35Zd0gx8AG8s5XdEKwdpmpr3V7aLoJZgMKhcrkcwVQY9cSsCpkGr
- VacsqogIIiEZsOww1YOwU1uJsk1Y/aBwAlK5Nqt5Wymh7qGaci6gQpx39VfrjFZWTJvc
- MDLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=sowwqNaemjInlLcOKI+yMME+t0nvPp/vZhsT3KkfGYU=;
- fh=B+sNfGFY/KP+SMcFAJFwd//jdROIPj1rfj5QBs9emFA=;
- b=X3PU5I1XCOE4HAt6DXUgheTC57ZynIEI3HVz2+NVUb9VcEBu/oVs5zkpwLxlsQ4oKP
- W2aUtiUylgBFbAIEPvM0iZRgqZliitr37ShmS7iz0gr+PS/PUtzbWqa9Lis8AAtGBZYM
- pVpn3WSnKGQ31W8cKN8amA15qiy4ElGGNetmNP2ou3gfpoh303sK6V0xSVesOg7NZSy3
- iRPXHHZFV/tuMmMa36FRUvg8vD1VnAwtoyQqrXW8gxkyP7tN1H+Jekk3fJl6pmvos4vJ
- UwFRom9iU/voPGIlKUpfD4nqORLf/EciiVV40qzUOu0PP+Q7G13/1bND5/pjJWdXq17O
- kTEQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785482093; x=1786086893;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=sowwqNaemjInlLcOKI+yMME+t0nvPp/vZhsT3KkfGYU=;
- b=noBe5vP1PmfKxZc76/tdF5Yi/3m9pkHWmnonIDlE6oHj+Hm3W41o7OFjXRQQeaIZ52
- QDiQvHcCdDPwUKRkyVjLPZnYYsFkVk5gKzAZBDnrpokwAjA2lG/5gE8hSIKkCLpF1313
- qrgc0R8TRCRC9N7aBNqWbzMckXbbikQymyM+oEWOfRmam3JTrRQ664ATIdkk41BKZTAe
- /lRFecIaIO4liDr8mQIm6kH0MOKGXPIWEl6Ry8KrPPJoEKrFzkPcM4oagOMnLa0gAcJ3
- 31y5z2evz8pD5q0L6Kk5XGJHjFNxX3/OZSDicZisIjwySmRKWivKsz050N4bgBYd57va
- aQbQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpjQQ9QABf4sJrytb+mKidiqHM+yf3G3LOCE1qZkIwxGGPqnOlcpC894B+OPJEW3z6QnUdjqSI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxGuFk69CGtQW6tLLHlwIvMjQi/aueQk3Ro9Ewl8XZaJEcHN/fa
- 2O1y0rtBl65bWA2JijUetL3+MdzN73vo5ctpBl+fAZVnu1GIgnnCWoDWtbuefbVlePmQfXtoGM0
- fuHYrew+vn0mO9jhaJjdI3XsijPFoanxFHF8eU9mnuw==
-X-Gm-Gg: AR+sD13uwpPegfwaILZpVqL2dOAc5vQ+rp+CpjXyloFJ8WFPa6/tOErpuWmgVXmV5l4
- k2gkbWOdEFwPv074FmU00H7kdN3lrEkYqePAtnReebkcWDJ0gwteFJ4b8uE7wGBZ4pvp2b5Ndcl
- LGP+Fp9bCZgWdrlPN6BvMj0rDHKlOecVAspX622mkpqfN9ClCYduF6MlzP63lYfm5T2sQijCidS
- ClOC39GLAt0fTizeNOTKOEvi1u8eslQBZgsAYzXQfgUNJAomOducJPPM022kKJLE/897Ey1qD2s
- 6VZSd1BDxFmK7dWsFbUsZGleEZLJsfVxy9B6gwC5b52OTzak6+J92tanIAdL/rwyjMNtBPR/PXJ
- jjBHMi+rZX8zGyy2n8Km2wOKAeATsP/PvdR3rv70=
-X-Received: by 2002:a17:907:c8c8:b0:c1c:2ee9:5e6d with SMTP id
- a640c23a62f3a-c1fd23c5a64mr41029366b.17.1785482092983; Fri, 31 Jul 2026
- 00:14:52 -0700 (PDT)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yGTdIwfOhpb8 for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 07:47:41 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=f707=fz=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 9B32F40EBE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9B32F40EBE
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9B32F40EBE
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:47:39 +0000 (UTC)
+X-Forward-Email-ID: 6a6c53183d2a6a998ff28073
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.13.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <1c19bd83-5c02-4563-9a50-ca4aef3fa034@kwiboo.se>
+Date: Fri, 31 Jul 2026 09:47:32 +0200
 MIME-Version: 1.0
-References: <20260724-ccaione-upstream-mt8188-spl-reset-v1-1-08da6554ecd8@baylibre.com>
-In-Reply-To: <20260724-ccaione-upstream-mt8188-spl-reset-v1-1-08da6554ecd8@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 31 Jul 2026 09:14:40 +0200
-X-Gm-Features: AUfX_mwpB_QtxDdUHKM0S3wn_Ju1xOJ6Qn7HMJoIdkCmPz1msCjX3AjU-tZyVPs
-Message-ID: <CAEHHSvb-6EZT3QptoLd_hYaB9NfQLM5fJr7LwZaZ4NsyKzN68Q@mail.gmail.com>
-Subject: Re: [PATCH] arm: mediatek: use phase-aware PSCI reset on MT8188
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 03/12] rockchip: doc: add BootROM mode text
+To: Johan Jonker <jbx6244@gmail.com>
+Cc: u-boot@0leil.net, kever.yang@rock-chips.com, sjg@chromium.org,
+ trini@konsulko.com, u-boot@lists.u-boot-project.org,
+ eddie.cai.linux@gmail.com
+References: <5aed2a27-bd7d-4b71-a6c1-0b46b41f3462@gmail.com>
+ <88612ac4-7c1d-4e4b-b297-a2f96ab17a3f@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <88612ac4-7c1d-4e4b-b297-a2f96ab17a3f@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785482093; x=1786086893;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=sowwqNaemjInlLcOKI+yMME+t0nvPp/vZhsT3KkfGYU=;
- b=RwL+kAeOc9wYBFgvn32HRiAUrP50p3z6/KLmNEGsITaKOlkP0mDeV1jfhCu6lm2m9T
- iH6tdw14JTgybFZ1dIfRK9sFC/hih++CVlhhLQcQJ7NrfgG7+Vw/ItBnSTsk18S3kwnT
- QdZEjM/j+d1nQvo+yW6EmkMRT6k2iInOtYXGSQ6sDnz0LdzT4k9RPthkofbDRJ0zgJFD
- UQXAdxTT2FP68FxNvpNjWqv+6BGZLPcoPAG7OU3kES1fPkfkIsoxQ2E/uQSFPZ3//uNl
- 1WoZu238Ztxtr8RJJ0EF/mg9AelCYcP4YebO4NfvYWbCk30idljj2PBLAB29MpTXRJGj
- RCfQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=RwL+kAeO
+ d=kwiboo.se; 
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1785484059;
+ bh=7xPL2XiQYFH1eReYZA34fJJe/pRn++xUg8szc96Kr68=;
+ b=UlT27LVAD3fB7zGzaZwQtTEUY6EEs2E07npzvPcobJSC6/16/lwKwkIiiQY5YJ8hx8/euvWhY
+ wOPWOLNmlTTl+4g9opJBmeescMgpIGIzImg8iT8IDC0KU7NqZQ0llHNqRzQ7WRVGNaXavw+93ZK
+ ls2yTi6lpc/haqhed0A6m1eh0unL8y6g8CGoSDzKSeG665cMhI0IoCd0GTk+tSqkMiFAl4N7iZB
+ NX2Uq2t4+UiXDiyvz9EK4eF891CG3h2kdltLdIXTikNGyxwznYvtXOpKTcWM01Pp2X1yzfbAsD2
+ GJioWIgm4oLrqSRJf+V7V0gg5bweZzceOv4vZRpVrp6A==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=UlT27LVA
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,44 +106,82 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Le ven. 24 juil. 2026 =C3=A0 10:45, Carlo Caione <ccaione@baylibre.com> a =
-=C3=A9crit :
->
-> MT8188 reset_cpu() checks the U-Boot proper PSCI symbol even when the
-> function is built for SPL. A standalone SPL download agent runs before
-> BL31, so fastboot acknowledges a reboot request and then stalls while
-> attempting an unavailable PSCI system reset.
->
-> Use the phase-aware configuration check so SPL falls back to the
-> watchdog reset provider. U-Boot proper continues to use PSCI as before.
->
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
-> ---
->  arch/arm/mach-mediatek/mt8188/init.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-mediatek/mt8188/init.c b/arch/arm/mach-mediate=
-k/mt8188/init.c
-> index 1108bc19373..b2cdec8c218 100644
-> --- a/arch/arm/mach-mediatek/mt8188/init.c
-> +++ b/arch/arm/mach-mediatek/mt8188/init.c
-> @@ -33,7 +33,7 @@ void reset_cpu(void)
->  {
->         struct udevice *wdt;
->
-> -       if (IS_ENABLED(CONFIG_PSCI_RESET)) {
-> +       if (CONFIG_IS_ENABLED(PSCI_RESET)) {
->                 psci_system_reset();
->         } else {
->                 uclass_first_device(UCLASS_WDT, &wdt);
->
-> ---
-> base-commit: d0c49353a648e135f269a2953dc9326505ba87de
-> change-id: 20260724-ccaione-upstream-mt8188-spl-reset-8aaee719823d
->
-> Best regards,
-> --
-> Carlo Caione <ccaione@baylibre.com>
->
+Hi Johan,
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+On 7/30/2026 3:33 PM, Johan Jonker wrote:
+> Add text that explains how to get into BootROM mode.
+> 
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> ---
+> 
+> Changed V3:
+> remove MaskROM
+> reword connect
+> use eMMC
+> wrap
+> ---
+>  doc/board/rockchip/rockchip.rst | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+> 
+> --
+> 2.39.5
+> 
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 5144cbccef78..fab1af73b22a 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -325,6 +325,22 @@ To build rk3588 boards:
+>          make evb-rk3588_defconfig
+>          make CROSS_COMPILE=aarch64-linux-gnu-
+> 
+> +BootROM mode
+> +------------
+> +
+> +Options to get your board into BootROM mode:
+
+We typically call this mode 'maskrom mode', i.e. the mode bootrom
+fallback into that listens to 0x471/0x472 usb commands.
+
+> +
+> +* Holding the recovery button when you boot the board.
+
+Holding a recovery button does not always take you to the maskrom mode,
+it typically depends on current firmware and how such recovery button is
+wired.
+
+> +* Remove the SD card.
+
+Maybe make this more generic, today we have e.g. SD card, eMMC modules
+and UFS modules that can be removed from some boards.
+
+> +* Erase the NAND, eMMC or SPI chip part where the BootROM blocks are located.
+
+BootROM blocks is a bad phrase to use here, the BootROM is read-only and
+located inside the SoC.
+
+The intent here is likely closer to 'erase any storage media
+containing boot firmware' or similar.
+
+> +
+> +Methods of last resort (USE AT YOUR OWN RISK):
+> +
+> +* NAND: connect pin 8 and 9 of the NAND flash with a needle while
+> +  reconnecting to the USB OTG port to a PC.
+> +* eMMC: connect the clock line to ground while
+> +  reconnecting to the USB OTG port to a PC.
+
+Not all boards get power from USB OTG port, so this phrase is maybe too
+narrow?
+
+The intent is likely that the pins should be connected/sorted for a
+short period when the board is connected to power, so that bootrom
+cannot locate any boot firmware and falls back into maskrom mode.
+
+Regards,
+Jonas
+
+> +
+>  Flashing
+>  --------
+> 
+
