@@ -4,123 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12170C54F54
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 14:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B01BCC5516F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 15:11:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C358060668;
-	Fri, 31 Jul 2026 14:53:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7121C60816;
+	Fri, 31 Jul 2026 15:11:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OxD-n5W-_Jgd; Fri, 31 Jul 2026 14:53:50 +0000 (UTC)
+ id C-wUFG1m6IC2; Fri, 31 Jul 2026 15:11:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C8F0D607AC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8252660825
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785509629;
-	bh=Uqff32a5kah/C+hPYXpnoQjMs4RVr46nJxpp/XUL1SA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=VHSbYeiK8ZpeS88d7xm9iANQe9sNDsvjxYIjG9jDo7OHvNJyYo9kAnmyyHiAY7Lgu
-	 BUfW66icnLhUZzVzpSn6wDhrJQvFloXmbKE9wfaz1nBXoSMuzzXi3ZxcGoynANOzI9
-	 Vcl9Wt433Ix1184ox1YVxCy9o8dVlQBouqMv80GhmDgaQ8cS/C1uXx70C0FtdFRpGo
-	 jK2DTcSUsDTP3ezKsUIwGBuUzz4vSe0u4FYp37wuwrbkoYfpTL5Z+QYyZw1Wugi2vq
-	 VGb0vQnVcGme0KTn3J8UN5fY+/R1FwzJJXBVW8bByRAXMAkXONbvQVljIbSJngkj5S
-	 3nfzWEDffAi7g==
+	d=lists.u-boot-project.org ; s=default; t=1785510697;
+	bh=6t6Oed5kmfu6gMztvAGUKe6ErL4IkA5kU/ul7enp7r0=;
+	h=Subject:From:To:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=VuSqbH1wuVuRbdm04luSpOL2rxKu6TwOb6sYgZslMUkvqV/YfQbLOiBiOlqOnMcZY
+	 9S3sCgXgi43n+1f4fEaZc05fmKt3Mw4k96g8dJEyKBbFDUmnexZXtXm6f7SLQYwG0Y
+	 uEHDdhtNUz6tbqeM82+auZ9DQx0ggAoepzNPcK7SVUCu+jsO6j31ulslYnJgzT7hel
+	 jyc9bAgriZ8GTTo2aadMVxabJt12g4+niFYWDDR6Zpagwk5iNayXengrnfMZCxLjhS
+	 RNnX0xiGFM8rJBdHVXQzSeJDzszs6niqSpffSWa1COefBUAti2ymgpF3OsNN8jYmzk
+	 KXUHUzaCFlkWg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C8F0D607AC;
-	Fri, 31 Jul 2026 14:53:49 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id C7F8E69
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 14:53:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8252660825;
+	Fri, 31 Jul 2026 15:11:37 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id BACE437F
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:01:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B9EDB400A4
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 14:53:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id B920740F80
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:01:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TAYMo7QByNQS for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 14:53:46 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yjtnShMDh7mO for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 15:01:17 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 981884004C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 981884004C
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 981884004C
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 14:53:46 +0000 (UTC)
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e9ecd7216cso571817a34.3
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:46 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ envelope-from=richard.purdie@linuxfoundation.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 579C140EF2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 579C140EF2
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 579C140EF2
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 15:01:16 +0000 (UTC)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-698ae09e356so1792047a12.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 08:01:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785509625; x=1786114425;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Uqff32a5kah/C+hPYXpnoQjMs4RVr46nJxpp/XUL1SA=;
- b=soFAGJLGwGtHlk/UCImcxfEmjOspXxAgG3rlX9wBc+iZM/yOURYtBTRPieqA/a8FSM
- dgt3VyR1ch4MqeqK1VmbHvOfaKAAawG+ilKWYAzKGRW8qGY1mPWSiMV1mmRNY4PJIoJs
- mhMIfk3B/ODshJeUKhmcCvmbPCKDV4D6jcY+D9c748zBmkNYwOplY5mvuTpfR445Bgqs
- 6Ak4ppCQyQRdJvDJ84fbgE8kISpQUBc/xUkLuzruHZfevKEowYbDwZYijhakeyUAlmUD
- 31DlP/lEYlSonsIUto1biDJYX7zhRr9OOOliALIxEY8hrCXGhyqdBPDuudSxNzahok0/
- +vUg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rrr0sU/C5GkKQEmxfzR1cWs68WBea5X6Qrr59eMODrVv2xUz3VLGDOJmwrMAZamaXy9ZOcfr4E=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yw0MWRdgo0vd8Tg+NeRHOiW+hX7OET8ZL8sKd7aBymiekeSV9lM
- zz/nLO5Sd446qjQP8mXkfNs17M1VcejM/C6WLkp5wI9I2+P1CuHptRSHlkDRfBwdHPk=
-X-Gm-Gg: AR+sD10fA8rbP4v6JGp51DMYMo3CDmgKDIFwMf3stL3lrmj6XAmK8dloailiDv3YS+I
- +F67fc9pbiAT162uXhF5PTbQ4MZ4MMebbQlpSl+oQJOQGiZv+9BY+4ciGvdv97GXADKrULoYNtL
- KgcAZtZWdrn7uehCB5tv5cmIBkOrV67zGzn/b8VW2wiFyzQBD3pg3VrUo4yRM7C/sD0bmIWBApT
- CuamygQWyAMMw9gQ2yh89wcXqjbYBGc30OpIRdRhuC6blRPkER4Qh4X1usHaRoB4TTB1ZSwweQv
- BtMAYgN7jr93UnS4zoKZjZ7RNgXQxvwQ7H6bdzp/aUjZPk8u9r/4uaEu+OtyWeJ9vBbkpfjgnaV
- ls/x3xqzVvgmKnADKTecbrJWOTAFgn24GwHhYUkLGiW7M/NfztEsapi4BI6d4gvjdddkoFn2hZF
- BnsUckeu0zP4gLq9OUI01Bo/Zri599LDffjDglIMs4MjEwIhtNWhTofIOQOnUBx+Rs/URVVM13g
- zJpuSut7F2tRrHZUR3c4QIl1ufepWsBx1xk6kB4E6JchIwvOUSIQnOO2dwvt9r048F5Z9DHCMoi
- NP7SZVi9cg==
-X-Received: by 2002:a05:6830:2a0e:b0:7d7:ed69:81b2 with SMTP id
- 46e09a7af769-7f196c11f37mr169168a34.5.1785509625454; 
- Fri, 31 Jul 2026 07:53:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f18ed9af83sm778008a34.10.2026.07.31.07.53.44
+ d=1e100.net; s=20251104; t=1785510075; x=1786114875;
+ h=mime-version:user-agent:content-transfer-encoding:content-type:date
+ :to:from:subject:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=6t6Oed5kmfu6gMztvAGUKe6ErL4IkA5kU/ul7enp7r0=;
+ b=Gzba11XlZCd2LKjmtmH4vGHc8EYpBtfQMEWrIm5KVVUXOvzeUVkjc4uYr+cd9tfpWf
+ 9XAeC/yJu4slTdaNcA/DDl0wID68Tv1dVn/S8sjL9XTh7VtADIf5ok1aMxp0c78XdqAq
+ 7gq8tuQY2Hlx8SXWB9MzQPEhIWqsrzjpKF4ukfnaBz02XD3KyTt48WXDhXFKdBbeyKoi
+ r8KqRMk7i+ylSVImQ7wunLyIAAZHPi25Rl8oxbyi1UaUwmlU0EAOR+wJ1KFSfOnbj/qR
+ iWGJZRH2kfGWnhmyLSQ8BTnuehoOn13zASJxhCksR09OtxG86uLaSVrpJ9aiV5gYbzxm
+ KrVg==
+X-Gm-Message-State: AOJu0YxdH3LaLBc1a2lbsqats2DmyHsYcj+tHMJvMVzBZmw9KmsiMes5
+ vbdUVHi8NOhmMGW79Hmgg1w27N63+lui9/Op+eAWA4RXoltTt8ziTzs8Z1kJeZpJd0svY9l/Qba
+ IEpJ0z04=
+X-Gm-Gg: AR+sD10+3F25e0ZJ7p9BkPhiGudcEMUU3ttOHi7h/pMNHlSvEJmbazhzZ7KmCCN+BpX
+ YSUDfT4qIBBqwECnbi/zOiu9D7JPB/aN9tK4H0CmXczRvYGOlN3FqgEBsnVG9QtkBqz1gAU90Rx
+ AXEutHt56XuX7ZcApvDCIxOHWg4sQhJQF4QYk13vXO6EJ+d8MRH5o/z0g5SVvbDtffMSXIVqEzL
+ OGQBPzsA7Hp/iBNhlEKxRBldMUq3fAc18SOTRF0cPfU3q1RyiuJD67cThO7tmC1RQNIATTlClmE
+ yp4RkC6bmGq8xrJnJv5M8c+A9GIqLEbwOlVStFc9J6GjcqqAX4gEzGke/Y2xGITS1E8vWP275BK
+ vogYT+MkBkMql79yfZ91wExkTj/nWv4sj3G9hLzkRE5J+EHfkLNV3/yHbJFIdkbL5Jk++PNGVoa
+ RfDLvk0Q4VLWWGC7h+5obDvNRD41PtPuNTookMa34cTe1ZJWapbgl6MIGQpucm4sO5ao9Jan/b7
+ JU3EjEPUgfs4BnielDZkJOu1tO3qM4ZnaOVmDmwjf5bCUfGlSGKXg==
+X-Received: by 2002:a05:6402:2424:b0:698:3b7c:7e52 with SMTP id
+ 4fb4d7f45d1cf-6a098d3af3amr1335679a12.40.1785510069682; 
+ Fri, 31 Jul 2026 08:01:09 -0700 (PDT)
+Received: from ?IPv6:2001:8b0:aba:5f3c:7f7b:46f5:a0f7:875c?
+ ([2001:8b0:aba:5f3c:7f7b:46f5:a0f7:875c])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a09c661641sm1764897a12.29.2026.07.31.08.01.07
+ for <u-boot@lists.u-boot-project.org>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 07:53:44 -0700 (PDT)
-Date: Fri, 31 Jul 2026 08:53:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v2 2/2] CI: Dockerfile: Add LoongArch64 support
-Message-ID: <20260731145342.GM1773261@bill-the-cat>
-References: <20260731114720.2212170-1-me@ziyao.cc>
- <20260731114720.2212170-3-me@ziyao.cc>
- <23f5f012-589c-4710-8b93-4c6bd509e4c4@gmx.de>
- <amyy2Lyg2Xypz__p@pie>
+ Fri, 31 Jul 2026 08:01:08 -0700 (PDT)
+Message-ID: <68767aba94c02cab3697b18b65de848cfadb7a2b.camel@linuxfoundation.org>
+Subject: makefile confusion about configuring u-boot in OE (ARCH and
+ UBOOT_ARCH)
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: u-boot@lists.u-boot-project.org
+Date: Fri, 31 Jul 2026 16:01:06 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-9 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fa7oQwpaE3vYEr67"
-Content-Disposition: inline
-In-Reply-To: <amyy2Lyg2Xypz__p@pie>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Fri, 31 Jul 2026 15:11:36 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1785509625; x=1786114425;
+ d=linuxfoundation.org; s=google; t=1785510075; x=1786114875;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Uqff32a5kah/C+hPYXpnoQjMs4RVr46nJxpp/XUL1SA=;
- b=gXD84ZYslKiS/cwwyDtPoRO8p7tTRmTyiedaKRkRwX9YSsaZtIhm7vhoquoGhTDRuJ
- T2JWXv9iPDSHfCub2aT7hv9VdCe5kMCWYk1fN7mMvDN0y/J8n06lsB0VyXL1zUEwpwu1
- 9FGtJY/QYyN9JYU1en8Yv/ldHIuWOAM0uC6Og=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ h=mime-version:user-agent:content-transfer-encoding:content-type:date
+ :to:from:subject:message-id:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=6t6Oed5kmfu6gMztvAGUKe6ErL4IkA5kU/ul7enp7r0=;
+ b=JCNT3YiaiKFgvlXkdBLZh96eVDlXwFMDH62yYqFVxZMkQl+LAnTyy2PGqutfNFTHgJ
+ V3W0mRbmJ+RDbjiMMW38wXoO0xc8INVrqW56GoKC8pFA6MfTMGjX+jLqmxl16PFtUeT7
+ oEnts7qadku4VyTPruls0iEJAo2dhTf9TGcF8=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ header.from=linuxfoundation.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=gXD84ZYs
+ unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org
+ header.a=rsa-sha256 header.s=google header.b=JCNT3Yia
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -135,149 +127,88 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi,
 
---fa7oQwpaE3vYEr67
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I'm trying to clean up some class code in openembedded-core and I'm
+getting confused about what the "docs" say I should do vs. what the
+code does (vs. what OE does).
 
-On Fri, Jul 31, 2026 at 02:36:51PM +0000, Yao Zi wrote:
-> Adding the list to Cc so at least this discussion could be archived...
->=20
-> On Fri, Jul 31, 2026 at 04:16:38PM +0200, Heinrich Schuchardt wrote:
-> > On 7/31/26 13:47, Yao Zi wrote:
-> > > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > >=20
-> > > Install LoongArch64 toolchains, build LoongArch64 QEMU,
-> > > build LoongArch64 GRUB.
-> > >=20
-> > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> > > ---
-> > >   tools/docker/Dockerfile | 21 ++++++++++++++++++---
-> > >   1 file changed, 18 insertions(+), 3 deletions(-)
-> > >=20
-> > > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> > > index fb8e2c523aad..187320c26d59 100644
-> > > --- a/tools/docker/Dockerfile
-> > > +++ b/tools/docker/Dockerfile
-> > > @@ -17,7 +17,7 @@ ARG BUILDPLATFORM
-> > >   ENV DEBIAN_FRONTEND=3Dnoninteractive
-> > >   # Set architectures to build for (leaving out ARM which is an excep=
-tion)
-> > > -ENV ARCHS=3D"aarch64 arc i386 m68k mips microblaze nios2 powerpc ris=
-cv64 riscv32 sh2 x86_64"
-> > > +ENV ARCHS=3D"aarch64 arc i386 loongarch64 m68k mips microblaze nios2=
- powerpc riscv64 riscv32 sh2 x86_64"
-> > >   # Mirror containing the toolchains
-> > >   ENV MIRROR=3Dhttps://mirrors.edge.kernel.org/pub/tools/crosstool/fi=
-les/bin
-> > > @@ -153,7 +153,8 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/ap=
-t,sharing=3Dlocked \
-> > >   	xxd \
-> > >   	zip
-> > > -# Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
-> > > +# Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit, and L=
-oongArch
-> > > +# 64-bit
-> > >   RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/=
-grub && \
-> > >   	cd /tmp/grub && \
-> > >   	git checkout grub-2.14 && \
-> > > @@ -189,6 +190,20 @@ RUN git clone https://https.git.savannah.gnu.org=
-/git/grub.git /tmp/grub && \
-> > >   	search search_fs_file search_fs_uuid search_label serial sleep tes=
-t \
-> > >   	true && \
-> > >   	make clean && \
-> > > +	./configure --target=3Dloongarch64 --with-platform=3Defi \
-> > > +	CC=3Dgcc \
-> > > +	TARGET_CC=3D/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarc=
-h64-linux-gcc \
-> > > +	TARGET_OBJCOPY=3D/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loo=
-ngarch64-linux-objcopy \
-> > > +	TARGET_STRIP=3D/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loong=
-arch64-linux-strip \
-> > > +	TARGET_NM=3D/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarc=
-h64-linux-nm \
-> > > +	TARGET_RANLIB=3D/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loon=
-garch64-linux-ranlib && \
-> > > +	make -j$(nproc) && \
-> > > +	./grub-mkimage -O loongarch64-efi -o /opt/grub/grubloongarch64.efi =
---prefix=3D -d \
-> > > +	grub-core cat chain configfile echo efinet ext2 fat halt help linux=
- \
-> > > +	lsefisystab loadenv lvm minicmd normal part_msdos part_gpt reboot \
-> > > +	search search_fs_file search_fs_uuid search_label serial sleep test=
- \
-> > > +	true && \
-> > > +	make clean && \
-> >=20
-> > We repeat ourselves a lot in the Dockerfile for building grub.
-> >=20
-> > How about:
-> >=20
-> > for arch in aarch64, i386, loongarch64, riscv64, x86_64; do
-> > 	./configure --target=3D$arch --with-platform=3Defi \
-> > 	CC=3Dgcc \
-> > 	TARGET_CC=3D/opt/gcc-${TCVER}-nolibc/$arch-linux/bin/loongarch64-linux=
--gcc \
-> > 	TARGET_OBJCOPY=3D/opt/gcc-${TCVER}-nolibc/$arch-linux/bin/loongarch64-=
-linux-objcopy \
-> > 	TARGET_STRIP=3D/opt/gcc-${TCVER}-nolibc/$arch-linux/bin/loongarch64-li=
-nux-strip \
-> > 	TARGET_NM=3D/opt/gcc-${TCVER}-nolibc/$arch-linux/bin/loongarch64-linux=
--nm \
-> > 	TARGET_RANLIB=3D/opt/gcc-${TCVER}-nolibc/$arch-linux/bin/loongarch64-l=
-inux-ranlib && \
-> > 	make -j$(nproc) && \
-> > 	./grub-mkimage -O $arch -o /opt/grub/grubloongarch64.efi --prefix=3D -=
-d \
-> > 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
-> > 	lsefi lsefimmap lsefisystab loadenv lvm minicmd normal part_msdos part=
-_gpt
-> > reboot \
-> > 	search search_fs_file search_fs_uuid search_label serial sleep test tf=
-tp \
-> > 	true && \
-> > done
-> >=20
-> > Adding a few more modules to each architecture does not harm.
->=20
-> This is a good idea, but some of grub file names don't match the arch name
-> in the triple,
->=20
-> - i386: grub_x86.efi
-> - x86_64: grub_x64.efi
-> - arm: grubarm.efi
-> - aarch64: grubaa64.efi
-> - riscv64: grubriscv64.efi
-> - loongarch64: grubloongarch64.efi
->=20
-> so we need a mapping between them, maybe a bash array. Or, these names
-> seem to be refered only in u-boot-test-hooks as
-> env__efi_loader_grub_file, so I think alternatively we could update the
-> repository to use file names consistent with the tripple.
->=20
-> I'd prefer the latter since it looks cleaner, though the change might be
-> a little complex to fit in this series (involving updating workflow and
-> u-boot-test-hooks in a correct order so no CI run gets broken).
+https://github.com/u-boot/u-boot/blob/main/Makefile#L381C1-L399C20
+Makefile in u-boot says:
 
-This sounds like a good cleanup to do, but yes, we should work it
-afterwards to keep this small and reviewable.
+"""
+# Cross compiling and selecting different set of gcc/bin-utils
+# -------------------------------------------------------------------------=
+--
+#
+# When performing cross compilation for other architectures ARCH shall be s=
+et
+# to the target architecture. (See arch/* for the possibilities).
+# ARCH can be set during invocation of make:
+# make ARCH=3Dia64
+# Another way is to have ARCH set in the environment.
+# The default ARCH is the host where make is executed.
 
---=20
-Tom
+# CROSS_COMPILE specify the prefix used for all executables used
+# during compilation. Only gcc and related bin-utils executables
+# are prefixed with $(CROSS_COMPILE).
+# CROSS_COMPILE can be set on the command line
+# make CROSS_COMPILE=3Dia64-linux-
+# Alternatively CROSS_COMPILE can be set in the environment.
+# Default value for CROSS_COMPILE is not to prefix executables
+# Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
+ARCH		?=3D $(SUBARCH)
+"""
 
---fa7oQwpaE3vYEr67
-Content-Type: application/pgp-signature; name="signature.asc"
+so that implies that ARCH from the environment would configure u-boot.
+Fine.
 
------BEGIN PGP SIGNATURE-----
+kernel-arch.bbclass in OE exports ARCH and UBOOT_ARCH.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCamy28gAKCRAr4qD1Cr/k
-ChkKAP90697gZoxscV+0T25ckCsCcs7xaTkxRZAOjoOM6AT+zQEA1wXJV99ecMk7
-vPh2wpEP/OJB0Whxadg16lTpDVB6ngI=
-=QecZ
------END PGP SIGNATURE-----
+I want to stop u-boot.inc inheriting kernel-arch since I'm not
+convinced it is entirely compatible and we need to make changes there
+which we don't want to affect u-boot.
 
---fa7oQwpaE3vYEr67--
+I therefore naively changed u-boot.inc:
+
+-EXTRA_OEMAKE =3D 'CROSS_COMPILE=3D${TARGET_PREFIX} V=3D1'
++EXTRA_OEMAKE =3D 'ARCH=3D${@oe.kernel.map_kernel_arch(d)} CROSS_COMPILE=3D=
+${TARGET_PREFIX} V=3D1'
+
+This proceeded to break all our u-boot recipes.
+
+I think I'm concluding that:
+
+* ARCH from the environment no longer changes u-boot and the comment is wro=
+ng
+* OE shouldn't/doesn't need to set ARCH
+* we should just drop most of this from u-boot
+
+That brings me to UBOOT_ARCH, which takes ARCH and does:
+
+    if   re.match('p(pc|owerpc)(|64)', a): return 'ppc'
+    elif re.match('i.86$', a): return 'x86'
+    return a
+
+on it.=C2=A0We generally use UBOOT_ARCH with mkimage, e.g. "uboot-mkimage -=
+A
+${UBOOT_ARCH}". We then have code which does:
+
+    UBOOT_ARCH_DIR =3D "${@'arm' if d.getVar('UBOOT_ARCH').startswith('arm'=
+) else d.getVar('UBOOT_ARCH')}"
+
+to find code u-boot which implies UBOOT_ARCH might not be right.
+
+Am I right in thinking the valid values for UBOOT_ARCH are "ls arch" in
+the u-boot tree?=C2=A0
+If so, the arm values in that function look dubious in that arm64
+shouldn't ever be there for example?
+
+I'm no u-boot expert, I do know something about the OE classes and
+build processes and this all looks a bit of a mess to me. Can anyone
+with a bit more experience tell me if I am missing something obvious
+here and if this is as much of a mess as I think it is?
+
+Thanks!
+
+Richard
