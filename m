@@ -1,63 +1,64 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372E3C54F54
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 07:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A56C55167
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 07:53:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 688F480F8B;
-	Fri, 31 Jul 2026 07:53:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 72DAA40F2E;
+	Fri, 31 Jul 2026 07:53:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m0L2dOsFNGEZ; Fri, 31 Jul 2026 07:53:28 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id npynLPN_QiEa; Fri, 31 Jul 2026 07:53:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5D12080F82
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 87E0B40F31
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785484408;
-	bh=9pXgtwJbSkoKuN1egnUA/R6yaBO4N4y6zPf19xvQ92U=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=fDZzFPFTdYRkttpZhLjGfU3OT4yvNk0oOY7pKn69Ve3FOaNGYLsBbtKzkD910/1Uq
-	 0JMYxDCG4fnlkXavETh8tTRpFZzT262+rBPA3Wz2R6ACT4D6enFlAmbMf6J3187U91
-	 b170vpxFcocOdwtvFd4qVBLaPAzwXz4z6Tl0l56Pm5GOZrY9cz6pCUbHHhHvzIz3Yk
-	 nherKEHxnVQ77IWLlALy0v0g12mVG93zF+hRUsyaEoED+shv2CK7ReDCOnpFMBc2Kb
-	 qUAigjz6Xd9j1uhFovdgMy4dFMJOnE73AF7DG98pmFNSr2btdjfxhORRL/eaR6UofB
-	 bbtZOsCcAb/pg==
+	d=lists.u-boot-project.org ; s=default; t=1785484413;
+	bh=OH9dZc+l9gJu4+3VjRMKxNudo8aJtGOIKI85+kCNUd8=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=yS3AGpBayJDj+534fRfbw/6v0xBeJEG1VNCYaiD0porjZsBNPnVoshGBqcAhXe7OP
+	 ffcsKV5WiEBwePhhWQ/XIGHNDnELrttvO4khm8Nv8BNePMjQpS0qBXPL91j/EUVyhS
+	 pnRIa0JambLskGmaPWG0BNNePxoQd36qoIESolp6dTEVx1+ui6Yt4pLqGqw3gKfeIr
+	 mfu3DdADJ43c0UciA4ipVeh2aszrLtYL6p1XfqxbGr3ZN7APltmPkKjg8tn8gdol8K
+	 i7vBPEV0sQufzICNIQ58Nbzf1YV3EZqqs9ilVB7GBTdg/wRtk9I6fyvYo80UlJWauf
+	 JFIWx3keKzFtA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5D12080F82;
-	Fri, 31 Jul 2026 07:53:28 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9406627C
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 87E0B40F31;
+	Fri, 31 Jul 2026 07:53:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF3782CE
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7973680F75
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C435A80B80
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XMqFLjf7kEfe for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 07:53:25 +0000 (UTC)
+ id LX1SjY_r1vE3 for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 07:53:31 +0000 (UTC)
 Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::6;
- helo=am0pr02cu008.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c201::3;
+ helo=as8pr04cu009.outbound.protection.outlook.com;
  envelope-from=alice.guo@oss.nxp.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org BD3F080F84
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BD3F080F84
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BD3F080F84
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 04C8F80F88
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 04C8F80F88
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 04C8F80F88
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:53:30 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nGs8p9awY1I5agCL+CCVTrJN9uOAdvyT8svZgJzCV8r4QM3Vrtg1NozViul4r6MHRE1jAk780PjlYWDIg8g2B+k5v6ZsvtG02Ng1l6iAOsj2yfo0DkA/WRLOzA+Ss0uybXmHzP4SGWXIeW5CXAbm8f9UtJMVooCUI1846iWhV5Y04CEaTlm+emGTFojtl9CMo4sloCeyVhf8Rix+0W6OfbIzRC5WZsPLfaO4ZopIGEJ+Jq0+z1ay4YHHAB9MNKhLHbvJzJcPX4LYZRBn76mhPhkSlNcrD1Mo2wWh2TFH4lTYdmx8Uwz6QZHkHhwxA7KF1ec1Ig9Z51Y7a25N+GMrqA==
+ b=pN6M9wm4yEuTe4OzsBcRCuou1QJQExGgKSE56GWkDhnP0kBv4ts19ITWU3xO/tbAu2X+xmFO4PWTJOTGQ+gf1c+zaIJCF8dh9WocVdDcmS6oRp6wG+WdLUaTy7QcvCA1QnUNgvrO/tDcKkdTDc6QeBnhXYdMID9m2fbGq9js9BQD0bNsW9qf3hV2uurJfEhP3ntNRIIAIzXr0St2dHKkQNZnMHNuf7+mz0AeQ4Jl1+frOYj1aA+8tAqOLzIqee78OODMNs/yaWzqS6ly0PIKsYDqhHHmi+cdkwmj/BzWaJEQK1fNeAK7qU07MuH/qoSlhBTbT5vVzhshDrBB/ihY7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9pXgtwJbSkoKuN1egnUA/R6yaBO4N4y6zPf19xvQ92U=;
- b=TX8lAcJdomdcXdE20NlWYorKuIRNK2ov8s2hZL3DvLcEFzg1SKWVfhhBCCiodYZxx8s8zQpo+4scH5nLiIwH7P3B/V7H19qAj3DhX37gxtPpNEtDmqgZDN7+avGxx0PjbRd44//Y7i2UMOSia6MFnqPnPpoKujjmNlwuY8sYIWe2/ecVAj4QxI2RRuCHoivSPLWEJ4cLLMnifR8Ned059NRt7kgszpgoTWDTScl0zUkEuCp7VJfV2xXwzavBRY8ByL7FqsT6ouKfoOsarALp6mde6o4NCuEBzqrI4u/TPakZA0zsbYn6rqk7o6x/80HeSfnAxK503+6hxmocbnA3hg==
+ bh=OH9dZc+l9gJu4+3VjRMKxNudo8aJtGOIKI85+kCNUd8=;
+ b=KO4vXy8XtMCj6tBo8cVmsSWx3VK1HDhYRAak6fbNMhpvCOJSI4GJehhtRAkYrWs1/GCE7UxczJLBrDA9v0BStV7hdCi8bro1m7hEuCPZVTwD3xx5fjUf4PJq1wY7oHjl040zkKdzEGYX0E/yrAh8LpocbLjKg/WTa/icMLEdtEJnKK+uzfbMb4KpRncVqbEryH/yYfcU3BX0VwRfjMPnxKQNhyNwWWx89HfDE8h/NF4tuAIJwFGzj/NG1R7PDSqfPGjrvZRmR/V2VUuqEPKBqR3LgqzFYGq4+WZg21IHAoEcmQ94PFkRStotEKeUhKhz0vz8QDfcgAMrpXADVW725g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
@@ -65,21 +66,20 @@ Received: from AM9PR04MB8114.eurprd04.prod.outlook.com (2603:10a6:20b:3b7::22)
  by VI0PR04MB11954.eurprd04.prod.outlook.com (2603:10a6:800:31f::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.15; Fri, 31 Jul
- 2026 07:53:16 +0000
+ 2026 07:53:25 +0000
 Received: from AM9PR04MB8114.eurprd04.prod.outlook.com
  ([fe80::cab0:e4b0:6be:b1d1]) by AM9PR04MB8114.eurprd04.prod.outlook.com
  ([fe80::cab0:e4b0:6be:b1d1%4]) with mapi id 15.21.0270.015; Fri, 31 Jul 2026
- 07:53:16 +0000
+ 07:53:22 +0000
 From: alice.guo@oss.nxp.com
-Subject: [PATCH 0/4] board: imx93_evk: add i.MX93W EVK support
-Date: Fri, 31 Jul 2026 15:56:48 +0800
-Message-Id: <20260731-93w1-v1-0-62d8459143e1@nxp.com>
+Date: Fri, 31 Jul 2026 15:56:49 +0800
+Subject: [PATCH v1 1/4] imx93: clock: add 900MHz entry to fractional PLL
+ rate table
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEBVbGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDc2NDXUvjckNdQ0OTlDQj4+TkFOMkJaDSgqLUtMwKsDHRSmWGSrEQseL
- SpKzU5BKQfqXaWgCpbFs9bAAAAA==
-X-Change-ID: 20260731-93w1-114df23ccd3b
+Message-Id: <20260731-93w1-v1-1-62d8459143e1@nxp.com>
+References: <20260731-93w1-v1-0-62d8459143e1@nxp.com>
+In-Reply-To: <20260731-93w1-v1-0-62d8459143e1@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -89,86 +89,86 @@ Cc: Tom Rini <trini@konsulko.com>,
  Primoz Fiser <primoz.fiser@norik.com>, Johan Jonker <jbx6244@gmail.com>, 
  Simona Toaca <simona.toaca@nxp.com>, Alice Guo <alice.guo@nxp.com>
 X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SG2PR01CA0185.apcprd01.prod.exchangelabs.com
- (2603:1096:4:189::19) To AM9PR04MB8114.eurprd04.prod.outlook.com
+X-ClientProxiedBy: SI2PR01CA0022.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:192::14) To AM9PR04MB8114.eurprd04.prod.outlook.com
  (2603:10a6:20b:3b7::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM9PR04MB8114:EE_|VI0PR04MB11954:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ece9255-d704-4cfb-a270-08deeed8c770
+X-MS-Office365-Filtering-Correlation-Id: 5fb9bc0b-ec0e-4c5c-160f-08deeed8cb4a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|19092799006|10067099003|11063799006|56012099006|18002099003;
-X-Microsoft-Antispam-Message-Info: Tk8UvGvREt1nfNV3SEpxKUi1ThOhGwLENTFyRups7SnVtD4gSCi4OjNBevpj19OWEQtC3aZG5d/tQTxQiDM8MgoKIuUovVCNp4Fa+hRtVETfJuae8DObXJKsN1PZQBXFN3Aney+BH9NsKW3xFOvAqMCDWL7ZOtRgHQICnP28uvCWNOFeLpy+vMQe+9Q8jFP6PUeWZ+khIS8WfTAKLp+5vXLLCczLK/rTJ4x8atz8y8v5W/ghXmV5wJzf4u1DYAO3MHMVyLh8Gt+6MDRIx1piBBWwhcOhvsncP7Tw4vYc0uMIKOSMUDDKoFDsOtDy3P5/WDXdy4QMSapnbViY+qfbgme9JHxXIQFa1tiiOFgSY38L9H44HCE4Ct4y14WGaCPrOtMJta8YOdBRTi4D6l2kcMqrgxP78pASR/6ExaEJ3Vf8RkYcrtGSr8Qn2kJl1eeL2hBvHKYh7IMLUR4J61J15RzqAK/aAFsWZvbucAStduUey+UgIGDVRzVvZFiq9BpZzSLwDHg5jNaKP7XRwOEWzvhF/G3B5n4KUSvdWg/lKMM+zmO9Pfmfz3pmpkYmb5OF1KYTXECQbxYxorBp1j77rhx/vFATQTYtE7FpfzHK/TiJFO9Mcu9sm4SkYKuMhvcWwuAt3SREj6gtXwG4eW1XWY/b6Cz1iKnrI5+9mpARYQ0=
+ ARA:13230040|23010399003|366016|1800799024|376014|19092799006|10067099003|11063799006|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: wdUtC/OZGSyu+rwQq3plX6KRLQ7Yb28TneDsaSOj57wFnk73r6D1jIs78pi0E8cYLb+zJ3ANnyY6k+tmKtrI2ZsfCEO9e8yINouGg2Zm51QGXTDXMEkZrYigW9xVeSG2jrRyflPSLlCj6925DcVoO8geibD7rF7P9ujrrFtx9FUNWihtiPc0Sp64MGKgzcWl9+e/jSkp94fdxgtc+J/Ot2OegXe6Vl4MJnMQ/7KKCnRVBSXbBt0VTodBs37DDPL8oRbVEKJhdxSNzKY7p/9SKcWpMO/rrPn5OkDXSu4mRH1LHz4lXxm+Ld8DcvnHl3504eld07Uh4jZnTGMw7EPJ+qAEpPh/sOa6wyPb5UdTASIp7vRRUtk3KgtPTCc3CdUNPQ0dAiEulPJdQJ0O4HlU1ERv/SyXEuizw+Ze7YfIBvY69lE6k0GPM5bvx/G2rr1xfE4L7rfytkSK4oquaFlaXyYpjpK0JOnI0hF24C4O8a7yR0XCj6Zv/W6vRNbrMkD/KmHAoebMOS6kKN5EIbVJOKvSrCFwQ90BH+cXH+NiBac71yGHcBZgXpsrMRC8DRda/0KT771z+nU5OfBasmsGbx+W9HMjSbTLCSh+I0kzhMzbNB6dBRbHTTRxAMzwROFnwb+o9vkiBT4Xbgsac+O3jDFVhxMrYKkfFv915V/SP2k=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB8114.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(19092799006)(10067099003)(11063799006)(56012099006)(18002099003);
+ SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(19092799006)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dngzazN4Nlc0cVVOVWpPVXhVRkNHUmViVWdlSTZtUUZoRFY3Vm1PeGhtYmYx?=
- =?utf-8?B?Tit4c3J0ZWU4eHBXenJwZnhKVUZQK0dmelpuQVBEZlNIVC9xK0d0Vlp4SDAz?=
- =?utf-8?B?VVg0OUV0NjNaZ1NnWVdPcTczZEFxeU15dDZYTlZZbEhHTXZUckhxSVJHNFFK?=
- =?utf-8?B?WHM1NWJ4SWNSS2JsK0pPRG0vVXV6cWFoNkt1SnJUQTJ1VjhwLzUwMzZuQk1N?=
- =?utf-8?B?UzFSQzNNODUyd2VmekNhempNcjBtQVpkNDY1ODVock5RWjJzbk9JYmFXRnRl?=
- =?utf-8?B?THd1RUwxKzhXUWlkVUJZeTBuS3M0alA1bDhqZDRGYUprTDNoL1FTSWpnQmUz?=
- =?utf-8?B?TVRHMy9zdWMyOXBJM0t0UTF4KzBwYXVXK0Q1VEZ5Qi9TNG9acHZRQmkydmxw?=
- =?utf-8?B?UkdtSXJBZ2pBZkpERjQzQjdLU2ZQVE0xYldvQXVXeTNSSjlUdk9JTHBOL1cz?=
- =?utf-8?B?ZFlIU1U1ZWYvTDhwWjhwaHpzdXQ1dEVrOE9jVkluSHZrZ0ZFek5heVZFakRV?=
- =?utf-8?B?VFFmazUyTEorSUp1WkpvQ0c4RGRianE0cGIzbGlWRmlEMDNoNkQrQXRNV3ht?=
- =?utf-8?B?Y3NMNW1VODJkbGo1T0RvUHRlM0p6cDJNeitaYjJFSE96RTRYcGl4YkZCZmxL?=
- =?utf-8?B?T0YxeXhOWnBQWWtUWkRTaUxIVmh4V2E2ZjNuZytNajdkSks5Q0RqbUsvK3N0?=
- =?utf-8?B?MzlnTmdCRTVrL09JZ1RkVm1RMzNrdCtXOGdRbjR3cFM4bFNodlRvZ3c0QmVE?=
- =?utf-8?B?SGZRbkpMUml3M1Jtam04bjErdTV2NzFVN2dVaUMvZVdIalNQbHF5OTNITVly?=
- =?utf-8?B?VFdyaFR3aXh6VTBLYTVSNkRaNG0rWndKYWtQUlJNeWRTTG5pellqZzA2R21z?=
- =?utf-8?B?SHM3WW9FcUxjUC9rR1JSK2UxZG1Fb0FOTERqUTZNb2NFWmV0cGFkTjRYQThk?=
- =?utf-8?B?TW1oWU8wT0J5TjNPS1BUN2hRZHNrL2lPSGY3emhheStuWGhrNXlWZWc2UWtt?=
- =?utf-8?B?blF2eHVqTzFtbjlDUmpaUEVqMGVMSmZuMnBHbGtxRTZoOVZITlhKaVBrSEZK?=
- =?utf-8?B?TFo1RmQ2Q3o1Yit4bWR2Q05ydTMxVW9OanUxTXJ6c1NaUllGa2ZsYS96OUZt?=
- =?utf-8?B?QnZicHJISXhGT3FtNXF4YUxoa3N6ck1iOFpUdDI5dC9DTDJwU3BweDl2aUNs?=
- =?utf-8?B?cm9HaC9wRE52aDM3bjNCcTFMR1Z4U3FUNkpZaGoyRnJZMVM5LzJXMFpGcGwr?=
- =?utf-8?B?WkhCcUtzc2I3Q1lyUmJveFNTQ0FuZkpxcVgveWZZeSt5eWtYaTVYR1lHUHYw?=
- =?utf-8?B?bW1TMkZqbHZhdThjckRuWWRFR09UcHJ3b1JGRm5IU1Q1K3F2ZU5rUWE5Q0dt?=
- =?utf-8?B?RFIvWVAyM2diaUtXK1BWcm1CKzN1UjR6aFBzL2s2Ui9SKzU4WGk4US9WSXJq?=
- =?utf-8?B?UXpnc3p4aTJmV2pVU0dPVXVORUppaDFZdW56V1A0cXF0N1NQWHdiUHBNdVc1?=
- =?utf-8?B?SnhzdkJjNUhvS0htVXJjTXY1RGpvNStsRVpDZEtMNnYrVW1FMzRYSGFtOTQx?=
- =?utf-8?B?Nk56SzhGeEV6UEtYUGh1M21LeU9vRjVSU2NXVzZwL1QzVGlneWZMRGRGbkla?=
- =?utf-8?B?OVBZZFJIaG1lYk01cUZHOTVsZ2lha001VjYyanRsU3FpeWV1K2QvbGxSKyt5?=
- =?utf-8?B?bitRMGEveWhqR2xJc1VoZ296VVBMcTI4eHNOUy8waG4xcm16OGRrcGN2S0hW?=
- =?utf-8?B?VTF6b08wbXQ5Qk0zbUtsLytLYWdmNlNWNlZkZWVxOEtoYTZoWXZydndjSWxD?=
- =?utf-8?B?N2ZsYjcyUzg5YkEzcGVncXJ5YkRUSm01eXpyNWxGRCtSdXdzdjZOMk9vUzd2?=
- =?utf-8?B?OGJrUTBWOFVKdWlkSEFyamtnS1VxTEkwdEVYRHlyT2lFTlZJeWJrSHJUS1lC?=
- =?utf-8?B?cE9iMkJ3c3kzczRHeGV3NWg4WHFQWXlwb0U0blRxL2tnL0llc255U0o2bmtM?=
- =?utf-8?B?VFFwRnV6WGoyaXNRU2pQeExPQTczQlpoMnBHUU5OeVpPMXBJV3VieHY5U0lp?=
- =?utf-8?B?WXRoZVhIdis0WldBT1JDLzQzSUVpb29na3R6aEh0a2w5UmFob1lzek5DeG9J?=
- =?utf-8?B?WGxHUmZBOFNXNmo4RUM4ejArQmVlUTNlbmYxWFNjTXcrbGhsVXZaK01NdFFS?=
- =?utf-8?B?NEtkRVNzdUdienVWb3FSRXZHZnd4OUFBaURnTDZOVkJhcVR1NHVLdFNXNE1Q?=
- =?utf-8?B?UEZ0SzU2M0ZOa1pqNGpEU0hvR2tSTXo2TjA0YWlSRGpMY1ZwcmRtbU02aXBn?=
- =?utf-8?B?WUpwSDRCMEF6YVprSkpDeElxbjFuMVoyZzhmVHB6NjJLdzdPNTFibVY4SEZm?=
- =?utf-8?Q?TX9FNvfu8y4iESNzIxlPmC39lqCq5Nr8UNt4/?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SW1LcHNMMHNaRGpsTWtwT1FjaDhFTnJ3T25VbXJ6OFRUZE1HV29EczE4SzZx?=
+ =?utf-8?B?YVM1ektxTmh1VjdLQlQ2bjB5cFdxQWFSMUxkVm9RQVV6NlNjeFRLZHB4eCti?=
+ =?utf-8?B?SGFmL3NycVJOaXdpYjhwZ1FidFhVR0tWUWtQYk0zc3EzdW9VY2lSV2pzMHRV?=
+ =?utf-8?B?a0N5VlJtK1FvOG12Q2xjVExEUk1SbUQxUXlka2MxTk5zTHhpZmlsVDZqd0JH?=
+ =?utf-8?B?RWp5dzlkWHBvYU5VdEl4RlMrMTBPOHlTQjJERmw2SUE5SHBPck1pL1lEM1JT?=
+ =?utf-8?B?MXpjUlJxRGFCeDE3SWdTRUZaSG1HSFgrWnFNMFl2UTNwdzg2MnBKOXczOTdL?=
+ =?utf-8?B?WjVLc09GajZJNjJURXU0L2c5d3A2L2pRLzd4c0dMa0pxZGI5MDRZQ1NrWHNu?=
+ =?utf-8?B?bVVQV1lCU0FqMjlrZkZ3SlFZcklzbUlMTHNxN0ZCS1lLcmEzUzh1VFBCUkEw?=
+ =?utf-8?B?VjNDRWNvMUhjQXhvQS9iMmNBUk1YeWZPNzIzVEU2bEVPMHJ6bWQwNmRBQmNL?=
+ =?utf-8?B?YW5wb00vamVyQTRyMzdLb05paUFvOHFLc3o0b2FFWldEaUdIenZ6czNFWHJj?=
+ =?utf-8?B?N0pxZlJvQkF6ZFZjTXBsc3YycWUrTm9MODV2bkNkZWJwZW02ZWpLbjN4RUUx?=
+ =?utf-8?B?VFJnTGlURlRSdHI2NGVjMEdsbVdBMU04a2ptd0hDSnF6a1hkb3JzRWNBZDVR?=
+ =?utf-8?B?VjFCMTdYSFd5WjlzbzBEaVA1MDhZcEpReUgzanNPbnI2WDYrcFdvRzZGNFFq?=
+ =?utf-8?B?eEdONXE5S0hvcStDU0JzRWZjMXBCRFVVeVFLdUo3S2tGV3FFVDFkaWNkMUZT?=
+ =?utf-8?B?eDY4bFM3ZTh6QmRzSVZTYVJWWm9ESWVvZzFXZnhIdW16NkUyZTdGVVJMSUpZ?=
+ =?utf-8?B?WXlraDliZmMrUFRiWU9pWkpseWRvTWlheGowS3o4UUlZWFFNRjNNTlRZK3VJ?=
+ =?utf-8?B?UnVEYS9SZU9LdXBOUXNtRHNFVzF5U29nQ2dwQS80aUc2VVBMVVRSR0NhQk9x?=
+ =?utf-8?B?SnNrMnlvNnd6clhmampEUVRNM3EzNHpqQ3hjMXlQTGtPVDJ5WHB1bWNWUmtI?=
+ =?utf-8?B?RFk4bGlGdkFBYWhVN2ZBWGE5eU1kSWo4U3VDeGxqcWhFb1ZieEpnTk4yRTRX?=
+ =?utf-8?B?SXY2WU0xTWo0Ri8yaEhzUHp4MUFJanM4cTRVV0w5dDJFd2szQWMwQnkrY0pm?=
+ =?utf-8?B?akxNSytLMTljVlBQY29oQmhOemlKajh3L01FQmZsQ3VQUi9TakNDRFluaXJt?=
+ =?utf-8?B?V25nNTBHMS96VzBEd29aM0xOS0RnWHdHTk5wSmkwU1NieHErOFZJdGZOQUlk?=
+ =?utf-8?B?NVdaNllrOGh1VmZtbXEwazcwZEl5dytGT2plWWRhNnlZV01XTW5zckhEZWc3?=
+ =?utf-8?B?aEFKQVo0am1KbUFQVG93VDU3dWw3QjhHS2ZlbThmbm5rSkcxYnBuNHprbkpS?=
+ =?utf-8?B?cmt6b2NGeWNoNnFxRWNCSXRCTTFSM3p1NzBoNm5vdnlZTktoMVZxM3Z0cEJo?=
+ =?utf-8?B?M0VQTDVBMjdRUE5SSEgxYmxGbDZuOUVBK0QyelJwaWtTT0M0Sy9CdlcwWDBs?=
+ =?utf-8?B?Ri9zUFNLVkdibDJtT2ZYVEVGRmRoUUd2R2R3cUtZQjZTU2x3ODBPd2k0cWRx?=
+ =?utf-8?B?bmV3amZ0cUxIS3dmejI1RWZRRVI3RlE3VFM2dXlHMlg1U1dXUFRDMkphcTJ0?=
+ =?utf-8?B?dGxBdm84Z1M4aS9kZDF1RGNkN0FjVldoQk9hb3J6c3l2dUEzOEQxd01kZmRv?=
+ =?utf-8?B?cWNiWHl4WSs4azg0TVR3MTdvcUJ1eXA4UFRYYWVTUi9TSnBsWUg3TXYycEN6?=
+ =?utf-8?B?elI3MTIvb3Vmdm83QmN2ZzhqWU1HcmxNRG4rbXRic0htd2diZDBBeEhDYzJy?=
+ =?utf-8?B?bUlSVVMydU9tQXM2VUlRTmErZzBvUW1sUVFFUVpsVWtrU2lNSm5OR2txSlBB?=
+ =?utf-8?B?VmJOQTdTREVJeHFtM3FTdHRtWGVFcytnQXVmNFplZjJ1YnJqNEJkbWtJY1l5?=
+ =?utf-8?B?b1BJVk5hTWpYdVNlVzhJSkpGY1M1RWpzbVU5VGZXanpNVnU0ckZFeXU0VmZK?=
+ =?utf-8?B?ZFNIVUZtOEkwdHhSR1ZjNEd6b2VrQzRtV1F2QTU5RlpnSFl1ZTBjOHBnVW9s?=
+ =?utf-8?B?MG5XTFFkVlhld0RZZE05NElIUWRxMWEydUNUY0t2MzVoV2RWeUh5UVZKSEMz?=
+ =?utf-8?B?bzJrenJNVFoxOUtMV09Ick5LRVhJYk45Nm9LSTA3RHRlakhTUk1iTGNSb2JG?=
+ =?utf-8?B?b1loME9NTllreThKbER0M3ZJOTV3WHhSV1dqTitEWWIvci9uVFZ3bVRXVkg2?=
+ =?utf-8?B?c1ZDeWlOSFdFZnBKUlg5cTBtc2VKT0d3VDNud1dLM3lqUGpOd0RrTmczS0pC?=
+ =?utf-8?Q?uN7OPrkdRJNci3QZAR25ah4f4z6y4vppt+QWN?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ece9255-d704-4cfb-a270-08deeed8c770
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5fb9bc0b-ec0e-4c5c-160f-08deeed8cb4a
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8114.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 07:53:16.5087 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 07:53:22.7246 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T0DIMJhmWTLrXRG9DcA7TAn88pCDY066oMj7dJ4CD7alXVyNYpDp6mpQ/CqdYNLtluyiSjdqBZ47u1rDdJS9PSgwpQQEV1/e2Mwa1Xa5o9bezvTgLiNv84koSIuKOEZO
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3OLnd2gfi5WS/hrexExP/VHzveUp+bNjbUYXPbiWwpG6hFoDBHDFdxaMHlw55uLyeTt16KofUix5ZmkaDDaITiacIPPekh7crAq6/kdDjrFyoPvr7pLX4FZwvWsJKCxT
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11954
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9pXgtwJbSkoKuN1egnUA/R6yaBO4N4y6zPf19xvQ92U=;
- b=c5kA1tJD3TTq0YsEq97rOYlHTQiPmeT6wQhO8wwLKTtuNgS2Gd06B6fSqe3A7nGokqtV/PV+Eo4Vo2wqYuLKd52uCTPh9n/7piANQXPqovynbUgRzWlm6I0dNmtc+tU6CEaw1Tl5TfZRFrRLfCJxDCDz0FpMgRJDp+PTqWcPpXnljg+2qrr4ILPoqBYYKtaD3+VycGlb/hhRcRqEYdYowUMMCYYSzBwZcn81ECvIbzRzaFzFX540GWnvjlPFUi/coQshS1yZJqTdvJ6aoYeTWUh7XqPLrIMI6U//RnEkujBBGQlcaPrPqAy1J2XdxEZB+81y/TWJ95Gq9hwe+5gbvQ==
+ bh=OH9dZc+l9gJu4+3VjRMKxNudo8aJtGOIKI85+kCNUd8=;
+ b=XDp/om2z6zfzBleLKbbbiC5VooXV7x4YnBvUb5oFnR4UDmLq3ITH3utw8VI4jju+krhKw4brCJ2Fh1mr4SmPGK3ZCUoslc+QsA71UpspbbPsirBz3ArI+jS3mghlwfGvxsJKBmxgKoK7jzZjxbsbHrZv9rCQ148OnbKwAApGV12jyPn+cXBMTUCPNg6UwUcm6M4k0bhXlyqV6fvTCRJMsAYIjYAJNWYu6qG3syOrFqxXjf+etKRw3E91A5q8ZnixsfH39J6vtecSoLP98wpyzoowr+LbsOiduKUqW3pkMzLc5hjBg1bcW1XJC8dYENVCiWNIMSLvnvoFcUpnUWt11w==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.nxp.com
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=c5kA1tJD
+ dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com
+ header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-NXP1-onmicrosoft-com header.b=XDp/om2z
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -185,40 +185,30 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series adds U-Boot support for the NXP i.MX93W EVK board, a variant
-of the i.MX93 EVK that uses LPDDR4X memory running at 3600 MT/s.
+From: Alice Guo <alice.guo@nxp.com>
 
-CI: https://github.com/u-boot/u-boot/pull/1027/checks
+Add a 900MHz rate entry to the fractional PLL table so that the required
+clock frequency can be configured to support DDR at 3600MTS.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Signed-off-by: Ye Li <ye.li@nxp.com>
 ---
-Alice Guo (2):
-      imx93: clock: add 900MHz entry to fractional PLL rate table
-      board: imx93w_evk: add board support for i.MX93W EVK
+ arch/arm/mach-imx/imx9/clock.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Ye Li (2):
-      imx93: clock: add 450MHz DDR PLL rate
-      board: imx93_evk: add LPDDR4X 3600MTS timing tables
+diff --git a/arch/arm/mach-imx/imx9/clock.c b/arch/arm/mach-imx/imx9/clock.c
+index 4ccff67b7ab..4b89ee3b2b4 100644
+--- a/arch/arm/mach-imx/imx9/clock.c
++++ b/arch/arm/mach-imx/imx9/clock.c
+@@ -33,6 +33,7 @@ static struct imx_intpll_rate_table imx9_intpll_tbl[] = {
+ static struct imx_fracpll_rate_table imx9_fracpll_tbl[] = {
+ 	FRAC_PLL_RATE(1000000000U, 1, 166, 4, 2, 3), /* 1000Mhz */
+ 	FRAC_PLL_RATE(933000000U, 1, 155, 4, 1, 2), /* 933Mhz */
++	FRAC_PLL_RATE(900000000U, 1, 150, 4, 0, 1), /* 900Mhz */
+ 	FRAC_PLL_RATE(800000000U, 1, 200, 6, 0, 1), /* 800Mhz */
+ 	FRAC_PLL_RATE(700000000U, 1, 145, 5, 5, 6), /* 700Mhz */
+ 	FRAC_PLL_RATE(600000000U, 1, 200, 8, 0, 1), /* 600Mhz */
 
- arch/arm/dts/imx93w-evk-u-boot.dtsi              |  171 ++
- arch/arm/mach-imx/imx9/Kconfig                   |   12 +
- arch/arm/mach-imx/imx9/clock.c                   |    2 +
- board/nxp/imx93_evk/Kconfig                      |    2 +-
- board/nxp/imx93_evk/MAINTAINERS                  |    2 +
- board/nxp/imx93_evk/Makefile                     |   12 +
- board/nxp/imx93_evk/lpddr4x_timing_3600mts.c     | 1998 +++++++++++++++++++++
- board/nxp/imx93_evk/lpddr4x_timing_3600mts_ecc.c | 1999 ++++++++++++++++++++++
- configs/imx93w_evk_defconfig                     |  172 ++
- configs/imx93w_evk_inline_ecc_defconfig          |  173 ++
- doc/board/nxp/imx93w_evk.rst                     |   72 +
- doc/board/nxp/index.rst                          |    1 +
- drivers/ddr/imx/phy/ddrphy_utils.c               |    4 +
- 13 files changed, 4619 insertions(+), 1 deletion(-)
----
-base-commit: 100e12ea78c73071b9710f08b32fd4590019266f
-change-id: 20260731-93w1-114df23ccd3b
-
-Best regards,
---  
-Alice Guo <alice.guo@nxp.com>
+-- 
+2.34.1
 
