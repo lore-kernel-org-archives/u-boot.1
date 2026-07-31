@@ -1,99 +1,99 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF65C5516D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:40:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A77C5516D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:40:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D098860B69;
-	Fri, 31 Jul 2026 12:40:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 56E70410ED;
+	Fri, 31 Jul 2026 12:40:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rmEzrpyxEI2f; Fri, 31 Jul 2026 12:40:37 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fxKIjCE1A7AP; Fri, 31 Jul 2026 12:40:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7010260AD0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8424A4109E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785501637;
-	bh=VQlvFNfjaRTnpQMUTzlWkCtETRvg3ueiHU844wGMBuE=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Vt9gtJSSiy+UCSgvCyXpcI+sP6kgnu/nyFFR+SRND7smJwjCR1iHgOKN6YgBClAHp
-	 351K3bbUOHgpwHW8aaSmCJ8ke/0WLJ/kbKUcumTBAwjVNNLxZPlmXO3QoCFORGMGu6
-	 VWwnTAvdIU6ccfMCT/BXpvuycoX6GlPJGlNj9NgIe2qG4UFvskEvrQ+2IKvmzUa5G5
-	 OUF7UOIwhnVXIV5k7I2mEVKr+BVO1N7YOefQy2at3SkuN80cJJVlVNYQU32w/cFTly
-	 M4QyL7hyiNw/ZLCuUanEKV775wRpbEjDEIzkO59X5SBMq0IkyDW8xwLK3r6YNKZXyJ
-	 qfTkElDirsypw==
+	d=lists.u-boot-project.org ; s=default; t=1785501640;
+	bh=2RP6uE4OF3H+9ZCyi7POZTWcG7NafS5Iq/IlroZl/94=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=deVC1UpPUAPBUdaKhKLzjs38xaUjR5jf/WlMMC/5RGZi3d8KX6Bb2tS8EPiwhspOO
+	 SvLXtZSFVXzYFVc2Z6zBXxUvNazL3CZaT4VmP9GmVZqVS8fo8UOR3HVXB35iYaHbLS
+	 R5i34Lffx9Sou34mVXaWehxsNlQpd63uakf6lpcw+l6gFUbPJ0rGZ2MgBox8fswPAf
+	 a7UrOHWbqyvIvf1RwJlBd1D3CzAKQOo721yXFyEh935IrdRH6vFJRoogrtIi9XPjB7
+	 4Yi+2KD8ikui4cor19zvV6VePNXXMUCllNDOJukpBArDUV13vYmkNq6wuJXTsVmiFF
+	 UWS/u6fiYwqIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7010260AD0;
-	Fri, 31 Jul 2026 12:40:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8424A4109E;
+	Fri, 31 Jul 2026 12:40:40 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9310869
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:35 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 50D1837F
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 84ADE4047C
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:35 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3706F4047C
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ysr8negjebUk for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 12:40:34 +0000 (UTC)
+ id yVmTRzvp4mrb for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 12:40:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9EC5840471
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9EC5840471
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9EC5840471
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:34 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-4758bd3731bso944122f8f.0
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 05:40:34 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 3768540471
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3768540471
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3768540471
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:38 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-47f7872abb6so675071f8f.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 05:40:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785501633; x=1786106433;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=VQlvFNfjaRTnpQMUTzlWkCtETRvg3ueiHU844wGMBuE=;
- b=TYrT5XkRCXlbeC2S6FmsyqmRujrOpIqs3UeA4QmN8wxAKoIrG72iFITSwUct9rgy/x
- xUELFnxYVlz4d2zYnkHqi6LHvAe0W2hEj15G4DRdq3Cqevh+4zfG4aWfSNRGIVfuiW9D
- iaWnjO5oKwtGzomjEHjU+zuTURCOt9kYVrypnVb5LUDWwf4d6UsGOIR7+vFh4Tw24aKP
- IVAOX/QARqkfw0ZpFSEPMSWlFrue6PezmWew0zz9dkoU7u39q+4+ZN9KDvpyURA1VuDz
- lAmVs5K/VFo3bVP7CytcASjcXnIfqG85CizD5UD5ooL1QLLNpjvgs9dib1N1LoRp/U/5
- t3aw==
-X-Gm-Message-State: AOJu0YyOhujJSl/yrP5mKNRdwvGc8FwxANR/DXMhTk7zLoZeKd9COuVg
- vnHktqnEnMyZhkRgKGmztGqzyDHJ3OQhKWX1p3RisNftEOwfjRy3qWFUYNm6JfKZIU0=
-X-Gm-Gg: AR+sD10H+X8WbMDljtiUaAgSkqPaW3pDQk1tGLHcGZsEbk1Gm0WhabusP7yPlLXN5Ae
- sksZGzwA1q0sMPhZ/RFFspp6jzek/pahcm4EAMI8ILtKZPadSyJo8T852V6sXD2nsyYiFgxM7pi
- SfCWrqIfKIBP6dCp3PKMydgDEbynaQsyGjqGwKJ5bvc4ovCa5bExV8XumNkoeIEqui7YAwvubPF
- RwmXReM/21yIuLMHXEnDcsSUKQf26PuJdbTGNYNOCgpj6ayCJzzF6cjezTvMTWBDxOkCBPNkN1O
- aWoddPQ+bkyLU//KpD+92muTdi01XByu8ojNayhFbQC7IQTObEJKDPBG4eqWIOhF9m0zI59BPa4
- u24ScNkWGfsLlzJ8l8aRSPFIXhvf23nb3w+DuA7KxeXVadjR8ChsNGeaBDKgFRs4Mj07JBw4Hi2
- EivdHR3BXS2l16/nUR+0avVLJxtBv/xD2JbIb19SHsa91HDOrRqZB4DQWIQkePcC/6Wm7fwo6JG
- trzD6sCIeS4kU5xzJyBQwOr6PDQ4abQhnvzy6vcLA==
-X-Received: by 2002:a05:6000:22c5:b0:47f:8b0f:7172 with SMTP id
- ffacd0b85a97d-47fd32b09d3mr3977617f8f.6.1785501632621; 
- Fri, 31 Jul 2026 05:40:32 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785501636; x=1786106436;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=2RP6uE4OF3H+9ZCyi7POZTWcG7NafS5Iq/IlroZl/94=;
+ b=ZlgA5idOF4NazElTDQ9kspAmGOJRTrgSwWeMhlfiZT+GOZ7cBxw7iV9pqv88w+NiS3
+ 6+7PLSUvoxzlWNHZyunLFsthOlS1VpMuw71kTO8vSYV+dXjGhD3IcqAiLfEhFVGEAXTV
+ yho4A1jWAnnZq0X8wqt29vqVr2j9ErX+IEUxfK0pZzrbsZ7Rwc18lf6BuuT5fmK2kTdp
+ C/t5aBwMY/rf4EQQ2GEfKQ02L1zQitlcIz4n3X8zD9wthlXCXxFSYNRPwIKk3lXnaL5Y
+ Z0bMbgaaDcklLBtuzIL01SlWHNAq9I0Dk/xvgmrLb1vmX+gvdyngPAI7TDYbZbX+nRmQ
+ Bl1w==
+X-Gm-Message-State: AOJu0Yw+jlZ3q3ruDVUGKYDgVvdB2D9q6dcCwNavQ45q8LALtScSAjOM
+ Q8Jkio3tsI3M3gizYebuxk/7KX62sbzC/PmsrVbCP+2SOQ0YSe4GIdk49uE9UC85GWY=
+X-Gm-Gg: AR+sD138cYZeBJtNqftxCfV1Zv4nkAOmpbbeRo7u9vAwGu5sIsJeBoLQROmJ1cU6Udg
+ 6PVQRRyVndooq7EPN/ZDNpDRjPu6G68DqkD/EPonNloSp4E1x9mYLG7D3XYNNamSPIBjmnlQNU9
+ pnRdJxJEPbmabUz1gSd+0OySgflpg7KzWScR6ONwkghIx60rxPnySvOoP7GYg+kwWM1pxoFxv/t
+ vD4QYYKSoI8jlJFNDyz7/shBrWkGX6bj3GHmnvuE9j+Hs+3RYYeFHsEWsPlCOObYItg65afsnkN
+ k4ADGnk4EZshGkX0jNNd2VCGpE0mRQQTOi6hx30/5MvOSWszBmCF9ujpdhkigmxgvx8GpJib1IT
+ Xovy30uNT5HulEo+rojN5fD1TMMzG38mi5Fyt0ovM8QdS4xmJWz7rXvV7PqLXrACf+X8WMFT/sH
+ gkdWyqzummAipWWePtTxvFE0QdJnZ0GRa77yGrVy8mrp/gOONYQxZ4smwUVO1nPDrkpFrlIV1XT
+ RJdPtUPZcH/WUxjIXvNbXFWdnDubhXgIFd0XpuwCQ==
+X-Received: by 2002:a05:6000:184b:b0:47f:853d:4768 with SMTP id
+ ffacd0b85a97d-47fd2acb828mr4258295f8f.20.1785501636112; 
+ Fri, 31 Jul 2026 05:40:36 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
  [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fd41e296csm4493682f8f.12.2026.07.31.05.40.28
+ ffacd0b85a97d-47fd41e296csm4493682f8f.12.2026.07.31.05.40.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 05:40:32 -0700 (PDT)
+ Fri, 31 Jul 2026 05:40:35 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Subject: [PATCH 0/6] disk: Fix the GPT layout on media with large logical
- blocks
-Date: Fri, 31 Jul 2026 16:39:59 +0400
-Message-Id: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+Date: Fri, 31 Jul 2026 16:40:00 +0400
+Subject: [PATCH 1/6] disk: part_efi: Size the partition entry array from
+ the block size
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDc2ND3fSCEl2TbN00iyTLVOO0xBQTcxMloOKCotS0zAqwQdGxEH5xaVJ
- WanIJSLdSbS0AqUvvV2oAAAA=
-X-Change-ID: 20260731-gpt-4k-f8b9e3fad474
+Message-Id: <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
+References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+In-Reply-To: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
 To: u-boot@lists.u-boot-project.org, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>, 
  Patrice Chotard <patrice.chotard@foss.st.com>
@@ -110,34 +110,33 @@ Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>,
  Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4092; i=alchark@flipper.net;
- h=from:subject:message-id; bh=d9/h7e7+XaFFQA4mKZ5GkNrYJtODipHxb8xBHipURbQ=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTlTN+o65oxvziDReLICTbfJZnOJ9ZtmbGoqYZ7ReQxh
- 3bhjw+1OiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- QyMdYx0jBi5OAZhqnp0M/53rp+yy3aFSZrGp41rOsiX+v8y1jBQCd17uLumTybBepsXI8Hin+fe
- fzUs5vNP/rVFw2/l78TJhbo6j19tTitjMrn4pZQUA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6368; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=RCdV+jpxr2/+Eo6jh8TGCsxQ9dsRHKF3rBpoXhXWmDM=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTlTN9Vk3xlx+ZZAiYHj/XeEdCtjk1TNt1b5TphvrSIb
+ SxLVjFnx0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjrGPEwMUpAFN94Bgjw76ALZ57Tvy23rwv9K3RzhM6t2fX3lO6Ha2XUv/L7GCkyxqGfzqJ9u9
+ 3u9cLO+y/cT+F87LdOt0zM26bT8wp2pD89/OUI6wA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785501633; x=1786106433;
+ d=flipper.net; s=google; t=1785501636; x=1786106436;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=VQlvFNfjaRTnpQMUTzlWkCtETRvg3ueiHU844wGMBuE=;
- b=g0ZM1u68KeaXonVFb6l3wKSVkJVeiabC90HsBydatwKj1kgiTghRcZ8y6RwPSsL4ll
- g3XWHT3N+VBVIaIj4w/bA4Da+rhDEXhHa9bxq4sZJUSo6GT3mOm3sFNetDvbgRpQ1BOu
- gcOjX1ZoShCq12R2O1LiN74Y1psaRXnLp13d9zUTn8KKZ6bI4Cay7RlMW+8iWf0iV4bB
- mqj7N42EjaJ/Wso83Y4s+GArBBLvONUZFMfBhBoO+proANJ57DWtXKeMOya17nK93hHF
- I/s9YnSslnTBT6ELx6dI8dX+il0QpF4CNOWefUi2zw8/LlPpzpm04yT2XpcMxXSStSDt
- E5dg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=2RP6uE4OF3H+9ZCyi7POZTWcG7NafS5Iq/IlroZl/94=;
+ b=gyxmwdUj/d8BmE3h+doraIeKY857/OGgbSSdsTRw/GQmLjwVpXYQfUV9tWNeNLJr2/
+ cf+LMjtxWZlts5QUdOehyTzyrGPB/QfCME7t4KlCODYSyEpGP5maSVtG9t5HXh2dEc/T
+ TcAmoDimDSM6V1JGq5egI6Ef+u++ZbnSGZshIJjVH5TkDuJ7MhC+aIZR7a+79+1qDKHr
+ zvlFkSajUFIMh0+SudeTfWSvAsoIYn/9obCtSRsWGgaOGG0uXiOb0y6glOzvVnuU/XnJ
+ s+bT1VcqhpV/+uiHk3V2rQXiqhVrhfox6/2lfl7f4TOYygQGxQTvK0qvkJwgq+NmCsfi
+ Agzw==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=g0ZM1u68
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=gyxmwdUj
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,82 +151,153 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The GPT partition entry array is sized in bytes by the spec, so the
-number of blocks it takes up depends on the block size of the device.
-U-Boot got that wrong in gpt_fill_header(), which reserved a fixed 34
-blocks at each end of the disk. On a device with 4096-byte native
-sectors, such as UFS flash, the backup entry array ended up 28 blocks
-short of the backup GPT header instead of immediately before it, and
-roughly 114 KiB was wasted at each end of the disk.
+gpt_fill_header() computes last_usable_lba and first_usable_lba from
+hardcoded block counts that silently assumes 512-byte sectors and the
+default number of partition entries.
 
-Patch 1 calculates the count from the block size and makes the four
-places that need it share one helper, since they disagreed with each
-other in different ways. Note that it also changes the 512-byte layout
-for boards that do not use the default entry count:
-CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is "default 56 if ARCH_SUNXI" and
-is set to 64 by a number of Rockchip defconfigs, and on those
-first_usable_lba moves from 34 to 16 and 18 respectively. Existing
-tables stay readable, since the entry array is always located from the
-on-disk partition_entry_lba, and only newly written tables are
-affected. Partitions given without an explicit start= will be placed
-lower, though, and on sunxi first_usable_lba lands exactly on the 8 KiB
-SPL offset, so sunxi and Rockchip folks may want to look at patch 1
-specifically (none of the devices I have override the default).
+The partition entry array holds GPT_ENTRY_NUMBERS entries of 128 bytes
+each, so the number of blocks it needs depends on both the entry count
+and the block size. write_gpt_table() derives that count correctly and
+writes the backup array at last_usable_lba + 1, so whenever the two
+disagree the backup array no longer immediately precedes the backup GPT
+header. Furthermore, on a device with 4096-byte native sectors, such as
+UFS flash, and the default 128 entries, the array is 4 blocks rather than
+32. Current code reserves 34 blocks at each end of the disk for any block
+size and wastes about 114 KiB at each end.
 
-Patch 2 is an unrelated big-endian correctness fix in the same file,
-noticed while auditing it: a few header fields are read without
-converting from little-endian, and one already-converted value is
-swapped a second time.
+Add a new helper gpt_pte_blocks() and use it in all four places which
+currently calculate the number of blocks each in its own way, so the
+layout written by gpt_fill_header() and the extent written by
+write_gpt_table() cannot drift apart again. With this, first_usable_lba
+on 4096-byte sectors is 6, last_usable_lba is lba - 6, and the backup
+array occupies lba - 5 .. lba - 2, immediately preceding the backup
+header, as the UEFI specification describes.
 
-Patch 3 is another unrelated bug that has to be fixed before any of this
-can be tested: part_test_mac() reads one block into a 512-byte on-stack
-buffer, so it corrupts the stack on any device with larger blocks. Since
-it runs during partition probing on every device, sandbox crashes on any
-access at all to a device bound with a 4096-byte block size.
+Note that this changes the 512-byte layout too for boards that do not use
+the default entry count. CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is
+"default 56 if ARCH_SUNXI" and is set to 64 by a number of Rockchip
+defconfigs:
 
-Patches 4 and 6 add the tests. The C test sweeps block sizes from 512 to
-32768 against gpt_fill_header()/gpt_fill_pte() with a synthetic
-descriptor, and the Python test writes a real GPT to a host device with
-4096-byte blocks and checks the resulting on-disk headers. Both fail
-without patch 1.
+  entries  array blocks  first_usable_lba  last_usable_lba
+       56            14        34 -> 16    lba - 34 -> lba - 16
+       64            16        34 -> 18    lba - 34 -> lba - 18
+      128            32        34 -> 34    lba - 34 -> lba - 34
 
-Patch 5 is a prerequisite for patch 6: test_gpt_write_part_type() never
-binds its own disk image and has only worked because an earlier test
-left host 0 bound, so it breaks as soon as a test binding a different
-image is added above it.
+Existing partition tables stay readable either way, since is_gpt_valid()
+locates the entry array from the on-disk partition_entry_lba. Only newly
+written tables change. Partitions given without an explicit start= will
+now be placed lower on those boards; on sunxi first_usable_lba lands on
+the 8 KiB SPL offset, so such boards should keep specifying start=
+explicitly.
 
-One known gap: test_gpt_write and test_gpt_write_part_type hardcode the
-128-entry 512-byte layout, so they fail if sandbox is configured with a
-different CONFIG_EFI_PARTITION_ENTRIES_NUMBERS. The new tests derive
-their expectations instead, and pass at 56 and 64 entries. No sandbox
-defconfig upstream uses anything but 128, so I have left the old tests
-alone.
+While here, report both LBAs when the requested layout does not fit, since
+the existing "Partitions layout exceeds disk size" debug message gives no
+clue as to by how much, making it less helpful in debugging.
 
-Tested by building sandbox (default, flattree, sandbox64, gcc and
-clang), generic-rk3576 (gcc and clang), sonoff-ihost-rv1126 and
-A20-OLinuXino_MICRO-eMMC on armv7, and boston32r2 and boston64r2 for
-MIPS32/MIPS64 big-endian, which is what patch 2 is there for.
-
+Co-developed-by: Anton Burticica <mouse@ya.ru>
+Signed-off-by: Anton Burticica <mouse@ya.ru>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
-Alexey Charkov (6):
-      disk: part_efi: Size the partition entry array from the block size
-      disk: part_efi: Add missing endianness conversions
-      disk: part_mac: Fix stack corruption on devices with large blocks
-      test: dm: part: Check the GPT layout for large sector sizes
-      test: py: gpt: Bind the disk image in test_gpt_write_part_type()
-      test: py: gpt: Test the GPT layout on a device with 4096-byte blocks
+ disk/part_efi.c | 47 +++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 35 insertions(+), 12 deletions(-)
 
- disk/part_efi.c           |  55 +++++++++++++++-------
- disk/part_mac.c           |  12 ++---
- test/dm/part.c            | 100 +++++++++++++++++++++++++++++++++++++++
- test/py/tests/test_gpt.py | 116 ++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 261 insertions(+), 22 deletions(-)
----
-base-commit: 100e12ea78c73071b9710f08b32fd4590019266f
-change-id: 20260731-gpt-4k-f8b9e3fad474
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index d8b17ec2e91a..af311867a285 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -388,10 +388,23 @@ static int set_protective_mbr(struct blk_desc *desc)
+ 	return 0;
+ }
+ 
++/**
++ * gpt_pte_blocks() - number of blocks taken up by a partition entry array
++ *
++ * @desc:	block device descriptor
++ * @gpt_h:	GPT header describing the array
++ * Return: number of blocks the array occupies on @desc
++ */
++static u32 gpt_pte_blocks(struct blk_desc *desc, const gpt_header *gpt_h)
++{
++	return DIV_ROUND_UP(le32_to_cpu(gpt_h->num_partition_entries) *
++			    le32_to_cpu(gpt_h->sizeof_partition_entry),
++			    desc->blksz);
++}
++
+ int write_gpt_table(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
+ {
+-	const int pte_blk_cnt = BLOCK_CNT((gpt_h->num_partition_entries
+-					   * sizeof(gpt_entry)), desc);
++	const int pte_blk_cnt = gpt_pte_blocks(desc, gpt_h);
+ 	u32 calc_crc32;
+ 
+ 	debug("max lba: %x\n", (u32)desc->lba);
+@@ -453,9 +466,7 @@ int gpt_fill_pte(struct blk_desc *desc,
+ 	size_t hdr_end = hdr_start + 1;
+ 
+ 	size_t pte_start = gpt_h->partition_entry_lba;
+-	size_t pte_end = pte_start +
+-		gpt_h->num_partition_entries * gpt_h->sizeof_partition_entry /
+-		desc->blksz;
++	size_t pte_end = pte_start + gpt_pte_blocks(desc, gpt_h);
+ 
+ 	for (i = 0; i < parts; i++) {
+ 		/* partition starting lba */
+@@ -482,7 +493,9 @@ int gpt_fill_pte(struct blk_desc *desc,
+ 		gpt_e[i].starting_lba = cpu_to_le64(start);
+ 
+ 		if (offset > (last_usable_lba + 1)) {
+-			log_debug("Partitions layout exceeds disk size\n");
++			log_debug("Partitions layout exceeds disk size: "
++				  LBAFU " > " LBAFU "\n",
++				  offset, last_usable_lba + 1);
+ 			return -E2BIG;
+ 		}
+ 		/* partition ending lba */
+@@ -604,18 +617,29 @@ static uint32_t partition_entries_offset(struct blk_desc *desc)
+ int gpt_fill_header(struct blk_desc *desc, gpt_header *gpt_h, char *str_guid,
+ 		    int parts_count)
+ {
++	u32 pte_sectors;
++
+ 	gpt_h->signature = cpu_to_le64(GPT_HEADER_SIGNATURE_UBOOT);
+ 	gpt_h->revision = cpu_to_le32(GPT_HEADER_REVISION_V1);
+ 	gpt_h->header_size = cpu_to_le32(sizeof(gpt_header));
++	gpt_h->num_partition_entries = cpu_to_le32(GPT_ENTRY_NUMBERS);
++	gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
++
++	/*
++	 * Number of blocks occupied by the partition entry array. For the
++	 * default of 128 entries that is 32 blocks on 512-byte sectors, but
++	 * only 4 blocks on 4096-byte sectors.
++	 */
++	pte_sectors = gpt_pte_blocks(desc, gpt_h);
++
+ 	gpt_h->my_lba = cpu_to_le64(1);
+ 	gpt_h->alternate_lba = cpu_to_le64(desc->lba - 1);
+-	gpt_h->last_usable_lba = cpu_to_le64(desc->lba - 34);
++	/* Reserve space for backup GPT header (1) + backup partition entries */
++	gpt_h->last_usable_lba = cpu_to_le64(desc->lba - pte_sectors - 2);
+ 	gpt_h->partition_entry_lba =
+ 		cpu_to_le64(partition_entries_offset(desc));
+ 	gpt_h->first_usable_lba =
+-		cpu_to_le64(le64_to_cpu(gpt_h->partition_entry_lba) + 32);
+-	gpt_h->num_partition_entries = cpu_to_le32(GPT_ENTRY_NUMBERS);
+-	gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
++		cpu_to_le64(le64_to_cpu(gpt_h->partition_entry_lba) + pte_sectors);
+ 	gpt_h->header_crc32 = 0;
+ 	gpt_h->partition_entry_array_crc32 = 0;
+ 
+@@ -747,8 +771,7 @@ static void restore_primary_gpt_header(gpt_header *gpt_h, struct blk_desc *desc)
+ static int write_one_gpt_table(struct blk_desc *desc, gpt_header *gpt_h,
+ 			       gpt_entry *gpt_e)
+ {
+-	const int pte_blk_cnt = BLOCK_CNT((gpt_h->num_partition_entries
+-					   * sizeof(gpt_entry)), desc);
++	const int pte_blk_cnt = gpt_pte_blocks(desc, gpt_h);
+ 	lbaint_t start;
+ 	int ret = 0;
+ 
 
-Best regards,
---  
-Alexey Charkov <alchark@flipper.net>
+-- 
+2.54.0
 
