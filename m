@@ -1,162 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9B7C55173
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 19:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C76C6C55173
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 19:25:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 30F9C80DE9;
-	Fri, 31 Jul 2026 19:00:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2A41D40FC0;
+	Fri, 31 Jul 2026 19:25:19 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CdtErpv4r-EX; Fri, 31 Jul 2026 19:25:17 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2AD1C40F89
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785525917;
+	bh=1hHWfQeY6PIsL27S+MLk+YEXOKZPsSYX/q2oqPF8Kg0=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Jz3q9nfYIbVOvVht2yGpzXXQoz/XxURwfLqM1kB0IHLoUm22C7TO2KPpJvbnj0Xs6
+	 kNs4oSMgR962wkWUagEqQPvLoUh9XY+IWdpDwQ/mH6y0LMS9iqxXm6WSQIN8nwTqgO
+	 rA8IO2QGg2RxHfvriKVglgI/+5mqVY5o+PcjoLTtBotEss18x3M9KNJzNfFlLb+LTa
+	 bov1a5OWlAQ6yGsAbzZBCKLZosoy/wUNutmWU4vCsf+chxtnHAoh3ReF3CbvJW/q+g
+	 NYpOSF8T/UbB5W7qczzdY+K6H6f0dzPG92zBhJUWOBAmdLbTPHuQbifUu0XBVxx9g1
+	 xgoqQPIbXOFPQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2AD1C40F89;
+	Fri, 31 Jul 2026 19:25:17 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 609F227C
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 19:25:16 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5E27F80C71
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 19:25:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rUiVZ8vBG3R1; Fri, 31 Jul 2026 18:59:58 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E9F838096C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785524398;
-	bh=ff+C2dUS6mJBkwcgwRjRCr0qEsBbDWcGq0DE8nVuz74=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=BL2O1YJ5KVWSd+Wlun/50MZXk0XabHnysItFUjxt2q8NUjARxrfqx5Td+0iHb9F+n
-	 sXcyMk+ZuNNuKD6QRYAbz3YBcY3tDhbMFRwHGWUkvtyEel5z9pa0bET37Mq4qQchMj
-	 05BR7dQxeBwubaOEXu82WdnfVBPyOrUdxSPiJM/oVpIsN2vvdl16Ffc/+V86bwZ886
-	 GV5C/myKw8tI3U70F8fStZTcE/XBg08mnKkF3dSSqBNIOdfiAX2iBmW3QXLBCeIpAd
-	 5gcuTje1285iA3XVHwtDD7VS9H11PRmiIiNCZDW2YosW0LxtCMFGkHK8t23fgQPptG
-	 mLuNg4MGl2EkQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E9F838096C;
-	Fri, 31 Jul 2026 18:59:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E235E36E
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:57:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D3CFD400C5
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:57:52 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id e_-jbFtD9J0T for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 18:57:52 +0000 (UTC)
+ id HNUGmiBY3m5F for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 19:25:15 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9DC6D4007F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9DC6D4007F
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9DC6D4007F
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:57:51 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c1c26d7e951so200822466b.0
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 11:57:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785524269; cv=none;
- d=google.com; s=arc-20260327;
- b=XnKqPgIrfN33zDWp/0/8kLAOQqyuN63okgYR0eOSofr+wQ4c9FU7a2sBkogyEXLJ94
- VF5/S8I4pSW6785PdRe9lhESL8ToHftTNCQHH8ZDdZ0XXNe0hRQAt72eeZUuvdrnFSSi
- 365y8jyHDWZJtzynkmNL+UYVUyGvjOf80bZBcVrkb6pyiRi7EM+0x7GUonamnQVmDhLd
- UrwXyLlXAUrp9x8oBF+Sm1yZfGKgWXG6xbHUcD653WvUuiyZO98eYvIq/k5hh07jqncd
- VtbHTG6//P5fu7fqpcv/68gKsFsFzrwARqYP4lKsqdjtKUTQPT0GZ6afX1WUiRLtmdYr
- THNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ff+C2dUS6mJBkwcgwRjRCr0qEsBbDWcGq0DE8nVuz74=;
- fh=11Ocal5QlSLP51uxYgbR5Rl5YMgikbHXO6XNUh2omrA=;
- b=Vl3Q9LUUoo+GNtbVko76NBxTSVvIlvaErrcdgV6sKWcT3GMPHIjYSPvhJGH8VeIEFw
- V4avuU3xdkfnygWs0707zjyrtPQMdo+3iq9xFEWQgmJgroM457A9/OZ4ZHM5TJ03XHtf
- f3akiu+aSwC7mJxoMDi+bciaWD+w0fYOkXC/f3+9v+kFQlz4JqQJgXdjP3UK6i2Q1PvW
- 3Hz6Xe2bx5EHra6PlnLqkPNvEzTw1ZeA/aEvVHOj4k1qoEtWhim0oQzXZ/ZEUPTG+BwQ
- HqpFlY9fdA7u+6ndUqWEM8FmV8p6iETn5uGLTkWHxzk5PebgYHkRfehmhfHD0TNwTSQR
- AWAQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2001:4860:4864:20::29; helo=mail-oa1-x29.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D6C6180C70
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D6C6180C70
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D6C6180C70
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 19:25:14 +0000 (UTC)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-44cf70de986so575608fac.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:25:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785524269; x=1786129069;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ff+C2dUS6mJBkwcgwRjRCr0qEsBbDWcGq0DE8nVuz74=;
- b=EGzS59ZN2buDgQUX68OvlWmpc/4FQh4zP5n91LrlcKCgql1k9yBRJ93nv6VU0GTvIx
- SJFK8OIxr1aGFJuoZ2IX2ZxiC+XDao0Q/Fet8v+RJBK7y190E5/9Wu4YKNO+UOsJ7oom
- aK9vKIyRJCeYBrSb9OmhNXQIZBn6HshhylKxZDikkNdfxKhMwIHc8nJMc16wsqgfddH/
- cBIQGONXW1b67/Oz5w+GsTCNpDtIYe5Aj5MoQmWXiRCtnmUbEFOpp0DCZC3MuEB3acMY
- 6TTlzF3V/ngHEGEUfF37oe/CHvWGQOyjX1mSXSz8ym1/W4QZtd3bagM0npppA1oskv4C
- UUcQ==
-X-Gm-Message-State: AOJu0YzB/BjwwqeVu6HZRq5oXqZQaOhsdlg1rVHVX/v0N+9xNyA4inDQ
- pCX+vSKxAyAwhyouSOW4URbrzRWK4Eqn+8T+KLhUXRIu9eN//S1tokpHeMNDLO5UG0NOfub4Nla
- +jj+iLm9cW7+jHWn1cjl1CnruGFHiFkVHBbcHdCq8/A==
-X-Gm-Gg: AR+sD10DFXX/jTS3ubqXmSW6gTw5SJQWIzfD6XbVYjf8/Z+54TdtyS0XNKUvxUT+wbQ
- gIZHp83jzbxU1tOm9bBG0NalIZ7UxIKxIOgviHRSnrzqBPPY73h9Chn/lLnjhqJDSNPHvM7YbsC
- VKI5sItVCL5a30D5Ztry8vJlNOoQT+dp7vptM6sxgnT5O4slQbAwaFEtDH+TD2n16ZRG1s06toI
- EFZQqKvqd97j3xjmVCcitZTZdsHBlb1ez7HF73FgX/C3Yv/M19lCwtSCRqfkDi5Rcgpc7RvZp2C
- NnSvmv7lVSqoWPTdXivvGjy1hHXCHIt+mWtcYKzRh3ajNvLHtO5Qxjl+imIvuBcL3vxSN3J7uHv
- 7
-X-Received: by 2002:a17:907:9289:b0:c19:6659:fdb2 with SMTP id
- a640c23a62f3a-c1fe813c229mr54319466b.36.1785524269373; Fri, 31 Jul 2026
- 11:57:49 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785525913; x=1786130713;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=1hHWfQeY6PIsL27S+MLk+YEXOKZPsSYX/q2oqPF8Kg0=;
+ b=o68b/H2DllZu9Zk+CRWr6kWFk3xhrTjMfPpttv+zh1YYGUGMsKqkxO5I8/UYoe5k7m
+ 2pH/5NaJ6KdJNTpLdkzKARQet32tZeldR9xbseFyzsV9FyooDJ7TKWI5W4eTiZ7mZsyB
+ m8CZYqvHNo5D0oK2vgZP3SA1UKJd9zhwP84enhBy1XQEsPL1nihMc5XTt0qne4k4snxF
+ T5pXIzMjBqhb3hIS1oZEm9B8jQUXSdlIIgySV59Ww0w1Gs0T+Iea1D+mW4Yk0OSHRPZm
+ V49OQp7U5f3pBIhkbZJhnOvmZvGN+1Dnc2HW0pf2FGAkeOo3ZWPokycYU7VwNlMeSyjw
+ oZJA==
+X-Gm-Message-State: AOJu0YyF/uuLma6rK8BNyHnu2oX988sGbY3qkRHsUr1v0pWvOq30hvQh
+ 6sXKxT6tTxtdam5pox5tzhBonNw1tDAJ52ACF79DCBW7scZtqp0s0F4nS2+q8AjX2Xw=
+X-Gm-Gg: AR+sD11WgP1SjG0BeCfPxmaA2kiuMZ5MVbC0cmLNhkx8mdFNM9QkpgoBPIHTmVqATQ/
+ ajho//dtR/F+YMTQTU73K5Or6arDWPNW5y+J9cKuzn8s0md5HUY77VJKTFRBEKXTyQ8YmTp0+/7
+ crqaH09H37G1jAepwRuLNOAhfgcRalKCqBZRuohGnQ/fvlDcHfJ+8TKtq/UhtM2TMetQ2UmmTh7
+ AQH0V91OShO8hH73P1cf/aTefRjxMU/dt26keiKYkEa6WRKKVijAnuEsgPAcHxPvsq+m3s2TmVY
+ SagsPQqrkeMtOBY8aUCSG2TPCQm6oAvN3nsLbdOkS9i7y6LnLDCzwc+iqX24ZDI1xiAz0JevKpj
+ U/HjtKrF1DH9xQqBILZ0c7xHbU8dR3ZctrF2SHo0+cuQ3oYzzuEkV+xGkcXNdkYN6FU6uynptVh
+ NA5b6cn/2qYQBHJjA2L/ExEOt95+1IHz7alaMDKX3Oj5PnbrxEcuGuaVYdHaOj/jv3Xg==
+X-Received: by 2002:a05:6809:24c:10b0:497:df42:1dff with SMTP id
+ 5614622812f47-4af5dfd1063mr1948771b6e.1.1785525913390; 
+ Fri, 31 Jul 2026 12:25:13 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:fa40:746f:401a:3b75])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4af58f25e00sm1318037b6e.14.2026.07.31.12.25.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Jul 2026 12:25:12 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Fri, 31 Jul 2026 14:25:02 -0500
+Subject: [PATCH] clk: mediatek: mt8189: add missing qualifiers
 MIME-Version: 1.0
-References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-2-acb97c172993@flipper.net>
- <20260731184730.GO1773261@bill-the-cat>
-In-Reply-To: <20260731184730.GO1773261@bill-the-cat>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 31 Jul 2026 22:57:39 +0400
-X-Gm-Features: AUfX_mySTc8rx3ciQpsq-xtk4Q6-DAXDHLlxMnTqGHiHS1xf8S-4Lay4VwqIkH0
-Message-ID: <CAKTNdwH=DnE0LgPth3XFPbAvHR4ErnWbSS0yt5SJnHhpE4h8_A@mail.gmail.com>
-Subject: Re: [PATCH v2 02/10] spl: atf: support Linux as BL33 with TFA
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ronald Wahl <ronald.wahl@legrand.com>,
- Richard Genoud <richard.genoud@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Johan Jonker <jbx6244@gmail.com>, Daniel Golle <daniel@makrotopia.org>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tony Dinh <mibodhi@gmail.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>, 
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 31 Jul 2026 18:59:56 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260731-mtk-clk-mt8189-fix-missing-qualifiers-v1-1-92f3f0e44817@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWNQQ6CMBBFr0Jm7SRtjdp6FeMC6hRHoGoHCAnh7
+ o66+nnJz3srCBUmgXO1QqGZhZ9Zwe4qiPc6t4R8UwZn3NGc9haHscPYd7re+oCJFxxYhHOL76n
+ uOTEVQW/CwSSXmmQDqOtVSJ+/zuX6Z5maB8XxK4dt+wC5G5aliQAAAA==
+X-Change-ID: 20260731-mtk-clk-mt8189-fix-missing-qualifiers-80950f2fbf19
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1302; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=EKKjceCWiKfd+Xjkematt5KAmgl4LeUkda775wl5Z2w=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqbPaPqJDOzZGFSLRV8CpG3jtd85Vsxc7qTjMv8
+ ACX+ZpTPYmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCamz2jxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AyXYIAJZCmKevCaHfmObxx2G2OXfjS+PJBlzSHbvCIIc
+ zU7StYYfjFHC4S57fWROZpHPkP2bDnxmUGSfD26ru1FiyNWkDf+WdO8Bgsd3lIr4GT7kF9qmajE
+ 8f3R1gzCRed9RkWBEiaUGVPrs5K/2amMrk58dh/3yqW6j+2BOQ1xbx33w2SHUyzppUhI23H5jmx
+ HMUdUf1OGGmh5sub2SoiB+4Tc3VzP0czuYAt3wcKakqYxNqNIy2zL4QdR3aBgpjA6j+SDXeJeCk
+ cm8TqLh0gCXzXfzjiAI5zLy9/5qLkuWQ8NRRPlnXE1xWJolnKXivA0bPeFKUZ02jOtuJYW9yToM
+ Wl1Y=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785524269; x=1786129069;
+ d=baylibre.com; s=google; t=1785525913; x=1786130713;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=ff+C2dUS6mJBkwcgwRjRCr0qEsBbDWcGq0DE8nVuz74=;
- b=SSN/XACVdjguphjA+NFlimTbXMaQ/Eg6ulQw/hj9cV939JslW63skPuQ18J6JJXVK2
- LJ4RtH+SxuGavrJBzn426Rs+F0xyZFXagrB9pObvLAv5ML4qEfZQ2TvhofkiPzRSRee8
- a/oaP94FsIB2Tu57nyoGDOwkrEQSuowVkzouH30GhwDUbPd/a6lwp3Ly1+8YWtA/Kxp2
- Dk3ynUiPAd11QOOeH8CkjCk/oWdwI9mJDXDVPvXD8j+cDbk3Ezjs+b0t3lSJkov5Q+3A
- 3n2SNqXuRSVEKqBKsQitKwP3gLFkzb2xI/SR/Gtyk98zfSE9dflHZ6a4Yfr1y/DZJ+nb
- PyBw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=SSN/XACV
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=1hHWfQeY6PIsL27S+MLk+YEXOKZPsSYX/q2oqPF8Kg0=;
+ b=djBi6AqBvimgGrbUXdmCRgZkIMHBKHMOpOx9VhrF9OFvL1krKA2e0YqiTj3tLBaJza
+ NPY4kZGxbgMcGWewfmlav2nHWQWTPhgKBVnDwGjfPE4uFjjyEFS32ylhjLtROs55vAap
+ uDM06vWWDPkeKAyPk0iYx7K0FVP+pQ/H3rSVGbQ2qva5Z1Ls4Sz/sBbEke/ZEQU/5t38
+ xuEhShu/to6pjCI93XMYGxYk0HUoLVaBZ9on4bRGVHpvZ1FfSDZyy+KxmlPRq2EdfMB/
+ V7XK7sBgUKwc84JToKf3i2lLMP9jDaWkeDSrCc3fqe/DNEo4xy4qGkNrpXdWITl2RkHp
+ HT7Q==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=djBi6AqB
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -171,105 +147,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, Jul 31, 2026 at 10:47=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, Jul 31, 2026 at 09:10:46PM +0400, Alexey Charkov wrote:
-> > Modern SoCs such as Rockchip RK3576 need TFA to be running to provide
-> > firmware services to the OS.
-> >
-> > Enable the TFA boot flow to allow using Linux as BL33 (including its
-> > calling convention) to facilitate Falcon mode boot on such SoCs.
-> >
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> > ---
-> >  common/spl/Kconfig   | 22 ++++++++++++++++++++--
-> >  common/spl/spl_atf.c | 49 +++++++++++++++++++++++++++++++++-----------=
------
-> >  2 files changed, 53 insertions(+), 18 deletions(-)
-> >
-> > diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > index 0618f42c9410..7c639ed8f763 100644
-> > --- a/common/spl/Kconfig
-> > +++ b/common/spl/Kconfig
-> > @@ -1230,22 +1230,40 @@ config SPL_BOOTZ
-> >       help
-> >         Boot a linux zimage from memory in falcon boot.
-> >
-> > +       This provides an entry path which is unused when the OS is ente=
-red
-> > +       through TF-A, since SPL then only places the kernel in memory a=
-nd
-> > +       BL31 is what enters it. It remains selectable: SPL can still en=
-ter
-> > +       a kernel itself on such a platform, dropping to EL2 without TF-=
-A
-> > +       resident, just without any firmware services being available to=
- the
-> > +       OS afterwards.
-> > +
-> >  config SPL_BOOTI
-> >       bool "Allow booting an Image style Linux kernel from SPL"
-> >       depends on SPL_OS_BOOT && !SPL_OS_BOOT_SECURE
-> > -     default y if ARM64 || RISCV
-> > +     default y if (ARM64 || RISCV) && !SPL_ATF
-> >       select SPL_LIB_BOOTI
-> >       help
-> >         Boot an uncompressed linux kernel image from memory in falcon b=
-oot.
-> >
-> > +       This provides an entry path which is unused when the OS is ente=
-red
-> > +       through TF-A, since SPL then only places the kernel in memory a=
-nd
-> > +       BL31 is what enters it, so it does not default to y in that cas=
-e. It
-> > +       remains selectable: SPL can still enter a kernel itself on such=
- a
-> > +       platform, dropping to EL2 without TF-A resident, just without a=
-ny
-> > +       firmware services being available to the OS afterwards.
-> > +
-> >  config SPL_OS_BOOT_ARGS
-> >       bool "Allow SPL to load args for kernel in falcon mode"
-> >       depends on (SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT) && !SPL_=
-OS_BOOT_SECURE
-> > -     default y if !SPL_OS_BOOT_SECURE
-> > +     default y if !SPL_OS_BOOT_SECURE && !SPL_ATF
-> >       help
-> >         This option enables the SPL to load an args file (usually the F=
-DT)
-> >         alongside the kernel image in falcon boot mode.
-> >
-> > +       This is not needed when the OS is entered through TF-A, since t=
-he
-> > +       device tree is then taken from the same FIT as the kernel, whic=
-h is
-> > +       why it does not default to y in that case.
-> > +
-> >  config SPL_PAYLOAD_ARGS_ADDR
-> >       hex "Address in memory to load 'args' file for Falcon Mode to"
-> >       depends on SPL_OS_BOOT_ARGS
->
-> Expanding on the help text is good. I'm not immediately sure on changing
-> the default statements however. Maybe the changes are fine but just need
-> a bit of a rewording to be a tiny bit more concise, the "which is why it
-> does not default to y in that case" can probably be dropped and you just
-> add text explaining when it's not appropriate to enable.
+Add a missing const and a missing static qualifier to a couple of
+lookup tables.
 
-Makes sense, thank you, will distill in v3.
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ drivers/clk/mediatek/clk-mt8189.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-The change in defaults for SPL_OS_BOOT_ARGS also helps avoid the
-prompt for SPL_PAYLOAD_ARGS_ADDR when selecting Falcon mode with ATF.
-Otherwise it breaks non-interactive builds by endlessly asking for a
-value (it has no default of its own, and there isn't any meaningful
-arch-independent default to consider), even though that value is never
-used in this configuration.
+diff --git a/drivers/clk/mediatek/clk-mt8189.c b/drivers/clk/mediatek/clk-mt8189.c
+index 15e040569e7..3724dffcc3a 100644
+--- a/drivers/clk/mediatek/clk-mt8189.c
++++ b/drivers/clk/mediatek/clk-mt8189.c
+@@ -291,7 +291,7 @@ enum {
+ 	CLK_PAD_AUD_ADC_EXT,
+ };
+ 
+-static ulong ext_clock_rates[] = {
++static const ulong ext_clock_rates[] = {
+ 	[CLK_PAD_CLK32K] = 32000,
+ 	[CLK_PAD_CLK26M] = 26 * MHZ,
+ 	[CLK_PAD_ULPOSC] = 260 * MHZ,
+@@ -1124,7 +1124,7 @@ static const struct mtk_parent ecc_parents[] = {
+ 			      _mux_clr_ofs, _shift, _width, _gate,		\
+ 			      _upd_ofs, _upd, CLK_MUX_SETCLR_UPD)
+ 
+-const struct mtk_composite top_muxes[] = {
++static const struct mtk_composite top_muxes[] = {
+ 	/* CLK_CFG_0 */
+ 	MUX_CLR_SET_UPD(CLK_TOP_AXI_SEL, axi_parents, CLK_CFG_0, CLK_CFG_0_SET,
+ 			CLK_CFG_0_CLR, 0, 3, CLK_CFG_UPDATE, TOP_MUX_AXI_SHIFT),
 
-SPL_BOOTI and SPL_BOOTZ don't hurt, but are simply not useful here, so
-I thought excluding them from defaults here would make more sense than
-disabling them in every defconfig which wants to enable Falcon with
-ATF.
+---
+base-commit: 11dfa5a8d20610ad7ca015a25cdcdf0bb35ff05b
+change-id: 20260731-mtk-clk-mt8189-fix-missing-qualifiers-80950f2fbf19
 
 Best regards,
-Alexey
+--  
+David Lechner <dlechner@baylibre.com>
+
