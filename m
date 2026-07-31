@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 368F6C55167
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 09:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE1FC55167
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 10:20:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 10DDC40F96;
-	Fri, 31 Jul 2026 09:46:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6801940F65;
+	Fri, 31 Jul 2026 10:20:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r6jzdNHl0aGW; Fri, 31 Jul 2026 09:46:36 +0000 (UTC)
+ id 6WdN29ohCmUn; Fri, 31 Jul 2026 10:20:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1B8B840EE0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9E83B40FB8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785491196;
-	bh=9yivesAPLGzv4FI27Y3VCleqM6g/nZnBJblSUWy69mQ=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=0BJvk1Wz/aqM8KyBzBDtuLh+Zt9xDxP53c6utwDb8ipjMGmC7rmp+zMvWjCzrDTnA
-	 d++khpagMkf0gR4xoTqHPkcX+SZ6AqI9Fh4DSs3sToB7Zknh3sxZh6saUBcMxi8Jdi
-	 OiIjcCNZbRGf/DIlxGiO3Cu1IBspx56cV3coO1vkuS1mnhG/Q4R1loi8oEUB3LgiIo
-	 NmwhRU+/F/jNSf7i2LW7o16QY21hSU8nPxm1GX8ta7rMHA3AYSvO9TYWMuLd5ukMwU
-	 Ikr/f8FdNX5XUF9qpvyYKZ7Cj1CReJNRj0JqqywwVssxfe68OK8dZNcVknZqhUahIT
-	 8xHN+x9nQHfCw==
+	d=lists.u-boot-project.org ; s=default; t=1785493203;
+	bh=F0pizMGeNCojOpT1357N6Wh837+7y3xuVd7/Ez0KT1U=;
+	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=h1Hf2sWQUERV/HfUVAKMJWRMxYplIB5ZDJdwsaeMP06cfaJGQry5Zh3n9j/jfgB9p
+	 +918hWlJKBTm/5onBbqmV5bntvRFx7WADX0WYSHcnsURi1EdF1KKjhbfUB/weWE2er
+	 hrEqyPlna2ysmgg5Z5FAqs/y4CV4Q7IEB9r1te2TrPDkqMEoLC+bkhd51FnNvGpnNN
+	 CNbz59prMqaL96NA4lFG59pQiSWHeaR7PFeU5dTHDCIL22D+xja9HvuhtMyzOteTnt
+	 5uCRSUh3s3aHPRFuLnOfBFGPJ39lTn7HUbDQBPElbhW+K+/raRC809Uysxo8UNvlqX
+	 Dv3Y6/yvogzkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B8B840EE0;
-	Fri, 31 Jul 2026 09:46:36 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5D450197
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 09:46:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9E83B40FB8;
+	Fri, 31 Jul 2026 10:20:03 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 784BA197
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 10:20:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 43BA7401D2
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 09:46:34 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5EA9240FB8
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 10:20:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CeN6BEPs-myK for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 09:46:33 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=ehristev@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 8BF4340074
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8BF4340074
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8BF4340074
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 09:46:33 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 70D5642DBF;
- Fri, 31 Jul 2026 09:46:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C38A41F000E9;
- Fri, 31 Jul 2026 09:46:31 +0000 (UTC)
-Message-ID: <fd29bb79-5f7e-492e-b460-68f0ec8a1dd8@kernel.org>
-Date: Fri, 31 Jul 2026 12:46:30 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Eugen Hristev <ehristev@kernel.org>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DQalyPiPOjmJ for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 10:20:01 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.121;
+ helo=smtp-relay-canonical-1.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3445940F65
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3445940F65
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3445940F65
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 10:20:00 +0000 (UTC)
+Received: from LT03.fritz.box (ip-084-119-040-110.um24.pools.vodafone-ip.de
+ [84.119.40.110])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 6F17B403B3; 
+ Fri, 31 Jul 2026 10:19:57 +0000 (UTC)
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org
-Subject: [PULL] u-boot-at91-fixes-2026.10-a
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ u-boot@lists.u-boot-project.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] lib: correct list_guid[] array
+Date: Fri, 31 Jul 2026 12:19:50 +0200
+Message-ID: <20260731101950.82084-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1785491192;
- bh=9yivesAPLGzv4FI27Y3VCleqM6g/nZnBJblSUWy69mQ=;
- h=Date:From:To:Cc:Subject;
- b=VxPiQ5eWFdqCtSbz0G/jQduvbRzGQMhvWb7xu/78nLsx3I/d8xr8uGzb9CwIOQDNf
- 8mOUHXOwIVSV4keJiV526W5NFWLtvcLjn9QhbMRy/5sohcHSD9Yp7C4e/KwYujjMG3
- BsULd6eSM0b0VAyc1Malmk4PY7a4dYIx7ekfondNFNAYrMvvxBbgXTT7pfipoXqr3F
- jVAX4DYSjesB6lEOypYLY4f2ekCyRpuySXugwrmxAQ9qdDDXpGkqaZHXSuWq0YUKtF
- 0jnQ7rQIjryZz83lT4us9IEY1wBlgUnJ59hEgaSnfibJNf+u0JUo+Dj3QePEwJjCd5
- 819MlgnSSCqnQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=VxPiQ5eW
+ d=canonical.com; s=20251003; t=1785493197;
+ bh=F0pizMGeNCojOpT1357N6Wh837+7y3xuVd7/Ez0KT1U=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=bCgL8TagQ79LbSrjHVr250DQZp6PrZPUyuxUT8KzIBQFzw3rX111X7OjZpMSGdjju
+ hETLY7TfryJYjWyIjsKmS5jfJ0ZgIGjsNcsJbbP+g6hStZriJC96KPMqnXgEiZRrfh
+ ZMuvuLCcZQaAolO/YDaadGmXDGAbOsGqDzufcAEAwM8n1KVxSAy4g8pwX8XVg9lx43
+ 4PsRPDVqkIh9VrYyA6Cv0ssPgpKCDKPSBbd/+p6EHGADVmWG5fIvTbuA2W+BUJdKSr
+ fi/kWbitEG5XENwKzULIXeS78mz9c5w0EIOXVSNuqg9oHlDraTtDP1zIQJR5um9EYK
+ 3lYb/0GpIHTAaDymYlA0gZMMJdg+ceZrzc4bgddwvXiVJsl+SqUn7AtaqYhaiH76/H
+ qzfjQ0XmYsc8KFENRjYhWnj8vsQhap7J31y90W76S4IRkkolpxkNSNYQvD7fdBHX75
+ 4WYceAW2GiVHrMLcpF8rrp9p6ZojVmdhgUS8/d08vhzA0gf0pm6SdYF9gm44E6o5Xo
+ 19X3RqN5kRLcOJSZ1yg5n/eDbU1snOSKGlt8OL0arPia99QfNgehYe4p+1AFqWhsPx
+ Jw7hCEubO9y6k1BEzC02wght/kP33V0wCRenPCSoqW7SQI3wQlRK3L4DUbgH2GjZP/
+ d3TPNteurwv0OcCptyASHv/E=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=bCgL8Tag
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -91,44 +100,42 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Heinrich Schuchardt via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-(resending from the correct email address)
+The #endif for #if CONFIG_IS_ENABLED(EFI_PARTITION) was misplaced.
+CONFIG_EFI_PARTITION=n disabled all entries in list_guid[].
 
-Hello Tom,
+CONFIG_EFI_PARTITION must only control the translation of GUIDs for GPT
+partition tables.
 
-Please pull tag u-boot-at91-fixes-2026.10-a , the first set of at91
-fixes for the 2026.10 cycle.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/uuid.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This is just one MAINTAINERS cleanup
+diff --git a/lib/uuid.c b/lib/uuid.c
+index d7c164ea06b..16ca8f37751 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -95,6 +95,7 @@ static const struct {
+ 		"system", "EFI System Partition",
+ 		PARTITION_SYSTEM_GUID,
+ 	},
++#endif /* EFI_PARTITION */
+ #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI_CLIENT)
+ 	{
+ 		NULL, "Device Path",
+@@ -304,7 +305,6 @@ static const struct {
+ 	{ "EFI_MEM_STATUS_CODE_REC", NULL, EFI_MEM_STATUS_CODE_REC },
+ 	{ "EFI_GUID_EFI_ACPI1", NULL, EFI_GUID_EFI_ACPI1 },
+ #endif
+-#endif /* EFI_PARTITION */
+ #endif /* !USE_HOSTCC */
+ };
+ 
+-- 
+2.53.0
 
-Thanks,
-Eugen
-
-
-
-
-The following changes since commit de02bc0eccb76aec8272abed651c35ab120f4844:
-
-  Merge patch series "i3c: dw: fix slave device setup and probe issues"
-(2026-07-22 13:10:22 -0600)
-
-are available in the Git repository at:
-
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-at91.git
-tags/u-boot-at91-fixes-2026.10-a
-
-for you to fetch changes up to 88386697bb752f0321f1277ebb92e8f405b4ba45:
-
-  MAINTAINERS: Replace Atmel with N: (2026-07-24 18:48:52 +0300)
-
-----------------------------------------------------------------
-First set of u-boot-at91 fixes for the 2026.10 cycle
-
-----------------------------------------------------------------
-Marek Vasut (1):
-      MAINTAINERS: Replace Atmel with N:
-
- MAINTAINERS | 13 ++-----------
- 1 file changed, 2 insertions(+), 11 deletions(-)
