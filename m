@@ -1,123 +1,145 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EC4C5516D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 13:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E885EC54F54
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 14:13:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BBD3660816;
-	Fri, 31 Jul 2026 13:22:13 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WH-T-JC2_-gS; Fri, 31 Jul 2026 13:22:13 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1DFC260AAC
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785504133;
-	bh=wTzukte/oFeQUg11ChDqiwxzS5bnjmRDi5FAu11/G8E=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RSCBoLoEiWJC3n56vDBGu05+o/zkShc0yyRN11notpFZm/dQNxH+3/XdUAsCWhRBq
-	 epSe4v7QRzTEySUrpqxyE0H9YheExImGSER5uF/2ecvQ693qAcRi4IxGBE/M0m3Cpg
-	 HELe9d3VvjAOAR4eHAnbsMFtyYWbXqEnniSOeoUYyPY314tHS0kcqGLgrqbxNAZUZD
-	 cl2um/xuioud18Iztmrt1sGhXZM5jacrXBKF/hSLv3a+XaOIR1LGpzxBotUe+DRuu3
-	 YOXg47SXMQaavUa8E2uKMAVRKwZtlV4wXsD6x6kXq3Ll5NhaH1qi6Lj6LqNtewdU7p
-	 pvhm5c1VB9hMA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1DFC260AAC;
-	Fri, 31 Jul 2026 13:22:13 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id EBFDA2E9
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:51:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D170980F75
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:51:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2F08F81312;
+	Fri, 31 Jul 2026 14:13:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YrDr5fMbT9k5 for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 12:51:47 +0000 (UTC)
+ id B8leSaS9PrsK; Fri, 31 Jul 2026 14:13:34 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EB2A281090
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785507214;
+	bh=XsY5WmtFcs++nuX9Mncq0Nwu0TiwZU4qITPSamFRYU4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=khqFgMkAkPeMfoh0TbPWd9YT3Giap5PCBWHUZ4VHSqGqteZoRQCKgjDmXpCPVzO3M
+	 hQyH7PMk6pZqBhUYkejI/QW9dcWA2eqBw5UYOaQhwKZ8v4kJ5qmTsSqg7fm2S3SANY
+	 bEYAGZY9n3X0OwbfIBwIPAULFZgH6nP79hJXHtF8rkNDnhwHf/BLH17UGHwsnDs6Ms
+	 jrBFiEY5Z6AjRWGAoLHwPqAN1AlBVIhQcGWnnHd13+5MZ1IYDR6mSUwr8eyuXibrvw
+	 Opn4DOTK5cHjw70MXvAOkMEnl8uEzKJjtl4Gq/ER0kLrqdsDq5SFf0oobMI69+pFBf
+	 K1nz1uHr6kcfA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id EB2A281090;
+	Fri, 31 Jul 2026 14:13:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4328D27C
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 14:13:33 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 40CFC400C1
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 14:13:33 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BxCptI8BGhRL for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 14:13:32 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::52c; helo=mail-pg1-x52c.google.com;
- envelope-from=bhimesh.matsa@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 4306080F6B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4306080F6B
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4306080F6B
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:51:47 +0000 (UTC)
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-c9ef3e1337fso651241a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 05:51:47 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::229; helo=mail-lj1-x229.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5F5D74004C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5F5D74004C
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5F5D74004C
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 14:13:32 +0000 (UTC)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-39da69c5ba3so7961011fa.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 07:13:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785507210; cv=none;
+ d=google.com; s=arc-20260327;
+ b=G+bDmI08kLN/G8Vun9B68hHq/FntipIqVHFFMG2fbwx6mXFAt0yYOl24BxU7xme4rx
+ Prpp6TXg3UoptOIqCqoQBy2+7U8mI8uXw0DPQYAxOXEpagQtlM65E15Rbid4URxu1x6w
+ DQ7ms3szVquj0GC6hn8nZJtGQzWTHYHyxKUCgib+Jlyt2qBJ6KaIeENfoH8q7+noLNJn
+ AEY+RkviPjT4KDSDW5UreHJ4UeMZWsISUluErLhGVUsL6FWxQVFVM9xhdx4ggq8vcs3G
+ gifmJ9pQhbyNa8onCUQRrPd257R2/dMoOE0Ltw1Y1I7f22vxF+4kKUF+95M08YaV8AWn
+ oprA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=XsY5WmtFcs++nuX9Mncq0Nwu0TiwZU4qITPSamFRYU4=;
+ fh=pqERukVFhgCix4QlkrPM5PRvZIsDYU03htW8sDxa7hI=;
+ b=awyyx0N11A3MjZ8aeghs8z6y8uGT96gGh68euVe30NurnGX5lVEquiA/MENULw0wcG
+ 23up7+v5vhIiTNWJbnjyVpcpIkYBt1GAWZXsjbW2Y1JUEePN/V4qnDSzXxv8GFSDCL5d
+ +h+qKhFZemHJt3K9sIM0Y++8DPn4qMVep7+TvbY8lHfU5WHCi7+qTmMg4fQIUkXn80Po
+ 1fmK1RJiqS4u2tSx62AdV7Qs9OvUB7pWn065zo6sdkYLGMilyXb+WP4il7gm8Kr+gNxv
+ M+I3NjSWkETE910L/KSZQQLRt8MCCIkFbQr6cDO7NxpU6IzEH8W5R9we5cCT3v04rtN9
+ 7ViA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785502306; x=1786107106;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=wTzukte/oFeQUg11ChDqiwxzS5bnjmRDi5FAu11/G8E=;
- b=r3yhtNvIDStQkcx/DooYqmmnpF+mOOOEOpiait5QLegXIEOUljemNqET/pcGiVwqXX
- Hayd26emHi5rpE8NfqTxIphxzOjsOqLnckUXfED8ufgf5CpYiHSksA6ylzTTTiYIRV7b
- e+/omVkedzCag/o4cYmESWABX8Tjl7Br4W0xhMD22YTVTqawJPh46/QcfEBmPHsC+0f1
- dO1+cOIue2cVGusIzZBwLnKLxYKylEWwo0CJfwrrJNCd87GXgKVLy1PeonQHC8LWS0xy
- 0att9+tGUz418eJ16t0ZhSnGIc1HTjKeTMv0xfg2+uGW0i9+Ob2IqXuSRmhvXTb9Bk17
- GYvw==
+ d=1e100.net; s=20251104; t=1785507210; x=1786112010;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=XsY5WmtFcs++nuX9Mncq0Nwu0TiwZU4qITPSamFRYU4=;
+ b=JYyv8j9gRPn3qhOXJ2gMH1e4IohYUUZPLX2oe7OGpv17kyNWNH652BETkxsEaqoKDU
+ pX8Uoqjwzrr/Ybrnp0I4LjrlhJMY34/YHSn/CcL+yqPFB5yNtOpmiY8LPbNfKkKAGXbD
+ De6Pezg6VL9/Xm2kcsNjqUbBdWvq0duzeTYhbyb6xxFvkSXNT3jcMng7MD/hpxPdAazQ
+ e+sPpbWfle+EyuNEnb7EQKPqGD76GEL6ZunqV2rJA5LEXizQXvPs2070wTBAwWB81HwG
+ M0Mup4UkPbyOuPT4DM/+Q30SJPN2NRV/lCaW0/RCasVzOVOpzbkMpd0tbuHwl3/LGBBS
+ djQQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqv8Y2tNiOuSDpwBc5Usx6ergOMvgzJjySwXo+vSXEh9LKCqSV8zq1r9gdMfNjVTlz+g1TPS6U=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyF6lX56uh6ppuQAVwvUpKxuL5NJUArF8yKrVNQFPAZl4docDsJ
- vflMd4oegu9RXBaw0uUt+NZjCBXctie660lqk4LLRAvGgWL89VAYIPQ4r1YKDbSW
-X-Gm-Gg: AR+sD10i6KGQLpAeyT2NVRW6t3AdNnBWURmkrf1XOrvrCIy8oCXjQomVoardCzX0elc
- AOQyzBdDWbyOR52Ax/W3nH13/br8QmqQ7xuDcHb+4pDZnlFgDjvrvi1isVtcjZZ5juFthIwpbBO
- NnYELZvs1G38L1JLChwV8qMJ23ybDbK4jowYnws2WYmz1D3rf0Xh8rT78/bm+uVyy20KNaRKman
- 3607sqpt2CXplrsgmlUKuVvfGve9P9Egn579ki0svGeA1rZ1c6pqFWIFxZKRr266A3LdPfCDdCD
- mdYy9xPz/AvUnaQTmL5mRUDM4tT24YsBXflDvxsQSPyqlE48ZSoi36hXhO1o/7Dm8G4K5GRDUZp
- vJboRL7Em9C5+0I8IAf6sAaBvpE29EayY8PFDu2eGNwTwOENM0k9u8Pxug6vxyLvDBVDF1f80Tl
- 7yUgWTAMtbW+xoxrFt6gbTX/83g3JSt2p3AWjfER6UQZLKED7TVxu9phvFQxpVWI4xwvgUGA==
-X-Received: by 2002:a05:6a21:7303:b0:3c4:397a:69aa with SMTP id
- adf61e73a8af0-3c91b1aa68bmr1829847637.31.1785502306389; 
- Fri, 31 Jul 2026 05:51:46 -0700 (PDT)
-Received: from kumara-Inspiron-15-3530..
- ([2406:7400:63:b1e4:68cb:1792:7028:16db])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3153dd4e666sm9304967eec.4.2026.07.31.05.51.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 05:51:45 -0700 (PDT)
-From: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
-Subject: [PATCH v2] power: regulator: tps65219: Fix LDO selector boundaries
-Date: Fri, 31 Jul 2026 18:21:33 +0530
-Message-ID: <20260731125133.10998-1-bhimesh.matsa@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260731013643.28244-1-bhimesh.matsa@gmail.com>
-References: <20260731013643.28244-1-bhimesh.matsa@gmail.com>
+ AHgh+RrWvqcWivjBLCfn0Jvconx2mW7BnTkeS8g2yMV+uI+Uk/qVtakVXUD52oPGUdJiEM7INh6ANi4=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyOmWWlOVoaVqhLRLfLHYVufpg+3y4HJmA5CQR+biCPznUtYBjs
+ wzL/xMfiWw+6R1vQbUQikTxqAWO2MsTU4wFjObVrlhJtHu/K5jzKgl6tJnaOhm6u0+IlCItBJeQ
+ o5ZYVVTVpMinYQRsikzIev9jRpLfLgVM=
+X-Gm-Gg: AR+sD12/ywn+0h7POznbUbmuQZKfMAPywsCotRyVvpirtwPK/hEOP2tanYbjUPM4khj
+ L2NXf/OEYyaF5DvDJ+m1KqWslKfUEDjJ1SPHrzKcUo1zSxQ1iqIJErWRjcQnh9x1pi38a1F9UkZ
+ 2G/m7f4aZGzaS8BBSQ/r4g6/ZbpeD+YR1/9i4ty/hZ+zKQjkYJs3j/sLAuPW1AK8CH4d2YaJpNI
+ K/37Uqn6F+/MXKbzG9Zw6LfXUaCE3njgLP1S1FTWRAXpJvQxYW/jp8BkBYVdpCnEz1ODeDbnlSt
+ tEnMw8vcgoZIMu1Z9kRaMuFK4UYtA/G19vl/0yuGCLFZKZ3zD5H3SFL7/D8NYqD4Z7noOnLKTlS
+ mes6RCwToNh5Wh57XX9D7IVaN1l4x7mQV2Q==
+X-Received: by 2002:a2e:90c9:0:b0:393:4e44:63ba with SMTP id
+ 38308e7fff4ca-39f7e421f58mr3601701fa.29.1785507209549; Fri, 31 Jul 2026
+ 07:13:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 31 Jul 2026 13:22:12 +0000
+References: <20260731-93w1-v1-0-62d8459143e1@nxp.com>
+ <20260731-93w1-v1-4-62d8459143e1@nxp.com>
+In-Reply-To: <20260731-93w1-v1-4-62d8459143e1@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 31 Jul 2026 11:13:18 -0300
+X-Gm-Features: AUfX_myjh8CGjQ0n5vKJVHdmuL9GeSbJd8_hGtK6a_sA8lhs_SctDV4uJ3iqg7U
+Message-ID: <CAOMZO5AUY3ZT5N8tCa_ZZ+kXxojqs+Z14Nq4R5H0N4cfFg1u2g@mail.gmail.com>
+Subject: Re: [PATCH v1 4/4] board: imx93w_evk: add board support for i.MX93W
+ EVK
+To: alice.guo@oss.nxp.com
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Simona Toaca <simona.toaca@nxp.com>, Alice Guo <alice.guo@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785502306; x=1786107106;
+ d=gmail.com; s=20251104; t=1785507210; x=1786112010;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=wTzukte/oFeQUg11ChDqiwxzS5bnjmRDi5FAu11/G8E=;
- b=Fog4ycijuy47dSaVJsU5IomFLBWnTu39gQO9mlBHjGEbFBr8Z+tcko4AarCbEaO8ja
- LPWQs3qr8bzYz4yhJvBVUuep36CoEwR3j80cPvZzPOFaE8T7pQ6HyJKo/Kum2etOsSjt
- rgB9yiBF5E2bc75DmcZPSMTUuT6akIIABB/MubX+I7sJ9+3Bbx3LVBVyUo2doG+Q00nV
- YUrY9z7+FtkBiTjidM70aVNxOHMcrgb40j7eeHqPKih6VBVZ8oojo8L4VOSiPoh2+srN
- vfVLZQj68qZ9DuG08eUzHVmlNIlTJxOF7aMUOnFAlJvfe3M8zHB9wpOAttJr8/8zAsk9
- zMvg==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=XsY5WmtFcs++nuX9Mncq0Nwu0TiwZU4qITPSamFRYU4=;
+ b=AhLulPtwOjfPpJfjj53rYNF0HezqLxIRXODlHEM2CLlAc2HGJMIRZmJFC5jNFgonFw
+ 6WEkgv9r5mdPKWKoiuJP/yych4KSsSaV0h6QU7wXG3VfPVAcejqgNAOuTObgNz7s9V0g
+ heraWEKcrN8Qlqg5K8gC2vikxSfI892EiXtIL8ddBobji3Tbc2NhW6fZ1agNxwUX745D
+ 7iRX0aPpSrnJgLFmh6mD1KMWa4+uJEN51HxsNnoaJGDIBCdFbFrnIoxI7irNieOiwcmf
+ ALEVpSeA8f+gRCXv6GtQOuh9qbXbMsNm9XBKYW/KYV8nCx4Bjh9ntuvtlh745/kbiW1z
+ vXTw==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=Fog4ycij
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=AhLulPtw
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,48 +154,14 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-According to the TPS65219 datasheet, selectors 0x38 through 0x3f
-map to 3.4 V for LDO1 and LDO2.
+Hi Alice,
 
-For LDO3 and LDO4, selectors 0x00 through 0x0c map to 1.2 V,
-while selectors 0x36 through 0x3f map to 3.3 V.
+On Fri, Jul 31, 2026 at 4:53=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
 
-The driver currently uses 0x56, 0x12, and 0x54 as selector boundary
-values. These values do not match the selector boundaries defined by
-the datasheet.
+>  configs/imx93w_evk_defconfig            | 172 ++++++++++++++++++++++++++=
++++++
+>  configs/imx93w_evk_inline_ecc_defconfig | 173 ++++++++++++++++++++++++++=
+++++++
 
-Use the correct selector boundary values of 0x38, 0x0c, and 0x36.
-
-Fixes: b5cfa0c7ca4f ("power: add driver for the TPS65219 PMIC")
-Signed-off-by: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
----
-Changes in v2:
-- Fix the LDO1/LDO2 selector boundary in addition to LDO3/LDO4.
-- Update the subject and commit message to cover all LDO selector boundaries.
-
- include/power/tps65219.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/include/power/tps65219.h b/include/power/tps65219.h
-index e8780af2d81..c3114f26e1d 100644
---- a/include/power/tps65219.h
-+++ b/include/power/tps65219.h
-@@ -47,10 +47,10 @@
- #define TPS65219_LDO12_VOLT_MIN		 600000
- #define TPS65219_LDO12_VOLT_MAX		3400000
- #define TPS65219_LDO12_VOLT_REG_MIN	0
--#define TPS65219_LDO12_VOLT_REG_MAX	0x56
-+#define TPS65219_LDO12_VOLT_REG_MAX	0x38
- #define TPS65219_LDO34_VOLT_MIN		1200000
- #define TPS65219_LDO34_VOLT_MAX		3300000
--#define TPS65219_LDO34_VOLT_REG_MIN	0x12
--#define TPS65219_LDO34_VOLT_REG_MAX	0x54
-+#define TPS65219_LDO34_VOLT_REG_MIN	0x0c
-+#define TPS65219_LDO34_VOLT_REG_MAX	0x36
- 
- #endif /* TPS65219_H */
-
-base-commit: 100e12ea78c73071b9710f08b32fd4590019266f
--- 
-2.43.0
-
+Please avoid this defconfig duplication by using the same technique as
+in configs/imx91_11x11_frdm_inline_ecc_defconfig
