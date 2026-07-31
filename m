@@ -1,96 +1,143 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B08DC5516D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:08:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF65C5516D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:40:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 90593813CF;
-	Fri, 31 Jul 2026 12:08:17 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tGsfInMLUDrU; Fri, 31 Jul 2026 12:08:15 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 814DA81300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785499695;
-	bh=yOMfkmpktTPSxMAfnyF7zPWDFitjcZRufG41A8CY+dE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=i6E/EtaEYKdH2MAcWMaz4BKqC458Hyf0CrrVKG5y73iAGa9wEEJLYe3E//zDwO2u7
-	 1teOgpG01Ug/juodaWweNDBUUhGZ5Wjpuc06m+UmZQckwa1pxMmblYyGMGxvhd0JwU
-	 hXy8lzrSy8lCDlYGz9+zt7cwdBiT+RFOkPTWxe9PtmQE/QCo5sizUwL6uY15t4LWbx
-	 y0onET2cF677KqsLou40QrxNeGqcBGRUpqG4NDZh9spOxjC4ppATwqqctHiGZhorUs
-	 C+8escMd/BSFh8Z6dNJ0qi/v0YwB8ZAyA3xWPRSfFJ2KaTScouiRKD6FRHphHDRC9d
-	 eg+YFGxkIIqaQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 814DA81300;
-	Fri, 31 Jul 2026 12:08:15 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 99FAF36E
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:08:11 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 814BC60B11
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:08:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D098860B69;
+	Fri, 31 Jul 2026 12:40:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KNyvg7hnORh2 for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 12:08:09 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
- helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BFD8E60AE2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BFD8E60AE2
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BFD8E60AE2
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:08:09 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1785499683; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=N96R29JznT6EmGqS3FTqeToqq0L97ZKlpOdkOS+L2RE2ynKfrYSUqEKLoDyvklPpLmn1Cj0wO7y3QpOaUFlr1IGrawiqOYuiVRJo6btGWl/Gpk5TaqTF7jyyff78SCBwAJkl/68M9a5d3m+Wm1lcdrbs6tejx4BBfd2k5cu+83k=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1785499683;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=yOMfkmpktTPSxMAfnyF7zPWDFitjcZRufG41A8CY+dE=; 
- b=mMbQ4QGMROoG16o969aUzdtXDNq+vqNpz/dsH2e0y9t3zf+nr6E1pCCBIXDBBNwKhg0SE4SCI0qfS8CDtnxDrALWEF1HGtdptyAmjzLEbrRGLosmRLwQS6GPZIX3sAm+KaXelabo2uxK8bzmb72dgTJKtqO0mJcrBVH/rlvHiYM=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 1785499682148359.7322298275071;
- Fri, 31 Jul 2026 05:08:02 -0700 (PDT)
-From: Yao Zi <me@ziyao.cc>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
-	Tom Rini <trini@konsulko.com>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.u-boot-project.org,
- Yao Zi <me@ziyao.cc>
-Subject: [RESEND PATCH v2 2/2] CI: Dockerfile: Add LoongArch64 support
-Date: Fri, 31 Jul 2026 12:07:50 +0000
-Message-ID: <20260731120750.2212394-3-me@ziyao.cc>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260731120750.2212394-1-me@ziyao.cc>
-References: <20260731120750.2212394-1-me@ziyao.cc>
+ id rmEzrpyxEI2f; Fri, 31 Jul 2026 12:40:37 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7010260AD0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785501637;
+	bh=VQlvFNfjaRTnpQMUTzlWkCtETRvg3ueiHU844wGMBuE=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Vt9gtJSSiy+UCSgvCyXpcI+sP6kgnu/nyFFR+SRND7smJwjCR1iHgOKN6YgBClAHp
+	 351K3bbUOHgpwHW8aaSmCJ8ke/0WLJ/kbKUcumTBAwjVNNLxZPlmXO3QoCFORGMGu6
+	 VWwnTAvdIU6ccfMCT/BXpvuycoX6GlPJGlNj9NgIe2qG4UFvskEvrQ+2IKvmzUa5G5
+	 OUF7UOIwhnVXIV5k7I2mEVKr+BVO1N7YOefQy2at3SkuN80cJJVlVNYQU32w/cFTly
+	 M4QyL7hyiNw/ZLCuUanEKV775wRpbEjDEIzkO59X5SBMq0IkyDW8xwLK3r6YNKZXyJ
+	 qfTkElDirsypw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7010260AD0;
+	Fri, 31 Jul 2026 12:40:37 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9310869
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:35 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 84ADE4047C
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:35 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ysr8negjebUk for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 12:40:34 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9EC5840471
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9EC5840471
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9EC5840471
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:34 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-4758bd3731bso944122f8f.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 05:40:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785501633; x=1786106433;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=VQlvFNfjaRTnpQMUTzlWkCtETRvg3ueiHU844wGMBuE=;
+ b=TYrT5XkRCXlbeC2S6FmsyqmRujrOpIqs3UeA4QmN8wxAKoIrG72iFITSwUct9rgy/x
+ xUELFnxYVlz4d2zYnkHqi6LHvAe0W2hEj15G4DRdq3Cqevh+4zfG4aWfSNRGIVfuiW9D
+ iaWnjO5oKwtGzomjEHjU+zuTURCOt9kYVrypnVb5LUDWwf4d6UsGOIR7+vFh4Tw24aKP
+ IVAOX/QARqkfw0ZpFSEPMSWlFrue6PezmWew0zz9dkoU7u39q+4+ZN9KDvpyURA1VuDz
+ lAmVs5K/VFo3bVP7CytcASjcXnIfqG85CizD5UD5ooL1QLLNpjvgs9dib1N1LoRp/U/5
+ t3aw==
+X-Gm-Message-State: AOJu0YyOhujJSl/yrP5mKNRdwvGc8FwxANR/DXMhTk7zLoZeKd9COuVg
+ vnHktqnEnMyZhkRgKGmztGqzyDHJ3OQhKWX1p3RisNftEOwfjRy3qWFUYNm6JfKZIU0=
+X-Gm-Gg: AR+sD10H+X8WbMDljtiUaAgSkqPaW3pDQk1tGLHcGZsEbk1Gm0WhabusP7yPlLXN5Ae
+ sksZGzwA1q0sMPhZ/RFFspp6jzek/pahcm4EAMI8ILtKZPadSyJo8T852V6sXD2nsyYiFgxM7pi
+ SfCWrqIfKIBP6dCp3PKMydgDEbynaQsyGjqGwKJ5bvc4ovCa5bExV8XumNkoeIEqui7YAwvubPF
+ RwmXReM/21yIuLMHXEnDcsSUKQf26PuJdbTGNYNOCgpj6ayCJzzF6cjezTvMTWBDxOkCBPNkN1O
+ aWoddPQ+bkyLU//KpD+92muTdi01XByu8ojNayhFbQC7IQTObEJKDPBG4eqWIOhF9m0zI59BPa4
+ u24ScNkWGfsLlzJ8l8aRSPFIXhvf23nb3w+DuA7KxeXVadjR8ChsNGeaBDKgFRs4Mj07JBw4Hi2
+ EivdHR3BXS2l16/nUR+0avVLJxtBv/xD2JbIb19SHsa91HDOrRqZB4DQWIQkePcC/6Wm7fwo6JG
+ trzD6sCIeS4kU5xzJyBQwOr6PDQ4abQhnvzy6vcLA==
+X-Received: by 2002:a05:6000:22c5:b0:47f:8b0f:7172 with SMTP id
+ ffacd0b85a97d-47fd32b09d3mr3977617f8f.6.1785501632621; 
+ Fri, 31 Jul 2026 05:40:32 -0700 (PDT)
+Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
+ [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47fd41e296csm4493682f8f.12.2026.07.31.05.40.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Jul 2026 05:40:32 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Subject: [PATCH 0/6] disk: Fix the GPT layout on media with large logical
+ blocks
+Date: Fri, 31 Jul 2026 16:39:59 +0400
+Message-Id: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1785499683; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=yOMfkmpktTPSxMAfnyF7zPWDFitjcZRufG41A8CY+dE=;
- b=FyeFwYpXyQVhc/+LoFXtzE6jazHXUzEXGis+eDE9ZMpxVzF8EUsrR5w6b2svggRb
- 8cluTh9z7pXm9YyE0Ic3zAPbrmUbQgWHVfLUzgXTsQ/18UDROLCTHHFP3dfZY6OHGev
- NXJGLEVFTy8iFaNPxlVeXH2IXw91ObWd0lg+nF6g=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDc2ND3fSCEl2TbN00iyTLVOO0xBQTcxMloOKCotS0zAqwQdGxEH5xaVJ
+ WanIJSLdSbS0AqUvvV2oAAAA=
+X-Change-ID: 20260731-gpt-4k-f8b9e3fad474
+To: u-boot@lists.u-boot-project.org, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Suniel Mahesh <sunil@amarulasolutions.com>, 
+ Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>, 
+ Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4092; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=d9/h7e7+XaFFQA4mKZ5GkNrYJtODipHxb8xBHipURbQ=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTlTN+o65oxvziDReLICTbfJZnOJ9ZtmbGoqYZ7ReQxh
+ 3bhjw+1OiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ QyMdYx0jBi5OAZhqnp0M/53rp+yy3aFSZrGp41rOsiX+v8y1jBQCd17uLumTybBepsXI8Hin+fe
+ fzUs5vNP/rVFw2/l78TJhbo6j19tTitjMrn4pZQUA
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1785501633; x=1786106433;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=VQlvFNfjaRTnpQMUTzlWkCtETRvg3ueiHU844wGMBuE=;
+ b=g0ZM1u68KeaXonVFb6l3wKSVkJVeiabC90HsBydatwKj1kgiTghRcZ8y6RwPSsL4ll
+ g3XWHT3N+VBVIaIj4w/bA4Da+rhDEXhHa9bxq4sZJUSo6GT3mOm3sFNetDvbgRpQ1BOu
+ gcOjX1ZoShCq12R2O1LiN74Y1psaRXnLp13d9zUTn8KKZ6bI4Cay7RlMW+8iWf0iV4bB
+ mqj7N42EjaJ/Wso83Y4s+GArBBLvONUZFMfBhBoO+proANJ57DWtXKeMOya17nK93hHF
+ I/s9YnSslnTBT6ELx6dI8dX+il0QpF4CNOWefUi2zw8/LlPpzpm04yT2XpcMxXSStSDt
+ E5dg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=FyeFwYpX
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=g0ZM1u68
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -105,70 +152,82 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+The GPT partition entry array is sized in bytes by the spec, so the
+number of blocks it takes up depends on the block size of the device.
+U-Boot got that wrong in gpt_fill_header(), which reserved a fixed 34
+blocks at each end of the disk. On a device with 4096-byte native
+sectors, such as UFS flash, the backup entry array ended up 28 blocks
+short of the backup GPT header instead of immediately before it, and
+roughly 114 KiB was wasted at each end of the disk.
 
-Install LoongArch64 toolchains, build LoongArch64 QEMU,
-build LoongArch64 GRUB.
+Patch 1 calculates the count from the block size and makes the four
+places that need it share one helper, since they disagreed with each
+other in different ways. Note that it also changes the 512-byte layout
+for boards that do not use the default entry count:
+CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is "default 56 if ARCH_SUNXI" and
+is set to 64 by a number of Rockchip defconfigs, and on those
+first_usable_lba moves from 34 to 16 and 18 respectively. Existing
+tables stay readable, since the entry array is always located from the
+on-disk partition_entry_lba, and only newly written tables are
+affected. Partitions given without an explicit start= will be placed
+lower, though, and on sunxi first_usable_lba lands exactly on the 8 KiB
+SPL offset, so sunxi and Rockchip folks may want to look at patch 1
+specifically (none of the devices I have override the default).
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Signed-off-by: Yao Zi <me@ziyao.cc>
+Patch 2 is an unrelated big-endian correctness fix in the same file,
+noticed while auditing it: a few header fields are read without
+converting from little-endian, and one already-converted value is
+swapped a second time.
+
+Patch 3 is another unrelated bug that has to be fixed before any of this
+can be tested: part_test_mac() reads one block into a 512-byte on-stack
+buffer, so it corrupts the stack on any device with larger blocks. Since
+it runs during partition probing on every device, sandbox crashes on any
+access at all to a device bound with a 4096-byte block size.
+
+Patches 4 and 6 add the tests. The C test sweeps block sizes from 512 to
+32768 against gpt_fill_header()/gpt_fill_pte() with a synthetic
+descriptor, and the Python test writes a real GPT to a host device with
+4096-byte blocks and checks the resulting on-disk headers. Both fail
+without patch 1.
+
+Patch 5 is a prerequisite for patch 6: test_gpt_write_part_type() never
+binds its own disk image and has only worked because an earlier test
+left host 0 bound, so it breaks as soon as a test binding a different
+image is added above it.
+
+One known gap: test_gpt_write and test_gpt_write_part_type hardcode the
+128-entry 512-byte layout, so they fail if sandbox is configured with a
+different CONFIG_EFI_PARTITION_ENTRIES_NUMBERS. The new tests derive
+their expectations instead, and pass at 56 and 64 entries. No sandbox
+defconfig upstream uses anything but 128, so I have left the old tests
+alone.
+
+Tested by building sandbox (default, flattree, sandbox64, gcc and
+clang), generic-rk3576 (gcc and clang), sonoff-ihost-rv1126 and
+A20-OLinuXino_MICRO-eMMC on armv7, and boston32r2 and boston64r2 for
+MIPS32/MIPS64 big-endian, which is what patch 2 is there for.
+
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- tools/docker/Dockerfile | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+Alexey Charkov (6):
+      disk: part_efi: Size the partition entry array from the block size
+      disk: part_efi: Add missing endianness conversions
+      disk: part_mac: Fix stack corruption on devices with large blocks
+      test: dm: part: Check the GPT layout for large sector sizes
+      test: py: gpt: Bind the disk image in test_gpt_write_part_type()
+      test: py: gpt: Test the GPT layout on a device with 4096-byte blocks
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index fb8e2c523aad..187320c26d59 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -17,7 +17,7 @@ ARG BUILDPLATFORM
- ENV DEBIAN_FRONTEND=noninteractive
- 
- # Set architectures to build for (leaving out ARM which is an exception)
--ENV ARCHS="aarch64 arc i386 m68k mips microblaze nios2 powerpc riscv64 riscv32 sh2 x86_64"
-+ENV ARCHS="aarch64 arc i386 loongarch64 m68k mips microblaze nios2 powerpc riscv64 riscv32 sh2 x86_64"
- 
- # Mirror containing the toolchains
- ENV MIRROR=https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin
-@@ -153,7 +153,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	xxd \
- 	zip
- 
--# Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
-+# Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit, and LoongArch
-+# 64-bit
- RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
- 	cd /tmp/grub && \
- 	git checkout grub-2.14 && \
-@@ -189,6 +190,20 @@ RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
- 	search search_fs_file search_fs_uuid search_label serial sleep test \
- 	true && \
- 	make clean && \
-+	./configure --target=loongarch64 --with-platform=efi \
-+	CC=gcc \
-+	TARGET_CC=/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarch64-linux-gcc \
-+	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarch64-linux-objcopy \
-+	TARGET_STRIP=/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarch64-linux-strip \
-+	TARGET_NM=/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarch64-linux-nm \
-+	TARGET_RANLIB=/opt/gcc-${TCVER}-nolibc/loongarch64-linux/bin/loongarch64-linux-ranlib && \
-+	make -j$(nproc) && \
-+	./grub-mkimage -O loongarch64-efi -o /opt/grub/grubloongarch64.efi --prefix= -d \
-+	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
-+	lsefisystab loadenv lvm minicmd normal part_msdos part_gpt reboot \
-+	search search_fs_file search_fs_uuid search_label serial sleep test \
-+	true && \
-+	make clean && \
- 	grub_cv_cc_mcmodel=no ./configure --target=riscv64 --with-platform=efi \
- 	CC=gcc \
- 	TARGET_CC=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-gcc \
-@@ -232,7 +247,7 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
- 	# config user.name and user.email to make 'git am' happy
- 	git config user.name u-boot && \
- 	git config user.email u-boot@denx.de && \
--	./configure --prefix=/opt/qemu --target-list="aarch64-softmmu,arm-softmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64el-softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x86_64-softmmu,xtensa-softmmu" && \
-+	./configure --prefix=/opt/qemu --target-list="aarch64-softmmu,arm-softmmu,i386-softmmu,loongarch64-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64el-softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x86_64-softmmu,xtensa-softmmu" && \
- 	make -j$(nproc) all install && \
- 	rm -rf /tmp/qemu
- 
--- 
-2.54.0
+ disk/part_efi.c           |  55 +++++++++++++++-------
+ disk/part_mac.c           |  12 ++---
+ test/dm/part.c            | 100 +++++++++++++++++++++++++++++++++++++++
+ test/py/tests/test_gpt.py | 116 ++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 261 insertions(+), 22 deletions(-)
+---
+base-commit: 100e12ea78c73071b9710f08b32fd4590019266f
+change-id: 20260731-gpt-4k-f8b9e3fad474
+
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
