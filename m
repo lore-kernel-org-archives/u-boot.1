@@ -1,84 +1,84 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085C4C55173
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 18:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DEBC55174
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 18:13:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AF8A3606CE;
+	by smtp1.osuosl.org (Postfix) with ESMTP id B936380EC4;
 	Fri, 31 Jul 2026 18:13:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WUxpGAw5N9hu; Fri, 31 Jul 2026 18:13:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id C4G_ZnNYElzo; Fri, 31 Jul 2026 18:13:54 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4223C60680
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7F17680F18
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785521633;
-	bh=T9gW9UANAeobSvBjPbUpPeLud1HRc73P46WJZY0Q30I=;
+	d=lists.u-boot-project.org ; s=default; t=1785521634;
+	bh=2jEp21XzvUuYo/PetHHg6TpBhqPNeV5cISPmqS51Pe8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TBnug7MoWCykrZ2XUG6v2/sOc3gHPd2r5QssBU6jdKVRMp75YiQvu0l1+KSsJ5i96
-	 M/0deoiOJHXTtlBWyUYCkN8Z7i5EiA6PjlTmmRUMzgflSY0sxwy2fsoyJuKlVAY03f
-	 trWVobZOXLaHZNeLvcdAm7r/e32Oy1gHOfWRoypx620xPG5o+Ip8aO5C/gWw0avTbV
-	 ERH1T/GnPnVdOv1VOWTFxNZnYPNuJwC+JPQvOi5jS38wMAmBTh/flF+9GzJFIFV8IL
-	 4R3NCORonVVfLAKpNEYz42z3ARxsolGKVNSgdtB5j6m4XZCbL5B4UTe7kbjNOp44m1
-	 vyGmWo+WT2Kqw==
+	b=c7Tw7laE/Payin8A6Cyja4vhsjoYgi6SwYMzbQm+bxl5zxkeX7TZdmP5tWrk5+ft9
+	 xxAJxhvB3pxMaHseT+z7fjgFQlB7taKe4I4Hh9MA6LpzGozOqKaR3jIS43uDE/fOeC
+	 4/PDmTYQWtiEOfEtSRkjsrdEyU4keCeMOoXDnDCqe5aLW5DYbBjxXVxEi9qmtUUSqK
+	 0C7tt6m/M41rxduFGHSrJwkUYhPHIBi5M36Ze0vP2WzgkYfACn/B+yypn/rF4iXTO8
+	 hLpY8QIMbeHgrdGn9Ep5aPi+jV+i1aOXFiti39B9u3rUF3yJSoIfdH9Tp+uKEKUTNK
+	 THvl4ptOc8ewg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4223C60680;
-	Fri, 31 Jul 2026 18:13:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 72C1936E
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7F17680F18;
+	Fri, 31 Jul 2026 18:13:54 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5AE0F37F
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 64B17400E9
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:11 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4CE9840FD4
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2L0zARP_lRNW for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 18:11:10 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JGQx8OS8ILNN for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 18:11:12 +0000 (UTC)
 X-Comment: SPF check N/A for local connections -
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=smtong@axiado.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2570140025
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2570140025
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org DC8A040F89
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DC8A040F89
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2570140025
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:10 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DC8A040F89
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 18:11:11 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D67484A29; Fri, 31 Jul 2026 20:11:08 +0200 (CEST)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 5E4FD805D7; Fri, 31 Jul 2026 20:11:10 +0200 (CEST)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F08184A0F
- for <u-boot@lists.denx.de>; Fri, 31 Jul 2026 20:11:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0C5B84A1A
+ for <u-boot@lists.denx.de>; Fri, 31 Jul 2026 20:11:07 +0200 (CEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=h3GEiCA1UM4Y+9zGk3skG8Ry/3DThK8K0pgD1u+7vSoa4ph8dJ1kdVaLMnSnWlLXxfxrj46uyO6LWdkrRZS0FVK2A2BBGX00GtclXk9gs9AIQGkRfvP3jsBIa/b8mRakZ1KRazGB+ighLdqfee2Kcxh7FqMWbMXdNsuZp5lWn6G0d8auewLjVIJrLMU64uBWepFuqjFmgdNChw+60KnJKZOUaZaEgAmNerYtHtL2VKQFDRWhMIqtA6RwsCyGojp2Dmmo4vNSGZXucc9Rhhi9ajrEY6E0ofLx9w2SZcaGykIu2TDezbInE2kMJQK9qbD58uoEol4ZJXqn7voi9Vjc8w==
+ b=gyLsblEoXgbDsG6CaQU+2qZXCYcvrvSDPQEDoc9uiIdT0cpzQudjpeRmPaNNdZoDIapd31mSPVi5/LurUVzA5GcmdxOtcRjDC2wkrn6Ru1pszjoK+Pi6pSCSbpqzMal8onG6s5nrC1d8VFQ0AEDhP/pPGVETnKWo08dS5Lha1hsi/mCOIYpSq6regHbjixNUL+bjULQEHzvlTqcUSG8q7Q/XiaqDJ2qCe3WIT3rY4LCTQak9Ke1oJ2JdllwCZ1o1AIx5LDT9gdyhuJLR2YDEc+P/m89JFv251AwuzDd9tc0nE2Ch2s3BNvxrlbyuZ05W+5TrNxKhlW3Zodw/kEdHxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=T9gW9UANAeobSvBjPbUpPeLud1HRc73P46WJZY0Q30I=;
- b=QFnuO9YbmOGittAgwVeBl2aH4OPr+kp8uKvU+uaiDhcXEWT8Q9e6S2eWSiN/tUxDlJdR0vXNemweYst0f5YIj5tsGdT/HUZGbJh9dqJp2utAHIa3r37Tr3b7PrF4rDFuVFtLhW2hDcXbLQIYOP9wOcE5gTKr7KeENmTP1OnuJ5u055fJwIyFweYQJsZxF8DzRf09ftRDauyzcuwLV3CmgUjWcDLDiuVa+Fa+bkjKuBDQPbqqA7LW4Flnc4TymkToZmdzO82BuxjP4RCCGBdmxmv/RULzHi4seMOlV+XC4NBFC0aDfm4LAX4KK9kFRTGYG7OcIXorBnWg0A1IULdefA==
+ bh=2jEp21XzvUuYo/PetHHg6TpBhqPNeV5cISPmqS51Pe8=;
+ b=p3fQQl8UdlxERfagM9t+BlpzU1BlixqPixuiyLg8KZ7Ton8KFIUld67UrVkwhdjskQdKLBCM/9sXlasWkA/ER2VdL5OSgvi/nG359D8DNCl4MsX+l82o1rLeysITcT25nkB/bI6XzEsOkLhnzHj5RvhcY0UmYS8g2yohhpDi4fI1z/sa2zZVc8iU8jOwqSu0hCdqsDkUh6gRMy1buBYPB12IwgTFAy4I8YYAzhpriNNIh62VbDa7yx1vpzn1HK0XrrflNajJzXq6QulzvO4OyNZKXMGXGj4grLUkG48coRA5GgHbUkSV0Cg+Wl1fhqCDNvgHcqdArVwyiKiJxAf/Ag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  64.62.143.114) smtp.rcpttodomain=arm.com smtp.mailfrom=axiado.com; dmarc=none
  action=none header.from=axiado.com; dkim=none (message not signed); arc=none
  (0)
-Received: from BLAP220CA0014.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:32c::19)
- by BY1PR18MB5840.namprd18.prod.outlook.com (2603:10b6:a03:4b5::5)
- with Microsoft SMTP Server (version=TLS1_2,
+Received: from DS7PR06CA0037.namprd06.prod.outlook.com (2603:10b6:8:54::12) by
+ BY1PR18MB5875.namprd18.prod.outlook.com (2603:10b6:a03:4ad::17) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.16; Fri, 31 Jul
  2026 18:10:57 +0000
-Received: from BN2PEPF000055DC.namprd21.prod.outlook.com
- (2603:10b6:208:32c:cafe::70) by BLAP220CA0014.outlook.office365.com
- (2603:10b6:208:32c::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.15 via Frontend Transport; Fri,
+Received: from DS1PEPF00017098.namprd05.prod.outlook.com
+ (2603:10b6:8:54:cafe::88) by DS7PR06CA0037.outlook.office365.com
+ (2603:10b6:8:54::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.16 via Frontend Transport; Fri,
  31 Jul 2026 18:10:57 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 64.62.143.114)
  smtp.mailfrom=axiado.com; dkim=none (message not signed)
@@ -87,19 +87,19 @@ Received-SPF: Fail (protection.outlook.com: domain of axiado.com does not
  designate 64.62.143.114 as permitted sender) receiver=protection.outlook.com; 
  client-ip=64.62.143.114; helo=smtp.corp.axiado.com;
 Received: from smtp.corp.axiado.com (64.62.143.114) by
- BN2PEPF000055DC.mail.protection.outlook.com (10.167.245.6) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.0
+ DS1PEPF00017098.mail.protection.outlook.com (10.167.18.102) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.8
  via Frontend Transport; Fri, 31 Jul 2026 18:10:56 +0000
 Received: from [127.0.1.1] (unknown [10.4.1.117])
- by smtp.corp.axiado.com (Postfix) with ESMTP id D43AA4186B59;
+ by smtp.corp.axiado.com (Postfix) with ESMTP id D1CD04186B58;
  Fri, 31 Jul 2026 11:10:55 -0700 (PDT)
 From: Siu Ming Tong <smtong@axiado.com>
-Date: Fri, 31 Jul 2026 11:10:50 -0700
-Subject: [PATCH 2/4] mmc: Add Axiado SDHCI driver
+Date: Fri, 31 Jul 2026 11:10:49 -0700
+Subject: [PATCH 1/4] phy: Add Axiado eMMC PHY driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260731-dev-scm3005-v1-2-30bea90ac5f7@axiado.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260731-dev-scm3005-v1-1-30bea90ac5f7@axiado.com>
 References: <20260731-dev-scm3005-v1-0-30bea90ac5f7@axiado.com>
 In-Reply-To: <20260731-dev-scm3005-v1-0-30bea90ac5f7@axiado.com>
 To: u-boot@lists.denx.de
@@ -110,59 +110,59 @@ Cc: Tom Rini <trini@konsulko.com>, Prasad Bolisetty <pbolisetty@axiado.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  Siu Ming Tong <smtong@axiado.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10245; i=smtong@axiado.com;
- h=from:subject:message-id; bh=GshA79rTv+R3N0vjAxHbLSc4oqnG0OKL2wIGnGVRMEA=;
- b=owEB7QES/pANAwAKAXwcqHIUQvOOAcsmYgBqbOUuDb+hcYhfyp0OlISP69cer/ngfrz+QB/g7
- 8mA+ooPhiyJAbMEAAEKAB0WIQR3Lze7GwS3XzAkT0h8HKhyFELzjgUCamzlLgAKCRB8HKhyFELz
- jlw8DACOWoZ5IK/Vym6nfux/NJxSGDp2mRcQ0nDNbM1dQYJOE5dBmHjz3vcManj7PoW21jdfWjU
- PRp5gy/xxA4pxVWwnW1Db2lRl+kUfYSqK5xxvazElaWPUYP2CjrN9V6Vix/T1ba95GXxY/OAA+o
- o4hajgYwbyAxId2st2stK1HmCCvAN9ftvbf2C9CCJVg9IfIqPMxJMETYknvJZTb9ZoRDbRklmVj
- N6/yTZrRz75Eob4hiOy/ZMdVSzslVCoidTymxt9o9ezHLAy1r50wUAWj8AP0Zr80aeLKMLWBfBs
- /Zo3fS3IMoMKbFQZ4vvaZGxQJDPxFJ60rzmw264OEKzqnoi/S4fVark4DAoEZgef2wop80+qc1X
- //dN28A1XpAE5TX8usHcj/cmi9KIdUN7WGNNPKTabCC7lnTsv3Woh/7cE5frrGsUNKLk8xzpj+n
- jcCnLpiPdOPOgfY655etJWnZz5grG4ZyzDpsE5+iMm8TWwcosiJXktUwBIHh9gbFHH6G4=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8015; i=smtong@axiado.com;
+ h=from:subject:message-id; bh=vdF0ibUhQY7lL6RszlQQxB2EKjyoPakz6gFK/ULRpuU=;
+ b=owEB7QES/pANAwAKAXwcqHIUQvOOAcsmYgBqbOUu+N/6P5jNLBmgXcyjNNPPImrXy8yszpMYj
+ wH3D/Tq9Q6JAbMEAAEKAB0WIQR3Lze7GwS3XzAkT0h8HKhyFELzjgUCamzlLgAKCRB8HKhyFELz
+ jjiZDACbqaxAsaDQiE3BXGgLCftHad5kLhzs2PZ4vT+BD7HgreXH+Kb+6axG7STYrmwQBYykkX8
+ 6zgPMx0/EacRRateUfCAxcfafaDGPzWK9EkDjF+H6EhBETCqGkwwrhYBC66HBndouTYBWwliqxM
+ W2zOpRYOVX/fztVRR/9cKbbk3k0wGDxJ3Ef4gJUrSswZI0w9+Nm8xBmXver5YKeKgDS0szg6F4V
+ 2p+9IvN/TlLRiORQ2ENeoBMLOA9KW8xOsHnJLe8ZmqJm0sAqdSjOk00TvoAoUhILfZLd9Q/q6FT
+ Qzr8nueD8A5dd0qEwjuA4rKjCGJ33AJrQ7uTAiNNXBXlfeCnHkO/kz+goNUo57csBYEwf/MSLIY
+ yAF3tcFXE11H+2K+A1HmqLMHrVKiOPPllq6RFsyayccQBGEOCHSa3dfTANqypbynC20g5fVB4/E
+ yYYjspOMXZFISStIO+hNiZR9H7q1bhfaL43zv6ihyR7GpZXn0IDxRTcrmp+85blk9lQ8s=
 X-Developer-Key: i=smtong@axiado.com; a=openpgp;
  fpr=772F37BB1B04B75F30244F487C1CA8721442F38E
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DC:EE_|BY1PR18MB5840:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f18c25a-b6bf-4be4-eef4-08deef2f1165
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017098:EE_|BY1PR18MB5875:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d8c8a60-20ed-4314-64d7-08deef2f1161
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|36860700016|82310400026|376014|1800799024|23010399003|6133799003|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: IF4jLhbKgE/wg1pX4jKiT3Uo1YFE85SiQ85Rh8UFM81apWTjeTEBQqe0K4upYFV0ymWSmFml7HVzdjawxeNMv6SR2xHWpmUcoYCVuHKq8goFjn6HgaSZ/MtzzcsROnlkxeSeoPOoOrkzM6PDvUcSUxmd/peMfSlXdU1q7CGTaTrokq+00S/aaVTHwg5EonSdbiNGsnEeI4JVWa8Kh3upnTo9VysXGZJrZX4tZB6HiSPk0FItx/TI3tFH1sOkF+zRIc+6AA1Tlwyejvhq6QQ2LfiTjKSJj5qNRFrFIofsfACnm4Lc5b8PPYThbCxnYEiVJu6tYDrlIt+IpHmz/7I6j2n+H2y+efmeZQdsBheJub9o5jMVbwnfVbVsp4UsdC5J0mUO6ha1sDxvaaNh/CrklzizRz/II3AxiP7PrrNvFYaQMEntMxQazUUy6pfGjScjAPz3ypJYV6515S7ia9Nq9uC339H7drjKlT4a0XUTE1FiWQFhf7IJEsBQhV+sSaYDH+yCDF/arEy9Tmhx/0RUYf2JB+4xpXz2Dd2JXQea/hsLlGmgonmoGNKKKvvLGzcXP0hJlgNENnbaWmRWmWpTvNQnoTh+tZxW0y71+78KPeuCwN0mUibG08+RbouZwzx2QXlLxJsUNj8vVNm2zLp0Mg==
-X-Forefront-Antispam-Report: CIP:64.62.143.114; CTRY:; LANG:en; SCL:1; SRV:;
+X-Microsoft-Antispam-Message-Info: gVHwSSxYHMFNvvBTLst46T1n+C+qnB6O++iUcG7/rNWQEoC/UUc8Ow9WLZJMV/fDrOSItarIxsfA2izufTHaOkxntiOSa+p/jtWcx1ZjOz2qga1sF36Hvrs4R/rN5za6vNOrz83WHIwrDVN8McDbX+RaoIjwgF1JUwAxf2Lrki7qVkV1h9mUve0eRskF39KKy1yNfgC7W8gFCkU/c2o2vrb5GOaI3pt/BoynpSw/7nNFXZdOBgk/ieXNuCI4zpKp05FHoesK5UY0yL551sdVpZVSaZDNyOqy6J98qJJuVtcObUWF063Cysl/63jfr14ODR9WLvk05SZoKAaDDg8DpCAf7/JEQjyb2f0UPtHS6aQoCGxVNBuWufnJ3SqjbOCnDhiCIjmHlm23doFU7YmL+WMfSj6HGgMsqyLRPZnsLh/Cq2Dmgr3T9x90d6aErjkc+U2e3Ow5zs4UewCy8ESqH8/QxhfXmqilBsyEMv90CMXmnfRb3zZnJ/STmC1U+ZEHt1mdf78UcHWUMGxvcQ4Y8/RBMlQW7v3NiNZP0MD6v+7Uopdi7KKFShmMyiI0xLzVS9y5f62iIKaJaHgs2kWYyyBiLVVn1GOUdy6b9+/efSo9p2gtyRyGIqy4btf5PDruAk9JjKQCbtzOuBS7IJYczTw3nmVeneNNcKgtsZH/8CfVdN4RaVbXBbabv+HlLfMjfH1G6c6rPc7f302M2j3mOw==
+X-Forefront-Antispam-Report: CIP:64.62.143.114; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:smtp.corp.axiado.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(23010399003)(6133799003)(56012099006)(10067099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 10Aec7o2oj6BRYGXammXI3GwpyCfLP4Fd2PQTYNHkACnphAAHsDXy4vxgQoPTpI7clgzFX+ZEsG/63r0Xev5RhGk1hssP4S7ELGb4z7durTk9V8zf3X5WxyP+0O4PC2aTmTkBGe4nIVKG90oD0ERhLHn5hjN08z5aJSF0h8oiCq/r5OsCtnEn33z3xsuLhBANuHnJZ7oyTXyhV+HTujB8XbT7EPSe6Wc/3bShCOh8Hhiwp6u4teCMqBOmC+eIM/gcU2cR5WYAYdj3BOlcEQklofCIMC0HUCtG5iz2kilZ8VimWRuhwPgoGMoNB5kmVjE8DGtH6n+1CAm2jsRTC5c63btQlHf4TSzaUwoUeCjKbyQwun4Vek+8I1oIn+m2yVmZ/ETJHTnmEjv6TT9z1BLLJIPGcL8xM+ZfNc98lxwWcf7hDRIfB9Q2+ijj0/dlQzq
+X-MS-Exchange-AntiSpam-MessageData-0: S4Bi8U9zDTlujhHlpalnzEhmr8YQkK79MqRF3ciZz3JtdYjtvtnaHJEs3Y8PkE+SghZpVdx+pBnLjQvcIi7QtWVAHW6KeVI/q7zHzumUOOAKQzE3P7ef7aqX7Nlk3JS5KNQvq9i4S+IXx9QBJA6J4c1hFJRYYQ5pU6RnyUj4/0b5UwRmsL5LtrshK/mp9bJfyU5yO61F6UpgoOQjlu/2fbN3rKEBrTf3tMrzrlevtKpQRgFfCSZVHkHOKop0QwFNU7KUT9vp1ZVyjlqwTp1cOtB6na3dofdYWzjl3qCSpKJ+F9RgsfuyCwRGbEIdn+KACfejXih1kp1Ax9hHByJAfKpgAejv3UWmjYy074lEkjsEoXzednm2cy6yNtwBzq4vUsAsD16MtyqND04VVixnQjykF/2+X6g8/4ztQ1hNau9H8Sad2Tn7bXEi8x8n6jnV
 X-OriginatorOrg: axiado.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 18:10:56.5825 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f18c25a-b6bf-4be4-eef4-08deef2f1165
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2026 18:10:56.4559 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d8c8a60-20ed-4314-64d7-08deef2f1161
 X-MS-Exchange-CrossTenant-Id: ff2db17c-4338-408e-9036-2dee8e3e17d7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=ff2db17c-4338-408e-9036-2dee8e3e17d7; Ip=[64.62.143.114];
  Helo=[smtp.corp.axiado.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DC.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017098.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR18MB5840
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR18MB5875
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Fri, 31 Jul 2026 18:13:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=axiado.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=T9gW9UANAeobSvBjPbUpPeLud1HRc73P46WJZY0Q30I=;
- b=HEG+MgqE/Dlqx0UGvw8R9DRf1C1aXQntpgLtGsjX/sHVSeiH7wXso5KjjKxJtfpWkYFyO5Ps5B9Zygr2jeaCpIm9kVfXk2Kz0hdviH+LK9dFlpmMuW3Og2S3qa6FOrzT0TFcACZzq+xdslTGtKnn8m4C85nAC7VRCistwJ5fxZ5SFG66Ry1ratrU1OJ6qFHuTfgtxaVwckBqgw8tbxXfbc0BUSpZsoi5uy1zKAbOqWX3QKsSeXwNcb55fJEf8xo0qOLvHZsXXNkotRqIDFOz2ZPcATvnIkruMZe79YvKH/WSw+SX+GZyGFtTQ0KhMDdAA4/us/11HojkXbXWJCUKPg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=2jEp21XzvUuYo/PetHHg6TpBhqPNeV5cISPmqS51Pe8=;
+ b=mkL9fFkeTnxi0tyEpF50W1k1YnNUyszZV8CrGAgjk7MqjfQlmAyd87HwVoQ0MaUiZJk1X+3vp+VHi1UMu9zJVNRirgfLyP/UBL/Fj1so/3KI/lFo38k2a/n3FO3FyC4qEeir307av1wz1Rhqr5XT8AykIb41yFDpFFHAcG4DnghuJ55lVlKog3nfqU6HTOjwSwUSndrikC89AFjdqJPSKLdy6pm81oGBkU+CqD8pda2QYs1pV/uxEIxsL93usc6ipajdNAlsktlPz6OcWraTjjIOXKSGWwQXEGmQqyb4UXrkRfTq9I9HVQIHzmL/UFb9QfL9lIT0AwHyZa29Pee6gg==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=axiado.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=axiado.com header.i=@axiado.com header.a=rsa-sha256
- header.s=selector1 header.b=HEG+MgqE
+ header.s=selector1 header.b=mkL9fFke
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none)
  header.from=axiado.com
@@ -170,7 +170,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=smtong@axiado.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=axiado.com header.i=@axiado.com header.b="HEG+MgqE"; 
+ unprotected) header.d=axiado.com header.i=@axiado.com header.b="mkL9fFke"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -186,378 +186,279 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add an SDHCI host controller driver (MMC_SDHCI_AXIADO) for the Arasan
-SDHCI controller found on the Axiado AX3005 SoC. The driver builds on
-the generic SDHCI framework and adds SoC-specific handling for signal
-voltage switching, HS200 tuning and eMMC PHY power sequencing through
-the generic PHY API.
+Add a PHY driver (PHY_AXIADO_EMMC) for the eMMC PHY found on the Axiado
+AX3005 SoC. The PHY provides signal conditioning and DLL functionality
+required for high-speed eMMC operation with data rates beyond 52MHz.
+
+The driver is based on the Arasan PHY (sdhci-pci-arasan.c) and programs
+the calibration, DLL and clock-buffer settings through a memory-mapped
+regmap.
 
 Signed-off-by: Siu Ming Tong <smtong@axiado.com>
 ---
- MAINTAINERS                |   1 +
- drivers/mmc/Kconfig        |   7 +
- drivers/mmc/Makefile       |   1 +
- drivers/mmc/axiado_sdhci.c | 311 +++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 320 insertions(+)
+ MAINTAINERS                   |   1 +
+ drivers/phy/Kconfig           |   9 ++
+ drivers/phy/Makefile          |   1 +
+ drivers/phy/phy-axiado-emmc.c | 208 ++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 219 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index eece4e5ebd0..02a0c171840 100644
+index e53cb0a485c..eece4e5ebd0 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -232,6 +232,7 @@ F:	arch/arm/dts/ax3005*
  F:	arch/arm/mach-axiado/
  F:	board/axiado/scm3005/
  F:	configs/ax3005_scm3005_defconfig
-+F:	drivers/mmc/axiado_sdhci.c
- F:	drivers/phy/phy-axiado-emmc.c
++F:	drivers/phy/phy-axiado-emmc.c
  F:	include/configs/ax3005-scm3005.h
  
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index f9f7aa5cf97..4ee56465c0f 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -114,6 +114,13 @@ config MMC_QUIRKS
- 	  are enabled by default, other may require additional flags or are
- 	  enabled by the host driver.
+ ARM BROADCOM BCM283X / BCM27XX
+diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+index 89d84df96ae..16eaa67fd02 100644
+--- a/drivers/phy/Kconfig
++++ b/drivers/phy/Kconfig
+@@ -81,6 +81,15 @@ config APPLE_ATCPHY
+ 	  This is a dummy driver since the PHY is initialized
+ 	  sufficiently by previous stage firmware.
  
-+config MMC_SDHCI_AXIADO
-+	bool "Axiado eMMC sdhci driver support"
-+	depends on MMC
++config PHY_AXIADO_EMMC
++	bool "Axiado eMMC PHY driver support"
++	depends on PHY
++	imply REGMAP
 +	help
-+	  Enable this to support the Axiado eMMC sdhci found in the Ax3005 SoC.
-+	  This sdhci provides functionality for interface with sdhci driver.
++	  Enable this to support the Axiado eMMC PHY found in the Ax3005 SoC.
++	  This PHY provides signal conditioning and DLL functionality for
++	  high-speed eMMC operations with data rates beyond 52MHz.
 +
- config SYS_MMC_MAX_BLK_COUNT
- 	int "Block count limit"
- 	default 65535
-diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index a23336d7d8d..f4a40ee10d5 100644
---- a/drivers/mmc/Makefile
-+++ b/drivers/mmc/Makefile
-@@ -56,6 +56,7 @@ obj-$(CONFIG_NEXELL_DWMMC) += nexell_dw_mmc.o
- obj-$(CONFIG_MMC_SDHCI)			+= sdhci.o
- obj-$(CONFIG_MMC_SDHCI_ASPEED)		+= aspeed_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_ATMEL)		+= atmel_sdhci.o
-+obj-$(CONFIG_MMC_SDHCI_AXIADO)         += axiado_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_BCM2835)		+= bcm2835_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_BCMSTB)		+= bcmstb_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_CADENCE)		+= sdhci-cadence.o
-diff --git a/drivers/mmc/axiado_sdhci.c b/drivers/mmc/axiado_sdhci.c
+ config BCM6318_USBH_PHY
+ 	bool "BCM6318 USBH PHY support"
+ 	depends on PHY && ARCH_BMIPS
+diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
+index e46c362878d..7ad0bd59407 100644
+--- a/drivers/phy/Makefile
++++ b/drivers/phy/Makefile
+@@ -34,6 +34,7 @@ obj-$(CONFIG_OMAP_USB2_PHY) += omap-usb2-phy.o
+ obj-$(CONFIG_KEYSTONE_USB_PHY) += keystone-usb-phy.o
+ obj-$(CONFIG_MT7620_USB_PHY) += mt7620-usb-phy.o
+ obj-$(CONFIG_MT76X8_USB_PHY) += mt76x8-usb-phy.o
++obj-$(CONFIG_PHY_AXIADO_EMMC) += phy-axiado-emmc.o
+ obj-$(CONFIG_PHY_DA8XX_USB) += phy-da8xx-usb.o
+ obj-$(CONFIG_PHY_EXYNOS_USBDRD) += phy-exynos-usbdrd.o
+ obj-$(CONFIG_PHY_MTK_TPHY) += phy-mtk-tphy.o
+diff --git a/drivers/phy/phy-axiado-emmc.c b/drivers/phy/phy-axiado-emmc.c
 new file mode 100644
-index 00000000000..a1cf22ad4f5
+index 00000000000..a151557a0ec
 --- /dev/null
-+++ b/drivers/mmc/axiado_sdhci.c
-@@ -0,0 +1,311 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/drivers/phy/phy-axiado-emmc.c
+@@ -0,0 +1,208 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * Copyright (c) 2021-26 Axiado Corporation (or its affiliates).
++ * Axiado eMMC PHY driver
++ *
++ * Copyright (C) 2017 Arasan Chip Systems Inc.
++ * Copyright (C) 2022-2026 Axiado Corporation (or its affiliates).
++ *
++ * Based on Arasan Driver (sdhci-pci-arasan.c)
++ * sdhci-pci-arasan.c - Driver for Arasan PCI Controller with integrated phy.
 + */
 +
-+#include <clk.h>
 +#include <dm.h>
-+#include <fdtdec.h>
-+#include "mmc_private.h"
-+#include <dm/device.h>
-+#include <linux/err.h>
-+#include <linux/libfdt.h>
-+#include <malloc.h>
-+#include <sdhci.h>
 +#include <generic-phy.h>
++#include <regmap.h>
++#include <time.h>
++#include <dm/device.h>
 +#include <dm/device_compat.h>
-+#include <linux/delay.h>
 +
-+#define SDHCI_HOST_CTRL2 0x3E
-+#define SDHCI_CTRL_VDD_180 0x0008
-+#define SDHCI_CTRL_EXEC_TUNING 0x0040
-+#define SDHCI_TUNING_LOOP_COUNT 40
-+#define EMMC_MIN_FREQ 400000
-+#define EMMC_MAX_FREQ 200000000
++/* Axiado eMMC PHY configuration registers */
++#define CAP_REG_IN_S1_LSB 0x00
++#define CAP_REG_IN_S1_MSB 0x04
++#define PHY_CTRL_1 0x38
++#define PHY_CTRL_2 0x3C
++#define PHY_CTRL_3 0x40
++#define STATUS 0x50
 +
-+DECLARE_GLOBAL_DATA_PTR;
++/* PHY Control 1 Register bits */
++#define DLL_ENBL BIT(26)
++#define RTRIM_EN BIT(21)
++#define PDB_ENBL BIT(23)
++#define RETB_ENBL BIT(1)
 +
-+struct axiado_sdhci_plat {
-+	struct mmc_config cfg;
-+	struct mmc mmc;
-+	unsigned int f_max;
-+	struct phy phy;
-+	bool phy_is_on;
++#define REN_STRB BIT(27)
++#define REN_CMD_EN GENMASK(20, 12)
++
++/* Pull-UP Enable on CMD Line */
++#define PU_CMD_EN GENMASK(11, 3)
++
++/* PHY Control 2 Register bits */
++#define OTAPDLY_EN BIT(11)
++
++/* PHY Control 3 Register bits */
++#define SEL_DLY_RXCLK BIT(18)
++#define SEL_DLY_TXCLK BIT(19)
++
++/* Status Register bits */
++#define CALDONE_MASK 0x40
++#define DLL_RDY_MASK 0x1
++
++/* Clock buffer bits */
++#define MAX_CLK_BUF0 BIT(20)
++#define MAX_CLK_BUF1 BIT(21)
++#define MAX_CLK_BUF2 BIT(22)
++
++/* Other constants */
++#define CLK_MULTIPLIER 0xC008E
++#define LOOP_TIMEOUT 3000
++#define TIMEOUT_DELAY 100
++
++struct axiado_emmc_phy {
++	struct regmap *regmap;
 +};
 +
-+struct axiado_sdhci_priv {
-+	struct sdhci_host *host;
-+};
-+
-+static void axiado_sdhci_set_control_reg(struct sdhci_host *host)
++static int axiado_emmc_phy_init(struct phy *phy)
 +{
-+	struct mmc *mmc = (struct mmc *)host->mmc;
-+	u32 reg;
++	u32 val;
++	unsigned long timeout;
++	struct axiado_emmc_phy *ax_phy = dev_get_priv(phy->dev);
 +
-+	switch (mmc->signal_voltage) {
-+	case MMC_SIGNAL_VOLTAGE_180:
-+		reg = sdhci_readw(host, SDHCI_HOST_CTRL2);
-+		reg |= SDHCI_CTRL_VDD_180; /* Set 1.8V mode */
-+		sdhci_writew(host, reg, SDHCI_HOST_CTRL2);
-+		break;
++	regmap_read(ax_phy->regmap, PHY_CTRL_1, &val);
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_1, RETB_ENBL | RTRIM_EN,
++			   RETB_ENBL | RTRIM_EN);
 +
-+	case MMC_SIGNAL_VOLTAGE_330:
-+		reg = sdhci_readw(host, SDHCI_HOST_CTRL2);
-+		reg &= ~SDHCI_CTRL_VDD_180; /* Clear 1.8V mode (3.3V) */
-+		sdhci_writew(host, reg, SDHCI_HOST_CTRL2);
-+		break;
++	regmap_read(ax_phy->regmap, PHY_CTRL_3, &val);
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_3, PDB_ENBL, PDB_ENBL);
 +
-+	default:
-+		debug("axiado_sdhci: Unsupported voltage: %d\n",
-+		      mmc->signal_voltage);
-+		break;
-+	}
++	/* Wait max 3000 ms */
++	timeout = get_timer(0);
 +
-+	sdhci_set_uhs_timing(host);
-+}
-+
-+static int axiado_sdhci_set_ios_post(struct sdhci_host *host)
-+{
-+	struct udevice *dev = host->mmc->dev;
-+	struct axiado_sdhci_plat *plat = dev_get_plat(dev);
-+	unsigned int speed = host->mmc->clock;
-+	u16 clk;
-+
-+	/* Reset SD Clock Enable */
-+	clk = sdhci_readw(host, SDHCI_CLOCK_CONTROL);
-+	clk &= ~SDHCI_CLOCK_CARD_EN;
-+	sdhci_writew(host, clk, SDHCI_CLOCK_CONTROL);
-+
-+	/* Power off PHY */
-+	if (plat->phy_is_on) {
-+		debug("Powering off eMMC PHY\n");
-+		generic_phy_power_off(&plat->phy);
-+		plat->phy_is_on = false;
-+	}
-+
-+	/* Restart SD Clock */
-+	sdhci_set_clock(host->mmc, speed);
-+
-+	/* Power on PHY if required */
-+	if (speed > EMMC_MIN_FREQ) {
-+		debug("Speed is high enough, powering on PHY...\n");
-+		generic_phy_power_on(&plat->phy);
-+		plat->phy_is_on = true;
-+	}
-+
-+	return 0;
-+}
-+
-+static int axiado_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
-+{
-+	struct mmc_cmd cmd;
-+	struct mmc_data data;
-+	u32 ctrl;
-+	struct sdhci_host *host;
-+	char tuning_loop_counter = SDHCI_TUNING_LOOP_COUNT;
-+
-+	host = mmc->priv;
-+
-+	ctrl = sdhci_readw(host, SDHCI_HOST_CTRL2);
-+	ctrl |= SDHCI_CTRL_EXEC_TUNING;
-+	sdhci_writew(host, ctrl, SDHCI_HOST_CTRL2);
-+
-+	sdhci_writel(host, SDHCI_INT_DATA_AVAIL, SDHCI_INT_ENABLE);
-+	sdhci_writel(host, SDHCI_INT_DATA_AVAIL, SDHCI_SIGNAL_ENABLE);
-+
-+	do {
-+		cmd.cmdidx = opcode;
-+		cmd.resp_type = MMC_RSP_R1;
-+		cmd.cmdarg = 0;
-+
-+		data.blocksize = 64;
-+		data.blocks = 1;
-+		data.flags = MMC_DATA_READ;
-+
-+		if (tuning_loop_counter-- == 0)
++	while (1) {
++		regmap_read(ax_phy->regmap, STATUS, &val);
++		if (val & CALDONE_MASK)
 +			break;
 +
-+		if (cmd.cmdidx == MMC_CMD_SEND_TUNING_BLOCK_HS200 &&
-+		    mmc->bus_width == 8)
-+			data.blocksize = 128;
-+
-+		sdhci_writew(host,
-+			     SDHCI_MAKE_BLKSZ(SDHCI_DEFAULT_BOUNDARY_ARG, data.blocksize),
-+			     SDHCI_BLOCK_SIZE);
-+		sdhci_writew(host, data.blocks, SDHCI_BLOCK_COUNT);
-+		sdhci_writew(host, SDHCI_TRNS_READ, SDHCI_TRANSFER_MODE);
-+
-+		mmc_send_cmd(mmc, &cmd, NULL);
-+
-+		ctrl = sdhci_readw(host, SDHCI_HOST_CTRL2);
-+
-+		if (cmd.cmdidx == MMC_CMD_SEND_TUNING_BLOCK)
-+			udelay(1);
-+
-+	} while (ctrl & SDHCI_CTRL_EXEC_TUNING);
-+
-+	if (tuning_loop_counter < 0) {
-+		ctrl &= ~SDHCI_CTRL_TUNED_CLK;
-+		sdhci_writew(host, ctrl, SDHCI_HOST_CTRL2);
++		if (get_timer(timeout) > LOOP_TIMEOUT) {
++			dev_err(phy->dev,
++				"eMMC-PHY: CALDONE_MASK bit not cleared.\n");
++			return -ETIMEDOUT;
++		}
++		udelay(TIMEOUT_DELAY);
 +	}
 +
-+	if (!(ctrl & SDHCI_CTRL_TUNED_CLK)) {
-+		printf("%s: Tuning failed\n", __func__);
-+		return -1;
-+	}
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_1, REN_CMD_EN | PU_CMD_EN,
++			   REN_CMD_EN | PU_CMD_EN);
 +
-+	/* Enable only interrupts served by the SD controller */
-+	sdhci_writel(host, SDHCI_INT_DATA_MASK | SDHCI_INT_CMD_MASK,
-+		     SDHCI_INT_ENABLE);
-+	/* Mask all sdhci interrupt sources */
-+	sdhci_writel(host, 0x0, SDHCI_SIGNAL_ENABLE);
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_2, REN_STRB, REN_STRB);
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_3,
++			   MAX_CLK_BUF0 | MAX_CLK_BUF1 | MAX_CLK_BUF2,
++			   MAX_CLK_BUF0 | MAX_CLK_BUF1 | MAX_CLK_BUF2);
++
++	regmap_write(ax_phy->regmap, CAP_REG_IN_S1_MSB, CLK_MULTIPLIER);
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_3,
++			   SEL_DLY_RXCLK | SEL_DLY_TXCLK,
++			   SEL_DLY_RXCLK | SEL_DLY_TXCLK);
 +
 +	return 0;
 +}
 +
-+static struct sdhci_ops axiado_ops = {
-+	.set_ios_post = &axiado_sdhci_set_ios_post,
-+	.platform_execute_tuning = &axiado_sdhci_execute_tuning,
-+	.set_control_reg = &axiado_sdhci_set_control_reg,
++static int axiado_emmc_phy_power_on(struct phy *phy)
++{
++	struct axiado_emmc_phy *ax_phy = dev_get_priv(phy->dev);
++	u32 val;
++	unsigned long timeout;
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_1, RETB_ENBL, RETB_ENBL);
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_3, PDB_ENBL, PDB_ENBL);
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_2, OTAPDLY_EN | (0xF << 7),
++			   OTAPDLY_EN | ((0x2) << 7));
++
++	/* Read back to ensure write is completed */
++	regmap_read(ax_phy->regmap, PHY_CTRL_2, &val);
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_1, DLL_ENBL | (0xF << 22),
++			   DLL_ENBL | ((0x8) << 22));
++
++	regmap_write(ax_phy->regmap, STATUS, 0x00);
++
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_3, (0x1 << 25),
++			   (0x1 << 25));
++
++	/* Wait max 3000 ms */
++	timeout = get_timer(0);
++
++	while (1) {
++		regmap_read(ax_phy->regmap, STATUS, &val);
++		if (val & DLL_RDY_MASK)
++			break;
++
++		if (get_timer(timeout) > LOOP_TIMEOUT) {
++			dev_err(phy->dev,
++				"eMMC-PHY: DLL_RDY_MASK bit not cleared.\n");
++			return -ETIMEDOUT;
++		}
++		udelay(TIMEOUT_DELAY);
++	}
++	return 0;
++}
++
++static int axiado_emmc_phy_power_off(struct phy *phy)
++{
++	struct axiado_emmc_phy *ax_phy = dev_get_priv(phy->dev);
++
++	/* Disable DLL */
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_1, DLL_ENBL, 0);
++
++	return 0;
++}
++
++static int axiado_emmc_phy_exit(struct phy *phy)
++{
++	struct axiado_emmc_phy *ax_phy = dev_get_priv(phy->dev);
++
++	/* Disable all PHY features */
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_1,
++			   DLL_ENBL | RETB_ENBL | RTRIM_EN, 0);
++	regmap_update_bits(ax_phy->regmap, PHY_CTRL_3, PDB_ENBL, 0);
++
++	return 0;
++}
++
++static const struct phy_ops axiado_emmc_phy_ops = {
++	.init = axiado_emmc_phy_init,
++	.power_on = axiado_emmc_phy_power_on,
++	.power_off = axiado_emmc_phy_power_off,
++	.exit = axiado_emmc_phy_exit,
 +};
 +
-+static int axiado_sdhci_probe(struct udevice *dev)
++static int axiado_emmc_phy_probe(struct udevice *dev)
 +{
-+	struct axiado_sdhci_plat *plat = dev_get_plat(dev);
-+	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-+	struct axiado_sdhci_priv *priv = dev_get_priv(dev);
-+	struct sdhci_host *host;
-+	unsigned long clock = 0;
++	struct axiado_emmc_phy *ax_phy = dev_get_priv(dev);
 +	int ret;
-+	struct clk clk;
 +
-+	host = priv->host;
-+	/* Get clock frequency */
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret < 0) {
-+		dev_err(dev, "failed to get clock\n");
++	ret = regmap_init_mem(dev_ofnode(dev), &ax_phy->regmap);
++	if (ret) {
++		dev_err(dev, "Failed to init regmap: %d\n", ret);
 +		return ret;
 +	}
-+
-+	clock = clk_get_rate(&clk);
-+	if (IS_ERR_VALUE(clock)) {
-+		dev_err(dev, "failed to get rate\n");
-+		return clock;
-+	}
-+
-+	ret = clk_enable(&clk);
-+	/* U-Boot commonly uses ENOSYS for "function not implemented" */
-+	if (ret && ret != -ENOSYS) {
-+		dev_err(dev, "failed to enable clock\n");
-+		return ret;
-+	}
-+
-+	if (device_is_compatible(dev, "axiado,ax3005-sdhci")) {
-+		/* Get and init phy */
-+		ret = generic_phy_get_by_name(dev, "phy_arasan", &plat->phy);
-+		if (ret) {
-+			dev_err(dev, "can't get phy from DT\n");
-+			return ret;
-+		}
-+
-+		ret = generic_phy_init(&plat->phy);
-+		if (ret) {
-+			dev_err(dev, "couldn't initialize MMC PHY\n");
-+			return ret;
-+		}
-+
-+		plat->phy_is_on = false;
-+	}
-+
-+	host->ops = &axiado_ops;
-+	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD;
-+
-+	host->max_clk = clock;
-+	host->bus_width = dev_read_u32_default(dev, "bus-width", 4);
-+
-+	if (host->bus_width == 8)
-+		host->host_caps |= MMC_MODE_8BIT;
-+	else if (host->bus_width == 4)
-+		host->host_caps |= MMC_MODE_4BIT;
-+
-+	host->mmc = &plat->mmc;
-+	host->mmc->dev = dev;
-+	host->mmc->priv = host;
-+
-+	ret = sdhci_setup_cfg(&plat->cfg, host, plat->f_max, EMMC_MIN_FREQ);
-+	if (ret)
-+		goto err;
-+	upriv->mmc = host->mmc;
-+
-+	ret = sdhci_probe(dev);
-+	if (ret)
-+		goto err;
-+
-+	return 0;
-+
-+err:
-+	clk_disable(&clk);
-+	return ret;
-+}
-+
-+static int axiado_sdhci_ofdata_to_platdata(struct udevice *dev)
-+{
-+	struct axiado_sdhci_plat *plat = dev_get_plat(dev);
-+	struct axiado_sdhci_priv *priv = dev_get_priv(dev);
-+
-+	priv->host = calloc(1, sizeof(struct sdhci_host));
-+	if (!priv->host) {
-+		dev_err(dev, "sdhci_host malloc failed\n");
-+		return -ENOMEM;
-+	}
-+
-+	priv->host->name = dev->name;
-+
-+	priv->host->ioaddr = dev_read_addr_ptr(dev);
-+	if (!priv->host->ioaddr) {
-+		dev_err(dev, "failed to get I/O address\n");
-+		return -EINVAL;
-+	}
-+
-+	plat->f_max = dev_read_u32_default(dev, "mmc-clk", EMMC_MAX_FREQ);
 +
 +	return 0;
 +}
 +
-+static int axiado_sdhci_bind(struct udevice *dev)
-+{
-+	struct axiado_sdhci_plat *plat = dev_get_plat(dev);
-+
-+	return sdhci_bind(dev, &plat->mmc, &plat->cfg);
-+}
-+
-+static const struct udevice_id axiado_sdhci_ids[] = {
-+	{ .compatible = "axiado,ax3005-sdhci" },
++static const struct udevice_id axiado_emmc_phy_ids[] = {
++	{ .compatible = "axiado,ax3005-emmc-phy" },
 +	{}
 +};
 +
-+static int axiado_sdhci_remove(struct udevice *dev)
-+{
-+	struct axiado_sdhci_plat *plat = dev_get_plat(dev);
-+
-+	if (device_is_compatible(dev, "axiado,ax3005-sdhci")) {
-+		if (plat->phy_is_on)
-+			generic_phy_power_off(&plat->phy);
-+		generic_phy_exit(&plat->phy);
-+	}
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(axiado_sdhci_drv) = {
-+	.name = "axiado_sdhci",
-+	.id = UCLASS_MMC,
-+	.of_match = axiado_sdhci_ids,
-+	.of_to_plat = axiado_sdhci_ofdata_to_platdata,
-+	.ops = &sdhci_ops,
-+	.bind = axiado_sdhci_bind,
-+	.probe = axiado_sdhci_probe,
-+	.remove = axiado_sdhci_remove,
-+	.priv_auto = sizeof(struct axiado_sdhci_priv),
-+	.plat_auto = sizeof(struct axiado_sdhci_plat),
++U_BOOT_DRIVER(axiado_emmc_phy) = {
++	.name = "axiado_emmc_phy",
++	.id = UCLASS_PHY,
++	.of_match = axiado_emmc_phy_ids,
++	.ops = &axiado_emmc_phy_ops,
++	.probe = axiado_emmc_phy_probe,
++	.priv_auto = sizeof(struct axiado_emmc_phy),
 +};
 
 -- 
