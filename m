@@ -1,143 +1,156 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42528C54F54
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CD5DC54F54
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:42:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C9DB60B9C;
-	Fri, 31 Jul 2026 12:41:00 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2wn2gYHHXShF; Fri, 31 Jul 2026 12:40:59 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0901460B9F
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785501659;
-	bh=bKqP3BY7ulwuTrubsvWSwjNDMuyrpaoxEio4kwR5EVs=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=g3qPVzR3BvcEenYrHk+r0nlVahc5Ynt8zpnGTx0Cc3nXzr4YxJ0FwxKO8+idLccUv
-	 P5T/EUO8Wd3x3ex1FP6McyEUZ43fAC7Sdu6XwXY4bvNUJx6meyxUci1POzLc8YlRt/
-	 hhmcprqw0ECe50vliGsQLukAWESnuUYAj1BDctmhq4eZ7+21l9p2QkOTLSjPuaeXfm
-	 rykQRKR2OvZz2E6C/Xxv+mqE9PzdxCqXwnFedgSB347if2Hkfo71JSL3XdNTYINcMQ
-	 CYlDivAVjaOLmc/TFmLmMcCEE8gN58Vgmr4RVnwbdi/R1UR3FQYm1O7Mxa20Y9pooj
-	 qdIg3hXmsAnwQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0901460B9F;
-	Fri, 31 Jul 2026 12:40:59 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3A36236E
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:58 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 20AF14112A
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3274A41108;
+	Fri, 31 Jul 2026 12:42:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o_obWsjOL9_w for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 12:40:57 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D116D41128
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D116D41128
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D116D41128
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:40:56 +0000 (UTC)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-47f6609c657so473798f8f.2
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 05:40:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785501655; x=1786106455;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=bKqP3BY7ulwuTrubsvWSwjNDMuyrpaoxEio4kwR5EVs=;
- b=tQl/SekJ0oQDvueG3wE3mRM+hCuwDv83dg58nI8UxIqDq5n1J6Z3Plar2PvxKpbUPU
- V/Svj6SaDrWfNbJ4cgg6TCR5tPcO3lVhmz5OQ976HjObBDpSnXuzMYrF/Y5xhz5rl8s1
- efhV4iVX5dThCwnOsCdniO9s2d50GDANaCK3ZO0foC/HHHxlm9BtasuqZlF2xA8l8lEG
- 14V+nTnG1JUaKK9QS90hdyAWs0PWxbq9vSnjkEgleHEBzpf5Has+DvYWUGhAs3XkTM+w
- jw3OB91NBuaKqLFOyS0Y7M+aNcsACJqxP5pS+RutZktEafcehPAmjfXayjNN+GF/n21I
- AVfA==
-X-Gm-Message-State: AOJu0YwAFEZyFvw07VDXKtcN/IXFQ8AUTzFB+g5YWBo0yHf0jC+2ctMz
- 3Vh8WfpQ54QRTApwOhNZC00jZYJTp3vxzza/RExNJ99CWs7iZ8j3aPA5lsmxiqRnETQ=
-X-Gm-Gg: AR+sD12AawplUb9eQP7ZIgoiYFtwVJE1Kc8WTSQt5lkVUa6aZpbcPf4jtPQBCLj3l9y
- MKaa0C7nCK1u+cRKXFlMw6fWbhfn2ZaTJ3KSeDrGtgaC0/Fpm1xn4AfDQ9ep5FNO8v3YA2x/49r
- Ryfnrk/2gf1oShxTTI8aR1xqK6Mh90hs+2sw8Wr03oTBLenluAB3eZKVVuZbPwuunb58wKXHwu6
- mpkxrYnop8HmvS8YyEh2coPLxEyDzJl4f6uPeXEy6aApeadFtb1gc79K5zQdkQUzZAdH7I/aJQZ
- 5R0nIBJJ7JcgrF+mxI391uugBb3EspYXHxqeZ1oS3ifRAqJdGSxgIccGza6/pkSR4wCwLoVh+33
- 73EL6EwLIpCeVuxYX2OraG1IonNbRfxgtmp71MKfLOUf62yJ/HBBHx3MntxWvMOB3WN0G4em7x8
- YcUAp/OM5SAuyPXtUidpqcbkGAcdLlwRRc3GzQcAQhfHjaMLeWCaq2WaOaABd5Iie6kl3ijJzEn
- eN8AZ0isg6xA5EGBoZz4AFdFkfrYo9rGfha/ULJuQ==
-X-Received: by 2002:a05:6000:2311:b0:47f:9441:51b5 with SMTP id
- ffacd0b85a97d-47fd2abab70mr4241704f8f.5.1785501654669; 
- Fri, 31 Jul 2026 05:40:54 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
- [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fd41e296csm4493682f8f.12.2026.07.31.05.40.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 05:40:54 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 31 Jul 2026 16:40:05 +0400
-Subject: [PATCH 6/6] test: py: gpt: Test the GPT layout on a device with
- 4096-byte blocks
+ id RB-voA6YNTwK; Fri, 31 Jul 2026 12:42:00 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 38929410E1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785501720;
+	bh=OlDRaxfE/YwFL4wPFpUheshgoy65xfJ0YcM1lcy+QZw=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BAfsi/13ElUILVD7qT2L2ElSLbaLnIMYsIZ8sx0p+kIOBv4lHjGMVAj0B3fAm2hXd
+	 6cuvKz8+CR2FVXBneXQs5smuqavqS85LlibX7VNbs/sQpE/ZPYdGr6tl9in9JMXiYL
+	 bzzz7HUxJjWnmbjHJYl4koSjRXnVqrTbdbQi84G7e2rwQ4HRfNiI81mowt3PECcM6r
+	 JSzYihisLljcYFvHGTLcE/vAp5aOU4y2SkQMSldXqpAHTnZCT4cpEfzFtFpLZq+jno
+	 muvAs6ePuPmCwr8gdse30BCMYzSWB8wbr+ahLSPsEniVAQ8Zvn0DpNzxbybve6lBi7
+	 j9a8rLgioXcIQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 38929410E1;
+	Fri, 31 Jul 2026 12:42:00 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3BECC37F
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 06:47:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 222054015E
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 06:47:03 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bAPruBjlqdtv for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 06:47:02 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=dorde.stojicevic@rohde-schwarz.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C3C4540063
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C3C4540063
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C3C4540063
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 06:46:59 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9977A84A0F; Fri, 31 Jul 2026 08:46:55 +0200 (CEST)
+Received: from mail02.rohde-schwarz.com (mail02.rohde-schwarz.com
+ [80.246.32.97])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E0A7849BC
+ for <u-boot@lists.denx.de>; Fri, 31 Jul 2026 08:46:52 +0200 (CEST)
+Received: from securemail-mu-h4.rohde-schwarz.com (10.0.19.146) by
+ mail02.rohde-schwarz.com (172.21.64.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.45; Fri, 31 Jul 2026 08:46:51 +0200
+Received: from GMU451.rsint.net ([10.0.225.106])
+ by gmu812.rsint.net (Totemo SMTP Server) with SMTP ID 522;
+ Fri, 31 Jul 2026 06:46:51 +0000 (GMT)
+Received: from GMU508.rsint.net (10.0.225.40) by GMU451.rsint.net
+ (10.0.225.106) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 31 Jul
+ 2026 08:46:51 +0200
+Received: from GMU508.rsint.net (10.0.225.40) by GMU508.rsint.net
+ (10.0.225.40) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 31 Jul
+ 2026 08:46:48 +0200
+Received: from GMU508.rsint.net ([fe80::9ee:3531:ebaf:c342]) by
+ GMU508.rsint.net ([fe80::9ee:3531:ebaf:c342%7]) with mapi id 15.02.2562.045;
+ Fri, 31 Jul 2026 08:46:48 +0200
+From: Dorde Stojicevic <dorde.stojicevic@rohde-schwarz.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Quentin Schulz <quentin.schulz@cherry.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Patrick Deiber <pdeiber@lynx.com>
+Subject: RE:  Re: Re: Re: Re: Re: [PATCH] arm: Backward compatibility to
+ U-Boot v2020.04
+Thread-Index: AQHcpzRe2+mcoRbah0Kuc/Nv5xoyYbaIIT3g
+Date: Fri, 31 Jul 2026 06:46:48 +0000
+Message-ID: <ab9b77d1c3204235a50c9de34aa86498@rohde-schwarz.com>
+References: <25380f75dd2443c0a882bcce78503511@rohde-schwarz.com>
+ <20260203170002.GO2603314@bill-the-cat>
+ <f8f1197e979b4998afb5dc952f7a8a63@rohde-schwarz.com>
+ <20260206015447.GP2603314@bill-the-cat>
+ <989f3c4aa5a04fd3b1c2efda1aedd459@rohde-schwarz.com>
+ <20260206150345.GT2603314@bill-the-cat>
+ <1000751cb4604e768e2f789c3dfda18e@rohde-schwarz.com>
+ <f991777100194a22b350660b5977cf27@rohde-schwarz.com>
+ <20260225222417.GY1593142@bill-the-cat>
+ <669abe865bc74dd6aeea69caabeae259@rohde-schwarz.com>
+ <20260226152640.GG1593142@bill-the-cat>
+In-Reply-To: <20260226152640.GG1593142@bill-the-cat>
+Accept-Language: de-DE, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.9.40]
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260731-gpt-4k-v1-6-a3f1f16b53ae@flipper.net>
-References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
-In-Reply-To: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
-To: u-boot@lists.u-boot-project.org, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>, 
- Javier Martinez Canillas <javierm@redhat.com>, 
- Simon Glass <sjg@chromium.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, 
- Suniel Mahesh <sunil@amarulasolutions.com>, 
- Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>, 
- Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6471; i=alchark@flipper.net;
- h=from:subject:message-id; bh=H9HI8pDo5Y3qGerN5eIfQke7z2j25N/Zv5gJUQ+Aftc=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTlTN+dc8uuR2Dt4rSjotMsbv+2W8uh87WhxoBd2vrW1
- eLDuzU3d0xkYRDjYrAUU2SZ+22J7VQjvlm7PDy+wsxhZQIZIi3SwAAELAx8uYl5pUY6Rnqm2oZ6
- hkY6xjpGDFycAjDVLscY/gotyBfzvHK28EqOmJXgYkFvhYXdN7pe/mcxms2+JCdmUijDXwl1vye
- 3jppc1+vQKTnxslGZ3UE85sUKu8vXt0ibiC5VZQQA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-IQAV: YES
+thread-topic: RE: *EXT* Re: Re: Re: Re: Re: [PATCH] arm: Backward
+ compatibility to U-Boot v2020.04 ***CAUTION_Invalid_Signature*** /ur/
+X-rus_sensitivity: 10
+msip_labels: MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Enabled=true;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_SetDate=2026-07-31T08:46:49Z;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Method=Privileged;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Name=UNRESTRICTED;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_SiteId=74bddbd9-705c-456e-aabd-99beb719a2b2;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_ActionId=8b69e117-7756-4ef8-b52e-ebe0297deaf4;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_ContentBits=1
+Content-Type: multipart/related; type="multipart/alternative";
+ boundary="--=_Boundary_=--9EA1-AF87--8F7_650.="
+X-GBS-PROCJOB: =?utf-8?Q?2mD02X04fG0+dV+wnXPoJxwPF7RqVcTSQbSA1QNrttswkEIC+qAmRrA+yiar?=
+ =?utf-8?Q?jXTRZ04UnlKwQls/tbzcPpVcOQE2D5l5tFaa46Y5jpot7UefJtaK0vwfsM6V?=
+ =?utf-8?Q?5faoBZWBdTM4Jij6lxcJp5H4giHnBY4MJ4gQ4Ktx+t/tCJHSaIkEfAnhCKM3?=
+ =?utf-8?Q?6EpfqfhlRrwmkix0yH8OoVopDoPjeXthQw=3D=3D?=
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+X-Mailman-Approved-At: Fri, 31 Jul 2026 12:41:59 +0000
+X-Content-Filtered-By: Mailman/MimeDel 2.1.30
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785501655; x=1786106455;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=bKqP3BY7ulwuTrubsvWSwjNDMuyrpaoxEio4kwR5EVs=;
- b=0VUlizXWc+wdbNuU3xqx9OW5f3iPEAIVVj792ChwFjtULJCcTDDRWS4yLVBn34IiRa
- LTvBnT+uiStnySGQtePCTJo2yXyFnwvfVsGvIwyAI7o+alr3bl/oINURCszcDn0pOvJc
- KWtlP1pOZrJwhvUZwoVL12Dej8KQe51tWQIJy8pCYzaKeDx0bOnT5s4VJ+p5wFo+8gE6
- CUdn60D0AMwUlu2VDovV8pKENa2V0GGhTuyLOrQtiyZatbGghrT0CBUfpce+99FMtOOO
- JAmweVpUlYrb2YtdXMNDanSB4R18aa8thUSaKiVAvl0WNnfIpM7ZCB2L8EJN1mbBQH1G
- YHpA==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=rohde-schwarz.com; s=mail25;
+ t=1785480411; bh=96pGr6evRyv37lpIrVVmSkKp1gaoF1IUV9RON+yygAA=;
+ h=From:Subject:Date:Message-ID:To;
+ b=LB6T79qqDqrhU6dgzqIwgvkooQEkuCe5FVZrGrRpg+w5LrkGtzvfscJptkM70UZlzTHdBkGn
+ PvyebQrZSg3vbLJyMFgoACCPEhWYo978OAl8MjwlO2PgZV8b0FQ45PXxfIlVlVVePGl86oHi
+ wVVm2O5i7LuYyIgh2R5rTIzG4gC7b0RdY7K6QiqGG1UcyWxZy7C4JWa6D1FwnfzUjzbkS+B7
+ 4yDpsNxMxKCdqV4yfBD/yrVNxFBqC71BpCbMTdcQjgq4DSLQDBedInw7OLO5CmKjeulVJDDz
+ uY6iQZXUOvKkV7o0Sh5+Zd2MYdEJnenNyq8T1aiNjvNsBMGbrmA/AA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ header.from=rohde-schwarz.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org; spf=fail
+ smtp.mailfrom=rohde-schwarz.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=0VUlizXW
+ unprotected) header.d=rohde-schwarz.com header.i=@rohde-schwarz.com
+ header.a=rsa-sha256 header.s=mail25 header.b=LB6T79qq
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none)
+ header.from=rohde-schwarz.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dorde.stojicevic@rohde-schwarz.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=rohde-schwarz.com header.i=@rohde-schwarz.com
+ header.b="LB6T79qq"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,172 +165,257 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Bind a blank image with a 4096-byte logical block size, let U-Boot write a
-GPT to it, and then check the result both through 'part list' and by
-unpacking the primary and backup headers straight out of the image. The
-interesting assertion is that the backup partition entry array ends
-immediately before the backup header in the last block, which is what
-regresses when the array size is computed with a hardcoded block count.
+----=_Boundary_=--9EA1-AF87--8F7_650.=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-No sgdisk is needed since U-Boot creates the table itself, so unlike the
-other tests here this one has no requiredtool marker. The number of entries
-comes from the build config rather than being hardcoded to 128, so the
-expected LBAs are recomputed for builds that set
-CONFIG_EFI_PARTITION_ENTRIES_NUMBERS differently.
+SGkgVG9tLA0KDQpJIGhhdmUgbmV3cyByZWdhcmRpbmcgdGhpcy4NCg0KSXQgYmVjYW1lIGFu
+IGltcG9ydGFudCBwb2ludCBhdCBMeW54LCBzbyBQYXRyaWNrIGZyb20gTHlueCAob3IgYSBh
+bm90aGVyIGFzc2lnbmVkIGNvbGxlYWd1ZSkgd2lsbCBnZXQgaW4gdG91Y2ggd2l0aCB5b3Ug
+dG8gc29ydCB0aGlzIG91dC4NCg0KSSBhbHJlYWR5IGRpc2N1c3NlZCB0aGUgc29sdXRpb24g
+cHJvcG9zZWQgYnkgeW91ICh0aGVyZWZvcmUgZm9yd2FyZGluZyB0aGUgZS1tYWlscyBiZWxv
+dykgYW5kIHdlIHNlZSBubyB0ZWNobmljYWwgcHJvYmxlbSB3aXRoIGltcGxlbWVudGluZyBs
+aWtlIHRoaXMuDQoNClBscyBrZWVwIG1lIGluIHRoZSBsb29wIGFzIEkgd291bGQgYmUgaW50
+ZXJlc3RlZCBpbiB0aGUgZmluYWwgaW1wbGVtZW50YXRpb24gYXMgd2VsbCwgZm9yIHRoZSBw
+dXJwb3NlIG9mIG15IHByb2plY3QuDQoNClRoYW5rcyBhbmQgdGFsayB0byB5b3Ugc29vbg0K
+RGoNCg0KDQpEb3JkZSBTdG9qaWNldmljDQoNClRlY2hub2xvZ3kgU3lzdGVtcw0KDQpSb2hk
+ZSAmIFNjaHdhcnogU0lUIEdtYkgNCkhlbW1pbmdlciBTdHJhc3NlIDQxIHwgNzA0OTkgU3R1
+dHRnYXJ0LVdlaWxpbWRvcmYgfCBHZXJtYW55DQpQaG9uZTogKzQ5NzExNjk5NDUxOTUNCg0K
+SW50ZXJuZXQ6IHd3dy5yb2hkZS1zY2h3YXJ6LmNvbQ0KDQoNCg0KR2VzY2jDpGZ0c2bDvGhy
+ZXIgLyBNYW5hZ2luZyBEaXJlY3RvcjogRGlubyBIdWJlcsKgDQpBdWZzaWNodHNyYXRzdm9y
+c2l0emVuZGVyIC8gQ2hhaXIgb2YgdGhlIFN1cGVydmlzb3J5IEJvYXJkOiBNYXJrdXMgRG9s
+ZmVuDQpTaXR6IC8gUmVnaXN0ZXJlZCBPZmZpY2U6IFN0dXR0Z2FydA0KSGFuZGVsc3JlZ2lz
+dGVyIC8gQ29tbWVyY2lhbCBSZWdpc3RlcjogQUcgU3R1dHRnYXJ0IEhSQiA3NTkgOTM0DQpV
+bXNhdHpzdGV1ZXItSWRlbnRpZmlrYXRpb25zbnVtbWVyIChVU3QtSWROci4pIC8gVkFUIElk
+ZW50aWZpY2F0aW9uIE5vLjogREUgMTIxIDk2MyAyODMNCkVsZWt0cm8tQWx0Z2Vyw6R0ZSBS
+ZWdpc3RlciAoRUFSKSAvIFdFRUUgUmVnaXN0ZXIgTm8uOiBERSA4NzcgNzI3IDY3DQoNCg0K
+DQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogVG9tIFJpbmkgPHRyaW5pQGtv
+bnN1bGtvLmNvbT4gDQpTZW50OiBUaHVyc2RheSwgRmVicnVhcnkgMjYsIDIwMjYgNDoyNyBQ
+TQ0KVG86IFN0b2ppY2V2aWMgRG9yZGUgKDExU0lFUFQxKSA8ZG9yZGUuc3RvamljZXZpY0By
+b2hkZS1zY2h3YXJ6LmNvbT4NCkNjOiBRdWVudGluIFNjaHVseiA8cXVlbnRpbi5zY2h1bHpA
+Y2hlcnJ5LmRlPjsgdS1ib290QGxpc3RzLmRlbnguZGUNClN1YmplY3Q6ICpFWFQqIFJlOiBS
+ZTogUmU6IFJlOiBSZTogW1BBVENIXSBhcm06IEJhY2t3YXJkIGNvbXBhdGliaWxpdHkgdG8g
+VS1Cb290IHYyMDIwLjA0ICoqKkNBVVRJT05fSW52YWxpZF9TaWduYXR1cmUqKioNCg0KT24g
+VGh1LCBGZWIgMjYsIDIwMjYgYXQgMDg6MTU6MTRBTSArMDAwMCwgRG9yZGUgU3RvamljZXZp
+YyB3cm90ZToNCg0KPiBIaSBhbGwsDQo+IA0KPiB5dXAsIEkgY29tcGxldGVseSB1bmRlcnN0
+YW5kIGFuZCBhZ3JlZSB3aXRoIHlvdS4NCj4gDQo+IE9uZSB3YXkgd291bGQgYmUgdG8gZGV0
+ZWN0IHRoZSBjaGFyYWN0ZXJpc3RpYyBzdHJpbmcgTHlueCBoYXMgaW4gdGhlIGJlZ2lubmlu
+ZyBvZiB0aGUgRklUIGltYWdlICIgZUx5bnhTZWN1cmUiIDoNCj4gDQo+IG1raW1hZ2U6DQo+
+IEZJVCBkZXNjcmlwdGlvbjogTHlueFNlY3VyZSAyMDI1LjEwLjAtMzk4NDRiODBlMCBTUlAg
+KGFhcmNoNjQpDQo+IENyZWF0ZWQ6ICAgICAgICAgVGh1IEZlYiAxOSAxMTo0NDowNyAyMDI2
+DQo+ICBJbWFnZSAwIChrZXJuZWwtMSkNCj4gICBEZXNjcmlwdGlvbjogIEx5bnhTZWN1cmUg
+MjAyNS4xMC4wLTM5ODQ0YjgwZTAgU1JQIChhYXJjaDY0KQ0KPiAgIENyZWF0ZWQ6ICAgICAg
+VGh1IEZlYiAxOSAxMTo0NDowNyAyMDI2DQo+ICAgVHlwZTogICAgICAgICBLZXJuZWwgSW1h
+Z2UNCj4gICBDb21wcmVzc2lvbjogIHVuY29tcHJlc3NlZA0KPiAgIERhdGEgU2l6ZTogICAg
+DQo+ICAgQXJjaGl0ZWN0dXJlOiBBQXJjaDY0DQo+ICAgT1M6ICAgICAgICAgICBMaW51eA0K
+PiAgIExvYWQgQWRkcmVzczogDQo+ICAgRW50cnkgUG9pbnQ6ICANCj4gIEltYWdlIDEgKGZk
+dC0xKQ0KPiAgIERlc2NyaXB0aW9uOiAgRmxhdHRlbmVkIERldmljZSBUcmVlIGJsb2IgZm9y
+IEx5bnhTZWN1cmUgMjAyNS4xMC4wLTM5ODQ0YjgwZTAgU1JQIChhYXJjaDY0KQ0KPiAgIENy
+ZWF0ZWQ6ICAgICAgVGh1IEZlYiAxOSAxMTo0NDowNyAyMDI2DQo+ICAgVHlwZTogICAgICAg
+ICBGbGF0IERldmljZSBUcmVlDQo+ICAgQ29tcHJlc3Npb246ICB1bmNvbXByZXNzZWQNCj4g
+ICBEYXRhIFNpemU6ICAgIA0KPiAgIEFyY2hpdGVjdHVyZTogQUFyY2g2NA0KPiAgRGVmYXVs
+dCBDb25maWd1cmF0aW9uOiAnY29uZi0xJw0KPiAgQ29uZmlndXJhdGlvbiAwIChjb25mLTEp
+DQo+ICAgRGVzY3JpcHRpb246ICBMeW54U2VjdXJlIDIwMjUuMTAuMC0zOTg0NGI4MGUwIFNS
+UCAoYWFyY2g2NCkNCj4gICBLZXJuZWw6ICAgICAgIGtlcm5lbC0xDQo+ICAgRkRUOiAgICAg
+ICAgICBmZHQtMQ0KPiANCj4geHhkIC1sIDEyOA0KPiAwMDAwMDAwMDogZDAwZCBmZWVkIDFk
+ZWEgM2JkNSAwMDAwIDAwMzAgMWRlYSAzYjY0ICAuLi4uLi47Li4uLjAuLjtkDQo+IDAwMDAw
+MDEwOiAwMDAwIDAwMzAgMDAwMCAwMDExIDAwMDAgMDAxMCAwMDAwIDAwMDAgIC4uLjAuLi4u
+Li4uLi4uLi4NCj4gMDAwMDAwMjA6IDAwMDAgMDA3MSAxZGVhIDNiMzQgMDAwMCAwMDAwIDAw
+MDAgMDAwMCAgLi4ucS4uOzQuLi4uLi4uLg0KPiAwMDAwMDAzMDogMDAwMCAwMDAxIDAwMDAg
+MDAwMCAwMDAwIDAwMDMgMDAwMCAwMDJlICAuLi4uLi4uLi4uLi4uLi4uDQo+IDAwMDAwMDQw
+OiAwMDAwIDAwNjUgNGM3OSA2ZTc4IDUzNjUgNjM3NSA3MjY1IDIwMzIgIC4uLmVMeW54U2Vj
+dXJlIDINCj4gMDAwMDAwNTA6IDMwMzIgMzUyZSAzMTMwIDJlMzAgMmQzMyAzOTM4IDM0MzQg
+NjIzOCAgMDI1LjEwLjAtMzk4NDRiOA0KPiAwMDAwMDA2MDogMzA2NSAzMDIwIDUzNTIgNTAy
+MCAyODYxIDYxNzIgNjM2OCAzNjM0ICAwZTAgU1JQIChhYXJjaDY0DQo+IDAwMDAwMDcwOiAy
+OTAwIDAwMDAgMDAwMCAwMDAzIDAwMDAgMDAwNCAwMDAwIDAwNTYgICkuLi4uLi4uLi4uLi4u
+LlYNCj4gDQo+IFRoaW5nIGlzIEkgYW0gY3VycmVudGx5IHByZXR0eSBidXN5IHdpdGggb3Ro
+ZXIgc3R1ZmYsIHNvIHdvbnQgYmUgYWJsZSB0byBjb21taXQgbXlzZWxmIHRvIGl0IGF0IHRo
+ZSBtb21lbnQuDQo+IE1heWJlIHlvdSBjYW4gd29yayBvdXQgYSBwcm9wZXIgc29sdXRpb24s
+IGJhc2VkIG9uIGluZm8gSSBwcm92aWRlZC4NCj4gVG8gbXkgdW5kZXJzdGFuZGluZywgc2hv
+dWxkbuKAmXQgYWN0dWFsbHkgYmUgdGhhdCBjb21wbGV4LCBlLmcuIGp1c3QgYWRkIGNoZWNr
+IGZvciBlTHlueFNlY3VyZSBpbiB0aGUgY29kZSBsb2NhdGlvbiB3aGVyZSBteSBwYXRjaCBp
+cy4NCj4gQnV0IG1heSBiZSBJIGRvbuKAmXQgc2VlIHRoZSB3aG9sZSBwaWN0dXJlIG9mIFUt
+Qm9vdCBhbmQgbWlzc2luZyBzb21ldGhpbmcuDQo+IA0KPiBMZXQgbWUga25vdyBpZiBJIGNh
+biBiZSBvZiBoZWxwIHNvbWVob3cNCg0KSSB3YXMgc3VnZ2VzdGluZyBhZGRpbmcgYSBuZXcg
+SUhfT1MgdHlwZSBiZWNhdXNlIG90aGVyd2lzZSB3ZSdyZSBnb2luZyB0byBiZSBvcGVuaW5n
+IG91cnNlbHZlcyB1cCB0byBpbnZhbGlkIChvciBtYWxpY2lvdXMpIGltYWdlcyBiZWluZyBw
+YXNzZWQgaW4uIFRoYW5rcyENCg0KLS0NClRvbQ0K
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
----
- test/py/tests/test_gpt.py | 115 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 115 insertions(+)
+----=_Boundary_=--9EA1-AF87--8F7_650.=
+Content-ID: <DF7F3780CBD74D75@A9C3C673EA6C2A40>
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
 
-diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-index fb4c8ba67d48..823fa40a9295 100644
---- a/test/py/tests/test_gpt.py
-+++ b/test/py/tests/test_gpt.py
-@@ -6,6 +6,7 @@
- 
- import os
- import pytest
-+import struct
- import utils
- 
- """
-@@ -45,6 +46,28 @@ def parse_gpt_parts(disk_str):
- 
-     return parts
- 
-+# Layout of gpt_header from include/part_efi.h. It is __packed and
-+# little-endian, and struct.calcsize() of this is 92, its header_size.
-+GPT_HEADER_FMT = '<8sIIIIQQQQ16sQIII'
-+GPT_HEADER_FIELDS = (
-+    'signature', 'revision', 'header_size', 'header_crc32', 'reserved1',
-+    'my_lba', 'alternate_lba', 'first_usable_lba', 'last_usable_lba',
-+    'disk_guid', 'partition_entry_lba', 'num_partition_entries',
-+    'sizeof_partition_entry', 'partition_entry_array_crc32')
-+
-+def parse_gpt_header(blob):
-+    """Unpack a raw GPT header.
-+
-+    Args:
-+        blob: Bytes starting at the first byte of the header
-+
-+    Returns:
-+        A dict mapping each gpt_header field name to its value
-+    """
-+    size = struct.calcsize(GPT_HEADER_FMT)
-+    return dict(zip(GPT_HEADER_FIELDS,
-+                    struct.unpack(GPT_HEADER_FMT, blob[:size])))
-+
- class GptTestDiskImage(object):
-     """Disk Image used by the GPT tests."""
- 
-@@ -93,6 +116,36 @@ class GptTestDiskImage(object):
-         cmd = ('cp', persistent, self.path)
-         utils.run_and_log(ubman, cmd)
- 
-+class BlankDiskImage(object):
-+    """Zero-filled disk image with no partition table on it."""
-+
-+    def __init__(self, ubman, size=4 * 1024 * 1024):
-+        """Initialize a new BlankDiskImage object.
-+
-+        Args:
-+            ubman: A U-Boot console.
-+            size: Image size in bytes. Must be a multiple of the block size
-+                the image is later bound with.
-+
-+        Returns:
-+            Nothing.
-+        """
-+
-+        self.size = size
-+        self.path = os.path.join(ubman.config.result_dir,
-+                                 'test_gpt_blank_disk_image.bin')
-+        ubman.log.action('Generating ' + self.path)
-+        with open(self.path, 'wb') as fd:
-+            fd.truncate(size)
-+
-+@pytest.fixture(scope='function')
-+def blank_disk_image(ubman):
-+    """pytest fixture to provide an empty BlankDiskImage object to tests.
-+    This is function-scoped because it uses ubman, which is also
-+    function-scoped."""
-+
-+    return BlankDiskImage(ubman)
-+
- @pytest.fixture(scope='function')
- def state_disk_image(ubman):
-     """pytest fixture to provide a GptTestDiskImage object to tests.
-@@ -330,6 +383,68 @@ def test_gpt_write(state_disk_image, ubman):
-     output = ubman.run_command('gpt guid host 0')
-     assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
- 
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_gpt')
-+@pytest.mark.buildconfigspec('cmd_part')
-+def test_gpt_write_4k_sectors(blank_disk_image, ubman):
-+    """Test the GPT layout written to a device with 4096-byte sectors.
-+
-+    The partition entry array takes up fewer blocks on a device with large
-+    sectors, and the backup array has to end immediately before the backup
-+    header in the last block whatever the block size is.
-+    """
-+
-+    blksz = 4096
-+    entry_sz = 128
-+    nblocks = blank_disk_image.size // blksz
-+    entries = int(ubman.config.buildconfig.get(
-+        'config_efi_partition_entries_numbers', 128))
-+    pte_blocks = -(-entries * entry_sz // blksz)
-+
-+    first_usable = 2 + pte_blocks
-+    last_usable = nblocks - pte_blocks - 2
-+
-+    ubman.run_command(f'host bind 0 {blank_disk_image.path} {blksz}')
-+
-+    output = ubman.run_command('gpt write host 0 "name=all,size=0"')
-+    assert 'Writing GPT: success!' in output
-+    output = ubman.run_command('gpt verify host 0')
-+    assert 'Verify GPT: success!' in output
-+
-+    output = ubman.run_command('part list host 0')
-+    assert f'0x{first_usable:08x}\t0x{last_usable:08x}\t"all"' in output
-+
-+    with open(blank_disk_image.path, 'rb') as fd:
-+        data = fd.read()
-+
-+    # The primary header sits in block 1 and describes the whole layout
-+    prim = parse_gpt_header(data[blksz:])
-+    assert prim['signature'] == b'EFI PART'
-+    assert prim['my_lba'] == 1
-+    assert prim['alternate_lba'] == nblocks - 1
-+    assert prim['partition_entry_lba'] == 2
-+    assert prim['first_usable_lba'] == first_usable
-+    assert prim['last_usable_lba'] == last_usable
-+    assert prim['num_partition_entries'] == entries
-+    assert prim['sizeof_partition_entry'] == entry_sz
-+
-+    # The backup header sits in the very last block...
-+    bkp = parse_gpt_header(data[(nblocks - 1) * blksz:])
-+    assert bkp['signature'] == b'EFI PART'
-+    assert bkp['my_lba'] == nblocks - 1
-+    assert bkp['alternate_lba'] == 1
-+    assert bkp['first_usable_lba'] == first_usable
-+    assert bkp['last_usable_lba'] == last_usable
-+
-+    # ...and its entry array must end immediately before it
-+    assert bkp['partition_entry_lba'] == last_usable + 1
-+    assert bkp['partition_entry_lba'] + pte_blocks == nblocks - 1
-+
-+    # The backup array holds the same entries as the primary one
-+    pte_len = entries * entry_sz
-+    bkp_off = bkp['partition_entry_lba'] * blksz
-+    assert data[bkp_off:bkp_off + pte_len] == data[2 * blksz:2 * blksz + pte_len]
-+
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('cmd_gpt')
- @pytest.mark.buildconfigspec('cmd_part')
+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
+o1/HeMeUx0hjrWJXxl6K04gTxHXHY+Oj45vipxf6LNy5cDzBPqE44foi40V5iy4s1licvvj4
+EsUlnCVHEtGJMYktie85oZwGzvTSgKW1S6e4bO4u7hOeB28Hb5Lvyi/nTyS5JpUnPUp2Td6e
+PJninlKR8lTAFlQLnqf6p9alvk4LTduf9ik9Jr09A5eRmHFUSBGmCfsytTPzMoezzLOKs6TL
+nJftXDYlChI1ZUPZi7K7xTTZz9SAxESyXjKa45ZTk/MmNzr3SJ5ynjBvYLnZ8k3LJ/J9879e
+gVrBXdFboFuwtmB0pefK+lXQqqWrelfrry5aPb7Gb82BtYS1aWt/KLQuLC98uS5mXU+RVtGa
+orH1futbixWKRcU3NrhsqNuI2ijYOLhp7qaqTR9LeCUXS61LK0rfb+ZuvviVzVeVX33akrRl
+sMyhbM9WzFbh1uvb3LcdKFcuzy8f2x6yvXMHY0fJjpc7l+y8UGFXUbeLsEuyS1oZXNldZVC1
+tep9dUr1SI1XTXutZu2m2te7ebuv7PHY01anVVda926vYO/Ner/6zgajhop9mH05+x42Rjf2
+f836urlJo6m06cN+4X7pgYgDfc2Ozc0tmi1lrXCrpHXyYMLBy994f9Pdxmyrb6e3lx4ChySH
+Hn+b+O31w0GHe4+wjrR9Z/hdbQe1o6QT6lzeOdWV0iXtjusePhp4tLfHpafje8vv9x/TPVZz
+XOV42QnCiaITn07mn5w+lXXq6enk02O9S3rvnIk9c60vvG/wbNDZ8+d8z53p9+w/ed71/LEL
+zheOXmRd7LrkcKlzwH6g4wf7HzoGHQY7hxyHui87Xe4Znjd84or7ldNXva+euxZw7dLI/JHh
+61HXb95IuCG9ybv56Fb6ree3c27P3FlzF3235J7SvYr7mvcbfjT9sV3qID0+6j068GDBgztj
+3LEnP2X/9H686CH5YcWEzkTzI9tHxyZ9Jy8/Xvh4/EnWk5mnxT8r/1z7zOTZd794/DIwFTs1
+/lz0/NOvm1+ov9j/0u5l73TY9P1XGa9mXpe8UX9z4C3rbf+7mHcTM7nvse8rP5h+6PkY9PHu
+p4xPn34D94Tz+49wZioAAAAJcEhZcwAADsMAAA7DAcdvqGQAABktSURBVHic7Z0JfBvFvcdn
+ZiWfsZMQP0JIKRQSIIaEhHLlPQolHyBQKGBZviQ7NtBw8zjDXUxoaSlQCARIHoYkRrJiy7Ic
+oEBzlJTrcUNLIEATPilXIIQjwbHjWNqd9/+vduXVeleWY8W2ePP7fKRdzc7OzszOfOceOTjn
+REhI6Mehptb26wnhY71lrhuG2y8ox3B7QEhIKD1qCobnUUrvJIQCaMJkJEBGAEZI6EcgqLlc
+C3C5S/9NCb1+JEBGAEZIKMOlwoWQu83mIwEyAjBCQhksO7joGm7ICMAICWWobODyLXy64TNR
+NxhOyAjACAlloGzg8p0s81MIi3ZK1PkcMUEmEAxzT7nrxqH0pwCMkFCGKQlcTq6pdL2DP3zB
+4CyJOtYCWvaN26D0BoAMGUrICMAICWWQUoELqqa8/F8AmZOGGzICMEJCGSI7uHBOTjHCRddI
+gIwAjJBQBigQbL+GUmu4eMtL3ra7b7ghIwAjJDTChXAhlNxjMu4XLrqGEzICMEJCI1iDhYuu
+4YKMAIyQ0AhVuuCiKxlkmlrDirfMdfNg/WyWAIyQ0AhUuuGiyw4ylNCbtHkyt+y2py0kACMk
+NMLkb227ilGWdrjoSlKTuVlrLqUNMgIwQkIjSCpcCLvXZPy9oiizqytKBw0XXUMFGQEYIaER
+oiRwORXg8ma6n4eQaWoKzaJZ7Lk9BRkBGCGhEaBAsP1KaBaZ4YL6iDF2YaC1/UKjITSXugkl
+nysyX2U1yS5Veb3uj/YkZARghISGWQgXgMV9NpeP0z4JojR2lCR6Z1Nr+8pol1xXW+v+anee
+v3Ej2TRpCg2Dm5eZHjJoyAjACAkNo2zggh267ZDhz0/FDWDNbGee9JLP5zu2pqbm24E8vynY
+fsTkYqkRTo+wdnxwkBGAERIaJtnARe3QpZQdA+cpAUbTQVLOqDvgeFHKz28Nz6WUPgCnOUkt
+AmSglsS9ZSW/HYB/VAnACAkNg5LARe3QhZrFMcYLnJD3o10/HI/njDGJ5ORPk4gKh8MN1moW
+LAhddeWV7p3Jnj1//nzHpCnT7gO4XGZxuZsTvogSWgnnE3RDqCXdApAhA4WMAIyQ0BBLg8tA
+R4vk2trabYbfawOBkIc4pXcNZnlFE+hhcLQdcWpoaMibXDy1BU7PtLj8JonItV6Pe31jc/gR
+p0Rx06pBQUYARkhoCGWACzUY79ZQdCTSucHpLEww44yOsX12IFCYP6boGTj9L4vLCzesl6+t
+r3f34I/aSteHAJlZg4WMAIyQ0BApnXBBOXMKTzebMU63WtldsiS0V05B7ko4Pcp0KcI5ucRb
+XvKo+Z50QEYARkhoCNQUDF9BKd1tuMBNowMt7W7tp8QZn0FZnz6UbRs/ePd9QkoSDP1+f35O
+QT7WXMxw2UEUpdRbUbrK7rkGyKyFn/sY/JMSZARghIT2sDS4YIfuYGou+xNGWvUfNMGpmDjh
+S+vr66NGs/nzQ1mTivPb4PRYk/Xvo1H5tDlV7tf7e7AGmZOsIBMIhhVPuave7l4BGCGhPSgb
+uGzbA9P/N3RtU+abDSdNkRbgPBmT8VZcOAlw+WeqjttBhlB6qzaEfZvVfQIwQkJ7SEngcko6
+4cIJeZf0kNPmznVvT3x++28oJRebrG+TZT67ptKVMlx0JanJ1GvNpdvM9wjACAntAQWC7Zen
+GS6fEIVcq54xUgbf5foFeMD4zq5vEuDSuDw03emQHjS5sQtodPZg1i4NFDICMEJCaRbCBXLc
+/SSNNReopWz3VpSE8NznC70u5UjnwGmWdnl8/ugirKn8GX8sWhQaNbpIaobTbJMrF3rKXS/s
+zvONQsj4g8FZLPbnbkkh41CHzqwCxHmUUv5x5/bv1sydOzdivv5Yc/P4HJblBUrPgNDnwB2b
+4J4V3orS/zXaa2wM7ePMlSrjBtGdSzwezw942tQaLqWc7ofniiK/W13pRg9DBPrGSdmjaiy8
+JSuUf7Zzm7LWXB1Ue9gp+UmyiOER0uL1lnxpNvc1h6dJErkComgyhOUbQvkTG9av89XX1ytW
+7jDGqL+59SxC2engKkQw7YCwvxPdqQSsFpyhfV+gbTaROA4roh93QrjfUXo6fdXV1V8b7fpb
+wnWMxuYyQKJ62Vte8oZqHgwezojzZM28B8wf1sJdAuHePxY58ps1le6X1LjF6jEho/C8c7u8
+FOPL7w/9jGVJZ+txWV1Z+iAket4bh22nQpiK1WdQvsVb5lpuDksgEComDulUywimvFPh0Veq
+y8vfSwhTsM3LCPsPy3t0z5DIM7h9QDI7mSA7uHBO0tbnUlPj/hTery9hrRIl8xoaGhZBXu0q
+HCctBJNDEu/iD3nKXI3peD4K3vEHqUDGYbeKk6rLNSnJH1P0IRBzNgZKvwZgqMqVsh8hWgKO
+RSXFe+bBteatXyjn6dOVpRy6v/EZEUlaAYcftDsuha+T8JxJbDEcVMDQ7OwJdv5iqp+kHyBj
+XeapKPEZLlwK379MFikKk1+DQwJg/C1tx0oS+zvR12PEwlIyqXgqLv662uwG9sr7WtqeJPGO
+M6rHV7UzT6pvamk7EyD7om4fYelvbguCtVkJaY4SL8vOvwUytdtTUfq3eDAYxUVlB2k/cY/U
+N2LWncfpcQKudMBBBQxn/Fj8W1D1XomF4fASDkuC2xifEprnF9L1cFhFs9hZhnh9DeCysDdc
+89nk4mkNcPrT2DNopKG5efXcyspvEiLAyY6Gb5uVv5RAgsM1LpiY40OojLJ5xG4xnW6HODbD
+IaMBkwwuekGRLkVk/qcsB60j2jsmWi0GYP4pxHddom3+FpQiL4D/msBnR4LBaPhs54Svh5Lk
+Wd7TuRwKus6B+iEVyKTSRDqU5ajb96ltPl9r+CSJUJ8hYAnCNQx7T2S74LTO6nqaVAgpchn4
+5cuaMteawThEGcUaHMKlG9q454O72M6dAeG4AGoe1xhLeNTkKdLlpLdXfgdcfBUidCqcj0d/
+UcYeg/sOwfvUmk5LGw4tnmTz+DFAlODi5csnXVRV9f1u+V/hqyEHX6/9PFI1c+ZiZu59P5RN
+JwgYQn8eN+N8ZUK4Dj0c/fhTg5Ezj2ZhzdPcjk/FV5cGgm1Pe8pLnx34vZmpoYQLqq7KtSHQ
+2h6E06q4ISXXQU3R2dc23Q881WIa2Z4A6eFQMHPR7Pzb/M0hL7Qgnh+oP5JBBvf4NQFGuYL3
+8Ge4g46DzHEXGJygXThatyHF/llOT7zrFR5xRzo7P8/KH/M7qPRcoTk/p3F5aEFtlfsfA/Ww
+lSATz6OEb435R6U2ww+A7jY49gEM2F/DufKY2bybRjdYOK+3Y9kuhb+azai+UIxCE4nGnDOI
+8l8a0tDDQOnroaQvypey47WWJUuCRXDY+nhLCJtEcbhAM+qaru3fLs4tGHsck6S/gFEufPYq
+kHIQ3v/Tb0RYKNK942VnXmEXnOZBgjkAa0wsK/9IkzW19sCh9NJ9zk2A4YzOMc+soIxgMzUZ
+YHbxHhkX20nUIRXDW2nSwoR3Y5pRAcNlcgNnSnwKO5Swv4DDJQZ3/tm1TUnwj1AKish/JE61
++0F/dXvb2LQz1zUR0uOzUBiekO6d8xIBo7AtXm/JRjjbCE2dlyDBqoCB4xd4bGxpOcDJsuKl
+oEz41dBu/gDPKypC15zlZi6wi30q1CkxnE7YBzBO5nwYaB+rjtGElaC2kmX+7JxK1/voBaDi
+1/g3C9qlmbi+Qu/T0UU5iXJKu41mjNOv+lT3iUqPx2hs6mNWtoNiWLK0C4ut+mDA/g5DRpwH
+YTkqT8peBSXVnJrK0jeNNR5ozp1luPVtb7lLX+D2XFNL+DqoPR2h+bfDKtzwnCpwf4Z6TvnP
+CDEjgJDa2tpusPMCXDpNtefMPRLc1QEjEywMKJmuNZsO1cy/fzLMX/NWxH5onYIu7Rr65ROi
+rtKlxzQ1hQ7BXc+s/AdS4BqmF3z/G+H9f6O9f4gnulm35K0s+at+7msOz+ASWWwIySbeQ043
+96llmjzlJQvhPRBTLWYMFLqrmoLte6QW4/G410FzFJrr9Oz+bceFeQ/7CXH3ulyDeS5UuBug
+YnGkudaeTFB7mWKuvaDAgfmQ3ucnAoaR68DD1eDhUZBQ9AVRkHf4A+pl5pxktB7pUOKR1tLi
+lqHd9RacqgkMcsRkay/R0y3yScqSFRKUJKIDhikOB1brEzoVMbNB5j7NaASlN06VPsNo1tDQ
+4MwfUzQLThEkWCvTazMLn2iTr/OUkz7iCl8AGRjBkUdiEypnQXBmYZigBNjobw1fXV3meipm
+mRzYG1b+ltEdb4UrlabH4b0Qto80eD+rqRZeKkkAFz5Ds499O9ghewjPzpuphRHtr8H3pd8/
+ei8JATtKuwYwoB9RfRuALAnSA7GbDp4F6eUpiFx6tls6kOjvnpAvojt/CJktL1senpzloFir
+Ga0ZbZV55LQab3mfjvdMVDLIQNoY0AiSrPDnHRKPz2GBTGi5kVQ0qvzB4ZCsAIMgyU8w4fzu
+yM6OW7FQWrAglLv3vuxqyKe/77VAxy9bFkTwfJGKH5PCJd7JmyhInNRUveZPb1y/DhKLi0gK
+BJP1JnSnc2dCqqeYjfV45SRlCg5E0PRhxu4FFmWWIz2pKH90ES5bLzGbg9e7IMO8CpkHI3u1
+p8xVp1+DRPIa1OQOczDnVRBSd8I+poRMArCt8DWHTlRHc6gxDuggsJpcNKqshqpy7JxwAIm6
+ZJ9AQbQcSiUEDDCZ1sbDpxBT84jEm0dUoStkRd4kOSRtBzNeDaXarTalGjyUnmliHwdcX2Pa
+WoAEAu0/cToJrnkZrxl1RqPymXOqMn/kyCg7yEAcrh4IZLQa+/v92YvQ6CcOImGts8BgHIWM
+stBQ08c0/Rmkyev196gNwtwBfp0OvizCPWC6tn3bbjVibKVU4IJyJF7kzwMjNsEDx9FYac8w
+AU06dCpuOLxI7uEbJMPeVzQnH9c3YM1A3cRmcvG0+GIqQI1Vfwc+ZCYE/3P13Ekwg/9nKgGK
+ezjW9NIV3b6dfNrHEidPQyZKqCHIXE5YZQov+yh46bpbX3GZnEslgitKJ+qjMpg+FK7Eq/e4
+l0ZOwdgjGeQrRVZad3xPbi4cJx0MbZxyuAc7i3HeAWMSw+YGDhdj80Ef0o33Y6ECre04YnO8
+9vNJT1nJ9aSv7iIRoo70cAevopTeZRUn1dXl70F4sBYwAfz8K4Ixi76P0pVQJ/sOTveCT6ke
+O0ymccAsa2nZL4tlzYo7RvlU5pAOIFrzCvt1/M1t2GdiNX9ChiLHB803aOXRoyDNHKZGGiOP
+LlsWeq6uzq3GuTrtIGfUSnRLuy8ClCtLZR1MJipdkOlPOKI5uTgbBxGMcMFMfjs89SMj9yHu
+c5cuXYrpM6Hr4Luvv6i+7LLLdg3kuanCBZUAGCi9FnkqSjDT4zyKpVDm1qnmjGJP9SIcqoZS
+/XVsm6M5lNb3QZv6S7lb+Xxy8dTbwWii/iwakdusPBfhPV/VeipUwEAmSylgDkbO8beEj2OM
+zAAqx3dXhwD9/eKL3Tv63EBJHiT5hMAzyvbxBYMd+lwLyllR/CInr2M/QSDYdikEdoXhthc/
+/uC9oJ43WUFBgSRJ8c7cwiJeAxHqh4Tzjr8lNBtcnR57PFVLAUWWVzBJ0jszj4Am5E27OuTF
+2fnS8ZSpcavGP+d8sVW41clVnhI1ruB92I4yYanU1BrGZtIcosEF9C3O+QHzdWB+Iultb7/v
+0dxEOanTS2Kd5lrc0Rv6VLWo2tlrBRicj3Munmj9OAg5bGqNyspnv4bjkgcffDB7r/ETn4bz
+YkPAVimcjsc5P7oRo/RDyJiv2oUx04SQaQqGmWk2L0IGm0uDnhOjzq1qbsOBgV8YzXGAY+P6
+d++YNGXadFPNssiRV/CcP9j2EI3w12pqyj/GdLMn4YJKNkyNL7tOO+/te+F0Hnj8b9q9B0sS
+fVvKTxyxhlJtidfjXjcQjycVtBNZ3wbGLq4odn/YfRLEf5+hYc6dc4k216KL7Hozn2Rj5GZD
+eM4C2L2sTzIzaPqBh0zFvgh117DzKyu3gD3MaHrn9xLIwJdAghkLP/UOVC7LstoHU13pXg0l
+2V/jHbBQJc0pkO4wPeMLGu1e2n8k9KvV8Jlj+B2Lf07XwYNP1A1jfSy9ggxguIdvBpMu7QfW
+VfWJi+7GxsbLse1u93AEPcQNVumPjT0nNpensHCfImJeyUvJGZDzzkh0gT9EYmnuRyNvuet+
+gAwxQWZsOiAD92M6qks05Zu75Z5qHJyAFsU/oEWBgxZT9KuQXmeCX2ZiTyPc3wFp8w1oaayK
+dsmNqfwjwUDhgrIFDDQOPjUUbEXYKYTtNiDzC4GW9ipotz9KezvrDM/ij0d3dljt9ZlOrQe4
+XDSYF4QjShDBNxg2ADI21bCEx8xVwCTyhN/vP1afcduj9FQ7WdZf4IZpBCsA8NIM90UgAm7S
+Z9OiOrfLlflj2HK1c7uvNskyP6fGNAq2O4p2KWuceRLXwoKQfy925OuooftHIb39L1ArOhou
+6QmQ71IiR59bUaGO/mjNmi0k1uE1RsodhTWS+HYBNsLRJx0m+w82TD8G7QnIBILhenDQXLh2
+R6NKyflVlfjOCELG3xy6GGrQWPBYzI2BZpU2QAHp5lbICzdD3l5g90w7uEACux3CeJvdfQAY
+Jd5THSXReGAjO3e84swbFb82btxOHDVR54hAMyoECXAtyx5VAQkUh1FzoGTcBKXlCnhY4t9b
+RnZuItm5cXeUrq54b7hC+H2M8GDMo2y9bt6zg23OKVASVoEqClWgXfMDZMgP//2v9981DyFz
+hdxHmdJiF1DVDpFfNv7GCG1qaXsLmoDYBMD+i63gpye3bdn87Ni9970IXqJTTROOHKzFqLOM
+6yoqPoPS4ecHFU89HZqIs8DRCTh0Da6vp1HaBk2aT4zP0IZffwUv+0RIVGdAibGvNhP31UhX
+R4u5VgDx+FtK+GgtTl7vNY+8TImkxQntMYcNSyAAfy1hijZywF5Rv2X6DJjF43L7li/jTbyo
+LEecDqpeUzjp0OGCwr+/gNpZje4XytWhTcJ7lFdpVuwezlnC3iNQ5b4XmrFrVfsKU6cEMNa9
+DVpn5hW9fQTv9b3+7GSq0gkZgMsfjZ23muD18fPMfVo4cc7XGv61RCjWkCcQe+XhDG9wu9BT
+7rrdfLGxOXyoU7Ksufzem2QvGJTDU1Zq2f7XRgEsr6G0/195OJnjKK3kt3QnPpxr0nnnub9L
+9mx18MYkb0XJk/35xUratP4XLS7db3ePtqnPU9onJWmzJPudKWm1/ke9Pzbf6INk9yYsndDN
+Yv0t1u84NhHSdjKklV+0OTGW82JwhA0OryWYxaagJ3mX/z+EkIFaAjVtmYmQWQk1yX7/1F77
+J4CHAFIXmK9xhV/hrbBONzVlrpWLFoUOHl1EcfrJGdoEyPFWdgFc9VBTadXSmqoYXEx7wBAN
+LmLLTCGhkSOsMWujS0bI7AWtgNXJIIOTSSdPmRbAvivzNWgC39jfnCptIGSx9lEXIDtypGPg
+uReY3GSUOnA6g1pDGixcUAIwQkJDqIFCRl297szFSYtTTE7hTLOroWZk22+yePnysQVS9rlQ
+66l8IiTP1CdXah26T0Lt6Sl/c9ua2EJcXVQd6EgHXFACMEJCQywDZIyr0hMgE1so23ohcUq4
+0Djf5AT+E8BvwN7jds8AdxYUOnKwOaVOTzjbJXngkNCExmHqQGv436ZZ4nK64IISgBESGgYl
+g4w/2Pbf/pY2hMMJFrd+r8hyBU6BSOY+pXwMfPeuNWJkEcAkJ9LV4dMHFnyt4dkSoQkLYnBd
+XLrgghKAERIaJtlBhlHmt7KPe+9GotxdV+W2niVvUEQmdzolgiut9V3toBZEH3HmFT4QaG3H
+tUYFAJe+q6ypuv1DIhc4vwOaYgOGC+njkJCQ0JDKBjJm4SrAhVs3yzf297/TunBbS6ixXAIO
+45IUZriEEygPsrkN1QcunnLXLak8s3/HhISEhlz9QOY9OSpfUFPlfmXA7pa5lgSCbd8SynBJ
+gfXQdDINEi4oARghoREghIy/tY0ywu41XdqXSdKA1gslulv6RENDw+q80UUeHJKmsTVhOHmy
+C5pcH0O76xNKCW7JkbhBeBrgghKAERIaIaouK70PIENMkOl3nkx/wo3A4fCo9onLFwweLFHH
+WtwFO+GGNMEFJQAjJDSCtKcgY5YBLvsmXEgjXFACMEJCI0wImUCwHf9A4x6DcdogM1RwQQnA
+CAmNQHnKS/6sdfymFTJ2cOGE/8GbZrigBGCEhEaokkHG1xw+eaB/AZuk5nInwOXmdPjZLAEY
+IaERLDvISBJdMxDIJIMLNIvsNm4btARghIRGuAYLmeGCC0oARkgoA4SQaWptx70J7zYY9wuZ
+4YQLSgBGSChD5C0ruQf/8zlVyAw3XFACMEJCGaRUITMS4IISgBESyjD1BxnCop1SbIPuYYUL
+SgBGSCgDlQQyqwlx4n4vE432OeF/8g4xXFACMEJCGSobyIwz21PhUuYy/xPBkEgARkgog2UD
+mbiGEy4oARghoQyXHWSGGy4oARghoR+BVMgEwxR0F/4eCXBBCcAICf1I5C133Q01GQZ4GTsS
+4IL6P6va7OV2EOpcAAAAAElFTkSuQmCC
 
--- 
-2.54.0
-
+----=_Boundary_=--9EA1-AF87--8F7_650.=--
