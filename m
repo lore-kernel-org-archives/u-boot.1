@@ -1,100 +1,100 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A672C55167
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 16:35:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B4F7C54F54
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 16:35:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 262F44078E;
+	by smtp1.osuosl.org (Postfix) with ESMTP id F378580E66;
 	Fri, 31 Jul 2026 16:35:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4-766nkf7jWo; Fri, 31 Jul 2026 16:35:46 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OT46vQf8vSIf; Fri, 31 Jul 2026 16:35:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 23FC040685
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3CC8580E62
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785515746;
-	bh=joNbBvvbVJVinjWDRPLYVMUzSg+8Ew57MrqB4oL/FQc=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=UaDWvJU10YhoNPMBSupaUt9pXyhMOQ6BuldZo2Yd9DnFHaxiq9cHwlJMIbfOvhynI
-	 7QUMx/wLlNYWH2Fv7EEDxt/QDCQiMVEgGZk5fEPWgfu2Bi8izgLMGeNNttLGQy4C5P
-	 4MzLqomkl3Ba01nB/qPLyv4/k4ZaCstVMiDzIqqlQuf8tRBy/MOmDf6UjrtKsggPI9
-	 G6+gXwr3I9lTB05Fj+AQyjxWWct+zKl0FWyRg1QArmb4X3U94zSyly+PTfOwSMa8iB
-	 otqxKCCmVx38QxhUJ4qKMD0nApl3oDLoIMD2dfVN0HcmhQE6B/XSyrgPdEkoy2lOgp
-	 2br9M1RftSqvw==
+	d=lists.u-boot-project.org ; s=default; t=1785515747;
+	bh=DXcnbiolijZ45LBVCRN5xTlz95IIDPca0cujNZ30nnI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=sd7sz7qMb8jdrV9RTLt+gbGyHXnXImxV5vgy2hYdGFSwb3XOReR5p31GA01PhtnkN
+	 /eTAz77q8Lu+KQ7GpzKnqybPTTEvWmj+bdIUjfSVJbgh1TnPrN75Zjds60MLIhmtgu
+	 PGa5gEdM90pdKgjc4o6lOEbQtXwc5xNwdx+4QDswkcc92EDl9BXUvbM682iq3BGWw+
+	 TJMSS2pfdQFVHkN5mSPg1UtzBxpIRrtkORHt6h/+ExFzH1AxSwbA14w+nlgAIOm3gX
+	 BDDsKlDXaLi8D4Ys97gM3AV3LEq2vDAxxteWXajdEzZkQeTuJXFURzTkxcNqYO+aXv
+	 PT3w0Ml5AkWcg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 23FC040685;
-	Fri, 31 Jul 2026 16:35:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3CC8580E62;
+	Fri, 31 Jul 2026 16:35:47 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 70E8B36E
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 16:33:51 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 5213069
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 16:33:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 62BD44008F
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 16:33:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 500F84008F
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 16:33:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Kyc4PJ-IanBr for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 16:33:50 +0000 (UTC)
+ id 7ipqs-4oKDXR for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 16:33:52 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::936; helo=mail-ua1-x936.google.com;
+ client-ip=2607:f8b0:4864:20::e2b; helo=mail-vs1-xe2b.google.com;
  envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 16E6C40025
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 16E6C40025
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [IPv6:2607:f8b0:4864:20::936])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 16E6C40025
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 16:33:49 +0000 (UTC)
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-9770fffa5a6so317523241.3
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 09:33:49 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7318C40025
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7318C40025
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7318C40025
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 16:33:52 +0000 (UTC)
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-738cdd667ceso293615137.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 09:33:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785515628; x=1786120428;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=joNbBvvbVJVinjWDRPLYVMUzSg+8Ew57MrqB4oL/FQc=;
- b=FgTFmDAQadLWjVnF2VicOPPJngHlKM2Tu+MT6s1O1SzDZu9PYvIp5bQJ12HRwWuDUp
- ddmViAagbMUUGJzzWQV2aZokbxCa4qfou4IkCKXdKtNbAqGgmAv0iS38fTlHXWrP7hR9
- deE4bmgCoY9TXZDeVhvbtUKKWJEx+qll7DhuPem4D0Lk984tvcFtBU2qk8zJn7/jiwhY
- 8Ob01lTO/Ocw2cxzxpfXyme4BURaRR4zKHsdhqOmM1Dv6G+O9S6iW1wYKKWdA/TffNXr
- 1o0aQ1f4mRCZf4EBLdPZHEQ6AqG+dCdXDERG/NuP4geFAy1ZkKbgnm4KMZ2//0cAM16t
- +hSg==
+ d=1e100.net; s=20251104; t=1785515631; x=1786120431;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=DXcnbiolijZ45LBVCRN5xTlz95IIDPca0cujNZ30nnI=;
+ b=dWAGceXCZdoiYWC6ZPrgbOtoGnF38OXepMbP975Z+/sHt5TfiMdYDEquTwcBjdizKs
+ H89mdhQ4Fk58fSjOKv+txo9i0wX0wfeplQF9i3q+S57QsYPUDnyLxx4mJDNhbLFmhjgC
+ qJUmZjIf/vnpS6yHdCFWgGreiAxEfsmTj7YH8JSQucc4u5gXpD9JzNVvQBVt2skiPNRx
+ JS6K/Pl9iR1o30pozaSEG7u4xQ2SdUuyvPyVAWuE4IZpd1LHNCSDMIZJeNJkJxwX6VpB
+ cS0WsOaCbpicA2lejCqu4hXOdVYVwuBo0URhqKO1uYcCQOBjY4vKyVa66fU0nqbWSs1W
+ ODTQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpSBXZRSgSN8Emy0ZV/K0CsCCZ0bxOoLKXuoO6iHKbNWbP7MTtUhP3y8D1X3e2R0YZK1u16weE=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxIkwx9OQCS9QmeGq6GLys6zgu0rvbafamqfxSW7GBsKEOeHiyW
- YTDfdg91UQ5Sd8jhiJwMPVc+S1JUd5Xj5AH8VwLoYJW04t3uC0q2thzCkK6+JNKbIDg=
-X-Gm-Gg: AR+sD10B+E9DxHccYDTIulInoOySI3wN1oi/zqQ5iST4EDwNH6206tT94HqiusEiSu5
- S/1MViUf2S6lXQY2uSRpxrF5t20MHhrogUW7sf88b8AMlufpyRia2Vo+us3saYLtARNm+iLskob
- U4RpjspOXZKF+bOuhqlxMHQ1/eKMa9V0HxBEicajV8w3Q0afplZyv0JXAoCdZMFthWVXwvnEFM0
- blxXlTv1gs6IJ3Ccw36olh9L0u/nYiUlrJjGMtuhmx/eZ/hpzB1WBo/O1GGrE+oirsA8EI23tco
- pO34e/b2qeoksnCAW9+3e54/qjNKMELpWA4fzl5mKYC5mGKhMX8jjUKCAkgX29RwVOrZviRSdPR
- 9Qnh02Buyc/r0uvJVqk0Iqc3M60d3kKyDwEY7XPRRs91zVuvn4MqfQuMd37fKMYsptJtuUCKU0m
- AaZuV9EGwUWxrHP+BPRaD72VLMzNISPVeMjaOTqQS1OLiAf74r+R9TSSMm1tRBNT8DSM2fpKPZr
- Ixy4ikXiC76yArwHI1lYEPj9OqcbYhIrujoAcbx6sSJmn/F5iHEYOwSbd57
-X-Received: by 2002:a05:6102:b0f:b0:739:5f55:3c3c with SMTP id
- ada2fe7eead31-75b238606fdmr703063137.13.1785515628537; 
- Fri, 31 Jul 2026 09:33:48 -0700 (PDT)
+ AHgh+RpNtsDhhIecBxyRVPupxcP1SdRgBPgr5q6mKempd9yhemik6FdkZiGmAbBL3Ft+S6pQiA51lmc=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxixbsHaJymlWzAoC1PTApm/SBFnswR03We9bqNuu1enNRZTDme
+ ZmifZL895hBRsct0udSOci/J+IqGjChWlBav0aSi06I6pgvZsxT6Z11l/wCQbt4Ws9Y=
+X-Gm-Gg: AR+sD10Ef4ag1FY5sDjBnVHZ4M601tsJuCYpKMAsdWhrq8vHJfZrkLCZRNVUk8iZzyN
+ ElBPa8Bx8VrdgOj46SYyuHFUTu9pUMFwM6fNf5scwTb8XmAq5ByiQHlVKawmZDGR97GBlQ5vq2H
+ HBo+DEkDSH9b1YaqJfH4ltYnwo1mluJOZCZfKmMtC0vJWhH39QLu1H4SLQVoiQl1Gzmeb6cH0C6
+ 5MDd4Pj3I7mg//iUjLb0bsO3e4UZdWguAJxHJihuf71vAIxFB6aMl6R8zlB1emJmNw6lME0ZCq3
+ bUjLPOepGNGZKP7pMWhKEyR64wxsL3CZZ5V/xjZ99kM6mwJG5sDNL/cmNm8zfEyl5oSXvH3nJou
+ +s6f+5TGnDWSAXo/CgfGNxFyTLNgnIpkqUn18V5GpO3wkYxoY13yd4v/jNnMI3K8gZJ0N9kIyH7
+ dPXEurKWh2d+tj+v+DQNSDsVVeuFG3oF9vO8oocO1JGTecgK4AtK4VFQ7Z1qz6pUR9fzSTR9jFB
+ JtWZemYB6eSfXyGT7CPFizUQ1rPNvioioqXW+CRsDfqGNb0kNSLSkaxvsPJ
+X-Received: by 2002:a05:6102:15a3:b0:738:be73:55e0 with SMTP id
+ ada2fe7eead31-75b237677ffmr703783137.12.1785515631056; 
+ Fri, 31 Jul 2026 09:33:51 -0700 (PDT)
 Received: from maple.netwinder.org ([198.58.133.142])
  by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-977e5eb9f77sm1084778241.0.2026.07.31.09.33.46
+ a1e0cc1a2514c-977e5eb9f77sm1084778241.0.2026.07.31.09.33.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 09:33:48 -0700 (PDT)
+ Fri, 31 Jul 2026 09:33:50 -0700 (PDT)
 From: Ralph Siemsen <ralph.siemsen@linaro.org>
-Subject: [PATCH 00/17] Renesas RZ/N1 additional drivers
-Date: Fri, 31 Jul 2026 12:33:29 -0400
-Message-Id: <20260731-rzn1-2026-07-v1-0-af2ce80db9d8@linaro.org>
+Date: Fri, 31 Jul 2026 12:33:30 -0400
+Subject: [PATCH 01/17] pinctrl: renesas: r906g032: handle pin subgroups
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAFnObGoC/yXMyw5AMBBA0V+RWZuk6tHwK2LhMWUsSlpENP5ds
- TyLez04skwOqsiDpYMdLyYgiSPop9aMhDwEgxSyEEqmaC+T4CsUCmWuinJQusy0hpCsljSf365
- ufru9m6nf3gfc9wM228l/cAAAAA==
-X-Change-ID: 20260723-rzn1-2026-07-25769d7f94ff
+Message-Id: <20260731-rzn1-2026-07-v1-1-af2ce80db9d8@linaro.org>
+References: <20260731-rzn1-2026-07-v1-0-af2ce80db9d8@linaro.org>
+In-Reply-To: <20260731-rzn1-2026-07-v1-0-af2ce80db9d8@linaro.org>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  u-boot@lists.u-boot-project.org
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>, 
@@ -132,36 +132,35 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
  Bastien Curutchet <bastien.curutchet@bootlin.com>, 
  Ralph Siemsen <ralph.siemsen@linaro.org>
 X-Mailer: b4 0.16-dev-401aa
-X-Developer-Signature: v=1; a=openssh-sha256; t=1785515625; l=3010;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1785515625; l=1720;
  i=ralph.siemsen@linaro.org; h=from:subject:message-id;
- bh=MUR/D3vi1NvDqoz2tV/adESi/1VbWZ1uwmZvo1PWumw=;
+ bh=zV+4C5G4X6AMh2BUvV3rAxoAcQGnNf37bzLtBsHMyfY=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4pAiw
  vPQ/tR3mihuAFYAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QFGfk9dcu8V7SrcKgTVm7+mAuT6teX6+2V3Z2YXroVv2VH+4Jib4LW1/OHiA8t/ymns9Ggi96es
- +C9+0MmT8Pg0=
+ QFx0lcacIlZuRIfh7RZQDXZbTsH9rw57QZl0szYZvawFn1W1N3RRGkh9d8lJ9A06tWkBGAXmspG
+ CwSWQhgHpSQ4=
 X-Developer-Key: i=ralph.siemsen@linaro.org; a=openssh;
  fpr=SHA256:12SQdavZEBUxPbBBtqQJgZ9F8vSvwTB6kFlSNgb4IcM
 X-Mailman-Approved-At: Fri, 31 Jul 2026 16:35:45 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785515628; x=1786120428;
+ d=linaro.org; s=google; t=1785515631; x=1786120431;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=joNbBvvbVJVinjWDRPLYVMUzSg+8Ew57MrqB4oL/FQc=;
- b=zGzIa6tL+zX78+J/515K3x0erPe2SK0zrHbNk/h5o2LIt3bDc5ZVhbSt5Zobr4IWai
- pNpyb6T+IEl9oxN0KUJxGviGIrGaYofkIkGeiNHv2McQ/mljnShd8/xmIGpzuenXLrl4
- x4VASHbcwfjbpZTPH6I021SqsljsfHxyY1Zk5dgaQwmd84HEEYhrdaD79LXnst+hz6Fe
- ZRrU36kkPopKxDxRerqr/zFrSS2rGPSD5Zjz1b3dPw3nEhFKI65rTPgmUfA7yrZs+UVC
- 7uu6EUfSNAYcnP2bXpgRH7ukqkofcXD35YUPOhdK3dX5tKaM7ICIX3kB0CrOXL1cCcii
- +Ghw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=DXcnbiolijZ45LBVCRN5xTlz95IIDPca0cujNZ30nnI=;
+ b=D29yVYhQWwdFITeA24yLXbtl++B2yiPxbv0UZAjtqsLkD9vqbTjuhjNyj6vU85ETc2
+ hbmGep/343KxQCrdOwJ8eTfga5IxpD7oJgn31OK9if09AX95N3OJUCIxI2xB4tFKlZ3X
+ TQb9HviR5MRQxT2gz5CWmmtevsMoAVzmmRrp5dN9zt/5LYiBwUBszqGzFd19D8el5WxJ
+ mYOb5tB2Ik6oS4ZNQTsY277jAap1yKr+fx6T9/tU2V/Wky6UPP7YIoWHoOdNRjc6qMdW
+ gZvbcqyvYArxwbuhSdWxUxujnYLzswuxRkVAL6ozagdmwpZtvMRRxxK8iwetOpyUIdjz
+ iMgA==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=zGzIa6tL
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=D29yVYhQ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -176,70 +175,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Enable many more of the peripherals found on Renesas RZ/N1 SoC,
-including GPIO, MMC, QSPI, NAND, Ethernet GMAC/switch/converters.
+Add simple recursion support to the .set_state method. This makes it
+possible to use subbroups in the device tree, which in turn allows
+setting multiple pins with different bias/drive-strength properies.
 
-This builds on top of the basic support that was added in May 2023:
-https://lists.u-boot-project.org/pipermail/u-boot/2023-May/518098.html
-
-It has been tested on the Schneider RZ/N1 board, including support
-for USB (DFU/fastboot/UMS) using the driver from Romain Gantois:
-https://lists.u-boot-project.org/pipermail/u-boot/2026-July/623625.html
-
-This patch series is based on v2026.10-rc1.
-
+Fixes: e4aea57fa773 ("pinctrl: renesas: add R906G032 driver")
 Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
 ---
-Ralph Siemsen (17):
-      pinctrl: renesas: r906g032: handle pin subgroups
-      spi: cadence_qspi: enable clock
-      spi: cadence_qspi: Use APB write protection
-      gpio: dwapb_gpio: Enable all clocks
-      net: add r9a06g032 A5PSW switch driver
-      net: add r9a06g032 MIIC driver
-      net: designware: add r9a06g032 compatible
-      mmc: zynq_sdhci: support Renesas RZ/N1
-      mtd: nand: add Cadence/Evatronix NAND flash driver
-      board: schneider: rzn1-snarc: set serial number
-      board: schneider: rzn1-snarc: add rzn1.env
-      board: schneider: rzn1-snarc: update MAINTAINERS
-      ARM: renesas: RZ/N1 QSPI controller features
-      ARM: dts: r9a06g032: sync with upstream
-      ARM: dts: r9a06g032: add QSPI controller
-      ARM: dts: r9a06g032-rzn1-snarc: enable new drivers
-      configs: rzn1_snarc_defconfig: enable new drivers
+ drivers/pinctrl/renesas/pinctrl-rzn1.c | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
 
- arch/arm/dts/r9a06g032-rzn1-snarc.dts  |  390 ++++++++
- arch/arm/dts/r9a06g032.dtsi            |  283 +++++-
- arch/arm/mach-renesas/Kconfig          |    4 +
- board/schneider/rzn1-snarc/MAINTAINERS |    3 +
- board/schneider/rzn1-snarc/rzn1.c      |   25 +
- board/schneider/rzn1-snarc/rzn1.env    |   21 +
- configs/rzn1_snarc_defconfig           |   76 ++
- drivers/gpio/dwapb_gpio.c              |   11 +-
- drivers/mmc/Kconfig                    |    2 +-
- drivers/mmc/zynq_sdhci.c               |   39 +-
- drivers/mtd/nand/raw/Kconfig           |   12 +
- drivers/mtd/nand/raw/Makefile          |    1 +
- drivers/mtd/nand/raw/evatronix_nand.c  | 1645 ++++++++++++++++++++++++++++++++
- drivers/mtd/nand/raw/evatronix_nand.h  |  407 ++++++++
- drivers/net/Kconfig                    |   12 +
- drivers/net/Makefile                   |    2 +
- drivers/net/designware.c               |    1 +
- drivers/net/rzn1_a5psw.c               |  377 ++++++++
- drivers/net/rzn1_miic.c                |  193 ++++
- drivers/pinctrl/renesas/pinctrl-rzn1.c |   15 +-
- drivers/spi/Kconfig                    |   11 +
- drivers/spi/cadence_qspi.c             |    1 +
- drivers/spi/cadence_qspi.h             |    6 +
- drivers/spi/cadence_qspi_apb.c         |   27 +
- include/configs/rzn1-snarc.h           |    5 +
- 25 files changed, 3542 insertions(+), 27 deletions(-)
----
-base-commit: 5c215cb75c3723cbf77c36cbac3e60b001721c79
-change-id: 20260723-rzn1-2026-07-25769d7f94ff
+diff --git a/drivers/pinctrl/renesas/pinctrl-rzn1.c b/drivers/pinctrl/renesas/pinctrl-rzn1.c
+index fdc43c8e714..8b13a2cea75 100644
+--- a/drivers/pinctrl/renesas/pinctrl-rzn1.c
++++ b/drivers/pinctrl/renesas/pinctrl-rzn1.c
+@@ -298,6 +298,7 @@ static int rzn1_pinconf_set(struct rzn1_pinctrl_priv *priv, unsigned int pin,
+ static int rzn1_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ {
+ 	struct rzn1_pinctrl_priv *priv = dev_get_priv(dev);
++	struct udevice *child;
+ 	int size;
+ 	int ret;
+ 	u32 val;
+@@ -317,8 +318,6 @@ static int rzn1_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ 
+ 	/* Number of pins */
+ 	ret = dev_read_size(config, "pinmux");
+-	if (ret < 0)
+-		return ret;
+ 
+ 	size = ret / sizeof(val);
+ 
+@@ -338,6 +337,18 @@ static int rzn1_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ 		rzn1_hw_set_lock(priv, LOCK_ALL, 0);
+ 	}
+ 
++	/*
++	 * Handle subnodes recursively, so that pin groups work.
++	 * Note that properties are *NOT* inherited from parent.
++	 */
++	for (device_find_first_child(config, &child);
++	     child;
++	     device_find_next_child(&child)) {
++		ret = rzn1_pinctrl_set_state(dev, child);
++		if (ret)
++			return ret;
++	}
++
+ 	return 0;
+ }
+ 
 
-Best regards,
---  
-Ralph Siemsen <ralph.siemsen@linaro.org>
+-- 
+2.55.0
 
