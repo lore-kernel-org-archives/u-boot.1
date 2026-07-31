@@ -1,93 +1,93 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB56FC54F54
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 11:23:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0497C54F54
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 12:08:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9FB5280F4D;
-	Fri, 31 Jul 2026 11:23:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C21B240FE7;
+	Fri, 31 Jul 2026 12:08:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2qXrC9e7vTCM; Fri, 31 Jul 2026 11:23:20 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MNpFtz3EU53F; Fri, 31 Jul 2026 12:08:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A848281080
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 484DB40FD8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785497000;
-	bh=UJTDomwXHALPEpHATqh4KeDlGgG/Kv9m0zBM+4RKMUI=;
+	d=lists.u-boot-project.org ; s=default; t=1785499691;
+	bh=6WcfcoV+WSuMZBXk3AlId9Cmth9prnQL0P/uOgoao0E=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=quCgFcu2emp20P0oXjHYACasF2ThvILs/9OI0eleAKc9gePnZT7lfA7rcPWhRJ2xT
-	 qlIvEFkU71+MOPdao0dmHuQ9hTsWcRWyn9KuTGdY3AWweUYvAx5Iiwjd76N8D6Prco
-	 ZNtJUYK/rKwHOFLH/V3mVyBKS6stMfpfz2Qd+XUePrnLKTz2kzpT9vrJz88OxwcT9o
-	 ef9N9VpHcjV7xU/KLSAJPHfkg6JvPbtkU8vZAfsqTMG4q/+UZvwoTvnvMoYSusJV6i
-	 gun4RaQIXg/gXI3rP8shq79Y/H4nQZ5qAa7wL3FsYAjCXYlKfKRmE/5NIwPvRbv7uJ
-	 4hm22Bp3q0CoQ==
+	b=pb7ibnHLM9s/dzShbL8uLX5ZaXqfwyjdrknOKiR+w/glin9L5hMNnqvb/NsWlC5RX
+	 lXJbL56BnUB5IsHpdl3xTslYjnxw+xbYWlWISpA9FoEkQC59LO9NTZENtOGRjEZEqh
+	 aZL1NAJRI5q7GB93R8yW++mczsbGzWF1XIGqCIg/kZwgoEYPG7oZUe51VqkTU9vghY
+	 LymdcXOIzLBjMUpL+65QuxcsprOHy6+b6CIrVclRVpPsCJ4oEubZCYQlS5PK+yZOvJ
+	 nkz9COk7GkFd4IDJQAaG8auVwGVLB8Y5lerBfp+7BDd7X+tXg+Ev+Kahjji1FB+9hz
+	 XGvJRIhZg6YHQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A848281080;
-	Fri, 31 Jul 2026 11:23:20 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B9A512CE
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 11:23:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 484DB40FD8;
+	Fri, 31 Jul 2026 12:08:11 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 40FB427C
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:08:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9F2FB81080
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 11:23:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 27EF1400DA
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:08:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cxwniu4nvjU6 for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 11:23:19 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m7x9uzJQwVCa for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 12:08:09 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org C4B0780F4D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C4B0780F4D
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org EA2CA40463
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EA2CA40463
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C4B0780F4D
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 11:23:18 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1785496992; cv=none; 
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EA2CA40463
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 12:08:08 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1785499681; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=TrplYjzSMIzjnG/h4+GzL6IsQZBVqgH+4IPIj7u2RT0vcv5UFN9DduZe2xqlqot6vHt2Ize5gt5sJtKJVMGovNBTO//DxBge/+R6kkqbXoBO08YSIY63nKBy0UVjO26WQMlYUDvd7YaG1tkaP3jF2bAYglPdnKPXT7wMP8bo9C8=
+ b=DpBCNcpjuHWbQ1DnoeIQQoCrgGzxAz6cZHEaP76V3t+WdmHHmBwZkyuW8lxRlfoQ/qAf9nJG9kf0mF59JV58NFlHGfIAtKl/btZCCGjmnm3eEqRz3ZXnPk1hsTg58ou7pWraCAZgirEknzWH3ZqFJ1+2Ervqha94L/RdUG1kqd8=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1785496992;
+ s=zohoarc; t=1785499681;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=UJTDomwXHALPEpHATqh4KeDlGgG/Kv9m0zBM+4RKMUI=; 
- b=OnGMSCnqiIhjL3KuBBeOpEHpxOGEOyHU7x3Wu4lMrQpSDAhRsxgyuFHd8g8e/Ezn9Pcw33+6XXbdsxTjxAoCScB9MSNF6XOVwfzTRcvH/PMrSEDnnyeJelObRICHTQa+Erphd7wlUOh0CzhdnqJ9FqyuiBNJf0ihiJuZXVhjhHA=
+ bh=6WcfcoV+WSuMZBXk3AlId9Cmth9prnQL0P/uOgoao0E=; 
+ b=TmhD6gvoY61YCR4Lqt4+fxbuqJXTaLuAG689TK5azW+uZkMO57piE78Y9qJFD07ohKgV+OejMm0NdBMrWj96GBp0uH3jchh1ft57yPEMfuU/vUhQFSv0OIao87A2MaB+XO6EpUN21XDaCYQH5kBlv0TDwN+oMq4L66HUGYJZJ2M=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-Received: by mx.zohomail.com with SMTPS id 1785496985649478.2735902381801;
- Fri, 31 Jul 2026 04:23:05 -0700 (PDT)
+Received: by mx.zohomail.com with SMTPS id 1785499677495658.6762007434025;
+ Fri, 31 Jul 2026 05:07:57 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
-To: Simon Glass <sjg@chromium.org>,
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org,
-	Yao Zi <me@ziyao.cc>
-Subject: [PATCH] buildman: Differentiate 32-bit and 64-bit LoongArch variants
-Date: Fri, 31 Jul 2026 11:22:29 +0000
-Message-ID: <20260731112229.2211474-1-me@ziyao.cc>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.u-boot-project.org,
+ Yao Zi <me@ziyao.cc>
+Subject: [RESEND PATCH v2 0/2] Add LoongArch support for CI image
+Date: Fri, 31 Jul 2026 12:07:48 +0000
+Message-ID: <20260731120750.2212394-1-me@ziyao.cc>
 X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1785496987; 
+ c=relaxed/relaxed; t=1785499681; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=UJTDomwXHALPEpHATqh4KeDlGgG/Kv9m0zBM+4RKMUI=;
- b=Q4ZSkGpNhnEAFDriBOWQkDeR3ZuhrqZpKLC82iiVrEROMrZi0dfWUU+z6fZ7whzU
- L0TuFCHtWhBRUzFJVeJ1wipBWMuU+j4ET0FCzObaOSDzBau/zqzhM1A4QUDzFRw+Q4N
- 7+kOrUk730O+iuDCKjDgkisi/DeV5B3A7ilDl5RU=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=6WcfcoV+WSuMZBXk3AlId9Cmth9prnQL0P/uOgoao0E=;
+ b=cNd22dmyVL/FVdBjYTGYfJo1+elqZMJwIoocG2qfbls8KiC0HQmgKyyDJ7/pDjG0
+ 5FPA1UuYCo2geV78hnvEpchNWje3RyalMgSaEnulQyHxu2Rf/XP91uEu4K3MmKWBoCB
+ qttgBzMPXNn6cmyMsme3mFo+N2f/KykhRXC7HK0s=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=Q4ZSkGpN
+ header.s=zmail header.b=cNd22dmy
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -102,41 +102,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Similar to RISC-V and ARM, 32-bit and 64-bit LoongArch couldn't be
-distinguished solely by CONFIG_SYS_ARCH, but require different
-toolchains if multilib is disabled in compiler, which is the case of
-toolchain provided by kernel.org.
+I somehow forgot to cc the list when sending v2, sorry for the noise.
 
-Let's override the parsed arch parameter for LoongArch configs based
-on CONFIG_ARCH_LA64 Kconfig symbol.
+This originates the series "New CI image and fixes" sent by Jiaxun Yang
+back to Jul. 2024, though only one PATCH remains since the Ubuntu image
+used as CI's base has been bumped to noble-20251013.
 
-Signed-off-by: Yao Zi <me@ziyao.cc>
----
- tools/buildman/boards.py | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+I also found the upstream added new dependencies to swtpm, breaking
+docker image build as we build the latest branch HEAD instead of a
+specified version, so in this series swtpm is locked to v0.10.1, the
+latest version without newly introduced dependencies.
 
-diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
-index 2fe43c3fc896..a878053df59d 100644
---- a/tools/buildman/boards.py
-+++ b/tools/buildman/boards.py
-@@ -309,6 +309,17 @@ class KconfigScanner:
-             else:
-                 params['arch'] = 'riscv64'
- 
-+        # fix-up for loongarch
-+        if params['arch'] == 'loongarch':
-+            try:
-+                value = self._conf.syms.get('ARCH_LA64').str_value
-+            except:
-+                value = ''
-+            if value == 'y':
-+                params['arch'] = 'loongarch64'
-+            else:
-+                params['arch'] = 'loongarch32'
-+
-         return params, warnings
- 
- 
+V2 of the LoongArch support series[1] passed Azure CI[2] with some
+fixes and the buildman support patch[3]. Thanks for your time and
+review.
+
+[1]: https://lore.kernel.org/u-boot/20260701111808.870705-1-me@ziyao.cc/
+[2]: https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13494
+[3]: https://lists.u-boot-project.org/pipermail/u-boot/2026-July/627018.html
+
+Changed from v1
+- Drop patches for bumping CI image to Ubuntu focal
+- Lock swtpm to an exact version
+- Link to v1:
+https://lore.kernel.org/u-boot/20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.
+com/
+
+Jiaxun Yang (1):
+  CI: Dockerfile: Add LoongArch64 support
+
+Yao Zi (1):
+  CI: Dockerfile: Lock the version of swtpm to v0.10.1
+
+ tools/docker/Dockerfile | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+
 -- 
 2.54.0
 
