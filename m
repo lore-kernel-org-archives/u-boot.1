@@ -4,138 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19364C55167
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 00:38:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A879C55162
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 02:11:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8D1F340E4C;
-	Fri, 31 Jul 2026 00:37:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9100040E84;
+	Fri, 31 Jul 2026 02:11:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YIcYFcCXw3X8; Fri, 31 Jul 2026 00:37:59 +0000 (UTC)
+ id VthSDphJVgc5; Fri, 31 Jul 2026 02:11:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DC50B40E44
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5DFD540D59
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785458279;
-	bh=5OadzG/b2E95NCslzzXdxAexgJdWgqAwa6B6gXI8WsE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=aLIcsvCkOheRLnLexa2P5aN5vnJ/7KBiAHjiHQ42MwFSKa8ta7M3/MkQ8N01wECZj
-	 q1a8RC92Uj7+tWDF5OJYe2aL+PsZVuu0eHy60BWzA+2dEGYvsJYtcLuf8L3juJbQZt
-	 mo3gDrx4BNNcD/eR8H/hciKIdtAx96IAHLjGalHu+gIetnpJOdRmjeoehRCNCyt0r5
-	 IacewSE0B97msATwVMdzhXvSIQuY7Mkax9PKOCR7iyo1QNdSOYlSnj17cDXzLg6zpn
-	 +CuqniqfCloL/NZI4pLfxjqc1d2RIOzPphoX5rHlg4OlzdYTjMe2NLS6jDJWeHrnI5
-	 clIQh6qzPlDAQ==
+	d=lists.u-boot-project.org ; s=default; t=1785463909;
+	bh=6rWdY4P62+U/sKZoT6bjB2fsP2NgzEbld+ZvJEUdJE4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=l1ED6jfvAILkRGrAq5oCM/L9sJIQEHTDgYsPz5fGj9ONVKKQa1Gz18p5fgitlbo8w
+	 cs/jF8wOXzMOsyfwvtc+KSCOgXkrWahDD7HwXWF0OZOCnEtMRjg5jNzLdSVP6GLsUU
+	 +/9NENCTz5ShIVpH0P9ItyN4AZHT3jpqPDSdy0ZONH8MXEV+pJVXUDU4hid4FxWOAu
+	 jJbaWUD1LicYewAEGG3aPAeiDslaaEtiOAeU+4mElj9ZMwok+KZf9nz615sXhj12aa
+	 0hk8dPMfTf4RD4u6S5c8pgHTQJ4IgFS+SvI0mSMFUKU23s1dqXrLC4+uSEsDVhKgLg
+	 Oo6fFbhYdFJyw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DC50B40E44;
-	Fri, 31 Jul 2026 00:37:58 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D373927C
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 00:37:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5DFD540D59;
+	Fri, 31 Jul 2026 02:11:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DDC3869
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 01:36:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C4F5C80F09
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 00:37:57 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CF6B440E42
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 01:36:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DrmJSNGeIO08 for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 00:37:57 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dbuBAOEt4oDf for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 01:36:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::132; helo=mail-lf1-x132.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 09B4D80C6A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 09B4D80C6A
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 09B4D80C6A
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 00:37:56 +0000 (UTC)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5b0231a3e86so388388e87.0
- for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 17:37:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785458275; cv=none;
- d=google.com; s=arc-20260327;
- b=ghretRDoIPpYOVK/Zxw5wajIolYZ9C4jyZqRbplNeD+NZ3S2h4dSyZUGSWHqGH4CAL
- Ned0aU3BJYGiqxHoGgLEiVQCWmmidC1kEgJVy38KCfW1gCFswKfpDbYxZ5sZZpbj3e6a
- 37Fcsa2Xc58vYYdRhLa4+xtSdDU6t6Tnk5CHsRrAhAVEY+TPdGJcyzVE8Gk7HnvLFAxI
- iSiTkEK3Mg+9m3PSYXOSKNHXPk8h9+xtMaeWrIIOnNM7NxqBaBCLBVh2oBuIPQ/3HLxd
- Bn8wgoDn3sXmcD3Z4uzo/Cn8TCEnJJpGf5Ip88XCpp+2b3ql0saAjcnYXZFU505ujmCQ
- FaCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=5OadzG/b2E95NCslzzXdxAexgJdWgqAwa6B6gXI8WsE=;
- fh=CNXu/X2zu5f27qgwGth4UJPoEVIXf/50S0Yx27PFF48=;
- b=hIjEWOd5xTguBKp6US49W40kvj+Ae6oqls1diK77HyTY6FNpi1g6sU7CP92jR2IEg7
- S+cZQb5KqYbwVK6pAhXhQpe01o9WCNNi3WrpSyo6F/Y+X2REAXPtpCTFX22Bbg6LotPG
- yws4yasgic3YnSfSKxeqs5PUTsAI09Q04z+sUn+5wgvk6rnBbV0LSa/+D2W/TNXLgAxB
- /VHS1SICnWW8nLsQbVS+T3GgwQKk6TZbL5Yjdc+IvYUndHuZKNmZA1MnYjGAl6Y7pJxX
- d6qJK4unl4vFgD/A9qI5mQKd8giYtpaxo5ptw/6344tTCoD2cn4a6fW5VhbePi0bu3zj
- FpAA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::102e; helo=mail-pj1-x102e.google.com;
+ envelope-from=bhimesh.matsa@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1E6B240E41
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E6B240E41
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1E6B240E41
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 01:36:54 +0000 (UTC)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-3811f512167so460980a91.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 30 Jul 2026 18:36:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785458275; x=1786063075;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=5OadzG/b2E95NCslzzXdxAexgJdWgqAwa6B6gXI8WsE=;
- b=PWZsBqFO+HzZpqq8geTIg5Kf+oQppMqWUQX8jUg8rbedDfjdJeXf4szwiH4SwFIEpn
- xYDdEo05tyBTHPuGRRAIW8v73AZFr7Tpa/86Ac/4KEdwkoQn0qfPpH5RzyZV8ftRUO36
- xaDZgzdoS3Vv4PoMtsrDERNsumxiIQXlGydtJXbC6CM8z9z5LoMQ57VIq/nuuaPX8vqj
- HH7Idb8zAOLX7feEyM+pYUCB5X1W2iqEiMoL4nasCcCtPJ+p+2IVbTAmy/BO6gvngdgq
- aFQ/N+lkckM3c+Ei695RsJpljgXRJD1alMwac8nHZ+wDqEOKe7jg9gm5ze5ukKr3ILTO
- n4Xg==
+ d=1e100.net; s=20251104; t=1785461814; x=1786066614;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=6rWdY4P62+U/sKZoT6bjB2fsP2NgzEbld+ZvJEUdJE4=;
+ b=hMHVsTk/e9cko6NrUjUjxM/w6r6Sc6S/QyAkoe784ajkZ+ArxH+7VJLHOpAkOxFCnW
+ 4r/aXL74sRcq1/pPLypvgymokwdGFbWkJ5UAxfTusrIO+HZSll8/oa4ioo+PcnCFLla5
+ isfCk0xk7LdJOS6sLV0d08Je1u4rvM9fO2z3Sphn/HIo/ba9/GZRVdx6aQTJUKY1TCVg
+ L7S1s3nLVE9M4XrcjRzJ14M1OyS58iYL2jUX3so5jY5voE5C1okhAVudAsbeXNRQl70b
+ Br+Nwi/1APSgRv0P+vLQZSY2uqn8mtz/dpbd03mLYL489/QVL7+/amHh4B1PqXrITpw7
+ OpjA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr8W43lVKHtlqregQOOJlzMD3UO99d8V48AaWcuTKsiMS5ULGBx4ZtxG3/ptkICQctarSFJdso=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwGrG4kULvVlaGv/9wLf94wgzVst6biu90tGMyYPqg/ivL60aIk
- qcY9H3whmPASxOxNLunVLGQdWiiXGbZG77RdlR6q6HUpbQYU6kkiY/gwgCE/gpiFqdoiUZTyTBW
- 2C9rb/XxUqF64lMMdFu57xmNoi+eJ97sS65Cx
-X-Gm-Gg: AR+sD10bQ788H4fXPlnLH3fkcBT8MryBv2UyrTDqaGqtLpzwESE9Q2wJB0tlRJfQ7bI
- bA68V6Aj26PbT7Viq08Lgnz7Et1W2w9a285TNkjMzVmZ1W/wcoyL/kLHWesGzA6+gJaWPBR769x
- WBCrnqda2hxIiS13xKnoINEuRrtVw3tfmPdeDoazpB4/P3V1IBJfacXKNxx6tRJB+EGpDtvObLo
- y2B/XyjfjuPQsIoH2VE5C0tEcrfGI0vkVp0owwGMDIN3w+Ir4BmBxzuhfB4yv4jbee5n61fgToU
- 4BkZ/+hQb0Bo0MKmJnBPZIkVOGBq/tmE2nUNNMJf40eIpORBKqgp3KyBw6grWte+kyhCnHqVMOu
- xjgB0lFFvjbCMk+xf2zwZoXZs0c2m0R3xazNGwTSwgC0=
-X-Received: by 2002:a05:6512:1044:b0:5b1:543f:f5ca with SMTP id
- 2adb3069b0e04-5b2e2002311mr12670e87.46.1785458274504; Thu, 30 Jul 2026
- 17:37:54 -0700 (PDT)
+ AHgh+Ro7rkR73UDaEA4fJpjtxvJbpczdlXx4VAojX+jjwHBeQvHwx4AyYDvrBYpS88zbhwII8IhpLJ8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxDbn73FeScHI+NWBRKchlQmmhK4Ut9rPwzbIGZdjRmNPS32Ka2
+ 416PgQZeHtPGSmR2h1fHXe+oqspR+SoiQLL/5Jd1ltrTNm4FgsEIU9ES
+X-Gm-Gg: AR+sD101ouvcs7VH57uRdsyqySBVdvwteoEN/rIK3NwUMIDcjVmN4NyHFb/nacCmWPd
+ DYNPdEr8QtZgiUiYku0AGJ0o/3gUf431A47NRzjk+gRCI43xYj8EBBR9TJp6+MR2It4zNNso3Tr
+ SkevHJ8gZIfEwH4rT8T5BwLNlqJwPiyvM9zZLeQeYkHNVjMeqj/+TVOeXkB2b++fW9IBnoHSEIX
+ 2mVUoLshCMb/MpWnoB9fsZTVAwxWw6gZ0wbmNxts/21gqU9O8RBRNQqDBK9k1duCYBv7FgivMpr
+ +vLMFDFkje2iFn3NR1Pw8G1ddOAwKBh48XbAKpLVumLKVJ//2Wl1REp6wXPN4ojNn6NHZqTa/ZF
+ 1LCK7jnuq7wakludS2u9OPLuvaixLQNJLxHWeuAyAfEuZqf6L2HiMaQlW6bjLvJsupW0L2JWrkj
+ K14fukGgfaQY8NJKlHCerZLyfIuk4pSNQ/beqZWSvimEzA53/TAm7f89Syqj2SNAzFWQ6cUQ==
+X-Received: by 2002:a17:90a:ec8b:b0:37f:c97a:939f with SMTP id
+ 98e67ed59e1d1-38fb10f0d30mr187789a91.7.1785461814290; 
+ Thu, 30 Jul 2026 18:36:54 -0700 (PDT)
+Received: from kumara-Inspiron-15-3530..
+ ([2406:7400:63:b1e4:34aa:6ba5:be21:9790])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-13fa758e799sm23853c88.14.2026.07.30.18.36.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jul 2026 18:36:53 -0700 (PDT)
+From: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>,
+	Peng Fan <peng.fan@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
+Subject: [PATCH] power: regulator: tps65219: Fix LDO3 and LDO4 selector
+ boundaries
+Date: Fri, 31 Jul 2026 07:06:43 +0530
+Message-ID: <20260731013643.28244-1-bhimesh.matsa@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260722194638.1285159-1-festevam@gmail.com>
- <a49f6530d95c4ea1908efe23d16f8843@infineon.com>
-In-Reply-To: <a49f6530d95c4ea1908efe23d16f8843@infineon.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 30 Jul 2026 21:37:42 -0300
-X-Gm-Features: AUfX_mwH2U1X_Ip53DeX7PGaDRkAjSPsFec8MUg4MUj-wxIQfgX-NbBq1-X72zM
-Message-ID: <CAOMZO5AUHUEXvM+39N8oybY_W-+cRZAw0BDENGH1e6kB3PTbfw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] mtd: spi-nor-ids: Add XMC XM25QH128C
-To: Takahiro.Kuwano@infineon.com
-Cc: u-boot@0leil.net, trini@konsulko.com, sjg@chromium.org, 
- kever.yang@rock-chips.com, u-boot@lists.u-boot-project.org, 
- festevam@nabladev.com, vigneshr@ti.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 31 Jul 2026 02:11:47 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785458275; x=1786063075;
+ d=gmail.com; s=20251104; t=1785461814; x=1786066614;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=5OadzG/b2E95NCslzzXdxAexgJdWgqAwa6B6gXI8WsE=;
- b=e0TxcwuklNrLvpM3HuNq7dQjV8QMchlikh0FiUfof+XwpZgCM9fX9lD1DduVHIgE0J
- rwfL/VjmZw4yCnytfW2Rzhz/EN/3kyZyB7fd0MK2SJL5i85dEzkFa5qylTrHjfy6c5ng
- TGHszmmDTuYs0/+99J3UgZw4dipyxMV95LPqELMgKfnp2GKrvy+sT1h3sMHNR10hYLmI
- Xm/9N6Mg7pjiui9Z+u2anHgUo01ABiJTzNOj/O98A9Js9awxWKAQzPYrGRoEN0Xqwo2d
- ngm3o7aMelNKVWXPatU7bMHVkT9OPaARtZsFdqkenJArt9YcfH+HjkJc+alJX2FV6G6C
- JJDQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=6rWdY4P62+U/sKZoT6bjB2fsP2NgzEbld+ZvJEUdJE4=;
+ b=G7lii5Flpc7LLGKLt47WzpryiHnuUEAlqIBIwv+xfxzLIG6o1shOpkho9B0eCccmQO
+ tHefwVPFiW0EuMgw5Y6UuxptVz76Lw3Auy2UjRzFL3qXAqQ3d3xHRM5NqMVmSZ7AWdhX
+ Hq9H6zywhruQTLA+mjpnTugaPCWz0xVAHDaoqnQ/V7c/tKewPfU4b1yjmN+hfwo55UH5
+ gaWW1JlLZHLgnKhPRlzZut6tez9wqHGI0x33QI6MkySZnsQA6f0k30uzvQfbP0ilQSt0
+ x/XobrM8q2fgr2YQZNugayFhMJKQHReWCN+rya37wUBrL9lPomBdvkv+0uXhXvh3HkVZ
+ AQtA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=e0Txcwuk
+ header.s=20251104 header.b=G7lii5Fl
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,20 +130,37 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Takahiro-san,
+According to the TPS65219 datasheet, selectors 0x00 through 0x0c map
+to 1.2 V, while selectors 0x36 through 0x3f map to 3.3 V.
 
-On Wed, Jul 29, 2026 at 5:59=E2=80=AFAM <Takahiro.Kuwano@infineon.com> wrot=
-e:
+The driver currently uses 0x12 and 0x54 as the selector boundaries
+for LDO3 and LDO4. These values do not match the selector ranges
+defined by the datasheet.
 
-> Per the datasheet, this chip supports Dual/Quad ops but for my reference,
-> could you let me know if you tested 1-1-4 or 1-4-4 ops?
+Use the correct selector boundary values of 0x0c and 0x36.
 
-I checked the RK3399 SPI1 pin configuration. It only exposes CLK, CS,
-TX/IO0, and RX/IO1; IO2 and IO3 are not muxed to the SPI controller.
-Therefore, my test exercised 1-1-1 operations rather than either 1-1-4 or 1=
--4-4.
+Fixes: Fixes: b5cfa0c7ca4f ("power: add driver for the TPS65219 PMIC")
+Signed-off-by: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>
+---
+ include/power/tps65219.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> Anyway,
-> Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+diff --git a/include/power/tps65219.h b/include/power/tps65219.h
+index e8780af2d81..4feea081f61 100644
+--- a/include/power/tps65219.h
++++ b/include/power/tps65219.h
+@@ -50,7 +50,7 @@
+ #define TPS65219_LDO12_VOLT_REG_MAX	0x56
+ #define TPS65219_LDO34_VOLT_MIN		1200000
+ #define TPS65219_LDO34_VOLT_MAX		3300000
+-#define TPS65219_LDO34_VOLT_REG_MIN	0x12
+-#define TPS65219_LDO34_VOLT_REG_MAX	0x54
++#define TPS65219_LDO34_VOLT_REG_MIN	0x0c
++#define TPS65219_LDO34_VOLT_REG_MAX	0x36
+ 
+ #endif /* TPS65219_H */
 
-Thanks for the review.
+base-commit: 100e12ea78c73071b9710f08b32fd4590019266f
+-- 
+2.43.0
+
