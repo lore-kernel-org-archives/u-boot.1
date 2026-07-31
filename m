@@ -4,135 +4,224 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2BCBC55173
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 20:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44401C55172
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 21:38:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2A13B40F76;
-	Fri, 31 Jul 2026 20:32:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 389DB411B3;
+	Fri, 31 Jul 2026 21:38:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2QsutFbLQ4IB; Fri, 31 Jul 2026 20:31:58 +0000 (UTC)
+ id Kk501Ch86Mie; Fri, 31 Jul 2026 21:38:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EB72840F1B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5630C410BB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785529918;
-	bh=bXEosqCQf7L+8/nB+E5zVQgOFmWm3iZzkjDSvKGeGRU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785533924;
+	bh=46Ch5DCnW+k8cFa30L/SzITzlNDG0w5eAdN3tX3sPXU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qDUsNgelKuFanR/DTJVDRNMjag6Kh3/Mp2GLQ8fthACulsnjCuHOyRl8Hh1oxgN2z
-	 8RCqhPT9YyUvoFV82A2HzwxSVTPtPBx7hy5qHcaN4mFX+4D2d3ryS2hUGnahdLHs2V
-	 gX1/s/BNQ+x3bqgvh97gHaBQHSEMgU5JblJAgYtikvDgukRicijswrchxZ7xxSWtJw
-	 Ko8/stKIloNI8NR2OYPs/5Te1OXDLxsxYaraGZjLCePIQNyKvWCIwgikXQ5tma5XGP
-	 v5wrLoNhcH3061irx3c+ojmQNpy5VoxjG9yRkT/4eZx9qH/09AmO8qKw8QdK99p1It
-	 3sIbq4e9kvOQA==
+	b=LnJ96GBVRKOJ5AjhhnlaljWIghugUrtoXwRGgNImGzKXXQYRvG0InThM08Ti1NDw+
+	 Rag7OwntoqIjHWkKrRxkpkDWND8G/4zMbSDuOviE5eYPVxRDwKqyvaZ7hEnC2u5Hht
+	 fj3q23uQEtkKM77kczHwwoQ2lkBDpSLGXwKGBmPQFKBJh58JhmF0/n4ux+t/UrrUFo
+	 X4jLgaq7i77BK5a5GlQAom5YjZsa/ejvDCaPiS4fySdYLloonacyMr7MJqSlZexXiR
+	 l0iBDVC95ETsUGYuebctTlRFUM1kKHMF7p3qtbZkEqvWFet5hiNBHFRYsMAdfkfgE/
+	 PTfUFWTwUgw4w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EB72840F1B;
-	Fri, 31 Jul 2026 20:31:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8345E3B6
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 20:31:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5630C410BB;
+	Fri, 31 Jul 2026 21:38:44 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9B8832EB
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 21:38:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 68D0C40119
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 20:31:54 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8D8F680BB0
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 21:38:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UlGhVWXvqD1v for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 20:31:53 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::232; helo=mail-oi1-x232.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 6E9894011A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6E9894011A
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6E9894011A
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 20:31:52 +0000 (UTC)
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-495b27007d0so713926b6e.1
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 13:31:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785529911; x=1786134711;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=bXEosqCQf7L+8/nB+E5zVQgOFmWm3iZzkjDSvKGeGRU=;
- b=DwomnuA3dUbwlow7RpnY+vKO81oM9X8Sh+LGmvOfnz2XCy2+XIIb+LHWe6ng/y5R5/
- INOxmMSTYR11eph3NO1jBnnsYeCAIgkKlsKtlnMuxTd0HQ1MWAd/RkuW8x5bV3w+kA4S
- i8jMj82CDpFW5ehfbSD2N4crFg4eBjy7H/hft/PXWADsl6dPxsa0Y0Q9etqF3+mXrwQv
- u7q8POVPbQfyIgAChzOo2CnWEz0zBjLIsuwQoswlPG89OnQ6TaHMK7iE4W6R7W+tuhCB
- h22Qt/ywookkwzJpRutgFZRtbWvnbxUzsjl/eqpBneMdwhsYwjSaaRS/XydhUaOQJG/h
- GM9A==
-X-Gm-Message-State: AOJu0Yx8iwcHU27mSyj9oFzosQUd5YVWo3E6nNFNGpr8caE70VZvIO8G
- 9VuTiis0CAOGiPKgET+tpCbit9MRkwp974W0j/l6rccYOQ81r7+UJCyGRK2nRhLw+E4=
-X-Gm-Gg: AR+sD13K5y28oPuaebZpL3GxWhllnwrKMWIGM8PF9aeiw2Ovn9kt7W4mqmW5K0x6ryG
- 0gSAzM2uGu0nQ0CUMwcVgrKRr+Eq6NQGxhaAMm6Vw6rF45fHJvfUoepuzGxZ+CH9B+q7PgWUn+R
- 7ZRuF4/NVO64NA3FzA71DXNqBJRy7HcnDQ8lbCndhHt5MsLyBAp4x7GFwxHhi3NHf0hY57UuDBv
- SkhQyGE6EzSrRfqyrpFiV/WDrbeMi8A6cfmUNKgzuBeXkzBebgT5cNhXsE3tmUAVnLzQWZ4azs9
- YfgNsHJzW+rH7VkTdg41pC7+7WMRdTrYXgmhsL7bTWjM102EwiRlslHDu18uIeHj0haujR4Mbt3
- rrhduGfxn0fG2dI1j3W2mwl2smlutQyDUEJK0vniNOYhd8XlFKHGV6/v0B9io0F+2eJyFfWYPSw
- Jtu3HSQiD8oChkC9rQRrV1tLuvSvDowro9YYies8VA1tr1Bn+U39R4JmYMVCMOo7BGFw==
-X-Received: by 2002:a05:6808:4481:b0:492:8920:81ca with SMTP id
- 5614622812f47-4af5e031e79mr3021591b6e.5.1785529911304; 
- Fri, 31 Jul 2026 13:31:51 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:fa40:746f:401a:3b75])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4af58ce0a1bsm1445791b6e.2.2026.07.31.13.31.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2026 13:31:50 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 31 Jul 2026 15:31:27 -0500
-Subject: [PATCH 2/2] arm: mediatek: use phase-aware PSCI reset on MT8195
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6-T23f369mAa for <u-boot@lists.u-boot-project.org>;
+ Fri, 31 Jul 2026 21:38:42 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=quwenruo.btrfs@gmx.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org A342A80B0D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A342A80B0D
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A342A80B0D
+ for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 21:38:40 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2560C844F6; Fri, 31 Jul 2026 23:38:37 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0850180117
+ for <u-boot@lists.denx.de>; Fri, 31 Jul 2026 23:38:35 +0200 (CEST)
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.174]) with ESMTPSA (Nemesis) id 1N9Mtg-1x2Ed34AKK-01842X; Fri, 31
+ Jul 2026 23:38:34 +0200
+Message-ID: <3659c07e-7f73-460c-8391-e2b8508e2bd4@gmx.com>
+Date: Sat, 1 Aug 2026 07:08:29 +0930
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260731-mtk-mach-phase-aware-reset-v1-2-90b918aa52f5@baylibre.com>
-References: <20260731-mtk-mach-phase-aware-reset-v1-0-90b918aa52f5@baylibre.com>
-In-Reply-To: <20260731-mtk-mach-phase-aware-reset-v1-0-90b918aa52f5@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=770; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=ke8R4vP/VbSOlUKNuatYyHboPR0E5duLPHT0vhv+2Ak=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqbQYt95kpaxHCFJws6s9SaaFIcWeuercGALS5F
- E2ZVXuot7mJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCam0GLRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A5HcH/1e9qFMG82cqmamfekfUhai+yvjEp2zmhi+/PYA
- YT26aRfj84hpSnNr6OHJFXXaHluBt/MoM2SkdX8G/GRaMpT/OrSZQ9BuuXScLtimIUo1lvKnmc2
- SNf7CTp2MJ4EDFyEANrlwxCLcyVru0VoLuJ8aj7zxiiu+DF1XLEO9zii2QtUdMXFVjLqhEytbsL
- mv+ErxmJYRtN/Q77th6FSEn7y0crpPpWc6lF+c3UhyarC004z4sBXbdEVFAv1LxLPcydYiVanR4
- SlW9DBCXxDG6lre24YEw9bcYJxGldb7BLItW3/N6rJBUa5uUiiKlHXINWC1SfxrhxNjL4+dhxCd
- Ptrw=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs: btrfs: fix zstd decompression of sector-padded extents
+To: Cole Munz <Munzzyy1@proton.me>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: Qu Wenruo <wqu@suse.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, linux-btrfs@vger.kernel.org
+References: <9acf406b5e73fa83001e1951e883143e2afb8b2d.1785528314.git.Munzzyy1@proton.me>
+Content-Language: en-US
+From: Qu Wenruo <quwenruo.btrfs@gmx.com>
+Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
+ xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
+ 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
+ 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
+ 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
+ gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
+ AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
+ BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCZxF1YAUJEP5a
+ sQAKCRDCPZHzoSX+qF+mB/9gXu9C3BV0omDZBDWevJHxpWpOwQ8DxZEbk9b9LcrQlWdhFhyn
+ xi+l5lRziV9ZGyYXp7N35a9t7GQJndMCFUWYoEa+1NCuxDs6bslfrCaGEGG/+wd6oIPb85xo
+ naxnQ+SQtYLUFbU77WkUPaaIU8hH2BAfn9ZSDX9lIxheQE8ZYGGmo4wYpnN7/hSXALD7+oun
+ tZljjGNT1o+/B8WVZtw/YZuCuHgZeaFdhcV2jsz7+iGb+LsqzHuznrXqbyUQgQT9kn8ZYFNW
+ 7tf+LNxXuwedzRag4fxtR+5GVvJ41Oh/eygp8VqiMAtnFYaSlb9sjia1Mh+m+OBFeuXjgGlG
+ VvQFzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
+ CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
+ /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
+ GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
+ q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
+ ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCZxF1gQUJEP5a0gAK
+ CRDCPZHzoSX+qHGpB/kB8A7M7KGL5qzat+jBRoLwB0Y3Zax0QWuANVdZM3eJDlKJKJ4HKzjo
+ B2Pcn4JXL2apSan2uJftaMbNQbwotvabLXkE7cPpnppnBq7iovmBw++/d8zQjLQLWInQ5kNq
+ Vmi36kmq8o5c0f97QVjMryHlmSlEZ2Wwc1kURAe4lsRG2dNeAd4CAqmTw0cMIrR6R/Dpt3ma
+ +8oGXJOmwWuDFKNV4G2XLKcghqrtcRf2zAGNogg3KulCykHHripG3kPKsb7fYVcSQtlt5R6v
+ HZStaZBzw4PcDiaAF3pPDBd+0fIKS6BlpeNRSFG94RYrt84Qw77JWDOAZsyNfEIEE0J6LSR/
+In-Reply-To: <9acf406b5e73fa83001e1951e883143e2afb8b2d.1785528314.git.Munzzyy1@proton.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:8r7Ov7VJu7pmDKCj6NB90YqVGBKonikncpTHdvsJNh8G+jDykfZ
+ WQSk9ZktfQo1MPdnYmV9DKX47bftAqHBzCt0n9nhuDnZBvN4mwNIZBEkE3T4i0zqPMcodTD
+ XZDZ6OfxoYkTNXezFiGYPHRlWLTA8eZyrWgkEBJbC+HK4Ez+FgYk/aG0lNh07uct2jwmgs2
+ hlR9nNEtfH47J3Jb4XZdA==
+UI-OutboundReport: notjunk:1;M01:P0:cIuFLUIVs9c=;eCXV7OYvAtvjq1hVDz8+Bl+ZtUC
+ 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
+ PtS+2yXr1Nq4Z18myCk736wH4VKpZgFHwdR28=
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785529911; x=1786134711;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=bXEosqCQf7L+8/nB+E5zVQgOFmWm3iZzkjDSvKGeGRU=;
- b=C6WZ+zteHEjHlqG+s3koY4HFprIDbnhIbi2wm9CLKHlKPwDCa0LFbIvbyD4C0PimSN
- T5h6iYgEq54P9As+E8F0evAlQBssGa3TcZxA47wCxDD2vAgNJYumVcD8aQyNsTjd25XU
- FCBlxdN2gLx0q3rchi5HU4Cmmui9DnqVZCb6TmMh54pwKKUh8pSCDXpE9SvOhEeG7EYC
- BHw6f8MTeZuALUz83YMUiG+aN4nXW4Z7uqM2zNXvDr9iarryY+Oe7hnX3FN81Nk9PcGJ
- e+Jk+tqk3lSCGeAxUbLK5A6tvz0mTUNHfHuCYOrREClZRSP9H6IjaESUlhE4DOi9wHZ1
- 6TIg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=C6WZ+zte
+ d=gmx.com; 
+ s=s31663417; t=1785533914; x=1786138714; i=quwenruo.btrfs@gmx.com;
+ bh=46Ch5DCnW+k8cFa30L/SzITzlNDG0w5eAdN3tX3sPXU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=qSqc1ECzt1AG9H6sKUCaeQMdrkNjh6HZu07jXMT9jxCm5pyWIO8D7zygw9htttdu
+ 10STf6NCsYWL4iil0yyz9X6YplguGf+QOoQCmQTt9vmZVB3FjEbWoyFq9Smao6tMw
+ pifbmMLmyJgAnPkpZHzXJDMExHAm1lRheMW0S9GV9WbHVEquAfyVEOZHGXjB5vQD/
+ AKWmPYvro9aPkqamGSGPgJsX8ii50obWFoT+cc5d8qpSqDJwon3qDQK6jTJTZwQkp
+ oZQz97Uzg36vvzThcspO/mrgcXZg5ur5n8MdIAFoKBrM4bDNoGxme7HZD/N/X5Vz2
+ Ruo4dnPcS6gVyhwaVA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=gmx.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ spf=fail smtp.mailfrom=gmx.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com
+ header.a=rsa-sha256 header.s=s31663417 header.b=qSqc1ECz
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=gmx.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quwenruo.btrfs@gmx.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="qSqc1ECz"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,29 +236,156 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Change IS_ENABLED() to CONFIG_IS_ENABLED() to prepare for SPL support.
-PSCI is not available in the SPL stage and would cause a lock-up if
-called.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- arch/arm/mach-mediatek/mt8195/init.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-mediatek/mt8195/init.c b/arch/arm/mach-mediatek/mt8195/init.c
-index 83cac9d01d6..6afb7330b4e 100644
---- a/arch/arm/mach-mediatek/mt8195/init.c
-+++ b/arch/arm/mach-mediatek/mt8195/init.c
-@@ -38,7 +38,7 @@ void reset_cpu(void)
- {
- 	struct udevice *wdt;
- 
--	if (IS_ENABLED(CONFIG_PSCI_RESET)) {
-+	if (CONFIG_IS_ENABLED(PSCI_RESET)) {
- 		psci_system_reset();
- 	} else {
- 		uclass_first_device(UCLASS_WDT, &wdt);
+=E5=9C=A8 2026/8/1 05:37, Cole Munz =E5=86=99=E9=81=93:
+> Btrfs pads compressed extents up to a sector boundary, so a file whose
+> size isn't sector-aligned still gets compressed as a frame whose
+> declared content size is the sector-rounded length, larger than the
+> extent's ram_bytes.
 
--- 
-2.43.0
+The padding at plain text level is completely common, since btrfs like=20
+all other major fses are block device based, all IO including=20
+compression is done at fs block level, so is the compressed data, which=20
+still needs to be block aligned.
+
+But your "larger than the extent's ram_bytes" is where I do not get.
+
+The ram_bytes described the decompressed size of a compressed extent,=20
+except inlined extents, the ram_bytes should always be fs block aligned.
+
+I didn't see how things can go "larger than the extent's ram_bytes".
+
+Can you provide more info about this, or better, provide the dump-tree=20
+output for the involved files?
+
+Thanks,
+Qu
+
+> zstd_decompress_dctx()'s one-shot API requires the
+> destination buffer to cover the whole frame and fails with
+> ZSTD_error_dstSize_tooSmall otherwise, even though
+> btrfs_read_extent_reg() and btrfs_read_extent_inline() already
+> zero-fill any short tail. The file then reads back truncated or the
+> read fails outright, which is what breaks fdt apply on zstd-compressed
+> overlays.
+>=20
+> Decompress into a bounce buffer sized to the frame when the declared
+> content size exceeds ram_bytes, and copy out only what the caller
+> asked for. Also trim the input with zstd_find_frame_compressed_size()
+> first, since the on-disk extent may carry trailing sector padding
+> after the frame.
+>=20
+> The fix lives here rather than in the shared lib/zstd/zstd.c wrapper
+> on purpose: for FIT images, ximg and ubifs an undersized destination
+> really does mean a corrupt input and should keep failing hard. Armbian
+> carries the same caller-side fix for this exact failure on RK3399 and
+> ODROID-N2 boards (armbian/build#9651, #10208), where it showed up as
+> "zstd_decompress: failed to decompress: 70".
+>=20
+> Fixes: 918adf8e0733 ("btrfs: Use U-Boot API for decompression")
+> Signed-off-by: Cole Munz <Munzzyy1@proton.me>
+> ---
+>   fs/btrfs/compression.c | 76 +++++++++++++++++++++++++++++++++++++++---
+>   1 file changed, 71 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/fs/btrfs/compression.c b/fs/btrfs/compression.c
+> index c69524d38ecc..017e61242a68 100644
+> --- a/fs/btrfs/compression.c
+> +++ b/fs/btrfs/compression.c
+> @@ -6,7 +6,7 @@
+>    */
+>  =20
+>   #include "btrfs.h"
+> -#include <abuf.h>
+> +#include <limits.h>
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <linux/lzo.h>
+> @@ -137,12 +137,78 @@ static u32 decompress_zlib(const u8 *_cbuf, u32 cl=
+en, u8 *dbuf, u32 dlen)
+>  =20
+>   static u32 decompress_zstd(const u8 *cbuf, u32 clen, u8 *dbuf, u32 dle=
+n)
+>   {
+> -	struct abuf in, out;
+> +	zstd_dctx *ctx;
+> +	zstd_frame_header fh;
+> +	size_t wsize, len, dst_capacity =3D dlen;
+> +	void *workspace;
+> +	u8 *dst =3D dbuf, *bounce =3D NULL;
+> +	u32 ret;
+> +
+> +	wsize =3D zstd_dctx_workspace_bound();
+> +	workspace =3D malloc(wsize);
+> +	if (!workspace)
+> +		return -1;
+> +
+> +	ctx =3D zstd_init_dctx(workspace, wsize);
+> +	if (!ctx) {
+> +		ret =3D -1;
+> +		goto out;
+> +	}
+>  =20
+> -	abuf_init_set(&in, (u8 *)cbuf, clen);
+> -	abuf_init_set(&out, dbuf, dlen);
+> +	/*
+> +	 * Compressed extents are padded up to a sector boundary, so clen may
+> +	 * include trailing junk after the actual zstd frame.
+> +	 */
+> +	len =3D zstd_find_frame_compressed_size(cbuf, clen);
+> +	if (zstd_is_error(len)) {
+> +		ret =3D -1;
+> +		goto out;
+> +	}
+>  =20
+> -	return zstd_decompress(&in, &out);
+> +	/*
+> +	 * Btrfs compresses whole sectors, so a file whose size is not a
+> +	 * multiple of the sector size still yields a frame whose content
+> +	 * size is the sector-rounded length, which can be larger than dlen
+> +	 * (ram_bytes from the extent item). zstd_decompress_dctx() requires
+> +	 * its output buffer to cover the whole frame and would otherwise
+> +	 * fail with ZSTD_error_dstSize_tooSmall, even though the extra bytes
+> +	 * are just padding the caller is going to discard: both
+> +	 * btrfs_read_extent_reg() and btrfs_read_extent_inline() already
+> +	 * zero-fill any tail beyond what we return here. Decompress into a
+> +	 * bounce buffer sized to the frame when that happens.
+> +	 */
+> +	if (!zstd_get_frame_header(&fh, cbuf, len) &&
+> +	    fh.frameContentSize !=3D ZSTD_CONTENTSIZE_UNKNOWN &&
+> +	    fh.frameContentSize > dlen) {
+> +		if (fh.frameContentSize > SIZE_MAX) {
+> +			ret =3D -1;
+> +			goto out;
+> +		}
+> +		bounce =3D malloc(fh.frameContentSize);
+> +		if (!bounce) {
+> +			ret =3D -1;
+> +			goto out;
+> +		}
+> +		dst =3D bounce;
+> +		dst_capacity =3D fh.frameContentSize;
+> +	}
+> +
+> +	len =3D zstd_decompress_dctx(ctx, dst, dst_capacity, cbuf, len);
+> +	if (zstd_is_error(len)) {
+> +		ret =3D -1;
+> +		goto out;
+> +	}
+> +
+> +	if (bounce) {
+> +		memcpy(dbuf, bounce, dlen);
+> +		ret =3D dlen;
+> +	} else {
+> +		ret =3D len;
+> +	}
+> +out:
+> +	free(bounce);
+> +	free(workspace);
+> +	return ret;
+>   }
+>  =20
+>   u32 btrfs_decompress(u8 type, const char *c, u32 clen, char *d, u32 dl=
+en)
 
