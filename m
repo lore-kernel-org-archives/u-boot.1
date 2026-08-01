@@ -1,78 +1,74 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A99B7C55172
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jul 2026 22:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AF8C55171
+	for <u-boot@archiver.kernel.org>; Sat,  1 Aug 2026 01:14:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6D7F280D9E;
-	Fri, 31 Jul 2026 22:38:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5C37440733;
+	Sat,  1 Aug 2026 01:13:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5oirUmUMrAxl; Fri, 31 Jul 2026 22:37:59 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iC3IlmddWVCx; Sat,  1 Aug 2026 01:13:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3C4F080D92
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 32E91406D8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785537479;
-	bh=bHJQAzRy8pcrsSIUx3GO51jUc76TBUpYY6miBkbIKv4=;
+	d=lists.u-boot-project.org ; s=default; t=1785546837;
+	bh=mtaJ3GuWcu6TQBen5pwJyzIk5UHCrSpZLeogGWQoo/g=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=V6I4witQH8FwXLID6djMXOlD+nPyVELx3RY9NXnfzWo3LvPX4mbE/yPm0XMbJtOM7
-	 dZ/4UfFVqYXgnuGhzjyadljxNjbzVHDt3+/TYJJDle0EZeFphOGnplArrfPAti4ndB
-	 JxmzoQvBhK54LSNXjRM5Oj/Ij6tts3TQt0d2rgpvqd6hKqwaBOoMWbPDx04QyPOoPU
-	 btzq7IMqK2uzZsD+c/cUE/0n2zQcdzKtskQCO+2qR72CwsqMmw4AevEyD0aZUqEnhv
-	 wpzDDzDBhHUjo0cpKyuP9lSKKIrzLaKhcOVd4xO0lPzbInyAQ9mrS4sCe4ICxHhfIa
-	 ir3cx1C/jvHew==
+	b=UpkmPKRLxTUMeCteWY6ngwtCjh3n7vxHZoQdFsTsgRR7TXj2X/xJnRcl8dcibR5hm
+	 Jp6GeZ/vUFCPzwgqedxSKPb335SEK6JRG5qVv20r1auGmuqj509+wnMp0UESzjKwVw
+	 4FlOaJH+Qap8QmRmFlEbVW61VAej4XH896cuq6lPzrJrtdjyMv2FRe6RG1JzpWA8Ao
+	 ha0EHV7u3iuDv4BElwFz2JcHunDfPSipP/Og+fo7xN1SFluicrKfriCMhpIlVeb2/J
+	 K13TvjDaaAv+I2efnT4Bi+u0ULFJXXWvoo/fPqCaZp6klAfF/MoJAAMt7U3uc5MV2l
+	 AojEsxeuM1i2g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3C4F080D92;
-	Fri, 31 Jul 2026 22:37:59 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E439F3A6
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 22:37:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 32E91406D8;
+	Sat,  1 Aug 2026 01:13:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 50CFA26E
+ for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 01:13:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D62AA6064E
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 22:37:57 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4DD1A40119
+ for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 01:13:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5p1_wkZk9rEe for <u-boot@lists.u-boot-project.org>;
- Fri, 31 Jul 2026 22:37:57 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=quwenruo.btrfs@gmx.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 1583260648
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1583260648
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1583260648
- for <u-boot@lists.u-boot-project.org>; Fri, 31 Jul 2026 22:37:54 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HhcC1x6RpDxO for <u-boot@lists.u-boot-project.org>;
+ Sat,  1 Aug 2026 01:13:54 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=quwenruo.btrfs@gmx.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org EE0B5400A4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EE0B5400A4
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EE0B5400A4
+ for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 01:13:52 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44168844F6; Sat,  1 Aug 2026 00:37:51 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 40D70844F6; Sat,  1 Aug 2026 03:13:50 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3001380117
- for <u-boot@lists.denx.de>; Sat,  1 Aug 2026 00:37:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E10E080117
+ for <u-boot@lists.denx.de>; Sat,  1 Aug 2026 03:13:47 +0200 (CEST)
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1Mof9F-1xINm62ifh-00aQ6o; Sat, 01
- Aug 2026 00:37:48 +0200
-Message-ID: <ac494999-15b2-4543-836d-4584d548beb8@gmx.com>
-Date: Sat, 1 Aug 2026 08:07:42 +0930
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.174]) with ESMTPSA (Nemesis) id 1N2V0B-1wvqgS0qTP-011Cey; Sat, 01
+ Aug 2026 03:13:35 +0200
+Message-ID: <bdab57d2-e7cd-418f-91f4-b54121fcf5c7@gmx.com>
+Date: Sat, 1 Aug 2026 10:43:30 +0930
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fs: btrfs: fix zstd decompression of sector-padded extents
-To: Cole Munz <Munzzyy1@proton.me>
-Cc: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, linux-btrfs@vger.kernel.org
+Subject: Re: [PATCH v2] fs: btrfs: fix zstd decompression of compressed inline
+ extents
+To: Cole Munz <Munzzyy1@proton.me>, kabel@kernel.org, trini@konsulko.com
+Cc: sjg@chromium.org, u-boot@lists.denx.de, linux-btrfs@vger.kernel.org
 References: <9acf406b5e73fa83001e1951e883143e2afb8b2d.1785528314.git.Munzzyy1@proton.me>
- <3659c07e-7f73-460c-8391-e2b8508e2bd4@gmx.com>
- <-pmHXWS0jQjmnEICAo6l7i5Q5tFivBJ1Mm162qdIm_69a1gcfU0tBo4C-bfELAT1lCrGHRKlYr3_EcKwLFRX18SHErryHV_TCdz93esbQ30=@proton.me>
+ <f6ac2bbdb9b559041cb0c82efccf89ea7262cb43.1785545440.git.Munzzyy1@proton.me>
 Content-Language: en-US
 From: Qu Wenruo <quwenruo.btrfs@gmx.com>
 Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
@@ -99,123 +95,125 @@ Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
  Vmi36kmq8o5c0f97QVjMryHlmSlEZ2Wwc1kURAe4lsRG2dNeAd4CAqmTw0cMIrR6R/Dpt3ma
  +8oGXJOmwWuDFKNV4G2XLKcghqrtcRf2zAGNogg3KulCykHHripG3kPKsb7fYVcSQtlt5R6v
  HZStaZBzw4PcDiaAF3pPDBd+0fIKS6BlpeNRSFG94RYrt84Qw77JWDOAZsyNfEIEE0J6LSR/
-In-Reply-To: <-pmHXWS0jQjmnEICAo6l7i5Q5tFivBJ1Mm162qdIm_69a1gcfU0tBo4C-bfELAT1lCrGHRKlYr3_EcKwLFRX18SHErryHV_TCdz93esbQ30=@proton.me>
+In-Reply-To: <f6ac2bbdb9b559041cb0c82efccf89ea7262cb43.1785545440.git.Munzzyy1@proton.me>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:5ylniR7Rny51Pqt2x4q01FLZ2yjyAOa8daQoycxZvC+yVJfrtjJ
- evOk2S+kDJUf/K2X6fI6ge3pjWw0JiekL2Rc1Q3Na4kG82Sa3L6glbtC6b5vVhZaRh4pV7L
- GWCE624LfW6W3AgUgXx81gTj4EBBHYj2xQd64Fxirpf9YWR6OoRd9cgEJCI4oOg2rMty6uK
- sCpRrPUrrsdOeaAsidp8A==
-UI-OutboundReport: notjunk:1;M01:P0:FPGkUQ8JOcI=;RAo2Lie/Z/C0V7ZKisX/7bejL+u
- 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
+X-Provags-ID: V03:K1:Zr4a8f7PGUyNbNQO4KiRPM1nptNCKYUgunP6z/r/RyPJOziNoL1
+ sON3fD014jJDlYMURacO76B5mQGwmxlWjrmYLWAw0avwxiZw4AcaoSun3tUpQbkPK06Pb4A
+ 8WqnjBmd/j4MhV5JHM+fcbka0EXoH0iO/ZFMRKE/LG7hLgis0miGFKvrq1m5CRLtfLBlfcd
+ 1Zv0F+gNc+BRj2OJ5l4tw==
+UI-OutboundReport: notjunk:1;M01:P0:mUi9cAmUJIw=;gN3ndnY6gWPBrfv+CjMUPz+rTlK
+ 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
+ dD75Xpw==
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmx.com; 
- s=s31663417; t=1785537468; x=1786142268; i=quwenruo.btrfs@gmx.com;
- bh=bHJQAzRy8pcrsSIUx3GO51jUc76TBUpYY6miBkbIKv4=;
+ s=s31663417; t=1785546816; x=1786151616; i=quwenruo.btrfs@gmx.com;
+ bh=mtaJ3GuWcu6TQBen5pwJyzIk5UHCrSpZLeogGWQoo/g=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=VS6krAikxUcCRifAh1KTBkfP319zjXKNT+fkk/19JEUfPBHA7oUbkfsXfarVdt8z
- JAhYAvDfQLlEDRj2xVX8C6+4mEEgelrJSIPe2EJ9r8Z4JRcPavQvGIc825vTUPxtj
- 55L90JlxMzo/4tGagqx90N/TM8ie6eoLz9Rpu5b7xyM650hxh83LGPlXcUZzK3Sgt
- 4wSakUK0qvu9CQ8juHi1d1rYC5rsXvJ+zDkyL1F/qpfT7p21wWowNTRJuZsoktuAs
- YUg9Z0IRlVbzjMNgTSPpzqFmEjpmlCt238kLpbcy2MQwu8P4UGF1/mYyAdfH9jJd+
- UTozIMIMzF376dxizg==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ b=hTDurNvPu3QvACGa+BHoR10FTzMIgexbPK2/BPUXiCmmEL2Th6bcDNWhMVDqM0mi
+ oCd97c4BMsF7fCSdoJoTkacA0MKNj8PP9HNehW76zqLzJoZYx0vgIT3tfv3h0An0S
+ 9U96BmYWBV1ADbkba9uYdrlucrn/EnXwwpAaN0TeCVErSwQGw2h4NY+jWjjp6vELC
+ BNWD7WbUeIOf2sa8SD8VwPgGNJX6YZxsl2/T8D35RpqofJ3jqM9EdzxhHD4EFZJiq
+ HiQnHx+3VSXSmhNNgPUMtkWLChKCC4inbSj5fBqQnyTJgGVv6p6//Xs+VxAeGpY8W
+ s0TVEgz7RLxyrOKd7Q==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=gmx.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  spf=fail smtp.mailfrom=gmx.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com
- header.a=rsa-sha256 header.s=s31663417 header.b=VS6krAik
+ header.a=rsa-sha256 header.s=s31663417 header.b=hTDurNvP
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=gmx.com
@@ -223,7 +221,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=quwenruo.btrfs@gmx.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="VS6krAik"; 
+ secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="hTDurNvP"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -241,99 +239,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 
 
-=E5=9C=A8 2026/8/1 07:56, Cole Munz =E5=86=99=E9=81=93:
-> Hi Qu,
->=20
->> The ram_bytes described the decompressed size of a compressed extent,
->> except inlined extents, the ram_bytes should always be fs block aligned=
-.
->>
->> I didn't see how things can go "larger than the extent's ram_bytes".
->=20
-> You're right, and the commit message overstates it. For regular extents
-> ram_bytes is block aligned and matches the frame's content size, exactly=
- as
-> you describe. The case that actually fails is the one you carved out:
-> compressed inline extents.
->=20
-> For the inline path, current mainline compresses the whole first block:
->=20
->    run_delalloc_inline():
->      cb =3D btrfs_compress_bio(inode, 0, blocksize, compress_type, ...);
->=20
-> so the page is zero-padded past EOF and the resulting zstd frame declare=
+=E5=9C=A8 2026/8/1 10:25, Cole Munz =E5=86=99=E9=81=93:
+> The kernel compresses an inline extent as a whole block:
+> run_delalloc_inline() calls btrfs_compress_bio(inode, 0, blocksize, ...)=
+,
+> so the data is zero-filled past EOF and the resulting zstd frame declare=
 s
-> frameContentSize =3D blocksize. But the extent item gets the unaligned s=
-ize:
+> a content size of one block. The extent item records the unaligned file
+> size though - __cow_file_range_inline() passes i_size down to
+> insert_inline_extent(), which stores it as ram_bytes.
 >=20
->    __cow_file_range_inline(inode, i_size, compressed_size, ...) ->
->      insert_inline_extent() -> btrfs_set_file_extent_ram_bytes(leaf, ei,=
- size);
+> btrfs_read_extent_inline() sizes its decompression buffer from ram_bytes=
+,
+> so for a 1900-byte file the destination is 1900 bytes while the frame
+> decodes to 4096. Since commit 918adf8e0733 ("btrfs: Use U-Boot API for
+> decompression") btrfs decompresses through the common U-Boot helper,
+> which uses the one-shot zstd_decompress_dctx(). That API requires the
+> destination to cover the whole frame and fails with dstSize_tooSmall,
+> error 70, otherwise. The streaming ZSTD_decompressStream() path it
+> replaced stopped once the output buffer was full, so it never hit this.
 >=20
-> So a 1900-byte file stored as a compressed inline extent has ram_bytes 1=
-900
-> while the frame decodes to 4096. The kernel side never notices because
-> fs/btrfs/zstd.c zstd_decompress() streams into out_buf and copies out at=
- most
-> destlen. U-Boot's decompress_zstd() is the one-shot zstd_decompress_dctx=
-(),
-> and btrfs_read_extent_inline() sizes the destination with
-> dsize =3D btrfs_file_extent_ram_bytes(), so the frame fails the whole-fr=
-ame
-> capacity check with dstSize_tooSmall - error code 70, which matches the
-> "failed to decompress: 70" in the Armbian reports.
-
-Thanks a lot! Now I see where the problem is.
-
+> The kernel side does not notice because fs/btrfs/zstd.c streams into its
+> own buffer and copies out at most destlen.
 >=20
-> One data point from testing while chasing this: an image built with
-> mkfs.btrfs --rootdir --compress zstd (btrfs-progs 7.1) does NOT reproduc=
-e.
-> For a 1900-byte file, progs writes an inline extent with ram_bytes 1900 =
-whose
-> frame also decodes to exactly 1900:
+> Allocate a full block for the decompression buffer and copy only
+> ram_bytes back to the caller. An inline extent never spans more than one
+> block, which bounds the allocation.
 >=20
->    item 8 key (257 EXTENT_DATA 0) itemoff 15316 itemsize 423
->        generation 6 type 0 (inline)
->        inline extent data size 402 ram_bytes 1900 compression 3 (zstd)
+> This shows up on RK3399 and ODROID-N2 as "zstd_decompress: failed to
+> decompress: 70" (armbian/build#9651, #10208), where it breaks fdt apply
+> on zstd-compressed overlays. Images built with mkfs.btrfs --rootdir
+> --compress zstd do not reproduce it, since btrfs-progs writes a frame
+> whose content size already equals ram_bytes. Only files written at
+> runtime through the kernel trip it.
 >=20
-> so mkfs-built images boot fine, and the failure only shows up on files
-> (re)written at runtime through the kernel - which fits the Armbian patte=
-rn of
-> /boot scripts and overlays breaking after a package update touched them.
->=20
-> I'll send a v2 with the commit message rewritten to name compressed inli=
-ne
-> extents as the failing case instead of the hand-wave about sector paddin=
-g. If
-> you'd like the on-disk evidence too, I can loop-mount a scratch fs with
-> compress=3Dzstd, write an unaligned file, and include the dump-tree outp=
-ut plus
-> the frame header read from the leaf in the v2 cover.
+> Fixes: 918adf8e0733 ("btrfs: Use U-Boot API for decompression")
+> Signed-off-by: Cole Munz <Munzzyy1@proton.me>
 
-Another thing is, since this bug only affects inlined extents, I'd=20
-prefer to have the fix located inside btrfs_read_extent_inline().
+Reviewed-by: Qu Wenruo <wqu@suse.com>
 
-So that we allocate a full block for decompression, then only copy=20
-ram_bytes back to the destination.
+Now the fix looks much simpler.
 
-With a mention about the limit during dbuf allocation inside=20
-btrfs_read_extent_inline().
-
-Thanks a lot of the explanation and fix,
+Thanks,
 Qu
 
+> ---
+> v2:
+>   - Move the fix into btrfs_read_extent_inline() and size the decompress=
+ion
+>     buffer to a full block, as Qu suggested. decompress_zstd() is left a=
+lone.
+>   - Rewrite the commit message. The failing case is compressed inline
+>     extents, not sector-padded regular extents: Qu pointed out that
+>     ram_bytes is always block aligned for regular extents.
+>   - Drop the zstd_find_frame_compressed_size() input trimming from v1. T=
+he
+>     inline item length is already exact, so it was doing nothing.
 >=20
-> The fix itself stays in btrfs's decompress_zstd() rather than lib/zstd
-> because for FIT/ximg/ubifs an undersized destination really does mean co=
-rrupt
-> input; only btrfs hands the decompressor a destination smaller than the =
-frame
-> on purpose. If you'd rather see it shaped differently - say, only engagi=
+> v1: https://lore.kernel.org/u-boot/9acf406b5e73fa83001e1951e883143e2afb8=
+b2d.1785528314.git.Munzzyy1@proton.me/
+>=20
+>   fs/btrfs/inode.c | 15 +++++++++++++--
+>   1 file changed, 13 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index 3998ffc2c819..53f1059e1ef8 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -362,9 +362,11 @@ int btrfs_read_extent_inline(struct btrfs_path *pat=
+h,
+>   			     struct btrfs_file_extent_item *fi, char *dest)
+>   {
+>   	struct extent_buffer *leaf =3D path->nodes[0];
+> +	struct btrfs_fs_info *fs_info =3D leaf->fs_info;
+>   	int slot =3D path->slots[0];
+>   	char *cbuf =3D NULL;
+>   	char *dbuf =3D NULL;
+> +	u32 dbuf_size;
+>   	u32 csize;
+>   	u32 dsize;
+>   	int ret;
+> @@ -380,8 +382,17 @@ int btrfs_read_extent_inline(struct btrfs_path *pat=
+h,
+>  =20
+>   	/* Compressed extent, prepare the compressed and data buffer */
+>   	dsize =3D btrfs_file_extent_ram_bytes(leaf, fi);
+> +	/*
+> +	 * The kernel compresses an inline extent as a whole block, zero-filli=
 ng
-> the bounce path for inline extents - happy to do that in v2 as well.
->=20
-> Thanks,
-> Cole
->=20
+> +	 * the tail past EOF, so the stream can decompress to more than
+> +	 * ram_bytes.  zstd's one-shot API rejects a destination that cannot
+> +	 * hold the entire frame, so give the decompressor a full block and co=
+py
+> +	 * only ram_bytes back out.  An inline extent never spans more than on=
+e
+> +	 * block, which bounds the allocation.
+> +	 */
+> +	dbuf_size =3D max_t(u32, dsize, fs_info->sectorsize);
+>   	cbuf =3D malloc(csize);
+> -	dbuf =3D malloc(dsize);
+> +	dbuf =3D malloc(dbuf_size);
+>   	if (!cbuf || !dbuf) {
+>   		ret =3D -ENOMEM;
+>   		goto out;
+> @@ -389,7 +400,7 @@ int btrfs_read_extent_inline(struct btrfs_path *path=
+,
+>   	read_extent_buffer(leaf, cbuf, btrfs_file_extent_inline_start(fi),
+>   			   csize);
+>   	ret =3D btrfs_decompress(btrfs_file_extent_compression(leaf, fi),
+> -			       cbuf, csize, dbuf, dsize);
+> +			       cbuf, csize, dbuf, dbuf_size);
+>   	if (ret < 0) {
+>   		ret =3D -EIO;
+>   		goto out;
 
