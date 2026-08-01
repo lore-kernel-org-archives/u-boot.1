@@ -1,123 +1,175 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F17C55172
-	for <u-boot@archiver.kernel.org>; Sat,  1 Aug 2026 20:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD062C5516F
+	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 00:02:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DBE204067C;
-	Sat,  1 Aug 2026 20:16:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A3AA160685;
+	Sun,  2 Aug 2026 00:02:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ER0cUNlakUJM; Sat,  1 Aug 2026 20:16:50 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yEscHTF3LcXe; Sun,  2 Aug 2026 00:02:31 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0E97540608
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 670D06060C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785615410;
-	bh=onSV6isfcAHa/Uz3c1LprPsbU3wfqRdAXOZq0Uv9EWo=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785628951;
+	bh=txCaZGupux01giCFmVETdTBZ5PLmb8pvLW2OavDVUuY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=eg7ytc2dVnawef7ia0mkoxui61r8GUz5KluiKH4B/tN6Zk7LX2i4vI11+jkH0f45D
-	 aa5NKaRwYLLIB1WQHBdkOeFdm7meviXR5ezgWIdWwbGbN+LSaGyrK1Nf+gnlI8p/M/
-	 JRnQ5pLt9rr16YvNS+NQ0cwvSwGJkg/SfQEIDyIg9e9utTZvY0pL12NMNeS3/4NIq/
-	 iYGRiKpLYgLkBixmn/1oLcbwVz33xcnILnrK1GvyN7tuwdifPm+G8w1dFTspOMueXl
-	 hXx5p35swCWvDL8Hly76CaC7wSCioZ2ebaf1+AIj/FYP0eu8qG19OsVxltWWKP8HYc
-	 Ay8ioxO4UiSRw==
+	 From;
+	b=zSkz7JlHUnJyiT8XwDtY1eoD4qwlm/Pg90j05wtytT6lV+STVEGHksmwGtdN3eSJ6
+	 n+rc1c7ChLvrfc0H6q8qQZ9hdSx0ffFgMkk1ERYmFCtWbyIu17y06kZowZm5Nyvi1U
+	 XgGDXNlBxU4yO3I28RnEgU+M8e0x3kAjP7WYAJaQABduCPqhQ4mTZyNhCk/v4Lyv6D
+	 CSuHpBG/oAJxTnUbC/FvzaPP3U6kg/wCvethzefXPkqz/oihq39MW82zO5tae9e28Q
+	 adk+V071T+6tG7VNjoF07mOYlmDqD7R53q+YsI683WnVbvkBBNmuiVMHN7J9lk83/4
+	 m6JuxrOv4nBMg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0E97540608;
-	Sat,  1 Aug 2026 20:16:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B587DFE3
- for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 20:16:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 670D06060C;
+	Sun,  2 Aug 2026 00:02:31 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DBA8E23F
+ for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 22:57:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A7EE840608
- for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 20:16:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C1CFF80D9D
+ for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 22:57:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OZb9DSRu_Fd0 for <u-boot@lists.u-boot-project.org>;
- Sat,  1 Aug 2026 20:16:47 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 49D6340605
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 49D6340605
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 49D6340605
- for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 20:16:47 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C36AC844F6; Sat,  1 Aug 2026 22:16:44 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF99380117
- for <u-boot@lists.denx.de>; Sat,  1 Aug 2026 22:16:42 +0200 (CEST)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hCDjj2jnfz8v08;
- Sat, 01 Aug 2026 22:16:41 +0200 (CEST)
-Message-ID: <595832c5-e8a0-43fc-871f-7894d3138e5b@mailbox.org>
-Date: Sat, 1 Aug 2026 16:28:51 +0200
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Fmf0BGnyyc9C for <u-boot@lists.u-boot-project.org>;
+ Sat,  1 Aug 2026 22:57:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::102a; helo=mail-pj1-x102a.google.com;
+ envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E6F0080D60
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E6F0080D60
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E6F0080D60
+ for <u-boot@lists.u-boot-project.org>; Sat,  1 Aug 2026 22:57:22 +0000 (UTC)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-3811f512167so2221906a91.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 01 Aug 2026 15:57:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785625042; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Bsml0rUEjaj6bRMDhnF83FXSPTSVqwHYrBZlIyyUrd2yIRKjGP3gjcijLYG6KfZAcm
+ l1vgr8JBgsmDWBJ1UHJRdiKUinlrD9/Qy2JSv0i4KH70yotD95BwGylu09Nqbn7mNS6T
+ UBmZCdsRZgwW1b7xymEfYW5ZzgTR1t6fNijSrYJCdx39cchtVgTnF2lArVbCX+JqGx5P
+ FAMgXS00CQVHXRcoeUPZ/ZWv7RtRBI6Di8ipQAz5EPp5mkTZarJkQnXbz93483xJx+sN
+ h2y+Z5fFxoRxzXhWnXibNlR1IxinPEqNIV9Shm6hMJIZ6pi/NQ3O0ak7otBah6CEdUzY
+ D9zg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=txCaZGupux01giCFmVETdTBZ5PLmb8pvLW2OavDVUuY=;
+ fh=mv98/Bh4/OE8tOsIbuxEWNwtaX4nSnMD9emH+z6Tpuc=;
+ b=DdESnWfw3yQxykGzOjqR+TFacocJP6Qk1XdUtqeBZYBI+crK0coPDLHwyHZ+KHAwEx
+ YY7Zr9ssjGBqAEAd9RBbHTDAWd8BJZRo8iNSOMxIgaHtFNogpD+bWQo63Ffhpfw87mtR
+ aA+60XOWtSwDNUl6+n3W20CAWAFw+3LUklQ0GQoLbp6FHN3Nt15gQ6M3TrDNOnESp8tk
+ can2Psj2fB0Qn+uxjZOsCCOdmZ5DgBVnwFJkfoSxoCP+PdncueUXrqC4Sh1CsOivoxfU
+ knx1VBn/6aopMO93e3wLxseoYafKG3xy7R6sUoALXi1RUsgy+GwsXAXqOli7RwG9PwgE
+ Nagg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785625042; x=1786229842;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=txCaZGupux01giCFmVETdTBZ5PLmb8pvLW2OavDVUuY=;
+ b=Ku7iCHeDv889z/2AkbKvfGH+CGvytI2mwFKAQMJ2Agb8kvUr1IlYeawg9XXklN9cKi
+ Odp5uOqgTl+EpiA3FSqtgSCQAxVzl8KUvJttCERN71NZlVlgZg8RNIpKTOXRj+HQBOxK
+ 9xE62pm20/lb0zCgCuZ1hVlgkXlZ4xo5CEjeo+8yPSVe+GdOyLcUc4oazGsZxuoSGroj
+ YPg09OVLGJydLAMsaWhTPfBuE9aL7MUOUT/g3AWFIr3m69FdKmr0xnDQ19BQ9q2A2z1E
+ NjM/G2wrDb5lCXOGCSiFZNIO3zo0ELJJ73P9X+YxOUKSHP2MOZiM8tYz34ADWSydhTjB
+ eQ2w==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqtEZGLfn5pPkwqIcrsYMzCyJ9/pZMLcoiy9LJ3ISvOFs4iLA70gso/6TgeFldF1sruhC3nOWA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Ywj9EbMaMGThhWQOZEKlHpz8w6p9F0HqWDBCbis/IKr4KEp7RmU
+ SK4xzGcYrxhv/593ILXMgq3oonfDdyl5CEX2Xr01fY524cibWdtMaJWNOIVlZzNeNJGYfmIa58D
+ RYStBSzmoXYTDP/49DOivDsZ75tv3uOGlA8GAC7Fu/w==
+X-Gm-Gg: AR+sD12MzGgY4Bi+1Uca44orlHt2M3Te/gkL2iC2QNQEzq6pFgAbxu79zZyQbwA63ul
+ 1HsjA3IFLHqBiUALGqTAaa1JpKWfSwfr1R5AIDesMXO6g9yBfLWokrPQa+tWf+StbrZfgLn0N1k
+ epAn5GD28TxtUoiTrvbtBIEI+H3BcqaEVYqDqcilAXKROKb6KC08NQar03/S2rChILZB8ziOguj
+ aFv0Ql77J65EtqR/9JnNPH/46oNKhg4gNRr5FTO3JJcafCvXXG/RtZqZzkZCqiR6UcOSOoAWl3g
+ T4go/IGz7Kr7xv6+AcqIJkTRqMzrgwtKuFFjW4StxW24u7pUiD1a+yMKbZjanvSxYnThzxuOa5j
+ JhQoOV3v9sssehN5iO7fhpD11kQ==
+X-Received: by 2002:a17:90b:164e:b0:381:dc88:7c09 with SMTP id
+ 98e67ed59e1d1-38fbc56cda4mr4636213a91.33.1785625042034; Sat, 01 Aug 2026
+ 15:57:22 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] usb: mtu3: wait for TX FIFO to drain before disconnect
-To: Carlo Caione <ccaione@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Bin Meng <bmeng.cn@gmail.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- u-boot@lists.denx.de
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- David Lechner <dlechner@baylibre.com>, Julien Stephan
- <jstephan@baylibre.com>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Vitor Sato Eschholz <vsatoes@baylibre.com>
-References: <20260720-ccaione-upstream-mtu3-tx-fifo-drain-v3-1-45c0e072b64a@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <20260720-ccaione-upstream-mtu3-tx-fifo-drain-v3-1-45c0e072b64a@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: id9gznnpk4pmbfq9fyzxoxnjmw77dhot
-X-MBO-RS-ID: 5184766437624280076
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+References: <20260731-rzn1-2026-07-v1-0-af2ce80db9d8@linaro.org>
+ <20260731-rzn1-2026-07-v1-3-af2ce80db9d8@linaro.org>
+ <800f6c85-7854-4b7e-9509-3006c3ca8b42@ti.com>
+ <CANp-EDa+2Hdzg2nn9mcOupkLNPvAohnu_1UZ9AaysG_gvK==AA@mail.gmail.com>
+ <1ef87c1d-4188-48e6-b67b-205364bbe39b@ti.com>
+In-Reply-To: <1ef87c1d-4188-48e6-b67b-205364bbe39b@ti.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Sat, 1 Aug 2026 18:57:14 -0400
+X-Gm-Features: AUfX_myPVtQ4l8RC233tiB7iZFOYRkiogQBDDefuN6TcSfuw1ZM9Ldt1JlhUKuE
+Message-ID: <CANp-EDZON_QjoF+Y_E099TNxY-DGMH+sZYVtHTwe3mX14C6meQ@mail.gmail.com>
+Subject: Re: [PATCH 03/17] spi: cadence_qspi: Use APB write protection
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.u-boot-project.org, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>, 
+ Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Naman Trivedi <naman.trivedimanojbhai@amd.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sean Anderson <sean.anderson@linux.dev>, 
+ Boon Khai Ng <boon.khai.ng@altera.com>, Ye Li <ye.li@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Jim Liu <jim.t90615@gmail.com>, Ben Wolsieffer <ben.wolsieffer@hefring.com>, 
+ Stanley Chu <yschu@nuvoton.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Anshul Dalal <anshuld@ti.com>, David Lechner <dlechner@baylibre.com>,
+ Daniel Palmer <daniel@thingy.jp>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Richard Genoud <richard.genoud@bootlin.com>,
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Hai Pham <hai.pham.ud@renesas.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Julien Stephan <jstephan@baylibre.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 02 Aug 2026 00:02:30 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1785615401;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=onSV6isfcAHa/Uz3c1LprPsbU3wfqRdAXOZq0Uv9EWo=;
- b=M3Ky78ubJjmiL9YcY22LvuxS3xf86mNZRI61abg3wjSGgA/rgitpNTXAKmwqen5/NO5rkf
- M0X1iqxrnlj+kE1I8oSetOzKWl68oqlNekRcIN9YnkbEpc0Fo1KIiJ82hA6G8tjI8BpGFT
- 0YFbpwwFcMmMd2oj2dNvWQdkDp7SkNIbWO/RN58WqE1aWB7MMWy/Nt1oZ28sErQB8f8jWp
- HqeTWtI/t8+YV0ReO/5ftXoUXOPnltcUETanQSCfHh63xOg82npUN2mDtbmxOvLf7f9Xxr
- dyMIw5H7PbfU+zocd0020ryn2gnh1JrFLkHjgFbRR1tt4Tqu/wv940V3bNSrkw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- spf=fail smtp.mailfrom=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=M3Ky78ub
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=marek.vasut@mailbox.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- secure) header.d=mailbox.org header.i=@mailbox.org header.b="M3Ky78ub"; 
- dkim-atps=neutral
+ d=linaro.org; s=google; t=1785625042; x=1786229842;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=txCaZGupux01giCFmVETdTBZ5PLmb8pvLW2OavDVUuY=;
+ b=nDuwqc0K7LPgCF0vzx7AReUTVVugiQVnRVO9yWtv0ql5fRpZWMEW+U4othkRJsTMXi
+ jRtnXi1DmZ7OlI+FMazIXLINnrnEuazixJppcIhXnSMBBsPoeupvgfDgaAnIqkc365KM
+ uyoYROulU0lhO69NTBqNcsZ4llA5IdbG19FQZzbSm1BMyxx0biqYGJqX1CxFgjoEKivS
+ HTj0VbJRUlLYHz4VXsPhhKKp51tE6jo3j+5HBZpJDXQfrE5mQ4Donmd/3XjDqb8B/QRe
+ kl0XmsPM7wd3+HsudWoXX4+910tdphYDdelv7n9utrkH+tuTEIdoIBIo2nVGq/tzcfxg
+ XOLA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=nDuwqc0K
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -129,27 +181,42 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Marek Vasut <marek.vasut@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 7/20/26 10:03 AM, Carlo Caione wrote:
-> Fastboot unregisters the USB gadget from the completion callback of
-> its final OKAY response. MTU3 QMU can report that request complete
-> while bytes remain in the endpoint TX FIFO. Disabling the USB function
-> immediately can therefore disconnect the host before it receives the
-> response.
-> 
-> Before selecting the high-speed or SuperSpeed disconnect operation, poll
-> the FIFO state of enabled IN endpoints that have no pending requests.
-> Bound the wait to 1 ms. If a FIFO does not drain, reset its endpoint,
-> force the disconnect, and propagate -ETIMEDOUT through the gadget pullup
-> operation. Endpoints with pending requests are skipped so an ordinary
-> disconnect does not wait for an active transfer.
-> 
-> Fixes: e09b88cd083d ("usb: add MediaTek USB3 DRD driver")
-> Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+On Sat, Aug 1, 2026 at 11:33=E2=80=AFAM Kumar, Udit <u-kumar1@ti.com> wrote=
+:
+>
+> Could you share your compiler details
+>
+> My compiler reports warning (gcc version 11.3.1 20220712)
+>
+> ../drivers/spi/cadence_qspi_apb.c:334:13: warning:
+> =E2=80=98cadence_qspi_apb_write_protect_enable=E2=80=99 defined but not u=
+sed
+> [-Wunused-function]
+>   334 | static void cadence_qspi_apb_write_protect_enable(void *reg_base)
 
-Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
+I'm using arm-none-eabi-gcc (15:13.2.rel1-2) 13.2.1 20231009.
+
+I would also expect a warning, but none appears. Even when I change
+the "caller" to
+
+    if (0)
+        cadence_qspi_apb_write_protect_disable(priv->regbase);
+
+there is no warning. However if I remove those two "caller" lines
+completely, then I get the warning:
+
+    drivers/spi/cadence_qspi_apb.c:334:13: warning:
+'cadence_qspi_apb_write_protect_disable' defined but not used
+[-Wunused-function]
+
+I'm compiling with CONFIG_CC_OPTIMIZE_FOR_SIZE and #
+CONFIG_OPTIMIZE_INLINING is not set (eg. the default values).
+
+Either way, I am happy to add back an #ifdef around the function definition=
+s.
+
+Regards,
+Ralph
