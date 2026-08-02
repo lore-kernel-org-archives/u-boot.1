@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CACDC55162
-	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 13:27:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7077FC55162
+	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 13:27:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BCB7760748;
-	Sun,  2 Aug 2026 13:27:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C0C2860751;
+	Sun,  2 Aug 2026 13:27:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pZs--wh5QouP; Sun,  2 Aug 2026 13:27:50 +0000 (UTC)
+ id OCKhoioyfd_K; Sun,  2 Aug 2026 13:27:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 47FF6606E5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6CBEF6073C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785677270;
-	bh=wpm3i8qtwCu7o6/4/dq71yDUSFjNwyAh7/bTp2v+G14=;
+	d=lists.u-boot-project.org ; s=default; t=1785677272;
+	bh=eYu+mARdLAxIoNBk3uSaZPcYXGH+1tPEPG4efPobjJw=;
 	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=glAGkmktIEn6axddxmXNQI6R2DZkEQpy0v5dl2QHNAB5AaEZ9KwEJduaFZl4bQ7HC
-	 bKuPJfcf5xe4BYViFPaZSmpPsj9Nfo04dBMKyettwBePG/A2y//P5Ahi/faEXaoiuO
-	 BCdnbuaBJRay1rFGR86ZShr5R68PNhxdaTFpy8bu7GCBzmxGJ3l1Ie8NsZ0qwHm8Rq
-	 BksUGzjHaHqGgv4UikvDtFQonGJa4HmFRO27ur30VeqpJCyolxUOCg7hD/3cf5ndxf
-	 2DkWHd0bNk6waS322CYcbzODDXYQKCR00HqHlljBVZP12fAml/TSL1RHDq0rqO1pBM
-	 6hBoXbeA2ntHg==
+	b=FggDLHV8+LGq2voeWq0p5As5Z5IqrO2Hh8BCVZPLKyXEPWJktGe2xF9603INmnyuQ
+	 q+fC1SmS5Ek27bHOvufuHb7QQoUSQHNTyTiYeO8B2CQ6KICO47l/I0uo7G2Rk50TCz
+	 N4ccm4mfTbrrPwI68dft2bjAbGklV7PZyP5W2gDUh803T83VFD0n8yCou9FFsign1K
+	 /tQoJF+MOk71TpGM71yrvpEizKiCfIqk7NhA9Lk1iJzHPAh75ue2smDOmgTCyjP+Cu
+	 b3VLMhxmbEKVSuXo5eMcCyQIirG3ULUowgXXLAjKe/eQEFxMDB8yhP+P4/ql1emrUQ
+	 ZceIrPtD/CKCQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 47FF6606E5;
-	Sun,  2 Aug 2026 13:27:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0285A2CE
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6CBEF6073C;
+	Sun,  2 Aug 2026 13:27:52 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 95EDD3A6
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DD08840650
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:32 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 93EB940650
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 73R3Z0qn6Ex9 for <u-boot@lists.u-boot-project.org>;
- Sun,  2 Aug 2026 09:35:32 +0000 (UTC)
+ id dxhD10oMk7K0 for <u-boot@lists.u-boot-project.org>;
+ Sun,  2 Aug 2026 09:35:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=munzzyy1@proton.me; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 5A18E40635
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5A18E40635
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 469204067A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 469204067A
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5A18E40635
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 469204067A
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:35 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF8AA80117; Sun,  2 Aug 2026 11:35:29 +0200 (CEST)
-Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
- [109.224.244.18])
+ id B25D580117; Sun,  2 Aug 2026 11:35:33 +0200 (CEST)
+Received: from mail-43100.protonmail.ch (mail-43100.protonmail.ch
+ [185.70.43.100])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0A4D805D7
- for <u-boot@lists.denx.de>; Sun,  2 Aug 2026 11:35:27 +0200 (CEST)
-Date: Sun, 02 Aug 2026 09:35:22 +0000
+ by phobos.denx.de (Postfix) with ESMTPS id B1036805D7
+ for <u-boot@lists.denx.de>; Sun,  2 Aug 2026 11:35:31 +0200 (CEST)
+Date: Sun, 02 Aug 2026 09:35:26 +0000
 To: u-boot@lists.denx.de
 From: Cole Munz <Munzzyy1@proton.me>
 Cc: Alexey Charkov <alchark@flipper.net>, Qu Wenruo <quwenruo.btrfs@gmx.com>,
  Marek Behun <kabel@kernel.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/3] fs: btrfs: release the path when btrfs_search_slot()
- fails
-Message-ID: <029949953a54514c74303f9a2211e10b6ccb2f8f.1785660029.git.Munzzyy1@proton.me>
+Subject: [PATCH v3 3/3] fs: btrfs: deduplicate the inode size lookup
+Message-ID: <4536a7a3bb0c0be683366a54703baef4969463c3.1785660029.git.Munzzyy1@proton.me>
 In-Reply-To: <cover.1785660029.git.Munzzyy1@proton.me>
 References: <c8e57b678bee2394655ea5e7b0678fb300705e2f.1785649258.git.Munzzyy1@proton.me>
  <CAKTNdwGCYjr+2vaBc6kArQokqTF=Gc23mF17B_22Fdcg1O=7hQ@mail.gmail.com>
@@ -72,7 +71,7 @@ References: <c8e57b678bee2394655ea5e7b0678fb300705e2f.1785649258.git.Munzzyy1@pr
  <d95529ec-3da5-443b-8c05-776309f06ada@gmx.com>
  <cover.1785660029.git.Munzzyy1@proton.me>
 Feedback-ID: 209578162:user:proton
-X-Pm-Message-ID: 28da5bef252b7d45cf1dc9af22f2f33ab02775f5
+X-Pm-Message-ID: 76e924409945d80685f15d09fa40642f616233ed
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -81,17 +80,17 @@ X-Virus-Status: Clean
 X-Mailman-Approved-At: Sun, 02 Aug 2026 13:27:38 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=proton.me; 
- s=protonmail; t=1785663327; x=1785922527;
- bh=wpm3i8qtwCu7o6/4/dq71yDUSFjNwyAh7/bTp2v+G14=;
+ s=protonmail; t=1785663331; x=1785922531;
+ bh=eYu+mARdLAxIoNBk3uSaZPcYXGH+1tPEPG4efPobjJw=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=AUQ9OPlMAitJ5asr1uuGF0hsw++8i+r1c/xQ8Fb6rJU9gskwv75k2bvZ3KXT5mWQW
- pBQPTorVFfGVWfPfW/T6MefYUdAIAJ3wjiN4ImG9nLtspY2WSkhOJZ4+ik1J0DX2Eg
- H+wMY3Gq+sDjbmKZSp2hMTiLCy7aNry02obOKsURLw6zWOXGh8A7O2H6cY/x3Ja5JR
- WZ/K5sfsLSHqV6zeZUh7vUR0/esvm+i2MDgNDkPtInhvVawfRXtqdngSHfJ2Pnz3j1
- AvMVCbPpsEwaDQd3c8F4QPTYnF7PURXmjUt/y5TPUr51ikU6BmU2ws2Wk3hb0QSnRi
- Vh3Q0avwppS0g==
+ b=FYenVreJAMHAW3Hq8hGi9fVQl2Jbr8oEvUBymy8U1RpNx+ueKtu2LMNCsjPfFpEf2
+ sLHPv1VhZZuWWT8ikQayXeIuRzfuzBtP9N6A2MDIV+7Co9AYQMgCNA3xpD9Dadg9SR
+ 8WiciCacDu7kP0vuT7Vrj4VG7bdNDKHnEA41FMDDZ7lISADmCd2B3BMOoqbdm34wCu
+ AVxxFDsjoqK9hc3P+TE9+cAYRNx5xuQwAwjrGhT9endU4F4DJdQSRBXcJKdbSbNYc1
+ VdwHO/RFA+8PwtUD44Sff4ZUYOZ0cj6KIYVSgNJRe47A5vz0rEujpAbJfVcu/YZItR
+ NzWk5bAZHDRfg==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
@@ -100,7 +99,7 @@ X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256
- header.s=protonmail header.b=AUQ9OPlM
+ header.s=protonmail header.b=FYenVreJ
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
@@ -108,7 +107,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Munzzyy1@proton.me
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- secure) header.d=proton.me header.i=@proton.me header.b="AUQ9OPlM"; 
+ secure) header.d=proton.me header.i=@proton.me header.b="FYenVreJ"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -124,68 +123,135 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The U-Boot copy of btrfs_search_slot() returns on error with the nodes
-it has descended through still attached to the path. The kernel one
-releases the path on any error unless p->skip_release_on_error is set,
-and callers written against that convention treat a failed search as
-owning nothing. btrfs_size() is one: it returns straight away on a
-search error and never reaches its btrfs_release_path() call, so the
-attached extent buffer references leak.
+btrfs_readdir() and btrfs_size() both open code the same search for an
+inode item to read its size field. Move it into one helper.
 
-Route both error exits through a release of the path. The error
-returns of read_node_slot() carry no extra reference, so the path is
-the only thing to clean up.
-
-Suggested-by: Qu Wenruo <quwenruo.btrfs@gmx.com>
 Signed-off-by: Cole Munz <Munzzyy1@proton.me>
 ---
- fs/btrfs/ctree.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ fs/btrfs/btrfs.c | 75 +++++++++++++++++++++++++++---------------------
+ 1 file changed, 42 insertions(+), 33 deletions(-)
 
-diff --git a/fs/btrfs/ctree.c b/fs/btrfs/ctree.c
-index 8e932adc425d..48c50e556b16 100644
---- a/fs/btrfs/ctree.c
-+++ b/fs/btrfs/ctree.c
-@@ -425,8 +425,10 @@ int btrfs_search_slot(struct btrfs_trans_handle *trans=
-,
- =09=09level =3D btrfs_header_level(b);
- =09=09p->nodes[level] =3D b;
- =09=09ret =3D check_block(fs_info, p, level);
--=09=09if (ret)
--=09=09=09return -1;
-+=09=09if (ret) {
-+=09=09=09ret =3D -1;
-+=09=09=09goto err;
-+=09=09}
- =09=09ret =3D btrfs_bin_search(b, key, &slot);
- =09=09if (level !=3D 0) {
- =09=09=09if (ret && slot > 0)
-@@ -461,8 +463,10 @@ int btrfs_search_slot(struct btrfs_trans_handle *trans=
-,
- =09=09=09=09break;
-=20
- =09=09=09b =3D read_node_slot(fs_info, b, slot);
--=09=09=09if (!extent_buffer_uptodate(b))
--=09=09=09=09return -EIO;
-+=09=09=09if (!extent_buffer_uptodate(b)) {
-+=09=09=09=09ret =3D -EIO;
-+=09=09=09=09goto err;
-+=09=09=09}
- =09=09} else {
- =09=09=09p->slots[level] =3D slot;
- =09=09=09/*
-@@ -479,6 +483,10 @@ int btrfs_search_slot(struct btrfs_trans_handle *trans=
-,
- =09=09}
+diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
+index b2856be0662f..f5f6d638ffd3 100644
+--- a/fs/btrfs/btrfs.c
++++ b/fs/btrfs/btrfs.c
+@@ -88,14 +88,42 @@ static unsigned int btrfs_dirent_type_to_fs_type(u8 dir=
+ent_type)
  =09}
- =09return 1;
-+
-+err:
-+=09btrfs_release_path(p);
-+=09return ret;
  }
 =20
- /*
++/*
++ * Read the size stored in an inode item.  A missing item is -ENOENT and
++ * leaves *size untouched.
++ */
++static int btrfs_get_inode_size(struct btrfs_root *root, u64 ino, u64 *siz=
+e)
++{
++=09struct btrfs_inode_item *ii;
++=09struct btrfs_path path;
++=09struct btrfs_key key;
++=09int ret;
++
++=09key.objectid =3D ino;
++=09key.type =3D BTRFS_INODE_ITEM_KEY;
++=09key.offset =3D 0;
++
++=09btrfs_init_path(&path);
++=09ret =3D btrfs_search_slot(NULL, root, &key, &path, 0, 0);
++=09if (ret < 0)
++=09=09return ret;
++=09if (ret > 0)
++=09=09ret =3D -ENOENT;
++=09if (!ret) {
++=09=09ii =3D btrfs_item_ptr(path.nodes[0], path.slots[0],
++=09=09=09=09    struct btrfs_inode_item);
++=09=09*size =3D btrfs_inode_size(path.nodes[0], ii);
++=09}
++=09btrfs_release_path(&path);
++=09return ret;
++}
++
+ int btrfs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **dentp)
+ {
+ =09struct btrfs_dir_stream *dirs =3D container_of(fs_dirs, struct btrfs_di=
+r_stream, parent);
+ =09struct btrfs_fs_info *fs_info =3D current_fs_info;
+ =09struct fs_dirent *dent =3D &dirs->dirent;
+-=09struct btrfs_inode_item *ii;
+ =09struct btrfs_root *root;
+-=09struct btrfs_path path;
+ =09struct btrfs_key location;
+ =09struct btrfs_key key;
+ =09u8 type;
+@@ -127,16 +155,13 @@ int btrfs_readdir(struct fs_dir_stream *fs_dirs, stru=
+ct fs_dirent **dentp)
+ =09 * layer prints it, so look it up.
+ =09 */
+ =09if (location.type =3D=3D BTRFS_INODE_ITEM_KEY) {
+-=09=09btrfs_init_path(&path);
+-=09=09ret =3D btrfs_search_slot(NULL, root, &location, &path, 0, 0);
+-=09=09if (ret =3D=3D 0) {
+-=09=09=09ii =3D btrfs_item_ptr(path.nodes[0], path.slots[0],
+-=09=09=09=09=09    struct btrfs_inode_item);
+-=09=09=09dent->size =3D btrfs_inode_size(path.nodes[0], ii);
+-=09=09}
+-=09=09btrfs_release_path(&path);
+-=09=09if (ret < 0)
++=09=09u64 size;
++
++=09=09ret =3D btrfs_get_inode_size(root, location.objectid, &size);
++=09=09if (ret < 0 && ret !=3D -ENOENT)
+ =09=09=09return ret;
++=09=09if (!ret)
++=09=09=09dent->size =3D size;
+ =09}
+=20
+ =09*dentp =3D dent;
+@@ -173,10 +198,8 @@ int btrfs_exists(const char *file)
+ int btrfs_size(const char *file, loff_t *size)
+ {
+ =09struct btrfs_fs_info *fs_info =3D current_fs_info;
+-=09struct btrfs_inode_item *ii;
+ =09struct btrfs_root *root;
+-=09struct btrfs_path path;
+-=09struct btrfs_key key;
++=09u64 isize;
+ =09u64 ino;
+ =09u8 type;
+ =09int ret;
+@@ -191,27 +214,13 @@ int btrfs_size(const char *file, loff_t *size)
+ =09=09printf("Not a regular file: %s\n", file);
+ =09=09return -ENOENT;
+ =09}
+-=09btrfs_init_path(&path);
+-=09key.objectid =3D ino;
+-=09key.type =3D BTRFS_INODE_ITEM_KEY;
+-=09key.offset =3D 0;
+-
+-=09ret =3D btrfs_search_slot(NULL, root, &key, &path, 0, 0);
+-=09if (ret < 0) {
+-=09=09printf("Cannot lookup ino %llu\n", ino);
++=09ret =3D btrfs_get_inode_size(root, ino, &isize);
++=09if (ret) {
++=09=09printf("Cannot read size of ino %llu\n", ino);
+ =09=09return ret;
+ =09}
+-=09if (ret > 0) {
+-=09=09printf("Ino %llu does not exist\n", ino);
+-=09=09ret =3D -ENOENT;
+-=09=09goto out;
+-=09}
+-=09ii =3D btrfs_item_ptr(path.nodes[0], path.slots[0],
+-=09=09=09    struct btrfs_inode_item);
+-=09*size =3D btrfs_inode_size(path.nodes[0], ii);
+-out:
+-=09btrfs_release_path(&path);
+-=09return ret;
++=09*size =3D isize;
++=09return 0;
+ }
+=20
+ int btrfs_read(const char *file, void *buf, loff_t offset, loff_t len,
 --=20
 2.55.0
 
