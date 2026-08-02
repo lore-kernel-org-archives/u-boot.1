@@ -1,119 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7211EC55174
-	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 21:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CB2C55174
+	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 21:36:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 82E0B405F4;
-	Sun,  2 Aug 2026 21:35:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 09178606CB;
+	Sun,  2 Aug 2026 21:36:58 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Yvc36R0o3tMO; Sun,  2 Aug 2026 21:36:56 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6CD78606AF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785706616;
+	bh=gWjb9+cDA2RpO/oy17hCdhz9FI9G7P9hWxXw7b+618M=;
+	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=Dg8a3ZAPl1yD0QLKEoE6YepHxGSMn0IgDqcYVKxhHmYDl8AIeWrC3bbZCd6izSALo
+	 xEyVtYZ+MQ6oWRsCVokB9dKUjnxy9H1pulQuJSCgWnfWUA1zYZrF+diOTjpKMPb9K9
+	 JH7spQHEoMisBTGMz3bsObeBCcgdYIaSqSnvKXik+cE4ttfUG1qLX/zgR1Gtp8QCrs
+	 U6Pwng0a0upM8hunQWbzGU2N90dcyUeODFwFbMYF9Q/DCXa8xAOlGy/09DULyQfNeB
+	 f4KMssnyvKA6CSfu7hKwONYZUFtZz3R5NXIn59MGi/6/g1Y+wq1/tbWN2kzlZWE/E3
+	 9SvdeWL4p0DwA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6CD78606AF;
+	Sun,  2 Aug 2026 21:36:56 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 31EF026C
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 21:36:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 22FC3405A6
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 21:36:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cfipwAlhAh_P; Sun,  2 Aug 2026 21:35:46 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2EB95405E5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785706546;
-	bh=5E1UqtFscLUlN1UfJff9/9NUlolYnu6oIPg1twTBo0Y=;
-	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=KxQMgtriDOpL9DMagAqUdIbZn3sCpqB0i8eqI3/1A9XizRoeyZeTzQR88H8Xs87iN
-	 W6CYhOeAmWGrcN9ZPYCNxjx1Y9pSO4+EBNRJGQIyfEw6ferbbm2snvWM1JPUicewaY
-	 Y6uphmiH+kJwnFF92aUqEcCLf0V7fCiBug26XzGK+tpvZVjjd5U/Wy6AxZHzRFiTyP
-	 eChy7H9PN44hGx7u6u3FqDHwY+nRlvJDq3GACzeyC6g8xCavZMNZBfrVuD1VpXVqyR
-	 9hxFLumEdHPG6FD0Gjg4Rp8rU3/a60Zb4D5BdA4Y0tuuYQV6c1T0x+m64wHmICJglB
-	 EZctrBMrr6AXA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2EB95405E5;
-	Sun,  2 Aug 2026 21:35:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A5DCB26C
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 21:35:44 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A3391400FD
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 21:35:44 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rmORbbALeK3Y for <u-boot@lists.u-boot-project.org>;
- Sun,  2 Aug 2026 21:35:44 +0000 (UTC)
+ id bSOlvDT3irYX for <u-boot@lists.u-boot-project.org>;
+ Sun,  2 Aug 2026 21:36:54 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
  helo=mout-p-101.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org D3FDE4006F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D3FDE4006F
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 000654050C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 000654050C
 Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D3FDE4006F
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 21:35:43 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 000654050C
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 21:36:53 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hCtQP5NTYz8tCZ;
- Sun, 02 Aug 2026 23:35:41 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4hCtRl5JjHz8v0l;
+ Sun, 02 Aug 2026 23:36:51 +0200 (CEST)
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Aristo Chen <aristo.chen@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] arm64: renesas: Enable verbose DRAM layout print on
- Renesas R-Car X5H R8A78000
-Date: Sun,  2 Aug 2026 23:33:38 +0200
-Message-ID: <20260802213530.134789-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260802213530.134789-1-marek.vasut+renesas@mailbox.org>
-References: <20260802213530.134789-1-marek.vasut+renesas@mailbox.org>
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] arm64: dts: renesas: ironhide: Describe all reserved
+ memory
+Date: Sun,  2 Aug 2026 23:35:49 +0200
+Message-ID: <20260802213643.134847-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 6b710624c47a79c0b07
-X-MBO-RS-META: zge38u5zeyb7apgbx9gwuabtcqsb7kak
-X-Rspamd-Queue-Id: 4hCtQP5NTYz8tCZ
+X-MBO-RS-ID: 538629c36ee8de29ef0
+X-MBO-RS-META: 4ew7iy5ncn8crfjrpjdd5oaywxzrq844
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785706541;
+ t=1785706611;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5E1UqtFscLUlN1UfJff9/9NUlolYnu6oIPg1twTBo0Y=;
- b=lwqjoLjxUxi88liLt0drI0ZM8tEbRmUnb1o35TmAolZqNRWtoxEwsVi1Te2KPekAIlJdbV
- /46whcNL35sIICguvcgsEavz7+syu5n7STP6g4b4uQLFZfkLu9tdCGOas+haXa8Hj0XJ42
- 8SwnErr4euCVUpE9scztBDVt3+jsedGvffB5aXg51+8ShCWXnYxnuQruub8F52bg9xVzLs
- 1DaUJAwCGsCpZfDOLXSn8jy++pk/ETvljehmrEG9k2G3GN/HbiVyhBJU0kEq2AMEONRkWi
- blj6Ob0mIDF6jmLbX3P6RivkMn/Zs7m8PCoWWB+6HFk10P4fSFU9AelGVFnqqQ==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gWjb9+cDA2RpO/oy17hCdhz9FI9G7P9hWxXw7b+618M=;
+ b=vLSburEq7zdLTLV1uKr5fRIVsLZCF20Ql+6Ng55qnCgZVxV+8frMDhxhz+bo+LRqgT+Onf
+ 5OhCPac/RctPUuZgEGOnoTjIFYU0AMICTA5CyTUPZJC7jqnfmDmUVHe47It94TM+uCNAcP
+ iBt81Uzx7YwUFte/3MVrFJQWrAFuRvCvzyLEfhORJulHBwnTOgfNuIS9hKwAvjpMyZyOlf
+ y2H6pfflv9gJ4qnqSoWWI9gK+Ix011bRFeknB6xuB1Kd07R5iZY0hCQk4QEkMzodJCE605
+ le7H934h7XXG87ZYOi2dh/MlWKOTFWfju7a0SFHs5bNeVdUFQx6tWYsjl3X+Ag==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785706540;
+ t=1785706610;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5E1UqtFscLUlN1UfJff9/9NUlolYnu6oIPg1twTBo0Y=;
- b=tpKfgAW58zAWh8Qwnne2TdfqsnIYI1qPUds+99bvKhcMW3wRsMBJWdLV9KacnH4SPTzYib
- bTI3KIpz5CzPQw+Md68IsyG5nByxExLV8HW3nzdLVKjKuuQFitecwMGOmxsD9s0X4JLINX
- AnUklNo1v3HRWRmVXHs3XWJN9IVvrYbx188+WZgI64Mw/q6zhEp4Tfhn4QDk2GrXfvXIFx
- xvinRRt0FaIeD2HAXstflsb+0H5rC+h7SVTqHFifPMXKarl81rx1+YbChQAXd4JlP8y3BX
- cxriGmAquqXmRUwUgVNBnUXgWE6tgttBOqilTvL1wuj8kUhfVMEgsxhCbs1LZQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gWjb9+cDA2RpO/oy17hCdhz9FI9G7P9hWxXw7b+618M=;
+ b=cLsjBiHyJtI4Yyf3BtVaBGk5evX2utgkNy9sQ82++3xrpX6P/j5wKOJMmaAnbKXNFOPxuT
+ yaABFifaEsfsPYTZTMXRyt9m7UvEU4u7QpziGlEZWaljn6Zwqf4vfr1fXmSks9V/M7TE1E
+ BIcj7IvhZ/2d0tyF/tegH1HQ7Rjc8m4YxOfYGFPQN9LVH/El0KD84YKpVZKbR+wC0WrZfL
+ 0VuVcwB5j+Ssk8dw5b8y1tjYHmINBCbaXvoZ+HJAUqy8il4Eh2dVvjX4HhVkVETdKjOS9S
+ QImFYUozVUYHUW2Uq5F2RyREKc/OLOOLwGMxUZsmX+ezryOHE0sCeenNuBmJpg==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=lwqjoLjx; 
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=tpKfgAW5
-X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=tpKfgAW5;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=vLSburEq; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=cLsjBiHy
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,36 +113,103 @@ Reply-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Enable verbose DRAM layout print on Renesas R-Car X5H R8A78000
-to inform the user of the DRAM topology on board.
+Fully describe all available DRAM in the DT, and describe regions which
+are not accessible because they are used by firmware in reserved-memory
+nodes.
+
+Replace the first memory bank memory@60600000 with memory@40000000 and a
+518 MiB long reserved-memory no-map subnode. This memory region is used
+by other cores in the system.
+
+Reserve 32 kiB of memory at 0x8c100000 for parameters shared by IPL,
+SCP, TFA BL31 and TEE.
+
+Reserve 512 kiB of memory at 0x8c200000 for TFA BL31.  The upcoming
+upstream TFA 2.15 BL31 uses memory from 0x8c200000..0x8c242fff; rounding
+up to 512 kiB is slight future-proofing.
+
+Reserve 32 MiB of memory at 0x8c400000 for OPTEE-OS, which is the entire
+OPTEE-OS TZ protected DRAM area.
+
+Neither TFA BL31 nor OPTEE-OS modify the DT passed to Linux in any way
+with any new reserved-memory {} nodes to reserve memory areas used by
+the TFA BL31 or OPTEE-OS to prevent the next stage from using those
+areas, which lets Linux use all of the available DRAM as it is described
+in the DT that was passed in by U-Boot, including the areas that are
+newly utilized by TFA BL31 or OPTEE-OS.
+
+In case of high DRAM utilization, unless the memory used by TFA BL31 or
+OPTEE-OS is properly reserved, Linux may use and corrupt the memory used
+by TFA BL31 or OPTEE-OS, which would lead to the system becoming
+unresponsive.
+
+Ported from Linux 7.2-rc5 commit
+5250b3b1ad99 ("arm64: dts: renesas: ironhide: Describe all reserved memory")
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Aristo Chen <aristo.chen@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Johan Jonker <jbx6244@gmail.com>
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- configs/r8a78000_ironhide_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/r8a78000-ironhide-u-boot.dtsi | 37 ++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/configs/r8a78000_ironhide_defconfig b/configs/r8a78000_ironhide_defconfig
-index f8a1403ae0d..21112c439f9 100644
---- a/configs/r8a78000_ironhide_defconfig
-+++ b/configs/r8a78000_ironhide_defconfig
-@@ -17,6 +17,7 @@ CONFIG_CMD_CLK=y
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_SCMI=y
- CONFIG_CMD_UFS=y
-+CONFIG_DISPLAY_DRAM_CONFIG_VERBOSE=y
- CONFIG_DM_MAILBOX=y
- CONFIG_DM_RESET=y
- CONFIG_ENV_IS_IN_MMC=y
+diff --git a/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi b/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi
+index 299716f96a4..21b03df849a 100644
+--- a/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi
++++ b/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi
+@@ -15,6 +15,13 @@
+ 		mmc0 = &mmc0;
+ 	};
+ 
++	/delete-node/ memory@60600000;
++
++	memory@40000000 {
++		device_type = "memory";
++		reg = <0x0 0x40000000 0x0 0x80000000>;
++	};
++
+ 	reg_1p8v: regulator-1p8v {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "fixed-1.8V";
+@@ -32,6 +39,36 @@
+ 		regulator-boot-on;
+ 		regulator-always-on;
+ 	};
++
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		/* First 518 MiB is reserved for other purposes. */
++		firmware@40000000 {
++			reg = <0x0 0x40000000 0x0 0x20600000>;
++			no-map;
++		};
++
++		/* Parameters set by IPL. */
++		parameters@8c100000 {
++			reg = <0x0 0x8c100000 0x0 0x00008000>;
++			no-map;
++		};
++
++		/* TFA BL31. */
++		tfa-bl31@8c200000 {
++			reg = <0x0 0x8c200000 0x0 0x00080000>;
++			no-map;
++		};
++
++		/* TEE TZ DRAM. */
++		tee@8c400000 {
++			reg = <0x0 0x8c400000 0x0 0x02000000>;
++			no-map;
++		};
++	};
+ };
+ 
+ &cpg {
 -- 
 2.53.0
 
