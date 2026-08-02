@@ -1,65 +1,66 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDFFC55171
-	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 04:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B81EC55171
+	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 04:35:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A290E60648;
-	Sun,  2 Aug 2026 04:35:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E3804069A;
+	Sun,  2 Aug 2026 04:35:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V1VGwnhGCq1A; Sun,  2 Aug 2026 04:35:24 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aEdEY2LWqWme; Sun,  2 Aug 2026 04:35:26 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C602760641
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E89140695
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785645323;
-	bh=GAJJzvqIoC72Jd5uXxRJmGeM5KvaULa96JMptXHBxoc=;
+	d=lists.u-boot-project.org ; s=default; t=1785645326;
+	bh=Xex2U89y3lUCzSgu48qS1G6ZfqhRvQlEKX/Wr6KXXrg=;
 	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=LZKWOdfGxP3B4NnMy4AYVy88sXeobSWAbHlVEnMB3yA4+bisuX/vP+/McOOsqf7ax
-	 P9eNx24EX4gNMcKedKEfcRIapBX/anhaBmSlOL9BRm0y1tL3+x70oYgi2Qd1FHiBhu
-	 oqIxZbfPqbqUoZ652tBTphPYVQthRuuWt4mAriVqN4bFGjtyfQpMnBb6CqFEM0765+
-	 rL94Z39k+Rc7SlbPYBjxtYmr3v+nBg3tUxyRwcq5R/oa2HDP/BjhThdGHRfwi3LO0k
-	 KPYXRyKV/PD1uvonTScth5lSm+O+I9QlQycrXoY8Sro/pNvE+/gZZpcV4RU7po88Gw
-	 equdjT3bjKu5w==
+	b=A/qUVlaqbGRJhM3J81QaK8AVHbiILl+R9gU2hXaz4H2LY61nAGaZeyj/PEIESHhkF
+	 /95469WcM0W4oirwOM9yq3OAwoyYuMV5pFsa7QrDT1nRWtvemJINsKhOq4rGyjyefK
+	 CUSTCdsZDKZHwTdG5+NIb1cKWbK/HQ2lP4ebkbNrt7NpsIQffFhU8pf3LLhB8AQWO2
+	 YaOHe5xlJ9xmQXmw2HfIs5RgWHNLgHYQQhSS+LXACZJ2wy6/S+lAO9k9/n32rBv9Zu
+	 PnaXugGPYITyNBooxx/2XRcvhTdBN9c2FOxpK79LqKxq+b45yozIgtlRSjMpb570hC
+	 IgNisaQAcDBhA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C602760641;
-	Sun,  2 Aug 2026 04:35:23 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 78FAC1389
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 03:35:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1E89140695;
+	Sun,  2 Aug 2026 04:35:26 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 123D723F
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 03:35:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5EAA880D7F
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 03:35:41 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0F84180D7F
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 03:35:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RfDHD_Q-L7L7 for <u-boot@lists.u-boot-project.org>;
- Sun,  2 Aug 2026 03:35:40 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
- helo=mout-p-103.mailbox.org; envelope-from=marek.vasut@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6AAA980D7A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6AAA980D7A
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6AAA980D7A
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 03:35:38 +0000 (UTC)
+ id kMj1EzoEzC6N for <u-boot@lists.u-boot-project.org>;
+ Sun,  2 Aug 2026 03:35:56 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0AC9D80D7A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0AC9D80D7A
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0AC9D80D7A
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 03:35:55 +0000 (UTC)
 Received: from smtp102.mailbox.org (smtp102.mailbox.org
  [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hCQS74zzgzKn2d;
- Sun, 02 Aug 2026 05:35:35 +0200 (CEST)
-Message-ID: <631912b3-55fd-4927-880f-b773969f1877@mailbox.org>
-Date: Sun, 2 Aug 2026 05:30:16 +0200
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4hCQST1D9LzKn8Z;
+ Sun, 02 Aug 2026 05:35:53 +0200 (CEST)
+Message-ID: <07464dc0-19b8-47df-8276-d1662e534fe4@mailbox.org>
+Date: Sun, 2 Aug 2026 05:33:45 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/17] pinctrl: renesas: r906g032: handle pin subgroups
+Subject: Re: [PATCH 03/17] spi: cadence_qspi: Use APB write protection
 To: Ralph Siemsen <ralph.siemsen@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  u-boot@lists.u-boot-project.org
@@ -97,52 +98,51 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
  Julien Stephan <jstephan@baylibre.com>,
  Bastien Curutchet <bastien.curutchet@bootlin.com>
 References: <20260731-rzn1-2026-07-v1-0-af2ce80db9d8@linaro.org>
- <20260731-rzn1-2026-07-v1-1-af2ce80db9d8@linaro.org>
+ <20260731-rzn1-2026-07-v1-3-af2ce80db9d8@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20260731-rzn1-2026-07-v1-1-af2ce80db9d8@linaro.org>
+In-Reply-To: <20260731-rzn1-2026-07-v1-3-af2ce80db9d8@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: ba34759758caf8270b2
-X-MBO-RS-META: sfgbnrrwge5b1djfz9ho8fktj6pm8m8m
-X-Rspamd-Queue-Id: 4hCQS74zzgzKn2d
+X-MBO-RS-META: drq5bzcuwdeq1uzb14hhh8jtb38x67mm
+X-MBO-RS-ID: c286e3628d87dd23cd0
+X-Rspamd-Queue-Id: 4hCQST1D9LzKn8Z
 X-Mailman-Approved-At: Sun, 02 Aug 2026 04:35:23 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785641735;
+ t=1785641753;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GAJJzvqIoC72Jd5uXxRJmGeM5KvaULa96JMptXHBxoc=;
- b=H+arKamRmCI2tR4uySTJ+7dCF4I217MBnong/kAClq6hXLKOghW9uFLmqAwJ+om5R544QO
- JkXdCzkZcR1L1PYkTOu2pxpCJPMyZvDOIpv+cJuBzVUV+CCtE2OEKyAHeg3W2+ml2joQSh
- QDZDwZL7TKFfG/r5ipEvzgt0k7bA5+CH4x75qjvxU1jqOEazCLjkDKhk8k4HjOf8sYumM+
- BcCwa1brKsd+UGL/6q3KMcucuupFqNNvwZ3++Uz47FyF6vrRKBYtmk/KolSenVwpuSjv1m
- RPplRh03fxd/0JkYO6caMEZsoi73U50PHDc9bX9URkTXCVFrqcFq5gUq4eYTbw==
+ bh=Xex2U89y3lUCzSgu48qS1G6ZfqhRvQlEKX/Wr6KXXrg=;
+ b=Ls4r+ZtC9VXmM14gdvF7e2lYSHX6SsclqXBp4vfvG/sYfe3fKBn3ftBmdi6myAkKbuZctz
+ cV2ILVkGNTFVxqyVDjT/nGOO3ql8yMJtU8Mh2FxBKRgUeuJTKUI06oOXeU9qQ8xsTSBive
+ ag89PHkTLsQRC+pY7xmzSd/YmZYIEZUqb1DtwkTsQ5pA6qBLJj3fLFUd6xDhcGFP1brA6I
+ Wg0C79vOlHjsIpIWK3fppTooiuCuZUj46ccvfDM+wRvv+UDMo+pUxQxJg/D5O+MCTB02m3
+ 54GxaaXxlTkcWIyscOjIbEwpOiQY1RS9gbM2aghtfXfFHQzmh607wr07eeZ49A==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785641733;
+ t=1785641750;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GAJJzvqIoC72Jd5uXxRJmGeM5KvaULa96JMptXHBxoc=;
- b=FA0H+rMw5VN3rYnPwgfJ1hLJ/Vu+i0l4VCM7hpRuxttfqZQ8LaBMqL1syXB6+GUsuXruNj
- u96qgV44ldAKb2kL/D8VlCUDzggRwY6tXsGXyg4D/rwmVswdJsHXbHDJLJR4NqEe3/+LtB
- ldE6wDL6+o7iE1yOu6XU+wqdHqVST348QIosVvT73I+fmtAXYlC90/MCkHUUGGgG+XNl1m
- u8q8DN2hX9A+Jx1Iv7yDfyFVNZ1SPMcuLRasT8ELORjWQjhLA4fFKe/rfHs3jPRK7hG61Q
- MWQXaTaEjBgBm1X7mAZBFdLx635XEmbp5QsE/q/BxX6RBWN4FDYFOh2fp6andA==
+ bh=Xex2U89y3lUCzSgu48qS1G6ZfqhRvQlEKX/Wr6KXXrg=;
+ b=sDdTVBJibj1VnzkUc9koattHnYkAdU8o0qBkGmn8H7P79IV/ZvFiYagRxDujG2uS2WzL9i
+ ae0mSXVDCQcGYKOyuaZ5vSedlzjKpETR3MihpJpJXUuG2L9IiHzRIPUamwuGoi08sKb0j/
+ JinDvIY3UgFTGxTcn4NfQj++CPRlEQBx1oWqkfGpRk95SKvsqFJmNciiTjsImGHqsl+HBz
+ mVIb7nBWJzO6XXAQWt49khRk1a4W1HptCLwSWBuGI6WwzAnPhk1rQQwzs8dxE2/cK1MF3a
+ dWIJq1ycj+QLoM3AVKc6q6TGiB4XRftnZd8kD1pl1rC7F+c0mawh/1O3vyZqrw==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=mailbox.org
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=H+arKamR; 
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=FA0H+rMw
+ header.a=rsa-sha256 header.s=mail20150812 header.b=Ls4r+ZtC; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=sDdTVBJi
 X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=FA0H+rMw;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=sDdTVBJi;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
  2001:67c:2050:b231:465::102 as permitted sender)
  smtp.mailfrom=marek.vasut@mailbox.org
@@ -163,63 +163,121 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 7/31/26 6:33 PM, Ralph Siemsen wrote:
-> Add simple recursion support to the .set_state method. This makes it
-> possible to use subbroups
-
-subgroups (typo)
-
-> in the device tree, which in turn allows
-> setting multiple pins with different bias/drive-strength properies.
-
-properties (another typo)
-
-> Fixes: e4aea57fa773 ("pinctrl: renesas: add R906G032 driver")
+> Prevent random memory writes from corrupting flash memory.
+> 
+> When using the Direct Access Controller (DAC), the QSPI flash appears as
+> a memory-mapped device. A stray write within the DAC region can corrupt
+> flash contents.
+> 
+> To prevent this, enable the hardware write protection feature. Due to
+> known errata [1] of the QSPI controller, the entire address range is
+> protected, and only gets unlocked during intentional QSPI writes.
+> 
+> [1] https://www.renesas.com/en/document/tcu/qspi-contoller-issue
+> 
 > Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
 > ---
->   drivers/pinctrl/renesas/pinctrl-rzn1.c | 15 +++++++++++++--
->   1 file changed, 13 insertions(+), 2 deletions(-)
+>   drivers/spi/Kconfig            | 11 +++++++++++
+>   drivers/spi/cadence_qspi.h     |  6 ++++++
+>   drivers/spi/cadence_qspi_apb.c | 27 +++++++++++++++++++++++++++
+>   3 files changed, 44 insertions(+)
 > 
-> diff --git a/drivers/pinctrl/renesas/pinctrl-rzn1.c b/drivers/pinctrl/renesas/pinctrl-rzn1.c
-> index fdc43c8e714..8b13a2cea75 100644
-> --- a/drivers/pinctrl/renesas/pinctrl-rzn1.c
-> +++ b/drivers/pinctrl/renesas/pinctrl-rzn1.c
-> @@ -298,6 +298,7 @@ static int rzn1_pinconf_set(struct rzn1_pinctrl_priv *priv, unsigned int pin,
->   static int rzn1_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+> diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+> index 007ad5e7733..19f8d48507b 100644
+> --- a/drivers/spi/Kconfig
+> +++ b/drivers/spi/Kconfig
+> @@ -168,6 +168,17 @@ config CADENCE_QSPI
+>   	  used to access the SPI NOR flash on platforms embedding this
+>   	  Cadence IP core.
+>   
+> +config CADENCE_QSPI_WRITE_PROTECT
+> +	bool "Cadence QSPI write protection"
+> +	depends on CADENCE_QSPI
+> +	help
+> +	  Enable hardware write protection in the QSPI controller. Helps avoid
+> +	  flash corruption due to stray writes. The direct access region is kept
+> +	  locked by default, and only gets unlocked during "sf write".
+> +
+> +	  This is similar to SYS_FLASH_PROTECTION however blocking is done by
+> +	  the controller, rather than by the flash device.
+> +
+>   config HAS_CQSPI_REF_CLK
+>   	bool "Cadence QSPI static reference clock"
+>   	depends on CADENCE_QSPI
+> diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
+> index 1e9081c2d17..6b3ed46977a 100644
+> --- a/drivers/spi/cadence_qspi.h
+> +++ b/drivers/spi/cadence_qspi.h
+> @@ -119,6 +119,12 @@
+>   #define CQSPI_REG_IRQSTATUS                     0x40
+>   #define CQSPI_REG_IRQMASK                       0x44
+>   
+> +#define CQSPI_REG_LOWER_WRITE_PROTECT           0x50
+> +#define CQSPI_REG_UPPER_WRITE_PROTECT           0x54
+> +
+> +#define CQSPI_REG_WRITE_PROTECT_CTRL            0x58
+> +#define CQSPI_REG_WRPROT_ENABLE                 BIT(1)
+> +
+>   #define CQSPI_REG_INDIRECTRD                    0x60
+>   #define CQSPI_REG_INDIRECTRD_START              BIT(0)
+>   #define CQSPI_REG_INDIRECTRD_CANCEL             BIT(1)
+> diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
+> index 0d4bc685f5d..353b57a46af 100644
+> --- a/drivers/spi/cadence_qspi_apb.c
+> +++ b/drivers/spi/cadence_qspi_apb.c
+> @@ -325,6 +325,17 @@ void cadence_qspi_apb_delay(void *reg_base,
+>   	cadence_qspi_apb_controller_enable(reg_base);
+>   }
+>   
+> +static void cadence_qspi_apb_write_protect_enable(void *reg_base)
+> +{
+> +	writel(CQSPI_REG_WRPROT_ENABLE,
+> +	       reg_base + CQSPI_REG_WRITE_PROTECT_CTRL);
+> +}
+> +
+> +static void cadence_qspi_apb_write_protect_disable(void *reg_base)
+> +{
+> +	writel(0, reg_base + CQSPI_REG_WRITE_PROTECT_CTRL);
+> +}
+> +
+>   void cadence_qspi_apb_controller_init(struct cadence_spi_priv *priv)
 >   {
->   	struct rzn1_pinctrl_priv *priv = dev_get_priv(dev);
-> +	struct udevice *child;
->   	int size;
->   	int ret;
->   	u32 val;
-> @@ -317,8 +318,6 @@ static int rzn1_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+>   	unsigned reg;
+> @@ -346,6 +357,18 @@ void cadence_qspi_apb_controller_init(struct cadence_spi_priv *priv)
+>   	/* Indirect mode configurations */
+>   	writel(priv->fifo_depth / 2, priv->regbase + CQSPI_REG_SRAMPARTITION);
 >   
->   	/* Number of pins */
->   	ret = dev_read_size(config, "pinmux");
-> -	if (ret < 0)
-> -		return ret;
-
-Is this removal of error checking correct ?
-
->   	size = ret / sizeof(val);
->   
-> @@ -338,6 +337,18 @@ static int rzn1_pinctrl_set_state(struct udevice *dev, struct udevice *config)
->   		rzn1_hw_set_lock(priv, LOCK_ALL, 0);
->   	}
->   
-> +	/*
-> +	 * Handle subnodes recursively, so that pin groups work.
-> +	 * Note that properties are *NOT* inherited from parent.
-> +	 */
-> +	for (device_find_first_child(config, &child);
-> +	     child;
-> +	     device_find_next_child(&child)) {
-
-device_foreach_child() ?
-
-> +		ret = rzn1_pinctrl_set_state(dev, child);
-> +		if (ret)
-> +			return ret;
+> +	if (IS_ENABLED(CONFIG_CADENCE_QSPI_WRITE_PROTECT)) {
+> +		/*
+> +		 * Enable AHB write protection, to reduce the chance of corrupting
+> +		 * flash memory due to a stray write within the DAC region.
+> +		 * Protect the entire address range, regardless of the flash size.
+> +		 * During "sf write" the protection will be temporarily disabled.
+> +		 */
+> +		writel(0, priv->regbase + CQSPI_REG_LOWER_WRITE_PROTECT);
+> +		writel(~0, priv->regbase + CQSPI_REG_UPPER_WRITE_PROTECT);
+> +		cadence_qspi_apb_write_protect_enable(priv->regbase);
 > +	}
 > +
->   	return 0;
-[...]
+>   	/* Disable all interrupts */
+>   	writel(0, priv->regbase + CQSPI_REG_IRQMASK);
+>   
+> @@ -955,7 +978,11 @@ int cadence_qspi_apb_write_execute(struct cadence_spi_priv *priv,
+>   	 */
+>   	cadence_qspi_apb_enable_linear_mode(true);
+>   	if (!priv->dtr && priv->use_dac_mode && (to + len < priv->ahbsize)) {
+> +		if (IS_ENABLED(CONFIG_CADENCE_QSPI_WRITE_PROTECT))
+> +			cadence_qspi_apb_write_protect_disable(priv->regbase);
+>   		memcpy_toio(priv->ahbbase + to, buf, len);
+> +		if (IS_ENABLED(CONFIG_CADENCE_QSPI_WRITE_PROTECT))
+> +			cadence_qspi_apb_write_protect_enable(priv->regbase);
+
+Wrap the if (IS_ENABLED()) into 
+cadence_qspi_apb_write_protect_enable()/disable() and simply do
+
+if (!IS_ENABLED()) return 0;
+
+in there.
+
+Also, maybe fold the two functions into a single one 
+cadence_qspi_apb_write_protect(..., bool enable);
