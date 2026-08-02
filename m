@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBECAC55162
-	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 13:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63453C55171
+	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 13:27:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 72ABF606BA;
-	Sun,  2 Aug 2026 13:27:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A848160688;
+	Sun,  2 Aug 2026 13:27:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tS1Y-aQdDO3C; Sun,  2 Aug 2026 13:27:44 +0000 (UTC)
+ id FNI8sW_9FZM7; Sun,  2 Aug 2026 13:27:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 047106069F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 451C5606C1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785677264;
-	bh=27Hqh9pSe6g+BkOrA5bW26HUM81rD7YQUcGlxtqZ7JQ=;
+	d=lists.u-boot-project.org ; s=default; t=1785677266;
+	bh=Uw5vADoxt00Q/MX8WufiOyFzbjySXLXWveX0Ge32eM8=;
 	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=O2B1MiIg4icV5FOEaESYtkUsn10H7dZeSJyWhY8cWYfXKMEZBGlyfFOM4FDdXVgM+
-	 GpW+sekKhiT0RBZKZLCLLOHL4nRimMpEkcRvjcVdjFz3MnazMJR/qSpQvT49SNtYYG
-	 lvK4Ji0egb8NrJDKNFZEtPXxpj5YqfLlWdmWJSPEJ56ulFSeJ8N09H67W1mFL2mbnw
-	 RHlChLSa8wN09P6oFJEHm1ntM00/+s2b870JiUvMRTLyA8gbXxWsVg5ftV/MSFGVXT
-	 0Y5sJw7+kwSUaoypnUuPFKpfJD67WEo2uqtMycC7Ju2A9XbyEp+JCZsahbqEqmyee1
-	 5nB6JxsYPT6iA==
+	b=yQ/tcQPUAoGybclQW4UlH3kVimyWXIW7o5VNuJnwaRRI3mygdgkvxRzTdwZV9k2X8
+	 dpdPHY3RfDHuCntlqHgtWT/qAY53eoicUe/wqBh/Im56LyBUCEWCmFRRhxRsJEEK4Q
+	 /XPIq6JuB9xOR/W4LjeeNPJqW0qJBqfiz4zNy25xpU408YYvcj65OR2p8YwnZJf1pB
+	 ftbUgAYWzvOaiWfzKZv7x8KLqZmUQsBR4Kfl2RlIsF2upVZqNxQcNNb5byqaQp9k+u
+	 HjN6RLqDB9Ol8PiQ5egluhPV9gFs2a+AMAEG11CpL+W3NQygVk6+TsuzTEt01ArUOw
+	 RtRR2IZazfFnA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 047106069F;
-	Sun,  2 Aug 2026 13:27:44 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D412136E
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 07:37:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 451C5606C1;
+	Sun,  2 Aug 2026 13:27:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B723D350
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BA18C60672
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 07:37:56 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A9884405CE
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 32DbY5iyXxOM for <u-boot@lists.u-boot-project.org>;
- Sun,  2 Aug 2026 07:37:55 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=munzzyy1@proton.me; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3EF216065E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3EF216065E
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3EF216065E
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 07:37:54 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jvRlpsy4HFIj for <u-boot@lists.u-boot-project.org>;
+ Sun,  2 Aug 2026 09:35:29 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=munzzyy1@proton.me; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2E1484061E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2E1484061E
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2E1484061E
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 09:35:27 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCE7E844F6; Sun,  2 Aug 2026 09:37:51 +0200 (CEST)
-Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
- [109.224.244.17])
+ id 8367F84671; Sun,  2 Aug 2026 11:35:24 +0200 (CEST)
+Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
+ [79.135.106.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B405A80117
- for <u-boot@lists.denx.de>; Sun,  2 Aug 2026 09:37:49 +0200 (CEST)
-Date: Sun, 02 Aug 2026 07:37:43 +0000
-To: Qu Wenruo <quwenruo.btrfs@gmx.com>, Alexey Charkov <alchark@flipper.net>
+ by phobos.denx.de (Postfix) with ESMTPS id 2FE7780117
+ for <u-boot@lists.denx.de>; Sun,  2 Aug 2026 11:35:22 +0200 (CEST)
+Date: Sun, 02 Aug 2026 09:35:16 +0000
+To: u-boot@lists.denx.de
 From: Cole Munz <Munzzyy1@proton.me>
-Cc: u-boot@lists.denx.de, Marek Behun <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] fs: btrfs: report file sizes from readdir
-Message-ID: <hTFbDtB7gXE4tGU0EwriHsWY9lutwDK1ehYABepLafBuF5IDEY1rjTUVvCFq0HOsdgpfpFHvayOonotnzsuHWxs-FnRFFsnKUKmvGSkQAHI=@proton.me>
-In-Reply-To: <7bcd492f-7e1e-4fd9-970d-857ca5460ddd@gmx.com>
+Cc: Alexey Charkov <alchark@flipper.net>, Qu Wenruo <quwenruo.btrfs@gmx.com>,
+ Marek Behun <kabel@kernel.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 0/3] fs: btrfs: report file sizes from readdir
+Message-ID: <cover.1785660029.git.Munzzyy1@proton.me>
+In-Reply-To: <d95529ec-3da5-443b-8c05-776309f06ada@gmx.com>
 References: <c8e57b678bee2394655ea5e7b0678fb300705e2f.1785649258.git.Munzzyy1@proton.me>
  <CAKTNdwGCYjr+2vaBc6kArQokqTF=Gc23mF17B_22Fdcg1O=7hQ@mail.gmail.com>
  <7bcd492f-7e1e-4fd9-970d-857ca5460ddd@gmx.com>
+ <hTFbDtB7gXE4tGU0EwriHsWY9lutwDK1ehYABepLafBuF5IDEY1rjTUVvCFq0HOsdgpfpFHvayOonotnzsuHWxs-FnRFFsnKUKmvGSkQAHI=@proton.me>
+ <d95529ec-3da5-443b-8c05-776309f06ada@gmx.com>
 Feedback-ID: 209578162:user:proton
-X-Pm-Message-ID: b3ed00efe0c5d1a0664f85c4a95bacde0a03e368
+X-Pm-Message-ID: e5705b2609cfde47c0e9bdc305c582400e3fb011
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -79,26 +79,26 @@ X-Virus-Status: Clean
 X-Mailman-Approved-At: Sun, 02 Aug 2026 13:27:38 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=proton.me; 
- s=protonmail; t=1785656268; x=1785915468;
- bh=27Hqh9pSe6g+BkOrA5bW26HUM81rD7YQUcGlxtqZ7JQ=;
+ s=zukvd5xdjndjldmzkxrfzlnn4i.protonmail; t=1785663320; x=1785922520;
+ bh=Uw5vADoxt00Q/MX8WufiOyFzbjySXLXWveX0Ge32eM8=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=elDQs3fF+6LUNZ1VA6RqtlHavxjf3SkMBmlEFrRA4iu2vU9aNpNNhq0v1ddo7gBtf
- wnRosQ0L/CM61elIT/h+lb+tv9zm4fYDGt1Pc6nl92Ogz4cj6rirtEBIIqCTwkhrK2
- 1JmPyD7EgBWqdgNb4AMtyy68VmHplw1J4un4hBXZOZdL1Nd4oujrbY9j5spyAGVjCR
- qzVvah2z90l302do8DuhJIRScBzAdbnVVRfGJku5Ywra/GDiFzi6dlU4KSu58yng2U
- w/9nHKFQlsWVAlDfuRETIsHL4VCZwfX57g1/qvEeVzxUsg4jBfFpkCNjbbidh74Kgf
- pqJ2B0jQ4qijw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ b=aakeoy+z/UnwL4UCfTLJFzgxf4NDZ4ErWwdzlCWzg3/p49D2T7wxUhux+iF/6TI2R
+ v3B/aEWMz9MbCgXDp4QhQAHPeAYZj4ngy4D5InSQ9+CpGM+ne4tpxI8Xu6fUSdFeES
+ dvozvcY5P6aglp7CYENkUg3ThgnPqonrhPZ06FQh7uEzX6VsMnURIi85f1mX3AMPzf
+ tr2UHr9uOhpQ+MD7ZZprHiEX0aIf5/g341B/jiWDWvv7Q2cLFVZ9HeE1h9Pf8CxgKG
+ mH4lTih/SBN/jPr7gnblk3wTRhHvGbw+hCJfW0wu+coOlju/xghobSsuCiUqqnB9z2
+ GeMl55EYwu63Q==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  spf=fail smtp.mailfrom=proton.me
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256
- header.s=protonmail header.b=elDQs3fF
+ header.s=zukvd5xdjndjldmzkxrfzlnn4i.protonmail header.b=aakeoy+z
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
@@ -106,7 +106,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Munzzyy1@proton.me
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- secure) header.d=proton.me header.i=@proton.me header.b="elDQs3fF"; 
+ secure) header.d=proton.me header.i=@proton.me header.b="aakeoy+z"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -122,22 +122,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026/8/2 16:17, Qu Wenruo wrote:
-> The function btrfs_read_next_dirty_entry() is search the key inside the
-> parent directory.
->
-> Meanwhile this one is search for the inode item of the child entry.
->
-> They are completely different and I didn't see why "refactor" can improve=
-.
+As agreed on the v1 thread, the fix and the cleanups are now separate
+patches:
 
-Right, the two searches are for different keys and cannot be merged.
-The repetition v2 removes is elsewhere. btrfs_size() open codes the
-same inode item search, and its error path never releases the path.
-That leaks the extent buffers btrfs_search_slot() attached before
-failing. So v2 mixed a cleanup into a fix, which was the real
-mistake here.
+- patch 1 is the fix in the v1 shape
+- patch 2 makes btrfs_search_slot() release the path on error like
+  the kernel version does. That is where the btrfs_size() leak came
+  from. Suggested by Qu.
+- patch 3 is the dedup Alexey asked about. One helper shared by
+  btrfs_readdir() and btrfs_size().
 
-How about a v3 with the fix back in the v1 shape, plus a second patch
-for the btrfs_size() helper and the missing release?
+The pending btrfs test suite still passes on top of the readdir
+series: 5 passed.
+
+Changes in v3: split the fix from the cleanups. The release moved
+into btrfs_search_slot() itself.
+Changes in v2: helper shared with btrfs_size() plus the leak fix in
+one patch.
+
+Cole Munz (3):
+  fs: btrfs: report file sizes from readdir
+  fs: btrfs: release the path when btrfs_search_slot() fails
+  fs: btrfs: deduplicate the inode size lookup
+
+ fs/btrfs/btrfs.c    | 77 +++++++++++++++++++++++++++++++--------------
+ fs/btrfs/ctree.c    | 16 +++++++---
+ fs/btrfs/ctree.h    |  3 +-
+ fs/btrfs/dir-item.c |  7 ++++-
+ 4 files changed, 74 insertions(+), 29 deletions(-)
+
+--=20
+2.55.0
+
 
