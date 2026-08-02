@@ -4,104 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A78C55162
-	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 22:09:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA0B3C55174
+	for <u-boot@archiver.kernel.org>; Sun,  2 Aug 2026 22:26:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 30DAE4061D;
-	Sun,  2 Aug 2026 22:09:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9764440563;
+	Sun,  2 Aug 2026 22:26:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id txF71FfZPUXg; Sun,  2 Aug 2026 22:09:14 +0000 (UTC)
+ id Qp2PyO5ZaBHu; Sun,  2 Aug 2026 22:26:26 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0654E405F5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 64CCE404E0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785708554;
-	bh=cMQXb4yHpgffo575YyTfAcAYnGHPJvUnUVSTWoQ9gN8=;
+	d=lists.u-boot-project.org ; s=default; t=1785709586;
+	bh=ji0v28vfoZ5XqEdsfOwQJ1oeTpDFEOQhsagGjAvrMjU=;
 	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=klUzL0McuF5AJQoR0pqSnjiyfjbFc/guaEZyhFGJXmjqez5Ekdka8nzEIOrcYKDRd
-	 c34bhEV16JlbB75VD3/YQPZIJtIGeByNTXWuwrvhZriAMJdMb4pgKEV1FSxFCrAZaQ
-	 Dkh+l6oZwpCq+JoRvkBIkEoL/oHVye0Ky6XLFPm5hfSPdaKGTLgg8mikjivdQt9lmb
-	 drfQKVqL3qijIpk1udhM/XCgDHPCphx39LwAsNH1Qs8GA9M6n9o++gld0JBxur0wJ1
-	 aF+wcydzATLGZmsh3A3ZLEQShgs0ElZ3ZproRIyN0CTIgEgrNOTKx0qzg25YDd7rwn
-	 wirMBw8ZSGAvA==
+	b=u/TzDJw5FRuYSdCFAb6AFyIpq1KBuI1ErcKbWOSyTw0ykLYiItbOfHeDHsGmsq7Zw
+	 54vcg0g52aqR1agbH82jEZ/+xzl4f7SsfEGYWZXU3JH4RgtfZL1XFl3RnGDU4qOMp3
+	 6Sma6zxowDDB0bQZqqUNmJUnMTayrMN7PYEUGby0gCK5Q0Horb2gQeJmJQHhjMTiR+
+	 315VPNzdygWplxxgG6e7LpLDTJy04wSkkm7HaSsMIbRaHFrPDJxWRExDws/rD+VQwD
+	 Xp2e6Nkh7jk6Uwujc0PXNvNnBO6IJYJXRMPM6Ss5cI6jwE4HTB4ni2qYrflypd9vfo
+	 KeqPh5/DQLxRg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0654E405F5;
-	Sun,  2 Aug 2026 22:09:14 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6BE8F3B9
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 22:09:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 64CCE404E0;
+	Sun,  2 Aug 2026 22:26:26 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 431BBFE3
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 22:26:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 51B87606BA
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 22:09:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3462840080
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 22:26:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id l1y7RoIFa9DA for <u-boot@lists.u-boot-project.org>;
- Sun,  2 Aug 2026 22:09:11 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
- helo=mout-p-202.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 9715B606B9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9715B606B9
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9715B606B9
- for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 22:09:10 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5UvvC0R6FSo0 for <u-boot@lists.u-boot-project.org>;
+ Sun,  2 Aug 2026 22:26:24 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
+ envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 62E734006F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 62E734006F
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 62E734006F
+ for <u-boot@lists.u-boot-project.org>; Sun,  2 Aug 2026 22:26:24 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hCv910KpNzMlLv;
- Mon, 03 Aug 2026 00:09:09 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hCvXt1XmpzMlLs;
+ Mon, 03 Aug 2026 00:26:22 +0200 (CEST)
 To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] cmd: scsi: Drop duplicate leading scsi prefix
-Date: Mon,  3 Aug 2026 00:08:38 +0200
-Message-ID: <20260802220904.168737-1-marek.vasut+renesas@mailbox.org>
+Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ufs: rcar-gen5: Switch from FASTAUTO mode to FAST mode
+Date: Mon,  3 Aug 2026 00:25:52 +0200
+Message-ID: <20260802222614.194571-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: hekbsjdt5t5kny7aqg1na7ua3xii1ggi
-X-MBO-RS-ID: f45f42010ea858a2e82
-X-Rspamd-Queue-Id: 4hCv910KpNzMlLv
+X-MBO-RS-ID: d8b32377e5e13d0cb5c
+X-MBO-RS-META: 6qe9c13ia66jh9ahxxkfdjgirjp66b5j
+X-Rspamd-Queue-Id: 4hCvXt1XmpzMlLs
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785708549;
+ t=1785709582;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=cMQXb4yHpgffo575YyTfAcAYnGHPJvUnUVSTWoQ9gN8=;
- b=hTo1xvJVQRVVCiAN5jXPx4GZLt/HTWA6iQhOU0KquB1kpSI6QVnnLQlB6cjLnOCIbdARu/
- Ei0u58rx4N7IwjWJq3aioeiKC0cfqhedOQLIaGrMmhsZRmM/xr2kW7FEZglo/sSDK/IJQz
- WHs4djzxrCnDr7/rI8hqWE37xejS2zg+UhEpGSSK2O/l+Sx0x3WqKeE0ARpOdvclCfoRmi
- 8JX2Tg6rQe+XnKuJVuBEePn1JTF5H7xuPdECQALRcPL3dbRzZu63jecCCxHUmzA/FHqWNT
- R7DJW1HFCB3U+MXxDNE/slihF07a8cZ7r9TyquzX8BH4itGJTWfb2kE7llbw0Q==
+ bh=ji0v28vfoZ5XqEdsfOwQJ1oeTpDFEOQhsagGjAvrMjU=;
+ b=haOjSOUhg3vXpRYNQh3O9WkfA3pOqY+BeEMAbO8FoEH79LuxBbka+whv6NxGg/tMC9uXQv
+ e164hsKs78uNnMYGzYgsvPL2THqFZ7ShQbfxZIcEQ4HnmqjxMd7GIT9RWOSxmtmNTljn45
+ TfyOB/hWLMvOAgJZwbAPGjbxfIVV9efj4u+7Ov0dCtlyiU0GgYwi3Fy5Jgcsph6EJcJ85B
+ 8EDFEklk+0wSjQN4dV1n3XNhCVpjRPuI8xieJTWKUzXoBeLP+HYeeIDhfvpC4mLUXroEJW
+ dORpFklH38QfOQknW7/jPKHrd5J9PAOgKan/XTQDil/vSwMhPFIBw6XRx9NxkQ==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785708547;
+ t=1785709580;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=cMQXb4yHpgffo575YyTfAcAYnGHPJvUnUVSTWoQ9gN8=;
- b=GfCr/kz9COHOK4bhg2ExsxyUvZZJlem1xd7KpTR9yM3uNcM/rWgv/jzc7rkXI4rD4pVqw6
- 5iA45sKNLDxEodQzufhAykdTT+dx2LVgpWuQGcdQ1rfpxmU5sCC2LOfMYS5ShTkcnN0U1L
- RPbtZSQNrJrfEXeB7b9+c2nALf4bICUzvLuI2nto46w/t6XnjkC4gakIuoM21uICSyGBwe
- F1D01O0RQd+OVfes5RzZBFLrAi7aAGVBineOt9R8yx2le30R1uNX9EE7tC2UL6YfFOGqfo
- uzCXkRvE7uQbJvu6o52sGVKlJGnjqptKihQm8BlyrTrz4A6okFriZAH6emQFDQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=ji0v28vfoZ5XqEdsfOwQJ1oeTpDFEOQhsagGjAvrMjU=;
+ b=LWY+w96TW13sElR9UyQLOr8LgqjOOGVgb4HXKnQTaoM5Yoc8eIs9Ngxj/evQbmIuOAwAIM
+ pcv1y/I9ITM1a6Salpl02XqozMhQoQ8EJxPVbauW7nQpHnTeh1JiRW2iE2mmIJZRbdeIgJ
+ 7lQ6u1JCLsVIxmEG3Y8UCpAsQjr060ryINzz8fM5FnQr+ySbf6wg5ZEj29DTOxNj6lMlBg
+ gz/S/QXDMvR94aI3d/PdXiLqUl7x+UOtIFGjXEZbcCP9bjpnNLj558eJTMJ2VzUhRWBkh4
+ WqpXFUn1AOWyMgYIiaC9ujMrQnKbJ2qey+xo0CRuF6M3Qp4eueKaaSCrAltSqg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=hTo1xvJV; 
+ header.a=rsa-sha256 header.s=mail20150812 header.b=haOjSOUh; 
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=GfCr/kz9
+ header.a=rsa-sha256 header.s=mail20150812 header.b=LWY+w96T
 X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="GfCr/kz9";
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=LWY+w96T;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -119,43 +124,87 @@ Reply-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The SCSI command currently prints the following duplicate prefix:
+From: Tuyen Dang <tuyen.dang.xa@renesas.com>
 
-"
-=> scsi
-scsi - SCSI sub-system
+Switch from FASTAUTO to FAST mode and lane 2 to achieve
+higher throughput. Drop the 64bit address quirk.
 
-Usage:
-scsi scsi info  - show available SCSI devices
-^^^^^^^^^
-scsi scan  - (re-)scan SCSI bus
-"
-
-Drop one copy of the scsi prefix.
-
-Fixes: 460c322f13ec ("(re)enabled scsi commands do_scsi() and do_scsiboot() Patch by Denis Peter, 06 Dec 2004")
+Signed-off-by: Tuyen Dang <tuyen.dang.xa@renesas.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: David Lechner <dlechner@baylibre.com>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- cmd/scsi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/ufs/ufs-renesas-rcar-gen5.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
 
-diff --git a/cmd/scsi.c b/cmd/scsi.c
-index ad7d8a4b664..5e732c1e50a 100644
---- a/cmd/scsi.c
-+++ b/cmd/scsi.c
-@@ -45,7 +45,7 @@ static int do_scsi(struct cmd_tbl *cmdtp, int flag, int argc,
- U_BOOT_CMD(
- 	scsi, 5, 1, do_scsi,
- 	"SCSI sub-system",
--	"scsi info  - show available SCSI devices\n"
-+	"info  - show available SCSI devices\n"
- 	"scsi scan  - (re-)scan SCSI bus\n"
- 	"scsi device [dev] - show or set current device\n"
- 	"scsi part [dev] - print partition table of one or all SCSI devices\n"
+diff --git a/drivers/ufs/ufs-renesas-rcar-gen5.c b/drivers/ufs/ufs-renesas-rcar-gen5.c
+index a9473cd60b1..c6e436fe197 100644
+--- a/drivers/ufs/ufs-renesas-rcar-gen5.c
++++ b/drivers/ufs/ufs-renesas-rcar-gen5.c
+@@ -72,7 +72,7 @@ static int ufs_renesas_pre_init(struct ufs_hba *hba)
+ 	if (ret)
+ 		return ret;
+ 
+-	writew(0x0000, priv->phy_base + 0x20000);
++	clrbits_le16(priv->phy_base + 0x20000, BIT(0));
+ 
+ 	ufshcd_writel(hba, BIT(0), REG_CONTROLLER_ENABLE);
+ 
+@@ -88,6 +88,9 @@ static int ufs_renesas_pre_init(struct ufs_hba *hba)
+ 	if (ret)
+ 		return ret;
+ 
++	ufshcd_rmwl(hba, 0xe000, 0, 0xc0);
++	ufshcd_rmwl(hba, 0x5000, 0x5000, 0xc0);
++
+ 	/* Skip IE because we cannot handle interrupts here */
+ 	ufs_dme_command(hba, 0x00000002, 0x81010000, 0x00000000, 0x00000005);
+ 	ufs_dme_command(hba, 0x00000002, 0x81150000, 0x00000000, 0x00000001);
+@@ -133,6 +136,10 @@ static int ufs_renesas_pre_init(struct ufs_hba *hba)
+ 	if (ret)
+ 		return ret;
+ 
++	clrbits_le16(priv->phy_base + 0x20000, BIT(0));
++
++	ufs_dme_command(hba, 0x00000002, 0xd0890000, 0x00000000, 0x00000001);
++
+ 	priv->initialized = true;
+ 
+ 	return 0;
+@@ -140,8 +147,7 @@ static int ufs_renesas_pre_init(struct ufs_hba *hba)
+ 
+ static int ufs_renesas_init(struct ufs_hba *hba)
+ {
+-	hba->quirks |= UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS | UFSHCD_QUIRK_HIBERN_FASTAUTO |
+-		       UFSHCD_QUIRK_BROKEN_LCC;
++	hba->quirks |= UFSHCD_QUIRK_HIBERN_FASTAUTO | UFSHCD_QUIRK_BROKEN_LCC;
+ 
+ 	return 0;
+ }
+@@ -180,12 +186,12 @@ static int ufs_renesas_get_max_pwr_mode(struct ufs_hba *hba,
+ {
+ 	max_pwr_info->info.gear_rx = UFS_HS_G5;
+ 	max_pwr_info->info.gear_tx = UFS_HS_G5;
+-	max_pwr_info->info.pwr_tx = FASTAUTO_MODE;
+-	max_pwr_info->info.pwr_rx = FASTAUTO_MODE;
+-	max_pwr_info->info.hs_rate = PA_HS_MODE_A;
++	max_pwr_info->info.pwr_tx = FAST_MODE;
++	max_pwr_info->info.pwr_rx = FAST_MODE;
++	max_pwr_info->info.hs_rate = PA_HS_MODE_B;
+ 
+-	max_pwr_info->info.lane_rx = 1;
+-	max_pwr_info->info.lane_tx = 1;
++	max_pwr_info->info.lane_rx = 2;
++	max_pwr_info->info.lane_tx = 2;
+ 
+ 	dev_info(hba->dev, "Max HS Gear: %d\n", max_pwr_info->info.gear_rx);
+ 
 -- 
 2.53.0
 
