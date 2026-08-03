@@ -1,95 +1,95 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32088C55184
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 23:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37885C55182
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 23:21:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E948480B99;
-	Mon,  3 Aug 2026 23:21:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 00B4440669;
+	Mon,  3 Aug 2026 23:21:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hRrJQBEaRQiQ; Mon,  3 Aug 2026 23:21:36 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AViVeJFvPmAt; Mon,  3 Aug 2026 23:21:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E0A7980B92
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 216D64065E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785799296;
-	bh=g513syghKrDoDzC68tm9Pj1GjzrwUDo2qe8w3wN9B3E=;
+	d=lists.u-boot-project.org ; s=default; t=1785799301;
+	bh=EpNSLUlturFzAw8snWK8eUFqJ8kqfiHBK24+0esL7hg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FOCixku2XrzS3gWD7cbyUDBBnnMISwidAgDEn5ot1gqP8+5BUu7P48YPtcU16JFbG
-	 TNYE+2s472Up+w1Qv9oeX7RVUiJ4yWSTxz5hDbpg3qoTlCQPPJ0kgjrT4udUucupMU
-	 B9XhvgBW84M7JCHcZOy94Py/ir3pD0549qQCNA6XXnDzmAR87WKrsnDy8Kjo89byQA
-	 xuZsxUXIz1G9YH8vqgkT57yp6VayX7rNQxgwNto2bZE+gQK83zaisrYZeBfZnReHmQ
-	 m4pdDeICHILEvijsPv8HlpIVZaB77IHpBuTyEuf4NheUJdRKXUTvvGRFXEKUEFFWxo
-	 JofJFzTcAtJCw==
+	b=LjWXRYqLo4sb6mfkya45Pv0xzEo0dbM0trwQrYCNyUx/Zw80/imNp1c+7hk2+JK3Y
+	 amuiSPbwY6uWMwPYR0PPlv3nCb6uNdEvAgbzYVsarfZeTDFYy1zW7mQga9euj5jPyM
+	 LaDdhXt8tyiJg3JpsYHbeVsZHq4B1pALp5l65hF8kVfJMkBaZh3cExWK9aq8fYIR8E
+	 E3/0dl0yXkODn+0B161ddT0Cja/Svg2CxF9MRU4Bayq+K+Ix9PXXmNt7KDDinizQ5D
+	 5s1UCn5y7duxe9oJUQ8A56HPY0XH1IXju0dRiQpsgpYcxpvFlPFlMN7vIY9th+Jf7s
+	 DEjdFd5aGTfsw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E0A7980B92;
-	Mon,  3 Aug 2026 23:21:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id B47AE3A6
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 23:21:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 216D64065E;
+	Mon,  3 Aug 2026 23:21:41 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 66BA7282
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 23:21:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9A033400DA
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 23:21:34 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5516380C0C
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 23:21:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id twOCoqbwmc-i for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 23:21:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dDFZyyREe2zZ for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 23:21:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c36; helo=mail-oo1-xc36.google.com;
+ client-ip=2001:4860:4864:20::2f; helo=mail-oa1-x2f.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7B186400B4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7B186400B4
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7B186400B4
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 23:21:33 +0000 (UTC)
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-6ab04bbcc8fso2032595eaf.1
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 16:21:33 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org C4ABA80B92
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C4ABA80B92
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C4ABA80B92
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 23:21:37 +0000 (UTC)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-456395f4e7bso2796278fac.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 16:21:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785799292; x=1786404092;
+ d=1e100.net; s=20251104; t=1785799296; x=1786404096;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=g513syghKrDoDzC68tm9Pj1GjzrwUDo2qe8w3wN9B3E=;
- b=QbZh+kKQJsSFjbywOJ0EWLXO2gegU+6eRj+HvStUkN2/Y9nfcNNwD1UgJBGS0r1n/8
- KeKVdXFZC67+wtpO1q+cYrfTvLELX94eLTQmKqdZlmYQZ2INCtS3KEou8H7jUknJEyX5
- 9sTLO85anucQULwPkJOZ2wYPpzjpM/bUBH33QTubsY1dlIXUJeumGBVHBHP/Cr5BcGPX
- 7joH8aqLzf1GKwlcrg24GImNEXPVwGKxInXWIocc1E43OCaOyM42eOUWhbH++KwlJbAl
- 4wB4gS31/KlZsXW7Cm4OUjoF/XlcH5oIRggRfeFLkxfBB89gHMRsVEUYYbcJDcnZd2GQ
- lCog==
-X-Gm-Message-State: AOJu0Yzv3afj7GABD+0cMXPUAaII3hdTBTnZaH7NpmGwgRHppq/2VO19
- m6+g491DkHoOEB70MSsUsgCLz/hb6R3Nw6n2fXxgSoUewIYS3qi0Dqq4HzFsNnyqKL4=
-X-Gm-Gg: AR+sD11EcT1aV3m2amO/SSkzXVeGkaEkFAZLpk15/TbuPgU7vsMXBMdCDrNvUxCOhUo
- blNCnimVOrmAIdTzkWYdCxGWq57BAH1EbwQsYNTbNGMjeysE3nVgW835Vr/ZE879UUst412VLUI
- qn711V2d2M4f1R7pktdAhOMopCg04TrGI7mBs7yuq2HQ0K4jU5Rv9yB2uFNpVd6hO1/TileJH4n
- /j0KLzCL6lV3Kn+AA7V77/utAXFulNHWCpJ4hLwGysDTDggTqbmkzd2B54at38QASBMi149g+1T
- rgc+9cf2VWALjg2uIIK7sUja+V6ZyZL+jcN+Qb8848IIkeCxhjDrSDXQ9+EBhURBjniYjjRyYmv
- D4388pQSwZ2Oy3hyfAASOxueSVnbYwUtZkr2ndpTA5IHcfmViqE0EwSS6YVBsCESKBz/S9gNS2m
- UYZuC5wl6n3rMIno7IXLK/uVGk4s2ygzEO7hYYaUvSZwz5pYu7Mw2lo2v6uLP0qIQ=
-X-Received: by 2002:a05:6820:2227:b0:6ae:8823:273f with SMTP id
- 006d021491bc7-6ae882331aemr107078eaf.18.1785799292247; 
- Mon, 03 Aug 2026 16:21:32 -0700 (PDT)
+ bh=EpNSLUlturFzAw8snWK8eUFqJ8kqfiHBK24+0esL7hg=;
+ b=O558iPC2HYesJZ9Z8geH45DaYjXIzocHyhC4K1rsiZ8isWINdh8SLQKMd4QCCAJVl/
+ Djp+R0aOxwGfaee+w1Qo6UiQ7ZbeG52H/6qk0ok4x5xv9efaK2NasbnXauh9EsN2q8zU
+ onq1Y3mrcAxQY0LJ3UlGJNhT2iX1QyRZp7LYp1KlFDfo8vF1kQ2y0PnF8+5gELGsRigq
+ tTSfaUFH5Pzouap5Hodu3k7OmAkdauDHiwyrcmJRopFbgE0aQQwqprRFJHdy9aCYbny3
+ ifHnUarhS9tQFCPXkDDljx3L1BbMFxDhj0cQBNLlF+o3GKnVyVKy8MtUSYLFRxoLfYTX
+ VqNw==
+X-Gm-Message-State: AOJu0Yxt/CVVxfXR+H2eooXptHDiRRcp9ej5DDJgl8tPtafbHQEgIofu
+ 9TmygIc/CAmCZPSDPMTB8dPBx3VI7eHJK0AMRzohWxpDkWXVyBDcG7KjN0aCXrZ3A4s=
+X-Gm-Gg: AR+sD12ynAaLTkjsli+Ek6E4i1fPofbOyUq/1HvxZAvwaRwsVeFRpFZkTUVZTzaogXV
+ jKjJUvjunViG3svrOyyJPGdTi7Urf12EvHzwVeiE/tLb8Pkllmgo4R+WCVjzKFu36WTzU+Xvytz
+ t+b6iISCCapW7sTonQZrjAzaDx5FrGp3jqGmkbZpFY2USeAkFooipTTTttwx73G/VMVo0L7Mpw1
+ 1o3lxTQiSdWLGdd2bmuVK8JQ8kIj5CeaeU1rsWmeZj2zkGoP6ky7lUeYKEzewDBQpynyRDMdfvA
+ /zY9dS5nnfyAtSu9ifZYPo+jZ4xc9zpaQUolSr/5P4CtxF5AhiahoEtlT+hC0Vtv66jLwuUZJ2u
+ 3X8iLu5KQ+lS6YfKUdoZGg0JvDdJBuLdjbR49ugLKL/zWZuhtM4IgjUcfWC8+08PqT0P2ZDTV6P
+ zxQjGBcE6fVmfaH1Z7b48wI65GRxVCmVhmDUE10EaaFQ0xmxrI65rC7S7T7WXXSEE=
+X-Received: by 2002:a05:6808:50a7:b0:490:af61:8830 with SMTP id
+ 5614622812f47-4af5dfd4565mr21010910b6e.3.1785799296543; 
+ Mon, 03 Aug 2026 16:21:36 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:b8f7:1f5e:7c:a7d1])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-458f60df63fsm9440852fac.6.2026.08.03.16.21.29
+ 586e51a60fabf-458f60df63fsm9440852fac.6.2026.08.03.16.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Aug 2026 16:21:30 -0700 (PDT)
+ Mon, 03 Aug 2026 16:21:36 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 03 Aug 2026 18:20:40 -0500
-Subject: [PATCH 1/6] dt-bindings: clock: add MT8366 clock header
+Date: Mon, 03 Aug 2026 18:20:43 -0500
+Subject: [PATCH 4/6] arm: mediatek: add MT8366 application processor
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-mtk-genio-360-bringup-v1-1-606ee60755b5@baylibre.com>
+Message-Id: <20260803-mtk-genio-360-bringup-v1-4-606ee60755b5@baylibre.com>
 References: <20260803-mtk-genio-360-bringup-v1-0-606ee60755b5@baylibre.com>
 In-Reply-To: <20260803-mtk-genio-360-bringup-v1-0-606ee60755b5@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -101,40 +101,39 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Macpaul Lin <macpaul.lin@mediatek.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
- Irving-CH Lin <irving-ch.lin@mediatek.com>
+ Chris Chen <chris-qj.chen@mediatek.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13443;
- i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=9ibaMnpPyP1Jh0CVRffUuUI91ISnJZ6GVfh5ikyr0KE=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqcSJQ1Rs9XF0Tf3LLh0btV6l4LsLLp85bbOxYF
- PN3bDxCG6GJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanEiUBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ac1EH/11yrtVxFjS0HzI8+tYLh7rmLOKHU7FTme+rusa
- GKZtmTcoPqbV4NmE4KdJ3V4DvN+t4BFmokJPVusNtaYd4SxEk0oyp1L5ROx6Cs4lf2HGj7pPOC3
- jtXf1umCOV03H23ykxit/6C8r4RF/QliXV45IfqRBQmJg1WupWXvAc87foGn+1340YFLaBFJyqf
- lC3FOWoGUxFJf/L0ufv1hmuHpuMAimZkynqqUe9W+Ae5D8k9sehsY++W3fWcQrnHg65SyToXN2T
- vnPFNGCLBRXBCUS9do6E/B9rG+CyI73brrtk2WBaWPI1ZKRb91aLNmJwbW9sdprXAtMPy9x7QC5
- f2x4=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5195; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=h1Tr9t/smezbplx4rUw6JH1YDOSeaIljl0YSDZ93z2c=; 
+ b=kA0DAAoBwswgAf8Bj8AByyZiAGpxImWgIbb4ZQYkPVEXrHXIjyzFDSQYKq72OnlrOIhkm5h1w
+ YkBSgQAAQoANBYhBOwY2Z5iDoPWnNhomMLMIAH/AY/ABQJqcSJlFhxkbGVjaG5lckBiYXlsaWJy
+ ZS5jb20ACgkQwswgAf8Bj8Ak4Qf+N4RrASPxORHfk9/e9A0ccZu5KEHUQmXCPdsDnot8oEZmgkz
+ u9Ei3cSm79aRuGAAccH8fOcOmXRsgWL48z4iKgBiFz46qwqoz/RkynroimphdhBtdL1x5pN0j4Q
+ qb5K32Q/3AIho768AEyr+Di5YEjmDL8bhqIRCK36hXHpTDmKd1c6OifRJirhb5KeXxdabM/IcCU
+ 7ioKxIEwSroq7vygiY04DxKF5MR8LEPAaEV3lzQFnPdbbt6DRpSiBhQgxKpswe1E4q6lYHfYZ0E
+ WmJS08cY6mmB/4PrIQR9lwJwmf/DvHaF3tjN53HrozWUBr0f9nZaTTAnSMLK+mBOgZMPmw==
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785799292; x=1786404092;
+ d=baylibre.com; s=google; t=1785799296; x=1786404096;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=g513syghKrDoDzC68tm9Pj1GjzrwUDo2qe8w3wN9B3E=;
- b=oYwYobGGXpfcETKKRt6YQtl1fM55hz7iFBYd0NLSqSzkFX5KgJcjTov1nvZORBeN2s
- b9bJXd0jy7G4pWi3uRLgQixvFGVyxb3frbIwbwqRWn28iGphC5kpLt8HFFeojT2LZ2UO
- Ot5ZHKxeSRL1hksDqaZNgDqdCi8aIQkhOtOZN+HtzOxFCgHokStNr6j9EDzcnohGlE4k
- dX7C7te/0SkCAzpG/4avocV7jJ2Wk+nM3RqMCnLLYKdEYgmaBOvtE03aTDhbUE5eS32M
- es1RhaemvFUcKJ7iSCFy3guxEYMFL3jN+TWI0ru2VskUNFlQSLadFqsDskkJnfIlxaon
- T01Q==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=EpNSLUlturFzAw8snWK8eUFqJ8kqfiHBK24+0esL7hg=;
+ b=hAKKaen+xLRmo5UqjxJL6nXIzMUNI2hV9TnpvEEt80+76jVCFmK8kgjCHHXQ8r4xq9
+ wN1+fsLzLtpWKWy4wQt6ijv6EyCbGDSumW+w+n+Tvr9LqgeMYaMTSrJkzoDD/+kSUqqo
+ kzMYf7DfMX79LlyVapp7n1C6Cg4MA9S0AxewRsRB8VN0rbz+CT1FKgvnuGzN6yst8Mcs
+ sAGSwc9iOxWBHq1z7PcMb9v+p3dZyyWXiGIY8gOrWHTselpEsvu823Kvah8TIjjOVmXF
+ F+kgYrK/ZVphFN22VcE9X17Bu+9vIadEJno+r+o6sZeqNVLGXDHt73VlPJ10eEW2i4ia
+ 0UxQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=oYwYobGG
+ header.a=rsa-sha256 header.s=google header.b=hAKKaen+
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,367 +148,158 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Irving-CH Lin <irving-ch.lin@mediatek.com>
+From: Chris Chen <chris-qj.chen@mediatek.com>
 
-Add a header with MT8366 clock definitions for use in devicetrees.
+Add basic support for the MT8366 application processor including init
+Kconfig target.
 
-Upstreaming of MT8366 has not even started yet, so we will have to
-carry a downstream version of this for some time.
-
-Signed-off-by: Irving-CH Lin <irving-ch.lin@mediatek.com>
+Signed-off-by: Chris Chen <chris-qj.chen@mediatek.com>
+Co-developed-by: David Lechner <dlechner@baylibre.com>
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- include/dt-bindings/clock/mt8366-clk.h | 342 +++++++++++++++++++++++++++++++++
- 1 file changed, 342 insertions(+)
+ arch/arm/mach-mediatek/Kconfig         | 12 ++++++-
+ arch/arm/mach-mediatek/Makefile        |  1 +
+ arch/arm/mach-mediatek/cpu.c           |  3 +-
+ arch/arm/mach-mediatek/mt8366/Makefile |  3 ++
+ arch/arm/mach-mediatek/mt8366/init.c   | 58 ++++++++++++++++++++++++++++++++++
+ 5 files changed, 75 insertions(+), 2 deletions(-)
 
-diff --git a/include/dt-bindings/clock/mt8366-clk.h b/include/dt-bindings/clock/mt8366-clk.h
+diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+index 9ff7e7a7f5e..a9ef1f1e314 100644
+--- a/arch/arm/mach-mediatek/Kconfig
++++ b/arch/arm/mach-mediatek/Kconfig
+@@ -120,6 +120,15 @@ config TARGET_MT8365
+ 	  It is including UART, SPI, USB2.0 dual role, SD and MMC cards, NAND, PWM,
+ 	  I2C, I2S, S/PDIF, and several LPDDR3 and LPDDR4 options.
+ 
++config TARGET_MT8366
++	bool "MediaTek MT8366 SoC"
++	select ARM64
++	help
++	  The MediaTek MT8366 is a ARM64-based SoC with a single-core Cortex-A76 and
++	  a six-core Cortex-A55. It is including UART, SPI, USB3.0 dual role,
++	  SD and MMC cards, UFS, PWM, I2C, I2S, S/PDIF, and several LPDDR4x
++	  options.
++
+ config TARGET_MT8512
+ 	bool "MediaTek MT8512 SoC"
+ 	select ARM64
+@@ -160,6 +169,7 @@ config MTK_MEM_MAP_DDR_BASE_PHY
+ config MTK_MEM_MAP_DDR_SIZE
+ 	hex "DDR .size in mem_map"
+ 	default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8188 || TARGET_MT8195
++	default 0x100000000 if TARGET_MT8366
+ 	default 0xc0000000 if TARGET_MT8365
+ 	default 0x80000000 if TARGET_MT7981 || TARGET_MT7986 || TARGET_MT8183
+ 	default 0x40000000 if TARGET_MT7622 || TARGET_MT8512
+@@ -208,7 +218,7 @@ config SYS_CONFIG_NAME
+ config MTK_BROM_HEADER_INFO
+ 	string
+ 	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629
+-	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT8195
++	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8366 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT8195
+ 	default "lk=1" if TARGET_MT7623
+ 
+ config MTK_TZ_MOVABLE
+diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/Makefile
+index 35f748a70d6..51bf5789bb5 100644
+--- a/arch/arm/mach-mediatek/Makefile
++++ b/arch/arm/mach-mediatek/Makefile
+@@ -17,6 +17,7 @@ obj-$(CONFIG_TARGET_MT8188) += mt8188/
+ obj-$(CONFIG_TARGET_MT8189) += mt8189/
+ obj-$(CONFIG_TARGET_MT8195) += mt8195/
+ obj-$(CONFIG_TARGET_MT8365) += mt8365/
++obj-$(CONFIG_TARGET_MT8366) += mt8366/
+ obj-$(CONFIG_TARGET_MT8512) += mt8512/
+ obj-$(CONFIG_TARGET_MT8516) += mt8516/
+ obj-$(CONFIG_TARGET_MT8518) += mt8518/
+diff --git a/arch/arm/mach-mediatek/cpu.c b/arch/arm/mach-mediatek/cpu.c
+index 56a41e42df6..04ede8823b0 100644
+--- a/arch/arm/mach-mediatek/cpu.c
++++ b/arch/arm/mach-mediatek/cpu.c
+@@ -39,7 +39,8 @@ void enable_caches(void)
+ u32 mediatek_sip_part_name(void)
+ {
+ 	if (CONFIG_IS_ENABLED(TARGET_MT8188) || CONFIG_IS_ENABLED(TARGET_MT8189) ||
+-	    CONFIG_IS_ENABLED(TARGET_MT8195) || CONFIG_IS_ENABLED(TARGET_MT8365)) {
++	    CONFIG_IS_ENABLED(TARGET_MT8195) || CONFIG_IS_ENABLED(TARGET_MT8365) ||
++	    CONFIG_IS_ENABLED(TARGET_MT8366)) {
+ 		struct arm_smccc_res res __maybe_unused;
+ 
+ 		arm_smccc_smc(MTK_SIP_PLAT_BINFO, 0, 0, 0, 0, 0, 0, 0, &res);
+diff --git a/arch/arm/mach-mediatek/mt8366/Makefile b/arch/arm/mach-mediatek/mt8366/Makefile
 new file mode 100644
-index 00000000000..501b65ce69d
+index 00000000000..661744a4398
 --- /dev/null
-+++ b/include/dt-bindings/clock/mt8366-clk.h
-@@ -0,0 +1,342 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)  */
++++ b/arch/arm/mach-mediatek/mt8366/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0-only
++
++obj-y += init.o
+diff --git a/arch/arm/mach-mediatek/mt8366/init.c b/arch/arm/mach-mediatek/mt8366/init.c
+new file mode 100644
+index 00000000000..13123be068e
+--- /dev/null
++++ b/arch/arm/mach-mediatek/mt8366/init.c
+@@ -0,0 +1,58 @@
++// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Copyright (c) 2026 MediaTek Inc.
-+ * Author: Irving-CH Lin <irving-ch.lin@mediatek.com>
++ * Copyright (C) 2026 Baylibre, SAS
++ * Copyright (C) 2026 MediaTek Inc.
++ * Author: Chris Chen <chris-qj.chen@mediatek.com>
 + */
 +
-+#ifndef _DT_BINDINGS_CLK_MT8366_H
-+#define _DT_BINDINGS_CLK_MT8366_H
++#include <fdtdec.h>
++#include <stdio.h>
++#include <asm/global_data.h>
++#include <asm/system.h>
++#include <dm/uclass.h>
++#include <linux/kernel.h>
++#include <linux/sizes.h>
++#include <wdt.h>
 +
-+/* APMIXEDSYS */
-+#define CLK_APMIXED_MAINPLL				0
-+#define CLK_APMIXED_UNIVPLL				1
-+#define CLK_APMIXED_MMPLL				2
-+#define CLK_APMIXED_TVDPLL1				3
-+#define CLK_APMIXED_TVDPLL2				4
-+#define CLK_APMIXED_MSDCPLL				5
-+#define CLK_APMIXED_CANPLL				6
-+#define CLK_APMIXED_EMIPLL				7
-+#define CLK_APMIXED_ETHPLL				8
-+#define CLK_APMIXED_APLL1				9
-+#define CLK_APMIXED_APLL2				10
++#include "../cpu.h"
 +
-+/* TOPCKGEN */
-+#define CLK_TOP_MAINPLL_D4				0
-+#define CLK_TOP_MAINPLL_D4_D2				1
-+#define CLK_TOP_MAINPLL_D4_D4				2
-+#define CLK_TOP_MAINPLL_D4_D8				3
-+#define CLK_TOP_MAINPLL_D5				4
-+#define CLK_TOP_MAINPLL_D5_D2				5
-+#define CLK_TOP_MAINPLL_D6				6
-+#define CLK_TOP_MAINPLL_D6_D2				7
-+#define CLK_TOP_MAINPLL_D6_D4				8
-+#define CLK_TOP_MAINPLL_D7_D2				9
-+#define CLK_TOP_MAINPLL_D7_D4				10
-+#define CLK_TOP_MAINPLL_D7_D8				11
-+#define CLK_TOP_UNIVPLL_D4				12
-+#define CLK_TOP_UNIVPLL_D4_D2				13
-+#define CLK_TOP_UNIVPLL_D4_D4				14
-+#define CLK_TOP_UNIVPLL_D4_D8				15
-+#define CLK_TOP_UNIVPLL_D5_D2				16
-+#define CLK_TOP_UNIVPLL_D5_D4				17
-+#define CLK_TOP_UNIVPLL_D5_D8				18
-+#define CLK_TOP_UNIVPLL_D6				19
-+#define CLK_TOP_UNIVPLL_D6_D2				20
-+#define CLK_TOP_UNIVPLL_D6_D4				21
-+#define CLK_TOP_UNIVPLL_D6_D8				22
-+#define CLK_TOP_UNIVPLL_D7_D3				23
-+#define CLK_TOP_UNIVPLL_192M_D4				24
-+#define CLK_TOP_MMPLL_D4_D4				25
-+#define CLK_TOP_MMPLL_D5				26
-+#define CLK_TOP_MMPLL_D5_D2				27
-+#define CLK_TOP_MMPLL_D6_D2				28
-+#define CLK_TOP_MMPLL_D7				29
-+#define CLK_TOP_TVDPLL1_D2				30
-+#define CLK_TOP_TVDPLL1_D4				31
-+#define CLK_TOP_TVDPLL1_D8				32
-+#define CLK_TOP_TVDPLL1_D16				33
-+#define CLK_TOP_TVDPLL2_D4				34
-+#define CLK_TOP_TVDPLL2_D8				35
-+#define CLK_TOP_MSDCPLL_D2				36
-+#define CLK_TOP_CANPLL_D5				37
-+#define CLK_TOP_CANPLL_D10				38
-+#define CLK_TOP_CANPLL_D20				39
-+#define CLK_TOP_CANPLL_D25				40
-+#define CLK_TOP_ETHPLL_D2				41
-+#define CLK_TOP_ETHPLL_D8				42
-+#define CLK_TOP_ETHPLL_D10				43
-+#define CLK_TOP_APLL1_D3				44
-+#define CLK_TOP_APLL2_D3				45
-+#define CLK_TOP_OSC_D2					46
-+#define CLK_TOP_OSC_D4					47
-+#define CLK_TOP_OSC_D8					48
-+#define CLK_TOP_OSC_D10					49
-+#define CLK_TOP_OSC_D16					50
-+#define CLK_TOP_AXI_SEL					51
-+#define CLK_TOP_DISP_SEL				52
-+#define CLK_TOP_EPD_SEL					53
-+#define CLK_TOP_DP_SEL					54
-+#define CLK_TOP_SPI0_SEL				55
-+#define CLK_TOP_SPI1_SEL				56
-+#define CLK_TOP_SPI2_SEL				57
-+#define CLK_TOP_SPI3_SEL				58
-+#define CLK_TOP_SPI4_SEL				59
-+#define CLK_TOP_SPI5_SEL				60
-+#define CLK_TOP_I2CP_SEL				61
-+#define CLK_TOP_I2C_SEL					62
-+#define CLK_TOP_PWM_SEL					63
-+#define CLK_TOP_AES_MSDCFBE_SEL				64
-+#define CLK_TOP_MSDC50_0_SEL				65
-+#define CLK_TOP_MSDC30_1_SEL				66
-+#define CLK_TOP_MSDC30_2_SEL				67
-+#define CLK_TOP_MSDC50_0_HCLK_SEL			68
-+#define CLK_TOP_MSDC30_1_HCLK_SEL			69
-+#define CLK_TOP_MSDC30_2_HCLK_SEL			70
-+#define CLK_TOP_MCUPM_SEL				71
-+#define CLK_TOP_DSI_OCC_SEL				72
-+#define CLK_TOP_KP_IRQ_GEN_SEL				73
-+#define CLK_TOP_NFI_BCLK_SEL				74
-+#define CLK_TOP_SFLASH_SEL				75
-+#define CLK_TOP_EMI_SEL					76
-+#define CLK_TOP_MAC_TL_SEL				77
-+#define CLK_TOP_SNPS_ETH_250M_SEL			78
-+#define CLK_TOP_SNPS_ETH_62P4M_PTP_SEL			79
-+#define CLK_TOP_SNPS_ETH_50M_RMII_SEL			80
-+#define CLK_TOP_LVDSTX_CLKDIG_CTS_SEL			81
-+#define CLK_TOP_VPLL_DPIX_SEL				82
-+#define CLK_TOP_EPD_DPI_SEL				83
-+#define CLK_TOP_ECC_SEL					84
-+#define CLK_TOP_GCPU_SEL				85
-+#define CLK_TOP_USB_TOP_P0_SEL				86
-+#define CLK_TOP_USB_XHCI_P0_SEL				87
-+#define CLK_TOP_USB_TOP_P1_SEL				88
-+#define CLK_TOP_USB_XHCI_P1_SEL				89
-+#define CLK_TOP_USB_TOP_P2_SEL				90
-+#define CLK_TOP_USB_XHCI_P2_SEL				91
-+#define CLK_TOP_PWRAP_ULPOSC_SEL			92
-+#define CLK_TOP_CAN0_SEL				93
-+#define CLK_TOP_DISP_PWM_SEL				94
-+#define CLK_TOP_F26M_CK_EN				95
-+#define CLK_TOP_USB_F26M_CK_EN				96
-+#define CLK_TOP_USB2_PHY_REFCK_P0_EN			97
-+#define CLK_TOP_USB2_PHY_REFCK_P1_EN			98
-+#define CLK_TOP_USB2_PHY_REFCK_P2_EN			99
-+#define CLK_TOP_USB2_26M_CK_P0_EN			100
-+#define CLK_TOP_USB2_26M_CK_P1_EN			101
-+#define CLK_TOP_USB2_26M_CK_P2_EN			102
-+#define CLK_TOP_FMCNT_P0_EN				103
-+#define CLK_TOP_FMCNT_P1_EN				104
-+#define CLK_TOP_FMCNT_P2_EN				105
++DECLARE_GLOBAL_DATA_PTR;
 +
-+/* INFRACFG_AO_REG */
-+#define CLK_INFRACFG_AO_REGP_UART0			0
-+#define CLK_INFRACFG_AO_REGP_UART1			1
-+#define CLK_INFRACFG_AO_REGP_UART2			2
-+#define CLK_INFRACFG_AO_REGP_UART3			3
-+#define CLK_INFRACFG_AO_REGP_DISP_PWM0			4
-+#define CLK_INFRACFG_AO_REGP_DISP_PWM1			5
-+#define CLK_INFRACFG_AO_REGP_SPI0_B			6
-+#define CLK_INFRACFG_AO_REGP_SPI1_B			7
-+#define CLK_INFRACFG_AO_REGP_SPI2_B			8
-+#define CLK_INFRACFG_AO_REGP_SPI3_B			9
-+#define CLK_INFRACFG_AO_REGP_SPI4_B			10
-+#define CLK_INFRACFG_AO_REGP_SPI5_B			11
-+#define CLK_INFRACFG_AO_REGP_SPI0_H			12
-+#define CLK_INFRACFG_AO_REGP_SPI1_H			13
-+#define CLK_INFRACFG_AO_REGP_SPI2_H			14
-+#define CLK_INFRACFG_AO_REGP_SPI3_H			15
-+#define CLK_INFRACFG_AO_REGP_SPI4_H			16
-+#define CLK_INFRACFG_AO_REGP_SPI5_H			17
-+#define CLK_INFRACFG_AO_REGP_AXI			18
-+#define CLK_INFRACFG_AO_REGP_AHB			19
-+#define CLK_INFRACFG_AO_REGP_TL				20
-+#define CLK_INFRACFG_AO_REGP_REF			21
-+#define CLK_INFRACFG_AO_REGP_DMA_B			22
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_PIPE		23
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_REF			24
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_FRMCNT		25
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_UTMI		26
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_SYS			27
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_XCHI		28
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_F			29
-+#define CLK_INFRACFG_AO_REGP_SSUSB0_H			30
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_REF			31
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_FRMCNT		32
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_UTMI		33
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_SYS			34
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_XCHI		35
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_F			36
-+#define CLK_INFRACFG_AO_REGP_SSUSB1_H			37
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_REF			38
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_FRMCNT		39
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_UTMI		40
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_SYS			41
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_XCHI		42
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_F			43
-+#define CLK_INFRACFG_AO_REGP_SSUSB2_H			44
-+#define CLK_INFRACFG_AO_REG_PMIC_TMR			45
-+#define CLK_INFRACFG_AO_REG_PMIC_AP			46
-+#define CLK_INFRACFG_AO_REG_SEJ				47
-+#define CLK_INFRACFG_AO_REG_MCUPM			48
-+#define CLK_INFRACFG_AO_REG_GCE				49
-+#define CLK_INFRACFG_AO_REG_GCE2			50
-+#define CLK_INFRACFG_AO_REG_PWM_H			51
-+#define CLK_INFRACFG_AO_REG_PWM1			52
-+#define CLK_INFRACFG_AO_REG_PWM2			53
-+#define CLK_INFRACFG_AO_REG_PWM3			54
-+#define CLK_INFRACFG_AO_REG_PWM4			55
-+#define CLK_INFRACFG_AO_REG_PWM				56
-+#define CLK_INFRACFG_AO_REG_GCE_26M			57
-+#define CLK_INFRACFG_AO_REG_CQ_DMA_FPC			58
-+#define CLK_INFRACFG_AO_REG_BTIF			59
-+#define CLK_INFRACFG_AO_REG_SPI0			60
-+#define CLK_INFRACFG_AO_REG_AUXADC			61
-+#define CLK_INFRACFG_AO_REG_CPUM			62
-+#define CLK_INFRACFG_AO_REG_CCIF1_AP			63
-+#define CLK_INFRACFG_AO_REG_CCIF1_MD			64
-+#define CLK_INFRACFG_AO_REG_AUXADC_MD			65
-+#define CLK_INFRACFG_AO_REG_TL_26M			66
-+#define CLK_INFRACFG_AO_REG_TL_96M			67
-+#define CLK_INFRACFG_AO_REG_PL_P_250M			68
-+#define CLK_INFRACFG_AO_REG_CCIF_AP			69
-+#define CLK_INFRACFG_AO_REG_DEBUGSYS			70
-+#define CLK_INFRACFG_AO_REG_AUDIO			71
-+#define CLK_INFRACFG_AO_REG_CCIF_MD			72
-+#define CLK_INFRACFG_AO_REG_DBG_TRACE			73
-+#define CLK_INFRACFG_AO_REG_CLDMA_BCLK			74
-+#define CLK_INFRACFG_AO_REG_AUDIO_26M_BCLK		75
-+#define CLK_INFRACFG_AO_REG_MODEM_TEMP_SHARE		76
-+#define CLK_INFRACFG_AO_REG_SPI1			77
-+#define CLK_INFRACFG_AO_REG_SPI2			78
-+#define CLK_INFRACFG_AO_REG_SPI3			79
-+#define CLK_INFRACFG_AO_REG_U_SAP_B			80
-+#define CLK_INFRACFG_AO_REG_UNIPRO_MBIST		81
-+#define CLK_INFRACFG_AO_REG_SPI4			82
-+#define CLK_INFRACFG_AO_REG_SPI5			83
-+#define CLK_INFRACFG_AO_REG_CQ_DMA			84
-+#define CLK_INFRACFG_AO_REG_KP_IRQ_GEN			85
-+#define CLK_INFRACFG_AO_REG_KP_32K			86
-+#define CLK_INFRACFG_AO_REG_U_AXI			87
-+#define CLK_INFRACFG_AO_REG_CCIF5_AP			88
-+#define CLK_INFRACFG_AO_REG_CCIF5_MD			89
-+#define CLK_INFRACFG_AO_REG_CCIF2_AP			90
-+#define CLK_INFRACFG_AO_REG_CCIF2_MD			91
-+#define CLK_INFRACFG_AO_REG_CCIF3_AP			92
-+#define CLK_INFRACFG_AO_REG_CCIF3_MD			93
-+#define CLK_INFRACFG_AO_REG_SEJ_F13M			94
-+#define CLK_INFRACFG_AO_REG_AES				95
-+#define CLK_INFRACFG_AO_REG_GCPU			96
-+#define CLK_INFRACFG_AO_REG_ECC				97
-+#define CLK_INFRACFG_AO_REG_CCIF4_AP			98
-+#define CLK_INFRACFG_AO_REG_CCIF4_MD			99
-+#define CLK_INFRACFG_AO_REGP_AUXADC_26M			100
-+#define CLK_INFRACFG_AO_REGP_MSDC0			101
-+#define CLK_INFRACFG_AO_REGP_MSDC0_H			102
-+#define CLK_INFRACFG_AO_REGP_MSDC0_FAES			103
-+#define CLK_INFRACFG_AO_REGP_MSDC0_MST_F		104
-+#define CLK_INFRACFG_AO_REGP_MSDC0_SLV_H		105
-+#define CLK_INFRACFG_AO_REGP_MSDC1			106
-+#define CLK_INFRACFG_AO_REGP_MSDC1_H			107
-+#define CLK_INFRACFG_AO_REGP_MSDC1_MST_F		108
-+#define CLK_INFRACFG_AO_REGP_MSDC1_SLV_H		109
-+#define CLK_INFRACFG_AO_REGP_MSDC2			110
-+#define CLK_INFRACFG_AO_REGP_MSDC2_H			111
-+#define CLK_INFRACFG_AO_REGP_MSDC2_MST_F		112
-+#define CLK_INFRACFG_AO_REGP_MSDC2_SLV_H		113
-+#define CLK_INFRACFG_AO_REGP_SFLASH			114
-+#define CLK_INFRACFG_AO_REGP_SFLASH_F			115
-+#define CLK_INFRACFG_AO_REGP_SFLASH_H			116
-+#define CLK_INFRACFG_AO_REGP_SFLASH_P			117
-+#define CLK_INFRACFG_AO_REGP_BTIF_B			118
-+#define CLK_INFRACFG_AO_REGP_CAN0_P			119
-+#define CLK_INFRACFG_AO_REGP_CAN0			120
-+#define CLK_INFRACFG_AO_REGP_NFI_H			121
-+#define CLK_INFRACFG_AO_REGP_NFI_B			122
-+#define CLK_INFRACFG_AO_REGP_NFIECC_B			123
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
 +
-+/* IMP_IIC_WRAP_C */
-+#define CLK_IMPC_I2C1					0
-+#define CLK_IMPC_I2C2					1
-+#define CLK_IMPC_I2C3					2
-+#define CLK_IMPC_I2C5					3
-+#define CLK_IMPC_I2C6					4
-+#define CLK_IMPC_I2C7					5
-+#define CLK_IMPC_I2C8					6
-+#define CLK_IMPC_I2C9					7
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++	/*
++	 * Limit gd->ram_top not exceeding SZ_4G. Because some peripherals like
++	 * MMC requires DMA buffer allocated below SZ_4G.
++	 */
++	return min(gd->ram_top, SZ_4G);
++}
 +
-+/* IMP_IIC_WRAP_E */
-+#define CLK_IMPE_I2C0					0
-+#define CLK_IMPE_I2C4					1
++void reset_cpu(void)
++{
++	if (CONFIG_IS_ENABLED(PSCI_RESET)) {
++		psci_system_reset();
++	} else {
++		struct udevice *wdt;
 +
-+/* DISPSYS_CONFIG */
-+#define CLK_MM_DISP_OVL0_4L				0
-+#define CLK_MM_DISP_OVL1_4L				1
-+#define CLK_MM_DISP_RSZ0				2
-+#define CLK_MM_DISP_RSZ1				3
-+#define CLK_MM_DISP_RDMA0				4
-+#define CLK_MM_DISP_RDMA1				5
-+#define CLK_MM_DISP_COLOR1				6
-+#define CLK_MM_DISP_CCORR1				7
-+#define CLK_MM_DISP_CCORR3				8
-+#define CLK_MM_DISP_AAL1				9
-+#define CLK_MM_DISP_GAMMA1				10
-+#define CLK_MM_DISP_DITHER1				11
-+#define CLK_MM_VPP_MERGE0				12
-+#define CLK_MM_DISP_DSI0_MM				13
-+#define CLK_MM_DP_INTF0_MM				14
-+#define CLK_MM_DPI0_MM					15
-+#define CLK_MM_DISP_WDMA0				16
-+#define CLK_MM_DISP_DSI1_MM				17
-+#define CLK_MM_DISP_FAKE_ENG0				18
-+#define CLK_MM_DISP_FAKE_ENG1				19
-+#define CLK_MM_SMI_SUB_COMMON				20
-+#define CLK_MM_DISP_MUTEX0				21
-+#define CLK_MM_DISP_APB_BUS				22
-+#define CLK_MM_LVDS_ENCODER				23
-+#define CLK_MM_EPD_DLI_ASYNC				24
-+#define CLK_MM_SMI					25
-+#define CLK_MM_DISP_DSI0				26
-+#define CLK_MM_DPI0					27
-+#define CLK_MM_LVDS_ENCODER_PXL				28
-+#define CLK_MM_DISP_DSI1				29
-+#define CLK_MM_DP_INTF0					30
-+#define CLK_MM_LVDS_ENCODER_CTS				31
-+#define CLK_MM_AXI					32
-+#define CLK_MM_EPDSYS					33
-+#define CLK_MM_MM_CK_GLOBAL				34
-+#define CLK_MM_DISP_DSI0_CK_GLOBAL			35
-+#define CLK_MM_LVDS_PXL_CK_GLOBAL			36
-+#define CLK_MM_DISP_DSI1_GLOBAL				37
-+#define CLK_MM_DP_CK_GLOBAL				38
-+#define CLK_MM_LVDS_CTS_CK_GLOBAL			39
-+#define CLK_MM_AXI_CK_GLOBAL				40
-+#define CLK_MM_EPDSYS_CK_GLOBAL				41
-+#define CLK_MM_26M					42
-+#define CLK_MM_32K					43
++		uclass_first_device(UCLASS_WDT, &wdt);
++		if (wdt)
++			wdt_expire_now(wdt, 0);
++	}
++}
 +
-+/* DPTX_PHYD_SIFSLV_DIG_GLB */
-+#define CLK_DPTX_PHYD_SIFSLV_DIG_GLB_RG_REF_CK_ENA	0
++int print_cpuinfo(void)
++{
++	u32 part = mediatek_sip_part_name();
 +
-+/* EPDSYS_CONFIG */
-+#define CLK_EPDSYS_PIPELINE_TOP				0
-+#define CLK_EPDSYS_PIPELINE_IMAGE_RDMA			1
-+#define CLK_EPDSYS_PIPELINE_WORKING_RDMA		2
-+#define CLK_EPDSYS_PIPELINE_WDMA			3
-+#define CLK_EPDSYS_PIPELINE_WF_LUT_TOP			4
-+#define CLK_EPDSYS_PIPELINE_DPI				5
-+#define CLK_EPDSYS_PIPELINE_6				6
-+#define CLK_EPDSYS_PIPELINE_IMAGE_PROCESS		7
-+#define CLK_EPDSYS_DISP_COLOR				8
-+#define CLK_EPDSYS_DISP_CCORR				9
-+#define CLK_EPDSYS_DPI					10
-+#define CLK_EPDSYS_TCON					11
-+#define CLK_EPDSYS_SMI_LARB3				12
-+#define CLK_EPDSYS_SMI_LARB8				13
-+#define CLK_EPDSYS_IMG_DL_RELAY				14
-+#define CLK_EPDSYS_26M_HRTWT				15
-+#define CLK_EPDSYS_DPI0_MM				16
++	if (part)
++		printf("CPU:   MediaTek MT%.4x\n", part);
++	else
++		printf("CPU:   MediaTek MT8366 series\n");
 +
-+/* GCE */
-+#define CLK_GCE_TOP					0
-+
-+#endif /* _DT_BINDINGS_CLK_MT8366_H */
++	return 0;
++}
 
 -- 
 2.43.0
