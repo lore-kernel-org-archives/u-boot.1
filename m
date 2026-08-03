@@ -4,92 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A47C55822
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F59BC55182
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:11:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2EB9860725;
-	Mon,  3 Aug 2026 19:10:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5961C6069C;
+	Mon,  3 Aug 2026 19:11:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EWhOBnxyJ3mR; Mon,  3 Aug 2026 19:10:10 +0000 (UTC)
+ id VRkTabM8Ayt9; Mon,  3 Aug 2026 19:11:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4ECEA60721
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 542A76069D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785784208;
-	bh=7fuS9+M4GxcMNudrm56sskXBhx5tfcWlqLZiHf6db/Y=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785784301;
+	bh=+vDsIiTP4RJQqVtu/VC5kzoILyXLaYyLkAAXqdfiDSs=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=to1nIAO5fl7IAyMSGIaTIlnUth9eSbSqYn/QvKrlYWekeELSFUzJAQQpV+2+f6Hyb
-	 Pui2wQvauLKcz/EOAoz2Gv4128f7lKRNtbQ+fphxDZYt2lMvdS0mTlUD4za8BPFR0f
-	 3PZaoxf2AF2KYAvfysbCj8D/YhOI1DeQrvfdDxAlqg979L7VNWDUVuriclrsCjkUk8
-	 goPtxakR+HXqNyMf5qbh4u6TGMSWmpAoRxWACcGA3DY0h7XpKzNzOo5MuM8XILqjRJ
-	 ML9WJ4GfyE+359Yx1DDdGg6VItYtQnMQ8dxg+Q9Yrf7ciZE97yXvsaCy2TResM/9CG
-	 AjGZmBH/7ooYQ==
+	b=MR1IfLeb4LlmfWu+v8/h4OAhnxO7Z2HvMGFCGR3gpBlMiFkh+OBBlIJRB2dBgzO56
+	 R5VLNxxGzccoqdwGiUfeRFPLrnVUhvjDEtLjSTSA4jv0Rgdp76KdeQJnVAMeiDbaE9
+	 66qbo4Rp7WXnUxxybuKiYkAXTe4eFl6SVB87ThEH6m+KRFB28xI0J46WAo3NQlHpgg
+	 VydviQcUhDhAvo8XsFPrB6lQaL7TX7oQ5WsUQ7ScL5Ds8OIsfZQ8qIDuRwPgYHGX8y
+	 IaKW93rX74KfJJs4DGJyVum8agFuWGt1Wi9Frw3CwNt/ErZrrwtrBnTc4R3aOy2kY0
+	 USySwesomsgHg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4ECEA60721;
-	Mon,  3 Aug 2026 19:10:08 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 79861194
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:10:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 542A76069D;
+	Mon,  3 Aug 2026 19:11:41 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 590A32CE
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:11:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 773EE80BDB
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:10:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3EDB44015A
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:11:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id p296DiILQWBi for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 19:10:04 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a02:6ea0:d71e::9;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=eb25=f5=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 68A3980C27
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 68A3980C27
-Received: from smtp.forwardemail.net (smtp.forwardemail.net
- [IPv6:2a02:6ea0:d71e::9])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 68A3980C27
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:10:04 +0000 (UTC)
-X-Forward-Email-ID: 6a70e789ae1ce3dd2fb7e5f0
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.13.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.u-boot-project.org,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 6/6] rockchip: rk3506: Use FIELD_PREP_WM16 macro
-Date: Mon,  3 Aug 2026 19:09:44 +0000
-Message-ID: <20260803190946.2259514-7-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260803190946.2259514-1-jonas@kwiboo.se>
-References: <20260803190946.2259514-1-jonas@kwiboo.se>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pxzLwKHcsIqd for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 19:11:38 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::633; helo=mail-ej1-x633.google.com;
+ envelope-from=jbx6244@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 1CC9D4005A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1CC9D4005A
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1CC9D4005A
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:11:37 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-c15df0c154dso48101766b.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 12:11:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785784296; x=1786389096;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:subject:from:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+vDsIiTP4RJQqVtu/VC5kzoILyXLaYyLkAAXqdfiDSs=;
+ b=seTFJEgBZaexwSXBDvJJRjsfAZWop6XiAkgMBy7VMBXpLB8JEG4lW08flIRCCDFIUL
+ k4F/ldeRLhRhhd/C8z4IHf31aV9fpiD6XoNxRryNR7RmB04oyojGAwioWEPIWpyXAq+5
+ YDNw27h7/iqjJcXEvRAJU6Jvh3k1q7MgXWpIgdVyhnYNFnnFrprNlEYg+VZCnxVgWDCz
+ KhLg+kVyI/PcJp6C8us90/KY0GJrtjSNC3lL6zEmCBrx9FKYDbYcKj6WluNhpjZ0qC+K
+ 6e8r/piSojVFbBw3H+zxifY3h9jTIXnOBsWKb9ZFFPYR9kd2L5iDj3CrNV497AY/Eqlv
+ qv8g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr9A1zGv3RFTqJuiWDu0CvF4/HpKaUDZxzYOXAcSeoICWVaq7byBnvxXeUNcMW/8zJPNtmkrKA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yww+OnUenF3wMizqsNiOtOWcPzqRK7B28AvY6AhlNx9OmBWO5eb
+ F/ThSKBbpuPmVkqZCsJ13tzvjQhiCHIkfR5XaH1vshfNG6m3kXyZ+h8k
+X-Gm-Gg: AR+sD124F6EBh5czjUgsG5O4KsP/+9GFA7BBzXjMkuURb5DzMnHnIAlFUC7z7R0pL9a
+ b/x7O9t6y3pB54sx9IHpTYDrpxHxbn2FM5I2yHP5Wc73kLPQuEsckQVq0AzRzjaCfzi9e9MmvLs
+ y+x/jq3G8HRKRxjMwXaE1GwcYod+LPd/TRxZK5tCbDBeVCKwoecyu7JZ54UCSBQpG1xGpWPTa1n
+ dg1BSjlzSlxwpu7v2PRh7W7ZPjW5Tnyf0zh5iCuifQTxTJqPjunTbyS7jbfuCIMzLTrx8fng/WO
+ W0O5BS1HZUmPT8iUkzfEveQHm36M7yLe3RIoEaCUQKQLIBj/LRNQVX8466kzrV8Us2F5Fkccmx7
+ 7b0iPkMvswviHPl7oQqytGtzC18SXNNVCtwuBpwuPD0vVO0kL7NF77J7u7QuEDOz5LanhlcJsuj
+ xxshUFcyvgEVf2RFpf/nz7wqwjXFHps+uBP7qtkfzR5L5obPDQ4FceSdyoLvy9xKv/hty6uJkAn
+ FutX6XRWzNbLdMqAl+MEhk4CZU=
+X-Received: by 2002:a17:907:7249:b0:c15:c651:f28f with SMTP id
+ a640c23a62f3a-c1fe8171f78mr661567766b.3.1785784295962; 
+ Mon, 03 Aug 2026 12:11:35 -0700 (PDT)
+Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c1fd4454472sm582668966b.34.2026.08.03.12.11.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2026 12:11:35 -0700 (PDT)
+Message-ID: <d3b88153-9503-4d2b-ae6b-4634a652c238@gmail.com>
+Date: Mon, 3 Aug 2026 21:11:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v4 1/9] rockchip: scripts: remove rkmux.py
+To: u-boot@0leil.net
+Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
+ u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
+References: <d15555b5-e57b-4567-ab70-56d48fd4b878@gmail.com>
+Content-Language: en-US, ar-EG
+In-Reply-To: <d15555b5-e57b-4567-ab70-56d48fd4b878@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kwiboo.se; 
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1785784203; bh=7fuS9+M4GxcMNudrm56sskXBhx5tfcWlqLZiHf6db/Y=;
- b=Umos5cyQRpYMB7fWDh3ZYTAWOReQjHeQH0GSEGQboglsgWR+ZX3Rbmz40Cm3mBkbB98q4MIfM
- LKgyI+3kWJI17GCf0iDKFF2/HW/bD/FOYkhesjVclxks5kUdC3pS5oia9E4ogbjserwwARHYnIt
- 9Kj+J+vAZGcTBarilyHopN1EmPn9bMqg+BJqEKccsoeT4Tyg4rwrurpDM4DPH4Pg88LwPn2mGkR
- OXSElyyOdELdyS/46aTPA394DILKetBpMU/teEeGh3E3CFuam8hpblxFPEhls6AwGoXnbg2OTHK
- Z/hOBug6ztdseJKmIUY93uAcAP67Ypdlcwwf6wKH1ziw==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=Umos5cyQ
+ d=gmail.com; s=20251104; t=1785784296; x=1786389096;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:subject:from:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+vDsIiTP4RJQqVtu/VC5kzoILyXLaYyLkAAXqdfiDSs=;
+ b=ScJjKoOEckWvKnWKh3FPl5w0qy9qzVfFa5vaHFYPbSq21cCkWo1Vy42rG8Fu6n+8XX
+ t01wqy8EBmbt3+OKGaNnWoZ6gTbqr5xuhCks/Jj+z6PQjTlP8mEIziV9HZnY7Kiogv7d
+ s2oH1EZ2GHcfsi/NRrYaNK7wyUeOzgFOqhccUEO40WQNkWKNKAgaSunDGR8SG+Ft3bam
+ prdjTsiTBY6+uHLUpVokd45mcSlYf7TLXlvkCh0DuWmMuqcrCZFZRATykjQh9XflDnDY
+ TuH0wlm2fXqnGo39hR35BiolGWRveSEeRLCJ3doENiSXGdrtH0C1i6dA3dQQ4AnBiEq5
+ n8dQ==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=ScJjKoOE
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -104,48 +134,289 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Change to use writel() together with the FIELD_PREP_WM16() macro instead
-of using the rk_clrreg() macro or custom write-enable bit handling.
+It's not U-Boot's core business to host a script
+to create enums from datasheets where it's unknown
+that it has ever been used for any Rockchip SoCs sold
+after rk3288. We don't need it to compile, so remove this
+relict from the past.
 
-No change in behavior is expected due to this code style change.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/mach-rockchip/rk3506/rk3506.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ MAINTAINERS         |   1 -
+ doc/README.rockchip |   7 --
+ scripts/pylint.base |   1 -
+ tools/rkmux.py      | 218 --------------------------------------------
+ 4 files changed, 227 deletions(-)
+ delete mode 100755 tools/rkmux.py
 
-diff --git a/arch/arm/mach-rockchip/rk3506/rk3506.c b/arch/arm/mach-rockchip/rk3506/rk3506.c
-index 2ed1dcc128e0..ef0943434e5e 100644
---- a/arch/arm/mach-rockchip/rk3506/rk3506.c
-+++ b/arch/arm/mach-rockchip/rk3506/rk3506.c
-@@ -6,7 +6,8 @@
- #include <dm.h>
- #include <misc.h>
- #include <asm/arch-rockchip/bootrom.h>
--#include <asm/arch-rockchip/hardware.h>
-+#include <asm/io.h>
-+#include <linux/hw_bitfield.h>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 86ab813aee4b..6dad4875a495 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -538,7 +538,6 @@ F:	drivers/spi/rk_spi.[ch]
+ F:	tools/rkcommon.c
+ F:	tools/rkcommon.h
+ F:	tools/rkimage.c
+-F:	tools/rkmux.py
+ F:	tools/rksd.c
+ F:	tools/rkspi.c
  
- #define SGRF_BASE			0xff210000
+diff --git a/doc/README.rockchip b/doc/README.rockchip
+index 96fa49d697bc..5a608ed0bce3 100644
+--- a/doc/README.rockchip
++++ b/doc/README.rockchip
+@@ -651,13 +651,6 @@ SPI flash.
  
-@@ -32,7 +33,7 @@ int arch_cpu_init(void)
- 		return 0;
+ See above for instructions on how to write a SPI image.
  
- 	/* Select non-secure OTPC */
--	rk_clrreg(SGRF_BASE + 0x100, BIT(1));
-+	writel(FIELD_PREP_WM16(BIT(1), 0), SGRF_BASE + 0x0100);
+-rkmux.py
+---------
+-
+-You can use this script to create #defines for SoC register access. See the
+-script for usage.
+-
+-
+ Device tree and driver model
+ ----------------------------
  
- 	/* Set the sdmmc/emmc to access ddr memory */
- 	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-@@ -77,7 +78,7 @@ void rockchip_stimer_init(void)
- 	asm volatile("mcr p15, 0, %0, c14, c0, 0" : : "r" (CONFIG_COUNTER_FREQUENCY));
- 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT0_REG);
- 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT1_REG);
--	writel((TIMER_EN << 16) | TIMER_EN, HP_TIMER_BASE + HP_CTRL_REG);
-+	writel(FIELD_PREP_WM16(TIMER_EN, 1), HP_TIMER_BASE + HP_CTRL_REG);
- }
- 
- #define RK3506_OTP_CPU_CODE_OFFSET		0x02
+diff --git a/scripts/pylint.base b/scripts/pylint.base
+index bc39e2385a31..a0a473b6d998 100644
+--- a/scripts/pylint.base
++++ b/scripts/pylint.base
+@@ -298,7 +298,6 @@ tools_patman_status 8.52
+ tools_patman_test_checkpatch 8.51
+ tools_patman_test_settings 8.78
+ tools_qconfig 9.79
+-tools_rkmux 7.10
+ tools_rmboard 8.06
+ tools_u_bootlib___init__.py 0.00
+ tools_u_bootlib___main__.py 7.78
+diff --git a/tools/rkmux.py b/tools/rkmux.py
+deleted file mode 100755
+index 1226ee201c3b..000000000000
+--- a/tools/rkmux.py
++++ /dev/null
+@@ -1,218 +0,0 @@
+-#!/usr/bin/env python3
+-
+-# Script to create enums from datasheet register tables
+-#
+-# Usage:
+-#
+-# First, create a text file from the datasheet:
+-#    pdftotext -layout /path/to/rockchip-3288-trm.pdf /tmp/asc
+-#
+-# Then use this script to output the #defines for a particular register:
+-#    ./tools/rkmux.py GRF_GPIO4C_IOMUX
+-#
+-# It will create output suitable for putting in a header file, with SHIFT and
+-# MASK values for each bitfield in the register.
+-#
+-# Note: this tool is not perfect and you may need to edit the resulting code.
+-# But it should speed up the process.
+-
+-import csv
+-import re
+-import sys
+-
+-tab_to_col = 3
+-
+-class RegField:
+-    def __init__(self, cols=None):
+-        if cols:
+-            self.bits, self.attr, self.reset_val, self.desc = (
+-                [x.strip() for x in cols])
+-            self.desc = [self.desc]
+-        else:
+-            self.bits = ''
+-            self.attr = ''
+-            self.reset_val = ''
+-            self.desc = []
+-
+-    def Setup(self, cols):
+-        self.bits, self.attr, self.reset_val = cols[0:3]
+-        if len(cols) > 3:
+-            self.desc.append(cols[3])
+-
+-    def AddDesc(self, desc):
+-        self.desc.append(desc)
+-
+-    def Show(self):
+-        print(self)
+-        print()
+-        self.__init__()
+-
+-    def __str__(self):
+-        return '%s,%s,%s,%s' % (self.bits, self.attr, self.reset_val,
+-                                '\n'.join(self.desc))
+-
+-class Printer:
+-    def __init__(self, name):
+-        self.first = True
+-        self.name = name
+-        self.re_sel = re.compile("[1-9]'b([01]+): (.*)")
+-
+-    def __enter__(self):
+-        return self
+-
+-    def __exit__(self, type, value, traceback):
+-        if not self.first:
+-            self.output_footer()
+-
+-    def output_header(self):
+-        print('/* %s */' % self.name)
+-        print('enum {')
+-
+-    def output_footer(self):
+-        print('};');
+-
+-    def output_regfield(self, regfield):
+-        lines = regfield.desc
+-        field = lines[0]
+-        #print 'field:', field
+-        if field in ['reserved', 'reserve', 'write_enable', 'write_mask']:
+-            return
+-        if field.endswith('_sel') or field.endswith('_con'):
+-            field = field[:-4]
+-        elif field.endswith(' iomux'):
+-            field = field[:-6]
+-        elif field.endswith('_mode') or field.endswith('_mask'):
+-            field = field[:-5]
+-        #else:
+-            #print 'bad field %s' % field
+-            #return
+-        field = field.upper()
+-        if ':' in regfield.bits:
+-            bit_high, bit_low = [int(x) for x in regfield.bits.split(':')]
+-        else:
+-            bit_high = bit_low = int(regfield.bits)
+-        bit_width = bit_high - bit_low + 1
+-        mask = (1 << bit_width) - 1
+-        if self.first:
+-            self.first = False
+-            self.output_header()
+-        else:
+-            print()
+-        out_enum(field, 'shift', bit_low)
+-        out_enum(field, 'mask', mask)
+-        next_val = -1
+-        #print 'lines: %s', lines
+-        for line in lines:
+-            m = self.re_sel.match(line)
+-            if m:
+-                val, enum = int(m.group(1), 2), m.group(2)
+-                if enum not in ['reserved', 'reserve']:
+-                    out_enum(field, enum, val, val == next_val)
+-                    next_val = val + 1
+-
+-
+-def process_file(name, fd):
+-    field = RegField()
+-    reg = ''
+-
+-    fields = []
+-
+-    def add_it(field):
+-        if field.bits:
+-            if reg == name:
+-                fields.append(field)
+-            field = RegField()
+-        return field
+-
+-    def is_field_start(line):
+-       if '=' in line or '+' in line:
+-           return False
+-       if (line.startswith('gpio') or line.startswith('peri_') or
+-                line.endswith('_sel') or line.endswith('_con')):
+-           return True
+-       if not ' ' in line: # and '_' in line:
+-           return True
+-       return False
+-
+-    for line in fd:
+-        line = line.rstrip()
+-        if line[:4] in ['GRF_', 'PMU_', 'CRU_']:
+-            field = add_it(field)
+-            reg = line
+-            do_this = name == reg
+-        elif not line or not line.startswith(' '):
+-            continue
+-        line = line.replace('\xe2\x80\x99', "'")
+-        leading = len(line) - len(line.lstrip())
+-        line = line.lstrip()
+-        cols = re.split(' *', line, 3)
+-        if leading > 15 or (len(cols) > 3 and is_field_start(cols[3])):
+-            if is_field_start(line):
+-                field = add_it(field)
+-            field.AddDesc(line)
+-        else:
+-            if cols[0] == 'Bit' or len(cols) < 3:
+-                continue
+-            #print
+-            #print field
+-            field = add_it(field)
+-            field.Setup(cols)
+-    field = add_it(field)
+-
+-    with Printer(name) as printer:
+-        for field in fields:
+-            #print field
+-            printer.output_regfield(field)
+-            #print
+-
+-def out_enum(field, suffix, value, skip_val=False):
+-    str = '%s_%s' % (field.upper(), suffix.upper())
+-    if not skip_val:
+-        tabs = tab_to_col - len(str) / 8
+-        if value > 9:
+-            val_str = '%#x' % value
+-        else:
+-            val_str = '%d' % value
+-
+-        str += '%s= %s' % ('\t' * tabs, val_str)
+-    print('\t%s,' % str)
+-
+-# Process a CSV file, e.g. from tabula
+-def process_csv(name, fd):
+-    reader = csv.reader(fd)
+-
+-    rows = []
+-
+-    field = RegField()
+-    for row in reader:
+-        #print field.desc
+-        if not row[0]:
+-            field.desc.append(row[3])
+-            continue
+-        if field.bits:
+-            if field.bits != 'Bit':
+-                rows.append(field)
+-        #print row
+-        field = RegField(row)
+-
+-    with Printer(name) as printer:
+-        for row in rows:
+-            #print field
+-            printer.output_regfield(row)
+-            #print
+-
+-fname = sys.argv[1]
+-name = sys.argv[2]
+-
+-# Read output from pdftotext -layout
+-if 1:
+-    with open(fname, 'r') as fd:
+-        process_file(name, fd)
+-
+-# Use tabula
+-# It seems to be better at outputting text for an entire cell in one cell.
+-# But it does not always work. E.g. GRF_GPIO7CH_IOMUX.
+-# So there is no point in using it.
+-if 0:
+-    with open(fname, 'r') as fd:
+-        process_csv(name, fd)
 -- 
-2.54.0
+2.39.5
 
