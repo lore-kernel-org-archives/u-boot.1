@@ -1,96 +1,97 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB372C55182
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 20:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2ED0C55182
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 20:57:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A99C240688;
-	Mon,  3 Aug 2026 20:57:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 673EA80C09;
+	Mon,  3 Aug 2026 20:57:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9EJEZZg3TvMI; Mon,  3 Aug 2026 20:57:50 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QiSlDKD1Zkcg; Mon,  3 Aug 2026 20:57:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 834FB40649
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3ABBB80C04
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785790670;
-	bh=SgrUymI9ugNXZsjzW2QB0dvlxKAA2HWlLTPtEkL3rEw=;
+	d=lists.u-boot-project.org ; s=default; t=1785790668;
+	bh=pD2dU7SU8h7jG9PuqfNWCuB14LXbaYTOevebPIYnqWs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VqjDfH4BhH4m3bMezzdksTWUpdoZRSRE4AAx6eEmf4lbtPqhqpZUqoY1qNhsVWRA7
-	 5jnkNmOq42JztWR0KNni7q7nw1ElOqcehfrdP+48pJluNYBuS2BJ26Nz26HHY5g8Ym
-	 EXRXEB5L4SWGSubUvqaM89y6hykPe1Smt6cqksAUZlpWU0JCfpKLMy3EZ30THRvWdA
-	 B1nasOh+Ng6knR4xLqpsOdD9BqrUcFlb7IUQ/NmBQewFtXDTJHKWS0mpL3iAnYt4jb
-	 yB2Zxiub+MRxlJzOEY4SeOBMGoZ/rFY+VMwdaxuT9wa/7npNHpTTlOXmytZ4kj8cQD
-	 RGlAmXd6HlI2Q==
+	b=DkB2/GF4WpzjrR8RtG8dxWS5IYc6oiNsXrzog57Po/FKJ3EY5KhT251VSKzN8PrrE
+	 xqiYZ8dSnxgWqRJsnyTk5S2VnwdEgp/1eI6IP1+CCxRghX5AUFTFYggv9EY/9LONcv
+	 YAq1k2OFK8QxtDKEjfLmO8f4DnsWdZZxIL4jWgEOah/3vMcckF8Uri4VNqAJ4sUVZ/
+	 A9Ke1Eq2gzhMj93wJKWDaz4UBzjsocIjfN51xQh43vFsXvY+lnzlfhXkoVhJDMQBxV
+	 lI7x/e0loEuoD3ZF+BadFL212QqdGbYAsb1ndDSy36MEHOTiUoDfjDpq5oXHQRcnFx
+	 +Dc88QJCDCgmA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 834FB40649;
-	Mon,  3 Aug 2026 20:57:50 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D3BEE28F
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3ABBB80C04;
+	Mon,  3 Aug 2026 20:57:48 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4AACA2DE
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C5623400AF
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:48 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 30E0240649
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w2sW-eay_MiU for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 20:57:48 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VRf4UAUoTM97 for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 20:57:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B00E44010D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B00E44010D
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B00E44010D
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:47 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7ec58fa3e01so1831311a34.1
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 13:57:47 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 44E3E40648
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 44E3E40648
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 44E3E40648
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:45 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7ee37dc91f5so2398995a34.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 13:57:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785790666; x=1786395466;
+ d=1e100.net; s=20251104; t=1785790664; x=1786395464;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SgrUymI9ugNXZsjzW2QB0dvlxKAA2HWlLTPtEkL3rEw=;
- b=ShNURG7kuncCIs3lUrY3KX0sTJbC3yggD6u0dm4t8dWq7Z5LpGj/pqAFGG9E9Dz1WA
- dl1z/GLyikciI3mEm/BXpfCkOKDkQx45i2S9wOBI+eiFSG4okpghMxVX74VBOTf0Uloj
- WaD84zDsfcQInX0+XTR6sbfSMo2eRdrYHN0aulL9gKEAAmzucZrxICYkyFGwBrJTQRkc
- MfGYQbVTxCpk5Dh5bIWXAiBDclOcBrte63qinuoZAMerEPaKew7EzinCzh0iJg/w5TxO
- iUlrRWafCA2pgTYdjNujVb9s+sSR9rn2hojuviHHbICJtvHd74pGFUX4BEoafixQmLFi
- e93g==
-X-Gm-Message-State: AOJu0YwRXiRVoT+H85ymhMCjLIXeE2flm1fd5h41mwHgvNWOiuVuvBQY
- T75twdW3xvE51/E3Rk635b0nXd6W+OxrLvse/cca/V23BT4qpslGaBE181cSZxNYJo4lOahGi8Z
- Z/RSrQVs=
-X-Gm-Gg: AR+sD10E/O1fjtEx4FuYXeV+Av7KE9gtMCMKLK5o+HvSpyl/eCjXT578HhugJ9yIef0
- 1JEN0P9cni/AUDIznsM9opxz1aqS2If3uyNpSagLUfJxgE0XMdBwWbWNzszhIwTxDzklNoLRNAi
- jUFGLeo7S2eijAw4m62d9cwfb5PqDkVXfzpW13y8QOWLCazlOdR9leGrFxRNqMHAjiPyyT2dHZA
- R8QlUIz6xZWVZG3jDUqvORaOupWccs2bBPTkNwtIapRPnqkNGKELcQGyfeH5dsncR3u2Jz/QiIc
- bXmsOHMdyZON6nT6BsQZ6HZcPhwU3+FVZ8bzT8M2t03YN0g0bK6i8ylamDA34mGBg3C5h3LO3qr
- QzA6VZhGfV1GthYApbnN5UvSaaouf6yZKPf5AsGL2yxaYsK7aSGxV0HKBopQt2Zw5EZoeH8IAeS
- J6Uqb/NMNOiqAlCtLYOSXmungr/UyzCT3EiZEozfOo2hHbh/n+qnZgNPs4nTWcqs4=
-X-Received: by 2002:a05:6830:3149:b0:7e6:fe3a:b777 with SMTP id
- 46e09a7af769-7f196ec393emr19264193a34.13.1785790666527; 
- Mon, 03 Aug 2026 13:57:46 -0700 (PDT)
+ bh=pD2dU7SU8h7jG9PuqfNWCuB14LXbaYTOevebPIYnqWs=;
+ b=qUwL7CWqWYWNU7UBQb3FjN9uxt0L952AE33/vNwWrB9yi+uqfUl3IcLaTu0Dx+9FlU
+ KfMH3oBE/kpRsyFY3gNY4ss1XiIA5X5yxyqRAFK0mwb7U7CQwJjtn6czw4PHU8fu/7jR
+ Fy+ZXvjLy2PlLQJ/S8z7Tg4o1wprdGrm0Ui8Zo6OxJ6Czm4SU3KkEr2rOz0SAx4HCgSq
+ u3unTKLbkNhYyHv17SeIv+lt5S7bn7Yxzsa379unM0NLbQuuo2q36zggY5OkqoknrurT
+ p61xZsBg5jVirIb6j6cV9mQPLMkgXmZNs3DkY1BSU6UInqJMHTEzKHOYMQS/Wg99nhIL
+ q3Hg==
+X-Gm-Message-State: AOJu0YyvWivdeurEsxMhiU/P4M8JfbQDfaVg1JUjoKN+S6dv64nd5F1A
+ 7udklOd5SgHLLntapNuTJdce8fVr9AQn4ov5NmxrG7XcO7BBnJo2PfkFQUk8ymFm8+myidUYQTw
+ 5RnP9LPg=
+X-Gm-Gg: AR+sD11xY7wuC/eKuDHML11Jtux/UQFJUKNKtYsLeysHSR0J+gSa0YJHvdRdPgsYIhw
+ kMdxCzf8dddDsGPKYPXdJ/82Bz6yFbOgNMq5vo4y37TFrUU+u/GnuaxXqt9cbkTe3RyriFfuhft
+ vLiCakn90KYRqvFdQSzi0o2tsd92CMr2gR6d1swoUfJDaN38/5eVPwdYrE0svOp3oHO30m+6Px6
+ OzJlFv8QqI7O5jPH9JcH/G2/OiegoeCps4mQ7eq9sBCZwMn3T8BZ4J4hxmX1TsIx5huNOVSzwQi
+ pI6dkq5oxyCGSD8LT0q/c8JCdxz3KmG4XnszdegKFFgysWg9KuWsi4vpp2mongCF9kg43wxqwyT
+ 6Ad1CL0RPGq45b6mR603wYj168+T92wS3S8qql3usykrzB90ODsfiXJ6NjoF9S7y5ZM/NvMeXzm
+ BfBjb4GXjR+/aVhJDLB2lpJYXclP7SAR8GOOkuXCiOZIa+JFrtnTj+s04Nx/WKjpjPXwbKUy0GU
+ w==
+X-Received: by 2002:a05:6830:7108:b0:7e7:45f:ce3c with SMTP id
+ 46e09a7af769-7f196e89bf1mr19733544a34.14.1785790664123; 
+ Mon, 03 Aug 2026 13:57:44 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:b8f7:1f5e:7c:a7d1])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f18f0d6a68sm8421452a34.19.2026.08.03.13.57.45
+ 46e09a7af769-7f18f0d6a68sm8421452a34.19.2026.08.03.13.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Aug 2026 13:57:46 -0700 (PDT)
+ Mon, 03 Aug 2026 13:57:43 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 03 Aug 2026 15:57:06 -0500
-Subject: [PATCH 3/4] pinctrl: mediatek: simplify Kconfig
+Date: Mon, 03 Aug 2026 15:57:04 -0500
+Subject: [PATCH 1/4] pinctrl: mediatek: select PINCONF
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-mtk-pinctrl-kconfig-cleanup-v1-3-fef1ff69d1cc@baylibre.com>
+Message-Id: <20260803-mtk-pinctrl-kconfig-cleanup-v1-1-fef1ff69d1cc@baylibre.com>
 References: <20260803-mtk-pinctrl-kconfig-cleanup-v1-0-fef1ff69d1cc@baylibre.com>
 In-Reply-To: <20260803-mtk-pinctrl-kconfig-cleanup-v1-0-fef1ff69d1cc@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -105,42 +106,40 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Julien Masson <jmasson@baylibre.com>, 
  Mingming lee <mingming.lee@mediatek.com>, 
  Fabien Parent <fparent@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4457; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=648; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=BHY/0fKDkO+j8yWvgDteKk5FKhiqlzZBVR+K4VvjY1Y=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqcQC4+MgbTgBqCTKqCTnIlxirkGu07OJl9daU+
- N4bYa6wtVyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanEAuBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AyxYH/2Z77jGjbUheDRIY9SQ9JHPD0HuQxTU0mlMKpgK
- KV0NeL42mJM/KJXk5uHmUMBybEJS1RIzgyXlzoO691cRJAvyZ05or3W2RcVvwkAL1YM4iWx9myS
- xl2YYntiYWRL7fIwlBFw/2iD+O2HKZ2Ehb7TU4AkKwXD18vn92FJyZ3x2t+VVVDlikiwO0cBIqb
- LHW5VMu1LcY5Hu5zKdiE9tznDtJoXibRMQyCe0lC1n4ojMqggRnmLjpfee+Zp4KNqYrFDWmdlPB
- RZPP5LbdB/Sty7AA1HQ/v5uBU6jyIA8Cwlz0pq7pQ9ekai7cZXcddYlxvXg/5+NKZew6TU1tKJ9
- Dxl4=
+ bh=OiUgks1djEYYyrmZ7kFijg68U0ScRedxzVKZAJV6qlA=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqcQCrQS8sqNWhKV26mrk+bsAThjZ+KlztPJnw8
+ Xuha9CUmcSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanEAqxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A1SIIAIFW6Jksr3fKg2v7RyDptAZHNelzTKriOdoWbJK
+ YYL++HcDIwWHGiVXe8a5P09+vBDppDZfpMeRoXCqQQ5kYU6d6DmjuaD3k510ZIugQff1BJwhcSG
+ Vf0CdjO3RLPL4a2IScFnbtnEPV3Jc84qkAJ42/72Ta4cBqaw42S7DzCJ8sgq0FilImiSrshDaHU
+ ktzXTev+xhJ0auw9CS1uHIVQJaNe6+dHWFjCwxW8SQUTmsnwolOLfPbbLQzxP/OUdA1gpVfvri4
+ AGaChpuKswwll2nbhOA24gbFM6+CSyTtU8a2ETHc4daKGCKMCN/3jPyLkm6/23VZflCD0zwbebG
+ NZ1k=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785790666; x=1786395466;
+ d=baylibre.com; s=google; t=1785790664; x=1786395464;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SgrUymI9ugNXZsjzW2QB0dvlxKAA2HWlLTPtEkL3rEw=;
- b=XM3EjPuc+UDA5/vcXC53oq3tA5DKyviVnpwFA2VBhwhaZ5peFJRSt9lDrxOc2jHTmY
- x2hjjQkUV3JIrUYqi2h/zf6It3OHPtBtqxGzBUS4xzLtfeVpFIejmzrkyXKL8/Ysbzgk
- Sn/3CVZDCZfxuiiog8fgtZUE+KVGl4gPS+9Z6CJwAW8OmrUOBoQzDhLfE/6oxIFUVPxK
- BbDxdc2m9N2Zw8Q15cnXXAyXfHk170eYQdtcfNsmQxJ26Xhqb2Nji5Bh15lrlCwrS7lW
- tj+bjg75cNyuqdx3g9UakWjcluYimyO9E+xXJwsqSKrs+wHAkA5zAOzgAlu19xt0ZVyB
- tHRg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=pD2dU7SU8h7jG9PuqfNWCuB14LXbaYTOevebPIYnqWs=;
+ b=IY9UuA07m51Fi7wnv31eSHb4PbK9/YLK24UgQLcNjW1+T00un7RYqRjSc6e9cjJc9D
+ RhWrGhQTeqAwBypwr/YN17KIOuqkv9LBbEjVHaSDAkB8lcatdtWhGYL3KZ+Be6LQbmTW
+ OGRRtBanpR3tVzVfPqZERgDVgfOHYOG6gfgUC0/HmufakBCSykgopCMhPYOpGMuM/Fgu
+ vEbn/T+AsHc0yuH2VY1BlFjVVY5c4APrdapXk9oV0JAsukSp6OcYVVft6HQAVuOUpX1t
+ OAla8SNxDci0XKIYXd/tVBsXOWYTBcxqkSlkIAHi1ZUSDGo/5OsQAKBYfjqd5zfyyRM/
+ z2pg==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=XM3EjPuc
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=IY9UuA07
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,141 +154,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Change the MediaTek pinctrl Kconfig to just have a single option for
-all targets. This will simplify adding new targets and SPL support in
-the future.
+All MediaTek targets include pinconf registers so we should just always
+select PINCONF instead of requiring each config to explicitly enable it.
 
-There is only one MediaTek target that does not have a pinctrl driver.
-All other targets enable it by default so the configs don't have to
-explicitly set it in addition to just enabling PINCTRL.
-
-In the Makefile, we can use the target config symbol to automatically
-select the correct driver. And the config selector on the common file
-was redundant since we already have the same in the parent Makefile,
-so it is dropped.
-
-Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
-Closes: https://lore.kernel.org/u-boot/fba47ca8-7cf7-446a-9242-54c50087cf3c@cherry.de/
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/pinctrl/mediatek/Kconfig  | 61 +++------------------------------------
- drivers/pinctrl/mediatek/Makefile | 30 +++++++++----------
- 2 files changed, 19 insertions(+), 72 deletions(-)
+ drivers/pinctrl/mediatek/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/drivers/pinctrl/mediatek/Kconfig b/drivers/pinctrl/mediatek/Kconfig
-index 42c7c8b8c80..46e35cbfe6c 100644
+index 5a90d74a9e1..42c7c8b8c80 100644
 --- a/drivers/pinctrl/mediatek/Kconfig
 +++ b/drivers/pinctrl/mediatek/Kconfig
-@@ -1,66 +1,13 @@
- if ARCH_MEDIATEK
+@@ -2,6 +2,7 @@ if ARCH_MEDIATEK
  
  config PINCTRL_MTK
-+	bool "MediaTek pinctrl driver"
  	depends on PINCTRL_GENERIC
-+	default y if !TARGET_MT8183
- 	select PINCONF
++	select PINCONF
  	select REGMAP
  	select SYSCON
--	bool
--
--config PINCTRL_MT7622
--	bool "MT7622 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT7623
--	bool "MT7623 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT7629
--	bool "MT7629 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT7981
--	bool "MT7981 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT7986
--	bool "MT7986 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT7987
--	bool "MT7987 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT7988
--	bool "MT7988 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8188
--	bool "MT8188 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8195
--	bool "MT8195 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8189
--	bool "MT8189 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8365
--	bool "MT8365 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8512
--	bool "MT8512 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8516
--	bool "MT8516 SoC pinctrl driver"
--	select PINCTRL_MTK
--
--config PINCTRL_MT8518
--	bool "MT8518 SoC pinctrl driver"
--	select PINCTRL_MTK
-+	help
-+	  Enable MediaTek pinctrl support.
- 
- endif
-diff --git a/drivers/pinctrl/mediatek/Makefile b/drivers/pinctrl/mediatek/Makefile
-index f90c74314f4..983de040ba3 100644
---- a/drivers/pinctrl/mediatek/Makefile
-+++ b/drivers/pinctrl/mediatek/Makefile
-@@ -1,19 +1,19 @@
- # SPDX-License-Identifier: GPL-2.0
- # Core
--obj-$(CONFIG_PINCTRL_MTK) += pinctrl-mtk-common.o
-+obj-y += pinctrl-mtk-common.o
- 
- # SoC Drivers
--obj-$(CONFIG_PINCTRL_MT7622) += pinctrl-mt7622.o
--obj-$(CONFIG_PINCTRL_MT7623) += pinctrl-mt7623.o
--obj-$(CONFIG_PINCTRL_MT7629) += pinctrl-mt7629.o
--obj-$(CONFIG_PINCTRL_MT7981) += pinctrl-mt7981.o
--obj-$(CONFIG_PINCTRL_MT7986) += pinctrl-mt7986.o
--obj-$(CONFIG_PINCTRL_MT7987) += pinctrl-mt7987.o
--obj-$(CONFIG_PINCTRL_MT7988) += pinctrl-mt7988.o
--obj-$(CONFIG_PINCTRL_MT8188) += pinctrl-mt8188.o
--obj-$(CONFIG_PINCTRL_MT8195) += pinctrl-mt8195.o
--obj-$(CONFIG_PINCTRL_MT8189) += pinctrl-mt8189.o
--obj-$(CONFIG_PINCTRL_MT8365) += pinctrl-mt8365.o
--obj-$(CONFIG_PINCTRL_MT8512) += pinctrl-mt8512.o
--obj-$(CONFIG_PINCTRL_MT8516) += pinctrl-mt8516.o
--obj-$(CONFIG_PINCTRL_MT8518) += pinctrl-mt8518.o
-+obj-$(CONFIG_TARGET_MT7622) += pinctrl-mt7622.o
-+obj-$(CONFIG_TARGET_MT7623) += pinctrl-mt7623.o
-+obj-$(CONFIG_TARGET_MT7629) += pinctrl-mt7629.o
-+obj-$(CONFIG_TARGET_MT7981) += pinctrl-mt7981.o
-+obj-$(CONFIG_TARGET_MT7986) += pinctrl-mt7986.o
-+obj-$(CONFIG_TARGET_MT7987) += pinctrl-mt7987.o
-+obj-$(CONFIG_TARGET_MT7988) += pinctrl-mt7988.o
-+obj-$(CONFIG_TARGET_MT8188) += pinctrl-mt8188.o
-+obj-$(CONFIG_TARGET_MT8195) += pinctrl-mt8195.o
-+obj-$(CONFIG_TARGET_MT8189) += pinctrl-mt8189.o
-+obj-$(CONFIG_TARGET_MT8365) += pinctrl-mt8365.o
-+obj-$(CONFIG_TARGET_MT8512) += pinctrl-mt8512.o
-+obj-$(CONFIG_TARGET_MT8516) += pinctrl-mt8516.o
-+obj-$(CONFIG_TARGET_MT8518) += pinctrl-mt8518.o
+ 	bool
 
 -- 
 2.43.0
