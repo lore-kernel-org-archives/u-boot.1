@@ -4,144 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE52C55184
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 12:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB3E3C55179
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 12:16:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 72E8540635;
-	Mon,  3 Aug 2026 12:16:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8B85D40652;
+	Mon,  3 Aug 2026 12:16:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FIRG1oBu4ASP; Mon,  3 Aug 2026 12:16:30 +0000 (UTC)
+ id I_Uu3GYufegC; Mon,  3 Aug 2026 12:16:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C080C40541
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 242734063A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785759390;
-	bh=jaasSxO/RumxUkhVCBjve6zUrFuH87QTe54R/HIH9DE=;
+	d=lists.u-boot-project.org ; s=default; t=1785759406;
+	bh=LgKak0N9ROCKjO3XxEqlIHvjhHZfad0H9b7qEPn5cMg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FwHGZMuLtxrIkSRgiauQ3K2Zqk1IPBLP4yUvIwRiHxMF09Y0/1qZscG+auVjo1WCX
-	 ze/6CyqIWXs+eVMp0g9333pnJSBwYezXS1ofDQ3Eud59YhjCyqXrG7p8BTXa1DEqNu
-	 NIDEtGIZCQHd8UUDV6nlmPyd5Aui/uVk9NaAAA8rTbIGQ1HsACNaQrXwhNnAFPguVz
-	 IZMTEGZZGpIvGB9YVbqxtbFh5BjUd8sfNt7wiLaA5Fzwz2tTzPpp4gr6NUBb819RAV
-	 J1XpKAwlBOE5sx6sokoGaMXrfpqx5MobTbj0c4P14m2CFgbZQRJ9y8aiiRocqOxMVl
-	 gHfVQ4JYupKwQ==
+	b=BHl6AitFLsnLcrYwyF6LBbiz9/RdPxoAvwaFWjOvw5+kwmZNtpEePc9f7aTy+iSU0
+	 VwYunoVSCIYP4hmZQm8kmtXfKcQL5JT++uGm2TXhUyy9Tof0o89ytlax+mK8/+3hW0
+	 CZchI8vegbypWC1MU8VA5OZozz1GuHn6jd4LowowtcGmHRnA6c9Gbmr+9+8YSc1NOW
+	 yxypcq3/CCUpWOGh6irXR1FBFSdlynur590YNiQr6VcNwqEs7veOSbiHkFzKlBLZVz
+	 4khgACmJgpJSRfONH6tp66MuTw6BiTxzTlBiKhumly7CgL5s5iNVVkTxACzU97OSE+
+	 G329zgb9WRC0Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C080C40541;
-	Mon,  3 Aug 2026 12:16:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id F21D6218
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:16:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 242734063A;
+	Mon,  3 Aug 2026 12:16:46 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 431F136E
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:16:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D04B96076A
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:16:28 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 35620400C1
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:16:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 20MsY3jTnjps for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 12:16:28 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TGGaCi_8eB5m for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 12:16:43 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::12b; helo=mail-lf1-x12b.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org EB35F60768
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EB35F60768
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EB35F60768
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:16:27 +0000 (UTC)
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5b01910b499so2825591e87.0
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 05:16:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785759386; cv=none;
+ client-ip=2607:f8b0:4864:20::b134; helo=mail-yx1-xb134.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org CBC17400A0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CBC17400A0
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CBC17400A0
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:16:42 +0000 (UTC)
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-668432fe416so4105262d50.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 05:16:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785759401; cv=none;
  d=google.com; s=arc-20260327;
- b=oNI4+tk7p+khltmnPZHOUqKaf30ivKDY5//nAu3mjGqwClUFfaOi3eHjA4AUy6Tlke
- NobMwq056zkKqslgjo7aH2V7DB7tcqLZyYgViE/l59XrtZvGBEisgdCE5BpUuDNJt1Wd
- RHWRAdJ7ZOQZTBohmpemFdV4r/9HPI6al2M+Lb4BVzJx/euexLx6CG/2Xy9t3FN+dza5
- DwoTGE2h4uQ9TL9Hf5XjfC+996mXfJaxCkSTJrOAiqAbjobQfKiY4KFK6kxNNVPuagva
- 1ktt/aT42eQdgx/8AZkKMMUPp0P0ecfYMVTGIbEvCNujg4n3dMoOewbZnRGO3gFTsFdy
- rQuw==
+ b=bbbtQoV9/GwL6oQYAoC0myS+zex+AhiIWAVzLyJ1kKauYKL0ssT/te3nD9Le2pRARq
+ bRr8IEdLID2g+DxuP/PU38O4U9KaG0bhbhRTgv0zk7rOWJlRxcj1fuv2n/X0v2axVQe/
+ YL7xrq3j3YEkYLP7KEBz6jmF8sm3FV2bWArCwz1e0at9il6Vg9iB/x9AXA10cxvdzL56
+ KeCsNz60du2tQwIDP99urqcmmCV+0yt8hkDC+V5xTrDDL7xPsdvyTeEZn/x9h8Lgf86Y
+ npriBfn5wEay5TZ2P9HjvWEce0okkQIqFaCeeUf69XmBcwwlNhLMIloXP5CYsSWviQzD
+ +/VQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=jaasSxO/RumxUkhVCBjve6zUrFuH87QTe54R/HIH9DE=;
- fh=svFw78k+QH0+FcVnqD15d0U3z+jQVzzU8uhZp6CyumI=;
- b=l+HNhaEu+IJnaxEaKF3R3a5aCL+m2ytdMoBUxiYtaLvtADIRHu6NhoKXWyLW+LF7mQ
- 5BYRZME2ux1N6a8kkH3BC2TqDq6TnUA7ZPRuO2RRF5Fo1krbtzllLsR7S5Qkk80Uwyj9
- SSx+QvybZLfc5o8uDp27OL7YrwfGSiyz18XbXZ4PjiMYnZSdhjjsmc2LKsocqGDEg5v5
- Dv/A2zHFZpzbSbjl8DLbsCKsj9WStKYnRYs6ytLKfNtFW9E1VEsAAgq/PXuIav2WZkjc
- /N2DggsFLC5Mg/f5bHVSWrNnJ3xArNqkoo656tLhmC9+ICdLSGUVOd1FCqWHJ8hBT2Zi
- +qKQ==; darn=lists.u-boot-project.org
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=LgKak0N9ROCKjO3XxEqlIHvjhHZfad0H9b7qEPn5cMg=;
+ fh=f/vaMyCG5Qv74UFk+AVmTQso3cXkIgLTJex8Yll2TDQ=;
+ b=ZwK2KI3TU4q77E9YvTQqYgl/VV5pIT5wOMgXVx2zvkNlxcutz4U1xXS9Ws8DhZt5Wz
+ +vAbFqCy9t81oNw6vtP5eEuwVOP5mqmTKxWVL6DCLyH61uv84pFm68FdINkUdRCGhLJp
+ 7bqS0XtF2HWAHpc5jGSQPjQ231mYRuANF2uoTQLIGqG9GvPZ7PY0iHig6thjl9q/fH1L
+ JwNdbsxIBzGTQK8xvtZNNEAhsyl1Eza1KZD7XpIfSC5MZx4/gWBbq9pLDl+/XBfM/iri
+ m+RfabNgHEmOQRV3E39/dkQsGsBSDa/oAuJthCwtSN1fItJAsC9t3zopJw+CZQctSCMg
+ e1ug==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785759386; x=1786364186;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jaasSxO/RumxUkhVCBjve6zUrFuH87QTe54R/HIH9DE=;
- b=CxmhxqT6yC8G2YWjE8UYPvbxt7wMSFn7Ib28/PAIt02Zohy8MI0xnbnZJWLmNqUt8r
- gjy73MW8tgQzI7Y2O3Hks92NIpa0NfjJC598iDpqTeZjnT8cxp/Z9HCmQkguDWmQFbZG
- DSCjQ7HwK/QrDwhyCwYL1+7NE9owTBomhsyL3w9tlo+YQJo844oVdOkEavQYyZ5nE2gO
- hx8ZGAVWL8XlNAWh3QypOEsyKe/PgVBfE2MW1CRNTbiU24HkE8fVlNTzxXqOyp0pPjAb
- 5EdcYr9dHErlA+kipMYhse+A7PtaI3D1MPxzk/hxSq7fTimTdnygrfP7lNvP+Jqe8/qB
- 5nmA==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rp4ANU702GJ8ERvgii+iI3PiK11VkXUyvDc3PC253SNlAl8cLTbPzhNizyTo+EJ0dUL7UwUZfU=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yz8XHUVLCnwqXwPXw734RhEeT5MolF+cldJ2pHEyHjngbRqiXui
- c1ZopJ39ZSnsnThsyAOQjsOMsstLsFkF5yFWTuLmtfphmHWmc89pV3fv5H7oBkWsJK82d3auqIT
- o66KDrqSlXkrekpyL05ySHPpQI9h8BVQ=
-X-Gm-Gg: AR+sD10oJpHGdYNrqXL9HazOiHGVdx/xsRF80lYPaAudnowlnsWC6R5BHKMKegusQxi
- jo8mewiYBqtAbUBHHy9Uqq8s0p9UxoL7sYhYmCz0Hk7g8dtYdH1f3jM6pD7UjKPnpN8QIJU/C+P
- rHw5BxgEzZWiYXfG2YHCmNI23CXZksYNMV49DUPY0npGzf/VT9TrWM37JguXHUCrv1kQJW7z2Mh
- kKN0zO3sXg4k/gHDuBXITQXIElLCWkITlW4ZmbTgA//4L21pBkgPlRp0+wnhwQCy2FCxRR9LLuw
- wm+XuCRMgveLBdidu0tFs9J2FtwPhmuQeeCgBsUc5xkyAat5eTLDpMtGrYLeWU0mbEMseddXIxk
- 6EU70I8J4aJrouFcyPNf1tuPgk18LbnvPEw==
-X-Received: by 2002:ac2:4644:0:b0:5b2:a353:e4bd with SMTP id
- 2adb3069b0e04-5b2e4f74c67mr1161266e87.30.1785759385404; Mon, 03 Aug 2026
- 05:16:25 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785759401; x=1786364201;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=LgKak0N9ROCKjO3XxEqlIHvjhHZfad0H9b7qEPn5cMg=;
+ b=DNu0P0GEg1QSeePfCJinKCJk9MNm+QrWTXjhxw+QxSq6DGUe9SX4vwWisbCw51XDGw
+ fJvMEExgwTcdh76jaU6AjIEf5RFI4kDpldoCZGyg0Bm9oN6m2V3GDUIxk4XhmlumU65F
+ AZTE/5yB80qgdM145qj5u7cvGopyzAZSZxQNH5EdoZdrewiE2J6kmEcSGpXGEQicBLEL
+ zmhE1sHKq3UdBvK0lFhv84TYyp+KqASzpszeqirpBPffljwJwJ3R3GpEudyjKR6mAmEp
+ P7/KijAWpO4ptWcW8qCftqSdmA06Qt/+rxYhireeIZc6sWUSj6zQs3JR7yalok5yaXhq
+ i9dg==
+X-Gm-Message-State: AOJu0YxMKGc9MvWdSW8FqDE+yg4PIOhxlFtU73CUDbPfPT1E2hW/ISCW
+ tIMdcNPSJBMIOpddbTfK9jJ+TXgsUhxNTFsjj9u3FAvmVuuTKEAvVKQzJ+z4D2cm7PT+i/tIXIY
+ 0bjmZ3oQFD7Z3tLGjUM0HFI3LlEqTeTcckaTiD67o/g==
+X-Gm-Gg: AR+sD13JKTYxr7ZR8ANRKNX/lCBVArBJcWW00C0NfJOFTyomBmiXr825gAKNgin9mPX
+ j5g+fJSnBD/6mTUYMM3S+9OSaQRimTJJi9ukTFH7hNvRinps4yxeeT1rJMYEZULdCxMVc6UpF5l
+ 7Y2053LN8VlQqM0P9NKTTZldW6sl2WwJO4W9lrGZl/Kt0FFy3wqFjsLNVuLWJO692qnOmGUqDGn
+ zvmSDUmixGRW6gdyUYsdsNm4q0x89XjI/AEtRQWyF+9Iy1ADFUuQ9oStdLMAJbLjcSn1qqxMQXv
+ WMYyr6/dNeXIMoVAOT0i5/w9nh04K+gt+jRFM+6l2Ija53o3MVfzi7sb+H9/y9Tn9zdy4gtE/wf
+ dMaR4AzBm6IhzsBB2iTfO16OWAbGHABG7jO8MEBhKvG4Zj6rcPVt+lJySjGZYmpoqhb8CVGGmBw
+ kwu9G2gEpgUT4EceerGHJc+R1lh1ZWfxlYEs/n4LMxpUM8OVCElnChuuTtQq4mxbgOFyUrK+csq
+ Ul03GFP0/YlVT5nBVlsbnk4fcFlcUjJhYL/TVUeyBA22jJoMMiRM69B5CVly4gHd96uukC/z/fb
+ AjtAb0W8U9Gozp8NB3uAE2lIo2g/jxzHOwlUGuQCsGHk7HDsuEttRj1UnzeSjeWbnfxIgRCPtsn
+ gJMd5Mhzpsr5P+NNyUX/Miq12SnJcNbB3DaAQMfrxorU=
+X-Received: by 2002:a53:a286:0:b0:664:9736:424d with SMTP id
+ 956f58d0204a3-6694f2311b9mr10195438d50.48.1785759401185; Mon, 03 Aug 2026
+ 05:16:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260716-imx95_frdm-v3-1-bb53481157fc@nxp.com>
- <CAOMZO5AX2VZJEKw4dyg+d4S=uRNBcOhe4k8ZED9+Q0mv=_a9Lw@mail.gmail.com>
- <MRWPR04MB121170AD9EADBB588BED27ECF94CF2@MRWPR04MB12117.eurprd04.prod.outlook.com>
- <CAOMZO5Asxi5JFdfXpsJuN1shOg=Q1eGiDvc0Ywak4mm4Odaeuw@mail.gmail.com>
- <12a7410e-870f-48a0-8afa-a50e5c226f2c@nxp.com>
- <CAOMZO5CqTuXdG+uXZfiS5WjDD9QoNmreYd=JT2Rb48n19qRKkA@mail.gmail.com>
- <b362330e-c919-46c0-a1ca-b000f9c89be4@nxp.com>
-In-Reply-To: <b362330e-c919-46c0-a1ca-b000f9c89be4@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 3 Aug 2026 09:16:13 -0300
-X-Gm-Features: AUfX_mwj6VdWDQacpKYxGIqIuJAbtczGeIOuS_8vJgsuMxlwW7PcaUi95WUzHts
-Message-ID: <CAOMZO5AhOZcsAc6DThNDcXudk5fWrm1gxgzwvETWX3hQ+Pj6=w@mail.gmail.com>
-Subject: Re: [EXT] Re: [PATCH v3] imx: Add FRDM-IMX95 initial support
-To: Joseph Guo <qijian.guo@nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- dl-uboot-imx <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Lei Xu <lei.xu@nxp.com>, Ye Li <ye.li@nxp.com>, 
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+ <20260731-gpt-4k-v1-3-a3f1f16b53ae@flipper.net>
+In-Reply-To: <20260731-gpt-4k-v1-3-a3f1f16b53ae@flipper.net>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 3 Aug 2026 15:16:03 +0300
+X-Gm-Features: AUfX_mwoJpKQlySL6XU-TqqHaxCQ3HO3cwTYzOJeYaZ9_DMUUX6IPgLk0fGjZ-U
+Message-ID: <CAC_iWj+ak8HWKHob2rr0QCMjewveLYHzN0GzX_AzmwGxBSx8jg@mail.gmail.com>
+Subject: Re: [PATCH 3/6] disk: part_mac: Fix stack corruption on devices with
+ large blocks
+To: Alexey Charkov <alchark@flipper.net>
+Cc: u-boot@lists.u-boot-project.org, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
+ Anton Burticica <mouse@ya.ru>, Javier Martinez Canillas <javierm@redhat.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Quentin Schulz <u-boot@0leil.net>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jacobe Zang <jacobe.zang@wesion.com>, 
+ Jagan Teki <jagan@edgeble.ai>, Heiko Stuebner <heiko.stuebner@cherry.de>, 
+ Jonas Karlman <jonas@kwiboo.se>, Suniel Mahesh <sunil@amarulasolutions.com>, 
+ Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785759386; x=1786364186;
+ d=linaro.org; s=google; t=1785759401; x=1786364201;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=jaasSxO/RumxUkhVCBjve6zUrFuH87QTe54R/HIH9DE=;
- b=fxW0NT0IZ94+W7f3/GvMhvFgFgC1X8kweAU+7NMA/PSs5ckQ30X8ADDikcKFnxyiG9
- /uEcvbW+B5xgbaSA0xF5NhW0QP7+N0gFeiVrdiG7EbbO/ZyYxYsB0VV1Pj8I5pTBjBNO
- m/2YSCgtI2AVR4406KhkvY+zCH58LKvDIfacaYHXtLGRTWghDqYn9LUvAthWc7rkXX8R
- 8lV2o/o4J7b2rYaFG4Bz6yHv20e14ihfb0/nZMRtUSZ6wzzRmY01qsHNHZMC2ik84aTq
- Ek5Al8wHMcr73PxxmiPzFJAr5zq7ZlkkTDlfR1lbpDzho+vTi9pxkuwAq48P1TGlWMmH
- gbvg==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=LgKak0N9ROCKjO3XxEqlIHvjhHZfad0H9b7qEPn5cMg=;
+ b=SvQhR84fWPmjOWKSMg7bmwHA9HP+X+aFKpwRGKb+mnbMc0gD83+eHJ57Ic1dhOdPaP
+ zu6NEaZKoHrUZgXnRmy16uJ3CgzTus64iPYQDTkqNQwPODaLdDEbrh0vs1m/FAU/QPuP
+ n9MKVcr9bPws+HELT5J7pJSz1qir7W0XS3ovl8zRJ5xfkRNC+lX4kO/U9YNjKSK54b/O
+ AzsdmZZdJAdYGTAZLa35+ckngnC8JQ7lwNCJXJrBSZVmRCk9UG8ogmHdsa/raR4nKn7O
+ pisBFlP/jxJnHYEvExkdHCL/K8dNWruYeOReDRC477WggA/YlVP2/HXPMRCju0q1ZZsa
+ gXMA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=fxW0NT0I
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=SvQhR84f
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,25 +159,80 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Joseph,
+Hi Alexey,
 
-On Mon, Aug 3, 2026 at 4:36=E2=80=AFAM Joseph Guo <qijian.guo@nxp.com> wrot=
-e:
-
-> On i.MX95, `netc_bus0`/`netc_bus1` are internal pseudo-PCI buses used by =
-the NETC subsystem for register access =E2=80=94 they are not real external=
- PCIe root complexes.
-> Without explicit ordering, `netc_bus0`/`netc_bus1` may be enumerated befo=
-re or interleaved with the real external PCIe root complex,
-> making it difficult to predictably identify and target the true PCIe inte=
-rface (e.g., for NVMe, PCIe Ethernet, or other add-in cards) in boot script=
-s and environment variables.
+On Fri, 31 Jul 2026 at 15:40, Alexey Charkov <alchark@flipper.net> wrote:
 >
+> part_test_mac(), part_print_mac() and part_get_info_mac() each declare a
+> single-block buffer sized after the descriptor struct:
 >
-> The `pci0`/`pci1` aliases fix the enumeration order in U-Boot only. Linux=
- does not use `pci` aliases for bus ordering. In kernel, it use 'linux,pci-=
-domain =3D <0>;' instead.
-> I prefer keep the alias in u-boot.dtsi instead of upstream.
+>         ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+>         ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+>
+> Both structs are 512 bytes, but every blk_dread() below them asks for one
+> block, which transfers desc->blksz bytes. On a device with 4096-byte
+> logical blocks that writes 4096 bytes into a 512-byte on-stack buffer and
+> corrupts the stack.
 
-Why can't U-boot use 'linux,pci-domain =3D <0>;' just like the kernel, then=
-?
+It's 2560b if ISO_PARTITION is enabled, but it's still the same error
+
+>
+> part_test_mac() runs on every block device during partition probing, so on
+> sandbox with CONFIG_MAC_PARTITION=y this crashes on any access at all to a
+> device with large blocks, for instance:
+>
+>         host bind 0 disk.img 4096
+>         part list host 0
+>
+> Pad the buffers out to the block size with ALLOC_CACHE_ALIGN_BUFFER_PAD(),
+> which is what part_efi.c already does for its own block buffers.
+>
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+> ---
+>  disk/part_mac.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/disk/part_mac.c b/disk/part_mac.c
+> index dd3ce0be832b..f0afab65d755 100644
+> --- a/disk/part_mac.c
+> +++ b/disk/part_mac.c
+> @@ -37,8 +37,8 @@ static int part_mac_read_pdb(struct blk_desc *desc, int part,
+>   */
+>  static int part_test_mac(struct blk_desc *desc)
+>  {
+> -       ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+> -       ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(mac_driver_desc_t, ddesc, 1, desc->blksz);
+> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(mac_partition_t, mpart, 1, desc->blksz);
+>         ulong i, n;
+>
+>         if (part_mac_read_ddb(desc, ddesc)) {
+> @@ -64,8 +64,8 @@ static int part_test_mac(struct blk_desc *desc)
+>  static void part_print_mac(struct blk_desc *desc)
+>  {
+>         ulong i, n;
+> -       ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+> -       ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(mac_driver_desc_t, ddesc, 1, desc->blksz);
+> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(mac_partition_t, mpart, 1, desc->blksz);
+>         ldiv_t mb, gb;
+>
+>         if (part_mac_read_ddb(desc, ddesc)) {
+> @@ -208,8 +208,8 @@ static int part_mac_read_pdb(struct blk_desc *desc, int part,
+>  static int part_get_info_mac(struct blk_desc *desc, int part,
+>                              struct disk_partition *info)
+>  {
+> -       ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+> -       ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(mac_driver_desc_t, ddesc, 1, desc->blksz);
+> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(mac_partition_t, mpart, 1, desc->blksz);
+>
+>         if (part_mac_read_ddb(desc, ddesc))
+>                 return -1;
+>
+> --
+> 2.54.0
+>
