@@ -1,100 +1,193 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F1DC55182
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 14:12:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E1DC55182
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 15:49:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AAB6A60711;
-	Mon,  3 Aug 2026 14:12:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 065FF40571;
+	Mon,  3 Aug 2026 15:49:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sot9AoSVMjLz; Mon,  3 Aug 2026 14:12:41 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Efg-gs8tMUo2; Mon,  3 Aug 2026 15:49:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BF7086072F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 036EE40580
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785766361;
-	bh=W4lZ/Vy+s28dfPnXxDQ/OCXNEglzu5aD7DP1U7cMzIQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=u5/kW8uC4ps6Ecg7tiXNbbr3hytVLnYN+UldcyIAERLKjXd7kOm7fxrVnQReB/v//
-	 EcBwF+CkOc8qibJ+TqgcsZY3DaYMMcFyIRp+76aGN7pFfpUEp4iTwTJTHT07IEqq/B
-	 JFoBAA901XjKBUtnLrma9ZZgfC+3Q/Ipamg4PHAbwnJZy8PsgYxctlcEjzEHrfgy8i
-	 RpmJ85xx8fHnWtC1zeq+S0j/LaB0lgHSzU8z1+BlgxB4iuQnzyaWdlYxsfyPHVia9F
-	 IQcHXPPTBJBnUhrcExorc81dh0DowVBqIXnjWLLQXMiHZ8AvjFMMzMhzT7SpDLAgBK
-	 M4R5GYJcCIZaA==
+	d=lists.u-boot-project.org ; s=default; t=1785772181;
+	bh=KQmwaOAf+IJH7breN7SZ1KmvtOxw5rksSf9MEEOhWbA=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=Wg7+MsBGgaEwMAQe3BOFyggL4gnCpJe5Yn5rNx2Lmz7VQswSE+Lqx1zSVgpa69YfF
+	 737yg0lmJJ85fw5Wap49Ikz55PkSHuVzRP0wL30w1WI+5dJpuSnJtgBFvz7wldaqal
+	 tWTbD9XP0P2z3u++E905OJSOm5Bo7dd3YiAQ4JxL+AangNTDjCbqT4TSycRPOlKJSG
+	 8b/UZm2QHRzhi6ZQmoryS9C29kHbljxKlMF2HKCBmWv91MCZO8RBuwtvV6u1+EuScy
+	 0bskEqTRuCge9BniWtRpTiMdHxyqQHA/Huheh5m6+zAEb5f9fmd7Plxw8vu9Mwyp4W
+	 o8VRCKrBYv3HQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BF7086072F;
-	Mon,  3 Aug 2026 14:12:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id B6E46218
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 14:12:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 036EE40580;
+	Mon,  3 Aug 2026 15:49:41 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 33B7836E
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 15:49:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9C77B400C1
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 14:12:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 22C0940580
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 15:49:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Px-LJHcvgQZ7 for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 14:12:39 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=193.142.43.55;
- helo=galois.linutronix.de; envelope-from=gregor.herburger@linutronix.de;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5CAE140042
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5CAE140042
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5CAE140042
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 14:12:39 +0000 (UTC)
-Date: Mon, 3 Aug 2026 16:12:33 +0200
-From: Gregor Herburger <gregor.herburger@linutronix.de>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, Matthias Brugger <mbrugger@suse.com>, 
- Tom Rini <trini@konsulko.com>,
- Filip =?utf-8?Q?Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v2] rpi: copy /chosen/bootloader partition and set
- boot_partition
-Message-ID: <6mekppoipr35wecczz26vktsovqzwgwvsxuo6u7ltalpl4yyfl@vsmbtmecofkp>
-References: <20260803-tryboot2-v2-1-30c071f2ee15@linutronix.de>
- <CALeDE9PhmuHkiR5k0H=7mdCwq=n=1gS80vuQQqb8GdpKMYM3nA@mail.gmail.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8n8d6SYaezIB for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 15:49:39 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org F009940571
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F009940571
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id F009940571
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 15:49:38 +0000 (UTC)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 673EBvGD1355032
+ for <u-boot@lists.u-boot-project.org>; Mon, 3 Aug 2026 15:49:38 GMT
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnrdac1m-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 15:49:37 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-38ec0f510a9so8824776a91.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 08:49:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785772177; x=1786376977;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=KQmwaOAf+IJH7breN7SZ1KmvtOxw5rksSf9MEEOhWbA=;
+ b=dBH8wRwZnijQ2XgpTTT8xO8AHKLZD8FQ2ydvElRWSa6VqWDqM2/ltUGwuTvVolxhL1
+ WkGdgU2bWD6kZ/ew6UbEb8Sm1LQ94PYPEsx/mPIHbn1GdCymAp25gN3kD87GsiT2frIY
+ KZNvJ++8azoCvYy/qqmzXzftR5jjXwzhRcQ4+eO7SphgPD61EXW3oGcdTKpEsKacrXrW
+ hm41u3PmHF54e715ZbG0uah6pM/udNN4QxYjoqlTEmh2bWuP6/zJ1DIYdnSG8pAF+xYc
+ awE9mApxD0Crc+n0VZae2WsjUAjyjX8QIbqaKnycmzXCwW+3aHa1khtR8o+h8SGXQIvd
+ 6LgA==
+X-Gm-Message-State: AOJu0YwAzPyPmiNfz+dv6oazjjBHd0Uu216jD7MwZh7i8KOzYbyjr/+P
+ 78nTQL9Z2awQx3bdXRdqiGSxR300TJ/UOayf3DcsdAeSw7ToXo881ZVaF+7EimmU99oknu1Ozy7
+ iNuCq/Q0TYKavfC9S/uTAIgUbkmoKVdEkZz5Pqfs9wrtKM1jECylD3r17/75ieOUoHT62LBU=
+X-Gm-Gg: AR+sD10OMQwENBixJbhPmHhFhG56zolSk7N8Ak2LDBpHNXKY6Z28ABNki5yxiGL8c4k
+ Rtm49LpPbU2NpOzpuhTEWd/JLNj6txmzXjzuSaG8ySWNGFzquTdD5P7i47wm5prx/5FgOHXyBSH
+ OTacWJEgrTlToTK4LDHrZ4YCs2mSmuEltw9m2Tf3G+DXB54KtBHwVY1hTr/JqVvN7rDTVseEytv
+ dsa14c48NvK/HgV2Kek58pCzwcqk3a6s64MAOtPSvnNrDIFtwpQgaRVQxuYV6ypv0N5hNxHkShW
+ VI14c63IskMzGGf/lkQJ1lUs9/3oqTVwhE59AugPhvYNflaWGlCizid+AMBk9Kbt71PjOYmkam7
+ Nps1QuFcUWNKhZYDBjNDQwNXPUA/lbKCBBXFVSHmQbeIagBwHcm/7+0zrylXEn9owsVC46V8JJ0
+ r1WYPwGscOVMx+4Op3spoHCheUrNu5
+X-Received: by 2002:a17:90b:3c44:b0:37f:9ce1:cda8 with SMTP id
+ 98e67ed59e1d1-38fbc511c1dmr9460428a91.30.1785772177236; 
+ Mon, 03 Aug 2026 08:49:37 -0700 (PDT)
+X-Received: by 2002:a17:90b:3c44:b0:37f:9ce1:cda8 with SMTP id
+ 98e67ed59e1d1-38fbc511c1dmr9460399a91.30.1785772176763; 
+ Mon, 03 Aug 2026 08:49:36 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-13fab13255esm29356854c88.3.2026.08.03.08.49.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Aug 2026 08:49:36 -0700 (PDT)
+Subject: [PATCH v5 0/8] (no cover subject)
+Date: Mon, 03 Aug 2026 21:19:26 +0530
+Message-Id: <20260803-snagboot-v5-0-00ef4542934e@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CALeDE9PhmuHkiR5k0H=7mdCwq=n=1gS80vuQQqb8GdpKMYM3nA@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIe4cGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyTHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDc2ND3eK8xPSk/PwSXZNUyzQzszQDI1OjFCWg8oKi1LTMCrBR0bG1tQD
+ IMWhDWgAAAA==
+X-Change-ID: 20260731-snagboot-4e9f66f0252d
+To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Michael Srba <Michael.Srba@seznam.cz>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785772171; l=5574;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=tVczlhMR8kF5cRzh+uOJVyNtjyDO+3nmhwCD17be4/o=;
+ b=kOQ8OLZ53Vft/e+7SIXPoh7tMYHUaaSoTOgxNQu5UQr/tx5/HjR5jaFqcfHHbuBHatBwmhXG1
+ DtQfDdGQ+LqDWgM0lFUqJdyRuFdPeXr8Tv8SH+AF06K1R2t2KgEAKfe
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE0MSBTYWx0ZWRfX656gM9hefo7f
+ fF+lXuEWkIDaYppC7laWAJzGzEjSZavzsm028zH4DYwBpWmNGIqOno81kL0Zz8ZPnr/Vb/q+9yu
+ 7QhOqRrH8ApVbudIUM+hkk270/JDuDc=
+X-Authority-Analysis: v=2.4 cv=f/94wuyM c=1 sm=1 tr=0 ts=6a70b891 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=4GZlKNTyZuL0fuDD4_0A:9 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: nJ4XMHlLJPI61nyzzR4dLncB6EC-kKII
+X-Proofpoint-ORIG-GUID: nJ4XMHlLJPI61nyzzR4dLncB6EC-kKII
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE0MSBTYWx0ZWRfXwKzLlBuHGdEc
+ 6ldeU4mLFfS3oRWB+h51Fq7NjPNlIIgv7SXllIcxvQM29o6AFYHdjIE5cIB9w2XiKgaojGVQ2rB
+ K405S1iSErJfELoJMSOZCXWYFDNZyo7lWlel/JaA6cFXS5yxg2UijKjej4BrwNA/yG/UIVs76Cm
+ XQk2y8SxHK/+82i34gFKgIyxy0yRpuxT2ULKgMce0UMFPDYI6hy5wtDyjd8FjqkKdnXU3UJEFyu
+ gH9c9sclIeuuA5SyGJpvrEx5dyrfT3jddUkeDJcOUKbs0iDXy/DQolvAwlhq73uL4NGKXQJkUiF
+ 6XArGYp4mWVilNGb6nCT7SQRTVm1A9P27NQN+wV7GTMafeMvqoKvWED1Toeue3MSrM9c0g6IKls
+ CGstlx6+/rcOVM97YbEct+kSmEV7QaT2cRdLGWdbQwSr58BehLFJgF7OTkyia7lz+30pxH6GneQ
+ 5DRG7AdEu1d4QXSHvlw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-03_03,2026-08-03_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0 spamscore=0
+ bulkscore=0 impostorscore=0 suspectscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030141
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linutronix.de; s=2020; t=1785766354;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=W4lZ/Vy+s28dfPnXxDQ/OCXNEglzu5aD7DP1U7cMzIQ=;
- b=Xaby3HieuODkCOAwlOFcoMYHKhzDnyWzTKpx/NkLPYIfYC4HvqyTdu2FJGF7sXUM6bZp0a
- d+plie2mb5085x5JpJuaqIn4f0xhAaRbU//haOqJr/VBRTIFgTe1BVvz+dSDpBq7kIyBs4
- I8tRiNUXJ/hIwE0ceQksjzePCJdb5D4gNHgQIhyO2GqjmuKBPwYYS42YDXyoCLqrPyFl00
- FwCMmPzeh2Ubk3Jb0qT28B4AG2G5KXdF5WbdJSYCt0succAqOpgx1K/6+oDKEshsm1KdH6
- 0zg1xROmeDulAWRyrNwQcBGLwXn1rR63GuCKJm0t6pqqqt3cE8RdYdf14falTA==
-X-Mailman-Original-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
- d=linutronix.de; s=2020e; t=1785766354;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=W4lZ/Vy+s28dfPnXxDQ/OCXNEglzu5aD7DP1U7cMzIQ=;
- b=tMgpR0kYDWziYEmvSsaVtg4aCXJQxTr8Rmuis9zhdck0aYdtEYldI9bIDeLQv6XcddJ9ip
- YwHbeYGVFTI1d5Dw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linutronix.de
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=linutronix.de
- header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=Xaby3Hie; 
- dkim=pass header.d=linutronix.de header.i=@linutronix.de
- header.a=ed25519-sha256 header.s=2020e header.b=tMgpR0kY
+ d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=KQmwaOAf+IJH7breN7SZ1K
+ mvtOxw5rksSf9MEEOhWbA=; b=Mc/U1HlyC25982ekEem+PNgSa1a9s7K/PKjPgz
+ Ps92IJKA+rdu6Uv+O4ZMKaoMyC3ZXx5iPZOlScMUM9D/Ugy6EWCppeA2i74XFpr2
+ AChT6gvhMWHxEOtKw+umdWdDCqrhGqy08z81aI7Riq17GpJTNZNtSSvYzRhwbhhg
+ K+lKIEx9/6ljLaYUHuaQ3OmmGkt6F4nMNtH056EFEZeSugtnRV2kuj1SsKlkSY1a
+ jiAjzMDDBRZhfEafHvw5WYQdWVt2v6KY/0ShHvMY+DoOVC+t9OO7p4YxZA0nmYYh
+ 8B7sFz3HqGy2OPY6jDcUEpdnng/GkpsinKNh3djtawxufsmQ==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1785772177; x=1786376977;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=KQmwaOAf+IJH7breN7SZ1KmvtOxw5rksSf9MEEOhWbA=;
+ b=PXfNkLuxlY3ynianUqshV11lFmLn4/tNAR70vjTi9ot1LaXj7HGRmfv9J02c1+MPgq
+ VKJrbnpFlS853Jb2/SpVi2CbbM3gip997Jjiut4O+76K7ZetnnBrbsJMLxIw8PjwwLuu
+ HzCRW71Ns/Vi5tDQEg0HpFeZjncDK3gtMF7BVQWuxe/x1me9gXZPnmA9mN1437YSeDJ7
+ 798r8Bk52j8kwi83dkhWT6I4pKfDF3k40oWrivRhJjXUYGk8E8jwiyXUGIQh1lPwk/n3
+ OvmRKYzDm0whOusaNNmbAMh9crt837l8eyifyfzpTp+YV0x0SzmJXi3wiJlB4z3hYiPx
+ LivA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=Mc/U1Hly; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=PXfNkLux
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -106,140 +199,123 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Balaji Selvanathan via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Peter,
+This series adds support for running U-Boot in snagboot mode on
+Qualcomm Snapdragon platforms, targeting the Lemans-EVK board.
 
-On Mon, Aug 03, 2026 at 01:17:11PM +0100, Peter Robinson wrote:
-> Hi Gregor,
-> 
-> > The Raspberry Pi has the "tryboot" feature where it can boot from a
-> > different partition enabling failsafe A/B updates. After boot the
-> > firmware sets 'partition' property in /chosen/bootloader. Copy this
-> > property to the device tree and set the env variable boot_partition.
-> > This allows boards to create a bootcmd based on the boot partition.
-> >
-> > Reviewed-by: Matthias Brugger <mbrugger@suse.com>
-> > Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
-> > ---
-> > Changes in v2:
-> > - update Reviewed-by tag
-> 
-> You don't need to do a v2 for a tag, patchwork will deal with that
-> automatically.
-Ok.
-> 
-> I looked at this briefly on a RPi4/5 yesterday and couldn't see the DT
-> bits being passed through to the kernel, purely by a simple test of
-> looking in /proc/device-tree/chosen/ directory and didn't see the
-> bootloader/ directory or added/amended details, where if I boot off
-> the FW DT I see:
-> 
-> # ls /proc/device-tree/chosen/bootloader/
-> boot-mode build-timestamp  capabilities  name  partition  rsts
-> tryboot  update-timestamp  version
-> 
-> Not sure if this is the versions of firmware/U-Boot/downstream DT I am
-> using or something else. 
-No I just tested it and couldn't see it either. I think it fails silently
-because of the missing '/chosen/bootloader' node. Don't know how it ever worked.
-Maybe I had a dts with that node from somewhere.
+Snagboot is an open-source, scriptable flashing framework that provides
+an alternative to the proprietary Firehose protocol for device
+provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
+Qualcomm boot ROM EDL mode and Sahara protocol to download
+and execute bootloaders. However, instead of using the proprietary
+Firehose programmer, Snagboot loads U-Boot into DDR and uses the
+standard fastboot protocol for device flashing.
 
-> I wonder also if we should just amend
-> everything in the branch of the DT as no doubt others will want other
-> bits for other features.
-You mean to copy the complete '/chosen/bootloader' node with all its properties?
-Yes I think that is a good idea, there seem to be some usable properties. 
+The framework consists of three modular components: snagrecover
+(downloads XBL/QCLib to initialize DDR and load U-Boot into RAM),
+snagflash (communicates with U-Boot over USB using fastboot to flash
+system images), and snagfactory (orchestrates parallel factory
+flashing tasks).
 
-Here is how it looks on my board:
-bootloader {
-        boot-mode = <0x00000001>;
-        version = "5855b10b2bd22b2a116dc91f6b5b1bc4b2ea849f";
-        capabilities = <0x0000007f>;
-        update-timestamp = <0x00000000>;
-        build-timestamp = <0x684bf1ce>;
-        tryboot = <0x00000000>;
-        rsts = <0x00001020>;
-        partition = <0x00000002>;
-        arg1 = <0x00000000>;
-        count = <0x00000002>;
-};
+In the snagboot execution flow, ROM code in EDL mode loads
+snagrecover, which downloads XBL to internal memory. XBL executes
+and initializes DDR, then snagrecover downloads U-Boot into DDR and
+transfers control to it. At this point, XBL has left the MMU enabled
+with its own page tables and has not initialized PSCI firmware or
+populated the Command DB. U-Boot must handle this non-standard boot
+environment to enter fastboot mode for device flashing.
 
+Support for Qualcomm Lemans-EVK SOC in Snagboot is now available in
+https://github.com/qualcomm-linux/snagboot/tree/qcom-next
+Soon these Snagboot changes will be upstreamed to https://github.com/bootlin/snagboot
 
-I will copy the complete node in the next iteration of this patch.
-> 
-> Peter
-> 
-> > ---
-> >  board/raspberrypi/rpi/rpi.c | 18 ++++++++++++++++++
-> >  1 file changed, 18 insertions(+)
-> >
-> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> > index 1da5df92351c..7a2ff646ac8c 100644
-> > --- a/board/raspberrypi/rpi/rpi.c
-> > +++ b/board/raspberrypi/rpi/rpi.c
-> > @@ -480,6 +480,20 @@ static void set_serial_number(void)
-> >         env_set("serial#", serial_string);
-> >  }
-> >
-> > +static void set_boot_partition_fdt(void)
-> > +{
-> > +       void *fdtp = (void *)gd->fdt_blob;
-> > +       u32 partition;
-> > +
-> > +       partition = fdt_getprop_u32_default(fdtp, "/chosen/bootloader", "partition", 1);
-> > +       if (!partition) {
-> > +               printf("Failed to the get partition property.\n");
-> > +               return;
-> > +       }
-> > +
-> > +       env_set_ulong("boot_partition", partition);
-> > +}
-> > +
-> >  int misc_init_r(void)
-> >  {
-> >         set_fdt_addr();
-> > @@ -489,6 +503,7 @@ int misc_init_r(void)
-> >         set_board_info();
-> >  #endif
-> >         set_serial_number();
-> > +       set_boot_partition_fdt();
-> >
-> >         return 0;
-> >  }
-> > @@ -641,6 +656,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
-> >
-> >         /* copy uart clk as provided by the firmware */
-> >         copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
-> > +
-> > +       /* Copy the boot partition */
-> > +       copy_property(fdt, fw_fdt, "/chosen/bootloader", "partition");
-> >  }
-> >
-> >  int ft_board_setup(void *blob, struct bd_info *bd)
-> >
-> > ---
-> > base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-> > change-id: 20260803-tryboot2-8c5221376e5a
-> >
-> > Best regards,
-> > --
-> > Gregor Herburger <gregor.herburger@linutronix.de>
-> >
+When U-Boot executes in Snagboot flow, it has to deal with missing
+platform services such as TrustZone (TZ), Hypervisor and AOP (which 
+populates CMD DB data).
 
-Best regards
-Gregor
+This series depends on the following patch/series, which are already
+picked up in qcom-next
+https://lore.kernel.org/all/20260508-qcom_spl-v7-4-7d0e22aaaa8f@seznam.cz/
+https://lore.kernel.org/u-boot/20260618-b4-modernise-smem-v3-0-472391477988@linaro.org/
 
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v5:
+- Make QCOM_BOOT0_SNAGBOOT_MODE as hidden config dependent on 
+  QCOM_SNAGBOOT_MODE
+- Disable C (Dcache) bit of SCTLR_EL3 register during MMU disable
+- Remove now unused QCOM_COMMAND_DB_OPTIONAL Kconfig definition
+- Disable unnecessar I2C configs (for Snagboot) in Qcom Snagboot
+  config fragment
+- Add build steps for compiling U-Boot for Snagboot mode in
+  Qcom Snagboot doc
+- Link to v4: https://lore.kernel.org/u-boot/20260619-snagboot-v4-0-385497442db2@oss.qualcomm.com/
+
+Changes in v4:
+- Renamed QCOM_SNAGBOOT_SUPPORT to QCOM_SNAGBOOT_MODE
+- Make SYSRESET_PSCI dependent on QCOM_SNAGBOOT_MODE
+- Place Snagboot related configs in seperate config fragment
+  called configs/qcom-snagboot.config
+- Include above config fragment in
+  configs/qcom_lemans_snagboot_defconfig
+- Removed Lemans EVK override dtsi: arch/arm/dts/lemans-evk-u-boot.dtsi
+- Removed QCOM_COMMAND_DB_OPTIONAL as now we use
+  CONFIG_QCOM_SNAGBOOT_MODE
+- Added documentation on U-Boot for Snagboot 
+- Link to v3: https://lore.kernel.org/u-boot/20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com/
+
+Changes in v3:
+- Brought the MMU disable logic under CONFIG_QCOM_SNAGBOOT_SUPPORT
+  ifdef condition
+- Moved the MMU disable codes to a new seperate file
+- Used "if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL))" instead
+  of #ifdef
+- Removed enabling QCOM_COMMAND_DB_OPTIONAL, ENABLE_ARM_SOC_BOOT0_HOOK
+  and SKIP_RELOCATE as they are now automatically enabled by
+  QCOM_SNAGBOOT_SUPPORT selection 
+- Removed updating MAINTAINERS as the defconfig file is picked up by
+  the "N: qcom" line
+- Link to v2: https://lore.kernel.org/u-boot/20260608-snagboot-v2-0-036bb0343bf7@oss.qualcomm.com/
+
+Changes in v2:
+- Changed SYSRESET_PSCI from 'select' to 'imply'
+- Guard show_psci_version() and qcom_psci_fixup() with CONFIG_ARM_SMCCC
+- Disables the MMU and invalidates TLBs at the earliest entry point
+- Add qcom_lemans_snagboot_defconfig for Lemans-EVK
+- Link to v1: https://lore.kernel.org/u-boot/20260409-cmddb-v1-1-b10549b34133@oss.qualcomm.com/
+
+---
+Balaji Selvanathan (8):
+      arm: snapdragon: Make SYSRESET_PSCI optional
+      arm: snapdragon: Guard PSCI functions with CONFIG_ARM_SMCCC
+      arm: snapdragon: Disable MMU early before U-Boot reset vector
+      arm: snapdragon: Add CONFIG_QCOM_SNAGBOOT_MODE option
+      soc: qcom: cmd-db: Allow boot without CMD DB data
+      arch: arm: dts: remove Lemans EVK override DTS
+      configs: add qcom_lemans_snagboot_defconfig for Lemans-EVK
+      doc: qualcomm: Add snagboot mode documentation
+
+ arch/arm/Kconfig                                   |   2 +-
+ arch/arm/dts/lemans-evk-u-boot.dtsi                |  19 --
+ arch/arm/mach-snapdragon/Kconfig                   |  20 ++
+ arch/arm/mach-snapdragon/board.c                   |   6 +
+ arch/arm/mach-snapdragon/include/mach/boot0.h      |   2 +
+ .../mach-snapdragon/include/mach/snagboot_boot0.h  |  27 +++
+ configs/qcom-snagboot.config                       |  46 +++++
+ configs/qcom_lemans_snagboot_defconfig             |  18 ++
+ doc/board/qualcomm/index.rst                       |   1 +
+ doc/board/qualcomm/snagboot.rst                    | 224 +++++++++++++++++++++
+ drivers/soc/qcom/cmd-db.c                          |  15 +-
+ 11 files changed, 358 insertions(+), 22 deletions(-)
+---
+base-commit: f79edc9ad08ec0c3e40323ff17cc7166ad2b9e71
+change-id: 20260731-snagboot-4e9f66f0252d
+
+Best regards,
 -- 
-Gregor Herburger
-Linutronix GmbH | Bahnhofstrasse 3 | D-88690 Uhldingen-Mühlhofen
-Phone: +49 7556 25 999 35; Fax.: +49 7556 25 999 99
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-Hinweise zum Datenschutz finden Sie hier (Informations on data privacy 
-can be found here): https://linutronix.de/legal/data-protection.php
-
-Linutronix GmbH | Firmensitz (Registered Office): Uhldingen-Mühlhofen | 
-Registergericht (Registration Court): Amtsgericht Freiburg i.Br., HRB700 
-806 | Geschäftsführer (Managing Directors): Dr. Wilfried Wessner, 
-Katharina Kopp, Alexander Gieringer
