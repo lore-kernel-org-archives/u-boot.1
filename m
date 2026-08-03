@@ -1,150 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D56C55179
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 12:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5613C55179
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 12:27:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 58D3E607B6;
-	Mon,  3 Aug 2026 12:21:37 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hG9FU_B7ZTHU; Mon,  3 Aug 2026 12:21:35 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1885A60779
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785759695;
-	bh=/AVbl7lEzGvQ2kSp7s4V2wL57pYJP7zRS5siI6JbYvc=;
-	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=zputpp7VgBQ6kwsXCjDNNZuICmbDub5RSanQpP75RdRITO92w15zASEOPZG3xRHIb
-	 Tmff7WAGeV+mPiAs4Xo9a76xqVbqZUVVHTDy0VkXcvR2V1dA/h+yeyxyYtHXpts1k1
-	 PqOA/zp118zTseJqLb8l2JpcaVwN/DEqVH6R/NlAYIxMlJ6o4vy8NEJjPsiONRKoJn
-	 OCyt6Fyua0spyRerZ2Nc8L9Av9YuSJV884rBtgeJ/zFM+9QdGczdWT87YKg1kR0D9a
-	 tJI5BiGODcWpo+vj1JkIbHIaZL3bFtV5qshK0yK7EQkK3acc+p5+gVu1rgfkZcGN0t
-	 Xqwq/imE/quow==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1885A60779;
-	Mon,  3 Aug 2026 12:21:35 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8E6E1218
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:21:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8BCCA4055F
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:21:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7BAB640652;
+	Mon,  3 Aug 2026 12:27:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4zbOic1mAAHI for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 12:21:33 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4DDC840521
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4DDC840521
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4DDC840521
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:21:32 +0000 (UTC)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-495590dde14so20289115e9.0
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 05:21:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785759691; x=1786364491;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=/AVbl7lEzGvQ2kSp7s4V2wL57pYJP7zRS5siI6JbYvc=;
- b=ffKu7fPXrapdIp3wvvb9ylmkUtnYURbuHYxVq7K1oYCacnYrCIxIizsFrUyh6UEUi5
- L2TJOjpYSCnLmgZzu7xgeq2PWORNxXq4F1SOEs/qtvOJCG+9hEAMyHYaLaRYRJCiaEf+
- /Uc6nGwTJPAdFZ/8aM/Z1qFeXqONTrj8G4+qYc1lqS20wBwoZQIZEaufNJFvhArvoXKo
- N0PPKz60tLTomdNq3orTOJABy5lW7jR/pXBVOOayLlwsz00KNdcwsv2DCgBsulJfCido
- l/JYW0dDs9WNYoXk6fiA4MbOe86BFfF5ivAGkEEm59wS3YkMkh5tnJFZ8cnW5ioKUTuc
- Tzcg==
-X-Gm-Message-State: AOJu0YxAm7Uac6WgLRGokoD3XCGyNO0rkhAAtm3axv9YtwB4thmCC9lw
- ekuhgQ64MQq30+L7OI/W89z3h6hnn78Y7PumM3h1adrgHUUROpbqRayQQEIMdni2Yhoq58tvL55
- rbWQVDwI=
-X-Gm-Gg: AR+sD12lcdIQrGhW408pmnqHNfgibzpQkJx2s4nIsizGvBuHeTyQne/NDwbweWvfFwv
- /ZUx1MKhR8aatXZVGViPLeCCLMvEqz69ZHFgDj4SCucT41szTm/rWoxVrAp00LsDR0wEnVRq2oA
- jDrDuoh3Hx2stJOxNMGuXFjOLVmokPXalCNAIBzMsH//75UmtLtLg01FH+Q2Ho84xWinu2FBSfG
- VOBPYc1QkRaSiBOlVWFM6JSkGUw6sp7kuP9940p/Fg8xSEjaTxlMavyOACd+BbP/aUL7eePXiYT
- o/tXlO71dKpBRqU8xRkVhdcGPEVyO605J5gOtcp4SnlZdik3HVcCr4zHEZC5M84Jjr3PkwfofbX
- VBFgK4ZnD2yyHoQR32kcoRC4GnP1PKm+EgoI64PFV9sfe8UisRp8F5xMTbLsKQfaFm9jWSfW0EX
- 3+INW7WYGjHIbvPCf/fSePXQ3iR/yeil48iWGLp5jhmeOA8CB0T7CjWJm6GiamHEV43kdLHfAqa
- LudxhNyge8pen9VXmcgN4OOsEcTS44jFL1BE/fDQxcKAHyRtrBfftE=
-X-Received: by 2002:a05:600c:350c:b0:495:4d00:2fda with SMTP id
- 5b1f17b1804b1-4980f23180fmr164659275e9.2.1785759691028; 
- Mon, 03 Aug 2026 05:21:31 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:b4d1:1a13:61d0:b2be?
- ([2a01:e0a:106d:1080:b4d1:1a13:61d0:b2be])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49808a721d2sm208692095e9.15.2026.08.03.05.21.30
- for <u-boot@lists.u-boot-project.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 05:21:30 -0700 (PDT)
-Message-ID: <842bd7e7-034e-4a2f-9cfa-4f9f65f4555b@linaro.org>
-Date: Mon, 3 Aug 2026 14:21:30 +0200
+ id qeZySqdR3l7F; Mon,  3 Aug 2026 12:27:15 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B312140645
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785760035;
+	bh=4xXGvFTBlD4z+LJdOYJpsoZCQxassUjvm5xch9Kg9xM=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=qprlBv6shEgGHi+jkwExf8efr9QHprkulHFfFYVyYDId0Fs0EA9C6q3KVmYHA7UeA
+	 NtH1s3AYJCNWN9X1SiPPXgI9bLsBl+Y30cvexnmW0KOhMYPxj/D23c2SFdX50MkVAL
+	 /yV6kNR7mf6KG/LDQkNUUGPt0fyimajlcexWigf7x2CAWTh7yRfo9z2PKpQowQEeJT
+	 mN2eGYWjyegGsmP3o/z+3ToOywGte6qeba+7i/xng3isddye6GTKaIIPU1abwx1BxN
+	 bFcHYcog24RDnn6xGF0mvgewwWCjtNoKIgx9vTLcacqqModxlnCgGwxUrWkyvkgMZ4
+	 8z63Mv26e7RkQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id B312140645;
+	Mon,  3 Aug 2026 12:27:15 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2CF4218
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:27:14 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id C8FD540645
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:27:14 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MPIMM-AdMTyg for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 12:27:14 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
+ helo=mout-p-201.mailbox.org; envelope-from=stefan.roese@mailbox.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A7D8D4063A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A7D8D4063A
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A7D8D4063A
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 12:27:13 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hDGC32mfczMlBD;
+ Mon, 03 Aug 2026 14:27:11 +0200 (CEST)
+Message-ID: <e1827120-2b25-47f1-bd33-603b9fd3a92d@mailbox.org>
+Date: Mon, 3 Aug 2026 14:27:05 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH] cmd: scsi: Drop duplicate leading scsi prefix
-To: u-boot@lists.u-boot-project.org
-References: <20260802220904.168737-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260802220904.168737-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] arm: imx: initialize the system counter earlier on i.MX7
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ u-boot@lists.u-boot-project.org, Rasmus Villemoes <rv@rasmusvillemoes.dk>
+References: <20260730093546.2432933-1-ghidoliemanuele@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20260730093546.2432933-1-ghidoliemanuele@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 8r351y9jytdibtkc7aj9ziby8pfg8t8h
+X-MBO-RS-ID: f2a5dde55cd6b063262
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785759691; x=1786364491;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=/AVbl7lEzGvQ2kSp7s4V2wL57pYJP7zRS5siI6JbYvc=;
- b=cjBiwAjiQ7j4EvfajVyqBnkXXPI9YCVsw+Hd6DoFG6oyAMEkiXi4zYWFFkfiSeeXOo
- E3hvHpcwqXtfOqHB4LZagtbWmZDvA2iYZjTArzi9j4tuY0AMBmXqxz5wVB/QxXXDm3xP
- 77UdnPD6uiNzjP8/9b7qcIgBY2WQu9D2YnYsm4LK69CDEJPto3tjwP/gJI12QbDrgjUk
- 1eRWRz1k8+xsw+IQPzbeJyNz5IeesMWLQCgg6je0Eykc8nZJf/Vb8GcdCByrYns7kOip
- ZMekdiGkidTb1fN1bqg7KiwxIsfEQQALZdpCSmXujq6pAurw9HYLQTPGBMT7m7ztWw3U
- dSmQ==
+ d=mailbox.org; s=mail20150812; 
+ t=1785760031;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4xXGvFTBlD4z+LJdOYJpsoZCQxassUjvm5xch9Kg9xM=;
+ b=nQ0+XuQ+i371IeODNx23pjtUVY19AIdB5s0sTVmtmCRVW0JyFzwGXdTctxwy66xwIqRrjS
+ jBphDt7BVMMSRNFlvIC1MdxmI3nt7zEoFQGc8vxvw9dt1j3Xpi+L+4VJuISS2Az9XbUUwm
+ UFXJrXgjJasyHJaPvZvSHowMnQGoRDKZbG6QjiTy4d/4ky9KUcrxxua7sByN/NUxucOCnB
+ HDmCp0CjF2VdNP02lgcnEvkHW57LGE5R/vf4Oy0u+nAVt64iLyPU5F29rzzkVNw6+aGnK8
+ S5qwFXyG/9yuWzgHOeqqhbdqALU9sjEKejZA/4USnIXOztbfZiYN+8PxtiedDg==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailbox.org; s=mail20150812; 
+ t=1785760029;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4xXGvFTBlD4z+LJdOYJpsoZCQxassUjvm5xch9Kg9xM=;
+ b=ODVIvbB773owGaxyaOyr/0RS7GQQffWw3SeIO00FZz82jKfqPxQUHmF6lVXZHivzO4hBF4
+ 2QJoSSa0cs/GjPENDc5PcuXQDXHFmfP89peETlq3NyxK7q2JwXdZKXi/lXeb154ODHwMTc
+ w89DD0euJ0yCBysUytfuoqNqNebzgdp0/tIvoyZpqK8DopffT1Bmbt2wJhdsa1rSd2VtOl
+ paNDkuCoZ5izOYLwz2qpTyvpDaqQ2HQYQA7tVnuhE0ngDk3L9RmwOYoRQ9LxYu4VzHEycq
+ mKm8FKgrsqvTzBQDmYF6pv/XKzwALIBKr7jsWpJZ12JceKHO6kPbE7K3QIio4A==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
+ dmarc=pass (p=reject dis=none)
+ header.from=mailbox.org
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=cjBiwAji
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=nQ0+XuQ+; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=ODVIvbB7
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,50 +120,81 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+From: Stefan Roese via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Stefan Roese <stefan.roese@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 8/3/26 00:08, Marek Vasut via U-Boot wrote:
-> The SCSI command currently prints the following duplicate prefix:
+On 7/30/26 11:35, Emanuele Ghidoli wrote:
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 > 
-> "
-> => scsi
-> scsi - SCSI sub-system
+> imx_gpcv2_init() calls udelay(), which through schedule() reaches
+> cyclic_run(). Since commit 9c1b13b3fd27 ("cyclic: reduce get_timer_us()
+> calls inside hlist_for_each_entry_safe()") get_timer_us() is called even
+> when no cyclic function is registered, so tick_to_time_us() divides by a
+> still zero CNTFRQ and __div0() hangs the board before the console is up.
+> The requested delay was a no-op as well, since us_to_tick() reads a CNTFRQ
+> of zero.
 > 
-> Usage:
-> scsi scsi info  - show available SCSI devices
-> ^^^^^^^^^
-> scsi scan  - (re-)scan SCSI bus
-> "
+> Initialize the system counter before imx_gpcv2_init(), and move the
+> "already initialized" guard from timer_get_boot_us() into timer_init() so
+> that the later timer_init() from the generic init sequence is a no-op.
+> Where the system counter timer_init() is not compiled in, the weak
+> definition is empty and the calling it is harmless.
 > 
-> Drop one copy of the scsi prefix.
-> 
-> Fixes: 460c322f13ec ("(re)enabled scsi commands do_scsi() and do_scsiboot() Patch by Denis Peter, 06 Dec 2004")
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.u-boot-project.org
-> ---
->   cmd/scsi.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/cmd/scsi.c b/cmd/scsi.c
-> index ad7d8a4b664..5e732c1e50a 100644
-> --- a/cmd/scsi.c
-> +++ b/cmd/scsi.c
-> @@ -45,7 +45,7 @@ static int do_scsi(struct cmd_tbl *cmdtp, int flag, int argc,
->   U_BOOT_CMD(
->   	scsi, 5, 1, do_scsi,
->   	"SCSI sub-system",
-> -	"scsi info  - show available SCSI devices\n"
-> +	"info  - show available SCSI devices\n"
->   	"scsi scan  - (re-)scan SCSI bus\n"
->   	"scsi device [dev] - show or set current device\n"
->   	"scsi part [dev] - print partition table of one or all SCSI devices\n"
+> Fixes: b059837850e4 ("imx: mx7: add gpc initialization for low power mode")
+> Fixes: 9c1b13b3fd27 ("cyclic: reduce get_timer_us() calls inside hlist_for_each_entry_safe()")
+> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
 
 Thanks,
-Neil
+Stefan
+
+> ---
+>   arch/arm/mach-imx/mx7/soc.c    | 6 ++++++
+>   arch/arm/mach-imx/syscounter.c | 6 ++++--
+>   2 files changed, 10 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-imx/mx7/soc.c b/arch/arm/mach-imx/mx7/soc.c
+> index e504c1fd52a0..8a858dea5187 100644
+> --- a/arch/arm/mach-imx/mx7/soc.c
+> +++ b/arch/arm/mach-imx/mx7/soc.c
+> @@ -331,6 +331,12 @@ int arch_cpu_init(void)
+>   
+>   	init_snvs();
+>   
+> +	/*
+> +	 * imx_gpcv2_init() needs to do a delay.
+> +	 * Timer must be initialized before calling a delay function.
+> +	 */
+> +	timer_init();
+> +
+>   	imx_gpcv2_init();
+>   
+>   	enable_ca7_smp();
+> diff --git a/arch/arm/mach-imx/syscounter.c b/arch/arm/mach-imx/syscounter.c
+> index 96fe2c7c17bb..86311d0cc07d 100644
+> --- a/arch/arm/mach-imx/syscounter.c
+> +++ b/arch/arm/mach-imx/syscounter.c
+> @@ -65,6 +65,9 @@ int timer_init(void)
+>   	struct sctr_regs *sctr = (struct sctr_regs *)SCTR_BASE_ADDR;
+>   	unsigned long val, freq;
+>   
+> +	if (gd->arch.timer_rate_hz)
+> +		return 0;
+> +
+>   	freq = CFG_SC_TIMER_CLK;
+>   	asm volatile("mcr p15, 0, %0, c14, c0, 0" : : "r" (freq));
+>   
+> @@ -103,8 +106,7 @@ ulong get_timer(ulong base)
+>   
+>   ulong timer_get_boot_us(void)
+>   {
+> -	if (!gd->arch.timer_rate_hz)
+> -		timer_init();
+> +	timer_init();
+>   
+>   	return tick_to_time(get_ticks());
+>   }
+
