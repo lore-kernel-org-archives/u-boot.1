@@ -1,137 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7ACBC55196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:26:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F1C1C55196
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:26:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 71B3B40594;
-	Mon,  3 Aug 2026 19:26:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E00BD6070B;
+	Mon,  3 Aug 2026 19:26:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vP3LjuA4E95Z; Mon,  3 Aug 2026 19:26:25 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NjRi3O2S9ntP; Mon,  3 Aug 2026 19:26:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D76564050A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 10751606A8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785785185;
-	bh=AQiNkah3UHoe6dW8DSYaup60ZbJNsMB4/daonIGYfQY=;
+	d=lists.u-boot-project.org ; s=default; t=1785785192;
+	bh=s2iXVDdo+8hYhHYksbPi++Zs6WZMGHxq0rb2nvtAbS8=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nMl/HOorGmMVirn3ukOabMYEdpWgqegINH+gGAYuo/QIgSd+aYpDS2P8haSrXKr3k
-	 OrUjhs4GY4JPSKzPyVplIJ9zjpl8H11W9TwGcRnzmhF/RZHjx7Xw4ll1at24OV44U/
-	 5hM/Ua+K3b75T05EH7GdFHbLTOZOawijRsQKkMSFamD4+FbU7qND10eeq1CXgU//Ya
-	 zZN3iUl1l9MqfFmbRwkL91dXGDgtD73wdFdWBNgl6To/RW6hDlfG1kolhhFFNZuX2S
-	 9T59Z8/1lzNzfrxgHD0VY3uzmDfG29KABdk4vJV0QpDXTtSLRnYAAF90dvWVbux9+R
-	 p0zenHALB75kQ==
+	b=FqGXtGN4Rl2wyAUzQAeEcktJuu1x4nUJxAsAG+/DP4YrhJuqt9nFlGZw6KyILRilP
+	 naHYOXT0IgOfon3Nv9cYY8kvxZHgr0ajp7W1hTtD5eGyJFCOdOZdIKtQ3BiFOAsm22
+	 r9Sf489vzZjMCR/zoldk9lOjlzygpzvJXbmqJLAjuBWYpuztkhGwe/eV8fpNba/B0+
+	 HHPVdIBvY3ah+OU5Pkkt/qTG2Ef7evoCrp5ICOyXmTi+EWi2g668+9S48/qZyL3clD
+	 w5Eb6qgymbUIx0lk1Eeljp/zYnNSH54ee3BlBq6aMD/rI0B9tKovOzM1hhh8RRJtQl
+	 HARP7ZmAuwo/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D76564050A;
-	Mon,  3 Aug 2026 19:26:24 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A112C296
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:26:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 10751606A8;
+	Mon,  3 Aug 2026 19:26:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9062A2CE
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:26:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8729980B5C
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:26:23 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 823EF4010D
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:26:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GLUUYNCpl28P for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 19:26:23 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3ZDKl59M8oZZ for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 19:26:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 9D80180B40
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9D80180B40
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9D80180B40
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:26:22 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-698a9f11776so5829474a12.1
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 12:26:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785785180; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org BA3604005A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BA3604005A
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BA3604005A
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:26:29 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6a08a2b7e5bso515820a12.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 12:26:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785785188; cv=none;
  d=google.com; s=arc-20260327;
- b=K1NKJkkrUEiclnv7Y30ztIvcsPObBiYopXGV95oyWnSKi1V47I2TDrEv/R6wI5qec7
- hqh5fTXk3keHa4ILXeXp3Tgy4eWCDjVitFTFscn4k6zC4UQG26muEOZOGoArZRquupOR
- kqtNkvp1M9tbDTQIEIp5/6Rh9N1cr0hcpi4Fwf8KPtDfr9/+x/TrgyHzSyCNoyp1YIOW
- LHTysx89ysfDoSdVb6bCFEGloJ4H0NR5PUtQha4gdGUCe6pmDxG7zZ68ko3pHT4SAGT5
- MQQjsY/0DWefIcuIbPlWxlEmsE1vdJOGuUDYDK5uS92aK371voysX8nkDp/0RVVrq/sN
- wBpg==
+ b=eibMNhFoY3G+WTCdv0hR8pgVzEne5ZzufAJsYtqrzBoL3HFC0xvAepc1I9TH7mOogF
+ uDs0q5rygBUhvKFDyX9sY3NzQcLsQDZXVBUW38ra4YobATKWIZgBhRHbz3WPO3LA6xiV
+ 5E6NwpsZZIZpDKwodfIJ2LB3w9ebzcfBQG7x9NH4Ce+Hc9U7kedmWnfG7a/pDoJvfpBF
+ ZaQ4oraYMPAg2iTmLMj7KPaW6vYu8pKea60P+9CSkpxFiF9WZbTmXD2FiL+1M9uMGfEy
+ Y1IG0hJJKP3TSGwJ3cuICCorKHMmuv3iUURoceCvIaAxg42anstbnv7pzYYlQJgB++ID
+ qEjA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=AQiNkah3UHoe6dW8DSYaup60ZbJNsMB4/daonIGYfQY=;
- fh=4f0P5431eIEklEsxS624FHh4PkIe3Cp2fAV7Oqy9IAM=;
- b=VKABKrAWJifZAv+0I/a8SNl6rw0pxyDTMvzHAVqsFhIOwVOEOxqGiLzCJa6384PfW7
- Kpb/Ezb7xOIkIAHxUJjf4yYU25iiwlB1UYjd5aArkk/hm+bQeA8Q9sZNbc6Mez+BfBPQ
- 8hMec/ltshPeGnO7c2yI2CLrpY6OyrQP2fyhPh5Arlm+SjgxCMvgCyK6tJjwbYmnw14i
- 3lcOuLXURwgs93One85WtqDQddb/NS28/OKwqZwqKq26TT70xPo+lRlqTjv9xauEhcrX
- Pm+sddI7rvCe0anx2EExoh1MNudlfEuVhzwXrzk6kMpwoUYcrW4GLVlO02w87IHjn+0q
- K+8A==; darn=lists.u-boot-project.org
+ bh=s2iXVDdo+8hYhHYksbPi++Zs6WZMGHxq0rb2nvtAbS8=;
+ fh=mmPxdJ2G/zVEnO0kkwO7IpmcprJCuw1ND+QV0f/fx0I=;
+ b=hDQv/0baWxhrmtt3l50tOyQCdi4QOMfnezVm8FsUoofqqvYsRXhV6bX8rRm0lAMnjB
+ AkWKPkCAZ5vlBaBmrJA7H+likZZwieVundyhXW7dxHLgzt9MiXohhgWxy4i/2BpZvYai
+ ieE48k/NBA+HhuE5DfGIerk/FuA2jacV6KjJuU5t0PhhhjkRsl+Udp0WTiDuoJ9O5KYD
+ t6X3H3zaEvh9i3F7NDevQnesFFOdbWooJqMejQSNjsXiKIbgbeFKjTPalG/jB/6S49b+
+ mpISWpihGTRxOEjzWbFAur9ESu6AvuPQk+tiJrxYjzS0VHK8jcVbGovtvtWA8BYjkTxK
+ NTjA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785785180; x=1786389980;
+ d=1e100.net; s=20251104; t=1785785188; x=1786389988;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=AQiNkah3UHoe6dW8DSYaup60ZbJNsMB4/daonIGYfQY=;
- b=BJW1jv8LZ2LRdMISGX75xUBIdNW7RSWkAnLiQELp8JxMQsvvdmuyDR5uiNGzLz0pir
- vzehKyH0o58T2ArCx2iAstZATl6DpCRpIjP4sYfOUnguzrfvPK+aReexzi/hCKSlQEsT
- M2l2+LdOX0nLcOb4MY6fKshCCx9KIz+nS35171p09AS3QN/P05RybDv/M6kGhonC/OFy
- U/PV8V+v02isTZdlUsNpZqS3wHuB3pSln3hdpr6jQb158IeJKUyk+llvtvCGJ7yT+Zt+
- d3FV7TbBPxLLc2UdXTzmUx7+UO3geoscdEFJZVQLm2V0R1x53nKRzLieUrkLozjBhi4B
- l11A==
+ bh=s2iXVDdo+8hYhHYksbPi++Zs6WZMGHxq0rb2nvtAbS8=;
+ b=if6gjaubVmBIaKYO4aMjorADnySF14C2StV4J8KZFHZ7+kxiL2AHSgPFUSIUaWAK0s
+ IocKYdTVa35pSNU1bfgtIw2f3MyJ9LMzn7ClZFQcRjiB42SMMSIgfkV9JurAl5stEBcR
+ f/Vl+wx2sfQK/iXnzsQgLFJ7WoZmy8nkBgw7wn54yVZYekZ/5cIJ9AQFLzHaaZ2IKlrz
+ b9a0BsuZDspl+MIkTyVnmsESGo0ukozhrw07CnBkHYyzlHdM9y3SnxgGz+xFkioSpQsM
+ hVN6XW0CxtljGG/bTHPyHot0fVhy8jmlYS+B7QZXYc+NzAgkkTKs6rw7VEYQXTWM/Kzy
+ ZiQg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoJ0jrZjuO900Bl9PVMnOLOZvy0lHNDE7UMvQY3nuyguZ2/hkMXYdDszseeTXe+4wNKeqW3cMU=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzXE2kv5BIAO/K6EOZwqIL3Ege4oocFqpysiHAGQoj5eqBOysfi
- XpYwwMlIQUtb0dxrFh/BiBHQOPUWKi3+LcF48gqR26Xcio0JRyHDD0QWej2zG6QBa0Bn5X70trv
- KaBP+z/xGSzueCRom4k9Xcx8oF5k1/4IGNSwEKKHc
-X-Gm-Gg: AR+sD13bIxHxioezdJZJHJ2i3BaVBJN6L4VTW7n7ZmaiZfrB0FsyCQpSJXDHumbeA4D
- nMswg6HhaoSc0g/6AAZ7NGcixQtjEqUHzDnykpItHUfA8HllKVOtmsckQffmZOgNZwslOQxsnrr
- HjGblr3i/QcI+s1CCwQZjizQGWQ4A46lQB+lTXXSuTf6bOWE4RnjcdadfqAH5vfnFWy3citHuWI
- ayVYOyP7ftWaYoWN2ozvFnqO4UHOuCO+4VTbkIc6yJ9Bf64mf4DrKaQV2FD/ZT7zc8FI/IA8zrS
- fDwjDo8dCN8j4iuJoCI3RKVheD5kYzIAUXxXrZ69JUhMgsd87q2UiA==
-X-Received: by 2002:a17:906:f91a:b0:c1c:4752:b5fb with SMTP id
- a640c23a62f3a-c1fe7f3e45bmr747349166b.27.1785785180478; Mon, 03 Aug 2026
- 12:26:20 -0700 (PDT)
+ AHgh+RqnHLbSIjagcgRHBzayDHoY2qPifS8Jq0pcC27m9E/r4IA8aMeo2NDIKBYOSzv/r5pH7BneG8s=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxrHliyiVlW6wilQS/i2N2B7IYWGkg9t7ShMwX62gX7qz+6MbBw
+ TRVN3OJ4Q8o2tg5Lc9T61OgoWZWWFaRWT9VRQdkbqhgpULkTjja4c+6iZtGo/BJP+OpOmJPDOP3
+ LSq0oJs6iVbLx6H4GHbpqjYMXsl9hHAEf3gGCDGji
+X-Gm-Gg: AR+sD13wBvsGkq2AfLHZabl9J2N0m5DSFqR/YJvWvELF7SNadq+s6axnmGIYe1BDQ8T
+ ww+LFtAjV90UpYCWPtjmbUJl9bAZ4vhR3vL15jD7ii5wTZoiGC2eXZ1Mobw3/P7KkaWwJw1jAV7
+ +u2HRs8XVrB+OpTeZuVXIzKPjkximdTcYJMRr33ylMIAQyzB3yRdZrIpixsKHxVNvUWbgtjf34R
+ augCjBiUdQRHf+XaEGzBk0d2GI5UupNlTN+5uq7nDNpAYv8XPZlDEbJ1X4O38VR0DbcESEY+WC3
+ wFuAgKdY/LUI2n+EtFUbdtRXxcjj7wpL1CKluiIR/lk=
+X-Received: by 2002:a05:6402:5383:b0:6a0:d320:1ed4 with SMTP id
+ 4fb4d7f45d1cf-6a122e3cb39mr921024a12.1.1785785187796; Mon, 03 Aug 2026
+ 12:26:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731001347.35624-1-aristo.chen@canonical.com>
- <20260731001347.35624-4-aristo.chen@canonical.com>
-In-Reply-To: <20260731001347.35624-4-aristo.chen@canonical.com>
+ <20260731001347.35624-7-aristo.chen@canonical.com>
+In-Reply-To: <20260731001347.35624-7-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 3 Aug 2026 13:26:05 -0600
-X-Gm-Features: AUfX_mxnQgM5DGsGTS0t1rL5iKBw2bsYLBbuNQDFNYKnWrNfnb5BW8hPnPH7yWA
-Message-ID: <CAFLszThBfFB4Wh3f=ET9-5S0NCPvT_YjDrU-Z0-WW8=ENRjyEg@mail.gmail.com>
-Subject: Re: [PATCH v4 3/7] binman: Fix FIT image overlap issues for
- testFitSplitElf
+Date: Mon, 3 Aug 2026 13:26:10 -0600
+X-Gm-Features: AUfX_myJBgMz-xsPoZvDsgdK0NqEyBUXu2WIqP9u1V7hMRb5e4Z6dYyM66Aciz8
+Message-ID: <CAFLszTg=rQJweERV_TSZJ+11RUSTb7pnT4cJrBjX0BTWre=w9g@mail.gmail.com>
+Subject: Re: [PATCH v4 6/7] test: fit: cover mkimage load address overlap
+ detection
 To: Aristo Chen <aristo.chen@canonical.com>
 Cc: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org, trini@konsulko.com, 
  sjg@chromium.org, nm@ti.com, bb@ti.com, n-francis@ti.com, d-gole@ti.com, 
- e@freeshell.de, jonas@kwiboo.se,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+ e@freeshell.de, jonas@kwiboo.se
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785785180; x=1786389980;
+ d=chromium.org; s=google; t=1785785188; x=1786389988;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=AQiNkah3UHoe6dW8DSYaup60ZbJNsMB4/daonIGYfQY=;
- b=i0HSIwjfGRYxvu/Xnu6k4a2nNr5Ev5AhkRD0+m63KIZmMZojqAJsRGYMbDOD99dtQl
- 9zz6JmyyDP3zeBLifWiDBfNHdvBIVp+JQ1K31oNyFpXUNgdJgQu79f+Bgi0SUl5A3qjl
- v++YCYnwQ4jeXMm4eIePnIpRayfHheXbL6HV8=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=s2iXVDdo+8hYhHYksbPi++Zs6WZMGHxq0rb2nvtAbS8=;
+ b=DnAcSYxZmLIbjDb+62j+dWv+ccY4JMWjfq9ENe+T6gEoHLY1/4cGO1QW2yekwX7TU6
+ TchFla8Q87FX/3vnuapgTvwVrQe8Z+teM1zIwD5Zf06iLzyqFz2DqQujmZzi6bYVzrfq
+ DZDfSgJO+r+wAXeL21NFTvACH2A4SBE+B2Tfw=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=i0HSIwjf
+ header.a=rsa-sha256 header.s=google header.b=DnAcSYxZ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,30 +145,23 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 2026-07-31T00:13:34, Aristo Chen <aristo.chen@canonical.com> wrote:
-> binman: Fix FIT image overlap issues for testFitSplitElf
+> test: fit: cover mkimage load address overlap detection
 >
-> testFitSplitElf builds both the ATF and TEE test images from the same
-> elf_sections binary, so the split-elf nodes generated for the two
-> images end up with identical load addresses and overlap in memory. An
-> upcoming commit teaches mkimage to validate whether the memory
-> regions referenced by a configuration overlap, which makes this test
-> fail.
+> Add a test that mkimage rejects a FIT image whose configuration
+> references a kernel and an FDT with the same load address, and that
+> the error message names the offending configuration and images.
 >
-> Update the test to use a non-overlapping memory layout so the two
-> images no longer collide:
->
-> 1. Add elf_sections_tee.lds, which mirrors elf_sections.lds with the
->    section addresses shifted up by 0x100000 for the TEE image.
-> 2. Build an elf_sections_tee binary from it in the test Makefile.
-> 3. Update ftest.py to use the separate ELF file for the TEE component
->    in split-elf operations.
+> Also add a companion test for the intended escape hatch: two images
+> may use the same load address as long as no single configuration
+> references both of them. Only one configuration is selected at
+> runtime, so such images never coexist in memory. This mirrors the TI
+> K3 tispl layout after commit c85bf61b14f9 ("arm: k3: select tifsstub
+> via board_fit_config_name_match"), where each security state has its
+> own configuration and all tifsstub variants share one load address.
 >
 > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 >
-> tools/binman/ftest.py                  |  2 +-
->  tools/binman/test/Makefile             |  8 ++++++--
->  tools/binman/test/elf_sections_tee.c   |  1 +
->  tools/binman/test/elf_sections_tee.lds | 35 ++++++++++++++++++++++++++++++++++
->  4 files changed, 43 insertions(+), 3 deletions(-)
+> test/py/tests/test_fit_mkimage_validate.py | 136 +++++++++++++++++++++++++++++
+>  1 file changed, 136 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
