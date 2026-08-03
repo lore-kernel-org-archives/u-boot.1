@@ -1,108 +1,109 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A2FC55196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 20:57:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B38C55196
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 20:57:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3CC6140648;
-	Mon,  3 Aug 2026 20:57:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DF9C46069D;
+	Mon,  3 Aug 2026 20:57:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iE0UJP9_0FXW; Mon,  3 Aug 2026 20:57:19 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JeXaoMMAVKGf; Mon,  3 Aug 2026 20:57:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6AB0840566
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 174F360683
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785790639;
-	bh=AUtEqKgyziy6NlD3V/w34HepEvlhAt/tPl+G5N6GkhQ=;
+	d=lists.u-boot-project.org ; s=default; t=1785790662;
+	bh=VRT1ziUHeodXkgUxeunc7Ab6K0Q+FudBgYcV6WSMcuo=;
 	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=uWBN2reYwcNYtS4gUFjBMw+FvC25cjFZY7g/WjIKYH8gE5jvn+BzIgcmRijY662x6
-	 /7x4uJT7F2YmAMDLzd+4A5yMd8iQSe+UrqcpT8XArR/hYNm1rzq6PX1RipFGy4GKsU
-	 gtaBs3YcotsFm/U4p9Jd8/LFmxCGAYrnE6yWXJyfg9vHNJZcO51D/EzjtRMnMkQUG3
-	 5PAG22LumI0wOarletdtuGKRbbrs7/RJUTUgzkh1HLL1u/mebMHbHBrQcG0uBrj100
-	 xLNIEmFcIo0ZacPxDrhHA0rYEnROPbW/nYBg8aljtFRBrcmTCBnPddCLz/5xcFG81C
-	 +m4F1SlLblIhQ==
+	b=uVkAOGT7VEMOlBfwW/u6hdwZHL61O/EqIzUQqqBr6QmG29Na4L3httN/orbqzIM5f
+	 vCwOiRacZXBcCHYPVZ99z6j9skJDno5VyV/ZJjZ6vm7osa+nsuGa7WIrXjAGEFO5vX
+	 Se5iC3st8pQb3mG7Kba1k9jCC4GS9YY7BbyXySF8AKdSW5g3fxTZ3KCG9W6F0u9Py5
+	 DTsCGWDVB+eZkzmcV804YgltK1Ncuh9D9I0wrZgj0DE/zwBeVLVodVJ6F4W0QmWqDN
+	 O3WArBTXyAYNKxVEKJEaxMJeIcAM4U+fA1kDRou9j7k3vURGdOTCZvv3fWJ+EwEIyw
+	 rj2YnjwbTBi/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6AB0840566;
-	Mon,  3 Aug 2026 20:57:19 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 31D7928F
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 174F360683;
+	Mon,  3 Aug 2026 20:57:42 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9234A2DE
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0FE4780C06
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:18 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8FDBE60683
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qwga7KqP_rkk for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 20:57:17 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P5nUHmkXGCLL for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 20:57:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
+ client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
  envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 472F580C04
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 472F580C04
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 472F580C04
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:17 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org C78826066F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C78826066F
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C78826066F
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:57:39 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hDTWb0h6hzMlG1;
- Mon, 03 Aug 2026 22:57:15 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4hDTX15r2WzKmXr;
+ Mon, 03 Aug 2026 22:57:37 +0200 (CEST)
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] mtd: spi: renesas: Align macro prefixes
-Date: Mon,  3 Aug 2026 22:56:55 +0200
-Message-ID: <20260803205711.134654-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] mtd: spi: renesas: Add R-Car Gen5 DT compatible
+Date: Mon,  3 Aug 2026 22:57:15 +0200
+Message-ID: <20260803205733.134673-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 74hopetu7pr4tsuhu49p1ag1haprkytc
-X-MBO-RS-ID: 2a459ec330612e6f3a1
-X-Rspamd-Queue-Id: 4hDTWb0h6hzMlG1
+X-MBO-RS-ID: efc7c2e3d57f95c08a1
+X-MBO-RS-META: qxrf9rt4ed3i7ithoywpkk74fnx14sbi
+X-Rspamd-Queue-Id: 4hDTX15r2WzKmXr
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785790635;
+ t=1785790657;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=AUtEqKgyziy6NlD3V/w34HepEvlhAt/tPl+G5N6GkhQ=;
- b=q89qnzQuHvjJAp0pcrjGDWgGBaQ3y8GkJse5n9AgRllBjmNAFiONT4gIF+svvl+HugvYBQ
- 1n3hSTEnzKWQ8cTb9jz04Zo804cpuOy0ewtG7Rrg4KrZ2d995pb/3jta7fUnkQu0Wwg1V4
- cVG7SG+GLG5C6FneEnovdlSY9thQ6FEt6l3euYaKjr4hsdRg9kfsndh6xqAt7wdo3bhVQ/
- UkIoFpd+l/p6Rzs6RzxiClQVYwHz3+KYoH3tKunBdqj29bvxtUp7GfqphXL+UbTWgO/5qu
- dM9k1NoB1Qb88O7burTlKjNyrfVjYwMIkCKLcTs8xxWIgzi9Sycr8eHdQ51Dtw==
+ bh=VRT1ziUHeodXkgUxeunc7Ab6K0Q+FudBgYcV6WSMcuo=;
+ b=MgKDjo2a1KavQZJIUqdtZ2HW3hUvqAnesdRyUW1cI383ZzLFQRKmnn8GlHFgOUBbs+bS52
+ 7/7WVCV2Th4H7zgPWu+PYx4aVDkozH0lP/t3ewfbS9sGq7Os2apEtAxWgLU2wHmCAdDa39
+ goKvRX5b1rRbgSjQfptxvzns6jjbl5SBRLd25dzg808TW0hXKRHxCvZXV8wCoMYg0w4NQO
+ xZBvyPBkW8tnMJ9ASqGtNHx64RI4ny9plh6gFaeDzmgxphqjVuu7QjVYI882H75ulEdhPl
+ +nEqljJG+unOLLtMQkS7d12gCPxxfVx+a76IiTFJ4Z4S59Lqr6WdTqDvHt2u2A==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailbox.org; s=mail20150812; 
- t=1785790633;
+ t=1785790656;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=AUtEqKgyziy6NlD3V/w34HepEvlhAt/tPl+G5N6GkhQ=;
- b=ohvOZWrD9EcZ+eK87UBdDyqB7z9nTv5gomsSr8mUt1sPb8L91EeA+z/1PTCvGiZtP/drxu
- gMWXaj8eT7cnTHYh/hm9vtSEekZbm+e+BVX3JHloiwuTp8DnQIQM9d9SeVbQiDDp4/Vn6L
- WXR6J8QGz1PP0+iO2/7rklhMuJj+64Ef5kAeMCOvPb6THCda9q0pK0liAcwRSLjdcPcYTb
- l4jJbSqZLLM042TumCHPeRwGYg/Zp4VAjm0HvX3wEJqLN7RxCxuYdhaH4pJOGn5BlwvJor
- UqeqKvLSFLDRKXD+gxi5OT1U0PUThrErM8HZMg+Thp6qp1jwJoA4bGi3lik5qg==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=VRT1ziUHeodXkgUxeunc7Ab6K0Q+FudBgYcV6WSMcuo=;
+ b=Nck3RQ+ni5TESv9N5smF73MGYWeb0Lxf0fxw/r7IHThSqCZy9CMMUUzAjcYuMP6pDSlyUf
+ BFWoPwLpxdZfe5yv6UP/tOraOht6yGsAegjCbXoreBOsgYpWrsx1/ZvtR3pkoRCmMJTX4b
+ yChEaepS46xHiUpxVLzVWiZznbmZbNrKpNh3Gg5XFyUJnSpJuB0eQ4ByzZX03IsTG6XHJ0
+ 9EXNcYdR0L13WwfbCuR5k/fLXylbTyH8s8dL4saBiBNzhwGqjiWo90PJqHpJKXgxlHyiuS
+ QFkn06C8IGCAcUW+6RRs8oeM55JHNsY6fdkVQzqGdbHYjiQ/f8NMpBBcQj0kxw==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=MgKDjo2a; 
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=q89qnzQu; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=ohvOZWrD
+ header.a=rsa-sha256 header.s=mail20150812 header.b=Nck3RQ+n
 X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ohvOZWrD;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Nck3RQ+n;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -120,56 +121,30 @@ Reply-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Remove the IF from RPCIF to align the register macros with each other.
-No functional change.
+Add device tree compatible string "renesas,rcar-gen5-rpc-if" to
+the driver to match on upstream RPC DT node in R-Car Gen5 DTs.
 
-Fixes: d5162463243d ("mtd: spi: renesas: Configure RPC PHY timing registers")
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/spi/renesas_rpc_spi.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ drivers/spi/renesas_rpc_spi.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_spi.c
-index 7103d786c7e..640607793c3 100644
+index 640607793c3..76eca5389a2 100644
 --- a/drivers/spi/renesas_rpc_spi.c
 +++ b/drivers/spi/renesas_rpc_spi.c
-@@ -145,11 +145,11 @@
- #define RPC_PHYCNT_WBUF		BIT(2)
- #define RPC_PHYCNT_MEM(v)	(((v) & 0x3) << 0)
+@@ -466,6 +466,7 @@ static const struct udevice_id rpc_spi_ids[] = {
+ 	{ .compatible = "renesas,r7s72100-rpc-if" },
+ 	{ .compatible = "renesas,rcar-gen3-rpc-if" },
+ 	{ .compatible = "renesas,rcar-gen4-rpc-if" },
++	{ .compatible = "renesas,rcar-gen5-rpc-if" },
+ 	{ }
+ };
  
--#define RPCIF_PHYOFFSET1	0x0080	/* R/W */
--#define RPCIF_PHYOFFSET1_DDRTMG(v) (((v) & 0x3) << 28)
-+#define RPC_PHYOFFSET1	0x0080	/* R/W */
-+#define RPC_PHYOFFSET1_DDRTMG(v) (((v) & 0x3) << 28)
- 
--#define RPCIF_PHYOFFSET2	0x0084	/* R/W */
--#define RPCIF_PHYOFFSET2_OCTTMG(v) (((v) & 0x7) << 8)
-+#define RPC_PHYOFFSET2	0x0084	/* R/W */
-+#define RPC_PHYOFFSET2_OCTTMG(v) (((v) & 0x7) << 8)
- 
- #define RPC_PHYINT		0x0088	/* R/W */
- #define RPC_PHYINT_RSTEN	BIT(18)
-@@ -233,11 +233,11 @@ static int rpc_spi_claim_bus(struct udevice *dev, bool manual)
- 	struct udevice *bus = dev->parent;
- 	struct rpc_spi_priv *priv = dev_get_priv(bus);
- 
--	setbits_le32(priv->regs + RPCIF_PHYOFFSET1,
--		     RPCIF_PHYOFFSET1_DDRTMG(3));
--	clrsetbits_le32(priv->regs + RPCIF_PHYOFFSET2,
--			RPCIF_PHYOFFSET2_OCTTMG(7),
--			RPCIF_PHYOFFSET2_OCTTMG(4));
-+	setbits_le32(priv->regs + RPC_PHYOFFSET1,
-+		     RPC_PHYOFFSET1_DDRTMG(3));
-+	clrsetbits_le32(priv->regs + RPC_PHYOFFSET2,
-+			RPC_PHYOFFSET2_OCTTMG(7),
-+			RPC_PHYOFFSET2_OCTTMG(4));
- 
- 	/* NOTE: The 0x260 are undocumented bits, but they must be set. */
- 	writel(RPC_PHYCNT_CAL | rpc_spi_get_strobe_delay() | 0x260,
 -- 
 2.53.0
 
