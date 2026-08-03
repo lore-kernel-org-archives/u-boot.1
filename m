@@ -1,193 +1,134 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F25C55175
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 09:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83D7BC55184
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 09:33:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1349680CC8;
-	Mon,  3 Aug 2026 09:31:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EC141405D7;
+	Mon,  3 Aug 2026 09:33:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id abC-sm_8YWg3; Mon,  3 Aug 2026 09:31:00 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4pyzeRGrUjYs; Mon,  3 Aug 2026 09:33:05 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A475B80C69
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 095BD405B9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785749460;
-	bh=1XGsASI5u2+eFKOq1vQGD3PZtx5Rhc7mjg38eaRjTt0=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785749585;
+	bh=IjnPt5tLJMSt8fc0k+4Su+7MFU/oJ32slLWg+AEsVy4=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=b1LAkH0ws5jHlFQ6XRcoe+P3YOFpBWnDVNoxMxftnvRBTmapyPCOT9moLUUblioL2
-	 PputZBQfd3etm/wqOyE+kT7FMGYsjAH0ZoOQ6Mtunb1vQ7Y+2CXD+jP8/C9CL6SG5i
-	 a1FMU3NGPAvA62/N8awFVh6m7eGCRKI6pGrAYKIuCPjIhkCEoiNEyVpRMwjxRAjr7A
-	 bQY8N6O2BaKRHiEOk/y2buX/Yrf3VnvqZyGfNHl4LMf8essgeEnqBPJWKGUJpqWtbZ
-	 ilkxqWsPYAZ3pS431nGYp2yj97SKSP4J7ibcfbb1rvEPHw04aJpN7GWKDhcFs/vjOv
-	 b8IkvyaKEX3fQ==
+	 From;
+	b=dnVSqgJctB14Zbj3v6bxe1lvgqJzTiMmyqFMHf9dVlhtfcNwyDl9X68lKzs6JiXZH
+	 8deereBFDVWH7ifw6ga80IgGE64xBXArcQSOHroG79Bl6j2tneBsfQHkIymbCwEpyB
+	 5viTxkU0JNylA5fNmWwfsYp0wii0t13PUy/Mdlc9REfefsNgv9PzRpUqXLpoVW7gK+
+	 UqOK394vrvZithP0NqC5eAy7S35xXbvmCoUc+iIaoTiTMY9H/pbNQjy7rKKZ4U68Lv
+	 hdvE1pTfzYyoKIlV9LvWW9cG2lcT1AKvHCMjzOoK23GDEVJ6T6xa7WPNRtYHSzEcSi
+	 +DbvhQL6uBmkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A475B80C69;
-	Mon,  3 Aug 2026 09:31:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 26EE836E
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:30:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 095BD405B9;
+	Mon,  3 Aug 2026 09:33:05 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0971C36E
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:33:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0D65940077
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:30:59 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id F016A405B9
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:33:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hOC385-QmaK3 for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 09:30:58 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=tien.fong.chee@altera.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DC69040024
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DC69040024
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DC69040024
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:30:55 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 617C3846E2; Mon,  3 Aug 2026 11:30:53 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4161A80087
- for <u-boot@lists.denx.de>; Mon,  3 Aug 2026 11:30:51 +0200 (CEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=F8PtTeuA8lQIpelTfDDgA7IFnJBhbTKj+ERbGP/F16wHSqepMUfSclfmWipWyJVqrG1LmGat136hd2NlGUO/cMeH0whEquNOP2R6wmPTcmxI9q7B1tPSdT2I5+yzMzPGyknvi7Ra42Jj4pmRR5vqQLFeC9MAwwHKL7pDfmWF3/QDzQmp2+PICi6fM1mz5fNoqR4GTnfiuu4XZP2SKkoNsb2JA/++c5C0ZRCu7o6y/TsHFSf5hv6znqhoe2hJ3cmDmd6GhQCSD2BIx3TOH3KNy9y3oteetVWlCiqHs9//lb0MQgnD/OEMz4ee7+Vh5NMsC59+muNxZztZ3keorJgI6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1XGsASI5u2+eFKOq1vQGD3PZtx5Rhc7mjg38eaRjTt0=;
- b=WMkCRyPkB6283iUzzqvCDANO6GtAe6QkXLEnWZTbN3NAxk/toV7ojPYCdoNHJEYNDjTFY4k+o4HWeI87dSMuDW7e6IObPku9uW9s32EAGKC7wSKZvKgcngat3RLE4JYmCo6Pu206mT1O1l+xiHCC//2/19LE8UqmG7gkhwnKaW8e5xX7CJWAwiWaC/pWREOxo4RQvzNuXmzmElw1kdhtBwhrTL9n7/K30Gl7S6UczTdExpFV+ht/YTY7dmrLNADWUYeqEd59NZdj28rlSHuk+NNxjzelK3wEqonz0p1GBi6BNYFG4x18OZRCK/PzDGqxtRsgsXHaKicqV5xJT8/E9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-Received: from SN4PR03MB989351.namprd03.prod.outlook.com
- (2603:10b6:806:1ec::5) by DM6PR03MB5306.namprd03.prod.outlook.com
- (2603:10b6:5:243::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.18; Mon, 3 Aug
- 2026 09:30:47 +0000
-Received: from SN4PR03MB989351.namprd03.prod.outlook.com
- ([fe80::5d69:ce74:a67c:71bd]) by SN4PR03MB989351.namprd03.prod.outlook.com
- ([fe80::5d69:ce74:a67c:71bd%4]) with mapi id 15.21.0270.016; Mon, 3 Aug 2026
- 09:30:47 +0000
-Message-ID: <6d676a87-3618-40b3-91b5-37add5159371@altera.com>
-Date: Mon, 3 Aug 2026 17:30:40 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: socfpga_n5x_socdk: Enable watchdog0
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
-References: <20260507005505.3917-1-dinesh.maniyam@altera.com>
-Content-Language: en-US
-In-Reply-To: <20260507005505.3917-1-dinesh.maniyam@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR06CA0002.apcprd06.prod.outlook.com
- (2603:1096:4:186::10) To SN4PR03MB989351.namprd03.prod.outlook.com
- (2603:10b6:806:1ec::5)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN4PR03MB989351:EE_|DM6PR03MB5306:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a92c4d8-f37d-4af8-1a18-08def141e63f
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|366016|10067099003|11063799006|56012099006|22082099003|18002099003|55112099003;
-X-Microsoft-Antispam-Message-Info: Lrv8ctarxhyJrFXrwAoXDeXdYIUcwbYHKE+3RGLAmGuPZKrWILGA+bumHEqS/BWqOQujjJponO8nyp36//8f0SJTaedCnKwZQBjwy62YNaDiYiqhlnY/ctf9iECx5XDSxDaRydNqgp3moO90ImT3qmYp4e0vBtEiEG7a9L4hqQebS0lXdWl8LaLIGI+nABodMsq2oJDs1ac02no1CBSqG7aBgf1bGkOBmcufAAuRPTLh5ZEdJAA2gDfv36BAlUTMKwd3ZyrEu4O6NgbH44Hy0FtxrSUS+lh3vIBVIiGoCTW+wK5/peGQ33R9EVEWj4T+F0BmXUM3w0fyQLO1Tqsc6VDKY2TdGFJQIRWcCs8Mox/yCF+iX4xHnUJ7nNzdZPqvKqLyqVY7UusJW9FJbeKeZhxT/VSvNFhSbmU+XjfS6W8d6RxmfFx3FItQzbBhU2Dt6XKIoGajVQBnMlFL/vh10S/ppn/3XrDitdTFMkx2TJGFn5/HG68JPw6poAhMo+/dJzu8bZ392v3lbz7it6ww56FCV02/nEzssmMHbiKtrzswR/CUmbR2S+AyXhPlBJCNXoSmh3DM+Q0ZNV17L2DFDHTEhsDUTyv1Y+HVmPj4VHffbQrXbgsIxDaOhNlKDqu/XLjJtiYUMfsCHXOj4aBi1piRU9KPP9wJWZvl+EC+CiE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN4PR03MB989351.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MTBNdWkzTGlUTk1PRnVkYmdrR0JTcGVoVS9IUEFNdEtGdGRGN2xrQm8zaWYx?=
- =?utf-8?B?eVZDTGM0SDVwVVF2dmdPSFBZWEZJN1MvSFZ2d0xKYkx0RWpBN2R0QXN6cHJD?=
- =?utf-8?B?NmpLbjM4MkhUY0pLOERRVC9YUWpoK3dnaURLejV3Z0hXbnczT2ZkMWNDcTln?=
- =?utf-8?B?aUFGWXlOK2hOUXF4cDhwQW11azlHSjJKSCtMNDJMUU82YXNvVzlZN3d4RUt0?=
- =?utf-8?B?VEFmNkxmM0hsTEhYdHZQZHB4ZE5IMVl4Z3pxOFRIUC8wbC9DVXVhTUNDYWw0?=
- =?utf-8?B?QzBZU1ZBMmdSQTVKTmwvMVBDUWQvR0U1azMrbGJwK2ZBZTJKc29LTXI4Q1Nx?=
- =?utf-8?B?dFBxWTM5cm1oV3B6bFAxRWhTRExHaXphNm1yWEJ4RThNL0NwZ0FLRjRqZ3k2?=
- =?utf-8?B?cnJDbTZMTUlNQlJIRHVxTUZOWndueitxT0NxaFJXQ2cyN2xZTXQyZi8wcFc1?=
- =?utf-8?B?ZmFoNnEwd0JpSjV4amwvYXQrN25RVHdWT3kwRlV4dHpsS050QWM2c0hvY0Fs?=
- =?utf-8?B?Y3B3NVprU28yZ2tSZ2Z3dTF3enowQjhjTTJhQ3Vrei9oUTd2UUEzazJqNDNL?=
- =?utf-8?B?NkVvWTlRZ2NzWVJYVjNhYnNwZmxMREJMc01iSi9oWmhVenBkSFFGUmNrcnJJ?=
- =?utf-8?B?ZFJUZ2NWUU02VzNFYlUyL1o3WEVlSWVtZ3VLa0JKUEJkTHFMSzI2L2ZxN0VI?=
- =?utf-8?B?bUZyaGtHUnFXVzBvU0w1MXZMVnhxazBFYWVOMVBxSEsyZDVSWk43QjRjTFpj?=
- =?utf-8?B?YjNOQ3A5cVVjckhrQ3NFdTh0NGVoOHNFMURPZWduVURzcWFzTVVzWXBHMkF6?=
- =?utf-8?B?TjU0MFpIaFZ1QXM5c1dYay9XNU41SHh4M1R4Z29QZGxzT2RrWlRINWQvdE51?=
- =?utf-8?B?Wm5NZGsycEpRekcxNUpQK3FqeHlHa2JzdnlZQzFHVVh1dE5qYy9BdTN3ZmR4?=
- =?utf-8?B?c1ZtSFlvQUNWNGhqUlgyTis1cVpaOVZjQ25QZFBEekIyWmZodWxxOC9SZ3pP?=
- =?utf-8?B?eUxQbEk2VFIzM0FmVFpGL3dHRndjTE5ZTVlUV2tSTEJwYmZraDcySUw0aHVV?=
- =?utf-8?B?ajk5OWkxWHVmT09HcHNKb1N1dmNFYXI2VjZRQTAycUNHRkpJTnk0SkxwYk9y?=
- =?utf-8?B?UWxCeEx0MXRZUllacmxqSytaM3QxVzl1azNTc28vdWM1YnBjaDNaTGFtZHJj?=
- =?utf-8?B?NVFSLzcwSG81dUM5VzNkOVh4VTFLZlNZdGI4ZlN2NU13MDQ3dUZGQW4rUUFj?=
- =?utf-8?B?bytqQUNWMkN5dkNwTVN1dU1VQWlYbHJNWkpYdXZ4MnZPNnVBQloyclBBSnlH?=
- =?utf-8?B?TEFHT254eXFzcUsrVlRqK0t2Mkp2bXVWZExsdVJDbnYxVlA0amRnRWxWdksy?=
- =?utf-8?B?T29rRDByejI1cXhDQmgwMURKT2FCMGJqY1dZVnFBWFA4UStUKzhaMlpudTJ3?=
- =?utf-8?B?V05EVmZnUFRBV1A1K2tmaHdGc2lZRXBSdisvRjNoQVIyZGREZTRJWDFJZHRn?=
- =?utf-8?B?c29vVkRsR3NpeERobVJBN2tXSGJwdjJUTUl1b29HU1FQYXFlN0Y0NU52Qk1i?=
- =?utf-8?B?NWR1NzJyTE1qMlhYVkRnZmVpaFYybGpaa2NtRWlCVTRTSis1VllRQ3hVdTZN?=
- =?utf-8?B?eTVRU09rcnM0dGsvMGs0ZFN2NU9aVHVudFFvOURhK0ExakdsNE8zd3cyTnJW?=
- =?utf-8?B?dG1jejMzbElBSDJaRzNNaVRrYWJIanBFT1JUYURJRXFHeVJBclRRVzhTQTJv?=
- =?utf-8?B?VWhndWMxS1dwMWIySlFoRGJoYy9KRzU1UzFJL0Q5WUtzaUliVXV1ZFdzVW9x?=
- =?utf-8?B?Y2Z5dVM0RkgvRkhTbVJ2UjB6aG5tSzRGOHJJRnpVZHlmTlFOQWFCYStHU0Zk?=
- =?utf-8?B?RVVpQ01QNVNHQTBnTjBlUkc2SFJMNFJhUFYrVFF3UW5RRzF3VGYzM2ZxcytV?=
- =?utf-8?B?UmoxOWRBWkpjUHM1MVdlSTFHMU9CUEU5WWExUFpaZllWMkljSGhFblZ4SmQx?=
- =?utf-8?B?bnFVQmx3R3FWK3lucjk4YVRZRFVFQm1tUUVXclNWUzNxZjlRS2NrdSs3NDRk?=
- =?utf-8?B?RXZUNEk2SFRYTU9vVU9QNWxnNzVZM2Jhd25TNGhRSXJQenNiOWlmby9CT1g1?=
- =?utf-8?B?SndnR256N25BbmFQZExFNldyTlJldGk1RDgzRElveE04QjdtTVVpZFNzR3pR?=
- =?utf-8?B?Sy9KT2ZzVlZzSDlScENJMFgrZ2w0WHNGaDZVTkI5WWc4NEFLdjRHUDF6OU15?=
- =?utf-8?B?N0ZPV2VpLzhodmc2a3EyREVNczNTc1lOeElVVUZIc1UxV3ZWUWNTWDJtS1Iz?=
- =?utf-8?B?QU9LcGt3TGNLcWprRjhsbnVTaC95RStTS1UwUndUdjlIR3R6cS9yWTd1cDl0?=
- =?utf-8?Q?V3KLndACQcsfehBY=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a92c4d8-f37d-4af8-1a18-08def141e63f
-X-MS-Exchange-CrossTenant-AuthSource: SN4PR03MB989351.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2026 09:30:47.4886 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qmCAGG6+Ca8GWdd5UVNJsUJFqsfaAi13WuFTUkROPZTfJANkGF/olVYI8FJafDUlv0F+4ERzrTc2mR8Dh0rSs9u9K6tAgTYW2WLd9tJrMyg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5306
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nKDfUfnxf9-2 for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 09:33:03 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org BE3FF40568
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BE3FF40568
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BE3FF40568
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:33:02 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4954afac04bso21976235e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 02:33:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785749581; x=1786354381;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=IjnPt5tLJMSt8fc0k+4Su+7MFU/oJ32slLWg+AEsVy4=;
+ b=iHOlL1PKJ8h9SEjnkgakDaax/9ykL28Tu+PQdNTLCWPAtaCS3EdpNj0bz63dmjzm5R
+ QInGgHmQrQvNA2IdVZ+VADLcCvZE+HDHHZhhyiqfVBZvrJ6wQxVihBZcCTOSjk1q+mRY
+ qGgLdP1mBw0Zcwj9Z0ibJOCEzdBmistA3mJY/dajHfKJq5Yim3faW3DrQnRaV2qqk7IB
+ 6XDsouMsklqQoeY+qGi5FIj5/lWeN09x2tqz+8LAhcYcOr18h/m0ivfkwLVJq4RdSgIE
+ 7iZe1oP4BYpllJdykpUwedx1ITF3ALrPsrxr0aBVg3sMwP+S4Dw0eZrBRGW+MvHI8qnT
+ F0nA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoJlRrVORZa9d+V85UTBEjyJVsD2dSIyHQ43ar4b1XMkorFzoPUYrDab62rU4IC/ew20QNGFCs=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxARWU224ax5kF9EJmYI64qXEwmXjKlZCB85+TSW0P6geiWZZ8s
+ 3HBDB+e5phl6C/wzDkB7fT9oVBGPZOgb5YYtooZM1gROtjltWDgWFZG9tNQg7Lup2EY=
+X-Gm-Gg: AR+sD13QiaHKqpMeLRbH3P1YDDsyY8P1v2nv7UtxLvpQCkpRlNWr1UjoQjtKg+QaHNY
+ YFVbU1PAm1qUQme/1gHjjZc5HyX4fXT3t95xmROXteEYnwuF0nHSF1ixa9Df/FlrotVvqlah2ou
+ Y7PtRnqbILFKVQOOyGBciuYo75x4kjhXa+6f/a8TzOM7J9B+lSUDV9b9nKCGhTtU1Nm+IHobL05
+ b8hpnveIOveSEwwnT1hLs9FfGW04REc1xQyuyzXRgR1ETgGYcPph0jbOFHfeARw11IZhbBS+QEY
+ gjVSPU0OmHPPeQkzgEkGb1l7GZCku4xFofIhwpwiaTzQ/bjUyDxXHiAqVm/QRSGbclErcrgOsux
+ GlL0FpyuVKpfH5Fzb1UYjzRaI0v/aUWSv6/MyfiIOAmbbKvjKdbf7HlnosX5wM/I2OA1XbUtOi1
+ yF7xFS2uHt/A/t5XTr9Mg0LGj1Xr6HJ05q7iS94IiBosx5D2EjjqP2LLzJYNNV4fR/J69smt1qg
+ 0llkdMRXqLo7mZWBvRgoHkC/Bo4uH1oMNsquZtWFHbNpsHRteHHvJrunevKQP2kPjbM/wubrbde
+ B2hwnr1WmF+AVEqcCrBFCnu8LyHhqaKnDO1P0jVkOimv9vYoyMa1ANh+esrsoJ/aBR519/ETX6q
+ k9pCCgaUGfJ9GKo6oFUmL2xmDszsTHXFV5admJTjdFCbtty6RAlW8TES0A1eu4DVTAkyX7i02Qo
+ bAmy+eYKZvoJNRCFQ7Ai8f3rRQ7QUWIwQx0w5jvwm4u2g0DZV/CqvnXrsKab3ai2ft46dTj7QaM
+ fW5ZxGtavBoiCJoEpXhVCoDg4GmhFv6lCTUOqM7hRGFcJbKozYn/1pdjWAeLZ21sD6ivDth5a0u
+ 7Efk
+X-Received: by 2002:a05:600c:3b01:b0:493:f0f5:f2d7 with SMTP id
+ 5b1f17b1804b1-4980c66c90fmr166052115e9.7.1785749580382; 
+ Mon, 03 Aug 2026 02:33:00 -0700 (PDT)
+Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49807b59a33sm216103715e9.1.2026.08.03.02.32.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2026 02:32:59 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 03 Aug 2026 12:32:58 +0300
+Message-Id: <DKF7E76IJ7F7.11I4JWAVP3Z4Q@linaro.org>
+Cc: "Tom Rini" <trini@konsulko.com>, "Heinrich Schuchardt"
+ <xypron.glpk@gmx.de>, "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ "Kory Maincent" <kory.maincent@bootlin.com>, "Sughosh Ganu"
+ <sughosh.ganu@arm.com>, "Wojciech Dubowik" <Wojciech.Dubowik@mt.com>,
+ "Simon Glass" <sjg@chromium.org>, "Peng Fan" <peng.fan@nxp.com>
+Subject: Re: [PATCH 3/8] tools: mkeficapsule: Enable multi-payload grouping
+ in config parser
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+To: "Balaji Selvanathan" <balaji.selvanathan@oss.qualcomm.com>,
+ <u-boot@lists.u-boot-project.org>
+X-Mailer: aerc 0.21.0
+References: <20260727-mkeficapsule-v1-0-5b162866b092@oss.qualcomm.com>
+ <20260727-mkeficapsule-v1-3-5b162866b092@oss.qualcomm.com>
+In-Reply-To: <20260727-mkeficapsule-v1-3-5b162866b092@oss.qualcomm.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=altera.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1XGsASI5u2+eFKOq1vQGD3PZtx5Rhc7mjg38eaRjTt0=;
- b=D6snmysgs4n3l29sxnmW8rKpyDKqYx09py3Si9blD9MmrYr15sHRcLOw6HrS6F/7tn5hDL0bUZ5w1L6AL7JAgSOBgPYJ1mx/WfFNRgGBiv41IfWAgZRHPFZOeFJzYi++S+SoD64VtRb2MFKzBEJCA5OSUC4VmViCc5s6UxVPinmdb3lDnLckxhjscP3kgCPCpyGT675CYhxuPx5OMoNGEWctWmhlE2aQf20c6H1hiAp/E1QgTfaOCrclKhG4e9u73U3eeb4WdcvrAM1dHxbAnRCEhIW8CWPxzWutsszZgFf3Ce2rmxtNaLPd9VVYkF7gTfyakli7m2m0pXY6UJi9RA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=altera.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- spf=fail smtp.mailfrom=altera.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=linaro.org; s=google; t=1785749580; x=1786354380;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=IjnPt5tLJMSt8fc0k+4Su+7MFU/oJ32slLWg+AEsVy4=;
+ b=M0pBVQTKPCRObUxDofUpM/mDIfQWGYkYjy24RkgWICCw/ehdl0uGCQ2SQmGSbOuUIl
+ Byf/8A6/QGj/3OuCgUxVtZF0uAJZktsGdcGdRC58yXAM8JTKvS87l66D8DNZvc85owvO
+ ryRS5xBGcLytb6nAZPzxWmsbLWV3/yXbkH4Q8dTMbvjkwKkjhHyQjxQzhDHc5tvcWUip
+ PU5YpD9SwSrIGgPNCztF7kBJOVsRmyP1tIyChUNlwo3Pf2iFEMCeYufLPQyF9/ek8Afe
+ xZ0+qlWr+nveB6zp7TSyDTV9XDbZv29yQjI0clDfoRAGRAFGRPj8ZpOT6OjtwJO3etJw
+ pgUQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=D6snmysg
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none)
- header.from=altera.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=tien.fong.chee@altera.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=altera.com header.i=@altera.com header.b="D6snmysg"; 
- dkim-atps=neutral
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=M0pBVQTK
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -199,40 +140,211 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: "Chee, Tien Fong via U-Boot" <u-boot@lists.u-boot-project.org>
-Reply-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Dinesh,
-
-On Thu, 07 May 2026 08:55:05 +0800, dinesh.maniyam@altera.com wrote:
-> Enable watchdog0 so the DesignWare watchdog can be probed and serviced
-> by U-Boot. Matches the existing Stratix 10 SoCDK enablement.
+On Mon Jul 27, 2026 at 6:56 PM EEST, Balaji Selvanathan wrote:
+> Extend the config file parser to automatically group multiple payloads
+> with the same capsule filename into a single multi-payload capsule.
 >
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> The parser now operates in two phases:
+> 1. Parse all payload entries and group by capsule filename
+> 2. Generate capsules based on grouping:
+>    - Single payload: use existing generation path
+>    - Multiple normal payloads: create multi-payload capsule
+>    - Mixed/non-normal types: generate separate capsules with warning
+
+I think we should just remote the third option and exit with an error. We c=
+an't
+predict all the mistakes users do and correct them
+
+>
+> This allows users to specify multiple firmware images for the same
+> capsule file in the config, and the tool will automatically create
+> an optimized multi-payload capsule when possible.
+>
+> Example config usage:
+>   [capsule1]
+>   image-guid: <guid1>
+>   hardware-instance: 0
+>   image-index: 1
+>   payload: payload1.bin
+>   capsule: update.capsule
+
+Why is 'update.capsule' needed? This seems a command line option
+
+>
+>   [capsule1]
+>   image-guid: <guid2>
+>   hardware-instance: 0
+>   image-index: 2
+>   payload: payload2.bin
+>   capsule: update.capsule
+>
+> This will generate a single update.capsule containing both payloads.
+>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->  arch/arm/dts/socfpga_n5x_socdk.dts | 4 ++++
->  1 file changed, 4 insertions(+)
+>  tools/mkeficapsule_parse.c | 115 +++++++++++++++++++++++++++++++++++++++=
++++++-
+>  1 file changed, 113 insertions(+), 2 deletions(-)
 >
-> diff --git a/arch/arm/dts/socfpga_n5x_socdk.dts b/arch/arm/dts/socfpga_n5x_socdk.dts
-> index 915b8f6380e..f98e87bb87e 100644
-> --- a/arch/arm/dts/socfpga_n5x_socdk.dts
-> +++ b/arch/arm/dts/socfpga_n5x_socdk.dts
-> @@ -120,3 +120,7 @@
->  &usb1 {
->  	status = "okay";
->  };
+> diff --git a/tools/mkeficapsule_parse.c b/tools/mkeficapsule_parse.c
+> index 12f5f04b824..4a07006e2f8 100644
+> --- a/tools/mkeficapsule_parse.c
+> +++ b/tools/mkeficapsule_parse.c
+> @@ -299,6 +299,63 @@ static void params_dependency_check(struct efi_capsu=
+le_params *params)
+>  	}
+>  }
+>
+> +#define MAX_CAPSULE_GROUPS 32
 > +
-> +&watchdog0 {
-> +	status = "okay";
+> +struct capsule_group {
+> +	char *capsule_filename;
+> +	struct efi_capsule_params_array params_array;
 > +};
-> -- 
-> 2.43.7
+> +
+> +static struct capsule_group groups[MAX_CAPSULE_GROUPS];
+> +static int group_count;
+> +
+> +static struct capsule_group *find_or_create_group(const char *capsule_fi=
+lename)
+> +{
+> +	int i;
+> +
+> +	/* Search for existing group */
+> +	for (i =3D 0; i < group_count; i++) {
+> +		if (groups[i].capsule_filename &&
+> +		    !strcmp(groups[i].capsule_filename, capsule_filename)) {
+> +			return &groups[i];
+> +		}
+> +	}
+> +
+> +	/* Create new group */
+> +	if (group_count >=3D MAX_CAPSULE_GROUPS) {
+> +		fprintf(stderr, "Too many capsule groups (max %d)\n",
+> +			MAX_CAPSULE_GROUPS);
+> +		exit(EXIT_FAILURE);
+> +	}
+> +
+> +	groups[group_count].capsule_filename =3D strdup(capsule_filename);
+> +	if (!groups[group_count].capsule_filename)
+> +		print_and_exit(MALLOC_FAIL_STR);
+> +
+> +	groups[group_count].params_array.count =3D 0;
+> +	return &groups[group_count++];
+> +}
+> +
+> +static void add_to_group(struct capsule_group *group,
+> +			 struct efi_capsule_params *params)
+> +{
+> +	struct efi_capsule_params *new_params;
+> +
+> +	if (group->params_array.count >=3D MAX_PAYLOADS_PER_CAPSULE) {
+> +		fprintf(stderr, "Too many payloads for capsule %s (max %d)\n",
+> +			group->capsule_filename, MAX_PAYLOADS_PER_CAPSULE);
+> +		exit(EXIT_FAILURE);
+> +	}
+> +
+> +	/* Allocate and copy params */
+> +	new_params =3D malloc(sizeof(struct efi_capsule_params));
+> +	if (!new_params)
+> +		print_and_exit(MALLOC_FAIL_STR);
+> +
+> +	memcpy(new_params, params, sizeof(struct efi_capsule_params));
+> +	group->params_array.params[group->params_array.count++] =3D new_params;
+> +}
+> +
+>  static void generate_capsule(struct efi_capsule_params *params)
+>  {
+>  	if (params->capsule !=3D CAPSULE_NORMAL_BLOB) {
+> @@ -324,7 +381,8 @@ static void generate_capsule(struct efi_capsule_param=
+s *params)
+>   * @cfg_file: Path to the config file
+>   *
+>   * Parse the capsule parameters from the config file and use the
+> - * parameters for generating one or more capsules.
+> + * parameters for generating one or more capsules. Payloads with the
+> + * same capsule filename are grouped into a single multi-payload capsule=
+.
+>   *
+>   * Return: None
+>   *
+> @@ -333,6 +391,8 @@ void capsule_with_cfg_file(const char *cfg_file)
+>  {
+>  	FILE *fp;
+>  	struct efi_capsule_params params =3D { 0 };
+> +	struct capsule_group *group;
+> +	int i;
+>
+>  	fp =3D fopen(cfg_file, "r");
+>  	if (!fp) {
+> @@ -343,11 +403,62 @@ void capsule_with_cfg_file(const char *cfg_file)
+>
+>  	params_start =3D 0;
+>  	params_end =3D 1;
+> +	group_count =3D 0;
+>
+> +	/* Phase 1: Parse all payloads and group by capsule filename */
+>  	while (parse_capsule_payload_params(fp, &params) !=3D -1) {
+>  		params_dependency_check(&params);
+> -		generate_capsule(&params);
+> +
+> +		/* Find or create group for this capsule */
+> +		group =3D find_or_create_group(params.capsule_file);
+> +		add_to_group(group, &params);
+>
+>  		memset(&params, 0, sizeof(struct efi_capsule_params));
+>  	}
+> +
+> +	fclose(fp);
+> +
+> +	/* Phase 2: Generate capsules */
+> +	for (i =3D 0; i < group_count; i++) {
+> +		group =3D &groups[i];
+> +
+> +		/* Check if all payloads in group are normal blobs */
+> +		int all_normal =3D 1;
+> +		int j;
+> +
+> +		for (j =3D 0; j < group->params_array.count; j++) {
+> +			if (group->params_array.params[j]->capsule !=3D CAPSULE_NORMAL_BLOB) =
+{
+> +				all_normal =3D 0;
+> +				break;
+> +			}
+> +		}
+> +
+> +		if (group->params_array.count =3D=3D 1) {
+> +			/* Single payload - use existing function */
+> +			printf("Generating single-payload capsule: %s\n",
+> +			       group->capsule_filename);
+> +			generate_capsule(group->params_array.params[0]);
+> +		} else if (all_normal) {
+> +			/* Multiple normal payloads - use multi-payload function */
+> +			printf("Generating multi-payload capsule: %s (%d payloads)\n",
+> +			       group->capsule_filename, group->params_array.count);
+> +			if (create_multi_payload_fwbin(group->capsule_filename,
+> +						       &group->params_array) < 0) {
+> +				print_and_exit("Creating multi-payload capsule failed\n");
+> +			}
+> +		} else {
+> +			/* Mixed or non-normal capsules - generate separately */
+> +			fprintf(stderr, "Warning: Cannot combine non-normal capsules. ");
+> +			fprintf(stderr, "Generating separate capsules for %s\n",
+> +				group->capsule_filename);
+> +			for (j =3D 0; j < group->params_array.count; j++) {
+> +				char temp_name[256];
+> +
+> +				snprintf(temp_name, sizeof(temp_name), "%s.%d",
+> +					 group->capsule_filename, j);
+> +				group->params_array.params[j]->capsule_file =3D temp_name;
+> +				generate_capsule(group->params_array.params[j]);
+> +			}
+> +		}
+> +	}
+>  }
 
-Looks good to me. Thanks.
-
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-
-Best regards,
-Tien Fong
+Thanks
+/Ilias
