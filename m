@@ -4,131 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F03C55182
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:25:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AAE8C55196
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:25:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B2F55606B4;
-	Mon,  3 Aug 2026 19:25:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CD1FE605E9;
+	Mon,  3 Aug 2026 19:25:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4JTveL1hI7MR; Mon,  3 Aug 2026 19:25:41 +0000 (UTC)
+ id V9tNvGtd2XMV; Mon,  3 Aug 2026 19:25:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 983C16066F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 01EDD6069D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785785141;
-	bh=m3upQwbW1hueoZ34UXpOF7kpVPgqYstW8pw5gvN9wLY=;
+	d=lists.u-boot-project.org ; s=default; t=1785785153;
+	bh=7jd0mymYtjQOybBbDX30IIL8kWcq2CA6im/1xXyP7FI=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=R342xZc8EitMUTU529eQvIPf4xZ9B/QAw4jNq0TspohdVulHF6v4mbPAw59xqIiik
-	 QuU8ZiabxiBxA+eswslMv4oNbZtZ261dHogqvaYpjNf8zg+qzu9rRffmmlc/RvaCgG
-	 QsfcjiVf9XRYSKpGjeO9LRI1u5BzWjOlpXkZ5fYsC86IPtae1o1VGe7dJQXUIeo5t4
-	 figwFv/AqSB23NUwloOpUrG63i4KE/OaZj70XskLr3mIeCJpfkG/PogAkOeC0BLt9N
-	 xlp38DQ9KigtQ06WqDLMAH2p1kl7ERK/Z9rJpPn6ZHkwF5R8GiL6Og5v1xc00to/xV
-	 97AompaRd5K8Q==
+	b=l0fBpw2573dvDxI+srr41/SvSLtRKPbOtRY06pI5gNdsF7oG6C8ReXAfGd6YQ+7wA
+	 1itf+0Z+aqH/ZZ7mCDVpKxio1Dt/wV9hQFwKtTJ7aw3IgOLj2vUXuUxPT6T3kWIQjB
+	 /LrHkKp8cwdTCR6SbuL0/aDDl6oPlKcD0ggj+v1Aau305H8IAE6i5zf20nuRILp73j
+	 2l0YoVIBth+5T4VMtyaef7Wj3X7CTBo/6MXojPn42qEp8BgyDWef7xEituH/aLTPDH
+	 r0xp+hZRneHB4vxpBX7P3MZONrN/bOW16VoyR9Ajdoc90hzNrqI6BSsQqkddwOfq/8
+	 ttQs86OeHll5Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 983C16066F;
-	Mon,  3 Aug 2026 19:25:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id AE1B2194
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:25:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 01EDD6069D;
+	Mon,  3 Aug 2026 19:25:53 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CDCA9296
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:25:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 96C8F405DC
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:25:39 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C039E405DE
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:25:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1DAshbRw4E4Q for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 19:25:38 +0000 (UTC)
+ id 79v9PnJhDqN8 for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 19:25:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 5485B405D8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5485B405D8
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5485B405D8
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:25:37 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6983d3dae7aso409444a12.0
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 12:25:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785785135; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org CF477405FA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF477405FA
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CF477405FA
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:25:50 +0000 (UTC)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4aa99bdso4444298a12.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 12:25:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785785149; cv=none;
  d=google.com; s=arc-20260327;
- b=ANp6r2CkWNYIAwgtdqq1qpUqLqTAJ4a/veHoQUx5wHeYd+Eafv8XdeM3HmGwB2mHfN
- d5UrxPxba0+CH/q8EUWnaUeg7tLnvwClvS64IsY87ABch8dUaG4wE4o19xhiFwZk4mGz
- qKa4130Z9faQTdTLxUH/t6eT0vIlm4sA+fghiAVExCh9O2neQIzdLdY6MNuKJbw+/n7X
- FZ42JILPVIhMLsniwQ+27q33HZ1r0wdQ7XZz6eXqJvJxC2M44E5v27UQZD0Wzgy1D1un
- ZXsTqJOFfDubYuTlhW1+0ynoIE8yeKfwnqHWxOvBFVeFir7klDJ5JfuQLU3bXhDe3yXN
- ZvxA==
+ b=F/k7ciB5JMKWMjK1QSrkHxEO3nMmNNi3FBrNJ7y6hUVnG6rO8exEnNvORL0nfZShXr
+ Vr7DVbd48069Jw5qX/0hw6iEGfRFtn71BD+Lk2VQ+PtsQOASy4QDzugjB8iAasi8uMyA
+ rpjoErooUVAPH7Vb7wLGEjDII9aKy7GcNnboH1PBM6AyEfwm2C7f3vnYKddeuZHVwu0I
+ EDGntmYT38VrdNVrNLe9TmdsC+T7ISw/HAB9BSGxbv9SriSsCcXBd1ailN34ySFyD3Rh
+ VzZZ9eqc6RxZAKsf2oYgWlYVNIRxYgCJztmhUJN1dlNEZfmhvlRqcm873+M/s3f8cV4m
+ /qAQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=m3upQwbW1hueoZ34UXpOF7kpVPgqYstW8pw5gvN9wLY=;
- fh=BAgd4wGJUMeTTehyqqj62TlzEd4snBjWttdmAmgNoP0=;
- b=QE9T/qZ7pT1JN8WV28Pv2oCWEC/9L8lAqdKYyN3rVTm5B5ZU3nKPz4vQaJKKTQP/6W
- 90K81KVhHLwwoE+0oJvGGZ+6J4ZJzSJTGEV/4zP1AihMhWc1rnzZR/DwTxaYCmkcjYAc
- 1sEjL/cXtvPoYV2/F0EQi1Lz6sCW28AmvRaOJgUoYpjytHjHwkE/wb4A3CzNWlL1vNj3
- K5ffjJzMbiLzVpr1xgUJP/eI27mNvAzgeR3qJggl+diUXMvFcFhTIEVd+JRB/3fJZTnW
- Woh3QnQsN8GYzcsqfn+T2zz/ehgUCJGJAp66dOJe3CSrQ7IAObudX5i470gU7mqpEQob
- jQNA==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=7jd0mymYtjQOybBbDX30IIL8kWcq2CA6im/1xXyP7FI=;
+ fh=MXS5MdkrD9JKR4kOEHYO03OAp4sZuMbTbNoh4piCW84=;
+ b=WE/o5gk5hrSchZtckoaNiw9+HnjTwlkT4d5Ka40Bvyh5Gn4BGvkM77p1/pFfa5YRH0
+ /M61R7lm1ET60D7soWxelrasi0nrGZFUcKE+q2DX6jubN9PprlCE6H6+swmlXd+Jp8kj
+ b8xEw8RzhtwH8gHflqstF0BMJgszfWm7j3/Bxcf5keFhbbQRiK0xesB0uy94ChG1DNzP
+ GpbIbid+J+sMEsRAGyD3cw069BEiqdzEJZvfpfKFlA+6wBGwbuDSFSDUOmwf/P6z0bxT
+ NEg/B/EDXScuG44f+ZOfaBhDkojwq7MmdRFhHyXAjTENdk39xMrclpK5USvlvocF4KDN
+ RYzQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785785135; x=1786389935;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=m3upQwbW1hueoZ34UXpOF7kpVPgqYstW8pw5gvN9wLY=;
- b=krhjopy9PFRs78zjVyPx3WljkwwinT+yNIsRLtyKGTFvihZMci4GDQd8yqCJG9JCys
- +p+ZjSWXb7PeUqiezHV2WRUyUO3ccRlu2HnXrCKMpNcg7gOdM5mBmIeth7mCjBZOn6XK
- bcQqwDIDmqAGk9uTa+Eyh1k1fMajFpHApKupbSmBu3UaqXKHSxV8I/X1URQqqGuqPHW/
- BUnnc89N7Sn0OQHFttB3J89xy6OY98E+kEHG4R642Bl4rXKPn4cFugbviNlh2nhpG11N
- d9/mWFZTD4wl5yNN40G1LylDcie54XU+SvMXPPj/POFtUMtudTcktIlOOW8miMBRzsAu
- PqAw==
+ d=1e100.net; s=20251104; t=1785785149; x=1786389949;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=7jd0mymYtjQOybBbDX30IIL8kWcq2CA6im/1xXyP7FI=;
+ b=F6zYyOJNyemqqNzyNLFXTAM/nfhzQyq7YXf47O9JIAtC+VIjw7gje6FD8Da9hMtnxS
+ KO1vTdZf+R8/NY22GhYNBeSIQixXHK6bDA66JG38GhRjef4lMtT/ypyDLZ0E+NztwLTr
+ /IboXIGgGUOux1BdyR0HjEQdFwWxfbL35/Or8PxSefS4Ib+98b2yoZ3/XBqyTbX4+wAn
+ k3M4JVe+rmLu4kOBEv/8M9+f3LOKUEtU/+o3NJfYK5Qoz3qmsgGtHKKva3MTUnYABUpA
+ twQTh//ey3hHHHUGmfMXklasLoFg1UXH9fvqV1lrmHL6HdklnOraT0+O9ngrRNoEOxOi
+ ArYA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrKAdAm8Roi6Nv5bwg/HvcPhkTAXOqEFEU+IoMRq9HTt6cObdmPTu6AJ2zRkPWeiwMDE3HmOrM=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx10Uj59RilWxnO5VbmUPNVneYuVptyGF2EVFGf4QpwNQlxhkh9
- yEmgcOGmuHGGVNxNqRyo8JInJ4qdwXE4BobE2QK0i24ppGxv87nA4tRyJultmnwK5qmQp8NxHlY
- fMiEeyftKsTJo+PWAQHkH5XMkcm1NjhscWQqz1ySd
-X-Gm-Gg: AR+sD134JsDLPkrLq2byHp3SUGt0Pp/Mrg7ToHBnw53Gj3f8Y5GNYx64fYWgIOVY/gC
- sqCS238lGNSeVEJM2oiBp3t59cXbrI6ofT2B4zl6IqN83vKLgWciky8eMVyM9r7kDbJxSoX2hIH
- +yWEDAC6ABXNTEvE7ttDUXB58eLOfoSnd/mw//GtPuFWsLTa9R/kGvTC5cyLK/gU3aEoHIIh2ct
- a77TYf4ME+UCHjq51JEtKXdLlpMS5EkkkwAwjlpN8hyAVxVxlPf02JqWKTilw23CH9LlWbSG+Dr
- BBPkV00i0kb856YawU31nNhPWcmo31BSz2jdcq0S4qOajHp+vZcHYQ==
-X-Received: by 2002:a05:6402:5383:b0:6a1:1742:ac22 with SMTP id
- 4fb4d7f45d1cf-6a122e38796mr859023a12.2.1785785135216; Mon, 03 Aug 2026
- 12:25:35 -0700 (PDT)
+ AHgh+Roznw7ALoFj8gjtcOO27CBX6W9gtMvu64tpLb35ixxke2+9/qrFeGmP96phr2B0/TkvCFjugQ0=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YziHI7sHh+VyxFSl3w9p5CtU4whMFfQlvi/3o5V30whOPd/luFE
+ mBYCwFE+ZCZ6uCvU5MZ/6Qkj61OaffzOQZfUaPIvRlbi/ILK0KEvGht0bZSJ7PzhtY2B/2C/qpJ
+ T9jpZHAc9IJBsbobzSjtfe47enYGYCiJMRJMUlwto
+X-Gm-Gg: AR+sD10IcSZGOSEV7460Dlc3L2Ry5/MJ8pjJWr6rUMWJh4aAO9wNvYrIevxNtHGjg1U
+ WEagAKG1j4IwQMFk++geZcBqpuWV1BSFe19P970CoLId+43qeEnmzKuo2nive1zxWMRGLE80PgI
+ COmpgDZPwy4lHt+LhAgJ0oCAXJdtqZDNyZOMd1r5W7kQgkD97tKCgRCI6uzMYu/GO/Xq4vG68un
+ 3iGhdrhdnXAl6W7fkORW+IVltVveQ0o62dRtQQy7uef5nEKFGvPgacGwFd74vrJ9wXQygRaBvGo
+ KSFS7F9mSdJSFw2UoeLRgmUARpWQ/am4U5vFvVt//h88RcYrWzlAgQ==
+X-Received: by 2002:a05:6402:2b8c:b0:697:decc:7f9a with SMTP id
+ 4fb4d7f45d1cf-6a0a7c60eb2mr8480637a12.9.1785785148856; Mon, 03 Aug 2026
+ 12:25:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260730-qemu-x86-pflash-v1-0-fb403348e29b@elliotjb.com>
- <20260730-qemu-x86-pflash-v1-1-fb403348e29b@elliotjb.com>
-In-Reply-To: <20260730-qemu-x86-pflash-v1-1-fb403348e29b@elliotjb.com>
+ <20260730-qemu-x86-pflash-v1-2-fb403348e29b@elliotjb.com>
+In-Reply-To: <20260730-qemu-x86-pflash-v1-2-fb403348e29b@elliotjb.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 3 Aug 2026 13:25:21 -0600
-X-Gm-Features: AUfX_mxbEAgrTSVhX8-JVrK0wYgq-xgFsx49lmWzGLgJuXV9b3HcLembA4qwh40
-Message-ID: <CAFLszThAUP-wJb_J5aX=jA-Wr_HawkUQvaAa1GVwSt+150FbNg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] x86: qemu: Describe pflash
+Date: Mon, 3 Aug 2026 13:25:32 -0600
+X-Gm-Features: AUfX_mw2Sjt4m6kPsDcPjn5OKThwpkPJHb9ul7Ikf9c4bAabBaZDYaDH8BzzzCs
+Message-ID: <CAFLszTjo5j7w+qzrruYZMXELu_3AP_Gt3wbneDiFP5-imPgNCw@mail.gmail.com>
+Subject: Re: [PATCH 2/3] qemu-x86: Wire support for applying capsule updates
+ to pflash
 To: elliotjb@elliotjb.com
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785785135; x=1786389935;
+ d=chromium.org; s=google; t=1785785149; x=1786389949;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=m3upQwbW1hueoZ34UXpOF7kpVPgqYstW8pw5gvN9wLY=;
- b=TIXQ20jp23TdcFrCScAIkKCRS2CjvagEcw0ENBQiF5mlhdkjlvdj0ejbDFKldBcx6y
- 7+r4qcgRTBFdpPBRStLKgbyHCyK7YNeHKwTGIM1ljDJRuc49Dp9TcnRtGFXfDqzki3VD
- zGGQ0JTL5LAjheAMbFnf2BOxbk6NW6CiDTiRI=
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=7jd0mymYtjQOybBbDX30IIL8kWcq2CA6im/1xXyP7FI=;
+ b=LDbik9oGgLReFHGFpVhbjvI/c1RSEDGwvZHHfc/hVVQL78ld+GShSkRbZUtgL6UrGv
+ sxpWjVSjQuMRASfXOelkXJ01ry7LWlrT0TI6EDf8FSlSUW35QTcVsc6Plczr1UrkaBdo
+ MOCvqq2wzHttmup8mBL0NUycDqTMOP4+wgyHc=
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=TIXQ20jp
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=LDbik9oG
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,56 +148,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Elliot,
 
 On 2026-07-30T19:37:45, Elliot Berman <elliotjb@elliotjb.com> wrote:
-> x86: qemu: Describe pflash
+> qemu-x86: Wire support for applying capsule updates to pflash
+
+The other two patches use the 'x86: qemu:' / 'x86: emulation:' prefix
+=E2=80=94 please make this one consistent (e.g., 'x86: qemu: Wire support f=
+or
+capsule updates to pflash').
+
 >
-> QEMU pflash is mapped just below 4GiB. Describe it as a cfi-flash
-> node so the MTD subsystem can probe it. When a flash device is not
-> exposed to the guest by QEMU, the address is still backed by ROM, so
-> we'll just see no flash found rather than faulting.
+> Following the flow used for qemu-arm64, probe the pflash MTD device
+> and set dfu_alt_info/mtdparts for qemu-x86 and qemu-x86_64 so EFI
+> capsule updates can target the u-boot pflash partition.
 >
 > Signed-off-by: Elliot Berman <elliotjb@elliotjb.com>
 >
-> arch/x86/dts/pflash.dtsi         | 14 ++++++++++++++
->  arch/x86/dts/qemu-x86_i440fx.dts |  1 +
->  arch/x86/dts/qemu-x86_q35.dts    |  1 +
->  3 files changed, 16 insertions(+)
+> board/emulation/common/Kconfig         |  2 ++
+>  board/emulation/common/qemu_dfu.c      |  6 ++++--
+>  board/emulation/common/qemu_mtdparts.c |  6 ++++--
+>  board/emulation/qemu-x86/Kconfig       |  3 +++
+>  board/emulation/qemu-x86/Makefile      |  3 +++
+>  board/emulation/qemu-x86/qemu-x86.c    | 38 ++++++++++++++++++++++++++++=
+++++++
+>  6 files changed, 54 insertions(+), 4 deletions(-)
 
-> diff --git a/arch/x86/dts/pflash.dtsi b/arch/x86/dts/pflash.dtsi
-> new file mode 100644
-> index 00000000000..ce69bcc6865
-> --- /dev/null
-> +++ b/arch/x86/dts/pflash.dtsi
-> @@ -0,0 +1,14 @@
+> diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/=
+Kconfig
+> @@ -24,5 +24,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+>       imply VIRTIO_NET
+>       imply VIRTIO_BLK
+>       imply CMD_SMBIOS
+> +     imply SET_DFU_ALT_INFO
+> +     imply SYS_MTDPARTS_RUNTIME
+
+These are only useful when EFI capsule updates are wanted. qemu-arm
+gates them by putting them in a separate 'if TARGET_QEMU_ARM_64BIT &&
+!TFABOOT' block that also sources common/Kconfig - please follow the
+same pattern here.
+
+> diff --git a/board/emulation/qemu-x86/Makefile b/board/emulation/qemu-x86=
+/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +obj-y        +=3D qemu-x86.o
+
+The whole body of qemu-x86.c is wrapped in #if
+IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT). Please gate the object
+here instead and drop the outer #if:
+
+    obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) +=3D qemu-x86.o
+
+> diff --git a/board/emulation/qemu-x86/qemu-x86.c b/board/emulation/qemu-x=
+86/qemu-x86.c
+> @@ -0,0 +1,38 @@
 > +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * QEMU pflash (CFI NOR) mapped just below 4GiB. QEMU aligns the pflash so
-> + * that it ends at the top of the 32-bit address space.
-> + * https://gitlab.com/qemu-project/qemu/-/blob/e1705a25aff35635c360bbaba4c2731d019a422a/hw/i386/pc_sysfw.c#L128
-> + */
+> +
+> +#include <config.h>
+> +#include <efi.h>
+> +#include <efi_loader.h>
 
-The link pins a QEMU commit hash which might go away. Please point at
-a stable ref (a release tag, or just hw/i386/pc_sysfw.c on -master).
+ARRAY_SIZE() is used below, so please add #include <linux/kernel.h>
+explicitly (matches qemu-arm.c) rather than relying on transitive
+includes.
 
-> diff --git a/arch/x86/dts/pflash.dtsi b/arch/x86/dts/pflash.dtsi
-> @@ -0,0 +1,14 @@
-> +/ {
-> +     pflash {
-> +             compatible = "cfi-flash";
-> +             reg = <(0x100000000 - CONFIG_ROM_SIZE) CONFIG_ROM_SIZE>;
-> +             bank-width = <1>;
-> +     };
-> +};
+> diff --git a/board/emulation/qemu-x86/qemu-x86.c b/board/emulation/qemu-x=
+86/qemu-x86.c
+> @@ -0,0 +1,38 @@
+> +#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+> +struct efi_fw_image fw_images[] =3D {
+> +#if defined(CONFIG_TARGET_QEMU_X86)
+> +     {
+> +             .image_type_id =3D QEMU_X86_UBOOT_IMAGE_GUID,
+> +             .fw_name =3D u"Qemu-X86-UBOOT",
+> +             .image_index =3D 1,
+> +     },
+> +#elif defined(CONFIG_TARGET_QEMU_X86_64)
 
-The convention would be to name it flash@<addr> - but in this case the
-address varies, so what you have seems fine.
-
-This ties the pflash window to CONFIG_ROM_SIZE, but the two aren't the
-same thing - CONFIG_ROM_SIZE is what U-Boot builds itself for, whereas
-QEMU's pflash1 window size is the size of the file passed to -pflash.
-If a user runs QEMU with a pflash image whose size differs from
-CONFIG_ROM_SIZE the reg will be wrong. Please call this out in the
-comment, or better, drive it from a dedicated symbol whose name
-reflects the pflash size.
+Please use IS_ENABLED() consistently rather than mixing it with #if
+defined(). qemu-arm.c does the same thing, but new code should prefer
+the modern form.
 
 Regards,
 Simon
