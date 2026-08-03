@@ -4,130 +4,190 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB374C55184
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 09:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F25C55175
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 09:31:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 50E5A80C69;
-	Mon,  3 Aug 2026 09:26:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1349680CC8;
+	Mon,  3 Aug 2026 09:31:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OhVJeIui799v; Mon,  3 Aug 2026 09:26:40 +0000 (UTC)
+ id abC-sm_8YWg3; Mon,  3 Aug 2026 09:31:00 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6697080C7C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A475B80C69
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785749200;
-	bh=WoUItW71Yg8u9kKuMgeJ/jUPqvG41aUEcfSFgQPA5QE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785749460;
+	bh=1XGsASI5u2+eFKOq1vQGD3PZtx5Rhc7mjg38eaRjTt0=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QrM5aqyP9RVuK2rmUcjCmrozt7Ri9e+TfrA+TnZMpMXAXD8Sxf7F4UOVveo/hMSFD
-	 38u5JlLAoNO/YNDEtU7H81HA9oS4TnCwWUmAc/bPR5FFrl2STqoA8crA/p2vI1Ip6p
-	 Qz+jiGjkU1ROV0wkoqBd2aXku7T74tw8Ch2e7iviXhac+Ii/VqjyJ8I4CVAWsEigoF
-	 8WZir3fyJuKogczYDNEb3A+vk9DhUYlh3UDTlNQk5oAP7t55H/CobxqqZ2ARCZpSBB
-	 ARMM/Oic2u032uCS1xWYzJBHfv90Ru/VNeLIvJZA3mM0PctnxiJyk1vH3RgQhOaYeb
-	 HPNZ6o1w+VJzg==
+	 From:Reply-To:From;
+	b=b1LAkH0ws5jHlFQ6XRcoe+P3YOFpBWnDVNoxMxftnvRBTmapyPCOT9moLUUblioL2
+	 PputZBQfd3etm/wqOyE+kT7FMGYsjAH0ZoOQ6Mtunb1vQ7Y+2CXD+jP8/C9CL6SG5i
+	 a1FMU3NGPAvA62/N8awFVh6m7eGCRKI6pGrAYKIuCPjIhkCEoiNEyVpRMwjxRAjr7A
+	 bQY8N6O2BaKRHiEOk/y2buX/Yrf3VnvqZyGfNHl4LMf8essgeEnqBPJWKGUJpqWtbZ
+	 ilkxqWsPYAZ3pS431nGYp2yj97SKSP4J7ibcfbb1rvEPHw04aJpN7GWKDhcFs/vjOv
+	 b8IkvyaKEX3fQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6697080C7C;
-	Mon,  3 Aug 2026 09:26:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A475B80C69;
+	Mon,  3 Aug 2026 09:31:00 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 40A99350
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:26:38 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 26EE836E
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:30:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 26B3B40077
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:26:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0D65940077
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:30:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id meXbPogGQwGN for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 09:26:37 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E64F240024
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E64F240024
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E64F240024
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:26:36 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4953e04ef16so19232445e9.2
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 02:26:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785749194; x=1786353994;
- h=in-reply-to:references:subject:cc:to:from:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=WoUItW71Yg8u9kKuMgeJ/jUPqvG41aUEcfSFgQPA5QE=;
- b=Jw/MYZNDhJXZO77yk0mjzmunI2z0koB2YDNvxk4xjkmbMbcW0j/EHNWNL5dytAY7qs
- aJFwhTkY5YYw7FiqFSBa7ljjwo+96YjX7agEAVEoLDBCodLjHszuCTPhCtysrQfI0D1X
- yTGxicBxYV6RBoHW6P6hJFRbAOqqxneU7XL3U9PL9Yk3iU5VKmn5UvBg5D9m8s3R9NHM
- +hqBv5nr9xfCZrfMO1SQsBHC+Ugy6P+4TMa+QKzJEGbTh9JeXC5wKoyALzSKCqv06/4Q
- WzmI13s2vLV6l+w5Jwn1Q1pCmwhbYnQCl3NRU/1Loh1tDC/xk2VjeZzgBKVi8qQnk1pr
- 1oUw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrZxaq8ZEcRlc4TaCUPbDO873IADZnAtfT3H8GC1BRT8zWOK678WFsU+ZHuzwXQoWGQ9XdvR+Q=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yxooy+5P+Ofz4JkV/1XFh4WthMXug5NeeqyeQBKdZh3MfqJ1D9U
- gBBw7lqY6IdMilMIdV7BcPGEB2XNtYDjbMpleDtpCH7kUKkOtl9RsqLOeIybCGIr3CM=
-X-Gm-Gg: AR+sD12Gyt9wLDdtKwWZt4aobBt565PuSIhdPs5HljSsKtbPT3NrtfxLBa9xHu++UwB
- fQvQJ+OStVrhzloi4+7WOlS3AdRVmXmQWnP768d2rjJoXp1efs762PA8fuqGVRZhj8yS0UDPn8z
- qOenMhgRJI5L9oLhO1KklDUHnA32mmuDjX+x3nn38IwV/MgLjixe9VpbHxtdzA8TfOjnKK7Bc4b
- ygsSA80UyMsyJoZL+rq821PQX2AfBQrwTb8bQtGeiA7YPuGDeJPM1IwBU8vIXGS7k9HE9nJjGAP
- HKW7cEmFhjJMmdqcEUg3ut7kx4KPq+tr6TIXJ8QZSPv9Gb3UvA1BLGf0HvXxh4A6aioSh9p5qKi
- JWTB6oWmrNP/PndSNGffX9ToCcd5Hl7wZpYDrD6VVM8cmeDDWcdZYQAVbQQa7aeMxXAnvoevDOj
- DN2+Y3Yz92vhBZWtCna70BxAeWTK3PLts3vn77uwl+uIoTflTxqIw/zoh1KcV2sdmf2TPQ5zNQz
- PlAPnwg46XMCRjf6vb3/69V3u3T7pXdUVNfi8mNHw0c/R/zHEwBKqmBERqtvESY0GK2B7/guOZB
- F0oPfv/35sDpf7l8zm5dAmRzBl+66lfdpVfZIzkzqB+W3cwvAKPRLaD1YNHOUqn9xufZZKvk0Mk
- of2Nz2M9MQN6u6M3/KhFGoRsMU5q9sW04/muHq/gTTF6ziXKDSrKL0rK8tZaryhLuj5yGs+26Ek
- 3SL44AfZiT0IewoHkKoiyhVL+1aZgOpeDMYLEwfT4tbG88ixOvAGcnAJwu3viJWBBUf4Exvuisc
- iRH7ZlS3TyeiiqkfvvM8jhgMeft9MX1Wjopcy32Hv5oKydysxaAbGCWQs5OImPelYD64g==
-X-Received: by 2002:a05:600c:19cf:b0:495:7a04:b006 with SMTP id
- 5b1f17b1804b1-4980c66b572mr184957325e9.8.1785749194618; 
- Mon, 03 Aug 2026 02:26:34 -0700 (PDT)
-Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49807b916e1sm185203185e9.9.2026.08.03.02.26.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 02:26:33 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 03 Aug 2026 12:26:32 +0300
-Message-Id: <DKF799VHIW2Y.SN931OAT6JCC@linaro.org>
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Balaji Selvanathan" <balaji.selvanathan@oss.qualcomm.com>,
- <u-boot@lists.u-boot-project.org>
-Cc: "Tom Rini" <trini@konsulko.com>, "Heinrich Schuchardt"
- <xypron.glpk@gmx.de>, "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
- "Kory Maincent" <kory.maincent@bootlin.com>, "Sughosh Ganu"
- <sughosh.ganu@arm.com>, "Wojciech Dubowik" <Wojciech.Dubowik@mt.com>,
- "Simon Glass" <sjg@chromium.org>, "Peng Fan" <peng.fan@nxp.com>
-Subject: Re: [PATCH 1/8] tools: mkeficapsule: Add support for parsing
- capsule params from config file
-X-Mailer: aerc 0.21.0
-References: <20260727-mkeficapsule-v1-0-5b162866b092@oss.qualcomm.com>
- <20260727-mkeficapsule-v1-1-5b162866b092@oss.qualcomm.com>
-In-Reply-To: <20260727-mkeficapsule-v1-1-5b162866b092@oss.qualcomm.com>
+ id hOC385-QmaK3 for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 09:30:58 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=tien.fong.chee@altera.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DC69040024
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DC69040024
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DC69040024
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:30:55 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 617C3846E2; Mon,  3 Aug 2026 11:30:53 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4161A80087
+ for <u-boot@lists.denx.de>; Mon,  3 Aug 2026 11:30:51 +0200 (CEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=F8PtTeuA8lQIpelTfDDgA7IFnJBhbTKj+ERbGP/F16wHSqepMUfSclfmWipWyJVqrG1LmGat136hd2NlGUO/cMeH0whEquNOP2R6wmPTcmxI9q7B1tPSdT2I5+yzMzPGyknvi7Ra42Jj4pmRR5vqQLFeC9MAwwHKL7pDfmWF3/QDzQmp2+PICi6fM1mz5fNoqR4GTnfiuu4XZP2SKkoNsb2JA/++c5C0ZRCu7o6y/TsHFSf5hv6znqhoe2hJ3cmDmd6GhQCSD2BIx3TOH3KNy9y3oteetVWlCiqHs9//lb0MQgnD/OEMz4ee7+Vh5NMsC59+muNxZztZ3keorJgI6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1XGsASI5u2+eFKOq1vQGD3PZtx5Rhc7mjg38eaRjTt0=;
+ b=WMkCRyPkB6283iUzzqvCDANO6GtAe6QkXLEnWZTbN3NAxk/toV7ojPYCdoNHJEYNDjTFY4k+o4HWeI87dSMuDW7e6IObPku9uW9s32EAGKC7wSKZvKgcngat3RLE4JYmCo6Pu206mT1O1l+xiHCC//2/19LE8UqmG7gkhwnKaW8e5xX7CJWAwiWaC/pWREOxo4RQvzNuXmzmElw1kdhtBwhrTL9n7/K30Gl7S6UczTdExpFV+ht/YTY7dmrLNADWUYeqEd59NZdj28rlSHuk+NNxjzelK3wEqonz0p1GBi6BNYFG4x18OZRCK/PzDGqxtRsgsXHaKicqV5xJT8/E9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+Received: from SN4PR03MB989351.namprd03.prod.outlook.com
+ (2603:10b6:806:1ec::5) by DM6PR03MB5306.namprd03.prod.outlook.com
+ (2603:10b6:5:243::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.18; Mon, 3 Aug
+ 2026 09:30:47 +0000
+Received: from SN4PR03MB989351.namprd03.prod.outlook.com
+ ([fe80::5d69:ce74:a67c:71bd]) by SN4PR03MB989351.namprd03.prod.outlook.com
+ ([fe80::5d69:ce74:a67c:71bd%4]) with mapi id 15.21.0270.016; Mon, 3 Aug 2026
+ 09:30:47 +0000
+Message-ID: <6d676a87-3618-40b3-91b5-37add5159371@altera.com>
+Date: Mon, 3 Aug 2026 17:30:40 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: socfpga_n5x_socdk: Enable watchdog0
+To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
+References: <20260507005505.3917-1-dinesh.maniyam@altera.com>
+Content-Language: en-US
+In-Reply-To: <20260507005505.3917-1-dinesh.maniyam@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI2PR06CA0002.apcprd06.prod.outlook.com
+ (2603:1096:4:186::10) To SN4PR03MB989351.namprd03.prod.outlook.com
+ (2603:10b6:806:1ec::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN4PR03MB989351:EE_|DM6PR03MB5306:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1a92c4d8-f37d-4af8-1a18-08def141e63f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|1800799024|366016|10067099003|11063799006|56012099006|22082099003|18002099003|55112099003;
+X-Microsoft-Antispam-Message-Info: Lrv8ctarxhyJrFXrwAoXDeXdYIUcwbYHKE+3RGLAmGuPZKrWILGA+bumHEqS/BWqOQujjJponO8nyp36//8f0SJTaedCnKwZQBjwy62YNaDiYiqhlnY/ctf9iECx5XDSxDaRydNqgp3moO90ImT3qmYp4e0vBtEiEG7a9L4hqQebS0lXdWl8LaLIGI+nABodMsq2oJDs1ac02no1CBSqG7aBgf1bGkOBmcufAAuRPTLh5ZEdJAA2gDfv36BAlUTMKwd3ZyrEu4O6NgbH44Hy0FtxrSUS+lh3vIBVIiGoCTW+wK5/peGQ33R9EVEWj4T+F0BmXUM3w0fyQLO1Tqsc6VDKY2TdGFJQIRWcCs8Mox/yCF+iX4xHnUJ7nNzdZPqvKqLyqVY7UusJW9FJbeKeZhxT/VSvNFhSbmU+XjfS6W8d6RxmfFx3FItQzbBhU2Dt6XKIoGajVQBnMlFL/vh10S/ppn/3XrDitdTFMkx2TJGFn5/HG68JPw6poAhMo+/dJzu8bZ392v3lbz7it6ww56FCV02/nEzssmMHbiKtrzswR/CUmbR2S+AyXhPlBJCNXoSmh3DM+Q0ZNV17L2DFDHTEhsDUTyv1Y+HVmPj4VHffbQrXbgsIxDaOhNlKDqu/XLjJtiYUMfsCHXOj4aBi1piRU9KPP9wJWZvl+EC+CiE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN4PR03MB989351.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MTBNdWkzTGlUTk1PRnVkYmdrR0JTcGVoVS9IUEFNdEtGdGRGN2xrQm8zaWYx?=
+ =?utf-8?B?eVZDTGM0SDVwVVF2dmdPSFBZWEZJN1MvSFZ2d0xKYkx0RWpBN2R0QXN6cHJD?=
+ =?utf-8?B?NmpLbjM4MkhUY0pLOERRVC9YUWpoK3dnaURLejV3Z0hXbnczT2ZkMWNDcTln?=
+ =?utf-8?B?aUFGWXlOK2hOUXF4cDhwQW11azlHSjJKSCtMNDJMUU82YXNvVzlZN3d4RUt0?=
+ =?utf-8?B?VEFmNkxmM0hsTEhYdHZQZHB4ZE5IMVl4Z3pxOFRIUC8wbC9DVXVhTUNDYWw0?=
+ =?utf-8?B?QzBZU1ZBMmdSQTVKTmwvMVBDUWQvR0U1azMrbGJwK2ZBZTJKc29LTXI4Q1Nx?=
+ =?utf-8?B?dFBxWTM5cm1oV3B6bFAxRWhTRExHaXphNm1yWEJ4RThNL0NwZ0FLRjRqZ3k2?=
+ =?utf-8?B?cnJDbTZMTUlNQlJIRHVxTUZOWndueitxT0NxaFJXQ2cyN2xZTXQyZi8wcFc1?=
+ =?utf-8?B?ZmFoNnEwd0JpSjV4amwvYXQrN25RVHdWT3kwRlV4dHpsS050QWM2c0hvY0Fs?=
+ =?utf-8?B?Y3B3NVprU28yZ2tSZ2Z3dTF3enowQjhjTTJhQ3Vrei9oUTd2UUEzazJqNDNL?=
+ =?utf-8?B?NkVvWTlRZ2NzWVJYVjNhYnNwZmxMREJMc01iSi9oWmhVenBkSFFGUmNrcnJJ?=
+ =?utf-8?B?ZFJUZ2NWUU02VzNFYlUyL1o3WEVlSWVtZ3VLa0JKUEJkTHFMSzI2L2ZxN0VI?=
+ =?utf-8?B?bUZyaGtHUnFXVzBvU0w1MXZMVnhxazBFYWVOMVBxSEsyZDVSWk43QjRjTFpj?=
+ =?utf-8?B?YjNOQ3A5cVVjckhrQ3NFdTh0NGVoOHNFMURPZWduVURzcWFzTVVzWXBHMkF6?=
+ =?utf-8?B?TjU0MFpIaFZ1QXM5c1dYay9XNU41SHh4M1R4Z29QZGxzT2RrWlRINWQvdE51?=
+ =?utf-8?B?Wm5NZGsycEpRekcxNUpQK3FqeHlHa2JzdnlZQzFHVVh1dE5qYy9BdTN3ZmR4?=
+ =?utf-8?B?c1ZtSFlvQUNWNGhqUlgyTis1cVpaOVZjQ25QZFBEekIyWmZodWxxOC9SZ3pP?=
+ =?utf-8?B?eUxQbEk2VFIzM0FmVFpGL3dHRndjTE5ZTVlUV2tSTEJwYmZraDcySUw0aHVV?=
+ =?utf-8?B?ajk5OWkxWHVmT09HcHNKb1N1dmNFYXI2VjZRQTAycUNHRkpJTnk0SkxwYk9y?=
+ =?utf-8?B?UWxCeEx0MXRZUllacmxqSytaM3QxVzl1azNTc28vdWM1YnBjaDNaTGFtZHJj?=
+ =?utf-8?B?NVFSLzcwSG81dUM5VzNkOVh4VTFLZlNZdGI4ZlN2NU13MDQ3dUZGQW4rUUFj?=
+ =?utf-8?B?bytqQUNWMkN5dkNwTVN1dU1VQWlYbHJNWkpYdXZ4MnZPNnVBQloyclBBSnlH?=
+ =?utf-8?B?TEFHT254eXFzcUsrVlRqK0t2Mkp2bXVWZExsdVJDbnYxVlA0amRnRWxWdksy?=
+ =?utf-8?B?T29rRDByejI1cXhDQmgwMURKT2FCMGJqY1dZVnFBWFA4UStUKzhaMlpudTJ3?=
+ =?utf-8?B?V05EVmZnUFRBV1A1K2tmaHdGc2lZRXBSdisvRjNoQVIyZGREZTRJWDFJZHRn?=
+ =?utf-8?B?c29vVkRsR3NpeERobVJBN2tXSGJwdjJUTUl1b29HU1FQYXFlN0Y0NU52Qk1i?=
+ =?utf-8?B?NWR1NzJyTE1qMlhYVkRnZmVpaFYybGpaa2NtRWlCVTRTSis1VllRQ3hVdTZN?=
+ =?utf-8?B?eTVRU09rcnM0dGsvMGs0ZFN2NU9aVHVudFFvOURhK0ExakdsNE8zd3cyTnJW?=
+ =?utf-8?B?dG1jejMzbElBSDJaRzNNaVRrYWJIanBFT1JUYURJRXFHeVJBclRRVzhTQTJv?=
+ =?utf-8?B?VWhndWMxS1dwMWIySlFoRGJoYy9KRzU1UzFJL0Q5WUtzaUliVXV1ZFdzVW9x?=
+ =?utf-8?B?Y2Z5dVM0RkgvRkhTbVJ2UjB6aG5tSzRGOHJJRnpVZHlmTlFOQWFCYStHU0Zk?=
+ =?utf-8?B?RVVpQ01QNVNHQTBnTjBlUkc2SFJMNFJhUFYrVFF3UW5RRzF3VGYzM2ZxcytV?=
+ =?utf-8?B?UmoxOWRBWkpjUHM1MVdlSTFHMU9CUEU5WWExUFpaZllWMkljSGhFblZ4SmQx?=
+ =?utf-8?B?bnFVQmx3R3FWK3lucjk4YVRZRFVFQm1tUUVXclNWUzNxZjlRS2NrdSs3NDRk?=
+ =?utf-8?B?RXZUNEk2SFRYTU9vVU9QNWxnNzVZM2Jhd25TNGhRSXJQenNiOWlmby9CT1g1?=
+ =?utf-8?B?SndnR256N25BbmFQZExFNldyTlJldGk1RDgzRElveE04QjdtTVVpZFNzR3pR?=
+ =?utf-8?B?Sy9KT2ZzVlZzSDlScENJMFgrZ2w0WHNGaDZVTkI5WWc4NEFLdjRHUDF6OU15?=
+ =?utf-8?B?N0ZPV2VpLzhodmc2a3EyREVNczNTc1lOeElVVUZIc1UxV3ZWUWNTWDJtS1Iz?=
+ =?utf-8?B?QU9LcGt3TGNLcWprRjhsbnVTaC95RStTS1UwUndUdjlIR3R6cS9yWTd1cDl0?=
+ =?utf-8?Q?V3KLndACQcsfehBY=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a92c4d8-f37d-4af8-1a18-08def141e63f
+X-MS-Exchange-CrossTenant-AuthSource: SN4PR03MB989351.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2026 09:30:47.4886 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qmCAGG6+Ca8GWdd5UVNJsUJFqsfaAi13WuFTUkROPZTfJANkGF/olVYI8FJafDUlv0F+4ERzrTc2mR8Dh0rSs9u9K6tAgTYW2WLd9tJrMyg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5306
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785749194; x=1786353994;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:references:subject:cc:to:from:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=WoUItW71Yg8u9kKuMgeJ/jUPqvG41aUEcfSFgQPA5QE=;
- b=gY0n6k9vt9PbvjLUYXgVyeOilx3aZ1C4cPtzLdpLl6enn81TpKYllF18LZ6pTh4DJi
- xbqRj18gAG6ubbhMSLuEunaVSTD1L21OuVGaTDqsBb0FQdbYzDki1YdTckAkhdqGv0O+
- rxejUFizhmNinMRS1mWC9IbXqpCu9X7/hdGMoO9PJUU0y4MvwdI+ILSLruodxeg/ftEF
- olGR7SYHam+GnRYrT1bwUADcw8uWpz3een8jhixLmInaKpV1XbUB+nHEOd8kohQSdD0H
- yZpietgy36U6TrleZxKt0y6mt/7J8NxZS6L+u6JZYmrk79/ble0SfjOVDB0Oj0Cz/aTT
- SOSw==
+ d=altera.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1XGsASI5u2+eFKOq1vQGD3PZtx5Rhc7mjg38eaRjTt0=;
+ b=D6snmysgs4n3l29sxnmW8rKpyDKqYx09py3Si9blD9MmrYr15sHRcLOw6HrS6F/7tn5hDL0bUZ5w1L6AL7JAgSOBgPYJ1mx/WfFNRgGBiv41IfWAgZRHPFZOeFJzYi++S+SoD64VtRb2MFKzBEJCA5OSUC4VmViCc5s6UxVPinmdb3lDnLckxhjscP3kgCPCpyGT675CYhxuPx5OMoNGEWctWmhlE2aQf20c6H1hiAp/E1QgTfaOCrclKhG4e9u73U3eeb4WdcvrAM1dHxbAnRCEhIW8CWPxzWutsszZgFf3Ce2rmxtNaLPd9VVYkF7gTfyakli7m2m0pXY6UJi9RA==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
+ dmarc=pass (p=reject dis=none)
+ header.from=altera.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ spf=fail smtp.mailfrom=altera.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=gY0n6k9v
+ unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
+ header.s=selector2 header.b=D6snmysg
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none)
+ header.from=altera.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=tien.fong.chee@altera.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=altera.com header.i=@altera.com header.b="D6snmysg"; 
+ dkim-atps=neutral
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,65 +199,40 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: "Chee, Tien Fong via U-Boot" <u-boot@lists.u-boot-project.org>
+Reply-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon Jul 27, 2026 at 6:55 PM EEST, Balaji Selvanathan wrote:
-> From: Sughosh Ganu <sughosh.ganu@arm.com>
+Hi Dinesh,
+
+On Thu, 07 May 2026 08:55:05 +0800, dinesh.maniyam@altera.com wrote:
+> Enable watchdog0 so the DesignWare watchdog can be probed and serviced
+> by U-Boot. Matches the existing Stratix 10 SoCDK enablement.
 >
-> Add support for specifying the parameters needed for capsule
-> generation through a config file, instead of passing them through
-> command-line. Parameters for more than a single capsule file can be
-> specified, resulting in generation of multiple capsules through a
-> single invocation of the command.
->
-> The config file can be passed to the mkeficapsule tool in such manner
->
->  $ ./tools/mkeficapsule -f <path/to/the/config/file>
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@arm.com>
+> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > ---
->  tools/Kconfig              |  15 ++
->  tools/Makefile             |  10 +-
->  tools/eficapsule.h         | 101 +++++++++++++
->  tools/mkeficapsule.c       |  90 ++++++++----
->  tools/mkeficapsule_parse.c | 353 +++++++++++++++++++++++++++++++++++++++=
-++++++
->  5 files changed, 533 insertions(+), 36 deletions(-)
+>  arch/arm/dts/socfpga_n5x_socdk.dts | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/tools/Kconfig b/tools/Kconfig
-> index ef33295b8ec..8e09427fbac 100644
-> --- a/tools/Kconfig
-> +++ b/tools/Kconfig
-> @@ -114,6 +114,21 @@ config TOOLS_MKEFICAPSULE
->  	  optionally sign that file. If you want to enable UEFI capsule
->  	  update feature on your target, you certainly need this.
->
-> +config EFI_CAPSULE_CFG_FILE
-> +	string "Path to the EFI Capsule Config File"
-> +	help
-> +	  Path to the EFI capsule config file which provides the
-> +	  parameters needed to build capsule(s). Parameters can be
-> +	  provided for multiple payloads resulting in corresponding
-> +	  capsule images being generated.
+> diff --git a/arch/arm/dts/socfpga_n5x_socdk.dts b/arch/arm/dts/socfpga_n5x_socdk.dts
+> index 915b8f6380e..f98e87bb87e 100644
+> --- a/arch/arm/dts/socfpga_n5x_socdk.dts
+> +++ b/arch/arm/dts/socfpga_n5x_socdk.dts
+> @@ -120,3 +120,7 @@
+>  &usb1 {
+>  	status = "okay";
+>  };
 > +
-> +config EFI_USE_CAPSULE_CFG_FILE
-> +	bool "Use the config file for generating capsules"
-> +	help
-> +	  Boolean option used to specify if the EFI capsules are to
-> +	  be generated through parameters specified via the config
-> +	  file or through command line.
+> +&watchdog0 {
+> +	status = "okay";
+> +};
+> -- 
+> 2.43.7
 
-There were valid comments in [0] which don't seem to be addressed.
-Also these options seem unused in this patch. If they are needed they belon=
-g to the patch that uses
-them
+Looks good to me. Thanks.
 
-[...]
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-
-[0] https://lore.kernel.org/u-boot/d50d88c9-445e-45cb-936b-0c1fac2cf8ad@gmx=
-.de/
-
-Thanks
-/Ilias
+Best regards,
+Tien Fong
