@@ -1,155 +1,100 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1CDC55179
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 13:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F1DC55182
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 14:12:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2CBAB4068E;
-	Mon,  3 Aug 2026 13:40:20 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qB6LG_AtaC49; Mon,  3 Aug 2026 13:40:18 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A910A4066D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785764418;
-	bh=YYG8H5pXZUrwHasKah1E904wVnVm82puBqBoj7XTtmg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=xkwDRThBayIb78r/iPgBAOkdd32O65ynMG+tUpyQRNRZDXHaNQUhE0wbioPw4wVCZ
-	 W+5UyuFDbf/kjnAmrad5bJ/Ol/fiwso/BTr8238bfY+8fJR3fVrf6fbJPF1zx2/vzL
-	 WyWZj2qImc0AlgHh84WP4MlN4xEEn1FSmyqNw5tAXs57EiahJV7I/yNzqVkQH/w9l6
-	 iSJbVUJNHACf9xKXL37KZ0V74Ie9bgrOhp7GlixKgWLnGmOH4JDp/my1WyHrmpdJVE
-	 tA/1ANN2Cwn5JjJnolG4gItvtsCzSGSHO6mu2H1WWoQRh3zUq6i1d/fYP+WwmNsiVE
-	 UbSrZLKjGR8Xw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A910A4066D;
-	Mon,  3 Aug 2026 13:40:18 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 84BBA218
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:40:16 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6AD7460768
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:40:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AAB6A60711;
+	Mon,  3 Aug 2026 14:12:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1iUhTCfGfVR7 for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 13:40:15 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 7DC436075D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7DC436075D
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7DC436075D
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:40:15 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6a051b73866so5449561a12.0
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 06:40:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785764413; cv=none;
- d=google.com; s=arc-20260327;
- b=XNevCdhpCv38jO9AYll1LUc8regYVxeHWYAef9eaoyOJE5SJrGAFyxybhEJJ3RO5zP
- +N1D1qYsY70Lh+EpBbl6hlz/4J1JaFMiu5btaTC713TfmDSU59rKje6PhLxgnXbfJFKp
- IMNov2OaxP2KoWD7JlecIOZZyuhHjWtmWGTwzWckXZqCnE5Va0/h8qIPNDzZKSC2TyE8
- 8nXDQDIBi1DOmb6BYYggMMzlO2TqUWp7TEujgplJu4V283xT4lI2aZbfzrJj8TC7JGHH
- 8WKMcT8uVg1DupGmthXfRCqkBSqYp4eanaBba/jOFctayaZZ9f27GQeaR9HZ/HDvv3lB
- 28jQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=YYG8H5pXZUrwHasKah1E904wVnVm82puBqBoj7XTtmg=;
- fh=1NERUeDO1krte69lYLk/9jgCoDN2AoB456fJLkKV3N4=;
- b=hDddOZvTc/zbIuPZeCsEOPJkpikKS15XH12ya3npbCqBCchXB2bbwalVEXLYOp58zV
- rNGmrnL88Nrgtgc0TIsT+RQ3z5Ztipg0ExlDRe0KPO2CioPLb1xdsv9C1RGUYLfmzvCd
- eoMdAOmWreeF+Gz1qkssl5LbD/jzFpKAZ0ZEuXqZ3/5LTy1OSu2YLBIUud3ZBVcpBQYq
- 9r46lJiw5vB3L2/p4864RUbBKyyylYC8MOkYn0VlRbu4TCj91yqyo+iAb8p8LB7BMQ4i
- dUFQ6R3XZ9uPcHpZAWQpQnn7fMfgMeZSKuTfYbE/dpJQIYKuCo3M3HysFZ2GUdHLSgqS
- 33Zg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785764413; x=1786369213;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YYG8H5pXZUrwHasKah1E904wVnVm82puBqBoj7XTtmg=;
- b=iSaWVQlxhQU6d/uS28H+BSx1ccQS4dSgG76W4XTru8aM8vNxWU1nHLJ+qhvtkA4/QL
- 0KPqXTiQcETTJbo8PeUuHhhcZO/vegUGEji2mssFR9oIl8hKdqaB/KG6G0chLIeWMJoo
- i4lGvigcK5kLR/qcipu9RZOcr24+JJtdXoA3gU5F0hIQrrG6+g8LQMF/WzQSbDA/5894
- GEZ6FcgmOFe4Zt0P4baTVQgo77LU4IglKkQpqwpgzbV8Ov45RHrsOuPRPusfvTYbde2i
- vmp04B8eHqqqtZ+HWJdP6p3jheyZUmG9zCIpX92pUzZvKWkJfA/hS+D91fLU8XwfkIwH
- /YFQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpdfQPC35hxDl0BYN5cH8DQWwr92Vp8EW1GbXWIrgDPlvE25//kZIThRCY/5jiXfnCt4lKuagU=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxxUAWMJewGepK9YK7lvC5jvKrn+R/XtCX+nHPRqPY2J6eFY3qC
- uZCmvet63u1oJrBbbpcYjyPC7nNNG1kQQtl0kUIO2rHfKxKGcftAQHumb3uVisFFmIWN5b5DJP0
- ZxW7Kdk5qfw6hMYwB1YkJ8p1jZIC4SE/e8k1s6QOa9g==
-X-Gm-Gg: AR+sD111zThsTmLJPkgsOT3lkJLMU3SU7ma2oYufRjBo0ZosOjUJGmMTNlYD6XpTF5w
- 7sO0WgU4SZZlB31l+msUVxpRIOzdijlC40QwJssGNJen6jBpRhCwIUAuY2QFlAEnid6Eh3/8UhB
- euHr9LY9u/tFwt/jnugIlcomSVy4RhR1SP/if5bHMnI3lNjV2yHkQC9gJd+peu04ByThhtBzuv1
- gzzMgpzNOxHNVdTLhSszDVClouiZvFFtlB3+mPvZ9l1WXs8PX2PVb82x5/k/GWOOx10StjcQewi
- 6LuYVl6UaT1cTKBeJp7htbVjCeHdAGf1d9JMRTRXca2mgX1+c8Iow7OyASyHbyKjN4NQTprfXTp
- p
-X-Received: by 2002:a17:906:6296:b0:c15:b67b:523e with SMTP id
- a640c23a62f3a-c1fe7ef886dmr875764366b.19.1785764413208; Mon, 03 Aug 2026
- 06:40:13 -0700 (PDT)
+ id sot9AoSVMjLz; Mon,  3 Aug 2026 14:12:41 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BF7086072F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785766361;
+	bh=W4lZ/Vy+s28dfPnXxDQ/OCXNEglzu5aD7DP1U7cMzIQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=u5/kW8uC4ps6Ecg7tiXNbbr3hytVLnYN+UldcyIAERLKjXd7kOm7fxrVnQReB/v//
+	 EcBwF+CkOc8qibJ+TqgcsZY3DaYMMcFyIRp+76aGN7pFfpUEp4iTwTJTHT07IEqq/B
+	 JFoBAA901XjKBUtnLrma9ZZgfC+3Q/Ipamg4PHAbwnJZy8PsgYxctlcEjzEHrfgy8i
+	 RpmJ85xx8fHnWtC1zeq+S0j/LaB0lgHSzU8z1+BlgxB4iuQnzyaWdlYxsfyPHVia9F
+	 IQcHXPPTBJBnUhrcExorc81dh0DowVBqIXnjWLLQXMiHZ8AvjFMMzMhzT7SpDLAgBK
+	 M4R5GYJcCIZaA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id BF7086072F;
+	Mon,  3 Aug 2026 14:12:41 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B6E46218
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 14:12:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9C77B400C1
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 14:12:40 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Px-LJHcvgQZ7 for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 14:12:39 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=193.142.43.55;
+ helo=galois.linutronix.de; envelope-from=gregor.herburger@linutronix.de;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5CAE140042
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5CAE140042
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5CAE140042
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 14:12:39 +0000 (UTC)
+Date: Mon, 3 Aug 2026 16:12:33 +0200
+From: Gregor Herburger <gregor.herburger@linutronix.de>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Matthias Brugger <mbrugger@suse.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Filip =?utf-8?Q?Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v2] rpi: copy /chosen/bootloader partition and set
+ boot_partition
+Message-ID: <6mekppoipr35wecczz26vktsovqzwgwvsxuo6u7ltalpl4yyfl@vsmbtmecofkp>
+References: <20260803-tryboot2-v2-1-30c071f2ee15@linutronix.de>
+ <CALeDE9PhmuHkiR5k0H=7mdCwq=n=1gS80vuQQqb8GdpKMYM3nA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
- <CAC_iWjJniUgONw47_WXAZZRsvrT_y6SJTyMLMOa+Hn9zy5BeFw@mail.gmail.com>
- <CALeDE9MOOjXRf4MAt=N-BmDdEQ522nQabEB7uoAcmf6t9fADQw@mail.gmail.com>
- <CAC_iWj+SD6axn-auG+rsE=c=0aaLDHaVv7jmS+1t4T_Y4BZ5zw@mail.gmail.com>
- <CAKTNdwHiNVy5rEYi9erzJ2E5EskZ8PsbCfvhxG-Y9c93j1hdSw@mail.gmail.com>
- <CAC_iWj+SbvzKB2ogB0AtGRzmG26HNZAMU0dQ0LVVLpuJhkLTaw@mail.gmail.com>
- <CAC_iWjJvdsuh+bn+2QVVhnAgPEGg+4d5YbeybMDqA490G-b=fg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJvdsuh+bn+2QVVhnAgPEGg+4d5YbeybMDqA490G-b=fg@mail.gmail.com>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 3 Aug 2026 17:40:02 +0400
-X-Gm-Features: AUfX_mzJMIOIDJBA9FOx7yozI5IEFQLgaA71mey00ylntWz689J7goWhoVZy9_0
-Message-ID: <CAKTNdwGwkUdbn=nvti0y6kGk1Gbat2OipjEj5oCZzvdzUw=v5Q@mail.gmail.com>
-Subject: Re: [PATCH 2/6] disk: part_efi: Add missing endianness conversions
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.u-boot-project.org, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
- Anton Burticica <mouse@ya.ru>, Javier Martinez Canillas <javierm@redhat.com>,
- Simon Glass <sjg@chromium.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Quentin Schulz <u-boot@0leil.net>, 
- Kever Yang <kever.yang@rock-chips.com>, Jacobe Zang <jacobe.zang@wesion.com>, 
- Jagan Teki <jagan@edgeble.ai>, Heiko Stuebner <heiko.stuebner@cherry.de>, 
- Jonas Karlman <jonas@kwiboo.se>, Suniel Mahesh <sunil@amarulasolutions.com>, 
- Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CALeDE9PhmuHkiR5k0H=7mdCwq=n=1gS80vuQQqb8GdpKMYM3nA@mail.gmail.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785764413; x=1786369213;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=YYG8H5pXZUrwHasKah1E904wVnVm82puBqBoj7XTtmg=;
- b=ErilWIZZA28QcR7PYZRgsjkuJumQ9lZTxDhlR394xuYr461l0PQPwta19rvDrWVYQm
- g3UsGWLiqhe+bFgWZz6KNRLxAHfI4zjbQhp7earLUMLg6DapOp2SwPrxc/12ci1E3U0V
- IOFWskdgMb9l2K+SbvoNJqTkyI2eTpw0xOOo7QhSQtFwzccD3yReE59tANYtfxejgjqs
- su/hs1XDwU1MThcSQ5uFKzFdjzr615rUDCwg0JSjFl11U1wj5KYFfquGPPpXEim3nDwh
- I2tTDcNJkKP65Csz0imNhYnYtNE+/EMDwcO1TYXczoydBYzka/LhSo9wwZ/v1ojOtK41
- vG7Q==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=ErilWIZZ
+ d=linutronix.de; s=2020; t=1785766354;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=W4lZ/Vy+s28dfPnXxDQ/OCXNEglzu5aD7DP1U7cMzIQ=;
+ b=Xaby3HieuODkCOAwlOFcoMYHKhzDnyWzTKpx/NkLPYIfYC4HvqyTdu2FJGF7sXUM6bZp0a
+ d+plie2mb5085x5JpJuaqIn4f0xhAaRbU//haOqJr/VBRTIFgTe1BVvz+dSDpBq7kIyBs4
+ I8tRiNUXJ/hIwE0ceQksjzePCJdb5D4gNHgQIhyO2GqjmuKBPwYYS42YDXyoCLqrPyFl00
+ FwCMmPzeh2Ubk3Jb0qT28B4AG2G5KXdF5WbdJSYCt0succAqOpgx1K/6+oDKEshsm1KdH6
+ 0zg1xROmeDulAWRyrNwQcBGLwXn1rR63GuCKJm0t6pqqqt3cE8RdYdf14falTA==
+X-Mailman-Original-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
+ d=linutronix.de; s=2020e; t=1785766354;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=W4lZ/Vy+s28dfPnXxDQ/OCXNEglzu5aD7DP1U7cMzIQ=;
+ b=tMgpR0kYDWziYEmvSsaVtg4aCXJQxTr8Rmuis9zhdck0aYdtEYldI9bIDeLQv6XcddJ9ip
+ YwHbeYGVFTI1d5Dw==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linutronix.de
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=linutronix.de
+ header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=Xaby3Hie; 
+ dkim=pass header.d=linutronix.de header.i=@linutronix.de
+ header.a=ed25519-sha256 header.s=2020e header.b=tMgpR0kY
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,51 +109,137 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, Aug 3, 2026 at 5:39=E2=80=AFPM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hrmm,
->
-> On Mon, 3 Aug 2026 at 16:36, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Mon, 3 Aug 2026 at 16:29, Alexey Charkov <alchark@flipper.net> wrote=
-:
-> > >
-> > > On Mon, Aug 3, 2026 at 5:07=E2=80=AFPM Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > On Mon, 3 Aug 2026 at 15:33, Peter Robinson <pbrobinson@gmail.com> =
-wrote:
-> > > > >
-> > > > > On Mon, 3 Aug 2026 at 13:20, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > On Fri, 31 Jul 2026 at 15:40, Alexey Charkov <alchark@flipper.n=
-et> wrote:
-> > > > > > >
-> > > > > > > Several GPT header fields are read without converting from
-> > > > > > > little-endian, which is wrong on big-endian hosts.
-> > > > > >
-> > > > > > Probably because we got no BE architecture running EFI.
-> > > > >
-> > > > > Isn't the EFI spec explicitly LE?
-> > > >
-> > > > Ah yes, I forgot that part.
-> > > > Alexey, you can drop that patch in v2
-> > >
-> > > Does that mean no BE system can ever have a GUID partition table on
-> > > any disks relevant to U-Boot, including removable storage?
-> > > It doesn't
-> > > have to boot via EFI to benefit from GPT-formatted storage, does it?
-> > >
-> >
-> > It doesn't but that's the EFI part of U-Boot we are changing here.
->
-> Ok I was too fast on replying. You can keep this patch. It's not for
-> the EFI loader.
+Hi Peter,
 
-Got it, thank you!
+On Mon, Aug 03, 2026 at 01:17:11PM +0100, Peter Robinson wrote:
+> Hi Gregor,
+> 
+> > The Raspberry Pi has the "tryboot" feature where it can boot from a
+> > different partition enabling failsafe A/B updates. After boot the
+> > firmware sets 'partition' property in /chosen/bootloader. Copy this
+> > property to the device tree and set the env variable boot_partition.
+> > This allows boards to create a bootcmd based on the boot partition.
+> >
+> > Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+> > Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
+> > ---
+> > Changes in v2:
+> > - update Reviewed-by tag
+> 
+> You don't need to do a v2 for a tag, patchwork will deal with that
+> automatically.
+Ok.
+> 
+> I looked at this briefly on a RPi4/5 yesterday and couldn't see the DT
+> bits being passed through to the kernel, purely by a simple test of
+> looking in /proc/device-tree/chosen/ directory and didn't see the
+> bootloader/ directory or added/amended details, where if I boot off
+> the FW DT I see:
+> 
+> # ls /proc/device-tree/chosen/bootloader/
+> boot-mode build-timestamp  capabilities  name  partition  rsts
+> tryboot  update-timestamp  version
+> 
+> Not sure if this is the versions of firmware/U-Boot/downstream DT I am
+> using or something else. 
+No I just tested it and couldn't see it either. I think it fails silently
+because of the missing '/chosen/bootloader' node. Don't know how it ever worked.
+Maybe I had a dts with that node from somewhere.
 
-Best regards,
-Alexey
+> I wonder also if we should just amend
+> everything in the branch of the DT as no doubt others will want other
+> bits for other features.
+You mean to copy the complete '/chosen/bootloader' node with all its properties?
+Yes I think that is a good idea, there seem to be some usable properties. 
+
+Here is how it looks on my board:
+bootloader {
+        boot-mode = <0x00000001>;
+        version = "5855b10b2bd22b2a116dc91f6b5b1bc4b2ea849f";
+        capabilities = <0x0000007f>;
+        update-timestamp = <0x00000000>;
+        build-timestamp = <0x684bf1ce>;
+        tryboot = <0x00000000>;
+        rsts = <0x00001020>;
+        partition = <0x00000002>;
+        arg1 = <0x00000000>;
+        count = <0x00000002>;
+};
+
+
+I will copy the complete node in the next iteration of this patch.
+> 
+> Peter
+> 
+> > ---
+> >  board/raspberrypi/rpi/rpi.c | 18 ++++++++++++++++++
+> >  1 file changed, 18 insertions(+)
+> >
+> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> > index 1da5df92351c..7a2ff646ac8c 100644
+> > --- a/board/raspberrypi/rpi/rpi.c
+> > +++ b/board/raspberrypi/rpi/rpi.c
+> > @@ -480,6 +480,20 @@ static void set_serial_number(void)
+> >         env_set("serial#", serial_string);
+> >  }
+> >
+> > +static void set_boot_partition_fdt(void)
+> > +{
+> > +       void *fdtp = (void *)gd->fdt_blob;
+> > +       u32 partition;
+> > +
+> > +       partition = fdt_getprop_u32_default(fdtp, "/chosen/bootloader", "partition", 1);
+> > +       if (!partition) {
+> > +               printf("Failed to the get partition property.\n");
+> > +               return;
+> > +       }
+> > +
+> > +       env_set_ulong("boot_partition", partition);
+> > +}
+> > +
+> >  int misc_init_r(void)
+> >  {
+> >         set_fdt_addr();
+> > @@ -489,6 +503,7 @@ int misc_init_r(void)
+> >         set_board_info();
+> >  #endif
+> >         set_serial_number();
+> > +       set_boot_partition_fdt();
+> >
+> >         return 0;
+> >  }
+> > @@ -641,6 +656,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+> >
+> >         /* copy uart clk as provided by the firmware */
+> >         copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
+> > +
+> > +       /* Copy the boot partition */
+> > +       copy_property(fdt, fw_fdt, "/chosen/bootloader", "partition");
+> >  }
+> >
+> >  int ft_board_setup(void *blob, struct bd_info *bd)
+> >
+> > ---
+> > base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
+> > change-id: 20260803-tryboot2-8c5221376e5a
+> >
+> > Best regards,
+> > --
+> > Gregor Herburger <gregor.herburger@linutronix.de>
+> >
+
+Best regards
+Gregor
+
+-- 
+Gregor Herburger
+Linutronix GmbH | Bahnhofstrasse 3 | D-88690 Uhldingen-Mühlhofen
+Phone: +49 7556 25 999 35; Fax.: +49 7556 25 999 99
+
+Hinweise zum Datenschutz finden Sie hier (Informations on data privacy 
+can be found here): https://linutronix.de/legal/data-protection.php
+
+Linutronix GmbH | Firmensitz (Registered Office): Uhldingen-Mühlhofen | 
+Registergericht (Registration Court): Amtsgericht Freiburg i.Br., HRB700 
+806 | Geschäftsführer (Managing Directors): Dr. Wilfried Wessner, 
+Katharina Kopp, Alexander Gieringer
