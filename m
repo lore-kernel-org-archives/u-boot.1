@@ -1,152 +1,133 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A89C55184
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 08:05:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB374C55184
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 09:26:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2068060738;
-	Mon,  3 Aug 2026 08:05:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 50E5A80C69;
+	Mon,  3 Aug 2026 09:26:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uV-glQHq3sk1; Mon,  3 Aug 2026 08:05:40 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OhVJeIui799v; Mon,  3 Aug 2026 09:26:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E3B8160708
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6697080C7C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785744340;
-	bh=OhtFOjBV74djGmSFhZ65ecrtBZC61gLXbD0vsMhSJRQ=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785749200;
+	bh=WoUItW71Yg8u9kKuMgeJ/jUPqvG41aUEcfSFgQPA5QE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=uAenaOnZQ5Lh0O4KdsJ28XXxrrQBQWyw7nDQm4Ah9284iP2OgpU61zsoQRxzNyHUQ
-	 7PO4eQzjgOGWRZd5rU3oKuqUKxv4Fs2nkQM7oyKCcx2D0kVrp6w1xouXZKg5JocJTO
-	 BbhAXvnQOoorEXKhk+v5IpufI9voqtn3DiQgLHItUERq4GtuzZdkY2aa/IhQiF2qOK
-	 ymnNN5g5OALcZeFOftfj0zDq/isIiltI8ZjgcV51GmHj5/oAyy3ydbEP4PRoV4sLDu
-	 yQzEkyMHyylThwYRG7GNq/zcqofISiKBSPuJIvooxGE9QR3ASB31/y5cD5kxqe96TP
-	 FCo5ueHTXB86g==
+	 From;
+	b=QrM5aqyP9RVuK2rmUcjCmrozt7Ri9e+TfrA+TnZMpMXAXD8Sxf7F4UOVveo/hMSFD
+	 38u5JlLAoNO/YNDEtU7H81HA9oS4TnCwWUmAc/bPR5FFrl2STqoA8crA/p2vI1Ip6p
+	 Qz+jiGjkU1ROV0wkoqBd2aXku7T74tw8Ch2e7iviXhac+Ii/VqjyJ8I4CVAWsEigoF
+	 8WZir3fyJuKogczYDNEb3A+vk9DhUYlh3UDTlNQk5oAP7t55H/CobxqqZ2ARCZpSBB
+	 ARMM/Oic2u032uCS1xWYzJBHfv90Ru/VNeLIvJZA3mM0PctnxiJyk1vH3RgQhOaYeb
+	 HPNZ6o1w+VJzg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E3B8160708;
-	Mon,  3 Aug 2026 08:05:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 71E9F3A6
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 08:05:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6697080C7C;
+	Mon,  3 Aug 2026 09:26:40 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 40A99350
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:26:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6375A400E5
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 08:05:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 26B3B40077
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:26:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zmLmcTSqfTMa for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 08:05:37 +0000 (UTC)
+ id meXbPogGQwGN for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 09:26:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 68C8E400A2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 68C8E400A2
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 68C8E400A2
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 08:05:37 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4954a9e8490so13392815e9.1
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 01:05:37 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E64F240024
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E64F240024
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E64F240024
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 09:26:36 +0000 (UTC)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4953e04ef16so19232445e9.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 02:26:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785744335; x=1786349135;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=OhtFOjBV74djGmSFhZ65ecrtBZC61gLXbD0vsMhSJRQ=;
- b=l5ngItaeMzTewXwfF5WfD7w/aFAgnWGf1g2b143qDVk4cC/PUY6Ksv/syCa2LmbYBd
- zCEWrQXZzTKNHaCpYLiLTYKnL5aLywLXHi9jJ2kVILWVUeM2k/fdYJEhnhA5UCFw+v/D
- pYOQ699wrrCxOSVV+743l4HIOq8xbWO8lJzY6/t09DlL1mFoZZu8UspMgJy6sojjUTaw
- KZ2czgFYTHUoY3XR20jaeYNXGa3uZe/v0aqXEuJX+U/srH/kmdDF3nbOC4ZNULWumfNK
- 3qe0nPuNMcQlVkJx4NDQ1eNf1Ub2ZQSwUsgqWjx7do+ZHCIRTuaL+6hHBHWcQct7iO5q
- ewMg==
+ d=1e100.net; s=20251104; t=1785749194; x=1786353994;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=WoUItW71Yg8u9kKuMgeJ/jUPqvG41aUEcfSFgQPA5QE=;
+ b=Jw/MYZNDhJXZO77yk0mjzmunI2z0koB2YDNvxk4xjkmbMbcW0j/EHNWNL5dytAY7qs
+ aJFwhTkY5YYw7FiqFSBa7ljjwo+96YjX7agEAVEoLDBCodLjHszuCTPhCtysrQfI0D1X
+ yTGxicBxYV6RBoHW6P6hJFRbAOqqxneU7XL3U9PL9Yk3iU5VKmn5UvBg5D9m8s3R9NHM
+ +hqBv5nr9xfCZrfMO1SQsBHC+Ugy6P+4TMa+QKzJEGbTh9JeXC5wKoyALzSKCqv06/4Q
+ WzmI13s2vLV6l+w5Jwn1Q1pCmwhbYnQCl3NRU/1Loh1tDC/xk2VjeZzgBKVi8qQnk1pr
+ 1oUw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro++UGyPvTdqP60YbiN1/7/nuthaEkuCEw4RDeonkQJMI/ZdL3ZwkW2rd6NnCh75rQNQBj8KhA=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxTt4apa8cqsPZG/FUsXOhpxD1CTEZNAyHh7ZuTeEo373bARIb4
- hV8pFXSzHzzjvWOJcxoansQteJKKkA3nsoqJcgxEW+yWdzmm/A4HgbVgphZJmEcdDUo=
-X-Gm-Gg: AR+sD11sSsm1AhScslQkZQq9iamnMt+M4KPl/PXnUQIzNtQwMzRhTvS1esaiLmiXqxY
- V9Ykr1AWRHHZ/8Qf857Rj4ZYZDHqxOYT9+ubXSPOXMRX/3JI+c7mzOz5JdvKK6oyvk1zGAVsLyZ
- mneM7LXg0EAsPvQGlHNXz3y49hdMwIYr0r0efkvmpJUs04h7IQwEj5+i5aETp0R88TIKWDyYMGT
- L5F6iq8m5h4JruH2O3nQnnzLXzOxiUFHCekG16l/vRCxLodZb8bRl5OG3HKdWnD5pGSbIIixgZf
- RlJETv48qmd2uDzr14NFfLwLaACXBTSDEZ0JIGNLqEIuFCvq3uhubELJGnfL1SOaPxYyD/wZg7z
- 1IVOGxWs1U6jMkUJZXEYs57YKd9kRdIQP9og7OFtBt+453auljPRr4/d8FudKvH4cmylS6Fcs2m
- FHNjVsHHTzvdybPHsMkggbcJlldVkB9ROABxk8TnGQ506CxywEI+jAFvTtMB0Z72Q+xoXvIfH1c
- 2cTPl87bRmBng2uUrtO3CychV7Y9TkdAst+B3s7diDb
-X-Received: by 2002:a05:600c:798:b0:495:58fe:88e5 with SMTP id
- 5b1f17b1804b1-4980eb96c74mr115782975e9.2.1785744334966; 
- Mon, 03 Aug 2026 01:05:34 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:de23:a565:d98d:318c?
- ([2a01:e0a:106d:1080:de23:a565:d98d:318c])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47fd456a6d7sm31398030f8f.19.2026.08.03.01.05.34
+ AHgh+RrZxaq8ZEcRlc4TaCUPbDO873IADZnAtfT3H8GC1BRT8zWOK678WFsU+ZHuzwXQoWGQ9XdvR+Q=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yxooy+5P+Ofz4JkV/1XFh4WthMXug5NeeqyeQBKdZh3MfqJ1D9U
+ gBBw7lqY6IdMilMIdV7BcPGEB2XNtYDjbMpleDtpCH7kUKkOtl9RsqLOeIybCGIr3CM=
+X-Gm-Gg: AR+sD12Gyt9wLDdtKwWZt4aobBt565PuSIhdPs5HljSsKtbPT3NrtfxLBa9xHu++UwB
+ fQvQJ+OStVrhzloi4+7WOlS3AdRVmXmQWnP768d2rjJoXp1efs762PA8fuqGVRZhj8yS0UDPn8z
+ qOenMhgRJI5L9oLhO1KklDUHnA32mmuDjX+x3nn38IwV/MgLjixe9VpbHxtdzA8TfOjnKK7Bc4b
+ ygsSA80UyMsyJoZL+rq821PQX2AfBQrwTb8bQtGeiA7YPuGDeJPM1IwBU8vIXGS7k9HE9nJjGAP
+ HKW7cEmFhjJMmdqcEUg3ut7kx4KPq+tr6TIXJ8QZSPv9Gb3UvA1BLGf0HvXxh4A6aioSh9p5qKi
+ JWTB6oWmrNP/PndSNGffX9ToCcd5Hl7wZpYDrD6VVM8cmeDDWcdZYQAVbQQa7aeMxXAnvoevDOj
+ DN2+Y3Yz92vhBZWtCna70BxAeWTK3PLts3vn77uwl+uIoTflTxqIw/zoh1KcV2sdmf2TPQ5zNQz
+ PlAPnwg46XMCRjf6vb3/69V3u3T7pXdUVNfi8mNHw0c/R/zHEwBKqmBERqtvESY0GK2B7/guOZB
+ F0oPfv/35sDpf7l8zm5dAmRzBl+66lfdpVfZIzkzqB+W3cwvAKPRLaD1YNHOUqn9xufZZKvk0Mk
+ of2Nz2M9MQN6u6M3/KhFGoRsMU5q9sW04/muHq/gTTF6ziXKDSrKL0rK8tZaryhLuj5yGs+26Ek
+ 3SL44AfZiT0IewoHkKoiyhVL+1aZgOpeDMYLEwfT4tbG88ixOvAGcnAJwu3viJWBBUf4Exvuisc
+ iRH7ZlS3TyeiiqkfvvM8jhgMeft9MX1Wjopcy32Hv5oKydysxaAbGCWQs5OImPelYD64g==
+X-Received: by 2002:a05:600c:19cf:b0:495:7a04:b006 with SMTP id
+ 5b1f17b1804b1-4980c66b572mr184957325e9.8.1785749194618; 
+ Mon, 03 Aug 2026 02:26:34 -0700 (PDT)
+Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49807b916e1sm185203185e9.9.2026.08.03.02.26.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 01:05:34 -0700 (PDT)
-Message-ID: <11071b0d-fb58-4022-99ec-3cc3bea00790@linaro.org>
-Date: Mon, 3 Aug 2026 10:05:33 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] pci: layerscape: fix pci_iommu_extra hotplug
-To: Vincent Jardin <vjardin@free.fr>, u-boot@lists.u-boot-project.org
-Cc: Laurentiu Tudor <laurentiu.tudor@nxp.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Tom Rini <trini@konsulko.com>
-References: <20260729222118.242013-1-vjardin@free.fr>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260729222118.242013-1-vjardin@free.fr>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ Mon, 03 Aug 2026 02:26:33 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 03 Aug 2026 12:26:32 +0300
+Message-Id: <DKF799VHIW2Y.SN931OAT6JCC@linaro.org>
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+To: "Balaji Selvanathan" <balaji.selvanathan@oss.qualcomm.com>,
+ <u-boot@lists.u-boot-project.org>
+Cc: "Tom Rini" <trini@konsulko.com>, "Heinrich Schuchardt"
+ <xypron.glpk@gmx.de>, "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ "Kory Maincent" <kory.maincent@bootlin.com>, "Sughosh Ganu"
+ <sughosh.ganu@arm.com>, "Wojciech Dubowik" <Wojciech.Dubowik@mt.com>,
+ "Simon Glass" <sjg@chromium.org>, "Peng Fan" <peng.fan@nxp.com>
+Subject: Re: [PATCH 1/8] tools: mkeficapsule: Add support for parsing
+ capsule params from config file
+X-Mailer: aerc 0.21.0
+References: <20260727-mkeficapsule-v1-0-5b162866b092@oss.qualcomm.com>
+ <20260727-mkeficapsule-v1-1-5b162866b092@oss.qualcomm.com>
+In-Reply-To: <20260727-mkeficapsule-v1-1-5b162866b092@oss.qualcomm.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785744335; x=1786349135;
+ d=linaro.org; s=google; t=1785749194; x=1786353994;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=OhtFOjBV74djGmSFhZ65ecrtBZC61gLXbD0vsMhSJRQ=;
- b=rVR6xZdCuNiGgXfcD8T5cFPGedYyaYsplmWlr656XIxIwt/4IOMDzi8gJV8R7AZR2N
- Vw9fkQAGzeuURLaXg7KYGwlpJAL0HnkpwTXZydqVO0ir6dBi7da4KQcb4al6/fUPdlrb
- d3FH+YK+S5qBzOE46X5gbkXUjV+r2KrvPTh/2pvcae6bMvYr9XP+A4x1E9cRTF7bxXrX
- TAYtiCwk+KoIBeMeQigq5yoQfxMZNLz8Q7xLr1veJ+OEkZRk4oeCtO+72r5YA8kPZLjJ
- BVfSq55tZPqOQKUV+AiEu7n+kuAOis2ngBOcayflMRoFi+WJ0/5PoExgj1ckelMQHvHo
- Jsww==
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=WoUItW71Yg8u9kKuMgeJ/jUPqvG41aUEcfSFgQPA5QE=;
+ b=gY0n6k9vt9PbvjLUYXgVyeOilx3aZ1C4cPtzLdpLl6enn81TpKYllF18LZ6pTh4DJi
+ xbqRj18gAG6ubbhMSLuEunaVSTD1L21OuVGaTDqsBb0FQdbYzDki1YdTckAkhdqGv0O+
+ rxejUFizhmNinMRS1mWC9IbXqpCu9X7/hdGMoO9PJUU0y4MvwdI+ILSLruodxeg/ftEF
+ olGR7SYHam+GnRYrT1bwUADcw8uWpz3een8jhixLmInaKpV1XbUB+nHEOd8kohQSdD0H
+ yZpietgy36U6TrleZxKt0y6mt/7J8NxZS6L+u6JZYmrk79/ble0SfjOVDB0Oj0Cz/aTT
+ SOSw==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=rVR6xZdC
+ header.s=google header.b=gY0n6k9v
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -158,53 +139,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 7/30/26 00:21, Vincent Jardin wrote:
-> We can have many pci hotplug groups, each introduced
-> by a "pci@<addr>" token such as,
-> 
->    pci_iommu_extra=pci@0x3600000,1.0.0,hp,pci@0x3700000,1.0.0,hp,
->                    pci@0x3800000,1.0.0,hp,pci@0x3900000,1.0.0,hp
-> 
-> Without this fix, we have the error:
->    Added iommu map for hotplug 1.0.0
->    ERROR: invalid action in extra iommu entry
->    ERROR: invalid action in extra iommu entry
->    ERROR: invalid action in extra iommu entry
-> 
-> Fixes: 2a5bbb13cc39 ("pci: layerscape: add a way of specifying additional iommu mappings")
-> Signed-off-by: Vincent Jardin <vjardin@free.fr>
-> 
+On Mon Jul 27, 2026 at 6:55 PM EEST, Balaji Selvanathan wrote:
+> From: Sughosh Ganu <sughosh.ganu@arm.com>
+>
+> Add support for specifying the parameters needed for capsule
+> generation through a config file, instead of passing them through
+> command-line. Parameters for more than a single capsule file can be
+> specified, resulting in generation of multiple capsules through a
+> single invocation of the command.
+>
+> The config file can be passed to the mkeficapsule tool in such manner
+>
+>  $ ./tools/mkeficapsule -f <path/to/the/config/file>
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@arm.com>
 > ---
-> 
->   drivers/pci/pcie_layerscape_fixup.c | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/drivers/pci/pcie_layerscape_fixup.c b/drivers/pci/pcie_layerscape_fixup.c
-> index 97c38c0bfa7..5299aee63db 100644
-> --- a/drivers/pci/pcie_layerscape_fixup.c
-> +++ b/drivers/pci/pcie_layerscape_fixup.c
-> @@ -319,6 +319,11 @@ static struct extra_iommu_entry *get_extra_iommu_ents(void *blob,
->   			/* Hot-plug entry */
->   			entries[i].action = EXTRA_IOMMU_ENTRY_HOTPLUG;
->   			p += 2;
-> +			/* Skip the comma separator so it check the
-> +			 * next "pci@" group.
-> +			 */
-> +			if (*p == ',')
-> +				p++;
->   		} else if (!strncmp(p, "vfs", 3) ||
->   			   !strncmp(p, "noari_vfs", 9)) {
->   			/* VFs or VFs with ARI disabled entry */
-> ---
-> base-commit: 616c3d79f01cf9204e38738857c4647a730dcb3b
-> branch: for-upstream/pci-layerscape-iommu-extra-v1
-> 
+>  tools/Kconfig              |  15 ++
+>  tools/Makefile             |  10 +-
+>  tools/eficapsule.h         | 101 +++++++++++++
+>  tools/mkeficapsule.c       |  90 ++++++++----
+>  tools/mkeficapsule_parse.c | 353 +++++++++++++++++++++++++++++++++++++++=
+++++++
+>  5 files changed, 533 insertions(+), 36 deletions(-)
+>
+> diff --git a/tools/Kconfig b/tools/Kconfig
+> index ef33295b8ec..8e09427fbac 100644
+> --- a/tools/Kconfig
+> +++ b/tools/Kconfig
+> @@ -114,6 +114,21 @@ config TOOLS_MKEFICAPSULE
+>  	  optionally sign that file. If you want to enable UEFI capsule
+>  	  update feature on your target, you certainly need this.
+>
+> +config EFI_CAPSULE_CFG_FILE
+> +	string "Path to the EFI Capsule Config File"
+> +	help
+> +	  Path to the EFI capsule config file which provides the
+> +	  parameters needed to build capsule(s). Parameters can be
+> +	  provided for multiple payloads resulting in corresponding
+> +	  capsule images being generated.
+> +
+> +config EFI_USE_CAPSULE_CFG_FILE
+> +	bool "Use the config file for generating capsules"
+> +	help
+> +	  Boolean option used to specify if the EFI capsules are to
+> +	  be generated through parameters specified via the config
+> +	  file or through command line.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+There were valid comments in [0] which don't seem to be addressed.
+Also these options seem unused in this patch. If they are needed they belon=
+g to the patch that uses
+them
 
-Thanks,
-Neil
+[...]
+
+
+[0] https://lore.kernel.org/u-boot/d50d88c9-445e-45cb-936b-0c1fac2cf8ad@gmx=
+.de/
+
+Thanks
+/Ilias
