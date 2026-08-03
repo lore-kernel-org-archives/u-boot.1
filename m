@@ -1,109 +1,126 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E034BC55196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 20:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89222C55182
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 20:59:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A4F1740688;
-	Mon,  3 Aug 2026 20:58:33 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IJiNbZeepf1h; Mon,  3 Aug 2026 20:58:31 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 791B240648
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785790711;
-	bh=zepptAEG9qqJMJnxlHzq0QtDTZY6wm82rSGv/hbk2eE=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=hXsTNSOTQt1IVHOD7Yf9yiFzDtN6l+wB8rVT1JZu0LhV7DM6DyKm06jKM5FhcooDj
-	 3TRk401o2mLogQFzu7lTIsUvY/p6LYd+4mHY08pTcFWXFGRwGGeONLCGsKIqljYsR9
-	 5r/2sVuK+opj6pjWEGOLGi87/1lULTmjUleWC9KdD/ehYCqJBDWzWFpyhGqC7Dw8H9
-	 1utLU2jG37EMriXrOrs0IszRKFrOEA6FwWuR32mPtYnwMZzHie/kEhyJb+Q4ZOk8Oy
-	 UTrkqEBMBnfMZdhoUM3/euUYbaoAwJudFlc/9Aldhiqp26vgxQpo5mv6BnQPJmb9ZF
-	 UB278qsqqavew==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 791B240648;
-	Mon,  3 Aug 2026 20:58:31 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 84D3F218
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:58:29 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6AA2480C09
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:58:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4B57380B0C;
+	Mon,  3 Aug 2026 20:59:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JGI4xkxxac5F for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 20:58:28 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
- helo=mout-p-201.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 615FB80C06
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 615FB80C06
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 615FB80C06
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:58:28 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hDTXy1sR5zMlGJ;
- Mon, 03 Aug 2026 22:58:26 +0200 (CEST)
-To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Johan Jonker <jbx6244@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] mtd: rpc: renesas: Add R-Car Gen5 DT compatible
-Date: Mon,  3 Aug 2026 22:58:08 +0200
-Message-ID: <20260803205822.134713-1-marek.vasut+renesas@mailbox.org>
+ id KPHtdXikePFG; Mon,  3 Aug 2026 20:59:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A751C807E1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785790770;
+	bh=Fo8UWnNZsdmFvsAEkyXpDC8Gwgww2INLyVg8a990Dvw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=rl4b5Q3uHD7hPiEn/3NPfAl4myuOKSuO3+1T4iUQ/vqmu4emKD0atFJONzVfT2wFU
+	 bjnHyyOuWnXbOZpj9uYzs1V96G3zNyU7csP3YsxMMtJ8U+Ntda4f60sqSa54F0F7j3
+	 7JXFBrextRZaW31rBdSy0Rp9vh1YYpxEhmxeU2XQCImui9Pd6y2cRWHuK2d+x0qzqr
+	 JM1vmunzEtK0FiLVvR7TyxOmBi5j887X4L81tPSHDarVOnqStnHdsKIT1wI4tvjkC3
+	 S9DsZZG1N/yVJiq2FSdbSPuQ4RvHH2TnuZbCkCKEdIBn6TciqEgv+X3EvPEpgKhbw+
+	 MX2D4dajtjjew==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id A751C807E1;
+	Mon,  3 Aug 2026 20:59:30 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C553B218
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:59:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id AB7F960683
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:59:28 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1xI9ChdSSOrJ for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 20:59:28 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::c32; helo=mail-oo1-xc32.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 034D26066F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 034D26066F
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 034D26066F
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:59:27 +0000 (UTC)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-6ae4475c68aso644388eaf.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 13:59:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785790767; x=1786395567;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Fo8UWnNZsdmFvsAEkyXpDC8Gwgww2INLyVg8a990Dvw=;
+ b=UG6LvoSLkTXzEvqwSWK7ouakQAqW4ab2bpcPsZz1heF0g/9hzsFOUMpPSlQrn7mMyJ
+ VXQ1y5wNEnzsRiKldId5wionMmTVy3A8VnwuUwXVn+RIS7ktSxg6zH49frFpQOJIhC/p
+ bfOauLUnSie3zKtZFxMlzrbCCQhoWAUxFN9UOGckmMhCQaBhEGvvh0K2P0UgoRT2Hgdy
+ PDx7FaVYqzRLcrPYe41PgBCxpPBEAZ2MDlPtaE5R7jw1XaKytuf4WGVtxLhtRloh8WFJ
+ ORG6pBnRZ4DWf4ggsACjvK5a7/uJnxYot7kSanNF0QZ20UuKKrGP+YvJUBSXxF+EVjoT
+ C5mA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqdxA5nVSuy/ARz3xYDZG0JPUI4pnG477vCV3LEUm9jivHRZCYPQhKLj7tHejvLAtH1e7Jna7c=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yzi+S1y4S+W6YXQoFnFRWWIonxEvNguHA1lvv0b3lsFJZ60ZQan
+ sEY7FXUxCBDqE/mHJWjJIF3M+GHSEglyYoG5VcdCz0XnI0PIZkJz2Mlx4fKRsFma2WM=
+X-Gm-Gg: AR+sD10v5krm4xAag3VHw3jDldO9t68D5gF6b6O5Jondede4bkwGP/LOJbN4Y+aPrM4
+ LFapBeJfxVMtcxapDPm+r6TPn/S04eVYd891do50MYAHhofLW59HTfPMoWvi8ix0/wou77cBCCV
+ 4a5Lin/+ofXlfx8ba/Gsjp/xVM5ulIN7tzCFFduoO6WktYld5mDBkxp8s9nYoDgRO0HktT2N99/
+ gbGrKjVtzf+B+Z4G9pPD1ORpt8+/zJrcfIn1V4CDPBNmP8KTQ+w1D9xfL2qZgkC9NW/AcfzDxPv
+ ybx3RGoPityq2RPy9oc/lP2fcRtBliCPjcrw4+ygD6DXzziUfg8C2jHPD3P0Kpt8XM+e7yn6d2y
+ mcndhg/OJCnbbOEP+5EUuo3JlbWCW2/PewAh2aFzlPXYNRTD4Lxs63tY6VA5wsDr9WXGMCux1RE
+ rh/tECnWyv6bSCzv2A2adZZv7EJOeYQGucuAp0sE6bbNBTQsfVH5m/xcmuEqGuTfYklmucPjBAy
+ IUqaR5nTfLxRDv2YizB9wCm6Vz42yEGKQ==
+X-Received: by 2002:a05:6820:4b15:b0:6a3:8303:bca4 with SMTP id
+ 006d021491bc7-6ae431ceec5mr18084870eaf.8.1785790766855; 
+ Mon, 03 Aug 2026 13:59:26 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:b8f7:1f5e:7c:a7d1?
+ ([2600:8803:e7e4:500:b8f7:1f5e:7c:a7d1])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6ae39d297dcsm7482641eaf.1.2026.08.03.13.59.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2026 13:59:26 -0700 (PDT)
+Message-ID: <4bd4731b-1c24-4055-9f2f-2851a3e2848a@baylibre.com>
+Date: Mon, 3 Aug 2026 15:59:25 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 181520a1eb241831048
-X-MBO-RS-META: wyw1syrbmm8r1bxt9ogq4mzkhmh5fuft
-X-Rspamd-Queue-Id: 4hDTXy1sR5zMlGJ
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: scsi: Drop duplicate leading scsi prefix
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>
+References: <20260802220904.168737-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260802220904.168737-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1785790706;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=zepptAEG9qqJMJnxlHzq0QtDTZY6wm82rSGv/hbk2eE=;
- b=kBRJUSUsdZJga4PYfzW/nKew5btxTm6Snh8JyR2tnp2Pud5tLaSlWM8SNI1OWAIg2FCCc5
- fxFn9esKbTHRScpSikD1id2sP1rfxRxyDmgyKnCexgTEUqCl4zYYoti6ZfX6wsl3+5L1xi
- 16fn+eKZUlBPg9WPAuaTyaZ3AJNH8htQC0h5RdZvrVfbdqr8SYg17DUd+RyH/F9lzkqZ9n
- ehSVqzbcIX1SFsHprfpGXYhss5XIgLC2/VFf3UY0Fe2MVVmVmsBJBsexNXucu9gsjjPDCK
- GKTnUvrDdDukprdxo6/FQtBNKs06BP5LJyblwsLqslT81fkCT73NsThfVJMidQ==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1785790704;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=zepptAEG9qqJMJnxlHzq0QtDTZY6wm82rSGv/hbk2eE=;
- b=jeXnep7bZwWITsFjr5+FW87+OSlbYWki7quCjJ0ZgGXH6Jymk/+I1VR3qd/lg7Z0ielIRX
- WRxR1o7sMhwUqtdXpsUsfanJtgzjDFTLImGa2ZdljoGyZd3uJtVIyuROsvnI8o/aNKUFRA
- D5X+kzXS5xuNbcVpiSpuGH/au6/AgMZT/8N1kNBYochTw+qlzD47ZBk1fZAoCnx8I/XELK
- CXYJ+V7oOXCcnUDCfFsMcPBnJZ5itQX2QB5ETjP0TLB1yh4AdAfj490NBUaZ643pLpyTnZ
- g21vQmWqQskb0GzyzN/hxPXTlyz8pO1bpfj4EvPOSLkyOE+vn2afoInv+VmfuA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=kBRJUSUs; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=jeXnep7b
-X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=jeXnep7b;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ d=baylibre.com; s=google; t=1785790767; x=1786395567;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Fo8UWnNZsdmFvsAEkyXpDC8Gwgww2INLyVg8a990Dvw=;
+ b=ce/Az/792Or5057zbax9LTUekeYinlQPVNRUi+RXBI857iG8IS6rNhVOWj1QMpHHNW
+ rzmlQ6IBJKViCE3j1ygVigquSdW3eQ2R4q0qvoqVGIWJ/t/LG1mfJsXsClnm1oUczbsE
+ PHCDxTRSHX2mrjviTksnJk2wAovwk4wYvDCE+6MaWcG1ePoVTTkg7slS6QBdfSpmzsPC
+ WBag+aq26k2AyFDzjzPsJdZpCCTjpBzr2ZWvkk/rhmhuArbm8QS1/UhSFnrvoslB08t/
+ gY4BAkQquQsoGf3LmcQW4D/Zxccfzh7pb4A/VpLT8D5pQfAt4b/biUFUk/Y0WYMR2JFh
+ +5ag==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=ce/Az/79
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -115,51 +132,47 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add device tree compatible string "renesas,rcar-gen5-rpc-if" to
-the driver to match on upstream RPC DT node in R-Car Gen5 DTs.
-Adjust Kconfig to allow driver enablement on all 64bit R-Car.
+On 8/2/26 5:08 PM, Marek Vasut wrote:
+> The SCSI command currently prints the following duplicate prefix:
+> 
+> "
+> => scsi
+> scsi - SCSI sub-system
+> 
+> Usage:
+> scsi scsi info  - show available SCSI devices
+> ^^^^^^^^^
+> scsi scan  - (re-)scan SCSI bus
+> "
+> 
+> Drop one copy of the scsi prefix.
+> 
+> Fixes: 460c322f13ec ("(re)enabled scsi commands do_scsi() and do_scsiboot() Patch by Denis Peter, 06 Dec 2004")
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: David Lechner <dlechner@baylibre.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.u-boot-project.org
+> ---
+>  cmd/scsi.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/cmd/scsi.c b/cmd/scsi.c
+> index ad7d8a4b664..5e732c1e50a 100644
+> --- a/cmd/scsi.c
+> +++ b/cmd/scsi.c
+> @@ -45,7 +45,7 @@ static int do_scsi(struct cmd_tbl *cmdtp, int flag, int argc,
+>  U_BOOT_CMD(
+>  	scsi, 5, 1, do_scsi,
+>  	"SCSI sub-system",
+> -	"scsi info  - show available SCSI devices\n"
+> +	"info  - show available SCSI devices\n"
+>  	"scsi scan  - (re-)scan SCSI bus\n"
+>  	"scsi device [dev] - show or set current device\n"
+>  	"scsi part [dev] - print partition table of one or all SCSI devices\n"
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org
----
- drivers/mtd/Kconfig          | 2 +-
- drivers/mtd/renesas_rpc_hf.c | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index 38d6dd142dd..f6bd9f6f2e9 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -196,7 +196,7 @@ config ALTERA_QSPI
- 
- config RENESAS_RPC_HF
- 	bool "Renesas R-Car Gen3 RPC HyperFlash driver"
--	depends on RCAR_GEN3 && DM_MTD
-+	depends on RCAR_64 && DM_MTD
- 	help
- 	  This enables access to HyperFlash memory through the Renesas
- 	  R-Car Gen3 RPC controller.
-diff --git a/drivers/mtd/renesas_rpc_hf.c b/drivers/mtd/renesas_rpc_hf.c
-index 0b4459df4d6..c94a25fe6a1 100644
---- a/drivers/mtd/renesas_rpc_hf.c
-+++ b/drivers/mtd/renesas_rpc_hf.c
-@@ -384,6 +384,7 @@ static const struct udevice_id rpc_hf_ids[] = {
- 	{ .compatible = "renesas,r7s72100-rpc-if" },
- 	{ .compatible = "renesas,rcar-gen3-rpc-if" },
- 	{ .compatible = "renesas,rcar-gen4-rpc-if" },
-+	{ .compatible = "renesas,rcar-gen5-rpc-if" },
- 	{}
- };
- 
--- 
-2.53.0
+Reviewed-by: David Lechner <dlechner@baylibre.com>
 
