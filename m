@@ -1,122 +1,94 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F41D5C55196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 011D1C55196
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 19:09:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A37D760648;
-	Mon,  3 Aug 2026 19:09:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C1FA080BCC;
+	Mon,  3 Aug 2026 19:09:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xxO6UQXqqil3; Mon,  3 Aug 2026 19:09:28 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MCoD_k8s4l3P; Mon,  3 Aug 2026 19:09:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 89F616066F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BD7CC80B40
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785784168;
-	bh=6SBxh6IR+bKWxkny/iu0/3dpz0UdlzvJaM0AjbAfO2U=;
-	h=Date:From:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org ; s=default; t=1785784196;
+	bh=hiXO2exgTHBuB90XAfpQ+deEGTdKQ9fQRe0fpPJht3Y=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=xwuhFsDYgwNafKs0lDt0Kntg3Q0IKjUV1oFrkmn088aAmt6ROxZhG4j+Gszxt3wSM
-	 JyKqqb6Cmlqicbe9D0kcf5W0sf3uApsGnT6Bb/6/8UxdwruRm6ciVDqGPjxeUCVSQU
-	 HwE2oBBiDUcQip0ag0y8kzHo8YkzPrBo+wcs0GxcfRXWJzvna0EX+thzM+HCiTKC2I
-	 rW4PTdYfQisFYgzozRS3n74gdJWk00wZ0aEYKhrvFQziYIeqTUfaXwVkgvFeQJmrhG
-	 DqTOsWs6MPqhoZgneLKLPKvemqvGlYeZDWAqLDk2MYRAQklRlfbaBWMCXtT/XeBHRK
-	 aJRT+FT1mUTlQ==
+	b=NNuZa++gmMPO2PA2TiE4PBvKru/fN3KmZSxowazjP6QWadx0bo+DOscIZJByZQYjz
+	 ViXd2sPXTgWxAze5JT5xWh4Uib3RbBglbKZOQVQyD5+rwxsA2QFhWYk3c4TuLNHC4c
+	 gJ+4aKIfrafZjE/Q1a+y7221m0WtpaJgvI812dPrWnWgWjSsuYwjtGJwkd06s8kHbY
+	 xIAzsB7ibUkfyx7MP3ghJyWnqaaLwW/2zr3LH4aCQ3MO4MkFGCIwUZp1DtQ/GmxRM/
+	 R7ZY+f1cB85MA/gUbGKMUVgOWPqFkEOw0CCh0Wm99mUAjdB4cvz5vz2OjRbyw54h2S
+	 +fH3F/JrfZPSg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 89F616066F;
-	Mon,  3 Aug 2026 19:09:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 69E15296
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:09:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BD7CC80B40;
+	Mon,  3 Aug 2026 19:09:56 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D28E42AA
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:09:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 473374015A
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:09:27 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C493F80B40
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:09:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MTylUM-1swn4 for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 19:09:26 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
- envelope-from=jbx6244@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 59E884005A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 59E884005A
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 59E884005A
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:09:26 +0000 (UTC)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-69af1bc780bso647277a12.1
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 12:09:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785784164; x=1786388964;
- h=content-transfer-encoding:content-type:content-language:cc:to
- :subject:from:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=6SBxh6IR+bKWxkny/iu0/3dpz0UdlzvJaM0AjbAfO2U=;
- b=GukCdCb0IomEwqUnxWfZeHy+gv3bc2JWo9DBCurzGQ8WXIIET2m2aiayYeUom7sBoJ
- AWXifw4sF4tRnZQtYRIj15jCj+o3bGAKx/lVbPqeeDww/JYGX5ifgH/TLI/YqlLxWTLR
- N3C6SdcWMgmKNJz1UISeHGQNXMttVl6Mq4CRLks2IgsLJLcgoNwYVYsWZ6F7pLGSCQjt
- KnZzHWediKNOgAQn5+iLqr/sAygKuLdeVnr06T+YBIJg3G9uXVI4E6inUNsidU8zynN5
- xGmnrHI7fjKBddNObM5oQhY9f43J4Ch89pPqeAWqsY9hdetfweIsidgn3yB5jQdKzM6Z
- w4DA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrvwU095GgLXaqZXCIeuiqMLwZVb10IWXK5WGYYsjReAU3bmi96JjcPOVm28oAeKcaYYlkqTgM=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx0wzL8oQtuTNLmLc6CudnSJjjANGwH7BL/nuJPyEVngf2Hp+ro
- N4n5SSJAn+59Loe13fY+reVhZyAtQPMEwSZfuC1UXcwY3KVHNUUItD32xJgHOg==
-X-Gm-Gg: AR+sD10DQW40vwySIuhDHwymJQIbSR+awNv0Ns03mhp5o9jl5pH4GJN4nyiAZRKzwOy
- Yw1j5jNUHspo5eGDFerD/qwElryGYwsQFaCnHUA0RcGwfB1bCxSO560P8JZEjgyCItYi1M8MUxr
- +wu01MxfF7yuIa3IB1XVL9NlunHw9xLOrxCIYmrqPAMn9ZQ7Y5Rd0IMhx5SkJmQNIGPcSY7VHS4
- Ah8ZsQJshd0AYnJfnrxEUAkgsGNdW3n7aGOhlusTOPenRU2cw5t9Oybsgo3G6ZJ+Ve4lgVu2cuF
- 7v2aXmX18wToiXFMwfsJ5UQ+A/eO4oIhhhMZgp19e8DmjC85OpUX/lyQXnJ7HwJmu5EnRhH7yjL
- hwvN+i4+WUad4TUBM4yLRBiLECEdgcN0Sf/X9etFfv+/L3qQPL7sYaugcEVgRtrVdvsgvNVPLo+
- U5i50pYzn3uk7EDU6xHu7d0oxnCjDzWCfUzlS2xyH30zRIVaenNDx07m/QyVOkqjniNSVMNZc0/
- Sklcf2G0/RiXIwhr756JgcEE88=
-X-Received: by 2002:a05:6402:4487:b0:6a0:f1d5:deb8 with SMTP id
- 4fb4d7f45d1cf-6a0f1d5e1e4mr2791985a12.0.1785784163931; 
- Mon, 03 Aug 2026 12:09:23 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1fd4537702sm600132766b.53.2026.08.03.12.09.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Aug 2026 12:09:23 -0700 (PDT)
-Message-ID: <d15555b5-e57b-4567-ab70-56d48fd4b878@gmail.com>
-Date: Mon, 3 Aug 2026 21:09:22 +0200
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tM8ejW7Mf7Oc for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 19:09:55 +0000 (UTC)
+X-Greylist: delayed 1503 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 03 Aug 2026 19:09:54 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E0D2280B23
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E0D2280B23
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a02:6ea0:d71e::9;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=eb25=f5=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Received: from smtp.forwardemail.net (smtp.forwardemail.net
+ [IPv6:2a02:6ea0:d71e::9])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E0D2280B23
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 19:09:54 +0000 (UTC)
+X-Forward-Email-ID: 6a70e77eae1ce3dd2fb7e53c
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.13.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/6] rockchip: Miscellaneous updates for RK3506
+Date: Mon,  3 Aug 2026 19:09:38 +0000
+Message-ID: <20260803190946.2259514-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v4 0/9] doc: clean up README.rockchip
-To: u-boot@0leil.net
-Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
- u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
-Content-Language: en-US, ar-EG
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785784164; x=1786388964;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:content-language:cc:to
- :subject:from:user-agent:mime-version:date:message-id:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=6SBxh6IR+bKWxkny/iu0/3dpz0UdlzvJaM0AjbAfO2U=;
- b=MoD4tNuUkAx5P9ijB1EWNoYDbnyoCgXwug/jASrTxCduJbBJlQvNkItSO/R+tFSyKb
- EQqtR/uTEkespFJNPCPXppbTLSFOo4kFGI/HLMV6e/s7sMQnRQccIm7GtzwgEqUeVXVE
- f9EAa+bTH/IALgV3cjd2yyEXdCjrEr/4GFnPTikHVO6DqDAJ9Di2t69Ce0C6MMy7YgxA
- 8mnC3/nZF2LxzftOa8sXHBdbmICL5Z1bziKQFk9cWzuGqKFsNSJRDvcxaqOzKP/K5wTm
- vkJXGgxiHPkQi7v6cTuNuFnINhBH1CG/vHSGJXMuowhmkaOEzifLKkwp9K+wpHRgVO9i
- cypw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=MoD4tNuU
+ d=kwiboo.se; 
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1785784194;
+ bh=hiXO2exgTHBuB90XAfpQ+deEGTdKQ9fQRe0fpPJht3Y=;
+ b=DZ3K4AcqtMDAmTGnAonfznkSHt0++aWWVIBASbFeIe2R6NgsjNoY1s4+Xy8amvu5++8t3PqC+
+ GO4Q2i87WXa9otBK9lHndJAFBLY6L+PsuBbOtZ1G+9TKfa2UR17tjP1BWLqNMltxByB4FZ+5pId
+ 9/zf66Iv6AmRDlf3H88DhXtr/b9EBWulx8UZXqaCjXvfgufkIofT3WUTt52CKO3gb4/ebGhVYm5
+ ItV6KS5CUmg6kb1lSS+M+c61EmKIPMU+8eVAmW1AUtLgd+TQBMLHz2HBMYE03O9SoszYKn2JRja
+ oUFv0WSa2RIJztd4QNvdzB0xYTIRmehznRHuNlGVGXSg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=DZ3K4Acq
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,34 +103,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The removal of README.rockchip is long over due.
-Prepare and expand rockchip.rst with more info.
-Move the still relevant parts from README.rockchip elsewhere.
+This series includes miscellaneous updates for RK3506, such as:
+- updated default load addresses to support small memory SoC variants
+- request use of 1.5 GHz saradc clk rate to avoid field truncation
+- changes to use FIELD_PREP_WM16 macro where appropriate
 
-Johan Jonker (9):
-  rockchip: scripts: remove rkmux.py
-  rockchip: doc: add mask ROM mode text
-  rockchip: doc: remove TODO
-  rockchip: doc: add more building instructions
-  rockchip: tools: rksd: remove reference to README.rockchip
-  rockchip: tools: rkspi: remove reference to README.rockchip
-  rockchip: tools: add comment section to rkimage.c
-  rockchip: doc: rockusb: remove reference to README.rockchip
-  rockchip: doc: remove README.rockchip
+The series depends on following patches for a clean apply:
+- clk: rockchip: rk3506: Fix trivial clock configuration errors [1]
+- include: linux: Import hw_bitfield.h from Linux v6.18 [2]
+And a branch with all depends and board configs can be found at [3]
 
- MAINTAINERS                     |   1 -
- doc/README.rockchip             | 684 --------------------------------
- doc/README.rockusb              |   1 -
- doc/board/rockchip/rockchip.rst |  61 ++-
- scripts/pylint.base             |   1 -
- tools/rkimage.c                 |   4 +-
- tools/rkmux.py                  | 218 ----------
- tools/rksd.c                    |   2 -
- tools/rkspi.c                   |   2 -
- 9 files changed, 55 insertions(+), 919 deletions(-)
- delete mode 100644 doc/README.rockchip
- delete mode 100755 tools/rkmux.py
+[1] https://patchwork.ozlabs.org/patch/2278946/
+[2] https://patchwork.ozlabs.org/patch/2280368/
+[3] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commits/rk3506
+
+Jonas Karlman (6):
+  rockchip: rk3506: Imply OF_UPSTREAM
+  rockchip: rk3506: Update ENV_MEM_LAYOUT_SETTINGS
+  adc: rockchip-saradc: Add driver data for RK3506
+  clk: rockchip: rk3506: Fix CLK_SARADC set rate issues
+  clk: rockchip: rk3506: Use FIELD_PREP_WM16 macro
+  rockchip: rk3506: Use FIELD_PREP_WM16 macro
+
+ arch/arm/mach-rockchip/Kconfig         |   1 +
+ arch/arm/mach-rockchip/rk3506/rk3506.c |   7 +-
+ drivers/adc/rockchip-saradc.c          |  10 ++
+ drivers/clk/rockchip/clk_rk3506.c      | 208 +++++++++++--------------
+ include/configs/rk3506_common.h        |  14 +-
+ 5 files changed, 117 insertions(+), 123 deletions(-)
 
 -- 
-2.39.5
+2.54.0
 
