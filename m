@@ -4,119 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDC2C55179
-	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 13:07:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E700FC55179
+	for <u-boot@archiver.kernel.org>; Mon,  3 Aug 2026 13:29:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3F94F80DE0;
-	Mon,  3 Aug 2026 13:07:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 54F9680B3D;
+	Mon,  3 Aug 2026 13:29:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OAYq6pXgXT6x; Mon,  3 Aug 2026 13:07:35 +0000 (UTC)
+ id g65jMY_cgZ_a; Mon,  3 Aug 2026 13:29:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5BBE580DCF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 96C0280ABB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785762455;
-	bh=RPPu4RO5uGWN8wAKqccW+rfk+kAIJWLI/8fOV91NgdE=;
+	d=lists.u-boot-project.org ; s=default; t=1785763772;
+	bh=dnnvhXlHYe1Ki9J+/eD6KK8BzT1QxAbqv3Y4bhWoaeM=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Vp+W/8dITA8cmY7ZfMXf255pLgnA+E5Ux/a1uvAjlFMt8ReWfuxilISC+1VuIT0iL
-	 y/rXFgI7NCo7NsrKB5prwO1yLlI87vO6cfZCBo273kY9EuvlWDq04IhSmE98UVpaCq
-	 Q0JWdhxPiLpI8PZKjCRt+YkSJ+x2z8o/WmsRMHX8L82fPM1BpdsNQS+HrF+u4RRrFG
-	 9JKIp9hEiu8GMbUQMuJBnVyIR4zK8MJInd010rb48qtg4QYSpUj9UT6OACXynWLINx
-	 MUn3XX4/4X2V/2PiRpm1oYJ+jy3st9iXjly25dNsupvVTzV6i/zEYCBV8nK9tr/rKM
-	 T+qtYoB2Q9CvA==
+	b=uyqst6hr2pGtg0WOuouhcnS6nMiq1ROtjRr20TOsmeJ7E6broQkM1RhMn6mABP2XO
+	 j8a9WWx14OTB1YH59qt4YjJwAkYCyaUdThQOXikoGlQcd6K42Rx4FHOjFjq9ARx6Tx
+	 x8YXSQx1ImomuclX9n76zO1wEBy/H6XtrIN0dp2FpJdimnrz/V3V2rpfuCBS5ULnD3
+	 4xe7y3C3vfFsU/tYt3hrrMajtLTGT8LXIl19CPcLYmWZGaHAg9G1e84m3Rn1QrJ6Pt
+	 0gZmsAQsdNvVSWNiir8eBCA+jMnEqEzW6x6M3nIxDOndieecAU4rcY2Ftq1pbE+Xe3
+	 41A8WckN1AaNw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5BBE580DCF;
-	Mon,  3 Aug 2026 13:07:35 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3C05D218
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:07:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 96C0280ABB;
+	Mon,  3 Aug 2026 13:29:32 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B07943A6
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:29:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 27E3440606
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:07:34 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A1BC680ABB
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:29:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2GaKFjCa2gld for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 13:07:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sb7ceBvrTHPy for <u-boot@lists.u-boot-project.org>;
+ Mon,  3 Aug 2026 13:29:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b134; helo=mail-yx1-xb134.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 5308B405E6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5308B405E6
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5308B405E6
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:07:33 +0000 (UTC)
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-66825847b2cso3529966d50.3
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 06:07:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785762452; cv=none;
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D09AA80A5C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D09AA80A5C
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D09AA80A5C
+ for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 13:29:29 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c160420289bso507129466b.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 06:29:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785763768; cv=none;
  d=google.com; s=arc-20260327;
- b=dO5err35M/llpvkvxTIfD6JgTil3fR/wHaP1cF0jXBpoOBF7uLs6x27LBbgNX9VMt0
- OrvouzVY64NJX4evRQNerNS1m3bNIjITBrBw+R/WAxGcFAdYnGVqjZXKsX31hv5u13Mf
- Zwy+Wy95JzcB25nXBZApMQQ/dxGoiqpCaxTQgQFvhoN8Imr+T5n4TVa0vAtSRDQyOv8l
- fDbbg7j9cy8IR0i6z5QNDu0/ijND6v0JbJX91+GS9WBoDZNYOYo0uy55RMkuyovz7x4B
- s8XhaxrOq76ijA//0kIpzx5gexzekrTc+iicbzCpCDG/m5Men5lUSDJVtl1A2ONL9Vts
- 7X3Q==
+ b=fF0I7xiJMok8WzV9U9NOKH4FGL+usy/1ERNh9YFUI4sVcCt38yGndRPWQzKHK4g//8
+ V5ZQ1lp6t0u0UUPoAFrzRtU7CfFOcmgBXKtiyvP3A43l+4Cb/Vwm6+1ldrbL2SCJHzHO
+ HRc2OXlmUmFqO5R743YoLFty+HFF2Jd5v8HvED8BjL6XcJmwS5iTqZ4eek9bTOpQ0kGE
+ uzCvkl6utNZr3/4yMzx125NEcfuq5dDxmMlC24ihcbsnYgIywRT9zrISsdXVXkcGAvdL
+ /IlNXjWjG8D9uLdj0gNF9DOBPcnzWSQtDRbfXrCLueYa25rbXeFaP7X1beQacKYxTDhJ
+ E1LA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=RPPu4RO5uGWN8wAKqccW+rfk+kAIJWLI/8fOV91NgdE=;
- fh=0OOq01pQUbd0XN/0qPZJhOOVy92lHQPNYRk7vnCJQ1k=;
- b=H5pExx1cNasQkIOyZmAAzMOurMeRP1Q8ADYusgbGk9hPzuo02V1CoZVZr5NR3CG/Gr
- iyes2GaFheTOkW8C7DXHe9Yel52njt9HPQ/VlpHawCd3fftZJyNayl24n5hWRnLJk77i
- xJqdj/nTcwmehAJUzYwoKL9+tqTvzB2t95ep8MEnwHbBQUeBGQWZu7L7IY3xznar574v
- u7cisBt/28XAviF2ZHzgZZk9FzrrRezTxDtfcLzOM7NFEQJp7GYsf9yqkw7CNib4+RlJ
- Kvw6RH5X3d46UcPtSJH7EcTQvGQg1ZIdfNCvOhvD72KHAZjejCs13s0QbMRvx0tFB9/C
- OekQ==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=dnnvhXlHYe1Ki9J+/eD6KK8BzT1QxAbqv3Y4bhWoaeM=;
+ fh=LvpZ4HDtMB/OchJXxxrNqOQ36qbRTFF7MqYqOQzHZGo=;
+ b=PjCo9hesuTge4/M0ygiBQzK0pdrX30lZoWB2xAH4rx1RZi79d6Sofk+l8Sgh74bxed
+ /dFYCpl6HYlUu/V/tiANXRLbC/uEmhaZQh4IRiwNd5+uXILqyH+h2fvJsfhFSyIjPa1z
+ rsNOnPocU7XgdV1NtgWxpcJl1GsyJjOyBnDpsbkDH2fwp1P0adsHpNYNzZKcPXYL1u/e
+ dTpsfCvpzLbSBDF9aJQcJLOnAl/5p+9QpR5CNfyVf0dmRZqT+Z2fEfXBlrSz5YEQQyiH
+ 4FpUM5zKG0LCjCyr18mVTarXuXEgN66Ranu+Ug9X6tmy3ICEBfXwHj5I+NPibNUv9rDv
+ dlCg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785762452; x=1786367252;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=RPPu4RO5uGWN8wAKqccW+rfk+kAIJWLI/8fOV91NgdE=;
- b=aqvJkf46fLTK0HYxMVfybBsuHDH27oSXbaEzQPlZuBuP8lDwMYxVNwjkNHOAUjopGn
- e4F6i+Kt9JyytCuiZcA5vXU3xcOpIKP9zu6/o/C17RrtHUgeioDQnaSHtCjj9NL73b4k
- elkgFAlQanQwXcoy01/h1cQUQcCwBxmzPg/UJmz5U0P6yOz9d+G6uban7Q4ZUY1beQWc
- E2Zb3I3rMuEYgrP01DzYlHIU1zYuxHw/e9bdQHpihoxf5/fjNrsn+6pcJ/u2nb1XGXaL
- yvf9pnUdoQtZiBzXYfIlBfj22TvnkKpdVp6KFKLj1hVoDnD78RaJzbZZSEc+tJkeJNuC
- 1qcw==
+ d=1e100.net; s=20251104; t=1785763768; x=1786368568;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=dnnvhXlHYe1Ki9J+/eD6KK8BzT1QxAbqv3Y4bhWoaeM=;
+ b=nYnAc0vDbo8cGWmDqr8aqa7kfp5LiGihzZMJ7HmvSgI+5c23cw4rhdQpyne8MdrxYi
+ OJ/vkblUjRUuFQ0xU+dJ7zuTyyoc28h8SA1sNPLBG+aHlqsaLOcasguq6wKspLxAVLSs
+ omW598vmVvk68Gy0/j4eWKJOFI2f6dVKFSxCOvsygoud1C+1pA28+vZrZfuLoVDckcwn
+ GEqbXgSG1ckuPCamzXbEYErgK2nqoyIutoroNjpyuvvI7NxorPfcyAW+GhesvDR75Xxs
+ XZK2kRXFuj1zohqOUBUP9uldsm/+dFpAKA4d9amjXGeOeLUQKqOwNLn/CNXKzF3nAvUX
+ Kbrw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RocWV0WPlYgaJ/FA4D/E+5387aZ9Ym5VyLLX0Nkbu3Asa+Vo/amH0g6BZSPHaUYqrVmzekS2HY=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxqfMgrugwfDTmp3CebEKF4zOoBUOibFkkJ7YigbickiWDWxBpg
- tZiflDBCScez9W1EqusWmAQgHsrsl1/7uaQgQpN9kWGgCtFO+CuSl7utfEpEflzN0z4kT9vJdTP
- ODdC+GuRXkDWq9Cs3hvGEtIp4/HM+VTXGsq4ZNdRrSQ==
-X-Gm-Gg: AR+sD13TlBf0Y3qRC4Q9EPKrWAvP3dUiZjRQr05zA0csl8pBwIy2rpS3jFDksPfn0GO
- xnkgYobY2Xlje9gQ8vaV7Yv5ylTzKigJgGPN/C7QkdS0COROPGR+JeimmBYZzsO/vXL1Du0k+L2
- /qNJqYDPI3YLV1u+62GKi6uGuM3xFt2/2Ns1auBwDYC9RPXIlwUCiknWjJEP0HA5x3Oe2Shetcl
- qWnYneVoZ/+BZR4KvySk1dIFrMuz3WVXFGsv16kaJmX6fV1KaLTwHaC7whrJUOVnBHsyispcv4V
- E8zevbLb6E+QmFgJZik1Kkrk4JAqDnPGxtO6j+VWzQA7bFUCb9ZK+d7R9XzT1+UytDOsd7uAAHH
- zA7F9Cp5gpmxQm/lmSEgoekhWrNbzAfqexaU1Jk6pL9q7qkhor9GxQU7Y80f4zFVeVsc1bfGO+1
- M+XuPw/sPmVdFDsb555YmQ6x4t3pczfoDj7ZZIXIWzBbQQ+Poq2c0ZX+tjVoiqjyrr+GCGAzXp0
- 5GwdyUB+FCioYwm8T2NfT+IN4QixKs4CYjVT2OAdcS3k++eRFfx5W3WKazD+gzge8s4OPiQ4ezl
- 74d8CiIPX3WkYBCwVwmNEesTsp/41IWBiQiKK/hGAiv2PAHGIEZ32SUzF6katI95Nx/UmzimRjR
- uOTIoCNqPGx/3mrnHeJVM+R+fvXHY52A2F1jBo/fLznwALYMvzD7zRA==
-X-Received: by 2002:a53:dac1:0:b0:669:485c:228 with SMTP id
- 956f58d0204a3-6694f08c998mr9196466d50.4.1785762451679; Mon, 03 Aug 2026
- 06:07:31 -0700 (PDT)
+ AHgh+RrwOGU6e/phb9+iD7ZpZDUHwhYoZJmFlV5cvPgLLrQwIVgQUEMdAqy77KwubVavgQku8oE8GI4=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzvznFWd/zc6wtoGOqykmXNam5QSq2FDOLXmltgmR2FOvDBiOpQ
+ EUrzK4y1DO0RaZUtffg2qLiuBEg1guM75SoK3NgFg4HVr1RRVH6DcFlTFO2vBPkfTcZ6kuois9o
+ b6ObEmIorV2prg3ZPHLEI3NmPeYh0N8v0nLOfyhWrpA==
+X-Gm-Gg: AR+sD12u8bebEJLnHom7Kq9VmTKy+bC+CCCCqms/ptfyuIadw69DY85Vz0wKio1dT12
+ wLwDm1c2ud+2gi1/UwuOB43i9DQzQ8Z1NXI5m2pdDFRvPmRqCBozKQP3UJ46uT/dxHw9u2/mK/J
+ UrbkEt5mGkHx5IH/Z12A4Tyhn8xogbdGJxlwvlK9vQJC1L8FJe7yzHRAJDesL/N72WJd+u+UXhp
+ ObZaYmjn4TFdPwkFF2XjijAAOBrcbO03gPtVoMsXEo5VevfOhybhHcH9FrflcbYW4o0pe7Ds63I
+ iqyIxqupX0irXCIdvdOLHZAWcdyRzrdwcFx9B9e0boreg0ZuIUMob9bEfAxNMrzI82Z4/UfDlTk
+ T
+X-Received: by 2002:a17:906:fe46:b0:c15:fd85:c5f7 with SMTP id
+ a640c23a62f3a-c1fe7eebd21mr913338166b.4.1785763767846; Mon, 03 Aug 2026
+ 06:29:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
  <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
  <CAC_iWjJniUgONw47_WXAZZRsvrT_y6SJTyMLMOa+Hn9zy5BeFw@mail.gmail.com>
  <CALeDE9MOOjXRf4MAt=N-BmDdEQ522nQabEB7uoAcmf6t9fADQw@mail.gmail.com>
-In-Reply-To: <CALeDE9MOOjXRf4MAt=N-BmDdEQ522nQabEB7uoAcmf6t9fADQw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 3 Aug 2026 16:06:54 +0300
-X-Gm-Features: AUfX_mz6XvdkBqEFteepmaxgzV_mCmmEMzevo9mfHHArIrWTyLs0EVued-rNkWI
-Message-ID: <CAC_iWj+SD6axn-auG+rsE=c=0aaLDHaVv7jmS+1t4T_Y4BZ5zw@mail.gmail.com>
+ <CAC_iWj+SD6axn-auG+rsE=c=0aaLDHaVv7jmS+1t4T_Y4BZ5zw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+SD6axn-auG+rsE=c=0aaLDHaVv7jmS+1t4T_Y4BZ5zw@mail.gmail.com>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 3 Aug 2026 17:29:17 +0400
+X-Gm-Features: AUfX_mxixa8Din5y4LFtLQqX1ADvWNdv7hran6I9KJ5OaLxFYgihtgeW57Ur7l8
+Message-ID: <CAKTNdwHiNVy5rEYi9erzJ2E5EskZ8PsbCfvhxG-Y9c93j1hdSw@mail.gmail.com>
 Subject: Re: [PATCH 2/6] disk: part_efi: Add missing endianness conversions
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org, 
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.u-boot-project.org, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>, 
  Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
  Anton Burticica <mouse@ya.ru>, Javier Martinez Canillas <javierm@redhat.com>,
@@ -128,26 +126,27 @@ Cc: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org,
  Jonas Karlman <jonas@kwiboo.se>, Suniel Mahesh <sunil@amarulasolutions.com>, 
  Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785762452; x=1786367252;
+ d=flipper.net; s=google; t=1785763768; x=1786368568;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=RPPu4RO5uGWN8wAKqccW+rfk+kAIJWLI/8fOV91NgdE=;
- b=cp2daKhg6x0mGpQWV6Y/psIFmnRhoeBB3ulbw5BBLoR7FSBzEHmKi2tX9aFCJ+KSPY
- msvV6xzZWvGDJD7YoG7yfzPrI/Ikhh2qKTA6IPTsvuh/jpJujYqdr90w3Yy4LzU7Hdu7
- iPX+RuRS7gMzuBxW7SKB1b0bM0CwJx7u/rmIkenPAxN2+uofR7Beck0DhJNBzWtORN/X
- ap10V30BAzpfFbtOfBzqYgiVAdZxywoaPP2bZkrGXQPedw3ZrWnX71VmcvG7IlSO5pIl
- masy1OCwg4GaoUdGhvMXQeN6cBK92aBgS1vDla4zAj4QxCA2zlTELwpssnKZ+sd5XUeZ
- C8uw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=dnnvhXlHYe1Ki9J+/eD6KK8BzT1QxAbqv3Y4bhWoaeM=;
+ b=XBk5s1xQzL3tTQwkgMK6mJOc9Kbl65mEbBsfbTM/bPJhdlAzTIHijj0eVSZ37lcyc8
+ h7MTDnxvdN3JGYySMTV9kjNd2SwzG7HopJWCIQBXj6wIEMcbVetg4tXxZs85z4pBM/vD
+ kECq2GIJSevvsnVlcXqnqhnSQpu/2M14IRJAYl7STq8eZt6kdlRrgZzGSIqPX0wxoS3o
+ 0c5jdHM9pNEL5V6fDEZnTK2qqpKXQj4RC8gODzV/NfgkxWhetipgSOuDiLBIgbLQIAGL
+ K4TLRT0R8fyzF4j2T1Osw0+AvCIJcaZ3eVWdRxCfjiTW6aS941hNFZ3OfLlZwAHK2SL5
+ Augw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=cp2daKhg
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=XBk5s1xQ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -162,86 +161,30 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, 3 Aug 2026 at 15:33, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Mon, Aug 3, 2026 at 5:07=E2=80=AFPM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Mon, 3 Aug 2026 at 13:20, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On Mon, 3 Aug 2026 at 15:33, Peter Robinson <pbrobinson@gmail.com> wrote:
 > >
-> > On Fri, 31 Jul 2026 at 15:40, Alexey Charkov <alchark@flipper.net> wrote:
+> > On Mon, 3 Aug 2026 at 13:20, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
-> > > Several GPT header fields are read without converting from
-> > > little-endian, which is wrong on big-endian hosts.
+> > > On Fri, 31 Jul 2026 at 15:40, Alexey Charkov <alchark@flipper.net> wr=
+ote:
+> > > >
+> > > > Several GPT header fields are read without converting from
+> > > > little-endian, which is wrong on big-endian hosts.
+> > >
+> > > Probably because we got no BE architecture running EFI.
 > >
-> > Probably because we got no BE architecture running EFI.
+> > Isn't the EFI spec explicitly LE?
 >
-> Isn't the EFI spec explicitly LE?
+> Ah yes, I forgot that part.
+> Alexey, you can drop that patch in v2
 
-Ah yes, I forgot that part.
-Alexey, you can drop that patch in v2
+Does that mean no BE system can ever have a GUID partition table on
+any disks relevant to U-Boot, including removable storage? It doesn't
+have to boot via EFI to benefit from GPT-formatted storage, does it?
 
-Cheers
-/Ilias
->
-> > > gpt_fill_pte() takes my_lba and partition_entry_lba raw when working out
-> > > the region a partition must not overlap, so on a big-endian host both
-> > > bounds are byte-swapped garbage and the overlap check does not do
-> > > anything useful.
-> > >
-> > > gpt_verify_partitions() compares the loop counter against
-> > > num_partition_entries raw, so its "More partitions than allowed!" guard
-> > > never triggers.
-> > >
-> > > It also swaps gpt_part_size, which is already in host order, having been
-> > > computed from two le64_to_cpu() results a few lines above. Drop the
-> > > conversion rather than adding one.
-> > >
-> > > All of this is a no-op on little-endian targets.
-> > >
-> > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> >
-> > In any case it;'s good to have
-> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >
-> > > ---
-> > >  disk/part_efi.c | 8 ++++----
-> > >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/disk/part_efi.c b/disk/part_efi.c
-> > > index af311867a285..062389c3af0c 100644
-> > > --- a/disk/part_efi.c
-> > > +++ b/disk/part_efi.c
-> > > @@ -462,10 +462,10 @@ int gpt_fill_pte(struct blk_desc *desc,
-> > >         char *str_type_guid;
-> > >         unsigned char *bin_type_guid;
-> > >  #endif
-> > > -       size_t hdr_start = gpt_h->my_lba;
-> > > +       size_t hdr_start = le64_to_cpu(gpt_h->my_lba);
-> > >         size_t hdr_end = hdr_start + 1;
-> > >
-> > > -       size_t pte_start = gpt_h->partition_entry_lba;
-> > > +       size_t pte_start = le64_to_cpu(gpt_h->partition_entry_lba);
-> > >         size_t pte_end = pte_start + gpt_pte_blocks(desc, gpt_h);
-> > >
-> > >         for (i = 0; i < parts; i++) {
-> > > @@ -851,7 +851,7 @@ int gpt_verify_partitions(struct blk_desc *desc,
-> > >         gpt_e = *gpt_pte;
-> > >
-> > >         for (i = 0; i < parts; i++) {
-> > > -               if (i == gpt_head->num_partition_entries) {
-> > > +               if (i == le32_to_cpu(gpt_head->num_partition_entries)) {
-> > >                         pr_err("More partitions than allowed!\n");
-> > >                         return -1;
-> > >                 }
-> > > @@ -877,7 +877,7 @@ int gpt_verify_partitions(struct blk_desc *desc,
-> > >                       (unsigned long long)gpt_part_size,
-> > >                       (unsigned long long)partitions[i].size);
-> > >
-> > > -               if (le64_to_cpu(gpt_part_size) != partitions[i].size) {
-> > > +               if (gpt_part_size != partitions[i].size) {
-> > >                         /* We do not check the extend partition size */
-> > >                         if ((i == parts - 1) && (partitions[i].size == 0))
-> > >                                 continue;
-> > >
-> > > --
-> > > 2.54.0
-> > >
+Best regards,
+Alexey
