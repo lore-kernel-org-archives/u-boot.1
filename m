@@ -4,193 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CCD6C55822
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 04:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDBAC55172
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 07:45:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D0958406CA;
-	Tue,  4 Aug 2026 04:35:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E24FB40703;
+	Tue,  4 Aug 2026 07:45:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id q_atjais0v3V; Tue,  4 Aug 2026 04:35:12 +0000 (UTC)
+ id M8KAqO9UZg_O; Tue,  4 Aug 2026 07:45:54 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1F0DA406AC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 20B1D406F1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785818112;
-	bh=vc2uvQrODlRR9qcZkUnzOCvQ++BebC5qH8NkJMfuPqQ=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=lnQgoifGGWrgMI9Au1JXLmwhLbNzBP/Q6im6uzJUDtGK7dBAVT0HUqcp8H/yEyZ7U
-	 J+UPUzbzVYZT4eNgRSsQY9AhhDjqMtNG+2RwPxJNVukThjpG7l1zm++TFw1QuEnwc/
-	 rHr6mGqYCZaz8lB/guAaUwE7RZlFDOAzYZRAtGpndp443fF6ptkVEvKhO2e8CfmUX4
-	 0zuwQFx7U03dCXfF+/LxZo67KTdnabeJsgbWd3MFKl/wrljAyd3C4wipIcPyvxKkfR
-	 sdkJrbU/+OpH2Rj3FJge/uqgq8Fw+zgVf6xXPr23tS1imFGNMu+zfDXZmy+vrm5XlM
-	 CQohK3v2U75dA==
+	d=lists.u-boot-project.org ; s=default; t=1785829554;
+	bh=/onTGiZ1K7eD61bTlIl1fo5FznSLsdmizjdu61GGU8Q=;
+	h=Date:From:To:CC:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=k86vhrQJHPDYB1chFXCaP9sw4a3bUM15OyAKW8nWTM+d3Ay3nGf9w1ofAiCcqLtSt
+	 5kw6cI3Dg5dXesxFN3vEEA+AzcGuK+x6qxHS9zvstOb/e5gz5b4qLLG63K9YLObmp4
+	 WIl3rN3nmGeqjScVCEPOVrY9J5vxJEZnLcbbNcc4cSkI4ONp9K5zC+sxw3vEdhkgCl
+	 ywJPMouVGtniAGayT8H05OnkRixMwJZTzy6QwakItvX2HDj7wA28QJ/oabKg76OzY+
+	 3VvjPRR3y22aJxnxMuu9av/UDF6Rv3a8BOGdOJeCb1Rgju2u24eMnUqxyAg1ntGiRL
+	 4lTyb2MpD8xlQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1F0DA406AC;
-	Tue,  4 Aug 2026 04:35:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DAA70194
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 04:35:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 20B1D406F1;
+	Tue,  4 Aug 2026 07:45:54 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1DE03198
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 06:14:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CC3954005B
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 04:35:10 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EF7A880B42
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 06:14:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id j7Kquc0CexP2 for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 04:35:10 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=tien.fong.chee@altera.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A248A4002B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A248A4002B
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A248A4002B
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 04:35:06 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 29B7F842FC; Tue,  4 Aug 2026 06:35:04 +0200 (CEST)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 679C280087
- for <u-boot@lists.denx.de>; Tue,  4 Aug 2026 06:35:01 +0200 (CEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=APlN4AmgYazAlz+rp3UyjA9D7B1CtDzzfpEiPN1SrIiCIh+nf1zYZwz7akYc9UFnNpncSkqHse2tT++yUsqGw6ngHGqEn85d0qx0N++alSiGFHiaVhJa1QqXea2kaegUyxHdbr4OTUwIF0s86o/nAnym6Xq9Jc7B/FOs7HXn4Yn9/GiU7nJinyPB9ODe4e2yeq7HuRwQDtdWdbWrRoBpMUc3DD48vtzDuU7Gog9eHLZDANXE3688ZPtWcbw/bM2uuiV29rpffYz39SvOeJKxZ0Uq4QOZdDVWNiixWw75kW61Whz4ib/JpT9I36f4LyZyqs+m8YBoYY4gYo1yJfDVug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vc2uvQrODlRR9qcZkUnzOCvQ++BebC5qH8NkJMfuPqQ=;
- b=pR4iPIfX6F0S/5DYDW1fSjh3SE4S3J6iRUa0JW5sojV1L/pw4Jj4bbKQVXFZeTVPX2rBcrlttsGecGVl5Q7jYFxyB8FLH7h1l1lG+lJjYsEwIAGxPinu9mdLvcUGq1/TQ+DhbNFQ/QLMKkaBKT4NGaK+hnngsi9SjaX+Dck5dKRREGRBD2hNfN8e5/vnrYXHTE8Ir1Kh8eB26yFGi7u02INTgIZFDvCYYRWykVRt1TXe9xcOZUU3B0Fdp2cZ97PvVPy8f8Xs+ab3ffsgs+Uu20Or7IJpn/wVgxQFqcxfhNEOWKBjROnW9ng3Lc/YSF/B98efd6eZUjEn4Oy4pLq9UA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-Received: from SA3PR03MB8229.namprd03.prod.outlook.com (2603:10b6:806:465::17)
- by DSWPR03MB989128.namprd03.prod.outlook.com (2603:10b6:8:35e::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.15; Tue, 4 Aug
- 2026 04:34:58 +0000
-Received: from SA3PR03MB8229.namprd03.prod.outlook.com
- ([fe80::2802:a21d:f4ad:97]) by SA3PR03MB8229.namprd03.prod.outlook.com
- ([fe80::2802:a21d:f4ad:97%5]) with mapi id 15.21.0292.013; Tue, 4 Aug 2026
- 04:34:58 +0000
-Message-ID: <6555d7d3-77a7-4613-82b2-90e55add2cb2@altera.com>
-Date: Tue, 4 Aug 2026 12:34:51 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: socfpga_n5x: Set CONFIG_SYS_LOAD_ADDR to
- 0x02000000
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Elly Siew Chin Lim <elly.siew.chin.lim@altera.com>,
- Tom Rini <trini@konsulko.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
-References: <20260507005538.7502-1-dinesh.maniyam@altera.com>
-Content-Language: en-US
-In-Reply-To: <20260507005538.7502-1-dinesh.maniyam@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI2PR01CA0040.apcprd01.prod.exchangelabs.com
- (2603:1096:4:193::14) To SA3PR03MB8229.namprd03.prod.outlook.com
- (2603:10b6:806:465::17)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Nnjh4Ors4Tz1 for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 06:14:49 +0000 (UTC)
+X-Greylist: delayed 1987 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 04 Aug 2026 06:14:48 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 03B3E80B19
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 03B3E80B19
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=67.231.156.173;
+ helo=mx0b-0016f401.pphosted.com;
+ envelope-from=prvs=9676a5f00c=akashn@marvell.com; receiver=<UNKNOWN> 
+Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com
+ [67.231.156.173])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 03B3E80B19
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 06:14:48 +0000 (UTC)
+Received: from pps.filterd (m0045851.ppops.net [127.0.0.1])
+ by mx0b-0016f401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6741734v365479; Mon, 3 Aug 2026 22:41:32 -0700
+Received: from dc5-exch05.marvell.com ([199.233.59.128])
+ by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 4fu31d1bga-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 03 Aug 2026 22:41:32 -0700 (PDT)
+Received: from DC5-EXCH05.marvell.com (10.69.176.209) by
+ DC5-EXCH05.marvell.com (10.69.176.209) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.25; Mon, 3 Aug 2026 22:41:30 -0700
+Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH05.marvell.com
+ (10.69.176.209) with Microsoft SMTP Server id 15.2.1544.25 via Frontend
+ Transport; Mon, 3 Aug 2026 22:41:30 -0700
+Received: from hyd1-dt91330 (unknown [10.29.36.146])
+ by maili.marvell.com (Postfix) with SMTP id E5AAF5B6921;
+ Mon,  3 Aug 2026 22:41:27 -0700 (PDT)
+Date: Tue, 4 Aug 2026 05:41:26 +0000
+From: Akash Nair <akashn@marvell.com>
+To: <u-boot@lists.u-boot-project.org>, <boon.khai.ng@altera.com>,
+ <jerome.forissier@arm.com>, <trini@konsulko.com>, <clamor95@gmail.com>,
+ <marek.vasut+usb@mailbox.org>, <maxime.chevallier@bootlin.com>
+CC: <akashn@marvell.com>, <rkannoth@marvell.com>
+Subject: [QUESTION] Architecture and roadmap for Synopsys XPCS driver with
+ APB3 indirect access
+Message-ID: <5skppezbdkanp336d4nr2jv7yp24kngxs2wcewll6mrxgwdtug@mygftq2jjbjo>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR03MB8229:EE_|DSWPR03MB989128:EE_
-X-MS-Office365-Filtering-Correlation-Id: dc59893b-ba37-48cb-b3e7-08def1e1bd77
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|10067099003|11063799006|56012099006|55112099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: kjU5/yK+jK+jhlmdHB1ryKYSszj0Cm329+yQOnMjRpPGm7LW0ncf7FWfxLJmVYcFcrYgPzrO+vckQTb/1aVkTU1HqRx8kJwqgJDxrC6RTLTfKl1gk9Zg2QrlyubNPaqDhCvkNepuw/AQv51ywZFSdcTKCc1l4AoyGCKslG82KN6mLZPexXDQrMtQ9F8kvopuS3US9VqEnRACc9cLSc8Y5GPRYncMUTp1T91Yo7FEUTmZpMx0UOCojqu/0+Ng4jKqoTJ/vjzTdDg6yj8CT4YIr8r0Xa3BH+KcnP6+m+LLtD+MboUcVFn2B4/7plkoGh0TFkEf12QqmEfOX9gOE3WxSTRcQsTdzRw18bjnViUfhJAsAMTPn7TFOrY8rRHDzk4pGxCmAktPHPDih+Uet5A/EY32mVg4gNV8p1SXJIaXyG7Y0PIwXLDTbFRxco6CJJPyicMF0T3DjMjhh7lI0bWYVqSVQivSR8ZKaFsAw4G/9lYVSFunIqakJA+xMQvm+qACpRFIrpgLjNYowwRSRQjKCr59BwsNBwU9HnI+DDEUZxaQDvOA+QLSco2nQkE4OCEQyIAhJlP5pT6zrQKKTbdDcz9RWHQV3ffIMxRnWsZK2K+DN8vxgMdSG9EsKeL2FfEYlP8cRyrJ+RnajXJsbHYsSA0cv8gVbRk065BCQ2ONU4Q=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB8229.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(10067099003)(11063799006)(56012099006)(55112099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b0J6Z0l1NXgrZUI2aWRXa1dsaDZ2bE04NFhSZzUvazJzZEowcTY1NEQzZU50?=
- =?utf-8?B?c0RpWUdzNnNzUEc4UG5ZN0dLMFI4a0piMnpxb1h0T00vS21ZWmFYV21SU3pX?=
- =?utf-8?B?Y3lKaWtISXI3ZWxqdTVsUllhUlNlWG5jQTYySWswLzV2Zjd2c1FQS3E0NmZW?=
- =?utf-8?B?R016Z2R1KzhOTUpzV2RiZWtpWHNZL2U4UEdjZGozUm9PRWcwcFJoWHFkQTRk?=
- =?utf-8?B?QzQwSnk1THdtaTJKb1V6SlpnYmErTVc3SnpGei9mWFo4SnZPRkh6RjZjUlhz?=
- =?utf-8?B?REZxMHRaek93M0xSVEdOVU1ZMWZsQm13d2ZXdTRvYS9HdEhiUzAxUVkwQmo3?=
- =?utf-8?B?RGdxcksxVXp1MkkvNlkyc0pLQTdQNW01SXo3cU5KK1pLMmZHcjRNWXBOQUsy?=
- =?utf-8?B?NjZkT0h0REhNL2ViS21mcU1uMTk1QnIwTElOajhPVjg5dVZvSHFBcG9kMW9O?=
- =?utf-8?B?bkZUTU8zak05Sms4ZmR1MWNqKzFZcDRVVy84RnFZZWxhcU10dFQ3dFZucEEr?=
- =?utf-8?B?NDNQbFZrK01HaXhjZlFHNnVDeXRMeFNTUGtQOHRLSDBjK2tITzYzMVVDNE9O?=
- =?utf-8?B?K0xDVDJkanRXWVYvS3p3c2o3eDlUbDczWDFBZkJWdVlOY244WndvalhLODF5?=
- =?utf-8?B?akdrTDFvTCt1MEY1UDFkbHJnbitNRXhlV2craHdaNlkveVBVcmZpNG1nditU?=
- =?utf-8?B?cExTai83LzlkdE9vTWJEVG9zVDRiS1NhelFhWmM4WG1VZlZqbW1HaTQ5b01i?=
- =?utf-8?B?aVlMYTlVcVc5ZHEzT2gvbVd5aVNDTmQ0RGFKU04weWowNjU2eDlDZnBOQnFz?=
- =?utf-8?B?TU4xSHNZdTNFUE5hdnYwWXJsODBQU01od3NORHZWL0JGWHdoZmczamtKZElz?=
- =?utf-8?B?RWdldmxGUmRkMDdJUlVTK3VoVk1Ma0lDMFFFbklxYW1CckkzekVOL0o2WWRu?=
- =?utf-8?B?VnlpUk5kWk5sdFpWNlBTSm1sQm10NTBpYmliZmZXQlBOUWNtVU5lQnhOZDFx?=
- =?utf-8?B?bTJydFU5dzVEV0tzMXpVdVhOa2tRbkFIQzFVWXdtbE51aUNqMVdLNHY1a1gr?=
- =?utf-8?B?dzdkKzROMkhnR0prWWE3VWxLQksxTmZYV0ZvQ3FrZUw2UlptREdZRWIwWWt3?=
- =?utf-8?B?bDlUbDQzY2VMS2w1by9ZdTZVSE5Kdk5VYWdRWnkwUUVtSFBzMUJOeWZseHov?=
- =?utf-8?B?MFlHREdia1dJZkxJQ3d4LzZhcFZlYUtZbmhlQkVtYmR1WnhlUnRiR042Rlp4?=
- =?utf-8?B?V0xyZzdINGFpYW9jcWJONDgzeEZZcTludDExQW5kWFFtMFF6ZFFLWHk4bDR5?=
- =?utf-8?B?T2RwWTU5S3dGSDUzd05KSmtaU1BxWmU0ejdjYXlzVFh4OENpM1lYUG5ITnF1?=
- =?utf-8?B?OTlkcE13NWdmMlc3ZE14ZGVwUUx0NmNNUHB5VkZRODVjeTB4UE8rRXhac0Q3?=
- =?utf-8?B?bFQvMWZQYW8xSmVyZ2owTjAxNkJPVkJOZG5VbExrSUU1clpiZjhlQTJ2MjJa?=
- =?utf-8?B?RGp2MkZDbUk4WFVzY1djRUd1ZXRKUEh6d1pTNlEvRTY4QW4vaGt1Zm5UKzkw?=
- =?utf-8?B?VnhtcVBUaGVJUlN4M29LZUdCRkNQbS95WVluVkdUdjFKVEhobG84dFJZTklD?=
- =?utf-8?B?V3ZwV1RxbHpPUHZVRS9hMHNkblQxa0p5cW1oYW9PM1QxSWNrbDhRQ2lDak1K?=
- =?utf-8?B?TnlMSWVZYzFKbmk2bzkzSzBUcTU0MFI5NVJTbkxYZ2Y2RXlseGlqNkZ1TmJT?=
- =?utf-8?B?QlUzVmxjQk5rWWU3eFRUU2tnK1dXMW4waVFMQ21lb2ZuQ0xhUGYxbTgxSis1?=
- =?utf-8?B?K2lvcXUzQmpGZ0o5RUR6azRmeDlXd1pQWEFwTldNTlc3TTlCbFdxczl1QWFS?=
- =?utf-8?B?SHRGZ2hWSmhTQ2lHR2NmcjlPR3FMUDlHd3MyQzFIU0R4UUNEbmNhNlV4QjN6?=
- =?utf-8?B?dkhJRDh1ZWt6TEZkVWVlcHFGLy8vTFNXcDh0REs1WFVPQkdRWW5mQ3ltNUo4?=
- =?utf-8?B?RDhmY3N2cWdKZll3NnMwNWlqYm5NQ1IvaENHVVNib2RWWmdxdG5VdkVwb1ht?=
- =?utf-8?B?WDVhR2RkazdodnQzZDgvMzBNSTQ3SWhkTU81RU1EcU44cTk1OFUzS1dDTndw?=
- =?utf-8?B?V2l1YkRjQmRLRnY4VTd4SkRBVnBpQy9YZW5iSTdnRXI2Qk1GYXRWb1RkMUtt?=
- =?utf-8?B?ancvMG5sdzE3cDA2YitrcEowcmhkZllDRVFSNFFoVUIvMmVKNVRMbkdrWVNy?=
- =?utf-8?B?MGxGNzJnUG15U2RXczJhVFZMaXJ3NTMzY2w1TDFPNnVzOG5DYmJLam03Z3BR?=
- =?utf-8?B?aHJsNVpaY3dqa0FWM1Fmb3JyeGJ0MThwOXo2U1VMMHBxS1hNMkdnZll5Mnla?=
- =?utf-8?Q?F+Nw0eAg0ibvDSsM=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc59893b-ba37-48cb-b3e7-08def1e1bd77
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB8229.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2026 04:34:58.4544 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LZme04kE7NcgoNpmCFj9g8W2j8frpXTPdBL8MQw3MAfhgDCmU+F8wyGlCKcn+A2OqTxOnDdaVt9t+LfWCgoIVV4QSSrRVwtN/iZeKltmdDE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR03MB989128
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDA0MiBTYWx0ZWRfX+WhqoYuP+eKt
+ ycpVF02ncdPJaUD9AQu2hOshrIcrhE6E7fzypHNkSbZVwGXuBbrQ2a2vcAfXVB4b1H4s++AqiIi
+ dS9T5q/NBepaUS7cZ3+IU8o3YNc+HIqo4avOA/SXSxsEZaVRPqT89BDhxy69bNbJr32xs2tLQcB
+ St6tZ+7IPz6TFIWyATMxaFyxap+sD7E54p/L5Ox2PfcZn4J+OfzV6/s5StxrYnA/NGsCEgoHMkA
+ x29neR+9BnnwI5sn4Vlu6PX5AsVTJrSphdVybAjJlUjuX3a35bApc/7vXMOurFPz1JR7/lraWae
+ MpA7hBREQWydcwlJfGp+3YzhGwFQ1KotnkE0CpldKc1yLxt1ZAFVL3Pqo+HJEd4wMGSWz6MGTo2
+ hruv07MLAu5n0dlTIqVZf8qNVx4zIkrUiEOvxhIAzQybAj4r9x4rPPgNjCO8OxulP6+QwcIX+/Z
+ px71r8rAvZ6oVbodNAA==
+X-Authority-Analysis: v=2.4 cv=T9K8ifKQ c=1 sm=1 tr=0 ts=6a717b8c cx=c_pps
+ a=rEv8fa4AjpPjGxpoe8rlIQ==:117 a=rEv8fa4AjpPjGxpoe8rlIQ==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=l0iWHRpgs5sLHlkKQ1IR:22 a=QXcCYyLzdtTjyudCfB6f:22 a=JGFfrT4xk0um10-Nj50A:9
+ a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: z5ITZffx85hw_MQzOP-ZJ0OHDCTpexD6
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDA0MiBTYWx0ZWRfX728fJ9XxFRTL
+ p2CLpfHtxo7WtA1LMEZpmE/yQuUEudwwQY7H9eMR4WpiOToGn2LdgfX5WpLVjabWzD+FLFzuHrK
+ U2PVVevInLsSZ6RjwJucpJH3tAe9NVM=
+X-Proofpoint-GUID: z5ITZffx85hw_MQzOP-ZJ0OHDCTpexD6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-04_01,2026-08-03_02,2025-10-01_01
+X-Mailman-Approved-At: Tue, 04 Aug 2026 07:45:52 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=altera.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vc2uvQrODlRR9qcZkUnzOCvQ++BebC5qH8NkJMfuPqQ=;
- b=jm4zgO53HccePcGoN76s03eknjE2JRMpNxdfaujmM5DKstP2qMnSW3HxCTlTEUaK7TxwdEpZEv1OCSs4pKXZ+kNe2STQd6NVuhEe4VH6gHc56bTgNcPiJKr2JwWomt0Nxj72UpqWPAC46HHuqCnKipE8ZWWG7dKl/dQpoDp/cHEw8XwdYOHb0aHfqsuwa0FrMVmTcfwT7UBJu4BVCKWuscbLLlYcYCccCaVpSKdhOGdWleOLJ2+TO5vZA7HGv96eZ+t0Ru0hfgQwXtwyd7XNlYXACC7IMtLz7FlLis0bnLAGBEmt+8mYKfu7oyTjNRJDuojCr25UsZl0hQk0IbWcyg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=altera.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- spf=fail smtp.mailfrom=altera.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=marvell.com; h=
+ cc:content-type:date:from:message-id:mime-version:subject:to; s=
+ pfpt0220; bh=/onTGiZ1K7eD61bTlIl1fo5FznSLsdmizjdu61GGU8Q=; b=YSW
+ mtCcrA0mwuAJ+TVvxvy8Yq7DIRjYk1k9qmISSI8F5H7bWB8v1xywiVB8kOuS6NAO
+ iaAuRs/XczoX5GIofpIHs6JwcIC5PwYCwPG6ijogG+1FpSeeiJnSNvTO60akOmuL
+ kdABz1AqrDLrPXhf8aSO8k1d+ZFCTpOwtFPc+8K0PBMSEvWzy3HmC6YSpXcCAiiS
+ ykLf7b3FVuiE2ymv7B24OMoOhxB/aixcCNx4Xd5cSu7Gxyhxo7o7kKiYXXVFziJx
+ a4xBArkGh43bUdi8JxuR5OEYDIDkFDwGaF0A6d0C64OHUDxsdem2ZhbLbvVjgGrl
+ VID9FC5KzaOsNa5e4Eg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=marvell.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=jm4zgO53
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none)
- header.from=altera.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=tien.fong.chee@altera.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=altera.com header.i=@altera.com header.b="jm4zgO53"; 
- dkim-atps=neutral
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
+ unprotected) header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256
+ header.s=pfpt0220 header.b=YSWmtCcr
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -202,34 +130,30 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: "Chee, Tien Fong via U-Boot" <u-boot@lists.u-boot-project.org>
-Reply-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Dinesh,
+Hi everyone,
 
-On Thu, 07 May 2026 08:55:38 +0800, dinesh.maniyam@altera.com wrote:
+I am currently working on Ethernet driver integration for Synopsys IP in U-Boot, specifically focusing on the Synopsys XPCS (Physical Coding Sublayer) block.
 
-> The default load address of 0x01000000 falls within the 32MB region
-> reserved at the start of DDR. Bump it to 0x02000000 across all the
-> N5X SoCDK defconfigs to match the sibling Agilex / Stratix 10 SoCDK.
+After reviewing the current codebase, I noticed that while Linux has a dedicated XPCS subsystem driver (drivers/net/pcs/pcs-xpcs.c), U-Boot does not currently have a standalone equivalent.
 
-Nit (optional): the "32MB region reserved at the start of DDR" claim is 
-not cited in-tree. The stronger rationale is already in the patch — 
-ARCH_SOCFPGA defaults to 0x01000000, while Agilex/Stratix 10 SoCDK and 
-N5X SPL_LOAD_FIT_ADDRESS/scriptaddr already use the 0x02000000 
-convention. Fine to leave as-is or tighten in a follow-up.
+Before starting development on a standalone driver, I would appreciate your guidance on a few architectural questions:
 
+1. Existing References:
+   Is there any existing/in-flight work or reference implementation in U-Boot or vendor trees for Synopsys XPCS handling?
 
-> 	"loadaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
-> 	"fdt_addr=1100000\0" \
-> 	"scriptaddr=0x02100000\0" \
+2. APB3 Indirect Access vs. Clause 45 MDIO:
+   Most typical implementations access the XPCS registers over MDIO Clause 45. In our hardware architecture, the XPCS is accessed via an indirect access mechanism using an APB3 management interface instead of MDIO. Are there any existing driver patterns or abstractions in U-Boot handling XPCS/PCS over non-MDIO register buses?
 
-Follow-up only (not a blocker for this patch): board env still 
-hard-codes fdt_addr=0x01100000 below the new loadaddr. Worth aligning 
-later if low DDR must stay clear of payloads.
+3. Design Context:
+   Is the lack of a dedicated XPCS driver in U-Boot primarily due to design preference (e.g., relying on TF-A/BootROM pre-configuration, or embedding initialization into SoC glue code), or simply that a generic driver model port has not yet been submitted?
 
+4. Upstream Integration & Guidelines:
+   Is there interest in upstreaming a standalone Synopsys XPCS driver? If we implement this driver under U-Boot's Driver Model (DM), what key requirements or design points should we keep in mind to ensure it aligns with current networking uclass standards?
 
-Best regards,
-Tien Fong
+Any insights, historical context, or recommendations on how best to approach this within U-Boot would be greatly appreciated.
+
+Thanks,
+Akash Nair
