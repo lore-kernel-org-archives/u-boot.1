@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAC02C55184
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 10:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14DB6C55184
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 10:57:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 586F7605EB;
-	Tue,  4 Aug 2026 10:57:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9DED460763;
+	Tue,  4 Aug 2026 10:57:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RhvsjwSE2VGB; Tue,  4 Aug 2026 10:57:46 +0000 (UTC)
+ id 8FDfpIZAXPSU; Tue,  4 Aug 2026 10:57:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9626160747
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 35EBE6074F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785841066;
-	bh=seHnUV5t0SBbHylUAzDoti9RpgEh7THpr9g8velhDHw=;
+	d=lists.u-boot-project.org ; s=default; t=1785841070;
+	bh=7j/K28BQJfw0vopubTx0pXk+xCzOI0T5pUPmCM4Gses=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rTunAAmxDK7Y6Pn0qevwgMmtGk+/RTpIN6Sb2OQfsrpxcDlICkZWoEzQS/5QFba50
-	 P7+iDl53mImmzeuzv+EwHeWof5Cb1NCulLnXoV3I0mR4ZCPb7MAjzX2HJGnCboCTor
-	 mMffYrmysoCgfura2HtcHfAXj2DY/685oFSFox4B78QH+XVbleyb8r+UBL3JjITJnC
-	 +of7HF6ha3uDfKnuzCrkxDq8zkeBXf2qUi6PN8X9zq/R/tarJ0nG2fRpNKtPULnhzk
-	 oyvIQuH5GBv9UpwEHqE1GGCTrzcosiUJNnaftlpf3Wce9/HpKKq4YJej0LTon/Z75D
-	 7/uSSpGlHJpAg==
+	b=qlpuaqqn2rR0c/ov4pj2L9bKQfeFfLHx48iYJ7S0Ha/3wDAlnB/SwBuVk0ZKf9OrW
+	 3mTNAT8mvQGwxr5eexBw2t/tYG4xntZiNFwURfutXb9URtk6yrdCrj9lzGuEgu39qT
+	 EejF4Uu9xvP/f1NhOZcG8T/6IIMkMAbnFJPtjaaGMSNdysmC+dmn01mJfYvu5JvzfT
+	 KR6em6YCvsSSccahuw0CyrdrQrdyCYUzt3cnw0qhqCOEX/knrw2zmhPhEFgaJjYSz4
+	 1hwICQlou4JQjyZ0Xf41Sr9WhTfXC1AzjFMdUjG2ukxTaDPiYvQnXURVhJST715pzb
+	 GthhNGRn5XgRg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9626160747;
-	Tue,  4 Aug 2026 10:57:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 120C42DE
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 10:57:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 35EBE6074F;
+	Tue,  4 Aug 2026 10:57:50 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A78AE2DE
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 10:57:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 03E3580C8D
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 10:57:45 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8E2A780C88
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 10:57:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0rYRyloGJ7KW for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 10:57:44 +0000 (UTC)
+ id cdfOafAZnSQ6 for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 10:57:47 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=eb25=f5=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 54B1380C86
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 54B1380C86
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 76C2E80C86
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 76C2E80C86
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 54B1380C86
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 10:57:42 +0000 (UTC)
-X-Forward-Email-ID: 6a71c5a4e481fa9c5d58fa7f
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 76C2E80C86
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 10:57:47 +0000 (UTC)
+X-Forward-Email-ID: 6a71c5a8e481fa9c5d58fa9d
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.13.4
@@ -60,12 +60,16 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ondrej Jirman <megi@xff.cz>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 2/9] ram: rockchip: rk3588: Simplify get_info() ops
-Date: Tue,  4 Aug 2026 10:57:11 +0000
-Message-ID: <20260804105721.2402406-3-jonas@kwiboo.se>
+ u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>,
+ Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH 3/9] video: rockchip: dw_mipi_dsi: Get GRF base address from
+ phandle
+Date: Tue,  4 Aug 2026 10:57:12 +0000
+Message-ID: <20260804105721.2402406-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260804105721.2402406-1-jonas@kwiboo.se>
 References: <20260804105721.2402406-1-jonas@kwiboo.se>
@@ -75,19 +79,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1785841062; bh=seHnUV5t0SBbHylUAzDoti9RpgEh7THpr9g8velhDHw=;
- b=Z6roNMjX+rmRXfHBuirnCUG3kADTk7uJYTpuVZwVJcIQQPf4N5f7Sk35eG5jpcpNJFNUECDD9
- P2oDlPKGgi617ft9GyGgjSvXk2xS8DOPf89Z9niiPrs+oXytEQuPbx2JwXSr8tWsk4/899oxpN/
- owSZsUI4QZCcsYc45WTd8TDGaGS/MENFx8vM/I87bAtzRHybqYTF2Ey+wHSd+htKu3rHC+GkgDU
- 6wbx8DNvp+cGs6dyLyf3XLX9jQms3xu40ixSOptz5pCU8T4iSIUQXpAn3mnNmKbbAymYcFA98rC
- d81/mebx1jfoyZGKcyePzQhGcZuQIY1fJEQQ62Xu1sUA==
+ t=1785841066; bh=7j/K28BQJfw0vopubTx0pXk+xCzOI0T5pUPmCM4Gses=;
+ b=YSpXefYjDhBbiTJpNteocuTuw176L/667iOKdpuUQdP+mX6gQj1DxEoBXVhUvCvdV6//9eYkG
+ 7WZ7y1E75X37FbWlRCKj0x34TacaP6L8eyLOvTgvIlpzeJPGbtcW42muVFqrkNTpZ9GUw1YpszO
+ D6CcpF5oszHom7jpiiuSo2zdLkyt94YhsikIc9L6aCV5DMTkb03fBHM5JDW72+++eXODhlgdYxZ
+ l8R2l3K/O8kPNxDJvcoPrprLqQX9+Z1pVJOOShmU3/lQu6vYQRbQ6Acs8C2sP0FUJdDuv0wJ51c
+ 8FD27dxeu3syFrVe/xmcLNbwV/LkBEmZlVV/0QnlzW4g==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=Z6roNMjX
+ dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=YSpXefYj
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -102,80 +105,85 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The PMU1GRF base address is fixed and known at compile time. However,
-the base address is read from DT at runtime in this driver, delaying
-reading the four HW regs to determine RAM size by several ms.
+The GRF syscon is referenced using the rockchip,grf prop in SoC DTs.
 
-Change to use a constant for the PMU1GRF base address to speed up
-reading RAM size and simplify the driver by removing use of probe and
-private data. The driver list entry name is also renamed to match the
-compatible, for possible use with OF_PLATDATA.
+Change to use syscon_regmap_lookup_by_phandle() to get a GRF regmap
+instead of using the inconvenient syscon_get_first_range() method.
 
+This has no intended behavior change, all affected SoC DTs have the
+rockchip,grf reference and the values being written already contain
+correct write-enable mask.
+
+Fixes: bd6375c5511c ("video: rockchip: dw_mipi_dsi: Fix GRF access")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/ram/rockchip/sdram_rk3588.c | 31 ++++++-----------------------
- 1 file changed, 6 insertions(+), 25 deletions(-)
+Please note that this has only been compile tested.
 
-diff --git a/drivers/ram/rockchip/sdram_rk3588.c b/drivers/ram/rockchip/sdram_rk3588.c
-index a144b432d76f..c572f602630a 100644
---- a/drivers/ram/rockchip/sdram_rk3588.c
-+++ b/drivers/ram/rockchip/sdram_rk3588.c
-@@ -3,37 +3,20 @@
-  * (C) Copyright 2021 Rockchip Electronics Co., Ltd.
-  */
+Cc: Chris Morgan <macromorgan@hotmail.com>
+Cc: Ondrej Jirman <megi@xff.cz>
+---
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+index fa512173510b..2e5bcb74589a 100644
+--- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
++++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+@@ -17,6 +17,7 @@
+ #include <mipi_dsi.h>
+ #include <panel.h>
+ #include <phy-mipi-dphy.h>
++#include <regmap.h>
+ #include <reset.h>
+ #include <syscon.h>
+ #include <video_bridge.h>
+@@ -31,7 +32,6 @@
+ #include <linux/time.h>
  
--#include <config.h>
- #include <dm.h>
- #include <ram.h>
--#include <syscon.h>
--#include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3588.h>
- #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/clock.h>
+-#include <asm/arch-rockchip/hardware.h>
  
--struct dram_info {
--	struct ram_info info;
--	struct rk3588_pmu1grf *pmugrf;
--};
--
--static int rk3588_dmc_probe(struct udevice *dev)
--{
--	struct dram_info *priv = dev_get_priv(dev);
--
--	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
--	priv->info.base = CFG_SYS_SDRAM_BASE;
--	priv->info.size =
--		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg[2]) +
--		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg[4]);
--
--	return 0;
--}
-+#define PMU1GRF_BASE			0xfd58a000
+ /*
+  * DSI wrapper registers & bit definitions
+@@ -224,7 +224,7 @@ struct dw_rockchip_dsi_priv {
+ 	struct mipi_dsi_device device;
+ 	void __iomem *base;
+ 	struct udevice *panel;
+-	void __iomem *grf;
++	struct regmap *grf;
  
- static int rk3588_dmc_get_info(struct udevice *dev, struct ram_info *info)
+ 	/* Optional external dphy */
+ 	struct phy phy;
+@@ -782,13 +782,13 @@ static int dw_mipi_dsi_rockchip_set_bl(struct udevice *dev, int percent)
+ static void dw_mipi_dsi_rockchip_config(struct dw_rockchip_dsi_priv *dsi)
  {
--	struct dram_info *priv = dev_get_priv(dev);
-+	static struct rk3588_pmu1grf * const pmugrf = (void *)PMU1GRF_BASE;
+ 	if (dsi->cdata->lanecfg1_grf_reg)
+-		rk_setreg(dsi->grf + dsi->cdata->lanecfg1_grf_reg, dsi->cdata->lanecfg1);
++		regmap_write(dsi->grf, dsi->cdata->lanecfg1_grf_reg, dsi->cdata->lanecfg1);
  
--	*info = priv->info;
-+	info->base = CFG_SYS_SDRAM_BASE;
-+	info->size = rockchip_sdram_size((phys_addr_t)&pmugrf->os_reg[2]) +
-+		     rockchip_sdram_size((phys_addr_t)&pmugrf->os_reg[4]);
+ 	if (dsi->cdata->lanecfg2_grf_reg)
+-		rk_setreg(dsi->grf + dsi->cdata->lanecfg2_grf_reg, dsi->cdata->lanecfg2);
++		regmap_write(dsi->grf, dsi->cdata->lanecfg2_grf_reg, dsi->cdata->lanecfg2);
  
- 	return 0;
+ 	if (dsi->cdata->enable_grf_reg)
+-		rk_setreg(dsi->grf + dsi->cdata->enable_grf_reg, dsi->cdata->enable);
++		regmap_write(dsi->grf, dsi->cdata->enable_grf_reg, dsi->cdata->enable);
  }
-@@ -47,11 +30,9 @@ static const struct udevice_id rk3588_dmc_ids[] = {
- 	{ }
- };
  
--U_BOOT_DRIVER(dmc_rk3588) = {
-+U_BOOT_DRIVER(rockchip_rk3588_dmc) = {
- 	.name = "rockchip_rk3588_dmc",
- 	.id = UCLASS_RAM,
- 	.of_match = rk3588_dmc_ids,
- 	.ops = &rk3588_dmc_ops,
--	.probe = rk3588_dmc_probe,
--	.priv_auto = sizeof(struct dram_info),
- };
+ static int dw_mipi_dsi_rockchip_bind(struct udevice *dev)
+@@ -821,7 +821,11 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
+ 		return -EINVAL;
+ 	}
+ 
+-	priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
++	priv->grf = syscon_regmap_lookup_by_phandle(dev, "rockchip,grf");
++	if (IS_ERR(priv->grf)) {
++		dev_err(dev, "unable to find rockchip,grf regmap\n");
++		return PTR_ERR(priv->grf);
++	}
+ 
+ 	i = 0;
+ 	while (cdata[i].reg) {
 -- 
 2.54.0
 
