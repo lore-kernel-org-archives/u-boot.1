@@ -4,109 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0004FC55184
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731BFC55184
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:11:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3C356607AE;
-	Tue,  4 Aug 2026 13:11:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D77E5607BC;
+	Tue,  4 Aug 2026 13:11:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ehf5L4sOuGsk; Tue,  4 Aug 2026 13:11:15 +0000 (UTC)
+ id 2nP7NNKYrWTM; Tue,  4 Aug 2026 13:11:19 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AEB2560794
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4D34F607B3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785849075;
-	bh=SyBe6HgHlxHIDY3j/Ra5/G5mohzkV8HiWbOI2367zS0=;
+	d=lists.u-boot-project.org ; s=default; t=1785849078;
+	bh=uV9zOeNHK13e12rGkPiDI/aL0+lCZtxjYQdbZWslYts=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YDsbpaPvwSXHQ8uhQAQ47APUrMtg5Jh8UNVS/f+Aw5QiScuVPuwpx4lOad3qvzQOD
-	 ZVtUfvCypX7KH8amhC25CJVDlLAJM804KXev6rwXAzLq8rCqMtyE5BnUoizqc8+9tt
-	 AjgpdEKQhuui87w/7lCyRX9cpLAtUnwDqJKr/NHmgT5NZ/QrNJYVwt6p0o8ylYniZy
-	 uBVjGM3AxkhijbOY467LRsMKWH6DmTb+/PjwwaXZkji3UiLcqgMcmHOwpkJ6UVHI1/
-	 mMpCt81/SNq/hwPFZFgz5vvFqKT/UjC5LPeBeZIe4qBnKyNVan4GXw+1Hg4zMp+Uxi
-	 vmQh56CLcIzig==
+	b=LkYdkMKd2OxGQXGJHyTPOxO/MbOfXdUqNHkggrcTIizxrPXfqDCD7z2gdEDio2dQI
+	 YyB1Bk3PcsgIjNd/hl9QIEchm5pQIqjIs1PzyTjYNzThLxteOf9fOUlUDtntsSb7Bi
+	 48CjNxonhjRLSRFSdBOJIGV+KMEYnecLW293LLmU6/VN0k/xPgwQxaX6OXhdNlrOT2
+	 chDyDCmMqt0ebMGQhuh7DPOC9BZwnAOAluCe2JRbyHUJ+8jXL014ud3Hv7uBDJbO0S
+	 UHeUy+bvolixo0L9BBswfs5DVFRdEjdtyeVW7QXVDF5/HoRe9LqJzdnRUAXhXqLmaQ
+	 7Z1+D67BToW5Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AEB2560794;
-	Tue,  4 Aug 2026 13:11:14 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 189C626C
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4D34F607B3;
+	Tue,  4 Aug 2026 13:11:18 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0F4712AA
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F2A7D405C0
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:09 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E9B3B4053E
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ze2qaEpM9_Od for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 13:03:09 +0000 (UTC)
+ id BSW4HCoMZ6d6 for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 13:03:36 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
+ client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 088EF40189
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 088EF40189
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 088EF40189
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:08 +0000 (UTC)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6984169c126so7675707a12.1
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:03:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785848587; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org BAC8940189
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BAC8940189
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BAC8940189
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:35 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4aa99bdso5494897a12.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:03:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785848614; cv=none;
  d=google.com; s=arc-20260327;
- b=kQ5W35W90kDyB8zU2gLz3jOzX2RZWueN0XJABY002lX4OEwE+o07+dsBqI6Mo00kwH
- mYSkTHZHydAOP+SuGbtoV2jDI/fvXLEjaOOXcYZU5IDJqHEDHGOPmH070XN57fV+OX51
- 2mHEVCaChTEsnArBbOJwDwhA+FpUN8qyauwi53pE6wVrExmRmwPnC/HtP6X8fUL3YkZh
- dbLxNB8HU1ZovAHGmL5BCeSZ3C76cc2CzmhQr+LpQEAJs/M1AvJBcXW7IL03vlGoecp/
- Tg0CLKXeX3U9PRvl9Lu8vY54KFh6WN0w/ULxj4ijNcnXiLUjgP0ahucm+DpQUXNTCUUq
- AdiA==
+ b=ko7q3a/KLaWPonXdUphNAZ4H2WpFL5l1+k+Y8UHtUnlmboCrnvmKVz83TpXSeuukPn
+ GQ8oE/2DWbUWLxKRLSyGSgH92eYauwhtP0x3fyn1BNiy/BGaSmL7NnmX8bAi1F/wiQON
+ gGjR0zy0L2i8mkePKjKwpv9Q/blX9L/iex69xILg7qhCPKqNatO8srxdMXEPD29oLY45
+ MKtCdCZHPeVZFtK5HeswVANBXiHz54VbG3Up3EFZgDex6P6WdMxUvJwg3ILYcplk5WOy
+ WOa5K9lH9OO5IC4qXEFrBUfljW3qhMwgYstot0kxhXK8iKvqHHsGGxLBC9qZDYsElmin
+ gYbg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=SyBe6HgHlxHIDY3j/Ra5/G5mohzkV8HiWbOI2367zS0=;
+ bh=uV9zOeNHK13e12rGkPiDI/aL0+lCZtxjYQdbZWslYts=;
  fh=hsQzq9IYCmZwK0E7cVW3p7RZJMnlUShWANxf+Zzt34k=;
- b=SRGedTn+ObqPEOvsisyCCfUmo3Y3YUAj/L1PmoePH0k8NugZgGWoo4OpaTX8Wlh5EH
- EgGqXgkPwKtl5WD/HavsXDE5LYTjFuF7trZurhm3G5dIWtDYeLJOtL2sIrgUflbwjhfm
- dgWvMmBKdWRECwOjb1HjQ3p3krjcL3nGG0DzzofdqZzoss6R8MtW5iAAuZLAy/qK/z+Q
- PMIJ/wlJmgAB+OGBIJs1gfJeWBeyOBlbNKtI9TE30VA+6BE3yqshAo3SpnfysgUh/apU
- SsnhrIPHVOGsHE1Qyf/bNYWH8jhjR0VbxF1tBDfWWXRnhhw7eG8T0DOxeAwcJtlt7Amt
- YcJA==; darn=lists.u-boot-project.org
+ b=I73FNE2aB1D5+QltQNnGZ/2Z9yGXQCtu61eJNCOPFaI5KPCcTyYeuyEJdd5SDPvSqs
+ O5LbeU8Z1ZMhFW03zUQwXTLxomDyVnh+NPp97l7Woa6kxfFFGczInrtztD33XbKl6syV
+ 1wQ133OZTHgnokMW4onjHA+cnnjx3aFWCEY1jQzuOT+bq+iHUA7jj7CPqCsj4vw32H6C
+ CGxD1jhavx9TblrEG1d0tXLLKmgRwpBY+RHrGNkq+GzoDYR3r+1A6lYppS0ObuAO44i2
+ rMWuD17TsfDsEkeBdlaLs/CTFHDOtlISub6TaLAGqHkD9KMcBWubsWdfcF3L3D6vvG6C
+ G4NA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785848587; x=1786453387;
+ d=1e100.net; s=20251104; t=1785848614; x=1786453414;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=SyBe6HgHlxHIDY3j/Ra5/G5mohzkV8HiWbOI2367zS0=;
- b=Gmd88FQok2aCuBQvZxa40AGunmslRyogOYSVNHXN+clG6YesJwIjDs5Yx2n7fK3H65
- yngjmep9u3k6lajadA4Cvd/SRP2qKNw6JEUUP0BfDwfYINzIQ7bldIqME7RssZ1+3UKz
- ef2Y+WQhEEMjR1K6rADQZ65wHe0WQyNniDjwMFfaTMUbndrDyb7UFgQvdQWYh9ORl3u2
- FTRI1dC1SzKEke+eWjusrpF+4h4Iz1B5yJBuVNdYWc/o0OPgFsw+HzD/nivrYlskOeM7
- nnz/B2YoVm8vGWPchEdiEbjQuB1a6rOCCeozusvsQwOZbRVtLNh+OSA7Du4ZcB6MFhbU
- L3Sg==
-X-Gm-Message-State: AOJu0YxCTkKpANicmE4wbX3PiP1BwTTbednMEF/X2nEZkl89/6cnzD9R
- Bm7AJ6oQmqHq8l4GhO/gCQRPZCKwSCiscVTmkN/5TgrCR2FhQz+Ia6mEo+t2lGiqE2kkWSM7Twd
- e9bGrLlheGQENDHtuxLdXgzrRVTLEbFfYNF4KZ+fd
-X-Gm-Gg: AR+sD13hOpLtfOZ/kDRCAoHl91+5Y/nsSXxskdEV+t7P3TmzqrpNDGj35ccO0KdTH7c
- i04cwKv7El2i2caR9DOzHaZTfKesiQKniwSvIU/5WrQMewzQUXkyHG3HZBGPJ7YQ45mwVW4CpfT
- nQ8pavd4+FFI0V0cuGN2oX1HSiARx+ozj82FI+lpR0JJcOLNEmjNc5FQcHGxKK6sQPki5DJBPQa
- 1mxwak7BxLD2vOKf81f1MiVB2bYnzNKoFcDehiWh23jCc4lt60Yo61aTvQ6E1e8kJecV2BtCixo
- De+HH/18e2GtnLaGd3ERRNebwY2aa/9UtzKkVr3TYls=
-X-Received: by 2002:a05:6402:52d1:b0:69e:8ad:5162 with SMTP id
- 4fb4d7f45d1cf-6a0a7c60ee0mr12060377a12.1.1785848586896; Tue, 04 Aug 2026
- 06:03:06 -0700 (PDT)
+ bh=uV9zOeNHK13e12rGkPiDI/aL0+lCZtxjYQdbZWslYts=;
+ b=q43cYMukkVih9IuTgl+uCsZoBP3V2kYg1w2mIj8hxdK6cp/pEnUlYYqlNDNMHI8ak5
+ wo9USAC9YulJ5IQy/l7MLetYzft4sKwTAJayP8dkMnyfPYYqwaXsSHsXrfDrvZbbHnRe
+ z2/RopVU6vwYQUw0dwl9eiNIiSlMPPtvKNt87IErtOKgSUbNADwgPfWXi6g7ieQGdCE4
+ jRMol3lHuA9WjhNRmLCpolvF8iugj8iHeuXp+X/7dJKlmG9jz/j3izfrhu2hd7Hwj0Bv
+ DhM3pC+r8vcUUEaWC5Mq9LNT3mLi8c8xFexw/GSR08GM5dsDnAx5NBYQ3Qeju6nbH1Fb
+ 1d+Q==
+X-Gm-Message-State: AOJu0YyyNiGn/U77zRReasUr63DiTcCXgCsD7h1nHhHXzCW6eAj3ZL+A
+ bPtIlbV18egs0hl7H/p3PjVwBXVIeaR6S6k/JNVTMLHR0f5I++bJz6V9m/8ytEAP9IphNJQyGyd
+ v5vB+zgscow83xpdMlyV7eNaEfb9VNKRRJWH5hPY8
+X-Gm-Gg: AR+sD12NqjQCFaOwxSizVfNdw/nXsJDok9XDmA7WDBveK88nJoiQTszdpF7L93xrDCY
+ pbyVL3AJ+fV1D+bkpGOv4e/r2DQ5P1iKelMouQkk1KDm7s8CqJuNKj0EUmTbV6d6hAGgRQnIEbY
+ 1+fusxFicw7TGZGvTEcQE7/hf/q/uspuFydMuporGFGTpboSSCOKCNLvVoiVlPptg7hkw8kCfuE
+ 7wIeUnFkAGRwRQ2YXIkOw20H3S5Bossdp24poPhT8SrM88GcJdVgRhzKdARJLJzw+R4ljtB4Yyg
+ XkZwZWB1TMVvTOt5nDPxFgHpCiHqF0XAyUfJklngI3I=
+X-Received: by 2002:a05:6402:44dc:b0:69f:4c65:86c2 with SMTP id
+ 4fb4d7f45d1cf-6a0a7c61187mr10429630a12.2.1785848613774; Tue, 04 Aug 2026
+ 06:03:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-5-acb97c172993@flipper.net>
-In-Reply-To: <20260731-atf-falcon-v2-5-acb97c172993@flipper.net>
+ <20260731-atf-falcon-v2-7-acb97c172993@flipper.net>
+In-Reply-To: <20260731-atf-falcon-v2-7-acb97c172993@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Aug 2026 07:02:52 -0600
-X-Gm-Features: AUfX_mzA5grGTJ_hrKcu7kOV97ChJhd5sljkj90Mwx3FQc2zZ7b8_SXbnZx0iu8
-Message-ID: <CAFLszTismHV2Dx-FKMDQ8416ZjWaXtXvKO6w5Wp88vcfp=z5Mw@mail.gmail.com>
-Subject: Re: [PATCH v2 05/10] binman: Add support for externally provided
- Linux initrd blob
+Date: Tue, 4 Aug 2026 07:03:20 -0600
+X-Gm-Features: AUfX_mx7L00lfA7GHJdHVhttv-x6virqoYQvzOJXxnosZe7s0Bvd2YBcZFoa4dc
+Message-ID: <CAFLszTgMXoB-X7i=s9uhX8nFkCvEeMvzDZ9vxPFEBAnquhVm4w@mail.gmail.com>
+Subject: Re: [PATCH v2 07/10] binman: tests: Add test coverage for a FIT with
+ embedded Linux+initrd and /chosen
 To: alchark@flipper.net
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -135,21 +135,21 @@ Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 04 Aug 2026 13:11:06 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785848587; x=1786453387;
+ d=chromium.org; s=google; t=1785848614; x=1786453414;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SyBe6HgHlxHIDY3j/Ra5/G5mohzkV8HiWbOI2367zS0=;
- b=guYlubt5YcmbfXBaAG5QD/xINx42ObQrDDwSgCucIOFD+vMlodTMhlzD5ssUtF+NBl
- 5hUK1cF2ylMqHpCSbXp1RwE/6u/3I12t6uo78N0o1CBbBzdnH9SJNosykqmaOIsdy5aU
- DIGcN20bH8ZAo8N3SYaw8ueCFXI9w9N/5nZS8=
+ bh=uV9zOeNHK13e12rGkPiDI/aL0+lCZtxjYQdbZWslYts=;
+ b=KDo7gSXFSuDfNCptt7nCEtYsEO3GaqP5bCw2B9Dss7dhkbJEXrNiMTwXfj1NWQnpgK
+ Yaep+EY1QB8AVj5YdG2Ebhvn58SYI5Gbl8sSjy9Lc664NSzeFCCWshSSbnIIw7x5T4Io
+ x5k00KOFX395CsBI/LsD4h/mrGOANmX4uayAk=
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=guYlubt5
+ header.a=rsa-sha256 header.s=google header.b=KDo7gSXF
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,17 +164,39 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Alexey,
+
 On 2026-07-31T17:10:44, Alexey Charkov <alchark@flipper.net> wrote:
-> binman: Add support for externally provided Linux initrd blob
+> binman: tests: Add test coverage for a FIT with embedded Linux+initrd and /chosen
 >
-> Add a simple named Linux ramdisk blob type to binman, activated by the
-> "LINUX_INITRD" make variable. No processing is done on the blob.
+> Add a test for a FIT image with a fake Linux kernel and initrd, and a
+> valid device tree into which a /chosen node is added (containing a
+> bootargs property, as is relevant for Falcon mode boot).
 >
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 >
-> Makefile                           |  1 +
->  tools/binman/etype/linux_initrd.py | 23 +++++++++++++++++++++++
->  tools/binman/missing-blob-help     |  5 +++++
->  3 files changed, 29 insertions(+)
+> tools/binman/ftest.py                          | 107 +++++++++++++++++++++++++
+>  tools/binman/test/fit/fit_chosen.dts           |  62 ++++++++++++++
+>  tools/binman/test/fit/fit_chosen_no_initrd.dts |  60 ++++++++++++++
+>  tools/binman/test/fit/fit_chosen_no_load.dts   |  57 +++++++++++++
+>  4 files changed, 286 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> +    def testFitChosen(self):
+> +        """Test patching /chosen (bootargs + initrd) into generated FIT FDTs"""
+
+The alternate-DTs (model1/model2) have no /chosen node, so all three
+tests only exercise the add_subnode() branch in _patch_fdt_chosen().
+Please add a case where the input FDT already carries a /chosen (with
+e.g. a pre-existing bootargs) to cover the path_offset() branch and
+confirm the overwrite behaviour that the docs promise.
+
+> +    def testFitChosenNoInitrd(self):
+> +        """Test a Falcon-mode FIT where the optional initramfs is not supplied"""
+
+There is no coverage for a config that sets only fit,bootargs or only
+fit,initrd (both DTS files set both). Since _patch_fdt_chosen() has
+independent None-branches for each, a small case exercising each on
+its own would be worth adding.
+
+Regards,
+Simon
