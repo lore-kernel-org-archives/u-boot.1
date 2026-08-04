@@ -1,58 +1,58 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13557C55822
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 21:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B894FC55ABA
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 21:45:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 98FA080893;
-	Tue,  4 Aug 2026 21:44:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 460DE60787;
+	Tue,  4 Aug 2026 21:45:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PG9PtWCPlRq5; Tue,  4 Aug 2026 21:44:57 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TGbV70XOdwvL; Tue,  4 Aug 2026 21:45:00 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F0893808C5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9443560618
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785879897;
-	bh=jz0U2fJrzT543eAbA9j+GhmqXmlmGviMlzhOvvDwwW0=;
+	d=lists.u-boot-project.org ; s=default; t=1785879900;
+	bh=W9j6H9Z2vu6onx4u7zQ2tk3v/kQ4s91BqVno3sCrHGk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0WgITr7Wx5KQF/u9AD016fDNTL1NtW7l/YjmwcuSCx9MCD12q3ycZCzoUQWPyS7dQ
-	 S1qrvDq1Yo/NPhxDrDgu3NpX3/unDyd2ShS5Z/HiJZJdyQZp8gE8jOJhX929bBOWi9
-	 LX//tQGeFX85duTYA0BaJsn8Cdu7nHNx9m59X+4/+vpkKVxmcsMSlZ7RasEqLwth2M
-	 ZCf4yrAOX9SG8NujhLOmTgeagpXvfpcQguhzrShkitaHK+O+L1nzG7fRPpj8FObwsq
-	 OTj2aTr9+kGqZXvz7JgQJ1g/dNb0D+RdCr5iS2UQ0w2ssYTSRKf6zRMT4T1nnvUimf
-	 IAcN5xZJDGwaw==
+	b=u0tiJl3J7/7Aq/pwvdGtsbSHex6gdEZHxI9qpiNYxK/itmUKOF/f0iKHT6OuvWq+G
+	 m8zkH2MTnt64K3I/l7tj0dJhiUbTAd7kDhxtpI5O/PxsDEBRmbKHb3eEJXPUozZQLL
+	 dhJSfghDHUBTUCPw74sLoMsGpmWXP9heTxlTedOPK6UQYb73pA+8HKyCqhuy4IvPPs
+	 ZIWRaXYP5o6ShvMXEdxnAtjURqXtS5r749YAG/nE6Ds/riSFMgaeEnKpYkrJyMaj9U
+	 PErWgGGfRaIFyDBhSJUhGpIz8nOCBzkwePUfjf+bX2YmvTGz3VglfqPEv40gO6dkLJ
+	 sOtHx0tb6jK6A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F0893808C5;
-	Tue,  4 Aug 2026 21:44:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 523EC2FA
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:44:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9443560618;
+	Tue,  4 Aug 2026 21:45:00 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE489270
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:44:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 476A4405D0
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:44:56 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C4627405D0
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:44:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9rUPR6DW072b for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 21:44:55 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ id DscfHUkOuXCb for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 21:44:58 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=1695=f6=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D7E7E40571
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D7E7E40571
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D7E7E40571
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:44:53 +0000 (UTC)
-X-Forward-Email-ID: 6a725d5296269bde083044c2
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 0BCD240571
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0BCD240571
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0BCD240571
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:44:57 +0000 (UTC)
+X-Forward-Email-ID: 6a725d5596269bde083044ea
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 121.127.44.66
 X-Forward-Email-Version: 2.13.5
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -62,13 +62,12 @@ From: Jonas Karlman <jonas@kwiboo.se>
 To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Klaus Goger <klaus.goger@cherry.de>,
- Heiko Stuebner <heiko.stuebner@cherry.de>
+ Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 01/10] rockchip: rk3588: Rename CRU_BASE to RK3588_CRU_BASE
-Date: Tue,  4 Aug 2026 21:44:30 +0000
-Message-ID: <20260804214442.2592597-2-jonas@kwiboo.se>
+Subject: [PATCH 02/10] rockchip: rk3588: Use fixed CRU base address
+Date: Tue,  4 Aug 2026 21:44:31 +0000
+Message-ID: <20260804214442.2592597-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260804214442.2592597-1-jonas@kwiboo.se>
 References: <20260804214442.2592597-1-jonas@kwiboo.se>
@@ -78,19 +77,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1785879893; bh=jz0U2fJrzT543eAbA9j+GhmqXmlmGviMlzhOvvDwwW0=;
- b=LFCh5TyNlNu62abeWpKDLVGPjUluolTKybqBsZDvGwW8E8xmFjxHtK1Yc7Tst3HUuVXpllTRP
- aw9n+neS0svVvNPvwyu2FXT2UtX+CB8IpGT/AgAK2ilxZFHv16HFKooc42z/HrT0VN/fK3y4Nhz
- 5eSHTmzuXiYWEvm8sH8KvejFmEiokPnqStCwj13pgKtMHLE1xjnRU5PUF8KhsJnC9RqyoIBDCSo
- 7P+RF6ezGM6gxPWDiUHf4rFcx96lIWXZYir318uPXfu1gawaJ5jGy3kl3npUF6d/ix7yb3NFg4F
- 5Rl0JnlDg+36Za6NaCATh6lTUf7kB28HH2dAI6VOTHaQ==
+ t=1785879897; bh=W9j6H9Z2vu6onx4u7zQ2tk3v/kQ4s91BqVno3sCrHGk=;
+ b=Lw/JeqnwOWzC9F1lAsaDkcO+gidlKjai4ttGSLXLQt7cWcSO0ciJV00b/5BTINhntckwgjinf
+ Cp+cyrOTbczbJFUfHBdPCeCTCbJo6dcpxAs9c7NelCs6yRJMitjwaMXXuCqKYszZi/eULxGMKSt
+ es60fKZoeCLbq1mZoQUWfmma7yUYcFfKF6jr6oiYwXH7bTTeSSrBuOx9LcjaLMRWc4Rr0G14beM
+ POfjOWoZGz86zmaGTpzGsmzLAIuReV3pOPo3AQa9D2/1CTKH+wTSIvfepnp4ASI5meTObHtW/nh
+ X39PXRZ8xjwwim4jinHbzuMgdFB5iz1qQhC0Abkf0q8g==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=LFCh5TyN
+ dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=Lw/Jeqnw
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -105,59 +103,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-RK3588 is using a generic CRU_BASE name for its SoC specific CRU base
-address constant.
+The rockchip_get_cru() helper is used by the sysreset_rockchip to get
+the SoC specific CRU base address. The helper may trigger a full clock
+driver probe to get the fixed CRU base address from the clock driver
+private data, something that can take several ms.
 
-Add a RK3588 SoC prefix to the CRU_BASE constant, similar to how other
-RK35xx CRU base address constants are named, to more easily distinguish
-what SoC specific CRU base address the constant refers to.
+Change to return the fixed RK3588 specific CRU base address directly to
+simplify and remove the unneeded complexity of using runtime lookup in
+SoC specific code.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/include/asm/arch-rockchip/cru_rk3588.h       | 2 +-
- board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c | 2 +-
- board/theobroma-systems/tiger_rk3588/tiger_rk3588.c   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ arch/arm/mach-rockchip/rk3588/clk_rk3588.c | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-index 85cc17840436..2723a0a36fb4 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-@@ -63,7 +63,7 @@ struct rk3588_pll {
- 	unsigned int reserved0[3];
- };
+diff --git a/arch/arm/mach-rockchip/rk3588/clk_rk3588.c b/arch/arm/mach-rockchip/rk3588/clk_rk3588.c
+index 250ec423bd24..9b112e45f1de 100644
+--- a/arch/arm/mach-rockchip/rk3588/clk_rk3588.c
++++ b/arch/arm/mach-rockchip/rk3588/clk_rk3588.c
+@@ -4,10 +4,7 @@
+  */
  
--#define CRU_BASE	0xfd7c0000
-+#define RK3588_CRU_BASE			0xfd7c0000
+ #include <dm.h>
+-#include <syscon.h>
+-#include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/cru_rk3588.h>
+-#include <linux/err.h>
  
- struct rk3588_cru {
- 	struct rk3588_pll pll[18];
-diff --git a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
-index 5177aa9d6e80..840504c3f564 100644
---- a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
-+++ b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
-@@ -31,7 +31,7 @@ void setup_eth0refclko(void)
+ int rockchip_get_clk(struct udevice **devp)
  {
- 	/* Configure and enable ETH0_REFCLKO_25MHz */
- 	static struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
--	static struct rk3588_cru * const cru = (void *)CRU_BASE;
-+	static struct rk3588_cru * const cru = (void *)RK3588_CRU_BASE;
+@@ -17,15 +14,5 @@ int rockchip_get_clk(struct udevice **devp)
  
- 	/* 1. Pinmux */
- 	rk_clrsetreg(&bus_ioc->gpio2c_iomux_sel_l, GPIO2C3_SEL_MASK, GPIO2C3_ETH0_REFCLKO_25M);
-diff --git a/board/theobroma-systems/tiger_rk3588/tiger_rk3588.c b/board/theobroma-systems/tiger_rk3588/tiger_rk3588.c
-index a6d44f10db32..55f298adfc55 100644
---- a/board/theobroma-systems/tiger_rk3588/tiger_rk3588.c
-+++ b/board/theobroma-systems/tiger_rk3588/tiger_rk3588.c
-@@ -31,7 +31,7 @@ void setup_eth0refclko(void)
+ void *rockchip_get_cru(void)
  {
- 	/* Configure and enable ETH0_REFCLKO_25MHz */
- 	static struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
--	static struct rk3588_cru * const cru = (void *)CRU_BASE;
-+	static struct rk3588_cru * const cru = (void *)RK3588_CRU_BASE;
- 
- 	/* 1. Pinmux */
- 	rk_clrsetreg(&bus_ioc->gpio2c_iomux_sel_l, GPIO2C3_SEL_MASK, GPIO2C3_ETH0_REFCLKO_25M);
+-	struct rk3588_clk_priv *priv;
+-	struct udevice *dev;
+-	int ret;
+-
+-	ret = rockchip_get_clk(&dev);
+-	if (ret)
+-		return ERR_PTR(ret);
+-
+-	priv = dev_get_priv(dev);
+-
+-	return priv->cru;
++	return (void *)RK3588_CRU_BASE;
+ }
 -- 
 2.54.0
 
