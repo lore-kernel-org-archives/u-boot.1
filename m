@@ -1,112 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B04DC55822
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7712BC55184
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:05:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ECC2E80C5C;
-	Tue,  4 Aug 2026 13:05:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 37B5860762;
+	Tue,  4 Aug 2026 13:05:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3JqVQplDCBIt; Tue,  4 Aug 2026 13:05:49 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l5-NTxusWWOQ; Tue,  4 Aug 2026 13:05:54 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0AD31805B2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2955760715
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785848749;
-	bh=KwdgLlydSDDOzPDivOyexGr7m75HlDkow/iIIcHm3SE=;
+	d=lists.u-boot-project.org ; s=default; t=1785848754;
+	bh=vFm+T/ETcyWAsma3YKUeTaFPeTTqZh6jakUluhChy/Q=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PA0x9XUzmqfuGxUi8c3klbQNwuYatYWUjudqoBYgghBlJ1t4IF673nAofOWah1qvc
-	 IGrbZywEuMA0uTq0M9xV+MO36u260H/3uMgWcHW9IOOzlNZA5LhZr3/ZYa05wt3L/C
-	 onC949Wv1tPm3zyd/WFoKQa8TcdI+scpjZc/znEWqgtoIo4+BAlMqL6TuA3DpJ/XY6
-	 chJpwDYhFMMcwhSTNHb/ZczgQ2mO2+5zxuMcFtoOOf6EAoQMITylxoebAahl5IVWKg
-	 WIjWDoYlnFzLnY3KlCUW8tGzQMf7LQZ2dujZXIvQdPnj3yzW+4tvNcVMY26FqZToh8
-	 /yXSW/wi3kNrQ==
+	b=WUxbHHgN6ktFb2a5aC6Ac0yd+8l1qNQnmHxPtB+HaWDR5HwoDMDh0WHCPMNFUR1CP
+	 OpTmEibjQxfoTv6wL61ytDXZH7HTotAoNdtzEwzWGRj9mNekJrmMvn88E+JYe83F0/
+	 tKLY/2T1bG1xd6rD8Sb7AAjS8fFYF1exjzF39lITNioRWMAQuVuvx6+2ANl+RrgFwB
+	 ajbOPVjBvuqz4nHy+AANsXXJpqhgPirMzVvbqHYnSrXh+8GbdY7uKm8lfSAtQoSmvY
+	 Z63q2ikPJwx1/JQNSSYHNUk3hndHB4xouU6z6fkawTjBXDmqkyj2BXrDCv3aQFy/Lo
+	 fZWPngrLe987A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0AD31805B2;
-	Tue,  4 Aug 2026 13:05:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8623626C
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:05:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2955760715;
+	Tue,  4 Aug 2026 13:05:54 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id AAA7C218
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:05:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 77E6A405AD
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:05:47 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9184680B92
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:05:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XB5z2UVaq4Ub for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 13:05:47 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YIopnmU6A3kQ for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 13:05:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8FDE34053E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8FDE34053E
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8FDE34053E
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:05:46 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-6a0cb6e96dcso4474954a12.0
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:05:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785848744; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5D95880C7C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5D95880C7C
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5D95880C7C
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:05:51 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-69fab5a852cso6262184a12.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:05:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785848749; cv=none;
  d=google.com; s=arc-20260327;
- b=Jayhf4YGuc3Q3mz3BCVoji2LGL7SZwljSYMvw1w8K8bexicZwCzQ7Uu3E1xH/kRZPF
- TyNQKqfEXJsACHczRUw91281wSLs66yOi0RWQG4ejbST/1yCXQbvwiPUmDqhOFR83f5d
- USj+tGFdh0QB1Sx8MnzpzU4sWpDHED1KijIPlulSeye0KR+aOCex7JCXQ4XItIba2KlW
- AGJ2vHwm2p2T5ricpIuAkzBmeF55tAq7JCalRhVMhWKRahECFh9j0Qc9i/TxAMPk0aEi
- 7/RedzmWAXej1hx6L6HJd6dH4xxncceiD+3G66E2HzdPFs6DMAnBLSEu5HfiaK+uiZL8
- +oJg==
+ b=S8iLhJvcGRVvah6LlEKmxZAy/Hok4973NtlY58N3A2TD8s8UYWxB0rLLiAu8Vx5f1Z
+ eokkOyTISIDiS/On1I241rK8LC54rRbxiIVtBaOxd2o/BdogOJ21XPr90RBbWCEeBEuu
+ ygb2S/cQYNM9rScKyJ0SMzGVMZo6W19iqRyB3O0kdJYyJWxT8BsBPwsWvXoU3qGTSFQv
+ J1xSVfqu+2mbISeJY7EsWc5lzRl1hEiRS16HGNhsx/62x2xoX87zqDl1LAjQgWjp8miB
+ yo7fI0C9TA1CivUE8UvTxQf6jg3RKDiywOu9D6kHYvt8KBMQbBU/Ac4xanR5k04JVhct
+ FPOA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=KwdgLlydSDDOzPDivOyexGr7m75HlDkow/iIIcHm3SE=;
+ bh=vFm+T/ETcyWAsma3YKUeTaFPeTTqZh6jakUluhChy/Q=;
  fh=Kycz0RmuF12z7/MfMEx/C/XJlPwcni/aTJr26m8kUJU=;
- b=OWnO/GN2PuGdpFEtminGX3Tqp0DmgH4UwmI0Q1T/5X3ZDMPEW+25j3LVWP1il9SLmV
- srTfsgmc4PCpSXFYab+7TYKzEeCAjj8WRBPf0siOOz19QOHZHw2ixclN2+i0QD5MSECy
- 7MNHYCP+oY/BywCuXvFeXQS4UydCjtJbVEvb0ZbtKAr+UsziT9skOhfuDWQKhMiZ/Dib
- RxdgCMcXTT+Te2YO6eRFyh2BwxsJq34VsIfdhx+DDfyxSHBTLT5CrCxEGDl/WaRuiK3Z
- nCoJ5OVm9gWYVdeGvXSgudKiBoOPswuhWOePHZW6G+LKfLdixik0d46OC3PF91z67AQ8
- nhcg==; darn=lists.u-boot-project.org
+ b=UrtWNHpskxlrr4y9Hj7JzsufvrACCJgrIx4RlGzBa2/ruQ40nGLCNFTetKvchpqjWx
+ 0Y+Fjrce+t9MBfj/vEAeZ6uuBbp0dVPXhSPUOy3GSkqEZx4BEV4OZcB/uHJAPRstkdpE
+ ELLpiWRiUGBeyDX8vzGRrW9aRYivlKm6/ciWaF8TbUytOi5t8xChslJQpGJZ6NRnsYL3
+ etBAABJihg/KWkvhOd1v51kKw4gog4L47nRHIw+eAbZVX8mdBHZkmPo6mAIlVXpfZpVq
+ XV/BX5kwm557zCFrAYrVRQsmZV/ofRqSFv0uMFjOx2OiEOz8NjcLme5hzE+yldTHyUXE
+ LWXw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785848744; x=1786453544;
+ d=1e100.net; s=20251104; t=1785848749; x=1786453549;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=KwdgLlydSDDOzPDivOyexGr7m75HlDkow/iIIcHm3SE=;
- b=rTbiBm4ym1GIB0X4MJ9fty6GM/zSFXNMCnbewjn+CB0uxaB2H8qz4PlQ7z2/PB1vEK
- tJ5jbKxBEdSFEx5CgjIf72cRDbJVm25HtRIUD+owWKugiu5LNuX45eBN8+yQ3DBJqjan
- X8uxbUVge6tJStM+sBcGIi9VArb9LUx9m1cF0FkqUI31oiuB37mDYYdsCPFjPX6p4pi4
- mYSS99+gFJrmangBEkz111T01+syrCNPmLAPTSO66GRvISoPBbSXHVE9fnsG1S62VC84
- goLdCmEDQLWdZlgBDrH3MLe83WAo7qDgOoFl2SMP/++CEA7FXDCmxG8FYXu1O5ExgZeO
- WiYQ==
-X-Gm-Message-State: AOJu0YzdiIH6hfdYA7bFFqpdf3Vt4ZRWWAaBw0SDTkVaIwxhXJ8Qfk0p
- QFVsciohX+qVQfCyXEiJT81a66JPYs6EzArtFXcySBNcJJ4b5GIGzMuaYfpv9hoxIPZUffR6H8u
- q9twHgeaStAa/l0A2d4ys84Oj9QtOcY5WOt+cLYGY
-X-Gm-Gg: AR+sD11dn220vdgTrtJ9+sXQs92zn08M96yRIC/MySK4QrGaNdT+Xp82JgM9CgUKL+q
- ARDSnARXvRZDCVBTXbHMNfFy541TK+4o37dRxtb+LgNcAlbhrJrYk3DxpBBdVyc3wEJuHOfAkEB
- yT/Fn7/XxUFLLKUP4+4Qv9wF0zGLSZCIK9cG2B3uBRUCWouXVAotQlhbPbOqDerdgoYx1iyR0KW
- CiZWyfITPf4f9qCw5gkOujnVnxVtRPKEeALXhsyqiacInD4m9iE1KE9Bt2tr1gBy+Ymo6qkDs1H
- IkRoeqbnJ3Ws4finutci8NhymEuDT29rer0kBiiQLao=
-X-Received: by 2002:a05:6402:a6c6:10b0:6a1:1be7:c416 with SMTP id
- 4fb4d7f45d1cf-6a11be7c4d6mr3433025a12.4.1785848744576; Tue, 04 Aug 2026
- 06:05:44 -0700 (PDT)
+ bh=vFm+T/ETcyWAsma3YKUeTaFPeTTqZh6jakUluhChy/Q=;
+ b=JxA0lMsXBMfGdxBLOxzNwyik2w0TBfElGnfvfT0XWaeRzKgCRP+erP9K2TWIYgczg+
+ 88vvd/fAmEOmxtfXatKkBH8PWDT2gyNdvncG/hA3uG/M5HDDkrltY/M1EgPFjOAfSuyt
+ of3nUi/vI6rREoByRrE3ANte5/Ayws7aM+u6gqg9AgMft6dqsLKeOWVIjIlrtFsDFb9i
+ NnkG3TwQWn0y9OlREH5PIkUaniU0uUGuddqh827rpec9meBLBx25Z6OtZdT3l0we9N7h
+ OghrUGTVtdLgPf36IbX7CiIa4omHsTJ1nAccsGPlH5N5HYD5xY+hwbKKDVs/Lgp+/NHR
+ fpyg==
+X-Gm-Message-State: AOJu0YzSZ1u4dUlmvZaqwC2vaMXAnD0ghFIAkz+I4Ap5KblogtW5srDn
+ SROBgM9PkzMKroDYJ3PMHCCFrZkalTItK7P6d/WBQs7ObpHpjmjepAGLVElcQpBGt6Io1YIt2oR
+ MWkDvJ2boBQaDuL/XYcc719wGTLGO7HBJHY/306nd
+X-Gm-Gg: AR+sD13gT34PnoK2WFzeAa5g1d/31XqzRumEI7Un0aU7O5i51YpGiSubq29Lfk0MBKt
+ Xn1x5k8FwewLb6MpNlsA9OTnPks8RDnKWyguCU5Elf+ifHKz8djGnNQPbvhwwBLEY779NtzOWz7
+ fUPoWpwagN8lyopG5Y8yjca7MzJqitw2J94wdQIVv1FEsJvu/R2+/LTBQWZCEhpwgyoUF2rG3BK
+ f8KFwnVsxQCjuvddC5HitwVsn4ktW2TNUyVTOwvjh21BWWBrmoVNQroeaCUFLS+lys0RqnFL4V3
+ crKJCBWTyAOCtOOvGYn+SG67GYqJIwolPKakbqOtsVmXNraaAhKVHQ==
+X-Received: by 2002:a05:6402:2485:b0:6a1:2863:ad84 with SMTP id
+ 4fb4d7f45d1cf-6a12863b043mr3114295a12.11.1785848749403; Tue, 04 Aug 2026
+ 06:05:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
-In-Reply-To: <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
+ <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
+In-Reply-To: <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Aug 2026 07:05:30 -0600
-X-Gm-Features: AUfX_mxYAoW0B6LuXkqNi875l77famZObmoBUqqzw_-K-M56xX5vtj7HllBhoUU
-Message-ID: <CAFLszTi3gEBx331wH2bNLh+8rZ7vVip0BQ0rnQXUPyoyiF0CrQ@mail.gmail.com>
-Subject: Re: [PATCH 1/6] disk: part_efi: Size the partition entry array from
- the block size
+Date: Tue, 4 Aug 2026 07:05:33 -0600
+X-Gm-Features: AUfX_mzMJVguk8HBEn0ucdc0aUHwRHtwpMCKi947Y1Hp_J_smLhJZxENCmM-d6k
+Message-ID: <CAFLszTjn+pNik+Vc5WKeTBpz4vAZ39pFRfnGOYtLEjdA9vpjLg@mail.gmail.com>
+Subject: Re: [PATCH 2/6] disk: part_efi: Add missing endianness conversions
 To: alchark@flipper.net
 Cc: u-boot@lists.u-boot-project.org, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>, 
@@ -123,21 +122,21 @@ Cc: u-boot@lists.u-boot-project.org,
  Tim Lunn <tim@feathertop.org>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785848744; x=1786453544;
+ d=chromium.org; s=google; t=1785848749; x=1786453549;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=KwdgLlydSDDOzPDivOyexGr7m75HlDkow/iIIcHm3SE=;
- b=MSK38pGJW9BEJD1ZHYn5PQFrBrcp3OSxL1cTN/92GF81trDZG9r+bVVLH8luWMySDg
- AtNw8kDUEIqTlcmMYrfphcTgPEftFQvwKsXHMYCU3aJ0u+wkLHW+LNmZDhfRJfnUagd+
- /gzufFjdD5uSKcuUYybtkxsg4OWsAsHDxfe8k=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=vFm+T/ETcyWAsma3YKUeTaFPeTTqZh6jakUluhChy/Q=;
+ b=OeNz6irszjf+AMAqBgjMhGwgAb9nYf5D+WDwt3tFXaeWOGg+3J5VszZ7wXomGYoiH9
+ P7cbynPCcPlV2jA5s+e3GdwqCX3xncOylWtKc1B30+pUA0ad+3dr0wQL/nfYKr6/WWk3
+ DRl4gJ1LE2qZ8O+NenmljBQwkupcQWV6c8Meg=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=MSK38pGJ
+ header.a=rsa-sha256 header.s=google header.b=OeNz6irs
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,56 +152,30 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 2026-07-31T12:39:59, Alexey Charkov <alchark@flipper.net> wrote:
-> disk: part_efi: Size the partition entry array from the block size
+> disk: part_efi: Add missing endianness conversions
 >
-> gpt_fill_header() computes last_usable_lba and first_usable_lba from
-> hardcoded block counts that silently assumes 512-byte sectors and the
-> default number of partition entries.
+> Several GPT header fields are read without converting from
+> little-endian, which is wrong on big-endian hosts.
 >
-> The partition entry array holds GPT_ENTRY_NUMBERS entries of 128 bytes
-> each, so the number of blocks it needs depends on both the entry count
-> and the block size. write_gpt_table() derives that count correctly and
-> writes the backup array at last_usable_lba + 1, so whenever the two
-> disagree the backup array no longer immediately precedes the backup GPT
-> header. Furthermore, on a device with 4096-byte native sectors, such as
-> UFS flash, and the default 128 entries, the array is 4 blocks rather than
-> 32. Current code reserves 34 blocks at each end of the disk for any block
-> size and wastes about 114 KiB at each end.
+> gpt_fill_pte() takes my_lba and partition_entry_lba raw when working out
+> the region a partition must not overlap, so on a big-endian host both
+> bounds are byte-swapped garbage and the overlap check does not do
+> anything useful.
 >
-> Add a new helper gpt_pte_blocks() and use it in all four places which
-> currently calculate the number of blocks each in its own way, so the
-> layout written by gpt_fill_header() and the extent written by
-> write_gpt_table() cannot drift apart again. With this, first_usable_lba
-> on 4096-byte sectors is 6, last_usable_lba is lba - 6, and the backup
-> array occupies lba - 5 .. lba - 2, immediately preceding the backup
-> header, as the UEFI specification describes.
+> gpt_verify_partitions() compares the loop counter against
+> num_partition_entries raw, so its "More partitions than allowed!" guard
+> never triggers.
 >
-> Note that this changes the 512-byte layout too for boards that do not use
-> the default entry count. CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is
-> "default 56 if ARCH_SUNXI" and is set to 64 by a number of Rockchip
-> defconfigs:
+> It also swaps gpt_part_size, which is already in host order, having been
+> computed from two le64_to_cpu() results a few lines above. Drop the
+> conversion rather than adding one.
 >
->   entries  array blocks  first_usable_lba  last_usable_lba
->        56            14        34 -> 16    lba - 34 -> lba - 16
->        64            16        34 -> 18    lba - 34 -> lba - 18
->       128            32        34 -> 34    lba - 34 -> lba - 34
+> All of this is a no-op on little-endian targets.
 >
-> Existing partition tables stay readable either way, since is_gpt_valid()
-> locates the entry array from the on-disk partition_entry_lba. Only newly
-> written tables change. Partitions given without an explicit start= will
-> now be placed lower on those boards; on sunxi first_usable_lba lands on
-> the 8 KiB SPL offset, so such boards should keep specifying start=
-> explicitly.
->
-> While here, report both LBAs when the requested layout does not fit, since
-> the existing "Partitions layout exceeds disk size" debug message gives no
-> clue as to by how much, making it less helpful in debugging.
->
-> Co-developed-by: Anton Burticica <mouse@ya.ru>
-> Signed-off-by: Anton Burticica <mouse@ya.ru>
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> disk/part_efi.c | 47 +++++++++++++++++++++++++++++++++++------------
->  1 file changed, 35 insertions(+), 12 deletions(-)
+> disk/part_efi.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
