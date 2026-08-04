@@ -4,135 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C89A1C55182
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 02:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC22C55184
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 02:15:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8447A406AB;
-	Tue,  4 Aug 2026 02:15:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C980A406C5;
+	Tue,  4 Aug 2026 02:15:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OZ6ooITOm188; Tue,  4 Aug 2026 02:15:29 +0000 (UTC)
+ id aOxD8Y2yRWtR; Tue,  4 Aug 2026 02:15:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8221E40670
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BAE7D40692
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785809729;
-	bh=rh4vGvKDdYSFJDiilkbxOxOy89FKzZHP99/BAW51SSk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=csakTTaLdRXRK6SDodqbLECn5VHkgW3ouzHUPhkpE5LOTTWzFya2kQY0aGiIJ/GUD
-	 s+BtyncKN5yiI3Kz0ytVLrXjSTf33PxiSSNgRRPzey/ZxCPiSj04XdY7TCtiwLXmQw
-	 AIZ1aQ6sqh4Dq1X5ZrJbNoRTJ2c7qcWd3CoC5UQ6TcPLCrmWQwmbt9WDHzS4ItjxU8
-	 XLEoKFPBz2CcShbhnGrbmZygo2PosRFn/T1wUxY+wVZQ7dW7X66ASCrgu1kyT9V2U6
-	 OXlnpwHE90cco1ik2Mxtpv+ofhzXne3oLs0QbNyophX97Odor5hEYryd/FxvDAH3le
-	 ktgaECZLy0uVw==
+	d=lists.u-boot-project.org ; s=default; t=1785809730;
+	bh=8uMaTQVWpRTf3qmAQZ1hDGbSL7Yqz0f9l0IEEeMeOXM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=YkDj9X8P+fF3S11g8yZRSmRsi+GQsClTC0U1K9i1IkYdQWvyAKi0HQNb3vxB3t//7
+	 j9uJE1Db/R6kdxP4psicZt349go0qjBvvauuVIMpivgYkEFINUVCbRVfDkP6H0kCe2
+	 jv6GUFAGjV5Ki7TD5QtTtxhEaVsW7iWULIjpcmj4Pmy8kH1JKwIiwV6Ubs7kWu/9OB
+	 BT8QbB11CbWH/MYBd4pjHe1fe6Mq0r4dbtJ39evycZVqSIBLI+wi3Os8I+OXSH4rYE
+	 PC9SFlYq8D2eLE8Wgse2YfNboSWN4hz/iaINHMcKil0kvtJ07gkJLJwN8mwAKCxlQE
+	 oRK/IWd4vfE1Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8221E40670;
-	Tue,  4 Aug 2026 02:15:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BAE7D40692;
+	Tue,  4 Aug 2026 02:15:30 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id E5F5F23F
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 21:07:06 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 15E66194
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 01:39:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CBB8E4062F
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 21:07:06 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 047DB40670
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 01:39:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hk8SS5c7AWlA for <u-boot@lists.u-boot-project.org>;
- Mon,  3 Aug 2026 21:07:06 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e29; helo=mail-vs1-xe29.google.com;
- envelope-from=vicencb@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C594440591
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C594440591
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C594440591
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 21:07:05 +0000 (UTC)
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-74ace427b29so1042784137.1
- for <u-boot@lists.u-boot-project.org>; Mon, 03 Aug 2026 14:07:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785791224; cv=none;
- d=google.com; s=arc-20260327;
- b=lme9A8ppqFWJRMBZhDrwIkDnyfSsJywlTUWU9lXoG5YGXTtKs0cJUz0P8lhyOPA7Wm
- Z3SN1E1a2rS0ZFX6z4ouy0OspACiP6Myn4xy9bXk2DUi+FVYM1vjB+inCM8wSb31c1t1
- R0OiCDqaPwqA6l3eCzvB5RSWczi/nZ+hwhJKQGQhpS3cBrIgYJytVqVNoPO4N8dQAN3M
- aHVTSzK/4pQnrAngDqB3wCN09qYn59Ol/+zKREuGD+UrA+G+ZLxdzkx/H0rrU9CozR3r
- zRiC3SqZs4JH0NAR/3++uzBkRcsbu9aazpbAng0cFLDz6pVsZi76+XQ+3uywbJAUY21a
- YqGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=rh4vGvKDdYSFJDiilkbxOxOy89FKzZHP99/BAW51SSk=;
- fh=hZ266pH6B/L51Hvhx9sr1Wd4wQ671gb9JbPdZ+AzQAU=;
- b=GDZdpzIHlD0ke4KovcP56eRgarWsCyaQ5xCGeVyS1TLtSq77b6ANYT9vBFSW6p+aGV
- WZZCNce+E59EpTZO/h27otDp3t+RIPAGHsxpdlA5WnEnrPcxWdEvUKAuZb5WJaPnWzgH
- oZR8PfmfQqNQYMAFk/Vb7WrHVC5tlXex8X1Ud9hldw3sSRsh6t4NLX+6M1OK1eT5tGrF
- ba6p66fC2/n51ohuCvvy6ERXaGDQqpAEMrUml3P3xILBaI6nMjEfKKbyoSqMqd9AJS5D
- Z4sgjvU+X2UTv3gPbZVRWLpgzVcM4pCLkd+VzcD4OmbLHt2B5hDfd6XNdRdkgtKCCIQx
- tp5A==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id izYOpTSrENU1 for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 01:39:38 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=mlpkos@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org DBB844065B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DBB844065B
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DBB844065B
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 01:39:37 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 56DA580087; Tue,  4 Aug 2026 03:39:35 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EBDA580087
+ for <u-boot@lists.denx.de>; Tue,  4 Aug 2026 03:39:32 +0200 (CEST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e9f69ee6f4so3604849a34.2
+ for <u-boot@lists.denx.de>; Mon, 03 Aug 2026 18:39:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785791224; x=1786396024;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=rh4vGvKDdYSFJDiilkbxOxOy89FKzZHP99/BAW51SSk=;
- b=K7P+bStRcJv7aicBxPF8MVG9W4rhOxfdQxXK8uDeu6rSUcdntuQQ78PV+yeHXp6Ayz
- LKmllhTZtoZ5RyFvAk7ANL4zwCiU5bRcrJBndpW7NxXc8FYFtSdkPVU9Q+vdmfuCqPrq
- j7T+bwGkFwKaTXnt8TZ1BsuVC3IxGrgDafmo+vc3ZEGiETknXD8LTfRQ5yEl7sSDoKuN
- IYizDunhaKd51V/dIS+ufm3YTBPGx6ZOyl24gSsYTLEqRMgryqC7gMmQ3DCZWzndgJbM
- Yq2hZhzxOfnE6KMVgTG4OfQhlImqsmMmvCamD4yzctsXoD4PGl6nPaLZ8Ic3lXS4/hLz
- ihGQ==
-X-Gm-Message-State: AOJu0YybsDVZ0wSbbRcWafqXyfPVk7r8N7Rx+C2Qjkx3jPq51dXs9BP9
- 4oZoD/piI6I2mMMIwWZCpIi6fMDi25pop2pLju9nr+tTx46ISy9tAyomMQI3aIRDe2pAGhVcXe1
- ACNADwlOGhQY6OpFChbiiNo7qdiKg/DY=
-X-Gm-Gg: AR+sD10K101HsgNTvwSrd/kE++whhsCb2OhZDLXYfCIDuuIyVvD5+d8IFtRbkYiiE0A
- joZLxX4haJLHm6xZr8daH6wh1QieYtuP6tFf46BlBp8IEW2W1O8Rrpq5ipiNsblv4ka6RmCk4wx
- /FFf83vLBi2TaZ4icCsp0VjHZfJXm7ClYHzNSii3A7rWq9Op0X9OSaV4936T2KKJZkBAbiJdYcR
- Ne+sBytE0/R17wD/PPuGLOYDTDEDCbh+i/yo/N1gr/DYRE9dUmWoRJdCUMk6YBhfOalhwqDRGSy
- NDCeOgB+KMI2Ds4eFStQnnyuO1Qz4MrtufMbYkvGHM50OT1Au1xupYKHjxI2A70EEongltyDR9T
- 7Lw==
-X-Received: by 2002:a05:6102:50a8:b0:739:71ef:d772 with SMTP id
- ada2fe7eead31-75b22064adfmr8207656137.4.1785791224380; Mon, 03 Aug 2026
- 14:07:04 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785807571; x=1786412371;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=8uMaTQVWpRTf3qmAQZ1hDGbSL7Yqz0f9l0IEEeMeOXM=;
+ b=iNWEHCb/LA8zl8kTtX1i6ZtMYpf9kNuA1lbghAwGcABv84TRmgvCi+BCo5G4obHNos
+ 4xJ1d4JcNLgdsV1HVAlPjW5eDb4qcMUK6t8gSApWZJ1hHwrQr3D7jqdbP0smXnkLsZN1
+ 4k1jslRS4fGhZ9Sh5qyy+AFUrWyb/lwq9UT9KJybcKai9kiJ2Xsct3ray7n1o1INHS13
+ 6AoMUpIU4rTq5p3zvdzXQ/fGyiyAgsy4HJS1uualgo3yXVEvrMytDkzdySowJdOs1+/f
+ P4gqukEV9oWArw8EHlCMwvy2SLqaYFomaTKtu1semxxOlLJNlwbNXD3wjyqGIaFJ9eyy
+ nUKg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqV9e5VBFGltQN4Zx8tpLRAKeUtlicIMBy3By9kWrqjrtw5ZWoVK2JgXk9mXe4lgISqfUQauNE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx37WfUkHf9i9kfR+rzHfukud6f8GTwt1UocEdyYyTl15g1N55j
+ TsXp7fkYmnmC+AhHsbMAgxo5x+TSTJRLF7zAx8EKwZTeqRVA5bK77yVp
+X-Gm-Gg: AR+sD11G2IwZfaw8c0k2Gx0a0wOTWdiVWFXvuqC8dMuE1x+p8XVWRs+yBL3GZfGdUJP
+ hTPuYVzDrLDACH0+awOdxUvscgfzCbUydJzfKlWUQLPDhW+SEoLT2b7kE3dl53KuG3Kl6LhfXs5
+ 1CCtB3AnyFkjIk+1EQRNkz4XpnzGNLYUxutRz9GO7JKjaqw9FVW0M2NcygRXAs44Zd800l5RIW8
+ N5d1SUlb5vrudi0ux2JrZ1WRrLdwwuzBARERq/BsNc67Fo+aWwyuwqfAZFRmnGZe3X+eL4KWg+N
+ SDOhjbQieaK8/dL99hbIUPrCGveY06u1xKYfnXA0uUewjYIioWgUIZWujyaOYBe3nj3329GPdQN
+ hcjs1dcAiLTHRE7Pj3mJgFZQ5fzXGpk4yMwKSOK73C4iqa7IC98X0JaVaIR706serwK2mOLGOHt
+ MegNQIpHVktFJIuTr8kZvN2w7i8SjDCKYpewf5FeixTz03m5lO87c8EyYGETpw4QWFYim2vnS9M
+ i4+DEatiA==
+X-Received: by 2002:a05:6830:6f86:b0:7ee:38af:b195 with SMTP id
+ 46e09a7af769-7f196b97f01mr23044140a34.2.1785807571396; 
+ Mon, 03 Aug 2026 18:39:31 -0700 (PDT)
+Received: from localhost.localdomain ([96.27.197.23])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f18ed3c81fsm8647085a34.5.2026.08.03.18.39.30
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 03 Aug 2026 18:39:30 -0700 (PDT)
+From: Mahmoud Komaiha <mlpkos@gmail.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, u-boot@lists.denx.de,
+ Mahmoud Komaiha <mkomaiha@umich.edu>
+Subject: [PATCH] ARM: socfpga: fix dead guard on
+ board_spl_mmc_get_uboot_raw_sector()
+Date: Mon,  3 Aug 2026 21:38:58 -0400
+Message-ID: <20260804013858.23721-1-mlpkos@gmail.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <CAAMcf8A2fkH41UP9jsJZSaPS2PUaoB_CNT5g4E4KXG0thmUvOQ@mail.gmail.com>
- <CAOMZO5BEWJanHUwdzzJ9YL+c-M=8XW43vvD_Lg28=ZU6+cPK6g@mail.gmail.com>
-In-Reply-To: <CAOMZO5BEWJanHUwdzzJ9YL+c-M=8XW43vvD_Lg28=ZU6+cPK6g@mail.gmail.com>
-From: Vicente Bergas <vicencb@gmail.com>
-Date: Mon, 3 Aug 2026 23:06:53 +0200
-X-Gm-Features: AUfX_mwrVjcG86TayOre5DH0f79jxaYWmuDS_NK1dOHoT0rKypUxf16D6_FORIg
-Message-ID: <CAAMcf8AnZ_YAUo85XME6VPyBM2cqd8OO+viNgZeerbMzasHqFw@mail.gmail.com>
-Subject: Re: Issue found when porting to new device.
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, heiko.stuebner@cherry.de, 
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 04 Aug 2026 02:15:26 +0000
+Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+X-Mailman-Approved-At: Tue, 04 Aug 2026 02:15:27 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785791224; x=1786396024;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=rh4vGvKDdYSFJDiilkbxOxOy89FKzZHP99/BAW51SSk=;
- b=btGiRPxaaGc36BL1bpj9MLohPpsXsxuPoKxLNQJBVbWLRRdrbeKK0PTTD2byirbCw/
- 5x4U0Hsk1NnUaz3AsPfqqZ+g7lDh8uiYwkLPFNdW+izrIO0OhoxOgvLOFigvsQtqPGN3
- s7xmr88STWU7dZvA7HN5v/zwkK4c37pGVu6LbxOTo01AzN1Z/AQqH8IcZu88EpTFn5ET
- fo8HsjXTCWrkq8tgPF3RRM2ppCrariFbILU0MlnRHh+uY4IYBX4PN/R6dYqUonOfSsrZ
- f531q4LAihsAyg5djNHvLPjMvWazg0ehuPtEReAkfFG18NDX5pNiqntYi18X8xNGWWP+
- VdXw==
+ d=gmail.com; s=20251104; t=1785807571; x=1786412371; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=8uMaTQVWpRTf3qmAQZ1hDGbSL7Yqz0f9l0IEEeMeOXM=;
+ b=B4HkU88OHHnswXGMkhutE/blgJyOwCONjDXAsnGuQD0LezLOc7Iyw6kJn6wFkkYPsg
+ bc3VouE+r3iGj4dehSRLjaoT2ZlBvLxQBw2ybzVW1MfAxfoOd6iqIJD0HBPTzsn1EZqe
+ pYH9cGir+dMWMQb2eJ7B/viLbIWyApDSwvBGFH5Rjt+/ueqoSkcVHo9MaQiZDf4PfjM5
+ ad1tU0ts5P+q6gk2EQFfdhhafvyeRoOCPjB890MVH3YD/ZYG90U1oG1ggJAZdDjTO1m7
+ sh8abB9fsUMLXa/pDEstV/nbD3gdr4zNnB+Uvk6uXA8GBoxA/BdBVkd/7PDCipzvGnYr
+ +LNg==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=btGiRPxa
+ spf=fail smtp.mailfrom=gmail.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=B4HkU88O
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mlpkos@gmail.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=gmail.com header.i=@gmail.com header.b="B4HkU88O"; 
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,53 +148,51 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, Aug 3, 2026 at 8:52=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
-rote:
->
-> Hi Vicente,
->
-> [Copying the U-Boot Odroid GO2 maintainers]
->
-> On Sun, Aug 2, 2026 at 1:35=E2=80=AFAM Vicente Bergas <vicencb@gmail.com>=
- wrote:
-> >
-> > Hi,
-> > i am porting u-boot to a new device:
-> > https://handhelds.wiki/R36S_Handheld_Wiki
-> >
-> > Given the similarity with ODROID_GO2, i've based my efforts on it and
-> > all goes fine up to the very last step: jumping from u-boot to linux.
-> >
-> > In the file arch/arm/cpu/armv8/transition.S there is a call to
-> > armv8_switch_to_el2_m which is supposed to jump into linux, but it
-> > doesn't.
-> >
-> > I've added some debug prints around it (see patch below) and it prints
-> > the first message:
-> > "before switch from EL3 to EL2"
-> > but it does not print either of the messages after.
-> >
-> > As another test, i've tried to replace
-> > armv8_switch_to_el2_m x4, x5, x6
-> > to
-> > br x4
-> > and then it indeed switches to linux, but then linux crashes, prints a
-> > trace and reboots, that is, it doesn't like running from EL3.
-> >
-> > Please, can somebody help here?
->
-> Are you using a recent ARM Trusted Firmware?
+From: Mahmoud Komaiha <mkomaiha@umich.edu>
 
-Hi Fabio,
-the version of ATF is the latest one: 2.15.
+board_spl_mmc_get_uboot_raw_sector() is guarded on
+CONFIG_TARGET_SOCFPGA_ARRIA10 and CONFIG_TARGET_SOCFPGA_GEN5. Neither
+symbol exists in Kconfig: the family symbols are ARCH_SOCFPGA_ARRIA10 and
+ARCH_SOCFPGA_GEN5, while the per-board symbols are of the form
+TARGET_SOCFPGA_ARRIA10_SOCDK / TARGET_SOCFPGA_TERASIC_DE10_NANO. These two
+lines are the only references to either symbol in the tree.
 
-Thanks for your attempt for helping, but i already found the issue.
-A few configuration options were accidentally dropped : FIT,
-SPL_LOAD_FIT and SPL_ATF.
-Now it is booting linux correctly and i switched tasks to port linux.
+The guard is therefore never true and the function is dead code on every
+SoCFPGA board, so the offset of u-boot proper inside u-boot-with-spl.sfp
+is never applied.
 
-There could still be an issue with the macro armv8_switch_to_el2_m.
-The current configuration boots linux through another code path.
+When SPL loads u-boot proper from the 0xa2 partition
+(SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE) the resulting load address
+is the start of that partition, which holds SPL itself rather than u-boot
+proper. SPL then hangs with no diagnostic after printing
+"spl: mmc boot mode: raw".
 
-Regards,
-  Vicente.
+Observed on a Terasic DE10-Nano (Cyclone V, GEN5) booting from SD with the
+standard layout (0xa2 partition at sector 1024). Instrumenting
+mmc_load_image_raw_partition() showed the computed load sector as 1024
+instead of 1536. With the guard corrected the offset is applied, the load
+sector becomes 1536, and the board boots to the U-Boot prompt.
+
+Signed-off-by: Mahmoud Komaiha <mkomaiha@umich.edu>
+---
+ arch/arm/mach-socfpga/board.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-socfpga/board.c b/arch/arm/mach-socfpga/board.c
+index 4d7f0b9a..fd7f15b3 100644
+--- a/arch/arm/mach-socfpga/board.c
++++ b/arch/arm/mach-socfpga/board.c
+@@ -211,8 +211,8 @@ void lmb_arch_add_memory(void)
+ }
+ #endif
+ 
+-#if (defined(CONFIG_TARGET_SOCFPGA_ARRIA10) || \
+-     defined(CONFIG_TARGET_SOCFPGA_GEN5)) && defined(CONFIG_XPL_BUILD)
++#if (defined(CONFIG_ARCH_SOCFPGA_ARRIA10) || \
++     defined(CONFIG_ARCH_SOCFPGA_GEN5)) && defined(CONFIG_XPL_BUILD)
+ unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 						 unsigned long raw_sect)
+ {
+-- 
+2.50.1 (Apple Git-155)
+
