@@ -1,135 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF94C55ABA
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 19:20:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753BBC55822
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 19:22:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id ED75C6079A;
-	Tue,  4 Aug 2026 19:20:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3381440730;
+	Tue,  4 Aug 2026 19:22:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id c_GbTUJWfyqr; Tue,  4 Aug 2026 19:20:01 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Akn-y519jFNB; Tue,  4 Aug 2026 19:22:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C36160781
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E719C406D8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785871201;
-	bh=ebArJ4g7FCwrczEGY+wmMK4JRnNjbo8B/DAT6cxUSYQ=;
+	d=lists.u-boot-project.org ; s=default; t=1785871341;
+	bh=RRznlpkbjuUZooV6H/p9gsVWMm5B8pjK3glErI0IKmo=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=K4s5E57PvQEkNpF04dK/nGQW8xAfaOTvG4UP1jlJO1ci1kqkC0+M0tnQ1JP8BFXgD
-	 4riuGBqph2LbUHGYjxViKvSkHHFnWGLFP3QdCy4dXuZenNb1wpejpwlg55Hq3BXNWa
-	 YCPYIoFd/HSvwTtt45YdtnQsLq2eV5H/5iCmS9dp+PWF6P5C+MVokjRMdOaBnVuplX
-	 1DY19DWLjhs4SqWdsvfSVFc0jc1YM+ozD5p5CRWm/Krn0o65htcsvo4g6+CYYopR6c
-	 Di47pi3Ux4Kk7E8rqm0VjGJTecJ/s/6Qf+ME8gZRZ1DWYEWSHQiu+FtwigFom+Qo2N
-	 zUTKjCYHOH7Dg==
+	b=PfrSkFaL9fhHmmfHqgOGD4fsa5D1oFHvA0a/V7RyVaQaDsm/aa3zPZm2G9fWJvs8g
+	 0LytgBZUyc4Jeza81AeKmpLB4ie6DI6C0vztrvm58hezJrvc6G97QWUhxQTOYs7qng
+	 0ZYCheIyOdsGu0Y77TnDY/E7QO4F9S50K+2G/LBWMS5RXhj7jVnQAi1bj2ma0/A88K
+	 879EgVrHal/bJ2fOZdu/hx+R+j8H8mxCr1PHP1RO4wPKrgsYhkLOGcZ295Ca3qvcoc
+	 IrBJIA0O9Nj/ijwS3xRjVExvxSP+PWImrvYQx/bxznJvpKvVRDguQfAL4P/fGNl+c4
+	 enAk6ba7X+p4g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C36160781;
-	Tue,  4 Aug 2026 19:20:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DF7322B6
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 19:19:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E719C406D8;
+	Tue,  4 Aug 2026 19:22:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AC6D92B6
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 19:22:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C5A5B401CA
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 19:19:58 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9E6BC401CD
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 19:22:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IX_SCc5IQ1aU for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 19:19:58 +0000 (UTC)
+ id N6REP5sllxba for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 19:22:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C92BA401A3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C92BA401A3
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C92BA401A3
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 19:19:57 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6a144c8f01fso500697a12.1
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 12:19:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785871195; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A6037401D4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A6037401D4
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A6037401D4
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 19:22:18 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6a14f762de4so215499a12.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 12:22:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785871337; cv=none;
  d=google.com; s=arc-20260327;
- b=HjZUp8HfbUMLm44eAjbtVBAjqtW3bMM15oHnlp2fScMH9pt23jV01WrSG1njnV1B/N
- 1oOTHhpt5mV5xUHw/JsK1ve38fMH/ucPaxv5YETp+V+VOyru/lfJiOn++oLpFXlrA46Q
- r5jHrhm9phW/qrE9C2TLa3Kty/ZwoPiaGYFO4Lu79Q+DwWoFBM3oV9Q90flHfQ93WfUg
- y1KW8gtMK+SgJlZhZGtbM/tHckIezkj0Av5lOO3ThIaP6Cni+WRZb1pWKOZZhOQtAfnr
- CgwQAlNfLR8e6S3GnmK3w2NwQJdZ4EyvfEHyAxM7vwuVpDwdLjhhWKbe6mBtDK80qrF9
- J4Mw==
+ b=dLqfJSTvMEbIWQSKNGfGKEslwYMfa0GN8HfUbRP4neAXWVk7Ip6I7WSfvnLsY1tTqx
+ FMoDQlHLdD4Gg3v6EusKp/0nVmleesOUALvQMRDB4oy7pBNwivIUKEkpkWNuF3CnlA/B
+ j3liRjOP0WtGQO5RanI0bi7WnJr9rKW3GplaLWlYRXcQKqa+aJNxvuLgBfqMGcCi6SIu
+ CS7rc6edIXFiJ+MdJ38hWfCBFrLlFrDowkY2VOHSDtJtXBXl60eA2BvIniV2j0A17A5e
+ JBHFKtmR0sjl3l/NkNVlFZUd2XAjil9Bsqxkxm6AbqaNsYjJeoFSF+bQhTrUybws0tD2
+ 7M4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ebArJ4g7FCwrczEGY+wmMK4JRnNjbo8B/DAT6cxUSYQ=;
- fh=Qf4arb6qvJTZOLQqtlKayM+6YUom6SXfWn6i7mhKMpA=;
- b=NLFQDMo+GAxQeLTrpuc3vBnM93jlnJUSDtSi7eM9UpZe3EzUFFH2Vzx7X+8FSnHRzL
- N1Y05pAhbvzFQdhPR+TsNBlDlot0026WEJUvq1tw+I9wYITLBlBQrVwQsy/JJa12DHo8
- 7/OM14dDfp3+pwg/uxM6/SksyZC2sX8eeFdka1B9ZRSt7AOVL44p2Q840+SIrdmzsaDm
- CzSTSO212fmKT6SKhVgtLf8iUM5ofp8Fkc9opbgL9DmW4weSY1Vg0WhaDLB35u1xEj7y
- WYAWo0k7u0UxIVzzo27luQr1pFtEmVJWOvcG0Evb3k9wN0TtJipi5tTRTEOUPYzkzWKb
- 2VKQ==; darn=lists.u-boot-project.org
+ bh=RRznlpkbjuUZooV6H/p9gsVWMm5B8pjK3glErI0IKmo=;
+ fh=LpCD47bnO8lqVAYEo2Kayy0sFPWyUoMN6ZkoIu/UCgk=;
+ b=XCSoljOawVb3pErkqSkVxdfhl9O9VQhd7CPRE8K0Wmt0N4uVtBnO3Hg0xiebNng/Qi
+ FJNoyCOhhd8TBIHNMyoIhHQPCG7q9yFvcj5ZC+tWe2G2rnc3xcClO93ghrbP6LZycguf
+ OAFinkwefgShJqC7PKVwxhEcuvfliMHjg63c7aszENLCoCXnkw3VBFEVki3q2x/wqFlj
+ ewKL+zcA0C6RZzQB5zeVbksGzazG97RZRumk93NrYVJdDkFg0KoY/V+ZnCpKCtONzkqw
+ zzRq/KpiqLMDVHuR6OIdZw7sAv2ODZ6uzBzDaIKUoeDHNLpkZH+TRoI1aXDold9yCVYs
+ xCeA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785871195; x=1786475995;
+ d=1e100.net; s=20251104; t=1785871336; x=1786476136;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=ebArJ4g7FCwrczEGY+wmMK4JRnNjbo8B/DAT6cxUSYQ=;
- b=Ci4jmMhAQQimbICnu70NEXZr4HuLYK670kJTpQ3T6r3Y9KGoClasaZYH2A+IKBNS6u
- igQ/jnfuPXPiWdORwPyw9GCSPS/pfN+eYtvpstaJEfuGlM6B27NQwaP0/CrtRWLmG8vG
- 5hkmNDhhycFGdtlQtY2DUYcLBELsLslFssgYZxOIPqKqOf+NvfcM0XGrmAWzjFl82o/p
- 4DTNAE5xrz9BiBsU3aaODIMgUBp2bnWgVH8EFMMAMuUUJGr5CXAnQFKocYeGxys5mDJ4
- J+vbMMFW6z90KrjO3MxPsSbLvQhgn9oLYfBs0ZFGXQJROp07naiuXkVwniK/fScIZ7L+
- 5SgQ==
+ bh=RRznlpkbjuUZooV6H/p9gsVWMm5B8pjK3glErI0IKmo=;
+ b=b1Lpb/h7MjKRNJga4zPwwqxdw8ANA4j7HpUV/9Hqu2KTpmY4lRZYZ+A9qQ1LHE4ln0
+ yRt9ekm22Yv97lf2isymL178HU+D+WmQu47W3QpbPR6/bppuhxFgu6LzUaIP97YWdvsm
+ KZpInOj1AJsApqGs2vdWcg+OBifHdwoBgxVrjtgyMy//V9P0w6CxuWIckOst44LeP0Bw
+ fogmu87ElCQm+zwZQHhQ8ZaPBmA7LRB7uHiGfmNS0timR4IapmyEwcNRblNIGmZZnU+P
+ j5z4L165vjUdhuK0sknzXaAkrznmfoz5ZnHP5YKW+xUU81q/NUPf2qcNnnQdzNYd1Ree
+ sS6g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpF0Wlqqbub+oZNumTJUR7didRrXvmjkTFJSEkVGtgeazJ9SnY7ViKxAOKkBH9iMTQZzsuCK9M=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyXVOci9yv/QWdFoAqSDMv2Jc3nfZXBg/qNJz4ikIyvvsKnxZFy
- TCpMTPhB4G9/QcRFqn2uixy/LydxUSlPw5PFegdAntPOv5xjifQfQe5j7OS/1IDTfm6gHnKUH2/
- +rpGMs9oWMCUkU6vz2lM4SqyjmFzGLNQZ7Wiyb4yUJ4AF6KYnwG0=
-X-Gm-Gg: AR+sD12wK5Z5Oz68hPA5jVoA3/XBpzHYkNtlLMXgbXOqjDmbCsmFq1HMqOG7KiGFChZ
- o/eoPx+iUec9Q9i+rEb3Zs6ynpbfVhiG825emmE75k2BkC3h1zSA3IbG2CTQclM3jy2NqHQfCCh
- 6HLlCVzUkUlyqmXknWP9kEPERm3QTSQLFAJzgYLXrc3tOcKH5Bx3C/kJkL4sEohJVUbQjdRqJV+
- gB8QBbmSHxebq6Jy4aMtqZp896bZPDcx77bo3wFEhyxjaNiH0OUwOl/pPcXxQqwVlVAK5th9bOh
- fVDG/KSacV002NEBerECM4NMuoHMvu6Zm1jzz13+QWI=
-X-Received: by 2002:a05:6402:4002:b0:6a1:332a:83c1 with SMTP id
- 4fb4d7f45d1cf-6a14ef6fe2fmr907061a12.6.1785871195492; Tue, 04 Aug 2026
- 12:19:55 -0700 (PDT)
+ AHgh+RrW6BjYMjJsyYg+BxyLjx6UtbyonG8HnNk3q/b6rD8oTnyfKWa0bPWAGgR+C/omuUuGDBledTA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwM2ceUio8hVtzqGb/IlBC2j9n/awuVzoiCLZ2t/WZN2/AhdnmJ
+ B4ueP03Mt5T+B+yAV1D8/hwisML9elRMytnzhQFfjnEXVmJJrjgcMUa5jbZCKm8hR3M5pGprQSC
+ 9mZA5zaTb2TjGFWok5/CDhMVLErb3prVvu6JBKvFQ
+X-Gm-Gg: AR+sD13xz9U4z23gl4GI8z5OIkbK2kA9bEUKm5e9sm/Q+Viu+TEUE1wF5M6/HsgAy94
+ wrb+VLuXclq7qcfQu2Z54tBqqLfvJAhZ3ym6CoCoWOf3k/owaOFw85jXbpacc2h543LEKODdo1Q
+ P5B/PWCJr8LrNRFKwPjmwm9jTyQGwMwUGASIxut4uPfacskafRJRHP0QnheGNRwzLUDUR/i31Oh
+ kZ9UNpkLtq6nrOi3rV4miDUQpO2Ca8elG332vnN/2yJjddWX8U5b3JGYNKhOd0RKwNl08ruqfOn
+ vajQaznozgZQGI30whrDgt+heWanZlrrJ7GDj9y1VxI=
+X-Received: by 2002:a05:6402:380a:b0:6a1:1e25:143e with SMTP id
+ 4fb4d7f45d1cf-6a14f07aa0emr757331a12.3.1785871336672; Tue, 04 Aug 2026
+ 12:22:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260804105721.2402406-1-jonas@kwiboo.se>
-In-Reply-To: <20260804105721.2402406-1-jonas@kwiboo.se>
+References: <02ea1132-9adb-4f07-b14f-9648a61a8021@softathome.com>
+In-Reply-To: <02ea1132-9adb-4f07-b14f-9648a61a8021@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Aug 2026 13:19:42 -0600
-X-Gm-Features: AUfX_myUjAdYsD5sNGIr8HKRuzLDZmNKibyElSj48j7BGEyTCfwxu_HDmXJQwPw
-Message-ID: <CAFLszTjBiTtKmjgknvXGFBrphh6kpBzRg8iroWjFQ0EDvuXTyQ@mail.gmail.com>
-Subject: Re: [PATCH 0/9] rockchip: Remove unneeded syscon driver for RK35xx
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+Date: Tue, 4 Aug 2026 13:22:04 -0600
+X-Gm-Features: AUfX_myE-tibvhkrZPQjaXpq1EbKMA22Xhv8bEMR_C-CtLMDgI56bfjbzBVJGrk
+Message-ID: <CAFLszTj1NG2jLgjrfng-iBmLepgxV+Nmwotm1TBEgCT_NDJgJQ@mail.gmail.com>
+Subject: Re: merge software ecdsa support
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Tom Rini <trini@konsulko.com>, Raymond Mao <raymondmaoca@gmail.com>, 
  u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785871195; x=1786475995;
+ d=chromium.org; s=google; t=1785871336; x=1786476136;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ebArJ4g7FCwrczEGY+wmMK4JRnNjbo8B/DAT6cxUSYQ=;
- b=lG+pfWzcnPfDwTU2BIuq3DZCL39qE+pIpscOvBXAehAczfnCNTe9HOPSqJk9md0l3x
- h0qyWfhuL1290OUVFsMlWS8kSXK9syGTf+8vbhCpZbO44K0fsbxNidy37m0XILBLn9Ej
- NEJmhBOefD6UAKKBR7YO3cmBNu6S1tetOxgKs=
+ bh=RRznlpkbjuUZooV6H/p9gsVWMm5B8pjK3glErI0IKmo=;
+ b=lfvUcBCVuSuNmU/S6uHnzFqXSkb4xr+jFQy9ndCrM97YgfvHAQt69ITpZteNj5XwEI
+ WEoLiP0PR2AB+udz9DDgocUp21VB2kpGEmmwcqZVAbjmTUBPE/DFklQfNLN7Iq+231Os
+ 75ricoLIf1iqj5fx5QSaznPdN0bhfLaq41Qqw=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=lG+pfWzc
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=lfvUcBCV
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,72 +141,18 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Jonas,
+Hi Philippe,
 
-On Tue, 4 Aug 2026 at 04:57, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Tue, 4 Aug 2026 at 08:29, Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
 >
-> This series takes the initial steps required to try and remove use of
-> syscon_get_first_range() or syscon_get_regmap_by_driver_data() to get
-> GRF base addresses at runtime for the Rockchip platform.
+> Hi Tom, Simon and Raymond,
 >
-> The GRF base addresses are fixed and known at compile time, yet drivers
-> keep trying to resolve them at runtime delaying some operations by
-> several ms.
+> Do you think the support of software ecdsa may be integrated in the next
+> release 2026.10 please ?
+> https://patchwork.ozlabs.org/project/uboot/cover/20260601134310.2452454-1-philippe.reynes@softathome.com/
 
-I suppose all addresses are known at compile-time, if you have a
-single device tree. I have always hoped that we might end up with a
-generic U-Boot for rockchip.
-
-I wonder if there is another way to do this, perhaps reading the
-address once and caching it?
-
->
-> In this initial part the three current uses of ROCKCHIP_SYSCON_x lookup
-> used on RK35xx SoCs is converted to use a constant value or using
-> phandle lookup, followed by removing the SoC specific syscon driver and
-> finally removing the RK35xx special ROCKCHIP_SYSCON_x enum values.
->
-> The changes included in this series have no intended behavior change for
-> the affected RK35xx SoCs.
->
-> Future series will continue to convert uses of ROCKCHIP_SYSCON_x for
-> remaining older RK SoCs if this initial part is accepted.
->
-> Jonas Karlman (9):
->   ram: rockchip: rk3568: Simplify get_info() ops
->   ram: rockchip: rk3588: Simplify get_info() ops
->   video: rockchip: dw_mipi_dsi: Get GRF base address from phandle
->   rockchip: rk3568: Remove unneeded syscon driver
->   rockchip: rk3588: Remove unneeded syscon driver
->   rockchip: rk3576: Remove unneeded syscon driver
->   rockchip: rk3528: Remove unneeded syscon driver
->   rockchip: rk3506: Remove unneeded syscon driver
->   rockchip: include: Remove unused ROCKCHIP_SYSCON_x enum values
->
->  arch/arm/include/asm/arch-rockchip/clock.h    |  8 -----
->  arch/arm/mach-rockchip/rk3506/Makefile        |  1 -
->  arch/arm/mach-rockchip/rk3506/syscon_rk3506.c | 19 ------------
->  arch/arm/mach-rockchip/rk3528/Makefile        |  1 -
->  arch/arm/mach-rockchip/rk3528/syscon_rk3528.c | 19 ------------
->  arch/arm/mach-rockchip/rk3568/Makefile        |  1 -
->  arch/arm/mach-rockchip/rk3568/syscon_rk3568.c | 23 --------------
->  arch/arm/mach-rockchip/rk3576/Makefile        |  1 -
->  arch/arm/mach-rockchip/rk3576/syscon_rk3576.c | 22 -------------
->  arch/arm/mach-rockchip/rk3588/Makefile        |  1 -
->  arch/arm/mach-rockchip/rk3588/syscon_rk3588.c | 31 -------------------
->  drivers/ram/rockchip/sdram_rk3568.c           | 29 +++--------------
->  drivers/ram/rockchip/sdram_rk3588.c           | 31 ++++---------------
->  drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 16 ++++++----
->  14 files changed, 21 insertions(+), 182 deletions(-)
->  delete mode 100644 arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
->  delete mode 100644 arch/arm/mach-rockchip/rk3528/syscon_rk3528.c
->  delete mode 100644 arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
->  delete mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
->  delete mode 100644 arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
->
-> --
-> 2.54.0
->
+Looks good from my side - I think it is waiting on Raymond to do a PR.
 
 Regards,
 Simon
