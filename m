@@ -4,121 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDBAC55172
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 07:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B132FC5518F
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 08:26:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E24FB40703;
-	Tue,  4 Aug 2026 07:45:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3E05640550;
+	Tue,  4 Aug 2026 08:26:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M8KAqO9UZg_O; Tue,  4 Aug 2026 07:45:54 +0000 (UTC)
+ id rilaoHakNNqN; Tue,  4 Aug 2026 08:26:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 20B1D406F1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 62F8E40580
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785829554;
-	bh=/onTGiZ1K7eD61bTlIl1fo5FznSLsdmizjdu61GGU8Q=;
-	h=Date:From:To:CC:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=k86vhrQJHPDYB1chFXCaP9sw4a3bUM15OyAKW8nWTM+d3Ay3nGf9w1ofAiCcqLtSt
-	 5kw6cI3Dg5dXesxFN3vEEA+AzcGuK+x6qxHS9zvstOb/e5gz5b4qLLG63K9YLObmp4
-	 WIl3rN3nmGeqjScVCEPOVrY9J5vxJEZnLcbbNcc4cSkI4ONp9K5zC+sxw3vEdhkgCl
-	 ywJPMouVGtniAGayT8H05OnkRixMwJZTzy6QwakItvX2HDj7wA28QJ/oabKg76OzY+
-	 3VvjPRR3y22aJxnxMuu9av/UDF6Rv3a8BOGdOJeCb1Rgju2u24eMnUqxyAg1ntGiRL
-	 4lTyb2MpD8xlQ==
+	d=lists.u-boot-project.org ; s=default; t=1785831971;
+	bh=K3Y7Khls4DqMQodk+gtaPzINPBWBHNeZMUdjem9Qr5A=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=CovwUxygB9GEMhhVfa7PnRK4XR7vUdjRQH6ahK6DP68qvFHlr0XVln6gqaG1/X0VA
+	 O2/IX1N3wVjj7Q7gB2i5kl+vzi9mSY6VtPxEFm6Uh4HfphiR+HErFf5dhDbKPPRs0n
+	 j0yPA/KpLZhHfpKl9rSGo+ImDfgUOtieTCR9M+3DFmlYG8p+WD5juhB0BKL1l8zKlO
+	 1lBFB27v4wtHCmrcZ2AUHWllkL5VDM77QDLo3fS++y43qMFZM/U25AX0G+fHpkvo3O
+	 d7fAUMtJYLX8N1jELITsWIxH6nShY3SFLKIQt+r0SmfVi5imlvgPgYz2F3BWdXCizw
+	 0YGnCqt2/+E1w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 20B1D406F1;
-	Tue,  4 Aug 2026 07:45:54 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1DE03198
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 06:14:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 62F8E40580;
+	Tue,  4 Aug 2026 08:26:11 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5003326C
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 08:26:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EF7A880B42
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 06:14:49 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4D6814004D
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 08:26:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nnjh4Ors4Tz1 for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 06:14:49 +0000 (UTC)
-X-Greylist: delayed 1987 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 04 Aug 2026 06:14:48 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 03B3E80B19
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 03B3E80B19
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=67.231.156.173;
- helo=mx0b-0016f401.pphosted.com;
- envelope-from=prvs=9676a5f00c=akashn@marvell.com; receiver=<UNKNOWN> 
-Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com
- [67.231.156.173])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 03B3E80B19
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 06:14:48 +0000 (UTC)
-Received: from pps.filterd (m0045851.ppops.net [127.0.0.1])
- by mx0b-0016f401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6741734v365479; Mon, 3 Aug 2026 22:41:32 -0700
-Received: from dc5-exch05.marvell.com ([199.233.59.128])
- by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 4fu31d1bga-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Aug 2026 22:41:32 -0700 (PDT)
-Received: from DC5-EXCH05.marvell.com (10.69.176.209) by
- DC5-EXCH05.marvell.com (10.69.176.209) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Mon, 3 Aug 2026 22:41:30 -0700
-Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH05.marvell.com
- (10.69.176.209) with Microsoft SMTP Server id 15.2.1544.25 via Frontend
- Transport; Mon, 3 Aug 2026 22:41:30 -0700
-Received: from hyd1-dt91330 (unknown [10.29.36.146])
- by maili.marvell.com (Postfix) with SMTP id E5AAF5B6921;
- Mon,  3 Aug 2026 22:41:27 -0700 (PDT)
-Date: Tue, 4 Aug 2026 05:41:26 +0000
-From: Akash Nair <akashn@marvell.com>
-To: <u-boot@lists.u-boot-project.org>, <boon.khai.ng@altera.com>,
- <jerome.forissier@arm.com>, <trini@konsulko.com>, <clamor95@gmail.com>,
- <marek.vasut+usb@mailbox.org>, <maxime.chevallier@bootlin.com>
-CC: <akashn@marvell.com>, <rkannoth@marvell.com>
-Subject: [QUESTION] Architecture and roadmap for Synopsys XPCS driver with
- APB3 indirect access
-Message-ID: <5skppezbdkanp336d4nr2jv7yp24kngxs2wcewll6mrxgwdtug@mygftq2jjbjo>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M4tjNjBS9fv3 for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 08:26:08 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::b133; helo=mail-yx1-xb133.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2115A4002B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2115A4002B
+Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
+ [IPv6:2607:f8b0:4864:20::b133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2115A4002B
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 08:26:07 +0000 (UTC)
+Received: by mail-yx1-xb133.google.com with SMTP id
+ 956f58d0204a3-66892c81725so5851351d50.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 01:26:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785831966; cv=none;
+ d=google.com; s=arc-20260327;
+ b=ODgCKUKax8/87qTxYGNQTKeFiemIJS3p71Fv32xLNXPrYQ8RJpFnzs2jg6ipA5tzgc
+ BkeeYrEsdDCTh5uOHZ23UQfjOqF5baJ+nlECQCY+R3JW3rAMcR5UnwdwdTXgD/A8p1J+
+ O9fmnUVSnRLBlsGZaF0pyMszprDhw2sL/lZAo5DhoT+LuU9njcmrGbDnaw8tHPddK4oQ
+ VcaNvzZB15C4nyQzb9jrwDcEQTR7w2lM/tdzGdn43U6//Gq0IZDLn+pvlHyDktUA8/B7
+ EBmDOPvWR24ZLQTtpLTeLCLjblZzTYX/pakZSPB809dtSHrOSncAo2VppLRsCNCSrD2s
+ W7Ug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=K3Y7Khls4DqMQodk+gtaPzINPBWBHNeZMUdjem9Qr5A=;
+ fh=f/vaMyCG5Qv74UFk+AVmTQso3cXkIgLTJex8Yll2TDQ=;
+ b=SGbeMQJbfIz1iYY7mnWNItqgkMljJAqIF1oK1f5mKzgktK2ZEaqzEHW0XupYlDQBw5
+ HQKTR6xIZCkxdrS0SuuKDLXPMN5uNrLuo+4+GnTiqPqiITOD0H2d6OFoFOAdOKScG+qX
+ 6an4BIcjBRehpMld8DvSUI2zz8QUlO51ZElQr7ehrsD6GLCDpYWjte9bjXyzAXPFHOPC
+ Gma2GnjaOK7em+gdLF0qqnTGLYitEEyORhJprLEKGVkQ8Q8z4JNQlZT7yJjC2xaHsSSF
+ tNBvoSNX5gB8gB+vsE66oKbSdlkjZsdb+X7gSYDKibOSNYNGcb2YK177yMMTW+zIuXS4
+ 5tWQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785831966; x=1786436766;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=K3Y7Khls4DqMQodk+gtaPzINPBWBHNeZMUdjem9Qr5A=;
+ b=UlDlQshMuFaysdJuocB83Y5ViDVhotONqlC+FBaJOvcw7yS37OQxjuTBZA8nTYkqs/
+ 5nkQuf5tD6tFW/o3asW9fsZnfrGyAFm9ldI/hB7lZRiQL5JSmq7kgqIVT3376LnXL5XN
+ Y0aqbvzdakZRDtAvuGRzPIqR+nBxW3YsJmAk9cyzqLSHqFYw/TWQtYBiVykUq7airpvl
+ 0YZ+2oXGCEPRa+m4Qahw8KAf5veIDT14zYVnKJI3mSQnZiUyj+xNlTsPUOsTU+HjQfMd
+ W+TfDwzAnjRypV44NQKWawAIqENjXN9YhEq2kQ96ezv57CvKborPehDdunnk/QdHLAxs
+ 9+GA==
+X-Gm-Message-State: AOJu0YxutqWYxLfl0kPo/AuW+6JUVXujCIhnes/G6wGPhpMSEHksjH+t
+ ocrlh2GDUnayG0tqEqXEXQBJh6SnBnffdeJlvcMw2iph9aEM9mjiEb89DO0cXRBH/pjaceAQcof
+ 5bFTRv2FzOwjJC2F1pCjiWo2n3Dnbdovv4tVbcbRIKA==
+X-Gm-Gg: AR+sD11dIkkg1hgTv8PYbAFgbIy38ShP0YV3Qi3AIrL2eCsVkuAyEEej9WDp/2ng3WX
+ oTiWBrgMbuKAtXT46G9DqX7vzf55vzTy0FEbak6og5AdwII5sZ0aWPln9Z72YxFLb2XHE1ufmum
+ ehchgleiVEToy9c0i2aSuDOdGUuyBk/SOo4sgk2wciwQpbCu7mWTdvGPR1K23bNbINd+yjBJFD9
+ UWjrHWpwPZT6YUuHFgmdBfrEyYpAK+CyYqYqdVMTNwvxdVtqOcYvdvGNBV4iVNAQUiKFEzveXA3
+ GbXW0ThXWMhGqB40rveVVbHRgtVhb+mMT18ZQVwWEQ0LRNVKOFHyu/4oK8Dl7BYv0Q0Bv8ruJyc
+ 4I/AzVUvvRW0C091pA+KvE20tKiUFKs+i/QgLQJGw0ihqmPISxqaSJ8GkbMd70UTgpfnDuXvdTP
+ uj0TqMSwBs12KAgFlWPnBq0uggc0rUQrNmtAGbIkuylWOsBjDLZ8XrTtvwwBKhpEUgxGy5u2FYi
+ Jm8wysyvTqw/xPYGxYB6tRZmW4VV8NHb9mqcDGKn+KMefEJIVBpodl8COWpMoISIdSHf8nKUdv5
+ Ek3xNHhpB0H1nANFEBLMlxAuY7LeJ4Cf5/FJp9Nd9xfj0JXhlslt7shRNhEhVinSX5LyGmqaWG8
+ 7CKUNi01uji97gGtDapT5Q4npnehkb6TP4SY3MTP83hc=
+X-Received: by 2002:a53:c48e:0:b0:668:43ff:265d with SMTP id
+ 956f58d0204a3-6694f17589cmr12526223d50.33.1785831966427; Tue, 04 Aug 2026
+ 01:26:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDA0MiBTYWx0ZWRfX+WhqoYuP+eKt
- ycpVF02ncdPJaUD9AQu2hOshrIcrhE6E7fzypHNkSbZVwGXuBbrQ2a2vcAfXVB4b1H4s++AqiIi
- dS9T5q/NBepaUS7cZ3+IU8o3YNc+HIqo4avOA/SXSxsEZaVRPqT89BDhxy69bNbJr32xs2tLQcB
- St6tZ+7IPz6TFIWyATMxaFyxap+sD7E54p/L5Ox2PfcZn4J+OfzV6/s5StxrYnA/NGsCEgoHMkA
- x29neR+9BnnwI5sn4Vlu6PX5AsVTJrSphdVybAjJlUjuX3a35bApc/7vXMOurFPz1JR7/lraWae
- MpA7hBREQWydcwlJfGp+3YzhGwFQ1KotnkE0CpldKc1yLxt1ZAFVL3Pqo+HJEd4wMGSWz6MGTo2
- hruv07MLAu5n0dlTIqVZf8qNVx4zIkrUiEOvxhIAzQybAj4r9x4rPPgNjCO8OxulP6+QwcIX+/Z
- px71r8rAvZ6oVbodNAA==
-X-Authority-Analysis: v=2.4 cv=T9K8ifKQ c=1 sm=1 tr=0 ts=6a717b8c cx=c_pps
- a=rEv8fa4AjpPjGxpoe8rlIQ==:117 a=rEv8fa4AjpPjGxpoe8rlIQ==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=l0iWHRpgs5sLHlkKQ1IR:22 a=QXcCYyLzdtTjyudCfB6f:22 a=JGFfrT4xk0um10-Nj50A:9
- a=CjuIK1q_8ugA:10
-X-Proofpoint-ORIG-GUID: z5ITZffx85hw_MQzOP-ZJ0OHDCTpexD6
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDA0MiBTYWx0ZWRfX728fJ9XxFRTL
- p2CLpfHtxo7WtA1LMEZpmE/yQuUEudwwQY7H9eMR4WpiOToGn2LdgfX5WpLVjabWzD+FLFzuHrK
- U2PVVevInLsSZ6RjwJucpJH3tAe9NVM=
-X-Proofpoint-GUID: z5ITZffx85hw_MQzOP-ZJ0OHDCTpexD6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-04_01,2026-08-03_02,2025-10-01_01
-X-Mailman-Approved-At: Tue, 04 Aug 2026 07:45:52 +0000
+References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+ <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
+In-Reply-To: <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 4 Aug 2026 11:25:28 +0300
+X-Gm-Features: AUfX_mwZRRzTiBssYbGChW2LXq8GLayJ728JrMfGy0yuTDp5fNj1uh9Lyqb-RZA
+Message-ID: <CAC_iWj+amWJLeGCXFTTtfpfGfzhbY5bHxBPWXmZW-E=LBMB1hQ@mail.gmail.com>
+Subject: Re: [PATCH 1/6] disk: part_efi: Size the partition entry array from
+ the block size
+To: Alexey Charkov <alchark@flipper.net>
+Cc: u-boot@lists.u-boot-project.org, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
+ Anton Burticica <mouse@ya.ru>, Javier Martinez Canillas <javierm@redhat.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Quentin Schulz <u-boot@0leil.net>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jacobe Zang <jacobe.zang@wesion.com>, 
+ Jagan Teki <jagan@edgeble.ai>, Heiko Stuebner <heiko.stuebner@cherry.de>, 
+ Jonas Karlman <jonas@kwiboo.se>, Suniel Mahesh <sunil@amarulasolutions.com>, 
+ Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=marvell.com; h=
- cc:content-type:date:from:message-id:mime-version:subject:to; s=
- pfpt0220; bh=/onTGiZ1K7eD61bTlIl1fo5FznSLsdmizjdu61GGU8Q=; b=YSW
- mtCcrA0mwuAJ+TVvxvy8Yq7DIRjYk1k9qmISSI8F5H7bWB8v1xywiVB8kOuS6NAO
- iaAuRs/XczoX5GIofpIHs6JwcIC5PwYCwPG6ijogG+1FpSeeiJnSNvTO60akOmuL
- kdABz1AqrDLrPXhf8aSO8k1d+ZFCTpOwtFPc+8K0PBMSEvWzy3HmC6YSpXcCAiiS
- ykLf7b3FVuiE2ymv7B24OMoOhxB/aixcCNx4Xd5cSu7Gxyhxo7o7kKiYXXVFziJx
- a4xBArkGh43bUdi8JxuR5OEYDIDkFDwGaF0A6d0C64OHUDxsdem2ZhbLbvVjgGrl
- VID9FC5KzaOsNa5e4Eg==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=marvell.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=linaro.org; s=google; t=1785831966; x=1786436766;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=K3Y7Khls4DqMQodk+gtaPzINPBWBHNeZMUdjem9Qr5A=;
+ b=lnL/FKM5X3w3lj7bPeJrwri8T/8mbo5GdatD4SBAeQ8CjDc0E9CZ6GYdvuw5+dV1dq
+ 7DdKkl1VwO1nVxalXfkfjGovs2mQ9m/Fsv/CKVBwSCdKgMimh61tMmomX8XIl5Mz5YWR
+ byis6KwQoHEbiG/Zqbc4aMkFnNK6JKScyCi4LI8JsISu+Q719KOjrudJHtd+3hQGNLqv
+ YM0pAmZAGwbB07vN7w7On/7Yve9EjhA7VKq80e1Ny7EXTVtwRaIdTbX9pTCEBCqaGZFN
+ oH4dRTdTPDrWdqvZi3wIymz9H8rOKK8ETK5XOGNRuFuA8Tzk0KguysbqiKGr2E8kHygV
+ gg/g==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256
- header.s=pfpt0220 header.b=YSWmtCcr
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=lnL/FKM5
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -133,27 +159,159 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi everyone,
+On Fri, 31 Jul 2026 at 15:40, Alexey Charkov <alchark@flipper.net> wrote:
+>
+> gpt_fill_header() computes last_usable_lba and first_usable_lba from
+> hardcoded block counts that silently assumes 512-byte sectors and the
+> default number of partition entries.
+>
+> The partition entry array holds GPT_ENTRY_NUMBERS entries of 128 bytes
+> each, so the number of blocks it needs depends on both the entry count
+> and the block size. write_gpt_table() derives that count correctly and
+> writes the backup array at last_usable_lba + 1, so whenever the two
+> disagree the backup array no longer immediately precedes the backup GPT
+> header. Furthermore, on a device with 4096-byte native sectors, such as
+> UFS flash, and the default 128 entries, the array is 4 blocks rather than
+> 32. Current code reserves 34 blocks at each end of the disk for any block
+> size and wastes about 114 KiB at each end.
+>
+> Add a new helper gpt_pte_blocks() and use it in all four places which
+> currently calculate the number of blocks each in its own way, so the
+> layout written by gpt_fill_header() and the extent written by
+> write_gpt_table() cannot drift apart again. With this, first_usable_lba
+> on 4096-byte sectors is 6, last_usable_lba is lba - 6, and the backup
+> array occupies lba - 5 .. lba - 2, immediately preceding the backup
+> header, as the UEFI specification describes.
+>
+> Note that this changes the 512-byte layout too for boards that do not use
+> the default entry count. CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is
+> "default 56 if ARCH_SUNXI" and is set to 64 by a number of Rockchip
+> defconfigs:
+>
+>   entries  array blocks  first_usable_lba  last_usable_lba
+>        56            14        34 -> 16    lba - 34 -> lba - 16
+>        64            16        34 -> 18    lba - 34 -> lba - 18
+>       128            32        34 -> 34    lba - 34 -> lba - 34
+>
+> Existing partition tables stay readable either way, since is_gpt_valid()
+> locates the entry array from the on-disk partition_entry_lba. Only newly
+> written tables change. Partitions given without an explicit start= will
+> now be placed lower on those boards; on sunxi first_usable_lba lands on
+> the 8 KiB SPL offset, so such boards should keep specifying start=
+> explicitly.
+>
+> While here, report both LBAs when the requested layout does not fit, since
+> the existing "Partitions layout exceeds disk size" debug message gives no
+> clue as to by how much, making it less helpful in debugging.
+>
+> Co-developed-by: Anton Burticica <mouse@ya.ru>
+> Signed-off-by: Anton Burticica <mouse@ya.ru>
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+>  disk/part_efi.c | 47 +++++++++++++++++++++++++++++++++++------------
+>  1 file changed, 35 insertions(+), 12 deletions(-)
+>
 
-I am currently working on Ethernet driver integration for Synopsys IP in U-Boot, specifically focusing on the Synopsys XPCS (Physical Coding Sublayer) block.
+LGTM, but I'd like people that have been involved to take a closer look
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-After reviewing the current codebase, I noticed that while Linux has a dedicated XPCS subsystem driver (drivers/net/pcs/pcs-xpcs.c), U-Boot does not currently have a standalone equivalent.
-
-Before starting development on a standalone driver, I would appreciate your guidance on a few architectural questions:
-
-1. Existing References:
-   Is there any existing/in-flight work or reference implementation in U-Boot or vendor trees for Synopsys XPCS handling?
-
-2. APB3 Indirect Access vs. Clause 45 MDIO:
-   Most typical implementations access the XPCS registers over MDIO Clause 45. In our hardware architecture, the XPCS is accessed via an indirect access mechanism using an APB3 management interface instead of MDIO. Are there any existing driver patterns or abstractions in U-Boot handling XPCS/PCS over non-MDIO register buses?
-
-3. Design Context:
-   Is the lack of a dedicated XPCS driver in U-Boot primarily due to design preference (e.g., relying on TF-A/BootROM pre-configuration, or embedding initialization into SoC glue code), or simply that a generic driver model port has not yet been submitted?
-
-4. Upstream Integration & Guidelines:
-   Is there interest in upstreaming a standalone Synopsys XPCS driver? If we implement this driver under U-Boot's Driver Model (DM), what key requirements or design points should we keep in mind to ensure it aligns with current networking uclass standards?
-
-Any insights, historical context, or recommendations on how best to approach this within U-Boot would be greatly appreciated.
-
-Thanks,
-Akash Nair
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> index d8b17ec2e91a..af311867a285 100644
+> --- a/disk/part_efi.c
+> +++ b/disk/part_efi.c
+> @@ -388,10 +388,23 @@ static int set_protective_mbr(struct blk_desc *desc)
+>         return 0;
+>  }
+>
+> +/**
+> + * gpt_pte_blocks() - number of blocks taken up by a partition entry array
+> + *
+> + * @desc:      block device descriptor
+> + * @gpt_h:     GPT header describing the array
+> + * Return: number of blocks the array occupies on @desc
+> + */
+> +static u32 gpt_pte_blocks(struct blk_desc *desc, const gpt_header *gpt_h)
+> +{
+> +       return DIV_ROUND_UP(le32_to_cpu(gpt_h->num_partition_entries) *
+> +                           le32_to_cpu(gpt_h->sizeof_partition_entry),
+> +                           desc->blksz);
+> +}
+> +
+>  int write_gpt_table(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
+>  {
+> -       const int pte_blk_cnt = BLOCK_CNT((gpt_h->num_partition_entries
+> -                                          * sizeof(gpt_entry)), desc);
+> +       const int pte_blk_cnt = gpt_pte_blocks(desc, gpt_h);
+>         u32 calc_crc32;
+>
+>         debug("max lba: %x\n", (u32)desc->lba);
+> @@ -453,9 +466,7 @@ int gpt_fill_pte(struct blk_desc *desc,
+>         size_t hdr_end = hdr_start + 1;
+>
+>         size_t pte_start = gpt_h->partition_entry_lba;
+> -       size_t pte_end = pte_start +
+> -               gpt_h->num_partition_entries * gpt_h->sizeof_partition_entry /
+> -               desc->blksz;
+> +       size_t pte_end = pte_start + gpt_pte_blocks(desc, gpt_h);
+>
+>         for (i = 0; i < parts; i++) {
+>                 /* partition starting lba */
+> @@ -482,7 +493,9 @@ int gpt_fill_pte(struct blk_desc *desc,
+>                 gpt_e[i].starting_lba = cpu_to_le64(start);
+>
+>                 if (offset > (last_usable_lba + 1)) {
+> -                       log_debug("Partitions layout exceeds disk size\n");
+> +                       log_debug("Partitions layout exceeds disk size: "
+> +                                 LBAFU " > " LBAFU "\n",
+> +                                 offset, last_usable_lba + 1);
+>                         return -E2BIG;
+>                 }
+>                 /* partition ending lba */
+> @@ -604,18 +617,29 @@ static uint32_t partition_entries_offset(struct blk_desc *desc)
+>  int gpt_fill_header(struct blk_desc *desc, gpt_header *gpt_h, char *str_guid,
+>                     int parts_count)
+>  {
+> +       u32 pte_sectors;
+> +
+>         gpt_h->signature = cpu_to_le64(GPT_HEADER_SIGNATURE_UBOOT);
+>         gpt_h->revision = cpu_to_le32(GPT_HEADER_REVISION_V1);
+>         gpt_h->header_size = cpu_to_le32(sizeof(gpt_header));
+> +       gpt_h->num_partition_entries = cpu_to_le32(GPT_ENTRY_NUMBERS);
+> +       gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
+> +
+> +       /*
+> +        * Number of blocks occupied by the partition entry array. For the
+> +        * default of 128 entries that is 32 blocks on 512-byte sectors, but
+> +        * only 4 blocks on 4096-byte sectors.
+> +        */
+> +       pte_sectors = gpt_pte_blocks(desc, gpt_h);
+> +
+>         gpt_h->my_lba = cpu_to_le64(1);
+>         gpt_h->alternate_lba = cpu_to_le64(desc->lba - 1);
+> -       gpt_h->last_usable_lba = cpu_to_le64(desc->lba - 34);
+> +       /* Reserve space for backup GPT header (1) + backup partition entries */
+> +       gpt_h->last_usable_lba = cpu_to_le64(desc->lba - pte_sectors - 2);
+>         gpt_h->partition_entry_lba =
+>                 cpu_to_le64(partition_entries_offset(desc));
+>         gpt_h->first_usable_lba =
+> -               cpu_to_le64(le64_to_cpu(gpt_h->partition_entry_lba) + 32);
+> -       gpt_h->num_partition_entries = cpu_to_le32(GPT_ENTRY_NUMBERS);
+> -       gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
+> +               cpu_to_le64(le64_to_cpu(gpt_h->partition_entry_lba) + pte_sectors);
+>         gpt_h->header_crc32 = 0;
+>         gpt_h->partition_entry_array_crc32 = 0;
+>
+> @@ -747,8 +771,7 @@ static void restore_primary_gpt_header(gpt_header *gpt_h, struct blk_desc *desc)
+>  static int write_one_gpt_table(struct blk_desc *desc, gpt_header *gpt_h,
+>                                gpt_entry *gpt_e)
+>  {
+> -       const int pte_blk_cnt = BLOCK_CNT((gpt_h->num_partition_entries
+> -                                          * sizeof(gpt_entry)), desc);
+> +       const int pte_blk_cnt = gpt_pte_blocks(desc, gpt_h);
+>         lbaint_t start;
+>         int ret = 0;
+>
+>
+> --
+> 2.54.0
+>
