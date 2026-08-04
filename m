@@ -1,59 +1,59 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A33EC55822
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 21:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC4CC55822
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 21:45:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B41A9607A8;
-	Tue,  4 Aug 2026 21:45:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C021080D9F;
+	Tue,  4 Aug 2026 21:45:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3si7-Z1fjj9d; Tue,  4 Aug 2026 21:45:07 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kepszwlc9LTe; Tue,  4 Aug 2026 21:45:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BC0AB606E6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EDBF380D96
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785879907;
-	bh=6d6Movo0My1WU5VK44yUr4brPIaUA3N3SC9iha2IU98=;
+	d=lists.u-boot-project.org ; s=default; t=1785879911;
+	bh=Yn0nzlqjchKT9G2BJLc+g48Jkz0Ob4sOXUU5XqZGWfc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KRFRexRv/+Wr9/j+ZIibeOE4sGGWY7PAy07f9wYm4soFKEf28aHkM5L6TrOWHCk9T
-	 t8EqXPt3aHyJJBJ39wmlxDq5Flbm4ArHcgmQL3Hi0WhwjmSFRa1eAtwLPeqXkPrEqh
-	 Rdpu5pgA/wyctijlTPMGXrPuicWvI42vQ7imDOq48OK3JyDuydfTF3QrfDxX54YMcZ
-	 5uBfqV0hyHzyf+5gJiLYMOb5dGOKtzvFckBVkexxMTD3UxXw7DzxpwxvecBz+Xp+U0
-	 3rff7eACSYeXdiqH3N1Ypv4IpWDLEvBrvTh0tZc0eHN4NoLXJFMw4UfB6ljeobWCIz
-	 CGxwldUB19wRg==
+	b=ZAzpT349QLwyyccQr8Wm+VdN5LqrJFumRvcV59dsP36H01/B947+4Y7pioww1QdnO
+	 ctxIYYfbu8SHhiKjgXPKYhRwA9VXjDFYUhngbClm6BhaIz+Em68kLgOIV8T8ykodrw
+	 YHwS441yyAjoOdaDBHB7MyW1vOURYvAZqwGlTvMj6c+J3LYuSgdx6mMTk5jM6QRi56
+	 UL3S2kxl6RItfnDONvmaZV7UZzD7POilQvfrSoSIdsD8we/C16Qn+opK455Hw8eavp
+	 nazQD2eMMxGefbAt39hdPYWzPiiutjtQu8Ue3RsWyFEWut7NL6TIAe38vfJTiWoL6S
+	 RrbOX1nhj3Nzw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BC0AB606E6;
-	Tue,  4 Aug 2026 21:45:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DA9C12FA
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:45:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EDBF380D96;
+	Tue,  4 Aug 2026 21:45:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8F1A610E
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:45:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D8C8E4059E
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:45:06 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 75E014059E
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:45:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gsXD7F9BoYjb for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 21:45:06 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ id nt3pUiDXGNsl for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 21:45:08 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=1695=f6=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org EB20640571
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EB20640571
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EB20640571
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:45:05 +0000 (UTC)
-X-Forward-Email-ID: 6a725d5e96269bde08304558
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8158040571
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8158040571
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8158040571
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 21:45:08 +0000 (UTC)
+X-Forward-Email-ID: 6a725d6196269bde08304580
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.13.6
+ 121.127.44.66
+X-Forward-Email-Version: 2.13.5
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
@@ -65,10 +65,10 @@ To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 05/10] rockchip: rk3568: Remove unused rockchip_get_pmucru()
+Subject: [PATCH 06/10] rockchip: rk3568: Remove unused rockchip_get_clk()
  helper
-Date: Tue,  4 Aug 2026 21:44:34 +0000
-Message-ID: <20260804214442.2592597-6-jonas@kwiboo.se>
+Date: Tue,  4 Aug 2026 21:44:35 +0000
+Message-ID: <20260804214442.2592597-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260804214442.2592597-1-jonas@kwiboo.se>
 References: <20260804214442.2592597-1-jonas@kwiboo.se>
@@ -78,18 +78,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1785879905; bh=6d6Movo0My1WU5VK44yUr4brPIaUA3N3SC9iha2IU98=;
- b=ymmnMfhVwSPlKUQV3pUUjbHTEeonDV4OVS93iY/XrtyrbNdW/rQtqIZ+Hpr3AvsQD3GP2a355
- NCRi6C1+icIMFqo1G3PeY2OGMKizNL7A7b/QKMgl9wXcqDKi20/WdAf19dhKYuqSlrHoPg026i3
- RtmIPxSvYXGM58FF4dDBI5yyb05baoS2NvDYRNyo11UsGCvWTWi1gvG+zSxjizk8nXC+aC+N+xC
- S5NFylDfFI5Ri0p+UMCD6tlinJEBjHEVnBvklPdgIVgf4kwJIPxbZB8jiUD0n4Mrjp5W1hFQRGB
- kZjQEz+Hvh9wV0Q7A9mRhtDY47O6e85M5aW9n0kMrLPg==
+ t=1785879907; bh=Yn0nzlqjchKT9G2BJLc+g48Jkz0Ob4sOXUU5XqZGWfc=;
+ b=F7tr8zk+wjkgQRu2Chg3m9hYIoQqPtsPBV6CDV3FkJg9GVGO+65al4T+pztYrQsOyTeUPNcJf
+ g4WX6mbg+pkLzYXKe5rgIkYLRyF+kIHl5CVZVrML4hIxd9o4Scqyc8NW2Foqzn8BSolScCuiX7J
+ n4NMeFxZ2Kzo3YRyWoYxM9j6bAx/YL4frB1i/eTwaD9w7sLhnzytk+nSdvRLcvsYQlMy+ph6+mm
+ Q4HSxN/36YDPBFsUS03tlf/Y+IjYfSYGot/q5DSIVFH8w+kC/r05UTCKZYx28PfrGzDvnKvJI3a
+ KU/ppMeer4JSm++BUYRMFlcI5nE2Zp2c0Yp8iKQFjFSg==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=ymmnMfhV
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=F7tr8zk+
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -104,29 +104,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The rockchip_get_pmucru() helper is only used by RK3399 SDRAM init code
-to help get the PMU CRU base address from the clock driver private data.
+The rockchip_get_clk() helper is typically used by SDRAM init code of
+older SoC generations or to help get the CRU base address from the clock
+driver private data.
 
-RK3568 has no uses for the rockchip_get_pmucru() helper, let's drop it.
+RK3568 has no uses for the rockchip_get_clk() helper, let's drop it.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3568/clk_rk3568.c | 5 -----
- 1 file changed, 5 deletions(-)
+ arch/arm/mach-rockchip/rk3568/clk_rk3568.c | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
 diff --git a/arch/arm/mach-rockchip/rk3568/clk_rk3568.c b/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
-index ccd98a91cd16..53755bcf55ad 100644
+index 53755bcf55ad..72141e4726c2 100644
 --- a/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
 +++ b/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
-@@ -16,8 +16,3 @@ void *rockchip_get_cru(void)
+@@ -3,15 +3,9 @@
+  * (C) Copyright 2021 Rockchip Electronics Co., Ltd
+  */
+ 
+-#include <dm.h>
++#include <linux/kernel.h>
+ #include <asm/arch-rockchip/cru_rk3568.h>
+ 
+-int rockchip_get_clk(struct udevice **devp)
+-{
+-	return uclass_get_device_by_driver(UCLASS_CLK,
+-			DM_DRIVER_GET(rockchip_rk3568_cru), devp);
+-}
+-
+ void *rockchip_get_cru(void)
  {
  	return (void *)RK3568_CRU_BASE;
- }
--
--void *rockchip_get_pmucru(void)
--{
--	return (void *)RK3568_PMU_CRU_BASE;
--}
 -- 
 2.54.0
 
