@@ -1,111 +1,113 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0527C55838
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5471EC55822
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:11:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7AAC780C8D;
-	Tue,  4 Aug 2026 13:11:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 99EDE60792;
+	Tue,  4 Aug 2026 13:11:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Hd8NVEgH2NNk; Tue,  4 Aug 2026 13:11:12 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KtO9Qq-868WC; Tue,  4 Aug 2026 13:11:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 06B2180C6F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1DCAC6078D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785849072;
-	bh=QtURLZPw/s4YlPRl3PJM8xzkMd3UL1+OeUG0ZjY1EcM=;
+	d=lists.u-boot-project.org ; s=default; t=1785849073;
+	bh=vggjn/mgGqyEcHQQ/w50aP5Qw/gT1XbZhxDDWvmxOcg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FyeKe/ibtGSqFp9Ob9t/N0Ov0OG8uyUTMNGbsoxpwuwIIEVIxiydm3jwkMAbVbVY2
-	 Qxe2z6OcBNZwPmNRvxB1pFQty8LCarNgQLHjR3VaMe+Nx+Zcp0ZQlQQpiLSJee8oim
-	 eBbGx7JPDiufucjeJ/EN9ocyY3bnEp8LuXDp8KUG44yGeKpwIoKX97k2qcqDPOOOaE
-	 hU+U+VrmaHsaGKgKW7B/N/Asaempd5BtZjvSPVzznepl6LN6IpRj+AqMWaBRojXMy8
-	 Nn0rUOABpQHPXWYA/NEzed7ZXndAZ92NumI175qIqfr89Y6S5Igv8mkV1QPnzvC+YX
-	 KZh3f2FfjLZIQ==
+	b=vU4HYyRPliB59ddDgOvKEUEd6FGos0l94cgYtep0qtQjISubYONKii2CbUorrWjNi
+	 FjPLIqKzb90K6yOxLMsf16Pg/XPc9DoIjCr/pHxE7j/nDoedbDL+l8c4wA/IPEJ4gT
+	 GWpTFaKq2BjI8qXoO0QBF5YleqG5t5069JMVt4m3rnhAyR0zlcILzMgnk9V83JOsAa
+	 UdgZNM9Dvoo7DeAHwCRUf+H75peGhpoqqjUhToRDqqJbylHoPmXBeeQTVmh7ap7Wmw
+	 jNL0WXYGL+8Q0olvbi4ANOyozhV8LbJCi5pT7pnHGaVi53ffvvX8yBkm2b4gleEOSY
+	 cxNRO9/ygC1+A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06B2180C6F;
-	Tue,  4 Aug 2026 13:11:12 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2EBF62AA
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:02:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1DCAC6078D;
+	Tue,  4 Aug 2026 13:11:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 83C5432E
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 203D54053E
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:02:55 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7635680ADE
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 74Ou-BV7rgB1 for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 13:02:54 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rFPwY3mR9OWs for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 13:03:01 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
+ client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1FBDE40189
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1FBDE40189
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1FBDE40189
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:02:53 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6a10b20634fso3166377a12.3
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:02:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785848572; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8B1EE80ADC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8B1EE80ADC
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8B1EE80ADC
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:03:01 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-69c20ba892eso1405615a12.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:03:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785848579; cv=none;
  d=google.com; s=arc-20260327;
- b=mBBPpky/Yuv5Px+vKGRdJlVm6KMnoRhlniVXcXxjyHBNLpsU4Lz7TM5jF8fhIl34PU
- 4l2S6tWMcwgZBEqJZsuOuHnto5hLhNq0HTuCTNONenDIOHUieaCUoGj9maDdc/ph/czL
- p7w51j3Vtn+uO1dDsCynEvou+qWFgQrAGWKQE82CqTjG/T5u3Y1D4JfMNyoqgn89UPfV
- ng5erCK0/pOv4HbC4XKiocsbkzCDbad43+vPh9lDLXrwtpU1OTa+XC183ta3RVtP9dAk
- 6e8cvJPtELxHMbaMkyKCTY1JknU4iRh/BHs/JMX46Z1hoDb2TUZLlxszAg6pMHpSjiqE
- 4k4w==
+ b=ASIBRrCRGIzLQN1oZbZEzw5liJacDGGcIwkoce6S5MDGb4xs81dS1aNrZ2CVricC56
+ II2poDsjSU+2v4mJbN5viNYHKMHIwMfeIZ3OWjFJhGI60JIKCE3ZJvLncZwxv09s8EMi
+ LP8S6eFsDpdKBGPYk0kpN2GITyx6PMgpkbCSXB84j9tArZk2kPfCZCklWztBk3ezgodd
+ biDu1CkZKV6E8L8+SUNu0JvFdEZNjAXw7FSZNd0u6CNRI1fecYhkmPalPGyqTM8QGpWV
+ wkIW5qlIoWAAkL9faPvfLH6kmoHUoHSbgDm1OejNVYF3fZjv70/4hEeH3GgXuvKiTPBn
+ 081Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=QtURLZPw/s4YlPRl3PJM8xzkMd3UL1+OeUG0ZjY1EcM=;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vggjn/mgGqyEcHQQ/w50aP5Qw/gT1XbZhxDDWvmxOcg=;
  fh=hsQzq9IYCmZwK0E7cVW3p7RZJMnlUShWANxf+Zzt34k=;
- b=GTLrZgPy5xjzkYZ+IfqzCQO4zyeJ7RsYKG0KDjwavwpimj+/ExzX6DZiKDYe76BTyp
- kBBXJQaB3wju1Sj2PE4/osf88RQ6ikPRGcHLJrIYTjLoYQPpR2EVAtnOqeNIAdwEXW3f
- lZll+IYjuwnsu3rN8th+uXcpq5PiRlsdt0xfByB//jyw11rJlHmJ2CrWgXvY8qin/T5c
- 5doamzI9aj3C4eODineMZTCkh12+WJyQe6XEsuPkmLM7uPP0SWN/E9+Z7AJ1uZFICaTK
- gOHHZw/hKg/aMCSaY905B/uzWrIziXUJ7SVq7MACprhWwBOrrPgTrvUhOkkp4pIrIuKJ
- wMnA==; darn=lists.u-boot-project.org
+ b=ID3n0rygVjr3fMCFfaFLBmIjozW8W/xkTgdEtrz4bmwJsEQzK9YX/h+y4yt1vrb4Mm
+ nJbL6ceZG2MWNz+W7zgSHa8iPbwCZIU1/Qf0SGjqUg8z2T8U6byEaRPr1JBIrn1mCBs7
+ qw7V6QCPVO/ZGxV9ody8jURwhEORjqq58ksY7GlotP8rGByn3PK2fzn2gBW6BjHUXaWf
+ 4nV6hPXjaX1pg4lTJmghjtpQ21WRwRoqkJdCZa4Xc2liVCw7ujZp1AuS7iY88j8TbM6X
+ oR4gE74rJrbCnFsrlaCTGpGiLAIT0ZV+s48L3SLN9KeTVZK16yQpmDtLdKjmpy4yW+px
+ PdOw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785848572; x=1786453372;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=QtURLZPw/s4YlPRl3PJM8xzkMd3UL1+OeUG0ZjY1EcM=;
- b=rhxQRTkUC3fPtau6MDZ6PUQrO9NVyDDcheYLPXyAQcGsl/kbHsMWjHzoGNSxaBBg+W
- 9Zjt3yrbfWbyd5Rey06HQPhIcO9a51eakasCywphc5bJnz45EVxhBuNhJ0eNKNI62pNs
- 9GL051mLG9ggzdRZlgT035D8dnM3VyYy+LDw4zUO2pEny9985FLzlOXsi9ZbAuJX3MOR
- c8Nmk+YiD0yoke1yswMbaKX3T2A/u1c0ImYcn+uCd0UyAcXvp1Uc1IaermWtRR58sKNH
- 7JnZgsDqVjXx3PPXGw+KDt5CS0LNZnwhY7mogQLi63X9ILkqMzuPzzeBXOUKx4yd7sNL
- 0Z7w==
-X-Gm-Message-State: AOJu0Yzg24fiAQd3LJnY06JrRV5EMuGjlAMzUbRah5gon8fnrR/7t9L1
- CUOvXJY192g2Gse4/4+1To/LKjIL9KGOtE29XGzfYba8grBDBmw4q9NsgBs6Q8esKqyympL4uJX
- JoYtoa/Im/iWVZ4kmJP08pVKJ0ypN+eqWnqvJGQce
-X-Gm-Gg: AR+sD12zBQU/tIBHTw4NmZBfN+c0Ae6sNxBnex17Jmbl1yMxz4JUviU+P0mGaOzX3dy
- PbpktOBGLhPiigFwZniT/m5WeBnh/N/DcTirN4i2G5PkUteAOFN/TpB9W4B1TZZW95dJDWl0DdP
- e4AzeC0Ilao7fwB/cEZs/aPEAd0vYqWeCvHn+oWVPbp5hAxsNL4rOHXzsw6/MknCVESUyImd/4H
- dK88IzTKhSLe9aTIsmiv6RJf4qd2laIwD+R8Cuaw1YDm4NTs+W66TME/RKdXivP4THqjXSc9F70
- ubw+luf1chgexdnHn7kI2MhCAs61Dl7gqS59pGlmsFk=
-X-Received: by 2002:a05:6402:21ca:b0:698:c13e:179a with SMTP id
- 4fb4d7f45d1cf-6a0a7c72678mr11471302a12.10.1785848570978; Tue, 04 Aug 2026
- 06:02:50 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785848579; x=1786453379;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=vggjn/mgGqyEcHQQ/w50aP5Qw/gT1XbZhxDDWvmxOcg=;
+ b=Vn+1YtCMZVHKiy4XYLRbwcd+tUl07Sri+JOsMVkRXU+1NQ5HceKEF1NUNd4TpDs9sK
+ miGEJlQKgDXzTn1vNC8CcXltzUggAVBcRvoLymdbuiZst0Tl4aNhNGJuE81XxjfyA24j
+ Iv2WifBWtb/9dqwZE1mxncs6fuPQksVG26UuScme5+qUm0mXS3qgcdEJCbTBAMvyXAC1
+ DhNxbHGM2nqbTr1caCWHh9zpQLgIwOftItChShEs0uZQjYsy/m7iLpXQaBhpIdPbU3Hf
+ ok81Sij3Y/U916P4MbMWT7pOB91j6zdVsa8HVTgn/gb5miOPULhIOuur3fudfHZyF5wV
+ 9k7A==
+X-Gm-Message-State: AOJu0YxZe8/esYfWXnbeXipZdmsgFOD4LDNPvGBgMCklaVwtoGRe4ckH
+ hw9oU/8sGJC9crLEba/Z5taJgN8HwrXF62ube9zRm0eZ/ASNeXJjDlyZ1AV60hGw9zNxVBJdB5r
+ RRElaf9pa9Zdrowj4YAxliSYYBqpu8fy845iH9/wY
+X-Gm-Gg: AR+sD12QZ90TMjYSqseq7ghUsoCb/JF1K23z2T5l7eaeM53bqLv6u7CwZcsw+UKlEhR
+ DZq6Qj+ue9/tCP79VDgFujVwnie4akumiGT7puThOLAA8Fr/nP4/qNeazR9TvwhCKJuFZWsBf3u
+ /sIdZzvapQLgJgzhhY7WwKp+HDVrC9HirLMkEMaJzTs+dJYDMV9TUvRZ0oM8i6Y2RflQIbb7yeg
+ brEjaj0tjooZOk26VQxthC+IIdb4R8+NMzbhdtPnFNJKw9ln0o2IOoz5bpYEr9A7QjsyXicbhkL
+ H2Up+DCIcbZkRqE1EcD1qumbWNogbkivDr2U4Jzkoq+V5wbPuDNMK/c=
+X-Received: by 2002:a05:6402:5383:b0:6a1:1742:ac22 with SMTP id
+ 4fb4d7f45d1cf-6a122e38796mr4143806a12.2.1785848579473; Tue, 04 Aug 2026
+ 06:02:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-3-acb97c172993@flipper.net>
-In-Reply-To: <20260731-atf-falcon-v2-3-acb97c172993@flipper.net>
+ <20260731-atf-falcon-v2-4-acb97c172993@flipper.net>
+In-Reply-To: <20260731-atf-falcon-v2-4-acb97c172993@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Aug 2026 07:02:36 -0600
-X-Gm-Features: AUfX_mzeleGmH2-K8ok1p7qs7F7xoQpc2j9iHg3W7ouhpc6rLo-S6jdH1QLJ0RQ
-Message-ID: <CAFLszTh0F-GsKVKuEVJ2NjEjjm+KOg375oV8+OwbUu1DBrAMZw@mail.gmail.com>
-Subject: Re: [PATCH v2 03/10] spl: ufs: add Falcon mode load path
+Date: Tue, 4 Aug 2026 07:02:46 -0600
+X-Gm-Features: AUfX_myrUBtKKzpyBOloW2a94As4-Z3HfAA0YaNUAk6coflop2wNLgYZTxQ8hUU
+Message-ID: <CAFLszTgVmR508j5h_ncKwUQT3T1_ZW=wCctrBut2+hf-qr13sw@mail.gmail.com>
+Subject: Re: [PATCH v2 04/10] binman: Add support for externally provided
+ Linux kernel blob
 To: alchark@flipper.net
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -132,24 +134,24 @@ Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>, 
  =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 04 Aug 2026 13:11:06 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785848572; x=1786453372;
+ d=chromium.org; s=google; t=1785848579; x=1786453379;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=QtURLZPw/s4YlPRl3PJM8xzkMd3UL1+OeUG0ZjY1EcM=;
- b=ZqGHilKK5RMqO7quZo2uOMgDmcL93vhpbr36TElTDRqwrfvzCCSjdnrF6Yjn0zMw+n
- 3Xy0z9zfsspKjThjhhuf2obiNJPOQ67oVz4heB2EB7KAc8yaL95diRDsYTq1zWqCupdF
- DjxoyrarHE4/AdP3cy5LBmzmPfJIhYPx6nwFk=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=vggjn/mgGqyEcHQQ/w50aP5Qw/gT1XbZhxDDWvmxOcg=;
+ b=IwweDSji1hILRqMVeHz9ziF8JSV4euWVJJnLgzRwZKNi7Eh46292rg8KWG1ep5XALS
+ 83xj5JHT2sus2+buaALRL9YSCCOtpyqMl53j7A/7s5XmHbGQLwMuRo7oxlMZ1nSlG+SZ
+ YYYKcI6YobaXRT5ovPJV1ny6DoERyQ60DNwuc=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=ZqGHilKK
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=IwweDSji
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,87 +169,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Alexey,
 
 On 2026-07-31T17:10:44, Alexey Charkov <alchark@flipper.net> wrote:
-> spl: ufs: add Falcon mode load path
+> binman: Add support for externally provided Linux kernel blob
 >
-> In Falcon mode, the SPL loads a FIT image containing a Linux kernel
-> instead of U-boot proper, and it may need to fall back to loading U-boot
-> if Linux is unavailable.
->
-> Add support for images containing a Linux kernel, optionally on a
-> different UFS LUN and/or offset vs. U-boot proper to enable fallback.
+> Add an simple named Linux kernel blob type to binman, activated by the
+> "LINUX_KERNEL" make variable. No processing is done on the passed blob.
 >
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 >
-> common/spl/Kconfig   | 23 +++++++++++++++++++++
->  common/spl/spl_ufs.c | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++--
->  2 files changed, 79 insertions(+), 2 deletions(-)
+> Makefile                           |  1 +
+>  tools/binman/etype/linux_kernel.py | 22 ++++++++++++++++++++++
+>  tools/binman/missing-blob-help     |  5 +++++
+>  3 files changed, 28 insertions(+)
 
->     In Falcon mode, the SPL loads a FIT image containing a Linux kernel
->     instead of U-boot proper, and it may need to fall back to loading U-boot
->     if Linux is unavailable.
-
-Please spell it 'U-Boot' (both occurrences). Since this patch actually
-accepts TF-A and TEE payloads too, please mention that here - the
-current wording suggests only a Linux kernel is expected.
-
-> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> @@ -20,13 +20,38 @@ static ulong spl_ufs_load_read(struct spl_load_info *load, ulong off, ulong size
-> +     if (spl_image->os != IH_OS_LINUX && spl_image->os != IH_OS_TEE &&
-> +         spl_image->os != IH_OS_ARM_TRUSTED_FIRMWARE) {
-> +             puts("Expected OS image is not found\n");
-> +             return -ENOENT;
-> +     }
-
-The equivalent check in mmc_load_image_raw_os() only accepts LINUX and
-TEE - the ARM_TRUSTED_FIRMWARE addition is new and specific to this
-series. Please mention that in the commit message so it is not
-mistaken for a copy/paste divergence, and consider whether the
-mmc/nand/spi paths should have the same relaxation in a follow-up.
-
-> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> @@ -20,13 +20,38 @@ static ulong spl_ufs_load_read(struct spl_load_info *load, ulong off, ulong size
-> +static int spl_ufs_load_image_raw_os(struct spl_image_info *spl_image,
-> +                                  struct spl_boot_device *bootdev,
-> +                                  struct spl_load_info *load,
-> +                                  struct blk_desc *bd)
-> +{
-> +     ulong sector = config_opt_enabled(CONFIG_SPL_OS_BOOT,
-> +                                       CONFIG_SPL_UFS_RAW_OS_SECTOR,
-> +                                       CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR);
-
-bd here is just load->priv - please drop the extra parameter and fetch
-log2blksz from load->priv, matching how spl_ufs_load_read() already
-does it. Also, config_opt_enabled() is redundant: this helper is only
-reachable from the OS_BOOT branch below, so
-CONFIG_SPL_UFS_RAW_OS_SECTOR is always defined - just use it directly.
-
-> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> @@ -36,6 +61,35 @@ static int spl_ufs_load_image(struct spl_image_info *spl_image,
-> +             if (os_devnum == devnum) {
-> +                     os_bd = bd;
-> +                     os_load = load;
-> +             } else {
-
-The struct copy of load into os_load is unusual - spl_load_info is
-meant to be initialised through spl_load_init(). Since the two
-branches only diverge when the device differs, please just pass &load,
-bd to the helper in the equal case and drop os_load entirely; only the
-!= branch needs a second spl_load_info.
-
-> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> @@ -36,6 +61,35 @@ static int spl_ufs_load_image(struct spl_image_info *spl_image,
-> +             puts("spl_ufs_load_image: Failed to load falcon payload\n");
-> +             log_debug("(error=%d)\n", err);
-> +             if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-> +                     return err;
-> +     }
+> diff --git a/tools/binman/etype/linux_kernel.py b/tools/binman/etype/linu=
+x_kernel.py
+> @@ -0,0 +1,22 @@
+> +class Entry_linux_kernel(Entry_blob_named_by_arg):
+> +    """Linux kernel image blob
 > +
-> +load_uboot:
+> +    Properties / Entry arguments:
+> +        - linux-kernel-path: Filename of file to read into entry. This i=
+s
+> +            typically an uncompressed ARM64 Image.
+> +
+> +    This entry allows binman FIT templates to consume a kernel provided =
+via
+> +    make variable, similar to how BL31 is passed to atf-bl31.
+> +    """
 
-The other backends (spl_mmc, spl_nor, ...) print 'Fallback to U-Boot'
-before dropping through - please do the same here for consistency,
-otherwise the boot log just shows the failure with no indication that
-fallback is happening.
+Please drop the ARM64-specific wording - this etype has no arch
+dependency and can hold a zImage, Image.gz, vmlinux.bin etc. Something
+like 'This is typically a Linux kernel image such as Image, Image.gz
+or zImage' reads better and matches the style of atf_bl31.py, which
+just describes what the blob is rather than how the FIT template
+consumes it.
+
+> diff --git a/tools/binman/missing-blob-help b/tools/binman/missing-blob-h=
+elp
+> @@ -32,6 +32,11 @@ If CONFIG_WDT_K3_RTI_LOAD_FW is enabled, a firmware im=
+age is needed for
+> +linux-kernel:
+> +A Linux kernel image is required to build a Falcon mode FIT image, which
+> +lets SPL start the OS directly instead of U-Boot proper. Build with
+> +LINUX_KERNEL=3D/path/to/Image, or disable Falcon mode image generation.
+
+This ties the generic linux-kernel blob to Falcon mode, but the etype
+itself is not Falcon-specific - a user could reference it from any
+FIT. Please reword to describe the blob generically ('A Linux kernel
+image is needed by a FIT that embeds one =E2=80=A6') and then mention Falco=
+n
+mode as the typical use case.
 
 Regards,
 Simon
