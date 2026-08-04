@@ -1,148 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB903C55184
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 08:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CDDC55184
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 09:17:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7A744406E8;
-	Tue,  4 Aug 2026 08:59:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 738F580C72;
+	Tue,  4 Aug 2026 09:17:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Fw81j9bBj79M; Tue,  4 Aug 2026 08:59:13 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bA7XOoEBwV9w; Tue,  4 Aug 2026 09:17:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B2854406EA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B59C080B12
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785833953;
-	bh=vTzt7gTB364Y7cCH1bLBVmmlVXmyoPdgylnlYBqVunQ=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1785835033;
+	bh=CDK3AgjvZlxjZMytD0zx2ReFFPjj5NFPoL/lFT79++0=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vgkpn0ziWQ246Cw55nbDNEJn0nXMaEO0wl7f+Rtwwo6vtfxMU2BC4Um/CNLy1rs0D
-	 Gtq/GtJpNOeRFvuCpBCotESt1z7diPP57gzUABfrD08Fmd+Ol27D4hPZp4nfTP7yFE
-	 ZLM7c/OhFC+x/rTvgGkrauKkHcIIJXbnZIyvsa+DsTiBTzSmUV4zb7z5CePYErOtBO
-	 7yRupQ7KNPKqWtri6w2LF9dxRYdaZPRaVPh0WdGMhWInb4M85VNLlWyUVGQMQTexmO
-	 FpDeJxOvGzgCp1rL+Oc6aojNjhN7CdIQYV7g739CJd5Jy5x1kSehMJ/r79qcnF20rd
-	 X+iYkT1Tm9k7g==
+	b=yVMFI122LHMhO1r+C+AYIre7ddvf+2WyYN3PpBfbCV182FoNCoGJ/fM11kXmoCdj6
+	 YumyCllDCGaWof3AN057yDnIp9b0ctty1Q050t+OIWLlz0xr1dwzfEX4R7bC/d7VOK
+	 AW8jrS4YgP7aGPOXrVJS1V5v+LAGyUcGJtTHKvGBUNU1iXWS9003k50wIKVQp9R88D
+	 FpeyLykVqfC6yYK+LKSVVGguuuDz0vzy8zet468SWm6ozzNpc3ENh1gTD84dqzPJaF
+	 IzMTUSgO8eCa1LGDoYCCB23+8V2NY8vDZNpNQ0ho5b0gsCf05fgFcJHvqepiAdRXav
+	 UVg1/UVDyECng==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B2854406EA;
-	Tue,  4 Aug 2026 08:59:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A859C23F
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 08:59:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B59C080B12;
+	Tue,  4 Aug 2026 09:17:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8D15326C
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 09:17:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A5FFD406EA
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 08:59:11 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7F0E8406F5
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 09:17:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gPGmsGkvtIPo for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 08:59:11 +0000 (UTC)
+ id JEGmbexduIPu for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 09:17:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b12c; helo=mail-yx1-xb12c.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D9136406E8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D9136406E8
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D9136406E8
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 08:59:10 +0000 (UTC)
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-66899c7b57bso6479237d50.1
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 01:59:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785833949; cv=none;
- d=google.com; s=arc-20260327;
- b=G+a9GSwF20JG5Kgxx3wIdqqBlnByXFLwE3N0c+e6YEkBKFjMyUGdSoBJcfIScIMhsE
- TpSSPatykekc4Kf40fIW4lSyR/dOQwWbSh6I2FoQr3dUJBGi7wk8DBcRLYz5UUlGeIjD
- sxrfck9BQZ4SnSlKh2OKMtBbrTdSH27OTSEC+xNWmu86LnS0YwWGGa0M8IEuWOvbCUFu
- OWTW4bgmeZkwEIvwiReu/qGGv/+jyfIFoRkQ10A+RxapaqlDDqpaqW4uibQmXsJvjIlt
- QakkVW5xYcVBkq16b1TBXPZM2Tyzn6AcEE0w45gn+E88qxLKC7DTZsymi7cGI8APNCm6
- qlYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=vTzt7gTB364Y7cCH1bLBVmmlVXmyoPdgylnlYBqVunQ=;
- fh=ljxBvtK9pKLqimmAAFMeBw6hsHidow9/hJ3Jbv7MK0s=;
- b=YfH4o4lZ3CXyle1swPQNrlQjaZpqPnGouYLJe51a3ke47gQjcwHBt+BQawt/NFWFZM
- idgPnCxAI7WrtDW+wH3NkxaiQGGIKi0IP3pRfrnVZ/ZdgKLNXekneLucpj28NC/qp8Zy
- v4ftv1Ray9ztGApVI7nEzuOuzr8ndRxgwGekINIydzKZRFTYZzuS15fH//NDApamr1Tm
- NRckTONDZJwzOoHByeAJJJ9QnZLp+mCHg6R5CMRR5X7CWyw0DJx7KZnYVK8INZ+cKfAt
- tFxhMm5huJgFh2bhsuo/nkrlnn+ZDITv4LxI7/uMj/Av6dq1YYVEs3vvJkOgaaw3wd4i
- 0Cww==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org E7D0C406EE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E7D0C406EE
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E7D0C406EE
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 09:17:09 +0000 (UTC)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-47c2b362ee2so3729679f8f.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 02:17:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785833949; x=1786438749;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=vTzt7gTB364Y7cCH1bLBVmmlVXmyoPdgylnlYBqVunQ=;
- b=MO0sCGrZLW0MCCj/t8lmaA3uuQPkBuPKOwrbZUF7LG8YHsQiENfViqLI3hhkW8xPx2
- zux3+EdyOQTEZVJrnJDNVfJZGkuaSYTyQkseovFP3KC6uNufuUqs648sJdUlNIcKSFYf
- BQhTtglq0UniIfR1J35+5F0qBFHpLvtVJF8N8mQhcf/O+WTRBvEiGtqz3ks0MyjL9GiI
- 6wX13Z44Ne7M6sORxR+/P+2rksFKzyvgWPpGdwhQs6bCEruMsd8JWSXEFBcQ9GmVR9Ul
- rPQOr9CdxqG/5vKQ3OMpwRqiAhATyrsxAIYgEkTcli0wiYI9pFtRDLYbIu/Bg9YaZ6sZ
- rLIw==
-X-Gm-Message-State: AOJu0Yx4bLaoVUMxFk2WbeSLu8o4Sco4UoXglEU0tTxCGq5h+ig792H2
- /RGN/OpnmsFNnxW/LI7LOhEngyAbFU3b4xmu9fQupfnzJbQ/Pn7ZvMZUea88InkxuTKmQwMeI87
- 5qpUI4XcIZvONqXM4Rfh4ZXZxki7lbnro8uZM4NeCcw==
-X-Gm-Gg: AR+sD13D6b+02kmkx51mwsSUPQlY4WMmDuyS3L0a7FiO8ZlTa2VQjxw7IcU0N0lXijX
- pHrAhFrvK1oQ60oAtAj8XzddrlhCND3pdwpi7o92RMOakqDTg29fNYrUDl/SEKm0PnfJXI5ZHsH
- fz3OlhaHR8ZcxojV5MdeAJZr8OO3PpiFW9PbT1+lJnf4aLzM8gVlgB3a8vkh4+dpd5N6tQTXGq+
- GqICxTdOp/GWroLCqZ1FtxjSlHrrafINUWhsAm7ja/Q7WLCAaIb80/DvIfsheIQR9ULKMQOisCx
- wOaUFqB/wGBYOJElB+OmFtZXWHdfAMtwlai4Cj5WM+nV96SG7rBMUnc7kIBUkhvmAD1efnpxzfP
- VrU4wwsnVHFRdEWFgAbJeyz1HDZuj9MBrKy1tAdXhp37qftKriZaoZ4xhCZ4evd6px87DMvTEs/
- 2PZ9IAuUw9u//e7UeI97XLhjVZwuvkgzWZNuwqjhJiaSHpwCCzDyoLDqPln/s9harS4vDiHS+Fq
- wUFScpdcMsHAnvB73+FF5nZMDrRF6FGRGfB3tExhHp7g/lfeSfOswh2wpSZ5wB6DNd02nuY7Qwi
- fNiPtd7Sn6lLwLpQboBJ1jwe7v0h7LV+5gxp7OyhZFXA4xtrL12c/IFV+EfDPSnRfI8pWPKbWH0
- BP+9bnDmqIAFMxaZ5hQYeyFPJhpTSmR8/R2T+7TkTgRc=
-X-Received: by 2002:a53:cecc:0:b0:668:a57:2b0f with SMTP id
- 956f58d0204a3-6694f1eaec3mr11780138d50.45.1785833949145; Tue, 04 Aug 2026
- 01:59:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
- <20260728-ccaione-upstream-ebbr-v2-2-4efb529140d6@baylibre.com>
-In-Reply-To: <20260728-ccaione-upstream-ebbr-v2-2-4efb529140d6@baylibre.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 4 Aug 2026 11:58:33 +0300
-X-Gm-Features: AUfX_my1sf4DvF2K8XbddAb3kGIx4Mpf4RnLbQ3e2jKkbbu6zH64ktaxn95DiNM
-Message-ID: <CAC_iWjKu1bj8ru18xmiqfp3rZ5SHoNy6OuH4=jPH=zvRRT1fGw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] boot: add a firmware-owned devicetree source
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, Ahmad Fatoum <a.fatoum@barebox.org>, 
- David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
- Vitor Sato Eschholz <vsatoes@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Johan Jonker <jbx6244@gmail.com>,
- Randolph Sapp <rs@ti.com>, Daniel Golle <daniel@makrotopia.org>, 
- James Hilliard <james.hilliard1@gmail.com>,
- Aristo Chen <aristo.chen@canonical.com>, 
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1785833949; x=1786438749;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ d=1e100.net; s=20251104; t=1785835027; x=1786439827;
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=vTzt7gTB364Y7cCH1bLBVmmlVXmyoPdgylnlYBqVunQ=;
- b=rsX3Efqlp9UcPD51e6g9BEvqHCkas5KISgiZ3UCXuR/mhfamZmfwJEcUlxcAnldVnt
- 7zk/z5ETxt4svrNlnU6T0FT+DI0NeyQeEwg+Fmv5VhXCAFj+kLxMVKtEflFztDGs5/sA
- 1jDkg5SSxx3vtGFj6DNUEEUYASwm1a/2FUkPnW9hnnxv2yngEqH6RCphLmdTdk1EGKnR
- IJZFAnOArMGkuauA3o4DAKrnUasnTpkrUr9Nk788Ua013qMnJsFVY0fTh31+RKpqwcKl
- MabLsz1vmEwzpQtawwwoxtZT3vu6LoMpITxAgKDbhSmHO7R5huqpt6aLa8MHgUdUWiXF
- TmDg==
+ bh=CDK3AgjvZlxjZMytD0zx2ReFFPjj5NFPoL/lFT79++0=;
+ b=AIzMU7qwkPecE8fQ7keUu6f7I84l9fAiuG6E4kaSfa/fX0DWMLNIJk0abjo6Ye5aff
+ y1TTh8tglfqm1QEuijEu2s9VH4VmmRSXKskrbHObUIigqZitMFDRHJ16RJ2yvBiV9kPz
+ GUzA7egNPVj+MWkisL7FmXA4DWr5HjOPQ019MYk/3dXjCR/iKl2K9CKD94GaeiDTr+eY
+ JwVd25t9K6onNM7KxaSvgP6vthKWxD0KHJBb7igP19YdABHtzgcPkPuCDyJpggnbgpX7
+ peJZmeFNnv86b/bjyvGprYpDbgtr35MFSGcpUqe0wihGQ0Woo9q/v/1dWod9jTo89eLD
+ UAhQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoM7ZeRFOf6BxBu1x1HY4cy9ebX7naz8rpYrUboB8KXKPpRjMkT8czx5dpjT9+97KZbHayf8aM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxKufMf0TR7e4cDftj7qQ1X3CtJPA1J5OUaQt4NpgRLFWg2/ViW
+ 2i6tXQlEXHoSjaTaSK4vCVXv1EYcb3fEa8AzzeU9bEEl4RSOoE/6YEoctEYS3njL+7EHJYIK2E6
+ QVEPea6g=
+X-Gm-Gg: AR+sD132SDqyRpB5aaQLASX5P4EB25pSCy9JY48TBhiCEioU8llWG4fGNDWTQBQmGZu
+ YHUr40f9mgCIqwH/mdQnTN/aMabCaZoHCZpycujMK4bJGJEip/8pGyDlbS5UOzTESqLmBnAcT39
+ 0Oqxv5XklmnFS1Dk3+nUV1JrvFF8QJ9KEMq7gTBOZ4vcNUCfe2CXlk94SrxmMi2Ej7Uj7KpTTBN
+ KG0q9rUW0JDkIvA7ceYBYqB7UtHp8oSXgFTlP4cS01qys0Zw0NzppOnjLO+ADgIcYXZVXzVK3F2
+ mExvB7gRjw+AH27sDv+7td63OdUHGQfWzV3sKW22LWDsHnqsM1CR8mVgQLstbe4bsbzz0vUsBF8
+ rSevFtMPTTbQWguY7RBFPs2VU7pXpzpYBNU9lZ9w7VXzSoIxv2uRNobjjlkgBolsQCc7S+ePfWf
+ /QVEJzWWcwr81LXPE1XMzLZ7SIbH93/fwSFT4dxTa22wSeqdOFuBzg94Bdit/7pGqFRuDHw+GCg
+ O0jzcTOGzelszOznHWpazmWsZOLRsxg+JWm4b++MSRtBVXOe/5F132G
+X-Received: by 2002:a05:6000:40e1:b0:47f:8b1f:efa2 with SMTP id
+ ffacd0b85a97d-47fd729e88bmr34713979f8f.8.1785835027493; 
+ Tue, 04 Aug 2026 02:17:07 -0700 (PDT)
+Received: from localhost (host-212-171-227-71.pool212171.interbusiness.it.
+ [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47fd41cf404sm41307054f8f.1.2026.08.04.02.17.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 04 Aug 2026 02:17:06 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 04 Aug 2026 11:17:05 +0200
+Message-Id: <DKG1OKWLVQR4.339ERXWKKY09D@baylibre.com>
+Subject: Re: [PATCH v4 1/2] usb: mtu3: support the upstream devicetree binding
+Cc: "Ryder Lee" <ryder.lee@mediatek.com>, "Weijie Gao"
+ <weijie.gao@mediatek.com>, "Chunfeng Yun" <chunfeng.yun@mediatek.com>,
+ "Igor Belwon" <igor.belwon@mentallysanemainliners.org>, "David Lechner"
+ <dlechner@baylibre.com>, "Julien Stephan" <jstephan@baylibre.com>, "Marek
+ Vasut" <marex@denx.de>, "Tom Rini" <trini@konsulko.com>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>
+To: "Marek Vasut" <marek.vasut@mailbox.org>, "Carlo Caione"
+ <ccaione@baylibre.com>, "GSS_MTK_Uboot_upstream"
+ <GSS_MTK_Uboot_upstream@mediatek.com>, <u-boot@lists.u-boot-project.org>
+From: "Carlo Caione" <ccaione@baylibre.com>
+X-Mailer: aerc 0.22.0
+References: <20260722-ccaione-upstream-mtu3-spl-gadget-v4-0-9719f4cecaeb@baylibre.com>
+ <20260722-ccaione-upstream-mtu3-spl-gadget-v4-1-9719f4cecaeb@baylibre.com>
+ <33c75886-eeb9-4e67-b378-7a83ff1fd58f@mailbox.org>
+In-Reply-To: <33c75886-eeb9-4e67-b378-7a83ff1fd58f@mailbox.org>
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1785835027; x=1786439827;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=CDK3AgjvZlxjZMytD0zx2ReFFPjj5NFPoL/lFT79++0=;
+ b=AjrKn7ODjPAgXOLByjfV4DY2YsmmMa7kpnqsAiyzsL14zosmVyhzOfq2EMSnSpcbnC
+ KNaPHWUIdeHawOcc2k+bgRvaIm9sJ8VHL+oax6XyU9kYbfQ0G6JrAeNNdXKokTELKlUl
+ tUh2i4lJxZMUeYrGg5TiK2+ZDWmbI5MpFU2QzhAjWS80oZQV5RVzYdXCTxjve4KEN9Pl
+ dyU+qjVySbJf7i4G/0NG1VWF3ji0pGOb9DLMmVxc+0UJOSWwhmXWwGX60QXJNt2WTCGH
+ P+rDM3qGE4ZM/7W1Q6uxgAaYhn/lSmW5WSVtEIL0E5fNN2s9D2QH8ZM0FxAhxTbX4ubm
+ msyw==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=rsX3Efql
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=AjrKn7OD
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,18 +141,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Carlo,
+On Sun Aug 2, 2026 at 10:13 PM CEST, Marek Vasut wrote:
+> On 7/22/26 11:43 PM, Carlo Caione wrote:
+>> The MTU3 glue driver only supports the legacy U-Boot layout, where a
+>> synthetic mediatek,ssusb child owns the gadget resources and dr_mode.
+>> Upstream devicetrees instead place these properties directly on the
+>> controller node. The gadget therefore cannot bind when U-Boot uses an
+>> upstream devicetree.
+>>=20
+>> Search the controller children for the legacy U-Boot-only node and use
+>> the controller itself when none is present. This preserves compatibility
+>> with existing U-Boot devicetrees while allowing the driver to consume th=
+e
+>> upstream binding.
+> Can the U-Boot DTs be aligned with upstream DTs , and the driver fixed=20
+> instead ? Then this compatibility goo won't be necessary ?
 
-[...]
+Yes, that would require a bigger change in the driver to support host
+and peripheral in the same node / driver. I'll push a V5 soon.
 
-> +
-> +int efi_stage_firmware_fdt(ulong fdt_addr, ulong *fdt_sizep, char **namep)
+Thanks,
 
-Is this really limited to efi only? This seems a pretty generic way of
-loading the DT that's defined somewhere in the firmware. So perhaps
-remove the efi prefix? Or find a more suitable name for it.
-
-[...]
-
-Cheers
-/Ilias
+--
+Carlo Caione
