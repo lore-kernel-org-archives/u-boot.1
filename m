@@ -1,115 +1,115 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC2DC55184
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 18:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F8DC55184
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 18:13:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3E2F5406E1;
-	Tue,  4 Aug 2026 18:13:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E670880CBF;
+	Tue,  4 Aug 2026 18:13:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NLBzgnHWo5Zu; Tue,  4 Aug 2026 18:13:24 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zi6VJ0YPoy6Y; Tue,  4 Aug 2026 18:13:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 14A5240696
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 341D180CB9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785867204;
-	bh=flbUtuoci6ywY/OVfgWnpF9TRtHzdCIPWXq+EsMqqt0=;
+	d=lists.u-boot-project.org ; s=default; t=1785867207;
+	bh=WrWUZWDmSk4C5DGJdi6z3LGoQ28ezDAI4wrpKnZLKgk=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HUts1XLDguKM3+3vW3kg2louaNXf06PHQ3YZWJXIWpllbOtiUvRa3CGxqSM5hOTdK
-	 CXI+BlY/UO4E0lfJZnJvBs6bQjHQujUEljonA9AxIy7wpOfQ0O5MkVaHO1gIO+QQtu
-	 WldkCmFJoVmOPvgiltbwVdnYIrUAlUmKdZG1RcySH/Ml0jJkL6fYqS030NIc5poEaJ
-	 iCbsUKQzsmiv/fm32t6GUI684u8yP7v0fDnDrvt3tFRgTp3tkqTPuPaVTc2WjZlfqx
-	 h2tGSS/j30istAoUU5Uh4/QszzzNXn4RBxoXqy+cvw33UNrE23sQE5ot/PjumveqE5
-	 Ek/4mgkHPDT4A==
+	b=h8i1YlM1+BUSO3YkqHv+/UXwzOFevHEgkdNSd4/Nml6qxgWwXgYa7JwmBkL+6PnNT
+	 qGGCpxAeO+t0osf4yqfTfimNnbrZAFF7j8i3+G8hopsVTBRRCNsr4OQITu6ZbEEP+y
+	 1iyQa1SfV1lS8Y5B4kvoriLoQxMmlC+ogIgPZZgJYHwNm7h2KTY0k0OpUwpULAbzdg
+	 dyHXRw1i3Oo7OVyVxEvNBetqlun2Mcyu36S70AKhCmcvkW1h5inpNtJp9td+l26aUx
+	 LVMm4sWTITgzkFRjCV60Z9E2V9ydl9r97A9/HrJIdcIYSOO2rmUrEdMeGjWdqNJDH1
+	 W0miTV85QlX8w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 14A5240696;
-	Tue,  4 Aug 2026 18:13:24 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1EDC5350
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 14:15:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 341D180CB9;
+	Tue,  4 Aug 2026 18:13:27 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D0C8D23F
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 14:27:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0547960633
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 14:15:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C2F8640135
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 14:27:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6prH-WU35ioV for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 14:15:14 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id f6qQbcfjJuR0 for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 14:27:58 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::433; helo=mail-pf1-x433.google.com;
+ client-ip=2607:f8b0:4864:20::633; helo=mail-pl1-x633.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4CC0D60627
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4CC0D60627
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4CC0D60627
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 14:15:14 +0000 (UTC)
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-84536ecfc5bso5425582b3a.2
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 07:15:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785852913; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 13C1D400DA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 13C1D400DA
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 13C1D400DA
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 14:27:57 +0000 (UTC)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2cc7e86e7aeso45574305ad.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 07:27:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785853677; cv=none;
  d=google.com; s=arc-20260327;
- b=EnmB6EFi/WwFQ24ybJe1+RLqlhYHfgs77iZzf8+uKPMRed/ENzuwgq7jCA6VRXaiMU
- z6ajaJ8X3y5dyiqblv6txw81/ahli0ad8SzJrHp9OcH0HfPrrZ5TR8PtULcwCEdDs6IG
- c5CeEqPTU7wAXUCepPbJqYdVpB983xMvpciY3+MVuU3ORILIZbBnOaPFMNY+KoU65Wh5
- txWZLcdB59dp32vqB12yU/jj3ccz0UpfviZqjjK+4Enhn7NfF/+agr61wbn4veXghqg5
- watnle7NeWeiuFrhTdGWl5aPpPzvijmtom/zecDOJv1QCK0Pzsqpfnpwc+XHwptLbhgC
- S/vA==
+ b=PASyBC11OMoVtgW+GYGSQgjUygf/wzHg2s98VpDF9wBzu7aP4PPE/9VPDCCgJpyK06
+ neLaqL4G9/g7b8FGntUAE/I57WybzaCe7kcOUmdKiTA8VOvZH7f8JIWFl8AH107/MnW0
+ hksE3x0p3rPNemZnGljn6rKn4SVx3vvK/G710tUNkQdMQMbVIqeeLvcMDbiWej5j3Ivf
+ 1Ln5AFMGZHuJuQPJKq0pASccgNogwyHku9FnokGbZWTIDvStGVcwb3417GtaOZmc1md6
+ oK+AUbbuo8w7yTLwXYr0bB8pK45+/4JnyfrSAt0RKx+AJ85SlsQxGSSwX82vzgOjFfsW
+ xVPA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=flbUtuoci6ywY/OVfgWnpF9TRtHzdCIPWXq+EsMqqt0=;
+ bh=WrWUZWDmSk4C5DGJdi6z3LGoQ28ezDAI4wrpKnZLKgk=;
  fh=mVR9Y/rQZk34FU/ncVJcP5o4w0wahIppgQrEM7okHPo=;
- b=FKTZq+ZcTFnR/hZulfCHkgYDXuToWa1mM3vIBXehl68PcgG8DSvFgDuwbnBlH4Jqx6
- Lgk8lqVu/aH7A258XJqPQZaUtIW0MivEl8pNDzlKCkntaqu55rv4D9JimAdDM/LRpnPj
- 0v0n/X8gchWZAq7AbJlp9hk9lh2VfkPZgaZE4oiQ4iFLXV4UuF2t+By2H0EmKbWK0LVW
- spu8xO533OuYy3VJTL4zgME0sUVKVW16+i0gByU4U52E+eMq7RSuofq7+K+VwMoUEeJW
- A2MhOsPwJXscMHyuCLgbMLmvMO/exA8YpwkhX9wQywpR0iAf49S1wqYsTcpz4RpWXpnq
- e/zg==; darn=lists.u-boot-project.org
+ b=APUO8uivRKUuUe++pGCcceLW48Qf6Wb5Mry2uGhryildgwRFVkgRtW+YjZBtcQhzlv
+ aammoDQX9N+aQ4xZPYXwuzRElJWitOizRyhKj6oQtUTeDvH6x7k6Xx2a11KQayIN0hk9
+ AEKp2mr1TgJQIz0TyKXXUH2aFU61lXC5vGKsvGtT+k+A20sMMKU2JS+2zaOqgvGGVSG/
+ dmN8OgVAEXOi18SyON4tewxwIaaQrSW+SZsyqJAsQINVlOw4l+UOGsAwyHNZEilcoO9X
+ qlpE/kYYPGvbSt03Q7rJKdKuk6S/0U0CAVebU3eVd+TNHqHYfNMw6kn5Z2xqHxVFJn0i
+ y6KA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785852913; x=1786457713;
+ d=1e100.net; s=20251104; t=1785853677; x=1786458477;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=flbUtuoci6ywY/OVfgWnpF9TRtHzdCIPWXq+EsMqqt0=;
- b=Gt+Yq4CW9JRyn1s2blzfnxnbq//KuQGVB12H/oyE+CLeccbRfFx+g7ZCAJ9MRLb9QC
- 8zTHXwk5KiIlyciENsbpscnqAbEinspiUoOQ6DPcHdSKF1MvXI50tJ6NryIEu7sPh1Fd
- Ssm/LHkWv/Nmh3USZ96KeS40CYbKksh3Gwqe0xsxo7XabmKFd6CbStczW3DsE3YGyvW7
- III2jdBGbjuzw8nJ4JUG5sDXQEVZ7ST2djdxT/8CBBKajAbVU5j/IQuLBvzTDV1Zn2LR
- 23u650kkkqijH+nqw4+lRbxGgr1wPTNU0trIgBJYmutsXttL+fdrVvkq7bB0g5YGfJQ6
- r14Q==
-X-Gm-Message-State: AOJu0YzPYDjWpDte+nHNJLcTHo8JAjgncceW4upgqPZWT/i5kyR5oYOY
- MuaTX0BAocXasuODhLyzE+oRUKQ1i+y5wr5Jp+uEEQ9ehj2aso/+o/5Q+A/AE0BV2Dy8asEJzUo
- pJ22h8RlEC3usix9dHaKBSwvRb94lPdD3ZXsJjrte1w==
-X-Gm-Gg: AR+sD12if2CkXRZUEM7EVzKaa/bxS+PWmIehOet71vbA+UijaJOv1cQ38FHG40HYRn0
- YHstAdvWc/Z+V+QpmRX5FyeWh5NKmkngeZK9voNZimUYXx2OgmplDZNyvAAFC61ph/v/xjRUI3j
- FTvxe6uSl3rx61eRn3uAml2YBQ0E5lUHBI0KdXhLgb5E7iGiK8u07NsnU3YVl5g6lCWpRDUmnVo
- J3iHVl/1XDa1odurUxwOUOG7L0TspLQ1rqj0i9zbdvFPvx/XWp/XvHPRzZG5ceIuv2zGwUHegRR
- 2t+v8EnB8xHFjkAECQRMFTNi00v3YUmnmwCO8PKWZzy2PxjsMUd0lVCBUTKtOWkkxtMK5iBGKv9
- c
-X-Received: by 2002:a05:6a21:920d:b0:3c3:9070:96b3 with SMTP id
- adf61e73a8af0-3c92a543d28mr16232214637.3.1785852913551; Tue, 04 Aug 2026
- 07:15:13 -0700 (PDT)
+ bh=WrWUZWDmSk4C5DGJdi6z3LGoQ28ezDAI4wrpKnZLKgk=;
+ b=fkajawq/97j4dm/1JlafYlK9kHwzZoII/ulpSiVbDnPZfYhRmBZb9Uch0BNvghMCol
+ eJCeaV4WflN85dxDee0TCRrqjEXPrqWR7Y3/aQybuK6Dof2jgI36EPEyRncfPD59Urfc
+ zBCUAx22e814vbG2/d+evtrH0daF20sk3bwktO9E1aHZfj8SX5A1yXbF/T7m0SsiveeU
+ 90zJqZgLpo3oG16XUF3QItNRnFXPdWVTqlVXZM8iO7ZlAWw+QoT8LAEhCcIQjOlioNcm
+ Kur3MEORtxlVyXh6em+OgCQpmIlGyVjAVujShvTizR45w/GNH2ISuc+L/XP1AmsSY4T5
+ rYZw==
+X-Gm-Message-State: AOJu0YzpD4gF4atA6/O8legBzKI6pQn/AVK7VvczmFrWTeoVqUk+EJkG
+ IP1m8Ibc+j8RqUn/L80nrAsKB0p5BlQ+RcLhQB4BoDGwpUwAcp5+UAD80A0Z55Vb3PcHuXI3zG5
+ cWNZE43bUeapb7GvKoR1dEIlo82Oz7WDzdLqiefmabA==
+X-Gm-Gg: AR+sD129nSzYjGsIPJm5h+CC6H9n9M/aH1VMV+uQpFJgP7f/AXes6fOQhvP/i/VCFDU
+ jPEDLDQTVa+sdttw0MHoep85rSnB2nn2e4LAFoS+2jtjbx+VEplxcf0p4FSHdckv0mWl/jqLnAj
+ vYAifY5SHWywXOfbVrgvTus1GdGlxUleT0mb7U7jTcuH/kAlr7l8jGdOEzxcOBRSz86QaU2Daqt
+ Vo3xiTr6wiNp4wlMnwlvg6B6IKSnL39nw2L7s+dxhIwCqGDEHS8sGC+N5nYOqCs4MavOPFC0yf5
+ lp5qm+IRsIhPYMUhE3b85nvdr0W7CHIykBaaemXai9s+LMDPJqc/bGFd0MrCWwVJm1CplVInX8E
+ Z
+X-Received: by 2002:a17:903:2283:b0:2ca:b8fd:f31 with SMTP id
+ d9443c01a7336-2d0521e37b5mr140358095ad.15.1785853677218; Tue, 04 Aug 2026
+ 07:27:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-6-acb97c172993@flipper.net>
- <CAFLszTh-HpSCUjT6R+daf57YDdwgWfNun4mddqZi+jU5LTwVLw@mail.gmail.com>
-In-Reply-To: <CAFLszTh-HpSCUjT6R+daf57YDdwgWfNun4mddqZi+jU5LTwVLw@mail.gmail.com>
+ <20260731-atf-falcon-v2-8-acb97c172993@flipper.net>
+ <CAFLszTg=G0Y-qNRP-smy6CGyXhm=fW7fkaiD60f4duMhBr3=bQ@mail.gmail.com>
+In-Reply-To: <CAFLszTg=G0Y-qNRP-smy6CGyXhm=fW7fkaiD60f4duMhBr3=bQ@mail.gmail.com>
 From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 4 Aug 2026 18:15:01 +0400
-X-Gm-Features: AUfX_mx2sj0MIyt0wKDntgtvQ-76799is1c3S9MGHGMVxAgJ8KGjSwp1tjEknFY
-Message-ID: <CAKTNdwGLEBm6W1s-xAnhwK+Wpisek87kLMPF9grm+J7tmZKW3A@mail.gmail.com>
-Subject: Re: [PATCH v2 06/10] binman: Add support for pre-patching FDTs in a
- FIT with a /chosen node
+Date: Tue, 4 Aug 2026 18:27:46 +0400
+X-Gm-Features: AUfX_mwmekoTDF3j9EWi1ZIKjOkGE6zgjIwSXgXtxOOJscJhEIMjOdMpL7GKE1E
+Message-ID: <CAKTNdwHJLa47xA7GOuLL_dKW04GuqsoZZH-0Ma9C8Vre8AC6OQ@mail.gmail.com>
+Subject: Re: [PATCH v2 08/10] rockchip: spl: default to Falcon mode boot in
+ SPL if enabled
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -139,25 +139,25 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 04 Aug 2026 18:13:17 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785852913; x=1786457713;
+ d=flipper.net; s=google; t=1785853677; x=1786458477;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=flbUtuoci6ywY/OVfgWnpF9TRtHzdCIPWXq+EsMqqt0=;
- b=U8UB6soKSV+wO3KLPjVv8o8v+kzafSX8DOoKfseu2WvPZFdKxSo/rSSi/AwPZsDyHM
- 1v2eW1LOEiubuzI1iwkd0wdAVBwmGyffiB8AjNHAGoWthZItM0W3pYcRSidERIj6POB0
- 760O4VSLqF3SbafflixXaktrgeRAl2f9MxztdFXOVnCZ5YAED3fcahKf6MiJEemcoWHI
- PEiMFzOLxBV+SpMGRvpa3jlGo+ofMTzOVSOlrDBUsjp3k51RUfTy+dL79X0lqgKQiFDo
- KoAn9S+Vnj7vJkoU3V2vRqXTuMqe/m9uftalX6qknfhbwm80h7sS827MO8jULQOUlZfZ
- wBJw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=WrWUZWDmSk4C5DGJdi6z3LGoQ28ezDAI4wrpKnZLKgk=;
+ b=EZMWmsgprj7nVIocQs7eaHUryApJ7WfwF1gb9PRaRiKkaLsuLZVncSfjuIXOWsZYll
+ MMC70D21q4ATgauPRLhN2Ylnq4NVtOogSOLl05G5jrnRbGYBInRfrwmu4/mvzCTLjwEy
+ Qy6dUL9gzUMvCKxnVOWtpz/ssTeeQfPcFuauxy/BluQvHbRf8NlZm4dvu3SSYiGcOy64
+ 2a9Rh+9kNK1HGjsdNx9vSuhZIJgIqxLTvMlgpum6x+Csgk0mdf2hfRPcqwvieSAfRaCp
+ GCW/V1InobcBcOyNQSBmz3rIgaqBLxD5eluGY4NHZZyb4KpA6nD/FMls2iWgmG6SXxXi
+ Wa6g==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=U8UB6soK
+ header.s=google header.b=EZMWmsgp
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -172,112 +172,84 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Simon,
-
 On Tue, Aug 4, 2026 at 5:03=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
 :
 >
 > Hi Alexey,
 >
 > On 2026-07-31T17:10:44, Alexey Charkov <alchark@flipper.net> wrote:
-> > binman: Add support for pre-patching FDTs in a FIT with a /chosen node
+> > rockchip: spl: default to Falcon mode boot in SPL if enabled
 > >
-> > When a generated FIT is used to boot Linux directly, bypassing U-Boot
-> > proper (Falcon mode), there is no runtime code to discover the kernel
-> > command line and (optional) initrd location and include them in a FDT.
-> >
-> > To facilitate easier preparation of a ready-to-boot FIT, add support fo=
+> > Common code calls into a platform specific function to determine whethe=
 r
-> > pre-patching the FDTs in a FIT with a preconfigured /chosen node includ=
-ing
-> > the bootargs and initrd location.
+> > to attempt OS boot in Falcon mode.
+> >
+> > There is currently no platform logic to drive that decision on Rockchip=
+,
+> > so attempt Falcon mode boot whenever it is enabled in the configuration=
+.
+> >
+> > This can be overridden by board code if needed with appropriate logic, =
+such
+> > as checking for a button state to skip Falcon mode boot when pressed.
 > >
 > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 > >
-> > tools/binman/entry.py     |   8 ++++
-> >  tools/binman/etype/fit.py | 103 ++++++++++++++++++++++++++++++++++++++=
-++++++++
-> >  2 files changed, 111 insertions(+)
+> > arch/arm/mach-rockchip/spl.c | 29 +++++++++++++++++++++++++++++
+> >  1 file changed, 29 insertions(+)
 >
-> > diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> > @@ -745,6 +779,66 @@ class Entry_fit(Entry_section):
-> > +        if initrd_name:
-> > +            entry =3D self._priv_entries.get(initrd_name)
-> > +            initrd =3D entry.GetData(required=3DFalse) if entry else N=
-one
-> > +            size =3D len(initrd) if initrd else 0
-> > +            if size:
+> > diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.=
+c
+> > @@ -153,6 +153,35 @@ void spl_board_prepare_for_boot(void)
+> > +/*
+> > + * This overrides the weak default in common/spl/spl.c, so it must not=
+ itself
+> > + * be weak: two weak definitions of the same symbol would leave the ch=
+oice
+> > + * between them up to archive link order.
+> > + */
+> > +int spl_start_uboot(void)
+> > +{
+> > +     return board_spl_start_uboot();
+> > +}
+> > +#endif
 >
-> If fit,initrd names an image that does not exist in the FIT (e.g. a
-> typo - 'randisk' instead of 'ramdisk'), entry is None and the initrd
-> fixup is silently skipped. The user ends up with a Falcon-mode image
-> that has no initrd, with no hint from binman as to why. Please raise
-> here when the referenced image is not present at all, and only fall
-> back to the silent skip when the entry exists but has no data (the
-> "optional initramfs was not supplied" case the docs mention).
+> You've already seen the vyasa-rk3288 problem here.
 
-Indeed, let me add an explicit check for that, thanks.
+Yes, it's an odd one out, will fix up in the next iteration.
 
-> > diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> > @@ -745,6 +779,66 @@ class Entry_fit(Entry_section):
-> > +                # Use the device tree's root #address-cells for the wi=
-dth, as
-> > +                # fdt_initrd() does (4 bytes per cell)
-> > +                cells =3D 4 * libfdt.check_err(
-> > +                    libfdt.fdt_address_cells(fdt._fdt, 0))
-> > +                fdt.setprop(chosen, 'linux,initrd-start',
-> > +                            start.to_bytes(cells, 'big'))
-> > +                fdt.setprop(chosen, 'linux,initrd-end',
-> > +                            end.to_bytes(cells, 'big'))
-> > +                # Reserve the initramfs region so the kernel does not =
-reuse it
-> > +                libfdt.check_err(
-> > +                    libfdt.fdt_add_mem_rsv(fdt._fdt, start, size))
+> > diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.=
+c
+> > @@ -153,6 +153,35 @@ void spl_board_prepare_for_boot(void)
+> > +#if CONFIG_IS_ENABLED(OS_BOOT)
+> > +/**
+> > + * board_spl_start_uboot() - decides whether to boot the OS or U-Boot =
+proper
+> > + *
+> > + * If Falcon mode (direct Linux boot via TF-A from SPL) is selected vi=
+a config,
+> > + * try booting to Linux first, with automatic fallback to U-Boot if it=
+ fails to
+> > + * load. Boards that want to implement conditional U-Boot/Linux select=
+ion logic
+> > + * override this, for instance to look at a button.
 >
-> Hmm should we add address_cells() and add_mem_rsv() to the fdt
-> library? We should not really be going into the private attribute.
+> Introducing a Rockchip-only board_spl_start_uboot() alongside the
+> existing standard spl_start_uboot() hook is awkward - a board author
+> has to know that on Rockchip the hook to override is the new one, not
+> the documented one. Would it not be cleaner to leave spl_start_uboot()
+> weak in the common code, drop this wrapper, and just have the
+> mach-rockchip default live behind the existing weak symbol? The
+> link-order concern applies equally to every other arch that provides a
+> non-weak default (arm-k3, layerscape, zynqmp=E2=80=A6), and none of them =
+add a
+> second indirection.
 
-Yep. Let me expose it publicly, thanks.
-
-> > diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> > @@ -302,6 +302,40 @@ class Entry_fit(Entry_section):
-> > +    Patching /chosen into the generated device trees
-> > +    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->
-> The underline is longer than the heading title - please trim it to match.
->
-> > diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> > @@ -302,6 +302,40 @@ class Entry_fit(Entry_section):
-> > +    fit,bootargs
-> > +        A string written to /chosen/bootargs of every generated device=
- tree
-> > +        (any existing value is overwritten). Typically set to `CONFIG_=
-BOOTARGS`
-> > +        via the preprocessed devicetree source.
->
-> The docs say 'any existing value is overwritten', but the
-> implementation guards with 'if bootargs:', so an empty fit,bootargs =3D
-> '' leaves any pre-existing /chosen/bootargs in place. Either the docs
-> or the code should change - I'd expect the empty case to be treated
-> the same as absent (leave untouched), and the docs updated to say so.
-
-Makes sense, will adjust.
-
-> > diff --git a/tools/binman/entry.py b/tools/binman/entry.py
-> > @@ -636,6 +636,14 @@ class Entry(object):
-> > +    def GetNode(self):
-> > +        """Get the devicetree node which describes this entry
-> > +
-> > +        Returns:
-> > +            Node: Node for this entry
-> > +        """
-> > +        return self._node
->
-> Nice - good addition. There are a few existing entry._node accessors
-> in control.py that could be converted in a follow-up, but no need in
-> this series.
-
-Thanks a lot for looking into this!
+It would be cleaner, but it foregoes the board-level override by
+construction, which is a useful thing to support. Maybe I'll add a
+Kconfig symbol which defaults y if CONFIG_ARM64 && CONFIG_SPL_OS_BOOT
+&& MACH_ROCKCHIP and just let the boards disable it via defconfig when
+they define a smarter version.
 
 Best regards,
 Alexey
