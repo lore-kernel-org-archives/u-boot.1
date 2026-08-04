@@ -1,143 +1,133 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4979DC55822
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:06:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D38CC55822
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 13:07:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1354C6074D;
-	Tue,  4 Aug 2026 13:06:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 22BE780C85;
+	Tue,  4 Aug 2026 13:07:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NbsvaLys5mOc; Tue,  4 Aug 2026 13:06:45 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rn5xPXIUg5hr; Tue,  4 Aug 2026 13:07:00 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8A39960716
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AF27B80C6F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785848805;
-	bh=mymIbDbKuAOetI/OJ7sbHSgSAit6BHj20oGdCxwYzGc=;
+	d=lists.u-boot-project.org ; s=default; t=1785848820;
+	bh=800hX2UR7S+T6JbuQ49C6rQ/EQDi7WCmCFnOJtjldgo=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hPYkdgzXpbqp9vn7LIxbsjE9+JRUpasJYnVl18yMUqgWt3LtUT5jrlfXokdAEy0e+
-	 ekqSvS052yaMGTAd08d9DDOaedSpWM7Ql2b7uVHxygNjzRlx5f7isvtIPTphPdiMHS
-	 Ux+oQh3ynHoJkbkxspgjTQ0+7FEmSPPcMYeaWuPC4pyF5cQda2UgAcz0hZaEjug79b
-	 0UhO1hxQpaS07t6tpXB2yITsk+JJWOTwzwjVxQaBkO6fvUqNE4bnrdE1+Q4cQ7xhOn
-	 /LZK/00ubr/Rt0SO/4VDFbcRJfN9gVdU36AXbFC1qTJ5WkM63NpcW9GplGCK/+FGSJ
-	 tmHiuNs3DaZ3Q==
+	b=VeujxEi1hxVZWuI1aFZQdpdMz0JgbXmNOKVioQwSQJsixRxwpUdG++6/onP3oSppm
+	 C3zuFRbBb1LOYsKsVxO+sm3kOGtCiiCsDrQa2QPD9FC8I8BKZexPC85+j6xHNEXWwW
+	 ncPp17dpMwhr5p+2eEm8Y61ytxLgcmyQJQsxP17dRUT72XnZINX9lGyu32HmjdCCvs
+	 LO04z0BPpYTmUbHjrNnHFRPCJFMeBHH7dQrNjeSMbuuDln7cwpt7ySVfeHGWCCsVjq
+	 eSMjlccj8+MjEYVrwD1USkg7V9QsWTeJWd1WuWJ+5IYn2EBkoAwJ103nWCJJW3Qtqs
+	 1aTeXIPTn6aMg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8A39960716;
-	Tue,  4 Aug 2026 13:06:45 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E09862AA
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:06:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AF27B80C6F;
+	Tue,  4 Aug 2026 13:07:00 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1D6FB350
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:06:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DEAD3405D0
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:06:43 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0EF54400DA
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:06:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nNJinZ3zy7A5 for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 13:06:43 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id y0BMBGvsUjNY for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 13:06:58 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::632; helo=mail-pl1-x632.google.com;
+ client-ip=2607:f8b0:4864:20::635; helo=mail-pl1-x635.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3F34740550
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3F34740550
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3F34740550
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:06:42 +0000 (UTC)
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2cca0c5799eso39719355ad.0
- for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:06:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785848802; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 6DE5A40071
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6DE5A40071
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6DE5A40071
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 13:06:58 +0000 (UTC)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2cf6d65d8a7so64073245ad.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Aug 2026 06:06:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785848818; cv=none;
  d=google.com; s=arc-20260327;
- b=OtkqFK1VSohvUNAOcRF8sb8WGd/mitoguzPuqxhYCHKBRnG3s59N/hPLgdhIj+uO6l
- GoXVA2Sc8vNh8D7NvACHmShGX1c31dXBHVWOQFpfhkiz3mdiiRY5J+ulNU/fQ1aV1F5v
- f34al0oKcUKGAsYWW1ixBT9ryNkgnKo99f6bVBOA1k/750ZtPp6cd0T/wDyVO5JqTLLI
- rUhp7ou1V02yI4S37rB9IaeT6m0p+zZRuCK1h2nWh+BTs7EvZrEGhrV0snK5Xzrj/5Rb
- cBsxkVb22U++YyefgYDGFDIKjJXw2md0of+IL2CEhhgobYNa5b725HKgt+ZE1rk5VX+H
- trrQ==
+ b=ZOwZ/iQ47dhJLEMjKHmwFEtimARSYG7OToLzsa1+BkuhV9NI9ZC0egyPuvWOEDDjpu
+ ngVitWQ+gMDGGFsyAWud8OYN/o2fCCA2e7mH+CNgDEy50u8Z1EaUjMsoJYbOaljmMvSv
+ jVBa6AYryv5TrAH3xP+me55mSZmim58D1pGIOUEp2uao92HDjCfbbt3jZ3KG5LyRO35X
+ CtYAM8SAB/6jovnzuzHZVDq4O2YLjRSyuqf6/onNAo9wOIXdC5Hwz5AbuLWpYKoqPaLK
+ t/hrdOZTaq3BdU6oXN5OdX4Tz19+j9HAXJNBMPIkaQGghh549z3lUC0Xj4vb8NGVHqXl
+ ZIZQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=mymIbDbKuAOetI/OJ7sbHSgSAit6BHj20oGdCxwYzGc=;
- fh=Kycz0RmuF12z7/MfMEx/C/XJlPwcni/aTJr26m8kUJU=;
- b=SKwLSYvXmT/5Ap6Fa7VLzk8wuj3gqYNeOOXDDI2eUGm8ATJ0z8/DczMfuMZv9+c4Iz
- UNIKRWc3GP9hPXVzQ1TSzqdG9gWOk+XCzu8fqHzn4yABapmxSeW7xU2Rd9ij2xW8KSqX
- LEnkdbwrnR04aWjuKr4IpQBk7wxeIpox0X6/U2Lu5BpnvnyaBg6K+efna946ROlb3YRq
- TJc0z+xYuBlEyEA5mPRT/q24sgJKaJkADKGqsnB9uTeQhTZ7vuhZeyHEe2SfcPpJGARu
- ZpBEkmg4Al9qM54CLT6K/FAoC5/wMHKgqk2pxTSo8obfOIqlWHsQEtJFX2+pSVsUYWq7
- Z9RQ==; darn=lists.u-boot-project.org
+ bh=800hX2UR7S+T6JbuQ49C6rQ/EQDi7WCmCFnOJtjldgo=;
+ fh=AQR1yYbryuDBAyUMkONZdS17UtE0oglklJGdA2HbjIg=;
+ b=Kem7p358yTq9gDMIc7Rf4qXEhwRc5xHew8P4Co26oPgtcGeV/BWtC/tp3E3FXVblmZ
+ AdY7nCMVWwmA0FfMSpvTJXP0SXAl63yhUx1EDvL+E7HUKY6txqPqe6g+r9YEBlnGq/H9
+ kCfmPti0sbWk9KfPNbkCpjzk8ezTK0JkwvrcEnrSl+znExSoJeqLPhbAzxaNrcfq3nyA
+ 86C2I3KlwBmeywgUED0DTYlO0bKqirD05pEFTIaNFSIonwIzxxl4W5XkMKzTiflsPwxW
+ 0dk2tUythmnQDi9R8BOuo9gbTd0Tszmdc1uHfe7y/+PqcFPZ/9GeZQ8KYAyccSFcGm08
+ IQ+w==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785848802; x=1786453602;
+ d=1e100.net; s=20251104; t=1785848818; x=1786453618;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=mymIbDbKuAOetI/OJ7sbHSgSAit6BHj20oGdCxwYzGc=;
- b=Kfd83nxbXJoe50RcPq8qW9zperYnPG3mVgY6E8CN/1RNgWGg6vaUkAUyVpuemoQhKD
- MoDwOZSJEkdIqQ6MQplZPEQFV3YHhNh7z4EA4wPkPHgp0si1QPrOM1/jRxf/H6MoxWkf
- 1eA68NIFMaDwH7th47azKvpk2OrijEsySpv2yjxT5EOZeeqlPat0VR3Qrwb3fJrJ8uGN
- 0Ij3UEsA1PHyicedgAVH8IHm2V/F9GnVHkXsQrNA5Uw4JlQZ512q3tZek2DfG2HHJfC6
- EK2f8y2JBaCjZCjKYFYON2YeR/DhEcN9b+AtzeYeFtA0bPuBMd+InmEi/rNx+DlEAqrh
- yNOg==
-X-Gm-Message-State: AOJu0Yz+tFHOuW47QcBf5tVoA/WM37Li9DCCxIL2OV86aravALSGM0FE
- YxJ/fIZOG8Zr6iim3F8lyuDNmJeomtYwxYY8ux3Ff1onP62nRLkc76jsUPHM8wHCfiZrQhL8AVD
- XnTgG5TWeLJ07jNqQkObhEdeAclkEt6Li3B/IoEpU
-X-Gm-Gg: AR+sD10PSSoGHHT4w4c4Ul3fNG7kK7xg4DlAVY7e79WilZAUjhoDnuRI7tChq5gm3eQ
- MaL+rcu8e2slzDE5IjSig84kIdaWb/rLUnceusCwTmSpmHyaMiJWuzL1qG25oX7qD3WKSJQEoc6
- i3/PM/kc8tAcRktlfderVne50FZSlR7uzociWVQakztEHGXzR6dJFBje8ITD6a61JCr8a6Ph1rK
- MRGYc4XOwDjElft02k/eEEmhab6H8Ju98ZZmMBLx3cMKFYSPDvoDVPP/2sOQCdYVISPPxpJ41Ov
- vtsQGzs3L7gsDcEZuW7usAvtHuipF3/AKGgd+7mPzag=
-X-Received: by 2002:a17:903:24e:b0:2c0:e2ea:6b0c with SMTP id
- d9443c01a7336-2d0521c66abmr132445675ad.21.1785848802457; Tue, 04 Aug 2026
- 06:06:42 -0700 (PDT)
+ bh=800hX2UR7S+T6JbuQ49C6rQ/EQDi7WCmCFnOJtjldgo=;
+ b=pQMhrWsFG594PP8j0FbvhWtouIhb5AQTiUEvt4NMKog4KTxu+vCNJjYU0EcpT3iizW
+ eEbkTPzZPEZ0MXFhMIpkez8iZdf8h2OpTtzVCJlyK2Os78FpcsaYeafYU+1Bodrvv+HR
+ Op/qQM+NWgN9t40peo1WKTrKcyhZXBaH8WaTIpoPxwvziIp9JviJiZwzcOrHCfeDKxv4
+ ckTnAemB219B6D+c0RcTY6cnp7SYfjQs3TyFfgcS3VP9GdS4D3VdCie8eAKHKHCapSKM
+ vV9WUDXsiBthtiknGqP5PdEBm2wgKEMRAe5H40EVUFpzmQ2e/s9aWzzds9lqbmgEkNSK
+ xZpA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqqcMgJRaHds1xSV9ITwf3g/agAInRZ9Ghcjmi1FPKIKxfZQ6xX1xG4pU208t2KKh9bVfavwn8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzAOeLyfgEZrr2vLxgl8iSaiAqFb15c/yg2fZaA65qx4B2DvstU
+ Z/rd0dlInPqR2y4MPf9Fo0oq8GqkSOHE5Lp1yawy/ZPZvSO5uy2ASha10ZdwMEcg6uCEuloT7PL
+ 7g+nd5eKMRHRCYNfRRPXlgmAR9KGTSPhRsuJH+SbQ
+X-Gm-Gg: AR+sD1113qyYQgnyoY0J7Eq7IbFQZIFrg9TRHGC8dWrvbAN44NkrQX1yKoDtbtu0z8M
+ J4t47F8+A5FqScrOIs0wpfkGcB4/Gt6ehl3VPzefekYDILDLeNb8tOOYfytKXSliJRoGITI0Ap1
+ 8r68CR2ldjZP3Js3vmKqFjOVIBA4nr5JVg73ddDoTd6CTESFsV/vyuHVfSYz8urQv9Iw1vPu++m
+ ESCVUB/h/TvHaeSwom2mfFkuB2zXjVJNNkatzTrOGpUgdIV1TXT9J5oR+K9wwE0446P1N0/I/a3
+ pazNZ9uxdQJfoPitfj4auHC7B1tjnXLvS5A6q2mHZ9g=
+X-Received: by 2002:a17:903:3d05:b0:2cc:aa36:c046 with SMTP id
+ d9443c01a7336-2d0521d44damr137870185ad.14.1785848817605; Tue, 04 Aug 2026
+ 06:06:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-6-a3f1f16b53ae@flipper.net>
-In-Reply-To: <20260731-gpt-4k-v1-6-a3f1f16b53ae@flipper.net>
+References: <20260731112229.2211474-1-me@ziyao.cc>
+In-Reply-To: <20260731112229.2211474-1-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Aug 2026 07:05:59 -0600
-X-Gm-Features: AUfX_mzYJ22g9TUvNL-d5LNjhy-mjJCErIIaNA8Rfejg1Vlh7qIfrp2-gtX1fmw
-Message-ID: <CAFLszTgn_fY1d_Zktw+3iXLv+JPvk14--Cexbs631F2h57o5VQ@mail.gmail.com>
-Subject: Re: [PATCH 6/6] test: py: gpt: Test the GPT layout on a device with
- 4096-byte blocks
-To: alchark@flipper.net
-Cc: u-boot@lists.u-boot-project.org, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
- Anton Burticica <mouse@ya.ru>, Javier Martinez Canillas <javierm@redhat.com>,
- Simon Glass <sjg@chromium.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, 
- Suniel Mahesh <sunil@amarulasolutions.com>, Klaus Goger <klaus.goger@cherry.de>,
- Tim Lunn <tim@feathertop.org>
+Date: Tue, 4 Aug 2026 07:06:18 -0600
+X-Gm-Features: AUfX_mxQ1OxsIfQCLoAhcrSbDC_X84DpVHVwHyaOHcqxGopQ97KexWqEizVVlhA
+Message-ID: <CAFLszTjqKd_wK5Dnhzm-TTc7TOvGfcu1pw=_=sJHdrhL=y_+Uw@mail.gmail.com>
+Subject: Re: [PATCH] buildman: Differentiate 32-bit and 64-bit LoongArch
+ variants
+To: me@ziyao.cc
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785848802; x=1786453602;
+ d=chromium.org; s=google; t=1785848818; x=1786453618;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=mymIbDbKuAOetI/OJ7sbHSgSAit6BHj20oGdCxwYzGc=;
- b=gulCjWHAsgSPsy5BKG9qFQRMVnrTGbzK1qf9ec6bWbovZWmh5MPvlP28JiaS6KtAE4
- rw2n3/j1ixBBOCloe5HG8bLI1aiOESBh7R5uIXBnbneQ6PXCB7zRbUSxL5ggrT/tKl4e
- 3a05GnjBDnrCOdrwGhrcTtSAcwB8QRhcmzCCs=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=800hX2UR7S+T6JbuQ49C6rQ/EQDi7WCmCFnOJtjldgo=;
+ b=B9w90xoR6XDqI4bp2LLmw/YtH8tTfdpNYYEe2kvP2GzeWCV/WXGqvQtc75oBxHgVCt
+ xzDJftl53rOsttlwCBH77omz2Wad1b+tR5JU9YMmaTYRUsLiWlMUj3Xlv+Plw2GKw49a
+ yQ15ju9TRMtl8FIMjz7ixudx8i/U2sv4bbsjk=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=gulCjWHA
+ header.a=rsa-sha256 header.s=google header.b=B9w90xoR
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,25 +142,45 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-31T12:39:59, Alexey Charkov <alchark@flipper.net> wrote:
-> test: py: gpt: Test the GPT layout on a device with 4096-byte blocks
+Hi Yao,
+
+On 2026-07-31T11:22:29, Yao Zi <me@ziyao.cc> wrote:
+> buildman: Differentiate 32-bit and 64-bit LoongArch variants
 >
-> Bind a blank image with a 4096-byte logical block size, let U-Boot write a
-> GPT to it, and then check the result both through 'part list' and by
-> unpacking the primary and backup headers straight out of the image. The
-> interesting assertion is that the backup partition entry array ends
-> immediately before the backup header in the last block, which is what
-> regresses when the array size is computed with a hardcoded block count.
+> Similar to RISC-V and ARM, 32-bit and 64-bit LoongArch couldn't be
+> distinguished solely by CONFIG_SYS_ARCH, but require different
+> toolchains if multilib is disabled in compiler, which is the case of
+> toolchain provided by kernel.org.
+
+Please use present tense - 'cannot be distinguished'.
+
 >
-> No sgdisk is needed since U-Boot creates the table itself, so unlike the
-> other tests here this one has no requiredtool marker. The number of entries
-> comes from the build config rather than being hardcoded to 128, so the
-> expected LBAs are recomputed for builds that set
-> CONFIG_EFI_PARTITION_ENTRIES_NUMBERS differently.
+> Let's override the parsed arch parameter for LoongArch configs based
+> on CONFIG_ARCH_LA64 Kconfig symbol.
 >
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> test/py/tests/test_gpt.py | 115 ++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 115 insertions(+)
+> tools/buildman/boards.py | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+
+> diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
+> @@ -309,6 +309,17 @@ class KconfigScanner:
+>              else:
+>                  params['arch'] = 'riscv64'
+>
+> +        # fix-up for loongarch
+> +        if params['arch'] == 'loongarch':
+> +            try:
+> +                value = self._conf.syms.get('ARCH_LA64').str_value
+> +            except:
+> +                value = ''
+
+The bare except: mirrors the RISC-V block, but pylint flags it -
+please use 'except AttributeError:'
+
+With that:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
