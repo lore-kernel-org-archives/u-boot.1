@@ -1,94 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A963C55838
-	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 02:15:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDB97C55182
+	for <u-boot@archiver.kernel.org>; Tue,  4 Aug 2026 02:15:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E1ACD60703;
-	Tue,  4 Aug 2026 02:15:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7E329406A8;
+	Tue,  4 Aug 2026 02:15:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dw1Qab11Wp50; Tue,  4 Aug 2026 02:15:09 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NVuwQVPAWeQh; Tue,  4 Aug 2026 02:15:07 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 422AC606E8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 242BC406AF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785809709;
-	bh=3wDD3+E8jWw6ueT6QBZIYRhKh/yvJxelp5TueJaoY5I=;
+	d=lists.u-boot-project.org ; s=default; t=1785809707;
+	bh=ASNZJRasADRfO19AK5n0nDxpxbercFf2Sq/66qi308Y=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GOQpRK1wHJSfB8ksLvd4r1XpCET3WEzxy3FuLAJth/VFSeAtqdOJQRfpWRDbjoij4
-	 81XXxisnqHxuoCOkC8DsvnZeXCit0F/Jk2eTURZFqVbI0tYZhyzyQ1JlZ9boc8nwTk
-	 r1APsYDHN2knzDbYZLyutv9G+Z2+QtcXVwr9LJVNB3tTSeTRftb5nB59cFLF+/lAmZ
-	 /tv/jWyB+fOcpmgK0y2JHW5BWwOQhZKeO+zz8c0TddKZyUgnSFOLwuw1raJFuTaG5b
-	 wqSQ/JawHHyv+TSnl3i7uMdlhitxeibCR2OgCzPxWhZNTOQf1wM29iGJxxQ3E7sxZo
-	 Xa6CHEsKtGtVw==
+	b=nvmZiS5DDTzSpnKzMuszpZz2riW9x2nGuMYvqBdJAfhk5TmZk8JHP7l145dtRvBk3
+	 SQGxw9BZueVnkrxa0/+F1M6PtnSROgTTNuoQAA6PhHcWAp1KBR+UdYepg2OzdLicv3
+	 dxqiYjjRmGK/nqtXzHoC6skxJcEbI53pOQzrPxfaGhni02OAkV2n9cJAMlGMUpfjZT
+	 Ab3MneDWQWQY4bnX4fDbu8zTDfAkSHyuiOPO9lt/6LhE6/8eA0h6k0LTGdG0SdtmvA
+	 pGiXF1HADtfal54dLHikDiYVj11VvXPi3OWJqPRuj2ZqLpkCBTHNHNyRSLUpakc/3b
+	 ap11Hgh4eO91A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 422AC606E8;
-	Tue,  4 Aug 2026 02:15:09 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DD0A42DE
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 00:28:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 242BC406AF;
+	Tue,  4 Aug 2026 02:15:07 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 54B36282
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 00:27:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CF0D1400B4
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 00:28:34 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 51FC380C1C
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 00:27:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id smdKy3fp2Jps for <u-boot@lists.u-boot-project.org>;
- Tue,  4 Aug 2026 00:28:34 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=162.0.218.230;
- helo=h7.fbrelay.privateemail.com; envelope-from=elliotjb+anduril@elliotjb.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 1E42C400A5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1E42C400A5
-Received: from h7.fbrelay.privateemail.com (h7.fbrelay.privateemail.com
- [162.0.218.230])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1E42C400A5
- for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 00:28:33 +0000 (UTC)
-Received: from MTA-11-3.privateemail.com (mta-11.privateemail.com
- [198.54.118.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WRm2Ea3KGZWO for <u-boot@lists.u-boot-project.org>;
+ Tue,  4 Aug 2026 00:27:11 +0000 (UTC)
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=elliotjb+anduril@elliotjb.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 345B980BE9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 345B980BE9
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 345B980BE9
+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Aug 2026 00:27:10 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BB8C5842FC; Tue,  4 Aug 2026 02:27:08 +0200 (CEST)
+Received: from MTA-10-3.privateemail.com (mta-10-3.privateemail.com
+ [198.54.127.62])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by h7.fbrelay.privateemail.com (Postfix) with ESMTPSA id 4hDZCL2y8Sz2xHW
- for <u-boot@lists.u-boot-project.org>; Mon,  3 Aug 2026 20:28:30 -0400 (EDT)
-Received: from mail.privateemail.com (K8S-PROD-WORKER-01 [104.30.160.130])
- by mta-11.privateemail.com (Postfix) with ESMTPA id 4hDZCF1hVkz3hhTR;
- Mon,  3 Aug 2026 20:28:25 -0400 (EDT)
-Date: Mon, 3 Aug 2026 17:28:24 -0700
+ by phobos.denx.de (Postfix) with ESMTPS id 9AB1080087
+ for <u-boot@lists.denx.de>; Tue,  4 Aug 2026 02:27:06 +0200 (CEST)
+Received: from mail.privateemail.com (K8S-PROD-WORKER-06 [104.30.160.130])
+ by mta-10.privateemail.com (Postfix) with ESMTPA id 4hDZ9c6CVTz3hhTG;
+ Mon,  3 Aug 2026 20:27:00 -0400 (EDT)
+Date: Mon, 3 Aug 2026 17:27:00 -0700
 From: Elliot Berman <elliotjb+anduril@elliotjb.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: elliotjb@elliotjb.com, u-boot@lists.u-boot-project.org
-Subject: Re: [0/3] qemu-x86: Wire up EFI capsule updates on pflash
-Message-ID: <anEx8UTLwbRIxYGD@eberman-5690-nixos.corp.anduril.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Elliot Berman <elliotjb@elliotjb.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH 2/3] qemu-x86: Wire support for applying capsule updates
+ to pflash
+Message-ID: <anExGWj6kgZlXvIT@eberman-5690-nixos.corp.anduril.com>
 References: <20260730-qemu-x86-pflash-v1-0-fb403348e29b@elliotjb.com>
- <CAFLszTiOZGWLcwMs0Zddk0g5Tjx8fu4xxJk08a1JZ43ZbbcKig@mail.gmail.com>
+ <20260730-qemu-x86-pflash-v1-2-fb403348e29b@elliotjb.com>
+ <20260730221208.GJ1773261@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiOZGWLcwMs0Zddk0g5Tjx8fu4xxJk08a1JZ43ZbbcKig@mail.gmail.com>
+In-Reply-To: <20260730221208.GJ1773261@bill-the-cat>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-Mailman-Approved-At: Tue, 04 Aug 2026 02:14:59 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=elliotjb.com; s=default; t=1785803307;
- bh=LiNh+uvhYxrUG1713emLJrGlS/x3rnqBxa8/UpYbUIE=;
+ d=elliotjb.com; s=default; t=1785803225;
+ bh=JLnccRCmzlDmOxud5k356LreRTT9T1rqfLiVj1I/A4U=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=yAatuukKrhc4NRciapLI6wODSPPa4Ml+dACaR0/LGLt811tr0LfQiN+ZB8qqFVZqL
- rMcHgIH7eoTTu6GClE3qOoK8tAl2DeGSauqJe7fccj8nL2f4fhV16ymauZZkE7c1yh
- 9rwq9DgzlzcOXjYX2ZIpdUTxjHADjqKJFOYGmGpRMGPGAQy2OyzEUl7DyEXahomQP0
- 8mHO3nrzdsNBL6+hF7AcPXurNkNQlI+WZDjYJkSusiQ5/iouqOzJdWLoiBiAIvY7bV
- Jz5Ybqdy5073TcncvIobKyymNUTs8/7dH+RrEhtC/7vUTlqFejgro3tVrBRib5/l2M
- Hqw1T3ggqSTBw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=TaWOxJSy9ol+iYPZQW0DMH84yDlKrFtYNZO8f9ZAjuKJuvqZxj7dTQOHJniFXD5c2
+ VXyRm/ejo5n1fBZwDp+cxwQ3Kn3K3UNQCxGNskJ1AWwgCDg+1kwx6TT47nkPVcAje2
+ try559NMKjdoBzHSo12M1F6eVE5tGn4M9u8lGdZSW1kZlkaecRxNYJwcd1DM2nxzkM
+ 6U6x3xR64VFtiZ8Cx0YteuoknDb2z9oRw27cMZmKFP8wpwN1X8uVM4FzYJZW2tzsY9
+ mhwbVIhOrMKOwDvPdOwXAVA7/fYAEHMS0/duw+7kFr4oJFlG7RXesMhA+8tNAenlFk
+ Tbn4n+G5R8RDg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=elliotjb.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ spf=fail smtp.mailfrom=elliotjb.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=elliotjb.com header.i=@elliotjb.com
- header.a=rsa-sha256 header.s=default header.b=yAatuukK
+ header.a=rsa-sha256 header.s=default header.b=TaWOxJSy
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none)
+ header.from=elliotjb.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=elliotjb+anduril@elliotjb.com
+X-Mailman-Original-Authentication-Results: phobos.denx.de;
+ dkim=pass (2048-bit key;
+ unprotected) header.d=elliotjb.com header.i=@elliotjb.com header.b="TaWOxJSy";
+ dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -103,20 +120,53 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, Aug 03, 2026 at 01:25:43PM -0600, Simon Glass wrote:
-> Hi Elliot,
-> 
-> On 2026-07-30T19:37:45, Elliot Berman <elliotjb@elliotjb.com> wrote:
-> 
-> > QEMU's x86 machines map a CFI NOR pflash device, mirroring the mechanism
-> > qemu-arm64 already uses for capsule updates.
-> 
-> Please add a short section to doc/board/emulation/qemu-x86.rst
-> covering how to invoke QEMU with -pflash and how to drive a capsule
-> update. doc/board/emulation/qemu-riscv.rst already does this (see the
-> pflash and capsule-update paragraphs around lines 45 and 186).
+Hi Tom,
 
-Will do this and all the other feedback I didn't directly reply to.
-Thanks for the review!
+On Thu, Jul 30, 2026 at 04:12:08PM -0600, Tom Rini wrote:
+> On Thu, Jul 30, 2026 at 12:37:46PM -0700, Elliot Berman wrote:
+> 
+> > Following the flow used for qemu-arm64, probe the pflash MTD device
+> > and set dfu_alt_info/mtdparts for qemu-x86 and qemu-x86_64 so EFI
+> > capsule updates can target the u-boot pflash partition.
+> > 
+> > Signed-off-by: Elliot Berman <elliotjb@elliotjb.com>
+> [snip]
+> > diff --git a/board/emulation/common/qemu_dfu.c b/board/emulation/common/qemu_dfu.c
+> > index 8a59f5ade13..db7d8cbbb4e 100644
+> > --- a/board/emulation/common/qemu_dfu.c
+> > +++ b/board/emulation/common/qemu_dfu.c
+> > @@ -51,11 +51,13 @@ void set_dfu_alt_info(char *interface, char *devstr)
+> >  	memset(buf, 0, DFU_ALT_BUF_LEN);
+> >  
+> >  	/*
+> > -	 * Currently dfu_alt_info is needed on Qemu ARM64 for
+> > +	 * Currently dfu_alt_info is needed on Qemu ARM64/X86/X86_64 for
+> >  	 * capsule updates
+> 
+> Here and later, we should stop enumerating the platforms because it'll
+> just get expanded when say RISC-V is added by someone else down the
+> line and just "on QEMU for capsule updates" is clear enough I think.
+> 
+> >  	*/
+> >  	if (IS_ENABLED(CONFIG_EFI_CAPSULE_FIRMWARE_MANAGEMENT) &&
+> > -	    IS_ENABLED(CONFIG_TARGET_QEMU_ARM_64BIT)) {
+> > +	    (IS_ENABLED(CONFIG_TARGET_QEMU_ARM_64BIT) ||
+> > +	     IS_ENABLED(CONFIG_TARGET_QEMU_X86) ||
+> > +	     IS_ENABLED(CONFIG_TARGET_QEMU_X86_64))) {
+> 
+> Can we reasonably be CONFIG_EFI_CAPSULE_FIRMWARE_MANAGEMENT=y on a
+> platform that *can't* support it? Again thinking to when someone
+> supports this for say RISC-V it would I think make sense for it to then
+> show up as "Oh, I forgot to map the MTD device in" as a run-time thing,
+> rather than "Oh, I need to update a big conditional". And this too is a
+> "here and later" question. Thanks!
+> 
 
-- Elliot
+Yes, I can drop the target conditionals. I could also drop the
+EFI_* config checks in this function as well. On QEMU, DFU can only
+happen when those EFI_* configs options are enabled, so I believe it's a
+little redundant. Does this make sense, too?
+
+Thanks,
+Elliot
+
