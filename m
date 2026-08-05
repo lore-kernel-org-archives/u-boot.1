@@ -1,130 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F85C55174
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 14:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA790C55174
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 15:29:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0DA754058B;
-	Wed,  5 Aug 2026 14:47:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 10F9280962;
+	Wed,  5 Aug 2026 15:29:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3ZLvJT5mR0GC; Wed,  5 Aug 2026 14:47:50 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vfPqdgvDO4JU; Wed,  5 Aug 2026 15:29:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5D59240577
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 61F96808C4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785941270;
-	bh=zcnb9Rw2rouoBKIrWP312Ikg745qzGKQh5wSB+PxXgQ=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=puEMbKkd8zsXRp7JvopbpdaJH2vp8xDAl9UmWiN8Mg7ZKKaD9DjpbX4doxD9N2j9G
-	 oNTP/8bzfAog+aArD6m2T4GsSWPF61PtHFc0ZJRFTOPavrhDvWhB140uW2ct1tMWBe
-	 B/cZpfDvBuYYW3vVxfCxNYFrdqcSXLDsEsXcns63vI0MXb8BPklo4eJbs/owhGN5M2
-	 6hOghWuAluUNttvCy15G5LM0yJHebgDbr4IGPjO/3/29SFJhk3pAmTo4P8krh03agX
-	 H5qP6CHtg6zgtTMCDjw4O2qC+nZqOEBetEgaNsFEms7cfgOT5VR0MWXZtZBiIDJvnB
-	 Ju/NX60z5ai1w==
+	d=lists.u-boot-project.org ; s=default; t=1785943777;
+	bh=c91LgRJYStfrfIdB+8dbKqY8Uz9ers7mPjtiNz+KVrE=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=Atq234FcBk2CnSSdTCPo98C8n2MuPLVKMpQJbmX8w7l9Sqb/p11YmWtuLU0AVQ54N
+	 bEvapmXgDAMQ/wC29sG3YOLQy3OIwLyGSqeho6gp2hb5HfqBDQMWRT6uz6fh2dleKW
+	 wWqJnoQ+OzxHuy/xH2VQD4Ii/7RYkBAuBD0XcbW6rWQ2aRFT3goOrvHHyvM2Jjro7x
+	 0hod+7NJadZ4ECMF8hiLSHJxrKCzfJ3pjPjYMpgTotJi8mm6majlSXqeL5XRAFMyc3
+	 kLhMGwP/5Azz66Ok4omNk6A0iajjLIJlnAmJ4ZBcusYDy+VMQNVFaNoaG4eziWFzLn
+	 k4APZXqaBdPMA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5D59240577;
-	Wed,  5 Aug 2026 14:47:50 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6B01F144
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 14:47:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 61F96808C4;
+	Wed,  5 Aug 2026 15:29:37 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6DCCE218
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 15:29:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 496CE400AE
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 14:47:49 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5F8FE808C4
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 15:29:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jPC4O9cwVKHY for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 14:47:48 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PjOXauIk1dtj for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 15:29:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 453B640061
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 453B640061
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 453B640061
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 14:47:47 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4957eefd361so8125435e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 07:47:47 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::62d; helo=mail-pl1-x62d.google.com;
+ envelope-from=leo.liang@sifive.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 888D5808C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 888D5808C1
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 888D5808C1
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 15:29:35 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2cfbbdfa60bso10772305ad.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 08:29:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785941266; x=1786546066;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=zcnb9Rw2rouoBKIrWP312Ikg745qzGKQh5wSB+PxXgQ=;
- b=h+G7j0ellH6MMNLtVctXUYkk4/zQ4gAnCsyi+BKR0RND0XiFa2tRK1Qu3NomsQ+v4x
- oLF9iDIRJLHNMyzq7n2P+rsxzHoksuweM8b7FEOyi5KILvpbNZ/QCLRJDMoS6xeZgwis
- sTS23qejwkYumsuktei9ChcONe1FDCmxlGR3fGAcvJ9dojBf5Z1EqxdZMg/wogL136+N
- REnoaxWDNKucyItx4CnlqK9RRuOLn3p4+CwYqINdQYQ+Y3mpo4OaKm6LbPu+7PsRVx7e
- ifCgBKWWCT976EPSCwfA+cfx6XKRFDGI/wksQAjamIOl2ilvFlaoKgzZfrczuUc51jcc
- zYew==
-X-Gm-Message-State: AOJu0Yz3jfqbw0DOzswG3viWvgBbljJAOf9IVwZBZAHXjwf1H1e5dBw0
- hwY+Kl4mmQJX0ARXpp5DR8kS2UiU0u1Dzd0rd7nreyhPlPGUy0/bx24aZfdp66TOa2s=
-X-Gm-Gg: AR+sD10TVtzVExg9NIBAQlmthEe020KxrGQjTrz2iUSRvqwjpCC7Mifuw4dMtE/jxHT
- n4K20h30slttEiXguR/DfXMAtME4GHY6446oQYdhFEbbgQRCDtekZGcsthHadI3LJgVH2fRtbTL
- nbRQSBEBZiHfcZ7APrpS4iGElXYiegwYw/rGwo7J+OYCm+FS29bm+OMU9hkgh8wnWavmE/6ZVnN
- 1khl2/Zbf+HZpUawQTmjhESfIjAqdS/sipY7JgYDJTPRoL1dyPynV5D11iNbuqE7icovURitdRV
- XMNYemaWm4el0fZfc7IoN5Ji3L1BX/AFqQafmN/Z3F4FbixEijPFS+4txBQRGIWNONJigt0ktg0
- OuBJUL9el4O4acLQj3g4SEqMN38P8gQB4Dp0jEbYSrRRcZxRGxdaZQBa81xIY6GV48LXGTr9n3k
- RAHerzwL0jLWf/pdaV19xeTJlYInc7RqULevDlxAC3brh84cZ0m2G+O68RfU1tCM57a8iXvdPmG
- Ni3CQK8tmWL190ahdTfZ4/pOj6acbhB9Y08oAgVbg==
-X-Received: by 2002:a05:600c:1550:b0:495:5fdf:2075 with SMTP id
- 5b1f17b1804b1-4994e6c5521mr86391245e9.0.1785941265876; 
- Wed, 05 Aug 2026 07:47:45 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
- [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4994a0f7b73sm219383405e9.9.2026.08.05.07.47.44
+ d=1e100.net; s=20251104; t=1785943775; x=1786548575;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=c91LgRJYStfrfIdB+8dbKqY8Uz9ers7mPjtiNz+KVrE=;
+ b=pZGQbgJxwNyTHpYtF9yWrdCHBGZWYthfSz2zzHWEHjBogRYyw9+0YUPcJZ7R2FxzcF
+ 1gIcvkkJHY/xJan2daNm7RZXZS+asw4KMU/lCjMNkmurYin9ZJe329eLH91hK8nWTWS2
+ pBJhI+L9bcgjvoQ36W5WPjv21xtkwmQacjOhxRAhmjPzcR9gx7v2Zf3pP0gKSixSTqbh
+ ChMQqBuLIVE++0OoCEnA6IP8gyh/gG0GDI9wxd79qh1AdlLu/2NHd6Bd86+x0DsCSCdN
+ EAAa0RZFnan4vx/q454C5I2SvH5osL8D3wl/5AaqtOy9S1nG6itq95zrXQJmBYTXOwZw
+ bV4w==
+X-Gm-Message-State: AOJu0YwDO6z8JsSH18lls2+pUa3gxAIwHOfKQ7PI+hI3mdLe2V+a6ew9
+ 5JOCOsdlxKAfXZLm/9ySQXbDZBy0Hn98mfZAQy15Fy2ZrgDx0kgMolypdbqJeubxBAw=
+X-Gm-Gg: AR+sD11T7nNoj8Ly2pLX3k+NkxLq7spDQqI4jJMeqx6kZfiU/Wzk385kezBtedTqQM6
+ uA/8umohy+ZvZiHMs/+gUZJy/oWuwf8YL5TVQixtjxQ/tqvrm52hgYkCVITHczSRL3okvutPvX4
+ 7TTHDM0qDpLIVy/hN3MwkO3QZG4NcEmNhFwsU/X/xsgdth1J1OxFQDWV8mE54CBPoGFhbJXO6ej
+ t82mOGBfYjWEhwp5g5S3QgX9lop2oW1/n2AKihulNBwro3I0NH76QXmYa7IhdH26Tw5IkIp42wR
+ hvV8Vcz+JyIppBTjhV+ZNe2f+r+fJuXzIgYroENUALrbRI8KPR77TCtO7sShxtc4nn7Qy8zdGJw
+ I4ZsA8GOX8ST7ntBcF8jdeqlaqfehfFAiHt7Q42WY87zZS7SI8FrGXiuLFCjnduoy/L3DSLzZWt
+ 2zkflf8ZXHyU5JbMSn+NBpcRZ36rJYjBwEUtMo8erSavZTgRKR2EFWMX0FCFPyXAYabBLKGUHFf
+ 2AOxQ==
+X-Received: by 2002:a17:903:324b:b0:2bf:27b2:4b80 with SMTP id
+ d9443c01a7336-2d0ca7fa969mr97465155ad.14.1785943774719; 
+ Wed, 05 Aug 2026 08:29:34 -0700 (PDT)
+Received: from lliang-1876.localdomain ([136.226.240.202])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d0a9f93726sm19645845ad.4.2026.08.05.08.29.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Aug 2026 07:47:45 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 05 Aug 2026 18:47:38 +0400
-Subject: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
+ Wed, 05 Aug 2026 08:29:33 -0700 (PDT)
+Date: Wed, 5 Aug 2026 23:29:25 +0800
+To: Hiago De Franco <hfranco@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, Kongyang Liu <seashell11234455@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Yao Zi <me@ziyao.cc>, Andreas Schwab <schwab@suse.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Martin Herren <sputnik@on-the-web.ch>, Peng Fan <peng.fan@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] board: sophgo: move ethernet driver to common
+ directory
+Message-ID: <anNW1bh92tFnaFzm@lliang-1876.localdomain>
+References: <20260723-add-milkv-duo256m-v2-0-2e1373dbcb8d@baylibre.com>
+ <20260723-add-milkv-duo256m-v2-1-2e1373dbcb8d@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqEMAxA4atI1gaiYileRVz4E2tErLRVZxDvb
- p1Zfov3LvDshD1UyQWOD/Fi14gsTaCf2tUwyhANOeWKNJW4fRfpxiGgYYvG2TNMSEVb6EyXpJW
- CWG6OR/n8rnXzt9+7mfvwruC+H+pPgB13AAAA
-X-Change-ID: 20260805-pylibfdt-geo-growth-03a381850866
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2569; i=alchark@flipper.net;
- h=from:subject:message-id; bh=1F6YpNN1sCombnNKDyL5LcYhCYI7r/EZ7jBhM0MjD8Q=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQV+wpETD/VMv/hnhknmGVW7F0XevGvyvaCEw/cV+8t+
- /OTO12RvWMiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
- MzTSMdYxYuDiFICp7vBlZPh8iL9mzVpvjtuuR1cul1HqT10QcE7rv/ONgP6TzoFqItKMDI1POAU
- 4WvtDPmn+0Lxyq6z617tovn7n+4q/ju7S0fnIywoA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260723-add-milkv-duo256m-v2-1-2e1373dbcb8d@baylibre.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1785941266; x=1786546066;
+ d=sifive.com; s=google; t=1785943775; x=1786548575;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=zcnb9Rw2rouoBKIrWP312Ikg745qzGKQh5wSB+PxXgQ=;
- b=sr8xWcdeelZRS66VLpMrPxKv2cD6CGXiv0Ph7tC36vdjTe08sdMTKYIx7qzZXbm1ji
- hrxzOQ+daJY6WTGv6ZGZMwMKerflsciPihpvowa/7Zm1GNgJ1cYg5XB6jkENCU/AYibp
- HO7v0VSKSqgjE+js5yR3o0Soa7i2EnJfmB8/DxZcPSPu0+l+nNTO94yDG19tmCO4EkA9
- 9y8DmiI96fIT2auv3Uqr1qRlZ3WnrEJpMnxqOpjPuMPGUqSJyM705KKL8jVST6OpH4/6
- PdEmnUy40TAY/VCABINA1OLf/mkblOIJQPJEjoWvJ8OokH6hHNHj8mze2yHQad4FTk18
- kAVQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=c91LgRJYStfrfIdB+8dbKqY8Uz9ers7mPjtiNz+KVrE=;
+ b=HUJF3zgf63K89kLBoMhVCtOE0HH0iXzhKpIS3m736GIUypS3AD2AFIAObp48stL0Z7
+ xScPA1qepx7WCLFrgKj9gKc8QOO6ZUQvrgOsJqGbssp+t5vdY9/e1LL2lRJjHm5OZdZO
+ ztGZB6B92oNeJzr69blgEISSJCBW2AH0ZiENSeZEZv63l1vs3kUybq8/bNsTnYsJXd9e
+ gnDY3QxhnkYmcZHGyVbFFgDbQqmUdLcw9Ijm8PJLqjOtWPKDcJtKhNRU+nNlGmD4zvs4
+ YBPBHl2wXwe4DPmIFNo8E3fSsq58tdLVpPB5ubAkrxGG2XT7yD6OolLpufCOFmMK2Onz
+ Pl7g==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=sifive.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=sr8xWcde
+ unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
+ header.s=google header.b=HUJF3zgf
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,67 +138,22 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Leo Liang via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Leo Liang <leo.liang@sifive.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Every expansion copies the whole tree into a freshly allocated buffer, so
-growing by a fixed amount makes building a tree cost time quadratic in
-its size. This is especially painful when assembling larger FIT images with
-binman, as it assembles the image with the data inline.
+On Thu, Jul 23, 2026 at 11:44:34AM -0300, Hiago De Franco wrote:
+> This will make easier for future boards to reuse the same driver (e.g.
+> Milk-V Duo 256MB).
+> 
+> Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
+> ---
+>  board/sophgo/{milkv_duo => common}/ethernet.c | 0
+>  board/sophgo/{milkv_duo => common}/ethernet.h | 0
+>  board/sophgo/milkv_duo/MAINTAINERS            | 1 +
+>  board/sophgo/milkv_duo/Makefile               | 2 +-
+>  board/sophgo/milkv_duo/board.c                | 2 +-
+>  5 files changed, 3 insertions(+), 2 deletions(-)
 
-Grow by at least as much as the tree already holds, which is what variable
-sized arrays usually do specifically to avoid such excessive copying.
-
-With this change, building a Rockchip TF-A+Falcon image whose FIT carries
-a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itself down
-from 25.3 s to 14.0 s, as 7139 reallocations become 187. The images
-produced are byte-identical and the binman and dtoc test results are
-unaffected.
-
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
----
- scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/scripts/dtc/pylibfdt/libfdt.i_shipped b/scripts/dtc/pylibfdt/libfdt.i_shipped
-index e4659489a96a..05c1bba78001 100644
---- a/scripts/dtc/pylibfdt/libfdt.i_shipped
-+++ b/scripts/dtc/pylibfdt/libfdt.i_shipped
-@@ -756,7 +756,7 @@ class FdtSw(FdtRo):
-     device tree. This will be increased automatically as needed as new items
-     are added to the tree.
-     """
--    INC_SIZE = 1024  # Expand size by this much when out of space
-+    INC_SIZE = 1024  # Expand size by at least this much when out of space
- 
-     def __init__(self, size_hint=None):
-         """Create a new FdtSw object
-@@ -801,6 +801,10 @@ class FdtSw(FdtRo):
-         -NOSPACE then the FDT will be expanded to have more space, and True will
-         be returned, indicating that the operation needs to be tried again.
- 
-+        Each expansion copies the whole tree into a new buffer, so the size is
-+        at least doubled rather than grown by a fixed amount, to keep the total
-+        amount of copying proportional to the size of the tree.
-+
-         Args:
-             val: Return value from the operation that was attempted
- 
-@@ -808,7 +812,7 @@ class FdtSw(FdtRo):
-             True if the operation must be retried, else False
-         """
-         if check_err(val, QUIET_NOSPACE) < 0:
--            self.resize(len(self._fdt) + self.INC_SIZE)
-+            self.resize(len(self._fdt) + max(len(self._fdt), self.INC_SIZE))
-             return True
-         return False
- 
-
----
-base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-change-id: 20260805-pylibfdt-geo-growth-03a381850866
-
-Best regards,
---  
-Alexey Charkov <alchark@flipper.net>
-
+Acked-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
