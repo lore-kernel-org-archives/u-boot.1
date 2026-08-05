@@ -4,132 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1F10C55174
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:59:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABBEC55ABF
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:59:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 672A980BD7;
-	Wed,  5 Aug 2026 21:59:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3362480E29;
+	Wed,  5 Aug 2026 21:59:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LNAfmB2TBC3h; Wed,  5 Aug 2026 21:59:11 +0000 (UTC)
+ id zraxss1vcEZ3; Wed,  5 Aug 2026 21:59:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9CBF280CDA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B00C480E0F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785967151;
-	bh=0HOUglhm0wmM4/PCHwKPxfQtVTkl9dTNulnzHRxML2E=;
+	d=lists.u-boot-project.org ; s=default; t=1785967164;
+	bh=b/DEySmaDw06PaZtqea+HESyHxWcfhD3tae/CdXHBBU=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FphnkCGUKJxBjmymbNP97fiBTt0AylixE6mDFmepRt08I8/woPZColN5tPIQxoBqT
-	 WL3KShn/V7Zc3w16JnTBJlAOLWERvlVujfbeuD1RaeCZTH0jvkpdv7Mg//259ljQXG
-	 Dz8uSU6gcRPg5GIe2ydhAibcCWnmQ4nFRPexUWmYjmpZMOJR/YU/8hYT7mG0MTBpGA
-	 QAkWT10D+4Jsiy6abFKF0ldSKzswql0NoaCRAKWjCvQU383l89ambP7wWMxbANgBq5
-	 Y87X/u+bqzAq17ZZY2aCvTLpqKlnQAnUUU9/K4rRcrNTYR8nPz0N7ByvgewnfDLzRK
-	 7SqcxFTs2QvXA==
+	b=HBMKhR5OiYAylVYnbrtX7B0fpUmBVXOVd28tuP3HGfpU5ZjRV6J+U9+Oklfg6hdXC
+	 r3C7FtfxJN9Hpwz9lGiXCq3sY6tczP1DGryy4BBzKfWnaidAopKpqPVEkO8/hUP1Av
+	 VFyE2hNSHVy2zSfKeZNe1+R9pZhA1UK3GeZKwH+xrxpsn7aypJGgLxdpffcaN0DcYd
+	 EPGNQFFF5A7J3+R3AAacvKPNiNBAdek6jKYXvdv2rwn2MO9iL7bZ9GsPtTU2KIOIhh
+	 H5pNyBFMR/NiC/360aLSDhFBvZZlwifOWWSBFT+gDylSB2IN7qvlIejJTFntDLtiYU
+	 eNHIgGe12gcrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9CBF280CDA;
-	Wed,  5 Aug 2026 21:59:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E6212218
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:59:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B00C480E0F;
+	Wed,  5 Aug 2026 21:59:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5663C2A8
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:59:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D818980DB0
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:59:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3CC3C40251
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:59:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zC0tksgxT3Z1 for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 21:59:10 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jKabnKdjXXb9 for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 21:59:22 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ client-ip=2607:f8b0:4864:20::102c; helo=mail-pj1-x102c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org F026A80CDA
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F026A80CDA
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- by smtp1.osuosl.org (Postfix) with ESMTPS id F026A80CDA
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:59:09 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-c169ae1cb26so57998166b.1
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:59:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785967148; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 8108040249
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8108040249
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8108040249
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:59:22 +0000 (UTC)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-38e347638adso1664191a91.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:59:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785967162; cv=none;
  d=google.com; s=arc-20260327;
- b=G26YoZfLdBgWAaDI2+A/tI5vZ0UiFpnpCA14+3jlqnaz4+SDD+HlfUbedj21aqS97l
- urBK36TODp7K/LukzDNhg/Gi2vEXHu/RGRxLtzyDSCaDszOT1lNJxwa3PDi6U6BEg/qi
- SUYqnchApQB+BRTXZCKsqafoR9kpMqWj47i10eoh+GhprzfLwSRVILlp176TBHnrxW4r
- AswjvCPez6LbI4jz3FNppylWLf3rLDq4tol6CToJTnaJ6PLspCHUgd0cc0EDU4jSBBQx
- dgD8erFsaHeygBOKeqbUMzD81Pwylu48ULvjE5cipt4Eh2lBsqJTBHV8rljGv8h9GF9W
- nsOw==
+ b=IqmAhghmwjNNAB+oMW8mq0ZkgLR7TK9R1vTs+2UAoM0P9HpWRLT1GDx/BWAqne1W2i
+ jb5ZS9KJxfy+eVMhJH86TwPgGHVcszEmBAoKbJBZs1g+tE847d/R9kyOLhLKy5b1c8CS
+ Ugl1NPTg1ZBpG8WtmoxG0n47NkKOW1iB/8BA2wZpXSb1dNCG/CJh3PilFWQbHmwcPajG
+ TNZn5FwxFO3/nU597uZNzWEir6sX930LxYyfDzZg+7rF3whbqhF9shZyn0gdOUQ5zI3s
+ 5UvaZsxA+fpIP0kwEc5KKaK8z165qlwMvzXbRBt0+2WGxfFC7ttRqXtpg6VOg/UcfSQy
+ 3cUw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=0HOUglhm0wmM4/PCHwKPxfQtVTkl9dTNulnzHRxML2E=;
- fh=HyFQaPPEQeDUys4T1Vgoss3sukzzAbWkhM4W77NfPuw=;
- b=R/WCgSvsxOdb/VmalRnWw3eIswka48GDhdRpm7vbPRHz2Lnz3pI4x65wEJbpvRJYPs
- GiDarQ/RWec5gLv4kNAUalrfSRGAUTCop/KLXapX54XKdQ/fbrIHM+1fKXsYnFWir7nk
- Qpn5ju9UCAsWpvkcfYfVkYs/zS+N8B5jlI46Cb8rbzhXCHwVkGmnTGglAq33PwU2ZZPE
- Ep/XiGJVfCrxhukm/AAwXZWZGjVtVATvqqYxxhw16obk7NuGL06L4VT+C8lInmxndyVE
- 7ig1LqGPo4xGptrp7b9QW4BPCq4ngMtLXGi4wbUseJhXC6H14P2zw5Y5995iiqT1OTmF
- WlcA==; darn=lists.u-boot-project.org
+ bh=b/DEySmaDw06PaZtqea+HESyHxWcfhD3tae/CdXHBBU=;
+ fh=9FcJG/5ehgkA/kaIH0gZFSvUHKLT4aoWNYklYlu4sK4=;
+ b=mOsIpKmOH9ZxUQ0G6yN5M5QgvUQCWTQD/kNvKtfS+c2vELRq8e3DKd3zj1h5FyO9X+
+ +2E6pAJtfG14ExPQJ/JAj0y7kXNTeJNbzcme1VfqSXyrO34KRwhJmyi3LqVr+vd9UT79
+ uEkW6BC08VsbtJcdhceJN0bAR2ux3n8jBkGdL3z1Rc4g7uVodPdrBI795CtuYtGuk9Vs
+ ozdjuiFOxvTXLMOOMKdtcQivgxApMxwQAGn8wyZB0NeA035M0KGZtkj5NxpSAW0QO0aw
+ MMAyb1TZb30vSDfQl0NNfXXnYIFQnbLWpd4bfxxjNKHD/I/RSRkUFnsGtWb8IWTGXAR5
+ leWA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785967148; x=1786571948;
+ d=1e100.net; s=20251104; t=1785967162; x=1786571962;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=0HOUglhm0wmM4/PCHwKPxfQtVTkl9dTNulnzHRxML2E=;
- b=NKQJH5OKyXnLB+/yHRO1h4RJd5YTnXECiCChI2XN+BPKfnxA0ud9/53w8o6Aewr/oF
- cj2XIo2+ON+emZ/NrQYn0T6C2WDWZp0wWNja38GHcvxSP3JfUn/coidze1pl7WO9PZfw
- hZKS17+gUN0G37JYZNdR6tF8fCmNqb9kcuC5k/ecv1+4SufCxQ3PPISNkhVcCaTWm1Lh
- owjOw/g7mdGoluoFZy6/SkL5Inwl/31w0XsHGqQBlWXgBjSQTcyCPJsujcqUM26KReTw
- YOAVzkr5eGygSEPhir+T5Cy1FhciiWgDfqKOX45exPrHTPLp6/zTAdwNaGpxAruaZqKG
- 4UIQ==
+ bh=b/DEySmaDw06PaZtqea+HESyHxWcfhD3tae/CdXHBBU=;
+ b=Q3Zc2XhGq4elFWXXOaxDDDvvYqZDY1E83yZck20fsc5gW7TZs2CoRCvX+5kaJd183r
+ 5mAuvyjLCEuCmPx3yTmFTKfnTo54gAk5ThpSQOl4X25GnKk6KGtrJCXH/4ZV+tKb2Pxo
+ b6XP3hLKw/OPeDKAFdFRS4Cdl1TKw5pu5Y5W41iMMtKp8M+zD0ZHi6IVEqkmjdPYScaz
+ w3mXYRrflIFUmVSqizRb4cDoEx1+9hbmJA6DQUl2I3rDc5sblyPtXEe9S1SHcGB3EsBn
+ WHms+wXX2sETzG2XFMk0QaR75QCqglk2XZfUiJZShdhlyaxi8byj9lM24sf5oM7BXyBk
+ zXyQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoQoeFIHCE2KL5Oj3pP61xV4+k0E1DOFfCnTnWnrOAIzaHWpPUUQpEdAUsNZj1krM6nFnwFXCc=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YySlYeaW0AAZD72MfWO42xH+9cAps/laINrMiy0hxvUrpo43zRq
- MidBpu70UqXNX2yc856mknidJ7+19sniblmpcrAPGF97h/l6QsNoVZ60XvCTMTtSBYNFU4WtK5e
- w5+LJ8wrf6Q50v/+MtVArLTRKM7hmVUrC1pNA1F2O
-X-Gm-Gg: AR+sD10yDQoy6sInGNuJICU2HdR6TlWdpn6JJ5er1ue6cye2jRl41L8jNcELG9J+jk2
- b1BGAlcCQF+Ig5EeiAQrsFpHC+lEBrxtKFmSwFljPta2nTz7rnY+aUaz4WdAa/53Ru5Thg8+agO
- c7ejnEJGS/SV3RztvfiHaNa/lSxrOVaRrxwTCo5G3bBMiO4wLzqvtNG6SGbqwDU2GjEGiqp1zZC
- W3pTbtC7Dm/PznX7lClzy5KXcZ6JNds6FoBwWkjbnjzcOaV/D9CudACOpvnOJLjoUlw+m+o9Ndu
- gd/VP7CafbZDdggei0faZUcA4dkaPdYzG3EszqBCkHrPxYu/3ohr9A==
-X-Received: by 2002:a17:907:94ca:b0:c12:c5d2:bf37 with SMTP id
- a640c23a62f3a-c2058057245mr117173466b.12.1785967147908; Wed, 05 Aug 2026
- 14:59:07 -0700 (PDT)
+ AHgh+Rq+f8USUAN4Q7A8qs7j2h2FEvBIkqIxSIde0d6YQJIcbeCOgb/FYdEs5IVIyqUxGH9oSOh100I=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwyRgMJ080RAjIJ5sMKrq7WVc7YpivMh9Bbx/VxcY/21vIwJzh4
+ WC5WmzWmrCwFE+MVU3zN3cSeFGvtTQulYuWCg0eCujyF3pSA/1qBBcBo23zX+QYUVkQW19tpkEA
+ zEn05V57/S19l9QqfAglSWMm+234wsDGhPuPr3s+A
+X-Gm-Gg: AR+sD13/8cfKZdQAKdp34oWD8xUa6L+M/mHdCbBtmeT8ERGqxfvIsPgqCdIikfggNvb
+ 0lP8xMhlnH3sLlXd6pmHIqxeZKp7Km3XF2aLqXa0yjyLTjf8+2mfZJ81j0/NU0ItXC4J4GcJUSm
+ tCiLs3mIDZ3uBlvVK+uohmayNI8KNw9g638DpQ7PcHkorDz+1hr/35F/lW+94iqLCj6peLo1Dok
+ B2SdQwxbUAr1ef0K5PGs6q0nsQWGvYBFXrZhjhebBChbSV6PZmit9sO+3Ia10ZgWbEKmL/CMpNV
+ KXcH2mJ4F+sCg+64L27t3oDkFUx2zvxEgYoh43fM0QM=
+X-Received: by 2002:a17:90b:3c06:b0:381:a766:efcc with SMTP id
+ 98e67ed59e1d1-3903c5bcd66mr10260826a91.14.1785967161659; Wed, 05 Aug 2026
+ 14:59:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260730-math64-resync-v1-0-8792d9119d49@flipper.net>
- <20260730-math64-resync-v1-3-8792d9119d49@flipper.net>
-In-Reply-To: <20260730-math64-resync-v1-3-8792d9119d49@flipper.net>
+ <20260730-math64-resync-v1-4-8792d9119d49@flipper.net>
+In-Reply-To: <20260730-math64-resync-v1-4-8792d9119d49@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 5 Aug 2026 15:58:52 -0600
-X-Gm-Features: AUfX_mwHpopBTwPWf5ZL2Z3njzRPEY9r5xUJlsrVpxUHX7svKVfKEcaMBWqyQBg
-Message-ID: <CAFLszTjCk=uYhSbvtwBog_7BCfuUjCLxiUDJc+bhVZjNb7iJag@mail.gmail.com>
-Subject: Re: [PATCH 3/5] lib: div64: inline __iter_div_u64_rem() into its only
- user
+Date: Wed, 5 Aug 2026 15:58:59 -0600
+X-Gm-Features: AUfX_mytF994F3Axej_-v46EluLbGow-MXCBMFi12UfpSIy7Y8qTJ3wYgR1NIJk
+Message-ID: <CAFLszTjtp1ef6RS3BBgJR=U=AEcRdELchZMaZFgWP9S1eHdktQ@mail.gmail.com>
+Subject: Re: [PATCH 4/5] lib: div64: sync with Linux v7.1
 To: alchark@flipper.net
 Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.u-boot-project.org, 
  Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
  Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785967148; x=1786571948;
+ d=chromium.org; s=google; t=1785967162; x=1786571962;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=0HOUglhm0wmM4/PCHwKPxfQtVTkl9dTNulnzHRxML2E=;
- b=EczPxcti862ZecL5L9QPmn/davipjE2L6n1hZTQjIn/TiX9azOLIfc1MeRaI2De1Xb
- PMFUDXgiefe0aMqj4a1EJwFb+01lY/HryLNv28G1mupfbW8fzvFnPjXFHsbvAMxo7SCx
- 8upbFAcqK4az6wSDFC4gp4C1L7sS6EnNhxVYA=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=b/DEySmaDw06PaZtqea+HESyHxWcfhD3tae/CdXHBBU=;
+ b=i+nFWiYvxfAtjrYIkQd481ROTaUzgbC77dARTcBBE1CGQHVVYwkGGXM7QxKL4Vio31
+ 2k4vrbRx2fvMJ/+++Vy2LE/PtSbNuL42cbK3fjz7sTZF7TZDjg/0efh+sAjtA9EY/PVO
+ Ss3aqXwOvxIIoiF5ZMG+oBN5xdi4id2/ogoTA=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=EczPxcti
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=i+nFWiYv
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,29 +145,50 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 2026-07-30T18:40:37, Alexey Charkov <alchark@flipper.net> wrote:
-> lib: div64: inline __iter_div_u64_rem() into its only user
+> lib: div64: sync with Linux v7.1
 >
-> __iter_div_u64_rem() is only split out in Linux for its vDSO header, which
-> has no use in U-Boot. Inline the body of the helper directly into its only
-> user, which is the iter_div_u64_rem() wrapper in this same file, and drop
-> the static inline, so that a subsequent resync of include/linux/math64.h
-> against Linux does not have to carry an exception for it.
+> Bring the structure of this file in line with Linux v7.1
+> lib/math/div64.c, so that future resyncs are a near-verbatim diff. No
+> functional change: the compiled lib/div64.o is byte-identical before and
+> after, verified by comparing objdump -d output for both
+> evb-rk3288-rk808_defconfig (32-bit, where these out-of-line helpers are
+> actually built) and generic-rk3576_defconfig (64-bit).
 >
-> include/vdso/math64.h is deliberately not created: its only other resident,
-> mul_u64_u32_add_u64_shr(), has no U-Boot user.
+>  - Add the SPDX license identifier, as upstream did in commit
+>    b24413180f56 ("License cleanup: add SPDX GPL-2.0 license identifier
+>    to files with no license").
 >
-> No functional change: the generated code is identical, verified by
-> comparing objdump -d of lib/div64.o before and after for
-> evb-rk3288-rk808_defconfig. The compiler was already inlining the sole
-> call.
+>  - Demote the kernel-doc blocks on div64_u64_rem() and div64_u64() to
+>    plain comments and drop the one on div64_s64() entirely, following
+>    upstream commit d28a1de5d112 ("math64: favor kernel-doc from header
+>    files"). The kernel-doc for these lands in <linux/math64.h> in a
+>    later patch of this series; keeping it in both places would only let
+>    the two copies drift apart.
 >
-> iter_div_u64_rem() itself has no in-tree callers either, but it is
-> upstream API and is left in place.
+>  - Guard iter_div_u64_rem() with #ifndef iter_div_u64_rem, matching
+>    upstream, so an arch can override it the same way it can override
+>    the other helpers here.
+>
+> Two U-Boot-local deviations are kept deliberately and are now marked as
+> such so that the next resync does not silently drop them:
+>
+>  - __div64_32() carries a no_instrument_function attribute, needed
+>    because CONFIG_TRACE builds with -finstrument-functions and this
+>    function is reachable from tracing code via do_div().
+>
+>  - The includes stay as they are. <linux/compat.h> provides U-Boot's
+>    no-op EXPORT_SYMBOL() in place of upstream's <linux/export.h>, and
+>    <linux/kernel.h> provides abs()/abs64() in place of upstream's
+>    <linux/math.h>, which U-Boot does not have.
+>
+> The u32/u64 spelling is also left alone rather than converted to Linux's
+> uint32_t/uint64_t: U-Boot's <div64.h> already made the opposite choice,
+> and matching Linux here would make the two files inconsistent for no
+> benefit.
 >
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 >
-> include/linux/math64.h | 19 -------------------
->  lib/div64.c            | 17 ++++++++++++++++-
->  2 files changed, 16 insertions(+), 20 deletions(-)
+> lib/div64.c | 18 ++++++++----------
+>  1 file changed, 8 insertions(+), 10 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
