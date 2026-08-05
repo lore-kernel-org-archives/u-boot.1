@@ -4,155 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC3C8C55174
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 19:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9655C55ABA
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 19:20:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4B4E280B6D;
-	Wed,  5 Aug 2026 19:11:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 603A580D6A;
+	Wed,  5 Aug 2026 19:20:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ez1WEzkK7jDI; Wed,  5 Aug 2026 19:10:59 +0000 (UTC)
+ id nA_zIGsNxTYy; Wed,  5 Aug 2026 19:20:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 82B9C80835
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8470680D4B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785957059;
-	bh=CvYdFikWHoJk6NmWR0Jz15lXLJEInMAlrQgzLo3YX/o=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yvYaE6OfIJI5gnDYqFZ0i4M1bFpXsIhnRNzj3fz8kKsWU/L59lZJGkl3MHPvJzkVS
-	 Q0r2KSCnCO7+zv4+1xSPQTmkFnyHW9LMQwEw4KyLX7uo+95bF8qpCKlYwq5XtwpjaT
-	 llC62/7fC4c7F9hLTF9WzJ6HU8vgGhintqC7037WxdHX6n+d+V3rVs6Dz/zpzLEFYx
-	 XdWninqlFZ2IMYgRbeDEYOwylCw5iNTQEjAHuGOKlBmfLp+tSSf7P7SBAh3X7mGpvz
-	 sYkSInCQJwbHEa+E5rTJE81jPDXgyO0TnN+jlD7iTHzeu2TShx6vvJ29TcpvucERg3
-	 b2DmssiCmBmsQ==
+	d=lists.u-boot-project.org ; s=default; t=1785957646;
+	bh=zQvThufackjIj/HlxbMz7i9w03As47kccOISHsXyLSY=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=jcAueUcsc5zuBwpfvcPC1pK/Cy9ETEgMQ7AgmrOcGDVD/sVU9QGXuU7gHDNU16KVL
+	 gyCctQ7Z94aqj8ZVFWVPmlqDRu4mV79P6NoofDDGdiBxuQpDYchGSQIHaIR0jTE6Kv
+	 hrfo/ydlTaDZGGlxaQSFdkIsBW+aUncPqY0FFCF/eaEofEJjMg0PEj19AYnfFMflSW
+	 JdwO7Ozr2k4Gl5HjifWuPSDkuKZuoqkA4iBUhpxO4QCjvvK4j93V1a55PAEHaMME0n
+	 ZRDaOp8dLKKY8F2e/AyheE+NoVJBI4fyHKZAtW+9C5cdT1ojaBXCjs+TJZcMorxenE
+	 UjojIjqpj3Qdw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 82B9C80835;
-	Wed,  5 Aug 2026 19:10:59 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 59A612A8
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:10:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8470680D4B;
+	Wed,  5 Aug 2026 19:20:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1D8BC218
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:20:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3FB3380822
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:10:58 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1AF1C407AC
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:20:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tTRj-bkfCLBX for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 19:10:57 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 867048082B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 867048082B
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 867048082B
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:10:56 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A053084867; Wed,  5 Aug 2026 21:10:54 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D732803F6
- for <u-boot@lists.denx.de>; Wed,  5 Aug 2026 21:10:52 +0200 (CEST)
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5aec6360133so1228769e87.1
- for <u-boot@lists.denx.de>; Wed, 05 Aug 2026 12:10:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785957052; cv=none;
- d=google.com; s=arc-20260327;
- b=RcrxZFcHtFEq211EXAX2+CdFbm3jErarUWw/K4jh3rQmAwtV8vYOITWL5Jqq9S5zPP
- xTpPtskFgoCeWSb4DBZ9WPddZiXgHN90whT6Yaig2lEKq1j/mD+LIbX3S45i4yAqpF4W
- LzVySxvcDuEfmY2R0V0LmrlXTuXhWPG22mZUyi9Sbg7eGbaKwDzEoVXH4c2vQhb8SOpK
- 06H4S056drvgUzkhJ9If+dswOCbILDARpHRv4U+JOBQAfoYB1XemvitTMO4TEtSYW5Q+
- ruEeboEBfMCNEKwro9kiUYiYSEVyfRPzNoAdEawdk7CHCUXf45wjKZTdNE41k+LoMNcd
- eEoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=CvYdFikWHoJk6NmWR0Jz15lXLJEInMAlrQgzLo3YX/o=;
- fh=tr0GhvMzl3my6alJTNWvKQWbYzIsaQjyCP4jDQVNuPs=;
- b=HDJ05Q7J9uqfSe+EOsWB0kXUaZDlGTv3zTRZNADeZHAZFR2RHytK4vndXOqh9sAnXn
- DE36YoS5SBywKf4I0WhnHi0rJylZ9MRich84IA1jZn+jCZDfpujx4DXiOtmrNpi9sANn
- XzZHBZCQ40FtYNILtFeE67Rt/rssQhmWkwbzuCebhGLGR81aAYmt/UtDEc2L888qr9Ok
- 9lySwT3WsOIVKNkdSpKUgVv9AEhUYog5Y+r3NPrJKNkqTKlK3N4i+dV2ubaLIkVge40i
- j1MZo9hTahKDX9zP3fGHCnEobKIoagoPrYhDNU9Z2fSfo307Kow4x/8DAOG7WpiP7YDG
- J22g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L0LlPkOuRiuo for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 19:20:44 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::22b; helo=mail-oi1-x22b.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1E449407A9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E449407A9
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1E449407A9
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:20:43 +0000 (UTC)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-4960fb63c75so894934b6e.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 12:20:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785957052; x=1786561852;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=CvYdFikWHoJk6NmWR0Jz15lXLJEInMAlrQgzLo3YX/o=;
- b=mEOwqr8kpcCRSRRIuRUiov8cESGi8+2FDhNwvMxHAcTOjdUMUDloQOOCzHiqdtL9uv
- 2JEw8GUr0y+ABmD15Z77i8xe6TSSwcQ+SBiy6jes3vVNT3out6p/rEVHfuIqumlip8rq
- fs93rd9c9/fiP8PJqm0UKxJBam7N+fPkl6wMJRT9Ome+t+zLnjV39amqvRv8nF/qMwJi
- iWAH7pWi2nZAP5kTDBr6dSZUy/vBh35oVbL2SK+qZSDObiEMXgHWYRVYQFRPStJgNlQ7
- yZGWIWgdyYiMQnzmYb/VlUbDlssvVBYaroHKNvq4w3Ot6MPj9Xc8yyGa8YGFyeg1T3Pr
- Br7g==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rpsk02ZcDzpPAppwRcFq05mAyE1Bh8NzQTAStnYVKTJSl0m7FstC18XEaGo0jR/lqTFRZ6wM2U=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBKNG9RKo5CDgecEQl6NIPkrBlK3zY+vfdbS4376XSON0Tea4a
- CpfwK0MmBdA1kmQMeqe/zisOXs37QeJTQ8xjTtBiIiJemsYgA0oHkhm+aovCsyB+Z5OnoFc9SXQ
- IEGtXUUJGlIVoZmF7UBDQn8CfJV5JKIQ=
-X-Gm-Gg: AR+sD11sBfQwrkLK4Is9+7NtrCw5JR6KUTvuzWdzWXQDP4jyte823xr6FrrOk0Zmdcg
- i1/sKJlfvuPMgtNhhqbaccyhHC/CZ4MNi0wfiWBnESMXsn8jt+4EYJUIjaFS8o/hNnSlozYUL+A
- qlqDfThMeGlmvcii+csxSy0PRL1DuSaNwrQHTKLtiE1Vo0RNfF9YGwjCnYNIgrFYVHbeoWhPZgb
- eYbt149yd8PXiswPB7GYR39XJGAHmnMdJPTeBOklvr5Yhya//3Z4YVzid8/0CgYqzXwCkQYhpFt
- psfAUjjWPN0ikaWQM1lEUmADrF68navtQwLgcuXVEmElyzpT3weDvUMmAPj4im4RB48gD4tGaL+
- sRPsNhg3GS3GFCjfIw/s7CzUVwh/UoorzJQ==
-X-Received: by 2002:a05:6512:15a1:b0:5ae:b0aa:8f07 with SMTP id
- 2adb3069b0e04-5b2f4b885edmr1469713e87.16.1785957051466; Wed, 05 Aug 2026
- 12:10:51 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785957643; x=1786562443;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=zQvThufackjIj/HlxbMz7i9w03As47kccOISHsXyLSY=;
+ b=nhgL1dSC1wFLI+mEDICRR/b/34awhG+kOcTxwFcuFwdiF/uw0Ef2c2DXOaINeW/KST
+ MXjuy0W/4PVT5yxEMRBHHXhBdHtlIYQpDAutrozj0oag9Pp+C0d/x+qkh3DEaXTuKCQK
+ fCnYnScN6yC17eqdQkSFYvHlCiWP0TIqCBpjaz1YYpT+J2+GuwHBu1i/y2y9AE/7EFL3
+ GN79zK/eI+9IJIQSbD2xVDzIHFj+OmmOksyb5kKcqbhLLj4kgstrqGhYZaJEGeE8GzPx
+ ms7kQ3fTRJuNxYIwjwVK7RqTgaVRB0okzsM1D1bU94ZEmHhC5xa4NlH5HKF98UpP6Bdc
+ q4Aw==
+X-Gm-Message-State: AOJu0YyJJjscLzsgkgEnMUE0YJC2ZHGDey9POmJyfISH/3+85+gIw47D
+ xrBT/avqB7IT7rN01meTRJordWUA7Wl3Jfnfp+PmuTx+llpjoovLSZ1VrrfrPxgXr1g=
+X-Gm-Gg: AR+sD10M8WzJoMX7Xnibnpv+AAU9UcKaafyKFa+kAas3ipY8lWai+nSxk56yAU3zM5m
+ uwTuiceTN9O7wc0nAhxkUqOvopgfDkxvANOyI0twDccuT4ea5L6P04JZHeD36y02GZqYfeti6M+
+ AGKIvOObtKX1hJeGavqmEwiwDMBolk5LYQmqf9UJqmz4+WnQC4TAOEVzD73DITKEpuKjwIGBFLM
+ mS2f3b0wT96j3SLHdudKvhzxyRLPpccxPaIreTKgno6F6ZTtNrXXxcpQRBOFxUBh+2ofVhHY82b
+ 1+BSF+Kg/fY3XWLQBQ2l5pSd2d909cGNfUtcdBHlzxVd2O2pqg/QuhxpShiBijV/Od7HgxpTjG4
+ oaKYiue2AQiY3ezwyXwB1GgEP4FaE011IEX4gIYwOdn6RyBy+ItupZyZpyfX6jhbzGOQ7FLGibZ
+ jMVZUZ6DT6HC9s7tT8xmUf0XWCggMe4Bdn9VPoIc9ux6gce3RNuBFAbNNC8KSUF0QUgw==
+X-Received: by 2002:a05:6808:344c:b0:497:d3d6:6a56 with SMTP id
+ 5614622812f47-4afadbff918mr4528459b6e.0.1785957642822; 
+ Wed, 05 Aug 2026 12:20:42 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:ebef:9550:d591:36ac])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4afae4b2b68sm2755884b6e.5.2026.08.05.12.20.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Aug 2026 12:20:42 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Wed, 05 Aug 2026 14:20:34 -0500
+Subject: [PATCH] phy: mtk-tphy: add v3 hardware support
 MIME-Version: 1.0
-References: <20260728155624.86989-1-marex@nabladev.com>
-In-Reply-To: <20260728155624.86989-1-marex@nabladev.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 5 Aug 2026 16:10:40 -0300
-X-Gm-Features: AUfX_my5zrzgQAYdWuLp2h5QrTpLWTgxCL2Hun2fp7KWYndsAhpS_DE-7O4Szt4
-Message-ID: <CAOMZO5DA6N6Mv1uD7vG5VbfooB1O7BRqE2TQNmUQOuWTF0UrZg@mail.gmail.com>
-Subject: Re: [PATCH v3] binman: nxp_imx8mcst: Handle FCFB header during SPI
- NOR boot
-To: Marek Vasut <marex@nabladev.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.u-boot-project.org, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260805-mtk-tphy-v3-v1-1-f1d6268b8d89@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDCwNT3dySbN2SgoxK3TJjXZPkpESLJAtLM9OkRCWgjoKi1LTMCrBp0bE
+ QfnFpUlZqcgnICKXaWgDxV/RcbwAAAA==
+X-Change-ID: 20260805-mtk-tphy-v3-4cba8b8965ba
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2428; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=h7ybyFr77rf/v9RtmBGjJhTryPidmQo44QYHtQJGXkk=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqc40DWLtGzQZIQ+XHilBMJ38mRrTsG3noWhTPP
+ IfgYisF90WJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanONAxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ATsUH/jtyqGYMtEJxtDZ5ZztB1XdC1cSAPjgdKwc1oFb
+ obwhCppE5YChtm+q/2ehaUm39irYJCTBHXYZ9DrCykprIDe+7KdXbxmq2KQv+eeDEkO2GDqAIBD
+ r+W3dHkQFm9ct795ZyWxpbT1ndCmFn0TpCJvhhhTxSNAuyezBpqM4BghJRujg8RX+l5M+vVXamj
+ NM7blwUvrN8ljfm2Ea20rLRiPgb5R1x2oA/KIJRdWf0+aU4lzI+5aioMtyyxYKGiHcqbb+jtftL
+ Bftda3II12RX8VsBjL5VLYwZ2z+DYh1KlshCLphzJIqwuB0al9n3rY+rvWiVHyElhY6hxbjxh68
+ T8MI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785957052; x=1786561852; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=CvYdFikWHoJk6NmWR0Jz15lXLJEInMAlrQgzLo3YX/o=;
- b=XlypcVUYw56CQRChMqmRDD3dp4KM8v2d3/6SHHFPbG1hws/C2tzoUlDjZKu7ZUc7Je
- MDxBWc0sHrRB0dunt8RKWLUkR+40DigPKiGJ5c8+pJwYb6sKf/CKm9C0ByPHVHV0s5pL
- 3hhJvbZbT5b72ne2y/0ztHsK59t7IZN9gp+uYWFrQ03+3AY07hay5LO7i0VCBwHomXqb
- dO+kk6qwo+ckw5d+tWFHufu9mDk5XQkZyBv6AomULxfZ6hq5EVjQcQ7oHPSUkw2fpRnU
- 17+EsMf5fGd4gy2+K1IE1tv7mCjJ/08Rk170T9sFpKksCQV7uX+pRmsmCyVa3dv2SQQ3
- Jh2A==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- spf=fail smtp.mailfrom=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=XlypcVUY
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=festevam@gmail.com
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=gmail.com header.i=@gmail.com header.b="XlypcVUY"; 
- dkim-atps=neutral
+ d=baylibre.com; s=google; t=1785957643; x=1786562443;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=zQvThufackjIj/HlxbMz7i9w03As47kccOISHsXyLSY=;
+ b=MU03ULQw5MRebhf0ywMT3gvoOp8h0JM9l4GtBWBOxR2Y+5Yy7Egmp1EopqCONPIw25
+ RJ2ydeDErm1wqopLBH0JHllCpGF9KIk5OtzL7aQkuGSksWYaictNVyrwmHyL5nYznqoY
+ i+er8vkiGUCTE9md+Xy/pwxjGVgwgv0+C3xuQniqAtfEbt2kabfA4vTQKaReE4CsTYha
+ FxeH7lcGhWvkkwAR/bHayrIIA/IucbS0ZehAHch0CO6CuXUK9S3LkQNyd3QPUwAa9+YK
+ 8JBDBSajA0F8w7sglOket3FWOA9hes1JDEEP8P3Ymg35vJprFT0J1N87g3VIUSMbR24Y
+ SA1g==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=MU03ULQw
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,29 +146,87 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Simon.
+Add devicetree compatible and match data for "mediatek,generic-tphy-v3"
+in the MediaTek TPHY driver.
 
-On Tue, Jul 28, 2026 at 12:56=E2=80=AFPM Marek Vasut <marex@nabladev.com> w=
-rote:
->
-> In case the image that is wrapped in the nxp_imx8mcst already contains
-> an FCFB header which is mandatory for SPI NOR boot, then the IVT is at
-> offset 0x1000 instead of offset 0x0, but the whole image including the
-> FCFB header must be signed to prevent attacker from tampering with any
-> of the headers. Add the FCFB handling.
->
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Stefano Babic <sbabic@nabladev.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: Update the block comment to mention the FCFB
-> V3: Add testNxpImx8mCSTFCFB test and document the 4120 figure
+According to the Linux driver implementation, the only difference
+between this and v2 is that v3 doesn't need to set slew rate. There is
+one register write in the U-Boot driver that gets skipped because of
+this now.
 
-Could you please help review this patch?
+Also, according to the upstream devicetree bindings, mt8195 is also
+v3 TPHY, so it gets updated as well.
 
-Thanks
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ drivers/phy/phy-mtk-tphy.c | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
+index 0a45dc58629..05172f220e6 100644
+--- a/drivers/phy/phy-mtk-tphy.c
++++ b/drivers/phy/phy-mtk-tphy.c
+@@ -228,6 +228,7 @@
+ enum mtk_phy_version {
+ 	MTK_TPHY_V1 = 1,
+ 	MTK_TPHY_V2,
++	MTK_TPHY_V3,
+ };
+ 
+ struct tphy_pdata {
+@@ -331,9 +332,10 @@ static void u2_phy_instance_init(struct mtk_tphy *tphy,
+ 			FIELD_PREP(PA6_RG_U2_SQTH, 2));
+ 
+ 	/* set HS slew rate */
+-	clrsetbits_le32(u2_banks->com + U3P_USBPHYACR5,
+-			PA5_RG_U2_HSTX_SRCTRL,
+-			FIELD_PREP(PA5_RG_U2_HSTX_SRCTRL, 4));
++	if (tphy->pdata->version < MTK_TPHY_V3)
++		clrsetbits_le32(u2_banks->com + U3P_USBPHYACR5,
++				PA5_RG_U2_HSTX_SRCTRL,
++				FIELD_PREP(PA5_RG_U2_HSTX_SRCTRL, 4));
+ 
+ 	u2_phy_pll_26m_set(tphy, instance);
+ 
+@@ -813,6 +815,7 @@ static int mtk_phy_xlate(struct phy *phy,
+ 		phy_v1_banks_init(tphy, instance);
+ 		break;
+ 	case MTK_TPHY_V2:
++	case MTK_TPHY_V3:
+ 		phy_v2_banks_init(tphy, instance);
+ 		break;
+ 	default:
+@@ -900,8 +903,12 @@ static struct tphy_pdata tphy_v2_pdata = {
+ 	.version = MTK_TPHY_V2,
+ };
+ 
++static struct tphy_pdata tphy_v3_pdata = {
++	.version = MTK_TPHY_V3,
++};
++
+ static struct tphy_pdata mt8195_pdata = {
+-	.version = MTK_TPHY_V2,
++	.version = MTK_TPHY_V3,
+ 	.sw_pll_48m_to_26m = true,
+ };
+ 
+@@ -914,6 +921,10 @@ static const struct udevice_id mtk_tphy_id_table[] = {
+ 		.compatible = "mediatek,generic-tphy-v2",
+ 		.data = (ulong)&tphy_v2_pdata,
+ 	},
++	{
++		.compatible = "mediatek,generic-tphy-v3",
++		.data = (ulong)&tphy_v3_pdata,
++	},
+ 	{
+ 		.compatible = "mediatek,mt8195-tphy",
+ 		.data = (ulong)&mt8195_pdata,
+
+---
+base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
+change-id: 20260805-mtk-tphy-v3-4cba8b8965ba
+
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
+
