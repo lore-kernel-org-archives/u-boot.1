@@ -1,137 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9655C55ABA
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 19:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE28DC55174
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 19:34:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 603A580D6A;
-	Wed,  5 Aug 2026 19:20:47 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nA_zIGsNxTYy; Wed,  5 Aug 2026 19:20:46 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8470680D4B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785957646;
-	bh=zQvThufackjIj/HlxbMz7i9w03As47kccOISHsXyLSY=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=jcAueUcsc5zuBwpfvcPC1pK/Cy9ETEgMQ7AgmrOcGDVD/sVU9QGXuU7gHDNU16KVL
-	 gyCctQ7Z94aqj8ZVFWVPmlqDRu4mV79P6NoofDDGdiBxuQpDYchGSQIHaIR0jTE6Kv
-	 hrfo/ydlTaDZGGlxaQSFdkIsBW+aUncPqY0FFCF/eaEofEJjMg0PEj19AYnfFMflSW
-	 JdwO7Ozr2k4Gl5HjifWuPSDkuKZuoqkA4iBUhpxO4QCjvvK4j93V1a55PAEHaMME0n
-	 ZRDaOp8dLKKY8F2e/AyheE+NoVJBI4fyHKZAtW+9C5cdT1ojaBXCjs+TJZcMorxenE
-	 UjojIjqpj3Qdw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8470680D4B;
-	Wed,  5 Aug 2026 19:20:46 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1D8BC218
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:20:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1AF1C407AC
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:20:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0908340801;
+	Wed,  5 Aug 2026 19:34:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id L0LlPkOuRiuo for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 19:20:44 +0000 (UTC)
+ id kYaKqRmJLfGh; Wed,  5 Aug 2026 19:34:10 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 13777407F5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785958450;
+	bh=Wh+NwYMzI92Tm+chmsSzH4Gjf59+M+ilCSdO7irCZKA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=XvKmlRgaVGa2eTVvJru+UCL7sVoINRIKrIX6UZp5O996YsK2TXjntcaygX3MuKqHC
+	 cgaRRVi5AiCI8dRhmEQaa3DBPJqAZT5mYtVSKg9jvPXUVZYdlgDeyjG6CUajAgG8bv
+	 hPG97ZL5m0bKJQTCPuR2qdbvPN1L/1s0i2cnDWXqDzD1krxmu2486jSz3csF4OQxPJ
+	 qlJFjnPT/vJFtjxRNxZZa7fryKKef6tel4UCMg66xEP4yaoiBoCXeot5UQDiDi9c52
+	 xAjWVNf40oZdODCkWre/nxN8iQLYmsYVHacCt869LogNZmcbXpGFnMDbeHxnJ77iMQ
+	 fZPCHsSskCq5g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 13777407F5;
+	Wed,  5 Aug 2026 19:34:10 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9307D2A8
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:34:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7942680D9E
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:34:09 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id p9kjm32olYXG for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 19:34:08 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22b; helo=mail-oi1-x22b.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1E449407A9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E449407A9
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1E449407A9
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:20:43 +0000 (UTC)
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4960fb63c75so894934b6e.2
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 12:20:43 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 41A7280D6A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 41A7280D6A
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 41A7280D6A
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 19:34:08 +0000 (UTC)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c2055573c8cso72958266b.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 12:34:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785958446; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Vj1TA5WHcaZXnZ5y7xSTXjuERyNsAf8bwCBnTpphR7t0pyMVP132I0EuGF2SERJru8
+ lT/SK7pcTfGBQd1d4BHMQJs/CaTjeUxRL2+SuwsptQwMTEyxWlcMkma2xCqBxeXY05Yw
+ tr28C2hE4J7hUXtK+I7EDi281gSR0nY65NnnJxG7m5Suj0ELf2EbN6gTbcUopn1MYLW7
+ +cJmIaGCBIoF3es8S+ChMrprG7Du8MiiTwfbHHbclvaDD8lvteVF9xl2cgq57G2sV6Dl
+ 2dTX+fXGbRNK4YahjAXs5KQny92ythuLdGsNNsnwlJ5FMd6Vqct/VcYBj0Qd6Kzd39g7
+ AW2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Wh+NwYMzI92Tm+chmsSzH4Gjf59+M+ilCSdO7irCZKA=;
+ fh=4Z9Hngv1u+xfl5eCS8/R1QtbzWnFYr4IieaWcdmVwA0=;
+ b=fz3mDP8+ZSamWAlyvHbZ2QDYVYhleEScnItFqFG0h4GWPCOeBzQhO7eV1Oeup2aBHl
+ 6j7gKVRbKZFq+gV4HXU3UVTbic3TbfBOh7gPVtWjVMcfpCahocembggt3hzqejpnGQ9M
+ cp0P6ty/kP3lWZ6ZWZx5mzT4F+/e0jW7wOQttrjCTxRQQiywl3EVYstnTRmettJkRnYd
+ RDoMD+/Bmr8dKwZGc6sIKW1aTrJK7h8HJELzEYFfk7+mKyyB9x2TGiwohn+70x0ngiou
+ BJ1IzU16fmJ4Go59Pf/9jEMjkcMnd8sXxfXLbGVVDNKjTKwsJdhGVBn62hm4j+UlHu+2
+ Gc0w==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785957643; x=1786562443;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=zQvThufackjIj/HlxbMz7i9w03As47kccOISHsXyLSY=;
- b=nhgL1dSC1wFLI+mEDICRR/b/34awhG+kOcTxwFcuFwdiF/uw0Ef2c2DXOaINeW/KST
- MXjuy0W/4PVT5yxEMRBHHXhBdHtlIYQpDAutrozj0oag9Pp+C0d/x+qkh3DEaXTuKCQK
- fCnYnScN6yC17eqdQkSFYvHlCiWP0TIqCBpjaz1YYpT+J2+GuwHBu1i/y2y9AE/7EFL3
- GN79zK/eI+9IJIQSbD2xVDzIHFj+OmmOksyb5kKcqbhLLj4kgstrqGhYZaJEGeE8GzPx
- ms7kQ3fTRJuNxYIwjwVK7RqTgaVRB0okzsM1D1bU94ZEmHhC5xa4NlH5HKF98UpP6Bdc
- q4Aw==
-X-Gm-Message-State: AOJu0YyJJjscLzsgkgEnMUE0YJC2ZHGDey9POmJyfISH/3+85+gIw47D
- xrBT/avqB7IT7rN01meTRJordWUA7Wl3Jfnfp+PmuTx+llpjoovLSZ1VrrfrPxgXr1g=
-X-Gm-Gg: AR+sD10M8WzJoMX7Xnibnpv+AAU9UcKaafyKFa+kAas3ipY8lWai+nSxk56yAU3zM5m
- uwTuiceTN9O7wc0nAhxkUqOvopgfDkxvANOyI0twDccuT4ea5L6P04JZHeD36y02GZqYfeti6M+
- AGKIvOObtKX1hJeGavqmEwiwDMBolk5LYQmqf9UJqmz4+WnQC4TAOEVzD73DITKEpuKjwIGBFLM
- mS2f3b0wT96j3SLHdudKvhzxyRLPpccxPaIreTKgno6F6ZTtNrXXxcpQRBOFxUBh+2ofVhHY82b
- 1+BSF+Kg/fY3XWLQBQ2l5pSd2d909cGNfUtcdBHlzxVd2O2pqg/QuhxpShiBijV/Od7HgxpTjG4
- oaKYiue2AQiY3ezwyXwB1GgEP4FaE011IEX4gIYwOdn6RyBy+ItupZyZpyfX6jhbzGOQ7FLGibZ
- jMVZUZ6DT6HC9s7tT8xmUf0XWCggMe4Bdn9VPoIc9ux6gce3RNuBFAbNNC8KSUF0QUgw==
-X-Received: by 2002:a05:6808:344c:b0:497:d3d6:6a56 with SMTP id
- 5614622812f47-4afadbff918mr4528459b6e.0.1785957642822; 
- Wed, 05 Aug 2026 12:20:42 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:ebef:9550:d591:36ac])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4afae4b2b68sm2755884b6e.5.2026.08.05.12.20.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Aug 2026 12:20:42 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 05 Aug 2026 14:20:34 -0500
-Subject: [PATCH] phy: mtk-tphy: add v3 hardware support
+ d=1e100.net; s=20251104; t=1785958446; x=1786563246;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Wh+NwYMzI92Tm+chmsSzH4Gjf59+M+ilCSdO7irCZKA=;
+ b=Yadwo4/4EvxjWsjNUcMYy1bqk7fXDnz6T8O3S4FeD7886hCNoU4LRx8XyN7xALqnYf
+ ZnwNa6uMnJeh2/EzQOKbb6WzpkfiyCR5qk63/bWs7C+0jjlKDAIUdN3KTnVGC9ecAs1T
+ ZCcKKLEn11aWzTth8ef5bWZMUIBpcv+fnlGZfji8RYq2wr26i8nwfPcXrjoCL18I39ZF
+ kFp1muBmGPC+e5MWctNNf/YZakOL729kiatzPjjBldCVjZ0vnV2M6Sy+WMWDC/nq8Iku
+ uA6EK+bq9nTm2Ks1gBG9+NcfjIndTH/Jw61yJDcOqNX98nMtXRh9VtzHFeFa+/gouKEK
+ IKeQ==
+X-Gm-Message-State: AOJu0YzuAsJvxsgV7I5L0srbyduETcfdwRhF081LiSVmh/jSM59vceER
+ EUZ8/R2BmyL6Z5h7tNdPd61PQRQnA7rnhD+/731R4JAU+0ZeSfXA0dpz1WQuT0d5bjNGDmXV4G/
+ YH4jBAqt+PwBSWTGRocVWrxQUbKlNCrLi/LuC8vcz
+X-Gm-Gg: AR+sD10LoVCZa46UatShSHDY0wZPTvaoNf8ddKCh+33gBi9TgjPRzGhxtMu1OWFIPEL
+ hUPmqTSZLLaz5k05RjIs90bx/tGEmcZGEg3Q6RcM7RjF9IX+bIJmtBbJiDS92B0mXyjd5d/xOcw
+ NFmnslfZOP9MpwlmH5aIsBUEn92NPawt0NBm0xYlp2rbvBdbfiri7BQd0n7OLAfFkf7ISsfIgYH
+ 4eniMEWY18bzWlSaKiIoXXfTYLAYThdi7gItdS6lDC/eJq97OT/PRvWYPiBBie5ltAx+HYcync7
+ QX77Q54PbEW9oXEZm7vescDtzqPagJ60iZ33n7c3ITg=
+X-Received: by 2002:a17:907:c807:b0:c1f:bada:4b2a with SMTP id
+ a640c23a62f3a-c2039d7a9eemr467077666b.31.1785958446052; Wed, 05 Aug 2026
+ 12:34:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260805-mtk-tphy-v3-v1-1-f1d6268b8d89@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDCwNT3dySbN2SgoxK3TJjXZPkpESLJAtLM9OkRCWgjoKi1LTMCrBp0bE
- QfnFpUlZqcgnICKXaWgDxV/RcbwAAAA==
-X-Change-ID: 20260805-mtk-tphy-v3-4cba8b8965ba
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2428; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=h7ybyFr77rf/v9RtmBGjJhTryPidmQo44QYHtQJGXkk=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqc40DWLtGzQZIQ+XHilBMJ38mRrTsG3noWhTPP
- IfgYisF90WJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanONAxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ATsUH/jtyqGYMtEJxtDZ5ZztB1XdC1cSAPjgdKwc1oFb
- obwhCppE5YChtm+q/2ehaUm39irYJCTBHXYZ9DrCykprIDe+7KdXbxmq2KQv+eeDEkO2GDqAIBD
- r+W3dHkQFm9ct795ZyWxpbT1ndCmFn0TpCJvhhhTxSNAuyezBpqM4BghJRujg8RX+l5M+vVXamj
- NM7blwUvrN8ljfm2Ea20rLRiPgb5R1x2oA/KIJRdWf0+aU4lzI+5aioMtyyxYKGiHcqbb+jtftL
- Bftda3II12RX8VsBjL5VLYwZ2z+DYh1KlshCLphzJIqwuB0al9n3rY+rvWiVHyElhY6hxbjxh68
- T8MI=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+References: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
+In-Reply-To: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 5 Aug 2026 13:33:52 -0600
+X-Gm-Features: AUfX_mzSkiTQkFAASLfzkNJraZajAV9FKq54R2miP2lDwOz2Zb1FAPvrz9cMFa8
+Message-ID: <CAFLszTiJK9JFDe30ZfaXkZvmNUfWUVmC8ZVLU0b-7vfTsHaQ5w@mail.gmail.com>
+Subject: Re: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
+To: alchark@flipper.net
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785957643; x=1786562443;
+ d=chromium.org; s=google; t=1785958446; x=1786563246;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=zQvThufackjIj/HlxbMz7i9w03As47kccOISHsXyLSY=;
- b=MU03ULQw5MRebhf0ywMT3gvoOp8h0JM9l4GtBWBOxR2Y+5Yy7Egmp1EopqCONPIw25
- RJ2ydeDErm1wqopLBH0JHllCpGF9KIk5OtzL7aQkuGSksWYaictNVyrwmHyL5nYznqoY
- i+er8vkiGUCTE9md+Xy/pwxjGVgwgv0+C3xuQniqAtfEbt2kabfA4vTQKaReE4CsTYha
- FxeH7lcGhWvkkwAR/bHayrIIA/IucbS0ZehAHch0CO6CuXUK9S3LkQNyd3QPUwAa9+YK
- 8JBDBSajA0F8w7sglOket3FWOA9hes1JDEEP8P3Ymg35vJprFT0J1N87g3VIUSMbR24Y
- SA1g==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=MU03ULQw
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Wh+NwYMzI92Tm+chmsSzH4Gjf59+M+ilCSdO7irCZKA=;
+ b=n/JCQCNJAWptT59w66dAZ/1TRDkZapzbvbnB8qPGf+VX6eLw9sCyz49JuEUVn+Q30Z
+ unUmWtekGz5sUId7eHN5ucRNwbUc33i2ILVkbLdd8sYsIERjQGR1agUOySK/twSSk7F0
+ nMCeydcNmgyXENpsF3x8HZyo/XzlOScwA4Tjg=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=n/JCQCNJ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,87 +140,45 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add devicetree compatible and match data for "mediatek,generic-tphy-v3"
-in the MediaTek TPHY driver.
+Hi Alexey,
 
-According to the Linux driver implementation, the only difference
-between this and v2 is that v3 doesn't need to set slew rate. There is
-one register write in the U-Boot driver that gets skipped because of
-this now.
+On 2026-08-05T14:47:38, Alexey Charkov <alchark@flipper.net> wrote:
+> pylibfdt: Grow the FdtSw buffer geometrically
+>
+> Every expansion copies the whole tree into a freshly allocated buffer, so
+> growing by a fixed amount makes building a tree cost time quadratic in
+> its size. This is especially painful when assembling larger FIT images with
+> binman, as it assembles the image with the data inline.
+>
+> Grow by at least as much as the tree already holds, which is what variable
+> sized arrays usually do specifically to avoid such excessive copying.
+>
+> With this change, building a Rockchip TF-A+Falcon image whose FIT carries
+> a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itself down
+> from 25.3 s to 14.0 s, as 7139 reallocations become 187. The images
+> produced are byte-identical and the binman and dtoc test results are
+> unaffected.
+>
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+>
+> scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
 
-Also, according to the upstream devicetree bindings, mt8195 is also
-v3 TPHY, so it gets updated as well.
+This is a _shipped file from upstream dtc, so any change here will be
+reverted on the next resync. Please can you send this to the dtc
+project first (see https://github.com/dgibson/dtc) and reference the
+upstream commit / PR in the U-Boot commit message, similar to how
+a63456b9191 links to dgibson/dtc PR 154. Otherwise the improvement
+will be lost.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- drivers/phy/phy-mtk-tphy.c | 19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
+> @@ -808,7 +812,7 @@ class FdtSw(FdtRo):
+>          if check_err(val, QUIET_NOSPACE) < 0:
+> -            self.resize(len(self._fdt) + self.INC_SIZE)
+> +            self.resize(len(self._fdt) + max(len(self._fdt), self.INC_SIZE))
 
-diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
-index 0a45dc58629..05172f220e6 100644
---- a/drivers/phy/phy-mtk-tphy.c
-+++ b/drivers/phy/phy-mtk-tphy.c
-@@ -228,6 +228,7 @@
- enum mtk_phy_version {
- 	MTK_TPHY_V1 = 1,
- 	MTK_TPHY_V2,
-+	MTK_TPHY_V3,
- };
- 
- struct tphy_pdata {
-@@ -331,9 +332,10 @@ static void u2_phy_instance_init(struct mtk_tphy *tphy,
- 			FIELD_PREP(PA6_RG_U2_SQTH, 2));
- 
- 	/* set HS slew rate */
--	clrsetbits_le32(u2_banks->com + U3P_USBPHYACR5,
--			PA5_RG_U2_HSTX_SRCTRL,
--			FIELD_PREP(PA5_RG_U2_HSTX_SRCTRL, 4));
-+	if (tphy->pdata->version < MTK_TPHY_V3)
-+		clrsetbits_le32(u2_banks->com + U3P_USBPHYACR5,
-+				PA5_RG_U2_HSTX_SRCTRL,
-+				FIELD_PREP(PA5_RG_U2_HSTX_SRCTRL, 4));
- 
- 	u2_phy_pll_26m_set(tphy, instance);
- 
-@@ -813,6 +815,7 @@ static int mtk_phy_xlate(struct phy *phy,
- 		phy_v1_banks_init(tphy, instance);
- 		break;
- 	case MTK_TPHY_V2:
-+	case MTK_TPHY_V3:
- 		phy_v2_banks_init(tphy, instance);
- 		break;
- 	default:
-@@ -900,8 +903,12 @@ static struct tphy_pdata tphy_v2_pdata = {
- 	.version = MTK_TPHY_V2,
- };
- 
-+static struct tphy_pdata tphy_v3_pdata = {
-+	.version = MTK_TPHY_V3,
-+};
-+
- static struct tphy_pdata mt8195_pdata = {
--	.version = MTK_TPHY_V2,
-+	.version = MTK_TPHY_V3,
- 	.sw_pll_48m_to_26m = true,
- };
- 
-@@ -914,6 +921,10 @@ static const struct udevice_id mtk_tphy_id_table[] = {
- 		.compatible = "mediatek,generic-tphy-v2",
- 		.data = (ulong)&tphy_v2_pdata,
- 	},
-+	{
-+		.compatible = "mediatek,generic-tphy-v3",
-+		.data = (ulong)&tphy_v3_pdata,
-+	},
- 	{
- 		.compatible = "mediatek,mt8195-tphy",
- 		.data = (ulong)&mt8195_pdata,
+Logic looks correct - doubling gives amortised O(n) total copying, and
+the INC_SIZE floor keeps small trees from taking many tiny growths.
+Nice measurement in the commit message too.
 
----
-base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-change-id: 20260805-mtk-tphy-v3-4cba8b8965ba
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
-
+Regards,
+Simon
