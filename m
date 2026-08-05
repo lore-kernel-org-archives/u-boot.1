@@ -1,89 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C7BC55ABF
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47537C55ABF
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:25:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 62B84407C1;
-	Wed,  5 Aug 2026 21:13:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 66C8480D6A;
+	Wed,  5 Aug 2026 21:25:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rCwT5BC87Iag; Wed,  5 Aug 2026 21:13:31 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ffuXa0DJHGnl; Wed,  5 Aug 2026 21:25:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 94F7E405C5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 98FD580DCF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785964411;
-	bh=RnWUBRtWJiplre4SFtkmAm3khbgZ8YOHcnoaGVBoGEc=;
-	h=Date:To:CC:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=oxhKqVzJTGRR+tewaRAku3x/YchbDxzhFAVoq4IyY79C18Qb+8MsQuXi9xN8MYrsN
-	 poVCJDob1D/1hmkCL7fCWqH5IAQZcNO20zVGVcLX54IxYe6orslYveoc4fS4DyghgG
-	 tYyf9rG3IVkxTkhL0x1zQ0LxIh18qUBR9p8HInvHzliV/foydEDhI/mTazGEDSPOgx
-	 0PC8RpEj8pXSzaqRwjtmaI30wcN9TaSrMGUP4XagUdDAwm7Nh1z9/4XAV+GGmPduQg
-	 9sIjukd1HpF5RV8izMWRB0X4XafAmzCecv+ZAIkK4ghccfTsNGl5jNxfo0BwEd1qS5
-	 PVcAomEuiQyKw==
+	d=lists.u-boot-project.org ; s=default; t=1785965133;
+	bh=Ij2Of9bKscVICrX8m0eQ3qK4cEK1efodidKS0Ce37N4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Lky+wdjQFB/15cDpc+XMS/3xGcMGegQcdniEbq9sNldZOrDPzPVtcXhY+5CtT/k2c
+	 2/6LmhtmME68JIUfWRtspWMelEZtZwJFRm2QenWoD755la4AYzF6yo8BqlqVqLA9/K
+	 IWCPLgHckDm/21LXegltW5j4x9zilfJwantA2abAplHSSoIOtJMp01p7LWNvNA1Crf
+	 1WQ1OH9XJz4EF1CjBwq9ocHJwr+yYPmNRFlPpXvOffld3sqaAP32mBFfbksBrAairA
+	 SqCmtg9afUpLrlY6W1sKAAWsoCip2qUmVY3cSCCsYVjxaaE1YTlPkgzXSjhu5pktyQ
+	 mgFmOi3k6EbMw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 94F7E405C5;
-	Wed,  5 Aug 2026 21:13:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9241A29C
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:13:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 98FD580DCF;
+	Wed,  5 Aug 2026 21:25:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A95C029C
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:25:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 83CA4607DC
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:13:30 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9A51A80D6A
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:25:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FukfbI-eVmiE for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 21:13:29 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=195.121.94.184;
- helo=ewsoutbound.kpnmail.nl; envelope-from=mark.kettenis@xs4all.nl;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 89179606C2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 89179606C2
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 89179606C2
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:13:27 +0000 (UTC)
-X-KPN-MessageId: 7d896055-9112-11f1-a5a1-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 7d896055-9112-11f1-a5a1-005056994fde;
- Wed, 05 Aug 2026 23:13:22 +0200 (CEST)
-X-KPN-MID: 33|fHy7oCxrxbBKU4AjmyJZeToEJFgTqw4alVdN9Fd/2ipNQH8HPvk0zPCdBMv3h62
- fxwMC01ZamnE0Pfh0oZSVPBTr3jJlJ+TRp1cIPaNnfdQ=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|m56hrOH1mpgVAMfKk5gP4iOd08Jt5PePV8YZczhCBtpE/RwbVmKwLqmz8AxShE8
- JRmez5dF+kIucu6XVQg4iWA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 7cf6d7dd-9112-11f1-8dda-00505699d6e5;
- Wed, 05 Aug 2026 23:13:22 +0200 (CEST)
-Date: Wed, 05 Aug 2026 23:13:21 +0200
-Message-Id: <878q6k2rv2.fsf@bloch.sibelius.xs4all.nl>
-To: Randolph Sapp <rs@ti.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: u-boot@lists.u-boot-project.org
-Subject: Bogus error messages on Apple Silicon
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kDFCF0uG0leU for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 21:25:31 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 976C2809AD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 976C2809AD
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 976C2809AD
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:25:30 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6a10d02ff43so2538588a12.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:25:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785965128; cv=none;
+ d=google.com; s=arc-20260327;
+ b=rtHp2yk4dVY2PBWvW6kXBYIdhu5vFmLhf924fHtLIq5mlsotUqeeUz1rZdiHO8kz3p
+ MxyMZuiuuY/1brCqNHaZFufDIWVkOahZlpyNwb4fMcTdUTpC0EYKl8H5sCEl6dH55aaT
+ S23a1TqIKjV8cz7S/KQItErvfYUP2SRzQsrwY4GRFkVSLnF1bM4d6OVB0T7yesRJocvj
+ t6HhddJQB8+iOYxsjMytD2GFjcGibyIrQ8zkxpstpYiCP4i8AnC6zBonCjUPd785Vi/8
+ g9zrzd6B22vBKe83igEdT8OPsa8fHYFeOFixDS8KiTynwptLr+dKeJSTRXfiSrlZE5fz
+ RUtQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Ij2Of9bKscVICrX8m0eQ3qK4cEK1efodidKS0Ce37N4=;
+ fh=xEUUUSHU18FrDNuh9/VGJ7CSs9Vhzj8W0EfEjn0I01s=;
+ b=QLxHOlIFShVLMHTA7wMpJz0b9xLBZuqE/iV8dmYLefmBbTTEfN+qudbpUHFduhOH9A
+ mimU8jwTYqS4okyt3k8lDoAQZss/L+/o9YI93xJ/Er5PGxG+v3aCqF+EB9pX1r1jbJxx
+ wcoUbP7qSvY95PZl4enFgkQh5dliSMHQO6zs6LeGBZu1im9MuG6l7mIJR0Rcy3uVHkka
+ Crmrsa4VRYsMWHbu4D//umnFLckZENSkmNMAmcxOc7ZvwhchjNuENUa1xXA9wMOxPgMZ
+ tELT4E8huh4kJe8TgGzfTV+hCJXQ5LDKHdfy9Ks8l0+dcC4PdL6hue2tYE2JDjAdGo2E
+ c2UQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785965128; x=1786569928;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Ij2Of9bKscVICrX8m0eQ3qK4cEK1efodidKS0Ce37N4=;
+ b=c76ryi5aluXGC4FeXNKsG58ic3RQMDl0BztKpGo/25syVrVyA+D0F8El3FONYxNunX
+ Kuj78iDIobvzL0YnsOYo4IlvJmgOKlhKLLt7HsxeRRuqOaE9UQD4NuPELSaSCtuIzDlH
+ qWmUacmsJI1sirI1stZJMwqCm7LdaFcSco1tfsA09cbff6HeVXLko+XtkpJ3ruv662/O
+ JXYkzf1UtYXShX7jCnrekREUcLXdglazlkY83ZpXXHiYxrhvWULV5XL0apFBakPBxQEr
+ IQSMUWlcQO3xqzWvhYwPeQJqz1CJv1E7smwbLJim2KGVtSSRs5on/IfT1jyurPs3kF+f
+ cquw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqZVeTK+zHFB0Fm8fmZ5FVXhx6QhIQZcFs4XCfflduLafTyX71ceLvjcLyEZG7/+Szd8c93S9g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Ywu3FfxEPZgX2iBWOO4mi047DVyYUW2KZ88t34XwFYrvNYUb4xY
+ bOUSI9GGsibXRGp/Znw1Bdm/Ag8kKAzT4X0AFdfGBCu9oIrml0KIuLHoloZ8y9erzjUlXLymrp9
+ qbEEvSV3RvGx/o3JL3MPIzVlDplZAddFozn2FczhN
+X-Gm-Gg: AR+sD11QRBlfkN6LAXsfpw9/VImNELrQMFE8LVHFiYBOnKKy5QazJI66JeETegX1t+C
+ 1EYHuqKw2Kw9w3Lacp1Sg2Hrpgwc36Se3aep6KeQD5DaxUjSoUQGYjEt4yUEvmKDXujLF74g8uh
+ ATC/qOw1sBbPfQl6hb2oPD5p/cybaNOIxwJDWJR81e2JKkPeriJU/QU/KSMwKCW7Ebsw69i0VK6
+ E5nIuxXODnZt2lmZDlu9ZWXARq3W9xdr6LxTlJyNPECOEkfgHS6PCohoayDXSxx84mU60XvhTY8
+ kE5lXn8H14qHzzNX1BVfMtiZMBnKqHTLY3EdmorfOK4=
+X-Received: by 2002:a05:6402:3506:b0:6a0:da09:885d with SMTP id
+ 4fb4d7f45d1cf-6a14eff888bmr5025403a12.0.1785965128410; Wed, 05 Aug 2026
+ 14:25:28 -0700 (PDT)
+MIME-Version: 1.0
+References: <d15555b5-e57b-4567-ab70-56d48fd4b878@gmail.com>
+ <8e3babdf-dc50-44b2-a184-7d9f2a9938ff@gmail.com>
+In-Reply-To: <8e3babdf-dc50-44b2-a184-7d9f2a9938ff@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 5 Aug 2026 15:25:16 -0600
+X-Gm-Features: AUfX_mwaCXknAJAcHbJXX9Hmekho_5ut1uU0xYa13TedyaWW9yG-JbNXBLkCb34
+Message-ID: <CAFLszTj6KGwqA8Puidwk3-pWZdveJnXTXKX=NZtvM4Dk7sC75Q@mail.gmail.com>
+Subject: Re: [PATCH v4 2/9] rockchip: doc: add mask ROM mode text
+To: jbx6244@gmail.com
+Cc: u-boot@0leil.net, kever.yang@rock-chips.com, sjg@chromium.org, 
+ trini@konsulko.com, u-boot@lists.u-boot-project.org, 
+ eddie.cai.linux@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=RnWUBRtWJiplre4SFtkmAm3khbgZ8YOHcnoaGVBoGEc=;
- b=KDDUS+9drT3n92Kzn7YHjOu8aS5FojaP95wRYmdVyNsRaF6YfsFifj7miZjyFPEBcICu0NevM0KvQ
- huhS22Wp58AaHovHW/ToqTd+uASLlA85aGRZJvlfotqzOmy66ItKLBYUxXeW8eMngq81oPZwFAZymX
- Nr9qq/zKr7Pa4/V3gMiFu5Ukqko1E8OZk3LlX/xRcGHelTpN/uGUHnR2mwPlsjy1JEzT/gIw5yW8xP
- JZSoiQuIJXo7cPYNsWz3MljW+trioa/3YKcqrajDvShrLaQm9VjOSUlsfdau/1+pglW6Wfn+0ymO4Q
- /NPv9RkeXPJo9UbdiMMV9zEqS54NbJQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=xs4all.nl
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=xs4all.nl header.i=@xs4all.nl header.a=rsa-sha256
- header.s=xs4all01 header.b=KDDUS+9d
+ d=chromium.org; s=google; t=1785965128; x=1786569928;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Ij2Of9bKscVICrX8m0eQ3qK4cEK1efodidKS0Ce37N4=;
+ b=dT70yhDM/DpWs8XkQAkC7yLlssdZqcLFMvdhWjRwrvRSoTOtW/BFTo0vF8VesrMlLH
+ MeBdwuNL6SqNojxLZ5TKTz0GZRkgurualrt6iRMhnqICj39Yt3HmFSMB/S7iotkZaLgN
+ ZzJEFcTE3LpoCAl+9pIA5EMhRcPJWl6x/xYbo=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=dT70yhDM
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -95,41 +141,62 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Mark Kettenis via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Mark Kettenis <mark.kettenis@xs4all.nl>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Randolph, Ilias,
+Hi Johan,
 
-After commit 623f6c5b6ab7fa2 ("boot: image-fdt: free old dtb reservations")
-U-Boot now produces some nasty bogus error messages on Apple Silicon:
+On 2026-08-03T19:09:22, Johan Jonker <jbx6244@gmail.com> wrote:
+> rockchip: doc: add mask ROM mode text
+>
+> Add text that explains how to get into mask ROM mode.
+>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+>
+> doc/board/rockchip/rockchip.rst | 26 ++++++++++++++++++++++++--
+>  1 file changed, 24 insertions(+), 2 deletions(-)
 
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> @@ -321,6 +321,28 @@ To build rk3588 boards:
+> +Mask ROM mode
+> +-------------
+> +
+> +The mode that the boot ROM falls back into that listens to
+> +0x471/0x472 USB commands.
 
-U-Boot 2026.10-rc1-00115-gbaa64b2f8928 (Aug 05 2026 - 22:33:45 +0200)
+Sentence fragment - no main verb. Perhaps 'Mask ROM mode is the
+fallback mode of the boot ROM, in which it listens for USB commands
+0x471/0x472.'
 
-Model: Apple Mac Mini (M2 Pro, 2023)
-DRAM:  15.3 GiB
-ERROR: reserving fdt memory region failed (addr=103d7f4c000 size=854000 flags=2): -22
-ERROR: reserving fdt memory region failed (addr=103d6c4c000 size=1000000 flags=2): -22
-ERROR: reserving fdt memory region failed (addr=103d7c4c000 size=300000 flags=2): -22
-ERROR: reserving fdt memory region failed (addr=10000218000 size=604000 flags=2): -22
-ERROR: reserving fdt memory region failed (addr=103fff74000 size=4000 flags=2): -22
-ERROR: reserving fdt memory region failed (addr=103fff78000 size=40000 flags=2): -22
-ERROR: reserving fdt memory region failed (addr=103fffb8000 size=4000 flags=2): -22
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> @@ -321,6 +321,28 @@ To build rk3588 boards:
+> +Options to get your board into Mask ROM mode:
+> +
+> +* Holding the recovery button, depending on firmware support or wiring,
+> +  when booting the board.
+> +* Remove any SD cards, removable eMMC or removable UFS modules.
+> +* Erase any storage media containing boot firmware.
 
+Please make these consistent - the first is a gerund fragment, the
+rest are imperatives. E.g. 'Hold the recovery button ... while booting
+the board'.
 
-The issue here is that these memory regions have been reserved already
-by the previous boot stage and have already been excluded from the
-memory listed under the /memory node:
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> @@ -321,6 +321,28 @@ To build rk3588 boards:
+> +Methods of last resort (USE AT YOUR OWN RISK):
+> +
+> +Pins that should be connected/sorted for a
+> +short period when the board is connected to power, so that boot ROM
+> +cannot locate any boot firmware and falls back into Mask ROM mode.
 
-    Node 0x22568
-        name: 'memory'
-        device_type: 'memory'
-        reg: 00000100.011e0000.00000003.d2a34000.00000103.d3c18000.00000000.00004000
+'sorted' should be 'shorted', and this is a fragment. Perhaps 'Short
+the following pins briefly while powering the board, so the boot ROM
+cannot locate any boot firmware and falls back into Mask ROM mode:'
+leading into the bullets.
 
-These regions are listed under /reserved-memory since they are
-referenced by other nodes in the device tree.
+With those:
 
-I suspect there are scenarios on other hardware platforms where this
-will happen as well.  Can this be fixed?
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
