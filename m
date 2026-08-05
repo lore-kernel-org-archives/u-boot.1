@@ -1,56 +1,56 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A706C55ABA
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 17:50:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E7AFC55174
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 17:50:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2A3C360769;
+	by smtp4.osuosl.org (Postfix) with ESMTP id A73EA407AC;
 	Wed,  5 Aug 2026 17:50:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Urf2GduHDGIX; Wed,  5 Aug 2026 17:50:39 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jji4QYyRTbrJ; Wed,  5 Aug 2026 17:50:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 81E7E6078F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1413B407BB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785952239;
-	bh=3fgknuOTTQ3iTQzd9jgdkqz95krpNcBi6eLwDJcqDsg=;
+	d=lists.u-boot-project.org ; s=default; t=1785952237;
+	bh=d9KkWQI1w1f68Aj4IABnVf3EhqE9V58sTxi8XWWmxWs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DIsyBc9p9t9Yb1pj3LMrbndR928fAPUs8FdmncH2e5S/U5pqWKcHE6SlkdYWIYV+K
-	 mO6MZxSElVtAW7ylchZK75it1jW9JcmivBXDTO1/bUNgxKsR+EAURqBl/ogtat+3OB
-	 FtTR0Uj/UVlo9oGUlTppy0vKp36U8o12g/gOsaoE7AiJIpG1nMOIWX76XS2mUsWGEB
-	 MsaoUJ9N6kLqRuAVqsjtotjVeJDVEvs43PL5gD/Beejq00T27HwU+ULxk9FRtPp561
-	 Hid4jxZbErg6HxvYqVx5A8McOtUPe2RoQb/n27WKd//iHFqDNDHZfbm33m4pqPUS+A
-	 PHATGJeFWhiQw==
+	b=xruMq3o9SW8ie5owWXDIXkbQgX0SDLND531W7oQ9/0dd27B8ukc5FXpLVDfISaGuR
+	 r+JW1LytoKuH4GxU1vug9mKLb4AQT7cdVzyNWo0KCqBYCrt+PZKa6HoSEB3SjbzRMr
+	 bbV7MsDl8qTb4juDInNIBdkS159smFftigFsgCq/jRe1QKwHKSHy9KXCel/OtuYYvp
+	 d5ZadplpwWMI7YaRhuT7Y64nQt1kapbs9Wsqyq2gMllCtRCQY/IaEC9eCtAJT0vHLz
+	 SDtLt8OrIGaUIg1Q7ZmRLVfECzmITmZ1fGoESqFhSkvbGI9lTTPYEStO6KqI9iM194
+	 NkG99u2T5o1AQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 81E7E6078F;
-	Wed,  5 Aug 2026 17:50:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1413B407BB;
+	Wed,  5 Aug 2026 17:50:37 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 74EF9397
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 17:50:37 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 2495D730
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 17:50:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 712A660769
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 17:50:37 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0A810607D4
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 17:50:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CwtiPCKIPOKf for <u-boot@lists.u-boot-project.org>;
+ id UpOyaP4pZZBx for <u-boot@lists.u-boot-project.org>;
  Wed,  5 Aug 2026 17:50:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=b88b=f7=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 25AA9607CD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 25AA9607CD
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org DA4FA6076B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DA4FA6076B
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 25AA9607CD
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DA4FA6076B
  for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 17:50:34 +0000 (UTC)
-X-Forward-Email-ID: 6a7376d65694ca629d62bcb5
+X-Forward-Email-ID: 6a7376d85694ca629d62bcd3
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.13.8
@@ -65,9 +65,10 @@ To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 25/30] rockchip: rk3568: Remove unneeded rockchip_cru alias
-Date: Wed,  5 Aug 2026 17:44:56 +0000
-Message-ID: <20260805174509.2968252-26-jonas@kwiboo.se>
+Subject: [PATCH 26/30] rockchip: rk3568: Remove unused rockchip_get_cru()
+ helper
+Date: Wed,  5 Aug 2026 17:44:57 +0000
+Message-ID: <20260805174509.2968252-27-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260805174509.2968252-1-jonas@kwiboo.se>
 References: <20260805174509.2968252-1-jonas@kwiboo.se>
@@ -77,18 +78,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1785952234; bh=3fgknuOTTQ3iTQzd9jgdkqz95krpNcBi6eLwDJcqDsg=;
- b=PWq5uis6FGaZrXgEWmjLfCg7sD+dupM5IOyhT1FxRycV1RBrqtUUUnAn4nC0UsWtGnb4F87L3
- kjL2CtB+OWdXIxqvrPaPzqOJ26Khs+p9NwgycMgq/Un80vfyEFGj3TqpOmqyYduXveB5KQNU4I8
- H75Y7FgBE5fgnZOHRKrF0YcySlNXgAeDDpKMIfk5h6vRm5Nokp97I3UL1qWQ82VuCau9W4Aq9dS
- NTiliY8jaZj7afG2CYCX5n5yfZQQxoCaFX0/kxv8Ned3rtqndApLe1uYlImOGCTGTYw7AkHgiry
- e7vM/ghOR4gMMokdYWZYqKn/VdTPZlTrM9a3RHIOE8Ag==
+ t=1785952234; bh=d9KkWQI1w1f68Aj4IABnVf3EhqE9V58sTxi8XWWmxWs=;
+ b=V+TUdMy3w9chMXSf7ou1q49abEDQCd55V0xElsw5UAyBH64FxS+rgvas1JHTGrQzzZq48xJlQ
+ 5izU99FTLQshppNo8GKRDShd2FiSf0i/uJtIgv9G+vpzXT+i+sg64L2HSonmDgpMwTX8PvkDiD4
+ MxGL1IqX0rgKz9H0Dih9kmDRQsSQScIYVzQ6gXkmydylTqGKEeCyyJqY3AtubIt5hPAUf4kjyxt
+ pr7Nzq8Xk8rb8/lgbDNsmH/Bu992jR3tE5WUMPGM9r8xjxhcQv2O9Ee5WIlcsfYuRnHVxP3r7lw
+ yZnA0hUMbKQWAG5BwkvhpZ2FV32iTcBsjNR+aOaiyZ7A==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=PWq5uis6
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=V+TUdMy3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -103,42 +104,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Remove the unused and unneeded rockchip_cru alias to rk3568_cru now that
-DISPLAY_CPUINFO and get_reset_cause() no longer require any use of it.
-Also drop the unused and unneeded include of cru_rk3568.h from cru.h.
+RK3568 have no uses for the rockchip_get_cru() helper now that the
+sysreset driver and cpuinfo no longer use it, let's drop it.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/include/asm/arch-rockchip/cru.h        | 2 --
- arch/arm/include/asm/arch-rockchip/cru_rk3568.h | 2 --
- 2 files changed, 4 deletions(-)
+ arch/arm/mach-rockchip/rk3568/Makefile     |  1 -
+ arch/arm/mach-rockchip/rk3568/clk_rk3568.c | 12 ------------
+ 2 files changed, 13 deletions(-)
+ delete mode 100644 arch/arm/mach-rockchip/rk3568/clk_rk3568.c
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
-index e756c5bc7f9f..1ff94f8780b5 100644
---- a/arch/arm/include/asm/arch-rockchip/cru.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru.h
-@@ -15,8 +15,6 @@
- # include <asm/arch-rockchip/cru_rk3288.h>
- #elif defined(CONFIG_ROCKCHIP_RK3399)
- # include <asm/arch-rockchip/cru_rk3399.h>
--#elif defined(CONFIG_ROCKCHIP_RK3568)
--#include <asm/arch-rockchip/cru_rk3568.h>
- #endif
+diff --git a/arch/arm/mach-rockchip/rk3568/Makefile b/arch/arm/mach-rockchip/rk3568/Makefile
+index 610d2a015587..d0bc69fd2f21 100644
+--- a/arch/arm/mach-rockchip/rk3568/Makefile
++++ b/arch/arm/mach-rockchip/rk3568/Makefile
+@@ -4,5 +4,4 @@
+ # SPDX-License-Identifier:     GPL-2.0+
+ #
  
- #define MHz		1000000
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
-index 528bbaf4b044..697e88a66226 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
-@@ -104,8 +104,6 @@ struct rk3568_cru {
- 	unsigned int emmc_con[2];/* Address Offset: 0x0598 */
- };
- 
--#define rockchip_cru rk3568_cru
+-obj-y += clk_rk3568.o
+ obj-y += rk3568.o
+diff --git a/arch/arm/mach-rockchip/rk3568/clk_rk3568.c b/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
+deleted file mode 100644
+index 72141e4726c2..000000000000
+--- a/arch/arm/mach-rockchip/rk3568/clk_rk3568.c
++++ /dev/null
+@@ -1,12 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * (C) Copyright 2021 Rockchip Electronics Co., Ltd
+- */
 -
- check_member(rk3568_cru, mode_con00, 0xc0);
- check_member(rk3568_cru, softrst_con[0], 0x400);
- 
+-#include <linux/kernel.h>
+-#include <asm/arch-rockchip/cru_rk3568.h>
+-
+-void *rockchip_get_cru(void)
+-{
+-	return (void *)RK3568_CRU_BASE;
+-}
 -- 
 2.54.0
 
