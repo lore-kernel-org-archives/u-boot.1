@@ -1,139 +1,187 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DD2C55ABA
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 11:40:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D435CC55ABA
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 11:45:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0D3AE80AD5;
-	Wed,  5 Aug 2026 11:40:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B8958607B0;
+	Wed,  5 Aug 2026 11:45:46 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yfHCiP0oBTT5; Wed,  5 Aug 2026 11:45:44 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A8A0D6079D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785930344;
+	bh=W/MQjRbWRkgFxcGmK2UobV0h/1qr4WfBXt2B7JshR+w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Le31+shFbKzKL0ED/nocEiYeVS7HFPLqKC+r0VAHYRkHcLmXmedu/UgSCDayjFZGj
+	 n6kw9RCK6imz3EZgR4qDJeRDYjMBYhi9h/7okt0GnsNf4XlpUT5+Lc7x9lKRzaJ6ts
+	 97O4qIz+KI6Ure/66/mpEi4uSa2czv508nVx8tEXWl+kzDlDMqIbmQitopUIMZm5+n
+	 aby1t1a2YCtQwdfeLPXAQDPP1v4kvg1F1H0L0FLGbfKF8cOpOhrtlAEoEkCwdHBiNk
+	 zhBDELNrdRUCxyYB9fU45KeLkiO8nwzYd9G5EBcGmOE6yqCQ0Bphdt5FNB5t4hpYUi
+	 LphsQ9nSm2OKg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id A8A0D6079D;
+	Wed,  5 Aug 2026 11:45:44 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 07635313
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 11:45:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id E4DF080B03
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 11:45:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nfVDGVkTdwb4; Wed,  5 Aug 2026 11:40:37 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 230F880B8C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785930037;
-	bh=PebiNkZoHdji+egClSmol7K+QqO6PDOinDTGtodSiN8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=IafojfPM0pR9cD3tQXjyi9kK1HomLbo9GgFigSZYELIQaNd8bZLKy6cb5HAFlFxNb
-	 iM2BHfY2Ouy/O3XQ4R7k+GklmU61FNA4VUAEJ7x3FjUppqi9He24qNuursrzw59LcE
-	 g2a8d7Ia6ucLIcS7otq/t0JO8VZpNRaC1iwOqWpTYRmiH2kF1ylmGbaPpBZ7cwNwEW
-	 Co/SGbrVwWxXpjGTESLd3wIzVTAFln4AWoVNY2bcL0eH/1bX/KxPYY5x9U6Oz1Iqjt
-	 KF4LbmyUN22HXA4lniHBaYs9amM/QM5FhJ4NZrke/9ig6nA0QuIcquVohNj1riQhSq
-	 jakwD8OYlKtNQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 230F880B8C;
-	Wed,  5 Aug 2026 11:40:37 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id BEE0E23F
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 11:40:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A1D05406EF
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 11:40:35 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kZAYEPwezmzH for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 11:40:34 +0000 (UTC)
+ id XAIL72aE9lzu for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 11:45:42 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f34; helo=mail-qv1-xf34.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 90AD6406B2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 90AD6406B2
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 90AD6406B2
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 11:40:34 +0000 (UTC)
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-8f23e851626so4818056d6.3
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 04:40:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785930033; cv=none;
- d=google.com; s=arc-20260327;
- b=sCEblXSayBTiplL2NKcWmXCF6EiKaHPcDcc7gq9siLql91K5gAJRK+6hnnzzm/L8ac
- A2f7JpfPX+xRTp92uPt6Ixy0jIieFmeE5kWWlgylaOc5jSjFUqZPXSnyUJnBj87opgw1
- YKrFVJ0SPJgrOeZwdcZFZfjkXISAItkLG1eqxSa8cNJz9cb+Kw4/zitW0mcGe+QUUbA2
- VuOxlEG0sIb3ED1gFZ1GvVzgXbI7ku2yINnsjmZYqJuAYKxJlxVl4eODNYXxFF1OX3Ce
- dISLij7yXHx7ti07hc00wGKkWvNDKcJyUgkFIV2doRSP9Ivfw6mAMOKPycGY2mMmEhe1
- B/tg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=PebiNkZoHdji+egClSmol7K+QqO6PDOinDTGtodSiN8=;
- fh=ng9IPAskjaqNl8F9JMBmRFIDjWoyq94UpMn4A5ZM6lE=;
- b=Hf44eZd2ATSrDrjlsYASkUrDfswtaC0N1CuC6Wiv7iIdMtaEiP2R+9UEqo96ZRoyVX
- SasQK2orUC9kciAOJ7ZaVCU1w45ytBT8g3f5VjMWkB0KBuTNa5+I2PgRgCS8hIB8JDgF
- JOtzDk/ZW4E/TsA5v6toQInmHN9Drass98JG9TIdfc/4Ma1oVICbKtPjYPKhqlYkv+Fi
- V/erFmm2+ylA5ZNqUy2f4WVv4/i3fP7lVnUnWufhEp022N2jTJPnaFQcF3yO8uxTsloX
- vWEQ8BnQqbD2Uy2oA9xjMBND5AuasCcH/segv3YQ11HDoSQ+LXZtSkF/Spdz9bXlwPGk
- By9Q==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785930033; x=1786534833;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=PebiNkZoHdji+egClSmol7K+QqO6PDOinDTGtodSiN8=;
- b=dWAiKEphcEtI5boIz+4s12m8jES+jzOCHvs0j2qgnCli5IuxcIrDVmN78TxNplSmCW
- NWPHgHWRsUqKC1cKfzlMLAyJ0rh+5iTEpsBGlTiU/twLdzfTcZSvs37/D5qIXXrTm69g
- n4HpMLd0T8aOoCGYf66iNI52Kwr9qPa/8qo88enX0W+BFzrjfl/I6PaGzNFxK05NqMOG
- ngzBy+Brm49wEjalZ+iYQgSOYKVw+2z1qSPEpemlanp+f8nvc7Ai8PToO+1uKgNRcXxI
- krKrwg7QoTpFvon/T5vRnGFvZCvBt0ERK8eYE5KcCHyTSIoWgmGOLm3OxybPsNHuodCV
- vKug==
-X-Gm-Message-State: AOJu0Yy0oHnjjSAQV5BaIcQvC8NBtHbBTFljqe/jGzgNr9SLeoQiAvJ/
- X1xybYK+7x4cc/kw9+w0kRSKnS4TVlTinj2a5NujftH/CdJuMiBTEb7wY9HYBPGd+bBz90HQad3
- 3d16ep49hVJy/u0fTOR9DFtuuMhnAkpw=
-X-Gm-Gg: AR+sD11gk7pm/P+8L+UVRgZ9iegQX5An8VJ/LM99iMZwTn0qCcNrhRz8sIbS9xozx5k
- xUT50ceqvMeJPJJ9d1WU/x3tFxV5zLv1YfHS5uBmw7rx7chyJcVPPoSXkYsOzwdhLx+8zZUTIxi
- lTqML/EM/SA8IGnbKu8waZpMwJFB1xYBo2wRB9Q0EWIbsRCRPvWUtdUNNyw8DA9WbLHqm6shSAR
- 7yltA3VPHZ/cs9137O9B8fvjNigSjieVvLZLR4qcOU+2T+5bOUSTrfF2avFtA4AsX62e3MbHXIm
- DVw8eTGkRl5jdvGCrpJP2L8iQBjeB0P+woL3/BpIPQ1JUWHehuefI2DD3hvItNNIFGJIupHS+Ie
- RS0F82cmpSfTOLgenzUlLvUopc4h9C3en0fr1hq4ZxOdNPkzgbOlbcirp7+c0Nts6vLbbf4CMnv
- dHHw83FLH13mmhR9O1SvpDU0manVrnlko0pqvg/R4=
-X-Received: by 2002:ad4:5942:0:b0:8e9:61e9:8d9 with SMTP id
- 6a1803df08f44-9088126d60dmr64993936d6.23.1785930032979; Wed, 05 Aug 2026
- 04:40:32 -0700 (PDT)
+ client-ip=2a01:111:f403:c200::3;
+ helo=du2pr03cu002.outbound.protection.outlook.com;
+ envelope-from=jerome.forissier@arm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 682AE80AEA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 682AE80AEA
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 682AE80AEA
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 11:45:40 +0000 (UTC)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=qOv7HDarYZPjHjTy8+3vtVBECmxETv7/MMy6UkmScQv6Ebsig7k2MDb9rDgGOYkxnsVk6sHKgtXNWC7AP5ZiDaYxYxplr3z8vOq1vAsRGq0WU750SULuGst0nQ69UjrRZe5JIM8hN7jw1006pCcSDPgkSqnR4dfbzvNo8KBIMI/iQYcJFGWn5alUKqgAwTC8Lq+k/WnT2W+Szvt805YbdGaEQRw9jOb4PyYqwbPI3/CK31ROcDLfpLWG+QwKi0N7P0H9WVCNfPpeaZ9LRtuMcWxhm+m/Yi2hzQe4vvYY2imaS2xD9DV+xHOP337BxCrqPk+Eh8MdoOCqms499ElsxA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W/MQjRbWRkgFxcGmK2UobV0h/1qr4WfBXt2B7JshR+w=;
+ b=nG6ZiKzk2/hHygCFhbK11Tmtvj+CcplQ0ygILvwTXhL9cibOjPsqfxklfvMD3zAA+gudBGPqLopvLB4WgS0Bq6SHDS4esQ3isaaFn3tltiBhxqe5YzT7tKpQPU/+spxBAhH99/CxCFsS7Ey9L4lE4zyUeXV4AwP7CbJHVDQoYfAXKwb9Lh3+CMlUbS07UsI55DEMuUgTcDL79y5vPHUg3AH812+vLn1UkBXthBarVzphoRw/9lCEYoKCNdRO+FnONktWkRCoYZ3FhcHCHF2hQw3KatdLwdkn2Bbp5ku9IlZsTHajIeUebAP0SyQCGNdN6y0GkQve5A7E+Riy9qQk2A==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=amd.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+Received: from AS4P250CA0025.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5e3::15)
+ by DU5PR08MB10852.eurprd08.prod.outlook.com (2603:10a6:10:522::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.20; Wed, 5 Aug
+ 2026 11:45:33 +0000
+Received: from DB5PEPF00014B9E.eurprd02.prod.outlook.com
+ (2603:10a6:20b:5e3:cafe::4d) by AS4P250CA0025.outlook.office365.com
+ (2603:10a6:20b:5e3::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.15 via Frontend Transport; Wed, 5
+ Aug 2026 11:45:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB5PEPF00014B9E.mail.protection.outlook.com (10.167.8.171) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.8
+ via Frontend Transport; Wed, 5 Aug 2026 11:45:32 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=y4x1vAAk4dn+j02eWE85jXbkSdVWpBP3MsyKpMi0UCRnxs7jJ8vI+O4xnDOZsZZ3/MKSV1YZyEJShWWqPX7Q681i9Ed0YPpbO2IGb8mQCNTdhodGPgAycD5Qaj5CFazuwPM++P6eey5GZAY/FgTBgMJ0GRvz9TIFqJhZQLJgT9z8DSXYO+U7tkh2utk9C+46WU6hZfmCiaG2MYuL7xM0D5t4IjP1oWQvqfj0jvs463NjXB0w6QYeXB+1LW/R+RmN5QuCy/znJCQev4NAsnd3OjHX4IiTC6NsQzl8zI/T+NqB/8UtYUf9rxOqg19wk7cDqh0rFytjNCatlWRiMmKKMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W/MQjRbWRkgFxcGmK2UobV0h/1qr4WfBXt2B7JshR+w=;
+ b=mf5Z800uGl2RCMG8TpIfYGJEtGy9Tbma7ixaruXd9BNAEtebzcLPhIiMIz5g4mhJ6KqvtN+iphd9HEBf/TomkoZTTVXfT8wQv19tgbipT3cMipbmX0T1taVklUKV8FvYJY+l7IHYpELNrOhRVP3rfQsWpCwONqa1cFrScF2jAKRjKz01PaOZAj9Y9Dv1bfc6X5o2CJR/7oFe8GFj0Kotk0s8jzuiEIpHR7bPSxsrXy6RFVY3KEpd5Avol60SITfPquetQYN7BmmtiF6po7PQXnEooDTtW8iN0ipZn1oGfJwf3BmMlfbXvuKibwlyouW1ZRbIBGOorQj0aEgQ0gpt5Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by DBBPR08MB10721.eurprd08.prod.outlook.com
+ (2603:10a6:10:530::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.18; Wed, 5 Aug
+ 2026 11:44:57 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.21.0270.017; Wed, 5 Aug 2026
+ 11:44:57 +0000
+Message-ID: <7a620ca6-d2f6-46d6-86f8-990eb8cf3d57@arm.com>
+Date: Wed, 5 Aug 2026 13:44:56 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: lwip: fix TFTP blocksize threshold check
+To: Padmarao Begari <padmarao.begari@amd.com>,
+ u-boot@lists.u-boot-project.org, michal.simek@amd.com
+Cc: git@amd.com, Tom Rini <trini@konsulko.com>,
+ Pranav Tilak <pranav.vinaytilak@amd.com>, nd <nd@arm.com>
+References: <20260805103429.3142222-1-padmarao.begari@amd.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260805103429.3142222-1-padmarao.begari@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P123CA0211.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a5::18) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-References: <20260804-tryboot2-v3-1-b0bc282a923b@linutronix.de>
-In-Reply-To: <20260804-tryboot2-v3-1-b0bc282a923b@linutronix.de>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 5 Aug 2026 12:40:19 +0100
-X-Gm-Features: AUfX_myLGmGgL4m7Omf73tOjZZxTJo7qCRY3FxOXDczheMLCyYnQk3Ll62XObDM
-Message-ID: <CALeDE9NJ7oxNkFe02e913OXiMd=WYQiPzvQoBs98SzL_w2D8ag@mail.gmail.com>
-Subject: Re: [PATCH v3] rpi: copy /chosen/bootloader partition and set
- boot_partition
-To: Gregor Herburger <gregor.herburger@linutronix.de>
-Cc: u-boot@lists.u-boot-project.org, Matthias Brugger <mbrugger@suse.com>, 
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DBBPR08MB10721:EE_|DB5PEPF00014B9E:EE_|DU5PR08MB10852:EE_
+X-MS-Office365-Filtering-Correlation-Id: c447c8bf-6410-421b-cb54-08def2e70e7a
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|1800799024|376014|23010399003|6133799003|11063799006|56012099006|18002099003|22082099003|10067099003;
+X-Microsoft-Antispam-Message-Info-Original: YQP9PtW5TBb8iz49egzd1FbUXK5YmnguaTbtdEht43u7D2FIPBTU+w7PSvWNAD+Rtfv5XIObrKte2KlKYZZUr2SbaQMiwEgRNnQgIV+fcHiFRkGN3VXjrEJ6WsOHwmQTU6oXRclQXQYGzrfUbr3AjG1FZuI1HpQTLPN3w9q46u0eIjBzRgPuXelh0Y/vF5U+pn0fPwdLh9LKmIY/i6nhlVTnsFIEK+74EDOFsp6NLtA3ymPOawaODm+QPhl0wk0juB3xU5mFJWl3ihVzvZBAcBHHAdaBfLU82rxQKGSTPxJ6JPf1nNnqUF837gDmvrP0xrRk7qlMU8DcXg7yj46FMtB2fnoXzGqszQHYXi9tPCMiSnNVauveJY7ugCO0FErjjFi+KiG+4spGT2PycKGFytIZTJBzuw8M64hnQa6Gpzd15DgLzrb0EjKsXzuUoVWytOxFsB2encT1UZm7J5PeKLxA1mITedZq0o48X1jhec7urgNl0jQEx4YMm5iKGtK4cKsYslGge1y3gj6z6FtpKfx3jOo5bL1lB0JV3Ta6rdbOzAFczr+LTd0jVA1FGjF64tPc0eMwBUd0/x592oq/VDKgynGP2X1qqGEIbtsAOiLZLFoAwYTtk6UjBN2dEcBfF3W4ellxvTrTnBduTlOrYB0oJW8LyZdaGSlLbksrhb0=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(6133799003)(11063799006)(56012099006)(18002099003)(22082099003)(10067099003);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: jzVvHsm22nZCVMqlXchq1lPgUjH6oGAhNTkva8Zx1zA/xTFttiwq9vfPzYD8N25k1QgA0GVEcnkqXjoHnvkCuSdGgeOvfAtAhp4L9y/3oJjGVAzTnjayjJCk+O+PhZJ3IE2DGUITnTH493pjVEsoGytSxFXyP2zUkyRwKZPH1REgyn0aSHv4jYb+vQEiu/fSAV2RnJewgurFyTdDMbtGFnNp3PkFHbpUt5xMEl6qKOU7lHzCUqZxTyvbybeBouIWV+hmJFrrENRyAr7ZeQ5Ide+9FeiI+5GKFIrBl4pqEbwPY9/F+GRv1ludg//YlKOkIgFgSjgcL9EYrFO9AkKh/Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB10721
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5PEPF00014B9E.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: f652a3f2-11b8-493f-0ef0-08def2e6f953
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|35042699022|14060799003|36860700016|23010399003|82310400026|1800799024|376014|11063799006|56012099006|10067099003|6133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 2z3VzPLgqp0izJHkKZuO9Ek2Z/igz0aSu39S3TEMXbfQpzzwGnK8p/QzyWZE+dXpptHtxvoIEntUsmryXgj7S/d+SNiwiKNcsJPX+oeni711chELjlxzx5/57utlhG4RbnJ1485oLCgEj2Mof6slLeyX2j5ndZdwShMPB43TbFuyJsDqa/DFWyNIyHPO/vccav/rb4pNFSkht47bdVXk1DqD+PHWifKQe5WgyTtr4D98bOeOIBDG419p8Xk7ceAW50GjOjQa7m7yRXBZr0ZJEE0ZvqeE7GSSnwdUWjuELxMsLQX5f/bhfdd5pIIYNyJ2w7nHndBh5F4ZIOQtvKvTjdYlcKW81miqrhdG61dOu0pBmLm3NBXMce3eAg6dlLhviVhhJwg2Swqf01ZkJHUSQGKzCrydM2DjDWg/k+d1NGT8f0SDAwJzmIKKf4njQJjry88k6i6hqk0o3dMr24Tix/RkhKetK/DK/ee6v0HA/Izfmz0u5DY1uvbYh6M10zqDWUB1WV7wAV/50IXzFJh5gajgMJo5zBa8+edEWqZ61qunVal64rZqu+gosHe9uI/6iGs7LLieay9KRJBssOcwk9N0RSlJt7k0JOY+2+lAmanf+wF75kfGbx1VmvXOaU+Ud/SDQBkIlQl0ckTs63LSSzzZl1vL0wG/axMBjaTPn7Jl3fV+Oy8eTquVcVoeUKUIU+Id0H9faermTj3/Bl3gzA==
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(35042699022)(14060799003)(36860700016)(23010399003)(82310400026)(1800799024)(376014)(11063799006)(56012099006)(10067099003)(6133799003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 0O73Dn9YCHiVzqs1owvcJDsj5Ojpd+T7s6CYpPuynoKNt80FxmdRvK1uuB218J+4fZxKNAeUu+9o9C5B2aiwSiOJeEIY62EWH5DpfDc7moX7vo2ltl/rCT0i26egH79ih/3TtGrocOM8Du1xV3+jOVzq8QMvQffcqeuxaBRwCCYNZ8fTbT4Kzs7sgZGsSDprRPuPbiY7+erJqFC/RkpWgxe7otTsgKrb+QMsrqH+Msjz8JAvHFLbQBpfsa82l0rM5vbBn/rNKqH8dkYnAur9QpuZ+peNuk7HIAvj/do1MQ+AN6hxZHYvCWqigsDm9VjFvIZJuGQY/29Cff1qsYauCm4ZlvQEXKTaM26XRk14ziQDY6Ze+M5BR2UvxQc8q9wjO60fQMsr6Fkn9ycJQk1ITg953Qp+kT7FrxA0f0fXUhvYPODIOAkE9dSE590E3+SE
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2026 11:45:32.6423 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c447c8bf-6410-421b-cb54-08def2e70e7a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B9E.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU5PR08MB10852
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785930033; x=1786534833;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=PebiNkZoHdji+egClSmol7K+QqO6PDOinDTGtodSiN8=;
- b=ff30LqcF0tUkjGRpvqZWq7ngJQy6pDMAeC5zNFEhqCqynU37tqoUZKZumKdaa+LNf4
- RYt5WZl7XG9gsIPtx5LYfJpd68ihjc/WQNK9pAskpTUF9dkSvz2JtyEdc4/a+3G24n28
- rHjWc21bVxOsbMx8BmXNPtDUA3OwU6wu/yZ/9peCNFmS4WlzLK6eW9w7q1AUCvu57mzY
- hdrUdcR9nbkfA1w0Fv0CfTZwCUKiNY0euaZ7OXtRs/HqJ8d+Nm4Esqq6d/7mMyIevI0R
- NjWWVaSVqaMqk0oXCfrxsvzYkEuQyLD67tLXd+KCNorikMCPbhneYhCjT0DmEqMc6/uh
- 4E6w==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W/MQjRbWRkgFxcGmK2UobV0h/1qr4WfBXt2B7JshR+w=;
+ b=GlPvP6wPUO9K8SQvCFaaPr1i0f8whBbclTZ7EBClpG6su5kJBCfbz7ZnwOZU3T2Zw0ZP2puryFiXzVGN3SIhVFo1v0dmNg9i1E4WMbqKa4sg6ZJ+vCDtd4vn1pMYGRv3F72ryPpZHEAW6PMxc0upxR1s3Rj24uw9sznUEzkOVF4=
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W/MQjRbWRkgFxcGmK2UobV0h/1qr4WfBXt2B7JshR+w=;
+ b=GlPvP6wPUO9K8SQvCFaaPr1i0f8whBbclTZ7EBClpG6su5kJBCfbz7ZnwOZU3T2Zw0ZP2puryFiXzVGN3SIhVFo1v0dmNg9i1E4WMbqKa4sg6ZJ+vCDtd4vn1pMYGRv3F72ryPpZHEAW6PMxc0upxR1s3Rj24uw9sznUEzkOVF4=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=ff30LqcF
+ header.from=arm.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=GlPvP6wP; 
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=GlPvP6wP
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,141 +196,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Gregor,
+Hi Padmarao,
 
-On Tue, 4 Aug 2026 at 14:39, Gregor Herburger
-<gregor.herburger@linutronix.de> wrote:
->
-> The Raspberry Pi has the "tryboot" feature where it can boot from a
-> different partition enabling failsafe A/B updates. After boot the
-> firmware sets 'partition' property in /chosen/bootloader.
+On 05/08/2026 12:33, Padmarao Begari wrote:
+> PBUF_POOL_SIZE/IP_REASS_MAX_PBUFS are only scaled up for large TFTP
+> block sizes when CONFIG_TFTP_BLOCKSIZE is strictly greater than
+> TFTP_BLOCKSIZE_THRESHOLD (4096). Since the threshold itself is 4096,
+> setting CONFIG_TFTP_BLOCKSIZE=4096 exactly falls through to the small
+> fixed pool (PBUF_POOL_SIZE=8, IP_REASS_MAX_PBUFS=4) instead of the
+> scaled one.
 
-I think the title and this needs to be updated to cover the fact we're
-now taking the whole chosen/bootloader/ branch of the tree not just
-tryboot or partition.
+What practical benefit do we get by using the scaled velues (for 4096
+that's PBUF_POOL_SIZE=9, IP_REASS_MAX_PBUFS=5 if I'm not mistaken)?
+> 
+> At blocksize 4096, the full UDP datagram (4096 data + 4-byte TFTP
+> header + 8-byte UDP header = 4108 bytes) exceeds the usable IP fragment
+> size (1480 bytes) and is split into 3 IP fragments that lwIP must
+> reassemble on receive. The scaled sizing accounts for this explicitly
+> (giving PBUF_POOL_SIZE=9, IP_REASS_MAX_PBUFS=5), so the threshold
+> should include the boundary value rather than exclude it.
+> 
+> Change the comparison to '>=' so that CONFIG_TFTP_BLOCKSIZE=4096 also
+> gets the scaled pool sizing.
+> 
+> Fixes: 67586012490a ("net: lwip: scale buffer pool size with TFTP block size")
+> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+> ---
+>  lib/lwip/u-boot/lwipopts.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+> index 8dae004f1a2..733478a0cda 100644
+> --- a/lib/lwip/u-boot/lwipopts.h
+> +++ b/lib/lwip/u-boot/lwipopts.h
+> @@ -72,7 +72,7 @@
+>  #define PBUF_POOL_RESERVE               4
+>  #define TFTP_BLOCKSIZE_THRESHOLD        4096
+>  
+> -#if defined(CONFIG_TFTP_BLOCKSIZE) && (CONFIG_TFTP_BLOCKSIZE > TFTP_BLOCKSIZE_THRESHOLD)
+> +#if defined(CONFIG_TFTP_BLOCKSIZE) && (CONFIG_TFTP_BLOCKSIZE >= TFTP_BLOCKSIZE_THRESHOLD)
+>  #define PBUF_POOL_SIZE			(((CONFIG_TFTP_BLOCKSIZE + (IP_FRAG_MTU_USABLE - 1)) / \
+>  					  IP_FRAG_MTU_USABLE) + PBUF_POOL_HEADROOM)
 
-> Copy the /chosen/bootloader node to the device tree.
->
-> Set the env variable boot_partition accordingly to allow boards to
-> create a bootcmd based on the boot partition.
->
-> Reviewed-by: Matthias Brugger <mbrugger@suse.com>
-Given the patch has changed quite a bit you should drop this review tag.
+I realize that this computation of PBUF_POOL_SIZE does not take into account
+the TFTP overhead. Shouldn't this be:
 
-> Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
+#define TFTP_PACKET_OVERHEAD		(4 + 8)
 
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
+#define PBUF_POOL_SIZE			\
+	(((CONFIG_TFTP_BLOCKSIZE + TFTP_PACKET_OVERHEAD + \
+	   IP_FRAG_MTU_USABLE - 1) / IP_FRAG_MTU_USABLE) + \
+	 PBUF_POOL_HEADROOM)
 
-This works for me to copy all of bootloader/ so I'm adding a tested, I
-think there's a few other minor bits needed.
-
+?
 Thanks,
-Peter
+-- 
+Jerome
 
-> ---
-> Changes in v3:
-> - Copy the complete '/chosen/bootloader' node instead of only the
->   partition property
-> - Link to v2: https://patch.msgid.link/20260803-tryboot2-v2-1-30c071f2ee15@linutronix.de
->
-> Changes in v2:
-> - update Reviewed-by tag
-> ---
->  board/raspberrypi/rpi/rpi.c | 51 +++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 51 insertions(+)
->
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 1da5df92351c..ba8a2c1ba4cf 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -480,6 +480,20 @@ static void set_serial_number(void)
->         env_set("serial#", serial_string);
->  }
->
-> +static void set_boot_partition_fdt(void)
-> +{
-> +       void *fdtp = (void *)gd->fdt_blob;
-> +       u32 partition;
-> +
-> +       partition = fdt_getprop_u32_default(fdtp, "/chosen/bootloader", "partition", 1);
-> +       if (!partition) {
-> +               printf("Failed to the get partition property.\n");
-> +               return;
-> +       }
-> +
-> +       env_set_ulong("boot_partition", partition);
-> +}
-> +
->  int misc_init_r(void)
->  {
->         set_fdt_addr();
-> @@ -489,6 +503,7 @@ int misc_init_r(void)
->         set_board_info();
->  #endif
->         set_serial_number();
-> +       set_boot_partition_fdt();
->
->         return 0;
->  }
-> @@ -579,6 +594,39 @@ int board_fdt_blob_setup(void **fdtp)
->         return 0;
->  }
->
-> +int copy_node_all_properties(void *dst, void *src, const char *path, const char *node)
-
-Should we split this to two patches?
-
-> +{
-> +       int src_parent, dst_parent;
-> +       int src_node, dst_node;
-> +       int prop;
-> +       int len;
-> +
-> +       src_parent = fdt_path_offset(src, path);
-> +       dst_parent = fdt_path_offset(dst, path);
-> +       if (src_parent < 0 || dst_parent < 0)
-> +               return -1;
-> +
-> +       src_node = fdt_subnode_offset(src, src_parent, node);
-> +       if (src_node < 0)
-> +               return -1;
-> +
-> +       dst_node = fdt_find_or_add_subnode(dst, dst_parent, node);
-> +       if (dst_node < 0)
-> +               return -1;
-> +
-> +       fdt_for_each_property_offset(prop, src, src_node) {
-> +               const char *name;
-> +               const void *value = fdt_getprop_by_offset(src, prop, &name, &len);
-> +
-> +               if (!value || !name)
-> +                       continue;
-> +
-> +               fdt_setprop(dst, dst_node, name, value, len);
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  int copy_property(void *dst, void *src, char *path, char *property)
->  {
->         int dst_offset, src_offset;
-> @@ -641,6 +689,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->
->         /* copy uart clk as provided by the firmware */
->         copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
-> +
-> +       /* Copy the bootloader node */
-> +       copy_node_all_properties(fdt, fw_fdt, "/chosen", "bootloader");
->  }
->
->  int ft_board_setup(void *blob, struct bd_info *bd)
->
-> ---
-> base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-> change-id: 20260803-tryboot2-8c5221376e5a
->
-> Best regards,
-> --
-> Gregor Herburger <gregor.herburger@linutronix.de>
->
