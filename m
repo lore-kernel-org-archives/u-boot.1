@@ -1,136 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321C3C55ABF
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9AD9C55ABF
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:50:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E2D53607EA;
-	Wed,  5 Aug 2026 21:49:55 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9Zy5iSBAfMcI; Wed,  5 Aug 2026 21:49:53 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A7644607E8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785966593;
-	bh=JIIfK1SPEkMdvth2tLwuE0YsXr8m74o76i26OpHFmqc=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=V1dPrfhhG04BLl4zjgsDr5Jnjh+N14DEckPD3WOp3ZbEAQV1rL0V9Vu/ZThWo40NF
-	 G747d9M6ZgsiIuZSIVrX0irkTB7j/KLLTzp0rjGSVy15coyCI0uLMDGyRvY7hA30VK
-	 BrEYs+GDd/kciq1tIMO9ggRCV0tgedJ4Q+sAVYX9aYjE7xqxHEQiVV5pLc3GGLwwvq
-	 CvVyqZzJ72kKsU2WTHslES+mgNAB/JyGbirrqb1mzvHxeeHRvXKmDwmITO8abm5CYT
-	 jgZBpn3cuYs/mLef5psJNsfziSclbMKxCrOVzsDYcPXjEpDSbdSPFTPx2tNAzBec+F
-	 3TvzpxKIAUCig==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A7644607E8;
-	Wed,  5 Aug 2026 21:49:53 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 53BB610E
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:49:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 45F9380DFA
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:49:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9E9FE80E05;
+	Wed,  5 Aug 2026 21:50:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ny596leTf5Ev for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 21:49:51 +0000 (UTC)
+ id zeUdmZVbw6vk; Wed,  5 Aug 2026 21:50:58 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E7D7D80DE8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1785966658;
+	bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xVQ5D2UCnxzDIgHQm1lEXNvDKTHMS7FOYnFE/WkJ+UBXSmQFP8dsD6RGWjgdguJh1
+	 7nY5Km+Qa7qSB+c8+OQ3tXYBwLt7RzPHjJ5hG7yyxFxHDPvkCFUfXCoHjRE3NvT1pX
+	 0pk1Rt7BOdPESPBqBdRe/1EMPEHEywZeB1SLbm9HHu7HK693wZHGyKN7li6JQSqw4z
+	 dvjbkRXzVqAERTj2+4kQqWOfH57k0kW60tt7ui988Mr+eCXjZboyZZChxZcvkDUToC
+	 Bxbrh0DR0ITTFwwPid1aEQmi2N0/ogAzw/KxQ57g1eUeKf8K9YUUIkDQ5TQQ9rNAnd
+	 JUoE7lecNcRGg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id E7D7D80DE8;
+	Wed,  5 Aug 2026 21:50:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2203A2B6
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:50:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 083694024F
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:50:56 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QVMBnm3T0qjm for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 21:50:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
+ client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6580A80DE8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6580A80DE8
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6580A80DE8
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:49:51 +0000 (UTC)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6983d3dae7aso540454a12.0
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:49:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785966589; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0D47A40249
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0D47A40249
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0D47A40249
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:50:54 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4a18180so2217467a12.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:50:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785966653; cv=none;
  d=google.com; s=arc-20260327;
- b=otEE6jZxQNQn44+Gml1C3ANcDdfPywkEMss+8N+3MbrzYdSJ/NEFWpNqKyX5uoBRq5
- /yzwirEpsq1MMeoYvzl5iN6RDpND3vpyTAsoV7rvhZHalpnfRcH0Vwl1TXNKyJeboOSp
- OkSj3ZyGNZcY+jDD3shM0k6/FtK2eXJooYKtEz3xHy2dhVcdzEkX9kALl/2uwd6SuecV
- 9xiqKzS+W/eJy3CB5EV3kAWqo7vkPR/TLqYsTzEGlAcaB/McEGmsdSQfBp05t+n5IlHb
- uUEwRgLpdbTPsKWimnCHOfeUswtjnYmYKZUf1Nfn7Ai+e08XGxuph+KwCrjHkkXgHFII
- Nv9w==
+ b=TcT36nxNr3rehtIrIUgoF9vYlUNrqfeaYe69SfJVloFTYJ73OwmrPDs+dAWhSdDFPV
+ ditb8w3wG1I4HEPRq5WAFLaTAC6iFkIDBoOyoS4D4xX6djLxQIMw0frz8FF2stU5dGxb
+ tykDjPSJfnF/eOhCtkSu8SW4P5H3+s0f26zDOpBLf17sC//bMk0CmqpuphdmR6AEulqV
+ UsU3GiN1Df484L7sA/fPRtuesYh09sOEsRszUS3LhNLaLpIq+gFXyr+PbcKuLW6rmbyu
+ H5QFPXOR0U3WHVwk9AIp+kgG2HySpBzE8ixjdgjb6dQsfIqpk9+LVikGnMbOQxBM5Z3h
+ P8OQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=JIIfK1SPEkMdvth2tLwuE0YsXr8m74o76i26OpHFmqc=;
- fh=eybldZBXeZ25kcSUWgn0EFj7euTPyUYAWUYWgJkJ5MY=;
- b=J2PCbPso1Sq4LiZWBmBVZa3J6a1s40OkraY8RaEzxEtcKNuW1Ny93KBRFAyAXigIRD
- nqCRn9Wy6vuw7C+XJDV0JD2XfvUtUMMCZMHvOqnQaDT/enSQHOaV82PucOsi9NmdphEX
- 59U2Opo1fLOu1wjU39mUOUpqL28wVSqkjCUWA8IdxqFWFJEoxs0VwXe/Kgmusd3K8Cnf
- RhNLw33crcJsg7f7Ba29roWujeFgv5YBwcs/ancL4gYV9wh4mlq7qn1I4SOt2NepGQ6K
- XzwZuYam08fSfiCZ+FRLxYEUi8s8KSPih8i/LxJAuttH6UImtVJ1tO1odbWSrSj01I06
- lszA==; darn=lists.u-boot-project.org
+ bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
+ fh=TZ92kOw2oMh3nws5P2EBVYMFrgSgvj+F9AAwJ4owneA=;
+ b=RZa9X+dHH/tHIGhKLi0MQrq/5HOp37dw2MEfnlMbgWFVdR4l1/WGRj8YQdYSISGTOt
+ erNHhcyJ+iHL9pPr+8g2t8Gm6skSViTCj/9IKXEmBzF70WPTeV+jk9zrzxloj4wUO7dr
+ r9L/cQ1VYRoT2beE1Y3FtkM0ML6puFa1ocRlfEXrtnqS/MpRJCqg3N2/6ffeoJbAED3M
+ +l+900mz5TSO/kyL2ZthYuQbEW0FhqdEw68Eou2NEYKgp6gaGmr9n8S4nIzwEdCGPg4/
+ zvwpDjL0VgG1Jt/gar7go1pqufxOMMGw9m7TExedUcjN3QktzMtV6bTPmERLV/A+hOHz
+ I3VA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785966589; x=1786571389;
+ d=1e100.net; s=20251104; t=1785966653; x=1786571453;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=JIIfK1SPEkMdvth2tLwuE0YsXr8m74o76i26OpHFmqc=;
- b=Q98WV3Y18pfUFDxu1WfEjasF19wzkoAnh+l8+XvPMbKOfnZXV41ExwAGWfd8d/xAxk
- FosylZMPPUoR2PGYBOLyuME6n0n58HKcSeHilp/+qoczGsGwdZkExWUnxJTYBltJ2GaI
- FzLzw9UfG+ZnyCahhSdBKQhSiEIBtptAynqnr/oRM+uw/5mkg4RAHwcSvUGVmtryvC5p
- 18YyDoP9SF7MPCxI4p743EozUDOo6v7M8KvYjXvaWdaTdJhPcWSXlp4kQ8W/XZcdesbf
- Tz7PASfd/5uo3JGZrGc3HH6Nmj+FxqLzYJxp2zv+qoDBx3kQ8dGjW76HcneUK0pTkHdC
- O/jA==
-X-Gm-Message-State: AOJu0Yx08CLr7UEd8yCU4yItqqH31hd1sujlAaQDd/Q8up/+q4qGiroQ
- 9hw+dHF9syEpCqXpNq9mjVNCGfS0RjrySCAV+qfNPm0JmN0FxxyHhIJ7WylB6B0hJoD03yOfxtH
- KI8YKBfrgNvCJnyDWnPy0LATe4OgSaSXZOAJBKCqD
-X-Gm-Gg: AR+sD13OyC8LV5VLnMAcsrbipnDLnjC7ZSOXjgNz4nadd1MF59W2Qzbw4NAZ5UZ2jav
- dnICcyLNqWalkOaWijsNua7BaVZrBriMK/7eVnuQwN9ASR3tSdRo+mSjCUDMxuRImyu6v1BwBJV
- x55ptY7k44GFO5vDVhkrURCIvbjEAA1S1NaszTBKa6wMyX6XnlxTbaKWREYOIsiyD8+L4oWPWyQ
- h69VKEMZdc2KnnTwCvFhuGrAzIvAEuJUs/HWfGxKoqspVWzxdAnNQac0DeiI9CFcy90Pxrm8kKa
- esFF1eFZzTsInpgtcIXLh2oyDKkK/CLmohhb+K1WLAE=
-X-Received: by 2002:a17:907:60c9:b0:c1c:2253:7744 with SMTP id
- a640c23a62f3a-c20580de181mr120281766b.16.1785966589442; Wed, 05 Aug 2026
- 14:49:49 -0700 (PDT)
+ bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
+ b=kIMujjMdgTrmBhJH5h+NWBetuyLVtatoRTYeVVZdlQTF5/AlA9ETMi7jOr6NoW68DA
+ DYYXSBLVX+3k3AZ8PyZscFy7MDAShYbkbnELun/R4XZhZhLQqwT5X9VdI1i1C3cxNoxc
+ ggA7DQFvj9Xab8ezvh+EQ8nnsbeieFQ2QajGqfSFVGI8F9HQiy9rN1Nsf3D2aLmiLWd0
+ 3tg7WhnvAuDa6Yn+oQbLbAMcZ8xpx2tm3vKSTEYc8LImSZuBzhKLr/06tJ4IrT52QboP
+ dXkZ3bh4PcCoT15LDvd9v7/Q4V1EJZVgM/Ck8X4WpTy1MjxV65RSaTvcXw/w6DR1kCGE
+ zP3w==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr3g8ldzIoEPp9N80wkS7zBQli9/t1NCkrLAeFDfSKLt/vFZ75Hq5ekRZo02c0D2W3pLSYZuQ4=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyMvgxAeacNjwJzOH37A2HQdTgg0yTR4k+/faZO6xeh9FE5UGlB
+ jyQ8KLNt1agof9lBxY9Iasbr1vLgIUZsTc+hljB23F+zPZEvLADlyoRu6K22opC0ro7aXrmnzCd
+ DbC8I7c61iBadGbnEtqOwlN2qOfJ5xCcuzgwvMq95
+X-Gm-Gg: AR+sD11rcSKbEATIuR74aWu5CAcrfXJj8xU/PJSP8BE4UDEPZQwbKuDhsOIcuW1MWQ3
+ 4+3ynxE2/NhvmjLef6J7PRbprtF0i+fGG+pFalLdsEpk5iADn8mq9HUo8q9VxQ+whGBSB7sqx6N
+ lTdN4UhYJWcZhbPpfzRiGKjpw+9MODTq5c4ep2pmojGuYDbhehUa+lJ1aeIwH6TTXv5RI+lFj+8
+ lpAc3ScpUiC57LL1QzHKkw5Sd2AW7diAgOMgYFWJfp5qxtvCdpADr+YOTVhjakSyaZikq8pur8X
+ 2YAFr0J1Oh9GDYq/vYyMPrCGyOTHKDbryqV2Ia1Ebxs=
+X-Received: by 2002:a05:6402:210f:b0:698:9e5e:5df8 with SMTP id
+ 4fb4d7f45d1cf-6a14f104406mr6056332a12.7.1785966653142; Wed, 05 Aug 2026
+ 14:50:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260730-b4-fit-ext-data-hardening-v1-0-4a6b91e37b51@binarly.io>
- <20260730-b4-fit-ext-data-hardening-v1-4-4a6b91e37b51@binarly.io>
-In-Reply-To: <20260730-b4-fit-ext-data-hardening-v1-4-4a6b91e37b51@binarly.io>
+References: <20260730-math64-resync-v1-0-8792d9119d49@flipper.net>
+ <20260730-math64-resync-v1-1-8792d9119d49@flipper.net>
+In-Reply-To: <20260730-math64-resync-v1-1-8792d9119d49@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 5 Aug 2026 15:49:37 -0600
-X-Gm-Features: AUfX_mwVRzB3jlfTWWjg0Znm5qSm8W3dVQOcirWN9NNee5TUoJJ9wH-OouvqqtU
-Message-ID: <CAFLszTgsCJXAnEkS2eUWqwW9iE3Y7_XithnDQzaNiVnNr18X+g@mail.gmail.com>
-Subject: Re: [PATCH 4/4] spl: fit: Bound external data like U-Boot proper
-To: Anton Ivanov <anton@binarly.io>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, 
- Daniel Golle <daniel@makrotopia.org>,
- James Hilliard <james.hilliard1@gmail.com>, 
- Aristo Chen <aristo.chen@canonical.com>, Francesco Valla <francesco@valla.it>, 
- Anshul Dalal <anshuld@ti.com>, Randolph Sapp <rs@ti.com>,
- Binarly Research <vr@binarly.io>
+Date: Wed, 5 Aug 2026 15:50:40 -0600
+X-Gm-Features: AUfX_myxnv8Z4tPSpM6EKF6Idjd3RZdU4ku8v-coz-U6Lmr0DXJexFMMN_bswIE
+Message-ID: <CAFLszTiNHH-Toq9qHhjB3o2dVE1xG8_q5AtpR-yjZcOF6VTwTQ@mail.gmail.com>
+Subject: Re: [PATCH 1/5] lib: div64: fix off-by-one shift in div64_u64() and
+ div64_u64_rem()
+To: alchark@flipper.net
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.u-boot-project.org, 
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785966589; x=1786571389;
+ d=chromium.org; s=google; t=1785966653; x=1786571453;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JIIfK1SPEkMdvth2tLwuE0YsXr8m74o76i26OpHFmqc=;
- b=XZSlGOiTyGqGi6e3DrwGzlGthAiHdvDMp6hSKw1oZPBcIKjJD9UeWVMcppTyApu+Jt
- 1pOc8iS2rNSBLb6m4x6HX5X4xCl4TZLsO68w7PKoqItG2v5xfe3hZ1ETDlA1wBq9fkxg
- pOiREhc9snJYxaHWz3ecVE6d3ac4L3uZ86Cbk=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
+ b=CqhpQQrtFLiIZvKH60c1UB8XzAUeI1w60ZxgHhNd2jAlvNs35Z55w082J2GhBTYm9U
+ ufefH3DPPNMtbQrwz6Wp9+vilMsqcALZaIKKgOCCPNv/0324tsWGDwbsdlVps1PYXBri
+ F0Qu1ZbXVcO1VyfwtCAcmZxzKPcd4o2PHeRMg=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=XZSlGOiT
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=CqhpQQrt
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,23 +145,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-30T15:03:40, Anton Ivanov <anton@binarly.io> wrote:
-> spl: fit: Bound external data like U-Boot proper
+On 2026-07-30T18:40:37, Alexey Charkov <alchark@flipper.net> wrote:
+> lib: div64: fix off-by-one shift in div64_u64() and div64_u64_rem()
 >
-> fit_image_get_data() checks that the external-data region fits in the
-> addressable range and, for signed FITs, stays below
-> FIT_SIGNATURE_MAX_SIZE. The SPL loader had no equivalent check, so a
-> hostile data-offset or data-size could make the read offset wrap past
-> ULONG_MAX, or the destination range wrap around the end of the address
-> space.
+> fls() counts bits starting from 1, so shifting the operands right by
+> 1 + fls(high) discards one more bit of the divisor than intended. Both
+> functions estimate the quotient from the shifted operands and then fix
+> it up with a single decrement/increment, so an estimate that is off by
+> more than one cannot be repaired and the result comes out wrong.
 >
-> Add the same check to load_simple_fit(), using the block-aligned read
-> size and the source pointer the read actually uses.
+> This only affects BITS_PER_LONG == 32, where these are the out-of-line
+> implementations; on 64-bit the header provides plain C division.
 >
-> Signed-off-by: Anton Ivanov <anton@binarly.io>
+> The error is only reachable when the quotient is large, which needs a
+> divisor just above 2^32. For example:
 >
-> common/spl/spl_fit.c  | 26 ++++++++++++++++++++++++++
->  test/image/spl_load.c | 23 +++++++++++++++++++++++
->  2 files changed, 49 insertions(+)
+>   dividend = 15559272575191414037
+>   divisor  = 4333540799
+>   expected = 3590429465
+>   actual   = 3590429468            (off by 3)
+>
+> A sweep over 6.4M random operand pairs, stratified by the width of the
+> divisor's high word, mismatches a __int128 reference 8260 times before
+> this change and never after it. All failures have a divisor with one or
+> two significant bits above bit 32; uniformly random 64-bit divisors are
+> closer to 2^63 and yield quotients of ~1, which hides the problem.
+>
+> Port of Linux commit cdc94a374931 ("lib/div64.c: off by one in shift"),
+> which fixed the same code and cites [1].
+>
+> In-tree users of div64_u64() that are built for 32-bit targets include
+> the Aspeed, Meson and Cadence TTC PWM drivers, the Versaclock and
+> wrpll-cln28hpc clock drivers, and the DWC3 USB core.
+>
+> Link: https://bugzilla.kernel.org/show_bug.cgi?id=202391 [1]
+> Fixes: 0342e335ba88 ("lib: div64: sync with Linux")
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+>
+> lib/div64.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
