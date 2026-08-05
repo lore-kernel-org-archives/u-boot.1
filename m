@@ -4,122 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10978C55ABF
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 20:03:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A61C55174
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 20:12:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ABF144081A;
-	Wed,  5 Aug 2026 20:03:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 139C2407CD;
+	Wed,  5 Aug 2026 20:12:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NvUv1SgX6t0y; Wed,  5 Aug 2026 20:03:32 +0000 (UTC)
+ id PbSn5EJN2rWw; Wed,  5 Aug 2026 20:12:55 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9F7C1407CA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8098A40435
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785960212;
-	bh=5OqGdifjN0X/8DrFO6Exs5+PnNDbBwEoSn0K30bviMY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PGX9pWChwV9zfu8KQG3+QReZY8Enir3y9Ht6Y6vA0YATyEIUmLVg76j/bXd9bejkt
-	 1ZCuKCmqSf/5tckFwIqhMlRZu8p6iLDS03034TPNAc+Hi2Qj3pmGzwVjqqpacRs3Yk
-	 xWDgPzW5Rh5kP7bdSw72K+fylhcAgRgU6wQkYj60yuJqozhIBykvWP6D3993g0bTG3
-	 5m9sXxo4ny7xTHxAQ0Nnj689L5jx7PfM0OXEmUXx1hVtHctNzuXiVUCr9AdlrA10/O
-	 MRt243pi8rHfTmhGr4l/ShvZAMvKx/YJ+ZKS+zJAsriozdsLh/lE3glq7pYO13Mrox
-	 2gaaw4PsX0XKA==
+	d=lists.u-boot-project.org ; s=default; t=1785960775;
+	bh=8syyKHikVWquhzysvWMXrf+jdNf7vnFhYy43Uqdq+VM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=BF6h8CIeD5Dzn/sCdp1ONA109/iyYlZlq4tjyu61puOGwg6ldWxD8Fh3/bY5Rtybb
+	 C3+G/OLCeBYGJ7C1G0oVybszP1bGW93F91L504qkZnlhVJoaX7/zXeyADRqkJ5WApE
+	 UJKssfncsIH7Nc1/4DOh3/3OhHhF0XW0FTn4FqwTFmVrwYwkZi56DPHTlsnoZsWX1x
+	 2kOohvs6UcsunNSvfNWjmQMJX6hLtbHmEGn/3gbx84RuszcjKrE8H4En2ibomJwpxv
+	 DAiURXQRWwmRElZaNcXv6D4th994Lng9Xlz1kG/jHL2G1yfAaI86QTBlcynEocBvS/
+	 qI3ieexpG9fTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9F7C1407CA;
-	Wed,  5 Aug 2026 20:03:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 41C4A2A8
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 20:03:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8098A40435;
+	Wed,  5 Aug 2026 20:12:55 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C52AA397
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 20:12:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 33D6C607D9
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 20:03:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id AAEE880DA9
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 20:12:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uhkT7480nHuw for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 20:03:30 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MLzZ4-3DqmRg for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 20:12:52 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::335; helo=mail-ot1-x335.google.com;
+ client-ip=2607:f8b0:4864:20::22e; helo=mail-oi1-x22e.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org EE798607D8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EE798607D8
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EE798607D8
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 20:03:28 +0000 (UTC)
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7ec49608332so775030a34.3
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 13:03:28 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 40B6680DA5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 40B6680DA5
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 40B6680DA5
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 20:12:51 +0000 (UTC)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4a46a53abc9so864748b6e.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 13:12:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785960207; x=1786565007;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1785960771; x=1786565571;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5OqGdifjN0X/8DrFO6Exs5+PnNDbBwEoSn0K30bviMY=;
- b=rwJE0A674XH2wwsWMSts3VNIeqhmktMjC6vTBp36Pf46uMuE/XGaFSYvwMgqB/JNos
- Z/Ju92VGSK+H/wJzTzjBHdY3fRqmdXXdGKWc4tLDKcCJ6ySGqavRfkj7TuZA1LIDJxWC
- WbeJjy1onPvT1/G28A9UOlLwLS/hxYKJB0zmCx6G+dwZDKAnJP9vgs023rcSJ+GnyP83
- eOOZfKCgwnUzJ/XKXByQLpisDnoOBweduKfAIepFgRK+DNstRj2J3KI6ayE9TgmL79ax
- /Uv+uukIYOgYzsYjlez3z4XkOZxq8DjImcPQE8nMPhEvhaJsqgYaFA2vnMnVEP9FLbQh
- raIA==
-X-Gm-Message-State: AOJu0YwGyZcJFh41z1Nfs0BF2kCTdi/npO6j/8xKFhqbQ4GQ6pBF9MM5
- TDBPu3vGA500tOptdvtpKZux77/9sea8gjQUxKTMJFZvFs0/VrKX1CpI7mam8CWCQzEwSdVSVNE
- VKydXNgI=
-X-Gm-Gg: AR+sD10e7baQfPnfbObQBD3zEz/taQqyFQ9u0ILhyLIsi2Z7yOnehXSPkbvTjn3uli4
- eoRghHwbYXeesIZFvlf4yO0jUzH8F66d3fRhyqKBpdzfqamrkLELxoGJHpK382SOMMMih8GLPsK
- llsDw1ksm10avYWjfXpS9T5Dx3nJfDwtSxFFh/v/y+LM7IsDraLkE8gB1mSQXotvi+PY05eV1Xl
- nxZI52Vj0b5U+Lkx2D6cHffBIpVPk1RjpKB+tLRj+4tmqrYkS5dA1iTiS5rsyW5iZJ9V5pTWOKy
- hqwJvpRrrXDxriFVU3/Gou3nV9lvLeNJL5EtjS0mmS2zD5hKeYXf9kRM/ZlVHrYXVtFjeBCoS36
- incSjO/CXiMF0/tbdM5IB1aNrorKsYZXbTVSam5pc0sEl+nCNk9ujyHIe+ocQYu2rRwDqkK/skx
- wgrSQaqH/lDOGis/Hd5BGr0yiU831iP+Fr+tZ4KYlMnj5v2BdmA/vcPEbg/f5rqRXvqAf+90B51
- Al6Aq+dnt5A+eYuI8mTH8dnUYRsStsEL1gMreZuyxVXX6eb/g==
-X-Received: by 2002:a05:6830:828e:b0:7dc:c4ae:a689 with SMTP id
- 46e09a7af769-7f1e5c13d47mr6360158a34.2.1785960207586; 
- Wed, 05 Aug 2026 13:03:27 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:ebef:9550:d591:36ac?
- ([2600:8803:e7e4:500:ebef:9550:d591:36ac])
+ bh=8syyKHikVWquhzysvWMXrf+jdNf7vnFhYy43Uqdq+VM=;
+ b=mLNrPBGV+ElWTBJuV9lhF2ShowE81hESoOjyqG38jmhqJP9FfEWZw1PkhexKXfmYgI
+ L03YsSV2Qy6nc9SOvdQ74vtMyr5GvDkz8e1TF1u0FHQwEAOK0U1k5M84+PtQpkcZkwIL
+ W13XqtlbcgSdFrldsbA73gRbOLOKcgqeIY4EGGfogXafA4uplulbQQiV07opzPoNtddq
+ LW8qa21qIfNqEbmxr8VDVyiTdLs2EdvBGYCb2QYcE/yrTUeS39oeL+phOa55pgQB7D1T
+ BmCnnXhMMQxpvwvDE5RpEcMeQw4+aJbVBltbCfIa4EEbiBP+EhTVZAmlZc6wwTEuKwY2
+ VhcQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrwoNHCeK+AhRg4UyJkGmSGh+W+XIq/lIGkQ/swq2f70u9Z+gkxUkky8Ordv+5wQNDRwTuz6DA=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yy6w7KNU0CHwtNV7J3o8yX5Tll33MFcdDCdCgGyMlHiVGdkxhEA
+ JA5S5lSHH218pqbCCT3u2OfMcVzeF+wlikfhkufWuth5TrtCst2wSDr/sjoXvG+HrZs=
+X-Gm-Gg: AR+sD10jgQ8zz9I6cnkluyrCALKdeo3ODtAAunhJqpEXqvOLjpkdtAl9+p+rLKepiFj
+ eHVb9HCdcfmJHqkurcvvG7GHi3ACjygVywMQNkoEauSgshCUAaokFcp+PT13KTole409eiouNqQ
+ pTahOJEz7pSaP0e6uNs61ZN0h1LmU68lZv0+GwvPe7yZ2+ofm++fl/zvrh4qR3Uq59pOqBpIMmi
+ pxs92SOzxTmadKoEZ4xj4CZiWBi2AodB0knnc080kAdj5BXdf/XQmXNjsvDRn7Jlmd8ILbxCN9V
+ XdtFNqE3EbVC0VkLo/kNf0XNSRvkSKlyZj7Q9o+aEfWAhB3itkOLOQ7ciOQAt4OTpb+shCRLQnT
+ RFscbS3yyOME6FvSipvEIMKHlafUkOc27DJGKrnbLyS1WgCV/tibbh/olVuaX9w02Sg6XYzDffo
+ FqnrYFU6s0HQ392g/ujsyRHowM05W2CpV68ZXvjliihfSKePOHtHuctXHZurEA6l4=
+X-Received: by 2002:a05:6808:524b:b0:496:892:c58f with SMTP id
+ 5614622812f47-4afaddd8294mr5023704b6e.2.1785960771001; 
+ Wed, 05 Aug 2026 13:12:51 -0700 (PDT)
+Received: from freyr.lan ([2600:8803:e7e4:500:ebef:9550:d591:36ac])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f1df33da38sm3330876a34.7.2026.08.05.13.03.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Aug 2026 13:03:26 -0700 (PDT)
-Message-ID: <35d9c43d-8d9c-4dd0-889c-7ee24fd81a7e@baylibre.com>
-Date: Wed, 5 Aug 2026 15:03:23 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [GIT PULL] Please pull mediatek-for-main-2026-08-05 into main
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, GSS_MTK_Uboot_upstream@mediatek.com,
- Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
-References: <20260805195116.2512286-1-dlechner@baylibre.com>
-Content-Language: en-US
+ 5614622812f47-4afae45b630sm2949689b6e.1.2026.08.05.13.12.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Aug 2026 13:12:50 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260805195116.2512286-1-dlechner@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Tom Rini <trini@konsulko.com>
+Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org,
+ GSS_MTK_Uboot_upstream@mediatek.com,
+ Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
+Subject: [GIT PULL v2] Please pull mediatek-for-main-2026-08-05 into main
+Date: Wed,  5 Aug 2026 15:10:33 -0500
+Message-ID: <20260805201244.2615610-1-dlechner@baylibre.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1785960207; x=1786565007;
+ d=baylibre.com; s=google; t=1785960771; x=1786565571;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=5OqGdifjN0X/8DrFO6Exs5+PnNDbBwEoSn0K30bviMY=;
- b=j33B1E1PUPXMCHk7UYFcvCUWqEuhTe5bWIUaYNHa3WAchDyDNm32UWtTFylZ7vdCvU
- ASdeZRjboJ0muxQi7SKIJyrLwGujNygvhIG9hQ+wDhMiE3ldPbOO92UKEwRRjf9uC7S5
- duUFd+NBbjbZjy7e8RZsTmBsZF6s5JBl6Sgjos6az87sYbFHck8jacz5NBUslbMITm5w
- LCAJ0FagaQHhYjpzfRPG3RWqbtl7ht7ncg3WL66MDZgy4TqdO64pn70ybFRmsGx75eZv
- C9VZkR69UWZxoIVmVhNqePGHH/jbA/FIJUkMyY3CAJJkNYcg9XgEHhVjjCOm/2GHJ946
- tGrQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=8syyKHikVWquhzysvWMXrf+jdNf7vnFhYy43Uqdq+VM=;
+ b=D+kO4jVSi4yDf7rmDq6l3nZasDefqL119oiBQxy3cpbXr2/D0ncrLVEZjS7k950rxh
+ OEt5aDPAA77MMwvzNKfFPvay0P2nE6Be706WlTWICvknOsKgaoGvkbgc98Ec7gqv3cfK
+ nLIzgaK5h3z6K4O5qRnKL6+jkaR+h2J17oqfMOC5cjhp7txPPnXWq7R5lFGQmvg0KNCN
+ SQqP17pSDzltjFU6fsV16xs3lMr6F1cj6GttD2v5yiXvVGY7qrV7o/UKK/1kgAGMqJ6y
+ UB+llko8Bayxhn71SCo43aWHlNjlUl7SCnBrNTBxUK3DbDvI7/hvquR8rW0aJ9Ec0okd
+ 6TMA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=j33B1E1P
+ header.a=rsa-sha256 header.s=google header.b=D+kO4jVS
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -134,38 +126,91 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 8/5/26 2:50 PM, David Lechner wrote:
-> The following changes since commit baa64b2f892890f00a377eac4a3e685472bb56b5:
-> 
->   Merge tag 'efi-2026-10-rc2-2' of https://git.u-boot-project.org/u-boot/custodians/u-boot-efi (2026-07-31 08:55:30 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-main-2026-08-05
-> 
-> for you to fetch changes up to 164113e995822052aaac44b34b238f595596c264:
-> 
->   clk: mediatek: mt8188: fix top0 gate polarity (2026-08-05 14:46:59 -0500)
-> 
-> ----------------------------------------------------------------
-> * Clock fix for MT8188 (Genio 700/520)
-> * SPL support preparatory patch for MT8188.
-> * Compile error fix for when enabling LWIP network stack on some MediaTek targets.
-> 
-> ----------------------------------------------------------------
-> Carlo Caione (1):
->       arm: mediatek: use phase-aware PSCI reset on MT8188
-> 
-> David Lechner (1):
->       cmd: ufetch: fix compiling with no CONFIG_SYS_CONFIG_NAME
-> 
-> Julien Stephan (1):
->       clk: mediatek: mt8188: fix top0 gate polarity
-> 
->  arch/arm/mach-mediatek/mt8188/init.c | 2 +-
->  cmd/ufetch.c                         | 4 ++++
->  drivers/clk/mediatek/clk-mt8188.c    | 4 ++--
->  3 files changed, 7 insertions(+), 3 deletions(-)
+v2 changes:
+* v1 was missing most of these patches.
 
-Oops, I accidentally dropped some patches I had queued. Ignore this one
-and wait for v2.
+The following changes since commit 616c3d79f01cf9204e38738857c4647a730dcb3b:
+
+  ram: k3-ddrss: fix ecc range checking bug (2026-07-28 12:30:55 -0600)
+
+are available in the Git repository at:
+
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-main-2026-08-05
+
+for you to fetch changes up to 6a77840b2f01e98bbad157fd1984a2dce2a3eecd:
+
+  clk: mediatek: mt8188: fix top0 gate polarity (2026-08-05 15:05:37 -0500)
+
+----------------------------------------------------------------
+* Clock fix for MT8188 (Genio 700/520)
+* SPL support preparatory patch for MT8188.
+* Compile error fix for when enabling LWIP network stack on some MediaTek targets.
+* Fix a regression in clock driver binding from the previous PR.
+* Add display-related clocks on MT8188.
+* Another wave of clock driver refactoring and de-duplication.
+
+----------------------------------------------------------------
+Carlo Caione (2):
+      clk: mediatek: probe parent providers on demand
+      arm: mediatek: use phase-aware PSCI reset on MT8188
+
+David Lechner (2):
+      clk: mediatek: drop probe-after-bind provider setup
+      cmd: ufetch: fix compiling with no CONFIG_SYS_CONFIG_NAME
+
+Julien Stephan (34):
+      clk: mediatek: mt8188: deduplicate clock gate drivers
+      clk: mediatek: mt8188: use driver data to store the clock tree
+      clk: mediatek: mt7622: deduplicate clock gate drivers
+      clk: mediatek: mt7622: use driver data to store the clock tree
+      clk: mediatek: mt7623: deduplicate clock gate drivers
+      clk: mediatek: mt7623: use driver data to store the clock tree
+      clk: mediatek: mt7629: deduplicate clock gate drivers
+      clk: mediatek: mt7629: use driver data to store the clock tree
+      clk: mediatek: mt7981: deduplicate clock gate drivers
+      clk: mediatek: mt7981: use driver data to store the clock tree
+      clk: mediatek: mt7986: deduplicate clock gate drivers
+      clk: mediatek: mt7986: use driver data to store the clock tree
+      clk: mediatek: mt7987: deduplicate clock gate drivers
+      clk: mediatek: mt7987: use driver data to store the clock tree
+      clk: mediatek: mt7988: deduplicate clock gate drivers
+      clk: mediatek: mt7988: use driver data to store the clock tree
+      clk: mediatek: mt8183: deduplicate clock gate drivers
+      clk: mediatek: mt8183: use driver data to store the clock tree
+      clk: mediatek: mt8516: deduplicate clock gate drivers
+      clk: mediatek: mt8516: use driver data to store the clock tree
+      clk: mediatek: mt8518: deduplicate clock gate drivers
+      clk: mediatek: mt8518: use driver data to store the clock tree
+      clk: mediatek: mt8195: deduplicate clock gate drivers
+      clk: mediatek: mt8195: use driver data to store the clock tree
+      clk: mediatek: mt8365: deduplicate clock gate drivers
+      clk: mediatek: mt8365: use driver data to store the clock tree
+      clk: mediatek: mt8512: deduplicate clock gate drivers
+      clk: mediatek: mt8512: use driver data to store the clock tree
+      clk: mediatek: mt8189: deduplicate clock gate drivers
+      clk: mediatek: mt8189: use driver data to store the clock tree
+      clk: mediatek: remove the dedicated clock gate code path
+      clk: mediatek: get the clock tree from the driver data in mtk_common_clk_init
+      clk: mediatek: mt8188: add display related clock driver
+      clk: mediatek: mt8188: fix top0 gate polarity
+
+ arch/arm/mach-mediatek/mt8188/init.c |   2 +-
+ cmd/ufetch.c                         |   4 +
+ drivers/clk/mediatek/clk-mt7622.c    | 208 +++++--------
+ drivers/clk/mediatek/clk-mt7623.c    | 117 ++++----
+ drivers/clk/mediatek/clk-mt7629.c    | 167 +++++------
+ drivers/clk/mediatek/clk-mt7981.c    | 125 ++++----
+ drivers/clk/mediatek/clk-mt7986.c    |  66 ++--
+ drivers/clk/mediatek/clk-mt7987.c    |  67 ++---
+ drivers/clk/mediatek/clk-mt7988.c    | 138 ++++-----
+ drivers/clk/mediatek/clk-mt8183.c    |  51 ++--
+ drivers/clk/mediatek/clk-mt8188.c    | 564 +++++++++++++++++++++++++++--------
+ drivers/clk/mediatek/clk-mt8189.c    | 104 +++----
+ drivers/clk/mediatek/clk-mt8195.c    |  46 ++-
+ drivers/clk/mediatek/clk-mt8365.c    |  45 ++-
+ drivers/clk/mediatek/clk-mt8512.c    |  85 +++---
+ drivers/clk/mediatek/clk-mt8516.c    |  45 ++-
+ drivers/clk/mediatek/clk-mt8518.c    |  45 ++-
+ drivers/clk/mediatek/clk-mtk.c       | 162 +++-------
+ drivers/clk/mediatek/clk-mtk.h       |  24 +-
+ 19 files changed, 1061 insertions(+), 1004 deletions(-)
