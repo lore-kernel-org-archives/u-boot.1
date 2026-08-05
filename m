@@ -4,133 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9AD9C55ABF
-	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7618C55ABF
+	for <u-boot@archiver.kernel.org>; Wed,  5 Aug 2026 21:53:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9E9FE80E05;
-	Wed,  5 Aug 2026 21:50:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8D66D80E12;
+	Wed,  5 Aug 2026 21:53:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zeUdmZVbw6vk; Wed,  5 Aug 2026 21:50:58 +0000 (UTC)
+ id LA7eo2aoHOo3; Wed,  5 Aug 2026 21:53:09 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E7D7D80DE8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 40F9480DE8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785966658;
-	bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
+	d=lists.u-boot-project.org ; s=default; t=1785966789;
+	bh=fMbVQt3vlvjz8zudhKAOx18EB46q2+NpxC9eFAMcZrA=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xVQ5D2UCnxzDIgHQm1lEXNvDKTHMS7FOYnFE/WkJ+UBXSmQFP8dsD6RGWjgdguJh1
-	 7nY5Km+Qa7qSB+c8+OQ3tXYBwLt7RzPHjJ5hG7yyxFxHDPvkCFUfXCoHjRE3NvT1pX
-	 0pk1Rt7BOdPESPBqBdRe/1EMPEHEywZeB1SLbm9HHu7HK693wZHGyKN7li6JQSqw4z
-	 dvjbkRXzVqAERTj2+4kQqWOfH57k0kW60tt7ui988Mr+eCXjZboyZZChxZcvkDUToC
-	 Bxbrh0DR0ITTFwwPid1aEQmi2N0/ogAzw/KxQ57g1eUeKf8K9YUUIkDQ5TQQ9rNAnd
-	 JUoE7lecNcRGg==
+	b=MgQblo9KJv0747F1/S6xTw5SHJBK+UU624ahEYBkImdrXv88wecu/M1FjUwVvsimD
+	 +TQuo0ObExluclW+j4taYGv8I61X5z5dG3iaPWMIRG0vOyFGRvl25BhmZO+bY9/aiQ
+	 XeuAEKAO1tjHrgzNyqdo40BBLU0YMurR2vIU6X6xaoRL5pG8HlvVbuNr3dv8SHDZna
+	 Q/5864c8YFdHa0t5niOuN2XqR0oNRRSS5ovHBCDWFwgsSOIEJF9AwtGyviwS5kxo3u
+	 /ZEvQVC314LApdL7hRBZ9Y8mqsXDIuy4KPwWEZbarob5aeLe2/qOk3WugeNLrENEet
+	 mLcnnfSfLhjsQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E7D7D80DE8;
-	Wed,  5 Aug 2026 21:50:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2203A2B6
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:50:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 40F9480DE8;
+	Wed,  5 Aug 2026 21:53:09 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 568F62B6
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:53:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 083694024F
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:50:56 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3CCDD607E8
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:53:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QVMBnm3T0qjm for <u-boot@lists.u-boot-project.org>;
- Wed,  5 Aug 2026 21:50:55 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id S-elH8IeUsEI for <u-boot@lists.u-boot-project.org>;
+ Wed,  5 Aug 2026 21:53:07 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
+ client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0D47A40249
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0D47A40249
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0D47A40249
- for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:50:54 +0000 (UTC)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6a0a4a18180so2217467a12.0
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:50:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785966653; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4771A607E4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4771A607E4
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4771A607E4
+ for <u-boot@lists.u-boot-project.org>; Wed,  5 Aug 2026 21:53:07 +0000 (UTC)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4aa99bdso2341759a12.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 14:53:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785966785; cv=none;
  d=google.com; s=arc-20260327;
- b=TcT36nxNr3rehtIrIUgoF9vYlUNrqfeaYe69SfJVloFTYJ73OwmrPDs+dAWhSdDFPV
- ditb8w3wG1I4HEPRq5WAFLaTAC6iFkIDBoOyoS4D4xX6djLxQIMw0frz8FF2stU5dGxb
- tykDjPSJfnF/eOhCtkSu8SW4P5H3+s0f26zDOpBLf17sC//bMk0CmqpuphdmR6AEulqV
- UsU3GiN1Df484L7sA/fPRtuesYh09sOEsRszUS3LhNLaLpIq+gFXyr+PbcKuLW6rmbyu
- H5QFPXOR0U3WHVwk9AIp+kgG2HySpBzE8ixjdgjb6dQsfIqpk9+LVikGnMbOQxBM5Z3h
- P8OQ==
+ b=EqKHlNsq7VCMzTSmp1ICK2wW3Z3JlAHntnj3TEzORXoPmohWgD1SV9wqrTVJGyvxMv
+ xwsOEGzNV3CNrc1/GWPWcTdrrzyOJIxDFN80f7ZSFYf5eu4EAw1cXHaoJn446MWbnZae
+ uSW66xO5dW4lWtOMAJs44+jiL2D67MiYeuVp30dbeCC0bM2FvlFW/WV7cvfCkm/6Q5Fv
+ /R2ZFu4jI88G89mJCYDufo0pBC41VMESxYWJjMh5KAZpDyLAFlLpRXnuxPIeRmt8Ogs/
+ NYyShDy9bvfXmz4QI98Y9V3SH7FY8lG0Bcio0y90FPMojIMohFBPTx3Gk/DvpJwaYzmD
+ TH0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
- fh=TZ92kOw2oMh3nws5P2EBVYMFrgSgvj+F9AAwJ4owneA=;
- b=RZa9X+dHH/tHIGhKLi0MQrq/5HOp37dw2MEfnlMbgWFVdR4l1/WGRj8YQdYSISGTOt
- erNHhcyJ+iHL9pPr+8g2t8Gm6skSViTCj/9IKXEmBzF70WPTeV+jk9zrzxloj4wUO7dr
- r9L/cQ1VYRoT2beE1Y3FtkM0ML6puFa1ocRlfEXrtnqS/MpRJCqg3N2/6ffeoJbAED3M
- +l+900mz5TSO/kyL2ZthYuQbEW0FhqdEw68Eou2NEYKgp6gaGmr9n8S4nIzwEdCGPg4/
- zvwpDjL0VgG1Jt/gar7go1pqufxOMMGw9m7TExedUcjN3QktzMtV6bTPmERLV/A+hOHz
- I3VA==; darn=lists.u-boot-project.org
+ bh=fMbVQt3vlvjz8zudhKAOx18EB46q2+NpxC9eFAMcZrA=;
+ fh=eybldZBXeZ25kcSUWgn0EFj7euTPyUYAWUYWgJkJ5MY=;
+ b=ZcaXD7Id6CKhEROtFeFvMMYJNURUuyxJMs1uUb1W5sKPmSBKG3WgbVoFdezp0eVdkE
+ 9IgRbiTi4JmziOqoEdKExZa9amQGJC6SZyLYWEmARXpFzDjU4W8tRoFKNfUUyaxpXfVU
+ u6ikMFs+AnCO4iynpytW4sbWss1jzxqPBeElxABiMHVjKenCFHyWIBr+F5Q+VOw+R4hP
+ vHoZdo5v8l9i3y28EXeMZayWjgcucN4n9ok2z5TvkIgbxD9NL8c2szycvSRwF6GBlKGC
+ r/Q6h+QFNcRsYc419c+W4UChAPVbULmNkqLheysy8n5Sqg1KKf3orBS22hrE9/wzmAON
+ 5pvA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785966653; x=1786571453;
+ d=1e100.net; s=20251104; t=1785966785; x=1786571585;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
- b=kIMujjMdgTrmBhJH5h+NWBetuyLVtatoRTYeVVZdlQTF5/AlA9ETMi7jOr6NoW68DA
- DYYXSBLVX+3k3AZ8PyZscFy7MDAShYbkbnELun/R4XZhZhLQqwT5X9VdI1i1C3cxNoxc
- ggA7DQFvj9Xab8ezvh+EQ8nnsbeieFQ2QajGqfSFVGI8F9HQiy9rN1Nsf3D2aLmiLWd0
- 3tg7WhnvAuDa6Yn+oQbLbAMcZ8xpx2tm3vKSTEYc8LImSZuBzhKLr/06tJ4IrT52QboP
- dXkZ3bh4PcCoT15LDvd9v7/Q4V1EJZVgM/Ck8X4WpTy1MjxV65RSaTvcXw/w6DR1kCGE
- zP3w==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr3g8ldzIoEPp9N80wkS7zBQli9/t1NCkrLAeFDfSKLt/vFZ75Hq5ekRZo02c0D2W3pLSYZuQ4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyMvgxAeacNjwJzOH37A2HQdTgg0yTR4k+/faZO6xeh9FE5UGlB
- jyQ8KLNt1agof9lBxY9Iasbr1vLgIUZsTc+hljB23F+zPZEvLADlyoRu6K22opC0ro7aXrmnzCd
- DbC8I7c61iBadGbnEtqOwlN2qOfJ5xCcuzgwvMq95
-X-Gm-Gg: AR+sD11rcSKbEATIuR74aWu5CAcrfXJj8xU/PJSP8BE4UDEPZQwbKuDhsOIcuW1MWQ3
- 4+3ynxE2/NhvmjLef6J7PRbprtF0i+fGG+pFalLdsEpk5iADn8mq9HUo8q9VxQ+whGBSB7sqx6N
- lTdN4UhYJWcZhbPpfzRiGKjpw+9MODTq5c4ep2pmojGuYDbhehUa+lJ1aeIwH6TTXv5RI+lFj+8
- lpAc3ScpUiC57LL1QzHKkw5Sd2AW7diAgOMgYFWJfp5qxtvCdpADr+YOTVhjakSyaZikq8pur8X
- 2YAFr0J1Oh9GDYq/vYyMPrCGyOTHKDbryqV2Ia1Ebxs=
-X-Received: by 2002:a05:6402:210f:b0:698:9e5e:5df8 with SMTP id
- 4fb4d7f45d1cf-6a14f104406mr6056332a12.7.1785966653142; Wed, 05 Aug 2026
- 14:50:53 -0700 (PDT)
+ bh=fMbVQt3vlvjz8zudhKAOx18EB46q2+NpxC9eFAMcZrA=;
+ b=nLAoK32UCIqlciFHhKm7CzjWiyAKkujX3dvXC1PAnMRWO/yPBr2PopPy6c3VRWs6Pr
+ tp/K3+35SDznQvinchl5rJEXL775qNaJhqILHhIhSb/nLizStWZR5xaC4QnyskOJGkrw
+ uNTSJuKlzPrB/iy+BTovZkdYnr8g8XjDlFrk+G0kCOwCWOrZmfLGBh4nWtLJTEJ5gS+T
+ EauyFvegkKa1zbf5XejiNqDABalZAcMANfivYSA2q3uB5qmJcSWelkQ45KCKNFBJIQNb
+ 5QiJ9WKTRwnQAV9LucgknuaBHOleOWlFMcOVMrsXt5ZNI0+cvsF+pdvnIHQnEIwVRkm0
+ MJAQ==
+X-Gm-Message-State: AOJu0YzrOwg7CoscmlKg32FFE1I4qQ6S2GJgSOzxCf3F/B7e0M076N9Y
+ e/fNX66IlyYjP5NtK/imUOBaFy6RFysOoelA9aXl2QVK/8wGrUhEqJzTxIRo7xAGK8SVTXBCWGE
+ GImc6QkAe2RAJfV47kp1OXt7TlbtzlqjS0G5YW5lP
+X-Gm-Gg: AR+sD11bAylJ9lMQ/IygyLgsDrbZY70Is+Z02CXQ86y69Up2pG+5z2K+Xaz5OGPKErp
+ fG0q57zps8qc/msA2fkb3pvNOmkqri4L7ZHpBnTUUGWNnH1OLp7Pdf+YhBQz1pDyyTYCnNQmQNL
+ I/SJkGEjQO3PrGKgn67l7zK1fsGTWfwWOnbs2+ebal0b6B2qh4nV8GSTbQORSKRo2RKkvO5WKxR
+ FcNIalrS0h2WNj/4Ks9GLq9bpYG5wA3N76pwINV5yLlchelq/s6Det60j/sYJsSi23Yp4W8uTSk
+ I2C/1fop0Ag6b7CEiEIeb4XKdU+ZhIT9+TAeA9eSZsM=
+X-Received: by 2002:a05:6402:5188:b0:697:decc:7f9a with SMTP id
+ 4fb4d7f45d1cf-6a14f0e3895mr5170529a12.9.1785966785193; Wed, 05 Aug 2026
+ 14:53:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260730-math64-resync-v1-0-8792d9119d49@flipper.net>
- <20260730-math64-resync-v1-1-8792d9119d49@flipper.net>
-In-Reply-To: <20260730-math64-resync-v1-1-8792d9119d49@flipper.net>
+References: <20260730-b4-fit-ext-data-hardening-v1-0-4a6b91e37b51@binarly.io>
+ <20260730-b4-fit-ext-data-hardening-v1-3-4a6b91e37b51@binarly.io>
+In-Reply-To: <20260730-b4-fit-ext-data-hardening-v1-3-4a6b91e37b51@binarly.io>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 5 Aug 2026 15:50:40 -0600
-X-Gm-Features: AUfX_myxnv8Z4tPSpM6EKF6Idjd3RZdU4ku8v-coz-U6Lmr0DXJexFMMN_bswIE
-Message-ID: <CAFLszTiNHH-Toq9qHhjB3o2dVE1xG8_q5AtpR-yjZcOF6VTwTQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] lib: div64: fix off-by-one shift in div64_u64() and
- div64_u64_rem()
-To: alchark@flipper.net
-Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+Date: Wed, 5 Aug 2026 15:52:52 -0600
+X-Gm-Features: AUfX_myrhlmMCbvkcDmWP5XiMWprK7c735tZyflXXKmDIuMFMynzDeQB1RNMIYQ
+Message-ID: <CAFLszTgm2hLbxsmc0ynaOOn-OyrUYpDBiMCuR+NneNNXPcrxPg@mail.gmail.com>
+Subject: Re: [PATCH 3/4] spl: fit: Harden external-data offset and size
+ arithmetic
+To: Anton Ivanov <anton@binarly.io>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, 
+ Daniel Golle <daniel@makrotopia.org>,
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Aristo Chen <aristo.chen@canonical.com>, Francesco Valla <francesco@valla.it>, 
+ Anshul Dalal <anshuld@ti.com>, Randolph Sapp <rs@ti.com>,
+ Binarly Research <vr@binarly.io>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1785966653; x=1786571453;
+ d=chromium.org; s=google; t=1785966785; x=1786571585;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=iy6H4vSM+shdsZuW3p6DFUwjFH1LGAY0p3RNqqvz+MU=;
- b=CqhpQQrtFLiIZvKH60c1UB8XzAUeI1w60ZxgHhNd2jAlvNs35Z55w082J2GhBTYm9U
- ufefH3DPPNMtbQrwz6Wp9+vilMsqcALZaIKKgOCCPNv/0324tsWGDwbsdlVps1PYXBri
- F0Qu1ZbXVcO1VyfwtCAcmZxzKPcd4o2PHeRMg=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=fMbVQt3vlvjz8zudhKAOx18EB46q2+NpxC9eFAMcZrA=;
+ b=NQ5jfoSL6zu4c97TZsSYfesFZfM5bdqU2+qvzN01Qdn/FrHay4ICHc9AthFOOVX7va
+ FvvzIhl0rlzov5n035hR4HC0BdTnjuNA53UL/lc2gNKAOMeMbwUNQ28/U0BEKfOeJNyX
+ 6cK/yBOcHtcqSLGaLvKCrH7tQctbSOjoCyPlc=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=CqhpQQrt
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=NQ5jfoSL
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,44 +146,63 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-07-30T18:40:37, Alexey Charkov <alchark@flipper.net> wrote:
-> lib: div64: fix off-by-one shift in div64_u64() and div64_u64_rem()
->
-> fls() counts bits starting from 1, so shifting the operands right by
-> 1 + fls(high) discards one more bit of the divisor than intended. Both
-> functions estimate the quotient from the shifted operands and then fix
-> it up with a single decrement/increment, so an estimate that is off by
-> more than one cannot be repaired and the result comes out wrong.
->
-> This only affects BITS_PER_LONG == 32, where these are the out-of-line
-> implementations; on 64-bit the header provides plain C division.
->
-> The error is only reachable when the quotient is large, which needs a
-> divisor just above 2^32. For example:
->
->   dividend = 15559272575191414037
->   divisor  = 4333540799
->   expected = 3590429465
->   actual   = 3590429468            (off by 3)
->
-> A sweep over 6.4M random operand pairs, stratified by the width of the
-> divisor's high word, mismatches a __int128 reference 8260 times before
-> this change and never after it. All failures have a divisor with one or
-> two significant bits above bit 32; uniformly random 64-bit divisors are
-> closer to 2^63 and yield quotients of ~1, which hides the problem.
->
-> Port of Linux commit cdc94a374931 ("lib/div64.c: off by one in shift"),
-> which fixed the same code and cites [1].
->
-> In-tree users of div64_u64() that are built for 32-bit targets include
-> the Aspeed, Meson and Cadence TTC PWM drivers, the Versaclock and
-> wrpll-cln28hpc clock drivers, and the DWC3 USB core.
->
-> Link: https://bugzilla.kernel.org/show_bug.cgi?id=202391 [1]
-> Fixes: 0342e335ba88 ("lib: div64: sync with Linux")
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
->
-> lib/div64.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Anton,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-07-30T15:03:40, Anton Ivanov <anton@binarly.io> wrote:
+> spl: fit: Harden external-data offset and size arithmetic
+>
+> The data-offset, data-position and data-size FIT properties are
+> excluded from the configuration signature, so they are attacker
+> controlled even when signature verification succeeds. The offset and
+> size arithmetic in load_simple_fit() can wrap on hostile values:
+>
+>  - adding the external-data base offset to data-offset can wrap past
+>    UINT32_MAX,
+>  - get_aligned_image_size() adds the block-alignment overhead and
+>    rounds up to the block length, which can wrap past ULONG_MAX,
+>  - adding the FIT's device offset to the aligned external-data offset
+>    can wrap past ULONG_MAX.
+>
+> Make get_aligned_image_size() return the aligned size through an out
+> parameter and fail with -EOVERFLOW when the computation would wrap,
+> check the two offset additions explicitly, and compare the
+> block-aligned size (the amount info->read() actually transfers)
+> against max_size before reading. Do the same for the FIT header read
+> in spl_simple_fit_read().
+> [...]
+>
+> common/spl/spl_fit.c  | 98 +++++++++++++++++++++++++++++----------------------
+>  test/image/spl_load.c | 57 ++++++++++++++++++++++++++++++
+>  2 files changed, 112 insertions(+), 43 deletions(-)
+
+Just to flag - first_loading_rbf_to_buffer() has the same 'rbf_offset
++= ((fdt_totalsize(buffer_p) + 3) & ~3)' pattern...out of scope but
+the maintainer may wish to take a look.
+
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -700,12 +700,8 @@ def test_vboot_ext_data_bounds(ubman):
+>          fd.write(500 * b'\0')
+>
+>      testcases = [
+> -        ('negative data-position',
+> -         {'data-position': 0xffffffff}, 'Invalid external data position'),
+> -        ('negative data-offset',
+> +        ('invalid data-offset',
+>           {'data-offset': 0xffffffff}, 'Invalid external data offset'),
+> -        ('negative data-size',
+> -         {'data-size': 0xffffffff}, 'Invalid external data size'),
+>          ('off-bounds data-position',
+>           {'data-position': 0x7fffffff}, 'FIT external data is out of bounds'),
+>          ('off-bounds data-offset',
+
+The 0xffffffff data-position and data-size cases are dropped rather
+than repointed at the 'out of bounds' message they now hit. Please
+keep the 0xffffffff coverage so a regression that stopped rejecting a
+UINT32_MAX property would still be caught - a rename to 'invalid
+data-position'/'invalid data-size' with the new expected message would
+do it.
+
+Is there any code-size impact for this series?
+
+Regards,
+Simon
