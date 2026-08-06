@@ -1,119 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A908DC5AC7A
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08819C55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:37:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 442D540558;
-	Thu,  6 Aug 2026 13:37:35 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6jCKLX8ssqrm; Thu,  6 Aug 2026 13:37:34 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 574FE404C9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786023454;
-	bh=W62VQ5O5YwMkjbfoBoHjj7E5Odd2rLqnCmyUCANdwOI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=02uFeovS/6cOWnbuQFZYrKMMawNCf4ik4adDWNLAlHbf7jfqzlC6wIJHlGC5bds8g
-	 RQJSsVo89SCLnvhtM1A5Y/7QCdLM5B2hUKoUiHVWNJBtkubJVeTPjpNcaIs0KTm12W
-	 sRo8zS/O/5hByaF0AIULibtcE5vEQnhbPi0cOufiuI2VzxJqaFGcsYmyQt07thoZR5
-	 q42omVua/4MFDC+cOWUqdUf/bS1M8nbH1rnnLQA2twBekWoTIPH5ibYX6dQTD4XWRC
-	 m5dixNbF7HAbqfRxuDYH+spMGGkUX4Ym+3yOuUdNFMuCLMVYXbupU8UTKje2tvypHp
-	 +l+ASJASuA/RQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 574FE404C9;
-	Thu,  6 Aug 2026 13:37:34 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id EB59B28C
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:37:32 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DD3FD60784
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:37:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B2BD060763;
+	Thu,  6 Aug 2026 13:37:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h8M6fi8VMRi7 for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 13:37:32 +0000 (UTC)
+ id hWoyMD8rygCp; Thu,  6 Aug 2026 13:37:35 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A8CEC60784
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786023455;
+	bh=tJ6HDTWjI4N6oA8m4j7yOb4FlHfKTGY25qpbHxSg8Q8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=hpisTh5PMq8BsycPEEYIkCDkj8mfmcYFEeEJWqpFGHn3hLqKWDZqh/VH57VSgYjHx
+	 J9Du6Pi476VvZxOVWB32xS+bJAPrlXL3HVi6QGKUuYuYaGdMU7pvYuptBrlBHMK2lm
+	 7CPcwUG1dRSat5vKAn/RAZK0ahb3SNlgb3N37g8KsjDAELa6QpX/kz5pCjlGruZThs
+	 VOpzyvhVQAoebgyqf1kagBwjLGvZ8iBQsPi31/8LqdfVhu6Tug1/1qBER27yvsIJBV
+	 4Ylad5BhUfLzq4IjZ750sqYQsE6oRvhi4MNCxy/K8a2j8XmvF8+rGPCNmewYKso9Jy
+	 stqeRGz4ahi5A==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id A8CEC60784;
+	Thu,  6 Aug 2026 13:37:35 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id AAFAF198
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:37:33 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 90954404C9
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:37:33 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lAYhvHcK84iQ for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 13:37:33 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org E951C60763
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E951C60763
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E951C60763
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:37:31 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so13599735e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:37:31 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org B4015404A2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B4015404A2
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B4015404A2
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:37:32 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so8953905e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:37:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786023450; x=1786628250;
+ d=1e100.net; s=20251104; t=1786023451; x=1786628251;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=W62VQ5O5YwMkjbfoBoHjj7E5Odd2rLqnCmyUCANdwOI=;
- b=sbdxhFRNDpeKbt0QaSjtMr6tL9DPZBsLqf/AXXDn5eqV2JC3zVvJI+MlHAnYsSlHej
- XlY1k04Y/qGcQRbYyUE3VZU/+W9Z9DNw7HS4n0i0DGX2P8Mr82jyniNG8kgJXaJc8ST5
- 4goZGZ6wA4QXo5WiGWRVfY9j+cQ731XC4P3RLldCGhkUrgZ1HzzHC1VedAoWMfyrf2Ei
- ICs/9yKfHU6IfTT0npfKlzL1WbVnw+ND6N0TFJaDv4adrLQRkXAcn417VpSSCew5w5TU
- 04/NFgh6WQ3pUM21I6pNJCFhVH4MBNOTabn8KGqv+vUwCmeeWpUtTRp5UV9Dfxs9KFMp
- uT8Q==
-X-Gm-Message-State: AOJu0YzH+HLh1NRphcZeFx441GsjZkXEbkz57Ibh1KmmhW2jsNYuVsr8
- rC66NNiG4grpVvtDjlxKiOigzguV00NaHdB61zwunAL0Adf+7aWGKhYLWGfb6A==
-X-Gm-Gg: AR+sD12JGxYoo3PHjuU6gMJ9I5KLg7NVkwuKczcJ7POiPiUqJATjs3pWTHcfwA5Rw4Q
- MNwFvjod6tBSdbcqVfA6C/eW4PHPRJxwTO7KHdzsG4/DFkRiGmyyMJ+T94PuGX6gwJJevP1LIt5
- JykqRxm2mFokhPyrNlq3YD5Rn8ISdvRGTYmKPMWqE6vtgIMZvPAI6V/DgmhffTzvUWOq3gZwZGQ
- swlUUrtSpAQxPbVJegtVrBXY8+0yflhaBgSjGc2qJeLU53yKBA06SXBeRQzgcO/C5KcRnXMqaQE
- +Ezuiq6IvrnFOIKXHgfgWoC0fNMm0eC1OIrdafzM/EolKE8QtST6TwLXIwZzEy/6p4nC70eC7rH
- aKQ3BZrpD4IjssUEwUD21qfeurEW8uyEOERl7z6NqrSATV+8DpC8sP5xEE/yz0Azk4HFv02oEYM
- l6ytVHZHbV2I0fsjaNlDhDzV3GFQF1Hgb9huBKZE5vIk29cnIzqdJ3IRofyxucBvE7fZI=
-X-Received: by 2002:a05:600c:48aa:b0:498:ff3:71ed with SMTP id
- 5b1f17b1804b1-4994e7e6e99mr137448045e9.17.1786023449611; 
- Thu, 06 Aug 2026 06:37:29 -0700 (PDT)
+ bh=tJ6HDTWjI4N6oA8m4j7yOb4FlHfKTGY25qpbHxSg8Q8=;
+ b=jarY7GFXF60WCMYfM88h8UUFGdQH3L6fI93dbEV1uPtubg+s4dVuQhIca92d1ltE34
+ FKfFXercTmtFmJJTcbuPOTcTAYkOYUrRTMj2g6txotCQVQAYUOdLzNbCtcv2GQBRiWmb
+ ZKVkCuOor9Xq1xhFhUx+N+HP7Ydnu2Q8N+Lsb3/qPAq2dU9808lxZej8I8cAHgm7T/S1
+ VaDZ7XDYdFIUJySHcJLQcX9vhXziKXK0J+70rsKCSPzRfbvXorlEv18qUFvn55For+F5
+ fABWtk5VkFRfB0qGjSOBsBShaTcCHIHdkCtBlROdQd7a/fxzD3zTD/G+EEsDPOaFftrU
+ WB7g==
+X-Gm-Message-State: AOJu0YyhLWLwNmGf28XGlE4Ro53KsY8UZ6aDQPNuKM5uaWIfUF7alA0u
+ j//GZy1CmKCsNpOnQOwuMT7/YNtPf+OzeP9Qw8Wl+yRPJtOYS1MP0hqdSBhIRA==
+X-Gm-Gg: AR+sD11bUMQ99sKCtXutWZoN6moup51jf2pbk4dkxBLPgyCt7vV+CQoim0CG8wUlO8U
+ /k4dXzRP8Zmls6a474UNj4f1pDqNn0RJ1w3IOHkrLGQWtdVPlJi5VG/+UrhUZiSk1w5um2dimXm
+ iciBP2L1yXLVjn4rKaIxQcAx+o99rFOhrNdq+GTopz3yOb2DZFuP311c2tE8Uy6u2bpK8/M988Z
+ s3HahI9tuSVjv0O6dicalsVrNJGh1A0t5u0uSJDmYMQmleuDBioEThWU2yqeetj252BtASi9gzz
+ IrDYNqUpc2sir2E4BUFfASBLZWn9EatLA2H+OTqdRVYjKboYPbKxdlCwbAbl5d+XmM9SR+9tJ+z
+ JUzjaQPDWG7B268y91rt6V5NVL/bo84ydFk19jo/Q2pBu9d/eb6ik3NXzAFYsHtwMO5Jgp+J0KP
+ 5+0FVcfoaVIKdMgllqsLwqJIVUaj33TeVBWGa8BGghutEShF5H3L70xemr1qYyGc6eCcw=
+X-Received: by 2002:a05:600c:468e:b0:499:596b:2e91 with SMTP id
+ 5b1f17b1804b1-499596b2ebbmr30306085e9.3.1786023450445; 
+ Thu, 06 Aug 2026 06:37:30 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4994e52d819sm91691585e9.1.2026.08.06.06.37.27
+ 5b1f17b1804b1-4994e52d819sm91691585e9.1.2026.08.06.06.37.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 06:37:28 -0700 (PDT)
+ Thu, 06 Aug 2026 06:37:30 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v2 1/2] cmd: allow bootd without bootm
-Date: Thu,  6 Aug 2026 15:37:23 +0200
-Message-ID: <20260806133724.336755-2-mehmet.fide@gmail.com>
+Subject: [PATCH v2 2/2] test: cmd: add a test for bootd
+Date: Thu,  6 Aug 2026 15:37:24 +0200
+Message-ID: <20260806133724.336755-3-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260806133724.336755-1-mehmet.fide@gmail.com>
 References: <20260806133724.336755-1-mehmet.fide@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786023450; x=1786628250;
+ d=gmail.com; s=20251104; t=1786023451; x=1786628251;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=W62VQ5O5YwMkjbfoBoHjj7E5Odd2rLqnCmyUCANdwOI=;
- b=N+E2Sp9r1+KRkx7JO5+ldfX6TzaxJp27gNj091XwPxYSfygZJgupsbsVeOOq5nYUNp
- XM7qFzh2BDWbEt4vDNCagSWHJqjU4btRmRn7R3EypdkX1VeZlMnnjaIIKl5b9dH5duDF
- C/8gx0/jM7KPlp+QmPRJlS1QDuKbTq8lyezxlElQscPRdmJHndH6xGQV/HGjKR3j15yi
- EShGvkH67tyPX1POXW1Xg8bHs7enyhMTW3abI2LMoHKW0awvG3bHEurZXmjPmJubrpgz
- m1FLcyUBK5s02cgMB28aPAdjJfsvvMI5AHxxc5AIFDyLvGqy+iFazOqCQS8oTbKEVCVT
- gj1g==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=tJ6HDTWjI4N6oA8m4j7yOb4FlHfKTGY25qpbHxSg8Q8=;
+ b=PVZZVHySq5wBsYwkcLGLpYmkw/ZwdRg62OGPfxMFkTHX3vYQxrRqMy0yO6Xqsmwgnb
+ obUmFiIgNfU5ZhbFFSuXHydwKA+Bgi/NZzj913E5Q6klRkrPwzN2zBJLLR94Aat+AD5S
+ InCt3WpooVuLBz4qB/qUEKC0RopV0/yHEd90+WYuOXHdVU8D/7RSEhw8AF6lN0mKp0/1
+ tehSMwl8VMfRurQCjYOTMTMygGv5ZEdz6lYq2RtgyxJ4OhN3Og4WhGGcSL/bgDrrCexd
+ fcVuuIAm7rlvLHV3ZsXEJ2wDdJritD59DkTaLhA+H8oru7CGfWhnYKbyLevYAXklEsWX
+ 79RA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=N+E2Sp9r
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=PVZZVHyS
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,144 +129,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-do_bootd() runs the "bootcmd" environment variable through run_command()
-and does nothing else. It uses no bootm functionality, and neither does
-the "bootd" recursion guard in cmd_process(). doc/usage/cmd/bootd.rst
-documents it that way, with an example that sets bootcmd to
-"echo Hello World".
-
-Commit 1fd04cf46baf ("cmd: Correct dependencies for CMD_BOOTD") made
-CMD_BOOTD depend on CMD_BOOTM because the build fails otherwise:
-common/command.c is compiled unconditionally and references do_bootd(),
-whose definition sits in cmd/bootm.c, which is only compiled when
-CMD_BOOTM=y. The dependency therefore describes where the code lives
-rather than what it needs, and the boards that disable CMD_BOOTM
-(colibri_vf, iot_devkit, mx6memcal and r8a78000_ironhide_cm33) cannot
-offer "boot" or "bootd" at all, although the implementation would work
-there.
-
-Move do_bootd() and its two command registrations into cmd/bootd.c,
-compiled from CMD_BOOTD, and drop the artificial dependency. To leave
-every board in tree unchanged, CMD_BOOTD now defaults to y only when
-CMD_BOOTM is enabled, which is precisely the set of boards that have it
-today. Boards without bootm can enable it deliberately.
-
-Tested on sandbox: bootd, the "boot" alias, the return value taken from
-a failing bootcmd and the recursion guard all behave as before. Also
-tested on a Colibri VF50 (vf610) board built with CMD_BOOTM=n and
-CMD_BOOTD=y, a combination that could not be selected before: "boot" and
-"bootd" run bootcmd and bring up the OS, and a bootcmd of "false"
-returns 1. A colibri_vf_defconfig build with CMD_BOOTD left off is byte
-identical to the previous one apart from the version string; enabling
-CMD_BOOTD costs 272 bytes.
+There is no test for the bootd command. Add one to the cmd suite that
+covers the documented behaviour: bootd and its "boot" alias run the
+command held in the bootcmd environment variable, and the return value of
+bootd is the one of that command. Also assert the recursion guard in
+cmd_process(), which is part of the code bootd carries.
 
 Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig  |  3 +--
- cmd/Makefile |  1 +
- cmd/bootd.c  | 30 ++++++++++++++++++++++++++++++
- cmd/bootm.c  | 24 ------------------------
- 4 files changed, 32 insertions(+), 26 deletions(-)
- create mode 100644 cmd/bootd.c
+ test/cmd/Makefile |  1 +
+ test/cmd/bootd.c  | 66 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 test/cmd/bootd.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 35ce42f8397..f8eed5a5bdf 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -300,8 +300,7 @@ menu "Boot commands"
- 
- config CMD_BOOTD
- 	bool "bootd"
--	depends on CMD_BOOTM
--	default y
-+	default y if CMD_BOOTM
- 	help
- 	  Run the command stored in the environment "bootcmd", i.e.
- 	  "bootd" does the same thing as "run bootcmd".
-diff --git a/cmd/Makefile b/cmd/Makefile
-index ce772e5555b..7c3db81e524 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -6,6 +6,7 @@
- ifndef CONFIG_XPL_BUILD
- # core command
- obj-y += boot.o
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index 8d36463879d..e734933d5f7 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -17,6 +17,7 @@ ifdef CONFIG_CONSOLE_RECORD
+ obj-$(CONFIG_CMD_ACPI) += acpi.o
+ endif
+ obj-$(CONFIG_CMD_BDI) += bdinfo.o
 +obj-$(CONFIG_CMD_BOOTD) += bootd.o
- obj-$(CONFIG_CMD_BOOTM) += bootm.o
- obj-$(CONFIG_CMD_HELP) += help.o
- obj-y += panic.o
-diff --git a/cmd/bootd.c b/cmd/bootd.c
+ obj-$(CONFIG_CMD_CONFIG) += config.o
+ obj-$(CONFIG_COREBOOT_SYSINFO) += coreboot.o
+ obj-$(CONFIG_CMD_FDT) += fdt.o
+diff --git a/test/cmd/bootd.c b/test/cmd/bootd.c
 new file mode 100644
-index 00000000000..d39b1bfe888
+index 00000000000..be7ca49a972
 --- /dev/null
-+++ b/cmd/bootd.c
-@@ -0,0 +1,30 @@
++++ b/test/cmd/bootd.c
+@@ -0,0 +1,66 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * (C) Copyright 2000-2009
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++ * Tests for the bootd command
++ *
++ * Copyright 2026 Mehmet Fide <mehmet.fide@screeningeagle.com>
 + */
 +
-+/*
-+ * bootd - boot default, i.e. run the command in the "bootcmd" environment
-+ * variable
-+ */
 +#include <command.h>
++#include <console.h>
 +#include <env.h>
++#include <malloc.h>
++#include <test/cmd.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+int do_bootd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++static int cmd_bootd_test(struct unit_test_state *uts)
 +{
-+	return run_command(env_get("bootcmd"), flag);
++	char *const argv[] = { "bootd", NULL };
++	const char *old = env_get("bootcmd");
++	char *saved = NULL;
++	int repeatable = 0;
++
++	if (old) {
++		saved = strdup(old);
++		ut_assertnonnull(saved);
++	}
++
++	/* bootd runs the command held in bootcmd */
++	ut_assertok(env_set("bootcmd", "echo hello bootd"));
++	ut_assertok(run_command("bootd", 0));
++	ut_assert_nextline("hello bootd");
++	ut_assert_console_end();
++
++	/* and so does its "boot" alias */
++	ut_assertok(run_command("boot", 0));
++	ut_assert_nextline("hello bootd");
++	ut_assert_console_end();
++
++	/*
++	 * The return value is the one of the command in bootcmd. An unknown
++	 * command fails whichever parser is built in; they word the complaint
++	 * differently, so match only its start.
++	 */
++	ut_assertok(env_set("bootcmd", "no_such_command"));
++	ut_asserteq(1, run_command("bootd", 0));
++	ut_assert_nextlinen("Unknown command");
++	ut_assert_console_end();
++
++	/*
++	 * A bootd reached from bootd is refused rather than recursing. The
++	 * guard lives in cmd_process(), and run_command() drops its flag
++	 * argument when the hush parser is used, so call cmd_process()
++	 * directly. bootcmd would print if the guard let it through.
++	 */
++	ut_assertok(env_set("bootcmd", "echo bootcmd must not run"));
++	ut_asserteq(CMD_RET_FAILURE,
++		    cmd_process(CMD_FLAG_BOOTD, 1, argv, &repeatable, NULL));
++	ut_assert_nextline("'bootd' recursion detected");
++	ut_assert_console_end();
++
++	ut_assertok(env_set("bootcmd", saved));
++	free(saved);
++
++	return 0;
 +}
-+
-+U_BOOT_CMD(
-+	boot,	1,	1,	do_bootd,
-+	"boot default, i.e., run 'bootcmd'",
-+	""
-+);
-+
-+/* keep old command name "bootd" for backward compatibility */
-+U_BOOT_CMD(
-+	bootd, 1,	1,	do_bootd,
-+	"boot default, i.e., run 'bootcmd'",
-+	""
-+);
-diff --git a/cmd/bootm.c b/cmd/bootm.c
-index ca7cec91fad..07fd995ebed 100644
---- a/cmd/bootm.c
-+++ b/cmd/bootm.c
-@@ -229,30 +229,6 @@ U_BOOT_CMD(
- 	"boot application image from memory", bootm_help_text
- );
- 
--/*******************************************************************/
--/* bootd - boot default image */
--/*******************************************************************/
--#if defined(CONFIG_CMD_BOOTD)
--int do_bootd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	return run_command(env_get("bootcmd"), flag);
--}
--
--U_BOOT_CMD(
--	boot,	1,	1,	do_bootd,
--	"boot default, i.e., run 'bootcmd'",
--	""
--);
--
--/* keep old command name "bootd" for backward compatibility */
--U_BOOT_CMD(
--	bootd, 1,	1,	do_bootd,
--	"boot default, i.e., run 'bootcmd'",
--	""
--);
--
--#endif
--
- /*******************************************************************/
- /* iminfo - print header info for a requested image */
- /*******************************************************************/
++CMD_TEST(cmd_bootd_test, UTF_CONSOLE);
 -- 
 2.54.0
 
