@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC39C5AC67
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 11:00:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB18C56208
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 11:00:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0B67380E2E;
-	Thu,  6 Aug 2026 11:00:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6FB9680E41;
+	Thu,  6 Aug 2026 11:00:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5XNeJK6rw81t; Thu,  6 Aug 2026 11:00:45 +0000 (UTC)
+ id 8uFgT-r59IXo; Thu,  6 Aug 2026 11:00:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1E62780E36
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1FB5380E36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786014045;
-	bh=HrPgnIHeq4cFyK/AEvCe99MeH0e/iWUMnbxmzeRgrQg=;
+	d=lists.u-boot-project.org ; s=default; t=1786014047;
+	bh=yeC6Hqt5s4JnHR3bsVVzmr7CkvTOTeNRKCd3sW6T7gA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Rhzvb1FvH0LKgWb/D2wbbgmSiCAV3Ae2GC4xaZ8+aAa9Y3bpWEFxCyrbPRoqmPfUn
-	 sun/E9t6q4hMuPwdD7QsVaQPVWYgQh+TGGi5+L+ouRIeXpE4pzL91tHhjqERz1P8h7
-	 g5TPg/gkQtI9VtuNa68SkjwyU35AzyVfVDoEz3vaXD99go4vj6SHsWryayPGfUv6FT
-	 CXFP2VqDiOS3Ja3DdTgPrbba0m4vkCcnuLYIFr92mQXtwDx/R0HT+dAg2fSE6vh4ai
-	 /TBkK9mutXIMurWlyJZkR8g39937gAk/H57UdsAlULIqErt9IGcvhbNPC799fCiBxK
-	 uKItkkcO0fwCA==
+	b=zR4vTN/hWjOlUjLSkelzCGQ1ukdQ1XMrocUT0FsUC4sVvOdePoVXgMSOy/6MosjeG
+	 aO8crAhxl+FHZKsDRmfI0+3wh5w8z8/fTQaQD0YSfbTPGrVu7rEpUCCEPhPsZ2oKxJ
+	 6mrRcniWYKU+D802VyEI2Czb+K2+3opvHho/w02Sx+xxOY0GiWky2ExGdEWsbIc9qB
+	 HaARx/u/G7KantRFU4EmhLhKXBo7h32O8gzkcvh/YrmZDEpk1qyu8fYurHASdj57uT
+	 mCa+UuKSu4LrcVdATm3crbDfooC6rQmKrZg2yGS1LGWJ+jUhxDGJ+FTYqFRsTzv4F4
+	 YVHXuJWmrxvOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1E62780E36;
-	Thu,  6 Aug 2026 11:00:45 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0FB383F9
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1FB5380E36;
+	Thu,  6 Aug 2026 11:00:47 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id F29A1194
  for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 10:18:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 017A880D66
+ by smtp4.osuosl.org (Postfix) with ESMTP id E469E4053D
  for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 10:18:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Dj8eyPmqZOop for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 10:18:16 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=209.85.128.52;
- helo=mail-wm1-f52.google.com; envelope-from=tanurelinux@gmail.com;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vxIzZctVbFO0 for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 10:18:17 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=209.85.128.45;
+ helo=mail-wm1-f45.google.com; envelope-from=tanurelinux@gmail.com;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E3CFE80D5E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E3CFE80D5E
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E3CFE80D5E
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 10:18:15 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4955de8797cso13295245e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 03:18:15 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A99FD4054B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A99FD4054B
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A99FD4054B
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 10:18:16 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-496b7622a83so16738155e9.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 03:18:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786011494; x=1786616294;
+ d=1e100.net; s=20251104; t=1786011495; x=1786616295;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=HrPgnIHeq4cFyK/AEvCe99MeH0e/iWUMnbxmzeRgrQg=;
- b=qCjZuemIdtfzOOIPjyX08gSDWpJUTx4zxcovjMT8N5UWYYOxJDqcAEnYON7omKU3X5
- sFrDOTRxi/h4tzEVSvfU4t3p4PTZT0AKhvuF7gchPcBayAMyr6EtUCTSbxXYDSk/ADAn
- QVjj+UZuL0kMRwzIO0X5nrJ8HP44ERetSZYHtxl1bzFRNZHIwvrXB+WHcmW+kMX/cs4h
- yYPUj7I44RHcu6qiG+Z44y3Vmxoo2k6T+egqlzKzsWRpdEds1a2GFI0lKU0suQ2EBMi0
- ZtNVaacihb3Vlw5AX8Ig5rE3JsmSnt7iqDIMuqeIP4WxHmZxAfdaZiIxPI6b4ojcHm+O
- 6TxA==
-X-Gm-Message-State: AOJu0YwCg2ELO0sr/4K4ufSjG83gn1FnitssyV46xPaEJg134yii/+ve
- K8WAUI1j+zZAETf00DLuuRWf5A7pTZZK1WfAPUNUK68Lcc7I3H64Uj6R3WeEtQ==
-X-Gm-Gg: AR+sD13u1FvUq5QjUXAGJLNQ2xvk1utsSYToeOpqnOL25ENFwV+MKir0Z/+ZZE2SkUB
- C7bgMW3X8kTPjYCSWx7VkRVyW0XXd0cfYl6BuxNboUig1mchavzyKgzaWdQ6hAUf4Wm4Bg+xJ4f
- 0e2SJOC5YQWz/JDoL1wCaIt+2d2nPwAwQawGz+isag9OxdRQ54OVddYKp2FpWJcmUdjBsqQzjxW
- xGEg0HbvLWd/2Ne/V+crDxGBlmRvdDUVbLz0f99dlxe9a4jKs9Ary7kX9iKQhHudH8cPKrwJczL
- 1K2Gg0BMcKuk467jQdCl0sS7YXBitBVoj/FF20ROYqqZFMVJRqvYHMzIVT5JqJ/fDhWRh05AiW9
- FA9H9EhLzUbX/qcLWZuPmElG+VP4hxCnFdzn7CRS+nwNa3m3An/UKoRABj11Tt8D6C+YnALEoQP
- rmqV6kkZ9e1qFZXIZV4s1jDpAnKHRqmhzNb1VFe7+F5Y+D8fX+Fl+pNPr6L4YIg7MQzFkRxGUG9
- x6NAsHN+Tbd67ZSieLniIez800=
-X-Received: by 2002:a05:600c:4614:b0:498:8e6:d464 with SMTP id
- 5b1f17b1804b1-4994e7c5c07mr113720235e9.14.1786011493700; 
- Thu, 06 Aug 2026 03:18:13 -0700 (PDT)
+ bh=yeC6Hqt5s4JnHR3bsVVzmr7CkvTOTeNRKCd3sW6T7gA=;
+ b=VS1EwF2HNObRUI+TG+AQrHHLraDGO0T6CXtdSVOT/K1Pk3HdplLUdUJWMlUss2aO+g
+ xBL24FmdarrLmYKGqKArnCxNEWjyjWRHN1f9Ei/jpoTxExnDbJqAdyL63Kmzo5NNVRqK
+ 2FNuj+9k2qNSNul1D7JTwBUezf39eY20jnoWf7zy3AgHF615TDc5IWG1VxIJyVgixfNS
+ AQmv11uPhznR52fw4Wu49Y3fM6Kx82SAkmfp/1n7wC9m3746Bt10QWGeEwW5zQChb5vO
+ 4JCh0wA6lxvpwbXOYwktyB6mghxQQHogcpmfsHjaibcHWzzcmejsgIG5bTVqp9jIIIZe
+ JNkQ==
+X-Gm-Message-State: AOJu0Yz3WKeBlxL7IdJ8Hy901zVo/s5P5mbPoTfBfP8mkhUn0WT+AfZn
+ Vf3p/FR+0n7Z6L6LrdQrkURFizybp4VBB5JlmdQO21beCMwnTieo8OVkbPhnHw==
+X-Gm-Gg: AR+sD115Lx/Q325BchJ6xciDxMIvgIDM/n2yetX/K2Mc3c1EXkkn2is41wg/SKvIVwT
+ MDm0E5zkbT7lV/Bqik3oXehib6JeT2atrzN6CkzNNONDFqnI6IADfDTXjYCWlooDTHRHYw2voHB
+ mdpljh7+XXPZSEG820tG+VgBa3Cpfg+QSxpENozrotmSxzSTrvwXUvRuYpcTCgnbmQqqmT3ChCD
+ bqRyUAA+GQw7bCqPyg8aKTuw94VnNJKH62z+hDufA1/bgxjlsY0qR8CYcVU9g7hN/FUOhpMS7a9
+ pjLPWVf7sGB1XxqTuFhpLn21AJ5ax4YWhrQk/d/LZE28D6/+SQVuAklKOzO+/kiopAsnJsutuU/
+ ycCOwssmEchjYWYKIpjvlDl2iL0B9SeWDe8NFhPFL5oE1ncOOz9zNCBGjz4c1n2yWqzfAwWdQnl
+ HNWaBe2B33vjbQTQi+wGmolBrBMe0HoCaZzjvv4QaVjCIflWTE5kEb80OMIhSaQcnFRVupR1Pof
+ ENSxki7XliD91RsJSivMCs+dag=
+X-Received: by 2002:a05:600c:12c8:b0:495:63e4:7f78 with SMTP id
+ 5b1f17b1804b1-4994e7baae6mr121733175e9.10.1786011494559; 
+ Thu, 06 Aug 2026 03:18:14 -0700 (PDT)
 Received: from threads.localdomain ([83.106.158.114])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-4994e988687sm108654725e9.3.2026.08.06.03.18.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 03:18:13 -0700 (PDT)
+ Thu, 06 Aug 2026 03:18:14 -0700 (PDT)
 From: Lucas Tanure <tanure@linux.com>
 To: u-boot@lists.u-boot-project.org
 Cc: neil.armstrong@linaro.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  funderscore@postmasteros.org, u-boot-amlogic@groups.io,
  Lucas Tanure <tanure@linux.com>
-Subject: [PATCH 1/4] serial: meson: add Amlogic S4 UART support
-Date: Thu,  6 Aug 2026 11:18:06 +0100
-Message-ID: <20260806101809.72526-2-tanure@linux.com>
+Subject: [PATCH 2/4] arm: meson: add Amlogic T7 SoC family support
+Date: Thu,  6 Aug 2026 11:18:07 +0100
+Message-ID: <20260806101809.72526-3-tanure@linux.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260806101809.72526-1-tanure@linux.com>
 References: <20260806101809.72526-1-tanure@linux.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 06 Aug 2026 11:00:31 +0000
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=fail (p=none dis=none)
  header.from=linux.com
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -114,134 +114,206 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The S4-generation UART (S4, T7, ...) derives its baud rate from the
-24 MHz crystal divided by 2, selected via the XTAL_DIV2 bit in the
-baud rate register, while older SoCs divide the crystal by 3. Add the
-"amlogic,meson-s4-uart" compatible with driver data selecting the
-div-by-2 scheme, matching the Linux driver (meson_s4_uart_data) and
-the configuration the vendor BL2 programs on T7 hardware.
+Add initial support for the Amlogic T7 family (A311D2). U-Boot runs
+as BL33, loaded at address 0x0 and entered from the vendor BL31 at
+EL2, either uncompressed or LZ4-compressed inside the boot image (the
+BL31 decompresses it).
 
-Older SoCs keep the existing div-by-3 behaviour: Linux also uses
-div-by-2 on G12A, but both modes work there and switching would risk
-regressing boards that have shipped with div-by-3 for years.
+The secure firmware writes the SCS device keys into the first page of
+the loaded BL33 image (2 KiB for the BL33 key followed by 2 KiB for
+the kernel key). Reserve that page with a boot0 hook, as the vendor
+U-Boot does, so the keys do not overwrite U-Boot's entry code.
 
-Also drain the transmitter before changing the baud rate so in-flight
-characters are not garbled, as the Linux driver does.
+The firmware also enters BL33 with the non-secure watchdog running:
+disable it in board_init(), otherwise the board is reset about a
+minute after boot.
+
+The memory map leaves 0x05100000 - 0x09000000 unmapped: the secure
+world owns this span (the BL31 and BL32 runtime zones described in
+the upstream devicetree, plus further firmware-protected pages), and
+this matches the vendor bootloader's own map. The whole span is also
+added to the devicetree and EFI reserved memory at boot time so no
+allocation is placed in memory U-Boot cannot access.
+
+get_effective_memsize() is capped at 0xdf800000 because the top 8 MiB
+of the first DRAM bank contain pages the secure world protects at
+runtime; U-Boot and its heap must stay below them.
 
 Assisted-by: Claude:claude-fable-5
 Signed-off-by: Lucas Tanure <tanure@linux.com>
 ---
- drivers/serial/serial_meson.c | 51 ++++++++++++++++++++++++++---------
- 1 file changed, 38 insertions(+), 13 deletions(-)
+ arch/arm/include/asm/arch-meson/boot0.h | 18 +++++
+ arch/arm/mach-meson/Kconfig             | 10 +++
+ arch/arm/mach-meson/Makefile            |  1 +
+ arch/arm/mach-meson/board-t7.c          | 97 +++++++++++++++++++++++++
+ 4 files changed, 126 insertions(+)
+ create mode 100644 arch/arm/include/asm/arch-meson/boot0.h
+ create mode 100644 arch/arm/mach-meson/board-t7.c
 
-diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
-index cc71381f87e..d909fedcfc4 100644
---- a/drivers/serial/serial_meson.c
-+++ b/drivers/serial/serial_meson.c
-@@ -62,26 +62,49 @@ struct meson_serial_plat {
- #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
- #define AML_UART_REG5_BAUD_MASK		0x7fffff
- 
-+/* Driver data flags */
-+#define MESON_UART_XTAL_DIV2	BIT(0)
+diff --git a/arch/arm/include/asm/arch-meson/boot0.h b/arch/arm/include/asm/arch-meson/boot0.h
+new file mode 100644
+index 00000000000..3ec085ccd64
+--- /dev/null
++++ b/arch/arm/include/asm/arch-meson/boot0.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * (C) Copyright 2026 Lucas Tanure <tanure@linux.com>
++ */
 +
- #if CONFIG_IS_ENABLED(DM_SERIAL)
--static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
-+static u32 meson_uart_xtal_div(struct udevice *dev)
++#ifndef __MESON_BOOT0_H
++#define __MESON_BOOT0_H
++
++/*
++ * The T7-family secure firmware writes the SCS device keys into the
++ * first page of the loaded BL33 image (2048 bytes for the BL33 key
++ * followed by 2048 bytes for the kernel key). Keep that page reserved
++ * so the keys do not overwrite U-Boot's entry code.
++ */
++	b	reset
++	.space	4096
++
++#endif /* __MESON_BOOT0_H */
+diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+index c687ef822a2..40aafc0b922 100644
+--- a/arch/arm/mach-meson/Kconfig
++++ b/arch/arm/mach-meson/Kconfig
+@@ -67,6 +67,15 @@ config MESON_A1
+ 	help
+ 	  Select this if your SoC is an A113L
+ 
++config MESON_T7
++	bool "T7"
++	select MESON64_COMMON
++	select ENABLE_ARM_SOC_BOOT0_HOOK
++	imply OF_UPSTREAM
++	help
++	  Select this if your SoC is from the Amlogic T7 family, like
++	  the A311D2 found on the Khadas VIM4 board.
++
+ endchoice
+ 
+ config SYS_SOC
+@@ -91,6 +100,7 @@ config SYS_BOARD
+ 	default "q200" if MESON_GXM
+ 	default "s400" if MESON_AXG
+ 	default "u200" if MESON_G12A
++	default "vim4" if MESON_T7
+ 	default ""
+ 	help
+ 	  This option contains information about board name.
+diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+index 08a24d4b24f..dc2bc0ceecb 100644
+--- a/arch/arm/mach-meson/Makefile
++++ b/arch/arm/mach-meson/Makefile
+@@ -17,3 +17,4 @@ endif
+ obj-$(CONFIG_MESON_AXG) += board-axg.o
+ obj-$(CONFIG_MESON_G12A) += board-g12a.o
+ obj-$(CONFIG_MESON_A1) += board-a1.o
++obj-$(CONFIG_MESON_T7) += board-t7.o
+diff --git a/arch/arm/mach-meson/board-t7.c b/arch/arm/mach-meson/board-t7.c
+new file mode 100644
+index 00000000000..a6ccec25c0e
+--- /dev/null
++++ b/arch/arm/mach-meson/board-t7.c
+@@ -0,0 +1,97 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2026 Lucas Tanure <tanure@linux.com>
++ */
++
++#include <init.h>
++#include <asm/arch/boot.h>
++#include <asm/arch/mem.h>
++#include <asm/armv8/mmu.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <linux/bitops.h>
++#include <linux/compiler.h>
++#include <linux/errno.h>
++#include <linux/kernel.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define T7_WDT_CTRL		0xfe002100
++#define T7_WDT_CTRL_EN		BIT(18)
++
++int board_init(void)
 +{
 +	/*
-+	 * S4-generation UARTs (S4, T7, ...) derive the baud rate from the
-+	 * crystal divided by 2, older ones divide by 3.
++	 * The secure firmware boots BL33 with the watchdog running,
++	 * disable it.
 +	 */
-+	return (dev_get_driver_data(dev) & MESON_UART_XTAL_DIV2) ? 2 : 3;
++	writel(readl(T7_WDT_CTRL) & ~T7_WDT_CTRL_EN, T7_WDT_CTRL);
++
++	return 0;
 +}
 +
-+static u32 meson_calc_baud_divisor(struct udevice *dev, ulong src_rate, u32 baud)
- {
- 	/*
- 	 * Usually src_rate is 24 MHz (from crystal) as clock source for serial
--	 * device. Since 8 Mb/s is the maximum supported baud rate, use div by 3
--	 * to derive baud rate. This choice is used also in meson_serial_setbrg.
-+	 * device. Since 8 Mb/s is the maximum supported baud rate, use a
-+	 * divided crystal to derive the baud rate. This choice is used also in
-+	 * meson_serial_setbrg.
- 	 */
--	return DIV_ROUND_CLOSEST(src_rate / 3, baud) - 1;
-+	return DIV_ROUND_CLOSEST(src_rate / meson_uart_xtal_div(dev), baud) - 1;
- }
- 
--static void meson_serial_set_baud(struct meson_uart *uart, ulong src_rate, u32 baud)
-+static void meson_serial_set_baud(struct udevice *dev, struct meson_uart *uart,
-+				  ulong src_rate, u32 baud)
- {
- 	/*
--	 * Set crystal divided by 3 (regardless of device tree clock property)
-+	 * Set the divided crystal (regardless of device tree clock property)
- 	 * as clock source and the corresponding divisor to approximate baud
- 	 */
--	u32 divisor = meson_calc_baud_divisor(src_rate, baud);
-+	u32 divisor = meson_calc_baud_divisor(dev, src_rate, baud);
- 	u32 val = AML_UART_REG5_USE_XTAL_CLK | AML_UART_REG5_USE_NEW_BAUD |
- 		(divisor & AML_UART_REG5_BAUD_MASK);
++/*
++ * The secure world owns 0x05000000 - 0x09000000: it contains the BL31
++ * and BL32 runtime zones (also described as reserved-memory in the
++ * upstream devicetree) and further firmware-protected pages, and is
++ * left unmapped in t7_mem_map below. Reserve the whole span so nothing
++ * (EFI allocations, boot-time relocations) is ever placed in memory
++ * U-Boot cannot access.
++ */
++#define T7_SECMON_RSVMEM_START	0x05000000UL
++#define T7_SECMON_RSVMEM_SIZE	0x04000000UL
 +
-+	if (meson_uart_xtal_div(dev) == 2)
-+		val |= AML_UART_REG5_XTAL_DIV2;
++void meson_init_reserved_memory(__maybe_unused void *fdt)
++{
++	meson_board_add_reserved_memory(fdt, T7_SECMON_RSVMEM_START,
++					T7_SECMON_RSVMEM_SIZE);
++}
 +
-+	/* Drain the transmitter before changing the baud rate */
-+	while ((readl(&uart->status) & (AML_UART_TX_EMPTY | AML_UART_XMIT_BUSY))
-+	       != AML_UART_TX_EMPTY)
-+		;
++int meson_get_boot_device(void)
++{
++	return -ENOSYS;
++}
 +
- 	writel(val, &uart->reg5);
- }
- 
-@@ -109,7 +132,7 @@ static int meson_serial_probe(struct udevice *dev)
- 		return ret;
- 	ulong rate = clk_get_rate(&per_clk);
- 
--	meson_serial_set_baud(uart, rate, CONFIG_BAUDRATE);
-+	meson_serial_set_baud(dev, uart, rate, CONFIG_BAUDRATE);
- 	meson_serial_init(uart);
- 
- 	return 0;
-@@ -165,8 +188,9 @@ static int meson_serial_setbrg(struct udevice *dev, const int baud)
- {
- 	/*
- 	 * Change device baud rate if baud is reasonable (considering a 23 bit
--	 * counter with an 8 MHz clock input) and the actual baud
--	 * rate is within 2% of the requested value (2% is arbitrary).
-+	 * counter with an 8 MHz, or 12 MHz for XTAL_DIV2 devices, clock input)
-+	 * and the actual baud rate is within 2% of the requested value (2% is
-+	 * arbitrary).
- 	 */
- 	if (baud < 1 || baud > 8000000)
- 		return -EINVAL;
-@@ -179,14 +203,14 @@ static int meson_serial_setbrg(struct udevice *dev, const int baud)
- 	if (ret)
- 		return ret;
- 	ulong rate = clk_get_rate(&per_clk);
--	u32 divisor = meson_calc_baud_divisor(rate, baud);
--	u32 calc_baud = (rate / 3) / (divisor + 1);
-+	u32 divisor = meson_calc_baud_divisor(dev, rate, baud);
-+	u32 calc_baud = (rate / meson_uart_xtal_div(dev)) / (divisor + 1);
- 	u32 calc_err = baud > calc_baud ? baud - calc_baud : calc_baud - baud;
- 
- 	if (((calc_err * 100) / baud) > 2)
- 		return -EINVAL;
- 
--	meson_serial_set_baud(uart, rate, baud);
-+	meson_serial_set_baud(dev, uart, rate, baud);
- 
- 	return 0;
- }
-@@ -244,6 +268,7 @@ static const struct udevice_id meson_serial_ids[] = {
- 	{ .compatible = "amlogic,meson-uart" },
- 	{ .compatible = "amlogic,meson-gx-uart" },
- 	{ .compatible = "amlogic,meson-a1-uart" },
-+	{ .compatible = "amlogic,meson-s4-uart", .data = MESON_UART_XTAL_DIV2 },
- 	{ }
- };
- 
++phys_size_t get_effective_memsize(void)
++{
++	/*
++	 * The top 8 MiB of the first DRAM bank contain pages the secure
++	 * world protects at runtime, keep U-Boot below them.
++	 */
++	return min(gd->ram_size, (phys_size_t)0xdf800000);
++}
++
++static struct mm_region t7_mem_map[] = {
++	{
++		/* DRAM below the secure monitor reserved zone */
++		.virt = 0x00000000UL,
++		.phys = 0x00000000UL,
++		.size = 0x05100000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/*
++		 * DRAM between the secure monitor reserved zone and the
++		 * end of the first bank. 0x05100000 - 0x09000000 is
++		 * protected by the secure world and must not be mapped.
++		 */
++		.virt = 0x09000000UL,
++		.phys = 0x09000000UL,
++		.size = 0xd7000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* Peripherals, GIC, ... */
++		.virt = 0xe0000000UL,
++		.phys = 0xe0000000UL,
++		.size = 0x20000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* List terminator */
++		0,
++	}
++};
++
++struct mm_region *mem_map = t7_mem_map;
 -- 
 2.55.0
 
