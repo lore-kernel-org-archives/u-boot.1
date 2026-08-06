@@ -1,98 +1,99 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D351C55ABF
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 11:11:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FC6FC55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 11:11:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 18C0960806;
-	Thu,  6 Aug 2026 11:11:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 677E280A96;
+	Thu,  6 Aug 2026 11:11:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z7iUl3uZ8rZC; Thu,  6 Aug 2026 11:11:30 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FipDVHPJ1k6T; Thu,  6 Aug 2026 11:11:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7F93B60784
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9D1A580A67
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786014690;
-	bh=B5a4ZNmrAScg5+hVqhCZRbwPH+JTZRPMLMw4sPOzQeg=;
+	d=lists.u-boot-project.org ; s=default; t=1786014704;
+	bh=VBQrbN5H3IKzOWC15kDgDkKfkd/d84qDFNBeOadNlJ4=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YXf2vuTzNSPq5Fqqo4X54YBs251d4ZRR+LAKy+e0J0bg9dWiaU/Z2V5IUF7czg5wR
-	 Ts6ks6eeBAh/gKO0vauRtE5IyYCyewVW0gtnW2dfOBtJMh2AFi1pd0SK5x7vVHBG0S
-	 i8XUXhSTBHsl3Ux4AEA8/otETyA4b/aiDuvUrAlNIkyaGogs0YQ9Csj9ZnVRBRIAY8
-	 KiKr2N2s7i2S5HeK//Qt+XnseH/3UK4l+z4En5q1QG6Kr4LVTC6Pku1oJYgw2ozkMj
-	 TaStYt6b6OMzNd0zo4//RNPK49yBKo5fqDQmMbybLWSxAHqCwSWOrwlS+X+s8/LV3r
-	 I4xCy7vNVuYfQ==
+	b=IMzyQ0k7DORyNrYEZQjorUIJdgY2w3uP/wvJAi1sq5grvq7jc5KjuY467bwpr2lYy
+	 HXgNMHH3gnli9pBYO32mssj8T283UNK/w8SsDV3P96Zg3N4yb5ZrC0HDfPapA+Do1g
+	 20auQd9RKpTkt9ROBI1Hd5MQ295DaEQs7SZU2qS/Cq+b0pYfe1jUZZUM8Wtb72U65c
+	 OUK8YmT10XQ6oVAG+SqK4P1avzDjJcHANgNZbVSm51WwTCDI4SIh2F/Qey0yKq3UOr
+	 8K/tX/wIqNQJWH5pbB4RBxnuq96kQWJ4FqLu2k2zKX1+DK3mWMqFLLkrWpth/l8Zeh
+	 aYhUAeTsPRayg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7F93B60784;
-	Thu,  6 Aug 2026 11:11:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2E52910E
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 11:11:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9D1A580A67;
+	Thu,  6 Aug 2026 11:11:44 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9CF59397
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 11:11:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1462560784
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 11:11:29 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 82EB080A92
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 11:11:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rWbGX8vrYVlV for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 11:11:28 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mdscg4-ZPtv3 for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 11:11:42 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
+ client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
  envelope-from=jbx6244@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 259246070D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 259246070D
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 259246070D
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 11:11:27 +0000 (UTC)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c160d8760e0so26317366b.0
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 04:11:27 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 913FB80A6D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 913FB80A6D
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 913FB80A6D
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 11:11:41 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6a18af264f9so269196a12.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 04:11:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786014686; x=1786619486;
+ d=1e100.net; s=20251104; t=1786014699; x=1786619499;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=B5a4ZNmrAScg5+hVqhCZRbwPH+JTZRPMLMw4sPOzQeg=;
- b=SGeq14rg18L3wQWXZBH7WOvUs8QYKAlOravn6EFwIw/eIXnJxBhmoNTnq2W/RrR+eg
- 7FCdqvi1IoyIs0Ivt3LYeMREnHsazOTJf2bVO0LltwW+9f5pZeUMTNoqzIXRLgjR0eee
- nasVVUCNrYm8GRH1yWeaqijwCjG1XHQ2+InY3gKC+VH7+4+0jrQqbU/5Phf+LGOROWMd
- NsXFkIyUK9CZly9/NfhCUDLosJU7gGmmDv+F31jQRbbHsz7Imr0kGLQvY7i3G0/1NVG3
- tQDeCi5mzKnz20DWYUa4M7TKZBeJs345LhBjdKmKmoaPfhhq7uIuUmm5/1VLY/xTVkg2
- Ay2w==
+ bh=VBQrbN5H3IKzOWC15kDgDkKfkd/d84qDFNBeOadNlJ4=;
+ b=sZZ0+xGre7HceMjEHIlajPWV3GlkKMLtbCqCGbJV5VMFCF6srpXMGxYJnNkAOMFM6g
+ yFr6kRYpB32WrObDipssVmn4DH2ZPbWeaDKUaBXfB6WmQoudD3ZMZlrgupQZoYbbxpBT
+ OIroLAK+GF67d4dUu3bMB1r3yV9gzKAD1Uk2t+E0d5T46n74O3EsVMhny5Px6WGar8ip
+ WKCUucmaCUICPEssjX8wwxAOmO7KZ9+MXhFxcmSyUrDtVuNTyDi2HPnRiGKRVHOubA48
+ d+aHCTRSgxBxLjlaYKNvL6rCL0N1zwlHchbxbd8ZTJZlobIDqgQ/VfjqwxQfjpKFqO4z
+ G2fw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RodLRQUgCJU3asHnIJRPsGzh9OLib4nE33qnE6daozp66VB8d7kawyK9BTpQxrT03nH/N0Axc0=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwBgVce20KuhWRH9d9sV4/ge2YCYBkCmRqoCFnsv1b4+AynlxOK
- 1ab2CNFW/GefXAtYqieBMEWXbHyZ45eMmjNWOSf7GcDQJ78iS4s6fmbo
-X-Gm-Gg: AR+sD11I6ZhBp+4JRL0WV0YkQ/oPRMwfZgr6ApdmMu9Pmt4hqdkvjzE4JwBPJqfvs98
- CTnOMxg3Z7UVVjMYrI+BpzOyMJqXwAW///JJw6Y+iIX0EkkBGSsia5l8O9Ems3GhHKCzjTDyFXW
- PJAO3jq2T8WTBD/27DIsWouGlkU06t+YyF1fMa9C7Gm0V/zkFfLTwaRGD+f1REvH4l51Rh5+gzM
- fU8VIKbqNuZZIyJGhLI14OxnkT2qTnztzUhSuUhilClSAVj9zSZFXTwdvjZ8USZ+70dC9tkznzj
- 6wAs/k41Lqi5HU7LUjIHnWcu8HvlI09EOlAK1pthueqo3KrhyrRvKe4T6Q1HtrC/YpPoZfrtmVj
- Vmx/FzB9kJjji/+lFpwiuKYNgzW/l/8l8CS9k6zPRH5Al5t6Qt6QEpbDAcZ4raFSCFfV2JDrrjh
- 2NC9M3QjqqYBDy8lnFZEMhLnBnlE31++/ze0ejrbTNBZRpJRD70TiAo5HgYssPmHCkk0jkiLxlu
- D9r6C0q0BJ+Ch0rQXJ1JOklc/Q=
-X-Received: by 2002:a17:906:ee8e:b0:c1c:4820:65d2 with SMTP id
- a640c23a62f3a-c2039edb9fbmr423822266b.2.1786014685640; 
- Thu, 06 Aug 2026 04:11:25 -0700 (PDT)
+ AHgh+RoDMjBdzRQ1cb6Pgn7/aLLOXI21pLkrobbp2fVpvFefJs76GEAjFvylbgI/ZqU0a+k8f5d5h4Y=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzqIfDpZaLLdji9MvOCNuIxUjuPjGIRWo4eRk7w/lOEYT5K3Ov1
+ 946ys0eKYBfYAm3lFaXc0IiWETAPvIinLZzRtvJRXZsZ2ld9Wbf5VCUD
+X-Gm-Gg: AR+sD130KMQJMPei3w5cLVFfkU0k8SuOK1TAuu+kNKY/3lPlIdXj563vJjilGaPmFqR
+ SE2I/P4I41au2hvJvh5OcbDzSnzPEsiVWci2r2O3IGTnI8m4Gcdq5aCxOUK7Leb+yHy1EYswpaf
+ oD7cZHfBAtxrRBSqSFC9i7rjpkYz0cjhMlQW3GgMgRO7CQarb9VW2x52irCPq0W2kITRh6Fpkes
+ m//uBfkg4JHtkegorgnYE27R9ctaEfnZvrw49NQf36TkMQ5U4qfkurJufEp2bpFYoLcTMxBQTPS
+ PozDkBS7RY/NrOSZQ4GBG8JQCEW6ciqnKF3yKIMYmwz4KjZ53HyvYgIfAGbzJ4KD+LqSPrESQWk
+ tvSK2AXUcAsAXXMXZGvkcbN236CAn6HKLstYIpxCbedN0V8yi7yKxUYR1CPMlj3ZIkVFNyR4UO6
+ Byy+jVu3AFHbY8jtxtUFibwxBS6VNBs6m8vz96d7D9qIhTA/sHgAl9Sga9C67GkUUbZK7K8gD8S
+ UCn2B8ocO3XcrP452O44hmp8OlVb5er95hfxg==
+X-Received: by 2002:a05:6402:28cb:b0:6a1:445f:1f3 with SMTP id
+ 4fb4d7f45d1cf-6a14f28502cmr3610407a12.4.1786014699473; 
+ Thu, 06 Aug 2026 04:11:39 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2036428e08sm244407366b.48.2026.08.06.04.11.24
+ 4fb4d7f45d1cf-6a1947d300esm715363a12.12.2026.08.06.04.11.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2026 04:11:25 -0700 (PDT)
-Message-ID: <5f60ffd4-273b-4f2f-87d1-5a9f1fe74543@gmail.com>
-Date: Thu, 6 Aug 2026 13:11:24 +0200
+ Thu, 06 Aug 2026 04:11:39 -0700 (PDT)
+Message-ID: <7c8d4fb1-ba0d-49f8-90a0-6a56b8ef002d@gmail.com>
+Date: Thu, 6 Aug 2026 13:11:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v5 4/9] rockchip: doc: add more building instructions
+Subject: [PATCH v5 5/9] rockchip: tools: rksd: remove reference to
+ README.rockchip
 To: u-boot@0leil.net
 Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
  u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
@@ -102,24 +103,24 @@ In-Reply-To: <0ce61246-3191-4ce2-a7ea-8ab3c02cfe80@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786014686; x=1786619486;
+ d=gmail.com; s=20251104; t=1786014699; x=1786619499;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=B5a4ZNmrAScg5+hVqhCZRbwPH+JTZRPMLMw4sPOzQeg=;
- b=lBu7jXCorQKglfxMsfEI8S+BfhFh/IyjsNYgC0d+2FyRXmxnWDoA01OBCwnaGlHkDh
- TCLhtI46rbIsS4zVYrOfTclt4EW8zXsX7mp+zpetRtRXYa+23bb5w5RpO3hl82r+YS3l
- 31J9RhgxJXYZgBVNVIyaoiMSih8koncpXK8s1EuswWl1pDl34lf/X78eW25ZkVG155hS
- hikOQftg5HzBYj9L2RsTjU0XPNYNZC1UVdpRn3pC4gTk+s+idVFn16gY7k27972co+kN
- Vm5K3+msWUwWgXjMvUNTmQCuxlWWi4gceec5QurBINZwIFyKUfMefo0a/wUUXUs//OY3
- Ebgw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=VBQrbN5H3IKzOWC15kDgDkKfkd/d84qDFNBeOadNlJ4=;
+ b=Qj1dvPATrAeJ6Zjcx4104nXsYZ8VOVtWeGM/1fIzMuhIwubO3mw8+7fku/k7zbYfEY
+ G6cAEBhrvIim7Yk2HTb9bGsGgMGm+KN8gC2sr/Ji0qFoCOsZlkedr03iyvXiJoXGvnvC
+ 1T2QJv/CNZqSKL80hxB8FuGVK1DUzXE71m84Qox758/vY4G/2FfRCm6MNBoO89GDwfwi
+ fN97udRBmt8ngJlGr0H+p6BnLy6QhHujxJwn3KYzo9Ouib/789YyjqbzfvBdzYECA289
+ DQb2K5x+7+cOLZnFIUwM1Bq7YfKfO2Gu0rqIcvqqDq1k4mVOH+oxWgMSG1yKGX0L6FOn
+ fIXQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=lBu7jXCo
+ header.a=rsa-sha256 header.s=20251104 header.b=Qj1dvPAT
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -134,60 +135,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add more building instructions for existing SoCs.
+README.rockchip must be removed.
+Remove the reference to README.rockchip in rksd.c
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- doc/board/rockchip/rockchip.rst | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ tools/rksd.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 369dadbce53f..046f70d4ef0f 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -241,6 +241,13 @@ To build px30 boards:
-         make evb-px30_defconfig
-         make CROSS_COMPILE=aarch64-linux-gnu-
+diff --git a/tools/rksd.c b/tools/rksd.c
+index 7d46a1b07b3a..bf1b3737b72a 100644
+--- a/tools/rksd.c
++++ b/tools/rksd.c
+@@ -2,8 +2,6 @@
+ /*
+  * (C) Copyright 2015 Google,  Inc
+  * Written by Simon Glass <sjg@chromium.org>
+- *
+- * See README.rockchip for details of the rksd format
+  */
  
-+To build rk3036 boards:
-+
-+.. code-block:: bash
-+
-+        make evb-rk3036_defconfig
-+        make CROSS_COMPILE=arm-linux-gnueabihf-
-+
- To build rk3066 boards:
- 
- .. code-block:: bash
-@@ -248,6 +255,27 @@ To build rk3066 boards:
-         make mk808_defconfig
-         make CROSS_COMPILE=arm-linux-gnueabihf-
- 
-+To build rk3128 boards:
-+
-+.. code-block:: bash
-+
-+        make evb-rk3128_defconfig
-+        make CROSS_COMPILE=arm-linux-gnueabihf-
-+
-+To build rk3188 boards:
-+
-+.. code-block:: bash
-+
-+        make rock_defconfig
-+        make CROSS_COMPILE=arm-linux-gnueabihf-
-+
-+To build rk3229 boards:
-+
-+.. code-block:: bash
-+
-+        make evb-rk3229_defconfig
-+        make CROSS_COMPILE=arm-linux-gnueabihf-
-+
- To build rk3288 boards:
- 
- .. code-block:: bash
+ #include "imagetool.h"
 -- 
 2.39.5
 
