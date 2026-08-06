@@ -1,116 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EF3C5AC7A
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:05:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8632EC55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:05:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 576CC60835;
-	Thu,  6 Aug 2026 13:05:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 452B7406E7;
+	Thu,  6 Aug 2026 13:05:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aZ3TlW4abSUj; Thu,  6 Aug 2026 13:05:21 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VKnhem1-HWVg; Thu,  6 Aug 2026 13:05:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 830A76080C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D0B27407B3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786021521;
-	bh=kPW2DUxdpLm77sM+lotN4NGuanbhMa2JVuZlwPlfDK8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=oulrlOBeiMnPFuZ90+ezdWnOYknKVke2q5CPKcdjrpvtAtyK+RdDxkw7fKTKCb0yx
-	 yp2PKd8TOQOeSia6GkCqOW+0djtaqSb48pImkHsWOdY899VGue6Y316M3/tmeJv96F
-	 ugzrUZbocBbcEmXQv+nETDnVQ4amHBD0acoH8q9TFm8bNC2ruA2RHTx9NZWxcIqEYn
-	 wDEt/uKOsZ05rxAzVyIUSYjPPQWphzSnyapmG9Jp2UmANARRmUXnGG2QBCZ4MFYutw
-	 smppXPTllbD55NYPi0nEqYEQYYDsDR/hNjhX9Mh/vEGjT6AkohY8ChObUHmTTYQG7w
-	 tLDvYWzb2PL5g==
+	d=lists.u-boot-project.org ; s=default; t=1786021523;
+	bh=K03urPrRGXrO5MI5Q36IkApSb2Fx6q/Q2CDcuw+MS9E=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=pH3U6ZZMSZEP0WS1Lqy6q1aEt8CeHgXsqGB+q9TUK5vhicQYUy2HbEjTMPd3xxGlB
+	 HAtiMN1bucYC+umTAzOeJ8HOhxUrMaJcG4CaiR2St8YtjP2s9KZDPjcqFmjYi6K2Wv
+	 td5TsoQqaNsIwJMsne97ZmF5vLi2O8IzQappms1rjKbfQVTH/LMgiGPdm48dHSkLbd
+	 w+ke+ScxfVL/0FMia5waU5ZjmsaLosjXxEjzxN8QIOmg2MHV+W9LHFwhoyDorP/yc8
+	 lc4KLU6c5R7EC2YIFsCbzJTD2c8gQeTHiEgjIx+CeSbWJYL2WXn7oZk6HdryO5ruOr
+	 TxilqFEESXbsQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 830A76080C;
-	Thu,  6 Aug 2026 13:05:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BEC6F218
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:48:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D0B27407B3;
+	Thu,  6 Aug 2026 13:05:22 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 28CCF282
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:05:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A4F0040278
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:48:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 19D234065F
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:05:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ttvnxZHHdf9g for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 12:48:20 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xgm6pswwjm0b for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 13:05:04 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DF5A840159
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DF5A840159
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DF5A840159
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:48:19 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-472326ca506so1455678f8f.2
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 05:48:19 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C88444063E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C88444063E
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C88444063E
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:05:03 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6983d3dae7aso1435634a12.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:05:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786021502; cv=none;
+ d=google.com; s=arc-20260327;
+ b=EbMg8BG0YvOWdKRCu/oCZrnUzsOpzrIno7hTy17w4dBRIouggO/XIjCO0wSdAn5oV4
+ 1i5Jcnup7IcIasNb9+21yP2oDvL2sE2E0RTKQjC8oNZ2eLDHMdLf24MKBRbcQ29qPa5j
+ 2XxeJm/R+3rBNxGZaKOYXbMEnPIhmLpnXtZIuu98YPqWS0ohxV8ID6PN6hGZbO9sd/5t
+ KolE/Ki6yv1K4kISO83yBJGugjqVbBBOq+3OLbe0Z2inJTKUzRcsI5HWhGH0Ptpk7ZoR
+ Sj6VrIrkfhbOp9HqvkkJYhLbsqaKGVJR1ybjJCGv1etKdG3zUNHGwZC5Y660AV9n3Lkj
+ mbUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=K03urPrRGXrO5MI5Q36IkApSb2Fx6q/Q2CDcuw+MS9E=;
+ fh=OiqyfJriKAEY4npMYc5GL0YTZxvo/Zyvl8rRGPa6ZE8=;
+ b=jwJrd9KIEb1grg9c7AmViTA8dNVTpsmrnEEsIi0VPQwdjrzu35AEEfCHkGP6VyaIC9
+ LjKd27mMs0oeuoHw4KQTfRwBe6KDE3OtXQg5bZz2oHfpUAsCLeDv4bh3No9sC0/k1fi5
+ m0sIuCJzOsJ3U0vG6oB7uEp8MSdESWPcQ/xfEbM8+rNy/3lfVmd2YAiGeUA0fDWFnH1U
+ bPAYzIrCFsJVGQW7OF9CcPZ0d7/NKVMQKlVAjU78GPQAmtirM4r6Xrdoghbg1u6SrUXH
+ K0dkqSwvFh8wqVOyscqsZCKvBBJ28j01zyitTjdwZ2TVl0bvOpVsGQVuhIcjeH1qdIMe
+ QLMg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786020498; x=1786625298;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=kPW2DUxdpLm77sM+lotN4NGuanbhMa2JVuZlwPlfDK8=;
- b=hDgJ3XiIrjUzKQau6CjVIvidRYdxAX0cJC5HiokubLZ9+7VeMulUZTA6A8UPTbe4Sh
- +Ich5ml/0DKzSXvWKHj3Lk/CH7U2WBLp/hIAuwVXrAEaTmFl8DR1bUuf03FeNwYDLQyw
- f9lQVruXPCCIS9lae7odaFdA6mBSzJFfJCQhv2hzMhJkRyEgvpiQMuHfZQ0esAZvTvsr
- JJzgAoiP5R1zayWaKhyFQUwDURQDIQ+sKfXvtzeHtE7IsC7KmKAQDF/WPv5pGAvt2DhS
- DSGUkqX4BONL8cOkq/fIScw+ErJZjmCk+fixjhoFAtXQeYz0FCDV4H9TfKfFqLbNUBxx
- jIlg==
-X-Gm-Message-State: AOJu0Ywc3Fv4faKeo5mMjcx7NnkVlN2/PrK5Com2mI0H57RQa6YuTEQm
- ejQhAK9HiIkn7hFp0y5uxaJ11l6FGaEbKTq2QLLmD4t2xLBnDB3MxBYwXchD0g==
-X-Gm-Gg: AR+sD10b+BEzdlGztDa3QHNSbfD/iR2AC09Bb8Lf/yD/uh+7cwIr+N6udbIrcWlqhRS
- ZMYKYEUPRf77w9y/TwDDm1bM9LoRLcFLm7cRc2hbj3euFHG8LDlzN129PuqxHVG2GjLFWxbkd7i
- abw0cACivxBeSuBiMoMpCWTQ5uPjmUL50qkghmURU86eBdUeh4aemENpzlh7XYj+4Wgv6efGC5o
- 6dujCt62j4Wkfh017+aMgRkL2e5S7o1y6kvr4yl2NP4Ji3oqjCh9EZLwTBc3hmod7DJFcGbnIyi
- rzN66rwEYvHBRSSj/mtKOKXGatFuugyes9pLKkBClWSI+i1/vFOKAC/jRnWzvrlDb7CRW888CZD
- eNQwChRGwgxXXsBYDrGQ+3yvQ0lzXwGww2f0g8feZ4wDpmy4GkAuKGV34LLHxslMYAqOmmfhqQA
- pdixn0KIhigq0Hyd9zgRcX7oXCQ7S5SNAtm+HwkgiSxxQ2y7Gd25Bb9NkHpiIFTqN51iY=
-X-Received: by 2002:a5d:5f48:0:b0:47f:9404:5185 with SMTP id
- ffacd0b85a97d-47fec63136fmr22485577f8f.24.1786020497698; 
- Thu, 06 Aug 2026 05:48:17 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ff7b25c01sm5663727f8f.29.2026.08.06.05.48.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 05:48:17 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Franz Schnyder <franz.schnyder@toradex.com>,
- Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: colibri_vf: CONFIG_TEXT_BASE and the Toradex eBoot flashing path
-Date: Thu,  6 Aug 2026 14:48:16 +0200
-Message-ID: <20260806124816.262259-1-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.54.0
+ d=1e100.net; s=20251104; t=1786021502; x=1786626302;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=K03urPrRGXrO5MI5Q36IkApSb2Fx6q/Q2CDcuw+MS9E=;
+ b=Ykh5P2m5mEQLhMnLQ8/NRmbI1wjLHCW2Dj/8UEbsmSCsFCbjW8SoEJYZ0NRahQwH0z
+ nsHlk1sVucaeWA+2eJEy692hH4c0sXIpg/inV2DB24qEyjtTEFWshqCylzig1lgfj4+D
+ /dFt2Y+ovdVef6rFdPD/VWWLXxp117vwWScLVBHoIu0jFmbzj0dNUKkICri2KrmD8Eye
+ M8UhQu3dfNp0W3gmVuM6PgeuMZohb8ZobWG6PC8qNFNFWgJX928wrNucH8d0z66fVQhF
+ Va+WpoOe/GqIE/8ELKHQ/tVElxFQ9MCa9vF2ky+cgOpcu3Lw3hG8Wz/suAZeT/ZOSTe3
+ hK2g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoMLccalI4p0WUdmuTrShrWCYy0y6oZf0pN9mlnPvRrkspN6nJaFC831AuFQOrbs/bfAVHpevc=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzUwZQBfgOxEw2FEC84V5RyiNAix8qkhNAie11u8pYzrquv1eJ4
+ Gk9MOngITCjwEqOUdxIu6RKGvH79lsoXGilQC34R9l/wnVHkzZd46IaWZdunUe+wrBAiLnf4sYu
+ gSeVMDTnSOWsDDtnv1ls6nbaRT0daDHZnFxPaf5XDMmMlg08kJMk=
+X-Gm-Gg: AR+sD13QU/uZSkNtltTUuaFEeu12fNN4+tIt0YrUzBzJOQUcZ5OUw3vRSAisASno2tJ
+ hkbhp46mzy6VVFLrgKyPMcH9M6SRKtGb+TjQdH8jfmBVcT+Ktea3z+FAeER2T03q8qHNKvdrIAD
+ dyl0+ekPqoSuneBoSB/MeDNluSzW4Q0TvhNelbJ+cDuVRyoHRGgqoS0gRIOcqx42LrKe1+oOKzQ
+ ZtXwd3nlgph9YkTluYbYzQtV9Wbn0JiqdfX+xaOeFwiOYXxqVP7Oh3HT4XXe4KXdBktOD9fzYrr
+ IVwAgTw4I0LesKa49wWhyXVGcRsuS12y6KbpSgFwM30=
+X-Received: by 2002:a05:6402:3809:b0:6a0:e8a5:7ef4 with SMTP id
+ 4fb4d7f45d1cf-6a198ebacbfmr2499582a12.3.1786021501747; Thu, 06 Aug 2026
+ 06:05:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 06 Aug 2026 13:05:01 +0000
+References: <20260731085724.75729-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTg3Rw8fOabWEsTKJvkazwJrnQYnAfTgANX9XDjpUczVdQ@mail.gmail.com>
+ <CAM=mAO=Eu8d-EQ3FgZ0jL3w8X2uMBddvWCLePb_+dhJGbnB6ig@mail.gmail.com>
+In-Reply-To: <CAM=mAO=Eu8d-EQ3FgZ0jL3w8X2uMBddvWCLePb_+dhJGbnB6ig@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Aug 2026 07:04:48 -0600
+X-Gm-Features: AUfX_mxJt5x2kV8ar3zxwUoblhJ9yPlSVdW07tbI0XKfZ0JKtX6Pa1G_8g8LBTU
+Message-ID: <CAFLszTiwvPhE+WLW1ym7wz35cCYY4wbF84drF2D34paP83uP6A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi: avoid video ghosting in EFI app
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786020498; x=1786625298;
+ d=chromium.org; s=google; t=1786021502; x=1786626302;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=kPW2DUxdpLm77sM+lotN4NGuanbhMa2JVuZlwPlfDK8=;
- b=iHG/w9PHn6hSL8QcEFCOdeKi0txxZ0yQWiyP2HZd/tlIuxvwUMSZaYPHF2ghb7p8zI
- aURkt3PTZjdxYQl7XtvbHBftQ7rZPY5StXHgsBbEYRjyEL+Wqe5Tg0006m59EPyKs1R9
- IaNCN4lJcEXBA8MczAxJINKzReYS4urm+IEQL2oXXMTBUqll9OiBgZMCho8lOl/R9T/+
- gz4i/+onb743vSpIBUimMyfpnCNDXgn9YhAwkecQMEZqRbRkRSKNrw2HDu3oEccr/444
- /zF0agGSSZtGS9Q5krviiH5uh6WTOVnwfOkO3sxRefICS4RVcgxGr2lCRm82myeY+io7
- XiEQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=K03urPrRGXrO5MI5Q36IkApSb2Fx6q/Q2CDcuw+MS9E=;
+ b=ny8MrFk5AEigTuWwCE7DnaDx+HEbJ93PVVGny9sCtr22zQR3DfJgVUO58NvCbOOKf3
+ cqZuaCxtKFzO64bulfMcmn61AGAP/JAM0uSOOhA5yr4AiotPwGb5/+aT8Uflq/c2eLGF
+ 0HdWV9R3PdMdl2AN+NyGEnr2LEfH+UFdOAEuI=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=iHG/w9PH
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=ny8MrFk5
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,51 +145,115 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+Hi Heinrich,
 
-Hi,
+On Wed, 5 Aug 2026 at 22:22, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+>
+>
+> Simon Glass <sjg@chromium.org> schrieb am Do., 6. Aug. 2026, 00:00:
+>>
+>> Hi Heinrich,
+>>
+>> On 2026-07-31T08:57:24, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>> > efi: avoid video ghosting in EFI app
+>> >
+>> > When running the EFI app via QEMU with EDK II using
+>> >
+>> >   cp /usr/share/OVMF/OVMF_VARS_4M.fd .
+>> >   qemu-system-x86_64 -enable-kvm -m 2048 \
+>> >     -machine q35,smm=3Don \
+>> >     -drive if=3Dpflash,format=3Draw,readonly=3Don,file=3D/usr/share/OV=
+MF/OVMF_CODE_4M.fd \
+>> >     -drive if=3Dpflash,format=3Draw,file=3DOVMF_VARS_4M.fd \
+>> >     -hda disk
+>> >
+>> > every character printed to the console by the U-Boot app appears twice=
+. See
+>> > https://gist.github.com/xypron/7214e785c7d73104f8541bcac363a192 .
+>> >
+>> > The reason is that environment variable stdout has serial,vidconsole a=
+s
+>> > value. This is defined by board/efi/efi-x86_app/efi-x86_app.env includ=
+ing
+>> > include/env/x86.env.
+>> >
+>> > Provide a proper efi-x86_app.env file which does not use vidconsole.
+>> >
+>> > [...]
+>> >
+>> > board/efi/efi-x86_app/efi-x86_app.env | 13 ++++++++++++-
+>> >  1 file changed, 12 insertions(+), 1 deletion(-)
+>>
+>> > diff --git a/board/efi/efi-x86_app/efi-x86_app.env b/board/efi/efi-x86=
+_app/efi-x86_app.env
+>> > @@ -1,6 +1,17 @@
+>> >  /* SPDX-License-Identifier: GPL-2.0+ */
+>> > +
+>> >  /*
+>> >   * Copyright (c) 2015 Google, Inc
+>> >   */
+>> >
+>> > -#include <env/x86.env>
+>> > +netdev=3Deth0
+>> > +consoledev=3DttyS0
+>> > +scriptaddr=3D0x7000000
+>> > +kernel_addr_r=3D0x1000000
+>> > +ramdisk_addr_r=3D0x4000000
+>> > +ramdiskfile=3Dinitramfs.gz
+>> > +
+>> > +/* common console settings */
+>> > +stdin=3Dserial
+>> > +stdout=3Dserial
+>> > +stderr=3Dserial
+>>
+>> Please can you keep '#include <env/x86.env>' and override just the
+>> three console variables afterwards?
+>
+>
+> Hello Simon,
+>
+> the EFI app should not be x86 specific. You already fixed this in your pr=
+ivate repo.
 
-a report rather than a patch, because I am not sure which way you want it
-solved.
+Are you planning to bring in support for ARM, RISC-V, etc? In any
+case, if you make a change the commit message should mention it, so
+people are not left guessing whether this is intentional or not. BTW
+my repo is public :-)
 
-Colibri VF50/VF61 modules that still carry the Toradex WinCE bootloader
-(here: "Toradex Bootloader 1.7 for Vybrid Built May 1 2020") are flashed in
-production by handing U-Boot to that loader:
+>
+> Do you miss any value?
+>
+>> env2string.awk uses vars[var] =3D
+>> env, so a later assignment wins, and we avoid duplicating netdev,
+>> consoledev, scriptaddr, kernel_addr_r, ramdisk_addr_r and ramdiskfile
+>> =E2=80=94 otherwise any future change to include/env/x86.env will drift =
+away
+>> from the EFI app.
+>>
+>> Also, the previous include pulled in pciconfighost=3D1 which this
+>> version silently drops. If that is intentional it deserves a mention
+>> in the commit message; if not, the include-then-override approach
+>> fixes it for free.
+>
+>
+> The EFI must not drive any hardware directly. There is no value in pcicon=
+fighost.
 
-	> flashloader colibri_vf/u-boot-nand.imx
-	Bootloader image size: 455448 bytes.
-	Loading done.
-	Flashing bootloader.
-	Writing 223 sector(s) of bootloader code from sector 64.
-	Flashing completed.
-	> reboot
+Again, please just put this comment in the commit message.
 
-With colibri_vf_defconfig as it is today, CONFIG_TEXT_BASE=0x3f401000, the
-module then prints nothing at all: no banner, no character, on a console
-that works before and after. Building the very same tree with
-CONFIG_TEXT_BASE=0x3f408000, the value the Toradex 2015.04 fork used, the
-image boots normally and the rest of the flashing flow (NAND partitions,
-Linux) completes.
+>
+> Best regards
+>
+> Heinrich
+>
+>>
+>> BTW an alternative is to leave x86.env alone and make the vidconsole
+>> entries conditional on something like !defined(CONFIG_EFI_APP), so
+>> efi-x86_payload.env and the other x86 boards keep sharing one source
+>> of truth. What do you think?
 
-The difference is only where the image lands in OCRAM:
-
-	0x3f401000: IVT entry 0x3f401000, image start 0x3f4004e8, len 0x6d000
-	0x3f408000: IVT entry 0x3f408000, image start 0x3f4074e8, len 0x6d000
-
-Our reading is that the loader is still resident when it copies the image
-in, so an image linked at the start of OCRAM overwrites the code doing the
-copy, while 0x3f408000 leaves the low 32 KB alone; we have not proved where
-exactly the loader keeps itself, so treat that as a guess. What is measured
-is the boot/no-boot difference above, on the same module, same card, same
-command, one build apart.
-
-Booting the same 0x3f408000 image from NAND through the boot ROM works too,
-so the older base is not specific to the eBoot path.
-
-Is the eBoot path still considered supported for these modules, in which
-case colibri_vf_defconfig would want to go back to 0x3f408000, or is it
-obsolete in favour of recovery mode, in which case it may be worth a note in
-doc/board/toradex? I am happy to send either patch.
-
-Thanks,
-Mehmet
+Regards,
+Simon
