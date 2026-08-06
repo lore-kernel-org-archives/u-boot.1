@@ -1,101 +1,100 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D169C561E6
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 09:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B247EC55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 09:27:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 901AD60802;
-	Thu,  6 Aug 2026 09:27:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 268ED40589;
+	Thu,  6 Aug 2026 09:27:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IJGlVMXY5QBP; Thu,  6 Aug 2026 09:27:22 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id k-jOBgFku3yJ; Thu,  6 Aug 2026 09:27:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0CCB0606F1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2EEFB40566
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786008441;
-	bh=4l/VmowySPL1pNENjXzm0eqg//6HxcXVZqY6xzZg0BA=;
+	d=lists.u-boot-project.org ; s=default; t=1786008448;
+	bh=5oayyJ68R834TLmTKMmpnV/zfA7PV7+p7yRGe5VtqI0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uTdZtZxYDnMtYXkCA3rDWulTOGORtjFT7/VB3t/iv29BA3tXxBQpc5zvUuxKtBQWV
-	 HOoGs9HYIcWtHAQdm3T1Go/w+usgTOl8EQx/GrcNmyu80rtv/Jd4MWCOFPsmSxdz5d
-	 S//KyJUZ+RvtWTyssXdxSDQozZOoNhYSxiHgbKfUoyhtj+vxTsPG3MpSdU1bV2to6b
-	 Jg2/Of5kx1mlf+L6pIeLuIWy075G2a9To8K0k72kkoHhb0EF2lNBdjU0VeaLBBQRHa
-	 T2DPCO7VB+st4MsH6gTh5xZXq+3GmQcqt5bgaw8wvz9YocdD72kzkUky3jOKHj59o2
-	 OAJOpTLnDwNyQ==
+	b=TheUae3XM2IEDFG+0fEW8dZbOEz4NEu4vbQN9cq8rmsXrbcc8sfyOl1JInQhwtoa/
+	 yoDhUDodM98w2KrOgwsemHpYVQhlJOHF986lWiw5gviZb7+4vYsIfB7wtif4HToAc3
+	 U3PYxd7EcR09ulSc/SVINiRhLrW/1pZ6ra2//DkZs9UjTu89pH8I/lt95OoDpdh0Vz
+	 F8t2gAzQM2Q4UHcYFdylUuT+9/jxT3Z8scOtCO6ZKVHS8GB75jXck0l8RGnlKCBT5s
+	 Nvn46v2NuxBv5AyZAfCCgWtWGNxnX2RRtNtpFDhnlcz4FURa+baMKoETvVLKBU1DlZ
+	 vSCmKxE8rw94Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0CCB0606F1;
-	Thu,  6 Aug 2026 09:27:21 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0CEDB3F9
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2EEFB40566;
+	Thu,  6 Aug 2026 09:27:28 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2D1F0198
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E74E7606E1
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:17 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1EE2380D86
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CYkiZ_Mg2yPm for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 09:27:17 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vLDYk9TVEMiM for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 09:27:20 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
+ client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org A5D4C605EB
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A5D4C605EB
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A5D4C605EB
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:16 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-47fde295992so603444f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 02:27:16 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 12AED80D81
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 12AED80D81
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 12AED80D81
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:19 +0000 (UTC)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-472326ca506so1333427f8f.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 02:27:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786008434; x=1786613234;
+ d=1e100.net; s=20251104; t=1786008438; x=1786613238;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=4l/VmowySPL1pNENjXzm0eqg//6HxcXVZqY6xzZg0BA=;
- b=s3hzIxAGhRHIg1cA8OeaD9WXTPkip0T34HsrMzBOw7VLQnOH0GXf5rhNUJpcmzqpne
- D8OZtt4h1Dk/6Qcu4Iz0XDumW9rvSOffIfyxEJxRbtYkAcqMD62oY6Z97FwXgolXpJ+4
- +plf6vuSCWKNOB4+HrS6ZFzX//UFut+QCeGjRxGB63tzgdE/1LXK5jbnDjywyzXrzB44
- YipaXHtCVFdyYvMPKf/zVXpCHq/MVxAPl97a7WtIcMbmPsRwd4C+79VR7DsvtYsH0gSi
- waBXjhhCOkIvFeLHjPVeTSeB6yG7VkmhcuB/Jg0PsWu8BuIeepCgik79V5A3/j3DtOz4
- jK1A==
-X-Gm-Message-State: AOJu0YwGJJtidXl196DZeGO+srD7CjjW5vSM3O8vubp4N8Fs5PBBaoTg
- I7Ell8oXh4uCgppHSVV47uWozKF/ESQjrJINb2AzQDF5jXVvlB+ICt5lD6Y/vVzWOtzFAE3wFDn
- xw4hGLQo=
-X-Gm-Gg: AR+sD105mnQDr4qqFiMo4sSgUNFPYCefATocbfwtoGxGTEXpzX8Um8/kEN5mufLkD1m
- f6/m9kLbHsThH96EZ8VCx9nhRYXKt6oNPorXUBVsT5magz0VxUEwTp4UaHdXOoTA+07498Ua6fZ
- t1ms1ylEQj5Vnb61J+QAxrXdBM+rzr95BPySm0etBNCZYsopmI4yKxN0QLXOP4WMGOmzkvZDvqD
- hVal7fxUFtueU39gN8sL9k/vWo5rXZ/KJwYkPo4WDAVb+x0iMiywvyRP5lQ6dMxe0+jm3O9IddU
- 4UftEQEe6aPw84Lhi/yuVRdqLYzHgswmZS7idBSVay/r113/HNGE3krzF4l2VmJwEpNqJaa/hfO
- mZWgI4RDECwdv4FAMgIIDZ8Mrj25eJLyLi8lEm006YMC0AEr62VW6Bu6AIQkutxeSPkQ5I9NZqm
- ooirTBIM3wRq/xvHjLAA18uK04k4JnrMlJoaZzG7VplgitpWcozI/qh5RtqTJrTyFC6nJAVX5Ll
- ZOGupBUQ4T4fQ7IiEzmJVUYtquFzmcOCpRuU+JM558Sm/xtZ2rv/PR80nrafQSNLVHsjV8nlZyK
- K4XSa0rUhwIbzn9nE6W45mD0jKbfo8OBnJCC/83IIRI+EA==
-X-Received: by 2002:a05:6000:4617:b0:47f:70f2:ccf6 with SMTP id
- ffacd0b85a97d-47ff86a9d22mr5171211f8f.6.1786008434496; 
- Thu, 06 Aug 2026 02:27:14 -0700 (PDT)
+ bh=5oayyJ68R834TLmTKMmpnV/zfA7PV7+p7yRGe5VtqI0=;
+ b=cJRAYvjzg/NSwOVEDsP5LGZn2/YDStM9MGWVWGO5K5tjUpE1dNgp5JK9KoTIfvl6LW
+ iD88t72sFsds6MGiByfS2lM5xOHoaLDpvV/76Tsh2klDsmPTrtNGjl+wuRaxsMgZdYtp
+ E9XduINiNmoTsNamntoqDbzzOHUTbB79BYSnKu02wp2nv8gsKJJ8YRPOSM7EQJ/T7nff
+ NfTaHXEW+PR02hLgJ52/u8pQ8Pb9ph1hHWXOA5LoRbTwYgWyz94Ib511MZ4H88HMBSKH
+ uRLm8jnvkDm4czLNUHsyWO4rZg1Nc1BRkjr+dn7r98XOUc64RJz0lTDoQ35R6ItJs276
+ U+NA==
+X-Gm-Message-State: AOJu0YxfLdlTpFEJaQdKLfVOD36g7c6ibaGdvxnoUIiLwdrQtaBEzNoY
+ 6eKi/nRmLmdNlxELLUy86RVqIDBIFS+Z+I3GIWXGdrGfP0S36a7IznJ67Z9bx8LaAio=
+X-Gm-Gg: AR+sD11FQVdLLugYyPV9iU4yb2k0pnFdaZkclXZqDantNaxCz5oOKB9mYfNLAdFG3/A
+ 7gMfRzCkX4JUSEIriAMxPcnDf0bPFCKvKm6+UJ4xQJHnaq+VxB0TZalzyAYwlrQihvy7vaec4xX
+ ItcQn5ECxmKEQDhvHdtSHK7erEBfKuZC1ghTxYQdTzCEndao7YihGBvaFwBue2ymHpMa7baz3jh
+ fKQhj/76RhvVLGw9EnC9UFX745Tly1VjtSq0ys9b7afCbWCZwhFKH2CVzb0yQwe5bpVjifbjpr8
+ 2l/6zvr41IVsoiUttewVOdCl8AcGIufRTMGCWX1+fsgS6W/1mJQeObtua4mMVDJFZMpTFBojEBB
+ ko7PtfukoKarJh8yFSYJKmXVc1MB1UgXSEX/Y+B68skC9kYM5+z/9mFQRJwcQ5twjYd0jAw34bd
+ LEZm9Wl1KFlgfU83LCUDt+nKDJBZZbahPphme/eWj+JOUIjyYQCkOwlFpIp+jugqkM5Ab62UgS9
+ LFmzcO5OmXEGILK/GUjA4tjtylT0B/LPqNzCPGLUY+5SWISbPQkQ2FgHgLPiC8bGSqv2de6wuBh
+ GFKTAijHSrkyMZUiqsjgR9Tqxrfhw84fTay6VtZ6uQ7dtw==
+X-Received: by 2002:a5d:5f48:0:b0:47f:9404:5185 with SMTP id
+ ffacd0b85a97d-47fec63136fmr20347765f8f.24.1786008437950; 
+ Thu, 06 Aug 2026 02:27:17 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ff7b31975sm4147248f8f.33.2026.08.06.02.27.13
+ ffacd0b85a97d-47ff7b31975sm4147248f8f.33.2026.08.06.02.27.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 02:27:14 -0700 (PDT)
+ Thu, 06 Aug 2026 02:27:17 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 06 Aug 2026 11:27:07 +0200
-Subject: [PATCH 1/6] mipi_dsi: add mipi_dsi_{generic/dcs}_write_seq helper
- macros
+Date: Thu, 06 Aug 2026 11:27:11 +0200
+Subject: [PATCH 5/6] video: panel: renesas-r69328: use common
+ mipi_dsi_dcs_write_seq macro
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-1-6b533788d0ac@baylibre.com>
+Message-Id: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-5-6b533788d0ac@baylibre.com>
 References: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-0-6b533788d0ac@baylibre.com>
 In-Reply-To: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-0-6b533788d0ac@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -106,25 +105,24 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Julien Stephan <jstephan@baylibre.com>, dlechner@baylibre.com
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786008434; x=1786613234;
+ d=baylibre.com; s=google; t=1786008438; x=1786613238;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4l/VmowySPL1pNENjXzm0eqg//6HxcXVZqY6xzZg0BA=;
- b=F5QsHByAgtbzRkonqJILFkWXj/3I46akwo9GErpRhvwaKRz8ahh1IooRVe9GwfS3Vw
- Ce9NLtRu8GPg802UQcIEvqPXFIHN/Rd33+BasTlCUTn7W4IZUAfSxFj+H5zr+nphP9U+
- cdfqtvYDYA0wt8aEE1i8hZsWEPFSurrXLwBhdzJckUC8CQZUaRqWA+MUgPLXMJyeFLks
- cc4dvh2Q4zorLM8buoGVzwun88F4WQTHX0l+FfjNTcecluMtSCe/Mvd2pU15ZhbTLPb6
- w/LjambR4+eSnQyDFORk7DAcCoBSXb910cfEcs9M1eqGTPCGvB16vVvT7o3aYJHuFCr3
- uyQw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=5oayyJ68R834TLmTKMmpnV/zfA7PV7+p7yRGe5VtqI0=;
+ b=cim8JjF0DJU2wJYFEuwdRL0eqqyZwv1csP1WTn1EnbHExu9aOuibAgeEpPvQUiLkrn
+ PEoh2/91h9TWB2fgmO1oRD1HhzF3b0RWBblPRnWY4v80V3gsmmOzAftJZ4CFGEx+zYjq
+ HIb5iwu8f8zT6Hk0PCqR6nq2u63ziaTjMsiI5dU6HH3AfDbok4eDSkaOGWNLfYtBiFKM
+ d3qdHEw9o9qfOKve3CI6ehy0wZ1tBoQyZr8ZKiP5wG6Pbn0QRhnEnkj1Jm+qCOgeNYMW
+ caH/94IAQe08j0uJSmQofAq1dSl7i2avwEhFSqh6xLIqY4wRY6CgdTnTMLJpb1wnzpAz
+ WXqA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=F5QsHByA
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=cim8JjF0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,55 +137,120 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add wrapper mipi_dsi_generic_write_seq and mipi_dsi_dcs_write_seq helper
-macros around mipi_dsi_generic_write and mipi_dsi_dcs_write_buffer to
-mimic macros defined in the Kernel. This helps porting drivers from the
-Kernel and avoids the manual declaration of static arrays in drivers.
+The current driver defines dsi_generic_write_seq as a wrapper around
+mipi_dsi_dcs_write_buffer.
 
-Some drivers (hitachi-tx10d07vm0baa.c, lg-lh400wv3-sd04.c, mot-panel.c,
-renesas-r69328.c and himax-hx8394.c) already define such a macro, so
-this will avoid duplication.
+Now that mipi_dsi.h defines such macro, we can use the common one.
+Note that we use mipi_dsi_dcs_write_seq instead of
+mipi_dsi_generic_write_seq to keep the same behaviour.
+
+While at it also use mipi_dsi_dcs_write_seq instead of direct call to
+mipi_dsi_dcs_write_buffer for address_mode, and remove static
+address_mode variable.
+
+No functional changes intended.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- include/mipi_dsi.h | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ drivers/video/renesas-r69328.c | 69 +++++++++++++++++-------------------------
+ 1 file changed, 28 insertions(+), 41 deletions(-)
 
-diff --git a/include/mipi_dsi.h b/include/mipi_dsi.h
-index 4ca05f71e29..fcad42d5145 100644
---- a/include/mipi_dsi.h
-+++ b/include/mipi_dsi.h
-@@ -267,6 +267,15 @@ int mipi_dsi_set_maximum_return_packet_size(struct mipi_dsi_device *dsi,
+diff --git a/drivers/video/renesas-r69328.c b/drivers/video/renesas-r69328.c
+index 0954b04b62e..e4f563c09c5 100644
+--- a/drivers/video/renesas-r69328.c
++++ b/drivers/video/renesas-r69328.c
+@@ -40,18 +40,6 @@ struct renesas_r69328_priv {
+ 	struct gpio_desc reset_gpio;
+ };
  
- ssize_t mipi_dsi_generic_write(struct mipi_dsi_device *dsi, const void *payload,
- 			       size_t size);
-+
-+#define mipi_dsi_generic_write_seq(dsi, cmd, seq...) do {		\
-+		static const u8 b[] = { cmd, seq };			\
-+		int ret;						\
-+		ret = mipi_dsi_generic_write(dsi, b, ARRAY_SIZE(b));	\
-+		if (ret < 0)						\
-+			return ret;					\
-+	} while (0)
-+
- ssize_t mipi_dsi_generic_read(struct mipi_dsi_device *dsi, const void *params,
- 			      size_t num_params, void *data, size_t size);
+-static const u8 address_mode[] = {
+-	MIPI_DCS_SET_ADDRESS_MODE
+-};
+-
+-#define dsi_generic_write_seq(dsi, cmd, seq...) do {			\
+-		static const u8 b[] = { cmd, seq };			\
+-		int ret;						\
+-		ret = mipi_dsi_dcs_write_buffer(dsi, b, ARRAY_SIZE(b));	\
+-		if (ret < 0)						\
+-			return ret;					\
+-	} while (0)
+-
+ static struct display_timing default_timing = {
+ 	.pixelclock.typ		= 68000000,
+ 	.hactive.typ		= 720,
+@@ -70,8 +58,7 @@ static int renesas_r69328_enable_backlight(struct udevice *dev)
+ 	struct mipi_dsi_device *dsi = plat->device;
+ 	int ret;
  
-@@ -303,6 +312,14 @@ enum mipi_dsi_dcs_tear_mode {
- ssize_t mipi_dsi_dcs_write_buffer(struct mipi_dsi_device *dsi,
- 				  const void *data, size_t len);
+-	mipi_dsi_dcs_write_buffer(dsi, address_mode,
+-				  sizeof(address_mode));
++	mipi_dsi_dcs_write_seq(dsi, MIPI_DCS_SET_ADDRESS_MODE);
  
-+#define mipi_dsi_dcs_write_seq(dsi, cmd, seq...) do {			\
-+		static const u8 b[] = { cmd, seq };			\
-+		int ret;						\
-+		ret = mipi_dsi_dcs_write_buffer(dsi, b, ARRAY_SIZE(b));	\
-+		if (ret < 0)						\
-+			return ret;					\
-+	} while (0)
+ 	ret = mipi_dsi_dcs_set_pixel_format(dsi, MIPI_DCS_PIXEL_FMT_24BIT << 4);
+ 	if (ret < 0) {
+@@ -88,35 +75,35 @@ static int renesas_r69328_enable_backlight(struct udevice *dev)
+ 	mdelay(100);
+ 
+ 	/* MACP Off */
+-	dsi_generic_write_seq(dsi, R69328_MACP, 0x04);
+-
+-	dsi_generic_write_seq(dsi, R69328_POWER_SET, 0x14,
+-			      0x1d, 0x21, 0x67, 0x11, 0x9a);
+-
+-	dsi_generic_write_seq(dsi, R69328_GAMMA_SET_A, 0x00,
+-			      0x1a, 0x20, 0x28, 0x25, 0x24,
+-			      0x26, 0x15, 0x13, 0x11, 0x18,
+-			      0x1e, 0x1c, 0x00, 0x00, 0x1a,
+-			      0x20, 0x28, 0x25, 0x24, 0x26,
+-			      0x15, 0x13, 0x11, 0x18, 0x1e,
+-			      0x1c, 0x00);
+-	dsi_generic_write_seq(dsi, R69328_GAMMA_SET_B, 0x00,
+-			      0x1a, 0x20, 0x28, 0x25, 0x24,
+-			      0x26, 0x15, 0x13, 0x11, 0x18,
+-			      0x1e, 0x1c, 0x00, 0x00, 0x1a,
+-			      0x20, 0x28, 0x25, 0x24, 0x26,
+-			      0x15, 0x13, 0x11, 0x18, 0x1e,
+-			      0x1c, 0x00);
+-	dsi_generic_write_seq(dsi, R69328_GAMMA_SET_C, 0x00,
+-			      0x1a, 0x20, 0x28, 0x25, 0x24,
+-			      0x26, 0x15, 0x13, 0x11, 0x18,
+-			      0x1e, 0x1c, 0x00, 0x00, 0x1a,
+-			      0x20, 0x28, 0x25, 0x24, 0x26,
+-			      0x15, 0x13, 0x11, 0x18, 0x1e,
+-			      0x1c, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, R69328_MACP, 0x04);
 +
- /**
-  * mipi_dsi_dcs_write() - send DCS write command
-  * @dsi: DSI peripheral device
++	mipi_dsi_dcs_write_seq(dsi, R69328_POWER_SET, 0x14,
++			       0x1d, 0x21, 0x67, 0x11, 0x9a);
++
++	mipi_dsi_dcs_write_seq(dsi, R69328_GAMMA_SET_A, 0x00,
++			       0x1a, 0x20, 0x28, 0x25, 0x24,
++			       0x26, 0x15, 0x13, 0x11, 0x18,
++			       0x1e, 0x1c, 0x00, 0x00, 0x1a,
++			       0x20, 0x28, 0x25, 0x24, 0x26,
++			       0x15, 0x13, 0x11, 0x18, 0x1e,
++			       0x1c, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, R69328_GAMMA_SET_B, 0x00,
++			       0x1a, 0x20, 0x28, 0x25, 0x24,
++			       0x26, 0x15, 0x13, 0x11, 0x18,
++			       0x1e, 0x1c, 0x00, 0x00, 0x1a,
++			       0x20, 0x28, 0x25, 0x24, 0x26,
++			       0x15, 0x13, 0x11, 0x18, 0x1e,
++			       0x1c, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, R69328_GAMMA_SET_C, 0x00,
++			       0x1a, 0x20, 0x28, 0x25, 0x24,
++			       0x26, 0x15, 0x13, 0x11, 0x18,
++			       0x1e, 0x1c, 0x00, 0x00, 0x1a,
++			       0x20, 0x28, 0x25, 0x24, 0x26,
++			       0x15, 0x13, 0x11, 0x18, 0x1e,
++			       0x1c, 0x00);
+ 
+ 	/* MACP On */
+-	dsi_generic_write_seq(dsi, R69328_MACP, 0x03);
++	mipi_dsi_dcs_write_seq(dsi, R69328_MACP, 0x03);
+ 
+ 	ret = mipi_dsi_dcs_set_display_on(dsi);
+ 	if (ret < 0) {
 
 -- 
 2.54.0
