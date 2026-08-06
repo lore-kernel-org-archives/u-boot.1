@@ -4,147 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC3C3C55838
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 04:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A24C55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 07:50:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1B42080D15;
-	Thu,  6 Aug 2026 04:22:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4A95880D1C;
+	Thu,  6 Aug 2026 07:50:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a-kRWvqrqTGP; Thu,  6 Aug 2026 04:22:42 +0000 (UTC)
+ id TauITsipoHw4; Thu,  6 Aug 2026 07:50:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 276E180D1D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 06B2E80C7C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1785990162;
-	bh=UEyJfxvS1Y/tohS3KDLwWVJ0i1kyM1kqDvw1m76XMZg=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=hHxoe4/djXNVkNvBapc309fXbLZxrsIfTdLQzn+7YgriSYI/QVXjLlgY57BrWMVi9
-	 QspFxDz5pmHPq2QrHCdmJPmQeBfIWP7Z/WvhRwfCMo/IOiVE+inBP1tJyKgcPnfPDo
-	 i6s9emC/KJVfMt1Ju39YmcTl4wuji8eSxuX/60FzyAK6+Js5mEF7GHdZCqBBMTnyDq
-	 LLiT1dAAD2Csz2k9e01MHJtj878q9oumjO+G5f/Uw+NIcpNSX/nu03+3KbSH1GZ21l
-	 d3EQFA+3NKmSxUwUrnJtsFwD82N+Vqe/rzSFT5d6EXn/3bbL/d6EdtjeJgSeUqAzK7
-	 YoHBmjeL/KamA==
+	d=lists.u-boot-project.org ; s=default; t=1786002606;
+	bh=5dDrTCluN6jGbr1insV2cN83ekf8s1NHqRpJobY84Yg=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=RngIEpXPjG4QHFTdI0lPCpifUYU9O0cMx8D2pdWxgH26uYuA+jzsBjHYDWwoLFloq
+	 bOisBwN8PNiIYUzCv+99dYLpTRmxX08daFH9g6OjGNBtVhWlvJipcFILl5YSMQqKdh
+	 L+sd9M0hJD1PgdoRr6EOpGRutc6htCoA2LN744dDmSIk3axQ4k69LiR7cLFtCcgnGI
+	 i6B9l3CkbW9LEiPT+jEFVme8Qj9Nvhf1ZGTCTqUs6bSMVixcHhmTCel4zY/nxXEGGL
+	 rcS9+boE9nMN6sNoHQ7fU9gNfgoiBC/O9GYc1AzQ/XLIKqqyUZCvGVnY/Rv7UGV5V1
+	 dHtyZgkNaTG7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 276E180D1D;
-	Thu,  6 Aug 2026 04:22:42 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 794DF392
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 04:22:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 06B2E80C7C;
+	Thu,  6 Aug 2026 07:50:06 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 98A78397
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 07:50:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 627DE4060A
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 04:22:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7F205606A9
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 07:50:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FBlIm88BYDKU for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 04:22:39 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A5A254067C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A5A254067C
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A5A254067C
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 04:22:37 +0000 (UTC)
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 177343F981
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 04:22:35 +0000 (UTC)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-38dde0df80bso2472385a91.3
- for <u-boot@lists.u-boot-project.org>; Wed, 05 Aug 2026 21:22:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785990153; cv=none;
- d=google.com; s=arc-20260327;
- b=HVORTsOzAb1dym69ko31X5fV2lWRXYCZTec9ynqkTJD2HhPyH1Cv8T9oAjaLeg9+Yv
- r3vCCQA6ZWLXKQPU3wwEj0BitQL/9nJS4SQViJcThrUi3MlffMluFJ1HnXaMqDaQL1as
- VnZodJa4DLjBkQ0gLC9SWA3h4N/wDFGLYRN6MzPOztbWQl7+0+AKCXmPmAKdp6bl5ycU
- 4Pfe/fUhKIdf1doY0iueRmco+gsHkQ3qgS3gGw0/2veT3oiF9qIe5BbJ01kays9VwEPC
- 52Z8OtVWlGgHuVocgPz5RQ3uBNinnh1nYRY50Wcs7o8lJtDl001qmUUzV4QnxII9Xpjg
- gFuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version;
- bh=3Nx86FkbGpmD8tE3Y7YFuJb388/hXVbHGHa6XF0RnP0=;
- fh=7lAWr5z9tIvpULmrrmB9Gn3ZBQ/8TtOKyCdhgWSh6Qw=;
- b=sf+vHt/3ZJANHQlXBVN28zOynk2C3TFNZc05jIR5TqoTieGX5V+QJBQrJmVM3v58xZ
- tvO07eFE38B6Y1vMluuIZLq/9Neew/Tzt1/7BOTgxYgIlDwTQ/e3upj2ZiofxJT0ZcYJ
- 50RCNwhg85yNGJDfzGcNf7/X94h6kPiHKk43KRSlzjajxlnDnj4mGkbGsW9LvtfdJiB7
- i1vcqZcwjJHOEoeRRjv11AWjKo+gFZwcmED1sgyXArjubftBtSnxswJP0buiPi0ZSpa2
- sMAM73Z45baSU7PYKr+n80fXTt1b1V2sBUzMiG80IV1psuWPEp4EY8EHu9BK93ka990R
- X4FA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785990153; x=1786594953;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=3Nx86FkbGpmD8tE3Y7YFuJb388/hXVbHGHa6XF0RnP0=;
- b=bwwwxt0b3CdeeG88kHyPJDQYTqqOSi4n/81MT1fmvqMxYGso5ZiUf/crBWRgwQkE10
- xImZVPvTfvBXWXfK+/qp4wmxxBqmS/B3FkSjSqYaDZfAJpixy/BTCdGb2jYYgv+FSY69
- mmJQnK6lCBlYrL6HnDgoywLwNke0ltXZ/34B1SQ+PN8w3/cGRtMBNwJ8T4sxgoxAT2Ps
- tsS2V+QeQvGR+404rUS1keu/5RvOpxqW6NTNGTAj6K16jHelgD/HISEHQ3c0braVvcG9
- 9EBGaeLlamxX+nGmglHfiYnMW97XJiy25jL768u4GF01B1MFZB5r7B3V2abHlxh20bcl
- tVNw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr+rELCXXO40Vwt4qgb4xqRRdGo6JiTy3avJ7VZfvWlgTxAwXlHpHs3Xjqowf8lPZmqEG4c7KY=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwL4cOOe+b1sruR18KVAY405/BH1e9vxZoZn4fnucV84EZpsBOK
- 1S+Nt52QF1vNVVtU/ehWhnqYqwI6R2/BgQbTKRlGHogMZ5eQivNx14Xk5EjSeekVhGNSZfpzSvh
- wbY87Qp8hq35tTGl/36omJ+icgPhbH7rR3PdcfToEYqIiVKeTafBqtQWfBtb6NUCJE7DBN4MLAk
- 79QWXc6c3NhIu6cNkW2Sxg6JSH5j8CLJTSOBq7hVYqHPanks7SrIndPzs7QkLVbfvOggMT
-X-Gm-Gg: AR+sD10PHcsTvayfLjulgv1b0PgCc5x4ZXmKHwTKG6+D5Ysx6nQnGDcUl4j+4Z180Oy
- BqL2b6aqyIfLe5sC2TEcjA6TqD12QZztWzH8GaifAuuLYo1h8S6fer3+pYoWuwalx3rcqDxg9qq
- wuT/iZOKjm6+k4u/ES8Yh2S+WS8wZX9OdyqLU2ZYTAB3aBXZMK52TsVvfunpj/FUZM9w42uZJzY
- 9X2OOt4P/d3mgjP6U2LDIlTPOs=
-X-Received: by 2002:a17:90b:1f8f:b0:38f:837e:fc5d with SMTP id
- 98e67ed59e1d1-3903c542eaamr12317376a91.3.1785990153360; 
- Wed, 05 Aug 2026 21:22:33 -0700 (PDT)
-X-Received: by 2002:a17:90b:1f8f:b0:38f:837e:fc5d with SMTP id
- 98e67ed59e1d1-3903c542eaamr12317346a91.3.1785990152943; Wed, 05 Aug 2026
- 21:22:32 -0700 (PDT)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aBBOSYmEdNQ7 for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 07:50:02 +0000 (UTC)
+X-Greylist: delayed 93562 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 06 Aug 2026 07:49:59 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org D1E76606C8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D1E76606C8
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=109.224.244.106;
+ helo=mail-244106.protonmail.ch; envelope-from=sean@geanix.com;
+ receiver=<UNKNOWN> 
+Received: from mail-244106.protonmail.ch (mail-244106.protonmail.ch
+ [109.224.244.106])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D1E76606C8
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 07:49:59 +0000 (UTC)
+X-Pm-Submission-Id: 4hFzvl4d7sz2Scmd
+From: Sean Nyekjaer <sean@geanix.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Sean Nyekjaer <sean@geanix.com>
+Subject: [RFC PATCH 1/2] tcan4x5x: initial commit
+Date: Thu,  6 Aug 2026 09:48:58 +0200
+Message-ID: <20260806074917.418220-1-sean@geanix.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-References: <20260731085724.75729-1-heinrich.schuchardt@canonical.com>
- <CAFLszTg3Rw8fOabWEsTKJvkazwJrnQYnAfTgANX9XDjpUczVdQ@mail.gmail.com>
-In-Reply-To: <CAFLszTg3Rw8fOabWEsTKJvkazwJrnQYnAfTgANX9XDjpUczVdQ@mail.gmail.com>
-Date: Thu, 6 Aug 2026 06:22:21 +0200
-X-Gm-Features: AUfX_myKwwgnWIkJzRLDVlg_af591XHmVyN4uh2HxdJzh4T0NT1CrLjm3_JW3vs
-Message-ID: <CAM=mAO=Eu8d-EQ3FgZ0jL3w8X2uMBddvWCLePb_+dhJGbnB6ig@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi: avoid video ghosting in EFI app
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.30
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1785990155;
- bh=3Nx86FkbGpmD8tE3Y7YFuJb388/hXVbHGHa6XF0RnP0=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=WCSjp087vG2vUof8JlD4vWx1aSy5i67qDua6x02NdY9ewOrBy05e2jEFTNuW8rAOd
- i0PeHca/PvD3fZwHWwzSaJbOiYyz7FG/lNtqYxqvm/JP71x4Pvht8ZTT5NvGE1CqaR
- /dwkAUafQ/kRk3xTWjg1+e57S7FzYLkB8+bqkaFBoyAnPoWQTWGQb4mGKCWD4nJNxu
- 2bd0ctV6xCogREXIblY2AkFdmKcZcNAg0HzdEqeX56dD18GegrHSC42iqdGJOfcBAJ
- am9oGHEnQtbh7u4h0v4QeL+0DlMiXBx73wpdFq+FbpT7AFezmqzrgz/+Lwhda/gJl1
- 8+CoyDXUAMMsFhu7B0HfEhpAnSlRC9lgGvH2OOz3+wscnmNV+ViesEC0Y2adSJX7gS
- II4Gh3AU7uc2wBf90nhxEWvlBSYE2eFj134rR5deSPZRaCTxLpXNRFvsMCJ/pJbvXZ
- c4Obg3qwUzvloBex+i+P4cERkyy5HbXIrbDrloR8+zsRtXbsjcEKTIHgHrnmDe372J
- d1QMm/LLeaKs0Y60RhQhuKeb2rqLuLSKkN1oDwgzlGrkp1A2lTvYmP/5KaJGsA6Ydf
- M679zuHIf3CCAbjDKCBT9pLfbeW8+R6sudbYuh/0rueo0QmdQPljA38Cw13LE5Rp4p
- lHlibWNGJqNUKemaAGa0CcM4=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=WCSjp087
+ d=geanix.com; 
+ s=protonmail3; t=1786002597; x=1786261797;
+ bh=5dDrTCluN6jGbr1insV2cN83ekf8s1NHqRpJobY84Yg=;
+ h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
+ Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=dEkyLtiwHQCNGjIOchMoM7Psulen4UP2N2M5uf7wBMYP5KMeA6L2nWhIBqJMqOZop
+ 444VmXUUf8N/AlCf8GcYxl5R7QCcgA1ejf3r5iS7PxivQWVcIdt+Ekt6cutHxaBJsm
+ LatI/CCBPdo9TABQhesrXJa5Y+X0DL6Nl8Y6Enr72hlULDQ1zUCK1uaTiVazGegtsE
+ jyXM+Vs+wiE2nMAnACK4W4UQswdv0FCk9N0o96liUXN6r9OSg0Wk2feEIqCnKi4N8T
+ Kb1HSiNpE+k+HjzXR+CUFheYOOn74oqwX314FBn9ntVxTrfkypdJSqLs//IxJgTdVo
+ WvCI5RIlTYwdw==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=geanix.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=geanix.com header.i=@geanix.com header.a=rsa-sha256
+ header.s=protonmail3 header.b=dEkyLtiw
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,105 +92,195 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Heinrich Schuchardt via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Simon Glass <sjg@chromium.org> schrieb am Do., 6. Aug. 2026, 00:00:
+This driver will put the tcan4x5x device into sleep mode to reduce power
+consumption.
 
-> Hi Heinrich,
->
-> On 2026-07-31T08:57:24, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> > efi: avoid video ghosting in EFI app
-> >
-> > When running the EFI app via QEMU with EDK II using
-> >
-> >   cp /usr/share/OVMF/OVMF_VARS_4M.fd .
-> >   qemu-system-x86_64 -enable-kvm -m 2048 \
-> >     -machine q35,smm=3Don \
-> >     -drive
-> if=3Dpflash,format=3Draw,readonly=3Don,file=3D/usr/share/OVMF/OVMF_CODE_4=
-M.fd \
-> >     -drive if=3Dpflash,format=3Draw,file=3DOVMF_VARS_4M.fd \
-> >     -hda disk
-> >
-> > every character printed to the console by the U-Boot app appears twice.
-> See
-> > https://gist.github.com/xypron/7214e785c7d73104f8541bcac363a192 .
-> >
-> > The reason is that environment variable stdout has serial,vidconsole as
-> > value. This is defined by board/efi/efi-x86_app/efi-x86_app.env includi=
-ng
-> > include/env/x86.env.
-> >
-> > Provide a proper efi-x86_app.env file which does not use vidconsole.
-> >
-> > [...]
-> >
-> > board/efi/efi-x86_app/efi-x86_app.env | 13 ++++++++++++-
-> >  1 file changed, 12 insertions(+), 1 deletion(-)
->
-> > diff --git a/board/efi/efi-x86_app/efi-x86_app.env
-> b/board/efi/efi-x86_app/efi-x86_app.env
-> > @@ -1,6 +1,17 @@
-> >  /* SPDX-License-Identifier: GPL-2.0+ */
-> > +
-> >  /*
-> >   * Copyright (c) 2015 Google, Inc
-> >   */
-> >
-> > -#include <env/x86.env>
-> > +netdev=3Deth0
-> > +consoledev=3DttyS0
-> > +scriptaddr=3D0x7000000
-> > +kernel_addr_r=3D0x1000000
-> > +ramdisk_addr_r=3D0x4000000
-> > +ramdiskfile=3Dinitramfs.gz
-> > +
-> > +/* common console settings */
-> > +stdin=3Dserial
-> > +stdout=3Dserial
-> > +stderr=3Dserial
->
-> Please can you keep '#include <env/x86.env>' and override just the
-> three console variables afterwards?
+Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+---
+Not many drivers use SPI. So leave this for others to see how it can be
+done.
+If this is appropriate for upstreaming, please comment :)
 
+ drivers/misc/Kconfig    |   5 ++
+ drivers/misc/Makefile   |   3 +
+ drivers/misc/tcan4x5x.c | 135 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 143 insertions(+)
+ create mode 100644 drivers/misc/tcan4x5x.c
 
-Hello Simon,
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index dde773ab6b1..2abfdb5575c 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -170,6 +170,11 @@ config CMD_CROS_EC
+ 	  updating its flash, accessing a small saved context area
+ 	  and talking to the I2C bus behind the EC (if there is one).
+ 
++config TCAN4X5X
++	bool "Enable TCAN4X5X"
++	depends on MISC
++	depends on DM_GPIO
++
+ config CROS_EC
+ 	bool "Enable Chrome OS EC"
+ 	help
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index 1d950f7a0ab..57ebafff121 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -29,6 +29,9 @@ ifdef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SANDBOX) += spltest_sandbox.o
+ endif
+ endif
++ifndef CONFIG_SPL_BUILD
++obj-$(CONFIG_TCAN4X5X) += tcan4x5x.o
++endif
+ obj-$(CONFIG_ALTERA_SYSID) += altera_sysid.o
+ obj-$(CONFIG_ATSHA204A) += atsha204a-i2c.o
+ obj-$(CONFIG_CBMEM_CONSOLE) += cbmem_console.o
+diff --git a/drivers/misc/tcan4x5x.c b/drivers/misc/tcan4x5x.c
+new file mode 100644
+index 00000000000..a304f3db9df
+--- /dev/null
++++ b/drivers/misc/tcan4x5x.c
+@@ -0,0 +1,135 @@
++#include <dm.h>
++#include <linux/delay.h>
++#include <asm/io.h>
++#include <asm-generic/gpio.h>
++#include <spi.h>
++#include <log.h>
++
++#define TCAN4X5X_SPI_INSTRUCTION_WRITE 0x61
++#define TCAN4X5X_SPI_INSTRUCTION_READ 0x41
++
++#define TCAN4X5X_CONFIG 0x800
++#define TCAN4X5X_MODE_BITS (BIT(7) | BIT(6))
++
++struct tcan4x5x_transfer {
++	u8 cmd;
++	__be16 reg;
++	u8 length;
++	__be32 val;
++} __packed;
++
++static int tcan4x5x_write_reg(struct udevice *dev, u16 reg, u32 val)
++{
++	struct tcan4x5x_transfer tx;
++	int ret;
++
++	tx.cmd = TCAN4X5X_SPI_INSTRUCTION_WRITE;
++	tx.reg = cpu_to_be16(reg);
++	tx.length = 1;
++	tx.val = cpu_to_be32(val);
++
++	ret = dm_spi_claim_bus(dev);
++	if (ret)
++		return ret;
++
++	ret = dm_spi_xfer(dev, 64, &tx, NULL, SPI_XFER_ONCE);
++
++	dm_spi_release_bus(dev);
++
++	return ret;
++}
++
++static int tcan4x5x_read_reg(struct udevice *dev, u16 reg, u32 *val)
++{
++	struct tcan4x5x_transfer rx;
++	int ret;
++
++	rx.cmd = TCAN4X5X_SPI_INSTRUCTION_READ;
++	rx.reg = cpu_to_be16(reg);
++	rx.length = 1;
++
++	ret = dm_spi_claim_bus(dev);
++	if (ret)
++		return ret;
++
++	ret = dm_spi_xfer(dev, 64, &rx, &rx, SPI_XFER_ONCE);
++	if (ret)
++		return ret;
++
++	dm_spi_release_bus(dev);
++	if (ret)
++		return ret;
++
++	*val = be32_to_cpu(rx.val);
++
++	return 0;
++}
++
++static int tcan4x5x_enable_sleep(struct udevice *dev)
++{
++	u32 val;
++	int ret;
++
++	ret = tcan4x5x_read_reg(dev, TCAN4X5X_CONFIG, &val);
++	if (ret) {
++		log_err("reg read failed (%d)\n", ret);
++		return ret;
++	}
++
++	log_debug("read %x\n", val);
++	val &= ~(TCAN4X5X_MODE_BITS);
++	log_debug("write %x\n", val);
++
++	ret = tcan4x5x_write_reg(dev, TCAN4X5X_CONFIG, val);
++	if (ret)
++		log_err("reg write failed (%d)\n", ret);
++
++	return ret;
++}
++
++static int tcan4x5x_probe(struct udevice *dev)
++{
++	struct gpio_desc rst;
++	int ret;
++
++	ret = gpio_request_by_name(dev, "reset-gpios", 0, &rst, GPIOD_IS_OUT);
++	if (ret) {
++		log_debug("could not find reset-gpios\n");
++		return ret;
++	}
++
++	ret = dm_gpio_set_value(&rst, 1);
++	if (ret) {
++		log_err("can't set_value for rst gpio");
++		return ret;
++	}
++
++	//tPULSE_WIDTH = 30us
++	udelay(100);
++
++	ret = dm_gpio_set_value(&rst, 0);
++	if (ret) {
++		log_err("can't set_value for rst gpio");
++		return -1;
++	}
++
++	/*
++	 * After a RST has taken place, a wait time of ≥ 700 µs should be used
++	 * before reading or writing to the TCAN4550-Q1
++	 */
++	udelay(1000);
++
++	return tcan4x5x_enable_sleep(dev);
++}
++
++static const struct udevice_id tcan4x5x_ids[] = {
++	{ .compatible = "ti,tcan4x5x" },
++	{ }
++};
++
++U_BOOT_DRIVER(tcan4x5x) = {
++	.name = "tcan4x5x",
++	.id = UCLASS_MISC,
++	.of_match = tcan4x5x_ids,
++	.probe = tcan4x5x_probe,
++};
+-- 
+2.55.0
 
-the EFI app should not be x86 specific. You already fixed this in your
-private repo.
-
-Do you miss any value?
-
-env2string.awk uses vars[var] =3D
-> env, so a later assignment wins, and we avoid duplicating netdev,
-> consoledev, scriptaddr, kernel_addr_r, ramdisk_addr_r and ramdiskfile
-> =E2=80=94 otherwise any future change to include/env/x86.env will drift a=
-way
-> from the EFI app.
->
-> Also, the previous include pulled in pciconfighost=3D1 which this
-> version silently drops. If that is intentional it deserves a mention
-> in the commit message; if not, the include-then-override approach
-> fixes it for free.
->
-
-The EFI must not drive any hardware directly. There is no value in
-pciconfighost.
-
-Best regards
-
-Heinrich
-
-
-> BTW an alternative is to leave x86.env alone and make the vidconsole
-> entries conditional on something like !defined(CONFIG_EFI_APP), so
-> efi-x86_payload.env and the other x86 boards keep sharing one source
-> of truth. What do you think?
->
-> Regards,
-> Simon
->
