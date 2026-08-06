@@ -1,133 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45DB5C56208
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:20:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 548F9C55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:22:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EEF9840657;
-	Thu,  6 Aug 2026 13:20:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 27FFC607E4;
+	Thu,  6 Aug 2026 13:22:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Gs2luJDBVXTZ; Thu,  6 Aug 2026 13:20:16 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8IOcFwvOMm8a; Thu,  6 Aug 2026 13:22:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8BA32405BD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CCEA860763
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786022416;
-	bh=tWvL8usIUJwS0Iz/3n/dkdgNRsoCZ98QKsZufa54dR4=;
+	d=lists.u-boot-project.org ; s=default; t=1786022523;
+	bh=Sh80hsTRUhY0soLGA8mz2CvUh4WQhtRT2xD6ivGndf4=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UoiAcwPvMf9ONpbQ6pNF/Huy2Nvuif5MpICq+7mnh5JST7q7PZ/QkVx6B0EfAdst5
-	 kd7wfZNB7wmQHHa8COh206EKW8zihb5CAdyedAKaFQzftbUD5EXMt71ZDp6BSngxQl
-	 eUkFg9m0b9Ty+HQpeR5gDHUYKQr3EcTjLFP8b+uAtVwgJg5X3QocozmQ5zvlAr8yZH
-	 iDSpajZ/Lx71xUU4YBfUWx3zeF+k/JI5Qm4tlqs3brmovGjmykc7kW5oMg8/0rEmMn
-	 SYVHv+lpQTpzaEYjhjvjX35PqfyA9Gfl4iLuyLSx01nEn8WoKpQeG2vF2JQ+X8Ak4Z
-	 nPjgiJtlYpjNg==
+	b=iuwUF6inxKcrpPDJUSkDuEmcRVI8iWRonzXdQcCXG3+zTukElEPjDAvfCj79UEgaO
+	 lPTZ67T+WeISvOESrmSsdc36mreJRF44B2NzTYod8O0Q07OVe1NagFwTbHNq6e9781
+	 ri1na6K0aLDbHf5FK1iBhEqM3QVx0m3qlp0SgGS9joQ1HtopEDki3eE1cKKt0GnwT7
+	 6o+15s35zf+HupI+g0bF+fzfcEAaH34VQnLfZ6xcDQ2lGtZQL5guooL56H3jqgDmVW
+	 9nq739t2+3QfasozEMkb43GER3gzJfyAK+/MXLxUJBFfsQLcjyo27G8WPr1yV55boy
+	 jsut7J3+PpHjw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8BA32405BD;
-	Thu,  6 Aug 2026 13:20:16 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1C6CB218
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:20:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CCEA860763;
+	Thu,  6 Aug 2026 13:22:03 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9EA72218
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:22:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 01BC54027C
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:20:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8215A405C4
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:22:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LQsF3E-NuKBC for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 13:20:14 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yr9s_V_xgtx6 for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 13:22:02 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
+ client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 136AE40112
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 136AE40112
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 136AE40112
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:20:13 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6a18e24ad25so1377733a12.1
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:20:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786022412; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A21A1405AD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A21A1405AD
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A21A1405AD
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:22:01 +0000 (UTC)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-6a144c8eea2so3019768a12.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:22:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786022520; cv=none;
  d=google.com; s=arc-20260327;
- b=sZvk84wlY00x/v+DcbuW/jKoeB4kosXy0SzwWvUY3BkbA+W5fmPF9oKFcKxTJU4q81
- n2q8fmXRkYQWZhAOUAP5UUkxelhNPUcEMyjy3bjuIPhxGl1tiYG4OuzePZNYILzZwDQ+
- 94QdyTwyCcYoqPDTLa0aFxyAd+of2bxFiY1ggUcMAhlAsMnxQ3u0MW+WH+QCCfDBRKcR
- +cHHY2pKBdWWxSwk1rT/m483AcFStEevEAVN7qR/MjCsCpIwVgngg/xEE6ei77ZXSZny
- /9c1WP960JrHmjCa7hhLf0+51s4Yn2BdRmUqLj3FkBL8JumU8Fh0DZgyCJr6ld/2n8bE
- 03gg==
+ b=HUqYF82AvmewWWD9biYHmtcrEHeRE03w6jdTlsVndiO0wKA7RuVwqL0M7HkIQ30saz
+ uC4bSMbvIVRqx2EDMs00uJePcqRk0i5GXHbMdh9ODBn3JfNd0bgtqp+ycN02dK1oAqTh
+ 1+qDzc++OB57895bkmmCrqDZuIuGp7ihbcXyH8k9bnXehBADyrvE9xZc21/ei5w7pZ0m
+ z6Os8QmkqgBkWM6VSfCvZcSzWOGUECLXAOZu1rnMr9Knqn9GDF8HEMQhgRscW9Igvjoj
+ cbhNJSBmrSUEfPRvA+1fMImWbeMtGZoroGmGAwxCwdq5rTwxm2Q8rWIdRsHz9IQ4fVfG
+ VJzQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=tWvL8usIUJwS0Iz/3n/dkdgNRsoCZ98QKsZufa54dR4=;
- fh=glD4piGlNxos0EA+GWLb7GfG3JXAKCSur0VU4kkUAHk=;
- b=bFbYd6/4nYp+zulmtnS/k3t7l8Zw7G8NdzPoJELXLDejmMofmWt/vsG9uD5p3Hoo4B
- Ygu3OI+nN4YFvjjb2HrNd8UJ8DwVgf6GS7SU1ZyT4bo4mGhIJNwC5K/tSkzybmu1UdBJ
- wDYYGPW7ijt6NbCD90bXFFvNCRKWxJXhttn9M7X3+6zJZW/lpnMFT57q8+ms5kifUDg4
- eyXDSBSbX4J3vg8akItlxXGiVry1Hayl4xdBAJNcVMg8Xg/URGqUhfehv1bwliQZNKcJ
- 1ZJcj26feN0P6tMSMphrSSN7drUStMCvGb8UdyaAELHLxQCwoAdPvQlCNsCEttcet066
- yreA==; darn=lists.u-boot-project.org
+ bh=Sh80hsTRUhY0soLGA8mz2CvUh4WQhtRT2xD6ivGndf4=;
+ fh=7xxvTH2sQtJt5Ay+3iwadnldSn0Fw9o87gYzUPDaOIA=;
+ b=SIa57SrqHKPx9RZ9Sg/QMY/dK6Xeu7eNyjllFqiKsLqHnhtiXleNrLRgBsmQekFIe+
+ 81lnrHGereoAOu0zNQ1kihBJ6Hbz/znG646PK9YfP4pRXOKlUR4iTNwrrJ6k7d8CYZzQ
+ PJg00irYkv0xwszFmwnzRbRvw1fEi5UUozTqgKeAUFX0pLB9t44Rk7HVEyBAjmJJ7fUi
+ PLcp3TAOOVKkFANm93TlR2N50i885Uby6sFeR2BwY6NNkMeMNF+CZnqwqbSljlyv/33n
+ GzWN94wIL8qvk4tXSDjrw7VxfAdTXV/QnRvDOEEMM5YjaqlSEfdv690C0wT0+/vrY6es
+ Lq2g==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786022412; x=1786627212;
+ d=1e100.net; s=20251104; t=1786022520; x=1786627320;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=tWvL8usIUJwS0Iz/3n/dkdgNRsoCZ98QKsZufa54dR4=;
- b=qq3U7LKQ/jOPJq42EwHa7R7iz3COD2gu3ehh5Z/TIPgb4auOs8CfO8Ed6t1fwqlXCD
- 1ZD76/PwH2VAv3YnC5F2TlUMd9mW4sUBnvPZJlYL+pOPLlFw5b2G1uiAIQfQbl9NwWcR
- /hTwArYq/bTzNTUoAJ/UsBsSfIgKeH105JBQ+eqIkrNk3kO1zdYK9AVpkFIyIlt9ntte
- pw3mspUb8pR3betnSdTi26bOuiLO+o8fSPt4Tbz4/JPEp2vc/FzkfItGhBqa76QVMa3I
- TVMwJq6kl/vu87q3Zv7IrUaK60BmMV43JeW8CKgkkonKT2Atqtstw3F6vWQ7V99ptzN5
- hGqQ==
-X-Gm-Message-State: AOJu0YwF6k8lX4CnIjys4cFmfhGadoh7ypo0GVu/LoZr7/QTf9V8pqwk
- RxWDzU+mOqEzTvyMsAvv8kD1xfeDGkj3LqWrIzQKA6AIXsAYZ9DjdmGabUG5u4XWr4+gUSuPL2k
- ILsLwbzW6TPhFPzv0DOGjrm5Y/VJNc/9oEssP5xWf
-X-Gm-Gg: AR+sD10afqOJ4sL04Jo+mBUcslYWvrGANoRaCDVIACPk9RO7WoLeEd5H1silgMbfNog
- G5sTsrtkwtoHpsRsEjtnbTudJsHT1YFF1nhnLe+pSPzrcaTNwG1/O+xSXDO1mieIVMAZe4RFypU
- dNRnJ97hx/pXR17qI2De8uIEwWqhjIE2a1oqo3Zr7VRkEc50eFYSBaMe3jN4mvOy3A6QGjIe/F4
- WsiKmFF8GXso9Vn+zo1r4MKKDpaf6wAFNo0E9+qs875duQ537bEc0M93ijbaWOzGJL9iASN4+ib
- HzOQdo0Z5sxLH31Wg9UswfsYP+LDrXwjZE1vmcCKkvg=
-X-Received: by 2002:a05:6402:3222:b0:69c:72e2:a3d9 with SMTP id
- 4fb4d7f45d1cf-6a14f26c0f4mr8278415a12.21.1786022411879; Thu, 06 Aug 2026
- 06:20:11 -0700 (PDT)
+ bh=Sh80hsTRUhY0soLGA8mz2CvUh4WQhtRT2xD6ivGndf4=;
+ b=c9Urw1wgoV9weIHXSAWs/glCDDn0GLSWp8hyz0KUNi+LZ4A/WLO3RUmGneMJsfKdlc
+ UyMCcalXNrL6Q8ImicaKmvsWNe72UE/pnJHLncIYf7oJYUFs1TGaTu1vMJEGRIs5czFY
+ M/21snBx2mUADgLIEINkrilgMQ0HuCLGQQNx5N/wzACrsOpgHl7mVAIxKzph0JxDOb2c
+ rnIxJg3dIKOBSkQ4Hzh8ulVVPtUAMS78YASJWDzbMvCP4+O6Wk8SFF7dAUo39pEKfGxc
+ 5xdy4v98KoiR4dH8xmzRWOouvhgnnVFm2UvjAZOquyhjFmQkroyKiW4QyTKOmgg4T66t
+ mjlw==
+X-Gm-Message-State: AOJu0YzZa3r74rbjtDOe1iYszz0m9IF2NaYkAdYLfSlUMniVWn89O6cR
+ 0nxTGoqUljYCDJvAgjZTI6kKR9/zqfPrNP96AAVJgVOMvS6Ib4OYkUDAlZr8s4A+A8obJ3I5afV
+ egZ4CAH7qppZLrFZMp7HEay715sun/oTaux8eeblCPUpMZe4J3mc=
+X-Gm-Gg: AR+sD12Y6rrj75oyzXRnfUQglX+gPCuD3cLJPZ/UM94mrSCU0TZIrUZoJHldbSBXE6U
+ xC0FgQP9th1mH6yTcRewbb0+vuBj4W8qq8izZmfCf4kMd4u29QKaF5LNMz2if7pXQmoycUSlJTX
+ Fg9mTqJh2yS7g23beos4R7Wuqnaw/Wz75vuaPLdaLWncz+tmnKc157AD9spg85F42xuH9L6X125
+ 8A9iROexmVFgW3ssslOuh1UounRGUinBRRV3BhTy1LS/cAgu7Q+Tp2rd1aYK9Y3dT66Fe7NxH0+
+ boe9nmZMjUxmY8tLImJkR1YyzlPI0TPH8ae4EzUHyr8SsEoPyfTvyQ==
+X-Received: by 2002:a05:6402:4593:b0:6a1:854:e75e with SMTP id
+ 4fb4d7f45d1cf-6a14f14c5d1mr7810645a12.15.1786022519691; Thu, 06 Aug 2026
+ 06:21:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260806103720.1026454-1-aristo.chen@canonical.com>
- <20260806103720.1026454-3-aristo.chen@canonical.com>
-In-Reply-To: <20260806103720.1026454-3-aristo.chen@canonical.com>
+References: <20260730155119.3328020-1-mehmet.fide@gmail.com>
+ <20260730155119.3328020-2-mehmet.fide@gmail.com>
+In-Reply-To: <20260730155119.3328020-2-mehmet.fide@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Aug 2026 07:20:00 -0600
-X-Gm-Features: AUfX_mybzeUL89rPGPgz3oCMM1dr32dniRMI6_BQGufcfN8b2eQQfTLP7_UcDGc
-Message-ID: <CAFLszTgKTk2m0wMnWO4zKg2BdH+QkS8ZvtzA76BbNioPTMjfUQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] test: cmd: Add gzwrite chunk boundary regression test
-To: Aristo Chen <aristo.chen@canonical.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Thu, 6 Aug 2026 07:21:46 -0600
+X-Gm-Features: AUfX_mxT5nrLr_k5PC5I2TEVdM-ixQLGsBQH397ogDSesHXQXuaDVxLPffoRXQo
+Message-ID: <CAFLszTjcmcSgBN=bL1QN62Q9NAoYeEjHrRTbKCV-XquNrE=qzQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] cmd: allow bootd without bootm
+To: mehmet.fide@gmail.com
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Mehmet Fide <mehmet.fide@screeningeagle.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786022412; x=1786627212;
+ d=chromium.org; s=google; t=1786022520; x=1786627320;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=tWvL8usIUJwS0Iz/3n/dkdgNRsoCZ98QKsZufa54dR4=;
- b=PUbMIZvOlVQ3JpR2gr51v7NvfGzUA3ELF7YHmiE1m7oFmYd53mgqJT69B/wW1A6lAK
- cnSOvZ0sCKWDci8xYo3/mZI4qwpXbJu3m4zAVs+9W01m40kxUmHKam0DooG1QclbRUUt
- vLPG8Zboqxl+pAI02/nP0kUbl46nwphsoJ1lw=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=Sh80hsTRUhY0soLGA8mz2CvUh4WQhtRT2xD6ivGndf4=;
+ b=PjY/C5NhngsjU9tzQNzsN4eHxdWGajBdmFhPRnIc5FO+jcBXEX6rBxGrR2PEWVlCw1
+ BseY68AtJ/5afhB18/Qq8ogpJKgLKQjbpBLRx0a8P/zCIIIMTY/SkYnGfZ7pPasd83JD
+ UR4mpwZ3uRrJBbS8Imuu3LRKpIeC2pt2+2ez4=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=PUbMIZvO
+ header.s=google header.b=PjY/C5Nh
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,69 +141,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Aristo,
-
-On 2026-08-06T10:36:59, Aristo Chen <aristo.chen@canonical.com> wrote:
-> test: cmd: Add gzwrite chunk boundary regression test
+On 2026-07-30T15:51:17, Mehmet Fide <mehmet.fide@gmail.com> wrote:
+> cmd: allow bootd without bootm
 >
-> Add a deterministic regression test for the gzwrite() case where a
-> decompression input chunk is exhausted at exactly the same time as
-> the write buffer fills up. Build a gzip file by hand from two 1 KiB
-> stored deflate blocks and pick a chunk size that covers exactly the
-> first block header plus its payload, so that with a 1 KiB write
-> buffer the first input chunk runs out precisely when the write buffer
-> is full.
+> do_bootd() runs the "bootcmd" environment variable through run_command()
+> and does nothing else. It uses no bootm functionality, and neither does
+> the "bootd" recursion guard in cmd_process(). doc/usage/cmd/bootd.rst
+> documents it that way, with an example that sets bootcmd to
+> "echo Hello World".
 >
-> Unlike the existing random data test, which only hits this corner
-> case for rare byte patterns (about 1 percent of runs on sandbox64),
-> this test fails 20 out of 20 runs without the preceding gunzip fix:
+> Commit 1fd04cf46baf ("cmd: Correct dependencies for CMD_BOOTD") made
+> CMD_BOOTD depend on CMD_BOOTM because the build fails otherwise:
+> common/command.c is compiled unconditionally and references do_bootd(),
+> whose definition sits in cmd/bootm.c, which is only compiled when
+> CMD_BOOTM=y. The dependency therefore describes where the code lives
+> rather than what it needs, and the boards that disable CMD_BOOTM
+> (colibri_vf, iot_devkit, mx6memcal and r8a78000_ironhide_cm33) cannot
+> offer "boot" or "bootd" at all, although the implementation would work
+> there.
 >
->   Error: inflate() returned -5
+> Move do_bootd() and its two command registrations into cmd/bootd.c,
+> compiled from CMD_BOOTD, and drop the artificial dependency. To leave
+> every board in tree unchanged, CMD_BOOTD now defaults to y only when
+> CMD_BOOTM is enabled, which is precisely the set of boards that have it
+> today. Boards without bootm can enable it deliberately.
 >
-> and passed 100 out of 100 runs with it.
+> Tested on sandbox: bootd, the "boot" alias, the return value taken from
+> a failing bootcmd and the recursion guard all behave as before. Also
+> tested on a Colibri VF50 (vf610) board built with CMD_BOOTM=n and
+> CMD_BOOTD=y, a combination that could not be selected before: "boot" and
+> "bootd" run bootcmd and bring up the OS, and a bootcmd of "false"
+> returns 1. A colibri_vf_defconfig build with CMD_BOOTD left off is byte
+> identical to the previous one apart from the version string; enabling
+> CMD_BOOTD costs 272 bytes.
 >
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> test/cmd/unzip.c | 103 +++++++++++++++++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 101 insertions(+), 2 deletions(-)
+> cmd/Kconfig  |  3 +--
+>  cmd/Makefile |  1 +
+>  cmd/bootd.c  | 30 ++++++++++++++++++++++++++++++
+>  cmd/bootm.c  | 24 ------------------------
+>  4 files changed, 32 insertions(+), 26 deletions(-)
 
-> diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
-> @@ -132,3 +140,94 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
-> +     /* Input chunk: exactly one stored block header plus its payload */
-> +     env_set_ulong("gzwrite_chunk", 5 + blk);
-> +     ut_assertok(run_commandf("gzwrite mmc 9 %lx %zx %zx", loadaddr,
-> +                              gzlen, blk));
-> +     ut_assert_skip_to_line("\t%zu bytes, crc 0x%08x", rawsize, crc);
-> +     env_set("gzwrite_chunk", NULL);
-
-We should have assrrts on the env_set...() functions too.
-
-If any earlier ut_assert*() fires between the env_set_ulong() and the
-env_set(..., NULL), gzwrite_chunk leaks into subsequent tests. Ideally
-we would put this code into its own function which does the core part,
-then call ut_assertok() on a function with the test code. I'm not sure
-how much this matters, though.
-
-> diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
-> @@ -132,3 +140,94 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
-> +     const size_t blk = SZ_1K;
-> +     const size_t rawsize = 2 * blk;
-> ...
-> +     u8 raw[2 * SZ_1K];
-
-Please use rawsize (or sizeof(raw)) here rather than repeating 2 *
-SZ_1K. Same for the 5 + blk chunk size - a named constant for the
-stored-block header would make the intent clearer than the bare 5.
-
-> diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
-> @@ -132,3 +140,94 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
-> +     ut_assertok(run_commandf("mmc read %lx 0 %zx", decaddr,
-> +                              rawsize / 512));
-> +     ut_assert_nextline("MMC read: dev # 9, block # 0, count %zu ... %zu blocks read: OK",
-> +                        rawsize / 512, rawsize / 512);
-
-Since you already have mmc_dev_desc, using mmc_dev_desc->blksz would
-be more robust than the literal 512.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
