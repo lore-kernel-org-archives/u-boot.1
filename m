@@ -1,131 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B783C56208
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 21:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBB78C5AC67
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 21:05:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DCF8760830;
-	Thu,  6 Aug 2026 21:04:22 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mh-ywndbonik; Thu,  6 Aug 2026 21:04:21 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C7E3605CA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786050261;
-	bh=geq+CKfKxxpWpotoi+2npW7wRCZflTwQopSe1nIyKOc=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SjphxJds+QyReJHtXOqB0iVJ83+2XH7iu+aZryXu3JM+KVREAkWzhF9OD/QocPto8
-	 udG9H/qFPFzY4rpXl9t5NQphYyLUc+HnWMyXGL74f6PPm4jx+ILKmAEClKORPC6gzw
-	 dtOJvW4NWuI4P8sMBfphv2Q69K9PjQOUQq3pafzxk2rfzM3JmhOXXnslxivu2wckfn
-	 Y+BrF7QttwV589BZyHqkxgNNUCR5QTXL68MHQwWIQFOXhJl0lQiTSmW5UY3vyvbaQI
-	 AuG+F2ByybyNgsVNPtxpQ/imfxQqlbY2u3C2SJkSntJOCXGtzYAZnz9UyLFJD67cZR
-	 pmJPfCBEIa7zw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C7E3605CA;
-	Thu,  6 Aug 2026 21:04:21 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 57E98218
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:04:19 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3E8EA4086E
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:04:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A9CF640820;
+	Thu,  6 Aug 2026 21:05:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1zbCJCxQ3bQb for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 21:04:18 +0000 (UTC)
+ id C-zDqo9FEyzB; Thu,  6 Aug 2026 21:05:03 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6850740812
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786050303;
+	bh=2jpwAGhENQvyLvaJ2dAczmwnLxEuI9ZJkiSlpTpi8Fg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=fGAEHsAWsMxACRueOQll+sigamGGfANaajBhkqSo04hfOY4JJ9/9KrOoiUBc0dY7j
+	 EYX36UqCUVoaQ2h3IkNnpeFmFu+cuDSKkjJlVG97yiX6pACustGeGMNOaHCfP881HW
+	 ET9bx5uz7T0pw5vEbHQbEofPpPrIgTqvq1r6NnNXQBTH5Pd8nkIdbIZhLa3A/gg+cI
+	 QUzvF+k2+9kE6Rwa3IiIqCrop+QTJq8hQ5HogDE+7xhg8e4QPm+kPIS6rJYZ8UwcZS
+	 seau9AxW+v8TA/qjuEnJ0AVf7LtoWquWT8eoCx1gQt49oYglRTTVjxtzWewizwPa1m
+	 toiBofxctJRog==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6850740812;
+	Thu,  6 Aug 2026 21:05:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C2918218
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:05:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id C036160836
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:05:01 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id u6QJRf2XglAL for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 21:05:01 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2436D407FB
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2436D407FB
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2436D407FB
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:04:18 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6a0de062db5so4299373a12.1
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 14:04:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786050256; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 047A260835
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 047A260835
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 047A260835
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:05:00 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6a10b20634fso4787960a12.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 14:05:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786050299; cv=none;
  d=google.com; s=arc-20260327;
- b=XzmU0WaXADZFE8/AZxR1s+YrZAcZIL+qfWvpMrcoEpxIO55OvTqQlgyhOmIByNSjgn
- PoPwVvF7NTJ6xxDi3NtlfoRTYqbaGEF3cVyXCP5n1qB44VWALg+9vUV2Xoa+ZSfGUB6u
- sHekw9BEiVycX75rqrZ9fX7xb7j1ZDbo5JJ0kTmQgnIptYipmc66rF5lrg+HbClfu35j
- aK69SmI/kUXpG30AOSz51ab6sZZw11eP9tKJI8ghJwMaUz7TRguB/SGurXynFH88LfBD
- zRw6G7t8QJt93zDNQGFgZCz5f2S2OG5cGYURlH5Sm9W8VewHfnlB070GixAKhvnXA+ji
- QCNA==
+ b=UULnJVbs2x50yIGwlQMnfIsbnAfgWerP8aTU2RfqkApCQaxVJNh1r8PCsvjAIBgbnK
+ pyqYOGxW4IESRDCQoO8a07bz5928ksJ/MtCNy0NS1g/Za/0HXuny+PRP58iXQPLXutqv
+ 8Rw5+CPrmJZrL7Rqr438H/3BuV9TEW3zwY4qWw/LoCCKqLxFUQumvD6lAbz0PAWDprbi
+ O2y9sgdBmrbpC+AAweDeNadgdqCxaDQE1G9wcfkw/043ymN+USiB9hwKKSHCcmwcgTOd
+ 46CZGcEcqqSE1E3dNP0n3XtqOb/IxOCCsplSYkKQ1IYAoBHyVvffmR8UmfLzOFLQkn5f
+ NnLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=geq+CKfKxxpWpotoi+2npW7wRCZflTwQopSe1nIyKOc=;
+ bh=2jpwAGhENQvyLvaJ2dAczmwnLxEuI9ZJkiSlpTpi8Fg=;
  fh=Ye9d8c9UuIgjdEYE5AmpFdHtipkFyQbZju95WIBagdg=;
- b=Z88q5CpM/Fyygdf825XH0ajc9MPePvZm0CIo2Hut1dvr+ae0HKXQMS8ZSmmdItB+4I
- beXKVLyRVgCy1WljofNBtYHtGB8FKrWrIjteigKSPu6vKYP+4wmT7gqRxlIMCzrVdShD
- Ag0bQkgG57vujTo3pwVtGkyyrg6uos/eBHBF4+jqgLuuBQGPKvhNMe5UUt1d4mONLDxl
- /nUsVkXe2k1aBSRx+I5RWpZLAyVi2sw1AEbIJ4BtXtui0CQY3CWiUyMbOEmbYpYcZYXJ
- r4wJUzgxqQ4TWJ4us3dbnyOk+zjHlRvXX3YWzh2syVxGlEhhtJ4WiBfmqzjwP44mi2Wk
- ZNmw==; darn=lists.u-boot-project.org
+ b=f0lTdTAtXO3UcTeTa/Y5Ux8tvq8YJVwutOUXNa/zegJlHCwxUcBva9DOAv7w/0Hkv0
+ mDRcvr+dOkr0axNKBwJPkZBteq0Wl+8yI48kE6tIpFuIMWqIucbuP9rSZDID3kvbJbNL
+ EXnWDeID90KL3SZpf2+ExKLpFCBtPJyLSCfdiPGHW6QB+aMoSwKbzlZx3pa80ckJm1uW
+ XxeA7FedJQniVUXjntvB0Ps5YMwyojVbIagp1eowmi5ntIwegVNfMvmGCCrCo89Mo3/U
+ UiRZmWQRrn2YzwO1pS/veTySpk0QwoMwbGN2HslV/ZCSWGZ9m8p/498/B6KIP9zMOi6L
+ Jqog==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786050256; x=1786655056;
+ d=1e100.net; s=20251104; t=1786050299; x=1786655099;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=geq+CKfKxxpWpotoi+2npW7wRCZflTwQopSe1nIyKOc=;
- b=pkPXVPaN+Kivgak1iXU+y/u5Pz6neiH64JYQ9p3+qTBgZfDOYiAld2u2HZpHywY2/A
- flmAci003sseYmG41Hbw8Ejt3Bk6V11qLWrxXGa2rLLTWc3eS6X5MZkhsQBdrPDnEmzN
- RMovPsG3VrLlRWKXIY0MUXztMjAZViwc1mUJq5FabychCD3sdyZT429PF9fF41eKgHyK
- oz6xbOM0gN2nJgbxgJlGB1g0g1+a/xNCSuuAy1VUBk2iXMS/dOi4X6CxzwXtuGe1nORk
- OY6Ov+Tjvi34iO0GGkMYP+YLuTQWIBrmKBxs3F1L7+jlBM0V+lYkL7OJsaMPUwRm4oIy
- 7ooA==
-X-Gm-Message-State: AOJu0YwbjJfK8XaNvY9PT3/XdDsM3Inu1gsXE6lV2PoklMqEviuMhhTj
- w7AG5K1+R12XTd30vJAysALwfm6v+kQwNG1WbSZeCNZALuuJPoXeED4t91OXiRh4gpvu8qPnkvT
- LB47xQTE982GJOaSqbjzKgTyPWSlC6nIBekszaNlo
-X-Gm-Gg: AR+sD123Xm46cstM07/BZXapZLvCiDiDB+AZmaQBMUCrx43e5oXR5pHHy8WRtt6hdhi
- xJ6aNuCvEnhCwFNi14IpsRVri7xYvtAiRV3jA5lg4VNvy3YbvcW8w7ElJAtwotVIyYrKhcpJtMv
- vJpQQ8znuXT1K/44ORy3L7M7Am1+CgR4ssV/HSjXe84c+xN6eBA4ojym3D/TilOut8XxLV9Cojm
- Oaw5OTAPOgZAMsNE+vyFCvSEJKq3XYGregszPHUy4wo+fIRDKaVRAL9IkpQKRxDc8Z6+LrCg15g
- R+4chTCsbkba6VQGw6EQorRCiv2YW8PB6rD+stLYdd4=
-X-Received: by 2002:a05:6402:534a:b0:69f:aecf:bb2d with SMTP id
- 4fb4d7f45d1cf-6a14f26b856mr7608480a12.17.1786050256168; Thu, 06 Aug 2026
- 14:04:16 -0700 (PDT)
+ bh=2jpwAGhENQvyLvaJ2dAczmwnLxEuI9ZJkiSlpTpi8Fg=;
+ b=mp4XMHYgqHIBWCfsjrruuGVfGJUdj9d34/1PJ65LSB95o/5n8FoPxnnZ8pt9tOuOeW
+ fmKpPuG6lGqtICo0TDljsk0F5capfgMGZCPpqnPngzP/1zJ2nVHPmKDp99NC2PJr0uNW
+ Owm5agQvDqSnE/X0yzMEd3TN0E3pVdH3FmK8Gcc4Ce/a2gU58obpRs9srpam4o3JTHgj
+ e0wroUBL4Dy6yo84x4K4XeYTitQCPGLnyS6RvHdziWNBSxpRI2xJjv5ryKJB9qpAZ0Cq
+ BZrOAEYOfVoZ1MMcYPx/w95FMprY5ChEZBbxwJDXAWQQ1WG8FwraEMHYvfbq7VVqODvH
+ 4Sgw==
+X-Gm-Message-State: AOJu0YyQpzYu+hHGLSifJPFw4TduqBfyn3odFtJodrbeSy/NLZtQgTbc
+ Aih7yJsck+4tLwtGf9y4gvryjkQu7I7oJ6pcWZ1CCc1d3bp5hWgL6ZLwndZH4pXuPaA3H213tHW
+ 8lRqjh4vwEG2ACkH/odMqH62mezWuL7xuC5lJu7D5lBWVFRB4zpE=
+X-Gm-Gg: AR+sD10g0P6HBbWp6znBt2J/RyPtuvEdI64JzUzDfRhbpsb3KMXdRW+u8JxHgKi3EQp
+ EN6vw1DHfPYk6Z44gp4h+dXcqhjIF9agYhfjr+3XiN6CkxA5gGkoJ+z9E7kgrZpAHt08heVLtO3
+ pbDyWHo7YNourYKdjiaZ7Ohn4mc2PijXWcz9yzcc9GqUk+rBf5isWZznNIiQSXMyqBkzkdIF1ZN
+ p/pMn87nGdYtAI9ZCSpavDaDJEsO71Pxvj564nOnWlII2sPS7qaE2GTRvrzsvUFCAbevtfGq6OB
+ pY17joirB6rTNYhd5NINhTRSJWSG9rwQISh0CCR9R3w=
+X-Received: by 2002:a05:6402:5d5:b0:6a1:c4f:3153 with SMTP id
+ 4fb4d7f45d1cf-6a14f07cdf6mr10266455a12.2.1786050298996; Thu, 06 Aug 2026
+ 14:04:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260804-am62lx-v4-0-01746157643d@ti.com>
- <20260804-am62lx-v4-3-01746157643d@ti.com>
-In-Reply-To: <20260804-am62lx-v4-3-01746157643d@ti.com>
+ <20260804-am62lx-v4-4-01746157643d@ti.com>
+In-Reply-To: <20260804-am62lx-v4-4-01746157643d@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Aug 2026 15:04:00 -0600
-X-Gm-Features: AUfX_mymskJR-zeJk89LIY1044INmzjHYCJnFF9lB3lavFSiD_SP4lrKTVO7wiY
-Message-ID: <CAFLszTikZeewCL-wFJqu7jmY1perk26bqy3U+hy7F1fu9xF6ZQ@mail.gmail.com>
-Subject: Re: [PATCH v4 03/11] soc: add data to identify the am62lx
+Date: Thu, 6 Aug 2026 15:04:47 -0600
+X-Gm-Features: AUfX_my3TpafqyM2V13o1qD9wq50pr-vK_ROTtxWDHsSchAkOCprnXaFGIt0L9w
+Message-ID: <CAFLszTjhkoG8Yff=us8ByCGA1cDR3hcyTPSopa2gWGj2gfFOOw@mail.gmail.com>
+Subject: Re: [PATCH v4 04/11] boot/Kconfig: disable fit post processing for
+ AM62L
 To: bb@ti.com
 Cc: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786050256; x=1786655056;
+ d=chromium.org; s=google; t=1786050299; x=1786655099;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=geq+CKfKxxpWpotoi+2npW7wRCZflTwQopSe1nIyKOc=;
- b=eKTQ4/B+XsLYeZeGDimOlZCSZYfnfVK6EXL5chBzfr1mZJIStcStEt9MDpj7BCObOb
- ZzQWIEsudBP9aWETehZs2gbkhXoNnuiS0oWGwBDiMZvAfJ/0dqL7+GGEX7HS9BwxZmy1
- 6TfI9mNpEtcXdamUp0V5X9x8Xi2Ecw9Iq29iw=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=2jpwAGhENQvyLvaJ2dAczmwnLxEuI9ZJkiSlpTpi8Fg=;
+ b=ZRtbZDrGWVXeW5BuY/ixKxIMLbG79n/ZrLe1oDJTgY16uptY5cod+ckeJaHo8yD37Q
+ Naq9pnMxVU1QsuvMWM6HkllCY60Mfx/qXaHca0Y9epz257aC33pbOs79i1+LpAh15IBI
+ HkvpkdPgqdkbrRdlf2AKRdtsiZCXPzk9wfTsA=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=eKTQ4/B+
+ header.s=google header.b=ZRtbZDrG
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,19 +141,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Bryan,
+
 On 2026-08-04T21:55:02, Bryan Brattlof <bb@ti.com> wrote:
-> soc: add data to identify the am62lx
+> boot/Kconfig: disable fit post processing for AM62L
 >
-> Include the part number for TI's am62lx family of SoCs so we can
-> properly identify it during boot.
+> The AM62L family of SoCs utilize a 2 stage ROM boot which uses x509
+> certificates for booting securely. There is no need for processing of a
+> fitImage. Disable it for the AM62L SoC family.
+
+Just to check - the AM62L defconfig added later in this series does
+not enable TI_SECURE_DEVICE, so this change has no effect on the
+boards being added here. Presumably it is aimed at a future HS
+variant. Please say that in the commit message so it is clear why the
+change is needed now.
+
 >
 > Tested-by: Anshul Dalal <anshuld@ti.com>
-> Acked-by: Andrew Davis <afd@ti.com>
 > Reviewed-by: Anshul Dalal <anshuld@ti.com>
 > Signed-off-by: Bryan Brattlof <bb@ti.com>
 >
-> arch/arm/mach-k3/include/mach/hardware.h |  2 ++
->  drivers/soc/soc_ti_k3.c                  | 11 +++++++++++
->  2 files changed, 13 insertions(+)
+> boot/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> @@ -333,7 +333,7 @@ config SPL_LOAD_FIT_FULL
+>  config SPL_FIT_IMAGE_POST_PROCESS
+>       bool "Enable post-processing of FIT artifacts after loading by the SPL"
+>       depends on SPL_LOAD_FIT
+> -     default y if TI_SECURE_DEVICE
+> +     default y if (TI_SECURE_DEVICE && !SOC_K3_AM62L3)
+
+Adding an SoC-specific negation to a generic boot/Kconfig option does
+not scale - the next K3 SoC with the same boot flow will need another
+'&& !SOC_K3_xxx' term. I think this would be better decided in the SoC
+layer, e.g. by adding a 'default n if SOC_K3_AM62L3' override in
+arch/arm/mach-k3/Kconfig alongside the other K3-specific defaults, or
+by having the AM62L Kconfig not select whatever pulls TI_SECURE_DEVICE
+in. That keeps boot/Kconfig free of per-SoC knowledge.
+
+Regards,
+Simon
