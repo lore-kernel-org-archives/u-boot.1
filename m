@@ -1,132 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AC5C56208
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 20:59:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23641C5AC67
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 21:01:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 926954082B;
-	Thu,  6 Aug 2026 20:59:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6816C6081E;
+	Thu,  6 Aug 2026 21:01:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WmZuheo7HhBe; Thu,  6 Aug 2026 20:59:48 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TMD5cLq4a9XS; Thu,  6 Aug 2026 21:01:12 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A38C84080C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E0A25605CA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786049988;
-	bh=gm6hSTiCTeTFw4yEOjkdldmnujLE3h8m1Cp7XuI4LbA=;
+	d=lists.u-boot-project.org ; s=default; t=1786050072;
+	bh=HaovFAst5KvozDgMM24zApuBJdvlbsvy2YFPKMTYiRI=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ednk8ZvPRZpjnltxkAjJDCnVx0ZKKcHoux9LhLDd439XumPUsfLZkTMqr51i6C9Bp
-	 jbbAjAhBZYxgxeJ80EOCQYjX5TeBPtDxqNa1Xl2NLD8i6xlcglhV0vTLsUk68TxXfJ
-	 XX7Mbk8prPn5cUJzd5Z+ll1XJXZbwyfCBb8kKHek+wSaL4gFiBwz9n5UAibhMvgykQ
-	 kcfECVPQRz99vvUGxanqL45VTlQeUE3R6neFAOYDYtcynXImqjI8aVeeT4htw3ozRh
-	 r6atYSWA9agRjy8kB+4o+MBsclMvdmA5EFmZ/YaDCB+O4D/ySjtCh4PCHb3IneLvFh
-	 VQ2jKAksFc8aQ==
+	b=ZYeneVlyI7NdQ/3KA4jl8A/YRAfZGgZZ/oKYbgPryy6GrsxDoFlJWCKcYCT5FveVR
+	 TSJqjBFB/7l+n8V2tzgUI68U4JhWWpzsBtjq92yK0W68aYTs/oq7hvrF7MmQyluWhF
+	 iP465kLXMd/3r9917O0ARNEyZfYkGr2PFkvialGY+j/suCUNKYArQQoxhBp/Pp1QB2
+	 vtc75zj3ROjRGRMeCo/xCGFQvH+PNO69koFrEH8xeoyaMcySs0Ku6LVr7o4MF8wxCu
+	 Yw07NzXguIujOuLVxMdNpuxA/18WBUbpDyM/n9EDkUbyT0/mA4m/OA/LO2G2epwMjx
+	 WWh5Sp4jdRaZA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A38C84080C;
-	Thu,  6 Aug 2026 20:59:48 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id AA5AB28C
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 20:59:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E0A25605CA;
+	Thu,  6 Aug 2026 21:01:11 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EF7D9282
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:01:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9006080ECF
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 20:59:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D588640226
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:01:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8HCBF83v92Fl for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 20:59:46 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id g4BtQXxaWe9R for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 21:01:10 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 80DB480E5A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 80DB480E5A
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org BC4C2400BC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BC4C2400BC
 Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
  [IPv6:2a00:1450:4864:20::535])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 80DB480E5A
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 20:59:45 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BC4C2400BC
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:01:09 +0000 (UTC)
 Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6a157f90752so3537497a12.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 13:59:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786049983; cv=none;
+ 4fb4d7f45d1cf-6a0a4aa99bdso3992057a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 14:01:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786050067; cv=none;
  d=google.com; s=arc-20260327;
- b=fAsBA/nU+6yy7+xFLQn6fVryebcSw2Ceb4gxDFwWD2DpW3BPijc2RNHLdqLLSep7aR
- 9VoVzuqxnkj18NgRtggTCchK5YTYCJVopXc+lrzgo4dGK8pN0xsAQPDKARRNFHmi24pH
- b71+0MMSgJk0UV97AwO4hA1GWm9kQGwU/338gajJ9XDSFKdBf7hGYDjbwX9jkAzpsN+P
- 4k4dH+jPYiPNAdpUXmDJ7+d8my1HwuglCbqx1wzT/sNjeAgfm4/2cwerB8YYcMx+lUJZ
- SzgwTSvE0hyZkOn9IIgSVRBIhQeWhuueu+3O4kQu0/Iu5ZWUAU90smcWObGmFTmfPOHk
- Zm1g==
+ b=ESvtiNot3gsPFCsvNqGKzWOp790NDGCv7sc4aVPTiVqg1WO5/+SHFBk/nqqwkkx7yB
+ g8SJJew2tZTxdest8F5dxSqiaSuJztSF+rnqzWhwe/PKJcwZY6tAxkY9hAwvlJdb9ygY
+ J9ogziMYmf9UTXAEvDZF0hPapVko6ignGFfPZORSZfxCjQ8he6bC1beNkyb/U5EJgOEp
+ EEGqk7UzeyBZHtk/k0MbAemj9OIh7/b4G2/ik1o1BQFG77ET7oehbHdR4SuosrFjn5B1
+ ySZZk4GWeZPtGNaaUiZ0SE2z5/m1YbGbGnxISuP5HNsZsY6J0DSiq9MuhkRs53FwQnwG
+ hK+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=gm6hSTiCTeTFw4yEOjkdldmnujLE3h8m1Cp7XuI4LbA=;
+ bh=HaovFAst5KvozDgMM24zApuBJdvlbsvy2YFPKMTYiRI=;
  fh=7xxvTH2sQtJt5Ay+3iwadnldSn0Fw9o87gYzUPDaOIA=;
- b=SziyDv3pLiDRqOU+6M6nbuze6Hem8gulJp8IBVLJ9GKx4Xw9PhQHIzxh6cj12Pyaee
- Agsj0btL2Ytz8q/v5/MmAML9KZaF26Doieu1gfDmXiZd7QSYLiHBsyAoVfmyNgcQIPEe
- QETfzILBcUE67TV5Mm05rqYBvWE9OzW7UBIvkeQislpXccexbH5cwLOdGJbSZbWTSwE3
- Aygo2DOH2z0aJJgqSX6qXqAbuqpbfDLRXXJsegEK5HmqOIt6W5tbRugIRbYSjgGjLTKu
- YxDD9kvCrNaXezmfQVQH2OWZpeZ/Ve3ORaKw9l+yi43bznEefbDpPy/TMIjCNilDTJtY
- A+Tw==; darn=lists.u-boot-project.org
+ b=WRI9oeGV3maF36srnlolmsM6W9e6jMkiqLlyATTSh0+xjNLNdJZA2zH0HH/r0vlQVs
+ Kde0xtD0WjHKDsfEt6jF/AhD4Sl0R2+GE9W4sE937a6j5e/AudwKyEyt9yMsYHvRtdgf
+ j0bzvi1bUUVnsR6sfSHfifqhwX0ouPBdduCkg+H+G9wxFZjDEuBMXGZlmZ1UmprdqIHD
+ kw0VEqbl8CeTRfomORv6XoLDp46II7qGgwGI5Vro2Ct0NjNUKHtrMmF1S/k+0Pysg7k/
+ JtmKUtzZt+l/zU1TPN5yZ5SoRNaM78TgVby3fZD3G3BG9xp9oupYDjxjBkrFGTPG1QaN
+ K+XA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786049983; x=1786654783;
+ d=1e100.net; s=20251104; t=1786050067; x=1786654867;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=gm6hSTiCTeTFw4yEOjkdldmnujLE3h8m1Cp7XuI4LbA=;
- b=P0Ok5QYlYV9RWRxLunxB+VLk6/6CFJGopv9Sfm86ptVRYIU6nXbd14yPLmvkzIdAp4
- AdiwZWPY3v7FfqoMMBQS+VA5/B1BLgzho+NW6cgD8vgDraSBDd29oolmi1jr6rUdJ8wC
- ya4+f5qdV7GVBccDQt0XqDpSdYv0jK8MHzM4tPVTeRwUpKz0AnKq/x3eph/di1kspkyc
- AcXanxtlib5fIU3QkM3QIOA7r9scV3Iev1otSPpGkyaINglz/7c7tLVPIAmnR54L5I4x
- 8Nn0tChy4ae+Nj7Z6Nr+0RqZRvsuHgDW+EAvBR2C8KGahX+fbtEku/ZVLRigq1QMs4VV
- TsXA==
-X-Gm-Message-State: AOJu0Ywal8DVdih5eL8yx7Fibditg/3sFq/0u0+/VZxbQJ99XNZNhuz0
- MR58v34p0mTvkwZLw7Xa8fI2Gs9q4M6vhUPsjOmhqVp02LVILo9NeMsxK+7f7Qg1bbB0jIFa9xR
- B1O42HAFjyL3EUquXOR8K3KS64sGGs5H05jzESL8t
-X-Gm-Gg: AR+sD12DC0ElorldzI+08XE7k9WPCmglXeHIA/9UZZ2FM04VPaKFM/lNF183OYJ9/4+
- X7gfd3x84H0JcLOCHp8gduMy3ujXOOif8EYCs7SOP4aLA1kkGS573GnbiIgUX/l5+bxXbhkzAn2
- 1aRj5UGCU/y7CzCOAbnFwNtCesGQ/rWZYq/762BkYE/D54hRw8yWazmoWS0B3fAzu47FId039Qs
- g+4Qoyzyl6T1+C1yW5NK9xkNdYkBVzvR8bDAO/1BiiXYJ05C9fIKQ5bEL2ckDgfxzv3WYukitxx
- Nu77F6UZ9o511sztGCaiJKOic1vZHeVuJRj498xEcNy1
-X-Received: by 2002:a17:906:9f8c:b0:c16:8461:e308 with SMTP id
- a640c23a62f3a-c2039c1ee73mr792644866b.20.1786049983496; Thu, 06 Aug 2026
- 13:59:43 -0700 (PDT)
+ bh=HaovFAst5KvozDgMM24zApuBJdvlbsvy2YFPKMTYiRI=;
+ b=VbGV2/LIXsPKhcCWK44EwI8x25dmCNPcVaF+tcT+WeEQnrfjU5AhU3KMvMUnGseYJZ
+ NVSoWXnbFQLQbJotyYeowsz8SHKR4RThoRwOKCrWl/pT4yB2RZcrNjmI2PV1Cdg1QfuF
+ oysFCnWDImjYi+zDYThHVNLZId+w59A3sLPWx4pSIhwGtsuU4c/SghXlo9co8+F/6/Ux
+ hGZr55vVBwANS9acQeXGztWh9PqA3Pc7XreTJ1D0hvjNdz3mt7FJZqhKxW2XkmLzu8EK
+ wmqrjSwYzOfBVAj/B3bSev7hIVXa+byANt5D0SUwoofpbHVU9ktabLb7zKqxffTXqQX7
+ SbiQ==
+X-Gm-Message-State: AOJu0Yy5DCOJ70vB6kOHWFe65YGILRGM7g0wZJRRG0tDGNcs0U6pnf11
+ Ny6jklf0O1LqPB1Mch35l9Otzpc5jomc6Gm2SOn+1w/CmkMWdBfDQv3q/7GXcQ+SvG359T5G/xk
+ M4u1VxNcRokeD4u3C50OserIyJfxKk9aGzTK7Dsfu
+X-Gm-Gg: AR+sD13hN+ED7ztej1BaHSFNoYjZiEsvsXQOrp9pwwWFsg36nE6zigL+l7bJflxc3Zg
+ 1qkT0cNbmrfL9W+XWOZnaagSlgU2tzG8TCOx1fgJIebrgbRSaFn9kRKMT1oFB/gTtyA+uUfXUYC
+ uYEeWCt8mzUELcZgRs30HasX975Ih7DoUwxuPJcbmrGDKseAjo1+LcDZnm6f9lDlh0h24B2KuWS
+ f7kjIF5X6K1TSmWo86im6lFqP0ClUpwjxgrcPoVv6d4jSulydpzWUHYf/GLOfJsgef4Yk1xoXQh
+ h2uzfmhgwj7cDNCXRU75lwOeLCIjZAyGHsH3Z28XCKk=
+X-Received: by 2002:a17:907:980c:b0:c20:3679:a2e6 with SMTP id
+ a640c23a62f3a-c2039b4bf40mr873190466b.10.1786050067606; Thu, 06 Aug 2026
+ 14:01:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260806133724.336755-1-mehmet.fide@gmail.com>
- <20260806133724.336755-2-mehmet.fide@gmail.com>
-In-Reply-To: <20260806133724.336755-2-mehmet.fide@gmail.com>
+ <20260806133724.336755-3-mehmet.fide@gmail.com>
+In-Reply-To: <20260806133724.336755-3-mehmet.fide@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Aug 2026 14:59:30 -0600
-X-Gm-Features: AUfX_mz7IS50thJJXLZBaj_1eVQWfRRG-xwcx3m-oWZ5jLX7dZ41_hKVAHSoGAw
-Message-ID: <CAFLszTjzJj7ec-PFMC6tfjf=hui8nfgzTaiRWsjEa4ATXc9VWg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] cmd: allow bootd without bootm
+Date: Thu, 6 Aug 2026 15:00:54 -0600
+X-Gm-Features: AUfX_mzgtnJBnwWJxdq-8P8dDrCCJORwMWE2C74Vl6X4ZUYtkb3DPWdAHjtqb3U
+Message-ID: <CAFLszTiB56ePBVEwLYjPZ0na4KNNT=dXqCW-UOWWh_oB7hsQwQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] test: cmd: add a test for bootd
 To: mehmet.fide@gmail.com
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Mehmet Fide <mehmet.fide@screeningeagle.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786049983; x=1786654783;
+ d=chromium.org; s=google; t=1786050067; x=1786654867;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=gm6hSTiCTeTFw4yEOjkdldmnujLE3h8m1Cp7XuI4LbA=;
- b=DSqHFJnKRX+ZToJ2OgNtOCo0WMQVHBBmJYBLyaBBpQRuY3rMJTHN4B+RM06j7YZTot
- rcAtIY6Yoc0KcYeGKNoivMsh64V9RNK7jFQ/faZ0z8amYkDktIma2EN2/G8HONnDOpDS
- CnIhVXesWZFooblFKHioJ0zYyGNEet7/qoVW4=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=HaovFAst5KvozDgMM24zApuBJdvlbsvy2YFPKMTYiRI=;
+ b=PjoUqzaG0Qabv3W533CVV9y2VwBuPNOsh9cfWFqx+IoMiSkdlWxVpH+CUhXVf28eAx
+ qkq84lvom3Ic2U9DFfH9QYoJksta5Fq9cA2bvnzlfxFdybc27HngeWb9UaTK1u9rlBAK
+ br7cwNtorIw1DaP0dNLmFfuxk3b+qYSq+7K1Q=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=DSqHFJnK
+ header.s=google header.b=PjoUqzaG
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,47 +141,22 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Mehmet,
+
 On 2026-08-06T13:37:22, Mehmet Fide <mehmet.fide@gmail.com> wrote:
-> cmd: allow bootd without bootm
+> test: cmd: add a test for bootd
 >
-> do_bootd() runs the "bootcmd" environment variable through run_command()
-> and does nothing else. It uses no bootm functionality, and neither does
-> the "bootd" recursion guard in cmd_process(). doc/usage/cmd/bootd.rst
-> documents it that way, with an example that sets bootcmd to
-> "echo Hello World".
->
-> Commit 1fd04cf46baf ("cmd: Correct dependencies for CMD_BOOTD") made
-> CMD_BOOTD depend on CMD_BOOTM because the build fails otherwise:
-> common/command.c is compiled unconditionally and references do_bootd(),
-> whose definition sits in cmd/bootm.c, which is only compiled when
-> CMD_BOOTM=y. The dependency therefore describes where the code lives
-> rather than what it needs, and the boards that disable CMD_BOOTM
-> (colibri_vf, iot_devkit, mx6memcal and r8a78000_ironhide_cm33) cannot
-> offer "boot" or "bootd" at all, although the implementation would work
-> there.
->
-> Move do_bootd() and its two command registrations into cmd/bootd.c,
-> compiled from CMD_BOOTD, and drop the artificial dependency. To leave
-> every board in tree unchanged, CMD_BOOTD now defaults to y only when
-> CMD_BOOTM is enabled, which is precisely the set of boards that have it
-> today. Boards without bootm can enable it deliberately.
->
-> Tested on sandbox: bootd, the "boot" alias, the return value taken from
-> a failing bootcmd and the recursion guard all behave as before. Also
-> tested on a Colibri VF50 (vf610) board built with CMD_BOOTM=n and
-> CMD_BOOTD=y, a combination that could not be selected before: "boot" and
-> "bootd" run bootcmd and bring up the OS, and a bootcmd of "false"
-> returns 1. A colibri_vf_defconfig build with CMD_BOOTD left off is byte
-> identical to the previous one apart from the version string; enabling
-> CMD_BOOTD costs 272 bytes.
+> command held in the bootcmd environment variable, and the return value of
+> bootd is the one of that command. Also assert the recursion guard in
+> cmd_process(), which is part of the code bootd carries.
 >
 > Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> cmd/Kconfig  |  3 +--
->  cmd/Makefile |  1 +
->  cmd/bootd.c  | 30 ++++++++++++++++++++++++++++++
->  cmd/bootm.c  | 24 ------------------------
->  4 files changed, 32 insertions(+), 26 deletions(-)
+> test/cmd/Makefile |  1 +
+>  test/cmd/bootd.c  | 66 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 67 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
