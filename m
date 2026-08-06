@@ -1,134 +1,134 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C951FC56205
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 16:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 013A3C56205
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 17:01:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2BA946081C;
-	Thu,  6 Aug 2026 16:53:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A7AC34085B;
+	Thu,  6 Aug 2026 17:01:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ildutuz0wxjM; Thu,  6 Aug 2026 16:53:27 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Z8H2antQ1Yrc; Thu,  6 Aug 2026 17:01:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 535CB60815
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 81A9F4047C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786035207;
-	bh=QucgFRtJ015It2+k6ao+ijBh0z3NXSzu7NcSKJcYgv0=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=s0tC28hQVf/L0M1h138vYuiHnCJnR4Xj4L2JE4NJPBsmak7auKkKwjfhg8pC0hCBG
-	 imElzBCxOcL7KbnUBAo+zATxTE8ZkPsx0zJQej+gwcICWWU94pY85pZXPGLa6NWZfJ
-	 MhoRVP7B4oIl0s/q7OfN5d6Udavfyn4HkCD+LuiyuuIawiVBTdhEPuzI8cO1rbU6xh
-	 +IgHj+6mXl17RxM508gTgZihT9YPCZDX1UxsUhfouDBHTpEs6w9WJs96y673gSCb00
-	 KOY9nDlw2OCeLOLGPz8yIrFPmB4wzbcJWz+htGc3UYEJbRrPSUVaBOCs/2jPHIXLMs
-	 xRPKSibZCt6GA==
+	d=lists.u-boot-project.org ; s=default; t=1786035707;
+	bh=Fat5Woy5aOHMAFOx8yIdjSZ6pGWFCFb0GcoZuVtHmpQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OYRjZDdW8Pp7Kp1wNN/PGYXLRy1S5xTSioTAV24QGzD/f84rNfZaANCNRvlE79lOh
+	 BlH9E19PmJYE2QeifZKIed70cQu1qMFn/dqe73H0auEBocj+yiWa15SnkFzNEIH7b9
+	 /R8gduc50LqndnEz4rx58lIMkfuiCVwVHcJiqMJ/+X7QOJ3P7WGUrPKCRufz9vI9jn
+	 oCFRn9mERQNePgz9OZR1zm5tVBEWogBVcFcPyRV7p2x1R1TTD834kCbn/kOuzMSDbu
+	 hcrnwPUCQhYEqKD/SCt0BgbHE577pD+L/qa7a9uXAsSO9TU04rvyZJQ7WYyza62WpL
+	 2stLWnfIBnxPw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 535CB60815;
-	Thu,  6 Aug 2026 16:53:27 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 4E726194
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:53:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 81A9F4047C;
+	Thu,  6 Aug 2026 17:01:47 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 101102B6
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:01:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 33D2960815
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:53:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EA02180EE6
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:01:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3OnZvCeSws05 for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 16:53:25 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id j1__ilFhzJFV for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 17:01:46 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c31; helo=mail-oo1-xc31.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 2725360814
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2725360814
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2725360814
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:53:24 +0000 (UTC)
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-6b01abe5d03so406828eaf.1
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 09:53:24 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org DEAE380EBF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DEAE380EBF
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DEAE380EBF
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:01:45 +0000 (UTC)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4a8d251so3336787a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 10:01:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786035704; cv=none;
+ d=google.com; s=arc-20260327;
+ b=VveRTZ0dq6hM7FuhDONvYWEgV3R1xBUI6qzHqfkUgpfGzyUUFvAufSp47/7g9SUNV7
+ 1oh2dhrlxL+zSNuQkEpYFzWhDy1Hw1yQw5TrORbRrFtnAQ7WPozhbm/OgMincHm9DZzb
+ TjRIcFm+SL6zkEuAerPFjHCbBosSKnuyNQUhPDZsa6RMugO6FXc5fQHWvASYv8yRmFGB
+ X00juHdyCFh2KUC+bV1cR0zsJ73tx7xTFlSS57RIQc4d9yH2aLfQ72NYwEfIOt4ypFv+
+ Kbs8HTwHpUZ1KP/UkEyG/0727XMBdAr3t873Y0MrWzXKXER93k6WD48NtMBQTjXDuvGx
+ Fv1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Fat5Woy5aOHMAFOx8yIdjSZ6pGWFCFb0GcoZuVtHmpQ=;
+ fh=nYjmZNcNBXjFNBQa2yYx09l5MGyiI3+DRBipPcPatTY=;
+ b=QTsVupjgijOORmMnAL12Tpjt6DIgGGjOWDGupl23Pdc4Dsay73IGviPLdIyN/eE/VD
+ 9EOzs4G0Ry8/IAKvY3ZOeZh5AEo++0OEwZ5dAfSaTGMLcA7tYC87uZ+nkJefjSidd9X3
+ Is87xxR84TkmwhkQWVLgojReV4MC/1IT/7/Ztn8ydvTYHDyGPCuQzUV53dO5GM8AYZRk
+ NXBfScOvkv8/XVlrsYCLKm4mxqbP+V3Bhieh5e1HP86nKPsGOkMuH58g4vdfyjcX69vY
+ XCZv8l2KEFa+RINJwt2+5okfz/vmY2AWR0Qm3P4pMXdUKHYx0lWpn65kOgDfLyNSoZ7l
+ 06OA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786035204; x=1786640004;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=QucgFRtJ015It2+k6ao+ijBh0z3NXSzu7NcSKJcYgv0=;
- b=gQvj7GKHEiKkzF5Y2+7Ss3vyn/jZng2rrjBgalyctQ20A4GLxPqQqDZuFj28DEKKgB
- 5AjlTwrEq/rnXcpG3Cm9vEYVcCFCTPyR/REYTj5mDbJZqXFJ8ywbBy/TIm2WUr1fKpFt
- vIE5LqYUDf3CZgQuoTKxJDMn/4xwnX34xRNv2RSYGUF5rwt+K0PisO/1ketXuq7+3qtV
- Hyc/MFcwqRmqyRSdRLPWxf/L8QwaYbYUMrABysRX4+GChIxv0tojr28f8mmsWnFrgRH2
- dDh0aJ+Gy2SH/4xVUAsCdBtNc8HebhET+dEsD/oYaXHAbwFvXQG51rraSxY6MUwifG9e
- FuTA==
-X-Gm-Message-State: AOJu0YxzEl7o1mc+tJ9Jn7iRCnvuZpy6MnIgxFFtFDQWNpKUrEGyARBY
- tH0MNeC76tck7C++d8yQovyIuFThuhnolUuVlYZwyLCzN35lYUFeYfiJ7ebjxtB1by3yaAig4Di
- 0GjW0v8U=
-X-Gm-Gg: AR+sD134ueU59m6RMJXuwY9z/zT3OHtJZdLsHX0L6Jhs8P1mvxIbqQrbAwnT7luALGb
- nK77XeUtvLttETEn4zf+njCdoSDdgQoPgk6XRVUCHb5YUHoO+pcJHQwcAuK8KBhnHVQkWyu1pts
- HtKTJPlbf9wpsZpQOcfiAFjL7ucgFNycVcnMQvTIiqHj77LQ2LlPftigIPh2KtWPoGWLMV13Xaq
- W4JzprptAowIixHv7YPuqdMQ5gkGFS21HO8oxdTgT1jAS1WiqSfLv7wGK/7LoNhgj1tr6ikrQa+
- 8IwLU3go6zxMBnmm6DMUUYtU9ICBVLHsnlBlW4Uli43fmvfUo5yJdnI6Jnfc1ipqlFWm6ysIxG3
- K8j6Vl1YvBK1E4HF/UX0snPlInM1tiWLqEDRMm8ft1HxHbV9MooKmMvWIyt0pwcXfNAWiVoLjBg
- FYHraTQfvbXqV+q4vXssNK7s3oexZrHTZ64HCEDKViuBMq08m4V6iE/38iRyAzEfX3p48F8yAzV
- iTd
-X-Received: by 2002:a05:6820:1a05:b0:6ae:774d:45ab with SMTP id
- 006d021491bc7-6ae96f87a73mr8793796eaf.27.1786035203795; 
- Thu, 06 Aug 2026 09:53:23 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:beb1:8dd1:72b8:350d])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4599dd615ecsm6095446fac.0.2026.08.06.09.53.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 09:53:23 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 06 Aug 2026 11:53:15 -0500
-Subject: [PATCH] Makefile: fix dtbs_check target
+ d=1e100.net; s=20251104; t=1786035704; x=1786640504;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Fat5Woy5aOHMAFOx8yIdjSZ6pGWFCFb0GcoZuVtHmpQ=;
+ b=rJOR7tLa2UEs+llE0WWz/yG4wO1uFYGjgZnZufu5w9+8SDvfqj30V0ifkk/7Pnufsl
+ CiHEDVRacp7J+QswrH1mmGY1qJ5lfC6M6YzQVxBgImVrvOkCxAkHqqZhjXcxKlaMeFy8
+ yrKOk2qjak0HRkZoy5lnGSIt+2lHbXoYUm42BhdIQWD4FDcmm65P4W3abUIhOluwOgOW
+ 3r7vqMlzjx/qqrS0dYbm2XAZ5CUE5MkT+QCIea2suL4JUHTMXbcQ5MOvLX2403yiOsF+
+ +CJRLwjvFl9a5QcIQaDFqmVV8hUa9b6MFrZgX8jiG53W1i5Qdmuq0QvNQncRXXU3r42U
+ VZWA==
+X-Gm-Message-State: AOJu0Yxzohls40h7ABs3ZOGQRrXDn2lW6AKy14b0XBaInWAV12HSkwcc
+ M4cg3/vnXKKNz91MPN/KhgZDbH69QrlrwIv1pbCcon8abXnaKPGU2dycTARpIfLEzt35wrJ6ygf
+ mOQwdAbb5iL/aI2GsWm1QArVDQwrNVGbaHBHovBzm
+X-Gm-Gg: AR+sD11z4Bh88MnxB/V9SGs2k/JCf0Ln6yvWOEPu9zq/KJwuJtFMYUXfFZgvp3zP/G8
+ UgWQiiS/yp6UtigJmXfm/slyCr3rMe0AJfwVAcUcQs3STGmydHrfjk4jwrkpaejzQqqtAactRuK
+ J47jOUP76YTAk5XVrLBz3/221zIe9g+LlKR/YYUKi4QrdOD0hNb43eXhsbXs69hLII3BzVvPcwh
+ 8zzReQTc6J5Jmj6QIVzmw3FXXCel0Z0cP475VRznLRytvt+AE/6hsuD/Cc8ru/9oPlrTFmjHYj0
+ idQFyX2ledkcHF6HApsCMvK/AXrvRd6TpkwrVOX15Vk=
+X-Received: by 2002:a05:6402:52cb:b0:6a1:b4ff:b755 with SMTP id
+ 4fb4d7f45d1cf-6a1b4ffc544mr1511363a12.5.1786035703810; Thu, 06 Aug 2026
+ 10:01:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260806-fix-dtbs-check-v1-1-2fe0b9486df5@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMywqEMAyF4VeRrCdQK3h7lWEWNqYaBR0aFUF8d
- 6suPzjnP0A5CCvUyQGBN1GZp4j0kwD1zdQxShsN1tjclCZHLzu2i1OknmnExmYFeVdULvUQT//
- AcfEEv7/XurqBabkrcJ4XdikvjXIAAAA=
-X-Change-ID: 20260806-fix-dtbs-check-a237cfb79b1f
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1339; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=rqPkXRAn+z2aSzm3rCPBgRZynta8S8rHikTW2v/1/3w=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdLv7w4+ePBU8FIX4pBi+O/lADPtNWmheH2XaI
- D/6gQtB/YaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanS7+xYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A3kcH/08IHNoB+yiPZoBO2Ksl431aSafg3Yg1K/CLEFb
- zruPH7efOMJCSWAhkDg68rwkr9JIHw2L+tXSY1RxXiuIGzhRzTWGdK2/Afqj42+yVOal5InwTOM
- 2oQW3HGQ3f/tQF1D2yqhsIWb8MGJDo1p0PX6xrwmHl4vW7rEyXNMkNYlCgsgT7pQHbaipg52ifh
- U973bdZm+TZGyun1CQXRdo2Q1lTW34MbmYBBn5CqUq1AtZh98x5pE1U4i2O7TRWz9aQ9Fal2n5M
- Ph6ivq3NEOKgAwaC61RalOTLbEJBSnMWDY/Tt7/TwIEIJYQ7Kr2I7YqWY/0IGbCvNiEItfjLUrW
- pLH8=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+References: <20260806-improve-logging-on-missing-uclass-v1-0-d477f0054f48@baylibre.com>
+ <20260806-improve-logging-on-missing-uclass-v1-1-d477f0054f48@baylibre.com>
+In-Reply-To: <20260806-improve-logging-on-missing-uclass-v1-1-d477f0054f48@baylibre.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Aug 2026 11:01:32 -0600
+X-Gm-Features: AUfX_mxvdxmd99a9JCuSluEASoMH2FQOs-uSenBkWoQYH5LIfws-baT6CuWqm8s
+Message-ID: <CAFLszTiW7wZf_TUf-1hjkMGLaEd8GJ1QjUSe4dQugW2aDdOY4Q@mail.gmail.com>
+Subject: Re: [PATCH 1/2] dm: improve logging for missing uclass
+To: jstephan@baylibre.com
+Cc: u-boot@lists.u-boot-project.org, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, dlechner@baylibre.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786035204; x=1786640004;
+ d=chromium.org; s=google; t=1786035704; x=1786640504;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=QucgFRtJ015It2+k6ao+ijBh0z3NXSzu7NcSKJcYgv0=;
- b=VeXAcJp++cdNUEwJllwEJPci+1kij1cf1W8RSVpXcHyWAEhiXXYquVLgQKpmZtFG9j
- xXHXCaHexw8JxHW7bL36w8Q+s+Id0IIg6B29l89kaSFJSqkIS+wLm794zoSNpwWxR8ij
- r+4NhOD8UAQ6FinJw1pSO7Ee00yzc+ia1C+/+OCeoCrtDQmDTDolkguefDnQ33L40rZv
- No9j2vAlqiZokrru4fQqOUEjwIJ1+uxIf/F2c3Rn//8t6U6Rr47H6XWaSRdXiK3pQBdS
- HKMu2msumnoW/ggGQhHOozduyssYcaKPMZ1qZZkNeKoGG+IhB8ORTy24H50886DU0CWi
- BpDQ==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=VeXAcJp+
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Fat5Woy5aOHMAFOx8yIdjSZ6pGWFCFb0GcoZuVtHmpQ=;
+ b=TPkfmyEgFbLQAd1zwVO0RetCsOAd0X6F9fMErNZUSrjyTPxcHGWOXy3yP/+HbabauU
+ pgFtz9BkVh1anF3XQ06CfjYuSaVMwh4FDClS5FvirBUhWxDWswA9tUMC/9a+lws2PS2U
+ Kr/ytAde8d+fXC4F49iu7aYWiK5JoPT4n6gUI=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=TPkfmyEg
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,46 +143,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Use absolute paths for src and srctree when calling dtbs_check via
-sub-make command. This fixes dtbs checks not working.
+Hi Julien,
 
-Without this change, we see errors like:
+On 2026-08-06T13:05:19, Julien Stephan <jstephan@baylibre.com> wrote:
+> dm: improve logging for missing uclass
+>
+> When a uclass definition is missing for an enabled driver, the board
+> cannot boot, and without any extra debug option enabled the following
+> error is displayed:
+>
+>   initcall_run_r(): initcall initr_dm() failed ### ERROR ### Please
+>   RESET the board ###
+>
+> There is a debug message using dm_warn(), which is not displayed by
+> default.  Since this is a fatal error preventing the board from booting,
+> the log level should be at least ERROR.
+>
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+>
+> drivers/core/uclass.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 
-    find: ‘dts/upstream/Bindings’: No such file or directory
+> diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
+> @@ -60,8 +60,9 @@ static int uclass_add(enum uclass_id id, struct uclass **ucp)
+>       *ucp = NULL;
+>       uc_drv = lists_uclass_lookup(id);
+>       if (!uc_drv) {
+> -             dm_warn("Cannot find uclass for id %d: please add the UCLASS_DRIVER() declaration for this UCLASS_... id\n",
+> -                     id);
+> +             log(LOGC_DM, LOGL_ERR,
+> +                 "Cannot find uclass for id %d: please add the UCLASS_DRIVER() declaration for this UCLASS_... id\n",
+> +                 id);
 
-This resulted in no schemas to be parsed and therefore no useful checks
-were done.
+This file sets LOG_CATEGORY to LOGC_DM at the top, so log_err() would
+be cleaner:
 
-Since we do not want to modify dts/upstream/Makefile, as it would be
-written over when we pull upstream changes, we make the changes in the
-U-Boot Makefile.
+    log_err("Cannot find uclass for id %d: please add the
+UCLASS_DRIVER() declaration for this UCLASS_... id\n",
+            id);
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- Makefile | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+The idea with this was that by returning -EPFNOSUPPORT (unused
+elsewhere in U-Boot (he says...)) it would indicate this problem,
+without bloating the code with a large message. This code is used in
+SPL where code size is at a premium. I don't see the error number
+though, which I added here:
 
-diff --git a/Makefile b/Makefile
-index c5cc8276fa0..8e4009a18df 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1455,7 +1455,9 @@ dtbs_check: dt_binding_check dtbs
- 
- DT_BINDING_DIR := dts/upstream/Bindings
- dt_binding_check: scripts_dtc
--	$(Q)$(MAKE) $(build)=$(DT_BINDING_DIR) $(DT_BINDING_DIR)/processed-schema.json
-+	$(Q)$(MAKE) $(build)=$(DT_BINDING_DIR) srctree=$(abspath $(srctree)) \
-+		src=$(abspath $(srctree))/$(DT_BINDING_DIR) \
-+		$(DT_BINDING_DIR)/processed-schema.json
- 
- quiet_cmd_copy = COPY    $@
-       cmd_copy = cp $< $@
+13123276806 initcall: Adjust the failure message and return value
 
----
-base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-change-id: 20260806-fix-dtbs-check-a237cfb79b1f
+Hmm yes it was dropped in the initcall move back to the header file.
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+We already have DM_WARN to help people with debugging, so perhaps
+instead we should just enable that by default in U-Boot proper?
 
+Regards,
+Simon
