@@ -4,131 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB59AC5ACAB
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 17:02:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4BEC56205
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 17:09:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9554940850;
-	Thu,  6 Aug 2026 17:02:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2CA7440857;
+	Thu,  6 Aug 2026 17:09:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X2ZBOYsVMl5m; Thu,  6 Aug 2026 17:02:56 +0000 (UTC)
+ id HgJDpI1wiFla; Thu,  6 Aug 2026 17:09:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F2A76404C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1777340805
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786035776;
-	bh=+TQIoL20I0ciArbvZNi2mA6ZmY4cES10YqeJcnp4EWk=;
+	d=lists.u-boot-project.org ; s=default; t=1786036170;
+	bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gMwHFXFZ/85lQQ/lcxcyQb27EnXe8nrOVvXXFuQa5AWogD+AWb0Zg7oAmjZ+0TLZJ
-	 ZR1dZUksmrBJ8+iqe+Qk6A/PKS35ebrsD4GxFO56wSL3oE54bgx/R0whr0MCaN85xb
-	 s4Kl3Yp6UQR+nMUE7ukR5iu4aeYJnLCYGWbaetuyj9msHXuOzZrYmoEUeP8z7br3sJ
-	 cqV/e9gILX9ktgTuNlDaTb9WJMhSf/ow+F26jODoyz67mzMnj2Nxpt8i+YgDO/+rBX
-	 VGvXI7w5o9llqhZ93cjTiibunxal95cfWzuBLZOBSICCRBa1+6zXmRivtrfnDhR68G
-	 hw1lnFoWI0U7w==
+	b=LE0iDybHEWLc5fsF4HHYcw3yVdEL6to0gp3YUEUxSrsuohUoGor3lyyz99erKZQEf
+	 sah582PoIfaDLQrmaURuVK0sr0czNObzBYqHBwKVOCi3yG2fJgdFTPhDCRnvaIvF1O
+	 +WYw6rmiCcuqTwtQ0fI8N1TqEDhe3Xw/aUjE8ctsDE1aJL4JEiWuIZw9Akj3/Semdq
+	 I7e2vLT1dO7bQcrcKKYOhlazyjKOrPwb/xW5sSvj4jUF80XyESvkldgQNolVB9Y+69
+	 F3TLRrA5z/PQEbKML/epDXOuq/vU+fKYaCiCelYrizOBNYO+kaLJc1yuBEY9N/uJBL
+	 SEDwSP2s8sjNQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F2A76404C1;
-	Thu,  6 Aug 2026 17:02:55 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id BAE2E392
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:02:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1777340805;
+	Thu,  6 Aug 2026 17:09:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 762E1392
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:09:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A1065402D2
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:02:54 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5C1A540805
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:09:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lStgwJ-y1fAw for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 17:02:54 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xf5SIj-9CAEf for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 17:09:27 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
+ client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9C56A40024
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9C56A40024
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9C56A40024
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:02:53 +0000 (UTC)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c2020421077so408240066b.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 10:02:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786035771; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4011C40473
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4011C40473
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4011C40473
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:09:27 +0000 (UTC)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0c8283146so4030635a12.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 10:09:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786036165; cv=none;
  d=google.com; s=arc-20260327;
- b=XzUOVm+foEsxsOCS3zerGPetm8z+U8zCLA/X1pEPPbIGtNfvD6MrYDT0lHLBkJs3vv
- +s/dGX7O9+NigcMXY4vJ7l5Y5RZzqYZV/AKQ4X/8roV0/VvkFJxz/FYLqaStcuheF645
- rWreD0aIxLPjDqHfbGDFRerU40g8gca9Hl3rmDLi962VhkAhYpPoth0YrDsIwfdQkBlq
- nx3uF97ygh3wJH4XwLhaB4M2AbXY7WPVVx7UFek2lQiVS0G+VpCPO2FwvsPzzcOX/kOV
- SfxdBjEMXqgyS3Hzjfd4a5HTXTwanf72j1N55ze1ACpUbFiYoQ/XqpDz5xDTtfZd71Z3
- MKzw==
+ b=WcNvkxq31/Dcvys0E9jL8xmZqs8RtHTIeDDqemfiF/d5o+fTUD+F3UsI9jd6RRIDAe
+ 6BRklmKcBsoAcWbMR7KNAgG4F5B92f8ucNXLKpYa54g1uYqMRNLcc0JVQdUBSkCh8S01
+ K6AFNS64clvIy1f4vkMKEr9uy6UrXq25xmS27wWkqCIDIrOMdNcWv4fh41AqD5FQDyRF
+ 3zvvOxptKleuZfgJvgUSZDJnCnSc9JMOhVCcnEum90TErJvH9FTiB78NEVXL5Nh4J5S1
+ UtlbWK+5G+J07t4SF86M2+cTh5nN4d08Uv1jh0aIIjn+qpGrUBtlGi5Yia06t5uoNGtm
+ /uwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=+TQIoL20I0ciArbvZNi2mA6ZmY4cES10YqeJcnp4EWk=;
- fh=nYjmZNcNBXjFNBQa2yYx09l5MGyiI3+DRBipPcPatTY=;
- b=C94JW66XTK49+1MetpxHC6P2YQ00eAfpGBkgxjWySRLSsmH9YUHX9z70s5jn05RlQZ
- X2LT2RtbFreHSA8Do9ZUkhBUftxVw8jQqWNWhKNOdbdUsz+bxpfSe8LsuUFXJAbSmb6O
- dRc9NCPsZsX/iP3ckV4XKlAzHcoLjXVjrBbIALnL00uFAIIVYulE7LnFGdxEFTH24xul
- KPn3pt47EtFnnFqOWgsNZaJQbI3tgP1nIbNuSmttYNmxz/GYFuZR+W8kUhY/xlj2CySA
- K49JzECAS4oHKcEq9QsHOkHZubfJrwCPe7LE2D4F2Y75e3QfAQHQqgqbZgaYldJbKxqR
- sk3w==; darn=lists.u-boot-project.org
+ bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
+ fh=Qe0Ic/EUO+9IWytden6r420E7DP3QB2PgHsA8AUFoEY=;
+ b=OJrBLdNcbSpxlK/J6bHmYJU8puX+a7EnsmXXZSjt4Fn1lf4CTaQ1+pVa+GIVj9iUyc
+ IDUvwUqbN7bn1/1T0jWLQOCFtTLRW8mE7q/XEtNItFJ85zZRtIG70TxqcHD1kwBWPNlx
+ sbimEhNoSw32ZxjahjCaNBIo42FJwvJd/gqZU0RCs7NHMmJteF8ta9BrT2XjKdy7tSag
+ qC4rqOlVZu4bZgzffOR8kIzwjksKLYvLLbLBBkaKJOjk8JWCOx5RnPjpRvlraWq6gbP1
+ j+Hno5hM4LnCzK9e19YqHJQa9UdkGjLz8Sev7bG8He3Il1CUBsyUBZtD5Jfx8R2mj3HN
+ mzvw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786035771; x=1786640571;
+ d=1e100.net; s=20251104; t=1786036165; x=1786640965;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=+TQIoL20I0ciArbvZNi2mA6ZmY4cES10YqeJcnp4EWk=;
- b=KBR7meNiTFMqjiju2fdHS0yaqvcFYFPq+iwtgOHvcxDGNdbXIxSSFZtrLVaqIM67/o
- PPDpLir2schjdOgZyE8ZyuO3H/irfbFVJHUHV8/Sw/R0xeKinEKLYtiW8SZDP04++e3R
- 7UDnLBPl2ajNdzaFDf14E6UBUo4wSEttji5JbrOf72z7rtZx5YfLh7X0ho99OQiO1eeI
- OGjoQoD2vs8LTFfIG1QDLh8IHgZTc8JLkx9E62bsbLl9N7b/pzhyAAYV+gJs5hftHtTv
- Sv/wh/om0J4uX7dZCEyrDY4ffQMk3t6UdM1PXdqIIZUE2WJ2k6v4li7yMWL+Afmvl3RH
- MfLA==
-X-Gm-Message-State: AOJu0YzQvfCEna4o6FnW+MkxZTSNYm71qwn79TCTJFORFJFnl8VswrBn
- 3dfylA0YNcFWg0oJuROEofjpQ+pHMKKos2ge30fv2avIH8RtIYMWDGdyvkyUncP+wQClpEwCjXr
- UqacbN1qlJFYOoPFLIiEPYOybTe8L1IoT7/7C5s85
-X-Gm-Gg: AR+sD11zoFl94nrxAYQ/2V0aSi4ydfEF9fyA85CnGAa90UBK2apXBunWISI8EFkM/LT
- Nm6IH8jXuDJj2nbzDMPB5g98Q46VZWVu4tipi3s8SQ5tnDVQrQjuTMKVbBxMlEXJ/+WskVzJT7M
- WUVWCkBS0ersiPElJxQot/dQn794YcYyQBK1EBin3er+DHQv0jHOXRvqx216QtksvOXTX0yVXJG
- eMx/dee5OnKp1kzbGwi4SXpFoT5JswUIpOKe93FvuHsbpX2D9pVE9o7UVp1LlG8/TD8CGCvTFzA
- 8pBPIVnWZ6m6AdbZl5sSGmpZVDuTxtXA1MyQyPWkdDM=
-X-Received: by 2002:a17:906:4793:b0:c16:4df6:176b with SMTP id
- a640c23a62f3a-c2039c214a2mr832116766b.20.1786035771448; Thu, 06 Aug 2026
- 10:02:51 -0700 (PDT)
+ bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
+ b=cmgM0KZ/EWvpLmME9EMrMMpez5D5GZ2/sW2YzE5nSOaw2RyUscXwJsgnKgXklR4GQ8
+ wQ5wFjf+RMoo7UboU5O2s3/iI4bocxsqiylietPwPyr8J3JnSfk9estz/A+c5QeWYoOq
+ E7GMJZbbvasrZ6z46Ool8PUDAOyukx2yP1bfPwFgM8Vu5i4Sb4GGaiKNFW+CrWKahzAf
+ hdJ6QAJV2lVqEQC19TvJPRO5f430PWrAg8M3bQwye7Pt4LtLYOwWMaI1qbzKmvCnxkfN
+ 1RjfpzkwW84piv8kwJO+e7t+ghb11yucSzcNiz5zq0KWsNvuIDOUbmQqafJvwTaEltZD
+ CgTA==
+X-Gm-Message-State: AOJu0Yz9dgwWnMGsMehcDZX84PZuGUFmOOYpl+EGE0Yojd24sFWjCQrO
+ MdQyNj/8xsR9WcI7IgN3uBQTsZmHID0iSj+Ciqopk9jdSsr1l77VP57NqVCBCI0iqcF7VhBFixX
+ q5qZryBixSuYbVyAkuXLBWJuk+A48VVKWL2oaHeGC
+X-Gm-Gg: AR+sD13il7guc+lauD8Dzp5Otdh4W2SHdf2oOtjLu0TTMJYvVdFWH4qtCtje0Eg84Pu
+ W4B81f7g1cKemGquP9evAIKr7SdddUCGV8xz58ggG+kSP5+RISHrEKjYoguNZ1/puHbznzTOrAN
+ ciwFAmCK9SdlN5dIAIkSJkw2HOxJ8uWZJYqkMXJqXq7eiUc+6Q4xTfgFWHuv1wnCEsfB9v/6oES
+ xgXxA0HVYzi0QbBPncbqN4YKa7BLp0h6yLvB545j/klp0SrD+RA1xiqq46NbKmweXVwyOMxJtYm
+ IVkHDDab0iubaYORotXdHVA+OJkPF4eH295uHHQ2Pbw=
+X-Received: by 2002:a05:6402:1f8d:b0:6a0:927e:39e2 with SMTP id
+ 4fb4d7f45d1cf-6a14f0c5762mr9076204a12.5.1786036165071; Thu, 06 Aug 2026
+ 10:09:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260806-improve-logging-on-missing-uclass-v1-0-d477f0054f48@baylibre.com>
- <20260806-improve-logging-on-missing-uclass-v1-2-d477f0054f48@baylibre.com>
-In-Reply-To: <20260806-improve-logging-on-missing-uclass-v1-2-d477f0054f48@baylibre.com>
+References: <20260805203113.46567-1-smoser@brickies.net>
+In-Reply-To: <20260805203113.46567-1-smoser@brickies.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Aug 2026 11:02:39 -0600
-X-Gm-Features: AUfX_mwa6FguSArx3QGzcaUpZFUWY2onp9qD5nX59-ONodQQU5CzuV4azPPRYIo
-Message-ID: <CAFLszTiTC5KkvsXj6YdE3axWJ47_oTmKyXUbpiijFR6fAcmdvQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] initcall: display error code on error
-To: jstephan@baylibre.com
-Cc: u-boot@lists.u-boot-project.org, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, dlechner@baylibre.com
+Date: Thu, 6 Aug 2026 11:09:12 -0600
+X-Gm-Features: AUfX_mx5hrrjekqq6wjm0U8lHRFBlivb_PCTyRJaEw_bebobkL-d5xW9uqYq2JY
+Message-ID: <CAFLszTh93y-zky7whGWp9+pbV3KeSOeHvL0WnDKouqEMR8hD1Q@mail.gmail.com>
+Subject: Re: [PATCH] dm: pci: fix uninitialized fdt_pci_addr fall-through in
+ pci_get_devfn
+To: smoser@brickies.net
+Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Dustin Kirkland <kirkland@chainguard.dev>, 
+ Dustin Kirkland <dustin.kirkland@chainguard.dev>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786035771; x=1786640571;
+ d=chromium.org; s=google; t=1786036165; x=1786640965;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+TQIoL20I0ciArbvZNi2mA6ZmY4cES10YqeJcnp4EWk=;
- b=GQjzTKkJV1qnEmUSkRL3fK8B+rf78WCFVV4/Ot0xADwBOptflBRhLAe1Ug4J89NAVv
- aa/cJeYnIHhAI4eE73uhi/WLnfFJaaY1k+oMeVG6I3rnkm7MwGQx8lU1UWtZkD6j0WUZ
- BUo+J0wzqHD+NVhMK8jvf3pmvJpoCd8IHyERo=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
+ b=ohi4k/LJOx7JB46HdtqbBEpSF2/wuKx7iyPQ9XF/zoBS09TUSfAiM1tzC0k0Wz2Ld2
+ Edwy/bfLirfI6IczV6PjvBj7JjA+VGbEyLQsv+Cf4wZANZxA9YxzVjyfZoQTkO6UucNn
+ fQcvRLbLbolngf/9oy2qkvHrDTbBtYfv1qOuI=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=GQjzTKkJ
+ header.s=google header.b=ohi4k/LJ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,57 +142,79 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Julien,
+Hi Dustin,
 
-On 2026-08-06T13:05:19, Julien Stephan <jstephan@baylibre.com> wrote:
-> initcall: display error code on error
->
-> Currently when an initcall fails the error code is not displayed.
-> Display it, along with the corresponding error string if ERRNO_STR is
-> enabled.
->
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
->
-> include/initcall.h | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
+On 2026-08-05T20:31:13, Scott Moser <smoser@brickies.net> wrote:
+> dm: pci: fix uninitialized fdt_pci_addr fall-through in pci_get_devfn
 
-> diff --git a/include/initcall.h b/include/initcall.h
-> @@ -14,9 +15,10 @@ _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
+Thanks for tracking this down.
+
 >
->  #define INITCALL(_call) \
->       do { \
-> -             if (_call()) { \
-> -                     printf("%s(): initcall %s() failed\n", __func__, \
-> -                            #_call); \
-> +             int _ret = _call(); \
-> +             if (_ret) { \
-> +                     printf("%s(): initcall %s() failed (err=%d: %s)\n", \
-> +                            __func__, #_call, _ret, errno_str(_ret)); \
->                       hang(); \
->               } \
->       } while (0)
-
-When CONFIG_ERRNO_STR is disabled errno_str() returns an empty string,
-so this prints '... failed (err=-19: )' with a dangling ': '. There is
-a %dE which will print the error string if available.
-
-> diff --git a/include/initcall.h b/include/initcall.h
-> @@ -14,9 +15,10 @@ _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
+> pci_get_devfn() reads addr.phys_hi and returns the low bits of it as the
+> requested devfn even on the -ENOENT branch, where ofnode_read_pci_addr()
+> has NOT written *addr. The C standard leaves that read undefined; in
+> practice the returned value depends on the compilers stack layout and on
+> -ftrivial-auto-var-init. That value ends up in pplat->devfn (set by
+> pci_uclass_child_post_bind()) and is later compared for equality in
+> pci_bus_find_devfn() during PCI enumeration, so an under-determined
+> value produces an under-determined driver-binding outcome.
 >
->  #define INITCALL(_call) \
->       do { \
-> -             if (_call()) { \
-> -                     printf("%s(): initcall %s() failed\n", __func__, \
-> -                            #_call); \
-> +             int _ret = _call(); \
-> +             if (_ret) { \
-> +                     printf("%s(): initcall %s() failed (err=%d: %s)\n", \
-> +                            __func__, #_call, _ret, errno_str(_ret)); \
+> Concretely, this fires on Raspberry Pi 5 (BCM2712) with vendor U-Boot
+> v2026.07 when the tree is compiled with GCC -ftrivial-auto-var-init=zero.
+> In that build addr.phys_hi is zeroed rather than left as stack junk, so
+> pci_get_devfn() returns 0 for every DT-declared non-PCI child of a PCI
+> bus. The Pi 5 device tree includes one such child under the second root
+> complex -- the rp1 simple-bus node representing the on-SoC RP1 south
+> bridge as seen from the OS side. Under zero-init:
+>
+>   * pci_uclass_child_post_bind(rp1) sets pplat->devfn = 0
+> [...]
+>
+> drivers/core/util.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 
-Since you are here, INITCALL_EVT() just below has the same problem -
-event_notify_null() returns an error code that would be equally
-useful. What do you think about giving it the same treatment in this
-patch?
+>     Reported-by: Dustin Kirkland <dustin.kirkland@chainguard.dev>
+>     Fixes: b52142004fbd ("pci: Add pci_get_devfn() to extract devfn from the fdt_pci_addr")
+>     Signed-off-by: Dustin Kirkland <dustin.kirkland@chainguard.dev>
+>     Investigated-by: Claude Opus 4.7 <noreply@anthropic.com>
+>     Co-authored-by: Claude Opus 4.7 <noreply@anthropic.com>
+
+This is a good find!
+
+Please drop Reported-by when the reporter is also the Signed-off-by -
+also U-Boot doesn't accept AI contributions, so probably best to just
+remove those tags. Also not that useful to mention a vendor tree - we
+mostly just worry about mainline here.
+
+> diff --git a/drivers/core/util.c b/drivers/core/util.c
+> @@ -20,10 +20,8 @@ int pci_get_devfn(struct udevice *dev)
+>       /* Extract the devfn from fdt_pci_addr */
+>       ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_CONFIG,
+>                                  "reg", &addr, NULL);
+> -     if (ret) {
+> -             if (ret != -ENOENT)
+> -                     return -EINVAL;
+> -     }
+> +     if (ret)
+> +             return -EINVAL;
+>
+>       return addr.phys_hi & 0xff00;
+>  }
+
+The fix is right, but the kerneldoc in include/dm/pci.h still says:
+
+    Return: devfn in bits 15...8 if found (pci_dev_t format), or -ENODEV if not
+        found
+
+Since this patch makes the error path observable, please either update
+that comment to match (-EINVAL on any lookup failure) or return
+-ENODEV for the ret == -ENOENT case so the documented contract holds.
+I'd lean towards -ENODEV for the not-present case and -EINVAL only for
+a malformed reg - that also reads more naturally at the callers in
+arch/x86/cpu/apollolake/{pmc,hostbridge}.c and intel_common/p2sb.c,
+which only test < 0. What do you think?
 
 Regards,
 Simon
+
+[1] https://lore.kernel.org/u-boot/20251113133038.GF6688@bill-the-cat/
