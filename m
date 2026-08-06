@@ -1,99 +1,99 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC84AC56205
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9BC3C56208
 	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 16:15:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CC9A440738;
-	Thu,  6 Aug 2026 16:15:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5B88180E9C;
+	Thu,  6 Aug 2026 16:15:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EdKAQYzgAuFX; Thu,  6 Aug 2026 16:15:31 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tegTcvRD3Y3y; Thu,  6 Aug 2026 16:15:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 52E45406E7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 65B4580E7D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786032931;
-	bh=wkkYGReH+ho1P51Xi3/swhElokXAzRJhpZaBY5xV7rc=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=RGogr3JHfwMeueBJWV4ZT9wHcQYAozF340qNC1uY1FBv0QHv3JYRp4rbmyKlAhTyh
-	 jtvg3IvNyVbQQifeTs60jQ40DaJHDoAfduuYrId0ps7SF5m1AL9WJ3X8kKtFWrL+Gz
-	 phYBlowERjfsTQDeoC/GZJZONVYnPxKfhgONCED9/2kjHWRqgl6b08ZbrS9LY4GlgR
-	 /ONnr3eQ9KAVGlFYu8Zm6tWsiaVUxuD96mMIjfoXR2hOeko27ePsH3nAstmW9vORQp
-	 JNTonq2Q4uV3xWeLlatxramMmI0dlrBGquQUFmcuAgMPw7pvmoQ2H5wq12tYEZLFOl
-	 Mp3gVkkLVtf4A==
+	d=lists.u-boot-project.org ; s=default; t=1786032932;
+	bh=WiEoqdG/rDlynBd2ILAaf5AZOsWCRvGFFd55gIsjrpo=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=NwY6AyX3VbfOjJcywPJ28RC86Q3MABZRscYY1FUDjmLqMpd+uOjyvUtZdKylFLWfY
+	 K7lTJOP59wl6ks1vzm45aW7DQqgygzJHPP0gUY2VA6nOEYHCs53IBA+8TvT5xSDFZx
+	 D8MP5md+oJYYx290nywI61+kwYFTt5qZzAs45eN/+y9g9HHadRZ8aDd+F46ccpSTpF
+	 VmE42r1nX2v2VNNsbwo23AYhaozWIx6iiOHwyAPl4C73fUX7blO+2sMbh1qdxXTJP2
+	 x3IWeIzZtlIHwkhCpQZxZYiuESp8PPXF4F/bYCsbF8PoxaCPSg0NeFN9l0Bj9bvEo/
+	 89MKsz+NnFO4g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 52E45406E7;
-	Thu,  6 Aug 2026 16:15:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 195BB397
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:15:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 65B4580E7D;
+	Thu,  6 Aug 2026 16:15:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 11A46218
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:15:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 16F3A60809
+ by smtp3.osuosl.org (Postfix) with ESMTP id EC7DA60806
  for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:15:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OwQjIAmZfuvi for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 16:15:29 +0000 (UTC)
+ id LmFJn7HqxbqI for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 16:15:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32d; helo=mail-ot1-x32d.google.com;
+ client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 137E160806
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 137E160806
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 137E160806
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:15:28 +0000 (UTC)
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7e6b554044fso2224725a34.0
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 09:15:28 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org C669460808
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C669460808
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C669460808
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:15:29 +0000 (UTC)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7e9d7464b71so1180892a34.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 09:15:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786032927; x=1786637727;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=wkkYGReH+ho1P51Xi3/swhElokXAzRJhpZaBY5xV7rc=;
- b=BiMp8B0Lr4WJJFQeQmJPPoBxv0ewbTl/ZK68yYDdLXTNirCxzE6q3bnnBrhutA6gmx
- UAkADzfQPE/wRSNOHwKi0b1DN/E0tc2fLuF5Srdt+BEjTZZZ3zG/VV5dFUNCXeigw0Gu
- WAdCyKWwsXfP3KOgw0xkjZisdmOD0VGISQhDnB95IklV8yNJj3s1E+Bsd7+mE1svmk8R
- 7PZ59EN3AT1C1c+Jrxrq/YZe9TIkV6TO+sZaaAVv+0aS8Z/JTtbFB4tv6xY/Xj5rgIX6
- nDJoWM8Kios+kgqju5DLo378856TtaakUiy8jp74coXUC/nWFot8mvk/jYa3QQ5B0e8h
- sUhg==
-X-Gm-Message-State: AOJu0Yy7esj2xyDfRf7Epp105y7wHpKc8xEbd4Kz2YltYF9cPFu2aNq4
- AGwCK4N1vZQs89zhdMXOtwbfmp16mbRAdt1ueC2t+qIVvHrdF9jKzT4kZLL97TgsEF9PsCsonnE
- +EAMwmGM=
-X-Gm-Gg: AR+sD12TTek6dpCJmY1/64LNX4O3T5QdT/6ogUnPe2kNiefi7XOSMRhUV4iqz5kr9q4
- xG6kE95zVrgHv722UDuO0TOA/MU1i2OPVrliWpN7wC2TllH5t45pHBEKjkTv4KndeHV93JNwgR4
- CT5cY6Fp6EZ0MLGKehnKKaStWb+CCriDV7RW5wqpIBF+rINEnzylm1HU95yrq/b4dtiOuSa++3m
- d43e1oZCClb0qo4c5ZkF4uXKabjGFmhZu00w5ah7FuMZ98qW2t4/nGRuqEP30vk7TXju/RDepfK
- uImDdTJxswojHmGugv/wS6J2NRCUYKdBpL3rz1Vsd4rNDIiAeVJBtUPhf5KObGvzWhZBm7d1vzS
- yTuSf/azWTMcXkGzZd+3e9gCsQsvAzuec70F1YhUyKT8wYhg4Qu2dDN8Nom2FRC0hHQrQZ390NT
- 4G+SoLtXY0B9xvmTd5T4NmfVF1A4M/1SzsBNq/0Dp4mb118CfCWowLwGqy3Tu2xYCvYbScFSWGQ
- 2eMy2ah6Zt9pnEf
-X-Received: by 2002:a05:6830:63cd:b0:7ee:3bdc:9205 with SMTP id
- 46e09a7af769-7f1e5e9c02amr10541432a34.13.1786032927514; 
- Thu, 06 Aug 2026 09:15:27 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786032928; x=1786637728;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=WiEoqdG/rDlynBd2ILAaf5AZOsWCRvGFFd55gIsjrpo=;
+ b=EoB+jNjiWeWZ1CkmfSGjiqy+zdscflOn+MwIVpxJ4u0K1Zy5rPdARbKSsrLbqCqWEN
+ 9V9yaR28I5S+tZ3Io0hFZfDG9zP9PnjVNIQG+RPtywkR+9Ifq9Av5Jufg/3hUrV8XMXN
+ Bnw1AJdUSDfDC+qT7hSaBv79ckOzWQKYiGwNeLMs0/neFvPyBDZynT4beYfh38d+6oKv
+ vsuETm8PhnMAQRjSa1dGaGdAmnhT/ThVLRD4lu66wGcotc2VIM0ZtWM3MP4jQwjrvfhy
+ DeJVnMnn2MHtLqkLMXTg4Sov38i8obIVyUIpb4IAXo4i6FLOpB0+67RcKduBQbpTHDZ7
+ mH5w==
+X-Gm-Message-State: AOJu0YwkyHlywIkoj5qvtexhe4vtsmS64dC237siMT4IN4hpFFgk2hXh
+ dBzxfMaUGjhHBCK9ZbEEtuWz1LSFq/JZiAhD2YW7kuMMMtVpkZ9cKM4EJyGt29XKo4QEPw844yD
+ MinRLpQQ=
+X-Gm-Gg: AR+sD10Wy19QywhR0vbW6REqnF3zp7WQo9jli0ZjQfTd326w/hp88EgUIbBhr14xYTe
+ yDNLt7FfPXwqOdIi3J7VPgW5TfkQxiZ3SAJPbnw2pgzmAXSQbsXRfzOmFUDiRDxZCZIuscwNs0G
+ uRoWMo7A9R/dgmRrJ4hHIn68uopuhIxQTKehpyeTG96lGny+PjDVSllI6nIzDho2/jYHENTM/Sd
+ Bne8tswfR22ditOxuJQzcGfmzdvfJYXbaRqq33XLQtnDzfNTBQSQ4VcaO9X3h3G9FEXZ4kpu6cU
+ 2adtOQh1KyriPe1KmGFooL/y+uLZfxA6CJq3v+rR4fvMNFNP/YiduYPQuO5cWT5FAYXYBfuk8Ks
+ BnfXP7Z147U3N/fSk60uxbNIzCgceKAq4j5ni4gL2pQz4V5dkErEOFSvhU3kEdL6XIV/thbhBZr
+ wjtNpBMkKl6buM7y0nK4mh9CPclmgxp3g5aevuvqFaS+iK/du7JxQcNUwvjIOXkga1JA==
+X-Received: by 2002:a05:6830:7103:b0:7d7:fbe2:9725 with SMTP id
+ 46e09a7af769-7f1e5cc3c9bmr9385343a34.5.1786032928557; 
+ Thu, 06 Aug 2026 09:15:28 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:beb1:8dd1:72b8:350d])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f1df568d7csm4563367a34.18.2026.08.06.09.15.26
+ 46e09a7af769-7f1df568d7csm4563367a34.18.2026.08.06.09.15.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 09:15:26 -0700 (PDT)
+ Thu, 06 Aug 2026 09:15:28 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/3] net: mediatek: add mt8366 support
-Date: Thu, 06 Aug 2026 11:14:58 -0500
-Message-Id: <20260806-mtk-net-mt8366-support-v1-0-5eb259ff69dd@baylibre.com>
+Date: Thu, 06 Aug 2026 11:14:59 -0500
+Subject: [PATCH 1/3] net: dwc_eth_qos_mtk: support platform-specific
+ PERI_ETH_BASE
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBCF4avIrB1IIoTUqxQXGqd2WowhE0UQ7
- 95UV49v8f4DhBKTQFsdkGhj4SUU6LoC/+7DRMhjMRhlrHLK4py/GCiXdY21KGuMS8poHkqPxju
- thwbKOSZ68X6Fn91tWYcP+fyvwXn+ALRkBw56AAAA
-X-Change-ID: 20260806-mtk-net-mt8366-support-2901d2c811b3
+Message-Id: <20260806-mtk-net-mt8366-support-v1-1-5eb259ff69dd@baylibre.com>
+References: <20260806-mtk-net-mt8366-support-v1-0-5eb259ff69dd@baylibre.com>
+In-Reply-To: <20260806-mtk-net-mt8366-support-v1-0-5eb259ff69dd@baylibre.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -103,38 +103,38 @@ To: Jerome Forissier <jerome.forissier@arm.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=759; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4909; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=RXAOh8dGHR3gtCRLgKRFvWnqLWZ+lIltYyCEU4iHdSQ=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdLMExjw4pi0ZJanPKn+aOUErt8AgLlMQZMdqo
- wzmx/odQlaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanSzBBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AZKAH/3dg7us1NEztccAXq0sQEnzG0exWtz9elPhk0TD
- frMpiQxRVtFUENjRtmvRBjkzRGInwMnZSw4di0qi3Wgl15BiIYgwdMiru6fY5Tr0lEias+PkH00
- 5yZONW2xwnrYnTIGkUFdxcA+p8cLE5rO5jey2mIOo1DBARE4n7d5oqAf4hG+s9BDZJSFfyus7mQ
- 4XmcutdC9qYjB/jF3w0ZszfrYnh5Egf2pZmsOCwsrZ4e72iQKCR+206wTjIlXuolRvVqHaLwD5B
- LRaoh4nJyQChGWgMp7nhKZT4c0BGppPoQiknPczA+bBEt65iCshqEWffSO5YSAnBfgwrQPEy2o5
- Ycdg=
+ bh=ch1TgzJOGXb3VtVmxVWg2vAtj+6frP8Wbn3nY8lL68s=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdLMKLNkvypNR9XVeN2ULPnxhJzW98I/4x656C
+ Xk5Ji4YOdyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanSzChYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ADPcIAJnuV3sIbxvWXiQ91y3J8ewC5YEKHvXYKMwDedq
+ MhqpUn8NJ8sgYX7a4hbuKP/ZhC9UjxrbFxoCo/rvKvK4xEmCSsCqUZeqTp7VPF1DA+vXrSEdy+r
+ a9J1gnHxD7Yo3dn+ItBkNazBzRBN+QYKcTJPfYO1GRiZbsEeI6xq0U7iSWMkJ7xJJmrM2l1MBZI
+ uloE7iZDd3yED3AQBjouRKNwUg36MpkJWCHAz37oJKNKDvJmlHsTX/a+HUVY+8pa5csxe1T6F2K
+ 17ioiMVrSXb7cl2DD2HLRTVcP7gI6fla/gfBw2jOraHEBvvcWlMTnRhmKyLMqIZ6zWeyE2pxxrC
+ HG/E=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786032927; x=1786637727;
+ d=baylibre.com; s=google; t=1786032928; x=1786637728;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=wkkYGReH+ho1P51Xi3/swhElokXAzRJhpZaBY5xV7rc=;
- b=R9/iEipgA8mrkuS2E2P6Hj/+dzBX/599dcFizYlej4jQeDvO3hI4K+W7/cFxuDDRTW
- vTCgt0Kt+LfyUlERg308Vp1lWI0zTrTrMEbcIHo8Knb8o7H+aeGhxdjyxdMJGanncoNc
- Idu9ejbeTTyIq6dcWUii0feoXeCeGhr9ds1FEtpzjR5Iru5xSnqWFOAOHZdl2nczNdLf
- A7DwsqfRFwYZSf4e9l106yuABwSuQKh3jirwLhvk4ZHTlIpLZP9/E7ez+v0nFGYOcNsB
- 2lu12fUsrXNjba34BqxxLbuthGiwrEtKTp66EgGQORrb1H/WHWKuHtH3pyMD/6aMUcoO
- 5FYQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=WiEoqdG/rDlynBd2ILAaf5AZOsWCRvGFFd55gIsjrpo=;
+ b=CH8BuU38PPo4h/yJFrAZFr73IjiMfZuTJt5o5e8K4XS3cil061N6tH0IiCYEEqDUgQ
+ sAaYW3sUiCw874DCFcHcXLznU9Mfo+2QgYoHbZoeRhi47fqeCfA6WMB3RRzJuEPoR3pt
+ NP2Oe7W+iTcu8gBJlLNzBrbfeG/woUdtlkwG8IIUaUsMQPqiDazSewS+yJu5D4VHS4SH
+ 0eHiKBIemBqig1Tvbs5EYGOou9j0Eep3tumk5r23uYVPp/V8e7OOJremLHvnq30l48zj
+ LVADYtrz2r+BuDWbPBWNyeuV6ElmkE0JZNPAJGWATh3qPM3AGXKNPDowVmHs4UOrslxG
+ GSqA==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=R9/iEipg
+ header.a=rsa-sha256 header.s=google header.b=CH8BuU38
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,25 +149,154 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-In order to support MT8366 (Genio 360 EVK), we need to add a new
-compatible string match since there are a few registers at a different
-offset on this target.
+Add infrastructure to support future MediaTek platforms that have a
+different PERI_ETH_BASE address. There are at least 3 different known
+base address for this.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (3):
-      net: dwc_eth_qos_mtk: support platform-specific PERI_ETH_BASE
-      net: dwc_eth_qos_mtk: add mt8366 support
-      net: dwc_eth_qos: add mt8366 support
+ drivers/net/dwc_eth_qos_mtk.c | 58 +++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 50 insertions(+), 8 deletions(-)
 
- drivers/net/dwc_eth_qos.c     |  4 +++
- drivers/net/dwc_eth_qos_mtk.c | 63 +++++++++++++++++++++++++++++++++++++------
- 2 files changed, 59 insertions(+), 8 deletions(-)
----
-base-commit: b2817120d3506e3c4f1329fb8745b40ae7f6ba60
-change-id: 20260806-mtk-net-mt8366-support-2901d2c811b3
+diff --git a/drivers/net/dwc_eth_qos_mtk.c b/drivers/net/dwc_eth_qos_mtk.c
+index 43e1085dfe5..a113870dc8a 100644
+--- a/drivers/net/dwc_eth_qos_mtk.c
++++ b/drivers/net/dwc_eth_qos_mtk.c
+@@ -18,9 +18,11 @@
+  * Peri Configuration register is SoC specific,
+  * so add a SoC specific prefix.
+  */
+-#define MT8189_PERI_ETH_CTRL0		0x270
+-#define MT8189_PERI_ETH_CTRL1		0x274
+-#define MT8189_PERI_ETH_CTRL2		0x278
++#define MT8189_PERI_ETH_BASE		0x270
++
++#define MTK_PERI_ETH_CTRL0(base)	((base) + 0x0)
++#define MTK_PERI_ETH_CTRL1(base)	((base) + 0x4)
++#define MTK_PERI_ETH_CTRL2(base)	((base) + 0x8)
+ 
+ #define EQOS_MTK_RMII_CLK_SRC_INTERNAL	BIT(28)
+ #define EQOS_MTK_RMII_CLK_SRC_RXC	BIT(27)
+@@ -55,6 +57,7 @@
+ 
+ struct eqos_mtk_priv {
+ 	struct regmap *peri_regmap;
++	const struct eqos_mtk_soc_data *soc_data;
+ 	bool rmii_clk_from_mac;
+ 	bool rmii_rxc;
+ 	u32 tx_delay_stage;
+@@ -63,6 +66,32 @@ struct eqos_mtk_priv {
+ 	bool rx_inv;
+ };
+ 
++struct eqos_mtk_soc_data {
++	const char *compatible;
++	u32 peri_eth_base;
++};
++
++static const struct eqos_mtk_soc_data eqos_mtk_soc_data[] = {
++	{
++		.compatible = "mediatek,mt8189-gmac",
++		.peri_eth_base = MT8189_PERI_ETH_BASE,
++	},
++	{ }
++};
++
++static const struct eqos_mtk_soc_data *eqos_mtk_get_soc_data(struct udevice *dev)
++{
++	const struct eqos_mtk_soc_data *data = eqos_mtk_soc_data;
++
++	while (data->compatible) {
++		if (device_is_compatible(dev, data->compatible))
++			return data;
++		data++;
++	}
++
++	return NULL;
++}
++
+ static int mtk_clk_init(struct udevice *dev)
+ {
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+@@ -87,6 +116,7 @@ static int mtk_set_delay(struct udevice *dev)
+ {
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++	u32 peri_eth_base = mtk_pdata->soc_data->peri_eth_base;
+ 	u32 gtxc_delay_val = 0, delay_val = 0, rmii_delay_val = 0;
+ 
+ 	switch (pdata->phy_interface) {
+@@ -176,15 +206,17 @@ static int mtk_set_delay(struct udevice *dev)
+ 	}
+ 
+ 	regmap_update_bits(mtk_pdata->peri_regmap,
+-			   MT8189_PERI_ETH_CTRL0,
++			   MTK_PERI_ETH_CTRL0(peri_eth_base),
+ 			   EQOS_MTK_RGMII_TXC_PHASE_CTRL |
+ 			   EQOS_MTK_DLY_GTXC_ENABLE |
+ 			   EQOS_MTK_DLY_GTXC_INV |
+ 			   EQOS_MTK_DLY_GTXC_STAGE_FINE |
+ 			   EQOS_MTK_DLY_GTXC_STAGES,
+ 			   gtxc_delay_val);
+-	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL1, delay_val);
+-	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL2, rmii_delay_val);
++	regmap_write(mtk_pdata->peri_regmap,
++		     MTK_PERI_ETH_CTRL1(peri_eth_base), delay_val);
++	regmap_write(mtk_pdata->peri_regmap,
++		     MTK_PERI_ETH_CTRL2(peri_eth_base), rmii_delay_val);
+ 
+ 	return 0;
+ }
+@@ -195,6 +227,7 @@ static int mtk_set_interface(struct udevice *dev)
+ 	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
+ 	int rmii_clk_from_mac = mtk_pdata->rmii_clk_from_mac ? EQOS_MTK_RMII_CLK_SRC_INTERNAL : 0;
+ 	int rmii_rxc = mtk_pdata->rmii_rxc ? EQOS_MTK_RMII_CLK_SRC_RXC : 0;
++	u32 peri_eth_base = mtk_pdata->soc_data->peri_eth_base;
+ 	u32 intf_val = 0;
+ 
+ 	/* select phy interface in top control domain */
+@@ -222,7 +255,8 @@ static int mtk_set_interface(struct udevice *dev)
+ 
+ 	intf_val |= EQOS_MTK_TXC_OUT_OP;
+ 
+-	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL0, intf_val);
++	regmap_write(mtk_pdata->peri_regmap,
++		     MTK_PERI_ETH_CTRL0(peri_eth_base), intf_val);
+ 
+ 	return 0;
+ }
+@@ -290,6 +324,13 @@ static int eqos_probe_resources_mtk(struct udevice *dev)
+ 	if (!mtk_pdata)
+ 		return -ENOMEM;
+ 
++	mtk_pdata->soc_data = eqos_mtk_get_soc_data(dev);
++	if (!mtk_pdata->soc_data) {
++		dev_err(dev, "missing MTK SoC data\n");
++		ret = -EINVAL;
++		goto err;
++	}
++
+ 	pdata->priv_pdata = mtk_pdata;
+ 
+ 	ret = mtk_config_dt(dev);
+@@ -384,6 +425,7 @@ static int eqos_fix_mac_speed_mtk(struct udevice *dev)
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++	u32 peri_eth_base = mtk_pdata->soc_data->peri_eth_base;
+ 
+ 	debug("%s(dev=%p):\n", __func__, dev);
+ 
+@@ -394,7 +436,7 @@ static int eqos_fix_mac_speed_mtk(struct udevice *dev)
+ 	case PHY_INTERFACE_MODE_RGMII_ID:
+ 		if (eqos->phy->speed == SPEED_1000)
+ 			regmap_update_bits(mtk_pdata->peri_regmap,
+-					   MT8189_PERI_ETH_CTRL0,
++					   MTK_PERI_ETH_CTRL0(peri_eth_base),
+ 					   EQOS_MTK_RGMII_TXC_PHASE_CTRL |
+ 					   EQOS_MTK_DLY_GTXC_ENABLE |
+ 					   EQOS_MTK_DLY_GTXC_INV |
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
