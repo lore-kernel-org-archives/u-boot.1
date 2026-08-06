@@ -1,124 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE8BC5AC67
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 21:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B887C5AC67
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 21:15:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DE27660849;
-	Thu,  6 Aug 2026 21:15:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 156D240877;
+	Thu,  6 Aug 2026 21:15:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dy8PvDqQPyLa; Thu,  6 Aug 2026 21:15:06 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BFnSUxdDGRDZ; Thu,  6 Aug 2026 21:15:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C45EB6083A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2AC2640536
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786050906;
-	bh=oa9+KvpNdBYKoP382wXb0kLLXt7YLmyEUHfdw//t7nM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786050936;
+	bh=4PI7cp/7lOJ5TpdgkNkT+H5brGY3zlRJ3Eo3WKO2y5U=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VJkf8cTku2YgXBq0Y8qN34sNfKNi3XykK8sj7qZMDtH59Af77kqYIuRllFURPSTTS
-	 a58aW/h02tVwtDbhcC8I51kHrNPdR6Fv2QfQRy9xYIb25tvXS7Ntub1UOrEGDLJfo2
-	 VbEwInO8cW7Me3tb42/XBY7whrq7rCsNxeZ3VRo9scxh2JoRyGkcc2bjx4Ype9FGNH
-	 73XitndNVLFnT4nRT4meJSxrlhxVM0rRHcxmLlz6ARA30AoZpNQQvnYXBWJmPmOBy/
-	 HcxOX7qOk9Flh9eA551DCGDlMTxxUrgSObRfFKkp+mnYbZ5cALUtpJUN4B0HMTY2dE
-	 EaflrTy9F0U2w==
+	b=Ww+v9spL+7j3YPprjjWWoSo/2LE59IACvyzAlexyVYTBM0XNR7Mu3d7txqtc2gWgk
+	 /vP0Zw2B2KsJyrWzEfeNXPEZROdDKsvoCTDwlilV45+bmBwtGXYslGKDIed2/ws5Jm
+	 PMlu1Ivo1x8qK1/Fqz/mpTk5KI8OKCbA6YdnXTan/PYDkm5b2/t9ptThzbb9CSwocb
+	 yhf+K0BJlGVuFuQCjQyZQ+KM2S2vt7ZQ6va/mH2zjSwBe5JP72YstAEBVM73S6TY6t
+	 Nkh/4tlGS691Qqtf7p7gpj0ni2e1y5TcgU92IMAUdQ3MEDqUixxmxePWHSmG7oXOWI
+	 PAusamZMmCg9w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C45EB6083A;
-	Thu,  6 Aug 2026 21:15:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 82F4D23F
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:15:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2AC2640536;
+	Thu,  6 Aug 2026 21:15:36 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 567A5218
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:15:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 693A780F34
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:15:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3C5EE40536
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:15:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RB82inGWaHrV for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 21:15:04 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ks-m7ucFw8xj for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 21:15:33 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2d; helo=mail-oo1-xc2d.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8326080F30
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8326080F30
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8326080F30
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:15:04 +0000 (UTC)
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-6acbbcd3798so1682025eaf.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 14:15:04 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 361304080E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 361304080E
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 361304080E
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:15:32 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6a18e24ad25so2000258a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 14:15:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786050931; cv=none;
+ d=google.com; s=arc-20260327;
+ b=bjaofxyVXFev//wRGdIa/HjmSdDiGoo9CTfinbFDBfLTt1nfEk68+tdCSZFSDIvyif
+ VCrNEv4UfrFSxmt/lbGovOjPZ8/KV1GATChlAez7/qWFJ2F5y4xYzOsDqWD21/Fc0zFh
+ amy7g4Z3fJpmGX/MzOYzshgBae06Nyn71XNZEy/JaXS4V9ewp5/9gtVxAghc81Irtjag
+ 8Jd8bkMV+UMFuxnb9Gm81NMvO2m4/Sam/0neUGdfD4IecCH8nZaFxQRY96lfXCUpkQer
+ 1Mh7XDaAQURARESuTU74TSGpJ+YzTwfNEbixWbfo7d//n/gZsW9O+t+MFzRk/FakUafD
+ gonQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=4PI7cp/7lOJ5TpdgkNkT+H5brGY3zlRJ3Eo3WKO2y5U=;
+ fh=Ye9d8c9UuIgjdEYE5AmpFdHtipkFyQbZju95WIBagdg=;
+ b=F8ulIKdp+WORJl32bU6EwQnY18kfEPZp/JG/rF3H1RKtpzaALpforf0TONAZw+A3fx
+ NMC4Gmi3S1CU4bVraZfXPYkew07aZB4p3sV+DB2/xaFCzIdKOM8XXJmCXXruKx1cc+Jo
+ bfireNMQ7BuqeuBkgKXNqOKRYT4gh46sfvOh2LBDj7uCLe1f6VNN3Vpr+6jZ7krAC6Ju
+ yLmyeKWzvvRzB+srcVc8JQxhZG21jr8HvlUd67tJUVAagjExIYVI41lWGzb74ORaBj2m
+ F5Voj9BUHAIf7cRFns+bZHScMKJm9BL/Sb7mxQPDSMghxz+ZSKS/balrP4uUopkcowqD
+ rlTQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786050903; x=1786655703;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=oa9+KvpNdBYKoP382wXb0kLLXt7YLmyEUHfdw//t7nM=;
- b=tAutfKGnN3/BJ5N3XoiFWZWJce+nm5bwkGQkU7085opFg6JrScYEiCyWMwXwKB3NCj
- 1TvmmrZzWSZLwCMZ5f9jwxkjDDpSPlm+KHskThqY+rFS3hYAeLtUxLXUUgUMS1VqsFML
- mAs6OWVR7ZCbZ6W5flbymdJ3KKGphDyIvuqioyOUiLC4nqlifelBI+Aszt/B1c9vs6xf
- uD8i/qV9KnE7bAMjJGIKFcvvvnN+Kw7nrUtRAljyUp4+Alt2fO6kXOtyMFXUSaAJDl4I
- K0IHbU38kqnZX3D930YTVeVwE8OF5Lo+XZNQBS5u/vd32or6iIQACOwKdV0WQvd1DhXz
- fBug==
-X-Gm-Message-State: AOJu0YwiPH14TLGlUpnal6bT8bONRdGTifi4p0aAB1oV2MMEUUi0CjM8
- R1Dhiuw0jE5d3iObIHcHvbZiKDwsOUxJIo6ntmOudZK3yE+vLYo+pS4cwHOcvnZFpVA=
-X-Gm-Gg: AR+sD11zLr0W/Mn5/SmhTdl3ZFVFLJfxv3AuPqioMDWEsOzcJRWMlAstgmMgovLEYPv
- Zrtq0P5Hr+xViCuc5PsrxpYnvc5nrp7JKVcIJvb7CuriuLiT+zpfEE0yp27QqN/4wvJHIYNbqJz
- o+93eA3uUOj32zdyaor3/x+cuDemFw4EkxXtC36zgWNWx/JDWtmMqcDbamdsKsUir3gvAM51Wz8
- OWzA8HQLIWtPIIdBPzMTO33CsLWtzeJ7jPVdouBBrPxCAn3K510XGzb1AYRF3BMSy1fjg7k6KBB
- T5sE1SeGAkipXE456NpXkwTycXPXDR3Kq+oC+tINSXvoP8ElQYUpIaqR8LBoTrwXmpsftXke0Mv
- mKSwbEoGjGb3cvBlCnd7eIvrnk23LOvKyvkalaD9VLY+sDcjqzrr2E/TGIgsySLPqt5kzL+yjiA
- n7CO0ZdUWlscVzWiDvMpzvIJiSPWwJQkbYrl2vxKNyQIo3B88wbwqnFdoQ0Vp8bjcbNcWVcX5EN
- oisaiSgqlJXl8gczR2B7McHuePyOpec0yMolCIfPi+sgvsDJbnjDnx7LxG+lCHI7Y5MPooGMsPJ
- KnobI5tbRg==
-X-Received: by 2002:a05:6820:2016:b0:6ac:b07c:b34b with SMTP id
- 006d021491bc7-6b0211ae9acmr2643421eaf.4.1786050903357; 
- Thu, 06 Aug 2026 14:15:03 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b02bbbdba8sm515338eaf.1.2026.08.06.14.15.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 14:15:02 -0700 (PDT)
-Date: Thu, 6 Aug 2026 15:15:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Arthur Chan <arthur.chan@adalogics.com>
-Cc: u-boot@lists.u-boot-project.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, David Korczynski <david@adalogics.com>,
- Adam Korczynski <adam@adalogics.com>,
- "security-cvd@anthropic.com" <security-cvd@anthropic.com>
-Subject: Re: [security] Report of possible arbitrary memory overwrite in
- U-Boot's EFI PE/COFF loader (ANT-2026-1K18JRMA)
-Message-ID: <20260806211500.GA180789@bill-the-cat>
-References: <7beb5eee-9eec-4200-af3a-9934fd76c606@adalogics.com>
+ d=1e100.net; s=20251104; t=1786050931; x=1786655731;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=4PI7cp/7lOJ5TpdgkNkT+H5brGY3zlRJ3Eo3WKO2y5U=;
+ b=arWL0NO++5197lpu3mtbS0E0ecQWdQZ/NrD8qLHOjB7cSebOzD6ZZme4PNuhIdCKKN
+ YW1j4Qb51GTaO2A4GbQHjaG2YOOMXPIenJz06+CX0hx4AX4pkUFcQ39fDTjvLojfRJIl
+ JV+eQFYZyq+OAZpMUTnBusXoRZg8NqiFi8pvODFl1FhsEMYUjEqE98VESqRAjeL4TkP1
+ SJxW3liDocbei8Zi7Vfkawt79xkN+AdRyloejZUi9yCszL2IllM2Pka6oA4MIkcX1uvl
+ QVt4er1e54dSIZuFOiwOcYTwwYCQ0sULP8GXtU7ghItdPOSePvaWixSUQbJR+nj0+VLf
+ geGA==
+X-Gm-Message-State: AOJu0Yx467nxm9fJrvVqLYCBs+lAVQVJnxltxQDHatGofY6gbmX5RzEb
+ CEGEWTxLlHJfefPosTnMRLZZSYa9WQBoRZwB0KorDl1iCb4XCSHkwBZeBYU3v+lK0TKQViV1udc
+ QOwQiBB5Fw2+hvErGIJJ7OyqJgcSO+BqMrWOJok8piGYFp0ExW6E=
+X-Gm-Gg: AR+sD12Jh/Txm6t+uvh3LqxGi1jBnFVUTLaRbnXM2QHpWdqACw/0DSOOMswwwJKcY3C
+ lQq+wccOpWWneNaht2NiDf7Sj9NmjiU4Lf8ztZU/tAvFJAj0Wme4jxetqdD9pRd+rbdkUISwJ0b
+ KofYxgoHZQ1u38k4/Y8I1ecYIrAao/Lxi+ofEIMDCqV2D9u0bd4BC8q0yPt3e6nz9w5pQ7AFsEW
+ ANzgI0ENGKt+A7NBDm0K8rsNJ+8pDriAMCEMg3xX9Lxfq8GoxT4jheuws9sUgvqSP9uhg3/ANQQ
+ uiK7BnGjakIkqSlb+/2mRGcv/lC0damhB3BKicQ6oO8=
+X-Received: by 2002:a05:6402:50ca:b0:698:3469:fa99 with SMTP id
+ 4fb4d7f45d1cf-6a14effe17bmr9327725a12.0.1786050931099; Thu, 06 Aug 2026
+ 14:15:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qkR640M17lQdLE92"
-Content-Disposition: inline
-In-Reply-To: <7beb5eee-9eec-4200-af3a-9934fd76c606@adalogics.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260804-am62lx-v4-0-01746157643d@ti.com>
+ <20260804-am62lx-v4-11-01746157643d@ti.com>
+In-Reply-To: <20260804-am62lx-v4-11-01746157643d@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Aug 2026 15:15:19 -0600
+X-Gm-Features: AUfX_myNxDkxL0waqWFpq8r66eR6DJw2eWfqyTyQCykRXosYXWnohP205quAeuk
+Message-ID: <CAFLszTjsUWpVb7Ra7_Bf5O-pG9F=Pj-L=gyhqWArZaO+YJ2LtA@mail.gmail.com>
+Subject: Re: [PATCH v4 11/11] doc: board: ti: am62lx_evm: add initial docs for
+ the AM62L-EVM
+To: bb@ti.com
+Cc: u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786050903; x=1786655703;
+ d=chromium.org; s=google; t=1786050931; x=1786655731;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=oa9+KvpNdBYKoP382wXb0kLLXt7YLmyEUHfdw//t7nM=;
- b=EZHOO1pSEDSahCPspsoD+jNatrAsquif0SEUgR0SL6ikSOEjT6qr9DpESBVmbcTs9I
- +mpi5upz5HYJu62mvFu5AHj9I96bUN4Xhd1T5olBKBJiEtbqzIIuBdu2OhJCE/ZEbrTa
- 2rJEi1cjbQSqM3Ven6kqbfdFuCPZzrHuHFIMI=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=4PI7cp/7lOJ5TpdgkNkT+H5brGY3zlRJ3Eo3WKO2y5U=;
+ b=ERcJEEe179qJeDOlVuLLSG77eIu5K5SMN08SGfPdWkjhdhyC0ta843pRhKykaJv4zj
+ mb9G7ugDHi9P6Nld4tGVaxDGPlDJlrsanLFcXoxd7w9uA+GjWvmH8YYTDaOSd7SUlo61
+ SQYVm0wYtEaxVxw8ROLoNV8OJUhnVRnxaonag=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=EZHOO1pS
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=ERcJEEe1
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -133,60 +141,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Bryan,
 
---qkR640M17lQdLE92
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-08-04T21:55:02, Bryan Brattlof <bb@ti.com> wrote:
+> doc: board: ti: am62lx_evm: add initial docs for the AM62L-EVM
+>
+> Add the initial documentation on the bootflow, build, and deubgging
+> procedures along with the relevant links to more information about the
+> AM62Lx processor and the reference board.
+>
+> Tested-by: Anshul Dalal <anshuld@ti.com>
+> Reviewed-by: Anshul Dalal <anshuld@ti.com>
+> Signed-off-by: Bryan Brattlof <bb@ti.com>
+>
+> doc/board/ti/am62lx_evm.rst                     | 222 ++++++++++
+>  doc/board/ti/img/am62lx_boot_diagram_phase1.svg | 450 ++++++++++++++++++++
+>  doc/board/ti/img/am62lx_boot_diagram_phase2.svg | 525 ++++++++++++++++++++++++
+>  doc/board/ti/img/am62lx_tiboot3.bin.svg         | 170 ++++++++
+>  doc/board/ti/img/am62lx_tispl.bin.svg           | 222 ++++++++++
+>  doc/board/ti/img/am62lx_u-boot.img.svg          | 143 +++++++
+>  doc/board/ti/k3.rst                             |   1 +
+>  7 files changed, 1733 insertions(+)
 
-On Wed, Aug 05, 2026 at 08:43:59PM +0100, Arthur Chan wrote:
+> diff --git a/doc/board/ti/am62lx_evm.rst b/doc/board/ti/am62lx_evm.rst
+> @@ -0,0 +1,222 @@
+> +The AM62L is a general purpose processor, however some of the
+> +applications well suited for it include: Human Machine Interfaces (HMI),
+> +Medical patient monitoring , Building automation, Smart secure gateways,
 
-> Hello U-Boot (EFI Loader) maintainers,
->=20
-> I'd like to report a High-severity security issue in  U-Boot (EFI Loader)=
- (https://github.com/u-boot/u-boot / https://git.u-boot-project.org/u-boot/=
-u-boot) related to possible arbitrary memory overwrite in U-Boot's EFI PE/C=
-OFF loader.
->=20
-> I have attached 3 files with this email as described below.
-> 1) report.md: A full description of the vulnerability and how to reproduc=
-e it, together with suggested fix of the issue.
-> 2) Dockerfile: A Dockerfile for demonstrating the issue.
-> 3) driver.c: Work with the Dockerfile to demonstrate the issue.
->=20
-> Attribution
-> -----------
-> Please attribute Claude and Ada Logics. This issue was found by Anthropic=
- from using agents to study security of open source projects, and I am from=
- Ada Logics helping validate the found issues and creating the report manua=
-lly and notify the maintainers.
->=20
-> Disclosure
-> ----------
-> This report follows a 90-day coordinated disclosure deadline. I'm happy t=
-o coordinate on the exact timing and to provide any further detail you need.
+Stray space before the comma after 'monitoring'.
 
-So, this applies to all of the reports you've been generating. I want to
-point again at
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?=
-id=3D36d49bba19f2c19c933d13b25dcf4eb607a030b3
-because these reports I believe fail most of the guidelines there. And
-in short, addressing issues (and following
-https://docs.u-boot.org/en/latest/develop/sending_patches.html) is much
-more valuable than just passing on reports. Thanks.
+> diff --git a/doc/board/ti/am62lx_evm.rst b/doc/board/ti/am62lx_evm.rst
+> @@ -0,0 +1,222 @@
+> +However because the lack of any MCU cores the boot ROM is located on one
+> +of the A53 cores which is responsible for loading TI's root-of-trust
+> +firmware (TIFS) along with a BL1 image generated from the
+> +ARM-Trusted-Firmware repository. The BL1 image is responsible for
+> +initializing the debug console, the DDR controller, and speeding up the
+> +A53 to it's maximum allowable.
 
---=20
-Tom
+'However because the lack of' should be 'However, because of the lack
+of'. And 'it's' should be 'its' - plus 'maximum allowable' is missing
+a noun (frequency?).
 
---qkR640M17lQdLE92
-Content-Type: application/pgp-signature; name="signature.asc"
+> diff --git a/doc/board/ti/am62lx_evm.rst b/doc/board/ti/am62lx_evm.rst
+> @@ -0,0 +1,222 @@
+> +For the second boot phase, with DDR active ROM can now load the larger
 
------BEGIN PGP SIGNATURE-----
+Please add a comma after 'active' - as written it reads as 'DDR active ROM'.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanT5UAAKCRAr4qD1Cr/k
-Ci1iAQDdK7ZSmCOb83PM+H4123aWqFrxGFCf8DBnhQNsUxpWLQD/ZouEWERVHQlg
-DRtPpLMnhOfKItDLpfiPVKRWRx//dgI=
-=Qsqb
------END PGP SIGNATURE-----
-
---qkR640M17lQdLE92--
+Regards,
+Simon
