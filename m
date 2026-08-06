@@ -1,64 +1,64 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 036BAC5AC82
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 23:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68B73C5AC67
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 23:45:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B954780FFD;
-	Thu,  6 Aug 2026 23:45:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 28C954094A;
+	Thu,  6 Aug 2026 23:45:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PH5j3FedNW8i; Thu,  6 Aug 2026 23:45:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Tt57pSdNVUoD; Thu,  6 Aug 2026 23:45:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D2AF380FE8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2DFDB4093B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786059905;
-	bh=sMKIjwsim571YepwxTDyk/UrA1erfDRWl+bPZdhL9NA=;
+	d=lists.u-boot-project.org ; s=default; t=1786059906;
+	bh=jtjQZ23tt3D4yxqY0iHqzavtKN6O4J9ze6nfYavYv3g=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=fCFHJMOeb1xQy/39Uuxe8o3p6dcwrL8xeBunA/nYMeAjTFeWRokAdCReo1seozvqt
-	 NPFagUHLWSR4pafgFQQ2v7Wj7u44MkgdjysyK+3py0MKVVJl2Ksd4Y0xZ5ZLavBvsn
-	 q7lnc9QV/pSj9UyYds9jD/IVizf4vIzpsOw/yxcMYoUhHTa5i8BaFm1sPSnW4jgPIq
-	 MmYWgafbgTjL7T90G2YSY5UTHwR7wxPWoNO815OJEfu3Vcx4EwKmKiRd3acDPtFHO3
-	 r7/Zu2XFxy7AR67Qw8rdFtD+9xEnUzdcJQhqbYAd/45CSSfQtSElPmAWwaMq6yXYFd
-	 xBT3YmRo6+1VQ==
+	b=IoCtWKO3koe3O6TVOVDUGfziNesAetjG4oMNqcUILO/gbE1s1zH/g9rWjl1BcKUHc
+	 2XuiEoFTuNgQU9Y2Dah4ds7fRn7yEQ5mcj9wWSD5pC6Wiv9mqzImV1dw5Xntl9Nmmk
+	 21GSMNjQHpmyP1RZfAKKak9mx+7ogdeJM3NijWuOMOA6lvg98qffL+4H8VPQ05pIHJ
+	 1GOIZrp2mg5iifcCAcHDzhwRjdCmlQp1WwYBOsRxFbpf5qaulQL77vdl1jFFEjFpbK
+	 ZOU5Fr19p+erHxgGVdN3sBhA68cajB4cJwHYoBqq8v0Z8AtbRPwjITpwvtAs97JaHA
+	 aHzGQ40LVHrZw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D2AF380FE8;
-	Thu,  6 Aug 2026 23:45:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 07B17218
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2DFDB4093B;
+	Thu,  6 Aug 2026 23:45:06 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B8819397
  for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 23:44:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EE24D80FA8
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 23:44:55 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A54E040910
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 23:44:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id c6DLHgyp9zdb for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M5RiKFK_6JVq for <u-boot@lists.u-boot-project.org>;
  Thu,  6 Aug 2026 23:44:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::3;
- helo=du2pr03cu002.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
  envelope-from=mikhail.kshevetskiy@genexis.eu; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 47CF180F87
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 47CF180F87
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 47CF180F87
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 23:44:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 2F32C4090A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2F32C4090A
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2F32C4090A
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 23:44:54 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LGdWSPkBmElb9WNt03NeKUjWjrnhJ4c4YwYo2ZU7RUEvozAEgGhbwTu/XZRSk4K0MR2RrTZtukwljrKX/OHovfcIb9D2+NP+aX16+QMqadxNqmtIguzmIVfqnTrH2BlBBXGVPP0zzfJU24gctLQPKYNYFIwYxLtwwmQHSvPBArjWM0VUH75xMVme9X+SB/9Syq5tMSSrxGVyjGcrP0Lj8PPiGIK7ISQ9GtNKS4XJDaa1LYooOsTRxCJGK+781NyPLch8l2MWERNZ9Gv3G+XCZRRYemyd34t6QXOROo73I1E/CJdfaXdtwVNPH9IdptPrN+txg2sSCp0RcytUVYIPVw==
+ b=Y50sKeRwwFoLMsduSe7jn6O4mC5T0TMegFvKZKqiGJMgmHY8QmaSs6IZIvmFyLA2X2UtAieq3oGm+VK3m/2BMdSmjF6Voy1zUS0kEqb0pq3dV5MLtSOmziOHOguxaCrtcLKyFZQvgql7US/Q9fhfy0utJORJBvm3pI9QCZLlo73Fdym05kR7/aSMTYG6FraVttvt8tS00ylm+mtF6OykYwcMvbCiUBaozWqB/qXUrFu8JVRHNwwXLwkvO9h8kEc3CJ2JPS/U5ZPGGsta+ka03NU4pj4wypmt/5DypatPW3DWwamU7AT3yEuXKI98mQbr+sdWn/KaWy8WklLSZa90LA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sMKIjwsim571YepwxTDyk/UrA1erfDRWl+bPZdhL9NA=;
- b=kI0yM4335rUtMnSOvHyQIh3e3BKHHe1eKKPo8tzCLVRvGA/EREHlQEi2NnLneXtF76wMveQXUwFbyaMd0M1tTcz93LLQtRjsm1pQKUL1enHWDllcdWBGnSwIgYuEwWBWAhvc9Zum/aynYIbNRvgCLWGXeaGermla6Ofj+CgkTH09fwWu/0rNvTVnJ8gUeBeiA5vj+KOwKW8VGVdwuNKKPXsdW3HTd61WiX9YKqCBcbvcFqrmj4ODHC8eB6gtYmL4azY9Pz+CwuIj8xDloZ2KisCMsftyD/WDhprSTtmgYT58c1iSztIXnY1uR7XGnYgDgQI1AX62xD4j0A73PEv7ig==
+ bh=jtjQZ23tt3D4yxqY0iHqzavtKN6O4J9ze6nfYavYv3g=;
+ b=G4l+/3RBnH7BHqeDIDvPx/eFlSkA33zYc8p7lxVNRBZZlBl/JZzqeIkM1PwIlhOb6m01RoLa9Blo03i0UcGgklUMKEcICjCq0iZmiMfUiQvQkpxlANSuI1pHTuvpOI7zwLxedans5OMfwrCl8jAaJ4lDej7vEuHgxaktd6lKDpMhlH/MbMIm8vJWVCdMnDzfflkpUZftP5nBXkAjL/G2Fj8Y4CY7wOVonQUqzqFWE2I8+8P1pLj1Z6NXcfbsP5NQidJyen4+5CB1DC9E0SSF9J90HCzEx91E1vFxVr4LcEVfUJqgxs3ILfc8msX+ZIE3rln/MaEn452R2DKGULryPQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
@@ -66,11 +66,11 @@ Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by PAVPR08MB9530.eurprd08.prod.outlook.com (2603:10a6:102:314::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.19; Thu, 6 Aug
- 2026 23:44:52 +0000
+ 2026 23:44:48 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0292.013; Thu, 6 Aug 2026
- 23:44:52 +0000
+ 23:44:48 +0000
 To: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
@@ -80,9 +80,9 @@ To: Tom Rini <trini@konsulko.com>,
  Johan Jonker <jbx6244@gmail.com>, Julien Stephan <jstephan@baylibre.com>,
  u-boot@lists.u-boot-project.org
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH 10/16] arm: dts: an7583: add mdio child node to switch node
-Date: Fri,  7 Aug 2026 02:44:26 +0300
-Message-ID: <20260806234432.4098414-11-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 07/16] airoha: add Ethernet node in AN7583 dtsi
+Date: Fri,  7 Aug 2026 02:44:23 +0300
+Message-ID: <20260806234432.4098414-8-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260806234432.4098414-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20260806234432.4098414-1-mikhail.kshevetskiy@iopsys.eu>
@@ -94,69 +94,69 @@ X-ClientProxiedBy: GV3PEPF0001DC42.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|PAVPR08MB9530:EE_
-X-MS-Office365-Filtering-Correlation-Id: c64eed44-2595-4341-41ab-08def414b5ad
+X-MS-Office365-Filtering-Correlation-Id: 283dfb46-acd6-48b6-91d5-08def414b379
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|23010399003|366016|7416014|52116014|376014|1800799024|921020|38350700014|56012099006|11063799006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: q7F3FXBLsOF1/Z/GOxkfMeNgd1vJSsbp/d4tGEXG21v5akcSjSsYh1MYqjvohVvvzzRTt4BcqgsyRhMEsm3A3dl/uecLiBJqeDKHlL3OBvx/DHA73uaKUwVDX7m6RtknGJA+IeyfEFJEaGpKgEeAGT05ocMc3R4bO2RLVTWRkJWAvdjyYprQWc4pLDeAAV1R2ol3UXyXLknofazpAoIUs2o4BcgLlbanyRzZmx1Qf8mOzniWWTjFaZPhNoA028VCvYmcPKjUcxceIHdwZIrNrGbwD63HjXXKZ5bqDYS42vt0jvy9/dnSG5PaNF2UV/2hSHDJoQVy1rrKkrAlCqllWUNLa9xjWJjHWCrFGf6DQizPSoB0GCRYWasOCQE28kXWbSpnyIKm19O7nblbDFnfug4ddqOBE5sI2zhL9iajed4G0hfcmEgAP/w4WSvvkY1hQPjeQEPPSiVErBlntFchRMndaMxq1uC52mEGZxoCkXKlxEVCPsGkWQXkYcjkJB+0G+6MH+tPE+EdlfGPAuDzFLgqQLo+BNzyxZgG/Ohzk+OLvT2ZAwNLmJssD5J/aTWO3prO2FHAFEbHdfQRjOL8w8OuvDu6UsYswTpH69v+pwUk2bSp33FAvHNsla8/Ztq4PaalRRyPwdpYcgJYCgotqDQPRWBMwa1NNuzjgemYYqHt8ALCHe3oDbX4emfomkc1BdgKONyvEvf5T0vmdWLoPr0T8ZHsU0pWfzpv+LXqaxA3zKdB6C69Gze5h9Pq3Cjq
+X-Microsoft-Antispam-Message-Info: Ofmiup23thw3bPFsfmLjU8J5ra2e6VRhJsCRjf6DAmV8nZN5wW6Cuu+YK9tMjCEA/4PiibDkqeswyVvpDxYGv+OaWAqvdAHPvdXEbVN26CvzFL+fdc4nnFawChGxhtcR3Wb/Dki0nhlsul3YUIKss+4Q7DYkkP8vCWKCBI9xyiI1X5THTSfQFlMOXhK9/Id2J2cFlIZTBuLcF5PebRUKd62+qMNPG7GNhtbreznkyeeZUoCu1RkwiYiBQDT+c6CQMYGguZtzJp56WRiqgNa3WUn+YL4t1e/gfHweDNmNBkgBeVhzgb6FoBnolR1m9aQFWojj9FtiO9ZMDXLBM8g9JEteaR4HKkYX8572rI4p4YR/PQoRAh8w7UhRRvGCzJAiRGsGtS3EUqUiviIeAt/b5I8dJyPRgrWoL3I+xwK7Wc7aTHwBfQPUbN3mmdTM9knTxB7Y1KPgmZS+5Boat2jCiK402pAh04GEuuGUrvyZXga5kTJv/QEglRnYKuGcwdOw4iMdeCM+GL01FG38teNLQWqds8J+3rqLta+2kVefqcppWLqA9BtMJqRh3M9bLl17etw69H/G2DmDqJLR2TrsDw1RNU4I6prd36F9JDqo5y1wzwHR1FQOSonxFqBiMnxL+OvQ7JaFG4cKa00bbPxJKRRxZA6VrmVNjuxFB2iyGO5jhWWRkE5x20R6KjOQtTYVsqiRkSQGE9MTWEic87eQwIZdPSWun8QQcR8AzBY/AsI=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(23010399003)(366016)(7416014)(52116014)(376014)(1800799024)(921020)(38350700014)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gSseDGXV6xzuB7DXQW8n9ioo7N6V5DVO95GRtSo3pQxp6AAfZ/IfcVG4+kX1?=
- =?us-ascii?Q?if5zK9qlcV0nYJeQKN4/IpNBVodHAkKNq3wExpXch6jvA834xDjbGuK5YBu6?=
- =?us-ascii?Q?pG1LycL/wbUMyHl3oqaOFap2ENOfUJqzH9lgD3QdAnQ1NyNQy6RSVGKmXbLm?=
- =?us-ascii?Q?AlcynSITFokkyUH60HjO20sDSZZPZoT7YcRbJgSkTdTt+woew2gYZdm0rBXA?=
- =?us-ascii?Q?/ARbEHvE3W0sxCp7kwzBIU1L2yqKw8p2yHFrSCRzgqgzsA4oAUTl0vKdwYDr?=
- =?us-ascii?Q?Y98q38S+zFR/1rCSNdG5mTm2zhfnow481qPVcYrBY3OQboqJb9yaBgUNRlzL?=
- =?us-ascii?Q?MngKrGe47r92r9qzzE4vMDJAWGJRc3+2RAAUqEogrb4OxTNjytywHnClgg5s?=
- =?us-ascii?Q?cv8EKN25syy71Smw56NSoMKK3Jjt8K7lyowmgP33X0jXuRBFW/YoOvgRvOQp?=
- =?us-ascii?Q?7aDz9pR9Z/IDLTCsim076k7NAUC4FOZJQPW9UZAa/T59RR6Y1i5Fj++d+IbJ?=
- =?us-ascii?Q?P7Ntqacf1M9GOERWAumh8EzOBtBf50FmRIfvwjRZ6Jukhx2ItsydY20ntF6D?=
- =?us-ascii?Q?jhANkG42lM+zOHpo9oSjonR+aLJuOf920aAlFuetbRWV3xbxxfQB0a+gYZCE?=
- =?us-ascii?Q?RolX7DvwRYLKFzoiPFgQptHJVDuCy78t2FEYE9zf6hB/L6CDa4wWuQOIccYF?=
- =?us-ascii?Q?ubstx6bTZwDwy6bHSn+6Grp2EomrQPDYgIZuv98206VM5olkgcvrqwr/L0Wl?=
- =?us-ascii?Q?bu5jCRyrtzZLuAvKPNAxFRV+4i5zdHZUa9B+tRIpvAT/pU7RPyQsHjSn4orP?=
- =?us-ascii?Q?y62wb0vQZg1neQZhmwkbykFyznsgOp5sVQtPZ95vNxIzOrBWIfmKqFUUAQkG?=
- =?us-ascii?Q?cgMkm+h/eaYDGSZ7fvOHF+uieUsUb4Z35tQNTo/rhLQ9ZhJ5Y6Wtmr2gttJV?=
- =?us-ascii?Q?15E3FWpDMDOHdKsd8rnP0YzwNcwZkdCDIOUeKQOBGenYFNzqXbTAT8Hk8Ofh?=
- =?us-ascii?Q?TAr3MiUXVu8OGLpHLlOzHPDj6Vn/90CmM19hkcoXm6STdlS//Y9D5CXLS/Nn?=
- =?us-ascii?Q?dcIp0n7d5Kdv0wM2UfCKds81zfyMXbzA4XmPnuro72rNtWgQpHgqCj58qe+5?=
- =?us-ascii?Q?tdYSgkZqAxKxYMTklLHpDJdrC1sa8/n9rsY444UJqyA0zAfPiFnqJXA1j7o6?=
- =?us-ascii?Q?uhqjySml/t21LJdNW5ACZTlS54jBi38h/wYjTzTgBeVGJOXAvhZtuylPgVV8?=
- =?us-ascii?Q?yhWCCDI4+AB/NXFNIJi3zhYC2nUM0qhzKEW4Hg8Y4bl+s6teL6JxrgfkL9cQ?=
- =?us-ascii?Q?8gcfK0dTTCJRNqd7s7HiWrriTyjoX6o6kRpPHNn99jn5Ivq2dmkUgN0vpbUm?=
- =?us-ascii?Q?53ontTqqzINnQGu4yXa/dtcZSi/YFJbWaoe9v1XkS2/9toCaVri7spZo8ijS?=
- =?us-ascii?Q?EQ4Wq1/UJ/3Rh1Ga0d8ObFCSIQTB93XinMG6sbQRWKHwyhr4naHyUWzgeOj+?=
- =?us-ascii?Q?Yor9p15PDDdQY5V72XX7sAQWPv00RVmrRkrNGOb9U8s4UK1WK8kGeyMztWGX?=
- =?us-ascii?Q?cSzc3sed/S0u7FCmx0WAOlVdbNBswWs7VohoDbfrB+KWsH7yvytKARTfoxC8?=
- =?us-ascii?Q?HvFVEkJvCftOpO9QpWHfJknDlNiE+FPAi5X+ehumdJCrxcTYyJFoiGrEnbCt?=
- =?us-ascii?Q?g4CmqD2JOSOGgrxgj+MmHtglUa6NyIOKW2oi/Q6wqASdotg50laRoHrt6kro?=
- =?us-ascii?Q?ptNdT+Dlsoinras16VtobKOQCaTW5WE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nTXoRjClqxz+RiQRR+NOxIpW6mDP6H2RiVEpP6L5GxUfXTV1ew5KEgKj+fgn?=
+ =?us-ascii?Q?PF3EdFiKG5KHeQq5li/xR+EBD9uLAJQqZKTGgykyke0SkZAJ5GhZ/WFC3DLU?=
+ =?us-ascii?Q?PBiYuYOIjdRnc7E7hnkFFFKyOEkaiwQDtZEqxKxUasUp88d8HI3G7PqrUx4m?=
+ =?us-ascii?Q?bzRQ1+Vb3VIMZbYrpt/p6vCo/Adl43fvJ6q6jf31ys+/Jffch0oPxl26MKYn?=
+ =?us-ascii?Q?t2Lz3Kd48aWfNqo51INGbAPlLdXaKOJWerZQLciII7etz3SvgkfQ7PMjDIv6?=
+ =?us-ascii?Q?3ph69Os/XjIT1xehqHImYKtfik3a5clYhq0WAmnZ+qWJ6GYgH8JvBPtpYe43?=
+ =?us-ascii?Q?+v2sqcGFhemEQ/nBG/t9Py9OfsEySQ9afteiSo3d5yvjoNt0rxqihDJ7fWDD?=
+ =?us-ascii?Q?PxBYYPBMN94BJ1XD/bx6BlFP+PLTU0iGz2+nVmP87qKO2EUZdc8hw7xkMvAh?=
+ =?us-ascii?Q?CmDCrLNMI/5WZvLKWUdXkcVZbHOgl4Iou4CTHjsPJIyFCDa2J2KLYR2+Vr55?=
+ =?us-ascii?Q?YdwtFgCmL8S3r58Asmx8HXgtXki+WV5w7RdxWfNq4+LNhYSBkNxQfFaemvac?=
+ =?us-ascii?Q?Nhq97ZtN5vGR+tzJAW90F6wyG9IXpqhtFEBeKUTMy/dGtfagcnn//WVYOpX0?=
+ =?us-ascii?Q?pORUB/YCoXlN+KiFnhQzCarL5HUnBYS331CAkvOeA3Ueh/oi8cGZhOJL+xew?=
+ =?us-ascii?Q?TXJo9IsHVLwHkwY03XF3TRyqT37bM0KYpcJIfCurVaYb4dT9ZKnfPZSHi6iK?=
+ =?us-ascii?Q?KuUUd4JAJaJCz2wj7Pu8bZ0X2FmQV874cGKOIGFk0+rB9y557PBXivyOAgjG?=
+ =?us-ascii?Q?W1Kca3t2/0jjvQDEBdJGt9P0RAFt1FryHDYJBwjk6oRhDfU4Z/8h8goY23p8?=
+ =?us-ascii?Q?sZ9npdbvFl96SfakCOgGOqbROxgsqnzFiq5DKjToyBYWMNbFuoaiULu6GfZq?=
+ =?us-ascii?Q?T0+tO2KQdphvXmrFjMyvhPkqSqGgSCrUcXFG1hfIuyLeQ9H2R/2B3Gc+HQGw?=
+ =?us-ascii?Q?XmUj+Vr5ouBH3oSvMtI+9abWh/fe8AwVrMaQS1PsnWoFgP9RDWUyt3Z8ZqfX?=
+ =?us-ascii?Q?1rWMg/spRKW6X6Bl/vdSm54NT1BC+V5fwWMcBjZLQ+PKqlHNDL9n/J/kokTN?=
+ =?us-ascii?Q?uZisLpyBW0ITQsqQFK27PtmanPXJY9vLcoCJJxqMCqWjkIc/e1tEcu6mjd7C?=
+ =?us-ascii?Q?22K31RC1AgwPcANmTaJmKGovU8DmQmGVCxA1jZssxrG3fwFGNa5M6oypdfvb?=
+ =?us-ascii?Q?NmTLeu8q8UrkWXXpiwyblylf+CpAhgKX2VP5BrO+lP+F5mqQR+jWvwqDwisk?=
+ =?us-ascii?Q?MGrLWMzhptpkbaNdo05rnTFS6qAtMGNWq05nIxncj8Zp8uGsWvng4fipVypj?=
+ =?us-ascii?Q?pBK7S8wxZhlDNhUFPqJ8FI2VAljclY+f4dBf9wWETQycS2+8TPJI+kko874K?=
+ =?us-ascii?Q?L368QIJvU4G+cILa2tSmPWufJsdZzjxs7YiE6JbXLFx6EUkQ+TrHHMeHoRSe?=
+ =?us-ascii?Q?cAjLnWhyguUSdLe/KlfThQO3gY1ue6WX+H6/ZNPpljTxzT9bwQlB00DmnH6n?=
+ =?us-ascii?Q?zeDL4BC3Z+U6pmTgXmGnr67zCgnfUbA5q1dl7MgvneJSrbq9koOu3VkkVM0O?=
+ =?us-ascii?Q?EMnLQWqQyGb2rfpBbZ/dASNemlCzBlRtVGCsRo5hGB2L9cxPiegh+B3ceh4m?=
+ =?us-ascii?Q?9LVwdP387ryFV5jtnQREuL5ChNtB49r6QGx3XLPFRSIG9H0WmLTfVPaeQE8p?=
+ =?us-ascii?Q?+2QcjPfMgOXzPCYCkV4Gt9swnloSseU=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: c64eed44-2595-4341-41ab-08def414b5ad
+X-MS-Exchange-CrossTenant-Network-Message-Id: 283dfb46-acd6-48b6-91d5-08def414b379
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 23:44:51.9455 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 23:44:48.2604 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: U1hJQ7qwNZHYPWQ04jBMglxiN4uecvD6LBHjot/jz9IlZd2/ru92/A9UidYlchfh6HS63ZODC7cILE5ZKWZzFKLgiD6SisOYwK6o7i9elog=
+X-MS-Exchange-CrossTenant-UserPrincipalName: wnHulXp2UwkEYLmn0kAUe7g7atNl01QC1lc8Z4ZOgWlrNjDppNSvQlZfGwou9/XBWeQxR7tlJdkHmlh6cVlC7SWr3p3REuEF678+bOS2Z6A=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9530
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sMKIjwsim571YepwxTDyk/UrA1erfDRWl+bPZdhL9NA=;
- b=P5RJxtzEkMtNKVw/8HAfgwodeX/6sjtksTsX6eNzYylzowSMM64vYTkN9ZNCEAc/61OK6ruxv8/oYQ8rLfd12P9QdwY5Z5HsWeOtutSB7GOQQsw7VJ3TtTB3a3jIxvrqA3aPidVjn0srUZV91KBvAswCBWOZEBvBEQcV+AgJrSVL7VFG8mPHzT+Ji63bcAv849qgBHU49V5SAOItDWlYUaKbYNAyg/OMRi4qzb9g0ck4C1Rgbscau1Ia6hX3k2Awx/blNEPcAn2VtfvHRaEsTb4fRQQ4dbvIj7IZJzPhaDfoNzDt+mjNgoVw+bk6Z0b0emRwzWyBcDRZT5xcDjyosQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=jtjQZ23tt3D4yxqY0iHqzavtKN6O4J9ze6nfYavYv3g=;
+ b=5fFOJ+6z5gu5DnF3N05zkAsK5AnToXkztwmCiMh2rmHs8ZxeRgjEMmk757nmeZzRslvzSaK1+hbswEhGdDbZ3r+rSEC38FrgkLMJHaju5eQ3Gd22w/rJHLgczD+xNkD5JLTldw88D4ucGNGQXKjjskQvAsgE+5q5s5/xTbXv+jWpHBHFQYK8uVcKN++O6BprWMQA9eUwCuO4rGshEBsfZM1uhp1yQ/T+s3dI9mxDk8spbtL7UeQH5BELuxGaabL0xCnjf2C9Eubt+NNTdmx1swk/aGhDBI+FrCFwKkjmQqRNC4Qg63jiKL7D3PCE0zdxFV8p5V33N51F2alQd8ymqA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=iopsys.eu
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.a=rsa-sha256
- header.s=selector1 header.b=P5RJxtzE
+ header.s=selector1 header.b=5fFOJ+6z
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -175,29 +175,50 @@ Reply-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-add mdio node to be able see switch port states
+From: Christian Marangi <ansuelsmth@gmail.com>
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Add Ethernet node in AN7583 dtsi to add support for the integrated
+Ethernet Controller.
+
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/an7583.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/arm/dts/an7583.dtsi | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/arch/arm/dts/an7583.dtsi b/arch/arm/dts/an7583.dtsi
-index 1a64f48e5f1..ec6eab327db 100644
+index 9362d2fbedf..d67b7459870 100644
 --- a/arch/arm/dts/an7583.dtsi
 +++ b/arch/arm/dts/an7583.dtsi
-@@ -166,6 +166,11 @@
- 		switch: switch@1fb58000 {
- 			compatible = "airoha,an7583-switch";
- 			reg = <0 0x1fb58000 0 0x8000>;
-+
-+			mdio: mdio {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
+@@ -130,6 +130,29 @@
+ 			reg = <0x0 0x1fa20000 0x0 0x388>;
  		};
  
++		eth: ethernet@1fb50000 {
++			compatible = "airoha,an7583-eth";
++			reg = <0 0x1fb50000 0 0x2600>,
++				<0 0x1fb54000 0 0x2000>,
++				<0 0x1fb56000 0 0x2000>;
++			reg-names = "fe", "qdma0", "qdma1";
++
++			resets = <&scuclk AN7583_FE_RST>,
++				 <&scuclk AN7583_FE_PDMA_RST>,
++				 <&scuclk AN7583_FE_QDMA_RST>,
++				 <&scuclk AN7583_DUAL_HSI0_MAC_RST>,
++				 <&scuclk AN7583_DUAL_HSI1_MAC_RST>,
++				 <&scuclk AN7583_XFP_MAC_RST>;
++			reset-names = "fe", "pdma", "qdma",
++				      "hsi0-mac", "hsi1-mac",
++				      "xfp-mac";
++		};
++
++		switch: switch@1fb58000 {
++			compatible = "airoha,an7583-switch";
++			reg = <0 0x1fb58000 0 0x8000>;
++		};
++
  		syscon@1fbe3400 {
+ 			compatible = "airoha,en7581-pbus-csr", "syscon";
+ 			reg = <0x0 0x1fbe3400 0x0 0xff>;
 -- 
 2.53.0
 
