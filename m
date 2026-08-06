@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C95C56203
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 09:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07713C561E6
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 09:27:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B7A2B60759;
-	Thu,  6 Aug 2026 09:27:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6F5FE6081D;
+	Thu,  6 Aug 2026 09:27:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gr0mmcOGJNqf; Thu,  6 Aug 2026 09:27:24 +0000 (UTC)
+ id aqXg1yAtYLEP; Thu,  6 Aug 2026 09:27:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D3AFA6080C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 80F046080C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786008444;
-	bh=YlV+BJ8Q2OVTAbafhJg5XKE0ZAXUHaOG+5oY9vq18k8=;
+	d=lists.u-boot-project.org ; s=default; t=1786008445;
+	bh=owmXgyyWFQz2oiQaMiBCeBl0BHToMPoPKgFnMgBvzU0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=T/U4LL0OZ1LWkkOcREbwNkBxu7F6mFnW5iJVAP1EFGjzp3sxzBeHyqDKZFKXgAw5w
-	 F/xE95gdBZLJVpPAuHMYyXi4db9E7MjRS6P1mtk6wnHA7b9/kC18fvk4rUOqe6iuH8
-	 oxuK3uJkP7a6EvE4T2XejBKLWtpAAgTcINpwm1ZNhARGk+BGiumJFyWQK3Xm2j5dw6
-	 A79TjqzPo5V+VYW21Wv/ggtVqWnc+0sMGR3WHXC1WFU9z0VJH6MhBcjRfq1bZY21Uh
-	 QfuKcaDcRaQIJmrKuDG/sBVSH+ik/HWdlLKllcyAfZ8MRle/xYIxuGMvHMToLqpW1l
-	 myaqbRz2+G6ag==
+	b=S9x/nQygAauVIW/rEcpoYPzuOEtDVOX8bnKCLyVdjsB2GAPDeYCB74OQwdotDAJjr
+	 EX29PCp8kMFTORJ2Qu1vgf3ypTgbm1bi+EmXvyW0vHzpXum51VT1aRCgYnOkj26ymV
+	 bHljYpSGSzDcYyiAfMLFu8kAIPe3l3qxWkSMBLqBjreLkAxedAS5dbIEPdcPS1+qw2
+	 mKSto6osWqWzA8ZAW2JJsKTRMwE4+VE+/YbPLGFEI0o2687QEGwUbgenxavg5HMo/q
+	 myh/W5GsdeZfeQRb5dKl2NLsvycHUxqTrRQrLAW7anFiH+vmLrdPZHzXWbIQpdZbRp
+	 oWM+nXUOCHpSg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D3AFA6080C;
-	Thu,  6 Aug 2026 09:27:23 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id CF4F5282
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 80F046080C;
+	Thu,  6 Aug 2026 09:27:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 91BB4194
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B5DC840207
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8376C80D86
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XFTdllvMTvnh for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Fsa9KM3aBVvj for <u-boot@lists.u-boot-project.org>;
  Thu,  6 Aug 2026 09:27:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
+ client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
  envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B231640167
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B231640167
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B231640167
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:18 +0000 (UTC)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-47f71156e1aso916101f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 02:27:18 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 633D380D7D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 633D380D7D
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 633D380D7D
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:19 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so6712445e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 02:27:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786008436; x=1786613236;
+ d=1e100.net; s=20251104; t=1786008437; x=1786613237;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YlV+BJ8Q2OVTAbafhJg5XKE0ZAXUHaOG+5oY9vq18k8=;
- b=niv8ZBYS2e3MO7xOrTkVNfDsKAOr9mbuZP+Djh4XdfMr8os20tCg4I53lYuQxFhnDz
- KnKNPTgKi/vnirPGa0Pe1JaTQ6tMHrpdZBW2nevLBHFyVJelppSRmgvQQAqyTnhjK2/U
- hgyo0VzICO38WO7rAekvqkeONNEiAWl5+ZrwTwz4wr8gHUtdiPYPntQgPubGu0xE9Gvm
- uNXWRmBDQM4gAA62CSFv9XBJLgKoiK3cidBXfubFX1l3ci6xOXDddBfa+o7yefSG/Zy3
- eIjJ6vgbAbnqN8Z/AyFacrIcAcaSbuxrKcrz0HMYTGjGu5d+KlHOX4TSNg1uI/wI6SkC
- BHWg==
-X-Gm-Message-State: AOJu0Ywn6wSBksfYDwCwkAjPo0OrHuhO7w6lfJONHgPRkmZWSFXMDdO4
- OQ2h92EUSzk/+ZNRxIdiA7iHhn0l7bgg681AcRS3MKhk3/DtG3o+nFy9kYRAEyPzxTU=
-X-Gm-Gg: AR+sD11A0lHO0ZodVCs9Ct3z8o/9kjNctUuVCuWoZJha3PjZWyc1QujiGGDR+IFFYEC
- Cryt0JfnCULp7wW0kRVkYFVlUY/Sm89LeaBTWF9IJYeYCbKTtgJ251sUHMM8DToousNxhii/k53
- PDgvMJ2qdSwusEcIWzTtcGCPBsnqlitLd/bi9Y6rsNinmJvcbcloeE10Q/u3K6e9+2Zwo05Cfvs
- bwgGYU3GYYJBcQ2e4ARlwN5q27x1ToK50pHVogiTDlRvePTpDOJ7aDBYYHoHtpyB6hVKh5nW1Sy
- dC6wOndB+x5/X3F48jllMY8Sc6DlHNUKxmJof93Pq2W3QfwIHeiGhp0wmxXfowl3CB84N6ESHC7
- v94CaTPdKSdSI/DdK8Z0aetlBj6yt+BFbb+zhfT3jzKh/1XcuMe4EGaCL+dt7yl6sPSGKSyOgYy
- tUuQYN6/2ZGQ+P9kgoCBMGmi9QQC4RdYaK9ZlbICelFqC2mg+iEBpU8kHoBLitq3iGr+lzLhdTD
- NahEOzDsAtJMO56IgY8Y+PYf4oW6Ruw3N1fIOlROJ3tFihhd1oO3AC0GT5Uv2OFAeUg6UMwaF4r
- 8oNw4H2S+92MDKzmGkt0XMSMtIYttegYyqNSqCrml5+M4g==
-X-Received: by 2002:a05:6000:2086:b0:474:b860:b7b1 with SMTP id
- ffacd0b85a97d-47fec51892bmr19426669f8f.9.1786008436332; 
- Thu, 06 Aug 2026 02:27:16 -0700 (PDT)
+ bh=owmXgyyWFQz2oiQaMiBCeBl0BHToMPoPKgFnMgBvzU0=;
+ b=VMGwpvChKzq5/UynoHQOpmRcEvSvJkRq+60WCo1iW4uLfTiOJDyaDy8z6oB2giLpVJ
+ 1uvJcpQ2IEDfW0+69KOs+raG1koy/+WijCTm3u78GThqjFhsebGyZZNbXAtmuzngtGcG
+ KPTS3JOtQtRbRbSaxbZorKztj+vCy/e9nP9AvQEvY727T7L/9GRl6dtyONad5kreEaJ5
+ +GAJ1JU5AHGl1MfKbVOoLx2xkzOt8uJudf6jhwC8UkGzdKwAKwM7fL2eLT04TIikx9qU
+ +KkLKt6eBYf/npBH6tU5egPzy50FRF4hw5OoIdOioMZhs9hq4+4RAHKOOku1cm0p5h/h
+ sznQ==
+X-Gm-Message-State: AOJu0Yxn5bmB52nN1zTH+IHSnCeRpQ9kLXzogX2w8OkamIMfwgYDss9p
+ 0kN4WFWYT/w1L2AY2C2BifBqZWVZIsUYWSe8FaZJoc6yxEzBF0JS7nEfR/7Nd/3LKlA=
+X-Gm-Gg: AR+sD102aNQ/5ZZ444/ILJERPj3Td4ITGYL//zOioOdeq7/OeJLA9Mn8AqBX/d3dbPs
+ HQaXsyFk4xQkAphyrMXA8xE4udM23OBFxbRQfT+TU/GoVLyZVSSaeHuixPbdFFIqIzpvFWOOhHt
+ wy0+gAdN0fEjZnBADnsMacJad4Wajj+sviVsyX8Tw861kJIzZaCeOIpp7iMVovdCWyfQQ7aR7Hn
+ qnYYxCEMqj6Xqe+7IDAdNTkvZ3i+/6RMimvf1reRY1BOtUk6qxuHys9WjGyEEEHkRAHsw89d9sC
+ V7W3GUqZTdTJuPdfAdjTOBGko8clYwLfnuaFeVowjXAC8ZMznRQQFBCBz1oSii2m4T+ZijbLIwT
+ mVCBdR43cuPOyZOa8L3nKDpq2DFeLxD9ugpPgCz3nVE/gQRZSDqt28Qu9FhA5V79E/265jzkfiv
+ a13kC0ngeq08G6HbYgw8iEQPuRhBgI9vI3G4p0UMMmxO5em9r7dRyjFV33o4dO01XwtUYeXnFTK
+ C9xh/P3hDt63CRJZL3Uo3jE0scrDu2n/uHSHcsuOBjyTP+MCNtLo7D8wh4q9s/uixPEeSNVV8an
+ 2ykVn6wOQgTcknQMQoRpSJv5fMZd+g8pmWDEOpgH8T78nA==
+X-Received: by 2002:a05:600c:68d2:b0:495:41ea:f6e with SMTP id
+ 5b1f17b1804b1-49952f24633mr53044675e9.8.1786008437134; 
+ Thu, 06 Aug 2026 02:27:17 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ff7b31975sm4147248f8f.33.2026.08.06.02.27.15
+ ffacd0b85a97d-47ff7b31975sm4147248f8f.33.2026.08.06.02.27.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 02:27:15 -0700 (PDT)
+ Thu, 06 Aug 2026 02:27:16 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 06 Aug 2026 11:27:09 +0200
-Subject: [PATCH 3/6] video: panel: lg-lh400wv3-sd04: use common
+Date: Thu, 06 Aug 2026 11:27:10 +0200
+Subject: [PATCH 4/6] video: panel: mot-panel: use common
  mipi_dsi_dcs_write_seq macro
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-3-6b533788d0ac@baylibre.com>
+Message-Id: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-4-6b533788d0ac@baylibre.com>
 References: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-0-6b533788d0ac@baylibre.com>
 In-Reply-To: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-0-6b533788d0ac@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -105,25 +105,25 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Julien Stephan <jstephan@baylibre.com>, dlechner@baylibre.com
 X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786008436; x=1786613236;
+ d=baylibre.com; s=google; t=1786008437; x=1786613237;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=YlV+BJ8Q2OVTAbafhJg5XKE0ZAXUHaOG+5oY9vq18k8=;
- b=eb2/NuoL9p1lo9SpjpcdOqc/ftqq3XPJ0Amq3GWnvhykj1P0IfNx52I3JIe+brtN7g
- jOPDa1zlMKurEpRTKNo2yfOodxhWXGuCQW70cCaSMAL/6MCHD2d8y/acfIERoMXk7yRp
- 6STX6auJN22G3GEv7o7GLv+164toGeS2uRWMc04GUyJUYz1tqyS76aChrW0IbN1RRIZd
- +z5o8Nzj7jNcL5a4ulWzuKcwiWRRaooYRhncphraGTNHLaNW/IMAy95tGeqScJNjTepJ
- EphgMZaThCCFCmvvIaIVIEbIg8LA+38Yexo7LiKXhw72cOngWF3PhkBoitmWCXI+St0V
- ibTA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=owmXgyyWFQz2oiQaMiBCeBl0BHToMPoPKgFnMgBvzU0=;
+ b=Mk4ztAMmZofSkHFhLB6mHrdrrV6KSXQD/I5NuAqgcG72DVDuHA45YusjftP1kYLYiA
+ GAG8WvAFYWb3xVgpjId/PGLyLUyZDHHnyUqpwRx7KKMeAoQUaK+s46FgY3OgoVkUIHSc
+ H6REBIgr9wY91Z2qIW1pqXYw9pHHdjfFoqOKeAErZM5bMcA4dHWnKhhfXATSmTd10mXn
+ r4JYLKLbWPLtAeH7Z9+W5fBz2v28e5WgIQKB9NZyTKm4K3d6l2Vzz8I+ZjbW8jK7Il8o
+ sK6eQ05aM8K9zIuGZRZD1+76D/jsXhUU1HyH6bscY04QDKtQdlhWU9bkPdxqekLzASSa
+ eF+Q==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=eb2/NuoL
+ header.s=google header.b=Mk4ztAMm
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,15 +149,15 @@ No functional changes intended.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/video/lg-lh400wv3-sd04.c | 58 +++++++++++++++++-----------------------
- 1 file changed, 25 insertions(+), 33 deletions(-)
+ drivers/video/mot-panel.c | 140 ++++++++++++++++++++++------------------------
+ 1 file changed, 66 insertions(+), 74 deletions(-)
 
-diff --git a/drivers/video/lg-lh400wv3-sd04.c b/drivers/video/lg-lh400wv3-sd04.c
-index 0385b39867f..8e6b5d2d723 100644
---- a/drivers/video/lg-lh400wv3-sd04.c
-+++ b/drivers/video/lg-lh400wv3-sd04.c
-@@ -35,22 +35,14 @@ static struct display_timing default_timing = {
- 	.vsync_len.typ		= 4,
+diff --git a/drivers/video/mot-panel.c b/drivers/video/mot-panel.c
+index a9114957867..ee131133e1f 100644
+--- a/drivers/video/mot-panel.c
++++ b/drivers/video/mot-panel.c
+@@ -27,14 +27,6 @@ struct mot_panel_priv {
+ 	struct gpio_desc reset_gpio;
  };
  
 -#define dsi_generic_write_seq(dsi, cmd, seq...) do {			\
@@ -168,79 +168,195 @@ index 0385b39867f..8e6b5d2d723 100644
 -			return ret;					\
 -	} while (0)
 -
- static int lg_lh400wv3_enable_backlight(struct udevice *dev)
+ static struct display_timing default_timing = {
+ 	.pixelclock.typ		= 38250000,
+ 	.hactive.typ		= 540,
+@@ -51,7 +43,7 @@ static int mot_es2(struct mipi_dsi_device *dsi)
  {
- 	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
- 	struct mipi_dsi_device *dsi = plat->device;
  	int ret;
  
--	dsi_generic_write_seq(dsi, MIPI_DCS_EXIT_INVERT_MODE);
--	dsi_generic_write_seq(dsi, MIPI_DCS_SET_TEAR_ON);
-+	mipi_dsi_dcs_write_seq(dsi, MIPI_DCS_EXIT_INVERT_MODE);
-+	mipi_dsi_dcs_write_seq(dsi, MIPI_DCS_SET_TEAR_ON);
- 
- 	ret = mipi_dsi_dcs_set_pixel_format(dsi, MIPI_DCS_PIXEL_FMT_24BIT |
- 					    MIPI_DCS_PIXEL_FMT_24BIT << 4);
-@@ -59,28 +51,28 @@ static int lg_lh400wv3_enable_backlight(struct udevice *dev)
- 		return ret;
- 	}
- 
--	dsi_generic_write_seq(dsi, 0xb2, 0x00, 0xc8);
--	dsi_generic_write_seq(dsi, 0xb3, 0x00);
--	dsi_generic_write_seq(dsi, 0xb4, 0x04);
--	dsi_generic_write_seq(dsi, 0xb5, 0x42, 0x10, 0x10, 0x00, 0x20);
--	dsi_generic_write_seq(dsi, 0xb6, 0x0b, 0x0f, 0x3c, 0x13, 0x13, 0xe8);
--	dsi_generic_write_seq(dsi, 0xb7, 0x4c, 0x06, 0x0c, 0x00, 0x00);
--
--	dsi_generic_write_seq(dsi, 0xc0, 0x01, 0x11);
--	dsi_generic_write_seq(dsi, 0xc3, 0x07, 0x03, 0x04, 0x04, 0x04);
--	dsi_generic_write_seq(dsi, 0xc4, 0x12, 0x24, 0x18, 0x18, 0x02, 0x49);
--	dsi_generic_write_seq(dsi, 0xc5, 0x65);
--	dsi_generic_write_seq(dsi, 0xc6, 0x41, 0x63);
--
--	dsi_generic_write_seq(dsi, 0xd0, 0x00, 0x46, 0x74, 0x32, 0x1d, 0x03, 0x51, 0x15, 0x04);
--	dsi_generic_write_seq(dsi, 0xd1, 0x00, 0x46, 0x74, 0x32, 0x1d, 0x03, 0x51, 0x15, 0x04);
--	dsi_generic_write_seq(dsi, 0xd2, 0x00, 0x46, 0x74, 0x32, 0x1f, 0x03, 0x51, 0x15, 0x04);
--	dsi_generic_write_seq(dsi, 0xd3, 0x00, 0x46, 0x74, 0x32, 0x1f, 0x03, 0x51, 0x15, 0x04);
--	dsi_generic_write_seq(dsi, 0xd4, 0x01, 0x46, 0x74, 0x25, 0x00, 0x03, 0x51, 0x15, 0x04);
--	dsi_generic_write_seq(dsi, 0xd5, 0x01, 0x46, 0x74, 0x25, 0x00, 0x03, 0x51, 0x15, 0x04);
--
--	dsi_generic_write_seq(dsi, MIPI_DCS_SET_COLUMN_ADDRESS, 0x00, 0x00, 0x01, 0xdf);
--	dsi_generic_write_seq(dsi, MIPI_DCS_SET_PAGE_ADDRESS, 0x00, 0x00, 0x03, 0x1f);
-+	mipi_dsi_dcs_write_seq(dsi, 0xb2, 0x00, 0xc8);
-+	mipi_dsi_dcs_write_seq(dsi, 0xb3, 0x00);
-+	mipi_dsi_dcs_write_seq(dsi, 0xb4, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xb5, 0x42, 0x10, 0x10, 0x00, 0x20);
-+	mipi_dsi_dcs_write_seq(dsi, 0xb6, 0x0b, 0x0f, 0x3c, 0x13, 0x13, 0xe8);
-+	mipi_dsi_dcs_write_seq(dsi, 0xb7, 0x4c, 0x06, 0x0c, 0x00, 0x00);
-+
-+	mipi_dsi_dcs_write_seq(dsi, 0xc0, 0x01, 0x11);
-+	mipi_dsi_dcs_write_seq(dsi, 0xc3, 0x07, 0x03, 0x04, 0x04, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xc4, 0x12, 0x24, 0x18, 0x18, 0x02, 0x49);
-+	mipi_dsi_dcs_write_seq(dsi, 0xc5, 0x65);
-+	mipi_dsi_dcs_write_seq(dsi, 0xc6, 0x41, 0x63);
-+
-+	mipi_dsi_dcs_write_seq(dsi, 0xd0, 0x00, 0x46, 0x74, 0x32, 0x1d, 0x03, 0x51, 0x15, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xd1, 0x00, 0x46, 0x74, 0x32, 0x1d, 0x03, 0x51, 0x15, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xd2, 0x00, 0x46, 0x74, 0x32, 0x1f, 0x03, 0x51, 0x15, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xd3, 0x00, 0x46, 0x74, 0x32, 0x1f, 0x03, 0x51, 0x15, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xd4, 0x01, 0x46, 0x74, 0x25, 0x00, 0x03, 0x51, 0x15, 0x04);
-+	mipi_dsi_dcs_write_seq(dsi, 0xd5, 0x01, 0x46, 0x74, 0x25, 0x00, 0x03, 0x51, 0x15, 0x04);
-+
-+	mipi_dsi_dcs_write_seq(dsi, MIPI_DCS_SET_COLUMN_ADDRESS, 0x00, 0x00, 0x01, 0xdf);
-+	mipi_dsi_dcs_write_seq(dsi, MIPI_DCS_SET_PAGE_ADDRESS, 0x00, 0x00, 0x03, 0x1f);
+-	dsi_generic_write_seq(dsi, 0x55, 0x01);
++	mipi_dsi_dcs_write_seq(dsi, 0x55, 0x01);
  
  	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
  	if (ret < 0) {
-@@ -90,7 +82,7 @@ static int lg_lh400wv3_enable_backlight(struct udevice *dev)
- 
+@@ -60,45 +52,45 @@ static int mot_es2(struct mipi_dsi_device *dsi)
+ 	}
  	mdelay(120);
  
--	dsi_generic_write_seq(dsi, MIPI_DCS_WRITE_MEMORY_START);
-+	mipi_dsi_dcs_write_seq(dsi, MIPI_DCS_WRITE_MEMORY_START);
+-	dsi_generic_write_seq(dsi, 0xf4, 0x00, 0xbb, 0x46, 0x53, 0x0c, 0x49,
+-			      0x74, 0x29, 0x12, 0x15, 0x2f, 0x2f, 0x04);
+-	dsi_generic_write_seq(dsi, 0xf8, 0x4b, 0x04, 0x10, 0x1a, 0x2c, 0x2c,
+-			      0x2c, 0x2c, 0x14, 0x12);
++	mipi_dsi_dcs_write_seq(dsi, 0xf4, 0x00, 0xbb, 0x46, 0x53, 0x0c, 0x49,
++			       0x74, 0x29, 0x12, 0x15, 0x2f, 0x2f, 0x04);
++	mipi_dsi_dcs_write_seq(dsi, 0xf8, 0x4b, 0x04, 0x10, 0x1a, 0x2c, 0x2c,
++			       0x2c, 0x2c, 0x14, 0x12);
  
- 	ret = mipi_dsi_dcs_set_display_on(dsi);
+-	dsi_generic_write_seq(dsi, 0xb5, 0x03, 0x7f, 0x00, 0x80, 0xc7, 0x00);
+-	dsi_generic_write_seq(dsi, 0xb7, 0x66, 0xf6, 0x46, 0x9f, 0x90, 0x99,
+-			      0xff, 0x80, 0x6d, 0x01);
++	mipi_dsi_dcs_write_seq(dsi, 0xb5, 0x03, 0x7f, 0x00, 0x80, 0xc7, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, 0xb7, 0x66, 0xf6, 0x46, 0x9f, 0x90, 0x99,
++			       0xff, 0x80, 0x6d, 0x01);
+ 
+ 	/* Gamma R */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x04);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x30, 0x12, 0x0e, 0x0c,
+-			      0x22, 0x27, 0x31, 0x2e, 0x07, 0x0f);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x30, 0x12, 0x0e, 0x0c,
+-			      0x22, 0x27, 0x31, 0x2e, 0x07, 0x0f);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x04);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x30, 0x12, 0x0e, 0x0c,
++			       0x22, 0x27, 0x31, 0x2e, 0x07, 0x0f);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x30, 0x12, 0x0e, 0x0c,
++			       0x22, 0x27, 0x31, 0x2e, 0x07, 0x0f);
+ 
+ 	/* Gamma G */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x02);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x37, 0x15, 0x15, 0x11,
+-			      0x1f, 0x25, 0x2d, 0x2a, 0x05, 0x0f);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x37, 0x15, 0x15, 0x11,
+-			      0x1f, 0x25, 0x2d, 0x2a, 0x05, 0x0f);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x02);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x37, 0x15, 0x15, 0x11,
++			       0x1f, 0x25, 0x2d, 0x2a, 0x05, 0x0f);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x37, 0x15, 0x15, 0x11,
++			       0x1f, 0x25, 0x2d, 0x2a, 0x05, 0x0f);
+ 
+ 	/* Gamma B */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x01);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x3f, 0x16, 0x1f, 0x15,
+-			      0x1f, 0x25, 0x2d, 0x2b, 0x06, 0x0b);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x3f, 0x16, 0x1f, 0x15,
+-			      0x1f, 0x25, 0x2d, 0x2b, 0x06, 0x0b);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x01);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x3f, 0x16, 0x1f, 0x15,
++			       0x1f, 0x25, 0x2d, 0x2b, 0x06, 0x0b);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x3f, 0x16, 0x1f, 0x15,
++			       0x1f, 0x25, 0x2d, 0x2b, 0x06, 0x0b);
+ 
+ 	/* Gamma W */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x20);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x34, 0x15, 0x1a, 0x11,
+-			      0x1f, 0x23, 0x2d, 0x29, 0x02, 0x08);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x34, 0x15, 0x1a, 0x11,
+-			      0x1f, 0x23, 0x2d, 0x29, 0x02, 0x08);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x20);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x34, 0x15, 0x1a, 0x11,
++			       0x1f, 0x23, 0x2d, 0x29, 0x02, 0x08);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x34, 0x15, 0x1a, 0x11,
++			       0x1f, 0x23, 0x2d, 0x29, 0x02, 0x08);
+ 
+-	dsi_generic_write_seq(dsi, 0x53, 0x2c);
+-	dsi_generic_write_seq(dsi, 0x35, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, 0x53, 0x2c);
++	mipi_dsi_dcs_write_seq(dsi, 0x35, 0x00);
+ 
+ 	return 0;
+ }
+@@ -107,9 +99,9 @@ static int __maybe_unused mot_es4(struct mipi_dsi_device *dsi)
+ {
+ 	int ret;
+ 
+-	dsi_generic_write_seq(dsi, 0xd2, 0x04, 0x53);
+-	dsi_generic_write_seq(dsi, 0xd2, 0x05, 0x53);
+-	dsi_generic_write_seq(dsi, 0x55, 0x01);
++	mipi_dsi_dcs_write_seq(dsi, 0xd2, 0x04, 0x53);
++	mipi_dsi_dcs_write_seq(dsi, 0xd2, 0x05, 0x53);
++	mipi_dsi_dcs_write_seq(dsi, 0x55, 0x01);
+ 
+ 	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
  	if (ret < 0) {
+@@ -118,45 +110,45 @@ static int __maybe_unused mot_es4(struct mipi_dsi_device *dsi)
+ 	}
+ 	mdelay(120);
+ 
+-	dsi_generic_write_seq(dsi, 0xb5, 0x03, 0x7f, 0x0a, 0x80, 0xff, 0x00);
+-	dsi_generic_write_seq(dsi, 0xb7, 0x7a, 0xf7, 0x4d, 0x91, 0x90, 0xb3,
+-			      0xff, 0x80, 0x6d, 0x01);
+-	dsi_generic_write_seq(dsi, 0xf4, 0x00, 0xbb, 0x46, 0x53, 0x0c, 0x49,
+-			      0x74, 0x29, 0x12, 0x15, 0x37, 0x37, 0x04);
+-	dsi_generic_write_seq(dsi, 0xf8, 0x0a, 0x04, 0x10, 0x2a, 0x35, 0x35,
+-			      0x35, 0x35, 0x21, 0x1a);
++	mipi_dsi_dcs_write_seq(dsi, 0xb5, 0x03, 0x7f, 0x0a, 0x80, 0xff, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, 0xb7, 0x7a, 0xf7, 0x4d, 0x91, 0x90, 0xb3,
++			       0xff, 0x80, 0x6d, 0x01);
++	mipi_dsi_dcs_write_seq(dsi, 0xf4, 0x00, 0xbb, 0x46, 0x53, 0x0c, 0x49,
++			       0x74, 0x29, 0x12, 0x15, 0x37, 0x37, 0x04);
++	mipi_dsi_dcs_write_seq(dsi, 0xf8, 0x0a, 0x04, 0x10, 0x2a, 0x35, 0x35,
++			       0x35, 0x35, 0x21, 0x1a);
+ 
+ 	/* Gamma R */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x04);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x08, 0x1c, 0x1b, 0x0f, 0x0f, 0x0a,
+-			      0x1e, 0x22, 0x27, 0x26, 0x07, 0x0d);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x08, 0x3c, 0x27, 0x0f, 0x0f, 0x0a,
+-			      0x1e, 0x26, 0x31, 0x2f, 0x07, 0x0b);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x04);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x08, 0x1c, 0x1b, 0x0f, 0x0f, 0x0a,
++			       0x1e, 0x22, 0x27, 0x26, 0x07, 0x0d);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x08, 0x3c, 0x27, 0x0f, 0x0f, 0x0a,
++			       0x1e, 0x26, 0x31, 0x2f, 0x07, 0x0b);
+ 
+ 	/* Gamma G */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x02);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x30, 0x14, 0x0f, 0x00, 0x06, 0x02,
+-			      0x1e, 0x22, 0x27, 0x27, 0x08, 0x10);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x30, 0x35, 0x0f, 0x00, 0x0a, 0x02,
+-			      0x1c, 0x23, 0x31, 0x2f, 0x08, 0x0e);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x02);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x30, 0x14, 0x0f, 0x00, 0x06, 0x02,
++			       0x1e, 0x22, 0x27, 0x27, 0x08, 0x10);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x30, 0x35, 0x0f, 0x00, 0x0a, 0x02,
++			       0x1c, 0x23, 0x31, 0x2f, 0x08, 0x0e);
+ 
+ 	/* Gamma B */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x01);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x12, 0x1b, 0x26, 0x0e, 0x12, 0x0b,
+-			      0x1e, 0x22, 0x27, 0x27, 0x06, 0x0c);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x12, 0x3b, 0x2c, 0x12, 0x12, 0x0e,
+-			      0x1e, 0x26, 0x31, 0x2f, 0x06, 0x0d);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x01);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x12, 0x1b, 0x26, 0x0e, 0x12, 0x0b,
++			       0x1e, 0x22, 0x27, 0x27, 0x06, 0x0c);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x12, 0x3b, 0x2c, 0x12, 0x12, 0x0e,
++			       0x1e, 0x26, 0x31, 0x2f, 0x06, 0x0d);
+ 
+ 	/* Gamma W */
+-	dsi_generic_write_seq(dsi, 0xf9, 0x20);
+-	dsi_generic_write_seq(dsi, 0xfa, 0x37, 0x1b, 0x09, 0x01, 0x06, 0x04,
+-			      0x19, 0x19, 0x22, 0x24, 0x04, 0x15);
+-	dsi_generic_write_seq(dsi, 0xfb, 0x37, 0x3b, 0x17, 0x01, 0x0a, 0x04,
+-			      0x19, 0x1d, 0x2c, 0x2c, 0x04, 0x13);
++	mipi_dsi_dcs_write_seq(dsi, 0xf9, 0x20);
++	mipi_dsi_dcs_write_seq(dsi, 0xfa, 0x37, 0x1b, 0x09, 0x01, 0x06, 0x04,
++			       0x19, 0x19, 0x22, 0x24, 0x04, 0x15);
++	mipi_dsi_dcs_write_seq(dsi, 0xfb, 0x37, 0x3b, 0x17, 0x01, 0x0a, 0x04,
++			       0x19, 0x1d, 0x2c, 0x2c, 0x04, 0x13);
+ 
+-	dsi_generic_write_seq(dsi, 0x53, 0x2c);
+-	dsi_generic_write_seq(dsi, 0x35, 0x00);
+-	dsi_generic_write_seq(dsi, 0xc3, 0x01, 0x4e);
++	mipi_dsi_dcs_write_seq(dsi, 0x53, 0x2c);
++	mipi_dsi_dcs_write_seq(dsi, 0x35, 0x00);
++	mipi_dsi_dcs_write_seq(dsi, 0xc3, 0x01, 0x4e);
+ 
+ 	return 0;
+ }
+@@ -167,9 +159,9 @@ static int mot_panel_enable_backlight(struct udevice *dev)
+ 	struct mipi_dsi_device *dsi = plat->device;
+ 	int ret;
+ 
+-	dsi_generic_write_seq(dsi, 0xf0, 0x5a, 0x5a);
+-	dsi_generic_write_seq(dsi, 0xf1, 0x5a, 0x5a);
+-	dsi_generic_write_seq(dsi, 0xd0, 0x8e);
++	mipi_dsi_dcs_write_seq(dsi, 0xf0, 0x5a, 0x5a);
++	mipi_dsi_dcs_write_seq(dsi, 0xf1, 0x5a, 0x5a);
++	mipi_dsi_dcs_write_seq(dsi, 0xd0, 0x8e);
+ 
+ 	ret = mot_es2(dsi);
+ 	if (ret)
 
 -- 
 2.54.0
