@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DBFC5AC7A
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B61C55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:05:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D062640648;
-	Thu,  6 Aug 2026 13:05:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CAF1A4063E;
+	Thu,  6 Aug 2026 13:05:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nryTwhvvxuWK; Thu,  6 Aug 2026 13:05:04 +0000 (UTC)
+ id ufefKYiFAgye; Thu,  6 Aug 2026 13:05:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3DE9440657
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7832C4065F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786021504;
-	bh=IsUGFmSnbeF78uxiR9aEaDNwoxt/q2ttr1C8Dl9kS5A=;
+	d=lists.u-boot-project.org ; s=default; t=1786021505;
+	bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=AZ07gIWTztqHi17LPnuTw9zXX6WmcaIMOlxaVkeOJpfKFcss1my9KbAaMSewxyAi1
-	 wSX5S8Ts0IwJ41Gi9Qhu+PelebqUk1g3KPQD2hZCEKI3TR6F+IW/Q5BtKgg70d/3QX
-	 v+5KtKB6+Jh+MZqANkMfz9bZ8rU5OnTpx0MlFL4NoramdLk8Vha42LgTowsTNhAklR
-	 q4e8P8MZ+5KIp2EMQXwnB2YHOqR6WdIHAYJEo20Dy5Y/CWROJ0Uf0ckvmTTKLEVmW7
-	 yXOjmNJFZenNA6+dQHr2POp+uKCQxeu2JIcdeoTGtoUbLFWVc5oZLWBkHmQx3Bm1Si
-	 qqddwbTQN2qzg==
+	b=LE3Ikrv85qBbSMZIhEEU5CgltustuCXj/yKyYrYtx6sSVo0L7SQZ62Ed8ndmR9xnN
+	 43rXy8BgLp2TBV68taqbF82OMcQT5ggBGP0R3VyXvBQUgv5lfa0igJ7RoW0tfotJca
+	 Fn5R7reRid+7l7HqYV7+0ZONMgJvYXLDqwKYzOcDWaAN5ii8D5Sw10t+sUc+pYkmX4
+	 9qm/S6w7bNUXIlHVJBgeOjwHEdirScLbv5+7S2szt44WKC8Hk8fS/Yig3h4WI/wHZO
+	 uEBvPa0eBpNxEs3LNONpsh+vThktJSkn5lBBNJMk8kp/M2TzoEqqN1Ewk0fWOAbs+M
+	 6COTzT7zuSr9Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3DE9440657;
-	Thu,  6 Aug 2026 13:05:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id D46F9218
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:15:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7832C4065F;
+	Thu,  6 Aug 2026 13:05:05 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EBC1B282
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:15:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C5ADF80DCE
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:15:09 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E939B403C8
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:15:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6n4_HxDUIGnN for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 12:15:08 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zw32EmxkJrSG for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 12:15:50 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.94;
  helo=sender4-pp-o94.zoho.com; envelope-from=zhuxu_ran@zohomail.com;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org BC22780DB5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BC22780DB5
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org EB4AD40385
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EB4AD40385
 Received: from sender4-pp-o94.zoho.com (sender4-pp-o94.zoho.com
  [136.143.188.94])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BC22780DB5
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:15:08 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1786018430; cv=none; 
+ by smtp4.osuosl.org (Postfix) with ESMTPS id EB4AD40385
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 12:15:49 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1786018435; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=C0DN4M4S/GXKwednHiaZoSvT/Q7A2h6gmdIaGPhxcIeZ6TXTCepTfD2DiFGvu2HncC02mc7kvMiUgOojDMkRWgJX2vl/EQHV4KPH2dKHcbcAoDBEUKSe82CHz4mkj3nZ7totKPJOpFLsJPLUHQQcYFK3Uz83N9a7LzIV51KLMRA=
+ b=Q0lQULXg08yelvB69I0sPt43y+jMoMYAvE++sKAYLZMuU+qb3WSrmqk6VdHgMFw+wngFzGp7j7nmpNvCJ6CnU4sxNYePT2kHtRGwK2dCgEXsXJSNjaTV0g++M/uQ9qSnJC9bfZDN8zDz3Zn/OG1PZT1UeqP1p8dRbhhAmTpmSgg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1786018430;
+ s=zohoarc; t=1786018435;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=IsUGFmSnbeF78uxiR9aEaDNwoxt/q2ttr1C8Dl9kS5A=; 
- b=IjFZLC2Alt6YcRWVl2Uz7Kl+31br9OjD71dEDpxXuWWYiZA1p1FSWQhWQoWj1EEIT+YyX5TxVV/J0tgoW/jhmX2MkCS50OiJcISzxmJdnU61MtZZ4CempTupI5mt6/e3EV1YAtgzAOskrNSvpcpPlMty/9B24dcECImaFLA9cCQ=
+ bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=; 
+ b=Ll5sUwwAunv8nWtnm20lRQY50AbowqYH/wK7fSOQvv/TxzYS07HTFO950KSIw75yTUopVQBDyO2Vhb7yp3t9XxveT/oEdx+T+jI/We3Rt3wCpSZf33Fg8y9hDQEhSBt7IKVOwr8HSCWreLE291IWi1PgnYzfFOouPVrp6TSERwI=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=zohomail.com;
  spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
  dmarc=pass header.from=<zhuxu_ran@zohomail.com>
-Received: by mx.zohomail.com with SMTPS id 178601842520115.751473938330491;
- Thu, 6 Aug 2026 05:13:45 -0700 (PDT)
-Date: Thu, 06 Aug 2026 20:13:21 +0800
-Subject: [PATCH v3 1/7] clk: sophgo: cv1800b: Add SoC-specific compatible
- strings
+Received: by mx.zohomail.com with SMTPS id 1786018432270498.53697484163024;
+ Thu, 6 Aug 2026 05:13:52 -0700 (PDT)
+Date: Thu, 06 Aug 2026 20:13:22 +0800
+Subject: [PATCH v3 2/7] mmc: cv1800b: Add SG2002 compatible string
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260806-milkv-duo-upstream-dts-v3-1-917cf70a2337@zohomail.com>
+Message-Id: <20260806-milkv-duo-upstream-dts-v3-2-917cf70a2337@zohomail.com>
 References: <20260806-milkv-duo-upstream-dts-v3-0-917cf70a2337@zohomail.com>
 In-Reply-To: <20260806-milkv-duo-upstream-dts-v3-0-917cf70a2337@zohomail.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -85,25 +84,25 @@ Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Guodong Xu <guodong@riscstar.com>, Andreas Schwab <schwab@suse.de>, 
  Junhui Liu <junhui.liu@pigmoral.tech>
 X-Mailer: b4 0.15.2
-Feedback-ID: zu0801122760aef652722c9ca7d7f19ead0000431358eb24d5318b354b0db866bc79fa1285aa76cdbf2b22fc:ZohoMail
+Feedback-ID: zu08011227611c51a4210926c4f62ca0e60000e250bac53775f912de3406498b6ab8e9c7cd3d859dcc49467c:ZohoMail
 X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
 X-ZohoMailClient: External
 X-Mailman-Approved-At: Thu, 06 Aug 2026 13:05:01 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; t=1786018430; 
+ c=relaxed/relaxed; t=1786018435; 
  s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
- bh=IsUGFmSnbeF78uxiR9aEaDNwoxt/q2ttr1C8Dl9kS5A=;
- b=FvSQuT0j/au2tA8+HiJJwggHI5JOGTqvt/zOZCgL/PQ9KKYDEQTIIzJQAL1Cu9U4
- a6FYMq+nMyn9NftaUbRa+KsusAZO5gJMdce1Z2kWlMnaPDrYZ6+YTEMHWBMZktDjgRt
- zHCVqOljpmnDwQ1IrUh2dcVOFDX/rQ1ekrdHEhyo=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=D7y9K9nsKl/qbMyMRX7J16nMx7oB0CNqcR/A6XEWjio=;
+ b=JWr03kfa18uC/BwghMOwNy4cvIYpSKY5m3prqm9w1MC7SQGnA8PTjkiH5TOZ3Ohx
+ sgTVCbOHrDiMljzo0P7ScTz04oAQzpWoJhNtIH83E/Opxfz/NIpVMyk+59YksAWvxbb
+ NJwdW/1X2Gq+RJv6G62uf21ePRyub/wf+z34RAOY=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=zohomail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com
- header.a=rsa-sha256 header.s=zm2022 header.b=FvSQuT0j
+ header.a=rsa-sha256 header.s=zm2022 header.b=JWr03kfa
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -120,27 +119,26 @@ Reply-To: Zhuxu Ran <zhuxu_ran@zohomail.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The upstream CV1800B and SG2002 devicetrees use
-"sophgo,cv1800b-clk" and "sophgo,sg2002-clk" respectively.
+The upstream SG2002 devicetree uses "sophgo,sg2002-dwcmshc"
+for the SDHCI controller.
 
-Add both compatible strings to the existing CV1800B clock driver.
+Add the compatible string to the existing CV1800B SDHCI driver.
 
 Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 ---
- drivers/clk/sophgo/clk-cv1800b.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/mmc/cv1800b_sdhci.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/clk/sophgo/clk-cv1800b.c b/drivers/clk/sophgo/clk-cv1800b.c
-index 248a69321fc..57051c1ec0a 100644
---- a/drivers/clk/sophgo/clk-cv1800b.c
-+++ b/drivers/clk/sophgo/clk-cv1800b.c
-@@ -744,6 +744,8 @@ const struct clk_ops cv1800b_clk_ops = {
+diff --git a/drivers/mmc/cv1800b_sdhci.c b/drivers/mmc/cv1800b_sdhci.c
+index b756649f90f..f8d94232170 100644
+--- a/drivers/mmc/cv1800b_sdhci.c
++++ b/drivers/mmc/cv1800b_sdhci.c
+@@ -110,6 +110,7 @@ static int cv1800b_sdhci_probe(struct udevice *dev)
  
- static const struct udevice_id cv1800b_clk_of_match[] = {
- 	{ .compatible = "sophgo,cv1800-clk" },
-+	{ .compatible = "sophgo,cv1800b-clk" },
-+	{ .compatible = "sophgo,sg2002-clk" },
- 	{ },
+ static const struct udevice_id cv1800b_sdhci_match[] = {
+ 	{ .compatible = "sophgo,cv1800b-dwcmshc" },
++	{ .compatible = "sophgo,sg2002-dwcmshc" },
+ 	{ }
  };
  
 
