@@ -1,133 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4BEC56205
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 17:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 548CDC5AC7C
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 17:40:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2CA7440857;
-	Thu,  6 Aug 2026 17:09:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EC87380DCA;
+	Thu,  6 Aug 2026 17:40:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HgJDpI1wiFla; Thu,  6 Aug 2026 17:09:30 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Pbe9gMroTCvT; Thu,  6 Aug 2026 17:40:12 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1777340805
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1D85B80E63
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786036170;
-	bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786038012;
+	bh=YSEudvUQkZ7LaUgFMiF21PA/jUPow2MNXpq9w29cWak=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LE0iDybHEWLc5fsF4HHYcw3yVdEL6to0gp3YUEUxSrsuohUoGor3lyyz99erKZQEf
-	 sah582PoIfaDLQrmaURuVK0sr0czNObzBYqHBwKVOCi3yG2fJgdFTPhDCRnvaIvF1O
-	 +WYw6rmiCcuqTwtQ0fI8N1TqEDhe3Xw/aUjE8ctsDE1aJL4JEiWuIZw9Akj3/Semdq
-	 I7e2vLT1dO7bQcrcKKYOhlazyjKOrPwb/xW5sSvj4jUF80XyESvkldgQNolVB9Y+69
-	 F3TLRrA5z/PQEbKML/epDXOuq/vU+fKYaCiCelYrizOBNYO+kaLJc1yuBEY9N/uJBL
-	 SEDwSP2s8sjNQ==
+	b=IXPmxx9xkwLUEAEnOnYeB75rjPl6gGsdMl7PmshJ2AyVj9sXjJcQ4XeBZfVtZsbuF
+	 OPCQmi25RnKPNlorXYhtUpHiwINTUxOYxO1i7h0EoL4vcXqLXjyWgWKfQ2HqYyl8i1
+	 yf+edgmJaB/WYC6XIDsiWvamWUuG3a7leYpG8qgBwCBoj2qZnjxy5K8aFe8MJr+1oS
+	 XqOxboU1x66/ijdUXjululHD4Zxng13OyKUmaf6vz1Rkwaps1lffJfX+wX44W8It2d
+	 nGzvFBB0DNrIUraUucvXOsTc9bVbD6LttFTvAsyx6ewEEjuU7rlJi4su0b4nTVJGko
+	 IUTyglZatCYaQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1777340805;
-	Thu,  6 Aug 2026 17:09:30 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 762E1392
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:09:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1D85B80E63;
+	Thu,  6 Aug 2026 17:40:12 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EEFAE2B6
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:40:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5C1A540805
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:09:28 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CCC4580E63
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:40:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xf5SIj-9CAEf for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 17:09:27 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4011C40473
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4011C40473
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4011C40473
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:09:27 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6a0c8283146so4030635a12.0
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 10:09:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786036165; cv=none;
- d=google.com; s=arc-20260327;
- b=WcNvkxq31/Dcvys0E9jL8xmZqs8RtHTIeDDqemfiF/d5o+fTUD+F3UsI9jd6RRIDAe
- 6BRklmKcBsoAcWbMR7KNAgG4F5B92f8ucNXLKpYa54g1uYqMRNLcc0JVQdUBSkCh8S01
- K6AFNS64clvIy1f4vkMKEr9uy6UrXq25xmS27wWkqCIDIrOMdNcWv4fh41AqD5FQDyRF
- 3zvvOxptKleuZfgJvgUSZDJnCnSc9JMOhVCcnEum90TErJvH9FTiB78NEVXL5Nh4J5S1
- UtlbWK+5G+J07t4SF86M2+cTh5nN4d08Uv1jh0aIIjn+qpGrUBtlGi5Yia06t5uoNGtm
- /uwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
- fh=Qe0Ic/EUO+9IWytden6r420E7DP3QB2PgHsA8AUFoEY=;
- b=OJrBLdNcbSpxlK/J6bHmYJU8puX+a7EnsmXXZSjt4Fn1lf4CTaQ1+pVa+GIVj9iUyc
- IDUvwUqbN7bn1/1T0jWLQOCFtTLRW8mE7q/XEtNItFJ85zZRtIG70TxqcHD1kwBWPNlx
- sbimEhNoSw32ZxjahjCaNBIo42FJwvJd/gqZU0RCs7NHMmJteF8ta9BrT2XjKdy7tSag
- qC4rqOlVZu4bZgzffOR8kIzwjksKLYvLLbLBBkaKJOjk8JWCOx5RnPjpRvlraWq6gbP1
- j+Hno5hM4LnCzK9e19YqHJQa9UdkGjLz8Sev7bG8He3Il1CUBsyUBZtD5Jfx8R2mj3HN
- mzvw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786036165; x=1786640965;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
- b=cmgM0KZ/EWvpLmME9EMrMMpez5D5GZ2/sW2YzE5nSOaw2RyUscXwJsgnKgXklR4GQ8
- wQ5wFjf+RMoo7UboU5O2s3/iI4bocxsqiylietPwPyr8J3JnSfk9estz/A+c5QeWYoOq
- E7GMJZbbvasrZ6z46Ool8PUDAOyukx2yP1bfPwFgM8Vu5i4Sb4GGaiKNFW+CrWKahzAf
- hdJ6QAJV2lVqEQC19TvJPRO5f430PWrAg8M3bQwye7Pt4LtLYOwWMaI1qbzKmvCnxkfN
- 1RjfpzkwW84piv8kwJO+e7t+ghb11yucSzcNiz5zq0KWsNvuIDOUbmQqafJvwTaEltZD
- CgTA==
-X-Gm-Message-State: AOJu0Yz9dgwWnMGsMehcDZX84PZuGUFmOOYpl+EGE0Yojd24sFWjCQrO
- MdQyNj/8xsR9WcI7IgN3uBQTsZmHID0iSj+Ciqopk9jdSsr1l77VP57NqVCBCI0iqcF7VhBFixX
- q5qZryBixSuYbVyAkuXLBWJuk+A48VVKWL2oaHeGC
-X-Gm-Gg: AR+sD13il7guc+lauD8Dzp5Otdh4W2SHdf2oOtjLu0TTMJYvVdFWH4qtCtje0Eg84Pu
- W4B81f7g1cKemGquP9evAIKr7SdddUCGV8xz58ggG+kSP5+RISHrEKjYoguNZ1/puHbznzTOrAN
- ciwFAmCK9SdlN5dIAIkSJkw2HOxJ8uWZJYqkMXJqXq7eiUc+6Q4xTfgFWHuv1wnCEsfB9v/6oES
- xgXxA0HVYzi0QbBPncbqN4YKa7BLp0h6yLvB545j/klp0SrD+RA1xiqq46NbKmweXVwyOMxJtYm
- IVkHDDab0iubaYORotXdHVA+OJkPF4eH295uHHQ2Pbw=
-X-Received: by 2002:a05:6402:1f8d:b0:6a0:927e:39e2 with SMTP id
- 4fb4d7f45d1cf-6a14f0c5762mr9076204a12.5.1786036165071; Thu, 06 Aug 2026
- 10:09:25 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CYYP-y_0ew3H for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 17:40:09 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=165c=ga=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E659C80DCA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E659C80DCA
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E659C80DCA
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 17:40:08 +0000 (UTC)
+X-Forward-Email-ID: 6a74c6f33d42beda28bc536d
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.13.10
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <86a8a080-ec65-46e1-9a12-5b0fe28173ee@kwiboo.se>
+Date: Thu, 6 Aug 2026 19:40:00 +0200
 MIME-Version: 1.0
-References: <20260805203113.46567-1-smoser@brickies.net>
-In-Reply-To: <20260805203113.46567-1-smoser@brickies.net>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Aug 2026 11:09:12 -0600
-X-Gm-Features: AUfX_mx5hrrjekqq6wjm0U8lHRFBlivb_PCTyRJaEw_bebobkL-d5xW9uqYq2JY
-Message-ID: <CAFLszTh93y-zky7whGWp9+pbV3KeSOeHvL0WnDKouqEMR8hD1Q@mail.gmail.com>
-Subject: Re: [PATCH] dm: pci: fix uninitialized fdt_pci_addr fall-through in
- pci_get_devfn
-To: smoser@brickies.net
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Dustin Kirkland <kirkland@chainguard.dev>, 
- Dustin Kirkland <dustin.kirkland@chainguard.dev>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] rockchip: spl: replace ifdef by IS_ENABLED for
+ timer_init() call condition
+To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Cc: Johan Jonker <jbx6244@gmail.com>, kever.yang@rock-chips.com,
+ sjg@chromium.org, ilias.apalodimas@linaro.org,
+ u-boot@lists.u-boot-project.org
+References: <cded3ae1-b908-49c6-af92-30b931d160c1@gmail.com>
+ <c6530788-e823-4cb4-905a-5473d9c00914@cherry.de>
+ <6e43369a-832e-40d3-af23-a0981af84d75@gmail.com>
+ <75f48c14-bad9-4250-a4b5-321cc17bc1ec@cherry.de>
+ <20260730220623.GI1773261@bill-the-cat>
+ <f3d4bfd6-3b99-426b-b025-d236b9feedff@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <f3d4bfd6-3b99-426b-b025-d236b9feedff@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786036165; x=1786640965;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=BFXlMU6DOHYoLX9CITfQ0e6IcLqNb/Nm2uJTBWVSqmw=;
- b=ohi4k/LJOx7JB46HdtqbBEpSF2/wuKx7iyPQ9XF/zoBS09TUSfAiM1tzC0k0Wz2Ld2
- Edwy/bfLirfI6IczV6PjvBj7JjA+VGbEyLQsv+Cf4wZANZxA9YxzVjyfZoQTkO6UucNn
- fQcvRLbLbolngf/9oy2qkvHrDTbBtYfv1qOuI=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=ohi4k/LJ
+ d=kwiboo.se; 
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1786038007;
+ bh=YSEudvUQkZ7LaUgFMiF21PA/jUPow2MNXpq9w29cWak=;
+ b=C/yZanVBfJ19Zs/Tm/aU/JftSCz+hjnor5KLWBStwKmzCNvRGiMjsrz1h81DokeLfOeYPFm5C
+ 9pX8RDORhGrbgPIrEkH9gt9Hjt/JyxyVkDpHd3lxJxvvG0tOxW+k7S7j7KAhnuSKnqzVgfCE8qY
+ 5LID9l3kpQs/wD5yvOVYI96uNS0znARgrR75eD+YAwznEtIKpNyU9/v0iMKPLmr97JX62b0WrGK
+ YqsO4Rg/oYS3IKEfZXLRJkDcSg0XvQU371T8hqxyP4lNrtczjy7hTU/SFHToDsFSf9Kv82hVWwX
+ vgu5w/vkToOtdvKvLT0O3omkM6qfHEj7Jv3XWsBxNXgg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=C/yZanVB
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,79 +111,191 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Dustin,
+On 8/6/2026 6:46 PM, Quentin Schulz wrote:
+> On 7/31/26 12:06 AM, Tom Rini wrote:
+>> On Thu, Jul 30, 2026 at 05:37:52PM +0200, Quentin Schulz wrote:
+>>> Hi Johan,
+>>>
+>>> On 7/24/26 11:53 AM, Johan Jonker wrote:
+>>>>
+>>>>
+>>>> On 7/24/26 10:45, Quentin Schulz wrote:
+>>>>> Hi Johan,
+>>>>>
+>>>>> On 7/24/26 12:17 AM, Johan Jonker wrote:
+>>>>>> Not all Rockchip SoC models use the ARM arch timer.
+>>>>>> Call the function timer_init() only when
+>>>>>> CONFIG_SYS_ARCH_TIMER is available.
+>>>>>> Replace the ifdef call condition by IS_ENABLED
+>>>>>> to increase build coverage and make the code easier to read.
+>>>>>>
+>>>>>> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+>>>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>>>>> ---
+>>>>>>
+>>>>>> Previous version not needed for serie, so resend separate.
+>>>>>> https://patchwork.ozlabs.org/project/uboot/patch/20220403230659.12039-5-jbx6244@gmail.com/
+>>>>>>
+>>>>>
+>>>>
+>>>> Hi Quentin,
+>>>>> You didn't answer Kever's question in the linked patch and I have the same question.
+>>>>
+>>>> Yes we end up the same code. But...
+>>>>
+>>>>>
+>>>>> This is essentially the same code, so what's the benefit, are you trying to fix a specific issue? How does this improve the situation?
+>>>>    > How does doing that increase code coverage... etc :)
+>>>>
+>>>> This patch originates around the time this concept as introduced.
+>>>> We are changing all code to the new norm and we leave this as it is...
+>>>> Fix this as well as a favor to Simon as part of the review. As we are there then fix them all as this is the new norm.
+>>>> https://patchwork.ozlabs.org/project/uboot/patch/20220403230659.12039-6-jbx6244@gmail.com/
+>>>>
+>>>
+>>> This doesn't point at what Simon could have said that prompted this patch.
+>>> The pointed patch did actually fix something, and instead of using
+>>>
+>>> #ifdef CONFIG_SYS_ARCH_TIMER
+>>>
+>>> you used
+>>>
+>>>      if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
+>>>
+>>> which is absolutely the correct and "modern" way of doing it.
+>>
+>> Right, and when it makes sense to and improves the readability of the
+>> overall code. If it not a must-do every time. There is a judgement call
+>> to it.
+>>
+>>>> The concept:
+>>>>
+>>>> Currently with #ifdef the compiler sees this code:
+>>>> =============
+>>>>
+>>>> 	rockchip_stimer_init();
+>>>>
+>>>> 	ret = dram_init();
+>>>>
+>>>> =============
+>>>>
+>>>> Now the compiler sees this code:
+>>>>
+>>>>
+>>>> int timer_init(void)
+>>>> {
+>>>> 	gd->arch.tbl = 0;
+>>>> 	gd->arch.tbu = 0;
+>>>>
+>>>> #ifdef CFG_SYS_HZ_CLOCK
+>>>> 	gd->arch.timer_rate_hz = CFG_SYS_HZ_CLOCK;
+>>>> #else
+>>>> 	gd->arch.timer_rate_hz = read_cntfrq();
+>>>> #endif
+>>>> 	return 0;
+>>>> }
+>>>>
+>>>>
+>>>>
+>>>> 	rockchip_stimer_init();
+>>>>
+>>>> 	if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
+>>>> 		timer_init();
+>>>>
+>>>> 	ret = dram_init();
+>>>>
+>>>> ============
+>>>>
+>>>> By using IS_ENABLED and CONFIG_IS_ENABLED the compiler is able to look further into code and catch possible errors or warnings.
+>>>
+>>> I don't know anything about compilers but I'm surprised this would actually
+>>> do anything different than what we currently have.
+>>>
+>>> If CONFIG_SYS_ARCH_TIMER is not set, then you get
+>>>
+>>> if (0)
+>>>      timer_init();
+>>>
+>>> which the compiler will (hopefully) see as a non-reachable branch and
+>>> discard it.
+>>>
+>>> Otherwise, it'll be:
+>>>
+>>> if (1)
+>>>      timer_init();
+>>>
+>>> which hopefully the compiler will simply replace without the branch:
+>>>
+>>> timer_init();
+>>>
+>>> Maybe Simon or someone else can teach me something here because my naive
+>>> view on this is: does not make a difference. What kind of benefits do we
+>>> have, what do you run to see those benefits?
+>>
+>> The compiler benefit that using IS_ENABLED provides is that we will make
+>> sure that timer_init is declared in a header that is included. That's
+>> it. It can be useful for more generic code, but it's of course imperfect
+>> if the include chain brings it on some platforms, but not others (as a
+>> warning pointed out on IRC today reminded me).
+>>
+> 
+> Yeah I'm not too sure of the benefit. We need to have timer_init() 
+> defined and thus may require "fallbacks" that are just empty stubs. 
+> Jonas had a look at doing size optimization for TPL for Rockchip a month 
+> ago and if i remember correctly, empty __weak stubs were actually 
+> costing a few bytes compared to simply not having one declared. See 
+> https://libera.catirclogs.org/linux-rockchip/2026-07-01 for some context.
 
-On 2026-08-05T20:31:13, Scott Moser <smoser@brickies.net> wrote:
-> dm: pci: fix uninitialized fdt_pci_addr fall-through in pci_get_devfn
+Correct, an empty weak function will still cost 8 bytes on AArch64, most
+likely branch and return instructions. And it seem to be similar for
+a call to timer_init() in Rockchip TPL.
 
-Thanks for tracking this down.
+I have since then learned that if we use a '__weak void func(void);'
+declaration without a default empty definition the entire operation is
+optimized out at link time.
 
->
-> pci_get_devfn() reads addr.phys_hi and returns the low bits of it as the
-> requested devfn even on the -ENOENT branch, where ofnode_read_pci_addr()
-> has NOT written *addr. The C standard leaves that read undefined; in
-> practice the returned value depends on the compilers stack layout and on
-> -ftrivial-auto-var-init. That value ends up in pplat->devfn (set by
-> pci_uclass_child_post_bind()) and is later compared for equality in
-> pci_bus_find_devfn() during PCI enumeration, so an under-determined
-> value produces an under-determined driver-binding outcome.
->
-> Concretely, this fires on Raspberry Pi 5 (BCM2712) with vendor U-Boot
-> v2026.07 when the tree is compiled with GCC -ftrivial-auto-var-init=zero.
-> In that build addr.phys_hi is zeroed rather than left as stack junk, so
-> pci_get_devfn() returns 0 for every DT-declared non-PCI child of a PCI
-> bus. The Pi 5 device tree includes one such child under the second root
-> complex -- the rp1 simple-bus node representing the on-SoC RP1 south
-> bridge as seen from the OS side. Under zero-init:
->
->   * pci_uclass_child_post_bind(rp1) sets pplat->devfn = 0
-> [...]
->
-> drivers/core/util.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
-
->     Reported-by: Dustin Kirkland <dustin.kirkland@chainguard.dev>
->     Fixes: b52142004fbd ("pci: Add pci_get_devfn() to extract devfn from the fdt_pci_addr")
->     Signed-off-by: Dustin Kirkland <dustin.kirkland@chainguard.dev>
->     Investigated-by: Claude Opus 4.7 <noreply@anthropic.com>
->     Co-authored-by: Claude Opus 4.7 <noreply@anthropic.com>
-
-This is a good find!
-
-Please drop Reported-by when the reporter is also the Signed-off-by -
-also U-Boot doesn't accept AI contributions, so probably best to just
-remove those tags. Also not that useful to mention a vendor tree - we
-mostly just worry about mainline here.
-
-> diff --git a/drivers/core/util.c b/drivers/core/util.c
-> @@ -20,10 +20,8 @@ int pci_get_devfn(struct udevice *dev)
->       /* Extract the devfn from fdt_pci_addr */
->       ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_CONFIG,
->                                  "reg", &addr, NULL);
-> -     if (ret) {
-> -             if (ret != -ENOENT)
-> -                     return -EINVAL;
-> -     }
-> +     if (ret)
-> +             return -EINVAL;
->
->       return addr.phys_hi & 0xff00;
->  }
-
-The fix is right, but the kerneldoc in include/dm/pci.h still says:
-
-    Return: devfn in bits 15...8 if found (pci_dev_t format), or -ENODEV if not
-        found
-
-Since this patch makes the error path observable, please either update
-that comment to match (-EINVAL on any lookup failure) or return
--ENODEV for the ret == -ENOENT case so the documented contract holds.
-I'd lean towards -ENODEV for the not-present case and -EINVAL only for
-a malformed reg - that also reads more naturally at the callers in
-arch/x86/cpu/apollolake/{pmc,hostbridge}.c and intel_common/p2sb.c,
-which only test < 0. What do you think?
+I even have one pending patch related to that TPL work that will drop
+the default definition of the Rockchip TPL specific tpl_board_init() to
+save those 8 bytes, and another one to make the timer_init() call
+conditional on !IS_ENABLED(CONFIG_ARM64) to save 8 more bytes :-)
 
 Regards,
-Simon
+Jonas
 
-[1] https://lore.kernel.org/u-boot/20251113133038.GF6688@bill-the-cat/
+> 
+>>>> There is even a warning for it in ./scripts/checkpatch.pl
+>>>>
+>>>
+>>> I'm aware, I quite often trigger it :)
+>>>
+>>>> ============
+>>>> __weak void rockchip_stimer_init(void)
+>>>> {
+>>>> #if defined(CONFIG_ROCKCHIP_STIMER_BASE)
+>>>>
+>>>> #endif
+>>>> }
+>>>> ============
+>>>> There are exceptions like in rockchip_stimer_init where certain defines are missing, so that's still allowed.
+>>>> In all other settings we use IS_ENABLED and CONFIG_IS_ENABLED.
+>>>> Hope that explains your questions.
+>>>>
+>>>
+>>> Not really no, sorry.
+>>>
+>>> The commit log is misleading and needs rewording. As far as my understanding
+>>> goes, it's clean-up. Maybe there's something helpful for the compiler but
+>>> you need to prove it because I don't see it (I'm interested to know if it
+>>> does, so please tell us!).
+>>
+>> I agree, at minimum, the commit message isn't clear that we're just
+>> replacing #ifdef with if (IS_ENABLED()) as a clean-up. I'll defer to
+>> Quentin on if that's worthwhile doing here, or not.
+>>
+> 
+> It's fine for me, I just don't want to only receive that kind of patches 
+> as I don't find them particularly useful :)
+> 
+> Cheers,
+> Quentin
+
