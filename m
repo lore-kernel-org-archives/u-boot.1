@@ -4,128 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0149CC56208
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:23:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F36C55ABF
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 13:23:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 097AD4063E;
-	Thu,  6 Aug 2026 13:23:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 83348403A9;
+	Thu,  6 Aug 2026 13:23:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X4geZG9Yh-Rh; Thu,  6 Aug 2026 13:23:02 +0000 (UTC)
+ id CfbfvXUQz-rD; Thu,  6 Aug 2026 13:23:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 03816405AD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3D7F9405AD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786022582;
-	bh=taxpDAeKq3b14TcnrJKrHwBdmml5nLBGNuW8AUTOogQ=;
+	d=lists.u-boot-project.org ; s=default; t=1786022598;
+	bh=fMSB8vj0wMd2ILw1oOE9IO1sow654wqDuzLJbz6Qf7M=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jY6FCsqwJVuX1NQHssg7GS6e4wol+lUmgoSlOW94v3FvjvyiHE9g+KVfwtGWxYosO
-	 C8h4QXrPiKBEvuhOlhRz+xjloJN8QA/DS0yEqcn7axdSl2KtPAQfQ5WOJcyY1pLR0K
-	 MwBtHNvytP+xMurvZ9aPzcWPbGa/UHdV6dOl2EW2tKQw/HN0ILJZKU23wNav21Ooac
-	 Tn2VbTUBX00H2qkx4qTCdc9F5m2ST/Zw8lT4TP9F+0MvM1nCtkAY5yzQ9coNA2GDpq
-	 vSqBzEvABoEsUSws4lSopHmXZzsvIOWUKRv69Nt3lj7yqhiBeu8yUhki+8W0aq12uW
-	 9E14WZ0Ctip9A==
+	b=Br0ha1QpXqwMKwcmdQDHEhLQ+b5AXgdShari4FORwAhHpB1Q+5xxWm14OkfMH+Zd9
+	 5uUHqEuZy2u9EBSdBNcO1Apzw3YL2h/SkBoyFaqhjDK7X3cs3IJyzXCC6RWlGVUAAV
+	 59/lB2znS8XciH6+VMzumdHO6R5nHS3Ezhh/fwlHfRNz0iX+wYqoRr3GFryoS8eTfz
+	 DnlFl0Pg/K7xE+iSsZFWBsjCLqvBo/N77EP2sQW5bFqs56lGn7GjxGjeJVwKakPyrT
+	 5CSY2877ddmVdWcMClWotazIZpOMAvLBzUHmoJkKuztOo1BbyXe2D5t1F6IDTw20Y4
+	 d5QgEPl/XtRjQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 03816405AD;
-	Thu,  6 Aug 2026 13:23:02 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id BD0D9198
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:23:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3D7F9405AD;
+	Thu,  6 Aug 2026 13:23:18 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 23901282
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:23:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A241C405AD
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:23:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 214E860763
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:23:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0LLlFE3xRLhO for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 13:23:00 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0bdKsQp4ueCg for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 13:23:15 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
+ client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D35C4403A9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D35C4403A9
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D35C4403A9
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:22:59 +0000 (UTC)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-69c108fee7fso3244133a12.3
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:22:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786022578; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4AA73605EB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4AA73605EB
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4AA73605EB
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 13:23:15 +0000 (UTC)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-69fab5a852cso3117675a12.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 06:23:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786022593; cv=none;
  d=google.com; s=arc-20260327;
- b=hdE85AysNmxci53d3PdG+COAyc27fJKXjjdeON4WWepEOtSdQNCvDVVDB8E7HLLzgf
- k5lfVyiisJBc4xEyCJTImXOQcDcaL1Oj1OKY4YtlG+MQ//LhgNxLDc7O6AmkmBvzbSaD
- dk6G2ZI6gC3VtfMX2dD6axqTSjZNx6Y8dOjiRbEomV3FjdM9FQgEPJ7/czvxmSUJo7MG
- i1xZGsWlKyjyiABPzDKN6a6/25Oe0AzwAXCvyz2kTuoFBpOY+rpyKq8VkNKCNXsTxugU
- Oy0JDBDjQpZ7XuFnDLbep5NBsBF67SSXos7/zB88GB1CPUo15NMNGR7uUllCDzd8gPU9
- pRaA==
+ b=rgcN9/VgjVvaYATFsgc18eTTUWLHSlqCRGbkwHwSY5ci5RME5WCkDPmtoqTUQyXpkY
+ NNVlizhd0bIJdnNX+kUNkt0Ye3KQp0BE6vWTI3UZWN5ugb+iWr6yKKuuF+72ar1/B4EO
+ fO7yj/gNzZFtMFWbiJW9bgQ9DSw3dtRhVhK7mI39MAjPP5U3chh0yxr48d6n2Jkg6IU7
+ jovYk7A17+3TSKR3yADOe/yVdLchB6at/8aD4V0BpIdGInRHvJ4qEgXx9OxuRVpkJndb
+ REhLMKfIkoIJcG3LK+ncHwbC/RgNhTWb8WE9dAgC2ne87psdIKBWuS6wj3Lx+wOjDeTv
+ Fd1Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=taxpDAeKq3b14TcnrJKrHwBdmml5nLBGNuW8AUTOogQ=;
- fh=7xxvTH2sQtJt5Ay+3iwadnldSn0Fw9o87gYzUPDaOIA=;
- b=H8/SykpRJY9Nhvo4Zq7Lw9waiBW0L/1/sg0KK81DlE4GNvOAwze4LPjLYxEv+VY7vo
- aCDYlx6rVPUFExjtyo4lPXCwd9c366/pNQ3M29n56KEonKqNWps5tDzu3SvZFoHx0H5Y
- /bP/C7vVMsOKq0jw+ghAchbceeqimBm47x2UxHAk2HiCh406VzTB0RVypXsk3HxJnJsg
- BF5rzbO+s1977y9tLYHbAMW0sS6dITQPWIPEG5MyT/PKJn7Gwhi5abGJ3olppJx/cUKU
- QUVR0Nw/7xnwB7TOFqfYrF7TYMlw/S6qf7AP+298fPH2CSr54LxEPzOy37AWCOhOk8Qs
- 4xrA==; darn=lists.u-boot-project.org
+ bh=fMSB8vj0wMd2ILw1oOE9IO1sow654wqDuzLJbz6Qf7M=;
+ fh=glD4piGlNxos0EA+GWLb7GfG3JXAKCSur0VU4kkUAHk=;
+ b=GdxDvG3kYkr2oU2HZ02V4Mzpg/pMUe2Xz/p2Yai3vXIkP7hsG3lVtfhCqC8aVXjdtZ
+ L5RFFsuxJCidxJQtLQ3LMcmK937+xHs7qJlcIggvdZMCRUr3ziaionO8TVmwODpOTUDs
+ n2tGFjaDI93J0Izf7Ce6erXz+h4MLaYDaQSlP7a8UfQqMGC6VKywE0RNcec+GPJgAKJK
+ sk7ohXKH4rnfxxmfYWNi7CD7y6YYSUnpWYbiaKRSGVuxsRM7gtc4cSjVZYdWO58LuwBF
+ vBQJ6pCz/sz4dTp6h0suOnv8gXlRE642xYlJc19G+FF3zJCT2UyO5KFfuAUyDjSVjn8W
+ A+FQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786022578; x=1786627378;
+ d=1e100.net; s=20251104; t=1786022593; x=1786627393;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=taxpDAeKq3b14TcnrJKrHwBdmml5nLBGNuW8AUTOogQ=;
- b=OPvfd6OTGyeZK2okwdD5dPjE+MI2svJmoIEtTjEdUVKKUY4wqMx4TB7Xa6erQeoBW2
- uiXPkX2K6Ojn0pOAJyQ3Hx0CXXABG3X8XWLdM9zSIiNAfi9v6B2al8LsoCc26VnJCZpS
- NI9RWEQfLTFztcL+s2arcdnxIIiGUeWvG8hchzNaoVKW7b0QwFhzErqjkSy6hgfrmlMY
- jT2v3cfb+QOH8n8sHnGWf35HiTzmT+8fV6A4Mx+lY/FXsKeL6uU+9KGRat5wqS64A1iz
- qnvqFoLAerENC4F4XFUQmXWPy/P2NSS+5a+5ijiuKLkBK4hpwR3tubesOmel7OOB46OC
- gJMA==
-X-Gm-Message-State: AOJu0YzYcg8rcM1wS26dFmh+6jbND40AE4EMRACktEU6uO/zUmryZaf0
- VOud7pNjx6vBKs9r4ePVGxAYfRoapS3/zWzgAdO1YLXmT2+uKIzMqWC23ZP+YN9nIOeTsvfEG1S
- UJCoX2Myh1F2f54XccKvo6eOt3JbnMql/eMqZVV3O
-X-Gm-Gg: AR+sD12wryGZnxzZz8sBhoD8G3xWNbE4Ibhy97RTxdcIXREdr2vQwxJMpeM919smcMi
- rOYsHqfiJT9WcqdmxlTNJL1qhNi+/4br3HnkjBps4TXuhb3XDRyssGl5s4ttR7AkVpg56u1Pv3K
- bEukyNbfF+kTcsrvMbmO3TyYOPfnzY4q4tzlkRRLMFhi5j4U8gmjXGAnCAdjjfTPcCX732DEymb
- H9IaR48w0FHKIhiqiv1TGVNfQWFwX3G7Uxl5M3tCfe77VNIOGtNzQqNjZuBixAVnOtp5oJZpmz1
- rm5c6rt99U51OHurSsuLwbvxA3fjVa9AAvnsoh/nDFg=
-X-Received: by 2002:a05:6402:324d:b0:69f:e3cd:5b0d with SMTP id
- 4fb4d7f45d1cf-6a14f284f6dmr6497792a12.19.1786022577869; Thu, 06 Aug 2026
- 06:22:57 -0700 (PDT)
+ bh=fMSB8vj0wMd2ILw1oOE9IO1sow654wqDuzLJbz6Qf7M=;
+ b=daLwf2+hsMoArhnwdzEOuy43MZh2EUpeKWXhbR7I4bD8UtAEWUtmcHWW9g9BHEFCf/
+ iZp6SVatimxlzSwiMHeTXKGo1LTn9kIxSa8PmGnhs1Z0R8a2gswbdB9/CaKpnMPouHCm
+ LHIZLsJBeOZnJ09JEvEvkUkxeQiwb67B9iuKwHMcVGG+WYGrZRpIiZmlnifOxzOtntG2
+ x9zb9cUlQlGTQu3u91gJkVoXB5IeIhh+a2D/2WEWIrk4SAItWIct9GKXkA2UFUsOkEe7
+ Fj+2CsowzY3NlqH3NpIDnvBTdPYzIjbuLEl5FsL1Pim3NQVgdrnENc4FKsR4FN+Bi5BD
+ K17Q==
+X-Gm-Message-State: AOJu0YyNp0c8hwd8CqTZEWlvbN7aRg6PNJCEe0h3i/Wu8M5OY+CrWyUY
+ Wb0sPMxLQE5RIhU6wMdwxgHu2v45TaAMj6PtE9tQHFBK1bGo8JV3+NmNO6vDWTob1rFHtj4n8Iy
+ vl1LPDyBbbw7Sr7frPE/Sk8/jYoKqSadEIeKYZ3TR
+X-Gm-Gg: AR+sD10HXVN34OvHAuuk5cD87xTTVfWdS7XAIQXkY7bjNFfi35LdibGFpI/FHTpWEuP
+ jf9zeTudrR/27ISML2/zHkw8IjZJpVeqgrv/w8tuKGsQGad1mLIoceI4ilu565WXJKy1WT8FNrz
+ hsWb3fSCemDGL4A/exQPQZZNgKRYyLbOcQHqLQ2ihiyzEZEDrDxsOZXGxdjCU4xtqo8m216XroA
+ Od1EVDEYnih2rSmYu/VkG4fVt66y72t5hZ4pmVexD8hVmD3RZDbb9SlfFDk3DZaqgt9sSFqUGNb
+ RdeA9wcIpWIZHlvSgMNPcqjs2zDiUvFZmatxvFcEW7nQ
+X-Received: by 2002:a05:6402:518f:b0:6a1:8ec3:766d with SMTP id
+ 4fb4d7f45d1cf-6a1b4bad1f5mr718953a12.19.1786022593177; Thu, 06 Aug 2026
+ 06:23:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260730155119.3328020-1-mehmet.fide@gmail.com>
- <20260730155119.3328020-3-mehmet.fide@gmail.com>
-In-Reply-To: <20260730155119.3328020-3-mehmet.fide@gmail.com>
+References: <20260806103720.1026454-1-aristo.chen@canonical.com>
+ <20260806103720.1026454-2-aristo.chen@canonical.com>
+In-Reply-To: <20260806103720.1026454-2-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Aug 2026 07:22:45 -0600
-X-Gm-Features: AUfX_mzRrS4z-mjZERXLGGPbS57AGVDTzVtShPCynLV2LNZM6UvLMoxG6MPoEuU
-Message-ID: <CAFLszThkdc_SOq5LY8d2cgFDYr6d6oMJGU0hoySAfF1=ahPwXg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] test: cmd: add a test for bootd
-To: mehmet.fide@gmail.com
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Mehmet Fide <mehmet.fide@screeningeagle.com>
+Date: Thu, 6 Aug 2026 07:22:58 -0600
+X-Gm-Features: AUfX_mzAQfTssZ3sTHF_9dtqmyEGlbSpLRi7Renq9ElANmVtNaTaRhOckelyzv4
+Message-ID: <CAFLszTiGOfixhO=dO7XtF8yXF4bXRnYghHZx1n6y39UpwhKKXw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite
+ decompression
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.u-boot-project.org, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786022578; x=1786627378;
+ d=chromium.org; s=google; t=1786022593; x=1786627393;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=taxpDAeKq3b14TcnrJKrHwBdmml5nLBGNuW8AUTOogQ=;
- b=WBv8e6xWHxL8M3GxVh5GFd1zDQca1FXbdrTsI7yv8L1rSJTriEO2cIF2KN7lHl1Szl
- xoI/JMdpA6XXswB5/LxHH8Z9cqgZJK7aNvPkok207hsJ8JDoN2H+m4eK//eenFCNKdyD
- 9/WqIKiZBqrqUPXeqlwp4/vnpgnPbu5bo5Nrg=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=fMSB8vj0wMd2ILw1oOE9IO1sow654wqDuzLJbz6Qf7M=;
+ b=XpYJPiCkOtY/0lpbKqbtR1Mb1549aAkP1hORHkiedbHqrbaeUaEaEIZ2Cml7W55A1c
+ QZ/41TbKF77ni8A/NTOlfVBSJ9+nbbft92DOVHQycWLHi1G+fShmT2ZTDP4kxqtxxsgP
+ xQmL5JspO/IK3OMb0BbRHHFj7ZQzpbLl6clYE=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=WBv8e6xW
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=XpYJPiCk
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,73 +143,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Mehmet,
-
-On 2026-07-30T15:51:17, Mehmet Fide <mehmet.fide@gmail.com> wrote:
-> test: cmd: add a test for bootd
+On 2026-08-06T10:36:59, Aristo Chen <aristo.chen@canonical.com> wrote:
+> gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite decompression
 >
-> There is no test for the bootd command. Add one to the cmd suite that
-> covers the documented behaviour: bootd and its "boot" alias run the
-> command held in the bootcmd environment variable, and the return value
-> of bootd is the one of that command.
+> The chunked decompression loop in gzwrite() treats any inflate()
+> return value other than Z_OK and Z_STREAM_END as a fatal error. When
+> the current input chunk happens to be exhausted at exactly the same
+> time as the write buffer fills up, the inner loop calls inflate()
+> again with avail_in == 0. No forward progress is possible in that
+> state, so inflate() returns Z_BUF_ERROR and gzwrite() bails out:
 >
-> Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+>   Error: inflate() returned -5
 >
-> test/cmd/Makefile |  3 +++
->  test/cmd/bootd.c  | 35 +++++++++++++++++++++++++++++++++++
->  2 files changed, 38 insertions(+)
+> Per the zlib documentation, Z_BUF_ERROR is not fatal and only means
+> that no progress was possible; the call should be repeated once more
+> input is available. The reference implementation in zlib
+> examples/zpipe.c continues in this exact situation.
+>
+> The failure is data dependent: it needs a stream position where the
+> consumed input and produced output line up with both the chunk and
+> the write buffer boundary at once, and the inflate side must have no
+> buffered output. That is most likely with incompressible input, where
+> deflate emits stored blocks and inflate holds no lookahead bits. This
+> is how dm_test_cmd_zip_gzwrite occasionally fails in sandbox64 CI on
+> random data with gzwrite_chunk = SZ_1M + 1, stopping at a multiple of
+> the 1 MiB write buffer:
+>
+>   12582912/16777216
+>   Error: inflate() returned -5
+>
+> Detect this case and let the outer loop refill the input chunk
+> instead of failing.
+>
+> On sandbox64, the random data dm_test_cmd_zip_gzwrite test failed
+> 17 out of 2000 runs (about 1 percent) without this fix, every time
+> with the same signature as the CI flake, and passed 2000 out of 2000
+> runs with it.
+>
+> Fixes: 58e523fedf48 ("gunzip: Implement chunked decompression")
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+>
+> lib/gunzip.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 
-> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-> @@ -17,6 +17,9 @@ ifdef CONFIG_CONSOLE_RECORD
->  obj-$(CONFIG_CMD_ACPI) += acpi.o
->  endif
->  obj-$(CONFIG_CMD_BDI) += bdinfo.o
-> +ifdef CONFIG_CONSOLE_RECORD
-> +obj-$(CONFIG_CMD_BOOTD) += bootd.o
-> +endif
-
-The CONFIG_CONSOLE_RECORD ifdef is not needed. UTF_CONSOLE means the
-runner skips the test when console recording is unavailable, and
-bdinfo.o just above has no such guard. Please add
-'obj-$(CONFIG_CMD_BOOTD) += bootd.o' next to the bdinfo line.
-
-> diff --git a/test/cmd/bootd.c b/test/cmd/bootd.c
-> @@ -0,0 +1,35 @@
-> +     /* the return value is the one of the command in bootcmd */
-> +     ut_assertok(env_set("bootcmd", "false"));
-> +     ut_asserteq(1, run_command("bootd", 0));
-> +     ut_assert_console_end();
-
-'false' is a hush builtin, so this leg only works when the sandbox
-build uses that parser. Please either note the assumption in a comment
-or pick something that does not depend on the shell.
-
-> diff --git a/test/cmd/bootd.c b/test/cmd/bootd.c
-> @@ -0,0 +1,35 @@
-> +static int cmd_bootd_test(struct unit_test_state *uts)
-> +{
-> +     ut_assertok(env_set("bootcmd", "echo hello bootd"));
-
-The test clobbers 'bootcmd' and unsets it at the end without
-preserving the previous value. Please save it with env_get() and
-restore it in cleanup, so a later test that relies on the environment
-is not affected by ordering.
-
-> diff --git a/test/cmd/bootd.c b/test/cmd/bootd.c
-> @@ -0,0 +1,35 @@
-> +     ut_assertok(env_set("bootcmd", NULL));
-> +
-> +     return 0;
-> +}
-> +CMD_TEST(cmd_bootd_test, UTF_CONSOLE);
-
-The cover letter mentions the recursion guard in cmd_process() never
-fires on sandbox, so I won't ask for a test of that here, but it would
-be nice to assert that do_bootd() itself, when invoked with
-CMD_FLAG_BOOTD and bootcmd='bootd', does not recurse - that part of
-the guard lives in the code you moved, and you can exercise it
-directly with cmd_process_error() or by calling do_bootd() with the
-flag set. What do you think?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
