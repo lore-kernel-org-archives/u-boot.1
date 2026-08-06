@@ -1,176 +1,129 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5159C55ABF
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 08:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50E92C561E6
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 09:27:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3B9A380D1F;
-	Thu,  6 Aug 2026 08:17:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7820660763;
+	Thu,  6 Aug 2026 09:27:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z-hdTFPxG-OT; Thu,  6 Aug 2026 08:17:42 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4-_hcrRALDMB; Thu,  6 Aug 2026 09:27:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6677680D0B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 00583606E1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786004262;
-	bh=BehNlAlyreKniyljDgFCbtYlB62o7FncfL69+N9zZSA=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=i9EuDmY1a2lwTZMbWwLfditQDjKB0vjhyNZ44cNC5jzQMJSy62RX93CCdIg+HtDpx
-	 +m6tvDpIDwXW2xQlMRgp6OhwmY0eTMCOAc16tF0zPgPw61ZRc4YGbRxpPvnvno3P0X
-	 cA9Er0IlIfR5NLdyYvtGKvaol0FJn+lWt7S3h2ado8j02v1WXPU4vcuU3RbbsdQjTa
-	 oUe4SuxqeFoTk/lw5gCfy6aho5aikEIJlwR69bZMBLPnfkwj8iU5kdd0jfY7Uc0yov
-	 gOIdDIZB6bu0pWMdsud10HJg71aIZF5K6WUJ5KiHbNzqeDncgbbdrjqnqX9fs1lJcl
-	 LooDWYBny4V/Q==
+	d=lists.u-boot-project.org ; s=default; t=1786008440;
+	bh=x+WTJ5Cun1s9ytueasFrlyJ85RlSey4OOEyTetsag3E=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=xy/PAv6qHc5wKzSF9SWSBQSzeek4pjMcT5Qoa/EzTX/1pejzK9Ofd2zpAzz282KSA
+	 dNjS90Rx8gQV5PdN7o0Qwt/1Bnb2LjvlSpozrdyuEE8tI12BopnV2STjml90CHc+xT
+	 s+iGHy1LmNW7Q6b98lbLBIMNg/VEzGidtkscnKaLcDVoN9qjD/B00yMoT/mctRlOt4
+	 pkXrIBYdpV8nopAdMJYw0ZuC1YYEkH4uqPs78AH79DXqv2fGrVxrwNMjJDywjyydHU
+	 JDninUzyzKp8a7ZZuCCWRhEFB4omhdEmCAvmgnLzgGaFWaKoo8fGG/o9S25rx/k7ZV
+	 Fk6sPxNJmtOdA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6677680D0B;
-	Thu,  6 Aug 2026 08:17:42 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id DD28D218
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 08:17:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 00583606E1;
+	Thu,  6 Aug 2026 09:27:19 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 00670194
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id DA38A80D0B
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 08:17:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D55A9606E3
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CkZJrY4hC4V0 for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 08:17:40 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ciz1M2G2qV42 for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 09:27:17 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
- envelope-from=maarten.brock@sttls.nl; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org C227C80D05
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C227C80D05
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C227C80D05
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 08:17:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sNRRDbqEGxVUDG0g0NFxIzdrP9rxdz2Z9bCzfcOqrmwgYN5OCQ5pwNiaAR/VcbYKO6BP2yS5jN9o8Qqtz/3qyXkOF53C7d9qHJp6GjyhAaJoGBbme/UiDmMB3F3AovAYiOsEVNi9iW8Q/B8p9Jq/5r0bifLH6JrNEazhWIRZerw7fu0tEbAp3JsN0rzCjxPeNbJA2kelkrmCqQu41hKeOCJDrJeY55W1Hn+IGvvTaE5S3x3W471wUXYqTzFHbl1jq3Q+o98iCFZceHUB3QRlOsUzQoYMNNbWrwwQeSFRzzHuok28HB5hX+hLqaWlyqZrK58GctyLpbIDZ2Gu8z2DdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BehNlAlyreKniyljDgFCbtYlB62o7FncfL69+N9zZSA=;
- b=MvAaYGU6qnk/0O1A4wjylRingY4z2JXp5sO+U0csKjaWf292mHYWvsQsq+IAFM/eDf7+F2S1hUGU6ZOm6Qk3gDvFP97P5IChdO5GeuSDAOEAcRj04QE/BF/OQb7q3oa6Aj79lzqIRCUVcodDHDVtpW25dK8e/c2sxN8B7sO4ew5PfNB5PhNxbtL4cm4EGDj7HbQMhpVScnx7/kNcAnxKgy5iIFxF/YhQPv8YC/4AXBrwNlfN1yfOUSQZNYLazH61RnVdpNDbDK1OhZScWQupWPpUhARhbgd345YjIoNzjy2t8ORT1gvV7bzMklFjiP00wGH+an59c2FBtC004cxSTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 20.93.157.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=sttls.nl; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=sttls.nl; dkim=none (message
- not signed); arc=none (0)
-Received: from AS9PR06CA0588.eurprd06.prod.outlook.com (2603:10a6:20b:486::28)
- by PR3PR05MB6923.eurprd05.prod.outlook.com (2603:10a6:102:68::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.19; Thu, 6 Aug
- 2026 08:17:33 +0000
-Received: from AM3PEPF0000A78D.eurprd04.prod.outlook.com
- (2603:10a6:20b:486:cafe::4d) by AS9PR06CA0588.outlook.office365.com
- (2603:10a6:20b:486::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.21 via Frontend Transport; Thu, 6
- Aug 2026 08:17:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.93.157.195)
- smtp.mailfrom=sttls.nl; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=sttls.nl;
-Received-SPF: Pass (protection.outlook.com: domain of sttls.nl designates
- 20.93.157.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=20.93.157.195; helo=westeu11-emailsignatures-cloud.codetwo.com;
- pr=C
-Received: from westeu11-emailsignatures-cloud.codetwo.com (20.93.157.195) by
- AM3PEPF0000A78D.mail.protection.outlook.com (10.167.16.116) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Thu, 6 Aug 2026 08:17:33 +0000
-Received: from DB6PR07CU003.outbound.protection.outlook.com (40.93.64.92) by
- westeu11-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12)
- via SMTP; Thu, 06 Aug 2026 08:17:32 +0000
-Received: from GV2PR05MB11941.eurprd05.prod.outlook.com
- (2603:10a6:150:2cf::21) by AS8PR05MB10253.eurprd05.prod.outlook.com
- (2603:10a6:20b:613::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.20; Thu, 6 Aug
- 2026 08:17:29 +0000
-Received: from GV2PR05MB11941.eurprd05.prod.outlook.com
- ([fe80::86e3:136c:737e:e29a]) by GV2PR05MB11941.eurprd05.prod.outlook.com
- ([fe80::86e3:136c:737e:e29a%6]) with mapi id 15.21.0292.019; Thu, 6 Aug 2026
- 08:17:29 +0000
-From: Maarten Brock <Maarten.Brock@sttls.nl>
-To: Kumara Bhimeswararao Matsa <bhimesh.matsa@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-CC: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
-Subject: RE: [PATCH v3] power: regulator: tps65219: Fix LDO selector boundaries
-Thread-Topic: [PATCH v3] power: regulator: tps65219: Fix LDO selector
- boundaries
-Thread-Index: AQHdJUrXCknxtvvfaUGJx6hPZeIOHraQrFqQ
-Date: Thu, 6 Aug 2026 08:17:29 +0000
-Message-ID: <GV2PR05MB119410BC934202527D72F93C483D22@GV2PR05MB11941.eurprd05.prod.outlook.com>
-References: <20260731013643.28244-1-bhimesh.matsa@gmail.com>
- <20260806005803.5998-1-bhimesh.matsa@gmail.com>
-In-Reply-To: <20260806005803.5998-1-bhimesh.matsa@gmail.com>
-Accept-Language: en-US, nl-NL
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=sttls.nl;
-x-ms-traffictypediagnostic: GV2PR05MB11941:EE_|AS8PR05MB10253:EE_|AM3PEPF0000A78D:EE_|PR3PR05MB6923:EE_
-X-MS-Office365-Filtering-Correlation-Id: 21ecba45-c8fc-4cf1-6377-08def3932a9a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|366016|6133799003|56012099006|4143699003|10067099003|18002099003|22082099003|38070700021;
-X-Microsoft-Antispam-Message-Info-Original: QG34TnRqaoEZZBOJ4x40FTl3IWILfaulP/HZcNgxux1mhEaSUQKNN7J6ia7YFRTIXlSix75bwDyFfj+WNAYtVgvNwW3YISPlzS2yMGvog4PoLaVyM98vtnH3iQXxPzRMxLBun5qE7Xb08dbfIIApj3oVSDXiR55TmTmvxEb7+1I/JnJeIAg7mTR7QilHmWy4BiSA+5LOlFEQF5NNwVzPnU+Ii3DIOFCp3INJ/xo3S95fogoLcIDmSuwXXKCyMBG20s0E2yCTFVV3qQSfPK+wDFRLE/ZaQsywfuzh4Ok0zlI8hVZPy3LE9+ZzJ0aKeridwu4PFkiuDxllZiaUhVReXqJ+33+uj/BewD5Mw4vQwBV6yyfhW2cdVmzj3iUatnmcYzPWgoegfcD8XkRKCBawYa7Kvd7DnPOIGLJjGgoq+fM9ZTRSOlUdI8aOwXja83HxKz0wgXuTQrXWrrlW1g9pSfNLMC1v4s36dGvYOj8A0Na+7/KIGaGoAgDlzj7j33G0iE9jyegP9Ws/1Y9VCRJv9Li6DtPfEfrUFnOA/6+mjpp3yg/doNMx61MgFXlEQWLMrqcdR+k8pZroQYPXHQGtVoYMpmCdXi1/r6HnuN7PAU+eLg9jgiAEoS8bS6MzPj+NKcDzDve6H3HPnKojqLCrXDzakdNQhTiT6sYzCY59jj5gYwiOe+De5E4R0RHyIP+qkNZ8mV/sPLKvDJrR1jNekvSGelCxnooiBs87Z9UHfY0=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:GV2PR05MB11941.eurprd05.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(6133799003)(56012099006)(4143699003)(10067099003)(18002099003)(22082099003)(38070700021);
- DIR:OUT; SFP:1102; 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org A9380606E1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A9380606E1
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A9380606E1
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 09:27:15 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-47f703a9d05so1275288f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 02:27:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786008433; x=1786613233;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=x+WTJ5Cun1s9ytueasFrlyJ85RlSey4OOEyTetsag3E=;
+ b=ANmPlGUH9XiOsnZNB9p0wL0WfkWjDdzNGaU3WLTqOIygcLX1aadwfjWngYPUSn/Eae
+ pyNGuQGWIc5R3Cecdtpk3zXSLHj+fRcU9Cqb5DkN5mEQJbPXJthUXXdSH3yJ17LmGknf
+ Kxkd4JznWcK/uENWQPrP8kwSh3qX+Q7TcP4UZF4PgAXBsgeUqAFyreZRXpfFd3ZdHO6c
+ oW7UUMDwJqeOv4BpItqqatHYaFFz0uRKkVCN9fPzNl48JBLQLDOk5xtM27VKQZbrX+v+
+ z2BszpIEUYQD2VIErEAGtMyR5OaYlLT87z6Y0PqDGHw/7ntvhY0qOLbKGWYn6J0D43mS
+ Iv1A==
+X-Gm-Message-State: AOJu0YwEWuPtETwH+YCYkmnqYDBkW81xY+b4cFctxWPgty/NGryy2r4Q
+ W1TzqzWQVHIPmkYC4N6cmVGTO8Fty41k7uKTQWMXl13wvLu2LEFzHQfqqfvvfuNlGOQ=
+X-Gm-Gg: AR+sD100wXB+pYjSHdx3e9Jnd2WJV+yax5Qz0RJTKEYV5XaZLafKz9zoMAFe3eB9ILG
+ 4vn+txfdTeCAXfYGBettmwKlqwz+/2Jp04LVMtxEFV2J/bBPmdwsNKM89bp4mhSsjPB2k7KYIco
+ F6d19WNJDaZ/f9wQDHCZqssnCe8z3DUZlvCoW4MRKmIbmriCSUrVHGqMNvc167/704xQRjojU/e
+ fmjCq8mbR0BHK5nFvyTM9cDOJdEo0H6B+HvOY+PjApdJB5wlIE++WqusCspsHl2t2EJH8n/2S4a
+ gv5fmcPJKhtqpaITTrCFMvnxlkxzHxG13h3bPH9BSV1TZuWHXTrZkYO8xhViHUTRDOjZ1qD9M8Z
+ jqqBg2O+9isBbvsk24KB2N+mLh0q2c0ivx2j6T1+VE41Q9mcTkjD7g0F0K3j4SAe5ePTHw5KApZ
+ eebxrGHznsx7VawZ/VEqGlzrncQ/s5BS92FD3rC3nfoGfRIYkycyMaOf3oeOV57bxxJ1jnVQTFW
+ dnNflJagIn8gb7dx7Hoebnh5R6pUA/EqdhqOOAyha8XwhZrHkpIYCgXEu0OZYJWsJ8/HYHcYDpL
+ SrOOiSru3NB/xs6jdgoBgKd2Q7wzwgw93OtbVkRV5esKTA==
+X-Received: by 2002:adf:fe11:0:b0:47f:9441:51b5 with SMTP id
+ ffacd0b85a97d-47fec4e73a8mr18764070f8f.5.1786008433495; 
+ Thu, 06 Aug 2026 02:27:13 -0700 (PDT)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
+ [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47ff7b31975sm4147248f8f.33.2026.08.06.02.27.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Aug 2026 02:27:12 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH 0/6] video: mipi_dsi: add common {generic,dcs}_write_seq
+ helper macros
+Date: Thu, 06 Aug 2026 11:27:06 +0200
+Message-Id: <20260806-add_mipi_dsi_write_seq_helper_macros-v1-0-6b533788d0ac@baylibre.com>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: kf/tYYrz/wgMHBr4s0kUlg+8KkE7aeud6HAU9pXNi76pyoXFvtWqr/xB85IYw7nSq1grItlUw2iqt5r59zk3LS58BbRQ2MqazsYgFu0oBy6VyYYL1a+h5zpMGhRREv3DSHd4XDEZ+4n7tSBjXQzIKOX6C41CTxzYW46OLqtMo+d8OrTkzVLW68gXD5THWMBfGbUJKN+vLppgvZg0FZFFvLjYpQxhE/eGOW5/Q7/x9gZ/oNH9sNvShfsQnONhrtUZ+UptvRF1oVdVdabtrENp8kbPy+6S43so6K+ZNr1er1Hz+ZKyyCs0jETdhWt25vQv0vZye54u0nnniIEaldGlMQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR05MB10253
-X-CodeTwo-MessageID: 808a1c0c-7394-4979-8b4d-9f9c860cf732.20260806081732@westeu11-emailsignatures-cloud.codetwo.com
-X-CodeTwoProcessed: true
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM3PEPF0000A78D.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: ee6dbd3b-73e3-4be9-730c-08def393284d
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|23010399003|35042699022|14060799003|18002099003|22082099003|4143699003|6133799003|10067099003|56012099006;
-X-Microsoft-Antispam-Message-Info: DATHqzOGHi1gozkIxRmRThlzWFA3RuhZLlpUJQ4lBza160CwkJ4zInwXTjySRxr5m3iFI3ej28bEAG4W0WlTJIjAWg10XXWI8Fw1iBt2ZZJ7Z/q/azQHCgMSC72A3mZI/1CQSDcnCgpCy7YPFv1ZKzbntPviws/NNUwEPjw8GTI4shP4RZoSXNGfcO5I/x4gJHl3Cl3ogXeFzxH6Ac6pmW8zgsNy2Q4RcxEX4SqKXbG1WG0k1Gju8X04TH02yia4oJUTH6xrCvfOa1Lh29patgYaQ4/E3GFQwY5wowaeEJNnIev4D5KmM8h9vCWpImDcz2tZ1oqnXhHBK9N7/xMlOL4gdS0Vv/SpeLoAGtFROMsOIRILtjV777jU1GoD0ndMbPq0SS2pkjz8SZKwNRJ3I1qDQxa0LxWJmwxVSZiVnzEMzm9LxqECeuviX4Gj3VjdE7T9q29WHnNNiQPMFE7MGP6XYr9FN38DpmsUAOfe1fmYtgQ/496X4kaFg72J64yKSVAzJuSbLAMR6YHsUvCFsEGuBQzZoYLyvApvdj+fxkTXWTLT/VNgx8iYI+hMMgeiqv6S6phK+zZXe1qUMNIK1FyCF0cbbTiKyksOBD7lI1fOTwvUuccDpMWIP73NpYhchSZsvlYs8ly2A9uP8od/ZLVSQUQtvAofsXjFd2AdwQo8gGM/Q3V12EIzBwy3lWQ0ww+YyBte7W7nzzmO+M/PMQ==
-X-Forefront-Antispam-Report: CIP:20.93.157.195; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:westeu11-emailsignatures-cloud.codetwo.com;
- PTR:westeu11-emailsignatures-cloud.codetwo.com; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(23010399003)(35042699022)(14060799003)(18002099003)(22082099003)(4143699003)(6133799003)(10067099003)(56012099006);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: viIIstyGEDi7cHovmDH9M2+VkZBBaaSPW2Xv5JiW32aVX/O86TA8IfnhTlNTEdsN0WGxEDmr3dlxNFQttg4McBAYHY7c8zUVhA4r9ZCrbAD8G0NX6M4uJD1bz/YscUIt5A66tvS69uehsZujenESh7Oj+wSWi1FhaL7x+K5VgXVXNfVDIP2+FEviuLZVHvwoYsFCb4ew5YKOkHBUh5dB+dcN9UKpoJqbGuAiRRsFHm+2mw3JprxkpHnkOSJd6ohpuBAaPzo0m4lXD4UY5GYQI/uFHDEe8sgrdHPUFtplBl/4xaEBu9eyBsQN67mMRizhPADdZz22B7GvLwmTOBjQA9nN9A/L9hmlcsGCcPvoqn1+aiPzFT9OCmdo4GLt8Dtj8gvqgU4rA1Wwr+rQc/tDTIUFhH2e4VE1IeMVxlfYjsE+C4F2F+p3CWXf5WNdudBG
-X-OriginatorOrg: sttls.nl
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 08:17:33.3446 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21ecba45-c8fc-4cf1-6377-08def3932a9a
-X-MS-Exchange-CrossTenant-Id: 86583a9a-af49-4f90-b51f-a573c9641d6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=86583a9a-af49-4f90-b51f-a573c9641d6a; Ip=[20.93.157.195];
- Helo=[westeu11-emailsignatures-cloud.codetwo.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A78D.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR05MB6923
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNywrCMBBA0V8pszYQY6jir4gMeYx2xLbpTH1A6
+ b8bdXk29y6gJEwKx2YBoScrj0PFdtNA6sJwJcO5Gpx1rT3Y1oScsefCmJXxJTwTKk3Y0b2QYB+
+ SjGqij34X9zl4clBTRejC79/mdP5bH/FGaf62YV0/YXY+FogAAAA=
+X-Change-ID: 20260806-add_mipi_dsi_write_seq_helper_macros-b4b43b7da4e2
+To: u-boot@lists.u-boot-project.org
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Julien Stephan <jstephan@baylibre.com>, dlechner@baylibre.com
+X-Mailer: b4 0.15.2
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sttls.nl; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BehNlAlyreKniyljDgFCbtYlB62o7FncfL69+N9zZSA=;
- b=HCiOVWIfIee6ewTz25LBtLdx84fHaK2LrE/wg/KiWGD/Cg1nPQ97OiAGhQfq0/oAPJjINW2feya4JPicL8FDjo6vtYLBgjHtfNUgPgY7nqFRJuWQd04qeMmPaIdn+ntrJaiYN4GqkMW3jVvSqNZX7kzyhEwAS6gT9RwxjBWCdwSBQYWyimFZjX/Wknpl6XJIWjYE/AtF8WNifjOM0z3/z6qtvWIJMr/LstVaZD4oxkwSS7fIuCL4ZlDJHC1vJ4aRnLTcR3NPJKrApYe2vMSPmOojpFNIC4kdaZ12FV6BEgJEkqyfBmkBoWS+jFswZGMUcDkhs4wwNSTrrj0BRXK8ww==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=sttls.nl
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=baylibre.com; s=google; t=1786008433; x=1786613233;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=x+WTJ5Cun1s9ytueasFrlyJ85RlSey4OOEyTetsag3E=;
+ b=ebhjkfk81dGBZbFzt5VU71xZSeNlwUlybVSJoucYd0iU6bMiGn6EVscTyHBQgu1GJ7
+ 94ql6wDPNnmmKJtNakdV3hC+Yjqd6KWL+UAxfV81+76aVExxbUjqkR4vBDHFuA0QDxSO
+ satGdWTNUe8wI5ue9sSucN03iXg+yeoTLw9fYLMOau3m8ZJTPK/4ngAyUSE1gHwgZizO
+ s+2c/KK32To/rKrDEX9Pf3coVWThRnldSPgG+QZ3+RyT+LEfHlvls44EcbjHeVZmekaQ
+ lB1jd0nq/5KD1hxWISkQKD/vT3FD8KUjFmDLeTYdKu0QKdo+tV7fSCdwLVgF0jXTflgR
+ k5bw==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=sttls.nl header.i=@sttls.nl header.a=rsa-sha256
- header.s=selector1 header.b=HCiOVWIf
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=ebhjkfk8
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -185,42 +138,43 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBVLUJvb3QgPHUtYm9vdC1ib3Vu
-Y2VzQGxpc3RzLnUtYm9vdC1wcm9qZWN0Lm9yZz4gT24gQmVoYWxmIE9mIEt1bWFyYSBCaGltZXN3
-YXJhcmFvIE1hdHNhDQo+IFNlbnQ6IFRodXJzZGF5IDYgQXVndXN0IDIwMjYgMjo1OA0KPiBUbzog
-SmFlaG9vbiBDaHVuZyA8amg4MC5jaHVuZ0BzYW1zdW5nLmNvbT47IFBlbmcgRmFuIDxwZW5nLmZh
-bkBueHAuY29tPjsgdS1ib290QGxpc3RzLnUtYm9vdC1wcm9qZWN0Lm9yZw0KPiBDYzogVG9tIFJp
-bmkgPHRyaW5pQGtvbnN1bGtvLmNvbT47IE5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0Bs
-aW5hcm8ub3JnPjsgS3VtYXJhIEJoaW1lc3dhcmFyYW8gTWF0c2ENCj4gPGJoaW1lc2gubWF0c2FA
-Z21haWwuY29tPg0KPiBTdWJqZWN0OiBbUEFUQ0ggdjNdIHBvd2VyOiByZWd1bGF0b3I6IHRwczY1
-MjE5OiBGaXggTERPIHNlbGVjdG9yIGJvdW5kYXJpZXMNCj4gDQo+IEFjY29yZGluZyB0byB0aGUg
-VFBTNjUyMTkgZGF0YXNoZWV0LCBzZWxlY3RvcnMgMHgzOCB0aHJvdWdoIDB4M2YNCj4gc2F0dXJh
-dGUgYXQgMy40IFYgZm9yIExETzEgYW5kIExETzIuDQo+IA0KPiBGb3IgTERPMyBhbmQgTERPNCwg
-c2VsZWN0b3JzIDB4MDAgdGhyb3VnaCAweDBjIHNhdHVyYXRlIGF0DQo+IDEuMiBWLCB3aGlsZSBz
-ZWxlY3RvcnMgMHgzNiB0aHJvdWdoIDB4M2Ygc2F0dXJhdGUgYXQgMy4zIFYuDQo+IA0KPiBUaGUg
-ZHJpdmVyIGN1cnJlbnRseSB1c2VzIDB4NTYsIDB4MTIsIGFuZCAweDU0IGFzIHNlbGVjdG9yIGJv
-dW5kYXJ5DQo+IHZhbHVlcy4gVGhlc2UgdmFsdWVzIGRvIG5vdCBtYXRjaCB0aGUgc2VsZWN0b3Ig
-Ym91bmRhcmllcyBkZWZpbmVkIGJ5DQo+IHRoZSBkYXRhc2hlZXQuDQo+IA0KPiBVc2UgdGhlIGNv
-cnJlY3Qgc2VsZWN0b3IgYm91bmRhcnkgdmFsdWVzIG9mIDB4MzgsIDB4MGMsIGFuZCAweDM2DQo+
-IGZvciBpbnRlcnBvbGF0aW9uLg0KPiANCj4gRml4ZXM6IGI1Y2ZhMGM3Y2E0ZiAoInBvd2VyOiBh
-ZGQgZHJpdmVyIGZvciB0aGUgVFBTNjUyMTkgUE1JQyIpDQo+IFNpZ25lZC1vZmYtYnk6IEt1bWFy
-YSBCaGltZXN3YXJhcmFvIE1hdHNhIDxiaGltZXNoLm1hdHNhQGdtYWlsLmNvbT4NCj4gLS0tDQo+
-ICBpbmNsdWRlL3Bvd2VyL3RwczY1MjE5LmggfCA2ICsrKy0tLQ0KPiAgMSBmaWxlIGNoYW5nZWQs
-IDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9pbmNs
-dWRlL3Bvd2VyL3RwczY1MjE5LmggYi9pbmNsdWRlL3Bvd2VyL3RwczY1MjE5LmgNCj4gaW5kZXgg
-ZTg3ODBhZjJkODEuLmMzMTE0ZjI2ZTFkIDEwMDY0NA0KPiAtLS0gYS9pbmNsdWRlL3Bvd2VyL3Rw
-czY1MjE5LmgNCj4gKysrIGIvaW5jbHVkZS9wb3dlci90cHM2NTIxOS5oDQo+IEBAIC00NywxMCAr
-NDcsMTAgQEANCj4gICNkZWZpbmUgVFBTNjUyMTlfTERPMTJfVk9MVF9NSU4JCSA2MDAwMDANCj4g
-ICNkZWZpbmUgVFBTNjUyMTlfTERPMTJfVk9MVF9NQVgJCTM0MDAwMDANCj4gICNkZWZpbmUgVFBT
-NjUyMTlfTERPMTJfVk9MVF9SRUdfTUlOCTANCj4gLSNkZWZpbmUgVFBTNjUyMTlfTERPMTJfVk9M
-VF9SRUdfTUFYCTB4NTYNCj4gKyNkZWZpbmUgVFBTNjUyMTlfTERPMTJfVk9MVF9SRUdfTUFYCTB4
-MzgNCj4gICNkZWZpbmUgVFBTNjUyMTlfTERPMzRfVk9MVF9NSU4JCTEyMDAwMDANCj4gICNkZWZp
-bmUgVFBTNjUyMTlfTERPMzRfVk9MVF9NQVgJCTMzMDAwMDANCj4gLSNkZWZpbmUgVFBTNjUyMTlf
-TERPMzRfVk9MVF9SRUdfTUlOCTB4MTINCj4gLSNkZWZpbmUgVFBTNjUyMTlfTERPMzRfVk9MVF9S
-RUdfTUFYCTB4NTQNCj4gKyNkZWZpbmUgVFBTNjUyMTlfTERPMzRfVk9MVF9SRUdfTUlOCTB4MGMN
-Cj4gKyNkZWZpbmUgVFBTNjUyMTlfTERPMzRfVk9MVF9SRUdfTUFYCTB4MzYNCg0KSSBvbmx5IG5v
-dyBzZWUgdGhhdCB0aGUgdmFsdWVzIHdlcmUgY29ycmVjdCBpZiBpbnRlcnByZXRlZCBhcyBkZWNp
-bWFsIGRlc3BpdGUgdGhlIDB4IHByZWZpeC4NCkxHVE0NCj4gDQo+ICAjZW5kaWYgLyogVFBTNjUy
-MTlfSCAqLw0KPiANCj4gYmFzZS1jb21taXQ6IDEwMGUxMmVhNzhjNzMwNzFiOTcxMGYwOGIzMmZk
-NDU5MDAxOTI2NmYNCj4gLS0NCj4gMi40My4wDQoNCkFja2VkLWJ5OiBNYWFydGVuIEJyb2NrIDxt
-YWFydGVuLmJyb2NrQHN0dGxzLm5sPg0KDQo=
+Several panel drivers define their own private write-seq macro,
+which is a private copy of the same wrapper around
+mipi_dsi_dcs_write_buffer. The Kernel provides mipi_dsi_generic_write_seq
+and mipi_dsi_dcs_write_seq for this exact purpose.
+
+Add both macros to mipi_dsi.h so drivers ported from the Kernel can use
+them directly, and convert the five drivers that define a local copy
+(hitachi-tx10d07vm0baa, lg-lh400wv3-sd04, mot-panel, renesas-r69328 and
+himax-hx8394) to the common one, removing the duplication.
+
+The drivers keep using the dcs variant (mipi_dsi_dcs_write_seq) to match
+their previous behaviour.
+
+No functional changes intended.
+
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+Julien Stephan (6):
+      mipi_dsi: add mipi_dsi_{generic/dcs}_write_seq helper macros
+      video: panel: hitachi-tx10d07vm0baa: use common mipi_dsi_dcs_write_seq macro
+      video: panel: lg-lh400wv3-sd04: use common mipi_dsi_dcs_write_seq macro
+      video: panel: mot-panel: use common mipi_dsi_dcs_write_seq macro
+      video: panel: renesas-r69328: use common mipi_dsi_dcs_write_seq macro
+      video: panel: himax-hx8394: use common mipi_dsi_dcs_write_seq macro
+
+ drivers/video/himax-hx8394.c          |  86 ++++++++--------
+ drivers/video/hitachi-tx10d07vm0baa.c | 180 ++++++++++++++++------------------
+ drivers/video/lg-lh400wv3-sd04.c      |  58 +++++------
+ drivers/video/mot-panel.c             | 140 +++++++++++++-------------
+ drivers/video/renesas-r69328.c        |  69 ++++++-------
+ include/mipi_dsi.h                    |  17 ++++
+ 6 files changed, 261 insertions(+), 289 deletions(-)
+---
+base-commit: f562ed02aa7ae4dc2775d90d2e6c40bab82e2715
+change-id: 20260806-add_mipi_dsi_write_seq_helper_macros-b4b43b7da4e2
+
+Best regards,
+--  
+Julien Stephan <jstephan@baylibre.com>
+
