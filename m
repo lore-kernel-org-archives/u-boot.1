@@ -1,103 +1,191 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253FEC56205
-	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 16:02:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B4DC56205
+	for <u-boot@archiver.kernel.org>; Thu,  6 Aug 2026 16:12:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 11A074067B;
-	Thu,  6 Aug 2026 16:02:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 43FDF80E9C;
+	Thu,  6 Aug 2026 16:12:42 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GX1L85ds49uU; Thu,  6 Aug 2026 16:12:40 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6282080E93
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786032760;
+	bh=fvL6giPhPA3qduLXv5gQfei7vFbC1qMOTdtQdd0MWww=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=u1ZfdXpbObHMX0C9FHP+yc3DiNwv8OezuE5d1sIvtmmL19j5agPVvoKcMPBdFaUL5
+	 hAX1dvG/FU1TPm/Mtxw+UJAtd71MzM1gEtxpRMbjKjSj537gDnDa+zTHyFTWRXH2H8
+	 wQGsqNqiOmMYN2AbI1uJ+4UyLPFQ4hotIyOwQjcQAtEk0ZYMNAq54tThsoJJF41fZs
+	 f6BTdXLkZ8sY69jhKLio/sQEGLtlB82DCEAvr95CM7T01usA0kwhByz6dljBiRqwfO
+	 Z4e3k7B3B8oF7S9y+hjKRUbGlVpY+q1olJtOlwp82rKSJa7Y5PPj0jhuYnhbyC4G5w
+	 FyLotiGfAOiug==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6282080E93;
+	Thu,  6 Aug 2026 16:12:40 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B8D3D2B6
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:12:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9F3C1406C2
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:12:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DlixZMjFucKe; Thu,  6 Aug 2026 16:02:22 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2E2334067C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786032142;
-	bh=Ne80aSMGFBpbslNYiyDHwZ+fxjwQXjS4Gj/Nzfqi2dQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=LYFDzLxslfPScPeGYlyYdCgy7obr3j0piM9cVq//OhH8wW3OzxnjBe3+hmyxfoRt2
-	 ckx/W6ZZyvtYCRbHTrrV7qzsuZ4tak6U4awwV8XSek2d0n8db6msBbz700ZhsKHkbf
-	 OXUlkl6HRusZm76MoMtukpzGsODOtBZ/HBDywwcHaCkQaCjeiow8kEW9eH8kWxx71b
-	 2MNQJXyvnwH45jw2A5Ut+v+NLUVmssTRoY6kLFWUHQUgwIBU0xAx5uA68baREOsBzP
-	 H4hpAYJBuMZHIZF6lJZCYsrPTUsdkNFk/6Z70giDUwYyCLxB4/WCo9KhflIeM4iitH
-	 KVgTZes+J+8sw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2E2334067C;
-	Thu,  6 Aug 2026 16:02:22 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1CD0D392
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:02:21 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 024FC402A4
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:02:21 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QV-UmnICaf0n for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 16:02:20 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=165c=ga=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 49274400D8
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 49274400D8
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 49274400D8
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:02:18 +0000 (UTC)
-X-Forward-Email-ID: 6a74b0086cacfbe9118dd933
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.13.10
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <4f79f56f-3be0-4bc4-a9ab-598ec7b1a232@kwiboo.se>
-Date: Thu, 6 Aug 2026 18:02:13 +0200
+ id RbA_IG0-q4Kh for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 16:12:39 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org CF9674065D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF9674065D
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CF9674065D
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 16:12:38 +0000 (UTC)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 676EmkEf2808153
+ for <u-boot@lists.u-boot-project.org>; Thu, 6 Aug 2026 16:12:38 GMT
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvq732603-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 16:12:37 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2cfc52ddc55so30653915ad.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 09:12:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786032757; x=1786637557;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=fvL6giPhPA3qduLXv5gQfei7vFbC1qMOTdtQdd0MWww=;
+ b=UiO3EGQTIBH/PnDpkB+UquA6mhCDbyE24TCXVFXbRPmNcuqW0ApFhC+ZH4fCGq+eJf
+ XUX6f7BTYXxsgoRDCK0RdLiUNqvJcwvfV5/cq13ufAkWVSveWSV8/axP8ZdsGEOmx4nl
+ Yfvr5LD8h2aeHK8d+D+wb7cPuhvPRTEYLh0YwnfGZQYS5UJFTQ6N+zZUWcrbhOOvUQcR
+ G9xMg94JXdHBpywmrk2NeKgbwA8WfhpT405ls5MbkpK6aCXOCyGw0deWoudRL+AVxpRI
+ okNYrz2eiv5KtGOQGMpa8AkCVaOXKrPUfkjQocpDcafj/QmzM6wI6mYXjy1kJeFyuBQD
+ 8ZPQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpdAsQ7pJdeJoG0/+Up74UqSuk0GeRz8NYiNticmtzMGXakjDf3FC0phPDRcE/U1+B2MaPp7HE=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwZY4ZbddRU9MYpMSbRFBCkLeJKOkZ7rH5vMrXdRhP4LbmOvXSQ
+ rgbNDquyhMMPjZYEy1Jv1R5uD6C3Cvc3mcULSFHC+3Vbgns1vFW/TWetqvbmDpayzukBNYtv3qO
+ xHTC+j6H4fGOeU3YHqpYKZeChr1TG1sBzeArqyFVYfcfGdDAfqUwWhkXoMrKmJSDfe+wIJPv6B+
+ OFlUI=
+X-Gm-Gg: AR+sD10vVEvlQMULl9eqAa+rApXO9mbWluBPeJRdrXyZq0b6gNS79k4Lm0TrZUA/enh
+ LQKX8lGQiyzuXSUFbLUkrgBVNKyfNbxYko/XQqI+NhSoEA1qsnJTLOrybnTU3v+rIWRLCnpqRWW
+ y7jctRpRIyiGGwTxCABjx+IZLQHGH8hIB9AqMja7xCiBqChhBNMBnGS6FrXtapUSDblUFWf3a0e
+ TwjuP5Aas45GaXYQpWKmurDIGpqyxwWbWkFB9NtoikP/gDi5Rgh7acvDUHV2G23ropPYi62mUe3
+ +1sIv1VS43qPWldRoSC69JBwBC9CoI69WHO4VvVSRgYgXWjHJeZe9tX6tSCU+sm6nYOoGUbE1YH
+ abbZdhYgQcF91V24LUmVUhMQtK/X0+7b/9zffMVXRHGLsQXSlAFPsBmTt8OYYiWHCNsg5wlhZJG
+ z+iQq+VtpFFmOgdl4X9q+kkFgajrfz
+X-Received: by 2002:a17:903:faf:b0:2d0:8b28:51ab with SMTP id
+ d9443c01a7336-2d106a8aa6amr30653545ad.7.1786032757078; 
+ Thu, 06 Aug 2026 09:12:37 -0700 (PDT)
+X-Received: by 2002:a17:903:faf:b0:2d0:8b28:51ab with SMTP id
+ d9443c01a7336-2d106a8aa6amr30652935ad.7.1786032756616; 
+ Thu, 06 Aug 2026 09:12:36 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-31586777bcfsm43381878eec.21.2026.08.06.09.12.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Aug 2026 09:12:36 -0700 (PDT)
+Subject: [PATCH 0/7] qcom: qcs8300/monaco-evk: pinctrl, interconnect, RPMH
+ clock and reboot-mode support
+Date: Thu, 06 Aug 2026 21:42:17 +0530
+Message-Id: <20260806-b4-monaco-v1-0-8d7b4e2f4fe1@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] rockchip: mkimage: Split size_and_off and
- size_and_nimage
-To: Quentin Schulz <u-boot@0leil.net>, Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Xuhui Lin <xuhui.lin@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>
-References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
- <20260713-rk3576-boost-v1-1-9d23aa08f674@flipper.net>
- <521c648b-9941-4e95-b3e3-4ca69f6c4c6b@0leil.net>
- <df2d1736-1498-4620-91da-1faa0cdfa14e@kwiboo.se>
- <636c02a7-a7c5-473b-b5cf-2900fd1adae7@0leil.net>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <636c02a7-a7c5-473b-b5cf-2900fd1adae7@0leil.net>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGGydGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDCwNT3SQT3dz8vMTkfF0jM1MDw6Q082QLM2MloPqCotS0zAqwWdGxtbU
+ Aeem32FsAAAA=
+X-Change-ID: 20260805-b4-monaco-26501bf7c863
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
+ u-boot-qcom@groups.io
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Johan Jonker <jbx6244@gmail.com>, Luca Weiss <luca.weiss@fairphone.com>,
+ Biswapriyo Nath <nathbappai@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786032752; l=1868;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=XmnH83mePepMeLlVHvc6IEE7wpOVn46QDBjlUCV/un8=;
+ b=q1aUzR0HW6tjDSNsoJP1WMj7XvH7OjmnsGlt+39qPoxYeqMy7VEbqP2xDwRky75nth36Mx0GK
+ dls13jMJjHPB2OgYN2kzcnfkIirnPeFMtEuNiB5E9ryt5bk8Ug4spd6
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDEyNiBTYWx0ZWRfX2aGR5oKQ04s+
+ vPam0XMlcLZdch2DHLuWtAKW1hYrnQLfw2UDVdZbgPU8MsDG5ZgLbGCnSBdC/9ZFICbdjsZWScD
+ vUzaHjbPhJxNURnD3/ud0jQz0SPKQ+e9OEouE9vG8t8UgRTocxnoXyXeaNCD78w6k1xi3n2cKOt
+ NCIpx5CriDQCcCFbhjSXOE/BCZiR3oJnwcdiezDvwvYjKJQ+o4HV8dEnN7gs7SueVZMcaDdmeYI
+ uTb+n+Q4xUX7eZ786dJd7lE4NCjFGgqsea8HMKScqoVDObwSUxzhORRPgp1wnoOSB6vx/1doXry
+ JnOTMzZ9Y6wdBviYLqygXusyh1obtG85abue+yHp0SDYFQiqlGpMqChayeNv4fXFOTuuaWd+Kim
+ LlTEgzeUEXhilNN9r0fOZJ4VVHRU3/4OcntHBHXhE0Q+TjCmd/5oUORRw/JZgYHik/j0NbgJuB3
+ 7OpwOmhjYBjmK+ekr3Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDEyNiBTYWx0ZWRfXyy6Xl8hSv4Eg
+ Z+RydkLtZ5W4c1byINLQBlig7p/LpdLcEfxiWvgPhTUr2hWFp7msSD3ZavANXtPL3a5XcGrywbC
+ SpKFDNL1D4HE0ImdrRaXP8PWFruAZJg=
+X-Authority-Analysis: v=2.4 cv=EeH4hvmC c=1 sm=1 tr=0 ts=6a74b275 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=wmB8RBNAKKwTtG_2d0UA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-ORIG-GUID: eKPSvPA52t3wA1IhvO7T6m_y_sxjHHdj
+X-Proofpoint-GUID: eKPSvPA52t3wA1IhvO7T6m_y_sxjHHdj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-06_01,2026-08-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 suspectscore=0 adultscore=0 impostorscore=0
+ lowpriorityscore=0 spamscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060126
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kwiboo.se; 
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1786032138;
- bh=Ne80aSMGFBpbslNYiyDHwZ+fxjwQXjS4Gj/Nzfqi2dQ=;
- b=oRn1eEVCofOFBcNsSxej8hU+7DALyjKlUswWioI4n6fZkWFGvsbXbzS9N9OlgtvAEDtLv/Elz
- +B/PyZe+CCMgs7MWxlELPm4UkpSftBj4VHmc1ITP4u6ermHgsDnRoFq9+e8UaJgFGOHsO86x8zq
- /mnhBn99SahFr8T49WqZY6HBuZt30JjnKf4T5BbJWTGVojFDWGJqu7RuDppKH5SNwVCEV41bSO+
- D6nUUtikRh0irPfKP/fZMgQcCMt5Hn/uM8BCwtWdA63gQy18P1diVWc4cew2V6o+yIshSg0zugu
- o01hH2t34I1J6VzckdnL348xXFELR5sK4nVhAYou4+tQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=fvL6giPhPA3qduLXv5gQfe
+ i7vFbC1qMOTdtQdd0MWww=; b=V2vHMC8dmv31gOIW/xUhmjPRvX76lc7x8hhP4a
+ VuJbNlTWH5xjyioIROrggOEh4+h+/ppUBWqsoh3JUd249tqecJdyYGga+TdJ2lea
+ iBQ4Xw7eDbi55BFBBv8wpUgqupxIcQfnL4ZPQZt3IFM5NLtk4I/tWFPg8pg3d9Lx
+ Qs1ey213m/BGvYlaQ0n26FYrgcXlsg6gYNVTbxh/3QL9fnXpfk1X0BdFbh8/3e/I
+ NDER0G1bqnyy0pWz56FSiObYMbg57cQrHkoTbigujfb5NLMdVDmVC3RaWrjkbqUb
+ eQOcEIphlf4GVjtqqS9ZQ73LD8hFJcSxApkeCpMrsu1px3pQ==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1786032757; x=1786637557;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=fvL6giPhPA3qduLXv5gQfei7vFbC1qMOTdtQdd0MWww=;
+ b=ee54tIihl1OlnwiL7vPBUA9ynI2fB/xdiJ4+avurGJly3ySlXqLp5LzUlLoqSTZR18
+ QpCXj8SjcCQheJt5e4KoI1H9U/dnaAo543548chuKYmLz2bmpwQTgQy/RAsmhgGFqgW7
+ 7efpGwAOuoOCCKBvgG0ajDG/BhVWyzjq/9DNhnYdZrUvlWvhUT/OlEdk8qh+Z6qCCPK+
+ 18p7XnUK71CGtt0leNKKiKPUMARyD0N2AbhyxELcaIKyWLqVIlmZxGkMboHXx85CZAGO
+ Mm1uHH3ExCVwmU78zurtU6szVrdHd61pjPwOI/F6aPjccT+p0kpPl5Ql3Bg79uGYEzji
+ dVzQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=V2vHMC8d; 
  dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=oRn1eEVC
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=ee54tIih
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -109,234 +197,47 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Balaji Selvanathan via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Quentin,
+This series brings up the Monaco (QCS8300) EVK target with a dedicated
+pinctrl driver, interconnect driver, a real sa8775p RPMH clock driver
+(replacing the generic clk-stub no-op), and PON/SDAM-backed reboot-mode
+support so "reboot bootloader" from Linux can be honored by U-Boot.
+qcom_qcs8300_defconfig is switched over to the monaco-evk device tree
+and the new drivers are enabled.
 
-On 8/6/2026 5:25 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 8/6/26 3:09 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 8/6/2026 1:15 PM, Quentin Schulz wrote:
->>> Hi Alexey,
->>>
->>> On 7/13/26 12:02 PM, Alexey Charkov wrote:
->>>> From: Jonas Karlman <jonas@kwiboo.se>
->>>>
->>>> Split 32-bit size_and_off and size_and_nimage fields of the v2 image
->>>> format header into their own 16-bit size, offset and num_images fields.
->>>>
->>>> Set num_images based on number of images passed by the datafile
->>>> parameter and size based on the offset to the hash field to fix using a
->>>> single init data file and no boot data file for the v2 image format.
->>>>
->>>
->>> When you need to start listing things you do in a commit, it means it
->>> needs to be split into multiple individual commits doing one thing at a
->>> time. I appreciate this is taken from Jonas's tree but it's fine to
->>> modify (well, from a maintainer's perspective at least :) ). Please list
->>> between Jonas's and your Signed-off-by what you changed since Jonas's
->>> version, in square brackets.
->>>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
->>>> ---
->>>>    tools/rkcommon.c | 44 ++++++++++++++++++++++++--------------------
->>>>    1 file changed, 24 insertions(+), 20 deletions(-)
->>>>
->>>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
->>>> index b39777fc0607..034896d57f80 100644
->>>> --- a/tools/rkcommon.c
->>>> +++ b/tools/rkcommon.c
->>>> @@ -34,15 +34,16 @@ enum hash_type {
->>>>    /**
->>>>     * struct image_entry
->>>>     *
->>>> - * @size_and_off:	[31:16]image size;[15:0]image offset
->>>> - * @address:	default as 0xFFFFFFFF
->>>> + * @offset:	image offset (unit as 512 byte blocks)
->>>> + * @size:	image size (unit as 512 byte blocks)
->>>> + * @address:	load address (default as 0xFFFFFFFF)
->>>
->>> Can it be anything but 0xFFFFFFFF? It's not even configurable currently.
->>>
->>>>     * @flag:	no use
->>>>     * @counter:	no use
->>>>     * @hash:	hash of image
->>>> - *
->>>>     */
->>>>    struct image_entry {
->>>> -	uint32_t size_and_off;
->>>> +	uint16_t offset;
->>>> +	uint16_t size;
->>>
->>> Do we need to start __attribute__ ((__packed__))'ing the structure to
->>> make sure there's no padding involved ever?
->>>
->>>>    	uint32_t address;
->>>>    	uint32_t flag;
->>>>    	uint32_t counter;
->>>> @@ -56,16 +57,17 @@ struct image_entry {
->>>>     * This is stored at SD card block 64 (where each block is 512 bytes)
->>>>     *
->>>>     * @magic:	Magic (must be RK_MAGIC_V2)
->>>> - * @size_and_nimage:	[31:16]number of images;[15:0]
->>>> - *			offset to hash field of header(unit as 4Byte)
->>>> - * @boot_flag:	[3:0]hash type(0:none,1:sha256,2:sha512)
->>>> - * @signature:	hash or signature for header info
->>>> - *
->>>> + * @size:	offset to hash field of header (unit as 4 bytes)
->>>
->>> I'm assuming we mean "unit as multiples of 4 bytes"? Is that correct?
->>> Can we say that instead, I find it clearer.
->>>
->>>> + * @num_images:	number of images
->>>
->>> Can we improve this documentation as well? I'm assuming this is the
->>> number of images stored in idbloader.img (so typically SPL + optionally
->>> TPL + optionally VPL/boost?)
->>>
->>>> + * @boot_flag:	[3:0] hash type (0:none, 1:sha256, 2:sha512)
->>>> + * @images:	images
->>>
->>> Not sure this is helping, either specify what those are or simply don't
->>> comment.
->>>
->>>> + * @hash:	hash or signature for header info
->>>>     */
->>>>    struct header0_info_v2 {
->>>>    	uint32_t magic;
->>>>    	uint8_t reserved[4];
->>>> -	uint32_t size_and_nimage;
->>>> +	uint16_t size;
->>>> +	uint16_t num_images;
->>>
->>> Do we need to start __attribute__ ((__packed__))'ing the structure to
->>> make sure there's no padding involved ever?
->>>
->>> Side question, should we start using the proper expected endianness
->>> here? e.g. __le16/__le32 instead of uint32_t and uint16_t? What do you
->>> think?
->>>
->>>>    	uint32_t boot_flag;
->>>>    	uint8_t reserved1[104];
->>>>    	struct image_entry images[4];
->>>> @@ -351,17 +353,18 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
->>>>    	printf("Image Type:   Rockchip %s boot image\n",
->>>>    		rkcommon_get_spl_hdr(params));
->>>>    	memset(buf, '\0', RK_INIT_OFFSET * RK_BLK_SIZE);
->>>> -	hdr->magic   = cpu_to_le32(RK_MAGIC_V2);
->>>> -	hdr->size_and_nimage = cpu_to_le32((2 << 16) + 384);
->>>> +	hdr->magic = cpu_to_le32(RK_MAGIC_V2);
->>>
->>> Please don't mix cosmetic changes as those and logic changes, in the
->>> same commit. The whitespaces removal makes it harder to identify quickly
->>> what is actually changed.
->>>
->>>>    	hdr->boot_flag = cpu_to_le32(HASH_SHA256);
->>>>    	sector_offset = 4;
->>>>    	image_size_array[0] = spl_params.init_size;
->>>>    	image_size_array[1] = spl_params.boot_size;
->>>>    
->>>>    	for (i = 0; i < 2; i++) {
->>>> +		if (!image_size_array[i])
->>>> +			break;
->>>>    		image_sector_count = image_size_array[i] / RK_BLK_SIZE;
->>>> -		hdr->images[i].size_and_off = cpu_to_le32((image_sector_count
->>>> -							<< 16) + sector_offset);
->>>> +		hdr->images[i].offset = cpu_to_le16(sector_offset);
->>>> +		hdr->images[i].size = cpu_to_le16(image_sector_count);
->>>>    		hdr->images[i].address = 0xFFFFFFFF;
->>>>    		hdr->images[i].counter = cpu_to_le32(i + 1);
->>>>    		image_ptr = buf + sector_offset * RK_BLK_SIZE;
->>>> @@ -370,6 +373,8 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
->>>>    		sector_offset = sector_offset + image_sector_count;
->>>>    	}
->>>>    
->>>> +	hdr->num_images = cpu_to_le16(i);
->>>
->>> Is it though? if image_size_array[i] is 0, it means nothing was passed
->>> as the i+1th image to mkimage -T rksd/rkspi -d no?
->>>
->>>> +	hdr->size = cpu_to_le16(offsetof(typeof(*hdr), hash) / sizeof(uint32_t));
->>>>    	do_sha256_hash(buf, (void *)hdr->hash - buf, hdr->hash);
->>>>    }
->>>>    
->>>> @@ -516,10 +521,8 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->>>>    			return;
->>>>    		}
->>>>    
->>>> -		init_size = header0_v2.images[0].size_and_off >> 16;
->>>> -		init_size = init_size * RK_BLK_SIZE;
->>>> -		boot_size = header0_v2.images[1].size_and_off >> 16;
->>>> -		boot_size = boot_size * RK_BLK_SIZE;
->>>> +		init_size = le16_to_cpu(header0_v2.images[0].size) * RK_BLK_SIZE;
->>>> +		boot_size = le16_to_cpu(header0_v2.images[1].size) * RK_BLK_SIZE;
->>>>    	} else {
->>>>    		ret = rkcommon_parse_header(buf, &header0, &spl_info);
->>>>    
->>>> @@ -533,8 +536,9 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->>>>    		}
->>>>    
->>>>    		image_type = ret;
->>>> -		init_size = header0.init_size * RK_BLK_SIZE;
->>>> -		boot_size = header0.init_boot_size * RK_BLK_SIZE - init_size;
->>>> +		init_size = le16_to_cpu(header0.init_size) * RK_BLK_SIZE;
->>>> +		boot_size = le16_to_cpu(header0.init_boot_size) * RK_BLK_SIZE -
->>>> +			    init_size;
->>>>    
->>>
->>> I could identify multiple commits to be split out of this one:
->>> - update documentation,
->>> - whitespace around ->magic assignment,
->>> - break the loop when image_size_array[i] is 0,
->>> - properly translate init_size/boot_size into CPU endianness,
->>> - split size_and_nimage u32 into two u16,
->>> - split size_and_off u32 into two u16,
->>> - programmatically set ->size,
->>> - programmatically set ->num_images,
->>
->> As stated to Alexey previously I have started re-working my old series
->> to address your old review comments, current local version have:
->>
->> b86f1ed33d9d WIP: rockchip: mkimage: Compare full string when matching imagename
->> d849f5710a62 WIP: rockchip: mkimage: Print image-type for the v2 format
->> 690bd184c62f WIP: rockchip: mkimage: use le16/le32_to_cpu when reading header fields
->> 01e1ce9ccab4 WIP: rockchip: mkimage: static assert
->> d5b2191eae34 WIP: rockchip: mkimage: split size_and_off in struct image_entry
->> 0bbb7bf20348 WIP: rockchip: mkimage: split size_and_nimage in struct header0_info_v2
->> 4f1cc2100120 WIP: rockchip: mkimage: Set header size based on offset to hash
->> 2031ef00ddaa rockchip: mkimage: Split size_and_off and size_and_nimage
->> deae586379d8 rockchip: mkimage: Print image information for all embedded images
->> 15867436697d rockchip: mkimage: Print image information for all embedded images
->> c5f38fe9aa85 rockchip: mkimage: Print boot0 and boot1 parameters
->> c03eda77d517 WIP: rockchip: mkimage: Print hash algo and image hash value
->> c28f75ab3d22 WIP: rockchip: mkimage: Print signature type
->> 744b76c3e716 WIP: rockchip: mkimage: Extract and use rkcommon_get_aligned_filesize()
->> e667ac1ff977 WIP: rockchip: mkimage: Extract and use rkcommon_get_header_size()
->> 776f4b84625f rockchip: mkimage: Add option to change image offset alignment
->> 403e40c9fe80 rockchip: mkimage: Add support for up to 4 input files
->>
->> But I have not completed addressing all review comments yet, will be
->> sending a v2 of my original series in a few days.
->>
-> 
-> Should I stop reviewing the rest of this series and wait for your v2 then?
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Balaji Selvanathan (7):
+      clk: qcom: Add dedicated sa8775p RPMH clock driver
+      clk: qcom: qcs8300: Extend GCC clock driver to full gate/RCG coverage
+      pinctrl: qcom: Add QCS8300 pinctrl driver
+      interconnect: qcom: Add QCS8300 interconnect driver
+      arm64: dts: monaco-evk: Add reboot-mode support via PON/SDAM
+      arm64: dts: monaco-evk: Force vreg_l8a always-on to protect UFS VCC
+      configs: qcom_qcs8300: Switch to monaco-evk DT and enable new drivers
 
-It looks like your new review comments closely matches your old review
-remarks so probably no reason to do double/triple work :-)
+ arch/arm/dts/monaco-evk-u-boot.dtsi    |  40 +++
+ configs/qcom_qcs8300_defconfig         |   6 +-
+ drivers/clk/clk-stub.c                 |   1 -
+ drivers/clk/qcom/clock-qcs8300.c       | 545 +++++++++++++++++++++++++++++++--
+ drivers/clk/qcom/clock-sa8775p.c       |  46 +++
+ drivers/interconnect/qcom/Kconfig      |   6 +
+ drivers/interconnect/qcom/Makefile     |   1 +
+ drivers/interconnect/qcom/qcs8300.c    | 269 ++++++++++++++++
+ drivers/interconnect/qcom/qcs8300.h    |  24 ++
+ drivers/pinctrl/qcom/Kconfig           |   8 +
+ drivers/pinctrl/qcom/Makefile          |   1 +
+ drivers/pinctrl/qcom/pinctrl-qcs8300.c | 468 ++++++++++++++++++++++++++++
+ 12 files changed, 1393 insertions(+), 22 deletions(-)
+---
+base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
+change-id: 20260805-b4-monaco-26501bf7c863
 
-I have tried to address all your old review remarks and some of Simons
-comments in my local tree, will look at your new comments and see if
-there is anything to pick up from them before sending a v2.
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
