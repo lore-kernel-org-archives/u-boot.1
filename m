@@ -4,129 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1895CC5AC67
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 01:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49A32C5AC80
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 01:50:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AD1004090C;
-	Fri,  7 Aug 2026 01:50:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 164B440929;
+	Fri,  7 Aug 2026 01:50:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6v4ZOPwcuRd5; Fri,  7 Aug 2026 01:50:28 +0000 (UTC)
+ id 152PyNjCZH6V; Fri,  7 Aug 2026 01:50:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AFC9240894
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1955A40925
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786067428;
-	bh=DFnF7HiMEpJDr4K3S86JHFB18VlKiZQGiJfFUHJb1N8=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=syf8tV1oiTelNoTZfOPoCxoNVKAbkV2RKZjwLIuwK5DzgwdEdSrR+J/h7aKdrOvfZ
-	 BWdPBEx9UcZ7rtlhxaBjU6rNra3scd9SvNt6Q5bwEJW3j+sI/47/AUMBHLOaU8dBAb
-	 bD2mbsntV1F3mFbT26eNqgRIzADkMtnPbj3OTlr6AaOkNTE+2S1h1G2D2odZaV7X6o
-	 okm7kWRan65/JaK8UPjJbMfNxzisCjLAmObDX2LgAcqNOEp4Myx9wp74jP2mWNBREl
-	 Kt6wilrJE6Jq7qyTF/TGycZmxI6prcPm88w3/rcB8RybAiUVknqQb9tGr/ln+g8GT1
-	 oSIbgHsdyJiNA==
+	d=lists.u-boot-project.org ; s=default; t=1786067434;
+	bh=UEVeJYUs1lOQuh9SxRfLlztWN9Xru0i6ho6Dc8bDh6o=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=kf2kieBazEvvqHIAzO7m26FPKUHRf82HKFrCULWWekclYk/kArR+aXw8P4mDgt12y
+	 FpHkbuqYP6kU9TzfxSQjUXbIyf6h4djeJM5aEbhk2gQEbVPzyalPzz8aaBmoXAOD1D
+	 oAFIm/RFUoHJA3Ux9xnTjtlQ96jZs+z6vOoudz5KtjkUrd726L851aLN8s144OqnDw
+	 sB3CFPrCOB+SA3kD8eNBiMFcg0YrzgY/JPn2kqoULcdQzG2xuoXKe/Rn5CAbr8jemP
+	 b+hqP5AznzXDmIubW6Thio5lRUVT2E7LNtO3XQ/3lhW0bb0q0ydHCGIxyxZ9FUGwHU
+	 Tl5ILq64nVJuA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AFC9240894;
-	Fri,  7 Aug 2026 01:50:28 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 236D6392
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 18:38:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1955A40925;
+	Fri,  7 Aug 2026 01:50:34 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 26955218
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:29:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 153E840813
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 18:38:08 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1862D60849
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:29:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0uBWlxgXm8-u for <u-boot@lists.u-boot-project.org>;
- Thu,  6 Aug 2026 18:38:07 +0000 (UTC)
-Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
- envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org F3CC14085E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F3CC14085E
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id F3CC14085E
- for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 18:38:06 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c2055f5a993so158512466b.2
- for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 11:38:06 -0700 (PDT)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zhnXAMAbCarB for <u-boot@lists.u-boot-project.org>;
+ Thu,  6 Aug 2026 21:29:40 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::835; helo=mail-qt1-x835.google.com;
+ envelope-from=anton@binarly.io; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org E33A460848
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E33A460848
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E33A460848
+ for <u-boot@lists.u-boot-project.org>; Thu,  6 Aug 2026 21:29:39 +0000 (UTC)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-517dc520840so19376441cf.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 06 Aug 2026 14:29:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786041485; x=1786646285;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=DFnF7HiMEpJDr4K3S86JHFB18VlKiZQGiJfFUHJb1N8=;
- b=E2aCz/+DhESh1GM07j3DafPHpP9cuR/bgEbGxma8qMS2ArYbI4qSUL3I53dWyinpIB
- UQxfiacrE20H7qDEZ23IvPKs2421KRZnfvo27x1Iz9aQWpjDJGBG/IRKbUIS2+JqBZbs
- tCvp19kQrKC9ZGt6c3Djdg5lR34pkuqQ9mLApytaxLkYgAEahO4rqyzyibQIhdOIL6y8
- 9NfKaBiVckGWez37Qm+FgtlU7CPic/geSr1QImqaOPHmMxE5V9moFU2mhVrnkdBpKIvv
- YemRiSGFapS+1xqhMn8eG8LINDXThVtyJ5pKg9vtA+P9K9vt+QeqHlJICkh6/SoFTyj9
- B4kg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpUGzCYiaIz1GXvtR7/JnMxET9vVsM4FCrc31jGruyOHiFhj9NjTpAZU4fT7175eJsC6/ZAuQs=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzEeViG1C4h3ANW9aWNUgPPIzbS7Cqa3sDnClKVR+RFeWtdXYbc
- L8cVnkLPT74yDDEJySX1j5KJo93iX9OeX44oQDwf1RlmLgA/U8J7w74j2egkYXpZOLphJtiGSsc
- QnpKmcQk=
-X-Gm-Gg: AR+sD10yb0wp2hKV8oPLNrBMOof33pBU8xHYFR852fHQ40EP5/C1cL25XQHYu3TvQyO
- lyvBHmse1weLExmdrm0mWYQlwPgTYfVNOcNv/RwDlOtHc1z+h5nhhkJNl7ckW5ydvVY3qTkxHLe
- VI95EBciI6hphmHOyvo+b2fhszid+G14fCjk6zx7Mooa85YbxwxhPhYpop8Gd7beDOVlto4Ku4J
- 0kkrMa5Kw+NNgoxRMKouP6gLb2Y1kz4UZ+pMbrUQUJSFvimnUh71Yrtc0viJHyNkDMmfMQ8bGsv
- sq+7DzOKE2Xb9bZ3dQ/r8QCAD0BiMM9S3OwLJUAQYjEQpB2LrHUERuVaBOSlq0APmNdHdoUyu8k
- GmpkPusofUC9GRQfpVUdQawQuL7vRuETfETRMcMMc5oqmtPx4QY9hBAgjPbbHg/etRDVAa1gFF7
- tVLGGNRozFgANgg1mHqt6wl9OrbKdCvZRUzk9RpiFo9Z1uQufn4A4IVVeYpXcFHRMnYVrFmxHhb
- gqjpt94oMnqHRGXmkLIRRmfUU7cPGY4BhmJDaf8dlQxyVz/hc4WLA==
-X-Received: by 2002:a17:906:eec4:b0:c1c:2ee9:5e6d with SMTP id
- a640c23a62f3a-c2039c39717mr860698066b.17.1786041484910; 
- Thu, 06 Aug 2026 11:38:04 -0700 (PDT)
-Received: from [127.0.1.1]
- (p200300ff0f038f00156d21543c815f45.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:156d:2154:3c81:5f45])
+ d=1e100.net; s=20251104; t=1786051778; x=1786656578;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=UEVeJYUs1lOQuh9SxRfLlztWN9Xru0i6ho6Dc8bDh6o=;
+ b=rvh2hlAuwwXaqJ4HYYxvWs3e4fCYQBZVM2/TTV6DW3DyFaqmTxJYUOeUrSW2flGFah
+ n2/waFI35c2xdumV2h8JAMyQcIXLShwJQOUSBx+awkkdlSyHvN71cqM+D5bksU9RLst8
+ di83IE1BcdBSqubGYiPz1eoU/xIxVLbSSFn/NkYSSWMoE5x5HfuRJl6nwAn5es+STJrm
+ MhAWPbHbce0WOFIqBHKMKVFHOI/ZH40ztMTLmOONjxwd9vukkkoqkzz10vE3/wMxcqqQ
+ Kr0JvZOtXMMbP4FgW42N1e072hE8sx5uDx3kqxJqaMM5gaE0qGt0EeAZiXC57IVApu5v
+ a6ng==
+X-Gm-Message-State: AOJu0Yzx0lF6rT8tMUK83JL4Um0ChXil0V5gzBaksBDOhv0MshBi01i3
+ abodgCe1Vt1TJq3HdXl03wU8qojW0pVB5xD8Ly/LEsPoNGd+wtAFWqjO3LhrduwcWrM=
+X-Gm-Gg: AR+sD10CBKr8MbYUf6D+EGT9IfHvI/dCA09ZC3cqNL2rFvjsvB41TIWaLAOEkrBpNaz
+ AbiMBLWBG4wRgbA7EshR+U+9HO1Xl+M+t/6W6vXw0/XGrlW0wmgyAwMW3mKnPqAXFxeYdCSNPeI
+ TL9F86/EG1IQ+u/aE41Iy1/W7kFQoJyQ+EHOXUm20kgNzg2xbz7axrjtilV6KQ0vLURG9blC8e2
+ 3W21auG6AVRI2wHkNQfjcvlZ0Sx3OPJqpXE2QLLwlz0BzE9gy5EezcbOT+ZFps1HH4hlZ9HAUmc
+ YaQ80m1NTms+eI5myyBr9rdvZXiDOBg5sXOXnmjiLAyd5B1j6DuxB6ukQQNcUZIDGorGXCSzIhN
+ Mn2CRyBGiGINiufOlKdn3pO1Uoa18HhBRiONFJXTTBlpI8Iz3/HSU/1bsdNuix0hqvS4PAe3PKU
+ 82zjm5YvfmnDuomG7x/OmB64gZE8070H7zXwt12qJNJ0FKTmEnmmW1vlWaSgZ8cmYvsxRTsPzCS
+ kfViTeHujBrz4bD
+X-Received: by 2002:a05:622a:4d98:b0:51c:1006:a024 with SMTP id
+ d75a77b69052e-52ce62017f7mr219260751cf.43.1786051777997; 
+ Thu, 06 Aug 2026 14:29:37 -0700 (PDT)
+Received: from Ivanovs-MacBook-Pro.local ([93.174.85.138])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c203642435dsm290075266b.44.2026.08.06.11.38.04
+ a640c23a62f3a-c207b4fffcdsm2071466b.46.2026.08.06.14.29.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2026 11:38:04 -0700 (PDT)
-From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Thu, 06 Aug 2026 20:37:51 +0200
-Subject: [PATCH 2/2] test: dm: eth: add DHCPv6 oversized option regression
- tests
+ Thu, 06 Aug 2026 14:29:36 -0700 (PDT)
+Subject: [PATCH v2 0/4] fit: Harden handling of external-data properties
+Date: Thu, 06 Aug 2026 22:29:18 +0100
+Message-Id: <20260806-b4-fit-ext-data-hardening-v2-0-b181cac15c29@binarly.io>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260806-b4-dhcp6-serverid-oob-v1-2-4ec6857682e1@byteray.co.uk>
-References: <20260806-b4-dhcp6-serverid-oob-v1-0-4ec6857682e1@byteray.co.uk>
-In-Reply-To: <20260806-b4-dhcp6-serverid-oob-v1-0-4ec6857682e1@byteray.co.uk>
-To: Sean Edmond <seanedmond@microsoft.com>, 
- Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.u-boot-project.org
-Cc: Argus <argus@byteray.co.uk>, 
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
- Francois Berder <fberder@outlook.fr>, 
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NTQ6CMBBGr0K6dkx/gAZX3sOwmMIAY0wxbSUQw
+ t0FvIDLl7zvfauIFJiiuGWrCDRx5NHvoC+ZaAb0PQG3OwstdSmtkeBy6DgBzQlaTAgDhpY8+x6
+ UNTlWWhpbGLHv34E6ns/2o/5x/LgnNekIHsbAMY1hOc8ndXj//EwKJORYukqRsa5Qd8cew2u58
+ ijqbdu+UTBiVNUAAAA=
+X-Change-ID: 20260730-b4-fit-ext-data-hardening-1734a9203753
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Anton Ivanov <anton@binarly.io>, 
+ Daniel Golle <daniel@makrotopia.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Aristo Chen <aristo.chen@canonical.com>, 
+ Francesco Valla <francesco@valla.it>, Anshul Dalal <anshuld@ti.com>, 
+ Randolph Sapp <rs@ti.com>, Binarly Research <vr@binarly.io>
 X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openssh-sha256; t=1786051774; l=2287;
+ i=anton@binarly.io; s=default; h=from:subject:message-id;
+ bh=heDQ1s0HCG4CJ/sGjfCfmqRsBmRErJ88aTw7FiLh5MI=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgLlci93RPwSlisH3PzSX3+CiC/xruz
+ nbNSGHIKfmW2YQAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QNIaE2NFUh6klNaummbN6caibVewVbhjjHu88MCssw6cpHtWkl4JGbA3co9VRR8ZBWDFbalU3Cj
+ pVOiyAQ35ywk=
+X-Developer-Key: i=anton@binarly.io; a=openssh;
+ fpr=SHA256:OWnvXkgcqeWMXacIaCJR2oikuTmVTaSodreIHEJTWEc
 X-Mailman-Approved-At: Fri, 07 Aug 2026 01:50:23 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786041485; x=1786646285;
+ d=binarly.io; s=google; t=1786051778; x=1786656578;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=DFnF7HiMEpJDr4K3S86JHFB18VlKiZQGiJfFUHJb1N8=;
- b=MilsrrvLqV5Sv8ibmtBt07toZjLXUWEk8fgEIRr6r1UcqfEZlTFpE/NI5qPYn60hI0
- tdbxYXilYzkqNPXZOTQxwOlHxLhWwiOJmtIVUcnUw2GgOHoca9ZGDuOCbf9uiohKGIHr
- 7mpN/5b9YZ1d6Vkx84IHik7TUcB2CUoN3TxBuagqfR19GN+jF/vbEidugfk6axTlk/k+
- NdNg1q9NweLS934AaAGtjTB5PEbQLjFzeh6wgHcf8+o3BZIl1utT25CmdKsPIz7FEnJY
- +bJI5X8o02pAqCOuDOXL9go3NC3rRKPW+WZQcTyuss1PCHFufroqpkJ+EttzdOn2QOfv
- 5CoA==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=MilsrrvL
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=UEVeJYUs1lOQuh9SxRfLlztWN9Xru0i6ho6Dc8bDh6o=;
+ b=Qv3vQ4KAuegKa8kMGvxD/N6+AknUnCQSt7JZ445ddbq8iBuy9Lw8eh0InepPHnDNV7
+ PcNX1CM9tjE2HNGDot2/5wRGAz6jFhmebhxPwkDPJp8KbIcAdMoV+PJ1vKPXWXY9N5od
+ VKZtCeMd76T2fFTNw6WZgcVyW8TiiJ2H6j1iWavY98U3WNtgrnMRjahK630ZSweP0+Dx
+ dwbeDvSZhWDjjRVCoeKEY2f7EgkmOZ1Bu3is1oxaVbzaP5FKXVLfJHtEOy0i47cuv9D7
+ mpHCgwZE1p75OYbt03nqYJB1nfCkSmr9uz4HI9d/R9HOOK5PG9Y6vNnGOU4k+CHy1Nh7
+ 3NCg==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=binarly.io
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=binarly.io header.i=@binarly.io header.a=rsa-sha256
+ header.s=google header.b=Qv3vQ4KA
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,186 +143,61 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Anton Ivanov via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Anton Ivanov <anton@binarly.io>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Answer a DHCPv6 SOLICIT from the sandbox eth tx handler with an
-ADVERTISE that carries an option longer than a valid DUID, and check
-the client rejects it rather than sending a REQUEST.
+The data-offset, data-position and data-size FIT properties are 32-bit
+unsigned values, but were read through signed int. Also, they are
+excluded from the configuration signature, so they are attacker
+controlled.
 
-Two cases cover the option parser: an over-long SERVERID, which a client
-that trusts the length copies out of bounds while building the REQUEST,
-and an over-long CLIENTID, which drives a memcmp past the client DUID
-buffer.
+Patch 1 switches the accessors and their callers to u32, removing
+the ad-hoc handling of "negative" values in U-Boot proper. This
+transition was discussed and agreed on in [1].
 
-Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+The SPL loader has its own copy of this logic with the same problems
+and fewer checks. Patch 2 factors out a test helper, patch 3 makes the
+SPL offset/size arithmetic overflow-safe, and patch 4 adds the
+addressable-range and FIT_SIGNATURE_MAX_SIZE bounds check that U-Boot
+proper already performs in fit_image_get_data().
+
+Patches 3 and 4 build on each other and on patch 1, so they are not
+intended to be cherry-picked individually.
+
+[1] https://lore.kernel.org/u-boot/CAPWaX55XWFLcMGRuaUuXXn__MX_UG4J8QTd6rvXZmJ4WSOCy9w@mail.gmail.com/
+
 ---
- test/dm/eth.c | 151 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 151 insertions(+)
+Changes in v2:
+- Patch 1: keep the 0xffffffff data-position and data-size test cases
+  instead of dropping them; they are renamed and repointed at the
+  "FIT external data is out of bounds" message they now hit.
+- Patches 3 and 4: no code changes, added SPL code-size figures
+- Link to v1: https://lore.kernel.org/all/20260730-b4-fit-ext-data-hardening-v1-0-4a6b91e37b51@binarly.io/
 
-diff --git a/test/dm/eth.c b/test/dm/eth.c
-index ed0b57d8861..f3a972c5c0a 100644
---- a/test/dm/eth.c
-+++ b/test/dm/eth.c
-@@ -621,6 +621,157 @@ static int dm_test_eth_async_ping_reply(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_eth_async_ping_reply, UTF_SCAN_FDT);
-+
-+#if IS_ENABLED(CONFIG_CMD_DHCP6) && IS_ENABLED(CONFIG_IPV6)
-+#define DHCP6_DUID_LL_LEN	10	/* type(2) + hw_type(2) + MAC(6) */
-+static bool dhcp6_request_seen;
-+static bool dhcp6_advertise_sent;
-+static int dhcp6_clientid_len;
-+static int dhcp6_serverid_len;
-+
-+/*
-+ * Answer a DHCPv6 SOLICIT with an ADVERTISE whose SERVERID option is longer
-+ * than any valid DUID. A correct client rejects it and never sends a REQUEST;
-+ * a client that trusts the length copies it out of bounds while building the
-+ * REQUEST.
-+ */
-+static int sb_dhcp6_advertise_handler(struct udevice *dev, void *packet,
-+				      unsigned int len)
-+{
-+	struct eth_sandbox_priv *priv = dev_get_priv(dev);
-+	struct ethernet_hdr *seth = packet;
-+	struct ethernet_hdr *eth;
-+	struct ip6_hdr *sip6, *ip6;
-+	struct udp_hdr *sudp, *udp;
-+	uchar *sdhcp6, *d, *opt, *rx;
-+	int msglen;
-+	u16 udptot;
-+
-+	if (ntohs(seth->et_protlen) != PROT_IP6)
-+		return 0;
-+	sip6 = (struct ip6_hdr *)((uchar *)packet + ETHER_HDR_SIZE);
-+	if (sip6->nexthdr != IPPROTO_UDP)
-+		return 0;
-+	sudp = (struct udp_hdr *)((uchar *)sip6 + IP6_HDR_SIZE);
-+	if (ntohs(sudp->udp_dst) != 547 || ntohs(sudp->udp_src) != 546)
-+		return 0;
-+	sdhcp6 = (uchar *)sudp + UDP_HDR_SIZE;
-+
-+	/* a REQUEST means the client accepted the over-long SERVERID */
-+	if (sdhcp6[0] == 3) {		/* DHCP6_MSG_REQUEST */
-+		dhcp6_request_seen = true;
-+		net_set_state(NETLOOP_FAIL);
-+		return 0;
-+	}
-+	if (sdhcp6[0] != 1)		/* DHCP6_MSG_SOLICIT */
-+		return 0;
-+	if (dhcp6_advertise_sent) {
-+		/* the client re-solicited, so it rejected the ADVERTISE */
-+		net_set_state(NETLOOP_FAIL);
-+		return 0;
-+	}
-+	dhcp6_advertise_sent = true;
-+	if (priv->recv_packets >= PKTBUFSRX)
-+		return 0;
-+
-+	rx = priv->recv_packet_buffer[priv->recv_packets];
-+	memset(rx, 0, PKTSIZE);
-+
-+	eth = (struct ethernet_hdr *)rx;
-+	memcpy(eth->et_dest, seth->et_src, ARP_HLEN);
-+	memcpy(eth->et_src, priv->fake_host_hwaddr, ARP_HLEN);
-+	eth->et_protlen = htons(PROT_IP6);
-+
-+	ip6 = (struct ip6_hdr *)(rx + ETHER_HDR_SIZE);
-+	ip6->version = 6;
-+	ip6->nexthdr = IPPROTO_UDP;
-+	ip6->hop_limit = 255;
-+	memcpy(&ip6->saddr, &sip6->daddr, sizeof(struct in6_addr));
-+	memcpy(&ip6->daddr, &sip6->saddr, sizeof(struct in6_addr));
-+
-+	udp = (struct udp_hdr *)((uchar *)ip6 + IP6_HDR_SIZE);
-+	udp->udp_src = htons(547);
-+	udp->udp_dst = htons(546);
-+
-+	d = (uchar *)udp + UDP_HDR_SIZE;
-+	opt = d;
-+	/* dhcp6 header: reuse the SOLICIT trans_id, msg_type = ADVERTISE */
-+	memcpy(opt, sdhcp6, 4);
-+	opt[0] = 2;			/* DHCP6_MSG_ADVERTISE */
-+	opt += 4;
-+	/* CLIENTID: the client DUID from the SOLICIT, padded to the test size */
-+	opt[0] = 0; opt[1] = 1;
-+	opt[2] = dhcp6_clientid_len >> 8;
-+	opt[3] = dhcp6_clientid_len & 0xff;
-+	memcpy(opt + 4, sdhcp6 + 8, DHCP6_DUID_LL_LEN);
-+	opt += 4 + dhcp6_clientid_len;
-+	/* echo the client's IA_NA (hdr 4 + iaid/t1/t2 12) */
-+	memcpy(opt, sdhcp6 + 4 + 14 + 6, 16);
-+	opt += 16;
-+	/* PREFERENCE = 255 so the client acts on this ADVERTISE at once */
-+	opt[0] = 0; opt[1] = 7; opt[2] = 0; opt[3] = 1; opt[4] = 255;
-+	opt += 5;
-+	/* SERVERID of the test size */
-+	opt[0] = 0; opt[1] = 2;
-+	opt[2] = dhcp6_serverid_len >> 8;
-+	opt[3] = dhcp6_serverid_len & 0xff;
-+	memset(opt + 4, 0x41, dhcp6_serverid_len);
-+	opt += 4 + dhcp6_serverid_len;
-+
-+	msglen = opt - d;
-+	udptot = UDP_HDR_SIZE + msglen;
-+	ip6->payload_len = htons(udptot);
-+	udp->udp_len = htons(udptot);
-+	udp->udp_xsum = 0;
-+	udp->udp_xsum = csum_ipv6_magic(&ip6->saddr, &ip6->daddr, udptot,
-+					IPPROTO_UDP,
-+					csum_partial((u8 *)udp, udptot, 0));
-+
-+	priv->recv_packet_length[priv->recv_packets] =
-+		ETHER_HDR_SIZE + IP6_HDR_SIZE + udptot;
-+	priv->recv_packets++;
-+
-+	return 0;
-+}
-+
-+static int dhcp6_run_advertise(struct unit_test_state *uts)
-+{
-+	dhcp6_request_seen = false;
-+	dhcp6_advertise_sent = false;
-+	sandbox_eth_set_tx_handler(0, sb_dhcp6_advertise_handler);
-+	sandbox_eth_skip_timeout();
-+
-+	env_set("ethact", "eth@10002000");
-+	net_loop(DHCP6);
-+
-+	sandbox_eth_set_tx_handler(0, NULL);
-+
-+	/* the malformed ADVERTISE must be rejected: no REQUEST is sent */
-+	ut_assert(!dhcp6_request_seen);
-+
-+	return 0;
-+}
-+
-+/* Check the DHCPv6 client rejects an over-long SERVERID option */
-+static int dm_test_dhcp6_serverid_reject(struct unit_test_state *uts)
-+{
-+	dhcp6_clientid_len = DHCP6_DUID_LL_LEN;
-+	dhcp6_serverid_len = 200;
-+
-+	return dhcp6_run_advertise(uts);
-+}
-+DM_TEST(dm_test_dhcp6_serverid_reject, UTF_SCAN_FDT);
-+
-+/* Check the DHCPv6 client rejects an over-long CLIENTID option */
-+static int dm_test_dhcp6_clientid_reject(struct unit_test_state *uts)
-+{
-+	dhcp6_clientid_len = 20;
-+	dhcp6_serverid_len = DHCP6_DUID_LL_LEN;
-+
-+	return dhcp6_run_advertise(uts);
-+}
-+DM_TEST(dm_test_dhcp6_clientid_reject, UTF_SCAN_FDT);
-+#endif
- #endif
- 
- #if IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY)
+Patches 1, 2 and 4 carry Reviewed-by: Simon Glass.
 
--- 
-2.43.0
+---
+Anton Ivanov (4):
+      image-fit: Use unsigned types for external data properties
+      test: spl: Factor out external-data FIT property checks
+      spl: fit: Harden external-data offset and size arithmetic
+      spl: fit: Bound external data like U-Boot proper
+
+ boot/image-fit.c               |  29 ++++------
+ common/spl/spl_fit.c           | 122 +++++++++++++++++++++++++--------------
+ common/splash_source.c         |   2 +-
+ drivers/fpga/socfpga_arria10.c |   3 +-
+ include/image.h                |   6 +-
+ test/image/spl_load.c          | 128 +++++++++++++++++++++++++++++++++++------
+ test/py/tests/test_vboot.py    |  10 ++--
+ 7 files changed, 210 insertions(+), 90 deletions(-)
+---
+base-commit: 94b349bd902d9e38e1846c157fadd9054c34680a
+change-id: 20260730-b4-fit-ext-data-hardening-1734a9203753
+
+Best regards,
+--  
+Anton Ivanov <anton@binarly.io>
 
