@@ -1,103 +1,104 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2214C5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE87C5AC82
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:12:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3796C80E34;
-	Fri,  7 Aug 2026 16:12:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4DA9060905;
+	Fri,  7 Aug 2026 16:12:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PTjcfVYmUyk1; Fri,  7 Aug 2026 16:12:51 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6gRSZv-XNECZ; Fri,  7 Aug 2026 16:12:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 25ADF80D48
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3D17260684
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786119171;
-	bh=JceJu2AvhGH4Q1dPq02j2kYJQ0nAL/oXneLxbxSqfhg=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=LsLZJFj6LSW2Aj5GEg1SOPB114g3D3Oj8HOWHiIswUhiA5xkebqtcVAMk1Ui0B/+C
-	 HOKGSbYSuRYGl/HsT+x97l0ueHaEDwYA16JNoi+WBm9WMZ8BrZQLbjGqCLJxM23hbr
-	 1xUIe2zcJ9kY7k65amRXa2FMwn1M/Y3XSow0/sq55jh+k9ONza/GQxr/t+IK1SmML9
-	 lHSZmdtMXtW6n+BPZy1wVfI7iKTrXsBRzJhcQKwGh85ohlJM5b5Qnnm/3WuOwezdCB
-	 JFwAujlyAYjiyegmxGOIY5FO+BhgoWtiDW5/qEuHAvuhEWjCV0GoVTESbNAQEJxp3a
-	 xYIwhw4XXpzvQ==
+	d=lists.u-boot-project.org ; s=default; t=1786119172;
+	bh=4jdg9ujw06xn6Ap7jZs7hcONdqjCly66sfM9bZgjMDc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=nWzjv723rTqfECoH39A8oyoSkPc0Y4jKqefU8GfrBOxWqaQvY1vhr75wl80I9IR+0
+	 UQ2zQxazIRL8uVMPXoB7gLH2dt0scUDchMgoPuBHfGR54aPOgrLxZA3IRlxZVxr0N/
+	 jqEX9N5M3myw8DVKc7oXJl1ZfXvXf0nejopmHgNc60tQy8KODR9huaMFTsJB0ZPZlm
+	 X/1Vq7vl+iLd2XSebjq6AgQE62LaqycmLV78ketV6QeSf8khGOe2eGJ4uN0mtgdokK
+	 AB5tlxRyNEfpCGVUIgcZpmuNgZGR7E7X9HxQyPS/1oJErDpdK680kkuHTRDqRE8wkE
+	 G2WzjT7+HigkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 25ADF80D48;
-	Fri,  7 Aug 2026 16:12:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5EEE1392
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3D17260684;
+	Fri,  7 Aug 2026 16:12:52 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9F1E4392
  for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4813440A6E
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9187140269
  for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id u-pjR47k528F for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 14:52:43 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LKYElqE9JKbe for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 14:52:44 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::631; helo=mail-ej1-x631.google.com;
+ client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org E87D140998
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E87D140998
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E87D140998
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:42 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-c15d3cd51b2so464013366b.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 07:52:42 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5BE1540074
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5BE1540074
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5BE1540074
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:43 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c15cd3fd760so377854066b.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 07:52:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1786114361; x=1786719161;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=JceJu2AvhGH4Q1dPq02j2kYJQ0nAL/oXneLxbxSqfhg=;
- b=RxSfHumVrGPkJnh1NLlJg81ENl8sO8ySfGMtNd2CGgxwrjdHzGr+I+eMSrDYqaLXMN
- pLygUTsCeVanSnh68mt/gb6+Yt67iKYhUEdj9iALzW4fL2WFub24/UAKm6Joz4EFwzaz
- wNCzhzMS2dgvqQEa3j5izV1ZZRatWSkfHFikUa0cIw+ih8OM/K74iZIOWy1opTwXl/DK
- zKR6g2NawHJf8UdaqKKavRCiz90AZjkbvp0tmQfZIUDrEmzUS+vA0K/HHEIF60iXpX3B
- LykmbSazKO/xysYOW8Z1PP7A7Fih5QskzZj4CK5LoxsO1zzXAnq1+Qk19N9WY2lBBSGV
- rv6g==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=4jdg9ujw06xn6Ap7jZs7hcONdqjCly66sfM9bZgjMDc=;
+ b=kPnsy70G4p8rzVfkKesKU9Lqvw/khaRHGq4ZoGeKZTfl/XQpKIELY8p+K+52pYlRbA
+ RF6mEzmdgOhDu21qxxdLJy3dy6BsemJfGBNPKto10Bam0gvcoocZDVAIBOcbudCpvtlf
+ xy6EWC2gDnQLY5+sipr77f5h5kF/Ejw8mILgaoaclsYySU/G/pvSfI18pk6w+Y69ka+D
+ 2sSNCtmJNen/VDWQsdb4GubjvTMGTfSf+ESdSQsSHqqJhzXh6VIMvSzAJUt13MFXosBt
+ EOIQhdQAd5OzCyhf5zCqzECHcfoO8R7eU9vSdEo5WMMXC9Tu3Y23GwqXuhhUKGKQcvkm
+ S5qw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp3XzWEcO4cveV7ZMddtUO/i0nuZARlRzw67sQQF9QS9dwxoVtxWPUmirpOckgxVRJyRt2UE2M=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzE/a8zvDEc1V1tYgz3rswW3DX7AIJmsYU+hXvqCOXvdzS8bi+Y
- 9JNgl58auNzv+h7wuegmVnkL0ECf93YKPQyCZANejcqq4ely9X1mrNX3WazaPRwlFy9vCzEZPFK
- vLM0iU0Y=
-X-Gm-Gg: AR+sD12/L6d1UCpezAWfziANVyhTM94+Xdao22VaXh+qvvyHzY95ZgCPk7gdfTlBByP
- gd92aVCJc+IgJUVkvsln6J12bJrXO8xz/9C87h4sP5z4r02ijiCMeVQH+6aCJYjYsp+h4J0x/qt
- spkvtTGlOmNaPGKlNnp4rJz5Z1X610KilNZwwRpXGXGDkfhWOPTZ4T4go/qV2acFDn/DuRaeBXe
- lFMw08RoXjOR/t8jkWyzXQRyGVy7fmJNsevIv4VQJe6LLkTqW8O7L5h1R3Cvd/gmj9Fhn6tTNGQ
- 7Tn04IEd4CXZTtI8Vn0h1gZHpoCS00uS5nNqLwVxf5k3j31b4oPUiT5AGdAG1xm8GnBpvo7rO56
- 3r+A83tcieFjaCmsb9EOrk0eMBEb2EOkQ06139xzvherAZ9t4ZToGCCA8wnogJkbV1Z3HGipy+H
- fYeM6MH1+ciEfkEoN7reolczIMO36VJUXbkyUK/uzVbzDQcZQEf2xDmRex2QmtNro2zGPhysS/Z
- sKhkCssgIMhiMjwyHtfpHR2nusqSomKEP3/MVr/JzX/VwZLA9w1B1l0LSzqXQbk
-X-Received: by 2002:a17:907:c15:b0:c20:3402:bd35 with SMTP id
- a640c23a62f3a-c20873bbd59mr67187666b.12.1786114360570; 
- Fri, 07 Aug 2026 07:52:40 -0700 (PDT)
+ AHgh+RrkIHTCKqirYu/T4yLqXyy4L+LNjJBWFguHuyPHQS68evXAbiDpbyJjyS7uFxfS9U7lXnUPrNI=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yxyxzq6Jrk5dteV0TrpOY8zAhluh5OG0ph+MlLUclq65Kaj3weH
+ DJBpXdxk49JOcyFKh6GEdHZh1rArOoOrI3ZjShe4ZNoHUNMF1htUv0L0zPg2lJEdwNBec2WZbe3
+ fjMfv3ds=
+X-Gm-Gg: AR+sD11NJSdUAIkLAev1xtV7DaX411al2wRjuVUsYckXDAXN9rGHzOseKbVEK7zbALe
+ jC7RKocfTPNP6UBYIKeCCfUuOYhfeXJ602oDOedn9Cy1x6vwMO2Oo7QtJ4E2zAxuccXq1F4g5BH
+ mXdOOMwHS7ZmYjOgJkWkecrniRwOubwGf/S2D2vkvhl882y9SJRSV9/04XGi2psyVxnPuYj491f
+ QBedM7ys3c9CGbBijtt09XVK92KtTwWSFyf2vp+xZjnZqmB8ctmmhbj8tzUmWpJnnHjW+JALQGs
+ B3B8Ni90NcL08O2GxGVLywQY5ahKpkh0PDcBPXVt5no91SLH03/1EeIgiUbmRYvmUNyQbKuK6Ns
+ +evi5HHkMcR1Vvf9n/nyPDwmtyxpP3y68fZowYlGEQhyKunZitdHFprcogbOhg1cJa+eFaMQrbP
+ JgrCePigZ3UfERR+pp26d8vhorDcRgBf3RyOVzN0WSV4sB69LR13DDIAysXVZ/+uLjQ/+FAsI88
+ 3GhJsIPnObLkbNAShjygMGUIyaG1NmC1dB1Ojec/xR7OdN9HX+PjasCPJnukGoW
+X-Received: by 2002:a17:907:980c:b0:c20:3679:a2e6 with SMTP id
+ a640c23a62f3a-c2039b4bf40mr1152355866b.10.1786114361196; 
+ Fri, 07 Aug 2026 07:52:41 -0700 (PDT)
 Received: from [127.0.1.1]
  (p200300ff0f038f0050294ea7756f18f0.dip0.t-ipconnect.de.
  [2003:ff:f03:8f00:5029:4ea7:756f:18f0])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2080cc3963sm62218566b.50.2026.08.07.07.52.39
+ a640c23a62f3a-c2080cc3963sm62218566b.50.2026.08.07.07.52.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 07 Aug 2026 07:52:40 -0700 (PDT)
 From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Subject: [PATCH 0/2] net: dhcp6: fix an infinite loop parsing IA options
-Date: Fri, 07 Aug 2026 16:52:20 +0200
-Message-Id: <20260807-poc-dhcp6-ia-loop-v1-0-9d3fd3171c59@byteray.co.uk>
+Date: Fri, 07 Aug 2026 16:52:21 +0200
+Subject: [PATCH 1/2] net: dhcp6: prevent an infinite loop parsing IA
+ options
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACTxdWoC/yXMQQqDMBBA0avIrB2IEY32KtJFnIw6UkxIrBTEu
- ze2y7f4/4TEUTjBozgh8iFJ/JZRlQXQYreZUVw2aKVb1SmDwRO6hUKLYvHlfcC+bkaqrHGm15C
- 7EHmSz+85PP9O73Fl2u8RXNcXXUIgQ3UAAAA=
-X-Change-ID: 20260807-poc-dhcp6-ia-loop-935bc1a7d792
+Message-Id: <20260807-poc-dhcp6-ia-loop-v1-1-9d3fd3171c59@byteray.co.uk>
+References: <20260807-poc-dhcp6-ia-loop-v1-0-9d3fd3171c59@byteray.co.uk>
+In-Reply-To: <20260807-poc-dhcp6-ia-loop-v1-0-9d3fd3171c59@byteray.co.uk>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
  u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -109,24 +110,24 @@ X-Mailman-Approved-At: Fri, 07 Aug 2026 16:12:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786114361; x=1786719161;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=JceJu2AvhGH4Q1dPq02j2kYJQ0nAL/oXneLxbxSqfhg=;
- b=SZFnquBVwBD6EKy1FBvpnlJ+nPn4F9FQvnw1FvnWssSR422S3sNRSpygp8F7L0VOL2
- ScrkQcW8MdUFabt7T1F2k7Rec8wNan5ej1wm3bjResMNIMhjqMTrT6q0L+lDpK2hLTPb
- qIJB8zEzsKviuji3z3qd+mNrUPDEWCHp4wDyWlRlG24Ay5q/9kxf9zGQawf4jbjwxczm
- YLY7uXQamAxlGsrjQzB0gJ9FKt65YURDqoJxx5vgOaVqOQnz77MFN/HPKfI/YVx9HKoW
- +6gywXTDb2EhjrTGLEy6AIADRMS40tvBMKOG2xFQ7kNrG49JnWqVXIBJSa3wXTtN6gyu
- IXrQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=4jdg9ujw06xn6Ap7jZs7hcONdqjCly66sfM9bZgjMDc=;
+ b=elfCSX9JkwstdXU6ppfUHV8owXKvnWneEYB9b6H1+Y9UF5pkMSTimMj9L3Ot5VaQGV
+ 9FDxeLtbIOEsswY6j4spI/7oz/P8T3RXHwoB5baYdgIEKLR1YAMKMwIUnOQiTaWB0WSY
+ 17sKwXXV+k9dsSacoxNU1Aiz5c+9Qri65p71nGoAsb2ZUBqA4i7xp5BIIS/LUGhcqyWe
+ hWCOAfTyzb+zZID2/RtRgiFhxWeIKrpsT6H9Z0Fi9RgB/Rxx3SFfiDdjZEjBzvZrmxtb
+ 4jXGzy9Ay5VnHBUIMqXzS3LJpBJpZOPxB9DzI5mrHwJBhWj6tIGsIvrB5pe8DcDv6bXW
+ Z9qw==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=SZFnquBV
+ header.s=20251104 header.b=elfCSX9J
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,39 +142,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The DHCPv6 client hangs when a received IA_NA / IA_TA option contains an
-encapsulated sub-option of length zero: dhcp6_parse_ia_options() advances
-its cursor by the sub-option length alone, so a zero length never makes
-progress and the client spins forever. A host on the local link able to
-answer the client's SOLICIT during a netboot can trigger this; the IA_ID
-it has to match is observable in the SOLICIT.
+dhcp6_parse_ia_options() walks the sub-options encapsulated in a received
+IA_NA / IA_TA option and advances its cursor by the sub-option's declared
+length alone. A sub-option with a length of zero never advances the
+cursor, so the while loop spins forever and the DHCPv6 client hangs. The
+advance also omits the sub-option header, so it is short even for
+well-formed options.
 
-Patch 1 fixes the advance so every iteration moves past a whole
-sub-option. Patch 2 adds a sandbox DM regression test that injects such an
-ADVERTISE and checks the client parses past it and re-solicits.
+An attacker on the local link able to answer the client's SOLICIT during
+a netboot can send an ADVERTISE whose IA_NA carries a zero-length
+encapsulated sub-option and hang the client; the IA_ID it has to match is
+observable in the client's SOLICIT.
 
-The same parser also reads a fixed 16 bytes for an IAADDR sub-option (and
-a u16 for STATUS_CODE) without a length check. Those reads stay within the
-received-packet buffer and only reflect packet bytes back as the client's
-own address, so they are not addressed here; I can send a follow-up that
-bounds them if preferred.
+Advance the cursor by the sub-option header size plus its length so every
+iteration makes forward progress and the walk matches the option layout.
 
-A reproducer is available on request.
-
+Fixes: a0245818f7f8 ("net: dhcp6: Add DHCPv6 (DHCP for IPv6)")
 Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 ---
-Shahriyar Jalayeri (2):
-      net: dhcp6: prevent an infinite loop parsing IA options
-      test: dm: eth: add a DHCPv6 zero-length IA option test
+ net/dhcpv6.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- net/dhcpv6.c  |   3 +-
- test/dm/eth.c | 120 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 122 insertions(+), 1 deletion(-)
----
-base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-change-id: 20260807-poc-dhcp6-ia-loop-935bc1a7d792
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 640f089a2e1..1e92d744615 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -285,7 +285,8 @@ static void dhcp6_parse_ia_options(struct dhcp6_option_hdr *ia_ptr, uchar *ia_op
+ 			break;
+ 		}
+ 
+-		ia_option_ptr += ntohs(((struct dhcp6_option_hdr *)ia_option_ptr)->option_len);
++		ia_option_ptr += sizeof(struct dhcp6_option_hdr) +
++				 ntohs(((struct dhcp6_option_hdr *)ia_option_ptr)->option_len);
+ 	}
+ }
+ 
 
-Best regards,
---  
-Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+-- 
+2.43.0
 
