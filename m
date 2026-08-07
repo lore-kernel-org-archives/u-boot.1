@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67517C5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 12:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB9B3C2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 12:40:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DA05C812CA;
-	Fri,  7 Aug 2026 12:38:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4C0DF80F95;
+	Fri,  7 Aug 2026 12:40:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WmmriPPDETE4; Fri,  7 Aug 2026 12:38:09 +0000 (UTC)
+ id E_0m6IUmAFC9; Fri,  7 Aug 2026 12:40:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 007B98112C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7C0D780E42
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786106289;
-	bh=1m8+j8Z8URFOZy76gDvdnjCVljozzo9jso5mYZBpor4=;
+	d=lists.u-boot-project.org ; s=default; t=1786106434;
+	bh=NMV3GGNj/cvZADcvQZ0ITKw6KYSBrO+K/iB82WVal4g=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=dc8t/yD32mdN17jP/hLEZRuZ/I1z+eFA38Fg1jq2AS3081ejVcgJvbcAWPD02zDEm
-	 0AO8Pt6J81i9IMvDsO1A6y8GEhkUkAJ6T5ZGVGRaNxuCRu1t3C5yTGm8913CK2MTZa
-	 8h2yteK4H2Z5A/YIRDiqFE7OjeQmLfiXH48mhTC6+uvr7iXzSw9QF17yDYAIK5LDpr
-	 zUWRVMSTrsLhnve/jICGSmOvjvXbWD+8whT/dBGjz/JAbkr2kUeaf5aP0M1Yr1ram4
-	 elDGFAjDTw46VEXNgyGIl2stYhNf3E7cGqI4VXZTG3SBpfZfvfiFTGwVNgLYNmXmIF
-	 Kymg1fPJu2K/Q==
+	b=S3mUgyHLTTh772QWuntC9akMI3ixQy4QrMxmoTdP5OeYrNw7D+ka4CLby9es+GG9Z
+	 kCe89uL4emWSl1UkDQ/N/w22iA+TUxzO5ZW2Cmu/VI807MddW6w9I0OdFliDkLbNBe
+	 tEPa9nZqDXxFdtdmCiJ17M3gMMVYJmJAQBZ1ZP9X9EPHK3409uHvRm2vfs5l+H/y7b
+	 J0nfNfnirv/2wcZUACAHYnRJ3WYI6EnxpJwWkHDuqzooSylGuOgJk5MTL/ZsGMHxji
+	 pLfO/pPipThu+lKJVJrV6yMVIukxivsZk8RP+ShPDq0GudIWpllSEtSnUwEUOIscdO
+	 2vv7CnhoJUuBA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 007B98112C;
-	Fri,  7 Aug 2026 12:38:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 214F0198
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 12:38:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7C0D780E42;
+	Fri,  7 Aug 2026 12:40:34 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF25D198
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 12:40:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0905140A5D
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 12:38:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C4E2380D48
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 12:40:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jFRG42vNwsLa for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 12:38:07 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 91D4UT0rtdx0 for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 12:40:32 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C040D40A46
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C040D40A46
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C040D40A46
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 12:38:06 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4955de8797cso23096775e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 05:38:06 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8B9EB80BD7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8B9EB80BD7
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8B9EB80BD7
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 12:40:31 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4956869750eso24496555e9.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 05:40:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786106285; x=1786711085;
+ d=1e100.net; s=20251104; t=1786106429; x=1786711229;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=1m8+j8Z8URFOZy76gDvdnjCVljozzo9jso5mYZBpor4=;
- b=UG+c/lXGP5NH0s6TISLIM0mi7LAzCYs8TSsHVsuU2uJ/Y9liiVvbRHz5OYF1xpdm+Q
- S70msSrZRjdxhxc46frT4P2I0C3j7a4oQkz0ABqkvr/hsQzgukW+RqN8sXUnLW16BtFH
- i0HXpFCVbqfedNX+rLXz5u/nHSpILg4JsYkPgsmzcLysREbAMzPgd39zxsCmHkTdg+eM
- /+VjH+FZRVq0g9SdXifUbAmJ+eNp4QqJVDWF0PPWssX8yiHwV7K+afclA4oAkefKYqqd
- aRulvrjn/6HSzMd+wZKd8vmIKLGD4Nncag0gMNW6mEGj2D5mYbr8aPpUCHCaLYmOcLsN
- j/3g==
+ bh=NMV3GGNj/cvZADcvQZ0ITKw6KYSBrO+K/iB82WVal4g=;
+ b=P4fr/bmauRqNqTm2ETkyGDJqBM2V9ZwY956H2lqvGlcctHQhOLABgdFIuLcmVwjm2q
+ caN/1RtuDT6lCApBWeiAvr/bLwNyPihFrH+j5l2UmlLAta/vEvLtoduG7fVJChubH0J5
+ 14zEzVhjvt3zvDU/BMpZfZD7KWR1iVfHHY9Lv/tO6k0tLbL3ulZszOU14SW6Ra/1PTtp
+ TEC1NRUZSTwcyhJB8lVFzL6YH26Ay2WDKFeBuDbFNUBdScU2WR3QBtVnVTTPDICkOxn4
+ g98hVEfT0n3txJJiHV6U/0O+I73N3Rx+ad2f7YHPCiJer1tY6y2UrTkDalZCcJwehAIA
+ p+TA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrXeuRLiG7lX3eqWypYwc+IC4/D094T9dP35Sf9ChgYrHzJW1g5arXVa8KmaiM1ksHWQrvuDQ8=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyktnSN1Q7rpX0WMjgdhL+sjNslAV1wpxavzBW8CzAZDv0lKwD2
- B2yWQEMR1YLxLHPf0PWY/Yl1Ih7Ml91OzqrjYcUXQQ8DTFEasTtWCKIy7/V6DbxR7Tc=
-X-Gm-Gg: AR+sD11LErCs34VvQntf2cYB1CQsuBvaYq5OQiVv+izf8FilMGyXq7D/Z/9IcjqxQju
- DPrXErbqoYEWZvO+qk6uCfL9HPvT/+VvDQcsillsTAmd3mfbZxBeti4UaLrM3sF+BJkZn5vZ2f0
- pBp9cYXzlkf7TrSBuQ2D8uH2GLJpf3IZtZ6B+KeHHRb9xMGzdORn6eD8yOAiJwzCk/j6ruxDZNb
- zVcObSCwNdgpeC5NxM2DXU6zDKJs2Eo/gBgG1mgiYipX2+ts7/PVZrG85dowp5oCvG5PvWehtOm
- z5z4i2YvbaDdPWOFOXOLdWmsBhCBbwnVrMZs1sclSz/IiuQHCGmfhXZ8yGj3BIqSpI2wANdBtZn
- FaYpL3w5sdtWNufORY5Jplr6GzSuQ3tLGl1KAsVgxpGuJamM4CyYW4uWWC3+emcLoY9o8YCZWuX
- H3g7bVXnlmfFs3dvDoxgoyeXpXHM7PXuNyF0HgWmBGMO+sG+b9RuTtHHPsjBXAGgo58aGW77F0z
- WsTC4DjipoAJM+100YOloplLaG6kIKXAJ01Ss7fc0JnkbrmyJZm/wyK
-X-Received: by 2002:a05:600c:4e86:b0:496:c2fd:1731 with SMTP id
- 5b1f17b1804b1-4995e07f47dmr37773825e9.1.1786106284549; 
- Fri, 07 Aug 2026 05:38:04 -0700 (PDT)
+ AHgh+Rrx9IWdHX9kfWteReC0+NQ9VUVh7clXs2QOLQM1deO7yMnbStmmPGf2lNgtOTyiCXVrnzn8AcU=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxdCb0vqIMnfQ/YZZZnvFmseF/y/CTTkUpfG9kSzYkX55me9kmz
+ Ev5OTfloFy/bT2BFifVFaKRVU9K5BF1QOLNIJ3cxpS/OQoDaPnabbc6ORvi4W45bn/4=
+X-Gm-Gg: AR+sD11kIFAFfl0LFnWZsG9nyO4WocgNB8EjoevTeOO4HjupyEGOGquDK0B/EqtjTDH
+ 3Ja9S7uxIIPHZV9LoGiYlS6xJh39Y4vX2KDag8IYOEkooyibb4TeNhc51bFyyWqUNWYYrVpT3en
+ VMtA48r9aOWI8nyirxiF/BA/ZK3M/atQIp+gcx5UBBo54DhWm4sGL6CBEvQdKnuvF9RTS81gmrB
+ v5ONJ3Wu82g11fbycYhXQkB4oLkZer82Xddt8TGA9KSJikuqSiqKgHylUa8uhP5Q7oWTeUmnCde
+ NZVlqKv387iZolnZdqWXI01reKYqGKXjJL/EjNsMcn32P/Gmb/Qyh9Sx5zrvScMXQCwMc6gfouw
+ hf762Ms1MEXkh2umAfzlsmwYofe4fN3/A3kuLjLyAvT6Le/M1A5XLfieIjzNcCdEW5Yvk/wlQvW
+ JpwG0BoAti3D32qpI5oU/DUKe341H1a5uuaqghx/2YpO2P+PQvNE/IelJ482Cl0jiW2CwdIbKKp
+ PZRrR+c+BsFfL3MjML0enN+FvCik25KFj5XXhbFLQBo
+X-Received: by 2002:a05:600c:3ba2:b0:493:aa0a:45ad with SMTP id
+ 5b1f17b1804b1-4994e794edamr283424385e9.2.1786106427509; 
+ Fri, 07 Aug 2026 05:40:27 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:66e6:6f30:5a76:1cc2?
  ([2a01:e0a:106d:1080:66e6:6f30:5a76:1cc2])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48002145589sm5983494f8f.1.2026.08.07.05.38.03
+ 5b1f17b1804b1-4995e9f0230sm32793455e9.6.2026.08.07.05.40.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Aug 2026 05:38:04 -0700 (PDT)
-Message-ID: <b2dd2649-c45b-4bad-997e-8a4787be6bf1@linaro.org>
-Date: Fri, 7 Aug 2026 14:38:03 +0200
+ Fri, 07 Aug 2026 05:40:27 -0700 (PDT)
+Message-ID: <e3976d91-6163-44e9-b8eb-ea27f4b6211f@linaro.org>
+Date: Fri, 7 Aug 2026 14:40:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/7] interconnect: qcom: Add QCS8300 interconnect driver
+Subject: Re: [PATCH 1/7] clk: qcom: Add dedicated sa8775p RPMH clock driver
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
  u-boot-qcom@groups.io
@@ -102,7 +102,7 @@ Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Biswapriyo Nath <nathbappai@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20260806-b4-monaco-v1-0-8d7b4e2f4fe1@oss.qualcomm.com>
- <20260806-b4-monaco-v1-4-8d7b4e2f4fe1@oss.qualcomm.com>
+ <20260806-b4-monaco-v1-1-8d7b4e2f4fe1@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -129,30 +129,30 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260806-b4-monaco-v1-4-8d7b4e2f4fe1@oss.qualcomm.com>
+In-Reply-To: <20260806-b4-monaco-v1-1-8d7b4e2f4fe1@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786106285; x=1786711085;
+ d=linaro.org; s=google; t=1786106429; x=1786711229;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1m8+j8Z8URFOZy76gDvdnjCVljozzo9jso5mYZBpor4=;
- b=f+zy8tC4Xd8oSU8oMot0PtIt+WyosNiBTvOea277z3Mh5vmMEy7m1xqWaqwovpvSmL
- mWh9R3X1RkxNhMAiyd7J38AxXJQ+ZKY8iX51t6+IHDic3igEAf45ziot+7LXgEn7c6s0
- UQ4hp9ovdlgAo9FfSi4uBo3KKZlmJLHsYr4rCk6Zgotl3pDJURBXhRYaKRGflIV+YYnJ
- JoFH4jzvD+uBdbZdfr38oFhdTjxZPp8TzjrZqd1T9+H1mBeqHDcGq5mEBZ52cIpSt9JU
- Gwp+PeX6n4ZJsWlDptt3kr9OqlWyish/9szVjUW5LSW8G0/6AKgraWGlHUyxHJSpSjeI
- 3ItQ==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=NMV3GGNj/cvZADcvQZ0ITKw6KYSBrO+K/iB82WVal4g=;
+ b=WZUTRNtPVZ4EATzexSZzyOdC+l8bmwF/3oQIPUj2lbV16LBDae1Ego/gacKf8BgKwh
+ jz93cyAs5o7bUVFmPtj1mGtZIITzuUWheMLJ/Hxse6KSJfQQ+hb9ldJakbPWn7J/GX+D
+ XmOHGgUa4Zg3c6P1lgLGyE1rmalGsAbdP4127eOROZ/tRQHpsS5+9j8aaZM77rbUXldm
+ Lt3ffnG/EfOnZC7vvLGHT0CnH7r2YACpi8UdeXk1O70UoalAsOV2NNenBHMv34IXt2t3
+ AWsRvSJp2d3eAHqq7AOC53r7GCRVXEve85ECxOt9e7InBebRMQCz/vk9dHEpFG6uTuVO
+ V2mw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=f+zy8tC4
+ header.s=google header.b=WZUTRNtP
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -169,353 +169,96 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 On 8/6/26 18:12, Balaji Selvanathan wrote:
-> Add the interconnect (NoC) driver for QCS8300.
+> sa8775p was being handled by the generic clock stub, which just
+> no-ops every request. Give it a real driver that provides support for
+> get/set rate.
 > 
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->   drivers/interconnect/qcom/Kconfig   |   6 +
->   drivers/interconnect/qcom/Makefile  |   1 +
->   drivers/interconnect/qcom/qcs8300.c | 269 ++++++++++++++++++++++++++++++++++++
->   drivers/interconnect/qcom/qcs8300.h |  24 ++++
->   4 files changed, 300 insertions(+)
+>   drivers/clk/clk-stub.c           |  1 -
+>   drivers/clk/qcom/clock-sa8775p.c | 46 ++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 46 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/interconnect/qcom/Kconfig b/drivers/interconnect/qcom/Kconfig
-> index b105c3a1f9a..906f2fa604a 100644
-> --- a/drivers/interconnect/qcom/Kconfig
-> +++ b/drivers/interconnect/qcom/Kconfig
-> @@ -5,6 +5,12 @@ config INTERCONNECT_QCOM_RPMH
->   	  Enable support for the interconnect helpers to vote with
->   	  the RPMh subsystems in Qualcomm SoCs
+> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+> index 4a6c71016da..f7d42892423 100644
+> --- a/drivers/clk/clk-stub.c
+> +++ b/drivers/clk/clk-stub.c
+> @@ -51,7 +51,6 @@ static struct clk_ops stub_clk_ops = {
+>   static const struct udevice_id stub_clk_ids[] = {
+>   	{ .compatible = "qcom,qcs615-rpmh-clk" },
+>   	{ .compatible = "qcom,rpmcc" },
+> -	{ .compatible = "qcom,sa8775p-rpmh-clk" },
+>   	{ .compatible = "qcom,sc7180-rpmh-clk" },
+>   	{ .compatible = "qcom,sc7280-rpmh-clk" },
+>   	{ .compatible = "qcom,sdm670-rpmh-clk" },
+> diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
+> index 7eec4aeae48..49b94078a41 100644
+> --- a/drivers/clk/qcom/clock-sa8775p.c
+> +++ b/drivers/clk/qcom/clock-sa8775p.c
+> @@ -13,8 +13,14 @@
+>   #include <linux/bug.h>
+>   #include <linux/bitops.h>
+>   #include <dt-bindings/clock/qcom,sa8775p-gcc.h>
+> +#include <dt-bindings/clock/qcom,rpmh.h>
+>   #include "clock-qcom.h"
 >   
-> +config INTERCONNECT_QCOM_QCS8300
-> +	bool "Enable interconnect support for QCS8300 SoC"
-> +	depends on INTERCONNECT_QCOM_RPMH
-> +	help
-> +	  Enable support for the interconnect driver for the QCS8300 SoC.
+> +#define TCXO_RATE	38400000
 > +
->   config INTERCONNECT_QCOM_SM8650
->   	bool "Enable interconnect support for SM8650 SoC"
->   	depends on INTERCONNECT_QCOM_RPMH
-> diff --git a/drivers/interconnect/qcom/Makefile b/drivers/interconnect/qcom/Makefile
-> index a33a65bd82e..6ba69269621 100644
-> --- a/drivers/interconnect/qcom/Makefile
-> +++ b/drivers/interconnect/qcom/Makefile
-> @@ -4,4 +4,5 @@
->   #
->   
->   obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_RPMH) += icc-rpmh.o bcm-voter.o
-> +obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_QCS8300) += qcs8300.o
->   obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SM8650) += sm8650.o
-> diff --git a/drivers/interconnect/qcom/qcs8300.c b/drivers/interconnect/qcom/qcs8300.c
-> new file mode 100644
-> index 00000000000..db5316af2cb
-> --- /dev/null
-> +++ b/drivers/interconnect/qcom/qcs8300.c
-> @@ -0,0 +1,269 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + *
-> + */
+> +/* RPMH_CXO_CLK = bi_tcxo_div2 on sa8775p */
+> +#define TCXO_DIV2_RATE	(TCXO_RATE / 2)
+
+Actually this is valid since SM8550, so perhaps it should be a separate standalone driver
+for sm8550/sm8650/sa8775p...
+
+Neil
+
 > +
-> +#include <dm.h>
-> +#include <interconnect-uclass.h>
-> +#include <dt-bindings/interconnect/qcom,qcs8300-rpmh.h>
+>   #define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0x1b040
+>   #define USB30_PRIM_MASTER_CLK_CMD_RCGR		0x1b028
+>   #define USB3_PRIM_PHY_AUX_CMD_RCGR		0x1b06c
+> @@ -275,3 +281,43 @@ U_BOOT_DRIVER(gcc_sa8775p) = {
+>   	.bind		= qcom_cc_bind,
+>   	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>   };
 > +
-> +#include "icc-rpmh.h"
-> +#include "qcs8300.h"
+> +static ulong sa8775p_rpmh_clk_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	return (clk->rate = rate);
+> +}
 > +
-> +static struct qcom_icc_node xm_ufs_mem = {
-> +	.name = "xm_ufs_mem",
-> +	.id = QCS8300_MASTER_UFS_MEM,
-> +	.channels = 1,
-> +	.buswidth = 8,
-> +	.num_links = 1,
-> +	.links = { QCS8300_SLAVE_A1NOC_SNOC },
+> +static ulong sa8775p_rpmh_clk_get_rate(struct clk *clk)
+> +{
+> +	switch (clk->id) {
+> +	case RPMH_CXO_CLK:
+> +		return TCXO_DIV2_RATE;
+> +	default:
+> +		return clk->rate;
+> +	}
+> +}
+> +
+> +static int sa8775p_rpmh_clk_nop(struct clk *clk)
+> +{
+> +	return 0;
+> +}
+> +
+> +static struct clk_ops sa8775p_rpmh_clk_ops = {
+> +	.set_rate = sa8775p_rpmh_clk_set_rate,
+> +	.get_rate = sa8775p_rpmh_clk_get_rate,
+> +	.enable = sa8775p_rpmh_clk_nop,
+> +	.disable = sa8775p_rpmh_clk_nop,
 > +};
 > +
-> +static struct qcom_icc_node qns_a1noc_snoc = {
-> +	.name = "qns_a1noc_snoc",
-> +	.id = QCS8300_SLAVE_A1NOC_SNOC,
-> +	.channels = 1,
-> +	.buswidth = 32,
-> +	.num_links = 1,
-> +	.links = { QCS8300_MASTER_A1NOC_SNOC },
-> +};
-> +
-> +static struct qcom_icc_node qnm_aggre1_noc = {
-> +	.name = "qnm_aggre1_noc",
-> +	.id = QCS8300_MASTER_A1NOC_SNOC,
-> +	.channels = 1,
-> +	.buswidth = 32,
-> +	.num_links = 1,
-> +	.links = { QCS8300_SLAVE_SNOC_GEM_NOC_SF },
-> +};
-> +
-> +static struct qcom_icc_node qns_gemnoc_sf = {
-> +	.name = "qns_gemnoc_sf",
-> +	.id = QCS8300_SLAVE_SNOC_GEM_NOC_SF,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { QCS8300_MASTER_SNOC_SF_MEM_NOC },
-> +};
-> +
-> +static struct qcom_icc_node qnm_snoc_sf = {
-> +	.name = "qnm_snoc_sf",
-> +	.id = QCS8300_MASTER_SNOC_SF_MEM_NOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { QCS8300_SLAVE_LLCC },
-> +};
-> +
-> +static struct qcom_icc_node chm_apps = {
-> +	.name = "chm_apps",
-> +	.id = QCS8300_MASTER_APPSS_PROC,
-> +	.channels = 4,
-> +	.buswidth = 32,
-> +	.num_links = 1,
-> +	.links = { QCS8300_SLAVE_GEM_NOC_CNOC },
-> +};
-> +
-> +static struct qcom_icc_node qns_gem_noc_cnoc = {
-> +	.name = "qns_gem_noc_cnoc",
-> +	.id = QCS8300_SLAVE_GEM_NOC_CNOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { QCS8300_MASTER_GEM_NOC_CNOC },
-> +};
-> +
-> +static struct qcom_icc_node qns_llcc = {
-> +	.name = "qns_llcc",
-> +	.id = QCS8300_SLAVE_LLCC,
-> +	.channels = 4,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { QCS8300_MASTER_LLCC },
-> +};
-> +
-> +static struct qcom_icc_node llcc_mc = {
-> +	.name = "llcc_mc",
-> +	.id = QCS8300_MASTER_LLCC,
-> +	.channels = 8,
-> +	.buswidth = 4,
-> +	.num_links = 1,
-> +	.links = { QCS8300_SLAVE_EBI1 },
-> +};
-> +
-> +static struct qcom_icc_node ebi = {
-> +	.name = "ebi",
-> +	.id = QCS8300_SLAVE_EBI1,
-> +	.channels = 8,
-> +	.buswidth = 4,
-> +	.num_links = 0,
-> +};
-> +
-> +static struct qcom_icc_node qnm_gemnoc_cnoc = {
-> +	.name = "qnm_gemnoc_cnoc",
-> +	.id = QCS8300_MASTER_GEM_NOC_CNOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { QCS8300_SLAVE_UFS_MEM_CFG },
-> +};
-> +
-> +static struct qcom_icc_node qhs_ufs_mem_cfg = {
-> +	.name = "qhs_ufs_mem_cfg",
-> +	.id = QCS8300_SLAVE_UFS_MEM_CFG,
-> +	.channels = 1,
-> +	.buswidth = 4,
-> +	.num_links = 0,
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sn3 = {
-> +	.name = "SN3",
-> +	.num_nodes = 2,
-> +	.nodes = { &qns_a1noc_snoc, &qnm_aggre1_noc },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sn0 = {
-> +	.name = "SN0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &qns_gemnoc_sf },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sh0 = {
-> +	.name = "SH0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &qns_llcc },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sh2 = {
-> +	.name = "SH2",
-> +	.num_nodes = 1,
-> +	.nodes = { &chm_apps },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_acv = {
-> +	.name = "ACV",
-> +	.enable_mask = BIT(3),
-> +	.num_nodes = 1,
-> +	.nodes = { &ebi },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_mc0 = {
-> +	.name = "MC0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &ebi },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_cn0 = {
-> +	.name = "CN0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &qnm_gemnoc_cnoc },
-> +};
-> +
-> +static struct qcom_icc_bcm * const aggre1_noc_bcms[] = {
-> +	&bcm_sn3,
-> +};
-> +
-> +static struct qcom_icc_node * const aggre1_noc_nodes[] = {
-> +	[MASTER_UFS_MEM] = &xm_ufs_mem,
-> +	[SLAVE_A1NOC_SNOC] = &qns_a1noc_snoc,
-> +};
-> +
-> +static const struct qcom_icc_desc qcs8300_aggre1_noc = {
-> +	.nodes = aggre1_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(aggre1_noc_nodes),
-> +	.bcms = aggre1_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(aggre1_noc_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const system_noc_bcms[] = {
-> +	&bcm_sn0,
-> +};
-> +
-> +static struct qcom_icc_node * const system_noc_nodes[] = {
-> +	[MASTER_A1NOC_SNOC] = &qnm_aggre1_noc,
-> +	[SLAVE_SNOC_GEM_NOC_SF] = &qns_gemnoc_sf,
-> +};
-> +
-> +static const struct qcom_icc_desc qcs8300_system_noc = {
-> +	.nodes = system_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(system_noc_nodes),
-> +	.bcms = system_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(system_noc_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const gem_noc_bcms[] = {
-> +	&bcm_sh0,
-> +	&bcm_sh2,
-> +};
-> +
-> +static struct qcom_icc_node * const gem_noc_nodes[] = {
-> +	[MASTER_APPSS_PROC] = &chm_apps,
-> +	[MASTER_SNOC_SF_MEM_NOC] = &qnm_snoc_sf,
-> +	[SLAVE_GEM_NOC_CNOC] = &qns_gem_noc_cnoc,
-> +	[SLAVE_LLCC] = &qns_llcc,
-> +};
-> +
-> +static const struct qcom_icc_desc qcs8300_gem_noc = {
-> +	.nodes = gem_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(gem_noc_nodes),
-> +	.bcms = gem_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(gem_noc_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const mc_virt_bcms[] = {
-> +	&bcm_acv,
-> +	&bcm_mc0,
-> +};
-> +
-> +static struct qcom_icc_node * const mc_virt_nodes[] = {
-> +	[MASTER_LLCC] = &llcc_mc,
-> +	[SLAVE_EBI1] = &ebi,
-> +};
-> +
-> +static const struct qcom_icc_desc qcs8300_mc_virt = {
-> +	.nodes = mc_virt_nodes,
-> +	.num_nodes = ARRAY_SIZE(mc_virt_nodes),
-> +	.bcms = mc_virt_bcms,
-> +	.num_bcms = ARRAY_SIZE(mc_virt_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const config_noc_bcms[] = {
-> +	&bcm_cn0,
-> +};
-> +
-> +static struct qcom_icc_node * const config_noc_nodes[] = {
-> +	[MASTER_GEM_NOC_CNOC] = &qnm_gemnoc_cnoc,
-> +	[SLAVE_UFS_MEM_CFG] = &qhs_ufs_mem_cfg,
-> +};
-> +
-> +static const struct qcom_icc_desc qcs8300_config_noc = {
-> +	.nodes = config_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(config_noc_nodes),
-> +	.bcms = config_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(config_noc_bcms),
-> +};
-> +
-> +static const struct udevice_id qnoc_of_match[] = {
-> +	{ .compatible = "qcom,qcs8300-aggre1-noc", .data = (ulong)&qcs8300_aggre1_noc },
-> +	{ .compatible = "qcom,qcs8300-system-noc", .data = (ulong)&qcs8300_system_noc },
-> +	{ .compatible = "qcom,qcs8300-gem-noc", .data = (ulong)&qcs8300_gem_noc },
-> +	{ .compatible = "qcom,qcs8300-mc-virt", .data = (ulong)&qcs8300_mc_virt },
-> +	{ .compatible = "qcom,qcs8300-config-noc", .data = (ulong)&qcs8300_config_noc },
+> +static const struct udevice_id sa8775p_rpmh_clk_ids[] = {
+> +	{ .compatible = "qcom,sa8775p-rpmh-clk" },
 > +	{ }
 > +};
 > +
-> +U_BOOT_DRIVER(qnoc_qcs8300) = {
-> +	.name = "qnoc-qcs8300",
-> +	.id = UCLASS_INTERCONNECT,
-> +	.of_match = qnoc_of_match,
-> +	.probe = qcom_icc_rpmh_probe,
-> +	.bind = qcom_icc_rpmh_bind,
-> +	.unbind = qcom_icc_rpmh_unbind,
-> +	.ops = &qcom_icc_rpmh_ops,
-> +	.plat_auto = sizeof(struct qcom_icc_provider),
+> +U_BOOT_DRIVER(sa8775p_rpmh_clk) = {
+> +	.name		= "sa8775p_rpmh_clk",
+> +	.id		= UCLASS_CLK,
+> +	.of_match	= sa8775p_rpmh_clk_ids,
+> +	.ops		= &sa8775p_rpmh_clk_ops,
+> +	.flags		= DM_FLAG_DEFAULT_PD_CTRL_OFF,
 > +};
-> diff --git a/drivers/interconnect/qcom/qcs8300.h b/drivers/interconnect/qcom/qcs8300.h
-> new file mode 100644
-> index 00000000000..2dc523d127e
-> --- /dev/null
-> +++ b/drivers/interconnect/qcom/qcs8300.h
-> @@ -0,0 +1,24 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * QCS8300 interconnect IDs
-> + *
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef __DRIVERS_INTERCONNECT_QCOM_QCS8300_H
-> +#define __DRIVERS_INTERCONNECT_QCOM_QCS8300_H
-> +
-> +#define QCS8300_MASTER_UFS_MEM			0
-> +#define QCS8300_SLAVE_A1NOC_SNOC		1
-> +#define QCS8300_MASTER_A1NOC_SNOC		2
-> +#define QCS8300_SLAVE_SNOC_GEM_NOC_SF		3
-> +#define QCS8300_MASTER_SNOC_SF_MEM_NOC		4
-> +#define QCS8300_SLAVE_LLCC			5
-> +#define QCS8300_MASTER_APPSS_PROC		6
-> +#define QCS8300_SLAVE_GEM_NOC_CNOC		7
-> +#define QCS8300_MASTER_GEM_NOC_CNOC		8
-> +#define QCS8300_MASTER_LLCC			9
-> +#define QCS8300_SLAVE_EBI1			10
-> +#define QCS8300_SLAVE_UFS_MEM_CFG		11
-> +
-> +#endif
 > 
 
-Casey: Feel free to pick it
-
-Acked-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-Thanks,
-Neil
