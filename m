@@ -1,163 +1,122 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE5EC5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 14:18:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAA48C2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 14:18:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 227D460A9D;
-	Fri,  7 Aug 2026 14:18:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 94BF08127A;
+	Fri,  7 Aug 2026 14:18:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cJouR89UYRSL; Fri,  7 Aug 2026 14:18:12 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4LT5k0XHhW6n; Fri,  7 Aug 2026 14:18:19 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3B81260A7B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E352E8127C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786112292;
-	bh=ou2z+aTJstDjXpoQHm42LR2QaDK9YPuYwKi9UPLdAQ8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786112299;
+	bh=q6U0JfyJOzLmHEVn4S/G8OSzXZvUh6dlOR939g4SuC0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=g3OX8rLN/Esc8kq9EB6lT7agSJQSfO5qstOU/Uxi1OJxJATviQ+1mxZw2OcyT162/
-	 iiw+B/FwKDPmrhX0iruNHVMsx9capAPBAdMTdYczU46XlV+Xhr505irMgA34BSn+Xl
-	 ZAmHlie1LSgHVxT3PY6/30ixD0htl+/jnscm2F+WWSExsC8h6DSy7SZgKvtDekrkYM
-	 O+58c23NSB57It3KL2AuiswFL+BbxpPp67B+MtPbtWpPHIvyqfFBnfSRs8L7FWa26T
-	 R2OlU7DH7U8dVJELhe06QWsfc+dD23qaAZg2XYbNPJ3f6gFdAKd9QkHs2hp3TFI7mO
-	 BgoMLwESb27lA==
+	b=LPxGAd1A02FuOGPYbmxmFfq1rOlRxEBV2MWp24mqLz6QNsbvhBM2b8gj/dseY6Ozt
+	 ulCI+AFn60COedco46NSwW8c9RPPnCckmXwge3GmD9hNlvMXccO0sxPyIjBogQbJxC
+	 kNiP58JDv2YHkSInHwqriqSQBBV2HjY/Iz+oU7Cw+5NxWn5+wvaIZoFOP4vtKFiDqk
+	 lYPJXj58nokDy5StS8V6YEAPvmuI0B9w2dF+phHoAPbt1SiGnh+O9HeBjOtPqD9fM0
+	 e4nNPrT+/gk9CQ/dufekANYwhElPSqTU4m1hpYC69s4Vw6fxZ+h1XIeR+qlozwa1no
+	 gNVFg/OPxQo4Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3B81260A7B;
-	Fri,  7 Aug 2026 14:18:12 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 71090270
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 07:38:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E352E8127C;
+	Fri,  7 Aug 2026 14:18:18 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1151D259
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:42:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 62E6B608B4
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 07:38:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0356780EC1
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:42:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R6cnAq1aekwy for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 07:38:07 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HbrP6n6H7ehI for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 11:42:10 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3EC89608B1
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3EC89608B1
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3EC89608B1
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 07:38:07 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c160420289bso431681266b.0
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 00:38:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786088285; cv=none;
- d=google.com; s=arc-20260327;
- b=XpzdcbTd1o62YF7FjqW1VYYB/hVKbk/sevfV17ZsU4lOUWdbQM26hTTStYSP5y8t9A
- +m5dFAb6/3HHuxI8UEqHgCeMPpkLmMTOWV7A4uMDa2eLV5Rhu9QwmclewnfaU5Uqajbl
- k3uDGRcifmjO2atNqQV6sg6zoGh+BY5BB5p24jGOr/Qq2y7o7pC0pk+a6EhEnTgdoLW0
- 6PJZwZweUzYsvNsXqPnCH3YnI+lK+sURLfm7J38VqatKcRD48C6r/Qad6o3h2cqtgJeS
- jBenJJ4yd6J0FHhPwj3pMC9UiO7ntBhg3fqAt6PYrfpQU4jgBwNViBCGNJ5rbW0dqH0X
- Dc6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ou2z+aTJstDjXpoQHm42LR2QaDK9YPuYwKi9UPLdAQ8=;
- fh=mVR9Y/rQZk34FU/ncVJcP5o4w0wahIppgQrEM7okHPo=;
- b=itLAZ4fG1zpGtbNWkJoaQWqBLi+FkRDDachoXez4HpqX7Y2hUAB11PISjKTu/bbOr2
- fbgPg60KlLxPtUa25a3nwm7fb+uOKSYFgB8igBIps5PQwm8jaPbbDKnCoGL7N4qJpUOR
- 0XFbUyDN3j/F1xvG2OkQjEtX+v+Kp7+4v+8EBQb2yj8H52Lk8hR6LdzDc5glXLfi4Je8
- zqkZZG3VE0yIyJ5QU49IdzO0P6VOQyzzxKeZmd1tcrOD/9TX4bKcOVU3B3iIeNfE9Fo/
- FEmT4uAIL14dMwKp6favT2gMLh2doqHGPjeTpAM6LCD1VcsrsiKV6vlqxsqjwhSkVvty
- NL0A==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
+ envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0504181149
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0504181149
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0504181149
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:42:09 +0000 (UTC)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4954df200ddso23049095e9.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 04:42:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786088285; x=1786693085;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ou2z+aTJstDjXpoQHm42LR2QaDK9YPuYwKi9UPLdAQ8=;
- b=YYib9djo677Snf8ePYTZ0w3JwLIAc6OnF/XB3B8nUqromNbVhNOEC7OZ+etdF1hKUX
- 6zg9TAXKhrztQzKiatORuhQ79EY+2FhC4Wb2dlB5EmhgEhuPYiwhWQT1+U0+1zcgpEzR
- DC7G8X7w9ykczIiNtSiJyBKt96DJdZsinp1tA7WPUY2CA/qZ2om+NleEwsSBX2wRKgQN
- PUgKi4aFE/mmlQ0k3fnPpsf5eXbU8auj268JkdS3pu32pKvb/zNOy1d4eST+pDh57JxF
- /P+tFW8uT2e9OtB1gyVVgJ3triv9SoIzJ4oG3opP0IfyL9BIsZMVkLi29kHjOHAbSeOt
- Sv1Q==
-X-Gm-Message-State: AOJu0YyLOX0uxjsMZoDnzy5mG0U3eTkzbwG0T3MjWnlyZPCcgDz/0pQF
- Nn+ouVlty1ppzKUaL8CAoZe+g1jLA4Rv9DjCLgoDqj9Y1MQNMubtq6yVD2sLUaukj4adShZp234
- kwpZ+laCD4rl7Hx9c7YWcJUgsMTnmtSkwxwo5NtRsmQ==
-X-Gm-Gg: AR+sD12Sm4f8Hvd9gC7VzVRni0sCQcSw6i+A22yhRcPFLOZE5OwUGC/efbC5Hc2y7cp
- Tax5RlRlr3Oaj5Sep/yxoBs7wAUX/QwRnTN530VuJ6ky5XBFVo+jO9+6391bw93E0ZzNKSMxqTI
- NEpyF+lY22fMfzUhysDivSfkArMpIoCh6ge0QbCBuJ+xRkT1N6XueUYYMcE1qYoLfi+HAX5YMx6
- 9Js5gn9ypTWaF5bboaxU2biei9hYixj5WiN89jmpkJQjML0x4Q8zR2eeLnxdFHmg5lL1inUqz+s
- 9cpBblR1mv44rdCK/gE/z08pA94aLLJhCKfh2dT5s7htAPzfzsXuF4WEt098t2uf7i7jdYUnpEM
- =
-X-Received: by 2002:a17:907:9344:b0:c16:5ae4:77a3 with SMTP id
- a640c23a62f3a-c2039d1cadbmr989523266b.25.1786088285011; Fri, 07 Aug 2026
- 00:38:05 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786102928; x=1786707728;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=q6U0JfyJOzLmHEVn4S/G8OSzXZvUh6dlOR939g4SuC0=;
+ b=StPFcT0zMTRwWwf6FP6olVjLJ1d3fQy3a1blL6DO69joYbp4NGdxUbM2dzP5m73v92
+ re6DJsJukbhZW08OyUuz/ifCRwT7FF5nDUw4H52fwVtMIK0Y4ZEthAZfiF7X9GSHY/8E
+ 0ZPEf1fiLrcGpng+B9CYbJ8U9XywxYtZzb+vw21NC+d1EOZLVFWMsnC0BSq+KdaUEZcd
+ SU/EurJqozdiuN1+BAjUhFz4wMfrIFHQn7IDRl8MNePplDzhtlsX7ib+0CIfL8ERmlSW
+ Q8a822xo//XS7rvYVnjhsA4URjej4dR5WfdZyMaOAL/486ivhwMsWNSVo+D60Mj4cmCl
+ uy9A==
+X-Gm-Message-State: AOJu0YysD0jJl4R0nfTBv4GjuTChshOz8eT1HKe220zHsUKiOOu6qwhy
+ eXC5lF4sbN49KC2SClqPXPfewilRvwMKUgaIz4wPciTCKEuY83asiiVd
+X-Gm-Gg: AR+sD11cQZZBgdKMoGAxMxJjSqSM4stafebT8IPT6kTUliQeAffMSPgbBIQNwCC4TLd
+ lYHJYeE1E90+85fSd2lAEjraZ4sxit/ThRSC+gLmI6pmgcrrLI16nL/b5fawqCNz/2v8VblAWRk
+ jhBanDwg2oRazke5VGl0wKvMsc8fOO36AW8QHlR9+GLIW/7fFcG6ZuFcDh86uL1pfV4vAIPketN
+ Ik9wEXi9WdDmw0K5a5YfE4HTZJk52ksScKmHn6tNLB8aVn1wVitlJA6BRYe4LRqeMVFSOhwBzRK
+ EPGURb/WSoPd3L3i70PBQfgRJv/HWgbsN2evaq+ba4cnV6voFWKh23BwaC/++xYY5VQbiM20QPs
+ f47/pkfdzyE+/TRtfY8IRbwwtZnNaEt0jlU9vaQEkYEEBdkFtvuDTDUQ9kHHza+tAP7y6QAmR8l
+ ceC3/P5c+jSv5+xJbmLBY7x25lTxbc0EKajzeg411H4TM=
+X-Received: by 2002:a05:600c:34d1:b0:498:1595:be7b with SMTP id
+ 5b1f17b1804b1-4994e794ee7mr327502225e9.4.1786102927846; 
+ Fri, 07 Aug 2026 04:42:07 -0700 (PDT)
+Received: from eichest-laptop.lan ([2a02:168:af72::cb4])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4995c7b2898sm42085455e9.4.2026.08.07.04.42.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Aug 2026 04:42:07 -0700 (PDT)
+From: Stefan Eichenberger <eichest@gmail.com>
+To: francesco.dolcini@toradex.com, sbabic@nabladev.com, festevam@gmail.com,
+ uboot-imx@nxp.com, trini@konsulko.com, franz.schnyder@toradex.com,
+ emanuele.ghidoli@toradex.com, stefan.eichenberger@toradex.com
+Cc: u-boot@lists.u-boot-project.org
+Subject: [PATCH v1 3/3] board: toradex: aquila-imx95: add SPL quick boot
+ autosave support
+Date: Fri,  7 Aug 2026 13:41:54 +0200
+Message-ID: <20260807114200.271420-4-eichest@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260807114200.271420-1-eichest@gmail.com>
+References: <20260807114200.271420-1-eichest@gmail.com>
 MIME-Version: 1.0
-References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-1-acb97c172993@flipper.net>
- <CAFLszTiAP1Bib=Xpg-OK=x=pJCuG=N8f_bnxE7dv=YdM4x2ZOQ@mail.gmail.com>
- <CAKTNdwHaxhnCy22VPMNnGo9Z=p3DF6zmQ8ixR-EsOpb9crO=Dw@mail.gmail.com>
-In-Reply-To: <CAKTNdwHaxhnCy22VPMNnGo9Z=p3DF6zmQ8ixR-EsOpb9crO=Dw@mail.gmail.com>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 7 Aug 2026 11:37:56 +0400
-X-Gm-Features: AUfX_mxiVpcSXmyH7jlaprZgL2QSiCN9stcJUh_wcJHtgGLIz5X2sj57putraQ4
-Message-ID: <CAKTNdwE1xG8d_x3KH6v5bQfWB_QQ1b6sHWxagz1JZ2GDyVOtgQ@mail.gmail.com>
-Subject: Re: [PATCH v2 01/10] spl: Decide about Falcon mode boot only once
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Ronald Wahl <ronald.wahl@legrand.com>, 
- Richard Genoud <richard.genoud@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Johan Jonker <jbx6244@gmail.com>, Daniel Golle <daniel@makrotopia.org>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tony Dinh <mibodhi@gmail.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>, 
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 07 Aug 2026 14:18:09 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 07 Aug 2026 14:18:10 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1786088285; x=1786693085;
+ d=gmail.com; s=20251104; t=1786102928; x=1786707728;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=ou2z+aTJstDjXpoQHm42LR2QaDK9YPuYwKi9UPLdAQ8=;
- b=nMp6Pyjeu9WUVZQaCwF3x7fhPGDBq3GanO248DtGJX6tN4qZ0E8UNEp9Y92WLW0QQz
- uVn1GZdmDLhuMtVRJ4Z434whPUcUUvBxG57Ia4neygfk0WR1MWrFy3eU/B8ER5jihiuH
- LBu7ktEeWaX/scLqnXO9NzOhDfhnsTcZDMUDqIkRn6pmnBR0suS106DiPjzuEGoj3/uv
- A/sF9buUuE7B+BRqwDlcKb1rIz8gImPtI6hrybb3N2vcm6wHsZ7HgEdKhXRee6qgbXB2
- /xGpnymijTnNe5XZ2y5WCByuZGEar4uqEi/2F/XqNHT1wHPOisFmLNlsnmLFOC9cJyWQ
- BGfA==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=q6U0JfyJOzLmHEVn4S/G8OSzXZvUh6dlOR939g4SuC0=;
+ b=KHQj7S3zSbUG3251ocIz00NnGV/nmnsr1ZoDsJBZtJ4x3vXudW4fnzZcV4gnNNTu0T
+ Jy/WUTOq3q1xzJGiouNEJMuma85hG0CEejwCscwqH5+LHeDK2IGWc2a7ldCNWWSnr0U+
+ ITuynoHFSGjlaUtSchcLPm6A6BKd6OqFRWx2RI8gtlNHDLrgfL8HWvM87OdmabVR69jD
+ hA168VBaMIlf28tmHXYGnKHcsa0bz+kPAy8vRuB4DNnQNC6pw0aKl/DzOtELwkL2gWNK
+ YbzxOb+3leZqCtrLV2KOy/9/c2hVipGOUaTL1Omfd71NUg+zRUIvZQBd539IvuIMkir5
+ 6HEQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=gmail.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=nMp6Pyje
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=KHQj7S3z
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -172,57 +131,62 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Simon,
+From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-On Tue, Aug 4, 2026 at 5:29=E2=80=AFPM Alexey Charkov <alchark@flipper.net>=
- wrote:
->
-> Hi Simon,
->
-> On Tue, Aug 4, 2026 at 5:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
-> >
-> > Hi Alexey,
-> >
-> > On 2026-07-31T17:10:44, Alexey Charkov <alchark@flipper.net> wrote:
-[...]
-> > > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > > @@ -105,6 +105,24 @@ __weak int spl_start_uboot(void)
-> > > +bool spl_falcon_boot(void)
-> > > +{
-> > > +     static int falcon =3D -1;
-> >
-> > Minor - since the return type is bool, I'd find it cleaner to use two
-> > bools (result and 'decided'), or an enum, rather than overloading an
-> > int with a -1 sentinel. It also keeps the value out of .data, which
-> > matters a little in SPL.
->
-> Sounds good, will adjust in the next version.
+Add support for the QuickBoot save feature in the SPL for Aquila iMX95
+modules to speed up boot time by skipping DDR training if a valid
+QuickBoot save is found. When CONFIG_SPL_IMX_QB is enabled, the settings
+will be stored automatically from the SPL. Otherwise, the command 'qb save
+mmc 0:1' must be used.
 
-Interestingly, the conversion to two bools on .bss turns out to be
-heavyweight enough to push the am335x_evm SPL image 8 bytes over its
-SRAM size [1]. The .data section shrinks by 3 bytes, but the .text
-section grows by 16 bytes compared to my v2 version, and it no longer
-fits :)
+Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+---
+ board/toradex/aquila-imx95/spl.c | 4 ++++
+ configs/aquila-imx95_defconfig   | 2 ++
+ 2 files changed, 6 insertions(+)
 
-I'm now thinking if it would make more sense to have the spl_atf
-handover function skip looking into the FIT contents and just trust
-that the loader selected the right one based on a one-off
-spl_start_uboot() reading - then I could skip the caching helper and
-wouldn't need to add any new global state, so there should not be any
-size impact. An edge case here would be a FIT containing BOTH a Linux
-kernel and a U-Boot proper (nothing technically prevents that, even
-though the binman template I'm adding as part of this series doesn't
-do that). There won't be any way to select which one to pick from the
-FIT at runtime anymore.
+diff --git a/board/toradex/aquila-imx95/spl.c b/board/toradex/aquila-imx95/spl.c
+index 9f501c11c1d..93e76be6145 100644
+--- a/board/toradex/aquila-imx95/spl.c
++++ b/board/toradex/aquila-imx95/spl.c
+@@ -6,6 +6,7 @@
+ #include <asm/arch/sys_proto.h>
+ #include <asm/mach-imx/boot_mode.h>
+ #include <asm/mach-imx/ele_api.h>
++#include <asm/mach-imx/qb.h>
+ #include <asm/sections.h>
+ #include <asm/global_data.h>
+ #include <clk.h>
+@@ -40,6 +41,9 @@ void spl_board_init(void)
+ 	ret = ele_start_rng();
+ 	if (ret)
+ 		printf("Fail to start RNG: %d\n", ret);
++
++	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
++		spl_imx_qb_save();
+ }
+ 
+ void board_init_f(ulong dummy)
+diff --git a/configs/aquila-imx95_defconfig b/configs/aquila-imx95_defconfig
+index bb3d475ef4d..ee66cebfa4f 100644
+--- a/configs/aquila-imx95_defconfig
++++ b/configs/aquila-imx95_defconfig
+@@ -26,6 +26,7 @@ CONFIG_SYS_LOAD_ADDR=0x90400000
+ CONFIG_WATCHDOG_TIMEOUT_MSECS=30000
+ CONFIG_SPL=y
+ CONFIG_SPL_RECOVER_DATA_SECTION=y
++CONFIG_SPL_IMX_QB=y
+ CONFIG_PCI=y
+ CONFIG_SYS_MEMTEST_START=0x90000000
+ CONFIG_SYS_MEMTEST_END=0xA0000000
+@@ -59,6 +60,7 @@ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MMC_WRITE=y
+ CONFIG_SPL_POWER_DOMAIN=y
+ CONFIG_SPL_THERMAL=y
+ CONFIG_SPL_WATCHDOG=y
+-- 
+2.55.0
 
-Or somehow make the caching helper only apply to SPL_ATF devices
-(am335x_evm isn't one), although that sounds a bit cludgy.
-
-Any thoughts welcome!
-
-[1] https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/job=
-s/62374
-
-Best regards,
-Alexey
