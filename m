@@ -1,100 +1,97 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B844FC2A09B
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 19:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A52DC5AC7A
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 19:17:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 72F5B812CC;
-	Fri,  7 Aug 2026 19:17:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 38D1A407A1;
+	Fri,  7 Aug 2026 19:17:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4Swh6JTiyDBB; Fri,  7 Aug 2026 19:17:10 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OXRV82jyU34z; Fri,  7 Aug 2026 19:17:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7D90E812DE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9F70D4098B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786130230;
-	bh=iWMVoTGinPcRg5DnPH7DTbP5V/Iv4u+BJ/eVi2xe/cA=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=jvPHvsL+v49eh2Fb6SiJDzOEXle8jAao/henXexMwScuzzl8iLOKHNic+YqDEgYRR
-	 tpPnVnqstp9+1RLhJWss11v9H2GK38j4WhNI6wd/+iRE9m5gmpoGuGYMOX0ojp4xim
-	 GOpmIxdNG4NZbhSepclPHq3Iq/DJHdBuuRP/UWmcQ4hzsb9LYU4s4xOS8XfAWkgD3G
-	 GQptB9wEb5f4ESutgLMA1v5KSAdSlZJdZbIJYdF96pzxo/S+5rw+jIgKYe+73nJ4dc
-	 XVxdhZGfVDyf8d9uKAPkOmFccJnZXYgg4Q1u5h+zDOBf8BXQYhmF3v0HLy6n+PWJsb
-	 daiITNUcF29zQ==
+	d=lists.u-boot-project.org ; s=default; t=1786130231;
+	bh=ATJnei3vGdFuqB0xz8BvMW7RaCMF5Lyp++DQh5qxeGc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=agQ61yXr3vkm3YJXtVrCLV1JEA3lEVCBU7zWb7SBoOk5K8UIrWZLUrENkLcjhNPUj
+	 lcK6dT+Ktr9WYvxomxziKDrUyHWB222UjzEwShSOrnn8tSxh1NVxKHAcbGrR3t+1F7
+	 zm5+vQx3UjzBs8fToqk31wWgUbQXounDTIzHI7zbq3E+VXKlsrtXWoMORrqwiIEeeE
+	 qUcCEiCLDOMRBZDvRcB9FLBxeDPGjiZWaCjIsuxaRwONX0mHxqzdo016Hmm1d0KYDt
+	 3r2u7V22oO05SCDHNBGUWtePc+Mi1Vv7BAvmaEEh/gVfwKydzv6dyGw6hSILFuCcnB
+	 sAk2rZOOTfnbA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7D90E812DE;
-	Fri,  7 Aug 2026 19:17:10 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0E7682F5
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9F70D4098B;
+	Fri,  7 Aug 2026 19:17:11 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 85AF0259
  for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:17:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E8ED0812D8
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:17:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 83A8A40207
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:17:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TjSntXSrPxyW for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 19:17:09 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id q-OxgDS8cE4F for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 19:17:10 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
+ client-ip=2607:f8b0:4864:20::229; helo=mail-oi1-x229.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 9AB0B812CC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9AB0B812CC
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9AB0B812CC
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:17:08 +0000 (UTC)
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7e9f1f24cbcso2284624a34.0
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 12:17:08 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 51849400C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 51849400C7
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 51849400C7
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:17:09 +0000 (UTC)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-495b27007d0so2260419b6e.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 12:17:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786130227; x=1786735027;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=iWMVoTGinPcRg5DnPH7DTbP5V/Iv4u+BJ/eVi2xe/cA=;
- b=MWaZWnLCSTAcBz1joMWkH01HlK1dB3dBlmXeI3A37XgFIAh5DLMwL+ggDEB49YgUnM
- oXglhqKDoaWULkitvtZD1N+rxwQuzJU/Wkmf/jpKRMvGJw50cR/g6jzmtbDdHpTD7WpY
- ZBWEyGa9T2wF501Ule/THt7CjN82U5tmRQ4wuYsjWIZQE8u2KGe7RH0nt/28eJPfpuOB
- kwNBnzkUGg0qg/qltPzFWWdx9DQ5nma8lSjMASThIdoeCP/ExVZSKrRrbzRL4lkdW6/m
- EWKsK46Al2aRqgDYsJBYsB0ZXL2q4oyD2e4ND12Gi2A6OYALsbBOpzd+XxCD+GIX7Amv
- D+AQ==
-X-Gm-Message-State: AOJu0YxjM/s/PhNvc4oiBlK9R4clRKSmKeE52e/r08D2KW+CRiOSKVq9
- D2bmlZf6i2NFrgB5I2tZFWJRI1vRdlh+COeqhST9g20hMIUp7WLXdZF6Yizd92xHxrOjT2Brx6S
- j3JaWxeU=
-X-Gm-Gg: AR+sD11uLn8mcf74e5evKrt4xrvj6XVxoGLTGrzLXek9Gk2kUvAh6lMBsWfWHkPC+Cl
- eYQExMEw0mbIOlWDnG+YYKSy8kpJA4oylop41vlugmz4/7Im+yaRj/OyZeqVdmLgKvyoeWSNrNN
- VmU1uYaBRzQ+6w/h1s3PfujwenVeLWNkrnqzx97pdzT5awITopKJyJT0F3+wRZE3azZN69aQVWh
- VW583m9+55FEDUky5trjJlxQ78O1cVCf4QGI2jYZx2rlmfxBA6WYNMhfWZhGNvaOItEk2aUIk2Q
- IgLDZqVaRClaAYDMV7735YAjkiG7JYiIvDlj9pHA5fvV54bsrnwQR6wllUW/JEXT3aSWmMfqOfB
- jVHtyupmdw5VaSJnyJDUD+IZsA9R+8gibGbNhZmcThi+y0E82Tzs5S1hT1/7XAxciWmFxX7vah4
- 5CEU7qJHg+mfhhz0kuD1N/qq4zAsv9lyvzUP28ceeeaIKCkVQnIRL6ko4UZu5KFDd9Q27wOyjbI
- zA=
-X-Received: by 2002:a05:6830:82c8:b0:7e7:24f9:55c8 with SMTP id
- 46e09a7af769-7f36c165ef3mr279083a34.5.1786130227147; 
- Fri, 07 Aug 2026 12:17:07 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786130228; x=1786735028;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ATJnei3vGdFuqB0xz8BvMW7RaCMF5Lyp++DQh5qxeGc=;
+ b=rC2ZOnxGJd7nIRwQBUx1H4VMLGgfyLzEo2ndwFkn5fRO9xhw/tTBsNxLfC7PVeTi4j
+ VFnWL1Zwa34sUfDteLmmaRhADSJ4r2I3ddAhXddviym65DUcUBiFZaDnEZmjVlk+8KSq
+ k8RpzwRP3GWs2JeGfFdOwU6qewOorYDa14zhKm7g/BJdcDBwA63/g6iLOwbWu/6rvQez
+ xHxBdmZg/RQ16IJzM1+sjhXavHCOJSm+y/6s69romzVGVl657exLRkBF2gZrDOVj4+H/
+ 9nk+xTuaC25uzYXWUKPW8rxm81hIsPfkU4CmOWTrxaU/GM6XEOSoILojf0zvRA1vo9N4
+ Rn5A==
+X-Gm-Message-State: AOJu0Yy3Eu2CrP3JSmtzuxKydn2BLOarQpxnSi7U2C3htkwbg+jprHkN
+ bHuM9p9BA4/0k3Lo36l1pPEnXjQZjp4WGHtCBZqq9vl/Z+FgSQ7dws7JXZIw2rJPcx8=
+X-Gm-Gg: AR+sD11nwzQD7FPjS8/PFFEr8/1BswUz21FTfZoUxE55IKa6HNfhjTQTi+wiS2hcq8C
+ 79iLo+FKd+bEnrwF7yArFJZPQ59hjiEDb23/Sdn59Ka1dWLUxTDzLkxZe/HBE7Al2fwZX4bsUUh
+ Yc7Ld6zID0NOqoJTf7w5B2XGB7iwl0F6vXmdgAuFZtsE0W1IQ9Tc3BwUvofVr3zBc0WPm19kkcr
+ +drSum3cUM4ylEqbKW/LhMGbREz+FwtHFPHWi9MvZjeyADbGXI5Ce//X+4TzhDAQPPPRiiiX9Od
+ i8N2P4BgWkRDxJee2JibJTEwPDN59wU53q08Qgl8y/Y5cgR2GPUyahkiNVZd6ug9VPXhfCGfMN2
+ HE/+Dmq6mLjq8sIxb4IxVB+xqUICvKGJn/IlPm+X0PGTdkT02Hx7NnY7hQUiBKXaSxGsWwciDIc
+ KMtmLyB3ZrJZg/S6GuwIE01DFdOIEoR0iEBlGZEOl679sVJNNtDGx1TtmGpuWjjcO5
+X-Received: by 2002:a05:6808:170e:b0:497:df42:1e05 with SMTP id
+ 5614622812f47-4b13323c85bmr6557585b6e.8.1786130228207; 
+ Fri, 07 Aug 2026 12:17:08 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:b714:88c:313d:dee2])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f35b5acbcbsm1875251a34.11.2026.08.07.12.17.06
+ 46e09a7af769-7f35b5acbcbsm1875251a34.11.2026.08.07.12.17.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 12:17:06 -0700 (PDT)
+ Fri, 07 Aug 2026 12:17:07 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v2 0/4] pinctrl: mediatek: Kconfig cleanup
-Date: Fri, 07 Aug 2026 14:16:28 -0500
-Message-Id: <20260807-mtk-pinctrl-kconfig-cleanup-v2-0-509a8f833181@baylibre.com>
+Date: Fri, 07 Aug 2026 14:16:29 -0500
+Subject: [PATCH v2 1/4] pinctrl: mediatek: select PINCONF
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NQQ6CMBAAv0J6tqYUBPTkPwyHsmxhBVrSFiIh/
- F3AD3icZDKzMo+O0LNHtDKHM3myZgd5iRi0yjTIqd6ZSSEzUYiED6HjIxkIrucdWKOp4dCjMtP
- Ib1LkaZEonebA9sLoUNPnrL/KH/upeiOEI3kYLflg3XLu5/jw/jvNMRdco461zu51DPCs1NJT5
- fAKdmDltm1f2RXo5tsAAAA=
-X-Change-ID: 20260803-mtk-pinctrl-kconfig-cleanup-5207483af47c
+Message-Id: <20260807-mtk-pinctrl-kconfig-cleanup-v2-1-509a8f833181@baylibre.com>
+References: <20260807-mtk-pinctrl-kconfig-cleanup-v2-0-509a8f833181@baylibre.com>
+In-Reply-To: <20260807-mtk-pinctrl-kconfig-cleanup-v2-0-509a8f833181@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
@@ -107,41 +104,40 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Julien Masson <jmasson@baylibre.com>, 
  Mingming lee <mingming.lee@mediatek.com>, 
  Fabien Parent <fparent@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2437; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=918; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=aAg9+r4CPb72SXQJ0CHSshzZfsxcAOP/IzuA4whSG/g=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdi8PDONUFAIMPWyHtB9i32QI93qtDhlYnGorf
- ydezTBv7xSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanYvDxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AuD4H/iX9ItLbgx4gmoWptkjiU6AbfRzXrjPga4bppws
- 3BYtHkPsQcdSawi2amdP0/GogsGoRO+v87f9TVYAYp32ZzAvkzfQdkHB+NbnzLju04mjgvDJTDy
- 3FOrHnk5xbIwNCONRZJtwA9VfZqXPHnK5MQ88E89tqncNtCQALO1+gH8QXknmSbCy9V53SU6ns8
- NYeibTPt4J6x+aYCX/8fvoxpoOiU6m9m5rLF9iqp/KV1OqKYmF322Ipp2chk6cBsRtRnqSUkGs9
- lVia2wTUwWd++IFO3Va7EGciuQzKrLosviDbK5HQ83kd1PhtphDmqKo3jQD1SZXFF0pUkCigrAi
- 4i4E=
+ bh=QTaeYTaOWB8sdEccuUt7KljcFcMaHuvZkHdv3fomIvA=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdi8WPw4AbKsABVG85J/NtTfoSF05jc/QQ0aQZ
+ hsENUuuWjmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanYvFhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ABzQH/08sqVDjRHnYjgNFv4DRZCO97pXfHK6b3pJllqs
+ 0ySA3EIJU2kWv1NNL0kITDsAHJSIRgW63ndulftt6foYhJ+TmMk9Q2/KahUsRKC+bqRlrkyjD4Z
+ 5AisnNkGQnwcUUTgP0GGfvtm2EmLcUwPrci3c2Xlvrpk6VJ9w93CpiMMOVWqsC440RBLXBN0NNS
+ ag6cE7cjEmAElWT/BGITswJyBl7mTIwGUCVo689YPrCPuKf6bEh4MjrSnOB0ACT8Sv+tZ19NZ4M
+ n7HTYeqH0C+G5IGP3eZR4nDCa38z2jS6VKSRYabPvDC49PlH3+U3mLDdVKvipHmspzAoulykss9
+ YNwk=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786130227; x=1786735027;
+ d=baylibre.com; s=google; t=1786130228; x=1786735028;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=iWMVoTGinPcRg5DnPH7DTbP5V/Iv4u+BJ/eVi2xe/cA=;
- b=B4tuvvIHitkpxcTk/kPNeB6UhqjsW1JYyt8TdjdHF0EoKn7VCdr5lbvBGUjm7GjMWI
- A2oTtjnFXvUpbH3FpAen1qd6S1cxt2wYJmOi7LTVU83mnpO+0xsJkHYToOyg5SegFinX
- ZaHVxiIlBnrDxt7QZc810SZ1AlxrkK4Igea28boq6dxwjjI+zF1prZrughcz2h87QdWA
- ynO+FoUXY+fH7VyHm4XdlefA+/d1bQVwL5MMEJPJ5T1vKU14STBVav80mepyz7MCKzr/
- KxBAQt1chZQFNcaq0AGVcetKutxuQ2yz9fEVit3Vz4OhHc6FmbVltQp3Djn5CO/uY1Oy
- 709A==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ATJnei3vGdFuqB0xz8BvMW7RaCMF5Lyp++DQh5qxeGc=;
+ b=NlzBas8HQ+bRS60Lsc2PQQwWmu8AaS55ZRw11J0/ug/w6UmI7Py7ahyKj228PvDXOf
+ ruiI5rB5mWH/E5kfjB/ipficEIZjU6oO2koJ1FvfJivEuPtUWqTSMKXIoKcCE6toyRBz
+ aFtFWImirGCjkmLWS9RinbFQ7r1hwKQks6S7HAdVQRpH+ip3mqqJ+ODPomvRiqp5cZRT
+ Oc/LVJfhaElJUsu0X+DhX0J53nBb8w56i0MhRX/F2LHWHHhBXAc5e7JuCDUKL8X+dRKV
+ YOFL/82lthd0OF2ESAQbpn5vUiK/m5rH4lt6lI6l5CJIA1JE5IvGqx0aZq/dW7p8Rq2v
+ CPuA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=B4tuvvIH
+ header.a=rsa-sha256 header.s=google header.b=NlzBas8H
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,56 +152,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This is following up on some suggestions to cleanup the MediaTek pinctrl
-Kconfig before we add another new SoC driver.
+All MediaTek targets include pinconf registers so we should just always
+select PINCONF instead of requiring each config to explicitly enable it.
+
+MT8518 was the only target that didn't have PINCONF already enabled in
+the defconfig, so it will be enabled there by default now. (This was
+likely unintentional as the MT8518 driver does define pinconf registers
+for drive and pull so supports pinconf operations.)
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes in v2:
-- Explain in commit message that PINCONF is enabled by default on MT8518 now.
-- Remove #if CONFIG_IS_ENABLED(PINCONF) from header file as well.
-- Sort targets in Makefile.
-- Link to v1: https://patch.msgid.link/20260803-mtk-pinctrl-kconfig-cleanup-v1-0-fef1ff69d1cc@baylibre.com
+ drivers/pinctrl/mediatek/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-David Lechner (4):
-      pinctrl: mediatek: select PINCONF
-      pinctrl: mediatek: remove PINCONF conditional compilation
-      pinctrl: mediatek: simplify Kconfig
-      configs: mediatek: drop no longer needed PINCTRL options
+diff --git a/drivers/pinctrl/mediatek/Kconfig b/drivers/pinctrl/mediatek/Kconfig
+index 5a90d74a9e1..42c7c8b8c80 100644
+--- a/drivers/pinctrl/mediatek/Kconfig
++++ b/drivers/pinctrl/mediatek/Kconfig
+@@ -2,6 +2,7 @@ if ARCH_MEDIATEK
+ 
+ config PINCTRL_MTK
+ 	depends on PINCTRL_GENERIC
++	select PINCONF
+ 	select REGMAP
+ 	select SYSCON
+ 	bool
 
- configs/mt7622_rfb_defconfig                  |  2 -
- configs/mt7623a_unielec_u7623_02_defconfig    |  2 -
- configs/mt7623n_bpir2_defconfig               |  2 -
- configs/mt7629_rfb_defconfig                  |  2 -
- configs/mt7981_emmc_rfb_defconfig             |  2 -
- configs/mt7981_rfb_defconfig                  |  2 -
- configs/mt7981_sd_rfb_defconfig               |  2 -
- configs/mt7986_rfb_defconfig                  |  2 -
- configs/mt7986a_bpir3_emmc_defconfig          |  2 -
- configs/mt7986a_bpir3_sd_defconfig            |  2 -
- configs/mt7987_emmc_rfb_defconfig             |  2 -
- configs/mt7987_rfb_defconfig                  |  2 -
- configs/mt7987_sd_rfb_defconfig               |  2 -
- configs/mt7988_rfb_defconfig                  |  2 -
- configs/mt7988_sd_rfb_defconfig               |  2 -
- configs/mt8188.config                         |  2 -
- configs/mt8189.config                         |  2 -
- configs/mt8195.config                         |  2 -
- configs/mt8365_evk_defconfig                  |  2 -
- configs/mt8512_bm1_emmc_defconfig             |  2 -
- configs/mt8516_pumpkin_defconfig              |  2 -
- configs/mt8518_ap1_emmc_defconfig             |  1 -
- drivers/pinctrl/mediatek/Kconfig              | 62 +++------------------------
- drivers/pinctrl/mediatek/Makefile             | 30 ++++++-------
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 13 ------
- drivers/pinctrl/mediatek/pinctrl-mtk-common.h |  6 ---
- 26 files changed, 20 insertions(+), 134 deletions(-)
----
-base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-change-id: 20260803-mtk-pinctrl-kconfig-cleanup-5207483af47c
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
