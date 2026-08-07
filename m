@@ -4,141 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E70BC2A09B
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 14:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B849C5AC7A
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 14:09:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0377260A44;
-	Fri,  7 Aug 2026 14:05:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8429360A78;
+	Fri,  7 Aug 2026 14:09:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m9u8ukONAvDo; Fri,  7 Aug 2026 14:05:04 +0000 (UTC)
+ id vYwszgU_J6Mo; Fri,  7 Aug 2026 14:09:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D0E4860A47
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3FE460A44
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786111503;
-	bh=jZH+xuchfqNnwopxQCvWNFpczv1aDYdfxO3KPMRcx94=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786111758;
+	bh=AfmOdSjr2wHfWxOXnSp10FlTWGudyqPFk7XTbvq/gFs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yA7TB0GDe+zvzVjP4eJsnALh3ggRQ+YDRslWhhWxYuCT4cTwlnqbLljM6GzJ5Q+yt
-	 bf8UILSJXV3TFEvoernKKyTmMfCvnIGeUY+NrOGZdjU6AHYB+tajUc/n/SSVl4m2cC
-	 fENkOnVSzdoq1AJX/QXatEaLVNTeG1N2L4UMx1Q8IA4SysOlIozPCnNKfNcdXqszB5
-	 8lTbypx9S4OY2Yq82XXRAVZZJJnO2mESueszJMTJaSPtPtv8B9BKePFI3znUYjP6fF
-	 0fmkhkLuc2O9dGh2LokmK9sLY2l2n5GlIR7eKfdHN+5w3S0+WP0jNdtduLf4JqNEfx
-	 xx6COwUHamrGQ==
+	b=SnVFqbg16EqG++qmmdMRbr1H/YKGKk07kuAjSrITSOMCUBmZF6Ss+K7WOsM4cSezs
+	 qjYTLa5IzLIHByoQA2suZQ5usIbHcOwPYPElebpJVaAMpE1gGsyWhIDspocmRA8HvL
+	 jU2GAgqwpSWQneQsCUyohSp/xojplhdajIC/Q6N+9N1E0rWQ1oEAY7RKg1RP8OI/rY
+	 +xdWEspWvF0ALTYHDCkUzstQt8aC8E3GuuefApTToGusFFkUIDFF87wa8sZQ/PvsNt
+	 JqrKT3sNqapPOjgRUQQTLYVugJJXUL8CtaU4BGRHzxScxkQR9wsCXK54JhTZtcPNBX
+	 A9PUksEk/qpDA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D0E4860A47;
-	Fri,  7 Aug 2026 14:05:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B3FE460A44;
+	Fri,  7 Aug 2026 14:09:18 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id EC5CB2F5
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:05:01 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E28AC198
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:09:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CCF3D60A6D
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:05:01 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C90EB60A71
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:09:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FUlLcv1iExti for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 14:05:00 +0000 (UTC)
+ id 2nrXd9-eJEvB for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 14:09:16 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BC1AE60A44
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BC1AE60A44
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BC1AE60A44
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:04:58 +0000 (UTC)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-69c5fda04a8so5455818a12.1
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 07:04:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786111496; cv=none;
- d=google.com; s=arc-20260327;
- b=OTMgz3goLpg4RLTOQwGg5vLQTBIJsFAWhCgIY5FL5VYJomdkhOk6v0/zxj0CDn6mV1
- b+wCZExgFfoUk+wP/jCFcItlxGTG+lKs5tMdqc2Jzsb2Lf5bBDFuQFIQLJyV1OQC7VBQ
- Dyx4pQnOPc3Kb6mT4xSENF5sEUViYT5hfoUINZ5bnJ54bOgD6ptyHjonkDaHGhFstbZ9
- eMuGq78TTWmv1u89oyh2qUaxwwPVBdYsRyOJD0ECkjVDG9JLuks9LunrEqO/HFEr1eY+
- 2X9vo4QbR+ppA343pK6kytwd9bJnWsbyJeP/4lbVubQhajfdddITRng6I/PHwhGFn+p6
- e4yA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=jZH+xuchfqNnwopxQCvWNFpczv1aDYdfxO3KPMRcx94=;
- fh=zq0xwFSW4TOBo+VRunfqpnjDrw5t9D1HU9uzIQOEeWk=;
- b=cfbrtJrgGcYoIwhPNQ7wuhUIP3/hsXGUsbz8tLng9kIz1tWf6ordW5xj49ejRrseoa
- 6K2pBVysqvQeRsFsibJH62kRt9Soyzv0OssCeKbERbFPVv+ifBuutDwZRwyW6eqn1FUl
- BdynHxbfH0stvTFj4bJq+yIe5fxo+wM/v61C/bV+dNkv/6DwelHhRpsT4m9Y7ynTuiSh
- 2nxFRICSHblqM7eoHRCD+OkqGI0gIe8j9pTBqK5yA2lDFoGnguCAsz8wlJjaQ8wV9EJw
- hpqRGoAuaFCLwnT+LBj3TXDlKq8MvLiL6c20m3aWpWyDclr3wfuXN4dZizjae100FgrH
- CnrQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786111496; x=1786716296;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jZH+xuchfqNnwopxQCvWNFpczv1aDYdfxO3KPMRcx94=;
- b=avNPrsFRqcYPRR6jyaTcDLRGqRSnYFg057o1xHbHLpEThpvecgfGmtJ9U+eqKHC5YJ
- 6nSX8ImiHTJTPgqfakP8drCNajx8F9BmPrR8Hkqr0HIChJWQZHfPbAj2WC0EFGtqDbY1
- fIElWPhqzHA/2TA2MD69qyvkDCmjXOhSdIxqDF2BN27vZvtaONw9VQsdmqWlzyniZRcm
- u7sAVhdkoFaC4dzNVLCIhSCjsHZqwvbrJ9Ms+T7v6kVbS3kY8WzSqtH8ZbF/agWSb8hR
- 1RxrtIBFegLNFIzmRaysl3u/r9So/ZQWxzNouSNiXKHjrrzDejYUigJzR14QUEmeFxsE
- nlsw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoE8uEsn19uWFitNX4/G+URqKnxHlVEAwiwm+VKzrZusn0HTKv7M/AXBqBwHBauAWlAmhf3av4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyxSuBigG+bDn/Mdgg0V4Cldm6O+scFvP++7yfurPseuw06oqUz
- fIuDHx8YVmWeRiF8eIwVowiE6uWE/fC/+5hAjl+c9JmsJmqr/SUeQrbFfkIGBqVYSU5XJN/jt85
- xNthHupo2W0esBfpMuRX0XGF9PRUC83CDwXSDLM8Wj0DfO6s8M3hkBU1+cw==
-X-Gm-Gg: AR+sD10mm8WXhBU+sWcf+U4glf/HfgNE6/bEjG7yPheQDubmfMM1rPDMJTPCpG9n9+z
- bv+961k1Ov4ohSyDkJkk6NyVE5K7ib6CsFff0UVdXgZ4Jq8PlDHxKf2q7APxaYAdMTMKvaQsvVN
- /p3DO0RrraXlHQUwZJMlOlE5CbGa2rYXG9RZnLiVPPe/xP+2Xhkkqm78vkV6M+IxsrlDwJCGpRB
- jti4+sNkW5Sk+C5pa6FoRmw5fFqNTaanzwjF67pmx3ug+b7r2LQAojWRDb+uKHz6QGaDc5t1ZUf
- Xn/pf/Bf53CH7J79W5w0L7qygt6QTkSu/JhP9WCuSvTuPFPE/cMzPwi9vJi6rYO55d1/ULkZnGn
- 6VIOgZGa7qX9NV4vQl4DbiDUWF8/4hklPV2TBGHx88L4lkLTHdB0R093qOsjIjNo=
-X-Received: by 2002:a17:907:97c2:b0:c15:fc5b:6884 with SMTP id
- a640c23a62f3a-c2039cb18f2mr1101454066b.13.1786111496368; Fri, 07 Aug 2026
- 07:04:56 -0700 (PDT)
+ client-ip=2a01:111:f403:c200::1;
+ helo=db3pr0202cu003.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org ECE2F60A44
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ECE2F60A44
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ECE2F60A44
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:09:15 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Fm0pXbZl8o3VTQssnqBqZgounTbBebflTrUBOZjbEYIkKP31Xl+UhYqu7RnkgBjZPRz93boaVq1C30LlEPji4ai4kfBsGCWHdp4VDDOnjZq7MxEuLNPOdIjMQRCXx5gay8pAc90uri1DJ/jjDfVuJUf5ucEk7dTvOM/JOMo5E069/PDP93QkLvtUexlaHGMoLwuUfDX4z6DbcvHM1QX9h13S30EdbF6zZzxQs/aVQ/gyLGgBy38T5cAC5QND1T21xF3dD3Nj1YIIDMEmGSK3yyHoHKGFipT3+Njwc36eylgd0QF6cy8lxrQZkD8sEQ+IXEdzlyWnohILBW4/WIhUNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AfmOdSjr2wHfWxOXnSp10FlTWGudyqPFk7XTbvq/gFs=;
+ b=HIMGGw9a8kwP21J6TsqkyJmSwN0cvHfTFEUZMA9jpfNDvSgMngsI7azX2Kjt7/gt0V37NYXyNMgBaFhDBcnEVguqaBjr9g+yHOC6LC+F0cpxEazTbNEkNSHuI/+KsiQkCXVsh3jfelzyLZuTI2RhWWRwEdFKvR2eIsy0pkXAMEj6Eh8IYBhYD21fXA0ga967OCqF21Ztyvh0CbjW9rJJxJp7CGDjMnuPEmXC3bYdm1T3TMMwWMpgkhMtRilKNxOXRPGJCqc/r67c1etIa8SSslWxAb4a8EHkoT65fraiQAA8NAlU0L5rb8oakyJDMqYQsuIUOzPiDAIttD3n0wHSVQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by ZR6PR04MB721958.eurprd04.prod.outlook.com (2603:10a6:910:e0::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.23; Fri, 7 Aug
+ 2026 14:09:10 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0292.019; Fri, 7 Aug 2026
+ 14:09:10 +0000
+Message-ID: <e2f32f58-3b20-40d2-8c8f-77ab68e90f76@cherry.de>
+Date: Fri, 7 Aug 2026 16:09:08 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/15] clk: rockchip: pll: Use PLL_FIXED_MODE flag on
+ rk3588/rk3576 plls
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org
+References: <20260730141308.1218014-1-jonas@kwiboo.se>
+ <20260730141308.1218014-5-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260730141308.1218014-5-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIUP296CA0037.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:34d::11) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-References: <20260803-mtk-genio-360-bringup-v1-0-606ee60755b5@baylibre.com>
- <20260803-mtk-genio-360-bringup-v1-4-606ee60755b5@baylibre.com>
-In-Reply-To: <20260803-mtk-genio-360-bringup-v1-4-606ee60755b5@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 7 Aug 2026 16:04:45 +0200
-X-Gm-Features: AUfX_mxODsQN6N3Po3RsFjulwkFbjLfV0b5KpxE1dfpKf8I588h1-SbgUWorUJk
-Message-ID: <CAEHHSvaeNGwbV0nGiS9kUtv1O5HH6tRaAfLbhW9PDWDwKadHMQ@mail.gmail.com>
-Subject: Re: [PATCH 4/6] arm: mediatek: add MT8366 application processor
-To: David Lechner <dlechner@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.u-boot-project.org, Chris Chen <chris-qj.chen@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|ZR6PR04MB721958:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30fd6733-db64-468b-0433-08def48d739d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|10070799003|23010399003|376014|11063799006|4143699003|56012099006|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: p8iqs6/XV/2ZiZgGbjpCS58+UQFWfZ34VlFK58MF8f+Zw40KBysOWCJT+yAz0mHcOGGzTomlZz/Q+ELtPfHuBYbV5yZSLOfT6s+jFz4yxVwMUCC546xbT85P0udDZ3N8HHJRKV45tdKlMg3CJ4mV1KHUbl5cTEsMSnyT4DgMp9HQk14rO7tFyLV+1Go4zYAHv25ETixJv7QUmpkbSmvzKBvlY8oJAYCRdnZQMaS5NS7k2VqnlS9Rqi81KvPYwRh38kqAl2E3f5zTqgNyaW0ikzkNIrAEI/Y1sMGkBBTyZFP4ZcsLMXVjHuvAy3bvTiy6v/8EdUsXSafXzHvWFYitExtYgLJq61/W/05m24PxRLADzwhXJ3zPz38E4/xm8vPfBADX0YAu/1fsFpwjwdQZD5CB+WhhQ3mTk4igYpPKupYkoqYqe9o4KO3qmuTaiToQE7JTyto8yEiHwplZCVGdHKJgbpwSiPGAIB1k077a03Q12y13BpIa2vVD7NwVROCdIuLy3u1XK9x5utsNLNd5AJANQnKAkm7WYL8+VwhWeFDOSk3HQVLjfF/htuqcCPCdmM2U48gd7eIzjghlYdstTGI8KS+idwwMD005sxcx7cYv5OYLLC8nyGAVdtU2nQpDy0dXAMRXpTX/d+hAayJ/ljmTKIVlVeasyCmBJl1EAS8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(10070799003)(23010399003)(376014)(11063799006)(4143699003)(56012099006)(10067099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZEFXbWF1ZU9hMDdWVm1GTXFDQTFOKzM1TGhOaFNKQzFpVk5MZUE4dDJhd3NW?=
+ =?utf-8?B?T2FSL2NBd3M3QktSZVJBejJLNktoa2VvZWd1M3pWd284V01adG9zSVBVRTJ2?=
+ =?utf-8?B?OXpsZ1VneUFRNFYrcEtycnJWRUhHdytBbG1lTW11dHRwTUVpWDAzeXdHMWpQ?=
+ =?utf-8?B?eFduMjFUUHZMelh0RnhOSXo5ZHBkVXVvKzRacEFwTEF0Z3VTNnZ2Mm0xZEpB?=
+ =?utf-8?B?eEpRMndJUWZxdWxMM252dnZza2dKR3dxUGlsVEFHNXFsTW9PMm5ONis3eDdG?=
+ =?utf-8?B?djlZKzNPSWU4U3FWVVVEVGZibHNuN3FSeHNqS2ljU01nbWVja1VpQTZmM2p0?=
+ =?utf-8?B?NnZxVHJCemhlZk9xVVhJanlOT2EyQk0wS1BvSnB0akRkZUFnMkNvbDdKTm1u?=
+ =?utf-8?B?dk1rWjkwSHRBUkJGL2kyd1U2UVlIMkxYK1lZQ29WMy8wMmxkYzduTU9NbXM3?=
+ =?utf-8?B?eU51MzZaZlllcmxaZGlMVi9PalRLcmw4b0gzRWN2dy9DQno4NUZmRms2MkJh?=
+ =?utf-8?B?NHhxaTB4ODhLRWZxWWNFYlRMNXRXTHJob2FmY1E4b1hOMGFoeXJOQkdGbU01?=
+ =?utf-8?B?QURLZ2JYQWZLSisyWjltRk80b09FQTlhUTlKYlJ5bDJoSnRmU1pRUFJtT3RU?=
+ =?utf-8?B?UXo4Mnh6UTNJVWdVTzQyQ0FBc2xvSnNDTVVHWWZMWWZiVEx2MjBBUERDZ0x6?=
+ =?utf-8?B?WkJKaFpMQ3lYdWZZR2JTZ0grYWEzTDJ1Wll3Uk1pQ3pJbHpOR3YzZmk3WlA5?=
+ =?utf-8?B?UWxjTDZ3L09GQzV4YlVHb2lST1NPNk5oVENDdVFBTlFxWmJ2NENWVjlQVnNT?=
+ =?utf-8?B?ZEVsVGtPcHJtZ0tXK1Q0TzB2bVV5S2p5U25JTHNNcXJzcVJvRmRGb3dna3VC?=
+ =?utf-8?B?a1dubUVhc3dxMU9acm1MeS9TMjNEbmlSaTA0bDd4ZS9LQ1pjUW05SnZud2lI?=
+ =?utf-8?B?YWhGNmtKSHo1ZkV6QXQ2Y3RWb2dWSXIzeE5JeEk0Q2Eva1pVaHhZTDcrdjZO?=
+ =?utf-8?B?aGlCbFVXdDBFSnM2VUZ6dXNITEVncVViOTdOcUNhcFpJNys1YWRKbzZ1bUpQ?=
+ =?utf-8?B?R3NoM2x6dktZS285RjlJaHRkVC9VcU16WU9oUFFMZXRtY0I2SWJUaEllU1Fq?=
+ =?utf-8?B?ZXRUOFlMZldHTU5taDhuRWV5MHRpTnM1L2xqUzNoeUlqMXpTVklhMmg3YmZm?=
+ =?utf-8?B?UmNLZEppSVdnVUZwU0czbHNodWRtUkFMUWttNE0wdkp2YWR2WTJMMERhSk5a?=
+ =?utf-8?B?U3JwdmxTaStOQjJHOVZodUVFZ25GTWFwVERwYUk2aFNMbUhMdDJlLytrTEtR?=
+ =?utf-8?B?a2NVWkdnU0F0ZnF5Vy9WZTZsREN1MVZqWEI3VTZ5eHMzUk52emd0eHNKZ2Zv?=
+ =?utf-8?B?NWpOdWI5clZjRW5zNHF6Rnc4bFdobnpZYWllYUllbG1obmUxZitkcUdrR1Fs?=
+ =?utf-8?B?VkpZaG96RmdCRmNIWWRCbmpTempWUzFQbDM0VGNUZXVWbnFxUHMrazd4VThK?=
+ =?utf-8?B?WTViSy9JQVRnQ1RVK2tkRm5pNXBrTG1zdlpuaGxLN0lzN2ZyOUdpWThyK1J5?=
+ =?utf-8?B?dEpMendsUEhwYzFhbjFpNGlUL0FwWHFacGV5K1N2alVLdTRqSWlPbVU4aE43?=
+ =?utf-8?B?eGlJUFJVVVU2RndNYlN5VjB6L3lSN1NFa0lvZDZ2cEc4QzRSTnJrNUNER0dM?=
+ =?utf-8?B?ZXRwS3FXQXZrMERmelUzWmYwYnFnNXBaUkROZDh6ZjBNNll3cStNT0NQM3ph?=
+ =?utf-8?B?RHk4THNubURXdThtZG1TYk5RUUFSNDhVY1MwbGVGU2tSbFo1Wm1CVFBSREZp?=
+ =?utf-8?B?bTl2SlVJd09nQWpPWk9JWlVJV3ZHcjNQVFRJNTkyZm1FVGc2UDRKdmV2Tjdq?=
+ =?utf-8?B?ODRVMHF1VnlJMi9FdXo4azZWMWVSdUNOSWhkUC9KUGFhdDR4dkF5SzhEa0Rp?=
+ =?utf-8?B?REVaaytKa3BRekN2YWhhT1JpTm4yRDQ4d0JIM3dDeVljZW1BR0JpRmJYbGlt?=
+ =?utf-8?B?bkl0MVRVQjAvZGRsYWhBUE1EQzhWc3JZdGJIZUlaS2RRSzFLZmFveVpPUGcv?=
+ =?utf-8?B?aU90a0phbFpwby9IeWNTVlRoRXNaMEk2R2hiVDViL1cxT3hrK252K25wYVEz?=
+ =?utf-8?B?ZURVZ0t5SVV0NEFVcnAvOGhvMFArOStjSGxibnV2YytKZ0ErRGgzWk1qVU82?=
+ =?utf-8?B?bHI3ejQyd0pYTzlyVSt0cnRScE1jdTd6YmxYQWEvM0VWQlc0c3lGNkdyUDZV?=
+ =?utf-8?B?bXVlUGpaejZyWmV1VVh5MEZTNDgyQ2FjUUFCUldkd3FiZ1A4WTR0NUNJaUpw?=
+ =?utf-8?B?OWxXQzdiQ2dZL202SkRyRGN3blR0RlVZUXcxY0ZYMzF1eDVMdzJZTCtHTGND?=
+ =?utf-8?Q?EJDeq+5gcRP4LOZhBiUnh2E4LLb6+zyE3/slk77xDhrj8?=
+X-MS-Exchange-AntiSpam-MessageData-1: dm0fOATAPQbJnQ==
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30fd6733-db64-468b-0433-08def48d739d
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Aug 2026 14:09:10.1913 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wdio3gBqBrOESrRoD/g49tyZ+KQmRYIopFIE7Qo556pzFYcDidVQoTGCBnS9xycxtW5r/sl0lCau/owlWH48bnlmDiiNTDsQZ1pfSpx2AbU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR6PR04MB721958
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786111496; x=1786716296;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=jZH+xuchfqNnwopxQCvWNFpczv1aDYdfxO3KPMRcx94=;
- b=AeLRve2WOAOpRMrvpY2hjQbzKxURIvThgQ5ELYUGMBb+v/k6+R2wCFEsP86ugqVs2s
- O3MINnq2mUP75iV3Ja9WiVobuTZ6H4Nmx18+8ss9rRCB0SuxslDACJHmPsmKGqNxl3xY
- AVSQPRYPw4X9FGYJCT1AdaqEDjUZ/gNYygN37FXR/HTFuevgzopiGeIcF5EbYmC2iwh9
- b7SHAcOKm/qxEYEkaLStf/LD8isoKIqo2PWzrvCtP2vJzwFjrm3ZnIqCWwc4Ewk/Krls
- F38ipI76/pUd/vU17AKXRVVCUSHKbc+TYH1hwKKnOamHuk21wWOwLO/ScyRkua8PYfjq
- Igyg==
+ d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AfmOdSjr2wHfWxOXnSp10FlTWGudyqPFk7XTbvq/gFs=;
+ b=PolJtMNy6pioadQ+PreL8Uh4PzzQct8fgfYlbwR+WnQje4fGtjpiz4KkzcJpIRqyu16NjFxHBHcjpNboYj3l2VfZYkQ0R2ZtNoCrhjFINe4eIzQERHT0REEARAfr5MrQavolUiV9/ZOra8Rs6rDi49CN7MRI9gMevxHJAZiGvxw=
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=AeLRve2W
+ dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=PolJtMNy
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,186 +184,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Le mar. 4 ao=C3=BBt 2026 =C3=A0 01:21, David Lechner <dlechner@baylibre.com=
-> a =C3=A9crit :
->
-> From: Chris Chen <chris-qj.chen@mediatek.com>
->
-> Add basic support for the MT8366 application processor including init
-> Kconfig target.
->
-> Signed-off-by: Chris Chen <chris-qj.chen@mediatek.com>
-> Co-developed-by: David Lechner <dlechner@baylibre.com>
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  arch/arm/mach-mediatek/Kconfig         | 12 ++++++-
->  arch/arm/mach-mediatek/Makefile        |  1 +
->  arch/arm/mach-mediatek/cpu.c           |  3 +-
->  arch/arm/mach-mediatek/mt8366/Makefile |  3 ++
->  arch/arm/mach-mediatek/mt8366/init.c   | 58 ++++++++++++++++++++++++++++=
-++++++
->  5 files changed, 75 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kcon=
-fig
-> index 9ff7e7a7f5e..a9ef1f1e314 100644
-> --- a/arch/arm/mach-mediatek/Kconfig
-> +++ b/arch/arm/mach-mediatek/Kconfig
-> @@ -120,6 +120,15 @@ config TARGET_MT8365
->           It is including UART, SPI, USB2.0 dual role, SD and MMC cards, =
-NAND, PWM,
->           I2C, I2S, S/PDIF, and several LPDDR3 and LPDDR4 options.
->
-> +config TARGET_MT8366
-> +       bool "MediaTek MT8366 SoC"
-> +       select ARM64
-> +       help
-> +         The MediaTek MT8366 is a ARM64-based SoC with a single-core Cor=
-tex-A76 and
-> +         a six-core Cortex-A55. It is including UART, SPI, USB3.0 dual r=
-ole,
+Hi Jonas,
 
-According to https://genio.mediatek.com/doc/android/hw/mt8366-soc.html
-it's 5 Cortex-A55
+On 7/30/26 4:12 PM, Jonas Karlman wrote:
+> The PPLL of RK3588 and RK3576 does not have a pll mode reg to switch
+> between slow, deep slow or normal mode.
+> 
+> Extend support for use of the PLL_FIXED_MODE flag to the rk3588_pll type
+> and update the PPLL to use this flag to signal that it does not need to
+> switch to slow mode before the rate is changed.
+> 
 
-> +         SD and MMC cards, UFS, PWM, I2C, I2S, S/PDIF, and several LPDDR=
-4x
-> +         options.
-> +
->  config TARGET_MT8512
->         bool "MediaTek MT8512 SoC"
->         select ARM64
-> @@ -160,6 +169,7 @@ config MTK_MEM_MAP_DDR_BASE_PHY
->  config MTK_MEM_MAP_DDR_SIZE
->         hex "DDR .size in mem_map"
->         default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET_M=
-T8188 || TARGET_MT8195
-> +       default 0x100000000 if TARGET_MT8366
->         default 0xc0000000 if TARGET_MT8365
->         default 0x80000000 if TARGET_MT7981 || TARGET_MT7986 || TARGET_MT=
-8183
->         default 0x40000000 if TARGET_MT7622 || TARGET_MT8512
-> @@ -208,7 +218,7 @@ config SYS_CONFIG_NAME
->  config MTK_BROM_HEADER_INFO
->         string
->         default "media=3Dnor" if TARGET_MT8518 || TARGET_MT8512 || TARGET=
-_MT7629
-> -       default "media=3Demmc" if TARGET_MT8516 || TARGET_MT8365 || TARGE=
-T_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT8195
-> +       default "media=3Demmc" if TARGET_MT8516 || TARGET_MT8365 || TARGE=
-T_MT8366 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT819=
-5
->         default "lk=3D1" if TARGET_MT7623
->
->  config MTK_TZ_MOVABLE
-> diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/Mak=
-efile
-> index 35f748a70d6..51bf5789bb5 100644
-> --- a/arch/arm/mach-mediatek/Makefile
-> +++ b/arch/arm/mach-mediatek/Makefile
-> @@ -17,6 +17,7 @@ obj-$(CONFIG_TARGET_MT8188) +=3D mt8188/
->  obj-$(CONFIG_TARGET_MT8189) +=3D mt8189/
->  obj-$(CONFIG_TARGET_MT8195) +=3D mt8195/
->  obj-$(CONFIG_TARGET_MT8365) +=3D mt8365/
-> +obj-$(CONFIG_TARGET_MT8366) +=3D mt8366/
->  obj-$(CONFIG_TARGET_MT8512) +=3D mt8512/
->  obj-$(CONFIG_TARGET_MT8516) +=3D mt8516/
->  obj-$(CONFIG_TARGET_MT8518) +=3D mt8518/
-> diff --git a/arch/arm/mach-mediatek/cpu.c b/arch/arm/mach-mediatek/cpu.c
-> index 56a41e42df6..04ede8823b0 100644
-> --- a/arch/arm/mach-mediatek/cpu.c
-> +++ b/arch/arm/mach-mediatek/cpu.c
-> @@ -39,7 +39,8 @@ void enable_caches(void)
->  u32 mediatek_sip_part_name(void)
->  {
->         if (CONFIG_IS_ENABLED(TARGET_MT8188) || CONFIG_IS_ENABLED(TARGET_=
-MT8189) ||
-> -           CONFIG_IS_ENABLED(TARGET_MT8195) || CONFIG_IS_ENABLED(TARGET_=
-MT8365)) {
-> +           CONFIG_IS_ENABLED(TARGET_MT8195) || CONFIG_IS_ENABLED(TARGET_=
-MT8365) ||
-> +           CONFIG_IS_ENABLED(TARGET_MT8366)) {
->                 struct arm_smccc_res res __maybe_unused;
->
->                 arm_smccc_smc(MTK_SIP_PLAT_BINFO, 0, 0, 0, 0, 0, 0, 0, &r=
-es);
-> diff --git a/arch/arm/mach-mediatek/mt8366/Makefile b/arch/arm/mach-media=
-tek/mt8366/Makefile
-> new file mode 100644
-> index 00000000000..661744a4398
-> --- /dev/null
-> +++ b/arch/arm/mach-mediatek/mt8366/Makefile
-> @@ -0,0 +1,3 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
-> +
-> +obj-y +=3D init.o
-> diff --git a/arch/arm/mach-mediatek/mt8366/init.c b/arch/arm/mach-mediate=
-k/mt8366/init.c
-> new file mode 100644
-> index 00000000000..13123be068e
-> --- /dev/null
-> +++ b/arch/arm/mach-mediatek/mt8366/init.c
-> @@ -0,0 +1,58 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2026 Baylibre, SAS
-> + * Copyright (C) 2026 MediaTek Inc.
-> + * Author: Chris Chen <chris-qj.chen@mediatek.com>
-> + */
-> +
-> +#include <fdtdec.h>
-> +#include <stdio.h>
-> +#include <asm/global_data.h>
-> +#include <asm/system.h>
-> +#include <dm/uclass.h>
-> +#include <linux/kernel.h>
-> +#include <linux/sizes.h>
-> +#include <wdt.h>
-> +
-> +#include "../cpu.h"
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +int dram_init(void)
-> +{
-> +       return fdtdec_setup_mem_size_base();
-> +}
-> +
-> +phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-> +{
-> +       /*
-> +        * Limit gd->ram_top not exceeding SZ_4G. Because some peripheral=
-s like
-> +        * MMC requires DMA buffer allocated below SZ_4G.
-> +        */
-> +       return min(gd->ram_top, SZ_4G);
-> +}
-> +
-> +void reset_cpu(void)
-> +{
-> +       if (CONFIG_IS_ENABLED(PSCI_RESET)) {
-> +               psci_system_reset();
-> +       } else {
-> +               struct udevice *wdt;
-> +
-> +               uclass_first_device(UCLASS_WDT, &wdt);
-> +               if (wdt)
-> +                       wdt_expire_now(wdt, 0);
-> +       }
-> +}
-> +
-> +int print_cpuinfo(void)
-> +{
-> +       u32 part =3D mediatek_sip_part_name();
-> +
-> +       if (part)
-> +               printf("CPU:   MediaTek MT%.4x\n", part);
-> +       else
-> +               printf("CPU:   MediaTek MT8366 series\n");
-> +
-> +       return 0;
-> +}
->
-> --
-> 2.43.0
->
+At a glance, it seems the Linux kernel is doing something different. 
+Instead, it checks whether the current mode is normal (0x1) if not, then 
+it sets it to slow while changing the rate (and then revert back to 
+normal mode). I'm assuming they rely on undocumented registers (the PLL 
+that don't have a slow mode for example) returning zeroes (i.e., slow 
+mode) so they don't do this dance for when slow mode (or undocumented 
+registers) is set. Did you send patches to the Linux kernel for this, 
+are you planning to maybe?
+
+This change here seems fine to me but we continue diverging from design 
+decisions made in the Linux kernel (which aren't necessarily correct). 
+Anyway:
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
