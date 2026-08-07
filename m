@@ -4,114 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E089AC5AC7C
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 11:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D038C5AC7A
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 11:50:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9E6B860A66;
-	Fri,  7 Aug 2026 11:48:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1555F60A4E;
+	Fri,  7 Aug 2026 11:50:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O9ubeBqn_3fk; Fri,  7 Aug 2026 11:48:35 +0000 (UTC)
+ id X8u_6TYS-B4z; Fri,  7 Aug 2026 11:50:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D08D060A5E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 301F360909
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786103315;
-	bh=4FNrsDx1ezdi/H05kGx6ZUmUU1YBkf52JpIDvFgo1Ak=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=HJ6/veZfBwFIo+qqiryk2gK7if4lewTQqkllhP8u6/6Ip7x035Pfu/bF72ZIErFdb
-	 cEFgiF5zfWROeI0rqVxCiOZ5981pA0eYH0bcLuZGr1DhVfb8kci8UHFXp228+g+7Pv
-	 uDM05boOQfYXQDbNUeMxTLQtE+nD/4t4e0pzF2Q0IkCJBK4kkelKbBIB7bdBv022iH
-	 2tHxmuFoRjQOqwT7o4mn6d+1+2MffBZh3aW5GwcIlgKA3ZQR2vP5C3wFWDEmzYgonT
-	 gI2HYqXDbIgxPk+GCdsvRI65pYEkz1mnQApY5TqbLJc88gDCp8eU7ZLmN8S9wgjZp/
-	 2h4G0cPuJFO0A==
+	d=lists.u-boot-project.org ; s=default; t=1786103411;
+	bh=dnWdUBUgn12xAo71syhUVspzkaniGP7H9jp3Kw4dOfI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=XAClaDFs5aMUIwqVHvMb5A/nEwQY2fNt3fJ35J1Rj1sH1R68UXZQLPl0SUs1HGmfg
+	 oKh2uQq0I4LufosfpgojNF4QdP4nhxnxdo7zcqcf6JQfX3z1t9q6Fpc2190sfd8h2A
+	 81K+dnFYgrc7/UXueEVbVCURrFti1XernRkzHgzf3eJ6Y07kwTLVN3aXTHmTSkJSc1
+	 OFvztjRgOKexslZHT0N9GK/3q5jcgFv8JPokx1G7PFuzg3DkznamLXGPkA3KjrSvtb
+	 amILi3owAXvwZCctqfHKK6fuw6eA+Zak1OwM83iSSS5EEIGUFMxzt9pqdfiRZL8s//
+	 /55stVVONtY/A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D08D060A5E;
-	Fri,  7 Aug 2026 11:48:34 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 78703259
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:48:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 301F360909;
+	Fri,  7 Aug 2026 11:50:11 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0388F259
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:50:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7637D403F0
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:48:33 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0121260909
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:50:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G66sdzsoSVAD for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 11:48:32 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ecnFwRhdHx7A for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 11:50:09 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::533; helo=mail-pg1-x533.google.com;
+ client-ip=2607:f8b0:4864:20::112a; helo=mail-yw1-x112a.google.com;
  envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9AD7B40105
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9AD7B40105
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9AD7B40105
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:48:32 +0000 (UTC)
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-c9eefcf9175so3104311a12.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 04:48:32 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 1554560905
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1554560905
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1554560905
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 11:50:08 +0000 (UTC)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-81ecf499af9so48142887b3.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 04:50:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786103408; cv=none;
+ d=google.com; s=arc-20260327;
+ b=rKD7//3rCBviLhaS3QZ8Cg441uCvhflaa+9wpRYVgLTBPCjzF06GODdc4ksBmyBFnA
+ +KEWtZcCgSvWgk0v2+yRjQaFmd9cLVKX3W2K19o7h+PYxawpK3YEDAsTIUYdMoUC74w8
+ nXaYQYXUMnbrNvNd4G/xbv5MPeKwVHhSjbL6Y47q33rG5M1+wx729MyJeVq/1EQ1MIg9
+ H81rjJpqhqyeketAu5DziG5Wj21niR/AfMUStOu9lQlII/3sgRANj6lSBnUgBA9/3s1+
+ SBdFV53SrDPuu4d+7Onnhb1Jzve9j9Kx1k5Ct3UIlf//ByDUz/1UT/korzFIJuCaVce9
+ TmjQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=dnWdUBUgn12xAo71syhUVspzkaniGP7H9jp3Kw4dOfI=;
+ fh=t9Hv7oJRwgNGFWMpOy6ztfryJPxqO4p5/Nq4rEjoHwQ=;
+ b=n3M1GE5KEscvYNSP2AFgWKFHJv6KRLIICTkDzeUVR61Y6oVMoxcYGOiXKgV9nN5el9
+ cDzkXSiz501I75acl6uzJYBcq78J/QRM0xn5NAyM7Aqj3l8ZPiUkkdOMr0eyMMKTQblx
+ 5IIOnRUYQwLn06biOVuxuDYMbg+UT/Lq+xu7Nm8Vis62p8elDethsrkWLNMTtO4Rkqkc
+ 83VINq2jm98+Hezm90mDAA1BjV01PCphd8RdTY023sjZ0oL16OZ6+4QPn9Cul69fmNLQ
+ ju1KJCIPBjr0EEoN9Xyh3yal7LZ6WzYlyd7RHohY/3pOZJOHBm/zCxaVyAD4IIQW3mv7
+ cEXw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786103312; x=1786708112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=4FNrsDx1ezdi/H05kGx6ZUmUU1YBkf52JpIDvFgo1Ak=;
- b=TwU38B/XnA8dth4rVdTyHjIV7ttAsGgyYF12Zvia68YpIvgvdFiL3xH4CrmPYjBR15
- u7COfXvmGCug7Nbnl96Dr2rmwTKk6uXkUZ0jbXea7lhB6Kqo8vi98GrpR6aKeRKI6327
- aDiUWLpbeFdMqZkAUL0mzmXw6c+vSPtcxCeQe2f5Ncru+OBfHT62CWD1qMoSrtsCUJW4
- cLJ7iAoVj+ScJowu05awuTU1T0gcgHBtpO3I3SeCleNXNPBZXfG2+QshibXRsas09h1Q
- VTv99bsAeugxJoqzo51XzF40iHC3D5MNCQ86inbJHFAf31Ge8DPLvE+XZ27j8idLvwLz
- Fttg==
-X-Gm-Message-State: AOJu0YxwasTu6+zld3g86dg4M3yc2aWPRuYsjtxYzMnJpHKjKzQ+VXb8
- Oz4kMuRTvTp1jrgrTaJn/dyv8YUF5RzWzUyrpknzlZfBL9cz0Y/z0CJO
-X-Gm-Gg: AR+sD12Sk8rxe3YaHrXQUKawNVa/FnnL8I6nXzJu8eB9dKsyELLBjTJMoSvjjTGnpmO
- MG3IC0S4riJ3IaOU08c26ViSzsth7msqM5zefWezE7cklOuE178M8MBCszy20D7ehqu3bDATL+L
- TS1SwdUMm8ygoPaTqWGKAN/ZXoB/0KuEercREHIFHtCFI6zksoPCLNROPVD7Tjsf73C4lge+cVI
- 3hQFR8Ea1lc5BIXjK0IAkNe/8l7pIQY+NpGzIL3nwI+mEa04nvT8nhk7P6nwumzVXy9i7zqezif
- FB2w4A6hyGZSJhdNsPeKY2hQRtuVos4Ef4YnDrs39rS09/8AsJItJgOTeBTJtS/66ROo2OBTel7
- 0GF2YIlMdts+1Gp+JvKefl8HKanEGpQNO5G+ofDgAnHgR5gkC4lNWkphv4MOUchI5itNc/YRVVV
- RVDOZx5o1ECXNIsnpqUz81/8sREA6RP6JMcAtiRZ7xmWBTApMx3UIkxpLPaGHDcCI4pR2HQf4My
- 9gXX3ywPJzLP/OPji0HAL/pYKwUFknjXSHY
-X-Received: by 2002:a05:6a20:9f09:b0:3b4:8f57:3205 with SMTP id
- adf61e73a8af0-3cbc04eb981mr4500171637.36.1786103311824; 
- Fri, 07 Aug 2026 04:48:31 -0700 (PDT)
-Received: from fabio-X870-EAGLE-WIFI7..
- ([2804:1b3:a801:e1cd:ebcb:49bb:7cdf:90a])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-141019b4244sm6401549c88.4.2026.08.07.04.48.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 04:48:30 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.u-boot-project.org, emanuele.ghidoli@toradex.com,
- franz.schnyder@toradex.com, ingo.rah@linutronix.de, qijian.guo@nxp.com,
- marex@nabladev.com
-Subject: [GIT PULL] Please pull u-boot-imx-main-20260807
-Date: Fri,  7 Aug 2026 08:48:27 -0300
-Message-ID: <20260807114827.51236-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20251104; t=1786103408; x=1786708208;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=dnWdUBUgn12xAo71syhUVspzkaniGP7H9jp3Kw4dOfI=;
+ b=miQYNO8sPHMEgCTbQgXOUvBwxlk/cpStG/waUVxRFWOZixOeC5QxL/GZsYAclYOx28
+ L+w/KoBsu+lTUJPypjDD8RqVOXzLfWC+6qReBtfc7b2Py9Q2Sj+gfrgzMuA65TrpT1eL
+ vk8+xE4CyKSlP8QcRpZpN9PQVLevM95VKcZQy+pTiJfoT8/7D56rB1yykmKzGjReTMw1
+ 4EuZSHIJRgI6bH8DZujyGDySkLNfKb/nK/cLFgbV+CdNvL8gM2hVlNgBITKP/k7gbHkt
+ O+LgL0rcOz8rWDINBhFp67hhhgPFTy0e3YBLBdy1cc1U9jxKa6AXrs2AYYjjcweBj0Jx
+ iaSA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrkHN95nheA7s8uxdJc4lkJ910cH1+BfK9qMnch/1NbDeAR+GSKN2IgMZgod/0NNJBwcVYmJ2g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxlK4IwY1r5ubgWcx4HZu+0jcaev06VaNKdm3rgmnD9QpIihuZj
+ jrQau5yiTtUwXtbXNFGV3e1e1k8+8EK+bNYaGvPwa8itI/XwmtEJNLTjOZiaAqTxQpWeX40p1ZV
+ 831AcYZ2kzdZhRHLBTUCQa1qYcoyUx6Y=
+X-Gm-Gg: AR+sD10WF3US06JtH5rAA0MOux85RLPY9LjaWRUSgcbBB2sk93KFEkDKu/V2ueySMoH
+ UZ92kPWV4QOl1jwchzWCCiTvlVZyvQVUiiwNx8IyezIaAlf2uNvSkxut0tlXse1gVsKjY3VpwAQ
+ r+0JQYtxEx18WZ1dRbJd3mk2byj8mD75Ck7jKr9b7bMzhil7grqdBojYOicJcuC0a+4KE3ILYsZ
+ OhRia+dI2gkTuNjVdoayaYFVqq6PzHrJkbSnkiyECMpvy5LXnx8KDn4ziacmUum4qvUca7vr5kD
+ 0YGzmz5cO8pIZ+SJTxWRGZDVX4XgA9CKLVFFpHYHqAVRmHOm1rOCUAA5Dg1awlunq7z9THrFEXW
+ BO7qcffq0/BX/fcdHX7cKovUyesoAf9+g
+X-Received: by 2002:a05:690c:6b12:b0:81e:8112:c5c9 with SMTP id
+ 00721157ae682-8201bc85c8amr140604177b3.3.1786103407825; Fri, 07 Aug 2026
+ 04:50:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260716-imx95_frdm-v3-1-bb53481157fc@nxp.com>
+ <CAOMZO5AX2VZJEKw4dyg+d4S=uRNBcOhe4k8ZED9+Q0mv=_a9Lw@mail.gmail.com>
+ <MRWPR04MB121170AD9EADBB588BED27ECF94CF2@MRWPR04MB12117.eurprd04.prod.outlook.com>
+ <CAOMZO5Asxi5JFdfXpsJuN1shOg=Q1eGiDvc0Ywak4mm4Odaeuw@mail.gmail.com>
+ <12a7410e-870f-48a0-8afa-a50e5c226f2c@nxp.com>
+ <CAOMZO5CqTuXdG+uXZfiS5WjDD9QoNmreYd=JT2Rb48n19qRKkA@mail.gmail.com>
+ <b362330e-c919-46c0-a1ca-b000f9c89be4@nxp.com>
+ <CAOMZO5AhOZcsAc6DThNDcXudk5fWrm1gxgzwvETWX3hQ+Pj6=w@mail.gmail.com>
+ <4024d372-29c2-4c6d-8185-9b97fe27f91d@nxp.com>
+ <CAOMZO5AuKP+DQfSCWNRxuzPJJpK2vz9DJFHxf5J2FQi0u18=2Q@mail.gmail.com>
+ <e11a94e7-b0d7-4570-bce7-8dce51d426e9@nxp.com>
+In-Reply-To: <e11a94e7-b0d7-4570-bce7-8dce51d426e9@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 7 Aug 2026 08:49:54 -0300
+X-Gm-Features: AUfX_mzY2dMpWc0UKwXnou6VbixHhZH2yFmkhhc01ChdONKRRjTKGbGri7uIvFY
+Message-ID: <CAOMZO5BmmyvikMqOFLGPw26uu+tiR5z8xzLRPMqt4we9xNfq0Q@mail.gmail.com>
+Subject: Re: [EXT] Re: [PATCH v3] imx: Add FRDM-IMX95 initial support
+To: Joseph Guo <qijian.guo@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ dl-uboot-imx <uboot-imx@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Lei Xu <lei.xu@nxp.com>, Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786103312; x=1786708112;
+ d=gmail.com; s=20251104; t=1786103408; x=1786708208;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=4FNrsDx1ezdi/H05kGx6ZUmUU1YBkf52JpIDvFgo1Ak=;
- b=pkwkPnO+956DPPPMJO/0vFqZA1kqE21CJl+F8DSZhzof1vbv6GljuK7HjRV9RWfR6P
- EHGYVGlcCY+wmzbk4FTBKS4NNkAtPRcjHbuQmVn2QsFKDfDC6TecMgTboGrNyujPmZG8
- BGxZh3QdktaLlPkLqcHp31mlnHm6soYLFeISMwb3TwcfvO9/xrRIfuGhnKaR1BdgRZtf
- BsHFej9nzghAwU+vW1MkghztPips/8T16nAkzHYztpXlJp7WfD4ZaAomXD2fapiqhH1h
- CTnqw3w0iJ1fPC/Mrfdcu3H7c7TuXFJd8oL8B9mY7k+GZElxQxexLxwvWaq96/rza7gI
- DWbw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=dnWdUBUgn12xAo71syhUVspzkaniGP7H9jp3Kw4dOfI=;
+ b=K6x6UIZictQjmjjbVQJmyGQTe7sIYELOwQLDQty0R/vJRtLns5mxq1EZKLqCKfLVHN
+ 2JCo0Ubai+lVxtNYDUYYvmKj6ZXomJAWvpMr0H0tjccEji6GJ5tO0R6zZ3C/G3i2PKw1
+ 5ODhc+eKAW8C8d6qNdKxlKn+fT/uFYIj5KqeFgl3sx9Obe/WOUpCUkDhK4kco2Q0xkc8
+ b4IBRQJ1pIyH5zq0eOQ/8rttqLsHgLBgJdQIHPTZkuOHkm7/QDKXFknrff4P/mB/8Stk
+ NUEPbswmGnjiafCiwwwzLdn6Y8/sU4gEN3AKzviL+tAxlWWDf1Wk7JTUEl8r/4/NwmVh
+ NTRA==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=pkwkPnO+
+ header.a=rsa-sha256 header.s=20251104 header.b=K6x6UIZi
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,90 +160,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Tom,
+Hi Joseph,
 
-Please pull from u-boot-imx/main, thanks.
+On Thu, Aug 6, 2026 at 6:43=E2=80=AFAM Joseph Guo <qijian.guo@nxp.com> wrot=
+e:
 
-The following changes since commit baa64b2f892890f00a377eac4a3e685472bb56b5:
+> Hi Fabio,
+>
+> Thanks for the suggestion to make the U-Boot driver honor `linux,pci-doma=
+in =3D <N>;` the way Linux does.
+>
+> I looked into implementing this, but I don't think it is the right fit fo=
+r U-Boot, for the following reasons:
+>
+> 1. `linux,pci-domain` and U-Boot bus numbering solve different problems. =
+In Linux, `linux,pci-domain` assigns a *PCI domain* (segment) number; it do=
+es not control the order in which host bridges are probed or the Linux bus =
+numbers. U-Boot's driver model has no concept of PCI domains/segments =E2=
+=80=94 a PCI controller is identified only by its DM sequence number, which=
+ doubles as the root bus number. So there is no existing field to map `linu=
+x,pci-domain` onto; honoring it would mean overloading the DM sequence numb=
+er with domain semantics.
+>
+> 2. Making U-Boot consume `linux,pci-domain` requires overriding the DM se=
+quence number in a non-obvious way. The DM sequence number is normally assi=
+gned during the bind phase (from `/aliases`), and the only way to make a co=
+ntroller pick up the domain value is to overwrite `dev->seq_` later in `of_=
+to_plat()`. This is fragile: it silently reinterprets a Linux-specific prop=
+erty as a U-Boot core-behavior knob, it interacts with the `pci` alias mech=
+anism in ways that are easy to get wrong, and it changes the enumeration/li=
+sting order for *every* PCI platform, not just i.MX95. The regression surfa=
+ce (e.g. the `pci` command's bus-walk stopping at the first link-down root =
+complex) is larger than the problem being solved.
+>
+> 3. The pci aliases are the documented [1], portable U-Boot mechanism for =
+exactly this. U-Boot already defines pci<N> aliases as the canonical way to=
+ fix PCI controller sequence numbers (DM_UC_FLAG_SEQ_ALIAS), and other boar=
+ds use them for the same purpose. Keeping the aliases in the board -u-boot.=
+dtsi is consistent with U-Boot conventions and does not touch the upstream =
+kernel DTS.
+>
+> If you main concern is keeping the U-boot DTS sync with the upstream. I c=
+an upstream the pci aliases. These aliases only influence U-Boot's DM seque=
+nce numbering; Linux ignores `pci` aliases for PCI enumeration and bus numb=
+ering, so adding them upstream is functionally a no-op for the kernel.
+>
+> [1] https://docs.u-boot.org/en/latest/develop/driver-model/design.html#de=
+vice-sequence-numbers
 
-  Merge tag 'efi-2026-10-rc2-2' of https://git.u-boot-project.org/u-boot/custodians/u-boot-efi (2026-07-31 08:55:30 -0600)
-
-are available in the Git repository at:
-
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-main-20260807
-
-for you to fetch changes up to fca58e8a08cf2ba2b09350732fd2b8d62b265463:
-
-  binman: nxp_imx8mcst: Handle FCFB header during SPI NOR boot (2026-08-06 22:05:45 -0300)
-
-u-boot-imx-main-20260807
-------------------------
-
-CI: https://git.u-boot-project.org/u-boot/custodians/u-boot-imx/-/pipelines/906
-
-- Fix a boot regression on i.MX7 related to the system counter.
-- Add Aquila iMX95 0243 PID4.
-- Update phycore_imx8mm DDR timings.
-- Add FRDM-IMX95 initial support.
-- Handle FCFB header during SPI NOR boot and CST backend selection.
-----------------------------------------------------------------
-Emanuele Ghidoli (1):
-      arm: imx: initialize the system counter earlier on i.MX7
-
-Franz Schnyder (1):
-      toradex: tdx-cfg-block: Add Aquila iMX95 0243 PID4
-
-INgo Rah (2):
-      board: phycore_imx8mm: update RAM timings
-      board: phycore_imx8mm: add 1 and 4GB RAM timings
-
-Joseph Guo (2):
-      imx: scmi: suppress invalid origin/errid in reset reason print
-      imx: Add FRDM-IMX95 initial support
-
-Marek Vasut (2):
-      binman: add CST backend selection for i.MX8M signing
-      binman: nxp_imx8mcst: Handle FCFB header during SPI NOR boot
-
- arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi  |   23 +
- arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi        |   81 +
- arch/arm/mach-imx/imx9/Kconfig                   |    9 +
- arch/arm/mach-imx/imx9/scmi/soc.c                |   52 +-
- arch/arm/mach-imx/mx7/soc.c                      |    6 +
- arch/arm/mach-imx/syscounter.c                   |    6 +-
- board/nxp/imx95_frdm/Kconfig                     |   12 +
- board/nxp/imx95_frdm/MAINTAINERS                 |    6 +
- board/nxp/imx95_frdm/Makefile                    |   11 +
- board/nxp/imx95_frdm/imx95_frdm.c                |   24 +
- board/nxp/imx95_frdm/imx95_frdm.env              |   93 ++
- board/nxp/imx95_frdm/spl.c                       |   82 +
- board/phytec/phycore_imx8mm/Kconfig              |   65 +
- board/phytec/phycore_imx8mm/lpddr4_timing.c      | 1867 +++++++++++-----------
- board/phytec/phycore_imx8mm/lpddr4_timing.h      |   13 +
- board/phytec/phycore_imx8mm/phycore-imx8mm.c     |   18 +
- board/phytec/phycore_imx8mm/spl.c                |   56 +-
- board/toradex/common/tdx-cfg-block.c             |    1 +
- board/toradex/common/tdx-cfg-block.h             |    1 +
- configs/imx8mm-phygate-tauri-l_defconfig         |    1 +
- configs/imx95_15x15_frdm_defconfig               |  143 ++
- doc/board/nxp/imx95_frdm.rst                     |  131 ++
- doc/board/nxp/index.rst                          |    1 +
- doc/imx/habv4/guides/mx8m_spl_secure_boot.txt    |   30 +-
- include/configs/imx95_frdm.h                     |   23 +
- include/configs/phycore_imx8mm.h                 |    5 +-
- tools/binman/etype/nxp_imx8mcst.py               |   38 +-
- tools/binman/ftest.py                            |   33 +
- tools/binman/test/vendor/nxp_imx8_csf_pkcs11.dts |   27 +
- 29 files changed, 1852 insertions(+), 1006 deletions(-)
- create mode 100644 arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi
- create mode 100644 board/nxp/imx95_frdm/Kconfig
- create mode 100644 board/nxp/imx95_frdm/MAINTAINERS
- create mode 100644 board/nxp/imx95_frdm/Makefile
- create mode 100644 board/nxp/imx95_frdm/imx95_frdm.c
- create mode 100644 board/nxp/imx95_frdm/imx95_frdm.env
- create mode 100644 board/nxp/imx95_frdm/spl.c
- create mode 100644 board/phytec/phycore_imx8mm/lpddr4_timing.h
- create mode 100644 configs/imx95_15x15_frdm_defconfig
- create mode 100644 doc/board/nxp/imx95_frdm.rst
- create mode 100644 include/configs/imx95_frdm.h
- create mode 100644 tools/binman/test/vendor/nxp_imx8_csf_pkcs11.dts
+Ok, I applied your patch as is.
