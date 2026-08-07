@@ -1,97 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA2FC5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 19:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240B1C2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 19:00:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 03F35409C3;
-	Fri,  7 Aug 2026 19:00:24 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k2XqVrXbrv8k; Fri,  7 Aug 2026 19:00:23 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 30250409C8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786129223;
-	bh=5oNx2TdEr0Ma256dnxOZlEvbFNbpMBQPpLkOlHgFk3I=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=vdtwKuBwNLmaUFj4HdPKvV9jsDFtT0lrInhVElpwkXvnuIONwUhSBL0yBlouks8RR
-	 E7+n+/D9pBII3K94yUA63Quwx9PMIohbOq2+IkGQaPheRt67+eeZ2mm36NsGqFaz57
-	 bS9ONuJr0llYEC7vPaEqUGymYoa1y7oX0bQHxRFpPOVtthbq5rPx/Gj3E5Z4osh6ER
-	 pbVGp1e3FEI8Is18q9qoZSYTiR2xcwgni4y09/DBcgo66OpGElIqPr8SLqwKzx4Mgu
-	 2mhcK5dw9yP0p7QRUKh1B+w9oE+Cc7oo03FPUa5NjXY/lw58t0/BwBxjEPNjr8Z3xw
-	 m4irZ+tCXU90A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 30250409C8;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 122F38129C;
 	Fri,  7 Aug 2026 19:00:23 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 68B00392
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:00:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4EAE281296
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:00:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hjQZZ6fkWfpi for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 19:00:21 +0000 (UTC)
+ id BxRuGNRP3IQh; Fri,  7 Aug 2026 19:00:22 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 19CED81294
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786129222;
+	bh=3sj7jQWdbZ9I3nqt+pX9B/454brfLYuoHxv4ZdFh5Vc=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=kh6VEXAcSFtt5Ozq4OAxjRG4PuKOoiNYWbAj0+r3nUSAqTo3kuuEEoxT0YqSCAYaS
+	 bVz2ynNWYH776VU+sV+pGk61+rjH7bb+qo2yqzMgQPlcrTLZClC1DMQdhThrKq+Ojr
+	 EPUpJzORwb6XAEjFIgdGyldRV8yN27z3CCKXjwRuYMHpu4IeprlBY/9VC1P3LDmmv8
+	 wEhAy1mtg0leLReChQgQpHwLIoybcYz+HfwuqdwVjDvvk8fEUKHMCQs6/3LMVOj0hk
+	 hUL51S3iJh3TlTJvRlc7Bth7onNgAzUVaOhL8x+4o7UdWWHRMjmQ4F0BthszcZbKGu
+	 9DMz9H2IFZ+uQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 19CED81294;
+	Fri,  7 Aug 2026 19:00:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E67F1AF
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:00:20 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8038240159
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:00:20 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iaGSbYZgspoG for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 19:00:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c32; helo=mail-oo1-xc32.google.com;
+ client-ip=2607:f8b0:4864:20::32f; helo=mail-ot1-x32f.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 733BE80E6A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 733BE80E6A
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 733BE80E6A
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:00:21 +0000 (UTC)
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-6ae9b721927so2027182eaf.0
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 12:00:21 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0E415400C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0E415400C7
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0E415400C7
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 19:00:18 +0000 (UTC)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7e6b554044fso3390729a34.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 12:00:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786129220; x=1786734020;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=5oNx2TdEr0Ma256dnxOZlEvbFNbpMBQPpLkOlHgFk3I=;
- b=QEVRex4t6H2a3QaH8vYWMex1DynU7LhaeApECcyZOp3PZqAxwNymK2IW2dB6zhRgyJ
- IKnpdDPKnf2EIxUb1kXD6p9gATlKDZbultZBbB7soAljL2Hi8FEUH8gz2PIpgvbyhm0D
- TGhaZL3hqrN4MDKRZvI9yat0vyz5xOZx66jq3Dgai6C3lom5HKc0wr6NX20YNCF7z7Ov
- PFRPOe4bnb5MnemdZUbSROL9Ga9IMPBdvJLqk64Ca40HcOFItkdrJ4sPlJkVXWWtBi7E
- xprdP5b2bUiKRT0s8D8q+XvSQ/2TBm+uNclBvjahprlcGhqPT7DSzfThv4pX9ec21Gu1
- sf9g==
-X-Gm-Message-State: AOJu0Yz6XZOkt4Pcdcldv5xs1GY3E8ghjl/DHtxmmE0loFz1EGakdXi8
- QW55wz+rbVTHMY60fXeyFImPyNlLjXRUvHEErHiBqG9jf79OkmuypyYwlI9rXD7Bv+M=
-X-Gm-Gg: AR+sD10abwiSyM3lNDcJC4ewBsInaZLtFIcMJF3810eCYKpGAUtqBZaG20Y3FPcYArK
- a+SNFJTOMpt93iy3VfyV3YGYVeST2r5ivseJUdC8//xLy9SHfZeBgD7bJP+wXOJymxQThqCAHPB
- LzvzEhoLmimLchPBtH76oPaZSN7c2H+kRdmbixq/h7LYgngM2NV9Jxzy5fpSugQAHTqdoChPmmK
- /LN/hkOPY9WbE4i5RtWzmE3liW8q+8/l5K2Zfz2SGhueDEKyZVdhKVu5dqykn2zmHeAGv546JQl
- Yvi5EZYd/tzDnQ9lcsttEz4AoFbM4aoYvNbN5ufm/MMzUSMt9Uac7kDcCSyu5Moi7Z1eDLw7o0y
- O4g3BX8WQ8WflGYIAMlGx8It/38vU9zYd0V+5d6Rewdei0erSOBEbbPk8P40Klew0wKnk53T2Wr
- WNGiv1X4PQdjLJ4y8f47frIETJppyeAYiF993GQ7AvmSi+aWMN7Nig0NPRRk9rwcvn
-X-Received: by 2002:a05:6820:1905:b0:6aa:e524:fd7f with SMTP id
- 006d021491bc7-6ae970b941bmr13223527eaf.34.1786129220218; 
- Fri, 07 Aug 2026 12:00:20 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786129217; x=1786734017;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=3sj7jQWdbZ9I3nqt+pX9B/454brfLYuoHxv4ZdFh5Vc=;
+ b=DiFvaNzHtSy8VQd1YYYQnurDjiKLq2ttHLepjsYqGsaNJSOsT9PYALuTQ3UcZGvmSH
+ fMjT5ALCiwIHkRSnqB2s2DIYO2yIYzlMuQME8qPurYneRr5KKfqc3/XY3qN6sz2MCd/p
+ 5CP90BbcN4KPX9JFYHoHlVzYxVzt1C+oyyuFoO6RMFDbcxFKptb1IxDxW6CZRyVwXKIN
+ 5YXVrtQMJYpOT/xuENNJ/AR1lP3XQDO8xffyfMZ43xIRzk4PUgW3JWdNWsrw9x5ad1NT
+ fMnhU8SUjkYkEKGSZdRGX9siRHcqXMiCTcu/I6HF26258M/nBMoPac5B3W1ErZ7wjthp
+ Bi2Q==
+X-Gm-Message-State: AOJu0YwJcc2FdaBfZwzGAqFtI0jo5Cth9t0xlKZymMvdcEDWDfi03MFp
+ y/Zk5bcn8OWqJJj+LRo/rFkzdWDVrO2xRZoxGWJU+H4gAd/tG7rRR5h40yKxeOOOMnc=
+X-Gm-Gg: AR+sD10IOR3CPgBs1b8Xt+JBjAYcLZAhhxUWgKjKm3lJFnBHXYNQD2oVolrgD8zN3VJ
+ PoNELqOAHyqSjsEQpm2LB+3U5Y3ReqV418tbx86V9+AwGkpdQWqzS92ZHJlQZLsH1EbdfaBkB3o
+ xAbKV1dX02kBNm2H4fIRX5+WNcNSgFGFsgkgmolceI1qn8qQ1WtIZlQ1jhGjHGct86qjRDAddb5
+ He0jPyqgsub2r1KcSi9N8m3cpaeb6RX2jqBZPaJW1VhelCqUHqAG5jQbKlQoORCNvrzogrj3XB9
+ mCBLfsk0VXLR7XkQfYgbfVj9ipmdyYzT/roCyUgdWms91UTRqx2YHiwP2yr0YKL9pf+yRNfvY+o
+ AlH/0Uk/uPP+o4iLR0wLS/geQ4JicvQdqTSHt2CmPbDTQsBU+sLWQ3B7wzTOLjFut7EdUIZMzRA
+ 3BQsOda0wyp31EG7X3z6oi0AGyhY6JfU/AxwFJZcKqQjGKi9mHqB/INXC/eIvBHKcL
+X-Received: by 2002:a05:6820:2207:b0:68d:2f4:82be with SMTP id
+ 006d021491bc7-6ae96ec8b60mr11874701eaf.22.1786129217410; 
+ Fri, 07 Aug 2026 12:00:17 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:b714:88c:313d:dee2])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b02be47604sm2679283eaf.10.2026.08.07.12.00.17
+ 006d021491bc7-6b02be47604sm2679283eaf.10.2026.08.07.12.00.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 12:00:18 -0700 (PDT)
+ Fri, 07 Aug 2026 12:00:16 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 07 Aug 2026 13:59:39 -0500
-Subject: [PATCH v3 1/4] serial: mtk: use ulong for clk_rate
+Subject: [PATCH v3 0/4] serial: mtk: clock rate fixes
+Date: Fri, 07 Aug 2026 13:59:38 -0500
+Message-Id: <20260807-serial-mtk-clock-fixes-v3-0-8cc94d313b57@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260807-serial-mtk-clock-fixes-v3-1-8cc94d313b57@baylibre.com>
-References: <20260807-serial-mtk-clock-fixes-v3-0-8cc94d313b57@baylibre.com>
-In-Reply-To: <20260807-serial-mtk-clock-fixes-v3-0-8cc94d313b57@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNyw7CIBREf6VhLQYutrWu/A/jgsLVYh8YqMSm6
+ b8LdWNMjMuTmTkzE4/OoCeHbCYOg/HGDhHEJiOqkcMVqdGRCTAoWAklTX3Z0X5sqeqsaunFPNF
+ TKAosuAZd8ZLE8d3hGsTt6fxm/6hvqMZkS43G+NG6aX0OPPX+ngROGeU6z3egUWjYH2s5daZ2u
+ FW2J+knwIdJ8J8miCYGwDmTFSqBX6ZlWV7qhQqnGwEAAA==
+X-Change-ID: 20260727-serial-mtk-clock-fixes-266e61d2d917
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
@@ -101,38 +102,38 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
  Suhrid Subramaniam <suhrid.subramaniam@mediatek.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1806; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1194; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=Q4nklDDnZz1dZY+qjW3cH6vr9f1RjgFQXQRgpvM5zUU=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdisll05GhQAvIF86r/wSfFJhd3RoM5fIJJknS
- GZ3KiH6wV2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanYrJRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ArMkH/0x7cM7A9A5dCz9VPbWskeWoiV7ol+JALMZkmnr
- PG7JRh9bYRIyx1ar/qe/iEBDcQXpzfa6h7sVjLF8+kiMvmKAQYMXlWZDgYSiCbSkONftp30oVFO
- TApitxkdpcz3xGhbWyX9Dmf49i8edP6GrUy2RNvOtYwg8lwNhYg642+NUUhYyRKcZn70EXqLHYp
- 8XI5cPQtM6kpK2pHyZsrG6/solnyk0rgprUYasKyAXy+xcSYbkHwErX+dvOlKM+HeW1ljlsiwpm
- 9N4Xm35mNBotYNskPv3B0c7t1e7NkFzDiq1F6a170wBien6S4ebq7leU5QDyoKdAb+udfTWHC2v
- iEI4=
+ bh=ePN+55Vua4Cnv6sK7cpTEYH6iHqLl9uFVLeg/WV35Hk=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdisd4SqPSJK/RaKo/aEa9ibREkhDZHb3febNS
+ lEbgVtPWAGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanYrHRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A9TgH/2kyo4zZaBrLbir7mvTGVURBuuMEbpVPLY6R4AF
+ tVxOLCffbhosPKsR1wVqRmvknHVM1LJnlqoFa/NGoosRPQoxPcTH/1+1DWZvo33LVPxO+p5F17e
+ RE5bcWy1Rti0wID89S8WovXpI0Dqla6u6WyOms7Qx8TGsYxapjs5X1hwEBCKx0VcLsYfddc7qvM
+ 3OO30oZ3hBJasCmdrl6YkdHoxG7sKYIU1I4DciHLZ1+BNmhgnvZPSAgO8kILbffEgqlzZWPneb/
+ RbJXDsypP+qmOJ4lM1D/sjal7BRi3RinsWGEl8xEmMwU5+qd1sxL73bgH6wZanZ13Fc86UXO0XI
+ 0sXs=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786129220; x=1786734020;
+ d=baylibre.com; s=google; t=1786129217; x=1786734017;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=5oNx2TdEr0Ma256dnxOZlEvbFNbpMBQPpLkOlHgFk3I=;
- b=jtHi+z5mf5/u7WkGtPDhWSd2rulEAiJdX7jE7eZI3MDmn06onr1HytK2W9Yr3zDWj8
- XDT37DOKH6RqbOUL5BR5jMWoiVWybLklcSx590EF9dkWv9ouvPDc2SvCIp0jv06hiqC2
- bhyuFzpe2sQIgg95v+Br2zj4yllCGz0ovbwQWGllMblB7l0AbEw2H/EW7cbnCnOjJyyn
- PPDy49Mu9jW4UID443mJwRjGmAHjr7WKKRcLxAbjJGqoqwh1UExQImNxe1bgXpMmkw5V
- FaWpo4H25anu6gNg1pT+hvEbo4NWG/jyn5Dwz46LOZGvZ1pjUykYcBJT3rYkfBgSJAWd
- oDRQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=3sj7jQWdbZ9I3nqt+pX9B/454brfLYuoHxv4ZdFh5Vc=;
+ b=Dr7dczWV7+SN3KV+Xat22Ocw34oqY7VWWn3YvlXJm4NjNbLvraEq3u9mZAsfHYXxSA
+ eJwXIKpsL1USjBPFmHpx3wZa5KERHr+01ckEb1CGeSfbGOBDBKjMF9mJ057GdCdwtA17
+ EjJFeLUha7wq5tICuDHCs0wOCgSle3j7xzqyMBmquIR1LxlWVtQrjezGkwvQ3F+/d/wn
+ oQe+U0JvGq2tJl//xEjIm8/z7umQj1QBNLFqCbZJ90g2BnJfE8Qe9865Zq3Ov890ptlk
+ aDsDW1MzouHZoWML69+MSrO3sdh4B94HQNTDPr6Cgrzxv+l5Fu6jLwPy8FCti2HtKibo
+ eKAg==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=jtHi+z5m
+ header.a=rsa-sha256 header.s=google header.b=Dr7dczWV
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,57 +148,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Suhrid Subramaniam <suhrid.subramaniam@mediatek.com>
+While working on SPL support, we noticed a few bugs in the MediaTek
+serial driver related to clock rate handling. Here are the fixes.
 
-Use ulong for return value of clk_get_rate() in the MediaTek serial
-driver.
-
-IS_ERR_VALUE() does a signed 64-bit comparison against the range of
-possible error codes. If clk_get_rate() returns an error, assigning this
-to a u32 truncates the top 32 bits making the value smaller, defeating
-IS_ERR_VALUE() and producing a garbage divisor that hangs the UART.
-
-Fixes: 3b17f2e2c2a9 ("serial: mtk: add support for using dynamic baud clock souce")
-Signed-off-by: Suhrid Subramaniam <suhrid.subramaniam@mediatek.com>
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/serial/serial_mtk.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Changes in v3:
+- Use clk_is_valid().
+- Drop the check before calling clk_enable().
+- Add a new patch to remove an existing redundant check before a
+  different clk_enable().
+- Link to v2: https://patch.msgid.link/20260731-serial-mtk-clock-fixes-v2-0-022110a9ec3e@baylibre.com
 
-diff --git a/drivers/serial/serial_mtk.c b/drivers/serial/serial_mtk.c
-index 01cc415efdd..28e87f485a2 100644
---- a/drivers/serial/serial_mtk.c
-+++ b/drivers/serial/serial_mtk.c
-@@ -213,7 +213,7 @@ static int _mtk_serial_pending(struct mtk_serial_priv *priv, bool input)
- static int mtk_serial_setbrg(struct udevice *dev, int baudrate)
- {
- 	struct mtk_serial_priv *priv = dev_get_priv(dev);
--	u32 clk_rate;
-+	ulong clk_rate;
- 
- 	clk_rate = clk_get_rate(&priv->clk);
- 	if (IS_ERR_VALUE(clk_rate) || clk_rate == 0)
-@@ -266,6 +266,7 @@ static int mtk_serial_of_to_plat(struct udevice *dev)
- {
- 	struct mtk_serial_priv *priv = dev_get_priv(dev);
- 	fdt_addr_t addr;
-+	ulong clk_rate;
- 	int err;
- 
- 	addr = dev_read_addr(dev);
-@@ -282,8 +283,8 @@ static int mtk_serial_of_to_plat(struct udevice *dev)
- 			return -EINVAL;
- 		}
- 	} else {
--		err = clk_get_rate(&priv->clk);
--		if (IS_ERR_VALUE(err)) {
-+		clk_rate = clk_get_rate(&priv->clk);
-+		if (IS_ERR_VALUE(clk_rate)) {
- 			dev_err(dev, "invalid baud clock\n");
- 			return -EINVAL;
- 		}
+Changes in v2:
+- Moved return value change to a new patch.
+- Link to v1: https://patch.msgid.link/20260727-serial-mtk-clock-fixes-v1-0-1d5542de3d28@baylibre.com
 
--- 
-2.43.0
+---
+David Lechner (2):
+      serial: mtk: return error value from clk_get_rate()
+      serial: serial_mtk: drop check before clk_bus enable
+
+Suhrid Subramaniam (2):
+      serial: mtk: use ulong for clk_rate
+      serial: mtk: guard clk ops on clk.dev
+
+ drivers/serial/serial_mtk.c | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+---
+base-commit: 5c215cb75c3723cbf77c36cbac3e60b001721c79
+change-id: 20260727-serial-mtk-clock-fixes-266e61d2d917
+
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
