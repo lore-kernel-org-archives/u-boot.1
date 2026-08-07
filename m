@@ -1,135 +1,99 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D2EDC5AC7C
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 10:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A6E9C5AC7C
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 10:38:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F0DD040A36;
-	Fri,  7 Aug 2026 10:27:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5AA5760909;
+	Fri,  7 Aug 2026 10:38:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WPUJykXGzlHo; Fri,  7 Aug 2026 10:27:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kWRzgB7tqGDa; Fri,  7 Aug 2026 10:38:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8189340A37
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E58C1608F4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786098433;
-	bh=rqBlT9BN0pEO4Pf4bHOUpGSPDkhmFnnv37XKukVidXA=;
-	h=Date:Cc:To:From:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786099128;
+	bh=byYSGAN8mQujLTIXakezhNPXOHqvZZ454Re73ZygRaY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FgfhmfGxGF5ovIISfdO+51iiUT1UinVIY1cVRZ9ub9scNj2jyq/G9QLGKAk8U54+e
-	 riTVX6cA4OA6BTvwLWAfywIyVItULyVxvozb3lCcdaMOsZjySHoDPFQmzLfXPcihSc
-	 BAP4bZuWtjj7/ehPIN3nZN2zIotvbx9gz+o0guCdl/fV8C/aJ7h5K4SHyag43z+nsA
-	 V83C3A54c/7rWVQgWM0cHx+Vr+b0eFMo8vomzrb8otQTHIho5VnWmpYGu0tYzYKOB+
-	 iBpnpIyzHo5DFFotFzTlu0WPr1swVjDzhkN01mjMSKE2DX9k3rHOTbaSydbpSDeucc
-	 WtqtK44MOtOzA==
+	b=eq4qqvJZwhTKax/narMLFMluPTv8MRLzKoFG5PHUnlyammRss4HQgcVWAYEpN81KU
+	 PZdwCh6dqXHDMHVWbRS9BWRT7VnAhgEqwHNarNQcvRnKk91hYp3a0+Jj5DCaYlSouj
+	 oQTbC1XgutHtmF3uCWZNJL91314f+S8Ybep1yrlWX17rVitsUYkRXTmGgWDeauW6Gn
+	 aWQqoKGRsyF6W1VokEhYDJgkv/z5tanOE+KSLvnF1QeZTxlal1geMZ3zp5snqkNoY5
+	 dVZH3vhD5tx/scIavLIwoJ0dP/zCU8SMUcse0KTVFa78a/9AWD0HTmwzx5tCxL+gOD
+	 qWqp6fbfzlQIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8189340A37;
-	Fri,  7 Aug 2026 10:27:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6630610E
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 10:27:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E58C1608F4;
+	Fri,  7 Aug 2026 10:38:47 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 52379282
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 10:38:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 57AAA40A91
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 10:27:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 43F33608F4
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 10:38:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W7rcr1uvQ6vJ for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 10:27:11 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D67F540A31
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D67F540A31
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D67F540A31
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 10:27:09 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-493b966dd74so19418075e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 03:27:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786098428; x=1786703228;
- h=in-reply-to:references:subject:from:to:cc:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=rqBlT9BN0pEO4Pf4bHOUpGSPDkhmFnnv37XKukVidXA=;
- b=HRKtRRo2XYVXtIjE0kWUTXenbwNELtOLkN3wHbbgQOJuO/MvNp1/yNpremwPAgO8Ve
- 35mOsMbs9kQLAyPyYVhVpFoba+UrGwdlggdCRUOETr7bI7flx9zwAuu8yal5ufAAL8qZ
- Jc/H8LNC5Q2aKsgnj/yGKYmELVLOGkWacD8SZwDDvMPtVWZoW561IM4JWWUtcIF0ZSb0
- +GY6q7ZQ5zZcPr4i+7vSvXn3qv4pWulK2zEdXemkiJYQihX+/P6fWsvQ3YM45izALH76
- 8/XKQLoDgdhLhsiFdlYzkdVDu59sYUU3596QtzF+oBjf7PWdzojyVLp2qukALCAQ6w1U
- 0xBw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rrq7MWs3/B5i0956oXjMNtQTW//8eARzB+Pqzl0I0W2FZPgxyEyqWcr2E5idBo/1nqsKg734yw=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx00yLyFxO0RWoOnuwD/6I/3FDFdpay6ADVGOsN2WlvKz0fLH89
- hT358j+Dhgwt57S4K/bVB4VCcFM5CLMcqqGsFOqYDEpBTVj33TOjpB2McF+Aryujook=
-X-Gm-Gg: AR+sD118zjfYhov4yZHrRKXVFfIzaamdzU7BGjAjusX/4IQKEt4s1T2AdWmtTCVW2aK
- 9txTiaacXmDMnQbahkHiTDzfrekUcp+iSAkUZrfI+2/sTChRIxcl3WDr3dC3sqA+Y1We2SdwQPX
- Ytp6WFg8tzJuOWYdwS5anPHzP7nINVqIqzN7eWrSbe0t0mR6qMrmLTFvHRazgPTc2HtkJCDhOYD
- eo7kL5VxNZ+TQc8swSy1HtR0F7oMdFPeCX1ogcB7r8o/B7yQSrQxYIchlYN3mzOZfj2RzHz0v11
- VNjmS5Eu8Rvaa2CxK0weALlrk1ta6G29zu0dSkADM+5kHcTQ2pUaiq2f3W9UGlZQgRL5l8pBafv
- Thidgtwa37mVDtCtUKFUSK/m4YqV98IuTvE0zNROX7xLgu0Hx/0AbhD5Mpe1eRyQpO9rbpw7uiy
- Vk0pFJgShmX8uA9TfNSFj9XoaG07AjmAU2ly7Kh0A+2tMdmfQQVU5XPr410MhAqo/A0VdEQM6rC
- Z6q8Rx0aFDp2MADliecohRqn6XyiRpNMIGKVz6+/rpNl9lySHZDdPSK
-X-Received: by 2002:a05:600c:190d:b0:499:5a5e:f2f3 with SMTP id
- 5b1f17b1804b1-4995a5ef379mr84469405e9.5.1786098427976; 
- Fri, 07 Aug 2026 03:27:07 -0700 (PDT)
-Received: from localhost (host-212-171-227-71.pool212171.interbusiness.it.
- [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4995e9eb1a0sm29832865e9.5.2026.08.07.03.27.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Aug 2026 03:27:07 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qW6lv8lzdWzH for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 10:38:45 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=165c=ga=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org EC13F608ED
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EC13F608ED
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id EC13F608ED
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 10:38:44 +0000 (UTC)
+X-Forward-Email-ID: 6a75b5aab8d98458e219311d
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.13.10
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <811ccc5b-d7bf-4c4d-930d-d66bd388919e@kwiboo.se>
+Date: Fri, 7 Aug 2026 12:38:30 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/15] clk: rockchip: pll: Fix double use of postdiv1
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.u-boot-project.org
+References: <20260730141308.1218014-1-jonas@kwiboo.se>
+ <20260730141308.1218014-2-jonas@kwiboo.se>
+ <cdb6ebf1-6d92-45ce-ac93-18135c23d3ca@0leil.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <cdb6ebf1-6d92-45ce-ac93-18135c23d3ca@0leil.net>
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 07 Aug 2026 12:27:06 +0200
-Message-Id: <DKIN1TO1WZJK.3M819O4VFHXX9@baylibre.com>
-Cc: "Tom Rini" <trini@konsulko.com>, "Ryder Lee" <ryder.lee@mediatek.com>,
- "Weijie Gao" <weijie.gao@mediatek.com>, "Chunfeng Yun"
- <chunfeng.yun@mediatek.com>, "Igor Belwon"
- <igor.belwon@mentallysanemainliners.org>, "David Lechner"
- <dlechner@baylibre.com>, "Julien Stephan" <jstephan@baylibre.com>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, "Peng Fan" <peng.fan@nxp.com>,
- "Jaehoon Chung" <jh80.chung@samsung.com>, "Marek Vasut" <marex@denx.de>,
- "Julien Masson" <jmasson@baylibre.com>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Alexey Charkov" <alchark@gmail.com>
-To: "Marek Vasut" <marek.vasut@mailbox.org>, "Carlo Caione"
- <ccaione@baylibre.com>, "GSS_MTK_Uboot_upstream"
- <GSS_MTK_Uboot_upstream@mediatek.com>, <u-boot@lists.u-boot-project.org>
-From: "Carlo Caione" <ccaione@baylibre.com>
-Subject: Re: [PATCH v6 3/3] usb: mtu3: add SPL gadget support
-X-Mailer: aerc 0.22.0
-References: <20260806-ccaione-upstream-mtu3-spl-gadget-v6-0-66e133a4bf1a@baylibre.com>
- <20260806-ccaione-upstream-mtu3-spl-gadget-v6-3-66e133a4bf1a@baylibre.com>
- <67436bcb-45d0-4cd2-b6fd-6b85633532cc@mailbox.org>
-In-Reply-To: <67436bcb-45d0-4cd2-b6fd-6b85633532cc@mailbox.org>
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786098428; x=1786703228;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:references:subject:from:to:cc:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=rqBlT9BN0pEO4Pf4bHOUpGSPDkhmFnnv37XKukVidXA=;
- b=aFFeBn3rD8/ppN0+5XmB+tH6Q72/HezN+AlYoyC7twu5vyGnWop2OUFyX/8G8rVQKu
- zAFYt26ZgjU9yPYFdpGiqBGgXfsHHKVCYpATsYhD2GW+gnxY6Ql0ou7lijlRIISyREgd
- n/s6ePJ7Q72BtArhjtiumB2Kxf09ebx4yuKJd1zZH1Us1D76gTxTws4wHW0i55I5Ou2U
- /j7Ov83smStGrUWvZC2RA1Al9LbFPxPHNkN+En4ixL3LKTBNHiSPqo3oqRy860zpuRzF
- 3qNKEHbysFNWOurKj3VgVevHMoPqcHmXJO3hOkF9AtErvfBzicZGH99gCVg2/oj3PVcn
- +Ddg==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=kwiboo.se; 
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1786099123;
+ bh=byYSGAN8mQujLTIXakezhNPXOHqvZZ454Re73ZygRaY=;
+ b=Ia/vD+m9OunMFCvHQnE9YJ6CNCZ+ntLtcZlwk5Z4tlG/rshf6xT8wvuumo0pYyNURF0I7Pdlk
+ L5IW3b1E+tEYuKmTxfRnAH6rBra/rqw15v811e3tdMHVyvCV+vKG7B6shm4F/QFMRO2NFNv7Nb0
+ bJ127ogq/x2x1RrxJPwgLDQIODONQ57YZ6Y+V/IL6uY7qhvgzVejfdxD+l4+1k/B4Q2imHclQd6
+ sbiNcDz1gRiGJnmeEM58T0RBWZPMQB9+sVCRxzOtYXOf5UxobyDg4jq7+r4dJvmRinN4ut95qJO
+ iBdL1VIoWYm+ztENs9Sy6jmQ1SCOMJ03F6zboBRAyk1Q==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=aFFeBn3r
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=Ia/vD+m9
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,41 +108,85 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu Aug 6, 2026 at 8:05 PM CEST, Marek Vasut wrote:
-> On 8/6/26 2:54 PM, Carlo Caione wrote:
->
-> [...]
->
->> +++ b/drivers/usb/mtu3/Kconfig
->> @@ -42,3 +42,23 @@ config USB_MTU3_DEBUG
->>   	  Say Y here to enable debugging messages in the MTU3 Driver.
->>  =20
->>   endif
->> +
->> +config SPL_USB_MTU3
->> +	bool "MediaTek USB3 controller support in SPL"
->> +	depends on ARCH_MEDIATEK
->> +	depends on SPL_DM_USB_GADGET && SPL_USB_GADGET
->> +	help
->> +	  Enable the MediaTek USB3 controller in SPL. The SPL driver currently
->> +	  supports peripheral mode only.
->> +
->> +if SPL_USB_MTU3
->> +
->> +config SPL_USB_MTU3_GADGET
->> +	bool "Gadget mode in SPL"
->> +	default y
->> +	select USB_GADGET_DUALSPEED
->> +	help
->> +	  Enable the MTU3 peripheral controller in SPL so USB gadget
->> +	  functions can use it before U-Boot proper starts.
->
-> HOST seems to be missing here ?
+Hi Quentin,
 
-Damn it, that was lost during the patch splitting. Thanks for spotting
-that, shame on me.
+On 8/7/2026 11:36 AM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 7/30/26 4:12 PM, Jonas Karlman wrote:
+>> The possible frac_rate part of rk3036_pll plls is divided two times by
+>> postdiv1 instead of both postdiv1 and postdiv2 as the integer part. Fix
+>> this by using postdiv2 in the second do_div() call.
+>>
+> 
+> I... cannot find which SoC(s) actually makes use of that function. It's 
+> only called when pll->type = rk3036 (which is 0, so anything that 
+> doesn't explicitly set ->type will have its type be rk3036), but all the 
+> drivers declaring a rockchip_pll_clock array specify something that 
+> isn't rk3036. So... is this dead code or what did I miss :)?
 
-v7 coming, cheers.
+It is also called for the pll_rk3328 type, i.e. rk3308, rk3506, rk3528,
+rk3588 and rv1126, strangely not for rk3328 (in U-Boot).
 
---
-Carlo Caione
+I do think there is a very low chance we actually use the fractal pll
+rates in U-Boot but the double use of postdiv1 seems (and should be)
+wrong.
+
+> 
+> Where did you get the formula also, I couldn't quickly find a publicly 
+> leaked TRM for RK3036 (and since I couldn't figure out which SoC(s) use 
+> the same formula...).
+
+I think they are very similar as most fractional plls used by RK.
+
+Following is a snippet from Rockchip RK3036 TRM V1.0 20150907-Part1
+(that used to exist in a GitHub repo at Poco-Ye/rk-datasheet)
+
+  The Fractional PLL output frequency can be calculated using some
+  simple formulas.
+  
+  If DSMPD = 1 (DSM is disabled, "integer mode")
+   FOUTVCO = FREF / REFDIV * FBDIV
+   FOUTPOSTDIV = FOUTVCO / POSTDIV1 / POSTDIV2
+  
+  If DSMPD = 0 (DSM is enabled, "fractional mode")
+   FOUTVCO = FREF / REFDIV * (FBDIV + FRAC / 224)
+   FOUTPOSTDIV = FOUTVCO / POSTDIV1 / POSTDIV2
+  
+  Where:
+   FOUTVCO = Fractional PLL non-divided output frequency
+   FOUTPOSTDIV = Fractional PLL divided output frequency (output of
+                 second post divider)
+   FREF = Fractional PLL input reference frequency
+   REFDIV = Fractional PLL input reference clock divider
+   FVCO = Frequency of internal VCO
+   FBDIV = Integer value programmed into feedback divide
+   FRAC = Fractional value programmed into DSM
+
+And Linux use following in rockchip_rk3036_pll_recalc_rate():
+
+	rate64 *= cur.fbdiv;
+	do_div(rate64, cur.refdiv);
+
+	if (cur.dsmpd == 0) {
+		/* fractional mode */
+		u64 frac_rate64 = prate * cur.frac;
+
+		do_div(frac_rate64, cur.refdiv);
+		rate64 += frac_rate64 >> 24;
+	}
+
+	do_div(rate64, cur.postdiv1);
+	do_div(rate64, cur.postdiv2);
+
+In U-Boot the postdiv part seem to be handled for the integer and
+fractal parts separately. Maybe we should just try to adopt something
+similar/closer to Linux?
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
