@@ -1,97 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3535C2A09B
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:45:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 772CFC5AC7A
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 17:34:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0CCE880E78;
-	Fri,  7 Aug 2026 16:45:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0A4B340797;
+	Fri,  7 Aug 2026 17:34:41 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8uW6CzoVclQ6; Fri,  7 Aug 2026 17:34:39 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0C35F40768
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786124079;
+	bh=iilitnHzik7ofnQRdmEG/kYCPpv99W7r+fdmUCsYihg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=UEOrhCONSuoukEzSSVqDGU7FYUFFq9YMANqazlcYt9mibWIc4btzehOEQfEnVe4Wd
+	 ovDu0anQ11+ZP8NYGNVat5loJnhFWfMbILoQR+dMlIbSUh7CjKObaRPcCZM+uLKOfq
+	 hfMA+qURf3juuj6/jYpliuCwrWvj5NLmZQBdXfgTGq/Vq7t//kdZ1THf+z1Vb+pjlD
+	 JX5xuMde6ESHVQjSbUEPUipEbxAnjlZKdSVi0Pp5DE9R2fo/zqseKnEwy4mN8ADYMw
+	 rDGUaX/XCOZFhIKDn7SSMSNYo6pMnNI1kQCMdTwjAU3mIUSGq3b7P8TixLYj0E9D1W
+	 R85t87xP2hBMA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0C35F40768;
+	Fri,  7 Aug 2026 17:34:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A98E1AF
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 17:34:37 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3767A80D0B
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 17:34:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ixQmc0AS4k9E; Fri,  7 Aug 2026 16:45:25 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1536F80E6E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786121125;
-	bh=mTwvYkkug8ryg66k01o89JZisbFX9vt/wQfb7wqMcCg=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=k0eQX4VUPMOiIIVqKyKzTA4hMwRVZLde1fzDVj4+XHXoIYL2fLymFoe/kpyAO62Db
-	 1WUqAp4lKLySVM4+Cpt+lRfHKTCVWRzNVhyHYKELiS8youdRtKboEMNa+XU2ap/yip
-	 vCwJuGlqBsi1TMiRv0e81Shb9QsgtZA9ctnIcaVMH+CnLtXlCvtjnRgU28sQQXr+x2
-	 Syr4r6NIEgrzP86KV5vtNRMBFQopSqF5eN8zQpNALIEZpMMiHzLwDLtiya6vkYlV7Y
-	 nyB4zD/b3DvCnJYDsqoa8VOm+d29wmIg0Swkpcjrf3shDii5sTGXS1unYPyMlbZtTW
-	 u5iug8q9GwpNg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1536F80E6E;
-	Fri,  7 Aug 2026 16:45:25 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 64B0F296
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 16:45:23 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 566B64010A
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 16:45:23 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Wb1o1aNfwrkh for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 16:45:22 +0000 (UTC)
+ id 4RcTBEamYz9X for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 17:34:36 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:b8b8::42ab; helo=smtp-42ab.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0B2684008E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0B2684008E
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [IPv6:2001:1600:19:b8b8::42ab])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0B2684008E
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 16:45:21 +0000 (UTC)
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hGqb84256zPJL;
- Fri,  7 Aug 2026 18:38:28 +0200 (CEST)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hGqb73r9XzTQk; Fri,  7 Aug 2026 18:38:27 +0200 (CEST)
-Message-ID: <0881ae1c-1d92-4c3f-abc1-77608abd9850@0leil.net>
-Date: Fri, 7 Aug 2026 18:38:27 +0200
+ client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 719FB80523
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 719FB80523
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 719FB80523
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 17:34:36 +0000 (UTC)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7eb6573bd52so2582241a34.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 10:34:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786124075; x=1786728875;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=iilitnHzik7ofnQRdmEG/kYCPpv99W7r+fdmUCsYihg=;
+ b=IM7Qko5nea3yCAHzizS3G9SAoduog4PsugfN64LzKD9OqgYCK3sLyp0EpPaAityw9m
+ oRZA/FKnFwgXsLsElj/dmAl2yvEgeUdMzyLKuZ+ELoBNUpQ3Aoefqx2y8leyn7HHDOSK
+ dEouSIxVtT/LbjiLrWM/p6nOP5TQvndAk4PugIRs7C9jODrWyytPv7bfaMmvVyDr1Dot
+ Nwibgwjy/CE1/J0v7cmF/iT68hp2SJf3su2IroggeLAEVTqWnbOVCNGtaEh+/ipjsP0s
+ CSR4sUIxe9n+naXqpBXPfPwaphJBh4qYl7xXpcYNMZUdRd/PCGuLrDvV6l7VzPCBHNl4
+ qzgg==
+X-Gm-Message-State: AOJu0YyutUDBlV4xrs36kwjfP4KauAChfGi2b5xBfC2Ftpg0HRhcDeAB
+ bdZBL2oRvM4PDorS7xtFCWWAQk3h6g3wquolPJdvoVLa57zBzMQXhQ7hCe7kuinYdF4=
+X-Gm-Gg: AR+sD125waQv77nyC9dGVEqf8azQCR4eThurNYV4ODX497yaG2WPgY+XV8IDMcjNcv7
+ XTRVER/FjTnDVDL+dCYUo0HSvLWJ6L2t9fSkKHvrX7M6lwBDtDDogeFXf5s3LiEFT4jLFke86zr
+ QD3FMqrE2li3P+H+7fJW3ALxqmAIQdC64ON9dqKZZMrV2xmw/nU3pWUlI4ouUDqqLTYSeL+PzFM
+ 9eWWwT0qHqmt3oxk5gL+uOlUolzt/HRYkLG0pJcvVkeUJ3Rn8TlrOJSNfEUzEG7QsTWNKw9jM9T
+ KfFO0kyklFwbOBM2fXJZstfsHjfAjQZfKHym6sw1s3qpHDrCq46YrnckscKu2plcr6yoAi2e9er
+ baFc7aVkn46w51Aixvi3/4JsgNueJOT5vmdc7bWJXD1L8Wu5iBMnITNK6pXkAIlfhqsfUppXZqQ
+ tRP7p0mVS1pfinSl9U+1wQQ4KBeXwHFhXoWneZFLhKFUnPjISNcoGD4WA3rVPv3AQWKtXyAy+c7
+ ILiOueyFKvef4kqrZEOu4az1SL33UuHqwYT88m/uzfdTpCVLaZUX4eYuohrz+xSk/RKfCpD0XFy
+ /N1mFOyzbQ==
+X-Received: by 2002:a05:6830:2e01:b0:7e9:e8a6:6389 with SMTP id
+ 46e09a7af769-7f1e5c9713dmr15006362a34.4.1786124075365; 
+ Fri, 07 Aug 2026 10:34:35 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f35b7c4c25sm1698328a34.22.2026.08.07.10.34.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Aug 2026 10:34:34 -0700 (PDT)
+Date: Fri, 7 Aug 2026 11:34:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mehmet Fide <mehmet.fide@gmail.com>
+Cc: u-boot@lists.u-boot-project.org,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] toradex: select EVENT for TDX_CFG_BLOCK
+Message-ID: <20260807173432.GA394392@bill-the-cat>
+References: <20260807112545.1883789-1-mehmet.fide@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/15] clk: rockchip: pll: Fix double use of postdiv1
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.u-boot-project.org
-References: <20260730141308.1218014-1-jonas@kwiboo.se>
- <20260730141308.1218014-2-jonas@kwiboo.se>
- <cdb6ebf1-6d92-45ce-ac93-18135c23d3ca@0leil.net>
- <811ccc5b-d7bf-4c4d-930d-d66bd388919e@kwiboo.se>
-Content-Language: en-US
-In-Reply-To: <811ccc5b-d7bf-4c4d-930d-d66bd388919e@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="H3hJDzwJMBlGzPBQ"
+Content-Disposition: inline
+In-Reply-To: <20260807112545.1883789-1-mehmet.fide@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0leil.net; s=20231125; t=1786120708;
- bh=mTwvYkkug8ryg66k01o89JZisbFX9vt/wQfb7wqMcCg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=DCGVDSOUhPKRoB6DcZt8ee2Eee3bs+RR+8C3eHUeta96CwimMJKhqMxc+rDjX36bO
- 1Hnx83HPHiY5UBMU2JynZtwi5G+f5F/ylxLACWKxED3S8QKmBZQiENpskSbB3EuNiJ
- SaGeP298vtX5d5Bu7eMj9zu4uKYmnz7T5Bvic1fXH9CQtk34QMEkk5bftc2jHkJBUu
- rlSELNsutP4Iv+QnkFUv5Sr0UYLsgIVAc7DY9Sl4usRaJHbQ2Rc39TkhOzdQ7CsaZH
- bQDY9vBxm2QeB8MvRhfz1+MzzyzO4h8+9n5bXbQvxsFZlXKlL6zP733+Mta9kfDNvq
- ugLRaeuXmqxJw==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=0leil.net
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=DCGVDSOU
+ d=konsulko.com; s=google; t=1786124075; x=1786728875;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=iilitnHzik7ofnQRdmEG/kYCPpv99W7r+fdmUCsYihg=;
+ b=RRlli0NyLxXP3E/Yqx6qkIIp1JCupT67YFydQLawE8HUAN/yTFPM2GkSDOaM7f+YEM
+ UiaDDeFoB4U7cGDYTysOwP2PaETZnf4rXzkUV8HiC8Y5c4dxFh+87sDemsKlkoZchXFk
+ I+D0UR6qzUMhBAuW07Ou4JC6uo9DM2outEnkM=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=RRlli0Ny
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -103,125 +129,69 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <u-boot@0leil.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Jonas,
 
-On 8/7/26 12:38 PM, Jonas Karlman wrote:
-> Hi Quentin,
-> 
-> On 8/7/2026 11:36 AM, Quentin Schulz wrote:
->> Hi Jonas,
->>
->> On 7/30/26 4:12 PM, Jonas Karlman wrote:
->>> The possible frac_rate part of rk3036_pll plls is divided two times by
->>> postdiv1 instead of both postdiv1 and postdiv2 as the integer part. Fix
->>> this by using postdiv2 in the second do_div() call.
->>>
->>
->> I... cannot find which SoC(s) actually makes use of that function. It's
->> only called when pll->type = rk3036 (which is 0, so anything that
->> doesn't explicitly set ->type will have its type be rk3036), but all the
->> drivers declaring a rockchip_pll_clock array specify something that
->> isn't rk3036. So... is this dead code or what did I miss :)?
-> 
-> It is also called for the pll_rk3328 type, i.e. rk3308, rk3506, rk3528,
-> rk3588 and rv1126, strangely not for rk3328 (in U-Boot).
-> 
+--H3hJDzwJMBlGzPBQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-s/rk3588/rk3568/ above.
+On Fri, Aug 07, 2026 at 01:25:45PM +0200, Mehmet Fide wrote:
 
-Thanks for the pointer, I missed the second call to 
-rk3036_pll_[gs]et_rate() when pll->type = pll_rk3328.
+> From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+>=20
+> The Toradex config block is read by settings_r(), which is reachable
+> only as an event spy:
+>=20
+>   EVENT_SPY_SIMPLE(EVT_SETTINGS_R, settings_r);
+>=20
+> board_r.c does call INITCALL_EVT(EVT_SETTINGS_R) unconditionally, but
+> with CONFIG_EVENT disabled event_notify_null() is an empty inline, so
+> the spy is never reached and settings_r() never runs. Nothing else
+> selects EVENT for colibri_vf, and CONFIG_EVENT has no prompt, so a
+> defconfig cannot turn it on by itself.
+>=20
+> The effect is that serial#, ethaddr and eth1addr are never populated
+> from the config block. serial# in turn is what fdt_root() copies into
+> the device tree as "serial-number", so Linux loses
+> /proc/device-tree/serial-number along with anything deriving a MAC
+> address or a device identity from it. The failure is quiet: a module
+> whose saved environment predates the conversion to the event framework
+> keeps the old values and looks healthy until the environment is
+> rewritten.
+>=20
+> Verified on a Colibri VF50. Before the change "printenv serial#"
+> reports "not defined" and no "MISSING TORADEX CONFIG BLOCK" is
+> printed, which is the signature of the spy never running. After it the
+> banner shows
+>=20
+>   Model: Toradex 0013 Colibri VF50 128MB IT V1.2B
+>   Serial#: 03135809
+>=20
+> and Linux finds /proc/device-tree/serial-number again.
+>=20
+> TDX_CFG_BLOCK cannot work without the spy, so select what it needs.
+>=20
+> Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-As for rk3328, it isn't using the common PLL core from 
-drivers/clk/rockchip/clk-pll.c but it is indeed weird to have it named 
-following the name of an SoC that doesn't actually make use of it.
+Fixes: 118b17b84fc7 ("toradex: common: Use SETTINGS_R event to read toradex=
+ config block")
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> I do think there is a very low chance we actually use the fractal pll
-> rates in U-Boot but the double use of postdiv1 seems (and should be)
-> wrong.
-> 
+--=20
+Tom
 
-Alexey started to look into supporting them for RK3576 and found a few 
-issues, so I'm guessing we are going to start seeing more users.
+--H3hJDzwJMBlGzPBQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
->>
->> Where did you get the formula also, I couldn't quickly find a publicly
->> leaked TRM for RK3036 (and since I couldn't figure out which SoC(s) use
->> the same formula...).
-> 
-> I think they are very similar as most fractional plls used by RK.
-> 
-> Following is a snippet from Rockchip RK3036 TRM V1.0 20150907-Part1
-> (that used to exist in a GitHub repo at Poco-Ye/rk-datasheet)
-> 
->    The Fractional PLL output frequency can be calculated using some
->    simple formulas.
->    
->    If DSMPD = 1 (DSM is disabled, "integer mode")
->     FOUTVCO = FREF / REFDIV * FBDIV
->     FOUTPOSTDIV = FOUTVCO / POSTDIV1 / POSTDIV2
->    
->    If DSMPD = 0 (DSM is enabled, "fractional mode")
->     FOUTVCO = FREF / REFDIV * (FBDIV + FRAC / 224)
+-----BEGIN PGP SIGNATURE-----
 
-This one's funny because I think it's supposed to be 2^24 and not 224. 
-They made the same mistake in the RK3308 TRM. It's fine in other TRMs.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanYXJAAKCRAr4qD1Cr/k
+CsDrAP4vEntNtqRjqJm/Z+PR4BK9IFFUUWCMiKyGXH5pXaHLXAEAh1C+uyFGrV3P
++yJOZDO3WNKs2O8TCUStrOdtgVhM9Q0=
+=RM9Y
+-----END PGP SIGNATURE-----
 
->     FOUTPOSTDIV = FOUTVCO / POSTDIV1 / POSTDIV2
->    
->    Where:
->     FOUTVCO = Fractional PLL non-divided output frequency
->     FOUTPOSTDIV = Fractional PLL divided output frequency (output of
->                   second post divider)
->     FREF = Fractional PLL input reference frequency
->     REFDIV = Fractional PLL input reference clock divider
->     FVCO = Frequency of internal VCO
->     FBDIV = Integer value programmed into feedback divide
->     FRAC = Fractional value programmed into DSM
-> 
-> And Linux use following in rockchip_rk3036_pll_recalc_rate():
-> 
-> 	rate64 *= cur.fbdiv;
-> 	do_div(rate64, cur.refdiv);
-> 
-> 	if (cur.dsmpd == 0) {
-> 		/* fractional mode */
-> 		u64 frac_rate64 = prate * cur.frac;
-> 
-> 		do_div(frac_rate64, cur.refdiv);
-> 		rate64 += frac_rate64 >> 24;
-> 	}
-> 
-> 	do_div(rate64, cur.postdiv1);
-> 	do_div(rate64, cur.postdiv2);
-> 
-> In U-Boot the postdiv part seem to be handled for the integer and
-> fractal parts separately. Maybe we should just try to adopt something
-> similar/closer to Linux?
-> 
-
-Casey has posted a series[1] porting some parts of the Linux's CCF to 
-U-Boot which should allow us to import the Linux kernel driver(s) with 
-minimal adaptation[2]. We would still need a minimal clock driver for 
-xPL (and currently also proper pre-relocation) if I understood 
-correctly, but we hopefully would need so little that it wouldn't cost 
-us much to effectively have two separate clock drivers depending on the 
-boot stage. I believe she's looking into making it work in proper pre-reloc.
-
-I'm honestly not sure if I'll have the time to give this a try any time 
-soon but maybe someone else would like to see if this can work out for 
-us. I would also feel much better if we had CI with Rockchip boards so 
-it feels less like a coin toss to do such big changes.
-
-[1] 
-https://lore.kernel.org/u-boot/20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org/
-[2] 
-https://lore.kernel.org/u-boot/20260720-casey-ccf-upstream-july-v1-33-8fece1b0333d@linaro.org/
-
-Cheers,
-Quentin
+--H3hJDzwJMBlGzPBQ--
