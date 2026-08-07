@@ -1,133 +1,133 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0317C5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 15:12:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EC7EC2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 15:12:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 605D38134F;
-	Fri,  7 Aug 2026 15:12:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E5F9040A3D;
+	Fri,  7 Aug 2026 15:12:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Hu2FO-UCC4xu; Fri,  7 Aug 2026 15:12:35 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Yxcmkh3YaB43; Fri,  7 Aug 2026 15:12:39 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F199581337
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 17BA640A40
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786115555;
-	bh=S2VUi+H1FUpCe60gOPYPeCygME3RRXYBg/2hp4QspZ4=;
+	d=lists.u-boot-project.org ; s=default; t=1786115559;
+	bh=lTzazjx3LPv+tQLEzyjvrMyrtR3d/SOFsr5dVVqL2pw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OkJMcYTTyEOcvoO107NOFIfqNFYBeYkXuWtgT8tGzCPaXv5Gxu8qxsMiSSvdECZJF
-	 xTm8BUvwkf40cSl22mkHDaTrzqPZ4I/N/NDsEkdOyl4cXhfUub2Tz+uAw9njcELu9U
-	 +cvAksId1tPb8eP+Fon+A+N1sEjBwxYRS86Iehkih1g9PVr4wTofCA/WPcJU/Kf3Im
-	 Nx+r9k/hHEtprguOCYKwHuBLAgtDlvi+dPTHnsPfK+DecnWD3iEsjeQwtkt4poNYmj
-	 MPi28Um09KKrdShloeOtxCjTlIF2P/4UpS1tD8vvcL90wy5iIuVDVX0LdYSaBruTrG
-	 BtBWQH00cMXMQ==
+	b=MQF6ETZgfXbZM8FZ0aEfR1+I0Bdg24zq7a5OH7cSmEwa/RA5gui6LdkkouHqcsyiH
+	 H8V+tIAwcsl3TVQfrVLUwrEEYxazm1p52McFFBzf9Gi8v6EzrmRNFJ2lodu3UcA3S/
+	 sXtA+csl7Yf1lMnr3qR955/tYfWJjI7wn2RF3kDhPCaFhgPheaxHU3mTUUwkautyjf
+	 4mEamP4MUGO3r6a8bgJb1EVf6hI5FcZPR1Ds6eBwxBYUWbGdTYDQgoN6Lm7k+wYdQs
+	 /pdf52PyBYE6qJxI1KAtLWy7S2zeglTXIA1wq8TicwzomQ/SqgRd4nT4oOrUagpglZ
+	 T4iO5i8nUhCaA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F199581337;
-	Fri,  7 Aug 2026 15:12:34 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8B68F2F5
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:12:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 17BA640A40;
+	Fri,  7 Aug 2026 15:12:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8514DD3
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:12:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7BC9381337
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:12:33 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6B567605CF
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:12:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dnI4M1SDs_Oz for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 15:12:32 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5Ob_iIJQHQJY for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 15:12:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org EFD1881348
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EFD1881348
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EFD1881348
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:12:31 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6a082b3671fso4418987a12.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 08:12:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786115550; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4E13260A7D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4E13260A7D
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4E13260A7D
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:12:37 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6a063d211ebso4543476a12.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 08:12:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786115555; cv=none;
  d=google.com; s=arc-20260327;
- b=qIFfOyHcjjkJ7+8C7TQJupl8EM3Oc1wc5vxAN+7tqmgatHXMjGAYrS6BptP6RLNRry
- fJLM7NOlDbG7MBgWSB7WrafAd3ziEO/+dlr/Vh6F8smn1gxnw/s+NgRatXmqU0xlBKKW
- yK8nUO/A4IwghJsTduQ2XacU0Y3d8KY2/LhrqNCnMo3HAfxFGpsDz5cCKVNsOAGsRBW0
- wfZSQSz/fLxtyGwhxvhsWrhsLj5z2WjxRVLwXzCZkXw8XLq5y38+bwgfqyGVB9Xe5vsE
- sGRPVcaFTmWrx4VcBh6P98XAHdizfLkc8Wy57xsj4VyZ0V4+yxeFtU0zGtAA28TuI1ah
- ZZMg==
+ b=CGjAJxNufHCvEq6WGQbXxbJp/TnSAoSyRicc/7u5UkX444eH0azIog8ykFY3zYdnAD
+ LM15jdwVelaZmNmbELe6JV9LclxsiK9R4QrdoWKda4i0LI0WQ3NjfsKJaBBjEK9kLvfq
+ FXwqxD/koktEI2ytWtEQALMXoVRMc/wsyfgaRlUH30rbYDoz3MKO3/04F1gyKjOLQp5Y
+ 13hpBTMWgxKnBRrNnCBoiJ2KCfK2eJfXUoCReOttrwPoPVvSWsWSrrgb4+fNHIMdeqQ2
+ BWSPD+gpRs+GRwOMpjkJc2fwpZQvnZxO09DA9zfW2G552NXzwfL9OgUavPFRKNByUles
+ 3JHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=S2VUi+H1FUpCe60gOPYPeCygME3RRXYBg/2hp4QspZ4=;
+ bh=lTzazjx3LPv+tQLEzyjvrMyrtR3d/SOFsr5dVVqL2pw=;
  fh=Ve5Rf33lTpAQZl0FmIOUMp9/uPnwy1xsgvzmn825Zcc=;
- b=gm6Uekxk5CCi2p+EFbMEzEc04P6d5zPyz9/jOprL1I9x2BbB2pSAhq8du8elbWZ5Vh
- l5hZ5R8UPgd4G3SiC7VNdNb9f0qVjO6NYsM5I/3XsjciWCLFnLXSt5AdEmLnYtlMn+gg
- LsOlg5rwCpSzA9BNVWdsVyeIyfxUT7KcqJ3+lS2FGSIGX9M8KjQa5/vmkS9EUYjZR86S
- AkBhFlQcf3aLajiKJpbnxTsOx5DgpWcCBSv7I76r1Q0EZuGh4TBdq9RF45cMOlL23hpP
- dM3zClLwOd3YrKju9EWw0pdVHGG3o1MNXtacS7NKvAhiExOSIvDuq6yqJZB4NdtTZ48p
- 2I5A==; darn=lists.u-boot-project.org
+ b=LUd+/fvxg8Rt4bgDxiN2teCMiZp5LvxF2GCpwyPG2E9ryuujDfMshfxbZXJDmKjPK3
+ m2ojkPKrbzhno+HtXZ/5O67zegb76fZIeN3nZgbbPUW+cKETDIMJpk/1z0c1QfYXTswW
+ jOHDNJyrfHLUBEzr5QNZnTSMImC52a4M3iJZWdqQ8051Giegsb0BAQ7+Kq6wClR1eDhX
+ qKIjN+/PzzD+ow63StLWg4LttX/4vX4TEqnU/PJ+bNwKwj5TFyOOtTbKzUlYf5Jr/HGB
+ 1M66f4daS6zp0xzp4vK6HVXXa3wHhuj8QhICNMxlQyCnO7tn+vqJJrlVShGjEJ9m/75a
+ of5g==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786115550; x=1786720350;
+ d=1e100.net; s=20251104; t=1786115555; x=1786720355;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=S2VUi+H1FUpCe60gOPYPeCygME3RRXYBg/2hp4QspZ4=;
- b=QAB9QGFQpNbv23T2t2HhRo8N6fX4YphmPj5W5+Gl/gHqrEgNpRZP1p0oIBWezumfRR
- Olj2CWmsQKjCzj2dFoV/H+QYhAn7RzNdVk8QrCPFBWddGWUKx98c4BKj0/FDUSiATurT
- AOhnovU6yvXe0vGbqiWOMA+MWZGbRMXaFi7UXj3gQKWJhq+/u1hHLmfDFTLuB7qNPCry
- JANqanrwDy69tj67T1nbtMD4kyjFbxfQX7Xd12rrLAJdAXUakGeulG2T7zUa7YAsYMH0
- lg4Hsb9IMNS5F68dy/EOk7WSba0aTUW6opw9EHowHNkFxYPo0m1du0Vr5vCQpQyIUFCC
- xd+g==
-X-Gm-Message-State: AOJu0Yzn4dCvbY0ONzIKTLzfNWc2alRytHiVopII5mCrf6HGJiWSqgCo
- Q3zAInC0L5K9rpow4BTtX8XJFqbl36gpk3TF8DVwPXAXIycuzd2ZAOg3Eb+9vBAPFfAJMGcy6eS
- rcaY2wTJhOh6vXArQtaMKkP0b+a4iW7A5S3guQVFsVXZV5Xxw5ug=
-X-Gm-Gg: AR+sD12MONcpP9TCM4L5Wuv8oF+oMXbkfKUCSdcAtqoKQ5KtOBlvD45ztwB1Af3m9qI
- Up/m140B7MtBnGQUOLHaEPlQ10j4j8D/fDgllzVySAk/7QUh9Lc3gGJEw89gxvasyAIZHU7+UFJ
- wFUYmSZTro2NR27de9NhEk5YYoc7+4UZbPVUcvkbNcmSRla3TdEvObjtOLkhtu/YrxPEGlSB1L0
- jTZ2R0P57Q+BpoLCJfF0Owegwvj++ZkKd+TcKC0aDy57pCj5DUWoWQHTE2hnYXcDaFfhHAkedH4
- 0HYUUWu0wyyQr5CzAkzMdCPxIfKw0kpwjxMErPj0gBY=
-X-Received: by 2002:a05:6402:e9f:b0:698:b899:d1 with SMTP id
- 4fb4d7f45d1cf-6a14eff65fcmr11646640a12.0.1786115549875; Fri, 07 Aug 2026
- 08:12:29 -0700 (PDT)
+ bh=lTzazjx3LPv+tQLEzyjvrMyrtR3d/SOFsr5dVVqL2pw=;
+ b=o3nF/jyuaQQD2MCsSrywLaC+inchqphGJr8Zs+bYCwUqTD2kGj99kcBDCT46OXmiVI
+ 3TDRIjhVhsq0RJV37NS34yO70fTZNIIaShG6NBRi1yJTyHr9hYSf1ucaoAzLtzK3abIQ
+ BdKDlSfcRMWEXtPzMoVBdgRe7tnjl28G++3G3Vua699/XROy3BTaLrIRCoKoEP6FBXWg
+ FOUdES6iWiGbwTAAqdoWk5gw+pqOlNJz147eUd52pbyGK/vsOmZyZ4ZN5u5v4RIFQKsU
+ ktffGKO4LgX1VA+a8K+56q0LZAqmf4l3O448vCBCrZ+u9g2gEdaZyE9I06t6lwd+7ThY
+ Ix/w==
+X-Gm-Message-State: AOJu0YyyPKoLxhc/wxZv1fHmdDCn/v2vxxi0vxumPjHAtmfD4/+AAvFv
+ 3YLKhz+O7O6srIOmxJ4zI/O/l/C6LE04iPlZontzqjYJoQRUKrdfssWZ7Q0hH9I4vnOnPQ+Mrnj
+ 2TELoF9VleKcRonywpSFqsT3A/Jh7fhRo0fke7WZh
+X-Gm-Gg: AR+sD1092cbAVMa6LO3PWyiZ1JDmh1b3DAP2fskaKCbIeOEUNugXASqxzjeJ2J8RWsk
+ eNlz0MzM+bOwegLqq/khTBAk1guIm6oL8XjTXxRYgX3iNHDso0zkf/I/LWKFN+0DMYeLsu10zfx
+ pZUVY86ekz9icIDq2d+bmv3dx6n1K9q99NoXAivcBKEJS1gobSUevFt89Bmbu9aF9HpR4T3yc8T
+ HO8p1ACz/zc+v+U0fFl2f7EkDhgVtu4lzmQmMBXfM06kgHMqadiMo68TAFqn8cngEV+2/wU55Ab
+ PyENgintFZdXB0MTc6m4VHsBN7DSW+rbgbhvCseApZY=
+X-Received: by 2002:a05:6402:2344:b0:697:de29:c802 with SMTP id
+ 4fb4d7f45d1cf-6a14f256f83mr11870169a12.18.1786115555281; Fri, 07 Aug 2026
+ 08:12:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260804-am62lx-v4-0-01746157643d@ti.com>
- <20260804-am62lx-v4-6-01746157643d@ti.com>
- <CAFLszTh9foQEBVa3BfNHpZ9-2Fr4BGNGCH+oYyLz4yCGr6SkhA@mail.gmail.com>
- <20260807142351.s27pj6ypv3pepdsn@bryanbrattlof.com>
-In-Reply-To: <20260807142351.s27pj6ypv3pepdsn@bryanbrattlof.com>
+ <20260804-am62lx-v4-9-01746157643d@ti.com>
+ <CAFLszThV9-uA_z_Lbpduov9tmxVD6m1dZbQQqiRfHo-aSayYGA@mail.gmail.com>
+ <20260807130400.5jcf6vmv4wyblrws@bryanbrattlof.com>
+In-Reply-To: <20260807130400.5jcf6vmv4wyblrws@bryanbrattlof.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 7 Aug 2026 09:12:15 -0600
-X-Gm-Features: AUfX_mxdfJUo0Qc1HSigHlJyzwQwSrUh85iVPCObEEvfAm-511zHyZie0v1AWeQ
-Message-ID: <CAFLszTgPogFNTfLjQ52kSxM4nVDz5JBA=0tMz4eVgfrBBW0XCw@mail.gmail.com>
-Subject: Re: [PATCH v4 06/11] board: ti: am62lx: add initial board files
+Date: Fri, 7 Aug 2026 09:12:17 -0600
+X-Gm-Features: AUfX_mxzQ3KXID12x4qgNyPwTtssQAv-gXkGbTkNXhSz3dMvwohjwpAXh7UjU0o
+Message-ID: <CAFLszTiwQMwOTdwNFTHrqgih+v+eMGCc3F1jt=wMd0AJCcn9VA@mail.gmail.com>
+Subject: Re: [PATCH v4 09/11] doc: ti: k3: fix pygments warning parsing
+ device-tree
 To: Bryan Brattlof <bb@ti.com>
 Cc: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786115550; x=1786720350;
+ d=chromium.org; s=google; t=1786115555; x=1786720355;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=S2VUi+H1FUpCe60gOPYPeCygME3RRXYBg/2hp4QspZ4=;
- b=RDTtiVQVzuFOoMWqgBMfxkXEqgRRj4B98MWdMQk+ABoovFkEbZvKBYEChQ4afMYDv0
- 9tvbvwAAh485N04ndymrAjXi0D92cdqA1cbZU5ykSR14YnDPnFcp9hlD2KqQgFUBoRJW
- 6U7/5ibudJR5nwyXGgy2O6ziPCFLKeny4LAuE=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=lTzazjx3LPv+tQLEzyjvrMyrtR3d/SOFsr5dVVqL2pw=;
+ b=fA0wDHiTNFVQXMrIzo+9am1QgerjvMHHmoLMh26hj2hpAA8cw5uHTuaje2WdA/DQLN
+ WkkbECMWkj8r/iXzEK7hVw/obacuoKK8G3Vzz1lSADpSlVJp/w3P2lVBpkcL9nsV2iZ7
+ I8Wzl4Vk80rkF2DrbAVuH3xu/KGelI5LNL/Y0=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=RDTtiVQV
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=fA0wDHiT
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,25 +144,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi Bryan,
 
-On Fri, 7 Aug 2026 at 08:23, Bryan Brattlof <bb@ti.com> wrote:
+On Fri, 7 Aug 2026 at 07:04, Bryan Brattlof <bb@ti.com> wrote:
 >
 > On August  6, 2026 thus sayeth Simon Glass:
 > > Hi Bryan,
 > >
 > > On 2026-08-04T21:55:02, Bryan Brattlof <bb@ti.com> wrote:
-> > > board: ti: am62lx: add initial board files
+> > > doc: ti: k3: fix pygments warning parsing device-tree
 > > >
-> > > Add the initial board files to support the AM62L3-SK reference boards
-> > > for basic boot via SD and MMC
+> > > A warning is emitted when generating the FIT image examples because of
+> > > white-space and invalid node names. Fix them
 > >
-> > The other patches in this series (defconfig target AM62L3_EVM,
-> > MAINTAINERS entry 'AM62Lx BOARD', docs am62lx_evm.rst, yaml files
-> > describing AM62L-EVM) all refer to the EVM, not an SK. Please fix the
-> > commit message so the board name matches - and also add a full stop
-> > and drop the mention of 'SD and MMC' (or spell out 'SD and eMMC' if
-> > that is what you mean).
+> > Please mention what the fix actually is (converting the placeholder
+> > brackets into valid DTS node syntax).
 >
-> Sure.
+> Sure
 >
 > >
 > > >
@@ -170,108 +166,58 @@ On Fri, 7 Aug 2026 at 08:23, Bryan Brattlof <bb@ti.com> wrote:
 > > > Reviewed-by: Anshul Dalal <anshuld@ti.com>
 > > > Signed-off-by: Bryan Brattlof <bb@ti.com>
 > > >
-> > > board/ti/am62lx/Kconfig        |  19 +++
-> > >  board/ti/am62lx/MAINTAINERS    |   8 +
-> > >  board/ti/am62lx/Makefile       |   7 +
-> > >  board/ti/am62lx/am62lx.env     |   8 +
-> > >  board/ti/am62lx/board-cfg.yaml |  32 ++++
-> > >  board/ti/am62lx/evm.c          |  19 +++
-> > >  board/ti/am62lx/sec-cfg.yaml   | 380 +++++++++++++++++++++++++++++++++++++++++
-> > >  7 files changed, 473 insertions(+)
+> > > doc/board/ti/k3.rst | 42 +++++++++++++++++++++++-------------------
+> > >  1 file changed, 23 insertions(+), 19 deletions(-)
 > >
-> > > diff --git a/board/ti/am62lx/evm.c b/board/ti/am62lx/evm.c
-> > > new file mode 100644
-> > > index 00000000000..cafafb8ede8
-> > > --- /dev/null
-> > > +++ b/board/ti/am62lx/evm.c
-> > > @@ -0,0 +1,19 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +/*
-> > > + * Board specific initialization for AM62Lx platforms
-> > > + *
-> > > + * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-> > > + *
-> > > + */
-> > > +
-> > > +#include <asm/arch/hardware.h>
-> > > +#include <asm/io.h>
-> > > +#include <dm/uclass.h>
-> > > +#include <env.h>
-> > > +#include <fdt_support.h>
-> > > +#include <spl.h>
-> > > +
-> > > +int board_init(void)
-> > > +{
-> > > +     return 0;
-> > > +}
+> > > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> > > @@ -466,25 +466,29 @@ choose any configuration at runtime to boot from.
+> > > +       configurations {
+> > > +           default = <conf-1>
+> > > +           conf-1 {
 > >
-> > None of these includes are used by an empty board_init(). Please drop
-> > them and only add each one when the code that needs it lands. Also,
-> > none of the other K3 boards (am62x, am62px, am62ax, am64x, j721e, ...)
-> > provide a board_init() stub at all, so I suspect the whole function
-> > can go away - leaving evm.c effectively empty. If that is the case,
-> > you might as well not add evm.c and the Makefile entry until there is
-> > something real to put in it.
+> > This line is still not valid DTS - it is missing the trailing
+> > semicolon, and for FIT the 'default' property is a string, so it
+> > should be:
 > >
+> >     default = 'conf-1';
 >
-> Sure.
->
-> > > diff --git a/board/ti/am62lx/am62lx.env b/board/ti/am62lx/am62lx.env
-> > > new file mode 100644
-> > > index 00000000000..0dd86db400e
-> > > --- /dev/null
-> > > +++ b/board/ti/am62lx/am62lx.env
-> > > @@ -0,0 +1,8 @@
-> > > +kernel_addr_r=0x82000000
-> > > +fdt_addr_r=0x88000000
-> > > +fdtoverlay_addr_r=0x89000000
-> > > +ramdisk_addr_r=0x88080000
-> > > +pxefile_addr_r=0x80100000
-> > > +
-> > > +dfu_alt_info_ram=
-> > > +     u-boot.img ram 0x83000000 0x400000
-> >
-> > Just to check - the other am62* boards pull in env/ti/ti_common.env,
-> > env/ti/mmc.env, env/ti/k3_dfu.env and set
-> > console/boot_targets/mmcdev/etc. but it looks like this board is
-> > relying on standard boot defaults? That's fine if so.
->
-> Much of what is in the environment for older K3 SoCs will not work or
-> would need to be overridden for AM62L based boards. Relying on standard
-> boot defaults and letting downstream forks modify the environment
-> however they wish seems appropriate here.
+> Sure. My aim was to suppress the warnings emitted by the lexer. I don't
+> think this snippet, even if completely syntactically correct, would
+> produce anything meaningful other than being an illustration.
 >
 > >
-> > > diff --git a/board/ti/am62lx/board-cfg.yaml b/board/ti/am62lx/board-cfg.yaml
-> > > new file mode 100644
-> > > index 00000000000..abb3174d4bc
-> > > --- /dev/null
-> > > +++ b/board/ti/am62lx/board-cfg.yaml
-> > > @@ -0,0 +1,32 @@
-> > > +  bm_writer_cfg:
-> > > +    subhdr:
-> > > +      magic: 0x7D8A
-> > > +      size: 5
-> > > +    allowed_host: 10
-> > > +
-> > > +  reserved: [0, 0, 0, 0, 0, 0, 0]
+> > > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> > > @@ -466,25 +466,29 @@ choose any configuration at runtime to boot from.
+> > > +           conf-2 {
+> > > +                image = "image-2";
+> > > +                fdt = "fdt-1";
+> > > +           };
 > >
-> > A one-line comment pointing at where bm_writer_cfg and the reserved
-> > block are documented in the TRM (or the tifs firmware header) would
-> > help here. Same for the magic values in sec-cfg.yaml
+> > The two properties inside conf-2 are indented one extra space compared
+> > with those in conf-1 above. Please make them consistent.
 >
-> I don't know the specific version this was introduced but these
-> structures are all documented in the TISCI specification along with
-> everything else K3 uses.
+> Sure
 >
->       https://software-dl.ti.com/tisci/esd/latest/3_boardcfg/BOARDCFG.html
->       https://software-dl.ti.com/tisci/esd/latest/3_boardcfg/BOARDCFG_SEC.html
+> >
+> > > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> > > @@ -466,25 +466,29 @@ choose any configuration at runtime to boot from.
+> > > -    /dts-v1/;
+> > > -
+> > > -    / {
+> >
+> > Any reason to drop the /dts-v1/; header? The block is tagged '..
+> > code-block:: dts' so keeping it makes the snippet a complete, valid
+> > DTS fragment. While you are here, the surrounding examples use 4-space
+> > indentation; changing this one to 3 spaces is a bit jarring.
+> >
 >
-> Are you suggesting I add these notes to the syntax.yaml or do you want
-> them in these auto generated files?
+> The best I can tell the DT lexer in pygments doesn't support /dts-v1/;
+>
+>     https://github.com/pygments/pygments/blob/master/pygments/lexers/devicetree.py
 
-How about a link to the docs somewhere in U-Boot doc/? Or do you
-already have it?
+Ah OK, that explains it, thanks.
 
 Regards,
 Simon
+
+> ~Bryan
