@@ -1,112 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6021C5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 20:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3BDCC2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 20:45:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4758460ADD;
-	Fri,  7 Aug 2026 20:45:04 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PpfDfyYs3Wmn; Fri,  7 Aug 2026 20:45:03 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C902F60877
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786135502;
-	bh=ctloMvnHIHrnGXymuseKTqXA/Qf+nTtCOQX3ruqHGyk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=pT/YuYHT6tRjLEFkZNG03YTkpMELKeM1M3PGtc0lySW/t3DpdlQVWOyTpYXdg7fjc
-	 E/CTLr0I5i0a2j0xsLxzEOnr0hANyLSTf1ucMGjbUE1gN5Nl+CdEweK7Em4fggkY5S
-	 vYosxx9qODQdwORHaVP2pieFeMgGwkOpdB6EW44qLSunmloNmxwW5qsUc9BxhMg3hD
-	 ehUb+NjwmFEyaIZvqlfYgejCLIP25C3DAXqVs6Bs+pMFeldPD9nXSc80UZB3yd2xfi
-	 EkIlAfm6WZBNNWfQUnTw6Zctr0nUEzAXeuXH54mWBeMnJksXcNYtXbnKcF5dPOca7N
-	 dDSJd3z5DeTeQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C902F60877;
-	Fri,  7 Aug 2026 20:45:02 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1FE17296
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 20:45:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 11AFB409B6
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 20:45:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B8394409B6;
+	Fri,  7 Aug 2026 20:45:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TB8mgYj6KhXg for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 20:45:00 +0000 (UTC)
+ id jt1-DlaC3vKV; Fri,  7 Aug 2026 20:45:22 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0D0B04099D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786135522;
+	bh=JjDOoyR5fKWKhi9GZ3A4T2WoZucbUWnn4QHzqSvaahU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Ge5ZBHVDwkmmfHvs1uwsiYCPIoDWus4ux/v6uPZfBewPuWhtEtLqYWDLgbVDZICTC
+	 e/LizQM1YSXX1HAkGxZsQF95n0WbfzqnyUN1r12N4CbgXbm6HMXzm8iAF8wt/A/MlE
+	 xQqC3sTtK3ZyWwxm3lrU4h1/ShDPxmwP79oD9zW8XwSY2Wt0/s/JOFZNP8ktoW9HI+
+	 K4l3QqKEyO0sbaHe4uu0eFwdbdZAEhqnRKF8KUYpzgSkocGaVy6LjGkJdoibQu7XGV
+	 5pbrQrsEaKJVPriyAPo6fiukHQkVnHcK2XU+fHU5MxeARdOvvscmktwLjHiURq9ckG
+	 3e9PR7z/9dBag==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0D0B04099D;
+	Fri,  7 Aug 2026 20:45:22 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8F38E296
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 20:45:20 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 817D1608D4
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 20:45:20 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id V4l4xcujKH7S for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 20:45:20 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 30A9B409B0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 30A9B409B0
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 30A9B409B0
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 20:45:00 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6a0de062db5so6040773a12.1
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 13:44:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786135498; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 96EA7607EC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 96EA7607EC
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 96EA7607EC
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 20:45:19 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6a144c8eea2so5536002a12.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 13:45:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786135517; cv=none;
  d=google.com; s=arc-20260327;
- b=Qe9S6QZxM+WDxUS45S1zunw+kbpFLlDnoCvDqAMMsOy+FHPkUq26EADNqiDdgKMiF8
- jE+I+isF/Dw1CFBnX2bSeV70tpNJ9ftS9JeddY9TktX4wKItfEDZduvHyASciqKKEBX7
- 1Iv6BiS/wUZLGJsCiMLeRFE0aTuWpqLzEf4uF0JbQQEsFHTBHn/frcYravYZPdcA1GG1
- AjFInxpiMnJ1KdGCJ1x55aON12q2XdsQQhKrFNja4UlADhZEaK5BWuip+OkY4gSWlbat
- zoj2/UbfS0hXoqARr3/76PLfStLdPaqhdo1ldgwXPpO7BtlLn3j+yVQLp7EqH7JHzf+I
- 5Rqg==
+ b=Tfq6YGv0tkTOx50yGjDzkyup5lt3IKBsBvKszEpcQLMdUisNzRWj81cEcGA0QfljXm
+ UWj/j9syBDOGrnARX3lihdnQ8OuVNHJ3M3XYjWRTE/I16mrXztQFda4APr4DsG2wiCAQ
+ deeDPsji1bKMyj4hPV/gM1pZK3LoYcUcTXfFREoxEtcYbjAqAQbZeC6RujWUtfox78W3
+ BMkckQnbBeyr942iFVoTFqhMOaVyHteFC1lSzY+uullDGrIhj5t5BUNsRRMhvSBQjasr
+ dvWu7w/JGvXE5/UMHuFHzIUyOPRKa9wQKqrBYD0HNCdTHF049tMpN0JJaLeA50DiCIUD
+ Pq5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ctloMvnHIHrnGXymuseKTqXA/Qf+nTtCOQX3ruqHGyk=;
+ bh=JjDOoyR5fKWKhi9GZ3A4T2WoZucbUWnn4QHzqSvaahU=;
  fh=ijpGqnd/DhBct2Cw5aDmEJPs+G5NkZyVrRaaBz7981M=;
- b=QjkCIF52YbrhauqiQwjnS/K7DGNF285OgBKZstCUB6shLCag/iX85VrTo28JcVh4xA
- 3SI5Ip0WigNgI4FNVpaOfJcFxAYvuzkQsqlwaOOsZrJnjXAZBdLKO6rTk3aoj+OHUfdl
- OuJCHXJwu9CxtLfQmJVFcqyRe2Y/QPXuaO254Xbi/Uip5Is5uX4hstzQ9UYUKt492Aeo
- oAkWh3j/6b8F+aDuUKq+hn+KPJyKWvT1okHVL3D7o5GNMd5EnXdbYOcymbCICqBWmroW
- 6wT6ZxPb+9QtpYMiT6BbkxK6rLGM6ejxXrLJpEd9YA1luH6kxIXBFH+NlDfj6J63QAN9
- SnCQ==; darn=lists.u-boot-project.org
+ b=CD4cTjnydHJc2ucUxR/uUEWVyqUoZh9FIW+H5VZG3l9JRx2Kp2rJvSpiA0W0+7kxqu
+ nL3s9dRlVVOsoHuAmNgbo1YKYEI/WgJt6+8oh7H0mUwwmwjt1FGk7MTBo4tbzj15oyH1
+ rcT8cuUz0c9sUmH3qgK5Ug5q24pYJjp/KItym8HCe+8X44Bn5wuqpHWWLu/01fhMqaO3
+ rWDH2wkC52WME0yoIkrTWzgp9a1UQYwfwm7urZuSpsmbN7ixTjN5zsCfOkgSCiKPNBnR
+ wo6ie5Sv8IyA9Ecv2+XJ2WvidsqCeSebL53RFQYQSCodiPoZsKYTg1U0XWtX8hMHQV3N
+ aKvg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786135498; x=1786740298;
+ d=1e100.net; s=20251104; t=1786135517; x=1786740317;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=ctloMvnHIHrnGXymuseKTqXA/Qf+nTtCOQX3ruqHGyk=;
- b=gQpNqZ2B11z5uZsjpxuRnXwSs3QLgja16FQzOYMIBhyDKSYZ6kahI4IXxw69Dgv3X1
- J4uwb7/8rxOXFwuelNJaNCGSO+nFbdbwES7muDT6mp6QT1A3fc4cMtjxg1J7qVwPXg7D
- +JG7SrklVNQ0v3PuEDhaZonDgQXcnSmOWAF7qbd4ZvN55ebw74W24oxbDbQOLd75NE/i
- b3CsaRWC56ABhmjLNlPxGBSKe6k02whaHpSjQmutrwAlv8mvymP4ZQwq3SWWroZbBWL1
- JnUrq4pXmhqA0YieEGiN7xEuuFoD/kYjzviNUkUG31FVtfBcoBUDWRLCtoM+weHaOhP/
- 0yow==
-X-Gm-Message-State: AOJu0YzkraJYormzhWhJ/c9cNJUGdiKypUJMUktskAxwahaVlaD604TB
- OlcWA+NV9kzBgi6pKmrskD+zpql5xRTbIiXFDdUcKypIeEEWsZgy57a768X92GzeZSIcooA6yeV
- KNKP/zDZ40qlbanY02deyXC7JRvfjyLNXuyWC7Gi7
-X-Gm-Gg: AR+sD11OklKacmaBed54axuzFkGHcvqwewIQSh08m8KBuROLH7hVfVLHAkTMCaksq5B
- OIsM2ukZ8NlwuPpmXbSi3NbA2r1bmqtbmq4IxkJvnapTa6uTWetdUj+3uHnlSo4YrGnLZIBQPMK
- /Q+XdrvFLD8IsI0StMVGQUoK/HOoxXZZ7JAl5zxU1mx5PY9o1GdLQFUDoJlaZFVazE1JvwL+ARY
- VeZonFR10WgOh3uKRvDjSlg+XZUaUmf/vQYdIhkjFKopKpK4E5tPjt3TfwlP6KAYYwOSbtZdad2
- HmDP7Qelo9HCzRWbP7l9fMEU/Ix4kILjzPuXFWfIat4=
-X-Received: by 2002:a05:6402:530a:b0:698:5f47:1d41 with SMTP id
- 4fb4d7f45d1cf-6a1e5b0df19mr3500476a12.14.1786135498264; Fri, 07 Aug 2026
- 13:44:58 -0700 (PDT)
+ bh=JjDOoyR5fKWKhi9GZ3A4T2WoZucbUWnn4QHzqSvaahU=;
+ b=CG35Cy6mGF8Z8g5aQQEutZ+bFgEkC7C8tFAT3NYU/o8I2pl++v4YFBl6hOZDy1OVh5
+ /DW6nk0IdhPofgM56NNAoHpWp8rsh+u4gV98Ql3/n/TR/SfuCM0GGgtLCS/eEDX1qv+w
+ NhQZSgUvExw8Qbrv+XJjREXd51hChM9tZh8MfvW1/CjPaGNlRwo2LHwbk5GoVQwKfiWw
+ ydQL01PhKCzkh61OhH38730/bMWmLCOXr6hXH+jCTFmK7gtYNBLIhZrf3ZeK8Wbd5Ec4
+ aEYKom29sMWXcxPntWtUsrUna0HeEFch0tIeKVoNGLPEM8l7/PNAMi23ajvSr7blua4z
+ Ui/g==
+X-Gm-Message-State: AOJu0Yz8uUJn3dERkw88dDh9aJKCaWqvRZp5G/+OSECongFKFM/bMKeL
+ Z95D7/KE9nbnEsYrsL4T+lbnavfyTGPojqFGYQoDFuin9XeHcpmWUbXgFD2Dgrfm7LgjjeiY8Lv
+ 9ANay6cv2udPkT/VH761/7z+HwgQi/ipqx5cs1B6X
+X-Gm-Gg: AR+sD11xtZXEH9sEHMqv8Rl7czQaWYm2E3V+4JHVxlRTELFDxNNmhTa1knb3OYejjBo
+ flezDT/6MgWmnW5+c/esYiaadK+5by626PLJnTktHJmwpwf7Vlf6HozkDc/znjc5RSdJoKifmk5
+ bfmAPijLDPUFfZYI2iLH7aVYdfIr9XRe8hrSAMwMQqT7WQyg3EvhuXjJkzyz8JcbceuCqC1IV6m
+ beZyPoF/ykD+At0DOOKoZ9Wvnq9MtJpt9nB/Q9l4Sci0WIlICaNRA8cyTZTVmjvToZU99OuDKNQ
+ gTCT2fetaLoPjmjNQbrdCAGEE7rtsCMcixzT5W9cpfD1
+X-Received: by 2002:a05:6402:4597:b0:6a1:854:e75e with SMTP id
+ 4fb4d7f45d1cf-6a1f2488fb6mr1487027a12.15.1786135517420; Fri, 07 Aug 2026
+ 13:45:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260807-riscv-full-fit-support-v1-0-21a34f79c350@maquefel.me>
- <20260807-riscv-full-fit-support-v1-3-21a34f79c350@maquefel.me>
-In-Reply-To: <20260807-riscv-full-fit-support-v1-3-21a34f79c350@maquefel.me>
+ <20260807-riscv-full-fit-support-v1-5-21a34f79c350@maquefel.me>
+In-Reply-To: <20260807-riscv-full-fit-support-v1-5-21a34f79c350@maquefel.me>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 7 Aug 2026 14:44:41 -0600
-X-Gm-Features: AUfX_mzQ6KO5s2khVeoP4SzV-DBsMhAPisvF1qn8uNQlEzJ0bkUK1alDJHevZOo
-Message-ID: <CAFLszTg6Jmnhi-e=DxTDYvY1cDiA4d3bJ6LTKvRVCOn-2xtvUg@mail.gmail.com>
-Subject: Re: [PATCH 3/5] spl: fit: Use map_sysmem() with buffers for fdt
- address
+Date: Fri, 7 Aug 2026 14:45:05 -0600
+X-Gm-Features: AUfX_mx4o5pr52pTEo0VoiQl3lcCNZVj3_AHSXzaTG-auhb4gCpXoalxi08FfXU
+Message-ID: <CAFLszThEAi0i32zbBQVA801Jt5PBwvNHdc682V66BUMTHd-g8A@mail.gmail.com>
+Subject: Re: [PATCH 5/5] spl: fit: Add test to check loadables
 To: nikita.shubin@maquefel.me
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Daniel Golle <daniel@makrotopia.org>, 
@@ -115,21 +114,22 @@ Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  Francesco Valla <francesco@valla.it>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786135498; x=1786740298;
+ d=chromium.org; s=google; t=1786135517; x=1786740317;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ctloMvnHIHrnGXymuseKTqXA/Qf+nTtCOQX3ruqHGyk=;
- b=UEnlLtH+h2JG7FhZGoolEJWGpisxUE88CAV+weq73Lm1XZlxxl8mPoq31krqOIsXyy
- uNFRv6Toe5/5Pcu7FS7c6AYaXZrZAtgMlFhoF1a1Lm32p+85KYbH5s8Fat9YTFo71/B5
- DqFADPbQmVT9GcDM5tQUFfypAFzFgUP/7dQJE=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=JjDOoyR5fKWKhi9GZ3A4T2WoZucbUWnn4QHzqSvaahU=;
+ b=i15++elFLyPJfFl6SUDrGYuWqfGw9i4eslEkDByEZic/1P7pfcvym5dok+xdfBZ0Tv
+ EAXHkQ+LB5Z0RA0k4jBxn34d2aMvmisRVWlSLIfsubYK0EIkCUC+32JPbd61+dCcHlPE
+ BOfu+g9ouJDomjizpjDDDEt6xrS+SFmkF2Kho=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=UEnlLtH+
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=i15++elF
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,15 +144,96 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Nikita,
+
 On 2026-08-07T08:06:41, Nikita Shubin <nikita.shubin@maquefel.me> wrote:
-> spl: fit: Use map_sysmem() with buffers for fdt address
+> spl: fit: Add test to check loadables
 >
-> The current implementation casts an address to a pointer. Make it more
-> sandbox-friendly by using map_sysmem().
+> Add spl_test_firmware_image() to check lodables correctly provided by
+> spl_load_fit_image().
+
+Same 'lodables' typo as patch 4; also please can you reword to "check
+that loadables are correctly provided". BTW I applied the series and
+ran this test on sandbox_spl - it passes here, so thanks for adding
+sandbox coverage.
+
+>
+> We create special image with U-Boot, firmware and empty dtb. Then invoke
+> spl_load_fit_image(), check everything (including dtb) loaded correctly
+> and then check if loaded dtb contains "/fit-images/u-boot".
 >
 > Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
 >
-> common/spl/spl_fit.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> test/image/spl_load.c | 195 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 195 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+> @@ -275,6 +275,201 @@ size_t create_image(void *dst, enum spl_test_image type,
+> +     char *data_uboot, *data_firmware;
+> +     const char *uname;
+> +     ulong check_addr;
+> +     char str[100];
+
+'uname' and 'str' are unused, giving build warnings:
+
+    spl_load.c:439:14: warning: unused variable 'str' [-Wunused-variable]
+    spl_load.c:437:21: warning: unused variable 'uname' [-Wunused-variable]
+
+Please drop them.
+
+> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+> @@ -275,6 +275,201 @@ size_t create_image(void *dst, enum spl_test_image type,
+> +     if (fdt_end_node(dst)) /* root */
+> +             return 0;
+> +     if (fdt_finish(dst))
+> +             return 0;
+> +
+> +out:
+> +     return total_size;
+
+This is fragile: fdt_finish() shrinks totalsize to the actual
+serialised size, and fit_image_get_data() locates external data
+relative to the aligned totalsize, not to prop_size - so the data
+offsets only line up with the data at 'img + 1168' because 1168
+happens to be exactly the serialised size. Any change to a node or
+property will silently shift the external-data base and the test will
+fail with a confusing memory-compare error. Please can you do what
+create_fit() does for the external case: check that fdt_totalsize(dst)
+does not exceed 'size', then call fdt_set_totalsize(dst, size), so the
+layout no longer depends on the magic number being exact.
+
+> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+> @@ -275,6 +275,201 @@ size_t create_image(void *dst, enum spl_test_image type,
+> +     if (fdt_property_u32(dst, "#address-cells", 2))
+> +             return 0;
+
+The file already has ADDRESS_CELLS and fdt_property_addr() for this -
+please use them here and for the entry/load properties below, rather
+than hard-coding 2 cells and fdt_property_u64(), for consistency with
+create_fit()
+
+> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+> @@ -275,6 +275,201 @@ size_t create_image(void *dst, enum spl_test_image type,
+> +     /* opensbi image node */
+> +     if (fdt_begin_node(dst, "opensbi"))
+> +             return 0;
+
+The u-boot and opensbi nodes are written with two near-identical
+20-line sequences. Please can you factor this into a small helper
+which writes one image node given a name, type string, data offset and
+struct spl_image_info? That would remove most of the duplication and
+make it easy to add further images later
+
+> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+> @@ -275,6 +275,201 @@ size_t create_image(void *dst, enum spl_test_image type,
+> +     /* check loadable and load address recorded successfully in empty dtb */
+> +     noffset = fdt_path_offset(phys_to_virt(fdt_load_addr), "/fit-images/u-boot");
+> +     ut_assert(noffset);
+
+Not quite: fdt_path_offset() returns a negative libfdt error when the
+path is missing, which is non-zero, so this assertion passes even when
+the loadable is not recorded. Please use ut_assert(noffset > 0) so a
+missing node fails at the right place.
+
+Regards,
+Simon
