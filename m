@@ -4,127 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE1BC5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:12:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 946A0C2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:12:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 84BEC81313;
-	Fri,  7 Aug 2026 16:12:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C7185810E6;
+	Fri,  7 Aug 2026 16:12:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D96NCIcW14VF; Fri,  7 Aug 2026 16:12:53 +0000 (UTC)
+ id 2y-xwrpkhVUJ; Fri,  7 Aug 2026 16:12:55 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6AB0480E55
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2CDEC80F84
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786119173;
-	bh=HNKb8gl2v39eGV5/yDp4ZBFinbqbjcQ1Cwwrm36d5Co=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786119175;
+	bh=xsqjBAtfc2vVCZQqGbGQXtf1hpoBP77QuACABOSQO+U=;
+	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=pUSr5yfNvpc0HcgVRWFDUyzOmX0yJVW2anzb3qU4esYyVC12uTUL+CWrmQDYe2zxW
-	 j95Hz74e0JMC/FcjKqOL53mMrZNI/pVOTAP8EGoqJgz1SsMSlnJgK/57s9i6cqm7Tr
-	 TxwBTgvjOW2Uh/wQGc31z01LGzv995ihtX3d4ygl/Yb+BO+B/qlGvkpgq9p7xNyBZI
-	 Ir89IoPyCHhKWdD5qSyUS+4hBBWON4kWd2k6lSCP1ESY7dwngYUQfJrAzBFCuxVTO+
-	 des+0hpoXqqzi48M1cVEntI66nT9WzTFZtJwtc42U/CyZeDNuh7LGJ/xZOPXq0vEQv
-	 8Q4YRx6bHxYPg==
+	 From:Reply-To:From;
+	b=zK8OBDMU+ky53D9/iT4f5A5KqQAMBw1RYa/MCRRk16NRU/CJByd0fRGxZObEtQQE9
+	 fHC6QYqVU4r7HO0H8WVEI5C98v+zlgzXOjGp48oxucAEijJFOB/3WYMm8W0vaMLwan
+	 2qVeiu/Kwk4suz0Pj+E26vmzoag7uCMQmv7hl+BQu7W4sO4JkR3Lg4NyQsb2HQPrLl
+	 mrTtM+QPBtf93cjc2+WDCC+InAXQ8zU+MCr5cVHTB0ccEspqzC7l6+7Gr35bcuKBTx
+	 9N+bz20gJ/ypD3+zpSYGRKGjNbBR7458NgNqzLA90DOAPDq/JfBvnr+luHkZ2nc07Q
+	 rSnn7VE+66fxw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6AB0480E55;
-	Fri,  7 Aug 2026 16:12:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 07C46198
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2CDEC80F84;
+	Fri,  7 Aug 2026 16:12:55 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E5E9D3
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:40:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E248440074
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:44 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5FCA08133E
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:40:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6qj5IYkJQfWG for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 14:52:44 +0000 (UTC)
-Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
- envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org EE18D4024A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EE18D4024A
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EE18D4024A
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:52:43 +0000 (UTC)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-6a144c8eea2so5007640a12.0
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 07:52:43 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A4TzwlmPsd5V for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 15:40:20 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 149DA81339
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 149DA81339
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 149DA81339
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:40:19 +0000 (UTC)
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3DAD03F135
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:40:17 +0000 (UTC)
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-6a178080182so3861978a12.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 08:40:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786117217; cv=none;
+ d=google.com; s=arc-20260327;
+ b=RjjtfQI8X8VS/84F+/OXhZgbsIILZFNguCX9VZ4o0wua2IrbTTtinRidTSXhyzTtTS
+ v2FfYpzKXksNbM5t3iU3nodu6dup67sHIMVIbOBTCHTeWeT3IoJZQ8uA4Grx8WMDE4/J
+ J3UvjW3FrpPLzNUFRi4IR285CNk5EYHrcn3KuuSt566+gV+tMKr5MChJVKjSf64fbIq4
+ X2cJWAXa2Mf7ygiFcJZhTYgFFbu8kJnwH8Ltzmu7QI6hcH7EZKezFmJiztmBUoTSdiEu
+ sbRfyRwlxUyCHmCmjM+7qJ/Zk1XAefNckpLICBTon01MSjhSjqhD2MaWU5nz2KBEeMhu
+ bOTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version;
+ bh=xsqjBAtfc2vVCZQqGbGQXtf1hpoBP77QuACABOSQO+U=;
+ fh=sJwCONpFUAWjXYRDOOgIm2arXditKxQtR35nu6jOFZs=;
+ b=cV6AyM8MzV7i85vWcKuXE4pSNdqaRF+YgbwucPIIvAa11gX5mhIpL5ajwPxV8OlAtD
+ ollPqtHJvSp+6qym+TQuQLb2v6zAJb+ps3Ciw6C668ptfgpcaKhFCvixuvlyZoBKXdYd
+ EJ7fvZbRcNHOtDSmZwxvAFCSfhBxa6TNlKZAuBw1DS1S7BOSRjQ7KrExiDLfXQenOrbh
+ AYTc0PPH3gBj3zaY+CGwIl+RKsKsF5TNh45/2sp7Wnav3jaGlaIsVTq/4KWQlOGrWt3A
+ L+kpaJeTnrJPauTJ3YGohaVPUFWIYsQRGuD0CzMoK7VaMIVBD/8EyDx0MN4IiOW6mC8m
+ 0KTA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786114362; x=1786719162;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
+ d=1e100.net; s=20251104; t=1786117217; x=1786722017;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=HNKb8gl2v39eGV5/yDp4ZBFinbqbjcQ1Cwwrm36d5Co=;
- b=fj8PUUIB0PmB6LXugyVtPyOGHufQFaLQdLkAm2eBaT2kOFrUTJNn0Co+GE2N1/5xjk
- +lGZaBh+HYgtE2b4XBPxoEVAOVku4IoJ8p8fcDEWtMlPR7sLnF+W0BazxCo0L1OmVHiT
- 9dP4Wzs0asQJiIuCLEOk7EuNBO2WoyeQPr91vwBWjZPiFE14LE7O6+jT31C8FIlxzW96
- UyHe9YFU66HId9pspS0JMdyFB7qcwQn7LF7tZL6aXJkvZ7rl7UkfiRxCJxx0fXc0ANz2
- rw+BLDtPoXK0cVIsllDlgXu0Ajk7n3ZOLHS4Wac0bFBWSun8hUwOmQvbe49GWBW7CNrA
- hGHA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrQYGxhFqf7pLiS7Az4TYXsLjPaTZj89h8SHGM/Ez4MnESQwwSUIFZQ02oJHOPq2K7d7pk+itc=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxU4Gtc9M4qpyHg1clcZNmQ8XQh9cecuVsMJG3FTGQYJ1D4lt3x
- vPTVPtjkfT1imigbnmrxLzsO3MLb8qpgX8LaF1KXJ6/Dw9QHnhW/0X+xV3XtevquCA8=
-X-Gm-Gg: AR+sD13J3r1/NaJ5pXJGcjgXKujSJgSzwz1JIxQl/8q7A0y5YezYu1NfqaeGGHtcvQ8
- NsFOaYr7R8jnQ2z3hUjhJLkoTXVjyM6vNqN5q3j+J3NnfjCLmsJIaisBtl2KhT9WmtytSeDOk0G
- nHCHwIvjjR4CZA+xXR3ApvD/peNO0Kw6ehR+PWa45k5pOJ/lud3oitAqPpjYZ6sDbh2rb2X72tM
- N/8cvjyYgicMVXlzXzyokd+jcxsncDvj/ulzxSb7zUI4zT2jsK1aq/1+dgWlebw+zIG/+CeNttG
- gUwR3QTzqsBbGuoBk4fOvZ4tiEVNx//DJLKxQwNB6roWGmbi7LFWYj0qb2rlft21LeD/Ideb6NX
- qdFctjVPSXz8R3bgfgf1/GvL3IglqybKE2FrqlPJi7850E6lcOptZvqHyrhq3s9FNjbMW0M2T+s
- ddrHoyZ32Sde5arf0Dq4LZ7ZQ1vm0e8XrDK7h+DJhb57k0ZVLgvu8kE7Q/M6PkS5nhT4GUd/Cs3
- vUFiCegs/lCColFIpdCVhz/q0EiE8bha9NKV10NXqjyp/aeNkTkDg==
-X-Received: by 2002:a17:906:7c43:b0:c19:5a94:411b with SMTP id
- a640c23a62f3a-c208726190fmr53835166b.6.1786114361825; 
- Fri, 07 Aug 2026 07:52:41 -0700 (PDT)
-Received: from [127.0.1.1]
- (p200300ff0f038f0050294ea7756f18f0.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:5029:4ea7:756f:18f0])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2080cc3963sm62218566b.50.2026.08.07.07.52.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 07:52:41 -0700 (PDT)
-From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Fri, 07 Aug 2026 16:52:22 +0200
-Subject: [PATCH 2/2] test: dm: eth: add a DHCPv6 zero-length IA option test
+ bh=xsqjBAtfc2vVCZQqGbGQXtf1hpoBP77QuACABOSQO+U=;
+ b=KApjWrsIyCkcuNN8EmTNucx0rpaOFWrtYSYCjkjHxK/mczRRi2fj/e04cKjM50OjAS
+ 4Rq8LDWCZgCAxCUln3721zFTskI31xfdTOdQwAa7dhAmoDzvbrH7EFhmpXqQhs0KE38V
+ V6vs/WKFsmeJY9HlH+nf5fJbCsvsCmesrzB8LCR96dQch40GaWJ4gy2NkAF9mRk5Z6YK
+ mKmw9Z2EOqJBSEJHmlgSGlRSzVGPLW1RVrma2an8m9rWNcSZFIXGDNe2CcDhLxaFRrOb
+ IKBH/5dFQ+1COm+Chdg2ASunmqd4SVUc7P+PF/qb48v6891CN31bHrG6YOgm+NBfROqK
+ F1Uw==
+X-Gm-Message-State: AOJu0Yz5pQEvqo02oPhz0AKiFYADOrzo52J1dXSqEbEhnuW3q32PWOxg
+ QxL945Vycs1w3bzVq0N6ymnaBg1yqkhASjr+gunOCvm6+2HNb2BwXlfkVy//SJauOXOIB74uWHn
+ ZP59cJooimVoSFZ0P0VWAf4RGQ0ViifQfJ8blrjjrIP7ZXWpPmdOeR7lNydiLtZBTsSLV2mCr2t
+ ujWxKz8SRWqUVl+Bc/Lx39HRkAZ8YLNhFvhwBsSt/PVogWRso8BuyyUKGWIczr
+X-Gm-Gg: AR+sD10SpCEenzi75wq0ibGnXU1zyXmVBL7Fqtn+ts6bF5C/5c5l/Tj84jwDvWRa14V
+ PzH/ogGhZeJqHv7taU4uF6zeNQrgJCBAbS/5CQmdKDJffzUff0u8yhsZps62TaRdCwiz9vWaX4r
+ iDv3BZIE7N0Fsdqddc0fcBVCoNcXCm4Fqj2UXcJawYEjZlw3elzxnrv+vj
+X-Received: by 2002:a05:6402:51d2:b0:697:f6b2:a94e with SMTP id
+ 4fb4d7f45d1cf-6a14f1395c4mr12042633a12.13.1786117216831; 
+ Fri, 07 Aug 2026 08:40:16 -0700 (PDT)
+X-Received: by 2002:a05:6402:51d2:b0:697:f6b2:a94e with SMTP id
+ 4fb4d7f45d1cf-6a14f1395c4mr12042601a12.13.1786117216423; Fri, 07 Aug 2026
+ 08:40:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260807-poc-dhcp6-ia-loop-v1-2-9d3fd3171c59@byteray.co.uk>
-References: <20260807-poc-dhcp6-ia-loop-v1-0-9d3fd3171c59@byteray.co.uk>
-In-Reply-To: <20260807-poc-dhcp6-ia-loop-v1-0-9d3fd3171c59@byteray.co.uk>
-To: Jerome Forissier <jerome.forissier@arm.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Sean Edmond <seanedmond@microsoft.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Francois Berder <fberder@outlook.fr>, Argus <argus@byteray.co.uk>, 
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-X-Mailer: b4 0.15.2
+References: <20260806103720.1026454-1-aristo.chen@canonical.com>
+ <20260806103720.1026454-3-aristo.chen@canonical.com>
+ <CAFLszTgKTk2m0wMnWO4zKg2BdH+QkS8ZvtzA76BbNioPTMjfUQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgKTk2m0wMnWO4zKg2BdH+QkS8ZvtzA76BbNioPTMjfUQ@mail.gmail.com>
+Date: Fri, 7 Aug 2026 23:40:04 +0800
+X-Gm-Features: AUfX_mzzmUXnM4S-2gYgSjE-glNYU_HyQJvoRfkrPBzt4oZJomppCoMqDQlh06M
+Message-ID: <CAA=k7==J645VNz7hZXm0eZPpPmoZqpak_CA_MopxFd_MUWdL8A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] test: cmd: Add gzwrite chunk boundary regression test
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 07 Aug 2026 16:12:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786114362; x=1786719162;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=HNKb8gl2v39eGV5/yDp4ZBFinbqbjcQ1Cwwrm36d5Co=;
- b=TbFQbwlKyD/h9cYLM4VItnqTuBY5/TXXJswbmwX9zc2n5fV4a+3jme2FwtEJrDviJt
- y1pHpqTBrPHxhNBXSRRC/enxmFnJsfOjRksPX3w5S/vhm2ERYrjbvatYqW6Vea5FCF7q
- RlMid2m7WcjQ9m9ENDWI1gFinVdxRoj6xF/D1kc4dQhb97FIKBGxWnMTK0QVuA1nb4yo
- a1cuelMykLmILkGf/6vilJZJHVrLKR+hUWZEhhvtsYXth56klXrCKkXhPqXfHLPkzxZh
- XDA0SS890uUFjyqaY1Zm1R0wCfy1c+KKB/zE71YD1J5qEgkVHUl2u3ntSQG6cPBVtxZC
- ZncA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=TbFQbwlK
+ d=canonical.com; s=20251003; t=1786117217;
+ bh=xsqjBAtfc2vVCZQqGbGQXtf1hpoBP77QuACABOSQO+U=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=NUalTi/2J7aKVDOCM2GxRqvqn68k4mMxHzxqKZX4XHIIZ03/KGbS2l1nWqBqZV6Ee
+ 6wQuOgcXuy7Ar+aynWvVu5vBlfzK7fp94T3CUkq7Dkhm9/6+FNGBoI/cZUvaioAP+9
+ 1BYFzIFua2sFcZcfW9MO4vxoqHjio5HJdYjNpbnSQrXf+46BLgePf59KfzjcH3lBzF
+ 9/wf2+SJRVO4CtScsrylLQIvlVIUe3qvpD3UrJz33KF8TH8D8sAuhM1H12nZkVdTGS
+ t9ns+j5iap9aio9DqqHil3OJghepYgpEx4tsfBJdJn5W5h0pNzbfzFigRBSTpnp4Vj
+ nYg+CYxILWs+ndKepX96QBskVd0Papq2QhgSMgWY0Mr9Ot/fffJiraRJb3inbmW/3j
+ uAJU/Niul9qBi3MgUglfcFdTrxssdHzQDz5MQW34pIXtCwQSB4QKqtYny6Vpuuqtoy
+ pwvNMEr06UO0Bxn+U1goXgkWwv7zJZ5Z1R2v7Vsr8ImFeqIzT7N1wtJrdgiaeZMdLf
+ cJ+mQ76P7CAWMLNAhHPAHvJvNH/bBuJeZh4aOyJAUXwKhcm0eOeOMCe4yC3AYGsNn/
+ dcwGUqIGvPk+vxuZPP8ZbA5kPbbwKNwtyOsBQ/GY3po2uor1NfMQC6jy2N3B7SnnYE
+ CioYkaKXdSFyLw5fVgP299B4=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=NUalTi/2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,150 +156,113 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Aristo Chen via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Answer a DHCPv6 SOLICIT with an ADVERTISE whose IA_NA holds a zero-length
-encapsulated sub-option and check the client parses past it and
-re-solicits instead of stalling in the IA option parser.
+Hi Simon,
 
-Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
----
- test/dm/eth.c | 120 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 120 insertions(+)
+Thank you for the review. All three points are addressed in v2, which
+I will post shortly.
 
-diff --git a/test/dm/eth.c b/test/dm/eth.c
-index ed0b57d8861..4708f0a4676 100644
---- a/test/dm/eth.c
-+++ b/test/dm/eth.c
-@@ -621,6 +621,126 @@ static int dm_test_eth_async_ping_reply(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_eth_async_ping_reply, UTF_SCAN_FDT);
-+
-+#if IS_ENABLED(CONFIG_CMD_DHCP6) && IS_ENABLED(CONFIG_IPV6)
-+static bool dhcp6_advertise_sent;
-+static bool dhcp6_resolicited;
-+
-+/*
-+ * Answer a DHCPv6 SOLICIT with an ADVERTISE whose IA_NA holds an encapsulated
-+ * sub-option of length zero. A correct client bounds the sub-option, finds the
-+ * ADVERTISE carries no SERVERID and re-solicits.
-+ */
-+static int sb_dhcp6_ia_option_handler(struct udevice *dev, void *packet,
-+				      unsigned int len)
-+{
-+	struct eth_sandbox_priv *priv = dev_get_priv(dev);
-+	struct ethernet_hdr *seth = packet;
-+	struct ethernet_hdr *eth;
-+	struct ip6_hdr *sip6, *ip6;
-+	struct udp_hdr *sudp, *udp;
-+	uchar *sdhcp6, *d, *opt, *rx;
-+	int msglen;
-+	u16 udptot;
-+
-+	if (ntohs(seth->et_protlen) != PROT_IP6)
-+		return 0;
-+	sip6 = (struct ip6_hdr *)((uchar *)packet + ETHER_HDR_SIZE);
-+	if (sip6->nexthdr != IPPROTO_UDP)
-+		return 0;
-+	sudp = (struct udp_hdr *)((uchar *)sip6 + IP6_HDR_SIZE);
-+	if (ntohs(sudp->udp_dst) != 547 || ntohs(sudp->udp_src) != 546)
-+		return 0;
-+	sdhcp6 = (uchar *)sudp + UDP_HDR_SIZE;
-+
-+	if (sdhcp6[0] != 1)		/* DHCP6_MSG_SOLICIT */
-+		return 0;
-+	if (dhcp6_advertise_sent) {
-+		/* the client parsed the ADVERTISE and re-solicited */
-+		dhcp6_resolicited = true;
-+		net_set_state(NETLOOP_FAIL);
-+		return 0;
-+	}
-+	dhcp6_advertise_sent = true;
-+	if (priv->recv_packets >= PKTBUFSRX)
-+		return 0;
-+
-+	rx = priv->recv_packet_buffer[priv->recv_packets];
-+	memset(rx, 0, PKTSIZE);
-+
-+	eth = (struct ethernet_hdr *)rx;
-+	memcpy(eth->et_dest, seth->et_src, ARP_HLEN);
-+	memcpy(eth->et_src, priv->fake_host_hwaddr, ARP_HLEN);
-+	eth->et_protlen = htons(PROT_IP6);
-+
-+	ip6 = (struct ip6_hdr *)(rx + ETHER_HDR_SIZE);
-+	ip6->version = 6;
-+	ip6->nexthdr = IPPROTO_UDP;
-+	ip6->hop_limit = 255;
-+	memcpy(&ip6->saddr, &sip6->daddr, sizeof(struct in6_addr));
-+	memcpy(&ip6->daddr, &sip6->saddr, sizeof(struct in6_addr));
-+
-+	udp = (struct udp_hdr *)((uchar *)ip6 + IP6_HDR_SIZE);
-+	udp->udp_src = htons(547);
-+	udp->udp_dst = htons(546);
-+
-+	d = (uchar *)udp + UDP_HDR_SIZE;
-+	opt = d;
-+	/* dhcp6 header: reuse the SOLICIT trans_id, msg_type = ADVERTISE */
-+	memcpy(opt, sdhcp6, 4);
-+	opt[0] = 2;			/* DHCP6_MSG_ADVERTISE */
-+	opt += 4;
-+	/* CLIENTID copied from the SOLICIT (hdr 4 + DUID-LL 10) */
-+	memcpy(opt, sdhcp6 + 4, 14);
-+	opt += 14;
-+	/*
-+	 * IA_NA (option 3), data length 20: IA_ID/T1/T2 (12) plus one
-+	 * encapsulated sub-option header (4) of length 0, plus 4 trailing bytes.
-+	 * Copy the client's IA_ID from its SOLICIT so the option is accepted.
-+	 */
-+	opt[0] = 0; opt[1] = 3;
-+	opt[2] = 0; opt[3] = 20;
-+	memcpy(opt + 4, sdhcp6 + 4 + 14 + 6 + 4, 4);	/* IA_ID */
-+	opt[16] = 0; opt[17] = 5;	/* sub-option DHCP6_OPTION_IAADDR */
-+	opt[18] = 0; opt[19] = 0;	/* sub-option length 0 */
-+	opt += 24;
-+
-+	msglen = opt - d;
-+	udptot = UDP_HDR_SIZE + msglen;
-+	ip6->payload_len = htons(udptot);
-+	udp->udp_len = htons(udptot);
-+	udp->udp_xsum = 0;
-+	udp->udp_xsum = csum_ipv6_magic(&ip6->saddr, &ip6->daddr, udptot,
-+					IPPROTO_UDP,
-+					csum_partial((u8 *)udp, udptot, 0));
-+
-+	priv->recv_packet_length[priv->recv_packets] =
-+		ETHER_HDR_SIZE + IP6_HDR_SIZE + udptot;
-+	priv->recv_packets++;
-+
-+	return 0;
-+}
-+
-+/* A zero-length IA sub-option must not stall the DHCPv6 option parser */
-+static int dm_test_dhcp6_ia_zero_len_option(struct unit_test_state *uts)
-+{
-+	dhcp6_advertise_sent = false;
-+	dhcp6_resolicited = false;
-+	sandbox_eth_set_tx_handler(0, sb_dhcp6_ia_option_handler);
-+	sandbox_eth_skip_timeout();
-+
-+	env_set("ethact", "eth@10002000");
-+	net_loop(DHCP6);
-+
-+	sandbox_eth_set_tx_handler(0, NULL);
-+
-+	/* the client parsed past the zero-length sub-option and continued */
-+	ut_assert(dhcp6_resolicited);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_dhcp6_ia_zero_len_option, UTF_SCAN_FDT);
-+#endif
- #endif
- 
- #if IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY)
+On Thu, Aug 6, 2026 at 9:20=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
+:
+>
+> Hi Aristo,
+>
+> On 2026-08-06T10:36:59, Aristo Chen <aristo.chen@canonical.com> wrote:
+> > test: cmd: Add gzwrite chunk boundary regression test
+> >
+> > Add a deterministic regression test for the gzwrite() case where a
+> > decompression input chunk is exhausted at exactly the same time as
+> > the write buffer fills up. Build a gzip file by hand from two 1 KiB
+> > stored deflate blocks and pick a chunk size that covers exactly the
+> > first block header plus its payload, so that with a 1 KiB write
+> > buffer the first input chunk runs out precisely when the write buffer
+> > is full.
+> >
+> > Unlike the existing random data test, which only hits this corner
+> > case for rare byte patterns (about 1 percent of runs on sandbox64),
+> > this test fails 20 out of 20 runs without the preceding gunzip fix:
+> >
+> >   Error: inflate() returned -5
+> >
+> > and passed 100 out of 100 runs with it.
+> >
+> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> >
+> > test/cmd/unzip.c | 103 ++++++++++++++++++++++++++++++++++++++++++++++++=
++++++--
+> >  1 file changed, 101 insertions(+), 2 deletions(-)
+>
+> > diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
+> > @@ -132,3 +140,94 @@ static int dm_test_cmd_zip_gzwrite(struct unit_tes=
+t_state *uts)
+> > +     /* Input chunk: exactly one stored block header plus its payload =
+*/
+> > +     env_set_ulong("gzwrite_chunk", 5 + blk);
+> > +     ut_assertok(run_commandf("gzwrite mmc 9 %lx %zx %zx", loadaddr,
+> > +                              gzlen, blk));
+> > +     ut_assert_skip_to_line("\t%zu bytes, crc 0x%08x", rawsize, crc);
+> > +     env_set("gzwrite_chunk", NULL);
+>
+> We should have assrrts on the env_set...() functions too.
+>
+> If any earlier ut_assert*() fires between the env_set_ulong() and the
+> env_set(..., NULL), gzwrite_chunk leaks into subsequent tests. Ideally
+> we would put this code into its own function which does the core part,
+> then call ut_assertok() on a function with the test code. I'm not sure
+> how much this matters, though.
 
--- 
-2.43.0
+Done in v2. The test body now lives in a helper and the outer test
+function owns the env_set_ulong()/env_set() pair, both asserted, so
+gzwrite_chunk is unset even when an assertion inside the helper fails.
 
+The pre-existing dm_test_cmd_zip_gzwrite has the same pattern, by the
+way: it sets gzwrite_chunk in a loop, does not assert on
+env_set_ulong(), and leaves the last value set when the test ends or
+an assertion fires. I left it alone to keep this series small; happy
+to send a follow-up cleaning that up the same way if you think it is
+worth it.
+
+>
+> > diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
+> > @@ -132,3 +140,94 @@ static int dm_test_cmd_zip_gzwrite(struct unit_tes=
+t_state *uts)
+> > +     const size_t blk =3D SZ_1K;
+> > +     const size_t rawsize =3D 2 * blk;
+> > ...
+> > +     u8 raw[2 * SZ_1K];
+>
+> Please use rawsize (or sizeof(raw)) here rather than repeating 2 *
+> SZ_1K. Same for the 5 + blk chunk size - a named constant for the
+> stored-block header would make the intent clearer than the bare 5.
+
+Done in v2, as STORED_BLK_HDR_LEN and STORED_BLK_LEN, with rawsize
+derived from sizeof(raw). I kept the array bound as a macro expression
+rather than a const variable: in C a const size_t is not a constant
+expression, so raw[rawsize] would formally be a variable length array,
+which kernel style discourages and make W=3D3 flags via -Wvla.
+
+>
+> > diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
+> > @@ -132,3 +140,94 @@ static int dm_test_cmd_zip_gzwrite(struct unit_tes=
+t_state *uts)
+> > +     ut_assertok(run_commandf("mmc read %lx 0 %zx", decaddr,
+> > +                              rawsize / 512));
+> > +     ut_assert_nextline("MMC read: dev # 9, block # 0, count %zu ... %=
+zu blocks read: OK",
+> > +                        rawsize / 512, rawsize / 512);
+>
+> Since you already have mmc_dev_desc, using mmc_dev_desc->blksz would
+> be more robust than the literal 512.
+
+Done in v2.
+
+>
+> Regards,
+> Simon
+
+Regards,
+Aristo
