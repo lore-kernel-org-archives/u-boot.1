@@ -1,142 +1,108 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AE4C5AC7A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 14:47:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E23C2A09B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 15:02:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 24E8540A69;
-	Fri,  7 Aug 2026 14:47:25 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GtRDvh42ravj; Fri,  7 Aug 2026 14:47:24 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4DFDD40A07
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786114044;
-	bh=zCkJHa1sEVzEnmqVuhFNjUudaJrqCsL1g+Z8k9MrZA0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0JgobehIbBaHBIIdTD+L9CQ0xYAIFu3ZI4xEQmtBf6JGZkK5AuzRnVaiu4rOf6JQ3
-	 u2FSCLB4Z0R9jCddvZzGkm8HB01UBd2pO9kauxxvmZksc3GP++czGcJ+8qcNHKEx4G
-	 U6s3IB38/2KkI5UWlkRb8qApqTQrLAoSN9aAZt5RG3rbD0ZCn5UmRWN12d51/DsrfM
-	 Hrxyy4irs+VRK1YQs29oMYMvvWUHdyyD37FMO90oGinziqK4RE0yngNAHaaxNZhWyl
-	 rbFPLW+pei4VY4Zskk9Uwa8ayH2yUa8eKSwYg+yAqUmOzsRI4ah2NWywrh6ZrOaGTi
-	 0sfJVyhfJuYbA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4DFDD40A07;
-	Fri,  7 Aug 2026 14:47:24 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 24D5FD3
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:47:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0B6CB8130D
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:47:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EA98B81337;
+	Fri,  7 Aug 2026 15:02:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R-OxVU81rvVO for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 14:47:21 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org DE48781322
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DE48781322
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DE48781322
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 14:47:20 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-c2055573c8cso363743866b.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 07:47:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786114039; cv=none;
- d=google.com; s=arc-20260327;
- b=f7NpVeYg+wJoraRAVZUIoVQwY1O2nAdNci7grYLZlA2uCWSJBhRB8FwixQwiBvfeX5
- xbhk49qm4wqca2YvHPfOA+ldx00/QXP4v+4TlSkq87pYRGuYugz7I59u0iJ7R2qCAYZD
- fFptBCrQFzFdDKQVAeSESCSurmE4AkBsjY+p+Q9k1i1sw8vodaP5yNpcvnHVIl3UFQ8R
- xd4FDGheULf7BkVBB0okdltZsXLHRTsw4TsjwB8CSzIt/YF+eGOcz9Gfficysu8gwbq1
- xopeSkx86GItD3VcGbPqf1b4E5VNrrJk4UsLtVAF2Dczex2S55hZ18pY8ChYHi8Utf80
- Ijbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zCkJHa1sEVzEnmqVuhFNjUudaJrqCsL1g+Z8k9MrZA0=;
- fh=Fcvzwn6crQPM6oHJvfgrovooJSB/EnfcBw72RqLWri8=;
- b=e0C1an7f+xfIQk3omwb7ebpNnIMELwYamyIh7DsufClpP/thMajyIZyzLD9xOVR93V
- Gj4s+q6wv3wwsg7Pr1nO+tqAdOR8qRNBCLLdXAxZN5LGSHjnIpMuACxdmj7/oilVvHWS
- c6u4VDAWXjkJ+7ntUBzZDnNbsSWSpEbte3vDv7aAmhpUQ3qQFk/oLLDh0RkYdLBkdXMm
- mFudTLlbAMFc9OmkxPfvlWxYjSOhkkg9HddomE7yXsqRfKI4CFRSLqRPBWplKhfeZZMv
- TUWoM5bpFauW/somnBEU2loqGNg2OX2ICOO9Bmsie6bPHsKOB2i+MoIGVVpjUq1y+UKh
- 2NaQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786114039; x=1786718839;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=zCkJHa1sEVzEnmqVuhFNjUudaJrqCsL1g+Z8k9MrZA0=;
- b=O7oDo52XuyTKuxrVvv+XxPec80M170Pjosng8HK6TJDhSAYk33VlOCjOBWT7cz2ApX
- u08+CTn5X7HuuMNDs3rjs/rubVR25j6KW1veaCvj/Y2ScbCphxlxBuyL5vXWvj/btjb1
- O6uCW4rq/D0Kjr9mcs0FtrGKjWcAb2Cs0gp91sTX/6XbOfCmz/zxEYtuTDliiWiUM7rK
- B2WO4LrlCGArjDPQ8xv77upvRQ3SAM4Gv3b8cFUTsyA8Jcb+zOyVUi2TgdgiRkltw4vT
- UhkJzq0uS54dqbjsAFYIxATBVCB5KNdfD3GjQrR+lKPQnG6BYCBULBmGGmKBCnn3CxyF
- 3Byw==
+ id tJjbngK_Obk8; Fri,  7 Aug 2026 15:02:27 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D21BC81325
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786114946;
+	bh=6VmMCdgZ8NjRxc0YdFbwoaLF2EgMvbPFp1e6cVWsSPg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=Hn55YQa0CqzjSl8S/8bQnXCXwH+FCLCj0ykODokxQn3iS6Qd3aVPNKw6QMxZAXst5
+	 3Bb1uBBR/TGh+bWhIgRJbIYBls3kXLFt1sSnd4qxkwb4XQV8Ud69sjnhOfahzXEX6+
+	 5wcgwhsWZFr7+/yugs7+hTh61FXE8XO9FIM78CDKQgDCUIVKE5wsE2VALC2yeiB7bl
+	 lotmAqlDp9rgMqi8YFlRWnPvXWfUmyt9KNEe56w/qeW5f7ZxO3YXpivooOUMW5Wfty
+	 /15pZzAylUEQm61xC9u++++urfTLVO+wUGFeq/dfblmvsYb0xCCExdMr3kIGEzfc8s
+	 6XN4grGX8GwGg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id D21BC81325;
+	Fri,  7 Aug 2026 15:02:26 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 83125259
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:02:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 695F440A6C
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:02:25 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Nu-xhiqocllt for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 15:02:24 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=wens@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 96E2340A39
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 96E2340A39
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 96E2340A39
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:02:24 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 97C704370D
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:02:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 647761F00ACF
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:02:23 +0000 (UTC)
+Received: by mail-lj1-f182.google.com with SMTP id
+ 38308e7fff4ca-39c74c469e8so24808651fa.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 08:02:23 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AHgh+RpAmJXCdl/T5npsx2zQ226OJ92Y+1SFXfCcZ8jmCA/3UkZzrf3IIiloOFXVRrWsN1GBSdNQLXU=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzBbXBRL7JGsuTK+DariXZsfo8EMjuu37KwC5+Wf6l8wLBlIHID
- R2HMc+2FVBbG7GXMZnVsqSRwrRXj33Lgr/+GQY6ISaQ6zfOPn2paBXOOEpStSHTu0uOuEUhVHMr
- nB8gWDEyPAcWB+vABaQYXrxW2q1sZiIUcPy24O82tNV7/NoJQqFcaiEvVSA==
-X-Gm-Gg: AR+sD10uxkExc7sDPDae56e5LDcxyJDfIgocawtedxfT9NWtfuqn0mqIE9d7p0QElAb
- tdPnwr9hDN4GEgKVt9mOuFJFOT7qZbmoaLyb3pyeS8QOTI/NDFb62UEZ8kSKClZL1jsaqKVjLvr
- 167l8R127n+sFarn7NsQ7jGIi3GEEVhuO+3WM0EuBAEz2HV/qqcFrSb8ogq76uHVqDUctt+jxEt
- AOcjp7K1qjlQH/Ez6S9A5IMUxdlou5A2rOdremuaWAUf+0sYFaAj3nOLumrixeaGPmrcLAGlm8P
- elvn/2OTJ5s8LAkRfwdl3heUNmFS5DeuKFMZuz7ZXjQJaZcrbfkbEcPP9Feo/Lfj+lWn23Kj7ZY
- fjjtzNGGu2XA2y2mMh1Tw63jPqJNMx64bWJ1NVHc2eyNSOBOFPn9KijccUWZGZo9sTlHhG7q1IZ
- U=
-X-Received: by 2002:a17:907:e1cc:10b0:c20:83b0:92d8 with SMTP id
- a640c23a62f3a-c2083b0934emr113934066b.0.1786114038870; Fri, 07 Aug 2026
- 07:47:18 -0700 (PDT)
+ AHgh+RqqKAZGPtfWwoMP1hOC1WTnMJ+vJMwv7UJxeRGZXG9qSzCCT5axUMd9gVJkhmu0FQpO8r54MB0=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yywn8Yrk1npFAiykcLZ6/InkzMcxvy2AEdnzGEjlKOJgzVNVJ90
+ 29d2gEpDYN8S5JoOo8PXIgUke+RxF5JeItdO3Pi9f+8py0wYFJJJDQnUTUFyeTDwPeKCfSuaZ7h
+ r69LvyrgKgbDkSjaLzF4au6E+9uT/Xm8=
+X-Received: by 2002:a05:651c:b09:b0:39d:b5b9:f0f4 with SMTP id
+ 38308e7fff4ca-39fe569a9c6mr1583231fa.10.1786114941771; Fri, 07 Aug 2026
+ 08:02:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260805-mtk-tphy-v3-v1-1-f1d6268b8d89@baylibre.com>
-In-Reply-To: <20260805-mtk-tphy-v3-v1-1-f1d6268b8d89@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 7 Aug 2026 16:47:07 +0200
-X-Gm-Features: AUfX_myPX6LF5VUK5RDKsE1XVL6nyEiY4axTUMJj7nh5vIaE6Chryzod3Vv6_yQ
-Message-ID: <CAEHHSvYtM_e+ZVsm+d0QVxS36dUVH5Nix-vrk81bPKKxZEMxmw@mail.gmail.com>
-Subject: Re: [PATCH] phy: mtk-tphy: add v3 hardware support
+References: <20260804-mtk-pmic-mt6366-v1-0-f3b36b8a1a47@baylibre.com>
+ <20260804-mtk-pmic-mt6366-v1-5-f3b36b8a1a47@baylibre.com>
+In-Reply-To: <20260804-mtk-pmic-mt6366-v1-5-f3b36b8a1a47@baylibre.com>
+From: Chen-Yu Tsai <wens@kernel.org>
+Date: Fri, 7 Aug 2026 23:02:08 +0800
+X-Gmail-Original-Message-ID: <CAGb2v67yRrSLi-voJWUpWW-niXqBb63mTTWCYPUnGim5ALW_NA@mail.gmail.com>
+X-Gm-Features: AUfX_mz12s80owBdDOVMuqP_tSk58SWcrcwRQcnwO2m_vFwTFtbpngWjXIqKoDk
+Message-ID: <CAGb2v67yRrSLi-voJWUpWW-niXqBb63mTTWCYPUnGim5ALW_NA@mail.gmail.com>
+Subject: Re: [PATCH 5/7] arm: dts: add mt6366 PMIC include
 To: David Lechner <dlechner@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Peng Fan <peng.fan@nxp.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.u-boot-project.org, Julien Masson <jmasson@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786114039; x=1786718839;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=zCkJHa1sEVzEnmqVuhFNjUudaJrqCsL1g+Z8k9MrZA0=;
- b=CviPNYtveMKYamqvKn31+iisElqOCgmd1UzsY9V+K+8nDc904X17gSV0Oc9oTPKuo9
- Dr7KPjXJJ/2aF6g1ZZiRRVtDZGZEuULDuyiK1ZFu+L8fsUecRQUplbEPJeAf3/WY6AEy
- /GaOxP7cHq8naSQm6V9DIlbhZ7znlHcBaJZrf/07LLBMTCUTVE18pHqDUV9Q1cK0hlQl
- 2W28MoTUiGvJKZAsFl2AjBhuKsrwyG8RoJii7udoc+iItFv+C129a1CK00UjtA/PBamn
- 7xCbtKefanXJ12uAiJbejCVNe4JrhLUepYvK8+5LJt8V4yFSST51LMtbXEfHvrow0rqZ
- z+kA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=CviPNYtv
+ d=kernel.org; s=k20260515; t=1786114943;
+ bh=6VmMCdgZ8NjRxc0YdFbwoaLF2EgMvbPFp1e6cVWsSPg=;
+ h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
+ b=U1GpauiK/lOXFX3Vioj0b2RZE6q8WF0E+LNILL+qGeYkJYWpDSoHIL6yjnm6N0qGu
+ IBfJVrZ6XiN+3QomHrgZtdVfQQ54VQq18p2Pp9Or0XO64TBni41F5RXDSv8Jx+D8Kb
+ keU/sh946Nlgh5bCEYVL6WcSp5xRElFhEhaol321VBWDb3UD/+UiPOiPUHbUUH4K+N
+ wWFni9FtyrAw5HMon95TRvP7/kqMdKIBElQstr4W7u8FcyrerApsXH8IHZd5dmrHIY
+ 9urkSZx2gU9+vnk2QDUXTk+4Or0yoGKZufA9YvYCNpUEBfrpDFvfcjxmWZd1/7rE+H
+ ptRuXBdyyrKaA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=U1GpauiK
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,97 +114,312 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+Reply-To: wens@kernel.org
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Le mer. 5 ao=C3=BBt 2026 =C3=A0 21:20, David Lechner <dlechner@baylibre.com=
-> a =C3=A9crit :
+On Wed, Aug 5, 2026 at 6:33=E2=80=AFAM David Lechner <dlechner@baylibre.com=
+> wrote:
 >
-> Add devicetree compatible and match data for "mediatek,generic-tphy-v3"
-> in the MediaTek TPHY driver.
->
-> According to the Linux driver implementation, the only difference
-> between this and v2 is that v3 doesn't need to set slew rate. There is
-> one register write in the U-Boot driver that gets skipped because of
-> this now.
->
-> Also, according to the upstream devicetree bindings, mt8195 is also
-> v3 TPHY, so it gets updated as well.
+> Add a mt6366.dtsi file for the MediaTek MT6366 PMIC. For now, this just
+> includes the regulators since that is all that U-Boot uses. This should
+> eventually be replaced by an upstream devicetree file.
 >
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->  drivers/phy/phy-mtk-tphy.c | 19 +++++++++++++++----
->  1 file changed, 15 insertions(+), 4 deletions(-)
+>  arch/arm/dts/mt6366.dtsi | 273 +++++++++++++++++++++++++++++++++++++++++=
+++++++
+>  1 file changed, 273 insertions(+)
 >
-> diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
-> index 0a45dc58629..05172f220e6 100644
-> --- a/drivers/phy/phy-mtk-tphy.c
-> +++ b/drivers/phy/phy-mtk-tphy.c
-> @@ -228,6 +228,7 @@
->  enum mtk_phy_version {
->         MTK_TPHY_V1 =3D 1,
->         MTK_TPHY_V2,
-> +       MTK_TPHY_V3,
->  };
->
->  struct tphy_pdata {
-> @@ -331,9 +332,10 @@ static void u2_phy_instance_init(struct mtk_tphy *tp=
-hy,
->                         FIELD_PREP(PA6_RG_U2_SQTH, 2));
->
->         /* set HS slew rate */
-> -       clrsetbits_le32(u2_banks->com + U3P_USBPHYACR5,
-> -                       PA5_RG_U2_HSTX_SRCTRL,
-> -                       FIELD_PREP(PA5_RG_U2_HSTX_SRCTRL, 4));
-> +       if (tphy->pdata->version < MTK_TPHY_V3)
-> +               clrsetbits_le32(u2_banks->com + U3P_USBPHYACR5,
-> +                               PA5_RG_U2_HSTX_SRCTRL,
-> +                               FIELD_PREP(PA5_RG_U2_HSTX_SRCTRL, 4));
->
->         u2_phy_pll_26m_set(tphy, instance);
->
-> @@ -813,6 +815,7 @@ static int mtk_phy_xlate(struct phy *phy,
->                 phy_v1_banks_init(tphy, instance);
->                 break;
->         case MTK_TPHY_V2:
-> +       case MTK_TPHY_V3:
->                 phy_v2_banks_init(tphy, instance);
->                 break;
->         default:
-> @@ -900,8 +903,12 @@ static struct tphy_pdata tphy_v2_pdata =3D {
->         .version =3D MTK_TPHY_V2,
->  };
->
-> +static struct tphy_pdata tphy_v3_pdata =3D {
-> +       .version =3D MTK_TPHY_V3,
-> +};
+> diff --git a/arch/arm/dts/mt6366.dtsi b/arch/arm/dts/mt6366.dtsi
+> new file mode 100644
+> index 00000000000..9b3a23d51b6
+> --- /dev/null
+> +++ b/arch/arm/dts/mt6366.dtsi
+> @@ -0,0 +1,273 @@
+> +// SPDX-License-Identifier: (GPL-2.0-only OR MIT)
+> +/*
+> + * Copyright (c) 2026 MediaTek Inc.
+> + */
 > +
->  static struct tphy_pdata mt8195_pdata =3D {
-> -       .version =3D MTK_TPHY_V2,
-> +       .version =3D MTK_TPHY_V3,
->         .sw_pll_48m_to_26m =3D true,
->  };
->
-> @@ -914,6 +921,10 @@ static const struct udevice_id mtk_tphy_id_table[] =
-=3D {
->                 .compatible =3D "mediatek,generic-tphy-v2",
->                 .data =3D (ulong)&tphy_v2_pdata,
->         },
-> +       {
-> +               .compatible =3D "mediatek,generic-tphy-v3",
-> +               .data =3D (ulong)&tphy_v3_pdata,
-> +       },
->         {
->                 .compatible =3D "mediatek,mt8195-tphy",
->                 .data =3D (ulong)&mt8195_pdata,
->
-> ---
-> base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-> change-id: 20260805-mtk-tphy-v3-4cba8b8965ba
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+> +&pwrap {
+> +       pmic: pmic {
+> +               compatible =3D "mediatek,mt6366", "mediatek,mt6358";
+> +
+> +               regulators {
+> +                       compatible =3D "mediatek,mt6366-regulator", "medi=
+atek,mt6358-regulator";
+> +
+> +                       mt6366_vdram1_reg: vdram1 {
+> +                               regulator-name =3D "vdram1";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <2087500>;
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+Please don't add default full-range voltages and default names. They
+make no sense. Both can be derived from the node and the PMIC's compatible
+string.
+
+
+ChenYu
+
+> +                               regulator-enable-ramp-delay =3D <0>;
+> +                       };
+> +
+> +                       mt6366_vcore_reg: vcore {
+> +                               regulator-name =3D "vcore";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <200>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vpa_reg: vpa {
+> +                               regulator-name =3D "vpa";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <3650000>;
+> +                               regulator-enable-ramp-delay =3D <250>;
+> +                       };
+> +
+> +                       mt6366_vproc11_reg: vproc11 {
+> +                               regulator-name =3D "vproc11";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <200>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vproc12_reg: vproc12 {
+> +                               regulator-name =3D "vproc12";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <200>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vgpu_reg: vgpu {
+> +                               regulator-name =3D "vgpu";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <200>;
+> +                       };
+> +
+> +                       mt6366_vs2_reg: vs2 {
+> +                               regulator-name =3D "vs2";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <2087500>;
+> +                               regulator-enable-ramp-delay =3D <0>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vmodem_reg: vmodem {
+> +                               regulator-name =3D "vmodem";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <900>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vs1_reg: vs1 {
+> +                               regulator-name =3D "vs1";
+> +                               regulator-min-microvolt =3D <1000000>;
+> +                               regulator-max-microvolt =3D <2587500>;
+> +                               regulator-enable-ramp-delay =3D <0>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vdram2_reg: vdram2 {
+> +                               regulator-name =3D "vdram2";
+> +                               regulator-min-microvolt =3D <600000>;
+> +                               regulator-max-microvolt =3D <1800000>;
+> +                               regulator-enable-ramp-delay =3D <3300>;
+> +                       };
+> +
+> +                       mt6366_vsim1_reg: vsim1 {
+> +                               regulator-name =3D "vsim1";
+> +                               regulator-min-microvolt =3D <1700000>;
+> +                               regulator-max-microvolt =3D <3100000>;
+> +                               regulator-enable-ramp-delay =3D <540>;
+> +                       };
+> +
+> +                       mt6366_vibr_reg: vibr {
+> +                               regulator-name =3D "vibr";
+> +                               regulator-min-microvolt =3D <1200000>;
+> +                               regulator-max-microvolt =3D <3300000>;
+> +                               regulator-enable-ramp-delay =3D <60>;
+> +                       };
+> +
+> +                       mt6366_vrf12_reg: vrf12 {
+> +                               regulator-name =3D "vrf12";
+> +                               regulator-min-microvolt =3D <1200000>;
+> +                               regulator-max-microvolt =3D <1200000>;
+> +                               regulator-enable-ramp-delay =3D <120>;
+> +                       };
+> +
+> +                       mt6366_vio18_reg: vio18 {
+> +                               regulator-name =3D "vio18";
+> +                               regulator-min-microvolt =3D <1800000>;
+> +                               regulator-max-microvolt =3D <1800000>;
+> +                               regulator-enable-ramp-delay =3D <2700>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vusb_reg: vusb {
+> +                               regulator-name =3D "vusb";
+> +                               regulator-min-microvolt =3D <3000000>;
+> +                               regulator-max-microvolt =3D <3100000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vcn18_reg: vcn18 {
+> +                               regulator-name =3D "vcn18";
+> +                               regulator-min-microvolt =3D <1800000>;
+> +                               regulator-max-microvolt =3D <1800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vfe28_reg: vfe28 {
+> +                               regulator-name =3D "vfe28";
+> +                               regulator-min-microvolt =3D <2800000>;
+> +                               regulator-max-microvolt =3D <2800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vsram_proc11_reg: vsram-proc11 {
+> +                               regulator-name =3D "vsram_proc11";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <240>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vcn28_reg: vcn28 {
+> +                               regulator-name =3D "vcn28";
+> +                               regulator-min-microvolt =3D <2800000>;
+> +                               regulator-max-microvolt =3D <2800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vsram_others_reg: vsram-others {
+> +                               regulator-name =3D "vsram_others";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <240>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vsram_gpu_reg: vsram-gpu {
+> +                               regulator-name =3D "vsram_gpu";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <240>;
+> +                       };
+> +
+> +                       mt6366_vxo22_reg: vxo22 {
+> +                               regulator-name =3D "vxo22";
+> +                               regulator-min-microvolt =3D <2200000>;
+> +                               regulator-max-microvolt =3D <2200000>;
+> +                               regulator-enable-ramp-delay =3D <120>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vefuse_reg: vefuse {
+> +                               regulator-name =3D "vefuse";
+> +                               regulator-min-microvolt =3D <1700000>;
+> +                               regulator-max-microvolt =3D <1900000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vaux18_reg: vaux18 {
+> +                               regulator-name =3D "vaux18";
+> +                               regulator-min-microvolt =3D <1800000>;
+> +                               regulator-max-microvolt =3D <1800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vmch_reg: vmch {
+> +                               regulator-name =3D "vmch";
+> +                               regulator-min-microvolt =3D <2900000>;
+> +                               regulator-max-microvolt =3D <3300000>;
+> +                               regulator-enable-ramp-delay =3D <60>;
+> +                       };
+> +
+> +                       mt6366_vbif28_reg: vbif28 {
+> +                               regulator-name =3D "vbif28";
+> +                               regulator-min-microvolt =3D <2800000>;
+> +                               regulator-max-microvolt =3D <2800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vsram_proc12_reg: vsram-proc12 {
+> +                               regulator-name =3D "vsram_proc12";
+> +                               regulator-min-microvolt =3D <500000>;
+> +                               regulator-max-microvolt =3D <1293750>;
+> +                               regulator-enable-ramp-delay =3D <240>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vemc_reg: vemc {
+> +                               regulator-name =3D "vemc";
+> +                               regulator-min-microvolt =3D <2900000>;
+> +                               regulator-max-microvolt =3D <3300000>;
+> +                               regulator-enable-ramp-delay =3D <60>;
+> +                       };
+> +
+> +                       mt6366_vio28_reg: vio28 {
+> +                               regulator-name =3D "vio28";
+> +                               regulator-min-microvolt =3D <2800000>;
+> +                               regulator-max-microvolt =3D <2800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_va12_reg: va12 {
+> +                               regulator-name =3D "va12";
+> +                               regulator-min-microvolt =3D <1200000>;
+> +                               regulator-max-microvolt =3D <1200000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vrf18_reg: vrf18 {
+> +                               regulator-name =3D "vrf18";
+> +                               regulator-min-microvolt =3D <1800000>;
+> +                               regulator-max-microvolt =3D <1800000>;
+> +                               regulator-enable-ramp-delay =3D <120>;
+> +                       };
+> +
+> +                       mt6366_vcn33_bt_reg: vcn33 {
+> +                               regulator-name =3D "vcn33";
+> +                               regulator-min-microvolt =3D <3300000>;
+> +                               regulator-max-microvolt =3D <3500000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                       };
+> +
+> +                       mt6366_vmc_reg: vmc {
+> +                               regulator-name =3D "vmc";
+> +                               regulator-min-microvolt =3D <1800000>;
+> +                               regulator-max-microvolt =3D <3300000>;
+> +                               regulator-enable-ramp-delay =3D <60>;
+> +                       };
+> +
+> +                       mt6366_vaud28_reg: vaud28 {
+> +                               regulator-name =3D "vaud28";
+> +                               regulator-min-microvolt =3D <2800000>;
+> +                               regulator-max-microvolt =3D <2800000>;
+> +                               regulator-enable-ramp-delay =3D <270>;
+> +                               regulator-always-on;
+> +                       };
+> +
+> +                       mt6366_vsim2_reg: vsim2 {
+> +                               regulator-name =3D "vsim2";
+> +                               regulator-min-microvolt =3D <1700000>;
+> +                               regulator-max-microvolt =3D <3100000>;
+> +                               regulator-enable-ramp-delay =3D <540>;
+> +                       };
+> +               };
+> +       };
+> +};
+>
+> --
+> 2.43.0
+>
