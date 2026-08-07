@@ -1,160 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 549B2C5AC82
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D46C5AC7A
+	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 16:13:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1AB1E60AB0;
-	Fri,  7 Aug 2026 16:13:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B1968810CD;
+	Fri,  7 Aug 2026 16:13:34 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZJhrCA_BHlLP; Fri,  7 Aug 2026 16:13:33 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0AE7180E2E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786119213;
+	bh=aN1BFEqt9oIFX3EdQcb0WqAhl4LjErOpsWJfCgWi6Ek=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=cCUAWCnf2iH7dLxrFyxnTmBQPOYERYP7Dt8eXn/eCzsvs116qZNOOHGsT4oj9F+wC
+	 otpxzckkZ3RuPFIA1oaVo7DuVEJ2lZCOQKY7+4VCX+75WBn13rJymrrWV3bws+WhL1
+	 6k7scHbt+Kuw4EbxGG/UQBYqBWARBnFZE/2aZPLDiyIfynFaEz5vuhFpIJQgCxtEjH
+	 yYeWMCeVwA/zsyFvn7RGoywG14lVDDf8BYTHJmJLjP6p9F19nG7Ms3TqTuHYOW691a
+	 vBACn6aZG/aaqi1vdvsSmRtBO8JvrPFTeuj1aNhoUiqbIVaJGws5pixBalQDjpNZi0
+	 UjiitkFb4a9+Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0AE7180E2E;
+	Fri,  7 Aug 2026 16:13:33 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0FD93D3
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 16:13:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id E9F9B607FF
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 16:13:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mZleFn_xyGBD; Fri,  7 Aug 2026 16:12:58 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CAB00607FF
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786119177;
-	bh=s+KGEm+1Xs7qyQSIhdkqfNxdX5bMBfJzZ+zwhhN97f0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=w/ec5c8z15tbctKhZUDM8KI+X8FDrp7JQX1os3UUvuqAitpGjaGZq4aSGKQniuU0L
-	 a/kCu+QI3Va+wqAsOpXbCTYn1awt11Mn3eSJ7Baxzc/mzmqdyyunkNnKag0ZosSIyX
-	 ooPLtKHE2tfBd+nhsOA52SOfBxm+nzm9z5C39+VGpQ+5unlG8ReqzgaxWRR4aMVibG
-	 cuGM1WBRfiThiSHkvOjYp2baHpVQsdvVpYdLlUGJZjsFEEpcPb84Yr0Dt2W7UOtdmX
-	 GU3tFbcKrFtgDWPNuoKp3tfa80wgOLbYyPDAWc4zqfPIIqj36hKCy4N75YcxgRCd6K
-	 lp6g7OcowdYoA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CAB00607FF;
-	Fri,  7 Aug 2026 16:12:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 111F72F5
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:53:29 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 03481400D1
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:53:29 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hczaKIct7bn0 for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 15:53:28 +0000 (UTC)
+ id V58f9XmOkKo9 for <u-boot@lists.u-boot-project.org>;
+ Fri,  7 Aug 2026 16:13:31 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1031; helo=mail-pj1-x1031.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0535E4008E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0535E4008E
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0535E4008E
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 15:53:27 +0000 (UTC)
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-38dfe910e9dso3605408a91.3
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 08:53:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786118007; cv=none;
- d=google.com; s=arc-20260327;
- b=WW1a6y9rhxNtYKtTx8+Ibtd9P8PLU1TFJ5fLp/4iMvi+qoSTiMzY16uWBYnq3VK9gn
- Dd7hsg8U9BUY9lk2rqrwMR6Z6sXvu19hFSDr6WYQzYQa0Vqb1LAYxhNeZ8tr7s3eTaAL
- 8tV8q7HfrTiw2MFMnifHGvpVRT3xlIQyVAeLZND+ZiHTM2d/KCfIObjRH0F9U7jRpXFh
- 4SEnh3WZu511RfPSVM47vcpa8dif9WbRraIPWd5zSBA2fioBa5pPkiYC68S46w1X3MST
- mevSBQe9O0AdgXkox5o0PEfWqzDlZYWjVSykMASmWACIjCdSPaRKl9DFAk9erYejaGK2
- 3Pjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=s+KGEm+1Xs7qyQSIhdkqfNxdX5bMBfJzZ+zwhhN97f0=;
- fh=IzScIBPEqXDc38dJAdsZ9BkhmTqefgr4mnMGLkLVUM0=;
- b=LHNvNxbci7TpDl5EEI/Twc2b5GvyiBLD5PWqUNGGDZ1Xq3G3YS2ctR1wgT/AmNAu8+
- KHuKTXgPxMcfwZUkrP8w/1MIySXa1tDd7DbIKgNTcqIdFnekG+GVwCW3MEbwv0PZAleD
- /b2q5/pusOiBnLgm/QHzx9fUGdlke7eSAePZE7OAf37YwPiBSwE8/ObqactV2Y4oTbO4
- x86yHRnfL5Qyy0Buk/J4S6nlTbBLxz6cTt4kCkKhsvWNYqnPqG//wBLePtIhgIBS6mi9
- Q6CMjhdrtqqjUy8nBjmixqdnLiuVIGhmAMXRuRAEdhxObTXPPa5XKef7bviy4kcs7Y5b
- 7COw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 7F06F60684
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7F06F60684
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7F06F60684
+ for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 16:13:30 +0000 (UTC)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e9fc3de7ceso1807575a34.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 09:13:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786118007; x=1786722807;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=s+KGEm+1Xs7qyQSIhdkqfNxdX5bMBfJzZ+zwhhN97f0=;
- b=DDmH55yMT2YV4u+FyUf+4qqWcAoQJesuc5GMcxV7t5Vfvvv78i7680Z3v8CcoGKy3f
- 5OfHSiktHimtkFKteKviifeHOLvhfK+c4J/VtebO5jAx+uRfadhzSisT+7IZS/eqy3c8
- XdhS4X8SfOGmrIAFdJFFSQVo4ObK94yrmNkLFJzVaNt7aPfVtVR9wrA101rqN0oKydEc
- kUbAuauFqhfk3RYYl/sn/PTuCju4AhvncjPGyR9wSGpL3jAWL5eEwsLPboi/mlHBGB6p
- eAXp7PIapM9e0nDLih0MGkgKkix4Sw54e1bDl+WlkO+rmm8m6Tv34Q7s23EYK0GJQkAF
- jEMQ==
-X-Gm-Message-State: AOJu0YxSdfFwy74yzfOZK6JpOHf9OZWTlN2K5j/fIU8O48FeP+xct2wi
- B2P9lPAvsHQlbsVdiU7Iz8zbYcGIITxr1iX2fmfK/QvRXSvu8wpAEGT9+8S7OCx8gIvpd+nS7LL
- 8MxifJ64Ys6fXEtSv1TUVjOrsq7CannCX5ym7IHin
-X-Gm-Gg: AR+sD113lgLZfPY6xN+QiCzoSoJYN48DceLA3cVx40/4ZU50epK2qr7J8Rayd3P3jn/
- mTifOfk7n1bGSysmIsIivp/9sS1HH/3zqtno0Ztq0R7tXkAcpp7LP+YYuNv/nrKBJvjXgcvnhBc
- Z/HeXk5pw663U1MWYDyIzQsun/RUr3veG88bF08KoeMo1Kho0YVC5o4EvyLZ0i0oGA76Ce1EQkJ
- Fl6tES1lIuGSrh3AUV1aYblVOkXT+fGy3DGxTRfmEyKrvSwrCG13iROU/gUzv7SkLBNwI7gdOZo
- Irz/dt9h+KJqRqJDuDSqAGv42oACJky27nFVHrPhCsg=
-X-Received: by 2002:a17:90b:528c:b0:380:9f17:6df3 with SMTP id
- 98e67ed59e1d1-3903c5448dcmr24800032a91.4.1786118007188; Fri, 07 Aug 2026
- 08:53:27 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786119209; x=1786724009;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=aN1BFEqt9oIFX3EdQcb0WqAhl4LjErOpsWJfCgWi6Ek=;
+ b=IogHOUbaWApoxwl1f2pxe3vMLWqdJSgqoLt+XzFnEeWsvvMXjlbGVFR6Wlzxp5wqop
+ cDFq0DBlRnEV+aU12WBPjcb0Qta4yuM+UKoKjiJRhuhz0s2Xq+vZ5Pg73iewI2YdVkBe
+ p4BneOdm2Gkplo0dgtXB2PK8n23Qs883sTeyWXo8gSY6q8wUI60iY5lwHIDpBjoKNYr3
+ u36cbn+Zi/A5MGbV3lMMpkpx7Jv6ZGTJ/GAi0uoW8+gHGak+RnaMFbAQ3zm/xn+P6vz1
+ OC0D31W9OkR7V87ULGpARgrVwO1T4GNqB+Yi0GlYixuFcSJPwxQy3caf47jRaVs3eeto
+ jeqg==
+X-Gm-Message-State: AOJu0YwNkfQMmG9Ht1BkOSK0aBhY5dow9s3FrI07Ib3iEJuy7a6rJFKO
+ LSNlFkr8N9ThHEmRY29GrmY9fklFcuhGNn9PTiavKVXcOViKrSXgHFC88d8AJmhRFZs=
+X-Gm-Gg: AR+sD1186fK7AeED+d7cFSB9iRCygz/wVpSGS07jUrn2AQcnqp2QpJg5v1Arjm9yxK+
+ SVJ4ZW0YXZtpTCUK3oIprJfVp0v9bVspSr3GwoiMxCtWu1iWGkj+Cii/1xKbGoSKk0GQkmbbfIp
+ wt2irxe+2rJ3ogkY2H5nM9IroW4EPLSr0AbNbM2s/snr1E/Imk88hwwDVcOLNpGL8HwG8QP6itF
+ CpQf3T2ev6CYK0NMLo0hYbHMbc4O9EP0OQZhrRqIBw820piUB2rb3Is/JFICpSXtvGlHJi8tA2u
+ i3HkzB0oXFCR/vTB/XmwkQmcVfKRjfwm2/bBJX8hQlyDC+XL3lXYrr/9UDLiQyykdSntnySJbU8
+ wK2lDr4rl4l0E0utObOhrPXLLFdVksm29O+32EdBXHiRF+1YxvKm6gzR7K8vK+LvhzRZM9AhJhn
+ 3DN6YncufzUcppIUC5lAqqMVSh/sppRiG7Vw9r+P//IVNoPgioRTulWZSsZRAqmvSU
+X-Received: by 2002:a05:6830:448d:b0:7e6:d54e:8fe3 with SMTP id
+ 46e09a7af769-7f36930b186mr756060a34.9.1786119208989; 
+ Fri, 07 Aug 2026 09:13:28 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:b714:88c:313d:dee2])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f35b7b9678sm1537878a34.21.2026.08.07.09.13.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Aug 2026 09:13:28 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v2 0/4] arm: mediatek: Genio 360 EVK bringup
+Date: Fri, 07 Aug 2026 11:12:50 -0500
+Message-Id: <20260807-mtk-genio-360-bringup-v2-0-7c3830297d97@baylibre.com>
 MIME-Version: 1.0
-References: <20260731-atf-falcon-v2-0-acb97c172993@flipper.net>
- <20260731-atf-falcon-v2-1-acb97c172993@flipper.net>
- <CAFLszTiAP1Bib=Xpg-OK=x=pJCuG=N8f_bnxE7dv=YdM4x2ZOQ@mail.gmail.com>
- <CAKTNdwHaxhnCy22VPMNnGo9Z=p3DF6zmQ8ixR-EsOpb9crO=Dw@mail.gmail.com>
- <CAKTNdwE1xG8d_x3KH6v5bQfWB_QQ1b6sHWxagz1JZ2GDyVOtgQ@mail.gmail.com>
-In-Reply-To: <CAKTNdwE1xG8d_x3KH6v5bQfWB_QQ1b6sHWxagz1JZ2GDyVOtgQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 7 Aug 2026 09:53:10 -0600
-X-Gm-Features: AUfX_mxJZKIPewAZLmYEISTr9cbU7IMmZOlakd5ufu6NYI15ApgTuKuteVzLovI
-Message-ID: <CAFLszTgGdE=ZeZhXGOy3bk2Yj3uokv=3VtafZpRk63GW3cnS8w@mail.gmail.com>
-Subject: Re: [PATCH v2 01/10] spl: Decide about Falcon mode boot only once
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Ronald Wahl <ronald.wahl@legrand.com>, 
- Richard Genoud <richard.genoud@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Johan Jonker <jbx6244@gmail.com>, Daniel Golle <daniel@makrotopia.org>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tony Dinh <mibodhi@gmail.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Quentin Schulz <u-boot@0leil.net>, 
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 07 Aug 2026 16:12:50 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WOwQ6CMBBEf8Xs2TWlSBVP/ofhQMsKq9KSFoiE8
+ O8WOHt8ycy8mSGQZwpwO8zgaeTAzkaQxwOYprQ1IVeRQQqpxEXm2PZvrMmyw1QJ1J5tPXRYUaq
+ pMpJMfobY7Tw9+bvtPoqdw6BfZPp1bE00HHrnp008Jmtud1xF+scxJihQCUUUn2SZzu66nD6sP
+ Z2Ma6FYluUHDDUph88AAAA=
+X-Change-ID: 20260729-mtk-genio-360-bringup-de3bedc2ec94
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
+ Chris Chen <chris-qj.chen@mediatek.com>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2462; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=gyhkFbE/OXNQaYPLRR3F0Hslv/1PYL8/FO8AFPl0nQ8=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqdgQGRlDUKV0SGd6hmavSNSNmqFRBo4Ja7cWfp
+ AaYnN6Ko0OJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCanYEBhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A/u8IAIIygx5X5WaJUHdgZbJC2R/NlYLDYoc7sXUN+5y
+ HDUA98yZ7Vf4bU+kDdbbA+/ZAIHhX9lSoHWz0IgyRzI7PeRVegZMzPRZ9o8NGqx2UhGOGHOCPLx
+ HHTn6agfFDkwll5zS834dbgFmkdkFFTGzZyfWVF3cxtoK0d5LFU5cqCDrU+u2PHNwiPMj7j09QV
+ KQ6bGUk27UQ6nbguPXt6eR6HqSK1v2Dka7buPBCnQ5tNEyLullG7g0mRx5+9VULtu9Cb0lxgTaM
+ 9uNlTnu7EM6P4zV10jAjzY23ptEehlLf0xrUWCiHQwbPrcg+0J1hSLYKv3G/S2XmLu+MWBndEFY
+ gybs=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786118007; x=1786722807;
+ d=baylibre.com; s=google; t=1786119209; x=1786724009;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=s+KGEm+1Xs7qyQSIhdkqfNxdX5bMBfJzZ+zwhhN97f0=;
- b=XS5LTs4/2t9Lp2Xw486veadPsCt5ClzDeWpsyc+GCC5AbAAfGsXnLvOCwzrvjmRewy
- DOq4SMQ2TX5igbP4qz9KgfFpX3ovla+grZoVOsyVBx8dX8C9V3FNmscklGD6yUypsD92
- 413QaBjwZGMMaNPdkWK6eETlJrk1XTWJKNtB4=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=XS5LTs4/
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=aN1BFEqt9oIFX3EdQcb0WqAhl4LjErOpsWJfCgWi6Ek=;
+ b=FB84skiRCj8+EEcexWvdHzOKDyJymQIllXUMz/IIxGLoaV+OVDB9vsDMm69eDJAGkE
+ jHM4YWmJ6eUMdR1oXp5TCD5bQC5EpqbbjF1QPArHv0eA/zXf6WktU+3Kl9W+CPnn2ifW
+ 8qoKJCjaGwvOBFsrtssdNp4AShQpThjhjl12fZRL4BHOQsxZqPj6PwV2JcHfk9wtVh/a
+ Ccr9z4zYLnWTw7kqisS04K4yi3Ky4iR2Ak7K+LU6ys/L1wpFY2nRm5amonJj7W0mpj3d
+ Eb4skbxvEH3pkHwGg9UDGCIUV/WSNKr5RHDEQSPFxBCKlVG9h1yt8vaIwBF5G+R4rGKY
+ 5L3A==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=FB84skiR
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -169,66 +150,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Alexey,
+This series is doing a basic bringup of the MediaTek Genio 360
+Evaluation Kit board. This contains a new application processor
+(MT8366) that hasn't been seen in U-Boot yet, so basic support for
+that is added as well. Clock, pinctrl, net, phy, spi, power drivers
+to add support for any missing compatibles were sent as standalone
+patches.
 
-On Fri, 7 Aug 2026 at 01:38, Alexey Charkov <alchark@flipper.net> wrote:
->
-> Hi Simon,
->
-> On Tue, Aug 4, 2026 at 5:29=E2=80=AFPM Alexey Charkov <alchark@flipper.ne=
-t> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Tue, Aug 4, 2026 at 5:02=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > Hi Alexey,
-> > >
-> > > On 2026-07-31T17:10:44, Alexey Charkov <alchark@flipper.net> wrote:
-> [...]
-> > > > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > > > @@ -105,6 +105,24 @@ __weak int spl_start_uboot(void)
-> > > > +bool spl_falcon_boot(void)
-> > > > +{
-> > > > +     static int falcon =3D -1;
-> > >
-> > > Minor - since the return type is bool, I'd find it cleaner to use two
-> > > bools (result and 'decided'), or an enum, rather than overloading an
-> > > int with a -1 sentinel. It also keeps the value out of .data, which
-> > > matters a little in SPL.
-> >
-> > Sounds good, will adjust in the next version.
->
-> Interestingly, the conversion to two bools on .bss turns out to be
-> heavyweight enough to push the am335x_evm SPL image 8 bytes over its
-> SRAM size [1]. The .data section shrinks by 3 bytes, but the .text
-> section grows by 16 bytes compared to my v2 version, and it no longer
-> fits :)
->
-> I'm now thinking if it would make more sense to have the spl_atf
-> handover function skip looking into the FIT contents and just trust
-> that the loader selected the right one based on a one-off
-> spl_start_uboot() reading - then I could skip the caching helper and
-> wouldn't need to add any new global state, so there should not be any
-> size impact. An edge case here would be a FIT containing BOTH a Linux
-> kernel and a U-Boot proper (nothing technically prevents that, even
-> though the binman template I'm adding as part of this series doesn't
-> do that). There won't be any way to select which one to pick from the
-> FIT at runtime anymore.
+There isn't an upstream devicetree at this point, so most of this is
+picking up the downstream devicetree along with a little init code
+and a defconfig.
 
-That seems reasonable to me - the edge case seems very unlikely and
-possibly broken.
+This has been tested on Genio 360 EVK booting to eMMC, microSD card,
+and USB storage and booting from eMMC and SPI NOR flash as well as
+testing that networking is working.
 
->
-> Or somehow make the caching helper only apply to SPL_ATF devices
-> (am335x_evm isn't one), although that sounds a bit cludgy.
->
-> Any thoughts welcome!
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+Changes in v2:
+- Updated devicetrees to align better with know similar upstream bindings.
+- Added nodes for mm1, pmic/pwrap, snor.
+- Added more options in defconfig to enable gpios, regulators, phy, net,
+  snor, usb.
+- Dropped clock dt-binding header patch (will merge the one from v1 with
+  the clock driver patch if we don't need a v2 of the clock driver patch).
+- Dropped the pinctrl dt-binding header patch (will send with pinctrl
+  driver patch v2 instead).
+- Link to v1: https://patch.msgid.link/20260803-mtk-genio-360-bringup-v1-0-606ee60755b5@baylibre.com
 
-Regards,
-Simon
+---
+Chris Chen (1):
+      arm: mediatek: add MT8366 application processor
 
->
-> [1] https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/j=
-obs/62374
+Macpaul Lin (3):
+      arm: dts: add MT8366 application processor
+      arm: dts: mediatek: add Genio 360 EVK
+      board: mediatek: add Genio 360 EVK defconfig
+
+ arch/arm/dts/Makefile                         |   1 +
+ arch/arm/dts/mt8366-genio-360-evk-common.dtsi | 564 +++++++++++++++++++++
+ arch/arm/dts/mt8366-genio-360-evk.dts         |  14 +
+ arch/arm/dts/mt8366.dtsi                      | 698 ++++++++++++++++++++++++++
+ arch/arm/mach-mediatek/Kconfig                |  12 +-
+ arch/arm/mach-mediatek/Makefile               |   1 +
+ arch/arm/mach-mediatek/cpu.c                  |   3 +-
+ arch/arm/mach-mediatek/mt8366/Makefile        |   3 +
+ arch/arm/mach-mediatek/mt8366/init.c          |  58 +++
+ board/mediatek/MAINTAINERS                    |   8 +
+ configs/mt8366_genio_360_evk_defconfig        |  59 +++
+ 11 files changed, 1419 insertions(+), 2 deletions(-)
+---
+base-commit: 97fdb6113084797d6e5640fc7c60f4349460fb5e
+change-id: 20260729-mtk-genio-360-bringup-de3bedc2ec94
+
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
+
