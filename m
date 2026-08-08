@@ -4,110 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4CFC5AC67
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04AC2C55174
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:32:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F04BE606E2;
-	Sat,  8 Aug 2026 17:31:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BAB87606B9;
+	Sat,  8 Aug 2026 17:32:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xgrZPq-OBT9F; Sat,  8 Aug 2026 17:31:07 +0000 (UTC)
+ id lEaBPCglDJAd; Sat,  8 Aug 2026 17:32:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C1921605FD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0BA21605FD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786210267;
-	bh=h1HXOwSVXGgPUuTtE89MMmQyAopMebtOpxQnnfZA+Sk=;
+	d=lists.u-boot-project.org ; s=default; t=1786210363;
+	bh=fdMTvkWjT/cO5knJTjXf5bkrfg+eHYBs9PyvpDb0W50=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=C8r6E0N4nEg/SjPd2uir3iCbyKREGUVlYWmorroVYIKOKs/J/W1O/6LDYeETAWpMW
-	 OI8VLN+YwK+vnFOAFt92kgbirDXxEMETCYxZhfNxosQQfCgjRsocMncWnn3wtWUI8l
-	 hscheUm7wKq6VMinxF0udZWnadYxOO5dTB+PTGARHikqVsiBeIsdLJY8kydh4p7kzt
-	 7INAKK+5mJRDBcMZex1tncIipKMWHdePos+0PKjYgfIT9i5d7fsb1Gqsq7yBxAasPH
-	 ULb95Lv0r0EENAktdDh6CJ1JrpmfrShGiLGkhGoGv3zt2Q5QQqGZHAEezaTWSerP8M
-	 sEK8KjZ2Za4XQ==
+	b=horX3DXYR4Ee7k/IE//nQXjvhHE6YUVPGpAImd8OS6AWhvhTmOH6JESMNbIbYkLjK
+	 A4PffNi/p0qda3+nbRnXItZk748rMpwAbS5X7dEY7dH02VHbetLNV53UnksbG1vx7u
+	 1PLdLuoh/39gczHrTxcoQHAw2el5CAZobEp5oJ2VWS9rWeiBt1nooUso00PSyQ6B2v
+	 jDiQq3abgu2RV1St694pDIbFuRLDBmyNbHwU+taTKkGRClgN/sf10cPEjU0pKwvTe5
+	 4qKzb1VF2QioRsznQVSGUBVbCSMURk7OzP7JDGfLwPRcYFVa1g80CmQT+A1E8DxDhV
+	 yNe9RHRdC9vWg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C1921605FD;
-	Sat,  8 Aug 2026 17:31:07 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id F1F592F5
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:31:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0BA21605FD;
+	Sat,  8 Aug 2026 17:32:43 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 072AE2F5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:32:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E3B2380E5D
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:31:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id ED028405DC
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:32:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TGuBkNwKtqIq for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 17:31:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zhuWv-g45GZf for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 17:32:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
+ client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 10DD180E5B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 10DD180E5B
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 10DD180E5B
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:31:04 +0000 (UTC)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-69c108fee7fso644972a12.3
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:31:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786210263; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 0D8F4405DA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0D8F4405DA
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0D8F4405DA
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:32:39 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6a1995ac437so895303a12.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:32:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786210358; cv=none;
  d=google.com; s=arc-20260327;
- b=LTZ6av0eo6AAcGsoemL7uDCHWfcqlaNxtDiK5eAcfjcxoLjMEPKPJoHxu+OrHZIf+s
- c/Fd2BCP6VfdrDurlF0y0EwYhZC+qPOLO96CMZ+qxT20Crnpptq1m/8WXBMha4M9X9g4
- Qlc+vPbq9uyTwk5TtQsI1kf9aANo07WXiBEM4Kines+GfD8go5nWNsHpcuOZ78IMbyJX
- CoNwdLsIKk6VwDYM01LrS8GXtXAH6HU16iniaLPEmqG4KNv+dAdYCE1P8nEbqtgzGKQZ
- x2a0a2Ffy6CmKjqcstGUz8y++akcCwtsAfCbgzd5cy8Lzhpp+1Hs/Rs1u57agY+LBlUU
- c2ag==
+ b=rxw8mKmdx7upgD/xwK0Ob4T2Ovk5Yk6HLks1yLsE8OH1+rSoiu8yyqPsef4q1pBS/v
+ WK7COgcHM1+z5gUUMeqLEIpF8Sq/G6Zcxs1FEPA+rEedycuzBaiQL6wFZ5lTruN3Imz/
+ bzwtPmntjVRG0X0EhkadLo55uZUnZOJj4lZ5VQRRIf7xa+mlJ/CenUGbi6Ax4+toC6z9
+ gT91mlt8Ewzde+jrv4zPLEG0OP1K+nQcqzpGu+sRwrgpoo/YXgJfq8lcK5ITcZYVxjSZ
+ vbWi++BG4q0UoqbfUDBH9fPqyN3CKOy4Zc+QRm/2vjTSTL+2s6IfYaFJrY/hT5PJt9//
+ 1FkQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=h1HXOwSVXGgPUuTtE89MMmQyAopMebtOpxQnnfZA+Sk=;
- fh=QgXxaQXkwLlzfaHTrBmJciG/XjkCLDadBy4GhhVYUO0=;
- b=RAhus/uhOynTB3qP/6VSGEh4sPdsC0xqI5uFkVTCuzSvSqUNvlPrEo71yzlkKon22l
- INW0t2WmHEkpZWC4I8xQATAcgGvHUGzd1Dsp2YoE5O0mWOhn9VBySB0OutrXokBodzLy
- wWScMCKwN1IZ3WsY9/5xT4MvU9ajO/kFpy4+vne/rVM2j7PqhtexZmJJrxip2BRxZkKh
- mhyH+efKuXUvfEKvgEnlmbt0U1xoCdycZV36iQXPiihoJnWkX0LMrvItPy5biLL2IMvX
- 6QvqIrXhNnxqEAw9cj7enKjIDNnCOW8yczsShJUbQwoaClebK+yN2GynN5oiZAeA1bRW
- KGRQ==; darn=lists.u-boot-project.org
+ bh=fdMTvkWjT/cO5knJTjXf5bkrfg+eHYBs9PyvpDb0W50=;
+ fh=aM5fUC7yAz3iSoHbBLnhV8pm9nnPXo6kLbt830m8m+4=;
+ b=pb/QvJYnMw0NGYICaBVT5WdLXll8mHzJpaWcVWU1cSNwdXuJUENgVUCucyLfjuAUPg
+ e70d0etkpNeg1+eDT5z2Nv4uXgpspBp1tlHMhWMqbypyOToYMyY9tmFB0oh/gt9Yfimi
+ vnzzmCx2CiRaxbQG8XApZwpDvfStKcAQ9jKtNAP9WUPavCouJACxBbGPxsZoCDnhhEtE
+ /8pSaG3a3sUoPQaaJn6Hdb5vn/eOTvOCUU5BMmcQ574YM+wy3YJUboweS62qVd9x9us6
+ 7Lh9aMd4Nfyw0lk0OPVfeMLM+65K9TM1e+UgRg2xpeoK739R0Hqsg4Y9Qi7rLbSrdTvY
+ jyGA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786210263; x=1786815063;
+ d=1e100.net; s=20251104; t=1786210358; x=1786815158;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=h1HXOwSVXGgPUuTtE89MMmQyAopMebtOpxQnnfZA+Sk=;
- b=n21EWLCkWMr/tlqEsc9XLA96xsrh8gRN3Mk6bf5Nf4AUPiKleltpIZCLMq60Ip4TAW
- nP9w46oHyy5xzYmrwMabG9WTO5FcTmnFlmX+bg748lgcFCxbp0RcK2bzAPEllQ5iv857
- HgPwQCjEtSbHKg+RkJ343JlFhNl9acS4oKMnutmobNBYKYLyxQq0vItljp3dyGk8E3iB
- sFQB86r8W8qBYUnTT0OgF/0H7rEKdkmvX6exBYTz4/P4d1vjWkzvvqU+fu3OVfkS7Rc1
- 7OJ3j8LRmcxP4cnvwQeGTIs908ce0v3AaUJMEdRXMTCWlvRV+btsA3htVgZ/QatTAapv
- kkNA==
+ bh=fdMTvkWjT/cO5knJTjXf5bkrfg+eHYBs9PyvpDb0W50=;
+ b=QHbaqYD9uzWxd9QKdxTZo7nENgJEPt7+pzzvWWDdxcOeF4JgFfdhB2BZ3pQ7qLqsH7
+ zIkw18LFRdRmaM65+rd/MvKcvXnZVGsVJSbsMYacC2rBfVvRwMRghUmbA8OAojGB1vvU
+ kPHQyKOdcpA6QCUqvfl/jyyGU92jqvKOSBavaWnVjvq4A3sS0pWva2x83i72bmfcsdu5
+ g8g/oLnsTJ0MNNRMwC4YlCj7Z8fZ61XEWXCpTEtT0xvrvWAWu45IHZk9XKzXjuvwnVGy
+ BQ1rY/rE80jp+a5XpUToW4HxITIc/UthWOk8+MaFp4jV2/+W7WhKF9IvOA751pk1k2Sc
+ Wfvw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpuvV3P+va0zUToj4TKAT33Uz20XKxMhpS0iUgHpH58p2btv9VqSUQ8/dKu1Fyi0PjN4Hc9xxw=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yz/iemQJ+jpE6CCCCu6VpksWAUcX4SZzUdQVhDvfMPmE9G59WeM
- FqycReoIlJ8DhPwNfP7+X/p6EDtkoChZoLdZKIAa1TbBdoJZVxBWGt5T+k5sx1i5BHkhxtuOrdF
- yCEt22fpXgamIzKke2REUU1eEgi+mfZW5p4NDZmZU
-X-Gm-Gg: AR+sD10Q5x8pzB60srwW8gajDc0XE0OB2oCn5DER5shWMpjUFUDqAbR24RVIR+/v5T2
- j0ylBa0ic8HKHVQmQvV1AJYrmepIaFu7v/1Xj68FceC4oR7ocWR7350FRpfgJQ9p65f/SZt40QN
- CSGQi86KctHNoIU3QhDz0/iI93ZJMA7M0u12Ss35U7bHkX78GxUAJJdbEOTG3iJKnAMIrX8LiMw
- r6GnB5SofwfLpDpaRA2tlRqe7Y+pm+LpBX0nWzWj1Wg7n7r6C1ArMBLvJSutjyXRf1TsVi+pZGQ
- 9Slo+SP4lRoX9MD2MIBGSDA1mKz0KokFNbXcsQ7v4gDL1Ca6Wj6xxA==
-X-Received: by 2002:a05:6402:24c1:b0:6a1:f092:3c1e with SMTP id
- 4fb4d7f45d1cf-6a1f0923e14mr3429835a12.13.1786210263096; Sat, 08 Aug 2026
- 10:31:03 -0700 (PDT)
+ AHgh+Rocre5A6qbpHxCs3eb5shevhK82N+7FAJNqvs/DJnINMl5/5DxC8DHMsTibcYdOGDBmsQ+WDms=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yw+4YKGKMbjBlDARSrUp8kDvi+PgTHg/KfXRBAUwGC497jvZonC
+ 8lSLvQWhAQwx0wUDSYECiEIRu6aUWxAX5NKNtrXGlohMuneIGsjzP5JGgpdWnEdRK2SGhKGSsCR
+ TZMnfqvV7RKR+OAVkTVYQn06ZykAwhvnAG0pkH4Jj
+X-Gm-Gg: AR+sD10UithbCaf0ANzCX2NcMOVhcq2EnKneQYp3xdxcHKPbwpBqfQmgrYY5AOqqB5r
+ 5FyTqfAsw10oVJ+RYbKuGCc20RANUt0QjSBVBCRJJuHWoo8ecNUAJ3lX8DKi6KxIzu/NFnCJDaz
+ UOPltcLdYC7gbsPt2HvJLiDJqmUFURwROsENUrgURGLHDpPfoKMlJlHAYexI1Gca0MkIRzXYdKu
+ Nqe3zQVJCVfEOmbj5RyvbjVuj+HB9BTBWzYKug/+9BLCY0iLAkwZQKyt10bdBvTa7QgsuLFYuQc
+ dCbJ7XXxOAxQnHRzqm+scqjcrJkc6Cl7hqCt3VhKCOc=
+X-Received: by 2002:a05:6402:3252:b0:6a1:6da8:a8d1 with SMTP id
+ 4fb4d7f45d1cf-6a1f4da49ffmr3024679a12.2.1786210357996; Sat, 08 Aug 2026
+ 10:32:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260804002643.2308515-1-jonas@kwiboo.se>
- <20260804002643.2308515-2-jonas@kwiboo.se>
-In-Reply-To: <20260804002643.2308515-2-jonas@kwiboo.se>
+ <20260804002643.2308515-3-jonas@kwiboo.se>
+In-Reply-To: <20260804002643.2308515-3-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 11:30:51 -0600
-X-Gm-Features: AUfX_myDTBnbUZjJURZD0q0fc2KN7dy2Pe6QzEloNjXy9LzQmJRXHmJdsY-W3Q8
-Message-ID: <CAFLszTjXANOTC8r0FbXAL80Zs2m7EpbEPb5BnDF3kWf1QxHpiQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] clk: rockchip: rk3568: Always init clocks in SPL build
+Date: Sat, 8 Aug 2026 11:32:26 -0600
+X-Gm-Features: AUfX_mzCUZX7EVbX3ZhJdcE4-kpOYIK4SaKOyOch4rHzgtp0q_8tWpzTdT11NVE
+Message-ID: <CAFLszTjPE85w92ONGRZhHiSuwnA3s88hh_bntKzGeY5uv9CbXA@mail.gmail.com>
+Subject: Re: [PATCH 2/4] clk: rockchip: rk3588: Always init clocks in SPL build
 To: jonas@kwiboo.se
 Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
  Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
@@ -115,22 +115,21 @@ Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
  Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786210263; x=1786815063;
+ d=chromium.org; s=google; t=1786210358; x=1786815158;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=h1HXOwSVXGgPUuTtE89MMmQyAopMebtOpxQnnfZA+Sk=;
- b=FFoDZfLaHHJO+rP+Y+X+ikV5QKIL0MbUsrn0Amcv3w1F0gQw3C+eQq21GGB4Ft+8ly
- nEHcbu2TduK++zHMs9ml+vglFXDhLZfOu53mYVSqwk5RbGY9ZC03piqQfZKdRU6Z8ZBR
- SrpWiqGVzaAgq0RnUlGoTwwTppZTTj4uPZko0=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=fdMTvkWjT/cO5knJTjXf5bkrfg+eHYBs9PyvpDb0W50=;
+ b=H6Q1hGWObvjL8C2JmPBSSzs6cncOnvufMo3Af3nWydaja2JGKgS1r72c3uHVja/kH8
+ zmP5sI7ck2jDiTRfJrhUChShPzaeS0kBWLh+MZ8D9/MBY1uzuzJ+8c+MyBupoLyJres+
+ fPikv5PmpyfRe1l/8YUzS8dPixZabKztqou74=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=FFoDZfLa
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=H6Q1hGWO
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,33 +147,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Jonas,
 
 On 2026-08-04T00:26:39, Jonas Karlman <jonas@kwiboo.se> wrote:
-> clk: rockchip: rk3568: Always init clocks in SPL build
+> clk: rockchip: rk3588: Always init clocks in SPL build
 >
-> The ACLK_BUS clock is initialized to 150 MHz in SPL on RK3568.
-
->
-> Ensure clock driver is always probed after bind for SPL builds to
-> initialize core PLLs and clocks in SPL phase on RK3568.
-
-Just to check: "is initialized to 150 MHz" reads as if this already
-happens. My understanding is that probe() contains the ACLK_BUS setup,
-but nothing forces the CRU to be probed in SPL, so it is silently
-skipped. Please spell that out - something like "the clock driver is
-currently only probed on demand, so the ACLK_BUS init in probe() is
-skipped when no SPL consumer references it" - so the motivation
-matches the speedup Alexey reported on the rk3576 patch.
-
+> The CPU PLLs and SPLL are only initialized in SPL on RK3588.
 >
 > Ensure clock driver is always probed after bind for SPL builds to
-> initialize core PLLs and clocks in SPL phase on RK3568.
+> initialize core PLLs and clocks in SPL phase on RK3588.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 >
-> drivers/clk/rockchip/clk_rk3568.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> drivers/clk/rockchip/clk_rk3588.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 
-> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-> @@ -2938,6 +2938,10 @@ static int rk3568_clk_bind(struct udevice *dev)
+> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+> @@ -2138,6 +2142,15 @@ static int rk3588_scru_clk_probe(struct udevice *dev)
+>       return 0;
+>  }
+>
+> +static int rk3588_scru_clk_bind(struct udevice *dev)
+> +{
+> +     /* Ensure clocks are initialized after bind in SPL build */
+> +     if (IS_ENABLED(CONFIG_SPL_BUILD))
+> +             dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+> +
+> +     return 0;
+> +}
+
+The entire SCRU section starting at line 2052 is wrapped in #ifdef
+CONFIG_XPL_BUILD, so this bind function only exists in an XPL build -
+s0 are you specifically wanting this to only happen in the SPL phase?
+If so, I think you should use xpl_phase() == PHASE_SPL
+
+> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+> @@ -2009,6 +2009,10 @@ static int rk3588_clk_bind(struct udevice *dev)
 >       struct udevice *sys_child;
 >       struct sysreset_reg *priv;
 >
@@ -183,11 +188,7 @@ matches the speedup Alexey reported on the rk3576 patch.
 > +             dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
 > +
 
-Have you considered marking the CRU node bootph-all (or equivalent) in
-the DT instead? That is the more usual DM way to force a device up
-early, and it avoids sprinkling a phase check into every SoC driver.
-If PROBE_AFTER_BIND is genuinely the right hammer here, please add a
-note in the commit message explaining why.
+Same question here.
 
 Regards,
 Simon
