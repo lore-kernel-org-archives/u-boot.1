@@ -4,125 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E860C5AD4E
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:35:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64EA0C5AD4E
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:46:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 38671606A9;
-	Sat,  8 Aug 2026 19:35:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2D79D60656;
+	Sat,  8 Aug 2026 19:46:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9IhBiL-XeqZ0; Sat,  8 Aug 2026 19:35:24 +0000 (UTC)
+ id xCQXVUCxgbLn; Sat,  8 Aug 2026 19:46:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1E0F06066F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8339C6065E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786217724;
-	bh=GjlBT0MElMcVKdLr8OZt8wtNuFaCxIyr5xPfaWv2jNY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786218390;
+	bh=HjS0D0p3EbT7nKTzbi3fG3iVfyJtDycq7zUxFp8W43c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=i5zLeDXyH/g/YdPfsxJ4P9fX1/u6QOhUlh2PtzZSG5d1JHQfTJz8/FxwpF8WyhWJo
-	 e/3Pe7faV/A/wJOHAyl6yT8Odoq5r7ABtqyj4t5ErIN78gXuWCzbpR89Lo2PkgYjjn
-	 yCcqpx9EmrvlOFF2SXnIc3nOetJ/jJ70aRHx5OTyXDL4rtbIKX4hDmMsa6vHUkuR0d
-	 I9wNIMp8K/O8dZWIC0fNjRs1Lmro/mNEJOdfIDKkZR2wKgMdq5Gc+mzyFvhNXlB+Pz
-	 zkIQm5ylqQ1Ba/z/yO61Op/8sK+ex8Th6tl67P4ZMGcsodPKaYev7cxncCPwuXI+VQ
-	 IK0ndeGGDoetg==
+	b=W0JiYwhAgVhOJJucHmFVNS6j1GLC7oFRpVkYy/UuGCDfSMpHZ0mESjxUrxKJEtxrF
+	 cMGr44Na3vJQM1AlgVTBf/BdlTyvTzB0Od9lZTRc6iBeDfLL8N3zXGL1ykrk7cnXx+
+	 Z9dqy0az2JMx5DaeUKlNNTrw86hRuO54V/5bE1x7Ty+4Vzdx0DrDBFwC3uDaFq9ZTa
+	 5FWdIZM/uwa9BMPgH6i1B247M80Ar5/vLaPhIhQobtoS2hpQcdpUrK+yNpWLJOnlC3
+	 zbDuyN9195MFWA+nzKeQZMKvIv7Ee90iS9vZPqXIoDyIw17VYapWzWZK3WPIwdyA+o
+	 Jwd4YKu2PPBwA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1E0F06066F;
-	Sat,  8 Aug 2026 19:35:24 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 20CCA1AF
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:35:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8339C6065E;
+	Sat,  8 Aug 2026 19:46:30 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6372B2F5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:46:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1333580BFB
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:35:23 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 55F5280DC5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:46:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w3cPUc7axRW1 for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 19:35:22 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 474F880BDD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 474F880BDD
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 474F880BDD
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:35:22 +0000 (UTC)
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7e9d7464b71so198520a34.0
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 12:35:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786217721; x=1786822521;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=GjlBT0MElMcVKdLr8OZt8wtNuFaCxIyr5xPfaWv2jNY=;
- b=DFYsgB+69tHt6IloF8jpz2I2Z2O7/F587EvrdLwePcjePv1LOZILGuvBL9Ns2PvESx
- G8+OY84zB2wEx3bYn5Ec2I92QYIewWdLYJtMTUstZJf0Mz+CJ+gdZQaqlaOkhPdPGy2x
- gRFJw3ZL7K+llDSAAM7QDUgSYH2hOrtmWM6QgG9NFlkiTZEzdco50zxTKlU/DHRyO95+
- r7AiLhQ0ImNbf+2QGOKMEIpzatGW2SgTfMSWhMddsWc0tGfEWJpcrrY1hBE1le/YyvnQ
- 6DJw9lNt9D9R7ZxfnnHWBag/IvoZ95IwPmBmDGK0XpsL0WCy08MMzwThGHdreJ3Y6dhJ
- o2vg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rrdm7YUVfFv3Rwa9JnGu5QLDbc0e4COc80SPVOdEnnrRcyw6KDK/Z0tO0GBQ35AD/A3ivYTHKE=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxV860rhYmvr5TAsoLhSZoyx/yH6s+RJFQhUn5T5zHluLaIoB0+
- JK4Y3TVTRq2+UZsfkT6i/vqgfFSMVH43GC6RQaKlI0tQc3Ley+0+xYJ8dsbjUK1vzbA=
-X-Gm-Gg: AR+sD11kOjWSxy2ejL1qvsGUuShfTvImCbRct1rakgGs38bKXSBtF9t5gI76aPb4fHQ
- 8wfFqhkJk1TDUH3SAkVc2wXQ2g1xPIS+HGgVZ6pf5ir+x7qgkviBXy8gjdEDCnyEYXpi8/oIwwD
- D+/gcvsD57LD0o6RlGLas4SUDpKxO9fGzvZE+CMhr6DICoYi/ZOvpwRUwz0nyqV/aerWbrkXGo5
- fhgRWZ0+dNmBNnFVV9aGShrVjmykNyXzTftZ+2EyY41dRSdJ69336wUhKCnc7MRK30v928rwWve
- phAML0kPXkk10nOUNeNOV6nXZXaaQju/YuAcOUW4CqwqeFV0mb1J27WlIS77QukYbmrEw/+Wi59
- uaJNUOt1WfeG+b0FrN1R5Ggk7dph5ehbciSqbCmZcb5qdHavl99jl4WTzMoRQ2ykYb6H7lfvcqM
- Fh3ErIU8a3DILDxGNA/tHs2rfRjQNsFhWTIQSn71Sok+keBpEy0XEbP1a0Co4lOL0t9QSGe+NPp
- GwJ336IjY57fVdf03VG7suzj389n1l3172Jb3tNtx6/kTy3GcOGGr2jFiG1XdJM0iZre4B0FTXQ
- Pa0bl8Bd3A==
-X-Received: by 2002:a05:6830:6d0d:b0:7e6:d384:459e with SMTP id
- 46e09a7af769-7f1e5c0dee9mr20077908a34.3.1786217721154; 
- Sat, 08 Aug 2026 12:35:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-459f1e2d668sm4770775fac.14.2026.08.08.12.35.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Aug 2026 12:35:20 -0700 (PDT)
-Date: Sat, 8 Aug 2026 13:35:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: alchark@flipper.net, u-boot@lists.u-boot-project.org,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] board_f: Make printing reset information optional
-Message-ID: <20260808193518.GE394392@bill-the-cat>
-References: <20260730-resetinfo-optional-v1-1-0b500903e4b3@flipper.net>
- <CAFLszTis8DL=VVUOKhCijxkKif62=ypMW0e_OdO2_WF3Q21t7w@mail.gmail.com>
+ id oV8raaky27Xu for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 19:46:28 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=b70c=gc=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 94D0380DBF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 94D0380DBF
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 94D0380DBF
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:46:28 +0000 (UTC)
+X-Forward-Email-ID: 6a77877dd6d5f90d44f6ef9f
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.13.10
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <8abb4515-95d8-4f86-99a1-96ab670ed91c@kwiboo.se>
+Date: Sat, 8 Aug 2026 21:46:03 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a8EzTx2SBBNHqLnh"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTis8DL=VVUOKhCijxkKif62=ypMW0e_OdO2_WF3Q21t7w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] clk: rockchip: rk3588: Always init clocks in SPL build
+To: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
+ <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Tom Rini <trini@konsulko.com>, Alexey Charkov <alchark@flipper.net>,
+ u-boot@lists.u-boot-project.org
+References: <20260804002643.2308515-1-jonas@kwiboo.se>
+ <20260804002643.2308515-3-jonas@kwiboo.se>
+ <CAFLszTjPE85w92ONGRZhHiSuwnA3s88hh_bntKzGeY5uv9CbXA@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFLszTjPE85w92ONGRZhHiSuwnA3s88hh_bntKzGeY5uv9CbXA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786217721; x=1786822521;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=GjlBT0MElMcVKdLr8OZt8wtNuFaCxIyr5xPfaWv2jNY=;
- b=ig0ybHtGISBRmaHPneVRye+N5Oq50zs1k9IsnS2oPTsFCchH74dDSBOSJSCP//IubW
- VhYvPLDEWE5OKNa25D9t7LLud5AW+74lIubKqFmAU2LIrpSipKhvrhcLHXdIeldvvG9O
- rn1ioaKugNeKpWJKXNkkGIzAWZ/yFJ6PQrAFc=
+ d=kwiboo.se; 
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1786218387;
+ bh=HjS0D0p3EbT7nKTzbi3fG3iVfyJtDycq7zUxFp8W43c=;
+ b=IGJmARbeRoxL/XDK20+KJ0mX5JeZ9AqQvDfB2JvWA0fn24HZXyvS93a5zGu8ZD+at7W82Ch21
+ R9UCpEpeB024JnzrNcBvB9t/LKkNxNkO28UUhLtKsDD4VkwH8/wNRZrYlg0Hk3AlnOYALn7BdGo
+ vbX2RtZSl66nX7q7ITYXGHmC+A+l0OVF3GjA/Qystrc1qm0yT27JjHI8XT37Rcb++gstFOukqEq
+ 2BtxojcP2xxed0tJqORlX0VaH2YYmpT4wQTEJnJ2kApUsmwNu3tJ9B7Q7KumChstR/ViaPt+vIl
+ wyzGoPmIlIkfzl310MrLei3M1sEw7yjtuAMHlRpGMqTw==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=ig0ybHtG
+ dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=IGJmARbe
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -137,85 +107,72 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Simon,
 
---a8EzTx2SBBNHqLnh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 8/8/2026 7:32 PM, Simon Glass wrote:
+> Hi Jonas,
+> 
+> On 2026-08-04T00:26:39, Jonas Karlman <jonas@kwiboo.se> wrote:
+>> clk: rockchip: rk3588: Always init clocks in SPL build
+>>
+>> The CPU PLLs and SPLL are only initialized in SPL on RK3588.
+>>
+>> Ensure clock driver is always probed after bind for SPL builds to
+>> initialize core PLLs and clocks in SPL phase on RK3588.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>
+>> drivers/clk/rockchip/clk_rk3588.c | 14 ++++++++++++++
+>>  1 file changed, 14 insertions(+)
+> 
+>> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+>> @@ -2138,6 +2142,15 @@ static int rk3588_scru_clk_probe(struct udevice *dev)
+>>       return 0;
+>>  }
+>>
+>> +static int rk3588_scru_clk_bind(struct udevice *dev)
+>> +{
+>> +     /* Ensure clocks are initialized after bind in SPL build */
+>> +     if (IS_ENABLED(CONFIG_SPL_BUILD))
+>> +             dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+>> +
+>> +     return 0;
+>> +}
+> 
+> The entire SCRU section starting at line 2052 is wrapped in #ifdef
+> CONFIG_XPL_BUILD, so this bind function only exists in an XPL build -
+> s0 are you specifically wanting this to only happen in the SPL phase?
+> If so, I think you should use xpl_phase() == PHASE_SPL
 
-On Sat, Aug 08, 2026 at 11:24:46AM -0600, Simon Glass wrote:
-> Hi Alexey,
->=20
-> On 2026-07-30T08:39:27, Alexey Charkov <alchark@flipper.net> wrote:
-> > board_f: Make printing reset information optional
-> >
-> > Current code tries to print information about the reset method whenever
-> > sysreset support is enabled. This causes the core to try to bind the
-> > sysreset device in board_init_f, even if the driver doesn't support
-> > reset status reporting, causing pure waste on some platforms (e.g. on
-> > Rockchip RK3576 it increases the boot time by ~0.4s even though the dri=
-ver
-> > doesn't support reset status reporting).
-> >
-> > Make the printing of reset information optional, so that it can be
-> > enabled only on platforms where it is supported and useful.
-> >
-> > Only four sysreset drivers actually implement the get_status() op, so
-> > default the new symbol to y wherever one of them can be in use to avoid
-> > regressing those platforms:
->=20
-> >
-> >  - sysreset_sandbox
-> >  - sysreset_mpc83xx
-> >  - sysreset_psci, whose weak stub get_status() is only overridden by i.=
-MX9;
-> >  - the pca9450 PMIC sysreset child driver.
->=20
-> This would age better if each driver implementing get_status() opted
-> in from its own Kconfig with 'imply SYSRESET_PRINT_RESETINFO', so the
-> next addition or removal doesn't have to touch this Kconfig too. What
-> do you think?
->=20
-> >
-> >  - sysreset_sandbox
-> >  - sysreset_mpc83xx
-> >  - sysreset_psci, whose weak stub get_status() is only overridden by i.=
-MX9;
-> >  - the pca9450 PMIC sysreset child driver.
-> > [...]
-> >
-> > common/board_f.c         |  4 ++--
-> >  drivers/sysreset/Kconfig | 14 ++++++++++++++
-> >  2 files changed, 16 insertions(+), 2 deletions(-)
->=20
-> > diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-> > @@ -43,6 +43,20 @@ config VPL_SYSRESET
-> > +config SYSRESET_PRINT_RESETINFO
-> > +     bool "Print reset information during boot"
-> > +     default y if SANDBOX
-> > +     default y if SYSRESET_MPC83XX
-> > +     default y if SYSRESET_PSCI && ARCH_IMX9
-> > +     default y if DM_PMIC_PCA9450
->=20
-> If you don't want the imply approach, please note in the help text
-> that any board adding a new get_status() implementation must flip this
-> on, otherwise the print will silently disappear on their next
-> defconfig regeneration.
+Correct, this should only happen in SPL builds, as originally intended.
 
-That's a bit of a non-sense comment.
+The change to XPL came from "drivers: Use CONFIG_XPL_BUILD instead of
+CONFIG_SPL_BUILD" and you not wanting to address my remarks about the
+unintended changes for the Rockchip platform ;-)
 
---=20
-Tom
+I have future refactoring plans for all RK35xx clock drivers, e.g.
+change to use FIELD_PREP_WM16 and more, was hoping to defer the
+unintended use of XPL_BUILD until such future series.
 
---a8EzTx2SBBNHqLnh
-Content-Type: application/pgp-signature; name="signature.asc"
+For now we only have SPL support for RK35xx, so the mixed use of XPL and
+SPL have no real difference until that changes.
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Jonas
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaneE9QAKCRAr4qD1Cr/k
-CuxyAP9g9/iwf95/eBCxxxpWxFQE6QjFLDyr7wxtj8w2xy3OZwEA7fLS85NJgXLd
-ocWP1NAIv6AtimlIXNYWbodwLPRCuQM=
-=tZTD
------END PGP SIGNATURE-----
+> 
+>> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+>> @@ -2009,6 +2009,10 @@ static int rk3588_clk_bind(struct udevice *dev)
+>>       struct udevice *sys_child;
+>>       struct sysreset_reg *priv;
+>>
+>> +     /* Ensure clocks are initialized after bind in SPL build */
+>> +     if (IS_ENABLED(CONFIG_SPL_BUILD))
+>> +             dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+>> +
+> 
+> Same question here.
+> 
+> Regards,
+> Simon
 
---a8EzTx2SBBNHqLnh--
