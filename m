@@ -1,134 +1,126 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04722C5AD4E
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:14:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7A41C5AD44
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:19:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AF20080BEC;
-	Sat,  8 Aug 2026 19:14:34 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6A5BC60678;
+	Sat,  8 Aug 2026 19:19:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y1ToUF4DQyAV; Sat,  8 Aug 2026 19:14:33 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PEsbnEJc_5Mo; Sat,  8 Aug 2026 19:19:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C4F1080BC4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5C0AF6065D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786216473;
-	bh=JGyBGi2yIVXMtjm3WqkE1YhtbqOeaqJEU3zLIH15WWI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786216781;
+	bh=ngn3IOED/nEkCdSNas6La3EO2QENBiyUpBOkuSauKUM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ovYcFteX234UziHujYNf0BcYoxaHqxjjl0W4Daeue5CjarF7O5o6vh4yEdJ8wbwo1
-	 v5q9G5PRUWO2sIRbDrNTMTjTFMRczfnOjQDFAo7g0o6D2N13ky8UmX8UKgZbKvFrDY
-	 fcgt5F8lteNqmHd++mx9ZAdMg0urFcCVYRYx8y9S1cSjmdnhuxnEUbZ7V4+TbFChEX
-	 Zpcxn9UxO3tEDL2TwSrDi4kBDFGoitlKwKOz9MErQ/eDhxS9xZFQ4FlXEiJi+c9Cdi
-	 gPMqUEMipOOYQ3EHWwx0z052fEiSex04fWbHZXZMkZTEfayisb4okqeQ7dmpXyUjgM
-	 sclh2hvZdBMgA==
+	b=E4Aa2Oyv06iOTeuMTaopMl1czKJ7QPVPn/u2CRZhBEUwXnwtvKSKCVRfrC9D9NyGg
+	 qtr4kbSjmgJa5ihLqIB3QVbKmtcftfZ/uJYvQjNAVyBhWrDKfQ+GKbjyaoevPJc0Ka
+	 4AgMhyghGMcaChnVviJqLJq5kOlVrDM2qTga7fYeJOXt92tOm4o5c+FWK2WMLvwVjt
+	 VCSCu2nVEKLYZ72KOsKX8koTijbpMirp8j43pIGI2qiWpOsKZfAOs0xTaNDewaWrVq
+	 7OBwoD4vaseugx/KmbsqmR0h0TTliXvi//T23uMb2KS0m0QzGGMNeimJeL0bIytXZK
+	 wRH2OSn+OCRVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C4F1080BC4;
-	Sat,  8 Aug 2026 19:14:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5C0AF6065D;
+	Sat,  8 Aug 2026 19:19:41 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 37B45218
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:14:32 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 3971E10E
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:19:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 296F980BCA
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:14:32 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2B29680BC4
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:19:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qE1siepLMhK8 for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 19:14:31 +0000 (UTC)
+ id IAZ4eK_cVRSd for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 19:19:39 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org EB51380BC4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EB51380BC4
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EB51380BC4
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:14:30 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6a17211b9ecso750730a12.2
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 12:14:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786216469; cv=none;
- d=google.com; s=arc-20260327;
- b=gAj5RG3kh3q5M0BZfwv02MuiXck8oNRISqu+GPo0lw4I3aKwYjtF3EJ8/GxIM0nIRq
- gHW6Td3H6VW1etavZNNQCPwRcer6aeMCW4lUOVWBpswmJKGaZf3vKRgsUautUG1GGnzj
- DjzuASL6Yw4fV6hHgTByzYTD4xljKwGYU1SM0TDmRBHgosus3/1RssbNgbmF5dbKF28Y
- Tr2KD5V9xHkayx1rXdla13FlWAK/5ZoQUiwEY1SsNSpDZb+wK2hf+Kxdc1CHBy6Diui4
- F9s23jkAizifpcJNSHcmHiGxxj25JWdJn2m/nxdTNNHZbKJHQDkfLs1bj9nxjE5vX9XV
- ZWBQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=JGyBGi2yIVXMtjm3WqkE1YhtbqOeaqJEU3zLIH15WWI=;
- fh=q4oTVouPigt8JvBPAjPE1kzymVX6rifNlXhZh/LPiu8=;
- b=FWg3WJatHAnTadm+zvCW9NWI+cV25tXhdhJmleajsBfD6/z0QWCqK+ljfyteVfyzAG
- Va2CBvgrWKydwKdZEbTDx16+a+Dn+2Vsa3rt510snnY6J1/S7yOw0ueFyfqM1GAywRS0
- MJsK93xhqV6niKi5KTu+LktC/8MzJ6Luokq2lKFCJJo1a6a3qHVUg2yKfpupozUIjoJ7
- aQLeV+iYVohwCJQjhidIFj/qvnI45Xsys4XoOigmWAiZncpbyt/0xjBGpsWBUI8dmsR+
- ljfTxrguSFRJCYxhsKPJJ3EXwVXzjlvm86mWWosRyCAmUY7NlW8m1DaArpWV6l24NKhS
- W1qw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::32d; helo=mail-ot1-x32d.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 1F7DD806A9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1F7DD806A9
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1F7DD806A9
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:19:39 +0000 (UTC)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7eb63dbd229so461654a34.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 12:19:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786216469; x=1786821269;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1786216778; x=1786821578;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JGyBGi2yIVXMtjm3WqkE1YhtbqOeaqJEU3zLIH15WWI=;
- b=pLshRv0nRXJD3KLHNILFtda+33u8go9MsH09kXEAxfMvQrJ0hvudbpSVf6TenuEo3D
- ktyOh6qQykXSS+jUZBziZMKaLCOLTPELkhA411uZnjjdr8Pae/zmFSoygmAAoCqTkQ4A
- Rn7zz85jAKCiVrDDYLv6YSu7g3QEX+7J7l+uFuPR/HBIvabngDAHbKqA6ToU/lwc3r+6
- HLrM2zftEvQ6bemtRDpJ7DTb+EQiDObn16zfvfwsgXKNw3va849Ztzqu2aoAEFH5hLd0
- nQfezpirs8q9kogmClyOGejDQQRoIgCvc+4fm3vyuuljzj5wHejOE43ZBs5/BMh/9jb8
- bgkA==
-X-Gm-Message-State: AOJu0YyFvooR8r/dsZdd5GNtKXhX/W9qKCtnzSqPgdzTW7IzgQWiHYGP
- EwAIKSL/1QXh+OynRB2qtVPFIgef+9tB0SECaVg1VjOyMLtwCp32KSriFPNUxwPjiSNABglhGym
- A9yUgeqZtXgu7jg+2DijKY7cEjshvHDLr2MHAZ3QEutGD0Iym5/4=
-X-Gm-Gg: AR+sD1231GivjpEDdgeWHWPcQviE4j1R8FHq4EPN7tg4uxUJEdxeUx6DFkLmVoY4X74
- yGb+cdo/VHP0hTljSMLNgiCMVyKrcKmUjp1NpfB8yn50xiZ/Vu83TOWprkxVEcWTCOz+eCsuE8a
- odudICVHIJYxo9sfUeyuUVMXK2Z1fFr/Hv93tNnzcL+/gv2Rc3pNK5ftXDG5Ddfp0s/OuM8V7u0
- ERf1pYDFq93bhWVeVRA5no+mX6s5ofBbYTLg0Z4HErHpIW8ufiJoQ4IT6AfgmmArzeiGpPWSyd0
- 685bMiuFYgDrmgL+sm65sW5cs/nv1QSf20GGC5pKofs=
-X-Received: by 2002:a05:6402:a503:10b0:6a1:9b21:457 with SMTP id
- 4fb4d7f45d1cf-6a19b210969mr7849341a12.21.1786216468803; Sat, 08 Aug 2026
- 12:14:28 -0700 (PDT)
-MIME-Version: 1.0
+ bh=ngn3IOED/nEkCdSNas6La3EO2QENBiyUpBOkuSauKUM=;
+ b=cNvA8iIoiZM5GEcJz/ykzCrIT/j0UlwCmA9AvttPfXH865g2+gsY+n3a1+2sEsm15Z
+ XYin4E0G7U58mfnnjnbGO1qPByXPzQB/rZwDACDGMWJPNmufiaT4UuRZ10x+lV2U5WB9
+ F8sSOEa25VDv2FE64qGeSMA4knExYphSG5QarXwYdzTpxXujfKTHqfrBzIJ1WHhzaBpG
+ x880XM1rM4WDIKiYU8AxtZr3UCKRHP9Rpi13ZD25Pdt/fRzlDT3DZWvisQ6lR4Uay4BR
+ NPoKN35aedKHDmKTDm2Pkkk7FZxWX5kC5okczpRabeaEdpfZQTSCAMFRoXfyrK6c21Yq
+ SlcQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoswzOOgQ0IQoKX/B8S6uuonWrb1V7kUTGO6B8RAYs7TKrVSkwmeJ/e/syTvuB/wTWO3TAQznk=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yy2kHSSYa5mUhUOIpio+rM/z2qZZv5LHzrPE7TP7hU2kMnAkbfz
+ WMAbpTp0A+FJUc2ux7As6760YVcowFZXIddM4Fn4+hiFUyQqjCIMPLsu1d8KdTPO/xo=
+X-Gm-Gg: AR+sD13ocG/s5FiamNOjpU4U5jdSuhQa7mKB6I85Cb9pUOK9LuXS2hM+wpWeKpccSQ1
+ 2nFeafO4fidlTZBvMFwMKofehRJEbEQIFD3q2uGn1wFr5kTdkJsu+kuo5e/BuxyMHi9KcfThJst
+ VJf14ZTyWTJO68earbcuPFsWzAGHcVsRkPq51KQyLQn72pomBzdrbdjt5uSbMqprzaU/4ABUbhM
+ ezhbmwPKiElv2Y0zarrJlnR1KrSC6QRIkviQTVKDmGw6JzgPi97JDYVeGjt17xbCZdDKbFFcca+
+ eUde9uBxMjcQHkZDmfn5fZ0MPjJyYcr50mo25ma3EBExwuJaFdkjj/Ze32CWTKq4qVeYEnmk71s
+ s1haaaUk+aMlDIy3e/py9HuKGh3SlIICgHuZSuZ4YIVFHG2tARWgVIU+6ZzVI2ioNh8IXImhtor
+ LxjLkjhKORgmyzkbYIadAy+AgZvMcPLy077IYJJIrj6jAGG4owGajOobYgAZH03aXHubtBPAIXM
+ 2tvXtweAQ8lWtP+auq+f8+9LNh9WWX///zJKATwa9V0hyjUUWeQQD0cfnGkwqu+0U/NWO7G0Ecs
+ kEQyixfE4A==
+X-Received: by 2002:a9d:6c97:0:b0:7f1:e04d:fc4e with SMTP id
+ 46e09a7af769-7f36c10f8a4mr1547490a34.2.1786216777951; 
+ Sat, 08 Aug 2026 12:19:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f35b7c4ba7sm3909018a34.23.2026.08.08.12.19.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Aug 2026 12:19:37 -0700 (PDT)
+Date: Sat, 8 Aug 2026 13:19:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
+Message-ID: <20260808191935.GC394392@bill-the-cat>
 References: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
  <CAFLszTiJK9JFDe30ZfaXkZvmNUfWUVmC8ZVLU0b-7vfTsHaQ5w@mail.gmail.com>
  <CAKTNdwHyab4T-02-YjSHqmEVHYVXmZSZ9FqYWzpvUpt63UUHEg@mail.gmail.com>
-In-Reply-To: <CAKTNdwHyab4T-02-YjSHqmEVHYVXmZSZ9FqYWzpvUpt63UUHEg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 13:14:12 -0600
-X-Gm-Features: AUfX_mxegqJfgNegDUsXZEEu5ArY9LKhcXOIc1MytISVL1mjzOoN_SjIycn-xEQ
-Message-ID: <CAFLszTjPmx=TqeeG6JfkdGsXOQ9uHYQAH_txWM0koGiqpKnL6g@mail.gmail.com>
-Subject: Re: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <20260808181058.GB394392@bill-the-cat>
+ <CAKTNdwHED5XzQc4vQX7k_R-+O_0ae3q__w-tG5mfViPgBXW67g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qxMVdivAdiEyTNIg"
+Content-Disposition: inline
+In-Reply-To: <CAKTNdwHED5XzQc4vQX7k_R-+O_0ae3q__w-tG5mfViPgBXW67g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786216469; x=1786821269;
+ d=konsulko.com; s=google; t=1786216778; x=1786821578;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=JGyBGi2yIVXMtjm3WqkE1YhtbqOeaqJEU3zLIH15WWI=;
- b=drsm6Nrjkbt73mL4MSf3RnjKvU4R7w5z9WICM4Q/2BDeIcNLWwHYxxlQDJzZqBh3bS
- vtdOPsEEobuwIvHCblzTE/qpIyzqNCs9qES2/m5bVF1DdMTH2D4kiMN1K0PkZhjFsEhI
- 49OnW6Wrgfy4fgXFc7R8MgDSSG4ZXGsqfn2rM=
+ bh=ngn3IOED/nEkCdSNas6La3EO2QENBiyUpBOkuSauKUM=;
+ b=R2J+V1frJGJ1erX6nmTAONaGTZV+kpO78SfXMweHt/fAQOcmpRuUPMrN75u4wPgMiC
+ 1gCUZ7fh/CwtteYufMrw8DIzfrADwU3917rJx0a3/mf68vYXPqefaJ//g2Mx+2H9hQX3
+ 3OOzTW0CD7t2qVq5SB97AWI33UJRj1Vrj6MVc=
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=chromium.org
+ header.from=konsulko.com
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=drsm6Nrj
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=R2J+V1fr
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,70 +135,109 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Alexey,
 
-On Sat, 8 Aug 2026 at 03:09, Alexey Charkov <alchark@flipper.net> wrote:
->
-> Hi Simon,
->
-> On Wed, Aug 5, 2026 at 11:34=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Alexey,
-> >
-> > On 2026-08-05T14:47:38, Alexey Charkov <alchark@flipper.net> wrote:
-> > > pylibfdt: Grow the FdtSw buffer geometrically
-> > >
-> > > Every expansion copies the whole tree into a freshly allocated buffer=
-, so
-> > > growing by a fixed amount makes building a tree cost time quadratic i=
-n
-> > > its size. This is especially painful when assembling larger FIT image=
-s with
-> > > binman, as it assembles the image with the data inline.
-> > >
-> > > Grow by at least as much as the tree already holds, which is what var=
-iable
-> > > sized arrays usually do specifically to avoid such excessive copying.
-> > >
-> > > With this change, building a Rockchip TF-A+Falcon image whose FIT car=
-ries
-> > > a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itself d=
-own
-> > > from 25.3 s to 14.0 s, as 7139 reallocations become 187. The images
-> > > produced are byte-identical and the binman and dtoc test results are
-> > > unaffected.
-> > >
-> > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> > >
-> > > scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
-> > >  1 file changed, 6 insertions(+), 2 deletions(-)
-> >
-> > This is a _shipped file from upstream dtc, so any change here will be
-> > reverted on the next resync. Please can you send this to the dtc
-> > project first (see https://github.com/dgibson/dtc) and reference the
-> > upstream commit / PR in the U-Boot commit message, similar to how
-> > a63456b9191 links to dgibson/dtc PR 154. Otherwise the improvement
-> > will be lost.
-> >
-> > > @@ -808,7 +812,7 @@ class FdtSw(FdtRo):
-> > >          if check_err(val, QUIET_NOSPACE) < 0:
-> > > -            self.resize(len(self._fdt) + self.INC_SIZE)
-> > > +            self.resize(len(self._fdt) + max(len(self._fdt), self.IN=
-C_SIZE))
-> >
-> > Logic looks correct - doubling gives amortised O(n) total copying, and
-> > the INC_SIZE floor keeps small trees from taking many tiny growths.
-> > Nice measurement in the commit message too.
->
-> Merged upstream: https://github.com/dgibson/dtc/pull/189
+--qxMVdivAdiEyTNIg
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Nice, that was quick!
+On Sat, Aug 08, 2026 at 11:12:47PM +0400, Alexey Charkov wrote:
+> Hi Tom,
+>=20
+> On Sat, Aug 8, 2026 at 10:11=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Sat, Aug 08, 2026 at 01:02:02PM +0400, Alexey Charkov wrote:
+> > > Hi Simon,
+> > >
+> > > On Wed, Aug 5, 2026 at 11:34=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Alexey,
+> > > >
+> > > > On 2026-08-05T14:47:38, Alexey Charkov <alchark@flipper.net> wrote:
+> > > > > pylibfdt: Grow the FdtSw buffer geometrically
+> > > > >
+> > > > > Every expansion copies the whole tree into a freshly allocated bu=
+ffer, so
+> > > > > growing by a fixed amount makes building a tree cost time quadrat=
+ic in
+> > > > > its size. This is especially painful when assembling larger FIT i=
+mages with
+> > > > > binman, as it assembles the image with the data inline.
+> > > > >
+> > > > > Grow by at least as much as the tree already holds, which is what=
+ variable
+> > > > > sized arrays usually do specifically to avoid such excessive copy=
+ing.
+> > > > >
+> > > > > With this change, building a Rockchip TF-A+Falcon image whose FIT=
+ carries
+> > > > > a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itse=
+lf down
+> > > > > from 25.3 s to 14.0 s, as 7139 reallocations become 187. The imag=
+es
+> > > > > produced are byte-identical and the binman and dtoc test results =
+are
+> > > > > unaffected.
+> > > > >
+> > > > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > > > >
+> > > > > scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
+> > > > >  1 file changed, 6 insertions(+), 2 deletions(-)
+> > > >
+> > > > This is a _shipped file from upstream dtc, so any change here will =
+be
+> > > > reverted on the next resync. Please can you send this to the dtc
+> > > > project first (see https://github.com/dgibson/dtc) and reference the
+> > > > upstream commit / PR in the U-Boot commit message, similar to how
+> > > > a63456b9191 links to dgibson/dtc PR 154. Otherwise the improvement
+> > > > will be lost.
+> > > >
+> > > > > @@ -808,7 +812,7 @@ class FdtSw(FdtRo):
+> > > > >          if check_err(val, QUIET_NOSPACE) < 0:
+> > > > > -            self.resize(len(self._fdt) + self.INC_SIZE)
+> > > > > +            self.resize(len(self._fdt) + max(len(self._fdt), sel=
+f.INC_SIZE))
+> > > >
+> > > > Logic looks correct - doubling gives amortised O(n) total copying, =
+and
+> > > > the INC_SIZE floor keeps small trees from taking many tiny growths.
+> > > > Nice measurement in the commit message too.
+> > >
+> > > Merged upstream: https://github.com/dgibson/dtc/pull/189
+> > >
+> > > Shall I spin a new version of this one to mention the upstream commit?
+> >
+> > Yes please, and are there other changes we need to merge in from
+> > upstream as well, in the pylibfdt portion?
+>=20
+> I've also added public accessors for address-cells, size-cells along
+> with add/delete methods for memory reservations, which David merged
+> earlier today [1]. It would be great to pull those in, too, while we
+> are at it.
+>=20
+> They are useful for the Falcon mode via TF-A series I'm working on [2]
+> but haven't yet posted the new version due to breakage in am335x_evm
+> which I am yet to fix. I could send them together with this change
+> here as a separate mini-series if that works (i.e. ahead of the Falcon
+> changes which rely on them).
 
->
-> Shall I spin a new version of this one to mention the upstream commit?
+That's good to know, and yes we want them. But I'm asking if there's
+other outstanding upstream changes to bring it?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--=20
+Tom
 
-Regards,
-SImon
+--qxMVdivAdiEyTNIg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaneBQwAKCRAr4qD1Cr/k
+CrUmAP9idZQB+75wPjRt9wa7a5ZQLCxfg65ILdj8GipRaJm/dAD/d7lP6uGv/RA3
+qOQVuvi5HPSBKmLVZR1v559EXjFCaA8=
+=Tf3c
+-----END PGP SIGNATURE-----
+
+--qxMVdivAdiEyTNIg--
