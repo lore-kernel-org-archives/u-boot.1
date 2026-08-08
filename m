@@ -4,127 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05818C5AC67
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C00C5AD2C
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:57:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5499C4064F;
-	Sat,  8 Aug 2026 17:49:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1BC6A40497;
+	Sat,  8 Aug 2026 17:57:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id INZiFwycaKxf; Sat,  8 Aug 2026 17:49:09 +0000 (UTC)
+ id 4fKYb015PG3O; Sat,  8 Aug 2026 17:57:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 24E42405FF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 51C5740475
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786211349;
-	bh=8M3K8/j0kRI0M4/OXV7de4vmClucGbePCe+F9iFJKus=;
+	d=lists.u-boot-project.org ; s=default; t=1786211843;
+	bh=R7gOgKsYyQmjUvFVPrU9f0CVplObDOgQ9hnZGCBzPnA=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WGa2cBxWQwIB+TKbdIaXXt6oYNzClGnrA3PJEcYi6smBB491aD+slOgloBgbelP4M
-	 52gU1rvzcLgIrVE4DKrhTBZqWJRh7wU6W7QVN19Q4RT+7P4F0klPHxqlHyqdfyMhAb
-	 U65G8sjZWEiO/2mbLkEguK4zAyGVIyjlbtci8gargM83l5n4VYw2ds5BVKwGRur20m
-	 cAbRDrSTZ64fUeyz9VZH2pYQoyhnpSFytKJYnoGatIHQqrViAebRHg8pphfL6qFYxs
-	 w8fw4wQ60S8YL02VSp0Qu9vXUqlLoD9/G66x7Nm4KgIdI7iSXG7n6wAvwGjkHeLej2
-	 N0imIwWnqOx/w==
+	b=ql3H3RuFGWk8Eh6EP+HWWribg9f3J8YTMrFqe5tNoTgAXNhEvILXWxfjZgmRkpass
+	 BQohW/RBJXRBtzc0rJy/JWdEnRlJf5WkHJgW1jCTverFXlXZakBSNrT9ZP4hZ3I25E
+	 Dtc/j8NW8eSQZnSqMwLN8Vlml8Au4tRbiSegG3sgO34bvo9hg1bA21OnKMNVB959Ps
+	 8Ph6QRJ0O1Rp/CH5xCGBX6hChCOBD0NrcGLpdW8HSyVnjMFY2yaZhNbDh1VvBSre7c
+	 b0wsnt2Q+vs8woNWcgohj+wiAixz9FqBMKSTOtQndJdE4o6loQv1LFTYwRRnMUjzB3
+	 PVit9cFvensyg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 24E42405FF;
-	Sat,  8 Aug 2026 17:49:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 51C5740475;
+	Sat,  8 Aug 2026 17:57:23 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8A446296
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:49:07 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 9CA4340A
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:57:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 77D70405FF
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:49:07 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8D6E94046D
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:57:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3uoTjmIlt8yf for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 17:49:07 +0000 (UTC)
+ id 4vBUGyGlXY49 for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 17:57:22 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 9AB6D405CC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9AB6D405CC
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9AB6D405CC
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:49:06 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-69c5fda04a8so819826a12.1
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:49:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786211345; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8F0EC40473
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8F0EC40473
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8F0EC40473
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:57:21 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4aa99bdso597528a12.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:57:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786211839; cv=none;
  d=google.com; s=arc-20260327;
- b=jawEpCKOn9u1z3T/9R4vkLHQjWq8P1JaKdohDBpJbZ4fVZurTgAWLwT/3/3azt/kJD
- nXmzViRBsggWQq8UxULkGYm7m5OpxQ+pa6NvEGawocFXdVotUWlrHxCVG/xsAGmw+lZ6
- IxN7qx3m5QGL9zENQXfStByaNvVmE8jp8Fkbc8XF4GC/7lgtixlue+7QIfc5GpUkQr3N
- XHN7ulYU0VfaXekGAcsMZxPB0fhpkW9VouLmelRQHIaqVzaMJCXgeYrlTaf7wdCGX/Dy
- 85FKG9Z6EKFewcrUdsNOgYfZkgllZaPIns7vWtk0nv6HiK1v61ATmm384D6moIsfcv6Z
- 869Q==
+ b=DsCrk++/E6fAojf+3J12R7bWkrCr0ArlQxAOyt0SYRtmtkWHAjN8Z+lwatCqTIeJi0
+ Lg3pIAN3BTbZwXbnjRUnPPPdII5rizui7kQ40Ez/5URSNirj09lnv5O2X2WwP5lUcMb0
+ JR7rNKl0zJpe0luvzTpF81/7gInGi87TeN1oji+b5ahnHPSBhvd8TQPeVp8fqzD6LXqn
+ XCSV3gYNP39IM3qiODjXuao+IkvX4BPGfd8oOq12M2RKxPxr8ov3rYPx4apwqQc6D0sy
+ wViij+JtNHm1pq7QFkFag6z39Yko7EPupSP68BskDY+25qfAQxLGe1bRifXf58m4kOqx
+ vRLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=8M3K8/j0kRI0M4/OXV7de4vmClucGbePCe+F9iFJKus=;
- fh=qpl1R5oyLDHrYwZo56n7zf1ddBj2+zYDxUllAj6kB/g=;
- b=RWTNMPwQSAILXHHKwRDGZ80uOF27NVWM10rqHxpZ3vogujWOZ9ud7Bil0X7Sq4EzCi
- /DCxTn0GefrKJ4kxFehjyg38RPg4zevGju+uPi6pSYxoLEAcVbIPWG/4ncb1XZ+Izrm0
- N8hx5ZGkUsADYsUSPC41VxzQTyvV6Z4Rruzkvg0aWhu19TDHpmy5x5zzSehmK6ABflCr
- YQeejzj2CwCOwQ3Em0/73+saSpuFICs5D8sj5g91DWe550EcV6qfpZsA2TfToe3ZGvvg
- k3Ps8rVn/RdjM8RPao9rDTfWy5ReKMhNj9T0FOKdwLGrlRDEOqXuZrsLgQjdvGUotS9K
- 0mSw==; darn=lists.u-boot-project.org
+ bh=R7gOgKsYyQmjUvFVPrU9f0CVplObDOgQ9hnZGCBzPnA=;
+ fh=8TbiD9fEG91wSNsvqqOput+PpnqsIRDXX+RXlsylxJ4=;
+ b=XiL+45gzISHDyYqB+En+b/Cx+BmpLR3bTJZOk6kyaJCnB9rNNPjGTIJ+OKXXtTaGer
+ /zmiUjrrTSwoWXjKWBYb6AIMSaV9IYDhVf5DTQ2YP2+yKlblfcudD1iozTCMJonIUCgX
+ uPXkL4utb8n2aF0gdNDbfO8uDqW1Qvc90y0/R5dPzx1wJIrMQ6ni44CPDhxpII3ufPS3
+ FjzOkoifZ3cce+BllS1UHin009CZxGK8yG4Ty5oKMdfrI5T4MVDUVkNVd1ASclRX+c1F
+ WeNQtdYneY1KvSM345OJwb+lIqfApJycT5qLzFdDpD6a78Qg2MwCqFIwAvUD3SGEKWzr
+ j1bw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786211345; x=1786816145;
+ d=1e100.net; s=20251104; t=1786211839; x=1786816639;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=8M3K8/j0kRI0M4/OXV7de4vmClucGbePCe+F9iFJKus=;
- b=d/oD+EHj4XutxK1QCxqq+GFFBmcOk16T8y2wR9y+MhuHByWkww1o2wH8XaEzDMp1D/
- 0J74JGqEIQ9ph+PFe2J2aAolgqx+rCE5inNj4QRn/Wjl/XfkgZ6DYp2uQZ4FLx6CrfjF
- ikqQa7RJjsotlSjQjiUk77MaiIQf6mrC5r1OZgBByKAgV4gBA8fl3RWn7415RJFHrb8e
- EUpluhT3uDLCDPI/qCXlwJ2yY9rhZThV14dSOdpLcqQaR9UZH45WtrKiM7xKteekuuvi
- L/Q8eUm+yjksZPYYWnA/QMNArIAMbJD08JAWJsbbIi/MzZSPQVTEgulTuYYCg4Bk2wnD
- OqNQ==
-X-Gm-Message-State: AOJu0YxwPjVIPOeCtzWxy91IQETh489A+ghIlFISQ3aoLasUaEJ3qQvG
- IrlN8rBWLooyZQRE1HTElNxLKVyTP4kOZoYAwnZIShqZUhrv7ardbPDa7b/FGvMHXatJxUCucLB
- bNYtoN1PZTYkoClkGK3ZBjCcIG70JR2Aj6Ao2xpb2dSiPQnwTeV4=
-X-Gm-Gg: AR+sD13Xa45AkTtUO7w1Dm659k0LrdNeh5ZoWgnXUKWHbxyyqN7opkk48+8/9OwMZzm
- 1vH3VkCOzqf7rqXbuSyt8ecSwC9Mv/dTJRYukvcrEdq7x309yI/LkFClMpUlkQip2Rf5NmQgwQ7
- fCB8wcKindFaJVLVN32LsNBEEdIiLax3FA2Lfkn073JY9Smnii+DFdWYLO+plFlomGsmFO8UJVn
- VTD95mTgRMEHPmFDwwdkAmHI0eEq2b2fauVSrbWwk46CEwBEHIbG8yugzo/huH4UnYEVAX+KeKf
- L85DjmdhixxWDGNRoG0JtJocwI6vqba8Bossv1IE9EMqjcjVcJQzEAQ=
-X-Received: by 2002:a05:6402:21d8:b0:6a1:e59c:62bd with SMTP id
- 4fb4d7f45d1cf-6a1e59c6678mr5503022a12.3.1786211344683; Sat, 08 Aug 2026
- 10:49:04 -0700 (PDT)
+ bh=R7gOgKsYyQmjUvFVPrU9f0CVplObDOgQ9hnZGCBzPnA=;
+ b=iBtHa99hV55vrfL1NztnGG/6QpngA1rbKaCwjDCZYNAeU8pKJwm8xr7JTT+xLwVFRU
+ s5UKye0ub9Lv1xMLMjyn6hZNLIhXXc/+0jSzkyf87E0dwvBtykaL/3mmZy8tdzo4aFan
+ TZ2tuEB/LZPatkpka4PTU/WUgSijf8tBmLipf6gGIyV8DnhZfo8+bgkYwoN8DTpayHYA
+ WLzP07CO/6GnL7QI8PYN+JDLOxiaoGmrXy86vP0erSr1ETl00cSsmEG4eBU7BLBoHR+4
+ LZBgzEdyrkSSsEQ6ygUJ4lUAFnRmsyHBJQHWx9EQ33ZdQQxqRjQNLPJVvt8SEti3DtnR
+ VcEA==
+X-Gm-Message-State: AOJu0Ywxw+Xowi9V9TTWMfNx1QiiCXrqqo7OIIGG4wfxISwH/V7aL7Bv
+ dunLGlN68zHmhiH+4Y19QFaVm7/ABbiqN65lbP0DcFpUbphgMcTI1XZnNehdFgh86jPNWR4do4Y
+ 91K3Xvn5b/WHlZslcz9w0RccMxwYOOp044mIWUlwQ
+X-Gm-Gg: AR+sD130v7U9P5d6apD9R2r3c2UMDj0Lqh9G+qRAG59vzY152PYu5PMDK1tsrqPLLE8
+ +gIydd+kGssaGBSdMoJlFRVKYft72XotZ2LbaB+TrVqi+NcUH/p1l8COVbp42RP2yD3C103rrLh
+ PhlocsM9ox9bxXSRVH8q5rypDsnVwrQb90LfBPxeVKvhZI566toKwPkSUkLh22DbyP4Dly010nI
+ KXZOae80Z+38IZgQRVtnTX4alV6VJny2oBvBGb3Z98sBu/b7OueLKhsUQKYD7BBy/81tICGNFVM
+ gXlxcRKFuJwWEhVdgPBFm3bVK9xJRm5niIo9DISxqYI=
+X-Received: by 2002:a05:6402:43c7:b0:698:6084:db7f with SMTP id
+ 4fb4d7f45d1cf-6a14f138ae3mr16160801a12.10.1786211839546; Sat, 08 Aug 2026
+ 10:57:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260729082350.2276234-2-dmukhin@ford.com>
-In-Reply-To: <20260729082350.2276234-2-dmukhin@ford.com>
+References: <20260729081218.550465-1-pranav.sanwal@amd.com>
+ <20260729081218.550465-2-pranav.sanwal@amd.com>
+In-Reply-To: <20260729081218.550465-2-pranav.sanwal@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 11:48:50 -0600
-X-Gm-Features: AUfX_mwxIpCP6vtXzXMYdMvOFi-bPgXZ9jAl3ECQxECGNygF1oyPXeeYVuva_ks
-Message-ID: <CAFLszTgPDptKG0Xi4+ESA5zweMW-5fxv1B=bFnCM4zziQC4n=g@mail.gmail.com>
-Subject: Re: [PATCH] pytest: fix out of bounds access to bad_pattern_ids
-To: dmukhin@ford.com
-Cc: u-boot@lists.u-boot-project.org, sjg@chromium.org, trini@konsulko.com
+Date: Sat, 8 Aug 2026 11:57:06 -0600
+X-Gm-Features: AUfX_mxh3_fMxwmZrJ7quKLOrxZ1tm_4LD_hBk-prO8a_TxSX_IeBCmW2RjYY-o
+Message-ID: <CAFLszTiGUcTjYt+4L7witP_wwPsUKcGnQMenLT9yid5ikxfwXw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] gpio: uclass: log when a gpio offset is already
+ claimed
+To: pranav.sanwal@amd.com
+Cc: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786211345; x=1786816145;
+ d=chromium.org; s=google; t=1786211839; x=1786816639;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=8M3K8/j0kRI0M4/OXV7de4vmClucGbePCe+F9iFJKus=;
- b=e7BGUBCKR4A8Fy8TmFmTlPP2UJ7xMqdL0sGaykl9/rS/3oxmONkdx5YatkIQZ5rwaL
- aqIAff68t/QSYHckfwdFueEkn1LvABS7rvrMPNSUJcnQ1PwPz4NK19CeJYPU7Zhad29/
- 4sIeBrqhih2ue1Le3G1ZgXJM05Ri19dESg/2k=
+ bh=R7gOgKsYyQmjUvFVPrU9f0CVplObDOgQ9hnZGCBzPnA=;
+ b=fwTL2n34XFzoy+awB1E17Dr/PsgHZvLANT+JBrkjUjLOagDvyBGc+hLsLQ+de+RcH7
+ OCTcGET2WBEcafvZ1bsXL9ZaAfpjOVlI6PdK4GA5eh+YFG5E/V2mh90BcpUFx9sv9p5o
+ DHg9ifDoV4I38QrlzlzpQJ54ZpCPL7O2yBq70=
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=e7BGUBCK
+ header.s=google header.b=fwTL2n34
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,59 +141,20 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Denis,
-
-On 2026-07-29T08:23:51, NG, BOON KHAI via U-Boot
-<u-boot@lists.u-boot-project.org> wrote:
-> pytest: fix out of bounds access to bad_pattern_ids
-
-Subject is fine, but please sharpen the body: with pattern_lab_mode at
-index 1, every bad-pattern index is off by one, so the wrong id is
-reported and a match on the final bad pattern indexes past the end of
-bad_pattern_ids.
-
+On 2026-07-29T08:12:14, Pranav Sanwal <pranav.sanwal@amd.com> wrote:
+> gpio: uclass: log when a gpio offset is already claimed
 >
-> Current logic in ConsoleBase() mislabels every bad pattern and walks
-> pattern past the end when the last one matches.
+> dm_gpio_request() returns -EBUSY when the requested offset is already
+> claimed, but gives no indication of which label already holds it. Any
+> caller going through the uclass API directly, rather than the "gpio"
+> command, has no way to see this at all.
 >
-> Ensure out of bound access to bad_pattern_ids is handled correctly
-> while processing test console output.
+> Log it at dev_dbg() level: silent by default, available when actively
+> debugging with this device's debug output enabled.
 >
-> Fixes: 8308a5eed6e6 ("test: Introduce lab mode")
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
 >
-> test/py/console_base.py | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+> drivers/gpio/gpio-uclass.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 
-> diff --git a/test/py/console_base.py b/test/py/console_base.py
-> @@ -212,24 +212,24 @@ class ConsoleBase(object):
-> -                    m = self.p.expect([pattern_u_boot_spl_signon,
-> -                                       pattern_lab_mode] + self.bad_patterns)
-> +                    extra_patterns = [pattern_u_boot_spl_signon, pattern_lab_mode]
-> +                    m = self.p.expect(extra_patterns + self.bad_patterns)
->                      if m == 1:
->                          self.set_lab_mode()
->                          break
->                      elif m != 0:
->                          raise BootFail('Bad pattern found on SPL console: ' +
-> -                                       self.bad_pattern_ids[m - 1])
-> +                                       self.bad_pattern_ids[m - len(extra_patterns)])
-
-The fix is correct. Please hoist the length into a local so the offset
-arithmetic reads more clearly, e.g.:
-
-    extra_patterns = [pattern_u_boot_spl_signon, pattern_lab_mode]
-    base = len(extra_patterns)
-    m = self.p.expect(extra_patterns + self.bad_patterns)
-    ...
-    raise BootFail('Bad pattern found on SPL console: ' +
-                   self.bad_pattern_ids[m - base])
-
-Same for the main-signon block below. What do you think?
-
-BTW while you are here, please double-check the other
-bad_pattern_ids[m - 1] sites in this file - the pattern is only
-correct where exactly one non-bad pattern precedes self.bad_patterns.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
