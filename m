@@ -1,56 +1,56 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D71DC5AD44
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 20:41:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66EB0C5AD44
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 20:45:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1947080B3D;
-	Sat,  8 Aug 2026 20:41:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 05CC5605EE;
+	Sat,  8 Aug 2026 20:45:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UaF-v37SuDeB; Sat,  8 Aug 2026 20:41:51 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id H9-4sKiXGD3o; Sat,  8 Aug 2026 20:45:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 86E0680B11
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 04A6160638
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786221711;
-	bh=he8jub8cLJgcAfjUILqNbf1IS/zmg6kNl8hZLLW0zWE=;
+	d=lists.u-boot-project.org ; s=default; t=1786221940;
+	bh=t4BhFzm+AQk0nN59T5N63aN13uFciOG6PzvSRJAyskk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aIAa1wfdwwftz7w7wwl98KHb7NF1nB49O6aNDainHAYVsVcqMGETcITMIR/ipgARH
-	 10vzNMggcfxLIOq4ftQ5j9cnuUI7z0CywUgX2IxhXK/dVV2/9GSzWGd9Itazio5IFp
-	 LgT/+m+ZbnQTAqb7JMPVr1pQJrLZy8g0Z+VcZTltKBElKGG3GhgdWNqc/KsloVS+W1
-	 eULliZZrSSfMcLRT2PbhrVlFof2AMrO3Abokf6eO96ZI8Eyne7PGecwVVu459orp5+
-	 71lczV6Ad7whqu1tNS/t9VycGEMoNqKB55dxDJdt+MAtf05emh1Hta0fjvEXMoUjpa
-	 qanNsO4yZVbZQ==
+	b=fqjYxLqeSRkJ89AHUdPU+qz1KQUAw0kmmwfKbM+hOahzo5I8flnaQ1P5uUBD5B4Qb
+	 TwRxPMbqgJdqfdJOHYoSt0Imem8EJ7NVt06Xfb360CNWnVDlH0CFB/G2WcE+YiesGU
+	 7ySChPG6C9W+9mBYBmUQXQtMpMgRS7FJYTEOXkQ+RpO0fvMhq6NKOKzVAZ8qsgkOlK
+	 YK+k9r6dqz0Ju2VPlB8kstJD9IOmgHTt5ix31HeR/86iD1iovaQwQ8c8Vi2vgsqwTC
+	 CFFmt1Fl5ErND+bwhpKDjTyJeHZFOEM3zlmKeOUN+FVvwf56mumRWMFWH6QZcG8YHH
+	 SRkirTwjPy1aw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 86E0680B11;
-	Sat,  8 Aug 2026 20:41:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id C65AA296
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 20:41:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 04A6160638;
+	Sat,  8 Aug 2026 20:45:40 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 546FE218
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 20:45:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AC239403E4
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 20:41:49 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3AA5C403EB
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 20:45:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wIc_oVcsVlKe for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 20:41:48 +0000 (UTC)
+ id kuLcpz4K2Itf for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 20:45:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=b70c=gc=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org E75794034F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E75794034F
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4397C403E4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4397C403E4
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E75794034F
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 20:41:47 +0000 (UTC)
-X-Forward-Email-ID: 6a779482bc4c5c3a0ebab63d
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4397C403E4
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 20:45:37 +0000 (UTC)
+X-Forward-Email-ID: 6a77956ebc4c5c3a0ebab87e
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 2.13.10
@@ -58,42 +58,45 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <799cedbc-9569-4865-90a8-14ce779825ac@kwiboo.se>
-Date: Sat, 8 Aug 2026 22:41:36 +0200
+Message-ID: <c7f337f5-6a14-4f90-81c3-eee1b6ddc8e0@kwiboo.se>
+Date: Sat, 8 Aug 2026 22:45:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] clk: rockchip: rk3506: Fix CLK_SARADC set rate issues
+Subject: Re: [PATCH] rockchip: px30: Fix TPL_STACK overflow into BootROM
+ reserved region
 To: Simon Glass <sjg@chromium.org>
 Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
  <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, u-boot@lists.u-boot-project.org
-References: <20260803190946.2259514-1-jonas@kwiboo.se>
- <20260803190946.2259514-5-jonas@kwiboo.se>
- <CAFLszThN9ivtWft4VcM6SHZ8-yorzgsOqyFSqVTgsxV_3oq7Rw@mail.gmail.com>
+ u-boot@lists.u-boot-project.org
+References: <20260807090431.464978-1-jonas@kwiboo.se>
+ <CAFLszThA3502QnQxSGyQL+WPEz3tovqE8VA7512gjVKUPSBMEg@mail.gmail.com>
+ <a1436f49-823c-4708-b640-92c67fc6362d@kwiboo.se>
+ <CAFLszTgso=ayEMwx+cF9FDPis1VmO4yQYH+3qoxWbah_GSnfug@mail.gmail.com>
+ <da12d1c4-d3bb-4b11-82c9-1210ee1ac97f@kwiboo.se>
+ <CAFLszTiLeLB-OB_2oXZFNV2Qe+O1LV9PLBjXrtGNNQGg=jsL+A@mail.gmail.com>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszThN9ivtWft4VcM6SHZ8-yorzgsOqyFSqVTgsxV_3oq7Rw@mail.gmail.com>
+In-Reply-To: <CAFLszTiLeLB-OB_2oXZFNV2Qe+O1LV9PLBjXrtGNNQGg=jsL+A@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1786221707;
- bh=he8jub8cLJgcAfjUILqNbf1IS/zmg6kNl8hZLLW0zWE=;
- b=XpG9P94Mcuwl9UbSgAuhi6XJ0OqT2ZAABy80LW4bXoZQ2fCfBobJdE0FFUoBIKPZkTfngBx+v
- k7Us5F1tIPc1KYKPMUFbxopA2QDrMiII/g5jpF2a8f0ODZF0RuXUS658AL0PjHNS3lD8D9yDzFG
- 66/bP/tr+evHp9zBjIiPT5LzFgynmNrZwMLCyPoJVtzfG7hkYUFzIHYYFB/7G0WFBlYprFLlH+3
- pZ8Ho39jI10p22fgTR2/esM8+78mMNwCJtNuooMeF/LNuqsp6VR87ZNss/elbX5iDfXKKMhiYT7
- C3r2vvBwtLljQQ4KUeghT7bnjy/E+dTUs623i8v8sQAw==
+ s=fe-e1b5cab7be; t=1786221936;
+ bh=t4BhFzm+AQk0nN59T5N63aN13uFciOG6PzvSRJAyskk=;
+ b=upVtwbETyZ0Ydc7oE+2Q9kE71yaj3QzB/svvsFg+CewsoGLLiNRCa10NXgFUggcrx9AZJe2xJ
+ fpVWiOf/jKAu3ZGRbB8r815jISQ2PhwhCC+0IgoswIHoWnagfj8w7DBqSgsF2zXRXBqfW26rg9L
+ rNPHh9mxgrG/GkepjDeRhgpVZUWZx3DWFFYMhrW2OxchlkJdBqvoDhSJvVcucvpsr1MMnTcf3VV
+ FzEzLpkUW+YljHw7jdlN373zQ8NefSTWq82I0zVuVVzOP8ucyiCGdh7WkbYwuQM9GRJ3AzJh9As
+ Vls9iI4kXLQ3zn32XO2helF+/bcldZQZCyqmFS8GqEMg==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=XpG9P94M
+ dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=upVtwbET
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -110,93 +113,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi Simon,
 
-On 8/8/2026 7:39 PM, Simon Glass wrote:
+On 8/8/2026 3:52 PM, Simon Glass wrote:
 > Hi Jonas,
 > 
-> On 2026-08-03T19:09:38, Jonas Karlman <jonas@kwiboo.se> wrote:
->> clk: rockchip: rk3506: Fix CLK_SARADC set rate issues
+> On Fri, 7 Aug 2026 at 17:06, Jonas Karlman <jonas@kwiboo.se> wrote:
 >>
->> The set_rate ops for the CLK_SARADC clock in RK3506 clock driver
->> force use of 32 KHz or 400 KHz rates when any requested rate is
->> divisible with 32 KHz or 400 KHz.
+>> Hi Simon,
 >>
->> Adjust logic to better match the 32 KHz, 400 KHz or 1.5-24 GHz rate
->> limitation of the CLK_SARADC clock in RK3506.
+>> On 8/8/2026 12:00 AM, Simon Glass wrote:
+>>> Hi Jonas,
+>>>
+>>> On Fri, 7 Aug 2026 at 15:41, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> Hi Simon,
+>>>>
+>>>> On 8/7/2026 10:40 PM, Simon Glass wrote:
+>>>>> Hi Jonas,
+>>>>>
+>>>>> On 2026-08-07T09:04:31, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>>> rockchip: px30: Fix TPL_STACK overflow into BootROM reserved region
+>>>>>>
+>>>>>> The PX30/RK3326 has 16 KiB SRAM at [0xff0e0000, 0xff0e4000), with the
+>>>>>> initial 4 KiB at [0xff0e0000, 0xff0e1000) reserved for BootROM at boot.
+>>>>>>
+>>>>>> SRAM addressing only seem to use 14 bits, meaning that reading from
+>>>>>> 0xff0e4000+ wraps around and instad reads back data at 0xff0e0000+.
+>>>>>
+>>>>> Typos: 'seem' -> 'seems', 'instad' -> 'instead' and 'possible looks'
+>>>>> below -> 'possibly looks'.
+>>>>
+>>>> Thanks, will update in a v2.
+>>>>
+>>>>>
+>>>>>>
+>>>>>> Using a TPL_STACK at 0xff0e4ff0 (16-bytes aligned) means TPL use BootROM
+>>>>>> reserved region for its global data, malloc area and runtime stack.
+>>>>>>
+>>>>>> TPL on PX30/RK3326 does not have any use for the malloc area and the
+>>>>>> generated GD_SIZE is typically around 304 bytes.
+>>>>>>
+>>>>>> Current memory layout possible looks something like:
+>>>>>>
+>>>>>>   [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
+>>>>>>     [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
+>>>>>>       [0xff0e09f0, 0xff0e0ff0)    1536 bytes  malloc area (unused)
+>>>>>>       [0xff0e08c0, 0xff0e09f0)     304 bytes  global data
+>>>>>> [...]
+>>>>>>
+>>>>>> arch/arm/mach-rockchip/px30/Kconfig | 4 ++--
+>>>>>>  common/spl/Kconfig.tpl              | 2 +-
+>>>>>>  tools/rkcommon.c                    | 2 +-
+>>>>>>  3 files changed, 4 insertions(+), 4 deletions(-)
+>>>>>
+>>>>>> diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
+>>>>>> @@ -129,7 +129,7 @@ config TPL_MAX_SIZE
+>>>>>> -     default 0x2800 if ROCKCHIP_PX30
+>>>>>> +     default 0x2c00 if ROCKCHIP_PX30
+>>>>>
+>>>>> Just to check, the layout shows [0xff0e3c00, 0xff0e3ed0) as pure
+>>>>> stack, but BSS (e.g. dram_info in sdram_px30.c) sits after
+>>>>> __image_copy_end and is not counted by the TPL_MAX_SIZE assert in
+>>>>> u-boot-tpl-v8.lds, so with an image close to 11 KiB the real stack
+>>>>> headroom is a bit less than 720 bytes.
+>>>>
+>>>> You are correct, current BSS is 72 bytes, will update the commit message
+>>>> to mention that the 720 bytes must fit both BSS and the stack in a v2.
+>>>>
+>>>> What is interesting is that global data is so large, especially when in
+>>>> this case nothing here is really using global data. We could save 16
+>>>> bytes by fully disable CONFIG_TPL_SYS_MALLOC_F, but that was too
+>>>> intrusive to be part of this fix.
+>>>
+>>> Well we have DRAM in there now. Actually now that Ilas' series is in,
+>>> we could take a look at trimming and aligning things - some things are
+>>> long which could be int, which matters on arm64.
+>>
+>> The px30/rk3326 boards do use CONFIG_NR_DRAM_BANKS=1 or 2, so dram
+>> should at least be limited somewhat.
+>>
+>> I think there are some DM related fields that could be excluded to save
+>> little bit more space. With below diff the GD_SIZE is down to 240 bytes,
+>> 16 for TPL_SYS_MALLOC_F and remaining 48 due to the DM related fields.
+>> Not sure this is safe, but the odroid-go2_defconfig could be built.
+>>
+>> I do not think the global data size is really a big issue for this
+>> board, but rk3036 only have 4 KiB that need to fit SPL (2716b),
+>> BSS (0b), global data (160b) and stack. SPL image is down to 2716 bytes
+>> after upcoming TPL refactoring at [1] (tpl branch).
+>>
+>> diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
+>> index dfdea66cd70c..c5fd6514010c 100644
+>> --- a/configs/odroid-go2_defconfig
+>> +++ b/configs/odroid-go2_defconfig
+>> @@ -118,3 +118,4 @@ CONFIG_USB_FUNCTION_ROCKUSB=y
+>>  CONFIG_TPL_TINY_MEMSET=y
+>>  CONFIG_LZO=y
+>>  CONFIG_ERRNO_STR=y
+>> +# CONFIG_TPL_SYS_MALLOC_F is not set
+>> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+>> index fd116b0cebf2..886c12900ddb 100644
+>> --- a/include/asm-generic/global_data.h
+>> +++ b/include/asm-generic/global_data.h
+>> @@ -174,10 +174,12 @@ struct global_data {
+>>          * @arch: architecture-specific data
+>>          */
+>>         struct arch_global_data arch;
+>> +#if CONFIG_IS_ENABLED(DM)
+>>         /**
+>>          * @dmtag_list: List of DM tags
+>>          */
+>>         struct list_head dmtag_list;
+>> +#endif
+>>         /**
+>>          * @timebase_h: high 32 bits of timer
+>>          */
+>> @@ -228,7 +230,7 @@ struct global_data {
+>>          */
+>>         long precon_buf_idx;
+>>  #endif
+>> -#ifdef CONFIG_DM
+>> +#if CONFIG_IS_ENABLED(DM)
+>>         /**
+>>          * @dm_root: root instance for Driver Model
+>>          */
 > 
-> Shouldn't that should be 1.5-24 MHz, not GHz?
-> 
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>
->> drivers/clk/rockchip/clk_rk3506.c | 13 +++++--------
->>  1 file changed, 5 insertions(+), 8 deletions(-)
-> 
->> diff --git a/drivers/clk/rockchip/clk_rk3506.c b/drivers/clk/rockchip/clk_rk3506.c
->> @@ -440,22 +440,19 @@ static ulong rk3506_sdmmc_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
->>  static ulong rk3506_saradc_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
->>  {
->>       u32 con, div, sel;
->> -     ulong prate;
-> 
->>
->>       con = readl(RK3506_CLKSEL_CON(54));
->>       sel = FIELD_GET(CLK_SARADC_SEL_MASK, con);
->>       div = FIELD_GET(CLK_SARADC_DIV_MASK, con);
->>
->>       if (sel == CLK_SARADC_SEL_24M)
->> -             prate = OSC_HZ;
->> +             return DIV_TO_RATE(OSC_HZ, div);
->>       else if (sel == CLK_SARADC_SEL_400K)
->> -             prate = 400000;
->> +             return 400000;
->>       else if (sel == CLK_SARADC_SEL_32K)
->> -             prate = 32000;
->> +             return 32000;
-> 
-> The commit message only mentions set_rate, but this changes get_rate
-> to ignore the divider on the 32K/400K paths. Please mention this and
-> explain why - I assume the hardware divider is only wired to the 24
-> MHz mux input, but that isn't obvious from the code. Also div is now
-> read but unused on those two paths.
+> Yes please, that's a huge improvement!
 
-The divider is configured to 1 in set_rate path, so this change is a
-simplification to ensure the ops for CLK_SARADC works as expected had
-set_rate been run.
+Will send out above struct global_data in a separate patch, CI seem to
+pass with above changes applied, see [2].
 
-The commit message already mentions that logic is adjusted to better
-match the limitation of the CLK_SARADC clock.
-
-> 
->> diff --git a/drivers/clk/rockchip/clk_rk3506.c b/drivers/clk/rockchip/clk_rk3506.c
->> @@ -463,10 +460,10 @@ static ulong rk3506_saradc_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
->>  {
->>       u32 div, sel;
-> 
->>
->> -     if (32000 % rate == 0) {
->> +     if (rate <= 32768) {
->>               sel = CLK_SARADC_SEL_32K;
->>               div = 1;
-> 
-> The threshold 32768 is odd given that get_rate reports this source as
-> 32000 - please pick one value and use it consistently, or add a
-> comment. I suspect the real source is 32.768 kHz, in which case
-> get_rate should return 32768.
-
-I would also think it should be 32768, however TRM only state 32K and
-vendor U-Boot use 32000.
-
-Due to this uncertainty and how the fallback use a very narrow divider
-field, 4-bits, it is more appropriate to check for <= 32768 or rate
-may have fallback to 1.5-24 MHz depending on bits [3:0] of the
-DIV_ROUND_UP(24000000, rate)-1 when close to 32 KHz is requested.
-
-I still think this change fits under adjust logic to fit clock
-limitations.
+[2] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/pipelines/924
 
 Regards,
 Jonas
 
+> 
+>>
+>> [1] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commit/8c8b98a29aa35880b93bbacce8daf68edb537eca
+>>
+>> Regards,
+>> Jonas
+>>
+>>>
+>>> I also did some work on struct board_f which is another way to reduce
+>>> space, if we can find more things which are only needed in early board
+>>> start-up. I suppose we could even expand that to include the
+>>> board_init_r() calls.
+>>>
+>>> Regards,
+>>> Simon
+>>
 > 
 > Regards,
 > Simon
