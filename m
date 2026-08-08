@@ -1,103 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FD1C5AD2B
-	for <u-boot@archiver.kernel.org>; Fri,  7 Aug 2026 23:06:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 629ABC5AC82
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 02:22:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EB1C76085B;
-	Fri,  7 Aug 2026 23:06:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6ED3C40802;
+	Sat,  8 Aug 2026 02:22:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id P8eDRIlXyvGg; Fri,  7 Aug 2026 23:06:23 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tVKrXFVoZVf9; Sat,  8 Aug 2026 02:22:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BBEF260846
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 85EF6407FB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786143983;
-	bh=6BWOIpGaxnsb46+M28mVJPNqofUexhFv/41OEXVR44s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uKCITrOwORXDNjqJebahlMpsTjIv9a83t52qrWTbn140QgDtyizwcyGTNMOXv0x41
-	 o4armAFPA6eqlkUSIU5boDm7OBMnlc1zVoT3c/vaPQhDadl1evk7Ys6AP+IqNsluL0
-	 2zB8kV5ghWZ+w/LAywiTZTokHbUMJ48FxIo8fo+Pr4S2YcJ4fn0fmg86JzuTcwV0s3
-	 oebTFhi2w2EeVyo4AXAathqxZP3D/UBrDxx31mxv8sLMxdcEzPWkQAElYNkdX1n8f0
-	 x6l73tywCw/Lz/+bNd0pttViSHHPt2PSuwXIcrCzKCjTh54R0a+rRxmXb0GVP5ibjQ
-	 lVQ/WpvmuPOTQ==
+	d=lists.u-boot-project.org ; s=default; t=1786155770;
+	bh=Hic+vnBb48EpyDlEaYzlTv5uWYqAAZkZkcDA9LD8zvI=;
+	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=ap0gibXKtZvJVqZuBuOSaz8YmNUArdr0a8rNiz0Lf813F8+daCqfYsQCfwmemrfGY
+	 jbj0TRi2o4A44OX0rdkNC2Z0QcUcPPrR6KqLC+ea29VVuhY0WeATg+Ig51SGD/sOyf
+	 kdkLmBl0eVvSx4L7yA9rKn/rchvKbkCuK+PIziT+ZlnJxs1Udusm9iK86nTRbajQ4M
+	 PjavYG0psrhdp5o2Tq2dHZY4FUZCanbnfAX9NF9tx1m5igWrbxXEwQYwsSl8AEqKJ8
+	 9cUp+MjMmfjV7Hv0dYDBXXVAhmKRAlzflz2x0aXVUSZEsPWTu2DnK1JJV8yCaSCFo5
+	 HQlduFDjnXSyQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BBEF260846;
-	Fri,  7 Aug 2026 23:06:23 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id EE1EB3A9
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 23:06:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 85EF6407FB;
+	Sat,  8 Aug 2026 02:22:50 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 99C6C2B6
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D3CE34031E
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 23:06:21 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8BA64407E3
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t0BNgLfpWMJD for <u-boot@lists.u-boot-project.org>;
- Fri,  7 Aug 2026 23:06:21 +0000 (UTC)
-X-Greylist: delayed 5112 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 07 Aug 2026 23:06:19 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0FC6140226
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0FC6140226
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=bda0=gb=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0FC6140226
- for <u-boot@lists.u-boot-project.org>; Fri,  7 Aug 2026 23:06:19 +0000 (UTC)
-X-Forward-Email-ID: 6a7664e8cd6642dfb886ba1a
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.13.10
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <da12d1c4-d3bb-4b11-82c9-1210ee1ac97f@kwiboo.se>
-Date: Sat, 8 Aug 2026 01:06:13 +0200
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ch8knRZ5rIQO for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 00:45:06 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3AEBE407E5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3AEBE407E5
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3AEBE407E5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:05 +0000 (UTC)
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id BFA4A3F9C0
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:02 +0000 (UTC)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-38e25e4b41cso134841a91.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 17:45:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786149901; x=1786754701;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Hic+vnBb48EpyDlEaYzlTv5uWYqAAZkZkcDA9LD8zvI=;
+ b=b1xJGHvoQv2BECIYoP4qh4iLGBfe4Rygn1cIZm2uvUx+IorbszzbMa+04jdGuj2HIx
+ bA/qvmFfAwGLHlIUkXK+HaadCmeqkBWksYhNNnCChYtpmuTeFQbPBotZvujhPgMYqLW9
+ lO+VNnYobaGPkBZP6ImtjeFgRYBHLynJw5uttc+zwVykSwCrsS7PjZCDCPC+GlBWr2kc
+ W4YgZO8h7MPVdlpOzk6QSOQxWBY1QXKl4tSaOK73UKLq87tlAUAZHyhjwM/FXXCY3IY/
+ toFJy9+TLcpKiTDs6WKIqfdktBwzwJSJa937+lP+hLSYo9bTL4K68xpicDWHF1jj1bKy
+ QKYA==
+X-Gm-Message-State: AOJu0YyCemgOmPKMpOcmzCtA4Hc0uP/lB5hfm34kKEP2giTXD167/E0C
+ GQM64biBunlAtQH42l3K8JsAHHzbT3eDhaMO2BFDuA2IzoFg1q3a++W8ERxmw9DIsW+8JpwEuuw
+ hZuAArFLk8+75GNBk7wNsPIp0dl7jvTwa6VmMTnz7UGSCQE7zC/83ixHgS9XJmRC9OBwmwXv7nx
+ shHyLnDD4AqAhsh6AzhA==
+X-Gm-Gg: AR+sD13AvoNafrNEu8GqTjn+0D5UHH0/atGfi8cXID7+k+OIY54tOHkMVvLE9KZaXjt
+ VVqpZAFpNGdkUlnICayeg8JC4Ro9sWXdNCm04BtwV3fu4u4WpRH0RkJLD6w3ZIV80WBr4OVtupD
+ /rzDNtCskG30bPa3uEN5KO9IiRVy5xJu1gZXMkbGbBOQWkyu/ABseRYaBQC49hM2Ml2+8H+Hmtg
+ 2o56XfShjRBjF1zQBRIlMqIsIAqiY36mYgMz2pwPIJ3egp1LjgG69vcf7v/FtDG2smOlbb+bMt9
+ BFGMlxp7aaVF/PjbZFRvmEUMyhaVIXVkKwtM+e9OnR5PvtlIdopBiFm2CGtALgk/8jpGT5JrTKh
+ ZosLhG0J4aFAOWg9lnU+MgJWfEd50VWCR5xWVkMw7B+lMcKgUpJHKuCEwjPGLClBaXjVS3w==
+X-Received: by 2002:a17:90a:d010:b0:38d:eaec:4396 with SMTP id
+ 98e67ed59e1d1-3903c58bdd2mr26539642a91.11.1786149900911; 
+ Fri, 07 Aug 2026 17:45:00 -0700 (PDT)
+X-Received: by 2002:a17:90a:d010:b0:38d:eaec:4396 with SMTP id
+ 98e67ed59e1d1-3903c58bdd2mr26539614a91.11.1786149900554; 
+ Fri, 07 Aug 2026 17:45:00 -0700 (PDT)
+Received: from noble-uboot.tail872496.ts.net
+ (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3925ff912c7sm4316935a91.17.2026.08.07.17.44.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Aug 2026 17:44:59 -0700 (PDT)
+To: u-boot@lists.u-boot-project.org
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v2 0/2] gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite
+ decompression
+Date: Sat,  8 Aug 2026 00:44:32 +0000
+Message-ID: <20260808004437.4367-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: px30: Fix TPL_STACK overflow into BootROM
- reserved region
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
- <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org
-References: <20260807090431.464978-1-jonas@kwiboo.se>
- <CAFLszThA3502QnQxSGyQL+WPEz3tovqE8VA7512gjVKUPSBMEg@mail.gmail.com>
- <a1436f49-823c-4708-b640-92c67fc6362d@kwiboo.se>
- <CAFLszTgso=ayEMwx+cF9FDPis1VmO4yQYH+3qoxWbah_GSnfug@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszTgso=ayEMwx+cF9FDPis1VmO4yQYH+3qoxWbah_GSnfug@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 08 Aug 2026 02:22:49 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kwiboo.se; 
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1786143979;
- bh=6BWOIpGaxnsb46+M28mVJPNqofUexhFv/41OEXVR44s=;
- b=ARQIW6DOnhhgTg12b3vIG61k/ZWsqC2SjCkUkbdj7SfBLI8dDvEGM1iw7XFFFOnTYHoGnk2ya
- x8ZAkvtRjaL5wKCEn3NmXLoYAIG2yhlFujAH+gOHXRQwm6rpS+YMKmTHlSkdgaBx2M1e0MJJqBW
- oeltxrnUV8a1CkNnB8rO0yZ4squhEic54LgWL3WlBvOlYnq0tVFYjfLdaQBkX8sI3MWnN4iCbUF
- nw02EvbIdz0Xd3ehpfWqTF4tM/7ZjN5TVOpv+Ip06EnUzC68MUMwE5KmNPl0WzdnNdHL0jTylK2
- q5utS+UKthQTkUAvDABiH/PDnPouAUw002ORimaBOswQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=ARQIW6DO
+ d=canonical.com; s=20251003; t=1786149902;
+ bh=Hic+vnBb48EpyDlEaYzlTv5uWYqAAZkZkcDA9LD8zvI=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=aTR/wYN2YRRmfvBE6PHAuOrD32RZivki9KKTJK/LDFDbAX1ujEFLh5TO+GI4ozcOO
+ 9NCvf3s/GztQOLz5f7/Z2ezgjp8AwaJRA3Xphttx//8cutQzT2/Qt1ZUQCVEqQEDsZ
+ aYhnb9yphFH2OSGN5vmYMtA0Rkib4PVJHuHbINjFvMzez5YU2mkgASZSjtBthVeWZ2
+ zltgdO/WT1Bi9gQpjPvwBkLZMPC1XayLPm8EdV3+PDzkHr5FAnCQsFVihZ4E/dDNEP
+ Is5Un0JzyGm8xoujNNekzvotRdIcxgr1Wv1FofMY3/LVFc68+ncWWNPov7sGkleEFD
+ SVLcDBYdAyBzEmgzxig/cXS+2tUi2MMHAm1jIwrXrgnrcRWAV2g6QsIrL3f27m9qtb
+ 2VGVYl7N5IME5AL1gjkUl92ENcSubuFqpgdi4YZbNMZ6z6i9Pen4RM2LGcVtqZiXX1
+ x0XSUi2PLYM064IEHXdLxVccXnDcMEa4rI7ogWHR+RZZeD8iFLToYQALfr+DX3bQyg
+ X+3is++Bp03DlYMF56cj08PiHg4C1ft/jEla/xG+N0hXe5YKCMB5hVWpabbSIj8uvm
+ j3FjJghPISpuizkGD88GaLeXA3kuEWTN48omquKlQ33YtLpnpEEYZIDJY+wtpfdAjB
+ NKpx9t2dlS56qtY8fEoRWByI=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=aTR/wYN2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -109,139 +137,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Aristo Chen via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Simon,
+The dm_test_cmd_zip_gzwrite sandbox test occasionally fails in CI
+with:
 
-On 8/8/2026 12:00 AM, Simon Glass wrote:
-> Hi Jonas,
-> 
-> On Fri, 7 Aug 2026 at 15:41, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Simon,
->>
->> On 8/7/2026 10:40 PM, Simon Glass wrote:
->>> Hi Jonas,
->>>
->>> On 2026-08-07T09:04:31, Jonas Karlman <jonas@kwiboo.se> wrote:
->>>> rockchip: px30: Fix TPL_STACK overflow into BootROM reserved region
->>>>
->>>> The PX30/RK3326 has 16 KiB SRAM at [0xff0e0000, 0xff0e4000), with the
->>>> initial 4 KiB at [0xff0e0000, 0xff0e1000) reserved for BootROM at boot.
->>>>
->>>> SRAM addressing only seem to use 14 bits, meaning that reading from
->>>> 0xff0e4000+ wraps around and instad reads back data at 0xff0e0000+.
->>>
->>> Typos: 'seem' -> 'seems', 'instad' -> 'instead' and 'possible looks'
->>> below -> 'possibly looks'.
->>
->> Thanks, will update in a v2.
->>
->>>
->>>>
->>>> Using a TPL_STACK at 0xff0e4ff0 (16-bytes aligned) means TPL use BootROM
->>>> reserved region for its global data, malloc area and runtime stack.
->>>>
->>>> TPL on PX30/RK3326 does not have any use for the malloc area and the
->>>> generated GD_SIZE is typically around 304 bytes.
->>>>
->>>> Current memory layout possible looks something like:
->>>>
->>>>   [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
->>>>     [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
->>>>       [0xff0e09f0, 0xff0e0ff0)    1536 bytes  malloc area (unused)
->>>>       [0xff0e08c0, 0xff0e09f0)     304 bytes  global data
->>>> [...]
->>>>
->>>> arch/arm/mach-rockchip/px30/Kconfig | 4 ++--
->>>>  common/spl/Kconfig.tpl              | 2 +-
->>>>  tools/rkcommon.c                    | 2 +-
->>>>  3 files changed, 4 insertions(+), 4 deletions(-)
->>>
->>>> diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
->>>> @@ -129,7 +129,7 @@ config TPL_MAX_SIZE
->>>> -     default 0x2800 if ROCKCHIP_PX30
->>>> +     default 0x2c00 if ROCKCHIP_PX30
->>>
->>> Just to check, the layout shows [0xff0e3c00, 0xff0e3ed0) as pure
->>> stack, but BSS (e.g. dram_info in sdram_px30.c) sits after
->>> __image_copy_end and is not counted by the TPL_MAX_SIZE assert in
->>> u-boot-tpl-v8.lds, so with an image close to 11 KiB the real stack
->>> headroom is a bit less than 720 bytes.
->>
->> You are correct, current BSS is 72 bytes, will update the commit message
->> to mention that the 720 bytes must fit both BSS and the stack in a v2.
->>
->> What is interesting is that global data is so large, especially when in
->> this case nothing here is really using global data. We could save 16
->> bytes by fully disable CONFIG_TPL_SYS_MALLOC_F, but that was too
->> intrusive to be part of this fix.
-> 
-> Well we have DRAM in there now. Actually now that Ilas' series is in,
-> we could take a look at trimming and aligning things - some things are
-> long which could be int, which matters on arm64.
+  12582912/16777216
+  Error: inflate() returned -5
 
-The px30/rk3326 boards do use CONFIG_NR_DRAM_BANKS=1 or 2, so dram
-should at least be limited somewhat.
+The chunked decompression loop added in commit 58e523fedf48 ("gunzip:
+Implement chunked decompression") treats Z_BUF_ERROR from inflate()
+as fatal. When an input chunk is exhausted at exactly the same time
+as the write buffer fills up, the next inflate() call is made with
+avail_in == 0, cannot make progress, and returns Z_BUF_ERROR. Per the
+zlib documentation this only means "no progress was possible" and the
+call should be repeated with more input, which is what the reference
+implementation in zlib examples/zpipe.c does.
 
-I think there are some DM related fields that could be excluded to save
-little bit more space. With below diff the GD_SIZE is down to 240 bytes,
-16 for TPL_SYS_MALLOC_F and remaining 48 due to the DM related fields.
-Not sure this is safe, but the odroid-go2_defconfig could be built.
+The failure needs the consumed/produced byte counts to line up with
+both the chunk size and the write buffer size at once, with no
+buffered output on the inflate side, which is why only certain random
+payloads trigger it. Note that the failure offset above is a multiple
+of the 1 MiB write buffer while gzwrite_chunk was SZ_1M + 1.
 
-I do not think the global data size is really a big issue for this
-board, but rk3036 only have 4 KiB that need to fit SPL (2716b),
-BSS (0b), global data (160b) and stack. SPL image is down to 2716 bytes
-after upcoming TPL refactoring at [1] (tpl branch).
+Patch 1 makes gzwrite() refill the input chunk in this situation.
+Patch 2 adds a deterministic regression test which builds a gzip file
+from two stored deflate blocks by hand and aligns the chunk boundary
+with the write buffer boundary exactly, failing reliably without
+patch 1.
 
-diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
-index dfdea66cd70c..c5fd6514010c 100644
---- a/configs/odroid-go2_defconfig
-+++ b/configs/odroid-go2_defconfig
-@@ -118,3 +118,4 @@ CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_LZO=y
- CONFIG_ERRNO_STR=y
-+# CONFIG_TPL_SYS_MALLOC_F is not set
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index fd116b0cebf2..886c12900ddb 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -174,10 +174,12 @@ struct global_data {
- 	 * @arch: architecture-specific data
- 	 */
- 	struct arch_global_data arch;
-+#if CONFIG_IS_ENABLED(DM)
- 	/**
- 	 * @dmtag_list: List of DM tags
- 	 */
- 	struct list_head dmtag_list;
-+#endif
- 	/**
- 	 * @timebase_h: high 32 bits of timer
- 	 */
-@@ -228,7 +230,7 @@ struct global_data {
- 	 */
- 	long precon_buf_idx;
- #endif
--#ifdef CONFIG_DM
-+#if CONFIG_IS_ENABLED(DM)
- 	/**
- 	 * @dm_root: root instance for Driver Model
- 	 */
+Verified on sandbox and sandbox64:
+- dm_test_cmd_gzwrite_chunk_boundary fails with -5 in 20 out of 20
+  runs before the fix, passes 100 out of 100 runs after
+- dm_test_cmd_zip_gzwrite fails 17 out of 2000 runs (about 1%)
+  before the fix, every time with the same signature as the CI
+  flake, and passes 2000 out of 2000 runs after
+- dm_test_cmd_zip_unzip keeps passing
 
-[1] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commit/8c8b98a29aa35880b93bbacce8daf68edb537eca
+Link to v1:
+https://lore.kernel.org/u-boot/20260806103720.1026454-1-aristo.chen@canonical.com/
 
-Regards,
-Jonas
+Changes in v2:
+- Assert on env_set_ulong()/env_set() and move the test body into a
+  helper so gzwrite_chunk is unset even when an assertion fails
+- Name the stored block constants and derive buffer sizes from
+  sizeof(raw) instead of repeating 2 * SZ_1K
+- Use mmc_dev_desc->blksz instead of the literal 512
+- Patch 1: no code changes, collected Simon Glass's Reviewed-by
 
-> 
-> I also did some work on struct board_f which is another way to reduce
-> space, if we can find more things which are only needed in early board
-> start-up. I suppose we could even expand that to include the
-> board_init_r() calls.
-> 
-> Regards,
-> Simon
+Aristo Chen (2):
+  gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite decompression
+  test: cmd: Add gzwrite chunk boundary regression test
+
+ lib/gunzip.c     |  10 ++++
+ test/cmd/unzip.c | 118 ++++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 126 insertions(+), 2 deletions(-)
+
+-- 
+2.43.0
 
