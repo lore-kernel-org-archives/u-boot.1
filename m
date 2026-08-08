@@ -4,133 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5781C5AC82
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 02:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37134C5AC82
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 02:22:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 168374081E;
-	Sat,  8 Aug 2026 02:22:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E681940816;
+	Sat,  8 Aug 2026 02:22:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id u3N64_yhLU3D; Sat,  8 Aug 2026 02:22:52 +0000 (UTC)
+ id mouzVku0D0GN; Sat,  8 Aug 2026 02:22:55 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A92D6407FB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 164EE4081B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786155771;
-	bh=yY9BGnvgumqv+fZAlKFt4FGcUPjywm7JmLtwmMh9L3M=;
-	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=Sy26TDbqCJ5A/HhNYpWXu9MgbSLacvixwqqqVnaYvpIosN1Gr4yGfxwzg9ik94Ms7
-	 lmyjBCV8C9BYjFRPW1weHdnfNhBWJR8+bXbreI4295yVcORe+N4c9hzJJJJv0VqEg6
-	 dyhUKON97B0kjf9eq3njfaJcYtKIa3T3z8GCNeRrwUUli1dPM+E5gTK5/JjtSPQ8cr
-	 f4HlZTlDafmLl98lFvmiaRsC57fdXa4AFT/HlwWeSHfXtdpQ05mqd4qmL5FqaPcYbB
-	 AtA3+5Y8N/TDNMAZljBHMXbflRxw7c5KPsbBsS0aS+ftRJOp8r5NlVegNAWSuJdGf3
-	 OxE3XcQuyZM0Q==
+	d=lists.u-boot-project.org ; s=default; t=1786155775;
+	bh=7QzW+JrdLD2VYSSYlCm7ko3dRJBfWt7CLUDnGL8QIhs=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=sg1dxQ5PvoTnBC6ujusTTpO4Nt/YJ1OqHNonNEfz40lVxMR8KmE9f7+44wrpP3n/j
+	 s0vhYPJHGOkjhuTd+73qQFEyt4JZhgCsshUfuoy7k/Yvy+FLbtBi2hU7Z4fYTu62k6
+	 P5EdZYccqIQXJG+ojv5Dp8K7YTp8NBWkiaWb3EEyQ3N6o0CFZHMKeDA73heALbxyhJ
+	 aRQG/lwOnafmY+IIwawVe95DhdDJtt3dhvIqZX5DRJv6JSbYgq/9bvLkR6dcwJ9E5G
+	 GxPhyTBOmHAUuldOv+6hhWDhkA83WHZx4kAPckU/b8De9ALOaZ4avrVFd1K9BYza6B
+	 1W0D8zU8iWn8g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A92D6407FB;
-	Sat,  8 Aug 2026 02:22:51 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id D4DA32B6
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 164EE4081B;
+	Sat,  8 Aug 2026 02:22:55 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A6A771AF
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 02:09:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D1A8D4011A
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 925BE407D0
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 02:09:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5TdCarFPMxpJ for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DF807400FD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DF807400FD
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DF807400FD
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:06 +0000 (UTC)
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id ACF753F9C5
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:04 +0000 (UTC)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-38e2f61c09dso162222a91.2
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 17:45:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786149903; x=1786754703;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=yY9BGnvgumqv+fZAlKFt4FGcUPjywm7JmLtwmMh9L3M=;
- b=VlZfFWTVScjfHezlqWJ+z1xjaDoDv4xQrWFQbVEW50BJxPI7gysMIyyPprzfJNo4kq
- YeWIkl/NE1DZWrcPBTy6PgiFq/mLL8XZIA4pUKdisPKv7RdJ4NJ/DwT3Gme5FSAdHiIr
- ZvfwYBw6uuFTG+zZzu4wzWiupaTXBPNUMINvIJnWj6qhHg2urJNCy1qz/hIRv6FueNjS
- JNczyDIwsx9QTzklYd0gRocAaNJMps7K6oC4qcbzow2YEkiTPcbx7x7cY8/r1qi9wApu
- Fqr+GK86uZShUKTyZyWU2846K/khY6eMQY9HQE7evJYTh/eimIoRrFphydHHPhDFYG1q
- 04Tg==
-X-Gm-Message-State: AOJu0YxOviRryAGcYt0BPNX+XNn0Ed/O/pxo1WLqzjLNbq57pAz/wUm4
- xOj+chcbru9AHR8ZE2kZEMxS3rBncykxvZcZzuF70MuR6ihXKfQiXtQCt8thRAR5Fj3gY5svLCM
- A7cy6BSVsR6tYcKPKiAYWOao7hPQerDWlg0w3Pq3ixu2mBv/BfSrDr9lmlD48XFuJUpPxrjBeQE
- gd3fK6kdAyj6q63slV3Q==
-X-Gm-Gg: AR+sD11iHs5r4+KJ6MZLVIRG6/1pQ1R+l87SKoZCgCbK3sQxKoIduMhWJ4RTFDjcvGK
- GWgaGuF455n5vNnTQIj6WLovE6d+ZXmnCFvye9h00xsbj98LLunCsTTSDSrfQ+DE+djWI+hAmUR
- URePzE0xg7HO1SVo6uJlq8eU9esEXSO1miQRNZyRxpF7wbulEAr7Ku6YLP8FGFh7UX7Z2brQMym
- H/GZpVfXeWNBctEOWyqk3J1Z0hC8UR1apW+1OOPJRaLQQEMPZAzFNJCx4chRt2d83xL+5qL4gvn
- FYhvgDM6H1sOkyG55aTC5zt3k2lLrqDAuuE3oivZtPs3UxYdkUmpBLQ9YtCBm5G0Vap0yNQngX0
- aqkH5VaIxv2xrrPZjuNIeoNMPdmLEm57BaPTZq1Tc1x3iqBWSKJVgx2r6YynMt7DD5bV9Eg==
-X-Received: by 2002:a17:90a:da83:b0:38e:500:3975 with SMTP id
- 98e67ed59e1d1-3903c5d82a3mr25280025a91.18.1786149903145; 
- Fri, 07 Aug 2026 17:45:03 -0700 (PDT)
-X-Received: by 2002:a17:90a:da83:b0:38e:500:3975 with SMTP id
- 98e67ed59e1d1-3903c5d82a3mr25279995a91.18.1786149902720; 
- Fri, 07 Aug 2026 17:45:02 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3925ff912c7sm4316935a91.17.2026.08.07.17.45.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 17:45:02 -0700 (PDT)
-To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/2] gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite
- decompression
-Date: Sat,  8 Aug 2026 00:44:33 +0000
-Message-ID: <20260808004437.4367-2-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260808004437.4367-1-aristo.chen@canonical.com>
-References: <20260808004437.4367-1-aristo.chen@canonical.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nLsJMKASslSJ for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 02:09:55 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org;
+ envelope-from=devnull+estebancalba.gmail.com@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 61338407CF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 61338407CF
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 61338407CF
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 02:09:55 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id A562F6001A;
+ Sat,  8 Aug 2026 02:09:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5CC4CC19425;
+ Sat,  8 Aug 2026 02:09:53 +0000 (UTC)
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 381DEC5AC82;
+ Sat,  8 Aug 2026 02:09:53 +0000 (UTC)
+From: Esteban Alba via B4 Relay <devnull+estebancalba.gmail.com@kernel.org>
+Date: Fri, 07 Aug 2026 21:09:53 -0500
+Subject: [PATCH] net: net6: validate IPv6 payload and UDP length on receive
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260807-net6-len-validation-v1-1-edff271cbf2c@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAPCPdmoC/yXMwQrDIBCE4VcJe86CyUHbvkrIwejYbgmmqJFCy
+ LvXtscPZv6DMpIg0607KKFKli02DH1H7mHjHSy+mUY1anVRhiOK5hWRq13F29L27LwZEPxVWxO
+ oPV8JQd6/6jT/nfflCVe+KTrPD4FKLfl3AAAA
+X-Change-ID: 20260807-net6-len-validation-cd71efd96a7f
+To: u-boot@lists.u-boot-project.org
+Cc: Ramon Fried <rfried.dev@gmail.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786154992; l=2310;
+ i=estebancalba@gmail.com; s=20260808; h=from:subject:message-id;
+ bh=Noglsh+V1jbRhzRXFIKeYwjx9lELZ2FDIrdfAldKLjk=;
+ b=mltVNCMlvJDST5IxyVGnqclfs/TqZZ03IQYrKdHH21v4nAjlYGxRjJP6exVh9mn8oz64j9gUM
+ NDGwAIBToy8BxvruaKTQC++I9GBphp8OyTA+UvBFdcc6jJcacDnKVC9
+X-Developer-Key: i=estebancalba@gmail.com; a=ed25519;
+ pk=1BEuFs3cavGme7UfOyPkuXqt9/3FstTgVwsFSCXGO5o=
+X-Endpoint-Received: by B4 Relay for estebancalba@gmail.com/20260808 with
+ auth_id=927
+X-Original-From: Esteban Alba <estebancalba@gmail.com>
 X-Mailman-Approved-At: Sat, 08 Aug 2026 02:22:49 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1786149904;
- bh=yY9BGnvgumqv+fZAlKFt4FGcUPjywm7JmLtwmMh9L3M=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=tIW7YqOd3yAYb3PM9aNzxVe/syDVdlO7HjYjW+uOfatMOi6xBUlsDsY7dv7ekuBfI
- zLpU/BkHxHjdGZwPu9ugdFshPG9XoAbkAcRbOYE5cFwc/YnHvsUFEsSfYaMO3vct5u
- NgA+mmNN7IvWvFCwD8uScsHv5ioXs9GjulQQmMwXO57CvxBh6ScHc0Y9yEg+9YE5iO
- UK8tkyMKKVnj5wSDHL/J4hA6+Qgu+rkocsmO1cdVp3PYJBYGAPa0EJz7yrOsgRZVsC
- I1hiYDEncaQVGFouMax9RkkoV9cm73D3aXAbGhtcX3JagmFZ6poXlv2YF5LVWJp4Tx
- dfWWIcM2/yiNKiUmIs4bTFixhxUUgYZRpQUyBVlvhhHUatvOO03t+VsSTDT9/s534F
- l9YSf3Z36T7cK9XvOobtTZQ92cux7bYqMgbY0yrelw3XztI6MlFgbktXtEvPB3J/iJ
- A+KsGCBDDRW7lDY9BOibkFnOM/3QgG0rxguHc8eLwZHLirxlCIIFbFctjnh707AFW0
- n5jINCyU8g12VvkMEOLzJg8y+jEgQXRFCqoFSSNNtCaOzzrUEVGhBH/iVRydrsVD86
- db8vGRh7GhSNHv4QQ5IeWhVCj3xJ8qniPoo24H8xgBp0YVeev9QJ47NKnXQXUF19Kr
- dNTMudZpA2Z/4APlwpKn2CEU=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=tIW7YqOd
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=kernel.org; s=k20201202; t=1786154993;
+ bh=r3vipK22HBJ9TKPaxEyl8uWUOEZjjqKabJclpOuww3g=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=teYGN9M5YsJqNxJHOBlCJ89/UAOkcJUsPF0XZYJFvXpLGAe1AYJpuRX12Yk8t21hr
+ Xh+uvhhbU9B+uEBUMOm+qYUMswrv0T5SXpAgjnaFQc7pq7iDASx/xds/iJmLQ00Z/i
+ oqKjGHohYvltslrBSf9wO2P7Hz7BBeHtF+hamb/w9gs6LDMFQ2y/JUH0927rvWPTkf
+ /17D4/Zm/vs1qlvR/VSOr+tsQP5+7YTAk+VX9E32DrzD5ciQoQIl6BD6hdFszGTVTu
+ Vo9gK2/TLzqwLRm3Y/ZLXBphqWtp1HFUw3+JRvbUQTPIec0SqshAqQlfZisVwetDBO
+ bu6yXkqQagT8Q==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=teYGN9M5
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,75 +111,69 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Aristo Chen via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Aristo Chen <aristo.chen@canonical.com>
+Reply-To: estebancalba@gmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The chunked decompression loop in gzwrite() treats any inflate()
-return value other than Z_OK and Z_STREAM_END as a fatal error. When
-the current input chunk happens to be exhausted at exactly the same
-time as the write buffer fills up, the inner loop calls inflate()
-again with avail_in == 0. No forward progress is possible in that
-state, so inflate() returns Z_BUF_ERROR and gzwrite() bails out:
+From: Esteban Alba <estebancalba@gmail.com>
 
-  Error: inflate() returned -5
+net_ip6_handler() checks the received length only against IP6_HDR_SIZE
+and then uses two length fields from the packet without checking them.
+The checksum is computed over payload_len, but the length passed to the
+UDP handler comes from udp_len. A sender can keep payload_len correct so
+the checksum still validates and set udp_len larger than the frame. A
+handler that trusts that length then reads or writes past the receive
+buffer. The DHCPv6 client copies the declared number of bytes and can be
+made to write past the packet buffer from a single link-local ADVERTISE.
 
-Per the zlib documentation, Z_BUF_ERROR is not fatal and only means
-that no progress was possible; the call should be repeated once more
-input is available. The reference implementation in zlib
-examples/zpipe.c continues in this exact situation.
+The IPv4 path already reconciles these lengths in
+net_process_received_packet(). Do the same here: reject a payload_len
+that exceeds the received length and trim len to it, then reject a
+udp_len smaller than the UDP header or larger than the payload before
+calling the handler.
 
-The failure is data dependent: it needs a stream position where the
-consumed input and produced output line up with both the chunk and
-the write buffer boundary at once, and the inflate side must have no
-buffered output. That is most likely with incompressible input, where
-deflate emits stored blocks and inflate holds no lookahead bits. This
-is how dm_test_cmd_zip_gzwrite occasionally fails in sandbox64 CI on
-random data with gzwrite_chunk = SZ_1M + 1, stopping at a multiple of
-the 1 MiB write buffer:
-
-  12582912/16777216
-  Error: inflate() returned -5
-
-Detect this case and let the outer loop refill the input chunk
-instead of failing.
-
-On sandbox64, the random data dm_test_cmd_zip_gzwrite test failed
-17 out of 2000 runs (about 1 percent) without this fix, every time
-with the same signature as the CI flake, and passed 2000 out of 2000
-runs with it.
-
-Fixes: 58e523fedf48 ("gunzip: Implement chunked decompression")
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Fixes: 1feb697830ce ("net: ipv6: Add implementation of main IPv6 functions")
+Signed-off-by: Esteban Alba <estebancalba@gmail.com>
+Cc: Jerome Forissier <jerome.forissier@arm.com>
+Cc: Tom Rini <trini@konsulko.com>
 ---
-v2: no code changes, collected Reviewed-by
+ net/net6.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
- lib/gunzip.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+diff --git a/net/net6.c b/net/net6.c
+index 4cff98df15..af2f484fad 100644
+--- a/net/net6.c
++++ b/net/net6.c
+@@ -392,6 +392,11 @@ int net_ip6_handler(struct ethernet_hdr *et, struct ip6_hdr *ip6, int len)
+ 	if (ip6->version != 6)
+ 		return -EINVAL;
+ 
++	/* Trim to the length declared in the header, as the IPv4 path does */
++	if (len < IP6_HDR_SIZE + ntohs(ip6->payload_len))
++		return -EINVAL;
++	len = IP6_HDR_SIZE + ntohs(ip6->payload_len);
++
+ 	switch (ip6->nexthdr) {
+ 	case PROT_ICMPV6:
+ 		icmp = (struct icmp6hdr *)(((uchar *)ip6) + IP6_HDR_SIZE);
+@@ -433,6 +438,10 @@ int net_ip6_handler(struct ethernet_hdr *et, struct ip6_hdr *ip6, int len)
+ 		if (csum != udp->udp_xsum)
+ 			return -EINVAL;
+ 
++		if (ntohs(udp->udp_len) < UDP_HDR_SIZE ||
++		    ntohs(udp->udp_len) > len - IP6_HDR_SIZE)
++			return -EINVAL;
++
+ 		/* IP header OK. Pass the packet to the current handler. */
+ 		net_get_udp_handler()((uchar *)ip6 + IP6_HDR_SIZE +
+ 					UDP_HDR_SIZE,
 
-diff --git a/lib/gunzip.c b/lib/gunzip.c
-index 20cc14f9688..b30cbfc34ef 100644
---- a/lib/gunzip.c
-+++ b/lib/gunzip.c
-@@ -246,6 +246,16 @@ int gzwrite(unsigned char *src, size_t len, struct blk_desc *dev,
- 				s.next_out = writebuf;
- 			}
- 			r = inflate(&s, Z_SYNC_FLUSH);
-+			if (r == Z_BUF_ERROR && !s.avail_in && payload_size) {
-+				/*
-+				 * The input chunk was exhausted at exactly
-+				 * the same time as the write buffer filled
-+				 * up, so no progress was possible. This is
-+				 * not fatal, let the outer loop refill the
-+				 * input chunk.
-+				 */
-+				break;
-+			}
- 			if ((r != Z_OK) &&
- 			    (r != Z_STREAM_END)) {
- 				printf("Error: inflate() returned %d\n", r);
--- 
-2.43.0
+---
+base-commit: ece349ade2973e220f524ce59e59711cc919263f
+change-id: 20260807-net6-len-validation-cd71efd96a7f
+
+Best regards,
+--  
+Esteban Alba <estebancalba@gmail.com>
+
 
