@@ -1,99 +1,128 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372DAC5AD4E
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:33:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E97D2C5AD44
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:33:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8FF8960687;
-	Sat,  8 Aug 2026 19:33:45 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y3wlE0Y4bbfA; Sat,  8 Aug 2026 19:33:43 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7BAB060664
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786217623;
-	bh=ZLeyrn7rveRc6UGTZvEouAkKw6Adobb9FwMOHZB2hVI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DopgG8VDeT9YUIZdrER4joNYPUJ95gQ1ZaSrsiyA9PnCDzjUTD4+kPN78zTwajQgX
-	 9LBVAGrNsHLqeDSn/jScB/r9Obc/DqYgFnzurIqxfizEf0TnNEztid871ZC22C9Sav
-	 +XLe4aqIjXAL3MYHE4hDmz+BXKtTWAwjwI6sUe/C2qcJmn7W1A3/i0jTW2lVNIWyLK
-	 mLHyGih2CBLlfC/YpNImZ9DISa725Z8c6UOpzZaivy2QSbFeqeqpYfGOHlCgTnJXIX
-	 bwaH/eQAPKuEw4he5adJwBLMsNngRQB8P2Qo7deE7ZuO6s2n8q8ilkG2UrLPJe06Ro
-	 WjmjPLvIxDPBA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7BAB060664;
-	Sat,  8 Aug 2026 19:33:43 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 85D7310E
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:33:41 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6BD2280BF3
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:33:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 980A380BDD;
+	Sat,  8 Aug 2026 19:33:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VMWysMkLKRbl for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 19:33:40 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=b70c=gc=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5DF9D80BDD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5DF9D80BDD
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5DF9D80BDD
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:33:38 +0000 (UTC)
-X-Forward-Email-ID: 6a7784891d349bd111805ad5
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.13.10
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d3912c4d-90d4-4e62-b9eb-9a53ba4a170e@kwiboo.se>
-Date: Sat, 8 Aug 2026 21:33:26 +0200
+ id P4wFP7yU704f; Sat,  8 Aug 2026 19:33:56 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A02F580BF3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786217636;
+	bh=FkPyJ9vTGWJtev0rtcn0v4VXwnITb9NxT09sy2x550s=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OOfVn754X3Goqw2lbzom2kbqJ0PWTzTQFJuVgpbLdZJZTfbESvTKVXkWqlI7G+Q0s
+	 Wt04KaxQf6zu9bK7mRwUGns3OIP6ZlxQU7wA042Aet9uyGbLLPcp+Tuc3bjMIvekm+
+	 LF1IvgNQq+boG9ojRVasH5fLAckKS572YNgjj4oEmmfecmr3qxT6TxnjFI9BnrKO0V
+	 K9gUyWdDLXGxboc/9QU0WF75Lm1wNxzf7vMYbVkXepgdOvjx4/jxuNL+wbQeBc1VHj
+	 3JxdrGvuHsBKnQA8oRKkcJQ3Y5AsFcdXe5SUYruUbt+wPe6tvZpnufS3TZTc4s/Nt+
+	 dO8+2g3r3fn+Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id A02F580BF3;
+	Sat,  8 Aug 2026 19:33:56 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5F9DF10E
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:33:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 51C6740061
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:33:55 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TFLzLOgzzO3q for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 19:33:54 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 5EB784006B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5EB784006B
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5EB784006B
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:33:54 +0000 (UTC)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7ee37dc91f5so374729a34.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 12:33:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786217633; x=1786822433;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=FkPyJ9vTGWJtev0rtcn0v4VXwnITb9NxT09sy2x550s=;
+ b=c6/QkARCfGCHJ27dnhyMVCD4INBHibWX/P/HklYpbc5MPs8Bf4Qe/aneptpvZkGwqf
+ PROp+DYYEaZJFKrfzXcWaFJ/hKsQb3PKN1R47SBrco8BwR6nSnKpIkOLzeqHxxcgcOZ2
+ GkIv0X/vDVcj96ErolkGvQTHNc3GDIWnahc7oWU1W+euWwxGvxGVv71IApSlXmJrdMKV
+ IS/EndPI0y9+WaXr9v8oK3x4CDnqnfHNtq3H3e2x6vFJoRsDgEmkKWjKwcSpF4njb9tA
+ NQqPX0F/+iYXiTmSSjQPcgggIMHa6fvc9eP3MR7jwk3Zn7oQWGzv07X3hRrY8q/1dP+A
+ EuAw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpjiPjlhEFkP+inNL4ehFgJ6geLEHsrkCb++GFqgBSNQZSCyl6ZT8eN9bxzRph8Lo2tbhpzaKQ=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwuWYyTK8akVxVJnJBwhVKIlAK0XWBuren/eqomIWFNyxujdgW+
+ w9w6ZlwAd5AOvAoCM0zzydPBTx5dn0VK8B4A9LheeYxwiXyOHnSB6H8awUdyhzsCAq54rLCB6T6
+ q7FXrq0w=
+X-Gm-Gg: AR+sD10dgFhAzJGgLa8cYGli8W2uY8p+bfskJAXfQ3bODKoBpGeGlskUUlrldgRZ7J3
+ +kPzVmyr+ukjXtGM1h7YH4M4Ov2JZx1ZcTJtBvsFiiMX/RLbjMkvqLjgNnhjChPoAhrWmeMQkNq
+ Fc/lCfVj46Hv8qmuZw9PJw55xOhnsZd/EFhBYTK5wh9mc2avEcQyzw+nRWuuAKTl9eo8o7mQejS
+ xqTUqibA2O3wU6ewGxwGAgIzX62tosnosK5QSxRrtgyE4gbvceUdwIypPrXVS0jxz9Po/eCuOZ1
+ KhLXLz+ncQ8RAKlffOhUHHuH96kqoWVJBCs2gx7KOGjOVzgRlCtlz3QyP3stlP7PkNIIXfx08EY
+ xdgR3JKqyky+lIgor996wj/Kinoj7yWIPMWqpBkTtlda3DkYs5rvE8mUfP5hrf6u4PyIVYtLAiY
+ xoaqVsaN+Ug7IKVTSn88AsOxLvJaJ5x/6XhnZBNKRO6B3hBA8//2Y9Kv3m0VsExHENOty6w1az6
+ mjYphE90V2lmNh3373YHQC9N+0GrmIZ8AcCjHylTOSDE4alrUW93o6/8tvfEqq6rSv2hBLFKqv5
+ IzzD1UtFew==
+X-Received: by 2002:a05:6830:82eb:b0:7e9:e0be:583b with SMTP id
+ 46e09a7af769-7f1e5e321femr18891763a34.9.1786217633305; 
+ Sat, 08 Aug 2026 12:33:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f35b76fe2fsm3801946a34.16.2026.08.08.12.33.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Aug 2026 12:33:52 -0700 (PDT)
+Date: Sat, 8 Aug 2026 13:33:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
+Message-ID: <20260808193350.GD394392@bill-the-cat>
+References: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
+ <CAFLszTiJK9JFDe30ZfaXkZvmNUfWUVmC8ZVLU0b-7vfTsHaQ5w@mail.gmail.com>
+ <CAKTNdwHyab4T-02-YjSHqmEVHYVXmZSZ9FqYWzpvUpt63UUHEg@mail.gmail.com>
+ <20260808181058.GB394392@bill-the-cat>
+ <CAKTNdwHED5XzQc4vQX7k_R-+O_0ae3q__w-tG5mfViPgBXW67g@mail.gmail.com>
+ <20260808191935.GC394392@bill-the-cat>
+ <CAKTNdwFBCbW5+-aX7Y5gt3gNx8rBAHsc0AuVMSJMm8ztNN5pXg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] clk: rockchip: rk3568: Always init clocks in SPL build
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
- <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>, Alexey Charkov <alchark@flipper.net>,
- u-boot@lists.u-boot-project.org
-References: <20260804002643.2308515-1-jonas@kwiboo.se>
- <20260804002643.2308515-2-jonas@kwiboo.se>
- <CAFLszTjXANOTC8r0FbXAL80Zs2m7EpbEPb5BnDF3kWf1QxHpiQ@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszTjXANOTC8r0FbXAL80Zs2m7EpbEPb5BnDF3kWf1QxHpiQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zUuG+3yYEfy3KsKA"
+Content-Disposition: inline
+In-Reply-To: <CAKTNdwFBCbW5+-aX7Y5gt3gNx8rBAHsc0AuVMSJMm8ztNN5pXg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kwiboo.se; 
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1786217618;
- bh=ZLeyrn7rveRc6UGTZvEouAkKw6Adobb9FwMOHZB2hVI=;
- b=OmYXxL0qJTTvTisWVY777hCRugC0JhtXrOhveFAJZqKPdvpLth7sRYkZhquSyGtCCUDl7P8w4
- d2H5gd9n52YyofoBkpYeHqAI9gqdildFmGNDg2FlUFhGPkKbmNoUcb2Mrxx+TA98aagTaVoR7Aw
- HIvwaBT6Gg8SNCK1FEZYntFrpL7Q4PMJEg01Uk/7WsCq40TvFvoUP/9n5VMaGZz4skRvZxSQC6x
- 9FxoWoMFviIJQZeuCiFnp3y4xRAzAWL3c9x90mpqdhUzDHQFVBLDezdB0FiASFjSSQ/sTH55pKv
- ncXy9Lyd5++oyQ3OVFvllL7DMxbUpn4EA0fWvtEjpgjw==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=OmYXxL0q
+ d=konsulko.com; s=google; t=1786217633; x=1786822433;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=FkPyJ9vTGWJtev0rtcn0v4VXwnITb9NxT09sy2x550s=;
+ b=qSughgyitYoz+SVv1iRu28+w0HZBC4My5YBxPIP5EG1/hMWROC89KCXurNyU08a+ry
+ gIdngzBKMmi8vUtOdM+PnqK81MrkR9OCHBznVJjmjJTjI0LKLy1p40IDhRwfM5JqDzC+
+ kFwAjuV2oFGcwE0SlnDw1MeU6zCP+3lFxkPiE=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=qSughgyi
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -108,73 +137,127 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Simon,
 
-On 8/8/2026 7:30 PM, Simon Glass wrote:
-> Hi Jonas,
-> 
-> On 2026-08-04T00:26:39, Jonas Karlman <jonas@kwiboo.se> wrote:
->> clk: rockchip: rk3568: Always init clocks in SPL build
->>
->> The ACLK_BUS clock is initialized to 150 MHz in SPL on RK3568.
-> 
->>
->> Ensure clock driver is always probed after bind for SPL builds to
->> initialize core PLLs and clocks in SPL phase on RK3568.
-> 
-> Just to check: "is initialized to 150 MHz" reads as if this already
-> happens. My understanding is that probe() contains the ACLK_BUS setup,
-> but nothing forces the CRU to be probed in SPL, so it is silently
-> skipped. Please spell that out - something like "the clock driver is
-> currently only probed on demand, so the ACLK_BUS init in probe() is
-> skipped when no SPL consumer references it" - so the motivation
-> matches the speedup Alexey reported on the rk3576 patch.
+--zUuG+3yYEfy3KsKA
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Correct, I will reword the commit message.
+On Sat, Aug 08, 2026 at 11:26:44PM +0400, Alexey Charkov wrote:
+> On Sat, Aug 8, 2026 at 11:19=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Sat, Aug 08, 2026 at 11:12:47PM +0400, Alexey Charkov wrote:
+> > > Hi Tom,
+> > >
+> > > On Sat, Aug 8, 2026 at 10:11=E2=80=AFPM Tom Rini <trini@konsulko.com>=
+ wrote:
+> > > >
+> > > > On Sat, Aug 08, 2026 at 01:02:02PM +0400, Alexey Charkov wrote:
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Wed, Aug 5, 2026 at 11:34=E2=80=AFPM Simon Glass <sjg@chromium=
+=2Eorg> wrote:
+> > > > > >
+> > > > > > Hi Alexey,
+> > > > > >
+> > > > > > On 2026-08-05T14:47:38, Alexey Charkov <alchark@flipper.net> wr=
+ote:
+> > > > > > > pylibfdt: Grow the FdtSw buffer geometrically
+> > > > > > >
+> > > > > > > Every expansion copies the whole tree into a freshly allocate=
+d buffer, so
+> > > > > > > growing by a fixed amount makes building a tree cost time qua=
+dratic in
+> > > > > > > its size. This is especially painful when assembling larger F=
+IT images with
+> > > > > > > binman, as it assembles the image with the data inline.
+> > > > > > >
+> > > > > > > Grow by at least as much as the tree already holds, which is =
+what variable
+> > > > > > > sized arrays usually do specifically to avoid such excessive =
+copying.
+> > > > > > >
+> > > > > > > With this change, building a Rockchip TF-A+Falcon image whose=
+ FIT carries
+> > > > > > > a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman =
+itself down
+> > > > > > > from 25.3 s to 14.0 s, as 7139 reallocations become 187. The =
+images
+> > > > > > > produced are byte-identical and the binman and dtoc test resu=
+lts are
+> > > > > > > unaffected.
+> > > > > > >
+> > > > > > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > > > > > >
+> > > > > > > scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
+> > > > > > >  1 file changed, 6 insertions(+), 2 deletions(-)
+> > > > > >
+> > > > > > This is a _shipped file from upstream dtc, so any change here w=
+ill be
+> > > > > > reverted on the next resync. Please can you send this to the dtc
+> > > > > > project first (see https://github.com/dgibson/dtc) and referenc=
+e the
+> > > > > > upstream commit / PR in the U-Boot commit message, similar to h=
+ow
+> > > > > > a63456b9191 links to dgibson/dtc PR 154. Otherwise the improvem=
+ent
+> > > > > > will be lost.
+> > > > > >
+> > > > > > > @@ -808,7 +812,7 @@ class FdtSw(FdtRo):
+> > > > > > >          if check_err(val, QUIET_NOSPACE) < 0:
+> > > > > > > -            self.resize(len(self._fdt) + self.INC_SIZE)
+> > > > > > > +            self.resize(len(self._fdt) + max(len(self._fdt),=
+ self.INC_SIZE))
+> > > > > >
+> > > > > > Logic looks correct - doubling gives amortised O(n) total copyi=
+ng, and
+> > > > > > the INC_SIZE floor keeps small trees from taking many tiny grow=
+ths.
+> > > > > > Nice measurement in the commit message too.
+> > > > >
+> > > > > Merged upstream: https://github.com/dgibson/dtc/pull/189
+> > > > >
+> > > > > Shall I spin a new version of this one to mention the upstream co=
+mmit?
+> > > >
+> > > > Yes please, and are there other changes we need to merge in from
+> > > > upstream as well, in the pylibfdt portion?
+> > >
+> > > I've also added public accessors for address-cells, size-cells along
+> > > with add/delete methods for memory reservations, which David merged
+> > > earlier today [1]. It would be great to pull those in, too, while we
+> > > are at it.
+> > >
+> > > They are useful for the Falcon mode via TF-A series I'm working on [2]
+> > > but haven't yet posted the new version due to breakage in am335x_evm
+> > > which I am yet to fix. I could send them together with this change
+> > > here as a separate mini-series if that works (i.e. ahead of the Falcon
+> > > changes which rely on them).
+> >
+> > That's good to know, and yes we want them. But I'm asking if there's
+> > other outstanding upstream changes to bring it?
+>=20
+> Not for the parts I touched (they are self-contained), but I could go
+> through the whole diff to see if there is meaningful divergence vs.
+> the U-Boot shipped version and report back (hopefully with patches if
+> applicable).
 
-Unless the clock driver is probed in SPL, the ACLK_BUS never gets
-initialized to 150 MHz.
+Yes please, we don't intentionally lag behind upstream on that part of
+the code.
 
-> 
->>
->> Ensure clock driver is always probed after bind for SPL builds to
->> initialize core PLLs and clocks in SPL phase on RK3568.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>
->> drivers/clk/rockchip/clk_rk3568.c | 4 ++++
->>  1 file changed, 4 insertions(+)
-> 
->> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
->> @@ -2938,6 +2938,10 @@ static int rk3568_clk_bind(struct udevice *dev)
->>       struct udevice *sys_child;
->>       struct sysreset_reg *priv;
->>
->> +     /* Ensure clocks are initialized after bind in SPL build */
->> +     if (IS_ENABLED(CONFIG_SPL_BUILD))
->> +             dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
->> +
-> 
-> Have you considered marking the CRU node bootph-all (or equivalent) in
-> the DT instead? That is the more usual DM way to force a device up
-> early, and it avoids sprinkling a phase check into every SoC driver.
-> If PROBE_AFTER_BIND is genuinely the right hammer here, please add a
-> note in the commit message explaining why.
+--=20
+Tom
 
-Use of bootph-all does not automatically triggers probe of the device.
+--zUuG+3yYEfy3KsKA
+Content-Type: application/pgp-signature; name="signature.asc"
 
-The main issue is the on demand driver probing, and depending on what
-boot source is used the clock driver may never be probed in SPL, e.g.
-when booting from RAM/USB.
+-----BEGIN PGP SIGNATURE-----
 
-We should possible move out some of these one-time clock initialization
-into e.g. arch_cpu_init() or similar in future to avoid having to use
-probe after bind.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaneEngAKCRAr4qD1Cr/k
+CuYhAQDRt3CkBEK7rDGmuREbUeJCODQEpQ7VdH3Jzu9RQWsEawD/SLmJuddMsJn2
+gAlG4tocpUbEonAxkQy+pD7jXC5hmwA=
+=BMw3
+-----END PGP SIGNATURE-----
 
-Regards,
-Jonas
-
-> 
-> Regards,
-> Simon
-
+--zUuG+3yYEfy3KsKA--
