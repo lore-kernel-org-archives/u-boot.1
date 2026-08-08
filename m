@@ -1,128 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D851AC5AC67
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 18:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A242C5AD4E
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 19:13:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 794A680E6A;
-	Sat,  8 Aug 2026 18:47:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qMjwFiaGdTZr; Sat,  8 Aug 2026 18:47:50 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5174F80E62
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786214870;
-	bh=VC4m6xxfcVqQy65ePWUOgg87DBwJKDcAUu49pFd0/eA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=T6FpUY1LwcEgDYYL7HMtWMwgfDoFyL+C9O+UV0cYXkSDF0kSL2GzzVb07sPkeXNN6
-	 vDdJbVwrK/L5eDP36Z/W/kzV46aQxMctEfEUaP4LxWG1769opoLyt4SLlUN+syyXHd
-	 mIEnGKjzLiIwJMRmM2YmDxy3POzY/JNeg8Bjf2xANVdbILWUACoNFlosv08d/r4CaL
-	 kR9qzex7wP5J3j2T3R855XOhzUtcsYjG/HO99uRGRs5zULZj0MGjo+t7AN1lAFx6xO
-	 38/96iLJK1qBbK3g5vXo+g4MU5TDZdJfSmPPIQBaq3sDKByjKh+aakUyY2K/9rNlxt
-	 59XGQc/BK5naQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5174F80E62;
-	Sat,  8 Aug 2026 18:47:50 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E935710E
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 18:47:48 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CF6F86066E
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 18:47:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 54FB760689;
+	Sat,  8 Aug 2026 19:13:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 330edgqzDnet for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 18:47:47 +0000 (UTC)
+ id cCsIMbyaZ0le; Sat,  8 Aug 2026 19:13:04 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 874956060D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786216384;
+	bh=Kv5ETN2k4aLOdDzXAFROnYzWQx6jJxRs2gukBTr9IoI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=VUKd7qMEUadmVFml2zhOVT3vII7hunLdbB0zYnIYnLFwMA8VyrwKeWs55XYNa8A27
+	 ZZdgpv57AyFwIaTOAfutnBYkoLVWOJUyOgESk/v5ASH2a+QI4lGR6jo+CfFYdfWr5g
+	 fiyuSGPQVe5Y9eNrgh1WbKhlQkO82rVsTUTujoorWs2gR4aNd7uYSqAi8P6DMnDnrR
+	 9Hr1mnsChtbhKrnK2Nm6EGqW1GVFKGgzs3VjvjDNC741dZQAqBleOh+gATlpx4zOMn
+	 0Pd4PW0FMaB5Uw6imL47REB9ryrnxfcyB9nPjDfQ1ZIc4f3XHgcrbXfgZSAE+8FvY4
+	 xItUBnQknbc1g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 874956060D;
+	Sat,  8 Aug 2026 19:13:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AC09A2F5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:13:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 929DD40065
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:13:02 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id F74OCBSjlF9o for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 19:13:01 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2c; helo=mail-oo1-xc2c.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 77F0F6064E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 77F0F6064E
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 77F0F6064E
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 18:47:46 +0000 (UTC)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6b0496f4bbcso321222eaf.0
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 11:47:46 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7C28E4006A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7C28E4006A
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7C28E4006A
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 19:13:01 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c15ca7a7ca9so51488366b.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 12:13:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786216379; cv=none;
+ d=google.com; s=arc-20260327;
+ b=LTTvtcIZ0r090nm3Nc0ba2Kl49cLI+rJWIQ4LALjZX6JkCHSRjCK0BUzNGPCcYILcU
+ utOHvgmX+HCv3fcNT6qsmRkO/0oHzLHUu1CGR2YnV+ZZZUunjZGhtjN6sErWqbLd7S/D
+ /Y9k1xr8V1mQ5IRnuXEymuqgyfLswhXkL3cDlmm78I3ODNB4kUqYRaHw7bRJhq9tpsO1
+ CYmE2XAUN420ftQhzQXii39B6eJ2PwYmCisjpwQz0t+s3dAiJa8uuneUwhMA3C/JOusq
+ 7kxvCICKmo/tORWbKvHJ1Qrpr0zS3GJ+xd5V9bHCKpYY4mRNiifjOs4mdmb9GmkuD7ty
+ 0MdA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Kv5ETN2k4aLOdDzXAFROnYzWQx6jJxRs2gukBTr9IoI=;
+ fh=h19i4MEHjZ0J++4StxZYxmIpBaCkUmhbpUec1J1bxWk=;
+ b=GZK19rOJPEQ17qBYl7yKo4mOOOe1rzN8JI9FrU3+pk4eaw2ZCLJ8deozWgOFDaF+lk
+ 8NeLSLxon9HvD544Edqt4YrMKu9h3t9GP+QA6MORE+a3LfpyAzyHY3zDkOxaSookmblM
+ 3kUEy3N92SY1MS8+HB4jpbmGklKuAMaLKL6aONwt8CYZeZvdGZZcLOfFJUldYoFu4V1o
+ GpKOxFXwhGpc1mJRjplpGoIoSbZFkkqSZnrlgiX0SENqns6NMNSO5qdOUyRNmgqjY/8p
+ dFh5BII/jIXHWCgrdFzC6hkVlnAbmIiaqsXdh17XgmdNi+R/SymNFSWhJIN7mUAvbOmq
+ SvPQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786214866; x=1786819666;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=VC4m6xxfcVqQy65ePWUOgg87DBwJKDcAUu49pFd0/eA=;
- b=sqdk5o4T4Sv/Y8ZuwNpWNQhOzpeulUO+8rT9Z9gJLhkazS+Yg/CQvJC46o0jlmC6FD
- Fk/M9MOYIeY7YAE4b4jIWqzHrxO/thjscCyrkmgrHFhWUEbjJz13sllZSs3nC/HVNlk/
- ryn5UZsFKaJj9N5SKbmxDivqYTanceprsQKzUMu2mZKAS4Wi/Ie3WuhdubWAom363mng
- VN3IQC/tAa6IIafieptTkgg0UqVc+zllpJWdrFkQID7HCXmki1kbfoSF99bZ+l1cRtk7
- yZpiYzNI3wbwZZiXmMPGXPha8XIgOA+7LjaPEekMQ5zIZLeBb6RAU8BfpkyHCURIr1sZ
- ApVg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrZitvzGcOY0s5uusl5QRLX/SV5rPWcJhKy22ZEDgO/t0/hwXXs+/CxdJvoSyykjyW/XsVh6go=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxGqdnxw7hrLWYhuBm2eFW8iY4XhTWVgHgY6u2/kUHnjxKf3eQB
- ScjUNSSaE5KK0RcizRkIM6vcohAgVlhlrRxOWoDviojm5dSKF/SJoATq7b1JcDm7CYrmgKreetT
- G4CdpUeM=
-X-Gm-Gg: AR+sD10hmv1FCkPYw9UEjrN5kzTTBYgZXzGV837ZW+vOcN4n9PAr4AvGEjZhdR0IB1e
- 9VXrsD+ptBQrMiurOs1qGadUsiTLw8INMYky9b9HNpoLlB/xcqaq5WqSzjfQ/gyiJQEJiNLGiOk
- 94vZy+d7wFCrt8/Jf3mYcGo5Ysn64nh68m7rTLj9E7zrY6OhbTWwVt7H63SWEvevH9lP2tlBMIw
- dIrTJsq0rnX6M5FqM7LmeoYSchLU08Xi4W5bw3Br2/Nq388sGrtPtMJ02vpzHM9XSUpuyuQS40V
- g3kHtxH65lzQFGqkn+nfY7I0uDkmJqPN3rLNTx2EYA44LDTIBA04d6lvc3fzTxur1Dgot7A1o5E
- ksUHMh/n4F2p4uNgHuNBXfAXmaTpM0RjzvYjm3wtuioxc2o55RZl41J6B/ZPzQNQMv8121x9jSI
- VUbFfBiE/Owloja4cfYDhtbmED+BNdyEJSBYExb6oEQUOC8hkk0wjkPAk8vNOcRT6WsTP9eUQ/G
- 6KsLNAuFyP0fB6/yoSOwFpASaBlsOSD0OliP6s=
-X-Received: by 2002:a05:6820:a0b:b0:6ae:8b66:8726 with SMTP id
- 006d021491bc7-6b0420b71d4mr4954571eaf.18.1786214865703; 
- Sat, 08 Aug 2026 11:47:45 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:99c2:f16e:201c:3bb5?
- ([2600:8803:e7e4:500:99c2:f16e:201c:3bb5])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b02be475f7sm4937248eaf.9.2026.08.08.11.47.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 08 Aug 2026 11:47:45 -0700 (PDT)
-Message-ID: <41bfaba7-6b7a-4c07-b14f-49421723e0a0@baylibre.com>
-Date: Sat, 8 Aug 2026 13:47:43 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Makefile: fix dtbs_check target
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-References: <20260806-fix-dtbs-check-v1-1-2fe0b9486df5@baylibre.com>
- <CAFLszTi0XiuovK3UW4Vq1XKB63ULKcP3DW5w-yYOkSrABpksCg@mail.gmail.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <CAFLszTi0XiuovK3UW4Vq1XKB63ULKcP3DW5w-yYOkSrABpksCg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786214866; x=1786819666;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ d=1e100.net; s=20251104; t=1786216379; x=1786821179;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=VC4m6xxfcVqQy65ePWUOgg87DBwJKDcAUu49pFd0/eA=;
- b=JMZCUuN8zZFwEsulw75tccm/1TJedqDoliFfNQYNyfZJ3tPn4ebcSAONd5jROV6/vH
- GDjWD/Uo967ZwZu8oE3iM+RXJDaAPiJ5u7NhD7LzwtlfVQ9ZaEU7JHkdX4Ol2ETZTd0x
- QQWPEdwVKvPFaYWagww/yy9jF1sntS8T/199X4fyI2ni+50nm4pMxWe564aZe8U/d7ms
- oIS+fkl7sTIRe1onjoA5ezDUZ84jby+XGCQ6VwgPo7wPtp1GkwKI7A6ovD0Sepl3hOJO
- uouZa4LPXRWTyENmZT/7aqQ1unSRWfT658wt8/rvF3ZWeyBUjNNe7H9tqZZp1J/jsjiy
- y2Mw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=Kv5ETN2k4aLOdDzXAFROnYzWQx6jJxRs2gukBTr9IoI=;
+ b=nn9yX1raP1x0UjUXrYu4pxqdGGt11uxDkkGPQ6c9O1GSy+rd+ko8fO0xo0j5jSTa3b
+ mayLx6ElankJkPCO1gi24BpexyvX/JEE33Rq6k+555N6owRm3711SyJGh2TRIWmvKun5
+ 5Q+MB03Pw8D7B2czIY8LkAk2fmilwN/FEyn1q2klqSh8sf9jBZ2UgcY0ltcryboZ9raf
+ O/JXYsdkUyoXPjdT1hN/Gbmw0zA7eqGlJXEku6Y/P9CaV4re4Sl0a1I5GE7RhVBEqaK3
+ s3EAsPU8QgyjwxNFqfgi0Y0tMJeqtRqt4sCdt7CmT7FNQIzyLXNFjkTqs83ant4Mr2pX
+ i4wg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrGVxtArIX0W4SsuPh9JNq7LrH7WCMceYfgCNmGX4m+nFCPjUKYD94HN6Xh9UVd/xwyB+d97w8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyzaJGn3NCtJKhMiM+pdbtxL6ewmGumUxad2DZv8Q+FEQS1Fh08
+ O2PFE+lRn5Yho7L50Lam51efAAQJYvACO8ucO94Gc1SvV2NVIIGFlpF7TRKVmcBz9N6kH9W0R5i
+ ABRktUAix3EDi8GkLaWLhXwvysQPpULNmS85UN1WjbA==
+X-Gm-Gg: AR+sD11FawjXL++sIAZEH9B6OScZqJYJ6N6GlVoW11p8nZG46Myl30X0iXoLLCHSOEs
+ eXulTETYRH/BH+kxgUQUk9YguedAX6xyN6NRyKNIwoI/2e39fHDc6+4wK7y2DY7mJmP9v9BBS1c
+ Ad/9ZMsIedkDxwasVnNCrwlWAR0Jkvhf0CtpYD111ecRgPqlEOGNzdWGfSyKsOA5uTAAAjbQTz0
+ RH/UV7Zk5IzJRluhAalY3w9qftpJJSNwWB5A9VAWJucaPOE+4LMoI4/Zr/COJivD7q/0agPe6RA
+ ZcgHqnw8KLMR5n8SVZ8l9nYkJutEEd0P5v8TK/5YJNxwW0bfFX1DQPQkqM0l+99k/4ZLXDBvjCE
+ =
+X-Received: by 2002:a17:907:1609:b0:c19:611c:fa8f with SMTP id
+ a640c23a62f3a-c2087505850mr424197466b.18.1786216379289; Sat, 08 Aug 2026
+ 12:12:59 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
+ <CAFLszTiJK9JFDe30ZfaXkZvmNUfWUVmC8ZVLU0b-7vfTsHaQ5w@mail.gmail.com>
+ <CAKTNdwHyab4T-02-YjSHqmEVHYVXmZSZ9FqYWzpvUpt63UUHEg@mail.gmail.com>
+ <20260808181058.GB394392@bill-the-cat>
+In-Reply-To: <20260808181058.GB394392@bill-the-cat>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Sat, 8 Aug 2026 23:12:47 +0400
+X-Gm-Features: AUfX_mxYQiINhX7d6wQcteb2bJX2C_9RV5Uo9ni30ir3piI7pYVPB5Oc5f6HzRs
+Message-ID: <CAKTNdwHED5XzQc4vQX7k_R-+O_0ae3q__w-tG5mfViPgBXW67g@mail.gmail.com>
+Subject: Re: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1786216379; x=1786821179;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Kv5ETN2k4aLOdDzXAFROnYzWQx6jJxRs2gukBTr9IoI=;
+ b=7QHEjlcw14B7yHBwYAQzAA9X1UUua58TFVuxgdpJeKcwNNtNBokQgSms5umXwLXG0t
+ LszXDEK5WFVzThA35HlwIW1VOz7R+1VLlgp2OMqGj4Uki3Q/hMkuwgr75ctvPW2FiSyK
+ VW8ZsYxxxonMM674IkCqxGpzbTnfJhy+RG18p0lsUNHgUYC4bL2dJp+GpWACe80aYEqz
+ cNl9ly0iL7bFfivc76nIy23VrQXX9iKrdPKOXcjW4oTl99HJpmg4nJ+sBEHMRRJWs0c4
+ +H55+Z3qyAdVl8uPqjP/Cpechc+iTzN4HAylX0/04fH20n6k2x2bJ1VxZVUMIibAXJRU
+ h/nQ==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=JMZCUuN8
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=7QHEjlcw
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -137,77 +150,88 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 8/8/26 11:23 AM, Simon Glass wrote:
-> Hi David,
-> 
-> On 2026-08-06T16:53:15, David Lechner <dlechner@baylibre.com> wrote:
->> Makefile: fix dtbs_check target
->>
->> Use absolute paths for src and srctree when calling dtbs_check via
->> sub-make command. This fixes dtbs checks not working.
->>
->> Without this change, we see errors like:
-> 
->>
->>     find: ‘dts/upstream/Bindings’: No such file or directory
-> 
-> Just to check, this only happens with out-of-tree builds (O=), right?
+Hi Tom,
 
-I always use O=, so I didn't think to check in-tree build.
+On Sat, Aug 8, 2026 at 10:11=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Sat, Aug 08, 2026 at 01:02:02PM +0400, Alexey Charkov wrote:
+> > Hi Simon,
+> >
+> > On Wed, Aug 5, 2026 at 11:34=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi Alexey,
+> > >
+> > > On 2026-08-05T14:47:38, Alexey Charkov <alchark@flipper.net> wrote:
+> > > > pylibfdt: Grow the FdtSw buffer geometrically
+> > > >
+> > > > Every expansion copies the whole tree into a freshly allocated buff=
+er, so
+> > > > growing by a fixed amount makes building a tree cost time quadratic=
+ in
+> > > > its size. This is especially painful when assembling larger FIT ima=
+ges with
+> > > > binman, as it assembles the image with the data inline.
+> > > >
+> > > > Grow by at least as much as the tree already holds, which is what v=
+ariable
+> > > > sized arrays usually do specifically to avoid such excessive copyin=
+g.
+> > > >
+> > > > With this change, building a Rockchip TF-A+Falcon image whose FIT c=
+arries
+> > > > a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itself=
+ down
+> > > > from 25.3 s to 14.0 s, as 7139 reallocations become 187. The images
+> > > > produced are byte-identical and the binman and dtoc test results ar=
+e
+> > > > unaffected.
+> > > >
+> > > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > > >
+> > > > scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
+> > > >  1 file changed, 6 insertions(+), 2 deletions(-)
+> > >
+> > > This is a _shipped file from upstream dtc, so any change here will be
+> > > reverted on the next resync. Please can you send this to the dtc
+> > > project first (see https://github.com/dgibson/dtc) and reference the
+> > > upstream commit / PR in the U-Boot commit message, similar to how
+> > > a63456b9191 links to dgibson/dtc PR 154. Otherwise the improvement
+> > > will be lost.
+> > >
+> > > > @@ -808,7 +812,7 @@ class FdtSw(FdtRo):
+> > > >          if check_err(val, QUIET_NOSPACE) < 0:
+> > > > -            self.resize(len(self._fdt) + self.INC_SIZE)
+> > > > +            self.resize(len(self._fdt) + max(len(self._fdt), self.=
+INC_SIZE))
+> > >
+> > > Logic looks correct - doubling gives amortised O(n) total copying, an=
+d
+> > > the INC_SIZE floor keeps small trees from taking many tiny growths.
+> > > Nice measurement in the commit message too.
+> >
+> > Merged upstream: https://github.com/dgibson/dtc/pull/189
+> >
+> > Shall I spin a new version of this one to mention the upstream commit?
+>
+> Yes please, and are there other changes we need to merge in from
+> upstream as well, in the pylibfdt portion?
 
-> In-tree the sub-make runs in the source directory, so the relative
-> path resolves. Please can you mention in the commit message that this
-> affects out-of-tree builds, so people know when it occurs and how to
-> reproduce it?
+I've also added public accessors for address-cells, size-cells along
+with add/delete methods for memory reservations, which David merged
+earlier today [1]. It would be great to pull those in, too, while we
+are at it.
 
-Sure.
+They are useful for the Falcon mode via TF-A series I'm working on [2]
+but haven't yet posted the new version due to breakage in am335x_evm
+which I am yet to fix. I could send them together with this change
+here as a separate mini-series if that works (i.e. ahead of the Falcon
+changes which rely on them).
 
-> 
->>
->>     find: ‘dts/upstream/Bindings’: No such file or directory
->>
->> This resulted in no schemas to be parsed and therefore no useful checks
->> were done.
->>
->> Since we do not want to modify dts/upstream/Makefile, as it would be
->> written over when we pull upstream changes, we make the changes in the
->> U-Boot Makefile.
->>
->> Signed-off-by: David Lechner <dlechner@baylibre.com>
->>
->> Makefile | 4 +++-
->>  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
->> diff --git a/Makefile b/Makefile
->> @@ -1455,7 +1455,9 @@ dtbs_check: dt_binding_check dtbs
->> +     $(Q)$(MAKE) $(build)=$(DT_BINDING_DIR) srctree=$(abspath $(srctree)) \
->> +             src=$(abspath $(srctree))/$(DT_BINDING_DIR) \
->> +             $(DT_BINDING_DIR)/processed-schema.json
-> 
-> I traced this through scripts/Makefile.build and
-> dts/upstream/Bindings/Makefile and the logic looks right: src on the
-> command line overrides the assignment in Makefile.build, so
-> find_all_cmd searches the source tree, DT_DOCS still resolves via
-> VPATH in the objtree, and the output lands in
-> $(obj)/processed-schema.json where scripts/Makefile.lib expects it
-> (DT_TMP_SCHEMA). The kernel has moved to defining src as
-> $(srctree)/$(obj) in Makefile.build, but there are more changes after
-> that, so we can worry about that later.
-> 
-> One small thing: $(abspath $(srctree)) is expanded twice. You could
-> assign it to a variable next to DT_BINDING_DIR to make the rule easier
-> to read. What do you think?
+[1] https://github.com/dgibson/dtc/pull/190
+[2] https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/tre=
+e/b4/atf-falcon?ref_type=3Dheads
 
-I thought I wrote $(abspath $(srctree)/$(DT_BINDING_DIR)) which would
-make it not so redundant.
-
-Your suggestion sounds fine though too.
-
-> 
-> In any case:
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Regards,
-> Simon
-
+Best regards,
+Alexey
