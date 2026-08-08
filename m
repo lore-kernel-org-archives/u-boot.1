@@ -4,132 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92165C55174
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1428C55174
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:33:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5666B6069B;
-	Sat,  8 Aug 2026 17:33:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5064D606A2;
+	Sat,  8 Aug 2026 17:33:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KF19SbcsmT7x; Sat,  8 Aug 2026 17:33:20 +0000 (UTC)
+ id Q0l3DoZSAoPg; Sat,  8 Aug 2026 17:33:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4323A6065E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4678160692
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786210400;
-	bh=nwXt7f6WlTyjlrlGaWimLN5gqe8yqj7JZZpmECMm9Vo=;
+	d=lists.u-boot-project.org ; s=default; t=1786210407;
+	bh=7NNLCLk6WoOyw1QQLx838l/oyDJzcqd9cdlQc/nSuuY=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=dySaB4QjWE8Lmsd5fvJKssN+0iOJj4FUHhKOGexNLvtMvdkbtobS00qsg/X9KBuva
-	 ttSpNUJVbByFYDMU2mPrY/kCYeG659ww8/pKgonoBOMRqgXPvtdyDNh8i8aOWR2B04
-	 nSntv6zYQAN27IXbqhG5OjI49iCQS0Gln4Y61dmBTONmcI1w1ZNDv+TlfwcYFAojPG
-	 Jrcl20nBWduQ+iCa5SuqKGFMaWWURM6jCFUbdLRFvBC6jdBxy3aiVxC/CwIPACkX7y
-	 da6Q5CKCDQGXb+n97dO7H44ImH9T44lq2xLBUZ7mBm0/kCJesWFLiNrmGjnNcYmz3Q
-	 zCccklVWZdQKw==
+	b=m1291DzRILzDgLzwxqxuI2Spn/hx7PMVKyC4CPRoeFZstcVq4Qvr1YqaDdKnUnFTh
+	 EzJ1tllINxjwr8yIOBlisRIZkHTxuNIiKY+cHjdDX9Ddgyl/Hi4pT9PqnQ5p9PiH+u
+	 sDVccrovUEaHrwdxwdfg6w1ved53E/QjGB0OmKVyEINm+4IM5JQbaA1WY4lfDoDwfE
+	 SG7p9MW8qk/MhEGQH/hc+OHUdcA0gzr1e9mFrD9MLVzN/ofVxew4VEwABGhskIllYt
+	 LpzjxvwvByG0976Tc9a+rqrpvXNd8tRsitlnkK3G506SpoxY96ootSYraOdRUxmmuu
+	 PuJZIUqRPagWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4323A6065E;
-	Sat,  8 Aug 2026 17:33:20 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B7479282
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:33:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4678160692;
+	Sat,  8 Aug 2026 17:33:27 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0E2332F5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:33:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A94D34007A
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:33:18 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E873D405CF
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:33:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nYZ8KLQAlQFx for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 17:33:18 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id s1EjCqOUfxHH for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 17:33:25 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
+ client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 99004400A9
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 99004400A9
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 99004400A9
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:33:17 +0000 (UTC)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-6a0a4aa99bdso585429a12.1
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:33:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786210396; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org B7691405BF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B7691405BF
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B7691405BF
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:33:24 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6a18e24ad25so550133a12.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:33:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786210403; cv=none;
  d=google.com; s=arc-20260327;
- b=bEmyem0G63Hm+rFOBOiBoklbJYjktjOL0YCHjRz937aunqw4lFrJzqotkjcWc+CgdK
- bJRl3w3miNQfZkSrDasHeP7N1Tn1qEwYDF2me3TTzcV2E9rI6nUFvwGmpAqW8EsrXCt8
- p64DOv1UjPVsAdTPBQ8vbNLirpNuV1OC+VRO0jbmgg53mBRlKLISZ3MMRrCj+u4/vRam
- xPgFIjBkjA2J5xAbFSvpy84Y10zk4rQtuhuf2X/Z/PGVuzvSpVzuzV5ceNKFuQ2EfqJn
- AoAoeR4r66B/REZ1Y0F048+jP0lLx1rfttNQEa/qiYOt+3z6qqAw5HLW1F6bK47ctAPp
- LcUw==
+ b=JeviGkAJuoS2K0yYLTHe/OznzXNPPFpo/IMpMRK9pQKz2wdodKZ3LRMIK5LPrPY56Z
+ H1eX3xVYV9GG5seqsMBSS3FJpXqGECVD+9UnyB25V3T9dMsCa5a0J/PUwBhOmIk/v3Fx
+ jFiOa+eSulCKFW2gFg7V571Uww8Qy/FNOhgPRqyc2z1ms6dEeA2cX/LqaTMwZtCCP8Ms
+ p8MTuxRgJQNPnTr0MXn4EVmDgOJSvXawG+9qd4zfxi7+zGYKWCh3LelhJNGs0tzV8oIZ
+ +qt7yJtvoSd6ZKlH7+XEfZnI8rB+89nE/wQ8R1x8bVaZ8ENAi2UOlw2PMWl4Nd/6HNww
+ fdyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=nwXt7f6WlTyjlrlGaWimLN5gqe8yqj7JZZpmECMm9Vo=;
- fh=8ELUOjKyCW5zjNkDVsUi4ofPIdn1lZF/cGwENRhulfE=;
- b=ru1qqrS86r8XpzD572P7WKTFISkL6+WsvyvRuu7eUIWvdN9b+gUH073nTWuu6l2Y3r
- ts55ECyDxj09CU3kL0I+VMouK1+fNjgHPQ7yl3M29aT1SkMnbBqXT0/GuK9wyPL6D8rq
- vD+ZDmMWl3JoRkKDacKW8RsK5ENyerYncf0DXvjUwnV7pIqIEJKvZx2k79gpvnRME47h
- j/iJURkhAsVRouwLDkkFPOqTfzIro6nMy2N6IHkbMbsE2No3y7/gSGx1Yh/f/7M/LDIj
- 4pLiePYXj6kx+YOiudscnrhBw0RBdhCOnab9UzYU2NlVvfI1ngKFWSq0PzJtsPW3+Md1
- ec8A==; darn=lists.u-boot-project.org
+ bh=7NNLCLk6WoOyw1QQLx838l/oyDJzcqd9cdlQc/nSuuY=;
+ fh=S8G6UEZOlml1/l/X4v7YXaauNsH7EJD8tcLHsSzYf+8=;
+ b=j3b/co6rPS3d4W8KwBsMWoJOig8jh7gBZN5bqtKN9yUBdlDGPm7F8WtANOfmVzTBPc
+ k3ZA5Yx1yEEJqo8c713WVafjlPDxqVkAma4gILWD9EPjvz75uhkdySOnpYsfzWxsgLtx
+ R2PuUqDa1XWzwVMFC4tvBQnGlcovXk+cf1Rw06l34tJ79XgWstFUMQKb9NFgzR0kF0At
+ cop4SYq4EQKzRtKGn6gfDlwrTSBWI8v/w54MfgPmWIP8ZPBg9jnJkLI3PdwOCD/eDsCU
+ 3wDrSeKXPMJA1+oqrXaghTxYN0H7coIQY/0TvcX96Hk/8kJCyfqIJ1nS/Ki9BBvUKqks
+ 4JDg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786210396; x=1786815196;
+ d=1e100.net; s=20251104; t=1786210403; x=1786815203;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=nwXt7f6WlTyjlrlGaWimLN5gqe8yqj7JZZpmECMm9Vo=;
- b=oTnuxZz3lx8eMZwHFq/YgbxvmyRWOXkr+hBDThhGemoUrUB1gb90PAoCsrUtce1A2g
- sbSFkIDYMSPDEPnVmbLWn3BYoY0q1RAm7nmmtLtwXpvVNn1UB4xp0pIkaVH+2l9CB/r0
- Ym0P2tfhY7liTH3aChAreGr0Hghc5gg+Sa/09QTq38EqGlj+RBPsdmRMJeKqOfF93WbC
- n1scSAH/cPpRra9FNL9QDbbdjw5kqO8AWfC50K9iKiYcTSvFlQX/QtlRoajcXsHUQhVe
- UxfF0sSB7dZzF/WNBfFqUEn3iBSjz3Qd7SOaBrFEz9gIdgKVYdK5J9v68ZvOfRkcVDCf
- s6yg==
-X-Gm-Message-State: AOJu0YxyF4HpIxOqcl5XQDZTi5stUCfuWVZKskfQH8ApTYKqYTlcsX6Q
- jBil4Cn99LArXNJi5JWSXNd9RZzbEtqCehl+yWjw4uyziZkxs/wh0yAwbfmF1DzgjbzecxRd7pc
- jhv+3zSdJrKHZFkGQSUhtrRvGI/oH6rqRWKhe0gHa
-X-Gm-Gg: AR+sD10vt7Z4DXz3vbBBrpZJvBxIgBuVaiQbbowWrQ7K9u1uIocXBC61LtnObTi/Fdt
- xLC9Q680mQMF3jGWFdDi8wOwE4mX/ZziL2z4k+7YphGH9cvSPDOkS6qTg4QIG5WFfwkJ2yud1/H
- IQHDT0fKMPZCb3q8QQBHIiyhIWz7RJUEKfANy8T/NjJ0oiIfjZYXfOr4nm8FEyvA09ZdvUY9Asr
- QBFIsv4Yuf6HPbP5islS1/X24JkPco8XnWCYcCOTo/p2OjvdfqQThY4XA6j5rpV9mlaIsCdbidT
- NhyqryvtlZ80/YLja6fXbPo+IG3esCc8v+bovTgH2XC8
-X-Received: by 2002:a05:6402:11d0:b0:6a1:b515:c3c1 with SMTP id
- 4fb4d7f45d1cf-6a1b515c6a2mr8171195a12.4.1786210395576; Sat, 08 Aug 2026
- 10:33:15 -0700 (PDT)
+ bh=7NNLCLk6WoOyw1QQLx838l/oyDJzcqd9cdlQc/nSuuY=;
+ b=oVebHaUTMVpyb19ubJvRFyD+p9fUweotD9HifLJaYD+W5llkIqO8KJl1DGGobGDZvP
+ JFFsSUFWoWuo0pigAwWiSE9NYjfivVWoeP0eu+GhdSIbaACUtTXIQNowhzyD/KdFl5xr
+ 5iE4YiDkQSQFKObHrmAhK+HeS+fofSFPob5wR5Df8vekMx3h/ii01PkXhQHWZHjcuv1y
+ 2MsTTVCa8D7AyUicWCoWP07G3Mmq7jWHEP/Lys8optgdtcldeV5N2pBJLrwcqrEtZp4p
+ xb/r/LIkTNG5BIqe1PM3DBdmX6OHKmRvsrT8q70TPt9LF98l1RoGzVhVbSDNHX3LFB2S
+ o4tA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Ro8o6l1JUkHYbxYPShwbsEdnmj/lKBba21Ub+a3IPydOCYa7OK8n30GjKyPRpxYw95uISKG65g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwKA9IF7gCGhG+l/DMxagmkMnNTnu/mNr4RVZc8EjDXlmQdL0vL
+ XNs2008s7XhBbG2tz11MwDsBXrdpgRvU4CqxWgp0O0ECXtJOMm9Xpr9AOaZuiwUlj+zSB7P9FAx
+ Ohr6ADTMlKphYVkXF1et+OXN1eDI9gUZCE50+TDNR
+X-Gm-Gg: AR+sD13Hxo9QT6YyCdpgiH7gKmv+wMm9/Kcz59fDubS/RD1FfKmZxZaSzZVjHwE2Wkx
+ MY8l9HJzvCf1NmCiiPBFSj5vmy3ybWW9f/wtDPVVCvx7JvMx3q8InhaHkpTiusrkI0ync5769TB
+ SPg4MTxPpgjudE3bXEqHVr/tgWvCc7rS0EWBem+2KB44CcB7Lp6oJza8mve7KD0n+13HIdmrrs+
+ Kn85gZroZisfor3BUq058yfdZTPZ7Ga8Gn7xbe2pyGCyU8nckqJPzvDbuAN45lFSdvxY8T+uVcy
+ gW5vbOMDqtDnttKhUqUwZVYigg/VmSn3wGJfe639JeM=
+X-Received: by 2002:a05:6402:378e:b0:6a1:778a:d223 with SMTP id
+ 4fb4d7f45d1cf-6a1f24a294emr4229323a12.18.1786210402659; Sat, 08 Aug 2026
+ 10:33:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260802213530.134789-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260802213530.134789-1-marek.vasut+renesas@mailbox.org>
+References: <20260729-binman_template_phandle_copy_fix-v3-1-9bf6cbbe1a61@ti.com>
+In-Reply-To: <20260729-binman_template_phandle_copy_fix-v3-1-9bf6cbbe1a61@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 11:33:01 -0600
-X-Gm-Features: AUfX_my0ThUeqTL_WaR32dVdUNeLc7fCXnqztdxU1DqrZFTUeARXQCZnmYYfACE
-Message-ID: <CAFLszTgS-5RydbUwGKm=S4NWKJF+WcmzH6wkN_wFPe7b0OOk3Q@mail.gmail.com>
-Subject: Re: [PATCH 1/2] board_f: Add verbose DRAM layout print option
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.u-boot-project.org, Aristo Chen <aristo.chen@canonical.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Sat, 8 Aug 2026 11:33:11 -0600
+X-Gm-Features: AUfX_mwkifZGgJUKzFjYp5VkgYzj1OZ9uCs_UdoVCS7IqT6RoZ4kF356hKtFcxE
+Message-ID: <CAFLszTjF-YcHuGmVWGJWJwSSxPYxN-c3n3imSeuNHWFo3r2iQw@mail.gmail.com>
+Subject: Re: [PATCH v3] fdt: Fix phandles not copying when using templates
+To: anshuld@ti.com
+Cc: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786210396; x=1786815196;
+ d=chromium.org; s=google; t=1786210403; x=1786815203;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=nwXt7f6WlTyjlrlGaWimLN5gqe8yqj7JZZpmECMm9Vo=;
- b=PXuoezl5Y60k5O4xQOjA6amWMjXD280nBcSPKDRBoCehC7IVCn1hcQqwzh/DNWYLAW
- UtjQWAJpULyGuR9Pzji+gBm8gPc+4p7uw0xMY1pXppIxHtANWI9YWle8PlfpET/53z/k
- oW/PqQibbnvc11q7UnEWWSBaKuWcTZTOrfQAY=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=7NNLCLk6WoOyw1QQLx838l/oyDJzcqd9cdlQc/nSuuY=;
+ b=feTzByAIOXKnbWW5r1Qd3MsdkF/z6GaEMGAGYIpp8SZrEW/wh9jvM/S34Lwo6xSwt7
+ PZZ6ujCTtDtzgpKitkEoxDLMBPL9TEuUnMLLYLRgdrVC1bc4I8jCZfv9zp5lWOWd/4pq
+ 1t8R5cQBfhwcTpbEWvXQD/41B+Y4wIS9a6kyM=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=PXuoezl5
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=feTzByAI
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,62 +140,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-08-02T21:33:37, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> board_f: Add verbose DRAM layout print option
+On 2026-07-29T10:24:57, Anshul Dalal <anshuld@ti.com> wrote:
+> fdt: Fix phandles not copying when using templates
 >
-> Make verbose DRAM layout print on boot configurable via newly introduced
-> CONFIG_DISPLAY_DRAM_CONFIG_VERBOSE Kconfig option. This reuses existing
-> DRAM layout debug print, but with additional rework to place the output
-> at the end of DRAM size listing, print both bank start and end addresses,
-> and skip empty banks. In case DEBUG is defined, the DRAM layout print is
-> triggered unconditionally.
+> The phandles used inside a template are not copied to the node inserting
+> the template, leading to a missing phandle error.
 >
-> The original debug print looked as follows, which puts the layout print
-> between DRAM: size announcement (1) and duplicate DRAM: size print (2),
-> does not skip empty banks (3), and does not print DRAM bank end (4).
+> The following example can be used to reproduce the issue:
 >
-> "
-> Model: Renesas Ironhide board based on r8a78000
-> DRAM:  <----------------------------------------------------------- (1)
-> RAM Configuration:
-> Bank #0: 1080000000 2 GiB
-> Bank #1: 1200000000 4 GiB <---------------------------------------- (4)
-> ...
-> Bank #8: 40000000 2 GiB
-> Bank #9: 0 0 Bytes <----------------------------------------------- (3)
-> ...
-> Bank #15: 0 0 Bytes
+> &binman {
+>   some_template: template-0 {
+>     ti-secure-rom {
+>       content = <&some_data>;
+>       keyfile = "some_key";
+>     };
+>     some_data: blob-ext {
+>       optional;
+>     };
+>   };
+>   output-bin {
+>     insert-template = <&some_template>;
+>   };
+> };
 >
-> DRAM:  2 GiB (total 32 GiB) <-------------------------------------- (2)
-> Core:  68 devices, 26 uclasses, devicetree: separate
-> "
+> With the error 'binman: Node '/binman/output-bin/ti-secure-rom': Cannot
+> find node for phandle 103' observed.
 >
-> The new debug print and optionally verbose print looks as follows, the
-> duplicate DRAM: prefix is removed (1), the layout is printed after the
-> DRAM size print (3), the DRAM end address is printed (3) and there are
-> no more empty banks printed (4):
+> The test_copy_subnodes_from_phandles was also updated to verify the new
+> behavior of phandles being copied.
 >
-> "
-> Model: Renesas Ironhide board based on r8a78000
-> DRAM:  2 GiB (total 32 GiB) <-------------------------------------- (1)
-> RAM Configuration: <----------------------------------------------- (2)
-> Bank #0: 0x1080000000 - 0x10ffffffff, 2 GiB <---------------------- (4)
-> Bank #1: 0x1200000000 - 0x12ffffffff, 4 GiB
-> Bank #2: 0x1400000000 - 0x14ffffffff, 4 GiB
-> Bank #3: 0x1600000000 - 0x16ffffffff, 4 GiB
-> Bank #4: 0x1800000000 - 0x18ffffffff, 4 GiB
-> Bank #5: 0x1a00000000 - 0x1affffffff, 4 GiB
-> Bank #6: 0x1c00000000 - 0x1cffffffff, 4 GiB
-> Bank #7: 0x1e00000000 - 0x1effffffff, 4 GiB
-> Bank #8: 0x40000000 - 0xbfffffff, 2 GiB <-------------------------- (3)
-> Core:  68 devices, 26 uclasses, devicetree: separate
-> "
+> Reviewed-by: Moteen Shah <m-shah@ti.com>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> common/Kconfig   |  6 ++++++
->  common/board_f.c | 33 ++++++++++++++++++++++++---------
->  2 files changed, 30 insertions(+), 9 deletions(-)
+> tools/binman/ftest.py                           | 12 ++++++++++++
+>  tools/binman/test/fdt/template_phandle_copy.dts | 22 ++++++++++++++++++++++
+>  tools/dtoc/fdt.py                               |  2 +-
+>  tools/dtoc/test_fdt.py                          |  4 ++--
+>  4 files changed, 37 insertions(+), 3 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
