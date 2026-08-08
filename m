@@ -4,127 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3C2C5AC67
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:57:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54578C5AD2C
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:58:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DE4D96066E;
-	Sat,  8 Aug 2026 17:57:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CDEAD6063E;
+	Sat,  8 Aug 2026 17:58:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jFFqfLTqnQkn; Sat,  8 Aug 2026 17:57:53 +0000 (UTC)
+ id UT2Ulkz5Jr4R; Sat,  8 Aug 2026 17:58:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4843C6063E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8D32A60624
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786211873;
-	bh=eDSJVWSLnEUCOW7rhDzgezGKicNZBjQzFyKEUUCxaZk=;
+	d=lists.u-boot-project.org ; s=default; t=1786211929;
+	bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=h6NbWDHOfUyF1RJfMS9H89oV1o+hJlnQ+lgi2BG9WfWXMKLpyesBFkxgFchZIw+7r
-	 tZv/FldqTJtH3Xz5sTmKiD7Fm2dApsENndrOmnSDkmObYfbgOgsvVRxPQu/f9HcbOu
-	 gtSyfHQ1PCXJm1RAlDT+0dPhz59Yde8XD1Ta7kcX/b8V7RkMI/vxiuELeCES5uP/9v
-	 7BY6O69M5f0u+N4DcN/tfs+HfQ0zE8bdNbfs9V1l8LqXGDNoavEltxbnXZTAnc6iqw
-	 gg9IVKbnjpO8Q0Rarvc5xu6NQPaSs1JUOeSeTvFtmLj9zdLGhLuoDhfjPiyRUBGwPt
-	 oPF60aQyLIN0g==
+	b=SYJW13Sloo6fKuPNnrbDFdB1dwJDoGpIzc1mf717fhcrRdudaYfTaUfW71jVS3W8V
+	 zW5ad1/uX9HnvD30SE0Ny09KEKFkwmxObSQ9gNtXGp7N3myW7OR11byebcTLkqGQRQ
+	 ixsfkFstkWFGgce2wFj4rFIzxPm4b+L+p3zE+MEXrxP/So6i/vJbQbRvrS6AftL8Fg
+	 XtHF+HQCiOvdueQEjCs2sKC7aYhZQeqVXcND/FF5LMvTemEyZmhwxDUp4VQfI40SsT
+	 /BZbtRjfpXtl56/PFexsBUPGVuWJV+DuLEZVRh9KMwsTCfyOYeWt0KSJ5+BMsfLrML
+	 JokSEODtk0oXg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4843C6063E;
-	Sat,  8 Aug 2026 17:57:53 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 010C010E
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:57:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8D32A60624;
+	Sat,  8 Aug 2026 17:58:49 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 73F271AF
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:58:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DBC9C40497
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:57:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6636380DB5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:58:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rwsV2p_HfYeZ for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 17:57:51 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VS-UP3823NS4 for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 17:58:47 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
+ client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org F049A4048D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F049A4048D
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp4.osuosl.org (Postfix) with ESMTPS id F049A4048D
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:57:50 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c15d3cd51b2so54469266b.3
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:57:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786211869; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8B68A80BE6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8B68A80BE6
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8B68A80BE6
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:58:47 +0000 (UTC)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-69c5fda04a8so826894a12.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:58:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786211925; cv=none;
  d=google.com; s=arc-20260327;
- b=ghaZd2H3horbA4O6Q6dyEV/NvRh+hORilbfea3y+y2bqKQMVHoORRYRemAcGeuhU7G
- FMaXpGNvkxNlSMWysCEM2gekyjcNHdTyIPGC/5MbOwphKqL/79b8+jkZx0Cd+oVxQnNg
- moFYh3JckQ8F9kynwtHfwXSYIYjDh70tQmzk8EeqquA9sjI8AzTN4sIFiK2l3U2waCts
- vm4TJm/KatWBtB0UsXYdeH6REWEW0cF/qYQY/thxVLmIYmwTd14HW8y0TwrRTx8pZ5aJ
- q3djktP/4+1AfKOewrB4/TUu2Zklb1hytMOlBAZKNwW6rOQcPGFhbspHBFJ/t/JOdsLs
- q1VA==
+ b=le+gKMWasqG+tIR45nPPzE4bwQsMDZEDyUhLTHVto6+fFpVKEexABOM4y5KtArmICC
+ mluPLCNK3C5qBcmRPW3g5DKsceeehN2GKTMi0xgR4i6SH/SaXXLE0X3/z/19epRmDSWy
+ Nw6RvGmRphULVqfFSxJPyN1meJ3C/bfFmGmcIaVpYOmKis81Cyexzh43YVsm1bFSK1ht
+ Z+Xh7vwwC4EgoMEILGbzYbzWPchAFT2/KMUxo+U2z3Qbn0nXnXfRSgLAgLNRNcwQ2LTU
+ OibRD9fgXm+bHBr+VJsi5X7l+Cid/oIiSH+KkV6p2EV3ZwrrL1FYLaz9EiX6A1gtrx9z
+ ROKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=eDSJVWSLnEUCOW7rhDzgezGKicNZBjQzFyKEUUCxaZk=;
+ bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
  fh=8TbiD9fEG91wSNsvqqOput+PpnqsIRDXX+RXlsylxJ4=;
- b=iTo8q83rnrNzdpJw9PTOCCATsVKwnDeoS+iTP6g9i3wPgI7KVkSxc+UqKBExTX06NC
- TuTF/pReqJcVIJBkFpk097KHgUvy63caIM8aZzTyG0Zwb9jwwuAJN884kpEQu9n/GniQ
- uf8R9zZ237sjXNMW7L69ocI/wGJJSsm6jdv+8xeBAUQGQebl6zVynFj9nXHbFdc+3gki
- N9Qm3HOiQ5WJ6VT9e/A760KsosZPIOzUh9U7jS48p04XB4YkzfHu1I/L/0gXvOnflbCS
- 8U6UE7++M+vOkT6kjrQ1DA40M2aU8V1kF9ZAieTsZqyAhS9qzuyoktFiyR8MmE1MQRfi
- z8bQ==; darn=lists.u-boot-project.org
+ b=fL7pRCo+SrmS6Nj8FRf6f4mrbpn6PB1TVZn+z7EoIXxcY+EI91ll2gasAAiqhHUcd3
+ LKo8rN4xEv3nxSYV4kgxUP5PZaipkyQ/NxWnQJhic+ppbgDu6WTTCKpC4Vezk1h/zUS9
+ dC1kAS33wr+z/6iXLS4TPg//YrIepMFxwJSN4GMbacyEFPztUQee44Iu/JU2zNA2TvvC
+ Z7SLtN01gLEiaNpNt5EU316h+S5JT6HZ5hux76dNJSyzC96sxt619Kmfv4dPS7uxC7eI
+ Cah8uEGcFajclwvaMN6gmArl8EhRrRJFKqhq8dQzAGLnPmCy2jooeX0s+BdaTPcv71Zk
+ 8y6Q==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786211869; x=1786816669;
+ d=1e100.net; s=20251104; t=1786211925; x=1786816725;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=eDSJVWSLnEUCOW7rhDzgezGKicNZBjQzFyKEUUCxaZk=;
- b=FHjM73miPvYLngD9e6T25iXbz1SASuUVJHnK9mDcCznHRSjNyHMTf39gq5xMhkWyN3
- kXu2/SEV+Lk76+M1FosMZfPbTlCo3M7mImSyaQ9zBznCLh5S50W57J2W76Xca18DDfXR
- yYRqnuxWP0BADYvkxog44koXauwqY9c7Wzc6XcdixVSwd/AEa+gBloOP2wXO41UQkAEH
- NC9Kz6Ic3kGvEcwHc43J+EXeM0aunhUr7zOqeCfWrQ/CSEwy9+mShjCGyNtQqCPOP5TL
- 2GeT5if728OfIJ0mS6ohtjM6vnEjxX7LSsqUMR87hhtWXYU9mbl+DwKTImCHW1qNBzrK
- sKww==
-X-Gm-Message-State: AOJu0Yys8P5Q9Bl97orNoldPsD1v0ml8TtZzDFh12wZ/09j07c9aD7zt
- SZbmVvBU6wwumrW4Vp4pPo9yxrTJibp1jh8lfCGhWkr1yQ/CbmVZqS2FdJ2tPMn+g2t/oLuGJlT
- 1fkwqAHJAcA6477+AuAfMDvJi1oukxAs3R5IR5Tgx6TsaDTWkdak=
-X-Gm-Gg: AR+sD114+TniuqkhQXg1cqvXxjCCQ1AhcuE66F5JRMBN+utgr4raY/5aeUQcLt9awpz
- FxBCJPdAWCIMsYG2UYfM6ADSSh/OxbkwnyrcFU+vB/VYt1NuL1tiiaQYJBV3mhTBFkIIJ590yBU
- sqhxZC0Se3wN9hI1kMNcVx0h3jDMyTY9edmsXOUH5+1w2NIeRF4naYlBFT0sUScQ85URFhr7LjS
- tcjwruQ6lk2XREQlBUcA1CLy1q+9H7iwuGOWhbywbfsRn4nJu0fspliEe6NZi0OU1gqHFBUzirR
- bIve02wg5xVCw3qq68tCWTlWdC9BcdwoeYWFgIt1D6M=
-X-Received: by 2002:a17:906:9fd1:b0:c20:7557:d986 with SMTP id
- a640c23a62f3a-c20873bf22emr478192366b.13.1786211868825; Sat, 08 Aug 2026
- 10:57:48 -0700 (PDT)
+ bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
+ b=BSZTaDyMt4bGg2GZRwx33mdyyv4GoRI7noNLh7rubtuPvt5G4SRkmlG1E4OyQhU0fM
+ 7+43xY8/ccwXwYyyDHMlchZXjrcTgEpHt2ZUjB6V7cUPRd2GYic9n8+ZhcPlq2Lqkdst
+ pPvHfGqvefDmun3iZSCXeLcO3ID3wbRc+MDlUDMy5ymHeuq+kYarz6elZBkbHRGvtz0A
+ 9A/g3gpsJnmp1WXacxqa4IZwodkoLBDHDNAo+JHj61J4MzexTZzROTIQ/bZ7FhkW7a41
+ Vcky6ZarHtkRqEeGZQLB3fM0rfnIoEb112WVXdWBNMG6cMqDeDY7bc/vsuH/FmYeB8i2
+ jAuw==
+X-Gm-Message-State: AOJu0YxsoTc1LE9mo1z96xtwjGz1eYH4olmmZZDLK3cYr2MsLABeURfg
+ PNRoOP1GUmx0pd0uF4L1wxOW7KrHN07otgRtsqhPXpHwOte7X8cBQBGFJqqSer5BFSsA0BhX/qG
+ 2caSIuD96BjlmMkd7EhzFzBypMKqY5bEE3JgZvIqT
+X-Gm-Gg: AR+sD13czFf/doQC2E5s40AfaJXZ9fm3xbRs5EGdXj86q3funDXFdx4Ehd9//cyAcSh
+ +ATspZlfvkkyF6fxcG/4//ML2XDCZulyPQifZKxJckPamhfHho5V7fnfj1rbxZ8ruSEGQ7hR5z+
+ Dysd9hIfZmz88GM+OYHz1LF7gS2rRxHPYslkxC/xrfayxzPCe6QmXcp1heOnwPlbAf/qnXShqV0
+ G34M/rXsKz/tGqp4bxchhfnoCZawOdNVD+6V46pdwvdq6J9YwwAs4Uea1M2fLQ355PJIh7eD0ns
+ CQsozXDSTpSv3wT1kEncREGMbgSoe+XcLHNnAXDUhjg=
+X-Received: by 2002:a05:6402:1f08:b0:6a1:b0b:ba6 with SMTP id
+ 4fb4d7f45d1cf-6a14f13e483mr9876181a12.15.1786211925446; Sat, 08 Aug 2026
+ 10:58:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260729081218.550465-1-pranav.sanwal@amd.com>
- <20260729081218.550465-6-pranav.sanwal@amd.com>
-In-Reply-To: <20260729081218.550465-6-pranav.sanwal@amd.com>
+In-Reply-To: <20260729081218.550465-1-pranav.sanwal@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 11:57:35 -0600
-X-Gm-Features: AUfX_mzXxAXhMSzcjZ3X6I-SbwTHhEhFGJcxYOpR4snrMDgWKC46jW6-NtHgtT4
-Message-ID: <CAFLszTgehLY9oWT-joZpjRBhoosszUu-G9YhnYQZsRCwxxD1qQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] gpio: delay: free wrapped real GPIOs on remove
+Date: Sat, 8 Aug 2026 11:58:33 -0600
+X-Gm-Features: AUfX_mzZJF1sXgX03-7P4-MKXdlzCjEfvmQ2M3vj3JCmI9QRxw19Nt2eHjNkTq8
+Message-ID: <CAFLszTgSKL4SRDOpej4-rd2CPtNuLVbA=L9yfCLhy9_g5E9ihg@mail.gmail.com>
+Subject: Re: [v2,0/5] gpio: improve claim diagnostics and fix gpio-delay
+ offset handling
 To: pranav.sanwal@amd.com
 Cc: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786211869; x=1786816669;
+ d=chromium.org; s=google; t=1786211925; x=1786816725;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=eDSJVWSLnEUCOW7rhDzgezGKicNZBjQzFyKEUUCxaZk=;
- b=mGFQjPcP6r9EtEooP3N7fG1dU1wROJfLzvDBSf3W4kebN/yaq9GzWI2jdDwOm7Ejxx
- W2WrojDtXAzYq0wroTnym/uNPzq6G03r69HxUXkKJ4JFj7pgzZ9/Xsnb/Um5ElBOhzRl
- nyb3Yx/RL82CLiioiG4v+ngLzc3HVWWuCKi8s=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
+ b=bjOelfeVnx+SXTRg/qXxxRle6jXTx1sTcqshJm4MIUEY9vJ8msNvbGVkoEWdzdt957
+ f/cAEX64Ur3L5r07j+sBrwJhQvRb0bci7d0RHS/jqZ9p+cOTee5WYAIp/muyubd+GJR2
+ Q0coH6GRvQ6V5+PTJ28rrSLzMvdBTYPdS9BKA=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=mGFQjPcP
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=bjOelfeV
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,53 +143,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Pranav,
 
 On 2026-07-29T08:12:14, Pranav Sanwal <pranav.sanwal@amd.com> wrote:
-> gpio: delay: free wrapped real GPIOs on remove
->
-> gpio_delay_probe() requests the real GPIOs it wraps via
-> gpio_request_by_name_nodev(), which strdup()s a label into the real
-> GPIO device's own uc_priv->name[] array. The driver had no .remove
-> hook, so those requests, and their strdup'd labels, were never
-> released when the gpio-delay device was torn down.
->
-> Add gpio_delay_remove() to free each wrapped real GPIO. Guard each
-> free with device_active() on the real GPIO's device: generic DM
-> teardown (e.g. dm_leak_check_end()'s uclass-by-uclass destroy) does
-> not guarantee a consumer is removed before the provider it wraps, so
-> the real GPIO device may already be inactive with its uclass_priv
-> freed by the time this runs.
->
-> Fixes: c866f2f197e2 ("gpio: Add GPIO delay driver")
-> Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
->
-> drivers/gpio/gpio-delay.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
 
-> diff --git a/drivers/gpio/gpio-delay.c b/drivers/gpio/gpio-delay.c
-> @@ -90,6 +90,20 @@ static int gpio_delay_xlate(struct udevice *dev, struct gpio_desc *desc,
-> +static int gpio_delay_remove(struct udevice *dev)
-> +{
-> +     struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-> +     struct gpio_delay_priv *priv = dev_get_priv(dev);
-> +     int i;
-> +
-> +     for (i = 0; i < uc_priv->gpio_count; i++) {
-> +             if (device_active(priv->descs[i].real_gpio.dev))
-> +                     dm_gpio_free(dev, &priv->descs[i].real_gpio);
-> +     }
-> +
-> +     return 0;
-> +}
+> Changes in v2:
 
-Please can you add a short in-code comment explaining why the
-device_active() guard is needed - a future reader touching this loop
-won't have the commit message to hand and the guard otherwise looks
-superfluous.
+Could you also add sandbox coverage for gpio-delay ? You shoud add a
+gpio-delay node to the sandbox test devicetree wrapping at least two
+real lines, plus a test in test/dm/gpio.c that requests both consumers
+and toggles them? That would cover the offset-propagation fix in patch
+4, the gpio_count/bounds fix in patch 3, and - via dm_leak_check - the
+remove-path fix in patch 5, all of which are otherwise not covered by
+tests and might break at any time.
 
-One related question: gpio_delay_probe() bails out on the first failed
-gpio_request_by_name_nodev() without freeing the descs it has already
-populated, so any partial-probe leak is not covered by this .remove
-hook. That's pre-existing rather than something to fix here, but if
-you're respinning anyway it would be worth cleaning up in probe by
-calling the same free path on error.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Regards,
+Simon
