@@ -1,134 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6A6FC55174
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 13:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A45DC5AC67
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 13:49:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DD52780E30;
-	Sat,  8 Aug 2026 13:48:39 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r6PpPCZuhCCK; Sat,  8 Aug 2026 13:48:38 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5C22980DE9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786196918;
-	bh=zB2pDY3E/9NSov08Dt+mS77/OlSosARqtXcWvX1Qwu0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=A0BfmdEpaQ8CibAgN8d0ZkIkvAQ3uZZ1TyBcOE/D70E0mUc60Lu8FFThJLv1seJzy
-	 +ZG9gdAT6S4+UFXChQy2gZ4mxg66mm+QsbKrT8v/g8FY0uXZOY/4DEutdgzB0KUt8E
-	 USha0mnkc6Ss4p6Fg+If7/3Yg8NiVjfnZxGwoVtkux/nNXVSzyvGUCRwbPVbwA9Nke
-	 CZoJM48kgy/apAJllPXzb9T1F4HBfXSj4H3ypn8VI5urrwYX0OZHhyW4CaUvDWNe78
-	 yAhOKutDik3jcCwPnPacPgJLCuuoYyU/o6o+Fq4st7Nlgg3HrFFpmvlTRn5kgMX+0/
-	 KT9nMRBI3QErA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5C22980DE9;
-	Sat,  8 Aug 2026 13:48:38 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 175E6296
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 13:48:37 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0968260677
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 13:48:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1019B60692;
+	Sat,  8 Aug 2026 13:49:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XmYdw6sFMvQG for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 13:48:36 +0000 (UTC)
+ id ncLsgA2JvlSm; Sat,  8 Aug 2026 13:49:20 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 91C566065E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786196960;
+	bh=uE8BJ4wIRdzHO2K9LGqBcJtk9ogLc31eUyisL/XUusY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=AgiNeG5xYQbE24wUxl9jPhYf7zx7ZrqGYM+AZMRPU/bhXE7FFfYHvv1NGBS5/Kg9n
+	 1n2fdXMVS0A62sQlTvpjUw0rnbQGfxqAJQnHpuWTXlre1y0LyElMbJN9Uoe+mu/XWY
+	 V4tNHm81sWeRxy5kv74NXWzi0ufFtcO0/LlgKfmpIp9bJ32lMLpkmz/XsF1PZ6RbdR
+	 EPlU2xp20SAvulE9FWpucQDBM948xOWoZiL9KyETmwilvEHQ0cU9VAETmTEBJclpm5
+	 V26uZuhTZ/kfvIIS9PUgVbCgir4PCyPBruZda3NGx/USi5cb1pzlCnqCoJhF5rTgTf
+	 Z6wsVZztoL99w==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 91C566065E;
+	Sat,  8 Aug 2026 13:49:20 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 584D0282
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 13:49:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3EA5180E33
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 13:49:19 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JHSLk87Gn1m8 for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 13:49:18 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 1B4806067D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1B4806067D
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1B4806067D
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 13:48:35 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-6a082b3671fso410869a12.3
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 06:48:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786196914; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5C37280E28
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5C37280E28
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5C37280E28
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 13:49:18 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6a1ff91dcedso195882a12.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 06:49:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786196956; cv=none;
  d=google.com; s=arc-20260327;
- b=EiSWl7NDO0s6z7Smxm3FjiZO3CEzw5fU4DLdWjANX1Wnea408LMWONCYZtiNHkDpfB
- F58OpYhB0QHu+fodiFGzD6WqLKxHWXNw4hInrGPPMg6njD7rJzvhfkw1dDQd/mV3ychx
- scIyBJm02QZa8Iw2iyci5fENbpbfyJrzNT8LXhILVPh3c368HU1SBokK2o0h5JEM076v
- 0iCZxISgKf81T0S5biV4nxeLgr8tx1yxBdtp6pvyS+vfHfTHx7cJDU5m+rUZUnzg77yM
- 1fTm2SeUQQF7G1nSFAfz2WH6BNuv3BbxQ2Yoihn3oXOitC9+RSIcvaokhp3cidKR33XY
- sP2Q==
+ b=fGhGOZE4sq0kywsTAyZFoEb4VG7S3E8DDxv+Rin/0aYtR13fbEZmWat2J8yZm3QnFF
+ 9R4Q1GBHFJ5wy0aZwS+wj8npRtCrKf/PigTYxo8QPX+8Wqt8yi2uj5CFx26lfMaIi0f/
+ u+IBhEvfziN7FdIZIcQ7qACNb2V3HzB2cc14NH+CrZGeNnu0ajSdPKQGLmIEgoFmjpOd
+ 2JSllSBNI1ZXL+EaMq4H/PTON8wrfXY+OWSGFnsGQFjG/QTajNKJUKehAUaunQi7trvl
+ lgcZJSbYL3Qme9rUSyRQMHt7XB75t1pAh9i3cyturNmJB+6DaxvUKgjSqkPdR5BRBTlP
+ Hjiw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=zB2pDY3E/9NSov08Dt+mS77/OlSosARqtXcWvX1Qwu0=;
- fh=03xFhLQz88vGk+OxVx1sK/8GEjp+FklHyDiE0dRxSI8=;
- b=SvmY7MpIeeyMnA73Ix/wMSDr21J9VcSG9tvXOiDgxoGQRV42rNewEst5pq+Hr1qBcj
- 38OE9HT0mPUuUzuSDNBla5+bFPeitS17UPBj5nfC6K75NLyS61SlSIVt2KxMOkB8/jzb
- 2wVHfqN/bwqsXYzZ/AcVky/prIu3+hX8ng0Kq500TZ6gUebLiCrybrywf1M0jBJrWVS7
- FvOLtETuRskhKYQj2JP2qDs+ZWARIu5Vgjkp+bq658Af6BNTPg7wuf5zKpXYZb4rpoKR
- U01FFUl5rj9j6PwJk3yVpF5PTjeqTxapfk0eqOdkeCbsf+CjbOu5tcbshtQIcNlShRGs
- 3h6A==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=uE8BJ4wIRdzHO2K9LGqBcJtk9ogLc31eUyisL/XUusY=;
+ fh=7jrThJA6pEWCuPXKG1O5LDhObUByc+vIYCmgiLRHVlk=;
+ b=SgLejD0KDeAwgfvLmYnfH9/SJ2vs85mAatwpBI6xI8WgW3s0jPTsnnwUntBQTMdz9E
+ Cn2oWhPyxLclpmWhTTwm/hbQePyVdiTS4QvHrlXz00Z2pRmURVsc+mXQz2ktRLma6eMz
+ oAK5yIJ2AqWBpcY1QQqX1RwdTQHSFKrISG99hpZ8g+7vSznE2S0S6bOil6C3kpBrbyTm
+ wvD1Vw3ymqDaSWVWOMpkLQee0BMZs1j2QdxVcy9of/AVCqGEpQoltCa8v+5suWZ3Rmlm
+ 9qsyPR3X9xzVQPyeAz/ArYYhmsU9B8cu20j2ZHwXlNxssQJEKQ6YkCZFq+/ZMy1gFOW2
+ /yPQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786196914; x=1786801714;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=zB2pDY3E/9NSov08Dt+mS77/OlSosARqtXcWvX1Qwu0=;
- b=Sfh903PxtQtLSdptTYvLtU/o+sW0f9Tj692wob6T8fYTSMfBts5/1PVl1F6cgKf3ar
- sIZ8IlWM8gaPWlzWftgILRrEVPP5qwbQwtU8dLjXb9AD0gsMxZrb+pF3fayUZFqAfz/D
- 0MDeyyccRycdYvGO/fzkDlcrY9f8PP8ClIm5ldOSOCliFN3S5curEJsGkP3llBlqrAJT
- 2VSJ+A/umzz0m826r0jnHtwwx3gM+TVm4NPoapGJ3ShHd/KyOu/joaij9TYRa9KWIokS
- cF8lmlIjPyuRfW31aez1kPHkTnwskDbkneSoKSOGs2uvsMQELILpI+JveAy03oujpkN6
- xtWQ==
-X-Gm-Message-State: AOJu0YzN9cBynYwreldu7mDMkFc2+urTV5grYMEYARMUkF/de4azLuI7
- KxKxKLzKPbFkJ0FTgx36Z/EjYgGcLfPYybYEy2XNqJRJzAlScb2jhNHrv92wHa1RUcCmmHGi+JA
- 0R+Fbhux3ym+Xk8s8ZnI6hKooI95PAVe28A6Jg2cA
-X-Gm-Gg: AR+sD11Tg9miG3SI9O/RNrH6t66Bc1RIx6OC3z9u8Rm/wbJ/nVQCCRofhzewwfUo/+u
- kcv758pSyalXM0BZjYTpC27X3lTERVqCVmq78JmlQrvIUqe0EFe9ItTWf0bvPycXouTpbKJ6cI8
- 7vmiCDyASinZV3O9QSg0bEamCVBKL61CWg4zevxg4rq7YHWcIJRxqoA40N5G8KteauPoTFNLqhC
- VQj0wri4Yj/a+F1zN6WvgyvQxWbfZNe2ZR1Nf48JXaMQHM2kRlFU8MPZNxHGgKieZIn3wVFg9ua
- /L32LuPB0BX2nPv9Ontj9Btr8Utt0ImaWFc1rJoV/Hc=
-X-Received: by 2002:a05:6402:320e:b0:6a1:f95b:8cff with SMTP id
- 4fb4d7f45d1cf-6a1f95b8f45mr1716610a12.1.1786196913883; Sat, 08 Aug 2026
- 06:48:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260808004437.4367-1-aristo.chen@canonical.com>
- <20260808004437.4367-3-aristo.chen@canonical.com>
-In-Reply-To: <20260808004437.4367-3-aristo.chen@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 07:48:22 -0600
-X-Gm-Features: AUfX_my_tUaU2jL0620iT6cI9Q75y22UWjxGv0qcFcKq-V6mWupJvBLbAHxCa-U
-Message-ID: <CAFLszThpVMGU3q6oRdDOn0KJaRAha1cuUdmh3wfts8Rn+mZecw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] test: cmd: Add gzwrite chunk boundary regression
- test
-To: Aristo Chen <aristo.chen@canonical.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786196914; x=1786801714;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ d=1e100.net; s=20251104; t=1786196956; x=1786801756;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=zB2pDY3E/9NSov08Dt+mS77/OlSosARqtXcWvX1Qwu0=;
- b=FGg74JYLOrneSk87U4pSK/kVOxXkRJkuJOMs9avPpq9/ct1gpsBQuQZq9i3OvjAh8l
- Gzc/ZRJPBmF74TmeZkGQlQVbfY0s6qGtt30FoGzcNKT8bho1HOzV6Z+dp6Y2XPbkZuDS
- jbO2ShaFtX10uHxiRObCh7nLP3l9boM53vc9k=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=uE8BJ4wIRdzHO2K9LGqBcJtk9ogLc31eUyisL/XUusY=;
+ b=pe5Bv2tKE/GnVifkoPCMA0loDb3FxB/XWn0zFF6w8xCwTkbTcNwECaZGDwG1zEuJsx
+ c0yG6mEztAuRhJzxvFC5/IwWzpRTadRp7wUT9khyCJEBySWlqkFVrnvqK3jdj/K8lZaL
+ lu3F185ZzunEg4sAUwvk4PqDx29xoVy8vzC8MLOAi+yvAZ4hMbDJ9bo/WqaFRGrkKhAh
+ 8rgwprileTtZ04wH4b+FFMQrDm9mdtVLLAhRQTKi71KZzprl54yCUnoXfo25iLPFRJSU
+ D9+1arlrSXN3rub/bU6uXXmxn0ZsS15F1S67K2wqqFstYBTfe61CdvWXasJDy40Fc3PS
+ vZPA==
+X-Gm-Message-State: AOJu0YztHhyfXJTx9ASZF0OzGJjYxwqSAK6szB0fOqy5WyEQGNzNpL71
+ Fubxht0iFBQ3NgpAO+QC+3tUN/gVF4NLV3eMO9GWydqh9AZlcqblbwDNvP/7wc1tqWfs1Pp8bNT
+ b9m69ip7k9KQSCLKUU2rU2VHwWuYSE2lMgDLwrF19PIYVnUT4V9A=
+X-Gm-Gg: AR+sD10/SvVsWjtTENUG8UchuKC4/LTybjZ4Tqe3+dOlXgBQCTdiHzNmOy7HIfiGn4E
+ cLbq5FLkLwDslgh+AbYrkUJyOcufaYLQ+VJYfMDQVos9MJFZ6uWK7KbMwY+xC2DEdMZJomcOK3V
+ f4NlQ+6NinFVjz0wFYosePZAqh9DCmvcc0cFIeCctW09bH9yeZCYj8IEAzezFTmIirCthAuUQLu
+ Dj/u6vD6B/SuIfpetbbl36knuibeQo3xcM+2jcJC8Eu4YNjgsFuxMoekD+hx5ix+R7kIyKe3LtF
+ hGZy/OaMaH2AEvdZN2tIMrB4l7YjkXqAJKJyAHP12Xo=
+X-Received: by 2002:a05:6402:21d2:b0:6a0:dda3:83db with SMTP id
+ 4fb4d7f45d1cf-6a1e59f17a6mr5292464a12.0.1786196956275; Sat, 08 Aug 2026
+ 06:49:16 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260807-riscv-full-fit-support-v1-0-21a34f79c350@maquefel.me>
+In-Reply-To: <20260807-riscv-full-fit-support-v1-0-21a34f79c350@maquefel.me>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 8 Aug 2026 07:49:04 -0600
+X-Gm-Features: AUfX_my5VUHVEj5GZ0Hd_GIPOrFPbyyaSdmKErPEkSMPWZkxQwYvPHMLta-Iim0
+Message-ID: <CAFLszThsggCcTCw63L71JhTCH2VC+HNUD=6XyBJNm9QpwLdmhg@mail.gmail.com>
+Subject: Re: [0/5] RISC-V SPL: fix OpenSBI FULL FIT loading
+To: nikita.shubin@maquefel.me
+Cc: u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1786196956; x=1786801756;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=uE8BJ4wIRdzHO2K9LGqBcJtk9ogLc31eUyisL/XUusY=;
+ b=CS97kBz+Jv1y/kNF/G9543kixHO+8gCAJUkbSLIs/e/NweakeMbbQQvthJnfC9avAo
+ rxOV2zietn6mt+xdxVE0ArzSmtq0u+8Tzuuyzp3YJLclPr7ftJB49d9WsZVpYdP6Ofpt
+ SEKdOa/bQmV+XFjBEgZmSDDZxAo9VGOy9pCRY=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=FGg74JYL
+ header.s=google header.b=CS97kBz+
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,28 +141,40 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-08-08T00:44:32, Aristo Chen <aristo.chen@canonical.com> wrote:
-> test: cmd: Add gzwrite chunk boundary regression test
->
-> Add a deterministic regression test for the gzwrite() case where a
-> decompression input chunk is exhausted at exactly the same time as
-> the write buffer fills up. Build a gzip file by hand from two 1 KiB
-> stored deflate blocks and pick a chunk size that covers exactly the
-> first block header plus its payload, so that with a 1 KiB write
-> buffer the first input chunk runs out precisely when the write buffer
-> is full.
->
-> Unlike the existing random data test, which only hits this corner
-> case for rare byte patterns (about 1 percent of runs on sandbox64),
-> this test fails 20 out of 20 runs without the preceding gunzip fix:
->
->   Error: inflate() returned -5
->
-> and passed 100 out of 100 runs with it.
->
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
->
-> test/cmd/unzip.c | 118 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 116 insertions(+), 2 deletions(-)
+Hi Nikita,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-08-07T08:06:41, Nikita Shubin <nikita.shubin@maquefel.me> wrote:
+
+> This series improves CONFIG_SPL_LOAD_FIT_FULL support on RISC-V, primaril=
+y to enable loading OpenSBI as firmware and recording loadable images (e.g.=
+, U-Boot) into the FDT passed to the next boot stage. This aligns spl_load_=
+fit_image() with the behaviour already present in spl_load_simple_fit().
+
+Just to check, what is the motivation for using LOAD_FIT_FULL here
+rather than the simple path? spl_load_simple_fit() already loads
+OpenSBI as firmware and records loadables, and is what existing RISC-V
+boards use today. Please can you explain in the cover letter why the
+full path is needed for your use case (e.g. full FIT verification), to
+justify the extra code in each board's SPL?
+
+> - This works only if FIT Image contains dtb blob, spl_load_simple_fit() o=
+n the other hand relocates gd->fdt_blob to the end of U-Boot;
+>   It's currently unclear to me if spl_load_fit_image() should do the same=
+.
+
+I suspect it should, since boards ought not to see different behaviour
+depending on which path is enabled. That can be a follow-on series,
+but please can you mention the limitation in the commit message so it
+is not forgotten?
+
+> - I am not sure if sandbox test is a right thing to do, still i think it'=
+s better than relying on QEMU for testing in this case;
+
+Yes, a sandbox test is the right approach - the spl_load tests exist
+for exactly this purpose and run in CI on every commit, so please keep
+it. Since the test constructs its own FIT at runtime, the grafted
+image you used for manual testing is not needed for CI, which seems
+fine to me.
+
+Regards,
+Simon
