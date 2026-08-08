@@ -4,128 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 629ABC5AC82
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 02:22:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5781C5AC82
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 02:22:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6ED3C40802;
-	Sat,  8 Aug 2026 02:22:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 168374081E;
+	Sat,  8 Aug 2026 02:22:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tVKrXFVoZVf9; Sat,  8 Aug 2026 02:22:50 +0000 (UTC)
+ id u3N64_yhLU3D; Sat,  8 Aug 2026 02:22:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 85EF6407FB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A92D6407FB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786155770;
-	bh=Hic+vnBb48EpyDlEaYzlTv5uWYqAAZkZkcDA9LD8zvI=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=ap0gibXKtZvJVqZuBuOSaz8YmNUArdr0a8rNiz0Lf813F8+daCqfYsQCfwmemrfGY
-	 jbj0TRi2o4A44OX0rdkNC2Z0QcUcPPrR6KqLC+ea29VVuhY0WeATg+Ig51SGD/sOyf
-	 kdkLmBl0eVvSx4L7yA9rKn/rchvKbkCuK+PIziT+ZlnJxs1Udusm9iK86nTRbajQ4M
-	 PjavYG0psrhdp5o2Tq2dHZY4FUZCanbnfAX9NF9tx1m5igWrbxXEwQYwsSl8AEqKJ8
-	 9cUp+MjMmfjV7Hv0dYDBXXVAhmKRAlzflz2x0aXVUSZEsPWTu2DnK1JJV8yCaSCFo5
-	 HQlduFDjnXSyQ==
+	d=lists.u-boot-project.org ; s=default; t=1786155771;
+	bh=yY9BGnvgumqv+fZAlKFt4FGcUPjywm7JmLtwmMh9L3M=;
+	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=Sy26TDbqCJ5A/HhNYpWXu9MgbSLacvixwqqqVnaYvpIosN1Gr4yGfxwzg9ik94Ms7
+	 lmyjBCV8C9BYjFRPW1weHdnfNhBWJR8+bXbreI4295yVcORe+N4c9hzJJJJv0VqEg6
+	 dyhUKON97B0kjf9eq3njfaJcYtKIa3T3z8GCNeRrwUUli1dPM+E5gTK5/JjtSPQ8cr
+	 f4HlZTlDafmLl98lFvmiaRsC57fdXa4AFT/HlwWeSHfXtdpQ05mqd4qmL5FqaPcYbB
+	 AtA3+5Y8N/TDNMAZljBHMXbflRxw7c5KPsbBsS0aS+ftRJOp8r5NlVegNAWSuJdGf3
+	 OxE3XcQuyZM0Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 85EF6407FB;
-	Sat,  8 Aug 2026 02:22:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 99C6C2B6
+	by smtp4.osuosl.org (Postfix) with ESMTP id A92D6407FB;
+	Sat,  8 Aug 2026 02:22:51 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D4DA32B6
  for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8BA64407E3
+ by smtp2.osuosl.org (Postfix) with ESMTP id D1A8D4011A
  for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ch8knRZ5rIQO for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 00:45:06 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5TdCarFPMxpJ for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 00:45:07 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
  helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3AEBE407E5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3AEBE407E5
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org DF807400FD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DF807400FD
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3AEBE407E5
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:05 +0000 (UTC)
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DF807400FD
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:06 +0000 (UTC)
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id BFA4A3F9C0
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:02 +0000 (UTC)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-38e25e4b41cso134841a91.0
- for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 17:45:02 -0700 (PDT)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id ACF753F9C5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 00:45:04 +0000 (UTC)
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-38e2f61c09dso162222a91.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 07 Aug 2026 17:45:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786149901; x=1786754701;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Hic+vnBb48EpyDlEaYzlTv5uWYqAAZkZkcDA9LD8zvI=;
- b=b1xJGHvoQv2BECIYoP4qh4iLGBfe4Rygn1cIZm2uvUx+IorbszzbMa+04jdGuj2HIx
- bA/qvmFfAwGLHlIUkXK+HaadCmeqkBWksYhNNnCChYtpmuTeFQbPBotZvujhPgMYqLW9
- lO+VNnYobaGPkBZP6ImtjeFgRYBHLynJw5uttc+zwVykSwCrsS7PjZCDCPC+GlBWr2kc
- W4YgZO8h7MPVdlpOzk6QSOQxWBY1QXKl4tSaOK73UKLq87tlAUAZHyhjwM/FXXCY3IY/
- toFJy9+TLcpKiTDs6WKIqfdktBwzwJSJa937+lP+hLSYo9bTL4K68xpicDWHF1jj1bKy
- QKYA==
-X-Gm-Message-State: AOJu0YyCemgOmPKMpOcmzCtA4Hc0uP/lB5hfm34kKEP2giTXD167/E0C
- GQM64biBunlAtQH42l3K8JsAHHzbT3eDhaMO2BFDuA2IzoFg1q3a++W8ERxmw9DIsW+8JpwEuuw
- hZuAArFLk8+75GNBk7wNsPIp0dl7jvTwa6VmMTnz7UGSCQE7zC/83ixHgS9XJmRC9OBwmwXv7nx
- shHyLnDD4AqAhsh6AzhA==
-X-Gm-Gg: AR+sD13AvoNafrNEu8GqTjn+0D5UHH0/atGfi8cXID7+k+OIY54tOHkMVvLE9KZaXjt
- VVqpZAFpNGdkUlnICayeg8JC4Ro9sWXdNCm04BtwV3fu4u4WpRH0RkJLD6w3ZIV80WBr4OVtupD
- /rzDNtCskG30bPa3uEN5KO9IiRVy5xJu1gZXMkbGbBOQWkyu/ABseRYaBQC49hM2Ml2+8H+Hmtg
- 2o56XfShjRBjF1zQBRIlMqIsIAqiY36mYgMz2pwPIJ3egp1LjgG69vcf7v/FtDG2smOlbb+bMt9
- BFGMlxp7aaVF/PjbZFRvmEUMyhaVIXVkKwtM+e9OnR5PvtlIdopBiFm2CGtALgk/8jpGT5JrTKh
- ZosLhG0J4aFAOWg9lnU+MgJWfEd50VWCR5xWVkMw7B+lMcKgUpJHKuCEwjPGLClBaXjVS3w==
-X-Received: by 2002:a17:90a:d010:b0:38d:eaec:4396 with SMTP id
- 98e67ed59e1d1-3903c58bdd2mr26539642a91.11.1786149900911; 
- Fri, 07 Aug 2026 17:45:00 -0700 (PDT)
-X-Received: by 2002:a17:90a:d010:b0:38d:eaec:4396 with SMTP id
- 98e67ed59e1d1-3903c58bdd2mr26539614a91.11.1786149900554; 
- Fri, 07 Aug 2026 17:45:00 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786149903; x=1786754703;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=yY9BGnvgumqv+fZAlKFt4FGcUPjywm7JmLtwmMh9L3M=;
+ b=VlZfFWTVScjfHezlqWJ+z1xjaDoDv4xQrWFQbVEW50BJxPI7gysMIyyPprzfJNo4kq
+ YeWIkl/NE1DZWrcPBTy6PgiFq/mLL8XZIA4pUKdisPKv7RdJ4NJ/DwT3Gme5FSAdHiIr
+ ZvfwYBw6uuFTG+zZzu4wzWiupaTXBPNUMINvIJnWj6qhHg2urJNCy1qz/hIRv6FueNjS
+ JNczyDIwsx9QTzklYd0gRocAaNJMps7K6oC4qcbzow2YEkiTPcbx7x7cY8/r1qi9wApu
+ Fqr+GK86uZShUKTyZyWU2846K/khY6eMQY9HQE7evJYTh/eimIoRrFphydHHPhDFYG1q
+ 04Tg==
+X-Gm-Message-State: AOJu0YxOviRryAGcYt0BPNX+XNn0Ed/O/pxo1WLqzjLNbq57pAz/wUm4
+ xOj+chcbru9AHR8ZE2kZEMxS3rBncykxvZcZzuF70MuR6ihXKfQiXtQCt8thRAR5Fj3gY5svLCM
+ A7cy6BSVsR6tYcKPKiAYWOao7hPQerDWlg0w3Pq3ixu2mBv/BfSrDr9lmlD48XFuJUpPxrjBeQE
+ gd3fK6kdAyj6q63slV3Q==
+X-Gm-Gg: AR+sD11iHs5r4+KJ6MZLVIRG6/1pQ1R+l87SKoZCgCbK3sQxKoIduMhWJ4RTFDjcvGK
+ GWgaGuF455n5vNnTQIj6WLovE6d+ZXmnCFvye9h00xsbj98LLunCsTTSDSrfQ+DE+djWI+hAmUR
+ URePzE0xg7HO1SVo6uJlq8eU9esEXSO1miQRNZyRxpF7wbulEAr7Ku6YLP8FGFh7UX7Z2brQMym
+ H/GZpVfXeWNBctEOWyqk3J1Z0hC8UR1apW+1OOPJRaLQQEMPZAzFNJCx4chRt2d83xL+5qL4gvn
+ FYhvgDM6H1sOkyG55aTC5zt3k2lLrqDAuuE3oivZtPs3UxYdkUmpBLQ9YtCBm5G0Vap0yNQngX0
+ aqkH5VaIxv2xrrPZjuNIeoNMPdmLEm57BaPTZq1Tc1x3iqBWSKJVgx2r6YynMt7DD5bV9Eg==
+X-Received: by 2002:a17:90a:da83:b0:38e:500:3975 with SMTP id
+ 98e67ed59e1d1-3903c5d82a3mr25280025a91.18.1786149903145; 
+ Fri, 07 Aug 2026 17:45:03 -0700 (PDT)
+X-Received: by 2002:a17:90a:da83:b0:38e:500:3975 with SMTP id
+ 98e67ed59e1d1-3903c5d82a3mr25279995a91.18.1786149902720; 
+ Fri, 07 Aug 2026 17:45:02 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3925ff912c7sm4316935a91.17.2026.08.07.17.44.58
+ 98e67ed59e1d1-3925ff912c7sm4316935a91.17.2026.08.07.17.45.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 17:44:59 -0700 (PDT)
+ Fri, 07 Aug 2026 17:45:02 -0700 (PDT)
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v2 0/2] gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite
+ Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/2] gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite
  decompression
-Date: Sat,  8 Aug 2026 00:44:32 +0000
-Message-ID: <20260808004437.4367-1-aristo.chen@canonical.com>
+Date: Sat,  8 Aug 2026 00:44:33 +0000
+Message-ID: <20260808004437.4367-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260808004437.4367-1-aristo.chen@canonical.com>
+References: <20260808004437.4367-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 08 Aug 2026 02:22:49 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1786149902;
- bh=Hic+vnBb48EpyDlEaYzlTv5uWYqAAZkZkcDA9LD8zvI=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=aTR/wYN2YRRmfvBE6PHAuOrD32RZivki9KKTJK/LDFDbAX1ujEFLh5TO+GI4ozcOO
- 9NCvf3s/GztQOLz5f7/Z2ezgjp8AwaJRA3Xphttx//8cutQzT2/Qt1ZUQCVEqQEDsZ
- aYhnb9yphFH2OSGN5vmYMtA0Rkib4PVJHuHbINjFvMzez5YU2mkgASZSjtBthVeWZ2
- zltgdO/WT1Bi9gQpjPvwBkLZMPC1XayLPm8EdV3+PDzkHr5FAnCQsFVihZ4E/dDNEP
- Is5Un0JzyGm8xoujNNekzvotRdIcxgr1Wv1FofMY3/LVFc68+ncWWNPov7sGkleEFD
- SVLcDBYdAyBzEmgzxig/cXS+2tUi2MMHAm1jIwrXrgnrcRWAV2g6QsIrL3f27m9qtb
- 2VGVYl7N5IME5AL1gjkUl92ENcSubuFqpgdi4YZbNMZ6z6i9Pen4RM2LGcVtqZiXX1
- x0XSUi2PLYM064IEHXdLxVccXnDcMEa4rI7ogWHR+RZZeD8iFLToYQALfr+DX3bQyg
- X+3is++Bp03DlYMF56cj08PiHg4C1ft/jEla/xG+N0hXe5YKCMB5hVWpabbSIj8uvm
- j3FjJghPISpuizkGD88GaLeXA3kuEWTN48omquKlQ33YtLpnpEEYZIDJY+wtpfdAjB
- NKpx9t2dlS56qtY8fEoRWByI=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ d=canonical.com; s=20251003; t=1786149904;
+ bh=yY9BGnvgumqv+fZAlKFt4FGcUPjywm7JmLtwmMh9L3M=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=tIW7YqOd3yAYb3PM9aNzxVe/syDVdlO7HjYjW+uOfatMOi6xBUlsDsY7dv7ekuBfI
+ zLpU/BkHxHjdGZwPu9ugdFshPG9XoAbkAcRbOYE5cFwc/YnHvsUFEsSfYaMO3vct5u
+ NgA+mmNN7IvWvFCwD8uScsHv5ioXs9GjulQQmMwXO57CvxBh6ScHc0Y9yEg+9YE5iO
+ UK8tkyMKKVnj5wSDHL/J4hA6+Qgu+rkocsmO1cdVp3PYJBYGAPa0EJz7yrOsgRZVsC
+ I1hiYDEncaQVGFouMax9RkkoV9cm73D3aXAbGhtcX3JagmFZ6poXlv2YF5LVWJp4Tx
+ dfWWIcM2/yiNKiUmIs4bTFixhxUUgYZRpQUyBVlvhhHUatvOO03t+VsSTDT9/s534F
+ l9YSf3Z36T7cK9XvOobtTZQ92cux7bYqMgbY0yrelw3XztI6MlFgbktXtEvPB3J/iJ
+ A+KsGCBDDRW7lDY9BOibkFnOM/3QgG0rxguHc8eLwZHLirxlCIIFbFctjnh707AFW0
+ n5jINCyU8g12VvkMEOLzJg8y+jEgQXRFCqoFSSNNtCaOzzrUEVGhBH/iVRydrsVD86
+ db8vGRh7GhSNHv4QQ5IeWhVCj3xJ8qniPoo24H8xgBp0YVeev9QJ47NKnXQXUF19Kr
+ dNTMudZpA2Z/4APlwpKn2CEU=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (4096-bit key,
  unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=aTR/wYN2
+ header.a=rsa-sha256 header.s=20251003 header.b=tIW7YqOd
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,60 +147,70 @@ Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The dm_test_cmd_zip_gzwrite sandbox test occasionally fails in CI
-with:
+The chunked decompression loop in gzwrite() treats any inflate()
+return value other than Z_OK and Z_STREAM_END as a fatal error. When
+the current input chunk happens to be exhausted at exactly the same
+time as the write buffer fills up, the inner loop calls inflate()
+again with avail_in == 0. No forward progress is possible in that
+state, so inflate() returns Z_BUF_ERROR and gzwrite() bails out:
+
+  Error: inflate() returned -5
+
+Per the zlib documentation, Z_BUF_ERROR is not fatal and only means
+that no progress was possible; the call should be repeated once more
+input is available. The reference implementation in zlib
+examples/zpipe.c continues in this exact situation.
+
+The failure is data dependent: it needs a stream position where the
+consumed input and produced output line up with both the chunk and
+the write buffer boundary at once, and the inflate side must have no
+buffered output. That is most likely with incompressible input, where
+deflate emits stored blocks and inflate holds no lookahead bits. This
+is how dm_test_cmd_zip_gzwrite occasionally fails in sandbox64 CI on
+random data with gzwrite_chunk = SZ_1M + 1, stopping at a multiple of
+the 1 MiB write buffer:
 
   12582912/16777216
   Error: inflate() returned -5
 
-The chunked decompression loop added in commit 58e523fedf48 ("gunzip:
-Implement chunked decompression") treats Z_BUF_ERROR from inflate()
-as fatal. When an input chunk is exhausted at exactly the same time
-as the write buffer fills up, the next inflate() call is made with
-avail_in == 0, cannot make progress, and returns Z_BUF_ERROR. Per the
-zlib documentation this only means "no progress was possible" and the
-call should be repeated with more input, which is what the reference
-implementation in zlib examples/zpipe.c does.
+Detect this case and let the outer loop refill the input chunk
+instead of failing.
 
-The failure needs the consumed/produced byte counts to line up with
-both the chunk size and the write buffer size at once, with no
-buffered output on the inflate side, which is why only certain random
-payloads trigger it. Note that the failure offset above is a multiple
-of the 1 MiB write buffer while gzwrite_chunk was SZ_1M + 1.
+On sandbox64, the random data dm_test_cmd_zip_gzwrite test failed
+17 out of 2000 runs (about 1 percent) without this fix, every time
+with the same signature as the CI flake, and passed 2000 out of 2000
+runs with it.
 
-Patch 1 makes gzwrite() refill the input chunk in this situation.
-Patch 2 adds a deterministic regression test which builds a gzip file
-from two stored deflate blocks by hand and aligns the chunk boundary
-with the write buffer boundary exactly, failing reliably without
-patch 1.
+Fixes: 58e523fedf48 ("gunzip: Implement chunked decompression")
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+v2: no code changes, collected Reviewed-by
 
-Verified on sandbox and sandbox64:
-- dm_test_cmd_gzwrite_chunk_boundary fails with -5 in 20 out of 20
-  runs before the fix, passes 100 out of 100 runs after
-- dm_test_cmd_zip_gzwrite fails 17 out of 2000 runs (about 1%)
-  before the fix, every time with the same signature as the CI
-  flake, and passes 2000 out of 2000 runs after
-- dm_test_cmd_zip_unzip keeps passing
+ lib/gunzip.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Link to v1:
-https://lore.kernel.org/u-boot/20260806103720.1026454-1-aristo.chen@canonical.com/
-
-Changes in v2:
-- Assert on env_set_ulong()/env_set() and move the test body into a
-  helper so gzwrite_chunk is unset even when an assertion fails
-- Name the stored block constants and derive buffer sizes from
-  sizeof(raw) instead of repeating 2 * SZ_1K
-- Use mmc_dev_desc->blksz instead of the literal 512
-- Patch 1: no code changes, collected Simon Glass's Reviewed-by
-
-Aristo Chen (2):
-  gunzip: Fix spurious Z_BUF_ERROR in chunked gzwrite decompression
-  test: cmd: Add gzwrite chunk boundary regression test
-
- lib/gunzip.c     |  10 ++++
- test/cmd/unzip.c | 118 ++++++++++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 126 insertions(+), 2 deletions(-)
-
+diff --git a/lib/gunzip.c b/lib/gunzip.c
+index 20cc14f9688..b30cbfc34ef 100644
+--- a/lib/gunzip.c
++++ b/lib/gunzip.c
+@@ -246,6 +246,16 @@ int gzwrite(unsigned char *src, size_t len, struct blk_desc *dev,
+ 				s.next_out = writebuf;
+ 			}
+ 			r = inflate(&s, Z_SYNC_FLUSH);
++			if (r == Z_BUF_ERROR && !s.avail_in && payload_size) {
++				/*
++				 * The input chunk was exhausted at exactly
++				 * the same time as the write buffer filled
++				 * up, so no progress was possible. This is
++				 * not fatal, let the outer loop refill the
++				 * input chunk.
++				 */
++				break;
++			}
+ 			if ((r != Z_OK) &&
+ 			    (r != Z_STREAM_END)) {
+ 				printf("Error: inflate() returned %d\n", r);
 -- 
 2.43.0
 
