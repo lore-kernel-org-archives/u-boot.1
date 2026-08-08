@@ -4,128 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54578C5AD2C
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 17:58:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 469E8C5AC67
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 18:04:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CDEAD6063E;
-	Sat,  8 Aug 2026 17:58:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EF69560625;
+	Sat,  8 Aug 2026 18:04:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UT2Ulkz5Jr4R; Sat,  8 Aug 2026 17:58:49 +0000 (UTC)
+ id TeLp6jUVxmTb; Sat,  8 Aug 2026 18:04:05 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8D32A60624
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4A501605D5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786211929;
-	bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
+	d=lists.u-boot-project.org ; s=default; t=1786212245;
+	bh=7JfcOblNTHH85szJ9eJxjalSE3sMZzrWs5dBjafx5fo=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SYJW13Sloo6fKuPNnrbDFdB1dwJDoGpIzc1mf717fhcrRdudaYfTaUfW71jVS3W8V
-	 zW5ad1/uX9HnvD30SE0Ny09KEKFkwmxObSQ9gNtXGp7N3myW7OR11byebcTLkqGQRQ
-	 ixsfkFstkWFGgce2wFj4rFIzxPm4b+L+p3zE+MEXrxP/So6i/vJbQbRvrS6AftL8Fg
-	 XtHF+HQCiOvdueQEjCs2sKC7aYhZQeqVXcND/FF5LMvTemEyZmhwxDUp4VQfI40SsT
-	 /BZbtRjfpXtl56/PFexsBUPGVuWJV+DuLEZVRh9KMwsTCfyOYeWt0KSJ5+BMsfLrML
-	 JokSEODtk0oXg==
+	b=WzluMYFX6n0EqS+BUKlBz1oWvVSrx91e7FYvN2FSRaGJwtjJlPCaU6YjdQ5NUpZZI
+	 FUiNaq0pBQw5eaKu6qCh0x1SrrOsDQ0XlYmlOFd3SO45+iwNb5e14GWJCrfPnvE3Vb
+	 ZxCY59Vkr0k6PHXRa7y6aW1fWhCZRsHgj8PrHe2hrcvSq2fpmCJDpd/7jRuSnqY+1J
+	 ZBWmZEDGUGGxwW8EwRiExyCRKdGmBDKyLxYYE6ZNNmqVtpuptWECgeRwGYnoWIFS+V
+	 QwnCB7gvl24AbrjlfDeJvUATiL64TfOsM7cxDrZJ2FjeJGs2w6hpFGtPYyenpac3Wv
+	 JMZshfrfIO6hw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8D32A60624;
-	Sat,  8 Aug 2026 17:58:49 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 73F271AF
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:58:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4A501605D5;
+	Sat,  8 Aug 2026 18:04:05 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C3E3282
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 18:04:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6636380DB5
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:58:48 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id F2803605D5
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 18:04:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VS-UP3823NS4 for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 17:58:47 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1wASo0Hpc8we for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 18:04:03 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8B68A80BE6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8B68A80BE6
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8B68A80BE6
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 17:58:47 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-69c5fda04a8so826894a12.1
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 10:58:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786211925; cv=none;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 12C92605D1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 12C92605D1
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 12C92605D1
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 18:04:02 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6a18840e2abso680310a12.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 11:04:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786212241; cv=none;
  d=google.com; s=arc-20260327;
- b=le+gKMWasqG+tIR45nPPzE4bwQsMDZEDyUhLTHVto6+fFpVKEexABOM4y5KtArmICC
- mluPLCNK3C5qBcmRPW3g5DKsceeehN2GKTMi0xgR4i6SH/SaXXLE0X3/z/19epRmDSWy
- Nw6RvGmRphULVqfFSxJPyN1meJ3C/bfFmGmcIaVpYOmKis81Cyexzh43YVsm1bFSK1ht
- Z+Xh7vwwC4EgoMEILGbzYbzWPchAFT2/KMUxo+U2z3Qbn0nXnXfRSgLAgLNRNcwQ2LTU
- OibRD9fgXm+bHBr+VJsi5X7l+Cid/oIiSH+KkV6p2EV3ZwrrL1FYLaz9EiX6A1gtrx9z
- ROKA==
+ b=Fsu7fECrN8U8M0PIvrRVIRfMbWDXGc+FTiwZXqb7S5fR+ekIZ4itTa/+qnhtvxOd6P
+ XBVVAgxs8LRdY29irwu26SJyqtAnfoqt49v2DCaC5e3cFP6vBGusmUYHuw4lDLqfFNcF
+ eSl1xU6HJHE7V6LvnTdAQ55ab+5GM4QCdlto5CUhlhBfI+sTCXFRSNWERKG+qOVTg47z
+ NwvJMsAv0HO7qq1Phv1SgZ6MvkG+AqS2BsPLsqKbR6Se7cvK0kibKU/qrZuDXKknnwP+
+ pyftZOTR6fYLz47aixnoht0HtO8LcP1JEuMWDE5qvYZ7nLOkDSQJLONkRsU6R49gnlD+
+ EXEA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
- fh=8TbiD9fEG91wSNsvqqOput+PpnqsIRDXX+RXlsylxJ4=;
- b=fL7pRCo+SrmS6Nj8FRf6f4mrbpn6PB1TVZn+z7EoIXxcY+EI91ll2gasAAiqhHUcd3
- LKo8rN4xEv3nxSYV4kgxUP5PZaipkyQ/NxWnQJhic+ppbgDu6WTTCKpC4Vezk1h/zUS9
- dC1kAS33wr+z/6iXLS4TPg//YrIepMFxwJSN4GMbacyEFPztUQee44Iu/JU2zNA2TvvC
- Z7SLtN01gLEiaNpNt5EU316h+S5JT6HZ5hux76dNJSyzC96sxt619Kmfv4dPS7uxC7eI
- Cah8uEGcFajclwvaMN6gmArl8EhRrRJFKqhq8dQzAGLnPmCy2jooeX0s+BdaTPcv71Zk
- 8y6Q==; darn=lists.u-boot-project.org
+ bh=7JfcOblNTHH85szJ9eJxjalSE3sMZzrWs5dBjafx5fo=;
+ fh=mP41zWuH0WtrKGSq2MhviURDVmaMLU3IfrOPV/Obc00=;
+ b=gxlJ3dZWougGepYVC3ZnPPCNGnFPegPbyGN3xEi/un9su5JVYSXbq5SClSClTawOho
+ 5dEKIhVPDOyfUq6SzjsXE9fYhG3qCQ8/XxSl4vZRA9TbAvxjoZI07efuHvsHarglAXFI
+ zSxoRipCT4GoAtN/eNUrU9THz9507/0SxU7xOVKP5wlW2EUz8qFsZGp5dBylVgJxqTV3
+ lKdBUiO98Oi/IzK2QAjxDN/7ycMVN+l0q6VKXiTZ9B2eqwX88/0f8w7tayJK/kXTTQj2
+ APlGN9pLPwwauTraxFsEn+1PiQqpi3OdODGmbJFpoz4PD5eOF2x9p/3p4prZLDnuM1z4
+ TkDA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786211925; x=1786816725;
+ d=1e100.net; s=20251104; t=1786212241; x=1786817041;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
- b=BSZTaDyMt4bGg2GZRwx33mdyyv4GoRI7noNLh7rubtuPvt5G4SRkmlG1E4OyQhU0fM
- 7+43xY8/ccwXwYyyDHMlchZXjrcTgEpHt2ZUjB6V7cUPRd2GYic9n8+ZhcPlq2Lqkdst
- pPvHfGqvefDmun3iZSCXeLcO3ID3wbRc+MDlUDMy5ymHeuq+kYarz6elZBkbHRGvtz0A
- 9A/g3gpsJnmp1WXacxqa4IZwodkoLBDHDNAo+JHj61J4MzexTZzROTIQ/bZ7FhkW7a41
- Vcky6ZarHtkRqEeGZQLB3fM0rfnIoEb112WVXdWBNMG6cMqDeDY7bc/vsuH/FmYeB8i2
- jAuw==
-X-Gm-Message-State: AOJu0YxsoTc1LE9mo1z96xtwjGz1eYH4olmmZZDLK3cYr2MsLABeURfg
- PNRoOP1GUmx0pd0uF4L1wxOW7KrHN07otgRtsqhPXpHwOte7X8cBQBGFJqqSer5BFSsA0BhX/qG
- 2caSIuD96BjlmMkd7EhzFzBypMKqY5bEE3JgZvIqT
-X-Gm-Gg: AR+sD13czFf/doQC2E5s40AfaJXZ9fm3xbRs5EGdXj86q3funDXFdx4Ehd9//cyAcSh
- +ATspZlfvkkyF6fxcG/4//ML2XDCZulyPQifZKxJckPamhfHho5V7fnfj1rbxZ8ruSEGQ7hR5z+
- Dysd9hIfZmz88GM+OYHz1LF7gS2rRxHPYslkxC/xrfayxzPCe6QmXcp1heOnwPlbAf/qnXShqV0
- G34M/rXsKz/tGqp4bxchhfnoCZawOdNVD+6V46pdwvdq6J9YwwAs4Uea1M2fLQ355PJIh7eD0ns
- CQsozXDSTpSv3wT1kEncREGMbgSoe+XcLHNnAXDUhjg=
-X-Received: by 2002:a05:6402:1f08:b0:6a1:b0b:ba6 with SMTP id
- 4fb4d7f45d1cf-6a14f13e483mr9876181a12.15.1786211925446; Sat, 08 Aug 2026
- 10:58:45 -0700 (PDT)
+ bh=7JfcOblNTHH85szJ9eJxjalSE3sMZzrWs5dBjafx5fo=;
+ b=mCqFYgpdHx6vECiIH+nIchyDfNUxI/i4/8sY4kqij2zpZB+EQ/8SgJXCDh7IgVepgM
+ GG+qbofVQGpM1iGHuz5DEHmoOJMgmZrOhar0Ztmk/tBJQV61Pr6W5fnM0NHwCTcCRE+/
+ g22U6GBSFzJrKImAynuDZCP7thv6XtwzlSwzZJMMxLpsCu7jI2xbHCPzL0MosGcTrUfC
+ 5hcRfLuDykUipRtXWZUvQKUQZlvmnObKYgWeRzmxvqd9nRHiHw1n6mm16G59ytCVneK5
+ i53gznvHX5lpTZcCxO0x5wkHAR8sDqxm0v8quCStAUu0bWSKl9C8DMIhnD50gwguS1OO
+ 0VLw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrdZUrxJzER9NVVh/FJoX1enXwVN4wAUu6GRX9O0yI13PI/fqL/dlcy+23b0Q1sqIy3BlbKhNM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yywo4sKrftTMRhq10mp+fDxx3Ro9oLa7aRhdKUsa7a8MSTBFLg2
+ P/03jdh3h9wlbmMtO/PEkkn/OBoFfsK27+tquGAqy2Yb6D5EDbWEaIFs0m7IKtz+kWVHtcLRCZA
+ 38ubiBGUdyrwfaYYtzMQt4q1Amr64p4123ZGZN0g1
+X-Gm-Gg: AR+sD12Hi5xsWEA3dZ9YfFP+b8JZ8nHX7079oRuDB/hOSLb3h1Me+sqlVOs4adAQClD
+ kAomOXhrTkuMv1FcMypLTHiU2P4vnRL4iMKojBa36RfUTnG9k8itZFQflF7sgsYhW+kW+EDiUo0
+ JLKSlJkp+/MDjr/yBFw8TBeuWSl9EaMkiTuBGFR5OnqZyDXd+taFutk1kzb8DoJRt2/AtfK/Md3
+ cgjaFF+GG5Irm182HWUze9sNcLrR3bIxrAX0+SjnyTjD5In3D+PMF1xDWefLt4igvLN7x+5uI7J
+ 6swlPYXKp2YLbvwv8h7kYGgPz8PtZ0CErMeP3GsmGi4=
+X-Received: by 2002:a05:6402:22fc:b0:6a1:7ccd:5205 with SMTP id
+ 4fb4d7f45d1cf-6a17ccd5664mr10261850a12.2.1786212241143; Sat, 08 Aug 2026
+ 11:04:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260729081218.550465-1-pranav.sanwal@amd.com>
-In-Reply-To: <20260729081218.550465-1-pranav.sanwal@amd.com>
+References: <20260728161904.96004-1-james.hilliard1@gmail.com>
+In-Reply-To: <20260728161904.96004-1-james.hilliard1@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 8 Aug 2026 11:58:33 -0600
-X-Gm-Features: AUfX_mzZJF1sXgX03-7P4-MKXdlzCjEfvmQ2M3vj3JCmI9QRxw19Nt2eHjNkTq8
-Message-ID: <CAFLszTgSKL4SRDOpej4-rd2CPtNuLVbA=L9yfCLhy9_g5E9ihg@mail.gmail.com>
-Subject: Re: [v2,0/5] gpio: improve claim diagnostics and fix gpio-delay
- offset handling
-To: pranav.sanwal@amd.com
-Cc: u-boot@lists.u-boot-project.org
+Date: Sat, 8 Aug 2026 12:03:49 -0600
+X-Gm-Features: AUfX_mw90lyHwYvX_aQDfdjmChsNiJXE92XbIbkvsRphVfWBEF7OPZy7F1Afb-k
+Message-ID: <CAFLszTgX5zFSxmfra5cv6SqodZd1EZXFUhA8MymOYqsL4VXEeA@mail.gmail.com>
+Subject: Re: [PATCH v2] tools: fit: sign all config image references
+To: james.hilliard1@gmail.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>, 
+ Daniel Golle <daniel@makrotopia.org>, Aristo Chen <aristo.chen@canonical.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Romain Naour <romain.naour@smile.fr>, 
+ Shiva Tripathi <s-tripathi1@ti.com>, Randolph Sapp <rs@ti.com>,
+ Anton Ivanov <anton@binarly.io>, 
+ Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786211925; x=1786816725;
+ d=chromium.org; s=google; t=1786212241; x=1786817041;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=siOoaDGOJFGoFwvkcEp9DsDnLoSFJrXMQJx5A3xwMLg=;
- b=bjOelfeVnx+SXTRg/qXxxRle6jXTx1sTcqshJm4MIUEY9vJ8msNvbGVkoEWdzdt957
- f/cAEX64Ur3L5r07j+sBrwJhQvRb0bci7d0RHS/jqZ9p+cOTee5WYAIp/muyubd+GJR2
- Q0coH6GRvQ6V5+PTJ28rrSLzMvdBTYPdS9BKA=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=7JfcOblNTHH85szJ9eJxjalSE3sMZzrWs5dBjafx5fo=;
+ b=adYv2kkTxZEBDqpjHRBamO6VJKyD+O3SGHZpb8VXzSB0ZlDNGrc9MIhBRr/pscdcoY
+ EWcsXJM4FI5LLLLyHmTSexzdEwiWoG/XmNs77NoquF0potGh22anp7HWglIJnh5TWhKw
+ Sxif07IOR8DAUchEaDRZUcgCsh71XIFpouhEU=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=bjOelfeV
+ header.s=google header.b=adYv2kkT
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,19 +147,56 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Pranav,
+On 2026-07-28T16:18:39, James Hilliard <james.hilliard1@gmail.com> wrote:
+> tools: fit: sign all config image references
+>
+> Target-side configuration verification builds the signed-region list from
+> every image-reference property in the selected configuration. Host-side
+> signing still uses either the signature node sign-images property or the
+> legacy kernel/fdt/script default list.
+>
+> This lets mkimage generate configuration signatures which U-Boot cannot
+> verify when the configuration references other image types, such as
+> firmware, loadables or ramdisk entries. It also lets the host and target
+> disagree when sign-images names only a subset of the configuration images.
+>
+> Build the host-side signing list from the configuration properties in the
+> same way as target-side verification. Use one shared property classifier so
+> the host and target cannot drift apart again. This makes signed
+> configurations cover the root node, the configuration node, every
+> referenced image node, and its hash/cipher subnodes, regardless of image
+> type.
+>
+> Warn when a legacy sign-images property is present, since it no longer
+> limits the signed image list. Require every referenced image to have at
+> least one hash subnode. Add sandbox coverage proving that a firmware
+> reference omitted from sign-images is still recorded in hashed-nodes and
+> verified.
+>
+> Update the signed-configuration documentation to describe the same rule and
+> the hash-subnode requirement.
+>
+> Fixes: 2092322b31cc ("boot: Add fit_config_get_hash_list() to build signed node list")
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+>
+> boot/image-fit-sig.c                               |  9 +--
+>  boot/image-fit.c                                   | 17 +++++
+>  doc/board/ti/k3.rst                                | 10 ++-
+>  doc/usage/fit/beaglebone_vboot.rst                 |  5 +-
+>  doc/usage/fit/sign-configs.rst                     | 13 +++-
+>  doc/usage/fit/signature.rst                        | 26 +++----
+>  doc/usage/fit/uefi.rst                             |  2 -
+>  include/image.h                                    |  9 +++
+>  test/py/tests/test_vboot.py                        | 11 ++-
+>  test/py/tests/vboot/sign-configs-algo-arg.its      |  1 -
+>  test/py/tests/vboot/sign-configs-sha1-pss.its      |  1 -
+>  test/py/tests/vboot/sign-configs-sha1.its          | 11 +++
+>  .../tests/vboot/sign-configs-sha256-pss-prod.its   |  1 -
+>  test/py/tests/vboot/sign-configs-sha256-pss.its    |  1 -
+>  test/py/tests/vboot/sign-configs-sha256.its        |  1 -
+>  test/py/tests/vboot/sign-configs-sha384.its        |  1 -
+>  tools/fit_image.c                                  | 12 ++--
+>  tools/image-host.c                                 | 84 +++++++++-------------
+>  18 files changed, 121 insertions(+), 94 deletions(-)
 
-On 2026-07-29T08:12:14, Pranav Sanwal <pranav.sanwal@amd.com> wrote:
-
-> Changes in v2:
-
-Could you also add sandbox coverage for gpio-delay ? You shoud add a
-gpio-delay node to the sandbox test devicetree wrapping at least two
-real lines, plus a test in test/dm/gpio.c that requests both consumers
-and toggles them? That would cover the offset-propagation fix in patch
-4, the gpio_count/bounds fix in patch 3, and - via dm_leak_check - the
-remove-path fix in patch 5, all of which are otherwise not covered by
-tests and might break at any time.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
