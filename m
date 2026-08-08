@@ -4,99 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D08C5AC67
-	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 04:26:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9AFC55174
+	for <u-boot@archiver.kernel.org>; Sat,  8 Aug 2026 09:02:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1104C80E92;
-	Sat,  8 Aug 2026 04:26:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 212F580F5B;
+	Sat,  8 Aug 2026 09:02:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y2T7ygUS-3Zs; Sat,  8 Aug 2026 04:26:15 +0000 (UTC)
+ id 5-gFzInkSK3m; Sat,  8 Aug 2026 09:02:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3205780E6F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2C5CF80F5C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786163175;
-	bh=Yb7UbU8+RpGWC5/C1VdTIhT9aw0kcpOUoKbA/pPbMyI=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=h0Ohr8GVwPDqqFTjTn+oMNU4xdLU0oZEpQAKvgxadM0wRLD0K8+/gFBxQTUGx3hkF
-	 gpwrKv42D3U1jKIQyj7TjtenHmZb+Bw1J2wdUgSXYUyuws3r4OdeFm8MUzRB0oRTCZ
-	 ceFXmPuxDkf+rl8w9M0HXCVRGvKhJcnIsIc/7aKmJCHPkTlQWDFOJTI4f8jelkzrdO
-	 Ncc82kD9O0i2pCkz9/JvXW6pnUhXlFMUM4lk855E3IbMJemRs4fwVUWoOuxjOAKnuP
-	 ojuRm66DvbWmSYDwAW5O06CDpkzT992DAHTRAj3uE6H6O9ukrXWo7pZfZc8UaBGOie
-	 cMdo0fwuxrmkw==
+	d=lists.u-boot-project.org ; s=default; t=1786179745;
+	bh=ywzYzmSCrjAnl8SHXScFhEr7YOEbmvGg8UWiH/J2mgU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=GOIMBV+43ynviZzu8qJgnDznblQBBOa0h4eY9/1JBpLr0Ape6A/irT8/m0bMJhG2w
+	 Pr85yQnjk/VCbGKrUo6c8dLd1RvHslLEGmcUKzengRndovVU50Uzv/AfNYHqmHym8F
+	 jgjJExeZJcplf/qQCidHTz02sdpR3+TR8freHr63IMlwFfJoFq6q2ABO+0UhdmsVpR
+	 Z6mFmzJAO9SuJqEgcji/K9Ovf08G568jWOnuFnes7j7opRq2FnBGPgvfUYineo8+f7
+	 H2mp3Nb+ohlygYf8jpuVT2xKcN2uRFN6iPhYWrrBNCfh7dNxzUTb8HiGPfecFucRfU
+	 Ftfd65XyTwKmg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3205780E6F;
-	Sat,  8 Aug 2026 04:26:15 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2FFA72B6
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 04:26:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2C5CF80F5C;
+	Sat,  8 Aug 2026 09:02:25 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E5A1A2B6
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 09:02:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 21A9880E63
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 04:26:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CFC1F40096
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 09:02:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PA_fzaW7plEl for <u-boot@lists.u-boot-project.org>;
- Sat,  8 Aug 2026 04:26:12 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
- helo=mout-p-103.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D08B780E5F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D08B780E5F
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D08B780E5F
- for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 04:26:10 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hH7Hh4cNrzKnbY;
- Sat, 08 Aug 2026 06:26:08 +0200 (CEST)
-To: u-boot@lists.u-boot-project.org,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/main
-Date: Sat,  8 Aug 2026 06:22:48 +0200
-Message-ID: <20260808042549.145756-1-marek.vasut+renesas@mailbox.org>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ARund1FSDu59 for <u-boot@lists.u-boot-project.org>;
+ Sat,  8 Aug 2026 09:02:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org CB2B740056
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CB2B740056
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CB2B740056
+ for <u-boot@lists.u-boot-project.org>; Sat,  8 Aug 2026 09:02:22 +0000 (UTC)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-6983d3dae7aso4279492a12.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 02:02:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786179740; cv=none;
+ d=google.com; s=arc-20260327;
+ b=efLgjupKvidMIo4CslZKsiOj4v8lpsLw/dHm2YdQ5jzqMAMv7h+/AgaTtF4Dwjtqxv
+ Dg5jeAu1UNeo6fsJp4WiCa3SgsnEl/WxFj91QYRm1ryJuZ4E6W9i9QbHCxtGRxWAR+Hl
+ oP5BLNzhccka4PBUWFbE2HdOsTBMKtyJT8ChZjMfaL7m9h8Eypqay1zQ2U8sZdFlhAOh
+ DDsGEV5Ku0ylChqN1BBkQNa+nl+Hx7krprzqSt6pn6nWKqtbg3n1qh+7jM0x1MkrgS+a
+ dd/WhwIXzE24Hqi1Ins1ztpdddul1lyuLiPVljbDoqFQhFex/mMRKzjyKhaNQ7So/wDp
+ x17g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ywzYzmSCrjAnl8SHXScFhEr7YOEbmvGg8UWiH/J2mgU=;
+ fh=oIMmC8iu+RpL9QS0aPIrVHvb7dY/DmDKYgM4/PZle3M=;
+ b=YeDS6ZDeFfNWVcx6g0xTl8TFG8FB8mDqC5UofxRCxrgFJtryw592a1w9QjIEy5ttY/
+ v+YKTTGiR8I4CHrriu+EtNK9LrMDHMYCEe6SewQrnSfE70D+cRVohqBQuZC9F3eV/F1w
+ HH1W8MwX87ztcwS2shy06vxN3FSW9wXohVP+t4XDkPyXl3QiFO3GeAMWqtHSzoKzMu7s
+ Xb9Sst9fV0GtZaJ0AmWXIIaQ2JOCLa4+DSepBDG8+W8hu/VVWrAj8FFNcCgXXbt7uZv4
+ 7KO+9LUiyu6H7HafpZAX/hpBONaFbKot16idO/f2A6T16eWSE8j4pNlTOHtVHO1v9YXu
+ rjTA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786179740; x=1786784540;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ywzYzmSCrjAnl8SHXScFhEr7YOEbmvGg8UWiH/J2mgU=;
+ b=ryLcjoq+YUFALti9pk2yWQp0LwfiBgvefwjZsrwW/5I6Gtn2SNvUgugqnDQUUP/NNp
+ AljcZJjNY28fYrZWVOkhTvI2AjPCZhuXMumLLwQYvZ+RIbis+T0WKQlasAdMzIqy+vdh
+ Y1g3EsykktajHQmUW4nqdO5wIEtMVuo5rxe/o3CRa6e+Ez7eKSJFC+jLwKIolldg5lms
+ /7EHJHq1/A9EaR99VpXSy7FQ5Sb2KQqA+HVpi/Xg5S4f/LfpKlWQmrhty2bRVRBhGNF+
+ ATljz5pSFhhZR+1JWWJh2QKmLDR/A8gIpW4WzNbcJdQZDiezVz3APquhNdGoxO2ixa2g
+ mGSA==
+X-Gm-Message-State: AOJu0Ywv96+Gls4pYgsSuNniF5iHDTZVZGl0CpIQ7znvCvaxF/TWnOy6
+ bUXVGca6Dk515Ut6Qx3JK9SxvElIkTaGjoI1NKKXxtOkuCUSgaOkAPjT7J7w/8+6CUnrWTvtxyH
+ 9e9cCeD9wCWVPL3uZipWqajZ+iJy1oOTvjWcrvSfRpQ==
+X-Gm-Gg: AR+sD12mhzZe0ZRIje2oAHVmfIoVZQJNWmF4wda3FPTT5QVMkJ6AKSpaTRGNc9hFJaG
+ 83sacpRWoIlG5N3tffb6IaH/spuP54gp5bYY6uKLOxR2DfEsTx5zstsjGCHZ4oW+nFCOL5dd0vV
+ Brk5yBcuZDGq6StUZx/ELudccocjoL9bujbGJs11hRMxQhn453BSqucCYAYo1QWVvPckgsDx0Q7
+ hWLI+ExXaq6oui2GBCmaBKIjVFPguuqw/5S2KKmxueNtqzS7OXgKqf8k8Anko+R1iWmZ5CXES+p
+ ElagH3HzwEsQdQczMjySfoOd/wgSMROZ+Oz8X62k5Ct+NfOW3HQjdUCpu3NiMEFUZXGbNMCpHig
+ P
+X-Received: by 2002:a17:906:ee87:b0:c19:5bf1:368e with SMTP id
+ a640c23a62f3a-c208d4f5702mr198195866b.13.1786179734091; Sat, 08 Aug 2026
+ 02:02:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 3mkmqxmmokx1awiu85gwry4nbnotwagt
-X-MBO-RS-ID: 1b06727b10ee615591f
+References: <20260805-pylibfdt-geo-growth-v1-1-dabe082367e5@flipper.net>
+ <CAFLszTiJK9JFDe30ZfaXkZvmNUfWUVmC8ZVLU0b-7vfTsHaQ5w@mail.gmail.com>
+In-Reply-To: <CAFLszTiJK9JFDe30ZfaXkZvmNUfWUVmC8ZVLU0b-7vfTsHaQ5w@mail.gmail.com>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Sat, 8 Aug 2026 13:02:02 +0400
+X-Gm-Features: AUfX_mx6PEP2L3XfqSGAiW5UFbwPCmf3zarIFMwBy8pdtcdfpFh8SPuJSTHSdso
+Message-ID: <CAKTNdwHyab4T-02-YjSHqmEVHYVXmZSZ9FqYWzpvUpt63UUHEg@mail.gmail.com>
+Subject: Re: [PATCH] pylibfdt: Grow the FdtSw buffer geometrically
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1786163168;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Yb7UbU8+RpGWC5/C1VdTIhT9aw0kcpOUoKbA/pPbMyI=;
- b=HtaqiUaoShHjigf0Y0buAtxZPt9GOs6684mX6fW5Vb/xR4ahODnk/qwVcXO9gn89ux0u+u
- 34KmfIEOLihNbg2e7fU/itQz8BOoGEWJU9oL2nzO5DBExvZmydcLICMurFBnHPfZnPomSQ
- 5w2H1EC+MVFwIAkc5/bRoQ34OutHv978335kOXAwlNoJnYSODN1JZcdnBg+JFfkry+kXeu
- /Ruq3tLG3kg+LgBm3nZTWQjmI2B7twpLELqX4wuy9V86E8jfZrssaywL+cqr59itc1y0CH
- 4aLWPavCDVBT8ivYnV/1ekBpu2jfJ/2eVs07pEv8HsTv6DTjMddHuZx6nm+LRw==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1786163166;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Yb7UbU8+RpGWC5/C1VdTIhT9aw0kcpOUoKbA/pPbMyI=;
- b=bhqiSPGgfHjRZQT9h6z4zkO2T/+7a7nPR94k0NKRuT7p3mmWTwlOEPO8QlxS3Ub0e936AC
- F+QpV2XRwiNzhSpd8JQbG2sew3VB4jrTfuOWG0yHKVHg6pL8eSQWZyCemIDIEKukILLUQJ
- I57MibqLtYOHtPDY/mHqF9AA0F2ValsMdvaUwS/LgueA8eMjRENyG/rWIzg8EVdDhMxkCb
- bjF2thXUHK9rv2dl6cRs8PpoKnHJSfUwEe2N3ZVw/n/gg1jDuRydALAK36HKaGqsFf6DEn
- vW3hgQCgiRZbwVcYfPTC4QTyW4lhW+DCDhlWXmN8OHsEpmkGqMz95ROdm163TA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=HtaqiUao; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=bhqiSPGg
+ d=flipper.net; s=google; t=1786179740; x=1786784540;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ywzYzmSCrjAnl8SHXScFhEr7YOEbmvGg8UWiH/J2mgU=;
+ b=4t5R79fdcX+rRoJeCWDXS1gcidTJuQsdW529fGK1fDRntcS3uLloVkjo/kyRzWyFyL
+ x29Qd52JshFM/4QgVdv0IQBOCIYFwDDf7T8DgTWo1oAVT3SEhgOmBNJJ3mQqwzPWxIP/
+ vmVsx85ga/WOlJd1mM3ebF73+rUWUMbV28FCMsGvu23o5iZiAJmFgIRZN/VQYbKw448E
+ zGE0cK3zeXlRzCliYS6H5uRRtMEYv5kgY7lUDlNSm29GdjnEP1c7KLWX5KP+8mMIF34k
+ oC+za7UUrm7eaZRm0qdmlD3j9Tq/S070B9ohfwhteDY1wmQVl4PIYi5CQ9gR2q5NwDen
+ 3D6Q==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=4t5R79fd
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -108,51 +143,63 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This includes temporary U-Boot DT ECC carveouts for R-Car Gen5, they
-will be dropped from U-Boot DTs once OF_UPSTREAM DTs get re-synced.
-This also includes RPC-IF support for R-Car Gen5 and env storage in
-RPC HF.
-This also includes an update for R-Car Gen5 UFS controller driver.
+Hi Simon,
 
-The following changes since commit 06c866fee0052579dbd27456fac425d002d44a80:
+On Wed, Aug 5, 2026 at 11:34=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Alexey,
+>
+> On 2026-08-05T14:47:38, Alexey Charkov <alchark@flipper.net> wrote:
+> > pylibfdt: Grow the FdtSw buffer geometrically
+> >
+> > Every expansion copies the whole tree into a freshly allocated buffer, =
+so
+> > growing by a fixed amount makes building a tree cost time quadratic in
+> > its size. This is especially painful when assembling larger FIT images =
+with
+> > binman, as it assembles the image with the data inline.
+> >
+> > Grow by at least as much as the tree already holds, which is what varia=
+ble
+> > sized arrays usually do specifically to avoid such excessive copying.
+> >
+> > With this change, building a Rockchip TF-A+Falcon image whose FIT carri=
+es
+> > a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itself dow=
+n
+> > from 25.3 s to 14.0 s, as 7139 reallocations become 187. The images
+> > produced are byte-identical and the binman and dtoc test results are
+> > unaffected.
+> >
+> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> >
+> > scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
+> >  1 file changed, 6 insertions(+), 2 deletions(-)
+>
+> This is a _shipped file from upstream dtc, so any change here will be
+> reverted on the next resync. Please can you send this to the dtc
+> project first (see https://github.com/dgibson/dtc) and reference the
+> upstream commit / PR in the U-Boot commit message, similar to how
+> a63456b9191 links to dgibson/dtc PR 154. Otherwise the improvement
+> will be lost.
+>
+> > @@ -808,7 +812,7 @@ class FdtSw(FdtRo):
+> >          if check_err(val, QUIET_NOSPACE) < 0:
+> > -            self.resize(len(self._fdt) + self.INC_SIZE)
+> > +            self.resize(len(self._fdt) + max(len(self._fdt), self.INC_=
+SIZE))
+>
+> Logic looks correct - doubling gives amortised O(n) total copying, and
+> the INC_SIZE floor keeps small trees from taking many tiny growths.
+> Nice measurement in the commit message too.
 
-  Gitlab CI: sage: Disable test_net_tftpboot_boot on Raspberry Pi 4 for now (2026-08-06 19:36:56 -0600)
+Merged upstream: https://github.com/dgibson/dtc/pull/189
 
-are available in the Git repository at:
+Shall I spin a new version of this one to mention the upstream commit?
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-sh.git main
-
-for you to fetch changes up to c0ed490da30e35a5951646ca08e984d7415fdd58:
-
-  arm64: dts: renesas: ironhide: Describe inline ECC carveouts (2026-08-07 21:59:00 +0200)
-
-----------------------------------------------------------------
-Marek Vasut (10):
-      mtd: rpc: renesas: Switch to dev_read_addr_name()
-      mtd: rpc: renesas: Add R-Car Gen5 DT compatible
-      mtd: spi: renesas: Align macro prefixes
-      mtd: spi: renesas: Add R-Car Gen5 DT compatible
-      arm: renesas: Disable MMC support on R-Car R8A78000 X5H Cortex-M33 RSIP port
-      arm: renesas: Bind RPC on R-Car R8A78000 X5H Cortex-M33 RSIP port
-      arm: renesas: Enable RPC on R-Car R8A78000 X5H Cortex-M33 RSIP port
-      arm: renesas: Store env in HF on R-Car R8A78000 X5H Cortex-M33 RSIP port
-      arm64: dts: renesas: ironhide: Describe all reserved memory
-      arm64: dts: renesas: ironhide: Describe inline ECC carveouts
-
-Tuyen Dang (1):
-      ufs: rcar-gen5: Switch from FASTAUTO mode to FAST mode
-
- arch/arm/dts/r8a78000-ironhide-cm33-u-boot.dtsi | 17 ++++++
- arch/arm/dts/r8a78000-ironhide-u-boot.dtsi      | 78 +++++++++++++++++++++++++
- configs/r8a78000_ironhide_cm33_defconfig        | 22 ++++++-
- drivers/mtd/Kconfig                             |  2 +-
- drivers/mtd/renesas_rpc_hf.c                    | 26 ++++-----
- drivers/spi/renesas_rpc_spi.c                   | 19 +++---
- drivers/ufs/ufs-renesas-rcar-gen5.c             | 22 ++++---
- include/configs/rcar-gen5-common.h              |  4 ++
- 8 files changed, 157 insertions(+), 33 deletions(-)
+Best regards,
+Alexey
