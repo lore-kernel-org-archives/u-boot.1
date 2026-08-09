@@ -4,116 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2A4C5AD5A
-	for <u-boot@archiver.kernel.org>; Sun,  9 Aug 2026 22:08:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C9EC5AD4E
+	for <u-boot@archiver.kernel.org>; Sun,  9 Aug 2026 22:08:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E79F96061C;
-	Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4328E60650;
+	Sun,  9 Aug 2026 22:08:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9BDpibsKw3Sa; Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
+ id v0SzxR2VIMNH; Sun,  9 Aug 2026 22:08:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 53B06605EE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8EA526063E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786313301;
-	bh=KeYrrO2WmTl6zlDN6TOCDgDSmr5+0Z7/NCPDP/vwm0E=;
-	h=From:To:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786313304;
+	bh=ipOep9hVvLzatvHw0NTgYLpfxTvdY9EI5p2RaF/fnaI=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Lyx+5mWg4P6wb3ERmilUg2Py6AyYAF4kOoWFaMlh/Fh6E1A0wmjdqGPFFfu0l0Pc5
-	 sS17Tp97Bg3uyJRPx1EmPtfVmdkMzru4ceXZCdzYtetma9Nb/M5Fj/CZ1J6wxWFztg
-	 y6aW1Zk3CIfaCG3HDfYlsilTuesWZGWhTz9SHIQu7LUYlJaCQ5nowXQRKM9qHq3Dhc
-	 XKP7hZUYdJyTpgaXXmgLeH1u5m48xc60mtTx/n5QtDcoLCDIXn5xAaMlvTQGdvpYbD
-	 buDeu6dfjQzJvKlu9jReSBVk5nsmmjOOBcV0GlFJAFQ83+gcWQSq3RT4wpRhkAnwYf
-	 Za6mFQJhrXLeg==
+	b=oCu/nCFebBD5+KkKCMYZU2edhZJLFhSjZdo216qQn5mnTRTXH6WriDKKrZQwihsRS
+	 FRW9ZHIITvCxGxlnTJz3N6BGi4wo90ztR1dUkaLn2d+p79RFtvp/frL6lQC99z3TAX
+	 Wec/S93FaZDkOCV//O1ZHSjzgHbz97it5dyM2IJTst+VGzzcGdIKiRwOFXojSa9wyO
+	 DVuRLraf9hMinAP1FiCW2RckcMrO5H50C4UznnHlbbhraLJiZhJEraHGeyRjVdeGB2
+	 6yRMowQcKlkAS3lskS9LKXFXou89UCCIZL6GosKPg75xcRmaOy8Pqww6YYUat+0/Jr
+	 bXHSVmBsK6lRg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 53B06605EE;
-	Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1518B296
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8EA526063E;
+	Sun,  9 Aug 2026 22:08:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0B6CF40A
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 06EF1605EE
+ by smtp2.osuosl.org (Postfix) with ESMTP id E5AB640061
  for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id j7SrsVAo8dTl for <u-boot@lists.u-boot-project.org>;
- Sun,  9 Aug 2026 22:08:19 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YZ9-AzbCMa8a for <u-boot@lists.u-boot-project.org>;
+ Sun,  9 Aug 2026 22:08:20 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2e; helo=mail-oo1-xc2e.google.com;
+ client-ip=2607:f8b0:4864:20::c29; helo=mail-oo1-xc29.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 41F09605D4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 41F09605D4
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 41F09605D4
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:18 +0000 (UTC)
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-6aae36ea5c4so772937eaf.1
- for <u-boot@lists.u-boot-project.org>; Sun, 09 Aug 2026 15:08:18 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0D4304004B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0D4304004B
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0D4304004B
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:19 +0000 (UTC)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6acbf97e9a1so687765eaf.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 09 Aug 2026 15:08:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786313298; x=1786918098;
+ d=1e100.net; s=20251104; t=1786313299; x=1786918099;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=KeYrrO2WmTl6zlDN6TOCDgDSmr5+0Z7/NCPDP/vwm0E=;
- b=lFcnOUywNS+L5S2v5Q+XLLofrd4lmNTfm9wu2x92/IX11LD2ZdZBPFr6KfzJtGiyKk
- cZxBIjjUXnhAQKJTnxu4B8c87dzUEoMeaESM/LANok/vN+PgiV74YsDjdu+x8YzgQyG3
- jKUHmUnMh6g57BuPjZndYM6hxbGXjZAeeXihR5ijKVihj402ejv0Usb5DFspfWj+HPnT
- u1zw4vc0vJLzMXdE1WTi9CmAXoF2vFT9aodNcLmeVezVmdC1m+5sLRwoelwb8eKHN5tI
- 3xU5i8N4lR8fKt4GsocmZ5y0vjgp1cQR6bLmX8e+isFnjuuTgkM2OArneSJ+dtKMjvgV
- xsMg==
-X-Gm-Message-State: AOJu0YwVfMakPl+4qoMCl2ouNDEXApNX2BEbm4RQD6UiXf2TqYIRWgQ3
- ytN9036FvOt3PO4bTqXSYw+bnXB+NggkD9S9On4gS8eYURyE1y0BNQgIO/svH0dICzO9/D9qzTM
- oU3deFVY=
-X-Gm-Gg: AR+sD10Sq6R/mPcWNk0fyCxCzUdvArypD1hTklBAItw1hh6b67+wKc6L92Ti26P1z42
- pCGYci9mC7+In8OIcvCGAzHk0f2IkDv+ljISJEjfjr87NEjiib4fDTrl0d1yK9qwPxpGyRsSQGw
- SErW1TsXGoyL28XjzKadCgwvz2cXZr7m3p5AR0ZCBzQ6s2qjYNlmWZZE6DF5o8blNlvIWgO/yh2
- ZoyzEAxt2tYq1PrJjhMWpq2oTPZ9YXhqkQAupHmgithhqAMJQ2uEaoho2FxrsKhLK1jUcGS36DJ
- pt6Ncg+mm/7FuvG7HiHoeBpB8XzF05IirRRgZFAlCcygKQzRBKRRPluLpztE7ywwBb5UHHMTjYo
- s3Ofl2NZGmqcDM0vRKJppPYKHRx9eYh9OaXDZ80aQZpdH3oRwWjAAr374icv8IEnL0CPXrvifjG
- uSWA0Hpk//1FBKPgOFH/O4X+lOSPs5pxBwhiGCCQN3f6bYTOTDyjigBnym8lpf0iIfb0bmeSMxS
- ujwpUwyu+8lIit5l6/RD6MeXpluGqDiVdQr0EKw0jN18tMZ2tdB73degZrQryLOsQ8h/t6ajJqp
- Z23a+oP7
-X-Received: by 2002:a05:6820:188e:b0:6ae:46cd:e908 with SMTP id
- 006d021491bc7-6ae96ec7afdmr20937286eaf.17.1786313298017; 
- Sun, 09 Aug 2026 15:08:18 -0700 (PDT)
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ipOep9hVvLzatvHw0NTgYLpfxTvdY9EI5p2RaF/fnaI=;
+ b=G9ldHMcbYFbgsmWQbq6DhG6yJygUlm5rjhi9x3f0Rtr+UZdHRjDIZ+1bKWX7CQs0LM
+ vtikXyWR1XQT0wpd2FjVdK6wn53O42q5mU73OAGNovBRMl9Xs3R1al8NS42DWV5v3iAI
+ 6xlZnIzhOt5hpWTsCg51Xex9ReoatiJLKP/F+Sne4jIYDIOpqodr6OpOQc8hE2C9rYfi
+ KExEi/0zWQED6JX2PzvkFwzWP9CNIHkcXIey0m8Seq05Iu+3uDbvyKUt9pABffB8X8l9
+ HJhj7TQZgXQd2n8fy28ri6zDfYiUAauJC0kPpdFI9BrlLbCrVYNcu8f4F87p0BeMG/Zn
+ gSDg==
+X-Gm-Message-State: AOJu0YyQ0ae59L6+I3J69lQE1B7U8O4OMMg+6h352UhXEJR2+7CtVpPz
+ 7wpg8VI8R3QWAUzB4zHby5l9lCj8LUyRdWcl1rHhI8JXMIdrTFbMHtEdUlyK7LoOXjmq+CU51tO
+ gHA6oiOA=
+X-Gm-Gg: AR+sD12BeU23upmv2ZRQ/bifRDJmQvPsvf0ZzrDUHhk1+jGTORRsRTXXauG17Y+XESi
+ 2A6OiHsLK5ui6uQmiZMh+xLYpeTRR6mT94G54aMMaDhhhlDe1BJf6vY9dahsQ1pT4DHY2sPNOAq
+ 7TSub9Ik6k146bFgh5NubypWf1Pb/kZbStTMHBDv4qX8Iihl7o08rrfr1x1+zxP9GgjssLO9LZG
+ mjqrhQ0WRRugh2e5KJP6Et/vX/JVyLTueyuEMC4zXKdoWHYCT30vdv+JFy3s1g/zAJNTN5d+kI1
+ o8Dlvd8hXW9+Csh+DfoDFd8vFM9OrFU1qhQ2dkDaX7Vk2259RX7+ZB6GUMHWj98mKzHUWThziO0
+ W+4tKywcgLO1qsxtHyV+Wwls4az7qJdJoM9+gcmkxACF8ZRuvPo+Sd2we1IW0wmTgsQQdzEu7h2
+ FOTfXQ7m2QP15etCOZ1cEDgwK2Gt2NtoltEWpvggmw2ZDWD1tqWGItbOX+6OBS+2KrajpWMcuo0
+ bl0UDXIdM5DMYSplR6K8m4uSzwh3lYJ0FF0Fjyt1x2c46SIwGdfjuPFRyYN45lIB76HYYzszG8+
+ gidJ0ys2
+X-Received: by 2002:a05:6820:611:b0:6b0:3b29:2301 with SMTP id
+ 006d021491bc7-6b03b292427mr9908239eaf.0.1786313299021; 
+ Sun, 09 Aug 2026 15:08:19 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b02be475b6sm7881835eaf.11.2026.08.09.15.08.16
+ 006d021491bc7-6b02be475b6sm7881835eaf.11.2026.08.09.15.08.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 15:08:17 -0700 (PDT)
+ Sun, 09 Aug 2026 15:08:18 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260808042549.145756-1-marek.vasut+renesas@mailbox.org>
-References: <20260808042549.145756-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/main
-Message-Id: <178631329692.1212230.12098030971679985934.b4-ty@konsulko.com>
-Date: Sun, 09 Aug 2026 16:08:16 -0600
+To: u-boot@lists.u-boot-project.org, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Carlo Caione <ccaione@baylibre.com>
+In-Reply-To: <20260809185338.841953-1-marek.vasut+usb@mailbox.org>
+References: <20260809185338.841953-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/main
+Message-Id: <178631329812.1212230.11128557399280472995.b4-ty@konsulko.com>
+Date: Sun, 09 Aug 2026 16:08:18 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786313298; x=1786918098;
+ d=konsulko.com; s=google; t=1786313299; x=1786918099;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=KeYrrO2WmTl6zlDN6TOCDgDSmr5+0Z7/NCPDP/vwm0E=;
- b=GbE+PcdFoznG7nAd4OHYdVnudiRMpNijYlfTja/6g280jG8FBG/f7y16ACOD194QQT
- fO3mLUKli1R/hO275vs7XKbuIOg54eX2xrZJzJWElMmFwpMYcFNJ1nJY41JPeHKwXz+3
- Yv4t3u4kJJyLEd6sanq4uf8h4p0pX7j7YVlS8=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=ipOep9hVvLzatvHw0NTgYLpfxTvdY9EI5p2RaF/fnaI=;
+ b=OpV/iS0SFLR7wDBheDMwSB/o2LV4O1wKWeZPw4txGlK75LVL5f125xQBuXKH0wOyQ2
+ UloZCYHnzeYs1dys2kJ86DlJS3h+bcgl3cI+Gzmx/zerZ2UJ+VrCoUVsQ3zrlWCb2VK5
+ uoTP0d9iD94NrXsdCnTmBMJaaUfqrYpW50yjM=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=GbE+PcdF
+ header.s=google header.b=OpV/iS0S
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,15 +129,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Sat, 8 Aug 2026 06:22:48 +0200, Marek Vasut wrote:
+On Sun, 9 Aug 2026 20:52:50 +0200, Marek Vasut wrote:
 
-> This includes temporary U-Boot DT ECC carveouts for R-Car Gen5, they
-> will be dropped from U-Boot DTs once OF_UPSTREAM DTs get re-synced.
-> This also includes RPC-IF support for R-Car Gen5 and env storage in
-> RPC HF.
-> This also includes an update for R-Car Gen5 UFS controller driver.
+> MTU3 DT bindings alignment with Linux DT bindings.
 > 
-> The following changes since commit 06c866fee0052579dbd27456fac425d002d44a80:
+> The following changes since commit d0615e4a67c8958fad4a8c39262074958f04c179:
+> 
+>   Merge tag 'u-boot-imx-main-20260807' of https://git.u-boot-project.org/u-boot/custodians/u-boot-imx (2026-08-07 10:21:33 -0600)
+> 
+> are available in the Git repository at:
 > 
 > [...]
 
