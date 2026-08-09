@@ -1,110 +1,119 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A69C5AD4E
-	for <u-boot@archiver.kernel.org>; Sun,  9 Aug 2026 18:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2A4C5AD5A
+	for <u-boot@archiver.kernel.org>; Sun,  9 Aug 2026 22:08:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 24BDF404C9;
-	Sun,  9 Aug 2026 18:53:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E79F96061C;
+	Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xOoNkvC5VNmB; Sun,  9 Aug 2026 18:53:56 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9BDpibsKw3Sa; Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 568C140483
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 53B06605EE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786301636;
-	bh=7kBH1Yg6FsXX38g6Iuu/pWNZFE8QESwJOD48jjfcgnw=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=0NoB8/aYOB8AHTxkTP8sukuDzSWY5Sa0qmnZpqlVg876cyzfoSDJEFfheNhQ6A3IV
-	 a63ohmk9kn007lAXlq8To3c7Owp/esh0zZrbISh6kMCAfOxiNsuNGuycqJrLaPXTmp
-	 rKHbXyFZ/jbxNY3h5aEno3ATilL6zdjuQXlk9UkaVxX26LK8wUNeLScFDNJQAAogB3
-	 T4K+NiGo7CIgXoHt8/tSamVY+mdqwJmbkkGnPMz7frSO98jm3enh18mbkkJHvhin4A
-	 rVPaPfZ07urW+WufdqmSkDRv3kTq33xwLsQ3q7cLbt9EuVo/zAQ/rrxILOWBAUA263
-	 f9WoYvYZ1Pbgg==
+	d=lists.u-boot-project.org ; s=default; t=1786313301;
+	bh=KeYrrO2WmTl6zlDN6TOCDgDSmr5+0Z7/NCPDP/vwm0E=;
+	h=From:To:In-Reply-To:References:Subject:Date:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Lyx+5mWg4P6wb3ERmilUg2Py6AyYAF4kOoWFaMlh/Fh6E1A0wmjdqGPFFfu0l0Pc5
+	 sS17Tp97Bg3uyJRPx1EmPtfVmdkMzru4ceXZCdzYtetma9Nb/M5Fj/CZ1J6wxWFztg
+	 y6aW1Zk3CIfaCG3HDfYlsilTuesWZGWhTz9SHIQu7LUYlJaCQ5nowXQRKM9qHq3Dhc
+	 XKP7hZUYdJyTpgaXXmgLeH1u5m48xc60mtTx/n5QtDcoLCDIXn5xAaMlvTQGdvpYbD
+	 buDeu6dfjQzJvKlu9jReSBVk5nsmmjOOBcV0GlFJAFQ83+gcWQSq3RT4wpRhkAnwYf
+	 Za6mFQJhrXLeg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 568C140483;
-	Sun,  9 Aug 2026 18:53:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 17D2010E
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 18:53:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 53B06605EE;
+	Sun,  9 Aug 2026 22:08:21 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1518B296
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 09471404C1
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 18:53:55 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 06EF1605EE
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8p7D4Tsih3Zt for <u-boot@lists.u-boot-project.org>;
- Sun,  9 Aug 2026 18:53:54 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
- helo=mout-p-103.mailbox.org; envelope-from=marek.vasut+usb@mailbox.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D5DA940483
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D5DA940483
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D5DA940483
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 18:53:52 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hJ6VP3g0vzKnRn;
- Sun, 09 Aug 2026 20:53:49 +0200 (CEST)
-To: u-boot@lists.u-boot-project.org,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
- Carlo Caione <ccaione@baylibre.com>
-Subject: [PULL] u-boot-usb/main
-Date: Sun,  9 Aug 2026 20:52:50 +0200
-Message-ID: <20260809185338.841953-1-marek.vasut+usb@mailbox.org>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id j7SrsVAo8dTl for <u-boot@lists.u-boot-project.org>;
+ Sun,  9 Aug 2026 22:08:19 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::c2e; helo=mail-oo1-xc2e.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 41F09605D4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 41F09605D4
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 41F09605D4
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 22:08:18 +0000 (UTC)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-6aae36ea5c4so772937eaf.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 09 Aug 2026 15:08:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786313298; x=1786918098;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=KeYrrO2WmTl6zlDN6TOCDgDSmr5+0Z7/NCPDP/vwm0E=;
+ b=lFcnOUywNS+L5S2v5Q+XLLofrd4lmNTfm9wu2x92/IX11LD2ZdZBPFr6KfzJtGiyKk
+ cZxBIjjUXnhAQKJTnxu4B8c87dzUEoMeaESM/LANok/vN+PgiV74YsDjdu+x8YzgQyG3
+ jKUHmUnMh6g57BuPjZndYM6hxbGXjZAeeXihR5ijKVihj402ejv0Usb5DFspfWj+HPnT
+ u1zw4vc0vJLzMXdE1WTi9CmAXoF2vFT9aodNcLmeVezVmdC1m+5sLRwoelwb8eKHN5tI
+ 3xU5i8N4lR8fKt4GsocmZ5y0vjgp1cQR6bLmX8e+isFnjuuTgkM2OArneSJ+dtKMjvgV
+ xsMg==
+X-Gm-Message-State: AOJu0YwVfMakPl+4qoMCl2ouNDEXApNX2BEbm4RQD6UiXf2TqYIRWgQ3
+ ytN9036FvOt3PO4bTqXSYw+bnXB+NggkD9S9On4gS8eYURyE1y0BNQgIO/svH0dICzO9/D9qzTM
+ oU3deFVY=
+X-Gm-Gg: AR+sD10Sq6R/mPcWNk0fyCxCzUdvArypD1hTklBAItw1hh6b67+wKc6L92Ti26P1z42
+ pCGYci9mC7+In8OIcvCGAzHk0f2IkDv+ljISJEjfjr87NEjiib4fDTrl0d1yK9qwPxpGyRsSQGw
+ SErW1TsXGoyL28XjzKadCgwvz2cXZr7m3p5AR0ZCBzQ6s2qjYNlmWZZE6DF5o8blNlvIWgO/yh2
+ ZoyzEAxt2tYq1PrJjhMWpq2oTPZ9YXhqkQAupHmgithhqAMJQ2uEaoho2FxrsKhLK1jUcGS36DJ
+ pt6Ncg+mm/7FuvG7HiHoeBpB8XzF05IirRRgZFAlCcygKQzRBKRRPluLpztE7ywwBb5UHHMTjYo
+ s3Ofl2NZGmqcDM0vRKJppPYKHRx9eYh9OaXDZ80aQZpdH3oRwWjAAr374icv8IEnL0CPXrvifjG
+ uSWA0Hpk//1FBKPgOFH/O4X+lOSPs5pxBwhiGCCQN3f6bYTOTDyjigBnym8lpf0iIfb0bmeSMxS
+ ujwpUwyu+8lIit5l6/RD6MeXpluGqDiVdQr0EKw0jN18tMZ2tdB73degZrQryLOsQ8h/t6ajJqp
+ Z23a+oP7
+X-Received: by 2002:a05:6820:188e:b0:6ae:46cd:e908 with SMTP id
+ 006d021491bc7-6ae96ec7afdmr20937286eaf.17.1786313298017; 
+ Sun, 09 Aug 2026 15:08:18 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6b02be475b6sm7881835eaf.11.2026.08.09.15.08.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Aug 2026 15:08:17 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.u-boot-project.org, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260808042549.145756-1-marek.vasut+renesas@mailbox.org>
+References: <20260808042549.145756-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/main
+Message-Id: <178631329692.1212230.12098030971679985934.b4-ty@konsulko.com>
+Date: Sun, 09 Aug 2026 16:08:16 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 8c245c9719b7c806036
-X-MBO-RS-META: arm69fb1c4of4bqub5szihcwaob9suis
-X-Rspamd-Queue-Id: 4hJ6VP3g0vzKnRn
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1786301629;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=7kBH1Yg6FsXX38g6Iuu/pWNZFE8QESwJOD48jjfcgnw=;
- b=DHPgxp3Hz9jeaHUmDb2keKHs8QSR64O/iZK/Rp8IuYBoB0GC8bMMsVX62et4yVdslH/TY1
- sUKNKbz5uL19XvcRhLJQatAOik5Pzc3T4qtic8NxBW1qyyAxtIK8gWw4p7qBf4md1k/kTZ
- gzB3NiAohsa0FT97Avs2tQh4afZWyv5eb5VPO7g6B/vPKnzXLj4+XyQ+ridCfPqAnWykeH
- EQjBYFKWvhhLbzonD3Ny/DXyDIiKKBVRX1QkQ55H6TiYpNevXvzNMOS5cxPh+x4gATLDh/
- xfrh4fBgQBtnDV8f6ClXQsKzVuCtTxvr2zRy1p33vftqHoEPTTdqmJWV60bhaw==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailbox.org; s=mail20150812; 
- t=1786301627;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=7kBH1Yg6FsXX38g6Iuu/pWNZFE8QESwJOD48jjfcgnw=;
- b=byneVcslXoBO2IAANOcve335nqd4GvXRa+KgaA9vg1RjW/SrQveFwYb9jDQBGr+DKfAd1M
- gMPU7/IXLdLsUisdcldBoUJakmdxCrmxprRWvlin9iBV4/sI/2NLnqgJrKo2jrXKz6c0ew
- tiQJeEjB6WIHjDe3ExuFJBOHl3LuMwbcqYY7cCvQFOETZeQCLIXm3YJ+VQdRgxex1IGPwO
- drHpMWX1fQfB16AKdhhT2n6AvPUabwS4FRYSYcPhRx2dpCM1iJTlFrVEb0vWqBLupI0Rkk
- PyK0QXZ3zxbyuCAhvVsb+J51OvS5LK7yhlFhvGPWeSKQLfnZY//t+d4rirkNQw==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=mailbox.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=DHPgxp3H; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=byneVcsl
-X-Mailman-Original-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=byneVcsl;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+usb@mailbox.org
+ d=konsulko.com; s=google; t=1786313298; x=1786918098;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=KeYrrO2WmTl6zlDN6TOCDgDSmr5+0Z7/NCPDP/vwm0E=;
+ b=GbE+PcdFoznG7nAd4OHYdVnudiRMpNijYlfTja/6g280jG8FBG/f7y16ACOD194QQT
+ fO3mLUKli1R/hO275vs7XKbuIOg54eX2xrZJzJWElMmFwpMYcFNJ1nJY41JPeHKwXz+3
+ Yv4t3u4kJJyLEd6sanq4uf8h4p0pX7j7YVlS8=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=GbE+PcdF
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -116,46 +125,24 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Marek Vasut <marek.vasut+usb@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-MTU3 DT bindings alignment with Linux DT bindings.
+On Sat, 8 Aug 2026 06:22:48 +0200, Marek Vasut wrote:
 
-The following changes since commit d0615e4a67c8958fad4a8c39262074958f04c179:
+> This includes temporary U-Boot DT ECC carveouts for R-Car Gen5, they
+> will be dropped from U-Boot DTs once OF_UPSTREAM DTs get re-synced.
+> This also includes RPC-IF support for R-Car Gen5 and env storage in
+> RPC HF.
+> This also includes an update for R-Car Gen5 UFS controller driver.
+> 
+> The following changes since commit 06c866fee0052579dbd27456fac425d002d44a80:
+> 
+> [...]
 
-  Merge tag 'u-boot-imx-main-20260807' of https://git.u-boot-project.org/u-boot/custodians/u-boot-imx (2026-08-07 10:21:33 -0600)
+Merged into u-boot/main, thanks!
 
-are available in the Git repository at:
+-- 
+Tom
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-usb.git main
 
-for you to fetch changes up to 08b77aac333cb437df57a7f746fa712042ccde61:
-
-  usb: mtu3: add SPL support (2026-08-09 13:26:42 +0200)
-
-----------------------------------------------------------------
-Carlo Caione (3):
-      doc: usb: remove obsolete MediaTek MTU3 bindings
-      usb: mtu3: support the upstream devicetree binding
-      usb: mtu3: add SPL support
-
- arch/arm/dts/mt8183-pumpkin.dts                    |   4 -
- arch/arm/dts/mt8183.dtsi                           |  17 +-
- arch/arm/dts/mt8512-bm1-emmc.dts                   |   6 +-
- arch/arm/dts/mt8512.dtsi                           |  19 +-
- doc/device-tree-bindings/usb/mediatek,mtk-xhci.txt |  46 -----
- doc/device-tree-bindings/usb/mediatek,mtu3.txt     |  79 -------
- drivers/Makefile                                   |   3 +-
- drivers/usb/mtu3/Kconfig                           |  39 ++++
- drivers/usb/mtu3/Makefile                          |  10 +-
- drivers/usb/mtu3/mtu3.h                            |  12 +-
- drivers/usb/mtu3/mtu3_core.c                       |   4 +-
- drivers/usb/mtu3/mtu3_dr.h                         |   4 +-
- drivers/usb/mtu3/mtu3_host.c                       |  11 +-
- drivers/usb/mtu3/mtu3_hw_regs.h                    |  11 +-
- drivers/usb/mtu3/mtu3_plat.c                       | 227 +++++++++++++++------
- 15 files changed, 240 insertions(+), 252 deletions(-)
- delete mode 100644 doc/device-tree-bindings/usb/mediatek,mtk-xhci.txt
- delete mode 100644 doc/device-tree-bindings/usb/mediatek,mtu3.txt
