@@ -4,100 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA73C5AD68
-	for <u-boot@archiver.kernel.org>; Sun,  9 Aug 2026 05:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E3FC5AD55
+	for <u-boot@archiver.kernel.org>; Sun,  9 Aug 2026 05:15:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 207DF6070B;
-	Sun,  9 Aug 2026 05:15:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B3C7360669;
+	Sun,  9 Aug 2026 05:15:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 24qsIV82sj3j; Sun,  9 Aug 2026 05:15:39 +0000 (UTC)
+ id AVnV7cFzJm8S; Sun,  9 Aug 2026 05:15:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 17872606C6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 729E060606
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786252539;
-	bh=S+cSX7Pl+L+o3oxqdY5VHkUddxkiAbmjlHOFqt3MqXY=;
+	d=lists.u-boot-project.org ; s=default; t=1786252535;
+	bh=SOsXGJUyAoC2tUedSyqSfyeB47Tn6fELmgtXhqfHhSg=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=gI00ZMIYFWTBvYkIOY/pnnZfj7jFmFTYaR3PwU0KWAVQIX5YEBOJCqSYpwJIz72FE
-	 a4OCJiEGxQAoJ+oUIinOuj9u6wZxapcJjx32x2E1AfIIO5t4/nxjOhrIIw/QQd1rFi
-	 1BOM2nyDk3DXhxuhq/q8dL8Yk7hRd3qUrW10548KlkF7ZUByz3BMkULA5AlF9M/eu/
-	 2zQ3TEKaE4fqw/HR9w9G+EqiCP9Jqj8h7mr1wXWhI/CVIJ2PaLWQZ/ie+HB8nmhLs2
-	 TbnE57+SawyaaiOmbL8cnolIqyMu7cbdJ6CyOXocRFjj2oIAe26prWq0F+bAzp/kpm
-	 IQYMoLHOF4NNg==
+	b=QpPsNNtdB6gt9PngsBuW0AFj6ZSL+anwupqnmY+KdEmEAiLUwdL+y86zdEWLrWw5l
+	 uvPzsIwS+8Z/4wKQpA2C8BnunLCMQOSQinP6c2R5t5j9FX36jNDe7frwIHZBgLRHAa
+	 iMsHUOAk65vWNFlY6dojSFeXPowK2J8lHKB+qoQA+K2Ig2kbecjqYGlnWnqkCYl1Lp
+	 mgWElERHHbbYPD7a51WZrpbWNZ23TtgwBUT+E9KjGBMJOueKDfru8avkZ7KJOaD6N+
+	 UKDeIML77xLJSIPm+AjykT1rxEPbTeSi/Rw3mJFnL8P21oTvkRLS4gr/bq5ig+cEU6
+	 rGZacg5D+N83w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 17872606C6;
-	Sun,  9 Aug 2026 05:15:39 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D2B54296
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:27:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C01CD60678
+	by smtp3.osuosl.org (Postfix) with ESMTP id 729E060606;
+	Sun,  9 Aug 2026 05:15:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C9EB296
  for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:27:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 788CE80D3D
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:27:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6vh5zXEGjHeI for <u-boot@lists.u-boot-project.org>;
- Sun,  9 Aug 2026 04:27:30 +0000 (UTC)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1321E605DB
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:24:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 1321E605DB
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1321E605DB
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VAbBXb_ArmKm for <u-boot@lists.u-boot-project.org>;
+ Sun,  9 Aug 2026 04:27:26 +0000 (UTC)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5AD1380A7A
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:23:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 5AD1380A7A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5AD1380A7A
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5EEB33FBBB
- for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:24:01 +0000 (UTC)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-8484f26852dso967218b3a.1
- for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 21:24:01 -0700 (PDT)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 327B23F60D
+ for <u-boot@lists.u-boot-project.org>; Sun,  9 Aug 2026 04:23:54 +0000 (UTC)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-cbe9733fbf6so616165a12.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 08 Aug 2026 21:23:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786249440; x=1786854240;
+ d=1e100.net; s=20251104; t=1786249432; x=1786854232;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=S+cSX7Pl+L+o3oxqdY5VHkUddxkiAbmjlHOFqt3MqXY=;
- b=NOxJ59lFvzNMfr1bEm/OfUu188VF6rf7FL4W7QNlfBlBOcs955IG12TUWUA+hrpkmf
- K/Atvj0Yt5hSZIM9tit5OiV/QCeFOXhIKgVcK9oVNvRgq6Ek1xvtKF7iLEblvbSIEg7b
- /21TRyTXnlgVwfTBx901Uk2Qx5648Fw6sxIXPr6DoS9MV+mLLWTxs8Lgt5XfovBvD19l
- V1nnWZZD1kwIjJ6fmbpzhKLKgdXiiN9yTCO0QJhnFr5Ky5+hlJ+970WlVBzTxPwYKI3y
- 9/ra50l3ZRzl8eWnhk1k+ZlibYbZCfZgXzVqnx6d/njEYnjUWSwms6VJS0DN3HSZ2zj2
- RPFw==
-X-Gm-Message-State: AOJu0YxnAUiLFASsGZXueYUlqth758addJlrHFknCUkinZs+cLpqhM64
- K0QRhMr19ogri8eE80A5B4nPkBq3YtIsAQLlLbROpCawfmrj9Eh3coKkevdhxiHz7O/V1LOwbk0
- b32/qoW7XLx1KoZebQFXLGsA56+wOFA7972C3L7hCxBliQQy8hAU1Sb/JgOpQvOhc+JBVvf5J2a
- U8pWqxgXzewWBBV2PQHA==
-X-Gm-Gg: AR+sD13U0mGEp+2UHTIbFMByFqB4Lc101vm8lpgo1ovyXEufD/zRojp7/fUkvAdBBPi
- mtS9ADgkURMnyBl45x/wnGw95jlIm/IZ6Tgu0fDJ7RgX8SZJbfDIkffj8G5RXx1YRYZsg5Fjc8t
- 7MDfONZCSXOQGxj1e2smixXz2GYRqDDwgsM5S9l+Zg8NssvXZhovgtCqkxGI3OWDCZgL5WXAtUP
- xQ6fsTM91z2/FX8Ht0WoRLjoBs6ZKsqgP/0X0u5o5B2pTCn9neolKS9nywFytavacWUswj2i5ds
- o0HzSBo/4BACTqTxni7O5UKCUQy44gM1jtOPSRQ2X3b25JXy5s6PHiJPznmaGAjF24qs09xtQz/
- Go6ZsJZIOKsu7m++c+tnLTRih2IKLLn96TZZxZhdfox52Nt8pqJpx1X5HlB+n0SNwXXNwFw==
-X-Received: by 2002:a05:6a00:1388:b0:848:30c3:45dd with SMTP id
- d2e1a72fcca58-84f4fdbf18amr20570148b3a.11.1786249439765; 
- Sat, 08 Aug 2026 21:23:59 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1388:b0:848:30c3:45dd with SMTP id
- d2e1a72fcca58-84f4fdbf18amr20570118b3a.11.1786249439255; 
- Sat, 08 Aug 2026 21:23:59 -0700 (PDT)
+ bh=SOsXGJUyAoC2tUedSyqSfyeB47Tn6fELmgtXhqfHhSg=;
+ b=XE+K2kkf7DWQxhz5PRlRPsjB9gjsy9ahJcPh0a2Y5pakq7RehsA46FeOAagEUPI67S
+ sQyi4IgGZCROcBQs+z2IZAP1P+8wI06RCNpRLC3nxdA1jVmyuaSiSUYCsRtav/EzHuOr
+ lLgExWTWI8tXDaZUkgtqCph9o5brs5XV8g8qLkRRvKEcWuaGqbnNOCVMAJKV4Sg0XDcv
+ 2oFA2uP5djsVIG4l923Kv9ZyWkOz7SbjQZUU6odTvzLLD3RiXkXsDiCdDcUz7SrugIrP
+ ngGLS1Bg5jNAfzx3jZtpQaiUkuqjgIUrgDft6X69AvUjqc+r8p/XAHAFBEdf+9if5BTK
+ 9PBw==
+X-Gm-Message-State: AOJu0YzQ8T23zDdHpq1HSJuWsVP4OmiJsUy+iq+gqj01fPfQrEE+QTvx
+ a25tQVtmHB+VYLr1f6dcS71bl8x5fbwtQYJqaDuGQZlLrIppnwnHad2ZjMpuOTDQ27etBR6dnim
+ mCVgxaTraGBP7GPo3/w8m67tc2LxrnlQYRsb83jiwk2bvHdcSNPxxUDzGzt9hznCoqs7T/1GJsC
+ ofui9r7Elm++9g/G+ddQ==
+X-Gm-Gg: AR+sD12BASYPE4pvUeXlCr+V6YgdadyLNAh/7nkWzMrH5KSftXmh9U8BwQIVpONgwsd
+ 9E7kGMHYK9awNS06YLqDDCm6UO2KhZG0Nb/gmoXgbAHXZSiiOk0xWej9QMNIamr0oAGj0SVQrWs
+ xbX+0PulNRo8qW1PKYPDQYz+FmIqbY3zQ/Bjd0ch+tE85mJMLOq98ynPgNpg31g6UMbydRgr88R
+ PsHULY30QiFgwPnH9TREID2u3aM3r2I+1LxgagafUKls2JZGO3tWMusqXCdq3nnrAol+ezGNWT9
+ snMtkP4LTcVI0kDLqE2KwCMbDMfXS3fB+u4sQTGJma7627qSOmzF1w98xd7QlXiWxMn2RTbfNV/
+ nP4Inh8ZfrCCjh0gd2QxXXgACkfYMfSpiqjARscEiGPa1qDE5kVJ+JUxuZc0SZ7R8ILiZyA==
+X-Received: by 2002:a05:6a21:329c:b0:3c3:8315:80b7 with SMTP id
+ adf61e73a8af0-3cb85e9757amr39069135637.9.1786249432617; 
+ Sat, 08 Aug 2026 21:23:52 -0700 (PDT)
+X-Received: by 2002:a05:6a21:329c:b0:3c3:8315:80b7 with SMTP id
+ adf61e73a8af0-3cb85e9757amr39069098637.9.1786249432194; 
+ Sat, 08 Aug 2026 21:23:52 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe8f35bc75sm2314583a12.19.2026.08.08.21.23.55
+ 41be03b00d2f7-cbe8f35bc75sm2314583a12.19.2026.08.08.21.23.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Aug 2026 21:23:57 -0700 (PDT)
+ Sat, 08 Aug 2026 21:23:51 -0700 (PDT)
 To: u-boot@lists.u-boot-project.org
-Cc: Aristo Chen <aristo.chen@canonical.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] test: lib: cover image_decomp_get_uncompressed_size() for
- lzma streams
-Date: Sun,  9 Aug 2026 04:23:29 +0000
-Message-ID: <20260809042338.63397-4-aristo.chen@canonical.com>
+Cc: Aristo Chen <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>,
+ Peng Fan <peng.fan@nxp.com>, Daniel Golle <daniel@makrotopia.org>,
+ Randolph Sapp <rs@ti.com>
+Subject: [PATCH 1/3] bootm: size the noload decompression buffer from the
+ compressor header
+Date: Sun,  9 Aug 2026 04:23:27 +0000
+Message-ID: <20260809042338.63397-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809042338.63397-1-aristo.chen@canonical.com>
 References: <20260809042338.63397-1-aristo.chen@canonical.com>
@@ -105,29 +109,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 09 Aug 2026 05:15:32 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1786249441;
- bh=S+cSX7Pl+L+o3oxqdY5VHkUddxkiAbmjlHOFqt3MqXY=;
+ d=canonical.com; s=20251003; t=1786249434;
+ bh=SOsXGJUyAoC2tUedSyqSfyeB47Tn6fELmgtXhqfHhSg=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=qpX/SFqMue3oBnyRDfy4FYJy/WuL3YrBE6EwMVVaoEFyWEEfOdCzCFAypIkOw7ml1
- 74ggccgrW4ZnAlft16xYt3tRRAyuo0M/DmYhC3FqNvuJg6CWceIhRmOfrSjUd6UaFl
- dl0UjcqpQ9uiOqlB0JJ9Z+DAQn38KU+pF7ajVXor6LAeu5KUJ6mfem+aFcr/z9U11m
- Lbj5rbiy8Bd6Og23fsT+rT/lEwsBzbVoICsOcoc6+qMi+WdwSPX+2PkEwLgQ5p91cg
- vZTHfp20D696Pg1OgDfkcWnCv09BsBb8O9xhFJUtuK0SuaWFeDiraSQLZkbJGdPI0R
- /Ly0YN/15/GJs3Mm/u9Xg6p8cZGmeDuYh0BP6GSq/5NKTm0FRof8DeBTmmAlWeynAY
- vVXIpMieF4+/XkBPTo8GgFBPHkxoQpPer+AGsM8uSQwegpdx513e4UMFev+tUh5Wcj
- 5nw2gPGtRThueDZuONuroHXOc3d3Pw6dZ1ljQPqjT1pidK/PEACfn7f9ls02Pu1hxB
- 2wpBpMwO73vCICYvMwx7lcqadxeWoUkcee++fUjsVfnqVSc4LREZciC4N70ik9BdCI
- oe5yUELvtoDe2FDHndcuPP8NBWN+tdox4kMZy3XOrxDUQvvfxrrtiE6CtPE/T5xPHB
- 6x+Lk40FZyP6uEBrJdW+hIJ8=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ b=nE205FxfndE3TufEmDaqQ5Cqy5wDyDtzhH8vmAxE3pQnMzBE7hcL+gBHyRys59BgO
+ /V+gE6BYZPNAZIlohwgZhWQRu5fwdJikUpw1aUiYM4GNWOVyqOaizWxlep8Esm+nQH
+ wNg8pHFJdVX+g6UjrUpRXUy2ddzXINj1vnlLiQ9k+3D9hecAuaD54NGqHPb/IqUaMc
+ Qq0k5reW92L2cHDZOmCjpseLFB+Zskb1/ItM81Ofv4Vq6JHHMg7+x5mdyDawS2WuWk
+ uAAO5YljVUFtfwlRLgvJlrU76Osw17vRB35WOJHMWhLh+J4702Rn2idZukaNo6x/By
+ qRhDFq11pqmWa4c/ony6+hdAYlpkAtXGQnsCw5MyV0Own4tQ5Z/Y8J2B4ViNE008iq
+ J8gCR3YLMG5IPzV2d32pnI4yHy7Yyed5JSzXltiATl86Uz8+DMqR7r3RlxhaIPw91o
+ t+bGeSbbKWPhXn8046vOWCXJR8Qa92R9zCTRsNv3K+5JQXEPz4ng1iD08dbrpTFDiG
+ C21uZRrXtSDGZeLsAw2HzltXubfc3E2Qyys9mVqrFWjJBpldVzZy2weJtEuwZB0dL1
+ rNxMZUM1NPmwiWENpeLpCxVAtdiASGvHk1d6cP+vZ1ktZXsVvFCFctiL7r7xypcAat
+ hdVi+5L0ZlWjIGqKHLFtMp44=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org; spf=pass
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org; spf=pass
  smtp.mailfrom=canonical.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=qpX/SFqM
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=nE205Fxf
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,110 +149,210 @@ Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The gzip, lz4, and zstd branches of image_decomp_get_uncompressed_size()
-are exercised end-to-end by test/py/tests/test_fit.py's
-kernel_noload_decomp_*_hdr_sized cases. The lzma branch cannot be
-reached that way: standard Ubuntu ships xz-utils' lzma shim (as does
-Python's lzma.FORMAT_ALONE), and both always write the header's 8-byte
-uncompressed-size field as the "unknown" marker 0xff..ff, so a
-runtime-generated stream would only ever exercise the -EOPNOTSUPP
-fallback path.
+For a compressed kernel_noload image, bootm_load_os() allocates a
+per-image decompression buffer of ALIGN(image_len * 8, SZ_1M). The 8x
+multiplier is a heuristic: it comfortably covers what zstd and xz
+achieve on real kernels, but any well-compressed payload (say, a big
+run of zeros) can exceed it and fail decompression, and no fixed
+multiplier is safe against arbitrarily compressible input.
 
-Add a hand-crafted lzma_with_size_compressed blob built with the
-standalone lzma-alone tool (whose header carries the real size) and a
-new unit test compression_test_image_decomp_lzma that asserts:
+Read the real uncompressed size from the compressor header instead.
+Add a small helper image_decomp_get_uncompressed_size() that returns
+the uncompressed size when the format carries one: gzip ISIZE, lzma
+header uncompressed size, lz4 frame Content_Size when the FLG bit is
+set, and zstd Frame_Content_Size. Other formats return -EOPNOTSUPP.
+Bootm uses it to size the buffer to ALIGN(hdr_size, SZ_1M), capped at
+CONFIG_SYS_BOOTM_LEN because the value is attacker-controlled, and
+falls back to the 8x heuristic for formats without a size field
+(bzip2, lzo, xz) or when the header lacks the size (some lzma or lz4
+streams).
 
-  - the existing lzma_compressed blob (unknown-size marker) returns
-    -EOPNOTSUPP so bootm falls back to its 8x heuristic;
-  - the new lzma_with_size_compressed blob returns strlen(plain) so
-    bootm can pre-size the noload decompression buffer.
-
+Suggested-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- test/lib/compression.c | 66 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+ boot/bootm.c    | 20 +++++++++----
+ boot/image.c    | 79 +++++++++++++++++++++++++++++++++++++++++++++++++
+ include/image.h | 25 ++++++++++++++++
+ 3 files changed, 119 insertions(+), 5 deletions(-)
 
-diff --git a/test/lib/compression.c b/test/lib/compression.c
-index 31b6e5b1eb4..930cd542294 100644
---- a/test/lib/compression.c
-+++ b/test/lib/compression.c
-@@ -74,6 +74,31 @@ static const char lzma_compressed[] =
- 	"\xfd\xf5\x50\x8d\xca";
- static const unsigned long lzma_compressed_size = sizeof(lzma_compressed) - 1;
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 3bce8586834..6ce98485889 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -654,17 +654,28 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	void *load_buf, *image_buf;
+ 	int err;
  
-+/*
-+ * lzma -kf plain.txt (standalone lzma-alone tool, not the xz-utils shim)
-+ * The 8-byte uncompressed-size field at offset 5 holds strlen(plain) rather
-+ * than the 0xff..ff "unknown" marker written by xz-utils and Python's
-+ * lzma.FORMAT_ALONE. Used to exercise the size-parsing branch of
-+ * image_decomp_get_uncompressed_size() for lzma streams.
-+ */
-+static const char lzma_with_size_compressed[] =
-+	"\x5d\x00\x00\x80\x00\x5e\x01\x00\x00\x00\x00\x00\x00\x00\x24\x88"
-+	"\x08\x26\xd8\x41\xff\x99\xc8\xcf\x66\x3d\x80\xac\xba\x17\xf1\xc8"
-+	"\xb9\xdf\x49\x37\xb1\x68\xa0\x2a\xdd\x63\xd1\xa7\xa3\x66\xf8\x15"
-+	"\xef\xa6\x67\x8a\x14\x18\x80\xcb\xc7\xb1\xcb\x84\x6a\xb2\x51\x16"
-+	"\xa1\x45\xa0\xd6\x3e\x55\x44\x8a\x5c\xa0\x7c\xe5\xa8\xbd\x04\x57"
-+	"\x8f\x24\xfd\xb9\x34\x50\x83\x2f\xf3\x46\x3e\xb9\xb0\x00\x1a\xf5"
-+	"\xd3\x86\x7e\x8f\x77\xd1\x5d\x0e\x7c\xe1\xac\xde\xf8\x65\x1f\x4d"
-+	"\xce\x7f\xa7\x3d\xaa\xcf\x26\xa7\x58\x69\x1e\x4c\xea\x68\x8a\xe5"
-+	"\x89\xd1\xdc\x4d\xc7\xe0\x07\x42\xbf\x0c\x9d\x06\xd7\x51\xa2\x0b"
-+	"\x7c\x83\x35\xe1\x85\xdf\xee\xfb\xa3\xee\x2f\x47\x5f\x8b\x70\x2b"
-+	"\xe1\x37\xf3\x16\xf6\x27\x54\x8a\x33\x72\x49\xea\x53\x7d\x60\x0b"
-+	"\x21\x90\x66\xe7\x9e\x56\x61\x5d\xd8\xdc\x59\xf0\xac\x2f\xd6\x49"
-+	"\x6b\x85\x40\x08\x1f\xdf\x26\x25\x3b\x72\x44\xb0\xb8\x21\x2f\xb3"
-+	"\xd7\x9b\x24\x30\x78\x26\x44\x07\xc3\x33\xd1\x4c\xe1\x05\x55\x6d";
-+static const unsigned long lzma_with_size_compressed_size =
-+	sizeof(lzma_with_size_compressed) - 1;
++	image_buf = map_sysmem(os.image_start, image_len);
 +
- /* lzop -c /tmp/plain.txt > /tmp/plain.lzo */
- static const char lzo_compressed[] =
- 	"\x89\x4c\x5a\x4f\x00\x0d\x0a\x1a\x0a\x10\x30\x20\x60\x09\x40\x01"
-@@ -606,3 +631,44 @@ static int compression_test_bootm_none(struct unit_test_state *uts)
- 	return run_bootm_test(uts, IH_COMP_NONE, compress_using_none);
+ 	/*
+ 	 * For a "noload" compressed kernel we need to allocate a buffer large
+ 	 * enough to decompress in to and use that as the load address now.
+-	 * Allow up to 8x compression: this comfortably covers what zstd and xz
+-	 * achieve on real kernels, with headroom for well-compressed payloads.
+-	 * Use an alignment of 2MB since this might help arm64
++	 * Prefer the uncompressed size the compressor header carries (gzip,
++	 * lzma, lz4-with-content-size, zstd); the value is attacker-controlled
++	 * so cap it at CONFIG_SYS_BOOTM_LEN. Otherwise fall back to an 8x
++	 * multiplier, which comfortably covers what zstd and xz achieve on
++	 * real kernels with headroom for well-compressed payloads. Align to
++	 * 2MB since this might help arm64.
+ 	 */
+ 	if (os.type == IH_TYPE_KERNEL_NOLOAD && os.comp != IH_COMP_NONE) {
+ 		phys_addr_t addr;
++		ulong hdr_size = 0;
+ 
+-		decomp_len = ALIGN(image_len * 8, SZ_1M);
++		if (!image_decomp_get_uncompressed_size(os.comp, image_buf,
++							image_len, &hdr_size) &&
++		    hdr_size && hdr_size <= CONFIG_SYS_BOOTM_LEN)
++			decomp_len = ALIGN(hdr_size, SZ_1M);
++		else
++			decomp_len = ALIGN(image_len * 8, SZ_1M);
+ 		decomp_limit = BOOTM_DECOMP_LIMIT_PER_IMAGE;
+ 		err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr,
+ 				    decomp_len, LMB_NONE);
+@@ -679,7 +690,6 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	}
+ 
+ 	load_buf = map_sysmem(load, 0);
+-	image_buf = map_sysmem(os.image_start, image_len);
+ 	err = image_decomp(os.comp, load, os.image_start, os.type,
+ 			   load_buf, image_buf, image_len,
+ 			   decomp_len, &load_end);
+diff --git a/boot/image.c b/boot/image.c
+index 185d52ba492..5476c81bb6f 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -22,6 +22,7 @@
+ 
+ #include <linux/errno.h>
+ #include <asm/io.h>
++#include <asm/unaligned.h>
+ 
+ /* Set this if we have less than 4 MB of malloc() space */
+ #if CONFIG_SYS_MALLOC_LEN < (4096 * 1024)
+@@ -442,6 +443,84 @@ int image_decomp_type(const unsigned char *buf, ulong len)
+ 	return cmagic->comp_id;
  }
- LIB_TEST(compression_test_bootm_none, 0);
-+
-+/*
-+ * image_decomp_get_uncompressed_size() has a dedicated code path per
-+ * format. gzip, lz4 with --content-size, and zstd are covered end-to-end
-+ * by test/py/tests/test_fit.py's kernel_noload_decomp_*_hdr_sized cases.
-+ * The lzma path is exercised here instead: standard Ubuntu ships xz-utils'
-+ * lzma shim (as does Python's lzma.FORMAT_ALONE), and both always write
-+ * the header size as "unknown" (0xff..ff), so a runtime-generated stream
-+ * cannot reach the size-parsing branch. A hand-crafted static blob is the
-+ * only portable way to cover it.
-+ */
-+static int compression_test_image_decomp_lzma(struct unit_test_state *uts)
+ 
++#ifndef USE_HOSTCC
++int image_decomp_get_uncompressed_size(int comp, const void *src, ulong len,
++				       ulong *sizep)
 +{
-+	ulong sz;
++	const u8 *bytes = src;
 +
-+	/*
-+	 * The existing lzma_compressed blob was made with the xz-utils
-+	 * shim and carries the 0xff..ff "unknown" size marker. Bootm must
-+	 * decline to size the buffer from that.
-+	 */
-+	ut_asserteq(-EOPNOTSUPP,
-+		    image_decomp_get_uncompressed_size(IH_COMP_LZMA,
-+						       lzma_compressed,
-+						       lzma_compressed_size,
-+						       &sz));
++	switch (comp) {
++	case IH_COMP_GZIP: {
++		u32 isize;
 +
-+	/*
-+	 * The lzma_with_size_compressed blob was made with the standalone
-+	 * lzma-alone tool and carries the real size in the header. Bootm
-+	 * must return that size so the noload path can pre-size its buffer.
-+	 */
-+	sz = 0;
-+	ut_assertok(image_decomp_get_uncompressed_size(IH_COMP_LZMA,
-+						       lzma_with_size_compressed,
-+						       lzma_with_size_compressed_size,
-+						       &sz));
-+	ut_asserteq(strlen(plain), sz);
++		/* Minimum gzip: 10-byte header + 2-byte deflate + 8-byte trailer */
++		if (len < 20)
++			return -EINVAL;
++		if (bytes[0] != 0x1f || bytes[1] != 0x8b)
++			return -EINVAL;
++		isize = get_unaligned_le32(bytes + len - 4);
++		*sizep = isize;
++		return 0;
++	}
++	case IH_COMP_LZMA:
++		if (CONFIG_IS_ENABLED(LZMA)) {
++			u64 usize;
 +
-+	return 0;
++			/* LZMA header: 5-byte props + 8-byte uncompressed size */
++			if (len < LZMA_PROPS_SIZE + 8)
++				return -EINVAL;
++			usize = get_unaligned_le64(bytes + LZMA_PROPS_SIZE);
++			/* All-ones means "unknown", per the LZMA reference */
++			if (usize == U64_MAX)
++				return -EOPNOTSUPP;
++			if (usize > ULONG_MAX)
++				return -EINVAL;
++			*sizep = (ulong)usize;
++			return 0;
++		}
++		return -EOPNOTSUPP;
++	case IH_COMP_LZ4:
++		if (CONFIG_IS_ENABLED(LZ4)) {
++			u8 flg;
++
++			/* LZ4 frame: 4-byte magic + FLG + BD + optional 8-byte size */
++			if (len < 6)
++				return -EINVAL;
++			if (get_unaligned_le32(bytes) != LZ4F_MAGIC)
++				return -EINVAL;
++			flg = bytes[4];
++			/* Content-size flag (FLG bit 3): 8 bytes follow BD */
++			if (!(flg & 0x08))
++				return -EOPNOTSUPP;
++			if (len < 14)
++				return -EINVAL;
++			*sizep = get_unaligned_le64(bytes + 6);
++			return 0;
++		}
++		return -EOPNOTSUPP;
++	case IH_COMP_ZSTD:
++		if (CONFIG_IS_ENABLED(ZSTD)) {
++			zstd_frame_header hdr;
++			size_t ret;
++
++			ret = zstd_get_frame_header(&hdr, src, len);
++			if (zstd_is_error(ret) || ret > 0)
++				return -EINVAL;
++			if (hdr.frameContentSize == ZSTD_CONTENTSIZE_UNKNOWN)
++				return -EOPNOTSUPP;
++			if (hdr.frameContentSize == ZSTD_CONTENTSIZE_ERROR ||
++			    hdr.frameContentSize > ULONG_MAX)
++				return -EINVAL;
++			*sizep = (ulong)hdr.frameContentSize;
++			return 0;
++		}
++		return -EOPNOTSUPP;
++	default:
++		return -EOPNOTSUPP;
++	}
 +}
-+LIB_TEST(compression_test_image_decomp_lzma, 0);
++#endif /* !USE_HOSTCC */
++
+ int image_decomp(int comp, ulong load, ulong image_start, int type,
+ 		 void *load_buf, void *image_buf, ulong image_len,
+ 		 uint unc_len, ulong *load_end)
+diff --git a/include/image.h b/include/image.h
+index 4149ebbcce9..5d590916208 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1092,6 +1092,31 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
+ 		 void *load_buf, void *image_buf, ulong image_len,
+ 		 uint unc_len, ulong *load_end);
+ 
++/**
++ * image_decomp_get_uncompressed_size() - Read the uncompressed size from a
++ *                                        compressed stream's header
++ *
++ * Peeks at a compressed image and returns the uncompressed size where the
++ * format carries one: gzip ISIZE, lzma header uncompressed size, lz4 frame
++ * Content_Size (only when the FLG bit is set), zstd Frame_Content_Size. The
++ * value is attacker-controlled, so callers must sanity-check against an
++ * upper bound before using it as an allocation size.
++ *
++ * gzip's ISIZE is the original size modulo 2^32, so this API is only useful
++ * for images up to 4 GiB. That is more than enough for a kernel_noload
++ * decompression hint.
++ *
++ * @comp:	Compression type (IH_COMP_...)
++ * @src:	Compressed data
++ * @len:	Length of @src
++ * @sizep:	Set to the uncompressed size on success
++ * Return: 0 on success, -EOPNOTSUPP if @comp does not carry an uncompressed
++ *         size (or is not enabled in this build), -EINVAL on a malformed or
++ *         truncated header
++ */
++int image_decomp_get_uncompressed_size(int comp, const void *src, ulong len,
++				       ulong *sizep);
++
+ /**
+  * Set up properties in the FDT
+  *
 -- 
 2.43.0
 
