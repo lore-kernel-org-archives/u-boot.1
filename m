@@ -1,135 +1,173 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC74C5AE49
-	for <u-boot@archiver.kernel.org>; Mon, 10 Aug 2026 13:09:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52106C5AD55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Aug 2026 14:03:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7EC2F80D2B;
-	Mon, 10 Aug 2026 13:09:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 00EC26064C;
+	Mon, 10 Aug 2026 14:03:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bGLgGnhJ9rPn; Mon, 10 Aug 2026 13:09:18 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XNrXrrNiYmct; Mon, 10 Aug 2026 14:03:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9F7F080D1D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0666E60707
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786367358;
-	bh=ffDbxzBrs0CFa0wpYl1eh6IzOqXIOe1RideM1Of6OiI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786370623;
+	bh=8gyirOWSJx1/M0b/5Wwkoov/vHSz7A+eaZwB4dU0okE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Jxs+gW4zmXIX0P1pP7EmdfaSXGpl44syx9/ucyd0JihZ//9VlA8NQ4tTbz5/Th6TK
-	 pv5OpVoHRTghCg/akUBn+Rm/T15jYQdawEGc1pPSCOiNFBYAttoUGpW50R2NlOJ/AL
-	 8+s+7TpDN7MSkhNK0abxHqEofbUuDqEoSllQ0cdeNOdQAR7I2DX+rg0XozOqb/I846
-	 NE8lLwGElwjzSfldvS/zvOj/pzfyk7Zf2twETzmVcg8ZTnenaD2kRb2KdGKTTdUu/y
-	 U8u1jMOgR8gTnkob3X6gGrW5hG+BTJGTngeELtHyasFrkiDs4KJbSe9QVyUax4EyOq
-	 2UcDdcHMMXtsQ==
+	b=G0WPyg02m2nuA44ama9ZK2zNklg6n6ATaEiLU31je6WvzY1qWupbwhyJH6ggP33pZ
+	 asV7aq7GL8s3BRdQceCB2e+60hc+ycjFTTAaxiAIuXJbG2XkOixTWIuIsiYGKsGT4S
+	 fg9IPO5Wauzfp3Qsj0dptBJecYV0y2A5HeJ6DT2m4eadOw3K+pBJKCJ0P0Vo5Ttpn9
+	 eqH49zmun4FdHJ33jmZukABI/zD6m712941P62ppUe8u1G8cI2wW8CHZBJHBunxQv5
+	 lPVX3Jugn8mcJIQmjn04gKbTbZek1Q9QrR0rtgh4TXHJEULSbckvKSaf7627ztMXa6
+	 U1n1J3CksAKwA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9F7F080D1D;
-	Mon, 10 Aug 2026 13:09:18 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 4642C1AF
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 13:09:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0666E60707;
+	Mon, 10 Aug 2026 14:03:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B1F8024E
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 14:03:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2FE3F4008A
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 13:09:17 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8B31E6064C
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 14:03:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V358nkLj8LB4 for <u-boot@lists.u-boot-project.org>;
- Mon, 10 Aug 2026 13:09:16 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kbIfWmepDMUu for <u-boot@lists.u-boot-project.org>;
+ Mon, 10 Aug 2026 14:03:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 3D0C24004D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3D0C24004D
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3D0C24004D
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 13:09:16 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6a10d02ff43so2945423a12.0
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 06:09:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786367354; cv=none;
- d=google.com; s=arc-20260327;
- b=paXrfKjk4fqkAnhO8XmAP3Vs2lBC/7R2t8WKzx+9EYbhLzCdRWbs3mgeLyQKpqsP8j
- gIRXSTPAnL5tPHytmeFH329/5tBu1tHWWtANTsVNkIzCuHtkBVkDB1mmOhiDvUjqrGxw
- KheHVzzsb4rHChAQNDIE5QJoQq8uPfFjs2m6I+DDCkxiTE5FPEO8gu2PVjv+hMxo7pEo
- tlgYRarzyr7I57c8wiaMXIsp19mYLn9A5WyBfjKsV8IMUui9HhF3NjtZ8plUzMsrFOpo
- 2qj0JvAUwnpMjJUi+xI4UFiZ5Hs9L+CRE6ZojyRUBB5zGUjYh8+UTPP7tQitdieQOUtg
- kpMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=ffDbxzBrs0CFa0wpYl1eh6IzOqXIOe1RideM1Of6OiI=;
- fh=qxRTI2eznDO0d8MKW+TLwweekasumpusiPljJjfe7Zo=;
- b=mdYL7WBmWUbnyKOCoMnO90/9EC0B+Q71B0mz6BTYqOYBA++Ycpf+JhvpZKFpilGkjd
- tywYJgnfDVaDM1seSOHCkwOn4VQ628GRvyvP2yrM/Cak3VQzDyP5vmaqA437lmFBAlEJ
- fkCTWEYutKN6s2uhlsXPFY6qYPHiMun6LeHzXNA4Lh9tuaCP4Lu78xs6sVh3U5O0Cxor
- u9RTEOJTXkVtu46IauSLMgpTcq8MqXD1VzCduWzzCeybwe3tHVudaKzZsHnuf1ZevKra
- 70NKkDU6/e8pYvzwiZMTfF2NLGQio5cBIXyjUyvNxPj/9cVv31Y79mVT9KJ1mBBWe1ZA
- PRFA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786367354; x=1786972154;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=ffDbxzBrs0CFa0wpYl1eh6IzOqXIOe1RideM1Of6OiI=;
- b=RDCsZnJEFZM7Ohjg7hc6yA8mmR/RFVwVNPjcNW5eCf/s6DqW4h15QI5F0zCvIf3T7G
- u0bL8mpFl/zZNyDgnH9e9e3vNzqKhARDs/7OR7YOKT5yvthESSVaz0xEpd175nWPD/2k
- 1OLT3tDLTbFUIqGZ5mhE65wfIZWKDeIZSa54ud+Ar192fMk6VD9g0r6rbfh4WHAw0F0e
- ybznMiAMFTlP4VI5YG6ntjfYOgLEQsHlD86vFeAQSlHtWLRAJuqI3kjGwz+w0zdy1x10
- oFYbZxelnDJ/5y2VI4ay22mDsMpIY/iifh9JS0mClX8IvRxRslIkOV+2EX7+1i/2dV30
- btsA==
-X-Gm-Message-State: AOJu0YwNS4X7Sm/pP2ypyD779fekl6HU0SryfXCvzS6RaLF0k46rrhN0
- uWWQRDR9FzGbn9vc+bT55XtrWpvt0VD3RmwtXhfPg2RxUmMeubMd2H/SsrkfFw3bqBKVyowFi/m
- tTy/1etTFIr62AW7DnqyWGnsbPCUfy2+ReGHj+wmn
-X-Gm-Gg: AR+sD13RRX2dA6HpfjLJD1SNrjc1PQ+KzFzgdTVIOL+1HNbbJNjMNWLysSlYaLv+VW5
- lFiSOsN82xvcUzoYlfkyDzXAVTUdIDF/EfoYJGJn6b9Al6acV6jDi6/DxCj4nuJVFC0Obm4YcD3
- Lv/YqWTGd+3XZCdQYNq6raFPYwMxZFcMWumtdLmoJfWcEmkfHiJ4XNHrH/yPnBXMwk4GUNVRJHM
- ShUnJVacO/IYKUQEog6jBxLdrtB9/a+BNWakNGmhVeHXv7H5q0acZQuOGXszMe0D2jFZ/l53ufr
- 3ptXUqAaAQq1a1ZkAqeG33wcEXD8nwPjwip1UkiNu/0=
-X-Received: by 2002:a05:6402:21d8:b0:6a1:e59c:62bd with SMTP id
- 4fb4d7f45d1cf-6a1e59c6678mr10430880a12.3.1786367354037; Mon, 10 Aug 2026
- 06:09:14 -0700 (PDT)
+ client-ip=2a01:111:f403:c200::5;
+ helo=duzpr83cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 925B460707
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 925B460707
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 925B460707
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 14:03:40 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=x1MxfOh/CPUHwalT9eWbZ4UAo9f2f8h2lZnGS8wImhoBGXOdb7/sOO3hrrGib0nTxVvw+pbaqM7485wN5LK1chLwBlEZlXysCxa/WIW+m74uge5AHl1+WzIxv80Cp59mgUCqKFfYKzR5UGopHsJ5rOnYLY+kQyr1hFiLdgT8aEFJBX+mQ9Sc43pvxF6MNE5np3YB2BgXcQWVbABfroQIwHIJ8oCOXEnBmhxad5kaTSoQxYjPuE6/3dYgNbgdS+Wc8cRpCH6vuSaoWWDsldqP6OwXuFa2E5fW4OESrff70xjrjtNXuDeLfd3NXzVOYr7i/3UklPYNjaS4jK3Bwl9xIQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8gyirOWSJx1/M0b/5Wwkoov/vHSz7A+eaZwB4dU0okE=;
+ b=Sea11CEoqizjQBXKFcjNz/M6EbiazUM76iD5N6yIkZzzRs0aGg6q4SeH37QB/MqnPeNYHa2W1sdTDFPBV2uo5z4vqbE9Z0V0WyvrmUT2k8hRptV1mJsrvbvNeAtA7yXf2qYr7U3E25FFkN6rs2lgn4IyInhXUoMvON/sZJIhYSuf807M01VyCxXEiGVvggMGfeC9YygNQa3n6Z1Geek0QCaiDBHiAOTHw1Q1yh3U+DyTeFtYvz7LuN4mc0s3bSMuxmJyUG85xGS18Dt8r3I1ixU+Erp5rAp25z0XHd0YuJ9attDjJFkfUT8ZXwSjrhWw90xg3me2aJKxCGpkZxyymQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+Received: from DBBSPR01MB0009.eurprd04.prod.outlook.com (2603:10a6:10:200::5)
+ by DU2PR04MB9522.eurprd04.prod.outlook.com (2603:10a6:10:2f5::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 14:03:32 +0000
+Received: from DBBSPR01MB0009.eurprd04.prod.outlook.com
+ ([fe80::882e:c2d6:872e:9974]) by DBBSPR01MB0009.eurprd04.prod.outlook.com
+ ([fe80::882e:c2d6:872e:9974%2]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
+ 14:03:32 +0000
+Message-ID: <24092fe1-9f23-4f85-99f7-46cb322f2e88@cherry.de>
+Date: Mon, 10 Aug 2026 16:03:30 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND PATCH V2] CI: add Qualcomm requirements.txt for world
+ build
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
+References: <20260810124802.2037363-2-casey.connolly@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260810124802.2037363-2-casey.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0102CA0012.eurprd01.prod.exchangelabs.com
+ (2603:10a6:802::25) To DBBSPR01MB0009.eurprd04.prod.outlook.com
+ (2603:10a6:10:200::5)
 MIME-Version: 1.0
-References: <20260721194828.398524-1-marek.vasut+renesas@mailbox.org>
- <CAFLszThbzKZWctdWh8B1j2cqACr+9dNVaX_FMkvbHtXkMDnsTg@mail.gmail.com>
- <2eb8a15b-c9d1-47d2-b8b6-da27d711ddb4@mailbox.org>
- <CAFLszTjUGsM99ffVV+YryDGjB5+YV+T9pnegmbko7vpRySaD2w@mail.gmail.com>
- <58052961-ee1b-4ace-809e-e15378bab54b@mailbox.org>
-In-Reply-To: <58052961-ee1b-4ace-809e-e15378bab54b@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 10 Aug 2026 07:09:02 -0600
-X-Gm-Features: AUfX_mxHDdBcS2czfIREg8CjocA7SsgLuq3H8t1lSYppnOh7p-m66CVaNU-r3uo
-Message-ID: <CAFLszTgrxSA_0pUnau2w78jV2LEU+hWrmO0ELPNG5sR8htHoqg@mail.gmail.com>
-Subject: Re: [PATCH] board_f: Call initf_malloc() before fdtdec_setup()
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.u-boot-project.org, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBSPR01MB0009:EE_|DU2PR04MB9522:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6eee8e40-a225-4a47-a6fb-08def6e829c7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|23010399003|10070799003|18002099003|22082099003|10067099003|56012099006|5023799004|11063799006|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: ccnN1YcEhyICHjjAB1Vy27ysaULPE7a9X/Qpef+Qj7xQzPIwO44lialmReAuV96L5m7vnr7N7FqsVhskDiaT9aQRRk+qSDScvaDEOV4AYPSeNClXk90ApuO7scBLg8xU4776dwY0koyuICgZ3Fjyx4hE5SP4VkfaCjWk4FqAtI3Lj15Xjmwq2VMtlb65jLFlYTO56FhWgBy8giwof98qnMx/Gjy0dKakavnCPaFCbaksOfIgS5IK8Z3pdJk30uiA2Pv5KPywS96+sKAOD80/aPR8B7kPwnCiyRWuhaLoHlstBUWgcRo1z+gZimnZ1epN7LyxycifdGt1Irw+xd7Z8CTxIwdHS7Wu8xfRzOvsF8jpkJS3mvoA2PvqRs8Cbg6NYGu3kXZb1JkShsg4ZP3ZTB9wrlQSTAeXau8OBQ/UwPVZsOccIoWHDJ61nD7D0xaSSWYwLwhYdE56nqL5pEd2S58YFJVcSXXMAYbGb8Xr9bwMI6r1YB0MbcVTJ8TCYUcnyBi2OEdxSvYuk451QeZzibTo7KAM4Q/1wOAsV39O3nxc+gp7/uVe+NSiYinWlbYXhIm0mQpmV3YTkcj8x0FYnZPrBG4WZfm+0Hxpmpo+bWSJs/NOmoXBh/YzffI1wJxnJTfDuolfq1BfF7brMD4DYNqxuJBMxK7J87yWHd0c8n8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBSPR01MB0009.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(10070799003)(18002099003)(22082099003)(10067099003)(56012099006)(5023799004)(11063799006)(6133799003)(3023799007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N3Z3WnVQeE1WY0l2M3VxclpXejdVTVl2WDVXTTI4RzRNTU8zOThBdC80N2xX?=
+ =?utf-8?B?S1ErNzNPWllmSzM2UDRhaGxaVTYvVUpjUFNoVktWT01aK1BMT3paMUxLcWgy?=
+ =?utf-8?B?NUpEYk5nTUV4ZndCRnZndUVzTDhWTlpDUVcvLzdiU3o2eFlDM0YyaVVETWxi?=
+ =?utf-8?B?NVZJMkUrbnVkMXZyNUZkWmhESWE2aWdhRzdPRCtCQlNMeSthTEJLRWJYZ2ZM?=
+ =?utf-8?B?bXNaN1JiaE9PN09pdVE3OWEvTW1mQktUYkNYakNjYmpLd3ppcDBka1V6QkU4?=
+ =?utf-8?B?czN4VmNIRzRuN3BROWwwNW5TdUZPOVdWdy9mZWhNLzFPbFExbDlWYkg1QVJT?=
+ =?utf-8?B?dG1LelF5dC8zWWt5QzVNNzFvWWIyWEJlV29XbDZYZGp3WHg4NlJMc2taZlFN?=
+ =?utf-8?B?SndUTG1WMGV4MXFtSkNQRnB5Tlk0ZWgvZkNPa1F3UnovZDNhNEJMNTE1SEd4?=
+ =?utf-8?B?MVdZRCs5MEJDU3VuQ2ZOQlhBSFJzeFJjNTU2MTBOSzJyTG1hRk5xbk1kd3hm?=
+ =?utf-8?B?dlBxUVhWL1FvWkY3VSsyRlREaStXZVVOa20rMnY1eW5GNWR3TTc4Z284alQ3?=
+ =?utf-8?B?L0d1YklsR2ZQTUdhU0p5elAzMEw1RFRiTEZaeW1nVzc1aHBteFk4WU14VFR6?=
+ =?utf-8?B?eEZ1YjVHR0wzMGNXckh1MXdBZXRGQ0pMR3plMzNvOVFNdTFvM3RnTGV5ckhj?=
+ =?utf-8?B?TWJXRFlWYmtTOVhBekFwV21ZamRLTVpZa3RveDlyQSs2RWR3ZjMveXJkUzIr?=
+ =?utf-8?B?VWtZWHhpOCtNUFlpRjFCYnZGVmRmYUtJWm5ocjFIcThKZ0JVczB1RCtHaWN1?=
+ =?utf-8?B?NHRMaWJuYzQrY2YyT2R2dkJwSDYwS1NSQ1pVdUczb0xONm9KRmhiYVd3MXRi?=
+ =?utf-8?B?WlkvV3AyMElYbWhFdG40WWFHZ0ZlckNwY3hIN2FsTkhJN0NQanFuMHh3NEl0?=
+ =?utf-8?B?cjA2anBhc3h6R1pkbnRJSERkR2ZRQWRiU3ZDb2VjOUNhcVVuMFhtSTM2VDdZ?=
+ =?utf-8?B?SHdPOVVsZUk1RFVFa1pyd0Z4ck8wM2UxNEd6QTV0V2RlVXhObGtWWmIveFg4?=
+ =?utf-8?B?UWNWN1d5elF5SzFlRk5ZbHRyYTV1cm9xNGZlbjFsem9Cc1pHUkdRQ085MEl1?=
+ =?utf-8?B?NFQ5eHQ2NzUwTUtyMWN2bHI5WkdURm1FOTFnQmV2YkVtS0JBY2RUUHc1TWtl?=
+ =?utf-8?B?eW9RUktrOGdjeGZISlJ1MEE0VUpNaEhNaVgzcVA3Smc3MFFQSG9NSXpzRVJS?=
+ =?utf-8?B?d0h0SldXRHkzNldqTUFVNHJXUEZVNkxMUStZMUpRM21Lbk1ONjlWY2JTelFv?=
+ =?utf-8?B?TnhJVDJtc29yWHZ5Vmk5aTFYK3N0eVI5TFE5UXNpTVJ3eWhXVysrUWhXN1BE?=
+ =?utf-8?B?bUtYbVRLYnBCT2lLSnpCUGZGcEQyRlVjVWVJSTMyeEJnNVJmbHI1NTNFTXlk?=
+ =?utf-8?B?RVlVc3dQek1KYVh5U204ajJVcm5haDZBR1RXbzZoYUN6b3ZuZ0E1RWF0aTIv?=
+ =?utf-8?B?bi9LY21NandpQUh4U3FpMU1iZGtrSjJmS1BSOTJSRVNYN25TZGd3b2FuTWN4?=
+ =?utf-8?B?bzh1NUdlL0RFeUZ6U092N3ZrV21RSURFTlJqbi96bEFvczY5T1BJVHdJR29q?=
+ =?utf-8?B?SWRpRTJVR1VRYzhLZHhwSnFLaWlJTFNmcDhuckpPQW9uaGhBUXZPV1A1Mmda?=
+ =?utf-8?B?Y1VJUG9DTzV4bW5aanpnT1ZkbDZYenJ1cXBkUnFyWldWdVU3RUdtbjhDa2I0?=
+ =?utf-8?B?MWRKQU14aDRVS25aY2dBT1pzb3l6VnJIc3FuaTd6SG5LMERrS2ViTUNjMm0r?=
+ =?utf-8?B?K2trblZIQmNnOXNhNlBJc2RPRm5XWHFhRjBHWEROYTROYmZCTXFKcHczeUFq?=
+ =?utf-8?B?SW10bWVObGpKZHBjY2c1dENFWmc4MHJWaHpXd3V6OTlEWTYvK3NkQm82OUNn?=
+ =?utf-8?B?UUdOei9iN0Nva0JtWmJuV2ZNZHpuTG43YTR2REt5d0RrbGlmZjQvdGFZVE1C?=
+ =?utf-8?B?MVZxeU9NTUNIbXNqVUd1djY0aEFHQXlqSVN0VHp6anhqZ2lmUU5HSTFqQzls?=
+ =?utf-8?B?aHhpMjRtb25Yck52RVBPTGRGMXRDczQ0d0FpbnJqa0czbkVxVW9TSTRXcmFW?=
+ =?utf-8?B?cFNNRHhFSlFXWWdRNHYwTGsxVjllNmdaU2xReW9WVHFrdFZXdW1pam5HTmxI?=
+ =?utf-8?B?NU4vUW5JMWkvUFVyM2VNTllLUXBpbnF2SFZuYnEybEZRNlRsaHpiWVNJWFV5?=
+ =?utf-8?B?Y2Mrb3hyK0hqOU1VTkZnR0tMRDVWeGNoT0IyUkZFanUyYlZSSEdzaWIvVVlR?=
+ =?utf-8?B?YjFHdnRpUUVIYkQxRTk5M0xSVGV1RmFHY08vaGc2WGIrZ0RiMk9ITUpkVkpl?=
+ =?utf-8?Q?xARSb6B3iU5JXYpY4P/3oH+/pI6R2gQasRb10yA19IIyr?=
+X-MS-Exchange-AntiSpam-MessageData-1: aG9gIvNztLUy2w==
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6eee8e40-a225-4a47-a6fb-08def6e829c7
+X-MS-Exchange-CrossTenant-AuthSource: DBBSPR01MB0009.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 14:03:32.7857 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4wAyypufQHzgDS/RlRQsUGl8CznYpcnhTHEJvR3w35cFRfJmT33U+8owVZd4WkWEuGWyXrCfAgUD7mGqawbXRq1hb5TZ6S/7Z6haDmyAaYg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB9522
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786367354; x=1786972154;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ffDbxzBrs0CFa0wpYl1eh6IzOqXIOe1RideM1Of6OiI=;
- b=BZJVRJ1hoIabX8E8xODF5rIdrU0NBKTTCycDRZyphENdcj4ZkzIpqKjHE0ovfzaynf
- defNQ0lRPRgKtj4gd99ybyGgqtdxlsIEccR+RZGTdVro7oVGsa6iGw+Xo8VDeKJwfjuS
- ORpmK/Bvs/eHthK508l/8A5yJBT2356mbZCoQ=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8gyirOWSJx1/M0b/5Wwkoov/vHSz7A+eaZwB4dU0okE=;
+ b=d7x84jMwUSIEGDWKOSZCxF3zxBXWLTbZK/TFqL64jbWch8KUleifSmy8MlbILo6TLJxF+bK8WjlnRc9QK61kPqhxkiDC2qpquDuU6qqY4a7qFKORIplDQOxJM5F4+tzEksXNPEeKtbwpG88y9p7Fw0LAnCuzBH6Q1h2HW6dkHwk=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=BZJVRJ1h
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=d7x84jMw
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,109 +182,98 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Marek,
+Hi Casey,
 
-On Sun, 9 Aug 2026 at 22:42, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 8/9/26 6:33 PM, Simon Glass wrote:
->
-> Hello Simon,
->
-> >>> On Tue, 21 Jul 2026 at 13:48, Marek Vasut
-> >>> <marek.vasut+renesas@mailbox.org> wrote:
-> >>>>
-> >>>> In case MULTI_DTB_FIT_GZIP is enabled, fdtdec_setup() does uncompress
-> >>>> the compressed DTs in uncompress_blob() using gunzip(), which invokes
-> >>>> malloc() internally. The early simple malloc is initialized in board_f
-> >>>> initf_malloc() call, which sets up the early simple malloc limit and
-> >>>> offset pointer in global data. Currently, the initf_malloc() is called
-> >>>> after fdtdec_setup(), which leads to malloc failure in fdtdec_setup()
-> >>>> during the gzip decompression, because the early simple malloc is not
-> >>>> initialized yet.
-> >>>>
-> >>>> Call initf_malloc() before fdtdec_setup() to assure fdtdec_setup() can
-> >>>> use malloc() during gzip decompression of the DTs.
-> >>>>
-> >>>> The impact of this change on boot time is negligible, because the
-> >>>> initf_malloc() only assigns two fields in global data.
-> >>>>
-> >>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >>>> ---
-> >>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >>>> Cc: Simon Glass <sjg@chromium.org>
-> >>>> Cc: Tom Rini <trini@konsulko.com>
-> >>>> Cc: u-boot@lists.u-boot-project.org
-> >>>> ---
-> >>>>    common/board_f.c | 2 +-
-> >>>>    1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>
-> >>> I'm not keen on reordering this list...
-> >>>
-> >>> The offending call is inside uncompress_blob(), which already has a
-> >>> non-malloc path - MULTI_DTB_FIT_USER_DEFINED_AREA with
-> >>> MULTI_DTB_FIT_USER_DEF_ADDR.
-> >>
-> >> It isn't the allocation of the decompress target that is the problem, it
-> >> is the gunzip() call which internally calls malloc(), cf. commit message
-> >> and lib/gunzip.c gzalloc() usage.
-> >>
-> >>> That is the pattern most boards using
-> >>> compressed multi-DTB FIT already use, and it avoids early malloc
-> >>> altogether. Could the BTT config not just switch to that and drop the
-> >>> board-local initf_malloc() workaround at the same time?
-> >>
-> >> This is unrelated to BTT config.
-> >>
-> >>> Failing that, the per-board workaround in board/liebherr/btt/btt.c is
-> >>> ugly but localised. If we really want a generic fix, I would rather
-> >>> see uncompress_blob() call initf_malloc() itself when it needs the
-> >>> heap, so the ordering constraint stays local to the code that needs
-> >>> it. We would need to ensure that malloc() isn't then inited a second
-> >>> time. We could always add a flag to gd->boardf, I suppose.
-> >>>
-> >>> The reordering also means that malloc cannot be traced - the idea with
-> >>> trace is that it is enabled as early as possible. Finally (that I can
-> >>> think of), it means that early malloc can never be configured by the
-> >>> devicetree (although that is not something we have needed yet).
-> >> [...]
-> >
-> > Ah OK, I see. So in U-Boot proper, before relocation, you have a FIT
-> > containing multiple gzip-compressed DTBs and you want to select the
-> > correct one (presumably with a compatible string), then decompress and
-> > use it.
-> >
-> > Is it possible to do this in SPL instead?
->
-> No, there is no SPL on the device I have here.
->
-> > If not, it looks like there are two allocations in gzip. One is just
-> > its state (fixed size so we could pass it in or pass a pointer to a
-> > local var). The other is its context buffer, which might be 64K or
-> > more. Did you see my suggested workaround above (call initf_malloc()
-> > itself)?
-> I believe there are more than 2 mallocs in the gzip code. Search for
-> ZALLOC() macro, that is invoked during decompression, that invokes the
-> gzalloc() function from lib/gunzip.c which invokes malloc() too.
+On 8/10/26 2:47 PM, Casey Connolly wrote:
+> The mkmbn Python tool used for some Qualcomm platforms needs the
+> cryptography module, make sure it's installed so the world build can
+> succeed by adding a new requirements.txt.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+> Resend to correct list
+> 
+> Changes since v1:
+>   - Use a new requirements.txt instead of adding the dependency directly
+>   - Document requirement in doc/board/qualcomm/signing.rst
+>   - v1: https://lore.kernel.org/u-boot/20260720131325.37436-1-casey.connolly@linaro.org/
+> ---
+>   .azure-pipelines.yml            | 1 +
+>   .gitlab-ci.yml                  | 1 +
+>   board/qualcomm/requirements.txt | 1 +
+>   doc/board/qualcomm/signing.rst  | 3 +++
+>   4 files changed, 6 insertions(+)
+>   create mode 100644 board/qualcomm/requirements.txt
+> 
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 352269b08354..31962db1a40b 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -704,8 +704,9 @@ stages:
+>             python3 -m venv /tmp/venv
+>             . /tmp/venv/bin/activate
+>             pip install -r tools/binman/requirements.txt \
+>               -r tools/buildman/requirements.txt \
+> +            -r board/qualcomm/requirements.txt
+>               setuptools
+>             if [[ "${BUILDMAN}" != "" ]]; then
+>                 ret=0;
+>                 tools/buildman/buildman -o /tmp -PEWM ${BUILDMAN} ${OVERRIDE} || ret=$?;
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index f53c9286c0c5..9831dd61bc18 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -153,8 +153,9 @@ build all platforms in a single job:
+>       - python3 -m venv /tmp/venv;
+>         . /tmp/venv/bin/activate;
+>         pip install -r tools/binman/requirements.txt
+>           -r tools/buildman/requirements.txt
+> +        -r board/qualcomm/requirements.txt
+>           setuptools
+>       - ret=0;
+>         git config --global --add safe.directory "${CI_PROJECT_DIR}";
+>         ./tools/buildman/buildman -o /tmp -PEWM -x xtensa || ret=$?;
+> diff --git a/board/qualcomm/requirements.txt b/board/qualcomm/requirements.txt
+> new file mode 100644
+> index 000000000000..2033083a01a7
+> --- /dev/null
+> +++ b/board/qualcomm/requirements.txt
+> @@ -0,0 +1 @@
+> +cryptography==50.0.0
 
-Yes you're right.
+Maybe we could add a
 
-Anyway, I've spent an hour or so digging through this and looking at
-the various board-specific implementations of board_fdt_blob_setup()
-and I believe your change is safe. In fact board/liebherr/btt/btt.c
-does something similar and with your change we can remove that
-workaround. Since, as you say, initf_malloc() really only writes a few
-things to gd, tracing is no great loss (really tracing should go above
-fdtdec_setup() but I suspect I found that too hard when I tried). So I
-agree with what Tom said too - this is a reasonable tradeoff.
+# mkmbn
 
-I suggest adding a tag for this, or at least a link to the commit
-which makes this change necessary, e.g.:
+comment in that file or after the cryptography==50.0.0 line:
 
-Fixes: 95f4bbd581cf ("lib: fdt: Allow LZO and GZIP DT compression in U-Boot")
+cryptography==50.0.0 # mkmbn
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+c.f. 
+https://pip.pypa.io/en/latest/reference/requirements-file-format/#comments
 
-I'm sure we could create a sandbox_noinst test for all this logic, BTW.
+As it isn't clear from the path of this requirements.txt what this 
+applies to except it's for Qualcomm :)
 
-Regards,
-Simon
+You could also decide to rename this file to mkmbn_requirements.txt and 
+that would provide the same info implicitly.
+
+> diff --git a/doc/board/qualcomm/signing.rst b/doc/board/qualcomm/signing.rst
+> index 317cd57cefee..ad1d0faa58e9 100644
+> --- a/doc/board/qualcomm/signing.rst
+> +++ b/doc/board/qualcomm/signing.rst
+> @@ -26,4 +26,7 @@ For example:
+>   
+>   When you run make to build the ``u-boot.mbn`` target, ``mkmbn`` will inspect the DTB in your
+>   U-Boot image and try to match the compatible to the table, then it will build an ELF image and
+>   hash/sign it per the MBN spec.
+> +
+> +The mkmbn tool requires the python ``cryptography`` module, this can be installed in a virtualenv
+
+``mkmbn``
+to be consistent with the highlight we have in the paragraph above.
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
