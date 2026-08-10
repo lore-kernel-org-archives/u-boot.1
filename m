@@ -1,125 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3546C5AD55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Aug 2026 22:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F24AC5AD7B
+	for <u-boot@archiver.kernel.org>; Mon, 10 Aug 2026 22:11:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 07040607AB;
-	Mon, 10 Aug 2026 22:01:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F1F0A40692;
+	Mon, 10 Aug 2026 22:11:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IepHUi9k0euu; Mon, 10 Aug 2026 22:11:44 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 012C240527
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786399904;
+	bh=LBqKjrLn1RGfxBdZarzkBKKyJHR98QuSrRtXTo53vY0=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=zh9TzNBiNWOkICvGQlMTQ2O+H/x1zE0gsn7Z3WIjIoOxjCmQxyN4oPAJUm0YGEpaW
+	 b29ik3ScEF0JzsLyEtVSRg4i7CdyPm5rmia9Fs4kh2IkWwwftiuVU61YK1HfUZ9PHz
+	 CRdqjyi5f9xNmJ6dIc5Sl6tPiKXCn6ELSRLHD6jXiQdEnZjLkTtW2roh7feoP89xoK
+	 mN1wEdi+aSVfbI80I3uTuK8lvQ2gsDzRvdqFMlYU8J37ZnrgpJX18mRUABsjRa8rm9
+	 yRB55V+QDC7tsVh9deJnmzoxFKxkTqPcT3cx5CBsvLMduiYRP/a79a066a4p19qR2t
+	 aPeK53FeSK0UQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 012C240527;
+	Mon, 10 Aug 2026 22:11:44 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 28C4F296
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:10:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1AB4B60790
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:10:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HlGnwovH78FT; Mon, 10 Aug 2026 22:01:38 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4B69F6078A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786399298;
-	bh=1V50HGzzLjRcRp1e/mpAcWrokpAiPVCVnoyAcjii6QA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KibFDx4HP2yeTYlQWhhvzZsDSlMbJ9iEIBApNNivMfAU5UWZDPQZ6m9jh/2ckn/kg
-	 aBvE6DhhUH5EKOd5ZYm1QpP/Hy7rXyyL8F7hOszI84C4oyftgFULFjc6B9daag51+5
-	 8aP1IJdhyLksRTZRHdBlUaynZBqctu3DaRN1OPsCrek7tWCe/q4B93IRAbD5lZIqTJ
-	 pN5e7rUnp+o24218xUIWqlxjMhdqIvX1AXjowZvTdx2I7wVGv/ZHUfGUY6XWENzEyZ
-	 DsbMg1emlU/iMEHpuVV3d1wWLFFSSGOcKXi+ffNrzyroxQSaHS0FKjsO9VsDwgGFhB
-	 s9g8KBUswCnCQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4B69F6078A;
-	Mon, 10 Aug 2026 22:01:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B597F198
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:01:36 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9F55780F05
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:01:36 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 33d-NtEPeOOo for <u-boot@lists.u-boot-project.org>;
- Mon, 10 Aug 2026 22:01:36 +0000 (UTC)
+ id bajBIvdYH_7T for <u-boot@lists.u-boot-project.org>;
+ Mon, 10 Aug 2026 22:10:08 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32f; helo=mail-ot1-x32f.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D604180F03
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D604180F03
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D604180F03
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:01:35 +0000 (UTC)
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7eb63dbd229so268140a34.1
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 15:01:35 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::835; helo=mail-qt1-x835.google.com;
+ envelope-from=anton@binarly.io; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org F090760774
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org F090760774
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F090760774
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:10:07 +0000 (UTC)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-52b3934af3fso23340291cf.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 15:10:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786399294; x=1787004094;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=1V50HGzzLjRcRp1e/mpAcWrokpAiPVCVnoyAcjii6QA=;
- b=n6/eyURWcZNojjIHBpsOHnB8sjFX4gLKHS+l6n71BQUbYD98NDPMuu4kAM70KNdahk
- aEAVcX7134a+I8VQkzjNJJb1K6ZTdC1nfacs226R41QfRScrRgXod7GWzgkyGtKqNo0Y
- gcRN9iDhw462gKfdVZ2qnfy7uKhg5dkfCrBEtGESjYcPBfVVY/99pmAaUeUR+mnvQlu1
- KJZjiKfyFAbsMa3y7O1nORDDrWMf5ZdThij1BAVCvgwNv59Uu4MVDJDIyRHDf8R0PIk3
- 7ceaA2Uo150OQ0yAdPVDoStt2iLaSe2vv7BxQkv9FB8iMMJKRjNgnwOu2Q2LJGFYvVDO
- IXZQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrYE3/4gpzrKzH1E14rMTwgvlyAJ2FHwM7CDAv7rAU/j6oC0GazhZxYOF3AcKug8nwEvWF06p4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxYoOlCpcVmVvR2LhSsY3TN0jbNOzr84pcXg1US3DEbfBx7DDdJ
- SQfKna3uSGA1qgC/S/UxeTzgc+PLKwZPPty1CqNBKECUJIZmhB9R6Pc8j66LbLvvpc6VWLuG9IF
- doLQB9S8=
-X-Gm-Gg: AR+sD13M3T1Q/jC3uZvIKMYsuAAxiFrzyi2KxkqpqA5yRgzLOiGxSqbe/BYyUS3JsCc
- 792CqFdT2IaJjaKlBNhdGIuycV1Sr8fquTPSWpY+z3V1K2IY4EA9NFtGiVzDugbyLFn9Sm0IWI1
- YBfXdTNQsqX0j3PIxQLJojRNgVpU4xEiHRCYSNfmRp2/ANi+kp19RaN1GVzoWgXLbY8I86hq5KR
- bqApMKoZChTofwVgvAGTa/DkC6BDrYbSiZfxb++fzdzxy8RBPw96rQImStQwkm/V3iZ9XL1F0Be
- XTXWIdKxCQeKACk5EV9oVuQbswg/I8zBLgvWxf29pJCkIIt48ZTYPc+PsL/yl3UE7zQ0t1EUVn7
- ThvMSWZa9ynxknLZ8kKOo9gKPbn7XWiCVwl7xMPfkmHsvCQkRWDlv4ESrU0AQl9olQgQk00SIXi
- +ywlXrgy/8809aXZaiaLFgh+6o+nEgMR2gLdhylRWAbXWHrWe/LxL63lI5iGzW3Pj74k9cO8WKR
- C4GZfxr+Au7+JlJaow2xtZTGxFwfOUJUIVG6xNW99kjoudvTf3Dw+Dc5qMEyHYy7WckOcE4ZjJX
- NxRMp7etmg==
-X-Received: by 2002:a05:6830:6d9e:b0:7ed:ce16:7d72 with SMTP id
- 46e09a7af769-7f3a11eb128mr414448a34.5.1786399294630; 
- Mon, 10 Aug 2026 15:01:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f35b76ff85sm7904035a34.13.2026.08.10.15.01.33
+ d=1e100.net; s=20251104; t=1786399806; x=1787004606;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=LBqKjrLn1RGfxBdZarzkBKKyJHR98QuSrRtXTo53vY0=;
+ b=DH32FS3xe7uN2Z2inBeqNa+Qrp3d6OZawcKqybyIj7BVnXdRL1jPF6todB31z2FRan
+ kmGhnpFrzw1EafQTlYSV6RUQ5H7BOK3qlPyAOVHFzkomQYjzAZif3cIjvWexlL4cGR3e
+ ZhVXj3KJpQr6LNL+pqmsUwE5MGbdiaFV3z5zge4okPUoY2zYtnKbxtHm8BjOJoOygvrq
+ 4rJURTnQDHP4mLKNloTasT9A6zeuTKNKBxOhKrRfhnqC8V8sMnTfrFqrILgYq17mrc9w
+ 59cYPMIaSyApRynABvzNWLyLSH3yXKrdOSNiwOJmj5/8iSFMGbCum87ydHecJ6f/yCIk
+ bkHg==
+X-Gm-Message-State: AOJu0Yy3zih68sy7VnU/VXO97CrYn+/aqPzZuYp/SOSf62EuCDm97cy3
+ SQvzJBBPEsLPzhuYtaqxAATyiMrif1PIgur4AonOIBYx19xQT5ummUy/pfFGt815N9FQpqNpv9D
+ kOExl5o93C8jMmic=
+X-Gm-Gg: AR+sD11BX02G0zvbSeRQR30u+qYtmCkW4g4EfFmLBXZsY/ZnIVWdU9KYL+OJBQRzmaj
+ +cOXKDGtcQp/5bddmapTlH8nN+FkCqz6ldAWQFZ3waKx7jE5i2GNyK7OH01z9fW4ClAmLwPdOSG
+ dHUzRxl+lQbVtWCV75vfq4IV2i5JUXjM1aSBc/juXn9Fqjt4xi4/0uyvA6HVCvzJDpFdZ5coDzk
+ yVS+LsXaagYtjPYKMKdOFrIX2lgPC9k2/opM0w/8Yku8axQu1KWnOI87/e6m1V4R+FXgxBLjH9H
+ az0v2M5k29/NT+PQvHtgPSV5K97s6JnhXV34I/1w96uG4PAY7HSFkUdOnYW0R1u8b8nKy4vYK3v
+ 0kAyvRa27S0ViC18xlpMmTdhzBz11oBwgkqHYT3mSQ19pmogAgF9XKjltP4iD9oKyuQoEwWuHGY
+ VLJQxHVN97ut3tmiamGnyo1cR6ljZOx8IsdJe14RIZXOTcdTiWgTVCJvkuAWJR0LqA76FjK/5y/
+ aIposILuPwRrutv
+X-Received: by 2002:a05:622a:c83:b0:51c:22c5:daf5 with SMTP id
+ d75a77b69052e-52d0b281f3cmr362851261cf.38.1786399806402; 
+ Mon, 10 Aug 2026 15:10:06 -0700 (PDT)
+Received: from Ivanovs-MacBook-Pro.local ([93.174.85.138])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2080c90e87sm441651666b.34.2026.08.10.15.10.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Aug 2026 15:01:33 -0700 (PDT)
-Date: Mon, 10 Aug 2026 16:01:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH] global_data: Only include driver model fields when DM is
- enabled
-Message-ID: <20260810220131.GF1160436@bill-the-cat>
-References: <20260810204828.2836359-1-jonas@kwiboo.se>
+ Mon, 10 Aug 2026 15:10:04 -0700 (PDT)
+Subject: [PATCH v3 0/4] fit: Harden handling of external-data properties
+Date: Mon, 10 Aug 2026 23:09:53 +0100
+Message-Id: <20260810-b4-fit-ext-data-hardening-v3-0-17184cdb87fd@binarly.io>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CGD0+OFWWcw9P0+R"
-Content-Disposition: inline
-In-Reply-To: <20260810204828.2836359-1-jonas@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42Nyw6CMBBFf4V07Zg+eLryP4yLtgwwxhTTVgIh/
+ LuAC+PGuDzJvefMLKAnDOyUzMzjQIF6t4I6JMx22rUIVK/MJJc5LxQHk0JDEXCMUOuoodO+Rke
+ uBVGoVFeSqyJTbP0/PDY07u7L9c3haW5o4ybcFh2F2Ptpjw9i2/3TGQRwSHVuKoGqMJk4G3La3
+ 6cj9WwLDfKjKnn+SyVXlRGlsNqKzMrqS7UsywvicIleIAEAAA==
+X-Change-ID: 20260730-b4-fit-ext-data-hardening-1734a9203753
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Anton Ivanov <anton@binarly.io>, 
+ Daniel Golle <daniel@makrotopia.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Aristo Chen <aristo.chen@canonical.com>, 
+ Francesco Valla <francesco@valla.it>, Anshul Dalal <anshuld@ti.com>, 
+ Randolph Sapp <rs@ti.com>, Binarly Research <vr@binarly.io>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openssh-sha256; t=1786399803; l=2531;
+ i=anton@binarly.io; s=default; h=from:subject:message-id;
+ bh=OYAYl80fRq/2+wAg8ASc97DqYNll629ItNz6aaB1YSs=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgLlci93RPwSlisH3PzSX3+CiC/xruz
+ nbNSGHIKfmW2YQAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QJdMouenrxUybK523PbuGbWa0lrCDdPAPkDTwnYV+UcQaO4UToQJNG9DIv59DxhtDz6TPyfWLbe
+ KooHs5ziDLAA=
+X-Developer-Key: i=anton@binarly.io; a=openssh;
+ fpr=SHA256:OWnvXkgcqeWMXacIaCJR2oikuTmVTaSodreIHEJTWEc
+X-Mailman-Approved-At: Mon, 10 Aug 2026 22:11:43 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786399294; x=1787004094;
+ d=binarly.io; s=google; t=1786399806; x=1787004606;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=1V50HGzzLjRcRp1e/mpAcWrokpAiPVCVnoyAcjii6QA=;
- b=Xm9skoNLbHsWIq1vGse9xHtieNO1cHvG1GfsSv6eMu52+7kYdQhAwAtQUx2pDgW5WS
- ZXBYOXW4yKLljbpnGAx3H+u0c8mNbh0l+re2o9vCEjo22Vn+x82CMPNFgOgDb7k6m9gN
- 5MUh+xQyhpVF1AuPfRAEeVnSEvRig8Ia24fhc=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Xm9skoNL
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=LBqKjrLn1RGfxBdZarzkBKKyJHR98QuSrRtXTo53vY0=;
+ b=GJ5E6BnyyQDCWRQp+ULD0JTstM9/cvxlUKyqK2tJu16N2lp+St0ohN/iFTPx/GKo/t
+ WjsbcoinFI1IoZ1jrlCtBDOLzlI1A/oHmqiZdmLv/3iSrMQCq7PCMn4mG5t3QHKMNBVT
+ wDVx19shJhs0ieVcraXkuIIPcB5hdDDe2FLrepJ2TzAXUOlfzh5BJru+VbdHJzVfdg48
+ mS+gXLXKjKnKfO//pyZ3atnabSo2QB8FWZdm04E5tU/uAq+FsO9BcaTh3BJvKibRT9nj
+ LejAHdzY4Qasyw97p+xBAAyoG2l2BrYwWCowxJcQFJESRCZX7pU8B+A65oh7gKo+dICw
+ cXjQ==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=binarly.io
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=binarly.io header.i=@binarly.io header.a=rsa-sha256
+ header.s=google header.b=GJ5E6Bny
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,42 +144,67 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Anton Ivanov via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Anton Ivanov <anton@binarly.io>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+The data-offset, data-position and data-size FIT properties are 32-bit
+unsigned values, but were read through signed int. Also, they are
+excluded from the configuration signature, so they are attacker
+controlled.
 
---CGD0+OFWWcw9P0+R
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Patch 1 switches the accessors and their callers to u32, removing
+the ad-hoc handling of "negative" values in U-Boot proper. This
+transition was discussed and agreed on in [1].
 
-On Mon, Aug 10, 2026 at 08:48:28PM +0000, Jonas Karlman wrote:
+The SPL loader has its own copy of this logic with the same problems
+and fewer checks. Patch 2 factors out a test helper, patch 3 makes the
+SPL offset/size arithmetic overflow-safe, and patch 4 adds the
+addressable-range and FIT_SIGNATURE_MAX_SIZE bounds check that U-Boot
+proper already performs in fit_image_get_data().
 
-> The struct list_head dmtag_list, struct udevice *dm_root, struct
-> list_head uclass_root_s and struct list_head *uclass_root fields in
-> struct global_data takes up 24/48 bytes of memory on ARMv7/AArch64.
-> However, these fields are only used when $(PHASE_)DM is enabled.
->=20
-> Guard driver model related fields using CONFIG_IS_ENABLED(DM) to save
-> memory space when U-Boot proper is built with DM=3Dy and xPL is built
-> without xPL_DM.
->=20
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Patches 3 and 4 build on each other and on patch 1, so they are not
+intended to be cherry-picked individually.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+[1] https://lore.kernel.org/u-boot/CAPWaX55XWFLcMGRuaUuXXn__MX_UG4J8QTd6rvXZmJ4WSOCy9w@mail.gmail.com/
 
---=20
-Tom
+---
+Changes in v3:
+- No code changes.
+- Patches 1, 2 and 4: added Simon's Reviewed-by tags, which were
+  missing from the v2 patches.
+- Link to v2: https://lore.kernel.org/all/20260806-b4-fit-ext-data-hardening-v2-0-b181cac15c29@binarly.io/
 
---CGD0+OFWWcw9P0+R
-Content-Type: application/pgp-signature; name="signature.asc"
+Changes in v2:
+- Patch 1: keep the 0xffffffff data-position and data-size test cases
+  instead of dropping them; they are renamed and repointed at the
+  "FIT external data is out of bounds" message they now hit.
+- Patches 3 and 4: no code changes, added SPL code-size figures
+- Link to v1: https://lore.kernel.org/all/20260730-b4-fit-ext-data-hardening-v1-0-4a6b91e37b51@binarly.io/
 
------BEGIN PGP SIGNATURE-----
+Patches 1, 2 and 4 carry Reviewed-by: Simon Glass.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanpKMgAKCRAr4qD1Cr/k
-CqueAQDL1aNYs3keW4GZSaJfJRFYNArwD0UVBgZ5uePuKvwkkwD8DMwgiiV4Cry4
-dgJuAVpdgIrPVCTvPBOudQbWnbY2Sw4=
-=vW+2
------END PGP SIGNATURE-----
+---
+Anton Ivanov (4):
+      image-fit: Use unsigned types for external data properties
+      test: spl: Factor out external-data FIT property checks
+      spl: fit: Harden external-data offset and size arithmetic
+      spl: fit: Bound external data like U-Boot proper
 
---CGD0+OFWWcw9P0+R--
+ boot/image-fit.c               |  29 ++++------
+ common/spl/spl_fit.c           | 122 +++++++++++++++++++++++++--------------
+ common/splash_source.c         |   2 +-
+ drivers/fpga/socfpga_arria10.c |   3 +-
+ include/image.h                |   6 +-
+ test/image/spl_load.c          | 128 +++++++++++++++++++++++++++++++++++------
+ test/py/tests/test_vboot.py    |  10 ++--
+ 7 files changed, 210 insertions(+), 90 deletions(-)
+---
+base-commit: 94b349bd902d9e38e1846c157fadd9054c34680a
+change-id: 20260730-b4-fit-ext-data-hardening-1734a9203753
+
+Best regards,
+--  
+Anton Ivanov <anton@binarly.io>
+
