@@ -1,116 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0028C5AD55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Aug 2026 22:49:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CABBC5AD55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Aug 2026 23:14:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 75530406F9;
-	Mon, 10 Aug 2026 22:49:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B719580F27;
+	Mon, 10 Aug 2026 23:14:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FAfHjHx9so7E; Mon, 10 Aug 2026 22:49:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xpdD5Kn7TOBb; Mon, 10 Aug 2026 23:14:54 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8D6EC406ED
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B353580F1C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786402182;
-	bh=/RByJ10W6tO0shaXtcgVKtGo3e/VDpu9i+ZSk0/weWQ=;
+	d=lists.u-boot-project.org ; s=default; t=1786403694;
+	bh=fOfQD6ZPPo4X8hL6NYaEpvIKkgryfEicKfSARyUMR0s=;
 	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=IMcAdevMjJE9mAfUKrhPBPVyfku5W+bLJ4QddWkiA+w/fy/FIv8S32l1s02tRdKGW
-	 l4XNc0hQ2J/QjYt9jWiTBtjx0UFQd6z8jwM51dQOUzj7LaRM+nOZnqswLGGNAhioF5
-	 VmcHNStHta1MndNGGI06YReWHAa8zOR4jsLwXAhGfMW16EbcwW7ZZoqZZJCL9OjRGy
-	 3nUAMCJmmdUoMwuo8MEgMYQl1qkp5soAZBNrQkwgVRIARvINZ6Tut4Rbc3wc5aK9ky
-	 mATKexb4RubZ9bLRJpfb0h+TjZgUyK/Hg4pbJwrPsAXZeZcg3RdwyT0OBH+dUoUeLd
-	 KsbS+nndQ2Fcw==
+	b=lSiJt9yINpMkAEwRLLAdy1XfHUx3kKJ2+9UtzoGYi8HO0yF3YTnxEPAprN2/IqYKe
+	 kF0UknED7z4QkaJh9TwLoaQZb+/S21mAPbWxybj2iHs+sPMEhSV3fUbualjlZOk7Kh
+	 84MdMk17Mum88WLV5b8rL2NpDB3mlkJckCf9GVAbW/W0HolwTlWihIuNyIixnUREa4
+	 m3JX6jaoRnL4XLkcfUV8gvfsLvKtSuQp3Jw6QPADytd9VWmO+LeVxzffcLS8C0M/mh
+	 i9XvlMftyY4yRiQ5Y6iS9Iu0RG3LBhR/ndLo96EZYg4oFYT2fNudgKzgYGRTiyYPXo
+	 QQTDYoneusGIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8D6EC406ED;
-	Mon, 10 Aug 2026 22:49:42 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3699D4E0
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:49:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B353580F1C;
+	Mon, 10 Aug 2026 23:14:54 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3F79F218
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 23:14:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 28E9A60628
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:49:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 25F6A4007A
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 23:14:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r-FJ9100C1wD for <u-boot@lists.u-boot-project.org>;
- Mon, 10 Aug 2026 22:49:39 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6WyfhGk6ylEc for <u-boot@lists.u-boot-project.org>;
+ Mon, 10 Aug 2026 23:14:52 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
+ client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3864D60792
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3864D60792
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3864D60792
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:49:39 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7eb64085c45so1919457a34.2
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 15:49:39 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0462B40061
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0462B40061
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0462B40061
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 23:14:51 +0000 (UTC)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7f39cfb65cbso531051a34.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 16:14:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786402178; x=1787006978;
+ d=1e100.net; s=20251104; t=1786403691; x=1787008491;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/RByJ10W6tO0shaXtcgVKtGo3e/VDpu9i+ZSk0/weWQ=;
- b=U2B9nnVbgLul9roZRo+rn5vxSE7G4HMYmRD26+dBMIAtq6p/aEhvE1mDHxkPt2PbfK
- gnugeIoE58mAQD7l3iQ3Yy0Sb90CMq2eLXVmwIA3/XzLodgK+weNHH6HAE8s3KfbQKDt
- kLioL/TpIXSS1unax8llHhjZavFZ48ibB107fgtB5eM9F6CRKGG83FRue2Hx3oxm+dyD
- uGI96SOWgBFRGanEszG0fKr0cNKblt3PUa8risVd5i9sAR738x5OE2zkNDw4GO0HYTm2
- NDS5Epck6qBRtp2JUN3jKKFnmbqVJZPyw75/poH2TYmFKTacGiRRd2F4SSOM9WRwGflP
- GCaw==
-X-Gm-Message-State: AOJu0Yx55/nTlYcydnE83sFlNsgmiEpvWmZMjXOAKRp968d6uRGFs6Fx
- h945tp0pXTR9yu4O4Yh5rIStGMsSfNhWBWQ2PxMLTTtnt6OKzz+ZxI6EWqRHEFr0vGXGfu669S0
- cG+zbzSY=
-X-Gm-Gg: AR+sD139hwAxBHvO6b+q8D53Z/ggTaHkFatVwEiU90xiFNS1DBhfFkx/enl7FkCnVQY
- 0OFnW2laWzOELpBPDmaWXGLBvTbywxF1IOJDeoze6gLF2dcW2ksfRMGp0aC+2FUq35dtp1dAjyz
- BbJBMkKpJuzLanv3w3aGMPr5uYh0siaDc3PmCeZgqTV1WJox8hwtaIL73SL7WosS3lhAup3T6au
- HFAL3kmKvCDE7C2CIPDL4Rb4Mro6lWn+ntYofAqW3FUm3paHQhuSHKlQL4fvuzcGP5jLaBnMBuh
- JXH1/qtSujEGQK4XmoCgTVwRKRwtg7Zq7TMBJNAUiwCRgYKIKu6j53UJqtTSkXjRdCcz55bLIfH
- Tnx315Su7FFY9TeK1d6U6ZpD7zf6Z1qJwboQ91PdUniIPyNd/MlSdhGhQl0PRvVxNW57HWftjLs
- s+CThMIym/LzrAfKUMicO+ekGs88ZWSRhDbd+V8ggPZ9wrBAH+rlPqxrWcRsQPAItkjXdBN3LlG
- xcEVwolm8hflg8JDBSNbiNaOsmlZcVgmGOvKHBXggNa2TFgTnaKgKi4mohYqBrUrScVmLXkjTAG
- zlX3a0ooyA==
-X-Received: by 2002:a05:6820:3388:10b0:6b0:4c0b:9698 with SMTP id
- 006d021491bc7-6b04c0b9762mr7467280eaf.18.1786402178034; 
- Mon, 10 Aug 2026 15:49:38 -0700 (PDT)
+ bh=fOfQD6ZPPo4X8hL6NYaEpvIKkgryfEicKfSARyUMR0s=;
+ b=XgBXG/uHq8kozBFa4l31s4T+c7Eb54HJ1UBjtppVjSJP5X4MS7HY8L/Rj+bOPJHNDm
+ CM60bhqnR3+EFYLljXxr1qM7+BYGVOdkRNLDl1IaHyTQb/qTmYs+7iNR4CSQX6U4vrry
+ iQp43romh827I51Uc6ThSt6uvDMa5oH3iCX7MPUXd8K32FKQiHj2b9UsU1UJxoe+ZSJu
+ n5mrkgiBaUz201vqkAtQBQ26/bbRRqbsuz3Nu0HKjpsXFX18NBGNSVZCLr0YbL789Pwg
+ YYzxTKWUK/7hs/jwdNtQ1S3a2X/yMdmZaBSwaMEpziWEjrb95LuxyIv0hExeK4aILI9J
+ ORIw==
+X-Gm-Message-State: AOJu0YxWGodQT5R7Zv0AyKnNKdUVIuQubk9CnD7/N05PS53wK8jCGr5P
+ 5gsBSrPuNy2oe8ihSZTSkt8J7JVONy7BLrfr8TLtRv3FkWMZtBCLRlCzDIG9r0iQu+JdbJXN4NS
+ HuiLKPaY=
+X-Gm-Gg: AR+sD1040Iz6cXXLHLJXXLty0NcTXL5qpNkIwMEfqEk9GQiojMeulCiUiNmO7/ncHhq
+ nQvVMBmji761qI9lnug9lFaI8GqOXUoNKZMLqOdt4jyAFuNu6yy6+oCds4cTTh66ek9nxtLAJUw
+ /go9XhiVNoioeM76DqIj2/YsFWLUSWiyMdioWN+UghK+63DAWp9bO03foLoPQN1hB5P4WpJsAPk
+ 6dHY9S9I/8s0VBAlVWO2+yjRs1vuZ8WqNuOBO/Fvm/b7PQqVp1ymmI7seUOIntyv/52lIe8WwyG
+ iSyLAbK8HAsfMgacf2DxtDqVRQ9ywCRq9PbDPC5IoaTJ3yZFAlRqd3t8blaEYOUpOTeOaezie6e
+ /Fd5lUU0sK+j+2Zu2E+T/89atL+m030EGNxgy93ayKmtK6DWB2zpJZ+CwqKB+AIRiSl2EZ2bENQ
+ SbG0dS7i4vbk6tFz7Rr6E4Maabz7SN6ekURBEh/f09brFDPRf7/DcL5VP61xE8uV1Np6QgwKTaZ
+ E6t4VTjm19Q6XEp7KOsgZdFoPD1n+4NnVLqC5WyLFmWEgOIJxPk6E76AHLmXnifb5y7XXPTgK3Z
+ aWNsBuBjzw==
+X-Received: by 2002:a05:6820:178a:b0:6a1:1269:c776 with SMTP id
+ 006d021491bc7-6b0909b11a5mr2775153eaf.25.1786403690888; 
+ Mon, 10 Aug 2026 16:14:50 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b02be475f7sm9662681eaf.9.2026.08.10.15.49.36
+ 006d021491bc7-6b02bc2631esm10844811eaf.4.2026.08.10.16.14.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Aug 2026 15:49:37 -0700 (PDT)
-Date: Mon, 10 Aug 2026 16:49:35 -0600
+ Mon, 10 Aug 2026 16:14:50 -0700 (PDT)
+Date: Mon, 10 Aug 2026 17:14:48 -0600
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.u-boot-project.org
-Cc: u-boot-custodians@lists.u-boot-project.org,
- u-boot-board-maintainers@lists.u-boot-project.org
-Subject: [ANN] U-Boot v2026.10-rc2 released
-Message-ID: <20260810224935.GG1160436@bill-the-cat>
+Cc: Rasmus Villemoes <ravi@prevas.dk>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Jordi Trepat Mur <yordy1902@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20260810231448.GH1160436@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T4//gx2+ehAe1QEH"
+ protocol="application/pgp-signature"; boundary="23T83t/wl0vA5HLc"
 Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786402178; x=1787006978;
+ d=konsulko.com; s=google; t=1786403691; x=1787008491;
  darn=lists.u-boot-project.org; 
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=/RByJ10W6tO0shaXtcgVKtGo3e/VDpu9i+ZSk0/weWQ=;
- b=hlcphqpSa3XmPp6UEtjHuYicWh2uc9I/X4KVdfZplivLAJofVkE6TSAW600pUR8yxZ
- flpph09+nQkrbbDDKWwwSJQtZuSCbHonzKqctbD+EBvqREjqyrfw9qHRoMUhJ0bkC1P3
- A048bs4xNPt79QxcfHo0ySq80spYeYIW+7fzE=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=fOfQD6ZPPo4X8hL6NYaEpvIKkgryfEicKfSARyUMR0s=;
+ b=cwRmZ2XKV7icq5glB3czGm5CiJd4Au1f2HuMuE9827BTv0YRjTl/+rTqXFBS/bVwtb
+ LnD7mhv1nM5fbTt2uCtvgZRymdiqMM2HvyuFzAVNoHIII4scfJ4M8eDYFQFf5AOKw5AA
+ tUiHOunj8DaLZtlbEuqOWwhxdHkc66qJprfH4=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=hlcphqpS
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=cwRmZ2XK
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,74 +130,181 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 
---T4//gx2+ehAe1QEH
-Content-Type: text/plain; charset=us-ascii
+--23T83t/wl0vA5HLc
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+Here's the latest report
 
-So it's release day and I have tagged and pushed things out.
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Aug 10, 2026 at 5:06=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
 
-First up, we should revisit things I mentioned in the -rc1 release. The
-mailing list migration had a few more hiccups after, but we should,
-hopefully, be set. That said, I do see one more issue that I've raised,
-which is that I believe due to how DMARC works, some patches authors are
-being rewritten not in patchwork, but in lore (patchwork has a fixup in
-place). I'm keeping an eye on pull requests and will do more fixups as
-needed, until we have things done. But that means good news,
-lore.kernel.org has caught up with the move and the backlog and I don't
-see anything missing. And, the move of our Gitlab instance to
-https://git.u-boot-project.org/ has been stable. If people need access
-and have not yet gotten an account, please do so soon.
 
-So, the git tag has been pushed to
-https://git.u-boot-project.org/u-boot/u-boot and the release itself is
-also under https://git.u-boot-project.org/u-boot/u-boot/-/releases/
+Hi,
 
-At this point, the next branch is now also open.
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
 
-We're continuing with a community meeting following the release and the
-calendar link is
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DZ2IwbH=
-R2NjZhMzZkOThqNHJoc2sxZG04MzJfMjAyNjA3MjhUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
-mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
-89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
-lendar.google.com&scp=3DALL
-and once again this is the same time as the previous meeting. The
-meeting details itself are:
-https://meet.google.com/jwj-pqka-bnj
-August 11th, 2026. 9am (GMT -06:00)
+   - *New Defects Found:* 5
+   - 1 defect(s), reported by Coverity Scan earlier, were marked fixed in
+   the recent build analyzed by Coverity Scan.
+   - *Defects Shown:* Showing 5 of 5 defect(s)
 
-To join by phone:
-Or dial: (US) +1 929-277-5781 PIN: 115 674 167
-More phone numbers: https://tel.meet/jwj-pqka-bnj?pin=3D2145803234090
+Defect Details
 
-In terms of a rough changelog:
-- Platform updates for i.MX, TI K3, Marvell, atmel, Renesas, RISC-V,
-  MediaTek,=20
-- Fixes in our DFU, Documentation, EFI Loader, UFS, NVMe, MMC, USB, FWU,
-  watchdog, and BTRFS subsystems / drivers.
-- Update to v7.1-dts tag for dts/upstream
-- FIT images can authenticate a dm-verity roothash.
+** CID 652911:       Resource leaks  (RESOURCE_LEAK)
+/drivers/pinctrl/pinctrl-single.c: 579           in single_add_gpio_func()
 
-I continue to plan to do an rc release every two weeks and the final
-release will be 05 October 2026.
 
-Thanks all!
+___________________________________________________________________________=
+__________________
+*** CID 652911:         Resource leaks  (RESOURCE_LEAK)
+/drivers/pinctrl/pinctrl-single.c: 579             in single_add_gpio_func()
+573     			break;
+574
+575     		list_add_tail(&range->node, &priv->gpiofuncs);
+576     		range++;
+577     	}
+578
+>>>     CID 652911:         Resource leaks  (RESOURCE_LEAK)
+>>>     Variable "range" going out of scope leaks the storage it points to.
+579     	return 0;
+580     }
+581
+582     static int single_probe(struct udevice *dev)
+583     {
+584     	struct single_pdata *pdata =3D dev_get_plat(dev);
+
+** CID 652910:       Memory - illegal accesses  (UNINIT)
+
+
+___________________________________________________________________________=
+__________________
+*** CID 652910:         Memory - illegal accesses  (UNINIT)
+/lib/libavb/avb_cmdline.c: 342             in avb_append_options()
+336             break;
+337           case AVB_HASHTREE_ERROR_MODE_PANIC:
+338             verity_mode =3D "panicking";
+339             dm_verity_mode =3D "panic_on_corruption";
+340             break;
+341         }
+>>>     CID 652910:         Memory - illegal accesses  (UNINIT)
+>>>     Using uninitialized value "dm_verity_mode" when calling "avb_replac=
+e".
+342         new_ret =3D avb_replace(
+343             slot_data->cmdline, "$(ANDROID_VERITY_MODE)", dm_verity_mod=
+e);
+344         avb_free(slot_data->cmdline);
+345         slot_data->cmdline =3D new_ret;
+346         if (slot_data->cmdline =3D=3D NULL) {
+347           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
+
+** CID 652909:       Control flow issues  (DEADCODE)
+/boot/bootretry.c: 32           in bootretry_parse()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 652909:         Control flow issues  (DEADCODE)
+/boot/bootretry.c: 32             in bootretry_parse()
+26     	if (s !=3D NULL)
+27     		retry_time =3D (int)simple_strtol(s, NULL, 10);
+28     	else
+29     		retry_time =3D CONFIG_BOOT_RETRY_TIME;
+30
+31     	if (retry_time >=3D 0 && retry_time < CONFIG_BOOT_RETRY_MIN)
+>>>     CID 652909:         Control flow issues  (DEADCODE)
+>>>     Execution cannot reach this statement: "retry_time =3D 0;".
+32     		retry_time =3D CONFIG_BOOT_RETRY_MIN;
+33     }
+34
+35     void bootretry_init_cmd_timeout(void)
+36     {
+37     	bootretry_parse(env_get("bootretry"));
+
+** CID 652908:       Error handling issues  (NEGATIVE_RETURNS)
+/test/dm/hash.c: 35           in hash_test_success()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 652908:         Error handling issues  (NEGATIVE_RETURNS)
+/test/dm/hash.c: 35             in hash_test_success()
+29
+30     static int hash_test_success(struct udevice *dev, enum HASH_ALGO alg=
+o,
+31     			     const void *ibuf, const uint32_t ilen,
+32     			     void *obuf, uint32_t chunk_sz)
+33     {
+34     	success_calls++;
+>>>     CID 652908:         Error handling issues  (NEGATIVE_RETURNS)
+>>>     "hash_algo_digest_size(algo)" is passed to a parameter that cannot =
+be negative. [Note: The source code implementation of the function has been=
+ overridden by a builtin model.]
+35     	memset(obuf, 0x5a, hash_algo_digest_size(algo));
+36
+37     	return 0;
+38     }
+39
+40     static int hash_test_hard_error(struct udevice *dev, enum HASH_ALGO =
+algo,
+
+** CID 652907:       Memory - corruptions  (OVERRUN)
+/test/dm/hash.c: 35           in hash_test_success()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 652907:         Memory - corruptions  (OVERRUN)
+/test/dm/hash.c: 35             in hash_test_success()
+29
+30     static int hash_test_success(struct udevice *dev, enum HASH_ALGO alg=
+o,
+31     			     const void *ibuf, const uint32_t ilen,
+32     			     void *obuf, uint32_t chunk_sz)
+33     {
+34     	success_calls++;
+>>>     CID 652907:         Memory - corruptions  (OVERRUN)
+>>>     Calling "memset" with "obuf" and "hash_algo_digest_size(algo)" is s=
+uspicious because of the very large index, 18446744073709551594. The index =
+may be due to a negative parameter being interpreted as unsigned. [Note: Th=
+e source code implementation of the function has been overridden by a built=
+in model.]
+35     	memset(obuf, 0x5a, hash_algo_digest_size(algo));
+36
+37     	return 0;
+38     }
+39
+40     static int hash_test_hard_error(struct udevice *dev, enum HASH_ALGO =
+algo,
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
 
 --=20
 Tom
 
---T4//gx2+ehAe1QEH
+--23T83t/wl0vA5HLc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanpVfwAKCRAr4qD1Cr/k
-ClckAQCOJy/052lnTKRuQIYYZury2Vhc79PeRx8d2RiKOa3ImwEAyK8OFlrvzDTT
-8nq5dBZVeug2VeRKsuZQjluzJjhk7AI=
-=kG+S
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanpbZAAKCRAr4qD1Cr/k
+CrgqAP9i+pjp0p01VOYupkRnl0WgeS8GUnPGxBrcrrUIIu8D/wD/f3mOKayM0GZa
+LiD7dpr7DKPc0AnLshdKJaBIDGIOago=
+=J66Y
 -----END PGP SIGNATURE-----
 
---T4//gx2+ehAe1QEH--
+--23T83t/wl0vA5HLc--
