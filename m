@@ -1,85 +1,86 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3594FC5CFCF
-	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 09:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFFC8C5CFCF
+	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 09:43:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BDB0440758;
-	Tue, 11 Aug 2026 09:42:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3D823607CD;
+	Tue, 11 Aug 2026 09:43:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ybDDdyPJGwg8; Tue, 11 Aug 2026 09:42:57 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ugckb99rH2RV; Tue, 11 Aug 2026 09:42:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0009440759
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2DBD8607BB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786441377;
-	bh=x7axtadZVxQXGn0S2fXVjcJUQEsrEccDMg63HpDt4MU=;
+	d=lists.u-boot-project.org ; s=default; t=1786441378;
+	bh=yOYoOqCqKQwR99iwRjdTYlS7pEuAKrLPOc46GD8O5xI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0CEWeyo09TjcFNOfrF1F5Skid2FiCzzpEQT32mRZsBHAlK+GqiVMN6pworbd34klz
-	 J4En9xlQtxnRxVX5EjBXHUKRL7HOstc333zvE4B1AFR1O+j2vcouYd6G4WyoamTxJQ
-	 4SYRfbhQg2C/YlCymcujLrZgx1yKKeCKVqzo7C/vcxqorj9c85ms+ljqUWLajffmB+
-	 TQVQbCqXoS0IEUNbbrCCHbxNv/AYO6DLQzR+Bi0NZ/vMk5yZhVoBcDVRED+7DKhlPk
-	 2ZaNYorA6h6d983dpPoPOk5AvV5TzBAjc09ki5ozHFucFZM57APikRxDweVZjp0pD0
-	 6/W945LnBadAA==
+	b=puDzf/pmRBgxe38B39bTmfQkYwSHSsGfUihPSnm35sYMCLAvXYikY/3GqySV0ETL3
+	 mlHVxJ0G4dhpTcClOng+BDYA56D5aQDPVi6v9wMoYOBCLZn4WK8fT8+iQt7+ClBkSR
+	 ZlA0owTtxMgcOP6q2HA4pftDrdvYGK8fT+gc28JScAs0g7mkH1TjRWAi7igPPOLmb+
+	 hmoFOTDvdlZNaj/ZGv07jYfvt88voSUXFMeBhei9G0YFN2IB33ie7+P+oVAut5jWh0
+	 ReiVHl18XvuS29c2cr2iDujgS16hKVcJb56nkhUpkHzzZocpuedjQfS5/Mqx0IhZs7
+	 Pp0Gf6HZamtNQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0009440759;
-	Tue, 11 Aug 2026 09:42:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C2227259
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 09:42:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2DBD8607BB;
+	Tue, 11 Aug 2026 09:42:58 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8BA3128A
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 09:42:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BFFA540758
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 09:42:55 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7E00440758
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 09:42:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KR2RJ3tgUEy0 for <u-boot@lists.u-boot-project.org>;
+ id ZuxvgRpPNJY0 for <u-boot@lists.u-boot-project.org>;
  Tue, 11 Aug 2026 09:42:55 +0000 (UTC)
+X-Greylist: delayed 482 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 11 Aug 2026 09:42:54 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 4256440759
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4256440759
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
  helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 473AE4075D
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 473AE4075D
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 473AE4075D
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4256440759
  for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 09:42:54 +0000 (UTC)
 From: Frieder Schrempf <frieder@fris.de>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
 Cc: uboot-imx@nxp.com
-Subject: [PATCH 2/3] board: imx6dl-sielaff: Remove board_boot_order()
- workaround
-Date: Tue, 11 Aug 2026 11:34:19 +0200
-Message-ID: <20260811093423.212986-2-frieder@fris.de>
+Subject: [PATCH 3/3] board: imx6dl-sielaff: Enable environment on SD card
+Date: Tue, 11 Aug 2026 11:34:20 +0200
+Message-ID: <20260811093423.212986-3-frieder@fris.de>
 In-Reply-To: <20260811093423.212986-1-frieder@fris.de>
 References: <20260811093423.212986-1-frieder@fris.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fris.de; s=mail; t=1786440889;
+ d=fris.de; s=mail; t=1786440890;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=x7axtadZVxQXGn0S2fXVjcJUQEsrEccDMg63HpDt4MU=;
- b=3WpMFeAlGZgmlEeB+3AiuBOdAitoeu3QR9kiUAq6ipXOE2uAQayhiQXl2BZyS/ai/Xdyy8
- /T5axdswZFMB4EGj3ZKB9Gf0KHyivN5v07TdBTlUPdijk0hSgWw8L3oIBfQbAD/lTCQFF/
- sgpEJ3UupP1u31DdOtm/g3gUSmMm3FKD9hNKp7Ah5o8tuloxB3tj4i3mIqLq3aJEvjcrfm
- +rGfugcvLK9/4p69uVV696IWePgiJOBk85zSL6LUVGFFYlKtaVtPez5mrj8xeIkbHQ2P6v
- tjcnYFeDERJuwuikZOw9KUbYRIt6lsz2Bc7VAqQf76GHFJuHRMfYuQK/8Wzlww==
+ bh=yOYoOqCqKQwR99iwRjdTYlS7pEuAKrLPOc46GD8O5xI=;
+ b=DEc0tkYHXwQ+YB9cL15HzZlvdNPDdmh3cS5nzfUMySHXPW6mMz+2somoKO8tyjXzcoXzYF
+ quN8w1/HATG7lpbck6tfxTB68W+A9CxHwwpgEOSDXn/S6HMaefzYiL+oN8kl+LwHk/D+CD
+ 8r32rOK/n30W/M9nENIYmACRbFiM5nNEMeQeTBTExDl1NU/kwWl+KobYKEPoAWcvr4c04U
+ k1UOOz7EfnePY/x7N3WbNA7ApvIQrYXMorM1cU77KFVmVT1w3xao27pzcINaBSamV7p9hn
+ +loJpN5sTyPWECUSdJp7fxpDkK4HcDCQovLjGnvRJM/KILsTtFu5Zd4LnP4Wyw==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=fris.de
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256
- header.s=mail header.b=3WpMFeAl
+ header.s=mail header.b=DEc0tkYH
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -96,44 +97,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Now that the fallback to SPI NOR as boot device can be properly
-detected, remove the workaround.
+Enable storing the environment on SD card and choose the env location
+according to the boot device.
 
+Assisted-by: Claude:claude-opus-5
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- board/sielaff/imx6dl-sielaff/spl.c | 22 ----------------------
- 1 file changed, 22 deletions(-)
+ board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c | 30 +++++++++++++++++++
+ configs/imx6dl_sielaff_defconfig              |  2 ++
+ 2 files changed, 32 insertions(+)
 
-diff --git a/board/sielaff/imx6dl-sielaff/spl.c b/board/sielaff/imx6dl-sielaff/spl.c
-index 6815952c0fb..ae36ff5712c 100644
---- a/board/sielaff/imx6dl-sielaff/spl.c
-+++ b/board/sielaff/imx6dl-sielaff/spl.c
-@@ -249,25 +249,3 @@ void board_init_f(ulong dummy)
- 	/* load/boot image from boot device */
- 	board_init_r(NULL, 0);
+diff --git a/board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c b/board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c
+index 4da084ed91c..f2c206cfeb0 100644
+--- a/board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c
++++ b/board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c
+@@ -9,6 +9,7 @@
+ #include <asm/arch/crm_regs.h>
+ #include <asm/arch/mx6-pins.h>
+ #include <asm/io.h>
++#include <env_internal.h>
+ #include <init.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -109,3 +110,32 @@ int board_init(void)
+ 
+ 	return 0;
  }
--
--void board_boot_order(u32 *spl_boot_list)
--{
--	u32 bootdev = spl_boot_device();
--
--	/*
--	 * The default boot fuse settings use the SD card (MMC1) as primary
--	 * boot device, but allow SPI NOR as a fallback boot device.
--	 * We can't detect the fallback case and spl_boot_device() will return
--	 * BOOT_DEVICE_MMC1 despite the actual boot device being SPI NOR.
--	 * Therefore we try to load U-Boot proper vom SPI NOR after loading
--	 * from MMC has failed.
--	 */
--	spl_boot_list[0] = bootdev;
--
--	switch (bootdev) {
--	case BOOT_DEVICE_MMC1:
--	case BOOT_DEVICE_MMC2:
--		spl_boot_list[1] = BOOT_DEVICE_SPI;
--		break;
--	}
--}
++
++/*
++ * Keep the environment on the device we were booted from. The boot fuses
++ * use the SD card as primary boot device and the SPI NOR as the ECSPI
++ * recovery device, so both are valid places for the environment to live.
++ */
++enum env_location env_get_location(enum env_operation op, int prio)
++{
++       u32 bmode;
++
++       if (prio > 0)
++               return ENVL_UNKNOWN;
++
++       if (imx6_is_ecspi_recovery_boot())
++               return ENVL_SPI_FLASH;
++
++       bmode = (imx6_src_get_boot_mode() & IMX6_BMODE_MASK) >>
++               IMX6_BMODE_SHIFT;
++
++       switch (bmode) {
++       case IMX6_BMODE_SD:
++       case IMX6_BMODE_ESD:
++       case IMX6_BMODE_MMC:
++       case IMX6_BMODE_EMMC:
++               return ENVL_MMC;
++       default:
++               return ENVL_SPI_FLASH;
++       }
++}
+diff --git a/configs/imx6dl_sielaff_defconfig b/configs/imx6dl_sielaff_defconfig
+index bfa4c4aa1d8..615c2935844 100644
+--- a/configs/imx6dl_sielaff_defconfig
++++ b/configs/imx6dl_sielaff_defconfig
+@@ -61,8 +61,10 @@ CONFIG_EFI_PARTITION=y
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_UPSTREAM=y
++CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
 -- 
 2.55.0
 
