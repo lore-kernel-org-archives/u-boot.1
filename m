@@ -4,144 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F1B7C5CFCF
-	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 10:53:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD68AC5CFCF
+	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 10:53:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D4D8F81007;
-	Tue, 11 Aug 2026 10:53:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AAB6481005;
+	Tue, 11 Aug 2026 10:53:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hLyt7ZUxbD1q; Tue, 11 Aug 2026 10:53:39 +0000 (UTC)
+ id ni-T1rEPytwZ; Tue, 11 Aug 2026 10:53:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 67EED80FFA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9E53581010
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786445619;
-	bh=BuFTq3SWry/Zh/VlW5OvILljH4mAalaqdLkERdD/igI=;
-	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=w9FxfFt3bRMsGVo5dRVwQGZlCqSYobfoFkjMUhTAOHkh68oeKk0JzW+VgLbB8gPJO
-	 vZ+DN1ZiXE8VGX8pcSEsyD9jzNHPJi8efPs7zJJNlrlwFnqvfQePC5MvlPmj1Dcwff
-	 toxnL71sdCAQIBnz3corysqCOxUzfaFha03NfQJVBGtnfhvU2hMDrQ09HJrWa9F4Y4
-	 IKU34oKtgjbq3cXgzAn6D9hM76BC28TlmlfV+UNeHXddLuY1xXyo6MpQ5PdrZj5A8h
-	 v3lL8U7Vn9y45WO/P+L9QwwqPf8WyV+Nw7R4y55W9Elf5JFOh24BORwSCAfWUGXZo2
-	 KtI4x/mjXus+A==
+	d=lists.u-boot-project.org ; s=default; t=1786445621;
+	bh=ym62MmdFPdFMANiEeAG2A4mSXgy+eBzziO8CnD0r6VY=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=bhzFrg15w8tojLkDfJXUBQi0COTG5d3DYI6jl/JLKP3numxwfa+h/BnMoVi+8HA6o
+	 pXWVZ2JEh4HAtPfusrWv31E347xktJZHZWtGK4f+rdbpvlg/bNX+piAYzWE30sviL2
+	 /bODR/K2KonL1gdEyRFQFqyD8koe25+KQl5Jx4MKCEuQhnL7WzQh9lqEkTOU6BXV2C
+	 fq9lmmejMBVQpl05UctC5mxKgB32duAZXWsTbECcELrUZvnWHtUoMitb7/T+ynEjwO
+	 z4TaX9I/SiefRLlYA6tP2bt2hAjlpf7+qxnrGUDITCIVHQE1ZUz7/hsQBEzUTmPbOD
+	 JiKQ6DDCp+YTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 67EED80FFA;
-	Tue, 11 Aug 2026 10:53:39 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 99BB7259
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 10:53:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9E53581010;
+	Tue, 11 Aug 2026 10:53:41 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 08260345
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 10:53:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8BC4880FFA
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 10:53:37 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E23D96076D
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 10:53:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iiu8ZQ5o-hTA for <u-boot@lists.u-boot-project.org>;
- Tue, 11 Aug 2026 10:53:36 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9adZQop0Nufy for <u-boot@lists.u-boot-project.org>;
+ Tue, 11 Aug 2026 10:53:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c10d::1;
- helo=sn4pr2101cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c107::3;
+ helo=ph0pr06cu001.outbound.protection.outlook.com;
  envelope-from=pranav.sanwal@amd.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6294980C34
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6294980C34
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6294980C34
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 10:53:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3393F6065A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3393F6065A
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3393F6065A
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 10:53:37 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iLybypQb27peR8iInfPnkoFDJrmuWGGcpGUrTlhjznoXu+9ZmJTwHB7nHGiqEIt63+8pqGQeRGmwywyFPaUcUjVd0cQ2VnlZhmi0y37VV1nviQkrliah0DhnoqJeBdOu58nSQuQoGkpSykoGEvI1U5fgXjwZ15ysQQt1aOt93IbD46z6R9DTE0VetoZ6yKmo2i58t3bjWOmsDisF5jlXrfcRF54x/j/LZRSQy0/zUJ+V5YDPbrYtol9tknx2aZYRYQKJjQifFmMDi07uMkusTpLRoQPja3YtgOGqb3tYCmcVdU9B9NYLe9bxyk1rYZxprnVIBtfrHhsrR511vXNW1g==
+ b=Is0fjiPK9TQV+OFzq8YgcJdbcQu7F7NBzccdoM46QgDoCDhnUngPyGPSeNx+cCIhh9bwzkReQpsrJRyOfUiebULPvaafRpYfv8GRfQeJ4cQqXifP77S4Fla3QvXLfySGufOmyg/IoycKgDNrrI2JvfwwCEPAlAFPDsn4x6l+bTLZOE/4KZfY5z5RY2A3d9kwihs//jZzc85rltIGry0zy9p6vRLmjTomnd4EU+IolG1pQoWRrUwpOuOWEIb59YHCUAXL+22jDjD54HZTlX1gPwu2+FuQKL6zo7/ZCPCklXgYeUvzl4VDNgcLyV49xgEaoPYBMzQ1A36QvJ/5Gte5Pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BuFTq3SWry/Zh/VlW5OvILljH4mAalaqdLkERdD/igI=;
- b=aLElqA+Y+/h02aE/HyoKZShtBFQ4+pIc+jvE7BZUvoJmg07mKcyTHctookQ2454CaAQ2LDHxsu8iTgYHdMBeqRcISKbyzpNRdN6A2jIn12khoG7OvWBH3HVoWXVgV4nJ5XjB7DG3og3r1t4oOuW3aj8QR90NjEoXgK09NjaWqTYVvchSUu7bi2mAdO6vJnfeNHJ3RNmVFHq3Xuqixlm00HM/HQ7HIh/8eZlL15pNKWhX8uXPrR7iV5+NvpX7g8Wcne5PA0nLAcJvlE4uhEv4zFg/LI9jKffywXhjRvGlPtyyBPoXk9uRdzYaaV4SCc6OxJuVk1SJoMoFWlSqufhhLg==
+ bh=ym62MmdFPdFMANiEeAG2A4mSXgy+eBzziO8CnD0r6VY=;
+ b=sgK8nVR3GkJf/dE0T8LHPS92bJ3HiTKa7B69xLAFDtvYPrr+nk4reUJglbPtaKb3dLvBSYprpBsezcdjNI+ygsqw3msrDDYkJkmirGUU55Nlt53zMDipl0/9QczR75BB1rFYSLuhAfHLkNvMTgwB8DcOeuVOdN+afP0cNy7yCBGPAk5AX355NItvBrC/kwQDI3h3j58vItN3Pmvqds83k+3c+Ry3/1pdNo9R1MEBmWR4PwqieTIu5rqkFvLrnkB/WKjsKoMGY5ITqXokudHnCDdzUZ2bbhvpd5r+yLCz7uYHMsxoFT3O8JJyArJ2hWoFNUZbMG00K86YcDNAArmVXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-Received: from MN2PR11CA0030.namprd11.prod.outlook.com (2603:10b6:208:23b::35)
- by PH7PR12MB6907.namprd12.prod.outlook.com (2603:10b6:510:1b9::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Tue, 11 Aug
- 2026 10:53:30 +0000
-Received: from BL02EPF0002992A.namprd02.prod.outlook.com
- (2603:10b6:208:23b:cafe::5b) by MN2PR11CA0030.outlook.office365.com
- (2603:10b6:208:23b::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.11 via Frontend Transport; Tue,
- 11 Aug 2026 10:53:30 +0000
+Received: from CH0PR03CA0094.namprd03.prod.outlook.com (2603:10b6:610:cd::9)
+ by PH7PR12MB7355.namprd12.prod.outlook.com (2603:10b6:510:20e::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.12; Tue, 11 Aug
+ 2026 10:53:32 +0000
+Received: from DM2PEPF00003FC7.namprd04.prod.outlook.com
+ (2603:10b6:610:cd:cafe::1b) by CH0PR03CA0094.outlook.office365.com
+ (2603:10b6:610:cd::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.25 via Frontend Transport; Tue,
+ 11 Aug 2026 10:53:31 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BL02EPF0002992A.mail.protection.outlook.com (10.167.249.55) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DM2PEPF00003FC7.mail.protection.outlook.com (10.167.23.24) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Tue, 11 Aug 2026 10:53:28 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.315.6 via Frontend Transport; Tue, 11 Aug 2026 10:53:30 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 11 Aug
- 2026 05:53:28 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 11 Aug
- 2026 05:53:27 -0500
+ 2026 05:53:29 -0500
 Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Tue, 11 Aug 2026 05:53:26 -0500
+ Transport; Tue, 11 Aug 2026 05:53:28 -0500
 From: Pranav Sanwal <pranav.sanwal@amd.com>
 To: <u-boot@lists.u-boot-project.org>
-CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH v3 0/6] gpio: improve claim diagnostics and fix gpio-delay
- offset handling
-Date: Tue, 11 Aug 2026 16:23:08 +0530
-Message-ID: <20260811105314.3837228-1-pranav.sanwal@amd.com>
+CC: <git@amd.com>, <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 1/6] gpio: uclass: log when a gpio offset is already claimed
+Date: Tue, 11 Aug 2026 16:23:09 +0530
+Message-ID: <20260811105314.3837228-2-pranav.sanwal@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260811105314.3837228-1-pranav.sanwal@amd.com>
+References: <20260811105314.3837228-1-pranav.sanwal@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992A:EE_|PH7PR12MB6907:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe8e5cb6-5231-437a-228f-08def796c70d
+X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC7:EE_|PH7PR12MB7355:EE_
+X-MS-Office365-Filtering-Correlation-Id: ffc577c4-a36a-49be-de89-08def796c824
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|82310400026|23010399003|376014|11063799006|56012099006|10067099003|6133799003|18002099003|13003099007;
-X-Microsoft-Antispam-Message-Info: 7eOy9Fmi59reFPlI2jg8Hsxv6vuaJ4OEiCd42rfGz8fQzokaL2r7Ja1es48jyA/pEHfGD40yjLQmr4LXzxwdbRvd1yNMsHBCF71gETy/3xSS6m1CQoQrLkPYDzcQ6BAkDdBtC7GQeXFu9X97sleAwO2IQlW8D3mgbHNnM/B9qac68CUzG0XyUdl0Ylz3eAGZ/XS2GZqqJPXs9uCVtv6Zzb5LXB41QTuLDpc4Q7morfAuXChLTnyqYFBvDmr1vKEJqFwKvmLA+lFtey3fPfAE18q03f1Nygj4lCaczI2ATmtgosMByXYG3I4r4QDibWLnJstm0JJHujBLct+6Cpwzk3P5LHTFVABPGoq6YisaDsY794D5htdkT1GHeQK26CUpZYdFb8TpNxJdKvVmCu4nF06bm6P2a8S0MIwzbYa0Gsl0z4eFEh22l5jGtslW9YoFXaQAU6Moth7mVNnT89kpYbFuRXuoxITurGXo+xoEIkJRyAY+NCeLllGa+eAssVZiLaXl1tJDNVf4OBrAOtqNkeYnu6aaDq69MAgo2eJlv3pS1y/isPccYoalO2bSFKu5EMFxddD+AN6SR/A+pFVG4E3m8RQ7btHOLbEmkzo693tkLOqqczaWEwA39gGscARh4nGhjGJwpxPu078EuwsOKag+XslyqQiHBahCzo5PgFb1Je3HpJPtMtvXx3am9dvMDSqkJdp6MOVIOUhyRG0bwA==
+ ARA:13230040|82310400026|23010399003|36860700016|1800799024|376014|3023799007|10067099003|11063799006|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: X0FRQ+aptRu7fpYQQUwWMRjb+jOnO4+W8Fn3Q79SqyirZWBvXv/eQJwJ4eU6fXgqftARDmZsuHk5Sz3yX12DlIP/z5ooIgYwIt5PRYJlyE3drqtUQdIGcbm6Iaomc1yLmTmhsVVuW/9Md6RCzPnWzArkZunzCqwQRLEHxwGFQrtRm0p/T23lbkdZ2S2U1zLZ2droJL11eo2rO/+H/nK+x3dVeua/xYtfnae5BcfhwHgysUsCgBHhAnJkDEApsWksGzMuhlw3GHCrM0pvXFhf8rfJmZauOv88A2P8Wax76AxZQJMPydZR/EBB30Zjnqm+ZL71Nph9rRALoQ/MzKkqiv2NxvDyYsoCzROVKoAeFfEnqsHLhyPEjWtnFLCkbs7Ze5+/eZiCNS8h7DwQ1zvYKcyZfk8YnVRbZtccvU0/hdIxnFPGh0csyaSNjvBY3Zr3IU6LXhIJS4apx9totTntUIrpsPtLjeTF5Cb2hX2AZ9ySDrSXNNr4cZ+fAZ4RT6A5T+bgTKngaQ19Njpx/pF5GKGzi1xg0LbXUYR3VHu6fSA2ZvgX315gCpd/mkcQ91XpR1Ra5LxT4JJcLe0SxD1Jx1suaXuApRyGCUwYwr+o58wQq4w/9lC6KVSo/OvQUsA7wHiu1wGFJ3BMkcsGr/+SCy7OcUGFcoZM0TTK7f1T/7QXOsq2U9u29QCneKl69iBY0J03aO1oc3j4lxnQBUXbiA==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(82310400026)(23010399003)(376014)(11063799006)(56012099006)(10067099003)(6133799003)(18002099003)(13003099007);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(23010399003)(36860700016)(1800799024)(376014)(3023799007)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: DMuKrjdIonnYjdrWCBP9JPpy6tuvWWGQgWtYIJ04Nsex058bBDOefKYhdrAwW/0wLjKbTs592gv/QT9k3D7BC94PaYzkRccNbz/mE1tPRvNDpB2cm/Rc8ZSLrlmF16JEGsxpxc57PhrhvX7KlxzXPpErql6aVUNY2hDiCM5CchjQ9Qs2fKATgMCVnP6vf9JYCUciSfSrEbHBOAcXQg3nsIVTn9nfxzD8N2i2eog86+zCDZpHGWeU2JFwvjhF0Zz4qdbMvayneSI5ARYk1wNgncYvL4fYhb9aPNDh0jXGEsZsZvyIjCSG35QEcHznE3Lo5cZBudeGr5MtiEBUVnzm4ZNJxaPO4Iy3lICIDrbmA6yKgZCtQt8Dhq14ZmMgWJ2XDSZRsLEMfVB1ng6RElwXKxJL0fRVOxbRQoNWEFroVuYWjjWzXf90xY8k+nKVb0FS
+X-MS-Exchange-AntiSpam-MessageData-0: hIdNMStXtE2SLJWcnMw9buFCZFysylrXJ5vfF77WHPeequttAj7q3/tXfGZCJlG2v7P5OLwa86g+kbEJ2UI63NWpeHPAIpyDy9KeJF/SH3W0InVU5y8DsyENUnLeocax8xulEDwJcZXqMKvwNayscXMAjhNXxM/DiqAYg0/2QQd8M4FlwbAiL5dBLalA0Jd87xVv6S38eCyTR8zhoFzSmSaYSwRIuzui9WGs7+HJs5jqEazESyu1CCB48wy6/Fh48ztGy/r/NSy9HRelI72OWg9TyVRnAwN5U17/LITofaAM3r2utsjts+KIKsGz8JNrIVUBW9c01ht1JiM6zHJkwrLITuQ1EL2FhurBhab51sZ8wqNx/USjWW9dQJHk7VIwYSM7zdn+b8hm2shiQDOgAuERPVYe9obfUlZyD2g4lrw8pASP/j2PFC/nwiC9MF5x
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 10:53:28.9408 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe8e5cb6-5231-437a-228f-08def796c70d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 10:53:30.7400 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ffc577c4-a36a-49be-de89-08def796c824
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992A.namprd02.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM2PEPF00003FC7.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6907
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7355
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BuFTq3SWry/Zh/VlW5OvILljH4mAalaqdLkERdD/igI=;
- b=ii0zjHaZ0PxPTa/6rXxcnAK6GSSIBdO9hr/4fIt1v0JdWcI9IAZlAMFrYqElh9c+rxYZ0iypJ+8wGLWF4BITlJCMzIXI7KxvgpJE+1T2pR3VgqMm60YX9XRFCaqVMbTEMUU9uTabEIMgPgfYdotp2lMEd0p9jOrzyIT0Bc1vziw=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=ym62MmdFPdFMANiEeAG2A4mSXgy+eBzziO8CnD0r6VY=;
+ b=IaQiNNydZbTIdpkXcFSiyibtEKjNe6i1LDMVrUYtoVnROgBHV2cK+gWnG93/2a+O8OOy1Fsv+gr9GFRUSlsv/7VDfBrFVpYge/0IGLoJEhexiyOGFyeDVM5d7NeHKD9xbsLireVOC7F+qt2SVo8JnKXXcC70QQBBqRTFLWRA58I=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=amd.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=ii0zjHaZ
+ header.s=selector1 header.b=IaQiNNyd
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,85 +154,37 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series improves diagnosability of GPIO offset collisions and fixes
-four related bugs in the gpio-delay driver that were uncovered while
-debugging such a collision.
+dm_gpio_request() returns -EBUSY when the requested offset is already
+claimed, but gives no indication of which label already holds it. Any
+caller going through the uclass API directly, rather than the "gpio"
+command, has no way to see this at all.
 
-Patch 1 logs, at dev_dbg() level, which label already holds a GPIO
-offset when a new request collides with it, from within
-dm_gpio_request() itself, so a collision can be root-caused from the
-uclass layer when actively debugging.
+Log it at dev_dbg() level: silent by default, available when actively
+debugging with this device's debug output enabled.
 
-Patch 2 adds the same diagnostic to the "gpio" command, at printf()
-level. -EBUSY from gpio_request() is a normal, expected result there (a
-pin already owned by a driver or hog), so the command already tolerates
-it silently; this patch only prints which label holds the pin on that
-already-tolerated path.
+Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ drivers/gpio/gpio-uclass.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Patch 3 fixes gpio_delay_probe()/gpio_delay_xlate() to size and
-validate against the driver's actual GPIO count (from its "gpios"
-property) instead of a hardcoded 32, correctly sizing the claimed/name
-tracking arrays and matching the pattern used by the generic uclass
-xlate implementation.
-
-Patch 4 fixes gpio_delay_xlate() to propagate the requested index into
-desc->offset. Previously every consumer's descriptor came back with
-offset 0 regardless of which index was requested, so on boards where
-gpio-delay wraps more than one real GPIO line, every consumer past the
-first silently collided with the first consumer's already-claimed
-offset 0 and was never toggled. This was the root cause behind the
-series; the other patches are diagnostic and robustness fixes found
-along the way.
-
-Patch 5 adds a .remove hook to gpio-delay to release the real GPIOs it
-wraps. The driver requests them via gpio_request_by_name_nodev(), which
-strdup()s a label into the wrapped device's own uc_priv->name[]; with
-no .remove, those requests and labels were never released on teardown.
-
-Patch 6 fixes a related pre-existing leak: gpio_delay_probe() bailed
-out on the first failed GPIO request without freeing the ones it had
-already requested, and patch 5's new .remove hook doesn't cover this
-either since .remove is only called for devices that finished probing.
-
-Patches 3-6 are tagged Fixes: c866f2f197e2 ("gpio: Add GPIO delay
-driver").
-
-Changes in v2:
-- Patch 1: downgraded from dev_warn() to dev_dbg(), since -EBUSY is a
-  normal/expected result for some callers (e.g. cmd/gpio.c, and sandbox
-  tests that deliberately exercise this path), and warning there fired
-  on legitimate operations, not just misconfiguration (Simon)
-- New patch 2: moved the user-facing diagnostic into the "gpio" command
-  instead, where -EBUSY is already known to be expected (Simon)
-- New patch 5: additional related fix found while further exercising
-  the driver
-
-Changes in v3:
-- Patch 5: added an in-code comment explaining why the device_active()
-  guard is needed, so a future reader doesn't need the commit message
-  to understand it (Simon)
-- New patch 6: fixes gpio_delay_probe()'s partial-request leak on
-  failure, reusing the free helper factored out of patch 5's .remove
-  hook (Suggested-by: Simon)
-
-Sandbox coverage for the gpio-delay fixes in patches 3-5 (exercising
-the offset-propagation, gpio_count/bounds, and remove-path fixes) is
-posted as a separate, dependent series:
-https://patchwork.ozlabs.org/project/uboot/list/?series=516335
-
-Pranav Sanwal (6):
-  gpio: uclass: log when a gpio offset is already claimed
-  gpio: cmd: warn when a gpio offset is already claimed
-  gpio: delay: set gpio_count and validate index against it
-  gpio: delay: fix offset propagation in gpio_delay_xlate()
-  gpio: delay: free wrapped real GPIOs on remove
-  gpio: delay: free already-requested GPIOs on probe failure
-
- cmd/gpio.c                 | 11 +++++++++--
- drivers/gpio/gpio-delay.c  | 40 ++++++++++++++++++++++++++++++++++++--
- drivers/gpio/gpio-uclass.c |  5 ++++-
- 3 files changed, 51 insertions(+), 5 deletions(-)
-
+diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+index 7559b8dc7e2..9451b7db4af 100644
+--- a/drivers/gpio/gpio-uclass.c
++++ b/drivers/gpio/gpio-uclass.c
+@@ -391,8 +391,11 @@ int dm_gpio_request(struct gpio_desc *desc, const char *label)
+ 	int ret;
+ 
+ 	uc_priv = dev_get_uclass_priv(dev);
+-	if (gpio_is_claimed(uc_priv, desc->offset))
++	if (gpio_is_claimed(uc_priv, desc->offset)) {
++		dev_dbg(dev, "gpio offset %u already claimed by '%s', requested label '%s'\n",
++			desc->offset, uc_priv->name[desc->offset], label);
+ 		return -EBUSY;
++	}
+ 	str = strdup(label);
+ 	if (!str)
+ 		return -ENOMEM;
 -- 
 2.43.7
 
