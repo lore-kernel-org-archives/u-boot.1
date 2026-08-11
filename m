@@ -1,58 +1,58 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B63F5C5CFC1
-	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 23:17:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B335C5AC67
+	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 23:17:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 08E99407EE;
-	Tue, 11 Aug 2026 23:17:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 60F57608F4;
+	Tue, 11 Aug 2026 23:17:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QlHT9f3j3TQ5; Tue, 11 Aug 2026 23:17:12 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P65-o1fDzfBD; Tue, 11 Aug 2026 23:17:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F03F7407C4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 27F84608DD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786490232;
-	bh=b/qG3LuRslkOD8EvPcXQW+ILYg6sVkUjJybDvh8xHjo=;
+	d=lists.u-boot-project.org ; s=default; t=1786490233;
+	bh=zI4HCTs0ecWREoRYyYhJAX3AJ4TptSpbtFbPh/iYhW4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FeacyHtH7uw7AGYQOb3hrHeEXkyKzHsQck8031zks923YhA1toP69nKJL6R2dBfH/
-	 tPeTq9WvhpYIHLYndL0Gsj9/QX8S+bNdBnUWuuUAOfc4i+EnfJ9K/RMQVpz1EYzFlm
-	 tgIE3nPL7klAW3hlhk4BrdGgwZjvKU/VLS95wKUwfdn1uv+kNZ0HPqtjDG6WpDaB4Z
-	 ygNWuYvnJ0bhdQO2D/SgoQrbMKYFgcXZJRV8zvjkZoBechrS87+qSvgCSip0x+qQZu
-	 9ZPaSOjmj3VhTLLyLTprOafIoz+KdGgkUzf5vqm4hKUi+5rLTOuk5WmXu8rWxNhCAy
-	 rNea7UMmg8pLA==
+	b=QfRtKCV9Hsr4OcsTRZ3F8qXZ/AEQFrb8pn5oiL7lp1CT6HQGjAgIlZ0hUhaA4z7Tn
+	 0FiDD6sqcsfcA8l4SYDUVt83jlAuHg/nX6AjlOBpAKz2F8bDX6BoLzVC8YWPo3N1SA
+	 nEQhkA/DWgbHYFgRHokXYVouWAAlcbUEVwo/yn/OJe3bj6EiwSEnwpdVU3W/dWj15q
+	 +RWHoJ43NwXi4rDNMlWS3Ija15ROqzJZeGwTVCVV/TZ0S70VMFFYOfc1lcgYfcrnxu
+	 5nq+xc5vNlLKtlWIf2FR8okDrFuEPXSXj2xDXIaW6diQzPxHj/MbDrl7sjSXO9l0wY
+	 gEUwxVKs5bvAA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F03F7407C4;
-	Tue, 11 Aug 2026 23:17:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 949B328A
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 23:17:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 27F84608DD;
+	Tue, 11 Aug 2026 23:17:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A81CD2E0
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 23:17:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 86E5581193
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 23:17:09 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8266581192
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 23:17:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9k7XBSyp_udk for <u-boot@lists.u-boot-project.org>;
- Tue, 11 Aug 2026 23:17:08 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ id nb_dxrOpFakW for <u-boot@lists.u-boot-project.org>;
+ Tue, 11 Aug 2026 23:17:09 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
  envelope-from=srs0=7f0c=gf=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 7A7148112C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7A7148112C
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7A7148112C
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 23:17:08 +0000 (UTC)
-X-Forward-Email-ID: 6a7bad71a067a7a17f1bb5a3
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 992C08112C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 992C08112C
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 992C08112C
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 23:17:09 +0000 (UTC)
+X-Forward-Email-ID: 6a7bad73a067a7a17f1bb5eb
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 121.127.44.66
 X-Forward-Email-Version: 2.13.10
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -66,10 +66,10 @@ Cc: Joseph Guo <qijian.guo@nxp.com>,
  Emanuele Ghidoli <ghidoliemanuele@gmail.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 2/3] lmb: Return -EFAULT when freeing unallocated memory
- regions
-Date: Tue, 11 Aug 2026 23:16:48 +0000
-Message-ID: <20260811231650.3150771-3-jonas@kwiboo.se>
+Subject: [PATCH v2 3/3] boot: image-fdt: Restore suppression of irrelevant
+ ERROR message
+Date: Tue, 11 Aug 2026 23:16:49 +0000
+Message-ID: <20260811231650.3150771-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260811231650.3150771-1-jonas@kwiboo.se>
 References: <20260811231650.3150771-1-jonas@kwiboo.se>
@@ -79,18 +79,18 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kwiboo.se; 
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1786490227; bh=b/qG3LuRslkOD8EvPcXQW+ILYg6sVkUjJybDvh8xHjo=;
- b=Sbn8I9JNbP2OZa6dfhiap8Dj+YN+xpHCetVfFxt0EJqZK21u0l22uM9s1Cduu5gx64Y2aNNzr
- BzV25Kmc31w+fj0Jz5yIn7LDkZja2C0pabOyzrg0ipciH8dvc3uDPSMFqZiQEttzikQuawApNti
- tSPp1SY+75PPhzNnjtR1rIzOGuMEpqHMYnzPY4thjBLeaYRNUepgxlLeEmTsLxhOtcbnQnpeMqD
- NKBvl3fDbb7Q6UjuQn+AQtbuoyfi6yn03S31uXL0nFFKUtyLz0wq4GR+YWSa+b8ibIKlTaXeHje
- VejWbw3T3AiznlXwb2bGUmnC0p4u3Gnoq57G3nbc/8aw==
+ t=1786490228; bh=zI4HCTs0ecWREoRYyYhJAX3AJ4TptSpbtFbPh/iYhW4=;
+ b=KNT5rfbCCVMNaH88TmQ7/rwp1xuylRNYTJ4xLHHBN8nUVRgjb3R3O6MDZjy5zaYUepppe4eO9
+ hxwVH6zP/9IkEqx0iveafrZKw7eOP687M3NziQpHqXYB+bLGhMJzQLGmEseTYoUVCIYMTy5W4rs
+ OeBV1IE0gA0l0uIjMZpwJKxXd3UOgVD1ne1v0ubtcw1R2bFifjuCGwttDnXHom/BjaRMQDnZmrW
+ 1D0mxVydfBpWShAwjv4bBIF6v9zL1E3KvO1gpYU4Rb+QQZ6mL8qe4AUe8dMx/tgsAqYGicpunty
+ EA+J4GGu6S+iqmBbrGoxZDwH2SynFRjVAI06h84pQ7vg==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=Sbn8I9JN
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=KNT5rfbC
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -105,58 +105,66 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Make lmb_free() return -EFAULT when the requested memory region is not
-allocated, instead of the generic -1 error value.
+The commit 623f6c5b6ab7 ("boot: image-fdt: free old dtb reservations")
+removed the suppression of ERROR messages when -EINVAL was returned due
+to the memory region not being part of the LMB memory map.
 
-Document the updated error code in the public API comment and change the
-LMB unit test to check for the new -EFAULT errno value.
+This causes an irrelevant ERROR message during boot, e.g.:
 
+  Model: Radxa ROCK 3B
+  [...]
+  ERROR: reserving fdt memory region failed (addr=10f000 size=100 flags=2): -22
+
+or
+
+  Model: Rockchip RK3288 Asus Tinker Board S
+  [...]
+  ERROR: reserving fdt memory region failed (addr=fe000000 size=1000000 flags=4): -22
+
+FDT correctly contains reserved-memory for 10f000 or fe000000 and U-Boot
+correctly does not make these regions available in the LMB memory map:
+
+  memory[0]      [0x200000-0xefffffff], 0xefe00000 bytes, flags: none
+  memory[1]      [0x100000000-0x1ffffffff], 0x100000000 bytes, flags: none
+
+or
+
+  memory[0]      [0x0-0x7fffffff], 0x80000000 bytes, flags: none
+
+With lmb_alloc_mem() and lmb_free() both returning -EFAULT when the
+requested memory region is not part of the LMB memory map it should be
+safe to ignore these errors when FDT memreserve and reserved-memory is
+being processed.
+
+Print -EFAULT errors using a debug message to restore suppression of
+this irrelevant ERROR message when memory region is not part of the LMB
+memory map.
+
+Fixes: 623f6c5b6ab7 ("boot: image-fdt: free old dtb reservations")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- include/lmb.h  | 2 ++
- lib/lmb.c      | 2 +-
- test/lib/lmb.c | 2 +-
- 3 files changed, 4 insertions(+), 2 deletions(-)
+ boot/image-fdt.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/include/lmb.h b/include/lmb.h
-index 028dabb19e86..157a24baf978 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -168,6 +168,8 @@ int lmb_is_reserved_flags(phys_addr_t addr, int flags);
-  * @flags: Memory region attributes
-  *
-  * Return: 0 on success, negative error code on failure.
-+ *
-+ * The return value can be -EFAULT when the region has not been allocated.
-  */
- long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 9e0e0f93edd3..956a3d97c420 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -91,10 +91,10 @@ static void boot_fdt_handle_region(u64 addr, u64 size, u32 flags, bool free)
+ 		ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size,
+ 				    flags);
  
-diff --git a/lib/lmb.c b/lib/lmb.c
-index f7c2e826d067..ca00047f6242 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -286,7 +286,7 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
- 
- 	/* Didn't find the region */
- 	if (i == lmb_rgn_lst->count)
--		return -1;
-+		return -EFAULT;
- 
- 	/* Check to see if we are removing entire region */
- 	if (rgnbegin == base && rgnend == end) {
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index b93b903f99f9..168c66ae6499 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -477,7 +477,7 @@ static int lib_test_lmb_at_0(struct unit_test_state *uts)
- 		   0, 0, 0, 0);
- 	/* check that this was an error by freeing b */
- 	ret = lmb_free(b, 4, LMB_NONE);
--	ut_asserteq(ret, -1);
-+	ut_asserteq(ret, -EFAULT);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, a, ram_size - 4,
- 		   0, 0, 0, 0);
- 
+-	if (!ret) {
+-		debug("   %s fdt memory region: addr=%llx size=%llx flags=%x\n",
+-		      free ? "freed" : "reserved", (unsigned long long)addr,
+-		      (unsigned long long)size, flags);
++	if (!ret || ret == -EFAULT) {
++		debug("   %s fdt memory region%s: addr=%llx size=%llx flags=%x ret=%ld\n",
++		      free ? "free" : "reserve", ret ? " failed" : "",
++		      (unsigned long long)addr, (unsigned long long)size, flags, ret);
+ 	} else {
+ 		printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %ld\n",
+ 		       free ? "freeing" : "reserving", (unsigned long long)addr,
 -- 
 2.55.0
 
