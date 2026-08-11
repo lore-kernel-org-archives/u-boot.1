@@ -1,111 +1,110 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED1BC5AD7B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 05:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15B9C5AD55
+	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 05:19:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C83D04071F;
-	Tue, 11 Aug 2026 05:19:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 430CD80ECF;
+	Tue, 11 Aug 2026 05:19:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id L3d63H8PfplK; Tue, 11 Aug 2026 05:19:13 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U-YTVbRpzCys; Tue, 11 Aug 2026 05:19:19 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CCA2940714
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 042C080EB3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786425552;
-	bh=z3i+08OZHbvU+2FiqRlwGjE6dFsl7NfhpqCkr6lFmIo=;
-	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=aYXlbFgldsGmBQlkZ9TQp0OpJkrG9n8FKZcxTrPO0eUkKFuV4QPpkcnobYVt4Vxr9
-	 qoFyEiv8pFYljK+zAEDWLUtUmS0QLnonOqcb/4HNZzskAWfCXoHuuyBH2M7Lb96ye1
-	 gj8gNuLZukT+ltoVK5EAbXqeF4ECn+GigRa3zOSygpPkz/rSyHWHALQ7Lj3Axb4RLL
-	 CylM4UkIWTSqXfEzh/mUW0oOi2a03WEVSGpdL/tq/oGyBzOwfcR4eibvHn3k8LriK0
-	 Kfnl/st4MJFreHqiqb6idwgV/utSADbjqkANrwBcQ6VdiOhsYBN7B0kvFab8GRcweR
-	 /vtUMsjzgAi3Q==
+	d=lists.u-boot-project.org ; s=default; t=1786425559;
+	bh=CEB8rUnGjAE9JpA/mDPCK5X9XqscSRuSSlmuWQ6H354=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=klkA387EjRygZE8+vSh3M+lITtJkfOGjHOCQ7oqHcaHbi3MReR/5AyqIe1Lx3yliF
+	 OwgtQ2Rw7tw5AO8vuULmHpnoJeEDS3FFxy+483aLwD97FpgzxPgYcAUlGxpsF9FDle
+	 NdKWf2DdPGcTHjKK7hSAon0S1i2i8E1tIPG1sxyI9yamU80cGoUhEWURQmomC8BhUg
+	 6dSyg28EGfgLn40IsJHzVXkKv1VVdlfmTzFGmvx2QWd8nvkQdZ4h5aHmdLPzyRC+t+
+	 aZoDBJFnEkS6EiiHPPoDqsVyIeeYmizUruTcuJ/RDHcL517PD7ANnXDZ+YjJbCJNY3
+	 IvLMbp14GNf6Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CCA2940714;
-	Tue, 11 Aug 2026 05:19:12 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 562F9259
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 042C080EB3;
+	Tue, 11 Aug 2026 05:19:19 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 48F59282
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3CDDD60634
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:11 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3AEE560634
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M4ZNyRlQj8UI for <u-boot@lists.u-boot-project.org>;
- Tue, 11 Aug 2026 05:19:10 +0000 (UTC)
+ id G9Vo2LaC6jEF for <u-boot@lists.u-boot-project.org>;
+ Tue, 11 Aug 2026 05:19:16 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com;
  envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 39FEB60629
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 39FEB60629
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 30E2060629
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 30E2060629
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 39FEB60629
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:09 +0000 (UTC)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 30E2060629
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:16 +0000 (UTC)
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67AMqWF82997309
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:08 GMT
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjyf2cdv-1
+ 67AMt3NU3314270
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:15 GMT
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjyftccm-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:08 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2cfa4e4684bso76521785ad.2
- for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:19:08 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:19:14 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-38e54b6556aso3401436a91.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 10 Aug 2026 22:19:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786425548; x=1787030348;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=z3i+08OZHbvU+2FiqRlwGjE6dFsl7NfhpqCkr6lFmIo=;
- b=jgvBAut7qgVVxwi7rIa9rvbhnmMfs5SOLsBYJeo2lZHcXqaw29PvZ0NyZSf1/b1YnT
- E6AGeva6Ovtm2msxAKRpWVvp+ja/elrwodwrG0oiWf30+YUTajPzVZmrK8saMrq1bEjm
- IyipT2oADtMA142v5/0WpC3BWt+/FL4NPWcaHiuAm8u9llATjsaPg6omCdRKYYIoLmiP
- SBiHafGL4HmHPg9jzNgubIe6lS9rIGoZec95ICXM7oPwGl5+j6J9XwIx59y1Leeytv7Z
- Izx8IQdJxbBaba2IJoZ8ko9+kKxJ2vRTUiAv8NEYk6jr80vCwec7G2gSSoBpIShx+7oD
- ovbQ==
-X-Gm-Message-State: AOJu0Yy09TMqDhhPZ1We+7VNNed0YkGYbqzsIeCCt99DmIOl/m7SoGjS
- 6wyEvemgdjoNzMbMVvEFAIxiHFaY6T4zKkO0o6qZH05TPitobvffjh+lwQ1IbliVpjoWpYoHFuy
- TnzYqS5a2SIKxUf+1KNqnRS8A5GwRaZR/TTtY5D2pdwomXjoYdJ5+vXV3o/th48CTCTALFH0=
-X-Gm-Gg: AR+sD13mRZ5ApAgRiicY8jUTUrMf2nN3pWlTMn320xE2qCMJcvvwzmkjhmrQW95vGJq
- MY2wajXMd+JRwEQhWSoqENT/mJnOiB8JrTdvSdomMTdgw7C2PcY/osw43xgZYsXGhxULye4gsLf
- WPJEWbv7nI6Vy5LI0cXjl/W1VJKgVEOrsua36BmJZUjIG2lOJ5VOZwG25d3Uy9CvgvLaO34504A
- xxm8R3D9R8I4rGInbEa1b959P1FCI+jTijcuOj6Q0eTgLFWRpChpvSjUDNfCxS6oaFhri6I8+G2
- fhoAJrRXDJXvc5oiW83mMhpqs8X0mpjPZfS/urpe8hAi8HS26dq8etMyZpoNGTU7Af8req5gYBW
- sgvBh588GuvXOIibWG+HIN2WQUUgr3bww6JT1I3u1nm6Y+MK8RZgenL1CPrjzElCtVd+T7DX0dR
- E5ObNCu5Rc/gab7W//ri9nVKx7Breh
-X-Received: by 2002:a17:903:468e:b0:2ce:fa3a:45f7 with SMTP id
- d9443c01a7336-2d317904fb8mr11086385ad.16.1786425547662; 
- Mon, 10 Aug 2026 22:19:07 -0700 (PDT)
-X-Received: by 2002:a17:903:468e:b0:2ce:fa3a:45f7 with SMTP id
- d9443c01a7336-2d317904fb8mr11085745ad.16.1786425547204; 
- Mon, 10 Aug 2026 22:19:07 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786425554; x=1787030354;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=CEB8rUnGjAE9JpA/mDPCK5X9XqscSRuSSlmuWQ6H354=;
+ b=CMwxt0Cz9xGUFjSGMvWxVwQ+VdQfvh1XaKPCoVcozMWLIqfGIqQOxmkYnbD0UWfkrG
+ h96GXGEV3MNk9Xu8EeydM4k8bpz79gvNfLD7cmXyBIR7vqjpkZ22e0a7UYZrPloA6hp7
+ O5IxZ1VRK07232KjS5W3rXjZk+5xqCRqfqg+fvAJJY0VGRt/XE9pL7ZAGVLZXg2nLT6u
+ nK89uxQAto9kArCH8tf9hJTZPKvTOeF4gNyZF5pkDmtwNE4VbDi+9R/WMphhRxl9yUMT
+ mfYjkKu//seonD2NZM5JX/scRguHaLM9vyg+FlYfM662SKdCjP4c/0aK9chUTin0++9H
+ GB/A==
+X-Gm-Message-State: AOJu0YyqIUF4aaQk2DAXox0s3FeAmgXSoUeyakmj00LkkHM7I4AhD6+C
+ sKrDW6/EpIPEqOzPtNswx36KlH9nrWSDR4vT0YT1RYKUjnde0tyBaTOWIIm9IYvJ8/f3xbuUq1o
+ bk+MwUAXNOe+N0yhZCO7GsEqo1ACrXc/nXZxIK6wM+IYdtVcUFmUK5v3Fr7CMlzBEad/8FXY=
+X-Gm-Gg: AR+sD1147yNCgKulnMfWB74m63AhzEM7nH+U8beGKWc0mqwdMJt9e1b3HQLOdx4PbOb
+ 5LS6DhaqTMmXdhKrfUkwUdeBudx3tPSaY8zUmw74XV/xd8+f5J43B+LVJlOVo9Pzqj7D7eD6jfq
+ gh+GGcuHpHwv6bMU0nrFf56qAm3XxqxFqOjbz9hFYXPu41vj1LZy+qX9MEMLT5IkixshcUdm+LC
+ MtNZLphnO5u064p0OpYtXdqO+sutSBgunRuJ3WFwVVHNXGWTLK7e2bCMqgiYwS9eYS6x2JdzUup
+ VdAnmWgyjUKL919iFTHEJQfhdVSUUdzHzcMRTByDwLPatq2rOm3V1eFYDHlY20gPzoqxpkIront
+ jJ2eQI7CsZNIEYTrVWikBR/9po8TfNnLzmc8LaBRqeR0XWnaxQzEHeBQep8qjdhkNrbsYfbemve
+ j6nMKozzqwfrl3uF69Q17NtTDLnzq+
+X-Received: by 2002:a17:90b:1d8e:b0:38f:18f9:785 with SMTP id
+ 98e67ed59e1d1-392ec3a9ca1mr686344a91.8.1786425553766; 
+ Mon, 10 Aug 2026 22:19:13 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d8e:b0:38f:18f9:785 with SMTP id
+ 98e67ed59e1d1-392ec3a9ca1mr686319a91.8.1786425553253; 
+ Mon, 10 Aug 2026 22:19:13 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31c619d01f8sm1353804eec.2.2026.08.10.22.19.01
+ 5a478bee46e88-31c619d01f8sm1353804eec.2.2026.08.10.22.19.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Aug 2026 22:19:06 -0700 (PDT)
-Subject: [PATCH 0/8] reset: dispatch DT-declared reset modes via the
- reboot-mode framework
-Date: Tue, 11 Aug 2026 10:48:35 +0530
-Message-Id: <20260811-b4-reset-edl-rebootmode-v1-0-2e15adc156a3@oss.qualcomm.com>
+ Mon, 10 Aug 2026 22:19:12 -0700 (PDT)
+Date: Tue, 11 Aug 2026 10:48:36 +0530
+Subject: [PATCH 1/8] reboot-mode: parse up to 3 magic cells per mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKuwemoC/x2MOwqAMBAFryJbuxA/qHgVscjnqQtqJBERxLsb7
- GaKmYcigiBSnz0UcEkUvycp8ozsovcZLC45lapsVFcoNjUHRJwMtyYy3p+bd+DKtFYrW9WT0ZT
- qI2CS+z8P4/t+Q7cICmkAAAA=
-X-Change-ID: 20260810-b4-reset-edl-rebootmode-3b7ca0c34fba
+Message-Id: <20260811-b4-reset-edl-rebootmode-v1-1-2e15adc156a3@oss.qualcomm.com>
+References: <20260811-b4-reset-edl-rebootmode-v1-0-2e15adc156a3@oss.qualcomm.com>
+In-Reply-To: <20260811-b4-reset-edl-rebootmode-v1-0-2e15adc156a3@oss.qualcomm.com>
 To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
@@ -121,73 +120,72 @@ Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
  Aristo Chen <aristo.chen@canonical.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786425541; l=3931;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786425541; l=3854;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=7an8ITXzDdegARTeokpmVxZvjhHK/rLkg9KT9myZ1DY=;
- b=dTlrscNxXqZRlok2/bh/W+QTHx3TYTmfmcNGDvEDLHseHxOMBFPW2tobgPlk0avViPnS7C41+
- KQOc/8XwVk8CIYk47HELJoBPBwOGPqBKK6QroSSn6p6MbjLLXNrTHKa
+ bh=WxQo5kkncHeCwbo0OD6u4Gd+LTcnFC4aWZjfGt0KvtE=;
+ b=Zn/TrZCmjXSTlIU4/qZ27CcP0hzBKmozJjuQzWihQNdk0BmMYvFuh3yWKMX1X6PLQps9oXJLp
+ tYJkK1+mmHFBvCjeIgBuk/sYi+zFELkxBWvijGQdvvnbG8XQNASp++p
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: 6pKw2_Hr21ClpVJl0bll-pORfzW_znEP
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDA0MiBTYWx0ZWRfX6HizPltS9DNA
- yuyZ6DuaSX47Ma9ZshFfsB4GTBV4nfIDUdrU851MxbW6zIPGfpMFrsS5O2BE2CIECVrcH3e6EAn
- e8b84RfKFUx0umcu7gw7Nj/7zPCeHwg=
-X-Proofpoint-GUID: 6pKw2_Hr21ClpVJl0bll-pORfzW_znEP
-X-Authority-Analysis: v=2.4 cv=NqnhtcdJ c=1 sm=1 tr=0 ts=6a7ab0cc cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: cqqn_RELCou53sjhekrOq-Tbzwp4xMEf
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDA0MiBTYWx0ZWRfX+qJdMMsnyH/P
+ aPR9b4IImxNDlbnWZXoaqzls8eIfwqZQMtLGmqBk+0SaMIwoOriUF9zzIvvzBLQ7yPIrIR9kBWt
+ qO/P5x0+ScbkElOyO4XmqePobw9lQI8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDA0MiBTYWx0ZWRfXy08QiWc68AkE
+ Afmof2xJhlme2EJ7FRGRAOpS8R048ziTdzAkNawFL407IoWnPNOVHnGwKFwTCwiDWPIZYV6ur4z
+ F3mPm2RgBKkEsZ89yqUQXwXbszDKaRstbacUNWYuZD/T6U2a4lV2aYuMu+cMVTmE/s2fIJWgg9b
+ tNPkIfDJW+Cq8wki9I18ew5ARDWIf4+Kv7RjBmD6EIMWTCeYgipsZ5Hqr2xSnAQcamymptaBb4H
+ mQKiuxiUsLU3JnjCR8B3cxmVXx5FJjZWBE+DkDZQpCDTkaqLpTifdsZFtPA98Ia3oF65vd8Cx3j
+ Kdol2ys79tPIpbePv6P6BRBVaPcIveWeFSoMgihLAhp1hC15yJNOum3KimYUf6XeVymrQ6gJGKi
+ ahIN1Zyw4axHbh2tFL2rHSwzNdl7RQWwPfWMlidA77laraO33y1C1ghVnPnO3M7O1y9GsR07Wg2
+ VWdop0SEcz5WOFArGdg==
+X-Proofpoint-GUID: cqqn_RELCou53sjhekrOq-Tbzwp4xMEf
+X-Authority-Analysis: v=2.4 cv=Zd4t8MVA c=1 sm=1 tr=0 ts=6a7ab0d2 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pUax2vqHjk9CiN5rtFkA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDA0MiBTYWx0ZWRfXyRlHeRc3DvaB
- Mi4vdW4cvhA/0DQJ3uVDSDXMJNOY6N3X2u9X3s6Jyc38CJVlMGN9BHkul7McB5DlFWDP2oVDjEx
- bpyIPLAKsufqMQV4G1tT2KlkNfAf80RSMNzf2TOHBxdmSrXUUd4eZHO7NCyzDObI5PM1ojRVXFy
- faR+R2IfAdOSXAD6Yv4AAm1+7U/gZ1ZtNV79/69zSgsd5OzkhhNMKK+GROY1hM3cSqDSC48cnJd
- bkpbrW/OzswVd13jI8M8eYBhyt63odgulUed06sSy2KYuWSVak/ffP9T6h2ThW2qY/RgoN//tj+
- UmfOmUW+agDTEGbl4PUXeiXsB3oAMLG6iVWgaAcmo+twJnjLZYDxycXjl9ei31EccAk1ChuYgHe
- yya1IAGtgpkTAdB5HjSstzQMSsBOmTL6OVQIHDD3/6dOB/28Q02ArEdtETY4SDA3yfUcntFLSUe
- 6f7eHbJ7+6G/s4RhEhA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=GESHroN6_YRezIVDoYEA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-10_06,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 impostorscore=0 spamscore=0 malwarescore=0
- phishscore=0 adultscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0 adultscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110042
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=z3i+08OZHbvU+2FiqRlwGj
- E6dFsl7NfhpqCkr6lFmIo=; b=jzvCP/eq2KnsnkvdzS9PN4i+Ipcx3DUGjHs8An
- naC5fLCtFTBK0xoTmoClaaZChSSfcyPUjR+73Z65n+sythbLlwi3FpUg3DFssRlG
- /MSuJlaFJDIGBEHhIe4dj0+XQ5t5U1KEvZ41jYe3bpA/W9Oqr0WAPxDilggVMLt0
- 09h5xEKoNUpd80hzgoz/ZbyEeWP/wrgeiikvcSUC17d4f4bGGomYlY6RY1RWrVnM
- 9YxCu2LDlTNWgFXX93L8gc2S8wC3HJKxTA57GHlbyh1Xve8fthwGcea/rq7BBCJk
- diyf1Yrt61O1hmT4/wXHAEU5jiR54W/W3USd5bdfwuZUa3Mg==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ CEB8rUnGjAE9JpA/mDPCK5X9XqscSRuSSlmuWQ6H354=; b=C632EMD/UnYnmq0D
+ zj8xj0dKIC9VRjmKta8B7Kw9UZCvmT8eEaEN2SrxQXEMzjDV33UdPg0hRW/khLw9
+ DftbOAV3+DKhuYByrp268OUYfheXqerRdMau5S7l4PjKVJu6aPbSTuyblyvCmsJt
+ Yo30ZkF4LFYk5ItaFmF3Ypx9nEMDinQ6eV/uEn2nRrqbQBny6SP+vvAXQ1jO0k5P
+ 8hPuaBNwYS7bwRTX4g00VlFLnVyXj0fhFp9Ldx+yIb2FM2yXUMh0ac0Dn/RTxorE
+ nLqnzihl3CjyNktxfbCqY2bG7iBpjnXUC3P7+wtKK3GncarRRH017BY949V4QCd7
+ xQv5ug==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786425548; x=1787030348;
+ d=oss.qualcomm.com; s=google; t=1786425554; x=1787030354;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=z3i+08OZHbvU+2FiqRlwGjE6dFsl7NfhpqCkr6lFmIo=;
- b=PaBk1EwsRBqs1nROOWeD1OWJVNArecJV5NLGbQ8xnwumilP1LDbtRknBmnElCIp+Z0
- a7oiUQUajndD2Nqi4zzt3mQKrTqR03sJeKCGgaemcQotjUbDyLACBgsOXLMKqgcmsHPI
- wcXn342UbcimGk0IVjdMmpOmUth+HG6Y26/SHmpDj4/jVcgXQ/BEOQWhwjvGN/Df3oK+
- 3MpssoGGhKs9dmjYER35RUrGxCN8HiF/DG2sPfmh56g/tgf7mNOO1ySO4n9KOn6tPw8x
- az+nGVUI4hgRfJYCTJZ7bQl1QFsF3erPL+hHQx+nMWuCxFfmu5fXXK5kSbBibl16jZYJ
- Anxg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=CEB8rUnGjAE9JpA/mDPCK5X9XqscSRuSSlmuWQ6H354=;
+ b=MIFbAsjxGm8ImrAwqLQiOdnRpl+S5gCXZMFjJ3xcxKCf+Zkr2Bca0Jgj/A2kDrp3pi
+ 2UKDTiBRMOlUe/ddVwWMnXkKgMncqo4oTfMt/R6jVfgh7A/ntX+o5tIIKkxjOnZwStLA
+ /uY1dIWtOt1W8MxOGuCPHPe9h5TyVLzwSkk2/MnYO4QiJi7Olhfh6jEkjnHspkPXiLPi
+ Aj+eUSCkXhvhQE0EQpCk4Nhy7f2pMGnegEAN2o32ekgdAlAiSfSSAben4Tagb1Pm6PaW
+ AqgH8131RCJI5k4zcLt/IWTt7M9bZ44K2Rd4wiuHFlLAaTQz1/dbQkVF6wC3pmcEKIVw
+ DCvw==
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=jzvCP/eq; 
- dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=PaBk1Ews
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=C632EMD/; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=MIFbAsjx
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -204,79 +202,112 @@ Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series adds a way to trigger named resets (for example Qualcomm
-EDL/download mode with "reset -edl") without hardcoding any magic values
-in a driver or parsing argv inside one. 
+The reboot-mode framework currently stores a single u32 magic value per
+mode and parses exactly one cell from each "mode-*" device tree property.
+That is sufficient for the existing backing-store users (nvmem, gpio,
+rtc), but a PSCI SYSTEM_RESET2 vendor reset is described by up to three
+32-bit cells: <reset_type[, cookie_hi[, cookie_lo]]>, matching the
+reboot-mode binding for the psci "reboot-mode" subnode.
 
-The design mirrors the Linux "PSCI reboot mode driver" work, which places
-the reset descriptions in a "reboot-mode" subnode of the psci DT node. It
-tracks the v24 revision of that series:
+Restructure struct reboot_mode_mode to hold an array of up to
+REBOOT_MODE_MAX_MAGIC (3) cells plus a cell count, and make
+dm_reboot_mode_pre_probe() length-aware so it reads 1 to 3 cells from
+each property. dm_reboot_mode_update() now matches the backing-store
+value against magic[0].
 
-  https://lore.kernel.org/linux-pm/20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com/
-
-The magic layout here (up to three cells, <reset_type[, cookie_hi[,
-cookie_lo]]>) follows that revision. The bindings are not yet applied
-upstream, so the reboot-mode subnodes live in U-Boot-private *-u-boot.dtsi
-overlays for now and can be adjusted if the binding shifts before it lands.
-
-The path a request takes: "reset -edl" strips the leading '-' and calls
-reboot_mode_request("edl"). The reboot-mode uclass matches that name
-against the modes declared in the device tree and calls the backing
-driver's new "trigger" op with the parsed magic cells. The PSCI driver
-folds those cells into a SYSTEM_RESET2 vendor reset and the board enters
-EDL. "reset -l" walks the same registered modes and lists them.
-
-The pieces behind that: the reboot-mode uclass learns to parse up to three
-magic cells per mode and gains the trigger op alongside the existing
-get/set, so a backend can act on a mode rather than only read one on boot.
-A thin PSCI driver, bound to the psci "reboot-mode" subnode, does the
-SYSTEM_RESET2 call with no argv parsing and no hardcoded values. mode-edl
-is declared on the qcs6490-rb3gen2 and lemans-evk boards, with the
-framework enabled in qcom_defconfig.
+Existing single-cell modes (e.g. nvmem "mode-bootloader = <0x02>") parse
+to magic[0] = 0x02, count = 1 and keep matching exactly as before, so
+there is no functional change for current users.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
-It follows the direction Casey
-suggested when the earlier sysreset "-edl" approach was reverted in
-c480bbd92b32 ("drivers: sysreset: revert support for args in request"):
-  - argument parsing does not belong in reset drivers;
-  - the reboot-mode framework already exists for exactly this purpose, so
-    the mechanism should not be qcom specific and should not hardcode the
-    reset magic values in the driver;
-  - the "reset" command should be able to enumerate the modes registered
-    with the framework.
+ drivers/reboot-mode/reboot-mode-uclass.c | 28 ++++++++++++++++++++++------
+ include/reboot-mode/reboot-mode.h        |  8 +++++++-
+ 2 files changed, 29 insertions(+), 7 deletions(-)
 
----
-Balaji Selvanathan (8):
-      reboot-mode: parse up to 3 magic cells per mode
-      reboot-mode: add trigger op and request/list helpers
-      reboot-mode: add PSCI reboot-mode driver
-      cmd: reset: dispatch named reset modes via the reboot-mode framework
-      arm64: dts: qcom: add psci reboot-mode edl node for lemans/qcs6490-rb3gen2
-      configs: qcom: enable PSCI reboot-mode framework
-      test: dm: reboot-mode: test trigger dispatch and mode enumeration
-      doc: usage: reset: document device-tree-driven reset modes
+diff --git a/drivers/reboot-mode/reboot-mode-uclass.c b/drivers/reboot-mode/reboot-mode-uclass.c
+index 7cbe02eb4ed..80aabf54750 100644
+--- a/drivers/reboot-mode/reboot-mode-uclass.c
++++ b/drivers/reboot-mode/reboot-mode-uclass.c
+@@ -30,7 +30,7 @@ int dm_reboot_mode_update(struct udevice *dev)
+ 		dev_get_uclass_plat(dev);
+ 
+ 	for (i = 0; i < plat_data->count; i++) {
+-		if (plat_data->modes[i].mode_id == rebootmode) {
++		if (plat_data->modes[i].magic[0] == rebootmode) {
+ 			ret = env_set(plat_data->env_variable,
+ 				      plat_data->modes[i].mode_name);
+ 			if (ret) {
+@@ -68,6 +68,7 @@ int dm_reboot_mode_pre_probe(struct udevice *dev)
+ 	struct ofprop property;
+ 	const u32 *propvalue;
+ 	const char *propname;
++	int len, cells, i;
+ 
+ 	plat_data->env_variable = dev_read_string(dev, "u-boot,env-variable");
+ 	if (!plat_data->env_variable)
+@@ -93,19 +94,34 @@ int dm_reboot_mode_pre_probe(struct udevice *dev)
+ 	struct reboot_mode_mode *next = plat_data->modes;
+ 
+ 	dev_for_each_property(property, dev) {
+-		propvalue = dev_read_prop_by_prop(&property, &propname, NULL);
++		propvalue = dev_read_prop_by_prop(&property, &propname, &len);
+ 		if (!propvalue) {
+ 			dev_err(dev, "Could not get the value for property %s\n",
+ 				propname);
+ 			return -EINVAL;
+ 		}
+ 
+-		if (!strncmp(propname, mode_prefix, mode_prefix_len)) {
+-			next->mode_name = &propname[mode_prefix_len];
+-			next->mode_id = fdt32_to_cpu(*propvalue);
++		if (strncmp(propname, mode_prefix, mode_prefix_len))
++			continue;
+ 
+-			next++;
++		/*
++		 * A mode may carry 1 to REBOOT_MODE_MAX_MAGIC 32-bit cells.
++		 * Cells beyond the maximum are ignored.
++		 */
++		cells = len / sizeof(u32);
++		if (cells < 1) {
++			dev_err(dev, "Mode %s has no magic value\n", propname);
++			return -EINVAL;
+ 		}
++		if (cells > REBOOT_MODE_MAX_MAGIC)
++			cells = REBOOT_MODE_MAX_MAGIC;
++
++		next->mode_name = &propname[mode_prefix_len];
++		next->count = cells;
++		for (i = 0; i < cells; i++)
++			next->magic[i] = fdt32_to_cpu(propvalue[i]);
++
++		next++;
+ 	}
+ #else
+ 	if (!plat_data->env_variable)
+diff --git a/include/reboot-mode/reboot-mode.h b/include/reboot-mode/reboot-mode.h
+index 5fbd7c801af..54a8c09650e 100644
+--- a/include/reboot-mode/reboot-mode.h
++++ b/include/reboot-mode/reboot-mode.h
+@@ -9,9 +9,15 @@
+ #include <asm/types.h>
+ #include <dm/device.h>
+ 
++/*
++ * Maximum number of 32-bit magic cells a reboot mode may carry.
++ */
++#define REBOOT_MODE_MAX_MAGIC	3
++
+ struct reboot_mode_mode {
+ 	const char *mode_name;
+-	u32 mode_id;
++	u32 magic[REBOOT_MODE_MAX_MAGIC];
++	u8 count;
+ };
+ 
+ struct reboot_mode_uclass_platdata {
 
- arch/arm/dts/lemans-evk-u-boot.dtsi      |  7 +++
- arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi |  7 +++
- arch/sandbox/dts/test.dts                |  6 +++
- cmd/boot.c                               |  6 ++-
- configs/qcom_defconfig                   |  2 +
- doc/usage/cmd/reset.rst                  | 42 +++++++++++++++
- drivers/firmware/psci.c                  | 16 ++++++
- drivers/reboot-mode/Kconfig              | 11 ++++
- drivers/reboot-mode/Makefile             |  1 +
- drivers/reboot-mode/reboot-mode-psci.c   | 58 +++++++++++++++++++++
- drivers/reboot-mode/reboot-mode-uclass.c | 76 +++++++++++++++++++++++++---
- drivers/sysreset/sysreset-uclass.c       | 27 +++++++++-
- include/reboot-mode/reboot-mode.h        | 48 +++++++++++++++++-
- test/dm/reboot-mode.c                    | 87 ++++++++++++++++++++++++++++++++
- 14 files changed, 385 insertions(+), 9 deletions(-)
----
-base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
-change-id: 20260810-b4-reset-edl-rebootmode-3b7ca0c34fba
-
-Best regards,
 -- 
-Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+2.34.1
 
