@@ -1,156 +1,124 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 175DFC5B56A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 12:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DABBC5B56A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Aug 2026 12:26:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CE177607D0;
-	Tue, 11 Aug 2026 12:03:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ED47B81004;
+	Tue, 11 Aug 2026 12:26:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WhhZDvTyIRb3; Tue, 11 Aug 2026 12:03:18 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LM7VAp_p5n_3; Tue, 11 Aug 2026 12:26:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 927F36065A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C59FC81005
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786449798;
-	bh=fW71jAKmJ0uh1BjJKE/+TgvZe3sEXU3ZMjue2cpvem8=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org ; s=default; t=1786451183;
+	bh=GGJAkPLhnmECdHo2ZAjH+ai1YnL8g+bZVAZ1GIrOOnY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=0EbpNUlv6x3b01N+1nrnqYYVgF1GmKgXg7PEdCNSDAVBKRUSvs/W4u2BXja/b7tep
-	 LBgZG8TXnVC96nyqZxmuPQcKOes1T7ARFyT7kysmLS+PlqYPjjamOspxS8xywLy3x7
-	 /f/TN2IRH8QwReaHhdmMvQN2e6mRkbxq5ptJJxGVYDvD0WTAcw341V83B69MXeTg4d
-	 b59NvFYfvwJ34JHC/5oZt/7rGFBpukSHo/S7FUdW1E9IwquAUbzT5tDfrNwaRQzNlv
-	 MtJ08JrYoy8/b0fDTcbolCitHk7RQSeTg3AA2G+oTswbSNLUtI/QEcKMFMspF0YWAX
-	 Nx9D9yc+zW/Cg==
+	b=fEb/63naVd6SeJVl47HbaJXtfo4EDQcfj+DZrWoJEgENOixmzbNZE0EPyaQSCpc3x
+	 7XjbJbKs/HTiTU50mMCetlXmWw7J0cN9ZvVxHEv7M9yUKZPb03ZsRume/YKbuhsQHR
+	 EJY+ucrQ5AINGHvfX42gJ03JFHmJPhfL7qQx4cBN2x75WRbyWWatL6uXF9RHUhfMfi
+	 f98mdL11o05nHvvE/Y9xWeVDBIkSu3zvq3BUKD1eCVIER/U+VuA7Hzlpp9O8X1fyaC
+	 0vYJDATl7yelZvoJcw0CIaTPAdg1iYedXXwKYjuvOg0pY51o+AZ9wF8yodY7CaopSg
+	 rp7LFpNFPreVA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 927F36065A;
-	Tue, 11 Aug 2026 12:03:18 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 93253345
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 12:03:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C59FC81005;
+	Tue, 11 Aug 2026 12:26:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 04718218
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 12:26:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 81E0E6065A
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 12:03:17 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id DF51681004
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 12:26:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pH60dUt8aVxO for <u-boot@lists.u-boot-project.org>;
- Tue, 11 Aug 2026 12:03:16 +0000 (UTC)
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::1;
- helo=am0pr83cu005.outbound.protection.outlook.com;
- envelope-from=peng.fan@oss.nxp.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 342D7605FD
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 342D7605FD
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 342D7605FD
- for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 12:03:15 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m+t7IPpg5W53Q1bV2m/unAkqL9/RJvDyxbXbk8/c5sbcSvflY4n3Z2wUoAHvcvBp5gnop2NEyyzB4/KGeOzP1lqRSj8FCepSmOT1hTdhhXYybKEovkT3IXA6XLnRksoBv/yC37O0KiZW8Wt56FKBZiMTiWlYFHRIGx3O9taHorgf0O6eHVH4ACuldy0eL6YGqVnoLE5UoO2qzDY+Aq19ec7IF+bs523V4DHNfhK274fDGMXZd88qvDSFVddgi9hCIaQH75jgoSaXjCFRKl4gb9vPnC5n/Pp6xHOMR9oMZkMAXVnRzk6+T6SyJ97HB42Edw2mal/zTCxsNqJ3smsC3Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fW71jAKmJ0uh1BjJKE/+TgvZe3sEXU3ZMjue2cpvem8=;
- b=b3CDo0mdP0/dVgDH7UoXDjf/IUgwKnNscwNtaXvfZYBCFAMtuT+8mosCfdiiPrZPMqFp9OyFdaZZDOlupA8B8LJAAT2YqxDERIOLwPVkWpGqFxw5Tc/APkpTcpXfYNBeGYQplPowOSjgw/dG/lI5oDY3x9kyCaa3yP6hAwDoh1ERZyb5I2taeIVIqMxl4WY5dh78bKhHZojDflM8eu3rYTr4gzrpDoq/FCIO9FcZN8AcGWfj5BLkZKNwQUwucqKb1c/82DcHd6Zq78jpNlEafRMldeUW5GkxlbsiZ0EG+KhQX/9Tk/EYZm1h1kypP7Ysg1q+S4s7BrFpBmnHoLrEXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by AM0PR04MB11856.eurprd04.prod.outlook.com (2603:10a6:20b:6ff::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Tue, 11 Aug
- 2026 12:03:09 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%6]) with mapi id 15.21.0315.008; Tue, 11 Aug 2026
- 12:03:08 +0000
-Date: Tue, 11 Aug 2026 20:01:18 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: pbiel7@gmail.com, u-kumar1@ti.com, bhimesh.matsa@gmail.com,
- vjardin@free.fr, michal.simek@amd.com, u-boot@lists.u-boot-project.org
-Subject: [GIT PULL] Please pull fsl-qoriq-for-2026.10-rc3 for main
-Message-ID: <ansPDn7F7PWS6vbV@nxa18884-linux-1.ap.freescale.net>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-ClientProxiedBy: MA5PR01CA0197.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1b2::13) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KFVHLCr2dlTt for <u-boot@lists.u-boot-project.org>;
+ Tue, 11 Aug 2026 12:26:22 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
+ envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 470E080F88
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 470E080F88
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 470E080F88
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 12:26:21 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so25096865e9.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 11 Aug 2026 05:26:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786451179; x=1787055979;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=GGJAkPLhnmECdHo2ZAjH+ai1YnL8g+bZVAZ1GIrOOnY=;
+ b=HAWkIhob0mBLNjreQIqONQzvErtbcuFJb9CwFJMLf7pv/76xsD9DMwnEBhSe8S/rDP
+ 42ny4fP45Szi0BoSWF9e0dJF4BI7nPW0Ayaeh5C7996GMYV2xMBJLDQe/yoOJUqp3un7
+ 8gGBHnWa5zkgpHpa0ybJiA19I6m4B7lJMg9Yy3E0mWwpUL6WkK4ylbdlIhcglGivRpq4
+ vY6ksvgP6QI+PscG7NST58abDqHM9F8mC7N2ux37EJJW2bjTQzpPX2tsvTtlFYFmSZ3D
+ RYdtC39ZzvhFbQOYt/qrxLhdA45/xquae1UpRJBDRCudfJANQwoDXAHK8sy5nSCOSFmJ
+ GO6A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqAIS/LX+I+y6wtvARbcqICmRoXSjpMxcfPJJeYLYrLiyw9om0L8H02nlLf5mVgth7s6L4mNtQ=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yx6V7lYnZPh11eKIzj0ZD4+w/CHABH1C54RFHqEmCwYsRLL7C1/
+ QwfffM2WPRjFml8b0cnCRYCEVnbtCpbkqLJNZ00+O8ZSs1qkDgdDGzyMZfIQJuRPnHQ=
+X-Gm-Gg: AR+sD11vkzzn03RR11nTpUG78KbvA7qbZmWgwqzLbxNsZJ6Fa+uzOdSGAbHg3YZgCiv
+ EOUdjzbRGuCU4HibMZ/t4EV5B4TZI37uOwpBRrAVzkYikMtkmhPMgj6Lmk3lChk5Tb9cSm5JHX2
+ BjAekM3VN+LfW2IJE/0za6uUtSt9JesLCYQYEGrM77EjszUbit8NBM1UJ1KN07Ld1pjU52f5QBw
+ 0AsSVl8gQKxFAiQn2Eg23eQZYVJzV1RfgZRfYw9kFavf8sbNIiU3RMVuvGC/lpHsEjS6FZESTWo
+ 2u5F7Nosa+sBCE11PkSNf6mMuP2SNEv4e8giWqLQP8/h6I3e838bqHOsmfFp682+G4meY40QFoA
+ 9waNjLe9LYDGjWkbX5FUkLcNmMs4+1ktLBYEkWvpVmePdYWV/sm7JcX6a4X5pF55mfsY3Xz5nQZ
+ H5F0T1kwLISDM8G5aiim4cUQ7VMbO6g+tqYqOiZph8UvOi2pLrHgro0xqE63P7h8XOVeTGVOMYz
+ mm8JOgl+PAoWoAyJcCFgbukuFOail5vRNAmamU=
+X-Received: by 2002:a05:600c:5250:b0:493:f140:c3fb with SMTP id
+ 5b1f17b1804b1-49978440da8mr46273945e9.7.1786451179077; 
+ Tue, 11 Aug 2026 05:26:19 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p5b29ea13.dip0.t-ipconnect.de.
+ [91.41.234.19]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-499788f17ccsm38825725e9.11.2026.08.11.05.26.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Aug 2026 05:26:14 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ u-boot-qcom@groups.io
+Cc: Sumit Garg <sumit.garg@kernel.org>, neil.armstrong@linaro.org,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Hongyang Zhao <hongyang.zhao@thundersoft.com>,
+ Michael Srba <Michael.Srba@seznam.cz>,
+ Vitalii Skorkin <nikroks@mainlining.org>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-next
+Date: Tue, 11 Aug 2026 14:18:48 +0200
+Message-ID: <20260811122549.2586034-2-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|AM0PR04MB11856:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65b5cae2-9491-474e-3fce-08def7a08223
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|23010399003|366016|1800799024|376014|10067099003|11063799006|3023799007|56012099006|18002099003|41080700001;
-X-Microsoft-Antispam-Message-Info: WWZ4EQxozrhllwYXjxVrOHS6IqRM3mDHZe5TM48D4bx9vIx3kNeUVymmfdX56FAvkQUtCi2pAodgAmxoRJfzdi9TRFOfYFt+Nph6Hqjtiuh4tXAfhdkQRAka0/jnex2uuDr2TtDcC93Ym7B3zQ2CuRdBm6HgZhZVzA346bE5Zew5s0+gT589QXcgOuWmwXLZStafx8PHtNRaSHgFamgkPV5XaPMG7CEeXI+DjWmi6xrbt9IwF/lM6CvteeEf/5xSz0xId0Mxttrd+qBi8uEE0uyaPXgw13IIqoBNNnYg85+//4pxRAV79MmIIT/Om3egh/hHYN+k/sRY3018qi0/vtiYeSMWF32drhbetE3dORMrV5jeAHMaRpSJuhswSIYDVh2w+JSlqWSDYiWepuTBvJVxdgId9+y/DOhYrVIJOVGYTb9ttZyYegyD7KWvG0cKdN6FrggwOvoowUn6SOiAcmXRJrK3HhTaXtCmmpiMnzRHHPI2dDMxoMY2LTNtQbdxyqT4dJLPovZZz4vPz6RTaMNvh1GOcuWEboyz9FY5GdnABEC9hDZlPUsTgfjmP3MzWLKXcMtB+MM8xgY5+tD0u3jyvommrNQO0mvk7WskVgQJO4xE1V+XsP9F9NMRCu0uY4+KguxiUNtQnBzA6MSW3TigIvTNiJTe6Upcw2J8J08=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(23010399003)(366016)(1800799024)(376014)(10067099003)(11063799006)(3023799007)(56012099006)(18002099003)(41080700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kTwfys6L0+j9S5eGKeRB77uFXfFSpnusXdu8ZQeKHpNotpSlV5T+2LdTbeD/?=
- =?us-ascii?Q?rCxYErujRxlwoFX57lS0E7B2kVujWoQWlKei78BnD81n4Qvet9gIj/kTeauo?=
- =?us-ascii?Q?fnCvD1SLlulA7LOS6Toy5+PKilwthFYf/pmkOZ4pi+tcY5FrIqfxBhi6Fesa?=
- =?us-ascii?Q?BlKUee6XTbTkqYdE/BuHuYzNnf+IeZdVsGbiLvjF3oN4VsWcznPpSsdW1g9K?=
- =?us-ascii?Q?ogu4cLcwp+rfcBnUwILg4tYpvZp0x+aDABztln8k1AA4Z6aZ1HOeEZHOGfvn?=
- =?us-ascii?Q?bRVFs8iaIrLFZ8ivxGdO+BEe9ads0YW1ZQyv4PNzkxpWutuNHdDRUVRczVrE?=
- =?us-ascii?Q?RLo+sF/JEWwYgq0n0t+P+Z2MAYhJMxIgU2AgG2tlPikN6CmdvhiuSsqmzoVB?=
- =?us-ascii?Q?Q8Kz+dKkmYZencxCRN7Zf4/9TA//+Tgs1WFm53LMqToVcxErp6r8oUAxGuNT?=
- =?us-ascii?Q?C0OT7DTm7fCMnQedoPOdUn7pjtOYpi69UxU+EFh2+Md6FGU0mN6/OEZXvBy8?=
- =?us-ascii?Q?pQyeRrQbXwRt9ksjOkXJDv5hJQCo7bPx2rAKhbn+j+S975qbJsqwGo3kV7Cd?=
- =?us-ascii?Q?xPeufS0UZt8yJtx+3P1wtDDLewnKPE8SHjHYgvK+fa+AzIDAHYjKfHE59ex8?=
- =?us-ascii?Q?bATppIpEIZywKVKj2jCG30dbCDJezEzztX/zRjsQbqdUP39g1I8M7ST0WR4O?=
- =?us-ascii?Q?+zh/uqwe94wvAMNxj7CAHCQsHqmDMoI1oqbTFuKjBnGwc+LiiAv5jkPS8L14?=
- =?us-ascii?Q?XxTqqaRsQqWfXESEAKFvydJ7o/lWPGjxhJ/gwBJxvK2BAdi1Ox3KN2UOcWHS?=
- =?us-ascii?Q?joAiU9FWg08FqzzNv3mjrBB1MbojzaRnGSETJnzWV1r5swV+GZ21zC3Rzm5i?=
- =?us-ascii?Q?GXPx4IsWslcvRap6su1wzJHYD/aqsF1e4LAcOZA4OIBuxuCFyQyRMnORdPyw?=
- =?us-ascii?Q?hi/V1x/HrVkJZXqs4ME5r1H3yTYwd8mJy6gylKkuCNAphTlyqBhCmFjia/4q?=
- =?us-ascii?Q?4dXGdlpH38z1zvk1EiTQ6kyHgjD/zH/WhFA4oMQhW0hfHYoKTlIhUTa6EEaW?=
- =?us-ascii?Q?Gbsx7XrYWjGswkoAzJNhIXdIhdq0yAe/Z2Cz8srT5nCfGO6l3lGyXtgPV7T1?=
- =?us-ascii?Q?DsbsOuI3fzp9yo+sLMeg2rMv6q5TrVYy1MRccR1O63sUtbd2a1C9YbuMgcW8?=
- =?us-ascii?Q?Depf4J90UEX0WYBQWYAaKt3rVFTbMxWA6Dfg4rOgCpjLo1ExuSB8/f/5CpA+?=
- =?us-ascii?Q?RxEcT6tLc17Wr0cnUUULn72je79D8PqcijK5yUp7lnseZK78A9p+znL/FISR?=
- =?us-ascii?Q?rwfUuMxQazUxIydH4xvtRf4aYRXWBSB+rXAtfU8KjZaBKHqPfum05JdLEvLW?=
- =?us-ascii?Q?WLIWqoxeqDN7T+mwk2LC2FUS33TViMaO8uxbHJMy+8ez9TVI09FJJ11uuOxF?=
- =?us-ascii?Q?+qVWpFgptQ4f0MqkYNFbnHop6cLU1j4cL79TXD04FUKEy/meTtPSyPcZPPMO?=
- =?us-ascii?Q?yvzrHcncWYMzNwQUAxTaRRJ2RkYFDG6iYdlE0b9M+/Caou0AI0SBClJQ58T/?=
- =?us-ascii?Q?P20QyfuB+zTer/rUXsa6uDR49jbtROA+gEcyArPGt/huFZXjhYLlts92qmxy?=
- =?us-ascii?Q?yAt55fwnfw8E5GQIvLqikKUasAm2rRh5aDxZbaZyZQeDHCjsHEPPEOj9rNH+?=
- =?us-ascii?Q?OUvcUt4W4YjW/RVZQAG/t4+Bbtm1lyfGqwFMaeT3ykYKvTz31lp2n1cY3q3h?=
- =?us-ascii?Q?LsH1TYfW16E3TF+KA0BHt/lw/pEfe840nyScVQsr/2MYuj+0nCMI?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65b5cae2-9491-474e-3fce-08def7a08223
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 12:03:08.5690 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aRJTFuXrd02KYySfPzltY4tggfzuH40E/rA6SCMcfw7XtDjIfSnZBBiwRN3AAdhi9dRSqI5pZn/eWoF0ZJvo0h3KsI2XsgWh5kUwKFmv0KzntyxDciZpSJHB6RJKp5T5
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB11856
+Content-Transfer-Encoding: 8bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fW71jAKmJ0uh1BjJKE/+TgvZe3sEXU3ZMjue2cpvem8=;
- b=v83oP2EGsX6PFZH7+dcOfw83K5vADNg5RCVFd+VMRdVfirVv7Sv1KKfuH1RSocvTPjV9K4ROILgUEQcL/bKiBGCUkp8/B6pUo1qtxgrA8Evs7/GD+iEbomWFW5wHiKHri9ufiC5NG5Vt28uRSwQ4lRuHhxxwq26lI7CJXqXFW7+szXwIYYJV6QE/5ds4y6QM8yTvIwJ1TWrzgvbVTSIO5OQxzB8IVoiFQTa1+gis8EeJQ+6ReSHawaC0ncfYgVg75AZ+oQS6hW5c2M4eO2ashRXHMNWW1bDkWdMJOjCM0HpG4J1V1RgwDUrp7AiB2y0eAVyHNcSm7qnv7A/deYwxEw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=oss.nxp.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=linaro.org; s=google; t=1786451179; x=1787055979;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=GGJAkPLhnmECdHo2ZAjH+ai1YnL8g+bZVAZ1GIrOOnY=;
+ b=bxgb4rZZsRjn8xmUut+BKnPqo3Z7MLIJJVeBOA5DRTO9Pkt5pl0YqQHg02MESysz1o
+ yoQMhsBmc5GAQroNfJxRQ8Ssc4sZdW29f5tGp1i/khvgSU+UVLJxgLCkQJTfReNAF1mn
+ I9If202ZzpCJzXNQY6mQs0aGYuKQguicde5HpgR1dfbydqGF/Bg198oc/BkxO6m6RVc0
+ KAiD/LIfDMVZ3E/BsTI8FOc/1g7buRUZ2mOsEPD4KFb/CKCuAqrSXryGQylSoBQfTz11
+ J6PaY+LecFDnV/ByxBbpUHc+6+/NfKYjbnQ3GYdetXoVqntkLd8vyavuSHuTvNVoC2at
+ jKwg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=v83oP2EG
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=bxgb4rZZ
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,71 +135,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi Tom,
 
-Please pull fsl-qoriq-for-2026.10-rc3 for main
+These changes for 2026.10.
 
----------------------------------------------------------
-- Add support for vendor protocol IDs 0x81 for SCMI
-- Fix LDO selector boundaries and make the driver fail gracefully when the
-- regulators DT node is absent for TPS65219 PMIC/Regulator: 
-- Fix a hotplug issue with pci_iommu_extra on Layerscape platforms for
-  PCIe Layerscape.
-- Fix a GIC LPI table corruption on LS1028A boards with 2 GiB of RAM caused
-  by an unbounded TF-A DRAM bank loop and an integer underflow when
-  gd->arch.resv_ram is inadvertently left at zero due to empty DRAM banks.
-- Also includes a minor DT cosmetic cleanup.
----------------------------------------------------------
+* Support for building mbn files during the build with the new mkmbn
+  tool
+* Remove UCLASS_SMEM and the old smem driver (Qualcomm was the only
+  user of both), replace it with a port of the Linux SMEM driver.
+* Refactor memory map parsing and support reading the memory layout from the SMEM database
+* Set the serial# from SMEM
+* Introduce initial support for SPL in mach-snapdragon
+* Add a defconfig for sm8650 with U-Boot as the primary bootloader
+* Workaround an MMC issue by limiting the transfer size
+* Add support for SM7125/SC7180 (clock/pinctrl drivers and UFS phy)
+* Add support for the QCS6490 powered Rubik Pi 3 board and document it
 
-CI: https://git.u-boot-project.org/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/946
+Thanks,
 
-CI 1hr timeout, I ran build in my local host and pass.
+The following changes since commit baa64b2f892890f00a377eac4a3e685472bb56b5:
 
-Thanks
-Peng
-
-The following changes since commit 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5:
-
-  Prepare v2026.10-rc2 (2026-08-10 16:43:34 -0600)
+  Merge tag 'efi-2026-10-rc2-2' of https://git.u-boot-project.org/u-boot/custodians/u-boot-efi (2026-07-31 08:55:30 -0600)
 
 are available in the Git repository at:
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-fsl-qoriq.git tags/fsl-qoriq-for-2026.10-rc3
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-snapdragon.git qcom-next
 
-for you to fetch changes up to 5a32ebc96295795a7325d6cbaa2d8b0bdfaa6d75:
+for you to fetch changes up to 914dd2f5d18a3a89e4ddb6d1d97b2743618ae5ee:
 
-  armv8: layerscape: Fix TF-A DRAM reservation with empty banks (2026-08-11 16:05:24 +0800)
+  CI: add Qualcomm requirements.txt for world build (2026-08-10 14:49:42 +0200)
 
 ----------------------------------------------------------------
-Kumara Bhimeswararao Matsa (2):
-      power: pmic: tps65219: fail if regulators node is missing
-      power: regulator: tps65219: Fix LDO selector boundaries
+Aswin Murugan (1):
+      i2c: geni: reset controller on NACK to recover from invalid bus state
 
-Michal Simek (2):
-      cmd: scmi: Show names for vendor protocols 0x80 and 0x82
-      firmware: scmi: Support probe vendor ID 0x81
+Balaji Selvanathan (1):
+      configs: qcom_defconfig: Limit MMC transfer size to prevent controller timeout
 
-Patryk Biel (1):
-      armv8: layerscape: Fix TF-A DRAM reservation with empty banks
+Casey Connolly (22):
+      config.mk: support vendor generic includes
+      tools: qcom: introduce mkmbn library
+      tools: qcom: add mkmbn.py
+      doc: board/qualcomm: update docs for new u-boot.mbn target
+      mach-snapdragon: add kconfig infra for building MBN files
+      configs: qcom: use mkmbn and stop building ELF files
+      Revert "dm: SMEM (Shared memory) uclass"
+      smem: drop drivers/smem
+      Revert "test: smem: add basic smem test"
+      Revert "drivers: smem: sandbox"
+      mach-snapdragon: fix reserved memory carveout
+      soc: qcom: import smem from Linux 6.11-rc2
+      soc: qcom: smem: adjust headers for U-Boot
+      soc: qcom: smem: adjust for U-Boot
+      soc: qcom: smem: get serial number from socinfo
+      soc: qcom: smem: stub functions
+      soc: qcom: smem: add build infra
+      mach-snapdragon: move memory parsing to its own file
+      mach-snapdragon: support parsing memory map from SMEM
+      mach-snapdragon: fetch serial# from SMEM
+      configs: add qcom_sm8650_defconfig and debug fragment
+      CI: add Qualcomm requirements.txt for world build
 
-Udit Kumar (1):
-      scmi: pinctrl: Rename SCMI_PIN_DEFUALT to SCMI_PIN_DEFAULT
+Hongyang Zhao (2):
+      configs: Add qcom_qcs6490_rubikpi3_defconfig
+      doc: board: qualcomm: Document RUBIK Pi 3
 
-Vincent Jardin (2):
-      arm: dts: layerscape: drop leading zeros from unit addresses
-      pci: layerscape: fix pci_iommu_extra hotplug
+Michael Srba (12):
+      Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+      of_live: support in SPL
+      drivers: allow clk_stub and spmi in SPL
+      mach-snapdragon: boot0.h: split out msm8916_boot0.h
+      qualcomm: add u-boot-spl-elf-sdm845.lds
+      mach-snapdragon: Kconfig: fix duplicate SYS_MALLOC_LEN
+      mach-snapdragon: Kconfig: changes / additions to support SPL
+      mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
+      mach-snapdragon: move board_usb_init to dragonboard410c.c
+      mach-snapdragon: add board_spl.c and split out common code
+      qualcomm: add defconfig, env and docs for SPL on sdm845
+      dts: add u-boot specific sdm845 .dtsi and a .dtsi for shift-axolotl
 
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c            | 33 ++++++++++++++--------
- arch/arm/cpu/armv8/fsl-layerscape/soc.c            |  5 ++++
- .../dts/fsl-ls1028a-qds-x5xx-sch-28021-LBRW.dtsi   |  8 +++---
- arch/arm/dts/fsl-ls1028a-qds.dtsi                  |  2 +-
- arch/arm/dts/fsl-ls1088a-qds.dtsi                  |  2 +-
- arch/arm/dts/fsl-lx2160a-qds.dtsi                  |  4 +--
- arch/arm/dts/fsl-sch-28021.dtsi                    |  8 +++---
- cmd/scmi.c                                         |  3 ++
- drivers/firmware/scmi/Kconfig                      |  3 ++
- drivers/firmware/scmi/scmi_agent-uclass.c          | 10 +++++++
- drivers/pci/pcie_layerscape_fixup.c                |  5 ++++
- drivers/power/pmic/tps65219.c                      |  1 +
- include/power/tps65219.h                           |  6 ++--
- include/scmi_agent-uclass.h                        |  3 ++
- include/scmi_protocols.h                           |  3 +-
- 15 files changed, 69 insertions(+), 27 deletions(-)
+Vitalii Skorkin (4):
+      clk: qcom: Add driver for SC7180 GCC
+      pinctrl: qcom: add SC7180 pinctrl driver
+      qcom_defconfig: Enable SC7180 GCC
+      phy: qcom-qmp-ufs: Add SC7180 support
+
+ .azure-pipelines.yml                               |   1 +
+ .gitlab-ci.yml                                     |   1 +
+ Kconfig                                            |   1 +
+ MAINTAINERS                                        |   1 -
+ Makefile                                           |  11 +-
+ arch/arm/Kconfig                                   |  37 +-
+ arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi      |   2 +
+ arch/arm/dts/sdm845-u-boot.dtsi                    |  16 +
+ arch/arm/mach-snapdragon/Kconfig                   |  46 +-
+ arch/arm/mach-snapdragon/Makefile                  |   8 +
+ arch/arm/mach-snapdragon/board.c                   | 400 ++---------
+ arch/arm/mach-snapdragon/board_spl.c               |  30 +
+ arch/arm/mach-snapdragon/dram.c                    | 239 +++++++
+ arch/arm/mach-snapdragon/include/mach/boot0.h      |  64 +-
+ .../mach-snapdragon/include/mach/msm8916_boot0.h   |  54 ++
+ .../include/mach/sdm845_spl_boot0.h                | 121 ++++
+ arch/arm/mach-snapdragon/mem_map.c                 | 226 ++++++
+ arch/arm/mach-snapdragon/of_fixup.c                |   5 -
+ arch/arm/mach-snapdragon/qcom-priv.h               |  19 +-
+ arch/arm/mach-snapdragon/rampart.h                 | 194 +++++
+ arch/sandbox/dts/test.dts                          |   4 -
+ board/qualcomm/config.mk                           |  14 +
+ board/qualcomm/debug-sm8650.config                 |   5 +
+ board/qualcomm/dragonboard410c/dragonboard410c.c   |  41 ++
+ board/qualcomm/requirements.txt                    |   1 +
+ board/qualcomm/sdm845_spl/config.mk                |  14 +
+ board/qualcomm/sdm845_spl/sdm845_spl.env           |   2 +
+ .../qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds  |  44 ++
+ common/spl/Kconfig                                 |  12 +
+ common/spl/spl.c                                   |   9 +
+ config.mk                                          |   8 +-
+ configs/hmibsc_defconfig                           |   1 +
+ configs/qcm6490_defconfig                          |   2 +-
+ configs/qcom_defconfig                             |   5 +-
+ ...0c_defconfig => qcom_dragonboard410c_defconfig} |   3 +-
+ ...0c_defconfig => qcom_dragonboard820c_defconfig} |   0
+ configs/qcom_ipq5424_mmc_defconfig                 |   1 -
+ configs/qcom_ipq9574_mmc_defconfig                 |   3 +-
+ configs/qcom_qcs615_defconfig                      |   2 +-
+ configs/qcom_qcs6490_rubikpi3_defconfig            |   7 +
+ configs/qcom_qcs8300_defconfig                     |   2 +-
+ configs/qcom_qcs9100_defconfig                     |   2 +-
+ configs/qcom_sdm845_spl_defconfig                  | 138 ++++
+ configs/qcom_sm8650_defconfig                      |  16 +
+ configs/sandbox64_defconfig                        |   2 -
+ configs/sandbox_defconfig                          |   2 -
+ doc/board/qualcomm/board.rst                       |   2 +-
+ doc/board/qualcomm/dragonboard410c.rst             |  19 +-
+ doc/board/qualcomm/dragonwing.rst                  |  14 +-
+ doc/board/qualcomm/index.rst                       |   3 +
+ doc/board/qualcomm/rb3gen2.rst                     |  30 +-
+ doc/board/qualcomm/rdp.rst                         |   5 +-
+ doc/board/qualcomm/rubikpi3.rst                    |  52 ++
+ doc/board/qualcomm/signing.rst                     |  32 +
+ doc/board/qualcomm/spl.rst                         |  91 +++
+ drivers/Kconfig                                    |   2 -
+ drivers/Makefile                                   |   3 +-
+ drivers/clk/Kconfig                                |   7 +
+ drivers/clk/qcom/Kconfig                           |   8 +
+ drivers/clk/qcom/Makefile                          |   1 +
+ drivers/clk/qcom/clock-sc7180.c                    | 273 ++++++++
+ drivers/i2c/geni_i2c.c                             |   2 +-
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c                |   1 +
+ drivers/pinctrl/qcom/Kconfig                       |   7 +
+ drivers/pinctrl/qcom/Makefile                      |   1 +
+ drivers/pinctrl/qcom/pinctrl-sc7180.c              |  95 +++
+ drivers/smem/Kconfig                               |  25 -
+ drivers/smem/Makefile                              |   7 -
+ drivers/smem/sandbox_smem.c                        |  44 --
+ drivers/smem/smem-uclass.c                         |  46 --
+ drivers/soc/qcom/Kconfig                           |   8 +
+ drivers/soc/qcom/Makefile                          |   1 +
+ drivers/{smem/msm_smem.c => soc/qcom/smem.c}       | 777 ++++++++++++---------
+ drivers/spmi/Kconfig                               |  13 +
+ drivers/spmi/Makefile                              |   4 +-
+ dts/Kconfig                                        |   8 +
+ include/dm/uclass-id.h                             |   1 -
+ include/smem.h                                     |  90 ---
+ include/soc/qcom/smem.h                            |  36 +
+ include/soc/qcom/socinfo.h                         | 111 +++
+ lib/Makefile                                       |   2 +-
+ test/dm/Makefile                                   |   1 -
+ test/dm/smem.c                                     |  26 -
+ tools/mkmbn                                        |   1 +
+ tools/qcom/mkmbn/cert.py                           | 127 ++++
+ tools/qcom/mkmbn/elf.py                            | 241 +++++++
+ tools/qcom/mkmbn/hashseg.py                        | 356 ++++++++++
+ tools/qcom/mkmbn/mkmbn.py                          | 165 +++++
+ 88 files changed, 3506 insertions(+), 1048 deletions(-)
+ create mode 100644 arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+ create mode 100644 arch/arm/dts/sdm845-u-boot.dtsi
+ create mode 100644 arch/arm/mach-snapdragon/board_spl.c
+ create mode 100644 arch/arm/mach-snapdragon/dram.c
+ create mode 100644 arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
+ create mode 100644 arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
+ create mode 100644 arch/arm/mach-snapdragon/mem_map.c
+ create mode 100644 arch/arm/mach-snapdragon/rampart.h
+ create mode 100644 board/qualcomm/config.mk
+ create mode 100644 board/qualcomm/debug-sm8650.config
+ create mode 100644 board/qualcomm/requirements.txt
+ create mode 100644 board/qualcomm/sdm845_spl/config.mk
+ create mode 100644 board/qualcomm/sdm845_spl/sdm845_spl.env
+ create mode 100644 board/qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds
+ rename configs/{dragonboard410c_defconfig => qcom_dragonboard410c_defconfig} (96%)
+ rename configs/{dragonboard820c_defconfig => qcom_dragonboard820c_defconfig} (100%)
+ create mode 100644 configs/qcom_qcs6490_rubikpi3_defconfig
+ create mode 100644 configs/qcom_sdm845_spl_defconfig
+ create mode 100644 configs/qcom_sm8650_defconfig
+ create mode 100644 doc/board/qualcomm/rubikpi3.rst
+ create mode 100644 doc/board/qualcomm/signing.rst
+ create mode 100644 doc/board/qualcomm/spl.rst
+ create mode 100644 drivers/clk/qcom/clock-sc7180.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sc7180.c
+ delete mode 100644 drivers/smem/Kconfig
+ delete mode 100644 drivers/smem/Makefile
+ delete mode 100644 drivers/smem/sandbox_smem.c
+ delete mode 100644 drivers/smem/smem-uclass.c
+ rename drivers/{smem/msm_smem.c => soc/qcom/smem.c} (56%)
+ delete mode 100644 include/smem.h
+ create mode 100644 include/soc/qcom/smem.h
+ create mode 100644 include/soc/qcom/socinfo.h
+ delete mode 100644 test/dm/smem.c
+ create mode 120000 tools/mkmbn
+ create mode 100644 tools/qcom/mkmbn/cert.py
+ create mode 100644 tools/qcom/mkmbn/elf.py
+ create mode 100644 tools/qcom/mkmbn/hashseg.py
+ create mode 100755 tools/qcom/mkmbn/mkmbn.py
