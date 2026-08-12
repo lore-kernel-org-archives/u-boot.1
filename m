@@ -1,132 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58F5BC5B572
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 15:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F3CC5B572
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 16:20:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E2742408CD;
-	Wed, 12 Aug 2026 15:58:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5719860757;
+	Wed, 12 Aug 2026 16:20:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h5nMO_jyhW1Y; Wed, 12 Aug 2026 15:58:02 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9qTswREq0riN; Wed, 12 Aug 2026 16:20:39 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E311B408FF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5199460841
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786550282;
-	bh=X27DvWxJQ2Xuq6wM+0lOXVG77rVy+JvAYic2ZfD8MNE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786551639;
+	bh=xYX0RnVyn0zirECJ9WG7budAAjv7uyoAAHpmX0GvJec=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0mKCn+UKDEOv4HOiWlGJp5Z47wmeo1a+MRPLhRISWyRotn0igea1OX9K2Ss7QA4Vb
-	 R6+LSSDRlNwSTMp2XivMsAoOe9VrB27vM7dTTXOj909RQ2e5iK/xWaPBksBrSRespR
-	 ICe6OrRciQ9anDR1aO12QsdsjCyqJ9KxBU4bHv9AhMKUQ0J53NwkkVMv5bTdNsAPUJ
-	 uCZZsWz1Db31qgihQkS2Xw7En/JaowQB1Y0xOG2VfFcPCHBmUCSmD0NLedsWaR9dnN
-	 u7XqmAP8E2rwbcsJFV2rCs8GH8Vzf7moohPsFQfiiFw4+HzTKRWGb0366JirlNgl8n
-	 imqzkUV6Aj7rg==
+	b=eIXE5ezNUaAZ5QyIjYhhFs0nUISZqFxIN1i36x2Jy+KHEk/ksWCyqaHlLrvNGxXAX
+	 IRqNlsgpzuNwgAmBNtxys2e589kz8NjWBf2CRdmBzPe6R2Gz2ekyyQ+USql/pt36T3
+	 X8+VGpVvKwA78Y92USJodcIlMCQSu5tGIV7nduRMXQICIyb+O9Ezc/xZGcSdSHz/ya
+	 6+XegOceZwjiVJnGGJnDJyUGOWRDcPLokv2RTkwAkzEQWyYffk6oAfYngMvWNkbMvS
+	 8OVwWUGWHGoowyJLmorQN/lhANjJFPzcDZuzCYCf2ym4bPEBDz9dEaezhbjZlgDYeS
+	 aHmklzgEQOH/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E311B408FF;
-	Wed, 12 Aug 2026 15:58:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 997C53A4
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 15:57:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5199460841;
+	Wed, 12 Aug 2026 16:20:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9D6043A4
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 16:20:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7F4C9408CD
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 15:57:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 837EB806B3
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 16:20:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1XqCRgrh0CNw for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 15:57:58 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::329; helo=mail-ot1-x329.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C3100408BA
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C3100408BA
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C3100408BA
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 15:57:57 +0000 (UTC)
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7ee4399c3abso777427a34.2
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:57:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786550277; x=1787155077;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=X27DvWxJQ2Xuq6wM+0lOXVG77rVy+JvAYic2ZfD8MNE=;
- b=jg9GcxoIfKhqEVDtisS8+NWih0KOVJti/Aot6SpKADIEN3aH9MUkk+UH+wyFrpVmd/
- BFivYu1JmkxSCgpuhcL+GYCYD4uJ/Zkpbx/RrxI7FWI8vJNAscrjuluNCCJq2peCB7iL
- CfLJzf8o/uDGf70fFQlami6RxIozPVZzSU8u5lss0F1frEYizPJfdn1aWcRQUGwCyPFI
- 8OcUuSNFE2NfRvx1KBDgHIZ7kP//8NBwMxaVGpMQUDug1YAi1zjEyqnWcX4e8rA+kpeZ
- qBfZm/ZDV4k/+YRi1jf8tVOg69VFsyc5MbDsY9tlqaC1G6HLCr1Pog05SaA44JNGbH91
- yMpQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rp7QycDlonV1zjegiZYdELWCfGZe48Eg52m8CeH19qJaSOn93bO2uAJzRs2RyZ9bIhUYibKyMo=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyXzMB29YTFgEbkursIlo7ZQIGtIkTjTdT7muaOBDs66eAZI4y3
- qv6Y70BgMchkfvmLdHdeijFnd6iU6P8WD+RsZj17rc2u2EszKX5yy5qWkmfbWlLJd3A=
-X-Gm-Gg: AR+sD10FumkoFmxFVnjrjM+YLlWxkFx23Y/HaZV3ZpwOMBrHbeLUT5d9KXdwPMIb9S3
- QfLc8a2sprIaHt/556Tjb0FArUPrykvxSjmR7zzqbMNbGzBlpvIXA/OFxdFHRg2AOMyb/An27Eh
- 0RjPs0XCGbmBwlw6LZGojRc7APsOmmYQEBUyiYzcYGbgNww9iHYojgeU6MgZ9zL60gH2TEbXMKA
- 8CFdigQP2CzxPi8EKGYTR52PeuBiIKEquBzx5ra7lb3t8N7Qgn+plJEVzAibE7Tu2zm34LVvXep
- wp3t+w/1vQNObajCmzjlO0vLE/bW/W9vAX7MhJLzGAM+AugTJJ2Sg+NwEH7MJm4Zmeb48CzXeQT
- kSwtcFECyqJz65PZjV+aFi2fcY+MgEQlauafR/6l6T3ZRi6gS1P31FmRIRkNRgtAVeGC1yA6WBW
- dcHUYpPU7IQx80pTla5eOJGzHb/mAdwE6ceyAhYGTog0ja5Nw0VGVqH8zvdpvwXxFRfZRP5UYOL
- DWBAg9lO1osbER8EjkJbRKze6PUJvEejjQzLW391+dtSsSmTkhiIJvNz90TaTkDROH3v2axI1Wq
- 23K8wlSKJA==
-X-Received: by 2002:a05:6830:67db:b0:7dc:3db6:f02 with SMTP id
- 46e09a7af769-7f3b797daa3mr6511380a34.9.1786550273756; 
- Wed, 12 Aug 2026 08:57:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f3b33ccbdesm3183321a34.17.2026.08.12.08.57.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 08:57:52 -0700 (PDT)
-Date: Wed, 12 Aug 2026 09:57:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Cc: Aristo Chen <aristo.chen@canonical.com>,
- u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>,
- Peng Fan <peng.fan@nxp.com>, Daniel Golle <daniel@makrotopia.org>,
- Randolph Sapp <rs@ti.com>
-Subject: Re: [PATCH 1/3] bootm: size the noload decompression buffer from the
- compressor header
-Message-ID: <20260812155750.GB3297518@bill-the-cat>
-References: <20260809042338.63397-1-aristo.chen@canonical.com>
- <20260809042338.63397-2-aristo.chen@canonical.com>
- <20260809152703.GF394392@bill-the-cat>
- <CAA=k7=n1tcSPQnjfXVMOpksz20Zb30NLrbCdt6Gv5-UnV4Znig@mail.gmail.com>
- <20260810163728.GB1160436@bill-the-cat>
- <b8c3b59fdfb810940ea2afa0e50f03935a665a5e.camel@ew.tq-group.com>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id stRzWL6ZMmrg for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 16:20:36 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=f498=gg=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8754C806AF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8754C806AF
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8754C806AF
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 16:20:34 +0000 (UTC)
+X-Forward-Email-ID: 6a7c9d4dcf67b390aab6da4e
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.13.12
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <64823d5b-2e70-47b0-b071-82651e7b1968@kwiboo.se>
+Date: Wed, 12 Aug 2026 18:20:26 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BiOmeiK6NmPfupRr"
-Content-Disposition: inline
-In-Reply-To: <b8c3b59fdfb810940ea2afa0e50f03935a665a5e.camel@ew.tq-group.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] adc: rockchip-saradc: Add driver data for RK3506
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+References: <20260803190946.2259514-1-jonas@kwiboo.se>
+ <20260803190946.2259514-4-jonas@kwiboo.se>
+ <ca0eef0e-4e4e-49f9-82bc-d498d54ddd3c@0leil.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <ca0eef0e-4e4e-49f9-82bc-d498d54ddd3c@0leil.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786550277; x=1787155077;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=X27DvWxJQ2Xuq6wM+0lOXVG77rVy+JvAYic2ZfD8MNE=;
- b=eld2o/Q8eCa+Hzx4j2pe8AtPvf93hGBRHPOecftleCsUcwMjF4+rgT9th4qXXSQoaK
- Wv3VKkDtvUZsYDF/3/6uLpQDyC/1GPhuU4AMRblk09O/lFevsWBpe6wEtw/kMw9Z3X+g
- u/s655fISR+QZQ4xgi3dfX6syDQCva89OOIsM=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=eld2o/Q8
+ d=kwiboo.se; 
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1786551634;
+ bh=xYX0RnVyn0zirECJ9WG7budAAjv7uyoAAHpmX0GvJec=;
+ b=OGT2LO2JF0cgvjrT+RcaUM0cjMbymsCRgGrLdPJKhz13zX/aUnAoLfV12358advMgBHnH287U
+ ve6u+RUUVyCFyTVbA8neT9dD+q2J4kog2l5vpZ7uuoUoJiXqCCfC3qEYS+E+j9QBBi5mpfDjfHa
+ nqm59rAdcmu+mN6JPzkVGOPUPsJDHLVVzpCUSgJh5SoH6w32Q8/5wEHZcmoAUexoOY8D4ejnpbF
+ +JwGyzsjt34+azv4ERUvJLquzpR6RnKr/RAl+gt83rVQfGv+KEN4csIrSZq9uE7KaUNMlwesNh4
+ Ftb5fICpDzi7zjq4xAeMw6hDFN6HL2Ptg5lYWHvN2Urg==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=OGT2LO2J
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,123 +107,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Quentin,
 
---BiOmeiK6NmPfupRr
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 8/12/2026 12:33 PM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 8/3/26 9:09 PM, Jonas Karlman wrote:
+>> Current rockchip,rk3528-saradc fallback instruct the driver to use a
+> 
+> There is no rk3506 DTSI available either in Linux kernel or U-Boot, so 
+> this fallback technically doesn't even exist and we don't have an issue 
+> (yet). Just say that none of the the v2 SARADC data match what the 
+> RK3506 can do (due to the divider and parent clocks not being able to 
+> achieve the requested 1MHz). Please simply rename the commit title to 
+> reflect you're adding support for the SARADC found on the RK3506.
 
-On Wed, Aug 12, 2026 at 09:45:52AM +0200, Nora Schiffer wrote:
-> On Mon, 2026-08-10 at 10:37 -0600, Tom Rini wrote:
-> > On Mon, Aug 10, 2026 at 10:32:12AM +0800, Aristo Chen wrote:
-> > > On Sun, Aug 9, 2026 at 11:27=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >=20
-> > > > On Sun, Aug 09, 2026 at 04:23:27AM +0000, Aristo Chen wrote:
-> > > >=20
-> > > > > For a compressed kernel_noload image, bootm_load_os() allocates a
-> > > > > per-image decompression buffer of ALIGN(image_len * 8, SZ_1M). Th=
-e 8x
-> > > > > multiplier is a heuristic: it comfortably covers what zstd and xz
-> > > > > achieve on real kernels, but any well-compressed payload (say, a =
-big
-> > > > > run of zeros) can exceed it and fail decompression, and no fixed
-> > > > > multiplier is safe against arbitrarily compressible input.
-> > > > >=20
-> > > > > Read the real uncompressed size from the compressor header instea=
-d.
-> > > > > Add a small helper image_decomp_get_uncompressed_size() that retu=
-rns
-> > > > > the uncompressed size when the format carries one: gzip ISIZE, lz=
-ma
-> > > > > header uncompressed size, lz4 frame Content_Size when the FLG bit=
- is
-> > > > > set, and zstd Frame_Content_Size. Other formats return -EOPNOTSUP=
-P.
-> > > > > Bootm uses it to size the buffer to ALIGN(hdr_size, SZ_1M), cappe=
-d at
-> > > > > CONFIG_SYS_BOOTM_LEN because the value is attacker-controlled, and
-> > > > > falls back to the 8x heuristic for formats without a size field
-> > > > > (bzip2, lzo, xz) or when the header lacks the size (some lzma or =
-lz4
-> > > > > streams).
-> > > >=20
-> > > > Have we gotten actual problem reports? This is a good bit of growth=
- for
-> > > > a problem I'm not sure we're seeing. Thanks.
-> > >=20
-> > > Thanks for the review! Honest answer: no bug report against the
-> > > current 8x multiplier has crossed the list. This is preventive rather
-> > > than reactive, and I should have made that clearer in the cover
-> > > letter.
-> > >=20
-> > > The reasons for this patch set are:
-> > >   * The multiplier is fundamentally a heuristic. Nora raised the same
-> > > concern in the v1 round of the earlier
-> > > series(<https://lists.denx.de/pipermail/u-boot/2026-June/621575.html>=
-):
-> > > "Deriving a buffer size from the compressed size is not possible, as
-> > > the compression ratio may be arbitrarily high for data with many
-> > > repetitions (for example ranges of 0x00 or 0xff)."She dropped her
-> > > replacement patch when we bumped 4x to 8x, but the underlying point
-> > > stands: any fixed factor can be defeated by a highly    compressible
-> > > payload, and further bumps are just moving the ceiling.
-> >=20
-> > Yeah, I recall this. But we aren't really handling arbitrary data here,
-> > so it's not as much of a valid concern I think, without real examples.
->=20
-> It's probably not a problem when the OS image is a proper kernel, but if =
-the
-> next image is a tiny loader itself, even a small amount of padding (either
-> inside the .data section or at the end of the image) might result in high
-> compression ratios.
->=20
-> While irrelevant for current U-Boot, one example would be OpenWrt's lzma-=
-loader:
-> it has a build mode where the <100KiB binary is padded to 1MiB (I may be
-> remembering the exact numbers wrong) before compression to force a cache
-> writeback during decompression (to work around ancient U-Boot versions th=
-at did
-> not implement cache handling correctly.)
->=20
-> Specifically the case of kernel_noload would usually be used with EFI
-> applications, for which additional loaders (shim, systemd-boot, ...) are =
-quite
-> common. The combination with FIT and compression is probably less common.=
-=2E.
->=20
-> Nonetheless, I think a principled fix is preferable - I like the EFI-in-F=
-IT
-> approach a lot (we may make that the default setup in our TQ-Systems stan=
-dard
-> BSPs in the future), thus I would like the feature to be well-supported a=
-nd
-> without known bugs.
+Sure, I will update the commit message in a v2.
 
-Thanks for explaining. My concern, now that I've put it through a wider
-test, is that of about 1550 platforms, 1297 grow under this as-is. Of
-those, ~375 grow by around 400 bytes (380 is average, a few go higher).
-The rest are around 170 bytes. This is all presumably the difference
-between gzip only and gzip+others (with the few much high growth being
-all algorithms).
+The rk3528 fallback mentioned was in reference to the dt-bindings:
 
-Maybe a question here is, haven't we already validated the compression
-header, and so don't need to do it a second time? If we really can't
-live with a good enough heuristic, we need to work the size growth as
-this is very much not an opt-in feature.
+      - items:
+          - const: rockchip,rk3506-saradc
+          - const: rockchip,rk3528-saradc
 
---=20
-Tom
+> 
+>> 1 GHz clock rate. However, the CLK_SARADC used on RK3506 can only be
+>> configured to use a 32 KHz, 400 KHz or 1.5-24 GHz rate.
+>>
+> This is quite misleading. The parent clocks are 32KHz, 400KHz or 24MHz. 
+> The divider is between 1 and 16.
 
---BiOmeiK6NmPfupRr
-Content-Type: application/pgp-signature; name="signature.asc"
+You are correct, I must have mixed up this clock with a different clock
+that had multiple parent options and the divider was for one of those
+parent options.
 
------BEGIN PGP SIGNATURE-----
+> 
+> This means that 1MHz is not achievable with the dividers and we need to 
+> aim for something else. Please reword the commit log to reflect this. 
+> I'm also not sure where people got 32KHz, 400KHz and 24MHz but it's 
+> what's specified in the Linux kernel, so fine with me :)
+> 
+>> Add driver data for rockchip,rk3506-saradc that request use of a 1.5 GHz
+>> clock rate, to avoid clock divider overflow in the RK3506 clock driver.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   drivers/adc/rockchip-saradc.c | 10 ++++++++++
+>>   1 file changed, 10 insertions(+)
+>>
+>> diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
+>> index 1515951403c9..50861b61eea4 100644
+>> --- a/drivers/adc/rockchip-saradc.c
+>> +++ b/drivers/adc/rockchip-saradc.c
+>> @@ -339,6 +339,14 @@ static const struct rockchip_saradc_data rk3399_saradc_data = {
+>>   	.stop = rockchip_saradc_stop_v1,
+>>   };
+>>   
+>> +static const struct rockchip_saradc_data rk3506_saradc_data = {
+>> +	.num_bits = 10,
+> 
+> It has 12 bits according to the TRM.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanyX+wAKCRAr4qD1Cr/k
-CrMvAP9dNIM/dtVrESQj9gxR+CDBD1NewH5AiRHf+XtLiZguvgD/VhrknnQiB/yE
-nNc+78kJgByDun96I8PBcw58W6C8Eww=
-=8psN
------END PGP SIGNATURE-----
+Hum, in the datasheet for RK3506J v1.2, RK3506B v1.4, RK3506G2 v1.5 and
+RK3506 TRM v1.1/v1.2 it lists 10-bit resolution.
 
---BiOmeiK6NmPfupRr--
+Regrads,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
