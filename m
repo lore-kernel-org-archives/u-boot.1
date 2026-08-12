@@ -1,99 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64EE0C5B56A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 17:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 611A1C5B572
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 17:21:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EAFC781205;
-	Wed, 12 Aug 2026 17:08:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9988460A44;
+	Wed, 12 Aug 2026 17:21:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vGJRodpgGfa3; Wed, 12 Aug 2026 17:08:22 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JAqPWoaPpHob; Wed, 12 Aug 2026 17:21:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 229228120C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 19782607BD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786554502;
-	bh=HgDNNwwGxYxZ3oRQWMSM+pKGk6HiGFYPvrkZZ7kVJ/Q=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=xIvJGXur++ZGanNi7qicodmhMjyVlchN00c3/3ep1ldti5SQQUuaG9GJt8tTzRLGh
-	 f8zHqTBM3SuLqDBSEiRrf8FNyUgiYn5G3eh0kpBszfa6J23GZGZVTu93hK8Ffd34J3
-	 1cJRftKd85pUtA8TgK4eGtqnJzFmiFQCVc3HLI1JKTlkw7Zf2qEHy52tmxWZdjMoWx
-	 ysnmS1N/lh5iUltOxLNWQCPmmTdw4DHMthe8U6sasFUhXRyh+VOENxsIo+cF1h0wQb
-	 OgOwMI9n4PEWTFjKMZ771og7IZXcP+xys/3ShR5zjYNDX3WnbNkrg5uSyKf70lOlb9
-	 9sNTHGkWaF34g==
+	d=lists.u-boot-project.org ; s=default; t=1786555264;
+	bh=6HfZpq5wVo+hlUZJcTU+hGx3711iOab2pFY9W9tBvRw=;
+	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=TYaoa0zoWigYiI0INxUO17gwkPQ4dWBUDbZWAU/Sowyh0LaaT5td6MAmkNlk2+8Mi
+	 VqOrSVLvHP27uPkYcA40nC8SKmSovrtFeuhcrTyTAVfqQRWEvT0Q00dGEy4VW4GUfB
+	 KeLfeE9YEoTZ9r/uenRFRze6wO4IX9s5BsoOyagQNuTB3r+I5cXrrKo+BarZKe3pK9
+	 vd9z8At5VMXaWmIaNHpGBye1jE42Qfme0OZnf7m393KIptj0c8yiVcUasutKfy+QNk
+	 X0/3DF7jxtSZhlIdOK7pY72OWqMsyO5dhoKnvi2syWzHDqWCbDsP1KGvdjNPwhMlFH
+	 WDUEpNlapIqHw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 229228120C;
-	Wed, 12 Aug 2026 17:08:22 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id EF286270
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:08:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 19782607BD;
+	Wed, 12 Aug 2026 17:21:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D8EF53A4
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:21:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E14588120C
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:08:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CAB8A4027A
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:21:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZAUbrodn2Ajp for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 17:08:20 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=f498=gg=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E15E081205
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E15E081205
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E15E081205
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:08:19 +0000 (UTC)
-X-Forward-Email-ID: 6a7ca881cf67b390aab71fae
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.13.12
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <ede92cc8-2f36-470b-8e7a-bdb04f723b03@kwiboo.se>
-Date: Wed, 12 Aug 2026 19:08:14 +0200
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wY9ZAIUJlyaV for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 17:21:02 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::22f; helo=mail-oi1-x22f.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 19BB140140
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 19BB140140
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 19BB140140
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:21:01 +0000 (UTC)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4a475409044so477543b6e.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 10:21:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786555261; x=1787160061;
+ h=content-disposition:content-type:mime-version:message-id:subject:to
+ :from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=6HfZpq5wVo+hlUZJcTU+hGx3711iOab2pFY9W9tBvRw=;
+ b=aRbSjrom8qYFXRswgYl4SPmn0jJ2BMG62mgKKEQaARdRM5uZMWK1YTLwchChuxFpwl
+ yztI0dW+gCeuTxr7rIzLP+9rmPbE6v2jYigZ75EmxdOscqEpltOTfgKa5q/oHtPBFLmv
+ KPWGf1bO8z+uFJ8D5vc7sc4/hNwG7r79JKT2Zlyo58OoGVLM/UOioAVXQ8BRb7gq4qQs
+ YurBJapjuJvFtp1Dni+Hmd+RID4x5HlI93Vc+8RGL/aVgEW8JiDKoMQqQTzCov9AYVqc
+ ZqR9gK9xXxyXBxicFB0S8XJ5TgyCrhWCy9E1PAloudWDqz5uQaZVmiqAAkL+2fXjIefs
+ U+VA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoQEOmZYCiMDvml3+8mkELEvs57tsORdvgJRh/K6vYTMuS9CWEItOxtRlkgcciaXOOJ5lQuBDo=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyoGMR6RCfVJ42Ych2FxeGcOIRsxczH2ZZv/BILX/0MxFQUHai2
+ DWuzcqjLYOYzYmcadgqxrI4qwMHxNaewivERhk5Idx02GExOTQ2QyNWKAo1B35S4O4Ig6YkEwKB
+ N7KUW4g0=
+X-Gm-Gg: AR+sD1388z/BXEqptH8f3cUTRn+K9DKTHUxxM7bTKy8ilRKAAk3R/54KSiufbbJ0/3/
+ TRSNWiGiNB4qJCQntXEuIYJ9Q+iNPvr5cjFJNR0PI4gQ5fdXsBsxIsnj47duHIkBVY5/B2emhKn
+ N81FerVpniBo2xpC1ny0evsl3tsvGBSvR/wRK3vpeHxr2steLQgK8OGe1zRGpBaHvSyQMNBoWet
+ sEhC06ZbSzKZKlBWUvZ8XKv/nHch2sL5ty1ZnKs00Av5mLc3tA573EftT2MMZUtgS73pH/GrlHV
+ 7NtBquBxWg6q1Jnkw9jZsof6MU/t8QGADUjY/M/9gofLuLfvLkp1tvDRo6OKjWdy9WcIFKGCQBP
+ ogoXb8TW55mBSiarFTWtYf3IIKNvwwztDDSpbgDuxgxxBtTy2g/8KTNdj7jAwbHY6hLJAMyYyZ4
+ uP5fL9y9DnEP1tcIIGPDsnu2E07pmmajcMEC3xf+DlbjWLWkMEqhkfM2pz0baglbBXGuHtEiDN5
+ 295TvUyOpg7ZpdM2JinDvvIOwHEVmT9Z2Zzxet9LmAjlVbEkIAeCBRbUvgj4hRgGoAEHptygLKC
+ O8ZIUlCX9Q==
+X-Received: by 2002:a05:6820:c8c:b0:6ae:47e0:be20 with SMTP id
+ 006d021491bc7-6b0c4194e3emr17420eaf.7.1786555260823; 
+ Wed, 12 Aug 2026 10:21:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-45e35175873sm2301645fac.7.2026.08.12.10.20.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Aug 2026 10:21:00 -0700 (PDT)
+Date: Wed, 12 Aug 2026 11:20:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Golle <daniel@makrotopia.org>, u-boot@lists.u-boot-project.org
+Subject: Problem with test/py/tests/test_fit_verity.py?
+Message-ID: <20260812172057.GC3297518@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] adc: rockchip-saradc: Add driver data for RK3506
-To: Quentin Schulz <u-boot@0leil.net>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-References: <20260803190946.2259514-1-jonas@kwiboo.se>
- <20260803190946.2259514-4-jonas@kwiboo.se>
- <ca0eef0e-4e4e-49f9-82bc-d498d54ddd3c@0leil.net>
- <64823d5b-2e70-47b0-b071-82651e7b1968@kwiboo.se>
- <c613cf1a-9fa7-4f9f-abdc-b3130d18e9c4@0leil.net>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <c613cf1a-9fa7-4f9f-abdc-b3130d18e9c4@0leil.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oTNySr9OHQg2P5qX"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kwiboo.se; 
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1786554498;
- bh=HgDNNwwGxYxZ3oRQWMSM+pKGk6HiGFYPvrkZZ7kVJ/Q=;
- b=YzLwEN3XP0WfLai/JsTrrImYVhVXnAOdYUWQWUez2mN0mlYz3VqjACxYbbzVJeBZePz+7JfcK
- Ovi3kf8L469uFhM/OHCpilk6ZPx39PHQ736YsJpzvYsFT+ADgw5ps4pKulYj07p7AFRN9Q0uCHo
- dTP6OlyVzH+osxiz5qQ1whhmQb+xlydPY/q9k/8Noboom9nsV/Emw+bcC/k2TlgdV8vagTc2ucJ
- O12XP+vO0PCGivb+aE2xY+UmmCK3PgbtP+K1zXHB7kXiNIGmBFLknDcQZYswh0dprb3cocNDdSC
- WztYlWIw9Lzts6FCrcSz50SrXlE7bmL/dINo+vljVWuA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=YzLwEN3X
+ d=konsulko.com; s=google; t=1786555261; x=1787160061;
+ darn=lists.u-boot-project.org; 
+ h=content-disposition:content-type:mime-version:message-id:subject:to
+ :from:date:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=6HfZpq5wVo+hlUZJcTU+hGx3711iOab2pFY9W9tBvRw=;
+ b=EJrWAnyWI6j1dIMVbVKOCMiJbZYZ+OHhOmkNP+prLdVLlFO44oNqdqkYNJ8FD3JJi8
+ mXNP2SlbZGwVr+pLNFv8h1Wl35HLleb9Uq7IDvmXuON0hVbOm3O8PvuS5v3m+rO4Kf8/
+ RAk5IRe8zJzSES+SLgrckbx+E4F5Ijrc5BYYU=
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=EJrWAnyW
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -108,113 +126,63 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Quentin,
 
-On 8/12/2026 6:48 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 8/12/26 6:20 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 8/12/2026 12:33 PM, Quentin Schulz wrote:
->>> Hi Jonas,
->>>
->>> On 8/3/26 9:09 PM, Jonas Karlman wrote:
->>>> Current rockchip,rk3528-saradc fallback instruct the driver to use a
->>>
->>> There is no rk3506 DTSI available either in Linux kernel or U-Boot, so
->>> this fallback technically doesn't even exist and we don't have an issue
->>> (yet). Just say that none of the the v2 SARADC data match what the
->>> RK3506 can do (due to the divider and parent clocks not being able to
->>> achieve the requested 1MHz). Please simply rename the commit title to
->>> reflect you're adding support for the SARADC found on the RK3506.
->>
->> Sure, I will update the commit message in a v2.
->>
->> The rk3528 fallback mentioned was in reference to the dt-bindings:
->>
->>        - items:
->>            - const: rockchip,rk3506-saradc
->>            - const: rockchip,rk3528-saradc
->>
-> 
-> Ha! Completely missed that, thanks the clarification.
-> 
->>>
->>>> 1 GHz clock rate. However, the CLK_SARADC used on RK3506 can only be
->>>> configured to use a 32 KHz, 400 KHz or 1.5-24 GHz rate.
->>>>
->>> This is quite misleading. The parent clocks are 32KHz, 400KHz or 24MHz.
->>> The divider is between 1 and 16.
->>
->> You are correct, I must have mixed up this clock with a different clock
->> that had multiple parent options and the divider was for one of those
->> parent options.
->>
->>>
->>> This means that 1MHz is not achievable with the dividers and we need to
->>> aim for something else. Please reword the commit log to reflect this.
->>> I'm also not sure where people got 32KHz, 400KHz and 24MHz but it's
->>> what's specified in the Linux kernel, so fine with me :)
->>>
->>>> Add driver data for rockchip,rk3506-saradc that request use of a 1.5 GHz
->>>> clock rate, to avoid clock divider overflow in the RK3506 clock driver.
->>>>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> ---
->>>>    drivers/adc/rockchip-saradc.c | 10 ++++++++++
->>>>    1 file changed, 10 insertions(+)
->>>>
->>>> diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
->>>> index 1515951403c9..50861b61eea4 100644
->>>> --- a/drivers/adc/rockchip-saradc.c
->>>> +++ b/drivers/adc/rockchip-saradc.c
->>>> @@ -339,6 +339,14 @@ static const struct rockchip_saradc_data rk3399_saradc_data = {
->>>>    	.stop = rockchip_saradc_stop_v1,
->>>>    };
->>>>    
->>>> +static const struct rockchip_saradc_data rk3506_saradc_data = {
->>>> +	.num_bits = 10,
->>>
->>> It has 12 bits according to the TRM.
->>
->> Hum, in the datasheet for RK3506J v1.2, RK3506B v1.4, RK3506G2 v1.5 and
->> RK3506 TRM v1.1/v1.2 it lists 10-bit resolution.
->>
-> 
-> Well, I read the register description and it says 11:0. But the first 
-> sentence in the SARADC section says "10-bit"... sooooo /me shrugs. 
-> Ideally, we should check whether the ADC returns close to 1023 (10 bits) 
-> or 4095 (12 bits) when it's fed 1.8V and then we would know for sure :)
+--oTNySr9OHQg2P5qX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I did a quick 'adc scan' test on my ArmSoM Forge1.
+Hey,
 
-With '.num_bits = 10':
+So we don't run the FIT verity tests on CI, because veritysetup isn't
+installed, and should fix that as it's own problem. On one of my test
+setups, I ran in to this:
+----------------------------- Captured stdout call ------------------------=
+-----
++/tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53/tools/mkimage -E -D -I dts -O dtb=
+ -i /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal -f /tmp/t=
+mp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image.its /tmp/tmp.=
+xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/i
+mage.itb
+FIT description: dm-verity test
+Created:         Wed Aug 12 11:01:01 2026
+ Image 0 (rootfs)
+  Description:  test filesystem
+  Created:      Wed Aug 12 11:01:01 2026
+  Type:         Filesystem Image
+  Compression:  uncompressed
+  Data Size:    262144 Bytes =3D 256.00 KiB =3D 0.25 MiB
+ Default Configuration: 'conf-1'
+ Configuration 0 (conf-1)
+  Description:  test config
+  Kernel:       unavailable
+  Loadables:    rootfs
++fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
+=2Eitb /images/rootfs/dm-verity algo
+sha256
++fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
+=2Eitb /images/rootfs/dm-verity data-block-size
+4096
++fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
+=2Eitb /images/rootfs/dm-verity hash-block-size
+4096
++fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
+=2Eitb /images/rootfs/dm-verity num-data-blocks
+Error at 'num-data-blocks': FDT_ERR_NOTFOUND
+Exit code: 1
 
-  => adc scan adc@ff4e8000
-  [00]: 1019, 1792961 uV
-  [01]: 1019, 1792961 uV
-  [02]: 0, 0 uV
-  [03]: 1011, 1778885 uV
+--=20
+Tom
 
-And with '.num_bits = 12':
+--oTNySr9OHQg2P5qX
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  => adc scan adc@ff4e8000
-  [00]: 1019, 447912 uV
-  [01]: 1019, 447912 uV
-  [02]: 0, 0 uV
-  [03]: 1011, 444395 uV
+-----BEGIN PGP SIGNATURE-----
 
-RK3506G_REF_V11_20241114 lists ADC 0-1023 in the SARADC_IN0_BOOT table,
-with 1023 for FSPI--SDMMC(eMMC/SD Card)--USB/SPI2APB.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanyrcgAKCRAr4qD1Cr/k
+CoF+AP4u0V2vHXc/X3XwcuKoiZgSjHymhrKoHMO8Oo0CQrWWkAEAq5vrcGtagLec
+tPa24krhP/2AuCeOYWNwU0ey0j3U5A0=
+=Nrwy
+-----END PGP SIGNATURE-----
 
-So with this data I think 10-bit should be correct, without having to
-measure or apply 1.8v on an ADC pin.
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+--oTNySr9OHQg2P5qX--
