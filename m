@@ -4,92 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB123C5B56A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 08:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2BAC5AD5A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 08:11:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5B59B608DC;
-	Wed, 12 Aug 2026 08:05:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 15FCA6084E;
+	Wed, 12 Aug 2026 08:11:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YgngQf3avhYM; Wed, 12 Aug 2026 08:05:08 +0000 (UTC)
+ id HhE8a3mAtuto; Wed, 12 Aug 2026 08:11:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9DECE60889
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DA4B860887
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786521908;
-	bh=3IiHc47dVMQ5UT13Vp/eEacxVwCCbgCmIJ2y2GGgT1E=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786522280;
+	bh=wGqRkzXIWHz5aOpQMHDuaEEjTMQzQK8x05KPjUMc3C4=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=KsbHBATsdePe+mK9pRGsudd11qlvHGVZ9AI/5+YSs9AGTJr5ebQ+dfr3+vo+OpOpg
-	 v4Kxp2oE0+YcismaXntAyqA2wPA6OEZGPHB7TbasucfJh1fTkfD2RRY6iYWR4clTsQ
-	 GuqzkyM4alz+G9phZdHVRiAZx3RCyTr1gkgVnmqOMBpASm8VIiAjBuQ68+1fI5jYzl
-	 i0jw6uoGnfUBVA4DQ0JUYv8HY/oeVavnJCt6PZ0fuzb0M9XBx4pJmFQ6SsAzccsD3R
-	 tNlYDq3TgzF23oAnYET6QNhgOjPaCIZCz8Eg7lBljjia1U70bNk9Hg2hNCjEUQjdtK
-	 ylkGcZviI2FvQ==
+	 From;
+	b=FxY8WpRXIxXRymCXS9zqwvsIBvEbH2NH/gP4DAFBrWQFXSJ38FRmqGv+zGdy5/Ry5
+	 34VgrHG5UE0rjzQjEUvbDG0WFk8F46k3/G0AfzpK0HdG8TgfNu3oG/hcPyhBDSIpyc
+	 2wdb8fsxhG4mg6YBFVvDeBqN3pZmIzAYldm+voni+WpG1JsYe/keXx2vR0tNDnoc68
+	 CjJWSYrbCObdDsaLukJhsGJrvydiDjTPUSL7i7wLvB0PsiX1GfH0Yb42vgVKdZXRgQ
+	 KnWcsLaxqekcwCQ2+vEEJG0SSMvbO53KuUemDkAHxgza2xufv/AUKQLd79fP81EsBb
+	 gY/hfP5tWR1mg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9DECE60889;
-	Wed, 12 Aug 2026 08:05:08 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D0E851F41
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:05:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DA4B860887;
+	Wed, 12 Aug 2026 08:11:19 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 17EE81F41
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:11:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BCB214083D
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:05:06 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EC4B381121
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:11:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EijOiMQXiJSa for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 08:05:06 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.25.11;
- helo=smtp-190b.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zdVvPw7JbMRL for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 08:11:16 +0000 (UTC)
+X-Greylist: delayed 1510 seconds by postgrey-1.37 at util1.osuosl.org;
+ Wed, 12 Aug 2026 08:11:16 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 58F46810CC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 58F46810CC
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
+ helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6AB4E40824
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6AB4E40824
-Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
- [185.125.25.11])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6AB4E40824
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:05:04 +0000 (UTC)
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hKgyP2YJ8zRgg;
- Wed, 12 Aug 2026 10:05:01 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hKgyN2P6hzjDH; Wed, 12 Aug 2026 10:05:00 +0200 (CEST)
-Message-ID: <e5aaed12-ec8c-4c8b-8cf8-1c4f9bdc2174@0leil.net>
-Date: Wed, 12 Aug 2026 10:04:59 +0200
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 58F46810CC
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:11:16 +0000 (UTC)
+Received: from sslproxy04.your-server.de ([78.46.152.42])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
+ id 1wu3eq-000LJl-2j; Wed, 12 Aug 2026 09:45:53 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy04.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
+ id 1wu3er-000Jz6-1I; Wed, 12 Aug 2026 09:45:52 +0200
+Message-ID: <b8c3b59fdfb810940ea2afa0e50f03935a665a5e.camel@ew.tq-group.com>
+Subject: Re: [PATCH 1/3] bootm: size the noload decompression buffer from
+ the compressor header
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+To: Tom Rini <trini@konsulko.com>, Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, Quentin
+ Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>, Peng Fan
+ <peng.fan@nxp.com>, Daniel Golle <daniel@makrotopia.org>, Randolph Sapp
+ <rs@ti.com>
+Date: Wed, 12 Aug 2026 09:45:52 +0200
+In-Reply-To: <20260810163728.GB1160436@bill-the-cat>
+References: <20260809042338.63397-1-aristo.chen@canonical.com>
+ <20260809042338.63397-2-aristo.chen@canonical.com>
+ <20260809152703.GF394392@bill-the-cat>
+ <CAA=k7=n1tcSPQnjfXVMOpksz20Zb30NLrbCdt6Gv5-UnV4Znig@mail.gmail.com>
+ <20260810163728.GB1160436@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/4] rockchip: rk3399: Add ROC-PC-PLUS board detection
-To: Fabio Estevam <festevam@gmail.com>
-Cc: trini@konsulko.com, sjg@chromium.org, kever.yang@rock-chips.com,
- u-boot@lists.u-boot-project.org, Fabio Estevam <festevam@nabladev.com>
-References: <20260722194638.1285159-1-festevam@gmail.com>
- <20260722194638.1285159-3-festevam@gmail.com>
- <d4d49e17-e125-4121-b0be-e486e1be5393@0leil.net>
- <CAOMZO5DULY0wE_U-4aX9sfrnum++J9iJ02_H8L+g3qdY156KCA@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAOMZO5DULY0wE_U-4aX9sfrnum++J9iJ02_H8L+g3qdY156KCA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0leil.net; s=20231125; t=1786521901;
- bh=3IiHc47dVMQ5UT13Vp/eEacxVwCCbgCmIJ2y2GGgT1E=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KLcUdbBkkgKmncbiw84O6X9y8ODEyqoppL2p2u8HBt52uyv6RfRA/C0eWOE+BShE+
- EJ/3BMYLza/uGjMYIHYKc9ZpqIgf4Zr+vVSpouadjqDGrn7jPqPTqpjwV9xdWJu/Hl
- +3hwZb9piUMULlulyYKfv07egsPIpXjN9VmEMDQOUmTiOviL6TavicIY56/D+Alkc3
- HHicKFCblhIhCu+2a0deQf98c0SEp33KFvYCzYev6gfPD5Ju/2ZWymv8VnY54A5I7d
- o7aMmgNL4mm//90m3byAzgCuKvcmcHiqfqiA3SNEPPpe75BrbeXPe5XT1j1aCZKY6d
- xAQGc2suYu89Q==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=0leil.net
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Virus-Scanned: Clear (ClamAV 1.4.3/28089/Tue Aug 11 08:25:05 2026)
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; 
+ d=ew.tq-group.com; s=default2602; h=MIME-Version:Content-Transfer-Encoding:
+ Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=wGqRkzXIWHz5aOpQMHDuaEEjTMQzQK8x05KPjUMc3C4=; b=okfaJITm+yQiTK37hgpP4ZDvgJ
+ ONJ7rJV7rPkFTPGpCKv/FULd87zHG6CSo7xIo317im+Lze6/8rQGCefxnleHktj/w6r1PQGDe3oQC
+ Mjh5BS9kEzhojrlcLrUHIrWInI8bAOSY72g2Cd+QWMAaKLVlzFiuTB2JjPs4jXLKAydSOGu77BM0Z
+ 3qvLzMojdhEX/CLhDnYtpmXeq+w4KBVmZwm5FY6XQyF+1HegeklFoTZuuzGgwQM9K2EIIpmfGHJ5V
+ vM4b85sH5F6Ml7SyK2LKFU09suRGXHzRTtOeEjgtg39qnIm+Em7ceuqZE4HD/pK6bPakVDR07XJ7z
+ 9wInNzxg==;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=KLcUdbBk
+ unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
+ header.a=rsa-sha256 header.s=default2602 header.b=okfaJITm
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -101,75 +110,120 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <u-boot@0leil.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Fabio,
+On Mon, 2026-08-10 at 10:37 -0600, Tom Rini wrote:
+> On Mon, Aug 10, 2026 at 10:32:12AM +0800, Aristo Chen wrote:
+> > On Sun, Aug 9, 2026 at 11:27=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
+rote:
+> > >=20
+> > > On Sun, Aug 09, 2026 at 04:23:27AM +0000, Aristo Chen wrote:
+> > >=20
+> > > > For a compressed kernel_noload image, bootm_load_os() allocates a
+> > > > per-image decompression buffer of ALIGN(image_len * 8, SZ_1M). The =
+8x
+> > > > multiplier is a heuristic: it comfortably covers what zstd and xz
+> > > > achieve on real kernels, but any well-compressed payload (say, a bi=
+g
+> > > > run of zeros) can exceed it and fail decompression, and no fixed
+> > > > multiplier is safe against arbitrarily compressible input.
+> > > >=20
+> > > > Read the real uncompressed size from the compressor header instead.
+> > > > Add a small helper image_decomp_get_uncompressed_size() that return=
+s
+> > > > the uncompressed size when the format carries one: gzip ISIZE, lzma
+> > > > header uncompressed size, lz4 frame Content_Size when the FLG bit i=
+s
+> > > > set, and zstd Frame_Content_Size. Other formats return -EOPNOTSUPP.
+> > > > Bootm uses it to size the buffer to ALIGN(hdr_size, SZ_1M), capped =
+at
+> > > > CONFIG_SYS_BOOTM_LEN because the value is attacker-controlled, and
+> > > > falls back to the 8x heuristic for formats without a size field
+> > > > (bzip2, lzo, xz) or when the header lacks the size (some lzma or lz=
+4
+> > > > streams).
+> > >=20
+> > > Have we gotten actual problem reports? This is a good bit of growth f=
+or
+> > > a problem I'm not sure we're seeing. Thanks.
+> >=20
+> > Thanks for the review! Honest answer: no bug report against the
+> > current 8x multiplier has crossed the list. This is preventive rather
+> > than reactive, and I should have made that clearer in the cover
+> > letter.
+> >=20
+> > The reasons for this patch set are:
+> >   * The multiplier is fundamentally a heuristic. Nora raised the same
+> > concern in the v1 round of the earlier
+> > series(<https://lists.denx.de/pipermail/u-boot/2026-June/621575.html>):
+> > "Deriving a buffer size from the compressed size is not possible, as
+> > the compression ratio may be arbitrarily high for data with many
+> > repetitions (for example ranges of 0x00 or 0xff)."She dropped her
+> > replacement patch when we bumped 4x to 8x, but the underlying point
+> > stands: any fixed factor can be defeated by a highly    compressible
+> > payload, and further bumps are just moving the ceiling.
+>=20
+> Yeah, I recall this. But we aren't really handling arbitrary data here,
+> so it's not as much of a valid concern I think, without real examples.
 
-On 8/12/26 1:01 AM, Fabio Estevam wrote:
-> Hi Quentin,
-> 
-> On Tue, Aug 11, 2026 at 8:55 AM Quentin Schulz <u-boot@0leil.net> wrote:
-> 
->> Ideally, we should be able to automatically detect whether it's a
->> roc-pc-mezzanine-rk3399, but I couldn't find schematics for it and from
->> the Device Tree, there doesn't seem to be something we could use to
->> detect it like we do for ROC-PC-PLUS/ROC-PC. So instead I recommend to
->> check for CONFIG_IS_ENABLED(DM_I2C). If it ever gets enabled for
->> roc-pc-mezzanine-rk3399_defconfig, the logic will return that it's NOT a
->> ROC-PC-PLUS and thus use CONFIG_DEFAULT_FDT_FILE which is
->> rockchip/rk3399-roc-pc-mezzanine.dtb which is correct.
-> 
-> DM_I2C is also selected by roc-pc-mezzanine-rk3399_defconfig.
-> 
+It's probably not a problem when the OS image is a proper kernel, but if th=
+e
+next image is a tiny loader itself, even a small amount of padding (either
+inside the .data section or at the end of the image) might result in high
+compression ratios.
 
-Yes, but it's missing SPL_DM_I2C.
+While irrelevant for current U-Boot, one example would be OpenWrt's lzma-lo=
+ader:
+it has a build mode where the <100KiB binary is padded to 1MiB (I may be
+remembering the exact numbers wrong) before compression to force a cache
+writeback during decompression (to work around ancient U-Boot versions that=
+ did
+not implement cache handling correctly.)
 
-> We can use SPL_I2C to distinguish, like this:
-> 
+Specifically the case of kernel_noload would usually be used with EFI
+applications, for which additional loaders (shim, systemd-boot, ...) are qu=
+ite
+common. The combination with FIT and compression is probably less common...
 
-Unfortunately, we cannot simply rely on SPL_I2C as the function is only 
-implemented in i2c-uclass.c which is only compiled when SPL_DM_I2C (and 
-SPL_I2C) is enabled.
+Nonetheless, I think a principled fix is preferable - I like the EFI-in-FIT
+approach a lot (we may make that the default setup in our TQ-Systems standa=
+rd
+BSPs in the future), thus I would like the feature to be well-supported and
+without known bugs.
 
-There's also an issue in the dependencies for SPL_DM_I2C and TPL_DM_I2C 
-as they both depend on I2C (via the if at the top of 
-drivers/i2c/Kconfig) and DM_I2C while they should depend on SPL_I2C 
-(respectively TPL_I2C). I'm not sure why they depend on DM_I2C as it's 
-for proper, not xPL...
+Best,
+Nora
 
-TPL_SYS_I2C_LEGACY depends on !SPL_DM_I2C but I'm assuming it should 
-rather depend on !TPL_DM_I2C.
 
-Same for SPL_DM_I2C_GPIO, not sure why it depends on DM_I2C_GPIO. 
-SPL_I2C_MUX also depends on I2C_MUX, for what reason?
+>=20
+> >   * Simon suggested the header-size approach as the principled fix in
+> > the same round (<https://lists.denx.de/pipermail/u-boot/2026-May/620121=
+.html>):
+> > "It might be worth updating image_decomp() to take a ulong size... I
+> > believe in each case it is also possible to find out the decomp size
+> > by looking at the header."
+>=20
+> Which would make sense for a more general problem, or a less constrained
+> system.
+>=20
+> > So the growth buys correctness: the buffer size is derived from the
+> > compressed stream itself, not from a multiplier guess that can be
+> > defeated by any payload with a high enough compression ratio.
+> >=20
+> > That said, I understand the "we're not seeing it" concern. If you
+> > would rather wait for a concrete report, I am happy to drop the series
+> > and re-send when one lands, or to shrink patch 1 to gzip only, which
+> > cuts about 40 lines of parser code. Let me know which you prefer.
+>=20
+> Yes, I'd like to wait and see what problem reports we get at this point,
+> thanks.
 
-VPL_DM_I2C should depend on VPL_I2C but it doesn't exist, so we probably 
-should just remove the symbol since it won't do anything as is.
 
-None are a blocker for this series.
-
-> --- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-> +++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-> @@ -68,6 +68,9 @@ static bool is_roc_pc_plus(void)
->   {
->          struct udevice *bus, *dev;
-> 
-> +       /* roc-pc-mezzanine-rk3399_defconfig does not select SPL_I2C */
-> +       if (!CONFIG_IS_ENABLED(SPL_I2C))
-> +               return false;
-
-Please add a newline after the return false;
-
-It should be !CONFIG_IS_ENABLED(DM_I2C) as CONFIG_IS_ENABLED is going to 
-add the appropriate prefix based on the current stage being built (so 
-definitely no SPL/TPL/VPL to be added manually) and CONFIG_SPL_I2C is 
-not enough to build the dm_i2c_probe implementation, we need 
-CONFIG_SPL_DM_I2C (well, and CONFIG_SPL_I2C because otherwise the 
-drivers/i2c directory isn't traversed and because SPL_DM_I2C is missing 
-a dependency on it).
-
-Cheers,
-Quentin
+--=20
+TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
+any
+Amtsgericht M=C3=BCnchen, HRB 105018
+Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
+neider
+https://www.tq-group.com/
