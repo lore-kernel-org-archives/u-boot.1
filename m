@@ -4,188 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED91C5B56A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 13:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807AEC5B572
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 13:32:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B73E380DDC;
-	Wed, 12 Aug 2026 13:10:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 216038125F;
+	Wed, 12 Aug 2026 13:32:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Sk15VBiDFv9O; Wed, 12 Aug 2026 13:09:59 +0000 (UTC)
+ id NqGbv9TNn5Se; Wed, 12 Aug 2026 13:32:17 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C1C0180EA3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AE6F8811FE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786540199;
-	bh=n8yOkKMIgEWPiYdEcnpJ3CuCJnA/My57L7wW3QaeJGU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786541537;
+	bh=yk/rElWfP3U6lraWkJcGxaOU6XQIFR5sYBahhz2ZwVQ=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kXeCnBqVpylxYqMTMn02jvpcth3AcO++4xGXamPE/y25XqQJ9TOKVrlFr3lE0joD3
-	 bH92bEHTdmIIOUZl7ZwlY6olhuf+JsgdOA0HOTwXOJw/e6HeM725k0EJx2n9XYpgo4
-	 6yHM1FOa8xak/NrOSXLtnZm5wanY3syR5jSX95wWzyDrgWNRdeNkg9fmjjn3G7OL6l
-	 n9E+3RP22zsH5imKGn6kmQahOFq9QjD9qL5tZP0CqeqiXtedh0QLskbAOjU9wNg5G2
-	 ZHCwJ0XbfZtdxpG66JyLl2RB6szSwsIVifpkOy/En7+0P0lgRLjfljH21fhb3cD1Ot
-	 +wtpN0OT3F6EA==
+	 From:Reply-To:From;
+	b=XM0WQDhZUftJx7E5Je37rV87Dh+LntphaGJesv1FNnum84p/rIXuI9pMjhTJKFN9z
+	 5vBCF69pdG7Wd9Wra+qxPsqz8mWbKNFbbLK5v8UWkiTrla4VNvNr0nOlmuoij1mgxk
+	 NjDicWDh2FkSQWX0HykIDzgSvhYn0ecUlxJnbOv31TOCi0HhqPfAnHvDUzlchU/N5s
+	 nrkOyMO8s5cy5GDQsphKo7c6Sy6wlQSKqgDGfHNUEiLQRZhtfBy6jo0pkMADCMIY8j
+	 xh4bFDtDKELan+OmOuCmOjLKd5oILpTznFs3FTiyde2hVRgGb1S+d4CpzTh/jB+uoG
+	 lw/ktD/Q8DjCQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C1C0180EA3;
-	Wed, 12 Aug 2026 13:09:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 05C493A4
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 13:09:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AE6F8811FE;
+	Wed, 12 Aug 2026 13:32:17 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CBB06282
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 13:32:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id EBEA3403E0
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 13:09:58 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BD86B4085D
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 13:32:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AkvzNXETDZbh for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 13:09:58 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cy2nZbxOy_NC for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 13:32:16 +0000 (UTC)
+X-Greylist: delayed 13386 seconds by postgrey-1.37 at util1.osuosl.org;
+ Wed, 12 Aug 2026 13:32:15 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 112814085A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 112814085A
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::3;
- helo=as8pr04cu009.outbound.protection.outlook.com;
- envelope-from=jerome.forissier@arm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7CD47400FF
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7CD47400FF
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7CD47400FF
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 13:09:56 +0000 (UTC)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=Jlub4yxKzeBQ8ENoerRNamZGqE9i1SRpanBu7HFdsOEAPNrYMkvglFmYaSpgfjuVncaNJ1PGjAbFxBQgBbRrel026oNvTaAWygvuT5D/x6QNsnXfRBiqqBx+tj0bv6EsB7Xh8Mem8n2z+hfikLSd64f8A5tNLxgEhFt/nWQILSwth/GP70piPLntZL9THBNPB7lY9BZx2OnmGATwNUP4Rh5Lr3AHCONAtHil0s5iIdCwyQaEps17f5pooMYLZkdb9tX8YDNtBbP7PoJpLROEcEP8Njs+r5rdDJfPYA8+5QT1+TNoTVdHbVdLia01GXDieYUC+48x33DDydhS2NiB3A==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n8yOkKMIgEWPiYdEcnpJ3CuCJnA/My57L7wW3QaeJGU=;
- b=HNdWSmgfNpzELc+IdeQtH96kOwf625XsHt1Kvrf/mghMM4cf/sepMIPVzpjSl41AoumxETbwvEynzDMPmc1jAm+mDujV7ObaOMa26Ma/ilw3/XpAv0JE0Zon9FeO1mvhNexG+xt1omR3R27mWdfNip4KGj1BSNfg1mUkOjvYp1IDU7Zvi/TJeRv7AOQ0BFewsZszRC4T3ECiJluVJp/gf72L5iQt0TjZnjqMNE+N9YVEW6p7PAv6c+/0I/PvcJGMK+IAaXuxfvcsGc+tLFGC5d/mHpPZERFn/w198S3uy5rTLZaDqEcMyLRDdJ55nta3Y9Fx4Y//mbaBuZn+tDDhJw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=byteray.co.uk smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-Received: from AM7PR02CA0018.eurprd02.prod.outlook.com (2603:10a6:20b:100::28)
- by DB9PR08MB6489.eurprd08.prod.outlook.com (2603:10a6:10:256::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.11; Wed, 12 Aug
- 2026 13:09:51 +0000
-Received: from AMS1EPF0000004A.eurprd04.prod.outlook.com
- (2603:10a6:20b:100:cafe::82) by AM7PR02CA0018.outlook.office365.com
- (2603:10a6:20b:100::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.13 via Frontend Transport; Wed,
- 12 Aug 2026 13:09:51 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS1EPF0000004A.mail.protection.outlook.com (10.167.16.134) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.6
- via Frontend Transport; Wed, 12 Aug 2026 13:09:51 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cFQ89beO0N/pb3w9aDXmbyMCB6YQvJx0sT68hRIQwjRzA1UV81MTBUwtkT6JlxFo+Tli8xT5yyNR1uLa7jDfX3nsqEhqn7tR52Z3vmI/ifUpoqQKwMypjgQ/KbDPUFDLp0TaZdyGS6MkrP1/GHmy8GPYRHpLMxi56eiseiPBylKijrWbDPTZEQuKxlocBWqvsmzve218zFoGJqHdDTp1x6TTRp714a/XU/XA/hwbWql+HE0COg3JmoZEEEAYC5WC79Wiw8kmucwHPuGVQfARQ8Gfa+oEerADAVs87g6nhgG4Yt8EJ3NYAkEXgu1H5mhMjBPGw4v6VToSDRwvwUd7Bg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n8yOkKMIgEWPiYdEcnpJ3CuCJnA/My57L7wW3QaeJGU=;
- b=kpUnUBlEij6d5b5jxtaEPYhVhLYg8edPyNqt+YDE4ddv1OmLJFXbccfkN2eLbYaRbZ32L1HVLIW9pTCWvZIA5w4mBwr3BruFn/7ggGKfkLx8BA4Cu6gTHCg2ADYPWzz4BhEUoRkafaVp4SoUwL95jONIJzmxhpuaQZMxpcx8AA28LpUIFEZjczU3ZgpRgZzZGhSSuz3kFRbOYRLf2u+GcCTkFR7kSBa0GLKiei37T1ZXp4Vt3/c8KXzn7MQXgaDZhLaUuPeiEYKM/f6Y05KR6uGNwqDvMDUGORgMQoqoo6w7cqxBjoMfnNosCIcbYF1ei9NoGxn7GnjntuY4wy3Kaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by PAVPR08MB9652.eurprd08.prod.outlook.com
- (2603:10a6:102:31c::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.12; Wed, 12 Aug
- 2026 13:09:15 +0000
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.21.0292.024; Wed, 12 Aug 2026
- 13:09:13 +0000
-Message-ID: <562641c4-f600-46eb-9b84-ece7bda0fce3@arm.com>
-Date: Wed, 12 Aug 2026 15:09:12 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] net: dhcp6: prevent an infinite loop parsing IA
- options
-To: Shahriyar Jalayeri <shahriyar@byteray.co.uk>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Sean Edmond <seanedmond@microsoft.com>, Ramon Fried <rfried.dev@gmail.com>,
- Francois Berder <fberder@outlook.fr>, Argus <argus@byteray.co.uk>,
- nd <nd@arm.com>
-References: <20260807-poc-dhcp6-ia-loop-v1-0-9d3fd3171c59@byteray.co.uk>
- <20260807-poc-dhcp6-ia-loop-v1-1-9d3fd3171c59@byteray.co.uk>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260807-poc-dhcp6-ia-loop-v1-1-9d3fd3171c59@byteray.co.uk>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P265CA0092.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2bc::13) To AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16)
+ client-ip=2001:1600:19:e38::bc08; helo=smtp-bc08.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
+ [IPv6:2001:1600:19:e38::bc08])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 112814085A
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 13:32:15 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hKqCw3dvWzvKZ;
+ Wed, 12 Aug 2026 15:32:12 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4hKqCv2vY0zcdQ; Wed, 12 Aug 2026 15:32:11 +0200 (CEST)
+Message-ID: <166efc6c-b659-41bb-a8d0-bec6d03df740@0leil.net>
+Date: Wed, 12 Aug 2026 15:32:11 +0200
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|PAVPR08MB9652:EE_|AMS1EPF0000004A:EE_|DB9PR08MB6489:EE_
-X-MS-Office365-Filtering-Correlation-Id: 726e1d33-fd0e-4bd0-6b43-08def872fe8a
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|376014|1800799024|23010399003|366016|10067099003|56012099006|11063799006|4143699003|18002099003|3023799007|22082099003;
-X-Microsoft-Antispam-Message-Info-Original: lHpv3NIwm5NdqMmVIf7dVFV9/UuLzOEfdfEDJ6w8wrJ/wwWy5Guh6blTi/UqA8eC7D4UIXWmsZFwheQD7sF2sdtDlhxN/o/pA7ZGmYWpheENfT809xU/3AzsmX2hw+BGK6TkjqNBNdkjzFe+PeV1MHPZuTMkwKGI5/MJHBGwEHqPnxryAObFhlGnsaR+9A98yiWiTqNcIM3tmsIfQCat70Slu+GqpzL360TBOmlTpc63L2N60SXKbO1KVy2SZYJBzAoc6K2wr5yAPh4THv6+zjQA1r1C9j9UmcuafMgvmvMcVGP6FGGnHuSm2JLRD7Rj9h2985nP002f23WBWoswRgPRQK02+kHIXA28+b1xrMDhYZWWkPgvc78eavt7nKuF+FSJMO+bwUBhQ1lvZEFguOmjp2UzPJMpOmruaN9gayMHv6+bxM1IP261bS1pk9OsGeax7BVfsq0UP18uRQcSJtiPF6uUzOhL6U5+mi8+wuXz1utMisJH0Y98oEW8PpeHCndDWzeFo251XT2Ki75bFG1Act8tMgbA+TpT2XpE5CEuDHqhWDvyKzNmwoOXi3LNTDbxyfgyUrcvebjPfz1xU7zlksf26lUfLj+a7nC+VmfZLKXpmv75hOTBAW1dDKLkghQwtrcB7kOItazXqqBIkw==
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(3023799007)(22082099003);
- DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: BuKHIYNc1bxlzjdKJrzPBUytWBm7CfwIowPpHOCCElrhqw6zJ7k19/DOhCK/HYnyiLPree4/i27TKaPntA7iXm7gS/TLrEPHPRWaeFt1dVr2b7eDNhP3nSdUywzffs9DzqtbY0AaJlnsSZ1QMc5Z5r2dY10Zvuh12OmXQIOpF5FaD+vdTR6wOmWoJ2bNGITRY7EbhdxJhOqCRHVZuY4q8UDBixlmQs4ImE+mQUIGiqcpY86EiJhPPy1N4vDVr44a7F9WpaQ18Lrw+dXW3PmJrA5Vd6knNV8xC5c/Isq/OlycqJVDvMEwyII7pKQfW+hi8CcO/L2SgOcWvZcnX4/P9A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9652
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF0000004A.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 1d23eb45-c3cb-4c92-818f-08def872e7fa
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|35042699022|23010399003|82310400026|36860700016|32650700020|1800799024|14060799003|22082099003|18002099003|56012099006|11063799006|4143699003|3023799007|10067099003;
-X-Microsoft-Antispam-Message-Info: bGZifkmRH1bUyogLaglu/6gD+n3yqgCitqLzvPGS6NIBcVur+SFne1fKUjvJASHcAehhCS9nljeDXvLcyBxsWNJ0v6Ul5aQ7cfoWTaRG2AzKiJymstzy+u+WLpyRnQT5AdrDBwdyfOiKdCyUOmUR7rxoIdYw5ZGpOMlRGxrxdsJ0l/6LOuZMbDc5q2Hwax52FUWX5d5hE1nfEDMyJEKxqbCeJi8Z/m7sJiADmeVHnWRhG1RVWr/8L1bnFSIrJLDueD3TBA2/WsW6GFVLPwfw8IMcYOEbsie2DL6pWPeckuMvRy00UdAvfYzEo/AGnaIxgS1Fq9OsYbU0SJ4WpXwhFI+dvxP1iotlYbGLE/KHAsRFNcwcFohj0/VLk/yup3skpz17FyxOaFERePUYIzJDqk4AG1B2WCwXI13TCMiT6EwOi8bbOHG3W0lVmC4nVv7412X1HHhTqQc03hGlYHC3puXP4ucRLaVk5gWlRpZMirSg1bVQ2sx0SYWg48gVxGJOZd95NaaAixlF8gedtm7oMlAXmoGqJ+ZqlwzYagTW6AQxnn5vF7f1irro+qZ1/FU+z9p49pWHmfBNs3ZIfb7iiEVmd5e1Ay5kTdOhquw/uav+nb/9RnBOnl8tyZoJ8TmNHZrB1yl6ZXw2WTq5uM9j8h9kmhIIo01Ehxmrl6jud1h8PC4sTy6tkOvNSZiy5XJO
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(35042699022)(23010399003)(82310400026)(36860700016)(32650700020)(1800799024)(14060799003)(22082099003)(18002099003)(56012099006)(11063799006)(4143699003)(3023799007)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: x01m9wxO5GFm7oOelnVxA2zjeLInkolDykhiO5dOKGPPKFUO/3DUA1pOdwvXC/LUz2qrwA0dSOAZk+/WWbpX1PjV46VDxUMxxwm0StNH38H1q7tAioGsuoD/xqdlqm/xMVw0VxsReVAHac0d2r3iYDQmRf+wNsptWvew6AFBVdO++j0/Xh68zBWpZbf95P6Ugn2KkHmt+eHada5+F8uGRJE6zf9sNG5pEyMyng0MxZH+4CDewhlhHecPEVRvluH+PSBIRZG83NqmDVnxSVsN2JFKMVPDNWXe0GeFQRS6HWieLSDZoTbrXYU35Qk2YE+X8GtntEf7QPzDnDEre1Rh0lgybN8PberZY5p5bwdxJ/pA/Mgcf3mp4M1RljL15Cda4TWWi5n8Mt/F/+jP5BL5wk2rQrWYb9uLvUahpoAOFP+md+KeL+LrTZh0IBxpfVg+
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2026 13:09:51.2713 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 726e1d33-fd0e-4bd0-6b43-08def872fe8a
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000004A.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6489
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 2/9] rockchip: doc: add mask ROM mode text
+To: Johan Jonker <jbx6244@gmail.com>
+Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
+ u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
+References: <0ce61246-3191-4ce2-a7ea-8ab3c02cfe80@gmail.com>
+ <dfe95538-0b08-4378-ad46-bbe0ef554cab@gmail.com>
+Content-Language: en-US
+In-Reply-To: <dfe95538-0b08-4378-ad46-bbe0ef554cab@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n8yOkKMIgEWPiYdEcnpJ3CuCJnA/My57L7wW3QaeJGU=;
- b=SqTL6MYnkmBd3eSVtevVNiA8l5zLZGFCIwq7Eq6fA+PJDvU7nZoNptbEVQhbpKbCXv9KYhjsrLH33JTDvngS77p+nxdHNZY6HF4R+TprDgUKqfp97KyFL85kexpJeA+wG4/zDN7SGUebtQ8yxxrWy+4Sa5FufLmJrJrXrPm9RaM=
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n8yOkKMIgEWPiYdEcnpJ3CuCJnA/My57L7wW3QaeJGU=;
- b=SqTL6MYnkmBd3eSVtevVNiA8l5zLZGFCIwq7Eq6fA+PJDvU7nZoNptbEVQhbpKbCXv9KYhjsrLH33JTDvngS77p+nxdHNZY6HF4R+TprDgUKqfp97KyFL85kexpJeA+wG4/zDN7SGUebtQ8yxxrWy+4Sa5FufLmJrJrXrPm9RaM=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=arm.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=SqTL6MYn; 
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=SqTL6MYn
+ d=0leil.net; s=20231125; t=1786541532;
+ bh=yk/rElWfP3U6lraWkJcGxaOU6XQIFR5sYBahhz2ZwVQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=g5oJxEp4TYrjaOEguxi5VHX5MkDIg+WSYPV37FqOtz/8Gl5mEluaKQn2oQb/mDpts
+ MI6S1H2B50X00vDvnKan98A3p/rcqWmiaHBspnoZiJbeWd71P8LVfQgiWMEaIB962a
+ 4UTw0NBQO5t4qZICGhoz3Pm1LZ/IbcvBgFLqBQYuG9HdJwaUJQcuVLHkL/0edh92aF
+ V6I7ps3zSzuew6Dmm8iEfJULaZJHlz+cVIfafLFIrvUpiQqMymQnAtZjjAU4bAV3E/
+ BkD/mv68zHWPyE9gsy0H1ULjdO90G/vppYXzFZjAIHQNouGHTsjzhgKr69ldwuCjVV
+ EFm4DTVFz1Agg==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=0leil.net
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=g5oJxEp4
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -197,61 +100,92 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Quentin Schulz <u-boot@0leil.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Johan,
 
-
-On 07/08/2026 16:52, Shahriyar Jalayeri wrote:
-> dhcp6_parse_ia_options() walks the sub-options encapsulated in a received
-> IA_NA / IA_TA option and advances its cursor by the sub-option's declared
-> length alone. A sub-option with a length of zero never advances the
-> cursor, so the while loop spins forever and the DHCPv6 client hangs. The
-> advance also omits the sub-option header, so it is short even for
-> well-formed options.
+On 8/6/26 1:10 PM, Johan Jonker wrote:
+> Add text that explains how to get into mask ROM mode.
 > 
-> An attacker on the local link able to answer the client's SOLICIT during
-> a netboot can send an ADVERTISE whose IA_NA carries a zero-length
-> encapsulated sub-option and hang the client; the IA_ID it has to match is
-> observable in the client's SOLICIT.
-> 
-> Advance the cursor by the sub-option header size plus its length so every
-> iteration makes forward progress and the walk matches the option layout.
-> 
-> Fixes: a0245818f7f8 ("net: dhcp6: Add DHCPv6 (DHCP for IPv6)")
-> Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->  net/dhcpv6.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-> index 640f089a2e1..1e92d744615 100644
-> --- a/net/dhcpv6.c
-> +++ b/net/dhcpv6.c
-> @@ -285,7 +285,8 @@ static void dhcp6_parse_ia_options(struct dhcp6_option_hdr *ia_ptr, uchar *ia_op
->  			break;
->  		}
->  
-> -		ia_option_ptr += ntohs(((struct dhcp6_option_hdr *)ia_option_ptr)->option_len);
-> +		ia_option_ptr += sizeof(struct dhcp6_option_hdr) +
-> +				 ntohs(((struct dhcp6_option_hdr *)ia_option_ptr)->option_len);
->  	}
->  }
+> Changed V5:
+> reword
+> ---
+>   doc/board/rockchip/rockchip.rst | 25 +++++++++++++++++++++++--
+>   1 file changed, 23 insertions(+), 2 deletions(-)
+> 
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index de2df3046e28..af6c08c46636 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -325,6 +325,27 @@ To build rk3588 boards:
+>           make evb-rk3588_defconfig
+>           make CROSS_COMPILE=aarch64-linux-gnu-
+>   
+> +Mask ROM mode
+> +-------------
+> +
+> +Mask ROM mode is the fallback mode of the boot ROM,
+> +in which it listens for USB commands 0x471/0x472.
+> +
+> +Options to get your board into Mask ROM mode:
+> +
+> +* Hold the recovery button, depending on firmware support or wiring,
+> +  while booting the board.
+> +* Remove any SD cards, removable eMMC or removable UFS modules.
+> +* Erase any storage media containing boot firmware.
+> +
+> +Methods of last resort (USE AT YOUR OWN RISK):
+> +
+> +Short the following pins briefly while powering the board, so the boot ROM
+> +cannot locate any boot firmware and falls back into Mask ROM mode:
+> +
+> +* NAND: connect pin 8 and 9 of the NAND flash with a needle.
+> +* eMMC: connect the clock line to ground.
 
-This fixes the lack of forward progress, but the nested-option walk still has
-two issues:
+I see that in the NAND section below pins 8 and 9 need to be connected 
+and that's where you got the information but is there a standard that 
+makes sure all NANDs are pin-to-pin compatible? I'm wondering if it 
+wouldn't make more sense to specify which pin(s) (its function for 
+example) need to be connected.
 
-First, ia_option_hdr is initialized before the loop and never updated after
-ia_option_ptr advances, so every subsequent sub-option is interpreted using
-the first sub-option’s ID.
+On RK3588, RK3576, possibly RK3562 and other RK35xx SoCs (but not 
+RK356x, likely not RK3528, ...) it's also possible to enter Mask ROM 
+mode by forcing channel 0 of the SARADC to be 0V. Can always be improved 
+in a later patch.
 
-Also, the code does not verify that each sub-option header and its declared
-payload fit within the enclosing IA option, which may permit out-of-bounds
-reads.
+For SPI NOR, on RK3399 Puma we make sure HOLD# is below the threshold 
+and thus the SoC cannot communicate with it. Can always be improved in a 
+later patch.
 
-Could you address these issues in v2?
+> +
+>   Flashing
+>   --------
+>   
+> @@ -485,9 +506,9 @@ To write a U-Boot image to the SD card (assumed to be /dev/sda):
+>   NAND
+>   """"
+>   
+> -Bring device in BootROM mode:
+> +Bring device in Mask ROM mode:
+>   
+> -If bricked and no BootROM mode shows up then connect pin 8 and 9 of the NAND flash
+> +If bricked and no Mask ROM mode shows up then connect pin 8 and 9 of the NAND flash
+>   with a needle while reconnecting to the USB OTG port to a PC.
+>   
 
-Thanks,
--- 
-Jerome
+There's another BootROM/Mask ROM swap that's missing. For RK3066:
 
+"""
+If all other boot options fail then it enters into a BootROM mode on the 
+USB OTG port.
+"""
+
+Cheers,
+Quentin
