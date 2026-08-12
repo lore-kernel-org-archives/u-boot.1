@@ -4,133 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03580C5B572
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DD8C5AD5A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 19:33:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A04A760757;
-	Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id ABA31607DA;
+	Wed, 12 Aug 2026 19:33:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EJutZq9yAFLF; Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
+ id qAJHEcAXCwrN; Wed, 12 Aug 2026 19:33:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0E37760627
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E4C566078E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786561023;
-	bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786563182;
+	bh=vY62d3Z2mcXlAxt+kGiqvo7qGuLhyL4TRKY3K5sZ/j4=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hNsO3/VS1nL2SNt0OPBFUYEOTfF84e8+KVXv8yMyRpER0X97Dp4EYRNDmvXfrEg86
-	 Z56uJYlVnizTSWeX/HKy3QrYS4vNbGY3CQoQN2bNAQfjrLjcmQiB/VUxgt5uQfFhkp
-	 25ag/jacWss0NHigU1+QZmuNW3mkROo82p4VLkd34FYhtRHXx1iAs94kNgtNKMZdFu
-	 yuQaKO+aWYKNGTSM0kS9a21w0Bw1m7oGImegsExWgbmGON6GEv++GUnb864ENujdVQ
-	 9+e+i2YNcjbX7H62VlSuMcUN0tnKE2hPTAWLkCDlpOwOE85P1SusJXfldkqOha616D
-	 19Xi7RKad4Rrg==
+	 From:Reply-To:From;
+	b=tmpqFMF9ANswbnrXGTT6SBKivfoV3deBug002g+uIlkHubLnIaMCEyo0RhcDWj8Z1
+	 Xu+FJf4bD5vWZOS0WT8eH1hPOCWPxWo+AWGlN6RAKaNohzBdf7yu931TpnaFs7RDCf
+	 A1Tl7CaQhZnGb+1C0cUr6/LOh+gm6U65c3UIRdAs/FTxXzFbLtuYjdMKv3FGjJ+yJ/
+	 1JV5URMDq1AHbDjeVSskhJ9DQeBy21ffReeBp60S5etwbPzWLqLkz1hs1c+qkevl09
+	 TZtzJvuvXmWNo93bEFnELvIGJQWsbYoNugqCEz/gb7nWvHQu+xIQPkc11ClfaUbrfK
+	 1MWt/fDZPTuVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0E37760627;
-	Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 42FDC3A4
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 18:57:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E4C566078E;
+	Wed, 12 Aug 2026 19:33:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A1A25270
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 19:33:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 34C314056A
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 18:57:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8B6FA80E7E
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 19:33:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FhGuaTs5SFmC for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 18:57:00 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 61AF9403F6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 61AF9403F6
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 61AF9403F6
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 18:57:00 +0000 (UTC)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6a374bea882so1990190a12.1
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 11:57:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786561018; cv=none;
- d=google.com; s=arc-20260327;
- b=qnh+oiZcH/tD+IhoydbfCnklFM/EaSXeEFOOS2lZTuITwkcIDUmQYbSShSUlzFUYHB
- 57yR60lIGBwEmH/gFZFLCr7HWVCN3VNaJoLX1Lqg76/6uUiZm2IqpL1+poXL35Yo95qY
- t4PYwrQNoWYroXiR2ga8OsFL5uW1Yyda+ry0FmfAm/c5YnyUGjP2678RRseGIL2MFsNa
- ll6ljdhBN6Orfc3nf7Mf26e31/5INVKyEg7zhk2pCtoBfpgkZYUpu05ttvU58ktTCl4Q
- vm+sHO2pFcb2eX2c1kBdZJJKn8uq1XfLK54TeTa8W/Qu8Y7xpXSH7+66WEDY28vVIItq
- +nSA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
- fh=yvHJ89E8bUI/gr/GYgtaKLx20ktEkLgtXMsmUcQ2C5o=;
- b=WbBC52NOkL6x+OhU4frbOrY7Qe39JsB0tcYJ5+W2WRxzcoKtLzdgdQz05jINYu1FLB
- A/eAsMMkZYL31vWgWWSIjKzYM8ikJrXIUbaKUyb38vSzG200qU/nlhTEZTwi1RybtI8k
- lDwXaDx6WWhb4ae1jLK4UxfnikvgFIWQJnQz0PNuTfdJPXLvYRTN0nqMAB+fPJfkwOxy
- tQH5HXdpKsgJHMMhNAy1pP0N+M+7u6ZTbDt+MUgnoUI2ZXchJ8uNgbdNJiYXJRjMuiqY
- WowrAaU7OndirVm2LyW/op4ccDT9acmS59/vOVgZvvJWsY/rmXvmaNSMKmlr6mYk1qke
- ch8w==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786561018; x=1787165818;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
- b=l0onEbV6JzSIn5QRjf2RmCuRbvtSxtgigTpRzrq6k9kevRWpTdLyYo1QjuJU4JvnRT
- lwTFYgjUj/lPjyw5EEqzSmLIkQzFEwdUVAYl9rtmvlLhTVVpFUZ0RTxF1+z3eD9ZRzNj
- MIwV4xcieRFCvhu8z0SPFzqHZ3+OBt9grBTpTNr8sMa7bKTfxxKDwbu677YJCwniswbF
- IUFI7gg76Xw+oaETWmmlfNdb7BrHp1ULMtmSFUnjHd6c5sXwPFt3RMQ0QBlOvb3yTcnE
- uUExFuoQ2wN2LSW10S75F1pPiJdzfSEcYJR0hgKLNqO9SLtwED+d1y3R2uyF1/tzbOcw
- tMbQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpKpCiTsL/PNhxqT27S+6Kx4UoDn7KJnQiTQJ0FxG+YqAwXrC6yGp6pOuu5G8BgHsKtOPGC92U=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx5E141xdBOUviuSRjAFEk65wJ6pv7fBwNsGgipK+ft6JYmjnsC
- 8Ar3qn+QIVh+wLZ0KwHiUtoySfwM97Zb9Ivtd9nURYgM6rmkx+pCH9lju+MHryJKiJOcjCPKOUK
- vTTKwnJ+rsWodUB+oJwmWF73ueNabjjnX/oku/7wXiLrOVI1NDpk=
-X-Gm-Gg: AR+sD11nzNvImzv/IJtf+h7fzc71o388mkPyIkNfmsymQpeMyKkZbAjLX6WGDS7KpG4
- Yimr/5v1NWKMWJODn+qTr8azzbKudPfRKE7OGwrg2cJhTst0KZJA95ndxI3dB5s1e+36tBlMLn9
- cY+bDruYmBCabzgKKM5jjXblrfztL8/pUSVL1aRmry09lVY5Ii/yIM/5UZDB3qArjmdDrIKFn6I
- 4BRU0XUYYzmUcqBwkmOoUH5zaxi69IQHgc41+SlgY1fVdoILre3FfMS6xQu3fS2p0NRzq+6AUI4
- DnrrNELdOS3NCBHq182QDLQ1NECG5GQKaUA0QJvrpXpydTpHxe1TRLYZ4fPX2xCfK2gQF3eJHbn
- HzA==
-X-Received: by 2002:a05:6402:52da:b0:698:c13e:179a with SMTP id
- 4fb4d7f45d1cf-6a3805f95c2mr41698a12.10.1786561018420; Wed, 12 Aug 2026
- 11:56:58 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id R7liCNkc1Ofu for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 19:33:00 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
+ helo=mout-p-201.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org BD9FD80E81
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BD9FD80E81
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id BD9FD80E81
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 19:32:59 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4hKzD82G4kzMlCF;
+ Wed, 12 Aug 2026 21:32:56 +0200 (CEST)
+Message-ID: <6bb58612-6b26-40e6-92f3-fcafae0739ad@mailbox.org>
+Date: Wed, 12 Aug 2026 19:51:35 +0200
 MIME-Version: 1.0
-References: <20260810204828.2836359-1-jonas@kwiboo.se>
-In-Reply-To: <20260810204828.2836359-1-jonas@kwiboo.se>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 12 Aug 2026 14:56:45 -0400
-X-Gm-Features: AUfX_myVs5HI2M1FsS1KMVfDUfFVol6GeYNVraFqA-Ws_Shc1txI-ma3i9333ms
-Message-ID: <CAFLszTgSs8s_hFtyEFq6D0zhPKmaEQ2+gE=mqAGiR3OVTLqxyw@mail.gmail.com>
-Subject: Re: [PATCH] global_data: Only include driver model fields when DM is
- enabled
-To: jonas@kwiboo.se
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] MAINTAINERS: Add missing fragment for Versal Gen 2
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.u-boot-project.org,
+ git@amd.com, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+References: <11956eca5ebd0b3626b7e2d0fa52331cbd3dc1ec.1786361819.git.michal.simek@amd.com>
+ <f29ac2fa-4d73-410f-ace5-819c2a459cb5@amd.com>
+ <f71ebcbb-6cdc-4c07-8d1e-0f39ccbfa141@mailbox.org>
+ <5ef6b6eb-5f90-47cc-8c87-872c01eaf3bd@amd.com>
+ <b3e35156-e1ec-4be4-9693-df16eb82016d@mailbox.org>
+ <d0bd0863-e094-4b82-9635-6798960a08d0@amd.com>
+Content-Language: en-US
+In-Reply-To: <d0bd0863-e094-4b82-9635-6798960a08d0@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 5e94ee707acb318768f
+X-MBO-RS-META: zpttkfwspd68kuxb1d8ekr5qjrs96dgs
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786561018; x=1787165818;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
- b=m6I3OA9zu6+p9SjYrS64gu51YK+ktGxjzVtVRMeVhE+/XLssF5iYLPG9dXK/4uAJgD
- 1r6ruyFrN0/Rm/oThPmE3DdVTyrYdaUNtUT+AjZyOYgaHj8KIDrBD72eXsE9+1VDMJF/
- a+w06LnfVMZSuBUJccu/ZVyDqywrO9QW0O86c=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=m6I3OA9z
+ d=mailbox.org; s=mail20150812; 
+ t=1786563176;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vY62d3Z2mcXlAxt+kGiqvo7qGuLhyL4TRKY3K5sZ/j4=;
+ b=nVjmLDpWrZq0yJfqHFMZyLwOEOCaiK3IJ4I3xBPGXH55xGynQgcq5iMVBKzSFXc4Dkwei8
+ BkhNzBve7xckij9EjR+mXxYkJzh3L3P/0KrVOstP/kxC3vqu+Vxbl2cnwBQW+Ugr1OH2sN
+ eN5D3ce3aPq78QK/MPzJcEGFbVWWWtoH1/VEcCGV05Za9QkQt4+6qrf9jtE5n1+m0lbbil
+ 6aF38DLWDGQDXdK/8FKyE2URoKyg3/Hz+zIv56h8M3TJEDtzO6i0FnszJMW5wTq1/xYJtS
+ XLU6HNtZG+mI8xlFpWI/YKW5dzmEc2SjwFUdiKj73t9eCPAcjGlDLsdSYz5R2A==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=mailbox.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=nVjmLDpW
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,25 +106,32 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Marek Vasut via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Marek Vasut <marek.vasut@mailbox.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-08-10T20:48:28, Jonas Karlman <jonas@kwiboo.se> wrote:
-> global_data: Only include driver model fields when DM is enabled
->
-> The struct list_head dmtag_list, struct udevice *dm_root, struct
-> list_head uclass_root_s and struct list_head *uclass_root fields in
-> struct global_data takes up 24/48 bytes of memory on ARMv7/AArch64.
-> However, these fields are only used when $(PHASE_)DM is enabled.
->
-> Guard driver model related fields using CONFIG_IS_ENABLED(DM) to save
-> memory space when U-Boot proper is built with DM=y and xPL is built
-> without xPL_DM.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> include/asm-generic/global_data.h | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+On 8/12/26 3:33 PM, Michal Simek wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+>>> Before
+>>> $ ./scripts/get_maintainer.pl -f arch/arm/mach-versal2/
+>>> Tom Rini <trini@konsulko.com> (maintainer:ARM)
+>>> Ilias Apalodimas <ilias.apalodimas@linaro.org> (maintainer:ARM)
+>>> Michal Simek <michal.simek@amd.com> (maintainer:ARM 
+>>> VERSAL,commit_signer:14/15=93%,authored:10/15=67%)
+>> There ^ you are , what's the problem ?
+> 
+> Yes, I'm listed - but under ARM VERSAL, which is a different SoC family.
+> Versal Gen 2 is a completely different chip with different features.
+> It only matches the ARM VERSAL entry because of the "versal" substring in
+> the N: regex, not because they're the same chips. (FWIW keeping "Versal"
+> in every new SoC name is very confusing).
+> 
+> Also Gen 2 specific drivers/files are coming, and those should be 
+> attributed to the Versal Gen 2 not to the Versal.
+> Creating the section now is what makes that correct - otherwise every 
+> new Versal2 file silently inherits the Versal.
+
+Why do we need 4 or 5 MAINTAINERS entries for Xilinx platforms, with the 
+same maintainer, same git tree, same status, in the first place ? Why 
+not have one XILINX entry that covers it all ?
