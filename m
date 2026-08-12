@@ -1,92 +1,95 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF6B6C5AD5A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 07:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB123C5B56A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 08:05:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0247C81199;
-	Wed, 12 Aug 2026 07:48:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B59B608DC;
+	Wed, 12 Aug 2026 08:05:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b1oXVrCqpX9O; Wed, 12 Aug 2026 07:48:21 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YgngQf3avhYM; Wed, 12 Aug 2026 08:05:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2885C8119D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9DECE60889
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786520901;
-	bh=BF66oNfPgRH1RKbiUG7vY/0uWPFzQYJA1PkY/sRVikg=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786521908;
+	bh=3IiHc47dVMQ5UT13Vp/eEacxVwCCbgCmIJ2y2GGgT1E=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=cA5TtMiFKe/seM06hHYKplDsmYJODp2BB+2PxvvTjVYSMfDOo4bfqdv+z7p9btjkx
-	 MRsTB/eqrH5pr6M7WI+Y/34aXugcybaOD3QHd4T/dX9o/reGa0Q214Q2sEvlXn6k/L
-	 kk1iHVhFTV7XNgXelpM5l7Ltc8WaDsp7w7AQ2fZbf/tP0Et72QRaUgC2+Q5OQUG5xJ
-	 ik57GSG5yxg/M3a4FCjqTKcsweuYwweznxTG27EiQBPXC2Trzka8md69p7js3ibzrr
-	 jHIKsY+bRNqkdwPpZ2DJs9kN0Zim/zPkABhf3+EabuhVPHsZqx+v0uuNWLLBPxnvj/
-	 GuW5BYt08kqoA==
+	 From:Reply-To:From;
+	b=KsbHBATsdePe+mK9pRGsudd11qlvHGVZ9AI/5+YSs9AGTJr5ebQ+dfr3+vo+OpOpg
+	 v4Kxp2oE0+YcismaXntAyqA2wPA6OEZGPHB7TbasucfJh1fTkfD2RRY6iYWR4clTsQ
+	 GuqzkyM4alz+G9phZdHVRiAZx3RCyTr1gkgVnmqOMBpASm8VIiAjBuQ68+1fI5jYzl
+	 i0jw6uoGnfUBVA4DQ0JUYv8HY/oeVavnJCt6PZ0fuzb0M9XBx4pJmFQ6SsAzccsD3R
+	 tNlYDq3TgzF23oAnYET6QNhgOjPaCIZCz8Eg7lBljjia1U70bNk9Hg2hNCjEUQjdtK
+	 ylkGcZviI2FvQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2885C8119D;
-	Wed, 12 Aug 2026 07:48:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0FC04259
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:48:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9DECE60889;
+	Wed, 12 Aug 2026 08:05:08 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D0E851F41
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:05:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 015838119D
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:48:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BCB214083D
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:05:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FW3whQCcIRqp for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 07:48:19 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 1CC3081199
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1CC3081199
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1CC3081199
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:48:17 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 587EC60A7E;
- Wed, 12 Aug 2026 07:48:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 777BD1F000E9;
- Wed, 12 Aug 2026 07:48:15 +0000 (UTC)
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Julien Masson <jmasson@baylibre.com>, u-boot@lists.u-boot-project.org, 
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Cc: Argus <argus@byteray.co.uk>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260729-b4-android-bootmeth-oob-v1-1-31c3450ae0be@byteray.co.uk>
-References: <20260729-b4-android-bootmeth-oob-v1-1-31c3450ae0be@byteray.co.uk>
-Subject: Re: [PATCH] bootstd: android: bound the boot image read by its
- partition size
-Message-Id: <178652089345.239806.17329637437699875380.b4-ty@b4>
-Date: Wed, 12 Aug 2026 09:48:13 +0200
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EijOiMQXiJSa for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 08:05:06 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.25.11;
+ helo=smtp-190b.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6AB4E40824
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6AB4E40824
+Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
+ [185.125.25.11])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6AB4E40824
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 08:05:04 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hKgyP2YJ8zRgg;
+ Wed, 12 Aug 2026 10:05:01 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4hKgyN2P6hzjDH; Wed, 12 Aug 2026 10:05:00 +0200 (CEST)
+Message-ID: <e5aaed12-ec8c-4c8b-8cf8-1c4f9bdc2174@0leil.net>
+Date: Wed, 12 Aug 2026 10:04:59 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 3/4] rockchip: rk3399: Add ROC-PC-PLUS board detection
+To: Fabio Estevam <festevam@gmail.com>
+Cc: trini@konsulko.com, sjg@chromium.org, kever.yang@rock-chips.com,
+ u-boot@lists.u-boot-project.org, Fabio Estevam <festevam@nabladev.com>
+References: <20260722194638.1285159-1-festevam@gmail.com>
+ <20260722194638.1285159-3-festevam@gmail.com>
+ <d4d49e17-e125-4121-b0be-e486e1be5393@0leil.net>
+ <CAOMZO5DULY0wE_U-4aX9sfrnum++J9iJ02_H8L+g3qdY156KCA@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <CAOMZO5DULY0wE_U-4aX9sfrnum++J9iJ02_H8L+g3qdY156KCA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1786520896;
- bh=BF66oNfPgRH1RKbiUG7vY/0uWPFzQYJA1PkY/sRVikg=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date;
- b=EZkhUOZyiSdYxXZDUSzgHfzHqA5ym0qP2ZsEfxq0odT5WviYqbRkt5ZCVNwg53zhb
- BOp6N670x2p8dasN1cd1GO+V/+1rRVeAYpRyYzK9SWksqskbWnZ0/KldGCpt9xu1NP
- HCfgUmRVoSUYrrS542ZeV/Mq9suHp0ufw6j6XzGuZYlvxkl7oeFhnx/PhK9/CjpQU4
- rsLsDM8a4yMHPGR48dwwRF1OgBQSo5uOOAStY1UEcKCEowW+Z8pC10gIBMYuQDhzWW
- wH4qeXQMuGuBOnGU8pWzcSbra5OZQqN4naP9Z+ZADC98YIAN8FpyulVE3gTQNaYvXD
- YEA19O1/Lr9LA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=0leil.net; s=20231125; t=1786521901;
+ bh=3IiHc47dVMQ5UT13Vp/eEacxVwCCbgCmIJ2y2GGgT1E=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=KLcUdbBkkgKmncbiw84O6X9y8ODEyqoppL2p2u8HBt52uyv6RfRA/C0eWOE+BShE+
+ EJ/3BMYLza/uGjMYIHYKc9ZpqIgf4Zr+vVSpouadjqDGrn7jPqPTqpjwV9xdWJu/Hl
+ +3hwZb9piUMULlulyYKfv07egsPIpXjN9VmEMDQOUmTiOviL6TavicIY56/D+Alkc3
+ HHicKFCblhIhCu+2a0deQf98c0SEp33KFvYCzYev6gfPD5Ju/2ZWymv8VnY54A5I7d
+ o7aMmgNL4mm//90m3byAzgCuKvcmcHiqfqiA3SNEPPpe75BrbeXPe5XT1j1aCZKY6d
+ xAQGc2suYu89Q==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=0leil.net
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=EZkhUOZy
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=KLcUdbBk
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -98,25 +101,75 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Quentin Schulz <u-boot@0leil.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi,
+Hi Fabio,
 
-On Wed, 29 Jul 2026 21:02:09 +0200, Shahriyar Jalayeri wrote:
-> read_slotted_partition() loads an Android boot/vendor_boot image into the
-> load address, sizing the read from the image header:
+On 8/12/26 1:01 AM, Fabio Estevam wrote:
+> Hi Quentin,
 > 
-> 	num_blks = DIV_ROUND_UP(image_size, desc->blksz);
-> 	...
-> 	blk_dread(desc, partition.start, num_blks, map_sysmem(addr, 0));
+> On Tue, Aug 11, 2026 at 8:55 AM Quentin Schulz <u-boot@0leil.net> wrote:
 > 
-> [...]
+>> Ideally, we should be able to automatically detect whether it's a
+>> roc-pc-mezzanine-rk3399, but I couldn't find schematics for it and from
+>> the Device Tree, there doesn't seem to be something we could use to
+>> detect it like we do for ROC-PC-PLUS/ROC-PC. So instead I recommend to
+>> check for CONFIG_IS_ENABLED(DM_I2C). If it ever gets enabled for
+>> roc-pc-mezzanine-rk3399_defconfig, the logic will return that it's NOT a
+>> ROC-PC-PLUS and thus use CONFIG_DEFAULT_FDT_FILE which is
+>> rockchip/rk3399-roc-pc-mezzanine.dtb which is correct.
+> 
+> DM_I2C is also selected by roc-pc-mezzanine-rk3399_defconfig.
+> 
 
-Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+Yes, but it's missing SPL_DM_I2C.
 
-[1/1] bootstd: android: bound the boot image read by its partition size
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/35432ef6fe2c79ab72709966e64815a45eb55c76
+> We can use SPL_I2C to distinguish, like this:
+> 
 
---
-Mattijs
+Unfortunately, we cannot simply rely on SPL_I2C as the function is only 
+implemented in i2c-uclass.c which is only compiled when SPL_DM_I2C (and 
+SPL_I2C) is enabled.
+
+There's also an issue in the dependencies for SPL_DM_I2C and TPL_DM_I2C 
+as they both depend on I2C (via the if at the top of 
+drivers/i2c/Kconfig) and DM_I2C while they should depend on SPL_I2C 
+(respectively TPL_I2C). I'm not sure why they depend on DM_I2C as it's 
+for proper, not xPL...
+
+TPL_SYS_I2C_LEGACY depends on !SPL_DM_I2C but I'm assuming it should 
+rather depend on !TPL_DM_I2C.
+
+Same for SPL_DM_I2C_GPIO, not sure why it depends on DM_I2C_GPIO. 
+SPL_I2C_MUX also depends on I2C_MUX, for what reason?
+
+VPL_DM_I2C should depend on VPL_I2C but it doesn't exist, so we probably 
+should just remove the symbol since it won't do anything as is.
+
+None are a blocker for this series.
+
+> --- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+> +++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+> @@ -68,6 +68,9 @@ static bool is_roc_pc_plus(void)
+>   {
+>          struct udevice *bus, *dev;
+> 
+> +       /* roc-pc-mezzanine-rk3399_defconfig does not select SPL_I2C */
+> +       if (!CONFIG_IS_ENABLED(SPL_I2C))
+> +               return false;
+
+Please add a newline after the return false;
+
+It should be !CONFIG_IS_ENABLED(DM_I2C) as CONFIG_IS_ENABLED is going to 
+add the appropriate prefix based on the current stage being built (so 
+definitely no SPL/TPL/VPL to be added manually) and CONFIG_SPL_I2C is 
+not enough to build the dm_i2c_probe implementation, we need 
+CONFIG_SPL_DM_I2C (well, and CONFIG_SPL_I2C because otherwise the 
+drivers/i2c directory isn't traversed and because SPL_DM_I2C is missing 
+a dependency on it).
+
+Cheers,
+Quentin
