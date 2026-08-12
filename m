@@ -4,114 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 611A1C5B572
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 17:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03580C5B572
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9988460A44;
-	Wed, 12 Aug 2026 17:21:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A04A760757;
+	Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JAqPWoaPpHob; Wed, 12 Aug 2026 17:21:04 +0000 (UTC)
+ id EJutZq9yAFLF; Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 19782607BD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0E37760627
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786555264;
-	bh=6HfZpq5wVo+hlUZJcTU+hGx3711iOab2pFY9W9tBvRw=;
-	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=TYaoa0zoWigYiI0INxUO17gwkPQ4dWBUDbZWAU/Sowyh0LaaT5td6MAmkNlk2+8Mi
-	 VqOrSVLvHP27uPkYcA40nC8SKmSovrtFeuhcrTyTAVfqQRWEvT0Q00dGEy4VW4GUfB
-	 KeLfeE9YEoTZ9r/uenRFRze6wO4IX9s5BsoOyagQNuTB3r+I5cXrrKo+BarZKe3pK9
-	 vd9z8At5VMXaWmIaNHpGBye1jE42Qfme0OZnf7m393KIptj0c8yiVcUasutKfy+QNk
-	 X0/3DF7jxtSZhlIdOK7pY72OWqMsyO5dhoKnvi2syWzHDqWCbDsP1KGvdjNPwhMlFH
-	 WDUEpNlapIqHw==
+	d=lists.u-boot-project.org ; s=default; t=1786561023;
+	bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=hNsO3/VS1nL2SNt0OPBFUYEOTfF84e8+KVXv8yMyRpER0X97Dp4EYRNDmvXfrEg86
+	 Z56uJYlVnizTSWeX/HKy3QrYS4vNbGY3CQoQN2bNAQfjrLjcmQiB/VUxgt5uQfFhkp
+	 25ag/jacWss0NHigU1+QZmuNW3mkROo82p4VLkd34FYhtRHXx1iAs94kNgtNKMZdFu
+	 yuQaKO+aWYKNGTSM0kS9a21w0Bw1m7oGImegsExWgbmGON6GEv++GUnb864ENujdVQ
+	 9+e+i2YNcjbX7H62VlSuMcUN0tnKE2hPTAWLkCDlpOwOE85P1SusJXfldkqOha616D
+	 19Xi7RKad4Rrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 19782607BD;
-	Wed, 12 Aug 2026 17:21:04 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D8EF53A4
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:21:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0E37760627;
+	Wed, 12 Aug 2026 18:57:03 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 42FDC3A4
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 18:57:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CAB8A4027A
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:21:02 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 34C314056A
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 18:57:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wY9ZAIUJlyaV for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 17:21:02 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FhGuaTs5SFmC for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 18:57:00 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22f; helo=mail-oi1-x22f.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 19BB140140
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 19BB140140
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 19BB140140
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 17:21:01 +0000 (UTC)
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-4a475409044so477543b6e.1
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 10:21:01 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 61AF9403F6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 61AF9403F6
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 61AF9403F6
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 18:57:00 +0000 (UTC)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-6a374bea882so1990190a12.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 11:57:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786561018; cv=none;
+ d=google.com; s=arc-20260327;
+ b=qnh+oiZcH/tD+IhoydbfCnklFM/EaSXeEFOOS2lZTuITwkcIDUmQYbSShSUlzFUYHB
+ 57yR60lIGBwEmH/gFZFLCr7HWVCN3VNaJoLX1Lqg76/6uUiZm2IqpL1+poXL35Yo95qY
+ t4PYwrQNoWYroXiR2ga8OsFL5uW1Yyda+ry0FmfAm/c5YnyUGjP2678RRseGIL2MFsNa
+ ll6ljdhBN6Orfc3nf7Mf26e31/5INVKyEg7zhk2pCtoBfpgkZYUpu05ttvU58ktTCl4Q
+ vm+sHO2pFcb2eX2c1kBdZJJKn8uq1XfLK54TeTa8W/Qu8Y7xpXSH7+66WEDY28vVIItq
+ +nSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
+ fh=yvHJ89E8bUI/gr/GYgtaKLx20ktEkLgtXMsmUcQ2C5o=;
+ b=WbBC52NOkL6x+OhU4frbOrY7Qe39JsB0tcYJ5+W2WRxzcoKtLzdgdQz05jINYu1FLB
+ A/eAsMMkZYL31vWgWWSIjKzYM8ikJrXIUbaKUyb38vSzG200qU/nlhTEZTwi1RybtI8k
+ lDwXaDx6WWhb4ae1jLK4UxfnikvgFIWQJnQz0PNuTfdJPXLvYRTN0nqMAB+fPJfkwOxy
+ tQH5HXdpKsgJHMMhNAy1pP0N+M+7u6ZTbDt+MUgnoUI2ZXchJ8uNgbdNJiYXJRjMuiqY
+ WowrAaU7OndirVm2LyW/op4ccDT9acmS59/vOVgZvvJWsY/rmXvmaNSMKmlr6mYk1qke
+ ch8w==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786555261; x=1787160061;
- h=content-disposition:content-type:mime-version:message-id:subject:to
- :from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=6HfZpq5wVo+hlUZJcTU+hGx3711iOab2pFY9W9tBvRw=;
- b=aRbSjrom8qYFXRswgYl4SPmn0jJ2BMG62mgKKEQaARdRM5uZMWK1YTLwchChuxFpwl
- yztI0dW+gCeuTxr7rIzLP+9rmPbE6v2jYigZ75EmxdOscqEpltOTfgKa5q/oHtPBFLmv
- KPWGf1bO8z+uFJ8D5vc7sc4/hNwG7r79JKT2Zlyo58OoGVLM/UOioAVXQ8BRb7gq4qQs
- YurBJapjuJvFtp1Dni+Hmd+RID4x5HlI93Vc+8RGL/aVgEW8JiDKoMQqQTzCov9AYVqc
- ZqR9gK9xXxyXBxicFB0S8XJ5TgyCrhWCy9E1PAloudWDqz5uQaZVmiqAAkL+2fXjIefs
- U+VA==
+ d=1e100.net; s=20251104; t=1786561018; x=1787165818;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
+ b=l0onEbV6JzSIn5QRjf2RmCuRbvtSxtgigTpRzrq6k9kevRWpTdLyYo1QjuJU4JvnRT
+ lwTFYgjUj/lPjyw5EEqzSmLIkQzFEwdUVAYl9rtmvlLhTVVpFUZ0RTxF1+z3eD9ZRzNj
+ MIwV4xcieRFCvhu8z0SPFzqHZ3+OBt9grBTpTNr8sMa7bKTfxxKDwbu677YJCwniswbF
+ IUFI7gg76Xw+oaETWmmlfNdb7BrHp1ULMtmSFUnjHd6c5sXwPFt3RMQ0QBlOvb3yTcnE
+ uUExFuoQ2wN2LSW10S75F1pPiJdzfSEcYJR0hgKLNqO9SLtwED+d1y3R2uyF1/tzbOcw
+ tMbQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoQEOmZYCiMDvml3+8mkELEvs57tsORdvgJRh/K6vYTMuS9CWEItOxtRlkgcciaXOOJ5lQuBDo=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyoGMR6RCfVJ42Ych2FxeGcOIRsxczH2ZZv/BILX/0MxFQUHai2
- DWuzcqjLYOYzYmcadgqxrI4qwMHxNaewivERhk5Idx02GExOTQ2QyNWKAo1B35S4O4Ig6YkEwKB
- N7KUW4g0=
-X-Gm-Gg: AR+sD1388z/BXEqptH8f3cUTRn+K9DKTHUxxM7bTKy8ilRKAAk3R/54KSiufbbJ0/3/
- TRSNWiGiNB4qJCQntXEuIYJ9Q+iNPvr5cjFJNR0PI4gQ5fdXsBsxIsnj47duHIkBVY5/B2emhKn
- N81FerVpniBo2xpC1ny0evsl3tsvGBSvR/wRK3vpeHxr2steLQgK8OGe1zRGpBaHvSyQMNBoWet
- sEhC06ZbSzKZKlBWUvZ8XKv/nHch2sL5ty1ZnKs00Av5mLc3tA573EftT2MMZUtgS73pH/GrlHV
- 7NtBquBxWg6q1Jnkw9jZsof6MU/t8QGADUjY/M/9gofLuLfvLkp1tvDRo6OKjWdy9WcIFKGCQBP
- ogoXb8TW55mBSiarFTWtYf3IIKNvwwztDDSpbgDuxgxxBtTy2g/8KTNdj7jAwbHY6hLJAMyYyZ4
- uP5fL9y9DnEP1tcIIGPDsnu2E07pmmajcMEC3xf+DlbjWLWkMEqhkfM2pz0baglbBXGuHtEiDN5
- 295TvUyOpg7ZpdM2JinDvvIOwHEVmT9Z2Zzxet9LmAjlVbEkIAeCBRbUvgj4hRgGoAEHptygLKC
- O8ZIUlCX9Q==
-X-Received: by 2002:a05:6820:c8c:b0:6ae:47e0:be20 with SMTP id
- 006d021491bc7-6b0c4194e3emr17420eaf.7.1786555260823; 
- Wed, 12 Aug 2026 10:21:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45e35175873sm2301645fac.7.2026.08.12.10.20.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 10:21:00 -0700 (PDT)
-Date: Wed, 12 Aug 2026 11:20:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>, u-boot@lists.u-boot-project.org
-Subject: Problem with test/py/tests/test_fit_verity.py?
-Message-ID: <20260812172057.GC3297518@bill-the-cat>
+ AHgh+RpKpCiTsL/PNhxqT27S+6Kx4UoDn7KJnQiTQJ0FxG+YqAwXrC6yGp6pOuu5G8BgHsKtOPGC92U=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yx5E141xdBOUviuSRjAFEk65wJ6pv7fBwNsGgipK+ft6JYmjnsC
+ 8Ar3qn+QIVh+wLZ0KwHiUtoySfwM97Zb9Ivtd9nURYgM6rmkx+pCH9lju+MHryJKiJOcjCPKOUK
+ vTTKwnJ+rsWodUB+oJwmWF73ueNabjjnX/oku/7wXiLrOVI1NDpk=
+X-Gm-Gg: AR+sD11nzNvImzv/IJtf+h7fzc71o388mkPyIkNfmsymQpeMyKkZbAjLX6WGDS7KpG4
+ Yimr/5v1NWKMWJODn+qTr8azzbKudPfRKE7OGwrg2cJhTst0KZJA95ndxI3dB5s1e+36tBlMLn9
+ cY+bDruYmBCabzgKKM5jjXblrfztL8/pUSVL1aRmry09lVY5Ii/yIM/5UZDB3qArjmdDrIKFn6I
+ 4BRU0XUYYzmUcqBwkmOoUH5zaxi69IQHgc41+SlgY1fVdoILre3FfMS6xQu3fS2p0NRzq+6AUI4
+ DnrrNELdOS3NCBHq182QDLQ1NECG5GQKaUA0QJvrpXpydTpHxe1TRLYZ4fPX2xCfK2gQF3eJHbn
+ HzA==
+X-Received: by 2002:a05:6402:52da:b0:698:c13e:179a with SMTP id
+ 4fb4d7f45d1cf-6a3805f95c2mr41698a12.10.1786561018420; Wed, 12 Aug 2026
+ 11:56:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oTNySr9OHQg2P5qX"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260810204828.2836359-1-jonas@kwiboo.se>
+In-Reply-To: <20260810204828.2836359-1-jonas@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 12 Aug 2026 14:56:45 -0400
+X-Gm-Features: AUfX_myVs5HI2M1FsS1KMVfDUfFVol6GeYNVraFqA-Ws_Shc1txI-ma3i9333ms
+Message-ID: <CAFLszTgSs8s_hFtyEFq6D0zhPKmaEQ2+gE=mqAGiR3OVTLqxyw@mail.gmail.com>
+Subject: Re: [PATCH] global_data: Only include driver model fields when DM is
+ enabled
+To: jonas@kwiboo.se
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786555261; x=1787160061;
+ d=chromium.org; s=google; t=1786561018; x=1787165818;
  darn=lists.u-boot-project.org; 
- h=content-disposition:content-type:mime-version:message-id:subject:to
- :from:date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=6HfZpq5wVo+hlUZJcTU+hGx3711iOab2pFY9W9tBvRw=;
- b=EJrWAnyWI6j1dIMVbVKOCMiJbZYZ+OHhOmkNP+prLdVLlFO44oNqdqkYNJ8FD3JJi8
- mXNP2SlbZGwVr+pLNFv8h1Wl35HLleb9Uq7IDvmXuON0hVbOm3O8PvuS5v3m+rO4Kf8/
- RAk5IRe8zJzSES+SLgrckbx+E4F5Ijrc5BYYU=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=pXZASyd24b+H6+opMce7rQutculUzMcpOuMrnr4bVVM=;
+ b=m6I3OA9zu6+p9SjYrS64gu51YK+ktGxjzVtVRMeVhE+/XLssF5iYLPG9dXK/4uAJgD
+ 1r6ruyFrN0/Rm/oThPmE3DdVTyrYdaUNtUT+AjZyOYgaHj8KIDrBD72eXsE9+1VDMJF/
+ a+w06LnfVMZSuBUJccu/ZVyDqywrO9QW0O86c=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=EJrWAnyW
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=m6I3OA9z
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,63 +145,22 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+On 2026-08-10T20:48:28, Jonas Karlman <jonas@kwiboo.se> wrote:
+> global_data: Only include driver model fields when DM is enabled
+>
+> The struct list_head dmtag_list, struct udevice *dm_root, struct
+> list_head uclass_root_s and struct list_head *uclass_root fields in
+> struct global_data takes up 24/48 bytes of memory on ARMv7/AArch64.
+> However, these fields are only used when $(PHASE_)DM is enabled.
+>
+> Guard driver model related fields using CONFIG_IS_ENABLED(DM) to save
+> memory space when U-Boot proper is built with DM=y and xPL is built
+> without xPL_DM.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+>
+> include/asm-generic/global_data.h | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 
---oTNySr9OHQg2P5qX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hey,
-
-So we don't run the FIT verity tests on CI, because veritysetup isn't
-installed, and should fix that as it's own problem. On one of my test
-setups, I ran in to this:
------------------------------ Captured stdout call ------------------------=
------
-+/tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53/tools/mkimage -E -D -I dts -O dtb=
- -i /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal -f /tmp/t=
-mp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image.its /tmp/tmp.=
-xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/i
-mage.itb
-FIT description: dm-verity test
-Created:         Wed Aug 12 11:01:01 2026
- Image 0 (rootfs)
-  Description:  test filesystem
-  Created:      Wed Aug 12 11:01:01 2026
-  Type:         Filesystem Image
-  Compression:  uncompressed
-  Data Size:    262144 Bytes =3D 256.00 KiB =3D 0.25 MiB
- Default Configuration: 'conf-1'
- Configuration 0 (conf-1)
-  Description:  test config
-  Kernel:       unavailable
-  Loadables:    rootfs
-+fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
-=2Eitb /images/rootfs/dm-verity algo
-sha256
-+fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
-=2Eitb /images/rootfs/dm-verity data-block-size
-4096
-+fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
-=2Eitb /images/rootfs/dm-verity hash-block-size
-4096
-+fdtget /tmp/tmp.xSw29uYDUF/am62x_beagleplay_a53_results/verity-equal/image=
-=2Eitb /images/rootfs/dm-verity num-data-blocks
-Error at 'num-data-blocks': FDT_ERR_NOTFOUND
-Exit code: 1
-
---=20
-Tom
-
---oTNySr9OHQg2P5qX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCanyrcgAKCRAr4qD1Cr/k
-CoF+AP4u0V2vHXc/X3XwcuKoiZgSjHymhrKoHMO8Oo0CQrWWkAEAq5vrcGtagLec
-tPa24krhP/2AuCeOYWNwU0ey0j3U5A0=
-=Nrwy
------END PGP SIGNATURE-----
-
---oTNySr9OHQg2P5qX--
+Reviewed-by: Simon Glass <sjg@chromium.org>
