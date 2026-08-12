@@ -1,89 +1,92 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C5E9C5B56A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 07:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF6B6C5AD5A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 07:48:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 714D16088C;
-	Wed, 12 Aug 2026 07:45:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0247C81199;
+	Wed, 12 Aug 2026 07:48:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RizCGw_9YnJy; Wed, 12 Aug 2026 07:45:04 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id b1oXVrCqpX9O; Wed, 12 Aug 2026 07:48:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 92EF260823
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2885C8119D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786520704;
-	bh=kgg7Gwx40NyARU7IBbnpUCBgS4BpwRzaowe9HOZvev8=;
+	d=lists.u-boot-project.org ; s=default; t=1786520901;
+	bh=BF66oNfPgRH1RKbiUG7vY/0uWPFzQYJA1PkY/sRVikg=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bTQ8+sE3fb/Oc8B7JIZCnxfkgWI16TrmRzWXczpVooz+DLbLqxHXOQD0HzMUGg7GH
-	 ZPO9YCAOGPQsY1Zv5EAx45Y62bG5uYxIsqT62O2PzB+9wO2B6iNJS9ZMAmXdaitxGD
-	 zEztw5PF3YPEar6ERLpPC/se+vpyygJ6J+mQy4F2iljm6akouutcsPmTb69ZSBnQ+8
-	 piXVXeFf3qlYYk+2ClPT5x1QlpvN73sVQil5rp98UOuMs6iLcRt+aARvSbMEucNd66
-	 Buxbp+Q5ivbhjMjfwHcuasuUBMNzu39BqppgR/0JlhGvUbiLQUB/9V7sYH3oy9R9Du
-	 silkZ9o0giMyg==
+	b=cA5TtMiFKe/seM06hHYKplDsmYJODp2BB+2PxvvTjVYSMfDOo4bfqdv+z7p9btjkx
+	 MRsTB/eqrH5pr6M7WI+Y/34aXugcybaOD3QHd4T/dX9o/reGa0Q214Q2sEvlXn6k/L
+	 kk1iHVhFTV7XNgXelpM5l7Ltc8WaDsp7w7AQ2fZbf/tP0Et72QRaUgC2+Q5OQUG5xJ
+	 ik57GSG5yxg/M3a4FCjqTKcsweuYwweznxTG27EiQBPXC2Trzka8md69p7js3ibzrr
+	 jHIKsY+bRNqkdwPpZ2DJs9kN0Zim/zPkABhf3+EabuhVPHsZqx+v0uuNWLLBPxnvj/
+	 GuW5BYt08kqoA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 92EF260823;
-	Wed, 12 Aug 2026 07:45:04 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 36A083A4
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:45:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2885C8119D;
+	Wed, 12 Aug 2026 07:48:21 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0FC04259
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:48:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 33FC0403A9
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:45:04 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 015838119D
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:48:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id p4cjeOjChS2U for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 07:45:03 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 707A3403A7
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 707A3403A7
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 707A3403A7
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:45:03 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FW3whQCcIRqp for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 07:48:19 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 1CC3081199
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1CC3081199
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1CC3081199
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 07:48:17 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 35FAD43AA5;
- Wed, 12 Aug 2026 07:45:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74DA91F00A3A;
- Wed, 12 Aug 2026 07:45:01 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 587EC60A7E;
+ Wed, 12 Aug 2026 07:48:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 777BD1F000E9;
+ Wed, 12 Aug 2026 07:48:15 +0000 (UTC)
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: u-boot@lists.u-boot-project.org, Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>
-In-Reply-To: <20260727-avb-root-key-pluggable-v1-0-7e27b2b92cc0@gmail.com>
-References: <20260727-avb-root-key-pluggable-v1-0-7e27b2b92cc0@gmail.com>
-Subject: Re: [PATCH 0/4] avb: make the AVB root key source pluggable
-Message-Id: <178652069921.239003.320032105460822758.b4-ty@b4>
-Date: Wed, 12 Aug 2026 09:44:59 +0200
+To: Julien Masson <jmasson@baylibre.com>, u-boot@lists.u-boot-project.org, 
+ Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+Cc: Argus <argus@byteray.co.uk>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260729-b4-android-bootmeth-oob-v1-1-31c3450ae0be@byteray.co.uk>
+References: <20260729-b4-android-bootmeth-oob-v1-1-31c3450ae0be@byteray.co.uk>
+Subject: Re: [PATCH] bootstd: android: bound the boot image read by its
+ partition size
+Message-Id: <178652089345.239806.17329637437699875380.b4-ty@b4>
+Date: Wed, 12 Aug 2026 09:48:13 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel.org; s=k20260515; t=1786520702;
- bh=kgg7Gwx40NyARU7IBbnpUCBgS4BpwRzaowe9HOZvev8=;
+ d=kernel.org; s=k20260515; t=1786520896;
+ bh=BF66oNfPgRH1RKbiUG7vY/0uWPFzQYJA1PkY/sRVikg=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date;
- b=NG8r0+8Aco2ofNzWC8jjBNo4IipPvtVza2zvEUMJ3ItNJdFG4uP2n04h71MazG+08
- PbEZ4843VnTZ+kYnosb7CXbS9/hSAgLdbKC5QkvyYehpuxT8/sv5LASzpWcQcfzPN9
- oIQ+XUwnn9jbQW/7OFJnGhB86kt/Gr9batHAsMAP5hmaBSQOkSuApzn4hj8VzKBWi5
- 4F14rSfweE866Bcek61bpufOZqwOkv4OsM/h0IfdsVAmrkv7ecWkUtQvFRuPiIF8Hu
- 0Q285LDHE3pRRnHsESG6/QMUbtMJlnTBNbY5i2ZZ4uW2TieWe8BfNwdAPlN8c0NQiD
- 2YHpjSECMjFJQ==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=EZkhUOZyiSdYxXZDUSzgHfzHqA5ym0qP2ZsEfxq0odT5WviYqbRkt5ZCVNwg53zhb
+ BOp6N670x2p8dasN1cd1GO+V/+1rRVeAYpRyYzK9SWksqskbWnZ0/KldGCpt9xu1NP
+ HCfgUmRVoSUYrrS542ZeV/Mq9suHp0ufw6j6XzGuZYlvxkl7oeFhnx/PhK9/CjpQU4
+ rsLsDM8a4yMHPGR48dwwRF1OgBQSo5uOOAStY1UEcKCEowW+Z8pC10gIBMYuQDhzWW
+ wH4qeXQMuGuBOnGU8pWzcSbra5OZQqN4naP9Z+ZADC98YIAN8FpyulVE3gTQNaYvXD
+ YEA19O1/Lr9LA==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=NG8r0+8A
+ header.s=k20260515 header.b=EZkhUOZy
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -100,30 +103,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi,
 
-On Mon, 27 Jul 2026 19:14:12 +0200, Igor Opaniuk wrote:
-> AVB's entire chain of trust reduces to a single public key, and today that
-> key is hard-coded in U-Boot as the AVB reference/test key -- whose private
-> half is publicly available. That is fine for development, but it means the
-> root of trust for a "locked" device is a key anyone can sign with, and there
-> is no way to point AVB at a real, per-device anchor.
+On Wed, 29 Jul 2026 21:02:09 +0200, Shahriyar Jalayeri wrote:
+> read_slotted_partition() loads an Android boot/vendor_boot image into the
+> load address, sizing the read from the image header:
 > 
-> This series makes the source of the trusted root key digest selectable via a
-> Kconfig choice (CONFIG_AVB_ROOT_KEY_*), while keeping the actual trust
-> decision -- hash the vbmeta key, compare against the trusted digest, fail
-> closed on any error -- in one place in validate_vbmeta_public_key():
+> 	num_blks = DIV_ROUND_UP(image_size, desc->blksz);
+> 	...
+> 	blk_dread(desc, partition.start, num_blks, map_sysmem(addr, 0));
 > 
 > [...]
 
-Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[1/4] avb: make the AVB root key source pluggable
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/83f12ac9d6355b4d843b64f5a92c933da4c94f64
-[2/4] avb: add OP-TEE root key digest provider
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/b842aab3e2a2a195278239628429b35df112542e
-[3/4] avb: add board-specific root key provider
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/d57dbfa61be077382f15b2fa70bc7937d514408a
-[4/4] doc: android: document the AVB root key source
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/c22d53af6344a6313042f70d6e55448e1562dd80
+[1/1] bootstd: android: bound the boot image read by its partition size
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/35432ef6fe2c79ab72709966e64815a45eb55c76
 
 --
 Mattijs
