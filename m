@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34343C5B567
-	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 06:35:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C67CC5B56A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Aug 2026 06:48:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5039C81101;
-	Wed, 12 Aug 2026 06:35:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3CEB181190;
+	Wed, 12 Aug 2026 06:48:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id StBCEwNaEwWG; Wed, 12 Aug 2026 06:35:32 +0000 (UTC)
+ id hWTF8sfywGhd; Wed, 12 Aug 2026 06:48:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2C6BF810E1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2EFC4810EC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786516532;
-	bh=kjfs1k28ney6/+pyIJvBhRyRCb0aBsNOqrul6K0BbMQ=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=OpG820aoU5I1VaxSOPFm+TNK8J/Ojrf+UEWbiT4aIhMmPkP9K+3Qil4SAwK89ujwa
-	 ypgtiUo0oUHlmMxpqZe6L1anbkdEhwHG4USjINip6G/1iLrH/Cgwomq33LaSgImDzC
-	 oHuoY0Rx6Snoi3exoVhyaSc+XlLOyX8Mw77ph0gJqyIvT3HxDj2ytd4RqlbW3NG6Rq
-	 bPvp38j1HLm8fkGqeYF/uozs9UNkxT+ada9jIFmoamYUGFFtup7eiHrIB1zSmlojd/
-	 4fwR8pwPcJQsdsA23ZLOjRzNfzqRRoMWQru2DZiwa49bHP9piZWDJ/gfS1ciTsf27w
-	 q0HL2OlRLCZkQ==
+	d=lists.u-boot-project.org ; s=default; t=1786517320;
+	bh=2r+NTVyZ6iJyfe/BmgzxxHPCoj78pQh9gOkI36RCMbw=;
+	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=F0vHVEuDpUf3xsqioZFPdXKey01CT6IgtCfDY6O0ny54tEVhREYvcebIjaZCpYrzX
+	 Ne/ox7tQphxppbYxTIKGjA2XwM6Q3iBIY0c1mCUA4YMfM15Cr3YeTI+hbFvI17fA3z
+	 0SuoMlDPlL8ypKdVX1/hMXBNMSLS9ShZrccNvR7mWqK7/HGq4qtjZ86jPdndHdGLsu
+	 oQMio70KuBnp5ES6Q5aDfPIc2gsGmFaQJOBAScA8IOGX941LC2vnRC7Ilyh3f2/Ruk
+	 XbF1B5M7oy/R0kVln1MzFTBWNopqF0aqqY3QNyDqpOKZnpsbho17G1HGTqYiuF2nvG
+	 jawmxw+EmxbZg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2C6BF810E1;
-	Wed, 12 Aug 2026 06:35:32 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9D0B9259
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 06:35:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2EFC4810EC;
+	Wed, 12 Aug 2026 06:48:40 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E6A6C259
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 06:48:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8303B4033F
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 06:35:30 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CCC544082D
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 06:48:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HvnS-TDjbm90 for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 06:35:29 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id n5hZeRx07UoL for <u-boot@lists.u-boot-project.org>;
+ Wed, 12 Aug 2026 06:48:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c10d::3;
- helo=sn4pr0501cu005.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c005::5;
+ helo=co1pr03cu002.outbound.protection.outlook.com;
  envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 717CA4008F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 717CA4008F
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 717CA4008F
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 06:35:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C944140824
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C944140824
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c005::5])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C944140824
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 06:48:37 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uiOzDZ+tNZoxG7LE26OB6gws3vdhgedmCGEfrXzXZwGZd5z1I8WeXmGZqReMxRLcDMb6PpWWv6MH9xWty64vm9sEDhq2DZLEOXf3ztyH68RagvkyCw9zyiNC0ABnd/cMGnf5BqMG6fiAvDP0S/Mclmkh0UMDUiMLZVwRONeh4GpFOIzE5SGsQmSgotv7Kh/nVDRkltJ9l3b2cOe4XC6YDQUWZUsDYhlQe/BmYt0WL4o8pv+gTAdXm+r86Qg4AFS3akUSn7hsgYLLhBs5sXeG9cEIG6FJ87FdJaEZVYouPGmxgbDvz1ezUEC5KQj1ucBgN7Y9UETqfxSRgIGUQ/6iCA==
+ b=K+BXV03/zjp3UgUqdvBTM0UOTHBEPMt6Cd5eYjc7Shr2uCgK9KntCemYzn4/eOHjVUQofPm+w3glIXdljEgXWKJY/x9uoaEHSJi16pjPiFUO09NK8Dg9KVTMsa0xEBwvuNb2cGg6hdX5WeZ1/iO5pytOoq08YJQJ7R0YZQXUT+fUbPQsguExAMNiWER6uhOBf+5Ar6Apgdm+gRQ0hGMpbjJkDAeXZghWnSs1hSNkXSuVMoqwGRQ01zLBCIXQ3cPZG554HxVbuKkV5/47OMcBlspxn8wrq90RApA+o9tKHF04sH92Gz26swDkzhvbVQ0zdUDU2UOrMg66+nGwwyTvHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kjfs1k28ney6/+pyIJvBhRyRCb0aBsNOqrul6K0BbMQ=;
- b=XlVN+mY8imQ+UtVIeUgIWsQmyG44r2tf8yrH84D2KiL1SCn7UZ4y/v7Ca4Sb9mnp9ruGXc/+IE4fGpkAmFr0G2QdrJzyx2udQ9JL5AsQkzornRYSOS8WNF1tQqElI93XoyfzI0T0XtTaKDk8e7hE3GCF18gMZfw3WrMxHqA37ATAMN4w+/NkE0oD2ww+slCBRVvHBtBPyI4h+TPiL5uxxnzaK/vxJiSGlYJiGTP/WnAdBzrFICGdNBaXppbV899bvH9B56Pk/VxNDaZkxpkj0PV9lfPpPo8jT+wKci2Zgp+apbmqfUHB5dnnntRg2cPdDeTAJ+eNjUUvrNPyRg6Lyw==
+ bh=2r+NTVyZ6iJyfe/BmgzxxHPCoj78pQh9gOkI36RCMbw=;
+ b=iYqH645rVuF6hqoTX2jJjehKbA5328Ko0P5GhFPYsZtCmT+N76QotT1zCmru0IUM+1AKDR0G1JGOt0gU/WGt7cR3/ylrMslGN6j3frOBNht6YAHgHIq/IHiVxtFadjTNFEjn9Gwlvif+ej2PI9kfezgIIKJr3A0pI34MSJj1rPJSqpGXd+zhEhlLY8cHhDhQzdhHBKlKRTeImhe+C/iTwedVMnAa3QZCe8caQvwR8aWwLgXjmfCwxSVEe4chhw8OAWP+Mca2v+DlQlJesnWb8azHWU0curiQULysTazhSoAtAD5Pty0Em1diBymKaHnjfqjvjJth4RML6w70XpUk/A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by PH7PR12MB6492.namprd12.prod.outlook.com (2603:10b6:510:1f3::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Wed, 12 Aug
- 2026 06:35:20 +0000
+ by DM4PR12MB7503.namprd12.prod.outlook.com (2603:10b6:8:111::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.12; Wed, 12 Aug
+ 2026 06:48:30 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0292.024; Wed, 12 Aug 2026
- 06:35:20 +0000
-Message-ID: <f29ac2fa-4d73-410f-ace5-819c2a459cb5@amd.com>
-Date: Wed, 12 Aug 2026 08:35:12 +0200
+ 06:48:30 +0000
+Message-ID: <422ca380-143c-4f9a-a4dd-082c955ca8ed@amd.com>
+Date: Wed, 12 Aug 2026 08:48:24 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MAINTAINERS: Add missing fragment for Versal Gen 2
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.u-boot-project.org, git@amd.com
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-References: <11956eca5ebd0b3626b7e2d0fa52331cbd3dc1ec.1786361819.git.michal.simek@amd.com>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org
+From: Michal Simek <michal.simek@amd.com>
+Subject: [GIT PULL] amd/xilinx patches for v2025.10-rc3
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -125,88 +122,86 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <11956eca5ebd0b3626b7e2d0fa52331cbd3dc1ec.1786361819.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P194CA0055.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:803:3c::44) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1P195CA0091.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:59::44) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|PH7PR12MB6492:EE_
-X-MS-Office365-Filtering-Correlation-Id: dbef77d5-0ae2-4ee3-f326-08def83be17f
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DM4PR12MB7503:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f71cfbf-c57c-446b-ec5f-08def83db8a2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|376014|366016|11063799006|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 4EsZJUZhRcKEG7HFnKu7OUtzmZz7huzphl4M/2RpwFVUgEBEpxK0Jwb2T4U9WE765sIZeIXdf3Uge2bu0M5WpNPBLLDad194M1P/UXteXaTmFNtclNzQ4zZoI0CdzNdWYwrppkP/0OVVG/28KY7znUiXAlQtZ+YcFzLyLD/qO3OFU5/oYC0erh+N7HcPq52VRNU/09x5dCW8R9pUvb7GnWx0PeU/ELmhyhs0ZWBjjFQrqykc+61aNRPL3BHseqrashpTaGFti+x7bVtjh09hWUphns3sAkOJ6xV9LR1oI/+waiH9qJRnu7caz/pHtUo68DyiaH57qLrKZYf0Tq+JBU4FMAhCx6geR11DMLxHdwoKNhVJyB85rSWcsgClD+R5oKBuwU5petPRq4+qL27ilb8Rte450nowMHoYkYjialsRdNQRtjnhl2LoIREggVYpjVom63+q8l+iGvwhm98EaREEKDGM69/bRe6vLvYpfJoqVkRFkbvnmrCn4uzxpAYiOdBLN6ilpFrwJUjgaODiIhAQ5vN+B38n5BDK8f/07buWunHfnVOhHsFfX0LlTnthulzt7c8+nMr+Jcx+pM9Mba5VZvVWi+9iefaFEQ2Ny14=
+ ARA:13230040|366016|23010399003|376014|1800799024|6133799003|10067099003|56012099006|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info: zcT1U9wvCsZwrrGQBqfmGDz0BUSDxTn70qJNgw3xhkKHdeFx2XTPxN9A+mXLiHDjXUb58A6xjVdK8a+aVHUAktGur/9LQvtp4IyD7slHizBRIs8GTxnyhY/z4WxiIq/eJND+wRddRrU2ylARaLpJvyzjLbK8bdHwCHEm2Fg1ntyPLJsWYrD5Nt3en2gpEUPExxlHy7p0wQCoyZqbsKLmthyj/2Lxt6Buf1xK2x9UK7cUV3Bc0GtNmieUzMaeC1AGh1HxFMVqto141Zxu7yFEy9pDCL1VOdeuQeeeBrBpSB+eGOtJaoSAMu4m5O+eHZEdrWLPV+2G83cQd7dPqdrwfv06xkQ+je1K7Lw1ZGBQNJdJy8lZVwpz4yDa6W/Zzk5w7MGvQxq/Bv8x01AxjKBI5hK5rl3Pzqad0QZVFpsbtxi4+7mPuxVsiWnZqYrbzOoZ3A7D6Z+QOX7U2nu1qKHl3BXFcUScf2YSg89Gq8obAWxG8udxUOw/hyrGVSIQxMr0+vLxZqwj+ta5AwpYvGK1i/l3Kl7UXp+zj67nxnyWCIAZS+BVPFvN9BzeIknm0g9WqniTwmeQWrwQOrw8Lr/v/YT0vh4RNVuWJweKAjpUCXI=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(11063799006)(56012099006)(10067099003)(18002099003)(22082099003);
+ SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(6133799003)(10067099003)(56012099006)(11063799006)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OTFTOEx3cmpiaWJwSFVWSU1LN2M4VTlFem1kaVMxOThlcWtzRnVwdVFkL0pT?=
- =?utf-8?B?T2ZXbzlqblVXOGd5Z0tBcTY5RS9Bd2VUSXdETExUVDF4ZzdIYWxhc1BWK1Ur?=
- =?utf-8?B?NUlEeXlvdXZ6UGRuZWVWeHF1dFlad3RrTU5wcWlFeFRGeUpRc2hIUyt4WDg0?=
- =?utf-8?B?UTNld3ovZ01WNVBYUCtGa3N1OFhyMUluVlJsaFN5MllJUW9NT2ZkcmdyN3l4?=
- =?utf-8?B?SXk1NU9lMVZnaGhxMURudlR1SjE0RTJoMEpNOFBNdHB4R0FSZE8zMU9vU21r?=
- =?utf-8?B?a1YxYzA1UzkwUy8ydzhKMnpSaURHb0NjZTl4ZDdqaGNxMFhTank0ei84TzRZ?=
- =?utf-8?B?THpmcUliNEVENTNqRmxCZXN5aWVyM3FXbklxbmlHd25hMGhhZ3JtZnNHREdM?=
- =?utf-8?B?QXRIMWxnRHJvcHNCZzJ2M05lUmFPM09mSUxUbXJLRnpBM1FtZldJM1NseVdh?=
- =?utf-8?B?R3p4SVhDOVArV2FMTnVWYS95TWdjMjJRUmJNbll0d2hDQjFhQWE1RGlWKzYx?=
- =?utf-8?B?SE5QNHR2MWF3TUp4UHRacGNoQzV2TWIzaFU3N2ZhVk1pRDQ2aEVJQ2U1cmdZ?=
- =?utf-8?B?TWc1NDZtZkdkRC81TkZjVWp3T0pXcTNXU1ZJa1hNUFJndkErdHlEc0FaWGhF?=
- =?utf-8?B?NTdLaG1jWUNtcVlvZVBHeEg0amk5eUpISUdYdE9HODNrUFJURnRFTVUrNnAy?=
- =?utf-8?B?MU40NW8weitiYnBIMklSYVBVVVJXakF0eVIrWmxVeGhNZVVsd2c4WWxJRDFn?=
- =?utf-8?B?RDdPdVFJQXNMeE1oeVJVZDkxeEF2eFJXT1BlUjV3cS9WekNMSkxWQ2lZbFR0?=
- =?utf-8?B?TFYvVmdLcDY4NFlFejBWQXliejNyRjVhS3NmeWxTZE5oNzVQTkJEQ1RVdkV4?=
- =?utf-8?B?dVQzelM4amJGRDZndUc2VmZUNnJCUzF5bHMrRm9yWE93L1I3MWMyZkRUaGhl?=
- =?utf-8?B?UDh3NWV6OWZCbVdWYkJycXN1K1hranM0ZHBtTk1rMWd5VUZFbCtUWHFHcURG?=
- =?utf-8?B?RGNzODJaN2JxcHVJSmZqdkJnNTZoRE9Vakt0UkhuRDZTWWxPZHFQdzIxZng0?=
- =?utf-8?B?Z2xQS1p5b1oxWHlDUlFrM1lCTkpSNzNyZk0wTVg4NWUxK0hIaUJxck5hSDNS?=
- =?utf-8?B?M1JLQ05EWjdlRnlHWFpNOFRQK1cwdUxvVUdGNllRNzkycWhNM3NuKzVJV3I0?=
- =?utf-8?B?d2dIY2xNYlE5OVZ2c0szem1KdWRLaWwxSHJ1bzRNeUYvWURTZXFSOFdUS1dI?=
- =?utf-8?B?cWNyMG1RYWJlcVBsMThEaGYybFFMbEpBK3BQV3ZUbmNQdWtlOXAyMmtIei9Q?=
- =?utf-8?B?eGpHM3RZYWpVWWorc1hKM2Q0TWpTMzJYdGNudzFnTzVVeG5wQmVIVzlQY093?=
- =?utf-8?B?aHIrTVlhRGRzK1NpdDlGNnpDdzUxcW1hRWJmcmxSQ0lBTXRUd2hHVlUxWEJn?=
- =?utf-8?B?OGhRQ3ZMQVE0Wk1EWGM2Y0tEbm5WVVdDT2I5TEVMZDdHeXhrbnVNclIrdExI?=
- =?utf-8?B?WnBTTVYwYitET2pSUVhzRjV0MmZNWWdWdXVyTW5hNkZ4Y20rUWZtSUhKYUEy?=
- =?utf-8?B?OUVRLzBBOUdLeEpKSmdCK2hHOERDNk95UzFMTld2ek5Xa25vS1RtVzJpYjRr?=
- =?utf-8?B?V3c5dVBYd014UldZMnRGc3Jld3V1czhSU1ZNNWVNY3BRSHkzSVJLcXFETHNN?=
- =?utf-8?B?OTczQkl1bnJjaHM1Y3dlT2Q3RnlVU2dkMUkzL0Y4QUVoREFmb1BRaGNTOE5I?=
- =?utf-8?B?b2U5a0h0Nml5R3hMSnVTclJXSU4vZitubnhjSDh3U0NsV2FQeTF0WW8xZStm?=
- =?utf-8?B?M2wwREVQd0w4aS9UaUw3VXZLa0cvb3ZLR3FmaFdCZnB6dzEzdktReGh3WkJV?=
- =?utf-8?B?L1RkcGJiQmlRejdOQ1c4RnBBRnVEZTVIejZZc0czNHF1b3prMzA5Nmp5RXBU?=
- =?utf-8?B?OEdMNXo2cVFMckxkOWlGdGh6cXVwN0ZEQlFuSnVJdTN4YlRZaWM2WXpHN2hQ?=
- =?utf-8?B?ZWM0dm9MRHdERzlDTWpZYVNqVi9zUGxIZGwwV2pMcnVpc3hYM3FZQzNuR2tU?=
- =?utf-8?B?Ynk5VW1mQXBmai9PSE5kK3RDOGJpSngwWlJmbkJLNFZuN0VFZzJsc1M3eks3?=
- =?utf-8?B?N3dNMzI5OURHR3E0VVgxZmFlTkc2Z0FLMllzWEdBQzFPVFdXRE5yT0luYUFX?=
- =?utf-8?B?NklHTlJ5eXErMHA1QlNyVVF4OThIbXMrclF4STJ4cjFyVzU5RHFEbDJ5Vm1Z?=
- =?utf-8?B?WUNUb1RDbkh5T1pPL05hYVY3c3FyTVZ5ZlA1TElmak5LeVZmNlBkakZUcnhP?=
- =?utf-8?B?QWhkNFlRRmRnQnJ3WXd5WjhCV2cycVdEdE4xblE0Rk9xUnQvcEJHdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q0FsaEJZZVhNOGZvaGRiOFRHZ2o0cnpzR1VoNVNhWVIrR3ZWZXgrVlVVNEJ6?=
+ =?utf-8?B?Uk0rR250MXcrUitNYmJjTk1OSjBrU2NlNHNSWTJhM3VObEl4WjBuQlB2VjBG?=
+ =?utf-8?B?QTg1QnVtWFVlUGdvRnBkWUVPZTFGTkZqVlFQa2xaUkVKcVBEb1RNekZZTE94?=
+ =?utf-8?B?dk84Vnd1OUpiK2JwQkcyZHIxK2dOLzZ1L2dXRTdJMnNxR2E1NjIzT1A2Uyt5?=
+ =?utf-8?B?Z2pLdjdKY3BnSWQyV1NGSE9OM25TMmpwQWt6SlhnbWE2MWRhdVhjK3N2ZkRP?=
+ =?utf-8?B?ellFTDRPMURqWjRDUzVQQWdJbHdIUXYvWGVET21ZTGNhRjh5T3p6alQvamtC?=
+ =?utf-8?B?azVna3hLK2lDOHlFeWhXQWNQM2g4OTF1b0o0KzJSN3BkbHFNaGRWMkl6aHdM?=
+ =?utf-8?B?YzQ1cURYVFhwZVFVNnoyQzhFNkhXaHlhZDcwcTBVQis5SmF2K1R6d1Vxbmsw?=
+ =?utf-8?B?dCtFQyszKy9xWW14VUsxb05pRThXYUtZcWpxUHdpWit4MVJzRmF5U0NTekhE?=
+ =?utf-8?B?dlhVSUtEN1dHcWd6MDE0OFAzZmV5WWd5QlRnakJCNGFIaGZ1Z0lDQjE0ZktT?=
+ =?utf-8?B?NVJPOE93dnJkMk53c2JNaUJTbGN6ZzZjUXFFOVNPMHJzMG5DOGNMZFJsbDVB?=
+ =?utf-8?B?SXVzSTRkUlE5U1hZYnNhbFYrQTUzbHloVExIZml0Y0xvc3hrVnk3RTFTSFJS?=
+ =?utf-8?B?cDZaWE1CUmk2V0MvZGROOVNFRjRRa1Y3UHZRejBXb2lSdDk1VFZoNnkycG9M?=
+ =?utf-8?B?Wk9sc2VpdWZISzRtdHJaNW9TYmpuRFdzNW5TeHNPYjlpQzBLWTlIdkVCNGY4?=
+ =?utf-8?B?UEdPczNWR2RsWFVnbkFWWHBGVnd5RXpLSTRrZkpCLzlEN1YrNXU4L2VnQ1B3?=
+ =?utf-8?B?R1VTTzFDYU5xY0ljdDFTV0dVekxvT3pBUVJYc1loMEpNa1MrajlxM2NoRzdX?=
+ =?utf-8?B?d2lWczR3ekpialMyZTQxa0VDSmRGV2pDbXdxck11QmhaTE0xR05mUTFJTUp6?=
+ =?utf-8?B?Y3FXMlBSRkZYanhady9KRGl3Z3JvWDdrbURBTXBWT0tJSk1aUzA0czVod3VV?=
+ =?utf-8?B?UXZlQ0xnNms1cW9SRDZXWWtTVlVPU1FsYWtEYkRFUTRETExoMTNNa3o2clZ2?=
+ =?utf-8?B?dTV1S2VmZ1liS3VOalpWRUVxa2xCZmcvMzdJdmRTN0tua0xrOWdsaG5uR0lU?=
+ =?utf-8?B?QlRFTTJOU3VuUEZHR05tS0tSM3ErZFY0SkhiV3p4R3k5S3MvOUFoc0g0eUVR?=
+ =?utf-8?B?ZEJtVWFPYjJIUWFGTmNBbWVWM1ZaYU1XUGN3T1M3TmsrZTl3Uk94NkVUeCto?=
+ =?utf-8?B?SzNiaTVQRUtEZTRlRzh2S3QrNFBIQ0xHdytSRU5WQ1diWkltZndjL216am1n?=
+ =?utf-8?B?a1RyYnk2RTJ2T3RKQkR6NUNZNFFXVTRDZWM0Vm9FRjVtUTI5ZmNwMUNOQjZR?=
+ =?utf-8?B?NTRwV1FoNHhYNFBJSDZBVFRCT0U3QWxBME9nM1FhQjd4UEx6MTBybmdUanhW?=
+ =?utf-8?B?c3hlNEhBY2JhOG5pTEtCbVk4TTUrMmhxTWdZaDRZa3NhNnRpcUJ2WGk2Q1Zs?=
+ =?utf-8?B?ak82MjRKK1dCd3pYM1R2aEd2SnIvaWZEbTdGNWNtVVlpbUk3YkhkL2tGSVNx?=
+ =?utf-8?B?b3R0TXFGWFBtdkpUb2J1YnVyak15bWtCa3o2c2lGTlkwOUphNzBVR3hnVk0r?=
+ =?utf-8?B?VTR3ck1DVDAwbmgwVVRMWEpIUERQUnRSZ29BREtlVmtjOVNXQ3ErYmwxSzMw?=
+ =?utf-8?B?bEtsSTNqVU5wQUwxVDUycDVFMDVzSjNEcjlVMzZMRnNZMGwyMU9SeWMxMGZY?=
+ =?utf-8?B?azNQVDBNTTNIYkliVUs1NHp1ejN6eE9qUGl5czhSdGI3UlkrVXJKWG1OOUxV?=
+ =?utf-8?B?b0tmRzJYcGFabkdoWDkydUZ3dEMvMmdmYWFrSmJnQllGS0VJdmN1d0tkUlQ2?=
+ =?utf-8?B?b2dGanREZFlqeVJtalVqandzT0s0QlF4dG9adkRqd1FiWnV2YUU5MGQ5MFRT?=
+ =?utf-8?B?N2s4U21FUnhWN0dTUXNXeGIwaFg4WUxEa0h2emtvSWtnMU1tRk5lRnZSYXBP?=
+ =?utf-8?B?T1duaDgrNFk5WEp5WldiV0syS21rMjB0eEVCNEJYRjNHSVVvZ2tCUFBWanQ0?=
+ =?utf-8?B?ak9UYWo4eS9kRFhHTDRDdEJkWVF6U2FIUjd3YlUwMzR1VW9ENkhMMEN2WDEv?=
+ =?utf-8?B?aFJZK0FmWm1DSXRybjZNYVFhd3FERjRzODlWVzF1Qmd3b1dzMTVtdFpLaGJ3?=
+ =?utf-8?B?YVlVM2JaNXJTU3VoK3Uvak5VeHprK0FyMjNKMjczVEtBbmp2VDM0Rkd0TzNv?=
+ =?utf-8?B?UkM1TGxlcDhrMDJlU0Y0Z3V1dlpWbUl4QWtteWF0cngxajJSOFQzUT09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dbef77d5-0ae2-4ee3-f326-08def83be17f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f71cfbf-c57c-446b-ec5f-08def83db8a2
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2026 06:35:20.5143 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2026 06:48:30.9028 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eF4AAC7VDC03A4sUcIedxsbOa64UKePKoo3A4G9xFSM/81ldfQKlBRPfKv0V+ty9
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6492
+X-MS-Exchange-CrossTenant-UserPrincipalName: NGfoR4UnM8y5pzVdvrGnspZ2rLjb670qfEcKbtLtzncZp/P/Dn1BmWATm6HVkehp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7503
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kjfs1k28ney6/+pyIJvBhRyRCb0aBsNOqrul6K0BbMQ=;
- b=gtbppECLHzUP9XSl736v1eQdxm9KtpfnbYycK+kGytKyFEehg16/jypG3HnNJxI4ZttVG8KY9dq0QZx+IpQosX1qL7CoIDWnL4ZjDF/opBZW2/IfIoD/M9ygCUrxOgzXrJ64k0P51AGmgpQKt/qbRL2jk6KFcC3a271wZnslkmk=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=2r+NTVyZ6iJyfe/BmgzxxHPCoj78pQh9gOkI36RCMbw=;
+ b=IChPU8iyqIWki2wtP0FF/J31QN9IDNwyS1ZA5k2VTQO55/nRzC0AD7N7qaveLI62p5Zv0TOZqrgrHQu3X9LnRAHxa/X1grMeLN6cA8B6WwPWhiY8032kOf4FuaPbL86ID8ED9Vrsw9+WmT/t4pID0OXJVm6BZDorXBJDsBB/wL8=
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
  header.from=amd.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=gtbppECL
+ header.s=selector1 header.b=IChPU8iy
 X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -223,38 +218,92 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+Hi Tom,
 
+please pull the following changes. I missed rc2 but I think it should be just 
+fine to pull this at this stage. I can't see any issue in CI too.
 
-On 8/10/26 13:37, Michal Simek wrote:
-> Versal Gen 2 and especially march-versal2 is not covered by own fragment
-> that's why add it.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   MAINTAINERS | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index e1379a6a3e7e..eb48eea55c5a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -821,6 +821,12 @@ F:	drivers/spi/cadence_ospi_versal.c
->   F:	drivers/watchdog/xilinx_wwdt.c
->   N:	(?<!uni)versal
->   
-> +ARM VERSAL GEN 2
-> +M:	Michal Simek <michal.simek@amd.com>
-> +S:	Maintained
-> +T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-microblaze.git
-> +F:	arch/arm/mach-versal2/
-> +
->   ARM VERSATILE EXPRESS DRIVERS
->   M:	Liviu Dudau <liviu.dudau@foss.arm.com>
->   S:	Maintained
-> ---
-> base-commit: 4b12b2532a904fcf1c5ed9a7b323f39717ee92e4
-> 
+Soon we will be sending patches to cleanup firmware interface to be prepared to 
+move Versal Gen 2 to SCMI. That cleanup should land in 2027.01-rc1.
 
-Applied.
-M
+Thanks,
+Michal
+
+The following changes since commit 77bc0326456d9d6a83aa7adac201d1c97a008b61:
+
+   Merge tag 'fsl-qoriq-for-2026.10-rc3' of 
+https://git.u-boot-project.org/u-boot/custodians/u-boot-fsl-qoriq (2026-08-11 
+08:49:22 -0600)
+
+are available in the Git repository at:
+
+   https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git 
+tags/xilinx-for-v2026.10-rc3
+
+for you to fetch changes up to 86cc9f2fb5637d64e2da78c43fdccf4c50daef8c:
+
+   MAINTAINERS: Add missing fragment for Versal Gen 2 (2026-08-12 07:06:12 +0200)
+
+----------------------------------------------------------------
+AMD/Xilinx changes for v2026.10-rc3
+
+Versal Gen 2:
+- Add support for 2VM3654 device
+- Add missing MAINTAINERS fragment
+
+AMD:
+- Fix fwu dfu_string generation not to alter with generic DFU
+
+Firmware/ufs:
+- UFS interface cleanup
+- Remove ZynqMP firmware dependency from UFS
+
+zynqmp_gqspi:
+- Fix quad mode bus conflict
+
+MB-V:
+- shrink SPL size and enforce size limits
+- remake ELF from BIN
+
+----------------------------------------------------------------
+Michal Simek (13):
+       arm64: versal2: Make hardware.h assembly safe
+       arm64: versal2: Select GIC redistributor base at runtime
+       board: xilinx: Generate FWU capsule dfu_alt_info from fwu_platform_hook()
+       xilinx: mbv: Disable CPU driver in SPL
+       xilinx: mbv: Disable arch-specific memory functions in SPL
+       xilinx: zynqmp: Setup BOARD_SIZE_LIMIT for mini configurations
+       xilinx: zynqmp: Enable SPL for zynqmp mini
+       firmware: zynqmp: Remove duplicated sys_proto.h header
+       xilinx: versal2: Add PM UFS firmware interface
+       ufs: amd-versal2: Perform controller reset in the init callback
+       xilinx: versal2: Clean UFS firmware interface
+       ufs: amd-versal2: Remove ZYNQMP_FIRMWARE dependency
+       MAINTAINERS: Add missing fragment for Versal Gen 2
+
+Sandeep Gundlupet Raju (1):
+       xilinx: mbv: Enable SPL_REMAKE_ELF support
+
+Suraj Kakade (1):
+       spi: zynqmp_gqspi: fix quad mode bus conflict
+
+  MAINTAINERS                                    |   6 +
+  arch/arm/mach-versal2/Makefile                 |   1 +
+  arch/arm/mach-versal2/cpu.c                    |  40 ++++++
+  arch/arm/mach-versal2/include/mach/hardware.h  |  87 +++++++------
+  arch/arm/mach-versal2/include/mach/sys_proto.h |   7 +-
+  arch/arm/mach-versal2/lowlevel_init.S          |  40 ++++++
+  board/amd/versal2/board.c                      |  39 ------
+  board/xilinx/common/board.c                    |  37 +++++-
+  board/xilinx/versal/board.c                    |  39 ------
+  configs/xilinx_mbv32_defconfig                 |   5 +
+  configs/xilinx_zynqmp_mini_defconfig           |  20 ++-
+  configs/xilinx_zynqmp_mini_qspi_defconfig      |   6 +-
+  drivers/firmware/firmware-zynqmp.c             | 104 +++++++++++++--
+  drivers/spi/zynqmp_gqspi.c                     |  43 +++++--
+  drivers/ufs/Kconfig                            |   2 +-
+  drivers/ufs/ufs-amd-versal2.c                  | 133 +++++++-------------
+  include/configs/amd_versal2.h                  |   9 ++
+  include/zynqmp_firmware.h                      |  13 +-
+  18 files changed, 388 insertions(+), 243 deletions(-)
+  create mode 100644 arch/arm/mach-versal2/lowlevel_init.S
