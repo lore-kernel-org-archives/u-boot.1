@@ -1,136 +1,130 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32529C5B572
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D915C5CFCF
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:57:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CA52360AF6;
-	Thu, 13 Aug 2026 15:57:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AF949409C9;
+	Thu, 13 Aug 2026 15:57:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z0o60w2bj6KU; Thu, 13 Aug 2026 15:57:10 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NdHSysN11fsj; Thu, 13 Aug 2026 15:57:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C9ED760B0B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C9026409A3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786636629;
-	bh=1x1SkgMeU1aKeO8KRRYDPtsVyrRbTUWp2WZhXhA1MAI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=T8P0EEBtldTzodVlAz7ZC8PCy0GUUzkgLGnwHNwQ2cqJbLHP766Wp6EJTROq4Bn9B
-	 hPbNwYlZ0oPobNn9Jl5WFZqHEOxCp3/ovPgJy/jphHLjCzy+4Dm3ovfDjg3nwHKBTE
-	 QtaqaJWC+62mdE6+yRbSYQGYCnr2wfcZA8RwC4O2UVgblliMCPbaELaV9oZlE5OLjK
-	 8fBmCTGkTnajDwM83793AvUaxnTjRU00cblF74hoZ0rlMc0aqXukMTbcKAeBZG2/Ld
-	 Lefc+iZVCYGsGm3K7HzHWruVCLwBKmlfS0/1Qunn7t1/1TvbS1luYT1SIm1y3/K4nB
-	 Uo/6wylzldJuQ==
+	d=lists.u-boot-project.org ; s=default; t=1786636630;
+	bh=srIR3i3vOgvB7u6lGi055bvCL19PMBN493jes1Pxyss=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=BeIgZhnNrQodjdZP/6eT8NwrKfRSVkm79R+skcukXd/v8TSATpBmPCpHiR0ArAk9N
+	 nOchnHQ6FA0TdJNA2yV++Zs1A6ICQm7LxsOFoQc7GorwSh99/0y2/zeJIsI/smmaZj
+	 Kvm5GuP12lesy/yhUqkG1ywiovYgQQAWCDqVGXsV+njGtzijDZxWlhq9E/T25E7nMG
+	 De3/V6+f06KhgTaZQ4Y816t/uQMG6UIkJbu46TKhR+Y1Pf3M0mGMle1eFs1Qhx2zY9
+	 NkcrkTGhIxDj0eloMDZ6E7aC50ObfKBm3S127HmEKqgCC2fAo55JA6YZfTBet2If6m
+	 Wd1Pi5vfcqwCA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C9ED760B0B;
-	Thu, 13 Aug 2026 15:57:09 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4BE411B8
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:42:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C9026409A3;
+	Thu, 13 Aug 2026 15:57:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id AB9C81B8
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:48:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3DF2181289
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:42:33 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 921C9409C9
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:48:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jpkZy_83LVLf for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 15:42:32 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ITpRjYitofjl for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 15:48:53 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
+ client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org F134A81285
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F134A81285
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id F134A81285
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:42:31 +0000 (UTC)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-49553515a8bso1195185e9.1
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:42:31 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 49018409C7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 49018409C7
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 49018409C7
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:48:53 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c1600d040e4so163043266b.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:48:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786635750; x=1787240550;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1x1SkgMeU1aKeO8KRRYDPtsVyrRbTUWp2WZhXhA1MAI=;
- b=KS/B8v69eslqjPynSE41dsiY0f6sGRwZI8/9mjkYhIPaMl/Id03YF6LqQkoi+bk76K
- gD2+WB63393M0UeNBQtI+L8olLl2GfSZfYKqjFpT4auDbgaln0CoYSHgjvkzDfJWb5zH
- /L6LwHzfN/JjXF+Qah6VPNFZm67B7Xx1D4VKVZWCom5mQITQ4RHngrNEuSmQDYXA5XkU
- TSpRbCEk7EIxUjlPcl4pXwZ8WlbHYySzgLfeHS9PD73+txvr2YSTcA8OgeMb+QTRkpSs
- 7X9YIdlVK35yCxILHUAI31Xzk9GXWXOyWn5d8/RMPCHJ+eE2SuADlTAKo1EFZ125DhuH
- TApQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rq9gCnsb2qY3irK4hyLZoYSscsizMDc6hiKJF0mbQBCqiUJq92q3TuQFxyo3JF9PlH7mfD262g=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzQ/SeCQnDOuNpbz0/d4FAfd7sTN4roB6FkMXroNRMKacJPgymQ
- pg30vsW0H/A0JG3k0R87USaPJLGUCgfS8ekDx9XnHCOgJovMJ2A5XVzBc8GpBMsflO4=
-X-Gm-Gg: AR+sD13ohsC4CBQVgoTnGYeLl6Zw2Efa6mEGNKzZNI6MpJQHb8IR3hYCGcoEfp3F7pH
- 6tizD4Qa5VYcBOlHzrTVhWisG6WXIKTwrGukKATxLG2Sn1REipOf9FJhOFhwbdG+XMShJJsS3EV
- IWw5Is7PhAzGtWonXiTiBQpmya5juJ1dWG+TSgi1m8OYUbhHAFb8dBcjtaTzCEPLFV2oQgz6HbF
- mEJjIUzPIeX4AXt2f30FBcTQlLHCMf2z2bmRFIO/cra3rTCph5pnQGoU4bCvs2UqKUw+7lS32KH
- 3nIw0zOX3GDDOi4+DaHKleRS1CULrKaM1rBm/9qri2fQJ7p2qARJjUVMksJbqZtIdwCOZ6PB9Ij
- 6zLwtsawdpbUpYXj41TMSwjkbnK/O446S4WS9qdBts/6JMjiD348jUAZHO5Ny6HmvYhdZ50g6rL
- pi/rbHTt4MXSG9iiutNPHaVibTp7KZUt1h+xbYBtepXCVEShMYMoWUSSuYdoDVZjLwQSGAR7h8W
- PdULAQ3DoQKmiw1zIMer2C8FXCPUWK9fpiVx/6uyunk6tn+zxpF6SqlQAOOtLTbxRekJcAQPU9j
- Ip/6DlwDHWzA9HkS4oHZdZeE0JKsJHrOgPQDGZsXFttEbevnVxhEeTs=
-X-Received: by 2002:a05:600c:1993:b0:490:c6c2:52 with SMTP id
- 5b1f17b1804b1-49982187725mr70446605e9.3.1786635749466; 
- Thu, 13 Aug 2026 08:42:29 -0700 (PDT)
-Received: from ?IPV6:2003:ff:f03:8f00:b111:828d:2817:5c05?
- (p200300ff0f038f00b111828d28175c05.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:b111:828d:2817:5c05])
+ d=1e100.net; s=20251104; t=1786636131; x=1787240931;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=srIR3i3vOgvB7u6lGi055bvCL19PMBN493jes1Pxyss=;
+ b=qUno3QYcmJhZ/ajqxmpdpAbsoQY7IbykEbCJMq9vqmG46BeaVjZNt0rmsvsIJmiD0H
+ LkqszuHuw5AVpy3x1AK0H3IvIB+iDgw6jGrc8jjSvhJfgDQqfjOAKP30Yf1Ixex6D3Rx
+ NoRDGmLY2PS1eNaRAWlAEwix1BKnXLlRgZHRfrXsw3Jt/GSLe5frv7cJ2waxC6Rtbb9Z
+ odXQx/2lG6/sBGnOGRogYmiFZixQOYoDDgnd5q4CoKQBAPuo8F2/xTASSY7HwgVNFeOF
+ GpY0PML1pGAtP84JC7bGx2n3lzFditzzfDKzIWFeiyb6XbT8zPZMs5eouZmvX0096xTE
+ HFyg==
+X-Gm-Message-State: AOJu0Yw5CUdOn8NBhFXv0k2iFE7YdE1SRToQNqLBHBpCBocgPVKeHw/5
+ M+dSizIaP0AkxuZJi9CZ+hUg53DPE1IT9covMuYNL6Q/9qSpKGnvpvD0vFSeD/po6qQ=
+X-Gm-Gg: AR+sD13mATDCAflOzTWTYYXcNjOZXZJHsTnlUN9y187V/inUPcArBmY0qIKbVGxImy9
+ QjKyDRgzYRjSWsKAuZoy3Bap/eWz1GUWj3oNIJir52XwxoND2zX5LBk3N46SmFxlicgrKvwcSmL
+ sX/oF8cEZbgOIr4++dPx6RQG7Aw0WfNUq5aQG0dY2F+IZukocT5lSEK1r+3IHVXHIij3qBc0M5J
+ 2JIy+Pt8kjB039IzF8FLHYChRboy95lR6EDkz/ga8KV7hOBLS9vMWLY0AdlW8ABZtakmdBLEi/E
+ ddO55LDTMiVAG2XRUlFUH1rtWbEYuLbP2B5ak5TsMhn+5aL2WJIn4eH+mmJt4nllJaE0DxgdGWu
+ V9LEReMgdvzYZaigfgnp62YuLbjnTPw6DzcPujkSdWlIVeBXKtLYC5CG3jWdN+Vqtjl2E1sJ0SL
+ YvhXvp6O6SG9cJCGvaNZFV5fUpx2Xwiu/TxwiuPeo77hJVH7rbx5ep77RhorrcNxoS388qNovrj
+ 6pa25IL6cBvxqnELxcQPoh43eevnmD9Bev0pyAvPQbLoJlICWnJ
+X-Received: by 2002:a17:907:c78e:b0:c1c:6d29:8a11 with SMTP id
+ a640c23a62f3a-c210a9d55d6mr322722566b.13.1786636130978; 
+ Thu, 13 Aug 2026 08:48:50 -0700 (PDT)
+Received: from [127.0.1.1]
+ (p200300ff0f038f00b49b9d175e416b42.dip0.t-ipconnect.de.
+ [2003:ff:f03:8f00:b49b:9d17:5e41:6b42])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49981b03d07sm82828795e9.2.2026.08.13.08.42.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 08:42:28 -0700 (PDT)
-Message-ID: <f70400e0-9444-4ee4-b7ff-dea8f32d6c86@byteray.co.uk>
-Date: Thu, 13 Aug 2026 17:42:27 +0200
+ a640c23a62f3a-c212378d8d9sm8151066b.40.2026.08.13.08.48.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Aug 2026 08:48:50 -0700 (PDT)
+From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+Subject: [PATCH v2 0/3] net: nfs: bound server-supplied lengths in READ and
+ READLINK replies
+Date: Thu, 13 Aug 2026 17:48:20 +0200
+Message-Id: <20260813-nfs-oob-fix-v2-0-80993770518e@byteray.co.uk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] test: dm: nfs: add a regression test for an oversized
- NFS read length
-To: Jerome Forissier <jerome.forissier@arm.com>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
- Sebastian Josue Alba Vives <sebasjosue84@gmail.com>,
- Argus <argus@byteray.co.uk>, nd <nd@arm.com>
-References: <20260811-nfs-oob-fix-v1-0-5444d86d28d7@byteray.co.uk>
- <20260811-nfs-oob-fix-v1-2-5444d86d28d7@byteray.co.uk>
- <ce8b5c8e-d62e-4e28-bab8-dab2d26a70aa@arm.com>
-Content-Language: en-US
-From: shj <shahriyar@byteray.co.uk>
-In-Reply-To: <ce8b5c8e-d62e-4e28-bab8-dab2d26a70aa@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAETnfWoC/22Nyw6CMBREf4XctZfQUhFd+R+GRR8XqSaUtNBIC
+ P9ui1uXZzJzZoNA3lKAW7GBp2iDdWMCfipAD3J8ElqTGHjFm6plDMc+oHMKe/vBmmlR15JzfWW
+ QFpOnFB+2R/fjsKgX6TkrcmOwYXZ+Pe4iy73/5siwwrMQwrSN4a253NU6k5drqV25vKHb9/0LQ
+ QlcP7wAAAA=
+X-Change-ID: 20260811-nfs-oob-fix-31c433a22c91
+To: u-boot@lists.u-boot-project.org, 
+ Jerome Forissier <jerome.forissier@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Sebastian Josue Alba Vives <sebasjosue84@gmail.com>, 
+ Argus <argus@byteray.co.uk>, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Thu, 13 Aug 2026 15:57:08 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786635750; x=1787240550;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786636131; x=1787240931;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=1x1SkgMeU1aKeO8KRRYDPtsVyrRbTUWp2WZhXhA1MAI=;
- b=IgVeJ6a6XX5lYX6XHOwtjIB2ZN2quThhFHj+NcK9HOUzfxhDejFpJ/TzkC6SULtXf/
- hswr6/DX5cWPeyYCb995+owsvhwB+VTHwgPwryD/kTtvPaZDd9qMZL3mfx4NCPEC449A
- rARWGMgJL6AUgoKiAByA6UCGQ3CPW4PGcHv/RdXU19KaGfS16GIpmjb7yq9GW7NRA7um
- +kEQv5xg4oSwAgJoNh416wAL8QzvuCxNJmzlfQgQAAq63yYWl9CjfdwZrhnEJXhU7dlF
- HXYEB2OdSuGcute6v0BoUtwdeDhtXJpCj4EMMVtU3LLYObOescCORk1VlOs5f1zfFAbq
- 3fwA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=srIR3i3vOgvB7u6lGi055bvCL19PMBN493jes1Pxyss=;
+ b=lsof/r3W4MsYsbUPizefcUZN4ixv3hsh31SefrGE4ZVxshdpRSClCwIt07zNelVQFA
+ Nkm/HELiqyIhKMqEcUf1EQkLh/wi6tn5s8imudMRhM0uudjK+NyMiPG8+XEUXyrz7JhF
+ ffdrBIbLAnZD3BQMg/WI9JZQbwNdIYnpkukekvR4KKZqvGIHNqlPSf18VvvnMiLhr9d3
+ P8k8mBrgPCb0lSRWgy7X9tnwgfAgdNLkZHmP7v1glLovRnVUDetgUF6L6s/DgxkAzgQZ
+ fRi8MWDVBaKaMlWvcT8hHINMsbWLUt2ives22oq+LFUlR/xSbWKX51jxOzT4t8AfejC/
+ 7bOQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=IgVeJ6a6
+ header.s=20251104 header.b=lsof/r3W
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,24 +139,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Jerome,
+A malicious NFS server can return replies whose 32-bit lengths are crafted
+to defeat the client's bounds checks.
 
-On 12.08.26 17:06, Jerome Forissier wrote:
->> With the series applied to for-main I got a CI error, see:
->> https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/jobs/68484
+nfs_read_reply() keeps the READ length in a signed int. On LP64 a value
+with the top bit set is negative, the bounds check passes, and
+store_block() then hands a ~2 GB length to memcpy(), which reads past the
+1152-byte reply buffer on the stack and writes past image_load_addr.
 
-I applied both NFS patches on top of current for-main and ran the 
-sandbox tests (I forgot to enable CONFIG_CMD_NFS in the sandbox config 
-in the previous nfs patch, and the nfs test is skipped, exactly as in 
-your job, sending v2). But overall I can't reproduce a failure, the 
-failing test in that job, dm_test_dhcp6_serverid_reject, isn't on 
-for-main. I applied the serverid series (fix + test) verbatim on current 
-for-main (b752e441790) and t_dm_dm_test_dhcp6_serverid_reject passed.
+nfs_readlink_reply() has the same signed-length flaw. A length of -1 slips
+past the destination bound as pathlen - 1 and drives a memcpy() off
+nfs_path_buff. The bound is also measured from the reply header rather than
+from the symlink data, so a large positive length reads a few bytes past
+the received reply. A server reaches this handler by answering the READ
+with an ISDIR status, which moves the client into the readlink state.
 
-Could you tell me which tree/commit you saw this on (the job checked out 
-for-main at 37f4c339, which I can't find on for-main now), or point me 
-at your merged test/dm/eth.c? I'll reproduce against exactly that.
+Both handlers are shared by the classic and lwIP NFS clients through
+nfs_pkt_recv().
 
-Thanks,
-Shah
+Patch 1 bounds the READ length by NFS_READ_SIZE. Patch 2 rejects a negative
+readlink length and measures its bound from the symlink data. Patch 3
+enables CONFIG_CMD_NFS in the sandbox config and adds DM regression tests
+that drive nfs_pkt_recv() with crafted replies.
+
+A reproducer is available on request.
+
+Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+---
+Changes in v2:
+- Add a fix for the same signed-length flaw in nfs_readlink_reply(),
+  rejecting a negative length and measuring the bound from the symlink
+  data.
+- Enable CONFIG_CMD_NFS in sandbox_defconfig so the regression tests are
+  built and run under sandbox; the v1 test was skipped in CI.
+- Add a readlink regression test alongside the read one.
+
+---
+Shahriyar Jalayeri (3):
+      net: nfs: reject a negative or oversized NFS read length
+      net: nfs: reject a negative or oversized readlink length
+      test: dm: nfs: add regression tests for the NFS reply-length checks
+
+ configs/sandbox_defconfig |  1 +
+ net/nfs-common.c          |  9 ++++-
+ test/dm/Makefile          |  1 +
+ test/dm/nfs.c             | 90 +++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 100 insertions(+), 1 deletion(-)
+---
+base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
+change-id: 20260811-nfs-oob-fix-31c433a22c91
+
+Best regards,
+--  
+Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 
