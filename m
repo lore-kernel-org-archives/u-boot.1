@@ -1,116 +1,116 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971A9C5CFDB
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 20:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CE8C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 20:57:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 597FE8148F;
-	Thu, 13 Aug 2026 20:57:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E830E606D0;
+	Thu, 13 Aug 2026 20:57:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JggfAtg_PMZU; Thu, 13 Aug 2026 20:57:16 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qsP6dwjo_guU; Thu, 13 Aug 2026 20:57:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 94E4180E8B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1C27A606D5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786654636;
-	bh=nTJTOl9IMYMvRRA1rw1fJerTLBG9e4miZKBSZK9ARD0=;
+	d=lists.u-boot-project.org ; s=default; t=1786654663;
+	bh=Jw7mm7hoaVXck2HcIUCvTswROQjnfwCyFtP1/t0B2EM=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gkXrlXPdPYmwhFtk3+bhigq3gpVzPinOYvLfPo08Bm2MN3LfadAgSjfKBf2NyPiiv
-	 hGF6uWrnG0NYgaQG3beJK1Eug7bFiPQEvqorYdJgDKDHOFopwTTWyesRLS90bKT28C
-	 V7Ycfg+LuUcpHDa27CVjadgvu5VUrk009UiA23equRCf9KFhRlGK9XxMQIrK5XmRAq
-	 58d5Z3gzXuDU/E9Kp+izm0GZdm64LIeG9W90DZasZRcgNz6ojJ7RPk7E9Dz33o2G22
-	 H1l+UH4cH0UqXhg5YC2GRwKvofbGTBNzZmQ844kL/vpVkJR2Oqw+NEdqOBwXUH+ojT
-	 JnMgZPW4Aeh1g==
+	b=DWtDce1crflPgCMZ9bknEcHL03ajpjiv2jXO9xf7qCkH4IjpJQjPNFIB/PxSrSIGA
+	 VlFkuOr0S/qvXCjGZI4UaibJe4d99PbBxG0w5B2H9ccpq+CcWdk7B5SJruHuV8ZM0i
+	 T4a0oFjU4HG1KszLOYSOSNjcgy2JJpzHvRCJMG2NaBZgAicbhhzB21PoxkFVH6Sqt9
+	 9Yu30nQN+Eo4U3DRpt2bdYNXwcZmNEGy5e2zt5+2fbUv9DqX3sJmXGqP+yrmpMFohK
+	 IvJNBM9Zkbxv7OZ1svZ6biTlOjdCokoy7CpihI3tQcgKQTmtUf2zs/spD5OOKI/lSK
+	 AzXIKfXVw8iSw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 94E4180E8B;
-	Thu, 13 Aug 2026 20:57:16 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2162B139A
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:57:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1C27A606D5;
+	Thu, 13 Aug 2026 20:57:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CC322139A
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:57:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0730D40CBF
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:57:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B27E06072F
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:57:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 29voD0c6U12t for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 20:57:14 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LCgveTz31Ucu for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 20:57:41 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
  envelope-from=jbx6244@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3BE4940CA4
-Authentication-Results: smtp4.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org D1673606D5
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3BE4940CA4
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=BK5VA0sR
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3BE4940CA4
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:57:14 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-c1f1f5631f8so5352466b.2
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:57:14 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D1673606D5
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=rLNQEH9J
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D1673606D5
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:57:40 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6a10d6f455dso34159a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786654632; x=1787259432;
+ d=gmail.com; s=20251104; t=1786654659; x=1787259459;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=nTJTOl9IMYMvRRA1rw1fJerTLBG9e4miZKBSZK9ARD0=;
- b=BK5VA0sRzuOv8z8lwRIPaz+1Vjt+Rnj2LKNAU+F4Y1y4FNKuKS2i+lOfacKvy3yaHh
- sMumoyshnsw8MjF9fbFJ4Ci9poGIgNtU57Kj4YxzWVrx/i3HnJJSw1p41+d4ZhA5gDyG
- qdVeyZH7LvMUOdBPwqo0pGS+nf63H7W7cqFNjwjTAHRCo4BvTGcFXKCrEAfCGe7oYZrE
- Mv7Yv7uAbV9MuOkNcrBjJWXeSblPbjjq8JWJXgP4r7+/wY4v49GEbA7l6oI5sEBgHUgj
- zfdHtAHPwEW2+T/CUyO0205JmdbZadSnJ41E/vgLFhqWIEKA2xKBguNqTcTmmldCUJb4
- qBAw==
+ bh=Jw7mm7hoaVXck2HcIUCvTswROQjnfwCyFtP1/t0B2EM=;
+ b=rLNQEH9Jha9cgqEw0YqhGLPgKhMbGlRxs4zEcPrCFKFkjCSJt7tm5eESFkO133FDiD
+ LMQuMV9La7ChG+ajq0PNGvPefWWVnYt8MyJpOAyBDuXnYS+Vs1z2qkW6JUt9q+9pHv4e
+ vBZq62f3iiaisgUHFNBou2QM+eOHMGZ4/otA5kr8NY6qLziJzjDoWqrtjGE6CiQRnsUN
+ IKByxX6mTodeYZ1q//zofIQQdhR1KYWqRru+a6Y/W9K32MzgPySO1P+2qS79QGziovuk
+ uUHgIkdeyBmUbcseXqMysdghGzE7BozKWyENDBGJh2Ryf+Q8fpVn5g4ySFILEJChWF6s
+ krjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786654632; x=1787259432;
+ d=1e100.net; s=20251104; t=1786654659; x=1787259459;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=nTJTOl9IMYMvRRA1rw1fJerTLBG9e4miZKBSZK9ARD0=;
- b=Nx5VomRS8suWQfu+1zIO7YJW0FtKi3Lq3gZsyxysFWrDgy8nNco/8n0vIswFxLTIju
- jvcV8cqKD5qOSHc4CZu8RZwnU+/k0M9UNbr+mN15v4CW2e4P9AlA9kuXoH3rQEYMxkbm
- +W5ZbDBtPb7PBQhxifiCoQ8sIohebakirAiNiFtLqrd/CXzLHj7xvyLzhU6vvj6+QJhD
- QJVZmdWVvDfrJVSBDcnkxCzS1XOeq9SmQS+XIY+XCrE+8ZFL/6Kl68UEZPxAH8veNhpB
- /l6cRZ2JCDGIt1veN8a4zEllk2psE1AMeF5ZwdvlgaDbC03PYSnbSJmwQnLVWcNqxqFX
- 6+Fg==
+ bh=Jw7mm7hoaVXck2HcIUCvTswROQjnfwCyFtP1/t0B2EM=;
+ b=L57BzFiYSZBDYQ0yRYmGou3L6GkJ5vc7gAmQrrSWkOoLfgObNRpghev0IeKhsVRXEJ
+ WqgppMpok9i3k3oxApnE4qNis0Y9aokGX4mcpCbrs93LG/lsduJQ9Xragh1gKpCf7Lvn
+ yCykcb0icpVle+HUS2wqhR2dwTsUhB6S8W9ABc8RTlLUbj8wxWdaBAQDb5WUE9nxH1mA
+ QAtETyPHwKszTHkw0ON/nE0MhavSjre2aqaa7sBesLYTxvSFrUklpv5VXftCNDwREuAX
+ UMhEaorSCTeTAPIW5iUUZcJfVg8/APP5ga1SNMFGApdRIif26uLRhUUpEG2iaBLG3PE7
+ xD9Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqtsprgUBFeeZ+E9c6dHmwQwi36zqfpSrYY7nFVqxHTufgKYMQmkjkMQREwKawNRz+3nqtZVhw=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzQfVQcaUXa7DXCGu9ke0aee6pv+kYROpA3eGli5Tii/PX+26E1
- MabEJzUwoESqm08Hr2zLIcwru9gj8LEfCvCv2lgPtynV/ekqMM0H7BHk
-X-Gm-Gg: AR+sD12bmBynZflvAzi72SxUSg8EEN8cUZWX4QlNIpL7Kch7XCw4rSpsnSFQF5AZflq
- SaCRGacVvgdm25sT3aqHWE2RjkHWq79FAj3SrSGu6yRSiRwsW+CyIcgYLWF8SeA5n7fO9A63dNR
- TqUGHD5jDGD3r5kQIklocTHWiFNurqWErotsx2vdykPa2eoSIHJHBF1HJjOohQjQRaRZsVfPtjF
- dUOumZ1JFusFrAuI9bRIE7pOL/z+DjObn27S47gnF1+5ec1swByoPe8NgadqMz3kSdIUzWsGDKB
- u45kToIyHxssO1sNWYYAckpHuyBUYzcgdyx6cgC2kBGGQjtDmXs0phZ5csysL0g62wpfogsoZ6u
- piCwWUcLOl3MjIZ+3govoQCZLkgC2Fxat0byG41r498L7JBDz4bERZYgLkjGneqW7V31avh3ru3
- SJ+th8XZFzTBRxVcdoeiDtdtliO3pSh7dfdu39KOhG8Y+kgAccLiPPNmkGSFAVIGEsu49Hv4yiZ
- OIQ8C4BhIsEZcQo5hyNCz6kop8=
-X-Received: by 2002:a17:907:849:b0:c16:1290:11a7 with SMTP id
- a640c23a62f3a-c2129b328f3mr28514766b.1.1786654631843; 
- Thu, 13 Aug 2026 13:57:11 -0700 (PDT)
+ AHgh+RpAmwch42yi3rUumctj4szatBLr/LIzPB1+crgg9P2Tfemhzsee+c7ukXNuMs+GlA7CA0r+iyM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxsV/3e0noxgIG2lL7/02o0QVZeOn0KEJ47rYBxBIJPPf833+aQ
+ 5gkT+WNyxsmTKAJLRQ9M3svUPx9NIA8iRyahsgWwKYBoVMZZgL8514P3
+X-Gm-Gg: AR+sD10PNMweJYmZu06xvoenmJFwgOC3z1kdj2yEuounR9bpk6K/mkSNP1tIem23rts
+ eRZ/MClcU1I6MRdOmsXSQ1w1GPGKbWnt03DZRPNvYCbrkQN4wlVMzmagSxN4JbWpCgH4ySj3jJS
+ rBG9jOL/sa53lxaz2UUwTlSJKX/vbmyqrIOLx8dC9G4J2pgsO8/BL6qUmeK4uMowNW54W3j3p/P
+ 8vtWfbhCO5TQS/jCJirjsMIUWx9SqCStl/B0AmaZ4SbJP7X1Oclyi3pp4afQiZ07ulE+mMTG7px
+ wSG8DUPlWH0vOqA6bOK6JMgNp1wj9zscpt8pijfrxQeLYlLpKErJBsuWFca/3QjaWDp4Bpq1mSm
+ zVEDCJNMtjuU13od/8Dk+ZNVQbezDIk+5X4eTrRIWri4IGI54NRierqJaTDQZBxszRISbbo0BNT
+ RrUdjjVMY1eaxZAwy6BZyDsAZKVUZPr6mmjICkYr/Cjgu4udwZL8twoOJE+qLZc3P1JsB7bhb6u
+ LHXrhIuiSEhOxZBvyPzUI1rQ6s=
+X-Received: by 2002:a05:6402:1587:b0:68e:4c0:f59a with SMTP id
+ 4fb4d7f45d1cf-6a38a930d5emr288362a12.2.1786654658350; 
+ Thu, 13 Aug 2026 13:57:38 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c21231f1903sm33687466b.0.2026.08.13.13.57.09
+ 4fb4d7f45d1cf-6a37f8cddf8sm1239634a12.28.2026.08.13.13.57.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 13:57:11 -0700 (PDT)
-Message-ID: <b61ab14d-f19c-4f8c-a0b5-947b51562b71@gmail.com>
-Date: Thu, 13 Aug 2026 22:57:09 +0200
+ Thu, 13 Aug 2026 13:57:37 -0700 (PDT)
+Message-ID: <b75fc0ca-b834-4b5c-85b5-0b556436b5b8@gmail.com>
+Date: Thu, 13 Aug 2026 22:57:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v6 2/6] rockchip: doc: add mask ROM mode text
+Subject: [PATCH v6 3/6] rockchip: doc: remove TODO
 To: u-boot@0leil.net
 Cc: kever.yang@rock-chips.com, sjg@chromium.org, trini@konsulko.com,
  u-boot@lists.u-boot-project.org, eddie.cai.linux@gmail.com
@@ -133,78 +133,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add text that explains how to get into mask ROM mode.
+Don't try to guess the future consensus. And don't add
+a TODO if you don't have the intent to send an immediate
+follow up. Remove the TODO in a constantly changing document.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-
-Changed V6:
-BootROM/Mask ROM swap
-
-Changed V5:
-reword
----
- doc/board/rockchip/rockchip.rst | 31 ++++++++++++++++++++++++++-----
- 1 file changed, 26 insertions(+), 5 deletions(-)
+ doc/board/rockchip/rockchip.rst | 7 -------
+ 1 file changed, 7 deletions(-)
 
 diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index de2df3046e28..7c911662b840 100644
+index 7c911662b840..5e16e860bfd5 100644
 --- a/doc/board/rockchip/rockchip.rst
 +++ b/doc/board/rockchip/rockchip.rst
-@@ -325,6 +325,27 @@ To build rk3588 boards:
-         make evb-rk3588_defconfig
-         make CROSS_COMPILE=aarch64-linux-gnu-
+@@ -559,13 +559,6 @@ config-flash.ini:
+         [OUTPUT]
+         PATH=RK30xxLoader_uboot.bin
  
-+Mask ROM mode
-+-------------
-+
-+Mask ROM mode is the fallback mode of the boot ROM,
-+in which it listens for USB commands 0x471/0x472.
-+
-+Options to get your board into Mask ROM mode:
-+
-+* Hold the recovery button, depending on firmware support or wiring,
-+  while booting the board.
-+* Remove any SD cards, removable eMMC or removable UFS modules.
-+* Erase any storage media containing boot firmware.
-+
-+Methods of last resort (USE AT YOUR OWN RISK):
-+
-+Short the following pins briefly while powering the board, so the boot ROM
-+cannot locate any boot firmware and falls back into Mask ROM mode:
-+
-+* NAND: connect pin 8 and 9 of the NAND flash with a needle.
-+* eMMC: connect the clock line to ground.
-+
- Flashing
- --------
+-TODO
+-----
+-
+-- Add Rockchip idbloader image building
+-- Add Rockchip TPL image building
+-- Document SPI flash boot
+-- Add missing SoC's with it boards list
  
-@@ -443,8 +464,8 @@ Note:
- 3. Package the RK3066 image with U-Boot TPL/SPL on NAND
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
--Unlike later SoC models the rk3066 BootROM doesn't have SDMMC support.
--If all other boot options fail then it enters into a BootROM mode on the USB OTG port.
-+Unlike later SoC models the rk3066 boot ROM doesn't have SDMMC support.
-+If all other boot options fail then it enters into a Mask ROM mode on the USB OTG port.
- This method loads TPL/SPL on NAND with U-Boot and kernel on SD card.
- 
- SD Card
-@@ -485,10 +506,10 @@ To write a U-Boot image to the SD card (assumed to be /dev/sda):
- NAND
- """"
- 
--Bring device in BootROM mode:
-+Bring device in Mask ROM mode:
- 
--If bricked and no BootROM mode shows up then connect pin 8 and 9 of the NAND flash
--with a needle while reconnecting to the USB OTG port to a PC.
-+If bricked and no Mask ROM mode shows up then connect pin 8 and 9
-+of the NAND flash briefly with a needle while powering the board.
- 
- Show connected devices with:
- 
+ .. Jagan Teki <jagan@amarulasolutions.com>
+ .. Wednesday 28 October 2020 06:47:26 PM IST
 -- 
 2.39.5
 
