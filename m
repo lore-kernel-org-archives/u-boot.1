@@ -1,134 +1,128 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3F19C5B572
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 17:59:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E3CC5CFCF
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 17:59:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4F9548130F;
-	Thu, 13 Aug 2026 17:59:26 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cjQ3A2s66-hO; Thu, 13 Aug 2026 17:59:25 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 49A2C81311
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786643965;
-	bh=YenJ49/FROMBb7sj13qV9XVpj3vUEY8ONmFrfSbrYh8=;
-	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=muMJWkKu7ShnWEuOG+fqTlB2P1GHgPDuh0L4VKPD0er7q8LoyHfnBXjetYhaDgUnu
-	 iZEhSd1n9XuXgGspSo6PwKSzM7WhP0+ZLb4XaiDxbC9+Hwl0eumHYKW0UHKg6GcaDj
-	 CYDnaEko3OdLcPxx9STULiYeaA/KAbTpGXrHWyaVrtntFfqwvx03HE0M2o5qyjS6KY
-	 zN/d+7E6G9GQIzHB/MRwAb1IrdQrmhYxPwyP3pc1/z9+rjBegjSc7aAcjUTZXI24C+
-	 xB1pv7kjA7zI1K4Lyp6kmJocHyeZwiuCpg8AOCTeb9vX7vl74vuQscpmCMRnX0X1pw
-	 DoBdG9PCN4irg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 49A2C81311;
-	Thu, 13 Aug 2026 17:59:25 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id EC1A5357
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:18 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D1BB240879
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C3DFA40C2A;
+	Thu, 13 Aug 2026 17:59:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0GUQkszQBvHw for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 16:28:18 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 1BA464085C
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1BA464085C
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1BA464085C
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:17 +0000 (UTC)
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
- [209.85.128.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id ED72E3F135
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:15 +0000 (UTC)
-Received: by mail-yw1-f197.google.com with SMTP id
- 00721157ae682-80ee3cb097eso1558027b3.1
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 09:28:15 -0700 (PDT)
+ id XuCis6Uan56o; Thu, 13 Aug 2026 17:59:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 084E940C2B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786643970;
+	bh=kwWx/5kxSWh2Ec7obO86QDtHOE3I3xrEqfL/3nIeiko=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=r9kqA9wteVWO/f69hkIoXYJM6XB+0TBTMC1dZpeEvGcstXWynH3m9TEnQ9+RGVWuI
+	 QqhktDjBGYQrGHUjT36oS7/5fOZYzEvMdAWBmfd+hWJJbYYpk8WIHZpYvA7+t1LGAb
+	 kfZIti+i9/10FFRrnvjVTKmMv+3ui4A3Fr5dJiJu/3u45uSojTu2uczBbulatQrELd
+	 1HTWR1gzUfZViyCd9jjPMd00LMgL8m8aWTz1/ZguHeWZDSIgB64pJB4q8j+m3yS7FV
+	 KsCdyara6ByelMRjy1nWkGhtKfpx5PSp9uFD27mR/ny8OihoJH27gc+Wn/6pWjYY6E
+	 OwkWX9Xsperxg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 084E940C2B;
+	Thu, 13 Aug 2026 17:59:30 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BCA8D323
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id AE2A74016A
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:38 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PFkw5G9Nr69c for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 16:28:38 +0000 (UTC)
+Received-SPF: None (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
+ envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B87CE40158
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B87CE40158
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B87CE40158
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:37 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-69fc9f25118so2650621a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 09:28:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786638495; x=1787243295;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=YenJ49/FROMBb7sj13qV9XVpj3vUEY8ONmFrfSbrYh8=;
- b=JvHLuZksK/VHTSrqxPyZfEekv8/0wQWq/inMi0hq/36hfhn6uTM7OS/SczqOOI10pf
- FoAlW3zYwQFnWiLD86gjJjN1JjzRVyMhjCA+ZnRYeM8OOTkGsma3SHbtd9tL9VnYmY5L
- xS7FMoe1wYb4RQzPw+X3PER4uLPc92R1EzcH+Ps/t4tsIclBzx+wBXQ99PshZjk9xYcC
- 5kH1XGVDhlujo3qZ8GDiYrGxVaA5AavUYh4OK+gNVyphkfQ8Pgt9tDin1em9WBWYaS4H
- lmGqpULhaK2iByTD8oqIg2yAxdBcpgsT96Q1LMtSujBnQRmeptJFzXOQBBiOKlocFPgX
- ZSQA==
-X-Gm-Message-State: AOJu0YwKFqOaqDZJJ28jAh8KsXdwfTVYKNCZ9vRbzCTP0Qtig8958oSw
- NVGeLs84upwkRQaff8WdAXChokBOM0x1eAHGa4baGTHpdl3xeYTZUXA8x6pEAmiDiYgVogSTcHm
- uLz9Vtx02gfGVvwILoqF1KwIt5RgGwMuQfBIqoZRdl4BEyjx9FwHSqW8Vg0KEDyqxvmjM+1vHrJ
- iB4eAV0mLYrifRftquXw==
-X-Gm-Gg: AR+sD11a0Xzh0rRU1cHrdAEsisnl+32zoH/z7QFLVue6mpG5+1V+p0+W1pwM8xko9jb
- tv5KeRa8dxZN0kB5R2nAZm34TM9ub0dSkNKvm3gSYQ+pww+NMqhGWALE2pO+ymzudfx7hHDDpky
- 2UEtT+mn9i9m1F0A9N4wmCOeKzteVA27z1bsOWcgjelGj13DGM5gdlU0BHYbrHO6QwE21lixWEP
- SXagmbMR4OMmL0rqbWN2Gns+HEtYpxmpP29HQ8y9GXCTv4R7Rnw8gMuzxEQSSPiMXR+tp1395qe
- KPPyTsABE2ySH6gvM1SKU62JPET1y7DY+vJKLznkXt1dfS1sofREm9pUjO5TRo8ftljHAIBN+Uu
- WZNMS5Xn0LJesKWsLvf/OLqXAG/ZXcc5mDkSXAYOG4XwLxBK6688=
-X-Received: by 2002:a17:90a:e7c1:b0:38f:c90c:72d9 with SMTP id
- 98e67ed59e1d1-3931e059eb3mr7982190a91.9.1786636611266; 
- Thu, 13 Aug 2026 08:56:51 -0700 (PDT)
-X-Received: by 2002:a17:90a:e7c1:b0:38f:c90c:72d9 with SMTP id
- 98e67ed59e1d1-3931e059eb3mr7982139a91.9.1786636610772; 
- Thu, 13 Aug 2026 08:56:50 -0700 (PDT)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3931f44de1esm3603538a91.13.2026.08.13.08.56.48
+ d=1e100.net; s=20251104; t=1786638516; x=1787243316;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=kwWx/5kxSWh2Ec7obO86QDtHOE3I3xrEqfL/3nIeiko=;
+ b=EqJKoB5ATi6PHPrs3xFFt1blB+74Xg8dukKTMOyeIEKPcVcv8LQuDvMzxT1EoKhVKu
+ S5lElpZWrVn9xlNjFjkVhfJDcmZ+yG9oIlcsZR/iLDGXKI7998RkrsvPerArBqysZGF+
+ vCEj79c77d41HcBsj1SOdApg//T0ABuoHeaaaw2aP9pppW+Xn0Fo8E8QD6YcJuoaIFL5
+ TDsWeaTBrIQ4hNdpG6up78Qcc5KZObSzPKEThAlvcSA5BVw63dUTh0C7zHfI1NVaCLyk
+ L5JgNnbmyUknPchP+IBkbf5Acdr49/exyBZqix8zk8uq7UVOgSqGrUphsVAw1mAJQDDv
+ crpA==
+X-Gm-Message-State: AOJu0YyEJVxqR66hnCMr3SblOD5UIcbahugSuAdPedkuU13sgKvYYXDQ
+ XE8Vcy1WNDdpSItXOpb4dLtlU57DaqJgluM31yXC1VyUDYoAVEFVb9d798it9Wr7rjY=
+X-Gm-Gg: AR+sD12Dw1xx+cYXmZ74i8XUnF8Rq5dyaKw8yqzYDrTurJqwuoykKcKXUZiSme7Wwh1
+ c+sHGpEejVIiz00IFRen6PitswQaawAApAWCLsHBanOAT+gnCP7T+G+P5e0OT0nVD19zRX3fJDe
+ fag9kDmXama/fufyH+qDwzXnGpX/FEkK0pUJ2v0C/9V00LEJ3EG4COkrEPoFEtB3Dm1GwZzAQ6E
+ ufnM5WV/c0E0k3bggyug4aRJBIxxZbcVCZSeZX3eVhxUbm4Uszz7VZFeqNMP9BUcH7dEHPGin+m
+ J+sdFoAtf5cVL2aUDV+wEWc/J0qZfPerXuoyYvQWDwp//28PHlHEtkx4v8b19mv5G7rVkADM5+0
+ nqiBLFOb6a460x9pfbcjU5maUucQG3HgYnuz8EsvxCVACNwzaI6zHHU+K+RsEGuG2iqn4xdF4YX
+ ZmqI3ucdN81ymYnISaCbabnDSH7v5C0tZtRJN3CvnNO5l0ULp6a2qAY5raP92b2KZ/ejclBrGye
+ A1PPw81T/gnq9ghCEpo2nbnckbJwb0E3v6XrLVqJaYKND/7faYF
+X-Received: by 2002:a05:6402:510c:b0:697:e953:d14d with SMTP id
+ 4fb4d7f45d1cf-6a380732100mr3166599a12.17.1786638515685; 
+ Thu, 13 Aug 2026 09:28:35 -0700 (PDT)
+Received: from [127.0.1.1]
+ (p200300ff0f038f00b49b9d175e416b42.dip0.t-ipconnect.de.
+ [2003:ff:f03:8f00:b49b:9d17:5e41:6b42])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a37f7f59afsm1139188a12.11.2026.08.13.09.28.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 08:56:50 -0700 (PDT)
-To: u-boot@lists.u-boot-project.org
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Martin Schwan <m.schwan@phytec.de>, Francois Berder <fberder@outlook.fr>,
- Denis Mukhin <dmukhin@ford.com>, Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 6/7] bootstd: Free abandoned bootflows while scanning
-Date: Thu, 13 Aug 2026 15:56:16 +0000
-Message-ID: <20260813155617.184928-7-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260813155617.184928-1-aristo.chen@canonical.com>
-References: <20260813155617.184928-1-aristo.chen@canonical.com>
+ Thu, 13 Aug 2026 09:28:35 -0700 (PDT)
+From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+Subject: [PATCH v2 0/3] net: lwip: fix use-after-free bugs in the wget and
+ dns commands
+Date: Thu, 13 Aug 2026 18:28:16 +0200
+Message-Id: <20260813-lwip-httpc-uaf-v2-0-1c3f0b3aa1eb@byteray.co.uk>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 13 Aug 2026 17:59:17 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKDwfWoC/3WNQQ6CMBBFr0Jm7ZCWRkFX3sOwaMtURg2QtqCE9
+ O4Crl2+5P33FwjkmQJcsgU8TRy471YoDhnYVnd3Qm5WhkIUJ1FJia83D9jGOFgctUMljauOSpT
+ GEqyjwZPjzx681T8Oo3mQjVtlM1oOsffz/jjJzfsbnyQKPDthdKmUbEhfzRzJ6zm3fT4+oU4pf
+ QH5wtpUwgAAAA==
+X-Change-ID: 20260811-lwip-httpc-uaf-31bf85307bce
+To: u-boot@lists.u-boot-project.org, 
+ Jerome Forissier <jerome.forissier@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
+ Argus <argus@byteray.co.uk>, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
+X-Mailer: b4 0.15.2
+X-Mailman-Approved-At: Thu, 13 Aug 2026 17:59:28 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1786638495;
- bh=YenJ49/FROMBb7sj13qV9XVpj3vUEY8ONmFrfSbrYh8=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=mDQ/otRZRjmvIQs4h0sfJeo5Qz25rw1i5FuyBhsO75Jb17WjHBSiLy18PvZeJZDke
- 5Yqc8pQxemOEQxqt3rjBDl1Zg1NxnKshcZ8xWvjChkmPsYTO2rcgOIv8yOu4jlg28p
- cT/DJHy67b2a8Mc8hWJUVTS2ERifLwt9i+R1hDPqiXtaV+i7b8sZrsSZPLvxpb7vdx
- 1LVBkVxszDcI/N6ZaWTt5X82kvNwycRg1UG1h0YL7uuPXDZ217zEatvgO4VeLdh960
- JWS3VilJqZ4wGVLbEYUgJ9uavTTKNhRKHY0F6kK0TUYReLpIHNxobp3yqZVcZrS/75
- 2JkGoMuh3GhlrmZdNULFPKgiEZReMpnAAF2X6GU3pxoOyMsHr/mb+g2AKsJ5vbQuUY
- vUzfyH6kt28miTCIPhdMsSlNG18M0MK4/RO38st4bPIz8x1ps6JXP+cJlPH9KSP1wh
- WfBxSWcwn6EbNJS0Tl2bRYinn1McMUE6RjOwOP36P0LowhmuuMWRAfepxjV1So2s5Z
- eY8s6y0HUbIeIxcdv8ZVeHr4kbZV7Wv9geTWwD0B4efkFuE5K1fyF9jjhuoEjWAyD6
- aZJTUNQfb/npn0BhmdOMDyXrwwUlrESQOyWlSUW+6SyEbTLwU5ZdCWbNI3XRkU4YIp
- i7sWuz8JTw2O7CZavQEkZ1AU=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=mDQ/otRZ
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786638516; x=1787243316;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=kwWx/5kxSWh2Ec7obO86QDtHOE3I3xrEqfL/3nIeiko=;
+ b=s4c/rN1bjfBbFNYBoJWB6QZK6ngLdv7lBM674FjvuyV2GT1ZLDuOC+tUMHkO94k7k2
+ 9JMIFwVRupSXjY3smpKykS4CFgYf8y5u006q1IxBWP42aHQz6qqMK+njzHXPCP6nZ/qU
+ uJYc07kI3nBW9QcxMM9uSC3nXuo38j20apapHM5wmNLoC52W9EoPYjNqtQ53ytkJ26xE
+ VIfKLX3Z74qywcaOOP5BKWLPmgZO8VV+20hzxSP9s0VaqOTuUus0QQYROlXw6EWDjYpt
+ E+b9qT8Mw2CGRgf0jpsPOsZhwB08d7g2nqCejJbBsNmqPNHxEt4pgnI0msIZ6SqSFcNe
+ dS+A==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=byteray.co.uk
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
+ header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=s4c/rN1b
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,82 +134,50 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Aristo Chen via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-bootflow_scan_first()/bootflow_scan_next() try each candidate
-(bootdev, method, partition) in turn. When a candidate fails and is
-not returned to the caller (no BOOTFLOWIF_ALL), the bootflow is simply
-abandoned: the next candidate's bootflow_init() memsets the struct,
-orphaning everything the failed attempt allocated, starting with the
-name allocated in bootdev_find_in_blk().
+Three use-after-free bugs in the lwIP wget and dns command glue.
 
-Each failed candidate therefore leaks its allocations on every scan.
-A single failing 'bootflow scan' on a sandbox MMC with a RAUC A/B
-layout leaks about 1 KB across ~30 abandoned candidates, and scans can
-be retried indefinitely from the U-Boot prompt.
+Patch 1 fixes httpc_recv_cb(), which calls altcp_abort() on a store_block()
+failure but returns ERR_BUF instead of ERR_ABRT, so tcp_input() keeps using
+the freed pcb.
 
-Free the bootflow when it failed and is not passed back to the caller.
+Patch 2 fixes wget, which keeps its transfer context on the stack and hands
+its address to the httpc callbacks. Ctrl-C while the host name is still
+resolving leaves the connection up, and a later callback runs against the
+freed stack frame, writing attacker-controlled data through store_block().
+The context, together with the httpc connection settings that lwIP keeps a
+pointer to, moves to the heap with an ownership handoff to the lwIP callback.
 
-Add a check to the bootflow_rauc test that repeating a failing scan
-does not change the number of allocated bytes. Together with the
-previous RAUC fixes this makes the failed-scan path leak-free.
+Patch 3 fixes the same stack-lifetime bug in the dns command, for its
+dns_gethostbyname() callback argument.
 
-Fixes: a8f5be178db5 ("bootstd: Add support for bootflows")
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+A reproducer is available on request.
+
+Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 ---
- boot/bootflow.c      | 2 ++
- test/boot/bootflow.c | 8 ++++++++
- 2 files changed, 10 insertions(+)
+Changes in v2:
+- Patch 2: also move the httpc connection settings (and the TLS allocator
+  they reference) into the heap context. lwIP keeps a pointer to them in
+  httpc_state_t.conn_settings and dereferences it from the result and
+  headers-done callbacks, so an abandoned request read its callback pointers
+  from the freed stack too. (Jerome Forissier)
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index d8a4a81a838..7ee940460af 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -580,6 +580,7 @@ int bootflow_scan_first(struct udevice *dev, const char *label,
- 			if (iter->flags & BOOTFLOWIF_ALL)
- 				return log_msg_ret("all", ret);
- 		}
-+		bootflow_free(bflow);
- 		iter->err = ret;
- 		ret = bootflow_scan_next(iter, bflow);
- 		if (ret)
-@@ -614,6 +615,7 @@ int bootflow_scan_next(struct bootflow_iter *iter, struct bootflow *bflow)
- 				if (iter->flags & BOOTFLOWIF_ALL)
- 					return log_msg_ret("all", ret);
- 			}
-+			bootflow_free(bflow);
- 		} else {
- 			log_debug("incr failed, err=%d\n", ret);
- 			iter->err = ret;
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 8fa8835c20c..ef4638ec700 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1403,6 +1403,7 @@ static int bootflow_rauc(struct unit_test_state *uts)
- 	struct udevice *bootstd;
- 	static const char *order[] = {NULL, NULL};
- 	const char **old_order;
-+	ulong mem_start;
- 	ofnode root;
- 	ofnode node;
- 
-@@ -1458,6 +1459,13 @@ static int bootflow_rauc(struct unit_test_state *uts)
- 	ut_assert_skip_to_line("(0 bootflows, 0 valid)");
- 	ut_assert_console_end();
- 
-+	/* Repeating the failed scan must not leak memory */
-+	mem_start = ut_check_delta(0);
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assert_nextline("No bootflows found; try again with -l");
-+	ut_assert_console_end();
-+	ut_asserteq(0, ut_check_delta(mem_start));
-+
- 	/*
- 	 * A failed scan with -a stores the failed bootflows; the next scan
- 	 * removes them, freeing bootmeth_priv. This used to double free the
--- 
-2.43.0
+---
+Shahriyar Jalayeri (3):
+      net: lwip: wget: return ERR_ABRT after aborting the connection
+      net: lwip: wget: free the transfer context after an aborted request
+      net: lwip: dns: free the callback context after an aborted lookup
+
+ net/lwip/dns.c  |  38 +++++++++++++++++----
+ net/lwip/wget.c | 101 ++++++++++++++++++++++++++++++++++++++++----------------
+ 2 files changed, 103 insertions(+), 36 deletions(-)
+---
+base-commit: baa64b2f892890f00a377eac4a3e685472bb56b5
+change-id: 20260811-lwip-httpc-uaf-31bf85307bce
+
+Best regards,
+--  
+Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 
