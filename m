@@ -1,85 +1,85 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4B9C5B572
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 17:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E31C5CFCF
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 17:05:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DB4EF409FC;
-	Thu, 13 Aug 2026 17:04:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 13FC68121E;
+	Thu, 13 Aug 2026 17:05:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Wybx7Gj3AMWs; Thu, 13 Aug 2026 17:04:09 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QLdgvy--wIkw; Thu, 13 Aug 2026 17:05:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ED3B4409F3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 251C88124A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786640649;
+	d=lists.u-boot-project.org ; s=default; t=1786640718;
 	bh=TOLOuS9hMrTzv+mBMS9SqAQzKSjU3xub5WvcWsB10+g=;
 	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=K52nw6ICNkfMS3Gu+47X1nlevGCELCmZqqaRkrjINeK1KHfXKBuewnX8holgT06sF
-	 tu2yhBVkFOwzNNbTJmligVw288TPJMkYIG1ascS2hSZv3atdpaTn/kCt38iXR4nGkJ
-	 4VzFcsYQuxlOBcAUIezKj38Sbm1RXapyiZBAKkltLpJZriSOkZlF6d3Ic2OXtF2rai
-	 shDMsBmMccbq4BIAnnjs5kyj6fIiqwFJ8xqV/7oR87lKvr4/RxnKpXpcFcZTlVEFIG
-	 mjbnMGlmRpLr2bwwFDiAvLdbZ3ULjCzOotTT6m/iTTTTWikVf1p1TEyM1wxpr1eJ5o
-	 wLLVq12X+HT9A==
+	b=vVPkqQyXzw5igs8MJQ8lBx5cxfDGlOrunUdoe1PvZGkF5DZBRAcrD14F6bWkDWsfc
+	 xSDb/2gmNSTIZNHod76XdXhX9ylvGQCx4rPDxbUF1sIxVsnWD+4rhSz7IJ69ZXTJ0n
+	 JOnNlYhoVSfpiGjP/vuFG40nbDEFUL31wn9iF/KW4fLXxEx29fXG4m8uGsWdjdM1ej
+	 5Og367JEkQXfOMdb+JPydfTcQkPzrgIwRcAopT7vlRT1O8Vljh0Dx4MWN57Ay1if3i
+	 Etb9GG1Lr2kZRBsS3mlsZMZzcLhHptls3aZHnJrTIAFsS/cBtBKXF58Yi8ioS5kFzg
+	 NL6GxnPhvtSiw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ED3B4409F3;
-	Thu, 13 Aug 2026 17:04:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3E4BEEC
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 17:04:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 251C88124A;
+	Thu, 13 Aug 2026 17:05:18 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0A80AEC
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 17:05:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3046840158
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 17:04:07 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E4384409F5
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 17:05:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bkqDIGMqor4M for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 17:04:06 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=83.166.143.170;
- helo=smtp-8faa.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org D506140061
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D506140061
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [83.166.143.170])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D506140061
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 17:04:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nF4IcH9_gg_J for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 17:05:15 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:1600:19:e38::8fa8; helo=smtp-8fa8.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org DC432409F8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DC432409F8
+Received: from smtp-8fa8.mail.infomaniak.ch (smtp-8fa8.mail.infomaniak.ch
+ [IPv6:2001:1600:19:e38::8fa8])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DC432409F8
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 17:05:14 +0000 (UTC)
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hLWsv3ZQZz4ZH
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:04:03 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hLWlb6b7KzSQ;
+ Thu, 13 Aug 2026 18:58:35 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hLWst6VYYzj1s; Thu, 13 Aug 2026 19:04:02 +0200 (CEST)
+ id 4hLWlb32FyzgbC; Thu, 13 Aug 2026 18:58:35 +0200 (CEST)
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 Subject: [GIT PULL] Please pull u-boot-rockchip-2027.01-20260813 into next
-Date: Thu, 13 Aug 2026 19:03:42 +0200
-Message-ID: <20260813170348.344977-1-u-boot@0leil.net>
+Date: Thu, 13 Aug 2026 18:58:01 +0200
+Message-ID: <20260813165822.343623-1-u-boot@0leil.net>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Infomaniak-Routing: alpha
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0leil.net; s=20231125; t=1786640643;
+ d=0leil.net; s=20231125; t=1786640315;
  bh=TOLOuS9hMrTzv+mBMS9SqAQzKSjU3xub5WvcWsB10+g=;
  h=From:To:Cc:Subject:Date:From;
- b=bP9dSQ6QDHK4B8Kib+SZ43DrBAeVLXZuIh/hu23YgVkRoal/59p7F82mxCWfWODGw
- NkRLwY+X9TMviJcNmwSttlxZ32won1jOvF0CZOWbUQuKTD56eoJKOMg3F5vFu2S0Hb
- crdL3ber1t116PQxU4IyzkRTaSkAqCv5KZuuaWQStvE+8wDoFEn1tBQjirXEY5gPKP
- 9Xs8HeLFwvBU6dho0gb602JMiDVR927iHacHX1lKbrF1aYv7sHqBuBhAn/VCSYGXJ5
- DeMyr+rB0dKqIN426Y77ElpIg6Qr3KpELqKJ7H1bvsQ7Awg0Os5hBj/tpxP8TSJRpq
- lrMh4iCSep13g==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=WJjLOyTbnfDcpE9nwmuHQ1CsIg8AWHdD9HaTi+JlNE4Z3d5wY5Bst98s577zn8Lpo
+ a6T7nh2Ayl9bCDBrtNDuic/8dIBwSaoNYI0lNQFskfPlA0F8m0IBSBszDOCNTISBUY
+ Yw+/qf+JgJegGY2TpZq9PAOsx4UbF3doftbQWBqGNvkv5+MWCEu/w7BhYVngqtlczx
+ HCbmQyEziapJYxx4+Yixunne7/zQSBN0rt82pdWLewANRcUkZgTr+kT9SYzDKkr+4K
+ nf5BlnpcxneNJH7GuEHCh8K4z+135wcURBfbqOMQkKo6uNtFj1cv6fBHbY8TEsFr/s
+ RRdlZqbYOw4JQ==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=0leil.net
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=bP9dSQ6Q
+ header.a=rsa-sha256 header.s=20231125 header.b=WJjLOyTb
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
