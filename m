@@ -1,134 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D7F8C5DF6A
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9493C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:57:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3783F409F5;
-	Thu, 13 Aug 2026 15:57:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A942B812D6;
+	Thu, 13 Aug 2026 15:57:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0cGfvAeKNt0w; Thu, 13 Aug 2026 15:57:18 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Z0SeYpiLM65f; Thu, 13 Aug 2026 15:57:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7765C409F1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E077881291
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786636638;
-	bh=lih+rqQqlkJ8puFaHrQp5t9dIV5JwX7+xDLIntPzguA=;
+	d=lists.u-boot-project.org ; s=default; t=1786636640;
+	bh=2doG0fJLR1DyRn5IZ7i/qPvPD52ANf7Yk9R1Y+HpMMM=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=eKoBG/b6h4TzYZoPAV05ZzGPFmPXQZiDPSZJDy6MNtmbPoyVWiA7Cu2lqNS7Tz0dz
-	 Y3dL6t1Db+1wEWw4pj4y6XLZK6M8g0kdknNxF2u9X8a15SihjAqU35A1brGGKaWKb5
-	 Gt2f438NgKbdjtxBdYxRDbT6AdwOr7KgFnx6yELrNkxYb0EStfx/eUxyfVOcE7wmKm
-	 oLdNO+02ISOpeALSxgQjWerMZ2HANbTTis7cbCi+wgD4ZbGcLi3zv9u3Lid4ArLwgO
-	 Yst+LTBktNus9/HxGCqQJGHGssaPu1q3+IwXG/eaXXFptDhiEkivxSrOxDoxGmg3A7
-	 65j0wUXflPFTQ==
+	b=X/A+xHRlMTr/oMpGcq01fQI+S5WQ+4en+iIOs6KSPewcODAyKrHvtToLSvW6jc5LI
+	 zAiWS5QHsYkhPQyQIZ6mOnV3n8VZwD92sSm0LdY13VepgnnPvj7n7W7WdLEVk0IbUK
+	 sl8eTRBjLddI9jFdGkI3BQ3RDQtxfg73Q51TAciYx0pDXMfd1lP4Andg9z+SpzXjGO
+	 Sky090PU/AxhuXpdk0ROrZzKFp3exCRpb1HyStKYflGI2WucKWoE897Bl9fxQofck/
+	 m9KNCo7G6nB6dg+nt+8P0JpB1Xyz1g+xX47G25j58EjM5XPWtWiufsbkpbwLWI/5Kv
+	 FBYhlS1Uu7QSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7765C409F1;
-	Thu, 13 Aug 2026 15:57:18 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1CCD2259
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E077881291;
+	Thu, 13 Aug 2026 15:57:19 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D4BB0EC
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1B02840158
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:54 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id BAFE580E30
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bloK4RhQ6h1g for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 15:56:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7iXF8ZU9NSsN for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 15:56:56 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
  helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B4F9B400E5
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B4F9B400E5
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B716981247
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B716981247
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B4F9B400E5
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:52 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B716981247
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:56 +0000 (UTC)
 Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
  [209.85.216.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id BE20D3F135
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:50 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D10523F0B5
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:54 +0000 (UTC)
 Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-38e5a616d07so2776416a91.2
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:56:50 -0700 (PDT)
+ 98e67ed59e1d1-38e7b87ce77so4924911a91.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:56:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786636609; x=1787241409;
+ d=1e100.net; s=20251104; t=1786636613; x=1787241413;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=lih+rqQqlkJ8puFaHrQp5t9dIV5JwX7+xDLIntPzguA=;
- b=P9S4fvMbUmpH7CBa+VYzM/fAGqVdKrbSg39DCVPnVf3oQ8rNoYajtbSumaez62WWnG
- yDD+P2/ecbfkz9SnlO40tf/kr043Je7mSwHlg/XFyiuriNyiXF/Wm8PhIAOBVA87xN/f
- +1udI0scjtWTHxEU/d/rPEQimQoIawe5olYKkKMP73brU3g/2U+wWaedWTADxNlukt6Y
- 0g6xh2/czgKDhL5gC6vOTFIKQc4BgcDPoQtnsvJaLkDqNrUNRhNfSfI06xoki6qYEv/L
- Gy1Gv3lLQj1ztQT7Pa+/FYWuzl+jkvNFNYrWN28ldU3KN0gGnMu/ojjn3K5DAPEuPX4r
- Etdw==
-X-Gm-Message-State: AOJu0Yw19XsZZ02Nr2csqf5I6caowDLV9r//vOsnaNVHBDqAQ8GTPMPp
- 0Ftd1chSJPM5j6J8cA8hq675IlXVFpNBdPiL+ip45/BtgQ0JZPOXl9VcljruxU9VAkxDswiWuZa
- xU+UWX/EJ4PyhQH5EIPt39uy+mTqKqq72U8WJKJGZWPxni187UVEBK36Jx13/rOmuNBDa/RKbeu
- jzFZsrbNNdDBF/BeiHWw==
-X-Gm-Gg: AR+sD10xTgJzddjrSZ+7wzMO9qeqHLhxk0uPAJY2ISOLWVPiiMInSzI311J6XtPbj0w
- DcYXCNNA3qbMszdSayACp4Cz5ks0sDntQd+IlyMBjVAb/yLjtNkGbTeyjc+xVtG8IxzJO5oVVn6
- RJyicYyMK/GQr5+8bULWj33+x6yGCuuzO5cO4lSQEOxlVARlwgASKc6dULVL7ZHnmKNqOxkJyKt
- oFxdkCqlEvvneQnGGLyltK3A/jqPpSUYqYt0OEpL/krho38EocNaMOQ+9mu2e07tQaaYZKgtvWV
- HWwaXnLJWqU8zCBMny/IfIHUlf+3+JYtUejNUDcnHoAHw03ip5hPxBRorM9y3u7Ovb81YU8/Gdk
- as7vQ0DRuBolPWCme0pyJoHhsd5u35wF6HbynHMUJF2fgPwU9wx4=
-X-Received: by 2002:a17:90b:254a:b0:36b:77b9:5c8c with SMTP id
- 98e67ed59e1d1-3931e2dd751mr8198102a91.17.1786636609230; 
- Thu, 13 Aug 2026 08:56:49 -0700 (PDT)
-X-Received: by 2002:a17:90b:254a:b0:36b:77b9:5c8c with SMTP id
- 98e67ed59e1d1-3931e2dd751mr8198024a91.17.1786636608738; 
- Thu, 13 Aug 2026 08:56:48 -0700 (PDT)
+ bh=2doG0fJLR1DyRn5IZ7i/qPvPD52ANf7Yk9R1Y+HpMMM=;
+ b=i+HCUXWnl26ywLr9Pb+phPW5NBhM4y7M9L7w00fvOhyO3kLA7JLj2dUQIsFJOon9qu
+ gqJ0SPSEA/TqKSU3XKXuUxwsmJm8UuOvSGUEEr84D9NDGnWFJ2ee+NxN39WEs64hOEiF
+ INTU1WF8n4ZjcrZZ4Tg1/PzYLDzmYP5fGsz3ulfUwj3A/JSv1hFpE/DlR7ZOs1VHYyN0
+ /MXqJMVnhX9oZv/TPUAEsHCvVaLCTDfjJSmalYSp6o6MPmYqKyKhuBnCr+qtW8q0BWKm
+ 4Y/l5egCcdSEhQEgyH0uUB7E7jpnAkeri3RQfyRKGM9ROMoewOF1SV9kBFxa3xMcCLOj
+ WVLw==
+X-Gm-Message-State: AOJu0YyXq0Czp8ijT8ARPi7vDo7JsFyxgrSJsdGusAYAK6s7u7S6Uo/T
+ of0uSEKeFm50tRJWW/DQ6SnZOcD92xMTKm19e+pNu1hOM4aeuJKDADZ4bb06neeNgVQGOclfJAz
+ L4nE8Z+1yxP3iZyRnNnA3D8MLvq2+Die9zcdsUKQLX5oIIVcPfzCA9PmeOsnUtDoeIE9gOhNGZR
+ LnoIPyq612GNcWgs6k0Q==
+X-Gm-Gg: AR+sD11yiVW1cziwbp0eQK3YK7bZs4TSTDEPE02cvKV1dGI2OwTrGQGbUcTrgOdd8FK
+ r2XzhRkzbL6OrNGe3k60jyQEC9J0nmpDZU/S4XLCdMPn0XbNh+J3wsK5ebouXT96mZmeep/mh0C
+ aYtdqxNdbREBby9W47f/ehjXF5YgfNAR0T6OdkTWikSiwHp5cYbjHhsPd+JeO79mqTrR3HDoRSB
+ rNdprDiUx0Kcjx3emGRjlNyMl8/JPVYRnkaHRRQyKqCiCyPqjJG7VTiOQfFU83eO/0RMcJr9Fnm
+ kc75ExMUYvRigOhyd3wgTffqjggBOlT8U/rQoO9XtIZdjVbsa4xyGp7Q2BtqltYgaTmXl99UE23
+ nhkunk1xryaGvb9ZexxgRRDI6jRwOCL7qfoZsTyLWLiF4Yu99XAw=
+X-Received: by 2002:a17:90a:e7cd:b0:38d:f096:a1dc with SMTP id
+ 98e67ed59e1d1-3931e270affmr7945739a91.11.1786636613268; 
+ Thu, 13 Aug 2026 08:56:53 -0700 (PDT)
+X-Received: by 2002:a17:90a:e7cd:b0:38d:f096:a1dc with SMTP id
+ 98e67ed59e1d1-3931e270affmr7945686a91.11.1786636612776; 
+ Thu, 13 Aug 2026 08:56:52 -0700 (PDT)
 Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
  [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3931f44de1esm3603538a91.13.2026.08.13.08.56.46
+ 98e67ed59e1d1-3931f44de1esm3603538a91.13.2026.08.13.08.56.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 08:56:48 -0700 (PDT)
+ Thu, 13 Aug 2026 08:56:52 -0700 (PDT)
 To: u-boot@lists.u-boot-project.org
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Martin Schwan <m.schwan@phytec.de>, Francois Berder <fberder@outlook.fr>,
  Denis Mukhin <dmukhin@ford.com>, Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 5/7] bootstd: rauc: Fix leak of the strsep() source buffers
-Date: Thu, 13 Aug 2026 15:56:15 +0000
-Message-ID: <20260813155617.184928-6-aristo.chen@canonical.com>
+Subject: [PATCH v1 7/7] bootstd: rauc: Clear bootmeth_priv after freeing it
+ when booting
+Date: Thu, 13 Aug 2026 15:56:17 +0000
+Message-ID: <20260813155617.184928-8-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260813155617.184928-1-aristo.chen@canonical.com>
 References: <20260813155617.184928-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 13 Aug 2026 15:57:08 +0000
+X-Mailman-Approved-At: Thu, 13 Aug 2026 15:57:15 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=canonical.com; s=20251003; t=1786636610;
- bh=lih+rqQqlkJ8puFaHrQp5t9dIV5JwX7+xDLIntPzguA=;
+ d=canonical.com; s=20251003; t=1786636614;
+ bh=2doG0fJLR1DyRn5IZ7i/qPvPD52ANf7Yk9R1Y+HpMMM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=UbzOfK1kcdBIGvQsJTBk7Wyp1zalqFMN9J49kj69yD6L+tLhRiJ9z66Gfw3r9+GEF
- qdUIzNvomusHJqaFkNJOh8AG5yDtludpeyJ5NvnPikgC/7N7T9H9pOZzJ99TXD3554
- ps0BGafnDw//3xH+9ofUlyMsjBMTIQvrRZ3K4IkFo9ndYzbsDHGbajTqQmzpmPmcah
- +OCjYpF+Dxa2GpJ58Sx4EYSbtRR468DaMr9QR+s1ZisLDatcFfmgDifnHNu+9dojkp
- VIRpCFSW2OEXd3H1Y9anDoZY58KHecL3NTLYPbIs2K+JoF6RTDUqeqy0xsv1cK2RR3
- 1jjSoLgk+dmPduDIFXEVZDI/cRo2X4A/Upxz2go7tUgVXGnf0qZjViBbCUn6hz2S0j
- y2/z9X7HaMdZCn6xgKRg5K0yd+BRbj8QYlkEC7toNYhbdvw2g+atGqnmFO8rOmYwmD
- 3kpqdjc4MQabxdYzUVaQLxZXJ4j3a5GIB2AVbp58hVbLdg5ClQzBmRr9EjjgwFR6hT
- A0Fah/t9fQ1d29+0jBf/xc9Ad7GneEC23kG5gTPetta4qbNClx0knVd3JpzwWb/3VV
- RJxhf655RPHusMU7pw+KtSixrrYYn0tEQ5WHbCGvY//kY56vTdw/6J0DNwq6Wg9a6m
- 4bLfubMSfSNmXut/ZYcjbgeE=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ b=cEJREF1sV+PY5iVBmvEsIHhP5JVlcr/s9GlaTpJlklUd3xEU3mMhhA6VYQFSjjYxN
+ Em9D//8jcGhYswxiDDtb0R69Ztrv7nFjhAWkqHRHcPDchGL5ssR3MFK6uCcoQjswPp
+ vW635rV6DITXwRba/GV3cNtwf0QteHdFIJ5ERIO0RG81KY8WThnurt6B3NMnHKD3B7
+ XRfA/dQVep8rwr0MJwxYWoYNoAL0C23qhXUkqpDTZjWGEDxzO7i0edfjMzWplhwlQg
+ ZVIjbqipTzoNvaZsZJj1wfktIrH6KMY7IR6NSyyJJLlma2GfcUaUyjdtkXn9cxybLJ
+ K3nSdPTxaYJcf+gmDJEXeduMV/QzJOo/EfhBkrZgy7vtkE9tfYfJt6Ol3FZwL5i0iv
+ BCn5XG2NvgOan4dGsbJqpgriKVv7l70R+O1uPlS7ZW/hnKjWcxf/yrOcjgNx4vLs+F
+ uDXdDCLv+QRHEBh7ALZwT7i7ELfe1snY22jnHQcR3q3J1OsEltIJLbtMTqfyAJ2BG1
+ dxmbt6ANYK6+A0amkkF5euRXa1E3/iiVvMY7/J6avVsXeb2rKDbXFHgNYItohOY08a
+ kOqFJkhkT1SHeYN5ewYpjJLYBUTOACkXrzyTYVrdx3JgTlrJ5xiyX6g7URk7pbAsQ8
+ n0eCJSuIutnIzZt0NjCluOVU=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (4096-bit key,
  unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=UbzOfK1k
+ header.a=rsa-sha256 header.s=20251003 header.b=cEJREF1s
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,68 +146,47 @@ Reply-To: Aristo Chen <aristo.chen@canonical.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-distro_rauc_read_bootflow() duplicates the default boot order and the
-partition list with strdup(), then parses both with strsep(), which
-advances the pointers until they are NULL. The error path then calls
-free() on the advanced pointers, which is a no-op, and the success
-path does not free them at all. The two buffers leak on every RAUC
-read_bootflow() call.
+distro_rauc_boot() deep-frees the private data once the boot script
+has been loaded and run, but leaves bflow->bootmeth_priv pointing at
+the freed memory. The bootflow being booted is the one stored in the
+bootstd list, so if the boot script returns (bootflow_boot() treats
+this as an error), the stale pointer is kept and bootflow_free()
+frees it a second time when the bootflow is removed, for example by
+the next 'bootflow scan'.
 
-This also removes a landmine: if the two lists ever had different
-lengths, the leftover pointer would point into the middle of its
-buffer and free() would be called on an interior pointer, corrupting
-the heap.
+Clear bflow->bootmeth_priv after freeing, as the scan error path
+does. Also check priv before using it, like the other users of
+bootmeth_priv in this file: after a failed boot attempt, a retry now
+finds bootmeth_priv NULL and must not hand it to get_slot(), which
+would dereference it.
 
-Parse via separate cursor variables and free the original pointers on
-both paths.
-
-Fixes: 7e5c2c782fb9 ("bootstd: Add implementation for bootmeth rauc")
+Fixes: 498e423457a0 ("bootstd: rauc: Free private data when booting")
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- boot/bootmeth_rauc.c | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ boot/bootmeth_rauc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
-index 12ab9fc5bbd..2df141f7424 100644
+index 2df141f7424..844df7576bb 100644
 --- a/boot/bootmeth_rauc.c
 +++ b/boot/bootmeth_rauc.c
-@@ -147,10 +147,12 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
- 	char *slot;
- 	int i;
- 	char *partitions = NULL;
-+	char *partitions_cursor;
- 	char *boot_order = NULL;
- 	const char *default_boot_order;
- 	const char **default_boot_order_list;
- 	char *boot_order_copy;
-+	char *boot_order_cursor;
- 	char boot_left[BOOT_LEFT_LEN];
- 	char *parts;
+@@ -398,6 +398,8 @@ static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+ 	if (desc->uclass_id != UCLASS_MMC)
+ 		return log_msg_ret("blk", -EINVAL);
+ 	priv = bflow->bootmeth_priv;
++	if (!priv || !priv->slots)
++		return log_msg_ret("priv", -EINVAL);
  
-@@ -198,9 +200,11 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
- 		goto rauc_read_bootflow_err;
- 	}
+ 	/* Device info variables */
+ 	ret = env_set("devtype", blk_get_devtype(bflow->blk));
+@@ -464,6 +466,7 @@ static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+ 		return log_msg_ret("boot", ret);
  
-+	partitions_cursor = partitions;
-+	boot_order_cursor = boot_order_copy;
- 	for (i = 1;
--	     (parts = strsep(&partitions, " ")) &&
--	     (slot = strsep(&boot_order_copy, " "));
-+	     (parts = strsep(&partitions_cursor, " ")) &&
-+	     (slot = strsep(&boot_order_cursor, " "));
- 	     i++) {
- 		struct distro_rauc_slot *s;
- 		struct distro_rauc_slot **new_slots;
-@@ -239,6 +243,9 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
+ 	distro_rauc_priv_free(priv);
++	bflow->bootmeth_priv = NULL;
  
- 	bflow->state = BOOTFLOWST_READY;
- 
-+	free(boot_order_copy);
-+	free(partitions);
-+
  	return 0;
- 
- rauc_read_bootflow_err:
+ }
 -- 
 2.43.0
 
