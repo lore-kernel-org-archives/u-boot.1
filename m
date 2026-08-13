@@ -4,144 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A64B5C5CFCF
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32529C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:57:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 32F2160A4C;
-	Thu, 13 Aug 2026 15:56:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CA52360AF6;
+	Thu, 13 Aug 2026 15:57:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DYsFBdYuIvrd; Thu, 13 Aug 2026 15:56:55 +0000 (UTC)
+ id Z0o60w2bj6KU; Thu, 13 Aug 2026 15:57:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6C4A160AF6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C9ED760B0B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786636615;
-	bh=gTf/8ICPP7Z+SGVrx9GoL6SjBtOiUyWf+WTOLGtglvs=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786636629;
+	bh=1x1SkgMeU1aKeO8KRRYDPtsVyrRbTUWp2WZhXhA1MAI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YsgRPo+x85jVzjwBp2W5l62DtcYwZshBv211Si1VrS2ShsZ2ZYqWZuWnSl0Vf74+T
-	 1WLE4zU1Zkiq9syXzjpsSnvjfHfLruJgIyVWDJKGvbcDbf4i28csemzfX89VIVswqN
-	 wiHgCaHJpx6kXFgrjl19gdK+IxCiTBOJsBAktoNvDEK8If8sqVgKae+8fJelhH642t
-	 ZBV0SOufseie2Tdsd3Pj2SLPgsp56xpJ99m55akmCT+3Bd7AlqqwQhCk9kJmQTk7Pu
-	 7h45Xa4nmtudWvA3a3QmEnnUmbvLbbHqP93WkMaMSL8wrR9yvOgpwoAgKFsC1NzjIY
-	 xLCAttpz7TFPQ==
+	b=T8P0EEBtldTzodVlAz7ZC8PCy0GUUzkgLGnwHNwQ2cqJbLHP766Wp6EJTROq4Bn9B
+	 hPbNwYlZ0oPobNn9Jl5WFZqHEOxCp3/ovPgJy/jphHLjCzy+4Dm3ovfDjg3nwHKBTE
+	 QtaqaJWC+62mdE6+yRbSYQGYCnr2wfcZA8RwC4O2UVgblliMCPbaELaV9oZlE5OLjK
+	 8fBmCTGkTnajDwM83793AvUaxnTjRU00cblF74hoZ0rlMc0aqXukMTbcKAeBZG2/Ld
+	 Lefc+iZVCYGsGm3K7HzHWruVCLwBKmlfS0/1Qunn7t1/1TvbS1luYT1SIm1y3/K4nB
+	 Uo/6wylzldJuQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6C4A160AF6;
-	Thu, 13 Aug 2026 15:56:55 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id BE5C8EC
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C9ED760B0B;
+	Thu, 13 Aug 2026 15:57:09 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4BE411B8
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:42:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B03A281247
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3DF2181289
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:42:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qvG45lRXP1hC for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 15:56:53 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B3AB580E30
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B3AB580E30
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B3AB580E30
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:56:52 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7ee4399c423so79062a34.0
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:56:52 -0700 (PDT)
+ id jpkZy_83LVLf for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 15:42:32 +0000 (UTC)
+Received-SPF: None (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
+ envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org F134A81285
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F134A81285
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id F134A81285
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:42:31 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-49553515a8bso1195185e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:42:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786636611; x=1787241411;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=gTf/8ICPP7Z+SGVrx9GoL6SjBtOiUyWf+WTOLGtglvs=;
- b=LFHWN7G+/B82mUMbvGxJB+A0l2jIjqWHwVZd8FSw9KjyM/okmNB51f87lumrsP776D
- 2qZWl5ha0XBNR+SidR0I5b1b5VfoT44ItVuKBdTBOimdEcBdjHJefYK2IgVyz+K3aQx1
- MPUlDpjOs9SP/MFZDdNKkwf8fGmpV02b8Ue1CBvoAXNP/MUW88KpGzWM55Wn5TyiFE7M
- Ps9E6ctZoOaeJi6NrWk4hZuX+xbo155IC5uvd5F0kt5uOBO135pgh+2MRdrc8O5SfX6N
- rMBYqHMzhpVzG9j+rT05mp0d3/+PproaCd2DoOD1ksfO1vKS4NVSEn5IL/vmjk0P1kp6
- PRvQ==
-X-Gm-Message-State: AOJu0YzuLLyy1s9e/GLWdIXQDtfKbEXiQnRqiCrh9wdl/6eMr2TZVZPA
- wiciunQ395l+rg5QOts2x/jjelfhPZOg71ewz1xbe986ooLPEsVsk6xW7j3Zv+N4Wc8=
-X-Gm-Gg: AR+sD124vItAY7+wKmtI+OFW7xI426vdVxSoFPusM6+DJWDz0HCKhwoB5k2dcprlril
- 08TVYk1yBLokQookbATau1lssn9+3rK2YBpU6efbg04fk0iSYXWGYS+BK+0KBzC1lL2vdNYT7GU
- hGkUaEw+s9bJv7908xOL2bF9unD9F09/aSWI5VrhOI3UKaLpEw9VkZo91+dK7Ke9CcewHsz5MSL
- xAZYPWnkWDXd+GKoYCAvt/mUyHnHJ/QSIhbOVD38+HAm3Sz70Ej/hW3uIflBwy1PXAXwCQRYRZS
- DPIMjtPalOwHCkXIlgLJxJCaWxyj0NO4aafvYKIJiwD6xNk7pcg7M9ES7jdASzZWio5DN1e/0I7
- JHEsQFQ923oEFcx28Mo+gdsfQiDpgUz2+A7hZb7j50Psuty1a1mnDUXrI4iB2xMSGz9xiODAXc2
- w+zRL2ILWY0DDKKp2eniWH7Re5VAoxNAtMm9XBIJpng7DxQasMoNMKrpSqEo5TO95h
-X-Received: by 2002:a05:6830:2992:b0:7e6:e385:4c1e with SMTP id
- 46e09a7af769-7f3ca59e06fmr6655416a34.4.1786636611112; 
- Thu, 13 Aug 2026 08:56:51 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:3678:ac91:e955:c25])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f3c9ca7b0bsm2391452a34.15.2026.08.13.08.56.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 08:56:50 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: u-boot@lists.u-boot-project.org, Julien Stephan <jstephan@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Minkyu Kang <mk7.kang@samsung.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Tim Harvey <tharvey@gateworks.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Johan Jonker <jbx6244@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Pavlo Yadvychuk <pyadvychuk@baylibre.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, u-boot@lists.u-boot-project.org
-In-Reply-To: <20260728-mt8188-add-hdmi-phy-driver-v2-1-8b2893b151ba@baylibre.com>
-References: <20260728-mt8188-add-hdmi-phy-driver-v2-1-8b2893b151ba@baylibre.com>
-Subject: Re: [PATCH v2] phy: phy-mtk-hdmi: add new driver
-Message-Id: <178663609577.2270888.11074723889068596355.b4-ty@b4>
-Date: Thu, 13 Aug 2026 10:48:15 -0500
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=514; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=v56Grm4Z+LxALeUxwqpXBlIqaoTZDtVc19cvZBYpB/U=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfek66mOUgxK973EsYju9VI7HNDfyPxCsK7xXj
- RNu3vtIqySJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan3pOhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AtZcH/iAH2Mx4cq8e4twHmonxcuCUmXVGmBke19euUnK
- FeCWrO2o5uxNX9HU9/3pnfBeFhGEsYsc/Cv1x01qA81taoer0V/ZpZi/QJgo8tNR/J6ieSjgj6g
- BqVh8+XWs1kjQ+kdFjz5ZyvdrPDCLu8+8qPJFw34erM4SyHfobAkTTWqtj+EyuqR+NnAelyXFUv
- 6ZxvdhrksDl7dpRIij3P0hg1sAkgI1sxkIZr5tb7ImK9EcCQ8530N4iFmtLoY577TG6UE3xELpe
- ROC+THamjAprnqXusLIBBwIDo85pjtLoxZ4wvESAXF+0BjKMlgtwddufold34vikU6MXO3uTxBP
- Razs=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786636611; x=1787241411;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1786635750; x=1787240550;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=gTf/8ICPP7Z+SGVrx9GoL6SjBtOiUyWf+WTOLGtglvs=;
- b=ovXlygV/Sa3+4cX886FqbcEe855n25/X8QzkEtGMFo+JE1zGmxUQHhQglYK3EJMKsy
- fyxRQNc+KRRFJo80vrmlM8rBSeUC7GuxVNJYTxnYg5/1xd5ivyFUOxv9JhtlpDq8KWTp
- ykbwqKP6hOSegvJv9V2c4sgCGG20y53PB8GuwCCl71PPI8Wv4WD88Ui0JoVUmvdtPS6J
- AlvMi5rhCAGh+wnL5SVz7JDqDdqtpVNdX/Cta4NzaX53ZtcJpHlrnyduC2EXeuqF8+8E
- RakdPfS/rDs+DG6VQ3H//7GKVlNJuSpTrUFGM6DnvzsarmQbwtY2JsbFoz8qXe1DWsp4
- 9W6A==
+ bh=1x1SkgMeU1aKeO8KRRYDPtsVyrRbTUWp2WZhXhA1MAI=;
+ b=KS/B8v69eslqjPynSE41dsiY0f6sGRwZI8/9mjkYhIPaMl/Id03YF6LqQkoi+bk76K
+ gD2+WB63393M0UeNBQtI+L8olLl2GfSZfYKqjFpT4auDbgaln0CoYSHgjvkzDfJWb5zH
+ /L6LwHzfN/JjXF+Qah6VPNFZm67B7Xx1D4VKVZWCom5mQITQ4RHngrNEuSmQDYXA5XkU
+ TSpRbCEk7EIxUjlPcl4pXwZ8WlbHYySzgLfeHS9PD73+txvr2YSTcA8OgeMb+QTRkpSs
+ 7X9YIdlVK35yCxILHUAI31Xzk9GXWXOyWn5d8/RMPCHJ+eE2SuADlTAKo1EFZ125DhuH
+ TApQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq9gCnsb2qY3irK4hyLZoYSscsizMDc6hiKJF0mbQBCqiUJq92q3TuQFxyo3JF9PlH7mfD262g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzQ/SeCQnDOuNpbz0/d4FAfd7sTN4roB6FkMXroNRMKacJPgymQ
+ pg30vsW0H/A0JG3k0R87USaPJLGUCgfS8ekDx9XnHCOgJovMJ2A5XVzBc8GpBMsflO4=
+X-Gm-Gg: AR+sD13ohsC4CBQVgoTnGYeLl6Zw2Efa6mEGNKzZNI6MpJQHb8IR3hYCGcoEfp3F7pH
+ 6tizD4Qa5VYcBOlHzrTVhWisG6WXIKTwrGukKATxLG2Sn1REipOf9FJhOFhwbdG+XMShJJsS3EV
+ IWw5Is7PhAzGtWonXiTiBQpmya5juJ1dWG+TSgi1m8OYUbhHAFb8dBcjtaTzCEPLFV2oQgz6HbF
+ mEJjIUzPIeX4AXt2f30FBcTQlLHCMf2z2bmRFIO/cra3rTCph5pnQGoU4bCvs2UqKUw+7lS32KH
+ 3nIw0zOX3GDDOi4+DaHKleRS1CULrKaM1rBm/9qri2fQJ7p2qARJjUVMksJbqZtIdwCOZ6PB9Ij
+ 6zLwtsawdpbUpYXj41TMSwjkbnK/O446S4WS9qdBts/6JMjiD348jUAZHO5Ny6HmvYhdZ50g6rL
+ pi/rbHTt4MXSG9iiutNPHaVibTp7KZUt1h+xbYBtepXCVEShMYMoWUSSuYdoDVZjLwQSGAR7h8W
+ PdULAQ3DoQKmiw1zIMer2C8FXCPUWK9fpiVx/6uyunk6tn+zxpF6SqlQAOOtLTbxRekJcAQPU9j
+ Ip/6DlwDHWzA9HkS4oHZdZeE0JKsJHrOgPQDGZsXFttEbevnVxhEeTs=
+X-Received: by 2002:a05:600c:1993:b0:490:c6c2:52 with SMTP id
+ 5b1f17b1804b1-49982187725mr70446605e9.3.1786635749466; 
+ Thu, 13 Aug 2026 08:42:29 -0700 (PDT)
+Received: from ?IPV6:2003:ff:f03:8f00:b111:828d:2817:5c05?
+ (p200300ff0f038f00b111828d28175c05.dip0.t-ipconnect.de.
+ [2003:ff:f03:8f00:b111:828d:2817:5c05])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49981b03d07sm82828795e9.2.2026.08.13.08.42.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Aug 2026 08:42:28 -0700 (PDT)
+Message-ID: <f70400e0-9444-4ee4-b7ff-dea8f32d6c86@byteray.co.uk>
+Date: Thu, 13 Aug 2026 17:42:27 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] test: dm: nfs: add a regression test for an oversized
+ NFS read length
+To: Jerome Forissier <jerome.forissier@arm.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Sebastian Josue Alba Vives <sebasjosue84@gmail.com>,
+ Argus <argus@byteray.co.uk>, nd <nd@arm.com>
+References: <20260811-nfs-oob-fix-v1-0-5444d86d28d7@byteray.co.uk>
+ <20260811-nfs-oob-fix-v1-2-5444d86d28d7@byteray.co.uk>
+ <ce8b5c8e-d62e-4e28-bab8-dab2d26a70aa@arm.com>
+Content-Language: en-US
+From: shj <shahriyar@byteray.co.uk>
+In-Reply-To: <ce8b5c8e-d62e-4e28-bab8-dab2d26a70aa@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 13 Aug 2026 15:57:08 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786635750; x=1787240550;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=1x1SkgMeU1aKeO8KRRYDPtsVyrRbTUWp2WZhXhA1MAI=;
+ b=IgVeJ6a6XX5lYX6XHOwtjIB2ZN2quThhFHj+NcK9HOUzfxhDejFpJ/TzkC6SULtXf/
+ hswr6/DX5cWPeyYCb995+owsvhwB+VTHwgPwryD/kTtvPaZDd9qMZL3mfx4NCPEC449A
+ rARWGMgJL6AUgoKiAByA6UCGQ3CPW4PGcHv/RdXU19KaGfS16GIpmjb7yq9GW7NRA7um
+ +kEQv5xg4oSwAgJoNh416wAL8QzvuCxNJmzlfQgQAAq63yYWl9CjfdwZrhnEJXhU7dlF
+ HXYEB2OdSuGcute6v0BoUtwdeDhtXJpCj4EMMVtU3LLYObOescCORk1VlOs5f1zfFAbq
+ 3fwA==
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none)
- header.from=baylibre.com
+ header.from=byteray.co.uk
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=ovXlygV/
+ dkim=pass (2048-bit key,
+ unprotected) header.d=byteray-co-uk.20251104.gappssmtp.com
+ header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=IgVeJ6a6
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,20 +145,24 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Tue, 28 Jul 2026 17:01:56 +0200, Julien Stephan wrote:
-> phy: phy-mtk-hdmi: add new driver
+Hi Jerome,
 
-I made a few small tweaks while applying.
-* Use div64_u64() instead of div_u64() since both args are u64.
-* Add a return value check for mtk_hdmi_pll_drv_setting().
-* Make da_hdmitx21_ref_ck u32 instead of u64.
+On 12.08.26 17:06, Jerome Forissier wrote:
+>> With the series applied to for-main I got a CI error, see:
+>> https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/jobs/68484
 
-Applied to mediatek-for-next, thanks!
+I applied both NFS patches on top of current for-main and ran the 
+sandbox tests (I forgot to enable CONFIG_CMD_NFS in the sandbox config 
+in the previous nfs patch, and the nfs test is skipped, exactly as in 
+your job, sending v2). But overall I can't reproduce a failure, the 
+failing test in that job, dm_test_dhcp6_serverid_reject, isn't on 
+for-main. I applied the serverid series (fix + test) verbatim on current 
+for-main (b752e441790) and t_dm_dm_test_dhcp6_serverid_reject passed.
 
-[1/1] phy: phy-mtk-hdmi: add new driver
-      commit: 7e98fc167a2f3a3b94387ed9b19d5e59b4d5b643
+Could you tell me which tree/commit you saw this on (the job checked out 
+for-main at 37f4c339, which I can't find on for-main now), or point me 
+at your merged test/dm/eth.c? I'll reproduce against exactly that.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+Thanks,
+Shah
 
