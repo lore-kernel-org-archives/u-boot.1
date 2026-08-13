@@ -1,147 +1,186 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E32C5AD5A
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 02:22:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14E43C5AC67
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 05:50:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C0F29810D2;
-	Thu, 13 Aug 2026 02:22:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8222C4091E;
+	Thu, 13 Aug 2026 05:50:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v3vDAHLz_2Sw; Thu, 13 Aug 2026 02:22:15 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cgLDj2L1MX9K; Thu, 13 Aug 2026 05:50:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A4F0F80CC8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A7892408BA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786587735;
-	bh=49uTPnYEInLaMh9Kyw9/PREOLpYgzHKcbc3uvj4lmrU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=aR0KXSYBrkwKDnRC66ezzw/997y9ICJjGqP8wgWzZZ6+Jp2KpmgyqdyFbnVp7OuYz
-	 7KzueeLwYXE5sG93w7KJDCYqoxwTG7FFUiujtM+L9QpuPnwkUViMeXxb9GNCHRuGC9
-	 I/dDQU/oMwSIm1nQ642Vn73kNrQ2P1/j7CwRXBIhN+uo5yxhNTtk7pIuEMEICrhmd8
-	 kUmRRtbzrPu43rY0cHjUnUyb2AHx8K7+wAiCOul1mySva74VvfJ5rIDrWKLTnKOPBl
-	 khXyeWmjpPOmgqmuCKK1U6NfVvBtyKm/LkcsxNjf6/MbkWIxtDTdAtX9lUN6S9k2+W
-	 BspLZEvm2Wc6Q==
+	d=lists.u-boot-project.org ; s=default; t=1786600236;
+	bh=qLEf3t/pDKXgMXS/tKRssDZ1oz8MXphDCyiU+D3RsWU=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=T2jHkQRQnoLYTCf9Dk0mjXD18NVie+ZgPLV8Q1LIIbTTTGr5MFW5Rf/8Z8+xVTWrV
+	 2GL94tFHN44Hzot3JN7gRnoa5wG/ulkp7Dde/Nxb1yJ3ZjxctzmAobow0beU9PbzWm
+	 usxJnOMf4z6ElUTH2qnkGmF/OwvS3vCnfe1dBW3FUlH4+bOjlP/E2N5RV4AcGge9w/
+	 aTZrHOp7pbDtXFwNcTU17BffisKh9hPbHkEONjhfR2SaRy6NEi2awEnG9gjQMupRTF
+	 hRsFxNx0i0Mdgp6iRxA1DIuK0bBlcvqwoTAoLndlJ6fd+0y8WPz60Mn0eLr+r8xn5Y
+	 xWZGGVXOzrEHw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A4F0F80CC8;
-	Thu, 13 Aug 2026 02:22:15 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5D09F1F41
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 19:04:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A7892408BA;
+	Thu, 13 Aug 2026 05:50:36 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C2A162B2
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:50:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5AD2F80EAF
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 19:04:45 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id AC7F9608B4
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:50:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5-0kcAKk3dIi for <u-boot@lists.u-boot-project.org>;
- Wed, 12 Aug 2026 19:04:44 +0000 (UTC)
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 81EE880EA3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 81EE880EA3
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 81EE880EA3
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 19:04:43 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AA12B84AB5; Wed, 12 Aug 2026 21:04:39 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2B7A84ACA
- for <u-boot@lists.denx.de>; Wed, 12 Aug 2026 21:04:33 +0200 (CEST)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c160875e029so18026466b.3
- for <u-boot@lists.denx.de>; Wed, 12 Aug 2026 12:04:33 -0700 (PDT)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OWAHKqRF93Rn for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 05:50:35 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B0BC560869
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B0BC560869
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B0BC560869
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:50:34 +0000 (UTC)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67D5g40j2398406
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:50:33 GMT
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0sk43t6y-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:50:33 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-38ec0f510a9so4164218a91.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 22:50:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786561473; x=1787166273;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=49uTPnYEInLaMh9Kyw9/PREOLpYgzHKcbc3uvj4lmrU=;
- b=aZsVeoYK+nA/ig1KZnTG4tQ6/JBLeirwWTJO3qnlJtUz7wwuJj8aWDAoFYVWSrM4F8
- P9CstUskAus83OL9le+dINL2q083H5P931JsOnon1wcwc7UpEnPeTlAJvvlzCHVzYr6v
- PbzwE1b4tGhDLsP77ai4RzGtj7NSGqfWiIJuaJluLIB0okRxBIT1ZXdwTyooClMIG+dA
- yuzghC/GzthDTjGABHocwo0+/XSte5xXvsdTxtPNMhMTG9jpP7Q50fHIloo/1rQzxJtT
- gObeu4BzishtvyIaa/1uWAmPiOwcmklq7zCgE8oZ9s364xuJ1zce5C7uEd4lwIFqiKqz
- f85w==
-X-Gm-Message-State: AOJu0Ywktf8T6deByatqI7MIUrS5D/p89g7mzYxFdkLKVEK2c7Jmgzjs
- ufm5ENDSpO2UNdErxbyx9dItDUNR1YRVhPRrtVFSP1FWO9ZAs5MTeT6/+CFbtzKIMK8=
-X-Gm-Gg: AR+sD11MUl9MfmfQpl0s0EUTvCIfyuu3fZGT1sc0CTa8fN3KFJUdciZYQYP+BXrYd8t
- 7O6hK5qEv0uk/QCl3oa9r0Ee2CDuXtDTLmNbI1uW9EvHerAtmZ/tn/VMEwGMFR86rUcl2y9oj+x
- eU8ooLQSYizfYDPpgrPfMrG5T92dF9N4jYvHNNJPibhk2HCuUTRJU5tQTlF/RnD00OF93TbZeeq
- a4s9Xtyex8WiqXQl8d/xwTIGhspeXnMsmx1RHXyq158zOhWm78oenRuQGXrmmMGM0LD9nkbnwwP
- yZwq5qJ4anf0m0T5OTQzjT9DIRbNN2Gwpnoxj80GWf4J9ezvnE8EqU8iW85lowl3LulO7GfrT8j
- kJ7qJEo24gTGQyTMB15dHCG+jm2rgJZIyHYM8Jtpk/TPY1XfJ8XSuZSi1vhs2GvOXnEcSWNVdn9
- WavI0aipCPJbWLNhBzSx9AWAP0J7Csc4PXpzHoFUiawNRJWOd4RhFIfZ5DVmdpLWYFR96aE/3nG
- mbh2NcLTkDJ1WlKFgGvcA==
-X-Received: by 2002:a17:907:97ce:b0:c1f:e0fd:1140 with SMTP id
- a640c23a62f3a-c2108cfa990mr12290066b.0.1786561472785; 
- Wed, 12 Aug 2026 12:04:32 -0700 (PDT)
-Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
+ d=1e100.net; s=20251104; t=1786600233; x=1787205033;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=qLEf3t/pDKXgMXS/tKRssDZ1oz8MXphDCyiU+D3RsWU=;
+ b=Lfx6KIHLAOwBZqmwwE9EfkjIAPgRyw+tzvU8OV2+Dl1QuMX6xXfyQK19v6JK1V4t1B
+ MeUr2IK06rT/CaK01XLUuQ6JRtn3NanAQx/SxCYzm1LKVe/sI4Z+j3NCKKbCzRHjKGFY
+ hLzKhunQC3IWiYf7PBD9b/3hWMI15L1nU32iBR7zpBXef5euBg0MBukJzqxYtNbyDZKv
+ x0h18npMnVyCa08w95g5ggVQyuBMC5McG0OZqL+NjiEm2Mw54vIbU4ypzPx5i9WVCxPi
+ tStKOmMTZnj1N4/CKIdCjWgdjKS4B88BJ9pObW9dUzvO8/s+9RdFGIt1X1TfNUvCqwYL
+ +m1A==
+X-Gm-Message-State: AOJu0YwHXCKJHMRCc1bpy3fB+Q9YRP9iwzNDo0ocbiXCYxsFMFSFriMj
+ lmL2TS1aG0a5CWseqDa/ljz+hoQtFRDUhF8YfIrhJh2XiPuEVkqeJj7UldggEtuQbESpzZ5yVXL
+ xNqTK7dmOjJoXO4IYjMdbIMqzFXMdnh6A+/KzqfplDthikRUvcrJGCWJfEyM1OfNFRLFaNKo=
+X-Gm-Gg: AR+sD13eq/DB6itmkwjx/jCoz1UUOgo9EYz+9x/oFOKkxD9EB9TQx8hw3JqAGzxhvug
+ Zj7xhoJ6j+2n1RcDmeZ7XiJ+mEobeg9Gx1fRd1QpemMFj9UKRFRgJS1PU7t5kdUtcd89ZwQzmhd
+ 4lRBH4Oiwkp+eZPTIxYnnWzudtzUbh24Zv+b1f36sLAyTwpjo+Y3ugsoppFj0z0direVwU1alXY
+ AWkdD2ldH1ocq0YqTcwzlkIuLC26jDnQfvrB7PMpoCLpd5lY6F1OaLs4iGCJYSJmx1M2Y5j4KB2
+ BxGoomeeEvCqCKOq61SXnuXhyiwuB6Aa5YGS3AZAitc7TShP6Y5WUXbbJsZiRTB4fGPH3sqnFru
+ +LmYVe1Fw8yf9pm4oBrZy5XkxrB4x/Xp/IqAzx/JjvBypO6ZS2iz7ub7bChmz5rP4RYTwbUusA1
+ Ka7005Gtxcgh/2eqY5g7xb0tRzTiyL
+X-Received: by 2002:a17:90a:ec8e:b0:380:fead:448d with SMTP id
+ 98e67ed59e1d1-3931e26f714mr4527742a91.13.1786600232822; 
+ Wed, 12 Aug 2026 22:50:32 -0700 (PDT)
+X-Received: by 2002:a17:90a:ec8e:b0:380:fead:448d with SMTP id
+ 98e67ed59e1d1-3931e26f714mr4527714a91.13.1786600232332; 
+ Wed, 12 Aug 2026 22:50:32 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c21083fb640sm7679566b.3.2026.08.12.12.04.31
+ 5a478bee46e88-31ec022acabsm3402870eec.27.2026.08.12.22.50.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 12:04:32 -0700 (PDT)
-Date: Wed, 12 Aug 2026 21:04:30 +0200
-From: Anders Roxell <anders.roxell@linaro.org>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, marex@denx.de, mkorpershoek@kernel.org,
- ilias.apalodimas@linaro.org, trini@konsulko.com,
- michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Chintan Vankar <c-vankar@ti.com>, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v5 00/75] usb: dwc3: sync code with Linux v6.16
-Message-ID: <anzDvgtMh_7Fl9Ig@monster>
-References: <20260716134305.614278-1-anders.roxell@linaro.org>
- <178602223375.3156999.13542339251028864355.b4-review@b4>
- <anmKNYbNQ73Kv3iX@monster> <DKL6AAZWIDW6.QM05DJXDFOTN@ti.com>
+ Wed, 12 Aug 2026 22:50:31 -0700 (PDT)
+Subject: [PATCH 0/4] efi_loader: track capsule last attempt status for
+ ESRT, add efidebug capsule images
+Date: Thu, 13 Aug 2026 11:20:16 +0530
+Message-Id: <20260813-efi-esrt-last-attempt-v1-0-3be172f47d9d@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <DKL6AAZWIDW6.QM05DJXDFOTN@ti.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-X-Mailman-Approved-At: Thu, 13 Aug 2026 02:22:13 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABhbfWoC/x2MQQqAMAzAviI9W9h2mOJXxMPQTgs6x1pEEP/u8
+ BhI8oBQYRIYmgcKXSx8pgq2bWDeQloJeakMzjhvemuRIiNJUdyDKAZVOrKid8Ea6nrTRQe1zaV
+ 69/8dp/f9AJV0H+xnAAAA
+X-Change-ID: 20260811-efi-esrt-last-attempt-62a10e7807f2
+To: u-boot@lists.u-boot-project.org
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Aristo Chen <aristo.chen@canonical.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786600229; l=2237;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=rbERV/pezhnkW+oDqBkiRdAyrvFfh9L+Mzk0HdkIzoo=;
+ b=BeI5AHAfurArYAus5+/przFEhAD+UXtNvWRqXb8/HBH7/k9RULXkS0GBw+TcojS71/2t6KyiF
+ u6poNhqZMgQDjDJcurIJnoXPDX2r4D5oBI0dzQLCpsa2u+JG0wPcRXH
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-GUID: sF_maEAS1nkUYLQ-tRkBWvNjdt9fh5ex
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDAzNyBTYWx0ZWRfXzQHxwRD4V22Q
+ /cb1delRND+RRZIeWzn7sJJx0+3M88PM68dwcmtEIsJXgTX9bWi6DcKc7WsgM4C5bzjXqE6HzGv
+ +JFyc3mKqWjT8w+BYxXqXEeq2Ooj4T8uCFqQYKtiYjv43/EbPEoR/iqaVpyDQEQMqtMQk1nDWoe
+ WmMiF/Mf2TnhE87XazKtp1f86sO46AJ5ZOVVvLPvtA0sngftwTV1peySO2+FEq6zV7Py+yZlu3m
+ i+mMMbvqKk1bpy+Mu6T4FCbLqAkPzZe2tottB164ZupT6nVVl/uLhsNkg1aA74dpdAXvrlWtnLc
+ YqPSLFJqQil4ysldxpar7+lRD50Wz3+AUOS36l273XmnTI5gWDolkUfT5BcFwfUMGdMiS6BPc/d
+ squDITCTu+4Gax/NzwxksVJYqtbqvNbYNKk3L8CeMxgA8Ghcd9cVXvwzSXacyuljS6lf3wICsc+
+ AmUoToKu12I1dpnIa3w==
+X-Authority-Analysis: v=2.4 cv=E8n9Y6dl c=1 sm=1 tr=0 ts=6a7d5b29 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=OIpgJ-WAo9WEGMKYZ48A:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDAzNyBTYWx0ZWRfX4oaj6xz+iIU/
+ rbmo2lEMh9KyligfVXBwvGSVzl68f5iIh3+cm/+RZbVDNaTZmBScjDuIaRbY/C86CtozsJxyKIe
+ l2u68RNhitcjSGtejPduba4rEWTyXCk=
+X-Proofpoint-ORIG-GUID: sF_maEAS1nkUYLQ-tRkBWvNjdt9fh5ex
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-13_02,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
+ clxscore=1015 impostorscore=0 spamscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130037
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786561473; x=1787166273; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=49uTPnYEInLaMh9Kyw9/PREOLpYgzHKcbc3uvj4lmrU=;
- b=oqqLwznrrc8IuE76PaR4gQgNiqyL7WqKzi/NOxuulkUqsicEPu3z21KNk/bDdX1O7M
- EMmWV0RmDrFkHijY3U6MJL03evriL3Xw+OMhUaVs79WMxoyFk1+Bvnd4mzWz9KNXKWDA
- pD50/+6on8Opa5M4swV8YnlO/xc2ZqZ7dya6YcghWZkhcLKbxFYXTumsbwBHnZJV0pbW
- y6IiEj49cBckXe9mvgtLPcgYezoQ4f/boGZxj7tMQWIg4Wvk6deVhLDF6Dem5LwCdvUw
- kLcVpkKI5yhHQM2XIJkPFFx37YSanIhUteKRY9Mwf5GIQEB9c6SuJYhdMbJGqDp9mwNa
- WWzA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- spf=fail smtp.mailfrom=linaro.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=qLEf3t/pDKXgMXS/tKRssD
+ Z1oz8MXphDCyiU+D3RsWU=; b=JQCildpx4OfEj0a+UmywGhKqg9PAoKh1JGkhfQ
+ tk8zGmBz69/CYFyX3F8oZyIt3i9KGAJRHZX0KBmeRnXMPKotXwndLfOSJ9jDp9On
+ TTzbeaKaPuj/r6QirRkka7uY8ecryNRtGQ0VCojeJX4dltGJwnv/8Q1l+F3uU9qU
+ N5IOPpx3YvRs0yziQT/6OV8AfdMF3Gkmh2xSmWutD4RutB2pllYvS+KG1K/WivJf
+ nnDV3/n9U06s1fDbWJGvhaq0PfnWytN4/Stw84yhHQhtOiO0rLsQzfLgUBGNB4sc
+ fg6vzYiB8RBb5oIyQYf+n5qwdmhnlfkZADHIl9V4aWBQSbtQ==
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1786600233; x=1787205033;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=qLEf3t/pDKXgMXS/tKRssDZ1oz8MXphDCyiU+D3RsWU=;
+ b=BtC14H2dweWbNzSPiShik1ieHRpGomIsNPumI6RHMw+wEQalQbRWiJdUEEoKJZKQzA
+ akWG2DT7zaOJVmXGUQcRBfnVyulrM8L17PHk1Ek7xPuc0V92YfKLcV0UTbHufRT/hrA6
+ bAgH3c9yLXBtiC3ayK/jT7kJugMk2SpUgxjvhnKEmMEQgxqTom0vaPkLYsgO5Bybj6gX
+ aMyQG0UE8f/HxY14KE7kvu4h5NoonpRT/UxZtKa0J2vWcSfSn/Gq290AvDECKmV2XIC5
+ cfGvzC1nkjfpjyQZUr63lTFUoYcmwLlGiy+SGMyx0R7V/DMhRLliYcNoOgJJc9T3UTrn
+ 5xeg==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=JQCildpx; 
  dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=oqqLwznr
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=linaro.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=anders.roxell@linaro.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="oqqLwznr"; 
- dkim-atps=neutral
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=BtC14H2d
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,216 +192,57 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Balaji Selvanathan via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-08-10 15:26, Anshul Dalal wrote:
-> On Mon Aug 10, 2026 at 1:52 PM IST, Anders Roxell wrote:
-> > On 2026-08-06 18:47, Anshul Dalal wrote:
-> >> On Thu, 16 Jul 2026 15:41:30 +0200, Anders Roxell <anders.roxell@linaro.org> wrote:
-> >> > [...]
+Right now the ESRT firmware resource entries never reflect a failed
+update. LastAttemptStatus and LastAttemptVersion stay at whatever they
+were set to at boot, so an OS querying ESRT after a rejected or failed
+capsule has no way to see that anything went wrong.
 
-[...]
+This series threads last-attempt tracking through the RAW capsule
+update path (raw image writes and the DFU-backed image writes it
+shares code with), maps the internal error codes to UEFI status codes,
+and makes sure the FMP variable gets updated on both success and
+failure so ESRT stays accurate. It also fixes FW version extraction so
+it still happens when authentication fails, since that path was
+skipping the version read entirely and left ESRT with stale version
+info on rejected capsules.
 
-> >
-> > And in dwc3_gadget_uboot_handle_interrupt(), same file:
-> >
-> > -		struct dwc3_event_buffer *evt;
-> > -		dwc3_thread_interrupt(0, dwc);
-> > +		struct dwc3_event_buffer *evt = dwc->ev_buf;
-> > +		dwc3_thread_interrupt(0, evt);
-> 
-> Thanks for the pointers Anders but I encounter a similar failure even
-> with the diff you suggested. I enabled some logging for the SPL by
-> defining the DEBUG macro in the following files (dfu.c spl.c spl_ram.c
-> dwc3-am62.c composite.c g_dnl.c).
+The last patch adds "efidebug capsule images", which prints the FMP
+image descriptors a board currently exposes (index, name, type GUID).
+This got more useful once fw_images[] started varying at runtime
+depending on what a board actually has.
 
-Hi Anshul,
+This work is part of multi-image capsule update support for
+Qualcomm boards.
 
-Good news. I found two more bugs on top of the two I already sent you
-(the event buffer and allow_connect). With all four the device
-enumerates.
+There is no dependency on any other series.
 
-> 
-> Failure logs:
-> 
-> 	U-Boot SPL 2026.07-00860-g5a9b7a715be2 (Aug 10 2026 - 15:06:27 +0530)
-> 	SYSFW ABI: 4.0 (firmware rev 0x000c '12.1.0--v12.01.00 (Clever Cat)')
-> 	Set clock rates for '/a53@0', CPU: 1250MHz at Speed Grade 'V'
-> 	SPL initial stack usage: 17104 bytes
-> 	SPL malloc() before relocation used 0x64d0 bytes (25 KB)
-> 	>>SPL: board_init_r()
-> 	spl_init
-> 	Trying to boot from DFU
-> 	g_dnl_register: g_dnl_driver.name = usb_dnl_dfu
-> 	g_dnl_bind: gadget: 0x81c44a98 cdev: 0x81c66bc0
-> 	usb_add_config: adding config #1 'usb_dnload'/81c67cc0
-> 	g_dnl_do_config: configuration: 0x81c67cc0 composite dev: 0x81c66bc0
-> 	adding 'dfu'/81c67d34 to config 'usb_dnload'/81c67cc0
-> 	cfg 1/81c67cc0 speeds: high full
-> 	usb_add_config: interface 0 = dfu/81c67d34
-> 	g_dnl_bind: calling usb_gadget_connect for controller 'dwc3-gadget'
-> 	usb_dnl_dfu: ready
-> 
-> <CTRL-C> from user
-> 
-> 	unbind function 'dfu'/81c67d34
-> 	g_dnl_unbind: calling usb_gadget_disconnect for controller 'dwc3-gadget'
-> 	Legacy image
-> 	u_boot_pos = ffffffff
-> 	Raw boot image support not enabled, proceeding to other boot methods
-> 	Error: -22
-> 	SPL: Unsupported Boot Device!
-> 	SPL: failed to boot from all boot devices
-> 	### ERROR ### Please RESET the board ###
-> 
-> Succes logs (same debug symbols ontop of main branch):
-> 
-> 	U-Boot SPL 2026.10-rc1-00209-g0bdd5e5daf95 (Aug 10 2026 - 14:58:28 +0530)
-> 	SYSFW ABI: 4.0 (firmware rev 0x000c '12.1.0--v12.01.00 (Clever Cat)')
-> 	Set clock rates for '/a53@0', CPU: 1250MHz at Speed Grade 'V'
-> 	SPL initial stack usage: 17104 bytes
-> 	SPL malloc() before relocation used 0x64d0 bytes (25 KB)
-> 	>>SPL: board_init_r()
-> 	spl_init
-> 	Trying to boot from DFU
-> 	g_dnl_register: g_dnl_driver.name = usb_dnl_dfu
-> 	g_dnl_bind: gadget: 0x81c44aa4 cdev: 0x81c4af40
-> 	usb_add_config: adding config #1 'usb_dnload'/81c4c040
-> 	g_dnl_do_config: configuration: 0x81c4c040 composite dev: 0x81c4af40
-> 	adding 'dfu'/81c4c0b4 to config 'usb_dnload'/81c4c040
-> 	cfg 1/81c4c040 speeds: high full
-> 	usb_add_config: interface 0 = dfu/81c4c0b4
-> 	g_dnl_bind: calling usb_gadget_connect for controller 'dwc3-gadget'
-> 	usb_dnl_dfu: ready
-> 	composite_suspend: suspend
-> 	set_config: high speed config #1: usb_dnload
-> 	non-core control reqa1.03 v0000 i0000 l6
-> 	non-core control req21.01 v0000 i0000 l4096
-> ...(repeated)
-> 	#non-core control reqa1.03 v0000 i0000 l6
-> 	non-core control reqa1.03 v0000 i0000 l6
-> 	DOWNLOAD ... OK
-> 	Ctrl+C to exit ...
-> 
-> I'm not that familiar with the DW3 driver, let me know if you need me to
-> test with any further changes.
-> 
-> >
-> > evt was used there without being set as well.
-> >
-> > All of this is in v6 that I plan to send out. I have no AM62p and it is
-> > only compile tested, so please try it on your board so we know if it
-> > solves your issue before I send out v6.
-> 
-> I was able to reproduce the issue on beagleplay since it uses the same
-> DWC3. You can try it locally if you have that board with you by
-> resetting to DFU mode from U-Boot prompt:
-> 
-> => mw.w 43000030 53; res
+Balaji Selvanathan (4):
 
-I could not use the mw.w 43000030 53; res trick on the BeagleBoard-X15
-that I found. But I can run DFU directly, it is the same DWC3 gadget
-path you hit.
+efi_loader: firmware: track last attempt status for ESRT reporting
+efi_loader: firmware: add last attempt tracking for RAW capsules
+efi_loader: Extract FW version even on authentication failure
+efidebug: capsule: add a command to list updatable firmware images
+---
+Balaji Selvanathan (4):
+      efi_loader: firmware: track last attempt status for ESRT reporting
+      efi_loader: firmware: add last attempt tracking for RAW capsules
+      efi_loader: Extract FW version even on authentication failure
+      efidebug: capsule: add a command to list updatable firmware images
 
-How I tested on x15:
+ cmd/efidebug.c                                     | 102 +++++++++++++++++
+ lib/efi_loader/efi_firmware.c                      | 121 ++++++++++++++++++---
+ .../test_efi_capsule/test_capsule_firmware_raw.py  |  22 ++++
+ 3 files changed, 232 insertions(+), 13 deletions(-)
+---
+base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
+change-id: 20260811-efi-esrt-last-attempt-62a10e7807f2
 
-  env set dfu_alt_info "${dfu_alt_info_ram}"
-  dfu 0 ram 0
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-On the host dfu-util finds it:
-
-  Found DFU: [0451:d022] ... name="kernel"/"fdt"/"ramdisk"
-
-The two new bugs:
-
-3. udc-core never sets dwc->async_callbacks. So the gadget setup() is
-   never called and every GET_DESCRIPTOR returns -EINVAL.
-
-4. ep0. The trb and the ep0 buffers are normal cached memory. In u-boot
-   dma_alloc_coherent is not coherent, so nothing keeps them in sync with
-   the controller dma. The resync dropped the manual flush and invalidate,
-   so the controller reads a stale trb and stale buffers.
-
-The patch below is only 3 and 4. Keep the first two you already have,
-this goes on top. It is against v5. I built it and tested it on x15,
-it works.
-
-Can you test it on BeaglePlay with your reset trick? These fixes will
-be part of the coming usb_dwc3_sync_v6 branch.
-
-Cheers,
-Anders
-
-
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index 0a4f69cbc28a..2ba05fc3f573 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -54,6 +54,9 @@ static void dwc3_ep0_prepare_one_trb(struct dwc3_ep *dep,
- 	else
- 		trb->ctrl |= (DWC3_TRB_CTRL_IOC
- 				| DWC3_TRB_CTRL_LST);
-+
-+	dwc3_flush_cache((uintptr_t)buf_dma, len);
-+	dwc3_flush_cache((uintptr_t)trb, sizeof(*trb));
- }
- 
- static int dwc3_ep0_start_trans(struct dwc3_ep *dep)
-@@ -811,6 +814,8 @@ static void dwc3_ep0_inspect_setup(struct dwc3 *dwc,
- 	int ret = -EINVAL;
- 	u32 len;
- 
-+	dwc3_invalidate_cache((uintptr_t)ctrl, sizeof(*ctrl));
-+
- 	if (!dwc->gadget_driver || !dwc->softconnect || !dwc->connected)
- 		goto out;
- 
-@@ -856,6 +861,8 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
- 	dwc->ep0_next_event = DWC3_EP0_NRDY_STATUS;
- 	trb = dwc->ep0_trb;
- 
-+	dwc3_invalidate_cache((uintptr_t)trb, sizeof(*trb) * 2);
-+
- 	r = next_request(&ep0->pending_list);
- 	if (!r)
- 		return;
-@@ -873,6 +880,9 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
- 
- 	length = trb->size & DWC3_TRB_SIZE_MASK;
- 	transferred = ur->length - length;
-+
-+	if (ur->buf && !r->direction)
-+		dwc3_invalidate_cache((uintptr_t)ur->dma, ur->length);
- 	ur->actual += transferred;
- 
- 	if ((IS_ALIGNED(ur->length, ep0->endpoint.maxpacket) &&
-diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
-index 6355931f9ff1..f03ff937dfde 100644
---- a/drivers/usb/gadget/udc/udc-core.c
-+++ b/drivers/usb/gadget/udc/udc-core.c
-@@ -941,6 +941,8 @@ static inline void usb_gadget_udc_set_speed(struct usb_udc *udc,
- 		gadget->ops->udc_set_speed(gadget, s);
- }
- 
-+static inline void usb_gadget_enable_async_callbacks(struct usb_udc *udc);
-+
- static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *driver)
- {
-         int ret;
-@@ -960,6 +962,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *dri
-                 driver->unbind(udc->gadget);
-                 goto err1;
-         }
-+        usb_gadget_enable_async_callbacks(udc);
-         udc->allow_connect = true;
-         usb_gadget_connect(udc->gadget);
- 
-@@ -1156,6 +1159,7 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
- 			udc->driver->function);
- 
- 	udc->allow_connect = false;
-+	usb_gadget_disable_async_callbacks(udc);
- 	usb_gadget_disconnect(udc->gadget);
- 	udc->driver->disconnect(udc->gadget);
- 	udc->driver->unbind(udc->gadget);
