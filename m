@@ -4,115 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DCF9C5CFDB
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 20:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A323C5CFDB
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 20:17:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 46D118146B;
-	Thu, 13 Aug 2026 20:17:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3EEA881425;
+	Thu, 13 Aug 2026 20:17:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CJ47d-CqB1hz; Thu, 13 Aug 2026 20:17:51 +0000 (UTC)
+ id OvA-e5XKapH5; Thu, 13 Aug 2026 20:17:54 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 30C388145A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2B01F8146A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786652271;
-	bh=v/ktMIvCp5cvwx+T/Lc9kbY5PyOzlFH10QD0ZD1I78g=;
+	d=lists.u-boot-project.org ; s=default; t=1786652274;
+	bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ebBuZjBjBKSoWvP6D2dwBeZF2GwOdKA46L8yvOZ+LHkZFDtWH9XDpU9Hy5lqgY6kC
-	 n4d9soGPitjFcLruxMzw+moNz22pHZ6IkzM8B/BnjPUnHmUY7qQjPjxs96T+kVgHsA
-	 ZIm31pCP9bBK4j+DZIFX2RWpMmW4ATLrLNJCu1yUhM9G32FTY39dDvuwUoW9uolC9M
-	 v+b4+4pyJnbPHft3ENal19OgifSXFQrNfxwqHe+cQU5/mEfWtRITDUusZ+gPOtfzYF
-	 XD+ktJ23rjkpYi5B1TlCzAZvExLtxaIRYk9+uCtt8vlXM7fN4Jg5m5bMDgSpbh8QK5
-	 wimH5XCYP8WkQ==
+	b=cAsOZUdm2UjPheSMSfsUddaRiPL5l38kFWGo27o8ENI2lmXlG4wHqg0MtyRhHfyIR
+	 bAgSi7CO0vsGd7FfYHSX5hyOKmmm4ieZEEGqlbGiu1NAcLg92EDFjIGVdIQY4OGyoD
+	 JpcLBi1W0ButtV86MFMB0s3nU40+X4xga9OFj0HQmKR3mVlaGJ47CBHx2llCzWkNT2
+	 RXAkpGdCCa+riNQYR2/amYumApgo9frGRcHKt+p+pLe+AVia3mxz12xTC83kADd8+v
+	 Lni3iy9CSHk03jbu8uZ4GjCvHIyoIS2R8kdoggmK7DIySqOcXko1FWWkkCVnPPrHw+
+	 zcw+mAkLDybXg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 30C388145A;
-	Thu, 13 Aug 2026 20:17:51 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id ADD593DF
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:59:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2B01F8146A;
+	Thu, 13 Aug 2026 20:17:54 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5DFB53DF
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:59:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A012B80A66
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:59:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4FE7580AA2
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:59:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3Thpw6-1CmeI for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 19:59:20 +0000 (UTC)
+ id 2jgo6Aw-S9eK for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 19:59:24 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ client-ip=2607:f8b0:4864:20::c31; helo=mail-oo1-xc31.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 7B26B80AFB
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3277380A66
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7B26B80AFB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3277380A66
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=ZocjRlb/
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7B26B80AFB
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:59:20 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7f0167e59a3so261579a34.0
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 12:59:20 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=ZYY5fn9w
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3277380A66
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:59:24 +0000 (UTC)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-6ae8c4b9822so163703eaf.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 12:59:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786651159; x=1787255959;
+ d=gmail.com; s=20251104; t=1786651163; x=1787255963;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=v/ktMIvCp5cvwx+T/Lc9kbY5PyOzlFH10QD0ZD1I78g=;
- b=ZocjRlb/qsdQ6UDsyNRdL4SWifEgh7INm0xgXCAjALaFqJb3ZpUARRHLqXhFBh1KDF
- uBYO6XJi9cHtk6m44uSTsnkHC2hlAeO8yCtbREhExrUwr0d0ri1aIzfj84OA7tYamGJm
- 2Wqh4bTyfozKoUiWGxY5Vyo/P4mwYRAZhom7sTYPp7YQoag+d59ODyzqswCWyLVR4M8O
- vJaKC5Vy7PDqcBHCAEjE+DppH6/Atztde1Ub8LFbCLg7Bmo01/h2dCb25TpHAQb8nBgu
- Kt1+tVDHK4CtlDtkg+nHk4RnDiLnl06rI0aKunVLyjWN3Z7IVtQMD9kNG8AatuP8K+De
- f/PQ==
+ bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
+ b=ZYY5fn9waYuugGGDKijZHtryNZ8xVUJh9Tvhj7REVw2TNz2Zr11ARuSXLSGjSJFUO0
+ /ukmfSldt63zoZxHXNQ7+n/hEMDlea4Xyu9jGtqwEHIvk8S2tP8yCkU835hT1ZpiQ+Qv
+ 19QtQIRcqGBX/M3SV7cEfl9Itg0YoyUAHChBTxJjtyUrORloj1+hbRFjIOwr4QUtFNos
+ h2TOeJkbyJy7jtVGuhLtZh5ntvu3UCZvR40gA55DsyViZsTmXsGeOoD1c5bwsK6L2O73
+ ZimlMHI+QaVUenufGVWJ2/1HajX0n2mYb10KmRxpH2MVFyxpZN6RU9fUaNnanYFZ0EO8
+ 4EOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786651159; x=1787255959;
+ d=1e100.net; s=20251104; t=1786651163; x=1787255963;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=v/ktMIvCp5cvwx+T/Lc9kbY5PyOzlFH10QD0ZD1I78g=;
- b=Gq3eO2tG09yl1RMKVx34FyAPSUVUN2NR/19DdZSz6BFLr5KzLxy80ug9693OyZmtTX
- RbnjbNHqtkAHj0NlQzai7CxM6B8pi5R5938JoSwGy0Q0D+yiYYADlMWzmdaLMw9s0W3W
- MEutD9ioz5GBeKBqthLA08fFiaynkWmNgzzmKi3XzigJLcOyBhIsu/TfmuyPjsqFgyV0
- +Vfvgn6f6OCoKzIsnZ5Xi6see03vpNq8EQOuqI952ILKX9Bnh2zm0bjTmnaKJn2yYmpI
- 6AJ8LpkXIL/tCe5DUmWZphJAfR+5xy4YHxxiEhUrNXNv1jpvnnhPw4K/4bj1Lh4N6mel
- BBqA==
+ bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
+ b=XRiWhaBLRDwPtqyE881Ig2GWJsLN5VhEHDjzQZb0PPDUuPxiABX6+HVVYw9WsmF8Qh
+ SBP9/2a36WPJEesOF6avymRWAEwE0PQECly/VlEMvpczLKEjqzu5qaj3ShEwHSAn0whq
+ l8amFflvigoTmelNuCvTmbfHaX1rhGbQsEq6ncgaax2fNOmO6+ahjV1r4TBeG9mAcmhH
+ NFgb9tay3eNWdZFXTA4fHW3jPx4V2yfnw7u4aWhPHv3DM80X/njkI3AcOGgvzoJ7tJO1
+ EdFY+H//TPHvL87wmv6Vezj/d811zq+Fe1d3adysWEx9kwLirDHTCaioojYAQfnDyMjN
+ oD/g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoWLxqWtP9iV9BX5olwFC5Qwh2aH9o4QBQzsU7whfohFpoe6Br4aUmcG48dRuHmKQ6RFQW7jf4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyvjOgOMotxLAXzHa9s+U3Pz8UybzW3aCjWIY2f+TRpNYQcInIQ
- tuPOLeNAJjPjzNr0fuwDy3E/oKJTSiAJ/J/5SEA8G0Rha1M3z2kIJf9A
-X-Gm-Gg: AR+sD10/bfr0OMV4/idk43CUNxATYs2eqQkCkKgtK7//pzgCBNXYO8YVltfXT87tnfk
- xjzISVdp0vGl0j6LpmkrMZzdX5gMEapfKI23Wr8G2+MGH+PfhF9RQ1TV6wwFcmLUYI1b58hK8id
- ReW4wJ8rX9CTkuGkUpfjU/AfC5cCgyTebITuohPjgga5EH/KbKc114Fr4OjX5Nc6G2olEaXwRsw
- 9WagCLM9wW/NQndr2M1zP3eG0sEoC3q3SObwM9rOUovXtS0K//h5TT8XgRcYJtJ0M4iTzsqgkRf
- DV7rje/mu9Z88PVovZHKa4BA4rnG1klWU0XECq98/9C7Wc/tz6EWeb9Yak+NcFR9ZXCUzOXyk/u
- E4q519sLCxUDQfBEhwQMfRYdSDcjlVFaNmw+DgU8iuQRnrDP3xrB8TSCWwWwvziimiMn4TDeUFG
- tYfSZn0cHqP0Yonp2rPwfYpNdet3IJex7YIUnPZjN6j+/F9KLLLJ18EZDn1rH2zpJDvMo4XMiW2
- ii4Bct35WTiaOddchg1H0ii/RwqToj8lpus7LU1W7HUI29158CaZUMCJfLDSbWT+nz33eNVBK1F
- t+ksSUZZoXKCKWkvjQTOrb33i/nKI73Np26W1gzNs7sj8zgsvZM0MQRveYIGHtPOLRBj+FRJU27
- Ss2EDaFhDERKgDdWb
-X-Received: by 2002:a05:6820:16aa:b0:6ac:a45e:ff75 with SMTP id
- 006d021491bc7-6b0d5fcaca4mr780615eaf.4.1786651159221; 
- Thu, 13 Aug 2026 12:59:19 -0700 (PDT)
+ AHgh+RpmzKAeRULcZp/0ZOwL7pCTNAeFmPlAy7GteaK8W7rCnOFUmqr1lF8wv/H+/umjKdj9eJpinWE=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yz3vIkmjJmQPjN4vNRhZ2dUoRKJtZlx2Tmt/mS4xXIuSiheDTjN
+ YZqmouyT5u9ohTADmPfPprxQ18255K4WSiKcfSY4Oq3vO7Py/NSUgCzr
+X-Gm-Gg: AR+sD11t4MZv0kl5B91UhhD7VgELBP0t95uExkAxdvTyMHISpLfyDKHC+kjnPprXRSI
+ Z7nGJdUmmnx27MOA25Cu3pehr4xZT3PlVf46e/YMnR+b+QNXnQgAnvS/P+XdUHSrqmWuWnvEb8a
+ 6SP1vkEo1Q1jermmuFt2X54Ygou+DMZQl6a07Rq1XcNRyde9SnPKjYMtGo1JR7NPVDjbDkGFT2y
+ oR8keVb7wzg4mKx7Tsba/Yg5wBv/bnbhrY7dHoK4qChRREs45CIGe7+TL2dHLXBmMsPVgop/Crv
+ U7VgpXOzSAU/PAljwEQzHkrApbUbIIZ+wcywxbXIwDEGMUKF4xi6wyHB/bH6mkRdJ3ttv3L9OzW
+ uONeWTxAbhlU2NerjxfRxHcLArg564rx0fEBs0VVev/vEoMae4Wie90KmB2wEVCpC73uOnIbHo4
+ Z4JgPiZiqhn0hIA1a7s+cBEa5wFeafW61KgWo5JDtctx176Zk8o9NCiyJdWHL3P+c70PSnxbAaE
+ +xX9CmMxyXDa6XY5sVnMkrzcn6MejP/t4flokcYWfSbQT6yb43zBkeUhxeajszUmwESB3P8b02+
+ L1XJHzYC1dSSJ6HRmyDUNlpxG+PYtik/89AcTvYcqw3oHhxyis/EPlBcimR3hs3gutGQ26F38/F
+ 0cR+w4B4V1neEOFOgVMMmQS8FLF4=
+X-Received: by 2002:a05:6820:611:b0:69d:a4f0:4191 with SMTP id
+ 006d021491bc7-6b0d6125e18mr811478eaf.12.1786651163049; 
+ Thu, 13 Aug 2026 12:59:23 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b0c42b7c34sm3345507eaf.6.2026.08.13.12.59.17
+ 006d021491bc7-6b0c42b7c34sm3345507eaf.6.2026.08.13.12.59.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 12:59:18 -0700 (PDT)
+ Thu, 13 Aug 2026 12:59:22 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 13 Aug 2026 13:58:58 -0600
-Subject: [PATCH v7 05/15] lib: rsa: internalize PKCS#1 DigestInfo prefixes
+Date: Thu, 13 Aug 2026 13:59:00 -0600
+Subject: [PATCH v7 07/15] crypto: aes: fix software key-size handling
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260813-submit-ce-series-v2-v7-5-593fcd8479fd@gmail.com>
+Message-Id: <20260813-submit-ce-series-v2-v7-7-593fcd8479fd@gmail.com>
 References: <20260813-submit-ce-series-v2-v7-0-593fcd8479fd@gmail.com>
 In-Reply-To: <20260813-submit-ce-series-v2-v7-0-593fcd8479fd@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -172,414 +172,352 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The checksum algorithm table is shared by RSA and ECDSA, but its DER
-prefix fields are used only by RSA PKCS#1 v1.5 padding verification.
-Keeping those prefixes in the software hash implementations also ties
-signature metadata to a particular hash backend and duplicates it between
-the legacy and MbedTLS shims.
+The AES uclass API expresses key sizes in bits, while the common software
+AES primitives take key lengths in bytes. The software provider passes the
+uclass value through unchanged, so AES-192 and AES-256 select the AES-128
+round count and key schedule shape. Key expansion also copies the bit count
+as a byte count for every key size.
 
-Keep the SHA-1, SHA-256, SHA-384 and SHA-512 DigestInfo prefixes in the RSA
-verifier instead. Select the prefix by checksum name when checking PKCS#1
-v1.5 padding, include every algorithm in host tools and only configured
-algorithms in target builds, and reject padding which is too short for the
-required eight-byte padding string.
+Validate the uclass key size, convert it to bytes once and retain that byte
+length for the software operations. Correct the primitive API documentation
+and add NIST ECB and CBC vectors for AES-128, AES-192 and AES-256.
 
-Remove the DER fields from the generic checksum descriptor and remove the
-now-unneeded constants from the hash implementations. ECDSA-only and
-hardware-hash-only builds then carry no RSA-specific DigestInfo data.
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-Changes v6 -> v7:
+Changes v5 -> v6:
+  - Drop stale AES-128 wording from the generic primitive docs
+    (suggested by Simon Glass)
+  - Return -EINVAL when no software key has been selected
+    (suggested by Simon Glass)
+
+Changes v3 -> v4:
   - New patch
 ---
- boot/image-sig.c        |  8 ------
- include/image.h         |  2 --
- include/u-boot/sha1.h   |  3 ---
- include/u-boot/sha256.h |  3 ---
- include/u-boot/sha512.h |  6 -----
- lib/mbedtls/sha1.c      |  5 ----
- lib/mbedtls/sha256.c    |  6 -----
- lib/mbedtls/sha512.c    | 12 ---------
- lib/rsa/rsa-verify.c    | 67 ++++++++++++++++++++++++++++++++++++++++++++++---
- lib/sha1.c              |  5 ----
- lib/sha256.c            |  6 -----
- lib/sha512.c            | 12 ---------
- tools/image-sig-host.c  |  8 ------
- 13 files changed, 63 insertions(+), 80 deletions(-)
+ drivers/crypto/aes/aes-sw.c |  45 ++++++++++++------
+ include/uboot_aes.h         |  24 +++++-----
+ test/dm/aes.c               | 109 ++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 153 insertions(+), 25 deletions(-)
 
-diff --git a/boot/image-sig.c b/boot/image-sig.c
-index 4eab017bc2d..80a9c4325bd 100644
---- a/boot/image-sig.c
-+++ b/boot/image-sig.c
-@@ -18,8 +18,6 @@ struct checksum_algo checksum_algos[] = {
- 	{
- 		.name = "sha1",
- 		.checksum_len = SHA1_SUM_LEN,
--		.der_len = SHA1_DER_LEN,
--		.der_prefix = sha1_der_prefix,
- 		.calculate = hash_calculate,
- 	},
- #endif
-@@ -27,8 +25,6 @@ struct checksum_algo checksum_algos[] = {
- 	{
- 		.name = "sha256",
- 		.checksum_len = SHA256_SUM_LEN,
--		.der_len = SHA256_DER_LEN,
--		.der_prefix = sha256_der_prefix,
- 		.calculate = hash_calculate,
- 	},
- #endif
-@@ -36,8 +32,6 @@ struct checksum_algo checksum_algos[] = {
- 	{
- 		.name = "sha384",
- 		.checksum_len = SHA384_SUM_LEN,
--		.der_len = SHA384_DER_LEN,
--		.der_prefix = sha384_der_prefix,
- 		.calculate = hash_calculate,
- 	},
- #endif
-@@ -45,8 +39,6 @@ struct checksum_algo checksum_algos[] = {
- 	{
- 		.name = "sha512",
- 		.checksum_len = SHA512_SUM_LEN,
--		.der_len = SHA512_DER_LEN,
--		.der_prefix = sha512_der_prefix,
- 		.calculate = hash_calculate,
- 	},
- #endif
-diff --git a/include/image.h b/include/image.h
-index 6edcb1995bf..b7086528e47 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1660,8 +1660,6 @@ struct image_region {
- struct checksum_algo {
- 	const char *name;
- 	const int checksum_len;
--	const int der_len;
--	const uint8_t *der_prefix;
- #if IMAGE_ENABLE_SIGN
- 	const EVP_MD *(*calculate_sign)(void);
- #endif
-diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
-index c2d62e9cf0f..7a167130dae 100644
---- a/include/u-boot/sha1.h
-+++ b/include/u-boot/sha1.h
-@@ -28,7 +28,6 @@ extern "C" {
+diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
+index a65200fb79b..4ec9484c608 100644
+--- a/drivers/crypto/aes/aes-sw.c
++++ b/drivers/crypto/aes/aes-sw.c
+@@ -12,15 +12,25 @@ struct sw_aes_priv {
+ 	u8 key_slots[SW_KEY_SLOTS][AES256_KEY_LENGTH];
+ 	u8 key_schedule[AES256_EXPAND_KEY_LENGTH];
+ 	u8 selected_slot;
+-	u32 selected_key_size;
++	u8 selected_key_len;
+ 	bool key_expanded;
+ };
  
- #define SHA1_SUM_POS	-0x20
- #define SHA1_SUM_LEN	20
--#define SHA1_DER_LEN	15
- 
- #define SHA1_DEF_CHUNK_SZ 0x10000
- 
-@@ -36,8 +35,6 @@ extern "C" {
- #define K_OPAD_VAL 0x5C
- #define K_PAD_LEN 64
- 
--extern const uint8_t sha1_der_prefix[];
--
- #if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
- typedef mbedtls_sha1_context sha1_context;
- #else
-diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-index 2d86508332e..4137b0c5851 100644
---- a/include/u-boot/sha256.h
-+++ b/include/u-boot/sha256.h
-@@ -13,9 +13,6 @@
- 
- #define SHA224_SUM_LEN	28
- #define SHA256_SUM_LEN	32
--#define SHA256_DER_LEN	19
--
--extern const uint8_t sha256_der_prefix[];
- 
- /* Reset watchdog each time we process this many bytes */
- #define CHUNKSZ_SHA256	(64 * 1024)
-diff --git a/include/u-boot/sha512.h b/include/u-boot/sha512.h
-index 92660d93357..d186238d856 100644
---- a/include/u-boot/sha512.h
-+++ b/include/u-boot/sha512.h
-@@ -9,9 +9,7 @@
- #endif
- 
- #define SHA384_SUM_LEN          48
--#define SHA384_DER_LEN          19
- #define SHA512_SUM_LEN          64
--#define SHA512_DER_LEN          19
- #define SHA512_BLOCK_SIZE       128
- 
- #define CHUNKSZ_SHA384	(16 * 1024)
-@@ -28,8 +26,6 @@ typedef struct {
- } sha512_context;
- #endif
- 
--extern const uint8_t sha512_der_prefix[];
--
- void sha512_starts(sha512_context * ctx);
- void sha512_update(sha512_context *ctx, const uint8_t *input, uint32_t length);
- void sha512_finish(sha512_context * ctx, uint8_t digest[SHA512_SUM_LEN]);
-@@ -37,8 +33,6 @@ void sha512_finish(sha512_context * ctx, uint8_t digest[SHA512_SUM_LEN]);
- void sha512_csum_wd(const unsigned char *input, unsigned int ilen,
- 		unsigned char *output, unsigned int chunk_sz);
- 
--extern const uint8_t sha384_der_prefix[];
--
- void sha384_starts(sha512_context * ctx);
- void sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length);
- void sha384_finish(sha512_context * ctx, uint8_t digest[SHA384_SUM_LEN]);
-diff --git a/lib/mbedtls/sha1.c b/lib/mbedtls/sha1.c
-index 2aee5037795..3dbec314e11 100644
---- a/lib/mbedtls/sha1.c
-+++ b/lib/mbedtls/sha1.c
-@@ -11,11 +11,6 @@
- #include <string.h>
- #include <u-boot/sha1.h>
- 
--const u8 sha1_der_prefix[SHA1_DER_LEN] = {
--	0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2b, 0x0e,
--	0x03, 0x02, 0x1a, 0x05, 0x00, 0x04, 0x14
--};
--
- void sha1_starts(sha1_context *ctx)
- {
- 	mbedtls_sha1_init(ctx);
-diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
-index 59edcb517df..d4b97a1c16d 100644
---- a/lib/mbedtls/sha256.c
-+++ b/lib/mbedtls/sha256.c
-@@ -16,12 +16,6 @@
- #include <mbedtls/hkdf.h>
- #endif
- 
--const u8 sha256_der_prefix[SHA256_DER_LEN] = {
--	0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
--	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
--	0x00, 0x04, 0x20
--};
--
- void sha256_starts(sha256_context *ctx)
- {
- 	mbedtls_sha256_init(ctx);
-diff --git a/lib/mbedtls/sha512.c b/lib/mbedtls/sha512.c
-index 5615248cb91..308edcbd635 100644
---- a/lib/mbedtls/sha512.c
-+++ b/lib/mbedtls/sha512.c
-@@ -11,18 +11,6 @@
- #include <compiler.h>
- #include <u-boot/sha512.h>
- 
--const u8 sha384_der_prefix[SHA384_DER_LEN] = {
--	0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
--	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
--	0x00, 0x04, 0x30
--};
--
--const u8 sha512_der_prefix[SHA512_DER_LEN] = {
--	0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
--	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05,
--	0x00, 0x04, 0x40
--};
--
- void sha384_starts(sha512_context *ctx)
- {
- 	mbedtls_sha512_init(ctx);
-diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
-index 3169c3a6dd1..5b70c971c31 100644
---- a/lib/rsa/rsa-verify.c
-+++ b/lib/rsa/rsa-verify.c
-@@ -25,6 +25,56 @@
- /* Default public exponent for backward compatibility */
- #define RSA_DEFAULT_PUBEXP	65537
- 
-+static const unsigned char rsa_sha1_der_prefix[] = {
-+	0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2b, 0x0e,
-+	0x03, 0x02, 0x1a, 0x05, 0x00, 0x04, 0x14
-+};
-+
-+static const unsigned char rsa_sha256_der_prefix[] = {
-+	0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
-+	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
-+	0x00, 0x04, 0x20
-+};
-+
-+static const unsigned char rsa_sha384_der_prefix[] = {
-+	0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
-+	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
-+	0x00, 0x04, 0x30
-+};
-+
-+static const unsigned char rsa_sha512_der_prefix[] = {
-+	0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
-+	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05,
-+	0x00, 0x04, 0x40
-+};
-+
-+static int rsa_get_digest_info(const char *name,
-+			       const unsigned char **der_prefix)
++static int sw_aes_key_len(u32 key_size)
 +{
-+	if ((tools_build() || CONFIG_IS_ENABLED(SHA1)) &&
-+	    !strcmp(name, "sha1")) {
-+		*der_prefix = rsa_sha1_der_prefix;
-+		return sizeof(rsa_sha1_der_prefix);
-+	}
-+	if ((tools_build() || CONFIG_IS_ENABLED(SHA256)) &&
-+	    !strcmp(name, "sha256")) {
-+		*der_prefix = rsa_sha256_der_prefix;
-+		return sizeof(rsa_sha256_der_prefix);
-+	}
-+	if ((tools_build() || CONFIG_IS_ENABLED(SHA384)) &&
-+	    !strcmp(name, "sha384")) {
-+		*der_prefix = rsa_sha384_der_prefix;
-+		return sizeof(rsa_sha384_der_prefix);
-+	}
-+	if ((tools_build() || CONFIG_IS_ENABLED(SHA512)) &&
-+	    !strcmp(name, "sha512")) {
-+		*der_prefix = rsa_sha512_der_prefix;
-+		return sizeof(rsa_sha512_der_prefix);
-+	}
++	if (key_size == AES128_KEY_LENGTH * 8 ||
++	    key_size == AES192_KEY_LENGTH * 8 ||
++	    key_size == AES256_KEY_LENGTH * 8)
++		return key_size / 8;
 +
 +	return -EINVAL;
 +}
 +
- /**
-  * rsa_verify_padding() - Verify RSA message padding is valid
-  *
-@@ -33,28 +83,37 @@
-  *
-  * @msg:	Padded message
-  * @pad_len:	Number of expected padding bytes
-- * @algo:	Checksum algo structure having information on DER encoding etc.
-+ * @algo:	Checksum algorithm used to select the DigestInfo prefix
-  * Return: 0 on success, != 0 on failure
-  */
- static int rsa_verify_padding(const uint8_t *msg, const int pad_len,
--			      struct checksum_algo *algo)
-+			      const struct checksum_algo *algo)
+ static int prepare_aes(struct sw_aes_priv *priv)
  {
-+	const unsigned char *der_prefix;
-+	int der_len;
- 	int ff_len;
- 	int ret;
- 
-+	der_len = rsa_get_digest_info(algo->name, &der_prefix);
-+	if (der_len < 0)
-+		return der_len;
-+
-+	ff_len = pad_len - der_len - 3;
-+	if (ff_len < 8)
+-	if (!priv->selected_key_size) {
++	if (!priv->selected_key_len) {
+ 		log_debug("%s: AES key size not set, setup a slot first\n", __func__);
+-		return 1;
 +		return -EINVAL;
-+
- 	/* first byte must be 0x00 */
- 	ret = *msg++;
- 	/* second byte must be 0x01 */
- 	ret |= *msg++ ^ 0x01;
- 	/* next ff_len bytes must be 0xff */
--	ff_len = pad_len - algo->der_len - 3;
- 	ret |= *msg ^ 0xff;
- 	ret |= memcmp(msg, msg+1, ff_len-1);
- 	msg += ff_len;
- 	/* next byte must be 0x00 */
- 	ret |= *msg++;
- 	/* next der_len bytes must match der_prefix */
--	ret |= memcmp(msg, algo->der_prefix, algo->der_len);
-+	ret |= memcmp(msg, der_prefix, der_len);
+ 	}
  
- 	return ret;
+ 	if (priv->key_expanded)
+@@ -28,7 +38,8 @@ static int prepare_aes(struct sw_aes_priv *priv)
+ 
+ 	priv->key_expanded = 1;
+ 
+-	aes_expand_key(priv->key_slots[priv->selected_slot], priv->selected_key_size,
++	aes_expand_key(priv->key_slots[priv->selected_slot],
++		       priv->selected_key_len,
+ 		       priv->key_schedule);
+ 
+ 	return 0;
+@@ -42,12 +53,16 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
+ static int sw_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	struct sw_aes_priv *priv = dev_get_priv(dev);
++	int key_len;
+ 
+ 	if (slot >= SW_KEY_SLOTS)
+-		return 1;
++		return -EINVAL;
++	key_len = sw_aes_key_len(key_size);
++	if (key_len < 0)
++		return key_len;
+ 
+ 	priv->selected_slot = slot;
+-	priv->selected_key_size = key_size;
++	priv->selected_key_len = key_len;
+ 	priv->key_expanded = 0;
+ 
+ 	return 0;
+@@ -57,14 +72,18 @@ static int sw_aes_ops_set_key_for_key_slot(struct udevice *dev, u32 key_size,
+ 					   u8 *key, u8 slot)
+ {
+ 	struct sw_aes_priv *priv = dev_get_priv(dev);
++	int key_len;
+ 
+ 	if (slot >= SW_KEY_SLOTS)
+-		return 1;
++		return -EINVAL;
++	key_len = sw_aes_key_len(key_size);
++	if (key_len < 0)
++		return key_len;
+ 
+-	memcpy(priv->key_slots[slot], key, key_size / 8);
++	memcpy(priv->key_slots[slot], key, key_len);
+ 
+ 	if (priv->selected_slot == slot)
+-		priv->selected_key_size = key_size;
++		priv->selected_key_len = key_len;
+ 
+ 	priv->key_expanded = 0;
+ 
+@@ -82,7 +101,7 @@ static int sw_aes_ops_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst,
+ 		return ret;
+ 
+ 	while (num_aes_blocks > 0) {
+-		aes_encrypt(priv->selected_key_size, src, priv->key_schedule, dst);
++		aes_encrypt(priv->selected_key_len, src, priv->key_schedule, dst);
+ 		num_aes_blocks -= 1;
+ 		src += AES_BLOCK_LENGTH;
+ 		dst += AES_BLOCK_LENGTH;
+@@ -102,7 +121,7 @@ static int sw_aes_ops_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst,
+ 		return ret;
+ 
+ 	while (num_aes_blocks > 0) {
+-		aes_decrypt(priv->selected_key_size, src, priv->key_schedule, dst);
++		aes_decrypt(priv->selected_key_len, src, priv->key_schedule, dst);
+ 		num_aes_blocks -= 1;
+ 		src += AES_BLOCK_LENGTH;
+ 		dst += AES_BLOCK_LENGTH;
+@@ -121,7 +140,7 @@ static int sw_aes_ops_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src,
+ 	if (ret)
+ 		return ret;
+ 
+-	aes_cbc_encrypt_blocks(priv->selected_key_size, priv->key_schedule, iv,
++	aes_cbc_encrypt_blocks(priv->selected_key_len, priv->key_schedule, iv,
+ 			       src, dst, num_aes_blocks);
+ 
+ 	return 0;
+@@ -137,7 +156,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
+ 	if (ret)
+ 		return ret;
+ 
+-	aes_cbc_decrypt_blocks(priv->selected_key_size, priv->key_schedule,
++	aes_cbc_decrypt_blocks(priv->selected_key_len, priv->key_schedule,
+ 			       iv, src, dst, num_aes_blocks);
+ 
+ 	return 0;
+diff --git a/include/uboot_aes.h b/include/uboot_aes.h
+index 592b7dbee43..e463d5b0c42 100644
+--- a/include/uboot_aes.h
++++ b/include/uboot_aes.h
+@@ -47,30 +47,30 @@ enum {
+  * operations.
+  *
+  * @key		Key
+- * @key_size	Size of the key (in bits)
++ * @key_len	Size of the key in bytes
+  * @expkey	Buffer to place expanded key, AES_EXPAND_KEY_LENGTH
+  */
+-void aes_expand_key(u8 *key, u32 key_size, u8 *expkey);
++void aes_expand_key(u8 *key, u32 key_len, u8 *expkey);
+ 
+ /**
+- * aes_encrypt() - Encrypt single block of data with AES 128
++ * aes_encrypt() - Encrypt a single block of data with AES
+  *
+- * @key_size	Size of the aes key (in bits)
++ * @key_len	Size of the AES key in bytes
+  * @in		Input data
+  * @expkey	Expanded key to use for encryption (from aes_expand_key())
+  * @out		Output data
+  */
+-void aes_encrypt(u32 key_size, u8 *in, u8 *expkey, u8 *out);
++void aes_encrypt(u32 key_len, u8 *in, u8 *expkey, u8 *out);
+ 
+ /**
+- * aes_decrypt() - Decrypt single block of data with AES 128
++ * aes_decrypt() - Decrypt a single block of data with AES
+  *
+- * @key_size	Size of the aes key (in bits)
++ * @key_len	Size of the AES key in bytes
+  * @in		Input data
+  * @expkey	Expanded key to use for decryption (from aes_expand_key())
+  * @out		Output data
+  */
+-void aes_decrypt(u32 key_size, u8 *in, u8 *expkey, u8 *out);
++void aes_decrypt(u32 key_len, u8 *in, u8 *expkey, u8 *out);
+ 
+ /**
+  * Apply chain data to the destination using EOR
+@@ -86,27 +86,27 @@ void aes_apply_cbc_chain_data(u8 *cbc_chain_data, u8 *src, u8 *dst);
+ /**
+  * aes_cbc_encrypt_blocks() - Encrypt multiple blocks of data with AES CBC.
+  *
+- * @key_size		Size of the aes key (in bits)
++ * @key_len		Size of the AES key in bytes
+  * @key_exp		Expanded key to use
+  * @iv			Initialization vector
+  * @src			Source data to encrypt
+  * @dst			Destination buffer
+  * @num_aes_blocks	Number of AES blocks to encrypt
+  */
+-void aes_cbc_encrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
++void aes_cbc_encrypt_blocks(u32 key_len, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
+ 			    u32 num_aes_blocks);
+ 
+ /**
+  * Decrypt multiple blocks of data with AES CBC.
+  *
+- * @key_size		Size of the aes key (in bits)
++ * @key_len		Size of the AES key in bytes
+  * @key_exp		Expanded key to use
+  * @iv			Initialization vector
+  * @src			Source data to decrypt
+  * @dst			Destination buffer
+  * @num_aes_blocks	Number of AES blocks to decrypt
+  */
+-void aes_cbc_decrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
++void aes_cbc_decrypt_blocks(u32 key_len, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
+ 			    u32 num_aes_blocks);
+ 
+ /* An AES block filled with zeros */
+diff --git a/test/dm/aes.c b/test/dm/aes.c
+index 702e4db2b35..c58a5e257f5 100644
+--- a/test/dm/aes.c
++++ b/test/dm/aes.c
+@@ -29,6 +29,8 @@ static int dm_test_aes(struct unit_test_state *uts)
+ 	u8 test_output[AES_BLOCK_LENGTH];
+ 
+ 	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
++	ut_asserteq(-EINVAL,
++		    dm_aes_ecb_encrypt(dev, test_input, test_output, 1));
+ 
+ 	/* software AES exposes 2 key slots */
+ 	ut_asserteq(2, dm_aes_get_available_key_slots(dev));
+@@ -55,3 +57,110 @@ static int dm_test_aes(struct unit_test_state *uts)
  }
-diff --git a/lib/sha1.c b/lib/sha1.c
-index be502c6126b..4f35850b384 100644
---- a/lib/sha1.c
-+++ b/lib/sha1.c
-@@ -24,11 +24,6 @@
  
- #include <linux/compiler_attributes.h>
- 
--const uint8_t sha1_der_prefix[SHA1_DER_LEN] = {
--	0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2b, 0x0e,
--	0x03, 0x02, 0x1a, 0x05, 0x00, 0x04, 0x14
--};
--
- /*
-  * 32-bit integer manipulation macros (big endian)
-  */
-diff --git a/lib/sha256.c b/lib/sha256.c
-index c2e77c854b9..b99f8105c8d 100644
---- a/lib/sha256.c
-+++ b/lib/sha256.c
-@@ -13,12 +13,6 @@
- 
- #include <linux/compiler_attributes.h>
- 
--const uint8_t sha256_der_prefix[SHA256_DER_LEN] = {
--	0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
--	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
--	0x00, 0x04, 0x20
--};
--
- /*
-  * 32-bit integer manipulation macros (big endian)
-  */
-diff --git a/lib/sha512.c b/lib/sha512.c
-index 0e75c1a943b..06d9b5564f9 100644
---- a/lib/sha512.c
-+++ b/lib/sha512.c
-@@ -16,18 +16,6 @@
- #include <compiler.h>
- #include <u-boot/sha512.h>
- 
--const uint8_t sha384_der_prefix[SHA384_DER_LEN] = {
--	0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
--	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
--	0x00, 0x04, 0x30
--};
--
--const uint8_t sha512_der_prefix[SHA512_DER_LEN] = {
--	0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
--	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05,
--	0x00, 0x04, 0x40
--};
--
- #define SHA384_H0	0xcbbb9d5dc1059ed8ULL
- #define SHA384_H1	0x629a292a367cd507ULL
- #define SHA384_H2	0x9159015a3070dd17ULL
-diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-index 5285263c616..758f14337ed 100644
---- a/tools/image-sig-host.c
-+++ b/tools/image-sig-host.c
-@@ -16,32 +16,24 @@ struct checksum_algo checksum_algos[] = {
- 	{
- 		.name = "sha1",
- 		.checksum_len = SHA1_SUM_LEN,
--		.der_len = SHA1_DER_LEN,
--		.der_prefix = sha1_der_prefix,
- 		.calculate_sign = EVP_sha1,
- 		.calculate = hash_calculate,
- 	},
- 	{
- 		.name = "sha256",
- 		.checksum_len = SHA256_SUM_LEN,
--		.der_len = SHA256_DER_LEN,
--		.der_prefix = sha256_der_prefix,
- 		.calculate_sign = EVP_sha256,
- 		.calculate = hash_calculate,
- 	},
- 	{
- 		.name = "sha384",
- 		.checksum_len = SHA384_SUM_LEN,
--		.der_len = SHA384_DER_LEN,
--		.der_prefix = sha384_der_prefix,
- 		.calculate_sign = EVP_sha384,
- 		.calculate = hash_calculate,
- 	},
- 	{
- 		.name = "sha512",
- 		.checksum_len = SHA512_SUM_LEN,
--		.der_len = SHA512_DER_LEN,
--		.der_prefix = sha512_der_prefix,
- 		.calculate_sign = EVP_sha512,
- 		.calculate = hash_calculate,
- 	},
+ DM_TEST(dm_test_aes, UTF_SCAN_FDT);
++
++struct aes_test_vector {
++	u32 key_size;
++	u8 key[AES256_KEY_LENGTH];
++	u8 ecb[AES_BLOCK_LENGTH];
++	u8 cbc[AES_BLOCK_LENGTH];
++};
++
++static const u8 aes_test_plaintext[AES_BLOCK_LENGTH] = {
++	0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96,
++	0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a,
++};
++
++static const u8 aes_test_iv[AES_BLOCK_LENGTH] = {
++	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
++	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++};
++
++static const struct aes_test_vector aes_test_vectors[] = {
++	{
++		.key_size = 128,
++		.key = {
++			0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
++			0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c,
++		},
++		.ecb = {
++			0x3a, 0xd7, 0x7b, 0xb4, 0x0d, 0x7a, 0x36, 0x60,
++			0xa8, 0x9e, 0xca, 0xf3, 0x24, 0x66, 0xef, 0x97,
++		},
++		.cbc = {
++			0x76, 0x49, 0xab, 0xac, 0x81, 0x19, 0xb2, 0x46,
++			0xce, 0xe9, 0x8e, 0x9b, 0x12, 0xe9, 0x19, 0x7d,
++		},
++	}, {
++		.key_size = 192,
++		.key = {
++			0x8e, 0x73, 0xb0, 0xf7, 0xda, 0x0e, 0x64, 0x52,
++			0xc8, 0x10, 0xf3, 0x2b, 0x80, 0x90, 0x79, 0xe5,
++			0x62, 0xf8, 0xea, 0xd2, 0x52, 0x2c, 0x6b, 0x7b,
++		},
++		.ecb = {
++			0xbd, 0x33, 0x4f, 0x1d, 0x6e, 0x45, 0xf2, 0x5f,
++			0xf7, 0x12, 0xa2, 0x14, 0x57, 0x1f, 0xa5, 0xcc,
++		},
++		.cbc = {
++			0x4f, 0x02, 0x1d, 0xb2, 0x43, 0xbc, 0x63, 0x3d,
++			0x71, 0x78, 0x18, 0x3a, 0x9f, 0xa0, 0x71, 0xe8,
++		},
++	}, {
++		.key_size = 256,
++		.key = {
++			0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe,
++			0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
++			0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7,
++			0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4,
++		},
++		.ecb = {
++			0xf3, 0xee, 0xd1, 0xbd, 0xb5, 0xd2, 0xa0, 0x3c,
++			0x06, 0x4b, 0x5a, 0x7e, 0x3d, 0xb1, 0x81, 0xf8,
++		},
++		.cbc = {
++			0xf5, 0x8c, 0x4c, 0x04, 0xd6, 0xe5, 0xf1, 0xba,
++			0x77, 0x9e, 0xab, 0xfb, 0x5f, 0x7b, 0xfb, 0xd6,
++		},
++	},
++};
++
++static int dm_test_aes_key_sizes(struct unit_test_state *uts)
++{
++	struct udevice *dev;
++	u8 key[AES256_KEY_LENGTH];
++	u8 input[AES_BLOCK_LENGTH];
++	u8 iv[AES_BLOCK_LENGTH];
++	u8 buf[AES_BLOCK_LENGTH];
++	int i, ret;
++
++	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
++
++	for (i = 0; i < ARRAY_SIZE(aes_test_vectors); i++) {
++		const struct aes_test_vector *vector = &aes_test_vectors[i];
++
++		memcpy(key, vector->key, vector->key_size / 8);
++		memcpy(input, aes_test_plaintext, sizeof(input));
++		memcpy(iv, aes_test_iv, sizeof(iv));
++		ut_assertok(dm_aes_select_key_slot(dev, vector->key_size, 0));
++		ret = dm_aes_set_key_for_key_slot(dev, vector->key_size, key, 0);
++		ut_assertok(ret);
++
++		ut_assertok(dm_aes_ecb_encrypt(dev, input, buf, 1));
++		ut_asserteq_mem(vector->ecb, buf, sizeof(buf));
++		ut_assertok(dm_aes_ecb_decrypt(dev, buf, buf, 1));
++		ut_asserteq_mem(aes_test_plaintext, buf, sizeof(buf));
++
++		ut_assertok(dm_aes_cbc_encrypt(dev, iv, input, buf, 1));
++		ut_asserteq_mem(vector->cbc, buf, sizeof(buf));
++		ut_assertok(dm_aes_cbc_decrypt(dev, iv, buf, buf, 1));
++		ut_asserteq_mem(aes_test_plaintext, buf, sizeof(buf));
++	}
++
++	ut_asserteq(-EINVAL, dm_aes_select_key_slot(dev, 64, 0));
++	ret = dm_aes_set_key_for_key_slot(dev, 64, key, 0);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_aes_key_sizes, UTF_SCAN_FDT);
 
 -- 
 2.53.0
