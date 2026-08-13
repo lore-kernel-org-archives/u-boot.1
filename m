@@ -1,208 +1,187 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A051EC5DF64
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 06:34:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53121C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 06:34:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A877608BD;
-	Thu, 13 Aug 2026 06:34:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1496A40961;
+	Thu, 13 Aug 2026 06:34:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VeHpzDwBtouw; Thu, 13 Aug 2026 06:34:19 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rTqiq2KZjBAB; Thu, 13 Aug 2026 06:34:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 347DE608D6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5E71C40958
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786602859;
-	bh=coln/i7H3Vwcw/EjVY8vwkM6SzhfvckMVrez++TH79M=;
-	h=Date:CC:Subject:From:To:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786602882;
+	bh=sdPE7K5p0Jc7YZjWJptVR0eOATXXIPuGhyOhF+mPwms=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Jqar557qg7DO7SOfrj4yC5S99GOpgVaQtuPMZMNPQvWfHVhI29nMOBLUd029EDsPv
-	 VEf4P6iT8NgxYllSBsX/u/DswHH4TEfgotxaSIcSyx/lNnp6wwBBRroPf8rC5fFxuA
-	 +WBsEyGxbeftu/Q6AhTlf7dPIkH9p9m518T1cyk50cxZDTV73V5EsEAAFekTBGTyfc
-	 P9w/R2ofOQD8NK/4zEX7lpQzynjiPXU+rZgbMocFLL/3xoPovcGnXfjYj6hxcHoYTB
-	 h70n1fYy8ot0DjlQ11RfL0iPNOun0PvZHj7L/K9UFr8Qd9H9tjSkkpqJ4MOG+FRYI7
-	 RZi95CZ3wujIw==
+	b=ulKD5KyCCDbsNOzZqgTPg5BzHDtoF6WDUSdlOqDk37jc9nr1D7owsGh+oVkuM6xrf
+	 cwc+FPhd++bADSfLYTW/2LP2QVcSmup1KY52ib/pFKnpzlFI7nBJSx6zzKTcpa/4G2
+	 LD7mLPAHtMpxLRGX+0e0OFlXIj/nEEBcvjn4vfUND0R7iWj/PwaJ9PXGpTy3LZ96Sw
+	 p69/VTA2CqFEu4tm5pOUXzfpZwPtSblL4DtZI0uQHqpTrExkQpdfCDW3IgiUNJv4TY
+	 vRx7DijlX03iyX586ThXtF8Q2HM4k/BYfFG90VmgBk59DLle788Xa2NInerf0Z/8TQ
+	 pjLrXTW7uFWTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 347DE608D6;
-	Thu, 13 Aug 2026 06:34:19 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 841623A4
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:34:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5E71C40958;
+	Thu, 13 Aug 2026 06:34:42 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 16F59109
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:34:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6A28980C1C
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:34:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id F13BC40126
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:34:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uobmQ9kiOYyZ for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 06:34:17 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
- helo=mx0b-0002e601.pphosted.com; envelope-from=anshuld@ti.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B274E80BE0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B274E80BE0
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
- [148.163.154.28])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B274E80BE0
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:34:16 +0000 (UTC)
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
- by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67D5h8Dt1963308; Thu, 13 Aug 2026 01:33:54 -0500
-Received: from co1pr03cu002.outbound.protection.outlook.com
- (mail-westus2azon11010045.outbound.protection.outlook.com [52.101.46.45])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4g13fx9mac-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 13 Aug 2026 01:33:53 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hFR7LYIVVZpcoaV8ayWGTjv1Km/fUuihlOInYrqHWRHdc3e5ipKj5OCQqba6CfihG+cUY1IXOva1+HM5u5GD73QGmdkDr8XDLphKEiHR5/150JlUaH/O4DyEpEksrxXOaQNjTvUFfowRYeUEodCPqOHXH5tq0w10LmhDgeGNG+KDU6STI1qKhGaigFmy5dgHJykyE8rKZSnRti8wBSRAyVps2WG2RZo805QyAmSY5Lfby4QLm0YicY8Wv7u0QvJhYdcyg/IaRpGctnZONoiG7ZaHexpOatADvcDHhZyDR7MO7/MwJOJ60jxGH7t7Lwx2Y2dsIbiZvTJ343WExRZaHA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=coln/i7H3Vwcw/EjVY8vwkM6SzhfvckMVrez++TH79M=;
- b=Y3/Fct0rt3OHmS9WmEFP+58w6ZK0I/q2bgWJpVCUbKYJUkmTU21ZArbjAnllY1uEl+ohgECW0LW99lnye9t8fQZtI7ePj11P2WxUM6wDGSeDd25bytbmmU3j5CmBJ15wS5qPie1ClexZp0/Am4oc02QkJZ6I/r5PnD/AikG8VtoDQ//7IGWACVp2LBJS0g6VcwD6LaWpyX5QtRBsolXpi1BrbEWDlNwMuiFer2n8LZEnz3cgiG7Oj4KZUxOpSDn7ilcQvLXfUYLrjWCmijzHhLbgagfnnubvaeBJJFpA+v/2jHoNoEN6x4HfW6OmYTCNY1WXmAgexBNu2m52PsRfTg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
- header.from=ti.com; dkim=none (message not signed); arc=none (0)
-Received: from SA0PR11CA0117.namprd11.prod.outlook.com (2603:10b6:806:d1::32)
- by DS4PPFECC4F8C68.namprd10.prod.outlook.com (2603:10b6:f:fc00::d55)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.14; Thu, 13 Aug
- 2026 06:33:43 +0000
-Received: from SA2PEPF00003AE4.namprd02.prod.outlook.com
- (2603:10b6:806:d1:cafe::47) by SA0PR11CA0117.outlook.office365.com
- (2603:10b6:806:d1::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.14 via Frontend Transport; Thu,
- 13 Aug 2026 06:33:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SA2PEPF00003AE4.mail.protection.outlook.com (10.167.248.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Thu, 13 Aug 2026 06:33:42 +0000
-Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 13 Aug
- 2026 01:33:42 -0500
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 13 Aug
- 2026 01:33:41 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 13 Aug 2026 01:33:41 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67D6XeiN3530887;
- Thu, 13 Aug 2026 01:33:41 -0500
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IlKk6LzwBemG for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 06:34:40 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.18;
+ helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A171D40121
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A171D40121
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A171D40121
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:34:39 +0000 (UTC)
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MDhlV-1wkjyJ2J7v-00FX7c; Thu, 13
+ Aug 2026 08:34:32 +0200
+Date: Thu, 13 Aug 2026 08:34:23 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.u-boot-project.org
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ =?ISO-8859-1?Q?Vincent_Stehl=E9?= <vincent.stehle@arm.com>,
+ Aristo Chen <aristo.chen@canonical.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_4/4=5D_efidebug=3A_capsule=3A_add_a_?=
+ =?US-ASCII?Q?command_to_list_updatable_firmware_images?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <20260813-efi-esrt-last-attempt-v1-4-3be172f47d9d@oss.qualcomm.com>
+References: <20260813-efi-esrt-last-attempt-v1-0-3be172f47d9d@oss.qualcomm.com>
+ <20260813-efi-esrt-last-attempt-v1-4-3be172f47d9d@oss.qualcomm.com>
+Message-ID: <9A49653C-9CF5-40D3-96E0-DC8273640213@gmx.de>
 MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 13 Aug 2026 12:03:40 +0530
-Message-ID: <DKNLUCYU412B.2KQXKMTTC3FP5@ti.com>
-CC: <u-boot@lists.denx.de>, <marex@denx.de>, <mkorpershoek@kernel.org>,
- <ilias.apalodimas@linaro.org>, <trini@konsulko.com>,
- <michal.simek@amd.com>, <alchark@flipper.net>,
- <jerome.forissier@arm.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Chintan Vankar <c-vankar@ti.com>, <u-boot@lists.u-boot-project.org>
-Subject: Re: [PATCH v5 00/75] usb: dwc3: sync code with Linux v6.16
-From: Anshul Dalal <anshuld@ti.com>
-To: Anders Roxell <anders.roxell@linaro.org>, Anshul Dalal <anshuld@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260716134305.614278-1-anders.roxell@linaro.org>
- <178602223375.3156999.13542339251028864355.b4-review@b4>
- <anmKNYbNQ73Kv3iX@monster> <DKL6AAZWIDW6.QM05DJXDFOTN@ti.com>
- <anzDvgtMh_7Fl9Ig@monster>
-In-Reply-To: <anzDvgtMh_7Fl9Ig@monster>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE4:EE_|DS4PPFECC4F8C68:EE_
-X-MS-Office365-Filtering-Correlation-Id: f87c5a33-5127-470c-f9e8-08def904d1de
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|23010399003|82310400026|7416014|376014|56012099006|5023799004|10067099003|6133799003|18002099003|22082099003|3023799007|4143699003|13003099007;
-X-Microsoft-Antispam-Message-Info: Nh2WksPoukPAJ0ZvESmumf0iN4XiToUjXeoeZdxzr3QHZIOXhgoLmq+BMKahQBelKc9vxIsj12PW4sNWZO4QilV0HGcNrVXP0XypEN++M1mC1tmONhkOtBqjS4SkrRIpiCoYrQNKD6rTaO016c+94EDNpF+wu/J1EbleLAy9UTGApRxtstMimkDYFx4R7x7O/aZmComJGOvxzSDgFAWth3KYFBjdAwLpGl4fuTOk/WVtaOp931bpzI9mf4g5aS8+VNV2TzpyE/7LujfWlQu8rYjt3gomYgoyJsZ+/0B+kCbL4kb25IxqUyc0Cr/iGDWp9ttnisY/1VOUoWzqIoWxfOag9Qq+8GbDI48xHId4LLUdmSAZyao6AXl6tby/JIbCNVSCFdKKa/k34XSZXkYJVSCjTYHKrNcPBIiYtXYgtWRRSxKXfCndkzDa2UKtQpBczXiXRHLvIy4CuMgByQabfuDVoorG2QklX9+/m96AwB1X3ITK4XzjtP1kS50eJMr8jdCjK3vSo/feuO67F0wuZJyMSBowOzVLWib8kwnSKL8gkeubyIp/svmvSPRTEOMWuHRX4M8XFwHAf2X7v5ii0UpFwUP1oYZXJPpTp3F4uDPLTF1wCTEEfA6SquIO0SeZ0apVHAm1YSbavepS1yap2H23knmcJ9DJk3ESJHnpNql3+ZZMWDyaLJ3gWVR+bgbC2H8c4qZExkq9rDQKDRJFnQ==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(23010399003)(82310400026)(7416014)(376014)(56012099006)(5023799004)(10067099003)(6133799003)(18002099003)(22082099003)(3023799007)(4143699003)(13003099007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: RXHApcPizrlAotTK6xjnomTjw80J55x1gWJ5OKgXnqnGJgpsx+hYfqxD71eVcy6g5s+M7kl4BeB1DccJ1JTmbl48pNYAS8+VPO72q6rH6N2DfvyTSJrLRM0bQLrZeUmQbphnG5ofC85FWW0GCxIhuVcLz7YaTHM02DbLxd3wzdYAcqZZpmb7yrUeLMB8aZEFvdtKwPss3jikcYnaGLqnc20TpK1m0UVRcul2lJYer6bsvZR1GB403B5N2CgxX+UHfVf1868ppYW5Nsxll9cJJkCaRlU3UoF755qUW5vfjuk8s04ehVTMkjEU6518xUBRJ1eaaFarhcGQYRmH2BaVviAHGJZD07FWobF95vXXRKJz7H+dPzrfjj0cdAg2PN/Uno7nIu5+OHhOe/cmFvSxQMeKTQDwzsW2ZSUKSN5TARnBDeOe35KJ0cJ6GA6P80aE
-X-Exchange-RoutingPolicyChecked: dZcxv7bIzyet1XHHUqkTmOP9kEpSbn30BPUXrAc9B9seOUsF6FfTfjUrhflSaiB1Yvv3Ua54dFM6Dl926/M+Lf8vYT+HEBspTZ5qObOFH2PoDiiLFY+nePaL00yMw7B//iF+04nDJxqIKtLiNdGGn/DlTs7sSvR7Ld6xvcB7x7sDVW2xa4EZiok/jd8yYPiePdoK4rR5hfgi1pjzXZw9um2e7KYQWUcUXuI/UuQMUCsqoLgIWt0WXbqdnluOCB8tLeBAQtuVDpWCRPJ45lDzDM4jJ+qaQEua0CDA1WXB4abpawPCy3qx7gB/jj7FIPtOYa7OisUnfRarbVH9tQntlA==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2026 06:33:42.8757 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f87c5a33-5127-470c-f9e8-08def904d1de
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE4.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPFECC4F8C68
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA0MyBTYWx0ZWRfX/fluJ1XMnz1c
- g1h7A8GF7RsijriyRtuyH8GrwTDfhq30dY9+up/EKXp2UiBsmjakIIAI20wPtGr/hKgCRz0J5c1
- qd++xzAJfgnOpKfaGt5w31K+KoY7rhM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA0MyBTYWx0ZWRfX2bRSYBWDaume
- QMXc6GtaYOI8EhPTJE8eFevE6uiQ1ncP48dreui35HQEAVqvbObqOTVf5m1rrboq6wKNrzrvjm4
- IMFqNhhwa2XC6Wo6Fqp5+8FtlE4+n3igWcwLOPHTug6bkV01AGOATKWg/ImhQlAKnMbHqqOhNq+
- 3a2lTgQVfTzMRprOF1TvmlLgvGKhoTCtFNzukVTnfZTa67Y5IXTPQims+UEUfn2gOPZFVVIMkuE
- hk7yf3EWKSEGoqe1W+Qq+YKy03dEkHvw1avzOYwPO/6mY9B3BOTyjhYY5MoPEOWCppuVHAsGVUP
- y8EKMqplRIqT2QsD5VqBycc7lHwE1p4lg9v4oTqkmbdHy9mz379fQM0QmwzyY0WLd1WKE0oT9np
- whV6OlHx7Wd+tL8u57vV9oLrHS8RQQIoAhz0awDoE6e4lOid4iarJZbLt//GGUXLgdhqOz9kLmB
- GTeaRpiddM7iHLsekkQ==
-X-Authority-Analysis: v=2.4 cv=Ae6B2XXG c=1 sm=1 tr=0 ts=6a7d6551 cx=c_pps
- a=lEAAG6kgDLZw1ps4cEx4qA==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22 a=NEAV23lmAAAA:8
- a=KKAkSRfTAAAA:8 a=dzigSyDH8EnYDIXRuO4A:9 a=QEXdDO2ut3YA:10
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: EgzUi2q50qPGfsxtMiWtqZ-iJ2myA9XI
-X-Proofpoint-GUID: EgzUi2q50qPGfsxtMiWtqZ-iJ2myA9XI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-13_02,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 impostorscore=0 phishscore=0 spamscore=0
- suspectscore=0 priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130043
+X-Provags-ID: V03:K1:6Btp6g5CiXQ07MhekpiPl0iznJo5AzQHditC40pX9/6Lx1W1igL
+ 12iUREml1Aa/q8SjFfXz3Yrx4aKQT+eofFBi3mJOaon0xsiguP/OC/+ymktckZuJ7FCGJHK
+ RpmT9BjQi9BwNVI8oaJQurx8ICAUE1g4QovKManiKev4emi8eIgAxlge8lM9vAGNoajNKuZ
+ fqVW4ldvthbImn9pY+5MA==
+UI-OutboundReport: notjunk:1;M01:P0:WAxAde/olBY=;sUZ43AhuiXuvu6NRBAIFsSzc/2e
+ ATMAiCYWrS6/Kl3/h9U4PYKJJYPWQLtQBqxGyp1nHbRAJ9OUMxluX9zRVPqc4QtLYu6MYqr0G
+ kYwV7EmaC75S25HeGXKJszjYXcyIlEI94fYcQoV+PzIHP1PscFEKbvv9EH7wffOIfNAyf+1KF
+ t64ItkXUw+lvXHLg3sjrRL1WKWE6cpzr/evMwFQilffWgO9LCBKiF83m4EF4B0Xpne3PakKiG
+ ZrowpRUO935sezwR1qy1aG9vQ0xyNUntgy2EsgRgyLLYE41UYgSgsNTIXpODC5Ol1KJCqZ4DJ
+ aBMFqDVDHZGJh6QB0wR8Rn61hi2Vo4y+J6Rmy2BcNG7TKV3otK9R3/mOtTefUHs0e7Y1kJRZi
+ JwAQ4sMbnyYEfEN74rKlbrUga1sPYZK2SWRhMXfx/x+W0P2etuTaLUxzHy+tYzc9d4uKlHUqG
+ 6+TTiT6zL6AUdoWVVJ0hEKlHIIHXwVDMbK+O0S9Ma/JZM5gUaQ7utlOSTPBDMF2MYBdXuJZLQ
+ vxS8J9VsYAmniffTK/L8BogoAreP96Jp862SvDPHQWtKYOftxwkxmCWFzpB+j7nk6aWwWTlXq
+ zD3nih5KYATZ6joVE80u9tZfozA8eC3K6je+ekCXuL0+4Hg+AzIFyBkulkSaJUd69pyXToVZc
+ JQ3WPG2u1OxKiTZJNxGgZdRg8sk68kReF9VIkMMqEUhlMboN2kbOwsXUOjFqHYJKuolXylupA
+ dIbwdSxU0dXiBtg9wn25Jql0u8mm8lDZS7HBwRhow93aaG8O6TD9C4nL1+AmVdRm5//KXDfqP
+ DlwEnCJ+4trhRdY75+ckx9bC6lzzTRBI0WyZgq8ibZL6iQKdX9AZ8pwu6vvxmSe2UneNyspZs
+ F0EGlCBaoHvLDFzu6sB0LNLz8n1SFKBrqIn60Dsoz8kWEFfmUGjafbAR6uHmnzNtteM52O54P
+ VgrBNSdkYQAUy5C7w1lLjgHYhCCd5WTCX93Rcg15uNp7NO1rKMSgnFuYu85lOql6y7efKcVU2
+ ifje6JLH+IrkeUvAutqGPZcELYpO6RsNQq9EHdrrAZRi3kqjU/Gb3mUcgcq325m0EeTC7wM+I
+ c/FIxzUg3xqiHlgwhZWPyqYmrZG+oDV5NXsoDFxtTkDne/roUdUebgb0VPVrrL9XCqMqrm5tl
+ Mb4/4onMA30yF+DIdR20DxmsgnQZpanAtOINtmeQvr1fNfZuB28EheHDCNgNWFkxMSuj1VL7b
+ VQ2vX9ocvXDjTqDKKRbJknKV94BKC8glrsKzAjclwR7pcJgecEj2hfgvt7zSVLGWYa+TdNAbN
+ ocDUPE2UwOiLYaGMEOJveJciIPu76LTb/M8147cDdwelr65a5VsMgFrLoZ6XQggTv0nykBy1U
+ ygUWpVe9Tm14+AfX3/q5k0hh23+zL5R4FkMbXLmbAEJM7U9+Y5JGe9qqwRyHZwFToJRewVog7
+ TtSD+BnXIiQInKy2C0/OZ+9y4khI6EkBIJONKgSE9uyc4fMwdmJD3wyz4LqPvlHeMy8X2x16v
+ AGyNueHeWUbGSI9H0FHCBtdjZoTSIU2TFEgbzZzuSt71CH3A0hbw/CrI0Qlyob/llcPMFVLU/
+ fqfvjfEyYliBg4uzYDs8WFstd2kr10jvwkNuDtfWI7Kcad8yfdhlD7OxN+rzZLW0Gc62gZ3gk
+ rrgEzqoYqW5HKEUuAeLT1Ofotyd0r0cKAUVB+/8vx5gJvpqFS4jqmpM0Ne8M51UR1wxmDoHuj
+ P0tctNDuKq1ARI4l9EUI6Uvd5xEQKo5BQWlm/hg15eg3RNrzXTzOwa4J4wIJjDvn1DyI1AaPW
+ X/7ogKA/pZr3RpixRWwNXbLI9KY+6ivCN+IZbydrbEHHiR3ojLyAC9Qil7LhU6Q6tE9MM5KDO
+ HpiOj35yTZCiMiitVwpkfarmG9V9Bi8uNO7aARwXyMXPn7S1ma2HRbWJOY7j9RftoAXUJXXdY
+ +ecQIWTMcnsEBR5Vu/dLZOmiEOm+TrigPKtKh+0ddKnIuthFGRW/75hpBWvPIMWjtPW7lTSCD
+ fS3PYU1k4GKWjGnTXL6Gyr5An/uFTQ2u1LziZ3EXVquRk2qF/hl6nf/N99RGWtxpCtgp0b5PC
+ qKU3aYXQtZVgGFX0oPOB20SyAfvZlex6TsZZkHbMyBuV2+PgITaisTSwsoo++oo+IQB2vAIPY
+ JDYNx1u5Zuoa1QrtUfpA3uy8OfAR2M28/lB9Lg4cYe1McF3ChyCz1Reuhp0a/AFDBWtNlxsgF
+ AxBs+k5vW4927iRh407jKmONbt40nDkpalwwgYglMPyGQitHWamhAEf7Ao6PibHDjOijY61Tb
+ lw7uNTw+54g6s7A9o+D+0m3Nh2nIthim9/mjrbn1vnGNQAkjVOm24uqP2sQuJBJspUjQ6Alhf
+ rJItsEwu2nGpGQyRTqjmKvJkLAtbxSIadbTvlEnXQkNH+cyUCQCIUqfctzJU6zDcRWoWZbiy3
+ euBBltg62btYmTVNJGlvAxyH8DpVp4gzcULyj/qChAXjTREm+kBzkOfE8FiC0yzhvoRdj/GZ0
+ IvStYXm7atnpYwaQ7E/Y/XSEXS4OaLhZTQNLum2rQtQwTVFvmeR9XJoPEFAiUYalyEP+9qwyA
+ Tl03IbT8LrF1zezVUeNxVJLlyA7nUWVE20L0W0untywU6K+fq3SH0mJFwDf1we7gPeqp9WPMP
+ AFk6nOsxAJsaRdXY5/Wz8e8PnKJpdoyIgsBgBG8NGYSfzyu/tukYHmvBZIRhR5Eqk69f/KyQX
+ WnvfxhyVc4QbWoRMdwzWjT3ZtOUUBCWdoUpKzuPi6cOZZdFIj37/SfUmfLJcUJvwp/8PjLI3N
+ bqr5L5xTD9ZC3pcRJr7+WeyevUW80IuWevJEZ/6pZzkPlnqfiTjixUh4prxzDBnE+yigYkeUK
+ MjO9/R+rQwubfRjScXh/631xJ4RAaKEkscxryxjzgb3lq54Dhz95yzWOB9XPxWwkJ+UjD2QB8
+ JbzioqWC7tKrClcu4oaOc8tXimN1+xhA7pWlUkFHdvW4YyIyn4vQ2laTpQbNvIFmMUNccxF7i
+ NKLsVXDlLHIBFIwhlY43hEYq0/yjTLDU39Rx1Zt8KigMxALOB5WNunQHpyK6gw9X7qc7dQRJA
+ TYr+6kIU+XO0ham/geiOqUsaJv/CRwAK3Faiw7VBYQLQI9eDC+m4VgoJHG3KDgXoddNLe168m
+ FUhPczApKgcI8d2Y6XywQcKinYPWGH+v0K3ENgjF1tuwWjSaIGJBCHd1M9cBaWy0tJW3sWsis
+ AJo/zREMoisQO3r5nRX4+aIdh5Fl0mTAxLGfp3+aBh3RfswP9+VxJaFcE78u66ICJDQaDG+m5
+ W4aSOYRSJD0epg7jAQkcnf9vleJUTChxRLFDgANf5blruo5359ezd+GrrSIlEuXgyv1KFQK8J
+ VgRzWQr1IyUfTRk2lww6cj6oc93GKALi0Bmi2n+tsLs5A8B0nOPD9ZNyRliHq2XmifvQlJl49
+ XGIfYbn1MWpg/2UsaV0LPGukD0Bx9VzEFAyec09GDLKCiLTozEG7IlUtEVAIA1yIKhh+fCHlx
+ xMzs4heqgLubH1zqLSYqAjZKqi5ZxY+8w5gt8K7qSFdMvPaSb1CGd7CAuHtI7gjMB00W2cW9g
+ qrtK/j4pw+YPnEM0i3HhHUcJ7fy1vk6KsIY75cb4cXwQ4vC7nsA7rC6FsHZG/pVZhS2cmFXGy
+ rehkikPJAigs5OBdBQrpQNfBHwBk4X6BncPXZDnEb57aJphHcR8W/gFm8j0T1tqzbbQBWGlzN
+ K8XYWtkW7Kb+gU+quDRds2B4CJ5gEzRSQICEs1Zu+49WJ4U7iOC5wp3Nu4oGQf/VDfBfRyHPB
+ eK2NtuguH8o54W2+hfY5ANWhHgxgz8wUbhl6pA/l8BiOyZshXnpFKlLzgbecMsbRyqp0nBsLZ
+ cR5d9SCpIPy1sKVP5EAqk5A5z5NA/Fae/MbA5ux7yrX2BCa6QFpwrjLIgC++crQj8wOMSuFml
+ 4mzGdvYpng+baG3/VRsSPAlR6PSA94f+qPkcpRaBfFxWUA4ay8LZIudIvmgLi+6ON4cXTEaHV
+ sEd7IZftkbyQPQocn3FPAE9zoN5G+mNguVS8r4OB9PecUgVSBn7V1EyVVKnhcaaAxpwXsO07K
+ joQ/JmNbc7MXjerB4eAfZNasmbg9X/F7F69vR3Y+jkxVcCbhSmXjWI1VEG79uBXhSavx9YCuY
+ 5J+IaCbbHuQ2LoFqvgsWqH7kDYMeSyOwdAmRdZDFOfzkA7VqJe2Ya+zLgYuTD8qYcw2w18EKG
+ dXg5exqAGP7NRZ+GifSQJs3lhjCND+4Ev73aYRiHbpBaqJb7t9pHvVMEQylKtbY82+J2TY0Y4
+ ossfP9eeRqDYwQEDN0niQT43Zu/VkkHSERL+IhKjQZB9lwNaxeOoLsrg5rxhFQGGMs+t3Ko97
+ 3+acgCVFegu4FJBm/dGGfLbCuE398ogYjHHyra/Q6u/VPmlqfnFoHXQtTvIkZd8SgPhmX84+p
+ 26V56rMpAdJ4k1HDjhjA786xa1Dq7N0IY5Y2mdTpN8QNaSIUH65r55tXKOFHEQ88gLG2rwY3n
+ ht5l4VtuiilSKNARgTgqcaQkfP/u1jzbXoD0+zNTQkMMnSzh+PYiwhuialBFO77N2whS1ZKfg
+ UxbRGyFWCilnbBcYipyIIQ4xX1xmwL9ApfENNpZSFuhPDbbdnpxe4M666wc4MDCYvrRmdQecp
+ pqMuuHm4b3LJnpFfhhoydsL3LJ8hmZ/gBXNY5vjoMMV8nlxFAJ7IiM3KwSP+CKiFSnGPzF+Zk
+ 7t2S9WM0nBBZ0HLJZSC5JB6NY7XXw5j6FwAoN4C+j5p80Pjm2MuZHGO9fRMljLXydRTtcZvVR
+ VLtp+t3PCwePFBpnWXNvoArUwR3QjnXLfGJiAD1fvYF4dLSDcwzZZyl6X+da2OpXKADHg1/TS
+ HYUhBxj+MKINByMJJRKEDCPOiTfPQ9xHBCHaETosprhhfkJaS9gjPYJNPbIeta3ETEUayj9j3
+ 15yv/hF8R8kzTSfwUkJB8fO4KOWc6AA9VMNj5B7R4FHUe+g+DIWYC/VKqmFTedU2EmEko7fvH
+ +tRhEQf9QYCAHeK4XmGX1Jhb6/mSGcIpaXORqaBoY1AND5NynEY+2O/5vge//+l1ttb8an60z
+ gGY2jI86Dpc1HmagxZoqOM6nOUcm3Yl6OXQa7xb5bSDa8fgpkENwhQQ+UGETTK8kg26Rx9ReN
+ 7GUwIURysVSp4KdpsKUv907fHulMi/3WXCyu9fyaSHXX3jItI0/A2wLSCIqyU24enJ/tLlHoI
+ AuttjDv67SXzUP62XWZg9uZ6Azs5GcgE5WJkhtlC6QSpxianimMkv1loW/wxbq9jWpZiUsvqR
+ 6hKGdkpGv9Mc+QANKV6xMwRG78b4cvhzH1kfEXT3CdL/b5hw/eBjP8K8frSzYQtiah9X/f8+4
+ ur+icWlGcCLze6K5ACPuUDpbSSH4BAlKThqBWcVZQfYD2ClwHlc9pDQXre7cPrCVygVjv0qr1
+ YoenXguSQ0GcUvgKW6szm/zlSdX+IDiH6kWnt3NAMov95PMCVsF4xIWFPPxEp3sXgiBsy0vYh
+ fhurj9ls1gb8INwctiFPz6SOZfMLZomCBc/2RN8grUs9I6OzDTCLek57ge2NlBCxQjRNDni94
+ 9mk3PjSrC+kLpMTdfRbDcXCC5O88i9vFGGrgthOqTr0ydUPbPWtnJgoWYGB7MLo2x1dt3+W7B
+ fMnBAkFbRlVyUvZ81CqEcVVMsDZ79SVdSLt2HOkMRYceyYtzcmnZontdaqgWNAbGAFr9QRVMG
+ 1R+nkRcBGl0wf9A9dBO/MeHyZiDpDZ4qVWnJGu2rrDWRh00pPSO3/qQGM/aKntrPLbOxccNJb
+ Zv57Eo7CyZ1o6zWIJdN8LcH/XHDeoDuyEsLachJ174L2sp1WqUQ87Qk24YhHrJqDY+G3YUREA
+ 3gFVH+bN8jYOlk+BtjtVKn36wpBzmUXZ7blra8KHGmtjVp3tbhJllTh9WQ6owkRTILEQVFm5h
+ SYqJi+BkT1VGiDFFnxnYE3u6AcLA4UiNmU3sNeDh8knYPVforPtu88wRjWx9sXu6jLv4LXdn2
+ mlvCGa4OODdmbiUrDPdtsrEn1wepWzS3qORvQbLuyGfq8wSdgV5XWaZpNjSReFn13mcK3sbFd
+ YDBqmG75Ny1zloyyJs4lhM5HGkkMFF3TfgsAw4oP
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=coln/i7H3Vwcw/EjVY8vwkM6SzhfvckMVrez++TH7
- 9M=; b=ZdWOo9Pqw5hYvmnDNTrjsPMe6x9z6rRu6/2iIHbXXv7AU33N+3ByFuAND
- xxq8XQ3WVsG2OidMoMquJr6YlMUQOyWEkFyKn6e4s5zBHkM09aJx6GekhNj2A4Tx
- gsEavxU2gc8vfmis5sYfmwExbelosMFAYE4kODmjhkpc1hfBWFYj7+QqZA4JB5uL
- RZPgVnHyEGIVDU1OLfvmintm8ovffYUFL4wqqQM97RokCRujcdZy6kQjyu4tj8cm
- dqD3PlA1vdNvXpek1T72T864rE78VW7y/aIQtJ4VxwC2CbxGIqzd29DE7N2Q8lZf
- 7UZw4RVxPZKCgE/L6ybdK53n66ZGg==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ti.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=coln/i7H3Vwcw/EjVY8vwkM6SzhfvckMVrez++TH79M=;
- b=gxZP9t/LS9CVvZd5vHTM0qXk4/Oga3Rq01phoSDtRuOAW6+P/apDUR7cmujhp9VW1QFQyOte9YRuYRNZd1GTPot+qmh883PZwdVWw7/HMnvxwTWEbMH7quC+727cqjWEIsRILlPEpjbQxMJlD+jS3WwHgFmqef2WbG+aWgOyJ3Q=
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ d=gmx.de; 
+ s=s31663417; t=1786602872; x=1787207672; i=xypron.glpk@gmx.de;
+ bh=sdPE7K5p0Jc7YZjWJptVR0eOATXXIPuGhyOhF+mPwms=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=LUOMUhGeAJ76t3IRHeC9wocuffwPfkbi6yIxMMPhYDObTew9It4Yd0i5oFi/x1lV
+ LxOL+ilqtcHhTzQpwYSq+22akZNi7uvEx6TG9WHHOCY5NxIihrvY8aYNw8w/ajEjd
+ knZqxZVZLRK0q0vVn7zhrYqmQmR71opFwF74nENQnW7BNP0uCL9j331yRGE1sMO1M
+ GmEr34EiSb0Q9QHrJr0XsMoooz+oJFDDn09wbdKybXsJuJcSNuezDresYsSAjcmSS
+ ElpCYJb05ZJLoZtdIPuJzIogU2xDDUgG5Rt1SyfRr5E2q8k7MY/6uqN+wJFVpaul4
+ lRcTQGRbJVnVWCVc7A==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none)
- header.from=ti.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=ZdWOo9Pq; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=gxZP9t/L
+ header.from=gmx.de
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de
+ header.a=rsa-sha256 header.s=s31663417 header.b=LUOMUhGe
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -217,239 +196,199 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Thu Aug 13, 2026 at 12:34 AM IST, Anders Roxell wrote:
-> On 2026-08-10 15:26, Anshul Dalal wrote:
->> On Mon Aug 10, 2026 at 1:52 PM IST, Anders Roxell wrote:
->> > On 2026-08-06 18:47, Anshul Dalal wrote:
->> >> On Thu, 16 Jul 2026 15:41:30 +0200, Anders Roxell <anders.roxell@lina=
-ro.org> wrote:
->> >> > [...]
+Am 13=2E August 2026 07:50:20 MESZ schrieb Balaji Selvanathan <balaji=2Esel=
+vanathan@oss=2Equalcomm=2Ecom>:
+>There is no easy way to see which firmware images a capsule can actually
+>target on a given board=2E On platforms that build their fw_images[] tabl=
+e
+>at runtime this is worse, since the set of images vary per board=2E
 >
-> [...]
+>Add "efidebug capsule images", which walks the installed Firmware
+>Management Protocol handles and prints the image descriptors each one
+>reports, along with the image index, name and type GUID=2E This is the
+>same information capsule matching looks at, so it doubles as a quick way
+>to check the GUIDs in a capsule line up with what the board expects
+>before attempting an update=2E
 >
->> >
->> > And in dwc3_gadget_uboot_handle_interrupt(), same file:
->> >
->> > -		struct dwc3_event_buffer *evt;
->> > -		dwc3_thread_interrupt(0, dwc);
->> > +		struct dwc3_event_buffer *evt =3D dwc->ev_buf;
->> > +		dwc3_thread_interrupt(0, evt);
->>=20
->> Thanks for the pointers Anders but I encounter a similar failure even
->> with the diff you suggested. I enabled some logging for the SPL by
->> defining the DEBUG macro in the following files (dfu.c spl.c spl_ram.c
->> dwc3-am62.c composite.c g_dnl.c).
->
-> Hi Anshul,
->
-> Good news. I found two more bugs on top of the two I already sent you
-> (the event buffer and allow_connect). With all four the device
-> enumerates.
->
->>=20
->> Failure logs:
->>=20
->> 	U-Boot SPL 2026.07-00860-g5a9b7a715be2 (Aug 10 2026 - 15:06:27 +0530)
->> 	SYSFW ABI: 4.0 (firmware rev 0x000c '12.1.0--v12.01.00 (Clever Cat)')
->> 	Set clock rates for '/a53@0', CPU: 1250MHz at Speed Grade 'V'
->> 	SPL initial stack usage: 17104 bytes
->> 	SPL malloc() before relocation used 0x64d0 bytes (25 KB)
->> 	>>SPL: board_init_r()
->> 	spl_init
->> 	Trying to boot from DFU
->> 	g_dnl_register: g_dnl_driver.name =3D usb_dnl_dfu
->> 	g_dnl_bind: gadget: 0x81c44a98 cdev: 0x81c66bc0
->> 	usb_add_config: adding config #1 'usb_dnload'/81c67cc0
->> 	g_dnl_do_config: configuration: 0x81c67cc0 composite dev: 0x81c66bc0
->> 	adding 'dfu'/81c67d34 to config 'usb_dnload'/81c67cc0
->> 	cfg 1/81c67cc0 speeds: high full
->> 	usb_add_config: interface 0 =3D dfu/81c67d34
->> 	g_dnl_bind: calling usb_gadget_connect for controller 'dwc3-gadget'
->> 	usb_dnl_dfu: ready
->>=20
->> <CTRL-C> from user
->>=20
->> 	unbind function 'dfu'/81c67d34
->> 	g_dnl_unbind: calling usb_gadget_disconnect for controller 'dwc3-gadget=
-'
->> 	Legacy image
->> 	u_boot_pos =3D ffffffff
->> 	Raw boot image support not enabled, proceeding to other boot methods
->> 	Error: -22
->> 	SPL: Unsupported Boot Device!
->> 	SPL: failed to boot from all boot devices
->> 	### ERROR ### Please RESET the board ###
->>=20
->> Succes logs (same debug symbols ontop of main branch):
->>=20
->> 	U-Boot SPL 2026.10-rc1-00209-g0bdd5e5daf95 (Aug 10 2026 - 14:58:28 +053=
-0)
->> 	SYSFW ABI: 4.0 (firmware rev 0x000c '12.1.0--v12.01.00 (Clever Cat)')
->> 	Set clock rates for '/a53@0', CPU: 1250MHz at Speed Grade 'V'
->> 	SPL initial stack usage: 17104 bytes
->> 	SPL malloc() before relocation used 0x64d0 bytes (25 KB)
->> 	>>SPL: board_init_r()
->> 	spl_init
->> 	Trying to boot from DFU
->> 	g_dnl_register: g_dnl_driver.name =3D usb_dnl_dfu
->> 	g_dnl_bind: gadget: 0x81c44aa4 cdev: 0x81c4af40
->> 	usb_add_config: adding config #1 'usb_dnload'/81c4c040
->> 	g_dnl_do_config: configuration: 0x81c4c040 composite dev: 0x81c4af40
->> 	adding 'dfu'/81c4c0b4 to config 'usb_dnload'/81c4c040
->> 	cfg 1/81c4c040 speeds: high full
->> 	usb_add_config: interface 0 =3D dfu/81c4c0b4
->> 	g_dnl_bind: calling usb_gadget_connect for controller 'dwc3-gadget'
->> 	usb_dnl_dfu: ready
->> 	composite_suspend: suspend
->> 	set_config: high speed config #1: usb_dnload
->> 	non-core control reqa1.03 v0000 i0000 l6
->> 	non-core control req21.01 v0000 i0000 l4096
->> ...(repeated)
->> 	#non-core control reqa1.03 v0000 i0000 l6
->> 	non-core control reqa1.03 v0000 i0000 l6
->> 	DOWNLOAD ... OK
->> 	Ctrl+C to exit ...
->>=20
->> I'm not that familiar with the DW3 driver, let me know if you need me to
->> test with any further changes.
->>=20
->> >
->> > evt was used there without being set as well.
->> >
->> > All of this is in v6 that I plan to send out. I have no AM62p and it i=
-s
->> > only compile tested, so please try it on your board so we know if it
->> > solves your issue before I send out v6.
->>=20
->> I was able to reproduce the issue on beagleplay since it uses the same
->> DWC3. You can try it locally if you have that board with you by
->> resetting to DFU mode from U-Boot prompt:
->>=20
->> =3D> mw.w 43000030 53; res
->
-> I could not use the mw.w 43000030 53; res trick on the BeagleBoard-X15
-> that I found. But I can run DFU directly, it is the same DWC3 gadget
-> path you hit.
->
-> How I tested on x15:
->
->   env set dfu_alt_info "${dfu_alt_info_ram}"
->   dfu 0 ram 0
->
-> On the host dfu-util finds it:
->
->   Found DFU: [0451:d022] ... name=3D"kernel"/"fdt"/"ramdisk"
->
-> The two new bugs:
->
-> 3. udc-core never sets dwc->async_callbacks. So the gadget setup() is
->    never called and every GET_DESCRIPTOR returns -EINVAL.
->
-> 4. ep0. The trb and the ep0 buffers are normal cached memory. In u-boot
->    dma_alloc_coherent is not coherent, so nothing keeps them in sync with
->    the controller dma. The resync dropped the manual flush and invalidate=
-,
->    so the controller reads a stale trb and stale buffers.
->
-> The patch below is only 3 and 4. Keep the first two you already have,
-> this goes on top. It is against v5. I built it and tested it on x15,
-> it works.
->
-> Can you test it on BeaglePlay with your reset trick? These fixes will
-> be part of the coming usb_dwc3_sync_v6 branch.
+>Signed-off-by: Balaji Selvanathan <balaji=2Eselvanathan@oss=2Equalcomm=2E=
+com>
+>---
+> cmd/efidebug=2Ec                                     | 102 +++++++++++++=
+++++++++
+> =2E=2E=2E/test_efi_capsule/test_capsule_firmware_raw=2Epy  |  22 +++++
 
-Great news! I applied the diff you suggested and DFU boot seems to be
-working now. I have hosted my working tree here[1] with all 4 bug fixes
-applied.
+The documentation update is missing=2E
 
-Let me know if you would want anything else to be tested before a v6.
+Best regards
 
-[1]: https://github.com/ArchUsr64/u-boot/tree/ti_k3_usb_dwc3_sync_working
+Heinrich
 
-Regards,
-Anshul
-
+> 2 files changed, 124 insertions(+)
 >
-> Cheers,
-> Anders
+>diff --git a/cmd/efidebug=2Ec b/cmd/efidebug=2Ec
+>index e55de04c699=2E=2Ea9e445d03fa 100644
+>--- a/cmd/efidebug=2Ec
+>+++ b/cmd/efidebug=2Ec
+>@@ -294,6 +294,104 @@ static int do_efi_capsule_res(struct cmd_tbl *cmdtp=
+, int flag,
+> 	return CMD_RET_SUCCESS;
+> }
+>=20
+>+/**
+>+ * do_efi_capsule_images() - list firmware images updatable by capsule
+>+ *
+>+ * @cmdtp:	Command table
+>+ * @flag:	Command flag
+>+ * @argc:	Number of arguments
+>+ * @argv:	Argument array
+>+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_FAILURE on failure
+>+ *
+>+ * Implement efidebug "capsule images" sub-command=2E
+>+ * Walk every Firmware Management Protocol instance and print the image
+>+ * descriptors it reports, i=2Ee=2E the firmware images a capsule can ta=
+rget
+>+ * on this board along with their name, index and type GUID=2E
+>+ *
+>+ *     efidebug capsule images
+>+ */
+>+static int do_efi_capsule_images(struct cmd_tbl *cmdtp, int flag,
+>+				 int argc, char * const argv[])
+>+{
+>+	struct efi_firmware_management_protocol *fmp;
+>+	struct efi_firmware_image_descriptor *image_info, *desc;
+>+	efi_uintn_t info_size, descriptor_size, no_handles;
+>+	u32 descriptor_version, package_version;
+>+	u16 *package_version_name;
+>+	u8 descriptor_count;
+>+	efi_handle_t *handles;
+>+	efi_status_t ret;
+>+	int i, j;
+>+
+>+	if (argc !=3D 1)
+>+		return CMD_RET_USAGE;
+>+
+>+	ret =3D EFI_CALL(efi_locate_handle_buffer(BY_PROTOCOL,
+>+						&efi_guid_firmware_management_protocol,
+>+						NULL, &no_handles, &handles));
+>+	if (ret !=3D EFI_SUCCESS || no_handles =3D=3D 0) {
+>+		printf("No firmware images found\n");
+>+		return CMD_RET_SUCCESS;
+>+	}
+>+
+>+	printf("Image Index    Firmware Name         Image Type GUID\n");
+>+	printf("=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D    =3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+\n");
+>+
+>+	for (i =3D 0; i < no_handles; i++) {
+>+		struct efi_handler *handler;
+>+
+>+		ret =3D efi_search_protocol(handles[i],
+>+					  &efi_guid_firmware_management_protocol,
+>+					  &handler);
+>+		if (ret !=3D EFI_SUCCESS)
+>+			continue;
+>+		fmp =3D handler->protocol_interface;
+>+
+>+		info_size =3D 0;
+>+		image_info =3D NULL;
+>+		descriptor_version =3D 0;
+>+		descriptor_count =3D 0;
+>+		descriptor_size =3D 0;
+>+		package_version =3D 0;
+>+		package_version_name =3D NULL;
+>+		ret =3D EFI_CALL(fmp->get_image_info(fmp, &info_size, image_info,
+>+						   &descriptor_version,
+>+						   &descriptor_count,
+>+						   &descriptor_size,
+>+						   &package_version,
+>+						   &package_version_name));
+>+		if (ret !=3D EFI_BUFFER_TOO_SMALL)
+>+			continue;
+>+
+>+		image_info =3D malloc(info_size);
+>+		if (!image_info)
+>+			continue;
+>+
+>+		ret =3D EFI_CALL(fmp->get_image_info(fmp, &info_size, image_info,
+>+						   &descriptor_version,
+>+						   &descriptor_count,
+>+						   &descriptor_size,
+>+						   &package_version,
+>+						   &package_version_name));
+>+		if (ret =3D=3D EFI_SUCCESS &&
+>+		    descriptor_version =3D=3D EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION) {
+>+			for (j =3D 0, desc =3D image_info; j < descriptor_count;
+>+			     j++, desc =3D (void *)desc + descriptor_size)
+>+				printf("%11d    %-21ls %pUl\n",
+>+				       desc->image_index,
+>+				       desc->image_id_name ? desc->image_id_name : u"",
+>+				       &desc->image_type_id);
+>+		}
+>+
+>+		efi_free_pool(package_version_name);
+>+		free(image_info);
+>+	}
+>+
+>+	efi_free_pool(handles);
+>+
+>+	return CMD_RET_SUCCESS;
+>+}
+>+
+> static struct cmd_tbl cmd_efidebug_capsule_sub[] =3D {
+> 	U_BOOT_CMD_MKENT(update, CONFIG_SYS_MAXARGS, 1, do_efi_capsule_update,
+> 			 "", ""),
+>@@ -309,6 +407,8 @@ static struct cmd_tbl cmd_efidebug_capsule_sub[] =3D =
+{
+> #endif
+> 	U_BOOT_CMD_MKENT(result, CONFIG_SYS_MAXARGS, 1, do_efi_capsule_res,
+> 			 "", ""),
+>+	U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_capsule_images,
+>+			 "", ""),
+> };
+>=20
+> /**
+>@@ -1618,6 +1718,8 @@ U_BOOT_LONGHELP(efidebug,
+> 	"  - show capsule information\n"
+> 	"efidebug capsule result [<capsule result var>]\n"
+> 	"  - show a capsule update result\n"
+>+	"efidebug capsule images\n"
+>+	"  - list firmware images updatable by capsule\n"
+> #ifdef CONFIG_EFI_ESRT
+> 	"efidebug capsule esrt\n"
+> 	"  - print the ESRT\n"
+>diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw=2Ep=
+y b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw=2Epy
+>index b8cb483b380=2E=2Ee6246a83ff0 100644
+>--- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw=2Epy
+>+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw=2Epy
+>@@ -238,3 +238,25 @@ class TestEfiCapsuleFirmwareRaw:
+>             check_file_removed(ubman, disk_img, capsule_files)
+>=20
+>             verify_content(ubman, '100000', 'u-boot:Old')
+>+
+>+    def test_efi_capsule_fw6(
+>+            self, u_boot_config, ubman, efi_capsule_data):
+>+        """ Test Case 6
+>+        List the firmware images updatable by capsule with
+>+        'efidebug capsule images' and check the images sandbox exposes
+>+        for raw capsule updates
+>+        """
+>+        ubman=2Erestart_uboot()
+>+
+>+        output =3D ubman=2Erun_command('efidebug capsule images')
+>+
+>+        # ensure that SANDBOX-UBOOT and SANDBOX-UBOOT-ENV are both liste=
+d,
+>+        # along with the image index each one is exposed at=2E
+>+        assert '1' in output and 'SANDBOX-UBOOT' in output
+>+        assert '2' in output and 'SANDBOX-UBOOT-ENV' in output
+>+
+>+        # ensure that SANDBOX_UBOOT_IMAGE_GUID is reported=2E
+>+        assert '985F2937-7C2E-5E9A-8A5E-8E063312964B' in output
+>+
+>+        # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is reported=2E
+>+        assert '9E339473-C2EB-530A-A69B-0CD6BBBED40E' in output
 >
->
-> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-> index 0a4f69cbc28a..2ba05fc3f573 100644
-> --- a/drivers/usb/dwc3/ep0.c
-> +++ b/drivers/usb/dwc3/ep0.c
-> @@ -54,6 +54,9 @@ static void dwc3_ep0_prepare_one_trb(struct dwc3_ep *de=
-p,
->  	else
->  		trb->ctrl |=3D (DWC3_TRB_CTRL_IOC
->  				| DWC3_TRB_CTRL_LST);
-> +
-> +	dwc3_flush_cache((uintptr_t)buf_dma, len);
-> +	dwc3_flush_cache((uintptr_t)trb, sizeof(*trb));
->  }
-> =20
->  static int dwc3_ep0_start_trans(struct dwc3_ep *dep)
-> @@ -811,6 +814,8 @@ static void dwc3_ep0_inspect_setup(struct dwc3 *dwc,
->  	int ret =3D -EINVAL;
->  	u32 len;
-> =20
-> +	dwc3_invalidate_cache((uintptr_t)ctrl, sizeof(*ctrl));
-> +
->  	if (!dwc->gadget_driver || !dwc->softconnect || !dwc->connected)
->  		goto out;
-> =20
-> @@ -856,6 +861,8 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
->  	dwc->ep0_next_event =3D DWC3_EP0_NRDY_STATUS;
->  	trb =3D dwc->ep0_trb;
-> =20
-> +	dwc3_invalidate_cache((uintptr_t)trb, sizeof(*trb) * 2);
-> +
->  	r =3D next_request(&ep0->pending_list);
->  	if (!r)
->  		return;
-> @@ -873,6 +880,9 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
-> =20
->  	length =3D trb->size & DWC3_TRB_SIZE_MASK;
->  	transferred =3D ur->length - length;
-> +
-> +	if (ur->buf && !r->direction)
-> +		dwc3_invalidate_cache((uintptr_t)ur->dma, ur->length);
->  	ur->actual +=3D transferred;
-> =20
->  	if ((IS_ALIGNED(ur->length, ep0->endpoint.maxpacket) &&
-> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/u=
-dc-core.c
-> index 6355931f9ff1..f03ff937dfde 100644
-> --- a/drivers/usb/gadget/udc/udc-core.c
-> +++ b/drivers/usb/gadget/udc/udc-core.c
-> @@ -941,6 +941,8 @@ static inline void usb_gadget_udc_set_speed(struct us=
-b_udc *udc,
->  		gadget->ops->udc_set_speed(gadget, s);
->  }
-> =20
-> +static inline void usb_gadget_enable_async_callbacks(struct usb_udc *udc=
-);
-> +
->  static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_dri=
-ver *driver)
->  {
->          int ret;
-> @@ -960,6 +962,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, st=
-ruct usb_gadget_driver *dri
->                  driver->unbind(udc->gadget);
->                  goto err1;
->          }
-> +        usb_gadget_enable_async_callbacks(udc);
->          udc->allow_connect =3D true;
->          usb_gadget_connect(udc->gadget);
-> =20
-> @@ -1156,6 +1159,7 @@ static void usb_gadget_remove_driver(struct usb_udc=
- *udc)
->  			udc->driver->function);
-> =20
->  	udc->allow_connect =3D false;
-> +	usb_gadget_disable_async_callbacks(udc);
->  	usb_gadget_disconnect(udc->gadget);
->  	udc->driver->disconnect(udc->gadget);
->  	udc->driver->unbind(udc->gadget);
 
