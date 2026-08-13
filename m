@@ -1,122 +1,147 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7B0C5CFEB
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB614C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 15:22:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F40C360B25;
-	Thu, 13 Aug 2026 15:07:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0EEF0409C8;
+	Thu, 13 Aug 2026 15:22:49 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KA6IjVV_s_5S; Thu, 13 Aug 2026 15:22:47 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 832BC409A8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786634567;
+	bh=FDCRFnXGJK3v2vgenbb4QGGNFlDbaYg32JcwWJnCiIw=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=leOV9om7HpH9lhqQ9z5ZQE1B4dYGD6ORU5QbNZa535gYaMWbAUOpvZ8gEeQJ77oby
+	 lcYLbTzUuWpX/7RO/xfu+1F9qX1J0lt/jr3M/HrOMctf1SLdRVfH5MR05DNcw2q1t9
+	 gfGFdNGP/ZGg5KSi0oc8E8z8rNttI8yhncrgYclNW74XDy873KOqZi+k+QARo0nFgW
+	 m5MKe/CyQ3XY7UkiL6oR1TcKkCtsVyV4uuczJx/XqfRJwkO2Q3AVhgzr6gUSHktQ/2
+	 rI8EuDUmffN4pNjH90K672rBKDWG07YLuz9YCY7oxQbcSt+1Dw0tO+T/Zsy9vbnfgM
+	 VOIdBWVmC3WbQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 832BC409A8;
+	Thu, 13 Aug 2026 15:22:47 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E5757388
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:22:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id CB16D6082E
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:22:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TI9U5g-_FMKl; Thu, 13 Aug 2026 15:07:52 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B7A95608FA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786633672;
-	bh=GBZVj7D+chDvecBcTnRw6e9dqJy6RpBmuDLxvu6aeT4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=CMdjRw1aMlca11xo8vOrTKohStCwmEsdOUD13HfIA2V0uYGa9qb6k0YPFtStcEgOY
-	 NL6hMNNWziROBCB3NWE8R9aTgkAFayRSx6ThAX4/xqrMSLqoG0jPhOBSq5fwHl1f+A
-	 pjmvMAC5ocBl/AhsN+r+Akr5+FZsqBq7CmUE4YfW5OGZvp7fZzI+jo7Ipu995wIJKL
-	 shAm3WoZrsoAtnn4h6XNCK4hvdBz66OiUdMP2a98J2kC+0feaHXA2zj1uIKNtcz29U
-	 kjJsH6+85+d64FXCLjFMSiswxj9AdiJfocwzZ3wp52F8JlKYj9GzxCHkFBDGrtPReq
-	 uSNsbDDZOAVQw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B7A95608FA;
-	Thu, 13 Aug 2026 15:07:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 06BC0392
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:07:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0412981180
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:07:52 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MfMTScKc4iu3 for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 15:07:51 +0000 (UTC)
+ id 9xir-vBLtRyz for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 15:22:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0A1BE8117B
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0A1BE8117B
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0A1BE8117B
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:07:50 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-47f6609c657so1097852f8f.2
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:07:50 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::22c; helo=mail-oi1-x22c.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BACC0607F0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BACC0607F0
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BACC0607F0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:22:44 +0000 (UTC)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-4af81963f35so1062011b6e.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:22:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786633669; x=1787238469;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=GBZVj7D+chDvecBcTnRw6e9dqJy6RpBmuDLxvu6aeT4=;
- b=nw32qZg9ezBu7vHuMBQymcre89qEjdF6G2NJV01hr8MNfP2jhZz66Ml5gx6HF3vyax
- zUo+PZoiXHC6TaRVU8+zN4PS2ROn51k/cvYOYERf41YNYKaZ6o/M8+Me8pxJTvaTy0O/
- oB5CC9nu4icy3gfBO7FpqnhUox/mQIYfhKd6gumaw/lYTz8W3xXqzw8E2zv1XcWWy7pX
- 5DK7bYPUXcEXZqunrjs0TX9KdW/WXmVlu0vHazxIZNoMdf7zhZAVhfw92qCRZ6o/vOpc
- uOcnuiwA1w+yv9oP8BDDhrxFEV5174Ac9Ua3La7fMGZY8nmXCBb8gB8ODCXOUEmeeXv2
- BtoQ==
-X-Gm-Message-State: AOJu0YwlyUjnL6Tz6+TZWmbqbz/qEZ3LkapYj+P0fV5FkpTIB/k9bE7n
- xb7Jj1sVJ/zv7VfuwKbGQx3uXeKYt6o3a47Frr66Ednktw7msZ2ZKJWR
-X-Gm-Gg: AR+sD11lMPNIUgDG9dW2b4M5e0+nQh5bGoEX35V64kB/gkHOueq6KvQZ0k0emRCgx2n
- Ajr/F2n3xuXK3pkr+74ja9QSq+heVDGVShiqSsvJ5JbSgM/9/0UXqJ32haKBsFAqqNzNI88CU0p
- YzUtu+1RYIx3gKFoykI+y4LURl37mtKccyyRjP+UneJhSIIHsgpcVV4FZqoa0G7MVJBkUZzbAYT
- XX96HIkP3VYvb1aU32r/7L5Z4an8IsZh6ODKZG7d669ImsT6vOgGj8GBLruetnvdA7IiZiWNq+Y
- KK0q8c0x5WMwFUr5dVv6sxdGagsEKK2KrJmEbC46o1Ja9QfHlILW8jiVji4+k+RFR3roYYMI5HB
- hHegQx0G4QGbfQEJy44YSPrwFecqJ9In8HX/tOIqyVZH/u5DyhQk45j3cAqn8OWGh1bep8Iuh8u
- 763e2dM9Uf3LkrMYdwHy7ug6ncMoB8R6DGPxOwSPu+UTsOMMkrUqghcBGWUKIa021EuXAcXA52N
- rkY
-X-Received: by 2002:a05:600c:4ed2:b0:496:c9cd:e7ab with SMTP id
- 5b1f17b1804b1-499821616c1mr66857295e9.5.1786633668559; 
- Thu, 13 Aug 2026 08:07:48 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
+ d=1e100.net; s=20251104; t=1786634563; x=1787239363;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=FDCRFnXGJK3v2vgenbb4QGGNFlDbaYg32JcwWJnCiIw=;
+ b=lGGHgb4NZUgVvRiuwKzazP7EhyuppvyeOfqNGu/daFiTyEoXpG+vRKYGxj9b6s0wMg
+ Y30o154jYh/0hNoJjnr2VcZUOYVm7VPN/IbjBDfjp3vv5ZDk81chP9exzapHW8k2TwiX
+ IDlfU9QZF/h+oUQc2Nc2dqg8WAa26bKLv51xS+AdYyBEd7w/rqYuAPBHLmfihWHDDsea
+ IIhZ5uGIsCVtJoXapfPcNAt4xL48sKtPQS/xzMt4Hen0KAMI7K2baybNX3WR8tUvzMoU
+ KyhNuKsCbDDXOFafMJZlqZLLOMONRIeS2dYgnUVlp+geXVVTOLyJXX30si4sHXwHIiIp
+ neQA==
+X-Gm-Message-State: AOJu0Yx/P7Uv9eY0Oyph2zGchx7UukdVBAFuQycp7LZNq2KUw7cdSLoF
+ 8+FWmHx8GUcBFvTiUf5TiejuysstiasmaaT3m706P3y3Oo8kAAKnCeKazSBdJmlZ/JpCx/zw2KR
+ Zdc1aNbs=
+X-Gm-Gg: AR+sD13Lvr1sDnYD8cwuCXRxmGVUcBUMMf8Zdttzj0MQzUr9yWeWiDiezIqWzsxRF20
+ CiorluMzFdUXjzkdmnIAiL1L2Q7/vtSAymVEQxxBByrQumy7gXkoyknBC4rsrgolVtur21rQQyS
+ NS6TG6gAzMRAY/qg7tWlb1ZGNMo/lAT6Gb8FtvRPpLok7zBuzLIg+Sbejjezv+vpCioMkrO5i+6
+ QjQe/9RWM6Xme7bMUp/TkylXJ4z03Mytdfn0FjTz1jHVnmgXMHxcKpXAw0OEfoyjKU1SW+KM5jD
+ MWcQsPEIN4OzqjMOQIIEEZxP9p2gmBzmBKoNKDSerLZiBfpjyValkwF5Bd25dRNXKtFUIJVJfeo
+ SQawRXz5b6pqZb6fyhQHvcqA/BUT3nnJqB2ZGYRTmT9+JtsR8l6CxK4nAPtjqhwq3S2luai/YLF
+ fZNcBGwTMePr+ijUSp+Ct6xsBQg4tZW7VFoEkkjbzJqJoC1S723zmqOwhmVJUNGRg9inhJqFioy
+ aY=
+X-Received: by 2002:a05:6808:3845:b0:4a3:ff0a:e407 with SMTP id
+ 5614622812f47-4b227a25098mr5409278b6e.15.1786634563165; 
+ Thu, 13 Aug 2026 08:22:43 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:3678:ac91:e955:c25])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49981d9613fsm176754735e9.0.2026.08.13.08.07.47
+ 5614622812f47-4b22cfb1ea5sm1824971b6e.16.2026.08.13.08.22.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 08:07:48 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Franz Schnyder <franz.schnyder@toradex.com>,
- Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: Re: colibri_vf: CONFIG_TEXT_BASE and the Toradex eBoot flashing path
-Date: Thu, 13 Aug 2026 17:07:47 +0200
-Message-ID: <20260813150747.2184702-1-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260812084753.GA93864@francesco-nb>
-References: <20260806124816.262259-1-mehmet.fide@gmail.com>
- <20260812084753.GA93864@francesco-nb>
+ Thu, 13 Aug 2026 08:22:42 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: u-boot@lists.u-boot-project.org, Julien Stephan <jstephan@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Heiko Schocher <hs@nabladev.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Pavlo Yadvychuk <pyadvychuk@baylibre.com>, 
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Johan Jonker <jbx6244@gmail.com>
+In-Reply-To: <20260727-mt8188-add-ddc-i2c-driver-v2-0-bf1c45fcd588@baylibre.com>
+References: <20260727-mt8188-add-ddc-i2c-driver-v2-0-bf1c45fcd588@baylibre.com>
+Subject: Re: [PATCH v2 0/2] i2c: add HDMI DDC driver for MT8188 and MT8195
+Message-Id: <178663444817.2270888.3268955205999905451.b4-ty@b4>
+Date: Thu, 13 Aug 2026 10:20:48 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=845; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=aGSY47bYdMMKZ/iADc/skC04VWAM4hZHXOj0Qoxi5So=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfeE6xnZ2ppcBfS7BXZQCkSz764WuI3NDOVbHR
+ MEqt51QR8aJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan3hOhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AjBoH/AhHRU8Lk/pD9ciTWRnis1oLfOIeKvR4nPjROiN
+ oNkUhWHbE8yWgmRXoQ+ECc6eaYKNj1kKjlY3OVsii9eENIaEfHreQsgnNje3i85xEenZiou0hhl
+ q+3et8WRKlugxS2E4CuDFewUZUqjlq07uq7oxZm1Vqpx8b3R/nUA31KgoY7V/bzV1yduhnTx8Jq
+ 1Hoq4ONp3rC2jI7/PjV/hyiZOfo0eeQ5KdTzL/1WXPdBFCxbra6E/11zmwiF5XowrWCheWiaaQn
+ +FWSRWTWcfk8q3DhgM5+27uHXUd8tnQUwyjA4Jmmo9L9pN+t1l9TXtfnb1EfvysEjmGSfkMfOVN
+ UtaI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786633669; x=1787238469;
+ d=baylibre.com; s=google; t=1786634563; x=1787239363;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=GBZVj7D+chDvecBcTnRw6e9dqJy6RpBmuDLxvu6aeT4=;
- b=FH7xegWnFPOauztAjyQzrGKVgeCUp5etTpPU1kvNp5S7gDwBBZW+wDW4DdXI+Jxh4Z
- S158OltgB7+jJgMCyHMdPWhghBlOHUdE3wBrdRku4tFEr7z7tgGof2lpyc1M54G4FP2A
- oyUDXkPdPRS60+vXVxCdKyj1i3HWsvpLg9j8QUuVgJWgF3DQfigPJBMcukiEjBmT0g+e
- gtXkcOlcvfhTnB8Dqm73Jt8fe2bidONJgy6uUA3iU7yh5iTs8o7KAj26pTHqCRYiZptz
- qpszEchBDfKoAJI9Zwe3r69eJrTHlWp6qi8CpVlKmPTxP2uE2BLzDditrodWgCozGXMY
- FvCg==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=gmail.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=FH7xegWn
+ bh=FDCRFnXGJK3v2vgenbb4QGGNFlDbaYg32JcwWJnCiIw=;
+ b=m/Q2aq4JvGlyXWfajXPK0itLZzajxz3EaDpu5SZFFq7+8IGL1xSPOuhQSWKRMUx+Do
+ bFFlTOdq6Z21rTDRkswb8wq2t7vtER/DYftxeU5cmMJFkkUXp4ve1JfzORuYQ+b7MQK6
+ c7KZHHdbcl0w4l1fKHp3kB5dKW5OMcn6HGDpA0KC50JTnxErtFpYcKrnWz+oCO8MMM6Z
+ NYzVLBPXnluiVjcaq7ZitOaP+ypZW91l+69TpT3dhZhNSBoHJmIIMPqek5UfHwWQHOEI
+ sxmmZ4xD4xDjyOXO7/ce4r3CH8bY1YzmlLmA9fuxio1ayCHTIa/bTRjJTNr93mAIaNkB
+ 6tzA==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=m/Q2aq4J
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,35 +156,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+On Mon, 27 Jul 2026 10:43:44 +0200, Julien Stephan wrote:
+> i2c: add HDMI DDC driver for MT8188 and MT8195
+> 
+> This series adds an I2C driver for the HDMI DDC (Display Data Channel)
+> found on MT8188 and MT8195 based SoCs, such as the Genio 510 and Genio
+> 700 EVK. The DDC channel is used to read the sink EDID over the HDMI
+> connector.
+> 
+> [...]
 
-Hello Francesco,
+Applied to mediatek-for-next, thanks!
 
-On Wed, Aug 12, 2026 at 10:47:53AM +0200, Francesco Dolcini wrote:
-> what if you powercycle the board, instead of doing a reboot?
+There is still one outstanding question, but since the same issue exists in the
+upstream Linux driver, we can address it in Linux first. It doesn't look like
+a critical issue.
 
-Measured today, and it turned out not to be an eBoot problem at all. I
-wrote the current-defconfig image (CONFIG_TEXT_BASE=0x3f401000) into
-NAND from a running U-Boot and power cycled: the BootROM does not start
-it either. The module drops into the serial downloader, verified by the
-0x23454523 UART association pattern echoing back on the console UART.
-Writing back an image linked at 0x3f408000 through the same procedure,
-the module cold boots normally.
+[1/2] edid: add default EDID_ADDR macro
+      commit: 5fa1de058293f4737ae3eeee6683dd87f5542360
+[2/2] i2c: mtk_mt8195_i2c_ddc: add new driver
+      commit: 71142b57cd1afa78117cd5be8baf071392599939
 
-So the eBoot observation from my report was just another face of the
-same thing: nothing starts an image linked at the bottom of the gfxRAM
-area, the low 28 KiB are not usable as a load address. It has been this
-way since commit c0f432c37780 ("configs: vf610: increase maximum size
-and enforce correct limit") in 2017; the vendor fork never took that
-change, which is presumably why it went unnoticed.
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-> I would not focus on whatever you are getting pre-programmed on the
-> board, apart maybe some note in the documentation.
-
-Agreed on the standalone flashing. I have sent a two patch series: the
-first restores 0x3f408000 in colibri_vf_defconfig with the measurements
-above, the second adds the missing doc/board/toradex page for the
-Colibri VF50/VF61 with the build, flashing and recovery mode steps.
-
-Thanks,
-Mehmet
