@@ -4,137 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AD2C5CFCF
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 16:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EF33C5CFCF
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 16:55:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A583B4086A;
-	Thu, 13 Aug 2026 16:36:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4326740A00;
+	Thu, 13 Aug 2026 16:55:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id THsXKRS3G9gJ; Thu, 13 Aug 2026 16:36:23 +0000 (UTC)
+ id U241OaK1k95w; Thu, 13 Aug 2026 16:55:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BFC0140879
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5C493409FC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786638983;
-	bh=x4kL8PDh6T/6gPqLmOyMlTEn39QWDAnqLL68JJzf0Uw=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786640157;
+	bh=zOA7zKBDXFHRcL+lJ7Hn2c+xHRH4VNws14+AvHx/K28=;
+	h=To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=wN4ys/R30tc3LhI5EgXWFwRXOiy/QEMy3gtTNk+CZVGxmwldmY7AOQvLV1BO059Mu
-	 x2tp4hnagTDfxuF/dDDJ6AhVjnp7fLvZoa8j4PNFxN7chaQWXU3D9yQ59mQF2Cnwad
-	 rqDRlpjNT45iIEleAb8L0iApM2FPUSfaXL5e9NsdSTm2tHmxxyJwYa5aZyhVcTRQNU
-	 vHA8PvN1mqsdd2SoiXmGWOZ2b6+kH9Pq0DHy+dbrTYHD+Y1Qs9BBIcrvyXNAk3nwAB
-	 8MNXcbNEdYBLenC7fBUYKa9Gxzajbbu5IjAQosL+2SibxuU+YPnDoPUJUhG8yqQPya
-	 Y/lbFQwIwBi5A==
+	 From:Reply-To:From;
+	b=cESHBypUXbBbGs55lnXV0EI2rvRbjxphGB2V3HzOovywaWmRFWkZBir/FWwb5Ca34
+	 pMiR4EaDlMaFVonjyx2VDMBNFVpdaeC8nUpS4/D1vNS0AjPo5brCGH7TD9aQXK8rI9
+	 lqvnRXk7aj8sc3QEFoIcTED8n0DZlVIRiXfplPK9yK8WuJRA1Nmj4Kl5SFAb4r3Q1N
+	 tah4LdKGKTF9RheJyPgzSmE3swuiUOmE+y/V67Y3aBLM7RGfAf1eU4G9DJWw3Eln5x
+	 pyNpma03x3l03HLxb7O3SnqrwbVsaaDvgsQvWObHVA31WjGULaYF6c7lFGrNBjdikX
+	 EBgXdtaDLHUBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BFC0140879;
-	Thu, 13 Aug 2026 16:36:23 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 11D813A4
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:36:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5C493409FC;
+	Thu, 13 Aug 2026 16:55:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 68211259
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:55:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 04226811FF
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:36:22 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6270A4041B
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:55:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eRnkFAzYveA8 for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 16:36:21 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vqg65WndHtkp for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 16:55:55 +0000 (UTC)
+X-Greylist: delayed 109355 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 13 Aug 2026 16:55:54 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 54CB340418
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 54CB340418
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c36; helo=mail-oo1-xc36.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 0FDEF811B3
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0FDEF811B3
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0FDEF811B3
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:36:20 +0000 (UTC)
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-6b049ea7a4fso41992eaf.2
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 09:36:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786638980; x=1787243780;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=x4kL8PDh6T/6gPqLmOyMlTEn39QWDAnqLL68JJzf0Uw=;
- b=CONo6u0oCeqOeGftorZa5PbL0KVHAqQ/fOu7pP10xwZfK2eb1M9HOUBnTzperbwV6j
- FvwDyETXHqs2TfLTUUN3T90pZ6k74ONeg+elEQC97GN3WqjTbX+wGx3eb32hsbjMcf4C
- sYgQC0TxMIgwPuvbDM07CbKokmzEG5gHQhqZJgxS3Kzk/3bpDasYQEnRtlYcodev+c3u
- alXA2tLGWjCvJyVDuCIWEyKa1Q7szP3MM0yTBmgO5lKVRZt13z5mj28xa48hmdQ/53ml
- QVTGDtAqk1iCroNam4egsIghyms7FJG4TjiPGNffgxLkjedYfIrgl/PdF4rHc6qirsWJ
- Vdxw==
-X-Gm-Message-State: AOJu0Ywcossuxj/RRE8p+L/OHsCBYSf2ovKEr6O0oEEOTy18+9cLbD9R
- Sefx0bVkjevL4M2NDYJoQUmoV4e7EYNuCCPJNVPXgrcOBLdqkVOLr92GmTRjnroTd5s=
-X-Gm-Gg: AR+sD12BQd3sBCYuVIOdJ/ZYsNcUe3C3B8g+EjnOmCnPVsbiW79s1zzVOT5xsV/QBrm
- 5T08Er1E0iu8I8kToyeTWp2TsMPOyN7uE8advJZZDNx1B8oOCFB/Yxf9zzh8wVDPMK6TrxklDlN
- 0fMmzmkB7zMCOUQgx/uUthEgMqwVtKomxI4xIJzRKYE1fk9CnT3zgPfaFCVtn03T1xk1OeRNeTk
- 1bwwhrP56S5WIqvxv8+Gkoqem02nv279dJLRHp/Sr78fw3YBx2yIksTYvoNelNZgI2W7/SLzp9N
- ARzGgghn3JEAKk39j1mRyyMlNS0Bfqp0Gm8f7dL80aRQCYt8J6UWRCdxc5AvXLv5o6wgwKpo0gr
- PxKt1I2miNgkQdd+BtNU8Y48SQjvfAOeIi7NOKCquEbLt9q3tnbRD4ueNLFS6d9UoiA+es63vb0
- YvkFEyzZhF5RdeMTJaTlFMRvcp+li2WR4gVfqumPdutFqe2eoxVWHiZlKpj+ghU+NixePEqZjum
- 5g=
-X-Received: by 2002:a05:6820:2915:b0:6a0:f319:6903 with SMTP id
- 006d021491bc7-6b0c41955f8mr6169735eaf.6.1786638979864; 
- Thu, 13 Aug 2026 09:36:19 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:3678:ac91:e955:c25])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b0c3d6c29bsm2839734eaf.0.2026.08.13.09.36.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 09:36:19 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, 
+ client-ip=2001:1600:19:d548::bc0d; helo=smtp-bc0d.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
+ [IPv6:2001:1600:19:d548::bc0d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 54CB340418
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:55:54 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hLWhS0yGmz2FD;
+ Thu, 13 Aug 2026 18:55:52 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4hLWhR2x3LzhxR; Thu, 13 Aug 2026 18:55:51 +0200 (CEST)
+To: Quentin Schulz <u-boot@0leil.net>, 
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org
-In-Reply-To: <20260731-mtk-mach-phase-aware-reset-v1-0-90b918aa52f5@baylibre.com>
-References: <20260731-mtk-mach-phase-aware-reset-v1-0-90b918aa52f5@baylibre.com>
-Subject: Re: [PATCH 0/2] arm: mediatek: use phase-aware PSCI reset
-Message-Id: <178663896943.2270888.13433303041904971465.b4-ty@b4>
-Date: Thu, 13 Aug 2026 11:36:09 -0500
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org
+In-Reply-To: <20260710100521.3677247-1-jonas@kwiboo.se>
+References: <20260710100521.3677247-1-jonas@kwiboo.se>
+Subject: Re: [PATCH 0/7] rockchip: Enable USB support for RK3528
+Message-Id: <178664015137.342950.9257272602190140562.b4-ty@b4>
+Date: Thu, 13 Aug 2026 18:55:51 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=689; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=TLg3Piwzuze28BcSEH255qARn/nArAXVQqY3Bcw93cA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqffJ8iIgvPZe1U/absF4TElgmbbi8MWgL5sanB
- 8zkYZG2z3SJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan3yfBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ASk4H/jXkvAF0cby7FzZLwx4HhIx1THUr/bUeaEmsRum
- Cj5OhkbR0+J9lhcg/gUrYDotdqetfbRaHdiPFtGlY2eaJgghJ2hxAG8B79ajk4E1MUq8WgLeZ+F
- QHdl+k9lyMDt2mJMUTpZSOqN5INAsJ034Y/sVFzAzRO4sMEppj0GiIgVGS41Qrd5avaS0hHBMMt
- 7e03YE9dqNUF2bX3RfeV9QSA27P/ozS8zRe5bIXRl6S0nVefvL0GF2slk2pIiC7yY3PbmFazvqq
- GBE0uQ8EoZxp+c69mLSvYR414JoLdo7wev6dOX34gOtuwMJm4dgyr14DhZEERfVHWIHKFJAVD1S
- Aets=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Infomaniak-Routing: alpha
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786638980; x=1787243780;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=x4kL8PDh6T/6gPqLmOyMlTEn39QWDAnqLL68JJzf0Uw=;
- b=lQPto9NjO2AW8SNzj7zCerScB7KjWNlf3z9LmCNScSFbbLe2PMlXULQM8Pn2IUR6Xh
- ZP4wZelZoZXjOBhZ+7qB+PEhMJVwe9SvE8e2wKzhgwxdB3b07augIN110QLW4bX6LWg4
- lSFICw6Kg3/meZbX+e6AWcHMvi/5shWM53xm5OutNhwNH6VzMXzpQy/GZnXMiOepV5P2
- sJPLgPShHr+9sDI6USAubeSpvXGcPcFak+RxSucTrBjwBnX5VjHdRtxuZIviHFXavMiJ
- FZlKO+tK0uhultyQkaU1ybZW3AgEsoYxZsCaCwTWAoOEFfSLAvg/+XTHrYc5Qkce+4B/
- mPWA==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=lQPto9Nj
+ d=0leil.net; s=20231125; t=1786640151;
+ bh=zOA7zKBDXFHRcL+lJ7Hn2c+xHRH4VNws14+AvHx/K28=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=mTUfdtUGE/w/zwCe2Wfu/Q0i1ZgSoZjjLba2hSPaX6hCu6RuCoImAOrDKNCkjvetz
+ lZ7gUkbpncdvppVPTwLhDsRMus75Tb6htgcIcqLuFFcLdVT4uhRw3UzZco40YFceAb
+ G4nlyaUupQ66Jkqwq49PD95KJwibghB/+xhaCzvv9I3uSmRI+4NPHQxTupVSg8BEh7
+ si424b26yKH4N9Eji4W3+AQXk8lsTiO0lsv9H93RQUuHZY5x8/hNvyv+BX4rmy3rrE
+ MspK9lwyFTdhh8eaarytOhozVdjKZ4u9/C+gMQZe34Tyh84yAOYOGb83CYs9VoEMdD
+ CgXt1pZQ5OKMA==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none)
+ header.from=0leil.net
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=mTUfdtUG
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,27 +102,39 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Quentin Schulz <u-boot@0leil.net>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, 31 Jul 2026 15:31:25 -0500, David Lechner wrote:
-> arm: mediatek: use phase-aware PSCI reset
+On Fri, 10 Jul 2026 10:05:12 +0000, Jonas Karlman wrote:
+> This series picks USB related DT commits from v7.2-rc1-dts to enabled
+> USB support on existing RK3528 boards. It also adds required DT nodes
+> and enables required Kconfig options on the Generic RK3528 target.
 > 
-> Similar to [1], a couple of other targets need to be fixed before we
-> can enable SPL support.
-> 
-> [1]: https://patchwork.ozlabs.org/project/uboot/patch/20260724-ccaione-upstream-mt8188-spl-reset-v1-1-08da6554ecd8@baylibre.com/
+> The 'Add watchdog node for RK3528' commit was included to fully sync
+> RK3528 DTs up to v7.2-rc1 state, it is not required for USB support.
 > 
 > [...]
 
-Applied to mediatek-for-next, thanks!
+Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip (u-boot-rockchip-2027.01), thanks!
 
-[1/2] arm: mediatek: use phase-aware PSCI reset on MT8365
-      commit: 81fdcc79c467ca42363091cab0e5dbb2282571d9
-[2/2] arm: mediatek: use phase-aware PSCI reset on MT8195
-      commit: 0bd564f4bbada6f10dc5aed31b09d58522ab3978
+[1/7] arm64: dts: rockchip: Add watchdog node for RK3528
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/a29794199190dee25a809210aad66ce5a18ef27f
+[2/7] arm64: dts: rockchip: Add USB nodes for RK3528
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/42437844e1dc7b78661d8d66cb9939ad0f981734
+[3/7] arm64: dts: rockchip: Enable USB 2.0 ports on Radxa E20C
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/34aecf3758bbb0251159cda1e0fa5c8a7aaa3f4f
+[4/7] arm64: dts: rockchip: Enable USB ports on Radxa ROCK 2A/2F
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/7382b32c71b1c160c96678b32ccad6737f6cd5aa
+[5/7] arm64: dts: rockchip: Enable USB 2.0 ports on ArmSoM Sige1
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/6426f2d2b3105e75a45e703ae4e6a90a7bc603f9
+[6/7] arm64: dts: rockchip: Enable USB 2.0 ports on NanoPi Zero2
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/a6c6a2fd5bdd71fa6eedaf79ed6c55921741c9c9
+[7/7] rockchip: rk3528-generic: Add support for USB OTG
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/8d913de45891bc79dcf2337e03da6b7ec4e83518
 
 Best regards,
 -- 
-David Lechner <dlechner@baylibre.com>
+Quentin Schulz <u-boot@0leil.net>
 
