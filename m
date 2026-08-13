@@ -1,109 +1,109 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0D5C5AC67
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 05:53:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5E1C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 05:53:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3EA6660A6A;
-	Thu, 13 Aug 2026 05:53:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 861D04095C;
+	Thu, 13 Aug 2026 05:53:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 39l-35miHYIz; Thu, 13 Aug 2026 05:53:43 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id klppmLhJ_xMU; Thu, 13 Aug 2026 05:53:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AAE95608A1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AA0164094E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786600423;
-	bh=nhBddSvmdduGXZ/Zld7b0J1jiyDVSH4gtVqIcpSlXlM=;
+	d=lists.u-boot-project.org ; s=default; t=1786600426;
+	bh=RloHWs3oXisIKexkmFbjiy2eK5Toyon6yDOEjsuhaF4=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=RNsAWSlS2aWgLX0Wl8Vhm0ny4I5x6+32AjPzh6DE1HUDg3qPrqk7y/rlTq3yEtmtr
-	 zAPxLicDM2B8UOXHEH1wasbGESjJhRKgymGEeUK2TMLLcsEQ/9pRMgjT1pZIQHvXlk
-	 RpY5Dw8/yZZ1/h9qhmFttpT9uSBiMNV3dU08oKWKkoB9kMdxjjk/Oy3YSk572iTO9g
-	 LKt8sXhzBVKNkh5/lJovUS7nVBHqkHEwTgKN1weTeV/xsPPe0Fknf6ndlARzNU1uSC
-	 Br9ESxavj1yIxxc7ZLxveNdfnvV9BO1Vdow8o8H8CM654zs6P4yqY5xZnn1rQHXZNB
-	 nUeEaQZu4Jkyw==
+	b=Mt876Gl5km17Yg434aVDF4N5lLqnJ931AERrJQ6eMtRK0OZeD5P8/hVneWF0tzK/9
+	 iALrsJ0iUrkgGx+PA/KgWKoTlLqige41RHrpP1FPWJzViH3hIP+l7te68N6+PKTv4z
+	 o3kPWJ9G6g5v11E01YOkXTVxiGNBZC6F5YHweaBF4BHzcW3KT1cSuZBxH/EZ9b2wY2
+	 uvzGC/SOpsmTUkNA3mz63tBixoLqvM1jO6dEsWgjS+4GU0WrkBKunFE/MmdHRXT/2Q
+	 vDHnFAHxHVZeZ2bxBijMfAP9YL7gh3RygIVglEomVRXqeG7K0ZwSWTSnHpxPyxFJbp
+	 tzCQmpoqrMGxQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AAE95608A1;
-	Thu, 13 Aug 2026 05:53:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AA0164094E;
+	Thu, 13 Aug 2026 05:53:46 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2EB0E1B8
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:42 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id AE4D4109
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 20E5840346
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A0DCC40347
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0e_5fs48V6ak for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 05:53:41 +0000 (UTC)
+ id 69QPUxGn27-y for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 05:53:44 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com;
  envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 18D1440121
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 18D1440121
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org AF04A40121
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AF04A40121
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 18D1440121
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AF04A40121
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:44 +0000 (UTC)
 Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67D5g7qZ1072467
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:40 GMT
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g14sygqyt-1
+ 67D5g8Br1072472
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:44 GMT
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g14sygr00-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:40 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2caf4173b1cso33860865ad.3
- for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 22:53:40 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 05:53:43 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2cc5faecf01so37939325ad.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 12 Aug 2026 22:53:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786600420; x=1787205220;
+ d=1e100.net; s=20251104; t=1786600423; x=1787205223;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=nhBddSvmdduGXZ/Zld7b0J1jiyDVSH4gtVqIcpSlXlM=;
- b=Iqrx++giFVsIoA1exwjIFfB2X/L2P7LmMdXLPCHUWXG20jEaP3a6ujFy59Dv5nYy8d
- NjtV9uzvVefplFk52zbDpk883wDNR36Z2qStCXAysD/zv4M/xF7IwUZLGU1sFROjO+B1
- +WSrRw0y1IIIbdRc9aEihdztZpkaBFnuN1LzWXhatxnGpUJtLfQL6UGGnub6yHJ7QHig
- 2g+Dk9G1eJiOW4u9J7EQ8JUD+AoTrTuoWiT9uZfF+/gKOvudYX/N52cSPVk8bu8VDGrx
- lvTfz13M+fTSfHT0doA5LGrqn9ELFRFsVVyVjumteJX3GbgTs7ebfKBd2nf8ffrIc/HZ
- QAPg==
-X-Gm-Message-State: AOJu0Yx5vR8XTjQvvy+ollABfhyT9IeFfIPbn19OzLdvUEhlO2msEWvm
- o83Eb3fs9SlwjsJnzkPRg4FaNSbaibo2F3h9oy8jExlGjATcf5gYcoRt6JZMzObulr7V9ExHyac
- k57DezwyyWaM+ydKgSeiZ7oszZKbMfHLzzkHP1uT6DnnXusUZs6MMU8+TFXk2iIe9+HlcVm4=
-X-Gm-Gg: AR+sD11t+y2TC7o6nRZOtc7IigVdFz7zjvVm4NS2fNiLAIOt9ELNvoSlFfFsffVu6E0
- TPbcriFy79sbIFVpOANrRm9brdslHSnnCC20Sx+CqhNOQInVxg2gXpD7hnq4zeMew5F74/iImjR
- 9a0WQhqusAI/r7KJrFZCOMgkMTWwBIoa9u7iDA+k4V0PTKy7/kcnvXC6btyru+uMu8VTbq7dTOd
- J7czaN2WacsKCYljMggWmKRXu8rAA4u+CsHHxxx5wK85M6bK4O/HEvmukMDPszlp6+378ZmC6b3
- HA/2JdohOQ42Y0gcILdFs7Z+OkOWIlKw29tLQHi87lYFET2auiYZ275QJ6GLp3uZ2HpDOES60Lx
- vZ0dOChxufLHcg8z05QVlS1qxvfi4uVYjQDqW14IQVHjuDSpklyZBP7rafJBIkyue2no9CzPQoM
- fIUBe00wBJgq8kOa4vYpKBaXZHS851
-X-Received: by 2002:a17:902:f64a:b0:2cf:84bb:1ebc with SMTP id
- d9443c01a7336-2d37e856fd9mr43619555ad.15.1786600419629; 
- Wed, 12 Aug 2026 22:53:39 -0700 (PDT)
-X-Received: by 2002:a17:902:f64a:b0:2cf:84bb:1ebc with SMTP id
- d9443c01a7336-2d37e856fd9mr43618975ad.15.1786600419204; 
- Wed, 12 Aug 2026 22:53:39 -0700 (PDT)
+ bh=RloHWs3oXisIKexkmFbjiy2eK5Toyon6yDOEjsuhaF4=;
+ b=d4Q+qGYjq7QlVt2bVCOYGuBODHTAkSSLcZKEUSrhRtH8Q5SclUW9IhdmH7UP/EgdCt
+ cOK+KJ3NGeVb/3b50MmecRzQY6ZhlSN/GDdKf8jHtTp7RxXdQa4YrFnFHv5vZWxIp/4g
+ QUi2qRR/qa0CbDs0cjtgT9n3+vtaNRP+FxQFo2FX97hxI1s6Lp4Lz2XiQiM4RXWOhcgz
+ llDAjyg6iv5E9u7fBkSbDp4SszcUy5paHlRcq3l6W/IZvMGYID3LwGcI6rdYyQJ1WGz7
+ 2Rdn5m0dE56wUECSvaBPGWE2kGDrYE75DOFsdYkL6Sws8+BOH7ANL1RDiFYUAuY/gM8e
+ ii+Q==
+X-Gm-Message-State: AOJu0YyKDtDqCaOrCUCGGuiUXB8zkHZkHWMa+OfMXjraUHvE0mZyElq/
+ BkPelaXb61YjQ5PnUWjm2yYFRmQYPD85NqTLxl0O0tEfrEZVdO6W1LjxGu1S6sH6lpMAN4emF85
+ LMVDggPkgVgQDFOuwRvEiEduf/AHqcQDOHc3/NQAfrx9N8zvsBvfWZh3FAwvYuQ71cg1vHNY=
+X-Gm-Gg: AR+sD11dQwAbEzcTLlWp5BPG8zoIWIys2wjOE5QpYouBtcBlv/oYLyAxISwcNs83v9e
+ PVPetgkrKkLDdhUJ4tItp8PqcArIHvH3FH5nzHMbgyfM5/pNGrousnEWmEilt8+FEHYlzBVueZb
+ DTJbK7iAAidMiuX4oAh2jVxaVZklb5rlesrAtEfk6TC4e/ABN23tYF9pxOuc0prUiYPjLdzzLEu
+ J/dG/q3pscQl0GncB5VcQUNf9UeaLVg6dhwQnqi0usnnxf7MVWdyR5AIk+0zobU/2DxsVNWLbnB
+ PYZnLZG2P3/lprrStFczbiRYBIj47c/DHDdSKJs8MMJZCtQ5v5nCbSWe7hScLG4yJC6dqzyPBhh
+ fucSfQ1mQNu+RMX+dgFFiNzOUik21F/r0Ntx5l9uADIS+QB5KAoaV8RHNRkITtaA3gO8Klf6uZk
+ 7h4JQL+BfCZJj5/skn0/9ZKOgLR2H0
+X-Received: by 2002:a05:6a20:3ca7:b0:3c4:397a:69aa with SMTP id
+ adf61e73a8af0-3cc5549bcfdmr4673706637.31.1786600423217; 
+ Wed, 12 Aug 2026 22:53:43 -0700 (PDT)
+X-Received: by 2002:a05:6a20:3ca7:b0:3c4:397a:69aa with SMTP id
+ adf61e73a8af0-3cc5549bcfdmr4673665637.31.1786600422767; 
+ Wed, 12 Aug 2026 22:53:42 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31ebc760524sm3921430eec.1.2026.08.12.22.53.35
+ 5a478bee46e88-31ebc760524sm3921430eec.1.2026.08.12.22.53.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 22:53:38 -0700 (PDT)
-Date: Thu, 13 Aug 2026 11:23:29 +0530
-Subject: [PATCH 1/2] efi_loader: firmware: decouple dfu_alt_num from
- image_index
+ Wed, 12 Aug 2026 22:53:42 -0700 (PDT)
+Date: Thu, 13 Aug 2026 11:23:30 +0530
+Subject: [PATCH 2/2] test: efi_capsule: add sandbox coverage for
+ dfu_alt_num override
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260813-efi-firmware-dfu-alt-num-v1-1-43f034253b21@oss.qualcomm.com>
+Message-Id: <20260813-efi-firmware-dfu-alt-num-v1-2-43f034253b21@oss.qualcomm.com>
 References: <20260813-efi-firmware-dfu-alt-num-v1-0-43f034253b21@oss.qualcomm.com>
 In-Reply-To: <20260813-efi-firmware-dfu-alt-num-v1-0-43f034253b21@oss.qualcomm.com>
 To: u-boot@lists.u-boot-project.org
@@ -114,32 +114,32 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786600412; l=3945;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786600412; l=5534;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=kFbU1SkitSoK5qYpzRNkqdHqKbUT9tpraG3nvV2Q5oE=;
- b=tBdGkDVyNj6oex0fu5NbWFCJYWeC1Xt8kNNh4ea7xuXPO+Ks2hi0OLWIm+x9GIgzSm8kUg7WY
- r4/sey/X+RQB2fICYKzgW1IA05NOGE1jBzXnoiq0qWdhaxbiCr2cCkE
+ bh=yLAFJy3o9H7ILuQkbb4/tzqz0uUShfJk6AaSCN3ZKV0=;
+ b=K06+9chMCUYfXCYvH9gmNiDx2DIulZcj64roSPg36dXdhjJ0qW+h6sO3SRFYHWg5ooOn2Un97
+ EVmXQYzv9ULDRtV7DcznEWzpeyIevmhOpdDUNYZfYkI/5meml/I1qSl
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Authority-Analysis: v=2.4 cv=ZcQt8MVA c=1 sm=1 tr=0 ts=6a7d5be4 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=ZcQt8MVA c=1 sm=1 tr=0 ts=6a7d5be7 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=H1DQs1lc3By0CTYzgj0A:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDAzOSBTYWx0ZWRfX/atiJVnCiOri
- St6+Q+Y6AT6y2qn7Qyg8D7Fbk1TZQNV8qsxwosYepm2FpYUCpRG3qlqx0Oovhxnhd2HToeKCX9P
- 5t6t8WsgsLeNeoZQaTTh0ghJwCWCYkF7YuydkIfpLkcGPvKkTJOsfGiQOl/H1n61ymPgMUa3ffQ
- 3eowc16+0GY3tCKV74VP22Hf8i0VQwvovK/FOAGecINP85LwsR7SYJ/ZZ9zg+lDA/GcqKbHKhvB
- naQ+t8ADEsjUHigEQMReERsp8tY1+vzQKOvJChFSfsDUM1+0E3lJbRfA3aRmDGVekf4VYM5ajG8
- xDFIqd47pvKlKUKmu6s7W4azjH8Rqs4KPI0sdGyqvtR37d62vXTBZK/k++uqbLcaslVXXTkBe4h
- MzFb3fhZkMwCvI+BLKPq5f3ccmcqpFTDDzNw4+fXobptfJ1dqQdZ6ik2/eSutgTNr8EbLBEdmPk
- BCp6bLho1qWAasrRWXw==
-X-Proofpoint-ORIG-GUID: 0i1EpGZgUJSwxVF_pCJrHLVRmlH1SXRz
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDAzOSBTYWx0ZWRfXzk5pOryNVRQn
- GLNZKq0JhoVglxuk4ulL6wz4ubD3UVJlLhUcgawuPr8NLRQqzzu/pWSSQx8zJJSgSk4cnS3FzQq
- TMQWUlf82ncynS5PsHFQ2msf5r/78EQ=
-X-Proofpoint-GUID: 0i1EpGZgUJSwxVF_pCJrHLVRmlH1SXRz
+ a=EUspDBNiAAAA:8 a=tDDqN7UG_OogWC0oBqkA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDAzOSBTYWx0ZWRfXxkSiueQfjhk6
+ 4ey+vmii5N5lXAHGerCUaV1O39twWkLw4DRrzezKX1qUu+B4seqVnceDN7lOFBH5OgrybfC9B3W
+ VqVScf+tcEzaanOmyIPFpCDJGKBieG3Y5zk+q/CDN0dC41nhD4hVNjUjA1UoY+4GRkXIj0Mpub1
+ 4RCpmS6Gx9CKpF+VkuHjFNffpMowUqsdoQ5MzX2OfBalphlS0Px7CBE19AzTBJ0v1XSEJz9teFn
+ +bhszf5JvP0oW0TWRFaeMvaXD5u/D2bjapu77nsskBqO746m+nZC9WpWiAU8dJjq9PnQW02t0fT
+ f23iRSwOzs+troy3IEteuu2apsoW0Usu6FvoUMUPotkaJhGBVA7u/O74NG3ReQc5F/ZMsK5bWst
+ cePO3tyCCyDCnaE26MGZq4MfOaO5gMnBncer0wj9J4nz3rNiYToK+W2mC1Mh59PxCKq+p0NDNFI
+ lLkIXNxvjrO8wjmfhEA==
+X-Proofpoint-ORIG-GUID: WmL04yp1OnLFbhdEU8AVFsAee2oZtroc
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDAzOSBTYWx0ZWRfX+Lb2SEmzsiu+
+ uKWQskkBDyJsgYliyTI7ZyX5pdr/9WEzTlCt1WgyVeu3ZvGXrefMPYPeQlRnKbwKhyt1cwSO/hc
+ CCNxQoqyEvtevhZxVItYAJTbD9k736w=
+X-Proofpoint-GUID: WmL04yp1OnLFbhdEU8AVFsAee2oZtroc
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-13_02,2026-08-12_01,2025-10-01_01
@@ -152,36 +152,34 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- nhBddSvmdduGXZ/Zld7b0J1jiyDVSH4gtVqIcpSlXlM=; b=baDIuwH8RaplM7/A
- kyat9BARglVj1eeOCH+9BgPyf8jMluK5Spy97ZrR6fcFRkB8E7cess44C+L144Rg
- UpFmbJPFK/4xlco+JPGcY+c5mFt9tBM53nx3n95MIYR5PX/6BbEg/xtV0TqFKpuK
- VlShwyTGD61mLQ2A+CzCkX44AsoarS8hluxuVf+N5n2rfimBn7xk/OfvQzfRPK8c
- wUeyGEJ12SJ8BjXLM38u3hBFJpfadnG+R5gX9yQVEfhJeIifkM5K8WpiO2AuzDrw
- imWOjNMSi9puFagJyvRIVlzwvH73VaCZOJXLOLzEVKTHsLkYlgLoHKI7cUhFS/86
- mKsVgQ==
+ RloHWs3oXisIKexkmFbjiy2eK5Toyon6yDOEjsuhaF4=; b=GhYIl2GCEgIjF/Gq
+ I7G5ctTQ5GknhOo+4S67eGfxPIxlbDCeu536p+JWpUiDU86Y90qD1QUbFsqhCSDS
+ agFTFTRdj+/ZB3KRXhS1z58oaRH/29HDPjPoDXbiT2mOcIATyCukKPUBxuEix7qd
+ q0epIpswKO+/EnSXWHgy8bfHZVpTmv/dagkEVzrNBdzmUP7F/N8A9B1CbbCPjKC2
+ fgiU6Z5+lf5KUPaSC982QTnT4nHGHyOQECF2dWKDDL1bBrNfrFV7VnTk40vUNu2S
+ XzFt7t9pQ+rpY8z7jxbTQR4plmhAi6TJHCYMrjiH4qXQhZjl1WL6s1KkE4y/VJbp
+ D1euew==
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786600420; x=1787205220;
+ d=oss.qualcomm.com; s=google; t=1786600423; x=1787205223;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=nhBddSvmdduGXZ/Zld7b0J1jiyDVSH4gtVqIcpSlXlM=;
- b=Ve/rQXb0QHJ98EvzGe6Gzxo9ORiecaKnsJzC0ufRevoLJ7h6DNJpmRx4rh354xNVGm
- 6zEKdw/LdnYvIASVw+EJLK5rJE2edw57aoVsBHfrBbPr73Ut61ZtfgZvTB6++0+YwTso
- Zuv95ciN1cxgkUK4vxh2e51Lzy3r8lsmozvgA1jNTdSEevjHzR7XGVg7vk8o+SSrtoBt
- vTONCdiwQKgG/aFlGtgIioNW3UQH2BHAaYYIjho1gznNmNoVTUGbf4/OhMRV8EWeduK5
- c32YLllnbFktZ43qlUYI15ZUtVDgQcpjS80K1NNQ8/naRJDsjpneogJHCDBeN+Ff/cNx
- 1OuQ==
+ bh=RloHWs3oXisIKexkmFbjiy2eK5Toyon6yDOEjsuhaF4=;
+ b=hAjtzx1HGLA36lneiz1EnQ4OuPMFE+WEhJOrJTB/nM+yAYrXasVPnPZJF4NGg2cwRp
+ s7/zsihB9y8bLLkzTUx2fJGAm0fV9cg9M6GfnhXRQGV+ox35rp1ToxE2h3YFLWxmuuYN
+ pHuYMZJp5goZ0p/dSuXe8NFy0gjKRD7/IMmrT8JANOP2BH/MNLm/y6HB3tfZHUOJHkP7
+ tQOAT4zeVUqk8scXKnFCKRNyHcu+OzoYr95i5BX3hg2q5TBL7ORbSGYjDufjkZqmpWRc
+ 4W4OOYCjmkZsSrlu1ls3ohYUd3TLp7Whc8G7ZSK2MUePxl6HLK3f1rL/IJzQCTXAwc6z
+ 7IzQ==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=baDIuwH8; 
- dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Ve/rQXb0
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=GhYIl2GC; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=hAjtzx1H
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -198,104 +196,143 @@ Reply-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-RAW capsule updates assume dfu_alt_num is always image_index - 1, i.e.
-that fw_images[] is a positionally-ordered mirror of the DFU alt
-settings. That holds for every board that builds its fw_images[] table
-by hand, but a platform whose image list is discovered at runtime
-(varying per board, with gaps for missing components) can't guarantee
-image_index and dfu_alt_num stay in lockstep.
-
-Move the (image_index - 1) calculation into a __weak function that
-platforms can override, following the pattern already used for
-efi_firmware_get_image_type_id(). The default keeps the
-existing behaviour, so no other board needs any change.
+Add a third sandbox fw_images[] entry (image_index 3) that aliases
+onto the same DFU alt setting as image_index 1 through a strong
+efi_firmware_get_dfu_alt_num() override, plus the matching capsule
+GUID and test case that applies it via ESRT and checks the write
+landed. Without the override this would fail, since dfu_alt_info has
+no alt number 2 (the default image_index - 1) defined.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- include/efi_loader.h          | 17 +++++++++++++++++
- lib/efi_loader/efi_firmware.c | 21 +++++++++++++++++++--
- 2 files changed, 36 insertions(+), 2 deletions(-)
+ arch/sandbox/dts/sandbox_capsule.dtsi              | 12 ++++++
+ board/sandbox/sandbox.c                            | 18 +++++++++
+ include/sandbox_efi_capsule.h                      |  1 +
+ .../test_efi_capsule/test_capsule_firmware_raw.py  | 45 ++++++++++++++++++++++
+ 4 files changed, 76 insertions(+)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 3a4d502631c..6626674f738 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -1187,11 +1187,15 @@ efi_status_t efi_capsule_authenticate(const void *capsule,
-  * @fw_name:		Name of the firmware image
-  * @image_index:	Image Index, same as value passed to SetImage FMP
-  *                      function
-+ * @dfu_alt_num:	DFU alt setting number for this image. Only consulted
-+ *                      by a platform's efi_firmware_get_dfu_alt_num()
-+ *                      override
-  */
- struct efi_fw_image {
- 	efi_guid_t image_type_id;
- 	u16 *fw_name;
- 	u8 image_index;
-+	u8 dfu_alt_num;
+diff --git a/arch/sandbox/dts/sandbox_capsule.dtsi b/arch/sandbox/dts/sandbox_capsule.dtsi
+index 34d29916b30..e5464df1715 100644
+--- a/arch/sandbox/dts/sandbox_capsule.dtsi
++++ b/arch/sandbox/dts/sandbox_capsule.dtsi
+@@ -166,4 +166,16 @@
+ 			};
+ 		};
+ 	};
++
++	capsule12 {
++		filename = "Test06";
++		efi-capsule {
++			image-index = <0x3>;
++			image-guid = SANDBOX_ALTIMG_IMAGE_GUID;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
+ };
+diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+index 13006a0ffc2..8ae7c244a09 100644
+--- a/board/sandbox/sandbox.c
++++ b/board/sandbox/sandbox.c
+@@ -42,6 +42,16 @@ struct efi_fw_image fw_images[] = {
+ 		.fw_name = u"SANDBOX-UBOOT-ENV",
+ 		.image_index = 2,
+ 	},
++	{
++		/*
++		 * Aliases image_index 3 onto the same DFU alt setting (0) as
++		 * SANDBOX-UBOOT above, to exercise the
++		 * efi_firmware_get_dfu_alt_num() override below and prove it
++		 * is consulted instead of the default (image_index - 1 = 2).
++		 */
++		.fw_name = u"SANDBOX-ALTIMG",
++		.image_index = 3,
++	},
+ #elif defined(CONFIG_EFI_CAPSULE_FIRMWARE_FIT)
+ 	{
+ 		.fw_name = u"SANDBOX-FIT",
+@@ -57,6 +67,14 @@ struct efi_capsule_update_info update_info = {
+ 	.images = fw_images,
  };
  
- /**
-@@ -1240,6 +1244,19 @@ efi_status_t efi_ecpt_register(void);
- efi_status_t efi_esrt_populate(void);
- efi_status_t efi_load_capsule_drivers(void);
- 
-+/**
-+ * efi_firmware_get_dfu_alt_num() - get the DFU alt setting number for an image
-+ * @image_index:	image index
-+ *
-+ * Return the DFU alt setting number to use when writing the image
-+ * identified by @image_index. Weak default derives it positionally as
-+ * (image_index - 1); a platform whose fw_images[] is not laid out 1:1 with
-+ * DFU alt numbers should override this function.
-+ *
-+ * Return:		DFU alt setting number
-+ */
-+u8 efi_firmware_get_dfu_alt_num(u8 image_index);
-+
- efi_status_t platform_get_eventlog(struct udevice *dev, u64 *addr, u32 *sz);
- 
- efi_status_t efi_locate_handle_buffer_int(enum efi_locate_search_type search_type,
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index b41969c70fd..c7339412055 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -80,6 +80,22 @@ efi_guid_t *efi_firmware_get_image_type_id(u8 image_index)
- 	return NULL;
- }
- 
-+/**
-+ * efi_firmware_get_dfu_alt_num - get the DFU alt setting number for an image
-+ * @image_index:	image index
-+ *
-+ * Return the DFU alt setting number to use when writing the image
-+ * identified by @image_index. The generic default derives it positionally
-+ * from @image_index; a platform whose fw_images[] is not laid out 1:1 with
-+ * DFU alt numbers should override this function.
-+ *
-+ * Return:		DFU alt setting number
-+ */
-+u8 __weak efi_firmware_get_dfu_alt_num(u8 image_index)
++u8 efi_firmware_get_dfu_alt_num(u8 image_index)
 +{
++	if (image_index == 3)
++		return 0;
++
 +	return image_index - 1;
 +}
 +
- /* Place holder; not supported */
- static
- efi_status_t EFIAPI efi_firmware_get_image_unsupported(
-@@ -768,9 +784,10 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
- 	/*
- 	 * dfu_alt_num is assigned from 0 while image_index starts from 1.
- 	 * dfu_alt_num is calculated by (image_index - 1) when multi bank update
--	 * is not used.
-+	 * is not used. A platform may override efi_firmware_get_dfu_alt_num()
-+	 * if its fw_images[] is not laid out 1:1 with DFU alt numbers.
- 	 */
--	dfu_alt_num = image_index - 1;
-+	dfu_alt_num = efi_firmware_get_dfu_alt_num(image_index);
- 	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
- 		/*
- 		 * Based on the value of update bank, derive the
+ #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+ 
+ #if !CONFIG_IS_ENABLED(OF_PLATDATA)
+diff --git a/include/sandbox_efi_capsule.h b/include/sandbox_efi_capsule.h
+index 84d45ec5cfd..848f1bdc4aa 100644
+--- a/include/sandbox_efi_capsule.h
++++ b/include/sandbox_efi_capsule.h
+@@ -10,6 +10,7 @@
+ #define SANDBOX_UBOOT_ENV_IMAGE_GUID	"9e339473-c2eb-530a-a69b-0cd6bbbed40e"
+ #define SANDBOX_FIT_IMAGE_GUID		"46610520-469e-59dc-a8dd-c11832b877ea"
+ #define SANDBOX_INCORRECT_GUID		"058b7d83-50d5-4c47-a195-60d86ad341c4"
++#define SANDBOX_ALTIMG_IMAGE_GUID	"2d137324-092d-5f04-a62c-a7b2442cb0ee"
+ 
+ #define UBOOT_FIT_IMAGE			"u-boot_bin_env.itb"
+ 
+diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+index b8cb483b380..6c1cc3c6cc8 100644
+--- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
++++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+@@ -238,3 +238,48 @@ class TestEfiCapsuleFirmwareRaw:
+             check_file_removed(ubman, disk_img, capsule_files)
+ 
+             verify_content(ubman, '100000', 'u-boot:Old')
++
++    def test_efi_capsule_fw6(
++            self, u_boot_config, ubman, efi_capsule_data):
++        """ Test Case 6
++        Update U-Boot on SPI Flash via an image_index whose DFU alt number
++        is resolved through board/sandbox/sandbox.c's
++        efi_firmware_get_dfu_alt_num() override rather than the default
++        (image_index - 1), proving the override is honored.
++        0x100000-0x150000: U-Boot binary (but dummy)
++        """
++        disk_img = efi_capsule_data
++        capsule_files = ['Test06']
++        with ubman.log.section('Test Case 6-a, before reboot'):
++            capsule_setup(ubman, disk_img, '0x0000000000000004')
++            init_content(ubman, '100000', 'u-boot.bin.old', 'Old')
++            place_capsule_file(ubman, capsule_files)
++
++        capsule_early = u_boot_config.buildconfig.get(
++            'config_efi_capsule_on_disk_early')
++        capsule_auth = u_boot_config.buildconfig.get(
++            'config_efi_capsule_authenticate')
++
++        # reboot
++        ubman.restart_uboot(expect_reset = capsule_early)
++
++        with ubman.log.section('Test Case 6-b, after reboot'):
++            if not capsule_early:
++                exec_manual_update(ubman, disk_img, capsule_files)
++
++            # make sure the dfu_alt_info exists because it is required for making ESRT.
++            output = ubman.run_command_list([
++                'env set dfu_alt_info "sf 0:0=u-boot-bin raw 0x100000 0x50000;u-boot-env raw 0x150000 0x200000"',
++                'efidebug capsule esrt'])
++
++            # ensure that SANDBOX_ALTIMG_IMAGE_GUID is in the ESRT.
++            assert '2D137324-092D-5F04-A62C-A7B2442CB0EE' in ''.join(output)
++
++            check_file_removed(ubman, disk_img, capsule_files)
++
++            # the override maps image_index 3 to dfu_alt_num 0, the same
++            # alt as SANDBOX-UBOOT (image_index 1). Without the override,
++            # the default (image_index - 1 = 2) does not exist in
++            # dfu_alt_info and the write would fail, leaving content 'Old'.
++            expected = 'u-boot:Old' if capsule_auth else 'u-boot:New'
++            verify_content(ubman, '100000', expected)
 
 -- 
 2.34.1
