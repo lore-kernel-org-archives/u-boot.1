@@ -1,129 +1,177 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A99CC5CFCF
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 16:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE6F1C5DF67
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 16:11:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D5011812CE;
-	Thu, 13 Aug 2026 16:00:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 706DC60A5E;
+	Thu, 13 Aug 2026 16:11:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ob_ox52ZTW3X; Thu, 13 Aug 2026 16:00:51 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TJ4_GSoLdPKb; Thu, 13 Aug 2026 16:11:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AED71812B7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 922EC60A8A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786636851;
-	bh=iVBVz5DHPE4pwg8+nbBVpwKoTVuGQArg3Zv7tCeme7Q=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786637478;
+	bh=hfHh9WAbMQRtbG8vQoovpcdfPiy85SoJQdc8KmzEUFU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0qjwrJkbFOPa3k9MEB5lkl1bTNz4SDXLUAmy/lAdy6yyCVnA7OVwpRBjmtWAoNs17
-	 lNBTP//dZNMUqRfDp7GI7lDbp36zLgNPunzKTZQor5vc4D6RadAANV2i9LbxiIYC/Z
-	 zaNVc/H6M6M5yLlicBNwi/ZP/4la2TjO5Jfm7iZ05kYtfCnNj2wbM7Gzmlt5IlgAGL
-	 dLZ24LOZfL+38Lv5N7br1e6XnV6JGOxxd6un6wNtWeiXfbdyI/CDacg9j6Wd/9e24b
-	 Im0w/rbkeVcZCtPs7f36THh4WkO6F7MjfP5fIRXCfmun/1FoyuvKb+8Humps3Oddys
-	 H0iDUm5V+O8ZQ==
+	b=qlY3EqxbFgxTEAykVMKg/znHxafliCjML7b3aAlMhta+RXUe3b9lWe2nbwWt9dIWe
+	 Cgyg7BPVZnmKc1cb3QWHcMt2hJfyYQ8gJj2cONTeUg9kV6N6+2OABdamDSfY4Q3OjH
+	 /0yPzwIwghMul5LgoBry+cW3hdlVg1coi7wQdnv17h+N0YJwupurFf7Eh7tRhu9W/a
+	 9sZuW1il/YRltjNSH21M9xyl/atKKk1dBaDtxtytO4Uc8us1PL5u0PfiXznfiG//wY
+	 IZ4WED83izLplxy71ZZrpdRzePe6w76wG/RHsZ16ufBSrG/FeUIU/M3FmyZq30AJ5I
+	 FQhUURMscWgTg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AED71812B7;
-	Thu, 13 Aug 2026 16:00:51 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2D98C388
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:58:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 922EC60A8A;
+	Thu, 13 Aug 2026 16:11:18 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1D35E3A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:11:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1FE24812A4
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:58:57 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0BADB812CA
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:11:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tyqGMn4UyAXU for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 15:58:56 +0000 (UTC)
-Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
- envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 03D7081285
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 03D7081285
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 03D7081285
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:58:55 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6a20319d030so3493377a12.2
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 08:58:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786636734; x=1787241534;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=iVBVz5DHPE4pwg8+nbBVpwKoTVuGQArg3Zv7tCeme7Q=;
- b=YksNtTR2rCFiFvKI7MnGNJjh/zO1UK9DWDPFIVw1cCMErOD8mdN4BWRP2cGJIBBw4c
- /jWjQahnRpwBauiEA9QZzDTjzfB1Px5+dxLkWJgmx2U83qgZhjzT7Ubmgq5a1ClUmRsi
- Qslh2Mr7P7Xluqn+MFrrRF2oZ0SBOB4Tq8uWgTA4UMhLXtKrQ2m4P9JYyAenyBiQPjAj
- z4o5GdOxJTVHlRFQ3pRquZUCSV4ALWmVuYlauVOEdnIXOdM+MzkCmTi+rOUljOysav76
- IDR0h0REdLpFN17nJ1mezO5ofihy0y3auwB/1I3//4VgabW+h0niv+FCzW71jOtsSmc7
- 6+yg==
-X-Gm-Message-State: AOJu0YyItr7h8QUB34yazDeM+fj2alE1ASynQXMvW7TKRJWD8d+9dx2e
- ikBSEZdpfceBjgcyF4yrwRD49z78qk6wwINkbt6lQtuDowY5TDDlcVn9ySdwh0FTMDA=
-X-Gm-Gg: AR+sD13dPAT2RrkMhQQmJLA+b+rXKkn10ZiDpVD4cRQ+YjsmccavhvAEK/4buTcZyQ6
- pAE3DxtK+HYf9VOiw/eNKBDvQTe0b8/6Vn+hJf9Fh87t157T2+sceYE4ixAfw9ly8TGi2/U+nDR
- sQZVfn26J4RWMy8vNwAxk9y66hk0i3zN28Zl2/i0ltP86ZF9a05/S0S99UoUEz9+++gjVeRly4m
- Kt4SKBC6m4SDHcNuoSP3BbNb+D4qIs5S/VrzF8oPbxQpNpNCR6hIkCefi8SU9VG8+V7HHrj48KQ
- hb0mrF5WaO23KUxtTYZw3/JcdLTkn0ts27yXxZBD9f9I0+WGujKv+X8Jp4D0WewlOYXAY2WIziE
- 7WWTX6DvTjeXEaoUcl0+fcO93iaBbxi7hEZAHcjhj7Q1zdfTaqREgPMoBlR/mo7dtHreINLrOz4
- WGMWCekgsLygIe69BGrkY26S0hCpy5jiylcZZcxxdfs/9zCMVWFvdf+qlDc403bnhDDZzf85K0Y
- qv5+H/TuFHmH1o13mvoUpkth+tUNSbR6r3Y9Orvi2GjtolmlvqK
-X-Received: by 2002:a17:907:a48:b0:c0b:e9c1:93a7 with SMTP id
- a640c23a62f3a-c210904488fmr324902866b.29.1786636733683; 
- Thu, 13 Aug 2026 08:58:53 -0700 (PDT)
-Received: from [127.0.1.1]
- (p200300ff0f038f00b49b9d175e416b42.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:b49b:9d17:5e41:6b42])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c21233a12e6sm9087366b.12.2026.08.13.08.58.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 08:58:53 -0700 (PDT)
-From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Thu, 13 Aug 2026 17:58:44 +0200
-Subject: [PATCH v5 2/2] test: tpm: check malformed capability and OIAP
- responses are rejected
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ id uVupBB7J0zyJ for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 16:11:15 +0000 (UTC)
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org C8B70812DA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C8B70812DA
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C8B70812DA
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:11:13 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LFzPhsk5VESgqs04iojVWO3I0Rp1pfKCBhKNJt56PnNtCLVVnwsAU2bwdKewPUlkQpW/lBo6W8b1HC4dgSA2hd9MmLEJtfuKdqshCEnnSQCcyGZYCZuwfXV2adNoUWrEns5wR7mp/e1P3JROotvSH3HRfhGstjphabwzo2roaKmxQ72jiPj9DV9Px7lwWv71ic9r6i+KxyhktEGwThNmdaUOSOvIH1n4Sz67SkDN4N2MSzvk6ZcUZ92MNv/p0tecbXNLP3GHKz2sDKcTm4TKflHjUgSXHRGs3UbIGaruU0iDB3s7cV5dObSYbfoACBbQBDhuXwqSmmHN4crOHVSPAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hfHh9WAbMQRtbG8vQoovpcdfPiy85SoJQdc8KmzEUFU=;
+ b=Jxq0UaGgo/h8q9Wc6Z13VsgfNr+mRIGFSo10zISqoA/ktbswXEeOIRoDEcTzfW1IVjZauLQ5+C+3Zml+N83Z+tRobTborsLH6HvXhJ8rpv/8M7lQZ9ub+FXu7uyfpvcQZJUM8HfXLYMyv+KXGbKrmsyvB6tjYFPHWz0cNhawW+gnHg+FnRGljMJ54CrnkBMSGVAQ6f1kWNYQERrJ88nL1X2RZYQqYFUn3DPnUCDgUrhA3ZnoD2J5F68TJGbXORW3SIABPGWEU0ZNNokt+4L1JnFuxscE9wHjNWS84tUv9l/QeIzZvgt8ln7GMS6QI9DeCBViD0eggFmXmvskentSAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DUZPR04MB10037.eurprd04.prod.outlook.com (2603:10a6:10:4d8::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.13; Thu, 13 Aug
+ 2026 16:11:03 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.21.0315.008; Thu, 13 Aug 2026
+ 16:11:03 +0000
+Message-ID: <bed7313e-fd9d-40ca-8f27-72733b65ba2b@cherry.de>
+Date: Thu, 13 Aug 2026 18:11:01 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] test: dm: nfs: add a regression test for an oversized
+ NFS read length
+To: shj <shahriyar@byteray.co.uk>, Jerome Forissier
+ <jerome.forissier@arm.com>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Sebastian Josue Alba Vives <sebasjosue84@gmail.com>,
+ Argus <argus@byteray.co.uk>, nd <nd@arm.com>
+References: <20260811-nfs-oob-fix-v1-0-5444d86d28d7@byteray.co.uk>
+ <20260811-nfs-oob-fix-v1-2-5444d86d28d7@byteray.co.uk>
+ <ce8b5c8e-d62e-4e28-bab8-dab2d26a70aa@arm.com>
+ <f70400e0-9444-4ee4-b7ff-dea8f32d6c86@byteray.co.uk>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <f70400e0-9444-4ee4-b7ff-dea8f32d6c86@byteray.co.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260813-tpm-trunc-resp-v5-2-153b492a3256@byteray.co.uk>
-References: <20260813-tpm-trunc-resp-v5-0-153b492a3256@byteray.co.uk>
-In-Reply-To: <20260813-tpm-trunc-resp-v5-0-153b492a3256@byteray.co.uk>
-To: u-boot@lists.u-boot-project.org, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>, 
- Reinhard Pfau <pfau@gdsys.de>, Tom Rini <trini@konsulko.com>, 
- Argus <argus@byteray.co.uk>, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Thu, 13 Aug 2026 16:00:48 +0000
+X-ClientProxiedBy: VI1P194CA0040.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:803:3c::29) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DUZPR04MB10037:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68ca624c-bc5d-4ff7-f776-08def9557941
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|10070799003|376014|366016|1800799024|23010399003|5023799004|11063799006|56012099006|10067099003|4133799003|3023799007|18002099003|4143699003|22082099003;
+X-Microsoft-Antispam-Message-Info: W++PM0WVtJpbHKKGSiAWjjd9gwKplyp80RL9lkjqYiTdp0VDJ+FkUrO4OvgxC8jwtx5AJo2VtecwEDX86eFnAqrVHjEET/hlE22+K49ShS0X6TH+WFyU5V1CxmujOVUjB/1Gb+it+u+ftygDQGhrlp+a+561FlMG4wK8H76P7XfgAw9K+Qt4FJ+LGvEx0gQ+xnNziavLbRVhTTZYg/qkYD1cy6IpAl1YvqlqUlwq13iMKyQIEA6byjHGyg/NNY9NtldaXlpzWjLGMRgIdC0v+aH0LsR/DYdkr1Mwee5s1wCMyC4HXjNWFfIgLMkwbHcC1pJ2BCq5CHmo3cssZDNAgG8SsqqW97LgNP4K9UoVIHHV6Wv9EoJFiy4hz67PCrbIo2rY6am3HL7ZuhglQOn2BOwTSqbHXPNDCl9Du7esIEzKX6/6phwyDSjb4+jjfxv3GXL0++r6F/CQhrB13mKjsNSc8sat1IhK//PmkruulNcs88jGPmaVSkgew53+N+9Hzx1F4BzoZmhO8IcXRGXpypq2a2a3U9ASWxEPgkv0OPYXMYLuaEDyLs3q7rSkZq5x1w+Hwu4kCqTkkQAQGYR6kUh+JX8mV7J2GVs5X8ECehA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(366016)(1800799024)(23010399003)(5023799004)(11063799006)(56012099006)(10067099003)(4133799003)(3023799007)(18002099003)(4143699003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?clFKM09VZnJQK0FQekJ2eHJ0ckZUM1VWeHBaNmtsR1hob0JGVFV4NUd1b2c1?=
+ =?utf-8?B?cHE4WWtOaHZlSjBJN2xFbmhLaUFCUU5TSkV4cjB5cHI0TEVkb3VYSWYvc1FS?=
+ =?utf-8?B?VTVCLy9CQkJHdkxwem9NUkw5VUU2Q0c3Vkg1NHUxZTJkZEp2bGtlR2tiZFZU?=
+ =?utf-8?B?U1IwYlF1YkJQbXZBMEsrR0pvNHpVdndINE12VWdMN2FRL01VRC90MWlmbzVD?=
+ =?utf-8?B?OU5XTStLaDNtYW5kTTkwcS9YdDV0dENaQmlLeUdkSWtBYTVNM0xKQkt5NFU2?=
+ =?utf-8?B?SENhcVB6VC9mbWF3VGFsdmNoTWFWTUFDSldjRFBRS1A3RnM2YlQvcGJiYUNm?=
+ =?utf-8?B?NkEzL3l0MlBzNVplVlQyTWhjOWRKMmYvZ0IvR0p2R0dnUm0wZzNDaVQ0eThy?=
+ =?utf-8?B?eUFrMDdHeTdnekcxMUJwOGFJMks0K0NmUU5tSVpPR1ZUL2ZMS3JGbk5BMmZS?=
+ =?utf-8?B?bGt6eGZ5ME1weFNwb0MyZHpjUGs2RWNWRFp0UDVGVUVSaXB3M0dLT1RXTk4w?=
+ =?utf-8?B?cnRIdlZWajZONnhIS3crcHBuMC9nM1dhc0VydS84UU5oa1o0L0dmbVFTaEU0?=
+ =?utf-8?B?Rk1hN0VxNFdrazdURERTU0hldWFFVzhlbHE5NzJWZjFlMklEakErb2dWWFFh?=
+ =?utf-8?B?N0FqNm5ibkhNRE9NQlREMTRIQXcvOUF5Z2pkbXo0K2lWcTNzL056WWc1UzJy?=
+ =?utf-8?B?dmNJOFpZeWFqWnFyalBCcS82SjlsSXNIZTNlU3BwQldMRzNPSllsbm4rLzQ3?=
+ =?utf-8?B?ZHExdEtYaHlzUm52WVE3ajIzZVdzKzE4ZnRicjQ1aXRISllkYlN6T2hiUkRw?=
+ =?utf-8?B?QXFlWXZzUkZUMmF1U3JiMS82b2owOHlsc0pLTWdYaVZGeXpSblJXb210WTRW?=
+ =?utf-8?B?K0doOWJLQTFSMk1ZN0xLRFI4THlONEtxd2VVN3BVbjVJQ1g0aWNmeFlIT1VP?=
+ =?utf-8?B?aDlmZWdWRlhQS1F2VlJWZ3VzT1NOL0ZON29aUGt3aUs0QTVHb3hwS3dMZnhu?=
+ =?utf-8?B?WmNNVlkvY0hUdjBLRzl4allZVHVHL3FvT3h5YjZXN3dqN3d2OHIva05tNlZn?=
+ =?utf-8?B?ZzYzcmV1TENJZjVBalNWLzlVcWovTmx2UGsrNDNvSUZKWXFhZk5nMVgrcXly?=
+ =?utf-8?B?RFB4bGxlMVBhRUl3QW00aEQwT3Npb1lRcmROS2ZuSUllTkUya29pdDJ0SGJp?=
+ =?utf-8?B?dlU4YzFKcGJrVkVNQUtQVFZZYTFEUDBSR1BmUXdieEYwaWpXNGJ2cXVEc0gz?=
+ =?utf-8?B?Snp4MjRpeEhicHhnb0hLUWdEZUlVSjNmdHIwVHFNTXZBa3hIMlJucWlvMHI4?=
+ =?utf-8?B?N2JWamNyNFRENmE2blZPOGtENS84V2dLbHBDYWRGNURIQTVxaWw1Nmwvb3pQ?=
+ =?utf-8?B?dmtHQnVJay9hbDFsNEJ5RWJ4UnFPRXQ1bWc1aXZ1N0xSRFhxWk5pZkRBSmpx?=
+ =?utf-8?B?OFFkRHBRMndlVU1jbFRocFdFbmxvM1RuRHJuTTJuZCtZUEczNmlmRGhGREF5?=
+ =?utf-8?B?d1VtMjhMTFJjaUJNSVN5MHhmYTNEMnl1aWxua0gwUzJKdHF2djNPRyt3Q0xs?=
+ =?utf-8?B?NW1zczEwTjY4L2JSNUxJWU5XRGpvK1hHaXFlR3N1RWdTSjVRcXltSElITkdU?=
+ =?utf-8?B?NVd4bGZOdFphQWtHeUNKK25OOVZYeFQ0dDNwUUxjUGh3TE00dzdjcVQ4VmJH?=
+ =?utf-8?B?MnF1OFJmelJNYnRrL3dESXBzclp6cEVLRUxncVNKdWxDTFBPNy9MNTJvdUFH?=
+ =?utf-8?B?a1p2YisvbWwreG5hNlRBS1F0b3lVTkx6WklabmJvMmlXejZhN1oyY3F3WUNM?=
+ =?utf-8?B?K0FFTWpFdkp2azZ5V0pwMHZUR2IraUpCeWFUZU0zWmhoenNsSkhvUkZvVE9F?=
+ =?utf-8?B?UlNYRklTWFBTMFl0cGVydXZZWHFGN051SVRPNHBGQnd6WjZpVGtjRUs0WGtW?=
+ =?utf-8?B?WTRsbUNXc1plZG5RM0RCT1kzS2xVMDMrL3hLUFhSTEM1eSt4UjFNNE05TnhL?=
+ =?utf-8?B?RHhQSHdCeEJxTUF2S01meU1MNVd5VWJ6OWZ2UjhkME42VWRwODNsYXpaOGJz?=
+ =?utf-8?B?SmkwNkltQlVERm9MRUpJT3ZiWkk0TjBWN09UTUdPZkEweDNrdjcxNE91Zndv?=
+ =?utf-8?B?SlJRL1p0UG5xMEtHRlhGRDNFS3h6N3R3VGFoK2ZwMWxHZkVSVmtrVnJsaC9M?=
+ =?utf-8?B?VklDdXRmRndibEpic2xNcXR6U0Vzc0cxd1FoQ0FKSFBsczBXNW5nVFpIYm0r?=
+ =?utf-8?B?T2dxdzJDMXh4dUhyQ1dVYy9rMzFzM3dLZkxNMXdKMEhENGFIdGllNGptbGw0?=
+ =?utf-8?B?NzBENVRSd3hMNUtCemQwYlJzWXBmck5SOS9vM2wxazFBeHFrUmdVL0R3UDJY?=
+ =?utf-8?Q?Znjzqp9hDGb6LMK11DZBTE7lZHvPWzwtlVpvEPEIYD02/?=
+X-MS-Exchange-AntiSpam-MessageData-1: 9MfDdvwXx69e1A==
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68ca624c-bc5d-4ff7-f776-08def9557941
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2026 16:11:03.6619 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D9sf7sS+a9h9KOkG+DGA0QiTE32jDOXm4qqBJBnIxCkXguEoxkXuOcv1n5Ro1ddhD1iR6VpW+2tkCZAsLuat/gM1WyRfGCuUUfZ5263M71Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR04MB10037
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786636734; x=1787241534;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=iVBVz5DHPE4pwg8+nbBVpwKoTVuGQArg3Zv7tCeme7Q=;
- b=VqU6XPyoiNX+3ZJ9K06sDgSoygpgLqb+e2y0DXcTvk3QuEzCI4wXV8mkOBLBdO/dqv
- AjYKAMgCHbJZQLz62ZAHIvrEmp1TvsYqvZFtNJgzeMV93QV3LHAsAp+kOmVEah3PagZy
- FLKTvi5Jntmr9P1279Eze3WYF6AVWp+gSrMJ5/QsoQxCNGh62858isd0C5Aige3sG6Yn
- jcQFq66q8vkKEYhWl3yez3EsDGMS9rMGa7SWyu7pzVUeLoaxB3dzd/jLKADvY0sE6KQq
- vBVDFjuVxLeQrHlk+CvyGIQ7xNfyhgp2wH2I3mqRkSR6pfrIWDqMKk/zZSIr8FfjnjEz
- CLPw==
+ d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hfHh9WAbMQRtbG8vQoovpcdfPiy85SoJQdc8KmzEUFU=;
+ b=LaMKJZgNMRtBdiPm7BFJKtzZAAwTofRDEkH8u8x216EpMQrHoffOvZdPzrjsDN/7SaCZsl5jE2YxXgT47YsQPu9uUDQ60ILCPEH7YoCPLbX2jECB3Mut85eIuxtViWYieZ/fJ280uzYzkKRLbIbs/VYbTmDfW0u/aLww7YAv3pk=
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=byteray.co.uk
+ dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
- header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=VqU6XPyo
+ dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=LaMKJZgN
+X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,234 +186,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The length of a TPM reply comes from the device and cannot be trusted to
-be well-formed. Add DM tests for the malformed replies that the length
-checks reject.
 
-For TPM2 GetCapability: one reply too short to hold its header, and one
-advertising more data than the caller's buffer holds. The sandbox emulator
-gains two test-only capability properties that produce them; the short
-reply is caught by the length check in tpm_sendrecv_command(), the
-over-long one by the caller's buffer bound.
 
-For the TPM1 OIAP helpers tpm1_load_key2_oiap() and
-tpm1_get_pub_key_oiap(): a reply too short to hold the auth trailer that
-their length arithmetic subtracts. The emulator answers OIAP with a zeroed
-session and both commands with a truncated reply, so the length check
-rejects them before the subtraction underflows. These paths need
-CONFIG_TPM_AUTH_SESSIONS, enabled here in the sandbox config.
+On 8/13/26 5:42 PM, shj wrote:
+> Hi Jerome,
+> 
+> On 12.08.26 17:06, Jerome Forissier wrote:
+>>> With the series applied to for-main I got a CI error, see:
+>>> https://eur02.safelinks.protection.outlook.com/? 
+>>> url=https%3A%2F%2Fgit.u-boot-project.org%2Fu-boot%2Fcustodians%2Fu- 
+>>> boot-net%2F- 
+>>> %2Fjobs%2F68484&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cfcf4355cfe314a023a7e08def9538abe%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639222334948504305%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C80000%7C%7C%7C&sdata=nNfbYn4Y0KW9fswuFVBAVh5ceKMSMFfACtCcOHpIdgw%3D&reserved=0
+> 
+> I applied both NFS patches on top of current for-main and ran the 
+> sandbox tests (I forgot to enable CONFIG_CMD_NFS in the sandbox config 
+> in the previous nfs patch, and the nfs test is skipped, exactly as in 
+> your job, sending v2). But overall I can't reproduce a failure, the 
+> failing test in that job, dm_test_dhcp6_serverid_reject, isn't on for- 
+> main. I applied the serverid series (fix + test) verbatim on current 
+> for-main (b752e441790) and t_dm_dm_test_dhcp6_serverid_reject passed.
+> 
+> Could you tell me which tree/commit you saw this on (the job checked out 
+> for-main at 37f4c339, which I can't find on for-main now), or point me 
+> at your merged test/dm/eth.c? I'll reproduce against exactly that.
+> 
 
-Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- configs/sandbox_defconfig      |  1 +
- drivers/tpm/sandbox_common.h   | 10 +++++
- drivers/tpm/tpm2_tis_sandbox.c | 28 +++++++++++++
- drivers/tpm/tpm_tis_sandbox.c  |  9 +++++
- test/dm/tpm.c                  | 89 ++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 137 insertions(+)
+https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/commits/37f4c339a4b20e8b60370d6b0f73560c04feef7c
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 79f46317e45..db26b6813de 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -394,6 +394,7 @@ CONFIG_ECDSA=y
- CONFIG_ECDSA_VERIFY=y
- CONFIG_RSASSA_PSS=y
- CONFIG_TPM=y
-+CONFIG_TPM_AUTH_SESSIONS=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
- CONFIG_TEST_FDTDEC=y
-diff --git a/drivers/tpm/sandbox_common.h b/drivers/tpm/sandbox_common.h
-index f423c50ec50..c3f6e15703a 100644
---- a/drivers/tpm/sandbox_common.h
-+++ b/drivers/tpm/sandbox_common.h
-@@ -14,6 +14,16 @@
-  */
- #define TPM_HDR_LEN	10
- 
-+/*
-+ * Sandbox emulator test hooks: a TPM2_GetCapability for these properties makes
-+ * the emulated TPM reply with, respectively, a header-only response and one
-+ * advertising more property data than a single-property request can hold. They
-+ * let tests drive the response parser with a reply shorter or longer than the
-+ * data it should carry, as a tampered or faulty TPM on the bus could.
-+ */
-+#define TPM2_PT_SANDBOX_SHORT_RESPONSE	0x00ffffff
-+#define TPM2_PT_SANDBOX_LONG_RESPONSE	0x00fffffe
-+
- /* These are the different non-volatile spaces that we emulate */
- enum sandbox_nv_space {
- 	NV_SEQ_ENABLE_LOCKING,
-diff --git a/drivers/tpm/tpm2_tis_sandbox.c b/drivers/tpm/tpm2_tis_sandbox.c
-index 50e308e7116..1fae0fc6ce1 100644
---- a/drivers/tpm/tpm2_tis_sandbox.c
-+++ b/drivers/tpm/tpm2_tis_sandbox.c
-@@ -542,6 +542,34 @@ static int sandbox_tpm2_xfer(struct udevice *dev, const u8 *sendbuf,
- 		property_count = get_unaligned_be32(sent);
- 		sent += sizeof(property_count);
- 
-+		/*
-+		 * Test hook: reply with a truncated (header-only) success
-+		 * response so the response parser can be exercised against a
-+		 * reply too short to hold the data it promises. Honoured for any
-+		 * capability so the check can be tested on a path without a
-+		 * capability-specific length bound.
-+		 */
-+		if (property == TPM2_PT_SANDBOX_SHORT_RESPONSE)
-+			return sandbox_tpm2_fill_buf(recv, recv_len, tag,
-+						     TPM2_RC_SUCCESS);
-+
-+		/*
-+		 * Test hook: reply with a success response advertising more
-+		 * property data than a single-property request can hold, to
-+		 * exercise the caller-buffer bound in the parser.
-+		 */
-+		if (capability == TPM2_CAP_TPM_PROPERTIES &&
-+		    property == TPM2_PT_SANDBOX_LONG_RESPONSE) {
-+			*recv_len = TPM2_HDR_LEN + sizeof(u8) + sizeof(u32) +
-+				    sizeof(u32) + TPM2_PROPERTY_NB *
-+				    sizeof(struct tpms_tagged_property);
-+			put_unaligned_be16(tag, recv);
-+			put_unaligned_be32(*recv_len, recv + sizeof(tag));
-+			put_unaligned_be32(TPM2_RC_SUCCESS,
-+					   recv + sizeof(tag) + sizeof(u32));
-+			return 0;
-+		}
-+
- 		switch (capability) {
- 		case TPM2_CAP_PCRS:
- 			break;
-diff --git a/drivers/tpm/tpm_tis_sandbox.c b/drivers/tpm/tpm_tis_sandbox.c
-index d7341062b31..1f63e60cbaa 100644
---- a/drivers/tpm/tpm_tis_sandbox.c
-+++ b/drivers/tpm/tpm_tis_sandbox.c
-@@ -226,6 +226,15 @@ static int sandbox_tpm_xfer(struct udevice *dev, const uint8_t *sendbuf,
- 		*recv_len = 12;
- 		memset(recvbuf, '\0', *recv_len);
- 		break;
-+	case 0x0a: /* TPM_ORD_OIAP: hand out a zeroed auth session for tests */
-+		*recv_len = TPM_HDR_LEN + sizeof(uint32_t) + 20;
-+		memset(recvbuf, '\0', *recv_len);
-+		break;
-+	case 0x21: /* TPM_ORD_GetPubKey: truncated reply, for the length check */
-+	case 0x41: /* TPM_ORD_LoadKey2: truncated reply, for the length check */
-+		*recv_len = TPM_HDR_LEN;
-+		memset(recvbuf, '\0', *recv_len);
-+		break;
- 	default:
- 		printf("Unknown tpm command %02x\n", code);
- 		return -ENOSYS;
-diff --git a/test/dm/tpm.c b/test/dm/tpm.c
-index 87c5c416daa..7fc58355739 100644
---- a/test/dm/tpm.c
-+++ b/test/dm/tpm.c
-@@ -6,9 +6,12 @@
- 
- #include <dm.h>
- #include <tpm_api.h>
-+#include <tpm-v1.h>
-+#include <tpm-v2.h>
- #include <dm/test.h>
- #include <test/test.h>
- #include <test/ut.h>
-+#include "../../drivers/tpm/sandbox_common.h"
- 
- /*
-  * get_tpm_version() - Get a TPM of the given version
-@@ -197,3 +200,89 @@ static int dm_test_tpm_autostart_reinit(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_tpm_autostart_reinit, UTF_SCAN_FDT);
-+
-+/*
-+ * A TPM sits on a bus a physical attacker can reach, so its responses cannot be
-+ * trusted to be well-formed. Check that a reply too short to hold its header is
-+ * rejected by tpm_sendrecv_command(), rather than parsed with an underflowed
-+ * length.
-+ */
-+static int dm_test_tpm2_get_capability_short(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 buf[64];
-+
-+	ut_assertok(get_tpm_version(TPM_V2, &dev));
-+	ut_assertok(tpm_auto_start(dev));
-+
-+	ut_assert(tpm2_get_capability(dev, TPM2_CAP_PCRS,
-+				      TPM2_PT_SANDBOX_SHORT_RESPONSE, buf,
-+				      sizeof(buf), 1));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm2_get_capability_short, UTF_SCAN_FDT);
-+
-+/*
-+ * Check that a GetCapability reply larger than the caller's buffer is rejected,
-+ * rather than copied past the end of it.
-+ */
-+static int dm_test_tpm2_get_capability_long(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 buf[16];
-+
-+	ut_assertok(get_tpm_version(TPM_V2, &dev));
-+	ut_assertok(tpm_auto_start(dev));
-+
-+	ut_assert(tpm2_get_capability(dev, TPM2_CAP_TPM_PROPERTIES,
-+				      TPM2_PT_SANDBOX_LONG_RESPONSE, buf,
-+				      sizeof(buf), 1));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm2_get_capability_long, UTF_SCAN_FDT);
-+
-+#if CONFIG_IS_ENABLED(TPM_AUTH_SESSIONS)
-+/*
-+ * A TPM1 OIAP reply carries an auth trailer that is subtracted from a
-+ * device-controlled length. Check that a LoadKey2 reply too short to hold that
-+ * trailer is rejected, rather than parsed with an underflowed length.
-+ */
-+static int dm_test_tpm1_load_key2_oiap_short(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 key[8] = {0};
-+	u8 auth[20] = {0};
-+	u32 handle;
-+
-+	ut_assertok(get_tpm_version(TPM_V1, &dev));
-+	ut_assertok(tpm_init(dev));
-+
-+	ut_assert(tpm1_load_key2_oiap(dev, 0, key, sizeof(key), auth, &handle));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm1_load_key2_oiap_short, UTF_SCAN_FDT);
-+
-+/*
-+ * The GetPubKey OIAP helper subtracts the same auth trailer from the same
-+ * device-controlled length. Check that a reply too short to hold the trailer
-+ * is rejected, rather than parsed with an underflowed length.
-+ */
-+static int dm_test_tpm1_get_pub_key_oiap_short(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 auth[20] = {0};
-+	u8 pubkey[8] = {0};
-+	size_t pubkey_len = sizeof(pubkey);
-+
-+	ut_assertok(get_tpm_version(TPM_V1, &dev));
-+	ut_assertok(tpm_init(dev));
-+
-+	ut_assert(tpm1_get_pub_key_oiap(dev, 0, auth, pubkey, &pubkey_len));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm1_get_pub_key_oiap_short, UTF_SCAN_FDT);
-+#endif
-
--- 
-2.43.0
+> Thanks,
+> Shah
+> 
 
