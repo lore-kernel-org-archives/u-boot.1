@@ -1,130 +1,94 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F368C5B572
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 13:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA5EC5CFEB
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 13:18:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D67D98128B;
-	Thu, 13 Aug 2026 13:15:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A27B360B0D;
+	Thu, 13 Aug 2026 13:18:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZQ9i2buVxJCf; Thu, 13 Aug 2026 13:15:47 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P6tjmfojPv6a; Thu, 13 Aug 2026 13:18:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7F23C81236
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ACE3760B05
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786626947;
-	bh=4Dk3h4XB9LIRvcGJbYwRA3Q/TUQAVjbKjDdivOzweG8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	d=lists.u-boot-project.org ; s=default; t=1786627105;
+	bh=hXqgctjwkGOZKfx9bck8fWivYfU7+Qn0z544DYFP8y4=;
+	h=Date:Subject:To:References:In-Reply-To:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From:Reply-To:
 	 From;
-	b=S3+fwMbbBQDMs0sT47xR96n+bWejU3FUSJqt0Fg6JT795qqviJ6uYOhzd++7gNr7l
-	 gX9y8K7GAJOF9CoRNAjTccq/PXudrTT3yWAkpFrxaVBG9DUJLtKMlRWgxYIetA59o0
-	 rLk6zNNpexm61XClkXxoS3JsDpKtbL1LOFCBNuAWV2FRGiV/G93GSJuw9JPo2S8ETk
-	 rfrumMWXJQptItzplXfbllqCjPaiPLwNlUpc+YcMo/FNzMoaCShSlc32IgswqUozrl
-	 MVoqzPWhXS4ecz5QSJP+l7eABw7EPIJ++6sLPNlv1lxYmFW52Kz1UJgu2/exDNW8bf
-	 F7dTEEocnvvUQ==
+	b=vkZU7f3f/haN+KnEvNQWuejqi6SIklQAroYthfDrFj9jfaF78DraUbSw+Z2XAs85A
+	 KakqCR54S3FycW4rxgyIUEskXsQvl7lvavkwMHJVNy+hyJRiHA5hR+A4OY/s8Xc5TQ
+	 ZxjsbmHGrIWYEgMYr9i4dlMuMS8Q3A2+iGMTf6d8Thttxwlhw0jzc95VYzebFfK5Zk
+	 To7aBvrbe7rO8F2AO/stxZptn0dvEfp/hMsveJsV7v3cq1R75zQtjlBFAuslNCipIM
+	 yDfQ8/TuBuxi5/uNg7Zuq7jvcP/C3lWM45a2UOR6QieH+TDP9dzEvgbNSvQxWpJmHH
+	 DGBhbufaz/yAQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7F23C81236;
-	Thu, 13 Aug 2026 13:15:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 139523A0
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:15:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id ACE3760B05;
+	Thu, 13 Aug 2026 13:18:25 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3E0AF3A0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:18:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 07D494096F
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:15:46 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 23E1240983
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:18:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ag_dM1MD7Lyu for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 13:15:45 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::236; helo=mail-oi1-x236.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 85AC740959
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 85AC740959
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 85AC740959
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:15:44 +0000 (UTC)
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-4af81963f35so967571b6e.0
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:15:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786626943; x=1787231743;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=4Dk3h4XB9LIRvcGJbYwRA3Q/TUQAVjbKjDdivOzweG8=;
- b=WOndHrVs3IjJgTGdmOHQSuata+Llxtkw2YVuxUjDfyzX0a4PnHVKTqIhvyqvgkfSvg
- fqCNOsz2agzmu1dZeSuyuDTgthoX8c+KebMeihFulMFrW1AAPwl2CbQBPksJyapk8f1f
- +itXwW75dXi5FQYt253517H5cA1siUmNw3MPZ9XMcMqGsH9tokygIwc7tOSklQNaK0AO
- OtMf3R/+Axs7MVPbep8nMoANZNv4MtsUDBG88AOTLW9vf5VwBMEzAverkBvkXugzJsE8
- 8QhGh8H8B7FiyE++csS1YZtbTdr/WuXrvAPbHh3Ge+9jea8bdXMPKGW0kTK85FGcSWEL
- +BJA==
-X-Gm-Message-State: AOJu0YwmL98O9xvk3RgAXWwCApFRFU4upF1g4HJ0Zq251YbLX/7eabc1
- mNI2EB9iG1yMKfzgbSmgbKWHv+M1OYEzv0NhU9Hkn4N8QAVGiMOe47+P4CP/tk3NgTw=
-X-Gm-Gg: AR+sD13ylyNffVK1gWgBAE7VtK9v0YHBqAGhBtmHn+u+7NxfjR8bEZ3JAqnw+J8uH/f
- VW32fCCRRrKbFjltRrQ8vuH7dxeYbmlxOGaj33VMgKbItaZLE8CVKJGwc3DZxQYdZASZKUM4jdF
- Y2tmQI113hyXEIrOBpSUPnFXdh3fkfO5sOZ3oSVXgrAY2YZWOdcm7htoYCoW5ga9xDaBiveFn2E
- MDB8d1BXkCiyIot+U9y1i2g9RIwCHxoCCLpa8wkWto+0Gwmlk2KqR19NktWCwpoDA2yTzjKrvR4
- lYASfn4Sq5EY2jnrdAwrm+rySdIy74KQ8J94jUbC9iBBRbLKGeLdRoVgXKPUkIxGE9zbtc1581/
- wTXXI0rEnB4cQcDzmM4NWYy2M4YlorGnw8vY69lJTRqFSPToL/K2c0xIQUFJnAG4B045k2NdQ9X
- Wz03GzgF0ftcb++xUe9a/Dj0FuB+FWIBe5ArmCOe8ARkJa3C1xYh9s6gcRV8LsgHy5vY/UTfe6A
- okZkRxbw/BF91craRy0fukXhPcQagNFkQFX
-X-Received: by 2002:a05:6808:1824:b0:497:df42:1e04 with SMTP id
- 5614622812f47-4b227b233b4mr4716718b6e.18.1786626943185; 
- Thu, 13 Aug 2026 06:15:43 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:3678:ac91:e955:c25?
- ([2600:8803:e7e4:500:3678:ac91:e955:c25])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b22d004c3csm1525314b6e.18.2026.08.13.06.15.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Aug 2026 06:15:41 -0700 (PDT)
-Message-ID: <a484c17b-83b2-4d10-92f0-554b35b53341@baylibre.com>
-Date: Thu, 13 Aug 2026 08:15:40 -0500
+ id 0gL7rmSIWmfT for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 13:18:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
+ helo=smtpout-03.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 357994096F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 357994096F
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 357994096F
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:18:22 +0000 (UTC)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 02AAD4E411FA
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:18:19 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id B5675602B8
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:18:19 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EF59711C4DF23
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 15:18:14 +0200 (CEST)
+Message-ID: <458309d9-4655-4cfd-9deb-dc0ce01d7b68@bootlin.com>
+Date: Thu, 13 Aug 2026 15:18:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: mediatek: fix reprobe regression
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Julien Stephan <jstephan@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, Sam Shih <Sam.Shih@mediatek.com>
-References: <20260813-mtk-clk-fix-reprobe-regression-v1-1-ed259968c2b8@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260813-mtk-clk-fix-reprobe-regression-v1-1-ed259968c2b8@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] pylibfdt: Replace removed SWIG Python 2 compatibility
+ macros
+To: u-boot@lists.u-boot-project.org
+References: <20260811133433.18852-1-jaipaul.cheernam@est.tech>
+Content-Language: en-US, fr
+Organization: Bootlin
+In-Reply-To: <20260811133433.18852-1-jaipaul.cheernam@est.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Rspamd-Fuzzy: fc92476046d305a7304aa5e3a89d331c86706a8860f55d2651411b4a3660045dd5dd8de1e8efbc95203731585d49b94bd0322fce187301f2d963c8915ca328ab
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786626943; x=1787231743;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=4Dk3h4XB9LIRvcGJbYwRA3Q/TUQAVjbKjDdivOzweG8=;
- b=k7eUSn/xZO/xBc3UXTTAKGtw6PHP8hcIjP3A+C96ZCR80LRGcAUXftQO35FEj2PXXW
- BApr4LmKdvCkLm7cCmvFJv0EtxBx7YRpcy5TW7wxBpX0dZgQ00I9dkdVv7VLcEWyaN16
- qhlusZIRqz2Kh8KbN9DccmdQgrTldk5sI//WDxOdur6gfbxqtnBLY9rTBJb/t/BlpD3C
- p0YTYwHNz0DPw9/jH9OuWL3ETsvbc8WqA4+fTMlg2vvCyElbdp85575m6d55MzTPZw4G
- 5DVrudyq7+lmPrO+HEyZ6a5JrecSPWcO9vv58/S0FP9wfAj8oxlotQEKslf283FVMQYR
- MwzA==
+ d=bootlin.com; s=dkim; 
+ t=1786627095; h=from:subject:date:message-id:to:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=hXqgctjwkGOZKfx9bck8fWivYfU7+Qn0z544DYFP8y4=;
+ b=YrVgQn3jRPOAo0cbB+OA/+cHFwsyrQ6fyYCtZ5RpwQ2oRdmH5Zw+v+KVt79Ysq8g6lZ6SO
+ APb0JC79HI50SxoMwH7zGll7JZ0KW6QQg1s0vqnx3pIcrInopNVy0GT27OMMYplrwV/9N6
+ 9pBK4hjFZ42wZd6jthlsVzJ/WtpTLln4dSmGQj+6vz8HSCHuN29I4bVJ3duVDasrSSuAfn
+ 7ddEp2O24iZS3kWulqH7I/PX4hWNfCXS/isZikobP4idqg9/umfRhavCTk3vG85gdzHq95
+ 05XDZhgXknAE8x4rKc4t2ncBZOZSbIpSr4O8PvJE9JHbEX2GH2uA91YsvLOwwg==
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none)
- header.from=baylibre.com
+ dmarc=pass (p=reject dis=none)
+ header.from=bootlin.com
 X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=k7eUSn/x
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=YrVgQn3j
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,17 +100,69 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_via_U-Boot?=
+ <u-boot@lists.u-boot-project.org>
+Reply-To: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?=
+ <jeremie.dautheribes@bootlin.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 8/13/26 8:10 AM, David Lechner wrote:
-> Clear the MediaTek clock provider registry after relocation. This is
-> necessary for a couple of reasons. If any clock probed before the
-> relocation, the registry will contain a pointer to pre-relocation
-> memory. Also, all drivers reprobe after relocation, so even if we
-> had a valid pointer, it would be to a clock provider that had not been
-> reprobed yet. Clearing the registry ensures that all clock providers
-> are re-registered when they are reprobed after relocation.
+On 8/11/26 15:34, Jaipaul Cheernam wrote:
+> SWIG 4.5.0 removed Python 2 compatibility macros (PyInt_*, PyString_*)
+> from its runtime header pyhead.swg (see commit 79f7a2b7cb7d). Replace
+> them with their Python 3 C API equivalents:
 > 
-Disregard. I forgot an important detail and will send v2 shortly.
+> - PyString_FromString -> PyUnicode_FromString
+> - PyString_AsString -> PyBytes_AsString
+> - PyInt_AsLong -> PyLong_AsLong
+> 
+> The replacements are safe since the macros were already aliased to
+> these exact functions in SWIG's Python 3 code path.
+> 
+> This is a backport of dtc commit 5008d1d6a356 ("pylibfdt: Replace
+> removed SWIG Python 2 compatibility macros").
+> 
+> Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+> ---
+>   scripts/dtc/pylibfdt/libfdt.i_shipped | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+
+Reviewed-by: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+Tested-by: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+
+> diff --git a/scripts/dtc/pylibfdt/libfdt.i_shipped b/scripts/dtc/pylibfdt/libfdt.i_shipped
+> index e4659489..326a15c7 100644
+> --- a/scripts/dtc/pylibfdt/libfdt.i_shipped
+> +++ b/scripts/dtc/pylibfdt/libfdt.i_shipped
+> @@ -1033,7 +1033,7 @@ typedef uint32_t fdt32_t;
+>   	PyObject *buff;
+>   
+>   	if ($1) {
+> -		resultobj = PyString_FromString(
+> +		resultobj = PyUnicode_FromString(
+>   			fdt_string(fdt1, fdt32_to_cpu($1->nameoff)));
+>   		buff = PyByteArray_FromStringAndSize(
+>   			(const char *)($1 + 1), fdt32_to_cpu($1->len));
+> @@ -1064,13 +1064,13 @@ typedef uint32_t fdt32_t;
+>           }
+>           $1 = PyBytes_AsString($input);
+>       %#else
+> -        $1 = PyString_AsString($input);   /* char *str */
+> +        $1 = PyBytes_AsString($input);   /* char *str */
+>       %#endif
+>   }
+>   
+>   /* typemaps used for fdt_next_node() */
+>   %typemap(in, numinputs=1) int *depth (int depth) {
+> -   depth = (int) PyInt_AsLong($input);
+> +   depth = (int) PyLong_AsLong($input);
+>      $1 = &depth;
+>   }
+>   
+
+-- 
+Jérémie Dautheribes, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
