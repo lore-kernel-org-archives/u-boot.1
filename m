@@ -1,127 +1,137 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9509DC5B572
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 17:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27FB9C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 17:59:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5945140C42;
-	Thu, 13 Aug 2026 17:59:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 57DAB81334;
+	Thu, 13 Aug 2026 17:59:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Kv5zoxvUQYwB; Thu, 13 Aug 2026 17:59:35 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l-uT0RIkCjuN; Thu, 13 Aug 2026 17:59:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CBD9D40C28
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D48FE8133B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786643974;
-	bh=ZpLVsGiHpstsjvN8VcAep8q4kjM1KBZfmedJ0Wf3N3I=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786643976;
+	bh=m928+qgJ6iaOFtJhWlpp7Pb3q8ThqlNgbpeLh4XiAd8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=g/j608XtezLPU4/H+EznPy6v+6lk/b3xcyIBHaoNaPygvczqtI0sGQa63tnzTs5I7
-	 /d6qvH3mS2fqFr7b0CTBWVcJioQkRSbR7302M0Fr7ayj9bYmC8su1hK9AnabFnnQrT
-	 qsfXq+j1XT398lC8fd3BvBK/63AVrBQcFygauxnsg3WX2f12xIViHPjiIbQXGB9Rwb
-	 AHVxn1OiXrHaAFzbBjYD+RRO5ccluhdiUEY8cUj6QHde7TF4/2NyhPlpzATh5IR5g7
-	 BSkTD5bfzwh3/TasjCR3Vv2IGknAlbpHAsKk4U/l0LftI37yGXBo+5OvuVI+zNTnwQ
-	 4TpuNPgQiEsqQ==
+	b=f/IK0rd1dYlKoIRIQb8Z5LQhnZm90E6BteM1AMYQTnzTahTubgx6n2f5jLB9IGaai
+	 /HbffG8kT09JqoWG3PcYj8pnUs9fSoGpHGo7OK+wJvTaEGACCWBdTmNlDYf7l70q2/
+	 Lpq0UPqoIYkaN9A0DOpCRFWXjrWO1jhwtm+Vdv9G4o1bstl8iSCGyuQCHlF/+0YEeq
+	 zl/pCa6LK2Z7eovOxp7YKEX+Z36EY4pBGhNsXN9K96MBTDAeABR213yFor48jh+RVH
+	 blT2llzJ4k8wVMuB6pQztL6A6FKpkkwHwOiTtVhBonqJh7xsWPRA/p7Yf8mZhAwPC/
+	 hdYcg4Ex/MFVA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CBD9D40C28;
-	Thu, 13 Aug 2026 17:59:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D48FE8133B;
+	Thu, 13 Aug 2026 17:59:35 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 43885357
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:42 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E5F583A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:41:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2A44240158
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E3F2740158
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:41:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2mOG3XU2rlg9 for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 16:28:41 +0000 (UTC)
+ id LFkmyw3A9nq8 for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 16:41:21 +0000 (UTC)
 Received-SPF: None (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
  envelope-from=shahriyar@byteray.co.uk; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 4432C4016A
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4432C4016A
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4432C4016A
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:28:41 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6a18840e2abso1778158a12.0
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 09:28:40 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C356D40168
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C356D40168
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C356D40168
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 16:41:20 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so1154725e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 09:41:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786638519; x=1787243319;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ZpLVsGiHpstsjvN8VcAep8q4kjM1KBZfmedJ0Wf3N3I=;
- b=YqQrr7BTGjoiaKE/zW7R9dHnIPNIFS8M97tPLsxr/idjZT4LSpkzjMB2olSfkAACt1
- Gz3fHhnWFgEPXSpx8z254M4Vol5+xww9EnEEb7CKaz+oH1TVnUEEyCMH7QWo4t6aSH3A
- qmvMBjvvOL94gXLs0lmGs9YLtjWCbQFG+kBxAB89OR02g4Rdx15tj6h93wWJC3lNoT+3
- SjtRozqn1bnvIeZ3Ns7vrWAgG2y8U11byxuHFF9opMZDKCn7X85azMT7p2jHVU31Jc/P
- CyXko6ZbzCq16/3oIN4EDDqibvTIggSroC49Yttg0rNJi1OmA3RWvpkY6PdKHZNTqz0d
- OzrQ==
-X-Gm-Message-State: AOJu0Ywh3ffpcc6zeAKzqWtLPYVFYpsIK9nqC9uiPkX54uWXsj2DJjfQ
- Tl6rI8a75FdazSIO3IKm7iBbqSLOVgW3sRinEWUKVOwZilBG5Mbq7hMNWpm7kHgpVYQ=
-X-Gm-Gg: AR+sD13CdX2u7AhrfRU0eNz/Si7JGJd7dMVnuWO5w0zg8I7zpT+mNs4Sf6z77DVf0do
- /fx6wJL5rwnj3DcFuiPWYTjmvbyaN9qZGCsfajnlTsQHS2Z0O3zylEExKmg3v1ZkU7bVB0tL44U
- lf59MFih42rpLZWSxJhff1ka5yGYpFiM6N+oiNC3I/7Rp3+XidP/NMKw6f44/eRi4Upi1ULgll1
- rh6OsdVcCH4wolNH/mgKm3n0r+P//vObcQV0HBhu+FjxDxWwqXUhK2NLgoM3mi1fa+Ydz9GWAMU
- 8eGHV6VfE02Nea1wtqN7s6nkgjCWmX7luzXNM9PyDgThhVYzLqJ+RtHCYWmgb4A5qb7UQTcdWb2
- ZgZ40+sLgxn3m0LkAtGd09BOY8s81r6XroSX60r1ZXwFimMWfvvcVkd8D9fyCedoBwKUVnU5/Fs
- 4nkt5yWV+2hU6VINpAlnF2EO379qq3VXy3nmx02a40h0Cy2qrUTrkq33DzCBHN+9/04Xhxoa2wI
- ykFMIYYTOzTXvTu37uQ8kLKp8mLgIpgUsIDkGnTAIWKoBynwMks
-X-Received: by 2002:a05:6402:e0b:b0:698:8847:e2f8 with SMTP id
- 4fb4d7f45d1cf-6a38060c289mr3721576a12.15.1786638519196; 
- Thu, 13 Aug 2026 09:28:39 -0700 (PDT)
-Received: from [127.0.1.1]
- (p200300ff0f038f00b49b9d175e416b42.dip0.t-ipconnect.de.
- [2003:ff:f03:8f00:b49b:9d17:5e41:6b42])
+ d=1e100.net; s=20251104; t=1786639279; x=1787244079;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=m928+qgJ6iaOFtJhWlpp7Pb3q8ThqlNgbpeLh4XiAd8=;
+ b=DsJZSUirrew3jrIIz6paeveJB/ZX6eqWhddpI3DnErm2Tmov3KePmGWfUio1kE8DxL
+ reuTf8YzH0gXKZBRWon020h9ZTPRfdjpkQaCxsrog+QVILat+9sSIKoHe3alVcg+rld8
+ n298kftj9vpOC1ecuRXFHDcJ0JSGpn+oZXJjjv5SOnwzSlTZDsSQ+F+H0khCvI7iicK9
+ 7eaHXbr7yULrlz56E2jgTGEfVD6F4qVLbjgXPNWK1dmaOt6AuwW6tPxLSnCLOHL6iaba
+ nYrdUakD+TjUppQhfUDdf7WD5IFAWxNzoPwgaRWxFWASFdQ4o8330yqqGzZHQ1/kzhXl
+ DG2g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpJdJ2nSVGOqaDvIW2KZACr7115VEFnDZrrFTPNq79AcIYtmakxxh6NsxQlqkmJ+Gb2hx0tE34=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yxqgk+XRwz6ml3k9yR67XKG2mIuk+lCjfh9/Qb9bVi4OcejQCP0
+ tgibchjUGo8gZUY+vUxrKDvlrqEQkeamUSqHiQ1zajiu69FMQ/Cn+UOozTjHWGZL1ls=
+X-Gm-Gg: AR+sD131zk75+WkFTSLwu0PRgAR8nUIPsdaUJmuj2W67CsTLA8VMBTOOTuNuWzcrtx8
+ I8ENQynzV0knN1pfEhnEitxYQWB4ErRwfukPdybXsg1rMtbfra9EmSOEshX+e6YAOPHs8sU+/LD
+ 7/0gPCUYYLip+jM9Cl/JiCei2AUnYA7ftFmRMoqzHKtQf1wKmfjI6pLRLAEUnx/oqrH9hW7qfJ0
+ HLXdifMDLAUap8ZOdK8uVIset6ay+e8vm+7iFGPkCVJm0sXWr8wqU078siVUrR0VzPUUYH+8LOt
+ zZOWQnNF28KMX0RMcgwJ/h347TWYu936zgBtn9bHG+Mu12rUzqSeyso+E20H+juPSRTmENaB+Gq
+ 68AXvtpVJ8C0mYASnlUCkFY7CzdFR0lyst6PjaxrwGuGzH5p4fRJ4DCT5EI2Z+G08P5PDJKOV/O
+ InO0pFdfZU5aS53sUe+B308NVjVtVdweOwSjdN2rD3XdtE6UQF8oJeZeGconV42/K+x99S0spRo
+ FIjTcm+G9zcyVTAm4SUqDIkw5mKqX2yIS8c0YctijdN0+mtN8psq5yQOxoAvLL5GTMhhfBT4L1y
+ p7XsK9HDDPYrhziV+WI7as/AVw4E4nR9AQCmuGKxKPUv
+X-Received: by 2002:a05:600c:8283:b0:495:6e68:5df2 with SMTP id
+ 5b1f17b1804b1-499821cb307mr97574485e9.12.1786639278705; 
+ Thu, 13 Aug 2026 09:41:18 -0700 (PDT)
+Received: from ?IPV6:2003:ff:f03:8f00:b111:828d:2817:5c05?
+ (p200300ff0f038f00b111828d28175c05.dip0.t-ipconnect.de.
+ [2003:ff:f03:8f00:b111:828d:2817:5c05])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a37f7f59afsm1139188a12.11.2026.08.13.09.28.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 09:28:38 -0700 (PDT)
-From: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-Date: Thu, 13 Aug 2026 18:28:19 +0200
-Subject: [PATCH v2 3/3] net: lwip: dns: free the callback context after an
- aborted lookup
+ 5b1f17b1804b1-49982130365sm81131985e9.7.2026.08.13.09.41.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Aug 2026 09:41:18 -0700 (PDT)
+Message-ID: <395519c3-fd57-4329-9a61-0a9df524cf75@byteray.co.uk>
+Date: Thu, 13 Aug 2026 18:41:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] test: dm: nfs: add a regression test for an oversized
+ NFS read length
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Sebastian Josue Alba Vives <sebasjosue84@gmail.com>,
+ Argus <argus@byteray.co.uk>, nd <nd@arm.com>
+References: <20260811-nfs-oob-fix-v1-0-5444d86d28d7@byteray.co.uk>
+ <20260811-nfs-oob-fix-v1-2-5444d86d28d7@byteray.co.uk>
+ <ce8b5c8e-d62e-4e28-bab8-dab2d26a70aa@arm.com>
+ <f70400e0-9444-4ee4-b7ff-dea8f32d6c86@byteray.co.uk>
+ <bed7313e-fd9d-40ca-8f27-72733b65ba2b@cherry.de>
+Content-Language: en-US
+From: shj <shahriyar@byteray.co.uk>
+In-Reply-To: <bed7313e-fd9d-40ca-8f27-72733b65ba2b@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260813-lwip-httpc-uaf-v2-3-1c3f0b3aa1eb@byteray.co.uk>
-References: <20260813-lwip-httpc-uaf-v2-0-1c3f0b3aa1eb@byteray.co.uk>
-In-Reply-To: <20260813-lwip-httpc-uaf-v2-0-1c3f0b3aa1eb@byteray.co.uk>
-To: u-boot@lists.u-boot-project.org, 
- Jerome Forissier <jerome.forissier@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
- Argus <argus@byteray.co.uk>, Shahriyar Jalayeri <shahriyar@byteray.co.uk>
-X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Thu, 13 Aug 2026 17:59:28 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786638519; x=1787243319;
+ d=byteray-co-uk.20251104.gappssmtp.com; s=20251104; t=1786639279; x=1787244079;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ZpLVsGiHpstsjvN8VcAep8q4kjM1KBZfmedJ0Wf3N3I=;
- b=AwZTRnfSYz5hh9g9V3GHCwg4p4eca8lqHV78XHANEXTglBXgunZxWQkOD6n38p/cF/
- r4HVA3dYd3E5oc/C3aK+zjDeeEMfsOgJfv74ZzTZCY4442CaC2VtQjnCY0/M0wbQd02a
- 2rza7JZgGAfYV2CWcm79BxWyD2odpRSpTDikZlNG4ysSDSwDa96ep6Tg8Rd1y+y2Nw0t
- kBjvnBo/gVc2nYJxv4xfCwI07QbeScdMwixjUD5Gnm6xtw01SZ9EgOEpODWmqDvnykM7
- 78K/AZavNhj2gM6NBi5s8bfmMwtJLaJFgxbP8cQvpFDO5oRmpdBghC7HVeEnT+E0rwUB
- or4Q==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=m928+qgJ6iaOFtJhWlpp7Pb3q8ThqlNgbpeLh4XiAd8=;
+ b=PTAUQ/ONj0zQ6vESt+zTQAhcjEBMo14NkT8wB9YHrjc0KqRuZ3pxrLZM0ZsImesm6G
+ A7hGtX+swltnJPEHojtRAlWFxV286ASJGy+jaee1uO48KcMLGCSu7n5Dl00YgHlOQddb
+ OvDGGJzNP5AEx/OE2KDEuOqDQ3MOWHlWBLF2mDXaBfr0VNE+J0VagAYYwYNZKShY4YB9
+ VMro/dRsFAiusW8ZLa/1m8ujpiZWkTgrEp2laxv/W7suksFXCgAeAHvarnigJcvFVVOs
+ OieAjU4t2V2yO/A9i3eEV4m4/2sAlYzIjfZSABC9zVCEI5WrKEr0VSMFGbdhmEaqwHTB
+ hHlQ==
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=byteray.co.uk
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=byteray-co-uk.20251104.gappssmtp.com
  header.i=@byteray-co-uk.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=AwZTRnfS
+ header.s=20251104 header.b=PTAUQ/ON
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,122 +146,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-do_dns() keeps its dns_cb_arg on the stack and registers its address as
-the dns_gethostbyname() callback argument. lwIP has no way to cancel a
-pending lookup, so if the command is interrupted or times out while the
-name is still resolving, dns_cb() fires later and writes the result into
-the stack frame that has since been reused.
+Hi Quentin, Jerome,
 
-Allocate dns_cb_arg on the heap and add an 'abandoned' flag. If the
-lookup did not complete, hand ownership to dns_cb(), which frees the
-context when it eventually fires; otherwise free it before returning.
+On 13.08.26 18:11, Quentin Schulz wrote:
+>
+>
+> On 8/13/26 5:42 PM, shj wrote:
+>> Hi Jerome,
+>>
+>> On 12.08.26 17:06, Jerome Forissier wrote:
+>>>> With the series applied to for-main I got a CI error, see:
+>>>> https://eur02.safelinks.protection.outlook.com/? 
+>>>> url=https%3A%2F%2Fgit.u-boot-project.org%2Fu-boot%2Fcustodians%2Fu- 
+>>>> boot-net%2F- 
+>>>> %2Fjobs%2F68484&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cfcf4355cfe314a023a7e08def9538abe%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639222334948504305%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C80000%7C%7C%7C&sdata=nNfbYn4Y0KW9fswuFVBAVh5ceKMSMFfACtCcOHpIdgw%3D&reserved=0
+>>
+>> I applied both NFS patches on top of current for-main and ran the 
+>> sandbox tests (I forgot to enable CONFIG_CMD_NFS in the sandbox 
+>> config in the previous nfs patch, and the nfs test is skipped, 
+>> exactly as in your job, sending v2). But overall I can't reproduce a 
+>> failure, the failing test in that job, dm_test_dhcp6_serverid_reject, 
+>> isn't on for- main. I applied the serverid series (fix + test) 
+>> verbatim on current for-main (b752e441790) and 
+>> t_dm_dm_test_dhcp6_serverid_reject passed.
+>>
+>> Could you tell me which tree/commit you saw this on (the job checked 
+>> out for-main at 37f4c339, which I can't find on for-main now), or 
+>> point me at your merged test/dm/eth.c? I'll reproduce against exactly 
+>> that.
+>>
+>
+> https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/commits/37f4c339a4b20e8b60370d6b0f73560c04feef7c 
+>
+>
+>> Thanks,
+>> Shah
+>>
+>
+Thanks for the commit. I reproduced test failing on 37f4c339. On that 
+tree the test "test: dm: eth: add DHCPv6 oversized option regression 
+tests" is applied, but "net: dhcp6: bound received DUID option lengths" 
+is not, so the assert trips. Cherry-picking that fix onto 37f4c339 
+should makes the test pass
 
-Fixes: aedcfec9ed78 ("net: lwip: add dns command")
-Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
----
- net/lwip/dns.c | 38 +++++++++++++++++++++++++++++++-------
- 1 file changed, 31 insertions(+), 7 deletions(-)
-
-diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-index b620b0611d6..e93720963b8 100644
---- a/net/lwip/dns.c
-+++ b/net/lwip/dns.c
-@@ -4,6 +4,7 @@
- #include <command.h>
- #include <console.h>
- #include <env.h>
-+#include <malloc.h>
- #include <lwip/dns.h>
- #include <lwip/timeouts.h>
- #include <net.h>
-@@ -15,6 +16,7 @@
- struct dns_cb_arg {
- 	ip_addr_t host_ipaddr;
- 	bool done;
-+	bool abandoned;
- };
- 
- static void do_dns_tmr(void *arg)
-@@ -26,6 +28,12 @@ static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
- {
- 	struct dns_cb_arg *dns_cb_arg = arg;
- 
-+	/* Late callback for an abandoned lookup: reclaim and stop. */
-+	if (dns_cb_arg->abandoned) {
-+		free(dns_cb_arg);
-+		return;
-+	}
-+
- 	dns_cb_arg->done = true;
- 
- 	if (!ipaddr)
-@@ -36,7 +44,7 @@ static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
- 
- static int dns_loop(struct udevice *udev, const char *name, const char *var)
- {
--	struct dns_cb_arg dns_cb_arg = { };
-+	struct dns_cb_arg *dns_cb_arg;
- 	struct netif *netif;
- 	const char *ipstr;
- 	ip_addr_t ipaddr;
-@@ -52,18 +60,22 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
- 		return CMD_RET_FAILURE;
- 	}
- 
--	dns_cb_arg.done = false;
-+	dns_cb_arg = calloc(1, sizeof(*dns_cb_arg));
-+	if (!dns_cb_arg) {
-+		net_lwip_remove_netif(netif);
-+		return CMD_RET_FAILURE;
-+	}
- 
--	ret = dns_gethostbyname(name, &ipaddr, dns_cb, &dns_cb_arg);
-+	ret = dns_gethostbyname(name, &ipaddr, dns_cb, dns_cb_arg);
- 
- 	if (ret == ERR_OK) {
--		dns_cb(name, &ipaddr, &dns_cb_arg);
-+		dns_cb(name, &ipaddr, dns_cb_arg);
- 	} else if (ret == ERR_INPROGRESS) {
- 		start = get_timer(0);
- 		sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
- 		do {
- 			net_lwip_rx(udev, netif);
--			if (dns_cb_arg.done)
-+			if (dns_cb_arg->done)
- 				break;
- 			if (ctrlc()) {
- 				printf("\nAbort\n");
-@@ -75,15 +87,27 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
- 
- 	net_lwip_remove_netif(netif);
- 
--	if (dns_cb_arg.done && !ip_addr_isany(&dns_cb_arg.host_ipaddr)) {
--		ipstr = ipaddr_ntoa(&dns_cb_arg.host_ipaddr);
-+	/*
-+	 * A started lookup that never completed may still be pending in lwIP
-+	 * and reference dns_cb_arg. Hand ownership to dns_cb, which frees it
-+	 * when it eventually fires, instead of freeing it here.
-+	 */
-+	if (ret == ERR_INPROGRESS && !dns_cb_arg->done) {
-+		dns_cb_arg->abandoned = true;
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (dns_cb_arg->done && !ip_addr_isany(&dns_cb_arg->host_ipaddr)) {
-+		ipstr = ipaddr_ntoa(&dns_cb_arg->host_ipaddr);
- 		if (var)
- 			env_set(var, ipstr);
- 		else
- 			printf("%s\n", ipstr);
-+		free(dns_cb_arg);
- 		return CMD_RET_SUCCESS;
- 	}
- 
-+	free(dns_cb_arg);
- 	return CMD_RET_FAILURE;
- }
- 
-
--- 
-2.43.0
+Thanks,
+Shah
 
