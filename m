@@ -4,98 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2962C5B572
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 19:53:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5B8C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 20:07:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 49A81813C6;
-	Thu, 13 Aug 2026 19:53:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7544C813EA;
+	Thu, 13 Aug 2026 20:07:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mm2Nj-nRLECn; Thu, 13 Aug 2026 19:53:01 +0000 (UTC)
+ id NWxPg5G7YW-G; Thu, 13 Aug 2026 20:07:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F2C90813A9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 15E59813CA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786650781;
-	bh=LYLgyJ07hi+NVcELlOIwEMW98KI1La1aOaB99HBP9Is=;
+	d=lists.u-boot-project.org ; s=default; t=1786651657;
+	bh=aYRifLfmUcFJBV90dDO3eXC0BbF6xCfEpHhjLs6RD4E=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=MNO0aZ6Irkqof74OWogz+yUpZnrmO6RicqkJjNqdXFF0SFjFqkQ3syU6z+yAUVePs
-	 v3ZPpWVp/xesqDSSdbHyHJI24vZ4qILxxVU7EQfZR0TDXlB7icPy3UC9nVER6ExFdu
-	 +PbH50md6yWrz+H3zhVxX5f0NCTw5PN7LDdjgGFFCMktcL45uKqAtn+UAwySTGtp1R
-	 WnwdMsIV6U8BviPfJxxp0tulVugF4ynBh5xrZ88QMMjiOI3MF2sFe7237WWPw333FP
-	 DqEmupmbiYjhiIyw3T1Yeq+1aDZ205GVF+uxFVn/xToYNPU9Fpm4xVlmaa7qXGX8e4
-	 s/MpXKKfAR5lA==
+	b=0isB0KzhnHfrPlPWnTxiBtfjBGDbEX6xPZFYxHYZ8Y46rm9cK193g03nbMAtipT4D
+	 gOdM3VqvlQQ9A1XhVIcHIu+hLXOaw1R5/z+CgJ0eyTfkO7UqwdgCcCz22CkyHgwsYT
+	 WaPSyguGBo9cvvEgwRUXIYl/woxkdQUOPyB33uejhoCzpi2ijce9/QCP1vc/FguGUv
+	 sf/3GHvoE+jee3XTuQVQzsViz1BEJuh9NXx0Qcg9alAwvuiJAjB+hWX0kMWP6eOHVk
+	 7dIhw7c9o8a/aEEsZqvQklIvmbVD2dNIcB5gh/VNa3lm7n5rEIx3kvjhn3B54DOs0Y
+	 iHOq117tiYJSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F2C90813A9;
-	Thu, 13 Aug 2026 19:53:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0500A194
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:52:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 15E59813CA;
+	Thu, 13 Aug 2026 20:07:37 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DAF74194
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:07:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id EAC25409C8
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:52:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CCE36606D0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:07:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E3NHgg1P1EUq for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 19:52:57 +0000 (UTC)
-X-Greylist: delayed 15383 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 13 Aug 2026 19:52:57 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A377D40147
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=icloud.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A377D40147
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=icloud.com header.i=@icloud.com header.a=rsa-sha256
- header.s=1a1hai header.b=uUVwyp9f
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Et0_XT3dDRPm for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 20:07:34 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:b747:3000:200::45; helo=outbound.mr.icloud.com;
+ client-ip=2a01:b747:3000:200::23; helo=outbound.mr.icloud.com;
  envelope-from=valentinliu@icloud.com; receiver=<UNKNOWN> 
-Received: from outbound.mr.icloud.com (mr-2001g-snip6-8.eps.apple.com
- [IPv6:2a01:b747:3000:200::45])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A377D40147
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 19:52:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 60333606D5
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=icloud.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 60333606D5
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=icloud.com header.i=@icloud.com header.a=rsa-sha256
+ header.s=1a1hai header.b=HMAuJhfk
+Received: from outbound.mr.icloud.com (mr-2001d-snip6-4.eps.apple.com
+ [IPv6:2a01:b747:3000:200::23])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 60333606D5
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 20:07:34 +0000 (UTC)
 Received: from outbound.mr.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-2a-20-percent-0 (Postfix) with ESMTPS id
- 6C22618001A2; Thu, 13 Aug 2026 19:44:54 +0000 (UTC)
-X-ICL-RepId: 019ffca7-f88e-755a-91f1-1c29c331b30e
-X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQ9IHV8FWhxEC1YBWQ9LVxQEDlIBUgVGGVcUWhh3AlEcVg1XQ1QEX1BfHA4EVAddBV1WUAJaS0ATBE4TBVIHXU1WDUcPWB5cFBcVQUNeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVaDlsERxQXG1wAFwZbFAREAV0FXQJICEsCVANfBkYXSQdYBlwLXQhVRQxbDlwEUBZfBEIrWxNVF0YJGQhdHQdYRxRHDg8ZWhRcGFM=
+ by p00-icloudmta-asmtp-us-west-2a-60-percent-8 (Postfix) with ESMTPS id
+ 4153F18009CC; Thu, 13 Aug 2026 20:07:32 +0000 (UTC)
+X-ICL-RepId: 019ffcbc-b082-7b9e-8bce-9922d001d4af
+X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQ9IHV8FWhxEC1YBWQ9LVxQEDlIBUgVGGVcUWhh3AlEcVg1XQ1QEX1BfHA4EVAddBV1WUAJaS0ATBE4TBVIHXU1WDUcPWB5cFBcVQUNeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVaDlsERxQXG1wAFwZbFAREAV0FXQJICEsBXQdcAEUXSQZcBVIGXQhVRQxbDlwEUBZfBEIrWxNVF0YJGQhdHQdYRxRHDg8ZWhRcGFM=
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
- t=1786650296; x=1789242296; bh=LYLgyJ07hi+NVcELlOIwEMW98KI1La1aOaB99HBP9Is=;
+ t=1786651653; x=1789243653; bh=aYRifLfmUcFJBV90dDO3eXC0BbF6xCfEpHhjLs6RD4E=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
- b=uUVwyp9fUB2QuBpiSCKv9DvWobcGKjRQ9D31GIiS6VsQd1oYSgMsUwp20syQwUjt+0gghMHefXQCdgSVc0iJHzuZ9ZuUR4UBsPU2ZGP30VSxFsP7530UKyGP6/fIf1I4EuJsSFAT0ToSQ8eOsCuB5qVMfceKfcnDadYi6Q1rqzsoLQGbY00uUXFMJiQMSGwRkHb1Up5Ij+kptZAJGzcRFOB61RlXTRZ9Er/I9wY1binmkZoKZAXM25fwdIQt5s5SLy94jxr8aYX+VGl0nyC9CHxrycyRUkHQslOv2t+JBGhYHuhFZ9UHxj611IG2VQdEpcuWA13A+MINehWhSa1Uwg==
+ b=HMAuJhfkqNqzSg5HT+HuKx7Fj14fSz3+6OTWD9Rk528L+MfxH6utifPuQ3fH6nhlNx3sTQRnhhMP+C0Ie8LejXHJZy+1iPe/UVfI6Uxwz8NH/BSNp/gZXg0hiKmUuwFbQnF/n6YcB1CbG0aunJX0P1ZUCFvRw2klaJVr/Sc9FRSlZBYODkYYeeBVB4XtEYcV0gwFTzDluMJ+EdlmeFC7AdH3QfZd95IngVW5Q2zlOGb5VrqGYutZHtOj6JJUNPjdn8G5TMQzRUIehnSJg8h30cZaQMMwFup1I5fCOpdWGxqXKPUUL58JIYfbofTxIaO3cKDCaCyMFtMTMKamkQF0jA==
 Received: from DESKTOP-GUOEOAE.lan (unknown [17.156.200.36])
- by p00-icloudmta-asmtp-us-west-2a-20-percent-0 (Postfix) with ESMTPSA id
- E9B811800DDB; Thu, 13 Aug 2026 19:44:51 +0000 (UTC)
+ by p00-icloudmta-asmtp-us-west-2a-60-percent-8 (Postfix) with ESMTPSA id
+ 99F7018009A0; Thu, 13 Aug 2026 20:07:29 +0000 (UTC)
 From: Valentin Liu <valentinliu@icloud.com>
 To: u-boot@lists.u-boot-project.org,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
  Valentin Liu <valentinliu@icloud.com>
-Subject: [PATCH v2] boot: android: Add support for the bootflow of Android 13+
-Date: Fri, 14 Aug 2026 03:44:46 +0800
-Message-ID: <20260813194446.145179-1-valentinliu@icloud.com>
+Subject: [PATCH v3] boot: android: Add support for the bootflow of Android 13+
+Date: Fri, 14 Aug 2026 04:07:24 +0800
+Message-ID: <20260813200725.151294-1-valentinliu@icloud.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDE0MyBTYWx0ZWRfXzxsAlp53Kqwn
- dUD3Kd++TxwNFCRt6ZRk8LiyrseVcaELgJ/qlf9SCZvBNMM6MQSM6/85rj0eZpimcUcCQ76ZW0M
- CCuBMY3mTkpF6yjxcSEg/AWNdgdT6nzY+M88D4HowwiP0QPRz2JSoY5ejNiCf3OB/kZsD3NCEmu
- HwldaB8+e7uOFLv2kKGTxGZ4qURSjrQYYTNJhVDppEnbYs74BCJskIQ80lhKg27/36ijJWupj32
- 6NBYvKtgbsSqfpq3F5EZ6HKjEA14RsEwqdxp3+z+DqHIRKe3CE9Je1z2O9nJpLPibBOIDWXODg7
- nXX2RYVN7tSJ9/RKjiL7i2224C+y+PSUsdzg4rU7KSCrLNt5/emk2L56ssL1WM=
-X-Authority-Info-Out: v=2.4 cv=S8jUAYsP c=1 sm=1 tr=0 ts=6a7e1eb7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDE0NiBTYWx0ZWRfX4Qbsmx4gUYUI
+ jbZtigTO0q/hxfRKo+wVtEgiBHdBp61A7+tlfGLSCfgyWxRNOlLrPIHvE0htnonz4leKQeqVH0F
+ iFQ2iijwuOf9Lv4ytrauoZV9VsIA/3NclEyLfxcMjkym/hyG1KfVQL8zKH2zZIPNkLDVzpOcdkf
+ fu9gDchUBjtmfw3lgJvGsWX6JhvH/Ob0tDmjQ0dofTSNVDAqY8qx902YN2v4krz3G2zYw+OR4J8
+ FiPBkPrfMSi3shrAxcax6YgIaEAr2jZt1ysb9tLl4X/viqi0kGbz5+1fbnSz1JStYLpFOZO/VCd
+ 8y71GDzwADP9JpZRsi8PvPumyZESdlHqfINp90Qa8DbWaZRJZPYHV7Ranr5FeM=
+X-Authority-Info-Out: v=2.4 cv=QMJlhwLL c=1 sm=1 tr=0 ts=6a7e2404
  cx=c_apl:c_pps:t_out a=9mRn2PO/+PIrVdEbaIuMPg==:117
  a=9mRn2PO/+PIrVdEbaIuMPg==:17 a=Sv0fKeRqtYgA:10 a=x7bEGLp0ZPQA:10
  a=LQAHsTbMm04A:10 a=VkNPw1HP01LnGYTKEx00:22 a=n8i27M1mAAAA:8 a=v3ZZPjhaAAAA:8
- a=IpJZQVW2AAAA:8 a=pGLkceISAAAA:8 a=EGU2brQIq94NsyqP7LYA:9
+ a=IpJZQVW2AAAA:8 a=pGLkceISAAAA:8 a=6y2KtKeVSjoUg3iUfdsA:9
  a=IawgGOuG5U0WyFbmm1f5:22
-X-Proofpoint-ORIG-GUID: C50HqTR7lw53awco1CmTwlGQeSUeCSXi
-X-Proofpoint-GUID: C50HqTR7lw53awco1CmTwlGQeSUeCSXi
-X-JNJ: AAAAAAABV2Ow1/86HnpB+agd2kjHrp4hpDXGYn1MbJEa20FrgAvu5wIlM7fspSFZ7QdoKIdxPDjzb8XICIdgLnG5rVXJfej+BrxFpkFRmvj6L7LYwuwP+JcbaM5MFZVSoEv0s/M+9lT1IQ5uaKjMWf/x/PCXogt+ObfSAyipFi2KdODMRW1pN1iOB3OgNKtbfvE3TL+FXFJzaMOFkjOX7BVjUYiMe6QjfoD9lj3lCyOZOJpuGTbpJn+URuGGC6bSswDjMBSrmybPG3iRNalcOtKP5NjAwUNFwoU10oBxlJ5igyDA3ZIByF/vhkh3k4LatBby7TLZAgi4TAHS7T4F257mEZT3EffkgJwsCYkB/1GqXpMBRVGDebNcbi9rdyh3mjiBVyCOmDHvEvW5emjQSx0yOvVTPRALcG37RVoeL2uYNIv9KKFTJgMTsYFwAuSKknuqwgNnzWahkVv1khEJ0EQP62VbhwCBJWPcgDfuYy69WNr49A16RmTC5ydKHLHG68ozLV3FLSa8IvgJGH0SrvcOccuwMQX53MkNgLfLGHR0M9+/y9W7wrHGWWcl45nPjm1sWxbvL/CtK5+SORP7mGQXeM5A7SlHjMXPvRc5pFOunXRwHz4WXloY2YSeQpB1Y8l9WNhIakCCYapgCBENsjBat9+YVgtZPWh2vk/NhAaMyGmtyH+d1m1sBHqO3GFjGX2mPs0cQC5/jp/1K2R0vs0NmWPtvhAkuskUVwdqdvapmIPq7DvlclB1K3+eFQbtctLnLeGyReMML4kck2MI/WAvMQp49adMNjy/nIb2Hn2C18O47oUegtlMJRfHMnj4omfDh5pi2dUP5Dn9vRV1BsHvPtjAx/dlxe6HWlSVuVS0utAUQy6hRuUSoWnip0Y3e7J9CxKqkmfg/WfCviBlDlm083rMjzP8uQ8Vgsvt4nKbGIMkHSKFhGlWG7I1vfuoUty/GVbRhgOr7qIaBVEg4AFgPm/VKna
- ccnODdH6qcumKgSqRCyyLAI3q7GD9Ddm9erc8sYT4LbPEaCgtbZwNFzJhCi7/zrSlPTMKcRfNgdx5+92o8z941vUqg283/tL2x7tk6ig6Loz/K865uws9EJhIRCEVoNa3A2iJk6xIVpl/tHCqxCsR/Ly8gCTzWre0+bhK2oVP5evU9udwUk0po3yvQ+G2HaXf7Rn9FlrXsJnsl65g7kbSiVk+Fr4nAwgj8SXIcslpOqyF5R+zwTbas84f792Za5R7se/qYfVtAWOAy1wM76XbejxvGrox+cRd2QRgSw==
+X-Proofpoint-GUID: zla3bfj-17nsDCbeyLXIUhGoamTwzj68
+X-Proofpoint-ORIG-GUID: zla3bfj-17nsDCbeyLXIUhGoamTwzj68
+X-JNJ: AAAAAAAB6vxlpKTmpd7/y/s4c5a6mSVac7P4+lbj8bnqk2xqOIbG1dhKAlohpV6cTGkyU8aAVWy6UY8Y9x4ZvFhHHAsBhjmIp91qulABQifFiMi+0MsMdBLOXmlx0XmAplV84+gO3LejV27t4zqMVdZTeSR/afvquD8Ag0A0dNv1BNWQRo1t2HPs5nogPvzob9BZJd1BQs5kTGAWD2wCwRkf34GobuCVK7uy6RMu6O8gbOZqa+AnjIJTg8MUucWO2TujIbYMsiwP9V2LNwQSXIp9biOZesmdWMpYm2CZfff0WOLm3Umih7oDweDfHDHgROKYv/1144Pj66PRW9+anrRKyp5w5UZqU08sUNMRRN7swHJwZG+mR91T9/Qp7DrsEovAJdCcQ85cc06Bg27acl2FtxsOQkS3Cyg5heV6qUpbJJGwzEDcfsVVAV69i3+Sq4YTdRWoPNDy08/WGTW5mP0Yn7lK0eNYrK/0n/1QLl6seEEUM4JJswF1zIHnCcd+Edm6du4KBLP8SymX3LTu0yRKbFfG+QodA4l7a2UI1Nizq4seE7MEgE9BcusS/tOwD+HG9mlc/Fg2ANynF6jMVfKQvEhhcbWcbKU/BJjjzpZ23iGf6HwHT8EtwPFV1D7ZvzdW4s1qJ9uDCoNJ0zM8KMj1ufazezG2+yScx0cvz5eHmLqBP7ekMWCY++VkYUhpUEc86XwqEsGEnlaoutjcgdSsbQyq+rHyisStp7ENsFHjf4/U/vvMGsROab1jZBC6iH5dcRDLlS4PxSETOfDY5OxgJEn3miHFp7MCzrwFLXNVEhXtsTr6u0PY9/j+M75bHHqS7Bg19b+R2Q1YRGgmgnAoF2JVsC3lLJVk2ZmVKCg8BO9Fz8HtEU4ssItEeWQ65Tg0rirYPtUW+2queEN0tchhbeLFD72x4jYiK2m8RKRpY7w16LV+4eRhhG1zMjdlnIQgKDQ2eDyHQWSaNUGmuurGuyDVMsn
+ inJwjsnVvnEqGXdeTDCJ+6k6Kkj1a88qoDqLv8cKr3tlISCgWqE3QYstAbJTWiQotbRLIyAJ6Ruzbc/o9VBZbQovj7oiiOS6FQgzK+9Du5tU1G8NabWZtOeYPNz6SFxZ9l8PyrT96EXY9UnYaO+4bn4Ie+bT6Wvzw51iTSvkzMd1u2PKa+71aWms4CTV01iH3ozWJ/kFi9u2L+r0Z9hs+vO7u/PpQeZf/SPuViBI9m9rOhdtmIwiATFO700kMajn3LmBAIx6rJoJOSVAeIPngYtofUjF6FdRUitiY
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -121,16 +119,25 @@ so that the kernel can execute init program to continue booting.
 Link: https://source.android.com/docs/core/architecture/partitions/generic-boot
 Signed-off-by: Valentin Liu <valentinliu@icloud.com>
 ---
- boot/bootmeth_android.c          | 65 ++++++++++++++++++++++++++++++-
- boot/image-android.c             | 67 ++++++++++++++++++++++++++++++++
- cmd/abootimg.c                   |  6 +++
- doc/develop/bootstd/overview.rst |  3 ++
- include/android_image.h          |  1 +
- include/image.h                  | 59 ++++++++++++++++++++++++++++
- 6 files changed, 200 insertions(+), 1 deletion(-)
+Changes for v2:
+- Resend without functional changes (mistakenly bumped version).
+Changes for v3:
+- Allow booting device with boot header version 4 without an init_boot partition.
+- Refactor AVB verification logic to verify the boot partition first
+  (to prevent downgrade attacks), then dynamically target the AVB
+  requested_partitions based on header_version.
+- Coding style cleanup.
+
+ boot/bootmeth_android.c          | 134 +++++++++++++++++++++++++++++--
+ boot/image-android.c             |  67 ++++++++++++++++
+ cmd/abootimg.c                   |   6 ++
+ doc/develop/bootstd/overview.rst |   3 +
+ include/android_image.h          |   1 +
+ include/image.h                  |  59 ++++++++++++++
+ 6 files changed, 265 insertions(+), 5 deletions(-)
 
 diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index ec255b072af..c11ef849c56 100644
+index ec255b072af..aacb7712892 100644
 --- a/boot/bootmeth_android.c
 +++ b/boot/bootmeth_android.c
 @@ -4,6 +4,7 @@
@@ -209,51 +216,142 @@ index ec255b072af..c11ef849c56 100644
  static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
  {
  	struct blk_desc *desc = dev_get_uclass_plat(blk);
-@@ -292,6 +340,13 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+@@ -291,6 +339,17 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+ 		goto free_priv;
  	}
  
- 	if (priv->header_version >= 3) {
-+		if (priv->header_version >= 4) {
-+			ret = scan_init_boot_part(bflow->blk, priv);
-+			if (ret < 0) {
-+				log_debug("scan init_boot failed: err=%d\n", ret);
-+				goto free_priv;
-+			}
++	if (priv->header_version >= 4) {
++		ret = scan_init_boot_part(bflow->blk, priv);
++		if (ret < 0) {
++			/*
++			 * Android 12 devices do not have the init_boot partition.
++			 * Some devices upgraded to Android 13 or later from
++			 * earlier Android versions may also not have one.
++			 */
++			log_debug("scan init_boot failed: err=%d\n", ret);
 +		}
++	}
+ 	if (priv->header_version >= 3) {
  		ret = scan_vendor_boot_part(bflow->blk, priv);
  		if (ret < 0) {
- 			log_debug("scan vendor_boot failed: err=%d\n", ret);
-@@ -425,7 +480,7 @@ static int run_avb_verification(struct bootflow *bflow)
+@@ -421,11 +480,31 @@ static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
+ 	return 0;
+ }
+ 
+-static int run_avb_verification(struct bootflow *bflow)
++/**
++ * run_avb_verification() - Run the Android Verified Boot (AVB) verification process
++ *
++ * Performs AVB slot verification via libavb. When @boot_partition_only is
++ * true, only the "boot" partition is verified; otherwise the full set of
++ * partitions required for the current slot (e.g. vbmeta, boot, system,
++ * vendor, etc.) is verified.
++ *
++ * @bflow: bootflow describing the target being booted
++ * @boot_partition_only: verify only the "boot" partition instead of the
++ *                        full AVB partition chain
++ *
++ * Return: 0 on success, a negative error code if verification fails
++ */
++static int run_avb_verification(struct bootflow *bflow,
++				const bool boot_partition_only)
  {
  	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
  	struct android_priv *priv = bflow->bootmeth_priv;
 -	const char * const requested_partitions[] = {"boot", "vendor_boot", NULL};
-+	const char * const requested_partitions[] = {"boot", "init_boot", "vendor_boot", NULL};
++	static const char * const boot_only_partitions[] = {"boot", NULL};
++	static const char * const v3_hdr_partitions[] = {"boot", "vendor_boot", NULL};
++	static const char * const v4_hdr_partitions[] = {
++		"boot", "init_boot", "vendor_boot", NULL
++	};
++	const char * const *requested_partitions;
  	struct AvbOps *avb_ops;
  	AvbSlotVerifyResult result;
  	AvbSlotVerifyData *out_data = NULL;
-@@ -556,6 +611,7 @@ static int boot_android_normal(struct bootflow *bflow)
+@@ -435,6 +514,22 @@ static int run_avb_verification(struct bootflow *bflow)
+ 	bool unlocked = false;
+ 	int ret;
+ 
++	if (boot_partition_only) {
++		requested_partitions = boot_only_partitions;
++	} else {
++		if (priv->header_version >= 4) {
++			ret = scan_init_boot_part(bflow->blk, priv);
++			if (ret == 0)
++				requested_partitions = v4_hdr_partitions;
++			else
++				requested_partitions = v3_hdr_partitions;
++		} else if (priv->header_version >= 3) {
++			requested_partitions = v3_hdr_partitions;
++		} else {
++			requested_partitions = boot_only_partitions;
++		}
++	}
++
+ 	avb_ops = avb_ops_alloc(desc->devnum);
+ 	if (!avb_ops)
+ 		return log_msg_ret("avb ops", -ENOMEM);
+@@ -504,9 +599,11 @@ static int run_avb_verification(struct bootflow *bflow)
+ 	return ret;
+ }
+ #else
+-static int run_avb_verification(struct bootflow *bflow)
++static int run_avb_verification(struct bootflow *bflow,
++				const bool boot_partition_only)
+ {
+ 	int ret;
++	(void)boot_partition_only;
+ 
+ 	/* When AVB is unsupported, pass ORANGE state  */
+ 	ret = bootflow_cmdline_set_arg(bflow,
+@@ -556,11 +653,13 @@ static int boot_android_normal(struct bootflow *bflow)
  	struct android_priv *priv = bflow->bootmeth_priv;
  	int ret;
  	ulong loadaddr = env_get_hex("loadaddr", 0);
 +	ulong iloadaddr = env_get_hex("init_boot_comp_addr_r", 0);
  	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
  
- 	ret = run_avb_verification(bflow);
-@@ -573,6 +629,13 @@ static int boot_android_normal(struct bootflow *bflow)
+-	ret = run_avb_verification(bflow);
++	/* Check the boot partition first to prevent downgrade attacks. */
++	ret = run_avb_verification(bflow, true);
+ 	if (ret < 0)
+-		return log_msg_ret("avb", ret);
++		return log_msg_ret("boot avb", ret);
+ 
+ 	/* Read slot once more to decrement counter from BCB */
+ 	ret = android_read_slot_from_bcb(bflow, true);
+@@ -572,6 +671,31 @@ static int boot_android_normal(struct bootflow *bflow)
+ 	if (ret < 0)
  		return log_msg_ret("read boot", ret);
  
- 	if (priv->header_version >= 3) {
-+		if (priv->header_version >= 4) {
++	ret = run_avb_verification(bflow, false);
++	if (ret < 0)
++		return log_msg_ret("avb", ret);
++
++	if (priv->header_version >= 4) {
++		ret = scan_init_boot_part(bflow->blk, priv);
++		if (ret == 0) {
 +			ret = read_slotted_partition(desc, "init_boot", priv->slot,
-+						     priv->init_boot_img_size, iloadaddr);
++						     priv->init_boot_img_size,
++						     iloadaddr);
 +			if (ret < 0)
 +				return log_msg_ret("read init_boot", ret);
 +			set_ainit_bootimg_addr(iloadaddr);
++		} else if (ret == -1) {
++			/*
++			 * Android 12 devices do not have the init_boot partition.
++			 * Some devices upgraded to Android 13 or later from
++			 * earlier Android versions may also not have one.
++			 */
++			log_debug("init_boot partition is not found");
++		} else if (ret < -1) {
++			log_debug("scan init_boot failed: err=%d\n", ret);
++			return log_msg_ret("read init_boot", ret);
 +		}
++	}
+ 	if (priv->header_version >= 3) {
  		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
  					     priv->vendor_boot_img_size, vloadaddr);
- 		if (ret < 0)
 diff --git a/boot/image-android.c b/boot/image-android.c
 index 7740cae8cb6..05eb7e9b6be 100644
 --- a/boot/image-android.c
