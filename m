@@ -1,140 +1,130 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B94C5DF66
-	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 13:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F368C5B572
+	for <u-boot@archiver.kernel.org>; Thu, 13 Aug 2026 13:15:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A486B60AE7;
-	Thu, 13 Aug 2026 13:10:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D67D98128B;
+	Thu, 13 Aug 2026 13:15:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id splsMxaRA-_b; Thu, 13 Aug 2026 13:10:38 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZQ9i2buVxJCf; Thu, 13 Aug 2026 13:15:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C8346090A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7F23C81236
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786626638;
-	bh=Yi7m8JiToLA6gKHo5Wffyg6qwXpOlXkEk6qkgrSY3xk=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=W8K9QVvWo0r9MdYJMQDK1iw3brNWSdxgpRc220o5z5zCzvAo2izNAbdchr8Ce4yc8
-	 q6VPfc3ivMwcoqTUBtMpHf5hULiPdV17bEWjkUuYJxC6urSJ5mQONMa7+KhgZSc92D
-	 M5TzMQRTriEDHXQnIPWGUusWJjwbYE4pmF/6T+u+AmtNqZejOIHssXB50nYV2LYEyR
-	 qbRcfaAIp7EV85oSuy6j/5Mb9Q9rFMU87vXV2yagmm6HQ5RtSpSLwkRQsm7LEIMdFX
-	 RuxcvHs46wfKxfjxLOiRqHKvxht3vIcMsaS1aOBzZ5gYocEYpFjZo/z1gdRVTslILV
-	 LHoqCEO23YEcQ==
+	d=lists.u-boot-project.org ; s=default; t=1786626947;
+	bh=4Dk3h4XB9LIRvcGJbYwRA3Q/TUQAVjbKjDdivOzweG8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=S3+fwMbbBQDMs0sT47xR96n+bWejU3FUSJqt0Fg6JT795qqviJ6uYOhzd++7gNr7l
+	 gX9y8K7GAJOF9CoRNAjTccq/PXudrTT3yWAkpFrxaVBG9DUJLtKMlRWgxYIetA59o0
+	 rLk6zNNpexm61XClkXxoS3JsDpKtbL1LOFCBNuAWV2FRGiV/G93GSJuw9JPo2S8ETk
+	 rfrumMWXJQptItzplXfbllqCjPaiPLwNlUpc+YcMo/FNzMoaCShSlc32IgswqUozrl
+	 MVoqzPWhXS4ecz5QSJP+l7eABw7EPIJ++6sLPNlv1lxYmFW52Kz1UJgu2/exDNW8bf
+	 F7dTEEocnvvUQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C8346090A;
-	Thu, 13 Aug 2026 13:10:38 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6B2F7198
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:10:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7F23C81236;
+	Thu, 13 Aug 2026 13:15:47 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 139523A0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:15:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 51FF5403D2
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:10:37 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 07D494096F
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:15:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UwhEx6-p8440 for <u-boot@lists.u-boot-project.org>;
- Thu, 13 Aug 2026 13:10:36 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ag_dM1MD7Lyu for <u-boot@lists.u-boot-project.org>;
+ Thu, 13 Aug 2026 13:15:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2a; helo=mail-oo1-xc2a.google.com;
+ client-ip=2607:f8b0:4864:20::236; helo=mail-oi1-x236.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9A9BC400AC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9A9BC400AC
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9A9BC400AC
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:10:34 +0000 (UTC)
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-6ac83a09781so656485eaf.1
- for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:10:34 -0700 (PDT)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 85AC740959
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 85AC740959
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 85AC740959
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 13:15:44 +0000 (UTC)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-4af81963f35so967571b6e.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 13 Aug 2026 06:15:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786626633; x=1787231433;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=Yi7m8JiToLA6gKHo5Wffyg6qwXpOlXkEk6qkgrSY3xk=;
- b=TKaaVJ4VncxbHw2Adl9hbDcwLs5sDNYdtDhOWF9/yrXeOtNTCVTZ9Uzmeio8hd68yY
- fhRm3whrYvY6kgKEd6jWua9NTozsbo6ENVch1NNBEfsIS76nnKfpFx+3Wz6qnCALuSS8
- lV8V2ZoypC97cktWZYb+C3CjvU3tL4Tlye87GzIsOGwolqSu37BX30DCMttJEHHtpVZS
- NpKEeppZypcsORZEy9AB6+FA0P4cThWk38JDmXYN8w/N+7cHssyr8YMq8ICVHkHI47aP
- OWhdq/dQZ+UTeINzKb4vLUtbddUJSYs9t7BCJHEe1ufQYmu+0FPW+c3sKWUVVROzx6Vj
- mocA==
-X-Gm-Message-State: AOJu0Yx/c0iVDKZ2hI5GFb3pEAMpINHSK9WDxAqd5y6FUtnD5UtzpM2g
- IYCKoYNewcr9eEyQ1quwqGl5FO9KimiNW7l6aT05cRQegN/L64gK6X0cKWGbxNgj0To=
-X-Gm-Gg: AR+sD12R+Cbf2eQ5c1zyvdCRcG4yiM+ZM05tOJfUxq0QImipcjw42HHwwqgK01uusv3
- +i870uPbshu+sW7w4VOnhFzVKWQQ1atZcfeGYd4xR48NQoOUCJOgyRwUz55qXjc8MjYKV34af6R
- lkdFU5k8eapkRi9UyP6YDoiHP1XB9wr/Woy+VKt9MTtsQMsJel5TltQmP31EnTnL4Jv9dT3vAcU
- DYNrqHW7DUb5XUOCU750qo9kQiAcyvRqJFd5zzIqj20ArIK4HppQ3RExh9jJyjr/L0qbR44QQX4
- a3XjV/44/ULrC/1qbillINQghkWnrPqzLh4BWcJfiROh+RuGlHJeHcN8d2JKB5EArwVlAmj/FlD
- 5YrVDn9898tYa5/lDtOJ+5cm3KFS2W617mWd4RqeV1tF/BiE0w629GQu70LvY9q8hw1Ne92YiaR
- l+ttUBn8klNWpxfaIBUbXouNVTqKiP6ypU9tqqLi6mPY0uYqUgqab+ezmjfPScyqfu
-X-Received: by 2002:a4a:ee04:0:b0:6b0:b3df:5eb8 with SMTP id
- 006d021491bc7-6b0c5c88371mr4053874eaf.18.1786626633289; 
- Thu, 13 Aug 2026 06:10:33 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:3678:ac91:e955:c25])
+ d=1e100.net; s=20251104; t=1786626943; x=1787231743;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=4Dk3h4XB9LIRvcGJbYwRA3Q/TUQAVjbKjDdivOzweG8=;
+ b=WOndHrVs3IjJgTGdmOHQSuata+Llxtkw2YVuxUjDfyzX0a4PnHVKTqIhvyqvgkfSvg
+ fqCNOsz2agzmu1dZeSuyuDTgthoX8c+KebMeihFulMFrW1AAPwl2CbQBPksJyapk8f1f
+ +itXwW75dXi5FQYt253517H5cA1siUmNw3MPZ9XMcMqGsH9tokygIwc7tOSklQNaK0AO
+ OtMf3R/+Axs7MVPbep8nMoANZNv4MtsUDBG88AOTLW9vf5VwBMEzAverkBvkXugzJsE8
+ 8QhGh8H8B7FiyE++csS1YZtbTdr/WuXrvAPbHh3Ge+9jea8bdXMPKGW0kTK85FGcSWEL
+ +BJA==
+X-Gm-Message-State: AOJu0YwmL98O9xvk3RgAXWwCApFRFU4upF1g4HJ0Zq251YbLX/7eabc1
+ mNI2EB9iG1yMKfzgbSmgbKWHv+M1OYEzv0NhU9Hkn4N8QAVGiMOe47+P4CP/tk3NgTw=
+X-Gm-Gg: AR+sD13ylyNffVK1gWgBAE7VtK9v0YHBqAGhBtmHn+u+7NxfjR8bEZ3JAqnw+J8uH/f
+ VW32fCCRRrKbFjltRrQ8vuH7dxeYbmlxOGaj33VMgKbItaZLE8CVKJGwc3DZxQYdZASZKUM4jdF
+ Y2tmQI113hyXEIrOBpSUPnFXdh3fkfO5sOZ3oSVXgrAY2YZWOdcm7htoYCoW5ga9xDaBiveFn2E
+ MDB8d1BXkCiyIot+U9y1i2g9RIwCHxoCCLpa8wkWto+0Gwmlk2KqR19NktWCwpoDA2yTzjKrvR4
+ lYASfn4Sq5EY2jnrdAwrm+rySdIy74KQ8J94jUbC9iBBRbLKGeLdRoVgXKPUkIxGE9zbtc1581/
+ wTXXI0rEnB4cQcDzmM4NWYy2M4YlorGnw8vY69lJTRqFSPToL/K2c0xIQUFJnAG4B045k2NdQ9X
+ Wz03GzgF0ftcb++xUe9a/Dj0FuB+FWIBe5ArmCOe8ARkJa3C1xYh9s6gcRV8LsgHy5vY/UTfe6A
+ okZkRxbw/BF91craRy0fukXhPcQagNFkQFX
+X-Received: by 2002:a05:6808:1824:b0:497:df42:1e04 with SMTP id
+ 5614622812f47-4b227b233b4mr4716718b6e.18.1786626943185; 
+ Thu, 13 Aug 2026 06:15:43 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3678:ac91:e955:c25?
+ ([2600:8803:e7e4:500:3678:ac91:e955:c25])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45e64f8f077sm1538470fac.6.2026.08.13.06.10.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 06:10:32 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 13 Aug 2026 08:10:24 -0500
-Subject: [PATCH] clk: mediatek: fix reprobe regression
+ 5614622812f47-4b22d004c3csm1525314b6e.18.2026.08.13.06.15.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Aug 2026 06:15:41 -0700 (PDT)
+Message-ID: <a484c17b-83b2-4d10-92f0-554b35b53341@baylibre.com>
+Date: Thu, 13 Aug 2026 08:15:40 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260813-mtk-clk-fix-reprobe-regression-v1-1-ed259968c2b8@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWN0QqCYAyFX0V23WAqmPQq0YX/WroslU0lEN+9W
- VeHD875zgYupuJwyTYwWdV1HALyUwbcNUMrqPdgKKioqM5LfM898qvHh37QZLIxSWRr4scUq4a
- J6RxlShCSySSav4Pr7c++pKfwfFhh379yEYJrggAAAA==
-X-Change-ID: 20260813-mtk-clk-fix-reprobe-regression-6ac0c072600b
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: mediatek: fix reprobe regression
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, Sam Shih <Sam.Shih@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1818; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=q0V3z+F2D5Fbl3w9j+kC5Zyp/rj/X+Sb3criNtuZtV0=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfcJBdHehrvWFgFZwruio58H2ENZ1UPZUlx0R+
- 1otMKO9DmmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan3CQRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AlTUH/i+ie86gipjXq8zPIOA+8BBR01G3QRN6mMnkMGD
- emr4mnmle09KVBDE9V065v42hC0JxVAI3cCLRVNJN7aEhHbUqjmOWdrGGsbgL3zRrEC5j0h6LX+
- ctdPCUAaRe06TvhU5isaj+b4KcXudx55pNWMvs970tlf1VhLqXVcv8WqKqvupim2UW+zZi9q5SD
- UfCtWgok6Nw+ARxAlriksNJ3BzDDWlW4voehlVjbSbjddYtgD470sVAU8ZwXQOUZsJPMGEC6B5S
- bWsHdzNssGFE8kH682DIqupq+ywOvWFFx8z7odOTMjORvGepd7ECp/WL6HjQTBfjl8z22AmWRcj
- KAmY=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Cc: u-boot@lists.u-boot-project.org, Sam Shih <Sam.Shih@mediatek.com>
+References: <20260813-mtk-clk-fix-reprobe-regression-v1-1-ed259968c2b8@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260813-mtk-clk-fix-reprobe-regression-v1-1-ed259968c2b8@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786626633; x=1787231433;
+ d=baylibre.com; s=google; t=1786626943; x=1787231743;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=Yi7m8JiToLA6gKHo5Wffyg6qwXpOlXkEk6qkgrSY3xk=;
- b=OVMpEIsXsHUnyXvGGtfjpIHpLd4YaAx7yB2mz98NOiosymZlyruVnPMODlVJ8iiluc
- wlpkZSzHT7dAK7vCFogjdzhKX3S3NHksb7xn12OU950ixN0sdQs8Zm6SWcesr/F6liDw
- rA/RJzznaINQNosALH5HpY7uwzrCPZ4ge0vdj2PJLGuCoVsB0qX5KCPaoMPAoNE5ZJqk
- +ZCilv5EegQ2DW8OP1T0k3wPj5hI22NJsFCDa2T0DwhtBmh+owAzDeiQWic2wsAX/Ii1
- QL5dE3GTzXEa/fjYD4jRAz/0voeBFZeiDsd4DC5G6lVJGv8mFmQsb5zNCfW1F6oPj5W9
- fahg==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=4Dk3h4XB9LIRvcGJbYwRA3Q/TUQAVjbKjDdivOzweG8=;
+ b=k7eUSn/xZO/xBc3UXTTAKGtw6PHP8hcIjP3A+C96ZCR80LRGcAUXftQO35FEj2PXXW
+ BApr4LmKdvCkLm7cCmvFJv0EtxBx7YRpcy5TW7wxBpX0dZgQ00I9dkdVv7VLcEWyaN16
+ qhlusZIRqz2Kh8KbN9DccmdQgrTldk5sI//WDxOdur6gfbxqtnBLY9rTBJb/t/BlpD3C
+ p0YTYwHNz0DPw9/jH9OuWL3ETsvbc8WqA4+fTMlg2vvCyElbdp85575m6d55MzTPZw4G
+ 5DVrudyq7+lmPrO+HEyZ6a5JrecSPWcO9vv58/S0FP9wfAj8oxlotQEKslf283FVMQYR
+ MwzA==
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none)
  header.from=baylibre.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=OVMpEIsX
+ header.s=google header.b=k7eUSn/x
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,53 +139,14 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Clear the MediaTek clock provider registry after relocation. This is
-necessary for a couple of reasons. If any clock probed before the
-relocation, the registry will contain a pointer to pre-relocation
-memory. Also, all drivers reprobe after relocation, so even if we
-had a valid pointer, it would be to a clock provider that had not been
-reprobed yet. Clearing the registry ensures that all clock providers
-are re-registered when they are reprobed after relocation.
-
-Reported-by: Sam Shih <Sam.Shih@mediatek.com>
-Fixes: 8ef0ad4c7a6d ("clk: mediatek: use registered provider for parent lookup")
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- drivers/clk/mediatek/clk-mtk.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
-
-diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index 13c248c93a6..849e8a196e5 100644
---- a/drivers/clk/mediatek/clk-mtk.c
-+++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -1130,3 +1130,21 @@ int mtk_clk_probe(struct udevice *dev)
- 
- 	return mtk_clk_tree_register_provider(dev, tree);
- }
-+
-+static int mtk_clock_reset_registry(void)
-+{
-+	/*
-+	 * When U-Boot is relocated, the static clock provider registry is no
-+	 * longer valid since it contains pointers to the old U-Boot memory.
-+	 * Furthermore, all devices are re-probed after relocation. Therefore,
-+	 * we need to reset the registry before any devices can probe after
-+	 * relocation.
-+	 */
-+
-+	for (int i = 0; i < ARRAY_SIZE(mtk_clk_providers); i++)
-+		mtk_clk_providers[i] = NULL;
-+
-+	return 0;
-+}
-+
-+EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_R, mtk_clock_reset_registry);
-
----
-base-commit: 0b581a9612e46310ee52bf8359165950d38b2a2b
-change-id: 20260813-mtk-clk-fix-reprobe-regression-6ac0c072600b
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+On 8/13/26 8:10 AM, David Lechner wrote:
+> Clear the MediaTek clock provider registry after relocation. This is
+> necessary for a couple of reasons. If any clock probed before the
+> relocation, the registry will contain a pointer to pre-relocation
+> memory. Also, all drivers reprobe after relocation, so even if we
+> had a valid pointer, it would be to a clock provider that had not been
+> reprobed yet. Clearing the registry ensures that all clock providers
+> are re-registered when they are reprobed after relocation.
+> 
+Disregard. I forgot an important detail and will send v2 shortly.
 
