@@ -1,129 +1,129 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 900F9C5CFCF
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:24:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08065C5B572
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:24:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 30017811F1;
-	Fri, 14 Aug 2026 21:24:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C47F46067F;
+	Fri, 14 Aug 2026 21:24:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X9aGMEdKS0Oa; Fri, 14 Aug 2026 21:24:00 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id f-kw4sV6QawU; Fri, 14 Aug 2026 21:24:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BF21180F5D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D85296069A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786742640;
-	bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
+	d=lists.u-boot-project.org ; s=default; t=1786742653;
+	bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hvpr2C70lSqOeW/Ouyt0cp7399eBXaKCv4GawcTXPaob12/x4PzLd1mY1F2j7Qy8E
-	 VI3PFK9hLQkWybs4pLmEEP4bLwpI0Jtvsyxw3cDx6u4jsOQbLWerp5Q8dILkaXLPYZ
-	 V70KUvpPSpSKbivgyVHaxXkseWEDngHJQqI91qpcRWDy1P9xwKHYNml5B/Sdb8BjIE
-	 5vkpgE73N1C0Fq2OtcJCgkIf/sAStd4rgXuQglNCZNAg8xCRam/A5FVgAknQybJTy2
-	 OabaKp3OAav3j5TwvxXvw6mrVSOEqY25Lsukp1gNddrPI7+ja/0psjf86zRNgp+4Vo
-	 8nXiEwXnMsU6g==
+	b=IQ/tnfdJhcnQ/zqEAmJS9gTyVOiFvrwzWWcdt/j27BpXkS9gMKthZhjLMqz9LMaru
+	 pEMFGkduO8bg6XKf0J37IfDk6rVlWy+QIJ3qXp8tzU+aXucmO9GE25+tOb8iKGij3o
+	 hceEmxyHkxmXhTqW5B+pH42Z8BiPV/RB6CGGRb0KjeKvWmNF4p53ynuhy94y06SCCi
+	 Q9N6o2AcKXqqI1A5YH0N34vPhjh7Kbr8FiFOvtQyfD0MNNPiKfxhH21/UI5PJHBfkA
+	 4m+mhomnUFpQW8eQBFnMxEQ86As63BMqPQwnIV5U32OZwrAyHthQFC11ao7qh0GuLs
+	 vdo6EmJJQisoA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BF21180F5D;
-	Fri, 14 Aug 2026 21:24:00 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6A6CA194
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D85296069A;
+	Fri, 14 Aug 2026 21:24:12 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CB41194
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:24:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5C72840A0E
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0E63880C45
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:24:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bo-vqX2Gry2K for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 21:23:58 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KfuLexOnoU_T for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 21:24:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
+ client-ip=2607:f8b0:4864:20::630; helo=mail-pl1-x630.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6325540A0B
-Authentication-Results: smtp4.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E7EEF80C35
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6325540A0B
-Authentication-Results: smtp4.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E7EEF80C35
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=jfP92geX
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6325540A0B
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:58 +0000 (UTC)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-6a386a34603so3022840a12.1
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:23:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786742636; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=X0CTweHm
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E7EEF80C35
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:24:10 +0000 (UTC)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2cfbbdfa60bso14963755ad.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:24:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786742650; cv=none;
  d=google.com; s=arc-20260327;
- b=pMPmkt8RSfRXlp+Rz4FSso23W92BbFdLOgWHiAStZgxvWWjFcdxcLW2I6Lif9mFUC+
- nPCmdrBkPRZEG8Uq5BBZ5I1QZcAmRg9u+maH7kN990ff2Hz7LsUKHoiZ4rNAo5Z4/oRo
- eiZ+ShuIjPELye67mWm+n9scYXxlPE3acX02u6b3LkyUnTBpQmeHIBDDwM1m9dpB5U50
- LXbkFzACEYj6/u2xxWgUNon5cTav+yzhnlGDbdF4Ru1UWCG6siMJzxi9F6XwUZbB7wgg
- N/NHOCBR6Mj4xuEqVt7ajy/RDM8OEGdKhO+yNPS9HArcACkSIl11zPOHCQTkifUXC3/t
- Cdaw==
+ b=KB7CpWXZK5k5aou8qmM3j6V9oe/tr1TY+ioXQes+fHnTtfpiqBRxw2gWas58m2dOdL
+ QU7UCN/ZQe4dAwFRFkLYWvj6aRrDvMRykUv4l9d1XpRuYzQrK57/s+9h4DRNoPbDMH4F
+ v9oYJeaZo0WZa0OJ/KKMcEunSlZMGxi18Ibq4aN1AXgBSRWBLmMzvUXo3udjXLTxFTVz
+ pkUA8tPnjL+hs2wkwRUFkx3Z967QCAK2hoVGzmNWLng8Iyb+7xwKWBTFMVSBiW3ibauB
+ UvzyMpqFEiHewvFFtltVh6n81AoHI/74y9S5rr9mzubsyint57Mwysjun7ibn2hecl2p
+ M6CQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
- fh=JJAwH8KzXB37Ep9tnwPaemnwUh4TNNjCGdGPFYfvgoo=;
- b=Ew3vLJ9E9wvv9NiGzOyt4pm9nd2JGlPWFnoEh/c8hhlophogeCekXnPZcGjueqciUH
- VtcUa7yYJqFsrKmCZk8i368JYXaXhSA4lmZeLU20W/xBfSwwSu/Gtg1m7wwsguy/mxjd
- /XBJwigFj5k6eZSWejP6+oLyLlZkDzKTz9susJGQ5UYOUM3AOShUT8Bq6R/72J4rDNYO
- 47yMJnM4y1rB30Dq07dcKjIBVaBO208UmAnZbx2T1RfSfMRH4MrzxTS8/aseF6guOaRr
- CZAkal9mrNjiEGxQjVh78xC763mGleS0K/xZKQwvi96tweObQPqUaYaanvfBpKajRm3C
- bE7Q==; darn=lists.u-boot-project.org
+ bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
+ fh=LpbDjGizNdTi3am7V54pRbGnMopdQTA1xxuRt61RYzE=;
+ b=JzZylzaOnhkg+8BdHmjCjDU/1vUjuXlzIulTR7vxKbxPG62VbL6TedG572cQuH+U0M
+ e+PW6u1lMzYGa3IztqScLuqiYc73pchmryveEK+LYZTRKxMPSkNBF9O42hHDSUliXG0e
+ Xr5ITJ/uFNrRUiZJ5Sa1HXYTm+CVEzP3urkupcG7Oo/vlm4f1grFTgZcAMk1oLnwKS66
+ 5JhkMK6KigIGOu6zA9OB6gNIvS+1MqAAzFdEUY7FFxkkvb0Zqq973oZMvcuXsyrFF/Lv
+ tKfHMUlBIwekts2sEK8B8J3gNXr+EwZwFXzsyzdQv5a6wGmC1LlAJsVuT5zB6dLEJ+l5
+ HYfw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786742636; x=1787347436;
+ d=chromium.org; s=google; t=1786742650; x=1787347450;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
- b=jfP92geXj3+pYGS9JppPIxeq+LXAON9nEt987xCxnWLY/w5ZXkUv9v0FQ9c+6u6VEQ
- Q/BSB7wv4O0LtBqAne8O8Q8qq9i0mnXMEEOjeWlHgrTtWfe90PyRE+tIU3TBnW1CKAht
- 9fLpXl9l5qFjjjsSAyW9ier70KmqStnDi0ie4=
+ bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
+ b=X0CTweHm+1hHYvQWZHYRAAbimaDzTA4tv6XCDt3hUuemf1s68AT27V564vqrTKVffs
+ oJuW4PQCpZZJ2OAgp/wtAncY4PNvt9xgEI1Zedrcf8pxKdJeo0k1OU0CqWSxnCQ7YqsN
+ PaJ5OIfH3dl0nVGgMLtgd8jdASOGOUfb7EW1Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786742636; x=1787347436;
+ d=1e100.net; s=20251104; t=1786742650; x=1787347450;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
- b=GqGzMJX54xBTzbDOfLJxlRq/ihyyQ7YMBeeUKlT+xpwI4ACClMpLJcQJzxgH4TcbxM
- sJkimgATJBfhKM67/Eurh+ZaXIlk2pkkIEVeFW1xX23ofgQ8X7ZNLhodSo8Y2jiSlfib
- yay7BSHNOwdD5hsSaUyE2iceVhqByQ+P1H/JBhobdF5sb907KxZ0Bz0OjwN50dFk7FkC
- 1GGtvsxaCdqoC+2aQTN8eef1MRlx+DcmnqXQniaLIP73drs4KO1mcYr1KvoI4C3z5A1p
- HNJ1VOuVPaIfL7X6HHauKQqjDQ4YE+lf5nWHGOjiYFlSkn8V4WCYHacqmIXpyQgHnxND
- p9SA==
+ bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
+ b=JV8MqvFZKLbevwTEbNlx3ohUpvZbBBBTKeMz9WKFBBr77//oYBNpC6UL4uQdQFPdVb
+ Ctkk028J0Mzdmm33cYeKCi6Qs842MXJCjJwPtV1lOmZ0GmtXCfsRbkWpYlXgI9CrdO9k
+ bn0h0c8p+xyyymo+xckpcpDxEycrFsdxUwqQN7ZeVLhgwxeR4tym2ePe2FmB46y4bTnn
+ nxI1bKGXvWzee5FOfE6NNiu6U3TY078cn3MnKGtQqP53cFh4irh2q0K3uwOM6e6aISNA
+ D9dYF1paue46wSiyFTl6apDp2Uvoc+eb7fTYe9gnKwGkQ+BnwYKcmdSiFU921XxtrnTk
+ 3HmQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoY5qOdzbMc6BVLg3NzxseIrLhVlYAntBlmhMubfqx3CWdVXpPxaOqzf0NfQqKHXvC0EAr/4/g=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx3ACCnbD5qMAHL60QM+fi6qDaqMUSKLUb+Fd2CWjBqBk1YwVRq
- 7qlM3ebnYxzu7m4jT2wH/nDe3E8hU2xk3guYKsYA6XyV3OaG5JHB9S/wmCViJfftJTrWyiAWdok
- FT4ZolkW16tThqF2N2YbODLvsgEf/8kFYAL2PbBWV
-X-Gm-Gg: AR+sD12HLkaPe5p7oEFvp/ykd1DR6SAB/G+bAkO8S5Y8j52yB/rT/NcvIStuBvqishc
- LG6ImN+hKuZq16kVYxemZ0ad5Op8JkGDMeSN+TijZSTX/XYHy31IPr3rNBrx3vTrt7wTv873s6r
- Cfvk2FWZcWlT/lDAXfyRfxEqSRMXUyBvCQ8uOInLSdc2rPIaRK/GOHW2fdAXUK9sXbd6H5H1w6C
- Ah3iLNlxuOVzC/Xyw7mzGcO+Btx/VUplz7KWzhYKVUBPUHkqAEuUazpJiKDo0CJU5oYvg4r3faq
- ndcE5z6FS856aG7a6mCNWKgBhZnoWH0QI7GT3FwmN1I=
-X-Received: by 2002:a05:6402:5415:b0:6a0:de1e:c4c4 with SMTP id
- 4fb4d7f45d1cf-6a38af28b64mr4214300a12.10.1786742636270; Fri, 14 Aug 2026
- 14:23:56 -0700 (PDT)
+ AHgh+Rqp9o86JZn53xnp6s5MJc/kTQKOY+bUEn4nZLXTgi9to1gpVHK/zKETwTx7G3ZV/IW4vVbEndg=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yx1yp3PZZkMS7d+psAchPphi4MGJQlLnrE0/WfjyRnLAj4SpXuf
+ Pqgc7lr24CTIj66zhUNjC/MZcZttgssylINsR5y5XopEVHhKTn/uvoHg77TxErVhE8Iv31+rPCK
+ ZSAHhM5pU721udv/QfMb8+oSfnlt+C7cU8jXRjGro
+X-Gm-Gg: AR+sD12CvShE3ZajeA0EagWl2cRRCgQo8p7zkhqP5EkPUdnkkuUPOIjpfX8tmMEOGrq
+ xVCZ3IbIRPF2jLhrmx5JpS4ldgDw/uN+Yhb2aC6Ii7O3QfIjssy0PWzQZ4yeAOJvlmHtb5kCTi1
+ blWLGdXrGqMhSnBdwQ269+fcnTvAzK8ZLiCHvuzKhMfRhYhRhCofX9onBgbEfRqrof+aQDakHN/
+ UN4+mTBD8Y+KCOz7+VYvOax6BQ7YGEyKts8e2bTgTdhYNAbZIhBbVF9TvpMDprXNo0CwzyV6RLE
+ KZTdwJ/qdIHe0nKsCrlCSvY4GyuvpZR1C8mzNzXXYiI=
+X-Received: by 2002:a17:903:1b66:b0:2cf:b68a:340 with SMTP id
+ d9443c01a7336-2d3b0c43462mr105270565ad.10.1786742650113; Fri, 14 Aug 2026
+ 14:24:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260814-imx93-secureboot-v1-0-0c3c78020d03@bootlin.com>
- <20260814-imx93-secureboot-v1-4-0c3c78020d03@bootlin.com>
-In-Reply-To: <20260814-imx93-secureboot-v1-4-0c3c78020d03@bootlin.com>
+ <20260814-imx93-secureboot-v1-5-0c3c78020d03@bootlin.com>
+In-Reply-To: <20260814-imx93-secureboot-v1-5-0c3c78020d03@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 15:23:40 -0600
-X-Gm-Features: AUfX_mzuNE1ytOnUzcwTmZWBhZ9x7Gvd-4iJXQDPYhib_4skVwXePt1GziMaQ58
-Message-ID: <CAFLszTjJ7ztxWuoTED2G-oECz8NoxPFmhOThTS0ifvrk7ER_Ww@mail.gmail.com>
-Subject: Re: [PATCH 4/5] doc: imx: ahab: add i.MX93 secure boot guide
+Date: Fri, 14 Aug 2026 15:23:46 -0600
+X-Gm-Features: AUfX_mx936Yul3hXpFWI6DSJqMqCzDcVAsFvCABw_YU6ea3qa41inDw-SZLAw-I
+Message-ID: <CAFLszTh6MDfPM75QgLBvwu34cpJ7aeBJZxHXN0uexUFyoDLphA@mail.gmail.com>
+Subject: Re: [PATCH 5/5] binman: test: add code coverage for nxp_imx93cst etype
 To: =?UTF-8?Q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  <jeremie.dautheribes@bootlin.com>
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.u-boot-project.org,
@@ -159,79 +159,78 @@ Hi J=C3=A9r=C3=A9mie,
 
 On 2026-08-14T17:07:09, J=C3=A9r=C3=A9mie Dautheribes
 <jeremie.dautheribes@bootlin.com> wrote:
-> doc: imx: ahab: add i.MX93 secure boot guide
+> binman: test: add code coverage for nxp_imx93cst etype
 >
-> Add a step-by-step guide describing how to securely boot an i.MX93
-> image using AHAB.
+> Add test methods to cover all code paths of the nxp_imx93cst etype,
+> reusing the pattern of the nxp_imx8mcst as done in commit 0cab35362d77
+> ("binman: test: Fix code coverage for iMX8 and cst bintool") by Simon
+> Glass.
 >
-> This guide is largely based on the following documents:
->   - doc/imx/ahab/guides/mx8ulp_9x_secure_boot.txt, from uboot-imx
->   (lf_v2026.04), originally written by Utkarsh Gupta
->   - doc/imx/habv4/guides/mx8m_spl_secure_boot.txt, from this tree,
->   originally written by Marek Vasut
+> This brings nxp_imx93cst to 100% coverage.
 >
 > Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
 e.dautheribes@bootlin.com>
 >
-> doc/imx/ahab/guides/mx93_secure_boot.txt | 269 ++++++++++++++++++++++++++=
+> tools/binman/ftest.py                              | 78 +++++++++++++++++=
 +++++
->  1 file changed, 269 insertions(+)
+>  tools/binman/test/vendor/nxp_imx93_csf.dts         | 18 +++++
+>  .../binman/test/vendor/nxp_imx93_csf_imagename.dts | 24 +++++++
+>  3 files changed, 120 insertions(+)
 
-> +Warning: Please ensure your sample is in OEM Open state, OEM SRK hash
-> +has been fused, and you are able to boot a signed image successfully
-> +without any SECO events reported. If not, your sample will be
+> +    def testNxpImx93cstELE(self):
+> +        """Test CST signing with an i.MX93 SPL container including the E=
+LE
+> +        FW"""
 
-SECO does not exist on i.MX93 - the security subsystem is ELE. This is
-a leftover from the mx8ulp_9x guide; please change to 'AHAB events'
-(or 'ELE events') to match the earlier ahab_status step.
+Please keep the docstring on a single line to match the imx8 tests
+just above. It fits within 80 columns as e.g. "Test CST signing where
+the SPL container starts with the ELE FW".
 
-> +i.MX93 boot image. It is assumed that the reader is familiar with basic
-> +AHAB concepts and with the PKI tree generation. Details about AHAB can b=
-e
-> +found in the introduction_ahab.txt document and in processors Security
-> +Reference Manual Document (SRM). The i.MX93 signing procedure is
+> +    def testNxpImx93cstSigned(self):
+> +        """Test CST-signing-success path with mocked cst invocation"""
+> +        spl_data =3D bytearray(64)
+> +        spl_data[3] =3D nxp_imx93cst.CONTAINER_HDR_TAG
+> +        spl_data[12:14] =3D struct.pack('<H', 0x90)
+> +        spl_data[40:44] =3D struct.pack('<I', 0x123)
+> +        self._MakeInputFile('imx93-container.bin', bytes(spl_data))
+> +
+> +        # Mock run_cmd() so that when cst is invoked, it creates a fake
+> +        # output blob and returns success, thus covering the signing pat=
+h
+> +        original =3D bintool.Bintool.run_cmd
+> +
+> +        def fake_cst_run_cmd(self_tool, *args, binary=3DFalse):
+> +            if self_tool.name =3D=3D 'cst':
+> +                arg_list =3D list(args)
+> +                if '-o' in arg_list:
+> +                    idx =3D arg_list.index('-o')
+> +                    tools.write_file(arg_list[idx + 1], b'\x00' * 32)
+> +                return 'fake cst output'
+> +            return original(self_tool, *args, binary=3Dbinary)
+> +
+> +        with unittest.mock.patch.object(bintool.Bintool, 'run_cmd',
+> +                                        new=3Dfake_cst_run_cmd):
+> +            data =3D self._DoReadFile('vendor/nxp_imx93_csf.dts')
 
-Minor: 'processors Security Reference Manual Document' reads awkwardly
-- please make it 'the processor Security Reference Manual (SRM)' and
-drop the redundant 'Document'.
+data is never used - drop the assignment (as testNxpImx8mCSTSigned
+does), or add an assertion on the returned bytes so the signing path
+is actually validated rather than only executed. A quick assertEqual
+on the length (spl_data plus fake 32-byte blob) would give real
+coverage rather than only line coverage.
 
-> +all the commands that the AHAB executes during the secure boot. These
-> +commands instruct the AHAB code on which memory areas of the image to
-> +authenticate, which keys to install, use and etc. The CSF is generated
+> +    def testNxpImx93cstUnknownTag(self):
+> +        """Test CST with unknown input tag passes data through"""
+> +        # Trigger the pass-through path using an input without the AHAB
+> +        # container tag
+> +        data =3D b'\x00' * 64
+> +        self._MakeInputFile('imx93-container.bin', data)
+> +        self._DoTestFile('vendor/nxp_imx93_csf.dts',
+> +                         force_missing_bintools=3D'cst')
 
-'install, use and etc.' is not quite English - please rephrase, e.g.
-'which keys to install and use, and so on'.
-
-> +| DT property        | Variable    | Description                        =
-                          |
-> ++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
-> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin =
-                          |
-> ++--------------------+-------------+------------------------------------=
---------------------------+
-> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha38=
-4_secp384r1_v3_usr_crt.pem|
-
-Just to clarify for the reader - this points at the SRK certificate
-(_crt.pem), not the private key. The DT property is nxp,srk-crt but
-the env var is SRK_KEY, which is confusing on its own; please spell
-out in the Description column that it is the SRK certificate. Also,
-the matching _key.pem file must sit next to the cert for CST to find
-it - worth stating explicitly, since there is no knob to point at it
-separately.
-
-> +See the introduction_ahab.txt document for the PKI tree generation
-> +procedure (ahab_pki_tree tool) and for the SRK Table generation
-> +(srktool, use the SHA256 variant for i.MX93).
-
-Just to check - the default key material the etype uses is
-'sha384_secp384r1' (see KEY_NAME in nxp_imx93cst.py), so telling the
-reader to use the SHA256 srktool variant looks inconsistent with what
-CST is then asked to sign with. Can you confirm which srktool hash
-flag matches the shipped default, and align this sentence with it?
+Since the pass-through branch returns early before cst is invoked,
+please assert the produced image equals the 64 zero bytes - that way
+the test actually proves the pass-through behaviour rather than only
+that no exception is raised.
 
 Regards,
 Simon
