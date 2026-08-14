@@ -1,132 +1,137 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C4EC5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:16:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2557AC5B572
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:21:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6832780F3A;
-	Fri, 14 Aug 2026 21:16:58 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a_YjxrdXDXau; Fri, 14 Aug 2026 21:16:56 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AB0C180EC6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786742216;
-	bh=tj23a3zvO+jR/vluDxkeKotIvbHh1xws+Anm1OuJQ8k=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bTuOMfkX7aatNsGtZv1v68rvomWcSlwHK0ZLUxVU9YEf/Mo1uJX7DQtkq5oNtJF1g
-	 RbbylMuxiLfUQSSUFCq5toDlbKVSjDkiPBCOHFJnhiTJK3cQYMspBNIGQl4mpLBnTh
-	 MwaV6mRS3Od0vibY88t7soVMbmXQhQyZXiQK3NYgH3HXn8+KFnJ6ZK8b2swGUx98bt
-	 FIQMmGxYbsd/N7xSIOF9qTzEyFVKyFDnMGfBfqKQ5VJwiFvvS2oKVvaWXzFVXGcd3z
-	 5nETtd9HDZTmofvMchWp6XxX8jdMpR/+0+0dh39PltlI9XVMD4teXYDJiHl2HZ9vrF
-	 anYdpZMs5Yp8A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AB0C180EC6;
-	Fri, 14 Aug 2026 21:16:56 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2A4212B2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:16:55 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1C3B9606E1
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:16:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D8F056067F;
+	Fri, 14 Aug 2026 21:21:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B1WmFKsKegTF for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 21:16:54 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org D7A0560685
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D7A0560685
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=lVRPwnZq
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D7A0560685
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:16:53 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6a10d02ff43so2613376a12.0
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:16:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786742211; cv=none;
- d=google.com; s=arc-20260327;
- b=hGBC7Zl1Li+QVsAK7osLHQDB32lVwLoxjhEVDaBuvEQPjvskccsm373pF6zsIglgo9
- T6FcfpYN7CMLSu/3Nn9Of8bcTyK5D+KmNQbHLObyfGIdEzpzcmjW3h/8NArIYrBLkrUh
- jUk7/kTfZROQkvOe0AordM0PlIW0QxfuYNjG03UhDjbzhrishQC85eqwJNr3Ckj4fk63
- qJvrGcwfoQrb+bpXpFVijuN9nZWkpXJao3One8/qqJ+jQESrIDVqIGUjH15FWMfq4Mdv
- J41K+fEv49DsX2fgl5/2ORbzaxqpByTjTFmfWyr3CJMRmHXj0jcIBnJ84OxrPeIK/50k
- UqWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=tj23a3zvO+jR/vluDxkeKotIvbHh1xws+Anm1OuJQ8k=;
- fh=oKuQMwzzx5PhyxqzXjrO9vkW2cwKpx1pa3eIywtw11c=;
- b=h7xIhUXfEsJbVNxBHmahUtEaTgRTwFrQwCd8v5sVpf+jijztUeGd2G3kiXgi+ABKYY
- BAsi8YMw1YIJ8f68UvsMbhAdLJdw4rEYtVJtVBD+5KHfkqn2Y75CPhtecFTzUWXu14Df
- /DLHA1jXKwnMllRVXWL39C2mZcSAr4Snc8HjJ1anXNI5y1kPn2SvAaLaAfhL+RUe4VIa
- 4SjIOKNWDUL15qm5EscdbrUm9NSW1olAparQf/5sHcAQrWNkTPhEeseuY8MQ7XjJ7Ixn
- Qgzet18iwYvQeQJUyOTQXUl1CxOtNDNFpbKseglmkusb5nZZnS783gqYfkfRiB5C4R1y
- nyHw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id qYlDLoGbv2Mg; Fri, 14 Aug 2026 21:21:39 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6AE67606DC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786742211; x=1787347011;
+	d=lists.u-boot-project.org ; s=default; t=1786742499;
+	bh=PJXi38vYlknPQoveZbcFivpScodOIZ54sXTwSloKBts=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=gGOp+Q/cOLtSDD6NFdwq2nrXdlUNHyvh0twra2ZYp2o4QjN5BoWFeCfsKED3YGanl
+	 MefclB+0da8RGB1oWE/mSju48lZmIzFMdyq+rum1+4cQP2iGT6IIsHWZX+stBHogX0
+	 CrMBPiUQF4vqJJcQi934P/OMLjTJyF/auvVpYWfh7ST7KKK9XBmwrfZKdGy6mtW+eR
+	 DppKvxMnmwiehIAy7aS3thvbUyX7I5iI2uCwzlaMxuZSf92/ssW06i3oJM9iBcVaSe
+	 kWBKFPO3S7aGGudqC28ki4lSakrND94rutlAunJCXcYxc1Neoh0w/CXJoeAivAKca8
+	 UY8nH/6aZwCZQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6AE67606DC;
+	Fri, 14 Aug 2026 21:21:39 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1B71F139A
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:21:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 01AD540064
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:21:38 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oJIvJrmpCQ96 for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 21:21:37 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 53D3140106
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 53D3140106
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=lBcDYACk
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 53D3140106
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:21:35 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7ee125ec926so1214576a34.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:21:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1786742494; x=1787347294;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=tj23a3zvO+jR/vluDxkeKotIvbHh1xws+Anm1OuJQ8k=;
- b=lVRPwnZqC1bmdzKk0WqixEvZs3nSIztQEx141IwOHub54EWIu0ESikEJY/jhZKY4GJ
- IPTigfRxl+lRtUMt3Mmf5H3bIZxSyfiHGPPKYhP8Q2QD0Le83eH3WmWGMW6B8ZMRj1Fu
- h5RxsgTIvqvkngBGamIedY6THbMA+yzZlCHK8=
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=PJXi38vYlknPQoveZbcFivpScodOIZ54sXTwSloKBts=;
+ b=lBcDYACkmp5XfbbVltcakcyCwRPmDHG3ZNRnno4WHSvIf11XCs+RgK5tSayhIUWc87
+ G7YaRAbk+s6iCepI7rpJNNWZRofUiZiYDkFkZPhkLGiDCwi3kRyTnMWgVuOq4Gvl3eDb
+ BQS1TL/S7buWVftkjHIPDo60q6TCU2A5IozSEr0KE85eD8hDyG1ndI/LKIP4FuDa2pYv
+ fst/VfaM7gWfW6VoDX+fcE78Qf88BtJI1P/VdqC2tSHuVRNvkJj4qq7/R6FxBg17C7ib
+ tUV0iqob6LZNdNlXJjpXyY6JXRcXy1wnOdzdDzbRNDHqqu3QevRZgewg7uFJWfdGqkfT
+ MF5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786742211; x=1787347011;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=tj23a3zvO+jR/vluDxkeKotIvbHh1xws+Anm1OuJQ8k=;
- b=RNU7D4RThD008SfKpT/5LB+h4sGDfoW5eiAvczD3y+0J4eS2WYKGJ2P8GhmMhFZX73
- Hx/u953jPqP3X8FUvnjSCaAsxSDCOwP0lmaIJ4g9Qewuo4Aa0hi8k4I0LF7PAkLgJS23
- TmuymioteK2DgUNRATqvxgU2p80aVpUe9o4IUDfXYlLDqdJwhsgNqNhPGmIO+HqcPpL+
- UK4QfNGWXuJfOhnNkHV3iI1JOUykal5viu4taIeqs/VTpOwO48m/C/aA6osMnAh7i3CM
- DZHNf9twZjCq4JzHJVcsdMlANzHe7X04z49VjDasKsCHFvlQBRnEjvJemuyHXJye94wI
- wtvg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rqw3oNsCoVSETDMd9n6t0aADg1XwPbuVWTWaF20Ij1OAV88WUXy+rLNDLUiIpA1UNcvTcPWdb4=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyMQShk322jMJOCKNPxkVqNM6dIjtiWzOqu03jCR91aJmr2uUXh
- 984c4G6fIs3BQuIiMcCo9Q2Eyfu31CrEP7yRbmtjstpUV973VRmr+wzYOSL7gpvohQeQ6VV8toq
- Om85C5ijcTHwgM5keyjhYWVont+SNVyfwem9Dd+cQ
-X-Gm-Gg: AR+sD12frTcI5J9GJWh4/JWqySO/Ubv1EWZHRUGPqF//tHoQnxwsuhhdgS9NdpHSVZH
- V5VlCAKT+2PEukn9b6WNFjM41qUPocbfwTehuSg2S0sESCyeQH2CmLbfhwRPOcbOHpp4fXrxzyF
- tfiIXU6IcAe2NtUPNdPC/QiTtXatZ4gHct9G9BN85w3WpzG03BhTIn6VbujolH+ztx+9oD+TFrb
- 9SfyaT4MfVczjG1FINwYIs7QszcT31ddJqlabwKkRRsgctihSVYVfOdr2aT4g9vc7MwoovlXHPj
- Mfw3gy6BhvK2Ok5T+AZvoDFr8SCSnxpJPcNS6HNVTPuE97zwA5TzMQ==
-X-Received: by 2002:a05:6402:a0d2:b0:6a1:f845:8039 with SMTP id
- 4fb4d7f45d1cf-6a38a947f23mr3909125a12.11.1786742211620; Fri, 14 Aug 2026
- 14:16:51 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786742494; x=1787347294;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=PJXi38vYlknPQoveZbcFivpScodOIZ54sXTwSloKBts=;
+ b=ottHU1vvcj4rX4qqhKgvoMmUB73DXoY1qZOuoqfQESeA31J90WrIxldKFG7vhPHPqe
+ ccRV3zlH1qSMNLYFSnii1kbQy4wCXcqNPdDzzHaknnHfGvrGgO/5Kkq5RsATAL+//IuL
+ XsUyGRV9adX0xI4P+30lCU5hqWF0UUAsQA/VOi5E8WPFhqxLOgiTPWJ7g4xayKp9+G7E
+ n2ygeMRLoBRXK1Ynok7PnCu9DKwhmQ2+R6dXXzjkykJGQS3BIwINJl9QXZ5bR6P4Rx6i
+ FohoM4DcE0nxs5CFVwOqSFtLXvimRUpKb1C7GYojVCbdlxIYMe0Ig+H5gqeDqeknTtvw
+ qqpA==
+X-Gm-Message-State: AOJu0Yzt1gKYEFuKMkKplq7zCCUV/DfFMsO7mKplYAf5d7IPXGpB9nEu
+ mKk54F0QV4aEP0FWhSFszYUC2anCvxjcPcwoOG5mKQVF4WgN26Va1WzhnH8fCXnR/8E=
+X-Gm-Gg: AR+sD11V+ZYUZ9ZX4gnU3/JNmx8nOm/ifwoEDcSQW+OBHbCnLZ/Xi173bNR/KRdaOR+
+ Bv2w2o65CmzisoVn1me8nYTyL/j2NkhqWvnX5i85c0ZJEw606CrCc/HLQ22M50QPWfh0xZDGVDr
+ lc4FBlArQ7Bq73gAL3TMm7Uq2FUFmSSNgkY20yUVnqhtYuARL5KqNoeqn4OB4PCxcYJCuQMJzi0
+ IzWdhthu7auvMZUkBnqOEmu8tGDVPisNzUjVnt6cbqGq7jZHOlYtZA8Ko/hF1N0Hu1E9/NQZCrH
+ DLzUA/VY2EF3ETyXadbCtvcBOB1efrddi15l9IyulcBWQ4+58+MK2wEpWmadvZzajpQMGobNRK0
+ GRe9ge56CGweXKIB134bliu96d9rJkT5mF+/5I71YfHXF/P1s8YBHqZPSVmzxWRc9syuXgQULXP
+ m9zqKf7xjrg5EjibLGtw0+rRpnFqws7tKSlDCg7Pahr3Ol/cCcwGeUoJC03MvINkrMXgMcCZj5Z
+ F/oKg==
+X-Received: by 2002:a05:6830:71a9:b0:7e6:fa37:9797 with SMTP id
+ 46e09a7af769-7f3de42968dmr8047618a34.6.1786742494609; 
+ Fri, 14 Aug 2026 14:21:34 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:7124:5000:3b37:b131])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f3e84d80d5sm1870949a34.7.2026.08.14.14.21.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 14:21:34 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Fri, 14 Aug 2026 16:21:25 -0500
+Subject: [PATCH] configs: mediatek: remove UFS defconfigs
 MIME-Version: 1.0
-References: <53b3903e-9413-4c96-ab45-4c34a2a6dca9@gmail.com>
- <becb8615-aa14-4dfa-b6eb-958abc535902@gmail.com>
-In-Reply-To: <becb8615-aa14-4dfa-b6eb-958abc535902@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 15:16:39 -0600
-X-Gm-Features: AUfX_mx8gmqyvvhYZ-QAaQYOYT8B9nlY9PKyRHewRIj7RjG64SN2uauH5wUewZM
-Message-ID: <CAFLszTix9GcQqki543r8fiKyqCrjUFrMk2sm91gGLENcWWmYOA@mail.gmail.com>
-Subject: Re: [PATCH v6 5/6] rockchip: doc: add back to ROM section
-To: jbx6244@gmail.com
-Cc: u-boot@0leil.net, kever.yang@rock-chips.com, sjg@chromium.org, 
- trini@konsulko.com, u-boot@lists.u-boot-project.org, 
- eddie.cai.linux@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260814-mtk-genio-720-remove-ufs-defconfig-v1-1-000eb476030f@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNUQ6CMBCE4auQfXaTUhGMVzE8SDsti6E1LRATw
+ t2t+vglk392ykiCTLdqp4RNssRQUJ8qMuMjeLDYYtJKt+paNzwvT/YIErnTihPmuIFXl9nCmRi
+ ceLZnlHXXXmwzUAm9Epy8fyf3/u+8DhPM8i3TcXwAQIEYsYYAAAA=
+X-Change-ID: 20260814-mtk-genio-720-remove-ufs-defconfig-d3e026765d4b
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5500; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=1DNTrUx9HbUk+xhtcljOz4aElQrgquptAMADtqVed4U=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqf4bWVXUlcwos34zPx3UA6TpDzUVexs/m6cJhf
+ 6OqujaZ9JCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan+G1hYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A6vwH/jXjvrvARD0KRLLLs8jOEdeK9GnOXY+FjD0+T9s
+ ZTZx8dk4vQiQXQmdgFSB9vca6yLwrMwlFqI+4RXbfN3YUheVVcn4VBnFATxR0OrKhwtbKNHQzua
+ mT3kfDfSzdGbw3qT2/WDGRRBRHQZGSXZJZimHWFv508zsaQU8J1c2QrUCR8k4fOA/HqkQzOLCZv
+ lEfagFe7tuJfcrJTO+qWVFZe8NuntBhTFxTJgGF0EtoYUyU+6IvsyT/nDrwJmT5i4rVG04hy5Wa
+ rmt9bLvmw+m1YyR7gZIJhP5RnRlj9qYL4IYuwadbRaSplGr6hy/sWEy2L/wVW79kRx9hOq5bDvI
+ G5Vo=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,40 +146,166 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Johan,
+Remove the UFS defconfigs for Genio 520/720/1200 and enable the UFS
+options in the remaining defconfigs. This simplifies things a bit, e.g.
+it makes fewer builds to run when testing. Users can instead use the
+base defconfigs and pass DEVICE_TREE= to select the correct devicetree
+for the target. Or alternatively, include devicetree overlays in a FIT
+image that can be selected at runtime by the SPL.
 
-On 2026-08-13T20:54:05, Johan Jonker <jbx6244@gmail.com> wrote:
-> rockchip: doc: add back to ROM section
->
-> Add a back to ROM section to rockchip.rst
-> Correct Kconfig text.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
->
-> arch/arm/mach-rockchip/Kconfig  | 16 ++++++++--------
->  doc/board/rockchip/rockchip.rst |  7 +++++++
->  2 files changed, 15 insertions(+), 8 deletions(-)
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+A bit more on the motivation behind this...
 
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> @@ -214,6 +214,13 @@ For SoCs whose TF-A code is not available as open source, use BL31 binary provid
->
->          git clone --depth 1 https://github.com/rockchip-linux/rkbin
->
-> +Back to ROM
-> +^^^^^^^^^^^
-> +
-> +Some Rockchip SoCs have the ability to load a second loader binary.
-> +If enabled, the TPL/SPL code will return to the boot ROM, which will then
-> +load and execute a SPL or U-Boot binary.
-> +
+As we are working on adding support for DSI displays for these that
+are removable (and there are dip switches to select different types
+of displays wired to the same pins) we need to add additional devicetree
+overlays for these EVKs. We don't want to keep adding more defconfigs
+for every permutation of the devicetree overlays. So better to go with
+a single defconfig that has everything enabled and just control what
+probes at runtime via the devicetree overlays.
+---
+ board/mediatek/MAINTAINERS                  | 4 ----
+ configs/mt8189-ufs.config                   | 8 --------
+ configs/mt8189.config                       | 4 ++++
+ configs/mt8195.config                       | 5 +++++
+ configs/mt8371_genio_520_evk_ufs_defconfig  | 4 ----
+ configs/mt8391_genio_720_evk_ufs_defconfig  | 4 ----
+ configs/mt8395_genio_1200_evk_ufs_defconfig | 8 --------
+ 7 files changed, 9 insertions(+), 28 deletions(-)
 
-This ends up under 'Building', between TF-A and TPL, but it describes
-runtime boot flow rather than a build step. Please can you move it to
-its own top-level section, or under a 'Boot flow' heading.
+diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+index d99c6d708b2..47f91d6e81c 100644
+--- a/board/mediatek/MAINTAINERS
++++ b/board/mediatek/MAINTAINERS
+@@ -5,12 +5,9 @@ F:	arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
+ F:	arch/arm/dts/mt8371-genio-common-u-boot.dtsi
+ F:	arch/arm/dts/mt8371-genio-common-ufs.dtso
+ F:	arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
+-F:	configs/mt8189-ufs.config
+ F:	configs/mt8189.config
+ F:	configs/mt8371_genio_520_evk_defconfig
+-F:	configs/mt8371_genio_520_evk_ufs_defconfig
+ F:	configs/mt8391_genio_720_evk_defconfig
+-F:	configs/mt8391_genio_720_evk_ufs_defconfig
+ 
+ MT8365 EVK
+ M:	Julien Masson <jmasson@baylibre.com>
+@@ -34,4 +31,3 @@ M:	Julien Stephan <jstephan@baylibre.com>
+ S:	Maintained
+ F:	configs/mt8195.config
+ F:	configs/mt8395_genio_1200_evk_defconfig
+-F:	configs/mt8395_genio_1200_evk_ufs_defconfig
+diff --git a/configs/mt8189-ufs.config b/configs/mt8189-ufs.config
+deleted file mode 100644
+index 8a7afb95b1b..00000000000
+--- a/configs/mt8189-ufs.config
++++ /dev/null
+@@ -1,8 +0,0 @@
+-#include <configs/mt8189.config>
+-
+-CONFIG_PHY=y
+-CONFIG_PHY_MTK_UFS=y
+-CONFIG_SCSI=y
+-CONFIG_UFS=y
+-CONFIG_UFS_MEDIATEK=y
+-CONFIG_CMD_UFS=y
+diff --git a/configs/mt8189.config b/configs/mt8189.config
+index ab56c90a17c..8db5815e9e0 100644
+--- a/configs/mt8189.config
++++ b/configs/mt8189.config
+@@ -16,6 +16,7 @@ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_UFS=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_PMIC=y
+ CONFIG_CMD_REGULATOR=y
+@@ -42,6 +43,7 @@ CONFIG_DM_PMIC_MTK_PWRAP=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_MT6359=y
++CONFIG_SCSI=y
+ CONFIG_BAUDRATE=921600
+ CONFIG_DM_SERIAL=y
+ CONFIG_MTK_SERIAL=y
+@@ -51,5 +53,7 @@ CONFIG_MTK_SNOR=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_MTK=y
++CONFIG_UFS=y
++CONFIG_UFS_MEDIATEK=y
+ CONFIG_WDT=y
+ CONFIG_WDT_MTK=y
+diff --git a/configs/mt8195.config b/configs/mt8195.config
+index 03f57d46708..909b495e015 100644
+--- a/configs/mt8195.config
++++ b/configs/mt8195.config
+@@ -13,9 +13,11 @@ CONFIG_BOOTSTD_FULL=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_UFS=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_CLK=y
+ CONFIG_MMC_MTK=y
++CONFIG_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCONF=y
+ CONFIG_PINCTRL_MT8195=y
+@@ -23,8 +25,11 @@ CONFIG_DM_PMIC=y
+ CONFIG_DM_PMIC_MTK_PWRAP=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_MT6359=y
++CONFIG_SCSI=y
+ CONFIG_BAUDRATE=921600
+ CONFIG_DM_SERIAL=y
+ CONFIG_MTK_SERIAL=y
++CONFIG_UFS=y
++CONFIG_UFS_MEDIATEK=y
+ CONFIG_WDT=y
+ CONFIG_WDT_MTK=y
+diff --git a/configs/mt8371_genio_520_evk_ufs_defconfig b/configs/mt8371_genio_520_evk_ufs_defconfig
+deleted file mode 100644
+index a0b365a86a2..00000000000
+--- a/configs/mt8371_genio_520_evk_ufs_defconfig
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#include <configs/mt8189-ufs.config>
+-
+-CONFIG_DEFAULT_DEVICE_TREE="mt8371-genio-520-evk-ufs"
+-CONFIG_DEFAULT_FDT_FILE="mt8371-genio-520-evk-ufs"
+diff --git a/configs/mt8391_genio_720_evk_ufs_defconfig b/configs/mt8391_genio_720_evk_ufs_defconfig
+deleted file mode 100644
+index f1de9d5fa1e..00000000000
+--- a/configs/mt8391_genio_720_evk_ufs_defconfig
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#include <configs/mt8189-ufs.config>
+-
+-CONFIG_DEFAULT_DEVICE_TREE="mt8391-genio-720-evk-ufs"
+-CONFIG_DEFAULT_FDT_FILE="mt8391-genio-720-evk-ufs"
+diff --git a/configs/mt8395_genio_1200_evk_ufs_defconfig b/configs/mt8395_genio_1200_evk_ufs_defconfig
+deleted file mode 100644
+index 525638f5800..00000000000
+--- a/configs/mt8395_genio_1200_evk_ufs_defconfig
++++ /dev/null
+@@ -1,8 +0,0 @@
+-#include <configs/mt8195.config>
+-
+-CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk-ufs"
+-CONFIG_CMD_UFS=y
+-CONFIG_PHY=y
+-CONFIG_SCSI=y
+-CONFIG_UFS=y
+-CONFIG_UFS_MEDIATEK=y
 
-With that:
+---
+base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
+change-id: 20260814-mtk-genio-720-remove-ufs-defconfig-d3e026765d4b
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
-Regards,
-Simon
