@@ -4,114 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5924FC5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 11:21:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDBCC5DF67
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 11:21:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5BF0E81117;
-	Fri, 14 Aug 2026 11:21:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4A638810E0;
+	Fri, 14 Aug 2026 11:21:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NabnsYSFxFPs; Fri, 14 Aug 2026 11:21:34 +0000 (UTC)
+ id 4cDAd6yoAzyS; Fri, 14 Aug 2026 11:21:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C86838117B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C6DBD811B2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786706494;
-	bh=NbfPJvTMOC/VB/gsgspxfyuxzyRL37MBFyM4mDeADWs=;
+	d=lists.u-boot-project.org ; s=default; t=1786706496;
+	bh=1OhgzFEVze+jII0D/0v+X890JS1+yZPhDe5DZ1pA1SI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZQn1rqffqli6NcCuYs2rrMYgDo4aoHQN8gdcDYfa/rfAOsYZDyc/g1Js1Y1T97DgU
-	 1L5V9eq7EoOBEjzkVyJMzPwt/WIXj5meHrxDX9sq6KwTwDydctHJKgxJsy/ERGk/N3
-	 lwrUxF1mIh1ztxU+eSWLy9X9NiaZrkeEZWe3IG4Me3/W5bMlTeUgI25NajkPd65Lzc
-	 SjLhJ8vfvkfSDlkUVxxgSaq0jhnnDa7TwtkSlbaMFu7n/AyitZZ/WzYqhNkEJ2lOp/
-	 7wogfxgoVNXaMQoo5XfAkLvKzrGzNbckEPJFXZJ38OntBwuuRwIhm/Q6ip+CO3Vd7T
-	 FwtMRItwUqazw==
+	b=IKe7T8oovjlc2kSFOPa4Ez9GDnV8BXCESTosJYk5qk6VhYHb7QXBj0CN+cff56m5g
+	 SQB7zHfBbBCndQpTg6ne1giKUwuMYbw5tvDQGDIahKHJZkBZQPytqkyPhf6DVlOH89
+	 m/ST++4PIqaeOP6a1FS2m3uXN4I62Y9wZfWJq2ofUYNkwv/LO5/wAQvP2QfeA3YDq6
+	 FTlnP75maWf/C0o13iXKlWDYJBIPqTIVgSl7eRmd72me2A1jWYt2GeV32wM2AyrKhQ
+	 8nutyTrA0l+WrcDKlDYg/+pJ/Nkfgerro4PSvytO7jzQyaqTjY1S0r5U2GutgqCdcn
+	 zc0AsXg6gv4Eg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C86838117B;
-	Fri, 14 Aug 2026 11:21:33 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 95A8C139C
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:21:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C6DBD811B2;
+	Fri, 14 Aug 2026 11:21:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D864B139C
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:21:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7C249405D1
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:21:28 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id ABA1181118
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:21:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nfke8jqnli6A for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3Sx20ah__9AX for <u-boot@lists.u-boot-project.org>;
  Fri, 14 Aug 2026 11:21:28 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
  envelope-from=fra.schnyder@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 90B87405A7
-Authentication-Results: smtp4.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6444781108
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 90B87405A7
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=IOKFK8bA
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 90B87405A7
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:21:27 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-47f6609c657so422488f8f.2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 04:21:27 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6444781108
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=Mw3G5cpO
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6444781108
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:21:28 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4954f5e8020so4908215e9.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 04:21:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786706485; x=1787311285;
+ d=gmail.com; s=20251104; t=1786706486; x=1787311286;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NbfPJvTMOC/VB/gsgspxfyuxzyRL37MBFyM4mDeADWs=;
- b=IOKFK8bAZ/sjzv6xljvXaS68lgkLxHl8Dxxl7Mzz0fvKEsDV65rJGIh+P797NesMEl
- QjUtp+S4auwN+G3b3+c3F8ia11TTGHVL65dtmgginnAFUDuIOJh2UXz/Vz7ZNSfTrpOp
- O1Wya0mDH0AIqStXyigfRv+oJtxPmm+g4SsNjjjqDf/I7bQ2WSy6z0oJIpVUjOQPnxMu
- N6RCqNYxAO4AwE8OP0Eh2hDI1TS8je7oEPIHo5B4vAvOQ0OcA/F3/8rLGX47Ax4HNrVL
- pzykuz+7IZCoeoxghfdYYKyA6p4rf9HpnZq/Mt04KhHXXlkQUsuxhOEjV1ldRz9+JNgF
- bK6A==
+ bh=1OhgzFEVze+jII0D/0v+X890JS1+yZPhDe5DZ1pA1SI=;
+ b=Mw3G5cpO7NrW5HjnXNkW/TimRmttKWIp9AkhWTIEYDIedzFSO96cHurZ55S1efMSOp
+ z5zeqcTiscB0tTCeTemcC9/QTk6z41bQcpnZE/Qdj19v8I8igi2CphNcP2rCqDud4Uoa
+ tNRTDRjHDLKVIk0UmZajV6i6Y5BuRgMewvHYw2w/FmLL1ZUKTmP2KtYnBtHetL4t9JQy
+ aTFt257ArWNJuoxpZBrk1U2oOnf5L6hg/Gx/EkR4Xpw0uuePYZy9adnQ7N/LXTe/7Tcw
+ ulv60nPFDGqVQVMEntp1SBxwSgjxMW9km82pMIAdDISOi8HFcvFMUealqg1OFLRLi9oB
+ 9Avw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786706485; x=1787311285;
+ d=1e100.net; s=20251104; t=1786706486; x=1787311286;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=NbfPJvTMOC/VB/gsgspxfyuxzyRL37MBFyM4mDeADWs=;
- b=aZNHg8eZ89hTtBmM1O6Ukp7IgLHU5LO/db7MXoWYiRLCjy4aYyX0/jUjPg9FzBopCm
- 7dNlX4hBDSIW7OuwxMiV+zyMaz11nIbvymrBEI6N0WciTJBL+fIPrFQpWMo8mgx13ZJP
- Pdy2vr8qjUHHLNdhZEcuPbioj77fIeaPY93D9tblopheoeK2ZBHTVpKcYWf6WC+YM8Lk
- R5vRhHkg12JrwKWQ/+eFDMg/6MQWoik+aTFvEaIE9P/SKO0YX3nDyBUCGry+MDjyw9FS
- SMxyDD9L4MoV3dwVU6elaYvc418xXoh9q+aogRLs+QiJwWqkaiekpVTsOytVQE7gSMlG
- LCxA==
-X-Gm-Message-State: AOJu0YwrVl0Q+4lgOfbNI9hKYRunLGM+IEmd5MhV2PWgJVwIZ2w5lAc8
- udc9i4VHsQspX8QYMljwSGwmenv8wGsTBRHFuBIkHR7y7A6tY5GE8iT+
-X-Gm-Gg: AR+sD10DJ59/nvqLx33toT17u+veXXS7cE9QXTvSwGn3sTtsF0cwwT79vAJrPB16wch
- PXNKHx7A8B8IAUGzU4VLP0zQK/bkPAM+CO0nE2+uTKyLsvpcqoM8sdnWKQ/xiyrkpTf0x3/M7zK
- pJaKv+96kfCjxDZdfMyuSaCbchPD46/nsikyk+AzlNnQ3bJsBDMXTL/KU+liLMmSapsD4vhL0mk
- J5SPQjZnhYGkQ7XvgOWI69qZZ5f6ppCTBZHzr7M1xw/9Wut39PZpOLfOgRD99Ti/rsPxMPuBNMx
- 7hMC6Iw2VAR7CvQjztVFixceQ5gbQHjuzPqkrii+eqoHQoUIYkrEZB+Z1FjuUGBuDzUQG8q+LEs
- u6pvz//UzglFFd2QFz29mIjW5DA571hrhKIgqsxx/In9UX8YZ6oj/+dRoEvCae1YY5pke1nb384
- KloSQy1GsyzX0QBn+R5LWphrGZDixoqvks+KHyiztpCNC9bqLnOV/X3goRu9lCRgRyGXAcqszvj
- lID+V39xkJMT2yq2Uu+ILFgO85VhdNF68qL5bhKhURPFdworeO5O/6+shn46BJ7nxfpP+49gOar
- iAExXkGnaxQ2iGB6Dejym9f2PXLPx7MNveyjKnwspGn7Qba8
-X-Received: by 2002:a05:600c:828c:b0:495:3da3:beb with SMTP id
- 5b1f17b1804b1-49989345963mr44769135e9.10.1786706485371; 
- Fri, 14 Aug 2026 04:21:25 -0700 (PDT)
+ bh=1OhgzFEVze+jII0D/0v+X890JS1+yZPhDe5DZ1pA1SI=;
+ b=NWiyRqF2dIUkgwObihQUvu16v7PwdidryZiM0xF995OLOBXddkKnlib7FMnkB9G50h
+ u5w9Zfkq3/uXdnSvDi2WUHFj9J8frhEWHHm7VZ2Syzz4bza79J4UYPRQtfLSfJyxqge2
+ axwso+IIbsexXH/ZUMrITu5V8DZ7yQcuu856ICLOUsj+fw196HuE5IfKidvcf1k7Niz2
+ kJlMddpoizzts0AwjCK1YLElXRbmuq8cLeEdK1v1ggmBWgANVyGZNJ45kztAziqwemh4
+ fj2N4+kiS0WrFtajxs1kVepEeMNDtdpUPb070u5LSZ97jTdj35VkpUdbpEJrel+B2yoR
+ kNkA==
+X-Gm-Message-State: AOJu0YwWzkYg3uJJ598QLrgNMZL9KWTWDryLMe7kFOKNjERwL1njmBZa
+ YSFzu+ar1C/rHfH2v4OMlblbvRcuv6qXh3OR+ozq+tqR4++73+HM3YW2
+X-Gm-Gg: AR+sD10bVKFeHJXvTkWW8iBW5AI0GmBwk9qvwyoshJuhm8/KjrQbB3ciznMPZornwrk
+ ZbzRW4Sed2G12KilSVgXsr2XG4ddTQDlLE87h1/WPXzyx096jgLOfswMEW2/yRoN3cxYwzdhgdK
+ sxkUC6jRdLqbkjGNNy+VRgkMiH98KzsABtHNegfafcKM8/F6TBBy1LTaGsmKeo7GytvzOuuUxhr
+ oKTnx9Ty9htA3shNR8plhomU0hnhyz2vkqNtjWEkr2e76WrJdglL220jnY2R6H4mokfXuDrq510
+ HLIv+BjBjeeploWxhpMTZFgbff0zOZKmF+mKadQdlnJcosUQK781Xb16a/51v0fbOupou3pwVq9
+ 8mIl13V33SahJDz/Ce274tgz9MwICV/hKFDU3ViwVz2/SZGG4UkjHZhsFD+T4RTF3jl01q5ssZn
+ FH3P8QbQ/VVwK4posmuckS1XLny7fIlB1TXR9LhzTs3nwHAczx1MylQ04svCO1zDcFitPUoM8x+
+ /zoNrisnQEUuAozd4Tfm/xUFEPiisHQH1sJyTws8DAFuSU/TuzDSjubEB+OgPvn3cfKlozMuTLX
+ 9LsEOSqCFg1kLhw5eLxX2U5y0ZmW1CUJxY8WQw==
+X-Received: by 2002:a7b:c015:0:b0:499:80d0:8b73 with SMTP id
+ 5b1f17b1804b1-49987927ebfmr59182905e9.4.1786706486247; 
+ Fri, 14 Aug 2026 04:21:26 -0700 (PDT)
 Received: from [127.0.1.1]
  (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49988b2a509sm41692355e9.14.2026.08.14.04.21.24
+ 5b1f17b1804b1-49988b2a509sm41692355e9.14.2026.08.14.04.21.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 04:21:24 -0700 (PDT)
+ Fri, 14 Aug 2026 04:21:25 -0700 (PDT)
 From: Franz Schnyder <fra.schnyder@gmail.com>
-Date: Fri, 14 Aug 2026 13:21:20 +0200
-Subject: [PATCH 5/8] toradex: verdin-imx8mm: Set WiFi DTB as default for
- new PIDs
+Date: Fri, 14 Aug 2026 13:21:21 +0200
+Subject: [PATCH 6/8] toradex: common: Decouple board sysinfo from the
+ product ID table
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-get-rid-pid4-table-v1-5-b8605ac094d0@toradex.com>
+Message-Id: <20260814-get-rid-pid4-table-v1-6-b8605ac094d0@toradex.com>
 References: <20260814-get-rid-pid4-table-v1-0-b8605ac094d0@toradex.com>
 In-Reply-To: <20260814-get-rid-pid4-table-v1-0-b8605ac094d0@toradex.com>
 To: u-boot@lists.u-boot-project.org, 
@@ -136,55 +136,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 From: Franz Schnyder <franz.schnyder@toradex.com>
 
-Currently, the Verdin iMX8MM uses the Toradex product ID table
-to determine whether the module is a WiFi or a non-WiFi one and sets the
-DTB accordingly.
+The sysinfo currently uses the Toradex product ID table to print a
+detailed board model string. With various new SoMs that are released by
+Toradex, the PID table grows and needs maintenance effort which can be
+avoided.
 
-In the progress of decoupling from the Toradex product PID table, use
-the WiFi DTB as the default for new PIDs.
-This change is safe, as on non-WiFi modules this leaves the WiFi and BT
-devices unprobed. Further, the SDIO/UART signals are exposed to the edge
-connector on non-WiFi modules and can be used on the carrier. However,
-no Toradex carrier board makes use of these interfaces on the carrier
-and it can only be achieved with a customized board. For customized
-boards, it's expected to override the default selection by setting the
-'fdtfile' env variable.
+Rather than printing the board model based on the PID table, rely on
+the model property of the device tree and the data written to the config
+block during manufacturing, which already describes the HW correctly.
 
+For example, the printed board model string will change from:
+ Model: Toradex 0075 Verdin AM62 Dual 1GB WB IT V1.2A
+ Serial#: 15412798
+and become:
+ Model: Toradex Verdin AM62 WB on Verdin Development Board
+ Toradex SoM: 0075 V1.2A (00751200)
+ Serial#: 15412798
+
+This removes detailed SKU information such as the number of cores,
+memory size, WB capability and temperature rating, but the PID4, PID8
+and revision of the SoM are still printed. The detailed information of
+the SoM can still be looked up using the printed information on the
+official Toradex website.
+
+Decouple board sysinfo from the Toradex product ID table, making the
+0243 Aquila iMX95 the last entry being made to it.
+
+Link: https://www.toradex.com/computer-on-modules
 Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
 ---
- board/toradex/verdin-imx8mm/verdin-imx8mm.c | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ board/toradex/common/tdx-common.c | 53 +++++++++++++++++++++++++++++----------
+ board/toradex/common/tdx-common.h |  7 ++++++
+ 2 files changed, 47 insertions(+), 13 deletions(-)
 
-diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-index 4e308084968..93c26476081 100644
---- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-+++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-@@ -71,7 +71,7 @@ static void select_dt_from_module_version(void)
- {
- 	char variant[32];
- 	char *env_variant = env_get("variant");
--	int is_wifi = 0;
-+	bool is_wifi = true;
+diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
+index 81f7fa09002..2a8589f5e41 100644
+--- a/board/toradex/common/tdx-common.c
++++ b/board/toradex/common/tdx-common.c
+@@ -104,8 +104,25 @@ __weak int print_bootinfo(void)
  
- 	if (IS_ENABLED(CONFIG_TDX_CFG_BLOCK)) {
- 		/*
-@@ -79,12 +79,10 @@ static void select_dt_from_module_version(void)
- 		 * module with Wi-Fi/Bluetooth make sure we use the -wifi
- 		 * device tree.
- 		 */
--		is_wifi = (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT) ||
--			  (tdx_hw_tag.prodid == VERDIN_IMX8MMDL_WIFI_BT_IT) ||
--			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT_NO_CAN) ||
--			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET) ||
--			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WB_IT_64G) ||
--			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_2G_WIFI_BT_IT_64G);
-+		is_wifi = !((tdx_hw_tag.prodid == VERDIN_IMX8MMDL) ||
-+			    (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_IT) ||
-+			    (tdx_hw_tag.prodid == VERDIN_IMX8MMDL_2G_IT) ||
-+			    (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_2G_IT_NO_CAN));
+ int checkboard(void)
+ {
+-	if (valid_cfgblock)
+-		printf("Serial#: %s\n", tdx_serial_str);
++	struct udevice *sysinfo;
++	int ret;
++
++	if (valid_cfgblock) {
++		char str[96], str2[96];
++
++		ret = sysinfo_get_and_detect(&sysinfo);
++		if (ret) {
++			log_debug("Failed to get sysinfo data: %d\n", ret);
++			return ret;
++		}
++
++		if (!sysinfo_get_str(sysinfo, SYSID_TDX_PID8, sizeof(str), str) &&
++		    !sysinfo_get_str(sysinfo, SYSID_TDX_BOARD_REV, sizeof(str2), str2))
++			printf("Toradex SoM: %s (%s)\n", str2, str);
++
++		if (!sysinfo_get_str(sysinfo, SYSID_TDX_SERIAL, sizeof(str), str))
++			printf("Serial#: %s\n", str);
++	}
+ 
+ #ifdef CONFIG_TDX_CFG_BLOCK_EXTRA
+ 	if (tdx_carrier_board_name)
+@@ -202,23 +219,33 @@ static int tdx_detect(struct udevice *dev)
+ 
+ static int tdx_get_str(struct udevice *dev, int id, size_t size, char *val)
+ {
+-	int ret = -ENOTSUPP;
+-	int idx;
+-
+ 	switch (id) {
+ 	case SYSID_BOARD_MODEL:
+-		idx = get_toradex_modules_idx(tdx_hw_tag.prodid);
++		const char *model;
+ 
+-		snprintf(val, size,
+-			 "Toradex %04d %s %s",
+-			 tdx_hw_tag.prodid,
+-			 toradex_modules[idx].name,
+-			 tdx_board_rev_str);
++		model = fdt_getprop(gd->fdt_blob, 0, "model", NULL);
++		if (!model)
++			return -ENODATA;
+ 
+-		ret = 0;
++		strlcpy(val, model, size);
++		return 0;
++
++	case SYSID_TDX_BOARD_REV:
++		snprintf(val, size, "%04d %s", tdx_hw_tag.prodid, tdx_board_rev_str);
++		return 0;
++
++	case SYSID_TDX_PID8:
++		snprintf(val, size, "%04d%0d%0d%02d", tdx_hw_tag.prodid,
++			 tdx_hw_tag.ver_major, tdx_hw_tag.ver_minor,
++			 tdx_hw_tag.ver_assembly);
++		return 0;
++
++	case SYSID_TDX_SERIAL:
++		strlcpy(val, tdx_serial_str, size);
++		return 0;
  	}
  
- 	switch (get_pcb_revision()) {
+-	return ret;
++	return -EOPNOTSUPP;
+ }
+ 
+ static const struct udevice_id sysinfo_tdx_ids[] = {
+diff --git a/board/toradex/common/tdx-common.h b/board/toradex/common/tdx-common.h
+index db3369a8f9e..7fb1cc8ecc8 100644
+--- a/board/toradex/common/tdx-common.h
++++ b/board/toradex/common/tdx-common.h
+@@ -7,6 +7,7 @@
+ #define _TDX_COMMON_H
+ 
+ #include <asm-generic/u-boot.h>
++#include <sysinfo.h>
+ 
+ #define TORADEX_USB_PRODUCT_NUM_OFFSET	0x4000
+ #define TDX_USB_VID			0x1B67
+@@ -14,4 +15,10 @@
+ int ft_common_board_setup(void *blob, struct bd_info *bd);
+ u32 get_board_revision(void);
+ 
++enum {
++	SYSID_TDX_BOARD_REV = SYSID_USER,
++	SYSID_TDX_PID8,
++	SYSID_TDX_SERIAL,
++};
++
+ #endif /* _TDX_COMMON_H */
 
 -- 
 2.43.0
