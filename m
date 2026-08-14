@@ -1,115 +1,115 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 576F4C5CFC1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87470C5CFCF
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:57:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A21D3814DD;
-	Fri, 14 Aug 2026 14:57:05 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gZBdDYayFGHc; Fri, 14 Aug 2026 14:57:03 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6F3F08148A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786719423;
-	bh=2oU7+0ICyNHddbRfNJ5YXgrS9aOGDwKLC0muF+I69UI=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=uqZl4STO+1YmGJmP/ts7TBAJh/FmaE6CThbYWkkHrz7IRqKC5WeidW2fGMcQ/HJxL
-	 ZXUCrHtk1tTjqnUltGcM1IV+v6pAcCDukE1DBCYMoRMLldu4il6EAddtePCAB1zin+
-	 J6hJq8IB9SjjKljf6b3qxL6MGLa1qH6JDaV2zX4TMglkRVfoKVh6Exub48AQ2lFAZg
-	 NPm7LcHiUXUzWSOBb8e9Fj0NpbCaoUJoLskf86h+bxjtJmLGR/kxVQwpm3CcWyy/Gv
-	 EtI+6iMZkoa3KYrBCiC7SxYClmE382jfYMK2RpVySLaOLshwzAGpSbIJf7RALgJ7cK
-	 tgaOtbv2UlWVg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6F3F08148A;
-	Fri, 14 Aug 2026 14:57:03 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E4C53194
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:57:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D6D8540DE8
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:57:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 526A440E73;
+	Fri, 14 Aug 2026 14:57:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jmeQOGLm_Crd for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 14:57:01 +0000 (UTC)
+ id 8endkzjgY1MC; Fri, 14 Aug 2026 14:57:06 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7C36040CF1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786719426;
+	bh=M+KbQID28XYoNfigxnjVBVxHPlekd/J+0oEi72Hg8Aw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=unfB1A92edQsV31w++u2UxJ0AzDqAbmHFT2NywFJaHtS7dO+7csg+1mQcKbnUPUwh
+	 3oFjOO8ZZl/XFcYjRtX6+nTG4FkAgfWqwTa5PRzF8y6T4Zp55FW1DznR+7ZwsKqW4U
+	 rwlmBZ4jp7N/JVARusspopyEH7zFV2CuaJUAo9+HiE0/zsFzoW/CH8BV7PcYVcaIST
+	 dIn5DAFiwMXaZW5xfHzwslEYhbSpNMTB28IJcnPmdfjI9437pR76hd/bqDoXoxxHzk
+	 cB0rqp+Wxqau/bNRmFS5ENXergdtOucgfFLp+dHPUPnvR1fqmf53jkA0xbosvswv6q
+	 KMXm4fiy9qikg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7C36040CF1;
+	Fri, 14 Aug 2026 14:57:06 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id ACB4323F
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:57:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 930AA40AD0
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:57:02 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AvQw4_FLUCZN for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 14:57:02 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ client-ip=2001:4860:4864:20::36; helo=mail-oa1-x36.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org CF89D40CFB
-Authentication-Results: smtp4.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C2F0040AC0
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF89D40CFB
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=p2vl8ITb
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CF89D40CFB
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:57:00 +0000 (UTC)
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7eb64371a2aso779958a34.0
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 07:57:00 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C2F0040AC0
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=fWT7Oj5J
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C2F0040AC0
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:57:01 +0000 (UTC)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-446f87b6de1so1190375fac.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 07:57:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=baylibre.com; s=google; t=1786719420; x=1787324220;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=2oU7+0ICyNHddbRfNJ5YXgrS9aOGDwKLC0muF+I69UI=;
- b=p2vl8ITbEMdDVpG1IZRRw4E1Dn/Va37m/TSyATthVIOmnZYmvcupcKY88w8LbS/kc5
- 6j962oIRYKJ1cysRhIgbhctftZK/DBAR+3CPLpE+kWGg8fmKsZJT5ir/S1IMofZFoLf8
- V/X7GDCu7RyV0yWQwZyhZ933Vj7V1e8pS8+PMQVJ4+KotHLQPgo7SJMvaRMdkllYOtmJ
- yFpenvP+u5e5WcXhOkrrdaG/QR4hmR9KkMHJ11hOcjF3cyi4RFKNUEK1iZ1ZlBeuB+WW
- o5i/+sw3/qqxFtpgHrOdZAoZ6KzHVq/e9tv3pZqX7699UX9X41uPYs2WoYEie5Bwc1yr
- 13JQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=M+KbQID28XYoNfigxnjVBVxHPlekd/J+0oEi72Hg8Aw=;
+ b=fWT7Oj5J0JLxi4Vht3DZ41phJ4moII72+m7lIRO9ACKmCKDoTCqQgUCVS44/+7KDXS
+ KbxfldYF3ZGOGl/a0ntwYdESDlxHHH9es/aWWXYy7iyy7VhfLgIsS33TOXhmfEboCXmt
+ 3MkPqmBlzExJemr2Vs5rI5PQalk9dUzdLa3+/MbNUwsZ4QPt21wiSLmpxGc9DTcxXUS+
+ iPb/jXLtx56BzLOYg9Zyyr//5qkNs6qOzSnbLZpbV7Hx89HGE0VOI6+PGi7P5c4NUgU2
+ 0rjdysGw/v7E/QC1bRlzPitcqH9Sdy5g221czmwWXHoYOp+Um0r+fKtnCItVG211adW5
+ /mjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1786719420; x=1787324220;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=2oU7+0ICyNHddbRfNJ5YXgrS9aOGDwKLC0muF+I69UI=;
- b=Jvei6iQZobSsVJVgoZtvHKta35kMB/5XSkADDgQrQA9qHpCpxs/vMM3ewpMQ3dmYqh
- wA8/zHRwzXaaaG32jXgnmhBJ0szpsSjsmVkS6JQNfD0rrncifMKMXFxjQtlOnRZwBNia
- s6ixWHBj+IVY1r9+bntl25GIyFkrgioTi0sPuQ/H4OUP7Okh1+D0YA1R2TRXMxNhQvWR
- K7NDCOymmBGEQPmOXV7AF49k0iVu4SaGHOx3lD3mWoMBoISwvhKI9bVkh1ArhJlVBSV9
- KjMnoTC5LgAAlTHVvX6NYmdwudCGEI0eLK5bZg3LQTdaRxavFkRJ53cYUKs2e/PTy02w
- /0wQ==
-X-Gm-Message-State: AOJu0YyKsrfT4Z0mC6mpOk5/oFctKFLR/3GLtxLFjJwGSv9aI0IDBD3o
- xAYCBXQ3XdQclWjv1XREgAM66ISVlzrgOg4DjJezix4YDcSOxGhortX/TfIBamhR+Fg=
-X-Gm-Gg: AR+sD13pPJBQSn+E83QNpwy0g3e3IzdnoPzmtAh5y2V9+zdWt1AVDATruT0zK4Uf1cP
- gi9p3dXUIvMffSdNAsy0dwbwfhxahJ487BEwGXNBiybtZrxX65025aKIQ4WB4RxgbypZJJYB3og
- ghwKgSIteUJitp/QInHko/5RGXoplVdqdPorAt3qKAoE6HlozXwCAtqR0OGP3APvo0PrGPBBSRn
- kG4NjR/9c8k3tp8T3nIoFDzFBupjcrpb3Z9HteAgRI3HG2as4/OsV/0v++45pdkRwxQRjXbuJlA
- /beG9tcrdB8lpGa6yaU6CqOCJFkpRNboZC0YQob8M7hBvc7sbwEN+5Jmu9PwtWG8SlMfohHmPgb
- 99zsmK/wPaneOU3BleaZ5Kkwf5kLJ6GjwXVQ3eWSHTYx6RsisRt7KoufXILeDjMH+idSY8iq48w
- IGANzAMpmJHZ4VFk3kuOTYS5rYUW2OM9guDkz2NeW5XruvNOAO3sf8gXQxW9Wq+vNk9A==
-X-Received: by 2002:a05:6830:439e:b0:7e9:e808:e9c1 with SMTP id
- 46e09a7af769-7f3de424d64mr5681909a34.8.1786719419699; 
- Fri, 14 Aug 2026 07:56:59 -0700 (PDT)
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=M+KbQID28XYoNfigxnjVBVxHPlekd/J+0oEi72Hg8Aw=;
+ b=qqeCgHhms7BIsgaP0KA6BllAf/Vft9pGLrpyOnr45HXKasDKxfaEKY6niL5vldSgcF
+ OBh5kkUsYwgddAh/N84fuW5YF74kdL7BE50VFUN1lHkU9OUY87pA8U9iG7UhQ+Bq9hAE
+ ejXiTOCVzoFde/7an/8tNBNMBW7kdO4XokbswaA2txx9o/IB0s6vuHzbPJDi7hDJ+i+C
+ p0qPvLpRiiHnq7Q6mxBx9MgjFaFxGJ7+7bLsc/0DIDXzhRVwO1LA6z1e0nZTl4hObL+k
+ mI9N9QA/qrDSes6mZc4H//CShdKqcYz4hHw6oIfHQfU7co7Ndobc1OOvHO0bb6x5JjAl
+ ltHQ==
+X-Gm-Message-State: AOJu0Yx7aZqYgYF6+fW28vFVtw9LjMz4y0Bb6777FKribGZdyPsnsMQd
+ X4CdacfzE/uvdlIj06ytyRrhPhmyO0XNjYeKEHwTti+gpXK1H/bhntJ+FQM1mBCtycQ=
+X-Gm-Gg: AR+sD10KijP3vFPXmUtC1Hb4AHiUbzoVprUBAivhtxoC4mxHGvkhpdLzmb/0dCkADFC
+ IpSg9ezgWshUv0EaGwC1/C3CVwOC7/9BOGwkm9XwTh4u5YQjrElnLLJCYny/cfj8wbIllHPWcY8
+ ZwB43kzVwWcaJeQXSXXNeetqXq0gyzfD/PlSy7DSLLoGGCTlJcCbqN3aTbC1OjBfgyfnTM/CeU+
+ Y4OI2iAmO2CAsUIyFDXBrftowQvmXWZyiw29IzLHNT+N487pxzoIcJaH2DSe+NYjgT7MfQOhOAW
+ R6YbtHjjx+ApOiGARH8yng0BPPxbC6Iv+0neZ1qlQH5LxWQf9fh/NhEVpCrobbRXTg3T+z4BL7F
+ vUyTZWC9tASdPtLLqpGa/itJB1PLnrwCEnC4gFYN2K80Og/CBQkdHS7tG1X13lPqrP5UuRV6nA5
+ 6QmegBkcHN3WRifUrwoFHYXl+lMGBrninfPI2Qri//yBPmjsbRuWkwLr0e9oL4DGYisA==
+X-Received: by 2002:a05:6820:809:b0:6ae:9712:cad0 with SMTP id
+ 006d021491bc7-6b0d68b23admr4746879eaf.21.1786719420632; 
+ Fri, 14 Aug 2026 07:57:00 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7124:5000:3b37:b131])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f3e8668831sm1065949a34.22.2026.08.14.07.56.58
+ 46e09a7af769-7f3e8668831sm1065949a34.22.2026.08.14.07.56.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 07:56:59 -0700 (PDT)
+ Fri, 14 Aug 2026 07:57:00 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/4] power: domain: mtk: add mt8366 power domain
-Date: Fri, 14 Aug 2026 09:56:20 -0500
-Message-Id: <20260814-mtk-power-domain-mt8366-v1-0-6a0bb4a766bb@baylibre.com>
+Date: Fri, 14 Aug 2026 09:56:21 -0500
+Subject: [PATCH 1/4] power: domain: mtk: add bus_prot_sta_mask field
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBCF4avIrDtgTAy2Vyku1Iw6LSaSqC0E7
- 27U5ffg/RECeaYAryyCp40DO5sgHhl0Y2MHQjbJUOSFziuhcFq+OLsfeTRuatimoZJa41MpqXt
- ZCtGWkN6zp57/V/ld3w5r+6FuOXOw7wctRGCGewAAAA==
-X-Change-ID: 20260814-mtk-power-domain-mt8366-94436f3511b5
+Message-Id: <20260814-mtk-power-domain-mt8366-v1-1-6a0bb4a766bb@baylibre.com>
+References: <20260814-mtk-power-domain-mt8366-v1-0-6a0bb4a766bb@baylibre.com>
+In-Reply-To: <20260814-mtk-power-domain-mt8366-v1-0-6a0bb4a766bb@baylibre.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -117,20 +117,19 @@ To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
  Julien Stephan <jstephan@baylibre.com>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
- Irving-ch Lin <irving-ch.lin@mediatek.com>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1152; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3221; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=CRJ4vvI/MqIPan/MqowK34T8aLVTuDt1AwtD2gHgKms=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfyyZ1l7iXNwxByF98Ww6c0Pi6lgwlpKZAwt8H
- YZIA0c6GZWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan8smRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A0bMIAIi9M0EyqfuVrsRm2vn4jMNR4veGK5eoMW/KEDt
- c64/jepJSpn4NOxhKrS2vQcBrnWBD2tMqtkHIWWLChpAvkjxdte4BaDguClhq6Dkd1R1LoMJt6O
- YxmXWBEwt07pPzEpDPJ2kwyl0iKrUVVrBJtcGyzKdDcaH33OglVL0+VVbWLUxxUO5L+HMOMBgfw
- 7XRKumlbMvOXXNBxbJ2Dan83Gq3K4W8+JIH0n3wfeAm5hU6Z5qZK7kUYK8+81GIHjI9+Ot6nOcA
- qabtOL10TQXJNkJ2KhmADeu3lrIOm6Nsr4sCFEA3DkUGBGwRsbcC7jmGgoLQfOvyI/mHJhKIBYW
- bpZo=
+ bh=jtOi6EM/nc8BhC1nghd4ejzGjuE98Vy7aHKx2G63YoI=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfyyg6NVwAEYUKcwyb0KOkF84qMxhMme2Q9B/x
+ jZkgZUqgCCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan8soBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/As1IH/ReS4gtxartgCKy4tt8sJJvc/bZzpVW39sEkp5V
+ jacr7H8s+7U+0AWL1KmlRzf6MsocTRw3VTimqrvfCfEi2/ZEdg/61Zffc1cjcpbqDpTgexZPz1X
+ 4qdtRxBc2ce2ZTTxGyp1wZ74E0vV4mo8ovJ7Bl3Se/xHIiZzH/7b4ChJFNKJ5r4Z32RIXAmjCUK
+ gQy5tMQkFa4ZZIkicMsHFrGFU/N4h4Jdwd735TzGUBhaphrGe2+LKp53RntyjmnWEwF2S+7ZQoZ
+ AMmA0ZHqQ1k6bsf6tMnvF6ghrosxyOOnhtJ4BPmvA9jwTDXxq911ydohmZPvcXkjlInXi4Vgrr8
+ 6DG8=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -147,32 +146,92 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add a new power domain driver for the Mediatek MT8366 SoC. This driver
-is based on the downstream Linux driver and has been adapted to U-Boot.
-This is part of the ongoing effort to bring up the Genio 360 EVK.
+Add a bus_prot_sta_mask field to the mtk_bus_prot structure. This will
+be used by power domains that have a separate status mask compared to
+the bus_prot_mask.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (2):
-      power: domain: mtk: add bus_prot_sta_mask field
-      power: domain: mtk: add BUS_PROT_WR_IGN() macros
+ drivers/power/domain/mtk-power-domain.c | 8 ++++++--
+ drivers/power/domain/mtk-power-domain.h | 9 +++++++--
+ 2 files changed, 13 insertions(+), 4 deletions(-)
 
-Irving-ch Lin (2):
-      dt-bindings: power: add mediatek,mt8366-power.h
-      power: domain: mtk: add mt8366 power domain
+diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
+index 9eef58d2d57..76f86b65f91 100644
+--- a/drivers/power/domain/mtk-power-domain.c
++++ b/drivers/power/domain/mtk-power-domain.c
+@@ -47,6 +47,7 @@ static int _scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd
+ 				      void __iomem *reg)
+ {
+ 	u32 val = 0, mask = bpd->bus_prot_mask;
++	u32 sta_mask = bpd->bus_prot_sta_mask;
+ 
+ 	if (!mask)
+ 		return 0;
+@@ -56,13 +57,15 @@ static int _scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd
+ 	else
+ 		writel(mask, reg + bpd->bus_prot_set);
+ 
+-	return readl_poll_timeout(reg + bpd->bus_prot_sta, val, (val & mask) == mask, 1000);
++	return readl_poll_timeout(reg + bpd->bus_prot_sta, val,
++				  (val & sta_mask) == sta_mask, 1000);
+ }
+ 
+ static int _scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bpd,
+ 				       void __iomem *reg)
+ {
+ 	u32 val = 0, mask = bpd->bus_prot_mask;
++	u32 sta_mask = bpd->bus_prot_sta_mask;
+ 
+ 	if (!mask)
+ 		return 0;
+@@ -75,7 +78,8 @@ static int _scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bp
+ 	if (bpd->ignore_clr_ack)
+ 		return 0;
+ 
+-	return readl_poll_timeout(reg + bpd->bus_prot_sta, val, !(val & mask), 1000);
++	return readl_poll_timeout(reg + bpd->bus_prot_sta, val,
++				  !(val & sta_mask), 1000);
+ }
+ 
+ static int scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
+diff --git a/drivers/power/domain/mtk-power-domain.h b/drivers/power/domain/mtk-power-domain.h
+index 5bf0ca850ec..da7ffa7b722 100644
+--- a/drivers/power/domain/mtk-power-domain.h
++++ b/drivers/power/domain/mtk-power-domain.h
+@@ -68,6 +68,7 @@ struct mtk_scpsys_bus_prot_data {
+ 	u32 bus_prot_mask;
+ 	u32 bus_prot_set;
+ 	u32 bus_prot_clr;
++	u32 bus_prot_sta_mask;
+ 	u32 bus_prot_sta;
+ 	bool bus_prot_reg_update;
+ 	bool ignore_clr_ack;
+@@ -111,17 +112,21 @@ struct mtk_scpsys {
+ 	struct mtk_scp_domain *domains;
+ };
+ 
+-#define _BUS_PROT(_mask, _set, _clr, _sta, _update, _ignore) {	\
++#define _BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, _update, _ignore) { \
+ 	.bus_prot_mask = (_mask),				\
+ 	.bus_prot_set = (_set),					\
+ 	.bus_prot_clr = (_clr),					\
++	.bus_prot_sta_mask = (_sta_mask),			\
+ 	.bus_prot_sta = (_sta),					\
+ 	.bus_prot_reg_update = (_update),			\
+ 	.ignore_clr_ack = (_ignore),				\
+ }
+ 
+ #define BUS_PROT_WR(_mask, _set, _clr, _sta)			\
+-	_BUS_PROT(_mask, _set, _clr, _sta, false, false)
++	_BUS_PROT(_mask, _set, _clr, _mask, _sta, false, false)
++
++#define BUS_PROT_WR_STA_MASK(_mask, _sta_mask, _set, _clr, _sta) \
++	_BUS_PROT(_mask, _set, _clr, _sta_mask, _sta, false, false)
+ 
+ int mtk_scpsys_probe(struct udevice *dev);
+ int mtk_power_controller_probe(struct udevice *dev);
 
- drivers/power/domain/Kconfig                      |  10 +
- drivers/power/domain/Makefile                     |   1 +
- drivers/power/domain/mt8366-power-domain.c        | 299 ++++++++++++++++++++++
- drivers/power/domain/mtk-power-domain.c           |   8 +-
- drivers/power/domain/mtk-power-domain.h           |  15 +-
- include/dt-bindings/power/mediatek,mt8366-power.h |  33 +++
- 6 files changed, 362 insertions(+), 4 deletions(-)
----
-base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
-change-id: 20260814-mtk-power-domain-mt8366-94436f3511b5
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
