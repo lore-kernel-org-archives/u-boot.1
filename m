@@ -4,129 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D24AFC5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 19:15:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D889C5CFC1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 19:30:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 834B960A6F;
-	Fri, 14 Aug 2026 19:15:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EBC4B60708;
+	Fri, 14 Aug 2026 19:30:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uS1F7khlvlOE; Fri, 14 Aug 2026 19:15:58 +0000 (UTC)
+ id 9HWonlFYEWlH; Fri, 14 Aug 2026 19:30:31 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BC61660866
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0AF5460617
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786734958;
-	bh=mDC664FM9jkpQaMq0MIE3BZKM7ujjHBo7hxF8/si86Y=;
+	d=lists.u-boot-project.org ; s=default; t=1786735831;
+	bh=7WAIdJxi1vWFGrwecLMr4P1U4Ex+otZsCEefxTNrXM4=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=SM14szjzjZ2FP0ykQHvuubm9Hn7kBz3UGJryeaxy10J6w7pB+RnC4kaXMrD/qbuxn
-	 /S4u2u6P7lKwp6fMTbuAAO9xO1AvdJ0rAp9uvuXlIafhGeU4pwuwySO0FaEMDpuUNE
-	 cwR5Obk2myE8tzjwNTQupMBtD+5xX+NuFKNwHnrTHrSFVhnwr7vVvbV0jvE4AvQxNS
-	 0FcpFoR1YhorPVttlaVaLMxNHfY6wqV16MawMna3hyUil7Ayrjp5NnIrsx0prIGtUf
-	 h2LBRnVSG2C5BxKtW/f/gLpfDa9Mnx2KducwPjnpQ7m3qSk1WyNLNiMhMFU+nqCM4w
-	 kDFyZSz9P+kog==
+	b=nrD8Y1SEG8A2oSER4v+/r0cdgLFMvo4PHdIWeN+QFIv7VHdL/Lf+JTgm5qFfjGx2K
+	 cjHnWJR5GOTwqJ8eq6IqPqGuXwfbca5WCOQ73yT1+4uS2vTRVC1X8qlvUGvwoWAK8C
+	 WFiD46Rx1qYWkmdK3rlRLoa/vouH8P8raJreKjXdiHm8CabnC8DiEu7UkkO6L3AJi2
+	 ccVdtPpi8W711WOHA7kx5DrVcnC2JJJlTh6SHb7MX7ZdLFS1PzKBvzka/Ht8Izv+b1
+	 v55VKJo+ekAUYjy8Z8BWRXi+0mSm+6OZh8hrHPgsRP6ZeW4+eb66Ly/FEjuNg6V+Lf
+	 UYbg/d2gCiP6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BC61660866;
-	Fri, 14 Aug 2026 19:15:58 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B38973A0
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 19:15:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0AF5460617;
+	Fri, 14 Aug 2026 19:30:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5EEAC23F
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 19:30:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B182E60866
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 19:15:57 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 50FA140809
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 19:30:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vDbxZzXb0hBf for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 19:15:57 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id d768Avin_b-v for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 19:30:28 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::232; helo=mail-oi1-x232.google.com;
+ client-ip=2607:f8b0:4864:20::c36; helo=mail-oo1-xc36.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4C0D760614
-Authentication-Results: smtp3.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 3691A400D5
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4C0D760614
-Authentication-Results: smtp3.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3691A400D5
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=D57Ko4mD
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4C0D760614
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 19:15:55 +0000 (UTC)
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-495b27007d0so898371b6e.1
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 12:15:55 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=gX+8BoaA
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3691A400D5
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 19:30:27 +0000 (UTC)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-6ae5baaef5dso1070516eaf.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 12:30:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786734954; x=1787339754;
+ d=baylibre.com; s=google; t=1786735826; x=1787340626;
  darn=lists.u-boot-project.org; 
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=mDC664FM9jkpQaMq0MIE3BZKM7ujjHBo7hxF8/si86Y=;
- b=D57Ko4mDOmwLvXvNVCBR1EnDUghoqsGDFNWBZu46RmobOQV/is0OXwqvW8Dy2wiOa7
- kT44bvY1HEzz05E5QzvDtV8nrBf5SiDhLFE93Nt+CLwCrJcdt1u1SqIZYDWljcV53bVr
- LwnCZszYf5IWolijUfPo+VQn0YfiLk5+U6ZDd+DCfX37Ft44olPdjus9aabVfvqTeWk7
- 1bT9HnsoGbcBdrv5QW3etGfNQDiFjAI60nXIVkmGl7FkGNGv2R37TZmcIkN47D0hjAMv
- S0dgpZRFAcqfERTDPvXPNPtCHa9V7N2R+VVkQV/wXs1Zlu+0JFvDk4Eok/ZyPWJTxM6w
- opEg==
+ bh=7WAIdJxi1vWFGrwecLMr4P1U4Ex+otZsCEefxTNrXM4=;
+ b=gX+8BoaAwzcZGI4yQ1HZvuj1DjFeUDy6Qnq+FzV3zVuQpwgmnrGGEBrvlSNtXYSYBx
+ WgibJc6B5KqoYtxlJn5wS4kh3mDCSiyz+f0wQz/JBeGQQ/0ROnVsYLOlrp11ai10KtTZ
+ SajaOxtPGD/eYwltPC32RdH4p5wTrsrwPTd/kx3SIZwDz2yiGofoMPdEexi07n+n0iA0
+ DTsg8kHb0nf2VfowHeT89oLQB4vxy/tUjGNutqrAZw5vE9Pp57bydK1X6B3ZzYAWCVv7
+ DYaiZW12VcSZmh2xiCmCpGdlTdgUFlngR4fiVQiqfEfwprK/F6wFFeWED3eEm2On31kE
+ zNLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786734954; x=1787339754;
+ d=1e100.net; s=20251104; t=1786735826; x=1787340626;
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=mDC664FM9jkpQaMq0MIE3BZKM7ujjHBo7hxF8/si86Y=;
- b=EwiHMfay3ee478AfeMjiJDmac8q7TziR+qa18r3IyfS+gluQJoQa4kx/wMU082m89u
- ga3Gz740LwNBhndGwWNJl49EmOkTaf5I1+LXjqoYqDXeO21Wr72/syCAtNGiC4uOoBW6
- l0P1ixoiYRLbHk6ad9KmxQMgn7Ix/KhiTKYtYIwPZTyTv/vNi6QS+t69XBS3SAH2rZmL
- IgqQ6r0b8Q+3Dvu0mrTyL0POfPwvW6hVEraM22OFcrXi7bI21GMno7cSeyhpQvPqFD+C
- scJwKr+zsIqK+Low6AVRtxJnNmKeSMVsRJmVxAwWgGBQ06GUK2criY/6diqZm/O41KSh
- zXRQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr3fUY4s659p6UPmgGC3bPP8yZkNRLWKr5YHR04wADTlVjqJv2dyVgbdd2TvSeikOO/+FmPV28=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwsLhEps3HhNmgOxo2vhFNrRJCkBJZMmcf49x3AdqlLbHkNgQd5
- 8A/mDUK06NxVbxxKtRhrzulqAfpD2QvmfPbXJJ5KvvRE2i57gst05wV7s4zFHe/7GBA=
-X-Gm-Gg: AR+sD127h73nfMTaG+BwHD517Vz0/kmcCj0XjTsw/9/UU9tV5TlqO3OsL2+0UjJMWTV
- 274PxqOI0MMRhyU5wLzsoECMucv6UwL8My7Kc3H0uzOjT13kXlxLc2c/yQaoe4gOLxOAcycFN2f
- VM9LpldzEknbabUHtfd64tiKoqWLfuSgIELUvYjTYqP11yKtAqli/mXzV/oe/4qTsAWdZDyQIgD
- fpbEk10KXOY7ikJR3ZBnL8si6eqligszAG3m6TeqvI3DRp/4TxjT0NT/2hjN22/bgrufLbdS4yL
- KKvFVU0hK7CXTWumhofhbpH/9NDJKw8GEbZbNXJLeFc2sf3XnJYg7zHX4uYCYou30TUfcyYKmzm
- vRRJkT0O4DjFeft04R7Mz3RgKMrM/+gTQM/3aFqL6H5lDE0LMHi1CuvjNSkQ6f6zSPOQyHo+02a
- eGQS9v+/ra5UoGgKOFRTIqPPIKoZ03TmGoUM/AoOM+Uo0HVlqpMCWFy5U53HLpnjDuUQ==
-X-Received: by 2002:a05:6820:c84:b0:6a3:8ffa:2d28 with SMTP id
- 006d021491bc7-6b0d61180c2mr6754190eaf.10.1786734954460; 
- Fri, 14 Aug 2026 12:15:54 -0700 (PDT)
+ bh=7WAIdJxi1vWFGrwecLMr4P1U4Ex+otZsCEefxTNrXM4=;
+ b=o9T9SQrmTODEy2kSkdMi8TMwTcWOtZnGgPnr9/7l9WuMRjJE/NViP96/tmxruc5PTT
+ qgFGnKSq/WfxwWqrzGOuXhU2GC9oQ6SULvTwasch41tcct2iQkV20vtA6B1aKql/pmwp
+ 8Xcny9X2lK0FgCD59sUlGbv0XzRFb4zZx9U8o7R7LF52+u4uNZ6rIS8VF5dTVVQI1dd1
+ y8PtkIfzIJQhe7DvwU7oH5DlUKKhjdh3NhzgCdCkfZ+AKzwhUrfkV8+dwpou8TSLW37U
+ qXguG+vd4uJWtWDyD2pCxXxMcs0fL8peNuYAFm0SVf8Komd6x/Comd1BKPkvIR9dBZQN
+ CO1A==
+X-Gm-Message-State: AOJu0Yw93zxLysEXbOFGiEv4cGKhpB0Wy0vk8++3FLq7j4bmf6eph6yb
+ I9KOJCLtG9DDtlS+Sx9Tufq0fM6aT+AQZfL95QqO7ssdxNXxukvyjB5BdWSTErPqbk0rzoE9L18
+ VtgOUYeo=
+X-Gm-Gg: AR+sD12Gk4PH3eaBOWH7G+/Xa22qkOPrWJrBIf1I3HJITqYNaOM2kLU2Xe2/hVQx1WG
+ dqBwGtFNwP8RYZB3Ck1hRB0aIChpFrnH2ZURuU6i4XYQ3Ul7+fCtyyqKoEoE2wel7+CA+JVmHxN
+ BQzG9eLrIZPiOpJ8Rzv6i57V/NZBpRqrL9nn7lNv/3hrGta2+RdF5VZN8HO9jgta853YL2KyvuC
+ P1N7VeSG3126mZNoJEHd69Be2AZWwz+7oAcUWBbDI+sO/raGEJRPAif+Mi1z6xwacMAVhwKS9RO
+ fqa0B6HZpNLdZOAOPbfjmoQaURxWizgE+Nl9VCDQy1KziETyNTyULW+n8ThjpmlquRb+w4X2p0F
+ EZ1gYh00h1MkhYyhprkjRfsOHOPnXFnBUjxVkNKJuRbSAFHe0UM9YhmrHgMPvddJZ9k1ji8QqRj
+ SVwkX9CqOPLbB60I57gdBl+ptTDGyzhSc6wVjfYgtR0oN+hqKtfJr+OzZp2VyWfHGNOg==
+X-Received: by 2002:a05:6820:190b:b0:6ae:47e0:be1b with SMTP id
+ 006d021491bc7-6b0d7c599b5mr4663774eaf.6.1786735826217; 
+ Fri, 14 Aug 2026 12:30:26 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7124:5000:3b37:b131])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b0d95d42f4sm2391633eaf.5.2026.08.14.12.15.53
+ 006d021491bc7-6b0d96643a7sm2761221eaf.8.2026.08.14.12.30.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 12:15:53 -0700 (PDT)
+ Fri, 14 Aug 2026 12:30:25 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 14 Aug 2026 14:15:45 -0500
-Subject: [PATCH] video: pwm_backlight: support num-interpolated-steps
+Date: Fri, 14 Aug 2026 14:30:15 -0500
+Subject: [PATCH] pwm: add MediaTek display PWM driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-video-pwm-backlight-num-interpolated-steps-v1-1-140b06287868@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNTQ6CMBBA4auQWTsJLYYSr2Jc9GeEUWibtqAJ4
- e5WXX6b93bIlJgyXJodEm2cOfgKcWrATtqPhOyqQbaybwdxxo0dBYyvBY22z5nHqaBfF2RfKMU
- w60IOc6GYUbm+s0rJwRkBNRgT3fn9m11vf+fVPMiW7wGO4wMsxuXIjgAAAA==
-X-Change-ID: 20260814-video-pwm-backlight-num-interpolated-steps-7d63c7728db1
-To: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org, 
- David Lechner <dlechner@baylibre.com>
+Message-Id: <20260814-mtk-pwm-disp-backlight-v1-1-847992f0b815@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CMBBA0auQWTsJBa3iVQyLtgwwIth0CpoQ7
+ m6F5Vv8v4JQYBK4ZysEWlj4PSWoUwauN1NHyE0yFHmh85s64xgH9J8RGxaP1rjhxV0fsawuypC
+ ttG6vkGIfqOXvPn7Uh2W2T3Lxf4Nt+wE47R2HegAAAA==
+X-Change-ID: 20260814-mtk-pwm-disp-backlight-3951aeb966f7
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5676; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6698; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=8SizHy7VJ3l4l0cHH9qDLDCRSAk0wpT5tBpFL4qFY68=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqf2lixHV/ntBq02C6i8ynVWY8udDCemJcGYS4g
- VVhm0jl9ViJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan9pYhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AsbcH/3762cRskm7oAf0eThaKyHo7dGRhjw0itTBeWEO
- iBF7DchP9GPrNYbrMwpboDsf903EaS8u/kY30642f2WxMQDIpGJ5MUZJrYg4i4WgEnRWVO3Qt05
- cyQyjXyWG2Ay9GK7CtzrRwuHibB+xEy0IeJMV4vdAi29camPCINlcn3R9Y1Nd71cGzKolP4Hebd
- IcbbH1mZsGg/kzhyUXLWkoKb+y/6I9oIpckd9FYwOaj4ZFTTNX9QtQXDjZJDLjSOBsz+LR0ep8P
- 4WmrS54qbd6zGeHh95az4W3ncv99Tn/wMaDkcH0C+nRHEkprqcu110kKNb3hDOwRd36fp3ckgik
- E0iw=
+ bh=UvEbUtI8VjPf9PuKll2vW6OQafAHQ8kqsNA0DiwjwPM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqf2zKRCqF8YMA73vPpMC3EWwyVb7jORIhLw/cf
+ XuUa0Md04yJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan9syhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AE28H/iptr8zZHujtMJhhfjC971Tl4jx0N/b98trrzrl
+ UPr/Az2kw9C9TQTu2fs6enrJM7pLAG7DY3L7DT8/CN2LGnG+bqMq2jWXbXlTd/Cbjw9TBSuCCvp
+ OTNLtny5cVuo2poNIryrPgQTkHfHVZ6UsKhHwnrMdM6oyjOFzTm6zItYXLh3Q9op6Aq3ODPXdFL
+ Cd/8++5Z1pU4V+pzd/3K+NyvWe2jKnTY4zzqd/HX9CG1DXsO3OlihEhw4RhN3gN/7sh5Y/yrpmq
+ mVVLtksEF+A1xp5sq2BUU7OLfl+X9AR1rsEG72skEVWDpdt813luw5IEZp62f+EcZs38ipqPxld
+ uzD0=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -143,181 +146,238 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add support for the num-interpolated-steps devicetree property to the
-pwm_backlight driver. This is used in cases where there are many points
-and we don't want to list them all in brightness-levels.
+Add a new driver for MediaTek display PWM controller. This is generally
+used for backlight control on MediaTek SoCs.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-This will be used by the MediaTek Genio 360 EVK that we are currently
-working to bring up.
+This driver will be used by MediaTek Genio 360 EVK that we are currently
+working on bringing up.
 ---
- drivers/video/pwm_backlight.c | 124 ++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 112 insertions(+), 12 deletions(-)
+ drivers/pwm/Kconfig        |   8 ++
+ drivers/pwm/Makefile       |   1 +
+ drivers/pwm/pwm-mtk-disp.c | 178 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 187 insertions(+)
 
-diff --git a/drivers/video/pwm_backlight.c b/drivers/video/pwm_backlight.c
-index 1470eaf4cab..cd469417552 100644
---- a/drivers/video/pwm_backlight.c
-+++ b/drivers/video/pwm_backlight.c
-@@ -16,6 +16,65 @@
- #include <linux/math64.h>
- #include <power/regulator.h>
+diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
+index a69fe37caff..8a2b140fe97 100644
+--- a/drivers/pwm/Kconfig
++++ b/drivers/pwm/Kconfig
+@@ -74,6 +74,14 @@ config PWM_MTK
+ 	  This PWM is found on MT7622, MT7623, and MT7629. It supports a
+ 	  programmable period and duty cycle.
  
-+/**
-+ * build_interpolated_levels() - Build a linearly interpolated levels table
++config PWM_MTK_DISP
++	bool "Enable support for MediaTek display PWM"
++	depends on ARCH_MEDIATEK
++	help
++	  This PWM is found on the display subsystem of several MediaTek
++	  SoCs (e.g. MT8183, MT8366). It is typically used to drive the
++	  backlight of a display panel.
++
+ config PWM_ROCKCHIP
+ 	bool "Enable support for the Rockchip PWM"
+ 	depends on ARCH_ROCKCHIP
+diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
+index 2682c536c6f..7c409c3c620 100644
+--- a/drivers/pwm/Makefile
++++ b/drivers/pwm/Makefile
+@@ -18,6 +18,7 @@ obj-$(CONFIG_PWM_EXYNOS)	+= exynos_pwm.o
+ obj-$(CONFIG_PWM_IMX)		+= pwm-imx.o
+ obj-$(CONFIG_PWM_MESON)		+= pwm-meson.o
+ obj-$(CONFIG_PWM_MTK)		+= pwm-mtk.o
++obj-$(CONFIG_PWM_MTK_DISP)	+= pwm-mtk-disp.o
+ obj-$(CONFIG_PWM_ROCKCHIP)	+= rk_pwm.o
+ obj-$(CONFIG_PWM_SANDBOX)	+= sandbox_pwm.o
+ obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
+diff --git a/drivers/pwm/pwm-mtk-disp.c b/drivers/pwm/pwm-mtk-disp.c
+new file mode 100644
+index 00000000000..540539e6167
+--- /dev/null
++++ b/drivers/pwm/pwm-mtk-disp.c
+@@ -0,0 +1,178 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * MediaTek display pulse-width-modulation controller driver.
 + *
-+ * Some "brightness-levels" tables only list a few anchor points and rely on
-+ * "num-interpolated-steps" to fill in the values between them, so that a
-+ * high resolution PWM duty cycle can be used without listing every value.
-+ *
-+ * @raw_levels: Anchor point values read from "brightness-levels"
-+ * @count:	Number of anchor points in @raw_levels
-+ * @num_steps:	Number of interpolated steps between each anchor point
-+ * @levels:	Returns newly allocated table of (count - 1) * num_steps + 1
-+ *		entries
-+ * @num_levels: Returns the number of entries in @levels
-+ * Return: 0 on success, -EINVAL if @count or @num_steps are invalid, -ENOMEM
-+ *	   on allocation failure
++ * Copyright (c) 2015 MediaTek Inc.
++ * Copyright (C) 2026 BayLibre, SAS
 + */
-+static int build_interpolated_levels(const u32 *raw_levels, u32 count,
-+				     u32 num_steps, u32 **levels,
-+				     u32 *num_levels)
++
++#include <clk.h>
++#include <dm.h>
++#include <pwm.h>
++#include <asm/io.h>
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/errno.h>
++#include <linux/time.h>
++
++#define DISP_PWM_EN		0x00
++
++#define PWM_CLKDIV_MASK		GENMASK(25, 16)
++
++#define PWM_PERIOD_BIT_WIDTH	12
++#define PWM_PERIOD_MASK		GENMASK(PWM_PERIOD_BIT_WIDTH - 1, 0)
++
++#define PWM_HIGH_WIDTH_MASK	GENMASK(28, 16)
++
++struct mtk_disp_pwm_data {
++	u32 enable_mask;
++	u32 con0;
++	u32 con0_sel;
++	u32 con1;
++	bool has_commit;
++	u32 commit;
++	u32 commit_mask;
++	u32 bls_debug;
++	u32 bls_debug_mask;
++};
++
++struct mtk_disp_pwm_priv {
++	void __iomem *base;
++	struct clk clk_main;
++	struct clk clk_mm;
++	const struct mtk_disp_pwm_data *data;
++};
++
++static void mtk_disp_pwm_update_bits(void __iomem *base, u32 offset, u32 mask, u32 data)
 +{
-+	u64 count_out64;
-+	u32 count_out, *table, i, x;
++	u32 value = readl(base + offset);
++
++	value &= ~mask;
++	value |= data;
++
++	writel(value, base + offset);
++}
++
++static void mtk_disp_pwm_set_bits(void __iomem *base, u32 offset, u32 mask)
++{
++	mtk_disp_pwm_update_bits(base, offset, mask, mask);
++}
++
++static void mtk_disp_pwm_clear_bits(void __iomem *base, u32 offset, u32 mask)
++{
++	mtk_disp_pwm_update_bits(base, offset, mask, 0);
++}
++
++static int mtk_disp_pwm_set_config(struct udevice *dev, u32 channel,
++				   u32 period_ns, u32 duty_ns)
++{
++	struct mtk_disp_pwm_priv *priv = dev_get_priv(dev);
++	const struct mtk_disp_pwm_data *data = priv->data;
++	u64 rate, div, clk_div, period, high_width;
++
++	rate = clk_get_rate(&priv->clk_main);
 +
 +	/*
-+	 * num_steps must fit in the s32 divisor of div_s64(), and count_out64
-+	 * must fit both u32 (it is stored as such) and the byte size passed
-+	 * to malloc().
++	 * period_ns = 10^9 * (clk_div + 1) * (period + 1) / rate
++	 * duty_ns = 10^9 * (clk_div + 1) * high_width / rate
 +	 */
-+	if (count < 2 || num_steps == 0 || num_steps > S32_MAX)
++	clk_div = (((u64)period_ns * rate) / NSEC_PER_SEC) >> PWM_PERIOD_BIT_WIDTH;
++	if (!FIELD_FIT(PWM_CLKDIV_MASK, clk_div))
 +		return -EINVAL;
 +
-+	count_out64 = (u64)(count - 1) * num_steps + 1;
-+	if (count_out64 > U32_MAX || count_out64 > SIZE_MAX / sizeof(u32))
-+		return -EINVAL;
++	div = NSEC_PER_SEC * (clk_div + 1);
++	period = ((u64)period_ns * rate) / div;
++	if (period > 0)
++		period--;
 +
-+	count_out = count_out64;
++	high_width = ((u64)duty_ns * rate) / div;
 +
-+	table = malloc(count_out * sizeof(u32));
-+	if (!table)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < count - 1; i++) {
-+		u32 x1 = i * num_steps;
-+		u32 x2 = x1 + num_steps;
-+		u32 y1 = raw_levels[i];
-+		u32 y2 = raw_levels[i + 1];
-+		s64 dy = (s64)y2 - y1;
-+
-+		for (x = x1; x < x2; x++)
-+			table[x] = y1 + div_s64(dy * (x - x1), num_steps);
++	if (data->bls_debug && !data->has_commit) {
++		/* Disable double buffer and select manual mode before writing */
++		mtk_disp_pwm_set_bits(priv->base, data->bls_debug, data->bls_debug_mask);
++		mtk_disp_pwm_set_bits(priv->base, data->con0, data->con0_sel);
 +	}
 +
-+	table[count_out - 1] = raw_levels[count - 1];
-+	*levels = table;
-+	*num_levels = count_out;
++	mtk_disp_pwm_update_bits(priv->base, data->con0, PWM_CLKDIV_MASK,
++				 FIELD_PREP(PWM_CLKDIV_MASK, clk_div));
++	mtk_disp_pwm_update_bits(priv->base, data->con1,
++				 PWM_PERIOD_MASK | PWM_HIGH_WIDTH_MASK,
++				 FIELD_PREP(PWM_PERIOD_MASK, period) |
++				 FIELD_PREP(PWM_HIGH_WIDTH_MASK, high_width));
++
++	if (data->has_commit) {
++		mtk_disp_pwm_set_bits(priv->base, data->commit, data->commit_mask);
++		mtk_disp_pwm_clear_bits(priv->base, data->commit, data->commit_mask);
++	}
 +
 +	return 0;
 +}
 +
- /**
-  * Private information for the PWM backlight
-  *
-@@ -49,7 +108,7 @@ struct pwm_backlight_priv {
- 	 */
- 	bool polarity;
- 	u32 *levels;
--	int num_levels;
-+	u32 num_levels;
- 	uint default_level;
- 	int cur_level;
- 	uint min_level;
-@@ -196,6 +255,7 @@ static int pwm_backlight_of_to_plat(struct udevice *dev)
- 	struct ofnode_phandle_args args;
- 	int index, ret, count, len;
- 	const u32 *cell;
-+	u32 num_steps;
- 
- 	log_debug("start\n");
- 	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
-@@ -232,20 +292,60 @@ static int pwm_backlight_of_to_plat(struct udevice *dev)
- 	index = dev_read_u32_default(dev, "default-brightness-level", 255);
- 	cell = dev_read_prop(dev, "brightness-levels", &len);
- 	count = len / sizeof(u32);
--	if (cell && count > index) {
--		priv->levels = malloc(len);
--		if (!priv->levels)
++static int mtk_disp_pwm_set_enable(struct udevice *dev, u32 channel, bool enable)
++{
++	struct mtk_disp_pwm_priv *priv = dev_get_priv(dev);
 +
-+	/*
-+	 * If present, "num-interpolated-steps" means the levels above are
-+	 * just anchor points, and the actual table used for
-+	 * default-brightness-level and PWM duty cycle is the interpolated
-+	 * table built from those anchor points. Interpolating needs at
-+	 * least two anchor points.
-+	 */
-+	num_steps = dev_read_u32_default(dev, "num-interpolated-steps", 0);
++	mtk_disp_pwm_update_bits(priv->base, DISP_PWM_EN, priv->data->enable_mask,
++				 field_prep(priv->data->enable_mask, enable));
 +
-+	priv->default_level = index;
-+	priv->max_level = 255;
++	return 0;
++}
 +
-+	if (cell && count >= (num_steps ? 2 : 1)) {
-+		u32 *raw_levels;
++static int mtk_disp_pwm_probe(struct udevice *dev)
++{
++	struct mtk_disp_pwm_priv *priv = dev_get_priv(dev);
++	int ret;
 +
-+		raw_levels = malloc(len);
-+		if (!raw_levels)
- 			return log_ret(-ENOMEM);
--		ret = dev_read_u32_array(dev, "brightness-levels", priv->levels,
++	priv->data = (const void *)dev_get_driver_data(dev);
 +
-+		ret = dev_read_u32_array(dev, "brightness-levels", raw_levels,
- 					 count);
--		if (ret)
-+		if (ret) {
-+			free(raw_levels);
- 			return log_msg_ret("levels", ret);
--		priv->num_levels = count;
--		priv->default_level = priv->levels[index];
--		priv->max_level = priv->levels[count - 1];
--	} else {
--		priv->default_level = index;
--		priv->max_level = 255;
-+		}
++	priv->base = dev_read_addr_ptr(dev);
++	if (!priv->base)
++		return -EINVAL;
 +
-+		if (num_steps) {
-+			ret = build_interpolated_levels(raw_levels, count, num_steps,
-+							&priv->levels,
-+							&priv->num_levels);
-+			free(raw_levels);
-+			if (ret)
-+				return log_ret(ret);
-+		} else {
-+			priv->levels = raw_levels;
-+			priv->num_levels = count;
-+		}
++	ret = clk_get_by_name(dev, "main", &priv->clk_main);
++	if (ret)
++		return ret;
 +
-+		if (index < priv->num_levels) {
-+			priv->default_level = priv->levels[index];
-+			priv->max_level = priv->levels[priv->num_levels - 1];
-+		} else {
-+			/*
-+			 * default-brightness-level is out of range for the
-+			 * table: fall back to raw 0-255 PWM scaling instead
-+			 * of using the table at all.
-+			 */
-+			log_warning("default-brightness-level %d out of range for %u-entry brightness-levels table, ignoring table\n",
-+				    index, priv->num_levels);
-+			free(priv->levels);
-+			priv->levels = NULL;
-+			priv->num_levels = 0;
-+		}
- 	}
- 	priv->cur_level = priv->default_level;
- 	log_debug("done\n");
++	ret = clk_get_by_name(dev, "mm", &priv->clk_mm);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&priv->clk_main);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&priv->clk_mm);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static const struct pwm_ops mtk_disp_pwm_ops = {
++	.set_config = mtk_disp_pwm_set_config,
++	.set_enable = mtk_disp_pwm_set_enable,
++};
++
++static const struct mtk_disp_pwm_data mt8183_pwm_data = {
++	.enable_mask = BIT(0),
++	.con0 = 0x18,
++	.con0_sel = 0x0,
++	.con1 = 0x1c,
++	.has_commit = false,
++	.bls_debug = 0x80,
++	.bls_debug_mask = GENMASK(1, 0),
++};
++
++static const struct udevice_id mtk_disp_pwm_ids[] = {
++	{ .compatible = "mediatek,mt8183-disp-pwm", .data = (ulong)&mt8183_pwm_data },
++	{ }
++};
++
++U_BOOT_DRIVER(mtk_disp_pwm) = {
++	.name		= "mtk_disp_pwm",
++	.id		= UCLASS_PWM,
++	.of_match	= mtk_disp_pwm_ids,
++	.ops		= &mtk_disp_pwm_ops,
++	.probe		= mtk_disp_pwm_probe,
++	.priv_auto	= sizeof(struct mtk_disp_pwm_priv),
++};
 
 ---
 base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
-change-id: 20260814-video-pwm-backlight-num-interpolated-steps-7d63c7728db1
+change-id: 20260814-mtk-pwm-disp-backlight-3951aeb966f7
 
 Best regards,
 --  
