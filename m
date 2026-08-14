@@ -1,132 +1,133 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7EFCC5CFCF
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 18:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61F60C5CFC1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 18:30:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A754B40D32;
-	Fri, 14 Aug 2026 18:30:25 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8oizH-92kcFl; Fri, 14 Aug 2026 18:30:24 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A9BEC40CF8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786732224;
-	bh=JMJuC/VlGCp4KPJX3NmfQmEYWwewgE8Bt3N5NIsEbaA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NS7xbl+HKc5IPBL+W7SUGxLQGLW4xeYy6CbasN5cxaw5VqqfRjVdCqj2OXRr3zBzH
-	 GffsLcw+y2rXakA933BDagJtSszbNKE+Rl6ijDLJbvaMgfVWMBkHOXSmRWDYrlXVQQ
-	 kiRq2g/edtL5rX6daT9HWWTD29RTduO63gO5H2kI+5nmWM6zNwjF4TuU4o7RpwItsi
-	 MYwf9mE4D6LF6hZscLDSMCz+Z09mvdwclJ9GsFhQrBLPaMlmxTGQRL37QEGiBJD9WA
-	 PpZPTn1xZr7GgG0cSurlRnBFwtd2+b4jvFMpWoHsa7Rh0wuMX61yvAnbNqlb1rzRWM
-	 7rJ+5kQ29WvxQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A9BEC40CF8;
-	Fri, 14 Aug 2026 18:30:24 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D01853DF
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:30:21 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C23B6608FE
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:30:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 28B5360A86;
+	Fri, 14 Aug 2026 18:30:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Fe6glrVa8qvT for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 18:30:20 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::72e; helo=mail-qk1-x72e.google.com;
- envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org A6DDB606D3
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A6DDB606D3
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=oKUKrNHc
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A6DDB606D3
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:30:20 +0000 (UTC)
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-92edb12cdf2so112372885a.3
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:30:20 -0700 (PDT)
+ id xNDiBM62OxI6; Fri, 14 Aug 2026 18:30:48 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org F1D3C60AC0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786732219; x=1787337019;
+	d=lists.u-boot-project.org ; s=default; t=1786732247;
+	bh=PE06Ndo5RvaHTH6d3FYkXh5tR6KWOrNYU5xy3W9UbwE=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Y5MdZG9EoHdGF10H5XTl3v030QSscVwPPkzc0B/D07hPXQKNUUfW4Dr1DyANVVC+e
+	 V0ahA6GWq6jH3C9GpFJoQnYHo1jwTYMUa2+1O+8J8lTpBQ0+hOIMXqcJEb9Yxo4zTm
+	 65XgVreDg+wKxGTj9XOmDsBISirIbnKP6pPLDMC0LKZ7M5JdmE7lkol6Q333R/TVd+
+	 q1gqaZhjsW5aanf22c2Jk2HAm2tVbqSQ50BijSrcB60MUULMQgQdP9pymFd7vUKemV
+	 iqPE/E+tFevfKM6vy5RjXA8Z2pPBn0a4phc5tIZxtz64ngggyOyaGsh1stCaqpUhsG
+	 Clq+GFQq806Wg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id F1D3C60AC0;
+	Fri, 14 Aug 2026 18:30:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CFFB83A0
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:30:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id B5B8F40D22
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:30:45 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8ODPQP8_FTsd for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 18:30:45 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::831; helo=mail-qt1-x831.google.com;
+ envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org A73C140C9C
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A73C140C9C
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=tWbB36YG
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A73C140C9C
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:30:44 +0000 (UTC)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-51c0cea8883so11088681cf.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:30:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1786732243; x=1787337043;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=JMJuC/VlGCp4KPJX3NmfQmEYWwewgE8Bt3N5NIsEbaA=;
- b=oKUKrNHc/lBvKFEe6CY1OPnYwxzdct+kmiqeITYouuZC/nHyJtnsQnW+uQ1Bl6ceyK
- 8PFmVfgaPwEoRHSc4l6hCQwUWDiCcuvmG8hdW5yi7DzBKU3hy+GWLOrWB8uLFW484zi2
- SIqa0JIyS7dH5AyhytQQLrb1GdsiXTvbpYKzYtZPmyVhMDJykitT0axNtXCyIAUN/XFY
- CmxjDZU9hjKTfi/95kOP1g6PeuaceH4nloTzp1dwD4XfeChJBvOlpFnMybtn53XOMU8j
- nfUHdlhDdP8MDMOf/sVMSsrcxkWuFOlzUVYESNk4cJ+erSPUUfUdybjS2wl/hWwvkLdv
- Jigw==
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=PE06Ndo5RvaHTH6d3FYkXh5tR6KWOrNYU5xy3W9UbwE=;
+ b=tWbB36YGGus7B1Xf1SrcHpMbpfARduFDBPeYUbIiEP5RwK7CcJlru6xKvQsrXurmoE
+ Rz1/E1P0nB0/wVdKGZKfHVED+lNR06wFgS2TRbvGHCF6uE0sD9DqBfCMET4PchZT34Du
+ TOaDQpNXxUt9XyiO/Rg7HqfKfkZzp2iuNZRUrxE6MNDa/SIoYMk7GS2XvX8tLVepRCgy
+ yAS1Yj60MDeIaJceB1XwAeAGShAaztm7J4sbm9lWAU/XJ3uKTNUD5Z1IfZ6Cjp3ozB/u
+ kfOB6wlDwZo87DwM4TaQ0wrOSJYAiYPD9+EtXFcfEOmXQVvJi6V3zFDHpRIdmqGiSEWb
+ kX+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786732219; x=1787337019;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=JMJuC/VlGCp4KPJX3NmfQmEYWwewgE8Bt3N5NIsEbaA=;
- b=h4XfQEkwqNRziACy5Cq3fP/hbZWLByV4NaPloURTEjmHWEZIauHSf19V2K/U+YSQPL
- d4IEReCaIKzJlza443FZlZKU5hq0tB2yMbS4pan6E1RiXU43sJBRs9cPu1Hv5t9d470H
- z+ad+XYTKerkuew8XkwjrHDNOelzXMnAuErw/4eJS2KmXXNM2GjRYG+v6JLXtdQQCw0u
- sXqlDGANVQjYEoN+buPmlUEST9WtstMn55Of+hNBlS+nG/UMMi4GPQFrmSp76LdAc0We
- zqe34Ez+PkFo1M0JB0MO5wE/LljOxoEDy6mtWbo8sxNoGmdgQEOD70aBCVGAgisPJ61q
- H4nw==
-X-Gm-Message-State: AOJu0YwY6XjpCO3Pwyk2Ul7CSlLATbW6sC7sZt692xBWvR/zJb+21tNw
- gQHC2lqyfiYmdJrvr1Plxj5kMLut4ryK/xPDTGHLs/E2mGSjX3vTxBx7Y3ewkma9QYY=
-X-Gm-Gg: AR+sD11KERsjBld4ur0d4X6/Th4bjOVwX3wPuQU4BSiFS6x3OwuIYQD1EfexkBqG6jF
- 1ldc2oCcs7CfTxIQMSAlaWm4uPKQ9yoBWu9lyEahKxfS1RruysVbs96t7dQ9WyWNem8l8aA9zMf
- m2QIDLl+gQ1o72Erm2E1+4yGY8F4igMQKYuqxk5UuklBIOw4eQvYY46UkSXZ5foy1IO68yR6z2W
- 7kve6fDfxFKywK6jBbekcSyaQqSN6V1vuRzk7haWLG69bmgOKzEgcIFInkysInYDdEh/6yChcCc
- dwm1hXiWreYeYMKH12Rq9SQM6+YJLbN0QjLzwFw5Wy32k9Cy9TM1EwJe8mBuVcxKhav8TWt7IlN
- usDjEt/AVshraYysdsga8WSXbNX6+ewpSFQ/37xx/zbxl0xSkT0oI0lhHpCEx9yHE6no3A5aOVT
- U8RYLRBUSGhWq3m9ajk3VDsyVbQMle/F8qAaOO/pRNRcQDge6mPvXQoPKobc6gqQ642RZAIM7F2
- xjBrqekP4BH2v4uiG9qXuc1t8j1aMawjKBwlkP1d6mTb19fhR+rJjurMVv09G/iuX4=
-X-Received: by 2002:a05:620a:29c1:b0:92e:e559:fe6b with SMTP id
- af79cd13be357-936d1fd8b90mr845544785a.7.1786732219082; 
- Fri, 14 Aug 2026 11:30:19 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786732243; x=1787337043;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=PE06Ndo5RvaHTH6d3FYkXh5tR6KWOrNYU5xy3W9UbwE=;
+ b=mqoEA5DmZ2PyspFPqL9kmEEm9TRw1jBG7hmWX5xm3RILRuuP5VQuwueuBKV5IbBRw3
+ +uAPjbA3jggANJv6UsP3AJWVCCs3eEmlEl5LChBfXhpxiNrFqlGdky0E/y9O3FDYghx5
+ +/O+/sefkCc2DRmEuQ0tLzxx3R2ec3N0C/BOxDtCW8OpQ8qPFVB3oy2bCPEVlCScmpol
+ H64XrTtHQlEEsudqpR7IG1R3qhUfRE5FJQ/UAmO/PMg/LeZUTzxCdbNu1cHEuv61i9po
+ VBcPXod50trs2/nLggsTmvmVA5RtJWLTgAT5y7diYnAq1G6gWj5tvm4EkbGn94J6urts
+ MuIQ==
+X-Gm-Message-State: AOJu0Ywz1NBeOPrQQweEMz1avLztZ31dXWZKWk9MwNUzry0miNa65jSP
+ +zyvMUbIqdfy2DnMzqXXuH9vAOSBv3W0DDBIyBy0itTduWqtP4J4mUzpyoroyyNbfQAJkRDqZ9p
+ eln657yk=
+X-Gm-Gg: AR+sD10Tw6vB+Nr8DaKvs5+WiuNT9QrhMftr+ZoDLWW4DEkShCyAudhWfeQ1VdZ41RB
+ 4a6akrRLF/txHb4zi8OY0Y8tu8e8jJ0Qd+ftjaSGbe92uILjSdaZF8IrY99HdxkDnp3VMGZwfVX
+ BxBMOXSsh8fE5j5NhMI+/DeUE9HK+Ft6Pt7/NoPADjLQQ9TbKgOHD7Z/R0yphrgQDSY9/yY2aS7
+ 61yYvjdNjqQH/PsGY5iakl8Rfrx1RSbiV2h+Kz+t6v14MAjX+sszs+X5FsS6plzD2L8ToB6mb1v
+ CFq+lrjS28GW9ePK0K41MYa2XTEkZqjQYFvcD/uZkSpwbABazjdJ2GjumrvYykvaIVUxOgkRFyz
+ bdSPK2guTbQ9GfVGV1zyIaGlbk5yQ18jfu2YAvhwqePwwiqHnXbPjpY3hQ7tnJl1KyZywZx1ypC
+ e2fi4eipmPuWmoZaiEaUWR7QhqLO5P2eCL719gloygZ1unTirWB6vSwbsi97HsZQbWR+vpPOHSP
+ CX3CcWByB4MeNzySLMJI1v8gdMTngKSCfoH9SOgGrcYT9xXCGmlQY2k
+X-Received: by 2002:a05:622a:1901:b0:51c:b98c:f772 with SMTP id
+ d75a77b69052e-52d85051dbemr76459461cf.15.1786732243044; 
+ Fri, 14 Aug 2026 11:30:43 -0700 (PDT)
 Received: from maple.netwinder.org ([66.129.139.8])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-936ce24d0b5sm324606285a.45.2026.08.14.11.30.18
+ d75a77b69052e-52d83ef8879sm26384321cf.10.2026.08.14.11.30.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 11:30:18 -0700 (PDT)
+ Fri, 14 Aug 2026 11:30:42 -0700 (PDT)
 From: Ralph Siemsen <ralph.siemsen@linaro.org>
-Date: Fri, 14 Aug 2026 14:30:14 -0400
-Subject: [PATCH v2 3/3] net: designware: add r9a06g032 compatible
+Date: Fri, 14 Aug 2026 14:30:39 -0400
+Subject: [PATCH v2] mmc: zynq_sdhci: support Renesas RZ/N1
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-rzn1-2026-10-net-v2-3-ff03583dc2b0@linaro.org>
-References: <20260814-rzn1-2026-10-net-v2-0-ff03583dc2b0@linaro.org>
-In-Reply-To: <20260814-rzn1-2026-10-net-v2-0-ff03583dc2b0@linaro.org>
+Message-Id: <20260814-rzn1-2026-10-mmc-v2-1-51e4d8a717b8@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAM9ef2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDC0ND3aKqPENdEE/X0EA3NzdZ19IwOcXE3MzcwNzMWAmoraAoNS2zAmx
+ kdCyEX1yalJWaXAIyR6m2FgBv+H9LdAAAAA==
+X-Change-ID: 20260811-rzn1-2026-10-mmc-91cd47670763
 To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Tom Rini <trini@konsulko.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- David Lechner <dlechner@baylibre.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>, 
  Ralph Siemsen <ralph.siemsen@linaro.org>
 X-Mailer: b4 0.16-dev-401aa
-X-Developer-Signature: v=1; a=openssh-sha256; t=1786732214; l=949;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1786732242; l=4098;
  i=ralph.siemsen@linaro.org; h=from:subject:message-id;
- bh=Vgcsu1+pIApcCh/KcLl/+6FkxJcRgm6ojt/tRbntkPk=;
+ bh=a20TYHOGHeDgQk3xRV7YhmYcH3H/+MM5N6GwcnXL9Wk=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4pAiw
  vPQ/tR3mihuAFYAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QAlg3vMT9z7nNwZw4gYikBPLz6w9RaGsNcjw+jNCdaRB+mlJfVDMGFjpJ1vXYqKbL0dqDNeSGlQ
- SRfLWMCCx+QA=
+ QJ5XE4eMwQWLpV61ot1vLR8dpQsnZ+68brg7jj9Er2n4ltruzYtV9HXQfkUfoLJQxpd2B79/caO
+ pWDWH2ggBzwU=
 X-Developer-Key: i=ralph.siemsen@linaro.org; a=openssh;
  fpr=SHA256:12SQdavZEBUxPbBBtqQJgZ9F8vSvwTB6kFlSNgb4IcM
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -143,31 +144,128 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The existing Designware driver can be used on Renesas RZ/N1.
-Add the corresponding compatible string to the driver.
+The Renesas RZ/N1 SoC contains a MMC controller using the Arasan IP.
+It is supported by the existing driver, with the following changes:
 
-See corresponding Linux commit
-d7cc14bc9802 ("dt-bindings: net: snps,dwmac: add "renesas,rzn1"
-compatible")
+1) Multiple clocks need to be enabled. This is handled using
+   clk_get_bulk() and clock_enable_bulk().
+
+2) It is necessary to defer the sdhci_probe(), similar to what is
+   done in drivers/mmc/am654_sdhci.c
 
 Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
 ---
- drivers/net/designware.c | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v2:
+- split from the series "Renesas RZ/N1 additional drivers"
+  https://lore.kernel.org/u-boot/20260731-rzn1-2026-07-v1-8-af2ce80db9d8@linaro.org/
+- fix typo in commit message
+---
+ drivers/mmc/Kconfig      |  2 +-
+ drivers/mmc/zynq_sdhci.c | 39 ++++++++++++++++++++++++++++++++-------
+ 2 files changed, 33 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 6ed9c6d538a..650d47036aa 100644
---- a/drivers/net/designware.c
-+++ b/drivers/net/designware.c
-@@ -1059,6 +1059,7 @@ int designware_eth_of_to_plat(struct udevice *dev)
- static const struct udevice_id designware_eth_ids[] = {
- 	{ .compatible = "allwinner,sun7i-a20-gmac" },
- 	{ .compatible = "amlogic,meson6-dwmac" },
-+	{ .compatible = "renesas,r9a06g032-gmac" },
- 	{ .compatible = "st,stm32-dwmac" },
- 	{ .compatible = "snps,arc-dwmac-3.70a" },
- 	{ .compatible = "sophgo,cv1800b-dwmac" },
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index f9f7aa5cf97..7649fc8f53f 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -778,7 +778,7 @@ config TEGRA124_MMC_DISABLE_EXT_LOOPBACK
+ config MMC_SDHCI_ZYNQ
+ 	bool "Arasan SDHCI controller support"
+ 	depends on OF_CONTROL
+-	depends on ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2 || ARCH_ZYNQ || ARCH_ZYNQMP
++	depends on ARCH_RENESAS || ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2 || ARCH_ZYNQ || ARCH_ZYNQMP
+ 	depends on MMC_SDHCI
+ 	help
+ 	  Support for Arasan SDHCI host controller on Zynq/ZynqMP ARM SoCs platform
+diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+index eda95b72f49..351e7d56569 100644
+--- a/drivers/mmc/zynq_sdhci.c
++++ b/drivers/mmc/zynq_sdhci.c
+@@ -1012,6 +1012,31 @@ static const struct sdhci_ops arasan_ops = {
+ 	.config_dll = &arasan_sdhci_config_dll,
+ #endif
+ };
++
++#elif defined(CONFIG_ARCH_RENESAS)
++/*
++ * It is unknown whether the IP in RZ/N1 supports these clock phase
++ * adjustments. The devicetree does not include these properties.
++ * So this is a no-op for now.
++ */
++static void arasan_dt_parse_clk_phases(struct udevice *dev)
++{
++}
++
++/*
++ * Renesas RZ/N1 needs deferred sdhci_probe(), otherwise the
++ * first CMD_00 fails with "Timeout for status update"
++ */
++static int arasan_sdhci_deferred_probe(struct sdhci_host *host)
++{
++	struct udevice *dev = host->mmc->dev;
++
++	return sdhci_probe(dev);
++}
++
++static const struct sdhci_ops arasan_ops = {
++	.deferred_probe = arasan_sdhci_deferred_probe,
++};
+ #endif
+ 
+ #if defined(CONFIG_ARCH_ZYNQMP) && defined(CONFIG_ZYNQMP_FIRMWARE)
+@@ -1110,7 +1135,7 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
+ 	struct arasan_sdhci_priv *priv = dev_get_priv(dev);
+ 	struct sdhci_host *host;
+-	struct clk clk;
++	struct clk_bulk clks;
+ 	unsigned long clock;
+ 	int ret;
+ 
+@@ -1152,13 +1177,13 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 		}
+ 	}
+ 
+-	ret = clk_get_by_index(dev, 0, &clk);
++	ret = clk_get_bulk(dev, &clks);
+ 	if (ret < 0) {
+-		dev_err(dev, "failed to get clock\n");
++		dev_err(dev, "failed to get clock(s)\n");
+ 		return ret;
+ 	}
+ 
+-	clock = clk_get_rate(&clk);
++	clock = clk_get_rate(&clks.clks[0]);
+ 	if (IS_ERR_VALUE(clock)) {
+ 		dev_err(dev, "failed to get rate\n");
+ 		return clock;
+@@ -1166,9 +1191,9 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 
+ 	dev_dbg(dev, "%s: CLK %ld\n", __func__, clock);
+ 
+-	ret = clk_enable(&clk);
++	ret = clk_enable_bulk(&clks);
+ 	if (ret) {
+-		dev_err(dev, "failed to enable clock\n");
++		dev_err(dev, "failed to enable clock(s)\n");
+ 		return ret;
+ 	}
+ 
+@@ -1239,7 +1264,7 @@ static int arasan_sdhci_of_to_plat(struct udevice *dev)
+ 	priv->host->name = dev->name;
+ 
+ #if defined(CONFIG_ARCH_ZYNQMP) || defined(CONFIG_ARCH_VERSAL) || defined(CONFIG_ARCH_VERSAL_NET) || \
+-    defined(CONFIG_ARCH_VERSAL2)
++    defined(CONFIG_ARCH_VERSAL2) || defined(CONFIG_ARCH_RENESAS)
+ 	priv->host->ops = &arasan_ops;
+ 	arasan_dt_parse_clk_phases(dev);
+ #endif
 
--- 
-2.55.0
+---
+base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
+change-id: 20260811-rzn1-2026-10-mmc-91cd47670763
+
+Best regards,
+--  
+Ralph Siemsen <ralph.siemsen@linaro.org>
 
