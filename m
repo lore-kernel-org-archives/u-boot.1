@@ -1,151 +1,141 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCBAC5CFDB
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:48:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70A29C5CFC1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:48:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 66843814E2;
-	Fri, 14 Aug 2026 14:48:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2F6DA40F26;
+	Fri, 14 Aug 2026 14:48:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id knqmzymkhhQc; Fri, 14 Aug 2026 14:48:16 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 89XEBlWM4rdc; Fri, 14 Aug 2026 14:48:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 92F148145E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D9AFA40F1B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786718896;
-	bh=qvzeUT7X5QnMnyliaTtuPXSGoA2QFnbVixbFldfm4uw=;
-	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=y/QiojtR5dt72SO0G598xYGLdhSW5isPBewMGdgEveirRXXUMt7bXhND5Qvx6omq4
-	 AWOvWEnqgQffmSOrLRxfwj+lZpvQqfNWePgaDz+HDwOtI68CpTNLMUEZluFOJBMski
-	 kdksiscnwLRy0Yt1aCX/Z01HtDqWf3HEKfrwpTrOifrGie3FpS7lY6pSqW7827ZLDx
-	 xLVETZrlykR1PCp3DTudMuOaynjP7navXaKnYZ/pO5LDF4Qhkv1HPZYnRxKP0bNIgE
-	 Wo9ErChVi40wYXbJz/E49QPTZVo0xWvc5lJA/0ULwsBTjUnAchOvLDdcz6Q4Uj54BQ
-	 rpf/I+JbVYkFA==
+	d=lists.u-boot-project.org ; s=default; t=1786718898;
+	bh=8AnNToHSP27lqbwvXbPvBt4hibsnoFTWPrPEKjyWnkE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=oc0DMi58Q4zVcaMZB/kAqjHZh86QppB26xpddxHv69jW097zxEqABelrlLT2yxymI
+	 Yij//ggYVqbqzRASolZWXj9MmzX7vFz3VubmXyqPSdgtaFms7TjG+t4HybSbiVqDoY
+	 ZkDJVjkTauf3R4l/uYo0jZXbsrN4N5qVJfjo4K1WF1i1TxwEuocmMqEpPg/BrQWmWU
+	 wIZo8GLbXDBQo8HWNqqpaKdthsj3qV2DgWHwdj9IvEpJVi+Xtm1xqXU7H7+JsPpVxM
+	 m/k0GF21lsTRZjAdwqoBjHNhKN5mlCm90/0f60yXpXfsAmTvHg9pXdWApSI1JIWcSw
+	 1pAu+Pzo45IZw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 92F148145E;
-	Fri, 14 Aug 2026 14:48:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D9AFA40F1B;
+	Fri, 14 Aug 2026 14:48:17 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6875633B
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:12 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1A5C5139A
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 666AE40AA2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 007F340AA2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ARMRtfboiB7P for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 14:48:11 +0000 (UTC)
+ id 5kAkIXehnthP for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 14:48:13 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c100::f;
- helo=bl2pr02cu003.outbound.protection.outlook.com;
- envelope-from=boon.khai.ng@altera.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 45E7F400A4
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 45E7F400A4
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 45E7F400A4
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:11 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EGUQUOEo81q7XkceQUx/lz+DSI1PzyL2oKlxImPQqB1zHt6kIGlpGH0Z/Y47iXSIY0T9S/jcniSLbyWg9euGdIfHCZKUqoV/u+JnPGdz8UOvVsAhN6LMw2mPMLONj4R0IaI25O9sg0bmy6xCWs2jG94TEj5olOULmfs8n0N5EJMJ8P+qpqQW/7l9PdP/4PV50stZG4FL+aH8YtAhAZTf0wY01UFLuHWgbc+eol+BvdDbwtqqIVB9ZOCIo7s/0m+esA4EaASa0xe6q85c8N949EwocpssAUD8lBM8BAKT6jK1GaSolX+efyPLInAV1eghJvcZUZ0M56ynfYFvcrGDjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qvzeUT7X5QnMnyliaTtuPXSGoA2QFnbVixbFldfm4uw=;
- b=dA4qUqhUePWaVJ5FVsPSAd7+jP++zlU0tyBmpjJMeiGSusLV/SfaiAnrtpPcz8dXICjwQd8BCPN+JlcIlKSzMFZOixQcTt8ra4fErnsEdf4CcWSYUhe4D/Ni2wTENl/+W5Jmk2Yd5o+ymeAVQbbfQT88iWrs0/yx8p5qsJ9jbPvjNalT7K0ipDUNVk3DplQnhUSUm8g50FFNfdGCb3KdPoIM3sTwImbwX5Tzi07hmdQsPkKIxaT9An19LL4FNGDjc7TKCu+W7nKt0ZT4/hPZvrsnRAsFt0wLoC//yjnloI1B5i3gXmVZ3t6lbSjwdf5nnh7YcmpogxGKNUzkDg/OMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by CO1PR03MB7913.namprd03.prod.outlook.com (2603:10b6:303:274::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.16; Fri, 14 Aug
- 2026 14:48:04 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53%6]) with mapi id 15.21.0315.014; Fri, 14 Aug 2026
- 14:48:04 +0000
-To: U-boot Openlist <u-boot@lists.denx.de>
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>, Brian Sune <briansune@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Marek Vasut <marek.vasut+socfpga@mailbox.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Subject: [PATCH v1 1/2] drivers: fpga: Adding Freeze Bridge for PR console
- support
-Date: Fri, 14 Aug 2026 22:47:46 +0800
-Message-ID: <20260814144747.12988-1-boon.khai.ng@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0287.namprd03.prod.outlook.com
- (2603:10b6:a03:39e::22) To SA3PR03MB7187.namprd03.prod.outlook.com
- (2603:10b6:806:2f6::11)
+ client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org B1555400A4
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B1555400A4
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=eeA3FBQs
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B1555400A4
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:12 +0000 (UTC)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-c207cb16cf5so158668866b.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 07:48:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1786718891; x=1787323691;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=8AnNToHSP27lqbwvXbPvBt4hibsnoFTWPrPEKjyWnkE=;
+ b=eeA3FBQsoMtEpcsouUq+6lrJVc/qWU3B4JQPCqljt6x0iz+yaWPSwcbi/mHhaqTpF6
+ La2xb5mjXLKqtbcBxiDJNMBDMSCJsS4A5gy1Oxfu1varcozd6wwUfkX2BIT7Z9yUUvJr
+ YNbOfe68I6n7MFAPkfzBy5g54MfPbnbyJlFGDI71Q7ECE85D5mx+eibXnunYRp6WYVXW
+ BvlzTcUbhq3A2AyzZQwwRpJZGejoT7/ahp0TtU/5J7ixRiJFOQLTBJimmSaxVjVbERQd
+ ddLG+wA6M5ErtIeMJODT1MFwPeAAYNOykCS7ka5BkY5tQVEzrUoqCZdmVbGEkZlvpWvs
+ d9NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786718891; x=1787323691;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=8AnNToHSP27lqbwvXbPvBt4hibsnoFTWPrPEKjyWnkE=;
+ b=IrmZ+0JFkOL0puZRa5V3oFngncBSon7v0XKbGv/t8C1w0i/aDhzFZvLt6d57uMEjWx
+ Jq1ZcBOab0FDWV6ipjNt5fgZAos2Pbd+P74PD8xKlz0L/iAIDUbahOv9HDZ5Z4ss6QI9
+ uSjR3evUn7CVIOH+ms/EeXGt8XcwLoc+POgCdQrtaCc9bjeKpctJGunzOkFuXFU/4YYl
+ fVwt0iMocSlKK2Wbo8rMWRqiKQmwZC8MiJpXJe2clgQ2M3A8IFiogIRy0aLh6AFtgfVp
+ i4TH70Rq26UBaNsPXYlK5yVCMDy/u9aM5JL9n1/L2kIdiynBIgPnHCZTVuFHsz3YBSnI
+ fqSQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpxFe9GAQfU+nflUaBg9gPLvAp1ko8Xp+nASdom9OzmtqmdldaTJqkhO/ko8QHHdX5q7UwfUko=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyjAcN7qP3Nvv7vqM8GNUkI4c21oeLS4fYIGanBQCWLcGjQwGeb
+ mhCV67CPj84Mj5I6NXd3XO/FHKGPrsuXfMomg2XUDjJV7DTP4O4NUqcLrZYuUZDBNJU=
+X-Gm-Gg: AR+sD10DHSGU+iTKqu1YKsjmXxBJLnLIY9dEGfGgx021mUIVE72ApQ2zb99wGCOAK79
+ DUuf3Nfb6PukUM1d3W09kGJlic8rkriDgQhNjvsla8l+EFvR7uMbj9qEjkB57l49J77d2+w5/rt
+ nAJvATxEE5KL32qH04a8meHHX6S1AN0AokEOq6u7LIbbDISqcdULUlAgs/GbRDjTdb9v103YLwS
+ mypSChRiyqVeRsMPw0A1Q+tL4VtEc46ecQlJWnqGzo/ehzJYL4wkBYOye5kTW/+ivWGkfAPaQnk
+ zPVagmaHBCj77kA+yMqYmPx4kNcBTrGjld/JwH2mzyjRa/0U2v1zP5Lgnd4cq1D9+NCOG0wcYmi
+ BPUzbwLUcY2SVHqNey7aVP6TF/oCxc49/9SiBuDF2pwm2IYQQ0g7FU1qZHFf58n5ORcb1onFvv4
+ E/e3KPL3cEsN0loUFRptNkSwxEvqDKd0N1Ty5AQLG6e5T+UN3zjyb5/XqjnEpIJq4wCclEJSSJ+
+ Zp+8F6qcBuy0jseWD9S4LVE8o0g1NM6ZylOfAkK7asw6OUqjfyOHQiV6II=
+X-Received: by 2002:a17:907:fdcb:b0:c16:101d:7afa with SMTP id
+ a640c23a62f3a-c212a8e21c4mr256004766b.16.1786718890395; 
+ Fri, 14 Aug 2026 07:48:10 -0700 (PDT)
+Received: from macbook.tail959722.ts.net (static-226232.rol.raiffeisen.net.
+ [195.254.226.232]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c212378d9fcsm114992666b.34.2026.08.14.07.48.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 07:48:09 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+Date: Fri, 14 Aug 2026 16:47:53 +0200
+Subject: [PATCH v4 3/6] arm: mediatek: build Genio 510 and 700 boot images
+ with binman
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|CO1PR03MB7913:EE_
-X-MS-Office365-Filtering-Correlation-Id: d131aa08-bfa6-449d-8756-08defa130b99
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|376014|366016|10067099003|56012099006|6133799003|11063799006|55112099003|18002099003;
-X-Microsoft-Antispam-Message-Info: RJjdFmRUczDP/jDWd48Jx7K4RZTL0Zjl3QWANubEoyikAEnis7O2qcH0+sJr0ECp87hHd3UHPjvAEML6SDdZDC+E8PWXd7P/u6V33C1l/rAsjkUZ2jTll/q9hDEGPCnBqTHXscy+Axg4MkVk8X+ShJ/AUvjoEMsSqdOUM1bGpTZi9SVcH1SZkmvwXH2a++k8MykuZEAwrIjzrbNXzGkSuG+klMoL0+uqwiUMcNCzkCfLFY+yCXAa8DzAO2h/ZLMAaqHrN7NZmzkYptYWgqUpAQ/bluY+hC34yDPZ7Sk5oBlB+9Cyc9c2He7aF38TRmRCNOmL7VlSC35sRS/IhE5DY1ckOaFkrDcCYqpIS06Wi96CrVGGiY8LEXwuW1hSzcnSWQCui5yVqh38okC7LR/MW4mUcZURfE2nrrlD/TJM6j+SSgv0MaxLWzOg4LiQ0Zo5gExtbhpaY8BFW+i63X1ItWleh3UtYhJCjZ5/dpp6T9+91ktl0vxZsK5Jmb0MVIHepHk3rU04AVVR/qaammXQMF/lx1zUE8J4ECHFERVaE0pwTAF/6rqyIyR9O7W/KLscvRtFouh69zUk2xu4KWq2nlwh0NXuVINdHql7lzH5Iv0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(10067099003)(56012099006)(6133799003)(11063799006)(55112099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?aLxoa5uBAtJwGN5JVQnLaqmx5/t0aA1361MCdQtvCK0yFMYGgOUf9AVtAfCD?=
- =?us-ascii?Q?p/rymPVEbgf1LzHNLD2PyYZb8oYFinFyFKxUnw48ZduYZT6KxUsK+OjnUJzf?=
- =?us-ascii?Q?IsIv1c28JzmGlS1WpCSRxhYhfGLMJ3o8bMxzkHlDxeFvMeneR7TO4mjiEHqO?=
- =?us-ascii?Q?GwVCMbkHuTd6iTLyVrfnMsxXP/HdD9cXwaO4A2kVb88L5n55cdTkSiPMAvwK?=
- =?us-ascii?Q?pxPVhh8HQYHyZB39NIE5zbYqLoRVwWtV+1TZxJHIUPplO12JwT7eTBWZZAPt?=
- =?us-ascii?Q?bNLA8t7pCY/Y/ttP2bwULftrg8UdpQjH/y97t4+0x8AkWJeZ9eEOxbDW+RL6?=
- =?us-ascii?Q?Sy8fTpUq9h2AtUsyW27S5lyELRQRLWyiS+Ym2278mUrvf1TuOgkeLBC41N7Z?=
- =?us-ascii?Q?KJWzfCvb3dkVZsmqCpL8kENwTuid++0zFWh6c8JDFviLpVa/i40t3brcV01i?=
- =?us-ascii?Q?elz5jEah4FagDCkSIbxaE21pPKuq0JKVyvUL2O3LC3s2ZqqcyY6TO1wd5oMB?=
- =?us-ascii?Q?fbFJ9cbrVGEoi57PWaATR+/AqRAAoSgjZFVi2fd8qZhNZZ6oD24zePcgfKLo?=
- =?us-ascii?Q?O8eR+jEcAfRDM5NPnw1ga79/uaJT/RS9//+YFOKi9LqDAvzSq/kOFCSUNFN0?=
- =?us-ascii?Q?K33GeloBRIf7cBqsWTvnsPyjl8S0+BzGqBe8ovNJs6pb86LlLb2D85iOnxfw?=
- =?us-ascii?Q?+/nNqsnxn2oXL1ylm8lThSfBc5yvP+jF1IRMtrQvZhAtlCU9qLondvRuLSpp?=
- =?us-ascii?Q?619WxPJ1U05sNFRoI13yvkhP8gECHfkjV3BfkdyNjk3Lzn4OJTiRB8guY27a?=
- =?us-ascii?Q?P4dhVNqDfZC4BBN+bCydENM3Dzb3rHEpLNo+OfsFTFXN2P9WBxBX4rF4Bi/P?=
- =?us-ascii?Q?dZ/PwJKK0sUyeza5VszNKtyIVSnlWcplKQewKBEXczuB1LcEatKNIhaAI8CF?=
- =?us-ascii?Q?ak8mLaVjs6qJWJBl1S2dbhjynmK7J0OiyNmz9ILYjhRQOxDLPD7BDp25y12B?=
- =?us-ascii?Q?+7S11Xi8uqCGMHGpoivWhwp0V8ORaVYmLClAN/RtZ+83Nl0Z86LQsWuTpKKr?=
- =?us-ascii?Q?44i76/DOpkOXB30K3hPd+0lbL9Ue4uFmueYB/D97drVAia8MTVCYvcgxXlVZ?=
- =?us-ascii?Q?x/8W+2eIOAZcYDkSmqKC29uCqNeOmjfnT24oFV6BPJofZzioqfWBKYAeWgcd?=
- =?us-ascii?Q?vbO+pB+AtF2K0x3Rs819HVeDuaIEKPIqNaRcBoxMUqCgM/LexpxsNR4XaVZg?=
- =?us-ascii?Q?REgE8vpy2Uj7ixSxHXnbcChRzMnuPk0xEz2MNp+atf5Xrnf896zTgg8ISOp1?=
- =?us-ascii?Q?9guMZD/NFL+i2oxxM0h3GDDrFW0yLtuqMuRCdYgtOm3xiKZ28rYGBoCiap3G?=
- =?us-ascii?Q?tRBWvfsR5zaKOI8Z1Xh3jPdD82rii5PdMRvvENsSz3bZ0LCy+36i9rXUbw9e?=
- =?us-ascii?Q?JmF/Y+qKRoIztCyxh5i+WqI+OSnO4MznSNSr37p+PlO1rnUVnYrHDuiGzvFL?=
- =?us-ascii?Q?jWklgi9fIm0I8Y5p97r+Hy9Z/3EhB3lqpYH36WNq635v2xX63QtCJyzx/Qv2?=
- =?us-ascii?Q?ybz80lHd7GtLxEfDI7g3ieCtHtl7+KePYowCVnMs1f0ZvtS8QYyCdHRBqMMu?=
- =?us-ascii?Q?TgbMJ7NAAkLWIGAFh/eKrtPULJsb5fvw4IN8FYiR55I0uPNEHDtKzWqEycdy?=
- =?us-ascii?Q?EVY7vO2JdjCN6zayertoPFqNlSBQnpW7UZz+HbpvXEbyp6bXHeomoN+1+rZy?=
- =?us-ascii?Q?hB2nSeLP2g=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d131aa08-bfa6-449d-8756-08defa130b99
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 14:48:04.3830 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sFTksKseVPdvVs5XlKtm7oQy2h4r7BpKYPMm3fbtqhi4Q968uboj48vHaLnsFtw0fbeCz6+q+fmNTQLdOmjxEw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB7913
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260814-ccaione-upstream-mt8390-spl-v4-3-f4f92978a79e@baylibre.com>
+References: <20260814-ccaione-upstream-mt8390-spl-v4-0-f4f92978a79e@baylibre.com>
+In-Reply-To: <20260814-ccaione-upstream-mt8390-spl-v4-0-f4f92978a79e@baylibre.com>
+To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ u-boot@lists.u-boot-project.org
+Cc: Julien Masson <jmasson@baylibre.com>, Quentin Schulz <u-boot@0leil.net>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Carlo Caione <ccaione@baylibre.com>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>, 
+ Johan Jonker <jbx6244@gmail.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Alexey Charkov <alchark@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ Suhrid Subramaniam <Suhrid.Subramaniam@mediatek.com>, 
+ Arnaud Ferraris <arnaud.ferraris@collabora.com>, 
+ =?utf-8?q?Pablo_Sun_=28=E5=AD=AB=E6=AF=93=E7=BF=94=29?=
+ <pablo.sun@mediatek.com>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,256 +147,321 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Boon Khai Ng via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Boon Khai Ng <boon.khai.ng@altera.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Adding Partial Reconfiguration (pr) command at U-Boot console. The pr
-command will control the Freeze Controller which will freeze
-and unfreeze the Partial Reconfiguration region. The pr command also
-support multiple Partial Reconfiguration region by specifying the
-region ID.
+Genio 510 and Genio 700 use an external DDR loader before U-Boot SPL,
+then load the remaining firmware from a FIT. Add shared binman
+descriptions for both images so integration builds can assemble the
+complete boot chain.
 
-Here are the example of expected steps for partial reconfiguration
-$ bridge enable
-$ fatload mmc 0:1 100 pr_bitstream.rbf
-$ pr start 0
-$ fpga load 0 100 $filesize
-$ pr end 0
+Keep packaging optional because the required platform firmware is built
+outside U-Boot.
 
-Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- drivers/fpga/Kconfig     |   9 ++
- drivers/fpga/Makefile    |   1 +
- drivers/fpga/altera_pr.c | 188 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 198 insertions(+)
- create mode 100644 drivers/fpga/altera_pr.c
+ arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi  |  9 +++
+ arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi  |  9 +++
+ arch/arm/dts/mtk-genio-binman.dtsi             | 12 ++++
+ arch/arm/dts/mtk-genio-bootloaders-binman.dtsi | 95 ++++++++++++++++++++++++++
+ arch/arm/dts/mtk-genio-loader-spl-binman.dtsi  | 16 +++++
+ arch/arm/dts/mtk-genio-mtk-boot-binman.dtsi    | 26 +++++++
+ arch/arm/mach-mediatek/Kconfig                 | 43 ++++++++++++
+ board/mediatek/MAINTAINERS                     |  2 +
+ common/spl/Kconfig                             |  1 +
+ 9 files changed, 213 insertions(+)
 
-diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
-index 1658c73bca4..82f887128f1 100644
---- a/drivers/fpga/Kconfig
-+++ b/drivers/fpga/Kconfig
-@@ -55,6 +55,15 @@ config FPGA_INTEL_SDM_MAILBOX
- 	  Enable FPGA driver for writing full bitstream into Intel FPGA
- 	  devices through SDM (Secure Device Manager) Mailbox.
+diff --git a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
+index 1a5f45cba6b..e3cf1e306e9 100644
+--- a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
++++ b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
+@@ -4,4 +4,13 @@
+  * Author: Julien Stephan <jstephan@baylibre.com>
+  */
  
-+config FPGA_ALTERA_PR
-+	bool "Enable Altera FPGA Partial Reconfiguration driver"
-+	depends on FPGA_ALTERA
-+	help
-+	  Say Y here to enable the Altera FPGA Partial Reconfiguration driver
++#include <config.h>
+ #include "mt8390-genio-common-u-boot.dtsi"
 +
-+	  This provides basic functionality for partial reconfiguration which
-+	  include the freeze controller support.
++#ifdef CONFIG_MTK_GENIO_BOOT_IMAGES
++#define MTK_BOOTLOADERS_DESCRIPTION "MediaTek Genio 510 bootloaders"
++#define MTK_BOOT_CHAIN_DESCRIPTION "Genio 510 boot chain"
++#include "mtk-genio-binman.dtsi"
++#include "mtk-genio-mtk-boot-binman.dtsi"
++#include "mtk-genio-bootloaders-binman.dtsi"
++#endif
+diff --git a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+index 1a5f45cba6b..cb50efab376 100644
+--- a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
++++ b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+@@ -4,4 +4,13 @@
+  * Author: Julien Stephan <jstephan@baylibre.com>
+  */
+ 
++#include <config.h>
+ #include "mt8390-genio-common-u-boot.dtsi"
 +
- config FPGA_XILINX
- 	bool "Enable Xilinx FPGA drivers"
- 	select FPGA
-diff --git a/drivers/fpga/Makefile b/drivers/fpga/Makefile
-index ccfed94717e..1e1011e9da8 100644
---- a/drivers/fpga/Makefile
-+++ b/drivers/fpga/Makefile
-@@ -23,4 +23,5 @@ obj-$(CONFIG_FPGA_STRATIX_V) += stratixv.o
- obj-$(CONFIG_FPGA_SOCFPGA) += socfpga.o
- obj-$(CONFIG_ARCH_SOCFPGA_GEN5) += socfpga_gen5.o
- obj-$(CONFIG_ARCH_SOCFPGA_ARRIA10) += socfpga_arria10.o
-+obj-$(CONFIG_FPGA_ALTERA_PR) += altera_pr.o
- endif
-diff --git a/drivers/fpga/altera_pr.c b/drivers/fpga/altera_pr.c
++#ifdef CONFIG_MTK_GENIO_BOOT_IMAGES
++#define MTK_BOOTLOADERS_DESCRIPTION "MediaTek Genio 700 bootloaders"
++#define MTK_BOOT_CHAIN_DESCRIPTION "Genio 700 boot chain"
++#include "mtk-genio-binman.dtsi"
++#include "mtk-genio-mtk-boot-binman.dtsi"
++#include "mtk-genio-bootloaders-binman.dtsi"
++#endif
+diff --git a/arch/arm/dts/mtk-genio-binman.dtsi b/arch/arm/dts/mtk-genio-binman.dtsi
 new file mode 100644
-index 00000000000..7ac39c79c45
+index 00000000000..7e718ddf8da
 --- /dev/null
-+++ b/drivers/fpga/altera_pr.c
-@@ -0,0 +1,188 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/arch/arm/dts/mtk-genio-binman.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +/*
-+ * Copyright (C) 2026 Altera Corporation <www.altera.com>
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ * Author: Carlo Caione <ccaione@baylibre.com>
 + */
 +
-+#include <command.h>
-+#include <errno.h>
-+#include <wait_bit.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <linux/bitops.h>
-+#include <linux/libfdt.h>
-+#include <fdtdec.h>
++/ {
++	binman: binman {
++		multiple-images;
++	};
++};
+diff --git a/arch/arm/dts/mtk-genio-bootloaders-binman.dtsi b/arch/arm/dts/mtk-genio-bootloaders-binman.dtsi
+new file mode 100644
+index 00000000000..c43d8c32507
+--- /dev/null
++++ b/arch/arm/dts/mtk-genio-bootloaders-binman.dtsi
+@@ -0,0 +1,95 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ * Author: Carlo Caione <ccaione@baylibre.com>
++ */
 +
-+DECLARE_GLOBAL_DATA_PTR;
++&binman {
++	bootloaders {
++		filename = "bootloaders.img";
 +
-+#define FREEZE_CSR_STATUS_OFFSET		0
-+#define FREEZE_CSR_CTRL_OFFSET			4
-+#define FREEZE_CSR_ILLEGAL_REQ_OFFSET		8
-+#define FREEZE_CSR_REG_VERSION			12
++		fit {
++			description = MTK_BOOTLOADERS_DESCRIPTION;
++			#address-cells = <1>;
 +
-+#define FREEZE_CSR_STATUS_FREEZE_REQ_DONE	BIT(0)
-+#define FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE	BIT(1)
++			images {
++				uboot {
++					description = "U-Boot";
++					type = "firmware";
++					os = "u-boot";
++					arch = "arm64";
++					compression = "none";
++					load = <CONFIG_TEXT_BASE>;
++					entry = <CONFIG_TEXT_BASE>;
 +
-+#define FREEZE_CSR_CTRL_FREEZE_REQ		BIT(0)
-+#define FREEZE_CSR_CTRL_RESET_REQ		BIT(1)
-+#define FREEZE_CSR_CTRL_UNFREEZE_REQ		BIT(2)
++					u-boot-nodtb {
++					};
 +
-+#define FREEZE_TIMEOUT				20000
++					hash {
++						algo = "sha256";
++					};
++				};
 +
-+static int altera_get_freeze_br_addr(fdt_addr_t *addr, unsigned int region)
-+{
-+	int offset;
-+	char freeze_br[12];
-+	struct fdt_resource r;
-+	int ret;
++				atf {
++					description = "ARM Trusted Firmware BL31";
++					type = "firmware";
++					os = "arm-trusted-firmware";
++					arch = "arm64";
++					compression = "none";
++					load = <CONFIG_MTK_GENIO_BL31_LOAD_ADDR>;
++					entry = <CONFIG_MTK_GENIO_BL31_LOAD_ADDR>;
 +
-+	snprintf(freeze_br, sizeof(freeze_br), "freeze_br%d", region);
-+	const char *alias = fdt_get_alias(gd->fdt_blob, freeze_br);
++					atf-bl31 {
++					};
 +
-+	if (!alias) {
-+		printf("alias %s not found in dts\n", freeze_br);
-+		return -ENODEV;
-+	}
++					hash {
++						algo = "sha256";
++					};
++				};
 +
-+	offset = fdt_path_offset(gd->fdt_blob, alias);
-+	if (offset < 0) {
-+		printf("%s not found in dts\n", alias);
-+		return -ENODEV;
-+	}
++				optee {
++					description = "OP-TEE";
++					type = "firmware";
++					os = "tee";
++					arch = "arm64";
++					compression = "none";
++					load = <CONFIG_MTK_GENIO_OPTEE_LOAD_ADDR>;
++					entry = <CONFIG_MTK_GENIO_OPTEE_ENTRY_ADDR>;
 +
-+	ret = fdt_get_resource(gd->fdt_blob, offset, "reg", 0, &r);
-+	if (ret) {
-+		printf("%s has no 'reg' property!\n", freeze_br);
-+		return ret;
-+	}
++					tee-os {
++					};
 +
-+	*addr = r.start;
++					hash {
++						algo = "sha256";
++					};
++				};
 +
-+	return ret;
-+}
++				uboot-fdt {
++					description = "U-Boot control devicetree";
++					type = "flat_dt";
++					arch = "arm64";
++					compression = "none";
 +
-+static int altera_freeze_br_req_ack(fdt_addr_t addr, u32 req_ack)
-+{
-+	u32 status, illegal, ctrl;
-+	int ret = -ETIMEDOUT;
-+	unsigned long start = get_timer(0);
++					u-boot-dtb {
++					};
 +
-+	while (1) {
-+		illegal = readl(addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
-+		if (illegal) {
-+			printf("illegal request 0x%08x detected in freeze bridge\n", illegal);
++					hash {
++						algo = "sha256";
++					};
++				};
++			};
 +
-+			writel(illegal, addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
++			configurations {
++				default = "conf";
 +
-+			illegal = readl(addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
-+			if (illegal)
-+				printf("illegal request 0x%08x detected in freeze bridge are not cleared\n",
-+				       illegal);
++				conf {
++					description = MTK_BOOT_CHAIN_DESCRIPTION;
++					firmware = "atf";
++					loadables = "uboot", "optee";
++					fdt = "uboot-fdt";
++				};
++			};
++		};
++	};
++};
+diff --git a/arch/arm/dts/mtk-genio-loader-spl-binman.dtsi b/arch/arm/dts/mtk-genio-loader-spl-binman.dtsi
+new file mode 100644
+index 00000000000..e49ad5c471f
+--- /dev/null
++++ b/arch/arm/dts/mtk-genio-loader-spl-binman.dtsi
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ * Author: Carlo Caione <ccaione@baylibre.com>
++ */
 +
-+			ret = -EINVAL;
-+			break;
-+		}
++ddr-loader {
++	type = "blob-ext";
++	filename = "ddr-loader.bin";
++	size = <CONFIG_MTK_GENIO_DDR_LOADER_SIZE>;
++};
 +
-+		status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
-+		status &= req_ack;
-+		if (status) {
-+			ctrl = readl(addr + FREEZE_CSR_CTRL_OFFSET);
-+			printf("%s request %x acknowledged %x %x\n",
-+			       __func__, req_ack, status, ctrl);
++u-boot-spl {
++	size = <CONFIG_SPL_MAX_SIZE>;
++};
+diff --git a/arch/arm/dts/mtk-genio-mtk-boot-binman.dtsi b/arch/arm/dts/mtk-genio-mtk-boot-binman.dtsi
+new file mode 100644
+index 00000000000..16ce9cacb66
+--- /dev/null
++++ b/arch/arm/dts/mtk-genio-mtk-boot-binman.dtsi
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ * Author: Carlo Caione <ccaione@baylibre.com>
++ */
 +
-+			ret = 0;
-+			break;
-+		}
++#include <linux/stringify.h>
 +
-+		if (get_timer(start) > FREEZE_TIMEOUT)
-+			break;
++&binman {
++	mtk-boot {
++		filename = "mtk-boot.bin";
 +
-+		udelay(1);
-+		schedule();
-+	}
++		mkimage {
++			args = "-T", "mtk_image",
++			       "-a", __stringify(CONFIG_MTK_GENIO_BROM_LOAD_ADDR),
++			       "-e", __stringify(CONFIG_MTK_GENIO_BROM_LOAD_ADDR),
++			       "-n", "media=emmc;arm64=1";
 +
-+	return ret;
-+}
++			section {
++				pad-byte = <0>;
++#include "mtk-genio-loader-spl-binman.dtsi"
++			};
++		};
++	};
++};
+diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+index 5e6c50ca64d..eb8d072e686 100644
+--- a/arch/arm/mach-mediatek/Kconfig
++++ b/arch/arm/mach-mediatek/Kconfig
+@@ -210,6 +210,49 @@ config MTK_BROM_HEADER_INFO
+ 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT8195
+ 	default "lk=1" if TARGET_MT7623
+ 
++config MTK_GENIO_BOOT_IMAGES
++	bool "Build MediaTek firmware images"
++	depends on TARGET_MT8188 && SPL
++	select BINMAN
++	select MTK_GENIO_IMAGE_CONTRACT
++	help
++	  Enable binman to assemble the MediaTek BootROM image and firmware
++	  FIT from U-Boot and external platform firmware components.
 +
-+static int altera_freeze_br_do_freeze(unsigned int region)
-+{
-+	u32 status;
-+	int ret;
-+	fdt_addr_t addr;
++config MTK_GENIO_IMAGE_CONTRACT
++	bool
 +
-+	ret = altera_get_freeze_br_addr(&addr, region);
-+	if (ret)
-+		return ret;
++if MTK_GENIO_IMAGE_CONTRACT
 +
-+	status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
++config MTK_GENIO_BROM_LOAD_ADDR
++	hex "BootROM payload load address"
++	default 0x201000 if TARGET_MT8188
++	help
++	  Address at which the MediaTek BootROM loads and enters the external
++	  DDR loader.
 +
-+	if (status & FREEZE_CSR_STATUS_FREEZE_REQ_DONE)
-+		return 0;
-+	else if (!(status & FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE))
-+		return -EINVAL;
++config MTK_GENIO_DDR_LOADER_SIZE
++	hex "DDR-loader image region size"
++	default 0x4b000 if TARGET_MT8188
++	help
++	  Size reserved for the external DDR loader at the start of the
++	  BootROM payload. This is also the offset of U-Boot SPL and must match
++	  the loader's SPL_OFFSET value.
 +
-+	writel(FREEZE_CSR_CTRL_FREEZE_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
++config MTK_GENIO_BL31_LOAD_ADDR
++	hex "BL31 load and entry address"
++	default 0x54601000 if TARGET_MT8188
 +
-+	ret = altera_freeze_br_req_ack(addr, FREEZE_CSR_STATUS_FREEZE_REQ_DONE);
-+	if (ret)
-+		writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
-+	else
-+		writel(FREEZE_CSR_CTRL_RESET_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
++config MTK_GENIO_OPTEE_LOAD_ADDR
++	hex "OP-TEE load address"
++	default 0x431fffe4 if TARGET_MT8188
 +
-+	return ret;
-+}
++config MTK_GENIO_OPTEE_ENTRY_ADDR
++	hex "OP-TEE entry address"
++	default 0x43200000 if TARGET_MT8188
 +
-+static int altera_freeze_br_do_unfreeze(unsigned int region)
-+{
-+	u32 status;
-+	int ret;
-+	fdt_addr_t addr;
++endif
 +
-+	ret = altera_get_freeze_br_addr(&addr, region);
-+	if (ret)
-+		return ret;
-+
-+	writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
-+
-+	status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
-+
-+	if (status & FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE)
-+		return 0;
-+	else if (!(status & FREEZE_CSR_STATUS_FREEZE_REQ_DONE))
-+		return -EINVAL;
-+
-+	writel(FREEZE_CSR_CTRL_UNFREEZE_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
-+
-+	ret = altera_freeze_br_req_ack(addr, FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE);
-+
-+	writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
-+
-+	return ret;
-+}
-+
-+static int do_pr(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
-+{
-+	const char *cmd;
-+	char *region;
-+	unsigned int region_num = 0;
-+
-+	if (argc != 2 && argc != 3)
-+		return CMD_RET_USAGE;
-+
-+	cmd = argv[1];
-+	if (argc == 3)
-+		region_num = simple_strtoul(argv[2], &region, 0);
-+
-+	if (strcmp(cmd, "start") == 0)
-+		return altera_freeze_br_do_freeze(region_num);
-+	else if (strcmp(cmd, "end") == 0)
-+		return altera_freeze_br_do_unfreeze(region_num);
-+
-+	return CMD_RET_USAGE;
-+}
-+
-+U_BOOT_CMD(pr, 3, 1, do_pr,
-+	   "SoCFPGA partial reconfiguration control",
-+	   "start [region] - Start the partial reconfiguration by freeze the PR region\n"
-+	   "end [region] - End the partial reconfiguration by unfreeze the PR region\n"
-+	   ""
-+);
+ config MTK_TZ_MOVABLE
+ 	select ARCH_MISC_INIT
+ 	select OF_SYSTEM_SETUP
+diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+index d0d25b096e5..2048cca22b2 100644
+--- a/board/mediatek/MAINTAINERS
++++ b/board/mediatek/MAINTAINERS
+@@ -24,6 +24,8 @@ S:	Maintained
+ F:	arch/arm/dts/mt8188-u-boot.dtsi
+ F:	arch/arm/dts/mt8390-genio-common-u-boot.dtsi
+ F:	arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
++F:	arch/arm/dts/mtk-genio-*-binman.dtsi
++F:	arch/arm/dts/mtk-genio-binman.dtsi
+ F:	arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+ F:	configs/mt8188.config
+ F:	configs/mt8370_genio_510_evk_defconfig
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 0618f42c941..e5d0aade7fc 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -194,6 +194,7 @@ config SPL_SHOW_ERRORS
+ config SPL_BINMAN_SYMBOLS
+ 	bool "Declare binman symbols in SPL"
+ 	depends on SPL_FRAMEWORK && BINMAN
++	default n if TARGET_MT8188
+ 	default y
+ 	help
+ 	  This enables use of symbols in SPL which refer to other entries in
+
 -- 
-2.43.7
+2.55.0
 
