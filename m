@@ -1,71 +1,71 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8631C5CFCF
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4F4C5CFCF
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:29:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8B38C40EE5;
-	Fri, 14 Aug 2026 14:29:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3C2DE80DDC;
+	Fri, 14 Aug 2026 14:29:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dQvhdsQsTFfV; Fri, 14 Aug 2026 14:29:02 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id K5P-F-E4GZWe; Fri, 14 Aug 2026 14:29:09 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9F2FE40EED
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2A45180D86
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786717742;
-	bh=ntCTUUf4BY4sPyhEO208YrtnCNxmdnwOAHCjU0uSf3o=;
+	d=lists.u-boot-project.org ; s=default; t=1786717749;
+	bh=dIcbggBH1yozrzZ8EBiGDkcoqrPRBBQ6tqQZCHaipO0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FLgCb4K8fpY+Ec+ah2juaczEC9Nmd1QM4dvLbYKd/cUNuQ27LLlno/IaMkiyrhOxa
-	 RMdphSWo5BMt0gLqKS/nj1Ds3s1i+ZV+YA3IjgEs8wMtKUs5TXcu1fztMyctehUHya
-	 vPQbppH7E16qe03JkxJqSi2nG4rtwhFVje01PxHOwIM+L5SO0cv6ncnITumQfkDdiq
-	 II4ByDUymf7P5NVQweTNkawwF7AE/NM8GaF3F2OJ6I/rwpX7sqH5Wo+RDBcorRb58r
-	 MZMYPOUxOIY1w0ZalhclgmRThPerxZtpKqM8QFR42hweuTps4l1Hou6nXXXZ7T780D
-	 3BH/FhdeijEYw==
+	b=Qt7fB7nBZa544hPngrxPcIqvwhvZRWiSUAUW1zeT4MoAsoNzBhknvYo69an8E+hMx
+	 VnNLrUWo3yGeaE0Am4JuVMUiJmKfjtGb2N6o4Gr24mugA4xd8kF6OiW5ipZDz/zLgK
+	 0poNJDPFGBgkOo2klsYC5PtebmhWMMp+d5vzPwRZUSZAz2bvHLs9Lw+fLMI4Z8xtZM
+	 NTrhC6Y6J+ufbFXBC97GUBCU6kGppIKYqoLnvNiQtRj+UlQFzt1H/y4AV5rQegJhvt
+	 vutHK67GB1327ebFZ3LzFv6s3qVZuvzSgrxnIbDM3a3nMOQ7KQ+CWC7RNSpzJFkJ+s
+	 Flc/Q1BvOOcuA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9F2FE40EED;
-	Fri, 14 Aug 2026 14:29:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2A45180D86;
+	Fri, 14 Aug 2026 14:29:09 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id A5A6D23F
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:29:01 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 5CEC83DF
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:29:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9D5FB60834
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:29:01 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 42F3160896
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:29:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Acz7RDFinph0 for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 14:29:01 +0000 (UTC)
+ id HSs-uEW17yh0 for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 14:29:07 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
  envelope-from=jerome.forissier@arm.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 6E2D26060D
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org BF7BF60834
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6E2D26060D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BF7BF60834
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=X8FvIm0T; 
+ header.a=rsa-sha256 header.s=selector1 header.b=rX2XzvRa; 
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=X8FvIm0T
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6E2D26060D
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:29:00 +0000 (UTC)
+ header.a=rsa-sha256 header.s=selector1 header.b=rX2XzvRa
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BF7BF60834
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:29:06 +0000 (UTC)
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=pG6iRitS1966OzjlVN80+EuapQ4U8v1kDm6KgGNha/fqibPQuh5Mj+7oECnuny2TdAK+9gPVGLItSLj6pOZpWjGbOhs5EtqKyUT7Nx08/ERcfHF1aEmrN7z2k0WI2Djlu7UObikP8bvRKBQA6Ci0CRq32PTMImfQckuHUlSpj5gzkrLL5wLr7nLUC78SIPPd9FHqgCODRnsLJ4QAHdlHJq07KgZzM247CEj8GTb7G6aZ8CEZvDksV7+vUX/gZ7p2XbND6KkadDV0seGfB4ZebfMw1V9oQOmqx0ysQzuPf+95vZYYMO33kD1F0dvi+FJWf3xaxxBVepi8WF0CE2sxhQ==
+ b=JLJZMLdsUoEHk8hdmvEduEf8lJVSpzGn6JmIJuqykC+glizzlpK/fE/wHtPXpc9WX1jhCQOCaIqp0URk2yJuOkkmx/Z3ZP0970ovAaRQMhCFpdMnImR8Q3gBAu+zeoMTkkfelLbaxPK+aFXuXbvISzJiMVi2CvWkqbIjA4CD69L8Vq3ZYNQRFwb+iJQN1zDw1X+ooLJQkAUneBKcEKz3Uo0s0jfBI4AL+PUk6e3FWKanrrLcJv2P+W5DA9obLCds/1WlsasTm9lmfIHjMo/gF5BiUms+aKQKI1sKdjlmdC3otlsNTObgM7qGFTytAZWxdX6/9n1IH388Ya6y/mpVbw==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ntCTUUf4BY4sPyhEO208YrtnCNxmdnwOAHCjU0uSf3o=;
- b=UlP0QMotEb43gVoT4tC7F4XO5GCPuyClufUnyFm+O9W+cKRKbBCzlZnpgAupoMEJHiSLeex6OSaHFzLafq5Nk+Pcsh+4gMMcDybv1b544VSIqLZTygeH9ljl4hwJXnx+anVoPfUFHYs9DnfJJtv3p7Osq4htKyN+PXK4wVSvXIXLIIof9buenUc8yRxd8BrCXo1xZZ4pqlEfDoUM99nNgqjwZCuZGsVfdY0xaYGgkcZvSs9GxGCtWQfii0vvkwthsiGzRPlCODYYpv9PaYTuMyR/w28wmADHaZomX8BUbooUIcDnppeOyPO1/ba0rj58XNd8TTmS1UJgKWfbNH1qew==
+ bh=dIcbggBH1yozrzZ8EBiGDkcoqrPRBBQ6tqQZCHaipO0=;
+ b=w3R9+dCHQ8qP8l/3fL4L+DyBhpOzY+Gp1MyFWTCgSHO8F13usOxfmYJZcYxFtpYkr1h7HphMwD3CcjYrzpqzGKn69eWm3M9053YHd+cfaQc/N35AYzyxI6UMx06+vbtKsLTW+ZR1DIsX0EMAo5JzAF96ILElBndyNCyGVwlVjukFx2hqWvmpFdCmeJj2ZTBAu04AmCsG26d4w3Gj/fnUMnc/+BPs6DoBtwxECj//gsd8fNzsrqvi6Xxkzsw4708+EMoCo+7TmNO5+3V3zfUI2MTse+mE7Zu1oShgVIYC1BqNK+HzxFrg8KgbHURfL8Gzoq29O7mEovNnllJNABkuKw==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  4.158.2.129) smtp.rcpttodomain=byteray.co.uk smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -74,18 +74,18 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  dmarc=[1,1,header.from=arm.com])
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ntCTUUf4BY4sPyhEO208YrtnCNxmdnwOAHCjU0uSf3o=;
- b=X8FvIm0TNV1v/p/oBoECkxbIokHQHj7v68eefZtZaMfElDugN2rnPHX6lkFHAsXWsa3psPDpZBj/pRspNq8vj3CwWzJFi4dhHwHgn/UYkYoe8w9Mf5JQjBQ7QkYogOHtaAS58Lkp438GZk/WLmC9IXEIDxz8LGKtwflpmD8+Xj0=
-Received: from AM0P309CA0022.EURP309.PROD.OUTLOOK.COM (2603:10a6:20b:28f::9)
- by PA4PR08MB6191.eurprd08.prod.outlook.com (2603:10a6:102:f3::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Fri, 14 Aug
- 2026 14:28:53 +0000
-Received: from AM4PEPF00027A60.eurprd04.prod.outlook.com
- (2603:10a6:20b:28f:cafe::4) by AM0P309CA0022.outlook.office365.com
- (2603:10a6:20b:28f::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.5 via Frontend Transport; Fri, 14
- Aug 2026 14:28:50 +0000
+ bh=dIcbggBH1yozrzZ8EBiGDkcoqrPRBBQ6tqQZCHaipO0=;
+ b=rX2XzvRaW5AsUYAqS4nOCYKm10QlJ6NgQ0so1S9yiF97LdACQZetLWqTnLfXbDYKRQbpoIia0eufB9Tq8+HkhuADGll+dFGk3rPs0VbQb8XJQYCLBAoxutMfgyvTdxcW6FhEPZVK4gKOYcxRX3c7K/TPhinz5YCO6A6tw14MFwo=
+Received: from AS9PR06CA0353.eurprd06.prod.outlook.com (2603:10a6:20b:466::30)
+ by PAXPR08MB6416.eurprd08.prod.outlook.com (2603:10a6:102:152::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.15; Fri, 14 Aug
+ 2026 14:28:58 +0000
+Received: from AM4PEPF00027A64.eurprd04.prod.outlook.com
+ (2603:10a6:20b:466:cafe::13) by AS9PR06CA0353.outlook.office365.com
+ (2603:10a6:20b:466::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.15 via Frontend Transport; Fri,
+ 14 Aug 2026 14:28:58 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=arm.com;dmarc=pass action=none header.from=arm.com;
@@ -93,94 +93,94 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  4.158.2.129 as permitted sender) receiver=protection.outlook.com;
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AM4PEPF00027A60.mail.protection.outlook.com (10.167.16.68) with Microsoft
+ AM4PEPF00027A64.mail.protection.outlook.com (10.167.16.75) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.3
- via Frontend Transport; Fri, 14 Aug 2026 14:28:49 +0000
+ via Frontend Transport; Fri, 14 Aug 2026 14:28:57 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vZfA4+XM7UgABuKefgz86lzoLpIySoRVzvn5qX9L0l/VJtn6wkApTRkRBClhSTRlOGH8gJ8t/9itCF0fNEMga6qV29iaciWmxxVa3l5vm5yg5VPXFRA4Pl/c5JS0NrMm7HcK9X6aZbJNyDjUmU7ViatM9UbgO3Tv0JPvll4jRog2B+NTFVjY0LVU2WTiDWfQIpSuU0Ks4Y6Xe3RwYh1ofa4BUFOOv8lgBSTc2GMmJZKF5xapz9PCjp93YmcwO/HdI9H8OlBJqGLps4+1UfHD+m035/F4dJnyW+biN6jDpAsNlnsg8YVsmUZXhGID6sXkLSVKUt5bc6N8wtkMMFjIiQ==
+ b=w2Zeho2S6nRvfRnfTRukwOmibrMMIzQBD3p1L93I2ze+SEp1MQJxWuj/sJbGHaC0/k7BDc+4gm+2+x1omSHNOQ7RFGwiDGi6QbZO3BLVS2eIl7SiTHEEp5/NLmf2Aq0hUpSjGlpfxyylHVKk+Bq0LSv4CmTOgRIlJ1KVbmXRpwzTkgMdk0Kf+BZFkJdiOZJawy/XDjIThxWfamndXY1MXRHeSpMqIg5VClX7u/ezzHzeN1w7ymgPhsJ+wdL6eufhjd1OTFmYYWaJu3eqwC5sAQS3cuFdSLgwKV7ucfWzVdaJBgsx7yS0cFGA6bVMygWr6Q00LITfhukRcVP5Jvd4ng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ntCTUUf4BY4sPyhEO208YrtnCNxmdnwOAHCjU0uSf3o=;
- b=LtKO2YROyaA/m17TsrotiCnG/VPzmgzs/y3pQRSGMVE2xPtLPnJi7V843vW6NyDPDMCtKtvN53AyKEqh8rKQQRD+HO55+VOA6sLcdDMH0G1CdzhhU5u6Ox2fM8hHoAd41IomofO9gWnxOh2JqFiaV/fjeF5vV/9l8D/75dMdex+4z80Dk8kuKVW0iX84/4nBf1VoLZMwN5MviT5hKfWIcUOWWJ2T3BorFk4DUsxW5tKD+zlUndHzj/cV0XgCiSOomWFLnRNt3FOdPzWroJa5K0twZcie1vyd6Du2Zzwt61KmstZipNJ1p6ISbqm97TrKYMSFoKlHKz8kHgOsmk98Yw==
+ bh=dIcbggBH1yozrzZ8EBiGDkcoqrPRBBQ6tqQZCHaipO0=;
+ b=IORz/1LZJO3gwuYH+RlkCIvPj1iQHuTPoCWAcxMOYIzGIbNEu/imJgrDdVZmvgqQZuHz0pGi4Zg+rmAlvIAa3y3mdhHdCZ1BpCN1e03zbqSi/sPiFoYlyQ6uhlDAqY5dc0Xr3fCm5qXmpNCJTrne+zbR3Khh8YH7E46y9F4z5BOaUTWEg1aKZUP62zNMyhwSQJQEXXH4/J8ECqh/+g3ta1brzU74hV9MC3EbkCI6lpA3bxN8VSNyZ/UHPs/Ra61aKgfTtKZYkt48QyMcp3FrBvbX9q5f4VF93q6XxQ50cskvtaqlg7vzpJ69tnJqrBWCv7iMUGiMQ3m3NDeygYfOcQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ntCTUUf4BY4sPyhEO208YrtnCNxmdnwOAHCjU0uSf3o=;
- b=X8FvIm0TNV1v/p/oBoECkxbIokHQHj7v68eefZtZaMfElDugN2rnPHX6lkFHAsXWsa3psPDpZBj/pRspNq8vj3CwWzJFi4dhHwHgn/UYkYoe8w9Mf5JQjBQ7QkYogOHtaAS58Lkp438GZk/WLmC9IXEIDxz8LGKtwflpmD8+Xj0=
+ bh=dIcbggBH1yozrzZ8EBiGDkcoqrPRBBQ6tqQZCHaipO0=;
+ b=rX2XzvRaW5AsUYAqS4nOCYKm10QlJ6NgQ0so1S9yiF97LdACQZetLWqTnLfXbDYKRQbpoIia0eufB9Tq8+HkhuADGll+dFGk3rPs0VbQb8XJQYCLBAoxutMfgyvTdxcW6FhEPZVK4gKOYcxRX3c7K/TPhinz5YCO6A6tw14MFwo=
 Authentication-Results-Original: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
  (2603:10a6:20b:740::16) by AS2PR08MB10153.eurprd08.prod.outlook.com
  (2603:10a6:20b:64c::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.15; Fri, 14 Aug
- 2026 14:28:17 +0000
+ 2026 14:28:24 +0000
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.21.0315.014; Fri, 14 Aug 2026
- 14:28:17 +0000
-Message-ID: <d2b5f9f1-724a-426d-bce0-7f9831fe9ce3@arm.com>
-Date: Fri, 14 Aug 2026 16:28:15 +0200
+ 14:28:24 +0000
+Message-ID: <7d18b896-cf1b-4953-a513-b9ea53ec86e1@arm.com>
+Date: Fri, 14 Aug 2026 16:28:23 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] net: lwip: dns: free the callback context after an
- aborted lookup
+Subject: Re: [PATCH v2 2/3] net: lwip: wget: free the transfer context after
+ an aborted request
 To: Shahriyar Jalayeri <shahriyar@byteray.co.uk>,
  u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>,
  Argus <argus@byteray.co.uk>, nd <nd@arm.com>
 References: <20260813-lwip-httpc-uaf-v2-0-1c3f0b3aa1eb@byteray.co.uk>
- <20260813-lwip-httpc-uaf-v2-3-1c3f0b3aa1eb@byteray.co.uk>
+ <20260813-lwip-httpc-uaf-v2-2-1c3f0b3aa1eb@byteray.co.uk>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260813-lwip-httpc-uaf-v2-3-1c3f0b3aa1eb@byteray.co.uk>
+In-Reply-To: <20260813-lwip-httpc-uaf-v2-2-1c3f0b3aa1eb@byteray.co.uk>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0241.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:1a7::12) To AM0PR08MB11733.eurprd08.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0252.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a7::23) To AM0PR08MB11733.eurprd08.prod.outlook.com
  (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|AS2PR08MB10153:EE_|AM4PEPF00027A60:EE_|PA4PR08MB6191:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6366893e-1e42-4443-0b3b-08defa105bd9
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|AS2PR08MB10153:EE_|AM4PEPF00027A64:EE_|PAXPR08MB6416:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6441f7da-6db2-446f-ff68-08defa106039
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|11063799006|10067099003|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info-Original: PMER611Jw5N7DgOTMuZ+pYutpoEh5Hg6PmZp3szmEhDDvn+qv6IrYbhDhcLtSIzJEzi2BUQAnwOSV7S9jxzbOjIvIikFGXfSvb4OvpAP73HEn0JuLlxfiSlJShOEWs/zbiWyDILlWlriAVzvyOXMUTwZk43g2Qp051dJNYEE+5LStZLUYFyIZAoqRz7ja+aJvC3ocn3ysmwCexgc5qkgXd2bWASFk//a9aBoOT+kfh4bodpOGB+D15ow5kAc7UZj4OaiWuOU59r31eNLlsJebV5dSYYrsYhMi7p71TX9IE4nyxY//MooI8G2qc7iEwVxpEYLaofa2q4NVrbdUrqPW6ThTb48fbWPDjUwxQuiS370wOkK/NM7V2zalkt7fdZx1r5p7/KWuoGh6+c0b2rMXEvlWRPr8Ez2JhB+SQrgz7ktp5wXavSoAwRCDOlN4BRdRQaaH7sIE0VM/Dac5Bu2h+vT/l/+F0d1F3ydkrtAABk16qZhip/Ix0Hxz18VZ2UtyYYi13Djl7saWTRkDe6C2hKciGDT2EFSv8Zdrn+rzXMPPVDD0pPLdYs0G9aHD3kW+aOHt6TjSA1rJ8eg2j3aVX/MWffUjPrlUBRVnX42uV4HgQY0qknAESJ/DAafSa0LD1eqm9bC2TMunhrDe4TimCFgc8ZTeIxD5qkF1TGAqR8=
+ ARA:13230040|23010399003|1800799024|376014|366016|11063799006|10067099003|5023799004|4143699003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info-Original: 3hNdgrJe2CDGmyD2joEhheH0NEJM/cdyDfnr83itXtnPHIFgzH/aR56zbEfubr3ojcW3oAatb+2GQQBkzfTN0SVj6q6WEg+1bThy0FPNIW5usSjNgpc6Gn//AkoJrBpTAWFAHuHMCyv9h+vZewO4YGKNSkYo4HKdH8U91iDv+bwJmLcpoiNpLfV2bqSaWyqshsMZaMCcMBVR2CgWnDP4082NAIehLSwwjUDecRx9O/DvsmxrQRaTEmI/pCG2QLCI2DMOSSNPMaRm+bF8Hmany8yFmnHjKijmItpb4xfYRbruGzqBoBvk+Y6axTJ29vPgIHNlMqtBe78fMtmbOl5mvrl0JZo/VI/cFEBlgCNMC6MILXFhBNwiZduxZPkXhAQGXzNM06UV4YnfHpE+5hxJv6zpCzPpvLNkh66aoCyla5a6lDhWb6qLAXEJO38kve5aPQd9LsES3B7DVa2LmfXsx1XWIzkrP2n8q3YaiS0F9YL9KnUbuDSsfJyT4pHQNdcjjWZobEcCY6EKwQ0XgY5+19X1u7XnG7d3cDGNQNGxXAalKiV2YN6NFUvFfE+EXMflWSbZCAfdplSt/U3o/nCGLOC7b9pJ9YzxVftbgJXfSPMvSQ7aE8w6pCCAMuuyqhXAJilR4iLz9B53L/6hCtml1t2xNGBgWtMu4mcQ3nqWxPs=
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
  PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(11063799006)(10067099003)(4143699003)(56012099006)(18002099003)(22082099003);
+ SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(11063799006)(10067099003)(5023799004)(4143699003)(56012099006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: ofIo3ljJiWLWYa+IszgkReRvMHQdwCCXI5zMliM2NdfrPR/b9CIpLIoSe9guhsuaO0UpMvD35oS4R7MiEn0TeYzPVWhslzi4uNn4YcA0kARaz9DRcGEDMOOiFOfxriGc6+Ts0pAjJ9V9bBXdAFB4ycXqFEtir4kNZFzqsS4/53qtqFRCD+CR7tCf+dZcY0nI3NWtVIxH8/88LH7qe5ftZEJW8BQW0iIof0roQ4MKE4Wgik3h9qeS73gQbSJI63QLtNZ0ewYQupteDNQGfs8kkAMDXSiRJ2WSVwb6PB6mYLscGjn8p+syJRnrnlrKMH96NXMQ5ncKfoLjamaBPlLEzg==
+X-Exchange-RoutingPolicyChecked: XFbbhswkc9Gkyye/BrNA6F6yxsNDWxk4IlcfWah38EB5+2YIVDlC7dSeH99ePWZG/T3iYcddTg+NOjzDE60SyDXjNLewqv/b35jf4X/Qu/WK0FJBOZ+hxOisK25PlY02yd4GBEhJZkxdzLmyTb1LkGzQhc8PXW/cOoqtpJjD8MFi2ichHMbi+nLf2ESJthD8iS6iQP+goT3QK4FwH65I0wd2946d9jA/vvMYgjk19x+nKrtRY4Fzjfd/xBVfGqbh+5e6Ts1prYLF221oAOT0/vieAzptlvdhFnVQTHn3WSkPUIclF4TYQq6XkFTgRwWx/CjMRQiKEdZ9d6bQmYSccA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB10153
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM4PEPF00027A60.eurprd04.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM4PEPF00027A64.eurprd04.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: c1d5f8f9-d9ae-4e19-f34f-08defa104812
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 57c7cafa-6683-4835-2270-08defa104cb4
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|82310400026|35042699022|36860700016|1800799024|14060799003|10067099003|56012099006|4143699003|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: uc4gT1q+4VDuGV86LGpWZfp3NMKJvxxiJFnr+B2S+xV9roQaaPFG83aPEfzTlOHV65Ym2z67vFz+FlzUPd4eSp75T/WG3FpwUZnSG7bLl7oZAoYBrr8EuSbG6C8jS5KNY2kuMrrrTPjYzHtOsCGzx9mArWgQD3RvV2piugxDphDLsWpumiAbwSsAdNC+McghS0HXYAvlXxcaijVH9wiJ6uG8+Cf8iwOJLm1gA0hCqt218c7lEn4WAPI/+MvOktE+Z7iQfXbuSMBqIpVNV0UFSnHlHLnaLG3Bt3heRWo21JBdMQh2rLhXtJwEtH0jRkQWVz1bxISQ390W3PC56WCTOL681C5nEaE9fWNyItNN0VxVNd+tbu6uypCaOnM/0IVc0dB1+nidhtES/wn7rUDnC1ZvhD+Jwy9j9Y1iqXRPNVhXSUK7bq+Esewk/gv5GIXYYWrf5yB9HgshIHL0XzzxIswkHXwT+Mlrr77SoO5B1ZwG4yrv2tpW/LALTXjflA56Pr8F0oVcrv36i+bWw1EQcE48yDGoxSEQSQyQwStNXHkTQ/r/Gn2X0NSUO2Y0AKGr40C0ArM1GdKyXcQ4nJuw5lgXStsKTBB1bobZ01fQTD0+968lFHZPIDlX6iCCHavSplTjHHa7TZ/2UVIfX0hkyDpmoOktdIEMMpmFJa2fe1Z5o5xVF5xqb47BLLssekJxFqyJEo2w8AYIGSucAQFMSg==
+ ARA:13230040|14060799003|36860700016|23010399003|35042699022|376014|82310400026|1800799024|4143699003|10067099003|11063799006|5023799004|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: RNg+/xJo4MQ6hD9zQ7IHXYwuSCn+XIOhLWZhkckHwB2mGXbB/wWCacqcvZ05XvsK/PjsA0ZxiYUk8eBRhDxEu6pbBNxd8aPqOA6OSYbaaXhzoZR4TxgF4FqKipsqsOJjzvB6AFgpn6mBLWwP12xGr96pPbm1f2qRMBh0OPQOatlvghVd57gL4f7J7XoWnQuiWayqT3loz8tpHr+4HI0JNcfmQIN0wAPprAZMcZaEkXTfdH3M3JpKK9kOsC4t6fCt/hXosAbBUkGEdf851N+JW6wcYSHJeRjYX3gHTt7oDQENXsgJFpqJDUk2JL7TMF2KxUGDBiBpmM8h6enTTRzV6+VuTQy0X+ZTuCHHxYv8xGpzucKxXfUHPACC8D79QFC3bRtrISDVcfXCsKTa6UBlEJyj8R6CvJwKCVOHCRIESvtCsZSipy8w83Y09JLsJcov0eqMPZUdh6WV2DwAfk0l7UOiJ7Gl+1TDrlKqsqey0GPsNW5v9zdpNQOKue1ILBf/DS8ZQv7rizdhMw+69GPRuil2SO2d4HVTyH4uOKrcbPXMw7wEqtkbmhzudOv9PhTebEwH5qbJlGFQFG4yeYAHNVB6SoJXjYUMQxtsgjZAkNvr7MUb2p/zGAtFoF13pZOOvoBjBL+Zzl6vk2fzFxjt2G/LNQbwn60U8fjnxSpvzG+PIHsh1lFOixw1FTJ7Beic7Tlz5x1sqmzWirWIYeKKtw==
 X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(82310400026)(35042699022)(36860700016)(1800799024)(14060799003)(10067099003)(56012099006)(4143699003)(11063799006)(18002099003)(22082099003);
+ SFS:(13230040)(14060799003)(36860700016)(23010399003)(35042699022)(376014)(82310400026)(1800799024)(4143699003)(10067099003)(11063799006)(5023799004)(56012099006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: fYJ/6/kzuUXf9UuQ2dNQPtyWQ7sO40XfxrfxqyfbwhwfvEftUIX92dhQjKnvodJzdiGcRGzOUgtcwvZn3wEhMl95Ndr/U3Kk1ZwKOuuk18SfQxJvg55NzlGVcWC3P0CDfLKChhQh7jWQMI49a9udr5MEu0xydGTdKb86TCGdwr/h7Lw0eqde8ijZvPi5tfKi/n2tsksIG9hzghcVtouLwiTvx8o2bRYhC+rnS6Y9qUUbQWM7tCylJkuVXDxixS4REDGHNmg0u0aUD7NAqieZYm0n8RT93+NRIN1UY6LSUMrxJBqcHR+P6t4vLJF9QoqUr/4tAhrytA+06TCIyijepMNeSdvcTOjY+Xkt6VbtW1oEOEgjTEdGX8z1U0MbMGgal7bKIAP/xzH/YR2KKGykpm0fIEcI9ngHVM3AAuJc+FEUvZxZMPyZDq7ckiOBJu/f
+X-MS-Exchange-AntiSpam-MessageData-0: cAFPqIfP8QQCNLypd8KMg2iZz54DUzfflohi677LkxqaXURRj5XqDIY80tX6ktCMODC5GVhpfW7XcZyjb+moXDYx309RwQ9L5iy096UmjCwWiCtE2anctIfmPYX1g15rD5ulxVBHk/0/QjuMJ8iTXaRsti3zi+0Nhthsjb8EEDp1KZ0kj65BGWEPcxZhFR5C7NUyodqzphJIW3qLpe4yRkLhFWpkTKzGnAQz+arTzspIKK4HFdIek4FEMf1HmruICRFPZRmXjjBwLRzNjRnc5nTj2nkRoNP+5azoTSnZ1OU2Jdg0sa9FXIgbGkqsCsTE5gA8VXwXrn+9IQPlx+vzAbtjQ1TYOSJ6VWfFSP5eGjTiHZnhhvJh0EYsNfRlPUYJnYf+z9ZSnQ3J6+nhZaH2rDVQtIZJigxblWP7sSaOBRyhRO01czFDVEzSK0h6ScPy
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 14:28:49.9632 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6366893e-1e42-4443-0b3b-08defa105bd9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 14:28:57.3037 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6441f7da-6db2-446f-ff68-08defa106039
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
  Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A60.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A64.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6191
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6416
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -198,131 +198,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Shahriyar,
 
 On 13/08/2026 18:28, Shahriyar Jalayeri wrote:
-> do_dns() keeps its dns_cb_arg on the stack and registers its address as
-> the dns_gethostbyname() callback argument. lwIP has no way to cancel a
-> pending lookup, so if the command is interrupted or times out while the
-> name is still resolving, dns_cb() fires later and writes the result into
-> the stack frame that has since been reused.
+> wget_do_request() keeps the transfer context on the stack and passes its
+> address to the lwIP httpc callbacks. If the user interrupts the transfer
+> with Ctrl-C while the host name is still resolving, wget_handle_request()
+> leaves its receive loop without tearing the connection down. The pending
+> DNS lookup (which lwIP cannot cancel) later resolves, the connection is
+> established, and httpc_recv_cb() runs against a stack frame that no longer
+> exists. It writes attacker-controlled TCP data through store_block() to
+> map_sysmem(ctx->daddr), with ctx read from reused stack.
 > 
-> Allocate dns_cb_arg on the heap and add an 'abandoned' flag. If the
-> lookup did not complete, hand ownership to dns_cb(), which frees the
-> context when it eventually fires; otherwise free it before returning.
+> The httpc_connection_t passed to httpc_get_file_dns() has the same lifetime
+> problem. lwIP stores a pointer to it in httpc_state_t.conn_settings rather
+> than a copy, and dereferences that pointer later for the result and
+> headers-done callbacks, so an abandoned request reads its result_fn and
+> headers_done_fn from a stack frame that is gone.
+> 
+> Allocate the context on the heap, move the connection settings into it
+> (along with the TLS allocator the settings point at, so nothing lwIP
+> retains points back at the stack), and add an 'abandoned' flag. On Ctrl-C
+> with a request still in flight, mark it abandoned and hand ownership to the
+> lwIP callback, which frees the context when the connection finally tears
+> down; the receive, headers-done and result callbacks return early so a
+> stale callback neither stores data nor touches wget_info.
 
-Similar to the wget case, this relies on a later DNS callback to reclaim
-the heap context, but that callback is not guaranteed to run.
+The problem I see is that this relies on a later callback to reclaim the
+heap context, but that callback is not guaranteed to run, especially once
+the command removes the netif and stops the device. That fixes the UAF by
+extending the lifetime, but can turn Ctrl-C into a leak.
 
-Here too I suggest cancelling the queued DNS callback before returning
-from dns, while the stack object is still valid. With a small DNS
-cancellation helper, dns_cb_arg can stay on the stack and no heap object
-has to be left for a later callback to free.
+I suggest cancelling the in-flight lwIP operation before returning from
+wget, while the stack objects are still valid. That likely means adding a
+small DNS callback cancellation helper and an httpc_abort() helper, then
+calling it on Ctrl-C and freeing the TLS config before returning.
 
 Thanks,
 -- 
-Jerome
-
-> Fixes: aedcfec9ed78 ("net: lwip: add dns command")
+Jerome 
+> Fixes: 3c656c928bd7 ("net: lwip: add wget command")
 > Signed-off-by: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 > ---
->  net/lwip/dns.c | 38 +++++++++++++++++++++++++++++++-------
->  1 file changed, 31 insertions(+), 7 deletions(-)
+>  net/lwip/wget.c | 95 ++++++++++++++++++++++++++++++++++++++++-----------------
+>  1 file changed, 67 insertions(+), 28 deletions(-)
 > 
-> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-> index b620b0611d6..e93720963b8 100644
-> --- a/net/lwip/dns.c
-> +++ b/net/lwip/dns.c
-> @@ -4,6 +4,7 @@
->  #include <command.h>
->  #include <console.h>
->  #include <env.h>
-> +#include <malloc.h>
->  #include <lwip/dns.h>
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index 9e93765926d..7359094f6be 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -12,6 +12,7 @@
+>  #include <lwip/errno.h>
 >  #include <lwip/timeouts.h>
+>  #include <rng.h>
+> +#include <malloc.h>
+>  #include <mapmem.h>
 >  #include <net.h>
-> @@ -15,6 +16,7 @@
->  struct dns_cb_arg {
->  	ip_addr_t host_ipaddr;
->  	bool done;
+>  #include <time.h>
+> @@ -39,6 +40,11 @@ struct wget_ctx {
+>  	ulong content_len;
+>  	ulong hash_count;
+>  	enum done_state done;
 > +	bool abandoned;
+> +	httpc_connection_t conn;
+> +#if CONFIG_IS_ENABLED(WGET_HTTPS)
+> +	altcp_allocator_t tls_allocator;
+> +#endif
 >  };
 >  
->  static void do_dns_tmr(void *arg)
-> @@ -26,6 +28,12 @@ static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
->  {
->  	struct dns_cb_arg *dns_cb_arg = arg;
+>  static void wget_lwip_fill_info(struct pbuf *hdr, u16_t hdr_len, u32_t hdr_cont_len)
+> @@ -200,6 +206,13 @@ static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
+>  	if (!pbuf)
+>  		return ERR_BUF;
 >  
-> +	/* Late callback for an abandoned lookup: reclaim and stop. */
-> +	if (dns_cb_arg->abandoned) {
-> +		free(dns_cb_arg);
+> +	/* The caller gave up on this request; drop the connection. */
+> +	if (ctx->abandoned) {
+> +		altcp_abort(pcb);
+> +		pbuf_free(pbuf);
+> +		return ERR_ABRT;
+> +	}
+> +
+>  	if (!ctx->start_time)
+>  		ctx->start_time = get_timer(0);
+>  
+> @@ -227,6 +240,12 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+>  	struct wget_ctx *ctx = arg;
+>  	ulong elapsed;
+>  
+> +	/* Last callback for an abandoned request: reclaim ctx and stop. */
+> +	if (ctx->abandoned) {
+> +		free(ctx);
 > +		return;
 > +	}
 > +
->  	dns_cb_arg->done = true;
+>  	wget_info->status_code = (u32)srv_res;
 >  
->  	if (!ipaddr)
-> @@ -36,7 +44,7 @@ static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
->  
->  static int dns_loop(struct udevice *udev, const char *name, const char *var)
+>  	if (err == ERR_BUF) {
+> @@ -282,6 +301,9 @@ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct
 >  {
-> -	struct dns_cb_arg dns_cb_arg = { };
-> +	struct dns_cb_arg *dns_cb_arg;
->  	struct netif *netif;
->  	const char *ipstr;
->  	ip_addr_t ipaddr;
-> @@ -52,18 +60,22 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
->  		return CMD_RET_FAILURE;
+>  	struct wget_ctx *ctx = arg;
+>  
+> +	if (ctx->abandoned)
+> +		return ERR_BUF;
+> +
+>  	wget_lwip_fill_info(hdr, hdr_len, content_len);
+>  
+>  	if (wget_info->check_buffer_size && (ulong)content_len > wget_info->buffer_size)
+> @@ -299,10 +321,6 @@ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct
+>  static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+>  			       struct udevice *udev, struct netif *netif)
+>  {
+> -#if CONFIG_IS_ENABLED(WGET_HTTPS)
+> -	altcp_allocator_t tls_allocator;
+> -#endif
+> -	httpc_connection_t conn;
+>  	httpc_state_t *state;
+>  	int ret;
+>  
+> @@ -313,7 +331,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+>  			return ret;
 >  	}
 >  
-> -	dns_cb_arg.done = false;
-> +	dns_cb_arg = calloc(1, sizeof(*dns_cb_arg));
-> +	if (!dns_cb_arg) {
-> +		net_lwip_remove_netif(netif);
-> +		return CMD_RET_FAILURE;
-> +	}
+> -	memset(&conn, 0, sizeof(conn));
+> +	memset(&ctx->conn, 0, sizeof(ctx->conn));
+>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
+>  	if (is_https) {
+>  		char *ca;
+> @@ -351,23 +369,23 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+>  			printf("WARNING: no CA certificates, ");
+>  			printf("HTTPS connections not authenticated\n");
+>  		}
+> -		tls_allocator.alloc = &altcp_tls_alloc;
+> -		tls_allocator.arg =
+> +		ctx->tls_allocator.alloc = &altcp_tls_alloc;
+> +		ctx->tls_allocator.arg =
+>  			altcp_tls_create_config_client(ca, ca_sz,
+>  						       ctx->server_name);
 >  
-> -	ret = dns_gethostbyname(name, &ipaddr, dns_cb, &dns_cb_arg);
-> +	ret = dns_gethostbyname(name, &ipaddr, dns_cb, dns_cb_arg);
+> -		if (!tls_allocator.arg) {
+> +		if (!ctx->tls_allocator.arg) {
+>  			log_err("error: Cannot create a TLS connection\n");
+>  			return -ENODEV;
+>  		}
 >  
->  	if (ret == ERR_OK) {
-> -		dns_cb(name, &ipaddr, &dns_cb_arg);
-> +		dns_cb(name, &ipaddr, dns_cb_arg);
->  	} else if (ret == ERR_INPROGRESS) {
->  		start = get_timer(0);
->  		sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
->  		do {
->  			net_lwip_rx(udev, netif);
-> -			if (dns_cb_arg.done)
-> +			if (dns_cb_arg->done)
->  				break;
->  			if (ctrlc()) {
->  				printf("\nAbort\n");
-> @@ -75,15 +87,27 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
+> -		conn.altcp_allocator = &tls_allocator;
+> +		ctx->conn.altcp_allocator = &ctx->tls_allocator;
+>  	}
+>  #endif
+>  
+> -	conn.result_fn = httpc_result_cb;
+> -	conn.headers_done_fn = httpc_headers_done_cb;
+> -	if (httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &conn,
+> +	ctx->conn.result_fn = httpc_result_cb;
+> +	ctx->conn.headers_done_fn = httpc_headers_done_cb;
+> +	if (httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &ctx->conn,
+>  			       httpc_recv_cb, ctx, &state)) {
+>  		return -ENODEV;
+>  	}
+> @@ -376,8 +394,17 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+>  
+>  	while (!ctx->done) {
+>  		net_lwip_rx(udev, netif);
+> -		if (ctrlc())
+> +		if (ctrlc()) {
+> +			/*
+> +			 * A request may still be in flight (e.g. the name is
+> +			 * still resolving). Hand ctx to the lwIP callback, which
+> +			 * frees it once the connection tears down, instead of
+> +			 * freeing it here under a live callback.
+> +			 */
+> +			if (!ctx->done)
+> +				ctx->abandoned = true;
+>  			break;
+> +		}
+>  	}
+>  
+>  	if (ctx->done == SUCCESS)
+> @@ -392,27 +419,26 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+>  int wget_do_request(ulong dst_addr, char *uri)
+>  {
+>  	struct udevice *udev;
+> -	struct wget_ctx ctx;
+> +	struct wget_ctx *ctx;
+>  	struct netif *netif;
+> -	bool is_https;
+> +	bool is_https, abandoned;
+>  	int ret;
+>  
+> -	ctx.daddr = dst_addr;
+> -	ctx.saved_daddr = dst_addr;
+> -	ctx.done = NOT_DONE;
+> -	ctx.size = 0;
+> -	ctx.prevsize = 0;
+> -	ctx.start_time = 0;
+> -	ctx.content_len = 0;
+> -	ctx.hash_count = 0;
+> +	ctx = calloc(1, sizeof(*ctx));
+> +	if (!ctx)
+> +		return -ENOMEM;
+> +
+> +	ctx->daddr = dst_addr;
+> +	ctx->saved_daddr = dst_addr;
+> +	ctx->done = NOT_DONE;
+>  
+> -	ret = parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https);
+> +	ret = parse_url(uri, ctx->server_name, &ctx->port, &ctx->path, &is_https);
+>  	if (ret)
+> -		return ret;
+> +		goto out;
+>  
+>  	ret = net_lwip_eth_start();
+>  	if (ret)
+> -		return ret;
+> +		goto out;
+>  
+>  	if (!wget_info)
+>  		wget_info = &default_wget_info;
+> @@ -422,14 +448,27 @@ int wget_do_request(ulong dst_addr, char *uri)
+>  	netif = net_lwip_new_netif(udev);
+>  	if (!netif) {
+>  		net_lwip_eth_stop();
+> -		return -ENODEV;
+> +		ret = -ENODEV;
+> +		goto out;
+>  	}
+>  
+> -	ret = wget_handle_request(&ctx, is_https, udev, netif);
+> +	ret = wget_handle_request(ctx, is_https, udev, netif);
+> +
+> +	/*
+> +	 * If the request was abandoned the lwIP callback still owns ctx and
+> +	 * frees it when the connection tears down; do not free it here.
+> +	 */
+> +	abandoned = ctx->abandoned;
 >  
 >  	net_lwip_remove_netif(netif);
+>  	net_lwip_eth_stop();
 >  
-> -	if (dns_cb_arg.done && !ip_addr_isany(&dns_cb_arg.host_ipaddr)) {
-> -		ipstr = ipaddr_ntoa(&dns_cb_arg.host_ipaddr);
-> +	/*
-> +	 * A started lookup that never completed may still be pending in lwIP
-> +	 * and reference dns_cb_arg. Hand ownership to dns_cb, which frees it
-> +	 * when it eventually fires, instead of freeing it here.
-> +	 */
-> +	if (ret == ERR_INPROGRESS && !dns_cb_arg->done) {
-> +		dns_cb_arg->abandoned = true;
-> +		return CMD_RET_FAILURE;
-> +	}
+> +	if (!abandoned)
+> +		free(ctx);
 > +
-> +	if (dns_cb_arg->done && !ip_addr_isany(&dns_cb_arg->host_ipaddr)) {
-> +		ipstr = ipaddr_ntoa(&dns_cb_arg->host_ipaddr);
->  		if (var)
->  			env_set(var, ipstr);
->  		else
->  			printf("%s\n", ipstr);
-> +		free(dns_cb_arg);
->  		return CMD_RET_SUCCESS;
->  	}
->  
-> +	free(dns_cb_arg);
->  	return CMD_RET_FAILURE;
+> +	return ret;
+> +out:
+> +	free(ctx);
+>  	return ret;
 >  }
 >  
 > 
