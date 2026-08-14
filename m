@@ -4,111 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FCAC5CFDB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AEFFC5CFC1
 	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 13:53:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B629240D94;
-	Fri, 14 Aug 2026 13:53:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1341C40D9A;
+	Fri, 14 Aug 2026 13:53:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id crML5ep8itiS; Fri, 14 Aug 2026 13:53:46 +0000 (UTC)
+ id AAyQ1CR33wDp; Fri, 14 Aug 2026 13:53:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B04C640D4E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ED87C40D88
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786715626;
-	bh=8cPkQZ4ennE+Z1E+7sUFoFSGLLJPtq3rz3wv0YAWEiE=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=yb7PWl1vi79vsIzlxIdSIyd68IAKbQ6xfL3Bm2j9pjglRD5bf/5zcLVJDJqFARx9t
-	 3P5DstlvsLK2x6QT/j9yYMvRknkt20SjtcIPGvKqFcR/ISgIkjbk8cs1RnxCGClyp0
-	 OsU0bxIKAs4ZENYjrv5ls+LHd9E7jlxCKrkG4NL+2ugcLVyhxlQNB2dMvzNS1qo0ui
-	 BiLgRx0661X+vayi97DGcCjopiYW09cUS0xFhagCfCLwVjRkmmaXdN6qDpqwnSwRGX
-	 G/TGhnNudAqGsua2dEnWg9Q6H2lgsx6a588J8ysfzqUbn0oGGCB8R3DUNbRU5YXcGR
-	 uqI/SpBVnvhDg==
+	d=lists.u-boot-project.org ; s=default; t=1786715628;
+	bh=Ifg/jXrczQjmdUxeAnGZfZ28rmsDTpKp9rMn3dwnfSY=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=Js1/eOgM1rM5hlp2mAbDbf4ypzf9hdzhqk47c32Ks//Sw6c1/lUtIAB5EDyorVpZ3
+	 u1lvo8mLDLz9dSbsVPNdthkYoA7kH4TYoh0ggtXNTOs3BzGtipW8V1jEtllY5VHAT4
+	 9XTq3N7AiuQORQbupOHHFXln90D61B91wXxZz8VKTTF/uq3EaIjEyuXaJIU4Gsgmbb
+	 XEyhH3Db5pG9bC2YWUMVkR9ql4t0tMx/IVgwSZQ4yVuK0s8VVx4cT21F6t4uwxq9Zc
+	 QV/HSyaR7CbuN5f3XgkURJAtxIyZq1RQCCHix1Rr35gnEJR4+VS4ZWR7vRCg6pY/cC
+	 /Amw10JVzsZ5g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B04C640D4E;
-	Fri, 14 Aug 2026 13:53:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 23F13361
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:15:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ED87C40D88;
+	Fri, 14 Aug 2026 13:53:47 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A5910139B
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:42:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 15CBC606EC
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:15:48 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A056740C55
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:42:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0QXf8kEEy_kk for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 13:15:47 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3sYTS6chEYpw for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 13:42:59 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
- envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org E22C860602
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E22C860602
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=PUAVUuSx
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E22C860602
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:15:46 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4954a32cf1eso5366535e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 06:15:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786713345; x=1787318145;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=8cPkQZ4ennE+Z1E+7sUFoFSGLLJPtq3rz3wv0YAWEiE=;
- b=PUAVUuSxS8hdfQ9iPa6rkoVusGX/ec613+uiHU4H8d1PQK/NX57QcTH8Dzg7pKLiy4
- p/cqiTKdsai1jFkslBFLeus+vYnkg/CC6/dbd7BDi1y+omNBiS2aR0my+bEPJglgBWPo
- fFn8I2gb4lPkOEbC49107Od+5LRuGaMFQPG+4LiAUuFTwnqPxtbxBlBJz4wwG1VxmyMJ
- 21k3jpogFwpLxS/mINk4Cl7nfnBMoP5TrX4wHKjl0Bn6GDHWJrxk+ql+8iqfm/LJU5g9
- Op1ED4vF6+CISxhc3xxJf2F4lcRgoVSY8j4/lcXnyky3mNjeLvkrIo67D6r3y7hFWHZ0
- t0rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786713345; x=1787318145;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8cPkQZ4ennE+Z1E+7sUFoFSGLLJPtq3rz3wv0YAWEiE=;
- b=OhjmhYCq+IrylZ7OCAOWvHIvLFrr33jkPTOhLTphU3KZnta/rrOQX9+huq8qyOHOfZ
- XsdoJz2GE5R87NDhOn8VY1WBxY6iH1WCOiW3LZSpF9bgTxWxZCwr9Vy4heVFv1AEX47H
- UA+Tac78/n24cmx3By1evPeFuRUVaLxR/hBv+zrKNUgpm52pynPJMWz5hYx3iJ3ElI8B
- yQLkwMyTRZ8D6tSXJgSDC1+j39bRKa3SgkaRQXPiH0IhYEi7yfSspW37pO9HC3CsGCQt
- RcLOYfBERncsGnMo83LBfoMOqdhwgDsZcC5dEUxOvbYyEUbcy5L/el3eh80FuPKxu4CJ
- AjpQ==
-X-Gm-Message-State: AOJu0Yzrt/0tHA3wHStZepbBiQj9ZVIUMfR6UUKRF+lzYRzEGLkGYXHn
- 0J0tOgGDBVHCee8LQQpnyceLZAyujPvllVPU/Z1VP/Z0JSNHze/w+ejO
-X-Gm-Gg: AR+sD10MDjnxDYrrn5UWqMjnYf2nmsrRjRdgCn0zLBV3BtVFLnCJYNwpKMYyoaV5OfG
- rXJJZTYl3yoXtxNM/Y6M3j1tuYK3SfuRCpycpmESZEsGUS5KI5NVJQSYUvulX4ZA8CFLLhh/+EH
- UMhol6BgvfRnAC9gLtYxgEvBOfGpSAF+Y5CxOERcvOEVPjOjWA/LiIr3YwtFL9/8Xw4Mggx43pP
- YQd+Vt/Lzr8W7wKQYjhykO2SBAcHrBHqqI1x5WhplID1Sc7hrdp8zO22za6ypTIsdJ2eXZJdQCU
- S58+Gjl8buqqxjB3Qcd8jJ5RNEJ4F7lAn/y4ochfL14TIa9sLVZRjfTVYo/ozd3lLnakIQomcdA
- hGgAwhW2v0nLwGC+Gj4wkWA8PIfSh3VO6wJEk+kAUUFBN1Rc0ebzHgHHjGcbCHJvFlkGoqRyUw1
- WItUC1kwPiBcjtKhnyQ5TRHzIrVgBrvCMKRo70sV04YZ0=
-X-Received: by 2002:a05:600c:4e0a:b0:499:737c:ce4c with SMTP id
- 5b1f17b1804b1-49987948ae5mr87120955e9.6.1786713344612; 
- Fri, 14 Aug 2026 06:15:44 -0700 (PDT)
-Received: from eichest-laptop.lan ([2a02:168:af72::cb4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4815f21a31dsm8534718f8f.9.2026.08.14.06.15.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 06:15:44 -0700 (PDT)
-From: Stefan Eichenberger <eichest@gmail.com>
-To: francesco.dolcini@toradex.com, sbabic@nabladev.com, festevam@gmail.com,
- uboot-imx@nxp.com, trini@konsulko.com, sjg@chromium.org, peng.fan@nxp.com
-Cc: u-boot@lists.u-boot-project.org,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>
-Subject: [PATCH] configs: toradex-smarc-imx8mp: enable SPL_SYS_MMCSD_RAW_MODE
-Date: Fri, 14 Aug 2026 15:15:17 +0200
-Message-ID: <20260814131535.308025-1-eichest@gmail.com>
-X-Mailer: git-send-email 2.55.0
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=devnull+ok563595.gmail.com@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org E281D40D66
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E281D40D66
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=ndqjodda
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E281D40D66
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:42:58 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 26BA960254;
+ Fri, 14 Aug 2026 13:42:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D00B4C2BCB3;
+ Fri, 14 Aug 2026 13:42:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1786714976;
+ bh=pRiTPnmxBpWi6l9SfxuxCRVE+bjLNIVTt5/D8cRHv74=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=ndqjoddamf1ln+aS5Mgnc8W0snIfZ4D+Q9QRj9Yp5lOUSFkUU4IA9GlLnt3fR5JZB
+ yefhim6BYaDfA4WE8iNZHcvvRbLFj4LHn6YLHhQ2jrUraoryTyRllMLWN9XwZF6Ct9
+ F07rMdXNZU2eQM57v4E9ZDykkgFB64a9iV8cdlgdrJ4rYm2bh7qIBqtKTQurcMcNnZ
+ JgKG1NVpsSXXKK1AK3sHw+w0Xaq2OfCOTfuRXFt9C10BLoq/ycU9OxbebWKYugFET1
+ qFOykDhSmLi5xWtazif2XDfklxWVazZ+Eht9/TpF2ARKzpDREZblTWTmUPsHOomWIt
+ 1cK058CcdwQZQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id ADB40C5CFC1;
+ Fri, 14 Aug 2026 13:42:56 +0000 (UTC)
+From: Oleg Kombarov via B4 Relay <devnull+ok563595.gmail.com@kernel.org>
+Date: Fri, 14 Aug 2026 20:42:55 +0700
+Subject: [PATCH] pci: pcie_dw_rockchip: add PCIe reset configuration delay
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260814-pci-rockchip-perst-delay-v1-1-dde1904d9b87@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CQAxA0auQrm3CDEbAqxgWQylQNTBpgWgId
+ 3fU5Vv8v4OxChtcsx2UNzGZpwR3yoDGMA2M0iWDz/0lr9wZIwnqTA8aJWJktQU7foY31nXliyK
+ Urm8dpDwq9/L6rW/N37a2d6bl+4Pj+AACBS1LfAAAAA==
+X-Change-ID: 20260814-pci-rockchip-perst-delay-998233a71fb1
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Cc: Quentin Schulz <u-boot@0leil.net>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Yao Zi <me@ziyao.cc>, Peng Fan <peng.fan@nxp.com>, 
+ Oleg Kombarov <ok563595@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786714975; l=2135;
+ i=ok563595@gmail.com; s=20260814; h=from:subject:message-id;
+ bh=74wBb9m2GnuOkRHqU23/NIffQe3sJ6lsA4lNCCBSlvQ=;
+ b=X4FxivtvX9HcEVsz7UYEeN44WQ0HFLggRa3fil3mraHUKXjLxs8mZf3oC+ZvbnbWNWk6VysXs
+ U7DsQT9+Za4C8tvhTcijYTOG1tNJJxeOdQ0wnT4cFAZAgddXQSrudlz
+X-Developer-Key: i=ok563595@gmail.com; a=ed25519;
+ pk=BkA5Dnbry6YAJS4cn/HnsXFv/FmHKxoQUkfowiJxipI=
+X-Endpoint-Received: by B4 Relay for ok563595@gmail.com/20260814 with
+ auth_id=949
+X-Original-From: Oleg Kombarov <ok563595@gmail.com>
 X-Mailman-Approved-At: Fri, 14 Aug 2026 13:53:45 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -121,35 +113,72 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+Reply-To: ok563595@gmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+From: Oleg Kombarov <ok563595@gmail.com>
 
-Enable raw MMC/SD boot mode again so that the SPL can load U-Boot proper
-from a RAW U-Boot sector. This was previously removed in commit
-25fefa05d732 ("configs: Resync with savedefconfig") but is required for
-the Toradex SMARC-iMX8MP board to boot from MMC/SD.
+PCIe r6.0 sec 6.6.1 requires a 100 ms delay before the first
+Configuration Request.
 
-Fixes: 25fefa05d732 ("configs: Resync with savedefconfig")
-Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+For ports supporting up to 5.0 GT/s, the delay is measured from
+the end of Conventional Reset. For faster ports, it is measured
+from the end of Link Training.
+
+The Rockchip DesignWare PCIe driver currently deasserts PERST# and
+proceeds after Link Training without guaranteeing these delays.
+A fast-training endpoint may therefore receive its first
+Configuration Request too early.
+
+Apply the required delay according to the maximum supported link
+speed.
+
+This fixes PCIe enumeration of a MAXIO MAP1202 NVMe device on an
+Orange Pi 5 (RK3588S), where enumeration was timing-sensitive and
+could hang without the additional delay.
+
+Signed-off-by: Oleg Kombarov <ok563595@gmail.com>
 ---
- configs/toradex-smarc-imx8mp_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/pci/pcie_dw_rockchip.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
-index 7301d7a4ace..83647284ae8 100644
---- a/configs/toradex-smarc-imx8mp_defconfig
-+++ b/configs/toradex-smarc-imx8mp_defconfig
-@@ -56,6 +56,8 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
- CONFIG_SPL_POWER=y
- CONFIG_SPL_WATCHDOG=y
--- 
-2.55.0
+diff --git a/drivers/pci/pcie_dw_rockchip.c b/drivers/pci/pcie_dw_rockchip.c
+index 61117fa95e6..322b0be9771 100644
+--- a/drivers/pci/pcie_dw_rockchip.c
++++ b/drivers/pci/pcie_dw_rockchip.c
+@@ -267,6 +267,14 @@ static int rk_pcie_link_up(struct rk_pcie *priv)
+ 	mdelay(100);
+ 	if (dm_gpio_is_valid(&priv->rst_gpio))
+ 		dm_gpio_set_value(&priv->rst_gpio, 1);
++	/*
++	 * PCIe r6.0 sec 6.6.1 requires a 100 ms delay before the first
++	 * Configuration Request. For ports supporting up to 5.0 GT/s, measure
++	 * the delay from the end of Conventional Reset. For faster ports,
++	 * measure it from the end of Link Training.
++	 */
++	if (priv->gen <= LINK_SPEED_GEN_2)
++		mdelay(100);
+ 
+ 	/* Check if the link is up or not */
+ 	for (retries = 0; retries < 10; retries++) {
+@@ -282,6 +290,9 @@ static int rk_pcie_link_up(struct rk_pcie *priv)
+ 		return -EIO;
+ 	}
+ 
++	if (priv->gen > LINK_SPEED_GEN_2)
++		mdelay(100);
++
+ 	dev_info(priv->dw.dev, "PCIe Link up, LTSSM is 0x%x\n",
+ 		 rk_pcie_readl_apb(priv, PCIE_CLIENT_LTSSM_STATUS));
+ 	rk_pcie_debug_dump(priv);
+
+---
+base-commit: 527115ef6783cec49e5610c523c124b399011361
+change-id: 20260814-pci-rockchip-perst-delay-998233a71fb1
+
+Best regards,
+--  
+Oleg Kombarov <ok563595@gmail.com>
+
 
