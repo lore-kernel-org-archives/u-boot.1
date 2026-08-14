@@ -1,128 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2DBAC5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 18:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8320DC5B572
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 18:52:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6F4FB40D2E;
-	Fri, 14 Aug 2026 18:52:12 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pwzI2Ick2g-J; Fri, 14 Aug 2026 18:52:11 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A315F40CC2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786733531;
-	bh=TFft+Bo44XlhLo/+pKKHY09lorbUCR9TbkhJDvRSa0w=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=m7yL+6nsZ9hkK3WA6Uy4/lBed56ng3O2oY0ZGmBCL9fM4kmVr5dOdGwmaFgya/sQl
-	 MjL57hV3u9wVA5Us10bsE1TtawrA8nLBfypzfwo1I7cttgUYEn/q8lGs8FAduPP+uA
-	 g/0ZnZPrEgSh1Ut6ZJkmFnSQB6t1dFTfZzBupDwzVROuwmE7aa622ply9gyLd9d4iz
-	 YHfLOJ6hSmNSD9ELt6nwf+pDwIiHO00z7abMCzhVKpZrE5e1n/9v6qbsyRCJMgNv2f
-	 0BheJ81a+172g5RfZ14cDUHZOmbAWORB8+SCORZLoTCa5XGqDgO0D8ZSPUJK0UU/Y5
-	 mkCu9JNmvBlWg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A315F40CC2;
-	Fri, 14 Aug 2026 18:52:11 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id CDD992B2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:52:09 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B214D60AC2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:52:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CD9DD60AC2;
+	Fri, 14 Aug 2026 18:52:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sXPqBnsEF6Fg for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 18:52:09 +0000 (UTC)
+ id WyaGMRkFkTvu; Fri, 14 Aug 2026 18:52:26 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BA9D0606DC
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786733546;
+	bh=J6P1FJ0mhPZ1uzGeqPSncU16h2GX789Mhv24uGX3t78=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=aXRwdsoM2whChJQ79eCdCWSVj7Pc4dRfYgYOlbNCi1DVCbPjNlgzkumwCYaHcSO52
+	 htLTT0q7tuvLF5Dl+yW+A4/6wbYBNRiXgKQja5LIIdm7YhTgwbdoESREmTjnnLaFtO
+	 qF6VxbFPLFVkWfQeUkq+vLg78ZPAeQFgyGUIDDqn88p5miXFZXkoAPp/R4j9fMPZ9d
+	 q5xxYiJz8jdijQX2FAZk9N/SijdtUOYNciqfhe9W1KEM6nqsZOy/9QHNLRDld1/qQ4
+	 xFzVANHuS8AhfY5hUIU07R7abFKsfKoWLP/0lDiTOuS4WSSCiUp15ViD+aqLQDQo+Z
+	 yBioCVBI96svQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id BA9D0606DC;
+	Fri, 14 Aug 2026 18:52:26 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8FDD8361
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:52:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 81DC58127A
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:52:25 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cvWWEuETnEfq for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 18:52:24 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::533; helo=mail-ed1-x533.google.com;
+ client-ip=2a00:1450:4864:20::633; helo=mail-ej1-x633.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org B27B560A7C
-Authentication-Results: smtp3.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6362681255
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B27B560A7C
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6362681255
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=RBjjtr0i
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B27B560A7C
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:52:08 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6a0c8283146so1954867a12.0
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:52:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786733526; cv=none;
+ header.s=google header.b=HsPwao+P
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6362681255
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 18:52:24 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-c1712a04ddaso213195466b.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 11:52:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786733542; cv=none;
  d=google.com; s=arc-20260327;
- b=E2a5rQ7RW7Tm0kvo8D3OMiFQfi7aE7ozYnDDxoeiTZgZkO0iDEip06UWuQ3xyx/69O
- +a1Zu9j2GH0DtUBDdVE8l7TUez8R0dwPbMwwN+iRNecz0hUxBDoMX0JKBvU8jQGZoSap
- ScN000Nfoa3KX/jVg/HwvOhbD8PyuaMt+t/+XGK4OubUxw1jPS/yVAft7uLjykbY5gWX
- hIh8kW1UsYOaT5yW9dIUFzmukbZNmmzGBW5ElaWhp7RA9n/E/fCBi2Ef0CLd9PPCOgnD
- B2PcQuvKGteq3Hsx5Tz+yV2gQqR02zezXj69Fs5CSnImIcoaBscoAMDfGH6pvo1zedWm
- jOyg==
+ b=Ig+Ri4HavsVURpc42ey21WdqHjf36N77ERg72zvwKR6vs+WdzYPIINFYqJTuRqLJlH
+ ZHyJeXuUkuuTLqeiIstzlmYw/xyuQbwiDHvdwb8k51oiqkYWU+CaYd6+2QyF5eJDK7ib
+ ORpwCLo8UORd0tuXZLR9mkfcVt8MQTL0aZllHBmDeoNKvAn1nQI4MmWDP4BU601fM3fo
+ bzYWOrTUYruj8UU1oDQgoV6ZNqsm5fXZ2laHNGutFJjcaF/1JMuTvH9jpQ3kfVBj5mWw
+ YiQg1KJzDsMRdGiEhgdY+Sn0nOwnVc/XylFTCm7X2hbaHIlZmgptMXCG8mt1Oc0yZTZd
+ Wr7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=TFft+Bo44XlhLo/+pKKHY09lorbUCR9TbkhJDvRSa0w=;
- fh=8TbiD9fEG91wSNsvqqOput+PpnqsIRDXX+RXlsylxJ4=;
- b=EgohPJ4yNIgmPo0CjAF7d8D+vut1ctA3zlJVayMcSgDSd9E4B4lGunc0iaf7NbN4PP
- YW+IyO2cbWUFpt9GHw6PigOEztT500MNyuhTOM1ekIHvsM5fEcmmaHutO1W0tn8Ht2rx
- zGUEZxIjP2xtF2W+N27SDGvxeXZffGyMPSZ3Z5JKXHrgk802/QR/Ccs8wO/gAh8CBwZG
- ulwjA27W23//ziPJank2RYIyFpcipzdGc0U3zI/uyKglG06p8ijYmDU6SXlmzS4cDDw0
- AoGxXA1m1ZLioERzUxptteduRr6vk26TO3mliLXZT6xH2B6xIi+VDR0EpYtb+02osa4s
- 4Jrw==; darn=lists.u-boot-project.org
+ bh=J6P1FJ0mhPZ1uzGeqPSncU16h2GX789Mhv24uGX3t78=;
+ fh=QCyI+D0jDsvYu5Ssk26o7d4/gDazT+HcRrO4eg7RvWk=;
+ b=jCzw4ey0iypPJurSSowUmIGTQY6EhiuA9zNB+98ZQrX5oiWVLZF3KLrIoTAarOanxF
+ 8pW3SE1DzjHpRAuNIqvmeZvRIVWfh4qP67S/5YtNeD2+2z5nEc5bdH++8XkIwzwRUmpj
+ DrDhjZbcfOBpq+nFgAvAUbNJQl0h8AbCDSO4KQUndzY+why5VIgp+qck0h7ehjT9+50n
+ kLbTx+dVReMV4am+2V4lZJJGNDVHOfEQ+W/ml3aWE0Ypl/1udVXsLy+endAI9tCxKbKt
+ LG7OM9xxsk8WcwmKKULPeayajvhZbxsXf6yfh6eCw2xP6mraeyiTAMBiIoWVvK6M6J41
+ 6M6w==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786733526; x=1787338326;
+ d=chromium.org; s=google; t=1786733542; x=1787338342;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=TFft+Bo44XlhLo/+pKKHY09lorbUCR9TbkhJDvRSa0w=;
- b=RBjjtr0iLUOzNOS0EAVFOzqRnmvNwRMgk5PlK7xW+Qem6tjdGFI6uI2ms3RFhrz2zS
- K7j9L2oM7D1KxUzc4kTCjv98ivB0sVNeQdFXGL2rWw/+4TcPpf9OwGqdUr2wC0NqKuN/
- DwSl8TnFmCd/o9yTOTCRGBgzFBvdtJzFZEvTA=
+ :content-type; bh=J6P1FJ0mhPZ1uzGeqPSncU16h2GX789Mhv24uGX3t78=;
+ b=HsPwao+P6u3WYWDiHSTG4U/LZXifKJhRQ5eBY+U5zlClX+7d9mZ2f0z8FUxNvD62fL
+ CvqJeRlJHnxIkMWeOGIatRmlVoZ6dnZLN9EhEctckEf3Ubbjqkk1H8T3UMCKt5gMXg+/
+ my+/wCobYtWt1IxDHrbDBS72Kjh5T+jsnJYek=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786733526; x=1787338326;
+ d=1e100.net; s=20251104; t=1786733542; x=1787338342;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=TFft+Bo44XlhLo/+pKKHY09lorbUCR9TbkhJDvRSa0w=;
- b=nnn/bvPJQzNwGzUFYzWvMkcSe870TlPqWtzGsuAaMuP/ZFlrgSXQqNQQc/B/EBZurE
- qImZAsBiSp/oHCbQC1KGQhRgyRC6bH1B1zYrKnBceKxp8C+OVkIv9nJg2I9LXfygMi6T
- yd13uOLV+kMScDWEp0vrfL6g2KV7qeGyXN1itFn3jxP+DQ6xpG5kDmz657p9SpALDkp+
- ERdtkp7NGcnT7byixylnWrEYZwTnSdB1nmuZ90poSylmRR1yOtiuHK4yeR4n5AXJB3nC
- uC20YKlPok5J7fVZiL0OWGqqG54GX4LDUKWF0NhuyYYqFTC5Kse3aa8irBnjTnM8XtGa
- kRWw==
-X-Gm-Message-State: AOJu0YzpsVAiiQAH8tdDB94OwKhutOGzN+h8vPrUfWW7cWUB6p/ggCXM
- vabpDzOlz74wpVRk/WHX2rOG6Yy/S9/Lfje1IsBveOxL59pUf7jGKRwFA8DcIy8g+OE409P7I41
- 8PCjB5d3zI72gr1fJbNxO12zqAT02rPHCdVoFMtGZk5C3BIJQMDM=
-X-Gm-Gg: AR+sD12YGc68oqERN5qRV9HuQPQRBDRcR/qN0znLLWd+DG9OPaUjAjOR7K7VxE0pCbB
- XZ1zb+9uuRyQxzgVI+c1oCIkPfoEQJu/B5OolBhn6Olrk/Y+dZ+eV8tOX99N+Gn9veM8zcrRJzf
- ff3WXWRodwlLS1ETiXXOv37dLXKrWXkVWM8V0YqdXOi4htWEbtc1WWNHYah7vHhmK4z3spmvV0I
- //VkJ6Xv0jZr9/z1W3L5MprCxMB+b0Yiiw0c4tWBESNSUK4TyYbJpYOxFvi6KVWivG8J3YZj2Xw
- 33OXJQkYaxpcpOEEh9w9fW1TonxvsIXeRmD2ya2T1Yc=
-X-Received: by 2002:a05:6402:4513:b0:6a0:926e:f907 with SMTP id
- 4fb4d7f45d1cf-6a38a8bea9fmr3928373a12.1.1786733526469; Fri, 14 Aug 2026
- 11:52:06 -0700 (PDT)
+ bh=J6P1FJ0mhPZ1uzGeqPSncU16h2GX789Mhv24uGX3t78=;
+ b=KTcPcGWN5kWWOQQCK6KUfBjQprMlqgUVliQNnx3oMSHu+BejJjFIW+bbPbsc1nKi1k
+ kEJRaeLXu/jY2JbzMr56lE8o49YpItaxBPC68PJ9zbgfSmu8M1GBuyCSaUYPrCjjy0LG
+ zGsT0vat3B6PajfrR4qmLvUQjLFcr4f/kf5idaHX/oMNL+hC7lY+8r5nZJCFRvI6Wq8U
+ TAC+JWA2zi6W8n0fTqU9Bm+N7VRT2dxqC5iv+NeFGeEEeC9pmRYoDO/x8eqRG6dHSm8c
+ WFCdScf5MIz2ln4+NTNj5zbDZ6RpyU34r+B9SvEX52CM0e4Ok9+bTICQc0Nv8WuhbTL8
+ +SAg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqPSlnWf58mY1ZKsZKZ71nGZpEETcWj59sSYcJoE7wywDLsdpDkhzy0LRFSdUdNJySYLQUlYag=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxT/P5WbRsqJGcPBVdsodL4ApsgSdqSoGcogcx7uvVShKTaqsX+
+ /JaIBrYyp/Ksqtg0Pr6NbhFG924ZD/gnIFsUpauAfMMfWaUGvn119ozzTxr0dfz4p+rgH6BIMHV
+ G1K/Fx/CK3Lv3ss9xv7RnpFhbHt7OmpgNMlvyT1XK
+X-Gm-Gg: AR+sD10ERkgKt8sLi58X8081OUKqCUFQM+oCtXRPwGG2s4o1KtRf9LuJwy95iLYJWVV
+ cjpPD98d4lwepl6Kgz9AtsPV48IJ46tRerbk2o7f4tdZYLtBBp6EqkE1c7hrVJmnfSJUzg5DYzu
+ Y4VBSvfY8GSf3fimojFCsM1LhRbKRuwsbV55feUBRgmAU+qoTg/C19wr8iL7KlMY7CxwoqNnghz
+ 0DUTDRdKcHEt62rFbLS66qsGwUjz7Q3Ns6GQG/Qdj0QlKv2rVyWJ1xyZhzDvKTMUam3GeOqQdOp
+ ZcKn3MhoIdUyyoLgSTBp1allYuMZPgnq4qWLyE+KBR8=
+X-Received: by 2002:a17:907:9994:b0:c1f:e9d3:a3f0 with SMTP id
+ a640c23a62f3a-c2129ac8464mr389184966b.7.1786733542306; Fri, 14 Aug 2026
+ 11:52:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260811105314.3837228-1-pranav.sanwal@amd.com>
- <20260811105314.3837228-7-pranav.sanwal@amd.com>
-In-Reply-To: <20260811105314.3837228-7-pranav.sanwal@amd.com>
+References: <53b3903e-9413-4c96-ab45-4c34a2a6dca9@gmail.com>
+ <bcd1ab49-dee7-4f99-962f-1d4876e7758e@gmail.com>
+In-Reply-To: <bcd1ab49-dee7-4f99-962f-1d4876e7758e@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 12:51:54 -0600
-X-Gm-Features: AUfX_mzUWi-KaQn5_SKhz3Rzw_nj2fWGJZ_q4G7ZBaf9xru9orqtJmZd8GimFdk
-Message-ID: <CAFLszTgR01mHsw9CAoUo_DT7Y1vW7fDxdi88fquWOW3VJWb4SA@mail.gmail.com>
-Subject: Re: [PATCH v3 6/6] gpio: delay: free already-requested GPIOs on probe
- failure
-To: pranav.sanwal@amd.com
-Cc: u-boot@lists.u-boot-project.org
+Date: Fri, 14 Aug 2026 12:52:10 -0600
+X-Gm-Features: AUfX_mye_gNolnfFgzETr_7wkTRr2Li43Xy0WJhKkXfltkGIVZHW7pW-gY11o-c
+Message-ID: <CAFLszThmQuWdHoA4yN6X4Ssmn4Wer0WkMgL30+qBBcycLrfNOA@mail.gmail.com>
+Subject: Re: [PATCH v6 6/6] rockchip: doc: add notes section
+To: jbx6244@gmail.com
+Cc: u-boot@0leil.net, kever.yang@rock-chips.com, sjg@chromium.org, 
+ trini@konsulko.com, u-boot@lists.u-boot-project.org, 
+ eddie.cai.linux@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -138,24 +141,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On 2026-08-11T10:53:10, Pranav Sanwal <pranav.sanwal@amd.com> wrote:
-> gpio: delay: free already-requested GPIOs on probe failure
+On 2026-08-13T20:54:05, Johan Jonker <jbx6244@gmail.com> wrote:
+> rockchip: doc: add notes section
 >
-> gpio_delay_probe() requests each wrapped real GPIO in a loop and
-> returns immediately if gpio_request_by_name_nodev() fails partway
-> through, without freeing the GPIOs it already successfully requested.
-> gpio_delay_remove() does not cover this either, since .remove is only
-> called for devices that finished probing.
+> Add a notes section for things that don't need
+> a chapter. Include some rk3036/rk3066 cases.
 >
-> Free what was already requested via the same gpio_delay_free_wrapped()
-> helper gpio_delay_remove() uses, bounded by the number of GPIOs
-> actually requested so far rather than the full gpio_count.
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 >
-> Fixes: c866f2f197e2 ("gpio: Add GPIO delay driver")
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
->
-> drivers/gpio/gpio-delay.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+> doc/board/rockchip/rockchip.rst | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
