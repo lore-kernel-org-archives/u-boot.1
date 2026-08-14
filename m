@@ -1,198 +1,162 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35BFCC5DF69
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 12:46:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1879C5CFDB
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 13:30:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B73AB40C9C;
-	Fri, 14 Aug 2026 12:46:42 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CL7lh3NRWMYa; Fri, 14 Aug 2026 12:46:40 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DCDF940C8F
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786711599;
-	bh=sJDr+WvRcQM3+2DTtB4OAdnHH85sNF5Q+zOLHBvnc3A=;
-	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=dGqi4u2sLTUi4VynRd5rxNunWweogqnQSO4wTQAiKpqdnwpOk2RZEsY8h25u7IOUt
-	 mGMPzz9S61AsBTu5jVVPz8kn0P0XgdlqcT7VgD6bHO7gVn1XpbeaaPwYs7eMoAWIQh
-	 MbWmJNVdYOIxguDBVnhrYpw/1Mkaw4nLjN3WDDnV5HiWqrgUv9QKs+5ZFzSaRNSCVv
-	 QS44qaCruo5RGq1MKbE1m/9V4uIAffQWW1EqDqG1tIPdVCeI90LPRp8gF/S4XW0y97
-	 +i/i9lx6TC3LGsU/xcPwt3wfxtRjTr8WReXzWLVHBtFRQY3tgq/7GIgjtXFq11zJr1
-	 PZGkOyFwHcBhg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DCDF940C8F;
-	Fri, 14 Aug 2026 12:46:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2F23E1B8
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 10:22:40 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 151DB80EC3
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 10:22:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6DFDD813F5;
+	Fri, 14 Aug 2026 13:30:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ntzb1_jfR67L for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 10:22:39 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
- helo=mx0a-0002e601.pphosted.com; envelope-from=g-praveen@ti.com;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 15AE380EBA
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 15AE380EBA
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=Uw4tCLpT; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=dO0ZdMX0
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 15AE380EBA
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 10:22:38 +0000 (UTC)
-Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
- by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 67E9Q0aE1367694;
- Fri, 14 Aug 2026 05:22:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=sJDr+WvRcQM3+2DTtB4OAdnHH85sNF5Q+zOLHBvnc
- 3A=; b=Uw4tCLpT3CNuVYvpBBwbrUwLtyygWN598jZfryt58oij0SemKmCyObmgw
- AxkRaGb27bhf3TdAs0Klma3rDGfrikNn+fxAL/4peAgEiArekc/7+n3I00Bhe4IN
- NQCYFFl3Xu4zoMcKfjKQ6od9GhC2KJnC3wHpLXCcJXBNkTdIggrN+49HwO5BwHLz
- OC8Qtn8+kwdXOBmgxV/YpBuOjNqQP7zRALDlm0JC0t9vsDkm5CFBp4NwaDBfXBdw
- Y8OcrG+KCxABX3Tdog55MEBMVxTVOLiFh9fRATP3YWiIpgyRgujSSL93eKyuCoXF
- 4HHJgFfvO+rtbnC91uVm0zJ9p2JAg==
-Received: from bn8pr05cu002.outbound.protection.outlook.com
- (mail-eastus2azon11011059.outbound.protection.outlook.com [52.101.57.59])
- by m0384305.ppops.net (PPS) with ESMTPS id 4g1tryhv83-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 14 Aug 2026 05:22:37 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=A9YGR2BHKZBZfUsRBZpAKhpwdPBRZvGm5Dpj+b+F4yr+rYZWdzmj5whh1m2tFlgINBG6gzvbpTiYFmfLtn7/Zpzl/9D074S5h0eEwzTY51baphzNuBRHPFd5N/nHrIHXfbft+MTlmWi9Y5oEErfE9EF4ZZCGLRMURK8SMFSRq7Hvs0qM0+ESNyqKGJvk4nmQ2uFzemuAW6NvJeOQEfDvP9Afd5P2ln0hRtNz0F7bbWSPOUUA9vy5mWUIkhIapbpp/UeDWPjnbI1AyeT5zUU/PHS3U638EZMhA3XHOnu7MunMrhr832C9cEuXdgHDwEa4xvWT5g60NLhrennByrEQwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sJDr+WvRcQM3+2DTtB4OAdnHH85sNF5Q+zOLHBvnc3A=;
- b=eSEeMQTBbsuZZ5moP8jX3Na4QLvT8o60qVskZTzAdACNdBsj11s8BuWI8WVuiZlHtjx+0UsrsF1Kl98T/Rrl2RNqCSO1ZRI4m6SBxn9Rj6ehV+8iG0qvJvTKIRq7Xdfl+tgX61NGjpJYIXJtGfidUTv+1bOtk1vVc2I5me6OXH8GWlkNdCc926Q21EqlWWzsg61LxFPFuiGXB1PyDan+fI1eBnDXR/rl7p5R6QYPQyNJ2WEUbB0e887cJC8q+LVRqBJaPMv4tuXm+WGv6DTOQy0wP87hY1DIALcKfVL5I3GcKfZefJR/upWCtFFwrb8iapWl+sdRXh6kdQaAxjE+FA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
- header.from=ti.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sJDr+WvRcQM3+2DTtB4OAdnHH85sNF5Q+zOLHBvnc3A=;
- b=dO0ZdMX0vHdG41/S+wW4LTo4laNn72xU/YBIDd6Gml27LsE12l67Q6aGau5dlYw8lOOAV1a+9UEngnGs98VPutO4am/kAFkn8Ba9gQMNAsCkTocgJAQVhmLQDhrgvUUY+55gWChHSa2QWIhW8wc47rb0vfasMCs/OhbZ6BuMQxE=
-Received: from BYAPR21CA0010.namprd21.prod.outlook.com (2603:10b6:a03:114::20)
- by CY8PR10MB6753.namprd10.prod.outlook.com (2603:10b6:930:94::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.16; Fri, 14 Aug
- 2026 10:22:34 +0000
-Received: from CO1PEPF00012E82.namprd03.prod.outlook.com
- (2603:10b6:a03:114:cafe::8f) by BYAPR21CA0010.outlook.office365.com
- (2603:10b6:a03:114::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.5 via Frontend Transport; Fri, 14
- Aug 2026 10:22:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CO1PEPF00012E82.mail.protection.outlook.com (10.167.249.57) with Microsoft
+ id JxHqQ-xlSIP2; Fri, 14 Aug 2026 13:30:25 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 98243813E7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786714225;
+	bh=+ZKwDhRC6Wq5wJpcAaB0f/fVrX8mKBs1/aT+Zoz0R4k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ncAB01qFUZpREuSggZ5c6UrDy8pVxSkV8zaD45rLmrhgsOUpKNPXBnTlM0SDTRDsV
+	 hACYZlMc0u0wfVVlMK6+7v/WAQoU3mnYRv0aj9k6/xsftI9R5qnAZSKdzDaGAXO4wa
+	 TufJWPHeJegllpLqdi/6wM4HSEPCoZhyuXKYyM7Nul897KUKYtdW3lEzE6DPLYuNGk
+	 ED4nP+aEqKuf1CBx1qLGCKw1CNnC2NQJlXwZeeprgWWmlaRJYOkyEV3KMU/s0TnE5e
+	 xioNUnlqD0eRmxFEpwouI2rNSkHVaosuD8EjKWnZ0Qv4WrXRMxzLIpldsGzSYQmd2G
+	 TAjdTGTDHxc4g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 98243813E7;
+	Fri, 14 Aug 2026 13:30:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6C9881B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:30:24 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5E2EA813E7
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:30:24 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ShdwsEs26iVN for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 13:30:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=194.104.109.113;
+ helo=de-smtp-delivery-113.mimecast.com;
+ envelope-from=francesco.dolcini@toradex.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6A8F0813DC
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6A8F0813DC
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256
+ header.s=toradex-com header.b=Y9TzrQZ+
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.109.113])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6A8F0813DC
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 13:30:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1786714221;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+ZKwDhRC6Wq5wJpcAaB0f/fVrX8mKBs1/aT+Zoz0R4k=;
+ b=Y9TzrQZ+yX4M2+s0YmDyW/u2GaZ6LRHeqwGsES1bqGzG6VxnC2pVY1cpAvQlCUuxJVj6BU
+ rxdhp2y3BjNEN/P87Qk3Yxg978ZwCOA6J2U9qX+9LzGRgtNGw1Cwy6/OVdVKipNE1ecCJZ
+ 2Nc0fawUdVky1UkgHGBW8Klwdwy1fyk=
+Received: from GVAP278CU002.outbound.protection.outlook.com
+ (mail-switzerlandwestazon11020079.outbound.protection.outlook.com
+ [52.101.188.79]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ de-mta-48-5Wqn7-zJNmqkNZCwwR1M1Q-1; Fri, 14 Aug 2026 15:29:06 +0200
+X-MC-Unique: 5Wqn7-zJNmqkNZCwwR1M1Q-1
+X-Mimecast-MFC-AGG-ID: 5Wqn7-zJNmqkNZCwwR1M1Q_1786714145
+Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:2e::8) by
+ ZR1P278MB1248.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:6e::9) with
+ Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Fri, 14 Aug 2026 10:22:31 +0000
-Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 14 Aug
- 2026 05:22:25 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 14 Aug
- 2026 05:22:25 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Fri, 14 Aug 2026 05:22:25 -0500
-Received: from a0507176-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0507176-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.53.154])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67EALueT2569179;
- Fri, 14 Aug 2026 05:22:23 -0500
-From: Gokul Praveen <g-praveen@ti.com>
-To: <trini@konsulko.com>, <g-praveen@ti.com>, <n-francis@ti.com>,
- <a-nandan@ti.com>, <u-boot@lists.u-boot-project.org>
-Subject: [PATCH 3/3] doc: ti: document semi-falcon mode for J784S4 EVM
-Date: Fri, 14 Aug 2026 15:51:53 +0530
-Message-ID: <20260814102153.44487-4-g-praveen@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260814102153.44487-1-g-praveen@ti.com>
-References: <20260814102153.44487-1-g-praveen@ti.com>
+ 15.21.315.16; Fri, 14 Aug 2026 13:29:03 +0000
+Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::88:6821:13f5:a5b2]) by ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::88:6821:13f5:a5b2%6]) with mapi id 15.21.0315.014; Fri, 14 Aug 2026
+ 13:29:03 +0000
+Date: Fri, 14 Aug 2026 15:29:00 +0200
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
+To: Stefan Eichenberger <eichest@gmail.com>
+Cc: sbabic@nabladev.com, festevam@gmail.com, uboot-imx@nxp.com,
+ trini@konsulko.com, sjg@chromium.org, peng.fan@nxp.com,
+ u-boot@lists.u-boot-project.org,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Subject: Re: [PATCH] configs: toradex-smarc-imx8mp: enable
+ SPL_SYS_MMCSD_RAW_MODE
+Message-ID: <an8YHJRKbm13jETw@francesco-nb>
+References: <20260814131535.308025-1-eichest@gmail.com>
+In-Reply-To: <20260814131535.308025-1-eichest@gmail.com>
+X-ClientProxiedBy: ZR2P278CA0074.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:52::8) To ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:2e::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00012E82:EE_|CY8PR10MB6753:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47dccf0a-f368-4625-b624-08def9edf345
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0495:EE_|ZR1P278MB1248:EE_
+X-MS-Office365-Filtering-Correlation-Id: a9a7eb12-9f2b-4479-1040-08defa0801f2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|23010399003|36860700016|82310400026|22082099003|18002099003|56012099006|6133799003|10067099003;
-X-Microsoft-Antispam-Message-Info: Ia0xjUkh+dSVsVTyOPDwoNuylkHXUCWrcYaKe9EvYVeZsisUZhPSHTNQqzq7D84bVFRqFyygfuvuoRTPdo4TNxIutuhiN1+bYcPcRdlHZLNpp2iJ+GcCfiIpBufWIQPmGbB+nzB7EFDgERcKqUuZTp/3wX7FOfneZ2g4fL/WnWUN40PtUkbxlkLoDdLD9AE1nCTVtfrqltA41/Y2e4sP3Xe+tYTVmyUDNVXYHMVeqT2wdO46iLp5Bl28d/bz0Lk7OsjaoZ0PooFb6h7SnyeZl/TUHqV/2/K2hWcfPeNQYiY3jKU1084F+MsNT4KI01dDQ3/XDuBnqzVQMmBnh+5pti/YVr7FeO3cKBggS08xWHcTQ023mgfvaYaoWWTzL/o5y/JYx8r7/UOyvlz+01SlGTREtzc2uBXdvpJt/DjGsEqB01VcW0e1//iUVdQn/efCmOETV8Iwqc0zbbvuUBGF7Scd8zDctbnXAZkQZHJeMAHkMMi/6QBQPjPkj+bY0L5t5K4Im5Qd6xvt+ZgQC++FuaBgKS3RbEtdBDshFL/AfL9Ma4f+mQYPWams18/OAyDdTbl0yhOpAh6NLQGsSNVvPXs8+FtvXsMFvSC5TvjEvuToorECHDMlpC55PSCbj8ExpnDgup1cneKJ7Pshc2YFpspd5Ca6xSucb5NSvkbCgkhX83sjZSaR6/LYESOiq7MpJW4kmFjy+3ehoQ0W0+1Nrw==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(23010399003)(36860700016)(82310400026)(22082099003)(18002099003)(56012099006)(6133799003)(10067099003);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|376014|23010399003|366016|1800799024|10067099003|56012099006|22082099003|18002099003
+X-Microsoft-Antispam-Message-Info: 3TwUZGqS3v20567HPcBHebdLdbKM+sUf519nd8rghHjjH+YAhMTA/VhRqA6gI9YTFXbnkvEvZY5wH0DNEtGeE2V1Jx8AwqPiqIqeFwi/Wni50G6wlp6ShefnldjtQJITM/YEPBKhwYbzLOxKRP06WkhG0liXre7VeDpHma/zbW/TwfKqOt+uSvf2f3glrFk1M8S1zYfm2WCj5yetTb8wDvB64J/mgrw2MiGqSsX7y2yOz4JgpZwMT7GV7dbVK3vMXvtPAjzF9NpDYZAGxVOn7SnJlhea2dA9rENeJFxfw8XU4V69iFxBS0tmSIwQXLTMyi5FLnn0FF4m66aG5tBbO05AXs0dCGr0Uzzkf4optvRoJl4Fd+zxR/kp2q6/k1CB9SZs/rnN/3bxU4AqAkmdoJOpFHgJHQ1Qlz2DldGKKmJ7BBNsEuP/mrRvTF5yVHnAWvHCwjiGqlKQIPla2Z/L/2oZnmivvuj5VizNwfHez/0sWxfoGIXrVYguWJvLG5X8pgz8TecoXDci+ujIR19EwaO3bth4FtGNnoMn14xFYipSLmadqJgmrQfUozkr1S4y3gwvidLPe6G2tgN1or56xNamLqW78E3GNpC85LWmYqrOFZ3WB8prhLdPgFBEefA+KeAVGlYvjEAheV5jgkmfex95AECnwgEYfatp2lfBeXw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(10067099003)(56012099006)(22082099003)(18002099003);
+ DIR:OUT; SFP:1102
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: RDtbA8ShvppvQxTw0HPF3Q5WgfpQsxTtu337G+/aMs++/luSAAiTO4KIUvglPpCYOrQVqpDGNJhZVvh4NVF6dgQR/cI3t8mGFYX/sXVyGu6PJe434r+vczJP6+xRBoWH7bjuH7p3/pZeco1qrR9m5Zs3SoeUb2D6To03WdX4HsdKOa+WekWnEWlet0cB66DVV2/+4xWF5gt3tpZFFcUwinqbxd3+dWBRfDZVmkbE/kfgOVyXIRDWLDRQ5mmDVnLV093f3qrJxdFEMiC7VS/7prfCjlSwEh2LaFOEmkdRcAKrCX4MOPW9uY2mB6ofj+Z1SvNgSsmBtu6jzX1DCRsakfz9xgXMI+SMn9A7DumskR1aeENAIqcIeXEQTAJnjrQ/1rDqxn7A0wWDsqr5bcLkvEzYykC4I8kNgAu89A+37wOfG8Wp+4kmbYZ4uxFj4Zno
-X-Exchange-RoutingPolicyChecked: D8qfoidE/Xg7bttdCccS/UwnampY6EPK3+/Fl5ZXQXYJecvdc8/WQ/SD8hCqrY+aP0a1fQ3NzYodHfxsZKnDJj0IxQCPB40clfjq9yIGwlJAQ1Uts/HdqQDRdOWX/POLvJy2JsBaTqP5v5RRtySHcn7itZyk18D2bTOel+q7Qzg1wApxDZ29HYqVOnIp/fwZ+C/6HDuFwAby6fG0aw6juoZA8WWOW3Ap94Y4iztfnbzjoellAbGMEYnA3plXioTJa1C9fi+mvEXjWXv7qr/7KUkLSIF+F38rMejFMY9885J4wJ3ghh0Hj8E2dxUzDuq9wahWaetvhFcmugwuUKBOrg==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 10:22:31.5883 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47dccf0a-f368-4625-b624-08def9edf345
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF00012E82.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6753
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDA3OCBTYWx0ZWRfXyJiL+TLIADo0
- CUuX+UPeVIpQvAnoz7xxS+ZcV/YK0xOSYuMkB/ogOeGkVvbxQrEe6xbsJOx9Lz3BqtqZ+8DvRQu
- 2LmBtT+sRh9kfrgIe7IzucWs3jIjQRFXpiyqHxHfiBGogQBLxDW2+kQEhAmlHP/+llFCbRhzKOn
- AmkZS+4Cm1HXFNtRvLwA9Li2EfSGoScybWWSDD37q6sVU8W45zhhQqFjiuDK/GDB+G2qQezvndk
- hZUShmb94GqHSv3Z5TV6Je0hRuuOoZjhV3LpscDsw3yReSidxG2HrdpJiEozoh82WxdLrfjj7jJ
- ZNT9XJjCD2Ua4KJSjeId51J7FBb6BuGI24lXkJLLVErLb+iT7+6y88gYd45gtwmjO2++RDm9VGJ
- cRlaG1fSmeXhvfpZksD6rlf6NUbVcj88qZVTN+cVTlLWQtRxZuC2jQhcGB+rGVyHyZXSb5I1KsF
- NExCjRpAjogiTYYJqMA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDA3OCBTYWx0ZWRfX38JKk+bKpsux
- l4xZBqBNqGQWwMipuhIFjL8jL2KcTW2BKeJ5B2GcByLI86wMqFPFLV5N7aiJhByGSEvf5ROcl/M
- ZPJyRiBhieh2q16I7zBJv3wxn1tsbrA=
-X-Proofpoint-GUID: 4H546P1_Q9JnITsrzHmnxE_U2KhGvXba
-X-Authority-Analysis: v=2.4 cv=H87rBeYi c=1 sm=1 tr=0 ts=6a7eec6d cx=c_pps
- a=J5CYyyHZZtesdUd/yj239g==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=V5UXEbMT0ywA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22
- a=sozttTNsAAAA:8 a=tlSJXLxGV86A4UsorCoA:9
-X-Proofpoint-ORIG-GUID: 4H546P1_Q9JnITsrzHmnxE_U2KhGvXba
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-14_03,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 suspectscore=0 malwarescore=0 phishscore=0 adultscore=0
- bulkscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608140078
-X-Mailman-Approved-At: Fri, 14 Aug 2026 12:46:31 +0000
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o9KxwblNWKxmJtU8Wy9A21ZUfCY+WB2UNpHmrg1oCso0/gJGoXpXOupNzRiS?=
+ =?us-ascii?Q?ou0iOTSnV7jW+uCaOvY2BrpnuDryD0BNOPVTTRypeRI1j/YHSab1FvQdclFz?=
+ =?us-ascii?Q?+FKu5O3hkY+Xwpxsx13K61PUEiH+R7+shd6sQueWyXOOBlSh3a6ZeU8uJQmj?=
+ =?us-ascii?Q?U5cj4fmD/9jaD/S0HCe3O6TFBSdpdrqslrPkM6vEZ/AVgR3S5sVDJuFALyJZ?=
+ =?us-ascii?Q?IhAqDhY6nIbJ5YpLGtdUe1pXfzu7VNi6H3fdPa6e4yqxo01h9LRaEg84uVp/?=
+ =?us-ascii?Q?PMVdW1FcjJwrbS7nZnQ0eUd3172ZP2kNiij2QZiSvaNWcJ8CYZtbWeONrFvS?=
+ =?us-ascii?Q?6FuqnntFJUcWTP8QKFczlW1SPK2FSJ4NsWGTaAm0SBy02nrLzb1q1ru7sZ1q?=
+ =?us-ascii?Q?3rWz+y6DNX0I+EXSZ96g2wIQgX99/bupS0XXGwTPsRb4caz1O3AMOdEw1GKf?=
+ =?us-ascii?Q?+yzfnB8EKXEXeV78ionkKeQKYLWUUaMs4x4hVQXv4ptAG5OhtoQ5LMcQmto+?=
+ =?us-ascii?Q?elah/vV93kP/lBxDVU7E10KL669jHwylQGafpt9bIypt04OlmCL/bIE78V+1?=
+ =?us-ascii?Q?/blqoheF4+ak34ml4EOTKk9f14h26lu59QAaWCdTTJVDcXmw3ExBs8P7npO9?=
+ =?us-ascii?Q?gmiHCNRCZk/sWeIstpDde/sgfaKc0KZVtPvwvZVmVE1WJS+98E6Mhmqf4yNo?=
+ =?us-ascii?Q?vdsEW6sS+J8ubwm0R0Hjp/8PstrWFSWUT4LgrGRxn1T3IBLMFLh4HhiPdyS3?=
+ =?us-ascii?Q?QSlVq11ZMHQ4dxoOoE5aQZ0qZo6hdef8Tc4rbEffYSxgBDPcE2cQxONhQg67?=
+ =?us-ascii?Q?qOYT5J4GVhC/5w3lI6wueqTavr137MKuIcaRCndT3xb+XzH9g9WffhKXn4qs?=
+ =?us-ascii?Q?L7oZZ5Bw+DvyO5jvZpo7NLOSvqCCfZZk1+esAEmRB6EwM21IpFvSQHav5Z9s?=
+ =?us-ascii?Q?+jsDn+HUcD/aO7BMpz398aN1tZd2ZFR2WTuFWilXph4uEa6Vt0lo09X6XytQ?=
+ =?us-ascii?Q?BmdZOVatEt7ZntR05dj+NJGiAdpdVk+C9xSUBURSz1yra5wKVd772fIZu2fy?=
+ =?us-ascii?Q?JK7+tUHj9Nt9JusrPbL8keDXtNkZeOIim0KzKMnDXSmn37e6QCEKA/ReyRWZ?=
+ =?us-ascii?Q?zmOiTBRRHd2g5x9f8W+VNFQHNtYaf07WuuAPRfS+y0C9PrhFNrd35ZdHvWKk?=
+ =?us-ascii?Q?t9uuAKcv4rtc1U6tGLBdXEYcHxJ07DD0rgfyb9+qTKeMhiVMjLcWjLYxT8ZL?=
+ =?us-ascii?Q?AQdTpga+jbaWc5Gz7dBniEXsXvUjDJequnHJujB7W3jJxziH1uvk43CfEHL7?=
+ =?us-ascii?Q?BerkL3HZjXL5/IPnow9EPfJQZEn57AIJbWhFuNPqzGzqDKRQq98s+afW+ZAH?=
+ =?us-ascii?Q?0eaQyX71quNuO0nuXv4uXw3xNlM5gFeGFMfh9IxCuRf5a8j0WzzWq09ev3GJ?=
+ =?us-ascii?Q?tpIhTcgPuoB1bF0Gkj34DBpZ3AsV2vf0x1+LxYvEYY/QuWh0jtG0fjslDWG8?=
+ =?us-ascii?Q?PZ9S2C+RWrkiqd2aStxRYhgXdQPMoUJdKHPZY+2Kl6j69OlDdUnyterj+lX7?=
+ =?us-ascii?Q?gUL5TDsopdR8ETNqlWMynTpevrA+s2eaRUrmfEVzFnPnXEHvAVBULgWJaOBR?=
+ =?us-ascii?Q?u5s7C6Ib5zSzwzFB46r4uanJB8TMMH8+o2b/bLRM1n2GB9+9O/8EjM5JOSJX?=
+ =?us-ascii?Q?ntEgVEWt1R+3YFUpqJDx8eRC6otrrA+XIj8hOqdrBiyVoY7RytI5uPngGU0D?=
+ =?us-ascii?Q?rlqi/QrDb1q2cc9VYs6ATDL/XPNMEsQ=3D?=
+X-Exchange-RoutingPolicyChecked: nKLrueINtkePFEieML5ZznM7xO8ng8jDZRzOu65fVUpttpBzSJ1i5A9c5tYlR3hYWdJy6Ad2CU7UjtT5egz/SZvSTXFPBeKsNFneNPn1EebP/4gWaLA9Aaa/FoJJ5+yY1puRZuPijGCbqTpiEpqJjt08GqzWHSgnmjicLn0LNy0M0UY4M6W83Kq0EU1RF6hWt7dTHjyIAJ8egv+qG7mHU8IFwOfzl3j/wJfj47MgrbZKVzf/Siupp9SV1/J6T+STmU1ud/PCi7rDnhGFm5XgqeL/Opizkj8d5madA+mnQCv44dZt46xXQbRTI2/MUxeKCawYVU54Y8R6YPrQtm5U2g==
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a9a7eb12-9f2b-4479-1040-08defa0801f2
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 13:29:03.3550 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W4fpuliERGY1QqjbMY/RkyWkwPCTFQOeWC+ROOkAB140dGnq3VB2rSQLLs/YlaePWiGMBelmf0FWcBTx1JSbLM+kTl52VpXIR88KyhNePrk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR1P278MB1248
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: uYXbDSB4gRyfULDr7gcP2DIYaOoXRsXU9n_UmS79odQ_1786714145
+X-Mimecast-Originator: toradex.com
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -207,169 +171,20 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This patch adds user documentation for semi-falcon mode for J784S4
-EVM. Boot flow and steps to build semi-falcon support and usage
-have been documented.
+On Fri, Aug 14, 2026 at 03:15:17PM +0200, Stefan Eichenberger wrote:
+> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+>=20
+> Enable raw MMC/SD boot mode again so that the SPL can load U-Boot proper
+> from a RAW U-Boot sector. This was previously removed in commit
+> 25fefa05d732 ("configs: Resync with savedefconfig") but is required for
+> the Toradex SMARC-iMX8MP board to boot from MMC/SD.
+>=20
+> Fixes: 25fefa05d732 ("configs: Resync with savedefconfig")
+> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-Signed-off-by: Gokul Praveen <g-praveen@ti.com>
----
- doc/board/ti/j784s4_evm.rst | 143 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 143 insertions(+)
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index ec82228ab90..c0b3fc98eb6 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -637,6 +637,149 @@ to the J784S4 endpoint:
- This program copies the boot image to the PCIe endpoint's memory region and
- writes the necessary control words to signal image transfer completion.
- 
-+Semi-Falcon Mode
-+----------------
-+
-+Semi-Falcon Mode on J784S4 platforms is a hybrid boot approach that bypasses
-+the A72 SPL while retaining U-Boot in the boot flow. This mode provides faster
-+boot times compared to normal boot while maintaining U-Boot's flexibility for
-+kernel loading and system configuration.
-+
-+**Key differences from Normal Boot:**
-+
-+* Skips A72 SPL execution
-+* U-Boot binary included in tisemifalcon.bin alongside TFA, OP-TEE, and DM
-+* U-Boot loads at CONFIG_TEXT_BASE=0x80080000(sA72 SPL earlier load location)
-+
-+Boot Flow
-+^^^^^^^^^
-+
-+**Normal boot flow:**
-+
-+.. code-block::
-+
-+             | tiboot3.bin |         tispl.bin          | u-boot.img |  Image  |
-+             |-------------+----------------------------+------------+---------|
-+    R5 Core  |    SPL      |                            |            |         |
-+    ---------|       \     |                            |            |         |
-+    A72 Core |        ------> TFA -> OP-TEE -> A72 SPL -->  U-Boot  --> Kernel |
-+
-+**With semi-falcon mode:**
-+
-+.. code-block::
-+
-+             | tiboot3.bin |      tisemifalcon.bin       |  Image  |
-+             |-------------+-----------------------------+---------|
-+    R5 Core  |    SPL      |                             |         |
-+    ---------|       \     |                             |         |
-+    A72 Core |        ------> TFA -> OP-TEE -> DM -> U-Boot --> Kernel |
-+
-+Build Process
-+^^^^^^^^^^^^^
-+
-+Enabling semi-falcon mode requires re-building U-Boot as follows:
-+
-+0. Setup environment variables:
-+"""""""""""""""""""""""""""""""
-+
-+Refer to the build procedure above for setting up the environment variables.
-+
-+1. U-Boot:
-+""""""""""
-+
-+* **1.1 R5:**
-+
-+.. prompt:: bash $
-+
-+ # use the semi-falcon config fragment for K3 platforms
-+ export UBOOT_SEMIFALCON_CFG_FRAGMENTR="k3_r5_semifalcon.config"
-+ export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} ${UBOOT_SEMIFALCON_CFG_FRAGMENTR}"
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* **1.2 A72:**
-+
-+.. prompt:: bash $
-+
-+ # use the semi-falcon config fragment for A72
-+ export UBOOT_SEMIFALCON_CFG_FRAGMENTA="k3_a72_semifalcon.config"
-+ export UBOOT_CFG_CORTEXA="${UBOOT_CFG_CORTEXA} ${UBOOT_SEMIFALCON_CFG_FRAGMENTA}"
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+
-+.. note::
-+
-+    The ``tisemifalcon.bin`` file is automatically generated by binman during
-+    the A72 U-Boot build process. This binary contains TFA, OP-TEE, DM, and
-+    the U-Boot binary with its device tree.
-+
-+Usage
-+^^^^^
-+
-+Semi-Falcon Mode uses a specialized binary called ``tisemifalcon.bin`` which
-+contains all necessary components to boot directly to U-Boot without loading
-+the A72 SPL.
-+
-+**tisemifalcon.bin structure:**
-+
-+The tisemifalcon.bin is a FIT image containing:
-+
-+* **ATF (ARM Trusted Firmware)** - loaded at CONFIG_K3_ATF_LOAD_ADDR
-+* **OP-TEE** - loaded at CONFIG_K3_OPTEE_LOAD_ADDR
-+* **DM (Device Manager)** - loaded at 0x89000000
-+* **U-Boot** - loaded at CONFIG_TEXT_BASE (0x80080000)
-+* **DTB (Device Tree Blob)** - U-Boot device tree
-+
-+The R5 SPL requires both ``tiboot3.bin`` and ``tisemifalcon.bin`` to be present
-+in the boot partition (first partition) of the MMC device. By default, the SD
-+card boot partition is used (``mmcdev=1``). The ``bootpart`` environment variable
-+defaults to 1:2, specifying the second partition of the SD card.
-+
-+To use eMMC instead of SD as the boot media, rebuild the R5 SPL with the
-+following diff:
-+
-+.. code-block:: diff
-+
-+    diff --git a/board/ti/j784s4/j784s4.env b/board/ti/j784s4/j784s4.env
-+    index 82b9f0741bb..73d59ac425c 100644
-+    --- a/board/ti/j784s4/j784s4.env
-+    +++ b/board/ti/j784s4/j784s4.env
-+    @@ -17,8 +17,8 @@ run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-+
-+     boot_targets=mmc1 mmc0 usb pxe dhcp
-+     boot=mmc
-+    -mmcdev=1
-+    -bootpart=1:2
-+    +mmcdev=0
-+    +bootpart=0:2
-+     bootdir=/boot
-+     rd_spec=-
-+
-+**List of files required on SD/eMMC for Semi-Falcon Mode:**
-+
-+.. list-table::
-+   :widths: 10 15 10 25
-+   :header-rows: 1
-+
-+   * - File
-+     - Copy path on SD/eMMC
-+     - Partition
-+     - Description
-+
-+   * - ``tiboot3.bin``
-+     - Boot partition (raw)
-+     - 1st partition (FAT32)
-+     - R5 SPL binary
-+
-+   * - ``tisemifalcon.bin``
-+     - Boot partition (raw)
-+     - 1st partition (FAT32)
-+     - Combined binary with TFA, OP-TEE, DM, and U-Boot
-+
- Debugging U-Boot
- ----------------
- 
--- 
-2.34.1
+And also this,
+
+Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
 
