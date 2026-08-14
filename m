@@ -4,113 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E89CC5CFCF
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:31:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A72C5CFC1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:31:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 666D440D99;
-	Fri, 14 Aug 2026 14:31:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3F28B40E80;
+	Fri, 14 Aug 2026 14:31:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KP187BaGevwh; Fri, 14 Aug 2026 14:31:39 +0000 (UTC)
+ id rM8tny6C7Y5z; Fri, 14 Aug 2026 14:31:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 74CF340CF5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 910CC40DE0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786717899;
-	bh=BFQfjLq1HjeQKMNRrWLt/Z5TZcRpTXN8PLPU+YRIySE=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Nuqxpd2c+qvhx/udV8gfju9OEADx5AIaU9pTyCT5GHM5I0KJIu2TvXkVToul1lgje
-	 nJSyvo0N4niW1ncheE76ftyvHsizeJBPowPRxSyx7Y3OKDjLIuQh5YZcAq6fupmdeI
-	 2H+J5J3Gr1ys5sd9WmZqeUBxK9I1hlYit+IcTqavfEPW+ynchG+IM8RoqTkNIeQyCC
-	 xsIqJs7qqydUoc2B50uAvH9VEz58ZHztDjKpgD0eYAuzrmX7B4zn3v2v9w4GEAIflJ
-	 WJOKlr0vgCr8srW++HUUUGtv0Pu6G+r7Y0xCVfa38F6NaUWalAozUiPw/hGcNz7YCg
-	 XDdm7nXtaDvDg==
+	d=lists.u-boot-project.org ; s=default; t=1786717902;
+	bh=i8RZve24fOwUtdYRki1WClGavdKDpLukjeEl/pP1hMM=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=bcnmnakc5EsvP8tydSziTo/jNQrmbUH422yYlw/MMc+6wmUl1RgaH+bcmECmkV4Ba
+	 jHXWCMoB3uyhhIz1P0nFfwyohhosB1E621hMROJf8yK8EoreCDizbWqRPzXA6LJ1yT
+	 pEAM4+TPJJ7NYWJG1fM5H4YH0xZyKC/Wnyh3QfN3lpvC3bb0MdOPynnc5G6Ly0irkD
+	 B3MkZ2Jz4rVq0biR2RSLLlSFOxhw2wuIR4EFDvMZI1+fcv9Xy3Jyspeyo3oLwU6+8O
+	 8fvAdSWtKiqTGWjkl94DcAlzrg+X1BfqzatLGnqF+rEuIuRpdr5otqHVTW0k5lj2Qi
+	 wAq6dSP5iVQ5w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 74CF340CF5;
-	Fri, 14 Aug 2026 14:31:39 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id D2F6F33B
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:31:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 910CC40DE0;
+	Fri, 14 Aug 2026 14:31:42 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6FF0F2B2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:31:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B5D3480E0D
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:31:38 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 55F8C80B0D
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:31:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oHeScxqyZ69x for <u-boot@lists.u-boot-project.org>;
+ id 3Hip61taf4gu for <u-boot@lists.u-boot-project.org>;
  Fri, 14 Aug 2026 14:31:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2c; helo=mail-oo1-xc2c.google.com;
+ client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org EFDA880B0D
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E6E8280DE3
 Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EFDA880B0D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E6E8280DE3
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=QNklLi0g
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EFDA880B0D
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:31:34 +0000 (UTC)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6b01562adbdso652477eaf.2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 07:31:34 -0700 (PDT)
+ header.s=google header.b=pl8P6q18
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E6E8280DE3
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:31:36 +0000 (UTC)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7ee125ec926so891686a34.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 07:31:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786717894; x=1787322694;
+ d=baylibre.com; s=google; t=1786717896; x=1787322696;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=BFQfjLq1HjeQKMNRrWLt/Z5TZcRpTXN8PLPU+YRIySE=;
- b=QNklLi0gNscMOmJoi+MZKDWVuKT4+2ciZWy1E5hyykrpYeenx/xTFXSKyLSf5mbPSu
- nJVW8QrnGCH1VpxtpXys8VFfL476OpknQBOf5fR/mJSzk2fDfBEiRUqgSi+dx5UrYC5H
- qxgL01idKaLxDISnUC7cg+bFUaPsnf3Is5y+uOwiey6fJhdAlj/2BmXRegdB6p237ubU
- dnH3INbHjX7TxbAWlyEgJNuxWagZ/xxuJ0Qw6SvafW7flYjrmAOLCOHt9TtO4y7ZJ/On
- CSBuJFp1Cql7lnp9xmcC+5RDy/ODIzgSrkhTuaOE2RdD2r0Ew+3+EzEWrmgBfW/fvmRE
- ef5A==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=i8RZve24fOwUtdYRki1WClGavdKDpLukjeEl/pP1hMM=;
+ b=pl8P6q18SmftMDLrAj19IXg1G2YS86wq7pdU0iP3mmmGQqQLun/I+ScsX1rD5KGuZv
+ kB1lAWycvu2EwjyoqMhDmH1PKirLbTYHlU4K1X6KFr5yZNNBsmRxj2GsG2V3/KFZuKZk
+ GybiaPWZm4lEVqxfMbycEo+v6C8A7h3+udr1moEFDPMIUynP+jl+jByi3GqplbVm7jmm
+ d4S6zohyCWmZRisnnmoNod/Ix8+3DNviEMe1dRxRtWxV8s0/Du9V6HajesbdjAaVSOc5
+ 4zjb+dUcQX/uKVjOeeViuDTWIw3RjW5JlKTAnEdR7vGKSIrwZXSULufeQuzPdPmqbSPS
+ PsEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786717894; x=1787322694;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=BFQfjLq1HjeQKMNRrWLt/Z5TZcRpTXN8PLPU+YRIySE=;
- b=RwM1UNWv+zaj70476lduaWllmEpLl7YxCiWP8I9oX+000ENRiB3X+AyG8yEp2UcxFw
- EqBNyarwRjjvyy0XJY7vRgq+whF3fjxv2J23c6c856/rBbCYYkAUmeWdAX6WuwjOMB9X
- TJevlPHJA6r1H9M1sguZ4ZaSUndpYJapdqJjEhs0fBbU8OWudXDitsO0mAUptsqUqWzP
- UXiJAWtUL9fH2FFAIfDi+LurXHskeQW/LkvagvQRmdpEShYqsqc4R+vCI+cbkfIJXov9
- JoqnOUGOXeZcss/2l+Z/mfCvdZxOwsvK3743uCWMHIPpJX68d8ViD/HTJj/umk4fXdwN
- hWaA==
-X-Gm-Message-State: AOJu0YyGiXmbuY3tJ+inxvXcmoWg1Hh4eggBCG/4sEWZMK3cmkg36pa1
- ZuevgZ3gOde7QQDgulivXyoRMadOYz0WwgFl6wgVAgK2IianYRdSqazUtZEZ1lC1CV8=
-X-Gm-Gg: AR+sD13GS3RlyETfY/7e30ucVtx20q8V96KvrXQVpnrG3ULzMMW93hvizRqhggUqZIS
- q5YlbPkpXDf6Kh01jSZCzGRAoAhIMrQio/LyDP/J0I0JCqVYIO9CSRDTyd9aj9Sy6MQjGQ1lbMM
- ZIit272zE1Az+HoNgFPvSL56q021z0n1BsKcZyXff2w0iecDsBKYqLhW90a+puMBRUr1wTqRYpo
- 2dQpPqHgnLex8Zsvh2g1kaGuErd7VRkmh7gMDOAz/pBeqxR4h8J9EcsDrNsYkE8pT0/tSrB/iis
- DcUCnWX7rxAypvfrwHLcCN3oHISBak9dnHdVsh1cbfOUamSlNX00HV4aBi+k8fZz3be0H5gzFE0
- kkKcNNWHcm0q2sqL4YmelbuntVKbFJfHI1uxyspBonzF0XONpBP36tjtT3W29mp5lQIkswaMEV6
- GRdiaL/m09IddAbFNzJPqFWgY033jO/PftOxU0seJSApu+GEx1jfPVuj8vukZwncMuXg==
-X-Received: by 2002:a05:6820:808:b0:6a1:8125:ffd with SMTP id
- 006d021491bc7-6b0d68dd9a8mr5022473eaf.30.1786717893841; 
- Fri, 14 Aug 2026 07:31:33 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786717896; x=1787322696;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=i8RZve24fOwUtdYRki1WClGavdKDpLukjeEl/pP1hMM=;
+ b=EVv12PyotHBkgASByDViCPvAgZ8Kx82Iz3E6qzPBGM1RgE4FWpTzn8ts/z12uyAJQt
+ Hi0sDVVWy7uNlPD2wcZ8W2PqJW2z4zeRKCYqiq5WpQWGgUz+FRZyJlngKSrSndTPAxba
+ 929zF8pung6ufn4hN5CedDS+9+cwUig1RrN9teMl9GagkvJSEBfe+y1l0abXEr6VnDpI
+ SbZi9XCOOrOVMp5X3G3DFdwU3FyQiD1KJczFZiekiYgV8En+bE0aUpz3wYxEcHrxb20E
+ fwIQR6b6kUGlDOqulRmmTBis4GFRCCjpuVuSnvf76nhRWCG/b4JdHxhr82/+77/ua7JU
+ Nzzg==
+X-Gm-Message-State: AOJu0YymItWYPgHfEWMDE9hFHZnEfYvuYDguSKwETK/BRPEQugthW7sC
+ cHwXiddJZgvpI/pXpekofJiP5X/CeNV3ZEBDwjVZXSPjquHmwuVfHtmdBT5S4Ezx3fU=
+X-Gm-Gg: AR+sD12bGmdolAzc93iE8DWLSzxBi24ulrQI1dqxZxpLAWBczcZsc6GYucbBueuTmFB
+ 855cxHSRnSDINVeC5MlI/rrg6e+b9JzDNkFgfrbYixDmE4/4UdD5T/VDZs8SIsgCxOfwLuZ4Efn
+ eDdmcV6vQe/Osm/Uu8fB4UDR226hG+fw8WErhJ3g2O7EECkA7IanlWF6GubFuFZzBh7AFJlGPIL
+ 7RytMaSHsutZpz1yFP60alcd3+88twy9FmYddCJXfu2bQ97tB58ovQgmPmdzRS0F5DAX12a0rs3
+ BrXEkpGXKRDpuUaWiY35O/DmvMXBJL3PyOTpEWUyG4YiFGLyVnXbX/h7QF//kV5tDUrrZS4W4GU
+ 2O0G9Jlrrh0XvUYurrUnIT95wTLmXjFlB697VNZuDsMkAY/oQvSYIc75gw6RoeQYy/Dg844mkVq
+ GaEIviiVXEgrRE6JaOQkrKKdCngwDzaK+jIXshXywwOje5J1Pp1k4LafYHklk3pMGpsQ==
+X-Received: by 2002:a05:6820:4b8b:b0:6a3:1e40:6329 with SMTP id
+ 006d021491bc7-6b0d61ba765mr5657639eaf.13.1786717894848; 
+ Fri, 14 Aug 2026 07:31:34 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7124:5000:3b37:b131])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b0dd2e52d5sm1389717eaf.10.2026.08.14.07.31.32
+ 006d021491bc7-6b0dd2e52d5sm1389717eaf.10.2026.08.14.07.31.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 07:31:33 -0700 (PDT)
+ Fri, 14 Aug 2026 07:31:34 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v2 0/2] clk: mediatek: mt8366: add new clock driver
-Date: Fri, 14 Aug 2026 09:31:01 -0500
-Message-Id: <20260814-mtk-clk-mt8366-v2-0-5e9e952de8d8@baylibre.com>
+Date: Fri, 14 Aug 2026 09:31:02 -0500
+Subject: [PATCH v2 1/2] dt-bindings: clock: add MT8366 clock header
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNyw6CMBREf4XctTVtkRZZ+R+GBS0XufKoaZFIC
- P9uwbWryUlmzqwQ0BMGKJIVPM4UyI0R5CkB21bjAxnVkUFyqXjOUzZMHbN9FzNPlWLWNJkWXGt
- +1RBHL48NfQ7hvfxxeJsn2mm37I2WwuT8cjzOYu/9lc+CCXZRGfJGyFzV5maqpSfj8WzdAOW2b
- V+o5pP3wQAAAA==
-X-Change-ID: 20260803-mtk-clk-mt8366-cbf571077097
+Message-Id: <20260814-mtk-clk-mt8366-v2-1-5e9e952de8d8@baylibre.com>
+References: <20260814-mtk-clk-mt8366-v2-0-5e9e952de8d8@baylibre.com>
+In-Reply-To: <20260814-mtk-clk-mt8366-v2-0-5e9e952de8d8@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -118,20 +117,19 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Julien Stephan <jstephan@baylibre.com>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>, 
- Irving-CH Lin <irving-ch.lin@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>
+ Irving-CH Lin <irving-ch.lin@mediatek.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1552; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=RRRQq8HC3ADjCnXjuwKb26+X8GqugpU00g4FLOzjBWA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfyavxniSGPwP4odIvA8V59xPR0mToBgcl80zU
- uHbWKnhuryJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan8mrxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A2ncH/jvaZ+lBhVCrgGrIyonbhwF50uDzG/Bj19XcFaN
- 5FUnkDKwNIjh2XQ3o7EiSU1RVXsP71ilxARXkFidh8Ev3kvAyeAcOcIiGCu8XfkC0BXQSIC6KAP
- usp+g6TPbjH8hP9OHmInbgBaL4hQPLMAaWz5BlJ2RPguN8p37PnoSSCi7lI2kphMUz45DXzUc2k
- b90LZbI4GwLtwKp8N7AduJSn3IUOWTQdA3dASvnlRxRMvhcsTOQySHGbOg3XuB9jhKsWs4N4j1X
- 71vxxvOrga5XDJGU+njAFLOCamHzs0wunZtJNw3L7y3KzVq4YSDtyFQ4UGwUiULr6WDc/Rql6iP
- QeZ4=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=18815;
+ i=dlechner@baylibre.com; h=from:subject:message-id;
+ bh=MptduWqSVApIvDSh1JDLFCBz8dcVAJTE2JjfWgBuEes=;
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqfya2tE28/7CwMvZWYTtQ8Rak3FrbRpbk2AFkT
+ u1mEAcvbZ+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan8mthYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AHosIAIqY6dett7RMu8XAlKOSOURqfE0bGdHpbLSeXml
+ HFFy3LYkO3gxc2sH0v0W9MfYehSqoDeHCqEIBufilVnewenl4sHnd5//fFb/PuXt+celvp8PQYm
+ LCgsvgsnwoY8sZb2n3ErtU9d4Pz0xLvkr9Z/CcbI3vM0U6xXwO0rcFAk1PjbIUBq3QKuff6AuHj
+ M9HDodNjBe7YiyrUNzTOciPIzcxu4w7GRP93SOApXJOeXRSApKnyfYbQIJcyw5JtjKXz5Hj1Ci+
+ sT6OMZi/0aqsnVfEe7Mi5qqQSsqQ13tCd1Lp3XmGJ1NGE5FKONmG8EWBWigLcF5wESTzYC7LdV2
+ 93Pk=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -148,45 +146,512 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-A new clock driver for the MediaTek MT8366 SoC. This is part of the
-ongoing work to bring up the Genio 360 EVK.
+From: Irving-CH Lin <irving-ch.lin@mediatek.com>
 
-v1 was based on downstream U-Boot, but it turns out that it had a
-stripped down version of the clock driver that was missing many clocks.
-This has been updated to use downstream Linux as a reference so now
-should have all of the clocks.
+Add a header with MT8366 clock definitions for use in devicetrees.
 
-Previously, we sent the dt-bindings include in a different series [1],
-but include it here now to make sure we get the ordering correct when
-we apply the patches.
+Upstreaming of MT8366 has not even started yet, so we will have to
+carry a downstream version of this for some time.
 
-[1]: https://lore.kernel.org/u-boot/20260803-mtk-genio-360-bringup-v1-1-606ee60755b5@baylibre.com/
-
+Signed-off-by: Irving-CH Lin <irving-ch.lin@mediatek.com>
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes in v2:
-- Picked up dt-bindings include patch from [1].
-- Add MAINTAINERS entry for dt-bindings include.
-- Added a bunch of missing clocks from downstream Linux.
-- Link to v1: https://patch.msgid.link/20260803-mtk-clk-mt8366-v1-1-465e0f1286db@baylibre.com
+ MAINTAINERS                            |   1 +
+ include/dt-bindings/clock/mt8366-clk.h | 473 +++++++++++++++++++++++++++++++++
+ 2 files changed, 474 insertions(+)
 
----
-Irving-CH Lin (1):
-      dt-bindings: clock: add MT8366 clock header
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d0924f72af4..4505299f89a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1332,6 +1332,7 @@ F:	include/configs/mt7621.h
+ F:	include/dt-bindings/clock/mt7620-clk.h
+ F:	include/dt-bindings/clock/mt7621-clk.h
+ F:	include/dt-bindings/clock/mt7628-clk.h
++F:	include/dt-bindings/clock/mt8366-clk.h
+ F:	include/dt-bindings/reset/mt7620-reset.h
+ F:	include/dt-bindings/reset/mt7621-reset.h
+ F:	include/dt-bindings/reset/mt7628-reset.h
+diff --git a/include/dt-bindings/clock/mt8366-clk.h b/include/dt-bindings/clock/mt8366-clk.h
+new file mode 100644
+index 00000000000..9bf37db5cff
+--- /dev/null
++++ b/include/dt-bindings/clock/mt8366-clk.h
+@@ -0,0 +1,473 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)  */
++/*
++ * Copyright (c) 2026 MediaTek Inc.
++ * Author: Irving-CH Lin <irving-ch.lin@mediatek.com>
++ */
++
++#ifndef _DT_BINDINGS_CLK_MT8366_H
++#define _DT_BINDINGS_CLK_MT8366_H
++
++/* APMIXEDSYS */
++#define CLK_APMIXED_ARMPLL_LL				0
++#define CLK_APMIXED_ARMPLL_BL				1
++#define CLK_APMIXED_CCIPLL				2
++#define CLK_APMIXED_APLL1				3
++#define CLK_APMIXED_APLL2				4
++#define CLK_APMIXED_APLL3				5
++#define CLK_APMIXED_APLL4				6
++#define CLK_APMIXED_APLL5				7
++#define CLK_APMIXED_MAINPLL				8
++#define CLK_APMIXED_UNIVPLL				9
++#define CLK_APMIXED_MMPLL				10
++#define CLK_APMIXED_TVDPLL1				11
++#define CLK_APMIXED_TVDPLL2				12
++#define CLK_APMIXED_MSDCPLL				13
++#define CLK_APMIXED_MFGPLL				14
++#define CLK_APMIXED_APUPLL2				15
++#define CLK_APMIXED_APUPLL				16
++#define CLK_APMIXED_ETHPLL				17
++#define CLK_APMIXED_CANPLL				18
++#define CLK_APMIXED_EMIPLL				19
++
++/* TOPCKGEN */
++#define CLK_TOP_AXI_SEL					0
++#define CLK_TOP_SPM_SEL					1
++#define CLK_TOP_BUS_AXIMEM_SEL				2
++#define CLK_TOP_DISP_SEL				3
++#define CLK_TOP_EPD_SEL					4
++#define CLK_TOP_MDP_SEL					5
++#define CLK_TOP_DP_SEL					6
++#define CLK_TOP_IMG1_SEL				7
++#define CLK_TOP_IPE_SEL					8
++#define CLK_TOP_CAM_SEL					9
++#define CLK_TOP_CAMTM_SEL				10
++#define CLK_TOP_CAMTG_SEL				11
++#define CLK_TOP_CAMTG2_SEL				12
++#define CLK_TOP_MFG_REF_SEL				13
++#define CLK_TOP_UART_SEL				14
++#define CLK_TOP_SPI0_SEL				15
++#define CLK_TOP_SPI1_SEL				16
++#define CLK_TOP_SPI2_SEL				17
++#define CLK_TOP_SPI3_SEL				18
++#define CLK_TOP_SPI4_SEL				19
++#define CLK_TOP_SPI5_SEL				20
++#define CLK_TOP_I2CP_SEL				21
++#define CLK_TOP_I2C_SEL					22
++#define CLK_TOP_SENINF_SEL				23
++#define CLK_TOP_SENINF1_SEL				24
++#define CLK_TOP_VENC_SEL				25
++#define CLK_TOP_VDEC_SEL				26
++#define CLK_TOP_PWM_SEL					27
++#define CLK_TOP_DVFSRC_SEL				28
++#define CLK_TOP_AES_MSDCFBE_SEL				29
++#define CLK_TOP_MSDC_MACRO_0P_SEL			30
++#define CLK_TOP_MSDC_MACRO_1P_SEL			31
++#define CLK_TOP_MSDC_MACRO_2P_SEL			32
++#define CLK_TOP_MSDC50_0_SEL				33
++#define CLK_TOP_MSDC30_1_SEL				34
++#define CLK_TOP_MSDC30_2_SEL				35
++#define CLK_TOP_MSDC50_0_HCLK_SEL			36
++#define CLK_TOP_MSDC30_1_HCLK_SEL			37
++#define CLK_TOP_MSDC30_2_HCLK_SEL			38
++#define CLK_TOP_MCUPM_SEL				39
++#define CLK_TOP_DSI_OCC_SEL				40
++#define CLK_TOP_KP_IRQ_GEN_SEL				41
++#define CLK_TOP_NFI_BCLK_SEL				42
++#define CLK_TOP_SFLASH_SEL				43
++#define CLK_TOP_EMI_SEL					44
++#define CLK_TOP_MAC_TL_SEL				45
++#define CLK_TOP_SNPS_ETH_250M_SEL			46
++#define CLK_TOP_SNPS_ETH_62P4M_PTP_SEL			47
++#define CLK_TOP_SNPS_ETH_50M_RMII_SEL			48
++#define CLK_TOP_LVDSTX_CLKDIG_CTS_SEL			49
++#define CLK_TOP_VPLL_DPIX_SEL				50
++#define CLK_TOP_EPD_DPI_SEL				51
++#define CLK_TOP_DSP_SEL					52
++#define CLK_TOP_ECC_SEL					53
++#define CLK_TOP_GCPU_SEL				54
++#define CLK_TOP_USB_TOP_P0_SEL				55
++#define CLK_TOP_USB_XHCI_P0_SEL				56
++#define CLK_TOP_USB_TOP_P1_SEL				57
++#define CLK_TOP_USB_XHCI_P1_SEL				58
++#define CLK_TOP_USB_TOP_P2_SEL				59
++#define CLK_TOP_USB_XHCI_P2_SEL				60
++#define CLK_TOP_AUD_INTBUS_SEL				61
++#define CLK_TOP_AUD_ENGEN1_SEL				62
++#define CLK_TOP_AUD_ENGEN2_SEL				63
++#define CLK_TOP_EARC_ENGEN_SEL				64
++#define CLK_TOP_SPDIFIN_ENGEN_SEL			65
++#define CLK_TOP_LINEIN_ENGEN_SEL			66
++#define CLK_TOP_AUDIO_H_SEL				67
++#define CLK_TOP_VADSP_VOWPLL_SEL			68
++#define CLK_TOP_PWRAP_ULPOSC_SEL			69
++#define CLK_TOP_AUD_1_SEL				70
++#define CLK_TOP_AUD_2_SEL				71
++#define CLK_TOP_VADSP_26M_SEL				72
++#define CLK_TOP_ATB_SEL					73
++#define CLK_TOP_ASM_H_SEL				74
++#define CLK_TOP_I2SI4_M_SEL				75
++#define CLK_TOP_I2SI6_M_SEL				76
++#define CLK_TOP_I2SO4_M_SEL				77
++#define CLK_TOP_I2SO5_M_SEL				78
++#define CLK_TOP_I2SO6_M_SEL				79
++#define CLK_TOP_AUD_IEC_SEL				80
++#define CLK_TOP_SPDIFIN_SEL				81
++#define CLK_TOP_CAN0_SEL				82
++#define CLK_TOP_DISP_PWM_SEL				83
++#define CLK_TOP_SSPM_SEL				84
++#define CLK_TOP_VADSP_SEL				85
++#define CLK_TOP_APLL_TDMOUT_MCK_SEL			86
++#define CLK_TOP_MFG_SEL_MFGPLL				87
++#define CLK_TOP_APLL12_CK_DIV_I2SIN5			88
++#define CLK_TOP_APLL12_CK_DIV_I2SIN6			89
++#define CLK_TOP_APLL12_CK_DIV_I2SOUT4			90
++#define CLK_TOP_APLL12_CK_DIV_I2SOUT5			91
++#define CLK_TOP_APLL12_CK_DIV_I2SOUT6			92
++#define CLK_TOP_APLL12_CK_DIV_SPDIFOUT			93
++#define CLK_TOP_APLL12_CK_DIV_TDMOUT_M			94
++#define CLK_TOP_APLL12_CK_DIV_TDMOUT_B			95
++#define CLK_TOP_MAINPLL_D4				96
++#define CLK_TOP_MAINPLL_D4_D2				97
++#define CLK_TOP_MAINPLL_D4_D4				98
++#define CLK_TOP_MAINPLL_D4_D8				99
++#define CLK_TOP_MAINPLL_D5				100
++#define CLK_TOP_MAINPLL_D5_D2				101
++#define CLK_TOP_MAINPLL_D6				102
++#define CLK_TOP_MAINPLL_D6_D2				103
++#define CLK_TOP_MAINPLL_D6_D4				104
++#define CLK_TOP_MAINPLL_D7_D2				105
++#define CLK_TOP_MAINPLL_D7_D4				106
++#define CLK_TOP_MAINPLL_D7_D8				107
++#define CLK_TOP_MAINPLL_D9				108
++#define CLK_TOP_UNIVPLL_D4				109
++#define CLK_TOP_UNIVPLL_D4_D2				110
++#define CLK_TOP_UNIVPLL_D4_D4				111
++#define CLK_TOP_UNIVPLL_D4_D8				112
++#define CLK_TOP_UNIVPLL_D5				113
++#define CLK_TOP_UNIVPLL_D5_D2				114
++#define CLK_TOP_UNIVPLL_D5_D4				115
++#define CLK_TOP_UNIVPLL_D5_D8				116
++#define CLK_TOP_UNIVPLL_D6				117
++#define CLK_TOP_UNIVPLL_D6_D2				118
++#define CLK_TOP_UNIVPLL_D6_D4				119
++#define CLK_TOP_UNIVPLL_D6_D8				120
++#define CLK_TOP_UNIVPLL_D6_D16				121
++#define CLK_TOP_UNIVPLL_D7				122
++#define CLK_TOP_UNIVPLL_D7_D2				123
++#define CLK_TOP_UNIVPLL_D7_D3				124
++#define CLK_TOP_UNIVPLL_192M_D2				125
++#define CLK_TOP_UNIVPLL_192M_D4				126
++#define CLK_TOP_UNIVPLL_192M_D8				127
++#define CLK_TOP_UNIVPLL_192M_D16			128
++#define CLK_TOP_UNIVPLL_192M_D32			129
++#define CLK_TOP_UNIVPLL_192M_D10			130
++#define CLK_TOP_APLL1_D4				131
++#define CLK_TOP_APLL1_D3				132
++#define CLK_TOP_APLL2_D4				133
++#define CLK_TOP_APLL2_D3				134
++#define CLK_TOP_APLL3_D4				135
++#define CLK_TOP_APLL4_D4				136
++#define CLK_TOP_APLL5_D4				137
++#define CLK_TOP_MMPLL_D4				138
++#define CLK_TOP_MMPLL_D4_D2				139
++#define CLK_TOP_MMPLL_D4_D4				140
++#define CLK_TOP_MMPLL_D5				141
++#define CLK_TOP_MMPLL_D5_D2				142
++#define CLK_TOP_MMPLL_D6				143
++#define CLK_TOP_MMPLL_D6_D2				144
++#define CLK_TOP_MMPLL_D7				145
++#define CLK_TOP_TVDPLL1_D2				146
++#define CLK_TOP_TVDPLL1_D4				147
++#define CLK_TOP_TVDPLL1_D8				148
++#define CLK_TOP_TVDPLL1_D16				149
++#define CLK_TOP_TVDPLL2_D4				150
++#define CLK_TOP_TVDPLL2_D8				151
++#define CLK_TOP_MSDCPLL_D2				152
++#define CLK_TOP_ETHPLL_D2				153
++#define CLK_TOP_ETHPLL_D8				154
++#define CLK_TOP_ETHPLL_D10				155
++#define CLK_TOP_CANPLL_D5				156
++#define CLK_TOP_CANPLL_D10				157
++#define CLK_TOP_CANPLL_D20				158
++#define CLK_TOP_CANPLL_D25				159
++#define CLK_TOP_OSC_D2					160
++#define CLK_TOP_OSC_D4					161
++#define CLK_TOP_OSC_D8					162
++#define CLK_TOP_OSC_D16					163
++#define CLK_TOP_OSC_D10					164
++#define CLK_TOP_OSC_D20					165
++#define CLK_TOP_APLL12_DIV_I2SIN0_PDN			166
++#define CLK_TOP_APLL12_DIV_I2SIN1_PDN			167
++#define CLK_TOP_APLL12_DIV_I2SIN2_PDN			168
++#define CLK_TOP_APLL12_DIV_I2SIN3_PDN			169
++#define CLK_TOP_APLL12_DIV_I2SIN4_PDN			170
++#define CLK_TOP_APLL12_DIV_I2SIN6_PDN			171
++#define CLK_TOP_APLL12_DIV_I2SOUT0_PDN			172
++#define CLK_TOP_APLL12_DIV_I2SOUT1_PDN			173
++#define CLK_TOP_APLL12_DIV_I2SOUT2_PDN			174
++#define CLK_TOP_APLL12_DIV_I2SOUT3_PDN			175
++#define CLK_TOP_APLL12_DIV_I2SOUT4_PDN			176
++#define CLK_TOP_APLL12_DIV_I2SOUT5_PDN			177
++#define CLK_TOP_APLL12_DIV_I2SOUT6_PDN			178
++#define CLK_TOP_APLL12_DIV_SPDIFOUT_PDN			179
++#define CLK_TOP_APLL12_DIV_TDMOUT_M_PDN			180
++#define CLK_TOP_APLL12_DIV_TDMOUT_B_PDN			181
++#define CLK_TOP_F26M_CK_EN				182
++#define CLK_TOP_USB_F26M_CK_EN				183
++#define CLK_TOP_USB2_PHY_REFCK_P0_EN			184
++#define CLK_TOP_USB2_PHY_REFCK_P1_EN			185
++#define CLK_TOP_USB2_PHY_REFCK_P2_EN			186
++#define CLK_TOP_USB2_26M_CK_P0_EN			187
++#define CLK_TOP_USB2_26M_CK_P1_EN			188
++#define CLK_TOP_USB2_26M_CK_P2_EN			189
++#define CLK_TOP_FMCNT_P0_EN				190
++#define CLK_TOP_FMCNT_P1_EN				191
++#define CLK_TOP_FMCNT_P2_EN				192
++
++/* INFRACFG_AO_REG */
++#define CLK_INFRACFG_AO_REGP_UART0			0
++#define CLK_INFRACFG_AO_REGP_UART1			1
++#define CLK_INFRACFG_AO_REGP_UART2			2
++#define CLK_INFRACFG_AO_REGP_UART3			3
++#define CLK_INFRACFG_AO_REGP_DISP_PWM0			4
++#define CLK_INFRACFG_AO_REGP_DISP_PWM1			5
++#define CLK_INFRACFG_AO_REGP_SPI0_B			6
++#define CLK_INFRACFG_AO_REGP_SPI1_B			7
++#define CLK_INFRACFG_AO_REGP_SPI2_B			8
++#define CLK_INFRACFG_AO_REGP_SPI3_B			9
++#define CLK_INFRACFG_AO_REGP_SPI4_B			10
++#define CLK_INFRACFG_AO_REGP_SPI5_B			11
++#define CLK_INFRACFG_AO_REGP_SPI0_H			12
++#define CLK_INFRACFG_AO_REGP_SPI1_H			13
++#define CLK_INFRACFG_AO_REGP_SPI2_H			14
++#define CLK_INFRACFG_AO_REGP_SPI3_H			15
++#define CLK_INFRACFG_AO_REGP_SPI4_H			16
++#define CLK_INFRACFG_AO_REGP_SPI5_H			17
++#define CLK_INFRACFG_AO_REGP_AXI			18
++#define CLK_INFRACFG_AO_REGP_AHB			19
++#define CLK_INFRACFG_AO_REGP_TL				20
++#define CLK_INFRACFG_AO_REGP_REF			21
++#define CLK_INFRACFG_AO_REGP_DMA_B			22
++#define CLK_INFRACFG_AO_REGP_SSUSB0_PIPE		23
++#define CLK_INFRACFG_AO_REGP_SSUSB0_REF			24
++#define CLK_INFRACFG_AO_REGP_SSUSB0_FRMCNT		25
++#define CLK_INFRACFG_AO_REGP_SSUSB0_UTMI		26
++#define CLK_INFRACFG_AO_REGP_SSUSB0_SYS			27
++#define CLK_INFRACFG_AO_REGP_SSUSB0_XCHI		28
++#define CLK_INFRACFG_AO_REGP_SSUSB0_F			29
++#define CLK_INFRACFG_AO_REGP_SSUSB0_H			30
++#define CLK_INFRACFG_AO_REGP_SSUSB1_REF			31
++#define CLK_INFRACFG_AO_REGP_SSUSB1_FRMCNT		32
++#define CLK_INFRACFG_AO_REGP_SSUSB1_UTMI		33
++#define CLK_INFRACFG_AO_REGP_SSUSB1_SYS			34
++#define CLK_INFRACFG_AO_REGP_SSUSB1_XCHI		35
++#define CLK_INFRACFG_AO_REGP_SSUSB1_F			36
++#define CLK_INFRACFG_AO_REGP_SSUSB1_H			37
++#define CLK_INFRACFG_AO_REGP_SSUSB2_REF			38
++#define CLK_INFRACFG_AO_REGP_SSUSB2_FRMCNT		39
++#define CLK_INFRACFG_AO_REGP_SSUSB2_UTMI		40
++#define CLK_INFRACFG_AO_REGP_SSUSB2_SYS			41
++#define CLK_INFRACFG_AO_REGP_SSUSB2_XCHI		42
++#define CLK_INFRACFG_AO_REGP_SSUSB2_F			43
++#define CLK_INFRACFG_AO_REGP_SSUSB2_H			44
++#define CLK_INFRACFG_AO_REG_PMIC_TMR			45
++#define CLK_INFRACFG_AO_REG_PMIC_AP			46
++#define CLK_INFRACFG_AO_REG_SEJ				47
++#define CLK_INFRACFG_AO_REG_MCUPM			48
++#define CLK_INFRACFG_AO_REG_GCE				49
++#define CLK_INFRACFG_AO_REG_GCE2			50
++#define CLK_INFRACFG_AO_REG_PWM_H			51
++#define CLK_INFRACFG_AO_REG_PWM1			52
++#define CLK_INFRACFG_AO_REG_PWM2			53
++#define CLK_INFRACFG_AO_REG_PWM3			54
++#define CLK_INFRACFG_AO_REG_PWM4			55
++#define CLK_INFRACFG_AO_REG_PWM				56
++#define CLK_INFRACFG_AO_REG_GCE_26M			57
++#define CLK_INFRACFG_AO_REG_CQ_DMA_FPC			58
++#define CLK_INFRACFG_AO_REG_BTIF			59
++#define CLK_INFRACFG_AO_REG_SPI0			60
++#define CLK_INFRACFG_AO_REG_AUXADC			61
++#define CLK_INFRACFG_AO_REG_CPUM			62
++#define CLK_INFRACFG_AO_REG_CCIF1_AP			63
++#define CLK_INFRACFG_AO_REG_CCIF1_MD			64
++#define CLK_INFRACFG_AO_REG_AUXADC_MD			65
++#define CLK_INFRACFG_AO_REG_TL_26M			66
++#define CLK_INFRACFG_AO_REG_TL_96M			67
++#define CLK_INFRACFG_AO_REG_PL_P_250M			68
++#define CLK_INFRACFG_AO_REG_CCIF_AP			69
++#define CLK_INFRACFG_AO_REG_DEBUGSYS			70
++#define CLK_INFRACFG_AO_REG_AUDIO			71
++#define CLK_INFRACFG_AO_REG_CCIF_MD			72
++#define CLK_INFRACFG_AO_REG_DBG_TRACE			73
++#define CLK_INFRACFG_AO_REG_CLDMA_BCLK			74
++#define CLK_INFRACFG_AO_REG_AUDIO_26M_BCLK		75
++#define CLK_INFRACFG_AO_REG_MODEM_TEMP_SHARE		76
++#define CLK_INFRACFG_AO_REG_SPI1			77
++#define CLK_INFRACFG_AO_REG_SPI2			78
++#define CLK_INFRACFG_AO_REG_SPI3			79
++#define CLK_INFRACFG_AO_REG_U_SAP_B			80
++#define CLK_INFRACFG_AO_REG_UNIPRO_MBIST		81
++#define CLK_INFRACFG_AO_REG_SPI4			82
++#define CLK_INFRACFG_AO_REG_SPI5			83
++#define CLK_INFRACFG_AO_REG_CQ_DMA			84
++#define CLK_INFRACFG_AO_REG_KP_IRQ_GEN			85
++#define CLK_INFRACFG_AO_REG_KP_32K			86
++#define CLK_INFRACFG_AO_REG_U_AXI			87
++#define CLK_INFRACFG_AO_REG_CCIF5_AP			88
++#define CLK_INFRACFG_AO_REG_CCIF5_MD			89
++#define CLK_INFRACFG_AO_REG_CCIF2_AP			90
++#define CLK_INFRACFG_AO_REG_CCIF2_MD			91
++#define CLK_INFRACFG_AO_REG_CCIF3_AP			92
++#define CLK_INFRACFG_AO_REG_CCIF3_MD			93
++#define CLK_INFRACFG_AO_REG_SEJ_F13M			94
++#define CLK_INFRACFG_AO_REG_AES				95
++#define CLK_INFRACFG_AO_REG_GCPU			96
++#define CLK_INFRACFG_AO_REG_ECC				97
++#define CLK_INFRACFG_AO_REG_CCIF4_AP			98
++#define CLK_INFRACFG_AO_REG_CCIF4_MD			99
++#define CLK_INFRACFG_AO_REGP_AUXADC_26M			100
++#define CLK_INFRACFG_AO_REGP_MSDC0			101
++#define CLK_INFRACFG_AO_REGP_MSDC0_H			102
++#define CLK_INFRACFG_AO_REGP_MSDC0_FAES			103
++#define CLK_INFRACFG_AO_REGP_MSDC0_MST_F		104
++#define CLK_INFRACFG_AO_REGP_MSDC0_SLV_H		105
++#define CLK_INFRACFG_AO_REGP_MSDC1			106
++#define CLK_INFRACFG_AO_REGP_MSDC1_H			107
++#define CLK_INFRACFG_AO_REGP_MSDC1_MST_F		108
++#define CLK_INFRACFG_AO_REGP_MSDC1_SLV_H		109
++#define CLK_INFRACFG_AO_REGP_MSDC2			110
++#define CLK_INFRACFG_AO_REGP_MSDC2_H			111
++#define CLK_INFRACFG_AO_REGP_MSDC2_MST_F		112
++#define CLK_INFRACFG_AO_REGP_MSDC2_SLV_H		113
++#define CLK_INFRACFG_AO_REGP_SFLASH			114
++#define CLK_INFRACFG_AO_REGP_SFLASH_F			115
++#define CLK_INFRACFG_AO_REGP_SFLASH_H			116
++#define CLK_INFRACFG_AO_REGP_SFLASH_P			117
++#define CLK_INFRACFG_AO_REGP_BTIF_B			118
++#define CLK_INFRACFG_AO_REGP_CAN0_P			119
++#define CLK_INFRACFG_AO_REGP_CAN0			120
++#define CLK_INFRACFG_AO_REGP_NFI_H			121
++#define CLK_INFRACFG_AO_REGP_NFI_B			122
++#define CLK_INFRACFG_AO_REGP_NFIECC_B			123
++
++/* IMP_IIC_WRAP_C */
++#define CLK_IMPC_I2C1					0
++#define CLK_IMPC_I2C2					1
++#define CLK_IMPC_I2C3					2
++#define CLK_IMPC_I2C5					3
++#define CLK_IMPC_I2C6					4
++#define CLK_IMPC_I2C7					5
++#define CLK_IMPC_I2C8					6
++#define CLK_IMPC_I2C9					7
++
++/* IMP_IIC_WRAP_E */
++#define CLK_IMPE_I2C0					0
++#define CLK_IMPE_I2C4					1
++
++/* DISPSYS_CONFIG */
++#define CLK_MM_DISP_OVL0_4L				0
++#define CLK_MM_DISP_OVL1_4L				1
++#define CLK_MM_DISP_RSZ0				2
++#define CLK_MM_DISP_RSZ1				3
++#define CLK_MM_DISP_RDMA0				4
++#define CLK_MM_DISP_RDMA1				5
++#define CLK_MM_DISP_COLOR1				6
++#define CLK_MM_DISP_CCORR1				7
++#define CLK_MM_DISP_CCORR3				8
++#define CLK_MM_DISP_AAL1				9
++#define CLK_MM_DISP_GAMMA1				10
++#define CLK_MM_DISP_DITHER1				11
++#define CLK_MM_VPP_MERGE0				12
++#define CLK_MM_DISP_DSI0_MM				13
++#define CLK_MM_DP_INTF0_MM				14
++#define CLK_MM_DPI0_MM					15
++#define CLK_MM_DISP_WDMA0				16
++#define CLK_MM_DISP_DSI1_MM				17
++#define CLK_MM_DISP_FAKE_ENG0				18
++#define CLK_MM_DISP_FAKE_ENG1				19
++#define CLK_MM_SMI_SUB_COMMON				20
++#define CLK_MM_DISP_MUTEX0				21
++#define CLK_MM_DISP_APB_BUS				22
++#define CLK_MM_LVDS_ENCODER				23
++#define CLK_MM_EPD_DLI_ASYNC				24
++#define CLK_MM_SMI					25
++#define CLK_MM_DISP_DSI0				26
++#define CLK_MM_DPI0					27
++#define CLK_MM_LVDS_ENCODER_PXL				28
++#define CLK_MM_DISP_DSI1				29
++#define CLK_MM_DP_INTF0					30
++#define CLK_MM_LVDS_ENCODER_CTS				31
++#define CLK_MM_AXI					32
++#define CLK_MM_EPDSYS					33
++#define CLK_MM_MM_CK_GLOBAL				34
++#define CLK_MM_DISP_DSI0_CK_GLOBAL			35
++#define CLK_MM_LVDS_PXL_CK_GLOBAL			36
++#define CLK_MM_DISP_DSI1_GLOBAL				37
++#define CLK_MM_DP_CK_GLOBAL				38
++#define CLK_MM_LVDS_CTS_CK_GLOBAL			39
++#define CLK_MM_AXI_CK_GLOBAL				40
++#define CLK_MM_EPDSYS_CK_GLOBAL				41
++#define CLK_MM_26M					42
++#define CLK_MM_32K					43
++
++/* DPTX_PHYD_SIFSLV_DIG_GLB */
++#define CLK_DPTX_PHYD_SIFSLV_DIG_GLB_RG_REF_CK_ENA	0
++
++/* EPDSYS_CONFIG */
++#define CLK_EPDSYS_PIPELINE_TOP				0
++#define CLK_EPDSYS_PIPELINE_IMAGE_RDMA			1
++#define CLK_EPDSYS_PIPELINE_WORKING_RDMA		2
++#define CLK_EPDSYS_PIPELINE_WDMA			3
++#define CLK_EPDSYS_PIPELINE_WF_LUT_TOP			4
++#define CLK_EPDSYS_PIPELINE_DPI				5
++#define CLK_EPDSYS_PIPELINE_6				6
++#define CLK_EPDSYS_PIPELINE_IMAGE_PROCESS		7
++#define CLK_EPDSYS_DISP_COLOR				8
++#define CLK_EPDSYS_DISP_CCORR				9
++#define CLK_EPDSYS_DPI					10
++#define CLK_EPDSYS_TCON					11
++#define CLK_EPDSYS_SMI_LARB3				12
++#define CLK_EPDSYS_SMI_LARB8				13
++#define CLK_EPDSYS_IMG_DL_RELAY				14
++#define CLK_EPDSYS_26M_HRTWT				15
++#define CLK_EPDSYS_DPI0_MM				16
++
++/* VDEC_GCON_BASE */
++#define CLK_VDE2_LARB1_CKEN				0
++#define CLK_VDE2_LAT_CKEN				1
++#define CLK_VDE2_LAT_ACTIVE				2
++#define CLK_VDE2_LAT_CKEN_ENG				3
++#define CLK_VDE2_MINI_MDP_EN				4
++#define CLK_VDE2_VDEC_CKEN				5
++#define CLK_VDE2_VDEC_ACTIVE				6
++#define CLK_VDE2_VDEC_CKEN_ENG				7
++
++/* IPE */
++#define CLK_IPE_LARB19					0
++#define CLK_IPE_LARB20					1
++#define CLK_IPE_SMI_SUBCOM				2
++#define CLK_IPE_FD					3
++#define CLK_IPE_FE					4
++#define CLK_IPE_RSC					5
++#define CLK_IPE_GALS					6
++
++/* CAMSYS_MAIN */
++#define CLK_CAM_M_LARB13				0
++#define CLK_CAM_M_DFP_VAD				1
++#define CLK_CAM_M_LARB14				2
++#define CLK_CAM_M_CAM					3
++#define CLK_CAM_M_CAMTG					4
++#define CLK_CAM_M_SENINF				5
++#define CLK_CAM_M_CAMSV1				6
++#define CLK_CAM_M_CAMSV2				7
++#define CLK_CAM_M_CAMSV3				8
++#define CLK_CAM_M_CCU0					9
++#define CLK_CAM_M_CCU1					10
++#define CLK_CAM_M_MRAW0					11
++#define CLK_CAM_M_FAKE_ENG				12
++#define CLK_CAM_M_CCU_GALS				13
++#define CLK_CAM_M_CAM2MM_GALS				14
++#define CLK_CAM_M_CAMSV4				15
++#define CLK_CAM_M_PDA					16
++
++#endif /* _DT_BINDINGS_CLK_MT8366_H */
 
-irving.ch.lin (1):
-      clk: mediatek: add support for MT8366
-
- MAINTAINERS                            |    1 +
- drivers/clk/mediatek/Makefile          |    1 +
- drivers/clk/mediatek/clk-mt8366.c      | 1561 ++++++++++++++++++++++++++++++++
- include/dt-bindings/clock/mt8366-clk.h |  473 ++++++++++
- 4 files changed, 2036 insertions(+)
----
-base-commit: 4e93493a1b9c1866abcd46bb41bbcf86edd940bf
-change-id: 20260803-mtk-clk-mt8366-cbf571077097
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
