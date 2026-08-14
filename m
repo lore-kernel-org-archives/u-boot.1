@@ -1,137 +1,147 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2557AC5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC35C5B572
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:23:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D8F056067F;
-	Fri, 14 Aug 2026 21:21:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0F88F80F5C;
+	Fri, 14 Aug 2026 21:23:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qYlDLoGbv2Mg; Fri, 14 Aug 2026 21:21:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ia7r1lhW9HfV; Fri, 14 Aug 2026 21:23:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6AE67606DC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 31F7980F5D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786742499;
-	bh=PJXi38vYlknPQoveZbcFivpScodOIZ54sXTwSloKBts=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=gGOp+Q/cOLtSDD6NFdwq2nrXdlUNHyvh0twra2ZYp2o4QjN5BoWFeCfsKED3YGanl
-	 MefclB+0da8RGB1oWE/mSju48lZmIzFMdyq+rum1+4cQP2iGT6IIsHWZX+stBHogX0
-	 CrMBPiUQF4vqJJcQi934P/OMLjTJyF/auvVpYWfh7ST7KKK9XBmwrfZKdGy6mtW+eR
-	 DppKvxMnmwiehIAy7aS3thvbUyX7I5iI2uCwzlaMxuZSf92/ssW06i3oJM9iBcVaSe
-	 kWBKFPO3S7aGGudqC28ki4lSakrND94rutlAunJCXcYxc1Neoh0w/CXJoeAivAKca8
-	 UY8nH/6aZwCZQ==
+	d=lists.u-boot-project.org ; s=default; t=1786742603;
+	bh=vxnrlYV34vZt4/tffqOlXWUinD5mkUmqp92VwMKouwk=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LU1OS+goKF76IkXuX96jpkNNdvKVCi8PQnPhHctC+KEiIkBEd+A1yov0QnKp4IbOl
+	 KFSnitkPcBs05d+7sTAV4Zd4Kv7T/joOREdn4qGN3CaQ/GxNqJz0nAKD6qob128j/a
+	 COocnIQA3B2d53DcPq5k+UozetAgyuzE5MIwWVD31GkhvkQcfjY/PGDnSpdwDeatrA
+	 ApWYWPWGC2rtcjj6yu8hxMn3Hlef5PqTe/Ghjd69JlYTBR4XXg55Pq9O8BYy9XjM+n
+	 mG3TubHgV2UAyLUE1ReRzVkD6eYdHctTnIQnjaf8rWX7eLLyyOwTe7dMrgSac2iT5O
+	 RW8zDxlbfpvNg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6AE67606DC;
-	Fri, 14 Aug 2026 21:21:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B71F139A
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:21:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 31F7980F5D;
+	Fri, 14 Aug 2026 21:23:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6179123F
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 01AD540064
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:21:38 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 474A480F5D
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oJIvJrmpCQ96 for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 21:21:37 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pAWV1Xf5O0Au for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 21:23:20 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 53D3140106
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 53D3140106
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=lBcDYACk
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 53D3140106
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:21:35 +0000 (UTC)
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7ee125ec926so1214576a34.2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:21:35 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 4E30180F5C
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4E30180F5C
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=a8+u86ZO
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4E30180F5C
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:20 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0c8283146so2131382a12.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:23:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786742598; cv=none;
+ d=google.com; s=arc-20260327;
+ b=JDJwPvCu0Se+0JgZ3eb3u52KDWGU0yKM/QhUeFyoFAV5S94jNZby3nei1LcxJjJOqW
+ XNjf/xOydzbDO0OL9yHym0kaatmV0pKc9+PmrC+s1f6sYLYNxWmKEN0D+OzdGkeSo4M6
+ FtBQja/7W3JB+qQ9lbqYWlhn6Rer/95J44asndUTe5iYfE85rb84yDXAF3s8M6/pFi+X
+ XiBJWN3ZqVBA15wUIaBcaj94V09PmNBks8rACQD61m5WX6bHNWaE51t7Icn1Jga/A5Ed
+ r3BkaI3GjMN8VjRYQfdH19HgvEyfPZqY+k0lmwvksZqg2m+8qjWCcAVpcYS3UPSztuNd
+ HEWw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vxnrlYV34vZt4/tffqOlXWUinD5mkUmqp92VwMKouwk=;
+ fh=Poon6yA3zlrUZCfAHy1fkV5/bnkRCwj8rHIj7D2+Ovs=;
+ b=JVbO5QasShwlBsqJhGDdFroBz37RkfKB6aPWvGT8soPDTSirZzNkxhgLLlutSF50fu
+ 9V/Eu1MnVmAXpXPN0MPr220mAs+xJUqpoN/Am0E4sU9qUaXklWyPYfgACrqWcNPiMK1A
+ hcyu2AkSXoXY9nEfGx6/2LqEihoraN/jbBlHaxAJGU71FbSSGdqd2hWBZmr7Efppz1TK
+ 3O+c4zlEVfrOm7MuVzkXEOW/g8E6lofRCl90qGXqzmY8i7aSpGMcMhuEwjp9noub3olp
+ +V1+QRBajQa2D6xYxfi6PnfQGc+rwCqpShAGa3aPYRlNVFCl8sl3TxSDTzxjV9j51DhC
+ 9UJA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786742494; x=1787347294;
+ d=chromium.org; s=google; t=1786742598; x=1787347398;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=PJXi38vYlknPQoveZbcFivpScodOIZ54sXTwSloKBts=;
- b=lBcDYACkmp5XfbbVltcakcyCwRPmDHG3ZNRnno4WHSvIf11XCs+RgK5tSayhIUWc87
- G7YaRAbk+s6iCepI7rpJNNWZRofUiZiYDkFkZPhkLGiDCwi3kRyTnMWgVuOq4Gvl3eDb
- BQS1TL/S7buWVftkjHIPDo60q6TCU2A5IozSEr0KE85eD8hDyG1ndI/LKIP4FuDa2pYv
- fst/VfaM7gWfW6VoDX+fcE78Qf88BtJI1P/VdqC2tSHuVRNvkJj4qq7/R6FxBg17C7ib
- tUV0iqob6LZNdNlXJjpXyY6JXRcXy1wnOdzdDzbRNDHqqu3QevRZgewg7uFJWfdGqkfT
- MF5g==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=vxnrlYV34vZt4/tffqOlXWUinD5mkUmqp92VwMKouwk=;
+ b=a8+u86ZOIVUhAuoELzhf6tnnRThijJPT7Dr1OE/Qkr3JuKPaLbq3rsyRWk9Qzm0RLR
+ zsRhg/v/UC+/k0VLpyBOKkxFkrI46QMU2WtEHWvXFrnHz59cDXrJ4te0wbehCRmrm3Ec
+ 5U/5d5KdWmVBK9NpzRX3fViqFCzteu25CJ478=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786742494; x=1787347294;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=PJXi38vYlknPQoveZbcFivpScodOIZ54sXTwSloKBts=;
- b=ottHU1vvcj4rX4qqhKgvoMmUB73DXoY1qZOuoqfQESeA31J90WrIxldKFG7vhPHPqe
- ccRV3zlH1qSMNLYFSnii1kbQy4wCXcqNPdDzzHaknnHfGvrGgO/5Kkq5RsATAL+//IuL
- XsUyGRV9adX0xI4P+30lCU5hqWF0UUAsQA/VOi5E8WPFhqxLOgiTPWJ7g4xayKp9+G7E
- n2ygeMRLoBRXK1Ynok7PnCu9DKwhmQ2+R6dXXzjkykJGQS3BIwINJl9QXZ5bR6P4Rx6i
- FohoM4DcE0nxs5CFVwOqSFtLXvimRUpKb1C7GYojVCbdlxIYMe0Ig+H5gqeDqeknTtvw
- qqpA==
-X-Gm-Message-State: AOJu0Yzt1gKYEFuKMkKplq7zCCUV/DfFMsO7mKplYAf5d7IPXGpB9nEu
- mKk54F0QV4aEP0FWhSFszYUC2anCvxjcPcwoOG5mKQVF4WgN26Va1WzhnH8fCXnR/8E=
-X-Gm-Gg: AR+sD11V+ZYUZ9ZX4gnU3/JNmx8nOm/ifwoEDcSQW+OBHbCnLZ/Xi173bNR/KRdaOR+
- Bv2w2o65CmzisoVn1me8nYTyL/j2NkhqWvnX5i85c0ZJEw606CrCc/HLQ22M50QPWfh0xZDGVDr
- lc4FBlArQ7Bq73gAL3TMm7Uq2FUFmSSNgkY20yUVnqhtYuARL5KqNoeqn4OB4PCxcYJCuQMJzi0
- IzWdhthu7auvMZUkBnqOEmu8tGDVPisNzUjVnt6cbqGq7jZHOlYtZA8Ko/hF1N0Hu1E9/NQZCrH
- DLzUA/VY2EF3ETyXadbCtvcBOB1efrddi15l9IyulcBWQ4+58+MK2wEpWmadvZzajpQMGobNRK0
- GRe9ge56CGweXKIB134bliu96d9rJkT5mF+/5I71YfHXF/P1s8YBHqZPSVmzxWRc9syuXgQULXP
- m9zqKf7xjrg5EjibLGtw0+rRpnFqws7tKSlDCg7Pahr3Ol/cCcwGeUoJC03MvINkrMXgMcCZj5Z
- F/oKg==
-X-Received: by 2002:a05:6830:71a9:b0:7e6:fa37:9797 with SMTP id
- 46e09a7af769-7f3de42968dmr8047618a34.6.1786742494609; 
- Fri, 14 Aug 2026 14:21:34 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7124:5000:3b37:b131])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f3e84d80d5sm1870949a34.7.2026.08.14.14.21.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 14:21:34 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 14 Aug 2026 16:21:25 -0500
-Subject: [PATCH] configs: mediatek: remove UFS defconfigs
+ d=1e100.net; s=20251104; t=1786742598; x=1787347398;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=vxnrlYV34vZt4/tffqOlXWUinD5mkUmqp92VwMKouwk=;
+ b=mMwkvvReXeP/nlLveLlzlyWH2pG7NZARjSh/0qnyoiCUOvROwsOUykTVRi5X3+oroF
+ P0WpVmMyOilCwcIJJCeI02CzOTU4uSFfYmqOz/eNZVb9E0dvoX3EyC5RKkR3pkw4RkZf
+ qVf8WOjy4gsR+moJjbARNutHlTx/2io9xaY3v+OtXoTP+zSpQjDb3fBp+TQjb4M/0w2m
+ OWQTN8t8W9JN0jHgGP7NPt7XUXcKc4RYCJqVOUuiq6mFmchJN8/oO5Fo4fy6cfAYueMl
+ kxpSELp2xfVOKleEeE/I2aXS81WhAwmqA5tbkV8SiY52Iw8o6Ubs7sFGMZ2LlINsHcmn
+ 1iqg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr7q6WtNZXtNcIo5USfvrK3tW6Y4QM+ZhSZ+Irr1yAnUsScmCqFT1J8domXOmnGFyggZGqU12M=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzSgPJrGVzzGG/INFo2O8GfAnTEhCmKhzTRJsY0JFpvM+a0n+RQ
+ SU62w69bYN+U/vsROcTgJJktghBgrsbPZjef9zMNYi0lfolT3Eu6Vo6uiMDulCIZSDd/AWozeS9
+ wiVrT7aS+mbYCrZQ8phNTRiGF6GdBKgh2MXX18Kgz
+X-Gm-Gg: AR+sD11zKxH5CPlflORKfh7S2M2Nqmh4DpKT0uWjfzO580qEtvWRU6spWm4wDhOMmWL
+ fqJfFft2ZoxEDvlyP28Vv4LsV1AWXEWmLkow8F2uZpmqly3fK6FjQtltrNR7Tze7nk/sWl9Ad19
+ +2tvle1Lx52ZvgZuq0H8QHK92yLUKY9AfByL1Sckd1vGJBD+FnfAgLTWCSxOwGLbqYdPk7Lt24S
+ 9Y8LVTlJ6DyJl/IAorNDkzkwRSEq9adKxFEtdTbH9AiEHczkT7EjUaosqAoSpzC+lb0Q68imcYF
+ kGaAJra2eLJ9c7ZYyO0SwLSF1QSzskv7zRDdlxb1Uvk=
+X-Received: by 2002:a05:6402:5484:b0:69a:a4cb:2882 with SMTP id
+ 4fb4d7f45d1cf-6a38a8ff103mr3951440a12.9.1786742598228; Fri, 14 Aug 2026
+ 14:23:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-mtk-genio-720-remove-ufs-defconfig-v1-1-000eb476030f@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNUQ6CMBCE4auQfXaTUhGMVzE8SDsti6E1LRATw
- t2t+vglk392ykiCTLdqp4RNssRQUJ8qMuMjeLDYYtJKt+paNzwvT/YIErnTihPmuIFXl9nCmRi
- ceLZnlHXXXmwzUAm9Epy8fyf3/u+8DhPM8i3TcXwAQIEYsYYAAAA=
-X-Change-ID: 20260814-mtk-genio-720-remove-ufs-defconfig-d3e026765d4b
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>
-Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5500; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=1DNTrUx9HbUk+xhtcljOz4aElQrgquptAMADtqVed4U=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqf4bWVXUlcwos34zPx3UA6TpDzUVexs/m6cJhf
- 6OqujaZ9JCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCan+G1hYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A6vwH/jXjvrvARD0KRLLLs8jOEdeK9GnOXY+FjD0+T9s
- ZTZx8dk4vQiQXQmdgFSB9vca6yLwrMwlFqI+4RXbfN3YUheVVcn4VBnFATxR0OrKhwtbKNHQzua
- mT3kfDfSzdGbw3qT2/WDGRRBRHQZGSXZJZimHWFv508zsaQU8J1c2QrUCR8k4fOA/HqkQzOLCZv
- lEfagFe7tuJfcrJTO+qWVFZe8NuntBhTFxTJgGF0EtoYUyU+6IvsyT/nDrwJmT5i4rVG04hy5Wa
- rmt9bLvmw+m1YyR7gZIJhP5RnRlj9qYL4IYuwadbRaSplGr6hy/sWEy2L/wVW79kRx9hOq5bDvI
- G5Vo=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+References: <20260814-imx93-secureboot-v1-0-0c3c78020d03@bootlin.com>
+ <20260814-imx93-secureboot-v1-1-0c3c78020d03@bootlin.com>
+In-Reply-To: <20260814-imx93-secureboot-v1-1-0c3c78020d03@bootlin.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 14 Aug 2026 15:23:05 -0600
+X-Gm-Features: AUfX_mz9KNIFTq93_fuvmMP7AfI4AV4JhKE1VU4ruPdaYzvQFbwBDvY-uMEqW7o
+Message-ID: <CAFLszTh3EaFTMusTDiPZZWvXZ4PvyXXNLKGORc=ag+4sDF5SFA@mail.gmail.com>
+Subject: Re: [PATCH 1/5] tools: binman: add nxp_imx93cst etype for i.MX93
+ flash.bin signing
+To: =?UTF-8?Q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
+ Denis Mukhin <dmukhin@ford.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
+ Alice Guo <alice.guo@nxp.com>, 
+ =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marex.vasut@mailbox.org>, 
+ =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,166 +156,90 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Remove the UFS defconfigs for Genio 520/720/1200 and enable the UFS
-options in the remaining defconfigs. This simplifies things a bit, e.g.
-it makes fewer builds to run when testing. Users can instead use the
-base defconfigs and pass DEVICE_TREE= to select the correct devicetree
-for the target. Or alternatively, include devicetree overlays in a FIT
-image that can be selected at runtime by the SPL.
+Hi J=C3=A9r=C3=A9mie,
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
-A bit more on the motivation behind this...
+On 2026-08-14T17:07:09, J=C3=A9r=C3=A9mie Dautheribes
+<jeremie.dautheribes@bootlin.com> wrote:
+> tools: binman: add nxp_imx93cst etype for i.MX93 flash.bin signing
+>
+> Add a new binman etype which allows signing both the SPL and U-Boot prope=
+r
+> sections of i.MX93 flash.bin using CST.
+> The implementation is largely derived from the nxp_imx8mcst etype, as the
+> signing procedures for both platforms are quite similar.
+>
+> Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
+e.dautheribes@bootlin.com>
+>
+> .gitignore                         |   2 +
+>  tools/binman/etype/nxp_imx93cst.py | 143 +++++++++++++++++++++++++++++++=
+++++++
+>  2 files changed, 145 insertions(+)
 
-As we are working on adding support for DSI displays for these that
-are removable (and there are dip switches to select different types
-of displays wired to the same pins) we need to add additional devicetree
-overlays for these EVKs. We don't want to keep adding more defconfigs
-for every permutation of the devicetree overlays. So better to go with
-a single defconfig that has everything enabled and just control what
-probes at runtime via the devicetree overlays.
----
- board/mediatek/MAINTAINERS                  | 4 ----
- configs/mt8189-ufs.config                   | 8 --------
- configs/mt8189.config                       | 4 ++++
- configs/mt8195.config                       | 5 +++++
- configs/mt8371_genio_520_evk_ufs_defconfig  | 4 ----
- configs/mt8391_genio_720_evk_ufs_defconfig  | 4 ----
- configs/mt8395_genio_1200_evk_ufs_defconfig | 8 --------
- 7 files changed, 9 insertions(+), 28 deletions(-)
+> +class Entry_nxp_imx93cst(Entry_mkimage):
+> +    """NXP i.MX93 CST .cfg file generator and cst invoker"""
+> +
+> +    def __init__(self, section, etype, node):
+> +        super().__init__(section, etype, node)
 
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index d99c6d708b2..47f91d6e81c 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -5,12 +5,9 @@ F:	arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
- F:	arch/arm/dts/mt8371-genio-common-u-boot.dtsi
- F:	arch/arm/dts/mt8371-genio-common-ufs.dtso
- F:	arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
--F:	configs/mt8189-ufs.config
- F:	configs/mt8189.config
- F:	configs/mt8371_genio_520_evk_defconfig
--F:	configs/mt8371_genio_520_evk_ufs_defconfig
- F:	configs/mt8391_genio_720_evk_defconfig
--F:	configs/mt8391_genio_720_evk_ufs_defconfig
- 
- MT8365 EVK
- M:	Julien Masson <jmasson@baylibre.com>
-@@ -34,4 +31,3 @@ M:	Julien Stephan <jstephan@baylibre.com>
- S:	Maintained
- F:	configs/mt8195.config
- F:	configs/mt8395_genio_1200_evk_defconfig
--F:	configs/mt8395_genio_1200_evk_ufs_defconfig
-diff --git a/configs/mt8189-ufs.config b/configs/mt8189-ufs.config
-deleted file mode 100644
-index 8a7afb95b1b..00000000000
---- a/configs/mt8189-ufs.config
-+++ /dev/null
-@@ -1,8 +0,0 @@
--#include <configs/mt8189.config>
--
--CONFIG_PHY=y
--CONFIG_PHY_MTK_UFS=y
--CONFIG_SCSI=y
--CONFIG_UFS=y
--CONFIG_UFS_MEDIATEK=y
--CONFIG_CMD_UFS=y
-diff --git a/configs/mt8189.config b/configs/mt8189.config
-index ab56c90a17c..8db5815e9e0 100644
---- a/configs/mt8189.config
-+++ b/configs/mt8189.config
-@@ -16,6 +16,7 @@ CONFIG_CMD_CLK=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
-@@ -42,6 +43,7 @@ CONFIG_DM_PMIC_MTK_PWRAP=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_MT6359=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
-@@ -51,5 +53,7 @@ CONFIG_MTK_SNOR=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_MTK=y
-+CONFIG_UFS=y
-+CONFIG_UFS_MEDIATEK=y
- CONFIG_WDT=y
- CONFIG_WDT_MTK=y
-diff --git a/configs/mt8195.config b/configs/mt8195.config
-index 03f57d46708..909b495e015 100644
---- a/configs/mt8195.config
-+++ b/configs/mt8195.config
-@@ -13,9 +13,11 @@ CONFIG_BOOTSTD_FULL=y
- CONFIG_CMD_CLK=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_UFS=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_CLK=y
- CONFIG_MMC_MTK=y
-+CONFIG_PHY=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT8195=y
-@@ -23,8 +25,11 @@ CONFIG_DM_PMIC=y
- CONFIG_DM_PMIC_MTK_PWRAP=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_MT6359=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
-+CONFIG_UFS=y
-+CONFIG_UFS_MEDIATEK=y
- CONFIG_WDT=y
- CONFIG_WDT_MTK=y
-diff --git a/configs/mt8371_genio_520_evk_ufs_defconfig b/configs/mt8371_genio_520_evk_ufs_defconfig
-deleted file mode 100644
-index a0b365a86a2..00000000000
---- a/configs/mt8371_genio_520_evk_ufs_defconfig
-+++ /dev/null
-@@ -1,4 +0,0 @@
--#include <configs/mt8189-ufs.config>
--
--CONFIG_DEFAULT_DEVICE_TREE="mt8371-genio-520-evk-ufs"
--CONFIG_DEFAULT_FDT_FILE="mt8371-genio-520-evk-ufs"
-diff --git a/configs/mt8391_genio_720_evk_ufs_defconfig b/configs/mt8391_genio_720_evk_ufs_defconfig
-deleted file mode 100644
-index f1de9d5fa1e..00000000000
---- a/configs/mt8391_genio_720_evk_ufs_defconfig
-+++ /dev/null
-@@ -1,4 +0,0 @@
--#include <configs/mt8189-ufs.config>
--
--CONFIG_DEFAULT_DEVICE_TREE="mt8391-genio-720-evk-ufs"
--CONFIG_DEFAULT_FDT_FILE="mt8391-genio-720-evk-ufs"
-diff --git a/configs/mt8395_genio_1200_evk_ufs_defconfig b/configs/mt8395_genio_1200_evk_ufs_defconfig
-deleted file mode 100644
-index 525638f5800..00000000000
---- a/configs/mt8395_genio_1200_evk_ufs_defconfig
-+++ /dev/null
-@@ -1,8 +0,0 @@
--#include <configs/mt8195.config>
--
--CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk-ufs"
--CONFIG_CMD_UFS=y
--CONFIG_PHY=y
--CONFIG_SCSI=y
--CONFIG_UFS=y
--CONFIG_UFS_MEDIATEK=y
+Please expand the class docstring to document the supported properties
+(nxp,srk-table and nxp,srk-crt) and the SRK_TABLE / SRK_KEY
+environment overrides, in the same style as Entry_nxp_imx8mcst.
+Without that, users have no way to discover what to put in the DT
+node. Also, __init__() does nothing beyond calling super().__init__(),
+so drop it.
 
----
-base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
-change-id: 20260814-mtk-genio-720-remove-ufs-defconfig-d3e026765d4b
+> diff --git a/tools/binman/etype/nxp_imx93cst.py b/tools/binman/etype/nxp_=
+imx93cst.py
+> @@ -0,0 +1,143 @@
+> +        if struct.unpack("<B", data[3:4])[0] !=3D CONTAINER_HDR_TAG:
+> +            # Unknown section type, pass input data through.
+> +            return data
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+struct.unpack() for a single byte is overkill - 'if data[3] !=3D
+CONTAINER_HDR_TAG:' is clearer and does the same thing. Also, there is
+no length check on data before this slice or the flags_offset read
+below; a short input silently produces an empty slice and the unpack
+raises. A quick 'if len(data) < flags_offset + 4' guard (returning
+data unchanged) would fail more gracefully.
 
+> diff --git a/tools/binman/etype/nxp_imx93cst.py b/tools/binman/etype/nxp_=
+imx93cst.py
+> @@ -0,0 +1,143 @@
+> +KEY_NAME =3D "sha384_secp384r1_v3_usr_crt"
+> +
+> +CSF_CONFIG_TEMPLATE =3D f"""
+> +[Header]
+> +  Target =3D AHAB
+> +  Version =3D 1.0
+> +
+> +[Install SRK]
+> +  File =3D "SRK_1_2_3_4_table.bin"
+> +  Source =3D "SRK1_{KEY_NAME}.pem"
+> +  Source index =3D 0
+> +  Source set =3D OEM
+> +  Revocations =3D 0x0
+> +
+> +[Authenticate Data]
+> +  File =3D "data.bin"
+> +  Offsets    =3D 0x400        0x490
+> +
+
+The Offsets line embeds a literal tab and hard-coded values that are
+always overwritten before the config is written. Please use plain
+placeholders (e.g. '0x0 0x0') with a single space, so the template
+does not mislead the reader into thinking those numbers matter. Please
+follow the prevailing single-quote convention in binman.
+
+> diff --git a/tools/binman/etype/nxp_imx93cst.py b/tools/binman/etype/nxp_=
+imx93cst.py
+> @@ -0,0 +1,143 @@
+> +    def BuildSectionData(self, required):
+> +        data, input_fname, uniq =3D self.collect_contents_to_file(
+> +            self._entries.values(), "input"
+> +        )
+
+input_fname is unused; assign it to _ to make that explicit.
+
+Regards,
+Simon
