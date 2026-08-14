@@ -1,140 +1,151 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F2BC5CFC1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:48:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCBAC5CFDB
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 14:48:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5FBBD40EF8;
-	Fri, 14 Aug 2026 14:48:16 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ShZxpDNxdKKP; Fri, 14 Aug 2026 14:48:14 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2751840DA3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786718894;
-	bh=MFfIz9O2F3Z86LHBXvxQJaur+HJu9opJ15GVcDMjClU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WhEqFksk9bT5ACgvvyLg2YbAXKbwhow6VSapB1aCW4EQj2/sgzjAXo6T0EjzIK/9a
-	 6mj4NFVOCH4UptYuJbTX9nkHUtJrtD/B7HHojSGahOQdlPqGU8xKXXuZFB7WYGoJGN
-	 J2m9fhY/JqFogqCxI3GlnVjmdDIh29Y2eQxEyGZpNJM+RGVIFAoz6obOc4vUVlqJx2
-	 ++JjlAUrN3o1Zhr/eYHn8vfGURwAsjgYVjAPiw8yezlP4Hw+e+gFSriVQiNbkLezlZ
-	 yzBeR2a2wcqNMMB5wYPXDf6K9TIoSUdf5lwC47TzDSCyojaQHRxgARub157AYccuIY
-	 o97yDyAUNbi0Q==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2751840DA3;
-	Fri, 14 Aug 2026 14:48:14 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DD728139A
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:11 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C37B88146C
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 66843814E2;
+	Fri, 14 Aug 2026 14:48:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 86TvRvU94KiJ for <u-boot@lists.u-boot-project.org>;
+ id knqmzymkhhQc; Fri, 14 Aug 2026 14:48:16 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 92F148145E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786718896;
+	bh=qvzeUT7X5QnMnyliaTtuPXSGoA2QFnbVixbFldfm4uw=;
+	h=To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=y/QiojtR5dt72SO0G598xYGLdhSW5isPBewMGdgEveirRXXUMt7bXhND5Qvx6omq4
+	 AWOvWEnqgQffmSOrLRxfwj+lZpvQqfNWePgaDz+HDwOtI68CpTNLMUEZluFOJBMski
+	 kdksiscnwLRy0Yt1aCX/Z01HtDqWf3HEKfrwpTrOifrGie3FpS7lY6pSqW7827ZLDx
+	 xLVETZrlykR1PCp3DTudMuOaynjP7navXaKnYZ/pO5LDF4Qhkv1HPZYnRxKP0bNIgE
+	 Wo9ErChVi40wYXbJz/E49QPTZVo0xWvc5lJA/0ULwsBTjUnAchOvLDdcz6Q4Uj54BQ
+	 rpf/I+JbVYkFA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 92F148145E;
+	Fri, 14 Aug 2026 14:48:16 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6875633B
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 666AE40AA2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:12 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ARMRtfboiB7P for <u-boot@lists.u-boot-project.org>;
  Fri, 14 Aug 2026 14:48:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B5B7E813A7
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B5B7E813A7
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=IEn9ZjKY
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B5B7E813A7
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:10 +0000 (UTC)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c1fbe461f59so176941066b.2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 07:48:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1786718888; x=1787323688;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=MFfIz9O2F3Z86LHBXvxQJaur+HJu9opJ15GVcDMjClU=;
- b=IEn9ZjKYn8xEJ9tJRAqqQcxjA9OwzgwXv+nPu1mnRSFjugb+qU49DVTqOMQqiKr4Aq
- myep46SrJmC0tO06LbQEX277U/g6uh8ooMihrvE+AKtRQmDO+SbfLHDJgYKDCVvrh7s6
- n9Nndl5qESsuET4kDobEzQAJ9M0RzZF6113iTqbfWr99eV8j/NSMD3k8B/zCfjQ0P8lz
- +UHsFDX6d1S3pp0xmNi8/6j2CcM8A0CAyDaVvSsrxFuPmmIV0L0ayO8cNjt8m/zomKu0
- BWsYI2zi7eFOGw1iKcXfGX/H8cVqOI890iElzaK73Qod9TxB+6r95cNSHwPxbxKqzi2N
- jkFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786718888; x=1787323688;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=MFfIz9O2F3Z86LHBXvxQJaur+HJu9opJ15GVcDMjClU=;
- b=gMBXcsMsScmPgOJ5JEbyO8NBdYxdUlmfpY6PVR1DJhgNeTXAITvRk3ZRJTC485qmoC
- w5Vd4Am8F7TVAPgvOv1MrHNxEKAL45XDikHQJfGlI+cVdiMoYlOIsl6zkJaPxWAIO/TR
- zZMxGkWY30bQdu1nvfa1ulmqg0Y5pvcJ01tyrZENn4ns8TxPnBCSVaeEYdJtPA4BYYzc
- wDxPAp0DKluzLcNAlNEH8e0t/0zoUwtoSArLcpk7b20LQH6EJ2zPMtQk4ziNXGddoGUC
- 1urzKWJzowvWsq4GrJ00pFY2nEH4MJSaEFzmVpe+UurQrjzNP1judv4/ohIW3Ghbn/fG
- 5GFg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr6ySWEIu3nveMnMho3bse60Tp44f3XwU/EnaoWUQAfO8SK6HPal0DHdTyvPla+wCqtW0+sW/c=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yws0xVYE3+Ueuu2vgmVDjbQpNGu+HmQqfRHj73rj8CJCi2+zXDx
- DYjGWwsYzRnM3xpW6/IotLkB0plZWgjkV+6TgtN7syIROxmUTldlp+ggXpBIGDJAqQ4=
-X-Gm-Gg: AR+sD13wUm4MYvBiqnRtef5bUsQ5yKukO6FqA6NGu6WbrqPp4PkaTg9GE3R7AZTkdxC
- 9WAXxSFlBWhZaB9hJvwZbLqIwHl8scd3Fzia5W3wfx2L7X6lUC4m7mMtGYViA5XiB4pBAn85MOF
- EvNasmnsEsmkoDfagNBfZUL6+DMr8/cW1Ws7TarHKZDYxwzpkKQXJHqzgSFa3wW2lzI1edRNXbl
- 2gqk65mH6ufxzhA21Fh/nZV4SX8UkOvJgjE+9Fy1HkhpKUXfOPXfq8Gb+Hivc4tt0cZWF5IeC5T
- HnKp35MIXoUtdUcrtY2OoD3QTqG8Sf6sDLK2NuqXIwKKQxiiPsaPSYk9SlR9LzBof0oQPD0Zldp
- lzoYBTdB94ysy5FQYe0R+qMJJmfjErff4xEkrw4/hnMzfffRVTAsZAGkRvAwtB5d9G6j1eI/9Kz
- YyaX2qGl+zNudOSs4eSvK/TY6IXiTBgwr9PpOZei/gSlqHFqwUsDD1Tr4htFH1G2MbhzjjD7Icq
- HP/DGhH7PKr/+VTEjvI4WvIIngqU1tqz5nVaETJXj4Nqe97FaxwBra/BLY+KB/8l5ATV0k=
-X-Received: by 2002:a17:907:c78e:b0:c20:f6d9:d8c7 with SMTP id
- a640c23a62f3a-c212a256de5mr278522966b.24.1786718888536; 
- Fri, 14 Aug 2026 07:48:08 -0700 (PDT)
-Received: from macbook.tail959722.ts.net (static-226232.rol.raiffeisen.net.
- [195.254.226.232]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c212378d9fcsm114992666b.34.2026.08.14.07.48.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 07:48:08 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Fri, 14 Aug 2026 16:47:52 +0200
-Subject: [PATCH v4 2/6] configs: mt8188: enable eMMC FIT boot from SPL
+ client-ip=2a01:111:f403:c100::f;
+ helo=bl2pr02cu003.outbound.protection.outlook.com;
+ envelope-from=boon.khai.ng@altera.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 45E7F400A4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 45E7F400A4
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 45E7F400A4
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:48:11 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EGUQUOEo81q7XkceQUx/lz+DSI1PzyL2oKlxImPQqB1zHt6kIGlpGH0Z/Y47iXSIY0T9S/jcniSLbyWg9euGdIfHCZKUqoV/u+JnPGdz8UOvVsAhN6LMw2mPMLONj4R0IaI25O9sg0bmy6xCWs2jG94TEj5olOULmfs8n0N5EJMJ8P+qpqQW/7l9PdP/4PV50stZG4FL+aH8YtAhAZTf0wY01UFLuHWgbc+eol+BvdDbwtqqIVB9ZOCIo7s/0m+esA4EaASa0xe6q85c8N949EwocpssAUD8lBM8BAKT6jK1GaSolX+efyPLInAV1eghJvcZUZ0M56ynfYFvcrGDjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qvzeUT7X5QnMnyliaTtuPXSGoA2QFnbVixbFldfm4uw=;
+ b=dA4qUqhUePWaVJ5FVsPSAd7+jP++zlU0tyBmpjJMeiGSusLV/SfaiAnrtpPcz8dXICjwQd8BCPN+JlcIlKSzMFZOixQcTt8ra4fErnsEdf4CcWSYUhe4D/Ni2wTENl/+W5Jmk2Yd5o+ymeAVQbbfQT88iWrs0/yx8p5qsJ9jbPvjNalT7K0ipDUNVk3DplQnhUSUm8g50FFNfdGCb3KdPoIM3sTwImbwX5Tzi07hmdQsPkKIxaT9An19LL4FNGDjc7TKCu+W7nKt0ZT4/hPZvrsnRAsFt0wLoC//yjnloI1B5i3gXmVZ3t6lbSjwdf5nnh7YcmpogxGKNUzkDg/OMQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by CO1PR03MB7913.namprd03.prod.outlook.com (2603:10b6:303:274::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.16; Fri, 14 Aug
+ 2026 14:48:04 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%6]) with mapi id 15.21.0315.014; Fri, 14 Aug 2026
+ 14:48:04 +0000
+To: U-boot Openlist <u-boot@lists.denx.de>
+Cc: Boon Khai Ng <boon.khai.ng@altera.com>, Brian Sune <briansune@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>,
+ Marek Vasut <marek.vasut+socfpga@mailbox.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Subject: [PATCH v1 1/2] drivers: fpga: Adding Freeze Bridge for PR console
+ support
+Date: Fri, 14 Aug 2026 22:47:46 +0800
+Message-ID: <20260814144747.12988-1-boon.khai.ng@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0287.namprd03.prod.outlook.com
+ (2603:10b6:a03:39e::22) To SA3PR03MB7187.namprd03.prod.outlook.com
+ (2603:10b6:806:2f6::11)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-ccaione-upstream-mt8390-spl-v4-2-f4f92978a79e@baylibre.com>
-References: <20260814-ccaione-upstream-mt8390-spl-v4-0-f4f92978a79e@baylibre.com>
-In-Reply-To: <20260814-ccaione-upstream-mt8390-spl-v4-0-f4f92978a79e@baylibre.com>
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Julien Masson <jmasson@baylibre.com>, Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Carlo Caione <ccaione@baylibre.com>, 
- Vitor Sato Eschholz <vsatoes@baylibre.com>, 
- Johan Jonker <jbx6244@gmail.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Alexey Charkov <alchark@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
- Suhrid Subramaniam <Suhrid.Subramaniam@mediatek.com>, 
- Arnaud Ferraris <arnaud.ferraris@collabora.com>, 
- =?utf-8?q?Pablo_Sun_=28=E5=AD=AB=E6=AF=93=E7=BF=94=29?=
- <pablo.sun@mediatek.com>
-X-Mailer: b4 0.16.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|CO1PR03MB7913:EE_
+X-MS-Office365-Filtering-Correlation-Id: d131aa08-bfa6-449d-8756-08defa130b99
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|23010399003|376014|366016|10067099003|56012099006|6133799003|11063799006|55112099003|18002099003;
+X-Microsoft-Antispam-Message-Info: RJjdFmRUczDP/jDWd48Jx7K4RZTL0Zjl3QWANubEoyikAEnis7O2qcH0+sJr0ECp87hHd3UHPjvAEML6SDdZDC+E8PWXd7P/u6V33C1l/rAsjkUZ2jTll/q9hDEGPCnBqTHXscy+Axg4MkVk8X+ShJ/AUvjoEMsSqdOUM1bGpTZi9SVcH1SZkmvwXH2a++k8MykuZEAwrIjzrbNXzGkSuG+klMoL0+uqwiUMcNCzkCfLFY+yCXAa8DzAO2h/ZLMAaqHrN7NZmzkYptYWgqUpAQ/bluY+hC34yDPZ7Sk5oBlB+9Cyc9c2He7aF38TRmRCNOmL7VlSC35sRS/IhE5DY1ckOaFkrDcCYqpIS06Wi96CrVGGiY8LEXwuW1hSzcnSWQCui5yVqh38okC7LR/MW4mUcZURfE2nrrlD/TJM6j+SSgv0MaxLWzOg4LiQ0Zo5gExtbhpaY8BFW+i63X1ItWleh3UtYhJCjZ5/dpp6T9+91ktl0vxZsK5Jmb0MVIHepHk3rU04AVVR/qaammXQMF/lx1zUE8J4ECHFERVaE0pwTAF/6rqyIyR9O7W/KLscvRtFouh69zUk2xu4KWq2nlwh0NXuVINdHql7lzH5Iv0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(10067099003)(56012099006)(6133799003)(11063799006)(55112099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?aLxoa5uBAtJwGN5JVQnLaqmx5/t0aA1361MCdQtvCK0yFMYGgOUf9AVtAfCD?=
+ =?us-ascii?Q?p/rymPVEbgf1LzHNLD2PyYZb8oYFinFyFKxUnw48ZduYZT6KxUsK+OjnUJzf?=
+ =?us-ascii?Q?IsIv1c28JzmGlS1WpCSRxhYhfGLMJ3o8bMxzkHlDxeFvMeneR7TO4mjiEHqO?=
+ =?us-ascii?Q?GwVCMbkHuTd6iTLyVrfnMsxXP/HdD9cXwaO4A2kVb88L5n55cdTkSiPMAvwK?=
+ =?us-ascii?Q?pxPVhh8HQYHyZB39NIE5zbYqLoRVwWtV+1TZxJHIUPplO12JwT7eTBWZZAPt?=
+ =?us-ascii?Q?bNLA8t7pCY/Y/ttP2bwULftrg8UdpQjH/y97t4+0x8AkWJeZ9eEOxbDW+RL6?=
+ =?us-ascii?Q?Sy8fTpUq9h2AtUsyW27S5lyELRQRLWyiS+Ym2278mUrvf1TuOgkeLBC41N7Z?=
+ =?us-ascii?Q?KJWzfCvb3dkVZsmqCpL8kENwTuid++0zFWh6c8JDFviLpVa/i40t3brcV01i?=
+ =?us-ascii?Q?elz5jEah4FagDCkSIbxaE21pPKuq0JKVyvUL2O3LC3s2ZqqcyY6TO1wd5oMB?=
+ =?us-ascii?Q?fbFJ9cbrVGEoi57PWaATR+/AqRAAoSgjZFVi2fd8qZhNZZ6oD24zePcgfKLo?=
+ =?us-ascii?Q?O8eR+jEcAfRDM5NPnw1ga79/uaJT/RS9//+YFOKi9LqDAvzSq/kOFCSUNFN0?=
+ =?us-ascii?Q?K33GeloBRIf7cBqsWTvnsPyjl8S0+BzGqBe8ovNJs6pb86LlLb2D85iOnxfw?=
+ =?us-ascii?Q?+/nNqsnxn2oXL1ylm8lThSfBc5yvP+jF1IRMtrQvZhAtlCU9qLondvRuLSpp?=
+ =?us-ascii?Q?619WxPJ1U05sNFRoI13yvkhP8gECHfkjV3BfkdyNjk3Lzn4OJTiRB8guY27a?=
+ =?us-ascii?Q?P4dhVNqDfZC4BBN+bCydENM3Dzb3rHEpLNo+OfsFTFXN2P9WBxBX4rF4Bi/P?=
+ =?us-ascii?Q?dZ/PwJKK0sUyeza5VszNKtyIVSnlWcplKQewKBEXczuB1LcEatKNIhaAI8CF?=
+ =?us-ascii?Q?ak8mLaVjs6qJWJBl1S2dbhjynmK7J0OiyNmz9ILYjhRQOxDLPD7BDp25y12B?=
+ =?us-ascii?Q?+7S11Xi8uqCGMHGpoivWhwp0V8ORaVYmLClAN/RtZ+83Nl0Z86LQsWuTpKKr?=
+ =?us-ascii?Q?44i76/DOpkOXB30K3hPd+0lbL9Ue4uFmueYB/D97drVAia8MTVCYvcgxXlVZ?=
+ =?us-ascii?Q?x/8W+2eIOAZcYDkSmqKC29uCqNeOmjfnT24oFV6BPJofZzioqfWBKYAeWgcd?=
+ =?us-ascii?Q?vbO+pB+AtF2K0x3Rs819HVeDuaIEKPIqNaRcBoxMUqCgM/LexpxsNR4XaVZg?=
+ =?us-ascii?Q?REgE8vpy2Uj7ixSxHXnbcChRzMnuPk0xEz2MNp+atf5Xrnf896zTgg8ISOp1?=
+ =?us-ascii?Q?9guMZD/NFL+i2oxxM0h3GDDrFW0yLtuqMuRCdYgtOm3xiKZ28rYGBoCiap3G?=
+ =?us-ascii?Q?tRBWvfsR5zaKOI8Z1Xh3jPdD82rii5PdMRvvENsSz3bZ0LCy+36i9rXUbw9e?=
+ =?us-ascii?Q?JmF/Y+qKRoIztCyxh5i+WqI+OSnO4MznSNSr37p+PlO1rnUVnYrHDuiGzvFL?=
+ =?us-ascii?Q?jWklgi9fIm0I8Y5p97r+Hy9Z/3EhB3lqpYH36WNq635v2xX63QtCJyzx/Qv2?=
+ =?us-ascii?Q?ybz80lHd7GtLxEfDI7g3ieCtHtl7+KePYowCVnMs1f0ZvtS8QYyCdHRBqMMu?=
+ =?us-ascii?Q?TgbMJ7NAAkLWIGAFh/eKrtPULJsb5fvw4IN8FYiR55I0uPNEHDtKzWqEycdy?=
+ =?us-ascii?Q?EVY7vO2JdjCN6zayertoPFqNlSBQnpW7UZz+HbpvXEbyp6bXHeomoN+1+rZy?=
+ =?us-ascii?Q?hB2nSeLP2g=3D=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d131aa08-bfa6-449d-8756-08defa130b99
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 14:48:04.3830 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sFTksKseVPdvVs5XlKtm7oQy2h4r7BpKYPMm3fbtqhi4Q968uboj48vHaLnsFtw0fbeCz6+q+fmNTQLdOmjxEw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB7913
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,66 +157,256 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Boon Khai Ng via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Boon Khai Ng <boon.khai.ng@altera.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Enable the Genio 510 and Genio 700 SPL path entered by the external DDR
-loader at 0x40000000. Bind the raw SPL to the loader's 0xaf000-byte copy
-window, place BSS separately in DRAM, and retain the non-overlapping SPL
-malloc region.
+Adding Partial Reconfiguration (pr) command at U-Boot console. The pr
+command will control the Freeze Controller which will freeze
+and unfreeze the Partial Reconfiguration region. The pr command also
+support multiple Partial Reconfiguration region by specifying the
+region ID.
 
-Use generic SPL MMC, GPT, FIT, and Arm Trusted Firmware support to load
-the firmware FIT from eMMC partition 1. Keep U-Boot proper at the shared
-MT8188 CONFIG_TEXT_BASE of 0x4c000000.
+Here are the example of expected steps for partial reconfiguration
+$ bridge enable
+$ fatload mmc 0:1 100 pr_bitstream.rbf
+$ pr start 0
+$ fpga load 0 100 $filesize
+$ pr end 0
 
-The MediaTek BL31 used on these boards stalls when passed the runtime
-devicetree as its platform parameter. Enable SPL_ATF_NO_PLATFORM_PARAM
-so SPL can still use the tree to locate OP-TEE and U-Boot while passing
-NULL as the separate BL31 platform parameter.
-
-Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
 ---
- configs/mt8188.config | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ drivers/fpga/Kconfig     |   9 ++
+ drivers/fpga/Makefile    |   1 +
+ drivers/fpga/altera_pr.c | 188 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 198 insertions(+)
+ create mode 100644 drivers/fpga/altera_pr.c
 
-diff --git a/configs/mt8188.config b/configs/mt8188.config
-index 29e2b3db878..a84e617e30f 100644
---- a/configs/mt8188.config
-+++ b/configs/mt8188.config
-@@ -28,3 +28,30 @@ CONFIG_MTK_SERIAL=y
- CONFIG_WDT=y
- CONFIG_WDT_MTK=y
- # CONFIG_RANDOM_UUID is not set
-+CONFIG_SPL=y
-+CONFIG_SPL_TEXT_BASE=0x40000000
-+CONFIG_SPL_MAX_SIZE=0xaf000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x400bb800
-+CONFIG_SPL_BSS_LIMIT=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x100000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x5c000000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x9000000
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_SERIAL=y
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_PINCONF=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_LIBDISK_SUPPORT=y
-+CONFIG_SPL_EFI_PARTITION=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=1
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-
+diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
+index 1658c73bca4..82f887128f1 100644
+--- a/drivers/fpga/Kconfig
++++ b/drivers/fpga/Kconfig
+@@ -55,6 +55,15 @@ config FPGA_INTEL_SDM_MAILBOX
+ 	  Enable FPGA driver for writing full bitstream into Intel FPGA
+ 	  devices through SDM (Secure Device Manager) Mailbox.
+ 
++config FPGA_ALTERA_PR
++	bool "Enable Altera FPGA Partial Reconfiguration driver"
++	depends on FPGA_ALTERA
++	help
++	  Say Y here to enable the Altera FPGA Partial Reconfiguration driver
++
++	  This provides basic functionality for partial reconfiguration which
++	  include the freeze controller support.
++
+ config FPGA_XILINX
+ 	bool "Enable Xilinx FPGA drivers"
+ 	select FPGA
+diff --git a/drivers/fpga/Makefile b/drivers/fpga/Makefile
+index ccfed94717e..1e1011e9da8 100644
+--- a/drivers/fpga/Makefile
++++ b/drivers/fpga/Makefile
+@@ -23,4 +23,5 @@ obj-$(CONFIG_FPGA_STRATIX_V) += stratixv.o
+ obj-$(CONFIG_FPGA_SOCFPGA) += socfpga.o
+ obj-$(CONFIG_ARCH_SOCFPGA_GEN5) += socfpga_gen5.o
+ obj-$(CONFIG_ARCH_SOCFPGA_ARRIA10) += socfpga_arria10.o
++obj-$(CONFIG_FPGA_ALTERA_PR) += altera_pr.o
+ endif
+diff --git a/drivers/fpga/altera_pr.c b/drivers/fpga/altera_pr.c
+new file mode 100644
+index 00000000000..7ac39c79c45
+--- /dev/null
++++ b/drivers/fpga/altera_pr.c
+@@ -0,0 +1,188 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2026 Altera Corporation <www.altera.com>
++ */
++
++#include <command.h>
++#include <errno.h>
++#include <wait_bit.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <linux/bitops.h>
++#include <linux/libfdt.h>
++#include <fdtdec.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define FREEZE_CSR_STATUS_OFFSET		0
++#define FREEZE_CSR_CTRL_OFFSET			4
++#define FREEZE_CSR_ILLEGAL_REQ_OFFSET		8
++#define FREEZE_CSR_REG_VERSION			12
++
++#define FREEZE_CSR_STATUS_FREEZE_REQ_DONE	BIT(0)
++#define FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE	BIT(1)
++
++#define FREEZE_CSR_CTRL_FREEZE_REQ		BIT(0)
++#define FREEZE_CSR_CTRL_RESET_REQ		BIT(1)
++#define FREEZE_CSR_CTRL_UNFREEZE_REQ		BIT(2)
++
++#define FREEZE_TIMEOUT				20000
++
++static int altera_get_freeze_br_addr(fdt_addr_t *addr, unsigned int region)
++{
++	int offset;
++	char freeze_br[12];
++	struct fdt_resource r;
++	int ret;
++
++	snprintf(freeze_br, sizeof(freeze_br), "freeze_br%d", region);
++	const char *alias = fdt_get_alias(gd->fdt_blob, freeze_br);
++
++	if (!alias) {
++		printf("alias %s not found in dts\n", freeze_br);
++		return -ENODEV;
++	}
++
++	offset = fdt_path_offset(gd->fdt_blob, alias);
++	if (offset < 0) {
++		printf("%s not found in dts\n", alias);
++		return -ENODEV;
++	}
++
++	ret = fdt_get_resource(gd->fdt_blob, offset, "reg", 0, &r);
++	if (ret) {
++		printf("%s has no 'reg' property!\n", freeze_br);
++		return ret;
++	}
++
++	*addr = r.start;
++
++	return ret;
++}
++
++static int altera_freeze_br_req_ack(fdt_addr_t addr, u32 req_ack)
++{
++	u32 status, illegal, ctrl;
++	int ret = -ETIMEDOUT;
++	unsigned long start = get_timer(0);
++
++	while (1) {
++		illegal = readl(addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
++		if (illegal) {
++			printf("illegal request 0x%08x detected in freeze bridge\n", illegal);
++
++			writel(illegal, addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
++
++			illegal = readl(addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
++			if (illegal)
++				printf("illegal request 0x%08x detected in freeze bridge are not cleared\n",
++				       illegal);
++
++			ret = -EINVAL;
++			break;
++		}
++
++		status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
++		status &= req_ack;
++		if (status) {
++			ctrl = readl(addr + FREEZE_CSR_CTRL_OFFSET);
++			printf("%s request %x acknowledged %x %x\n",
++			       __func__, req_ack, status, ctrl);
++
++			ret = 0;
++			break;
++		}
++
++		if (get_timer(start) > FREEZE_TIMEOUT)
++			break;
++
++		udelay(1);
++		schedule();
++	}
++
++	return ret;
++}
++
++static int altera_freeze_br_do_freeze(unsigned int region)
++{
++	u32 status;
++	int ret;
++	fdt_addr_t addr;
++
++	ret = altera_get_freeze_br_addr(&addr, region);
++	if (ret)
++		return ret;
++
++	status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
++
++	if (status & FREEZE_CSR_STATUS_FREEZE_REQ_DONE)
++		return 0;
++	else if (!(status & FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE))
++		return -EINVAL;
++
++	writel(FREEZE_CSR_CTRL_FREEZE_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
++
++	ret = altera_freeze_br_req_ack(addr, FREEZE_CSR_STATUS_FREEZE_REQ_DONE);
++	if (ret)
++		writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
++	else
++		writel(FREEZE_CSR_CTRL_RESET_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
++
++	return ret;
++}
++
++static int altera_freeze_br_do_unfreeze(unsigned int region)
++{
++	u32 status;
++	int ret;
++	fdt_addr_t addr;
++
++	ret = altera_get_freeze_br_addr(&addr, region);
++	if (ret)
++		return ret;
++
++	writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
++
++	status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
++
++	if (status & FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE)
++		return 0;
++	else if (!(status & FREEZE_CSR_STATUS_FREEZE_REQ_DONE))
++		return -EINVAL;
++
++	writel(FREEZE_CSR_CTRL_UNFREEZE_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
++
++	ret = altera_freeze_br_req_ack(addr, FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE);
++
++	writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
++
++	return ret;
++}
++
++static int do_pr(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
++{
++	const char *cmd;
++	char *region;
++	unsigned int region_num = 0;
++
++	if (argc != 2 && argc != 3)
++		return CMD_RET_USAGE;
++
++	cmd = argv[1];
++	if (argc == 3)
++		region_num = simple_strtoul(argv[2], &region, 0);
++
++	if (strcmp(cmd, "start") == 0)
++		return altera_freeze_br_do_freeze(region_num);
++	else if (strcmp(cmd, "end") == 0)
++		return altera_freeze_br_do_unfreeze(region_num);
++
++	return CMD_RET_USAGE;
++}
++
++U_BOOT_CMD(pr, 3, 1, do_pr,
++	   "SoCFPGA partial reconfiguration control",
++	   "start [region] - Start the partial reconfiguration by freeze the PR region\n"
++	   "end [region] - End the partial reconfiguration by unfreeze the PR region\n"
++	   ""
++);
 -- 
-2.55.0
+2.43.7
 
