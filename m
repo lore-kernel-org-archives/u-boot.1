@@ -1,134 +1,126 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71914C5CFC1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 22:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D213BC5B572
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 22:55:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 37DC460A6F;
-	Fri, 14 Aug 2026 22:55:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A0338812E3;
+	Fri, 14 Aug 2026 22:55:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WXNyH8i-8ZZh; Fri, 14 Aug 2026 22:55:30 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m9cr7jnAzh7N; Fri, 14 Aug 2026 22:55:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6BA65608B4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 070D9812B2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786748130;
-	bh=S0KDOyksWmVkxS+x8bUx8taBTCHiVUc5PiXP21Qkb44=;
+	d=lists.u-boot-project.org ; s=default; t=1786748149;
+	bh=G90ieMTuXtbCC3atXl1yk09D1vr9OYtAhSIxgyn/83o=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=d1llXl3S+OCI+ziy96qehTE7ZOq8c42bz+xo56n4UVmwwZLHNBuswn6x/ulb1Mx9g
-	 mzJI6QCArnzo0hOclmmFLgOxzPBTHMD995FfxSYN7pwMJ/lHelSLUs4lmPVna7kCi8
-	 T/an/KOhm8ce5S6dlh99Ta1h4SocQbf2BZpr0JJ7m5/el7faSpCOOzst6ro5V6W6a/
-	 Mz7XNmL1ep4HJlhiSj3zXsRqnn5PskJaJGfI+pvtr96xzwvJR6v2lbCn4vgIJpAQ1C
-	 CjUcHfbjEQ2esE9ksZMOzBVilUu+e36llXzySsONOjo5u+HQropiby9/v70q2F76A4
-	 czK9ZQnrWNKjg==
+	b=d3VWLCv5AFydmNhGNUkJGXvZrHorT3G3mPcXCAzZZBHIQyiZRLp5qQ+j1TLs9YfEX
+	 C617ubJpjenTvOFMdLt0ToL/tK35RdELz1fxqyUVlC3bhXnx+Aj4jvMYhqv3Hs+d/5
+	 CuIv+55nz0cUNhZ/Kccwfd83wu86wYr0vlj8rKlkc7ymtZS4zF2Lgm+AiAtoot9VkZ
+	 4xcTUDih4iG6l/juZqcvok8OX3E8eLp6SqRgZxHo+37ZwJiRbhZ1hFuDVZxb/Tq8tp
+	 lwfRDn8jhcJGWDQb5oKP2qcpNy4ILIaukZ6ODLzD5PVlBstwelmcdmXQxMI/fMgQE0
+	 y0vtYta5o8TIg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6BA65608B4;
-	Fri, 14 Aug 2026 22:55:30 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 93D35194
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:55:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 070D9812B2;
+	Fri, 14 Aug 2026 22:55:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0A6882BB
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:55:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 794D340B19
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:55:28 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0808C40C9D
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:55:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zblYPYJiuJM4 for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 22:55:27 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id J0HvhL3xElvo for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 22:55:47 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::631; helo=mail-ej1-x631.google.com;
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 9B73A40064
-Authentication-Results: smtp2.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 0A73E40C78
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9B73A40064
-Authentication-Results: smtp2.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0A73E40C78
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=irY5N6MB
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9B73A40064
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:55:27 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-c169ae1cb26so462512366b.1
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 15:55:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786748125; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=IBl1WfGI
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0A73E40C78
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:55:46 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c15cf78d1a2so171169766b.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 15:55:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786748145; cv=none;
  d=google.com; s=arc-20260327;
- b=paoZa9SfroKMz2lq6fKdNB60BM5XDwpjkoaSzcu4kO7gswAM0wq7PZ6hxGCYnan4Us
- JeK5JDrimwYSFF0oswV+ilItwDskWpaXHRJ+rAyIybTX70s3cWWvnzlFFax5WKVEKVoe
- IFg52r7B82KrgvyOwoSYDHJ9t0VIyO6o6hSyhr4aDeu3p2y2vuWEXIWsm8BU1X9cgBo4
- WAJik3zmYaxiRpKx5kG5He7d3HM1vEutIbC5e4sok9GGyqmyrs7k9OZiYO0A7Dgxiafl
- 8tAOXjlqT/YFeaSa5NdzP/Fh/nA8R08hs+eThiDp3pY+fzu2yIiC8rcVdOEWOJmecKDq
- 4vUw==
+ b=aal7/sAvp+QFg4GbKs3I1fwaWNbkjE5GgAtUDS0q5LZz7oRoKTXUEThkT1CTyM8GZa
+ e7FRHJ4wVnWPAYBzokeQw66IhPfwStkLWubsQ/yewUspYyUkxDCVlSV0gkqWPCZE2Irm
+ IwrAHEaRWQ1gwEYEJ+6U5wPzYj2VufdPc5SLvGVkD5TEqxJorQg8/QLhQDMTC+JEonYV
+ cZA+MP8FegvumJ90Igul501nHjRmqgbegsrqNqgSvUwDSRTz7hHqAw7sfwXmcnBrORUY
+ bFS1snUfiy9dzCmBl8EDnuV9bIs/S+TJYfchBV+HatWKeo7jFNONZ3xw0fwmBhVkqROa
+ OBGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=S0KDOyksWmVkxS+x8bUx8taBTCHiVUc5PiXP21Qkb44=;
- fh=CWoM8UuBv/dglXElNYTHZV4SkYgGFbIL0j0tzpI/BR0=;
- b=oE0UDHExt5TFidnPvQlAmXnGJaz7iiwwzeWyRItSMC9E/cXoOyHDm3KdBrdPXNRy+y
- P79XavLGOpUB+LYh3bXHczzo8QP+fm4XaMoUYzKvC6Ot1lCHDySSBE9YXEqoI8aXIBsA
- hH92qrllIcLj5k+bYsQiGKE8iChhGKJz3OZcdGWoG3V3TiqPQIfKjufI63ENdoxIJJpo
- 7AKxXJ34su0KXk3TdRYDfRVMzCw1ijIuczGVXPEAHQftDUVFeOfMeGaBqjfjka5eUuuN
- tymDTxkmJS0+XJno5ZsLkPJraV5qBzu0Jr0yAb+rHXlyfaCmjAbkk/cfZ00EdxJ+lQ1R
- Z0QQ==; darn=lists.u-boot-project.org
+ bh=G90ieMTuXtbCC3atXl1yk09D1vr9OYtAhSIxgyn/83o=;
+ fh=ykfKS/haxsKhjCOFJ8eab7SykjDB2XUE4xn7bagk86c=;
+ b=ZoC9UuCOxmResxlPpzzn1xdpNAiFnZI4ca4qGYPfmuroDr6gsSnK5WvxeRncnCYYC9
+ kwVLCpjaZp5XRzlt/BfAmYLOYoPqEyBgifEeVfFdQ0nnhXWc+JOD4NzFS1cUE3+D5hDt
+ yIZGN2bA6Nl0jPum3Exv/AJOc8f9sxZz+wjHcV1Y3/fkOu5zwE0mo6/301q5NwJsbDGJ
+ lo8x+dh2ded81QU7UV4u89WeFnT+AcA++7KhgqqtmJxatZX7ejZDy0LQjR1EqS1tBmkF
+ YRDCUrZaTpyFetlnZRGrCaBUNKUx9K6m++/DF9Zw2UBYPIzdWABJg3ETZu3bHNGciXq4
+ j94w==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786748125; x=1787352925;
+ d=chromium.org; s=google; t=1786748145; x=1787352945;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=S0KDOyksWmVkxS+x8bUx8taBTCHiVUc5PiXP21Qkb44=;
- b=irY5N6MBdQboDyRuHR/zW4bLy93XXtk9+d0zreOI9uZCU08W2YJ2yPTIkAlOnhorIP
- hvzEt2ABQZp8huCjPXZDC4RPXPGbIPXOrlGorhz6KbwrH6e7Rayke0DdUMyXvUTrmkNm
- XcmIPLoJuwH0UPKTfhqUWcD7aAR/deq5E8fgE=
+ :content-type; bh=G90ieMTuXtbCC3atXl1yk09D1vr9OYtAhSIxgyn/83o=;
+ b=IBl1WfGIADeLP5pTOdWKWWlM/WGutp1PB9n3vVbLVwq09VLSgVL0mKm1Jj7MbYgxUn
+ hDb3FNCGPGDqkVFiEIzfAyRChz++KThwWrK8/WCqDKtJXDPmj34fz4hgFJu/C+i3HNGZ
+ Ht5cNBzOXyMt6xgvWghmBgzNSn1ZrQGKp1ukw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786748125; x=1787352925;
+ d=1e100.net; s=20251104; t=1786748145; x=1787352945;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=S0KDOyksWmVkxS+x8bUx8taBTCHiVUc5PiXP21Qkb44=;
- b=NghoAnenXmDC2rLXqbjQpICiDw5Z24pT1wUNv1A+uzBaAiY6knpeazzNo8alcZIE8h
- 6UqiKCK1JflWxO3qgcKPHAz3D0hcIgfsESOXU/IIqtaM/aFk4TOG9FcOY0Lgt6eexsvn
- L5HiNid6983iFGlFFgXBvytu82mrCox5Cur8meP88L6OufVwdkfxALD9Evn3TpmGAwB+
- Fe1vvTo7q3IZUkUwjXsVMNm/+g1Jt3EbYq5fpwK/BZd22pT6fmBdIrRf5NWioxENEmV5
- 2Jk6NiQSc50syIoSfMiilhU3CY5/vs1IhcT519jdlnOwzytp075xU7bgO/8HZrR8WJWJ
- so0Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rox/ltcOxLgoV3SoRYAKj55mP8bFEDzFW6qPDBsXOwPD9+FYAjsr8kkPm0R44BO4uFe2oxeumI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyWO6NqhwSdWwYm+6ca2kuSC3RiYYdo1OC1p0JDYzQ8A8YhzodX
- EU0MnseCi9sWVQ+YsSmXpe22aex9Ci5UASuLXbio/lPYLAUqWp8Ov9a0f0xGGjh8XQ7WSj/9E1w
- atyQ8I2B0XxNU/X9ahuXRoX9PYSdIkpW69bdJyFwr
-X-Gm-Gg: AR+sD13ckaRLuEMMjzvI8qs2HfbTLyHb2udKlxt4dh96P5t8ULz22Of59tXIA6VfoAU
- XTdy0cwZfPAvTmxaWwoZTB17CNyeEsvqjurj4CFqlUd974UYK0yMCbOjTmP18y8PVB2bbwr5uTt
- 1yjFueHsLGRr66mSkpcv20f2gut1x/sv+8m9OmGVHPFG6Judq1fFkEx4G+KK5K+i5Us0dmEWy+v
- RjwPMOeDdkWX0s1GN1aIfvIgOioxdMgv3igbap2olYunvJJGoJ+068uDi8yJiWkDBPigRhGpfSZ
- x6xrseoqPjZn0YUvP8/80ZaMu/9aU6lIy5oDsaoNWTI=
-X-Received: by 2002:a17:906:f58f:b0:c20:f9d5:8d71 with SMTP id
- a640c23a62f3a-c2109f45faamr749823566b.5.1786748125354; Fri, 14 Aug 2026
- 15:55:25 -0700 (PDT)
+ bh=G90ieMTuXtbCC3atXl1yk09D1vr9OYtAhSIxgyn/83o=;
+ b=Uxg/LPzoDLN6cpn3iup98z7Z4+HRSGqJ0LtteyWODX0AZH2578p31tH8GW9KjUpita
+ wXuxwxiM+qsFH8vEs69vjEgcWGp/FpyNsexocIaK6qvSBaGRFSJD9zw2h0WrLbXZwIqf
+ t5G5G6ZdqvEfR14TQkJ1NX1RJtnfRnF5LUMohQe4iPwg0VaGFavQOLq0veAo7y9IWLiz
+ Nwjg2yFrcFQOJFDcgzslzMBf/nUR387ju/t2CFij9hiiCM5UOBh0t/A2g3m7wTftgxlq
+ CmN4LMrDvhMNObrbOa7RUunqKbZXyTG958S9It2t4oB/WFHs7oLLlcySNpezoMaqzciD
+ t3RQ==
+X-Gm-Message-State: AOJu0Yze8A109n58guRirNKTj62Zegjbt1ksxJMyU0Ml4U0+VYdyhKD2
+ F+M8F9sm13FB5X07Ty1bmIo9vvqtpF17J82YY4JMOmom1ZxSrimYQ3OJtdcBfgySJILenudPzni
+ KPzrBjOPIFV8bniBpZjIAQQwAVPhaVeY1OP4N4h+QvVCbsZUziZs=
+X-Gm-Gg: AR+sD10l+W35uTk6W7GhXm9LS/28lGRiwqAfm7mCFtI29DDizsZUisXBd3M1dlpprkD
+ gHN86pAQ9oTiB8+6M6OUXuyYXYW6wvLjg3Y3E9oL6+HMeCx9nIJ8Y4HLc1o97cjorjYk4KksJAK
+ ujOkiin6vmT0BcuYaYKk1XIGvP2U7ukvcZn27gqGIiOM64PeQNiqXMMl8CA9kNwt7duOsNwvHi1
+ Aj4UwzVIS3h1cQJlsdg9FMmEo9dAGvCW4+4+MYaXILJTTeVVanQjmjQoauzgmLGXwcD9KmtRghb
+ 4k0G9VvMk2FXUvInASiarHgjRldGqBKgwKtlV2DSUFo=
+X-Received: by 2002:a17:906:ee8d:b0:c21:792:8257 with SMTP id
+ a640c23a62f3a-c212a1d6bd0mr389260666b.15.1786748144779; Fri, 14 Aug 2026
+ 15:55:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260812-rinta-watchdog-gettime-v2-0-d8a5a7aa0df7@nokia.com>
- <20260812-rinta-watchdog-gettime-v2-5-d8a5a7aa0df7@nokia.com>
-In-Reply-To: <20260812-rinta-watchdog-gettime-v2-5-d8a5a7aa0df7@nokia.com>
+In-Reply-To: <20260812-rinta-watchdog-gettime-v2-0-d8a5a7aa0df7@nokia.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 16:55:11 -0600
-X-Gm-Features: AUfX_mxdyHkcdP0jbZsa9FsQmPRQuNl1u_sC28osc0Z_YC_VmdG9FGB7S0xNukU
-Message-ID: <CAFLszTi1U9=XihfqRjqMaGhL54d00ux=zYjcfUuk0GX7LLpU7A@mail.gmail.com>
-Subject: Re: [PATCH RESEND v2 5/5] test: wdt: add a test for max_timeout_ms
-To: Juuso Rinta <juuso.rinta@nokia.com>
-Cc: u-boot@lists.denx.de, Stefan Roese <stefan.roese@mailbox.org>, 
- Tom Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>, 
- Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Aaro Koskinen <aaro.koskinen@nokia.com>, 
- u-boot@lists.u-boot-project.org
+Date: Fri, 14 Aug 2026 16:55:33 -0600
+X-Gm-Features: AUfX_mxA4hAXWLdv6knLum01mMhDECUROJCsPxsIsEF85WZQOVBTi_JMWbT7W_Q
+Message-ID: <CAFLszThdqj8hPL82RKe5secs1_Vg0N1fSNRcwBX0RuhfUCttzQ@mail.gmail.com>
+Subject: Re: [RESEND,v2,0/5] watchdog: report effective timeout
+To: juuso.rinta@nokia.com
+Cc: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -147,71 +139,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Juuso,
 
 On 2026-08-12T09:48:39, Juuso Rinta <juuso.rinta@nokia.com> wrote:
-> test: wdt: add a test for max_timeout_ms
->
-> Add a DM test for the case where wdt_start() is called with
-> a timeout_ms value greater than the (emulated) hardware-supported
-> limit.
->
-> Add console-print asserts for both the clamped and unclamped cases,
-> as well as for the per-device uclass-plat data max_timeout_ms field.
->
-> Add matching tests for the GPIO driver, which does not set the
-> max_timeout_ms value.
->
-> Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
->
-> test/dm/wdt.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 47 insertions(+), 2 deletions(-)
 
-> diff --git a/test/dm/wdt.c b/test/dm/wdt.c
-> @@ -16,34 +17,68 @@
-> +static void format_wdt_servicing_str(char *str, size_t len, struct udevice *dev)
-> +{
-> +     if (IS_ENABLED(CONFIG_WATCHDOG)) {
-> +             u32 reset_period = dev_read_u32_default(dev, "hw_margin_ms",
-> +                                                     4000) / 4;
-> +
-> +             snprintf(str, len, " with servicing every %ums ",
-> +                      reset_period);
-> +     } else {
-> +             snprintf(str, len, " without servicing ");
-> +     }
-> +}
+> The hardware still performs the actual clamping; max_timeout_ms only
+> lets the uclass report the effective value in the start-path print.
 
-This helper reimplements internal wdt-uclass details (the format
-string, the "every %ldms" text, and the hw_margin_ms / 4 calculation
-from wdt_pre_probe()). If any of that drifts, the tests silently rot
-rather than catching a real change. Please drop the string
-reconstruction and either match against a fixed literal (choose
-test-side values that make the expected text deterministic) or split
-the assertion into a handful of ut_assert_nextlinen() / substring
-checks. Reproducing driver-private logic in the test isn't the right
-layer.
-
-Also, wdt-uclass prints "every %ldms" (long), not %ums, and when
-CONFIG_WATCHDOG is not enabled the driver's format string produces two
-spaces before the '(' (because svc_str is empty inside " %s ("), while
-this helper emits only one trailing space. Sandbox does not select
-CONFIG_WATCHDOG, so I suspect the ut_assert_nextline() calls below
-will not match today.
-
-> diff --git a/test/dm/wdt.c b/test/dm/wdt.c
-> @@ -16,34 +17,68 @@
-> +     /* Clamped timeout path */
-> +     console_record_reset();
-> +     ut_assertok(wdt_start(dev, SANDBOX_WDT_MAX_TIMEOUT_MS + 1000, 0));
-> +     ut_asserteq(SANDBOX_WDT_MAX_TIMEOUT_MS, state->wdt.counter);
-> +     ut_assert_nextline("WDT:   Started %s%s(%ds timeout, requested %ds)",
-> +                        dev->name, svc, SANDBOX_WDT_MAX_TIMEOUT_MS / 1000,
-> +                        (SANDBOX_WDT_MAX_TIMEOUT_MS + 1000) / 1000);
-> +     ut_assert_console_end();
-
-The clamped case only exercises timeout_ms > max_timeout_ms. The
-uclass code has a second branch, the sub-second difference guard, that
-suppresses req_str when the whole-second value would be unchanged. How
-about a case where timeout_ms is greater than max but rounds to the
-same whole second (e.g. max + 100ms), to lock down that behaviour?
+Since the uclass now knows both the requested value and the
+driver-reported maximum, would it be cleaner to have the uclass clamp
+timeout_ms before calling ops->start(), rather than reporting a value
+the driver may or may not honour? The sandbox driver has had to grow
+its own clamp in patch 4 purely so the print path is testable. If the
+uclass clamped, real drivers would never see an out-of-range value and
+the sandbox change in patch 4 would not be needed. What do you think?
 
 Regards,
 Simon
