@@ -4,143 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08065C5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:24:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD91C5CFC1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 22:07:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C47F46067F;
-	Fri, 14 Aug 2026 21:24:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4C0DF60866;
+	Fri, 14 Aug 2026 22:07:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f-kw4sV6QawU; Fri, 14 Aug 2026 21:24:13 +0000 (UTC)
+ id ohIIDHqxldjw; Fri, 14 Aug 2026 22:07:31 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D85296069A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 016ED605F3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786742653;
-	bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=IQ/tnfdJhcnQ/zqEAmJS9gTyVOiFvrwzWWcdt/j27BpXkS9gMKthZhjLMqz9LMaru
-	 pEMFGkduO8bg6XKf0J37IfDk6rVlWy+QIJ3qXp8tzU+aXucmO9GE25+tOb8iKGij3o
-	 hceEmxyHkxmXhTqW5B+pH42Z8BiPV/RB6CGGRb0KjeKvWmNF4p53ynuhy94y06SCCi
-	 Q9N6o2AcKXqqI1A5YH0N34vPhjh7Kbr8FiFOvtQyfD0MNNPiKfxhH21/UI5PJHBfkA
-	 4m+mhomnUFpQW8eQBFnMxEQ86As63BMqPQwnIV5U32OZwrAyHthQFC11ao7qh0GuLs
-	 vdo6EmJJQisoA==
+	d=lists.u-boot-project.org ; s=default; t=1786745251;
+	bh=OOLf+3T2msg7R2OAJKRvjXuXHaBeHtGq371mSq9t8DM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=zaOFBDd5XeNguz5KOF+RFnqATh3XKDRmKxlBOnYo6cL/wzcTOQRyyvllSrrovgqAO
+	 gAqnzsRHB5gHfwGKufVpm2RUZgCSRyG5VZ7NryJwnGTLdeoQ2uwVMrN5SHCIcZ3MFP
+	 jsNOd+A4A6ZrVaSjcVySOldTDS2rhB2ECuihlNCWlVaun8bVg5ihFQV1152vsoGHOE
+	 wBmX/DwYF9qDOmt5mYsfIRnBjVXUAgXM/ST0gSdZxX7v635D/2B0+tZbqg/3ZoAVQu
+	 wbMQb4h6hNQZdwHM+EMJUwJzcxTuhRmVzEoNyvG0CN7qn5JWsMAbrAe0bXAws+H0jP
+	 RfvHkuMUFF71Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D85296069A;
-	Fri, 14 Aug 2026 21:24:12 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1CB41194
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:24:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 016ED605F3;
+	Fri, 14 Aug 2026 22:07:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6A4E22B2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:07:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0E63880C45
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:24:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5C731409D7
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:07:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KfuLexOnoU_T for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 21:24:11 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tA_yBh4T7pjV for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 22:07:29 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::630; helo=mail-pl1-x630.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org E7EEF80C35
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E7EEF80C35
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=X0CTweHm
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E7EEF80C35
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:24:10 +0000 (UTC)
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2cfbbdfa60bso14963755ad.3
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:24:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786742650; cv=none;
- d=google.com; s=arc-20260327;
- b=KB7CpWXZK5k5aou8qmM3j6V9oe/tr1TY+ioXQes+fHnTtfpiqBRxw2gWas58m2dOdL
- QU7UCN/ZQe4dAwFRFkLYWvj6aRrDvMRykUv4l9d1XpRuYzQrK57/s+9h4DRNoPbDMH4F
- v9oYJeaZo0WZa0OJ/KKMcEunSlZMGxi18Ibq4aN1AXgBSRWBLmMzvUXo3udjXLTxFTVz
- pkUA8tPnjL+hs2wkwRUFkx3Z967QCAK2hoVGzmNWLng8Iyb+7xwKWBTFMVSBiW3ibauB
- UvzyMpqFEiHewvFFtltVh6n81AoHI/74y9S5rr9mzubsyint57Mwysjun7ibn2hecl2p
- M6CQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
- fh=LpbDjGizNdTi3am7V54pRbGnMopdQTA1xxuRt61RYzE=;
- b=JzZylzaOnhkg+8BdHmjCjDU/1vUjuXlzIulTR7vxKbxPG62VbL6TedG572cQuH+U0M
- e+PW6u1lMzYGa3IztqScLuqiYc73pchmryveEK+LYZTRKxMPSkNBF9O42hHDSUliXG0e
- Xr5ITJ/uFNrRUiZJ5Sa1HXYTm+CVEzP3urkupcG7Oo/vlm4f1grFTgZcAMk1oLnwKS66
- 5JhkMK6KigIGOu6zA9OB6gNIvS+1MqAAzFdEUY7FFxkkvb0Zqq973oZMvcuXsyrFF/Lv
- tKfHMUlBIwekts2sEK8B8J3gNXr+EwZwFXzsyzdQv5a6wGmC1LlAJsVuT5zB6dLEJ+l5
- HYfw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2607:f8b0:4864:20::1035; helo=mail-pj1-x1035.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 79C7E40080
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 79C7E40080
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=S37DIN0S
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 79C7E40080
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:07:29 +0000 (UTC)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-38e08baf860so1616454a91.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 15:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786742650; x=1787347450;
+ d=gmail.com; s=20251104; t=1786745248; x=1787350048;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
- b=X0CTweHm+1hHYvQWZHYRAAbimaDzTA4tv6XCDt3hUuemf1s68AT27V564vqrTKVffs
- oJuW4PQCpZZJ2OAgp/wtAncY4PNvt9xgEI1Zedrcf8pxKdJeo0k1OU0CqWSxnCQ7YqsN
- PaJ5OIfH3dl0nVGgMLtgd8jdASOGOUfb7EW1Q=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=OOLf+3T2msg7R2OAJKRvjXuXHaBeHtGq371mSq9t8DM=;
+ b=S37DIN0SmXB7OS82e4kvVpYXI3WRGh1mYYHp1ylc2N9gWzMStIw9xoz2wi7as83dyA
+ J6+UWHl6S/FzUYA1lVYHbBRdtCg2NuiFgrMmj9gNOdAMH8YDMRi5pNp1SU6s78uuTkRe
+ ZI/MNuEPlCvlRrbZn5E2r3IXS/vmPnFEnD0C0di9Exj/Tam+Kg4XdMEJqWdwdgsEPCEz
+ d0KWc2t6pk7rjjNTXh0Lwnv2/atVmzhR5yoaRxT4jaBBtLORxRogOGRe5YKyNHCw3Xba
+ UdKb3tfW8dTxIraArKp15HabZIVezBqkiCKiQAt9fm+WBdjVT/ZiOPhm6OljN9ob7ZFM
+ 16og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786742650; x=1787347450;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=5W8HkHI42U2FiYMIQa2rIyv9b4T3BZxhZ1J8JoIJnZM=;
- b=JV8MqvFZKLbevwTEbNlx3ohUpvZbBBBTKeMz9WKFBBr77//oYBNpC6UL4uQdQFPdVb
- Ctkk028J0Mzdmm33cYeKCi6Qs842MXJCjJwPtV1lOmZ0GmtXCfsRbkWpYlXgI9CrdO9k
- bn0h0c8p+xyyymo+xckpcpDxEycrFsdxUwqQN7ZeVLhgwxeR4tym2ePe2FmB46y4bTnn
- nxI1bKGXvWzee5FOfE6NNiu6U3TY078cn3MnKGtQqP53cFh4irh2q0K3uwOM6e6aISNA
- D9dYF1paue46wSiyFTl6apDp2Uvoc+eb7fTYe9gnKwGkQ+BnwYKcmdSiFU921XxtrnTk
- 3HmQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rqp9o86JZn53xnp6s5MJc/kTQKOY+bUEn4nZLXTgi9to1gpVHK/zKETwTx7G3ZV/IW4vVbEndg=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yx1yp3PZZkMS7d+psAchPphi4MGJQlLnrE0/WfjyRnLAj4SpXuf
- Pqgc7lr24CTIj66zhUNjC/MZcZttgssylINsR5y5XopEVHhKTn/uvoHg77TxErVhE8Iv31+rPCK
- ZSAHhM5pU721udv/QfMb8+oSfnlt+C7cU8jXRjGro
-X-Gm-Gg: AR+sD12CvShE3ZajeA0EagWl2cRRCgQo8p7zkhqP5EkPUdnkkuUPOIjpfX8tmMEOGrq
- xVCZ3IbIRPF2jLhrmx5JpS4ldgDw/uN+Yhb2aC6Ii7O3QfIjssy0PWzQZ4yeAOJvlmHtb5kCTi1
- blWLGdXrGqMhSnBdwQ269+fcnTvAzK8ZLiCHvuzKhMfRhYhRhCofX9onBgbEfRqrof+aQDakHN/
- UN4+mTBD8Y+KCOz7+VYvOax6BQ7YGEyKts8e2bTgTdhYNAbZIhBbVF9TvpMDprXNo0CwzyV6RLE
- KZTdwJ/qdIHe0nKsCrlCSvY4GyuvpZR1C8mzNzXXYiI=
-X-Received: by 2002:a17:903:1b66:b0:2cf:b68a:340 with SMTP id
- d9443c01a7336-2d3b0c43462mr105270565ad.10.1786742650113; Fri, 14 Aug 2026
- 14:24:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786745248; x=1787350048;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=OOLf+3T2msg7R2OAJKRvjXuXHaBeHtGq371mSq9t8DM=;
+ b=A65nAGHuzaROK+vrwkL1HMnR0SGpcjU8dDaNoVCbPUsf2PG9dR3/EUNVH34sSll/AZ
+ /75l1KZr2vdxAUrdfA+PeNSvIK85UFcLjXEalSPnhPj6CEmGj3qaBKKBSYa7vjhZkvxt
+ Zb0Jhy+yBf23xEOVrGGrdx5wHxd/kBMRCjfQAYnTFiE5HM4CJjgQLW2UerhyhMj4dmCR
+ T5nUvjDqOtxIENMWQkO5U16XjSPOIMDITDSqt1cE9dGaiN5lpdE5d/kFVxz6dTKrqlJH
+ YsfaZHB7u4xP2qAWpfBq7qIH0z+66LVdHTlBfubviNsfWuKhvIBpaYUV/fVMi7pG4muJ
+ xDdw==
+X-Gm-Message-State: AOJu0YwORKxhK6KITkKJv4hUchbQ5jq/G/tiKmlcWMCgwQrodmSH8mXy
+ HAsDbrQOUk541IUra3BAsiijzkOxIjNy/29KjIqGrafdyr/Cbl3EJwYkQm4R7A==
+X-Gm-Gg: AR+sD10t5FWFeL/62Bc/17YiblNctHKZW+BXUf9sBrwjaA9kjKph9jcnssCEvXB21fe
+ 1LZTGu6ErjpgB3XibOdznJ5VsXGvsD8H2t2ZwbD5I2Rvc7UTLnP4YPWEwqqTMLnG2ewN52NcHju
+ xz4N5LNUd/GZcCj1/LEBIo7JBDijWMs0lHeXalKfGewvYrNs7nQB23N31GvPq5ukVKzGyVdqzoy
+ o8INGV2955PT3E4WemZHCDQbSg/FALjgKp6ZiyrzurZibRD8o6jxY3bCITweoOquGtsFmnKU9WT
+ cWji48tlMQzkMygO2x6DNdHgE6NdooDeMkAF332BPFvZmdnoCtCGYJyURZxIGA3iSlSMmOYXXq0
+ K8ckz8ZfiTCqIgi4kCWTDrbgdu9oGUcYBC1b3IPj5IW0enpMDbHi5OPJf2ZYD2N4o1mj9P5MeRh
+ Gy8GrjQS5lZqL0PKumUoS5a4YRVfKhFuBAKp7P8K0XQuUIK4SJypsnFC0x3BVfxt1PqIcbGuE31
+ r/0V6061s3wf+wj51H5v4nH6V/sT5Ju5/HD
+X-Received: by 2002:a17:90b:3908:b0:381:5bd6:eb19 with SMTP id
+ 98e67ed59e1d1-3933e74e1bbmr9677757a91.18.1786745248346; 
+ Fri, 14 Aug 2026 15:07:28 -0700 (PDT)
+Received: from fabio-X870-EAGLE-WIFI7..
+ ([2804:1b3:a802:463c:7e80:dfc:24c2:3bdc])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-320e9df03d4sm7121278eec.15.2026.08.14.15.07.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 15:07:27 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.u-boot-project.org, franz.schnyder@toradex.com,
+ frieder.schrempf@kontron.de, mehmet.fide@screeningeagle.com,
+ stefan.eichenberger@toradex.com, S4210155@student.rmit.edu.au
+Subject: [GIT PULL] Please pull u-boot-imx-next-20260807
+Date: Fri, 14 Aug 2026 19:07:23 -0300
+Message-ID: <20260814220723.1677460-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260814-imx93-secureboot-v1-0-0c3c78020d03@bootlin.com>
- <20260814-imx93-secureboot-v1-5-0c3c78020d03@bootlin.com>
-In-Reply-To: <20260814-imx93-secureboot-v1-5-0c3c78020d03@bootlin.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 15:23:46 -0600
-X-Gm-Features: AUfX_mx936Yul3hXpFWI6DSJqMqCzDcVAsFvCABw_YU6ea3qa41inDw-SZLAw-I
-Message-ID: <CAFLszTh6MDfPM75QgLBvwu34cpJ7aeBJZxHXN0uexUFyoDLphA@mail.gmail.com>
-Subject: Re: [PATCH 5/5] binman: test: add code coverage for nxp_imx93cst etype
-To: =?UTF-8?Q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
- <jeremie.dautheribes@bootlin.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
- Denis Mukhin <dmukhin@ford.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Alice Guo <alice.guo@nxp.com>, 
- =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marex.vasut@mailbox.org>, 
- =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,82 +125,75 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi J=C3=A9r=C3=A9mie,
+Hi Tom,
 
-On 2026-08-14T17:07:09, J=C3=A9r=C3=A9mie Dautheribes
-<jeremie.dautheribes@bootlin.com> wrote:
-> binman: test: add code coverage for nxp_imx93cst etype
->
-> Add test methods to cover all code paths of the nxp_imx93cst etype,
-> reusing the pattern of the nxp_imx8mcst as done in commit 0cab35362d77
-> ("binman: test: Fix code coverage for iMX8 and cst bintool") by Simon
-> Glass.
->
-> This brings nxp_imx93cst to 100% coverage.
->
-> Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
-e.dautheribes@bootlin.com>
->
-> tools/binman/ftest.py                              | 78 +++++++++++++++++=
-+++++
->  tools/binman/test/vendor/nxp_imx93_csf.dts         | 18 +++++
->  .../binman/test/vendor/nxp_imx93_csf_imagename.dts | 24 +++++++
->  3 files changed, 120 insertions(+)
+Please pull from u-boot-imx/next, thanks.
 
-> +    def testNxpImx93cstELE(self):
-> +        """Test CST signing with an i.MX93 SPL container including the E=
-LE
-> +        FW"""
+The following changes since commit d3e8597e46b635ec556a057bc42f0b0859654bdf:
 
-Please keep the docstring on a single line to match the imx8 tests
-just above. It fits within 80 columns as e.g. "Test CST signing where
-the SPL container starts with the ELE FW".
+  pytest: fix out of bounds access to bad_pattern_ids (2026-08-13 22:14:05 -0600)
 
-> +    def testNxpImx93cstSigned(self):
-> +        """Test CST-signing-success path with mocked cst invocation"""
-> +        spl_data =3D bytearray(64)
-> +        spl_data[3] =3D nxp_imx93cst.CONTAINER_HDR_TAG
-> +        spl_data[12:14] =3D struct.pack('<H', 0x90)
-> +        spl_data[40:44] =3D struct.pack('<I', 0x123)
-> +        self._MakeInputFile('imx93-container.bin', bytes(spl_data))
-> +
-> +        # Mock run_cmd() so that when cst is invoked, it creates a fake
-> +        # output blob and returns success, thus covering the signing pat=
-h
-> +        original =3D bintool.Bintool.run_cmd
-> +
-> +        def fake_cst_run_cmd(self_tool, *args, binary=3DFalse):
-> +            if self_tool.name =3D=3D 'cst':
-> +                arg_list =3D list(args)
-> +                if '-o' in arg_list:
-> +                    idx =3D arg_list.index('-o')
-> +                    tools.write_file(arg_list[idx + 1], b'\x00' * 32)
-> +                return 'fake cst output'
-> +            return original(self_tool, *args, binary=3Dbinary)
-> +
-> +        with unittest.mock.patch.object(bintool.Bintool, 'run_cmd',
-> +                                        new=3Dfake_cst_run_cmd):
-> +            data =3D self._DoReadFile('vendor/nxp_imx93_csf.dts')
+are available in the Git repository at:
 
-data is never used - drop the assignment (as testNxpImx8mCSTSigned
-does), or add an assertion on the returned bytes so the signing path
-is actually validated rather than only executed. A quick assertEqual
-on the length (spl_data plus fake 32-byte blob) would give real
-coverage rather than only line coverage.
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20260814
 
-> +    def testNxpImx93cstUnknownTag(self):
-> +        """Test CST with unknown input tag passes data through"""
-> +        # Trigger the pass-through path using an input without the AHAB
-> +        # container tag
-> +        data =3D b'\x00' * 64
-> +        self._MakeInputFile('imx93-container.bin', data)
-> +        self._DoTestFile('vendor/nxp_imx93_csf.dts',
-> +                         force_missing_bintools=3D'cst')
+for you to fetch changes up to 817664148ebd584a55a4f482d198fe6ae595d079:
 
-Since the pass-through branch returns early before cst is invoked,
-please assert the produced image equals the 64 zero bytes - that way
-the test actually proves the pass-through behaviour rather than only
-that no exception is raised.
+  configs: toradex-smarc-imx8mp: enable SPL_SYS_MMCSD_RAW_MODE (2026-08-14 16:21:23 -0300)
 
-Regards,
-Simon
+u-boot-imx-next-20260814
+------------------------
+
+CI: https://git.u-boot-project.org/u-boot/custodians/u-boot-imx/-/pipelines/906
+
+- Several fixes for long-standing Vybrid issues.
+- Improvements for imx6dl-sielaff.
+- ADD SPL Quick Boot support for several Toradex boards.
+----------------------------------------------------------------
+Franz Schnyder (1):
+      toradex: apalis-imx8: select QP/QM device tree from OTP fuse
+
+Frieder Schrempf (3):
+      ARM: imx: Support detection of ECSPI recovery mode on i.MX6
+      board: imx6dl-sielaff: Remove board_boot_order() workaround
+      board: imx6dl-sielaff: Enable environment on SD card
+
+Mehmet Fide (5):
+      gpio: vybrid: read and write the GPIO block, not the PORT block
+      serial: lpuart: test the receive flag, not the FIFO counter
+      toradex: select EVENT for TDX_CFG_BLOCK
+      colibri_vf: restore the pre-2017 text base, the BootROM refuses the low one
+      doc: board: toradex: add the Colibri VF50/VF61 page
+
+Ngo Luong Thanh Tra (1):
+      arm: imx: hab: validate HAB M4 event length before memcpy()
+
+Stefan Eichenberger (4):
+      board: toradex: verdin-imx95: add SPL quick boot autosave support
+      board: toradex: smarc-imx95: add SPL quick boot autosave support
+      board: toradex: aquila-imx95: add SPL quick boot autosave support
+      configs: toradex-smarc-imx8mp: enable SPL_SYS_MMCSD_RAW_MODE
+
+ arch/arm/include/asm/mach-imx/sys_proto.h     |  1 +
+ arch/arm/mach-imx/hab.c                       | 12 +++++
+ arch/arm/mach-imx/init.c                      | 75 +++++++++++++++++++++++++++
+ arch/arm/mach-imx/spl.c                       |  7 +++
+ board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c | 30 +++++++++++
+ board/sielaff/imx6dl-sielaff/spl.c            | 22 --------
+ board/toradex/apalis-imx8/apalis-imx8.c       | 34 ++++++------
+ board/toradex/aquila-imx95/spl.c              |  4 ++
+ board/toradex/common/Kconfig                  |  1 +
+ board/toradex/smarc-imx95/spl.c               |  4 ++
+ board/toradex/verdin-imx95/spl.c              |  4 ++
+ configs/aquila-imx95_defconfig                |  2 +
+ configs/colibri_vf_defconfig                  |  4 +-
+ configs/imx6dl_sielaff_defconfig              |  2 +
+ configs/toradex-smarc-imx8mp_defconfig        |  2 +
+ configs/toradex-smarc-imx95_defconfig         |  2 +
+ configs/verdin-imx95_defconfig                |  2 +
+ doc/board/toradex/colibri_vf.rst              | 66 +++++++++++++++++++++++
+ doc/board/toradex/index.rst                   |  1 +
+ drivers/gpio/vybrid_gpio.c                    |  8 ++-
+ drivers/serial/serial_lpuart.c                |  9 ++--
+ 21 files changed, 245 insertions(+), 47 deletions(-)
+ create mode 100644 doc/board/toradex/colibri_vf.rst
