@@ -1,129 +1,129 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B668DC5B572
-	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 900F9C5CFCF
+	for <u-boot@archiver.kernel.org>; Fri, 14 Aug 2026 21:24:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 817F36082D;
-	Fri, 14 Aug 2026 21:23:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 30017811F1;
+	Fri, 14 Aug 2026 21:24:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0N6IgqURsImu; Fri, 14 Aug 2026 21:23:55 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X9aGMEdKS0Oa; Fri, 14 Aug 2026 21:24:00 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9667C6069A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BF21180F5D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786742635;
-	bh=S2kAeVmrF/uWUlG8BF4IXCeIQsI8sgIhY6pj/Yp4Wgs=;
+	d=lists.u-boot-project.org ; s=default; t=1786742640;
+	bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=d6+neIobQhfo7ijzKBFI2TePMo48pbEZD35mrwpOrC8jQ79GsHTNLEG1G9XNaSLu4
-	 mLqkdDMrGRAjG2LgHymmj1Pote9Awy+0c+YAuF5/L4mnx3qpzkOVYfLC8XvfX6Rge0
-	 4L9PIcSxmWsCW8gTessGDuufCHhSQU4U/z8DeqOk0+xDQ/Era9elZsii1RxMiJsrL7
-	 ds8F0y8gLorN4MOCdgy3T0QWc5MX4YbsTHLpm4tAAPd1dNO8tbESxsWb/4na/Ew81F
-	 kQyR5XFtm56Kd8AmgcO+VLK4cVkdGbCvAb36oUrjgfhMQF2YzQ+eqNnCZ5LTQxssAQ
-	 VsWS6BWdIAOgA==
+	b=hvpr2C70lSqOeW/Ouyt0cp7399eBXaKCv4GawcTXPaob12/x4PzLd1mY1F2j7Qy8E
+	 VI3PFK9hLQkWybs4pLmEEP4bLwpI0Jtvsyxw3cDx6u4jsOQbLWerp5Q8dILkaXLPYZ
+	 V70KUvpPSpSKbivgyVHaxXkseWEDngHJQqI91qpcRWDy1P9xwKHYNml5B/Sdb8BjIE
+	 5vkpgE73N1C0Fq2OtcJCgkIf/sAStd4rgXuQglNCZNAg8xCRam/A5FVgAknQybJTy2
+	 OabaKp3OAav3j5TwvxXvw6mrVSOEqY25Lsukp1gNddrPI7+ja/0psjf86zRNgp+4Vo
+	 8nXiEwXnMsU6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9667C6069A;
-	Fri, 14 Aug 2026 21:23:55 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1F9F73DF
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BF21180F5D;
+	Fri, 14 Aug 2026 21:24:00 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6A6CA194
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 061A66069A
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:54 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5C72840A0E
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TX8yzeFfzSRE for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 21:23:53 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bo-vqX2Gry2K for <u-boot@lists.u-boot-project.org>;
+ Fri, 14 Aug 2026 21:23:58 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org C4F4A6067F
-Authentication-Results: smtp3.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6325540A0B
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C4F4A6067F
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=DwNhoSYS
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C4F4A6067F
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:52 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-6a36982a875so1846092a12.0
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:23:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786742631; cv=none;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6325540A0B
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=jfP92geX
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6325540A0B
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 21:23:58 +0000 (UTC)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6a386a34603so3022840a12.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 14:23:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786742636; cv=none;
  d=google.com; s=arc-20260327;
- b=hYO2p9MfLRq3S3hbpeBkxZctoSMzN18r1emJtCPAwrCH78v19l9lc3F25lJbxGeYy7
- mmIiC4ulpeAcX/YSSXbLGMySreGp9XFe69o+iD8rSsnK1y91zfZNt7BpLDQJ2ikxTSHb
- l7HFhICqHwSeR8XzQGcEf5dNgNw0fKaqbGbnPL97m/UrRS44IAJTqmUE4Xg5/sPFfD3s
- 0D6VQKUIhsYrHSVGYwQKNrXLYqeiroZOn3ZboloKX1g58PecrP7ASZrba4+ek8EPD2hm
- IVaR8jHUM7QpUTMvNxUpt81ubz0MFYqqSd5TLaeUnHxTJp58fCjPmyOI2PSEEXG9foPC
- Totw==
+ b=pMPmkt8RSfRXlp+Rz4FSso23W92BbFdLOgWHiAStZgxvWWjFcdxcLW2I6Lif9mFUC+
+ nPCmdrBkPRZEG8Uq5BBZ5I1QZcAmRg9u+maH7kN990ff2Hz7LsUKHoiZ4rNAo5Z4/oRo
+ eiZ+ShuIjPELye67mWm+n9scYXxlPE3acX02u6b3LkyUnTBpQmeHIBDDwM1m9dpB5U50
+ LXbkFzACEYj6/u2xxWgUNon5cTav+yzhnlGDbdF4Ru1UWCG6siMJzxi9F6XwUZbB7wgg
+ N/NHOCBR6Mj4xuEqVt7ajy/RDM8OEGdKhO+yNPS9HArcACkSIl11zPOHCQTkifUXC3/t
+ Cdaw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=S2kAeVmrF/uWUlG8BF4IXCeIQsI8sgIhY6pj/Yp4Wgs=;
- fh=o/TVdZdfR4biOv13Ruw0VTrD/BYEc+RtKl+Eg54Pl0I=;
- b=CLZz5bMx1EyCtUoNK1+lbG4Kc4sx/KlpNkTBzNr6DZ6TdOeE37wsUj/wTI0GTh/juB
- Mifkzfx26gafxT23v3oxyq85Qk4wvw8EAU/ppsoXLa5oY52g3rp5rLsbCuQTjMc2fGgl
- hykWfu9H6YjBejXndbtH4YLx8TGehDw6IO1swKXLXwjg5IpfWlW0RWeO080UAWzlI837
- wEtuJ/P4dHIRjLSHzYVEobXmn11PI1uxtd7BMR4fu9xgp7ldBf65mfKCok8mw4/DVReY
- efy39wIXOdCLLS8cYovYziHDRuS/NC8o/oZqOooelKA2P1v1ND1lt1EQdOrzhDh8k7hU
- R98w==; darn=lists.u-boot-project.org
+ bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
+ fh=JJAwH8KzXB37Ep9tnwPaemnwUh4TNNjCGdGPFYfvgoo=;
+ b=Ew3vLJ9E9wvv9NiGzOyt4pm9nd2JGlPWFnoEh/c8hhlophogeCekXnPZcGjueqciUH
+ VtcUa7yYJqFsrKmCZk8i368JYXaXhSA4lmZeLU20W/xBfSwwSu/Gtg1m7wwsguy/mxjd
+ /XBJwigFj5k6eZSWejP6+oLyLlZkDzKTz9susJGQ5UYOUM3AOShUT8Bq6R/72J4rDNYO
+ 47yMJnM4y1rB30Dq07dcKjIBVaBO208UmAnZbx2T1RfSfMRH4MrzxTS8/aseF6guOaRr
+ CZAkal9mrNjiEGxQjVh78xC763mGleS0K/xZKQwvi96tweObQPqUaYaanvfBpKajRm3C
+ bE7Q==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786742631; x=1787347431;
+ d=chromium.org; s=google; t=1786742636; x=1787347436;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=S2kAeVmrF/uWUlG8BF4IXCeIQsI8sgIhY6pj/Yp4Wgs=;
- b=DwNhoSYSD/uiFHD8c4fFJVkJUwOI4/7FvnQ5+nUQxTh5vLcGVoZH28zyRztTNkANNF
- 22E1j6oesefS5X5dzX8XvPxyaILiqZ04IdXK4vVjQuS1ILUM1Ot3JNFW35XSKES00ue1
- Sv4+BsNZjJLpbxhBIRqd829uiDkYP7yhB3GRQ=
+ bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
+ b=jfP92geXj3+pYGS9JppPIxeq+LXAON9nEt987xCxnWLY/w5ZXkUv9v0FQ9c+6u6VEQ
+ Q/BSB7wv4O0LtBqAne8O8Q8qq9i0mnXMEEOjeWlHgrTtWfe90PyRE+tIU3TBnW1CKAht
+ 9fLpXl9l5qFjjjsSAyW9ier70KmqStnDi0ie4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786742631; x=1787347431;
+ d=1e100.net; s=20251104; t=1786742636; x=1787347436;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=S2kAeVmrF/uWUlG8BF4IXCeIQsI8sgIhY6pj/Yp4Wgs=;
- b=suq/FIqFsxV/l9pcxd8EA1ok/rXFLBv1QdllbzDrxqPGickoDZTMGpM3ZyrPBxgX0x
- oXhjn+Mzo6owzSCg0AeQgExPEffuqNQE8Xps6mAoSPSO1x4KCHMuDE/OQ93Pchls5uHl
- 4C9i2LFRbFt2B6XWlTh7fATdrmjBokmRerwALmBFiBjP0QWrRyRkQCuw2knXH9Wu4KrY
- 3EdNhnO2tVnCUml20XOWHjZP8YnNNI/5a6+YrsrahHDBeTA4zZ56GbM2u0lIfXTH3s2q
- 8lO1JERNnwNX2hqFR+yHespVwfypG/niZKNSBDumnp3sKcQT30a8I/NPxWZisVNQ24T6
- bOHA==
+ bh=zK2AUO+h0QJ6JHv5PhrMaJmHbcGEdbhvN24PQREe5Fk=;
+ b=GqGzMJX54xBTzbDOfLJxlRq/ihyyQ7YMBeeUKlT+xpwI4ACClMpLJcQJzxgH4TcbxM
+ sJkimgATJBfhKM67/Eurh+ZaXIlk2pkkIEVeFW1xX23ofgQ8X7ZNLhodSo8Y2jiSlfib
+ yay7BSHNOwdD5hsSaUyE2iceVhqByQ+P1H/JBhobdF5sb907KxZ0Bz0OjwN50dFk7FkC
+ 1GGtvsxaCdqoC+2aQTN8eef1MRlx+DcmnqXQniaLIP73drs4KO1mcYr1KvoI4C3z5A1p
+ HNJ1VOuVPaIfL7X6HHauKQqjDQ4YE+lf5nWHGOjiYFlSkn8V4WCYHacqmIXpyQgHnxND
+ p9SA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq+BP/fV751es1l2nUrw8c0eUkwou92iZm01zXlDpJAIsm7xabNhqri8zWqe8+VzAp9Fb4WzcI=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwM9Dj2jREsaBobevCJyH/p/K1vw42maiT1puc7K8mQ5alTyZP5
- woVTYywLcqqmnXX4fCkwff/jASLmHPV5PshVVfdDXaAkHXjUAyK1mmyAVDO74NuIsvyAHWYXdkk
- 3ho9aQ8Z8rAhD55xsLcb+i4IbThJbwmNf6kTVfzF7
-X-Gm-Gg: AR+sD13bxFHbCcZD1OQEj5uqF5EHsMH/E3wCtjv5LaYPReJqELdZ8yzhjF8MS0gaHMQ
- ss0xPEF+WUXu0Ls5KPHXbDM6tvIUN1WeixLYUmUrBBVRzQO3BxSkJYw83hmfa9wFM8KyTrxAOJ8
- 0mkd/WdX1WuliRCqq4KHD2Bhni1dNPTWIiPgsIBk5Q9EEl3zAYrgyPxJdpw398Fb5uENUlJTtk9
- rnXd2NZFcym+07wWmC9oP5jv/E9D7Ba7o2kI1I8SFINiOVX9pQ4fB9hsX1VpKPyFclx5Cc1WeyA
- 4dil/aUWnpRtLbXEy7B2WBurr/Pk/WMt6GoeOh0TwSI=
-X-Received: by 2002:a05:6402:5003:b0:698:3ce6:767f with SMTP id
- 4fb4d7f45d1cf-6a38a96aebamr3846668a12.12.1786742630638; Fri, 14 Aug 2026
- 14:23:50 -0700 (PDT)
+ AHgh+RoY5qOdzbMc6BVLg3NzxseIrLhVlYAntBlmhMubfqx3CWdVXpPxaOqzf0NfQqKHXvC0EAr/4/g=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yx3ACCnbD5qMAHL60QM+fi6qDaqMUSKLUb+Fd2CWjBqBk1YwVRq
+ 7qlM3ebnYxzu7m4jT2wH/nDe3E8hU2xk3guYKsYA6XyV3OaG5JHB9S/wmCViJfftJTrWyiAWdok
+ FT4ZolkW16tThqF2N2YbODLvsgEf/8kFYAL2PbBWV
+X-Gm-Gg: AR+sD12HLkaPe5p7oEFvp/ykd1DR6SAB/G+bAkO8S5Y8j52yB/rT/NcvIStuBvqishc
+ LG6ImN+hKuZq16kVYxemZ0ad5Op8JkGDMeSN+TijZSTX/XYHy31IPr3rNBrx3vTrt7wTv873s6r
+ Cfvk2FWZcWlT/lDAXfyRfxEqSRMXUyBvCQ8uOInLSdc2rPIaRK/GOHW2fdAXUK9sXbd6H5H1w6C
+ Ah3iLNlxuOVzC/Xyw7mzGcO+Btx/VUplz7KWzhYKVUBPUHkqAEuUazpJiKDo0CJU5oYvg4r3faq
+ ndcE5z6FS856aG7a6mCNWKgBhZnoWH0QI7GT3FwmN1I=
+X-Received: by 2002:a05:6402:5415:b0:6a0:de1e:c4c4 with SMTP id
+ 4fb4d7f45d1cf-6a38af28b64mr4214300a12.10.1786742636270; Fri, 14 Aug 2026
+ 14:23:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260814-imx93-secureboot-v1-0-0c3c78020d03@bootlin.com>
- <20260814-imx93-secureboot-v1-3-0c3c78020d03@bootlin.com>
-In-Reply-To: <20260814-imx93-secureboot-v1-3-0c3c78020d03@bootlin.com>
+ <20260814-imx93-secureboot-v1-4-0c3c78020d03@bootlin.com>
+In-Reply-To: <20260814-imx93-secureboot-v1-4-0c3c78020d03@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 15:23:35 -0600
-X-Gm-Features: AUfX_mx472Ppkn0QlU55DH2_zinaTHhRekHx5VcFo0rAG-IHcmOHdoBQsO7NapI
-Message-ID: <CAFLszTisvqoC+5EhdsCwWr1XZmZ6fAAbbtQM9qx5+-U6mnGnQw@mail.gmail.com>
-Subject: Re: [PATCH 3/5] doc: imx: ahab: add AHAB introduction
+Date: Fri, 14 Aug 2026 15:23:40 -0600
+X-Gm-Features: AUfX_mzuNE1ytOnUzcwTmZWBhZ9x7Gvd-4iJXQDPYhib_4skVwXePt1GziMaQ58
+Message-ID: <CAFLszTjJ7ztxWuoTED2G-oECz8NoxPFmhOThTS0ifvrk7ER_Ww@mail.gmail.com>
+Subject: Re: [PATCH 4/5] doc: imx: ahab: add i.MX93 secure boot guide
 To: =?UTF-8?Q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  <jeremie.dautheribes@bootlin.com>
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.u-boot-project.org,
@@ -159,91 +159,79 @@ Hi J=C3=A9r=C3=A9mie,
 
 On 2026-08-14T17:07:09, J=C3=A9r=C3=A9mie Dautheribes
 <jeremie.dautheribes@bootlin.com> wrote:
-> doc: imx: ahab: add AHAB introduction
+> doc: imx: ahab: add i.MX93 secure boot guide
 >
-> Add an introductory document describing the AHAB (Advanced High
-> Assurance Boot) secure and encrypted boot flow, covering the
-> following topics:
-> - AHAB architecture overview (SCU, SECO, PKI tree)
-> - AHAB secure boot and encrypted boot flow
-> - PKI tree generation (ahab_pki_tree.sh)
-> - SRK Table and SRK Hash generation (srktool)
-> - SRK Hash fuse programming and sanity check notes
-> - i.MX 8ULP/93 secure boot support
+> Add a step-by-step guide describing how to securely boot an i.MX93
+> image using AHAB.
 >
-> This is based on doc/imx/ahab/introduction_ahab.txt from uboot-imx
-> (lf_v2026.04). Originally written by Breno Lima, with contributions
-> from Ye Li, Vanessa Maegima, and Utkarsh Gupta upstream in
-> uboot-imx.
-
-Firstly it's great to get some detailed documentation, thank you.
-
-Please convert this to reStructuredText and hook it into the Sphinx
-tree (e.g. under doc/imx/ with an index.rst), so it is discoverable
-via https://docs.u-boot.org rather than being an orphan file only
-mailing-list readers will find. New U-Boot documentation is expected
-to be rst; the neighbouring habv4/introduction_habv4.txt being .txt is
-legacy, not a target to match.
-
+> This guide is largely based on the following documents:
+>   - doc/imx/ahab/guides/mx8ulp_9x_secure_boot.txt, from uboot-imx
+>   (lf_v2026.04), originally written by Utkarsh Gupta
+>   - doc/imx/habv4/guides/mx8m_spl_secure_boot.txt, from this tree,
+>   originally written by Marek Vasut
 >
 > Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
 e.dautheribes@bootlin.com>
 >
-> doc/imx/ahab/introduction_ahab.txt | 445 ++++++++++++++++++++++++++++++++=
+> doc/imx/ahab/guides/mx93_secure_boot.txt | 269 ++++++++++++++++++++++++++=
 +++++
->  1 file changed, 445 insertions(+)
+>  1 file changed, 269 insertions(+)
 
-> +1.1.3 [i.MX 8ULP/9x] The Edgelock secure enclave
-> +-------------------------------------
-> +
-> +EdgeLock=E2=84=A2 Secure Enclave is the security subsystem based on a de=
-dicated core
-> +(RISC-V) to manage security tasks with a tight control on security resou=
-rces
-> +along with other enhancements.
+> +Warning: Please ensure your sample is in OEM Open state, OEM SRK hash
+> +has been fused, and you are able to boot a signed image successfully
+> +without any SECO events reported. If not, your sample will be
 
-Just to check - is this really verbatim from uboot-imx? The =E2=84=A2 is
-non-ASCII and will look odd in a plain-text doc and trip up some
-readers. Please drop it (or spell out 'EdgeLock Secure Enclave') here
-and anywhere else it appears.
+SECO does not exist on i.MX93 - the security subsystem is ELE. This is
+a leftover from the mx8ulp_9x guide; please change to 'AHAB events'
+(or 'ELE events') to match the earlier ahab_status step.
 
-> +NOTE: The terms Sentinel, S400, and EdgeLock secure enclave (ELE), and E=
-LE
-> +are used interchangeably throughout the document.
+> +i.MX93 boot image. It is assumed that the reader is familiar with basic
+> +AHAB concepts and with the PKI tree generation. Details about AHAB can b=
+e
+> +found in the introduction_ahab.txt document and in processors Security
+> +Reference Manual Document (SRM). The i.MX93 signing procedure is
 
-Nit: ELE is listed twice. Please drop one.
+Minor: 'processors Security Reference Manual Document' reads awkwardly
+- please make it 'the processor Security Reference Manual (SRM)' and
+drop the redundant 'Document'.
 
-> diff --git a/doc/imx/ahab/introduction_ahab.txt b/doc/imx/ahab/introducti=
-on_ahab.txt
-> new file mode 100644
-> index 00000000000..4a5b6f795c4
-> --- /dev/null
-> +++ b/doc/imx/ahab/introduction_ahab.txt
-> @@ -0,0 +1,445 @@
-> +1.2 The image container
-> +------------------------
-> +
-> +Due to the new architecture, multiple firmwares and software are require=
-d to
-> +boot AHAB supporting devices. In order to store all the images in a sing=
-le
-> +binary the container image structure is used.
-> +
-> +At least two containers are needed for the boot process, the first conta=
-iner
-> +must include only the Security Subsystem FW (SECO/ELE FW provided by NXP=
-).
-> +Additional containers can contain one or multiple images, depending on t=
-he
-> +users specific application.
-> +
-> +The final binary is generated by the imx-mkimage tool.
+> +all the commands that the AHAB executes during the secure boot. These
+> +commands instruct the AHAB code on which memory areas of the image to
+> +authenticate, which keys to install, use and etc. The CSF is generated
 
-Since this series adds a binman-based path for i.MX93 (patches 1 and
-2), please mention that binman is now an alternative to imx-mkimage
-for producing the final signed binary, and cross-reference the new
-i.MX93 guide in patch 4/5. As written, a reader would assume
-imx-mkimage is the only option.
+'install, use and etc.' is not quite English - please rephrase, e.g.
+'which keys to install and use, and so on'.
+
+> +| DT property        | Variable    | Description                        =
+                          |
+> ++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
+> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin =
+                          |
+> ++--------------------+-------------+------------------------------------=
+--------------------------+
+> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha38=
+4_secp384r1_v3_usr_crt.pem|
+
+Just to clarify for the reader - this points at the SRK certificate
+(_crt.pem), not the private key. The DT property is nxp,srk-crt but
+the env var is SRK_KEY, which is confusing on its own; please spell
+out in the Description column that it is the SRK certificate. Also,
+the matching _key.pem file must sit next to the cert for CST to find
+it - worth stating explicitly, since there is no knob to point at it
+separately.
+
+> +See the introduction_ahab.txt document for the PKI tree generation
+> +procedure (ahab_pki_tree tool) and for the SRK Table generation
+> +(srktool, use the SHA256 variant for i.MX93).
+
+Just to check - the default key material the etype uses is
+'sha384_secp384r1' (see KEY_NAME in nxp_imx93cst.py), so telling the
+reader to use the SHA256 srktool variant looks inconsistent with what
+CST is then asked to sign with. Can you confirm which srktool hash
+flag matches the shipped default, and align this sentence with it?
 
 Regards,
 Simon
