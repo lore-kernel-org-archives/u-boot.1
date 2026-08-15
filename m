@@ -1,169 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA258C5CFC1
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 00:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 092A9C5B572
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 00:52:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1A3B340C31;
-	Sat, 15 Aug 2026 00:52:36 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jz_-4y8HUHEh; Sat, 15 Aug 2026 00:52:34 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E758540CA4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786755154;
-	bh=kxdXEEvFBDlESkW7KT/cnrmZhm5JKA+MHzP4AJPAcm4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=EKdMICFb2F+R7//4xlp5hQdGe8+fDfVCViJqAAe6atl8paaCAz7L2PNhCnRTJhNK+
-	 odkzgoTF1Unj8i4PZAu3GYw7ZGantV6DkExZD9K0SwsT29KbzsJTn+rS8QQL0V8sS6
-	 3zvf6BdaII+2w+CN27oZBsn9SFFWHZ/s22fkJmJk1+jZUyzu6Vq+wcpTfsq6Uyo5wN
-	 WY32g4q35CVi/Cetbp0uM3vvJuYSnxIIlIfCIxEuUS9Ta7GRk/ztzVN7tU3ECLlqYn
-	 0UHtKy/v22mgpqvgogJ8UM1dcnyQfKQktkVqxesKDQY+NOjXz1aeMjtc7SskalACiN
-	 FuXP6L33yHjaQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E758540CA4;
-	Sat, 15 Aug 2026 00:52:33 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9A7E0139A
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:31:31 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 811786068A
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:31:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A8D9760E17;
+	Sat, 15 Aug 2026 00:52:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uMXwITqJ7RfS for <u-boot@lists.u-boot-project.org>;
- Fri, 14 Aug 2026 22:31:30 +0000 (UTC)
+ id zoa30BmntyKi; Sat, 15 Aug 2026 00:52:45 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 70BF360DE8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786755157;
+	bh=u61JgbExgvdpbDFrEKSqRBA0wHIC9BJgqYcdI6uBG8E=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=0+JJlCPLARDJLBR7ZduLvMA1tFO+b5gs59zUaKpEee0Vh5cWYiPxMnP746W29Josc
+	 gp3uvfQun065AbudUfVv503nst+ag6kxtUccpDKr6CIFYROEwKxW6t8Ioz4GfVF4IX
+	 P21sHCqdEcEVtT38/TyUVxmpg4OaVlw3wmY+q6LlKRd2ao/iBH74zWcrQwdQAMZ4eL
+	 ZU/215FLcrKkm68qJlNhcWk14nd9e44LtvqimcQM60qtUrLtWjxrxKelsCmZN6T6WL
+	 B8g+3tq+FGGWoLUj8LoBT7n0RMwbRTVOaouybO4PSb4632sXI30ISKPOZPiVVHxY6v
+	 tKTF9ayB6jJMg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 70BF360DE8;
+	Sat, 15 Aug 2026 00:52:37 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7DE10194
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 00:06:36 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6FC2460A50
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 00:06:36 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VbpMSXDX0ICZ for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 00:06:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8B8D46067E
+ client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
+ envelope-from=dmanlfc@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 9B88F60738
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8B8D46067E
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=UADnuBjr
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8B8D46067E
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:31:30 +0000 (UTC)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6a0794669a6so2461896a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 15:31:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786746688; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9B88F60738
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=Boo2ddW6
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9B88F60738
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 00:06:35 +0000 (UTC)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-4b21f09ec76so850918b6e.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 17:06:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786752394; cv=none;
  d=google.com; s=arc-20260327;
- b=igSB0MZpzXpLuBSpjRO5CaC9oSa6BoAL8RTFmN/BUXhrPCOAtdA2uUa1q5h+y587Tc
- 6ntvlrkSrbTWKqXAAo/kT/x+v+zkAqF3Ae0VwbbcKyyfL5LFr16fstPO16dcfMIU2N1L
- TNpVm65nnpgsXAawlvSSjTWkvAMDejdX0jHQxThFn6UBbOa4eb++OeAxGpJRN7FCJqoe
- Ur2XUmGLH59p/an0io6VCnQs3xTdpb+fwveI6/Ns718qvi7ubA5KddGbXtN1FWRmZ4ib
- qN5ADJSEt5/Yqd5V1ZESaKsSCD3TBWnU7N3TLXVwmKp9DTaIeVJ9wecHn6GVvszeRLEo
- yMGA==
+ b=bbrJuykRDukU1YBCCotLHOMNSoVIXyypPQ+SWbWjgUF4qA3sY5cFrSF9M/5fJKF9Oh
+ 8ntODoQY2RLHtyfXPaWbcIVNN4/MDWL0F+nzO1bHqC5TYeBWgFm/Bfne2IQUo7cWSkAZ
+ X1D6b0/Y6MvuvrgtAY87gnvOa2IJ7sLV6hZhKM9XUuzMmRsVs9O6aUWBSQsSs6AV14RP
+ ZyHJj6GHabp07t90KCTpIwO31gxNgmskmuGvYVlNenpGRYJjBb2/FHvldVH+DDfK639g
+ GQ/w47ATJrF3fqEy04wTsnauGJ8YyLtBG4Esn8N0bNIjvi7CbLzcNyCzxBmsu2XcaeVo
+ f40g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=kxdXEEvFBDlESkW7KT/cnrmZhm5JKA+MHzP4AJPAcm4=;
- fh=bnad+7a1ZNw2MOCqaBE4yX7FR9MQrd9Cq6xqrouhfQQ=;
- b=fU20TvSk5qoCaQpCgnr/dEgzWsKtp8gR7nQoMTF/p0Y8EvfHw3W8sJ0IyQOQzTZHI6
- nQq29Ew+cpg9mX00qJv5ORsYUSk/2yAINw8Dly4dBtSs++e78W80qLkNBoZd4Xaoe72z
- GvMdP+frXqVluNKBGufUtWLXh3LdmztL/sao75i7f4GG2IqbPO6IoS1AUcwGbLkK/yki
- zv7Hl+2kYDjSJthYycjOf6ktaPCIXI03VKmgtjXSfMovpIR7GzrhZuc802L9VPAK4SvH
- 0gUh3IdYXw8RzvR84M2RT8dIz7mv9X0pMQA9FAmQXTAOyvw5dYgQXjyOhwDlMn1aqAUI
- cc6A==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=u61JgbExgvdpbDFrEKSqRBA0wHIC9BJgqYcdI6uBG8E=;
+ fh=/zQg2PAzuyeK8caZDFOZj8Z21rYh149OSxPPdvlKo8A=;
+ b=PI2PAmKGCP0lNdgZhRI0kMuwEFOgZFxRjVNtQDaB9NYRuIFV4im+umlDiaon1np9X+
+ 8r3OcVGgkHva9kDQf/oIgB0Fk/H799Js4lMgst3qsJCpT4fcOwKk1Gqx51XJFqhrmAi0
+ +nCqO/V0KSKCr5SRmWfMs5yRYA+99XthTbv/EhpOkcBerXWaN+EwDAu4FDDg9qHcnDeI
+ BSQmfvXsm0nLP7cG3EP5Ig9FbiLv3IJ1O0FX3ucUxxLB1Y3eGrlmZbCusch2t2XKbHY+
+ YceZVwTbJ+C5NrGxR0f29sGaMi3PHZRPRhYK+aBdKo0D+0/jFHtGniALYGvXXE7EM5DX
+ J9cw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786746688; x=1787351488;
+ d=gmail.com; s=20251104; t=1786752394; x=1787357194;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=kxdXEEvFBDlESkW7KT/cnrmZhm5JKA+MHzP4AJPAcm4=;
- b=UADnuBjrnSbwltb3OrWIxILrPfUo0YYXNrPOSRhCgjhyiTXaALoauhcUHPN9gU+1Q3
- /le3oq+ckJgan+v8hZGv67A5aWAkiJQQyrJI4oSVAv26B39n1FOmgrvACxmQOmjuJREZ
- 9kVprtOVfS+ZOmrh+hpU2FsWl8+KO9fvGjVdY=
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=u61JgbExgvdpbDFrEKSqRBA0wHIC9BJgqYcdI6uBG8E=;
+ b=Boo2ddW6wg/cQOZXnj7aKuPS7CRlXX+0qE6sbmE8JOcIXKK9PwxBQdii4Lt80p4MB+
+ TSr6MEcPnGF5yNlEfh3jWPzTezMS53QXEuGgYT7mN8cLmgjyqNBTdWUfnCAxI4lNqPZG
+ k7mdwGDCOxX+IAJZS/zWt0mnPmY2xiiGH00hU+wivDwJLBfnDwSggPI+vvE4PbvUAbIl
+ xDdP61BE77g9D2pSVBybzAngPw1xCuHiHr13Q+Pc2qMzB1qE+12xEWCKrwJozzCgPaGi
+ qdjNdb/2j/bVxMIcC5EBjdyZKyGV0ciFWdlM6z7iH+k1vtuYA6V7maf+axg3EhNaKGWB
+ oeqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786746688; x=1787351488;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=kxdXEEvFBDlESkW7KT/cnrmZhm5JKA+MHzP4AJPAcm4=;
- b=bsBK7zwajthWX4wRz2gcNOMAGIxPbJu0B3aFheQNizwI9Inz57eafSR1wcxv5192sF
- Oy1ZRRi1L0ok0rBLKkItZzU4qV+M1JGq+URmUa36kJ/G4WfGCdOgi/4TCc1qFA5pW52G
- GXkkgRD1UlpkrmwaPO5VE31vLvc8gEJp2BrPOZp79LDdj0nf6jAbjZ7gcKr2ldyz5lIU
- PaDzByKnJYM6SVxijIYNF3KCaRBXJnOf9j4WL0CBdUveAdiYp+gJaiQ7LpCkuP0csk8e
- hqI05L89ad96ad6iwk0Nfe05mCBSywMHB3sSr0GODrQzVfVMuGTDc7gUIYsX3JMpXzkx
- lfmQ==
+ d=1e100.net; s=20251104; t=1786752394; x=1787357194;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=u61JgbExgvdpbDFrEKSqRBA0wHIC9BJgqYcdI6uBG8E=;
+ b=fsbLgedA8/Ev08+Y/DDQkP0Aqa6i9jsCog1gB5O8jpH8DCggBeD4qsLq2jXMijIfLj
+ RhTDKUtCw4sdJ3AnY58t8LxR+BdF+vf3Y+81wk24ho3T3gr0K/4CfqVHCetqCx7Rddc7
+ WHmfE3NT7nglCEaypXdccsxqraJK0nuxlpCCQHQ+aEiJk7pG1dl24R0Y75SFiXjI0ndR
+ miPgjNeUqMNj2Fv1d0nZseFgVZujVnhgJmfyaqR/ltAEhAikhI+0PEVw75vheo1wcp2V
+ X9l4GRPak6lXrcK8uAKmz2bOsLLssuBEs6dlqo+dQ5M2rI1hVl8QGvZk9L86TBzYIlhl
+ JUpQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoIGraeY2df2oEzrcJRUFEzUJxubaurp7SvQl4TnNwvaySv7NQ02nT9NlIc/YFuB18kf/xzgCs=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxEAcJhJdE/7f7osg5kunmz4qpTgC8mviL6GPCGScxvgP8QxfN9
- Io/J0xM39syvm7ifmbFulqt2OE4JVkl/veu89GYf+7CFw9DtZoE9gPyDeOPFhTbFTDxfV9ugaIo
- /0/eyDuHJIigfiSUugbc1T0AjEEIG2Ud6fZDKsvTJ
-X-Gm-Gg: AR+sD11us6fePn5r7hy/L4zyG7vX7PbkxEGH3Bk9sj6CbCo3mNi4CZSziJsIL7SMgM2
- ZJtMepn+6tki4LnHO65W5H+y1P2BbgoiLhuf024duP6sWj4D/CjHYHfsW1PQNMie+5vR5nz/G1r
- XavkqzWTi9SxDfprRChaI8lyL5lxSQIprOm/+MWJZgUM/qaCamArSjug8XZ33oBF0jeYORLDgSb
- j8QPgAe5l0rNqvRaoADcU2GysTqZnQJCQoJA7WmKf4PcDyDiUiH4vshY4jofdJvHFO9XetiJjGu
- OA8LkfpokBh/xKeCXxTX19d7oJV0mJ/L/4t7N6s6aPy95Pa1PfGUyQ==
-X-Received: by 2002:a17:907:3f83:b0:c16:14d1:b529 with SMTP id
- a640c23a62f3a-c212a2b2a40mr439931166b.18.1786746688509; Fri, 14 Aug 2026
- 15:31:28 -0700 (PDT)
+ AHgh+RqzH5kAbYBdmUguH5E2hlqsBJKTdzXwSbRdSVnWGjaU76Jil1sB2D43k9ciyFj9ZKcN2AGyHqk=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyAOXeION2d71MhRz24vwpb8Za+wCh0QcoMjdjfswi6VgIHmMLg
+ HF9/APbF33uw+cUQ/oNzwUh0X6+M4bbcueb6xuvG71L26EuOyIPW1zLC+quxACRPtUeJSd4j1L6
+ 664RYscYX3zTIPsx+b5L2znYFaVrTOhg=
+X-Gm-Gg: AR+sD13s7aVO2qcEfX12b0pTatJ8bN0XiufTyQsg73Y8jVP1dBWjYVJzqbDahaSMLdZ
+ mTErPaH3j576umc/Pu/XrxV6fj0LG6iuDYbGCA9OLM9UZ/pGQYe61JGhrfvDXuqo4J9qYeDEBz7
+ Tlpdlg9VwSjjnqeW31rbPlW37a/Tl484nedANYB3z0gXkEFG/VTgstPvQ4dg8JzS+Z4k31zXPbq
+ W7MHbgczPzzsBO4M1XGU1VCHHli+xoCS3HFXc8VSDU92ifRzYhtx/LOAAW8uUiVwetHsUWSGLLa
+ 2hmdOiBT1bfIdKgyYArzrIiX2EgyZZnV2SOvT3PUQsfZ/A==
+X-Received: by 2002:a05:6820:2228:b0:6a3:e297:2f14 with SMTP id
+ 006d021491bc7-6b0d611ec87mr7957263eaf.8.1786752394407; Fri, 14 Aug 2026
+ 17:06:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260813-submit-ce-series-v2-v7-0-593fcd8479fd@gmail.com>
- <20260813-submit-ce-series-v2-v7-6-593fcd8479fd@gmail.com>
-In-Reply-To: <20260813-submit-ce-series-v2-v7-6-593fcd8479fd@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Aug 2026 16:31:17 -0600
-X-Gm-Features: AcwNN1Xxv0N5l_Z_C1Wxr2LAvpqDj2SrnpGWh5CpnTgYUgqxs6qgbOpOBjhnXhs
-Message-ID: <CAFLszTig3sOjU-bDZ5mrkmXvRabLA4Rsg4oC_n6+4Y=ghhXpeA@mail.gmail.com>
-Subject: Re: [PATCH v7 06/15] crypto: hash: support hardware-only progressive
- hashing
-To: james.hilliard1@gmail.com
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- u-boot@lists.u-boot-project.org, 
- Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Thierry Reding <treding@nvidia.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Rasmus Villemoes <ravi@prevas.dk>, Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
- Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
- Daniel Golle <daniel@makrotopia.org>, Francois Berder <fberder@outlook.fr>,
- Peng Fan <peng.fan@nxp.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Randolph Sapp <rs@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Alexey Charkov <alchark@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Johan Jonker <jbx6244@gmail.com>, Francesco Valla <francesco@valla.it>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michael Walle <mwalle@kernel.org>, 
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
- Richard Genoud <richard.genoud@bootlin.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, E Shattow <e@freeshell.de>, 
- Enric Balletbo i Serra <eballetbo@kernel.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Raymond Mao <raymond.mao@riscstar.com>, 
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, Heiko Stuebner <heiko@sntech.de>, 
- Vincent Jardin <vjardin@free.fr>, Raymond Mao <raymondmaoca@gmail.com>,
- Yao Zi <me@ziyao.cc>
+References: <CAOyTmd13R7_fan-iB8qK55AFZoba+RCi4VT-GOa5ot+OZD__Rg@mail.gmail.com>
+ <38c0d683-46bc-42b1-86a1-345b2070084b@cherry.de>
+ <PH0PR19MB997338FA72B2980A64B4194127A5DA2@PH0PR19MB997338.namprd19.prod.outlook.com>
+In-Reply-To: <PH0PR19MB997338FA72B2980A64B4194127A5DA2@PH0PR19MB997338.namprd19.prod.outlook.com>
+From: Daniel Martin <dmanlfc@gmail.com>
+Date: Sat, 15 Aug 2026 10:06:23 +1000
+X-Gm-Features: AUfX_mzf3iJKJXAyd031AZER3EgK8Xsyhxxs6AMYGL0RykgPMNaaq3icKy4cYJk
+Message-ID: <CAOyTmd1JvBqRiuBPcLxkhF+x6yws6uOQ7z6vZqq3jrZkgj7+tg@mail.gmail.com>
+Subject: Re: [BUG] rockchip: v2026.07 fails to boot on GameForce Ace (RK3588S)
+To: Christopher Morgan <macromorgan@hotmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 15 Aug 2026 00:52:29 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -179,60 +148,100 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi James,
+Thanks for the further details Chris,
 
-On 2026-08-13T19:58:53, James Hilliard <james.hilliard1@gmail.com> wrote:
-> crypto: hash: support hardware-only progressive hashing
+It would indeed be great if we could move this device to mainline end-to-en=
+d.
+Let me know how you get on with v2026.07 and if possible, test your
+DTS with the stable kernel (7.1.8 or similar).
+When I reverted uboot, I encountered inconsistent I/O issues with the
+latest stable kernel, therefore I ended up going back to the BSP.
+
+Thanks for all your work, we appreciate the effort.
+
+Dan
+
+
+On Sat, 15 Aug 2026 at 07:40, Christopher Morgan
+<macromorgan@hotmail.com> wrote:
 >
-> FIT configuration signatures hash multiple discontiguous regions through
-> the legacy progressive hash interface. This still requires a software
-> implementation even when image hashes use a driver-model hardware
-> provider.
+> I'm having trouble with my usual email client, so I'm sorry if this messa=
+ge is formatted weird.
 >
-> Add provider selection for progressive driver-model hashing and use it
-> from hash_calculate(). Allow SPL_SHA256_LEGACY to be disabled explicitly,
-> link the SHA-256 software support only for a selected software backend,
-> and make legacy fallback paths reject an algorithm whose software
-> callbacks are absent.
+> I have tested the device most recently with 2026.04 with the default defc=
+onfig options. I am using mainline Arm Trusted Firmware though, not the Roc=
+kchip versions. Using Rockchip's A-TF should work, but again it's not somet=
+hing I've tested. I can note that if you're using mainline A-TF along with =
+mainline Optee, you need to pass CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3DN, othe=
+rwise the device will fail to boot because it won't protect the Optee regio=
+ns. (For mainline A-TF CONFIG_SPL_ATF_NO_PLATFORM_PARAM is optional unless =
+you use Optee, for Rockchip's BL31 you need CONFIG_SPL_ATF_NO_PLATFORM_PARA=
+M=3DY).
 >
-> Extend the hash provider-selection test to cover progressive
-> initialization.
-
-That seems like a stale comment, at least for this commit.
-
+> I'm going to test the device next week and see if I encounter any issues =
+with it. I'll report back if I find out anything weird.
 >
-> This permits SPL to retain SHA-256 FIT support while relying exclusively
-> on a hardware hash provider.
+> Thank you,
+> Chris
+> ________________________________
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+> Sent: Wednesday, August 12, 2026 10:22 AM
+> To: u-boot@lists.u-boot-project.org <u-boot@lists.u-boot-project.org>; dm=
+anlfc@gmail.com <dmanlfc@gmail.com>
+> Cc: Chris Morgan <macromorgan@hotmail.com>
+> Subject: Re: [BUG] rockchip: v2026.07 fails to boot on GameForce Ace (RK3=
+588S)
 >
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> +Cc Chris who maintains this board and may be able to help.
 >
-> boot/image-fit.c                  |  2 +-
->  common/hash.c                     | 21 +++++++++++++++++++--
->  drivers/crypto/hash/hash-uclass.c | 31 +++++++++++++++++++++++++++++++
->  include/u-boot/hash.h             | 14 ++++++++++++++
->  lib/Makefile                      |  4 ++--
->  lib/hash-checksum.c               | 28 +++++++++++++++++++++++++++-
->  lib/mbedtls/Kconfig               |  2 +-
->  7 files changed, 95 insertions(+), 7 deletions(-)
+> I somehow didn't receive this mail in my inbox, here's my attempt at
+> quoting text from a mail I didn't receive (and it's also not available
+> on lore.kernel.org...).
+>
+>  > Hello,
+>  >
+>  > I am experiencing a total boot failure on the GameForce Ace handheld
+>  > console (Rockchip RK3588S) when trying to run mainline U-Boot
+>  > v2026.07.
+>  > The device fails to initialize or display any output during the
+>  > initial handshake.
+>  > Unfortunately, due to the tightly integrated form factor of this
+>  > handheld device, it is exceptionally difficult to break open the
+>  > casing and wire up a UART serial console to capture early boot logs.
+>  > The target operating system (Batocera Linux) environment is running
+>  > the mainline Linux 7.1.5 kernel.
+>  > Given the complete lack of visible console output, I wanted to check:
+>  >
+>  > 1. Has the GameForce Ace board target been actively tested with the
+>  > v2026.07 release?
+>  > 2. Are there any specific or updated build instructions, BL31/TPL/SPL
+>  > combinations, or proprietary Rockchip firmware binary requirements
+>  > (rkbin) needed for this release that may differ from previous
+>  > versions?
+>  >
+>  > For reference, the build configuration used was: gameforce-ace->
+> rk3588s_defconfig
+>  > TF-A / BL31 version: rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.21.bin /
+>  > rk3588_bl31_v1.54.elf
+>  > Compiler: GCC 14.3
+>  > Linux 7.1.5 uses the rk3588s-gameforce-ace.dts
+>  >
+>  > Any guidance on known regressions regarding this target, or
+>  > recommendations on how to isolate the stage where it hangs without a
+>  > hardware UART, would be greatly appreciated.
+>  >
+>
+> If you have a known working version of U-Boot, maybe start a bisect with
+> that commit as good and 2026.07 as bad to isolate a commit that broke
+> the board.
+>
+> Cheers,
+> Quentin
 
-> diff --git a/lib/hash-checksum.c b/lib/hash-checksum.c
-> @@ -20,13 +22,37 @@ int hash_calculate(const char *name,
-> +             if (!ret) {
-> +                     for (i = 0; i < region_count; i++) {
-> +                             ret = hash_update(dev, ctx, region[i].data,
-> +                                               region[i].size);
-> +                             if (ret)
-> +                                     return ret;
-> +                     }
-> +
-> +                     return hash_finish(dev, ctx, checksum);
-> +             }
 
-If hash_update() fails partway through, the provider's ctx is leaked -
-nothing calls hash_finish() or an equivalent free path. Do you need an
-explicit teardown on the error exit?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--=20
 
-Regards,
-Simon
+Kind Regards,
+
+Daniel
