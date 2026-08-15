@@ -1,103 +1,136 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71DE4C5CFC1
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 19:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD7E5C5AD5A
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 20:05:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1FEC080C98;
-	Sat, 15 Aug 2026 19:39:33 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PNRdcMB4BEMV; Sat, 15 Aug 2026 19:39:31 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9454180C43
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786822771;
-	bh=hnK6yHaovixTBqvJhdbSlhutMh2Qp+EGTnWHpbZuZiE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=JqwDG80Y6TtyKpyoJWrFl50Fq001VuMF76c7ZOTouYrD1ZIRyCysaFKjCkDkofzds
-	 fcZRn4hu6FHAmgE6XRqKS+hY12Z21gNTlMFIIzlc5tgYFxYqp7VzPZp0yyRs3PWoRu
-	 WNxuMbQVQKvxOLyM3OzBP/f0iqNJ038lwQvBkbMNRPu9rORFQLjIaO7dU5V+/Bs35L
-	 EKgV74voKKgimG6GH1DWlmetMiIko31FCK3BmYiZ9tiILVH2spQiFpsEOcdi+8rINn
-	 KLObRqJjCSIN5ftbEUjtObyrkIHaSEtlXi4s8fpJwNQT9EOn96IRWAFDSk1Z+KLe/S
-	 eIMo1L/KeC4Yw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9454180C43;
-	Sat, 15 Aug 2026 19:39:31 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 22B5A333
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:39:30 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 08236407AD
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:39:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 04DA7407CF;
+	Sat, 15 Aug 2026 20:05:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HsBdfIgvRaMp for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 19:39:29 +0000 (UTC)
-X-Greylist: delayed 4201 seconds by postgrey-1.37 at util1.osuosl.org;
- Sat, 15 Aug 2026 19:39:28 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 71A0140770
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=icloud.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 71A0140770
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=icloud.com header.i=@icloud.com header.a=rsa-sha256
- header.s=1a1hai header.b=hlLJZTa5
+ id eYIipEr7-caM; Sat, 15 Aug 2026 20:05:13 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3CFEA407AF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786824313;
+	bh=RgWWmdgwhBY8QKtY7uoB1ipD9W62ZHFyXi4bgJ0uVqM=;
+	h=References:In-Reply-To:From:Date:Subject:To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FXSXjiWtlgOoQzTWDGfJTCLbo3n7/N2daSae5FVoJmIIdrlX/Yl6S7R2eoMH797VT
+	 EIWZb9Ujyvn6qoT/ow2LKNGlLcom/ts+gtnjI7hkxlHMssBzkAfwyxSepyKkj1mwri
+	 tx5oAcI2SZiT3/7R1OpJeqUpmfbR9x4+ohZHCz56kTx36HpDTGOORhxWK9djyMa9PT
+	 +HHiP/5qCo7lzF0QI2foR8oT1ApA3seHjYW5a3HPyrFA1fZxjohAO9ahSqrwPYZC4X
+	 eAItnBBdhh8CKayMGCXso+Aj6jcdLrmcCZHK0PzpqJ1Vz8bQvlvtQwyAp/wKu7Ogcz
+	 m8KXCn6NuzQWg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3CFEA407AF;
+	Sat, 15 Aug 2026 20:05:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 90BAC334
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:44:48 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 831C76063F
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:44:48 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Wtme4dEUP_WZ for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 19:44:47 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:b747:3006:206::35; helo=outbound.qs.icloud.com;
- envelope-from=valentinliu@icloud.com; receiver=<UNKNOWN> 
-Received: from outbound.qs.icloud.com (qs-2004e-snip6-11.eps.apple.com
- [IPv6:2a01:b747:3006:206::35])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 71A0140770
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:39:28 +0000 (UTC)
-Received: from outbound.qs.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-east-2d-60-percent-6 (Postfix) with ESMTPS id
- 4B29E1800123; Sat, 15 Aug 2026 18:23:32 +0000 (UTC)
-X-ICL-RepId: 01a006aa-3188-7af6-85dd-0e8a244cf93c
-X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQ9IHV8FWhxEC1YBWQ9LVxQEDlIBUgVGGVcUWhh3AlEcVg1XQ1QEX1BfHA4EVAddBV1WUAJaS0ATBE8TBVIHXU1WDUcPWB5cFBcJQENeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVaDlsERxQXG1wAFwZbFAREAV0FXQJICE0CVQVYAEIXTQBaB0YDXU8ZXwhZH1seVRFGLV4IXh9MHB0OWAYMUE0BQwgKAlEcVg1X
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
- t=1786818213; x=1789410213; bh=hnK6yHaovixTBqvJhdbSlhutMh2Qp+EGTnWHpbZuZiE=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
- b=hlLJZTa5779z1J3/4crhCjf6LZONm1SFXVXO/yI9SkGFEmVnmCxoifo20mTntWYum/rtHCdJtf9uR/D7xodP24C8oZz9dBH53jE5XZSBrs9vvMg117aMbOpO0YkPzBu9vVqQVsC/agSK4fHC5279u4E+TPuhRO4JR05bMzuReW0NRml4YJfU0bnEcr/ERhtMI+cP86PiNP7FAxs0OkbYRsdlgOFQxPs6vhwWD9n/0eoHUXnthuM2WOPjiJh/6Vk88Kf+R5ABq6Xlu5W4/8MA6QD4eLrQws9UlV26JPHsfujO5tn3xc0oK4Uvj6YwhZn9I4O7hVFbOPjI2h3hODyrEg==
-Received: from DESKTOP-GUOEOAE.lan (unknown [17.57.155.37])
- by p00-icloudmta-asmtp-us-east-2d-60-percent-6 (Postfix) with ESMTPSA id
- 0121518004F9; Sat, 15 Aug 2026 18:23:28 +0000 (UTC)
-From: Valentin Liu <valentinliu@icloud.com>
-To: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org,
- Valentin Liu <valentinliu@icloud.com>
-Subject: [PATCH v2] arm: rockchip: spl: Add hotkey detection support.
-Date: Sun, 16 Aug 2026 02:23:22 +0800
-Message-ID: <20260815182322.5370-1-valentinliu@icloud.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260815170844.1196849-1-valentinliu@icloud.com>
-References: <20260815170844.1196849-1-valentinliu@icloud.com>
+ client-ip=2607:f8b0:4864:20::929; helo=mail-ua1-x929.google.com;
+ envelope-from=pranavkasthuri@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 40143605E6
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 40143605E6
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=LpWq2Rq+
+Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
+ [IPv6:2607:f8b0:4864:20::929])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 40143605E6
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:44:47 +0000 (UTC)
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-97bf8f6a31eso451452241.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 12:44:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786823086; cv=none;
+ d=google.com; s=arc-20260327;
+ b=AgS6SHov4UFcjQxkL92ZImM5eQlSKB7nhQxzot9IpqevHPrjHvs+tbAAJFqde0+DUs
+ UaMyqAHY/m6LCy23Xu8QOMFGgQsTouW05P42P3gUDXU3GZrvXlrdWokIK59KH0oNQteW
+ na9qPdsr9mS6PeNkvITCNAuFceuA0pWs81aB1B5d3j7aPVKJ7LMQ4aLr7RCyLmCxmauc
+ ndtt+L573OHwSaxd1CNsN9Pi5Kr/g3X+99dDRc4z6/d8TzlrCxie1kOIwaSDsrCffZQY
+ GYhyPskSEb5OniAPOtRNvhy3VdZoXpSmObPyNS3poplOEQrH1qDuV7L8Bh6rndq/6uxz
+ f4kw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :dkim-signature;
+ bh=QozyvD3peM26WCnTiZT2OqoF5THu7syw1NCSap/W1Ho=;
+ fh=5Npx3k9b5z47XKiJBELwPu6sioz5jeS2G3yV/mI266o=;
+ b=jWI5DH6Pj41QaoP8aMm64SDxMnlba7s6TMG6ZfXnnBqr94f8STW7cHJo1BBRsVhEc7
+ lBsqHZXrM23CEfygIxqgeOzrbh+k7Nxc5XBTK+fD875kNenTZhyysgCCAS5WGSLsCpF+
+ hYy6gOiP6rXwMcS/86k0RmNnUwMbDDLQMM3DfgDQMFmz202snHMYEknxIpr7v0vFDz6p
+ Q4WWvzHsBkYZqBWyrE+iTyYa6ssYx+UelyzI1SB3JMtF0qJUPSivF/HYS7c7HX3J8a7w
+ Pziw+Fh6q1oNovDWr8C5WwVbJNT2Mc0wLLyQClSpSoNQjSylVvGz4GVM5pg9u4DJsQ8o
+ 2F/A==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1786823086; x=1787427886;
+ darn=lists.u-boot-project.org; 
+ h=content-type:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=QozyvD3peM26WCnTiZT2OqoF5THu7syw1NCSap/W1Ho=;
+ b=LpWq2Rq+TipjOTUtJCTiwRJcGtilEYc/4U2HSdIU/lPOpuon2An4d/N2bTobT43+22
+ 6db3fbC5xdAk7YDkzNVsR7aUE+tPSQGaOSwZOnTEMjyG8NAEY7Lars/uVP8/VnE73VSN
+ yIWog8c70a1AXcszl4HauKPZW+bXOGcL5WdQIf2g+Uvx9jUU/+0JFM0ETe+/haynEwsb
+ KK+0JvejaQn3lcQn18ba5Ek2y7ovicSrDwAK+l2PCz54QURROfoVuOMq+o8/rQXjXwvd
+ 09zjfOXboR2KsTx6QWPHCe4cwNQr8Q4ONrhZ/8Dm93ATiJzANSjUZDyIY0B4WC25dhzO
+ g99w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786823086; x=1787427886;
+ h=content-type:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=QozyvD3peM26WCnTiZT2OqoF5THu7syw1NCSap/W1Ho=;
+ b=chwOPQplwzTLsdY5c5ys239Tzmo3w5PZinI0icu/RjiKGFeOe4yIGfes2zbT82MQKm
+ RBzzCY3EKoBCtcCaBuut8IbBNHFXtnYS96XQA0o0kWiibg7uizv3hOZlp2vGpn+F8h+i
+ YThoV3/9BCNMrQuL26VV/Bk8sRzJg9mYKpJB1N1MnogzlrxqJnOeQ6YyPIhJcZU938L0
+ T8zZsVHbR54RkWmXL29KIGEl7OUW78oov8CNEIeDTXRrn0i+UFOTR40XVZ7GrChI8fia
+ 2shdv3hT3kM2Gq9qHMFHvtr0BqXAC9YldjKlBeezSIt1oyEMDBLShxf/OBF91DwPCMTD
+ NcQw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrRqnCxCSd7r7OFKjLZW9vLXhnPWkTuyadm2M7CDDGh/mKvXgyGIok6m32S2fWv9JMesr88Xto=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzzVGSYMKU7NqUGADOtO2MWNsULyTKj6Q8Csyw4vLpSyXEtZz9R
+ vT7RZD1KNPi8Z4oEAb7ADXtPQ80Ez9L7MeBdZBMGQ0W++askj0bW2jh7BVeArzRR46Q59aNcrdK
+ ecH+GtRFMwXquzzugOux2LbIZpXKd6mIqAapkfNQ=
+X-Gm-Gg: AR+sD108vzZiCuS7gLEMz4DtidgDBTpd+jg1QnvkbJ0Wk7hA4+30YtYhx2Zd3kk8O3Y
+ b6oTkemEDlrY7HFPjiZm7XFuq2HhDQo1/Dm3xMW/p4LEoayTaKyvxTDZsb6S1qKu21+H6TwTZuh
+ UMkV1QkW9BuZCCbmZqX98kp6dDyo9El3mD72Haw0cs0YljJzQBqEztcYPIxIX30Rhh4xnMV3fwK
+ aGMQY67YocXyHPW18NT5n3p1zkHtsxhkikUPLd5Pp5GcpCXzboyVyUjcuM2/gssqHh+IvWCoomk
+ 8yZU1M5PcaUSzgt24vIJDodeoounYsZg6b2e8EYpIrT/BErhO/WtKknpnMNeF1yfTAIuucYG6vk
+ QC2VhPMo/GIaifJ/GflJbGxo1srOZ
+X-Received: by 2002:a05:6102:5e90:b0:76e:e529:2fcf with SMTP id
+ ada2fe7eead31-76f2a9eeef3mr2230460137.6.1786823085833; Sat, 15 Aug 2026
+ 12:44:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: Y1FN6PFlFhqUE0PGM6Gsd6Ydye7sX4hJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE1MDEzOCBTYWx0ZWRfX1ytjeoSNyZF2
- tE2HFGnvDc4eorN3Zres095FidEfvteFahqB17UoJMimxsq81w+euBd2xFcJvq0BNZ5c07+ZCVh
- 0C22f4VnpktPMkwioyVENZuG/uHO5YbEkxl7A/SreMzqFenSG7nChzhQ1MaIcmjsDkgWiaw9nJn
- ihQUwxDOUrCRqQ9J/vJKq5minTn/Am1ZxctoW0hfqUbk9pq2L8a8/hVXjo4vwlV3jBd9AuuRFZd
- B+CmTn1pEnMbW58hoH9a8TSi6ZHQ7/ZD8nF0jx4AdsG0hb0bq8pY8XPoYKK7o3De5Yd6OvQEAj1
- v5hY1jd8D0lk8sQ5CeFgaaPCJNMMt5Krl6H81vpgcliWUBab7pLV0DYccclcNI=
-X-Authority-Info-Out: v=2.4 cv=EfjFgfmC c=1 sm=1 tr=0 ts=6a80aea5
- cx=c_apl:c_pps:t_out a=bsP7O+dXZ5uKcj+dsLqiMw==:117
- a=bsP7O+dXZ5uKcj+dsLqiMw==:17 a=Sv0fKeRqtYgA:10 a=x7bEGLp0ZPQA:10
- a=LQAHsTbMm04A:10 a=VkNPw1HP01LnGYTKEx00:22 a=v3ZZPjhaAAAA:8
- a=dZgUxksGFSRSUUpnT4MA:9
-X-Proofpoint-GUID: Y1FN6PFlFhqUE0PGM6Gsd6Ydye7sX4hJ
-X-JNJ: AAAAAAABXnUD/hpyRwMgE4uy+vKlnR+ha9xaqO9aDUOADUizHUAbjTRZxolyDaEaR7QcLFEY+/e87GWq5vKoFqh8DY75VvTpp5kjtnZ6k7gO6WfDm0psscfS10Dkbu3O2OS6KeIki3SGTBaXv79bxQazs4BeMTQhNIzB96/PIrjZovt7ZL4URAFI74h/HFhSE4C7AUvbuIzL9jivv6Lftg6MI0G0tEjjaIQgXfLgnQCYjPoQ7jWd0N8Z63QWsh45fo6p9TufLSK7QDAKEzc0SG13hvuZfi474YwPkAVlJm3ibmfQLlw8JWWjrmt70ecwoVBI2PSTcENhFc9KKNiHgcdaVIoPZWjmgrUfHpbpXs70/HB62Mgf2uxMzh8CBPvo7awp0IJdPLMdbKf1rgKyxTxGuEccC0MrgXZ5yZxF2aHeWeaKGWaGrpdJThebelpA3hgY2lK1prX1+Gdql68oUCasIx7q8HNzI+dD+d0ptBJSDhU2f+oiOlrWlipQHt8pH8tPJUvd78Lzo6evAgOSGj6PGWAYwjyRpAx4CnfVqfUBn4BXvGw/cILeGaaBGb8I9i0AJA7mVQITUDm5r55CSfnX0i3VbOoOLeXpIcYWTq5Mu4s2eXKokA8pC4kwkj9r68TOjshMIjCcZ8EteHtLgiOMLOaVxFH6Sr0xyhkXqLwguf7O6wYekpfEuUh/B3srDGahgQzq0AqD1xBDzOKxp/aNFhAn/gaFuLvnscXUxLLStuCeGwlPm7FpZ2lgcSm6qquAMayDDDFqCx7NXWglgiVCi8S55Tb68fNv6hqkBA71SBsQkQb0gNwFqCfcfY5RwGusGNcsCKN8oLpv4fC9lWyMMLRmhuLAWHK9EJTtrgw8uSImBmhgLr1CuH1zX+i+DyF/wZRZuxYeJSggaZLRznDwDn+uKXOQCJXd0WGi8RyfyeuBXlcj769L+bD1gpzJmWWnynNVvfHPzZX/1ZFt8bK6AIvysYD
- ZCi0MJUAEqSjnocif67akvrwh18rvVXGKTQyK/blcIA/fZKuy+mex5zRuA4La/Du4jyGyDd/LF5dcpXTrg6A/2Jy4e2jnlRC4BSEHO8V1DfQz2OZ4ZPFGG9vQ461OJEpEJCqKi9K4uXHSj0AqsXmvK2HHbCdHUkgYNSn2bfssvslAgx2Aa4HqHhmWlN1cK1dgG7NO3sKe6sOE4JE3+82vAdWVW8rcT0IGx6aQxKMverBYuvSCc2srnPeY0d9q7Z4jHs/U1M/Wb9x0HZMLUvU9MQpOsl3knt1N0wDgafp+hgr2PesWbc0daEM9ghE=
+References: <CANMPf=M9ZsryW_doxe7Vrvd4atYpFgctR4e_aE6xjRZWDa3LYw@mail.gmail.com>
+In-Reply-To: <CANMPf=M9ZsryW_doxe7Vrvd4atYpFgctR4e_aE6xjRZWDa3LYw@mail.gmail.com>
+From: Pranav R <pranavkasthuri@gmail.com>
+Date: Sat, 15 Aug 2026 20:44:34 +0100
+X-Gm-Features: AcwNN1WhN4mM-p7Z7CmVOAv6FF-V2BRPaQQe9pW536_Q5mgD3QVEKy4MX_MEfdU
+Message-ID: <CANMPf=M-XLJuw4OM9C+xFCB03DByWvyin+_iFOMyrrSXSjqYfw@mail.gmail.com>
+Subject: Re: [SECURITY] Five vulnerabilities in FIT cipher, squashfs, and
+ BOOTP/DHCP handling (mainline, VERSION 2026.07 dev)
+To: trini@konsulko.com, u-boot@lists.u-boot-project.org
+X-Mailman-Approved-At: Sat, 15 Aug 2026 20:05:11 +0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.30
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -112,121 +145,105 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add a configurable Rockchip SPL hotkey feature that checks the
-serial console during SPL startup.
+Hello Team,
 
-Ctrl+B can be used to enter BootROM download (MASKROM) mode and
-be widely used. We can add more boot mode support in future.
+I am writing to follow up on the security vulnerability report I submitted
+on July 23, 2026, regarding the five memory-safety findings in the FIT
+cipher, squashfs, and BOOTP/DHCP components.
 
-Add CONFIG_SPL_ROCKCHIP_HOTKEY to enable the feature and wait for
-the serial port to be ready to receive input before checking for
-hotkeys.
+Could you please provide an update on your team's verification progress for
+these findings? I would also appreciate any visibility you can share
+regarding the remediation timeline or planned target dates for deploying
+the corresponding patches.
 
-Signed-off-by: Valentin Liu <valentinliu@icloud.com>
----
-Changes for v2:
-- Simplify the dependencies of SPL_ROCKCHIP_HOTKEY.
-- Remove the conditions for the newly added includes.
+Thank you for your time and continued coordination.
 
- arch/arm/mach-rockchip/Kconfig | 13 +++++++++++
- arch/arm/mach-rockchip/spl.c   | 40 ++++++++++++++++++++++++++++++++++
- 2 files changed, 53 insertions(+)
+Regards,
+Pranav Rajendran
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 1a2e7847c9e..f2d2b5520ef 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -743,6 +743,19 @@ config TPL_ROCKCHIP_EARLYRETURN_TO_BROM
- config SPL_MMC
- 	default y if !SPL_ROCKCHIP_BACK_TO_BROM
- 
-+config SPL_ROCKCHIP_HOTKEY
-+	bool "SPL hotkey support"
-+	depends on SPL_DM_RESET && SPL_SERIAL
-+	help
-+	  Enable hotkey detection during SPL booting stage.
-+
-+	  When enabled, SPL checks the serial console for a control
-+	  character and can execute Rockchip-specific hotkey actions,
-+	  such as entering BootROM download mode (MASKROM) with Ctrl+B.
-+
-+	  The hotkey is checked after the SPL console has been
-+	  initialized.
-+
- config ROCKCHIP_SPI_IMAGE
- 	bool "Build a SPI image for rockchip"
- 	help
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index e989c148079..0422415b06e 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -13,12 +13,15 @@
- #include <log.h>
- #include <mapmem.h>
- #include <ram.h>
-+#include <serial.h>
- #include <spl.h>
-+#include <asm/arch-rockchip/boot_mode.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/timer.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <linux/delay.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -107,6 +110,40 @@ __weak int arch_cpu_init(void)
- 	return 0;
- }
- 
-+#if IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY)
-+static void rockchip_reset_from_hotkey(const int code)
-+{
-+	switch (code) {
-+	case 0x02:
-+		printf("SPL Hotkey: Ctrl+B: BootROM download!\n");
-+		writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);
-+		do_reset(NULL, 0, 0, NULL);
-+		/*NOTREACHED*/
-+	default:
-+		if (code <= 0x1a) /* 'z' */
-+			printf("SPL Hotkey: Ctrl+%c\n", code + 'A' - 1);
-+		else
-+			printf("SPL Hotkey: Unknown code: 0x%x, ignore\n", code);
-+	}
-+}
-+
-+static void spl_hotkey_init(void)
-+{
-+	if (!gd || !(gd->flags & GD_FLG_HAVE_CONSOLE))
-+		return;
-+	if (gd->flags & GD_FLG_DISABLE_CONSOLE)
-+		return;
-+
-+	/* Wait for the serial port to be ready to receive data. */
-+	mdelay(100);
-+
-+	if (serial_tstc())
-+		rockchip_reset_from_hotkey(serial_getc());
-+	else
-+		printf("SPL Hotkey: No key pressed, continue\n");
-+}
-+#endif
-+
- void board_init_f(ulong dummy)
- {
- 	int ret;
-@@ -143,6 +180,9 @@ void board_init_f(ulong dummy)
- 	}
- #endif
- 	preloader_console_init();
-+
-+	if (IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY))
-+		spl_hotkey_init();
- }
- 
- void spl_board_prepare_for_boot(void)
--- 
-2.53.0
 
+On Thu, Jul 23, 2026 at 11:56=E2=80=AFPM Pranav R <pranavkasthuri@gmail.com=
+> wrote:
+
+> Hello Team,
+> I am reporting five memory-safety vulnerabilities found during a source
+> review of the current U-Boot mainline (VERSION 2026.07, development tree =
+=E2=80=94
+> happy to confirm against a specific commit if that's useful; my checkout
+> doesn't carry git metadata).
+> All are static-analysis findings, traced end-to-end from
+> attacker-controlled input to the vulnerable operation; none have been
+> exploited against real hardware. Detailed reports with reproduction steps
+> and remediation suggestions are attached as PDFs.
+> Summary of Findings
+> *1. Heap buffer overflow (write) in FIT image AES-CBC decrypt*
+>
+>    - *Location:* lib/aes/aes-decrypt.c, lib/aes.c =E2=80=94 CONFIG_FIT_CI=
+PHER
+>    - *Description:* A destination buffer is allocated to the exact
+>    ciphertext length, but the decrypt loop writes a block-size-rounded-up
+>    length with no alignment check, overflowing by up to 15 bytes on
+>    non-block-aligned FIT image data.
+>    - *Severity:* CVSS 3.1: 8.1 (High)
+>    - *Attachment:* U-Boot-FIT-AES-CBC-Heap-Overflow-Report.pdf
+>
+> *2. Heap out-of-bounds read via forged FIT data-size-unciphered*
+>
+>    - *Location:* boot/image-fit.c, boot/image-cipher.c =E2=80=94 CONFIG_F=
+IT_CIPHER
+>    - *Description:* The post-decryption size is read from a FIT property
+>    outside the coverage of per-image hash/signature verification, and is =
+never
+>    checked against the real decrypt-buffer size.
+>    - *Severity:* CVSS 3.1: 6.8 (Medium)
+>    - *Attachment:*
+>    U-Boot-FIT-Cipher-DataSizeUnciphered-OOB-Read-Report.pdf
+>
+> *3. Heap out-of-bounds reads in squashfs sqfs_frag_lookup()*
+>
+>    - *Location:* fs/squashfs/sqfs.c =E2=80=94 CONFIG_FS_SQUASHFS
+>    - *Description:* Two independent unchecked-index issues in the same
+>    function: a fragment-table index derived from an attacker-controlled
+>    superblock field with no bound against the actual allocation, and a
+>    metadata copy bounded by a fixed constant rather than the real buffer =
+size.
+>    - *Severity:* CVSS 3.1: 7.1 (High)
+>    - *Attachment:* U-Boot-Squashfs-FragLookup-OOB-Read-Report.pdf
+>
+> *4. Heap out-of-bounds read via unchecked index in sqfs_dir_offset()*
+>
+>    - *Location:* fs/squashfs/sqfs_dir.c, fs/squashfs/sqfs.c =E2=80=94
+>    CONFIG_FS_SQUASHFS
+>    - *Description:* The function can return a negative error code or an
+>    unbounded offset; all three call sites use the return value directly a=
+s an
+>    array index with no validation, including a negative-index heap underf=
+low
+>    path.
+>    - *Severity:* CVSS 3.1: 7.1 (High)
+>    - *Attachment:* U-Boot-Squashfs-DirOffset-OOB-Read-Report.pdf
+>
+> *5. BOOTP/DHCP option parser scan window ignores received length*
+>
+>    - *Location:* net/bootp.c =E2=80=94 CONFIG_CMD_DHCP
+>    - *Description:* dhcp_packet_process_options() scans a fixed 548-byte
+>    window regardless of the actual received packet length, which is only
+>    validated down to 236 bytes. A minimal-length crafted DHCP reply cause=
+s
+>    stale receive-buffer content to be parsed as option data.
+>    - *Severity:* CVSS 3.1: 5.5 (Medium)
+>    - *Attachment:* U-Boot-BOOTP-DHCP-OptionScan-InfoLeak-Report.pdf
+>
+> Technical Context
+> Each PDF includes exact file:line anchors, the full exploit chain,
+> deterministic reproduction steps, a per-metric CVSS justification, CWE
+> mapping, and a minimal remediation suggestion.
+> I understand the project doesn't operate under NDA; I'm glad to coordinat=
+e
+> on timing before any public write-up and to answer questions on any of th=
+e
+> above. Let me know if a different reporting channel or additional
+> recipients would be more appropriate for any of these.
+> Regards,
+> Pranav Rajendran
+>
