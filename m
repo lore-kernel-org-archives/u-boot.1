@@ -4,110 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1FCBC5DF67
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 22:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC979C5CFC1
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 22:48:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 06AE2407C4;
-	Sat, 15 Aug 2026 22:48:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9518140807;
+	Sat, 15 Aug 2026 22:48:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kNAhxyDaLxjh; Sat, 15 Aug 2026 22:48:46 +0000 (UTC)
+ id hy2CSIC6FPSB; Sat, 15 Aug 2026 22:48:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 28775407C2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 109FD407FD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786834126;
-	bh=AdDsT+W1vwryWekVOMqsKHt7ouNjgAV5cqBYztPgCto=;
+	d=lists.u-boot-project.org ; s=default; t=1786834130;
+	bh=62qjbErmgBLqyrsjCtPZdemW5IHuaXEDM6hVxXUf//4=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=es7EBT1SwBSyeYxLM3Pk6UVOzhj9UkzM8z+lq7jpr34gBu8QpNmzE+fQCF+pPEXj0
-	 z5DGdpKWe5J9jWzA2rV8LbyioUDGUzfOc0bFlagQ2d/A+uUJ23Qc2meUmIlemyM23t
-	 TqblOZcAKOvvL9s+3HA2rVhOHaMZPVCkZZU+1EgshlLA2APf1960c9bF/CgBm80lW/
-	 LOTMTg6Sr9M3vSxCVnIeKsLZb2AmDmML+lMMUrO72Jy3EmYUfT+LoS2yJLQipewDXl
-	 uJrwuDUEbgO/3sc0hKUypk25FUwbUDa6RqNOBjEpvbekFz9uTVNyk6aKzdYRgWrw5V
-	 8aeAhu/iPESbw==
+	b=WkeZk4t16Mtb9SbRnpTMWzQpsg6eknvU+f2JFk+ywQlrgm2jqUn0ldo3Cw5IeHSB5
+	 HlRBHCGnL6/IHN9WIsw5g0b2W7Nefi4Bv0ohR4CJuIpH+Ub12wRcR2ZONsw+FQU7ex
+	 HtohT6ovFjzTqx3pFXaUqyPJDmFrPaOZp9AEp9BAyPy7NdOrHCc6DAsJ+OyDH9a+eZ
+	 9/wWXEjS+g276hSoDWx2fDdRjxWjrixWjXzO2Xc1VAAWbGMQMu3hrCBkLGPAGKdNeG
+	 vj/OgvW3vokgQu5XwdBTl4a8TphWcU8M2qAzoI6EN6e01u8ExlfBA1K2edV3skfOJW
+	 DYmmHiypCVY+w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 28775407C2;
-	Sat, 15 Aug 2026 22:48:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0745E333
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:02:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 109FD407FD;
+	Sat, 15 Aug 2026 22:48:50 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2B028337
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:08:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E13B380EA1
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:02:31 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 29007400E2
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:08:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8xIJHiu25nv4 for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 22:02:26 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id d6OG9_oyFoIi for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 22:08:01 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
  envelope-from=pranavkasthuri@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 1A47380E4E
-Authentication-Results: smtp1.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 424D8400D1
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1A47380E4E
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 424D8400D1
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=CcT7osMi
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1A47380E4E
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:02:26 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4998590d392so22793315e9.0
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 15:02:25 -0700 (PDT)
+ header.s=20251104 header.b=CQDqPVHU
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 424D8400D1
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:08:01 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-496bb7cdf51so28185365e9.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 15:08:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786831344; x=1787436144;
+ d=gmail.com; s=20251104; t=1786831679; x=1787436479;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=AdDsT+W1vwryWekVOMqsKHt7ouNjgAV5cqBYztPgCto=;
- b=CcT7osMivfRG/Kj/m5dBe6yFMiI5dQ/iWArsAGJUtNXQUk4y48KWLpjuT77eaAX4BE
- o49vF6zzhuPF7629Epick/liXzzhiTPQA7+iUbZ6GQHOHdGcbpeIUMmtgXeVXzI0SyZb
- f5tlYG3wYl2kHfeahUG4Udd4hhU/Iw2SVFjP8t+PcPUyHn/Gwoe1/s6qWktxSqua0c9J
- S/urTeqP2p3wLHGleA7ut7kojop2zj/gnOZ7DzOCaWXIWh7AppLzmOmSWke/Ma+H/3ZM
- jN0kM57w4nNJ5jZlwAT/ROmaR4nveP0uajPUsrUqJXePBIu+ABt95aGl0+rWD/Yshops
- j/pA==
+ bh=62qjbErmgBLqyrsjCtPZdemW5IHuaXEDM6hVxXUf//4=;
+ b=CQDqPVHUCjUHANMvEQz8W9ZIiX3CiVltntMo57TnxKbvsLJuwIQe0KrQuRPRAmafEh
+ jA3TfVH0pq18nHrcGffaAaM2KZN6ikRDwHSvNu9Id66TAnsfbIJDso82RNi+CxeD8irB
+ /iisT7cUmziFRkzFwnNNTcvU5mlYdjqEjSf3lGol/EIViBog6EYSJGBix+uJU9BgYvpW
+ sxoSWjl/8D4Lv9sC9u1gXguUxlU050Py6f0j2in57yrxvOmRgrLb64PNYiiFBAuYurir
+ ZfAtWGszLSQNeS2C89d5eEdRbFVrjXneVzZ84Kvz1kS/1whFrgGTJDoJ+4t0j9AHa0dJ
+ lh+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786831344; x=1787436144;
+ d=1e100.net; s=20251104; t=1786831679; x=1787436479;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AdDsT+W1vwryWekVOMqsKHt7ouNjgAV5cqBYztPgCto=;
- b=sOD11TYR9LhrU0FjuG2N5KP35iYvVzR3/53SXca3MFmgcfZQbiZ90zvJwZjUl8KqyW
- zrkZsF2SVUoKHbaQB0nduDNI+WSOlF3r2Gtyq3q44KluNA8g8He4fzthCJtINHGxBvLn
- jQIeAugCIrnf2xoTmksz9HCIz+x+8YRJ4SzQRTFKPVnD9e5X5eobYi4etb2sIWZ3F1Cf
- +/yTAz0XPJKVRMrr4k/eEiZ46ucnVEqAPqQHmlnVOHE6argAGOIX16D0DLFMyoHKu5fX
- bFT0DSPKqkkPigcJV9t+zWFHes2ECIUOJshUgB66M+1fLaMu9zWHhV3BCbplgByuwtUs
- n3AA==
-X-Gm-Message-State: AOJu0Yzs8lsJl44SWShTZYvnGMvgz3xaEyN60tAr5L/cTH6S04GmgGQE
- 9YKxPwyjd7vjJVmlDdzi2pl6oV4z8rfd4Xpzwgvu/Ane6z334mzTArLOFh2x2dtkvjk=
-X-Gm-Gg: AR+sD12h7baLykdIIhkCx8uUlfrRGa2mGQPdrMI+WJ6FPP6cwWt8O9LNDhLpnPyBWtC
- M8Inrlg39e++TnOfBKvpXF44ag53xj0dbSJaWXu/JySx/K06paZ2HIa8PLOKbp6Q1P06gIxs/KV
- Ii+JocxwfB6ZdCi3LtT2G6rmmbhch2HZQ+B9098TSA+hTQ7NnBlPpZY2fSXnPmzKvuETr+42P1K
- UlAUOrL7MsAllIiaVFajkaTIy+vAh9CsYXF68DFLcNlOhHyKGKdXknNWAr5VStLBciobO2b3fSe
- iLQmDyP/iNpsmwYeGlUeNvxviTeIGdTi8trMeOsZRR+45IwIHkja/dcrEZD2NYQ71kPATg3r/p9
- kVmp5vVVKB4iK+/ync7qThtDXKN083Qt8M368JRHDPS1G9rV3pRhTX0r9In60FdurB3Yht8cEOR
- 1w6c5yGEwwVfWdIFxANRZGx3mjIDT/M/Xc9Vfpxe6Tcck1nOHMvXnAYwgQcpjed6m0rQ6gODzhS
- L0Il6tn48ICiTQSFJ8t6jkecrNB8T8LuA6j+ast+5dYZErL9d2080wiFeHMR4LYdq30SkaHS+r6
- AND8xaLLk8DRnHqdagDgpgaHczCrwhRyfpI=
-X-Received: by 2002:a05:600c:8b05:b0:499:7a15:fcec with SMTP id
- 5b1f17b1804b1-499879923ecmr242719015e9.13.1786831343936; 
- Sat, 15 Aug 2026 15:02:23 -0700 (PDT)
+ bh=62qjbErmgBLqyrsjCtPZdemW5IHuaXEDM6hVxXUf//4=;
+ b=WEmu62NImlzBaWozXW+3lxDQuENyymEJh7D5W5SF3hrWQs7GECQd1z2Rkraef3Dj8C
+ G5qGcxNf+ZRTRsrd+xeMcEBSQhpo5icHujaJ23jiUcvis3Obl3otP4bbKyHtQ6f74S47
+ 1GKdElM9gUgFjlR71p4Qf2YC4EQA0OnnV4mCC35ZjHj6zln4X2hamjkCQkX6B+lI0Nc4
+ alwNsu2N4OT0l4B7cVyZr/DpqTO5sj1GBTSvvvJ8MxuZCxEveHc9gdJDNdQd2fUn2ZRL
+ fdaDlWGHFIa7Wymic7k93xibBBTwF+zrUQCuQgBopfgulXBk6lSboZqkW+CM0Y/yPN0N
+ Pv/A==
+X-Gm-Message-State: AOJu0YyDxBonFUNs4v7J3nm4MvVPJvhnB4S/BJfVFp1yTij1iwpUHjTd
+ AAipLZDm+bCgZ1LLlS4FG3y4POz5Idy81QxvJGtobaA5qDEDHsBkMzDPa5Czb6ATleQ=
+X-Gm-Gg: AR+sD11OjZid4A689LqjoArqvL+Z4oqPMmjHQ+whk56cjaqcBcoCgHRu7HapfrGTCzB
+ nxfnG7hd5RVPocUkEQlxYK/0xunBfmmVmFAqIkhrvK9fv6DR0aBF5s8KmDaTkcPyQ14+k7tKQjo
+ ACLqb+BH8n1VI4iKfxYItsckAYTOoAsN3fBiN5R3BDdTQPhHQ/+UG6nKaoIq9gSj7aKC0GLYYcF
+ 6nbHBMiOpdv2DlQUsRjg5iEUCV5J1XmHONTgclW+7H9n/dYOsRmK5ePevgWysnXeq7fTsJ9vKAB
+ UfY1V5yKxlLYQzn/1eusHrbgeWwXc3g2t5q314B2gXvlH8SbpFOyFArVTNUfeFgd4jmdkTy3svh
+ jYMSbrClg6iJhb+KsCAcIMSR8G1yo4xlo2vcZ3LdzIYTEtTZqA8BdhTfWRazgFMQxLd9I6kpQ+Y
+ 7Xglpb2gRsrk1j8aloXhWVUhs0mq530UsCMxugnq8C1knMw6DhJRfKNvqXdR+iwofZHdNNN/W3U
+ hrkyEkktaITKdSYoODbCFJofhT4GEFDGtsqtF9/PLV69qaaVkwGbIgsgcuArzEtQCK26h8aI7xK
+ UWyzYtaVEpw/PGsKr09qce6U
+X-Received: by 2002:a05:600c:4708:b0:495:6396:8b67 with SMTP id
+ 5b1f17b1804b1-499879419bdmr175865195e9.4.1786831678971; 
+ Sat, 15 Aug 2026 15:07:58 -0700 (PDT)
 Received: from Mac (default-188-240-185-161.interdsl.co.uk. [188.240.185.161])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49988b1d33asm179055255e9.10.2026.08.15.15.02.21
+ 5b1f17b1804b1-49988b1d33asm179598285e9.10.2026.08.15.15.07.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 15 Aug 2026 15:02:22 -0700 (PDT)
+ Sat, 15 Aug 2026 15:07:58 -0700 (PDT)
 From: Pranav Rajendran <pranavkasthuri@gmail.com>
 To: u-boot@lists.u-boot-project.org
-Cc: joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com,
- thomas.petazzoni@bootlin.com, miquel.raynal@bootlin.com,
- trini@konsulko.com, Pranav Rajendran <pranavkasthuri@gmail.com>
-Subject: [PATCH v1 0/2] fs/squashfs: bounds checks on image-controlled offsets
-Date: Sat, 15 Aug 2026 23:01:13 +0100
-Message-ID: <20260815220115.11335-1-pranavkasthuri@gmail.com>
+Cc: philippe.reynes@softathome.com, trini@konsulko.com,
+ Pranav Rajendran <pranavkasthuri@gmail.com>
+Subject: [PATCH v1 0/3] fit: cipher: bounds checks on the ciphered image path
+Date: Sat, 15 Aug 2026 23:07:51 +0100
+Message-ID: <20260815220754.11724-1-pranavkasthuri@gmail.com>
 X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -126,40 +125,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Two out-of-bounds reads reachable from a crafted SquashFS image, found
-while auditing fs/squashfs for image-controlled values used as buffer
-offsets without validation. Both were reported to the list earlier; these
-are the fixes.
+Three fixes in the FIT cipher path, found while auditing for image-
+controlled values used as buffer lengths without validation. They were
+reported to the list earlier; these are the fixes.
 
-Patch 1 covers sqfs_frag_lookup(), where the fragment index is checked
-only against a superblock field that is itself part of the image, and
-every subsequent access derived from it is unchecked against the buffer
-that was actually read.
+Patch 1 is an out-of-bounds write. image_aes_decrypt() sizes its output
+buffer with cipher_len but decrypts DIV_ROUND_UP(cipher_len, block)
+blocks into it, so a 'data' length that is not block aligned writes past
+the end of the allocation.
 
-Patch 2 covers sqfs_dir_offset(). Commit 57e0bb7bf00d ("fs/squashfs: add
-sqfs_dir_offset() error checks") addressed the negative return value; the
-positive range is still unbounded, and the callers use it to index the
-directory table.
+Patches 2 and 3 are the two halves of the unciphered size never being
+checked: the 'data-size-unciphered' property is read without asking for
+its length, and the value it yields is never related to the amount of
+data that was actually decrypted. The second matters because that
+property sits outside the per-image hash and signature, so it can be
+changed on a signed FIT without disturbing verification.
 
-Neither patch changes behaviour for well-formed images: the rejected
-cases all describe inodes that reference data outside the tables the
-superblock declares.
+I have kept them as separate patches since they are independent defects
+with different consequences, but I am happy to squash 1 and 3 if you
+would rather have one change per function.
 
-checkpatch-clean, builds for sandbox with no new warnings at W=1, and
-test_sqfs_ls and test_sqfs_load both pass against images generated by
-mksquashfs 4.6.1 (the default plus the three lzo fragment variants).
+checkpatch-clean, builds for sandbox (CONFIG_FIT_CIPHER=y) with no new
+warnings at W=1, and no change in test/py results.
 
-Review of the exact bounds is welcome, in particular whether patch 2 is
-too strict in rejecting a directory header that would start within the
-last SQFS_DIR_HEADER_SIZE bytes of the directory table.
+Pranav Rajendran (3):
+  lib: aes: reject a ciphertext length that is not a whole number of
+    blocks
+  image-fit: check the length of the data-size-unciphered property
+  lib: aes: reject an unciphered size larger than the ciphertext
 
-Pranav Rajendran (2):
-  fs/squashfs: bound fragment table accesses in sqfs_frag_lookup()
-  fs/squashfs: bound the offset returned by sqfs_dir_offset()
-
- fs/squashfs/sqfs.c     | 50 ++++++++++++++++++++++++++++++++++++++++--
- fs/squashfs/sqfs_dir.c | 42 ++++++++++++++++++++++++++++++-----
- 2 files changed, 84 insertions(+), 8 deletions(-)
+ boot/image-fit.c      |  6 +++++-
+ lib/aes/aes-decrypt.c | 21 ++++++++++++++++++++-
+ 2 files changed, 25 insertions(+), 2 deletions(-)
 
 -- 
 2.50.1 (Apple Git-155)
