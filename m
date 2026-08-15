@@ -4,134 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3886C5CFC1
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 18:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F02C5CFC1
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 18:45:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9055E408A5;
-	Sat, 15 Aug 2026 18:45:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5E8B14088A;
+	Sat, 15 Aug 2026 18:45:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VcPoytNvwQhV; Sat, 15 Aug 2026 18:45:25 +0000 (UTC)
+ id 9Lro8v1O-Vsy; Sat, 15 Aug 2026 18:45:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8854140838
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9C23C40843
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786819525;
-	bh=AC3bLtj4naxooA+6Zggm2AP181A4g5EdNV09+3mPJXs=;
+	d=lists.u-boot-project.org ; s=default; t=1786819533;
+	bh=00f/K4ESGuBGHvBD8JXyGwlrK/QiVH+FgMqbXxmD3Co=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cZJaOeJMP91uTvqfFeWzqs9XJQJce/zfQdy0kVR2jlB+tvrGdlhLygTOKw/3sjStH
-	 12Kj/2vLwpeiCRSKl2+BGthYMqA4tM19+opmPixHHd5dAgBluUHyxd7GOCVUOLXUB4
-	 xjK2Tt8YEXpESoRAdphSLaHNPp2bmsbMWMXBaMIrDnlqERqhjduMx3oqm6IOwZQpgI
-	 fB4BVLGDEBZCX+w78ZSLUqYjCD3X9R8HLqAnh+ZCaOzqUarb9sgUyjmfVQX4W8RMI/
-	 uN2N5KmZYuvtHGlK7c8Je7cGVmARZL7A/vaLUZOcWNIwMBwP2BI/T+c5/hd0aH1dmT
-	 CxbjXj2h/T+YA==
+	b=XJ/eWWvg4jgpqJduqKCi3vkpKTxtKOCDOr/yAhR9eRxsuUelIDzGIvXRaTb5Yz97e
+	 rKZGdmm3CrMoKyG3pGTBgpLAhWLOr3kUtFnuFA4tArRLiuDZ8DO8BMNWtOIJs7jRIx
+	 EhidGN8EImvCXXwuM38mi1WWDRB1FfpGquWilsBKP2CQzPrDsDtGAb9VJxGqIeXVQp
+	 Wm89QFVSR1xakKfSxnXNt5okdQdlo2MdbuFsZKOOwtxKY/kC8PUEv/OvH0zbBN7YpA
+	 yVa8CLc+gxTOMkr59PGz+ifqLdmB/1odYIHJ/d5VZRqfOQeV6bvJDcmtdetdichzsq
+	 8r4Khn+tYuDvA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8854140838;
-	Sat, 15 Aug 2026 18:45:25 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A78B62BB
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 18:45:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9C23C40843;
+	Sat, 15 Aug 2026 18:45:33 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E3573336
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 18:45:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9687B400CB
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 18:45:24 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E104040843
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 18:45:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sGwTjNJyDjUP for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 18:45:24 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cHC9VhrabtLA for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 18:45:32 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
+ client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A916A4008C
-Authentication-Results: smtp2.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org EFCFD40841
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A916A4008C
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EFCFD40841
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=lpYS8LKI
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A916A4008C
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 18:45:23 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-6a0a4a28cbdso3495207a12.3
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 11:45:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786819521; cv=none;
+ header.s=google header.b=mEE9QsK2
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id EFCFD40841
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 18:45:31 +0000 (UTC)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6a17211b9ecso4381393a12.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 11:45:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786819530; cv=none;
  d=google.com; s=arc-20260327;
- b=ASrc1n4AlDttXFebmZ/2txHyU5/Bg+tACvTQseEVCsZ0pDpFur5Gc6DVJuRX/SH9Cd
- 6NPMwHCezlsyeZR+P2jrludEgaaeHSbd+4rB/NEcajLjXzeXGUcafUymheO1NmnSq4kC
- WT/SkwxNcq2wDR0Az68ViS7tLOqcx/UWlwtGuqVM8Sh2yiBssPMdHNnLjy0SubrkqcMn
- w8j7cI2cchMATYpW/vFYfEZQIAzFKhkOoL0Y8XnipsVq9DtSvVTHxCbbhgY7uGGHkxkj
- LajnTR6C+bexs7XtlO4vJs0A1AxUP9ugQVitOuZ+iw/6B1C3WtmI2w4U+lJkOQL7LP5Z
- PksA==
+ b=Pc3pc84Kuyewbbjb2wu+9xDXf6Q5JUPytuREAj7no/OVkn3vrmL2c1Hiu+AeBkWq8h
+ j3ctCvP1By4oa43LW0pIQZPARbpVVQXDUhSyt3ax2O2mYb1Jd8p65T/67mscXSmqeXyr
+ 2D80ZNPFwceHxaiHgKJCszi8cc2A+1N6oncO7XN3t8dlzAyEjgZEIiUGnDcb8Xwz2qP4
+ 7UCy3v5EakgPjAjKO4qEksdK2LMnw8aheZthM2yg4Z9qEkaz41ddlRZdhSEfAZL1FEwy
+ u69zlL+EZjRrXocerAS7907jeWQN08tG71dBYGuWWKNHsan2YvHdpX9B+kxnIgpTwgLU
+ aAqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=AC3bLtj4naxooA+6Zggm2AP181A4g5EdNV09+3mPJXs=;
- fh=lMu/IoIlTfGI1wvkQqdTjRQJTv1loZZGdihE0p1XJi0=;
- b=avNfCdD5kc5La93S8eqRDuAC++oCGQ7A1xd+3sdZSNU47DI4u5bjuQv8r4hoSFrb+g
- QuZEZsU2NyHrEzcKCATz/gc6SCIU1XL04UBOOKJ8rGmiB2QzbbNF6LdBXB2Ta1BnJ8Wc
- 4zZKZkpkJWdTssk16pg5POputl78BGi84mb1apQJJsBpTG/fjkgtDiqUc70/XGaTmKdb
- WderI5GJL7vMorpfEkSwKCxLZqVpnrxgzKLBC19LAu0+NsKWGviaziZRwEZV1jcB21r7
- luGs4StbYx71JtYi8e2awuWW7modwES6rpz3osK5iZXCYJKsMsbVdcmeUh8g19XkH3mC
- dEoA==; darn=lists.u-boot-project.org
+ bh=00f/K4ESGuBGHvBD8JXyGwlrK/QiVH+FgMqbXxmD3Co=;
+ fh=cUYNs/76oAu8JC8Dnt20Op7FjAkbyXpOSgmkHUekRa4=;
+ b=DU+Te+/Ou2SDaHPJzVau9PFSmphRS/B//gLd3MlNNwxxN9dtK+RaGWdcpRnVrD+PwU
+ YmMndzMeVP+b6b7fWOlDwP/P6flnR5yIkWDozDO/tm45kgNWSdalUJM6uOEosTnW+tWJ
+ TDFGgRCKHEc+eB89UIimE1QBv16droKwsZ4kVCZUEaMelQwlNpyWtXZMpp9vtDD/Dqon
+ /1wWI7Gk93ejsp1dvOyx7y+ipqt3cNbxvZBdWPnMY7zUYqdrHEicJWvzB0axR8I4Tdkw
+ 4ZaOPaFGy2r5mGNN7idLhxf3SkfysP9m/ET1Ma9dyRCoyTb9yDFNNXrWl/iuehBGSTcr
+ iHFg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1786819521; x=1787424321;
+ d=chromium.org; s=google; t=1786819530; x=1787424330;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=AC3bLtj4naxooA+6Zggm2AP181A4g5EdNV09+3mPJXs=;
- b=lpYS8LKIWeleCcYbaTryxQ+hThPiztnpzfLFPgqgGVWHooLt4JC8QYsBXi/fsZZuJY
- lhb38bXPI9TPnxnkkXFkYhXq9ki+M1LZWVuTUnIEm7zF/8/aPgyiVmPFUQg1v434XcnL
- 0ijWRUoeZPgVhUk9iMTdd6P7LCnTOVcOfi190=
+ :content-type; bh=00f/K4ESGuBGHvBD8JXyGwlrK/QiVH+FgMqbXxmD3Co=;
+ b=mEE9QsK2Asz9mdXATOgTNzu8zBbIkjq/g/b/ZDN58gUzC38IHIwzGJzGZWnIhJLhzf
+ KlQPuqTCBnbzjtIQvjSPDzw1MUTK5NjObvgwpTLBFOf7ShKYBiIAAl1fnrqWAy+tWaRD
+ gmof5qPdnGSq3z0//p34Bp7TcksC3NdOnjPj8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786819521; x=1787424321;
+ d=1e100.net; s=20251104; t=1786819530; x=1787424330;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=AC3bLtj4naxooA+6Zggm2AP181A4g5EdNV09+3mPJXs=;
- b=OarEQc4SpTGRvVmgJJp+4wWY6lkAtKJpIn283wWWwGpWfXxztMvPtWvfJ7Wb85EbVE
- IivFRwM61PJaXIHmc3M8DYBqkG3z1t+2SO7GNt5IhuD6wEy/dvPqs8IINsLLjlPUNb+7
- HvbUrHkYX+1TytGxsceXWGy+TOciYEB+TOGAknvsz3H9jo1dOLkfwcUq/DLp+SYdzQok
- 4z1LgI7MFvxP4zLnuvycF4A1SJbCTpbWMzs5jnJevg7ZIIgdQAb3ZFjYWj+zw+ce18JS
- NjfOrdVupSTsLnP1yJFXZmt/jzLg/A6I0fevcLhwt7a41bfIZER911DcLwKWnk9n3tTf
- l/kA==
-X-Gm-Message-State: AOJu0Yx+6M8aGOUVO6nJRRcIn3fs+YbztPnP3T8dfkhofIj0lJLXf3MN
- rSHxjC0YzhRNvVjStfaWjmUICmfGdM+jxd6iAWVB3d+HWHC4RtcyyM73Cfor7rccnFZOw8L+mrs
- QfyT3b5LYjIaUFyGJLgL10Hp1ixHAN6DCx/B1V145
-X-Gm-Gg: AR+sD13rd1OMCl8tpnNSMwKdzHlkgrQM4ZjjT0VJIj59e5bC+M3kT9FFQGAi2+ANMxI
- I8aigICNZ61UoR09Yd0nj7W98Ged5l4oIeUBjuK8sd83FGCw0L7aDkwMjeWtXJb/XeLfA6IgIKD
- 4EB9yjgEoVir1D40Do/w+/2rLdSRNRj1TQXBzvKNOWT+2luGWNVFpj0Iv8/buVDP7cJOgO14RDc
- 2hKiCZd9UN2LPD3eppHKMcT3kHJDszgi544z6boe6FZvKWEcwF9VMerftj2ED62RiLX0RCjRHiI
- k/p1vTYsDItzuZ7rChffpN+Jg4d/jiCsuaAXfxReIaVKnOxqeVkAlA==
-X-Received: by 2002:a05:6402:2811:b0:698:3602:d0d with SMTP id
- 4fb4d7f45d1cf-6a38a9843c0mr5964726a12.17.1786819521260; Sat, 15 Aug 2026
- 11:45:21 -0700 (PDT)
+ bh=00f/K4ESGuBGHvBD8JXyGwlrK/QiVH+FgMqbXxmD3Co=;
+ b=C5RAWLLhnATVlukMRespDJFhYNMZfvVngORkKi2SSo5rB++NarSFdZTYWIGB1ea0vX
+ w9vryqMHf0SUpdltJcWJnQmF2VyjSkBa3F/LRPQup+IDAlgBaGS76uxpTiLb47ewPSZy
+ 8zNxpZUJ57pHSzInZm9np8NelGTlD7S3sTc93vU5QNdXwX8Fs0dm9FzS3EkIcqHlL7/N
+ ceANyY460f+9BwfWZaxd0v+vTOD7Jti3yVOG1i3AkT7YrflR7EX5K3alrAbKIMUNiBvH
+ L85otCXivnCSFfrq+RK1TXaS7JexdBH5+8hlezBIQuaMUV+ceGnw0hWkl4ZKkQGFm1s1
+ QubQ==
+X-Gm-Message-State: AOJu0Yyh5hKGTLj5UWZhZV2TTJkEwekHn9bRuHp+XlGYLqnKkSfZzWll
+ tk6gkPlGCPagyx1PHqPflcKeV+wyzGcw3jRhll6YII8pQb0+MrLCe5I+Vnk2Y9IEfSwYjR5ukSh
+ Na7ZFehXh/UKAo6r+VrXl2pn0k5ZAK5RWQNCpcHOg
+X-Gm-Gg: AR+sD10M83AwbQdgLMWnFByvH9KPuvUAxYPQa4q1Pj1DwuhSlKI/seyEUo78lZjSxMZ
+ rq9WEpBJiS25+Fx8T+HkifG8kse3GkFBqS2KsaLUn6DqAuP2QkPd03fOpujBzF/1UjqmYTLqQyJ
+ usDxIhpRzLiGnIrefgab8Tw4vumK21eWIqDkkMop1RHLXXYCl3eurmBlecZHlEjf+GJy9yN4mIT
+ +fS2sUqOSOF+M5ND2l/vEPwhJzUu+/oEk/kMqGnXEsQXdBkDfqtwqzjuzay+4Ymyv0AGYKG0Lpv
+ 0Gu93nFxfA38Q+gOK5TDKlxm5OrQxOfxKVm6ndbg3uH/LdYAjuoZ8Q==
+X-Received: by 2002:a05:6402:5cf:b0:6a3:8652:a373 with SMTP id
+ 4fb4d7f45d1cf-6a38a8bbf12mr6570858a12.3.1786819530025; Sat, 15 Aug 2026
+ 11:45:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
- <20260728-ccaione-upstream-ebbr-v2-5-4efb529140d6@baylibre.com>
-In-Reply-To: <20260728-ccaione-upstream-ebbr-v2-5-4efb529140d6@baylibre.com>
+In-Reply-To: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Aug 2026 12:45:08 -0600
-X-Gm-Features: AcwNN1UcObPG1shUahQqpXkQi4DPHcHOvmk8QR1Qsmjo3SHzOeEa-0SMHDaoYN0
-Message-ID: <CAFLszThP6P+xStcoAk_OFmeczdSJ_O6kgcUV787YAt9iz+j9MA@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] test: boot: add firmware-FDT source tests
+Date: Sat, 15 Aug 2026 12:45:18 -0600
+X-Gm-Features: AcwNN1Uqu-VHDCqHPSG-xb8fSxHnAWclQAAChC3cI5JX6OnjWeM3OO8zeSrrHxY
+Message-ID: <CAFLszTgX08U3GpcvwkvzBinY7X21EC_P2nEZPx3ikVH=vBt_yA@mail.gmail.com>
+Subject: Re: [v2,0/5] firmware-owned devicetree for EBBR / SystemReady IR
 To: ccaione@baylibre.com
-Cc: u-boot@lists.u-boot-project.org, Ahmad Fatoum <a.fatoum@barebox.org>, 
- David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
- Vitor Sato Eschholz <vsatoes@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Johan Jonker <jbx6244@gmail.com>,
- Randolph Sapp <rs@ti.com>, Daniel Golle <daniel@makrotopia.org>, 
- James Hilliard <james.hilliard1@gmail.com>,
- Aristo Chen <aristo.chen@canonical.com>, 
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>
+Cc: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -150,86 +139,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Carlo,
 
 On 2026-07-28T13:20:42, Carlo Caione <ccaione@baylibre.com> wrote:
-> test: boot: add firmware-FDT source tests
->
-> Add sandbox coverage for firmware_fdt_load(). The Python fixture creates
-> mmc11.img in persistent_data_dir with A/B firmware partitions. Its first
-> FAT partition carries FITs for a base-plus-overlay configuration,
-> compatible best-match, external-data rejection and corrupt-hash rejection.
->
-> Construct the complete MMC provider and firmware-FDT source topology in
-> each flat-tree test, including the provider phandle. Nothing is added to
-> the shared sandbox control devicetree, and the sandbox test framework
-> restores its FDT snapshot even when an assertion fails.
->
-> Cover default and explicit configuration selection, compatible best-match,
-> owned and borrowed assembled-FDT storage, EFI staging and its returned
-> filename, and the fail-closed cases: corrupt base or overlay data,
-> configuration chaining, a missing configuration or partition, an invalid
-> source phandle, external data and mismatched partition selectors. Verify
-> that only a genuinely absent source returns -ENOENT.
->
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
->
-> configs/sandbox_defconfig |   1 +
->  test/boot/Makefile        |   1 +
->  test/boot/firmware_fdt.c  | 411 ++++++++++++++++++++++++++++++++++++++++++++++
->  test/py/tests/test_ut.py  | 181 ++++++++++++++++++++
->  4 files changed, 594 insertions(+)
 
-> diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-> @@ -614,6 +614,186 @@ def setup_rauc_image(ubman):
-> +def setup_firmware_fdt_image(ubman):
-> +    """Create mmc11.img for the firmware_fdt tests
-> +
-> +    A GPT disk with two firmware partitions (A/B) sharing a firmware type
-> +    UUID; partition 1 (label 'firmware') holds a FAT filesystem with the
-> +    FIT (fdt.itb) carrying a base DTB and an overlay, with two
-> +    configurations: the default applies the overlay, 'conf-base' does not.
-> +    """
+> Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
+> as an independent behaviour fix. Patch 2 adds the loader, binding,
+> documentation and shared EFI staging policy. Patches 3 and 4 integrate
+> the EFI bootmeth and boot manager. Patch 5 adds sandbox coverage.
+[..]
 
-The docstring only mentions fdt.itb, but the fixture also builds
-fdt-best.itb, fdt-ext.itb, fdt-corrupt.itb and
-fdt-corrupt-overlay.itb. Please extend it so a reader knows the FAT
-holds five FITs without digging through the body.
+> - 'fw_fdt_part' can pin an A/B partition and 'fw_fdt_config' can select
+>   an explicit configuration.
 
-> diff --git a/test/boot/firmware_fdt.c b/test/boot/firmware_fdt.c
-> @@ -0,0 +1,411 @@
-> +/* A corrupted base fails hash verification and cannot fall back */
-> +static int firmware_fdt_test_corrupt(struct unit_test_state *uts)
-
-There is no coverage for the case where the source is configured, the
-partition is found, but the named FIT file does not exist on the
-filesystem. That drops through fs_size() in fw_fdt_read_fit() and is
-remapped to -ENODEV by fw_fdt_load_source(); worth pinning that
-behaviour so a future refactor cannot silently turn "FIT missing" back
-into a fall-back -ENOENT. Please add one, e.g. by setting filename to
-something not present on the FAT.
-
-> diff --git a/test/boot/firmware_fdt.c b/test/boot/firmware_fdt.c
-> @@ -0,0 +1,411 @@
-> +/*
-> + * Without a source node, -ENOENT is the only result which lets callers fall
-> + * back. This also proves the provider alone does not configure the feature.
-> + */
-> +static int firmware_fdt_test_no_source(struct unit_test_state *uts)
-> +{
-> +     struct firmware_fdt fw;
-> +
-> +     ut_assertok(fwfdt_configure(uts, false));
-> +     ut_assertok(fwfdt_bind_mmc(uts));
-> +
-> +     ut_asserteq(-ENOENT, firmware_fdt_load(&fw));
-> +     /* Source detection precedes address validation in the EFI helper */
-> +     ut_asserteq(-ENOENT, efi_stage_firmware_fdt(0, NULL, NULL));
-> +
-> +     return 0;
-> +}
-
-This is the only test which omits the trailing fwfdt_clear_env() call.
-Harmless here since nothing was set, but worth keeping the pattern
-uniform so a future change that starts poking at the environment does
-not leak between tests.
+Just to check - is exposing these as environment variables really the
+right long-term interface? U-Boot has been moving configuration into
+the control devicetree, and both of these look like properties that
+would sit naturally on the u-boot,firmware-fdt-block node, with the
+env var overriding for A/B slot selection only. What do you think?
 
 Regards,
 Simon
