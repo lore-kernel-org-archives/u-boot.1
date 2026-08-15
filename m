@@ -4,116 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1DEDC5AD5A
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 14:05:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F20C5DF6A
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 14:09:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7B08840987;
-	Sat, 15 Aug 2026 14:05:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0993540712;
+	Sat, 15 Aug 2026 14:09:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NlJOmeHSFTHS; Sat, 15 Aug 2026 14:05:41 +0000 (UTC)
+ id C2PRldiXrbsZ; Sat, 15 Aug 2026 14:09:17 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4C731408BA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3CDE140756
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786802741;
-	bh=5Jd3ZtfEGvx+S6V96brf6oWIwKZ1gyujMtk3ruHybFk=;
+	d=lists.u-boot-project.org ; s=default; t=1786802957;
+	bh=wwCxpiYT66y89Gjwr5Lg2pzOVl6/+ySHNXmohmKBdUw=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pDnd4GaRlcpIaZw8u9p9qsB+5yjjuBn/oEO5eOivN3JgR33KrTkt0GqZ1UvDuL9/w
-	 crAcY3Los0oFYmH0idDEPMecOs53FSbNPgyVcmsmpmDrjY1zrP8/vgenB2KdkvS2fb
-	 LElBrPxoR8hzrR/tfP/L0jstPy+Q+xhA0kYClgoganw6z7MeuqOxNbpbEsOSxxtERc
-	 mLwqUO5Ol9cqtjtydQvwu48ejW1k5jBL9OSCugZCFhHh7x1iRJL0AunS7rYph96LNa
-	 IHGLNNzPPuQNY0MheamaHAqR5D5ScfEM7s8ooE6sZ9sRkj7lCCGiVdGDOn63045dL/
-	 ZIYmeoTzpRyBA==
+	b=hMVfgF8ztzg7cReSi3D39FIRa7i13/c6TUYDro7hMRdh3dK6OmcG8bK0y3hoYWbWJ
+	 zIfZNVAwlWipnmz/DsbdpSVpn8lFovwItJioQKwxKPqotlYGcFuYagMUZ1+Mk+ftyR
+	 aAM6UWRL/DvXJzPG+ePdGMJUVvS9CpHCD/CYqjhSmPZA4sXCQ9TCL/qBllkffxDWMy
+	 XFrtL2rjG8jYdz34pkpo/3ck9FUETv/iC3aY8CwkByhPt/MiKdPnXRihAkD54QBvPS
+	 NyypyRXifaCZbsbDK3Qn1u01xvOcQjyaon6Jq1pXVjUj+PJMtVcCGLcXrl4pwS2e96
+	 TMhRzFN/C7uKw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4C731408BA;
-	Sat, 15 Aug 2026 14:05:41 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 17CCE2BB
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 14:05:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3CDE140756;
+	Sat, 15 Aug 2026 14:09:17 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7BC4B2BB
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 14:09:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0928880F18
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 14:05:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 61BDE40756
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 14:09:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sub3z8i0UPjl for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 14:05:39 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id w7VlueJ7IcLp for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 14:09:14 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::734; helo=mail-qk1-x734.google.com;
+ client-ip=2607:f8b0:4864:20::72f; helo=mail-qk1-x72f.google.com;
  envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 3CA8E80F45
-Authentication-Results: smtp1.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 53B9640712
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3CA8E80F45
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 53B9640712
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=sqA/+Hvx
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3CA8E80F45
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 14:05:38 +0000 (UTC)
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-934956bee57so202865585a.2
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 07:05:38 -0700 (PDT)
+ header.s=google header.b=i97beO+l
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 53B9640712
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 14:09:14 +0000 (UTC)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-930f72317a6so100921485a.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 07:09:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786802738; x=1787407538;
+ d=linaro.org; s=google; t=1786802953; x=1787407753;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=5Jd3ZtfEGvx+S6V96brf6oWIwKZ1gyujMtk3ruHybFk=;
- b=sqA/+HvxTgfSD+NLz5/AoMGxzlXv3cvtfX3To09MOOQfwPkMUOcRD7H1Z248mquRLQ
- tl8bVM89y8tRc5mZCnGUyc+W7PvdnGNf4cN1EnuGtf0eDpFOUibe8Y9rGtsxETFTtM66
- 2knVrTcgQn0haM1sCn+bcE4sqVH5Z9tMzjHEFJyWv0YExw2VYpeEcJ1fxXC4rc3P13Qs
- k2Ws1t5QfcbjjZfGBacxhEk81ByYL5FYwmWuwRUICG0PZwZm9bllZJpjDMvKw+0P2fE/
- SmEXW6mZLYkdYo18cOaAYdUaArvCVPxtKmhm7JHbuaBXzz9hacHs9zvcXz6HDqanTsFN
- 03bQ==
+ bh=wwCxpiYT66y89Gjwr5Lg2pzOVl6/+ySHNXmohmKBdUw=;
+ b=i97beO+l2zLXDGCsTz5y60Hrqt5qvG/zEzSVtnx3430schklkOvdnm00cleXmKsi+J
+ 0EcIpRyJ1e1z9RtT/j0Ylx8ArlKrh70eHDcalOjZynKT1vTws+kNBDkO59aKH5LkADnF
+ 7BG1+q8RajlHHrgDcBQue9Wk9qjRiriklYiF2MkPIEBEY3yPcCDVfw4ANg3wz7r9vemZ
+ tuCxxXA6oNH1cLs3jNdVE6UgIifOsiKnfX4HyLAzhUyoR1ng8Um1hocA+dYodJi9qT+J
+ NjanrAPKxwaanfxrICBzrqZ/0fJ0BmcxSbLLPLU2a59aArC4SEvTEcplXkDk2ZuxQzDR
+ g5QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786802738; x=1787407538;
+ d=1e100.net; s=20251104; t=1786802953; x=1787407753;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5Jd3ZtfEGvx+S6V96brf6oWIwKZ1gyujMtk3ruHybFk=;
- b=NdK2L6ZnO6rePsQ21vxbzaZ1uc/2+tNgxalPATDhs5z3bMDR7GdsBwjbyP1yltH+C+
- 8ybcSnm1JWU6hFSVmTRckBK+NLAn4Tb1AQ/Bu4dUEELh3qpZPTtOcf/5dZyJVID3EKEn
- daAhURsuatsgUVlAxCtx6konQKPfywJeEO/kUrkw2a5LMBdLYZO2nRpZRgU5IM7Hd0ZN
- lFUqc9WuhKYwP4VYfECy3oCFaw6Ff1K6LIsi2ZCf20QX1RDhiRw9DFf8QAEfoHJtrGgl
- asl5QE1ofWUCPSV1AhqtNBbcHzVTm4FKHbXlmt1za0IN/7vJFvCIjb5YOWmeB2nDJSTm
- 2nyA==
-X-Gm-Message-State: AOJu0YxYNWkOgHwG6X2n6bKEAL8r1Dy8DHgCy99LNV92FZsT0Ffu/jUM
- zaAW/X40kWhpRpM2wvbE3JqnhWB1zrKfcx2yJolk7Cjx3dz45hoLh06TK4Da1lSRJSA=
-X-Gm-Gg: AR+sD11sOk1L9iW8vdeBVoJqA3ls9/OHYHip7blfC3Lgueu8Zti/MKeu23MCeMG5nKo
- LyRGnWRcLd5U5esRXeHjztM7wNaluNq5LEEjIbJx5nUHvJ2+NnzcQs2PC2fNCISeJbBJbUZhlPA
- FFjb0HzODUBKIVSHnkupZonoCVibAwQN8J37HJvx7F7yINVutP8MJatn9yiTz9tocZxTs0NdL+N
- 3ffltBdm6rVCOzHI6ilhGxwf/XTs7sBGg8pmzg6GCOPDMfx72h5VPMRriadFgSh8erdgj79u/p/
- YQQolGlv9L8M99KSi1Jo0BNuvDxKnmcUFAX2anb3poBOBBJ4+idYni/h2Wd8XYWyt7SgTyAZhvM
- L8iSGyjJEep7l0Ns0GBwAYoKk/Hr6jouYD84a5xBsDoCbmBcLZ8iww3779cgEQk/4RLYoNjq5Zn
- 3/P9LmxL32qbSvIONDmlndbgj72dFBrE4QfBczSc8hh7S9589WiQJjeXK1DikmGlxk9jujBtIaO
- 508ThhesN1fSxnlFaIvILuohW69byBjqiRAxAy4UGI=
-X-Received: by 2002:a05:620a:d8d:b0:936:cdd5:35fb with SMTP id
- af79cd13be357-936d227a606mr1363704285a.11.1786802737671; 
- Sat, 15 Aug 2026 07:05:37 -0700 (PDT)
+ bh=wwCxpiYT66y89Gjwr5Lg2pzOVl6/+ySHNXmohmKBdUw=;
+ b=RlTjZ0NsiCfs86/W+qwqdaep7SdT2191uO81JM5BSxnZTl1jM/Y8tufj3FvI5RZTUk
+ jAjrFpk/QCC0h+7EIhiukRJTzaTOl6YnWR4lONmZjjjS5Ko+zPFTFQU/56JbLIviFcF6
+ SBoFfNeNo6YncaEDUDbNkDO1aAKG0eDBBPYhoo222qAMIfssYdQIXyqYqXpaU5734OjB
+ kLBgLMGYxdPg9uiGvQfL69I4Cx+2Z28cqchbf14KawfqfI9hVvY2bJ2HMv7U0yusE/Il
+ N56SPnBc4PwvywLttF1kC6hGiWggf33gSxeq3frwVE6+90DMdw0MnPLgJ5GIognIE2rG
+ F1Ng==
+X-Gm-Message-State: AOJu0YxdwM/fPaj0u7oyMokwFTAvqN1yXX8tDrptN01GfO/NoaAYKP+j
+ /Ge7G4trxOax1xm2f03BsjAn3vj0Ki09/KdqqW9kRZUrJsu8Mt3yHi17goVRYYStpWU=
+X-Gm-Gg: AR+sD12jTfjvxXAUBiHI3La6ekIdBDnCMTaJLRS+hpKxN3XXicw4pvyWg6zy3ldl2hi
+ sLUr29TKF/MqsPKfJtLatWUl1OAI49dL69KFTUtzfdjMYK01bYzTsFAWULwAg1ZONrjfWoJSB6s
+ 8eRVYr5GzLGklwlkL5D8Yn5OLVqlisVJ8AU+2wZ+xlCvQiqjZOGzQGdWNN1H7IntzVTIClgkvfm
+ HixeYo32YpBfglyeQ5XtMKIk11c/fcx4m6KO3USTFG7v0X86OY/pz634l/oVDoWcXLgtTBuNlvV
+ smu3W27KBmwFBpv0wr0qcT58apDEGxStpdOUpEP+0NmPu/F/Tc6rpiT51YLe7tPM9uQs5NGbU4K
+ fr8kcioh6uWhT3/s5akNdA9f9frp7RUG4SHdj/UBFixsv2qMxjAaCxSuw+9WWJmDj6qUs0pWP2G
+ nR8LoN/yadcu8eIJFA7vsnRW8Kmpt6ksxS1LrvwqzzqiNbq7AwKCE3zYb91USepF1MFO5FSK3U/
+ +YDQVCl1zn/yjSQ3A8oVD7NxynuyvHr9iDC4gKWzIk=
+X-Received: by 2002:a05:620a:718b:b0:930:f4dc:e7df with SMTP id
+ af79cd13be357-936d233fd5emr1386515785a.24.1786802952860; 
+ Sat, 15 Aug 2026 07:09:12 -0700 (PDT)
 Received: from localhost ([66.129.139.8]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-936ce1ec714sm549728085a.24.2026.08.15.07.05.37
+ af79cd13be357-936ce217c0esm554185785a.32.2026.08.15.07.09.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 07:05:37 -0700 (PDT)
-Date: Sat, 15 Aug 2026 10:05:36 -0400
+ Sat, 15 Aug 2026 07:09:12 -0700 (PDT)
+Date: Sat, 15 Aug 2026 10:09:11 -0400
 From: Ralph Siemsen <ralph.siemsen@linaro.org>
 To: Marek Vasut <marek.vasut@mailbox.org>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2] gpio: dwapb_gpio: Enable all clocks
-Message-ID: <aoByMCnVSX_GyuU5@maple.netwinder.org>
-References: <20260814-rzn1-2026-10-gpio-v2-1-7490cc61b337@linaro.org>
- <9eb93d89-41f9-4c9b-a876-22e6f496443a@mailbox.org>
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Padmarao Begari <padmarao.begari@amd.com>, Anshul Dalal <anshuld@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Johan Jonker <jbx6244@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH v2 1/3] spi: cadence_qspi: enable all clocks
+Message-ID: <aoBzB2o_KUD6NwrC@maple.netwinder.org>
+References: <20260814-rzn1-2026-10-spi-v2-0-973d5fa092f2@linaro.org>
+ <20260814-rzn1-2026-10-spi-v2-1-973d5fa092f2@linaro.org>
+ <43fec897-24f2-40f6-b1d4-63a7a171a013@mailbox.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <9eb93d89-41f9-4c9b-a876-22e6f496443a@mailbox.org>
+In-Reply-To: <43fec897-24f2-40f6-b1d4-63a7a171a013@mailbox.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,53 +134,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Sat, Aug 15, 2026 at 12:05:55AM +0200, Marek Vasut wrote:
->On 8/14/26 8:29 PM, Ralph Siemsen wrote:
+On Sat, Aug 15, 2026 at 12:03:55AM +0200, Marek Vasut wrote:
+>On 8/14/26 8:28 PM, Ralph Siemsen wrote:
 >
 >[...]
 >
->>@@ -132,12 +134,34 @@ static int gpio_dwapb_reset(struct udevice *dev)
->>  	return 0;
->>  }
->>+static int gpio_dwapb_enable_optional_clocks(struct udevice *dev)
->>+{
->>+	struct gpio_dwapb_priv *priv = dev_get_priv(dev);
->>+	int ret;
+>>@@ -250,7 +250,11 @@ static int cadence_spi_probe(struct udevice *bus)
+>>  			return ret;
+>>  #endif
+>>  		} else {
+>>-			priv->ref_clk_hz = clk_get_rate(&clk);
+>>+			ret = clk_enable_bulk(&clks);
+>
+>Some sort of clk_disable_bulk() seems to be missing.
+>
+>Fail path which disables the clock seems to be missing too in this function.
+
+Ack for both.
+
+>>+			if (ret)
+>>+				dev_warn(bus, "failed clk_enable_bulk\n");
 >>+
->>+	ret = clk_get_bulk(dev, &priv->clks);
->>+	if (ret) {
->>+		/* Clocks are optional */
->>+		if (ret != -ENOENT)
->>+			dev_err(dev, "Failed to get clocks: %d\n", ret);
->>+		return ret;
->>+	}
->>+
->>+	ret = clk_enable_bulk(&priv->clks);
->>+	if (ret)
->>+		dev_err(dev, "Failed to enable clocks: %d\n", ret);
->>+
->>+	return ret;
->>+}
->>+
->>  static int gpio_dwapb_probe(struct udevice *dev)
->>  {
->>  	struct gpio_dev_priv *priv = dev_get_uclass_priv(dev);
->>  	struct gpio_dwapb_plat *plat = dev_get_plat(dev);
->>  	if (!plat) {
->>+		gpio_dwapb_enable_optional_clocks(dev);
+>>+			priv->ref_clk_hz = clk_get_rate(&clks.clks[0]);
+>
+>Can the refclock be second or later (not first) clock in the list of 
+>multiple clock in DT ? If yes, then the clk_get_rate[0] will return 
+>bogus rate for another clock.
 
->Error is not propagated from this call.
-
-This was intentional. All existing users work without explicitly 
-enabling the clock. They probably do it in board specific code, or in a 
-previous boot stage.
-
-While adding clk_enable() should be harmless, what if it fails on some 
-of the existing boards? I would rather not break them, this can be quite 
-hard to debug.
-
->Fail path that would disable the clock is missing in this function.
-
-Okay, I can add this.
+The right solution is to get the clock by name. But once again we have a 
+pile of existing boards which may not have the correct name ("ref") in 
+their device tree. So I went with the simple option of continuing to 
+assume that the first clock is the refclock.
 
 Ralph
