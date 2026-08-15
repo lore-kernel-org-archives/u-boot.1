@@ -4,115 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420EFC5DF6A
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 13:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B19C5DF6E
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 13:01:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 74D2F8100F;
-	Sat, 15 Aug 2026 13:01:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CC1FB812E3;
+	Sat, 15 Aug 2026 13:01:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ynDYfdOzt1os; Sat, 15 Aug 2026 13:01:25 +0000 (UTC)
+ id dwjS7iV-g39C; Sat, 15 Aug 2026 13:01:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 453F281202
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4E9FF812B6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786798884;
-	bh=nfFqn1btDcuwrJHOaGAmXx29nodWtwcgu/zk1iVnurc=;
+	d=lists.u-boot-project.org ; s=default; t=1786798887;
+	bh=bQr8HtSOCkcvmJvbux6/d2biRjAYkuPZlT6Y2mFv4tY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uxrD99LtJH1aMaKgHQBY4fMZmuI9frPR3WEATf+CZPukRsD3XC0RVYOatPomsIlhB
-	 PuwM0zYa39Ml37v6wsKbRS0/ZgTq/qnIDIFS+ENKn47sV9hbngMxc7OQinwWP4UmBs
-	 x581+ZXEm3maBCvUhiJL0h48Z8SQEzyIUSfbTtqCPwtD0U5VuDQ9g5ibLN9huBbm4o
-	 Tl1jTZe/yAyZvXEsyGX+tgw4i5umXn0o8P2yRLZ5t/cxKSLe5OViCB1atINhErNiF7
-	 fDS0ly0Zu/8/sWDitnjY8/DZGHMzFpFiPKzR/kzz7kTqZZgd3RxND98hEXAqWRCM+f
-	 LEHoTvlqbtFdw==
+	b=ZBDoL4+gFV6wNYZoYfrH+y55YZZ8LcXUmmJoep8jdDNOhAvRifhpUreQKpgNVkFJA
+	 k3Ah+ilI/aWiy+vxclD25yJDoLrbHdLjW8+jhP2Pyyb0sG2n2AmhipeCQkow/Y+K11
+	 Z1eKaBAf+enT6uaESKRyA00miVbnsLKk5fgbU3BP+dCOZwUaoW8paYRs5bqidQrjZR
+	 V53XpYOftKdTCT1Ajs5D0cmbk4Rb7O+YcZ4pjVobaUCwBkI7AnhgLSpWYvvZT+B+nh
+	 IXcxnmp5OeKHXuPFYgV0idJvL9Eg3TW1MTET8711qZ5wlH8ECsw8tqK1erclXpq0JT
+	 Z9IBiBbP1xK6Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 453F281202;
-	Sat, 15 Aug 2026 13:01:24 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2342B361
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 05:48:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4E9FF812B6;
+	Sat, 15 Aug 2026 13:01:27 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A674C2BB
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 05:48:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1597A4005A
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 05:48:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 989A460DCA
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 05:48:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pRJGr6H3KBKM for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 05:48:46 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id I_w2IVSBNRFF for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 05:48:48 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::335; helo=mail-ot1-x335.google.com;
+ client-ip=2607:f8b0:4864:20::329; helo=mail-ot1-x329.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 3B5AA40026
-Authentication-Results: smtp2.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8079A60A50
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3B5AA40026
-Authentication-Results: smtp2.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8079A60A50
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=mDRAFvnj
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3B5AA40026
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 05:48:46 +0000 (UTC)
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7eb1dc6bd53so1308659a34.2
- for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:48:46 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=g9FtiT/S
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8079A60A50
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 05:48:48 +0000 (UTC)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7e9ecd7216cso824703a34.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 14 Aug 2026 22:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786772925; x=1787377725;
+ d=gmail.com; s=20251104; t=1786772927; x=1787377727;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=nfFqn1btDcuwrJHOaGAmXx29nodWtwcgu/zk1iVnurc=;
- b=mDRAFvnjwS0D4TwjJL3/nWW7K6PBYLiByCq/vmdGTC/x7ZlNT9CZ0BZbZCJ9i9N+J2
- pOpXThfXtTWnweSlcyv58QUW/eSqA0GEXk9CxUo4K2rcIJ/Nbj8kkua092SiLIObMIYl
- +yrpfYFPi79T0SCro5MsKBA2q9GEVswzirK7uweayueDzIHftDyVNjZHY0+YjuRlNsX3
- olBZB4DPcPX0luQVv29BZlQpUINEagzAV4abqskBbiynm9RyevjrLsD6+ydVp8ava0KO
- cb0Ae2Ur3qgZSnzPccZ6goLcXqlmKjZJ/EfBbyccygaNAaHs4wRxj7J4MS4/SKdboDL5
- dGMQ==
+ bh=bQr8HtSOCkcvmJvbux6/d2biRjAYkuPZlT6Y2mFv4tY=;
+ b=g9FtiT/SB+c05MsCaZBDV6DXMw8tlKmAAWwmvqpPikuUwhe4+9X8hsxIhM4OOesNZ/
+ hBjwFSNC6ZJJJCSW4vmqVUqjEG9Y2FgbzbBhCWJ9PhEBpO3a6zWwJDbKoDuGj5XnoLnd
+ nLsAM4YI03lntu1yaLURyt+PKfhGoFoDyb4OaENY88tiSSXQLXz1OT/m+GuYKAuc4PVy
+ X8RDZto75j3l0j8qX9yBVXLfgzKBxacasDMNIQzQXLvFoUJP5hWcmXUUurtyh09vEw1Z
+ qQBSAv4Jt8sE7gJnSgXcDzUqOMNbLS/MiYvM7/t8NYslzzNYjKwxaptV2I+zZ8cA63dG
+ zGPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786772925; x=1787377725;
+ d=1e100.net; s=20251104; t=1786772927; x=1787377727;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=nfFqn1btDcuwrJHOaGAmXx29nodWtwcgu/zk1iVnurc=;
- b=BLAktv3dz+kGEjlpis0Eex5XpP8rJBfw87sYK66s+52AjZsQdl0ndHwBzMtWgfy4d4
- xwNqluMhUB6yAaWh36wHNBW7j2RlfIREhnUshDKlypiL6u++DT1ZrmBMLgBKL2WyDp/0
- qk8pehIVJPv3Bteum4uagxvbfGbMQhXoLualCvVMdQp2DDHaJ0KHkZThWje8CcVEobUj
- 0CTDF0Va07CBfxTpJghEf48S6aHZXezFkaSfSb2Hbz5cte9gSuHPQ7Lb/igjWkOohSfz
- 4ziwQGtd9EXOGQKxJVP1Tpwws48P0ERixLz9SMUXxmLgV9WzHC9BESE4RimbgWXQ6V0q
- hrwA==
+ bh=bQr8HtSOCkcvmJvbux6/d2biRjAYkuPZlT6Y2mFv4tY=;
+ b=MxdMqIK0LA5Pd2NyZTwwbUhynMbJ3d1VQI+eth2dRKJjZVGVVTUfrvXLzFBuh+EET7
+ p/6+17NgCS2pycZD2YrKFDIjYbJslPFxj7n25ECkRFXuBNsmlQbUBdyJqEqHom10XryX
+ kkjWA53oopkoYyHTUWhkRh1nSZdzl1Xv6127faYL62xCUCzSvVK07K2CDu/QKlLyZLES
+ fsVdZyioyp3RurVpi7yGi9S9u2gDr9qxWhB0TKV8MmB/TDMOLzXc5So6C4pZZQSqdENF
+ bsPXOxdIYEeveQd3xrbyVtQyW/rbNEuXUED2CW6yomZ0n6Ifeg2Mvbzbol3560IBcmIl
+ jQfg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpcbAbASJMt0oBrJUGKA98e+nrsdX4Fc5iXUEW8Z+BE45YEzYaGT8a5yPhtuHzKBuWt+GQEUPk=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwREbWttFl/HZ8/A8FF8JIK65+iAPRMfRFV9tSt4Y8bjKuKaMmP
- i1fd52a3OofoKeERhMLrOQ4dQeUw//0AjAMrIhihavNiWk2zc7XC7+7U
-X-Gm-Gg: AR+sD118Bus4WycKvBDRv7kYZneU4IjL4k63/BpAVKPkzrIfmiXKNzYW5yjfnVXz4FS
- g/kA9Cg604mKDInKoJsk+TxLfqnxcunxf4o/faSsGuh8TaFyvYIbJLLiFdKT2/ZC121hlL3Wxvv
- Z8TfZXg5vFALKmn5KMWjZaDATX5vv+ySB22WBNy3lfvxu5g4Mxl6M67kgoFPiY+yqPm6oOQ/Cyp
- bOj6ooAx1sRAEQa4mC2OEePwqK1QbihZLDflbsWEwOy6Bc30ZHSNUthOqVpPtBm0sRuFskyP9Qq
- tgj2dd7G4cc2ZMB/WTVBSTC/zWDidO/cSM33WTBT/KSw/W94PNCZg3wnRZycVrB3hmHH2CAWZMO
- DNBszuZE/X3aflSND+WdsbxYPWnM4bZBcYFU/16RGcGM6gd4Q3ihAc71TtKvzGvT5ZgA1RWJ/ew
- 4DAWOLLcVur2dJUxHgLYRF0v44DohZJ2HpPpZ1nADLEzl8qRIv54lEIhhmpjacNYV8El3GVTNIg
- Gh0E0SL8rtVlPaQDXDes0sHFzsnBknElK/6/Ae+0OPIXQW2vYzOLOaer8UoQlEjNv0RfHRJtlKd
- ezscT9yKaJwRWzHlFHpX9eaY7Cobs+8u4Z4TRKxp8Su/rTOdYjyrubV7AOCvBYg6Xy8kCFejQvR
- CGIgSMqPwrxogNHwM
-X-Received: by 2002:a05:6830:398c:b0:7e6:f7fb:9678 with SMTP id
- 46e09a7af769-7f3de419859mr10503660a34.1.1786772925034; 
- Fri, 14 Aug 2026 22:48:45 -0700 (PDT)
+ AHgh+RqaM6TtfaOdzPa7iL3KY4yalSldXsp/+n9kIzV9a9Sx7SzwcB6kIr/XtViV0+ROJ+joa2rc2tg=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzL4fUj3YNveV6ZX7U9a/ZE2csoTcyIHJRl/NNG/Ec3SipR6Bt1
+ GRdXYrVPJJlaCvmf4TRfvzEOKEhERGwAC9Kf0P0PDyeg0ETi3RjIs2l8
+X-Gm-Gg: AR+sD13ytgTDElT5qboffsUfRKCNYnliX9x9X0PmYqKPMGJ1NuI642FUxWZ6orNNPGT
+ R7Vbv+7gZTe0zG3AiuilItWZCbdB9jb+774GzyW+F3FnA4fmBWGhORGL2lN9qXCNNBLgklp7AMl
+ AxVYLfv60/bXdrBNywNO2Yvdx4SW90qYBwhXOKRFp3InyeVKx6KTL06JEHQAbHOVM/GSFaOHAO9
+ 0Dq7TAJ2ZiQEcwueUPLWwv+0NAuEhA/Dc78q73z42DajOe8TFOvohGuayPfIA6Bqjk1qQRJe82L
+ 4aip1eHl5EalPqQp2UdTxjjqOVk6XhenIDgMEnMeg5oQxcS7NaVrEtkQZuODT+pwpZObDNjcEKS
+ AwUmqPEEIUl5tp5Y/J6z/9+8EicOJRaxl1I4OjhtVsvAQ5yYkcXKIZ+KQvod8Wx3mN/MD2/b48d
+ 8FpfYgyNS8AvZtvGQPA9nf3C5aYrSZSO9HsqcqH0hbpoxwrgGkrspuw+3KFhMuJ8mJnRAk81Nto
+ cTiH0wqmiKp7bgsfg+VfOensfTgt7RSfLAHnnN3wcxicaZKPAEyQyevDIBwW7AGoRfLHN6AvZT+
+ Avxtm3qbHA6xYS47jRE5czzqoQ6bZeUufRzU7KYHRRfFFio3GjLbocy9O1G4S7gojNiR1YGoP3X
+ eV1oVbURGQc27vua1tg9Q0Q==
+X-Received: by 2002:a05:6830:600e:b0:7e6:f2dd:93c3 with SMTP id
+ 46e09a7af769-7f3de65f077mr9992444a34.15.1786772927486; 
+ Fri, 14 Aug 2026 22:48:47 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f3e86282a6sm2780166a34.18.2026.08.14.22.48.42
+ 46e09a7af769-7f3e86282a6sm2780166a34.18.2026.08.14.22.48.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 22:48:44 -0700 (PDT)
+ Fri, 14 Aug 2026 22:48:46 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 14 Aug 2026 23:48:10 -0600
-Subject: [PATCH v8 03/15] crypto: hash: allow DM hash in SPL
+Date: Fri, 14 Aug 2026 23:48:11 -0600
+Subject: [PATCH v8 04/15] boot: image: try all DM hash providers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-submit-ce-series-v2-v8-3-fe9212431a94@gmail.com>
+Message-Id: <20260814-submit-ce-series-v2-v8-4-fe9212431a94@gmail.com>
 References: <20260814-submit-ce-series-v2-v8-0-fe9212431a94@gmail.com>
 In-Reply-To: <20260814-submit-ce-series-v2-v8-0-fe9212431a94@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -173,160 +173,68 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The hash uclass is currently keyed only by CONFIG_DM_HASH, so SPL cannot
-enable UCLASS_HASH independently. Any SPL code using hash_digest*() has to
-rely on U-Boot proper also enabling DM_HASH, and the FIT hash path selects
-the driver-model implementation with a non-phase-aware preprocessor check.
+FIT hash calculation currently selects UCLASS_HASH device zero directly,
+so a provider which does not implement the requested algorithm prevents a
+later capable provider from being used. It also turns every provider error
+into the same generic FIT hash failure.
 
-Add SPL_DM_HASH, build the hash uclass from CONFIG_$(PHASE_)DM_HASH and use
-CONFIG_IS_ENABLED(DM_HASH) when selecting the FIT hash implementation. This
-lets SPL FIT verification use a UCLASS_HASH provider without requiring the
-U-Boot proper hash uclass.
-
-No in-tree configuration enables both DM_HASH and SPL_CRYPTO, so the
-Makefile object key switch does not remove hash-uclass.o from an existing
-SPL build.
+Use the common hash provider-selection helper. Fall back to the configured
+software implementation only when no DM provider supports the algorithm,
+and preserve probe and digest failures from providers which accept it.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-Changes v5 -> v6:
-  - Document that no in-tree configuration relies on the old SPL object key
-    (suggested by Tom Rini)
-
-Changes v2 -> v3:
-  - Remove the bare software-hash fallback scope
-    (suggested by Simon Glass)
-  - Document that SPL_DM_HASH needs a hardware provider unless a
-    phase-aware software hash provider is added
-    (suggested by Simon Glass)
+Changes v3 -> v4:
+  - New patch
 ---
- boot/image-fit.c             | 50 +++++++++++++++++++++++---------------------
- drivers/crypto/hash/Kconfig  | 13 ++++++++++++
- drivers/crypto/hash/Makefile |  2 +-
- 3 files changed, 40 insertions(+), 25 deletions(-)
+ boot/image-fit.c | 26 +++++++++-----------------
+ 1 file changed, 9 insertions(+), 17 deletions(-)
 
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index ef90c5abd18..d7d7c70fe76 100644
+index d7d7c70fe76..9b39696de2d 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -32,10 +32,8 @@ extern void *aligned_alloc(size_t alignment, size_t size);
- #include <malloc.h>
- #include <memalign.h>
- #include <asm/global_data.h>
--#ifdef CONFIG_DM_HASH
- #include <dm.h>
- #include <u-boot/hash.h>
--#endif
- #define aligned_alloc(a, s)	memalign((a), (s))
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -1318,43 +1316,47 @@ int fit_set_timestamp(void *fit, int noffset, time_t timestamp)
- int calculate_hash(const void *data, int data_len, const char *name,
- 			uint8_t *value, int *value_len)
- {
--#if !defined(USE_HOSTCC) && defined(CONFIG_DM_HASH)
-+	struct hash_algo *algo;
-+	int ret;
-+
-+#ifndef USE_HOSTCC
+@@ -1322,30 +1322,22 @@ int calculate_hash(const void *data, int data_len, const char *name,
+ #ifndef USE_HOSTCC
  	int rc;
  	enum HASH_ALGO hash_algo;
- 	struct udevice *dev;
+-	struct udevice *dev;
  
--	rc = uclass_get_device(UCLASS_HASH, 0, &dev);
--	if (rc) {
--		debug("failed to get hash device, rc=%d\n", rc);
--		return -1;
--	}
-+	if (CONFIG_IS_ENABLED(DM_HASH)) {
-+		rc = uclass_get_device(UCLASS_HASH, 0, &dev);
-+		if (rc) {
-+			debug("failed to get hash device, rc=%d\n", rc);
-+			return -1;
-+		}
- 
--	hash_algo = hash_algo_lookup_by_name(name);
--	if (hash_algo == HASH_ALGO_INVALID) {
--		debug("Unsupported hash algorithm\n");
--		return -1;
--	};
-+		hash_algo = hash_algo_lookup_by_name(name);
-+		if (hash_algo == HASH_ALGO_INVALID) {
-+			debug("Unsupported hash algorithm\n");
-+			return -1;
-+		}
- 
--	rc = hash_digest_wd(dev, hash_algo, data, data_len, value, CHUNKSZ);
--	if (rc) {
--		debug("failed to get hash value, rc=%d\n", rc);
--		return -1;
--	}
-+		rc = hash_digest_wd(dev, hash_algo, data, data_len, value,
-+				    CHUNKSZ);
-+		if (rc) {
-+			debug("failed to get hash value, rc=%d\n", rc);
-+			return -1;
-+		}
- 
--	*value_len = hash_algo_digest_size(hash_algo);
--#else
--	struct hash_algo *algo;
--	int ret;
-+		*value_len = hash_algo_digest_size(hash_algo);
-+		return 0;
-+	}
-+#endif
- 
- 	ret = hash_lookup_algo(name, &algo);
- 	if (ret < 0) {
--		debug("Unsupported hash alogrithm\n");
-+		debug("Unsupported hash algorithm\n");
- 		return -1;
+ 	if (CONFIG_IS_ENABLED(DM_HASH)) {
+-		rc = uclass_get_device(UCLASS_HASH, 0, &dev);
+-		if (rc) {
+-			debug("failed to get hash device, rc=%d\n", rc);
+-			return -1;
+-		}
+-
+ 		hash_algo = hash_algo_lookup_by_name(name);
+-		if (hash_algo == HASH_ALGO_INVALID) {
+-			debug("Unsupported hash algorithm\n");
+-			return -1;
++		if (hash_algo != HASH_ALGO_INVALID)
++			rc = hash_digest_wd_lookup(hash_algo, data, data_len,
++						   value, CHUNKSZ);
++		else
++			rc = -EOPNOTSUPP;
++		if (!rc) {
++			*value_len = hash_algo_digest_size(hash_algo);
++			return 0;
+ 		}
+-
+-		rc = hash_digest_wd(dev, hash_algo, data, data_len, value,
+-				    CHUNKSZ);
+-		if (rc) {
++		if (rc != -ENODEV && rc != -EOPNOTSUPP) {
+ 			debug("failed to get hash value, rc=%d\n", rc);
+ 			return -1;
+ 		}
+-
+-		*value_len = hash_algo_digest_size(hash_algo);
+-		return 0;
  	}
+ #endif
  
- 	algo->hash_func_ws(data, data_len, value, algo->chunk_size);
- 	*value_len = algo->digest_size;
--#endif
- 
- 	return 0;
- }
-diff --git a/drivers/crypto/hash/Kconfig b/drivers/crypto/hash/Kconfig
-index 72b955ac791..272af7bce18 100644
---- a/drivers/crypto/hash/Kconfig
-+++ b/drivers/crypto/hash/Kconfig
-@@ -4,6 +4,19 @@ config DM_HASH
- 	help
- 	  If you want to use driver model for Hash, say Y.
- 
-+config SPL_DM_HASH
-+	bool "Enable Driver Model for Hash in SPL"
-+	depends on SPL_DM
-+	select SPL_CRYPTO
-+	help
-+	  Enable the hash uclass in SPL so SPL code can bind and use
-+	  UCLASS_HASH providers through the driver model. This is useful for
-+	  FIT verification paths that want to calculate image hashes through a
-+	  hardware hash accelerator before U-Boot proper is loaded.
-+	  HASH_SOFTWARE depends on DM_HASH, so SPL_DM_HASH alone does not
-+	  provide a software hash device. Enable a hardware hash provider for
-+	  SPL when selecting this option.
-+
- config HASH_SOFTWARE
- 	bool "Enable driver for Hash in software"
- 	depends on DM_HASH
-diff --git a/drivers/crypto/hash/Makefile b/drivers/crypto/hash/Makefile
-index 33d88161ed4..9f0d30f9be3 100644
---- a/drivers/crypto/hash/Makefile
-+++ b/drivers/crypto/hash/Makefile
-@@ -2,5 +2,5 @@
- #
- # Copyright (c) 2021 ASPEED Technology Inc.
- 
--obj-$(CONFIG_DM_HASH) += hash-uclass.o
-+obj-$(CONFIG_$(PHASE_)DM_HASH) += hash-uclass.o
- obj-$(CONFIG_HASH_SOFTWARE) += hash_sw.o
 
 -- 
 2.53.0
