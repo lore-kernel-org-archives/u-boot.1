@@ -1,121 +1,122 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E0C9C5AD5A
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 20:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957E4C5CFC1
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 22:48:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 01CED4076D;
-	Sat, 15 Aug 2026 20:08:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3C37660649;
+	Sat, 15 Aug 2026 22:48:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X1ywYpefnMnw; Sat, 15 Aug 2026 20:08:35 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pqCQWDa5cjfz; Sat, 15 Aug 2026 22:48:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0E8954077C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4D6576062B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786824515;
-	bh=w2mzd4vHm1OdE6S9Yh+0jdV2ujAdQ8SXj7/7ah27bkY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786834127;
+	bh=EJ/5Ylt1TKf1UggP2XQQoMJWmCd4XeRdFFiKao4fmZs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xFjwArz0qTK0TdNNRoTjQrJxZ6ee2+8KoUTbrW9gGvoEWR9a2VvuGoBlxkJ2xeSG/
-	 E3DVD54c/eEdRCjORZ1HISOvPT3MmVOcCSrQdDZLO5g3FD0WACvDy6EKu4OwIVEzRr
-	 xshuw0x7Juqts03TEMwRgtgPQxUEWrd1j+PPRUfMicNDRbEfk+Zl8H0wtqE3iEZ5QI
-	 S9YMOiPElxXp9E4nTeM1Is05/zSU6y7TnPFPfcCLtL4qBaO/kt/UXoMXQaVAf1asXy
-	 IJlggY+/65cRruGp3AmF4BFCkU496nzaqhmEU0/tr9cwr5btq29JjwBYOi63gaTcP4
-	 N8wBuTa8vbqFg==
+	b=cq1ltTwXCdjrCRUgBaRsKce/N+FZVIw3MdBDLPt6l4JCchaX2uFHwQ6cwAKlX6Xat
+	 P+yrRBaoLgdyTfNMQylfyxXxBkUBdnmR3xx2TXaljrKH7jauXYI8obXZcbxcmOOA5E
+	 daBMqbhcBnODx6cU6DOrw//8oIAPtTNr1DoOKyeNR6Zpjsj6Ag3ZFAN0uLUWdLnelk
+	 5JSd+WkiCzkSLzGDMtS0zHpHWoVgYEURRlVcUtODe3owD/xwg5oR4dCH5oFzEdCrMp
+	 jmxi61avVD3zLyKTqjoGZXWHa1A4AuBVhIR7dxbKUU9KRSurX62UoRrVM3dJTAtrDl
+	 ZgW5shz8ZgDOg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0E8954077C;
-	Sat, 15 Aug 2026 20:08:35 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id AF02C336
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 20:08:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4D6576062B;
+	Sat, 15 Aug 2026 22:48:47 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 670F02BB
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:03:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A0EA680E8D
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 20:08:33 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4D41060644
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:03:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hd40hRkcOREH for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 20:08:32 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id No2ld1z4-Vps for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 22:03:17 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2f; helo=mail-oa1-x2f.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org DD13580E90
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DD13580E90
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=atx61WBs
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DD13580E90
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 20:08:31 +0000 (UTC)
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-4472500e25fso1295896fac.1
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 13:08:31 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
+ envelope-from=pranavkasthuri@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4EA2660633
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4EA2660633
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=O2yWrtiN
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4EA2660633
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 22:03:17 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4954a2e73a9so15809495e9.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 15:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1786824510; x=1787429310;
+ d=gmail.com; s=20251104; t=1786831395; x=1787436195;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=w2mzd4vHm1OdE6S9Yh+0jdV2ujAdQ8SXj7/7ah27bkY=;
- b=atx61WBsHdXU7ney0uw4+ZWzzNxwE+5EBy4VoTWRiJvqzFH4iUXfT3NxNeaYey/jS/
- Vqwk8C/H9qSYT7PHg0eWhuZpPwcnjfftuGzUq6QL8XUzTi8Pl/0P1t9BtVQJgZj/0aV2
- ztonN8xILD2H9T1f4DK1zSLmOA5LlPzkxH3tk=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=EJ/5Ylt1TKf1UggP2XQQoMJWmCd4XeRdFFiKao4fmZs=;
+ b=O2yWrtiNsqF4eU/dP6caRoo+qaLG44F5KwvnRXd2uryfGMB2Fs67/Us9B/cyhHn+DH
+ khbMeqc0BCg+dX8DW1g/Y4pHo92x4WzzDS/sM6HjZNNpzSzRV0JxeSk1XzMsDepYjxpS
+ OSFPaKgBf/yJYWmUQAAwkRolXuTUz8ykCADjREojKGg15yaqt3B5sSwrtQtLhEmH0qcM
+ uxKfyyL+hElrcFjm1Hve6YxyIANj3BKHwj/L7VP45vxZ96gAKGp9CkP8p0MHUC43z54J
+ 2u5AkholBbP+fjAm4H37siZzhlxoAc767Pt3t75tREzjX2M7mKVyQDovf704lD+eYGZH
+ i/Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786824510; x=1787429310;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=w2mzd4vHm1OdE6S9Yh+0jdV2ujAdQ8SXj7/7ah27bkY=;
- b=DQtt/EiDXtcEUPXrbjnrySai3X1Dsq8ojpTiHRCi3pt8uuBmXcxviLT/F+htaHZryH
- sU563DYXWmVF/s5yYlttLWM827sj9ITYKbqWHKl4wjTeFRek4md4W46HU2cH8RrTWYNJ
- PxR+d9gk1mY5jB4LQJ2/WgtzbuyiKVYEEkRuMulqx6GR2X3DfDmHn3LNRM0sq5gYAN3s
- d21OqzcL1EIl1mdxlFEYuDLTddhXFWYLxSLXVjvgDyn3Q024qZ3BVhy97/lxku7OMUhb
- YieOkZXhpdTODNxe6+DEaHAuiAZUhiOvzOSpKvjBEOuo95UwkozVMCC+xq939HAp9hx0
- QIBw==
-X-Gm-Message-State: AOJu0YyH7dquPgwRNxx9vOBp3326C7ZfYmaMeVQKTOfTVRZvX7yPXR06
- 4WuD6lRGZxPXSGWyFQyuOlL4AMELZfHQNMH9BGmLE0b9EWxsZgN38G2uGWzMvzbx9NbORqScna7
- royOdpr8=
-X-Gm-Gg: AR+sD11g8KZWdtV1QEEJQ2jKD2M8JESP4Wto0+Zih9kjfG7dw+ewpqljHrwE4VYc4kU
- 2fVgm3MhhhSvpXVzoOMzGqHXdt4mMAHDXPbs7U7MltiDPTi3v86U4GXT6mrrNcCFNC2XmRdCCSP
- SFHF0JYlCQUtXgcNdpNQaBC2n41lxs2z2EFBidvPLhTg54CPQI8q2gyk2iOHMUIomkhl1HnyK6c
- b4ibEz72uIseoogvkY0M7ynG+tPz+dwnpNwzACBqAGj5D1FPRTrGcYTpKalQo1ourO2Fe5/JFcN
- SXM5EoVTpmJgU/nh+ZJjktkpAfocYsf+G0xJiQvFAjO4yNuPTGJzea0nncYFHW7swcq5fTAqpyt
- D2fzORBUVthY/Bw1JQSw8lH0U5VijbP3mIz77+/lrAXVc+ohihIttePt2JhMEPgYkJpJa4T7pc2
- AoCqw5nr3b4RWiZ0cWUF4mzY/bHFxyn3X3Ga6IYXESZe6HFE1VGJIFZmPjsxMLu6EFWb/CcVJ5N
- P7NpAaKbFsGSOAvli8kBT2TQwfK9U2iBnW5Nnb07qZk34L20ETmuPevP8GEWLid6hWLJfqFJxz4
- /pn+9vEynA==
-X-Received: by 2002:a05:6871:200c:b0:447:24bf:ec47 with SMTP id
- 586e51a60fabf-45e92353f37mr13167189fac.10.1786824510050; 
- Sat, 15 Aug 2026 13:08:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45e8f976bfesm5760564fac.8.2026.08.15.13.08.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 13:08:29 -0700 (PDT)
-Date: Sat, 15 Aug 2026 14:08:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Pranav R <pranavkasthuri@gmail.com>
-Cc: u-boot@lists.u-boot-project.org
-Subject: Re: [SECURITY] Five vulnerabilities in FIT cipher, squashfs, and
- BOOTP/DHCP handling (mainline, VERSION 2026.07 dev)
-Message-ID: <20260815200827.GO3297518@bill-the-cat>
-References: <CANMPf=M9ZsryW_doxe7Vrvd4atYpFgctR4e_aE6xjRZWDa3LYw@mail.gmail.com>
- <CANMPf=M-XLJuw4OM9C+xFCB03DByWvyin+_iFOMyrrSXSjqYfw@mail.gmail.com>
+ d=1e100.net; s=20251104; t=1786831395; x=1787436195;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=EJ/5Ylt1TKf1UggP2XQQoMJWmCd4XeRdFFiKao4fmZs=;
+ b=Y0XTkGXi48py5RFLCeI5WBaRDzJSeLSpV3P+se6KkBq+yOuFcfE7whW4gmuxAmWCJ+
+ LkMw0OeaJhn0SBpmc1UKFKzD6nmZGc/JumxOV7SOBzILeydjnXS6UrILKg4NzZDCDJIq
+ SIO97ZC2pC+2HI8ydx5xlUocQbE5+ooubTLFNkyl9HdapETb3bSnHq3oV4KvbCorS4Fm
+ BwznMkY1VJFv3CGej3junIml9UtFcR5c+WhyMkLkSRC/tOxQRTM7vudl4EIdXkyZAyrm
+ KlD7LGnZ7rxuL8ddmEKLazD11CddlV939pecbJDLrK7uj9q9yQZpQr8u1Iy4hECZGfjb
+ rvfA==
+X-Gm-Message-State: AOJu0YxwkapFq65KxRxnvyIjKEgczQuzZQO9ouVQj/gRNm3yzfv5kNC8
+ 01RR++yQwyo/Pz88Tjyc/EiFIXVyP89GEDqOqWuY0io/zOjEacVnJvEdnOF88LLlFaw=
+X-Gm-Gg: AR+sD130iem/7bnD6WEjJp4MeoKYEBeVi4yd/61o15utQEObtrAnet/G+eY0JrOe7sY
+ rLEOOWr0QnWG/ICDNxBH66YGHlnMOcQAaESHbzs4nwc5PNUQ2kdo+5o42N0wxHesgzSwHuJTgTQ
+ un3rHpxHKjXx/McqdzNpUY+qWslqEp5jzYRw/F6EAJpst+eMuKHdLMWTJ2/V/KjIvcllaLaIEPa
+ nbh0OaneeKrzp7Dion30G3x0hrI8FJnjmtzd5b7UJebN2yqNQNUw9xKWmqL70E+u8Qp/IYXMEGO
+ KQNxEZyzpQ9gT9taIUrUyRclyu08kWB88FSnTPPlKLu/rJzh+NqzqyRrmsdmt32G8LG/A3eKHTr
+ trmg/m6dWHO0sIjc0glvBeRBSU/mVsqu4hvGE/0nGYdEL42KJt/de2CMwc3vXnRVQSMlfS9v/T+
+ aWUDVCjoRxEitzGwLtFm4rcfWsExlJ+CTPSrtf8l5OBrXHwytS+kyX/pY1r/bqF9KX1A/xNKWHJ
+ /H+SzWQ6fTBWcI/an6vEJXeEeCCO0sR65LUNKQ7c9yqFyIwEE4t7wlvEqdb4f8p1bDVdUW9OtQd
+ z2tK1zwOwnW4Qw+m7xrCMOTZ
+X-Received: by 2002:a05:600c:1da8:b0:496:bbce:fc with SMTP id
+ 5b1f17b1804b1-4998798467amr232877465e9.12.1786831395142; 
+ Sat, 15 Aug 2026 15:03:15 -0700 (PDT)
+Received: from Mac (default-188-240-185-161.interdsl.co.uk. [188.240.185.161])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49988b1d33asm179055255e9.10.2026.08.15.15.03.13
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sat, 15 Aug 2026 15:03:14 -0700 (PDT)
+From: Pranav Rajendran <pranavkasthuri@gmail.com>
+To: u-boot@lists.u-boot-project.org
+Cc: joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com,
+ thomas.petazzoni@bootlin.com, miquel.raynal@bootlin.com,
+ trini@konsulko.com, Pranav Rajendran <pranavkasthuri@gmail.com>
+Subject: [PATCH v1 1/2] fs/squashfs: bound fragment table accesses in
+ sqfs_frag_lookup()
+Date: Sat, 15 Aug 2026 23:01:14 +0100
+Message-ID: <20260815220115.11335-2-pranavkasthuri@gmail.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20260815220115.11335-1-pranavkasthuri@gmail.com>
+References: <20260815220115.11335-1-pranavkasthuri@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HRIKLHUuIZTUhHQJ"
-Content-Disposition: inline
-In-Reply-To: <CANMPf=M-XLJuw4OM9C+xFCB03DByWvyin+_iFOMyrrSXSjqYfw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 15 Aug 2026 22:48:45 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,137 +131,148 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
+sqfs_frag_lookup() validates its fragment index only against
+sblk->fragments, which is read from the image superblock and is
+therefore under the control of whoever supplies the image. Every
+buffer access derived from that index is then made without checking
+it against the size of the buffer actually read from the device:
 
---HRIKLHUuIZTUhHQJ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ - the fragment index table entry at 'table_offset + block *
+   sizeof(u64)' can be read past the end of 'table', as 'block' is
+   inode_fragment_index / SQFS_MAX_ENTRIES and has no upper bound;
 
-On Sat, Aug 15, 2026 at 08:44:34PM +0100, Pranav R wrote:
-> Hello Team,
->=20
-> I am writing to follow up on the security vulnerability report I submitted
-> on July 23, 2026, regarding the five memory-safety findings in the FIT
-> cipher, squashfs, and BOOTP/DHCP components.
->=20
-> Could you please provide an update on your team's verification progress f=
-or
-> these findings? I would also appreciate any visibility you can share
-> regarding the remediation timeline or planned target dates for deploying
-> the corresponding patches.
->=20
-> Thank you for your time and continued coordination.
+ - the metadata block header and payload are read from
+   'metadata_buffer' at 'table_offset', but that buffer is sized from
+   start_block, which comes from the unvalidated index table entry
+   above. A start_block just below sblk->fragment_table_start yields a
+   single-block buffer while SQFS_METADATA_SIZE(header) may be up to
+   SQFS_METADATA_BLOCK_SIZE, so both the decompression source and the
+   memcpy() source can run past the end of the buffer;
 
-I don't see the original report around, I wonder where it went.
-Regardless, please see
-https://docs.u-boot.org/en/latest/develop/sending_patches.html for how
-to submit fixes. Thanks!
+ - 'entries' is allocated with SQFS_METADATA_BLOCK_SIZE bytes but only
+   partially filled, so entries[offset] can read uninitialised heap
+   memory when the metadata block holds fewer than offset + 1 entries.
 
->=20
-> Regards,
-> Pranav Rajendran
->=20
->=20
-> On Thu, Jul 23, 2026 at 11:56=E2=80=AFPM Pranav R <pranavkasthuri@gmail.c=
-om> wrote:
->=20
-> > Hello Team,
-> > I am reporting five memory-safety vulnerabilities found during a source
-> > review of the current U-Boot mainline (VERSION 2026.07, development tre=
-e =E2=80=94
-> > happy to confirm against a specific commit if that's useful; my checkout
-> > doesn't carry git metadata).
-> > All are static-analysis findings, traced end-to-end from
-> > attacker-controlled input to the vulnerable operation; none have been
-> > exploited against real hardware. Detailed reports with reproduction ste=
-ps
-> > and remediation suggestions are attached as PDFs.
-> > Summary of Findings
-> > *1. Heap buffer overflow (write) in FIT image AES-CBC decrypt*
-> >
-> >    - *Location:* lib/aes/aes-decrypt.c, lib/aes.c =E2=80=94 CONFIG_FIT_=
-CIPHER
-> >    - *Description:* A destination buffer is allocated to the exact
-> >    ciphertext length, but the decrypt loop writes a block-size-rounded-=
-up
-> >    length with no alignment check, overflowing by up to 15 bytes on
-> >    non-block-aligned FIT image data.
-> >    - *Severity:* CVSS 3.1: 8.1 (High)
-> >    - *Attachment:* U-Boot-FIT-AES-CBC-Heap-Overflow-Report.pdf
-> >
-> > *2. Heap out-of-bounds read via forged FIT data-size-unciphered*
-> >
-> >    - *Location:* boot/image-fit.c, boot/image-cipher.c =E2=80=94 CONFIG=
-_FIT_CIPHER
-> >    - *Description:* The post-decryption size is read from a FIT property
-> >    outside the coverage of per-image hash/signature verification, and i=
-s never
-> >    checked against the real decrypt-buffer size.
-> >    - *Severity:* CVSS 3.1: 6.8 (Medium)
-> >    - *Attachment:*
-> >    U-Boot-FIT-Cipher-DataSizeUnciphered-OOB-Read-Report.pdf
-> >
-> > *3. Heap out-of-bounds reads in squashfs sqfs_frag_lookup()*
-> >
-> >    - *Location:* fs/squashfs/sqfs.c =E2=80=94 CONFIG_FS_SQUASHFS
-> >    - *Description:* Two independent unchecked-index issues in the same
-> >    function: a fragment-table index derived from an attacker-controlled
-> >    superblock field with no bound against the actual allocation, and a
-> >    metadata copy bounded by a fixed constant rather than the real buffe=
-r size.
-> >    - *Severity:* CVSS 3.1: 7.1 (High)
-> >    - *Attachment:* U-Boot-Squashfs-FragLookup-OOB-Read-Report.pdf
-> >
-> > *4. Heap out-of-bounds read via unchecked index in sqfs_dir_offset()*
-> >
-> >    - *Location:* fs/squashfs/sqfs_dir.c, fs/squashfs/sqfs.c =E2=80=94
-> >    CONFIG_FS_SQUASHFS
-> >    - *Description:* The function can return a negative error code or an
-> >    unbounded offset; all three call sites use the return value directly=
- as an
-> >    array index with no validation, including a negative-index heap unde=
-rflow
-> >    path.
-> >    - *Severity:* CVSS 3.1: 7.1 (High)
-> >    - *Attachment:* U-Boot-Squashfs-DirOffset-OOB-Read-Report.pdf
-> >
-> > *5. BOOTP/DHCP option parser scan window ignores received length*
-> >
-> >    - *Location:* net/bootp.c =E2=80=94 CONFIG_CMD_DHCP
-> >    - *Description:* dhcp_packet_process_options() scans a fixed 548-byte
-> >    window regardless of the actual received packet length, which is only
-> >    validated down to 236 bytes. A minimal-length crafted DHCP reply cau=
-ses
-> >    stale receive-buffer content to be parsed as option data.
-> >    - *Severity:* CVSS 3.1: 5.5 (Medium)
-> >    - *Attachment:* U-Boot-BOOTP-DHCP-OptionScan-InfoLeak-Report.pdf
-> >
-> > Technical Context
-> > Each PDF includes exact file:line anchors, the full exploit chain,
-> > deterministic reproduction steps, a per-metric CVSS justification, CWE
-> > mapping, and a minimal remediation suggestion.
-> > I understand the project doesn't operate under NDA; I'm glad to coordin=
-ate
-> > on timing before any public write-up and to answer questions on any of =
-the
-> > above. Let me know if a different reporting channel or additional
-> > recipients would be more appropriate for any of these.
-> > Regards,
-> > Pranav Rajendran
-> >
+Compute the size of both buffers explicitly, rejecting the
+multiplication overflow the way sqfs_read_directory_table() already
+does, and check each access against it. Also track how much of
+'entries' was populated and reject an index beyond that.
 
---=20
-Tom
+A crafted SquashFS image can trigger all three cases, either crashing
+U-Boot or feeding adjacent heap contents into the fragment entry that
+the following data read is based on.
 
---HRIKLHUuIZTUhHQJ
-Content-Type: application/pgp-signature; name="signature.asc"
+Fixes: c51006130370 ("fs/squashfs: new filesystem")
+Signed-off-by: Pranav Rajendran <pranavkasthuri@gmail.com>
+---
+ fs/squashfs/sqfs.c | 50 ++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 48 insertions(+), 2 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 55fbe1bcc1a..cd88923521e 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -109,6 +109,7 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	unsigned char *metadata_buffer, *metadata, *table;
+ 	struct squashfs_fragment_block_entry *entries;
+ 	struct squashfs_super_block *sblk = ctxt.sblk;
++	size_t table_size, metadata_size, valid_len;
+ 	unsigned long dest_len;
+ 	int block, offset, ret;
+ 	u16 header;
+@@ -133,7 +134,12 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	start /= ctxt.cur_dev->blksz;
+ 
+ 	/* Allocate a proper sized buffer to store the fragment index table */
+-	table = malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
++	if (__builtin_mul_overflow(n_blks, ctxt.cur_dev->blksz, &table_size)) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	table = malloc_cache_aligned(table_size);
+ 	if (!table) {
+ 		ret = -ENOMEM;
+ 		goto out;
+@@ -147,6 +153,16 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	block = SQFS_FRAGMENT_INDEX(inode_fragment_index);
+ 	offset = SQFS_FRAGMENT_INDEX_OFFSET(inode_fragment_index);
+ 
++	/*
++	 * 'inode_fragment_index' is only checked against sblk->fragments, which
++	 * is itself read from the image, so the resulting index may point past
++	 * the fragment index table that was actually read from the device.
++	 */
++	if (table_offset + ((u64)block + 1) * sizeof(u64) > table_size) {
++		ret = -EINVAL;
++		goto out;
++	}
++
+ 	/*
+ 	 * Get the start offset of the metadata block that contains the right
+ 	 * fragment block entry
+@@ -158,7 +174,13 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	n_blks = sqfs_calc_n_blks(cpu_to_le64(start_block),
+ 				  sblk->fragment_table_start, &table_offset);
+ 
+-	metadata_buffer = malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
++	if (__builtin_mul_overflow(n_blks, ctxt.cur_dev->blksz,
++				   &metadata_size)) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	metadata_buffer = malloc_cache_aligned(metadata_size);
+ 	if (!metadata_buffer) {
+ 		ret = -ENOMEM;
+ 		goto out;
+@@ -170,6 +192,11 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	}
+ 
+ 	/* Every metadata block starts with a 16-bit header */
++	if (table_offset + SQFS_HEADER_SIZE > metadata_size) {
++		ret = -EINVAL;
++		goto out;
++	}
++
+ 	header = get_unaligned_le16(metadata_buffer + table_offset);
+ 	metadata = metadata_buffer + table_offset + SQFS_HEADER_SIZE;
+ 
+@@ -183,6 +210,16 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 		goto out;
+ 	}
+ 
++	/*
++	 * The metadata block's payload is read straight out of
++	 * 'metadata_buffer', so it has to fit in what was read from the device.
++	 */
++	if (table_offset + SQFS_HEADER_SIZE + SQFS_METADATA_SIZE(header) >
++	    metadata_size) {
++		ret = -EINVAL;
++		goto out;
++	}
++
+ 	entries = malloc(SQFS_METADATA_BLOCK_SIZE);
+ 	if (!entries) {
+ 		ret = -ENOMEM;
+@@ -198,8 +235,17 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 			ret = -EINVAL;
+ 			goto out;
+ 		}
++
++		valid_len = dest_len;
+ 	} else {
+ 		memcpy(entries, metadata, SQFS_METADATA_SIZE(header));
++		valid_len = SQFS_METADATA_SIZE(header);
++	}
++
++	/* Only the part of 'entries' that was actually filled in is usable */
++	if (((u64)offset + 1) * sizeof(*entries) > valid_len) {
++		ret = -EINVAL;
++		goto out;
+ 	}
+ 
+ 	*e = entries[offset];
+-- 
+2.50.1 (Apple Git-155)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoDHNwAKCRAr4qD1Cr/k
-CrPvAQCxQ+m1wBeBsqWkgq3PF2ErCFmK4RI5VXitgBUXRu8OJAEAlzYO80pa01zk
-9lN6faqeLKD+TbjYmu5sAr10/NPKTgM=
-=YhB6
------END PGP SIGNATURE-----
-
---HRIKLHUuIZTUhHQJ--
