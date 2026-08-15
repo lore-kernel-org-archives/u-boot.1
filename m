@@ -1,179 +1,103 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7655C5AD5A
-	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 18:55:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71DE4C5CFC1
+	for <u-boot@archiver.kernel.org>; Sat, 15 Aug 2026 19:39:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7296C4080E;
-	Sat, 15 Aug 2026 18:55:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1FEC080C98;
+	Sat, 15 Aug 2026 19:39:33 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PNRdcMB4BEMV; Sat, 15 Aug 2026 19:39:31 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9454180C43
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786822771;
+	bh=hnK6yHaovixTBqvJhdbSlhutMh2Qp+EGTnWHpbZuZiE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JqwDG80Y6TtyKpyoJWrFl50Fq001VuMF76c7ZOTouYrD1ZIRyCysaFKjCkDkofzds
+	 fcZRn4hu6FHAmgE6XRqKS+hY12Z21gNTlMFIIzlc5tgYFxYqp7VzPZp0yyRs3PWoRu
+	 WNxuMbQVQKvxOLyM3OzBP/f0iqNJ038lwQvBkbMNRPu9rORFQLjIaO7dU5V+/Bs35L
+	 EKgV74voKKgimG6GH1DWlmetMiIko31FCK3BmYiZ9tiILVH2spQiFpsEOcdi+8rINn
+	 KLObRqJjCSIN5ftbEUjtObyrkIHaSEtlXi4s8fpJwNQT9EOn96IRWAFDSk1Z+KLe/S
+	 eIMo1L/KeC4Yw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9454180C43;
+	Sat, 15 Aug 2026 19:39:31 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 22B5A333
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:39:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 08236407AD
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:39:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id c-fx5h4F3nOr; Sat, 15 Aug 2026 18:55:27 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0885F40802
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786820127;
-	bh=ziedgTYrEe8XJqfPhNc8uqF74rg9ZEliwI48HjDnxC4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KrtFsoUOfSoDMINV2+GfV34tX+cJW2AhXVo1VMTjnbhcaP/a4zSiOpysAKivCZmuf
-	 343VZCd2u/kpqrKziJHkpn2WYOt2S0aVCcDp7VTGhaXHMW3gGOm1IHAD7EmC5aD7Ph
-	 +ZwbXfBKCatJn5DQGY0WPGzHJqmoTtf9WOOOxS8WY3cIndFPNEosY0GmiP6esu+Rrn
-	 J3M07HZlIJDVEN929mNtEYlakutrcGPwJfNLspY5Y/c9wF3A3WQZ9+oqueBIzxACHp
-	 H9fyN9UnLmUhp0lumlrQ5Yr84RCxjy0SrmwSYTvwbnu6YbMX/EORo/RHwW8XS739hG
-	 Rm0AYEfB4OC3A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0885F40802;
-	Sat, 15 Aug 2026 18:55:27 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 84C5723F
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 17:23:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 76B11400AA
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 17:23:52 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8Da_fWnvUQVG for <u-boot@lists.u-boot-project.org>;
- Sat, 15 Aug 2026 17:23:51 +0000 (UTC)
+ id HsBdfIgvRaMp for <u-boot@lists.u-boot-project.org>;
+ Sat, 15 Aug 2026 19:39:29 +0000 (UTC)
+X-Greylist: delayed 4201 seconds by postgrey-1.37 at util1.osuosl.org;
+ Sat, 15 Aug 2026 19:39:28 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 71A0140770
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=icloud.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 71A0140770
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=icloud.com header.i=@icloud.com header.a=rsa-sha256
+ header.s=1a1hai header.b=hlLJZTa5
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::92b; helo=mail-ua1-x92b.google.com;
- envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7AE4240026
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7AE4240026
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=NaFJaIQQ
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7AE4240026
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 17:23:51 +0000 (UTC)
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-96944741eaeso474838241.1
- for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 10:23:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786814630; cv=none;
- d=google.com; s=arc-20260327;
- b=hOAltlVPvIXoqIz20JosXSjME6kJK6b0qIUaa/HwCQQQrdAEeo64BWD1zfaYcMt7Mq
- wwMpe6YyEFqfVoZ1Lgz+Kcei3aJNEZ3m2gCBMw1Z1di2U0ZU+RhFRVJPewvMS7UZPPKr
- ikx5Acd+wvko4fNLlgbqElwb0VIYMTiUbTfutWdO1Blz0WYciHhAC2Kl/65Ogn51V/Sj
- hdjVnTaOjzSyassAcDlf0Bnm7yEYZm8g3j4uegnOEu/OZH/fsBWyJkhB4a2YOeYr9SHk
- na+bZSbjQ/T+42RyOghDA6doyMDoriWbEVpq8OPO0ijikluQZybBEm9GCX7TN2Ke9EYB
- QwYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ziedgTYrEe8XJqfPhNc8uqF74rg9ZEliwI48HjDnxC4=;
- fh=2Xwx16O9LbRjt2i+odzJsXLS0Hr6Z3H7RZdBUMpFkjY=;
- b=gex47Q+v1CAe7+U6G6lk2JGtw6xw4Vti9Cj+Sv744sQcU11HsWb+AW61W6Y5jFvgVY
- qoBpKJiCwuXt0UmsNVSDUwuk33XJHw1lm0S9a0Rd8LNmxjMg1LwAMEtHF9Bk3j7l/sVN
- YF1Cw8sMTLUs0KefTTMj1aY5jy1/P/oX5JwY+Nmq+fVWPlGqEC4pDEiMwdzNL3e+bPos
- NssvQumjT22KiPqjigXvITe1qQH5XoJC4Mf2ZRs/IwosZvNnNccZknxtLo3n2/j7ciRX
- KlmD9esKSxJmtMsv86nLyZDZYxcPpJ+8uow4jl8YPK4qQtioAcIPbArQcwN7s6VyKzDa
- TIGA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786814630; x=1787419430;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=ziedgTYrEe8XJqfPhNc8uqF74rg9ZEliwI48HjDnxC4=;
- b=NaFJaIQQw5rAnObB57UAcVW2FT6pyiDCPQAmoARBuh/V+rkfO6tyD65jL6aEn6HUCC
- 9Um0H5Lfuz7IhtJvHAXaOkCec7rg9X6SIrvCyBWGGAO8dVh/gUO8D4/fqu75TDraN1NI
- SeGt4lbCrprofhhOsQOaSxJvOsprsWla2jxev7GmUjqr0onlGtI6crvXqOCtwUNXE2gC
- XpfQ41VKnQDvffEyTJgrQlZknK5PhIoDvo7rA6qNfOgFheOQzUeo6WlLfBulKttQk3tL
- isaahjnjXT/JgLNHi1aIXWXaDAd5mYpmsuk8CTkzzzhEtB1PRV2iPrf1UPgwaPAZKfsy
- ob8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786814630; x=1787419430;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ziedgTYrEe8XJqfPhNc8uqF74rg9ZEliwI48HjDnxC4=;
- b=dJf61S4pqfM6VXPcBdGFkYJ4CWnc3HirUOakkfxFpFFPei85tZcLC4Ht0Dm2UKYVM/
- YKloKsCEQMyoWD4M8B2+t5iOWkEzK3qaIJbIq2n+gYlZOtidPze1kEUqSDfx3L4I6lqN
- LW51fan3yhnqRehyO54TynR6DEjvVg0XRfO/sdN5+eIza/u3XWnzENrMt+6tBytekJjv
- EGbgou58BVWUPRZxL3yLt8jEiKeQOOHezoyTDro9qIHQbSnh7543lWfmPaDFVCmht7Hr
- HQRpbf9uB2wMCF2j3L6FQBuf5HzV3cTcIxRWa46OndR6MnvcP0tHj/oizlM4EDv+XBwe
- NLlw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rp9zy0dK9alAy5nM3DYy2Ijk1neaa3tE2WjTGa+asgyuyJym5PBVhiwr2P37wC17o+sUg4L/Ok=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yy3CT4md6zTtYg4oQcnNJKNEr/UQDHByTb9pcuQZCr0j5g4deXA
- Shg9puQIpzHcyW2zwbVYnDGCpFSC3wGY5a4dNqUoybNWrKCzUbuTF744XEGwr1BUixU2QV0sywX
- bNhOLzziVE7PCrFwCRSbWfQsBiNBNwQ4=
-X-Gm-Gg: AR+sD122gFB8S3EHV4pSLxXmBxMQ+dRVxgOwlY5RCqytw2NgsjZjfmG2Srufc+AYBIk
- 9q6guEupdDrtlM4rj3IPuj7iRUwCvAR2tsfBEegoOpb3eWHS5KUyI1NcdDY7wpMhd07lfWucCBb
- Z4lBN069iXZzB19PGdoWWFoRd9lH1K0YkY+0ZZzgyRZQMNT9W5vyyZiqzq9ROK+YOoUR3AjV0zT
- RaCmY+33SGCARrLsTymynh7BiieFUcRj6lxHGmeRMAIzjkenVhyd3X460WRktt6sD1kRzcvFBLQ
- JOhelbVkWM9z0PE1xMJZi1nRu4xkWOSwDxqki5zNSliYL7CzWZe/NXvHynFzeL5pYDKHCW/BwwM
- vRJ8IPGCoHmMcF3dzg9saLbF1FttxV/Na/o5pG0QGLCl0qorCzLp5lBkkA44rq9GKS+jCQlVjS1
- wpmkzSDpMQS9gyWkvvbePCJ5xMYpN8mks39rimleLqsQ==
-X-Received: by 2002:a05:6102:3fa8:b0:745:78d4:4856 with SMTP id
- ada2fe7eead31-76f2b9172abmr2260933137.7.1786814629770; Sat, 15 Aug 2026
- 10:23:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260813-submit-ce-series-v2-v7-0-593fcd8479fd@gmail.com>
- <20260813-submit-ce-series-v2-v7-6-593fcd8479fd@gmail.com>
- <CAFLszTig3sOjU-bDZ5mrkmXvRabLA4Rsg4oC_n6+4Y=ghhXpeA@mail.gmail.com>
-In-Reply-To: <CAFLszTig3sOjU-bDZ5mrkmXvRabLA4Rsg4oC_n6+4Y=ghhXpeA@mail.gmail.com>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 15 Aug 2026 11:23:38 -0600
-X-Gm-Features: AcwNN1UROH51tP7xSzS2hOjZCdh9CDgYVexdC6p0l6cid72M5PQAMEg3aZ7r8nA
-Message-ID: <CADvTj4rTCJN=azo4YAt=smZum=HRw9gNF0MJ3eXfkzpNuhEEsw@mail.gmail.com>
-Subject: Re: [PATCH v7 06/15] crypto: hash: support hardware-only progressive
- hashing
-To: Simon Glass <sjg@chromium.org>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- u-boot@lists.u-boot-project.org, 
- Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Tom Rini <trini@konsulko.com>, 
- Thierry Reding <treding@nvidia.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <u-boot@0leil.net>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marek.vasut@mailbox.org>, Rasmus Villemoes <ravi@prevas.dk>, 
- Rasmus Villemoes <rv@rasmusvillemoes.dk>,
- Aristo Chen <aristo.chen@canonical.com>, 
- Anton Ivanov <anton@binarly.io>, Daniel Golle <daniel@makrotopia.org>, 
- Francois Berder <fberder@outlook.fr>, Peng Fan <peng.fan@nxp.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Randolph Sapp <rs@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Alexey Charkov <alchark@gmail.com>, 
+ client-ip=2a01:b747:3006:206::35; helo=outbound.qs.icloud.com;
+ envelope-from=valentinliu@icloud.com; receiver=<UNKNOWN> 
+Received: from outbound.qs.icloud.com (qs-2004e-snip6-11.eps.apple.com
+ [IPv6:2a01:b747:3006:206::35])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 71A0140770
+ for <u-boot@lists.u-boot-project.org>; Sat, 15 Aug 2026 19:39:28 +0000 (UTC)
+Received: from outbound.qs.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-east-2d-60-percent-6 (Postfix) with ESMTPS id
+ 4B29E1800123; Sat, 15 Aug 2026 18:23:32 +0000 (UTC)
+X-ICL-RepId: 01a006aa-3188-7af6-85dd-0e8a244cf93c
+X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQ9IHV8FWhxEC1YBWQ9LVxQEDlIBUgVGGVcUWhh3AlEcVg1XQ1QEX1BfHA4EVAddBV1WUAJaS0ATBE8TBVIHXU1WDUcPWB5cFBcJQENeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVaDlsERxQXG1wAFwZbFAREAV0FXQJICE0CVQVYAEIXTQBaB0YDXU8ZXwhZH1seVRFGLV4IXh9MHB0OWAYMUE0BQwgKAlEcVg1X
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
+ t=1786818213; x=1789410213; bh=hnK6yHaovixTBqvJhdbSlhutMh2Qp+EGTnWHpbZuZiE=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
+ b=hlLJZTa5779z1J3/4crhCjf6LZONm1SFXVXO/yI9SkGFEmVnmCxoifo20mTntWYum/rtHCdJtf9uR/D7xodP24C8oZz9dBH53jE5XZSBrs9vvMg117aMbOpO0YkPzBu9vVqQVsC/agSK4fHC5279u4E+TPuhRO4JR05bMzuReW0NRml4YJfU0bnEcr/ERhtMI+cP86PiNP7FAxs0OkbYRsdlgOFQxPs6vhwWD9n/0eoHUXnthuM2WOPjiJh/6Vk88Kf+R5ABq6Xlu5W4/8MA6QD4eLrQws9UlV26JPHsfujO5tn3xc0oK4Uvj6YwhZn9I4O7hVFbOPjI2h3hODyrEg==
+Received: from DESKTOP-GUOEOAE.lan (unknown [17.57.155.37])
+ by p00-icloudmta-asmtp-us-east-2d-60-percent-6 (Postfix) with ESMTPSA id
+ 0121518004F9; Sat, 15 Aug 2026 18:23:28 +0000 (UTC)
+From: Valentin Liu <valentinliu@icloud.com>
+To: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Johan Jonker <jbx6244@gmail.com>, Francesco Valla <francesco@valla.it>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michael Walle <mwalle@kernel.org>, 
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
- Richard Genoud <richard.genoud@bootlin.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, E Shattow <e@freeshell.de>, 
- Enric Balletbo i Serra <eballetbo@kernel.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Raymond Mao <raymond.mao@riscstar.com>, 
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, Heiko Stuebner <heiko@sntech.de>, 
- Vincent Jardin <vjardin@free.fr>, Raymond Mao <raymondmaoca@gmail.com>,
- Yao Zi <me@ziyao.cc>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 15 Aug 2026 18:55:25 +0000
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org,
+ Valentin Liu <valentinliu@icloud.com>
+Subject: [PATCH v2] arm: rockchip: spl: Add hotkey detection support.
+Date: Sun, 16 Aug 2026 02:23:22 +0800
+Message-ID: <20260815182322.5370-1-valentinliu@icloud.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260815170844.1196849-1-valentinliu@icloud.com>
+References: <20260815170844.1196849-1-valentinliu@icloud.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: Y1FN6PFlFhqUE0PGM6Gsd6Ydye7sX4hJ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE1MDEzOCBTYWx0ZWRfX1ytjeoSNyZF2
+ tE2HFGnvDc4eorN3Zres095FidEfvteFahqB17UoJMimxsq81w+euBd2xFcJvq0BNZ5c07+ZCVh
+ 0C22f4VnpktPMkwioyVENZuG/uHO5YbEkxl7A/SreMzqFenSG7nChzhQ1MaIcmjsDkgWiaw9nJn
+ ihQUwxDOUrCRqQ9J/vJKq5minTn/Am1ZxctoW0hfqUbk9pq2L8a8/hVXjo4vwlV3jBd9AuuRFZd
+ B+CmTn1pEnMbW58hoH9a8TSi6ZHQ7/ZD8nF0jx4AdsG0hb0bq8pY8XPoYKK7o3De5Yd6OvQEAj1
+ v5hY1jd8D0lk8sQ5CeFgaaPCJNMMt5Krl6H81vpgcliWUBab7pLV0DYccclcNI=
+X-Authority-Info-Out: v=2.4 cv=EfjFgfmC c=1 sm=1 tr=0 ts=6a80aea5
+ cx=c_apl:c_pps:t_out a=bsP7O+dXZ5uKcj+dsLqiMw==:117
+ a=bsP7O+dXZ5uKcj+dsLqiMw==:17 a=Sv0fKeRqtYgA:10 a=x7bEGLp0ZPQA:10
+ a=LQAHsTbMm04A:10 a=VkNPw1HP01LnGYTKEx00:22 a=v3ZZPjhaAAAA:8
+ a=dZgUxksGFSRSUUpnT4MA:9
+X-Proofpoint-GUID: Y1FN6PFlFhqUE0PGM6Gsd6Ydye7sX4hJ
+X-JNJ: AAAAAAABXnUD/hpyRwMgE4uy+vKlnR+ha9xaqO9aDUOADUizHUAbjTRZxolyDaEaR7QcLFEY+/e87GWq5vKoFqh8DY75VvTpp5kjtnZ6k7gO6WfDm0psscfS10Dkbu3O2OS6KeIki3SGTBaXv79bxQazs4BeMTQhNIzB96/PIrjZovt7ZL4URAFI74h/HFhSE4C7AUvbuIzL9jivv6Lftg6MI0G0tEjjaIQgXfLgnQCYjPoQ7jWd0N8Z63QWsh45fo6p9TufLSK7QDAKEzc0SG13hvuZfi474YwPkAVlJm3ibmfQLlw8JWWjrmt70ecwoVBI2PSTcENhFc9KKNiHgcdaVIoPZWjmgrUfHpbpXs70/HB62Mgf2uxMzh8CBPvo7awp0IJdPLMdbKf1rgKyxTxGuEccC0MrgXZ5yZxF2aHeWeaKGWaGrpdJThebelpA3hgY2lK1prX1+Gdql68oUCasIx7q8HNzI+dD+d0ptBJSDhU2f+oiOlrWlipQHt8pH8tPJUvd78Lzo6evAgOSGj6PGWAYwjyRpAx4CnfVqfUBn4BXvGw/cILeGaaBGb8I9i0AJA7mVQITUDm5r55CSfnX0i3VbOoOLeXpIcYWTq5Mu4s2eXKokA8pC4kwkj9r68TOjshMIjCcZ8EteHtLgiOMLOaVxFH6Sr0xyhkXqLwguf7O6wYekpfEuUh/B3srDGahgQzq0AqD1xBDzOKxp/aNFhAn/gaFuLvnscXUxLLStuCeGwlPm7FpZ2lgcSm6qquAMayDDDFqCx7NXWglgiVCi8S55Tb68fNv6hqkBA71SBsQkQb0gNwFqCfcfY5RwGusGNcsCKN8oLpv4fC9lWyMMLRmhuLAWHK9EJTtrgw8uSImBmhgLr1CuH1zX+i+DyF/wZRZuxYeJSggaZLRznDwDn+uKXOQCJXd0WGi8RyfyeuBXlcj769L+bD1gpzJmWWnynNVvfHPzZX/1ZFt8bK6AIvysYD
+ ZCi0MJUAEqSjnocif67akvrwh18rvVXGKTQyK/blcIA/fZKuy+mex5zRuA4La/Du4jyGyDd/LF5dcpXTrg6A/2Jy4e2jnlRC4BSEHO8V1DfQz2OZ4ZPFGG9vQ461OJEpEJCqKi9K4uXHSj0AqsXmvK2HHbCdHUkgYNSn2bfssvslAgx2Aa4HqHhmWlN1cK1dgG7NO3sKe6sOE4JE3+82vAdWVW8rcT0IGx6aQxKMverBYuvSCc2srnPeY0d9q7Z4jHs/U1M/Wb9x0HZMLUvU9MQpOsl3knt1N0wDgafp+hgr2PesWbc0daEM9ghE=
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -188,87 +112,121 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Fri, Aug 14, 2026 at 4:31=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi James,
->
-> On 2026-08-13T19:58:53, James Hilliard <james.hilliard1@gmail.com> wrote:
-> > crypto: hash: support hardware-only progressive hashing
-> >
-> > FIT configuration signatures hash multiple discontiguous regions throug=
-h
-> > the legacy progressive hash interface. This still requires a software
-> > implementation even when image hashes use a driver-model hardware
-> > provider.
-> >
-> > Add provider selection for progressive driver-model hashing and use it
-> > from hash_calculate(). Allow SPL_SHA256_LEGACY to be disabled explicitl=
-y,
-> > link the SHA-256 software support only for a selected software backend,
-> > and make legacy fallback paths reject an algorithm whose software
-> > callbacks are absent.
-> >
-> > Extend the hash provider-selection test to cover progressive
-> > initialization.
->
-> That seems like a stale comment, at least for this commit.
+Add a configurable Rockchip SPL hotkey feature that checks the
+serial console during SPL startup.
 
-Missing tests added in v8:
-https://lore.kernel.org/u-boot/20260814-submit-ce-series-v2-v8-6-fe9212431a=
-94@gmail.com/
+Ctrl+B can be used to enter BootROM download (MASKROM) mode and
+be widely used. We can add more boot mode support in future.
 
-> >
-> > This permits SPL to retain SHA-256 FIT support while relying exclusivel=
-y
-> > on a hardware hash provider.
-> >
-> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> >
-> > boot/image-fit.c                  |  2 +-
-> >  common/hash.c                     | 21 +++++++++++++++++++--
-> >  drivers/crypto/hash/hash-uclass.c | 31 +++++++++++++++++++++++++++++++
-> >  include/u-boot/hash.h             | 14 ++++++++++++++
-> >  lib/Makefile                      |  4 ++--
-> >  lib/hash-checksum.c               | 28 +++++++++++++++++++++++++++-
-> >  lib/mbedtls/Kconfig               |  2 +-
-> >  7 files changed, 95 insertions(+), 7 deletions(-)
->
-> > diff --git a/lib/hash-checksum.c b/lib/hash-checksum.c
-> > @@ -20,13 +22,37 @@ int hash_calculate(const char *name,
-> > +             if (!ret) {
-> > +                     for (i =3D 0; i < region_count; i++) {
-> > +                             ret =3D hash_update(dev, ctx, region[i].d=
-ata,
-> > +                                               region[i].size);
-> > +                             if (ret)
-> > +                                     return ret;
-> > +                     }
-> > +
-> > +                     return hash_finish(dev, ctx, checksum);
-> > +             }
->
-> If hash_update() fails partway through, the provider's ctx is leaked -
-> nothing calls hash_finish() or an equivalent free path. Do you need an
-> explicit teardown on the error exit?
+Add CONFIG_SPL_ROCKCHIP_HOTKEY to enable the feature and wait for
+the serial port to be ready to receive input before checking for
+hotkeys.
 
-Yes. In v8 I added an explicit hash_abort() provider operation. After a
-successful hash_init(), the context must be consumed by exactly one
-hash_finish() or hash_abort() call.
+Signed-off-by: Valentin Liu <valentinliu@icloud.com>
+---
+Changes for v2:
+- Simplify the dependencies of SPL_ROCKCHIP_HOTKEY.
+- Remove the conditions for the newly added includes.
 
-hash_calculate() now calls hash_abort() after any hash_update() failure
-and returns the original update error. The existing progressive providers
-were updated with matching abort cleanup.
+ arch/arm/mach-rockchip/Kconfig | 13 +++++++++++
+ arch/arm/mach-rockchip/spl.c   | 40 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 53 insertions(+)
 
-The new failure-path test verifies that an update error calls
-hash_abort() exactly once and does not call hash_finish().
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 1a2e7847c9e..f2d2b5520ef 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -743,6 +743,19 @@ config TPL_ROCKCHIP_EARLYRETURN_TO_BROM
+ config SPL_MMC
+ 	default y if !SPL_ROCKCHIP_BACK_TO_BROM
+ 
++config SPL_ROCKCHIP_HOTKEY
++	bool "SPL hotkey support"
++	depends on SPL_DM_RESET && SPL_SERIAL
++	help
++	  Enable hotkey detection during SPL booting stage.
++
++	  When enabled, SPL checks the serial console for a control
++	  character and can execute Rockchip-specific hotkey actions,
++	  such as entering BootROM download mode (MASKROM) with Ctrl+B.
++
++	  The hotkey is checked after the SPL console has been
++	  initialized.
++
+ config ROCKCHIP_SPI_IMAGE
+ 	bool "Build a SPI image for rockchip"
+ 	help
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index e989c148079..0422415b06e 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -13,12 +13,15 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <ram.h>
++#include <serial.h>
+ #include <spl.h>
++#include <asm/arch-rockchip/boot_mode.h>
+ #include <asm/arch-rockchip/bootrom.h>
+ #include <asm/arch-rockchip/timer.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
++#include <linux/delay.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -107,6 +110,40 @@ __weak int arch_cpu_init(void)
+ 	return 0;
+ }
+ 
++#if IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY)
++static void rockchip_reset_from_hotkey(const int code)
++{
++	switch (code) {
++	case 0x02:
++		printf("SPL Hotkey: Ctrl+B: BootROM download!\n");
++		writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);
++		do_reset(NULL, 0, 0, NULL);
++		/*NOTREACHED*/
++	default:
++		if (code <= 0x1a) /* 'z' */
++			printf("SPL Hotkey: Ctrl+%c\n", code + 'A' - 1);
++		else
++			printf("SPL Hotkey: Unknown code: 0x%x, ignore\n", code);
++	}
++}
++
++static void spl_hotkey_init(void)
++{
++	if (!gd || !(gd->flags & GD_FLG_HAVE_CONSOLE))
++		return;
++	if (gd->flags & GD_FLG_DISABLE_CONSOLE)
++		return;
++
++	/* Wait for the serial port to be ready to receive data. */
++	mdelay(100);
++
++	if (serial_tstc())
++		rockchip_reset_from_hotkey(serial_getc());
++	else
++		printf("SPL Hotkey: No key pressed, continue\n");
++}
++#endif
++
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+@@ -143,6 +180,9 @@ void board_init_f(ulong dummy)
+ 	}
+ #endif
+ 	preloader_console_init();
++
++	if (IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY))
++		spl_hotkey_init();
+ }
+ 
+ void spl_board_prepare_for_boot(void)
+-- 
+2.53.0
 
-See v8:
-https://lore.kernel.org/u-boot/20260814-submit-ce-series-v2-v8-6-fe9212431a=
-94@gmail.com/
-
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Regards,
-> Simon
