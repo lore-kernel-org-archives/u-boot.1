@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D86C5B572
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F656C5DF66
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:35:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8CD8A407F0;
-	Mon, 17 Aug 2026 15:34:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BD5B840804;
+	Mon, 17 Aug 2026 15:35:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id psZRewJmsD2D; Mon, 17 Aug 2026 15:34:45 +0000 (UTC)
+ id PkveLk7ldmxY; Mon, 17 Aug 2026 15:35:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CB52B40706
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 01B4340807
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786980884;
-	bh=gMA32XkmRzsRZtZg0wlo/eBbExsgUpQwy6av0JrtBNw=;
+	d=lists.u-boot-project.org ; s=default; t=1786980902;
+	bh=JoSIx0iU6fb+bH64tA7v+wRbQFvkf4YjHDMC9RpXQH4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vk/Ys5ZqL6qlKRn+ocQ9wY/62bZUhHNUQkpN9ehw56OnlMex82m3WZEDTma8GHyYB
-	 WUTjYE+CSQe7ggTnycDTTLvsQs7l/LMZsz0flWIjfdKUFhsvLIsNdTMvx0B7Is/lX6
-	 TG2WWBx9W5uBXkCfSzL0Wm6+fs6odqUlOiwNqiZtwRtcbby45EN/+Lmtc+Gb9IxcP/
-	 U4iWF6OXYCKKnF3yQ6aQW/yZNP/dMpiqLT36FzJsODyXlHS1FZK6uk77RxU0HO2Jc+
-	 nYz9FZ0BGL4ONWYezvnIY6eUOU6xGl8bHqb15OgnREGg+CCiH63Rz+EKRGJeOWFqob
-	 BkKHFapraQJtw==
+	b=LQMgqQ0B1zvaxoEElwO/13PIf1zF67LNIfpzCzzHPo4jghzr0Gs68A+94F32UBYdu
+	 16zZsn4KYJc3vPTWePs06zWr2wpgIW9vio4IdwQe5dmmvn3tw5deIBBkccbBJic3RN
+	 ZLmsGWCEcW4I58tIgWUG2atrAAomb1HiMGu77GYgK9ZwFH8dwklfDDSa4kJZ7jTT2d
+	 8+90KrVUoqaLRdns+uAX7KdT6douQHtkFJgbwZhDvHZjJof/orp72N169EW/r+Gf27
+	 zVTia3w94df3HmHT0RGY9H8cAPH1oSL/OE3iauYiTMDtCJmydy2FKIfaUL/b3PKlaR
+	 kbTdAsBqfKxGg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CB52B40706;
-	Mon, 17 Aug 2026 15:34:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 41DBD194
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 01B4340807;
+	Mon, 17 Aug 2026 15:35:02 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 986EB23F
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:35:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 27A8640706
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:43 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7CDFC407D0
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:35:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dHuwLA23jI2q for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 15:34:42 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
+ id ot3o9s_dCYKY for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 15:34:59 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 13D8B406E5
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 7F9B8407EE
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 13D8B406E5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7F9B8407EE
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=aAJ+IMvX
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 13D8B406E5
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:41 +0000 (UTC)
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=C8e1U54v
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7F9B8407EE
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:59 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 6D84EB00565;
- Mon, 17 Aug 2026 17:34:33 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id DE384B00563;
+ Mon, 17 Aug 2026 17:34:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1786980880;
- bh=gT+Sj/69FDUVEy2w/WZcVmRH717187WFvEGArK4pIZI=;
+ s=smtp-20201208; t=1786980897;
+ bh=pv1zmFFiRHTt3QCgOXtezyvlx06sFYrC6Xh7ZXLnAjY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=aAJ+IMvX9mxzn7BjU/L/L0NDjgPJ3I4EqRDk52AjWvskI2CNjbsclpMu0dI1lXt/R
- kMpZORqsaF8PqqvahKlPr514gFvZCqM8lnadSRn8jPCo/ousAU+kenjzjWqqGBz9Wz
- zKbGA/s/sBGXRaGSqTrdZaMl0xI8z1VV8rDpEVlRfG+6qcSsNyTctlHp9tzxMyvXgG
- 00VNiX8fkpXFszXziBDcwhUWwx8u041RuMN1UekoA8S+IIhgiFDWf/CCAN2SsuK+9P
- eCYtnkOSHAUtDh2RLGE/nAhs9oHhqJox4WRi5nBxcqsuV1kyn9225UT+PPmBucGgLT
- 0nG77pFzjczkw==
+ b=C8e1U54vxdDsTJ+/p0TOyccqe84VQ5NDErWaiyd2sAgcY429u3Vad1DC5u/IlZKi/
+ udnC+NQCWqsLuRobmPct07S8QKqSh6fUIXz5+0nid7hNu/4js5064ZJtJZKLJv0Ktd
+ dkqvpz86nxjJLdQUADLnDO/IVKVO5eOMyub9MNAUcMzzqkFT2Ae9LtT7uxWbP4wKl6
+ txcfLCxLQyYe5jd3pS9P4WSke6PLGTsR7AUsG6A0YCmxqhpmEe2YXRVfWgw+tvleMz
+ UuS93UAKK1SvrlLzdqru3Q2PXhHfedb/jLWVnTFIELvfpw8z6M0o2FvZCaCudZLIc0
+ J6HWUrivqpqjg==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Wasim Khan <wasim.khan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 09/23] board: nbxv3: enable +3V3_FAN rail fixed regulator
-Date: Mon, 17 Aug 2026 17:31:27 +0200
-Message-ID: <20260817153144.1951036-10-vjardin@free.fr>
+Subject: [PATCH v1 10/23] arm: dts: layerscape: nbxv3: enable UART0..UART3
+Date: Mon, 17 Aug 2026 17:31:28 +0200
+Message-ID: <20260817153144.1951036-11-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260817153144.1951036-1-vjardin@free.fr>
 References: <20260817153144.1951036-1-vjardin@free.fr>
@@ -95,83 +95,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Probes the +3V3_FAN fixed regulator
+&uart0 (LX2160ARM UART1, MMIO 0x021c0000) is the console. The
+remaining three (&uart1..&uart3) are available for applications
+at the U-Boot prompt.
 
-The rail is regulator-always-on, so the probe drives it on and the FAN
-daughterboard's EMC2305 / TMP411 / EEPROM become visible to
-  i2c probe
+Numbering note: the LX2160A has four PL011 UARTs on chip. The
+reference manual labels them 1 indexed (UART1..UART4); the device
+tree is 0 indexed (&uart0..&uart3).
+The mapping is constant across the family:
+
+ - &uart0   LX2160ARM UART1   MMIO 0x021c0000   (console)
+ - &uart1   LX2160ARM UART2   MMIO 0x021d0000
+ - &uart2   LX2160ARM UART3   MMIO 0x021e0000
+ - &uart3   LX2160ARM UART4   MMIO 0x021f0000
+
+TF-A also uses &uart0 for its own boot log.
+
+U-Boot console is at 115200 8N1.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
- board/nxp/lx2160a/Kconfig           |  6 ++++++
- board/nxp/lx2160a/nbxv3/Makefile    |  1 +
- board/nxp/lx2160a/nbxv3/fan_power.c | 32 +++++++++++++++++++++++++++++
- 3 files changed, 39 insertions(+)
- create mode 100644 board/nxp/lx2160a/nbxv3/fan_power.c
+ arch/arm/dts/fsl-lx2160a-nbxv3.dts | 20 ++++++++++++++++++++
+ configs/nbxv3_tfa_defconfig        |  1 +
+ 2 files changed, 21 insertions(+)
 
-diff --git a/board/nxp/lx2160a/Kconfig b/board/nxp/lx2160a/Kconfig
-index 12d2e418aa5..efd245bb68a 100644
---- a/board/nxp/lx2160a/Kconfig
-+++ b/board/nxp/lx2160a/Kconfig
-@@ -83,4 +83,10 @@ config NBXV3_DPLL
- 	select DM_SPI
- 	select FSL_DSPI
+diff --git a/arch/arm/dts/fsl-lx2160a-nbxv3.dts b/arch/arm/dts/fsl-lx2160a-nbxv3.dts
+index 9dcc1bf1d5e..9b79d2c3253 100644
+--- a/arch/arm/dts/fsl-lx2160a-nbxv3.dts
++++ b/arch/arm/dts/fsl-lx2160a-nbxv3.dts
+@@ -13,6 +13,26 @@
+ / {
+ 	model = "Free Mobile Nodebox v3 CPU Module (LX2160A)";
+ 	compatible = "freemobile,nbxv3", "fsl,lx2160a";
++
++	aliases {
++		serial0 = &uart0;
++	};
++};
++
++&uart0 {
++	status = "okay";
++};
++
++&uart1 {
++	status = "okay";
++};
++
++&uart2 {
++	status = "okay";
++};
++
++&uart3 {
++	status = "okay";
+ };
  
-+config NBXV3_FAN
-+	bool
-+	default y
-+	select DM_REGULATOR
-+	select DM_REGULATOR_FIXED
-+
- endif
-diff --git a/board/nxp/lx2160a/nbxv3/Makefile b/board/nxp/lx2160a/nbxv3/Makefile
-index c8a676fb708..82063017432 100644
---- a/board/nxp/lx2160a/nbxv3/Makefile
-+++ b/board/nxp/lx2160a/nbxv3/Makefile
-@@ -8,3 +8,4 @@ obj-y += dpll_zl30733.o
- obj-y += mps_pmbus.o
- obj-y += psu_pmbus.o
- obj-y += vid_handoff.o
-+obj-y += fan_power.o
-diff --git a/board/nxp/lx2160a/nbxv3/fan_power.c b/board/nxp/lx2160a/nbxv3/fan_power.c
-new file mode 100644
-index 00000000000..faa882b8bf8
---- /dev/null
-+++ b/board/nxp/lx2160a/nbxv3/fan_power.c
-@@ -0,0 +1,32 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2026 Free Mobile - Vincent Jardin
-+ *
-+ * Enforce Nodebox v3 FAN-daughterboard enable.
-+ *
-+ * Note: it tequires CONFIG_DM_REGULATOR_FIXED
-+ */
-+
-+#include <dm.h>
-+#include <event.h>
-+#include <power/regulator.h>
-+
-+/* `regulator-name = "+3V3_FAN"` in the nbxv3 DTS. */
-+#define NBXV3_FAN_REGULATOR_NAME	"+3V3_FAN"
-+
-+static int nbxv3_fan_power_last_stage_init(void)
-+{
-+	struct udevice *reg = NULL;
-+	int ret;
-+
-+	if (regulator_get_by_platname(NBXV3_FAN_REGULATOR_NAME, &reg) || !reg)
-+		return 0;
-+
-+	ret = regulator_set_enable_if_allowed(reg, true);
-+	if (ret)
-+		printf("nbxv3: %s enable failed (%d)\n",
-+		       NBXV3_FAN_REGULATOR_NAME, ret);
-+
-+	return 0;
-+}
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, nbxv3_fan_power_last_stage_init);
+ /*
+diff --git a/configs/nbxv3_tfa_defconfig b/configs/nbxv3_tfa_defconfig
+index cb6043f3278..6d55a808a76 100644
+--- a/configs/nbxv3_tfa_defconfig
++++ b/configs/nbxv3_tfa_defconfig
+@@ -20,6 +20,7 @@ CONFIG_MP=y
+ CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+ # CONFIG_EFI_LOADER is not set
+ CONFIG_OF_BOARD_SETUP=y
++CONFIG_OF_STDOUT_VIA_ALIAS=y
+ CONFIG_SYS_PBSIZE=532
+ # CONFIG_ID_EEPROM is not set
+ CONFIG_RESET_PHY_R=y
 -- 
 2.43.0
 
