@@ -4,121 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04761C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 21:14:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D07C5DF74
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 21:22:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5CFE680E64;
-	Mon, 17 Aug 2026 21:14:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 52F9980C32;
+	Mon, 17 Aug 2026 21:22:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 37obLC1JD_Kh; Mon, 17 Aug 2026 21:14:10 +0000 (UTC)
+ id NUwpdJiLk6xo; Mon, 17 Aug 2026 21:22:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5E92880D83
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 66D5E810EC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787001250;
-	bh=+SU8ohAMaQE5q/sup8AUNZYQ/RpLQzsn9Z5VVsqU5SQ=;
+	d=lists.u-boot-project.org ; s=default; t=1787001734;
+	bh=2r6ifILCBLoxHBxO1RWGG0yHZ08GN287IWY9p0z5ncA=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=g9Aq/n7NM6p7l7jMvSJrc5QhipMwzA56UujERA4vwfyc/0tIPhUpsPKuPQ9GUpJ9v
-	 B585OZkxnJiHznb8CtNk/wgg1mmFtgNP3EGVuGmwDQW+QnZtUjhnpgw4LaAKLF2TqG
-	 OC3QYGkW6JB0/GmX/X5virnSVyPsIFi4PdBc2tnk6IZ+en5k769DtVrh7YuCwaPC6u
-	 iN9ImELdsjEB9kvUXUr5fY2KqO3ulkBzjjJdntLv5onOZHVu4vzncW68qEb9SYAPQg
-	 wEoM1aqm8+JQjpwBLNsI/Ihw5TBLBWQOWFSGrPv0oVW8lOxxT7fd2me5TIWdBusmDn
-	 fNLQJVTLV5R2Q==
+	b=y6YXevwwBdC7a+0kilp7QxTAOTr6cpTMynOlBtrtbg4Os5fSAyQNI/cqttASPy2mU
+	 GH7VGGbjUSpymjCP+QHhljgkzxZaIg902vfgyUc6z6WJXipHZtMt8q1y3tUmU3WgO9
+	 UiSpGQakMA0KSW+o/ssJRA6scpO0PZlGRL42pxsp4wuMNlF332RbHzU2Egkj+EOKGh
+	 u2oy3Lc5h8sIkvlovO3fI0hB/Jt8dEk1Fd30NgEpGiWsvhg+IWgb/ceZg9BH/baMQU
+	 W5dqOYXdoVEgL0qSO8n4ugoroZ+JEOukZuV89FWWuVum4b/O/swup4/o6Lks0DN7Ti
+	 EIc80NIavYGVQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5E92880D83;
-	Mon, 17 Aug 2026 21:14:10 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4FAAA337
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 21:14:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 66D5E810EC;
+	Mon, 17 Aug 2026 21:22:14 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BE584194
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 21:22:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 304AC80898
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 21:14:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A8401402D1
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 21:22:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uKhDkzSyusFV for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 21:14:08 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vPci_y248CzF for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 21:22:12 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2b; helo=mail-oo1-xc2b.google.com;
+ client-ip=2607:f8b0:4864:20::32d; helo=mail-ot1-x32d.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 42D48810BC
-Authentication-Results: smtp1.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C6B18400CC
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 42D48810BC
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C6B18400CC
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=FPZITugR
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 42D48810BC
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 21:14:08 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-6acbbcd3798so3250240eaf.3
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:14:08 -0700 (PDT)
+ header.s=google header.b=J3FflmV2
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C6B18400CC
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 21:22:11 +0000 (UTC)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7ee4399c3abso2585058a34.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:22:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787001247; x=1787606047;
+ d=konsulko.com; s=google; t=1787001731; x=1787606531;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=+SU8ohAMaQE5q/sup8AUNZYQ/RpLQzsn9Z5VVsqU5SQ=;
- b=FPZITugRFqY1YVki/ZG0DU2fBT99UTW1AhmHhkVrPY6PgcU9b+gZdr+44MS2gWTm1o
- I+779TujAwGNn+a12H8gdXAABxHZcHOVXdlfuGsP/Qr9MAFI64D3Ufi4psV0q8kGQmHo
- QdkxRogZetvD8Gbn9iBJFyXc7x6lhLgUtoO10=
+ bh=2r6ifILCBLoxHBxO1RWGG0yHZ08GN287IWY9p0z5ncA=;
+ b=J3FflmV2yVcXQNcxudzY5jD0LznGzbzu9Rp3mGznUYl3JxmY4/XRjIJyDt21hyfYkH
+ xh5BcQJ+4uoxWVZIBRY4zImcIHPGgORyqFGCxeDcCD1ZiT0dPwS/kotbj3gMBewC2FVd
+ SMByc7ATmlGexy63wgabaSZE2vHPlY/NmS8L4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787001247; x=1787606047;
+ d=1e100.net; s=20251104; t=1787001731; x=1787606531;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+SU8ohAMaQE5q/sup8AUNZYQ/RpLQzsn9Z5VVsqU5SQ=;
- b=Ad/BKKWYhydsuGOnJ8aUZ20sUlSq81sVQUtpfU7t+YTnUSmI16JzIkmJNIWn3YfaCL
- fb+6fpYpcIZFJrYLzQ9lYS+e7Tb+AtRQRsSEHuHB0HeYikj3Uw++ZIdXoVAgo8tGTnJg
- iE4a6Xkg9yzJDnyVQurPUHSkQZaLIgHJsXyGNYeXx/LK0orAEAPhvyKqV0xZGGb/WXES
- oFtB2hvDEZ08iSngBtLysGbBtjGLXhTeulGOHWOPDlrzrEGWL2OWhnpfinaUNP607Q0a
- aBB4lR32Y02x1u1S+QI/6ELGr35KIg0IBfBflRJXAgMMHthACArvXu2xNkF3zXu/08k8
- XmVg==
+ bh=2r6ifILCBLoxHBxO1RWGG0yHZ08GN287IWY9p0z5ncA=;
+ b=VW5Fcr9SLW/xlC9AZof9jkdoT+eGmWobK96ONVzOjSJWeBkeiKGVmMCX8Y7Nrkg5fN
+ TtN9PGjMMx6dgvmzC4jLhPYfUj9e5qhS48GylkNK7nsY3vnko9U+fGfO+ZG0hQwpRi8e
+ OQYehDTgn5KRkEPBn6uiatYRvrOS9W+h5PKJCTOZGLol9ZW16FKwpqsuCAAod2i7G0VJ
+ G6NM9u0tAlRQGzqT3RYA/yq8LMfe4CStJi7gerDzhQ23BE5R0at/YAlKqUvAIsyxrXT5
+ xLXJPuiTaJGxnfWyBK8WdHo4bwDn5YYUellrh0tQ2z2WwrfjojfQtLb4YO2RWi/hqFgW
+ dIiw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqZHu5r4WoebhuCh/7l8y9UB9IwocpHkaxf/WAKbvYE6F9ahRVa+5RFodJNRC0ry1nccCPNWHc=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzuyssphOzELJCd7a24MBovAnmbpJ5sHYnAQ2PL0tEBdjEdiRwl
- v12/0aZT4s0LcviFPjUJmYkVYTaZqhDEl2uY41SArK/NPhaHfPBaecQb0Nj8nUqsuZ8=
-X-Gm-Gg: AR+sD12bUAOQ1PKwWZdomrMOwGfEW1faXG9zzJnOe+IjL4V9QAoVEju8r6txKNGL5A8
- 6jUO6guWYj9Om64Ccz00IRkg+kGS2o11xJggtgkQug/RHtIg/VdgyTDiravwV6ooq0Q8Y+/fQjS
- vAbAj0Do1cljK9jZ6gKSfExSbdSLFbcBRgilVdBUGcgIC9ZbsJylhRQGs9zp48dFcpBCYrEQCw9
- 8a1hsKVm9v4Q0yvOSjVCy2NPbadTvwod61hK5LaSzwVCBFojmveZzz9fOQixitciVLIWAx6HOge
- WRYTc+GuZOi+ZapExbZha84nTPS03fCM9e+Ml6BhPxumxYeCfSneVmi/DEIq0RQ+gsrFABwup1l
- BLp/PoTZYAoOO9aAfP/UB5Wjzlco8EZD+e2CrUjqvaf3KpRt9rA8q3hkYWWgohc9Tgcj1lYEehG
- VxmArZskUfx9sF8MrysjmGp8TEr2j7PFqWCznnp7GqpYugLVQ4RXZPoC6d35JOLdtfe/Vsek+p/
- l4swOsfHygYYDhvpwLxNXm6G0RJWw9cB5obu2CMzWQscBDPQjhtjLVtQLu7FpZNk8Rsozyz4sy5
- yqVySdDqOKgpVRuTXx1EXw==
-X-Received: by 2002:a05:6820:8187:b0:6b0:566b:b8ba with SMTP id
- 006d021491bc7-6b0d68c175fmr24144837eaf.27.1787001247053; 
- Mon, 17 Aug 2026 14:14:07 -0700 (PDT)
+ AHgh+RrcgOetSQBtMt4eDuh0WsA4CWRYSgPz4DDztW/JNNZs6vJ4DU2KeYn4g/HTeli2byC1OZwJxAs=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyScSpQk9eFc1CCKOZYEPsZPkAXwSHGywrOsXAFkg2FtqJ/hyyI
+ 844I1TIUUzQqru2TMS8QNEebzeAAquAPzblQq4fu5Kj4Xq9/tZ+dulfj9JNLENYnvzw3mlKjbLR
+ e4O4IHrw=
+X-Gm-Gg: AR+sD11C75GT+LKMMPXr6JSYvRi5gdVzOY3uAZNsZfqYieIBSwwzLjUFCPP+cHhI618
+ D03UhI8boBNh7gN7ig7647ctMDt4clO2UES2b4mAgaaHeOb+R6dNGZgcriVqkRDWbOJnufKQkmX
+ GQ+EJo9JtpfOhsY5IjR6tyA+wvj3nK7rbE3MuNIo3xAIbnx+ZgjWTBusVlpeA+YsEgajULshsYl
+ 3r3KPX3/2vaQ+pDmNVljjQowMCUo3mHKpssxTahGulYP5LFBtkl3ndasVCWOymR2Sedbk8T40YC
+ Fj3/hug7nP2gdZpKMx1RpbvjVGay+bsdaDM0/hXby2q3RwLja3mUkNivqxMZI10EYFRn21gkjy4
+ w1iSJG6IdFLT9Wsmoyoys7sbe5A12SMfpxLESHo7FWmzWSQZAUVPjr9v2wiENJuPzGtUnDHs3Wx
+ LSGK6k3HFquSM0hAv0oF3YXQ6s3XiywpsFnZndI5+KuQZKFFZA/u2tfjK7RyoDpG8Y9UeUK9Snc
+ cD8KwUR8tj/1im3Q/iad7ZTPMdL3IJbhIos+Foz6vQQvnxfG3gbSkDJZygwT7SXhw4rpoyReh6F
+ 1bF0a3EVAyJYie7LuCDFRWYuXOb4KYKj
+X-Received: by 2002:a05:6830:7301:b0:7e9:f8e8:d905 with SMTP id
+ 46e09a7af769-7f3de66d149mr31011638a34.16.1787001730724; 
+ Mon, 17 Aug 2026 14:22:10 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b1166fd581sm2676882eaf.15.2026.08.17.14.14.05
+ 46e09a7af769-7f41bf2c916sm2689115a34.9.2026.08.17.14.22.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2026 14:14:06 -0700 (PDT)
-Date: Mon, 17 Aug 2026 15:14:04 -0600
+ Mon, 17 Aug 2026 14:22:10 -0700 (PDT)
+Date: Mon, 17 Aug 2026 15:22:08 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Stephan Gerhold <stephan.gerhold@linaro.org>,
- u-boot@lists.u-boot-project.org, Stefan Hansson <newbyte@postmarketos.org>
-Subject: Re: [PATCH v2 8/8] arm: u8500: Give Golden panel regulators unique
- names
-Message-ID: <20260817211404.GV3297518@bill-the-cat>
-References: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
- <20260817-ux500-external-sdcard-v2-8-ca9a110bd9c6@kernel.org>
- <aoM7BEBLYau0Y_ux@linaro.org>
- <CAD++jLm-9_Dm9es2kn2zfKtByXc_fY=sxWM+_c3Xu3So-cA5iw@mail.gmail.com>
+To: Gokul Praveen <g-praveen@ti.com>
+Cc: n-francis@ti.com, a-nandan@ti.com, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH 0/3] Semi-Falcon Boot Support
+Message-ID: <20260817212208.GW3297518@bill-the-cat>
+References: <20260814102153.44487-1-g-praveen@ti.com>
+ <20260814145645.GJ3297518@bill-the-cat>
+ <26cefba7-df22-4043-9383-b5451ce7cf95@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ol6uuKywwoHQW8j3"
+ protocol="application/pgp-signature"; boundary="DU8z1J9Sba8a8MlZ"
 Content-Disposition: inline
-In-Reply-To: <CAD++jLm-9_Dm9es2kn2zfKtByXc_fY=sxWM+_c3Xu3So-cA5iw@mail.gmail.com>
+In-Reply-To: <26cefba7-df22-4043-9383-b5451ce7cf95@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -134,44 +132,90 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---Ol6uuKywwoHQW8j3
-Content-Type: text/plain; charset=utf-8
+--DU8z1J9Sba8a8MlZ
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 17, 2026 at 10:36:36PM +0200, Linus Walleij wrote:
-> On Mon, Aug 17, 2026 at 6:47=E2=80=AFPM Stephan Gerhold
-> <stephan.gerhold@linaro.org> wrote:
+On Mon, Aug 17, 2026 at 01:46:10PM +0530, Gokul Praveen wrote:
+> Hi Tom,
 >=20
-> > I think it's a bit awkward to have multiple regulators with the same
-> > name, even on Linux when looking at debugfs for example.
-> >
-> > Can you make this change on the Linux side and backport it here?
+> On 14/08/26 20:26, Tom Rini wrote:
+> > On Fri, Aug 14, 2026 at 03:51:50PM +0530, Gokul Praveen wrote:
+> >=20
+> > > Semi-Falcon Mode is a hybrid boot approach that bypasses
+> > > the A72 SPL while retaining U-Boot in the boot flow. This mode provid=
+es faster
+> > > boot times compared to normal boot while maintaining U-Boot's flexibi=
+lity for
+> > > kernel loading and system configuration..
+> > >=20
+> > > Boot logs link :
+> > >=20
+> > > https://gist.github.com/GokulPraveen2001/fef407a482e2dad30272006de557=
+627c
+> > >=20
+> > > Gokul Praveen (3):
+> > >    configs: add semi-falcon mode fragment for k3 devices
+> > >    arm: k3-binman: add tisemifalcon.bin for semi-falcon mode
+> > >    doc: ti: document semi-falcon mode for J784S4 EVM
+> > This is just doing what many other aarch64 platforms do, of skipping the
+> > SPL phase in Cortex-A because something else has already done any
+> > required initialization, unless I'm reading all of this wrong. So my
+> > feedback is:
+> > - It's not "semi-falcon", it's just "no SPL". Naming differences, if
+> >    any, should be done with that in mind.
 >=20
-> You're right of course:
-> https://lore.kernel.org/linux-arm-kernel/20260817-ux500-dts-fixes-v1-1-24=
-379c6c2495@kernel.org/T/#u
->=20
-> I don't know if U-Boot backport device tree changes? Isn't it like
-> a scripted upstream sync?
+> Actually, there is an SPL in Cortex-R5 which is still present in the
+> semi-falcon bootflow.
 
-Yes, we pull the vX.Y-dts tags to the main or next branch, depending on
-how those line up with our own needs, and then allow cherry-picks from
-the devicetree-rebasing tree as well in the interim to keep things
-unblocked.
+Yes. But it's not "semi-falcon", at all, as "falcon" refers to booting
+directly to Linux.
+
+> Its only the Cortex-A SPL which is avoided, which is why I did not name it
+> as "no SPL"
+>=20
+> *Normal K3 Bootflow*:=A0R5 SPL + TFA + OPTEE + DM + Cortex-A SPL + UBOOT +
+> Kernel
+>=20
+> *Semi-Falcon* *boot flow* is : R5 SPL + TFA + OPTEE + DM + UBOOT + Kernel
+
+Yes, and this is similar to other platforms, where the Cortex-R or
+similar isn't exposed in the same fashion as it is for TI.
+
+> > - You should make sure to structure this so any K3 platform *could* take
+> >    advantage. I seem to recall part of the rationale for the current
+> >    approach is that some variants might only have a little SRAM (512k?
+> >    256k?) while others might have 1-2M and so easily fit U-Boot in SRAM
+> >    prior to relocation. It sounds like this specific family has a large
+> >    enough lower memory bound.
+> >=20
+> Yes, this is structured in a way that all K3 platforms can take advantage=
+ of
+> this approach and changes.
+>=20
+> Additionally, as there is an SPL running in cortex-R5 even with this
+> bootflow(semi-falcon).
+>=20
+> this bootflow can be used on all variants irrespective of whether they ha=
+ve
+> less or more memory.
+
+OK good. Just come up with a different way of describing this that
+doesn't say "falcon", thanks.
 
 --=20
 Tom
 
---Ol6uuKywwoHQW8j3
+--DU8z1J9Sba8a8MlZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoN5mAAKCRAr4qD1Cr/k
-Cj2CAP9u+H4A96Xq9FDzNb/0dXLNd2XSKU2rKfXOLSwYTOKGPAEAkbRAEjJeDxue
-tU3853omxQc7XK4U5eAsH2fD7LsWZgI=
-=eI1E
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoN7fwAKCRAr4qD1Cr/k
+CgOyAQCBrXlklFYrHX2TsDgzS11Kda1zlEFvCnqSNUGLoBVSWQD+L1Q9KWFVhY38
+m24/RYb7KCPqWf/ccKTjWcQd3FdscAg=
+=i3XT
 -----END PGP SIGNATURE-----
 
---Ol6uuKywwoHQW8j3--
+--DU8z1J9Sba8a8MlZ--
