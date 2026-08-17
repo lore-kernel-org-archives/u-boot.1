@@ -1,81 +1,81 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0115FC5B572
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D86C5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:34:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B86B1607B5;
-	Mon, 17 Aug 2026 15:34:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8CD8A407F0;
+	Mon, 17 Aug 2026 15:34:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M75RFvAc1W9j; Mon, 17 Aug 2026 15:34:27 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id psZRewJmsD2D; Mon, 17 Aug 2026 15:34:45 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9E492607A2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CB52B40706
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786980867;
-	bh=XMvbXPyKKO4/J1amitWr8Wfg8Rs4XqA3dr0C1sNfliM=;
+	d=lists.u-boot-project.org ; s=default; t=1786980884;
+	bh=gMA32XkmRzsRZtZg0wlo/eBbExsgUpQwy6av0JrtBNw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gy6cN5UqZMTzGh/yyYOdfWYmFCoxhcw1GfjCA/tthAQTwkKIWfcB4V41ottY+bzd6
-	 +KoKbtrgmXfkWE2RGxW3P0x4qzemtn68ReMUA0CV9ZRKRQN9L+ez/jFJpLcReyNVog
-	 +v/mok1YDpxdng7iebo09TKXuv3fTYi0Q5GaNe+rz7rmF2HPj3hJezHhETWKOazXxc
-	 Q1uCl9vz5kwZw/GvIanBEtBK7JsMfytODxssEKHhtOpVI8tBV/ZH9F9jvqMNdfnZQJ
-	 BHY6+vBuw3+zh6yTaOPbxWE/Z5YMRfEiBxRbLtPONJFCCrajE5rW9BTNVS4uxRh2uk
-	 vZt6h1ZlS2S3Q==
+	b=vk/Ys5ZqL6qlKRn+ocQ9wY/62bZUhHNUQkpN9ehw56OnlMex82m3WZEDTma8GHyYB
+	 WUTjYE+CSQe7ggTnycDTTLvsQs7l/LMZsz0flWIjfdKUFhsvLIsNdTMvx0B7Is/lX6
+	 TG2WWBx9W5uBXkCfSzL0Wm6+fs6odqUlOiwNqiZtwRtcbby45EN/+Lmtc+Gb9IxcP/
+	 U4iWF6OXYCKKnF3yQ6aQW/yZNP/dMpiqLT36FzJsODyXlHS1FZK6uk77RxU0HO2Jc+
+	 nYz9FZ0BGL4ONWYezvnIY6eUOU6xGl8bHqb15OgnREGg+CCiH63Rz+EKRGJeOWFqob
+	 BkKHFapraQJtw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9E492607A2;
-	Mon, 17 Aug 2026 15:34:27 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9E538194
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CB52B40706;
+	Mon, 17 Aug 2026 15:34:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 41DBD194
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 905F780C53
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:25 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 27A8640706
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BYvPlAC_5tYx for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 15:34:24 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dHuwLA23jI2q for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 15:34:42 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8884B80C06
-Authentication-Results: smtp1.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 13D8B406E5
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8884B80C06
-Authentication-Results: smtp1.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 13D8B406E5
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=oauWh6J5
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=aAJ+IMvX
 Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8884B80C06
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:24 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 13D8B406E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:41 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id C68CAB00573;
- Mon, 17 Aug 2026 17:34:15 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 6D84EB00565;
+ Mon, 17 Aug 2026 17:34:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1786980862;
- bh=J+wiF779UcKSM9Qvq2f59plu1BV48fzqS+BnUHt5fsA=;
+ s=smtp-20201208; t=1786980880;
+ bh=gT+Sj/69FDUVEy2w/WZcVmRH717187WFvEGArK4pIZI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oauWh6J5FlefgcmgFGbalI0Be7C5W9o7IgpF4KgntnEZ+FpL/WzzciA16EJjYbfym
- umVHC+hfT32Knt2Cd4pqhvYMmxWgTBTlgY2CoHI+FEcnElOaQjnfyXE8EVjKoBrJze
- 3KuvcArcHXniiWIlyBuVhLy9V8YQWVKB2m/H4pgWwjNSNtSaN/4/ZqLlZ9ml+UXk2T
- rFpGi0MmU0CunkVC4pb4Ib6peNWnSs8M30H+dH7F2xB+TgUkfL2pl+RP9QLXd/9AOs
- Dg/m6M6wcFAUQ+J/LVOAwlrcXphGfdJ0OxHfsngsWL+mCNErY4DRylilVweZuG6Y7v
- k8wYSy5r5Ps/g==
+ b=aAJ+IMvX9mxzn7BjU/L/L0NDjgPJ3I4EqRDk52AjWvskI2CNjbsclpMu0dI1lXt/R
+ kMpZORqsaF8PqqvahKlPr514gFvZCqM8lnadSRn8jPCo/ousAU+kenjzjWqqGBz9Wz
+ zKbGA/s/sBGXRaGSqTrdZaMl0xI8z1VV8rDpEVlRfG+6qcSsNyTctlHp9tzxMyvXgG
+ 00VNiX8fkpXFszXziBDcwhUWwx8u041RuMN1UekoA8S+IIhgiFDWf/CCAN2SsuK+9P
+ eCYtnkOSHAUtDh2RLGE/nAhs9oHhqJox4WRi5nBxcqsuV1kyn9225UT+PPmBucGgLT
+ 0nG77pFzjczkw==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Wasim Khan <wasim.khan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 08/23] board: nbxv3: add DPLL status (ZL30733, ZL30643)
-Date: Mon, 17 Aug 2026 17:31:26 +0200
-Message-ID: <20260817153144.1951036-9-vjardin@free.fr>
+Subject: [PATCH v1 09/23] board: nbxv3: enable +3V3_FAN rail fixed regulator
+Date: Mon, 17 Aug 2026 17:31:27 +0200
+Message-ID: <20260817153144.1951036-10-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260817153144.1951036-1-vjardin@free.fr>
 References: <20260817153144.1951036-1-vjardin@free.fr>
@@ -95,259 +95,83 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add a boot time probe for each Microsemi/Microchip DPLL on the
-board:
- - ZL30733
- - ZL30643
+Probes the +3V3_FAN fixed regulator
 
-Linux: full DPLL configuration (clock tree programming, output enables,
-holdover policy, line side rates) is the job of the Linux DPLL driver
-at runtime. U-Boot only verifies presence and identity, it does not
-program any output.
+The rail is regulator-always-on, so the probe drives it on and the FAN
+daughterboard's EMC2305 / TMP411 / EEPROM become visible to
+  i2c probe
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
- arch/arm/dts/fsl-lx2160a-nbxv3.dts     |   8 ++
- board/nxp/lx2160a/Kconfig              |   7 +
- board/nxp/lx2160a/nbxv3/Makefile       |   1 +
- board/nxp/lx2160a/nbxv3/dpll_zl30733.c | 183 +++++++++++++++++++++++++
- 4 files changed, 199 insertions(+)
- create mode 100644 board/nxp/lx2160a/nbxv3/dpll_zl30733.c
+ board/nxp/lx2160a/Kconfig           |  6 ++++++
+ board/nxp/lx2160a/nbxv3/Makefile    |  1 +
+ board/nxp/lx2160a/nbxv3/fan_power.c | 32 +++++++++++++++++++++++++++++
+ 3 files changed, 39 insertions(+)
+ create mode 100644 board/nxp/lx2160a/nbxv3/fan_power.c
 
-diff --git a/arch/arm/dts/fsl-lx2160a-nbxv3.dts b/arch/arm/dts/fsl-lx2160a-nbxv3.dts
-index 8e336a622f3..9dcc1bf1d5e 100644
---- a/arch/arm/dts/fsl-lx2160a-nbxv3.dts
-+++ b/arch/arm/dts/fsl-lx2160a-nbxv3.dts
-@@ -57,3 +57,11 @@
- 		regulator-always-on;
- 	};
- };
-+
-+&dspi0 { /* DSPI1: on module management SPI */
-+	dpll@0 {
-+		compatible = "microchip,zl30733";
-+		reg = <0>;
-+		spi-max-frequency = <12500000>;
-+	};
-+};
 diff --git a/board/nxp/lx2160a/Kconfig b/board/nxp/lx2160a/Kconfig
-index e46223d1b43..12d2e418aa5 100644
+index 12d2e418aa5..efd245bb68a 100644
 --- a/board/nxp/lx2160a/Kconfig
 +++ b/board/nxp/lx2160a/Kconfig
-@@ -76,4 +76,11 @@ config NBXV3_PMBUS
- 	select DM_REGULATOR_PMBUS_GENERIC
- 	select CMD_REGULATOR
+@@ -83,4 +83,10 @@ config NBXV3_DPLL
+ 	select DM_SPI
+ 	select FSL_DSPI
  
-+config NBXV3_DPLL
++config NBXV3_FAN
 +	bool
 +	default y
-+	select SPI
-+	select DM_SPI
-+	select FSL_DSPI
++	select DM_REGULATOR
++	select DM_REGULATOR_FIXED
 +
  endif
 diff --git a/board/nxp/lx2160a/nbxv3/Makefile b/board/nxp/lx2160a/nbxv3/Makefile
-index 4ce2508249d..c8a676fb708 100644
+index c8a676fb708..82063017432 100644
 --- a/board/nxp/lx2160a/nbxv3/Makefile
 +++ b/board/nxp/lx2160a/nbxv3/Makefile
-@@ -4,6 +4,7 @@
- 
- obj-y += eth_nbxv3.o
- obj-y += carrier.o
-+obj-y += dpll_zl30733.o
+@@ -8,3 +8,4 @@ obj-y += dpll_zl30733.o
  obj-y += mps_pmbus.o
  obj-y += psu_pmbus.o
  obj-y += vid_handoff.o
-diff --git a/board/nxp/lx2160a/nbxv3/dpll_zl30733.c b/board/nxp/lx2160a/nbxv3/dpll_zl30733.c
++obj-y += fan_power.o
+diff --git a/board/nxp/lx2160a/nbxv3/fan_power.c b/board/nxp/lx2160a/nbxv3/fan_power.c
 new file mode 100644
-index 00000000000..4dfa4579cce
+index 00000000000..faa882b8bf8
 --- /dev/null
-+++ b/board/nxp/lx2160a/nbxv3/dpll_zl30733.c
-@@ -0,0 +1,183 @@
++++ b/board/nxp/lx2160a/nbxv3/fan_power.c
+@@ -0,0 +1,32 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2026 Free Mobile - Vincent Jardin
 + *
-+ * Nodebox v3 - DPLL identification probe (both DPLLs).
++ * Enforce Nodebox v3 FAN-daughterboard enable.
 + *
-+ * It reads a small set of read-only descriptor registers from each
-+ * Microsemi/Microchip DPLL on the board and prints the result on the
-+ * console at EVT_LAST_STAGE_INIT time, just before the prompt.
-+ * It is purely a basic power on test diagnostic: no configuration
-+ * register is written, the DPLL register profile loaded at power-on
-+ * is left untouched.
++ * Note: it tequires CONFIG_DM_REGULATOR_FIXED
 + */
 +
-+#include <command.h>
 +#include <dm.h>
 +#include <event.h>
-+#include <log.h>
-+#include <spi.h>
-+#include <vsprintf.h>
-+#include <linux/delay.h>
++#include <power/regulator.h>
 +
-+#define ZL30733_SPI_HZ		12500000
-+#define ZL30733_SPI_MODE	SPI_MODE_0
++/* `regulator-name = "+3V3_FAN"` in the nbxv3 DTS. */
++#define NBXV3_FAN_REGULATOR_NAME	"+3V3_FAN"
 +
-+/* The two DPLLs sharing the ZL3073x register protocol on this board */
-+static const struct nbxv3_dpll {
-+	const char *label;	/* expected part at this location */
-+	const char *devname;	/* DM device name for the ad-hoc slave */
-+	int bus;		/* U-Boot SPI bus number */
-+	int cs;			/* chip select on that bus */
-+	u32 hz;			/* SCK ceiling */
-+	const char *hint;	/* what to check when reads are implausible */
-+} nbxv3_dplls[] = {
-+	{
-+		.label = "ZL30733", .devname = "zl30733_dpll",
-+		.bus = 0, .cs = 0, .hz = ZL30733_SPI_HZ,
-+		.hint = "check PROG_DPLL_EN mux",
-+	},
-+	{
-+		.label = "ZL30643", .devname = "zl30643_dpll",
-+		.bus = 2, .cs = 1, .hz = 10000000,
-+		.hint = "check CS1 rework / RST_B",
-+	},
-+};
-+
-+#define ZL30733_REG_INFO	0x00
-+#define ZL30733_REG_ID_HI	0x01
-+#define ZL30733_REG_ID_LO	0x02
-+#define ZL30733_REG_REVISION	0x03
-+#define ZL30733_REG_FW_VER	0x05	/* 6 bytes 0x05..0x0A   */
-+#define ZL30733_REG_FW_VER_LEN	6
-+#define ZL30733_REG_RST_STATUS	0x18
-+#define ZL30733_REG_PAGE_SEL	0x7F
-+
-+#define ZL30733_CMD_READ	0x80	/* OR'd into the 7-bit address */
-+
-+#define ZL30733_INFO_DEFAULT		0x21
-+#define ZL30733_INFO_ID_MASK		0x7f
-+#define ZL30733_INFO_EEPROM_BOOTED	0x80
-+#define ZL30733_REV_DEFAULT		0x03
-+
-+static int zl30733_read_block(struct spi_slave *slave, u8 addr, u8 *buf,
-+			      size_t len)
++static int nbxv3_fan_power_last_stage_init(void)
 +{
-+	u8 cmd = ZL30733_CMD_READ | (addr & 0x7F);
++	struct udevice *reg = NULL;
 +	int ret;
 +
-+	ret = spi_xfer(slave, 8, &cmd, NULL, SPI_XFER_BEGIN);
++	if (regulator_get_by_platname(NBXV3_FAN_REGULATOR_NAME, &reg) || !reg)
++		return 0;
++
++	ret = regulator_set_enable_if_allowed(reg, true);
 +	if (ret)
-+		return ret;
-+
-+	return spi_xfer(slave, len * 8, NULL, buf, SPI_XFER_END);
-+}
-+
-+static int zl30733_select_page0(struct spi_slave *slave)
-+{
-+	u8 cmd[2] = { ZL30733_REG_PAGE_SEL & 0x7F, 0x00 };
-+
-+	return spi_xfer(slave, sizeof(cmd) * 8, cmd, NULL,
-+			SPI_XFER_BEGIN | SPI_XFER_END);
-+}
-+
-+static int zl30733_dump(struct spi_slave *slave, const struct nbxv3_dpll *d)
-+{
-+	u8 info, rev, rst;
-+	u8 fw[ZL30733_REG_FW_VER_LEN];
-+	u8 idbuf[2];
-+	u16 id;
-+	int ret;
-+	bool plausible;
-+
-+	ret = zl30733_select_page0(slave);
-+	if (ret) {
-+		printf("DPLL: %s page select failed (%d)\n", d->label, ret);
-+		return ret;
-+	}
-+
-+	ret = zl30733_read_block(slave, ZL30733_REG_INFO, &info, 1);
-+	if (ret)
-+		return ret;
-+	ret = zl30733_read_block(slave, ZL30733_REG_ID_HI, idbuf, sizeof(idbuf));
-+	if (ret)
-+		return ret;
-+	id = ((u16)idbuf[0] << 8) | idbuf[1];
-+	ret = zl30733_read_block(slave, ZL30733_REG_REVISION, &rev, 1);
-+	if (ret)
-+		return ret;
-+	ret = zl30733_read_block(slave, ZL30733_REG_FW_VER, fw, sizeof(fw));
-+	if (ret)
-+		return ret;
-+	ret = zl30733_read_block(slave, ZL30733_REG_RST_STATUS, &rst, 1);
-+	if (ret)
-+		return ret;
-+
-+	plausible = (info & ZL30733_INFO_ID_MASK) == ZL30733_INFO_DEFAULT &&
-+		    id != 0x0000 && id != 0xFFFF;
-+
-+	printf("DPLL: %s @ spi%d:%d  info=0x%02x (%s) id=0x%04x rev=0x%02x\n",
-+	       d->label, d->bus, d->cs, info,
-+	       (info & ZL30733_INFO_EEPROM_BOOTED) ? "EEPROM boot" : "MCU default boot",
-+	       id, rev);
-+	printf("      fw_ver=%02x:%02x:%02x:%02x:%02x:%02x  reset_status=0x%02x",
-+	       fw[0], fw[1], fw[2], fw[3], fw[4], fw[5], rst);
-+	if (!plausible)
-+		printf("  [implausible; %s]", d->hint);
-+	printf("\n");
-+
-+	return plausible ? 0 : 1;
-+}
-+
-+static int zl30733_probe_print(void)
-+{
-+	struct udevice *bus;
-+	struct spi_slave *slave;
-+	int i, ret;
-+
-+	for (i = 0; i < ARRAY_SIZE(nbxv3_dplls); i++) {
-+		const struct nbxv3_dpll *d = &nbxv3_dplls[i];
-+
-+		ret = _spi_get_bus_and_cs(d->bus, d->cs, d->hz,
-+					  ZL30733_SPI_MODE,
-+					  "spi_generic_drv", d->devname,
-+					  &bus, &slave);
-+		if (ret) {
-+			printf("DPLL: %s spi%d:%d not reachable (%d)\n",
-+			       d->label, d->bus, d->cs, ret);
-+			continue;
-+		}
-+
-+		ret = spi_claim_bus(slave);
-+		if (ret) {
-+			printf("DPLL: %s spi_claim_bus failed (%d)\n",
-+			       d->label, ret);
-+			continue;
-+		}
-+
-+		zl30733_dump(slave, d);
-+
-+		spi_release_bus(slave);
-+	}
++		printf("nbxv3: %s enable failed (%d)\n",
++		       NBXV3_FAN_REGULATOR_NAME, ret);
 +
 +	return 0;
 +}
-+
-+static int nbxv3_dpll_last_stage_init(void)
-+{
-+	zl30733_probe_print();
-+	return 0;
-+}
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, nbxv3_dpll_last_stage_init);
-+
-+static int do_dpll_info(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char *const argv[])
-+{
-+	return zl30733_probe_print() < 0 ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
-+}
-+
-+U_BOOT_CMD(
-+	dpll_info, 1, 0, do_dpll_info,
-+	"display ZL30733 + ZL30643 DPLL identification + reset status",
-+	""
-+);
++EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, nbxv3_fan_power_last_stage_init);
 -- 
 2.43.0
 
