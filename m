@@ -1,81 +1,81 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7CFC5DF66
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:34:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0115FC5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:34:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 27E8C407D0;
-	Mon, 17 Aug 2026 15:34:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B86B1607B5;
+	Mon, 17 Aug 2026 15:34:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Gb063GB3gBOX; Mon, 17 Aug 2026 15:34:10 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M75RFvAc1W9j; Mon, 17 Aug 2026 15:34:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 344FE4072F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9E492607A2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786980850;
-	bh=6U2A/jURnayq6Nw6wHIaJgwpre5Dlw4hHYO1QnI0hEo=;
+	d=lists.u-boot-project.org ; s=default; t=1786980867;
+	bh=XMvbXPyKKO4/J1amitWr8Wfg8Rs4XqA3dr0C1sNfliM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=i/l9uGjsNKqAsO8CaS8bqPofvd30c5V8V5WFAIYgawL5zdo7NClglCGCV1po4OR2w
-	 8AU80Uq+IXsaKGOrDrsghMD8v5OSpAuL5qjqBawXxwgONUpUEX+Jtj3lFtV6vCtynz
-	 oiGvM+46siDal6jjUnztoEFwGu+id1wMhNVt/kQB0mj+37QOTUFeqLxX6lUcDFUMoe
-	 LFADNZbkf5vh7Loy47pZ0eULTrBKDCFFmhegsxPBOS8CCOe0oqrcCB1F3YPRviZaDJ
-	 o61RCKu5TveUr2RLBimumY2+HWyIHdIgAWfQ4t/irRhc2rnGhTfTIbXT8jMBW+7ptj
-	 Ivfq6rpI57haQ==
+	b=gy6cN5UqZMTzGh/yyYOdfWYmFCoxhcw1GfjCA/tthAQTwkKIWfcB4V41ottY+bzd6
+	 +KoKbtrgmXfkWE2RGxW3P0x4qzemtn68ReMUA0CV9ZRKRQN9L+ez/jFJpLcReyNVog
+	 +v/mok1YDpxdng7iebo09TKXuv3fTYi0Q5GaNe+rz7rmF2HPj3hJezHhETWKOazXxc
+	 Q1uCl9vz5kwZw/GvIanBEtBK7JsMfytODxssEKHhtOpVI8tBV/ZH9F9jvqMNdfnZQJ
+	 BHY6+vBuw3+zh6yTaOPbxWE/Z5YMRfEiBxRbLtPONJFCCrajE5rW9BTNVS4uxRh2uk
+	 vZt6h1ZlS2S3Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 344FE4072F;
-	Mon, 17 Aug 2026 15:34:10 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0C14C282
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9E492607A2;
+	Mon, 17 Aug 2026 15:34:27 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9E538194
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E689C4072F
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 905F780C53
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rA00h4uDyIAc for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 15:34:08 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BYvPlAC_5tYx for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 15:34:24 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D2C4440791
-Authentication-Results: smtp4.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8884B80C06
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D2C4440791
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=JPqO7VQ+
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D2C4440791
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8884B80C06
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
+ header.a=rsa-sha256 header.s=smtp-20201208 header.b=oauWh6J5
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8884B80C06
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:24 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 461D5B00563;
- Mon, 17 Aug 2026 17:33:58 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id C68CAB00573;
+ Mon, 17 Aug 2026 17:34:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1786980845;
- bh=/YIPJD1uM/n8n6F4pbf7m/uxqD/C2Z3JiwuLwlpCqIM=;
+ s=smtp-20201208; t=1786980862;
+ bh=J+wiF779UcKSM9Qvq2f59plu1BV48fzqS+BnUHt5fsA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JPqO7VQ+IoQKTYSr0cln58OsI7YCW8OJND05XpJlm7wSDn2I0o5EADk7VZUcS+n1h
- xDZqJT90EylpMXmDHGXZBigjYBBf7t7lPLDMei+iTgEq4OapYLETUvOkIm3Tng21nA
- DBLXZFPkVcWk237fgSGdABANOGAbis0+qDAntFP2he8HhLxFhLJGmALETwBomQfSYj
- Tr5YYnb+/SvMdHXGbWKHyWxI5bOK2vqN3vrxBS0NQShSqD4aVwWQQtnriL+kH/OmIa
- ZJ0EMpvB9oSwTZLqeqB4GxtDr3Zxl4PcvsAJPqp79B/8mR9yc6iCNgMePJ4dMWoQ6P
- w7C0Defanhhcw==
+ b=oauWh6J5FlefgcmgFGbalI0Be7C5W9o7IgpF4KgntnEZ+FpL/WzzciA16EJjYbfym
+ umVHC+hfT32Knt2Cd4pqhvYMmxWgTBTlgY2CoHI+FEcnElOaQjnfyXE8EVjKoBrJze
+ 3KuvcArcHXniiWIlyBuVhLy9V8YQWVKB2m/H4pgWwjNSNtSaN/4/ZqLlZ9ml+UXk2T
+ rFpGi0MmU0CunkVC4pb4Ib6peNWnSs8M30H+dH7F2xB+TgUkfL2pl+RP9QLXd/9AOs
+ Dg/m6M6wcFAUQ+J/LVOAwlrcXphGfdJ0OxHfsngsWL+mCNErY4DRylilVweZuG6Y7v
+ k8wYSy5r5Ps/g==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Wasim Khan <wasim.khan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 07/23] board: nbxv3: select carrier at boot
-Date: Mon, 17 Aug 2026 17:31:25 +0200
-Message-ID: <20260817153144.1951036-8-vjardin@free.fr>
+Subject: [PATCH v1 08/23] board: nbxv3: add DPLL status (ZL30733, ZL30643)
+Date: Mon, 17 Aug 2026 17:31:26 +0200
+Message-ID: <20260817153144.1951036-9-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260817153144.1951036-1-vjardin@free.fr>
 References: <20260817153144.1951036-1-vjardin@free.fr>
@@ -95,181 +95,259 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-The Nodebox v3 CPU module runs on several carriers. They share one
-kernel Image but need different DTBs and different DPAA2 DPC/DPL, so
-the kernel FIT carries every carrier's set as fdt-<c> / dpc-<c> /
-dpl-<c> with a conf-<c> configuration each, and U-Boot picks one:
+Add a boot time probe for each Microsemi/Microchip DPLL on the
+board:
+ - ZL30733
+ - ZL30643
 
-  mcinitcmd   imxtract ... dpc-${carrier} / dpl-${carrier}
-  mc_init     bootm ${kernel_addr_r}#conf-${carrier}
+Linux: full DPLL configuration (clock tree programming, output enables,
+holdover policy, line side rates) is the job of the Linux DPLL driver
+at runtime. U-Boot only verifies presence and identity, it does not
+program any output.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
- board/nxp/lx2160a/nbxv3/Makefile    |  1 +
- board/nxp/lx2160a/nbxv3/carrier.c   | 87 +++++++++++++++++++++++++++++
- board/nxp/lx2160a/nbxv3/carrier.h   | 17 ++++++
- board/nxp/lx2160a/nbxv3/eth_nbxv3.c | 10 ++++
- 4 files changed, 115 insertions(+)
- create mode 100644 board/nxp/lx2160a/nbxv3/carrier.c
- create mode 100644 board/nxp/lx2160a/nbxv3/carrier.h
+ arch/arm/dts/fsl-lx2160a-nbxv3.dts     |   8 ++
+ board/nxp/lx2160a/Kconfig              |   7 +
+ board/nxp/lx2160a/nbxv3/Makefile       |   1 +
+ board/nxp/lx2160a/nbxv3/dpll_zl30733.c | 183 +++++++++++++++++++++++++
+ 4 files changed, 199 insertions(+)
+ create mode 100644 board/nxp/lx2160a/nbxv3/dpll_zl30733.c
 
+diff --git a/arch/arm/dts/fsl-lx2160a-nbxv3.dts b/arch/arm/dts/fsl-lx2160a-nbxv3.dts
+index 8e336a622f3..9dcc1bf1d5e 100644
+--- a/arch/arm/dts/fsl-lx2160a-nbxv3.dts
++++ b/arch/arm/dts/fsl-lx2160a-nbxv3.dts
+@@ -57,3 +57,11 @@
+ 		regulator-always-on;
+ 	};
+ };
++
++&dspi0 { /* DSPI1: on module management SPI */
++	dpll@0 {
++		compatible = "microchip,zl30733";
++		reg = <0>;
++		spi-max-frequency = <12500000>;
++	};
++};
+diff --git a/board/nxp/lx2160a/Kconfig b/board/nxp/lx2160a/Kconfig
+index e46223d1b43..12d2e418aa5 100644
+--- a/board/nxp/lx2160a/Kconfig
++++ b/board/nxp/lx2160a/Kconfig
+@@ -76,4 +76,11 @@ config NBXV3_PMBUS
+ 	select DM_REGULATOR_PMBUS_GENERIC
+ 	select CMD_REGULATOR
+ 
++config NBXV3_DPLL
++	bool
++	default y
++	select SPI
++	select DM_SPI
++	select FSL_DSPI
++
+ endif
 diff --git a/board/nxp/lx2160a/nbxv3/Makefile b/board/nxp/lx2160a/nbxv3/Makefile
-index 68fab9bf18f..4ce2508249d 100644
+index 4ce2508249d..c8a676fb708 100644
 --- a/board/nxp/lx2160a/nbxv3/Makefile
 +++ b/board/nxp/lx2160a/nbxv3/Makefile
-@@ -3,6 +3,7 @@
- #
+@@ -4,6 +4,7 @@
  
  obj-y += eth_nbxv3.o
-+obj-y += carrier.o
+ obj-y += carrier.o
++obj-y += dpll_zl30733.o
  obj-y += mps_pmbus.o
  obj-y += psu_pmbus.o
  obj-y += vid_handoff.o
-diff --git a/board/nxp/lx2160a/nbxv3/carrier.c b/board/nxp/lx2160a/nbxv3/carrier.c
+diff --git a/board/nxp/lx2160a/nbxv3/dpll_zl30733.c b/board/nxp/lx2160a/nbxv3/dpll_zl30733.c
 new file mode 100644
-index 00000000000..231aaf1e3f1
+index 00000000000..4dfa4579cce
 --- /dev/null
-+++ b/board/nxp/lx2160a/nbxv3/carrier.c
-@@ -0,0 +1,87 @@
++++ b/board/nxp/lx2160a/nbxv3/dpll_zl30733.c
+@@ -0,0 +1,183 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2026 Free Mobile - Vincent Jardin
 + *
-+ * Nodebox v3 carrier selector.
++ * Nodebox v3 - DPLL identification probe (both DPLLs).
 + *
-+ * The CPU module is used on several carrier boards (nbv30, nbv32, ...).
-+ * They share one kernel Image but need different DTBs and different
-+ * DPAA2 DPC/DPL, it is up to the build framework (buildroot, etc.) to
-+ * puts all of them into the single kernel FIT.
-+ *
-+ *   images:         fdt-<carrier>, dpc-<carrier>, dpl-<carrier>
-+ *   configurations: conf-<carrier>
-+ *
-+ * and then the boot env picks one with ${carrier}:
-+ *
-+ *   mcinitcmd  imxtract ... dpc-${carrier} / dpl-${carrier}
-+ *   mc_init    bootm ${kernel_addr_r}#conf-${carrier}
-+ *
-+ * Change it from the prompt and make it persistent:
-+ *
-+ *   setenv carrier nbv32 && saveenv && reset
-+ *
-+ * WHY THIS FILE EXISTS RATHER THAN JUST A DEFAULT IN CFG_EXTRA_ENV_SETTINGS:
-+ * A default there only applies when the saved
-+ * environment is absent or fails its CRC: env_import() calls himport_r()
-+ * WITHOUT H_NOCLEAR, so a valid saved env in NOR replaces the built-in
-+ * defaults wholesale rather than merging with them. Every board already
-+ * running with a saved env would therefore come up with ${carrier}
-+ * EMPTY on the first boot after this feature lands, `bootm
-+ * ${kernel_addr_r}#conf-` would fail with
-+ * "Could not find configuration node".
-+ * Setting
-+ * it from C on every boot when it is missing makes any upgrade
-+ * invisible, and still lets an explicitly saved value.
-+ *
-+ * Called from reset_phy() in eth_nbxv3.c ; it is during initr_net,
-+ * after initr_env has loaded the saved environment and BEFORE
-+ * mc_env_boot() evaluates ${mcinitcmd}, which is the earliest consumer.
-+ * (board_late_init() would also be early enough, but it this logic is
-+ * specific for the nbx boards, we do not want to touch.
-+ * shared arch/arm/cpu/armv8/fsl-layerscape/soc.c
-+ *
++ * It reads a small set of read-only descriptor registers from each
++ * Microsemi/Microchip DPLL on the board and prints the result on the
++ * console at EVT_LAST_STAGE_INIT time, just before the prompt.
++ * It is purely a basic power on test diagnostic: no configuration
++ * register is written, the DPLL register profile loaded at power-on
++ * is left untouched.
 + */
 +
-+#include <env.h>
-+#include <linux/kernel.h>
++#include <command.h>
++#include <dm.h>
++#include <event.h>
++#include <log.h>
++#include <spi.h>
 +#include <vsprintf.h>
++#include <linux/delay.h>
 +
-+#include "carrier.h"
++#define ZL30733_SPI_HZ		12500000
++#define ZL30733_SPI_MODE	SPI_MODE_0
 +
-+#ifndef NBXV3_CARRIER_DEFAULT
-+#define NBXV3_CARRIER_DEFAULT "nbv30"
-+#endif
++/* The two DPLLs sharing the ZL3073x register protocol on this board */
++static const struct nbxv3_dpll {
++	const char *label;	/* expected part at this location */
++	const char *devname;	/* DM device name for the ad-hoc slave */
++	int bus;		/* U-Boot SPI bus number */
++	int cs;			/* chip select on that bus */
++	u32 hz;			/* SCK ceiling */
++	const char *hint;	/* what to check when reads are implausible */
++} nbxv3_dplls[] = {
++	{
++		.label = "ZL30733", .devname = "zl30733_dpll",
++		.bus = 0, .cs = 0, .hz = ZL30733_SPI_HZ,
++		.hint = "check PROG_DPLL_EN mux",
++	},
++	{
++		.label = "ZL30643", .devname = "zl30643_dpll",
++		.bus = 2, .cs = 1, .hz = 10000000,
++		.hint = "check CS1 rework / RST_B",
++	},
++};
 +
-+/*
-+ * Placeholder for strap/EEPROM based identification.
-+ * Returning NULL means "cannot tell".
-+ */
-+static const char *nbxv3_carrier_detect(void)
++#define ZL30733_REG_INFO	0x00
++#define ZL30733_REG_ID_HI	0x01
++#define ZL30733_REG_ID_LO	0x02
++#define ZL30733_REG_REVISION	0x03
++#define ZL30733_REG_FW_VER	0x05	/* 6 bytes 0x05..0x0A   */
++#define ZL30733_REG_FW_VER_LEN	6
++#define ZL30733_REG_RST_STATUS	0x18
++#define ZL30733_REG_PAGE_SEL	0x7F
++
++#define ZL30733_CMD_READ	0x80	/* OR'd into the 7-bit address */
++
++#define ZL30733_INFO_DEFAULT		0x21
++#define ZL30733_INFO_ID_MASK		0x7f
++#define ZL30733_INFO_EEPROM_BOOTED	0x80
++#define ZL30733_REV_DEFAULT		0x03
++
++static int zl30733_read_block(struct spi_slave *slave, u8 addr, u8 *buf,
++			      size_t len)
 +{
-+	/* TODO, not available yet */
-+	return NULL;
++	u8 cmd = ZL30733_CMD_READ | (addr & 0x7F);
++	int ret;
++
++	ret = spi_xfer(slave, 8, &cmd, NULL, SPI_XFER_BEGIN);
++	if (ret)
++		return ret;
++
++	return spi_xfer(slave, len * 8, NULL, buf, SPI_XFER_END);
 +}
 +
-+void nbxv3_carrier_env_init(void)
++static int zl30733_select_page0(struct spi_slave *slave)
 +{
-+	const char *carrier = env_get("carrier");
-+	const char *detected;
++	u8 cmd[2] = { ZL30733_REG_PAGE_SEL & 0x7F, 0x00 };
 +
-+	if (carrier && *carrier) {
-+		printf("Carrier:       %s (from env)\n", carrier);
-+		return;
-+	}
-+
-+	detected = nbxv3_carrier_detect();
-+	if (!detected)
-+		detected = NBXV3_CARRIER_DEFAULT;
-+
-+	if (env_set("carrier", detected)) {
-+		printf("Carrier:       WARNING: cannot set ${carrier}\n");
-+		return;
-+	}
-+
-+	/* Not saved on purpose: saveenv on every boot would burn our NOR */
-+	printf("Carrier:       %s (default, not saved - `setenv carrier <name> && saveenv` to pin)\n", detected);
++	return spi_xfer(slave, sizeof(cmd) * 8, cmd, NULL,
++			SPI_XFER_BEGIN | SPI_XFER_END);
 +}
-diff --git a/board/nxp/lx2160a/nbxv3/carrier.h b/board/nxp/lx2160a/nbxv3/carrier.h
-new file mode 100644
-index 00000000000..e7eb42265e4
---- /dev/null
-+++ b/board/nxp/lx2160a/nbxv3/carrier.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2026 Free Mobile - Vincent Jardin
-+ */
 +
-+#ifndef __NBXV3_CARRIER_H
-+#define __NBXV3_CARRIER_H
++static int zl30733_dump(struct spi_slave *slave, const struct nbxv3_dpll *d)
++{
++	u8 info, rev, rst;
++	u8 fw[ZL30733_REG_FW_VER_LEN];
++	u8 idbuf[2];
++	u16 id;
++	int ret;
++	bool plausible;
 +
-+/*
-+ * Ensure ${carrier} is set before anything consumes it.
-+ * It is idempotent, and it never overrides a value already present
-+ * in the uboot's environment.
-+ * It shall run after initr_env and before ${mcinitcmd} is evaluated.
-+ */
-+void nbxv3_carrier_env_init(void);
++	ret = zl30733_select_page0(slave);
++	if (ret) {
++		printf("DPLL: %s page select failed (%d)\n", d->label, ret);
++		return ret;
++	}
 +
-+#endif /* __NBXV3_CARRIER_H */
-diff --git a/board/nxp/lx2160a/nbxv3/eth_nbxv3.c b/board/nxp/lx2160a/nbxv3/eth_nbxv3.c
-index eb91d47add5..58bf8246aa0 100644
---- a/board/nxp/lx2160a/nbxv3/eth_nbxv3.c
-+++ b/board/nxp/lx2160a/nbxv3/eth_nbxv3.c
-@@ -21,6 +21,8 @@
- #include <exports.h>
- #include <fsl-mc/fsl_mc.h>
- 
-+#include "carrier.h"
++	ret = zl30733_read_block(slave, ZL30733_REG_INFO, &info, 1);
++	if (ret)
++		return ret;
++	ret = zl30733_read_block(slave, ZL30733_REG_ID_HI, idbuf, sizeof(idbuf));
++	if (ret)
++		return ret;
++	id = ((u16)idbuf[0] << 8) | idbuf[1];
++	ret = zl30733_read_block(slave, ZL30733_REG_REVISION, &rev, 1);
++	if (ret)
++		return ret;
++	ret = zl30733_read_block(slave, ZL30733_REG_FW_VER, fw, sizeof(fw));
++	if (ret)
++		return ret;
++	ret = zl30733_read_block(slave, ZL30733_REG_RST_STATUS, &rst, 1);
++	if (ret)
++		return ret;
 +
- DECLARE_GLOBAL_DATA_PTR;
- 
- int board_eth_init(struct bd_info *bis)
-@@ -31,6 +33,14 @@ int board_eth_init(struct bd_info *bis)
- #if defined(CONFIG_RESET_PHY_R)
- void reset_phy(void)
- {
-+	/*
-+	 * MUST come first: mc_env_boot() evaluates ${mcinitcmd}, which
-+	 * imxtracts dpc-${carrier} / dpl-${carrier} out of the FIT. If
-+	 * ${carrier} is still unset a subimage named "dpc-" and the MC
-+	 * firmware never starts.
-+	 */
-+	nbxv3_carrier_env_init();
++	plausible = (info & ZL30733_INFO_ID_MASK) == ZL30733_INFO_DEFAULT &&
++		    id != 0x0000 && id != 0xFFFF;
 +
- #if defined(CONFIG_FSL_MC_ENET)
- 	mc_env_boot();
- #endif
++	printf("DPLL: %s @ spi%d:%d  info=0x%02x (%s) id=0x%04x rev=0x%02x\n",
++	       d->label, d->bus, d->cs, info,
++	       (info & ZL30733_INFO_EEPROM_BOOTED) ? "EEPROM boot" : "MCU default boot",
++	       id, rev);
++	printf("      fw_ver=%02x:%02x:%02x:%02x:%02x:%02x  reset_status=0x%02x",
++	       fw[0], fw[1], fw[2], fw[3], fw[4], fw[5], rst);
++	if (!plausible)
++		printf("  [implausible; %s]", d->hint);
++	printf("\n");
++
++	return plausible ? 0 : 1;
++}
++
++static int zl30733_probe_print(void)
++{
++	struct udevice *bus;
++	struct spi_slave *slave;
++	int i, ret;
++
++	for (i = 0; i < ARRAY_SIZE(nbxv3_dplls); i++) {
++		const struct nbxv3_dpll *d = &nbxv3_dplls[i];
++
++		ret = _spi_get_bus_and_cs(d->bus, d->cs, d->hz,
++					  ZL30733_SPI_MODE,
++					  "spi_generic_drv", d->devname,
++					  &bus, &slave);
++		if (ret) {
++			printf("DPLL: %s spi%d:%d not reachable (%d)\n",
++			       d->label, d->bus, d->cs, ret);
++			continue;
++		}
++
++		ret = spi_claim_bus(slave);
++		if (ret) {
++			printf("DPLL: %s spi_claim_bus failed (%d)\n",
++			       d->label, ret);
++			continue;
++		}
++
++		zl30733_dump(slave, d);
++
++		spi_release_bus(slave);
++	}
++
++	return 0;
++}
++
++static int nbxv3_dpll_last_stage_init(void)
++{
++	zl30733_probe_print();
++	return 0;
++}
++EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, nbxv3_dpll_last_stage_init);
++
++static int do_dpll_info(struct cmd_tbl *cmdtp, int flag, int argc,
++			char *const argv[])
++{
++	return zl30733_probe_print() < 0 ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
++}
++
++U_BOOT_CMD(
++	dpll_info, 1, 0, do_dpll_info,
++	"display ZL30733 + ZL30643 DPLL identification + reset status",
++	""
++);
 -- 
 2.43.0
 
