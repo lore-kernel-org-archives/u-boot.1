@@ -1,101 +1,84 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF4AC5B572
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 14:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA04C5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:32:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 47E6380F14;
-	Mon, 17 Aug 2026 14:26:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 70A5840706;
+	Mon, 17 Aug 2026 15:32:09 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3DsnU24diGcY; Mon, 17 Aug 2026 15:32:07 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B45D54071B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1786980727;
+	bh=u7yffwo1FAoczvPWIjHLBpEs+pXMKXOEJSmsfMG0XTo=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=UMm7IAGambX/UZdAv0inOfki223gu3Z7SyZPWN4NAPg/G0Xzq41onS1RQCz+ez/Rc
+	 iX4hIG3cEeGzM2pKIAQWX5dUWgQBnLZs9s2QiOSbsKVNFsvLaGjpTDAhfZV2OsVbDF
+	 xCJRdjD1qP12k60O6YjBOWVfETPBiilWK2eMKwpc2plyiaigrnDbMOkLMhQVV/dc8s
+	 pFurSmGJ9vUsOspNVHmG7iertA6xZhcLZ56UD5Gzq3j1fcEiUV45bJgyelFr0pkvG/
+	 WL+BlNlC6RwmVKYo+9lOprRoIhz0eu3F+80Rv64/CEtUySP0kPJRoXSPLvVfH4rGnn
+	 tFhntG/6OVOsw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id B45D54071B;
+	Mon, 17 Aug 2026 15:32:07 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 73BD8282
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:32:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 65E4580EAB
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:32:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id n50mw-oHri5b; Mon, 17 Aug 2026 14:26:36 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6847F80F09
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786976796;
-	bh=ED6DTI8Mc1tSjT5ouW1hNNYK1SIXi4jnNPqqFKf6PCM=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ard3WN2SLFTE32alWebaKlizp4m+7rf3NRTlJqgvf641LRWrNdOxV6Ca+5re03gix
-	 BxW+qA1QENW/rrAzarD6NC6KulX+iB/tMRLrBcug0eaDoNMYX08Q4Fe9tVticx8sKD
-	 xLBREm/wnUzFgUK0bjFHStg+o5yUADJncv4h8WhXwHx9N8MDZoq0IKF9UpOWJW3sst
-	 ZJ/ZydJsS1FIaZMJYhVPPpjiYAkmp3saUZn0OkyN4BzB4jLuIL44IUb+LVL2kvq9Qk
-	 WXMBd4Jmkr0hl40GTI9U3KRJKJHq5JMLCAqhUxP0xoDnOaToiWDDJ5FwRkyto0QGRC
-	 Y5A82XWysgnTA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6847F80F09;
-	Mon, 17 Aug 2026 14:26:36 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 41B95282
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:26:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2756C6072A
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:26:35 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RYKkMboTHde7 for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 14:26:33 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
- helo=sender4-op-o12.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3F1DA606DA
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3F1DA606DA
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=AwBMQ3uJ
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3F1DA606DA
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:26:27 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1786976743; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=EqrCZDqtIohszmswQ8Sm63RRPWiO/caVInoDVUF3z5XgtuMF8lBxT3p/T/y02vVBlxjnNA1PbkktrhvKEPmNggd8cRZx2RqPsFHp/NMu6FlGq71+dZvP80D3HqhnrQdOrpu/qrMHjNkfKz1RHvlFQvplkW0zgWTjxEusc1gSCj8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1786976743;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=ED6DTI8Mc1tSjT5ouW1hNNYK1SIXi4jnNPqqFKf6PCM=; 
- b=jktRSqOrtfyr7gwFAEGPvmtAu5do4hSQP0V5MPSFGIvoGvkJyHBa0yC+40nE7eUBxhIdrfrNXsdsipT7E9zuOCY52Y1DETg1mEhVCGGnIcWJjEFO6eHbJ1MeXTMBUMRwOA7cU68b4AXSc00lOCV16ZhM23+Pc5SnXAeblyt4wn8=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1786976743; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:Subject:Subject:From:From:To:To:In-Reply-To:Reply-To;
- bh=ED6DTI8Mc1tSjT5ouW1hNNYK1SIXi4jnNPqqFKf6PCM=;
- b=AwBMQ3uJRCUdNw8froQL10G7sazEMOaoP1BYwdeYVVQosDIwlK6eMw6Wxjmh5RoK
- 2bNH/kX05Q+ATGydBo2PSD5qbdmOxkFAzn0/hymUgpQQmLSq9wlk4BxBvUcZ9/a/YkV
- 57gYc5p3gtCjvnJG0zvVtuV4SFuhoAA+WoZvjuaI=
-Received: by mx.zohomail.com with SMTPS id 1786976740834828.1309380603295;
- Mon, 17 Aug 2026 07:25:40 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 17 Aug 2026 22:25:30 +0800
-Message-Id: <DKRADSUN4GN9.299FCK1VIS6EH@pigmoral.tech>
-Cc: "Heiko Schocher" <hs@nabladev.com>, <u-boot-spacemit@groups.io>,
- <u-boot@lists.u-boot-project.org>, "Huan Zhou" <pericycle.cc@gmail.com>,
- "Guodong Xu" <guodong.xu@oss.qualcomm.com>, "Tom Rini"
- <trini@konsulko.com>, "Raymond Mao" <raymond.mao@riscstar.com>, "Lukasz
- Majewski" <lukma@denx.de>, "Yixun Lan" <dlan@kernel.org>
-Subject: Re: [PATCH v2 1/4] i2c: k1: fix wrong bus speed setting
-From: "Junhui Liu" <junhui.liu@pigmoral.tech>
-To: "Troy Mitchell" <troy.mitchell@linux.spacemit.com>, "Junhui Liu"
- <junhui.liu@pigmoral.tech>
-X-Mailer: aerc 0.21.0
-References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
- <20260815-k1-i2c-fix-v2-1-7d2a48607233@pigmoral.tech>
- <DKR3Q808Z4E0.27KFK7LNAM3K7@linux.spacemit.com>
-In-Reply-To: <DKR3Q808Z4E0.27KFK7LNAM3K7@linux.spacemit.com>
-X-ZohoMailClient: External
+ id jjiZKQrhtvmA for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 15:32:05 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
+ helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org B3B1F80EAA
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B3B1F80EAA
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=eGVKm9Lz
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B3B1F80EAA
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:32:04 +0000 (UTC)
+Received: from localhost.localdomain (unknown [91.160.0.144])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 53319B00573;
+ Mon, 17 Aug 2026 17:31:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1786980722;
+ bh=dIlaf5RY6ug+nO6ntXq0qjeHhrvxXAUhjHja0vmrCCc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=eGVKm9LzUNvH6gLAVt2NRArGMBhZpBytRe6ShK6NfvYGPhcfQYrL+bXRcjmPNqtuA
+ GgbF1DFCwj4RFZqEHC86/XT/0eQMp953q/Osoyse1lCvhAEVGr3/up6ylZs9ccY8Rr
+ dur/vI06Cttktrx5zvSIrgnGrfw4o6fF8Eofqh8E8Z59HHSU4AQQgPkyB5604HWmqy
+ 4kMvfMWNF0rlphHJU6wX3R3XUwdI764TT+mIc0vqU1h/OqS7ntuP+2Ovymk+tkjZaI
+ jD28e5fRlKPEncPqGVlbBuKM9y6LN/jRlaPQdjGN6NHJ3BD8M4CuSoIY1RAiHfISoB
+ JMNTQTaROxGlw==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.u-boot-project.org
+Cc: Wasim Khan <wasim.khan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+ Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH v1 00/23] board: nxp: add the Free Mobile Nodebox v3 CPU
+ Module (LX2160A)
+Date: Mon, 17 Aug 2026 17:31:18 +0200
+Message-ID: <20260817153144.1951036-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -110,65 +93,104 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Troy,
-Thanks for the review.
 
-On Mon Aug 17, 2026 at 5:12 PM CST, Troy Mitchell wrote:
->> The controller bus mode should be selected according to the requested
->> I2C bus speed. However, the driver currently passes the functional clock
->> rate to k1_i2c_set_bus_speed(), so the selected mode does not reflect
->> the requested bus speed.
->>
->> Fix this by reading the clock-frequency property from the Device Tree,
->> defaulting to standard speed, and drop the unused clk_rate field.
->
-> `clock-frequency` is the requested SCL rate, but this patch only changes =
-the
-> value passed to `k1_i2c_set_bus_speed()`.
->
->> @@ -496,10 +496,13 @@ static int k1_i2c_probe(struct udevice *bus)
->>  		debug("%s: failed to enable clock\n", __func__);
->>  		return ret;
->>  	}
->> -	priv->clk_rate =3D clk_get_rate(&priv->clk);
->>
->>  	priv->base =3D (void *)devfdt_get_addr_ptr(bus);
->> -	k1_i2c_set_bus_speed(bus, priv->clk_rate);
->> +
->> +	speed =3D dev_read_u32_default(bus, "clock-frequency",
->> +				     I2C_SPEED_STANDARD_RATE);
->> +	k1_i2c_set_bus_speed(bus, speed);
->
-> `k1_i2c_set_bus_speed()` only changes `ICR_MODE_MASK`. It does not progra=
-m
-> the ILCR divider or initialize IWCR, so the actual SCL rate still depends=
- on
-> the register reset values and may not match the Device Tree.
+This series adds the Free Mobile Nodebox v3 CPU Module, an NXP
+LX2160A based board (16x Cortex-A72, DPAA2). U-Boot is the BL33
+payload of TF-A: BL2 trains the DDR, BL31 hands over, and U-Boot
+boots a FIT image (kernel + MC firmware + DPC/DPL) from a single
+FlexSPI NOR. The module plugs onto several carrier boards (NBV30,
+NBV32, etc.) that share one kernel image but differ in their device
+tree and DPAA2 data path.
 
-Yes. This patch only aims to fix the ICR_MODE selection. On the K1 board
-I tested, the register reset defaults are enough for both the PMIC and
-the EEPROM to work under U-Boot.
+The port is modelled on the LX2160ARDB / QDS boards and lives next
+to them under board/nxp/lx2160a/, reusing their SoC level code.
+Board specific behaviour is wired through EVENT_SPY hooks rather
+than weak symbol overrides, and the dependencies each hook needs
+are forced on by hidden default-y Kconfig bools under
+`if TARGET_NBXV3`, so a hook cannot silently turn into a no-op.
 
->
-> Please calculate and program ILCR from the functional clock rate and the
-> requested SCL rate, initialize IWCR as required by the hardware, and reje=
-ct
-> unsupported rates. The functional clock handle or rate therefore needs to
-> remain available to `k1_i2c_set_bus_speed()`.
+The series is in three stages:
 
-That's a fair point. The current driver is aligned with the mainline
-Linux K1 I2C driver. It does not include your later work to program
-ILCR/IWCR:
-https://lore.kernel.org/linux-riscv/20260508-k1-i2c-ilcr-v7-1-8c2dde5c3ed5@=
-linux.spacemit.com/
+ 1. Base port and documentation (patches 1-2): TARGET_NBXV3, the
+    defconfig, a minimal device tree, the MAINTAINERS entry, the
+    Ethernet wiring file and doc/board/nxp/nbxv3.rst.
 
-Porting that change to U-Boot is not a small amount of work. I'd prefer
-to keep that as a follow-up series rather than mix it into this ICR_MODE
-fix.
+ 2. Board code (patches 3-9): DPAA2 Ethernet on DPMAC17 through the
+    RTL8211FD PHY; the +0V8_VDD core rail (MPS MPQ8785 PMBus
+    regulator snapshot, PMBus PSU snapshot, VID fuse driven voltage
+    trim through UCLASS_REGULATOR); the ${carrier} selection that
+    lets one FIT carry a DPC/DPL/DTB set per carrier; the ZL30733 /
+    ZL30643 DPLL traces; the +3V3_FAN rail hook.
 
->
->                                             - Troy
+ 3. Build and device tree settings (patches 10-23): one small
+    commit per peripheral or features, each enabling its DT nodes and
+    defconfig symbols.
 
---=20
-Best regards,
-Junhui Liu
+
+
+Vincent Jardin (23):
+  board: nxp: add Nodebox v3 CPU Module (LX2160A) base port
+  doc: board: nxp: add the Nodebox v3 CPU Module (nbxv3)
+  board: nbxv3: enable RTL8211FD PHY for 1G DPAA2
+  board: nbxv3: add MPQ8785 PMBus traces + DT regulator
+  board: nbxv3: add boot-time PMBus PSU traces
+  board: nbxv3: add VID-fuse driven core voltage
+  board: nbxv3: select carrier at boot
+  board: nbxv3: add DPLL status (ZL30733, ZL30643)
+  board: nbxv3: enable +3V3_FAN rail fixed regulator
+  arm: dts: layerscape: nbxv3: enable UART0..UART3
+  board: nbxv3: enable FlexSPI boot NOR (GD55LB02GF) and FIT boot
+  board: nbxv3: store the environment in the boot NOR
+  board: nbxv3: enable eMMC on eSDHC2
+  board: nbxv3: enable PCIe root complexes (PCIE3..PCIE6)
+  board: nbxv3: enable both USB host controllers
+  board: nbxv3: describe the I2C buses and their on module devices
+  arm: dts: nbxv3: add the +3V3_FAN regulator
+  board: nbxv3: enable JC42 + QorIQ TMU + PMBus thermal
+  board: nbxv3: enable HW crypto (CAAM) and rng command
+  arm: dts: nbxv3: bump SBSA watchdog timeout to 120s
+  board: nbxv3: add operator commands and JTAG semihosting
+  board: nbxv3: enable GPIO controllers with line names and hogs
+  board: nbxv3: add the boot environment (FIT over MC, MC memory, PS1)
+
+ arch/arm/Kconfig                       |  12 +
+ arch/arm/dts/Makefile                  |   1 +
+ arch/arm/dts/fsl-lx2160a-nbxv3.dts     | 531 +++++++++++++++++++++++++
+ board/nxp/lx2160a/Kconfig              |  45 +++
+ board/nxp/lx2160a/MAINTAINERS          |   9 +
+ board/nxp/lx2160a/Makefile             |   1 +
+ board/nxp/lx2160a/nbxv3/Makefile       |  11 +
+ board/nxp/lx2160a/nbxv3/carrier.c      |  87 ++++
+ board/nxp/lx2160a/nbxv3/carrier.h      |  17 +
+ board/nxp/lx2160a/nbxv3/dpll_zl30733.c | 183 +++++++++
+ board/nxp/lx2160a/nbxv3/eth_nbxv3.c    |  77 ++++
+ board/nxp/lx2160a/nbxv3/fan_power.c    |  32 ++
+ board/nxp/lx2160a/nbxv3/mps_pmbus.c    | 107 +++++
+ board/nxp/lx2160a/nbxv3/psu_pmbus.c    |  80 ++++
+ board/nxp/lx2160a/nbxv3/vid_handoff.c  | 146 +++++++
+ configs/nbxv3_tfa_defconfig            | 106 +++++
+ doc/board/nxp/index.rst                |   1 +
+ doc/board/nxp/nbxv3.rst                | 255 ++++++++++++
+ include/configs/nbxv3.h                |  57 +++
+ 19 files changed, 1758 insertions(+)
+ create mode 100644 arch/arm/dts/fsl-lx2160a-nbxv3.dts
+ create mode 100644 board/nxp/lx2160a/nbxv3/Makefile
+ create mode 100644 board/nxp/lx2160a/nbxv3/carrier.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/carrier.h
+ create mode 100644 board/nxp/lx2160a/nbxv3/dpll_zl30733.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/eth_nbxv3.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/fan_power.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/mps_pmbus.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/psu_pmbus.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/vid_handoff.c
+ create mode 100644 configs/nbxv3_tfa_defconfig
+ create mode 100644 doc/board/nxp/nbxv3.rst
+ create mode 100644 include/configs/nbxv3.h
+
+---
+base-commit: 527115ef6783cec49e5610c523c124b399011361
+branch: for-upstream/nbxv3-v1
+
+-- 
+2.43.0
+
