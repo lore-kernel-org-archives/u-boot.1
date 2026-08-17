@@ -1,166 +1,126 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 966D8C5DF66
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 18:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 333C9C5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 18:27:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 411AC8113A;
-	Mon, 17 Aug 2026 18:18:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DB9F04082F;
+	Mon, 17 Aug 2026 18:27:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AZZ4sOiVmhVA; Mon, 17 Aug 2026 18:18:03 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ENJ9ykFEeY-c; Mon, 17 Aug 2026 18:27:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2BE408113D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6267B40826
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786990674;
-	bh=ipdrXAqXYhoX9Enb+DNliQsSZuyPo3OBHTmPLbXngHk=;
+	d=lists.u-boot-project.org ; s=default; t=1786991261;
+	bh=WpkoLpElAfhUXcpB3iux1Ia/Sk8svPcJMIbnt0FaziM=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RrPcHZNcqHzYlJqI4OeyVihF5n14tirIRyME/HUB7Q4L0G5LvP1YRCuueeNRwkCyq
-	 PfjpCPVuSdXxmhoW74Ii6N9RQLDbxMnWKdKtQX1ZgkRijDpicobY7eejbuVviHzeQE
-	 sZpBsx+v5qwHeqU/ZvOQbYa8caLSWCRWRuE6KlQFyAWHaNQqnBUtcTCtrENX9ZOAsd
-	 y0hBKuWhWgRiSL6LNkGIXH9wdYqLa5xvNIQCuK0sN5EPNp3lH8bAEw7FIEksC3GV8u
-	 KHeoLFKMq6gnY/xFOQe+IB+EQmim91rP2Hj6/+zxaofvRv+KkyaGN2PBBpyNiQCdhD
-	 MWTVxhlr3Oecw==
+	b=kCr6/ndOiqbjmnZBaow8o8b629pb/u/O0I5iYZSAEBYTjeuI+CzDGMHqnh3Lvcz+B
+	 NBgfg7SobHJvWa56WPEAzfyKX+8gEtpQWsED4b8aWiRXyf4lGuX9lrc46AsR9FyOF/
+	 6Mwz7UuHGnjq9uVdIn2eo8nd3qX8GEDLLDX/dusM4sw4QPSnR/vkz40crEXFNWpbY/
+	 1St/6lRXKkvMmTWdYHx/UN+s1Fm0yDCBO+0clQGNMmOixwqp+GRw9WVW7URTNfTx2N
+	 OPY+JiBNTCFhBTfmG6qqKD0fjYoUlDmkXUDi+lP8an+N4p7RbYi+L5bZfMTBvoyiRD
+	 lkxFAIC2VAzxg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2BE408113D;
-	Mon, 17 Aug 2026 18:17:54 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0FFA123F
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 17:34:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6267B40826;
+	Mon, 17 Aug 2026 18:27:41 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5804F334
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 18:27:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 01A1280D8A
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 17:34:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 49A006081A
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 18:27:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ErVKhILEUKMR for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 17:34:56 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FegDinwLtqra for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 18:27:39 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:d100::1;
- helo=bl0pr03cu003.outbound.protection.outlook.com;
- envelope-from=macromorgan@hotmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 31CC980D83
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=hotmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 31CC980D83
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256
- header.s=selector1 header.b=hQH+XTtR
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazolkn190120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d100::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 31CC980D83
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 17:34:56 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NcKcQj6/0YrjG9UfdGQ1zv6TyqLFXrlDSdjBxg2otExKxifRmdQNaqhTCfP11cQIX0OHv/qiy7WkUBX8Thv82ey/uMzzRFZGV597rNHGCNyVbq8bOVKNgK9xz7Ox3N/DZdzC4AM+y/6duYjAI0k38/CBhKL7Q1k795vPsUL+y9+k6qt1cuwFehzL9rQLh4cA57VfvOxt05ql7Uz1pIn2Btw8wrXLFCFyTKix4mOhmnMYMp/XBojVNf5v9n62+U6v3NhSOEjRGUHfMw4XezXXjpJtGf+myQGxEHLuvVde4wu8c4LRsiQbRO7JMFpfVBvpgUyHENhgC2oQAuybecgJ0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ipdrXAqXYhoX9Enb+DNliQsSZuyPo3OBHTmPLbXngHk=;
- b=FNekCsJWd7F5mALLt2kNJOOeBg7sOJRAXCBJlxhqzzJMl3q0iGAr/qr1+RHIXZzlEZXB62BGhZCx0YpTvflcDRgrjnys1Nb/HXUocJyK9u9004+wLtqdKYDrJUIY+sbzOL30i/g2MEs6vNHw6SQ0KVy9T8TMZqywb/GkRWOeY+eqWqYneYzU5E+9Ijvz/CAVUg7XlAUfv+kPFwxMI5ac61Y9/S6IyZES8a5eRubTtX/ADI3967KUUT4uwvkzgLSrG67C8pEDw37rJW7oaPqLwk6zlg+uzScT3Tw3tCYY+VYAz+3Z1XESZa1tirQJezfGwi4fz2MhpWEwg/wZPSNtrA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ipdrXAqXYhoX9Enb+DNliQsSZuyPo3OBHTmPLbXngHk=;
- b=hQH+XTtRo7ufyUOSRuLvphsI1fXVzlrxAFO0Nm8V4e/VJuPb6VESdhryVv61NEbtWystNXs8l7mH8/HztYBNScaA0ZZZ2anl4igd7ujTzInDgXMHIrQVRHhQZYQ5xjimhRqpfLOZbokhn5qSmlHEuIfzSwYuHnLXgObLrr2F82dQ3v6iD7v0kHgVy6wcyXEYmQuuSwN9HVYNVYdeJos58BUe+sUv/ZglMWzii/DIGGOlQwg8QtZ82HDWoYFQtZWrA/d7WcOU2b9TSZdJX2waY4SamDo7WJ8/MgpKbCcejlVeT81su7cTaHnjfCfeFaDnBeIW9qYCnhfE9u3Ox8yZdA==
-Received: from PH0PR19MB997338.namprd19.prod.outlook.com
- (2603:10b6:510:3b1::18) by DSVPR19MB997406.namprd19.prod.outlook.com
- (2603:10b6:8:45a::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Mon, 17 Aug
- 2026 17:34:52 +0000
-Received: from PH0PR19MB997338.namprd19.prod.outlook.com
- ([fe80::fd22:ee23:3e25:3172]) by PH0PR19MB997338.namprd19.prod.outlook.com
- ([fe80::fd22:ee23:3e25:3172%4]) with mapi id 15.21.0315.016; Mon, 17 Aug 2026
- 17:34:52 +0000
-Date: Mon, 17 Aug 2026 12:34:49 -0500
-From: Chris Morgan <macromorgan@hotmail.com>
-To: Daniel Martin <dmanlfc@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-Subject: Re: [BUG] rockchip: v2026.07 fails to boot on GameForce Ace (RK3588S)
-Message-ID: <PH0PR19MB9973381C3D06EF7593AE50C56DA5A72@PH0PR19MB997338.namprd19.prod.outlook.com>
-References: <CAOyTmd13R7_fan-iB8qK55AFZoba+RCi4VT-GOa5ot+OZD__Rg@mail.gmail.com>
- <38c0d683-46bc-42b1-86a1-345b2070084b@cherry.de>
- <PH0PR19MB997338FA72B2980A64B4194127A5DA2@PH0PR19MB997338.namprd19.prod.outlook.com>
- <CAOyTmd1JvBqRiuBPcLxkhF+x6yws6uOQ7z6vZqq3jrZkgj7+tg@mail.gmail.com>
- <an_Wqkp09sxijfxv@wintermute.localhost.fail>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <an_Wqkp09sxijfxv@wintermute.localhost.fail>
-X-ClientProxiedBy: SA0PR11CA0078.namprd11.prod.outlook.com
- (2603:10b6:806:d2::23) To PH0PR19MB997338.namprd19.prod.outlook.com
- (2603:10b6:510:3b1::18)
-X-Microsoft-Original-Message-ID: <aoNGOZd8wEA29mHx@wintermute.localhost.fail>
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 6385B60820
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6385B60820
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=cWxLnJVI
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6385B60820
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 18:27:39 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7ea9c6ea7deso2567037a34.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 11:27:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1786991258; x=1787596058;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=WpkoLpElAfhUXcpB3iux1Ia/Sk8svPcJMIbnt0FaziM=;
+ b=cWxLnJVIjkaUDTn9xkgVKn1GhLRUlj2cGbDpnF8pXah5WLxp2LTNi/nvTH5HiLpyHm
+ fi6iopDuB1ILM3NvZ5YUJJvni3OqKhY/OHrTrk1cysOz+ppjezzHGFC6e94Z3Utx7nbc
+ NUOWPT2LDKqe4V8YF8EZR0PKMokhMjE3ClatQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786991258; x=1787596058;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=WpkoLpElAfhUXcpB3iux1Ia/Sk8svPcJMIbnt0FaziM=;
+ b=V+MJG9txKz0pPBRLJZgYXRoMd5zV7e0h3bxQO6uA9f+vej54MjFhKjBn0wP3jjAwp7
+ L5lEfW7YTPk0qxNyaS2rFRB8aEIa8IuCh4xrPglW2aiyH6FL+OwrC+j7y/9Ebceu+ew6
+ JUqLtX7HzKlnnunzFQrrI+xREuY0/2scO/YbFWt6p8K38I3fr3Wr7T6xViAA0Mt1GdMo
+ KuC1Z0+ZXh8oNlGPb3IP3K/kaS1iRqcHEuEFbIzha4xgD2LNlq+/lTyZHeQiZowhbKNR
+ j3rvzCvYTER9YpPJ6j/Z0VziLDC6oEigxBvENB4NrSOSBDKmjQNUezNjJEOwJBfxX+32
+ jwCw==
+X-Gm-Message-State: AOJu0YwaueSEqn2+/Oxr3Mr59iF8W3dHJmeYty2qXZqtvsllSNMKnFm8
+ EMCDh7T5PIZzeKQ1WvfQaSwGnqnZUWn546pm0GzrM47ECrqFibLuHl6JHXd5BTrZiJw=
+X-Gm-Gg: AR+sD131Db2vsGqFDGbBn79RlGybm9v6XMixYjTm+DS7dTtyUzfYYiG2AFGfsKNdwC0
+ svGL1m0EGQaEPdV62elFwFqgHeo8DqpzZ029GDr5BskwINf0fzELFo1cMHRafjTYJLtgvBWoOjU
+ VnES2FpYiglVF2L3TZx2JKshqApbZuIkNbO9IoGswDfcFY8zW/wZDIUGBlLwDGwMKxFpq+Sj4H2
+ PRkmIJRUOB04wfk2w1xIliReJSb852xsonkG1PVzeIU0mXm/xFyvEBmseyl63HBm/54akeRrBHn
+ +G5LxVE7qy0Ae3qtJjM8/PeFTWrMaMMg42Vxw+w1KIzXagrvOT2t5MSYHseFjQOLbcyizoubnTl
+ iCB2LOD2ihDTEVa+kU0VCvnhJbg1XMFNDLel5h4aAGNQhFKC1bIdj5OZYiMr/OpIbVlR9exBnUj
+ hz1Y1QyMfD+7dQqtqSgjhpi5O5DcGA5cKJG+UrYTyqD1o7pwqQ2gZbY7sO4Tx9AbGDvnQui2MQ8
+ L5DfELmupavb6vNs4Y+5XLqbDWyBCKdLlmFgwg7UgHnm9LsF7/ZVhqb6d26HcbUMD2mDBq59H9K
+ GJI/9v6t11Y=
+X-Received: by 2002:a05:6830:6687:b0:7e6:e1d2:3bd0 with SMTP id
+ 46e09a7af769-7f423e93218mr2774700a34.10.1786991258291; 
+ Mon, 17 Aug 2026 11:27:38 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f41c0f35a3sm2032764a34.21.2026.08.17.11.27.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Aug 2026 11:27:37 -0700 (PDT)
+Date: Mon, 17 Aug 2026 12:27:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Brian Sune <briansune@gmail.com>, Tze Yee Ng <tzeyee.ng@altera.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Boon Khai Ng <boon.khai.ng@altera.com>
+Subject: Re: [GIT PULL] SoCFPGA updates for next (2026-08-17)
+Message-ID: <20260817182735.GQ3297518@bill-the-cat>
+References: <cfa5d305-908e-4ab5-8725-47f287fb5e54@altera.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR19MB997338:EE_|DSVPR19MB997406:EE_
-X-MS-Office365-Filtering-Correlation-Id: 86950374-e119-4212-c601-08defc85d7ef
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|15080799012|51005399006|24021099003|55001999006|8060799015|19110799012|37011999003|12121999013|23021999003|25031999004|6090799003|25010399006|5072599009|40105399003|2607281247196008|440099028|3412199025;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DOVYbHIiTzauPBSKzhg/7cOPGpT/yUk3nt46niHTuMmCIFw4tZTdN2ZBGlYP?=
- =?us-ascii?Q?OoiASRTCFZVrwVxIm6e2P9GljGCV9ORNk+P+R6QlOghFVPNtr8M7TMfqkAdW?=
- =?us-ascii?Q?obHX8GyNpgDYcQG/S43sPRs6iaBPrgHfX5rmL49znFLJKGUZTee3PGp/nlOz?=
- =?us-ascii?Q?a0x43DL8WT2hc3cclXNwji0gJAzYYFU92yZx6lc4JFTOmXSBqXjcn0/XVIyc?=
- =?us-ascii?Q?0hLzE36wD4oJ/Z+IwF3U0wNvpDzV+mncNVqoGIVTm8mrKq6BPX1Lw3dP/wQm?=
- =?us-ascii?Q?kw7BvCcumSdWk30LsZORaTFd9bw67KVY5lcNSyjg1vyDr+IrRkJwRzkP+YRz?=
- =?us-ascii?Q?7bou6Qlt9RQwXpxELSPI8rpXQOkY3R+w5gwGBGmPNZT03tJcBt+iKphEl9X7?=
- =?us-ascii?Q?nDljmPfarPOaar/T2dl2hqF3mNK6AHp0BHnqE6ZjaKwM4vkiW+g1YL6Y6azB?=
- =?us-ascii?Q?M5so5u6cJlBq6aOwyEWP+IgT9faaIkNA8AOBaBwQpExIFWui1qpXJRYf632b?=
- =?us-ascii?Q?BUJlTDOZCi3qQPZMCBOuYb0RRopY+RD3FismXjVNjf9HrSPWZJQ5duMBnjuV?=
- =?us-ascii?Q?TxSBasoLnTvu7jJGBgMUprO7rOPNF8vfRgR2SHLmIQpXbKAaSjkcLAleh8/N?=
- =?us-ascii?Q?5DGEtd030bDGQyHsFLPxuNWmMiTCEfJLxrlP9pBqWqRGBMUR1+d9mtXH5X/E?=
- =?us-ascii?Q?c/mCtGTswjPjNQSq/5PWLbxxud0RXVur+A1MqUVVFWeyZtpZuh9H/bpNEnfe?=
- =?us-ascii?Q?2ZCYgXpStXnw5rbIGZ3uQ2u62ErJFHFiHWvr4RoOprYrRTYxxNznA/GvayKw?=
- =?us-ascii?Q?ROZ0Ba9a/2YqDocdWtgVzEj3xZLil3gwc86j8fvjN7W35hCd5G0QIFhQodNR?=
- =?us-ascii?Q?Cxiwj08JlpHBWr5Nu6ib8OJUsGPlr1X+Aq4TAyG/5MN9zfTRbag/0BFPq6CI?=
- =?us-ascii?Q?5oM5F2Ar5ujeFvgMoRwshD9gRfqiml2DWJcHX870KpzRWk2LtYE+KSVuLyQ0?=
- =?us-ascii?Q?IDV7itFb3NpXXhczW844HpFYEf9PONollrq9J07vT2U2vupi+HL0gyE4+1nf?=
- =?us-ascii?Q?T0fir8r/p1jS0D4aA1xCcZkM07usQQ=3D=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?I2rInJsT4DXJwJXi9+v8y5e0ZHV6MUDRvGV4VF98K7nfa+K5eOkYZv7c4bkP?=
- =?us-ascii?Q?RO3kX/9A0782+RZcVjTzxkKvI89DFUMzJue8A38ONFZRxq5U6EK8jwaDCHjs?=
- =?us-ascii?Q?IfYLjk5qgXWe6ns5hyECIw3t8D7x2Zj6sA+5wMP3Ekj3cISxw7bKLM/YufAG?=
- =?us-ascii?Q?yPhs+J7UL/+lT0ehy4nza5A36S8lyxAlctkuqZtoCfZUZLQcggxdPZZ9cb5P?=
- =?us-ascii?Q?8r7ekKf32rIEO9Vtp2r4DM6VHKY1A2puJkt1Dgl76tN3hi4N9cDuGBOTwrjt?=
- =?us-ascii?Q?46Jyark6ZNeIVQegQM34UzSL+jmCi47uh3+YUmlONHX9547X7weJLXmiz/+M?=
- =?us-ascii?Q?UWujvWWF7nmoTdg17SK0oish9ZWWKEDr6+QiVNuLEu2tiMT4OCjlGxBjcBPM?=
- =?us-ascii?Q?p1xOXSsedniu/sfOV64IhncWmBNP/g+wF+lm1e0mjrCMIXFg84vWXZObRetN?=
- =?us-ascii?Q?aRCK9JTP5/4eeLsmqVgyzWxHdhaTda8sRCuZgsKUkv8D9xS4JPkBn7svV/1k?=
- =?us-ascii?Q?GepR5dh9ahQqyWWqrhT5SHXabF6piwcRqa/Cx7AiydhaoPTBVbfJ6PQxZdJ4?=
- =?us-ascii?Q?3Y5zRf4Ywu6355gNZnjxPzlaSYncW8eka/uxY810Qz3D9LBQp5UaE/AZbP+B?=
- =?us-ascii?Q?07/plp58+l0BV7jOWpg1NvFsID6/vWSsLFCfVYtSumyTfqoB/K1z6yY4C6/6?=
- =?us-ascii?Q?awFZqQWqugmCqty3pM8ypX/BIeZfYmG/cqJGfdbKPfGaGjKwfTzJGyuRbK4W?=
- =?us-ascii?Q?wmFkAzVw4JkRDTiLIkivVLxWkM4jSTGPXgINT5NNO7HDG0BpA9TfcYTU5yOj?=
- =?us-ascii?Q?xCr/AC5qlodnEusEJORGUm3wX2Xg3Rv7BU/8N+tupPXcL2qENhkaAEBThCkH?=
- =?us-ascii?Q?Y8QU3x9qUtfg7hGvTOqNuiXNo6fQnQM04WFJ0akuEZAX6PThg+VxqmDMdj68?=
- =?us-ascii?Q?2fw8gh7fUiDnB5RBS8tnRCCqDLWzrWUDXzBvRzotQYlaQzvpvPV68N/7pLlh?=
- =?us-ascii?Q?AvGmLysM7TxjZbmE2chwq89pdxTvzVX5dtvajXSbE/pQwVXHbsYy9HARgyXd?=
- =?us-ascii?Q?65YI5RBj/BQZJxUQUg1X9iQbsbDp35tjUlIXaoYSdR9tIWJiuWIhKcOwM1c3?=
- =?us-ascii?Q?BxAxIdzbGc2pjT/CmgCOWiaceFM4MDuKGTWe4/yF8v6/nX+AsokyLHrqsLZH?=
- =?us-ascii?Q?l0QKeCOj7KutPhFs6HzMcN6VzCnc91m3CqnBBOG6JwkvpVm9WKluouhmMUAR?=
- =?us-ascii?Q?1fEkRPzFoe3mmkANDXZBsltGM93a4Ei2GUX8j4ivllSW4/Bst6bKY3pTB8dq?=
- =?us-ascii?Q?+qgjz/62UfjkwAnPJJ12+o51WmggH+ci4CSnl0evluZWrB4D2KVHy495JSoD?=
- =?us-ascii?Q?mvKAkYRxtxBnAhX3X1M2hHhJOIHle7kLjs1CMnO1q4bNQhfYOYT4ePTnvIHE?=
- =?us-ascii?Q?ATARlVQOTONgTTlq4CvrbLVKmQ4eH4Iw?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-990eb.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86950374-e119-4212-c601-08defc85d7ef
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR19MB997338.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 17:34:52.1573 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR19MB997406
-X-Mailman-Approved-At: Mon, 17 Aug 2026 18:17:15 +0000
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UfcfYuKcvlKtO8wA"
+Content-Disposition: inline
+In-Reply-To: <cfa5d305-908e-4ab5-8725-47f287fb5e54@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -174,124 +134,43 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, Aug 14, 2026 at 10:02:05PM -0500, Chris Morgan wrote:
-> On Sat, Aug 15, 2026 at 10:06:23AM +1000, Daniel Martin wrote:
-> > Thanks for the further details Chris,
-> > 
-> > It would indeed be great if we could move this device to mainline end-to-end.
-> > Let me know how you get on with v2026.07 and if possible, test your
-> > DTS with the stable kernel (7.1.8 or similar).
-> > When I reverted uboot, I encountered inconsistent I/O issues with the
-> > latest stable kernel, therefore I ended up going back to the BSP.
-> > 
-> > Thanks for all your work, we appreciate the effort.
-> > 
-> > Dan
-> 
-> I've just tested booting the device with a completely unmodified
-> version of Arm Trusted Firmware (checked out at tag v2.15.0), U-Boot
-> (checked out at tag v2026.07 and changing nothing from the
-> gameforce-ace-rk3588s_defconfig), loading Linux 7.2 (tag v7.2-rc7) via
-> extlinux boot method and it seems to be working. I do note that it
-> seems to be slower to boot since I upgraded A-TF and U-Boot to the most
-> recent releases, so I'll troubleshoot that some more next week as I try
-> to install a fully up to date Ubuntu 26.04 on it.
-> 
-> I know you said it's hard to get a serial port on it, but if you
-> continue to have problems booting it that might be required to
-> troubleshoot it further. Otherwise I can send you my binaries if
-> need be.
-> 
-> Thank you,
-> Chris
 
-I'm afraid I cannot seem to recreate the problem, and I'm going to need
-a serial dump of the kernel logs. I'm sorry to ask that of you, but it
-will help further debug what the issue may be on your end. So far I've
-tested using a mainline kernel (v7.2 checked out this morning), U-Boot
-v2026.07, Arm Trusted Firmware (mainline master, checked out this
-morning OR the rkbin version, rk3588_bl31_v1.54.elf), optionally with
-Optee (master, checked out this morning). In each case the device boots
-successfully for me running Debian 13 (Forky) with my own mainline
-kernel.
+--UfcfYuKcvlKtO8wA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'm going to test installing Ubuntu 26.04 and fusing some OTP keys
-later today, I'll let you know if I encounter further issues.
+On Mon, Aug 17, 2026 at 11:29:50AM +0800, Chee, Tien Fong wrote:
+> Hi Tom,
+>=20
+> Please pull the following SoCFPGA updates for next.
+>=20
+> The following changes since commit 527115ef6783cec49e5610c523c124b3990113=
+61:
+>=20
+>   pylibfdt: Replace removed SWIG Python 2 compatibility macros (2026-08-13
+> 10:12:41 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-socfpga.git
+> tags/u-boot-socfpga-next-20260817
 
-Thank you,
-Chris
+Can you please put this on git.u-boot-project.org? The denx gitlab is
+unresponsive at this point for me, thanks.
 
-> 
-> > 
-> > 
-> > On Sat, 15 Aug 2026 at 07:40, Christopher Morgan
-> > <macromorgan@hotmail.com> wrote:
-> > >
-> > > I'm having trouble with my usual email client, so I'm sorry if this message is formatted weird.
-> > >
-> > > I have tested the device most recently with 2026.04 with the default defconfig options. I am using mainline Arm Trusted Firmware though, not the Rockchip versions. Using Rockchip's A-TF should work, but again it's not something I've tested. I can note that if you're using mainline A-TF along with mainline Optee, you need to pass CONFIG_SPL_ATF_NO_PLATFORM_PARAM=N, otherwise the device will fail to boot because it won't protect the Optee regions. (For mainline A-TF CONFIG_SPL_ATF_NO_PLATFORM_PARAM is optional unless you use Optee, for Rockchip's BL31 you need CONFIG_SPL_ATF_NO_PLATFORM_PARAM=Y).
-> > >
-> > > I'm going to test the device next week and see if I encounter any issues with it. I'll report back if I find out anything weird.
-> > >
-> > > Thank you,
-> > > Chris
-> > > ________________________________
-> > > From: Quentin Schulz <quentin.schulz@cherry.de>
-> > > Sent: Wednesday, August 12, 2026 10:22 AM
-> > > To: u-boot@lists.u-boot-project.org <u-boot@lists.u-boot-project.org>; dmanlfc@gmail.com <dmanlfc@gmail.com>
-> > > Cc: Chris Morgan <macromorgan@hotmail.com>
-> > > Subject: Re: [BUG] rockchip: v2026.07 fails to boot on GameForce Ace (RK3588S)
-> > >
-> > > +Cc Chris who maintains this board and may be able to help.
-> > >
-> > > I somehow didn't receive this mail in my inbox, here's my attempt at
-> > > quoting text from a mail I didn't receive (and it's also not available
-> > > on lore.kernel.org...).
-> > >
-> > >  > Hello,
-> > >  >
-> > >  > I am experiencing a total boot failure on the GameForce Ace handheld
-> > >  > console (Rockchip RK3588S) when trying to run mainline U-Boot
-> > >  > v2026.07.
-> > >  > The device fails to initialize or display any output during the
-> > >  > initial handshake.
-> > >  > Unfortunately, due to the tightly integrated form factor of this
-> > >  > handheld device, it is exceptionally difficult to break open the
-> > >  > casing and wire up a UART serial console to capture early boot logs.
-> > >  > The target operating system (Batocera Linux) environment is running
-> > >  > the mainline Linux 7.1.5 kernel.
-> > >  > Given the complete lack of visible console output, I wanted to check:
-> > >  >
-> > >  > 1. Has the GameForce Ace board target been actively tested with the
-> > >  > v2026.07 release?
-> > >  > 2. Are there any specific or updated build instructions, BL31/TPL/SPL
-> > >  > combinations, or proprietary Rockchip firmware binary requirements
-> > >  > (rkbin) needed for this release that may differ from previous
-> > >  > versions?
-> > >  >
-> > >  > For reference, the build configuration used was: gameforce-ace->
-> > > rk3588s_defconfig
-> > >  > TF-A / BL31 version: rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.21.bin /
-> > >  > rk3588_bl31_v1.54.elf
-> > >  > Compiler: GCC 14.3
-> > >  > Linux 7.1.5 uses the rk3588s-gameforce-ace.dts
-> > >  >
-> > >  > Any guidance on known regressions regarding this target, or
-> > >  > recommendations on how to isolate the stage where it hangs without a
-> > >  > hardware UART, would be greatly appreciated.
-> > >  >
-> > >
-> > > If you have a known working version of U-Boot, maybe start a bisect with
-> > > that commit as good and 2026.07 as bad to isolate a commit that broke
-> > > the board.
-> > >
-> > > Cheers,
-> > > Quentin
-> > 
-> > 
-> > 
-> > -- 
-> > 
-> > Kind Regards,
-> > 
-> > Daniel
+--=20
+Tom
+
+--UfcfYuKcvlKtO8wA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoNShwAKCRAr4qD1Cr/k
+CpOJAP994tgIlvxqCobT/3x4P8yyJN/g0fhhVBRH/3I/lzK9kgEAk5HlzsSj2rQu
+S3okSQgOBT6Jd/augRlR1J9Lv5XGcgk=
+=C4im
+-----END PGP SIGNATURE-----
+
+--UfcfYuKcvlKtO8wA--
