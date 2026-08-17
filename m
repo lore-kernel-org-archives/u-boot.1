@@ -1,81 +1,81 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D28BC5B572
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:33:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7CFC5DF66
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:34:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D6264607AE;
-	Mon, 17 Aug 2026 15:33:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 27E8C407D0;
+	Mon, 17 Aug 2026 15:34:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kvl4xEXrepJe; Mon, 17 Aug 2026 15:33:52 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Gb063GB3gBOX; Mon, 17 Aug 2026 15:34:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1C91F6078F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 344FE4072F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786980832;
-	bh=44vBU2BF9TtdVyxnix/79xep8LUYoxfU2YJhGNq2rUw=;
+	d=lists.u-boot-project.org ; s=default; t=1786980850;
+	bh=6U2A/jURnayq6Nw6wHIaJgwpre5Dlw4hHYO1QnI0hEo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=b8MxAvon+eKMwXW2mL+hPofs4wMVLTrNL9SBTqfVsrlFxkTaS0UQvniDmYVLFOBqe
-	 i3j4oNrgnd+ZhwHX22FlfUdwzrJ+n9A0zU7FtIdrutO5qti0C6WCo4/ltHdjdEV0ZQ
-	 XwgZCSUeBgSQ4ussk/Oh9MEpfaqp8v9HqIzbRnSWO79OoRBzBmywIGBXTbk0SpAcvB
-	 URMzILJeT2oVwCYK6jq0E2wGbDkbNKg91naY7tTTZQ/36XtVQaGAMVcnCDz7+WBHIV
-	 dw6+ZvxIUqNddCg64RubM3ukct5vErtBDdLEyF3xExM77+HTG8iu7tWWYI5yb8QnbG
-	 4Amx81uLTi0Ag==
+	b=i/l9uGjsNKqAsO8CaS8bqPofvd30c5V8V5WFAIYgawL5zdo7NClglCGCV1po4OR2w
+	 8AU80Uq+IXsaKGOrDrsghMD8v5OSpAuL5qjqBawXxwgONUpUEX+Jtj3lFtV6vCtynz
+	 oiGvM+46siDal6jjUnztoEFwGu+id1wMhNVt/kQB0mj+37QOTUFeqLxX6lUcDFUMoe
+	 LFADNZbkf5vh7Loy47pZ0eULTrBKDCFFmhegsxPBOS8CCOe0oqrcCB1F3YPRviZaDJ
+	 o61RCKu5TveUr2RLBimumY2+HWyIHdIgAWfQ4t/irRhc2rnGhTfTIbXT8jMBW+7ptj
+	 Ivfq6rpI57haQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1C91F6078F;
-	Mon, 17 Aug 2026 15:33:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7D343282
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:33:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 344FE4072F;
+	Mon, 17 Aug 2026 15:34:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C14C282
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7760E80EB1
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:33:50 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E689C4072F
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0_mPspYwkgzN for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 15:33:49 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rA00h4uDyIAc for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 15:34:08 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
  helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6B63580EC5
-Authentication-Results: smtp1.osuosl.org;
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org D2C4440791
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6B63580EC5
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=VJjaCJ/D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D2C4440791
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=JPqO7VQ+
 Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6B63580EC5
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:33:49 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D2C4440791
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:34:07 +0000 (UTC)
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id C1FB5B0057C;
- Mon, 17 Aug 2026 17:33:40 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 461D5B00563;
+ Mon, 17 Aug 2026 17:33:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1786980827;
- bh=qZdYPuSJkmtlGogS7wRP6fs4N1Vzf9FZZQ76fV8Kgdk=;
+ s=smtp-20201208; t=1786980845;
+ bh=/YIPJD1uM/n8n6F4pbf7m/uxqD/C2Z3JiwuLwlpCqIM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VJjaCJ/D1KQ7JQGMdpQ88wa8T02lt/0s3PybV9L9ygOEWBqbDKbEVWLDz7jYj9n2a
- evI20sSe81CUAm330KH4lOra9WL3UN/j8QCpAl+MDzdcX9i3Zd3AGlcoK2r3NEy6rI
- tRT2uJEeCw8MzqauvMuXUlFHTsI29rW+OYRONRK1aRechvkrReg+h5a/RpU47K0F8B
- Pnel3tPqsSInqxmdCaPKZ51sJPd8d++0uGt+KtqRlotJILgunIDoohgfeS1VtRhkIG
- j8v7XcsiUIExEYZ2wk+4y+UYW6le3cur75/FYKtAyx/20oixlu27SIPCO3Rjid96Kz
- tl2hMhgs1rvYA==
+ b=JPqO7VQ+IoQKTYSr0cln58OsI7YCW8OJND05XpJlm7wSDn2I0o5EADk7VZUcS+n1h
+ xDZqJT90EylpMXmDHGXZBigjYBBf7t7lPLDMei+iTgEq4OapYLETUvOkIm3Tng21nA
+ DBLXZFPkVcWk237fgSGdABANOGAbis0+qDAntFP2he8HhLxFhLJGmALETwBomQfSYj
+ Tr5YYnb+/SvMdHXGbWKHyWxI5bOK2vqN3vrxBS0NQShSqD4aVwWQQtnriL+kH/OmIa
+ ZJ0EMpvB9oSwTZLqeqB4GxtDr3Zxl4PcvsAJPqp79B/8mR9yc6iCNgMePJ4dMWoQ6P
+ w7C0Defanhhcw==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.u-boot-project.org
 Cc: Wasim Khan <wasim.khan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
  Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 06/23] board: nbxv3: add VID-fuse driven core voltage
-Date: Mon, 17 Aug 2026 17:31:24 +0200
-Message-ID: <20260817153144.1951036-7-vjardin@free.fr>
+Subject: [PATCH v1 07/23] board: nbxv3: select carrier at boot
+Date: Mon, 17 Aug 2026 17:31:25 +0200
+Message-ID: <20260817153144.1951036-8-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260817153144.1951036-1-vjardin@free.fr>
 References: <20260817153144.1951036-1-vjardin@free.fr>
@@ -95,186 +95,181 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Read the LX2160A DCFG_FUSESR.ALTVID / VID fuses, look up the
-binned target voltage, and command the rail through the
-UCLASS_REGULATOR set_value op
+The Nodebox v3 CPU module runs on several carriers. They share one
+kernel Image but need different DTBs and different DPAA2 DPC/DPL, so
+the kernel FIT carries every carrier's set as fdt-<c> / dpc-<c> /
+dpl-<c> with a conf-<c> configuration each, and U-Boot picks one:
 
-Hooked at EVT_LAST_STAGE_INIT so the rail is at the VID-correct
-voltage before the kernel regulator framework probes the chip.
-
-Set nbxv3_vdd_mv to a millivolt integer in [600, 1100] to bypass
-the VID fuse and pin the rail at the wanted voltage. Useful for
-bench characterisation.
+  mcinitcmd   imxtract ... dpc-${carrier} / dpl-${carrier}
+  mc_init     bootm ${kernel_addr_r}#conf-${carrier}
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
- board/nxp/lx2160a/nbxv3/Makefile      |   1 +
- board/nxp/lx2160a/nbxv3/vid_handoff.c | 146 ++++++++++++++++++++++++++
- 2 files changed, 147 insertions(+)
- create mode 100644 board/nxp/lx2160a/nbxv3/vid_handoff.c
+ board/nxp/lx2160a/nbxv3/Makefile    |  1 +
+ board/nxp/lx2160a/nbxv3/carrier.c   | 87 +++++++++++++++++++++++++++++
+ board/nxp/lx2160a/nbxv3/carrier.h   | 17 ++++++
+ board/nxp/lx2160a/nbxv3/eth_nbxv3.c | 10 ++++
+ 4 files changed, 115 insertions(+)
+ create mode 100644 board/nxp/lx2160a/nbxv3/carrier.c
+ create mode 100644 board/nxp/lx2160a/nbxv3/carrier.h
 
 diff --git a/board/nxp/lx2160a/nbxv3/Makefile b/board/nxp/lx2160a/nbxv3/Makefile
-index 24874138833..68fab9bf18f 100644
+index 68fab9bf18f..4ce2508249d 100644
 --- a/board/nxp/lx2160a/nbxv3/Makefile
 +++ b/board/nxp/lx2160a/nbxv3/Makefile
-@@ -5,3 +5,4 @@
+@@ -3,6 +3,7 @@
+ #
+ 
  obj-y += eth_nbxv3.o
++obj-y += carrier.o
  obj-y += mps_pmbus.o
  obj-y += psu_pmbus.o
-+obj-y += vid_handoff.o
-diff --git a/board/nxp/lx2160a/nbxv3/vid_handoff.c b/board/nxp/lx2160a/nbxv3/vid_handoff.c
+ obj-y += vid_handoff.o
+diff --git a/board/nxp/lx2160a/nbxv3/carrier.c b/board/nxp/lx2160a/nbxv3/carrier.c
 new file mode 100644
-index 00000000000..4131bd96023
+index 00000000000..231aaf1e3f1
 --- /dev/null
-+++ b/board/nxp/lx2160a/nbxv3/vid_handoff.c
-@@ -0,0 +1,146 @@
++++ b/board/nxp/lx2160a/nbxv3/carrier.c
+@@ -0,0 +1,87 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright 2026 Free Mobile, Vincent Jardin
++ * Copyright 2026 Free Mobile - Vincent Jardin
 + *
-+ * Per die core voltage trim for the Nodebox v3 +0V8_VDD rail
++ * Nodebox v3 carrier selector.
++ *
++ * The CPU module is used on several carrier boards (nbv30, nbv32, ...).
++ * They share one kernel Image but need different DTBs and different
++ * DPAA2 DPC/DPL, it is up to the build framework (buildroot, etc.) to
++ * puts all of them into the single kernel FIT.
++ *
++ *   images:         fdt-<carrier>, dpc-<carrier>, dpl-<carrier>
++ *   configurations: conf-<carrier>
++ *
++ * and then the boot env picks one with ${carrier}:
++ *
++ *   mcinitcmd  imxtract ... dpc-${carrier} / dpl-${carrier}
++ *   mc_init    bootm ${kernel_addr_r}#conf-${carrier}
++ *
++ * Change it from the prompt and make it persistent:
++ *
++ *   setenv carrier nbv32 && saveenv && reset
++ *
++ * WHY THIS FILE EXISTS RATHER THAN JUST A DEFAULT IN CFG_EXTRA_ENV_SETTINGS:
++ * A default there only applies when the saved
++ * environment is absent or fails its CRC: env_import() calls himport_r()
++ * WITHOUT H_NOCLEAR, so a valid saved env in NOR replaces the built-in
++ * defaults wholesale rather than merging with them. Every board already
++ * running with a saved env would therefore come up with ${carrier}
++ * EMPTY on the first boot after this feature lands, `bootm
++ * ${kernel_addr_r}#conf-` would fail with
++ * "Could not find configuration node".
++ * Setting
++ * it from C on every boot when it is missing makes any upgrade
++ * invisible, and still lets an explicitly saved value.
++ *
++ * Called from reset_phy() in eth_nbxv3.c ; it is during initr_net,
++ * after initr_env has loaded the saved environment and BEFORE
++ * mc_env_boot() evaluates ${mcinitcmd}, which is the earliest consumer.
++ * (board_late_init() would also be early enough, but it this logic is
++ * specific for the nbx boards, we do not want to touch.
++ * shared arch/arm/cpu/armv8/fsl-layerscape/soc.c
++ *
 + */
 +
-+#include <command.h>
-+#include <dm.h>
 +#include <env.h>
-+#include <event.h>
-+#include <log.h>
++#include <linux/kernel.h>
 +#include <vsprintf.h>
-+#include <asm/io.h>
-+#include <asm/arch/immap_lsch3.h>
-+#include <power/regulator.h>
 +
-+#define NBXV3_VDD_REGULATOR_NAME	"+0V8_VDD"
-+#define NBXV3_VDD_OVERRIDE_ENV		"nbxv3_vdd_mv"
-+#define NBXV3_VDD_MIN_MV		600
-+#define NBXV3_VDD_MAX_MV		1100
++#include "carrier.h"
 +
-+#define NBXV3_VID_LSB_uV		1953
-+#define NBXV3_VID_TOLERANCE_uV		1953
-+#define NBXV3_VID_STEP_uV		1953
-+#define NBXV3_VID_MAX_ITER		50
-+#define NBXV3_VID_PLATEAU_LIMIT		3
++#ifndef NBXV3_CARRIER_DEFAULT
++#define NBXV3_CARRIER_DEFAULT "nbv30"
++#endif
 +
-+static const u16 lx2160a_vid_table[32] = {
-+	[0]  = 8250,
-+	[1]  = 7875,
-+	[2]  = 7750,
-+	[16] = 8000,
-+	[17] = 8125,
-+	[18] = 8250,
-+	[20] = 8500,
-+};
-+
-+static int nbxv3_vid_handoff(void)
++/*
++ * Placeholder for strap/EEPROM based identification.
++ * Returning NULL means "cannot tell".
++ */
++static const char *nbxv3_carrier_detect(void)
 +{
-+	struct ccsr_gur *gur = (void *)(CFG_SYS_FSL_GUTS_ADDR);
-+	struct udevice *reg;
-+	u32 fusesr;
-+	u8 vid;
-+	int target_mv, target_uV, actual_uV;
-+	char *override_str;
-+	unsigned long override_mv;
-+	int ret;
-+
-+	if (regulator_get_by_platname(NBXV3_VDD_REGULATOR_NAME, &reg) || !reg)
-+		return 0;
-+
-+	fusesr = in_le32(&gur->dcfg_fusesr);
-+	vid = (fusesr >> FSL_CHASSIS3_DCFG_FUSESR_ALTVID_SHIFT) &
-+	       FSL_CHASSIS3_DCFG_FUSESR_ALTVID_MASK;
-+	if (vid == 0 || vid == FSL_CHASSIS3_DCFG_FUSESR_ALTVID_MASK)
-+		vid = (fusesr >> FSL_CHASSIS3_DCFG_FUSESR_VID_SHIFT) &
-+		       FSL_CHASSIS3_DCFG_FUSESR_VID_MASK;
-+
-+	target_mv = (lx2160a_vid_table[vid] + 5) / 10;
-+	if (target_mv == 0) {
-+		printf("MPQ8785 (%s): VID handoff fuse=0x%02x reserved/unknown, leaving rail untouched\n",
-+		       NBXV3_VDD_REGULATOR_NAME, vid);
-+		return 0;
-+	}
-+
-+	/* Env override */
-+	override_str = env_get(NBXV3_VDD_OVERRIDE_ENV);
-+	if (override_str && !strict_strtoul(override_str, 10, &override_mv) &&
-+	    override_mv >= NBXV3_VDD_MIN_MV &&
-+	    override_mv <= NBXV3_VDD_MAX_MV) {
-+		printf("MPQ8785 (%s): VID handoff override %s=%lu mV (fuse VID=0x%02x would have been %d mV)\n",
-+		       NBXV3_VDD_REGULATOR_NAME, NBXV3_VDD_OVERRIDE_ENV,
-+		       override_mv, vid, target_mv);
-+		target_mv = (int)override_mv;
-+	} else if (override_str) {
-+		printf("MPQ8785 (%s): VID handoff %s=\"%s\" out of range [%d, %d] mV, ignored\n",
-+		       NBXV3_VDD_REGULATOR_NAME, NBXV3_VDD_OVERRIDE_ENV,
-+		       override_str, NBXV3_VDD_MIN_MV, NBXV3_VDD_MAX_MV);
-+	}
-+
-+	target_uV = target_mv * 1000;
-+	actual_uV = regulator_get_value(reg);
-+
-+	if (actual_uV >= target_uV - NBXV3_VID_TOLERANCE_uV) {
-+		printf("MPQ8785 (%s): VID handoff fuse=0x%02x target=%d mV (already within tolerance, rail at %d uV)\n",
-+		       NBXV3_VDD_REGULATOR_NAME, vid, target_mv, actual_uV);
-+		return 0;
-+	}
-+
-+	printf("MPQ8785 (%s): VID handoff fuse=0x%02x %d uV -> target %d mV (closed-loop adjust)\n",
-+	       NBXV3_VDD_REGULATOR_NAME, vid, actual_uV, target_mv);
-+
-+	/*
-+	 * Plateau detection: if the rail stops moving while we are
-+	 * still bumping VOUT_COMMAND, the chip is clamping at VOUT_MAX
-+	 * (or refusing to slew higher for some other reason). Bail
-+	 * with a WARNING and leave the rail at whatever it settled at.
-+	 */
-+	{
-+		int cmd_uV = target_uV;
-+		int last_actual_uV = -1;
-+		int plateau = 0;
-+		int iter;
-+
-+		for (iter = 0; iter < NBXV3_VID_MAX_ITER; iter++) {
-+			ret = regulator_set_value(reg, cmd_uV);
-+			if (ret) {
-+				printf("WARNING: MPQ8785 (%s): VID handoff set_value failed at iter %d (cmd %d uV, ret %d), rail at %d uV\n",
-+				       NBXV3_VDD_REGULATOR_NAME, iter, cmd_uV,
-+				       ret, actual_uV);
-+				return 0;
-+			}
-+
-+			actual_uV = regulator_get_value(reg);
-+			if (actual_uV >= target_uV - NBXV3_VID_TOLERANCE_uV) {
-+				printf("MPQ8785 (%s): VID handoff settled at %d uV after %d iter (cmd %d uV, target %d uV)\n",
-+				       NBXV3_VDD_REGULATOR_NAME, actual_uV,
-+				       iter + 1, cmd_uV, target_uV);
-+				return 0;
-+			}
-+
-+			if (last_actual_uV >= 0 &&
-+			    actual_uV - last_actual_uV < NBXV3_VID_LSB_uV) {
-+				plateau++;
-+				if (plateau >= NBXV3_VID_PLATEAU_LIMIT) {
-+					printf("WARNING: MPQ8785 (%s): VID handoff stalled at %d uV after %d iter (target %d uV, cmd %d uV) -- VOUT_MAX clamp or chip refused\n",
-+					       NBXV3_VDD_REGULATOR_NAME,
-+					       actual_uV, iter + 1,
-+					       target_uV, cmd_uV);
-+					return 0;
-+				}
-+			} else {
-+				plateau = 0;
-+			}
-+			last_actual_uV = actual_uV;
-+			cmd_uV += NBXV3_VID_STEP_uV;
-+		}
-+
-+		printf("WARNING: MPQ8785 (%s): VID handoff did not converge after %d iter (rail %d uV, target %d uV, cmd %d uV)\n",
-+		       NBXV3_VDD_REGULATOR_NAME, iter, actual_uV, target_uV,
-+		       cmd_uV);
-+		return 0;
-+	}
++	/* TODO, not available yet */
++	return NULL;
 +}
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, nbxv3_vid_handoff);
++
++void nbxv3_carrier_env_init(void)
++{
++	const char *carrier = env_get("carrier");
++	const char *detected;
++
++	if (carrier && *carrier) {
++		printf("Carrier:       %s (from env)\n", carrier);
++		return;
++	}
++
++	detected = nbxv3_carrier_detect();
++	if (!detected)
++		detected = NBXV3_CARRIER_DEFAULT;
++
++	if (env_set("carrier", detected)) {
++		printf("Carrier:       WARNING: cannot set ${carrier}\n");
++		return;
++	}
++
++	/* Not saved on purpose: saveenv on every boot would burn our NOR */
++	printf("Carrier:       %s (default, not saved - `setenv carrier <name> && saveenv` to pin)\n", detected);
++}
+diff --git a/board/nxp/lx2160a/nbxv3/carrier.h b/board/nxp/lx2160a/nbxv3/carrier.h
+new file mode 100644
+index 00000000000..e7eb42265e4
+--- /dev/null
++++ b/board/nxp/lx2160a/nbxv3/carrier.h
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2026 Free Mobile - Vincent Jardin
++ */
++
++#ifndef __NBXV3_CARRIER_H
++#define __NBXV3_CARRIER_H
++
++/*
++ * Ensure ${carrier} is set before anything consumes it.
++ * It is idempotent, and it never overrides a value already present
++ * in the uboot's environment.
++ * It shall run after initr_env and before ${mcinitcmd} is evaluated.
++ */
++void nbxv3_carrier_env_init(void);
++
++#endif /* __NBXV3_CARRIER_H */
+diff --git a/board/nxp/lx2160a/nbxv3/eth_nbxv3.c b/board/nxp/lx2160a/nbxv3/eth_nbxv3.c
+index eb91d47add5..58bf8246aa0 100644
+--- a/board/nxp/lx2160a/nbxv3/eth_nbxv3.c
++++ b/board/nxp/lx2160a/nbxv3/eth_nbxv3.c
+@@ -21,6 +21,8 @@
+ #include <exports.h>
+ #include <fsl-mc/fsl_mc.h>
+ 
++#include "carrier.h"
++
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ int board_eth_init(struct bd_info *bis)
+@@ -31,6 +33,14 @@ int board_eth_init(struct bd_info *bis)
+ #if defined(CONFIG_RESET_PHY_R)
+ void reset_phy(void)
+ {
++	/*
++	 * MUST come first: mc_env_boot() evaluates ${mcinitcmd}, which
++	 * imxtracts dpc-${carrier} / dpl-${carrier} out of the FIT. If
++	 * ${carrier} is still unset a subimage named "dpc-" and the MC
++	 * firmware never starts.
++	 */
++	nbxv3_carrier_env_init();
++
+ #if defined(CONFIG_FSL_MC_ENET)
+ 	mc_env_boot();
+ #endif
 -- 
 2.43.0
 
