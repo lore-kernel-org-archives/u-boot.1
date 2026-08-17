@@ -4,84 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04672C5B572
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E497C5DF66
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 15:41:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C4EAE4074C;
-	Mon, 17 Aug 2026 15:38:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B8CE14081B;
+	Mon, 17 Aug 2026 15:41:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iHO0pbfL8jHq; Mon, 17 Aug 2026 15:38:50 +0000 (UTC)
+ id uFWznEcWRyrS; Mon, 17 Aug 2026 15:41:15 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 94E7940720
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EB64D40756
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786981130;
-	bh=Lup5TsRzXtzcHMB+eMjNSGd2dcff0C5qMNDvrpnJAEw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=okFcpoh6RGkRVfdiXG2h0lcSBRJ88LktBeW2mDrfMXnj62DICzkhMn4vrpX4zCAtW
-	 na3NSFtnCQVZ2PTqscP9Pk5N1/kXdyxPvrYQxEDXWpUN4IVibJ3EcAZIbV9ZjOubpu
-	 bRYupXfFr5/NC153HSRX21ot3CzT7EphnR7gE2RX9IOOZwl+E9yg/CXdUOxk0pbhLM
-	 DzY41+NPi9/FEOOJ1LUGPGT96HgDNh7wRB7quBc1fVIeyzMny799tlarrlYR1wAzQV
-	 UmI2og37jfaGfyTpRq4tdmyIe+9wfQpxQuZKeyTfLtL/3qPb5cnwwZwP7LxRplof34
-	 3RwjpkhZyyKbA==
+	d=lists.u-boot-project.org ; s=default; t=1786981275;
+	bh=02D14FrtOkQiiDfFDddz42caT3otLH1/I6WWq8Ht+Cw=;
+	h=From:Subject:Date:To:CC:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=bmx5rKf0lfwk8E+xNqoyQTYk3AHVzKYIFDgvwRqOy0bbG8CRUO2YK7FKRNftwznBW
+	 1J/eEacTBXNy5MPDysKX660zoWO9lqqbRYlZnresoL+8jIf2Xb9dn6+eMmywpkjEKe
+	 lYLZKxWrFQc5QxJ7FwI7ZGfbjvdhOigFwTmyAWoacDtZ5T6wwayL49nZ9YwjfkIxUI
+	 AJGuJYT7eDxZQYfLufm+eUHTomo/kSy7+pfQX/ksfAJUfNTG0sK171BRRgcQ013/cg
+	 UxLcvytUrV/5z85VNhHJcOM539+QJnqUs4/PIs6NaaJ/GPZyx70SaY1EWWcQuOiGDk
+	 DSlqg9Ld4jYlQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 94E7940720;
-	Mon, 17 Aug 2026 15:38:50 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id AA860282
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:38:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EB64D40756;
+	Mon, 17 Aug 2026 15:41:14 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id ADAE6282
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:41:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9D388401E3
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:38:48 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 93AD240720
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:41:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id htR83tvYlnR9 for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 15:38:47 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
- helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 8697F401DF
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8697F401DF
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=dTYihCWC
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8697F401DF
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:38:47 +0000 (UTC)
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id C1BEFB0053D;
- Mon, 17 Aug 2026 17:38:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1786981125;
- bh=wTE+Ug07RhihhiGwfxOgPjpgV0+l+rSIqIGgMXuAWF8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=dTYihCWC6Cp3eBQqYPJ9kA3HNnWxLi9j6A8LxFStg9/n376BEGcrwg55Sn2xfQEtz
- ZylQuyI0fRYyMuSWJ3KzeXJIyapOytK0w2dd27LHlltifMspxZAp1g7Yawxuxy7ylv
- rAInxbhsBiTfEhJ00WdpKGL7Rm76qA2O6bBYD9/lNdL8vl8sDdymIwcbWFusGzf0sy
- oNEvlRyCZU8nHyCf0CHHkAgjSinINdL9owNeua3Q/Dwz3fkGrTlEy6nL3EC7TEyZ9x
- ZS88q5SxZ6yJpWXGCJTTpmE9MERYRH35OUqLV6CEKFed4cCAFLJPWpXbtBpmqsxo6g
- Fef+Bh6NFV9EA==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.u-boot-project.org
-Cc: Wasim Khan <wasim.khan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 23/23] board: nbxv3: add the boot environment (FIT over MC,
- MC memory, PS1)
-Date: Mon, 17 Aug 2026 17:31:41 +0200
-Message-ID: <20260817153144.1951036-24-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260817153144.1951036-1-vjardin@free.fr>
-References: <20260817153144.1951036-1-vjardin@free.fr>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Blw7mGrLWEQ3 for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 15:41:12 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::3;
+ helo=du2pr03cu002.outbound.protection.outlook.com;
+ envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org C2225406BF
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C2225406BF
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
+ header.s=selector2 header.b=GECzgZRN
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C2225406BF
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 15:41:11 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=urI9G9o90fpQFfXCrcBQDS40pObVVqkK5uuXle0QQhH6W8auuXRI0DJmedcoFSoF6YLXLmMHbL31gn2vDgVWEdwY0/RAmP1QfV7hknO8wKPckcDbOqwx4i8OQq7gENPW3XtrMNl3+fMBSdiVZwhLE6+pQRpYhAaiQXMHI/PG8XcJosAmd5lsqMYcQARwwv92xRUSpwUl1Lo0jWY8TTxMDx3P0GfsbJQOTWLm5J/uti69WwQhrikiRexjGRPkAUmqAPiFp6VYF+iZdJuEHmOutHXNroN+6xUbi7zFTTb/r9s8FY2PsUE8SAW9C9zbOkLVTjVSpek4c2TRZLCAfo4PiQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=02D14FrtOkQiiDfFDddz42caT3otLH1/I6WWq8Ht+Cw=;
+ b=ofIdnvqJYaVlbijbtNYPkDDrRafjN7ynJaoLhH/kv5omtLZQSPaLN4wx3Tx+S/O0LO6Xt3SpFbNaJxe+Pj9VmuGgkbbUPftv8N+20yEMvnmd59ktYEgEdxDP253yF4eHUyhPHCXGaO10uzJsAt+BOVP1JBw4jdtntQsmAJ3inK5xHpFDUy5HvPepUWWwG8fZmuydUurxz+qRjQP/DaWTQ5Rc4wG6LEROpIq8OQss6HACFYns//zPtRu9GeQX9zz1diexaPAF8+UlAlRTE59Q/z4UDqJfp+TsnKiCNDIXFMp/gUloSqO1nGc+nIU3MDqGVDiWc4OHxvI59yCR05I9NQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=denx.de smtp.mailfrom=foss.st.com; dmarc=fail
+ (p=none sp=none pct=100) action=none header.from=foss.st.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=02D14FrtOkQiiDfFDddz42caT3otLH1/I6WWq8Ht+Cw=;
+ b=GECzgZRNtNbyQnTsZQhqjWYJi9HyqrxaD1bu7k+mJRhQ1ZXcaWFuLKbWYcgrcwm/SpAOm6eb0TBoYGU0CnuX3tFHGzWYdy4e+Ti5yMCtDL/6V8AU8AJrwZa+ijzv3RHFFjnH9t1BfkbRUy6rFT7s9xfaOUoDbHmNDmzGoyRxkTuz4RNZAfS7z6z3F2HhMrOsHz7BhAbfRTJlDKmNT2bxHbNyxDE5I3omjZl9VTYqbaft7kw+vBHRy6yMGwAvSfmM0UW5A4axFccfWWF1Ze9x3NWMptBnIgeVG12JBBh2yVQ2KBT0rGKdGuqSENl6tlqHI6skFEpLwZHpZvEdQcy0Zg==
+Received: from DUZP191CA0047.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4f8::14)
+ by PA1PR10MB8920.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:445::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Mon, 17 Aug
+ 2026 15:41:06 +0000
+Received: from DB1PEPF00050A00.eurprd03.prod.outlook.com
+ (2603:10a6:10:4f8:cafe::81) by DUZP191CA0047.outlook.office365.com
+ (2603:10a6:10:4f8::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.17 via Frontend Transport; Mon,
+ 17 Aug 2026 15:41:06 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DB1PEPF00050A00.mail.protection.outlook.com (10.167.242.42) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.3 via Frontend Transport; Mon, 17 Aug 2026 15:41:06 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Mon, 17 Aug
+ 2026 17:46:04 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Mon, 17 Aug
+ 2026 17:41:05 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 0/2] usb: gdaget: f_mass_storage: various fixes
+Date: Mon, 17 Aug 2026 17:41:03 +0200
+Message-ID: <20260817-move_schedule_inside_sleep_thread-v1-0-0023194e8c47@foss.st.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAI8rg2oC/yXNQQrCMBBG4auUWRtoopjiVURCTP6akZqWTFuE0
+ rsbdflt3ttIUBhCl2ajgpWFx1yhDw2F5PMDimM1mdac205b9RpXOAkJcRngOAvH6gGY3JwKfFT
+ 6eAoW0fSd9VQ7U0HP79/jevtblvsTYf6Gad8/NXx/noUAAAA=
+X-Change-ID: 20260817-move_schedule_inside_sleep_thread-134c7ed2f87a
+To: <u-boot@lists.u-boot-project.org>
+CC: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Marek Vasut <marek.vasut+usb@mailbox.org>, "Tom
+ Rini" <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.16.0
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF00050A00:EE_|PA1PR10MB8920:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8dc9f92d-815d-49a0-4518-08defc75f3f9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|23010399003|82310400026|1800799024|376014|10067099003|11063799006|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: +OC65/S1edHl2uKlytO0JpEY/Shx0qjTMqsrgk2i0kvtF6z8uLbfaNPZyU8jRP5TTMCw0Uyqe767EUFzVnk8utELWxXYvdpCflckVpgI053mKOEY+24mGQCHcJOV9NI4dRA+tAsgIGiNB1yfNb0fmXQesqQDxUgl9+kqBkaG3c1e3spVlD4VSCB2/SxBjBbBzLnFM8oYnVIgpNyanwg+gJuqp3I3Hfk/ffzDl6lnBP/cPrr9DsIOVEeHWwa4VeIGh3sk5hz4OaeFa1rpL6y0QUSOYfiDqm2q30Kj9NIz5bnVH0iv7JXfkTtWY7k+ZLUUnCnpQu2YalSGisWjOv5KyzpF78mSsqh00adn4HU/09EX8EztbMnedge+QRX0pWvg6mClLC5NpjOqHGK4uwwrrB8sG0Zdm3KgCwLAhCD2CorJN+3RWCedtHs8GcdxdtxULBWDFgYoUsQ6EefdG/gMgD91dCiWNQ/ILvTdcDOs8n3sd/8Q+Ric9KsT7hO2WH9pgpRxBcWMkaHJM31jnQzpPE1165t5YXqSDuuLk0m7eral7Y42AAVjJdwBt7o3oQYlA0ROKELEnMSGuuxJibIsZtGuOpspWIwyjIVHu3X0CKHrYJuHK85JloF51GypP2QKC5udl5h4bJmQz8GSSY01mGFXb2gYGXxWym2KpbwOKiqYAp3Vspvmfx0XM5s1/LZZZXZDtrR/+HRgDtBinUgFvQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(23010399003)(82310400026)(1800799024)(376014)(10067099003)(11063799006)(56012099006)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: dHBRQ5t9fmjK4FCLBOaQX4TDt/8S6799ujQmE/9r7t1iKhUzzeVeEYoe4Rcibn36HTeZw9oOpXX9MlKHR0AtyNfmL+ruf6jPYnAt0pzIJuGJJwrKbBvrCNdIa6ks/BIBlF58j3PI4MEyI46uBGQf7f/ixEsYPuxPsxgmhB82s8QP4dfQRC0zcNZCxfQeHILNb9oAoOpTwSf6ttbUFyWx3G3R+T1rPNUeZGyG1PzltVXUNVzqn5E3GlaAKACnnIJ5NCvKgDy7JzugVwpU0oiuSj2RHRu85IUxleipmLgVpjeyjjajUxmwZNMuI+Kes7HMZaXeVPEGR+YpNu54mZjrs/kA+UzdxeWqhGsu10eZEie50W8MJQ7s6H7IdE7wbKWejmR47ucaEcSyDGBiXcYPmQcurSwKZLm4WwraqH+6Bu1hdIBdY4t3v4FIl6LFdgou
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 15:41:06.6526 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8dc9f92d-815d-49a0-4518-08defc75f3f9
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF00050A00.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB8920
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -96,100 +158,24 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Add the production boot environment in CFG_EXTRA_ENV_SETTINGS. The
-kernel FIT at NOR offset 0x1000000 carries the kernel,
-DTB, optional ramdisk and the LX2160A management complex artefacts
-(mc, dpc-<carrier>, dpl-<carrier>) as sub-images.
+- remove useless "rc" local variable
+  - optimize schedule() call
 
-The usage of those variables is described in doc/board/nxp/nbxv3.rst.
+ optimize schedule() call 
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
+Patrice Chotard (2):
+      usb: gadget: f_mass_storage: Remove useless rc variable
+      usb: gadget: f_mass_storage: Optimize schedule() call
 
- configs/nbxv3_tfa_defconfig |  8 ++++++++
- include/configs/nbxv3.h     | 40 ++++++++++++++++++++++++++++++++++++-
- 2 files changed, 47 insertions(+), 1 deletion(-)
+ drivers/usb/gadget/f_mass_storage.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+---
+base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
+change-id: 20260817-move_schedule_inside_sleep_thread-134c7ed2f87a
 
-diff --git a/configs/nbxv3_tfa_defconfig b/configs/nbxv3_tfa_defconfig
-index a4c8419f0c3..bc90bb0594c 100644
---- a/configs/nbxv3_tfa_defconfig
-+++ b/configs/nbxv3_tfa_defconfig
-@@ -25,8 +25,12 @@ CONFIG_MP=y
- CONFIG_DYNAMIC_SYS_CLK_FREQ=y
- # CONFIG_EFI_LOADER is not set
- CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTDELAY=3
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_OF_STDOUT_VIA_ALIAS=y
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyAMA0,115200 earlycon=pl011,mmio32,0x21c0000 nokaslr"
-+CONFIG_USE_PREBOOT=y
- CONFIG_SYS_PBSIZE=532
- CONFIG_LAST_STAGE_INIT=y
- # CONFIG_ID_EEPROM is not set
-@@ -52,8 +56,12 @@ CONFIG_CMD_CACHE=y
- CONFIG_CMD_RNG=y
- CONFIG_CMD_LOG=y
- CONFIG_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SPI_BUS=3
-+CONFIG_USE_ETHPRIME=y
-+CONFIG_ETHPRIME="lanconsole0"
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FSL_CAAM=y
- CONFIG_DYNAMIC_DDR_CLK_FREQ=y
- CONFIG_DDR_ECC=y
-diff --git a/include/configs/nbxv3.h b/include/configs/nbxv3.h
-index 287f4110a7c..c266e0f9fe2 100644
---- a/include/configs/nbxv3.h
-+++ b/include/configs/nbxv3.h
-@@ -14,6 +14,44 @@
- 	"pci_iommu_extra=pci@0x3600000,1.0.0,hp,"			\
- 		"pci@0x3700000,1.0.0,hp,"				\
- 		"pci@0x3800000,1.0.0,hp,"				\
--		"pci@0x3900000,1.0.0,hp\0"
-+		"pci@0x3900000,1.0.0,hp\0"				\
-+	"kernel_addr_r=0xc0000000\0"					\
-+	"fit_nor_offset=0x1000000\0"					\
-+	"fit_nor_size=0x1000000\0"					\
-+	"mcmemsize=0x70000000\0"					\
-+	"mcinitcmd="							\
-+		"sf probe 3:0 && "					\
-+		"sf read ${kernel_addr_r} ${fit_nor_offset} ${fit_nor_size} && "\
-+		"imxtract ${kernel_addr_r} mc 0xa8000000 && "		\
-+		"imxtract ${kernel_addr_r} dpc-${carrier} 0xa9000000 && "\
-+		"imxtract ${kernel_addr_r} dpl-${carrier} 0xaa000000 && "\
-+		"fsl_mc start mc 0xa8000000 0xa9000000 && "		\
-+		"fsl_mc lazyapply dpl 0xaa000000\0"			\
-+	"mc_init=bootm ${kernel_addr_r}#conf-${carrier}\0"		\
-+	"linux_boot_fit="						\
-+		"sf probe 3:0 && "					\
-+		"sf read ${kernel_addr_r} ${fit_nor_offset} ${fit_nor_size} && "\
-+		"bootm ${kernel_addr_r}#conf-${carrier}\0"		\
-+	"host_boot="							\
-+		"load semihosting - ${kernel_addr_r} fit.itb && "	\
-+		"bootm ${kernel_addr_r}#conf-${carrier}\0"		\
-+	"provision_openocd_fit="					\
-+		"load semihosting - ${kernel_addr_r} fit.itb && "	\
-+		"sf probe 3:0 && "					\
-+		"sf erase ${fit_nor_offset} ${fit_nor_size} && "	\
-+		"sf write ${kernel_addr_r} ${fit_nor_offset} ${filesize} && "\
-+		"reset\0"						\
-+	"xspi_bootcmd="							\
-+		"cp.b 0x21000000 ${kernel_addr_r} ${fit_nor_size} && "	\
-+		"bootm ${kernel_addr_r}#conf-${carrier}\0"		\
-+	"fsl_bootcmd_mcinitcmd_set=y\0"					\
-+	"bootcmd=run mc_init || run provision_openocd_fit\0"		\
-+	"mdio_list="							\
-+		"echo === Nbxv3 probed PHYs === && "			\
-+		"mdio list\0"						\
-+	"PS1=nbxv3> \0"							\
-+	"ps_refresh="							\
-+		"setenv PS1 \"nbxv3 ${ethact} ${ipaddr}> \"\0"		\
-+	"preboot=run mdio_list ; run ps_refresh\0"
- 
- #endif /* __NBXV3_H */
--- 
-2.43.0
+Best regards,
+--  
+Patrice Chotard <patrice.chotard@foss.st.com>
 
