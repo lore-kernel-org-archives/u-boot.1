@@ -4,130 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391FBC5CFC1
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 07:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B243AC5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 08:03:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C000080C9B;
-	Mon, 17 Aug 2026 07:59:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A127280E76;
+	Mon, 17 Aug 2026 08:03:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oD7s-qwjR1ha; Mon, 17 Aug 2026 07:59:13 +0000 (UTC)
+ id Ph7o87TVexsP; Mon, 17 Aug 2026 08:03:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 538F8809F8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D41CB80E2D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786953553;
-	bh=B9COAeR9Uh7DRtjS9Ltc6Hprre49AyxehQkFrum3Uj8=;
+	d=lists.u-boot-project.org ; s=default; t=1786953790;
+	bh=GQj/Hj+MFQgjO8MYxdUZ3rH3rxlFC8SBANh1MpB+yIg=;
 	h=To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=Cz8MYD/eUlSCEgbDhdzOSWXAfGGHEvBO8BTCzXhz+KX4zXB6E3jqV3J8xy+4UNCdF
-	 pa/MyyG05jPZrzr52XRIHqxWZQcNVTY3NQs6ULBQvSbNUe8x7/zcMjnvBVdDDCHt8K
-	 yihOsNyg0WE1iGizmdctA6WnMoTgkBQLjAPVMjlYG5Dlccc/S93vQQTj6M+ZMp2am7
-	 +jwx+lIjBTJ0mbCKTiZJf/j4cEW+c7cQ3nMznG7qM5I+JCvC9VwUZI9nOmuEsJ7zsm
-	 Ed7ZBIvZj0eXgjKgxYxq1kaxWfK0bddJd8WjtM7niX4+IBtOA+nE7YLd/5kBKNDopF
-	 aDJDP4y9buVEg==
+	b=agRJ5/uv1Q/NSXXqeDICM/4Q7WkpXZYF2xqSKQchMNDgL0QBfVC2hvn+sj8rP1aQm
+	 iTLBWm8M8IjSipjLarvRYYWHYUa96o1ISsBpcZoznjqnPdJCJCaTLAlCAFErESj2cL
+	 TAJfr962AkAr5nYC2/hUIpO3ocUjHpa91sznGfwJKBhpp9rZ8y8ECpinkNgis7UtHp
+	 zF1Y48D81wl6+V/2ZyPRebnFTujm33ZmYX309ypgqq79dLOK19jwM6NF8YNm4SEKa1
+	 K1VO/7+mj69dkgw1VW3zU8lUHwUEDwc2WHHhK42zlizvmD8zc6J+tkYMUa2NiaEQ0e
+	 pitfrzAHfWaxQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 538F8809F8;
-	Mon, 17 Aug 2026 07:59:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 82AE4336
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 07:59:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D41CB80E2D;
+	Mon, 17 Aug 2026 08:03:09 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B8286237
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 08:03:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8030940707
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 07:59:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id AA4E760710
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 08:03:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OK-JXLg_A-7v for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 07:59:12 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T0Br_LfeD8Ve for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 08:03:08 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20f::7;
- helo=osppr02cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c20a::7;
+ helo=pa4pr04cu001.outbound.protection.outlook.com;
  envelope-from=juuso.rinta@nokia.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 6D4F440706
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6D4F440706
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6D4F440706
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 07:59:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org EC11C60709
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EC11C60709
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id EC11C60709
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 08:03:07 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PapXHu7XUkLzkBkYQKmhvyz4bPNydVJdDTTn45BPCjoHSWtaAL+eGs7QdptobJCk0fHiivWoDDoQGWGvnRHcT34xehrqjtWxJ2vzAaelHhm8OamAF1nxsKW9tFH3IqV5O9HCZpITT1J4QtOq7H7xBMvla0sFGy7S2Mx6wueGpnlnXHYqvIowgNLQJkqAklZTC9MX6ity9goK6XRDVgAiDdqFkbf4TFUy9b2DUJP2s58mxpiHMepHwDCLvRftWWHwJROf9KSuu2fEMS0uvqGnqzLaopCUNjAUHyObRN+pOTIxQe6H6GbNyPyJ1/78zpFn08v7NzRcS0TjJA3WuhQH2Q==
+ b=DS8PTkyUxba6jYTg1OVtTrdssLSBouxkdrK4A8GfXkIdIDd1fhqBbHYgm9h6tDbUWAj3/msywhgmBArg+/zLDjQ6brOXoNAPfzVrCOe0k4/sIt1cto2VQdNjjZRRVUbHlL1uRgG8I78dbb8pWhUK0DsnWYdg7Uv/lqiJG2rwxR2PWVLrJ0lHTZLaUg2s/Y88DWplVHF7ZI04mD2BZg0/s9uk4QqenKeMK6/5GnPAQYS0rMNrunMCGSxLC+KT3rPIXU6FbMeUBW+Vo5NlxDdoWHN1hCOMhIYzMjq6si2XiZLCAStiOS32HSkBprb30EJL2BI9Tx1fxYTx15L6Y8Nc9w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B9COAeR9Uh7DRtjS9Ltc6Hprre49AyxehQkFrum3Uj8=;
- b=y/fAlTVO38jPVFD7SG1it/qVP6OeW8x9BYdXAiRQBSfz8MW07WtUnQO4p6UmBzlz7tpeq5Kb0C9ySrszlae0vohg2XF8Wvp9SCfAzUVCtW98W+T/SShnZn5XZfO33cT1FfsNeDx8RXogjk+AVRMstQT9CLe2k28S5simx4AeM/e+hdeDRuHadYbZ0I+D8uzojLX/EKoCkfpD3WB3fybJEHXmc7hn/owWHtGNJS24iC24Ty0zWhZvuSCtAdB9M9ZeqKVaNCtfo6c5pUbBmJJ8L2m6eCoNB5YOf/sqjdvWGXEDDzF3n9EF6Ys9TurysCvT6hYHhzcHhQfHKpAFLJgKZA==
+ bh=GQj/Hj+MFQgjO8MYxdUZ3rH3rxlFC8SBANh1MpB+yIg=;
+ b=svIQZazzOFcDaBV89fc9JiKns9toOxVyoLGNN74aUu1HmV2M2cYdX6QXpGY3L1iQHx9L05WVQ9n8mmLS0MaKWHiy/kPZpfDBhuT5DnGyeEkOMx4WGeYEDij/Wbv0fZxLiVxxUVxd0sptkN9TsBEYXPibRxuTrzJ4X5eMulKfnb6fuZBl4pRmLypoaSnuNdvHvifnUev90iO24ZfA9zRXqR/wlxyQXtGCdyUmaodtItO4vvbq8egwbgJyGv3+qplb4vpb9yy+RcbTFfO5XUOMgXXjtt3dYhOjbaAwA8X+nyg7YxX691ub2TQAanO3VQyhdKj3vvq/etBecLIlCaJ2yA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 131.228.2.85) smtp.rcpttodomain=chromium.org smtp.mailfrom=nokia.com;
+ 131.228.2.240) smtp.rcpttodomain=chromium.org smtp.mailfrom=nokia.com;
  dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nokia.com;
  dkim=none (message not signed); arc=none (0)
-Received: from AS4P191CA0004.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:5d5::10)
- by PAWPR07MB9577.eurprd07.prod.outlook.com (2603:10a6:102:360::11)
+Received: from AM0PR02CA0127.eurprd02.prod.outlook.com (2603:10a6:20b:28c::24)
+ by VI0PR07MB11035.eurprd07.prod.outlook.com (2603:10a6:800:2d3::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Mon, 17 Aug
- 2026 07:59:05 +0000
-Received: from AMS0EPF000001AF.eurprd05.prod.outlook.com
- (2603:10a6:20b:5d5:cafe::51) by AS4P191CA0004.outlook.office365.com
- (2603:10a6:20b:5d5::10) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 08:03:01 +0000
+Received: from AMS0EPF000001A1.eurprd05.prod.outlook.com
+ (2603:10a6:20b:28c:cafe::8) by AM0PR02CA0127.outlook.office365.com
+ (2603:10a6:20b:28c::24) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.17 via Frontend Transport; Mon,
- 17 Aug 2026 07:59:04 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.2.85)
+ 17 Aug 2026 08:03:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.2.240)
  smtp.mailfrom=nokia.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nokia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nokia.com designates
- 131.228.2.85 as permitted sender) receiver=protection.outlook.com;
- client-ip=131.228.2.85; helo=fihe02smtplvp01.emea.nsn-net.net; pr=C
-Received: from fihe02smtplvp01.emea.nsn-net.net (131.228.2.85) by
- AMS0EPF000001AF.mail.protection.outlook.com (10.167.16.155) with Microsoft
+ 131.228.2.240 as permitted sender) receiver=protection.outlook.com;
+ client-ip=131.228.2.240; helo=fihe3nok0735.emea.nsn-net.net; pr=C
+Received: from fihe3nok0735.emea.nsn-net.net (131.228.2.240) by
+ AMS0EPF000001A1.mail.protection.outlook.com (10.167.16.231) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.3
- via Frontend Transport; Mon, 17 Aug 2026 07:59:04 +0000
+ via Frontend Transport; Mon, 17 Aug 2026 08:03:00 +0000
 Received: from updev-hifix-1-5g.devops-fwk.dynamic.nsn-net.net
  (10-175-3-186.he-pi-os-dhn-100.nesc.nokia.net [10.175.3.186])
- by fihe02smtplvp01.emea.nsn-net.net (Postfix) with ESMTP id 3EB4E800008E;
- Mon, 17 Aug 2026 10:59:04 +0300 (EEST)
+ by fihe3nok0735.emea.nsn-net.net (Postfix) with ESMTP id 6AD682360A;
+ Mon, 17 Aug 2026 11:03:00 +0300 (EEST)
 To: sjg@chromium.org
 Cc: aaro.koskinen@nokia.com, antonio.borneo@foss.st.com, juuso.rinta@nokia.com,
  me@ziyao.cc, patrice.chotard@foss.st.com, peng.fan@nxp.com,
  stefan.roese@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de,
  u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH RESEND v2 1/5] watchdog: wdt-uclass: report effective
- timeout in start print
-Date: Mon, 17 Aug 2026 10:58:58 +0300
-Message-Id: <20260817075858.2219899-1-juuso.rinta@nokia.com>
+Subject: Re: [PATCH RESEND v2 5/5] test: wdt: add a test for max_timeout_ms
+Date: Mon, 17 Aug 2026 11:03:00 +0300
+Message-Id: <20260817080300.2382982-1-juuso.rinta@nokia.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <CAFLszTiE735wxfGe=nu8rFJn1a3tYOJYa6vjOUeDazuKLCKyPA@mail.gmail.com>
-References: <CAFLszTiE735wxfGe=nu8rFJn1a3tYOJYa6vjOUeDazuKLCKyPA@mail.gmail.com>
+In-Reply-To: <CAFLszTi1U9=XihfqRjqMaGhL54d00ux=zYjcfUuk0GX7LLpU7A@mail.gmail.com>
+References: <CAFLszTi1U9=XihfqRjqMaGhL54d00ux=zYjcfUuk0GX7LLpU7A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001AF:EE_|PAWPR07MB9577:EE_
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001A1:EE_|VI0PR07MB11035:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: dfa31009-c5b4-44ef-e243-08defc356860
+X-MS-Office365-Filtering-Correlation-Id: 34475709-08d3-48b7-0aa0-08defc35f524
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|23010399003|82310400026|56012099006|10067099003|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 80iVQANZUddn2tzLqzC4r/2EI/sIKyU8SKcFj3tb+14KATLXWGk1u+x2CUNkGvzz+ZExS84DE58xbowZo6ywCe441ETrx/OJWhLsFmlos9rIgmZqjtd0rYViHqjBPQBhkCE7M2z4idGp02fkMToituPV1EilrHYf1pc8vhCDdBZ/5ckrfMBUc5ECfuwq70MXApDasb4U9NQ6Pnjyh9ZYUTrdpD6FO5vvR4R7ba0DnCAKLY+P/OBJJXLXEINWffQLqM5XiYN4UDO9/8kNmE9jiM9DuIwlcK+jQlOcAe9uHQ7uhNZWciaH/hae5xlzWg1c7ZmDs0FaE5+PdH1+eqM9YDqG7b4VNxYYz7fOojmwYZIpXJ+1mb6HAU+YwR0M71Z7gJ2rO1TiqhsxgFHRse9/ynf3RhtVZL4H+2Ef9/EXCTTBhVF1oxN98jDK6v2/8HCZojChchbmPTNkPqGwLsf3S3mEFcFN2luf/1b99znctK+qjIFwjF7x19IdGdWECI01qHE0MQwJ88wIkNE8iJiLlS8yXlsLeXHErFqE4aNhZHolTlWvEGgBNIQusY4nyyG4EhZZBOnXexAhgueq5GviBQGpv43hvCZMWIMWHOPuBYeyEOBSBbbRusE1TCcEv9u4VLqWCHzGMroxOFK+eLWYX37heSpaDLgD2Z1x0RfvEFfEjS4YUBijlQCuI5+ivhK4NgJmcFatI3v0fkVOdTfsVQ==
-X-Forefront-Antispam-Report: CIP:131.228.2.85; CTRY:FI; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:fihe02smtplvp01.emea.nsn-net.net;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(23010399003)(82310400026)(56012099006)(10067099003)(11063799006)(18002099003)(22082099003);
+ ARA:13230040|82310400026|1800799024|23010399003|376014|36860700016|22082099003|18002099003|56012099006|11063799006|10067099003;
+X-Microsoft-Antispam-Message-Info: vruKZ9F5XEePHtvDq8lo8w5HPUhjjPEXg1cT4LIP6qsomeo+YIa8/m0+v3JWdcOYvPfzHNXsWiLlx8SOyEhdn8+TrVSqAenAFdpFaJoTzdrt10Tnc/6+/gVP311rsdaaUZd5UOpBAmB0lXGQSWk+dAvpmLz+2FozciIA2rM3LHuIt2QDW8Rhl0HR0jBdhDMuotq/KISRv1YF0cGyHc+e7ZtQdIMhGLI+RI8jKqTQD/jnuO04R/iu8zpndR6JDDDzcvYst7s6yVIgvvIhgQPSjuLqMT4df7D5apVMRP635oOtDJ+3SEHZe7EQNB+iEVHEVtZiyCVsd/yRkkntmsg46tnG0Z/PN5oyGMM6V0rUItBmNjmT/6hJXSGUWLHx3ErC5hbbeQLTECnkOoeqp/cjXWJ+g3thHPtusaAlRqbev9ci+GnIKgjJ0t5pmg9yQuy9jmSw5klWHdA+PD0VmiI5sI6EtL1YxBu1mUklclYjf4vfPdNLCTf7MBURzI4Nuu1FAWRIpvI7NK6K92x15jjriEXhd47I2sV/q44G3h73EXGxDX35U6/CXoOflTmlPwmX8Vd7tbxaRV/R+3VAus+x16/UEHlaTFt6I4x0kFM73YOx4zRq8ww5vnVwinyws/KftVZooZ/Bn04md6eum86B9nvugmsZ9FG9I7luGnocb17QTmErOhSRqSpzMbp1kX5wcFMQkndVvDxrAPC8Jervxg==
+X-Forefront-Antispam-Report: CIP:131.228.2.240; CTRY:FI; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:fihe3nok0735.emea.nsn-net.net; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(23010399003)(376014)(36860700016)(22082099003)(18002099003)(56012099006)(11063799006)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: YJN2IyZH5eu1DtJXEtEjnETswSlCIzP85xJpgdywgtscmQJUjxrjhVj7QleNS2qw1CI+FisPakHROvRElMYGFY5sorEoC+jupe+n/KNUg8r/0ihdv7mNeIrEgYij075ePMqGezVfYbhXT/Vx/zVBl5cCumF5CEkT5ptVkruDGUXNaTzx9E/TLvKOwnlHmx6V4s83TimLE+JjkQ1nFnvOIeQKlGqAJih4mezCxwJoAOKglSUbJQTpFE43eP6UOgfUrn1FMSkVoPXClI8523E18sYolbTy/yyztUdbHUzKIbWfb9kHg/afpiR2wNFSPoSXP9k2KullMQYW9Rwpi5prJ+eGawRkilYqYqQus0dot1N+YGVaFtdKeCBTzPSE0SECQ33PC1fFKAyuH/ALvY9OQHj1MfKaCbrMFMdAc7mI/Y799gCT8v7gMVV4Ck9OeaWd
+X-MS-Exchange-AntiSpam-MessageData-0: MQ5DFsD1tbWk03KhdQk959oUyGcJ/qerLKMKWeUCjJInI/3/Qg+ZyYnlveNDUIbYIeOE68jh1O5hfqsYYMSMnpkJTtl9lRN+Rcg4ge58rgOKSp2cWrBVvBYad4d7v/94h4TnHcjtg1XXJwaOSZ6waQZToxd4+cijmBMCewXW7uohIS8CWqSWh7qrDA5ru1/CjztqpK8efmwycSvKX2lx9NH0RkPKPzru3rm9R5LdaL98uqqLA0ArLQ7Y1hn/npNqgw9jzsk5c5VzjU+5Mjt+y4aWQj9Bg7bPijVOYI5JKwoTK2sEbl5VINXKlafbeUQDbliLwwN4MJKB9kIcdbEkPhdIqWWx9Oc9cU/QKAHht5xE+GVh+9lTd++2tykGgxJ6EZeyBya0kcZHhZga+QFtt4XmVBynkGfSM+luupfhzGQJJ/q/BGeFD8ci+0RLBr48
 X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 07:59:04.6877 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfa31009-c5b4-44ef-e243-08defc356860
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2026 08:03:00.8472 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34475709-08d3-48b7-0aa0-08defc35f524
 X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.2.85];
- Helo=[fihe02smtplvp01.emea.nsn-net.net]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.2.240];
+ Helo=[fihe3nok0735.emea.nsn-net.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AMS0EPF000001AF.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AMS0EPF000001A1.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR07MB9577
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR07MB11035
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,8 +145,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 Hi Simon,
 
-> Normally a cleanup like that would be best in a separate patch, BTW.
-Thanks, split into its own patch in v3.
+> This helper reimplements internal wdt-uclass details (the format
+> string, the "every %ldms" text, and the hw_margin_ms / 4 calculation
+> from wdt_pre_probe()). If any of that drifts, the tests silently rot
+> rather than catching a real change. Please drop the string
+> reconstruction and either match against a fixed literal...
+
+Agreed, v3 drops the helper and asserts a fixed literal.
+
+> Sandbox does not select
+> CONFIG_WATCHDOG, so I suspect the ut_assert_nextline() calls below
+> will not match today.
+
+That would be true from sandbox_defconfig alone, but CONFIG_WDT has
+'imply WATCHDOG', so the sandbox build ends up with CONFIG_WATCHDOG=y.
+ut dm wdt_base prints:
+  WDT:   Started wdt@0 with servicing every 50ms (0s timeout)
+v3 will expect that line.
+
+> The clamped case only exercises timeout_ms > max_timeout_ms. The
+> uclass code has a second branch, the sub-second difference guard, that
+> suppresses req_str when the whole-second value would be unchanged. How
+> about a case where timeout_ms is greater than max but rounds to the
+> same whole second (e.g. max + 100ms), to lock down that behaviour?
+
+Good idea, will be added to v3.
 
 Best,
 Juuso
