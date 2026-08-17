@@ -4,118 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2633EC5DF66
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 14:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF4AC5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 14:26:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 020A580EC5;
-	Mon, 17 Aug 2026 14:18:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 47E6380F14;
+	Mon, 17 Aug 2026 14:26:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id egfj-wFXuQ-n; Mon, 17 Aug 2026 14:18:39 +0000 (UTC)
+ id n50mw-oHri5b; Mon, 17 Aug 2026 14:26:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BD2A680EC4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6847F80F09
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786976319;
-	bh=lVH2Be5od1rYcYPDNlTNOrhm/I41NBcrdbl1ww7OYwk=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1786976796;
+	bh=ED6DTI8Mc1tSjT5ouW1hNNYK1SIXi4jnNPqqFKf6PCM=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=S4RgvzWMgZFUB7Aj2dAqbGz2d3J2ItqVnqXUPOsJCCdu96sQNjJj48qsqQ3qOnrYs
-	 Y+kyx05Fdx6JEwU7UhkMa4XPMKm6uuyJmxlABHv6WKU8f08lXJ+Rby8eM8J4/TzW6w
-	 +pABcW/4bt3S/wflMFL/R3OB2RrpCdCZcubFlEepfeg2cbDy0FkoYFWtccsIFv5mh5
-	 wIPMZoDvYLcSzREhYhHUujbCBhdcNaMNSvX1VsBP/j2FVJeQpFSNal4gFkDCyeitjq
-	 VC7C4AWDoNLVO9jEIhETkoM13db5t86aGwE2dgB1BKApKQcO6myY/atfqFFI4wITfX
-	 t/ID9wtXo5a6w==
+	 From;
+	b=ard3WN2SLFTE32alWebaKlizp4m+7rf3NRTlJqgvf641LRWrNdOxV6Ca+5re03gix
+	 BxW+qA1QENW/rrAzarD6NC6KulX+iB/tMRLrBcug0eaDoNMYX08Q4Fe9tVticx8sKD
+	 xLBREm/wnUzFgUK0bjFHStg+o5yUADJncv4h8WhXwHx9N8MDZoq0IKF9UpOWJW3sst
+	 ZJ/ZydJsS1FIaZMJYhVPPpjiYAkmp3saUZn0OkyN4BzB4jLuIL44IUb+LVL2kvq9Qk
+	 WXMBd4Jmkr0hl40GTI9U3KRJKJHq5JMLCAqhUxP0xoDnOaToiWDDJ5FwRkyto0QGRC
+	 Y5A82XWysgnTA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BD2A680EC4;
-	Mon, 17 Aug 2026 14:18:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6847F80F09;
+	Mon, 17 Aug 2026 14:26:36 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 86EA0147
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:18:38 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 41B95282
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:26:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6D6E2606A9
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:18:38 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2756C6072A
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:26:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IYC7TqiU4zGp for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 14:18:37 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b131; helo=mail-yx1-xb131.google.com;
- envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 53EFA6069F
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 53EFA6069F
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 53EFA6069F
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:18:36 +0000 (UTC)
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-66c711b7f2aso5059218d50.3
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 07:18:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786976316; cv=none;
- d=google.com; s=arc-20260327;
- b=UcaDWqc+HNiibbwUyLmhzRLDoMLntCYCZtwB3mEw3kSlEaJVXI1V51egHHd/cmrxR+
- tvoqb2kDV7+6zK5BoYdZ2DZ2170XW/HnG0cYhIw2cjgGnsHdxIuS7SN33K2cvd+cGnLe
- cv0AtQLAe0nDLtK8nu12TcYT4z2Hbp03YUSQXiJmI2wnr3PcZdm2zOxnJKqfspT+Wb+b
- 1zEBCw1ilEfsU472wmTKWaB87s0NnLQ8+jBPf0eFEYYQRJfvrIpkVhuGXPigT6SbOFvZ
- e2mN0eV44uJrKYYKICySJiu1LXExIBwpJySQs9v4Yj4C7cs5cUDNg/Ghz6u1fPU7dobY
- oEiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=lVH2Be5od1rYcYPDNlTNOrhm/I41NBcrdbl1ww7OYwk=;
- fh=xa53t6eSd3qJViWAK5PzgTCOh9s0VmebQL9hVAwhHEI=;
- b=rMUOYY9oKMmygqdq/quEe8tiBOfi5Eyt5e23mSGS70kyM1rQp1YkiMfV+zdLvbLK4P
- SEKY6w/RUqZBLzUSyfYA6VKlBh1lCHEOQdDluKEJ+D+ICEb8S/oT2RTRIOcpcbB03a95
- qAb2NmshdnUnLqjiPXsbHtDBnan7yV84Q6ZKcsbt15K5mU27Zd0fr0YlCRGJTpzKikOA
- 32OTKCmUN5FnRg7Uy0iOHUQxASnuN4kpq8KYTm7SDIF9PHRv5dwrz+ViODRn7JZOdu8R
- SD9C706EKfiLFJ68MoH46Lw0PRkKLqZ5/hT5P+63mwJ5wTb3yFkCScxcEKZLZGGaB6AF
- +7Dg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786976316; x=1787581116;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=lVH2Be5od1rYcYPDNlTNOrhm/I41NBcrdbl1ww7OYwk=;
- b=ZmovpOOrbNMcuf1Z4cOT3CTZOCq6MhkEH1hOmwXNv+Vj53xePbHGw/+4ksVl3v5Tl2
- aNbNFnPZKrVvvFh6/qgBWGwVUuspSQq0iqumWdn3zRdMp+MZVnV5Z7IRKABmzyziDq5e
- lJkpdf0kK7ZV2Lbr9c7YJPS2PsgMUb7QKetcqqFrXVcVhOURi9eKvQ4GLIctNyPhRcMP
- 248UsrNBQ2/DQ+hWK+0vUmvk5BisuwbA1yR9O0St1rb2WibANJ/qU0ONQzo1uUvPNkMb
- 1/jGytQoMUXnWviY4w7a9IlPf83RLPeUlIBK0UdY0yV0WW9nwF8Qhra1aHFB3NZVAAUt
- TiXQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrSTGajxDIrPygE5DcbnkoY9cArYbX26LhZpXrH+lBoWdLtonibJPuIKBd5vkIUtQeYEbUIkBg=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxlJEPVbPusjeDd602D3t2tEQI+nHdpo6+ZwpUjrr698peE4Uq0
- X2aQqNQieiXWjsBCu4xXPUB2Te+lNAMsmCtT3WYkc6CSggib7mBSQCHYO676242DemFt+mAqTMr
- H/5SHfz9wZa29VknTVXx7gZkBp2x3yxzutSkGLdQLDiGvTEINdsfGvPU=
-X-Gm-Gg: AR+sD10XF7DWOFRtl6aP6DIiEJRg3HLz/RZy6I67vpEh39kItKpOcTOeXKOmnUDJNRJ
- 94efRgTjnmujFemHHg5kSnDMA1fTiX/ti4lDkvQrIAN1qyp6mQu27wXnKjahsY+6xNSO1LGyAu6
- y2SSqpXaWNRIdFivdg1F4Pv5DZlZnPsdVi0Go72mRMYtvw+wnjvWl1V9l6FjDQG9zLsaMnu4hId
- bB4z6NlpEyCduDFcVDXDcKKOoOa0lIS4PidzWAvJpCaERiX8EzdvD4sSNz7tVi7cntwbFTgii+t
- o3pBbuZO39dAcfGhT4bZiqU7H2sm/CIOZFnzdwbUALechGP/ymAT98aQtFAb1PfxnZRjGS7ajH4
- =
-X-Received: by 2002:a05:690e:1913:b0:669:484d:fdc with SMTP id
- 956f58d0204a3-66cb9e43bf6mr328955d50.30.1786976315647; Mon, 17 Aug 2026
- 07:18:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260803-riscv_iommu-v1-1-793cfa421ab2@oss.tenstorrent.com>
- <rxsu6crqaqxylns2vw5trz4fzsis5w4j36ovh5u2fp3ajj3k2o@oolpt5ilpoxc>
-In-Reply-To: <rxsu6crqaqxylns2vw5trz4fzsis5w4j36ovh5u2fp3ajj3k2o@oolpt5ilpoxc>
-Date: Mon, 17 Aug 2026 09:18:23 -0500
-X-Gm-Features: AcwNN1X1Q8oaE6ejvwCA-FsWpDKuWxPDTOYn_9SYkuqgbCwf8UIqa5f8cjTztEc
-Message-ID: <CAEev2e_=TojrBbrfD0ZTEGJvGS7XUA44ZruOL5NfUPmSHE054A@mail.gmail.com>
-Subject: Re: [PATCH] iommu: Add RISC-V IOMMU driver
-To: Tim Ouyang <tim609@andestech.com>
-Cc: Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, Leo Liang <leo.liang@sifive.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
+ id RYKkMboTHde7 for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 14:26:33 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.12;
+ helo=sender4-op-o12.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 3F1DA606DA
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3F1DA606DA
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
+ header.a=rsa-sha256 header.s=zmail header.b=AwBMQ3uJ
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3F1DA606DA
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 14:26:27 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1786976743; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=EqrCZDqtIohszmswQ8Sm63RRPWiO/caVInoDVUF3z5XgtuMF8lBxT3p/T/y02vVBlxjnNA1PbkktrhvKEPmNggd8cRZx2RqPsFHp/NMu6FlGq71+dZvP80D3HqhnrQdOrpu/qrMHjNkfKz1RHvlFQvplkW0zgWTjxEusc1gSCj8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1786976743;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=ED6DTI8Mc1tSjT5ouW1hNNYK1SIXi4jnNPqqFKf6PCM=; 
+ b=jktRSqOrtfyr7gwFAEGPvmtAu5do4hSQP0V5MPSFGIvoGvkJyHBa0yC+40nE7eUBxhIdrfrNXsdsipT7E9zuOCY52Y1DETg1mEhVCGGnIcWJjEFO6eHbJ1MeXTMBUMRwOA7cU68b4AXSc00lOCV16ZhM23+Pc5SnXAeblyt4wn8=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1786976743; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:Subject:Subject:From:From:To:To:In-Reply-To:Reply-To;
+ bh=ED6DTI8Mc1tSjT5ouW1hNNYK1SIXi4jnNPqqFKf6PCM=;
+ b=AwBMQ3uJRCUdNw8froQL10G7sazEMOaoP1BYwdeYVVQosDIwlK6eMw6Wxjmh5RoK
+ 2bNH/kX05Q+ATGydBo2PSD5qbdmOxkFAzn0/hymUgpQQmLSq9wlk4BxBvUcZ9/a/YkV
+ 57gYc5p3gtCjvnJG0zvVtuV4SFuhoAA+WoZvjuaI=
+Received: by mx.zohomail.com with SMTPS id 1786976740834828.1309380603295;
+ Mon, 17 Aug 2026 07:25:40 -0700 (PDT)
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 17 Aug 2026 22:25:30 +0800
+Message-Id: <DKRADSUN4GN9.299FCK1VIS6EH@pigmoral.tech>
+Cc: "Heiko Schocher" <hs@nabladev.com>, <u-boot-spacemit@groups.io>,
+ <u-boot@lists.u-boot-project.org>, "Huan Zhou" <pericycle.cc@gmail.com>,
+ "Guodong Xu" <guodong.xu@oss.qualcomm.com>, "Tom Rini"
+ <trini@konsulko.com>, "Raymond Mao" <raymond.mao@riscstar.com>, "Lukasz
+ Majewski" <lukma@denx.de>, "Yixun Lan" <dlan@kernel.org>
+Subject: Re: [PATCH v2 1/4] i2c: k1: fix wrong bus speed setting
+From: "Junhui Liu" <junhui.liu@pigmoral.tech>
+To: "Troy Mitchell" <troy.mitchell@linux.spacemit.com>, "Junhui Liu"
+ <junhui.liu@pigmoral.tech>
+X-Mailer: aerc 0.21.0
+References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
+ <20260815-k1-i2c-fix-v2-1-7d2a48607233@pigmoral.tech>
+ <DKR3Q808Z4E0.27KFK7LNAM3K7@linux.spacemit.com>
+In-Reply-To: <DKR3Q808Z4E0.27KFK7LNAM3K7@linux.spacemit.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -127,35 +107,68 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Anirudh Srinivasan via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Tim,
+Hi Troy,
+Thanks for the review.
 
-On Sun, Aug 16, 2026 at 7:20=E2=80=AFAM Tim Ouyang <tim609@andestech.com> w=
-rote:
+On Mon Aug 17, 2026 at 5:12 PM CST, Troy Mitchell wrote:
+>> The controller bus mode should be selected according to the requested
+>> I2C bus speed. However, the driver currently passes the functional clock
+>> rate to k1_i2c_set_bus_speed(), so the selected mode does not reflect
+>> the requested bus speed.
+>>
+>> Fix this by reading the clock-frequency property from the Device Tree,
+>> defaulting to standard speed, and drop the unused clk_rate field.
 >
-> On Mon, Aug 03, 2026 at 03:06:12PM -0500, Anirudh Srinivasan wrote:
-> > Adds a basic driver for IOMMUs that conform to the RISC-V IOMMU
-> > specification. This driver sets up the IOMMU in bare mode so that
-> > peripherals requiring DMA in U-Boot can function.
+> `clock-frequency` is the requested SCL rate, but this patch only changes =
+the
+> value passed to `k1_i2c_set_bus_speed()`.
 >
-> Would you consider adding support for SPL?
+>> @@ -496,10 +496,13 @@ static int k1_i2c_probe(struct udevice *bus)
+>>  		debug("%s: failed to enable clock\n", __func__);
+>>  		return ret;
+>>  	}
+>> -	priv->clk_rate =3D clk_get_rate(&priv->clk);
+>>
+>>  	priv->base =3D (void *)devfdt_get_addr_ptr(bus);
+>> -	k1_i2c_set_bus_speed(bus, priv->clk_rate);
+>> +
+>> +	speed =3D dev_read_u32_default(bus, "clock-frequency",
+>> +				     I2C_SPEED_STANDARD_RATE);
+>> +	k1_i2c_set_bus_speed(bus, speed);
+>
+> `k1_i2c_set_bus_speed()` only changes `ICR_MODE_MASK`. It does not progra=
+m
+> the ILCR divider or initialize IWCR, so the actual SCL rate still depends=
+ on
+> the register reset values and may not match the Device Tree.
 
-I don't have an easy way to test this. This will have to be done later.
+Yes. This patch only aims to fix the ICR_MODE selection. On the K1 board
+I tested, the register reset defaults are enough for both the PMIC and
+the EEPROM to work under U-Boot.
 
 >
-> > +#define RISCV_IOMMU_DDTP_TIMEOUT          10000000
+> Please calculate and program ILCR from the functional clock rate and the
+> requested SCL rate, initialize IWCR as required by the hardware, and reje=
+ct
+> unsupported rates. The functional clock handle or rate therefore needs to
+> remain available to `k1_i2c_set_bus_speed()`.
+
+That's a fair point. The current driver is aligned with the mainline
+Linux K1 I2C driver. It does not include your later work to program
+ILCR/IWCR:
+https://lore.kernel.org/linux-riscv/20260508-k1-i2c-ilcr-v7-1-8c2dde5c3ed5@=
+linux.spacemit.com/
+
+Porting that change to U-Boot is not a small amount of work. I'd prefer
+to keep that as a follow-up series rather than mix it into this ICR_MODE
+fix.
+
 >
-> Although the timeout aligns with Linux=E2=80=99s, it may still be too len=
-gthy
-> for the bootloader stage.
+>                                             - Troy
 
-What value do you suggest? Seems like none of the other iommu drivers
-use timeouts, so I'm not sure what to pick.
-
-> --
-> Best regards,
-> Tim Ouyang
+--=20
+Best regards,
+Junhui Liu
