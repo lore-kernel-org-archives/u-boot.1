@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19253C5DF74
-	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 13:34:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EAE6C5B572
+	for <u-boot@archiver.kernel.org>; Mon, 17 Aug 2026 13:34:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BF9CB60874;
-	Mon, 17 Aug 2026 13:34:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5124160842;
+	Mon, 17 Aug 2026 13:34:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WCY0FXlZQS4W; Mon, 17 Aug 2026 13:34:38 +0000 (UTC)
+ id iDfS6uH67C6n; Mon, 17 Aug 2026 13:34:39 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C333A60877
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6D63E60881
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1786973678;
-	bh=CS39o5Q4ieQPqWn7qoHPFvTc4oOXYIl+02TWt/wxcvE=;
+	d=lists.u-boot-project.org ; s=default; t=1786973679;
+	bh=DRM0QiLbGPOdQgxkhuQyJ5a8QJesqzzwGig/5inAR1I=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=z39VoienVJqW2UqK9a+yyK5By0SYWmkW1wt0iJoNCScn/w5/BAfxDKECAil75Hb7m
-	 mhtu3J/TA3Dn5m6C6ieLQ73nZZztL0Q0ooV+o/Jb9kh2k0/oPPbdHRn8aFwjG3CSqX
-	 Jp91XywT1YRgc/BCiRMcAgqwO4tvQaceT5EZf1XxCe6SsswyYAt2VDj/Fiy/IBaaHl
-	 A+C8CT9YiInVJcxTeoorfRSnr1lqXwG7QIiCMTugyMWdTfopW8Ee1N8MpDAZWFkajB
-	 JosvA7xpwF4TAXMlSzQWQtkwoOD+HL1NTFJWDqBZGlr26uKUK1mx98Xd9WbaPrRyMy
-	 YftJwScIYiH6Q==
+	b=t0mmSoJpE2TCDBfmRwTiN7pjhrUXbFc/077mXyltfcEz/4rjjnKT1nlHC0G/RW1kl
+	 wP7LlfZX6y7OOwdKBStaw6DQb1Om8GgUWmhw3YJSBzj3/1wydFgDyaUrS5NnbhUTVR
+	 eLNqhfGGJoz6VuPM5OtOXddTbqPwKeu3jkfkyjX0vGnb4jGt4x0HQ50izIfwXLMoyO
+	 tQQ6zT0PxeGvdPUiWSXtHl1+FwKuK9IJlKxZOQVDG4SluLBn1e8ApasyMImQzoRtwe
+	 KiyLBQtvK1jgaLWXm6edhGSYzExm44m/t63+RZht0aLFt4U7EH1lzAPW61F9fnNMwD
+	 1PSXPiNUdYASA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C333A60877;
-	Mon, 17 Aug 2026 13:34:37 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0388423F
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 09:32:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6D63E60881;
+	Mon, 17 Aug 2026 13:34:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 502772EF
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 09:32:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E931F80EC9
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 09:32:04 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 42AE9605EC
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 09:32:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AAm0YtRqjdln for <u-boot@lists.u-boot-project.org>;
- Mon, 17 Aug 2026 09:32:04 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kpMdqNY-al46 for <u-boot@lists.u-boot-project.org>;
+ Mon, 17 Aug 2026 09:32:05 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
  helo=sea.source.kernel.org; envelope-from=linusw@kernel.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 1025880EC5
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org ACA6F6071D
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1025880EC5
-Authentication-Results: smtp1.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ACA6F6071D
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=dEJ/Onz3
+ header.a=rsa-sha256 header.s=k20260515 header.b=Yh/gO3jS
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1025880EC5
- for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 09:32:04 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ACA6F6071D
+ for <u-boot@lists.u-boot-project.org>; Mon, 17 Aug 2026 09:32:05 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id CB22B404D2;
+ by sea.source.kernel.org (Postfix) with ESMTP id 7398F43D0F;
+ Mon, 17 Aug 2026 09:32:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2461C1F000E9;
  Mon, 17 Aug 2026 09:32:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A5BD1F000E9;
- Mon, 17 Aug 2026 09:32:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1786959123;
- bh=CS39o5Q4ieQPqWn7qoHPFvTc4oOXYIl+02TWt/wxcvE=;
+ s=k20260515; t=1786959125;
+ bh=DRM0QiLbGPOdQgxkhuQyJ5a8QJesqzzwGig/5inAR1I=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=dEJ/Onz3FdNrf+3OnNFQYCJ9gyG4r3LXW4iSrAAm5eEoKgx7KftSUdC1DPtBLIxbF
- vLdSzmbwGUMhBFM83oDj0NMHJjYAaeWNmL0RNCNh5ok+z1MKEXfqPhiZQoiiv2Bm0e
- KZcrTIzJL5HnlpHlWAzvB3X/Q1SKX2130lLyNl0QDkZ9zy+xfrxl+6KY9HKFtQQTZ0
- BUrLV4WZa/hay2U67qqt8Pn+ziIkTST+didu4w/V+YECxLZ2fGP6Me8QFplBA5oEdR
- vtYmwzjeXnoRMwRggzQqf6tYuDtYIjo6bMgcB5BUZBbWF8FWsywKO+QYjbdkqHYQSK
- TarzV1YLbDWrQ==
+ b=Yh/gO3jSUefyy82PHhWWEP9GaWPGClBzQ8qTKKuzTTv3Dqlf3M4SkT9NBpmLa2LT1
+ CmY+uRSQY6cMn46w3E78dfVPkOTOFY6vNmbn8RDtauH/juV/Y5XdcZ7+WxorSRNCkp
+ R8oe48L2tQMb0Unp1V9eBnSdp5372OGOvPT30rggvCrJEiguva9q2th2jquqmZEkKI
+ wtaIZ7zMJU0BnBMNAH9YwitEotd8BOgOst8nYqAjBmnGeTtSBlTQUUrZ4aWIVUYDgm
+ JRk9N5OSHD/CSZ3KmL4KKclhB7QEI+MlcA7ZHx3MRH+wBxD4U10ZtDs6IsvqNxnGVG
+ gTvTiExD4bzwA==
 From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 17 Aug 2026 11:31:55 +0200
-Subject: [PATCH v2 6/8] configs: stemmy: Boot EFI from external SD card
+Date: Mon, 17 Aug 2026 11:31:56 +0200
+Subject: [PATCH v2 7/8] arm: u8500: Switch Stemmy to upstream Janice device
+ tree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260817-ux500-external-sdcard-v2-6-ca9a110bd9c6@kernel.org>
+Message-Id: <20260817-ux500-external-sdcard-v2-7-ca9a110bd9c6@kernel.org>
 References: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
 In-Reply-To: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
 To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -98,41 +99,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Replace the fastboot-only command with standard bootflow scanning and
-enable the EFI loader so the removable SD card can provide the default
-ARM EFI executable. Filesystem probing is handled by the standard boot
-framework and does not require the FAT command.
+Use the upstream Samsung Janice device tree as the initial target for
+the Stemmy configuration. This also prepares the board to share the
+upstream Ux500 Samsung device trees with Linux.
 
-Disable mkeficapsule because generating capsule tools is unrelated to
-running EFI payloads and adds a host GnuTLS build dependency.
+U-Boot does not yet implement the U8500 clock providers used by the
+upstream device tree. Add a U-Boot-specific overlay with the known MTU
+clock rate and a fixed input clock for the external SD controller.
 
 Signed-off-by: Linus Walleij <linusw@kernel.org>
 ---
- configs/stemmy_defconfig | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ arch/arm/dts/u8500-u-boot.dtsi | 20 ++++++++++++++++++++
+ configs/stemmy_defconfig       |  3 ++-
+ 2 files changed, 22 insertions(+), 1 deletion(-)
 
+diff --git a/arch/arm/dts/u8500-u-boot.dtsi b/arch/arm/dts/u8500-u-boot.dtsi
+new file mode 100644
+index 000000000000..41eaad7f78b9
+--- /dev/null
++++ b/arch/arm/dts/u8500-u-boot.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++
++/ {
++	/* FIXME: Remove this when the U8500 clock driver is implemented */
++	sdmmcclk: sdmmcclk {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <100000000>;
++	};
++
++	soc {
++		mtu@a03c6000 {
++			clock-frequency = <133000000>;
++		};
++
++		mmc@80126000 {
++			clocks = <&sdmmcclk>;
++		};
++	};
++};
 diff --git a/configs/stemmy_defconfig b/configs/stemmy_defconfig
-index 631ccababf1c..57e794c5c88b 100644
+index 57e794c5c88b..1f512416c9f4 100644
 --- a/configs/stemmy_defconfig
 +++ b/configs/stemmy_defconfig
-@@ -14,10 +14,10 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
- CONFIG_DEFAULT_DEVICE_TREE="ste-ux500-samsung-stemmy"
+@@ -11,7 +11,8 @@ CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
+-CONFIG_DEFAULT_DEVICE_TREE="ste-ux500-samsung-stemmy"
++CONFIG_DEFAULT_DEVICE_TREE="st/ste-ux500-samsung-janice"
++CONFIG_OF_UPSTREAM=y
  CONFIG_SYS_BOOTM_LEN=0x4000000
  CONFIG_SYS_LOAD_ADDR=0x100000
--# CONFIG_EFI_LOADER is not set
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run fastbootcmd"
-+CONFIG_BOOTCOMMAND="bootflow scan -lb"
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-@@ -43,3 +43,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x685d
- CONFIG_VIDEO=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_VIDEO_MCDE_SIMPLE=y
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
+ CONFIG_BOOTSTD_FULL=y
 
 -- 
 2.55.0
