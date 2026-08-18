@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE7CC5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 09:00:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57794C5DF80
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 09:00:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CCA3B80DEF;
-	Tue, 18 Aug 2026 09:00:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2C0DE81067;
+	Tue, 18 Aug 2026 09:00:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GuhHGYxIseKz; Tue, 18 Aug 2026 09:00:41 +0000 (UTC)
+ id 3r5rgu17HlvF; Tue, 18 Aug 2026 09:00:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0A1C480D89
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 344F780FA9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787043641;
-	bh=yVWFNoYUv/LUXW8daukjhuxvCqRcsvNZS0Qo3XjbWOU=;
+	d=lists.u-boot-project.org ; s=default; t=1787043643;
+	bh=UWrFDZOn3+F0+E22kS5LIkjeUmfTy4w5AAHDhy7ztgM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bUtokNMQcMkefj9pYNBTs11m3R2VEynQ46V88wbqPts0KSfd7rpxD0TDkmITxZZ76
-	 FGaeeBU8yEoNBwWu88kQRy8hHmvZVDJfU+PoUypzet0VQY6mPXMD/cEYkhN1phuT2p
-	 pN3C0qeyV4Ust6Uay51b5sATea1V+KBrZvmIvhE8Y4qgqkVJrDkWIfyjlz2JDQHNhh
-	 PC+8b9hVPedJADc26x/HsVMA+kWKx5ELcnDa0xTa4DJkqsBiKCucZeI5EuZeFmgFCT
-	 y0lwJ/5iCY/454G5Uj4haFIRpMFpyYSLQlea9MNKFuEYduRm5vfs7iXycCvWXVfY0a
-	 +euvr4EOT6R0g==
+	b=jFTOjaicSSEJVku4CnjNl5KPBnmn/rLehnhFxEGENheo+n7eGjGskVLZOLBgvpFua
+	 rhR0OI/k3P8CeZhHHpof96ht3FFcX1GVyURB9dpEFwE7MqjRQZYFQevt/DfWfr6q/l
+	 A7AkyTVrN3W5h5dLoIG7HhvVd93Dl5UlhXX52714/ff7PFa2dcrwhUUi83DioH9WfK
+	 59snW2dGoRzbkAFYKj4AJLBHeFDruuDLVsKCZ+0o1zQJyxDYd4HTqUVLGXW68HhPbY
+	 IBhUjLDMfaWuixLkaSn2iyuZ8RXgMraMREbI8i8Ii9Wqcymmm2HN5MUy0opz8deSX5
+	 THFqiCABU6mKg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0A1C480D89;
-	Tue, 18 Aug 2026 09:00:41 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EE564237
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:00:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 344F780FA9;
+	Tue, 18 Aug 2026 09:00:43 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2BB17237
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:00:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D52B1607ED
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:00:37 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1E514400F9
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:00:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YXP5y3bQXTdw for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 09:00:37 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=linusw@kernel.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VFxr9Z3_3SLV for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 09:00:39 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=linusw@kernel.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 218F0607DA
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E415040059
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 218F0607DA
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E415040059
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=AjJq6dwi
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 218F0607DA
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:00:36 +0000 (UTC)
+ header.s=k20260515 header.b=oR/CjUd+
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E415040059
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:00:38 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 088FC4143C;
+ by tor.source.kernel.org (Postfix) with ESMTP id D25B560A5D;
+ Tue, 18 Aug 2026 09:00:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B1201F000E9;
  Tue, 18 Aug 2026 09:00:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B37101F000E9;
- Tue, 18 Aug 2026 09:00:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787043635;
- bh=yVWFNoYUv/LUXW8daukjhuxvCqRcsvNZS0Qo3XjbWOU=;
+ s=k20260515; t=1787043637;
+ bh=UWrFDZOn3+F0+E22kS5LIkjeUmfTy4w5AAHDhy7ztgM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=AjJq6dwiOhGpLexO3YTVHWDbsPH6ItOE+HaIYqptvBMI5s9kz37YFbKfQ+HgCAnfU
- PrPV4XOQALefLJ0jZ/NMAgxQlpdzJe11xJq0xpPOOkNVlAD3XDbLWDsC2UVWOppY0X
- NkrVAyKwfA2e57oPxKcsfE3+E9uy+TBdQITUIhdLJ+QIfpGnBnzPuKkN6MK41sGeDS
- OCRJ8XOaFWcoIJGXHbhdCsN7Iw+qqIGr2fP6QTijy5+qhwH2YB3dXu15jq8xfgg/2o
- lD0CN78UULlMZSnUaJ53ae+uTr4sB1AIMpH/9TWGJHWZ3EUe0YeuiNMJJMdPNtJr1U
- VXTWiQWx/O0BA==
+ b=oR/CjUd+aDx5JBkwrvnyZH0ae9KFjw867RYKDEa+PBQs2hxZ9cGikh9266jPjtNdG
+ gMDRG5SfzyRZSkBhbKYq7Yx8qjtRt5RJmwGhFVWPQ4IM9eWEp3/4496Dm5tgnrH6U3
+ fidgL1WKRka4P3SnVQuWWmAAO7R+QOvlj5KVbMHLaXIcmsnj60L41yTdX4rz9D160R
+ W8L5NNgJCx7r7Ch3BlwPg3G/+yuUSfouElSF7YWYhwKmq/qcOs5Ab7WYiEhhFcm3Ry
+ kOjvrDGhP2mI5hfqc7xXEv9GLrBh4W9+22eycHqChIBe7tpn3lsHtbQN3jlVi5hDuo
+ FMpMPmNPuPXZw==
 From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 18 Aug 2026 11:00:27 +0200
-Subject: [PATCH v3 03/11] mmc: arm_pl180: Gate idle card clocks
+Date: Tue, 18 Aug 2026 11:00:28 +0200
+Subject: [PATCH v3 04/11] mmc: arm_pl180: Set initial supply voltages
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260818-ux500-external-sdcard-v3-3-a5d94930f3bb@kernel.org>
+Message-Id: <20260818-ux500-external-sdcard-v3-4-a5d94930f3bb@kernel.org>
 References: <20260818-ux500-external-sdcard-v3-0-a5d94930f3bb@kernel.org>
 In-Reply-To: <20260818-ux500-external-sdcard-v3-0-a5d94930f3bb@kernel.org>
 To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -96,53 +96,109 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The MMC core uses mmc->clk_disable to request that the card clock is
-stopped, but the PL180 driver leaves SDI_CLKCR_CLKEN unchanged. This can
-leave inactive hosts driving their card clocks.
+Obtain the optional vmmc and vqmmc regulators and configure them for
+the normal SD voltage range before card initialization.
 
-Honor clk_disable when programming the clock control register. Also enable
-the PL180 power-save mode so the clock stops automatically while the bus is
-idle.
+The Ux500 boards supply their SD cards from AB8500 or AB8505 AUX3,
+whose highest voltage selector is 2.91 V. Request that exact voltage
+for Ux500 SD and SDIO hosts, while retaining the normal 3.3 V target
+for eMMC-only hosts and other PL180 implementations.
+
+Ignore the unsupported set-value operation for fixed regulators; their
+voltage is already described by their fixed constraints.
 
 Signed-off-by: Linus Walleij <linusw@kernel.org>
 ---
- drivers/mmc/arm_pl180_mmci.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ drivers/mmc/arm_pl180_mmci.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
 diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
-index af21b814641e..528612359789 100644
+index 528612359789..a2ea5cf03120 100644
 --- a/drivers/mmc/arm_pl180_mmci.c
 +++ b/drivers/mmc/arm_pl180_mmci.c
-@@ -294,6 +294,11 @@ static int  host_set_ios(struct mmc *dev)
- 	u32 sdi_clkcr;
+@@ -16,6 +16,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <mmc.h>
++#include <power/regulator.h>
+ #include <dm/device_compat.h>
+ #include <dm.h>
  
- 	sdi_clkcr = readl(&host->base->clock);
-+	sdi_clkcr |= SDI_CLKCR_PWRSAV;
-+	if (dev->clk_disable)
-+		sdi_clkcr &= ~SDI_CLKCR_CLKEN;
-+	else
-+		sdi_clkcr |= SDI_CLKCR_CLKEN;
+@@ -28,11 +29,23 @@
+ #define MMC_CLOCK_MAX	48000000
+ #define MMC_CLOCK_MIN	400000
  
- 	/* Ramp up the clock rate */
- 	if (dev->clock) {
-@@ -400,7 +405,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
++#define SD_VOLTAGE_MIN_UV	2700000
++#define SD_VOLTAGE_UV		3300000
++#define SD_VOLTAGE_MAX_UV	3600000
++#define MMC_VOLTAGE_UV		3300000
++#define UX500_SD_VOLTAGE_UV	2910000
++
+ struct arm_pl180_mmc_plat {
+ 	struct mmc_config cfg;
+ 	struct mmc mmc;
+ };
  
- 	host->pwr_init = INIT_PWR;
- 	host->clkdiv_init = SDI_CLKCR_CLKDIV_INIT_V1 | SDI_CLKCR_CLKEN |
--			    SDI_CLKCR_HWFC_EN;
-+			    SDI_CLKCR_PWRSAV | SDI_CLKCR_HWFC_EN;
- 	host->clock_in = clk_get_rate(&clk);
++static int arm_pl180_set_supply_voltage(struct udevice *supply, int target_uV)
++{
++	return regulator_set_value_clamp(supply, SD_VOLTAGE_MIN_UV,
++					 target_uV, SD_VOLTAGE_MAX_UV);
++}
++
+ static int wait_for_command_end(struct mmc *dev, struct mmc_cmd *cmd)
+ {
+ 	u32 hoststatus, statusmask;
+@@ -390,6 +403,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
+ 	struct pl180_mmc_host *host = dev_get_priv(dev);
+ 	struct mmc_config *cfg = &pdata->cfg;
+ 	struct clk clk;
++	int supply_uV = SD_VOLTAGE_UV;
+ 	u32 periphid;
+ 	int ret;
  
- 	cfg->name = dev->name;
-@@ -418,7 +423,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 	case UX500V2_MMCI_ID:
- 		host->pwr_init = SDI_PWR_OPD | SDI_PWR_PWRCTRL_ON;
- 		host->clkdiv_init = SDI_CLKCR_CLKDIV_INIT_V2 | SDI_CLKCR_CLKEN |
--				    SDI_CLKCR_HWFC_EN;
-+				    SDI_CLKCR_PWRSAV | SDI_CLKCR_HWFC_EN;
+@@ -427,11 +441,15 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
  		cfg->voltages = VOLTAGE_WINDOW_MMC;
  		cfg->f_min = host->clock_in / (2 + SDI_CLKCR_CLKDIV_INIT_V2);
  		host->version2 = true;
++		supply_uV = UX500_SD_VOLTAGE_UV;
+ 		break;
+ 	default:
+ 		host->version2 = false; /* ARM variant */
+ 	}
+ 
++	if (dev_read_bool(dev, "no-sd"))
++		supply_uV = MMC_VOLTAGE_UV;
++
+ 	if (dev_read_bool(dev, "st,sig-dir-dat0"))
+ 		host->pwr_init |= SDI_PWR_DAT0DIREN;
+ 	if (dev_read_bool(dev, "st,sig-dir-dat2"))
+@@ -445,6 +463,26 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
+ 	if (dev_read_bool(dev, "st,sig-pin-fbclk"))
+ 		host->pwr_init |= SDI_PWR_FBCLKEN;
+ 
++	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
++		ret = device_get_supply_regulator(dev, "vmmc-supply",
++						  &mmc->vmmc_supply);
++		if (!ret) {
++			ret = arm_pl180_set_supply_voltage(mmc->vmmc_supply,
++							   supply_uV);
++			if (ret && ret != -ENOSYS)
++				return ret;
++		}
++
++		ret = device_get_supply_regulator(dev, "vqmmc-supply",
++						  &mmc->vqmmc_supply);
++		if (!ret) {
++			ret = arm_pl180_set_supply_voltage(mmc->vqmmc_supply,
++							   supply_uV);
++			if (ret && ret != -ENOSYS)
++				return ret;
++		}
++	}
++
+ 	gpio_request_by_name(dev, "cd-gpios", 0, &host->cd_gpio, GPIOD_IS_IN);
+ 
+ 	ret = mmc_of_parse(dev, cfg);
 
 -- 
 2.55.0
