@@ -1,151 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A394BC5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 15:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9362EC5DF7E
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 15:12:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CA3B260902;
-	Tue, 18 Aug 2026 15:12:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4D4964089A;
+	Tue, 18 Aug 2026 15:12:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E6ZEfTjudTir; Tue, 18 Aug 2026 15:12:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lH_SSLNjaTHz; Tue, 18 Aug 2026 15:12:42 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A6C99608F0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4E3AC4089B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787065925;
-	bh=siJwourR2EAL0L7fwdrPGfB1mSKjfi4lPGef3zqlwgc=;
-	h=From:Date:Subject:References:In-Reply-To:To:CC:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nymBn4BfPQwsZbQ0Phn9btEK78oWfU/zYWaXpZbzUA/ukqQaoCN0gPxdYJkEqlKx4
-	 YdGVS0LUBtx85pvA5wKfIZdnNDEFFvpdqD1nXulUijkCRd4copslPO2DgbBS6LOcQY
-	 +w+qxWalI0embQYhIRXBi9Ch7ie+aGMDl2UWqUiFrzVgsuVDXxPfVXevQlkqknHZno
-	 lVzzsdPd9Oeo6McLhSc/qcJ6nFTKlSfGYJLXSoHf5Li9cZ4tB1kQ3Zs5/PRKTU/tKD
-	 qoTWUeASDme6Vzxi6/I0/XO2QnmrQ3r1Z1a2iAGSQHIheiW+4M8egtVDWBK2kfkPJR
-	 zTg2dykGcm9bw==
+	d=lists.u-boot-project.org ; s=default; t=1787065962;
+	bh=joYyyzRJcmmpioWmcbmKTB38ZaWcDF0fa66QTYb7efE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=h/KdJbqHjTvZlW3tD6OOZNg4YoN6w7/l8IgTEadt9LePmSeEZZ8esRqr7jeziG062
+	 A4bT6pkghPHssjOVmmjc622zQO8NtbC11jqOwteN5hrDVZAD5rxBN+X1ytWda+WHKU
+	 cxpikyJFuLUeDF/1RvWIhtcMlxbb9Zd6K+MNbTLWHWbWJ+bccpobMgngj8LXBEQnFj
+	 Oae+uBZ8AJ9cQsSfhtR6lckK4Q/K6X+9LXiDwig/+uuUtljfjHoz7QX0rWg5v2fIoo
+	 mMHBWsqZB6YYXidY0uYefevo0ZKFj0xuGTlcCjcupL5eWR4GL3V5SWBml65vjRi+dV
+	 LyxHCp+FyXY5A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A6C99608F0;
-	Tue, 18 Aug 2026 15:12:05 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9368F322
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4E3AC4089B;
+	Tue, 18 Aug 2026 15:12:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 31443282
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9134780CA7
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2E6D64085E
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FoeKV57jJnxI for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 15:12:03 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iAhmKziSLFa5 for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 15:12:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
- envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 726E980C66
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 726E980C66
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
- header.s=selector2 header.b=JRSoPzW0
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 726E980C66
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:03 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DEOTqc3xsdTujvHb9fR23NuBVir+Hu9dBuFJ4JDM+lAWuTHu0p6fdAMyCSmOntad+bWQolYo4gC/CSgaPKNvanUR9PtPn7yJCH/8YBq6EADvX40vx7kkz3euPqNCRJLpf+fYpNaaOpHl0xX0h/QPCNg6U3CcPo4eQNCnfY+zr0KgH1VzNJFJPTgKTJvjep81id/fDB8obL2q2F6R1xmO6RdPIT3StXNIZ75Vw5HvvS5I4+Q8XeBg29yVoiPBBDu2CQj0SjtaozeL7iQQwXrBjrrVvMiUaXmRiYkf5Infvo+SA2iByAR9ixO1WLjXlu6i+VXT1wL0rachfgkmfJZl8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=siJwourR2EAL0L7fwdrPGfB1mSKjfi4lPGef3zqlwgc=;
- b=mZI5YzUSU2Rz34cDAVfBTA8SzsM6wAcGJfjBAfkbAk43X8LlOTFBZsJYUbBkKmuzCkeuPJfJFV10qh8QqJOtECN4WIDz7840Oi6kKCM+wfDfkaOGBgNvWFtzaYNTpbyGufVjEG2BCAJu8Q06hov7YbiVMi7NVXnwhLqPALoSaFloWsm8fQfj1iM/l7wGyOfvK4N1gHW7EH9YmM+a7vFIgh8uGk604h+uSYgjUs2Ne7BUoyOZNLqkld/IEkPLXtLy15KCQ/IuP/ldoaBFyDjflaq+mBWHV15P6RDTmiVNid3Cq8kCKmMrhmDHDFiuf1fszJ9wjPe0lh2KpVHmFWjXJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=siJwourR2EAL0L7fwdrPGfB1mSKjfi4lPGef3zqlwgc=;
- b=JRSoPzW0SeD7TK2QVMeEcLr8ck63F4tfAI8yDejllgaudv4gD4RIvXBDKwOVtEZAnkMWYvyaW3q7ebVd/0/MBNyAqFCZhMG/uj1QbRHW4q12XK4eiwLyclTX5QVnuaVPeTYCr5JaxeJn0YW4YDl8ONDAyt+3uYYHZDXTUq3gR9Agn9tXWnUhZrWnEL1n8bzA24exnK337K5ohXqBLhtqzeghC035HqZalI4L7A/c7ha/uToQcQNEdbTZ85mCiy/x0QDeDsL/DAKOEp2Clu438Y+ialmjnPFyMqkmOFPEAlx/Rftzn1cttsjtHcQ1vIN+f/56vZEoUp4XAk8aDt3Ffg==
-Received: from DUZPR01CA0239.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b5::28) by AS1PR10MB5413.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:4af::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Tue, 18 Aug
- 2026 15:11:56 +0000
-Received: from DB5PEPF00014B98.eurprd02.prod.outlook.com
- (2603:10a6:10:4b5:cafe::a5) by DUZPR01CA0239.outlook.office365.com
- (2603:10a6:10:4b5::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Tue, 18
- Aug 2026 15:11:55 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB5PEPF00014B98.mail.protection.outlook.com (10.167.8.165) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 15:11:55 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 18 Aug
- 2026 17:16:52 +0200
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 18 Aug
- 2026 17:11:53 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Tue, 18 Aug 2026 17:11:51 +0200
-Subject: [PATCH 1/2] ARM: stm32mp2: fix TAMP_FWU_BOOT_IDX_MASK/OFFSET
- definition
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3E5D94080A
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3E5D94080A
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=jxA+HUig
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3E5D94080A
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:40 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so48464315e9.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 08:12:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787065958; x=1787670758;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=joYyyzRJcmmpioWmcbmKTB38ZaWcDF0fa66QTYb7efE=;
+ b=jxA+HUigoy1OvOLWy/PTJkVTPu5l0PfmQjbc0xv5wTXBNk6+pBTU6ESg7VSMmW1UJz
+ +2XBCUe0pIy9eRvo4dUKJDLflS6xsYcCIFrPPLiEOUexsZ7zuor++qlOq4EA7gz94O1H
+ 0hjNnQ8/fZKgTsM13KHTf7vzcVAC/tN+IayKWfznE58rfCWWi4x4FT18FHAc1xnyDDKh
+ IHTkHt6+fayTNPLATeHYCBeoGAf/FNrIiWMbvFwa4s6RNe2ulM2A9UWS12PhimXDh5PK
+ PD1eQAV/nG+ZSKuMNkcj6vNm3wD0JaWvUZ/g7qC92VHEKoWxm8whOSgTrqiapVV30Wxd
+ b5+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787065958; x=1787670758;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=joYyyzRJcmmpioWmcbmKTB38ZaWcDF0fa66QTYb7efE=;
+ b=SGldzw27FkIiJHGmL/+C0tkkX6aFoMjjiwMDLfvp7IukvKWJGtJDJsvkwQg08+/F4q
+ EZEUFqqdPzjMB7837PeBKw0hGDDXPM5Yzh1f1+sWXmf/j54jj9g/OFobOJuqcYKglvOS
+ jyZCduSgbDcruQ9dNHQihzdUzoYi45JzhYzS18sohhDtkreIzJqgHlDCM/aA7w+g5D9o
+ 1/e6H9JLzR47kQmAsisiFSUQr5QATmRQ0Ci+pPUCjwK/M1a5E1Q/8CMZmvhGGsPMTZYg
+ q30r/6wF1aOZYP+LEWkUBvaELaigcJE920ac25+84x+QaJtluPFSMbSwxAQChKGwNz6B
+ OtOg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqC8TgyaH0hwg3FShu1zDpNEL8RZAH8xog3vvskWonlfQAcjPJY4lCdVViwu3cryJVBgrUu8Zw=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwFYtc2UgqXfKrumxngFm67JGOfJK28oK/FF33EzbcpCRn4tTIz
+ IFpf6oDjOWi+TUJZrQUemPy3KGA0qU1gabnY5ibb+IjWDBRYdbHlYDpk
+X-Gm-Gg: AR+sD105SMqR+CtQLNkYvYHkOGrnrgsHlzl1fwSyKp/3bPCP/Z9/IysYGSKEIV1z2Ea
+ Xo/9nyz+LaDkJ07j0ieGKPo1vg/tQ7ckz6gOC/dSWmdfKQ9AWZXQscSpO9CKCDMWyf+/+EuhXpB
+ BhpQoMAhUeRDmoUIU5ler7COU1cP3T28plFmWuyltpBbLBQkonGBY0bdDnJRw8Cnd8Jo2k4ZscQ
+ EoOrXUBB+pMSRIppGhJSK9SJg+a9FGa2hcOjQkEf+JSCJztevIA7p/hLLqpDKXwUFu31Aq1hDL9
+ WXuc0R3PIs1HEusXIbma9VPzz4uiO9A97EpOiFPsDgoxu82e/fd/9HIG4gS4z8CTXH75mNZ9ohH
+ w+eLZowyRrzXw6tUY6Eh2+bqFbDt4Feu32l/xsLnMxWMXbqrito0f5tVsYu1KmEZXEB08EI4R2b
+ PEfHovmbe0W9RPOzhyDlRLgSB4+xLnyjElD6NQx/z7LisF/VCKiHlq4DArASUy9acZqO0=
+X-Received: by 2002:a05:600c:468c:b0:495:52a5:8829 with SMTP id
+ 5b1f17b1804b1-4999fb6d4d8mr133481705e9.11.1787065957917; 
+ Tue, 18 Aug 2026 08:12:37 -0700 (PDT)
+Received: from deb05.proceq.com ([213.160.61.66])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482a5b7840esm11543237f8f.29.2026.08.18.08.12.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Aug 2026 08:12:37 -0700 (PDT)
+From: Mehmet Fide <mehmet.fide@gmail.com>
+To: Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Mehmet Fide <mehmet.fide@screeningeagle.com>,
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
+ Stefan Agner <stefan@agner.ch>, Francesco Dolcini <francesco@dolcini.it>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH] usb: ehci-vf: take the controller index from the device tree
+Date: Tue, 18 Aug 2026 17:12:36 +0200
+Message-ID: <20260818151236.2891878-1-mehmet.fide@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-1-611201a282ce@foss.st.com>
-References: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-0-611201a282ce@foss.st.com>
-In-Reply-To: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-0-611201a282ce@foss.st.com>
-To: <uboot-stm32@st-md-mailman.stormreply.com>,
- <u-boot@lists.u-boot-project.org>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>
-CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.16.0
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B98:EE_|AS1PR10MB5413:EE_
-X-MS-Office365-Filtering-Correlation-Id: 81879855-fec7-40b2-d5dc-08defd3b0a5e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|82310400026|36860700016|1800799024|376014|11063799006|10067099003|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: zZXCWuiQGWVwebfocOsy3EM9NObZj78SyXB/LZm5WCnT5wjhaCfa0Flxq8ZQwckMgRB7wCca5Ec/of6F6efBGYw08B+87AgB0mzI1XumqgwqUYcVQIR/H70hspNBOtajwVRXMA/qHb/y7rFgDirnUa0oKfq5rxwFC/BKORJlc16nHGYFXkB3TOblukqwYtFDtbecwV2KPfC4pnYbGvaNpGvsUO+iH9859Lsud8eL2repvv8TEvYD41i9OFBRAB8gpoKxd3qjrFLSuL4rMY+W2nwZ+ddzAJhE16/i5w8yUTWyazlx5b7zB4I14wyMpPz6XBzM83jzTMslzzyJKQral1ryaDxeVnPcqeRVPrv4ue+F+oaS6d236QkSAxzGlNmdm/zivAEvC3JuZA7P41MgJfuYAGVV5SYHgL8alQtfK06bxXxZIGWJw10wI4ffI+OYYa6lydDEZB7fLXXuk3JdWI2je7ffd3iik0FdYT7z+t53z6tzQ5EGL6HSSCbeIEvX1wac6Y+AtjsmtGYTQZetDHxYevjewRoTOrr8l1PS4m8dxW3mpbuHHZUQ1ssdF5USgC/aIV2iRsk5OTPGksS6zrNBIv87dicFWSBm5oKHJSBgsBZ17LdEEpWcBbc8cjT755vuS1+/2B/ZVuhgB4EYRr1ccaLPqgwNzAOQKzrLXmvhzkGzDW1uBFfrUwp4VDxH2Uuct+Ajkvyawa7e95UwQQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(82310400026)(36860700016)(1800799024)(376014)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: v7OEChy+WX+QMovgLnf/1IUieqLR+XlMSlwUd7x6jhy1nDh7/3kk5wXuucLMbabKMGfjfYtVmF+zYWLttG57FntwBDiIH4HBi3+IWydMnghH63Xz2fgKIkp/GTi5fr7JoQKELFszH2v1HS9racU+1+aXBtXOah0ZJ4wMiQeD/C8/lcfty5WJfbLr3UBic/7R2xqhNCK4b1OhpIbq5NNguCFpRgxGrbrMiYh/Y1b8LmhD1qjhS9pL5A9sh5QdOHexBTdJgVEHO5wkJCy407MdKM30+iGL0uSRG16SLpRm22GzMV1Zih2/z41+lPCA4+m/w+wNx6cT8WsDX3NINXx771ktCkrUYsqpkfaTEEanwVX2Tz5AV9vtbD0l/L1dk2UzUurLDsVRcemriXjNBL7QRvIteN56G52I5HXe/2yk+CjwQnBOYz9xBSh92B5Hkl8/
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 15:11:55.0928 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81879855-fec7-40b2-d5dc-08defd3b0a5e
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B98.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR10MB5413
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -159,46 +125,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Move the definition of TAMP_FWU_BOOT_IDX_MASK and
-TAMP_FWU_BOOT_IDX_OFFSET outside of config check for
-CONFIG_STM32MP15X and CONFIG_STM32MP13X.
+From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-This patch solves a STM32MP2 compilation issue in
-board/st/common/stm32mp_fwu.c when CONFIG_FWU_MULTI_BANK_UPDATE
-is activated.
+"usb start" dies with a data abort on a Colibri VF50 and on a Colibri
+VF61, and the watchdog resets the board:
 
-Fixes: 5166658ac605 ("ARM: stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET definition")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+  Colibri VFxx # usb start
+  starting USB...
+  Bus usb@40034000: Port not available.
+  data abort
+  ...
+  r4 : 00000003
+  Resetting CPU ...
+
+vf_usb_of_to_plat() takes the controller index from dev_seq(), but the
+sequence numbers of the two controllers are 2 and 3:
+
+  Class     Seq  Probed  Driver    Name
+  usb         2  [   ]   ehci_vf   usb@40034000
+  usb         3  [   ]   ehci_vf   usb@400b4000
+
+uclass_find_next_free_seq() starts numbering above the highest alias of
+the uclass, and fdtdec_get_alias_highest_id() matches an alias by its
+name prefix plus trailing digits, so the usbphy0 and usbphy1 aliases of
+the vf device tree count as "usb" aliases and reserve 0 and 1. The two
+controllers have no aliases of their own and end up with 2 and 3, past
+the two entries of phy_bases[] and nc_reg_bases[]. usb_oc_config() then
+loads a base address from beyond the table and writes to it, which is
+the abort above. The bounds check that would have caught this only
+exists in the non-DM ehci_hcd_init().
+
+Follow the fsl,usbphy phandle, as ehci-mx6 does, and map the PHY node
+to the index of the driver's own table instead of trusting the sequence
+number, since the alias numbering is what goes wrong here.
+
+Tested on a Colibri VF50 V1.2A on an Iris carrier, U-Boot 2026.07 from
+NAND: "usb start" now brings up the host controller and enumerates the
+root hub instead of resetting the board.
+
+Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 ---
- arch/arm/mach-stm32mp/include/mach/stm32.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/usb/host/ehci-vf.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 42e3735847a..dfbd4f43629 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -67,6 +67,9 @@ enum forced_boot_mode {
- 	BOOT_UMS_MMC2 = 0x12,
- };
+diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
+index 96d1363a76e..32fe05920d0 100644
+--- a/drivers/usb/host/ehci-vf.c
++++ b/drivers/usb/host/ehci-vf.c
+@@ -221,8 +221,23 @@ static int vf_usb_of_to_plat(struct udevice *dev)
+ 	const void *dt_blob = gd->fdt_blob;
+ 	int node = dev_of_offset(dev);
+ 	const char *mode;
++	fdt_addr_t phy_addr;
++	ofnode phy_node;
++	int i;
  
-+#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-+#define TAMP_FWU_BOOT_IDX_OFFSET	0
+-	priv->portnr = dev_seq(dev);
++	phy_node = ofnode_parse_phandle(dev_ofnode(dev), "fsl,usbphy", 0);
++	if (!ofnode_valid(phy_node))
++		return -EINVAL;
 +
- #endif
++	phy_addr = ofnode_get_addr(phy_node);
++	for (i = 0; i < ARRAY_SIZE(phy_bases); i++) {
++		if (phy_addr == phy_bases[i])
++			break;
++	}
++	if (i == ARRAY_SIZE(phy_bases))
++		return -EINVAL;
++
++	priv->portnr = i;
  
- /*
-@@ -135,9 +138,6 @@ enum forced_boot_mode {
- /* TAMP registers */
- #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * x)
- 
--#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
--#define TAMP_FWU_BOOT_IDX_OFFSET	0
--
- #ifdef CONFIG_STM32MP15X
- #define TAMP_BACKUP_MAGIC_NUMBER	TAMP_BACKUP_REGISTER(4)
- #define TAMP_BACKUP_BRANCH_ADDRESS	TAMP_BACKUP_REGISTER(5)
-
+ 	priv->ehci = dev_read_addr_ptr(dev);
+ 	mode = fdt_getprop(dt_blob, node, "dr_mode", NULL);
 -- 
-2.43.0
+2.54.0
 
