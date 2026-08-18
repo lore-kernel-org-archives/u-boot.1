@@ -4,87 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B85EC5DF7D
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 09:34:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B59B9C5DF7D
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 10:39:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8F25340762;
-	Tue, 18 Aug 2026 09:34:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6F4FD40758;
+	Tue, 18 Aug 2026 10:39:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5dWMohu-QSMY; Tue, 18 Aug 2026 09:34:07 +0000 (UTC)
+ id bO4svdiazsOT; Tue, 18 Aug 2026 10:39:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3741940660
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 85F0440760
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787045647;
-	bh=p8ErtJlJ/g13XRRnFgpKEGRc3M32mMEkB1OHE05XJHA=;
-	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1787049568;
+	bh=Qu6xNLlthSmM9yUV/NcF/2x3Ca5rRWDx/iwKAFYkyZo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gKKlWwJU3SK0uOg2XzHm47XNXFpRy4BHo8fZ/fEWhBxZI1Nqidlp+rnC4ODjfH80K
-	 PMQhyDw1NONyiIZZGoqB3ynWZDhpC1t5qMA0GOOaARzYGkwSJAPqI78mSSCQtI8WCf
-	 ai1ccfeBo7ZZtT/smCZQaz9sd2jM66/7oolJtHfs2+VzHm/73vdIoLB1kmnnyVIR30
-	 QuutPrrJCxyrPkah355wwCT37JJkJKRvvl8xs04kb4EgLwFbcBy3vALV0KCRsjkQJ6
-	 Cj4MQBJ3CHF5WXUrzM2OfbVz+fj5IftI0VWOw4L7Ej4Pn3E0hqEdCqDbN7IhOdL50c
-	 p9Nm5XExjNQ7w==
+	b=j63rnwxkimIFjVxSg2cmFgDFPVRDy8klIYNVaWH6mtF2cIcvq0RCsC7s8zcTJVyI0
+	 iISuV8xd52+t8UF4PeEPPP6qfPnxnw/F/2ZHUkHBVQ23D1omtXxJys06j+Oxq6zYzz
+	 /ejUVH3VZNZ/eDMTkc1whjdrEhAIjrFPRrO1LrNKRWHB4HjNVgDwn8EJgeMgnRB6vs
+	 6CZGcbNF7treiSDOlummDvcKRlIBq6lSYk0I9o7fam16QW6PjzO9ErnjBsC+dhymR0
+	 aYPYcH1l2aNr0PuAHGhAHPTUKrJ5KWGkmzR1RXD0jnq8MTOaJ5JssNgNsKDQ569UYe
+	 SOYfIhChLOB1w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3741940660;
-	Tue, 18 Aug 2026 09:34:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 632DA230
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:34:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 85F0440760;
+	Tue, 18 Aug 2026 10:39:28 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 430E9282
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 10:39:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 54F2940660
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:34:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 34E9C4006B
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 10:39:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EtrAC9ZFpu14 for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 09:34:04 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=79.135.106.29;
- helo=mail-10629.protonmail.ch; envelope-from=munzzyy1@proton.me;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org BB7F440608
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BB7F440608
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256
- header.s=protonmail header.b=INuYhjqP
-Received: from mail-10629.protonmail.ch (mail-10629.protonmail.ch
- [79.135.106.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BB7F440608
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:34:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1787045641; x=1787304841;
- bh=p8ErtJlJ/g13XRRnFgpKEGRc3M32mMEkB1OHE05XJHA=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=INuYhjqPel+Kt2VccN5WzgCE8VwjWrN2Ec31wqf0D/JgqWkgUGVzRXjO2N6EIyph0
- BZzF3tC+3Vzx+zj6qjnco+S+eJVyamAkM4RBgTt/+KQ9piNW2Lqs1i4vNyFSojnlE0
- 6qbSvbWelJmg0PiGBszlh3AYXA3wyGS73+D8VNp2647X5J6I3LGg4uXPXJPIc6LmTw
- IbkhwbqRjW+GOgAM17HSmqx3MpGIiPkyz0QT1T1uPf0pNyejr9L4NKCo5WjeOc5MGw
- eEW0KwvseWRYoojPL22RsmLcdWARnj6oQO7BfuBwZ//cZZ0MufGLvPNhKbjfk12Q0F
- bgDAZx6mpKUuA==
-Date: Tue, 18 Aug 2026 09:33:55 +0000
-To: u-boot@lists.u-boot-project.org
-From: Cole Munz <Munzzyy1@proton.me>
-Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>
-Subject: [PATCH] spi: rockchip: skip the unused FIFO direction on a one-wire
- device
-Message-ID: <69c35eba7ee1a353107459b8f8032e92506a3fb1.1787045568.git.Munzzyy1@proton.me>
-In-Reply-To: <CAKTNdwHMga0XG1zfgLYirMbVK8iVpWgjyr9x49sQ2ofPNu+w3Q@mail.gmail.com>
-References: <10e92a74c8a22cc2cd54f5dcccc31594016d4263.1787015208.git.Munzzyy1@proton.me>
- <CAKTNdwHMga0XG1zfgLYirMbVK8iVpWgjyr9x49sQ2ofPNu+w3Q@mail.gmail.com>
-Feedback-ID: 209578162:user:proton
-X-Pm-Message-ID: 225b042fe154a3a2f7f36c1fca997ca07f3f4389
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SfcCEHQPEeYF for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 10:39:25 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ envelope-from=stephan.gerhold@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0422C40057
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0422C40057
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=zJg/2bqn
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0422C40057
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 10:39:24 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-47f7027ca11so2725914f8f.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 03:39:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1787049563; x=1787654363;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Qu6xNLlthSmM9yUV/NcF/2x3Ca5rRWDx/iwKAFYkyZo=;
+ b=zJg/2bqn6FfpQJ+lsivxZUWaqGnbwzaq0WDBGMiwgekFYUa15v2zVEvSYQd3Y0OGsX
+ VwepU9rVQcoT63GJizmemb+QgVa8hv6286x6n5iqCx7zN2s5kVx7hxj9D4mc5UyPzmhV
+ RIxk/1ZHaYmNSD6OYYUmyyF4XmmzmUJCbdf/s0uSym9lQsfFDtdCaSpvCLb4ruxGBVUg
+ 9ad2wio30MqRjJAU3zgPTTdacomrZRsmJxHQuP+q5wtC7KFjtkjkl3IG0q7ClCY1Gp3j
+ kLI6j+IzcAkXVVf0nb9yS0okB+K+rjkpO0gE9awSqV53Fy8lJyGD1YB49VIRendwsKvX
+ n7uA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787049563; x=1787654363;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=Qu6xNLlthSmM9yUV/NcF/2x3Ca5rRWDx/iwKAFYkyZo=;
+ b=kFEEtF5bfP0+wubw5n9BOU72Ap4UTbo+/hwYSxc7DpdRUD7i8vLFpHvIdj4HkCgYL4
+ n8Jhy28V4ooBM9ES7U05F2r+KQo2sWICqu5mmNaPd3cTpEq0RQN/KbU7PwvLRPz7gK2T
+ z2BlHZusAvGQvkhVbnQXx48IcV3tNhCdKc3zQ2o12jiNGebqhLQBmsM7ePOSkcrVmoTv
+ y/EawH201GHCh3k3a56TCSZ13+lXF+Tl/+x99aXDSKkXhfOcGUlTqSXKoMYM+qOaScCW
+ 9wC97MWQTOT2YB0UHwiqAgfqqOrDUdMF9AGgnKUNgVJdBGCodTr05LmrFsESxdWllKOO
+ 8O4A==
+X-Gm-Message-State: AOJu0Yzo2rKoDam2CwmWwMmPmOLycqohk1Z9qW1FezJLbgq3yNL2bJ8U
+ WILTE3S7NbH0tudd3+8NhrT8m4OBRmOsz7HjA41Ods9NQHr8m5xwshunzLST4N6VqL2b+u0/7Iu
+ 1TeD+hvw=
+X-Gm-Gg: AR+sD10afWz5EDknaX3DLAN85Y/iUw6mVi35EGYXhZbNnZgjTK4dPHSIy+Wu7+o64dX
+ 4v4WTFYGjWJpy0FDQ1mnfkLeAEvy3dCPKSOJpyRDq/lXMdX+nA1DPxpQWKiiGaF2fVVN14pAZ1Q
+ fRWxCAm/mSysgRu0M8Ym6fWQYu4GAnECExd/s25OZ2cgRG+Fm0LtPTH78u7/deLwgEwj+KJB8Ku
+ ACVAfJuib+kjuFId3aIqkgBKn5XP7seR2wxv68X/TRnFU48UMz1f9W60WQE/rjbGbQmfHj0lZs4
+ xjr+YlwGXsD+xgEWvwmDoVPViS2xFVw0sQVYTExSlOIhnjLT2zSgcynIwZGFP87e2OWfO8ZmRev
+ R99wMKOLwQILwYCtmUJo7UGFGEms0Ay7cHjJ3LpJU837IENrBuscPUS7AeGwjDpXengwaROqMxb
+ w0kMf4y6eYAHxnnwtonpAketmFu4reh1nKGGhD7qvuvZMgQai7SA7gqawxuHFOcgrfn7mVfGLd
+X-Received: by 2002:a05:600c:4e04:b0:499:9069:c2c9 with SMTP id
+ 5b1f17b1804b1-4999069cf2bmr484580695e9.11.1787049562641; 
+ Tue, 18 Aug 2026 03:39:22 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7241:d70b:9010:cd0e:3bf])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4999d06167csm126388205e9.3.2026.08.18.03.39.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Aug 2026 03:39:22 -0700 (PDT)
+Date: Tue, 18 Aug 2026 12:39:16 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Linus Walleij <linusw@kernel.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+ Stefan Hansson <newbyte@postmarketos.org>
+Subject: Re: [PATCH v2 7/8] arm: u8500: Switch Stemmy to upstream Janice
+ device tree
+Message-ID: <aoQ2VMH_unoQaQxO@linaro.org>
+References: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
+ <20260817-ux500-external-sdcard-v2-7-ca9a110bd9c6@kernel.org>
+ <aoM6qJ32H35aumPL@linaro.org>
+ <CAD++jLnTaaN9ektt9h5S_jYZ27sezSfuymmjTGiL1_j8NSw6bw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAD++jLnTaaN9ektt9h5S_jYZ27sezSfuymmjTGiL1_j8NSw6bw@mail.gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -98,127 +132,69 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The controller has a transfer-mode field that can run transmit-only or
-receive-only instead of both, which leaves the unused FIFO out of the
-transfer entirely. The driver never used it for that: claim_bus always
-programmed TMOD_TR, and the only other mode came from an opportunistic
-switch to TMOD_RO for read-only transfers.
+On Mon, Aug 17, 2026 at 10:54:51PM +0200, Linus Walleij wrote:
+> On Mon, Aug 17, 2026 at 6:45 PM Stephan Gerhold
+> <stephan.gerhold@linaro.org> wrote:
+> 
+> > Hm okay so you're basically dropping support for the internal eMMC in
+> > this patch? Can we support both? BOOTSTD should be able to scan multiple
+> > storages for boot targets.
+> 
+> Yeah just laziness on my part, I'll fix it up.
+> 
+> > I'm also not really sure about selecting Janice as "default" device tree
+> > here. Do you expect users to change this setting when they want to build
+> > stemmy for another board?
+> 
+> I have a script that loops over the Samsung device trees,
+> and recompiles U-Boot for each of them.
+> https://dflund.se/~triad/krad/makefiles/ux500-uboot.mak
+> 
+> > I wonder if we could continue using a single generic binary for all
+> > boards using CONFIG_MULTI_DTB_FIT. We should have "fw_mach" in
+> > board/ste/stemmy/stemmy.c that should tell us which device we are
+> > running on, which seems to be mostly(?) unique:
+> >
+> > https://github.com/stericsson-mainline/android_kernel/blob/9508895090960012f916561b2ede5eaf8124fabd/arch/arm/tools/mach-types#L3956-L3965
+> >
+> > I'm not sure about codina-tmo, you would need to check which number the
+> > bootloader passes.
+> >
+> > If these numbers are unique, it should be easy to implement
+> > board_fit_config_name_match().
+> 
+> I see the appeal of the ambition to have a "one size fits (pun!) all"
+> U-Boot.
+> 
+> But as it is, some of the DTS attributes on the external SD card are
+> different between the platforms, so we would need to modify the
+> U-Boot internal Stemmy device tree for those, copying over yet
+> properties from the device trees and into the boardfile.
+> 
+> For example Janice and Codina uses a regulator for
+> vqmmc-supply, and those using the "sd_level_translator"
+> for vqmmc-supply actually use different GPIO pins on say
+> Gavini compared to Codina or Golden.
+> 
+> The pin direction settings on the MMC host vary. (Some of
+> these were really tricky to get right.)
+> 
+> So I think no, if we want external SD card boot we need
+> per-device compiled U-Boot binaries with the unique device
+> trees.
+> 
 
-A device described with spi-{tx,rx}-bus-width =3D <0> has no wire in that
-direction at all, so now that the width reaches plat->mode as
-SPI_NO_TX/SPI_NO_RX, pick the transfer mode from it. A write-only
-display stops clocking receive bytes nobody reads.
+I wasn't suggesting to use the same DT for all devices. What I suggested
+is to bundle all the upstream DTBs for the individual devices into a
+single U-Boot binary (CONFIG_MULTI_DTB_FIT) and pick the correct one at
+runtime. :)
 
-The transmit-only case needs one more change. The 8-bit loop paces
-itself on the receive FIFO and sets toread unconditionally, so with no
-receive path it would wait on a FIFO that stays empty forever. Leave
-toread at zero there and let the existing wait_till_not_busy() at the
-end of the chunk handle completion, which is the same thing that
-already covers a transmit component today.
+That should be equivalent to your setup, just more convenient for the
+user.
 
-The restore at the end of a read-only transfer went back to a hardcoded
-TMOD_TR, which would undo the device's own mode. Restore what the mode
-asks for instead.
+The only open question for me is if we can reliably detect codina-tmo
+based on the mach-type ID, I can't find that in the kernel sources I
+have.
 
-Signed-off-by: Cole Munz <Munzzyy1@proton.me>
----
-Alexey, this is the FIFO wiring you asked about. It applies on top of
-"spi: Handle spi-{tx,rx}-bus-width 0 as SPI_NO_TX/SPI_NO_RX", since it
-needs those bits to exist.
-
-You are right that the first patch is a no-op on its own. With this one
-the Flipper One display bus stops running the receive FIFO at all: the
-MISO pin is the end-of-frame GPIO, so every byte the controller clocked
-in was discarded by the loop anyway.
-
-The part that is not just a mode select is the 8-bit loop. It sets
-toread =3D todo whether or not the caller passed a din, and drains the
-receive FIFO to pace itself. In TMOD_TO that FIFO never fills, so it
-would spin forever. Leaving toread at zero and letting the existing
-rkspi_wait_till_not_busy() close out the chunk keeps the timing the same
-for the transmit case, which already relied on that call.
-
-Verification, and its limits. I have no Rockchip board, so this is
-compile-tested and reasoned from the driver, not run:
-
- $ make jaguar-rk3588_defconfig
- $ make CROSS_COMPILE=3Daarch64-linux-gnu- drivers/spi/rk_spi.o
- CC      drivers/spi/rk_spi.o     (exit 0)
-
-checkpatch --strict is 0/0/0. A full board build stops in binman for want
-of BL31 and tee.bin, identically with and without this patch, so that one
-is my missing blobs rather than the change.
-
-What I cannot check here is the hardware behaviour: that TMOD_TO really
-does leave the receive FIFO idle on a real part, and that a write-only
-display still clocks out correctly. If you have a board in front of you,
-that is the bit worth a look.
-
- drivers/spi/rk_spi.c | 25 ++++++++++++++++++++++---
- 1 file changed, 22 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/spi/rk_spi.c b/drivers/spi/rk_spi.c
-index 2c3d70ba7159..6c2ed3a90bf9 100644
---- a/drivers/spi/rk_spi.c
-+++ b/drivers/spi/rk_spi.c
-@@ -283,6 +283,20 @@ static int rockchip_spi_probe(struct udevice *bus)
- =09return 0;
- }
-=20
-+/*
-+ * A device that declares spi-{tx,rx}-bus-width =3D <0> has no wire in tha=
-t
-+ * direction, so the controller can drop the matching FIFO entirely instea=
-d
-+ * of clocking bytes nobody reads.
-+ */
-+static u32 rkspi_base_tmod(struct rockchip_spi_priv *priv)
-+{
-+=09if (priv->mode & SPI_NO_RX)
-+=09=09return TMOD_TO;
-+=09if (priv->mode & SPI_NO_TX)
-+=09=09return TMOD_RO;
-+=09return TMOD_TR;
-+}
-+
- static int rockchip_spi_claim_bus(struct udevice *dev)
- {
- =09struct udevice *bus =3D dev->parent;
-@@ -330,7 +344,7 @@ static int rockchip_spi_claim_bus(struct udevice *dev)
- =09ctrlr0 |=3D FRF_SPI << FRF_SHIFT;
-=20
- =09/* Tx and Rx mode */
--=09ctrlr0 |=3D TMOD_TR << TMOD_SHIFT;
-+=09ctrlr0 |=3D rkspi_base_tmod(priv) << TMOD_SHIFT;
-=20
- =09writel(ctrlr0, &regs->ctrlr0);
-=20
-@@ -472,7 +486,12 @@ static int rockchip_spi_xfer(struct udevice *dev, unsi=
-gned int bitlen,
- =09=09writel(todo - 1, &regs->ctrlr1);
- =09=09rkspi_enable_chip(regs, true);
-=20
--=09=09toread =3D todo;
-+=09=09/*
-+=09=09 * In transmit-only mode the RX FIFO never fills, so waiting
-+=09=09 * on it would hang. Completion is handled by the
-+=09=09 * wait_till_not_busy() below instead.
-+=09=09 */
-+=09=09toread =3D (priv->mode & SPI_NO_RX) ? 0 : todo;
- =09=09/* Only write if we have something to write */
- =09=09towrite =3D out ? todo : 0;
- =09=09while (toread || towrite) {
-@@ -513,7 +532,7 @@ static int rockchip_spi_xfer(struct udevice *dev, unsig=
-ned int bitlen,
- =09if (!out)
- =09=09clrsetbits_le32(&regs->ctrlr0,
- =09=09=09=09TMOD_MASK << TMOD_SHIFT,
--=09=09=09=09TMOD_TR << TMOD_SHIFT);
-+=09=09=09=09rkspi_base_tmod(priv) << TMOD_SHIFT);
-=20
- =09return ret;
- }
---=20
-2.55.0
-
-
+Thanks,
+Stephan
