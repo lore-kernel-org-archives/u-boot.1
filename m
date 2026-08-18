@@ -4,137 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9073CC5DF7D
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 12:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48210C5DF7D
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:06:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id ACE34608BF;
-	Tue, 18 Aug 2026 12:04:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DF5EB608C7;
+	Tue, 18 Aug 2026 13:06:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o5IxZiW01D0o; Tue, 18 Aug 2026 12:04:21 +0000 (UTC)
+ id hHy8VnnXyv98; Tue, 18 Aug 2026 13:06:19 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 425816086B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 47E3C608B9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787054661;
-	bh=YGSnfe4F1IezbXG/idsX4RtXPHdpvgyd9W/Shb68FWI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1787058379;
+	bh=9zaZWGD4pHi855qNUIkXWIGkwjwJC7wx2LCJN/R2V5g=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=imeQefAi0VFAlELB8T8RgONgbJZLd8kgFdzjR6U00yTqD1MtlGy727F/yw1x3um11
-	 9CDIB8qjST7nToIEIDkfVqFd+BFcxIDb1R58weja9IQDr9MXpHe5DxQiRN/fRHCgz9
-	 dUiO2axDZOQlb6BvVEr25sk+s71T24uLxBt3hCB2f4W2tsF02d3QU82BaCQf6bRz+O
-	 DgEg+Fq36Q0Q+i2ccbX/N8EcErYN5HdL12LkcDr54afZJVEt4OxUU4pVGI7Q5PwTnW
-	 PZN+ZzRySEuZPJWusliUrnq0604PKR2kIUJ98LkxQK+HjiVy4Z7BU4Jke8nJtJQ5WZ
-	 K4Go+s4LxQYRA==
+	b=kNSnyiLTOOOj1NB1f22shATqUGKGeZ9iDm0t3qRP65Q4wi+dg/omRvN4PqS09SvdH
+	 8ycD1ZmGDouXy5cucuwzif+XdzXHHr/hxVVv4f2N8bPsrFSzEUFVCk+4l7mK4sEElm
+	 n6xoR75TrHnwe75jaAoN7CaiQcmNiu6X/uhyDGsbD7g5gVPH3qREnS2DqL25mH3PPb
+	 TIiD9Fm5NesmkOCRPKlerbDRAj/q/FP/a+iJzQ9Ikqi1SK2k29zrDZMYsUjtC+SGf+
+	 eJNMNHOEWsYLkTUAYjdzuORsx4RwHcOxqaDzkIl75g2qNIsqWnSLu5Nd8LVr/30HIo
+	 dchOP1/DUHIiA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 425816086B;
-	Tue, 18 Aug 2026 12:04:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 47E3C608B9;
+	Tue, 18 Aug 2026 13:06:19 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0C6C923F
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 12:04:20 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D10D223F
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E698F80B34
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 12:04:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C30C780FB0
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FDzBuL9tptGr for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 12:04:19 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::136; helo=mail-lf1-x136.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2A99A80ABB
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2A99A80ABB
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=FuymraoJ
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2A99A80ABB
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 12:04:19 +0000 (UTC)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5b3119957f0so4076838e87.1
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 05:04:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787054657; cv=none;
- d=google.com; s=arc-20260327;
- b=PJ5oGeNSPLmRYljdGY4hrb/uPSRX1ZXaGD6Trk1/AZSHpLHKy3NYIqwJN4SEft9Inq
- fu6GpXSaYUkGcQ9x6+nS7GjAGb9VqPuy5D7SHTfz7vAw5xMVGgqi4dwq+6JrEBYHF3tx
- XQhoGyj5oujx8veWt4dzcrDnS4kFNK8zgASOagOfS47AfE7i4lxuXmMl5M0Txsc0p2rN
- WFFbpKB//cuso9KIzhDEJTNMc9yLQQgai9qo3OLBEXFWrg98PVGEHbGoaRr2gofznfUx
- NcsZNt9+jD/QLZnmAZqG8l2EaUuz0veXsPjFbzvuheKTGW5WqQvM7FWXEPVAr65RzL45
- yi9A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=YGSnfe4F1IezbXG/idsX4RtXPHdpvgyd9W/Shb68FWI=;
- fh=4sv/oNU+N7epZXYrJ354OICvCAmLDxZf8w2D/NZnCdE=;
- b=hiMi4C48rKJVg+z5YL+5VlTpFMRTeU5TvGOeiLm0QiDprcs6eIIacigGVWBB0n1TP8
- dZIu95aT/+Op7x1Li8oX0PLVwyHq7O+eg3BlBDXFggxtn1l/A5ziSL+wbZdzRP3/t+LL
- YP23B1ac6J2jI+neTlYaN9sHc1SiRClrsN9Sl2gajozwOru6yFqXyvn4F3okdMLBqR6j
- gnX2oIgJo37IEZO998OGJWGwDCxwqHw7IrO8cQ4Oy7Eqa8H2q63m/GqcZ2OvT1F9x4+j
- yaIT0LTFldyzgUIQjrIW4AeWGJshBZq3NnH5WSvoq5BBZ3s76EhRMZ/vGfv/HTk02yep
- jEtA==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787054657; x=1787659457;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=YGSnfe4F1IezbXG/idsX4RtXPHdpvgyd9W/Shb68FWI=;
- b=FuymraoJG4/Q4GQIYtHIsHlXYtPesyOGQ8Mg6XFsm9cQj4G8+QUR3EEAOJ7hV+gGy+
- 0jRttGsndOTg91amvHtqve1RleONtI7+5kduJvl/P2qflFAHXXGRMEPa41fnAM6iD5S2
- ocxrWfrBfyXcNBa5h6h0N9XA/wdbZCgByDDfSH7S3khOOU5z2v76WPxQ1uBLAifPqVxq
- Xs5ZGrp56HSij0CmEUPbWMBggklZhMMga8Lu1ep2mMfl+l0V13UtEceGvsgfhqeIqS21
- UbVfjBD7GXJZxUYcztbeQdua6Qa13i1tnofYeV4pWd5+pQjSYMqk8iXujWGLTXpTM86Y
- Nx5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787054657; x=1787659457;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YGSnfe4F1IezbXG/idsX4RtXPHdpvgyd9W/Shb68FWI=;
- b=XEmT2bbDpf5fuBwITO+heyOsdAYF+J24VCCrJ7Fv7BUPvcQ7D9f3mjFLCu722G72nb
- jsVq+rG8lS2kKVAi6fGrG4hE0+Xw+pB1UNSSJ1iKhfbQPavQgPhUw6IL0xLO29yl+nWE
- TOi4fkkcelfR+KQu61tVdBjQ7dNVct64C84l84RpTM5rDIMbE1gH6cDHcFbIvTzTjaH2
- tJ+cvMCt1gh8PqscVLB5Km6Xn1Vt3v88vhJutJPBwIsnV795ZG+4Z5DApb2gd7myx40W
- /7hvt5w21MKUxlfnvn4DlC1rUsTsp/PBkGjiEwy6cRngmo8K64+4Rap5tnv6Q2SUoYyM
- wXMQ==
-X-Gm-Message-State: AOJu0YyG013RGBhcmFHjIknM1bN2QHW6QlisfTTcCMBcjt77LXOzJkt8
- kXXqwG4To2HICkiT21Hry/2SoA9+QdlXt11FhrkHruqRr4Eu/YD6zP6puTTumdBOCKwugzmlY2N
- a8Xe0DYHNy+H7juGKqPf6QQvR5U5c3lk=
-X-Gm-Gg: AR+sD11c74w5V7moBhO7fFeUsYj8W8JcmVPA15x+/zyWjYMC4HHfZLmwocgCn9ypPlh
- KAL/ABln22mFCS9tVtpIdiupBN8N+c8ZhlSIG9kJNqlDTzsuSXWTzUW3jiiZfaMqjbctFWRQKOW
- qCBzQ4WCmvMouxtq1yqhpaIK/wkiaXSO8421iZBReXyZNWasKqlQDPT+si9Yzv4QJ82vYroGog1
- cjWtiVWIRqc21xj8li+PcO0jmbaKeH4ctYMokmllCQnOiiT++r70wF11TomZeT0x51Hq6bLW9S+
- GGxyqEdVj24hENVVtPLX+Mi5LbhC+GND7sCHHLPDRQDXfraSa+xOfkn3KpH9cCQrDTd2bozVi+3
- YMDVzIASV71fm5cjy9dz2srE8k0QW04R5B788ZTe7Pe5c
-X-Received: by 2002:a05:6512:687:b0:5ae:bd5e:95f7 with SMTP id
- 2adb3069b0e04-5b47066ced0mr1891077e87.4.1787054656485; Tue, 18 Aug 2026
- 05:04:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260816232404.1223819-1-marex@nabladev.com>
- <CAOMZO5AOmyEbHS7tMdLaWuEoGgkOWSiVUG6Ln54ATPCUqWxCkQ@mail.gmail.com>
- <c5a9255d-b56d-4c05-bc75-f1a5688b9ad2@nabladev.com>
-In-Reply-To: <c5a9255d-b56d-4c05-bc75-f1a5688b9ad2@nabladev.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 18 Aug 2026 09:04:04 -0300
-X-Gm-Features: AcwNN1WsXBEkLzv1Dgv1IqiM7_J8i6-5XOlDiBbykC-8liQEFzXWpJZaGsa504w
-Message-ID: <CAOMZO5A1gbzoFFc9PrvTpNBgz1WV8eb9aabhc7_EM2OqSjRvcA@mail.gmail.com>
-Subject: Re: [PATCH] arm64: dts: imx: Fix EEPROM address on Data Modul i.MX8M
- Plus eDM SBC
-To: Marek Vasut <marex@nabladev.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Stefano Babic <sbabic@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ id D-SSfv-XUFDs for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 01:04:47 +0000 (UTC)
+X-Greylist: delayed 58003 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 18 Aug 2026 01:04:46 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6FF6080F4E
+Authentication-Results: smtp1.osuosl.org; dmarc=none (p=none dis=none)
+ header.from=linux.spacemit.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6FF6080F4E
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=linux.spacemit.com header.i=@linux.spacemit.com
+ header.a=rsa-sha256 header.s=mxsw2412 header.b=fNkAQghK
+Received-SPF: Pass (sender SPF authorized) identity=helo;
+ client-ip=54.254.200.128; helo=smtpbgsg2.qq.com;
+ envelope-from=troy.mitchell@linux.spacemit.com; receiver=<UNKNOWN> 
+Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6FF6080F4E
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.spacemit.com;
+ s=mxsw2412; t=1787015044;
+ bh=9zaZWGD4pHi855qNUIkXWIGkwjwJC7wx2LCJN/R2V5g=;
+ h=Mime-Version:Date:Message-Id:Subject:From:To;
+ b=fNkAQghKkO27WaAiorqgZEWrb2nTEMFp4bvNr1FUy09EXT4CyvwWM5K8jhVB4zYb3
+ 4BM0hL53N74eiUFTGR41BLiFwXonnu5AUWuLljjmOnkld3CKxQpi6rAsjNJqGehD0y
+ aojPOG4zEbGuZ4n2a86F7Cf97b+/XBjl05JirxM0=
+X-QQ-mid: zesmtpgz4t1787015042tef681fe1
+X-QQ-Originating-IP: uGo6hjJnr0JZtldwZk41tmjGlztABY6a4cCQZiAF4+Y=
+Received: from = ( [120.237.158.181]) by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 18 Aug 2026 09:04:00 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 8758530987341579553
+EX-QQ-RecipientCnt: 11
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Tue, 18 Aug 2026 09:03:58 +0800
+Message-Id: <DKRNYNELFA7H.3838MH2QULHVX@linux.spacemit.com>
+Cc: "Junhui Liu" <junhui.liu@pigmoral.tech>, "Heiko Schocher"
+ <hs@nabladev.com>, <u-boot-spacemit@groups.io>,
+ <u-boot@lists.u-boot-project.org>, "Huan Zhou" <pericycle.cc@gmail.com>,
+ "Guodong Xu" <guodong.xu@oss.qualcomm.com>, "Tom Rini"
+ <trini@konsulko.com>, "Raymond Mao" <raymond.mao@riscstar.com>, "Lukasz
+ Majewski" <lukma@denx.de>
+Subject: Re: [PATCH v2 3/4] i2c: k1: enable both functional and bus clocks
+From: "Troy Mitchell" <troy.mitchell@linux.spacemit.com>
+To: "Yixun Lan" <dlan@kernel.org>, "Troy Mitchell"
+ <troy.mitchell@linux.spacemit.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
+ <20260815-k1-i2c-fix-v2-3-7d2a48607233@pigmoral.tech>
+ <DKR3E33H0FCK.1O1KN2YJSZSBB@linux.spacemit.com>
+ <20260817091812-GKC571540@kernel.org>
+In-Reply-To: <20260817091812-GKC571540@kernel.org>
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpgz:linux.spacemit.com:qybglogicsvrgz:qybglogicsvrgz3a-0
+X-QQ-XMAILINFO: OGPyLxpWWNNm1CWsFgwWfIWYIkj9pMqAbBXbX1KBB4UbqSu7NeBJxWBO
+ ptsn+FV49MGl5ohEm5AtleZpWwyaQRVAUofedzUwEFlY9G2t4QA+bVS6ofyi+R8KGXET2xs
+ cS2ui7TwOdcXgLcz8QPFeLBmQTnM/gFb92+IIqq5APhLZNVt2dfGWWy7OVCaGgw6adBSq+3
+ Q/9s1dgGz7u4kJWLt2ZeXsQZTi1bm+JLWF+6C7Q87lUHGnVz40Xg0C3YtcGR/fhhgHdoRmR
+ EpYOiw5kbH1YvH/lL43YUx/gY341tt1A3VBPds+ZOPXMSvOtcmQ9KjZHYUCjlJnUViAnNnn
+ ehixI2vqeu/qffs5BGkzlAzF4ZjzQ208XqmMVQnUppJxrm5jCbIKrWEm8vYwFO3j973Y4cR
+ qttHLFEbebSA6Qx9WQ/AzFYsKlAcBHbN3orcs7mXufolJp3IY2v0Neai+IupZ95LjqXCeq0
+ wO2uDqymKjChlj+cJkhQhkl/Wi0TbJ5l4vaGTAYSaJBWVnrtyeao7JnHZSnUhav/LQtgjt3
+ 0Oc+yjgSEbigFm47/Ts3taBHOZaqetoVLTRKhBXIDaRCaJL1ENP5tlVFTZQe5YhOAwkGLCZ
+ 1CrbHyboFaY+k0wlHvy7LCgIjqn4YzytMdrZD5bq10F9xbrVx8j9eyHqJJBOwYwS40/xgBF
+ JJEhLMhGiMQmF6yWxOX4S52i2iVYRFuzkHAwh8Wj6KLl07Jg9b7LH92PUFXUP1zpuuYAeJA
+ tdxucmN3DGIR3JSugDGbt4Th4Qct5F6VXzUUka041lLpPGMavJVQlODU1wM018RGfiK7PWY
+ PfpvoIUSgsu+ggy4yDmNaETybMV+Xw/OHHhp2MFfpcwwH1cGwHoyJWldGbwxIwuF2HogBKj
+ 3BHeaepmCrzbKN37mHI+dCcTLULRZWY8oZ5Nt6eOt0ooiGbTr4kydUBaNNFY2pcv6/YZ91B
+ NUF5oWZGCIEmyLI2TZqQ7De4zMA1CXhyjjs7GQHF0ICuvIOnrQWi0oqK+es56fzYEqyMbbM
+ Gw2fjrtFq1keQYIY9yeHaj1Z8QZyZG7tVj8c5Y0/zm2XCuN1olcdXsOKhOrnwTXdqfRvIT8
+ 09nh/WWaO5U
+X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
+X-QQ-RECHKSPAM: 0
+X-Mailman-Approved-At: Tue, 18 Aug 2026 13:06:17 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,15 +128,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sun, Aug 16, 2026 at 8:58=E2=80=AFPM Marek Vasut <marex@nabladev.com> wr=
-ote:
+--4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-> > Does this need to go to main, or can it go to next?
+On Mon Aug 17, 2026 at 5:18 PM +08, Yixun Lan wrote:
+> hi Troy,
 >
-> main would be nice, since this is a (long overdue) fix.
+> On 16:56 Mon 17 Aug     , Troy Mitchell wrote:
+>> > The K1 I2C controller requires both its functional clock and APB bus
+>> > clock to operate. The device tree provides them as "func" and "bus", b=
+ut
+>> > the driver currently acquires and enables only the first clock.
+>> >
+>> > Acquire both clocks by name and enable them during probe. Use explicit
+>> > named lookups instead of the bulk clock API to align with the K1 Linux
+>> > driver and keep the roles of the two clocks clear if functional clock
+>> > rate configuration is needed later.
+>>=20
+>> [...]
+>>=20
+>> > @@ -487,15 +487,21 @@ static int k1_i2c_probe(struct udevice *bus)
+>> >  		return ret;
+>> >  	}
+>> >
+>> > -	ret =3D clk_get_by_index(bus, 0, &priv->clk);
+>> > +	ret =3D clk_get_by_name(bus, "func", &clk);
+>> >  	if (ret)
+>> >  		return ret;
+>> >
+>> > -	ret =3D clk_enable(&priv->clk);
+>> > -	if (ret && ret !=3D -ENOSYS && ret !=3D -EOPNOTSUPP) {
+>> > -		debug("%s: failed to enable clock\n", __func__);
+>> > +	ret =3D clk_enable(&clk);
+>> > +	if (ret)
+>> > +		return ret;
+>> > +
+>> > +	ret =3D clk_get_by_name(bus, "bus", &clk);
+>> > +	if (ret)
+>> > +		return ret;
+>> > +
+>> > +	ret =3D clk_enable(&clk);
+>> > +	if (ret)
+>> >  		return ret;
+>> > -	}
+>>=20
+>> Once the functional clock has been enabled, failure to acquire or enable
+>> the bus clock returns without disabling the functional clock.
+>>=20
+> I'd not worry about this, as in uboot it isn't worth the effort to do the
+> resouce reclamation, instead I'm more concerned about the error handling.=
+.
+Reviewed-by: Troy Mitchell <troy.mitchell@linux.spacemit.com>
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
 
-Tom,  at the moment I don't have any outstanding patches queued for main.
+--=20
+Troy Mitchell
 
-Please apply this one directly, thanks.
+
+--4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iIMEABYKACsWIQSL4Ay2cExaPXAQcU2YCe+A+TM0LwUCaoOvfg0caUB0cm95LXku
+b3JnAAoJEJgJ74D5MzQvwg4BAIS1uUyCjrHVjapCPXvliuQ9ZAlWKc3jQItF3pVY
+WC4aAQDH2QpwIG2VSgxz8oIN8kEWVqZPBtRRVqcrbOLnVwMnDg==
+=ZXt0
+-----END PGP SIGNATURE-----
+
+--4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22--
