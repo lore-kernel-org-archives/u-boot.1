@@ -4,135 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25EF2C5DF70
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 09:09:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E76C5DF80
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 09:29:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 14F498064A;
-	Tue, 18 Aug 2026 09:09:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DB87180C73;
+	Tue, 18 Aug 2026 09:29:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IQH_NlLF6uc9; Tue, 18 Aug 2026 09:09:07 +0000 (UTC)
+ id nc95QZJQpYf2; Tue, 18 Aug 2026 09:29:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B627080F3F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A94F480BE6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787044147;
-	bh=k416MjI+8rLAK93n8F+N5lQ5OG6N/h09DG6bRviQ/tk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1787045360;
+	bh=FYLLW6PPIaJbMDkG6tWmyGPJx6WAVvITCnXIYFBVYkc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QOOQlCvAlbyZwoSc079ufH4qB6Ts+bNhYcBevRmckKxWPQGlGFuLq7mgmsqo4GY0C
-	 EwTXMP48YDkgFQWtrx3t735y2LSpc3f0lBcdXgzEbBP8hg9PRbWfhRFg4joU1YaAd8
-	 XzOohg55u1EPuSAeN34RbAN+gDZfV3B17uk+drCobYQunA/OOCLX4XDE7LUCzPDHHA
-	 ZLCKj5Iy73HB804gB2HBIu/TyV6cVjiKlJLWMJqiHuXAysDoYVnX3vgJPDgWLT0HEK
-	 Ok6TeD1qHoibyUm0OIL6Ku0/Dk8f+dGCrnTnG6bAnH90MRzpNit61wnGqA8REN/c/N
-	 5rFrIC9jcoayQ==
+	b=r+gqu8uW4cA4xPlL8Tmh8fd3tyjxiD5SdyF0J9U6GiNTdz28S0wkLx1pP5iAciwnG
+	 6CYTV5ja4iiN/ztVLKiaKOrpnxaHOZO6gIG3TIcsEP9ZZP21k9Q3vL8dMoygCYMjqi
+	 yYSOxVcOnoDtAjhKK1wRa2DIRdHqgqnd2TRD/CR3a1l2CTAX5R/tvKiJ36IELT6SsM
+	 bjwSwUQpLTZpTjcH+nYzI1jU3Pbj6w+mHyWfAcioX4oINABtT4OyTID5pqa78vWF3T
+	 Y0loHooOK0xBngkbvzINVFXWNeTyqjejBjZQ8wknt8+Mjb5at6s6CvytkfAVsyIDv0
+	 Vcnxe5Y1602ww==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B627080F3F;
-	Tue, 18 Aug 2026 09:09:07 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E6CC9237
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:09:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A94F480BE6;
+	Tue, 18 Aug 2026 09:29:20 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D06672EF
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:29:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D88C380F33
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:09:05 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B62D280BE5
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:29:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sPTSv-76bbDS for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 09:09:05 +0000 (UTC)
+ id Ql_wJ56St3vb for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 09:29:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org EF38880EEB
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=conor@kernel.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org DD1F980B36
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EF38880EEB
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=nnpOeS0E
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EF38880EEB
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:09:04 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c197eaaab00so818515166b.0
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 02:09:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787044143; cv=none;
- d=google.com; s=arc-20260327;
- b=HN155Mdo+46GZeeLtUu3UDdrxNeGQbTTCko0GflO8eWX7Wsr1oTRq+7IiCC146/m2k
- kjv93a7rA+LKy99x+yVIr6gD5P9bCGarhrqvLyk1u05o8/850RAoj/24o8aaW0JqgdLJ
- O1fkMh6MtBKzsscfdvCNM+wt7xZ1cl2pVZW04Dz8g3iQr+4PJ3lQ7LUIixWZX/YOQgzg
- yZhPJQ/SOQy+CDVjFlihcB9GtKERnWaW2axNvH8etAAC31gJ66mn3zaqyIaZhjHdfkdZ
- 2A53bTPXt64+P580XJgWOkCMkfWxXxVXuinL9F5otyMedPhipzdY/KIZdb8r3lnV4fij
- hpEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=k416MjI+8rLAK93n8F+N5lQ5OG6N/h09DG6bRviQ/tk=;
- fh=oeC4hiXUdh3cD7Z+46ECQz8jRnxlEFqJWOHzYTCxTpM=;
- b=ielF/j2oQlSmBe2gwDPKqgAKECLcsiMyd6P90cyBwyjwkascQBIKO3Bpmj/28/+u5d
- srEk+bIRor7UWsOa5KiJfiNCH7lClpBdqRgv2c8cRsQIACXRtxVv0cKCRRQYP6cYNVG0
- a9wRPQiDliqLGZpUdEVTj2xOu/6fOFsp5KjvJN3V6ROOljY3Jrvb1ZCb6gnlU7aMH/kT
- RVdMlPT3Iirw0VEj0GKRdPEvnolZKZ9TOZE+jpDKm8Y6TljwNvTLRlQURiqTyvvWkzFW
- vXvKYD6a4CrJoyEgOFd+IV5h4FDpjZDFKpJ71UdDfo+Z3mLgi+IxkYbfGkuL48YUCtV3
- p6Kg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787044143; x=1787648943;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=k416MjI+8rLAK93n8F+N5lQ5OG6N/h09DG6bRviQ/tk=;
- b=nnpOeS0E0WzIbWYDmUaMx3NxDWB3gCaE89V4B0x3j8+unJvEdRPBKMsQ201CusuXA9
- dGVfJIe5IX7YYAkHyTGD3FnTZELUJT09CvMwjHpWFxLb5btZ2TUSwifVXkULem6RCcAZ
- Z3W48ni4o/1qhbG+gBR/Ijqe6SWPXcktnrclIb17msW7iO8YIaAOEj6aR4gYUc9b6T1Q
- tlHoeOPtvWnoXiAO4ii609Of8n7s+HVPKjvPQTfDa2mZO1RB8RpwfoA/acvjmWVXANLn
- F3Ej+c78+IzAeZskLmZ5RM5UzfoOaO1kKjeTpc4TUwoXie6e1+HCdY4hlJkU6mWFnzkF
- e9Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787044143; x=1787648943;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=k416MjI+8rLAK93n8F+N5lQ5OG6N/h09DG6bRviQ/tk=;
- b=Lv7wpLIVGhQrU1EYVCpyjsC1UVIZva+6Or4UOe/yPUhoZmGMU75coC7UFuATKesd38
- Xbn5ok3DcLltdNUP8Rb0eAGSJVLDyX66PO7jRX2oQapxeScvqRgk48iX14Fkc+SwzRSz
- i0uORycOSkMYtYqQs8zsNYEg8DX47fYg/fW/6jyGFOeobp8KV9xCSD1IlGul/nQdkX/V
- VshzRSAQqba25/2ZtkEMhdXUWy2htNdYSoTt118rbUI4Onl8zI9QkMxnzTbddU/t75Bb
- yXPl8yMQ5KviD7P6sjeqfliH+xXwe0N4ZA4aqNWTsvJcnaBUw3f9eeXFDz/hoKgAHjyq
- 5lqg==
-X-Gm-Message-State: AOJu0Yzxzgq9EmWlCyGj2DCoIbeVIWWOzeckQAEwvMuDxOOTVCRtreRS
- v/36Xucb61Cz9EQ1+LyswQj0TO1FDYUMllMeKrXyxcSXV7allv7nNOXVFQqANq229SEmcl+7Dfa
- ZuTEBE0wbomCIYAG3Hw5jLfhReD38PRi+IqPZN6TQqQ==
-X-Gm-Gg: AR+sD13Pa40sg8E0IlyHnjhGL0n5O1nsLMFxRxSEtjF347fX3lY8o/mZ44L3PiIHw3m
- 6Rps5p/sCWARq9xAFmkHwIMFLDkf6NOBDKSKNnRQCBAH5fWWd7RNr5JWOiBU6KjxNH6Sr+6Jyry
- 9UGjhPwGaVNBvoKN/L8tmebYY2TKkYsiLUtl45vJ48fl7E/DXMDKh5yS754bgo/GyiBLrPF/XZ0
- NAXnWWbeSnkRZXLon77ZeEzrhpRfQ0ayk+ZACLHj8Z19gOX4ah+39MNAs9z55Z2UDoNjas8G6gK
- 8QhdZ15jL3yLOWAdsCBL70ULuPffvqEswhmQZ4p98N/tYxi6sgUMnpKcUhrM4glKReCULG4NhwV
- sxQ==
-X-Received: by 2002:a17:907:f448:b0:c16:8adf:f183 with SMTP id
- a640c23a62f3a-c212a0443cfmr1465374866b.14.1787044142808; Tue, 18 Aug 2026
- 02:09:02 -0700 (PDT)
+ header.from=kernel.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DD1F980B36
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=G3J604dC
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DD1F980B36
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 09:29:18 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 99E2160A5D;
+ Tue, 18 Aug 2026 09:29:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C63B1F000E9;
+ Tue, 18 Aug 2026 09:29:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787045356;
+ bh=FYLLW6PPIaJbMDkG6tWmyGPJx6WAVvITCnXIYFBVYkc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=G3J604dCESgVua9xHImVG+ERnDgP9II0SvXUXBHovlwXe8RC4n/kHXbeM30XSc7d/
+ SRxg8IfU25dn8SqCEvxhsuCgx5P6RmEQVlPFzSdw/tsricYz4qetKZPGjrXF5sQgk0
+ 96MwJ6aDQC+uH+qoEe5vdqHfiagQswJj7aav4s5Vx9lXD+iYnfXYndo8XXgntEO/H5
+ X/BBCd+bVvD//+S5QrpH8P2gyBPRCkHypkGymOJcLWOwaCCdnI875hvTydrru3oIww
+ DEOZGTJMmzpOYVZ1hy+mJfwBAP0vWD1ga8wdX1KomTxRfiquMpdbpCsZH7LJ4TMlar
+ z8UufjQWLOvwg==
+Date: Tue, 18 Aug 2026 10:29:12 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Nathan Whitehorn <nwhitehorn@pa.msu.edu>
+Cc: u-boot@lists.u-boot-project.org, conor.dooley@microchip.com,
+ jamie.gibbons@microchip.com
+Subject: Re: [PATCH] riscv: mpfs: Read and store FPGA design information on
+ MPFS hardware.
+Message-ID: <20260818-rehydrate-gurgle-27ca628f2c24@spud>
+References: <20260724173547.77823-1-nwhitehorn@pa.msu.edu>
 MIME-Version: 1.0
-References: <10e92a74c8a22cc2cd54f5dcccc31594016d4263.1787015208.git.Munzzyy1@proton.me>
-In-Reply-To: <10e92a74c8a22cc2cd54f5dcccc31594016d4263.1787015208.git.Munzzyy1@proton.me>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 18 Aug 2026 13:08:54 +0400
-X-Gm-Features: AcwNN1V_KNVsPyCXk8V7vljEK3U5z-2Gdyb5F-NrU17ZGofmMwlLI5ULGUnxvns
-Message-ID: <CAKTNdwHMga0XG1zfgLYirMbVK8iVpWgjyr9x49sQ2ofPNu+w3Q@mail.gmail.com>
-Subject: Re: [PATCH] spi: Handle spi-{tx,
- rx}-bus-width 0 as SPI_NO_TX/SPI_NO_RX
-To: Cole Munz <Munzzyy1@proton.me>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Boon Khai Ng <boon.khai.ng@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rW7FbuOFq2fluTvI"
+Content-Disposition: inline
+In-Reply-To: <20260724173547.77823-1-nwhitehorn@pa.msu.edu>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,66 +97,247 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Cole,
+--rW7FbuOFq2fluTvI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 18, 2026 at 5:15=E2=80=AFAM Cole Munz <Munzzyy1@proton.me> wrot=
-e:
->
-> The spi-peripheral-props binding shipped in dts/upstream allows a bus
-> width of 0, meaning no RX or TX is possible on this device. The
-> switches in spi_slave_of_to_plat() only handle 1/2/4/8, so a width of
-> 0 falls through to the default case and warns "spi-rx-bus-width 0 not
-> supported" on every boot, even though the devicetree is valid per the
-> binding. The fact that the wire is missing is then dropped from
-> plat->mode.
->
-> Map 0 to new SPI_NO_TX/SPI_NO_RX mode bits, as Linux has done since
-> v5.12 ("spi: Add SPI_NO_TX/RX support", mainline d962608ce218).
-> Bits 16 and 17 are the first free mode bits.
->
-> This comes up on devices with no MISO line at all, such as a
-> write-only SPI display described with spi-rx-bus-width =3D <0>.
->
-> Signed-off-by: Cole Munz <Munzzyy1@proton.me>
+Hey Nathan,
+
+Sorry for missing this originally.
+
+On Fri, Jul 24, 2026 at 01:33:50PM -0400, Nathan Whitehorn wrote:
+> When working with systems with multiple FPGA firmwares, it is sometimes
+> useful to be able to use the same U-Boot and script conditional behavior
+> based on the FPGA firmware ID and version number. This, allows, for
+> example, flashing new FPGA images without flashing the bootloader and
+> letting U-Boot and the Linux kernel adapt appropriately.
+>=20
+> This does three things with the information:
+> 1. Prints the FPGA design ID and version to the console as part of U-Boot
+>    startup, which is helpful to a human working with the board.
+> 2. Stores the same information, plus the already-acquired FPGA serial
+>    number, in a new set of environment variables (pf_serial_number,
+>    pf_design_id, pf_design_ver [the version], and pf_design_backl
+>    [minimum-version backlevel]). These can be used in a U-Boot script to
+>    load different kernels, device trees, etc. depending on the currently
+>    installed firmware, which allows U-Boot and the kernel to adapt
+>    cleanly to FPGA firmware updates that change accessible peripherals
+>    etc.
+
+These two I don't really mind, I can see the value in it.
+
+> 3. Stores the same information in the device tree (under /soc) as
+>    fpga-design-version, fpga-design, and fpga-design-version-backlevel.
+>    These things are also available through the Linux system-controller
+>    driver directly, but it is handy to have them in the device tree as
+>    well.
+
+This I don't on the other hand. If linux needs it, it can go and get the
+information itself and if userspace needs it, I'd rather there was a
+small driver made to expose it on a dedicated interface rather than
+buried somewhere in the devicetree portion of sysfs. If it is just
+informational, the info has been emitted by U-Boot already.
+I'd also rather U-Boot didn't add undocumented properties to the
+devicetree.
+
+>=20
+> Signed-off-by: Nathan Whitehorn <nwhitehorn@pa.msu.edu>
 > ---
-> Raised as a boot-log warning on Flipper One, whose display has no MISO
-> line at all: that pin is reused as the end-of-frame GPIO. Reported at
-> flipperdevices/u-boot#33, and sent here rather than to the fork as
-> suggested on that issue.
->
-> Verified on sandbox at 527115ef6783, with spi-rx-bus-width =3D <0> added
-> to spi.bin@0 in arch/sandbox/dts/test.dts and CONFIG_LOG disabled, so
-> warn_non_xpl() reaches the console the way it does on the board.
->
-> Before:
->  $ ./u-boot -T -c "sf probe"
->  spi-rx-bus-width 0 not supported
->  spi-rx-bus-width 0 not supported
->  SF: Detected m25p16 with page size 256 Bytes, erase size 64 KiB, 2 MiB
->
-> After:
->  $ ./u-boot -T -c "sf probe"
->  SF: Detected m25p16 with page size 256 Bytes, erase size 64 KiB, 2 MiB
->
-> It warns twice in sandbox because both the pre- and post-reloc DM scans
-> run there; the board logs it once.
->
-> ut dm spi_flash, spi_xfer, spi_find, spi_claim_bus, spi_set_wordlen and
-> spi_flash_func all pass with the property in place. Nothing consumes the
-> new bits yet, matching d962608ce218 in Linux, where the consumers landed
-> later.
->
->  drivers/spi/spi-uclass.c | 6 ++++++
->  include/spi.h            | 2 ++
->  2 files changed, 8 insertions(+)
+>  board/microchip/mpfs_generic/mpfs_generic.c | 31 ++++++++++++
+>  drivers/misc/mpfs_syscontroller.c           | 52 +++++++++++++++++++++
+>  include/mpfs-mailbox.h                      |  1 +
+>  3 files changed, 84 insertions(+)
+>=20
+> diff --git a/board/microchip/mpfs_generic/mpfs_generic.c b/board/microchi=
+p/mpfs_generic/mpfs_generic.c
+> index f57f5f4046b..469e914e083 100644
+> --- a/board/microchip/mpfs_generic/mpfs_generic.c
+> +++ b/board/microchip/mpfs_generic/mpfs_generic.c
+> @@ -114,7 +114,10 @@ int board_late_init(void)
+>  {
+>  	u32 ret;
+>  	int node;
+> +	int idx;
+>  	u8 device_serial_number[16] =3D {0};
+> +	char serialstring[33], designid[33];
+> +	u16 designver, designbacklevel;
+>  	void *blob =3D (void *)gd->fdt_blob;
+>  	struct udevice *dev;
+>  	struct mpfs_sys_serv *sys_serv_priv;
+> @@ -144,6 +147,24 @@ int board_late_init(void)
+>  		return -EINVAL;
+>  	}
+> =20
+> +	/* Store design info and serial number in environment */
+> +	ret =3D mpfs_syscontroller_read_design_info(sys_serv_priv, designid, &d=
+esignver, &designbacklevel);
+> +	if (ret) {
+> +		printf("Cannot read device design information\n");
+> +		return -EINVAL;
+> +	}
 
-Thanks a lot for the patch! It looks like this has no users in the
-current tree, making it an effective no-op (apart from silencing the
-warning).
+blank line here please
 
-Rockchip's SPI controller could further benefit if those bits were
-wired up in the driver, as it can disable the respective FIFOs
-altogether when unused. Could you please look into that as well?
+> +	designid[32] =3D 0;
 
-Best regards,
-Alexey
+What is this doing?
+
+> +	for (idx =3D 0; idx < 16; idx++)
+> +		sprintf(&serialstring[2*idx], "%02x", device_serial_number[idx]);
+
+blank line here please.
+
+> +	env_set("pf_serial_number", serialstring);
+
+Contrary to what I said yesterday, why not just make this
+"serial_number"? Not like the code is going to run on a non-polarfire.
+
+> +	env_set("pf_design_id", designid);
+
+Ditto here and below.
+
+> +	env_set_ulong("pf_design_ver", designver);
+> +	env_set_ulong("pf_design_backl", designbacklevel);
+> +
+> +	printf("FPGA Design name: %s\n", designid);
+> +	printf("FPGA Serial: %s\n", serialstring);
+> +	printf("Design version number %d (backlevel %d)\n", designver, designba=
+cklevel);
+> +
+>  	/* Update MAC address with device serial number */
+>  	mac_addr[0] =3D 0x00;
+>  	mac_addr[1] =3D 0x04;
+> @@ -182,6 +203,16 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>  	u32 ret;
+>  	int node;
+> =20
+> +	node =3D fdt_path_offset(blob, "/soc");
+
+Putting in the soc node doesn't really make sense anyway, the soc node
+is really the devices on axi buses.
+If this were to go anywhere, it should be in the root node.
+
+Cheers,
+Conor.
+
+> +	if (node >=3D 0) {
+> +		if (env_get("pf_design_ver") !=3D NULL)
+> +			fdt_setprop(blob, node, "fpga-design-version", env_get("pf_design_ver=
+"), strlen(env_get("pf_design_id")) + 1);
+> +		if (env_get("pf_design_backl") !=3D NULL)
+> +			fdt_setprop(blob, node, "fpga-design-version-backlevel", env_get("pf_=
+design_backl"), strlen(env_get("pf_design_backl")) + 1);
+> +		if (env_get("pf_design_id") !=3D NULL)
+> +			fdt_setprop(blob, node, "fpga-design", env_get("pf_design_id"), strle=
+n(env_get("pf_design_id")) + 1);
+> +	}
+> +
+>  	node =3D fdt_path_offset(blob, "/soc/ethernet@20110000");
+>  	if (node >=3D 0) {
+>  		ret =3D fdt_setprop(blob, node, "local-mac-address", mac_addr, 6);
+> diff --git a/drivers/misc/mpfs_syscontroller.c b/drivers/misc/mpfs_syscon=
+troller.c
+> index f608d5518b0..ef03ce7b262 100644
+> --- a/drivers/misc/mpfs_syscontroller.c
+> +++ b/drivers/misc/mpfs_syscontroller.c
+> @@ -129,6 +129,58 @@ int mpfs_syscontroller_read_sernum(struct mpfs_sys_s=
+erv *sys_serv_priv, u8 *devi
+>  }
+>  EXPORT_SYMBOL(mpfs_syscontroller_read_sernum);
+> =20
+> +/**
+> + * mpfs_syscontroller_read_sernum() - Use system service to read the dev=
+ice serial number
+> + * @sys_serv_priv:	system service private data
+> + * @device_serial_number:	device serial number
+> + *
+> + * Return: 0 if all went ok, else return appropriate error
+> + */
+> +int mpfs_syscontroller_read_design_info(struct mpfs_sys_serv *sys_serv_p=
+riv, u8 *designid, u16 *designver, u16 *backlevel)
+> +{
+> +	unsigned long timeoutsecs =3D 300;
+> +	u8 data[36];
+> +	int ret;
+> +
+> +	struct mpfs_mss_response response =3D {
+> +		.resp_status =3D 0U,
+> +		.resp_msg =3D (u32 *)data,
+> +		.resp_size =3D sizeof(data)};
+> +	struct mpfs_mss_msg msg =3D {
+> +		.cmd_opcode =3D 2,
+> +		.cmd_data_size =3D CMD_DATA_SIZE,
+> +		.response =3D &response,
+> +		.cmd_data =3D CMD_DATA,
+> +		.mbox_offset =3D MBOX_OFFSET,
+> +		.resp_offset =3D RESP_OFFSET};
+> +
+> +	ret =3D mpfs_syscontroller_run_service(sys_serv_priv->sys_controller, &=
+msg);
+> +	if (ret) {
+> +		dev_err(sys_serv_priv->sys_controller->chan.dev, "Service failed: %d, =
+abort\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	/* Receive the response */
+> +	ret =3D mbox_recv(&sys_serv_priv->sys_controller->chan, &msg, timeoutse=
+cs);
+> +	if (ret) {
+> +		dev_err(sys_serv_priv->sys_controller->chan.dev, "Service failed: %d, =
+abort. Failure: %u\n", ret, msg.response->resp_status);
+> +		return ret;
+> +	}
+> +
+> +	debug("%s: Read successful %s\n",
+> +	      __func__, sys_serv_priv->sys_controller->chan.dev->name);
+> +
+> +	if (designid !=3D NULL)
+> +		memcpy(designid, &data[2], 30);
+> +	if (designver !=3D NULL)
+> +		memcpy(designver, &data[32], 2);
+> +	if (backlevel !=3D NULL)
+> +		memcpy(backlevel, &data[34], 2);
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL(mpfs_syscontroller_read_design_info);
+> +
+>  static u16 mpfs_syscontroller_service_spi_copy(struct mpfs_sys_serv *sys=
+_serv_priv, u64 dst_addr, u32 src_addr, u32 length)
+>  {
+>  	int ret;
+> diff --git a/include/mpfs-mailbox.h b/include/mpfs-mailbox.h
+> index c0ff327a4ce..5c1ade3e918 100644
+> --- a/include/mpfs-mailbox.h
+> +++ b/include/mpfs-mailbox.h
+> @@ -59,6 +59,7 @@ struct mpfs_sys_serv {
+> =20
+>  int mpfs_syscontroller_run_service(struct mpfs_syscontroller_priv *sys_c=
+ontroller, struct mpfs_mss_msg *msg);
+>  int mpfs_syscontroller_read_sernum(struct mpfs_sys_serv *sys_serv_priv, =
+u8 *device_serial_number);
+> +int mpfs_syscontroller_read_design_info(struct mpfs_sys_serv *sys_serv_p=
+riv, u8 *designid, u16 *designver, u16 *backlevel);
+>  void mpfs_syscontroller_process_dtbo(struct mpfs_sys_serv *sys_serv_priv=
+);
+>  struct mpfs_syscontroller_priv *mpfs_syscontroller_get(struct udevice *d=
+ev);
+> =20
+> --=20
+> 2.34.1
+>=20
+
+--rW7FbuOFq2fluTvI
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaoQl5QAKCRB4tDGHoIJi
+0vSyAP9NmTFKAin3XY2fYbdqITinq9UHTPh+2pMpy6G7ol+ndgD+KMIVr9FBXz4q
+fhroh4tYBrj1IOrv8OTP2rSsjKUfYg0=
+=Iijd
+-----END PGP SIGNATURE-----
+
+--rW7FbuOFq2fluTvI--
