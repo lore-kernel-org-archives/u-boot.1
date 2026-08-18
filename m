@@ -1,86 +1,150 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F32EC5DF74
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 14:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E46C5DF7D
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 15:12:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B6A5C608DA;
-	Tue, 18 Aug 2026 14:34:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1F1834085E;
+	Tue, 18 Aug 2026 15:12:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qJoId-QYd4ov; Tue, 18 Aug 2026 14:34:45 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gcegbcozrdef; Tue, 18 Aug 2026 15:12:04 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0E80C608D1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 68A8140644
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787063685;
-	bh=ukidtSl7g+GfI+Ht4gOT7wTtCPKX/Xjq6PZs6RZbk94=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1787065924;
+	bh=F8jfCm/rN8cMWtbNW3uM1qCkiVaMYl+Erq9AvftDT/E=;
+	h=From:Date:Subject:References:In-Reply-To:To:CC:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aLhIF+RF1wm/FTkIMhCVYlIiM5Jrbzk7rWc34kRqGUWzHIAC9t9po5ifoiK5IQ+YF
-	 5X072YtETcbM4jwsofAL1+/pmfYsKNw0Jv8WUfdbry1iYooApvyFIqxSJnosFTeofc
-	 UNocf8nTuhCSTvCWlnbZfdnY0P2KHNVXfuNGb62GJFIG71xH8+lOLJVeatL3t4PHcm
-	 d9Sth1DlJycEMixNIf4wWydpnpX/j/7J/5SwRraKzfTpFZi4IfBS56MGjF9Z55VjYi
-	 70hpkg9zy/0qJfTC8chvZGgkkU/vsp7gEEWyb+2XTie1BLuvveOSA1fiGf40c82DPa
-	 oYJUtnRFsGQYg==
+	b=oz8xnsg50hQnswPBVHYWj71kJe2sNssfYmAVNbaZnHisjxplJACTCQt9RhT51Ef61
+	 UDWjKMEHuvutxbKeNNU8lNDZt1t5pOZMauQpkY5zoB8Rk2BkOQjSuNadRwy3BwaHoi
+	 Qal4MagKNBppGS6onrO/o4m5Nf1BoW6iZd9sk6+4SBRBlrEA4khLHP//jB38Yzfqce
+	 Vtptt+xSXKYlu/ySM61tS6Fghqj2pOv7f3javGxHcdtZ6h5DAPuwuEYhiiGATX+Cad
+	 AegeHE5MvZ+D9faQrfJDDUwKKl3SAPdIHxbpFP6N3KgUSDdMsbufEHi78mMhiXyamz
+	 kUm+vqgJLoOZg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0E80C608D1;
-	Tue, 18 Aug 2026 14:34:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 621FC2EF
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 14:34:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 68A8140644;
+	Tue, 18 Aug 2026 15:12:04 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2CBC8282
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4DA5E40331
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 14:34:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 12DA380CA7
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Kfh9X0VHW8iO for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 14:34:42 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org E24A540159
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E24A540159
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=V6Fr/GwF
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E24A540159
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 14:34:41 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id F35804195B;
- Tue, 18 Aug 2026 14:34:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31AFF1F000E9;
- Tue, 18 Aug 2026 14:34:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787063680;
- bh=ukidtSl7g+GfI+Ht4gOT7wTtCPKX/Xjq6PZs6RZbk94=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=V6Fr/GwFeQQLqdZNTuuAgiDBzywKzYoJxUl7Oub769J3hmaGjt7g67fQ2OMmCW6cx
- bsUhZ/WqbMUvdQTn7hA1aLGwr0Bd+ux+HlXLqdEGaxQF4HQ24MEWx4JHGEwfNrWD12
- v7rLWnl8/QlyLNJDh0I+2O+ULPiZBrEJOUC0bYVtmE50dAfXI3CZ+j4E4WqauUCgJR
- Bwanc5SjlI8aTmoLROJVEAinGZhsWqvVAgzHiU+j+axT0UZXZ2QYCXfQ52ceojEkJl
- wSldBZdVBrY36HNCa9XK+SRRam6A2kPibn5BvjJKeY3vMPpvqjumKtVD3aAVThVMJ7
- UuACygN+L2DTg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Valentin Liu <valentinliu@icloud.com>, u-boot@lists.u-boot-project.org
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Igor
- Opaniuk <igor.opaniuk@gmail.com>, Valentin Liu <valentinliu@icloud.com>
-Subject: Re: [PATCH v3] boot: android: Add support for the bootflow of
- Android 13+
-In-Reply-To: <20260813200725.151294-1-valentinliu@icloud.com>
-References: <20260813200725.151294-1-valentinliu@icloud.com>
-Date: Tue, 18 Aug 2026 16:34:38 +0200
-Message-ID: <8733wbijk1.fsf@kernel.org>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7y3AEXpp4HxH for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 15:12:01 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::3;
+ helo=du2pr03cu002.outbound.protection.outlook.com;
+ envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org D44DC80C66
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D44DC80C66
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
+ header.s=selector2 header.b=FKXN4lbO
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D44DC80C66
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 15:12:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dD4D2EEK7bVDH+hVnzMDwOaJBfQp9BmKgsqMXUZ24abrirVAhYL4A7b/AMZ3sGLZOoa5SDudm4jsrSP5wsoQhxz889sKC9zAioP4Rw6E31pneIDy5O/3TCsy8nMNqJMe0Px1DPzAN6a1LQoq18kumfCkYJ33icOcyh/LU3+N521ZCNXwu8D8n6CxWChMgYH4lq11vE581oJr6fH92jalE4NVTMtRBMtYr6F29VeFLkCzNt8L2MJ4FmBWLn+YwGUsheFOJwBDK6k8umTyI+9GGfu5X6D3XeNk+ROPXnvBEj1tXJVwG1o3n9DyIJsXtx+ME20rkEi36Y9uAfsOzs7OnA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=F8jfCm/rN8cMWtbNW3uM1qCkiVaMYl+Erq9AvftDT/E=;
+ b=w46ZrgG7AvQdZ8p0wlEU8GGYKYYJ+jNQ4H9wMe9oPYjbpX1twULDlwWIfLULviycCaEdr8DM5t5YUIo8GOJ6odPqZyzJZNrkX0morWheETT7D78sFil9KlHITW1n9H4cNKGbIaN1tXTjkEzO69uACyLxlXGrlcoxAOSCL4kHsDy1Rc7WCRYAsMwpkLLww6DscLUSVuU29UqPwYZusLy5n5Y1SgS++WosRwEDjUiTkCGDbOxpBlfWNn+lRUCIwGTfXYaVh5sAvKxe1Aj7R/koV82J43OZ6y1fblSpADnSM6EdzE2rGdxRZQuIDHOf3td9SjQQLxkB9JSb3upsArqLgA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=F8jfCm/rN8cMWtbNW3uM1qCkiVaMYl+Erq9AvftDT/E=;
+ b=FKXN4lbOAhRCCgk5PZ+THzanfSmdTMlg3fm+qgqwQ05BvXTZC4x3/plT4uTmGSVkel9UdXbrdYsER2FImPS0RtovQW/9Y70He8ZCVWBq/o1nVtu/Br5QNLzW6jEalpn+djC6Rp72LF0lPHahgNxdaAtMwS1URtmqHuGvmzZnLzHzIL8qjgDFFO2KfcU8XofY9I4agvVbIl7258YMzp7m6E6uewifV8LFrDzpoUQm7cI348yPcvqxd25fFUYI0xhwvufDt3QcRGPKWDgU0VMUNCiNyQX24qda/I9C5Iqnp8us0UisV9reD/RTd1H7Ej4imugKpz6kK3JE8ZOYXOSVlA==
+Received: from AS4P190CA0010.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:5de::20)
+ by VI1PR10MB7810.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1cd::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Tue, 18 Aug
+ 2026 15:11:55 +0000
+Received: from AM3PEPF0000A78F.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5de:cafe::52) by AS4P190CA0010.outlook.office365.com
+ (2603:10a6:20b:5de::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.17 via Frontend Transport; Tue,
+ 18 Aug 2026 15:11:55 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AM3PEPF0000A78F.mail.protection.outlook.com (10.167.16.118) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 15:11:55 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 18 Aug
+ 2026 17:17:28 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 18 Aug
+ 2026 17:11:54 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Tue, 18 Aug 2026 17:11:52 +0200
+Subject: [PATCH 2/2] board: st: Fix compilation issue
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-ID: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-2-611201a282ce@foss.st.com>
+References: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-0-611201a282ce@foss.st.com>
+In-Reply-To: <20260818-fix_tamp_fwu_boot_idx_mask-offset_definition-v1-0-611201a282ce@foss.st.com>
+To: <uboot-stm32@st-md-mailman.stormreply.com>,
+ <u-boot@lists.u-boot-project.org>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>
+CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.16.0
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A78F:EE_|VI1PR10MB7810:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2014e21b-e6cd-4d70-48d9-08defd3b0a6c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|23010399003|376014|1800799024|10067099003|56012099006|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: FodjSOrymGxHU8byIiREI5T+V2ZASFtyWtLId0YPhM2UNAaWH8M/oXNijJIu91Stc3zaZf8gySCsVLZ5PrXVFUHTNbyhKYG1PySlGyL0aim4t4agmgcf80iBkjtF3Cs37HxPSiApF0MQ0tDxq/Itzk+ZjIxPEFoLqPXKTFFeTaRiW+XmHt5IPdDBrL/QIJan9055hkK3LrGKVOE439z1me4PZ5dYcQ3sz7QRcOZSwn7Lzd9mpmO68V4JlG3e1vF3CUteGGu+fkUhkRG4fV2dXD5Xgu8D6TB81Co2Qjjc28PUx1uULtZhKFfbmcwHJLw9nlhcWd8igCic59ndP4vDXvJXaqJwoM3CJSDCcHfz9SwpjbUNWZNCVcuXTY8+vgCJylyTXp3X5RvSGeB/4Kq89xvfm6xkoSUD0XmxorJ01B0miO+uGXCMeilc08AUlkzA5yijYxlxeWQ71Wp4kOXMEhhB+xMR2pJdNbR6Sr/wGUAW3q8xfvOKIfK5fuh2p6xtnhsPUZatPgkdA5dbpuS8MI6pGvh20B6rG6+BhX3FIecwOpxT44tnNQ5bGnih/DVLOW3bcb63sTadx1wPA1Wt45ttPE91ZGasKdHMvwkOCuZ53SpaVkptXLL3Cj86Kie1tsIf8LqoiTG/en7OCrB3J2JI2fBMd8y0SsH3Xq6b1mfNiBvkQ21O4X3gs6+P8W4aehh8VkEHfnvjSUAvtz+0Iw==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(23010399003)(376014)(1800799024)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: xSEAwwcWlxfUswSQOsV+qK4hUSrCIFSV4JEVh2Wg9ZUxduZ+lJgGu93UlohYiAgfl/+dftAvCrqaaJ/8RJ3CtBJaeiTf/ILrUsxdE+zcnIRGam7naLLyYHJyNH/K84efxd0nLahM+BhbzBGHZwr26ZECtQH23lXy2apFqCZIbtmDTPUqOORZlQUdFil3ZepLPqsQMJdg7NlV7b1l2eC2/HI6S4L9qb+p7qGGGAuWgpHFbNr/I13Xk/vykcDSY5UEHOD1G1mrFw8bacAGvuZDPIEGpvUecPJj676HfHvFPjXy8UUQUbuRuF1sjj0ap8L6aWJ9DSnN67711MXnXSnKnGmZcnZVs8gsIQk49d3OH121ELqFw9JbbHWf86TpHWVdYVvgROcdja82U2lDpn9uBazRkpLKEbtJa5T4GqZAq4uslEyiLTm3qDrxBZ+uQ52H
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 15:11:55.2111 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2014e21b-e6cd-4d70-48d9-08defd3b0a6c
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A78F.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB7810
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -94,568 +158,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Valentin,
+This patch solves a STM32MP2 compilation issue in
+board/st/common/stm32mp_fwu.c when CONFIG_FWU_MULTI_BANK_UPDATE
+is activated :
+    - error: ‘TAMP_FWU_BOOT_INFO_REG’ undeclared
+    - error: ‘TAMP_FWU_BOOT_IDX_OFFSET’ undeclared
+    - error: ‘TAMP_FWU_BOOT_IDX_MASK’ undeclared
+    - error: implicit declaration of function ‘env_set’
 
-Thank you for the patch and for contributing to U-Boot.
+Fixes: 4369c6a05035 ("board: st: factorize STM32MP FWU multi-bank support")
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ board/st/common/stm32mp_fwu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Fri, Aug 14, 2026 at 04:07, Valentin Liu <valentinliu@icloud.com> wrote:
+diff --git a/board/st/common/stm32mp_fwu.c b/board/st/common/stm32mp_fwu.c
+index ac7ca6bdca2..cff020a99bb 100644
+--- a/board/st/common/stm32mp_fwu.c
++++ b/board/st/common/stm32mp_fwu.c
+@@ -3,9 +3,11 @@
+  * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
+  */
+ 
++#include <env.h>
+ #include <fwu.h>
+ #include <part_efi.h>
+ #include <asm/io.h>
++#include <asm/arch/stm32.h>
+ /**
+  * fwu_plat_get_bootidx() - Get the value of the boot index
+  * @boot_idx: Boot index value
 
-> The devices launching Android 13+ were using a new partition
-> named init_boot to store generic ramdisk.
->
-> In the new bootflow, kernel still be stored in boot image,
-> however, the First Stage files in ramdisk were moved to
-> init_boot image. We should load it to memory and verify it
-> so that the kernel can execute init program to continue booting.
+-- 
+2.43.0
 
-We already have some support for init_boot introduced with
-commit 17b1656dcd07 ("abootimg: Add init_boot image support")
-
-Can you explain in more what is missing in U-Boot and why this patch is
-needed?
-
-Some boards (such as the Beagle Play) already seem to use this, for
-example: board/beagle/beagleplay/beagleplay.env
-
->
-> Link: https://source.android.com/docs/core/architecture/partitions/generic-boot
-> Signed-off-by: Valentin Liu <valentinliu@icloud.com>
-> ---
-> Changes for v2:
-> - Resend without functional changes (mistakenly bumped version).
-> Changes for v3:
-> - Allow booting device with boot header version 4 without an init_boot partition.
-> - Refactor AVB verification logic to verify the boot partition first
->   (to prevent downgrade attacks), then dynamically target the AVB
->   requested_partitions based on header_version.
-
-Can you move the AVB verification logic into a separate patch? That
-would make things a bit easier to review and reason about.
-
-This way, we can look into the details about downgrade attacks and how
-to solve that.
-
-> - Coding style cleanup.
->
->  boot/bootmeth_android.c          | 134 +++++++++++++++++++++++++++++--
->  boot/image-android.c             |  67 ++++++++++++++++
->  cmd/abootimg.c                   |   6 ++
->  doc/develop/bootstd/overview.rst |   3 +
->  include/android_image.h          |   1 +
->  include/image.h                  |  59 ++++++++++++++
->  6 files changed, 265 insertions(+), 5 deletions(-)
->
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> index ec255b072af..aacb7712892 100644
-> --- a/boot/bootmeth_android.c
-> +++ b/boot/bootmeth_android.c
-> @@ -4,6 +4,7 @@
->   *
->   * Copyright (C) 2024 BayLibre, SAS
->   * Written by Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> + * Copyright (c) 2026 Valentin Liu <valentinliu@icloud.com>
-
-Please don't add any copyright lines here. I don't think there is a
-strict policy about this but in my opinion this should not be updated
-each time a new contributor adds some code to this file.
-
->   */
->  #define LOG_CATEGORY UCLASS_BOOTSTD
->  
-> @@ -29,6 +30,7 @@
->  #define BCB_FIELD_COMMAND_SZ 32
->  #define BCB_PART_NAME "misc"
->  #define BOOT_PART_NAME "boot"
-> +#define INIT_BOOT_PART_NAME "init_boot"
->  #define VENDOR_BOOT_PART_NAME "vendor_boot"
->  #define SLOT_LEN 2
->  
-> @@ -47,6 +49,7 @@ struct android_priv {
->  	char *slot;
->  	u32 header_version;
->  	u32 boot_img_size;
-> +	u32 init_boot_img_size;
->  	u32 vendor_boot_img_size;
->  };
->  
-> @@ -113,6 +116,51 @@ static int scan_boot_part(struct udevice *blk, struct android_priv *priv)
->  	return 0;
->  }
->  
-> +static int scan_init_boot_part(struct udevice *blk, struct android_priv *priv)
-> +{
-> +	struct blk_desc *desc = dev_get_uclass_plat(blk);
-> +	struct disk_partition partition;
-> +	char partname[PART_NAME_LEN];
-> +	ulong num_blks, bufsz;
-> +	char *buf;
-> +	int ret;
-> +
-> +	if (priv->slot)
-> +		sprintf(partname, INIT_BOOT_PART_NAME "_%s", priv->slot);
-> +	else
-> +		sprintf(partname, INIT_BOOT_PART_NAME);
-> +
-> +	ret = part_get_info_by_name(desc, partname, &partition);
-> +	if (ret < 0)
-> +		return log_msg_ret("part info", ret);
-> +
-> +	num_blks = DIV_ROUND_UP(sizeof(struct andr_boot_img_hdr_v3), desc->blksz);
-> +	bufsz = num_blks * desc->blksz;
-> +	buf = malloc(bufsz);
-> +	if (!buf)
-> +		return log_msg_ret("buf", -ENOMEM);
-> +
-> +	ret = blk_read(blk, partition.start, num_blks, buf);
-> +	if (ret != num_blks) {
-> +		free(buf);
-> +		return log_msg_ret("part read", -EIO);
-> +	}
-> +
-> +	if (!is_android_init_boot_image_header(buf)) {
-> +		free(buf);
-> +		return log_msg_ret("header", -ENOENT);
-> +	}
-> +
-> +	if (!android_image_get_init_bootimg_size(buf, &priv->init_boot_img_size)) {
-> +		free(buf);
-> +		return log_msg_ret("get init bootimg size", -EINVAL);
-> +	}
-> +
-> +	free(buf);
-> +
-> +	return 0;
-> +}
-> +
->  static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
->  {
->  	struct blk_desc *desc = dev_get_uclass_plat(blk);
-> @@ -291,6 +339,17 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
->  		goto free_priv;
->  	}
->  
-> +	if (priv->header_version >= 4) {
-> +		ret = scan_init_boot_part(bflow->blk, priv);
-> +		if (ret < 0) {
-> +			/*
-> +			 * Android 12 devices do not have the init_boot partition.
-> +			 * Some devices upgraded to Android 13 or later from
-> +			 * earlier Android versions may also not have one.
-> +			 */
-> +			log_debug("scan init_boot failed: err=%d\n", ret);
-> +		}
-> +	}
->  	if (priv->header_version >= 3) {
->  		ret = scan_vendor_boot_part(bflow->blk, priv);
->  		if (ret < 0) {
-> @@ -421,11 +480,31 @@ static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
->  	return 0;
->  }
->  
-> -static int run_avb_verification(struct bootflow *bflow)
-> +/**
-> + * run_avb_verification() - Run the Android Verified Boot (AVB) verification process
-> + *
-> + * Performs AVB slot verification via libavb. When @boot_partition_only is
-> + * true, only the "boot" partition is verified; otherwise the full set of
-> + * partitions required for the current slot (e.g. vbmeta, boot, system,
-
-Per my understanding, vbmeta, vendor and system are not verified by AVB
-(in the U-Boot stage).
-
-vbmeta is used because that's what has the hashes for verifying the
-other partitions.
-
-vendor/system is verified whenever the Android kernel is already started
-and it's dm-verity that handles this.
-
-Can we rework the comment to only list the partitions that we are
-verifying from U-Boot?
-
-> + * vendor, etc.) is verified.
-> + *
-> + * @bflow: bootflow describing the target being booted
-> + * @boot_partition_only: verify only the "boot" partition instead of the
-> + *                        full AVB partition chain
-> + *
-> + * Return: 0 on success, a negative error code if verification fails
-> + */
-> +static int run_avb_verification(struct bootflow *bflow,
-> +				const bool boot_partition_only)
->  {
->  	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
->  	struct android_priv *priv = bflow->bootmeth_priv;
-> -	const char * const requested_partitions[] = {"boot", "vendor_boot", NULL};
-> +	static const char * const boot_only_partitions[] = {"boot", NULL};
-
-What's the benefit of making these static? Can't we keep them as is?
-
-> +	static const char * const v3_hdr_partitions[] = {"boot", "vendor_boot", NULL};
-> +	static const char * const v4_hdr_partitions[] = {
-> +		"boot", "init_boot", "vendor_boot", NULL
-> +	};
-> +	const char * const *requested_partitions;
->  	struct AvbOps *avb_ops;
->  	AvbSlotVerifyResult result;
->  	AvbSlotVerifyData *out_data = NULL;
-> @@ -435,6 +514,22 @@ static int run_avb_verification(struct bootflow *bflow)
->  	bool unlocked = false;
->  	int ret;
->  
-> +	if (boot_partition_only) {
-> +		requested_partitions = boot_only_partitions;
-> +	} else {
-> +		if (priv->header_version >= 4) {
-> +			ret = scan_init_boot_part(bflow->blk, priv);
-
-Can we avoid reading the partition again?
-For example, we already have priv->init_boot_img_size that's available
-here to tell us if we have init_boot or not.
-
-> +			if (ret == 0)
-> +				requested_partitions = v4_hdr_partitions;
-> +			else
-> +				requested_partitions = v3_hdr_partitions;
-> +		} else if (priv->header_version >= 3) {
-> +			requested_partitions = v3_hdr_partitions;
-> +		} else {
-> +			requested_partitions = boot_only_partitions;
-> +		}
-> +	}
-> +
->  	avb_ops = avb_ops_alloc(desc->devnum);
->  	if (!avb_ops)
->  		return log_msg_ret("avb ops", -ENOMEM);
-> @@ -504,9 +599,11 @@ static int run_avb_verification(struct bootflow *bflow)
->  	return ret;
->  }
->  #else
-> -static int run_avb_verification(struct bootflow *bflow)
-> +static int run_avb_verification(struct bootflow *bflow,
-> +				const bool boot_partition_only)
->  {
->  	int ret;
-> +	(void)boot_partition_only;
->  
->  	/* When AVB is unsupported, pass ORANGE state  */
->  	ret = bootflow_cmdline_set_arg(bflow,
-> @@ -556,11 +653,13 @@ static int boot_android_normal(struct bootflow *bflow)
->  	struct android_priv *priv = bflow->bootmeth_priv;
->  	int ret;
->  	ulong loadaddr = env_get_hex("loadaddr", 0);
-> +	ulong iloadaddr = env_get_hex("init_boot_comp_addr_r", 0);
->  	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
->  
-> -	ret = run_avb_verification(bflow);
-> +	/* Check the boot partition first to prevent downgrade attacks. */
-> +	ret = run_avb_verification(bflow, true);
-
-Ditto here. Let's move the downgrade attack protection to a separate
-(prepatory) patch please.
-
->  	if (ret < 0)
-> -		return log_msg_ret("avb", ret);
-> +		return log_msg_ret("boot avb", ret);
->  
->  	/* Read slot once more to decrement counter from BCB */
->  	ret = android_read_slot_from_bcb(bflow, true);
-> @@ -572,6 +671,31 @@ static int boot_android_normal(struct bootflow *bflow)
->  	if (ret < 0)
->  		return log_msg_ret("read boot", ret);
->  
-> +	ret = run_avb_verification(bflow, false);
-> +	if (ret < 0)
-> +		return log_msg_ret("avb", ret);
-> +
-> +	if (priv->header_version >= 4) {
-> +		ret = scan_init_boot_part(bflow->blk, priv);
-> +		if (ret == 0) {
-> +			ret = read_slotted_partition(desc, "init_boot", priv->slot,
-> +						     priv->init_boot_img_size,
-> +						     iloadaddr);
-> +			if (ret < 0)
-> +				return log_msg_ret("read init_boot", ret);
-> +			set_ainit_bootimg_addr(iloadaddr);
-> +		} else if (ret == -1) {
-> +			/*
-> +			 * Android 12 devices do not have the init_boot partition.
-> +			 * Some devices upgraded to Android 13 or later from
-> +			 * earlier Android versions may also not have one.
-> +			 */
-> +			log_debug("init_boot partition is not found");
-> +		} else if (ret < -1) {
-> +			log_debug("scan init_boot failed: err=%d\n", ret);
-> +			return log_msg_ret("read init_boot", ret);
-> +		}
-> +	}
->  	if (priv->header_version >= 3) {
->  		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
->  					     priv->vendor_boot_img_size, vloadaddr);
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index 7740cae8cb6..05eb7e9b6be 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -1,6 +1,7 @@
->  // SPDX-License-Identifier: GPL-2.0+
->  /*
->   * Copyright (c) 2011 Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-> + * Copyright (c) 2026 Valentin Liu <valentinliu@icloud.com>
-
-Same remark here.
-
->   */
->  
->  #include <env.h>
-> @@ -130,6 +131,28 @@ static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3
->  	data->boot_img_total_size = end - map_to_sysmem(hdr);
->  }
->  
-> +static void android_init_boot_image_v4_parse_hdr(const struct andr_boot_img_hdr_v3 *hdr,
-> +						 struct andr_image_data *data)
-> +{
-> +	ulong end;
-> +
-> +	/*
-> +	 * The header takes a full page, the remaining components are aligned
-> +	 * on page boundary.
-> +	 */
-> +	end = (ulong)hdr;
-> +	end += ANDR_GKI_PAGE_SIZE;
-> +	end += ALIGN(hdr->kernel_size, ANDR_GKI_PAGE_SIZE);
-> +	data->ramdisk_ptr = end;
-> +	data->ramdisk_size = hdr->ramdisk_size;
-> +	data->boot_ramdisk_size = hdr->ramdisk_size;
-> +	end += ALIGN(hdr->ramdisk_size, ANDR_GKI_PAGE_SIZE);
-> +
-> +	end += ALIGN(hdr->signature_size, ANDR_GKI_PAGE_SIZE);
-> +
-> +	data->init_boot_img_total_size = end - (ulong)hdr;
-> +}
-> +
->  static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot_img_hdr
->  						      *hdr, struct andr_image_data *data,
->  						      bool write_trailer)
-> @@ -263,6 +286,27 @@ bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size)
->  	return true;
->  }
->  
-> +bool android_image_get_init_bootimg_size(const void *hdr, u32 *init_boot_img_size)
-> +{
-> +	struct andr_image_data data;
-> +
-> +	if (!hdr || !init_boot_img_size) {
-> +		printf("hdr or init_boot_img_size can't be NULL\n");
-> +		return false;
-> +	}
-> +
-> +	if (!is_android_init_boot_image_header(hdr)) {
-> +		printf("Incorrect init boot image header\n");
-> +		return false;
-> +	}
-> +
-> +	android_init_boot_image_v4_parse_hdr(hdr, &data);
-> +
-> +	*init_boot_img_size = data.init_boot_img_total_size;
-> +
-> +	return true;
-> +}
-> +
->  bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img_size)
->  {
->  	struct andr_image_data data;
-> @@ -326,6 +370,24 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
->  	return true;
->  }
->  
-> +bool android_image_get_data_v4(const void *boot_hdr, const void *vendor_boot_hdr,
-> +			       const void *init_boot_hdr, struct andr_image_data *data)
-> +{
-> +	if (!android_image_get_data(boot_hdr, vendor_boot_hdr, data)) {
-> +		printf("An error happened while calling android_image_get_data().\n");
-
-android_image_get_data() already prints out a specific error on each
-failure path. This printf() is not needed. Please drop it.
-
-> +		return false;
-> +	}
-> +
-> +	if (!is_android_init_boot_image_header(init_boot_hdr)) {
-> +		printf("Incorrect init boot image header\n");
-> +		return false;
-> +	}
-> +
-> +	android_init_boot_image_v4_parse_hdr(init_boot_hdr, data);
-> +
-> +	return true;
-> +}
-> +
->  static ulong android_image_get_kernel_addr(struct andr_image_data *img_data,
->  					   ulong comp)
->  {
-> @@ -466,6 +528,11 @@ bool is_android_vendor_boot_image_header(const void *vendor_boot_img)
->  	return !memcmp(VENDOR_BOOT_MAGIC, vendor_boot_img, ANDR_VENDOR_BOOT_MAGIC_SIZE);
->  }
->  
-> +bool is_android_init_boot_image_header(const void *init_boot_img)
-> +{
-> +	return !memcmp(ANDR_BOOT_MAGIC, init_boot_img, ANDR_BOOT_MAGIC_SIZE);
-
-This is the same body as is_android_boot_image_header(). Can't we just
-call that instead?
-
-> +}
-> +
->  bool is_android_boot_image_header(const void *hdr)
->  {
->  	return !memcmp(ANDR_BOOT_MAGIC, hdr, ANDR_BOOT_MAGIC_SIZE);
-> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-> index eae3e643b60..b32872bba7f 100644
-> --- a/cmd/abootimg.c
-> +++ b/cmd/abootimg.c
-> @@ -2,6 +2,7 @@
->  /*
->   * (C) Copyright 2020
->   * Sam Protsenko <joe.skb7@gmail.com>
-> + * Copyright (c) 2026 Valentin Liu <valentinliu@icloud.com>
-
-Same here
-
->   */
->  
->  #include <android_image.h>
-> @@ -33,6 +34,11 @@ ulong get_ainit_bootimg_addr(void)
->  	return _ainit_bootimg_addr;
->  }
->  
-> +void set_ainit_bootimg_addr(ulong addr)
-> +{
-> +	_ainit_bootimg_addr = addr;
-> +}
-> +
->  ulong get_avendor_bootimg_addr(void)
->  {
->  	return _avendor_bootimg_addr;
-> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-> index ec9fafa0fa0..f1306ae0a8f 100644
-> --- a/doc/develop/bootstd/overview.rst
-> +++ b/doc/develop/bootstd/overview.rst
-> @@ -293,6 +293,9 @@ script_offset_f
->  script_size_f
->      Size of the script to load, e.g. 0x2000
->  
-> +init_boot_comp_addr_r
-> +    Address to which to load the init_boot Android image, e.g. 0xd0000000
-> +
->  vendor_boot_comp_addr_r
->      Address to which to load the vendor_boot Android image, e.g. 0xe0000000
->  
-> diff --git a/include/android_image.h b/include/android_image.h
-> index a2d80499ba3..134b5ed74d6 100644
-> --- a/include/android_image.h
-> +++ b/include/android_image.h
-> @@ -357,6 +357,7 @@ struct andr_image_data {
->  	ulong tags_addr;  /* physical addr for kernel tags */
->  	u32 header_version;  /* version of the boot image header */
->  	u32 boot_img_total_size;  /* boot image size */
-> +	u32 init_boot_img_total_size;  /* init boot image size */
->  	u32 vendor_boot_img_total_size;  /* vendor boot image size */
->  };
->  
-> diff --git a/include/image.h b/include/image.h
-> index 6edcb1995bf..b323b5f880e 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -2015,6 +2015,30 @@ struct andr_image_data;
->   */
->  bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size);
->  
-> +/**
-> + * android_image_get_init_bootimg_size() - Extract size of Android init_boot image
-
-Shouldn't this be android_image_get_bootimg_size()?
-
-It looks like a copy paste from the function below.
-
-> + *
-> + * This is used to extract the size of an Android init_boot image
-> + * from init_boot image header.
-> + *
-> + * @hdr: Pointer to init_boot image header
-> + * @init_boot_img_size: On exit returns the size in bytes of the init_boot image
-> + * Return: true if succeeded, false otherwise
-> + */
-> +bool android_image_get_bootimg_size(const void *hdr, u32 *init_boot_img_size);
-> +
-> +/**
-> + * android_image_get_init_bootimg_size() - Extract size of Android init_boot image
-> + *
-> + * This is used to extract the size of an Android init_boot image
-> + * from init_boot image header.
-> + *
-> + * @hdr: Pointer to init_boot image header
-> + * @init_boot_img_size: On exit returns the size in bytes of the init_boot image
-> + * Return: true if succeeded, false otherwise
-> + */
-> +bool android_image_get_init_bootimg_size(const void *hdr, u32 *init_boot_img_size);
-> +
->  /**
->   * android_image_get_vendor_bootimg_size() - Extract size of Android vendor-boot image
->   *
-> @@ -2041,6 +2065,23 @@ bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img
->  bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
->  			    struct andr_image_data *data);
->  
-> +/**
-> + * android_image_get_data_v4() - Parse Android header version 4 boot images
-> + *
-> + * This is used to parse boot, vendor-boot and init boot header into
-> + * andr_image_data generic structure.
-> + * The Android 13 and newer has splited parameters from boot and
-> + * vendor_boot images to the init_boot image.
-> + *
-> + * @boot_hdr: Pointer to boot image header
-> + * @vendor_boot_hdr: Pointer to vendor boot image header
-> + * @init_boot_hdr: Pointer to init boot image header
-> + * @data: Pointer to generic boot format structure
-> + * Return: true if succeeded, false otherwise
-> + */
-> +bool android_image_get_data_v4(const void *boot_hdr, const void *vendor_boot_hdr,
-> +			       const void *init_boot_hdr, struct andr_image_data *data);
-> +
->  struct andr_boot_img_hdr_v0;
->  
->  /**
-> @@ -2167,6 +2208,17 @@ bool android_image_print_dtb_contents(ulong hdr_addr);
->   */
->  bool is_android_boot_image_header(const void *hdr);
->  
-> +/**
-> + * is_android_init_boot_image_header() - Check the magic of init boot image
-> + *
-> + * This checks the header of Android init boot image and verifies the
-> + * magic is "ANDROID!" (same with the boot image)
-> + *
-> + * @init_boot_img: Pointer to boot image
-> + * Return: non-zero if the magic is correct, zero otherwise
-> + */
-> +bool is_android_init_boot_image_header(const void *init_boot_img);
-> +
->  /**
->   * is_android_vendor_boot_image_header() - Check the magic of vendor boot image
->   *
-> @@ -2199,6 +2251,13 @@ void set_abootimg_addr(ulong addr);
->   */
->  ulong get_ainit_bootimg_addr(void);
->  
-> +/**
-> + * set_ainit_bootimg_addr() - Set Android init boot image address
-> + *
-> + * Return: no returned results
-> + */
-> +void set_ainit_bootimg_addr(ulong addr);
-> +
->  /**
->   * get_avendor_bootimg_addr() - Get Android vendor boot image address
->   *
-> -- 
-> 2.53.0
