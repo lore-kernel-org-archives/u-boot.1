@@ -1,130 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D8A4C5DF7D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFBFFC5DF7E
 	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:50:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 040674087E;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 703A8810C8;
 	Tue, 18 Aug 2026 13:50:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FaXHxKEeU6S4; Tue, 18 Aug 2026 13:50:45 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8pU-zA5zrH3P; Tue, 18 Aug 2026 13:50:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A402B4064B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A5D2F810B7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787061045;
-	bh=NWtA22MklSUFhb7IN601MDVTD+9TKw0j9YPtYPo0Gj4=;
+	d=lists.u-boot-project.org ; s=default; t=1787061046;
+	bh=2rsZCWRaf0AzvuJIMMsJwDLE/n7B67tcvaIvPs+YFu0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=y+cMUQbf9dCZdkuCoE2PUf8afjTq0b4iCvGOM6Jkf/d7yzqBdGpSAcVSnWcnLRhCc
-	 qj9/cMBZi2vI9rAvv/4Su2KKeKv839e8N0leKw/UB1G6vPGwtmIj0ulGOewdl65+NS
-	 ynAitONTEGb20hHCAo8rt17kbgnk6QRJKAZfJjdvCeM1+fwKC1nxcyGwOgI4Vg7xeD
-	 lWoMcZWjg2nEWmNR21O77Z9xnD27YA2OPKv+OgEO2vPPCNzODjELM3g41AA6iOwhZd
-	 MF+ie8qr4KbjHPBPQDW0+SsVxflPXn+ZsqdWW0o97iZ2EKjF2gCPgnIs9+94TDyMo4
-	 Q3/DorEIixVeQ==
+	b=jFB96N7KvCEkM8/kieqNSsC1d2DMpm+DwFhlVxjamZ6wUWGtDuKzhF4P5OxzqK/+C
+	 J57bis8mNs3039NCAEVl/EGFSY8dINkTqFlDB5H0mMNE7oimBzV6U46P0D0hmh/+In
+	 ExWSvJY6yFT5tVwXJoyhpYvNHQq/MJciYxiF6OxDyJ8q05AzzKkDgpcxsQzg/4/NiG
+	 EhA4xsI7C6ZfCCAEmd4PhExiQ0BplCvuRcadEeN4PAiLA4dSVeQKUQ+JmduPoGfWBn
+	 k/IfKOLdxUAnqgaAIpmP0vY2LkWDpJ4Pv043ZyP9btnsFtRLv0nHAgiTXzjHRQckgA
+	 mOr5d2Qu5z2vw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A402B4064B;
-	Tue, 18 Aug 2026 13:50:45 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 834B8282
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A5D2F810B7;
+	Tue, 18 Aug 2026 13:50:46 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BEBB6194
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6906C407F0
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:53 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B0F3D40159
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7KO26i0FzWN4 for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 13:23:52 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MHX3QrOmnbWG for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 13:23:53 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 9009D40760
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 0A87F400EC
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9009D40760
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0A87F400EC
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
  unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=tTIrppk6
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9009D40760
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:50 +0000 (UTC)
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
+ header.a=rsa-sha256 header.s=20251003 header.b=Uv8BLcMJ
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0A87F400EC
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:52 +0000 (UTC)
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4F7443F62F
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:48 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B0B963F8AE
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:23:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787059428;
- bh=NWtA22MklSUFhb7IN601MDVTD+9TKw0j9YPtYPo0Gj4=;
+ s=20251003; t=1787059430;
+ bh=2rsZCWRaf0AzvuJIMMsJwDLE/n7B67tcvaIvPs+YFu0=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=tTIrppk6lTTccN4Viz+8NAMES6GFEYqAJ/wnT+XGUdbCVHlDGxC+R0E+nUhhzif/H
- k92IUU9UwGJfY30tJ/T3OdJBonkkly+or6YR3UEoIBWI0BrNrVzSrc1blMpKMF7IFT
- yGBih2ymjL2kcA+QVzIE6Bx+JEn63EaTgr1EEakDcaS1/OF6qTiJ9qN4WpR5AHT0Rn
- cHvWbEh7NjRTyflhbbvgPUMNjMNMlIlTgGGdFpZHfA24CkbRKgJ3KBAghmdLNQ9tji
- UhGq/81qY5egfa7032AVKv4OBPhWliTz/VMvjt4sOk9jSUca70sSCzYJHFIbwbDuJO
- Qsvizra9y/ZHFG62ER8+FuvL4oigglZUkNVwdWcJTNxWdjL9md4kRUk5anAJsJkBRW
- wvsiKLyTHbrSTahkZoh5tdhILCSvYgrE7ihPos4tRVjbxsm/OxwMlSxTrJqIIs5+Ge
- gzC+04fmpiXj2W7dXwfuWSMse4Z4PZdMSxL9iC6U4Z5WbX9XABhQaLzdv3uH62fNUL
- 6jHMSXh/312rcF+qYeA36sjoY9+bquKUDrcLvyv+gStkRNGw1JPi+akuekp/3B112j
- NGy0flZ9vJqb6sHmmltYs3DPlltDf6hAKhGOE39Z2Ez49nZQUyOg0pImBOuF4wfZGH
- 9/XZsuNQuh4+bdLAuf6P5jLM=
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-84c4cd31b51so1285591b3a.0
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:23:48 -0700 (PDT)
+ b=Uv8BLcMJMWUtAlaRCft4pLFWYDKf3y+B9CMwlX/TxuVBbtri5W3YrGlenOAB4p0kX
+ zFMU0K65/b9QFHEKQgsH8TVElcgqJz/Chd8DC3lIHyAnEZGYkNVU7RnMJSLTWFQAVp
+ aN85YBWyP16Q2ABuvQYy12ROijF77A/sNMQLj6G9kVCvmh+XA+dwORlhj/Sosa/Stg
+ 9BdgQfdJeQli7YQxJNrCD/P/8aoWBtnvGSbVa1ZF8QZK5J83mAcf3ItVeYHl2hrwh2
+ lv15ymDkuVJsFpRWv5DBAfdy0rXyrpPwAePiwD41HOwPHGCC52nuB/Ku7pm5oBgiV3
+ 9Cg8cj24cso2DO5zJAJmTKeeZgUyFD4EtEw/oe/inOxzNEE4s5nhAqUzfzhRIE25zC
+ 5dbGq2j7UhLrafbEySPEeo8O9oYOj7LR1GMFFtJ0WdBq9ZJO6oLStQxGJs4/OY3d6D
+ X16yf45SRNHoPz5YY78oVyTtVrmj9yoRkzH8xCnU5TDjoX/zueOToSi7XznHJbx/Gc
+ 6M3sErT5l+ZL7H60CcpHtIbinIEwEY0vTPGLzVIKJtg210EvzRf8PFCZCibtFrUoIP
+ mFd4NCH6uKq8N3oj2bfyBUVVnJLsPwWo4rqQZ88VyYhlEmrAcPL0Bo/cjQ1RRyeADE
+ t5O7xVWwF5HW8qbCn0HgchyE=
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-84870e7f498so4838797b3a.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:23:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787059427; x=1787664227;
+ d=1e100.net; s=20251104; t=1787059429; x=1787664229;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=NWtA22MklSUFhb7IN601MDVTD+9TKw0j9YPtYPo0Gj4=;
- b=pY25UafSUz27WlDiE4EJC+6Tfk7jZJR5B8spIYi18UAIEHda0n1bHgjO2bKDXIKJt2
- TQIVRpRVpwqw5B89dKD4cDjt2Rc2PVP8bCDgwREowZRn0buvhynI20YZtCA1ABWOzPiL
- MiBef/XSL+i9libbM0ljcC6ckm5BO8JoowC8EwDIGdE+c1zQd6pEQmY+UMhtIs+VeOst
- 782q7rkM8/ARdcOjVhiPjoN9W9PAo6UoBJp7FNTc0gu2S30e9USPMgksa+HsBw7z1L9S
- QD5GHdEVjZ8/Hg7EZs6n8vK2set6ayT+oIuCzujRFf0SoQ9eOkzmc80nZl90Bu7QQzrz
- +2jQ==
-X-Gm-Message-State: AOJu0Yxlj3o+GD57kD10PorD2jp752vxI9nbpeBuMuyiRqVdQhCSn/QE
- UeUr+YGwnh7XUf8Oap8uuohW5I2l0PuVBZZI3yvVdVdCT7EJAtbPd9DgOT2j1GOQPMi2q7rvKor
- 2Wyer0RF2DA9LDo1b5Q91LHGfqNmIOKSqMF/hQw/6eDnCFLB4cSXtiSn//0wd3M5WG3YKL3YHhE
- a7Ne7fAqcWi6QK4XCdbQ==
-X-Gm-Gg: AR+sD13Q7ySp9Vg4eSgKz6oVUu3Zz+m9Ijdt9GbpsOf3y4UNflF4lhkdgo4ox2mWjUs
- AUgOZ+zpzX8OYy8H6a4RmQyqUpdKcr1KqCtTutR58Ynw+JfE+UlmW6PNsS7D9wEoLW8zfEnZk8b
- tYx2T/SniC5Ul0YuRj8AgMJkC/mtS0qMPUhMQkHhx66ng9JRWszSZcI1G5tSjct94P6mLvY7F2L
- +T9rWGkezypM7CodY5Rh8JPSXTlpmfYRIT5I73Eh1IAGxNjvapg43fWfnKcqUNukFYps5zocJaj
- rmbrO8lrW1qp2VKiFsJdepe64P36qwsOEjGoBM/fye+5ym31RxY3afwKBHXw4UjjVHk6ZZuWQ9f
- 7Z8T02V7VnEvV4okhqJ36w8Z7nQMTfZaV2LJ9DHcMY482d1Sd
-X-Received: by 2002:a05:6a00:1d96:b0:836:6f2e:bb6d with SMTP id
- d2e1a72fcca58-851bc3cce42mr5674255b3a.14.1787059426683; 
- Tue, 18 Aug 2026 06:23:46 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1d96:b0:836:6f2e:bb6d with SMTP id
- d2e1a72fcca58-851bc3cce42mr5674216b3a.14.1787059426117; 
- Tue, 18 Aug 2026 06:23:46 -0700 (PDT)
+ bh=2rsZCWRaf0AzvuJIMMsJwDLE/n7B67tcvaIvPs+YFu0=;
+ b=jm0395oapAFK08lEJTmNc6JUNUXtm62mSKdgaZDGI8WdIof4KmVNV88MaHK45+lPBw
+ 0xtUuLQHWOiWLAJNiwss+eitUiHZNIPbL3YSIWAJenJlbFah+20P9ScR/sEXhxSQqaSy
+ 62SBVLxMbMHyWUJ4YvORNH78+0jxWbTKST5EMgYJluCTKuOxlJLxlZvNko9yk536Z4+e
+ /3Gn+Z/TO1NomRPGp58IvZmJ+XStGM73/a8ElHAKZYuLxsS2NoXqOJmgAB/WP59a5yyr
+ veInS+F8be58HX2DaEtvvVQBUUG3iU3OymQa2HxqzdyYFNpZ1DqsTvbce3AuT4ZGqn6J
+ nUVw==
+X-Gm-Message-State: AOJu0YwLfoPx2duEyL807i850fnaOKSsWRR1kqSGCbFoqxl1edPW9EoA
+ 4+g6wehnIMygja/Vsp/hzyx7jXmRKkbR+XiWks+gvsfvy17hV+b0OYtYqZthMWgVClCEWRgJwq/
+ 8gNiXyGk2coo48j+HkbpBIAZKt9xyBPi38P1QRqXPf/dcoKuUiQR/i+kEg4yX31E5W2GhOYDyYU
+ PBl98F41mYXbXOmGhjDw==
+X-Gm-Gg: AR+sD127GOtbahJcUgGcLOn/2CNB6LbLxLBF5D+y/+2Obpa8kxcF1Os2eMEFDn5L/Ze
+ nBNPrsF6hD21RVFY6FtXFDuAYck9DM83+autSD4W8yt1TgZz8cX32AX7qVGJvaZkJpSwezH00sW
+ lmVyNDmsVtb3vCcTx+diDCZnqOe+Btw6eVl2eY79wc7UebVGHEXTItZVKc/pLcxVT0+qU92QsCh
+ 0h/j034CsPwtRLtD6TDVQabuOVGKLrqqqbjmZC0X7l9CETwxzK7AfGzDURyTuUj8VHMfxjLBYXI
+ /9o4QCzE3Tinp+5GTYWojLvaQyfG54mAPtJOyb96Z6ankRFv3lo4pfy8S/41/hmmVR4oGASYh8R
+ v5EExoGS5mdQYmF/NmHgeTqqRf00X8wbbdGc+9k5tiP8LzvK/
+X-Received: by 2002:a05:6a00:9a9:b0:846:a26:8e0b with SMTP id
+ d2e1a72fcca58-84fde521a09mr30616690b3a.18.1787059429015; 
+ Tue, 18 Aug 2026 06:23:49 -0700 (PDT)
+X-Received: by 2002:a05:6a00:9a9:b0:846:a26:8e0b with SMTP id
+ d2e1a72fcca58-84fde521a09mr30616593b3a.18.1787059428545; 
+ Tue, 18 Aug 2026 06:23:48 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851b6fc0e84sm1515818b3a.43.2026.08.18.06.23.44
+ d2e1a72fcca58-851b6fc0e84sm1515818b3a.43.2026.08.18.06.23.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 06:23:45 -0700 (PDT)
+ Tue, 18 Aug 2026 06:23:48 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: sjg@chromium.org, nora.schiffer@ew.tq-group.com,
- Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v2 0/8] bootm: size the noload buffer from the compressor
- header
-Date: Tue, 18 Aug 2026 13:23:14 +0000
-Message-ID: <20260818132332.324173-1-aristo.chen@canonical.com>
+ Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/8] bootm: size the noload gzip decompression buffer from
+ ISIZE
+Date: Tue, 18 Aug 2026 13:23:15 +0000
+Message-ID: <20260818132332.324173-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260809042338.63397-1-aristo.chen@canonical.com>
+In-Reply-To: <20260818132332.324173-1-aristo.chen@canonical.com>
 References: <20260809042338.63397-1-aristo.chen@canonical.com>
+ <20260818132332.324173-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 18 Aug 2026 13:50:44 +0000
@@ -141,187 +142,117 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This is v2 of "bootm: size the noload decompression buffer from the
-compressor header". Tom pushed back on v1
-(https://patchwork.ozlabs.org/project/uboot/patch/20260809042338.63397-2-aristo.chen@canonical.com/)
-on two grounds:
+For a compressed kernel_noload image, bootm_load_os() allocates a
+per-image decompression buffer of ALIGN(image_len * 8, SZ_1M). The 8x
+multiplier is a heuristic that comfortably covers what zstd and xz
+achieve on real kernels, but a highly compressible payload (say, a
+run of zeros) can exceed it and fail decompression.
 
-  1. No concrete problem report driving the change.
-  2. ~1297 platforms grew by ~170-400 bytes; the change is not
-     opt-in, so the size cost falls on everyone.
+gzip carries the original size in the last 4 bytes of the stream
+(ISIZE, modulo 2^32). Where the compressed image is a gzip stream,
+read ISIZE and use ALIGN(hdr_size, SZ_1M) as the buffer, capped at
+CONFIG_SYS_BOOTM_LEN because the value is attacker-controlled. For
+non-gzip streams or when ISIZE cannot be trusted, fall back to the
+existing 8x multiplier.
 
-On the first point, Nora Schiffer replied with a concrete use case
-(EFI-in-FIT plus padded loaders such as shim, systemd-boot, and
-OpenWrt's lzma-loader can produce compression ratios that outrun the
-8x heuristic), and mentioned this is on the road map for TQ-Systems
-standard BSPs.
+The size read is done via a small static helper in bootm.c, wired up
+via a switch on os.comp so the same pattern can be extended to other
+formats without adding a new public interface. The other formats
+U-Boot supports (lzma, lz4, zstd) also carry a size hint and are
+added in follow-up patches.
 
-On the second point, v2 reworks the implementation to cut the size
-cost, measures it across the format and architecture buckets, and
-splits the work per format so each decompressor's support can be
-taken or dropped on its own.
+Suggested-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ boot/bootm.c | 47 ++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 42 insertions(+), 5 deletions(-)
 
-Background: for a compressed kernel_noload image, bootm_load_os()
-sizes the decompression buffer as ALIGN(image_len * 8, SZ_1M). The
-8x heuristic works for typical kernels, but any well-compressed
-payload can exceed it, and no fixed multiplier is safe against
-arbitrarily compressible input.
-
-Each implementation patch adds a small static header-parse helper in
-bootm.c (no new public API) and wires it into a size-hint switch;
-helper and switch case are only compiled when the matching
-decompressor is enabled, so boards that do not build a format pay no
-code for it. gzip's ISIZE is a fixed trailer read, lzma's size a
-fixed header read, lz4 mirrors ulz4fn()'s frame-header validation,
-and zstd asks zstd_get_frame_header(), whose frame-parsing code
-already ships with the zstd decompressor. The header-recorded value
-is attacker-controlled, so it is capped at CONFIG_SYS_BOOTM_LEN, and
-it is only an allocation hint: the decoder stays authoritative
-during the actual decompression.
-
-Text size deltas of the u-boot ELF (size(1), distro gcc 13.3 cross
-toolchains); data/bss are unchanged everywhere. To make the columns
-directly comparable, the v1 column is v1's implementation commit
-cherry-picked onto this series' base, so both columns share one
-baseline:
-
-  board          arch     decompressors        v1        v2
-  qemu_arm       arm      gzip                +160      +104
-  qemu-ppce500   powerpc  gzip                +176      +112
-  mt7623n_bpir2  arm      gzip+lzma           +184      +128
-  qemu_arm64     arm64    gzip+lzma+lz4       +384      +368
-  qemu-riscv64   riscv64  gzip+lzma+lz4       +332      +352
-  th1520_lpi4a   riscv64  all four            +412      +404
-  am62x_evm_a53  arm64    all four, LTO       +0 *    +8192 *
-  qemu-x86       x86      none                +108        -2
-
-  * am62x_evm_a53's number is dominated by the Cortex-A53 erratum
-    843419 linker workaround (default-enabled in distro binutils for
-    aarch64): symbol-level code growth (nm -S) is +392 for v1 and
-    +452 for v2, but those bytes shift which ADRP instructions land
-    at the erratum's page offsets, and ld pads each inserted veneer
-    to a full 4 KiB page. v2 happens to trigger two such pages here;
-    v1 triggered the same two on its own original base and none on
-    this one. See the world-build note below.
-
-To see how much each bucket weighs, I configured all 1550 defconfigs
-and sorted them by which decompressors they enable next to bootm:
-
-  858  gzip only (722 of them arm, essentially the 32-bit boards)
-  530  gzip+lzma+lz4 (494 arm, mostly arm64, plus 36 riscv)
-   38  gzip+lzma
-   31  bootm with no decompressor at all
-   27  gzip+lzma+lz4+zstd
-   19  gzip+lz4
-   15  gzip+zstd
-    6  other combinations
-   26  do not link bootm at all
-
-To measure at the same scale as the original objection, I also ran a
-full world build (buildman, all 1550 defconfigs, distro plus
-kernel.org toolchains, gcc 13.3/14.2) over one branch holding the
-base, the v1 implementation, its revert, and this series. 1496
-boards built on all four commits with the revert reproducing the
-base sizes exactly (44 boards did not build on every commit, and 10
-built nondeterministically; both sets were excluded). Of those 1496,
-the same 1375 change under either version and the rest are
-untouched, including every board without bootm or without a
-decompressor:
-
-                                        v1            v2
-  mean delta over all boards          +194 B        +166 B
-  median delta (changed boards)       +160 B         +96 B
-  median, 856 gzip-only boards        +112 B         +80 B
-  median, 517 gzip+lzma+lz4 boards    +392 B        +376 B
-  boards cheaper with v2                   -          1222
-  boards costlier with v2                  -            74
-
-The world build also puts the am62x footnote in proportion: 53
-boards under v1 and 49 under v2 (28 in both sets), all arm64, show
-size(1) jumps of one or two 4 KiB pages in either direction (min
--8192, max +8192). The mechanism is the Cortex-A53 erratum 843419
-linker workaround: when a code change shifts which ADRP instructions
-land at page offsets 0xff8/0xffc, ld materialises a 16-byte veneer
-and pads it to a full 4 KiB page so the page offsets of all
-downstream code stay unchanged. Any few-hundred-byte change re-rolls
-which boards are affected, in both directions; symbol-level growth
-on every such board I checked matches the byte ranges above.
-
-Since Tom noted the higher growth in his run was on multi-algorithm
-platforms: building each patch in sequence on a gzip+lzma+lz4 board
-(qemu_arm64) and an all-four board (th1520_lpi4a) gives the
-per-format cost directly, in bytes:
-
-               qemu_arm64    th1520_lpi4a
-  gzip             +112             +86
-  zstd               +0             +62
-  lz4              +176            +176
-  lzma              +80             +80
-
-(zstd is +0 on qemu_arm64 because that board does not enable it, so
-the guard really does compile the helper out.) lz4 is the most
-expensive parser because it mirrors ulz4fn()'s frame validation;
-zstd is the cheapest because zstd_get_frame_header() already ships
-with the decompressor. Since the series is split per format, if the
-multi-algorithm cost still looks too high, dropping the lz4 patch
-alone would cut the 517-board gzip+lzma+lz4 bucket from a median of
-+376 to roughly +200; lz4 images then simply keep the 8x fallback.
-
-In the v1 thread Simon suggested recording the uncompressed size as
-a FIT property instead. As discussed there, the two compose: a FIT
-property could be layered on top later, with bootm preferring the
-property, then the stream header, then the 8x fallback. This series
-provides the part that works for every existing image and for the
-legacy uImage form of kernel_noload.
-
-Series layout, one decompressor at a time:
-
-  1. gzip helper + wiring
-  2. gzip pytests (lying-header overflow, header-sized, boundary)
-  3. zstd helper
-  4. zstd pytest (guarded by requiredtool zstd)
-  5. lz4 helper
-  6. lz4 pytest (guarded by requiredtool lz4)
-  7. lzma helper
-  8. lzma pytests (real size patched into the header field, plus the
-     "unknown" size marker fallback; needs no external tool since
-     Python's lzma module is in the standard library)
-
-Every patch builds in isolation on sandbox_defconfig and
-qemu_arm_defconfig; the seven kernel_noload_decomp pytests and the
-full test_fit class pass on sandbox.
-
-Changes in v2:
-- split the single implementation patch into per-format patches
-  (gzip, zstd, lz4, lzma), each acceptable or droppable on its own
-- make the helpers static in bootm.c, compiled only when the
-  matching decompressor is enabled, instead of one always-built
-  public image_decomp_get_uncompressed_size() in boot/image.c; this
-  removes the cost from boards without the formats entirely
-- regroup the pytests per format, next to the patch they exercise
-- add runtime lzma coverage (header-recorded size and the "unknown"
-  marker fallback) in place of v1's parser-only C unit test, which
-  cannot reach a static helper
-- measure the size cost on a common base across all 1550 boards and
-  document the per-bucket numbers and the arm64 erratum-843419 page
-  effect in this cover letter
-
-Aristo Chen (8):
-  bootm: size the noload gzip decompression buffer from ISIZE
-  test: fit: cover the kernel_noload gzip header-size and lying-header
-    paths
-  bootm: size the noload zstd decompression buffer from
-    Frame_Content_Size
-  test: fit: cover the kernel_noload zstd header-size path
-  bootm: size the noload lz4 decompression buffer from Content_Size
-  test: fit: cover the kernel_noload lz4 header-size path
-  bootm: size the noload lzma decompression buffer from the header
-  test: fit: cover the kernel_noload lzma header-size and unknown-size
-    paths
-
- boot/bootm.c              | 144 ++++++++++++++++++++++-
- test/py/tests/test_fit.py | 282 ++++++++++++++++++++++++++++++++++++++++++----
- 2 files changed, 400 insertions(+), 26 deletions(-)
-
---
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 3bce8586834..ab787979f2e 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -23,6 +23,7 @@
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
++#include <asm/unaligned.h>
+ #include <linux/sizes.h>
+ #include <tpm-v2.h>
+ #include <tpm_tcg2.h>
+@@ -638,6 +639,24 @@ static int handle_decomp_error(int comp_type, size_t uncomp_size,
+ #endif
+ 
+ #ifndef USE_HOSTCC
++#if CONFIG_IS_ENABLED(GZIP)
++/*
++ * Return the gzip stream's uncompressed size from its ISIZE trailer, or
++ * 0 if the buffer is not a gzip stream. Only the two magic bytes are
++ * checked, since a fuller validation happens inside gunzip() during
++ * decompression; the caller uses the return value as a size hint only.
++ */
++static ulong bootm_gzip_uncompressed_size(const void *src, ulong len)
++{
++	const u8 *b = src;
++
++	/* Minimum gzip: 10-byte header + 2-byte deflate + 8-byte trailer */
++	if (len < 20 || b[0] != 0x1f || b[1] != 0x8b)
++		return 0;
++	return get_unaligned_le32(b + len - 4);
++}
++#endif
++
+ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ {
+ 	const struct image_info os = images->os;
+@@ -654,17 +673,36 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	void *load_buf, *image_buf;
+ 	int err;
+ 
++	image_buf = map_sysmem(os.image_start, image_len);
++
+ 	/*
+ 	 * For a "noload" compressed kernel we need to allocate a buffer large
+ 	 * enough to decompress in to and use that as the load address now.
+-	 * Allow up to 8x compression: this comfortably covers what zstd and xz
+-	 * achieve on real kernels, with headroom for well-compressed payloads.
+-	 * Use an alignment of 2MB since this might help arm64
++	 * For a gzip stream the trailing 4-byte ISIZE field holds the
++	 * original size modulo 2^32; when it is present and within
++	 * CONFIG_SYS_BOOTM_LEN, allocate exactly that. Otherwise fall back
++	 * to an 8x multiplier, which comfortably covers what zstd and xz
++	 * achieve on real kernels with headroom for well-compressed
++	 * payloads. Use an alignment of 2MB since this might help arm64.
+ 	 */
+ 	if (os.type == IH_TYPE_KERNEL_NOLOAD && os.comp != IH_COMP_NONE) {
+ 		phys_addr_t addr;
++		ulong hdr_size = 0;
+ 
+-		decomp_len = ALIGN(image_len * 8, SZ_1M);
++		switch (os.comp) {
++#if CONFIG_IS_ENABLED(GZIP)
++		case IH_COMP_GZIP:
++			hdr_size = bootm_gzip_uncompressed_size(image_buf,
++								image_len);
++			break;
++#endif
++		default:
++			break;
++		}
++		if (hdr_size && hdr_size <= CONFIG_SYS_BOOTM_LEN)
++			decomp_len = ALIGN(hdr_size, SZ_1M);
++		else
++			decomp_len = ALIGN(image_len * 8, SZ_1M);
+ 		decomp_limit = BOOTM_DECOMP_LIMIT_PER_IMAGE;
+ 		err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr,
+ 				    decomp_len, LMB_NONE);
+@@ -679,7 +717,6 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	}
+ 
+ 	load_buf = map_sysmem(load, 0);
+-	image_buf = map_sysmem(os.image_start, image_len);
+ 	err = image_decomp(os.comp, load, os.image_start, os.type,
+ 			   load_buf, image_buf, image_len,
+ 			   decomp_len, &load_end);
+-- 
 2.43.0
+
