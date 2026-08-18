@@ -1,103 +1,137 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79537C5DF74
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:31:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C10C9C5DF74
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:34:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2847D810A4;
-	Tue, 18 Aug 2026 13:31:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8F4D840809;
+	Tue, 18 Aug 2026 13:34:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jd_vpKRTCEDB; Tue, 18 Aug 2026 13:31:31 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fYh7YfP7APjG; Tue, 18 Aug 2026 13:34:39 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 64EA780F6B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0827840760
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787059891;
-	bh=S3zF0ODRXHvankAx4LD+qZeG9Zr+cyAcHuCzwEN0rr8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Oem2gtCcBEOi/oW9Z3y0hUysYr2u/nvwQDgJ32Rvl5AI/VLsW8clIxGFnKlcisP4U
-	 DZ6xvMDEBiWsJi/SqfZRUi8HRzBwhJy8v0hAmpnBegAFcuhlC7CNlwdQxd4hYUNEdk
-	 F8k+STKZ++C0NPw6MM4A88nra00WOOC0pzG0ZB+drXhmhLl86JMfWJHzau1CampSYv
-	 e/MHCjRfRAtI0lOIGKF+8iqnt+vJpM1pU13uh8r3BYQgsFwuc/4zDJQaCKAx8wA6vP
-	 6A6CnhTzP4tEYXiMVyTJcDqrbAxvyByp7ZUka0CBfANiyoNNWV8BybWbtuhkpOJjyL
-	 lldb0Ql17xLDw==
+	d=lists.u-boot-project.org ; s=default; t=1787060079;
+	bh=ewfOTplKbobRgs5xxJU5xZtJWqULKxZMaaPVMh6iswA=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ol8vi8y7zXZPcrNxc0w5ssrHOG5RCh9pK/Fb4ANcwkG/hsmxPQ2ttvXwvCslqBxI3
+	 5Zfgg8F8pGb/ySsGms6c7B8XJPdA047u/5HV3WtX5tb7GUVVOn3ycucrWenoNlicTo
+	 9rKY3+4BpCDUxVkKZp8evD1zwLVphcnWtPmx91rD4Ink+aCD2OCHKAyNo5Q0hK0l6k
+	 EisrLZ90056ZaaZ2ftuBAJdQGqX9+5JU7bPiX8maeUzTbQYon1GGycubtkXlhBMuW9
+	 mc512GxAri1NBG83BMljc9il4nRuluPZ+8UVnmiU568+M4w+lDBtirWFhFU/DkhNDi
+	 hFpBAIZ0GORwg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 64EA780F6B;
-	Tue, 18 Aug 2026 13:31:31 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 42FEC322
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:31:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0827840760;
+	Tue, 18 Aug 2026 13:34:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 131362EF
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:34:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 34E5081062
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:31:30 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EDA5C80E73
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:34:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cbAMsflTt3V0 for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 13:31:29 +0000 (UTC)
+ id HCJdILYLPBhp for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 13:34:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=linusw@kernel.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 8D04E80F79
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8D04E80F79
+ client-ip=2001:4860:4864:20::29; helo=mail-oa1-x29.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2082D80E72
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=n0BR0ToA
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8D04E80F79
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:31:29 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 0FCB7601FB
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:31:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAC2C1F00A3F
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:31:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787059887;
- bh=S3zF0ODRXHvankAx4LD+qZeG9Zr+cyAcHuCzwEN0rr8=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc;
- b=n0BR0ToAHbpRbsAVDAcJNrRBGl/fqZ0lr/YOfsGQgjFAkj9+Kv/tOKCRQ/WvWXPFj
- 5QVKJ5pV7XfFxALZ6VqpKzqwZhhktzRFQWarv+VanICJz4WLytj8PbPdUHtKT7ycK3
- Ss2AWuk9fdw2zi7VNTO3MdUz+IepustuHPO5fWCudGd6orDppY4W1IPlp8FP/UTKOS
- ALc81IccepBFqbQWzJrHj/LGlBRXA3UbfPB/mjJfdzv0XocGqiy54AezV6r89hUKXF
- v5FvTQMSN5KNvW7FuXTj6bkJsLkVRLRcNo30QrLe1HArYxsQJMObqPOb31rc45pAUe
- 5veaZ0yEE5ZfQ==
-Received: by mail-lf1-f53.google.com with SMTP id
- 2adb3069b0e04-5b021916bd3so5946983e87.3
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:31:27 -0700 (PDT)
-X-Gm-Message-State: AOJu0YzCmcC3Uwzl+jqOD5qp9XWG7oDZFx1QqZpwfnRV3NxMNGqh42ju
- lY143MSWXFqbg1ZROX6cYEICPzyx+83iz5F3dBL0tilhJPpJHSW/BE3FdC2jI0U40XHBuSjwF2V
- vtKNSJDh5YF3K3HCMhyR82twD2VjDu0U=
-X-Received: by 2002:a05:6512:838e:b0:5b1:5379:8b6d with SMTP id
- 2adb3069b0e04-5b459117895mr4201239e87.23.1787059886428; Tue, 18 Aug 2026
- 06:31:26 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2082D80E72
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=Sl5yIj7/
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2082D80E72
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:34:35 +0000 (UTC)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-4518ad44e83so2878826fac.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:34:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1787060074; x=1787664874;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=ewfOTplKbobRgs5xxJU5xZtJWqULKxZMaaPVMh6iswA=;
+ b=Sl5yIj7/tajXIoYEo3ETFx1/DvWCZaLMaSKDPqi4TdGtbhnlbrs5MlQnQ69r3YD/D4
+ Be2sE7CE6Qik4p3apeXWw2PazC7slTzIcAuJIvfgb4z9h8hsdsqcGOZOE/En7hpuN2Qo
+ /Buks8WmC8qXyvkUGxLR26ODj6YvPkrBV3liravIT5y/mV9nsI0PZ6tJKphGAgWyIuZY
+ LoGMzf2y38Tw/y+jSL93fyjbIM/2Trj0gkoitlFL8I2PnY4BsRPwA5ansvroYrsZSqg7
+ D8OH48hzaGNW83CB3diqwI9k3TkOuMCQph1DyLkplq/FncrS9U06r+VE+CdcqrTE7Ky4
+ bY/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787060074; x=1787664874;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=ewfOTplKbobRgs5xxJU5xZtJWqULKxZMaaPVMh6iswA=;
+ b=GpX/Vmi73oO/E5khe7AuvMnH6wjccbY5ulj9HkCRsCpuA9PVT0zL2d1O66kMVgFltN
+ fvMEJdBylO0u0abNby+ZVvw1po3jEZKa5WyoT1IsckCeht+BuLSX6fhv7KU1C87d9SYC
+ Cv5WwzD6L0rozapE6VXvSlvWJUMJrInleVpzouq92ndPbGcOSsgr44pB5w3KVqzyyrqh
+ 0Com2TU5aH92XQ3EsIGjAMVo+bw1GhyKUnjRAXFQ/6nlETrFeb1JF6tUDkD2PkwQQoCr
+ BF7AlGC9jhsP4keF4OzJvhi6WbpaxEXdQknlnMMMCB1GbohZD8fcztIGSInttjVUTJ7I
+ jSmA==
+X-Gm-Message-State: AOJu0YyNTo01LjGtgZ28QQ9zWPDtPLysgd6qCgP1M6/I0hcBpwXDe4nn
+ 6gEB3KKxjZLiyGZiqEeg9iGlahv88sXXv2jNXaFQmUdPbjmmCX8fL+KGU1nlzAMK6HQ=
+X-Gm-Gg: AR+sD10fD3oe1dM+qt7TBYyuPogcOtoZJ7PeQa4Ef6zMFaL3NUBtSNU+J8u6rCLGfXT
+ MA8oaBfn6sqEzKPQzB9p3Y9ov/dQx2mUkywRIj502QdZJbFKiuX6HHD1bADryeWY9sGunA+MPxq
+ MpuHHKtj+/xpmxHH3EChi6zlyNv60xsgBrV7u6P28AK474nS3j/p4X+VK/XzWk4rZVwGD4SEpLi
+ eDokNkOeURTJ7pX6nKlxV6DF34unUnt0Qd6aDLngr0Vv+v3SusZxjGNMC+XnA27O7BQPqmh5SIj
+ SBnBk+PfhYu/owt1wWlrO3SzYPNDnre/lmqk3IqPeFA5qkz+9ySWXIcLLFiJtImzsbEBGTP5Bwj
+ zA70KeiRfGtAH70sq0NkMYjgAT8vvysZ6H3iV582FjbukWvyz6BOcotF8FEOvTFEmTRA/lMZOjU
+ E9yDxDgN028oOZpyFJPTIQnP42V0h2G+w6hCNKgAlqQk4qoH57DeDUOlgIHkoZHAo7uw==
+X-Received: by 2002:a05:6871:6a8:b0:448:9d5b:6393 with SMTP id
+ 586e51a60fabf-45e92133e2dmr29148421fac.14.1787060074479; 
+ Tue, 18 Aug 2026 06:34:34 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:1cf0:fc72:ac61:29db])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-45f22aea39fsm3177704fac.6.2026.08.18.06.34.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Aug 2026 06:34:33 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Tue, 18 Aug 2026 08:34:17 -0500
+Subject: [PATCH] power: domain: mtk: remove setting DCM_TOP_EN
 MIME-Version: 1.0
-References: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
- <20260817-ux500-external-sdcard-v2-7-ca9a110bd9c6@kernel.org>
- <aoM6qJ32H35aumPL@linaro.org>
- <CAD++jLnTaaN9ektt9h5S_jYZ27sezSfuymmjTGiL1_j8NSw6bw@mail.gmail.com>
- <aoQ2VMH_unoQaQxO@linaro.org>
-In-Reply-To: <aoQ2VMH_unoQaQxO@linaro.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 18 Aug 2026 15:31:14 +0200
-X-Gmail-Original-Message-ID: <CAD++jL=OtNJZrx20c_siaRBAJdnp=v5aPv8Vr1S++HC3ay7M3g@mail.gmail.com>
-X-Gm-Features: AcwNN1W77imiR2221teV3jLUSqSzK0iDzfFDXPi19dZ3dTCuk5Y7zucckn8Y7BM
-Message-ID: <CAD++jL=OtNJZrx20c_siaRBAJdnp=v5aPv8Vr1S++HC3ay7M3g@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] arm: u8500: Switch Stemmy to upstream Janice
- device tree
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Stefan Hansson <newbyte@postmarketos.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260818-mtk-power-domain-remove-dcm-v1-1-13de7925ceec@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ6CMBAG0KuQWTsJYNDqVYyL/nzV0bQlLSIJ4
+ e5WXb7NW6kgCwqdm5UyZimSYkW3a8jedbyBxVVT3/aHVnWKw/TkMb2R2aWgJXJGSDPY2cBHf9J
+ G7Y1XGKgOY4aX5bdfrn+Xl3nATt+Stu0Di+ozE38AAAA=
+X-Change-ID: 20260818-mtk-power-domain-remove-dcm-7f9ab83bf8e5
+To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1240; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=AzHCWZ122e0GJoi/+PRCMblC68lz294TLmqf+Bk7dRQ=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqhF9haBvFPHfD0VtIRNLgXjMUfGXLI+LGJl6aU
+ +lN/wQY/2uJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaoRfYRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A7t0H/iXY0OVFNwcLcE4Rg9nomdGn2bugx1X9gl0mcZ6
+ 7xnebkhtVkj3UO7SFxEDba/j/znnlsHdb+j0YB6tu+yARQRaRWdVcEYy6TYA5wzzvqKEn0aGi2a
+ VUnuFaUwN3OdrsM4S9Rpw7DZV8Dviy7dlRkV7/pZt4qwN0pX7j42wY4T0t7wKHvyC/9gMYK8JlH
+ ICwXLOkBtaEGgBtXub6OBOwB6eR0b1KJApV8t+oQPZlXFAYf0SbGvSHdKK6bfEdNNQ+dfqlZcpU
+ 6jDZ85ROzeV+YVSw9ygyv+T+HQR0EiPHIJ49LXUFaqFIR4RVCRrJSzAUe4h0IdIKLYYUG8Ps4WK
+ NJuU=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -111,37 +145,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, Aug 18, 2026 at 12:39=E2=80=AFPM Stephan Gerhold
-<stephan.gerhold@linaro.org> wrote:
+Remove setting DCM_TOP_EN (Dynamic Clock Management). This is not
+present in the Linux driver and MT8xxx SoCs don't have this register.
+Writing this register causes a hard fault on MT8366.
 
-> I wasn't suggesting to use the same DT for all devices. What I suggested
-> is to bundle all the upstream DTBs for the individual devices into a
-> single U-Boot binary (CONFIG_MULTI_DTB_FIT) and pick the correct one at
-> runtime. :)
->
-> That should be equivalent to your setup, just more convenient for the
-> user.
->
-> The only open question for me is if we can reliably detect codina-tmo
-> based on the mach-type ID, I can't find that in the kernel sources I
-> have.
+Fixes: a81e1f8a7cf2 ("power: domain: mediatek: add support for the power-controller model")
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ drivers/power/domain/mtk-power-domain.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-Aha I get it...
+diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
+index 9eef58d2d57..b0cb8bad6e6 100644
+--- a/drivers/power/domain/mtk-power-domain.c
++++ b/drivers/power/domain/mtk-power-domain.c
+@@ -368,11 +368,6 @@ static int mtk_scpsys_add_one_domain(struct udevice *dev, ofnode node, int paren
+ 			return PTR_ERR(regmap);
+ 
+ 		domain->infracfg = regmap_get_range(regmap, 0);
+-
+-		/* enable Infra DCM */
+-		if (domain->infracfg)
+-			setbits_le32(domain->infracfg + INFRA_TOPDCM_CTRL,
+-				     DCM_TOP_EN);
+ 	}
+ 
+ 	num_clks = ofnode_read_string_count(node, "clock-names");
 
-I can check the codina TMO, I think it could be an improvement on top
-of this series though, if I leave the stemmy device tree in place.
+---
+base-commit: 7581a12eb96c8b8825b65a9c597696cb28cb6155
+change-id: 20260818-mtk-power-domain-remove-dcm-7f9ab83bf8e5
 
-It all becomes a bit tautological and hence confusing, because yes
-we can perhaps embed all the device trees into an FIT and pick the
-right one depending on magic from the first stage (odin) boot loader,
-then we overlay that with the U-Boot restrictions, then we come to
-the EFI boot partition, where again we have all the device trees,
-again pick the right one, now for Linux, then augment it again, but
-only partly, without U-Boot overlays, then we boot the kernel with
-that second augmented device tree.
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
-This is... the way it is I guess. I'll look into the stemmy-FIT-with-many
-device trees approach.
-
-Yours,
-Linus Walleij
