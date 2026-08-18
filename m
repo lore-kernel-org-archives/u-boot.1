@@ -1,118 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48210C5DF7D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCA5C5DF7E
 	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:06:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DF5EB608C7;
+	by smtp1.osuosl.org (Postfix) with ESMTP id D4FE381062;
 	Tue, 18 Aug 2026 13:06:19 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hHy8VnnXyv98; Tue, 18 Aug 2026 13:06:19 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 47E3C608B9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787058379;
-	bh=9zaZWGD4pHi855qNUIkXWIGkwjwJC7wx2LCJN/R2V5g=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kNSnyiLTOOOj1NB1f22shATqUGKGeZ9iDm0t3qRP65Q4wi+dg/omRvN4PqS09SvdH
-	 8ycD1ZmGDouXy5cucuwzif+XdzXHHr/hxVVv4f2N8bPsrFSzEUFVCk+4l7mK4sEElm
-	 n6xoR75TrHnwe75jaAoN7CaiQcmNiu6X/uhyDGsbD7g5gVPH3qREnS2DqL25mH3PPb
-	 TIiD9Fm5NesmkOCRPKlerbDRAj/q/FP/a+iJzQ9Ikqi1SK2k29zrDZMYsUjtC+SGf+
-	 eJNMNHOEWsYLkTUAYjdzuORsx4RwHcOxqaDzkIl75g2qNIsqWnSLu5Nd8LVr/30HIo
-	 dchOP1/DUHIiA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 47E3C608B9;
-	Tue, 18 Aug 2026 13:06:19 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D10D223F
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:48 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C30C780FB0
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D-SSfv-XUFDs for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 01:04:47 +0000 (UTC)
-X-Greylist: delayed 58003 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 18 Aug 2026 01:04:46 UTC
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 6FF6080F4E
-Authentication-Results: smtp1.osuosl.org; dmarc=none (p=none dis=none)
- header.from=linux.spacemit.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6FF6080F4E
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=linux.spacemit.com header.i=@linux.spacemit.com
- header.a=rsa-sha256 header.s=mxsw2412 header.b=fNkAQghK
-Received-SPF: Pass (sender SPF authorized) identity=helo;
- client-ip=54.254.200.128; helo=smtpbgsg2.qq.com;
- envelope-from=troy.mitchell@linux.spacemit.com; receiver=<UNKNOWN> 
-Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6FF6080F4E
+ id atB0E9rLPO-e; Tue, 18 Aug 2026 13:06:18 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3299680FFF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1787058378;
+	bh=r3ttuacTpBmpxLEDxo/j6Raf4G6GgcY8pGJuaKhlXcQ=;
+	h=Date:To:Cc:Subject:From:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xETZhIdR/KwuAju++VGn6/D68K1gitpUca+adb5JT2cukoOrPXybBoCScyxMXNrUr
+	 cJy49KokNGADlth4f+MQH/+lDvoTjXnpiymOrOogR40oyjFcG2voGwsi1N21IB2OBu
+	 fTKTp0E06WOI2++PcevECPBnGyVd2DfiwxUQKGPvTxweAXm2SviKez7RnvdbqiRW4+
+	 WqAiqgB3QYNJ1Ez/lkgHfj/ptE/uQP3/QWlQj32gyYAcVpkGa0JQ5hoiz90yTCmBOr
+	 4iQkX1YFlpqm3BuI5sSFlD2Oa0Zh+f94UKFvt33GVxx9hpD+61QoKFPh7VBHArBcQc
+	 zBzwq+IBItolw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3299680FFF;
+	Tue, 18 Aug 2026 13:06:18 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 71F672EF
  for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 63DBC400FE
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:45 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O32gBmuS-S_Z for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 01:04:44 +0000 (UTC)
+X-Greylist: delayed 58002 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 18 Aug 2026 01:04:41 UTC
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 1AC2E40015
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
+ header.from=linux.spacemit.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1AC2E40015
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=linux.spacemit.com header.i=@linux.spacemit.com
+ header.a=rsa-sha256 header.s=mxsw2412 header.b=FMXW8QoP
+Received-SPF: None (mailfrom) identity=mailfrom; client-ip=35.173.142.173;
+ helo=smtp-usa2.onexmail.com; envelope-from=troy.mitchell@linux.spacemit.com;
+ receiver=<UNKNOWN> 
+Received: from smtp-usa2.onexmail.com (smtp-usa2.onexmail.com [35.173.142.173])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1AC2E40015
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 01:04:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.spacemit.com;
- s=mxsw2412; t=1787015044;
- bh=9zaZWGD4pHi855qNUIkXWIGkwjwJC7wx2LCJN/R2V5g=;
- h=Mime-Version:Date:Message-Id:Subject:From:To;
- b=fNkAQghKkO27WaAiorqgZEWrb2nTEMFp4bvNr1FUy09EXT4CyvwWM5K8jhVB4zYb3
- 4BM0hL53N74eiUFTGR41BLiFwXonnu5AUWuLljjmOnkld3CKxQpi6rAsjNJqGehD0y
- aojPOG4zEbGuZ4n2a86F7Cf97b+/XBjl05JirxM0=
-X-QQ-mid: zesmtpgz4t1787015042tef681fe1
-X-QQ-Originating-IP: uGo6hjJnr0JZtldwZk41tmjGlztABY6a4cCQZiAF4+Y=
+ s=mxsw2412; t=1787015016;
+ bh=r3ttuacTpBmpxLEDxo/j6Raf4G6GgcY8pGJuaKhlXcQ=;
+ h=Mime-Version:Date:Message-Id:To:Subject:From;
+ b=FMXW8QoPNyGdjDEMFgxcOzlIKZenobtIYeSN1EQlyicmvArGt1kSxaKikNWj8IKXf
+ LvwUX5tk7VEfXFMfSlhi7BFJ9gHh+fvlg+t3qASX/1ryLrw1dKQ5TKjTyGLNcdiUcX
+ nZurMSp8bn4bBASrQ10v4I5UBPjCFp5HeqR9gpBI=
+X-QQ-mid: esmtpsz10t1787015014t01efc13c
+X-QQ-Originating-IP: jfJQWVh33GCQ10tvEEWOlIkSztxsXbQlxMgG4Exy1rM=
 Received: from = ( [120.237.158.181]) by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 18 Aug 2026 09:04:00 +0800 (CST)
+ id ; Tue, 18 Aug 2026 09:03:32 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 8758530987341579553
+X-BIZMAIL-ID: 707725886485996054
 EX-QQ-RecipientCnt: 11
 Mime-Version: 1.0
 Content-Type: multipart/signed;
- boundary=4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22;
+ boundary=4ff214fd76a40c1c046d515a453c13f5d1bb3e1c5f3e1b39c601aaf95a87;
  micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Tue, 18 Aug 2026 09:03:58 +0800
-Message-Id: <DKRNYNELFA7H.3838MH2QULHVX@linux.spacemit.com>
-Cc: "Junhui Liu" <junhui.liu@pigmoral.tech>, "Heiko Schocher"
- <hs@nabladev.com>, <u-boot-spacemit@groups.io>,
+Date: Tue, 18 Aug 2026 09:03:30 +0800
+Message-Id: <DKRNYAH9YSW5.X8HMOZQ2VYB2@linux.spacemit.com>
+To: "Junhui Liu" <junhui.liu@pigmoral.tech>, "Troy Mitchell"
+ <troy.mitchell@linux.spacemit.com>
+Cc: "Heiko Schocher" <hs@nabladev.com>, <u-boot-spacemit@groups.io>,
  <u-boot@lists.u-boot-project.org>, "Huan Zhou" <pericycle.cc@gmail.com>,
  "Guodong Xu" <guodong.xu@oss.qualcomm.com>, "Tom Rini"
  <trini@konsulko.com>, "Raymond Mao" <raymond.mao@riscstar.com>, "Lukasz
- Majewski" <lukma@denx.de>
-Subject: Re: [PATCH v2 3/4] i2c: k1: enable both functional and bus clocks
+ Majewski" <lukma@denx.de>, "Yixun Lan" <dlan@kernel.org>
+Subject: Re: [PATCH v2 1/4] i2c: k1: fix wrong bus speed setting
 From: "Troy Mitchell" <troy.mitchell@linux.spacemit.com>
-To: "Yixun Lan" <dlan@kernel.org>, "Troy Mitchell"
- <troy.mitchell@linux.spacemit.com>
 X-Mailer: aerc 0.21.0-0-g5549850facc2
 References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
- <20260815-k1-i2c-fix-v2-3-7d2a48607233@pigmoral.tech>
- <DKR3E33H0FCK.1O1KN2YJSZSBB@linux.spacemit.com>
- <20260817091812-GKC571540@kernel.org>
-In-Reply-To: <20260817091812-GKC571540@kernel.org>
+ <20260815-k1-i2c-fix-v2-1-7d2a48607233@pigmoral.tech>
+ <DKR3Q808Z4E0.27KFK7LNAM3K7@linux.spacemit.com>
+ <DKRADSUN4GN9.299FCK1VIS6EH@pigmoral.tech>
+In-Reply-To: <DKRADSUN4GN9.299FCK1VIS6EH@pigmoral.tech>
 X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpgz:linux.spacemit.com:qybglogicsvrgz:qybglogicsvrgz3a-0
-X-QQ-XMAILINFO: OGPyLxpWWNNm1CWsFgwWfIWYIkj9pMqAbBXbX1KBB4UbqSu7NeBJxWBO
- ptsn+FV49MGl5ohEm5AtleZpWwyaQRVAUofedzUwEFlY9G2t4QA+bVS6ofyi+R8KGXET2xs
- cS2ui7TwOdcXgLcz8QPFeLBmQTnM/gFb92+IIqq5APhLZNVt2dfGWWy7OVCaGgw6adBSq+3
- Q/9s1dgGz7u4kJWLt2ZeXsQZTi1bm+JLWF+6C7Q87lUHGnVz40Xg0C3YtcGR/fhhgHdoRmR
- EpYOiw5kbH1YvH/lL43YUx/gY341tt1A3VBPds+ZOPXMSvOtcmQ9KjZHYUCjlJnUViAnNnn
- ehixI2vqeu/qffs5BGkzlAzF4ZjzQ208XqmMVQnUppJxrm5jCbIKrWEm8vYwFO3j973Y4cR
- qttHLFEbebSA6Qx9WQ/AzFYsKlAcBHbN3orcs7mXufolJp3IY2v0Neai+IupZ95LjqXCeq0
- wO2uDqymKjChlj+cJkhQhkl/Wi0TbJ5l4vaGTAYSaJBWVnrtyeao7JnHZSnUhav/LQtgjt3
- 0Oc+yjgSEbigFm47/Ts3taBHOZaqetoVLTRKhBXIDaRCaJL1ENP5tlVFTZQe5YhOAwkGLCZ
- 1CrbHyboFaY+k0wlHvy7LCgIjqn4YzytMdrZD5bq10F9xbrVx8j9eyHqJJBOwYwS40/xgBF
- JJEhLMhGiMQmF6yWxOX4S52i2iVYRFuzkHAwh8Wj6KLl07Jg9b7LH92PUFXUP1zpuuYAeJA
- tdxucmN3DGIR3JSugDGbt4Th4Qct5F6VXzUUka041lLpPGMavJVQlODU1wM018RGfiK7PWY
- PfpvoIUSgsu+ggy4yDmNaETybMV+Xw/OHHhp2MFfpcwwH1cGwHoyJWldGbwxIwuF2HogBKj
- 3BHeaepmCrzbKN37mHI+dCcTLULRZWY8oZ5Nt6eOt0ooiGbTr4kydUBaNNFY2pcv6/YZ91B
- NUF5oWZGCIEmyLI2TZqQ7De4zMA1CXhyjjs7GQHF0ICuvIOnrQWi0oqK+es56fzYEqyMbbM
- Gw2fjrtFq1keQYIY9yeHaj1Z8QZyZG7tVj8c5Y0/zm2XCuN1olcdXsOKhOrnwTXdqfRvIT8
- 09nh/WWaO5U
-X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
+Feedback-ID: esmtpsz:linux.spacemit.com:qybglogicsvrgz:qybglogicsvrgz3a-0
+X-QQ-XMAILINFO: M+EtDX7VsKFY9ZJCsSMOgZpzXCx+xynpILTjBNXMzfLtpiqK1DCXU6vk
+ j7dKb+pOAdP8itgp04AvFf1xuUyWd91RtPUS4zAZxluFWcFNGb9R5UlYPxom5GE1bXU5zF6
+ NF5knCnpk7jRQu4JDjx4TTNJj8fZAImM9CB/Vi33zchfdoeYPjcOkovCFXuMbq0GKLBCn8x
+ 4Wu4tGzVhsGL3+Rfr3tbGbIav0pCEINTHKXDeE0iKRSzkjfVMu3VjDZd6yn6S0N3pvjgh99
+ m2HSRm8F6y3QcTxum7LFbJkWKShvatAnhIHgrG3aJ2yCV27BUOon+a5bBecYFwe3eOyIPY2
+ 5xpfNcz1HAqK9TANzHJmcAxneSmfg7xv4vtI2Zt4teWpRMcpBNcZDm08NctRsB4cwhg1oKS
+ LgaohTRy1T+y6JfJKn0j7YwzQzL72TgqpV+vN07P7R16V4JMU5+9KP/e5UfSqD8swa2s4Ao
+ zCYy47BaE5iA3nxKbhA13qMdUo4Kh468Rzf+DUAHG+4ep2oeMxL2JYAPLPpKSZakpFyujVh
+ gnnCuQCVNKruJsMWTJDbFZuS0DsgsGaTyl9EIAycPmQ7PoSNhwKY/o4SJBVsfLZ8UuZeelZ
+ 79IncdOL1o5dK2qK/Nofh6t8aBjbEWbZqLuAiv6uoxNQEPEWCtMz+3pznOcDV+BOVE051rU
+ NUAzvgo4rqlh8h7F+bWVoYxWn4a8Dvp1AKFDtJ1h2eKJD+GN0OMsASd6TRMlt843GpVo2qv
+ FPFdIiV1Qi5ZpVsDuQhHJbRJ/xYbVlFnUAG71MrQggwEHJoQrjPrAxusslyYWYQopORTxxE
+ 8n0UyZpS78QDfFL3eUQ1+GGwQN8hHuB+RJ/ieA6zhKdVgO6dXydI8rAq6Ls2YIL6fHVhoAq
+ 9W9h03IRX43+djn+VrperszrTLNB6SarTGkThU7HVvwF4R+Tiz99zo6YpzjXAG0cg/y1Brh
+ 94fF+FXJy2gV1g3QnyXmzEb9uJbP/jAEyKF3GGzUg0c6dg0iaBr0XZmef+mUnriL1UHTUFh
+ HEuGd77Que0E9xw+C1UAQ5PwWxZjIwtA9DJkkNTJLmczJ2NHKd2Q3oZokA06deWC6wJ9Yyq
+ k/Y0s6uCPoN
+X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
 X-QQ-RECHKSPAM: 0
 X-Mailman-Approved-At: Tue, 18 Aug 2026 13:06:17 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -128,57 +127,70 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22
+--4ff214fd76a40c1c046d515a453c13f5d1bb3e1c5f3e1b39c601aaf95a87
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
 
-On Mon Aug 17, 2026 at 5:18 PM +08, Yixun Lan wrote:
-> hi Troy,
+On Mon Aug 17, 2026 at 10:25 PM +08, Junhui Liu wrote:
+> Hi Troy,
+> Thanks for the review.
 >
-> On 16:56 Mon 17 Aug     , Troy Mitchell wrote:
->> > The K1 I2C controller requires both its functional clock and APB bus
->> > clock to operate. The device tree provides them as "func" and "bus", b=
-ut
->> > the driver currently acquires and enables only the first clock.
->> >
->> > Acquire both clocks by name and enable them during probe. Use explicit
->> > named lookups instead of the bulk clock API to align with the K1 Linux
->> > driver and keep the roles of the two clocks clear if functional clock
->> > rate configuration is needed later.
->>=20
->> [...]
->>=20
->> > @@ -487,15 +487,21 @@ static int k1_i2c_probe(struct udevice *bus)
->> >  		return ret;
->> >  	}
->> >
->> > -	ret =3D clk_get_by_index(bus, 0, &priv->clk);
->> > +	ret =3D clk_get_by_name(bus, "func", &clk);
->> >  	if (ret)
->> >  		return ret;
->> >
->> > -	ret =3D clk_enable(&priv->clk);
->> > -	if (ret && ret !=3D -ENOSYS && ret !=3D -EOPNOTSUPP) {
->> > -		debug("%s: failed to enable clock\n", __func__);
->> > +	ret =3D clk_enable(&clk);
->> > +	if (ret)
->> > +		return ret;
->> > +
->> > +	ret =3D clk_get_by_name(bus, "bus", &clk);
->> > +	if (ret)
->> > +		return ret;
->> > +
->> > +	ret =3D clk_enable(&clk);
->> > +	if (ret)
->> >  		return ret;
->> > -	}
->>=20
->> Once the functional clock has been enabled, failure to acquire or enable
->> the bus clock returns without disabling the functional clock.
->>=20
-> I'd not worry about this, as in uboot it isn't worth the effort to do the
-> resouce reclamation, instead I'm more concerned about the error handling.=
-.
+> On Mon Aug 17, 2026 at 5:12 PM CST, Troy Mitchell wrote:
+>>> The controller bus mode should be selected according to the requested
+>>> I2C bus speed. However, the driver currently passes the functional cloc=
+k
+>>> rate to k1_i2c_set_bus_speed(), so the selected mode does not reflect
+>>> the requested bus speed.
+>>>
+>>> Fix this by reading the clock-frequency property from the Device Tree,
+>>> defaulting to standard speed, and drop the unused clk_rate field.
+>>
+>> `clock-frequency` is the requested SCL rate, but this patch only changes=
+ the
+>> value passed to `k1_i2c_set_bus_speed()`.
+>>
+>>> @@ -496,10 +496,13 @@ static int k1_i2c_probe(struct udevice *bus)
+>>>  		debug("%s: failed to enable clock\n", __func__);
+>>>  		return ret;
+>>>  	}
+>>> -	priv->clk_rate =3D clk_get_rate(&priv->clk);
+>>>
+>>>  	priv->base =3D (void *)devfdt_get_addr_ptr(bus);
+>>> -	k1_i2c_set_bus_speed(bus, priv->clk_rate);
+>>> +
+>>> +	speed =3D dev_read_u32_default(bus, "clock-frequency",
+>>> +				     I2C_SPEED_STANDARD_RATE);
+>>> +	k1_i2c_set_bus_speed(bus, speed);
+>>
+>> `k1_i2c_set_bus_speed()` only changes `ICR_MODE_MASK`. It does not progr=
+am
+>> the ILCR divider or initialize IWCR, so the actual SCL rate still depend=
+s on
+>> the register reset values and may not match the Device Tree.
+>
+> Yes. This patch only aims to fix the ICR_MODE selection. On the K1 board
+> I tested, the register reset defaults are enough for both the PMIC and
+> the EEPROM to work under U-Boot.
+>
+>>
+>> Please calculate and program ILCR from the functional clock rate and the
+>> requested SCL rate, initialize IWCR as required by the hardware, and rej=
+ect
+>> unsupported rates. The functional clock handle or rate therefore needs t=
+o
+>> remain available to `k1_i2c_set_bus_speed()`.
+>
+> That's a fair point. The current driver is aligned with the mainline
+> Linux K1 I2C driver. It does not include your later work to program
+> ILCR/IWCR:
+> https://lore.kernel.org/linux-riscv/20260508-k1-i2c-ilcr-v7-1-8c2dde5c3ed=
+5@linux.spacemit.com/
+>
+> Porting that change to U-Boot is not a small amount of work. I'd prefer
+> to keep that as a follow-up series rather than mix it into this ICR_MODE
+> fix.
+Then:
+
 Reviewed-by: Troy Mitchell <troy.mitchell@linux.spacemit.com>
 
 
@@ -186,15 +198,15 @@ Reviewed-by: Troy Mitchell <troy.mitchell@linux.spacemit.com>
 Troy Mitchell
 
 
---4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22
+--4ff214fd76a40c1c046d515a453c13f5d1bb3e1c5f3e1b39c601aaf95a87
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iIMEABYKACsWIQSL4Ay2cExaPXAQcU2YCe+A+TM0LwUCaoOvfg0caUB0cm95LXku
-b3JnAAoJEJgJ74D5MzQvwg4BAIS1uUyCjrHVjapCPXvliuQ9ZAlWKc3jQItF3pVY
-WC4aAQDH2QpwIG2VSgxz8oIN8kEWVqZPBtRRVqcrbOLnVwMnDg==
-=ZXt0
+iIMEABYKACsWIQSL4Ay2cExaPXAQcU2YCe+A+TM0LwUCaoOvYg0caUB0cm95LXku
+b3JnAAoJEJgJ74D5MzQv87gA/A51KAdE3vq0CZ0539Ozqu8DfYt9qes5ZNafYkmZ
+47OjAP9yfm3mYJsUODYmGJU/wSljPpgyTTt2dP9NeDWz0Rl2Ag==
+=Y2s7
 -----END PGP SIGNATURE-----
 
---4f7f390a2d430e8dc2a0af40fac90d57573d38c246df004a81b492240c22--
+--4ff214fd76a40c1c046d515a453c13f5d1bb3e1c5f3e1b39c601aaf95a87--
