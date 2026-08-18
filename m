@@ -1,126 +1,127 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42222C5DF7E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF1CC5DF7D
 	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:50:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 07397408BE;
-	Tue, 18 Aug 2026 13:50:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1EAAA81159;
+	Tue, 18 Aug 2026 13:50:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dF8MCLHupH8c; Tue, 18 Aug 2026 13:50:56 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qwiy7KT7QJjM; Tue, 18 Aug 2026 13:50:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 14726408BC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 44F3C81148
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787061056;
-	bh=5VK2Fia5jNg66B+u/9UU+u5a30QkkXOl6B3wxqExfWY=;
+	d=lists.u-boot-project.org ; s=default; t=1787061053;
+	bh=nJqQz1GzEKlMdybzI8Cp4UA24IJeHbSU1l6N4GE2NT8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lYODJGxoc3qArNb1j/99qdZ6Z2szvDpfzIdI6vehcO84AWoNA+Axo8niX53zgpEfy
-	 WGsMAnGJf7UOx5s/m1i7ewEqqfgl10Yv9Zy6BvPz0WlKc1+ZN6pxnB1SKdI7wdmnid
-	 h/DF/oBQxXb3CwoHVwiFsKgv0ACmaKhW3ZtemDI941WDcZxiJphNyLcg+9mLKmH5pn
-	 h/t4AbOqXuu2NQJwxI40dDJJyTjcdtf5J9DT7dU1Alur29gzavPUgGFWpH0gbGAmzy
-	 E2/JI/jZJx8T0Ps43sHAL8KJlkp5Yv6gfhFS2zMp2MSFKlT/msZWufXBNxT7/eL928
-	 rB/VEm6Q1M4Tw==
+	b=F7ERBcJqxacWYGGXIvr06dxjjvcoHhMbx73IKYqRLI3TsgykXVXGWxtXwhAE1CPh0
+	 QmB9lekltdKaMNkJeaB55SUEfy9MJLLXX3dhFLJckg6JPvk9VDzYRiu3QqT/F7AC8t
+	 5aJlY0b+1y2bD9O5EjyF4Q1jO8KhlEnWvpLFoqm4VGdYNS7ZkOi89LaRafk17uqrtq
+	 TeOfwgqE5tiTTMGlNEPOyY7G9IhXJslOWJCorajiXumGe63boYb+jbJzWpWQAa3sJS
+	 GNzkHfgut6Be4/QKJYN7p7CVH6nxouXl1hHlDHrZ7TtXEy2yh65KLoaiS2DJh94fDL
+	 i9uz0psTIIiuA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 14726408BC;
-	Tue, 18 Aug 2026 13:50:56 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 47684237
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 44F3C81148;
+	Tue, 18 Aug 2026 13:50:53 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D7F922EF
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2CBEC40159
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:05 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CA7FA608A1
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lgAuABeaAuhS for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 13:24:04 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id u8bJ7XV3fNp6 for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 13:24:02 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
  helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2C152400EC
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org C806F605DB
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2C152400EC
-Authentication-Results: smtp2.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C806F605DB
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=HJlXb6nZ
+ header.a=rsa-sha256 header.s=20251003 header.b=sDUGgp5x
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2C152400EC
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:04 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C806F605DB
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:01 +0000 (UTC)
 Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
  [209.85.210.198])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A86343F8AE
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:02 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 440A53F8AE
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787059442;
- bh=5VK2Fia5jNg66B+u/9UU+u5a30QkkXOl6B3wxqExfWY=;
+ s=20251003; t=1787059440;
+ bh=nJqQz1GzEKlMdybzI8Cp4UA24IJeHbSU1l6N4GE2NT8=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=HJlXb6nZ64Uf1pbk1qntqMs7XPBp9dtPBKU3eq/XfMslGDhXcb2Np3vMP7RvisIL3
- H2QHhQACc7C6ICW11myZBBKj1MNRPXxeWSFZJkQkyCL1F9k19dCEabxcxD75JmX2uY
- ivPHPRQq4WFJ1JDw7MNAWtBe39zZ/fTLth+kpwq35MPc3s8u3QKuN7/ncs1eKW6K+P
- QWejoenorJlESZlWyoLI3l1duWLkoItAHJPlenoF702Znz53oba8mCpP2OditeD2Qn
- GVJYE+DhGu2tv6QewD0R3J23ZoU/4fTroYyaqagV36jUL9GSUr1X7m6/J2wXDr96nC
- 84SzwMYjxzXv/GNx06ZQ9OTnG3AnUsXxIVjeGZzLrI3DnfR5oUCbJmYA9Bf6eh7Nqq
- 44apTOXPCmztQI97+Syke76eLjUcBrvlG4E8/+htOosNpXl864iWFnu9jLyZoSvcib
- kDCP8O0t07IYLmbin1zDm2E1aWONtS/OfNAppd2YeRkJz4BlJPFMIywMTyfbcJ69CZ
- qQxHt37KsrRL/IR3pySUScLHtw5TGyKXjRPC1QIlBEX3gtPS3YYX4bvIBdldMKlglv
- 0VnVEz3FnIhkYAL6EghrLeucbtZ6Hrny8EjSCqEqaGVcitOhWtkJ+ObJ9qVsvlVqSn
- 59d6qb5JAou7Yveo+Dsq0jTY=
+ b=sDUGgp5xrS8/IQYghi9hV8luhyDtSMTqK4bvsTrx8pwNdGY36+sWo6I/eSENFelqd
+ LagZe5g8pyx4P1GWQwyjF7/tIpRyea1dpVSwv1zgA3DiW0gKC5ERg1zCM/KPx6/QtG
+ rtqyMBNXcoXUFbSKZXM7+qDuw+mtaPqr9o57P1mjHGXJ3g5CxGSyvnhOtjzy+WPwsJ
+ RUidKbKG5rEuyg1pnvAODVEz/EFkh0AF+/DfDgjtm9JMNKMigefYDpqk4FtUuqbn3J
+ HzzgTMExxkut59vWRvsth+/OfcNi3WetmETv+M11/M9Uo5oAbt/yspxqNssdHu5ilB
+ v5mNyvfMQvThSPHFwYpuqJuAwdiGVCoth8RaLV9fDsQLP5J28nFxGT/SMvFH2lKwia
+ 0rBCmlkmvJS5N2RvRnOoSl6PGCUyE7/2E88mu62kcHtkNzkOUk4zeY9lau6M8lprxJ
+ Dfo+fakUvm44djVaLol5UpPo3MDUQjXvPRsT2DErAnUo6a01LqiRHEpYF8AJI7eHIY
+ 26Ab51diiYPEAi6TR65SK/5hsewpDh5gfVIHmEsU31L1H1IJAlhiMO+yGmine/qq7e
+ 1vf85FjrPRcjcOZ9ODRgJmDnX6yVMAZJnHJpm5mTcSlN4XjyyLFb7Cvsv/v3f/ZebT
+ cJ2/LSV1Np9Q+99bzWC+ZjZw=
 Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-84e024d2129so7868587b3a.2
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:24:02 -0700 (PDT)
+ d2e1a72fcca58-848d21bbb55so7358165b3a.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:24:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787059441; x=1787664241;
+ d=1e100.net; s=20251104; t=1787059439; x=1787664239;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=5VK2Fia5jNg66B+u/9UU+u5a30QkkXOl6B3wxqExfWY=;
- b=o+Z1zJN0WsBGLR1TYtxJekKhxBOa1Fxj3WbQ36GfIfV6/rSo4MLAh88c9nCGYBO59u
- sjopbeB5bVVp6LrEGhvAJ6H6SQzv+fEh8NWnb3uUrOaL0IZHyQBtWNrK2skH3V/eudlm
- 7oXEpS59i2jSrGrnrRP7YfX+Y2b89Zmw8c5RsnR9ixQQDIR7DzNh0wIOLy1rUHM+RRJg
- F0onfKoTY9lZ+1u147Kfu/KVdSsSXCe/SRW7qedwANursaWbfXtCC3G3HT9XDGed7CuZ
- zQkSTMfWmO4zLSyx69q601QP0veDPL1TgQNauGQ61I6boW5YL9iOvl9b/Zfk/BHctNsP
- FVuA==
-X-Gm-Message-State: AOJu0YyWFDxN95fj08XKgI8ULVM+2gPin/D3NqB4J4xraMJPIAX2lea+
- 5c1q236nrBxtgn+k4BGAoLfY831Hug619RlFd4KajaWVgAL6/IJQvkV2ANChtYnKJaCLDgcffq0
- fQPYqPeqflxqJufWOw8Zkt+OSRkYcECNdz88jxHs5VpzKdMABX+kQ7zCt1gLl3wOqzV0A+AhwcR
- 7G327w5NNgGru7Hh2A4g==
-X-Gm-Gg: AR+sD12DKu9IVw/kDp4xBl5ufUINLemCWd7MS5SGNXWCq6ICIHesXZRgLvpqNTRBQ36
- ho3UKheMiNiJxwRkg4T9GBRFrUZJL4VM4ZrZtlkom/brHuLoy9DKOrT5RbGgtNFaQdOSDUs2CCX
- ip0P4AccutcLO8vPbXtJ44l9lQJ3NE4QnjFS9ti+gfKxJ+8VZaioIcFDQk4ZhAvNc9bvIcVy0b5
- 6bOnO8OWD8wBfygkMzW2lRBo78VnuYgEUs9hp8+L2V+n1SpmG6rp4Jyb5Ml7WFc8fFHBqOtL9r/
- GTDV83cbtORbRuYDCjnm/mQwu/AutqmazxMZk2jRDujMJbnZSXFC73SLSYCUMEKcwP312YMtEm3
- beDUauSQirSSre2Zjanp+ivpcZGiyPABimPnXHisDLrzPIfOR
-X-Received: by 2002:a05:6a00:4ac3:b0:82f:50cd:e586 with SMTP id
- d2e1a72fcca58-84fde001affmr39420160b3a.13.1787059441129; 
- Tue, 18 Aug 2026 06:24:01 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4ac3:b0:82f:50cd:e586 with SMTP id
- d2e1a72fcca58-84fde001affmr39420072b3a.13.1787059440728; 
- Tue, 18 Aug 2026 06:24:00 -0700 (PDT)
+ bh=nJqQz1GzEKlMdybzI8Cp4UA24IJeHbSU1l6N4GE2NT8=;
+ b=lRqSIJUuJalab4x1oS8xIW22p/wpu2/noFIG/UUh4BEhgWaHW9BRolOxDgnKv0/8yF
+ t2ejJx9zoMHyoREQB/pmochtKY2uXX5sO1kBHGxShYf0L35kJRff4ej5TaQzhDD7VtEb
+ LLDTL4jIYNqNG3xsWLfg94LCN0wPDq0Cr4agC0B4ZBJzrUzat9Of+Z8zprpapCkUNdJN
+ YniAi6hhunpJwtPfHVBlmXyggUwzLArJZMgLCEkyL55mmqzGGXGp5PHrHtm4QlDcDe6e
+ QXQwp0oXz8hhFkjPkJVtkbDK2LI7PjnVsqZGCnkmNqYu507BlD5bx+6pHpcm2u47VNQ/
+ piSA==
+X-Gm-Message-State: AOJu0YzUgNBDiXkwBwjpm5RmcZhU0vii8PD/KI9HxNoZY2Lm0otvrCDd
+ dJuSLeEIiwjUiibacNSIrcW6GrNu6ciqmUlG15ZoXkmUw2nHJeVbdnTc9f9qPPmNBahdCF2MTNt
+ 9GcszzCbEIx1761iWzygGPNmekMKgRXBcHfTpd+WFYI0uaBlbnLlgWNNoMPtIsas0T+f8kWqyh4
+ IpONEOwJPZSyQEVrpA3Q==
+X-Gm-Gg: AR+sD12HbWmV1U4zhp25txgE4lT1ooO2wtWC22oOEdfibh+HjpwN6yStTce07HeFCTC
+ YxHeQ1l1zeFloiAGYFtVengCUhfTddv+ucK/g7xiYzzvBFl8Znb2iKR+BfOWnhoTLM7CX1O4vTp
+ lYmFkInCVmYV0wt3m/Ai60ukkljby8/5MU3FnOHaW4fTMIE32ttrXdJUuaDuseGjqg0kCpB0D06
+ Z/Jp8HTR+QQVRj0lWiPxW4NIUprpBOdwrs0uwMJ60KXEdFPKQzOPf5GRb9Yk/BGu1dwWY25i6OY
+ WgU/7ogdbZOWqAYhUFl43H87SpjTXDn4OdEelydgmjvqt8QM0nQkeE3JJoltjkaTy2Cbg8Msru6
+ JUQZ9doH26vnr37FyM6Q9II5sMiGzbm6ZZ1GS4nMB9YNpouI1
+X-Received: by 2002:a05:6a00:ac8a:b0:848:3f07:c5a2 with SMTP id
+ d2e1a72fcca58-851b8742117mr12143054b3a.4.1787059438683; 
+ Tue, 18 Aug 2026 06:23:58 -0700 (PDT)
+X-Received: by 2002:a05:6a00:ac8a:b0:848:3f07:c5a2 with SMTP id
+ d2e1a72fcca58-851b8742117mr12142967b3a.4.1787059438200; 
+ Tue, 18 Aug 2026 06:23:58 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851b6fc0e84sm1515818b3a.43.2026.08.18.06.23.58
+ d2e1a72fcca58-851b6fc0e84sm1515818b3a.43.2026.08.18.06.23.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 06:24:00 -0700 (PDT)
+ Tue, 18 Aug 2026 06:23:57 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: sjg@chromium.org, nora.schiffer@ew.tq-group.com,
  Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 6/8] test: fit: cover the kernel_noload lz4 header-size path
-Date: Tue, 18 Aug 2026 13:23:20 +0000
-Message-ID: <20260818132332.324173-7-aristo.chen@canonical.com>
+Subject: [PATCH v2 5/8] bootm: size the noload lz4 decompression buffer from
+ Content_Size
+Date: Tue, 18 Aug 2026 13:23:19 +0000
+Message-ID: <20260818132332.324173-6-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260818132332.324173-1-aristo.chen@canonical.com>
 References: <20260809042338.63397-1-aristo.chen@canonical.com>
@@ -141,76 +142,79 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add test_fit_kernel_noload_decomp_lz4_hdr_sized: a 6 MiB payload
-whose lz4 compression ratio is past the 8x heuristic decompresses
-cleanly because Content_Size is consulted. The tool must be invoked
-with --content-size so the frame's FLG bit is set. The test is
-guarded by @pytest.mark.requiredtool('lz4') so it skips on hosts
-that do not ship the lz4 command.
+Add a small static helper bootm_lz4_uncompressed_size() that parses
+the lz4 frame header and returns Content_Size when the FLG bit is
+set, and wire it into bootm_load_os() alongside gzip and zstd.
+
+The header parse mirrors ulz4fn()'s validation (magic, version==1,
+reserved bits, independent-block flag) so the helper does not accept
+a frame the decoder itself would reject. Only Content_Size is
+extracted; the full validation still runs inside ulz4fn() during the
+actual decompression call.
+
+The lz4 command needs the --content-size option to set the FLG bit
+that carries the size; frames produced without it fall back to the
+existing 8x heuristic.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- test/py/tests/test_fit.py | 47 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+ boot/bootm.c | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
-index f59010c8c35..42edddb0600 100755
---- a/test/py/tests/test_fit.py
-+++ b/test/py/tests/test_fit.py
-@@ -611,6 +611,53 @@ class TestFitImage:
-             'bootm rejected a well-compressed kernel_noload image whose '
-             'ISIZE trailer records the real uncompressed size: %s' % text)
+diff --git a/boot/bootm.c b/boot/bootm.c
+index e4284fe9844..c5bdc909053 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -658,6 +658,36 @@ static ulong bootm_gzip_uncompressed_size(const void *src, ulong len)
+ }
+ #endif
  
-+    @pytest.mark.buildconfigspec('lz4')
-+    @pytest.mark.requiredtool('lz4')
-+    def test_fit_kernel_noload_decomp_lz4_hdr_sized(self, ubman, fsetup):
-+        """A well-compressed lz4 kernel_noload image fits when the frame
-+        header carries the content size.
++#if CONFIG_IS_ENABLED(LZ4)
++/*
++ * Return the lz4 frame's Content_Size, or 0 if the buffer is not an
++ * lz4 frame or the frame does not carry the size. The header parse
++ * mirrors ulz4fn()'s validation so we do not accept a stream the
++ * decoder itself would refuse.
++ */
++static ulong bootm_lz4_uncompressed_size(const void *src, ulong len)
++{
++	const u8 *b = src;
++	u8 flg, version, indep_blocks, has_content_size, bd;
++	u64 cs;
 +
-+        Same as test_fit_kernel_noload_decomp_gzip_hdr_sized but for lz4:
-+        the tool must be invoked with --content-size so the frame's FLG
-+        bit is set and bootm can read the size instead of falling back to
-+        the 8x heuristic.
-+        """
-+        sz_1m = 1 << 20
-+        bootm_len = int(ubman.config.buildconfig['config_sys_bootm_len'], 0)
++	if (len < 4 + 2 || get_unaligned_le32(b) != LZ4F_MAGIC)
++		return 0;
++	flg = b[4];
++	bd = b[5];
++	version = (flg >> 6) & 3;
++	indep_blocks = (flg >> 5) & 1;
++	has_content_size = (flg >> 3) & 1;
++	if (version != 1 || !indep_blocks || (flg & 3) || (bd & 0x8f) ||
++	    !has_content_size)
++		return 0;
++	if (len < 4 + 2 + 8)
++		return 0;
++	cs = get_unaligned_le64(b + 6);
++	return cs > ULONG_MAX ? 0 : (ulong)cs;
++}
++#endif
 +
-+        decomp_size = 6 * sz_1m
-+        assert decomp_size <= bootm_len, (
-+            'Test setup error: decomp_size (%#x) must be <= '
-+            'CONFIG_SYS_BOOTM_LEN (%#x)' % (decomp_size, bootm_len))
-+        kernel = fit_util.make_fname(ubman, 'test-noload-kernel-lz4.bin')
-+        with open(kernel, 'wb') as fd:
-+            fd.write(b'\0' * decomp_size)
-+        kernel_lz4 = kernel + '.lz4'
-+        utils.run_and_log(
-+            ubman, ['lz4', '--content-size', '-f', kernel, kernel_lz4])
-+
-+        image_len = self.filesize(kernel_lz4)
-+        heuristic_bound = (image_len * 8 + sz_1m - 1) // sz_1m * sz_1m
-+        assert heuristic_bound < decomp_size, (
-+            'Test setup error: 8x heuristic bound (%#x) must be < uncompressed '
-+            'size (%#x); if this fires, lz4 got less effective and the test '
-+            'needs a bigger payload' % (heuristic_bound, decomp_size))
-+
-+        fit = fit_util.make_fit(ubman, fsetup['mkimage'], NOLOAD_ITS,
-+                                {'kernel': kernel_lz4, 'compression': 'lz4'},
-+                                basename='test-noload-lz4-hdrsized.fit')
-+        fit_addr = fsetup['fit_addr']
-+
-+        output = ubman.run_command_list([
-+            'host load hostfs 0 %x %s' % (fit_addr, fit),
-+            'bootm start %x' % fit_addr,
-+            'bootm loados',
-+        ])
-+        text = '\n'.join(output)
-+        assert 'Image too large' not in text, (
-+            'bootm rejected a well-compressed lz4 kernel_noload image whose '
-+            'frame header records the real content size: %s' % text)
-+
-     @pytest.mark.buildconfigspec('zstd')
-     @pytest.mark.requiredtool('zstd')
-     def test_fit_kernel_noload_decomp_zstd_hdr_sized(self, ubman, fsetup):
+ #if CONFIG_IS_ENABLED(ZSTD)
+ /*
+  * Return the zstd frame's Frame_Content_Size, or 0 if the header does
+@@ -722,6 +752,12 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 								image_len);
+ 			break;
+ #endif
++#if CONFIG_IS_ENABLED(LZ4)
++		case IH_COMP_LZ4:
++			hdr_size = bootm_lz4_uncompressed_size(image_buf,
++							       image_len);
++			break;
++#endif
+ #if CONFIG_IS_ENABLED(ZSTD)
+ 		case IH_COMP_ZSTD:
+ 			hdr_size = bootm_zstd_uncompressed_size(image_buf,
 -- 
 2.43.0
 
