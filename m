@@ -4,124 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694C0C5DF74
-	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C55DC5DF7D
+	for <u-boot@archiver.kernel.org>; Tue, 18 Aug 2026 13:51:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EABFC81179;
-	Tue, 18 Aug 2026 13:50:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3DE4A81113;
+	Tue, 18 Aug 2026 13:51:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xp7PQWnoLFxt; Tue, 18 Aug 2026 13:50:57 +0000 (UTC)
+ id XaDsVokxajje; Tue, 18 Aug 2026 13:50:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 464CE81173
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 329D68117E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1787061057;
-	bh=T2/SHatofqd1vmzRqPauXMY1lFop220ukIgqmCgIWtA=;
+	d=lists.u-boot-project.org ; s=default; t=1787061059;
+	bh=EH2yeaIJE6z+RQJNKVxOmbEQDOMLXIyGl87/rZG2iuw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hIFN5N7+d+i3ALarmMv7MQz6UyWc+9mUs2xPgWbXsmgoQlSlMl0X+6kDnnvxtJdvw
-	 KUHy4aR/iTD3tjizSSgZPFuePsr9hDdFCG4Trwx0oxKEamKLcZiTzfueXE1zm6WQ/F
-	 ilYxwlpTFtuzHoPBVFslcYNYSl5j8aPRDO1vjtW+yevjSqCg59lZ3ZgBlyfTOySV6N
-	 Lp1SJuDQJ31FOv83mKfOpDkd82fkuvdVOf9nIbpdkGJx/7TE9r1JCjekq/Qd+PsTKP
-	 NtrhYLEg/3HkXpYgjy/IRTRlG/YdV8xqskHSiRPPSyG+ZtZM6X9irvO3A0VqzFif+f
-	 bq7YUoS0VUelA==
+	b=SidUUNgKBUOfA2pAbkHd5BtZxVGIidR6Ls6OBWQVgPE4rl+3eZpTRRfqmp7NZwmcW
+	 SFhjbiCsqfgL3XytFEdk8ZXbKV+m/QTDdfdviW512RYkKGnixOIvf2+vN07w/KnPJU
+	 Ev6QToIvGVgdULA24l4G53RFdSgicl+kZBfSBv8gkkGpYdhxOF4zA+F8+QzY1oncTU
+	 91GHFcYmjoHz6NVgftDSQ50cTw0IShYe4wcvV70iGCXcLEx0TRWOGdOEfvBlkQ30KD
+	 LlCqY90BwDRSbZBSb18SlMtC61TuNyLuMb3rU2rgavqf3v7wLCXOEdVuSJkg2Q20lJ
+	 kWZS9e3m8rsCA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 464CE81173;
-	Tue, 18 Aug 2026 13:50:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C39012EF
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 329D68117E;
+	Tue, 18 Aug 2026 13:50:59 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 65A37237
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B5D0C40159
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:08 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 57C1A6086B
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dKiX9Iwxwhia for <u-boot@lists.u-boot-project.org>;
- Tue, 18 Aug 2026 13:24:07 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BbpUoZzzdSya for <u-boot@lists.u-boot-project.org>;
+ Tue, 18 Aug 2026 13:24:10 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org A69FC400EC
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 4570D605DB
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A69FC400EC
-Authentication-Results: smtp2.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4570D605DB
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=naqFgwws
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A69FC400EC
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:07 +0000 (UTC)
+ header.a=rsa-sha256 header.s=20251003 header.b=s3XqKy6m
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4570D605DB
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:10 +0000 (UTC)
 Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
  [209.85.210.200])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1C6573FC36
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:06 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 996203F82D
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 13:24:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787059446;
- bh=T2/SHatofqd1vmzRqPauXMY1lFop220ukIgqmCgIWtA=;
+ s=20251003; t=1787059448;
+ bh=EH2yeaIJE6z+RQJNKVxOmbEQDOMLXIyGl87/rZG2iuw=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=naqFgwwsEjWpbL4jdg+Z8YH7qI/mraZFMHxrNu78+p7pDlLuqxB6lH26WVWk0Aknn
- cLy+zOF9pBwp+8k6TcfL5Bh4h+hRqM75iqBFSTTQr8dRItsKQCf3XkpjMvvtnMFLOq
- 50wyaYeAAcE5i8cTRv6pU13kIapMtP0wHu8hDH1silmoUdl6XUEQ0+QNRnilvR7uHh
- sxmNwm2/qfDuAMFK58J45SfEldu7VYth8DRzgHeEn6cDSZ1Vk2dWSHQG6nLPinEIpG
- ATRMDRbITNkQE33k+Bmlty8OHzwhPGgLdwFQ71RbbmpHWj/IkX4THCzr12mKZhg94L
- fBmrlRC4vU1nI5kv7cwfS3hI080uW/NeVyGJwtbiWMfiMsY9qg+CBx78iqkK8Eqj9A
- pLISL7ySa+49lRc4StwxTfANt8IkJ2GWVmbcXge7rM0pRGW0XQuVzOJN6v6QYFBYzd
- d0TXLYQ5ofOIzUxKvt8C76OZ7Bmx8qLQRSg5DwwmQSpuKc0REqyB2C2t5DTV+VrfN4
- EkSnjv40hxIm3dD6dfhUrD/QT2IEzmc/ETCb3TBccbXg9a60bEPkV1h8phlqMmi3TU
- WuqndB2JaLc4TFDYM8+OWn/USFfPo7E2z8zKF3B+uRBg3/Phqyuhu1qYfrEBVBuvRr
- vWvLt6uTLNvGzSRDCer4tulM=
+ b=s3XqKy6mPRc0CNDHFZHP/aygC54AZ/E3gt2vl07M/6wipAGHheWXncqu0xW1YMdF5
+ EixWced1liI3kNnKOzk6nEMZ9biHbQyxMz/hEb0yq//8WTGcm3zf8qLOzPPK7ehDVy
+ /5XdjVC2l38W/k7pSqf6JFO/zKQ3CAFJx6I3Y08yG3PINRCqzY+DNZbUOZNVxIeGCD
+ 39s9f+Aod3lr/M7ntztQqXRK19xcoWk2BiWrAmWpyy0wamSotA+0FS5zqyFtIjzCb5
+ JBEBBhG1z1nPYpp3Sen/+jOve10IEpZ7STM45WsrWoa8ecvga8VNjyUX+N8bMu79fq
+ F0KiE+Boi4xRr981EUKuXBdzaLNFBfrDiGPqNMC4JDmf7znzQ+qV+1Yso89R9dF1tq
+ h2dNFffh2iKmCx6q+BrjXu7AaepGmJqw6lklvR6RQO6ucPbz56fTxneKI85GYaOf++
+ /LUm5nV8BDWNqT4PzIkhjgh9qbF4LE6itDKoLN3IdzZei6Cs5PnEP1cxO0d4CDPL9d
+ C8IfPv8pyAP1PoxB7XLE62U17C+hPrmCQ8gZ/HU64s4O/BroSUuzo2nPhtM+Wic5oe
+ LWPKF7cktca0aWchc+F/TKq72Zgrb/xjfrjAnj7IfMz30W5NVIx/04w5CVGmsAcZPB
+ gIJd/ibVUAP8Uw/g676DOuNo=
 Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-84f7002f9afso4046057b3a.3
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:24:06 -0700 (PDT)
+ d2e1a72fcca58-84e048a801dso6249934b3a.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 06:24:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787059444; x=1787664244;
+ d=1e100.net; s=20251104; t=1787059447; x=1787664247;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=T2/SHatofqd1vmzRqPauXMY1lFop220ukIgqmCgIWtA=;
- b=TRpKRp/mY4p+q+3CeWe32XO12ukWbF4PZBkp44+UrOBJ7BohU3ddxKJy0qVV8Zzxiz
- MHTPTorzZl6eI82eKwUzbvSMjm7MVg549k5JDDyNIs/E8UgXBxdRlrZboJVaFklvmPoS
- qsjDPxL2ajxN1ozCFQpJM//0MSOFqkCZif/KkYJHOQH0TG5S0s32JE2c9vmBmNjVM5vT
- SJ+BmA8DOqHsFi9VG/fbF81e7V4l/2K44JTvG+ym3jS7qNXC/QjXRVVkck3oC0lVGYKK
- qPAxhr8buxxIZ4ebuYyNG8qOVoDQ7MFKMlaow7fVWz+KfZSyBqGju3AE1EziFJFyUVpZ
- cIZQ==
-X-Gm-Message-State: AOJu0YwNB2q9Mj+Ft/IzO9NyWhxajYxxQNcMJbv+KskPVzatq9zWGz+C
- 2b6ZxXdX5oDa4KKNodOUcGzp61zr1gV6JFVznfpDVRrgJMHHO3nYif6JSdguvLs8nyu2znGSaFN
- 6d02uLKIU/I9+as1iDoJ3slpLGqzRnTiKiAPeTV+juOGPnix3MTMkNiTc/F2kVeMV492SpgEyD8
- LiWmmDwm54hvBGpkMvew==
-X-Gm-Gg: AR+sD11AuPVI12/ACD0qX0PMLLbLsbbTa/gbvA5ai7dM1fCTHPRJ53zIWI8DPIui9yD
- 6q6gzIm4ZZuCYPk/OzTrZUBHv9Ttxmh/a9yCdzKq5nZPSu0cnwPu/bXh/8wOKpe2tSGgTvcMzi+
- 95wm5MQqURQsI84IFN8vXZiyZPHQjPaIhux6zuNnX2sUlPj0tp6719os02BQHyM3rYpYE+3cw6Z
- UKrlSVGd2Fi2vKF3QENqJBSZBmB0kEkYNgYDqrCEOIw9jZLPf59T8tuEGysUNUH6sOZGNSDtu1P
- NNSGdk3KjW7Lmxvv8Oos+1lhplrS4p8zDZvb8a1cyMzUNjHKfcWBqM2+D9gel4yY+8TBbec/kQM
- eIpKy4rKpRYgb4gmWtslwcPSp+MIZe8m6eOjAZRpq0my0/gko
-X-Received: by 2002:a05:6a00:4299:b0:847:93f3:a4b6 with SMTP id
- d2e1a72fcca58-84fde24b8f1mr38469448b3a.17.1787059444483; 
- Tue, 18 Aug 2026 06:24:04 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4299:b0:847:93f3:a4b6 with SMTP id
- d2e1a72fcca58-84fde24b8f1mr38469374b3a.17.1787059444094; 
- Tue, 18 Aug 2026 06:24:04 -0700 (PDT)
+ bh=EH2yeaIJE6z+RQJNKVxOmbEQDOMLXIyGl87/rZG2iuw=;
+ b=Fy/Cd9RM/3m0TvLRwoitA0qlT6hWGJsoNErshmca0bFjUEKmt8pC/1kaxPqcKQXchj
+ zuKU8dB63Z1LX2kYKl/Kl6PE55ztnvm7oeI7vVYVSCZxbsMHO0+U8S8ckEM+bcITy9Bd
+ W+7nv3Zd7qAl0xaJzQnVZupGq7pPcQlzZJlDjTxHkBtj/AUyWBOiy7GAx97GKi+anfhi
+ Ijjrpn17t6wTa45uRVHPpRCTbXqxlY9qOm5BW0OcNTAjiYv/JGl7mAVv6phpJXKhKUhr
+ 9U64Q9LSzpBPfnRgD3hE93T2NVuTdbUT7vV/Im14gZE1HVfj+4V6SRqXgMUt1lETck1n
+ 0Jvg==
+X-Gm-Message-State: AOJu0YzHzWK1Lti95mAdsHmsMnXY+N9J3ewlctmNcLNLRR11PVJm0i2f
+ lv/8trGSJryaYcxXpkmtSwpeIO4t11nHlqLJa5nxBzTBZ+cXOmMRAG36flN2oUufpCAqrqySq8C
+ bqWMcnGkKwsD01R6qCXwCHDYQ74Bg3N69vxIJNiwhMaMLJu50RY348uZ+5XfMUf+R1FVQYvlFaR
+ 8QJ/b0bqRUd2kartVDQw==
+X-Gm-Gg: AR+sD10KC2cqidh+rqoh8AHe8OaHfOIopmysj/nraUO54toO1ZCpEZzME36GcupKyFw
+ ucGIIxttXASbSOXsRP89vBJyjkAMRCJpIEFbHqtXgt0isDqAkIB/zQvMXIuQyQdKc3uhLg/HTLE
+ 1Gqzm2teKvS1rdb1kQCN6XNvvb2CjqzCXZG5UBjFo8xl0F/fxmuLiV6t+fYqu/XmTtc9T+MlAd3
+ vbJx23aew2mO00su3MFYRnR4QRLqb2s3PFpiuFzybaL4P5BWGsR7z7ZGZzX1hgPV19Eb0vjlGp1
+ wSwDzbw1lvNx783UMgmdSGrJgkjJm2ix2HY9Z1WjIeBJsLtN9ePZ0Upia4VsSkFikGExYrMvNZ6
+ VZJZ/nhMA+dZHOYozNFAtNrNORQMAoNcOFtMFdNcvY5DugcVq
+X-Received: by 2002:a05:6a00:2e20:b0:83e:b443:965e with SMTP id
+ d2e1a72fcca58-84fddfa8bddmr34313149b3a.3.1787059447083; 
+ Tue, 18 Aug 2026 06:24:07 -0700 (PDT)
+X-Received: by 2002:a05:6a00:2e20:b0:83e:b443:965e with SMTP id
+ d2e1a72fcca58-84fddfa8bddmr34313073b3a.3.1787059446604; 
+ Tue, 18 Aug 2026 06:24:06 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851b6fc0e84sm1515818b3a.43.2026.08.18.06.24.01
+ d2e1a72fcca58-851b6fc0e84sm1515818b3a.43.2026.08.18.06.24.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 06:24:02 -0700 (PDT)
+ Tue, 18 Aug 2026 06:24:06 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: sjg@chromium.org, nora.schiffer@ew.tq-group.com,
  Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 7/8] bootm: size the noload lzma decompression buffer from
- the header
-Date: Tue, 18 Aug 2026 13:23:21 +0000
-Message-ID: <20260818132332.324173-8-aristo.chen@canonical.com>
+Subject: [PATCH v2 8/8] test: fit: cover the kernel_noload lzma header-size
+ and unknown-size paths
+Date: Tue, 18 Aug 2026 13:23:22 +0000
+Message-ID: <20260818132332.324173-9-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260818132332.324173-1-aristo.chen@canonical.com>
 References: <20260809042338.63397-1-aristo.chen@canonical.com>
@@ -142,76 +142,137 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a small static helper bootm_lzma_uncompressed_size() that reads
-the uncompressed size out of the .lzma-alone header, and wire it
-into bootm_load_os() alongside gzip, lz4, and zstd.
+Exercise bootm_lzma_uncompressed_size() end-to-end on sandbox:
 
-The .lzma-alone format keeps the uncompressed size in a fixed 8-byte
-field right after the 5-byte properties block; a marker of all ones
-means the size is unknown, and the caller falls back to the 8x
-heuristic in that case. Streaming encoders (xz-utils' 'lzma' shim,
-Python's lzma.FORMAT_ALONE) write the unknown marker, while LZMA SDK
-style encoders record the real size.
+- test_fit_kernel_noload_decomp_lzma_hdr_sized boots a 6 MiB
+  kernel_noload payload that lzma compresses far past the 8x fallback
+  heuristic, so the boot only succeeds when bootm sizes the buffer
+  from the header's uncompressed-size field. Streaming encoders write
+  the "unknown" marker into that field, so the test compresses with
+  Python's lzma module and patches the real size into the fixed
+  8-byte field, matching what LZMA SDK style encoders record.
+
+- test_fit_kernel_noload_decomp_lzma_unknown_size leaves the marker in
+  place and checks that bootm falls back to the 8x heuristic buffer
+  and still boots the image.
+
+No external tool is required: Python's lzma module is part of the
+standard library.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- boot/bootm.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ test/py/tests/test_fit.py | 98 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 98 insertions(+)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index c5bdc909053..758edeb964c 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -26,6 +26,7 @@
- #include <asm/unaligned.h>
- #include <linux/sizes.h>
- #include <linux/zstd.h>
-+#include <lzma/LzmaDec.h>
- #include <tpm-v2.h>
- #include <tpm_tcg2.h>
- #if defined(CONFIG_CMD_USB)
-@@ -658,6 +659,28 @@ static ulong bootm_gzip_uncompressed_size(const void *src, ulong len)
- }
- #endif
+diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+index 42edddb0600..0edf875a9e1 100755
+--- a/test/py/tests/test_fit.py
++++ b/test/py/tests/test_fit.py
+@@ -704,6 +704,104 @@ class TestFitImage:
+             'bootm rejected a well-compressed zstd kernel_noload image whose '
+             'frame header records the real content size: %s' % text)
  
-+#if CONFIG_IS_ENABLED(LZMA)
-+/*
-+ * Return the uncompressed size recorded in the lzma stream header, or
-+ * 0 if the buffer is too short or the size field carries the "unknown"
-+ * marker (0xff..ff). The .lzma-alone format keeps the size in a fixed
-+ * 8-byte field right after the 5-byte properties block; nothing else
-+ * is validated since the value is only an allocation hint.
-+ */
-+static ulong bootm_lzma_uncompressed_size(const void *src, ulong len)
-+{
-+	const u8 *b = src;
-+	u64 usize;
++    @pytest.mark.buildconfigspec('lzma')
++    def test_fit_kernel_noload_decomp_lzma_hdr_sized(self, ubman, fsetup):
++        """A well-compressed lzma kernel_noload image fits when the header
++        records the real uncompressed size.
 +
-+	if (len < LZMA_PROPS_SIZE + 8)
-+		return 0;
-+	usize = get_unaligned_le64(b + LZMA_PROPS_SIZE);
-+	if (usize == U64_MAX || usize > ULONG_MAX)
-+		return 0;
-+	return (ulong)usize;
-+}
-+#endif
++        Same as test_fit_kernel_noload_decomp_gzip_hdr_sized but for lzma.
++        Streaming encoders write the "unknown" marker into the .lzma-alone
++        size field, so compress with Python's lzma module and patch the
++        real size into the fixed 8-byte header field, the way LZMA SDK
++        style encoders record it.
++        """
++        lzma = pytest.importorskip('lzma')
++        sz_1m = 1 << 20
++        bootm_len = int(ubman.config.buildconfig['config_sys_bootm_len'], 0)
 +
- #if CONFIG_IS_ENABLED(LZ4)
- /*
-  * Return the lz4 frame's Content_Size, or 0 if the buffer is not an
-@@ -752,6 +775,12 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 								image_len);
- 			break;
- #endif
-+#if CONFIG_IS_ENABLED(LZMA)
-+		case IH_COMP_LZMA:
-+			hdr_size = bootm_lzma_uncompressed_size(image_buf,
-+								image_len);
-+			break;
-+#endif
- #if CONFIG_IS_ENABLED(LZ4)
- 		case IH_COMP_LZ4:
- 			hdr_size = bootm_lz4_uncompressed_size(image_buf,
++        decomp_size = 6 * sz_1m
++        assert decomp_size <= bootm_len, (
++            'Test setup error: decomp_size (%#x) must be <= '
++            'CONFIG_SYS_BOOTM_LEN (%#x)' % (decomp_size, bootm_len))
++        kernel = fit_util.make_fname(ubman, 'test-noload-kernel-lzma.bin')
++        with open(kernel, 'wb') as fd:
++            fd.write(b'\0' * decomp_size)
++        filters = [{'id': lzma.FILTER_LZMA1, 'preset': 6,
++                    'dict_size': 1 << 20}]
++        blob = lzma.compress(self.read_file(kernel),
++                             format=lzma.FORMAT_ALONE, filters=filters)
++        assert blob[5:13] == b'\xff' * 8, (
++            'Test setup error: expected the streaming encoder to write the '
++            '"unknown" size marker')
++        blob = blob[:5] + decomp_size.to_bytes(8, 'little') + blob[13:]
++        kernel_lzma = kernel + '.lzma'
++        with open(kernel_lzma, 'wb') as fd:
++            fd.write(blob)
++
++        image_len = self.filesize(kernel_lzma)
++        heuristic_bound = (image_len * 8 + sz_1m - 1) // sz_1m * sz_1m
++        assert heuristic_bound < decomp_size, (
++            'Test setup error: 8x heuristic bound (%#x) must be < uncompressed '
++            'size (%#x); if this fires, lzma got less effective and the test '
++            'needs a bigger payload' % (heuristic_bound, decomp_size))
++
++        fit = fit_util.make_fit(ubman, fsetup['mkimage'], NOLOAD_ITS,
++                                {'kernel': kernel_lzma, 'compression': 'lzma'},
++                                basename='test-noload-lzma-hdrsized.fit')
++        fit_addr = fsetup['fit_addr']
++
++        output = ubman.run_command_list([
++            'host load hostfs 0 %x %s' % (fit_addr, fit),
++            'bootm start %x' % fit_addr,
++            'bootm loados',
++        ])
++        text = '\n'.join(output)
++        assert 'Image too large' not in text, (
++            'bootm rejected a well-compressed lzma kernel_noload image whose '
++            'header records the real uncompressed size: %s' % text)
++
++    @pytest.mark.buildconfigspec('lzma')
++    def test_fit_kernel_noload_decomp_lzma_unknown_size(self, ubman, fsetup):
++        """An lzma stream with the "unknown" size marker falls back cleanly
++
++        Streaming encoders write 0xff..ff into the .lzma-alone size field.
++        bootm must fall back to the 8x heuristic buffer and still boot the
++        image.
++        """
++        lzma = pytest.importorskip('lzma')
++        sz_1m = 1 << 20
++
++        # Incompressible data keeps the real size well inside the 8x
++        # fallback buffer.
++        payload = os.urandom(sz_1m)
++        kernel = fit_util.make_fname(ubman, 'test-noload-kernel-lzma-unk.bin')
++        filters = [{'id': lzma.FILTER_LZMA1, 'preset': 6,
++                    'dict_size': 1 << 20}]
++        blob = lzma.compress(payload, format=lzma.FORMAT_ALONE,
++                             filters=filters)
++        assert blob[5:13] == b'\xff' * 8, (
++            'Test setup error: expected the streaming encoder to write the '
++            '"unknown" size marker')
++        kernel_lzma = kernel + '.lzma'
++        with open(kernel_lzma, 'wb') as fd:
++            fd.write(blob)
++
++        fit = fit_util.make_fit(ubman, fsetup['mkimage'], NOLOAD_ITS,
++                                {'kernel': kernel_lzma, 'compression': 'lzma'},
++                                basename='test-noload-lzma-unk.fit')
++        fit_addr = fsetup['fit_addr']
++
++        output = ubman.run_command_list([
++            'host load hostfs 0 %x %s' % (fit_addr, fit),
++            'bootm start %x' % fit_addr,
++            'bootm loados',
++        ])
++        text = '\n'.join(output)
++        assert 'Image too large' not in text, (
++            'bootm rejected an lzma kernel_noload image carrying the '
++            '"unknown" size marker; the 8x fallback should have covered '
++            'it: %s' % text)
++
+     @pytest.mark.buildconfigspec('gzip')
+     def test_fit_kernel_noload_decomp_gzip_boundary(self, ubman, fsetup):
+         """Test that decompression succeeds exactly at the buffer limit
 -- 
 2.43.0
 
