@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99783C5DF88
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 08:54:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2126FC5DF86
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 08:54:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5B7E040752;
-	Wed, 19 Aug 2026 08:54:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6EE1A40697;
+	Wed, 19 Aug 2026 08:54:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9DhFwr7B8UUc; Wed, 19 Aug 2026 08:54:21 +0000 (UTC)
+ id mvRqasYpxv61; Wed, 19 Aug 2026 08:54:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787129661;
-	bh=UWrFDZOn3+F0+E22kS5LIkjeUmfTy4w5AAHDhy7ztgM=;
+	d=lists.u-boot-project.org; s=default; t=1787129663;
+	bh=zZ0Ytiis7eiEAR/Ny8xoBKpj7SvQCh7nK+tOoYg8Ft0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LHPpyo0ohOlJwIHan7mf+5aSxEM2WI7PmyUi8POMHjbxriO2BZ68CVkkx8UP3DhiD
-	 2A6pgi/eZ6DsyYScbWZu/Ol+TJFfR1ZBMVKwMnrxGu1Uu4RErOBVMcO0Q9rdfNod0c
-	 E3CuCQwVGaXWmapbxyT5lUHwEMpagmK9SajN1P7DjpN2iXFTmjF3NTkxQhynGXYMf8
-	 TpPbaSrLQ5o67kXVj2ka+HWtQPORfMrwLKUpmMKrWvDXq6xtz/PL8fo53+Nis5Hd6L
-	 t6moyn7VQWDhVSvjWWuOcfwfS5VgnaEWEX3e5aDPbm7+tNmIn0RisGD3RDiAzUH393
-	 akXyTBalBdYmw==
+	b=H3Jv+vInBGZ+eFxIjfBng779tLJpDG2nvBCeQRZx7jA9Nb3muFuEqhnrlq3Upl6kN
+	 inscrjdsAc7FMO5Q6XRu1GNnGVDLdiwIvUbaRRxkVqfHps/yZPZCecAqaY03JF0s2a
+	 Urs+Xw9JeoT8Rt/6YTWK5GKBf+rUgf9e4+/eEOqgzbs6BIeeALKj3IACFePatLWvrt
+	 J/5i7HEw+VXMWuQcaLNy1g44lTKTcWdwweVuZwMbt6nfa6d9tNaXvG3Vm4+A7/4omX
+	 f/CkIAJLJZLKfNuaEjNh9+3UuCh2JytHQ7ifmZckCM+MSG12m7obWhg6JXLj9zqYGX
+	 733qB60/4DU6w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A4AC5406DB;
-	Wed, 19 Aug 2026 08:54:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0F93F265
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0C9FB40762;
+	Wed, 19 Aug 2026 08:54:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AF3852FD
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D042B80C6C
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:17 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A154F4008C
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0jtvEyQIKvwM for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 08:54:17 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=linusw@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qi8Mq57JPcmS for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 08:54:19 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=linusw@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=H78WSR0v
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2C5BD80DE6
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:16 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20260515 header.b=D4Xsd2ip
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9ECA740042
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:19 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AC1C2437D3;
+ by tor.source.kernel.org (Postfix) with ESMTP id 805E360A58;
+ Wed, 19 Aug 2026 08:54:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A9801F000E9;
  Wed, 19 Aug 2026 08:54:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62B291F000E9;
- Wed, 19 Aug 2026 08:54:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787129656;
- bh=UWrFDZOn3+F0+E22kS5LIkjeUmfTy4w5AAHDhy7ztgM=;
+ s=k20260515; t=1787129658;
+ bh=zZ0Ytiis7eiEAR/Ny8xoBKpj7SvQCh7nK+tOoYg8Ft0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=H78WSR0vVvfWqDc21zmRa2LD9+9GSbtFK/H/rDu1b/ulq3l7H++QqM5VM/Ey0dzm4
- 3TGRX4ikkcKiHeMYJqZ4HqrRYJHqXcKxLNHgGitrF2HMyoINywv9YcEzOuZuZV09JN
- OI2GU0spPEbBJjpJAUCtXi8BcIInmldERFLRup6Uu3N4OZmdZpIX3GbVoejakdkee/
- KklKjY528haIMAHg8qduaNW+PiR7b+XRnNq+elik0hR5r8ymu3fnzt3f9uWeyJguZh
- 4Bat8zP+X+wqJXt9e8jQT/yReuVDauxnT4rQjmCt7CK4Bj7annSkcYKm8wJ/BwCVCt
- OVTi5VlceFqLg==
+ b=D4Xsd2iphjrNgODsYd89jj4aS+3Lzai+YJDHhcseFmyTBXYss94JMjKT2mW5MbtfF
+ FAMb9l1MwXd3UUjjnoMzm+ywJJdTqaz79Oer3k3jltrcKrGYChdjLyY608Twvcu/lC
+ 4nZkyv34MDkPuObzYEnJFp9aZ2YU/JP/3UhPC+Mrz2YT1aiotzaCtjZ49NyDrE12TU
+ 5eY9sbEjmuDjybVPeeeFqtyHya66qkAxnYDVgeI+QgFvZH/9spHz7ZkNh8m/uvqrvY
+ dSU4EPk16BZYwx6IyOQbjWEUnwIb179f8FShiopWMeVq/SLIZyuLza6m0HtiL1ez/6
+ 9dHbkwjoJ7Bkg==
 From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 19 Aug 2026 10:54:09 +0200
-Subject: [PATCH v4 04/12] mmc: arm_pl180: Set initial supply voltages
+Date: Wed, 19 Aug 2026 10:54:10 +0200
+Subject: [PATCH v4 05/12] mmc: arm_pl180: Power down card supplies at OS
+ handoff
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260819-ux500-external-sdcard-v4-4-f1c8c9ffac30@kernel.org>
+Message-Id: <20260819-ux500-external-sdcard-v4-5-f1c8c9ffac30@kernel.org>
 References: <20260819-ux500-external-sdcard-v4-0-f1c8c9ffac30@kernel.org>
 In-Reply-To: <20260819-ux500-external-sdcard-v4-0-f1c8c9ffac30@kernel.org>
 To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -94,109 +94,75 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Obtain the optional vmmc and vqmmc regulators and configure them for
-the normal SD voltage range before card initialization.
+PL180 card supplies remain enabled after probing and while U-Boot is
+running. They are no longer needed once control is handed to the operating
+system.
 
-The Ux500 boards supply their SD cards from AB8500 or AB8505 AUX3,
-whose highest voltage selector is 2.91 V. Request that exact voltage
-for Ux500 SD and SDIO hosts, while retaining the normal 3.3 V target
-for eMMC-only hosts and other PL180 implementations.
-
-Ignore the unsupported set-value operation for fixed regulators; their
-voltage is already described by their fixed constraints.
+Mark the driver for removal during OS preparation and disable its VMMC and
+VQMMC supplies from the remove callback.
 
 Signed-off-by: Linus Walleij <linusw@kernel.org>
 ---
- drivers/mmc/arm_pl180_mmci.c | 38 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ drivers/mmc/arm_pl180_mmci.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
 diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
-index 528612359789..a2ea5cf03120 100644
+index a2ea5cf03120..dd913f963c82 100644
 --- a/drivers/mmc/arm_pl180_mmci.c
 +++ b/drivers/mmc/arm_pl180_mmci.c
-@@ -16,6 +16,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <mmc.h>
-+#include <power/regulator.h>
- #include <dm/device_compat.h>
- #include <dm.h>
+@@ -46,6 +46,20 @@ static int arm_pl180_set_supply_voltage(struct udevice *supply, int target_uV)
+ 					 target_uV, SD_VOLTAGE_MAX_UV);
+ }
  
-@@ -28,11 +29,23 @@
- #define MMC_CLOCK_MAX	48000000
- #define MMC_CLOCK_MIN	400000
- 
-+#define SD_VOLTAGE_MIN_UV	2700000
-+#define SD_VOLTAGE_UV		3300000
-+#define SD_VOLTAGE_MAX_UV	3600000
-+#define MMC_VOLTAGE_UV		3300000
-+#define UX500_SD_VOLTAGE_UV	2910000
-+
- struct arm_pl180_mmc_plat {
- 	struct mmc_config cfg;
- 	struct mmc mmc;
- };
- 
-+static int arm_pl180_set_supply_voltage(struct udevice *supply, int target_uV)
++static int arm_pl180_disable_supply(struct udevice *supply)
 +{
-+	return regulator_set_value_clamp(supply, SD_VOLTAGE_MIN_UV,
-+					 target_uV, SD_VOLTAGE_MAX_UV);
++	int ret;
++
++	if (!supply)
++		return 0;
++
++	ret = regulator_set_enable_if_allowed(supply, false);
++	if (ret == -ENOSYS)
++		return 0;
++
++	return ret;
 +}
 +
  static int wait_for_command_end(struct mmc *dev, struct mmc_cmd *cmd)
  {
  	u32 hoststatus, statusmask;
-@@ -390,6 +403,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 	struct pl180_mmc_host *host = dev_get_priv(dev);
- 	struct mmc_config *cfg = &pdata->cfg;
- 	struct clk clk;
-+	int supply_uV = SD_VOLTAGE_UV;
- 	u32 periphid;
- 	int ret;
+@@ -497,6 +511,20 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
+ 	return 0;
+ }
  
-@@ -427,11 +441,15 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 		cfg->voltages = VOLTAGE_WINDOW_MMC;
- 		cfg->f_min = host->clock_in / (2 + SDI_CLKCR_CLKDIV_INIT_V2);
- 		host->version2 = true;
-+		supply_uV = UX500_SD_VOLTAGE_UV;
- 		break;
- 	default:
- 		host->version2 = false; /* ARM variant */
- 	}
- 
-+	if (dev_read_bool(dev, "no-sd"))
-+		supply_uV = MMC_VOLTAGE_UV;
++static int arm_pl180_mmc_remove(struct udevice *dev)
++{
++	struct mmc *mmc = mmc_get_mmc_dev(dev);
++	int ret, vmmc_ret;
 +
- 	if (dev_read_bool(dev, "st,sig-dir-dat0"))
- 		host->pwr_init |= SDI_PWR_DAT0DIREN;
- 	if (dev_read_bool(dev, "st,sig-dir-dat2"))
-@@ -445,6 +463,26 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 	if (dev_read_bool(dev, "st,sig-pin-fbclk"))
- 		host->pwr_init |= SDI_PWR_FBCLKEN;
- 
-+	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
-+		ret = device_get_supply_regulator(dev, "vmmc-supply",
-+						  &mmc->vmmc_supply);
-+		if (!ret) {
-+			ret = arm_pl180_set_supply_voltage(mmc->vmmc_supply,
-+							   supply_uV);
-+			if (ret && ret != -ENOSYS)
-+				return ret;
-+		}
++	ret = arm_pl180_disable_supply(mmc->vqmmc_supply);
++	if (mmc->vmmc_supply != mmc->vqmmc_supply)
++		vmmc_ret = arm_pl180_disable_supply(mmc->vmmc_supply);
++	else
++		vmmc_ret = 0;
 +
-+		ret = device_get_supply_regulator(dev, "vqmmc-supply",
-+						  &mmc->vqmmc_supply);
-+		if (!ret) {
-+			ret = arm_pl180_set_supply_voltage(mmc->vqmmc_supply,
-+							   supply_uV);
-+			if (ret && ret != -ENOSYS)
-+				return ret;
-+		}
-+	}
++	return ret ? ret : vmmc_ret;
++}
 +
- 	gpio_request_by_name(dev, "cd-gpios", 0, &host->cd_gpio, GPIOD_IS_IN);
- 
- 	ret = mmc_of_parse(dev, cfg);
+ int arm_pl180_mmc_bind(struct udevice *dev)
+ {
+ 	struct arm_pl180_mmc_plat *plat = dev_get_plat(dev);
+@@ -560,8 +588,10 @@ U_BOOT_DRIVER(arm_pl180_mmc) = {
+ 	.of_match = arm_pl180_mmc_match,
+ 	.ops = &arm_pl180_dm_mmc_ops,
+ 	.probe = arm_pl180_mmc_probe,
++	.remove = arm_pl180_mmc_remove,
+ 	.of_to_plat = arm_pl180_mmc_of_to_plat,
+ 	.bind = arm_pl180_mmc_bind,
+ 	.priv_auto	= sizeof(struct pl180_mmc_host),
+ 	.plat_auto	= sizeof(struct arm_pl180_mmc_plat),
++	.flags = DM_FLAG_OS_PREPARE,
+ };
 
 -- 
 2.55.0
