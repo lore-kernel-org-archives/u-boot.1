@@ -1,99 +1,87 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F4D8C5DF6D
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D8EC5DF85
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 08:54:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ABA984058C;
-	Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mark4V3Athav; Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787129636;
-	bh=aHQWZv5bo1LFPaxWf/ZPdcIi4VT8g3Y+pKJsI/ptfFM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ZggX/eXzOGuWJNwI3XE/R/X60gbvoctnKFXO/6ycB6hyLVzai+HbE6fCW5KfwEWKU
-	 3MHkc97NBJ1S29dlqk1Cg2Vd/cp6Ax5AUQpQzcNFh0s0HqAvJf2iHS5bKu7qcYxXK8
-	 8fWf9XVX0VGatSLlDbYgh0VwaFg0UWTZMwS56oA6A/KJNQ1Je52UuW8YxeaeWnIg66
-	 1nIdh7oTyQT6TnV3fQnYAVnlXxDwp4HG1PU8N+jSA+H0iLEgapcl0yIqnQqTqmvcD8
-	 Gw+1EqT7E4LHNZYWK5JdDzPkEwsIv+kY4+30DLTNzm90cvzE/JZm5zSVbSd8AYKsg3
-	 +V4xjezgLEelg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 253E440633;
-	Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 02FF32FD
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:55 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E8A4580CBF
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7834E80DB8;
+	Wed, 19 Aug 2026 08:54:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CrwESSztzf6p for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 08:53:54 +0000 (UTC)
+ id qpt6W2jzn1IC; Wed, 19 Aug 2026 08:54:13 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787129653;
+	bh=2t3V8WnKGEd4DU6Oj6Qs5UcxNgiap3GV2WXt8D5fqF4=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=tNnY43V4lBub18qSafndMUBYmU1u8M3y8ki14A3Gaa4frcKjXehm4scfyufCUJ3jN
+	 64qCn1COfkVa/j6G8qc2Kma7gSxstKQI5eOF5vuGfF61i9bjoJ3Ftt2Axk0fNEkBvb
+	 gHc5IYsx7JjsR+lfuS2eAI1a6+4MHxHhVM2f4gFLRAnA4nIm0uV3ll7Kg380W+rk3k
+	 IE4nk64yuIMgGXjw3FxPBsvOwtPKI+VTlQ6yfU5aKLIHInNN8kHsDYpciy0jVAhFO0
+	 QfC2xJT4/9wldzpGse4LU9l2jZMngRdyddyEC4Yu+hZqPvhIpZdKOWewRBtg6GLJtc
+	 JHdBgpjgpadrg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 738F080CBF;
+	Wed, 19 Aug 2026 08:54:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 69244265
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:11 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4E26980D81
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:11 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BqWnZ75SCk3K for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 08:54:10 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
  helo=sea.source.kernel.org; envelope-from=linusw@kernel.org;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=Dn0UN71T
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=O8Y2qfO9
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3BE1780C6C
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5F55780C6C
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:54:10 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 4A92C4372B
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F8671F00A3E
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:53 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 258CB437D3;
+ Wed, 19 Aug 2026 08:54:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DAC1E1F00A3A;
+ Wed, 19 Aug 2026 08:54:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787129633;
- bh=aHQWZv5bo1LFPaxWf/ZPdcIi4VT8g3Y+pKJsI/ptfFM=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc;
- b=Dn0UN71Tr88EWexIgrNjEvFwU8wykZ2NUq/ZZ+sp1nkwlUxnRt/AkjBY2of/duGuA
- a1uqngZ2+NNf970mgpE7mZmdqlY6zX4b2LFuYGCn1QanVLhsmILjDR//2BsO4SIBtc
- w8cvmIT+0pGk8R7lfoI2PQ4Ls1DsglspZOUf8zujgD78Pr3ary5nWHJhUmzY7si+is
- mQZJ+xOL5NZUJFEmwlcgVqV/Jfi2+0wbjp6jGKZtKemKnanYWOf1G79nNPLeXCtgiJ
- LJI1cuqJL9WU4s2sitmdrSXifLGueNkpmUmc3o03rTyEzhIJifMSuylU7qAqpw3rqx
- 3qD7dbyVwX6BA==
-Received: by mail-lf1-f44.google.com with SMTP id
- 2adb3069b0e04-5b015b2d792so904541e87.3
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 01:53:53 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yz++p645DFcxOSld/0KYx7mQ38Nqn3cYPG8W+8fk5o0P12obUiX
- QopwBhg2U4BbV24+qKLh+OMBfDguPBOVhD4v8jOkVoDAVINN93vDYB+J2GfjMR615U7iigJmqH2
- kQUImamUPzIcWcEvzg+SPZYUHmqtN9Nw=
-X-Received: by 2002:a05:6512:3191:b0:5b0:1e16:e60c with SMTP id
- 2adb3069b0e04-5b478d3018cmr861945e87.25.1787129631954; Wed, 19 Aug 2026
- 01:53:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
- <20260817-ux500-external-sdcard-v2-7-ca9a110bd9c6@kernel.org>
- <aoM6qJ32H35aumPL@linaro.org>
- <CAD++jLnTaaN9ektt9h5S_jYZ27sezSfuymmjTGiL1_j8NSw6bw@mail.gmail.com>
- <aoQ2VMH_unoQaQxO@linaro.org>
-In-Reply-To: <aoQ2VMH_unoQaQxO@linaro.org>
+ s=k20260515; t=1787129650;
+ bh=2t3V8WnKGEd4DU6Oj6Qs5UcxNgiap3GV2WXt8D5fqF4=;
+ h=From:Subject:Date:To:Cc;
+ b=O8Y2qfO9Y3foiNFYiVse/OkpVNj4M+RVoJT1P3lUvmV7ruVOzxs9DMWfk1xlY+BY7
+ GrHnH2D8mrjqh+7I867427JWR8YZxrGdtZgabUlhW+c02BGURhNCDh1tFxxRYFx3La
+ vTZSncuOtUA7eHsNT8xWnoFh5dyEaxPG2tgHDnfDfweOoX//Xaknv7jBkj+eG+gO5F
+ 1h0i938gwLHlrT/NNd5WSiW5XiDxj5nUpxlsJBUC9RcSs/I105u0b3sxmKVHgb1HSg
+ PFscq7SBw44YSK8vItpitcTKrgCT9IAZ8bqYXK4OcAt6/sqASASV9ZyHl5RyyAqDlD
+ PbHGQNTWX3QhQ==
 From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 19 Aug 2026 10:53:39 +0200
-X-Gmail-Original-Message-ID: <CAD++jLn4VB9FK9pkw9d+fdJuDGGTr2=94qyF9JYWhxp3D3JiPQ@mail.gmail.com>
-X-Gm-Features: AcwNN1Urgp4hamOJ-l_y7mTclb4zJPq6r8Wrri3VfP__WopN5hfdNxx1rtwph0c
-Message-ID: <CAD++jLn4VB9FK9pkw9d+fdJuDGGTr2=94qyF9JYWhxp3D3JiPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] arm: u8500: Switch Stemmy to upstream Janice
- device tree
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Stefan Hansson <newbyte@postmarketos.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [PATCH v4 00/12] arm: u8500: Enable upstream DT based SD card boot
+Date: Wed, 19 Aug 2026 10:54:05 +0200
+Message-Id: <20260819-ux500-external-sdcard-v4-0-f1c8c9ffac30@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NSwqDMBCA4atI1k3JQ43pqvcoXYzJqKGiJbFiE
+ e/eKBRaitDlP8N8M5OA3mEgp2QmHkcXXN/FSA8JMQ10NVJnYxPBRM4KLuljyhijOA3oO2hpsAa
+ 8pZBqpQqrVCk4ibd3j5WbNvdyjd24MPT+ub0Z+Tp9i2pHHDll1CAHYSWA5vZ8i3tsj72vyUqO4
+ i9GrAxo4JyVVpv8h5GfTLHHyMhAZnWqJatkWX4xy7K8AP29lm9JAQAA
+X-Change-ID: 20260813-ux500-external-sdcard-a49778d77b21
+To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Stefan Hansson <newbyte@postmarketos.org>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Linus Walleij <linusw@kernel.org>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -107,34 +95,98 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Tue, Aug 18, 2026 at 12:39=E2=80=AFPM Stephan Gerhold
-<stephan.gerhold@linaro.org> wrote:
+Switch the U8500 Stemmy configuration to the upstream Samsung Janice
+device tree and enable booting an EFI system from the external SD card.
 
-> I wasn't suggesting to use the same DT for all devices. What I suggested
-> is to bundle all the upstream DTBs for the individual devices into a
-> single U-Boot binary (CONFIG_MULTI_DTB_FIT) and pick the correct one at
-> runtime. :)
->
-> That should be equivalent to your setup, just more convenient for the
-> user.
+Add compact DB8500 pinctrl support for applying the default states from
+the upstream device trees. Extend the PL180 driver to configure Ux500
+signal direction and the SD card supply voltages.
 
-Hey it works!
+The upstream device trees describe the SD card supplies through the
+AB8500 or AB8505 PMIC. Add support for the AUX3 regulator used as
+vmmc-supply, using the existing AB8500 PMIC driver for register access.
+Enable fixed regulators for the vqmmc level shifters used on the other
+supported Samsung boards.
 
-The bootloader crosses over the 512KB limit but we have space enough
-for an entire kernel so it's no big deal.
+Add a U-Boot overlay for Golden's duplicate regulator names.
 
-> The only open question for me is if we can reliably detect codina-tmo
-> based on the mach-type ID, I can't find that in the kernel sources I
-> have.
+The seven supported device trees are packaged into a FIT appended to U-Boot.
+The Samsung firmware machine ID selects the matching tree at runtime. Codina
+TMO shares the Codina machine ID and is distinguished by board ID. This keeps
+the board-specific SD supplies, level-shifter GPIOs and MMCI signal-direction
+settings in their respective device trees while using a single U-Boot binary.
 
-I brought out and booted the device. It is re-using the Codina
-machine ID.
+This has been tested successfully to boot PostmarketOS using the EFI
+boot flow, with some minimal changes to the PostmarketOS to use
+systemd-boot and compile in the right kernel configs.
 
-However we have unique board IDs in another parameter which is
-enough to discern the Codina-TMOs from the Codinas.
+Signed-off-by: Linus Walleij <linusw@kernel.org>
+---
+Changes in v4:
+- Package all seven Stemmy device trees in an appended FIT.
+- Select the Stemmy device tree using the firmware machine and board IDs.
+- Print the firmware machine and board IDs for diagnostics.
+- Link to v3: https://patch.msgid.link/20260818-ux500-external-sdcard-v3-0-a5d94930f3bb@kernel.org
 
-Sending a v4 patch series which should contain all you asked
-for. It also works.
+Changes in v3:
+- Disable unsupported DDR mode on the internal eMMC controller.
+- Gate idle PL180 card clocks and honor clock-disable requests.
+- Shut down PL180 card supplies at OS handoff.
+- Skip global EFI boot entries when scanning the external SD card.
+- Disable the unused WLAN SDIO controller in U-Boot.
+- Remove the obsolete downstream Stemmy and DBx500 device trees.
+- Provide a fixed clock for the internal eMMC controller.
+- Enter fastboot when the volume-down button is held.
+- Use standard DM helpers to bind the AB8500 AUX3 regulator.
+- Select 3.3 V supplies for eMMC-only PL180 hosts.
+- Use Nomadik DT-binding macros in the pinctrl driver.
+- Link to v2: https://patch.msgid.link/20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org
 
-Yours,
-Linus Walleij
+Changes in v2:
+- Use the new mailing list address, no other changes.
+- Link to v1: https://patch.msgid.link/20260817-ux500-external-sdcard-v1-0-ce1a2d3aa91d@kernel.org
+
+---
+Linus Walleij (12):
+      pinctrl: Add compact Nomadik pin controller
+      mmc: arm_pl180: Configure Ux500 signal direction
+      mmc: arm_pl180: Gate idle card clocks
+      mmc: arm_pl180: Set initial supply voltages
+      mmc: arm_pl180: Power down card supplies at OS handoff
+      power: regulator: Add AB8500 AUX3 support
+      arm: u8500: Enable SD card regulators
+      configs: stemmy: Boot EFI from external SD card
+      arm: u8500: Switch Stemmy to upstream Janice device tree
+      arm: u8500: Give Golden panel regulators unique names
+      arm: u8500: Enter fastboot with volume-down button
+      arm: u8500: Package Stemmy device trees in FIT
+
+ MAINTAINERS                                       |    2 +
+ arch/arm/Kconfig                                  |    6 +
+ arch/arm/dts/Makefile                             |    1 -
+ arch/arm/dts/ste-dbx5x0-u-boot.dtsi               |   38 -
+ arch/arm/dts/ste-dbx5x0.dtsi                      | 1144 ---------------------
+ arch/arm/dts/ste-ux500-samsung-golden-u-boot.dtsi |   15 +
+ arch/arm/dts/ste-ux500-samsung-stemmy.dts         |   36 -
+ arch/arm/dts/u8500-u-boot.dtsi                    |   30 +
+ board/ste/stemmy/Kconfig                          |    6 +
+ board/ste/stemmy/stemmy.c                         |   76 +-
+ configs/stemmy_defconfig                          |   10 +-
+ drivers/mmc/arm_pl180_mmci.c                      |   90 +-
+ drivers/pinctrl/Kconfig                           |    7 +
+ drivers/pinctrl/Makefile                          |    1 +
+ drivers/pinctrl/pinctrl-nomadik.c                 |  230 +++++
+ drivers/power/pmic/ab8500.c                       |    1 +
+ drivers/power/regulator/Kconfig                   |    7 +
+ drivers/power/regulator/Makefile                  |    1 +
+ drivers/power/regulator/ab8500.c                  |  107 ++
+ include/configs/stemmy.h                          |    4 +-
+ 20 files changed, 582 insertions(+), 1230 deletions(-)
+---
+base-commit: 0b581a9612e46310ee52bf8359165950d38b2a2b
+change-id: 20260813-ux500-external-sdcard-a49778d77b21
+
+Best regards,
+--  
+Linus Walleij <linusw@kernel.org>
+
