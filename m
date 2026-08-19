@@ -4,112 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD65C5DF6D
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50B2BC5DF6D
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:56:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C9CE080E57;
-	Wed, 19 Aug 2026 03:56:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1685F80EA2;
+	Wed, 19 Aug 2026 03:56:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OJsiSkAseCm7; Wed, 19 Aug 2026 03:56:42 +0000 (UTC)
+ id x9pUQlY7Iq9r; Wed, 19 Aug 2026 03:56:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787111802;
-	bh=070g02ll6sMJTPvv+FTDb46uDhxkq6VKpOWuv1Gjd6U=;
+	d=lists.u-boot-project.org; s=default; t=1787111809;
+	bh=OLKYRoMiXKWGmP88S7wo5+XrL3qD4A+ckBwywH4yGLA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=C+jjNvNdLLThno5SCV0k5BdVmXLH7URfKTX6FdY0UklX3e2zItcaKAXRO5o2NFHYy
-	 SBd1v09de20KB31QbIL7eaPrbPy5MjL13oxWkmWH1dU4c0EFc57GU3a1m3j3ca9zQy
-	 7U142VqQT7CkCVOTpP/OVA/pYwr9f/tz1bQEtwD3+xbkaHmVkqvjoMerI++lVl/+pd
-	 QNBd8spp3xJN3gBSXh9GzqBkLU55H8DY8UWPoAs7lMMPLvmTkYDn358/xbMMzvx68H
-	 F5MEJA6/+0xpMVI0e7oFbM23d2owOJukxBDUuFAWHq0aLdHsu/QMilhyZePj1wWXTi
-	 GW6HYDh1uMRaQ==
+	b=nf5xvJS46/YoNJALB23JFDLxbH9yCbQCbofSFBAto/lLg18xyBcdjL/5rOXSdZ+mF
+	 apS5G1YBYwmsRvNgcNRWVCutPKWhERBWfk0n0RFg59IwFOM3K2LjGmN6y6EqewRa2A
+	 vvF41rv9vyR6ECf69NzkXyX+k8UblbXNbcBFCaL83yx8sY/oVItJ82QEKRcMzXm/E+
+	 2zJPHvNciGMRnL7VfGNzBQosOx2bWwIMVWo8kTP6y5Fo3JX4CL7fxVAnwpZ3nCj1fz
+	 STfQcYrHz7vSrB32xftWYkZqevtsfIjKoWDWjrHmEXtiJDynbId3t7/BJS7TS7UxXl
+	 puJMk1CvzOsLA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F399780E02;
-	Wed, 19 Aug 2026 03:56:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 229FE39E
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:56:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3670480E72;
+	Wed, 19 Aug 2026 03:56:49 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 86A5A23F
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:56:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 145B540666
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:56:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6D0FD60656
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:56:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bc80Izk6OqpG for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 03:56:39 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xsL4kKTCTG3p for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 03:56:46 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::431; helo=mail-pf1-x431.google.com;
+ client-ip=2607:f8b0:4864:20::62a; helo=mail-pl1-x62a.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=x1B/CK1k
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 54E764069B
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:56:39 +0000 (UTC)
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-84867f07d63so670911b3a.2
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:56:39 -0700 (PDT)
+ header.s=20251104 header.b=HRWtwJAU
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7FCA26061F
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:56:46 +0000 (UTC)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2cc7e86e7aeso6192605ad.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:56:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111798; x=1787716598;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111806; x=1787716606;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=070g02ll6sMJTPvv+FTDb46uDhxkq6VKpOWuv1Gjd6U=;
- b=x1B/CK1kBetfX0XZK3dTI5IC2dzucMRc/HSytu+0phUrL6inY/uTtjmqFlWoLPOTcL
- dsb3aNTIEQtjmOmlKipI/wmIkUa0CEntZVZxjL3Oe5daPoXqXcAt8OuQbbhbYzOSNjGE
- +djyyqWz5FhyAaB/pQoIWa0DoUUdY0YQHj+Cc/3sbJXdrk0Pr6ytvFzLVamGjE997myT
- wk7L382gRbd8fZv9Ypa3uB17xLXgbvlpxNIOMQGA8l2dzF9QzEigsIMrUm6pvcp00puA
- goc3vUUMkWa+375WWe6mPJughdvzdkYDkDLeWmmDN+qGnDQn2aXzKXK4vMAzig7RFOzC
- 4lbg==
+ bh=OLKYRoMiXKWGmP88S7wo5+XrL3qD4A+ckBwywH4yGLA=;
+ b=HRWtwJAUgSyJhmwxwVL+hWezQunwkCny2ptuggkAedKvT7kISlMf5DP+VYPU3g07nT
+ wRSTEJV03HR51fr3DNhui6CO5Yvb8QVIw6Nry/uDRNNoo9zpsN3aFPN0caSl4Tsva5Ej
+ FlH2meDXoJr7GiIbE5fjEdG4Vp360+a3viseoCKxIXpmRyNKbzz4N1RnYxsG905CF2K1
+ INzMO543AWRtuKFhL9bES6xh96DbT7YkEo8PbCioLl0T5MiAqTigEMQOWZ1V9o2qBh8g
+ fqIr5lOh00mBpTmVBiB0EVdxqtt9xF2E5hIPBkzYB0hLwd0BJ430BCqkCHk2RS0XrSTm
+ AP6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787111798; x=1787716598;
+ d=1e100.net; s=20251104; t=1787111806; x=1787716606;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=070g02ll6sMJTPvv+FTDb46uDhxkq6VKpOWuv1Gjd6U=;
- b=i4YBL7dKHuOIITqzIoOpQEiRHQpY26H6e1VVrJcE517xKGRuoQsht2Z3uSe2U/7fgJ
- 7XAIFTHulrlCQzhcYpgXtgfkRI0u476JyUwPI4TTz7RgN1ST5wBqmq1nN0hboRoDGfUj
- oJQejQU8WasoSls8SdIbr1hldribDQt6C8OYdOzSEsUO5VRFRDEhd976JbxTgvV/OPyK
- j4Ez1QlA0xD4ZOQs7r0v95pdirymUsHnRJofDCQVITcQnj6H06Kg/DP/9yvf/rPtEYv7
- ofPfmu6679T8KMYIsO1/2dTLFKGf0R8i45VDTN5jaLOMx/SaY6hoH0+4NZ/DivZyAJk/
- zZ7Q==
+ bh=OLKYRoMiXKWGmP88S7wo5+XrL3qD4A+ckBwywH4yGLA=;
+ b=QOq48IRJMKWab2rNFdzspgG3Iu/daqaHNUnfu9EXyW09T2ohklUrHp8Us1o58ThRoK
+ FQ7C9Bj62P4u8HLlevIk6QfbSRsOo8yiZIomdKIlm32nthuAGNLyF1zEsyHgbz4T0ygC
+ S5AxvA67sZzKkYNfvOwN4/SAqJwpj/b9HNCLLS8OEsjEp3THSqlBP7EzcWWVg6M9bhtS
+ 2QJjVbdl5WpStONVKuk23HMOp5/teun3TTvMBaNr5p+4h9K2CU9lJNfbBe1vobNESrZA
+ LXIZ7xC+mrdvRfJERDE5Z1ZJWMxXfE9JrD2zLRy4B4hPY81MlL7z5XimsIktPu3waREY
+ rL5Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrpnyqm32bfewAYOxcblO64L0O5fmFKUYK2eqMb0opp2vV59eQIyG5tASOkZSAWQsLMsvXV3cc=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzHilJMgalNWkUo6lit9/HBLy/WZSzOBIfuEShrxFwzjnQQ8MwU
- UcenyULrmBiKjQYjhk/iufM+QwaqWkIVeSeHReJkK6LDYPId7qFNwiSyLIWcNCA/E7E=
-X-Gm-Gg: AR+sD100nM7gpa2Oth3EXv8aPJ/MWvzaX1xAEUTL/ARlEdwYLLN1CgpeTf73CdltgB/
- wbMKgQIt6get63vINX7X4zcH+UDxcRKiO8uVtc2vlusgnvkEDQibxH3wIy/e9VOkk4HoY6odija
- lWKDtwwHQ4MnzekSBi7wNJcmrbGirKzkCPbSFzXKVlhvaAHPgXS7heWK577M6zeYvQRKWmkUn9I
- Hom1Rd3msfGmK1xS/O0ZveMc8XusqT1Lwaq4+QPeNeDb4w9D9zo2MBCVkmRvKPJ27wQR43wvSqs
- l0xHBn1S0aMb1UHvHoj5RKDG6fg0imCEN5KtSF9qIwB+D64f7sDZcpjB+sL0YzsFn3QXSm28RIJ
- Kb+EEVXj5L+LWrj1pGiTYC7WFXboiPOG+/sQe/SYqpQX67hqEaJ2LGSZLoHeT89hM+FvdYzyIfl
- BRCy0C0sz3dfC3sIOAtNuDJQXZ6il9rnKasWM5g2J0o6dMMFzFmJiwRJ1fC1GCHi0j21l6n7b/E
- KU2I0gbjwV7+FFi4yBXLV7/21apuw6aeECHwKb5BO2gnZeB0pnwI3ta6L7aXcSs0eZK8dW9lpUn
- C0M5aViYCOwgCYdrmvF0XNpAzg==
-X-Received: by 2002:a05:6a20:d48f:b0:3c4:1c9f:d7e with SMTP id
- adf61e73a8af0-3cd0164c45dmr3742267637.6.1787111798319; 
- Tue, 18 Aug 2026 20:56:38 -0700 (PDT)
+ AHgh+RqADGfjTkjem9AU29ATawEn3BwCm6US6PJs/Vq4d32Wt3s/40QgokkZ+18180IfNOXbeo84dpQ=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyYIMiLF8ETy9k7Ecxjop4QxvcEWFfdMV0FmHmHzAq7llr6jA4o
+ XAlEOVuXjI8drFrtH34zH3ou30VpQyWYVAb35MvP88cjAk3oBgKUCKMWyyyEv7C5W3s=
+X-Gm-Gg: AR+sD12bRAJxGY3jVOTI9odLsQeZ72crX6nADtMiAvZGAUqYf8H4Y0aEBqOcxSpvqgI
+ LQMKzJaMMrwJ34AQc2XN3+unXtYBRFJYtnYANhc2jW6syi54iGTW34zvEnic1woekUeh0SEsdxE
+ QExj1PX9eKmWEn+/oeMQYSnW4VrROYORi8rYdwfs+bAQfrxfjpg/Us3gC/XBNmfezdKrsNdgCIf
+ kwjN8/E3mJ7JyLznmT5YihcdeeXMzVEKVHs7bAEmnAOVd0bYsZ8krOszIdnAv7W8Lt/aqjcVtH+
+ yOAE9tz/c+RSAApbZWHw87wkLXrt+o3FRlXOsKtzL6XhNH/0UY4msOFubF0d/4eA35Y6rLpKjPp
+ lfNi8GpfcestQsl4pwglTdlahNDa06/ZsRne19kyBdRGBPJgEBmxp/HXkQ9PIzZ/IRV1gc/YGTq
+ D5CkupKcF3jyHXbTN7O2FTKJIi2SleY8WN3/l/G1ywrgvpibpvYZmk+LlbHqJia7TjzQ6Ev36WV
+ HtAhlyVtD4yyN4VmURkvFX9PFzbsOzhUovlrfoAKMO4KINzFfjm495gEZ8Iqr6UdZwaB9ts2Z0E
+ 30gcs4mPRlzqyn+ZV9wBPLWzvvYP6ULsJWu+JQ==
+X-Received: by 2002:a17:90b:3c46:b0:38f:23d6:b4ad with SMTP id
+ 98e67ed59e1d1-39580aa420cmr3323317a91.8.1787111805694; 
+ Tue, 18 Aug 2026 20:56:45 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.56.31
+ a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.56.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 20:56:37 -0700 (PDT)
+ Tue, 18 Aug 2026 20:56:45 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 19 Aug 2026 11:54:51 +0800
-Subject: [PATCH v9 09/19] riscv: dts: spacemit: k1-musepi-pro: add 24c02 eeprom
+Date: Wed, 19 Aug 2026 11:54:52 +0800
+Subject: [PATCH v9 10/19] riscv: dts: spacemit: k1-musepi-pro: enable QSPI
+ and add SPI NOR
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260819-m4-v9-9-6e66016392b9@riscstar.com>
+Message-Id: <20260819-m4-v9-10-6e66016392b9@riscstar.com>
 References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 In-Reply-To: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -149,88 +150,89 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Andre Heider <a.heider@gmail.com>
 
-Enable i2c2 and add the connected GT24C02B EEPROM.
+Add the QSPI controller node and describe the attached SPI NOR flash
+(Winbond W25Q64FWSSAQ).
 
-It contains an ONIE TLV table:
-=> tlv_eeprom
-TLV: 0
-[  12.162] TlvInfo Header:
-[  12.162]    Id String:    TlvInfo
-[  12.165]    Version:      1
-[  12.168]    Total Length: 58
-[  12.171] TLV Name             Code Len Value
-[  12.175] -------------------- ---- --- -----
-[  12.179] Product Name         0x21  16 k1-x_MUSE-Pi-Pro
-[  12.184] Serial Number        0x23  17 BPMIMXXXXXXXXXXXX
-[  12.189] Unknown              0x41   1  0x02
-[  12.194] Base MAC Address     0x24   6 FE:FE:FE:XX:XX:XX
-[  12.199] MAC Addresses        0x2A   2 2
-[  12.203] CRC-32               0xFE   4 0x395ECD34
-[  12.207] Checksum is valid.
-
-(With 0x41 as TLV_CODE_DDR_CSNUM)
+Add a corresponding vendor flash partition layout.
 
 Signed-off-by: Andre Heider <a.heider@gmail.com>
-Link: https://patch.msgid.link/20260513071958.29574-3-a.heider@gmail.com
+Link: https://patch.msgid.link/20260513071958.29574-4-a.heider@gmail.com
 Signed-off-by: Yixun Lan <dlan@kernel.org>
 
-[ upstream commit: 6bc75cfa56e885c2eab80e215f0a610075505846 ]
+[ upstream commit: 735b1b205d07bf7bfa55b1f50f5485b9cc42a251 ]
 
-(cherry picked from commit 53114539cb9edac100d8804ba4386ea8a8b37ced)
+(cherry picked from commit 30ccfd225cc1aa971a0748faefa14e735e49807c)
 ---
- dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts | 33 +++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts | 50 +++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
 
 diff --git a/dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts b/dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts
-index 653e5a1bf41b..b8e73eed8e62 100644
+index b8e73eed8e62..74841cffd5f5 100644
 --- a/dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts
 +++ b/dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts
-@@ -17,6 +17,7 @@
- 	aliases {
- 		ethernet0 = &eth0;
- 		serial0 = &uart0;
-+		i2c2 = &i2c2;
- 		i2c8 = &i2c8;
+@@ -44,6 +44,15 @@
+ 		regulator-boot-on;
+ 		regulator-always-on;
  	};
- 
-@@ -82,6 +83,38 @@
- 	status = "okay";
++
++	reg_qspi_vcc1v833: regulator-qspi-vcc1v833 {
++		compatible = "regulator-fixed";
++		regulator-name = "QSPI_VCC1833";
++		regulator-min-microvolt = <1833000>;
++		regulator-max-microvolt = <1833000>;
++		regulator-always-on;
++		vin-supply = <&buck4_3v3>;
++	};
  };
  
-+&i2c2 {
-+	pinctrl-0 = <&i2c2_0_cfg>;
+ &emmc {
+@@ -239,6 +248,47 @@
+ 	};
+ };
+ 
++&qspi {
 +	pinctrl-names = "default";
++	pinctrl-0 = <&qspi_cfg>;
 +	status = "okay";
 +
-+	eeprom@50 {
-+		compatible = "atmel,24c02";
-+		reg = <0x50>;
-+		vcc-supply = <&buck3_1v8>; /* EEPROM_VCC1V8 */
-+		pagesize = <8>;
-+		read-only;
-+		size = <256>;
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <26500000>;
++		spi-rx-bus-width = <4>;
++		spi-tx-bus-width = <4>;
++		vcc-supply = <&reg_qspi_vcc1v833>;
++		m25p,fast-read;
 +
-+		nvmem-layout {
-+			compatible = "onie,tlv-layout";
++		partitions {
++			compatible = "fixed-partitions";
++			#address-cells = <1>;
++			#size-cells = <1>;
 +
-+			product-name {
++			bootinfo@0 {
++				reg = <0x0 0x10000>;
 +			};
-+
-+			serial-number {
++			private@10000 {
++				reg = <0x10000 0x10000>;
 +			};
-+
-+			mac-address {
-+				#nvmem-cell-cells = <1>;
++			fsbl@20000 {
++				reg = <0x20000 0x40000>;
 +			};
-+
-+			num-macs {
++			env@60000 {
++				reg = <0x60000 0x10000>;
++			};
++			opensbi@70000 {
++				reg = <0x70000 0x30000>;
++			};
++			uboot@a0000 {
++				reg = <0xa0000 0x760000>;
 +			};
 +		};
 +	};
 +};
 +
- &i2c8 {
- 	pinctrl-0 = <&i2c8_cfg>;
+ &uart0 {
+ 	pinctrl-0 = <&uart0_2_cfg>;
  	pinctrl-names = "default";
 
 -- 
