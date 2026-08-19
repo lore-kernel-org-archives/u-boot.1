@@ -1,114 +1,113 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5B3C5DF8A
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 13:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCD2C5DF81
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 13:42:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 15E6980E62;
-	Wed, 19 Aug 2026 13:42:12 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id t5qQvS0fzAlM; Wed, 19 Aug 2026 13:42:11 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787146931;
-	bh=2SJgcBJEpD14DSgXDh/3kP4rR63gczWYipvmQntWKSU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=aHs7XUC1ECqU1B4JIZRqnyXbgQoLvHCktPPIVDfjc9Gs42tz83DEtFEu7WiVO8gfj
-	 qA2XNYQWF5rtab829RpHN3/Y+Uj+6M1Kwx2OK/EgzBypvh9V8H1GFYZeRcDGAuBIvM
-	 TJ6/znha/BStROa2+RaX5GyBG1q6aMaPyowPDLag1dAbdHDbGekkfyBYjNLDBV+GAE
-	 fELEaBBGujwzDf+gTdZa4htVcXpYRLlXwuyqMEtFy/CdhHtvBVNIqo+nFn5oQmIoP/
-	 9ocr6uN8srABAfJ24shPSWk2gC1+pvQltCpviCmQSUM0ozUZc7YH+NZY9kyvlyGxgR
-	 EeRHMeNUarE/A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 65E7F80E0F;
-	Wed, 19 Aug 2026 13:42:11 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 435AC3AC
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 13:39:09 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2933240561
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 13:39:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 54BD940722;
+	Wed, 19 Aug 2026 13:42:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5uqQqQiDqkCp for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 13:39:08 +0000 (UTC)
+ id Q0TALtlg8D1J; Wed, 19 Aug 2026 13:42:12 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787146932;
+	bh=4g/D0gC2ROGCu3J/nnvbQ59vnyNBYleFVVXc1hGXH1c=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ULXw2iTUClWxsjUgd6yGmBMyNrLJMXq9kQp+cHmIPQ/TohX3UqMCFc/wQ3S5tragO
+	 pzIzNAUPhF9BUm2jlnD0cdBZW+XlQQ0HyBvDJTSsNvvFWMT7L/qJHvlb0kZDIZD83q
+	 St21LrL5RAPIp/Zkx91iKTAJEJ4JI7Cb6zByi96BohkO6gq13OYq2eAwwMKO3/N+eQ
+	 SKB+b60ZMspcpNLttvLkRP6AdjTWJIfxmDf3WHb3iCIREApM+ZLTPYkYCfVzZKV0Nk
+	 iO4gVblcJeNMppl87JK1nXajdv2rdZPntuCkYOIPuFueVyrm66T1J1N+uDymyZmjoc
+	 A0zwSMYKWmzdA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id B1A7C40799;
+	Wed, 19 Aug 2026 13:42:12 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 57F33230
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 13:39:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3DF8440561
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 13:39:10 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Y2aFtcwSy4Ff for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 13:39:09 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
  envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=CEKst2QK
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 45CAB405E7
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 13:39:07 +0000 (UTC)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-47de0093c42so939405f8f.3
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 06:39:07 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=rRmRn3JE
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 62F4E405CD
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 13:39:09 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-47de008b020so590567f8f.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 06:39:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787146746; x=1787751546;
+ d=gmail.com; s=20251104; t=1787146747; x=1787751547;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=2SJgcBJEpD14DSgXDh/3kP4rR63gczWYipvmQntWKSU=;
- b=CEKst2QK/fVXUj0ndUkmWcJZwR/Kzl24n6EEJ8NLRcPvDD55HP/ncWxsPDXQGNf+4G
- 8rmojpzn9q8kmMgm5GH/WegOLVAUhnugqYc1xqH/5XzwSOcdJUxAF4sdJUnfzzzHDZ7K
- 58B2HdQDNu6OTIfeUUygNJT6c+UnB08xqe0zSApjDyFOHLCbUHgX7Su++qALXmmHdth9
- HqYibQxWMmca95ixuo0h4QCU2lx+TQV1taQ/rlpIZBkOPclmbcRLEpMSJyO4TKRlSmXB
- kPu1nmqY9bBWvYExYL3lgOxVrVRG5UYBiQlUDPYTAZE08exxaFc2+brdLjzlxjNhJ0cs
- kAhQ==
+ bh=4g/D0gC2ROGCu3J/nnvbQ59vnyNBYleFVVXc1hGXH1c=;
+ b=rRmRn3JE6TylzS80deqarDbaKZbIB5ohB+EOxQhfjg+lsshljs207jjpvwptRbUpgh
+ 9mS2An1a1W9WQm7N2sae9YJKjsfDCJoKPiMy4CTuNLTHRFJk6/fmGwffrRg2Ic3jQATC
+ Ot1uOD8z2ywxQt2HykgrLiHhmT9OtVd7IeIJvlY6qLBXrUgdYAMklnIoa7uhbLch0Nh7
+ yZs3etYoimbeh6lsuC3zv/isaPUYer+Sk7QDr6ClGftKByqtPPktdwaj8Ol4aNhjBPlR
+ F7D8B1H7vcCPlvOwVOwxIkcUFuiGtJxaozyLJOJbe7bP/vqpydSkhEXWatwl2hCaSI3b
+ RfdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787146746; x=1787751546;
+ d=1e100.net; s=20251104; t=1787146747; x=1787751547;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=2SJgcBJEpD14DSgXDh/3kP4rR63gczWYipvmQntWKSU=;
- b=YiURK9KxpbAbqS8j3yncGhrCe2zIMkJk/XsyGheJ7Hx+VQdnkU72YYQeWpIg5Qh5A0
- pJyZ57hQC1x2Im78q4YafK2FAfoIg+/sDPm5zCOI2DNx8RtiIqPbRnHIxXskKpcf4k9k
- Irz/hfhbqAtD0IbWBltj2tE/pDp/ZCKwIkizx3JY+7Md+n2UgVlfTGTf4WNKZ4DWOYWh
- NKWIZ7ohT+zLZ0K5DghX46/qwAm39F5jUHL1VCTD8OXdI9MGHBonAQ20Hol7hfNCa1GZ
- MHocqKjc98NRKg34pFe0KM4sAWkmHyH8TkhFrTVh5rT8JXBP2CFs8oBENfnD3wZuDRnC
- rzYw==
-X-Gm-Message-State: AFuF++nWGG1PQH0jt7eAYTThs4fqVE3qVWPSrtx6phxIvzBEOvNwscUF
- W/nYX/otWxqkrd1I9vw0A0QhR3mcF/DGZtANVe2ldzTCLBjoxvQtO7jP
-X-Gm-Gg: AR+sD10LykhLLSn95w6/6C+eigYUZL4awZxo598dKoZvWv3oE9WIWSAcYJ0AN1b9Kzo
- wnGEfpDMALTpDl2pxUgdiyi7rCUtq01fzoQzr8I3oOqqt16e3Tjx/DLivnvVpYGorWl/4Ls+ftv
- PNcyS1jiX2GBwi989w2tW+JUXgsbyfK57KLsNx2jEg/5hmLWjtRg2x8OzHtNeigtXNKke6zlejX
- ykH8hEHXD1ZSLDMh5sGdbau0OgrXQb1HGjrF2u4y4JzZdgrRQZ90q+JK19gbwZpg0MaCdG1JdDo
- ALsby13WC1U8yobrStHLfn1Ki52NPWhwRxHeGo4gar2Z0GOu/5no/yAVI9B42f5Xx2ep2OndVGW
- LyHf+dTiVRJqoFkehoxj2FVIbv1RZ9j9NyjOGy6GOjFlVBKNdbl6cbbs8eWsOhVyKEvzB2opujO
- Sx0MuNytAkM9trT5SbmPjAKn18BA4rfL2uXxDCX3ReUse/8VV0LyPb0A+nZSGPZACEzEDrgh2UR
- XKKcNRAjt7MOxQyA03u+dlPzzC+O7IqnlZHsD4jbMSW38qeOg==
-X-Received: by 2002:a05:6000:385:b0:47f:c648:e274 with SMTP id
- ffacd0b85a97d-482b1e83838mr9486334f8f.5.1787146745928; 
- Wed, 19 Aug 2026 06:39:05 -0700 (PDT)
+ bh=4g/D0gC2ROGCu3J/nnvbQ59vnyNBYleFVVXc1hGXH1c=;
+ b=m5NoOu9TmNwS3oaa9mZ38499OLWs2UeMggYMOoDQDumaiVEn+HitclAadIRac/bKMd
+ V216vuVbNPlmRh2P16jBKO3gy0Haj5Rq10BOZaNTYyiXqJK6eiTSvy2xxLc977cNBQP+
+ iX26SmCTuJRmBCDneWb4IjfaTTpPUXmUPbJ3mjsFyRA0T5hzAygwpxYa70ID3M+ugWcj
+ qaygMspiw54aLFV39DNujiTultIrzs76TJlYJu0VFkiqALdv69Cgs70Ngg6sncYLb2FL
+ ApCeL1Txa5VMLjLsi/BfvE4PoSdzx52fM/qRYB1e/3GJbV/5cn49GRrugT02ZjvjJlj4
+ 4EIA==
+X-Gm-Message-State: AFuF++mtnRsjB+mBA0uqp6/C1rDlJSjevoAK+jmiUFRj7+8orDe94+ln
+ hc+iWMfnJyhS+KsjrndTyB1g2qLg6qm8Xye3nyUNyujI5WaTV2EnWkuY
+X-Gm-Gg: AR+sD10VepLDWeaKWZVL06d+ok7aS1Z7LSDV7F2IyUT9OdjlBIzQB5QAH6PYZEathGg
+ jQePII8KFSkpjQ49gnXLXmR0HCRJCFIQVXE+J3rGQFZcaqT1cGpmGWw16AkAp4PHORxNxQjO3Zl
+ g9QgH7VIIy1tUaEZvrZnrc0BJIaX3JSveRtMGlBgQezGTqOKUgta8AURV8CInbDTfIZiGTA+65h
+ XNP+Da5Ztv1cwGLWaxntpmBer0Mv/LJhIPLFnk5JnnAafaVOFDfcx6MV/nbP9T0vPpnK22QzCCX
+ F8Q4PNhYHBORSc0i2jVZa7MCg2AOVQujTa0r6JPb6WSIdFCtSPRgzaXyGP7hIBWVXmTcuKJ9stR
+ FqVzKahtfEBeoUlPgd7deKlaRKdncwPSZ65xV5wyfqDG+7GDm6Zs+pji3OENWnwhdQrqLHPVuxB
+ FTzpgoASNlubyFSMxG7mKe6hY0uWuRF7LZKovYviLZUG+9GYDuTfUjD+rxsm6AQJjNXCOuxTT2E
+ dK/VBpC9HnznS66VWpKeONQNaUl7SEVj43W9+XV3bcn8HheXA==
+X-Received: by 2002:a05:6000:220c:b0:481:50ae:df9a with SMTP id
+ ffacd0b85a97d-482b106a680mr8177524f8f.9.1787146746905; 
+ Wed, 19 Aug 2026 06:39:06 -0700 (PDT)
 Received: from eichest-laptop
  (90.251.200.213.static.wline.lns.sme.cust.swisscom.ch. [213.200.251.90])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b1441753sm6463070f8f.5.2026.08.19.06.39.04
+ ffacd0b85a97d-482b1441753sm6463070f8f.5.2026.08.19.06.39.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Aug 2026 06:39:05 -0700 (PDT)
+ Wed, 19 Aug 2026 06:39:06 -0700 (PDT)
 From: Stefan Eichenberger <eichest@gmail.com>
 To: francesco.dolcini@toradex.com, sbabic@nabladev.com, festevam@gmail.com,
  uboot-imx@nxp.com, trini@konsulko.com, franz.schnyder@toradex.com,
  emanuele.ghidoli@toradex.com, stefan.eichenberger@toradex.com,
  ernest.vanhoecke@toradex.com, alice.guo@nxp.com, peng.fan@nxp.com
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 1/2] configs: {aquila, verdin,
- toradex-smarc}-imx95: remove CONFIG_SPI
-Date: Wed, 19 Aug 2026 15:38:36 +0200
-Message-ID: <20260819133900.167046-2-eichest@gmail.com>
+Subject: [PATCH v1 2/2] imx: verdin-imx95: remove unused WDOG_BASE_ADDR
+Date: Wed, 19 Aug 2026 15:38:37 +0200
+Message-ID: <20260819133900.167046-3-eichest@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260819133900.167046-1-eichest@gmail.com>
 References: <20260819133900.167046-1-eichest@gmail.com>
@@ -130,60 +129,36 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-CONFIG_SPI=y has been set on the Toradex i.MX95 boards since their
-initial board support commits, but none of them selects an SPI
-controller or slave driver. The option therefore only builds the SPI
-uclass with no bus behind it, and SPI is not usable in U-Boot on these
-boards.
+The ULP watchdog driver obtains its base address from the devicetree
+since commit 3cacd1b1809d ("watchdog: ulp_wdog: Use driver model for
+reset_cpu()"), so WDOG_BASE_ADDR has no user left. Commit 4f8d6c8f417c
+("imx: Remove hardcoded watchdog base address macros") dropped the macro
+from the other i.MX9 boards, including toradex-smarc-imx95, but missed
+verdin-imx95.
 
-Remove CONFIG_SPI from the aquila-imx95, toradex-smarc-imx95 and
-verdin-imx95 defconfigs to reduce maintenance effort. No other symbol
-selects SPI, so the resulting configuration ends up with
-"# CONFIG_SPI is not set".
+The definition is in fact dangling: WDG3_BASE_ADDR was removed from
+arch-imx9/imx-regs.h by that same commit, so anything expanding
+WDOG_BASE_ADDR would now fail to build.
 
+Remove the leftover definition.
+
+Fixes: 4f8d6c8f417c ("imx: Remove hardcoded watchdog base address macros")
 Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 ---
- configs/aquila-imx95_defconfig        | 1 -
- configs/toradex-smarc-imx95_defconfig | 1 -
- configs/verdin-imx95_defconfig        | 1 -
- 3 files changed, 3 deletions(-)
+ include/configs/verdin-imx95.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/configs/aquila-imx95_defconfig b/configs/aquila-imx95_defconfig
-index bb3d475ef4d..dcac9fdc615 100644
---- a/configs/aquila-imx95_defconfig
-+++ b/configs/aquila-imx95_defconfig
-@@ -160,7 +160,6 @@ CONFIG_REMOTEPROC_IMX=y
- CONFIG_DM_RNG=y
- CONFIG_DM_SERIAL=y
- CONFIG_FSL_LPUART=y
--CONFIG_SPI=y
- CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
-diff --git a/configs/toradex-smarc-imx95_defconfig b/configs/toradex-smarc-imx95_defconfig
-index 9abadb0ed1a..cd8344572ad 100644
---- a/configs/toradex-smarc-imx95_defconfig
-+++ b/configs/toradex-smarc-imx95_defconfig
-@@ -162,7 +162,6 @@ CONFIG_REMOTEPROC_IMX=y
- CONFIG_DM_RNG=y
- CONFIG_DM_SERIAL=y
- CONFIG_FSL_LPUART=y
--CONFIG_SPI=y
- CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/verdin-imx95_defconfig b/configs/verdin-imx95_defconfig
-index daf41a8b830..0d15a04635c 100644
---- a/configs/verdin-imx95_defconfig
-+++ b/configs/verdin-imx95_defconfig
-@@ -164,7 +164,6 @@ CONFIG_REMOTEPROC_IMX=y
- CONFIG_DM_RNG=y
- CONFIG_DM_SERIAL=y
- CONFIG_FSL_LPUART=y
--CONFIG_SPI=y
- CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
+diff --git a/include/configs/verdin-imx95.h b/include/configs/verdin-imx95.h
+index 30eb2e01460..b6df4d48695 100644
+--- a/include/configs/verdin-imx95.h
++++ b/include/configs/verdin-imx95.h
+@@ -22,6 +22,4 @@
+ #define PHYS_SDRAM_SIZE		(SZ_2G - PHYS_SDRAM_FW_RSVD)
+ #define PHYS_SDRAM_2_SIZE	SZ_30G
+ 
+-#define WDOG_BASE_ADDR		WDG3_BASE_ADDR
+-
+ #endif
 -- 
 2.55.0
 
