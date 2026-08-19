@@ -1,139 +1,110 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9931BC5B572
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 14:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A1AC5B572
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 15:30:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4B3F5605D4;
-	Wed, 19 Aug 2026 14:57:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D5C8D4057E;
+	Wed, 19 Aug 2026 15:30:30 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3W7HtaxBmlej; Wed, 19 Aug 2026 15:30:29 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787153429;
+	bh=6fpGcaN66v0gONivoFXC966UCHypSYO2K0ehiuYk8U0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ntODK+GLY8nOAz3bzrlTtxSy2v8dK4HlUquJXh2UJ+iZs0oGaLU9VNPFBl6qDwNCQ
+	 QVMiMnpWuzoCUJ6pPpeKBhcOI6gDLLVGm2LjDqxmF20r6B6OAfHFjkiV3jh7ODz81J
+	 T4svUMqGZlEEIsccnDq1/6xwWpYmQVmj4FMmxk8W5NMB3axFtKSBQWItmKREzXkozm
+	 siI1XS2d+gKSc4wibsNnDHzuuI/V/VP+k5YfsKYrNdVxxb/+b9CG6BSLY6Jsg7dueU
+	 NpKiqajQlVU1bGdiBlykA1DTmj3SWLJe5TuatljOrsJBXBHvcMZJvQNBNWlsBWEywW
+	 +5YqouA93Y1dA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id A02674054F;
+	Wed, 19 Aug 2026 15:30:29 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 413EB1460
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 15:30:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 26FB2606F4
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 15:30:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CCbsSMaMgTNC; Wed, 19 Aug 2026 14:57:46 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787151466;
-	bh=qZoyLsgA0u3CwGqgnbKRtGbOaLsTBdUKfNnU9s/uQ5M=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0qE2/bCPBbIZ9zkJFUz46Fze+o1wfQYefHY38l44pgbWSm+NWBvhZ0kopXSG3h6zD
-	 +5bszJxs+3g4PbyxiqCy1MjCb7V9BcHoYH59kEf23GBn+UhZ6ua3R2mv34L3r99Ztu
-	 hX9zfWFHXFI5YFQUTlm9wuNA2Cd0TgiptK9uL+Wwj+RRkHHWA12wdZdKBead7wHRWu
-	 qX1QRwGxHWeexdmMylIeCPI5NZWB3/WaCLBW7K7tJfeEd74cEYWXLC5k34gefV86Rb
-	 sym8l/C2WBaGpWbCZqiDj0qRyMTX320tH1l6it1AwXXB8TPOAOQ4Qxc8qr9DXe1p02
-	 hl88x3b9DlKDA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AD533605E3;
-	Wed, 19 Aug 2026 14:57:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3C5FA3AC
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 14:57:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2DEEA40093
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 14:57:45 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RCuZFY01yT3z for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 14:57:44 +0000 (UTC)
+ id FmrFBveiqEAo for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 15:30:27 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b131; helo=mail-yx1-xb131.google.com;
- envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.tenstorrent.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com
- header.a=rsa-sha256 header.s=google header.b=E7yT4p4s
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2FC094002B
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 14:57:43 +0000 (UTC)
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-66c67a73eb7so3186536d50.0
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:57:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787151462; cv=none;
- d=google.com; s=arc-20260327;
- b=YQYP/W56HaVMiDgNHaAP+NF1LQJVC9TwJ4I/NXg5i8cmPbcsLt70c5mYmWMHKom+A+
- 52prQp+R1eo/Y3fR5UrCPLyjZr4xJMljwgyK/Ux3+lSgeRcG9TpRT2xsb8pnwtN6DXl/
- QTo0SaGpwfQAJHwxpXi4ZvvadSVDKPzsAskNPyDhaG7f3wrz0GMaIDb15t3c5C7GwHzP
- JES66cS5ZWUaAutoiLhwPimK8rKihW7+wzDurVzLgGXktAFk5A8fhqYzCA8DX9xUgbKX
- VSvCVcRvG921bzWY8uazubS0wniNM9Yd/N/neelEmWzQBqTUO/C/2BKCOWvQbmGoG79k
- Fj8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=qZoyLsgA0u3CwGqgnbKRtGbOaLsTBdUKfNnU9s/uQ5M=;
- fh=lO9g+rTj/Uy7OCCA8AL9ImSXq/xc87njTqTXQWmK988=;
- b=iEspwvKG+P19V44XfkAiBhvyk55Pk52PRk/6cB/LNJeoxb/w9Xq4DKZPMsJCRhM4sm
- 55j1G+r7Fa6zQnBNQ0hdJRxPdaky+8ThFxq6RZom2qXMnIRE77R/Ohzg/fQlCluztGnx
- oESXAvk3FUUlz9UUmWvwpKNC8ssbqe4nIviIVMP1R92eQstUdmgq15Q042wOB8QaHbk8
- BBNEtmyTHmd2eVeJvZdrerkWqZWUzMHp/NBqj58EM2YAin6InGKJH811T8xOx4wUL62M
- ETSntdgWPr+Lc2Z42ePeoCIsbczdzoNjZx5oSJc3ylkT+TS2y4a3nU/T42foa2TfOfMC
- iUlw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
+ envelope-from=petko.manolov@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=hNBTGnyN
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 38AB9606EC
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 15:30:26 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so1066665f8f.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:30:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1787151462; x=1787756262;
+ d=konsulko.com; s=google; t=1787153425; x=1787758225;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=qZoyLsgA0u3CwGqgnbKRtGbOaLsTBdUKfNnU9s/uQ5M=;
- b=E7yT4p4srWUG91H98/mCNzNZBx1tvXL5eeVtl0lofLre3hBWyQoAmKJlTFyKB6IZiG
- Qpu6Xkce0BWbVkWq9UVDT8/2Mx0aJIrpc7xmPAU050vqQu0yrwln6T/pcerhBQgBzWYO
- Q9QgrnGjopPglRjZAY4diPPn7nGNnZlxhiEg9ntHc0aZFTPkyJqAEQNMMh7BkC9ZVVTW
- PeZ6VPznEWDNqRhinamFo8oxVfK6LEet41Z9vLtxP544WWMtze4ycZRYdwBxYJSuwDif
- 4z8oOXJ6QwJw3zffFlTX4qIBNy3Zr9MtSBM45xXCZhj/XrG57nbBEe2+6wf2pzHl7Xmg
- 0i8Q==
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=6fpGcaN66v0gONivoFXC966UCHypSYO2K0ehiuYk8U0=;
+ b=hNBTGnyNtdqP5raj8tQxBuhH+H49vA38j84Ou15q/m19d0BUx6FU+OFxT0h4TOgsPo
+ gXhzm0QPEJ+ErVr31l2oe6hOA/Pi8pKcAFmMAFK5vFdRnEfo48AEy0J785JN4ADYwmJg
+ LK6eHN0vNpAkNWdi/qAdufq4zioKZI6zLPPZU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787151462; x=1787756262;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=qZoyLsgA0u3CwGqgnbKRtGbOaLsTBdUKfNnU9s/uQ5M=;
- b=OJgiXC/jvna/pQHAOvrKxTNBkPn1udJPh6P4syWEwDshBUAQgfY71Y5dyc0ECWctoc
- Au+sXRHi4NDIUEQy9kCOYs4LOJYckSMv7W3MX5pMoIz3bl9WUsopNj6m4v6P1LSpwGLq
- 4AR5bWdPM6TfhXUv9uFzTswUHGvt6qcdjkCcqRWOtyhAQMsepx8FpKhgsr1hCBjzjEGx
- 4DLiz/Y/VSEzkJqyq8jbI9yj8wTaYHQw1hd7J+FrWk61GCsdjDxm2korz0BvvQvNxD6q
- b4asaEQqunxQwk82mM4UXyXHxkuw9kqTvNQlZdx7Dmz6MjMMkTmXLImhDX3SbZukiLtF
- s1ag==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoAE9KNr/Ryhwgqg14bMkoEzvV+B2lT0vyqjGkHO+YNSDm7Gj/6NwBNP/G8I2p8hTXXWCxwgZM=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lnBNi7XhOHZ0hL7FWQXfk7nd/rkxWeh0R7SEyAq1V13QUqBaOR
- coFiSzxynu/9K5GVEZI/gWhalDbyQfv7V/8vpunLxau7dNQNFLQ+tLz5eg1ddnBDAX0YS0UZQxC
- HnC8zvcb0JrUG7qHjUQmuEU1DoFgWxGHmNSBmHe6cpz7eZa8f6RI01k8=
-X-Gm-Gg: AR+sD13PAHxMjyuWTVS7Jid0FOhsyZyY/u8ly6zJBcFr3qIbueI5cqyGHXTRUEakUHi
- f4P+HI1ZYFdgNFz8cFXXdnzdjWzop9Gnl4KXtU5H8EGYpO6HsmrbpcM3FEc1V8/PpCnrt6KyPVI
- OOKIg5rssCw9jKVFiB8GZDJ70RCWy8Eao0glOzw29bcaHhllMIjx2Dcnsj8m0KShqQux0k9ddKS
- Ajw1CRmqF7eZemGeM7+HfsXLoOMFDwdnrgreWYRpbRg69886GYH6VfSmy7XxveN43VLL6SGkz4m
- sEpBKLIxwWn7o0Qt3Yc9wz535OhuR/SqI+D/EuiNgcliL7yU5rwA/YmTbnG2CHsgVdnuVUMNVVc
- =
-X-Received: by 2002:a05:690e:4814:b0:66b:32bb:740f with SMTP id
- 956f58d0204a3-66ccb1d8e2bmr1576038d50.0.1787151462565; Wed, 19 Aug 2026
- 07:57:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787153425; x=1787758225;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=6fpGcaN66v0gONivoFXC966UCHypSYO2K0ehiuYk8U0=;
+ b=Jp5MmUruNco+JSip89jLmH7sPdWdvVgF/C5DrgB/aut+vps07ktNr3JehBJz4KcA57
+ oQsD3axF4mrtdXAI17M0viQEzkGD/FO5rGS0K9me7LPrHuEzt0ijTZv28J4JFX4cH+6X
+ sedmpdQzjqpRtJCy03zu2BSTDOwAk6PWoAiRttgVZJW0My8CJpzx+DA8l9+Y6Wu3WNMC
+ HZS+OinDh2r4K/pQJ70ZlBNolCa1x5GZflVXz4LQEMiQRom+AtZr4MIENMg29J9zEDQx
+ 8ET5uUVH+gdhiVVqNCMOWXDeFfWGf5fUnrw4frgUIKJvSOrR5wefuv25wxBR+B20YhXC
+ cI2A==
+X-Gm-Message-State: AFuF++lQSJLy2s36ra/lSk+dWsZww68cjcZ60uKLR60N3JK6PcOX/tCR
+ kSHFuJ6QHsslzamvTalVPS4E1jqX+0FPuo8WBm/JFYalYxfsXvta8GL9P/evdzXWx0IKOLPBO21
+ L5cpF
+X-Gm-Gg: AR+sD10etEQd8nox64JMYWNrxrSq19lvj7yyoQ7HrfrpiEOYnG56oYhrlZiqVX6ErWv
+ eaqPx8gO6YNABX10diPIcWUfcsP6mdQgJ3ckTFlAfRog5+jh3GVyC/9dwpHvaJXiO0EwMC2wXcq
+ jjK+jfNcSDyIxXGe6b9UPkidKEh8Y3a1Ii4vIFkgf0EjdFED1z2f0gq78nC3kzr3HvpbelAGJO9
+ W+gAnxtfj6Ev/kOn+eso0DXsHRkoSYifxY8m6PAuReUIONDuKtQa3M6GDT0ImOxL5/oKxFpuP5r
+ +i6nBfqw+l5cW41c2t/F5oXct+FCqk3J8OEsvofUJAfBTvOpzYsY9oeuuC/zQIS0GYD6brJTxxo
+ vS88X9EiNfBK8/+0CpM3vs+S+MjYwdeVqD+4qUOnmRM6QOSNuOdSgGft4xe3PsuZhCGL5LUyHM3
+ O5EmCZkxSKydxtQXfnuou0G4ZkDbfvKBinzvviuX3fxlUXi1+24uy9Z+h+TNxWp9YRBEbvbTipU
+ QZP1Q==
+X-Received: by 2002:a05:6000:715:b0:481:57f7:6015 with SMTP id
+ ffacd0b85a97d-482b1e96130mr11393881f8f.6.1787153425115; 
+ Wed, 19 Aug 2026 08:30:25 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482b1441c85sm7143214f8f.1.2026.08.19.08.30.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Aug 2026 08:30:24 -0700 (PDT)
+From: Petko Manolov <petko.manolov@konsulko.com>
+To: u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com, festevam@gmail.com, uboot-imx@nxp.com,
+ Petko Manolov <petko.manolov@konsulko.com>
+Subject: [PATCH v1 0/1] arm: draeger: Add devicetrees for Draeger's M48 board.
+Date: Wed, 19 Aug 2026 18:30:13 +0300
+Message-ID: <20260819153014.834228-1-petko.manolov@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-References: <20260803-riscv_iommu-v1-1-793cfa421ab2@oss.tenstorrent.com>
- <rxsu6crqaqxylns2vw5trz4fzsis5w4j36ovh5u2fp3ajj3k2o@oolpt5ilpoxc>
- <CAEev2e_=TojrBbrfD0ZTEGJvGS7XUA44ZruOL5NfUPmSHE054A@mail.gmail.com>
- <3q2w5dsgdii7eeeq5mq5jxempshgw4hagagikmvpigxnnounxd@d5rnytl4gkbu>
-In-Reply-To: <3q2w5dsgdii7eeeq5mq5jxempshgw4hagagikmvpigxnnounxd@d5rnytl4gkbu>
-From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Wed, 19 Aug 2026 09:57:31 -0500
-X-Gm-Features: AcwNN1VFKFsF43sTERnx2-vVBGzOKDwOWRGE9cJRMoEmYeKVpgnVLZhcAq8XIzc
-Message-ID: <CAEev2e-gvsjtwuJKyFB8RdEJM-sscLT3SUtY7eUaWCKdU+b_TA@mail.gmail.com>
-Subject: Re: [PATCH] iommu: Add RISC-V IOMMU driver
-To: Tim Ouyang <tim609@andestech.com>
-Cc: Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, Leo Liang <leo.liang@sifive.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, oyst.lnx@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,43 +118,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tim,
+Adding the device trees for “Dräger M48 on NXP i.MX6 (Q) and Intel/Altera
+SoCFPGA Cyclone V” board variant.  It has both (the SoC and FPGA) on the same
+carrier and they are cross-monitoring each other.
 
-On Wed, Aug 19, 2026 at 12:28=E2=80=AFAM Tim Ouyang <tim609@andestech.com> =
-wrote:
->
-> On Mon, Aug 17, 2026 at 09:18:23AM -0500, Anirudh Srinivasan wrote:
-> >
-> > Hi Tim,
-> >
-> > On Sun, Aug 16, 2026 at 7:20=E2=80=AFAM Tim Ouyang <tim609@andestech.co=
-m> wrote:
-> > >
-> > > On Mon, Aug 03, 2026 at 03:06:12PM -0500, Anirudh Srinivasan wrote:
-> > > > Adds a basic driver for IOMMUs that conform to the RISC-V IOMMU
-> > > > specification. This driver sets up the IOMMU in bare mode so that
-> > > > peripherals requiring DMA in U-Boot can function.
-> > >
-> > > Would you consider adding support for SPL?
-> >
-> > I don't have an easy way to test this. This will have to be done later.
->
-> OK, let=E2=80=99s just move forward with the U-Boot proper part for now.
->
-> > > > +#define RISCV_IOMMU_DDTP_TIMEOUT          10000000
-> > >
-> > > Although the timeout aligns with Linux=E2=80=99s, it may still be too=
- lengthy
-> > > for the bootloader stage.
-> >
-> > What value do you suggest? Seems like none of the other iommu drivers
-> > use timeouts, so I'm not sure what to pick.
->
-> I think a one-second timeout should be sufficient on real SoCs, while
-> three seconds should accommodate slower FPGA implementations.
+This is the first of series of patches that are supposed to upstream Draeger's
+entire change-set so that eventually mainline u-boot should be able to start the
+kernel.
 
-Thanks, will change this to 3s in v2.
+Petko Manolov (1):
+  arm: draeger: Dräger M48 on NXP i.MX6(Q) and Intel/Altera SoCFPGA
+    Cyclone V devicetree.
 
-> --
-> Best regards,
-> Tim Ouyang
+ arch/arm/dts/Makefile                         |   3 +
+ arch/arm/dts/imx6dl-draeger-m48.dts           |  24 ++
+ arch/arm/dts/imx6q-draeger-m48.dts            |  24 ++
+ arch/arm/dts/imx6qdl-draeger-m48-u-boot.dtsi  |  20 +
+ arch/arm/dts/imx6qdl-draeger-m48.dtsi         | 369 ++++++++++++++++++
+ arch/arm/dts/imx6qp-draeger-m48.dts           |  78 ++++
+ .../socfpga_cyclone5_draeger_m48-u-boot.dtsi  |  66 ++++
+ arch/arm/dts/socfpga_cyclone5_draeger_m48.dts | 132 +++++++
+ 8 files changed, 716 insertions(+)
+ create mode 100644 arch/arm/dts/imx6dl-draeger-m48.dts
+ create mode 100644 arch/arm/dts/imx6q-draeger-m48.dts
+ create mode 100644 arch/arm/dts/imx6qdl-draeger-m48-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6qdl-draeger-m48.dtsi
+ create mode 100644 arch/arm/dts/imx6qp-draeger-m48.dts
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_draeger_m48-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_draeger_m48.dts
+
+-- 
+2.47.3
+
