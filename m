@@ -1,124 +1,108 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26900C5DF85
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 18:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536A0C5B572
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 20:53:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C575E80D1C;
-	Wed, 19 Aug 2026 18:22:58 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WuFDYbVF0WDk; Wed, 19 Aug 2026 18:22:57 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787163777;
-	bh=oEpCvtyibme0JM6K0NU8+ujBisKwLfo8mo2B5yJ01Rw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Iuq/kiMYbnMnjeNuOq34lSvp5vmrs5QHq25mkwu166eb8nIjXsuf604DTjTGf61gw
-	 x+Tx308PCstaohRheSrY5cTN3Pf912tb1jFd0yIyXvvf0/QB3WVgBqdjb/4PU/PkhK
-	 BfhuHVBr7spIdEb5ajhRS8igz0fAnHTXMUoqGgZw/Invt6ZGj6qBfm9DmZvHKQ0PWp
-	 eXmLP6LMnf54nv8QskPYDetoUjBc8xBzqVexet8gBjdNxw6n5eRIEjbpGcjjmpww78
-	 djYOZ+w5hSik6KlEfcIhaS5bBDpFdwr7Ovbq9xllO1geAK1gdrRWBWd9lz9KhPJCMb
-	 uoXDe7h1GVhrg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A4CF80C95;
-	Wed, 19 Aug 2026 18:22:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id EE030265
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 18:22:56 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D3C77405A3
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 18:22:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 59AE2405B9;
+	Wed, 19 Aug 2026 20:53:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TgGGTNhot51g for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 18:22:56 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2f; helo=mail-oo1-xc2f.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=atk3XorV
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0436B4050C
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 18:22:55 +0000 (UTC)
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-6ae6e407bfdso753407eaf.1
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 11:22:55 -0700 (PDT)
+ id 5HYUUdYL5lgv; Wed, 19 Aug 2026 20:53:08 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787163775; x=1787768575;
+	d=lists.u-boot-project.org; s=default; t=1787172788;
+	bh=ldM+GlfnUMzQGtWrq8X0BMyb0F+8MdcLYTJ57mFN6x8=;
+	h=Date:Subject:From:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=D6uy2MK2gnlBrDJPLyISqpbcC9LE0IrjHGCZZY90oAwlLIXS+zvGDwk7/lAn2jC50
+	 eVpds6llb1bnz6WgWNg0yxiMeARMUxMMKCEMQxxxZX2v8d0WsbovCTlfBH+jh8wXE2
+	 kpoWcPLGcTYXqoS+XaFz3znoMAHFighCCooBWv5ds0SVv3LP4Flt0nNJT3rcEtbTTM
+	 NkbF2WHKbskjcO0cN9GxAdkbxQNMF4gzsww8RBxi7qgBVNMcZ3ED4L52RDqnol6LWx
+	 yULHL8yP95fL3lMH76S0bI4b80Cv+DomWUUvrnczIcdWMev/uILw4OTDxlDyNF9rYH
+	 b7dxTfxEFC0ag==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 73ADE405B1;
+	Wed, 19 Aug 2026 20:53:08 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C5A8C39E
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 19:10:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id ABAB240243
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 19:10:52 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6_5FP6FYQZmq for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 19:10:52 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::1046; helo=mail-pj1-x1046.google.com;
+ envelope-from=3uv-fagskbi0hdgrjxiqjwppxxpun.lxvd-kxxcurbcb.d-kxxc-yaxsnlc.xap@flex--yuxiaozhang.bounces.google.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256
+ header.s=20251104 header.b=iy0sYd/+
+Received: from mail-pj1-x1046.google.com (mail-pj1-x1046.google.com
+ [IPv6:2607:f8b0:4864:20::1046])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E81D440240
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 19:10:51 +0000 (UTC)
+Received: by mail-pj1-x1046.google.com with SMTP id
+ 98e67ed59e1d1-38f57e31b6eso1393292a91.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 12:10:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20251104; t=1787166651; x=1787771451;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=oEpCvtyibme0JM6K0NU8+ujBisKwLfo8mo2B5yJ01Rw=;
- b=atk3XorVdP4bR9w/prffi/cfQ1UAh7Fk8Ip8i6GIEZ51Q4tY6YrpwBBJArg7OOjUfF
- 7MiaGwdolI/7NJd56nlYG0nXsBi92GHaFg156ornriXSUBmgCo+EZ5CJqY9Y7qhmCyny
- v4gc+joiQ7q84CPfE/DYfG4J0rBG4LysIqyQQ=
+ h=content-type:cc:to:from:subject:message-id:mime-version:date:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ldM+GlfnUMzQGtWrq8X0BMyb0F+8MdcLYTJ57mFN6x8=;
+ b=iy0sYd/+TgQCr9C2fuTyo08yQbGo9r+WW5+DlhU3K2avCb3PviQc2BS8AnpsQbTU/7
+ HC2F5sXgV1Xp2mo2rtcoeAIt28KyKWICr0IJDS9fGwFCdE6Xu5oM1ZYfveo0pZdMh7A4
+ 3P5LSuzpZLWbIFEM9nFrijRvFrGDWTzHyUrT/q31f/sN0GTL5+mCNCGwsqWHBFGu4QM7
+ 8p5O7Z1vJQ+ckdOAORMUoI+MWqJwOPxLq+XYjZTQxajbJNRC4acR8LnpwTUcqAwMfKmH
+ gmdFsNhiz8HosAaL9oJQb96jRkA8WMV0fIFASbwEdV1jFbbiKxvdjbyz8gh2B4XfvbBw
+ nzOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787163775; x=1787768575;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
+ d=1e100.net; s=20251104; t=1787166651; x=1787771451;
+ h=content-type:cc:to:from:subject:message-id:mime-version:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=oEpCvtyibme0JM6K0NU8+ujBisKwLfo8mo2B5yJ01Rw=;
- b=e5GAyLKkLLGBoWUv3xfpnj8yJOo/YWvuVA6OGlMRKIam3mAxXyK3gMynS4NN6sPiRL
- Ps4138HU0bnWIaI0piaXc9gGKkHrGo5Ma5aN5Bey+MRbp5L5y9RIqRQmo2MtruG+TA7S
- VxV4QBQYYad23neRG/EDhNgBorwP2Ospw1bNxxKAa3F5TGjfGIBh2aPB9fzr1Rb4sSc3
- 28iq3h8dJLLPVAbYDklS9Z5ZkUdcMaGW5once/eLHCxrICkrrB872wpknMFTfVtzdylI
- 6qtw3Sp0S1x7j9RcG2SqGkfnpNsMDRCR/CmjRAk05XIhIxY9AgTy1BkOKVd1YU6j3QRX
- S4XQ==
-X-Gm-Message-State: AOJu0YzK92JAvpWCPrOHJemRm2rGMpvhLbEqmTOHcQTSsf7FVUm4OeId
- lbjC4ZhJSQThLJvGJVTGXXwbQQlgCydsF+vrNToaPVnwWhs4shU5mu4pYXKyITdXkAM=
-X-Gm-Gg: AR+sD13ZE1JUOnYn3PWWydmkpnCC67TgUI4dygkU0PHqO2IMk4ri8CWXEXExsDWZYC0
- F0GlU1QqV7tI//+MnFdJz4vNCG4KsTlkrpusV/VXw1pOItiFFlz4bRzVQeyKRgV0D93yQzGvugo
- VsZFgm862rBJq5EO+By0iCJz68OEJ+iHWK6ODzeNROBXSpM5SNQClB55JbDZB6X+E2rW8wkLQVC
- PVN4TSQuGSLIrK7aO7LJtO5VzX0DhyIARZNxhdCYA4nA7k3UjTmS8DSsEAiXb+5/FxfwZJtu4Ql
- Rp328R/D/HOX05luJfPUEMuBoF69vuxSIFM2a62lwsjL2VWJ9hg/tXucgzldSRTBCAMyKSPHSas
- g36AU7/g1uExd9MK652UjLTGPp4Q6VrsgVtWqprhQFjIlM/p396wyaISqjRiVQ1LLRUabuc9YcA
- 9jyBgxFaG1XtX5PkALiujjX+3pu8tQX0RFz0XGGVR9+d0YeBCWw6spi6vLp5sszfKXAtG/wZp1N
- NloYCrqS/CiAB/T36rEnAIFqorMPf7YwF2FMcE2PC62fE46g8fSfXf1kAl10zme/kZXl6y47sJU
- ad31NQ+eC3dHC4nmqXc9
-X-Received: by 2002:a05:6820:3415:10b0:6b1:4250:6a43 with SMTP id
- 006d021491bc7-6b142506b33mr3133219eaf.17.1787163774801; 
- Wed, 19 Aug 2026 11:22:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b13cb51ebdsm2518712eaf.3.2026.08.19.11.22.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Aug 2026 11:22:53 -0700 (PDT)
-Date: Wed, 19 Aug 2026 12:22:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Cc: u-boot@lists.u-boot-project.org,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Brian Sune <briansune@gmail.com>, Tze Yee Ng <tzeyee.ng@altera.com>,
- Peng Fan <peng.fan@nxp.com>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Boon Khai Ng <boon.khai.ng@altera.com>
-Subject: Re: [GIT PULL] SoCFPGA updates for next (2026-08-17)
-Message-ID: <20260819182251.GA1954583@bill-the-cat>
-References: <20260818201715.GC523975@bill-the-cat>
- <83d2b4a9-ae55-46cb-9dbd-9d603fa1ec94@altera.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="D3L5ufjOLkZ7xNUX"
-Content-Disposition: inline
-In-Reply-To: <83d2b4a9-ae55-46cb-9dbd-9d603fa1ec94@altera.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ bh=ldM+GlfnUMzQGtWrq8X0BMyb0F+8MdcLYTJ57mFN6x8=;
+ b=qTcWOkAxwrKAryMCqYndFS7758sYA+1qQMAKQBuz2NmT8fm7hcugbbGNP58E+9vinp
+ bD0McGbp8I5nNQdY228U9eGh3eVnBZpQ+em9EmaiNwl4SC2jeQP+NcA2iz4t3nTnm76y
+ MBVmZ/HJLqa3I2iItsce+/hdTiZeOJmBsDYIdWrfzu+bNTI3faH7cw6uchyVAqRbkq1y
+ lfvjxeFTaspP914xUwmjcqkFehYIeOQV2qLgIRkkYEfXKcpixYMpgeMv6Xf2bVVSAATk
+ raDhKSyIMG0h1GciNhh42ZhBBXxmP63guDmm92q3wIjN9CLhB592nzIOqu69jMhrbGAE
+ zzFg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RomP411MxxBYucRdGJgIwE3Rz4JqUFKdI6e6++bwJCCxtRpRFeCt+zOs/ai5OK3P9AQyhycg/c=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mCbMxYfCZK1xn0OJ2VUjbk/MxPfjd1e+WXa1g71Q8GU8P1lvov
+ qhZyr1KhDdAAO2pP5dPhu1grIOOeqJHuzhXdjngw5jyfrT7UPNKcAScW2iIY+LGhCLfqp2PPQGd
+ HQ9EcCsVxu1lG7fF90Sql+Pa8qw==
+X-Received: from dldyq20-n2.prod.google.com
+ ([2002:a05:701b:4554:20b0:141:2c5a:38a5])
+ (user=yuxiaozhang job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:90b:4d82:b0:395:4de4:92c7 with SMTP id
+ 98e67ed59e1d1-39580ed143bmr12456426a91.3.1787166650603; 
+ Wed, 19 Aug 2026 12:10:50 -0700 (PDT)
+Date: Wed, 19 Aug 2026 12:10:21 -0700
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.55.0.737.g08866a6d13-goog
+Message-ID: <20260819191046.4125809-1-yuxiaozhang@google.com>
+Subject: [PATCH] dhcpv6: support rapid commit dhcp6 option
+From: Yuxiao Zhang <yuxiaozhang@google.com>
+To: u-boot@lists.denx.de
+Cc: Yuxiao Zhang <yuxiaozhang@google.com>, Francois Berder <fberder@outlook.fr>,
+ Jerome Forissier <jerome.forissier@arm.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 19 Aug 2026 20:53:07 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,89 +116,132 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Support rapid commit option code 14 which bypass the advertise and
+request state. The option is enabled by DHCP6_RAPID_COMMIT.
 
---D3L5ufjOLkZ7xNUX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Yuxiao Zhang <yuxiaozhang@google.com>
+---
 
-On Wed, Aug 19, 2026 at 09:16:43AM +0800, Chee, Tien Fong wrote:
-> Hi Tom,
->=20
-> On Tue, 18 Aug 2026 20:17:15 +0000, Tom Rini <trini@konsulko.com> wrote:
-> > I know CI doesn't fail on this, so I only saw it in my build logs:
-> >        arm:  w+   socfpga_de10_nano
-> > +(socfpga_de10_nano)
-> > +(socfpga_de10_nano) WARNING: unmet direct dependencies detected for DE=
-SIGNWARE_WATCHDOG
-> > +(socfpga_de10_nano)   Depends on [n]: WDT [=3Dn]
-> > +(socfpga_de10_nano)   Selected by [y]:
-> > +(socfpga_de10_nano)   - ARCH_SOCFPGA_CYCLONE5 [=3Dy] && ARM [=3Dy] && =
-ARCH_SOCFPGA [=3Dy] && !TARGET_SOCFPGA_TERASIC_SOCKIT [=3Dn] && !TARGET_SOC=
-FPGA_EBV_SOCRATES [=3Dn] && !TARGET_SOCFPGA_SOFTING_VINING_FPGA [=3Dn]
-> >=20
-> > That needs to be fixed.
->=20
-> Changelog since tags/u-boot-socfpga-next-20260817:
->=20
-> - arm: socfpga: cyclone5: select WDT with DESIGNWARE_WATCHDOG
->   ARCH_SOCFPGA_CYCLONE5 now selects WDT with the same board filter as
->   DESIGNWARE_WATCHDOG. socfpga_de10_nano no longer warns about the
->   unmet DESIGNWARE_WATCHDOG dependency.
->=20
-> This pull request updates SoCFPGA platforms with Stratix 10 and N5X
-> driver-model conversions, DDR robustness fixes, Agilex5 storage and DT
-> updates, and Gen5/Arria10 maintenance.
->=20
-> Stratix 10
-> Switch to the upstream Linux DT, combine boot-flash defconfigs, and move
-> firmware register settings into the device tree. Enable the system
-> manager driver, refactor the S10 clock driver, exclude S10 from legacy
-> MMC clkmgr address lookup, and improve SPL data save/restore and
-> watchdog support.
->=20
-> N5X
-> Enable the system manager driver and switch firewall setup to driver
-> model. Adopt the upstream Linux DT, update GMAC nodes, consolidate
-> ATF/VAB defconfigs, and use common SoC64 environment settings. Enable
-> CMD_MTD and ISSI QSPI, split the reset manager into common and
-> platform-family parts, and drop the kernel node from binman for the
-> non-VAB flow.
->=20
-> DDR and memory
-> Add ECC DRAM scrubbing and DRAM size checking for Gen5/Arria10,
-> secure-region support for the ATF flow, a delay before MBRDADDR writes,
-> and a data-cache flush fix. Use dev_read_addr_index_ptr() in the DDR
-> driver.
->=20
-> Agilex / Agilex5
-> Add an Agilex eMMC device tree, enable 8-bit eMMC, restrict watchdog0
-> autostart, set DTB filename and kernel-node removal for non-secure boot,
-> disable gmac2 on Agilex7M, and update Agilex PLL sync-to-async
-> configuration.
->=20
-> Gen5 / Arria10 and cleanup
-> Improve QTS handoff prepare isolation, fix the PL330 TARGET-to-ARCH
-> naming, enable DesignWare watchdog and random MAC on Arria10, select WDT
-> with DESIGNWARE_WATCHDOG on Cyclone V, and apply related Kconfig, FPGA,
-> clock and MAINTAINERS cleanups.
->=20
-> Please pull the updated tag.
+ cmd/Kconfig  |  8 ++++++++
+ net/dhcpv6.c | 39 ++++++++++++++++++++++++++++++++-------
+ net/dhcpv6.h |  2 ++
+ 3 files changed, 42 insertions(+), 7 deletions(-)
 
-Applied to u-boot/next, thanks!
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index ff90a87024c..b3cf3a6d8b6 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1996,6 +1996,14 @@ config DHCP6_ENTERPRISE_ID
+ 	int "Enterprise ID to send in DHCPv6 Vendor Class Option"
+ 	default 0
+ 
++config DHCP6_RAPID_COMMIT
++	bool "Request Rapid Commit (2-message exchange) from DHCPv6 server"
++	default n
++	help
++	  Request the Rapid Commit option (option 14) in DHCPv6 Solicit
++	  messages to enable a 2-message exchange (Solicit-Reply) rather
++	  than the default 4-message exchange.
++
+ endif
+ 
+ config BOOTP_MAY_FAIL
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 640f089a2e1..1e51e6de256 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -115,6 +115,9 @@ static int dhcp6_add_option(int option_id, uchar *pkt)
+ 
+ 		opt_len = sizeof(struct dhcp6_option_ia_na);
+ 		break;
++	case DHCP6_OPTION_RAPID_COMMIT:
++		opt_len = 0;
++		break;
+ 	case DHCP6_OPTION_ORO:
+ 		oro_opt = (struct dhcp6_option_oro *)dhcp_option_start;
+ 		oro_opt->req_option_code[num_oro++] = htons(DHCP6_OPTION_OPT_BOOTFILE_URL);
+@@ -194,6 +197,8 @@ static void dhcp6_send_solicit_packet(void)
+ 	pkt += dhcp6_add_option(DHCP6_OPTION_ELAPSED_TIME, pkt);
+ 	pkt += dhcp6_add_option(DHCP6_OPTION_IA_NA, pkt);
+ 	pkt += dhcp6_add_option(DHCP6_OPTION_ORO, pkt);
++	if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT))
++		pkt += dhcp6_add_option(DHCP6_OPTION_RAPID_COMMIT, pkt);
+ 	if (CONFIG_DHCP_PXE_CLIENTARCH != 0xFF)
+ 		pkt += dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);
+ 	pkt += dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
+@@ -448,6 +453,12 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 			}
+ 			sm_params.rx_status.preference = *option_ptr;
+ 			break;
++		case DHCP6_OPTION_RAPID_COMMIT:
++			if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT)) {
++				debug("DHCP6_OPTION_RAPID_COMMIT FOUND\n");
++				sm_params.rx_status.rapid_commit_found = true;
++			}
++			break;
+ 		default:
+ 			debug("Unknown Option ID: %d, skipping parsing\n",
+ 			      ntohs(option_hdr->option_id));
+@@ -618,14 +629,28 @@ static void dhcp6_state_machine(bool timeout, uchar *rx_pkt, unsigned int len)
+ 		break;
+ 	case DHCP6_SOLICIT:
+ 		if (!timeout) {
+-			/* check the rx packet and determine if we can transition to next
+-			 * state.
+-			 */
+-			if (dhcp6_check_advertise_packet(rx_pkt, len))
+-				return;
++			struct dhcp6_hdr *dhcp6_hdr = (struct dhcp6_hdr *)rx_pkt;
++
++			if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT) &&
++			    dhcp6_hdr && dhcp6_hdr->msg_type == DHCP6_MSG_REPLY) {
++				if (dhcp6_check_reply_packet(rx_pkt, len))
++					return;
++				if (!sm_params.rx_status.rapid_commit_found) {
++					debug("[DHCPv6] REPLY received without Rapid Commit option, ignoring\n");
++					return;
++				}
++				debug("REPLY (Rapid Commit) good, transition to DONE\n");
++				sm_params.next_state = DHCP6_DONE;
++			} else {
++				/* check the rx packet and determine if we can transition to next
++				 * state.
++				 */
++				if (dhcp6_check_advertise_packet(rx_pkt, len))
++					return;
+ 
+-			debug("ADVERTISE good, transition to REQUEST\n");
+-			sm_params.next_state = DHCP6_REQUEST;
++				debug("ADVERTISE good, transition to REQUEST\n");
++				sm_params.next_state = DHCP6_REQUEST;
++			}
+ 		} else if (sm_params.retry_cnt == 1)  {
+ 			/* If a server UID was received in the first SOLICIT period
+ 			 * transition to REQUEST
+diff --git a/net/dhcpv6.h b/net/dhcpv6.h
+index d41a3c30615..49f20390730 100644
+--- a/net/dhcpv6.h
++++ b/net/dhcpv6.h
+@@ -24,6 +24,7 @@
+ #define DHCP6_OPTION_PREFERENCE		7
+ #define DHCP6_OPTION_ELAPSED_TIME	8
+ #define DHCP6_OPTION_STATUS_CODE	13
++#define DHCP6_OPTION_RAPID_COMMIT	14
+ #define DHCP6_OPTION_OPT_BOOTFILE_URL	59
+ #define DHCP6_OPTION_OPT_BOOTFILE_PARAM	60
+ #define DHCP6_OPTION_SOL_MAX_RT		82
+@@ -152,6 +153,7 @@ struct dhcp6_rx_pkt_status {
+ 	enum dhcp6_status	ia_status_code;
+ 	enum dhcp6_status	status_code;
+ 	u8			preference;
++	bool			rapid_commit_found;
+ };
+ 
+ /**
+---
+base-commit: 527115ef6783cec49e5610c523c124b399011361
+branch: main
 
---=20
-Tom
+-- 
+2.55.0.737.g08866a6d13-goog
 
---D3L5ufjOLkZ7xNUX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoX0eAAKCRAr4qD1Cr/k
-CpthAQCvVSgW6SLzNnmNCBVXFXx0ymjgh4oRKHEKFAmoyY6qkwEAqiAaPKIZ03kB
-KfT1avPQmux2/HuVwPn31lllF56Jqww=
-=p0+o
------END PGP SIGNATURE-----
-
---D3L5ufjOLkZ7xNUX--
