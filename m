@@ -1,115 +1,116 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBC5C5DF85
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 459F6C5DF6D
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:55:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B962F80DF0;
-	Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CACD4406C4;
+	Wed, 19 Aug 2026 03:55:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Qjgsn4-_RmL3; Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PwzOtFD60quc; Wed, 19 Aug 2026 03:55:55 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787111748;
-	bh=kkI7TSX9h09x+T0r/8UTMI/PRVggzQx3pgrUrnHQXso=;
+	d=lists.u-boot-project.org; s=default; t=1787111755;
+	bh=EC3ioCr3Yv0tsDHITlP0Y23ChL9+XcoaBfllPajdQNA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CODvg11z+lqjW7yA6Go+FTmh/Fxxh1HAfXhGE6Kas+cv7t7PHbyfKA0SoUZkjpG2m
-	 iNXXQIEYJYJX/m9ny6jmvAYxKaNFy19PWBQX4Sds2RCJDPqYbaYhY07VR+mlrFoHoa
-	 emeiVPNVZeFGvSHb8ixokqDhGcEFyAb4ACImTBb0cTrP+i4JJGJfK8m5vawAEhAebK
-	 lY9AaYqWX0Y/00wxW1UTY59iYdhpEiSrQtPN+NZa2/bInp4hnGIkaknShPy3797UJk
-	 6/bNMqh9ysB/i4c5QreknNfWjygahaUBxO7Q94CyDjaVC4ey6zF1Ai9LWshIsFQLwK
-	 lcR37yunJMyeA==
+	b=bB/wgPux+RVDJxKjCivNNM4zTeVpi5U7kaIhirxd51FGRBLjaZILwbAVuzzaO6iuq
+	 4Bk0GnlGW2h61KpitiDMwAVYOIkxERZtUHTwROqvDV2iGcPbkilolcl6g3vMYa9Eid
+	 BxGofxT8tVExBe1hHhWwNWVemuI2d41G0ZOm2UJO7WqtnogJAZcf9U+/phznpyFD17
+	 5iuD7xa9u5UObZyO6oSoMYDHq6oXj6lBrcwsKK+bUgIr//seeJsi8lH5jVMOeSUpuL
+	 1Zzet4hdfL1mcbgiEyvL4cRS/0g4s8fdkChAQq65vfDuLIPfVRRgwG4VFIuS75lsQW
+	 hDXR7Ss/6n2cg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 19FB180DE5;
-	Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5001C1460
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 65B2A4065D;
+	Wed, 19 Aug 2026 03:55:55 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 65B851460
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3653E60650
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4B5FE4065D
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X4IwXbSHFwxD for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 03:55:46 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1jfovy5Yb7Ft for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 03:55:53 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1036; helo=mail-pj1-x1036.google.com;
+ client-ip=2607:f8b0:4864:20::62d; helo=mail-pl1-x62d.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=F/KkZbMs
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 86A2B60606
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:46 +0000 (UTC)
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-38759bcd877so822486a91.2
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:55:46 -0700 (PDT)
+ header.s=20251104 header.b=xzBNZncy
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 85ADB40654
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:53 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2cf52d15d88so4261395ad.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:55:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111745; x=1787716545;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111752; x=1787716552;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=kkI7TSX9h09x+T0r/8UTMI/PRVggzQx3pgrUrnHQXso=;
- b=F/KkZbMsjr1UNG0LCVggUr77t3O/qlI+fqjIhYFGNYPDCQrpobmiwNlf4SCf7nlkDj
- fBQu9ETbOYo0+AdEEsrMLPLnRj/ghI6FgsLmWiDA7tBQrH0BmGmxFDo6PbAmcqpxAHDp
- alHW8YZSXTsbWopOe2QDJeC9547I/m9iQNMFRAbE3vCfwx1jMdu8KpLhc9yj2kzRbJmQ
- 22g5ecPkZwCjf5QcivrgPsSHp0m+iLdVZzCLV1ZppU6ga3mHH2Lq+aaY0y0cnMI3DKtO
- elrFLy4++ZsvPtgvULBK8yO23jJx5KwcoH0uYqOXjWPjZT+AvG5pCpFVitiMII5yAwCt
- 9kFA==
+ bh=EC3ioCr3Yv0tsDHITlP0Y23ChL9+XcoaBfllPajdQNA=;
+ b=xzBNZncyXgH4zovn4hqErL92raXiU607MUDARI0hL3F2d8GlMXd3/IVzk+32PYb5Cj
+ ZkNlWd4pl3dD8JlLCF6dmMhsoikSBELGnpJIMSNgJcaby2Fg7o/2cOPVEoG16vKNHGss
+ 8Mct6MmiU3BaT1FBOM2h/PzB9rguzH21xrHagclH2mXin70MnRWIhCWwn3re7+W3gceq
+ Q/J9oJMQ6GMOkyuL9mOZs52Oewu1TM2RRmYd8aF5yqVdH5ACAUWhRCCZgTI8qXmjGIZE
+ BfM4a9AGZ8bva5Wxzi7/rDICyvoLUjEb7Dk/rDIyJUVMLQn6wGcZSvKKJNkmTWmVR+NK
+ LGCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787111745; x=1787716545;
+ d=1e100.net; s=20251104; t=1787111752; x=1787716552;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=kkI7TSX9h09x+T0r/8UTMI/PRVggzQx3pgrUrnHQXso=;
- b=MQ0uRv7Ntn1GgDi9QcwtnIja3wvd5augdxkRSvVxWPB0iMTLp6jFW4orjjiKaccD7y
- ymgnmfh0vY+Gva9L644QZYxM+IUHD5qAsp6iWjayYmAnbyCioDmE7uvMrNJwgqov9t1x
- Kr3ZwZ/b/V69O5GnRPBSK7CizFPSrJh7WsezoinvxybdzH4s84AaOow82pD35vKCpyup
- WiSJUtHEdutTNqX7y692JSOzOgmWVkBf+va0vH/qggWTYvu1+MhZAPvtjwCjE5RgD5ub
- gzGsLXOksNa+gIxIDZzgF+5up/ZfyBYaGt3g64AMdaoLY0n9l73mQlkTWBQSxBI8wQb2
- uBKQ==
+ bh=EC3ioCr3Yv0tsDHITlP0Y23ChL9+XcoaBfllPajdQNA=;
+ b=HH8B7ApmMmnYb6flc750HmcXC5Be+E3ahScowi/ChR9xU0j88NmO4NhXkZWlO5HGIg
+ fnZbpNIzIpw961gwDKdmKhRp8d+CPbv/lnsdbsfpOEjIbyC2nVMK2fdyHjvL5FiMbJuZ
+ YcB4O6d2Mm7NsOEQV9NiUKXteT0pXgshklyl0vC7vW+aWNyvAb7U84WV1M5ahtoq6dkL
+ JZVNLMee2sQvGrkVS454a6gqzOyWeCKaQVVX8bIA8a/k8X7qNFywjJdpnwNYhceni5Zu
+ eMFIb5bBdi1gedfa7AxKOR0jP9A8edS6nWVzBLZvVWk13/BZi0+IJ5NIMazwOe4JQxoe
+ lLFA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpxeLfb3dqTeqGZmXHFiBRXRzvfzKtaZZuONI1SJgImc6IvATWUMP3KlLBj/fGjP0+F5hyytmw=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxEYnUIrsj3pqHRh/ajAQzOtfSOK/o6KyviaV5rlyhwzaWoPaIR
- Bpbpik/aTp6xynbbAxiUSEm6CKMRYX6F29tM4XCdnn0ri60Rpo/rEP+On8kaU6n2nH8=
-X-Gm-Gg: AR+sD10Ar0qwS0/LVFYc6vDvAh9xBrjgPKJC5ufNDt/hz2ocBJdfd4spJzZOtp4AELh
- rQjJPPOd1GqqsScSDXFkcMe3yldQ5igrfOdCcOHK5nn/poyw5RRCPpyI8yH68uQqqm5JAadhNBR
- Zz/E6VhEwtBX5Cdtp3hJgPrJhlDGeB+IAmqTH/J1d5u+64ri0ujc+f6WLwx3Dtkv/Ul4sKIPJ3x
- krieLr5+lxo/G/Q9OXBcx1dWo1kWATxZMXeCiof22zHGs2ow94E+MyOAxNfnd0nK8PiDWxKhcbz
- 1qPW0wl6QhJbe26zHYamqwQySd31BehnYDCIFwwsn15uiN63k9cB+zQG/drbHC2bH3CoV7F7W8D
- gX6g4J9DYRhUdTQrffASs3Avcxq8z5LnwHuP1OCUvWh4w0zEj4AfBhu8+RFxxrT7tGeIzxVS1hQ
- 47itiyocmUAdWOnYxF2MVSwRwOl2MZl6fEDufYPm10WXUT7QcnN2DwGk3lNAYvJWC6pSsoXL90M
- Cg2PTh2yxO9i/Zz+5SDH7DugcwePj326WXBwFqlJW9RTtqZRCximwbta5HmKSVSt8J1qchiFRyK
- wb85NnzoPpCZaY7iDAfzwWQ2RQ==
-X-Received: by 2002:a17:90b:3c4d:b0:380:540:d499 with SMTP id
- 98e67ed59e1d1-39580f04a50mr3333392a91.6.1787111745624; 
- Tue, 18 Aug 2026 20:55:45 -0700 (PDT)
+ AHgh+RrSWIJcrdpDKSWKTip34fIGz3ZgnpC651WVLX4kjESjqglOTvF/NipnSA276PAca44T9m4HOe8=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzI8UveafyVHT24fBNNh6CBLKv3u9cD8wrhbjjrzhRgFQEPJORJ
+ T5AVgoSeo6QT389MDYXlz9hYWXJSJ02x4Aq+wmO6415Qt6igGNHG0elVwmdpsq/oQoA=
+X-Gm-Gg: AR+sD114vj5+wWBlu+0FyFj5dd2GKRkrnMP3oz+p7pvVc2Of7IvkHT6XuG0NtpprGyq
+ F9LJcLwKf/qPXus8vd4y1fBTJV2jJm8ewovGlR1pvg3sdE4u8vp5VJDVX/+650DNpufbLcsi2tg
+ eVTMNGtvFjR53Goq+JtCWnqtqoNaluH/SuvJFMi+fVlnIV1rTmfOFxKKorBwjsLOtguTtTr2DKp
+ 1H/ite0rqlpZbea7hMnOU0h07x0C3xB/j8Tp6R60EcH5orYP5QAuVLBSr6FDQcWASFQ5NkXq1Pc
+ RpClG3pIYzLNvq9TX2pyYOv0Wx6i/ueORyJBhAt9k/gU/tWP9B2APFA23rLY9Br4FcWqIn6NpSL
+ fvFe0SERboBaBkhHybeFyvIP5dE4tNh3PeatVj0+Be5Ep116zm0BkmUSd8ZYeOyPbYjW0kXOyTf
+ CErW+BakCh+h9W53y6LIWxdaWt6WEvDM4PneZ7gEVV9+hAKl5AZv4imvrGvyvaN9s/5MdKyAxPp
+ fp3St6ZomxnR7J8r42ji9+49FrpsjRUFgkMoKTgFd67wcxOz+LIQtl3gjymSB+kr7R8LzHxfl1j
+ KXIp9fBUR5TBH9vghCfJexAYBPMtz0hP9f/v
+X-Received: by 2002:a17:90b:3804:b0:37f:fd1f:d30f with SMTP id
+ 98e67ed59e1d1-395813f549amr2816077a91.12.1787111752347; 
+ Tue, 18 Aug 2026 20:55:52 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.55.39
+ a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.55.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 20:55:45 -0700 (PDT)
+ Tue, 18 Aug 2026 20:55:51 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 19 Aug 2026 11:54:44 +0800
-Subject: [PATCH v9 02/19] pinctrl: k1: fix pull-up/pull-down configuration
+Date: Wed, 19 Aug 2026 11:54:45 +0800
+Subject: [PATCH v9 03/19] pinctrl: k1: add IO power domain configuration
+ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260819-m4-v9-2-6e66016392b9@riscstar.com>
+Message-Id: <20260819-m4-v9-3-6e66016392b9@riscstar.com>
 References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 In-Reply-To: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -131,7 +132,7 @@ Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, 
  Guodong Xu <guodong@riscstar.com>, Yao Zi <me@ziyao.cc>, 
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Eric Chung <eric.chung@riscstar.com>, Yixun Lan <dlan@kenrel.org>
+ Eric Chung <eric.chung@riscstar.com>, Yixun Lan <dlan@kernel.org>
 X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -146,54 +147,211 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Fix pull-up/pull-down configuration to honor the argument parameter:
-when argument is non-zero, enable the requested pull direction;
-when argument is zero, clear all pull bits to disable.
+Dual-voltage GPIO banks default to 3.3V, but when externally supplied
+with 1.8V the internal logic must be explicitly reconfigured to match.
+
+Add the ability to program IO power domain control registers through the
+APBC block. These registers require unlocking the AIB Secure Access
+Register (ASAR) before every read/write, since configuring a 1.8V domain
+while 3.3V is externally supplied can cause back-powering and pin damage.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-Reviewed-by: Yixun Lan <dlan@kenrel.org>
+Reviewed-by: Yao Zi <me@ziyao.cc>
+Reviewed-by: Yixun Lan <dlan@kernel.org>
 
 ---
-v9:
-- Rebase since drop patch "fix drive strength configuration".
 v7:
-- Simplify pull-up/pull-down configuration by using a single
-  clrsetbits_le32() call.
+- Remove the dependency on SYSCON.
 v6:
-- Fix pull-up/pull-down configuration.
+- Use dev_read_phandle_with_args() to fetch "spacemit,apbc" instead.
+v5:
+- Use tabs for macro definition alignment.
+- Fix the missing power source argument.
+v3:
+- Add SYSCON dependency in Kconfig.
+- Fix not sorted issue in the driver.
 ---
- drivers/pinctrl/spacemit/pinctrl-k1.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 95 +++++++++++++++++++++++++++++++++--
+ 1 file changed, 92 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
-index a6a22eacac7b..9ca4ef7c771e 100644
+index 9ca4ef7c771e..6cb71b44b3a6 100644
 --- a/drivers/pinctrl/spacemit/pinctrl-k1.c
 +++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
-@@ -406,7 +406,6 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+@@ -12,6 +12,7 @@
+ #include <linux/bitops.h>
+ #include <linux/errno.h>
+ #include <linux/io.h>
++#include <regmap.h>
+ 
+ /*
+  * +---------+----------+-----------+--------+--------+----------+--------+
+@@ -34,8 +35,23 @@
+ #define PAD_PULLUP		BIT(14)
+ #define PAD_PULL_EN		BIT(15)
+ 
+-#define PIN_POWER_STATE_1V8		1800
+-#define PIN_POWER_STATE_3V3		3300
++#define IO_PWR_DOMAIN_OFFSET	0x800
++
++#define IO_PWR_DOMAIN_GPIO2_Kx	0x0c
++#define IO_PWR_DOMAIN_GPIO3_K1	0x10
++#define IO_PWR_DOMAIN_MMC_Kx	0x1c
++#define IO_PWR_DOMAIN_QSPI_K1	0x20
++
++#define IO_PWR_DOMAIN_V18EN	BIT(2)
++
++#define APBC_ASFAR		0x50
++#define APBC_ASSAR		0x54
++
++#define APBC_ASFAR_AKEY		0xbaba
++#define APBC_ASSAR_AKEY		0xeb10
++
++#define PIN_POWER_STATE_1V8	1800
++#define PIN_POWER_STATE_3V3	3300
+ 
+ enum spacemit_pin_io_type {
+ 	IO_TYPE_NONE = 0,
+@@ -60,12 +76,14 @@ struct spacemit_pinctrl_data {
+ 	int (*get_pins)(struct udevice *dev);
+ 	int (*get_functions)(struct udevice *dev);
+ 	int (*get_io_type)(struct udevice *dev, unsigned int pin);
++	unsigned int (*pin_to_io_pd_offset)(unsigned int pin);
+ };
+ 
+ struct spacemit_pinctrl_priv {
+ 	void __iomem		*regs;
+ 	struct spacemit_pin_io	*io_pins;
+ 	int			nr_io_pins;
++	struct regmap		*regmap;
+ };
+ 
+ struct spacemit_pin_mux_config {
+@@ -196,6 +214,28 @@ static int k1_get_io_type(struct udevice *dev, unsigned int selector)
+ 	return -EINVAL;
+ }
+ 
++static unsigned int spacemit_k1_pin_to_io_pd_offset(unsigned int pin)
++{
++	unsigned int offset = 0;
++
++	switch (pin) {
++	case 47 ... 52:
++		offset = IO_PWR_DOMAIN_GPIO3_K1;
++		break;
++	case 75 ... 80:
++		offset = IO_PWR_DOMAIN_GPIO2_Kx;
++		break;
++	case 98 ... 103:
++		offset = IO_PWR_DOMAIN_QSPI_K1;
++		break;
++	case 104 ... 109:
++		offset = IO_PWR_DOMAIN_MMC_Kx;
++		break;
++	}
++
++	return offset;
++}
++
+ /* use IO high level output current as the table */
+ static struct spacemit_pin_drv_strength spacemit_ds_1v8_tbl[4] = {
+ 	{ 0, 11 },
+@@ -400,6 +440,35 @@ static const struct pinconf_param spacemit_pinconf_params[] = {
+ 	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	U32_MAX },
+ };
+ 
++static void spacemit_set_io_power_domain(struct udevice *dev,
++					 unsigned int pin,
++					 unsigned int io_type)
++{
++	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	struct spacemit_pinctrl_data *data;
++	unsigned int offset;
++	u32 val = 0;
++
++	if (!priv->regmap)
++		return;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_io_pd_offset)
++		return;
++
++	offset = data->pin_to_io_pd_offset(pin);
++	if (!offset)
++		return;
++
++	if (io_type == IO_TYPE_1V8)
++		val = IO_PWR_DOMAIN_V18EN;
++
++	regmap_write(priv->regmap, APBC_ASFAR, APBC_ASFAR_AKEY);
++	regmap_write(priv->regmap, APBC_ASSAR, APBC_ASSAR_AKEY);
++
++	writel(val, priv->regs + IO_PWR_DOMAIN_OFFSET + offset);
++}
++
+ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 				unsigned int param, unsigned int argument)
+ {
+@@ -414,6 +483,7 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
+ 	if (!data || !data->pin_to_reg)
+ 		return -EINVAL;
++
+ 	addr = data->pin_to_reg(dev, pin_selector);
+ 	switch (param) {
+ 	case PIN_CONFIG_BIAS_DISABLE:
+@@ -455,10 +525,14 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 			}
+ 			break;
+ 		}
+-		if (!found && argument != PIN_POWER_STATE_1V8) {
++		if (!found && argument != PIN_POWER_STATE_1V8 &&
++		    argument != PIN_POWER_STATE_3V3) {
+ 			dev_err(dev, "Invalid power source (%d)\n", argument);
+ 			return -EINVAL;
+ 		}
++		if (found)
++			spacemit_set_io_power_domain(dev, pin_selector,
++						     priv->io_pins[i].io_type);
+ 		break;
+ 	default:
+ 		return -EOPNOTSUPP;
+@@ -471,6 +545,7 @@ static int spacemit_pinctrl_probe(struct udevice *dev)
  	struct spacemit_pinctrl_data *data;
- 	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
- 	void __iomem *addr;
--	u32 mask = 0;
- 	unsigned int io_type;
- 	u8 ds;
- 	bool found;
-@@ -421,12 +420,12 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 		clrbits_le32(addr, PAD_PULLUP | PAD_PULLDOWN | PAD_PULL_EN);
- 		break;
- 	case PIN_CONFIG_BIAS_PULL_DOWN:
--		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
--		clrsetbits_le32(addr, mask, PAD_PULLDOWN | PAD_PULL_EN);
-+		clrsetbits_le32(addr, PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN,
-+				argument ? PAD_PULLDOWN | PAD_PULL_EN : 0);
- 		break;
- 	case PIN_CONFIG_BIAS_PULL_UP:
--		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
--		clrsetbits_le32(addr, mask, PAD_PULLUP | PAD_PULL_EN);
-+		clrsetbits_le32(addr, PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN,
-+				argument ? PAD_PULLUP | PAD_PULL_EN : 0);
- 		break;
- 	case PIN_CONFIG_DRIVE_STRENGTH:
- 		io_type = IO_TYPE_1V8;
+ 	struct spacemit_pinctrl_priv *priv;
+ 	struct clk_bulk clks;
++	struct ofnode_phandle_args args;
+ 	size_t size;
+ 	int ret;
+ 
+@@ -488,6 +563,19 @@ static int spacemit_pinctrl_probe(struct udevice *dev)
+ 		dev_err(dev, "Fail to allocate memory\n");
+ 		return -ENOMEM;
+ 	}
++	ret = dev_read_phandle_with_args(dev, "spacemit,apbc",
++					 NULL, 0, 0, &args);
++	if (ret) {
++		dev_warn(dev, "no APBC phandle found, disable IO power domain switching\n");
++		priv->regmap = NULL;
++	} else {
++		ret = regmap_init_mem(args.node, &priv->regmap);
++		if (ret) {
++			dev_warn(dev, "failed to get APBC regmap,"
++				 " disable IO power domain switching\n");
++			priv->regmap = NULL;
++		}
++	}
+ 
+ 	ret = clk_get_bulk(dev, &clks);
+ 	if (ret) {
+@@ -515,6 +603,7 @@ static const struct spacemit_pinctrl_data k1_pinctrl_data = {
+ 	.get_pins	= k1_get_pins,
+ 	.get_functions	= k1_get_functions,
+ 	.get_io_type	= k1_get_io_type,
++	.pin_to_io_pd_offset = spacemit_k1_pin_to_io_pd_offset,
+ };
+ 
+ static const struct udevice_id spacemit_pinctrl_ids[] = {
 
 -- 
 2.51.0
