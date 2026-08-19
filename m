@@ -4,112 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B763CC5B572
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBC5C5DF85
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 40C1F808C9;
-	Wed, 19 Aug 2026 03:55:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B962F80DF0;
+	Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5BeNwh7K1EUA; Wed, 19 Aug 2026 03:55:42 +0000 (UTC)
+ id Qjgsn4-_RmL3; Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787111742;
-	bh=ZFutmG7XSG5sRixMuMTht3qRA9qAOunxam0ba5/gBXM=;
+	d=lists.u-boot-project.org; s=default; t=1787111748;
+	bh=kkI7TSX9h09x+T0r/8UTMI/PRVggzQx3pgrUrnHQXso=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SVUYalHvn50qYXzjFydYAAqspdR3tG7Acy9pdeG8y8oMx5qaLRSjBum0xjFscoco2
-	 nZ2QCvzyoS/HE7CaqqYqZtlmVPLZHKjL+aK+4EcFpuAifTdbKurkU8ItGwK5C7qOU8
-	 ErZcoYIhaXCdqfvnGV9FHuijQCDAD7Dpib0c7AvPnKRhBVWLrGqrD9mc2FoQGS5MB0
-	 v0TSIpekbRDr+xA/3XEizrGpoXJ8KlLS4xCj3vJijcRPpC9Y+MONQfddE1WxyUOsqD
-	 k2sEoxF0bdOpcROYoC9ihMV0V0w1cZWHOss2XnXwNrAymp0X2OYm0gBPyWlqXRKd6B
-	 Jjn4pzgvpy46Q==
+	b=CODvg11z+lqjW7yA6Go+FTmh/Fxxh1HAfXhGE6Kas+cv7t7PHbyfKA0SoUZkjpG2m
+	 iNXXQIEYJYJX/m9ny6jmvAYxKaNFy19PWBQX4Sds2RCJDPqYbaYhY07VR+mlrFoHoa
+	 emeiVPNVZeFGvSHb8ixokqDhGcEFyAb4ACImTBb0cTrP+i4JJGJfK8m5vawAEhAebK
+	 lY9AaYqWX0Y/00wxW1UTY59iYdhpEiSrQtPN+NZa2/bInp4hnGIkaknShPy3797UJk
+	 6/bNMqh9ysB/i4c5QreknNfWjygahaUBxO7Q94CyDjaVC4ey6zF1Ai9LWshIsFQLwK
+	 lcR37yunJMyeA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9871980B0A;
-	Wed, 19 Aug 2026 03:55:42 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D80E839E
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 19FB180DE5;
+	Wed, 19 Aug 2026 03:55:48 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5001C1460
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C9C60808C9
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3653E60650
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Es2otVFBMZZF for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 03:55:40 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X4IwXbSHFwxD for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 03:55:46 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::42d; helo=mail-pf1-x42d.google.com;
+ client-ip=2607:f8b0:4864:20::1036; helo=mail-pj1-x1036.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=TPaCHT/5
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1DA578087B
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:39 +0000 (UTC)
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-8485ef63b68so550947b3a.1
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:55:39 -0700 (PDT)
+ header.s=20251104 header.b=F/KkZbMs
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 86A2B60606
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:55:46 +0000 (UTC)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-38759bcd877so822486a91.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111739; x=1787716539;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111745; x=1787716545;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ZFutmG7XSG5sRixMuMTht3qRA9qAOunxam0ba5/gBXM=;
- b=TPaCHT/5Bf52LsdvPbsFZOIdNBvuUk2g0BbRO2FId+atv06svsb0QTTVKSLR2XgJxR
- vqZxTs4tL9p8n8wdabSXfLxEvjPPlcGXcMVTJdhgbtMfuYd9S3BFPo5H17Egb/I6n+hB
- Gro0r3dO6QeWqNTk/BuBqipjC5TFuz0jm/zD1KvaqtpeUzSgbWCj5RB27u7bbUlkBeGM
- kNBK8NXV0dlUIrqMwM855Lm2STaJWsG3Vw9w1mYqqVxmSbu9Ccf9LcVhKrSfEur0Nn8a
- KBVt4JVX/kITAgQ9oqL2+2TUPKyqWJ8BCDFZeVkQkxngMdkw72SeQui1UcCehRuNBsms
- FzCw==
+ bh=kkI7TSX9h09x+T0r/8UTMI/PRVggzQx3pgrUrnHQXso=;
+ b=F/KkZbMsjr1UNG0LCVggUr77t3O/qlI+fqjIhYFGNYPDCQrpobmiwNlf4SCf7nlkDj
+ fBQu9ETbOYo0+AdEEsrMLPLnRj/ghI6FgsLmWiDA7tBQrH0BmGmxFDo6PbAmcqpxAHDp
+ alHW8YZSXTsbWopOe2QDJeC9547I/m9iQNMFRAbE3vCfwx1jMdu8KpLhc9yj2kzRbJmQ
+ 22g5ecPkZwCjf5QcivrgPsSHp0m+iLdVZzCLV1ZppU6ga3mHH2Lq+aaY0y0cnMI3DKtO
+ elrFLy4++ZsvPtgvULBK8yO23jJx5KwcoH0uYqOXjWPjZT+AvG5pCpFVitiMII5yAwCt
+ 9kFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787111739; x=1787716539;
+ d=1e100.net; s=20251104; t=1787111745; x=1787716545;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ZFutmG7XSG5sRixMuMTht3qRA9qAOunxam0ba5/gBXM=;
- b=HZrjcvxpuKtFIoH8+lj8saYCMusFZJRs69q3eVgjzRldTyeiuOc3Gcd1dSez9IyWzk
- Uik2qtESnCkWMy3CC4ycWGH1At/79OXXKY8yPvzf9zVa9mYEyVzKstIG7fyIuYprr/7l
- tOd4RNbpVmZfJ8L9aB8i9hSoGugoO3s1IMW/i093mVFIqW0UjJ0GK+JQrauqPhNzLitI
- +fHkTQ6xi2p4T9jCFMV878x8o8vE+ZYnDjBetSktE/76Z7RyPe+mweaVBO5hrMJz1EEG
- l6l96f0zyCDyXpX9J9G21yMCJRJxXg9XzSk2dwbSPtxshB1pdxWhAWYBoFfuSOnAptVg
- yZ9w==
+ bh=kkI7TSX9h09x+T0r/8UTMI/PRVggzQx3pgrUrnHQXso=;
+ b=MQ0uRv7Ntn1GgDi9QcwtnIja3wvd5augdxkRSvVxWPB0iMTLp6jFW4orjjiKaccD7y
+ ymgnmfh0vY+Gva9L644QZYxM+IUHD5qAsp6iWjayYmAnbyCioDmE7uvMrNJwgqov9t1x
+ Kr3ZwZ/b/V69O5GnRPBSK7CizFPSrJh7WsezoinvxybdzH4s84AaOow82pD35vKCpyup
+ WiSJUtHEdutTNqX7y692JSOzOgmWVkBf+va0vH/qggWTYvu1+MhZAPvtjwCjE5RgD5ub
+ gzGsLXOksNa+gIxIDZzgF+5up/ZfyBYaGt3g64AMdaoLY0n9l73mQlkTWBQSxBI8wQb2
+ uBKQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrwpBtIHQpEROFtv/0q5VAsvna6ohf6NqeIXIqV1o0H9T7J9IxUXRDM6hkl3C1yMt98y/sD50A=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyFB357SOaNEPQXblEyjg9c4dY1hwGFoKgUtnkU/T9dI8PbzZjW
- bTkh1sl3nKSLt9KQa8GOUeh+WczZRuvxJrvAqb+kB74i+ZjuH+sgGxxrqjJxWV/JT9c=
-X-Gm-Gg: AR+sD11SFH94vNGV38+8RKvVtelDmvNJ8SIkGnfW0UxldgwZnuiHdQl5clcTPEQ9XJ7
- isipwPMsskl2CAR9zZ8Iw3/vKhIpHU/F5uYVKc56m2gXZznprrxwMzi3GhmsNqtvshfcb2WGRT+
- CWJ5BWs92GHApNUgnQjmute9TCecBVAnzGpYKBIPJbt1sNw3gEw8b7/YU67CNkWOOBbJlKwi7rs
- SjYUovYQN6F3Rl31nDlD/pdTJumGFYpLMbjvam5WGkF1bvfVJyHWqdW95ovBWoTctRt8KilqeRX
- P/AG62YDzSFdpalweCvqHvlmTYu9ayUiKF/Bw4kC+Ct8o6JrHiumkHRIZXNIPWEFkbdbjXKN3W0
- zodLWH8KgbWFSnNj+GdHYzABlcA0TK3Y0TSu+l3sn7FWMK1DID7y2LOlGijnVOrHYIruAXp2AI3
- 3fs5BEqcIw3Om1EPyhrFSY6JKS7YbLnPkgRWhnIgjfdTdxSXQicjfiaxY4LaHmSYmkQroz7WwWD
- dp4wi2arQkkh9xRlRgrNgA1zN17jmTk8pn0/lMv2aFWIXChv+nalPGl8woZPaW6+ma2gBv5USLd
- aVhaJR8cOPFP4U+Ujab1dQ5PvQ==
-X-Received: by 2002:a05:6a20:3d06:b0:3c3:9c4e:de3a with SMTP id
- adf61e73a8af0-3cd0107c6bamr3704537637.6.1787111739058; 
- Tue, 18 Aug 2026 20:55:39 -0700 (PDT)
+ AHgh+RpxeLfb3dqTeqGZmXHFiBRXRzvfzKtaZZuONI1SJgImc6IvATWUMP3KlLBj/fGjP0+F5hyytmw=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxEYnUIrsj3pqHRh/ajAQzOtfSOK/o6KyviaV5rlyhwzaWoPaIR
+ Bpbpik/aTp6xynbbAxiUSEm6CKMRYX6F29tM4XCdnn0ri60Rpo/rEP+On8kaU6n2nH8=
+X-Gm-Gg: AR+sD10Ar0qwS0/LVFYc6vDvAh9xBrjgPKJC5ufNDt/hz2ocBJdfd4spJzZOtp4AELh
+ rQjJPPOd1GqqsScSDXFkcMe3yldQ5igrfOdCcOHK5nn/poyw5RRCPpyI8yH68uQqqm5JAadhNBR
+ Zz/E6VhEwtBX5Cdtp3hJgPrJhlDGeB+IAmqTH/J1d5u+64ri0ujc+f6WLwx3Dtkv/Ul4sKIPJ3x
+ krieLr5+lxo/G/Q9OXBcx1dWo1kWATxZMXeCiof22zHGs2ow94E+MyOAxNfnd0nK8PiDWxKhcbz
+ 1qPW0wl6QhJbe26zHYamqwQySd31BehnYDCIFwwsn15uiN63k9cB+zQG/drbHC2bH3CoV7F7W8D
+ gX6g4J9DYRhUdTQrffASs3Avcxq8z5LnwHuP1OCUvWh4w0zEj4AfBhu8+RFxxrT7tGeIzxVS1hQ
+ 47itiyocmUAdWOnYxF2MVSwRwOl2MZl6fEDufYPm10WXUT7QcnN2DwGk3lNAYvJWC6pSsoXL90M
+ Cg2PTh2yxO9i/Zz+5SDH7DugcwePj326WXBwFqlJW9RTtqZRCximwbta5HmKSVSt8J1qchiFRyK
+ wb85NnzoPpCZaY7iDAfzwWQ2RQ==
+X-Received: by 2002:a17:90b:3c4d:b0:380:540:d499 with SMTP id
+ 98e67ed59e1d1-39580f04a50mr3333392a91.6.1787111745624; 
+ Tue, 18 Aug 2026 20:55:45 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.55.32
+ a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.55.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 20:55:38 -0700 (PDT)
+ Tue, 18 Aug 2026 20:55:45 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 19 Aug 2026 11:54:43 +0800
-Subject: [PATCH v9 01/19] spacemit: k1: select boot device via config registers
+Date: Wed, 19 Aug 2026 11:54:44 +0800
+Subject: [PATCH v9 02/19] pinctrl: k1: fix pull-up/pull-down configuration
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260819-m4-v9-1-6e66016392b9@riscstar.com>
+Message-Id: <20260819-m4-v9-2-6e66016392b9@riscstar.com>
 References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 In-Reply-To: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -131,7 +131,7 @@ Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, 
  Guodong Xu <guodong@riscstar.com>, Yao Zi <me@ziyao.cc>, 
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Eric Chung <eric.chung@riscstar.com>
+ Eric Chung <eric.chung@riscstar.com>, Yixun Lan <dlan@kenrel.org>
 X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -146,169 +146,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add logic to determine the current boot device by reading the
-SoC's configuration registers, rather than using a hardcoded
-default.
+Fix pull-up/pull-down configuration to honor the argument parameter:
+when argument is non-zero, enable the requested pull direction;
+when argument is zero, clear all pull bits to disable.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-Reviewed-by: Yao Zi <me@ziyao.cc>
+Reviewed-by: Yixun Lan <dlan@kenrel.org>
+
 ---
 v9:
-- Enhance detection on booting from SD card.
-v5:
-- Add blank lines around the switch statement.
-v2:
-- Use FIELD_GET() to parse boot strap mode.
-- Remove comments on hacking. Since the sequence between eMMC
-  and SD device is exchanged in the upstream DTS. So it isn't
-  a hacking any more.
+- Rebase since drop patch "fix drive strength configuration".
+v7:
+- Simplify pull-up/pull-down configuration by using a single
+  clrsetbits_le32() call.
+v6:
+- Fix pull-up/pull-down configuration.
 ---
- board/spacemit/k1/spl.c | 95 ++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 94 insertions(+), 1 deletion(-)
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index d749e21a2d57..b70eed14e6ed 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -13,6 +13,7 @@
- #include <dm/device.h>
- #include <dm/uclass.h>
- #include <i2c.h>
-+#include <linux/bitfield.h>
- #include <linux/ctype.h>
- #include <linux/delay.h>
- #include <log.h>
-@@ -22,6 +23,20 @@
- #include <tlv_eeprom.h>
- #include "tlv_codes.h"
- 
-+/* boot mode configs */
-+#define BOOT_DEV_FLAG_REG	0xd4282d10
-+#define BOOT_PIN_SEL_REG	0xd4282c20
-+
-+#define BOOT_STRAP_MODE_OFFSET	9
-+#define BOOT_STRAP_MODE_MASK	3
-+#define BOOT_STRAP_MODE_EMMC	0
-+#define BOOT_STRAP_MODE_SPI	1
-+#define BOOT_STRAP_MODE_NAND	2
-+#define BOOT_STRAP_MODE_SD	3
-+
-+#define STORAGE_API_P_ADDR	0xc0838498
-+#define SDCARD_API_ENTRY	0xffe0a548
-+
- #define MUX_MODE4		4
- #define EDGE_NONE		BIT(6)
- #define PULL_UP			(6 << 13)       /* bit[15:13] 110 */
-@@ -46,6 +61,17 @@ typedef void (*puts_func_t)(const char *s);
- typedef int (*ddr_init_func_t)(u64 ddr_base, u32 cs_num, u32 data_rate,
- 			       puts_func_t puts);
- 
-+enum board_boot_mode {
-+	BOOT_MODE_NONE = 0,
-+	BOOT_MODE_USB = 0x55a,
-+	BOOT_MODE_EMMC,
-+	BOOT_MODE_NAND,
-+	BOOT_MODE_SPI,
-+	BOOT_MODE_SD,
-+	BOOT_MODE_SHELL = 0x55f,
-+	BOOT_MODE_BOOTSTRAP,
-+};
-+
- struct ddr_cfg {
- 	u32     data_rate;
- 	u32     cs_num;
-@@ -58,6 +84,69 @@ binman_sym_declare(ulong, ddr_fw, size);
- 
- char product_name[I2C_BUF_SIZE] = "k1";
- 
-+u32 read_boot_mode(void)
-+{
-+	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
-+	void __iomem *boot_strap = (void __iomem *)BOOT_PIN_SEL_REG;
-+	void __iomem *storage_api = (void __iomem *)STORAGE_API_P_ADDR;
-+	u32 mode, sel, ret = 0;
-+
-+	mode = readl(storage_api);
-+	if (mode == SDCARD_API_ENTRY)
-+		return BOOT_MODE_SD;
-+
-+	mode = readl(boot_dev);
-+	if (mode == BOOT_MODE_NONE || mode > BOOT_MODE_SD) {
-+		sel = FIELD_GET(BOOT_STRAP_MODE_MASK << BOOT_STRAP_MODE_OFFSET,
-+				readl(boot_strap));
-+		switch (sel) {
-+		case BOOT_STRAP_MODE_EMMC:
-+			mode = BOOT_MODE_EMMC;
-+			break;
-+		case BOOT_STRAP_MODE_NAND:
-+			mode = BOOT_MODE_NAND;
-+			break;
-+		case BOOT_STRAP_MODE_SPI:
-+			mode = BOOT_MODE_SPI;
-+			break;
-+		case BOOT_STRAP_MODE_SD:
-+		default:
-+			mode = BOOT_MODE_SD;
-+			break;
-+		}
-+	}
-+
-+	switch (mode) {
-+	case BOOT_MODE_EMMC:
-+		ret = BOOT_DEVICE_MMC1;
-+		break;
-+	case BOOT_MODE_NAND:
-+		ret = BOOT_DEVICE_NAND;
-+		break;
-+	case BOOT_MODE_SPI:
-+		ret = BOOT_DEVICE_SPI;
-+		break;
-+	case BOOT_MODE_USB:
-+		ret = BOOT_DEVICE_USB;
-+		break;
-+	case BOOT_MODE_SD:
-+		ret = BOOT_DEVICE_MMC2;
-+		break;
-+	default:
-+		ret = BOOT_DEVICE_MMC1;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+void write_boot_mode(u32 mode)
-+{
-+	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
-+
-+	writel(mode, boot_dev);
-+}
-+
- static void i2c_early_init(void)
- {
- 	struct udevice *bus;
-@@ -327,8 +416,12 @@ void nor_early_init(void)
- 
- void board_init_f(ulong dummy)
- {
-+	u32 mode;
- 	int ret;
- 
-+	mode = read_boot_mode();
-+	write_boot_mode(mode);
-+
- 	ret = spl_early_init();
- 	if (ret)
- 		panic("spl_early_init() failed:%d\n", ret);
-@@ -354,7 +447,7 @@ void board_init_f(ulong dummy)
- 
- u32 spl_boot_device(void)
- {
--	return BOOT_DEVICE_SPI;
-+	return read_boot_mode();
- }
- 
- void spl_board_init(void)
+diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+index a6a22eacac7b..9ca4ef7c771e 100644
+--- a/drivers/pinctrl/spacemit/pinctrl-k1.c
++++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+@@ -406,7 +406,6 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 	struct spacemit_pinctrl_data *data;
+ 	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
+ 	void __iomem *addr;
+-	u32 mask = 0;
+ 	unsigned int io_type;
+ 	u8 ds;
+ 	bool found;
+@@ -421,12 +420,12 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 		clrbits_le32(addr, PAD_PULLUP | PAD_PULLDOWN | PAD_PULL_EN);
+ 		break;
+ 	case PIN_CONFIG_BIAS_PULL_DOWN:
+-		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
+-		clrsetbits_le32(addr, mask, PAD_PULLDOWN | PAD_PULL_EN);
++		clrsetbits_le32(addr, PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN,
++				argument ? PAD_PULLDOWN | PAD_PULL_EN : 0);
+ 		break;
+ 	case PIN_CONFIG_BIAS_PULL_UP:
+-		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
+-		clrsetbits_le32(addr, mask, PAD_PULLUP | PAD_PULL_EN);
++		clrsetbits_le32(addr, PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN,
++				argument ? PAD_PULLUP | PAD_PULL_EN : 0);
+ 		break;
+ 	case PIN_CONFIG_DRIVE_STRENGTH:
+ 		io_type = IO_TYPE_1V8;
 
 -- 
 2.51.0
