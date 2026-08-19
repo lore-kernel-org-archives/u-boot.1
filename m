@@ -1,75 +1,78 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7820C5B572
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 07:08:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7FDC5B572
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 07:08:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9D4F440687;
-	Wed, 19 Aug 2026 07:08:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 105F780E8D;
+	Wed, 19 Aug 2026 07:08:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vGIreijb0dur; Wed, 19 Aug 2026 07:08:22 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jzgyI0PIgpPZ; Wed, 19 Aug 2026 07:08:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787123302;
-	bh=NtJgVSsCRowHmJRkTorCjn0uGORE9+DndqVreA5LOzA=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=im5y0ktX4T/+OLNHvYYdP/QdBi0RvUhjB5JfcQJHM6zhz3VlVjOwBSyto254hlw6O
-	 CiB3y8S83mOkzc15aFrxWobLn7j7plQUoHGVsBRsjR1I+5G/CITPQTYVHfI5wh7aEL
-	 I/Bx/kI2v55IuibGkYxGizAHIY1P/W5owVx0mM0L/fvmUDXt+0EKoHSLIHa+hVQhKW
-	 /xm7Enn5I7OFf//86EbTWEw0Vo3P62Zy3g20zc09c6Fbl5DRKb/Qd2ifZjha/W71Db
-	 HV+akCIKIR0M3CxxV9KsJTREmlGG/k8pv+qF6+R6YD/Oc5TQhei0uF5GK7d5mDsfE8
-	 B3CELmCYYCG6A==
+	d=lists.u-boot-project.org; s=default; t=1787123305;
+	bh=pCYEVE0mN/3RFzULpQjoEiiLWREjfNRl8BVc46eS9co=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=htvojOQktvkE2z60LHFldYk6nI1UMd4gx8mumepGs2TrfGjKTv+nblEiq54R51qUS
+	 f0F4zRi9QhCnp4qgMRml/94kobLa/Oq9MVubYyiTjFGPzyXOKjE0wFfqv5TfoedMVF
+	 oCLGAJfz0LrpioaiDD3Bfj2tr3EU02ZHjlBYdoiFBF5R+gFC/Sp5FORG6WQpd1Rsr1
+	 ndIfhQNLjKPlPk/EJo0cXQLlpWD2AfwO1l5IHywALVwOmKJQa/WDz5r8uRoNIUchRz
+	 xE/pp0QKB28+CqJ6J0dU+t1I9Mtike1yNZwXobaKxPETt+LQ/fwELRAQUvSHY+r2tj
+	 mmrM9L3Q05aZQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E787D4065E;
-	Wed, 19 Aug 2026 07:08:21 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5E87B3AC
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 747E780E8E;
+	Wed, 19 Aug 2026 07:08:25 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B2B4829B
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4FF9C4065E
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A49EB40042
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id T6a5ns1zL-z7 for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 07:08:18 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rXGp3KZqjNjw for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 07:08:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
  helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256
- header.s=mail header.b=Je7RtH3+
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=fris.de header.i=@fris.de
+ header.a=rsa-sha256 header.s=mail header.b=TcyyIgyT
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 45155403C5
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:16 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 81AC740026
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:19 +0000 (UTC)
 From: Frieder Schrempf <frieder@fris.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1787123294;
+ t=1787123297;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=NtJgVSsCRowHmJRkTorCjn0uGORE9+DndqVreA5LOzA=;
- b=Je7RtH3+nta79XHvowVNxwfyz+czeY101aHk0vbbBfb3blQY0cH2W/yusQNLqxKPiJ8d43
- NYTL41o16iKbduzefoVsGAOSJITPaPu39xMMhNnR6lNUvs39cBcWisav00Ta2jWwguKc6c
- CvsYh53StttEy4c2avbq233pVTWTP3659z9F8P5+qXNxrNL+gS1Snh4uZscVXX6AAejsPo
- 8RiLXEZe1LZ2wPcCbD2sSvhVCeQWe1eHs6GMsfB3clC2yqp1Rm+DDlIn1TDWBtzXwZef1N
- AjTQtq1vYsEjfgRJq3cGuFRPWHYX0Yz3cSIav0ITxz+AkffSyfOAN8Q1QM09gg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pCYEVE0mN/3RFzULpQjoEiiLWREjfNRl8BVc46eS9co=;
+ b=TcyyIgyTdUzQRJ/Y+jbliMdJRUdXSzyKMf34kWeDrW+eSza7M83HaAUl48FH9hoeBY5A5r
+ Fsa/GgrG6LrIpxTNIbimwQfRZzFm67C0d6TUFDwCqWpC4Xr4PTGdryMXblh6ZT8fdfMrE2
+ UNkZhsnQng8cdjXuCS8d1MxiWPl5P9L2qC1/Ts/o0P3TdghGOrgk1BPNpmISqb8hKDOA/+
+ nbcr1R+70qpYlmeoaMtqZCNfzBI48tSte6RztTP//pKbfITR6E0BpVQzz1zutYDO2a8Uri
+ lnJdDZ0im/DTxFgdWMr3ME9mdM1w3v69lsus+VoLbI5UnjKe+RjU0kUP9PuG4g==
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Shawn Guo <shawn.guo@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-Cc: uboot-imx@nxp.com, Frieder Schrempf <frieder.schrempf@kontron.de>,
- Fabio Estevam <festevam@denx.de>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v2 1/4] ddr: imx: Reload the training firmware for every PHY
- configuration
-Date: Wed, 19 Aug 2026 09:07:52 +0200
-Message-ID: <20260819070758.51350-1-frieder@fris.de>
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: uboot-imx@nxp.com
+Subject: [PATCH v2 4/4] imx: kontron-sl-mx8mm: Stop printing error message on
+ first DDR init
+Date: Wed, 19 Aug 2026 09:07:55 +0200
+Message-ID: <20260819070758.51350-4-frieder@fris.de>
+In-Reply-To: <20260819070758.51350-1-frieder@fris.de>
+References: <20260819070758.51350-1-frieder@fris.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -87,92 +90,28 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-ddr_load_train_firmware() remembers the type of the last loaded firmware
-image in a static variable and returns early if the same type is
-requested again. That is valid within a single ddr_cfg_phy() call, where
-the 1D image is used for several frequency setpoints in a row, but the
-state also survives across calls.
+The first try might fail and we are retrying for smaller DDR sizes
+after that. Don't print an error message to not confuse the users
+of 1GB and 2GB variants.
 
-Boards that probe several DDR configurations call ddr_init() more than
-once. The power up procedure at the beginning of ddr_init() resets the
-DDR PHY, which leaves the image in the PHY memory in an undefined state.
-The second call then skips the loading, starts the PMU on whatever is
-left of it and the training firmware never reports a result. As the PHY
-also stops answering on its APB interface at that point, the boot hangs
-in a register read, which no software timeout can recover from.
-
-On some specific Kontron SL i.MX8MM with 1GB or 2GB DDR, where the first
-init is expected to fail and the second one uses an adjusted
-configuration, this made the boot hang every few cycles.
-
-Move the check into ddr_cfg_phy(), the only caller, so that the loading
-is still skipped for repeated setpoints of one run, but never across
-runs.
-
-Fixes: b614ddb5d335 ("ddr: imx: Save the FW loading if it hasn't changed")
-Assisted-by: Claude:claude-opus-5
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
-Changes in v2:
-* Add missing hunk due to rebase gone wrong
----
- drivers/ddr/imx/phy/ddrphy_train.c | 14 ++++++++++++--
- drivers/ddr/imx/phy/helper.c       |  7 -------
- 2 files changed, 12 insertions(+), 9 deletions(-)
+ board/kontron/sl-mx8mm/spl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ddr/imx/phy/ddrphy_train.c b/drivers/ddr/imx/phy/ddrphy_train.c
-index 1a2d071d6f1..63a6ca800a3 100644
---- a/drivers/ddr/imx/phy/ddrphy_train.c
-+++ b/drivers/ddr/imx/phy/ddrphy_train.c
-@@ -12,6 +12,7 @@ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
- {
- 	struct dram_cfg_param *dram_cfg;
- 	struct dram_fsp_msg *fsp_msg;
-+	int last_fw_type = -1;
- 	unsigned int num;
- 	int i = 0;
- 	int j = 0;
-@@ -33,9 +34,18 @@ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
- 		/* set dram PHY input clocks to desired frequency */
- 		ddrphy_init_set_dfi_clk(fsp_msg->drate);
- 
--		/* load the dram training firmware image */
-+		/*
-+		 * Load the DRAM training firmware image, unless the same image has
-+		 * already been loaded for an earlier frequency setpoint of this run.
-+		 * It must be loaded again for every ddr_cfg_phy() call as the caller
-+		 * resets the PHY before this, which leaves the image in the PHY memory
-+		 * in an undefined state.
-+		 */
- 		dwc_ddrphy_apb_wr(0xd0000, 0x0);
--		ddr_load_train_firmware(fsp_msg->fw_type);
-+		if (fsp_msg->fw_type != last_fw_type) {
-+			ddr_load_train_firmware(fsp_msg->fw_type);
-+			last_fw_type = fsp_msg->fw_type;
-+		}
- 
- 		/* load the frequency set point message block parameter */
- 		dram_cfg = fsp_msg->fsp_cfg;
-diff --git a/drivers/ddr/imx/phy/helper.c b/drivers/ddr/imx/phy/helper.c
-index 147ec9ab061..3c39c89de19 100644
---- a/drivers/ddr/imx/phy/helper.c
-+++ b/drivers/ddr/imx/phy/helper.c
-@@ -50,15 +50,8 @@ void ddr_load_train_firmware(enum fw_type type)
- 	unsigned long imem_start = (unsigned long)_end + fw_offset;
- 	unsigned long dmem_start;
- 	unsigned long imem_len = IMEM_LEN, dmem_len = DMEM_LEN;
--	static enum fw_type last_type = -1;
- 	unsigned long spl_start = 0;
- 
--	/* If FW doesn't change, we can save the loading. */
--	if (last_type == type)
--		return;
--
--	last_type = type;
--
- #ifdef CONFIG_SPL_OF_CONTROL
- 	if (gd->fdt_blob && !fdt_check_header(gd->fdt_blob)) {
- 		imem_start = roundup((unsigned long)_end +
+diff --git a/board/kontron/sl-mx8mm/spl.c b/board/kontron/sl-mx8mm/spl.c
+index a5cdd2ab6d1..ebb883f861a 100644
+--- a/board/kontron/sl-mx8mm/spl.c
++++ b/board/kontron/sl-mx8mm/spl.c
+@@ -77,7 +77,7 @@ static void spl_dram_init(void)
+ 	 * Try the default DDR settings in lpddr4_timing.c to
+ 	 * comply with the Micron 4GB DDR.
+ 	 */
+-	if (!ddr_init(&dram_timing) && check_ram_available(SZ_4G)) {
++	if (!ddr_init_silent_fail(&dram_timing) && check_ram_available(SZ_4G)) {
+ 		size = 4;
+ 	} else {
+ 		/*
 -- 
 2.55.0
 
