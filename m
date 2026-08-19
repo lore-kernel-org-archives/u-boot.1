@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068DBC5DF6D
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 04:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF3DC5DF6D
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 05:28:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BC9BD40670;
-	Wed, 19 Aug 2026 04:53:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 456C740694;
+	Wed, 19 Aug 2026 05:28:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cwlgScq-TvXB; Wed, 19 Aug 2026 04:53:46 +0000 (UTC)
+ id jNner3GQpSpW; Wed, 19 Aug 2026 05:28:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787115226;
-	bh=FgPMMM/RyK48lMbLKs8RGYaZLTSNOiIj/gkiyfSCmoY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787117320;
+	bh=a7I8TqZBm7rZ373LsrihQ/58FYlByoO07At/qpfsdDM=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JoCiy6JqpZ2p9bVjZKOZfHOGskzCfUNULldHPgq+wrQ3IoZKlhb2n965QMX0ZAcpw
-	 iggH3hRD2YPa9SiuaEG3JyUNo53NZn24vEaEg3xstFjBsAsK+81Hg6srhLOlH4+Xs3
-	 BmQEFwj/hadPnVC+q8z3cc9S0hsEQUlhh5sJiXUftqFT6IcaHwXS5eTAfQo5lazp/g
-	 Kkrpq/AIVYsXCYGsFdQCDlvxf28g/ZejW6H1w0BS+K/AoBuKUkk3xr9AenCYd3Ug6m
-	 1NjhFWLWevAB0D4gGgjfR162nC03dpaX/j/v7xzE4lbJrsUl8usGME9oX96kduznhT
-	 /TlvLslAbvEMQ==
+	b=yg4JPyxrs2NC+SM3tPcUgg7lNMxRSy2UhQ6pIn7amsEEDOjSWbC/Amf1UENmipfzV
+	 Mu9SGHTJiLbmi9E9v3KWPw3iQuoGJ8soxsNeZKMFGFwHmc/OEBFJwB4qtqko5LyOk7
+	 2L5WYSh8icTwnjCdBgOSZwAD+6XJBwk1Sr9qHfwsHXme5wFpHQdJCffaZlTlaNY51d
+	 s7oUk6N/v+NPxck3e3zBkE+QeNGLTWLCevICEr2HueqrX/Vpx/DbiLoatJd5YUtphD
+	 Nm7sMWnfgjIKRqZJpuLKey7uawv2HVrhfTUIIgaMfWFyyape9tWPS+LImv2VTXXXUG
+	 m6ABLMbMl6G4g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2A91D40674;
-	Wed, 19 Aug 2026 04:53:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id C057F39E
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 04:53:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3A72D40674;
+	Wed, 19 Aug 2026 05:28:40 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C64D282
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 05:28:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B28A980DE8
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 04:53:44 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E65DF6061F
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 05:28:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0_sXtQZX-eXA for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 04:53:44 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
- envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=VG855OfC
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E2E2F80BB9
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 04:53:43 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hPvNN49L2zMlBx;
- Wed, 19 Aug 2026 06:53:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1787115220;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FgPMMM/RyK48lMbLKs8RGYaZLTSNOiIj/gkiyfSCmoY=;
- b=VG855OfCoMmXMF3VMZpXPsbhPViERXkhneqRpFXsnIUpuFNSdybyO1O0utjr2BOSM4SoBf
- pe2lgGzxSqUJWYLUDpdwZ4LAkn4cKedCQasyHgzGOxh4YBjwJLDqVQJ7SCwWwnIy899uYX
- otnHHnUa3s4zrE2gg3fTgzNiOX6LAEKAcYPFaef1R+a0UL0naqRpvKENdmN9c3gre0YlzP
- aVDpX3lYbYP0AIPSVKeJ8f9FgQjKAOk/A4wCJ/eK1G1XE9LMRpyAebRRrF3nGYaSQ8c8O1
- m9ER2u/8kLK4uO/Cc3Y3LUs2kgKqaqHoO+79m1WgD10CWKsprxQW5A96Q6BYcg==
-Message-ID: <1a8642c2-58c8-45fb-a0b6-2ae91076e790@mailbox.org>
-Date: Tue, 18 Aug 2026 17:39:11 +0200
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tfk6ncQJZ8f4 for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 05:28:34 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=220.128.198.184;
+ helo=atcsqr.andestech.com; envelope-from=tim609@andestech.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=andestech.com
+Received: from Atcsqr.andestech.com (atcsqr.andestech.com [220.128.198.184])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A36D06061C
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 05:28:29 +0000 (UTC)
+Received: from mail.andestech.com (atcpcs54.andestech.com [10.0.1.154])
+ by Atcsqr.andestech.com with ESMTPS id 67J5S72c091875
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 19 Aug 2026 13:28:07 +0800 (+08)
+ (envelope-from tim609@andestech.com)
+Received: from ATCPCS34.andestech.com (10.0.1.134) by atcpcs54.andestech.com
+ (10.0.1.154) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.43; Wed, 19 Aug
+ 2026 13:28:07 +0800
+Received: from swlinux01 (10.0.15.55) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 19 Aug
+ 2026 13:28:07 +0800
+Date: Wed, 19 Aug 2026 13:27:46 +0800
+From: Tim Ouyang <tim609@andestech.com>
+To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+CC: Yao Zi <me@ziyao.cc>, <u-boot@lists.u-boot-project.org>, Tom Rini
+ <trini@konsulko.com>, Leo Liang <leo.liang@sifive.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, <oyst.lnx@gmail.com>
+Subject: Re: [PATCH] iommu: Add RISC-V IOMMU driver
+Message-ID: <3q2w5dsgdii7eeeq5mq5jxempshgw4hagagikmvpigxnnounxd@d5rnytl4gkbu>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+References: <20260803-riscv_iommu-v1-1-793cfa421ab2@oss.tenstorrent.com>
+ <rxsu6crqaqxylns2vw5trz4fzsis5w4j36ovh5u2fp3ajj3k2o@oolpt5ilpoxc>
+ <CAEev2e_=TojrBbrfD0ZTEGJvGS7XUA44ZruOL5NfUPmSHE054A@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: ehci-vf: take the controller index from the device
- tree
-To: Mehmet Fide <mehmet.fide@gmail.com>
-Cc: Mehmet Fide <mehmet.fide@screeningeagle.com>,
- Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
- Stefan Agner <stefan@agner.ch>, Francesco Dolcini <francesco@dolcini.it>,
- u-boot@lists.u-boot-project.org
-References: <20260818151236.2891878-1-mehmet.fide@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260818151236.2891878-1-mehmet.fide@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 767337d224fe41c0843
-X-MBO-RS-META: c1hmrwh5rhqg3yxyyjazh5j36bbjikqi
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAEev2e_=TojrBbrfD0ZTEGJvGS7XUA44ZruOL5NfUPmSHE054A@mail.gmail.com>
+X-Originating-IP: [10.0.15.55]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs54.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 67J5S72c091875
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -102,78 +98,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/18/26 5:12 PM, Mehmet Fide wrote:
-> From: Mehmet Fide <mehmet.fide@screeningeagle.com>
-> 
-> "usb start" dies with a data abort on a Colibri VF50 and on a Colibri
-> VF61, and the watchdog resets the board:
-> 
->    Colibri VFxx # usb start
->    starting USB...
->    Bus usb@40034000: Port not available.
->    data abort
->    ...
->    r4 : 00000003
->    Resetting CPU ...
-> 
-> vf_usb_of_to_plat() takes the controller index from dev_seq(), but the
-> sequence numbers of the two controllers are 2 and 3:
-> 
->    Class     Seq  Probed  Driver    Name
->    usb         2  [   ]   ehci_vf   usb@40034000
->    usb         3  [   ]   ehci_vf   usb@400b4000
-> 
-> uclass_find_next_free_seq() starts numbering above the highest alias of
-> the uclass, and fdtdec_get_alias_highest_id() matches an alias by its
-> name prefix plus trailing digits, so the usbphy0 and usbphy1 aliases of
-> the vf device tree count as "usb" aliases and reserve 0 and 1. The two
-> controllers have no aliases of their own and end up with 2 and 3, past
-> the two entries of phy_bases[] and nc_reg_bases[]. usb_oc_config() then
-> loads a base address from beyond the table and writes to it, which is
-> the abort above. The bounds check that would have caught this only
-> exists in the non-DM ehci_hcd_init().
-> 
-> Follow the fsl,usbphy phandle, as ehci-mx6 does, and map the PHY node
-> to the index of the driver's own table instead of trusting the sequence
-> number, since the alias numbering is what goes wrong here.
-> 
-> Tested on a Colibri VF50 V1.2A on an Iris carrier, U-Boot 2026.07 from
-> NAND: "usb start" now brings up the host controller and enumerates the
-> root hub instead of resetting the board.
-> 
-> Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
-> ---
->   drivers/usb/host/ehci-vf.c | 17 ++++++++++++++++-
->   1 file changed, 16 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-> index 96d1363a76e..32fe05920d0 100644
-> --- a/drivers/usb/host/ehci-vf.c
-> +++ b/drivers/usb/host/ehci-vf.c
-> @@ -221,8 +221,23 @@ static int vf_usb_of_to_plat(struct udevice *dev)
->   	const void *dt_blob = gd->fdt_blob;
->   	int node = dev_of_offset(dev);
->   	const char *mode;
-> +	fdt_addr_t phy_addr;
-> +	ofnode phy_node;
-> +	int i;
->   
-> -	priv->portnr = dev_seq(dev);
-> +	phy_node = ofnode_parse_phandle(dev_ofnode(dev), "fsl,usbphy", 0);
-> +	if (!ofnode_valid(phy_node))
-> +		return -EINVAL;
-> +
-> +	phy_addr = ofnode_get_addr(phy_node);
-> +	for (i = 0; i < ARRAY_SIZE(phy_bases); i++) {
-> +		if (phy_addr == phy_bases[i])
-> +			break;
-> +	}
-> +	if (i == ARRAY_SIZE(phy_bases))
-> +		return -EINVAL;
-> +
-> +	priv->portnr = i;
-Would it be possible to eliminate the priv->portnr and index based PHY 
-handling in favor of parsing the PHY addresses from DT fully, possibly 
-in a follow up patch ?
+On Mon, Aug 17, 2026 at 09:18:23AM -0500, Anirudh Srinivasan wrote:
+>
+> Hi Tim,
+>
+> On Sun, Aug 16, 2026 at 7:20 AM Tim Ouyang <tim609@andestech.com> wrote:
+> >
+> > On Mon, Aug 03, 2026 at 03:06:12PM -0500, Anirudh Srinivasan wrote:
+> > > Adds a basic driver for IOMMUs that conform to the RISC-V IOMMU
+> > > specification. This driver sets up the IOMMU in bare mode so that
+> > > peripherals requiring DMA in U-Boot can function.
+> >
+> > Would you consider adding support for SPL?
+>
+> I don't have an easy way to test this. This will have to be done later.
 
-This fix looks good.
+OK, let’s just move forward with the U-Boot proper part for now.
+
+> > > +#define RISCV_IOMMU_DDTP_TIMEOUT          10000000
+> >
+> > Although the timeout aligns with Linux’s, it may still be too lengthy
+> > for the bootloader stage.
+>
+> What value do you suggest? Seems like none of the other iommu drivers
+> use timeouts, so I'm not sure what to pick.
+
+I think a one-second timeout should be sufficient on real SoCs, while
+three seconds should accommodate slower FPGA implementations.
+--
+Best regards,
+Tim Ouyang
