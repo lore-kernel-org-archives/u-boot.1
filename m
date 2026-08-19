@@ -1,92 +1,108 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D53C5DF87
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 03:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EC4DC5DF8A
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 03:55:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 92BBB80BF0;
-	Thu, 20 Aug 2026 03:55:30 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lMHALk5R0soR; Thu, 20 Aug 2026 03:55:30 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787198130;
-	bh=rGkAYs8r70E3SAfgQh8WJhs7LVhz/yLPW+ADckJ22iU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=VjHxMz1jaJcMxvWvsyq3zwzAk7E8Wwi5AFyJnumuj5QJJK/FAy0Zo/LrZfv4nNIgL
-	 XyOsuYSY6ag3grzcSPxoeYThatx9XCkaOZ+9Mk8BtDf/xR+OJFMqM3TyYzLPHsKdf8
-	 CQwOGaAL9Ue/YjwyTe1BYJ4yDOtzrtj6trSGN2qlLMMI2LruuNFXPwSwCaNCrYcReX
-	 M8Tja2kTN3uNesorhHt7bTAzBRKjyF3tP/so/Ss7NwWYZHhEAKWHxR/JiVivVHmEnq
-	 g9ycwcWYdBdjKQ5JiG3WWQKwhXY/XhngOfSigw6+Bl/wdovBhKOwYxf19oGC3lHadM
-	 h4dYO1S0iR9Tw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 035A680C31;
-	Thu, 20 Aug 2026 03:55:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id F3A1339E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:55:28 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E536460675
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:55:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DB23D606A2;
+	Thu, 20 Aug 2026 03:55:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wo24kanHUgv6 for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 03:55:28 +0000 (UTC)
-X-Greylist: delayed 64282 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 20 Aug 2026 03:55:27 UTC
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=D/PWNbZx
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
- helo=mx.nabladev.com; envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6566B60623
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:55:26 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 13EB511C4E3; Thu, 20 Aug 2026 05:55:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1787198120;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=rGkAYs8r70E3SAfgQh8WJhs7LVhz/yLPW+ADckJ22iU=;
- b=D/PWNbZx5dx7uJsP+NXGwb3G2BMQkyzuVfpVvUxqA5g3Iv/xwEsYF543s/tAVKhT5pyDJs
- c95cKVAJM+6j1aBgfI68dLAgPPg0rL1cn/8F/YyfGLDAZHEyPq6oBFLgCW/4yjCN1Yfj0Q
- Cd4rUNpwxvwukAgSFWMBBuOXZOBNF9AmXNebyXw05ifQeao9UV8DLsBhqPGK0JAj4MPp3R
- aGPhGBRoJpR43sTj4IprvKeO4tjCm4SjDXAkqTf8bhta8dQdfxORw/UsSXz7OrhuLauz6/
- nct8cPsJXHJtqwfpw322vxocq29ubAMzEfQBLREMmSQvp6BSOj9yKbqltC4ZlQ==
-Message-ID: <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
-Date: Wed, 19 Aug 2026 14:47:31 +0200
+ id KH9VhUhygb2g; Thu, 20 Aug 2026 03:55:45 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787198145;
+	bh=c/axpfusuUqpRhU+ByCtZl3DhyIpCN2/ddqLKt9kCTY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=N8kWRYhoPOqqnjIdeaLdeKPSOPiGZTsqrqIIRIxDV+kRFiQqvbnl+lvtXACu+v4LR
+	 2pfSRVQ5GTH2Udv071ZQcvimb4msQeAu7y/DLmlCfpyXCJm3ZlKrahZWj5MsD0rY4K
+	 4nvWwQQ3p5dTcpQW50N6VzaJbDiIFppKBe2jh3WcLMLux+T5FdzRQ0LgLdgUiHCLak
+	 Ngc9/4ki2OWPlBTw+j4BzZugx8aqWvUQN23NdpueDXit4kWglClN0Tuz/QhrS+kl2y
+	 ofiOFWrSesxlhyofenUbO2ZQarWS+AXnW8GyVANkv6gmiFP5XWK6mY/n6MT5I90x5G
+	 0eVRPJMBPXRMg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 57F0560623;
+	Thu, 20 Aug 2026 03:55:45 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E90592FD
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:55:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id DAA9A8096A
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:55:43 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CGJTKQqnSL46 for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 03:55:43 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=IO5XykSN; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=Dl/gv1QP
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 34C7080934
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:55:42 +0000 (UTC)
+Received: from smtp2.mailbox.org (unknown [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4hQV3075f8zMlFt;
+ Thu, 20 Aug 2026 05:55:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787198141;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=c/axpfusuUqpRhU+ByCtZl3DhyIpCN2/ddqLKt9kCTY=;
+ b=IO5XykSNRcOz4Xbjg/TelMqiPXnjYi35LeQQBXL0ccSUbli9XeZjAVC0EKc5mVhHwt3pFU
+ QYGjrBi94/Qhx3tbz08hNXtv5uL9m6qETDJwQ32LBhk78m28q5Wj2R0d1V7OfmoJuX+w65
+ u6OxuVMJs+gE+OtQddicO6eZ2CZBNey0ndP8tBUGziyZ1Q2hg1fHnJixiyzBFRdnJt2l93
+ Zr3tOi4ho1XHmyHZ/GRQ98CCpQnplGqYjG+ptew1yWD+SwkDkqLeVPB/t2JsjlAF3XNAif
+ pfsb/TD1ujjK3RKZko4IJXS3XhTVeEeLkwmOGPs4SIbuPapbu5klMKzw29e+2w==
+Message-ID: <332c309a-d418-4b18-a370-9ed83437d947@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787198139;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=c/axpfusuUqpRhU+ByCtZl3DhyIpCN2/ddqLKt9kCTY=;
+ b=Dl/gv1QPE7h+0foPzPbrj5blVREH69V6iyFP3u3pAD9pJJxKdg8vEtaaTtXIaEwIYN1mvT
+ cTBDhkhACQeQXlibRG4sAjSLsvOOFGbh6aX8yZAIBlRsbvfOFaLGx4GpQ/NC3n2a/DQDBD
+ WkBcajEZxgWDr6KNa2FVTnXCu3EkhFO9Ffd9VbmUecsT2mNBDHjRj5FARf/VzuZwVefJuw
+ 9wFCp/xyrmtw2QbebhzKCOYsSkkFbY44PdOK83ZyTD0utLzN/m/itxUcSYyO86pniPlFKG
+ zVnLgmIQFFMGmGeRjJ6bTUlq+N/5Q2zL7qwybypUG6aKUjJsB/0JzNj4fGbpAw==
+Date: Wed, 19 Aug 2026 21:50:15 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
- failure
-To: Frieder Schrempf <frieder.schrempf@kontron.de>,
- Frieder Schrempf <frieder@fris.de>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Cc: uboot-imx@nxp.com, Simona Toaca <simona.toaca@nxp.com>,
- Viorel Suman <viorel.suman@nxp.com>
-References: <20260819070758.51350-1-frieder@fris.de>
- <20260819070758.51350-3-frieder@fris.de>
- <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
- <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
+Subject: Re: [PATCH 3/3] usb: ehci-vf: take the register bases from the device
+ tree
+To: Mehmet Fide <mehmet.fide@gmail.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ Mehmet Fide <mehmet.fide@screeningeagle.com>
+References: <20260819093705.4143509-1-mehmet.fide@gmail.com>
+ <20260819093705.4143509-4-mehmet.fide@gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260819093705.4143509-4-mehmet.fide@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-META: io578wgg1c6x3sd9djiq44drkfyd4e94
+X-MBO-RS-ID: 38c568840a00a9569e9
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -100,21 +116,17 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/19/26 12:10 PM, Frieder Schrempf wrote:
-> On 19.08.26 12:04, Marek Vasut wrote:
->> On 8/19/26 9:07 AM, Frieder Schrempf wrote:
->>> From: Frieder Schrempf <frieder.schrempf@kontron.de>
->>>
->>> In some cases we need to call ddr_init() multiple times to try
->>> different configurations.
->>
->> What different configurations ? Details please ?
-> 
-> The detection of different DDR types/sizes on our SoMs has always been
-> based on trying the init and seeing if it succeeds, falling back to the
-> smaller sizes on failure. See here [1].
-Could you maybe bring the interface up in some minimal 400 MTps or 100 
-MTps configuration and then read out the MR ID registers from the DRAM 
-to discern which DRAM configuration is present on your SoM? This would 
-be the ideal generic way of doing this, and it would be reliable since 
-the IDs are stable and surely indicate which DRAM chip and how big it is.
+On 8/19/26 11:37 AM, Mehmet Fide wrote:
+
+[...]
+
+> +	misc_off = fdtdec_lookup_phandle(blob, offset, "fsl,usbmisc");
+
+Please avoid fdtdec_*() functions if at all possible.
+
+Either use dev_read_addr() or a variant thereof, or , a variant of 
+of_get_address() .
+
+> +	if (misc_off < 0)
+> +		return -EINVAL;
+[...]
