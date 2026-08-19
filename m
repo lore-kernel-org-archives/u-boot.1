@@ -1,115 +1,115 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83784C5DF6D
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:57:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 904DDC5DF6D
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 03:57:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 48591406B3;
-	Wed, 19 Aug 2026 03:57:26 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1Ije_alea7Yf; Wed, 19 Aug 2026 03:57:25 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787111845;
-	bh=YZJkJAnxxIXxytAYbNONjfciX0tqSU1TJti69624ddw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=jq7h5aaVdmm0WJ6+l0ZlegIv9xrODwzRaK34Yd1NNhcYni3KpHinwxZAeKz/W4mrS
-	 E967WN6mHcGGye8NEx9Tn2VMU9uYs+4WfaJUe3JdPrs/xs21kv9DQZ075zgzFgELbP
-	 Q2TI/hupBkNaJA/10VKv4S3aveiaTDdPSuQWS0T7IWIjfM0PBqGTFT2vocb3SPQx/f
-	 gqMTRdlOyM1LrCeqjhKBPWu1J/NoGT8+7m/382Gdx5hNyMv4qWn5vXkQTZWzmxJESd
-	 koSaz0TiK2RztYMOdnZTHvTxIpTI0YvmM3Ra5ODXdgUlHA7U0QKNrjNQXLDflytc18
-	 z7N4a7bAJnVZA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 877404066D;
-	Wed, 19 Aug 2026 03:57:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 990DD1395
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:57:23 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 96B1980E66
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:57:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 36832808C9;
+	Wed, 19 Aug 2026 03:57:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MWwEoZPuIkER for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 03:57:23 +0000 (UTC)
+ id utb5Uxv3hKd5; Wed, 19 Aug 2026 03:57:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787111850;
+	bh=i/g14dlRUw+v2tpwpdNveaA4tyvugJDl5xjyjAgeFng=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=j7eTh1C9gad4Wxg0gnyRQoDLd5rpwWFkEbyOzM+0B4Ou3vN8Zxpf8u6zLSMZZcRjl
+	 hJeicyvyM8DhsMiY3xiL1mJOUhUGd/+pksUs5iNo5ZApW+du1+69HIe/mprdqvRAf4
+	 DT3kSGB7bycSYOhjuqb4rD/pmebsk1xR5XLcKXsbsuz3lDFuffEhwKjnsSQW+jviVZ
+	 ezGU9h3H0s8IGQYIu28i6Tu4k1f40iWLqXBP3hWGPX+h+yHjO8z5IjzK6qhOH6NjHA
+	 7c5voPqHhbwJv738x2JiQMbK1bQSKK64CZNymIGWf6UFKVQ1t81WV6A3hU2kZthkMr
+	 eWsapFsP0KMbw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9C5C480C31;
+	Wed, 19 Aug 2026 03:57:30 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4FE2223F
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:57:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4D6A880C31
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:57:30 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id x_hSojCABWoa for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 03:57:29 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::52e; helo=mail-pg1-x52e.google.com;
+ client-ip=2607:f8b0:4864:20::534; helo=mail-pg1-x534.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=t9BvV2WQ
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EA1BD80C31
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:57:22 +0000 (UTC)
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-cb5b8572b70so551786a12.2
- for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:57:22 -0700 (PDT)
+ header.s=20251104 header.b=acO14jhs
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id BB36F808C9
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 03:57:29 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-cb5b8572b70so551856a12.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 18 Aug 2026 20:57:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111842; x=1787716642;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787111849; x=1787716649;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=YZJkJAnxxIXxytAYbNONjfciX0tqSU1TJti69624ddw=;
- b=t9BvV2WQR4PZykHaCm8zvfwbUKsNpwmln0Ph2Qy6MT2JWPyGWmrf3Q3MznB76HZN/p
- kXa7/yG5z6EoomcMbpD0Z9SbirYsFs0bivEbGGC3vz3oe4W62SxoQIUJi/fx4Ysj2TI/
- Je10tBztP0xCvlSZl1xwIwG1bwJTbxdgSi6iqdylPqa7JXLN7K6G6dp5NN/33Yz2NT42
- JTX2RY95EZeATt7i3dhFKcrUHt+ebvN3VVFSQowdzXW2uDn7K8C0NaMwdh1SlvljamkG
- UTVz/n2gX9vl+7w935MPNLS+jVUPOS64OfQqYr+QrQlEaTkeV7U0FhOxOnCzoJnPk81r
- OYrQ==
+ bh=i/g14dlRUw+v2tpwpdNveaA4tyvugJDl5xjyjAgeFng=;
+ b=acO14jhss0k7oZ17sNL/nQyyC1dutHAcv9WKTxz2f+d1fJVfyj8W501U14kcoyaP1j
+ lz/AnE9/ZBqMwuAzTF8pny4aWzvX8IsZKPP5HqGqfdbf5rR5Y7ekGd5QG2F17JBP7hqh
+ E8q/U/PCTxVShzdi9diQVNO8GPqynK58Qzc4rU8I/R8hn92qG5lBmkMfKD2b8Ov8qUbA
+ ssybK0BfWjURj0uJBlS/ue73VgS5pKmgRtMleqgZnH8+rOALaxt2V5O2ZlTGHeuRT/1Z
+ 9OBu172eJ7AXWQz8qC9IXaw1DXSrAc9q05nqtGs5AzwrOVp2xTq8FmjhwdcYpXWwTqDy
+ IGeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787111842; x=1787716642;
+ d=1e100.net; s=20251104; t=1787111849; x=1787716649;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YZJkJAnxxIXxytAYbNONjfciX0tqSU1TJti69624ddw=;
- b=dKPJTqgxUv1PhYTT6iu7HjhYgmKc2Z7de4EdBYwmYbbJGhUw2Uc2VatsAgI6EqIIVN
- 45nzYN4dWUWSRnhnDyZL8X51C6uEpqpGGEzpOxJxSevWemAAH0wRrLCZ182mDhj7yE2U
- pf3fCTKOCDlhi+Cn9apcULBzL9MJBA9zBoe/zFrdDjVjgt09auFRYqy7ls2iYs9zZwRl
- +pkbLBg0Ijq36Uvo2trV1nT3oxxVP3+84Uw3yP9N0ydwJyoTKIKlS1VtxWeyf6t8RHCk
- nT6QOMWNbyfngYz0yJc461GNhg7nHX0k8OQYgobbhNgq3pJUrIoXzIyKnc9ZufWlGMhl
- qFfw==
+ bh=i/g14dlRUw+v2tpwpdNveaA4tyvugJDl5xjyjAgeFng=;
+ b=jBxLA360MfJZ19X3iVkBK/AdBXMuhpl73nVbbQrRUmXKULgU848+/AwBSJe2jYA5D9
+ PhAbgu+3LmjPWFm8gqOHYfM1nSZcSVmgD3xWzVAVBOxsZSSii8DWJruNaVODzhc/+ImK
+ mRuTjPNON4E27JQfG+bFF9bGP00E+pv/Ztys9blzfy0IPTPXBSJcqHVmJBv306Vktovq
+ Kr0z0Yp5QEfo7qxEHzgyTxCx2a+pXQbvQXqraADrdKHSCG61Agozyk/bRL0SD+AAov3O
+ DlAcnSUdu69oKQuBGdy/WAowZqcwwnSvw/wGP3EBLJ9xJ4jWKk3/gqGtblE+RCVu47dG
+ XLOQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpXSDzOsZV+Mb97cqh0oXs+OenqfDtDJ/qPQNdzJPAVglcS4hxIX79M8bCXoZwnV8daebS3S3Q=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YzzpqW4t142mfXUvk9HihrVrJmiRLgGbtx96DavoDpZGfLkN4nB
- q0SnEDODG5+Tdm90cNSGPtVpiemSv7WiGEFAHwgU2CbwE3n7KTK6n1IZUNxZTRRlvFI=
-X-Gm-Gg: AR+sD12zr5diC/jyhyfRd+60Dg1pTIb22pnQezz9yarG6IL3nM6f6cgpUhwDlwJ1hT2
- G8FvJgtoeFBNSSo19JAbTBiufOcFACIyxJOvP2TuXD81r/T1LJFOi85v52mvmavbqDzClRMqeSn
- vVg05Y2lDHEz7WWEsQzHJ3TmvhP23Clw0pJEmYPG4fUZJ4WypKgRqs7Kss2dYEPOy6Cqw4eFbwV
- T/IjUmpTLuqVrO7qabXJfGqq3ajlCavuedcA43VMogKCPhiXgmvI3f5ELwt+O+D2DTK1gEZhLA/
- T/Gnu1SeGPrIiRExbS8jawqEDmaHVJWzEfUZkvpeaFhZhwdmjjLlVfngUXus64tKerBq18I5lV9
- 0/FEI1YTg2j+9qGZR4qa0g13LE5G1mXVIg+XbcaahLyrDWtn7yqPH4nj2ydoaGabRqClHzl/jk0
- wraZf+dJazlwA8+PuTmYUOSoR0MM56TCmGtwBbsjDREmboeto6y8NoH6Bj3T6LxMYsVB5Fr5npJ
- ysdlb4NBlJk1Iooh7fn2hSRzl3f5Pxe9uavMO4nHgpxAAVuTvJZYFfNmkwY6APqknCyjgdDCwDU
- BIv7HuGN/JzwUbKW8L97JD+TYrM/bNq83H5cNw==
-X-Received: by 2002:a05:6a21:99a3:b0:3cc:faf3:331a with SMTP id
- adf61e73a8af0-3cd011b5342mr3216297637.10.1787111842215; 
- Tue, 18 Aug 2026 20:57:22 -0700 (PDT)
+ AHgh+RpmVsTNdX00bcuEYp1YL5rvG8oxRLtXZw1KhiYTzb+ukGops3SfJOtx/DX9g2/2S2+eu78dOsg=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YwrVWCH6MPrXess376XhB0SobVdCLSJSKRp7rTOSyRLRWMXREng
+ JvUAbbXu5DtZuBCIWCb1HeOvXmDcVpCUCt/AHfnUGRjMcTwLq4Z2oIp8GmgBAYDrdzU=
+X-Gm-Gg: AR+sD10e0ZVrNWXqmxy7PTfUqyVwOVGTIu5+XC4gnp7N//3D/tPeLZAnbt8+KbyehuD
+ mCBKJlRyHOTJz+kvSECcXS7Mx+rsJTb9gBgPDapBMfL+rGRXWqFcqA9LOIpwy1P8PbJe+Kpm9LZ
+ rIflZvFfZI5aWl0PTN7Zmqvzr4G7xsIlTZUbA6qGBFljPloHmR5Vk0zlCOFd2ixXrcJPWFZJZ1x
+ kiY9D9YJ3qx79Njq68hclW/eSG8fYzhyuB8/HPEAH5PZgZDTcJzreGQN1pDjjGBnEBzzjyZvA9d
+ rNXgJZQD+l80VbpU+Fhy98od3chzIVoatlhGvHEVSnwTpVxmyvSCLl5/56ET5D2cQCzH063kFGY
+ FC1rOfv/IML50f1QcSNXmkXtMPt/7xwXkkBssuBt4AA/T+wmwFTWnFcLwIQypk/c2cipKmKWLcq
+ xtSErFYCnYan81J7sEnwg7WLYCtSdO7oRDVUqD1eE2Qg6pWuDvHlFX3y+wGuGzZwG04q7Lo3w6Z
+ dT3C+Z8BRERF6/rKhx9Ecj2OjRU8XSqiwPi9iJVeUcMbdBGunAKxcPJTXStCcxKrAa8C7ceLmOL
+ BqCIp4rfc8eK2/BN+WeoVHy8kQ==
+X-Received: by 2002:a05:6a20:2446:b0:3cc:22bb:8911 with SMTP id
+ adf61e73a8af0-3cd00e65097mr3078543637.6.1787111848993; 
+ Tue, 18 Aug 2026 20:57:28 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.57.15
+ a92af1059eb24-1416ad53874sm2912408c88.4.2026.08.18.20.57.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 20:57:21 -0700 (PDT)
+ Tue, 18 Aug 2026 20:57:28 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 19 Aug 2026 11:54:57 +0800
-Subject: [PATCH v9 15/19] dts: k1: enable mmc devices in SPL
+Date: Wed, 19 Aug 2026 11:54:58 +0800
+Subject: [PATCH v9 16/19] configs: k1: enable SD and eMMC support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260819-m4-v9-15-6e66016392b9@riscstar.com>
+Message-Id: <20260819-m4-v9-16-6e66016392b9@riscstar.com>
 References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 In-Reply-To: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -146,244 +146,82 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Enable eMMC and SD device nodes in SPL stage. And set the
-bus frequency for mmc device nodes.
-
-Remove the redundant device nodes that are delcared in upstream
-DTS files.
+Enable high-speed MMC modes.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
----
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  12 ++-
- arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 136 +++---------------------------
- 2 files changed, 21 insertions(+), 127 deletions(-)
 
-diff --git a/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi b/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-index 7f9443d69510..3077cdee55d7 100644
---- a/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-+++ b/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-@@ -50,7 +50,6 @@
- 
- &i2c2 {
- 	bootph-pre-ram;
--	resets = <&syscon_apbc RESET_TWSI2>;
- 
- 	eeprom@50 {
- 		bootph-pre-ram;
-@@ -65,7 +64,6 @@
-  */
- &i2c8 {
- 	bootph-pre-ram;
--	resets = <&syscon_apbc RESET_TWSI8>;
- 
- 	pmic@41 {
- 		bootph-pre-ram;
-@@ -89,6 +87,16 @@
- 	};
- };
- 
-+&emmc {
-+	bootph-pre-ram;
-+	max-frequency = <204800000>;
-+};
-+
-+&sdhci0 {
-+	bootph-pre-ram;
-+	max-frequency = <204800000>;
-+};
-+
- &binman {
- 	u-boot-spl-ddr {
- 		type = "section";
-diff --git a/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi b/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
-index 8a9a2a09de99..d6299c96949d 100644
---- a/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
-+++ b/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
-@@ -76,42 +76,15 @@
- 
- &i2c2 {
- 	bootph-pre-ram;
--	status = "okay";
--	pinctrl-0 = <&i2c2_0_cfg>;
--	pinctrl-names = "default";
--	resets = <&syscon_apbc RESET_TWSI2>;
- 
- 	eeprom@50 {
- 		bootph-pre-ram;
- 		status = "okay";
--		compatible = "atmel,24c02";
--		reg = <0x50>;
--		vcc-supply = <&buck3_1v8>; /* EEPROM_VCC1V8 */
--		pagesize = <16>;
--		read-only;
--		size = <256>;
--
--		nvmem-layout {
--			compatible = "onie,tlv-layout";
--
--			mac-address {
--				#nvmem-cell-cells = <1>;
--			};
--
--			num-macs {
--			};
--
--			serial-number {
--			};
--		};
- 	};
- };
- 
- &i2c8 {
- 	bootph-pre-ram;
--	pinctrl-0 = <&i2c8_cfg>;
--	pinctrl-names = "default";
--	resets = <&syscon_apbc RESET_TWSI8>;
- 	status = "okay";
- 
- 	pmic@41 {
-@@ -125,130 +98,43 @@
- 			buck1 {
- 				bootph-pre-ram;
- 				regulator-name = "vdd_core";
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3450000>;
--				regulator-ramp-delay = <5000>;
--				regulator-always-on;
--			};
--
--			buck2 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3450000>;
--				regulator-ramp-delay = <5000>;
--				regulator-always-on;
- 			};
- 
- 			buck3_1v8: buck3 {
- 				bootph-pre-ram;
- 				regulator-name = "vdd_1v8";
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <1800000>;
--				regulator-ramp-delay = <5000>;
--				regulator-always-on;
--			};
--
--			buck4 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3300000>;
--				regulator-ramp-delay = <5000>;
--				regulator-always-on;
--			};
--
--			buck5 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3450000>;
--				regulator-ramp-delay = <5000>;
--				regulator-always-on;
--			};
--
--			buck6 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3450000>;
--				regulator-ramp-delay = <5000>;
--				regulator-always-on;
- 			};
- 
- 			aldo1 {
- 				bootph-pre-ram;
- 				regulator-name = "vdd_1v8_mmc";
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-boot-on;
--			};
--
--			aldo2 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			aldo3 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
- 			};
- 
--			aldo4 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			dldo1 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-boot-on;
--			};
--
--			dldo2 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			dldo3 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			dldo4 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-always-on;
--			};
--
--			dldo5 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			dldo6 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-always-on;
--			};
--
--			dldo7 {
--				regulator-min-microvolt = <500000>;
--				regulator-max-microvolt = <3400000>;
--			};
- 		};
- 	};
- };
- 
- &qspi {
- 	bootph-pre-ram;
--	pinctrl-names = "default";
--	pinctrl-0 = <&qspi_cfg>;
- 	status = "okay";
- 
- 	flash@0 {
- 		bootph-pre-ram;
--		compatible = "jedec,spi-nor";
--		reg = <0>;
--		spi-max-frequency = <26500000>;
--		m25p,fast-read;
--		broken-flash-reset;
- 		status = "okay";
- 	};
- };
- 
-+&emmc {
-+	bootph-pre-ram;
-+	max-frequency = <204800000>;
-+};
-+
-+&sdhci0 {
-+	bootph-pre-ram;
-+	cd-gpios = <&gpio K1_GPIO(80) (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+	max-frequency = <204800000>;
-+};
-+
- &binman {
- 	u-boot-spl-ddr {
- 		type = "section";
+---
+v7:
+- Remove the change on MAINTAINERS.
+- Force DM to use alias by CONFIG_DM_SEQ_ALIAS. Since the sequence
+  of mmc devices in DTS are inverted by alias.
+v5:
+- Remove ADMA support since it depends on CMD23 support.
+- Enable PINCONF support for related power source setting.
+v2:
+- Enable ADMA support.
+- Enable SYSCON support.
+---
+ configs/spacemit_k1_defconfig | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
+index 0604c2feefc1..5f9923c7f470 100644
+--- a/configs/spacemit_k1_defconfig
++++ b/configs/spacemit_k1_defconfig
+@@ -23,6 +23,7 @@ CONFIG_DEBUG_UART_BASE=0xd4017000
+ CONFIG_DEBUG_UART_CLOCK=14700000
+ CONFIG_TARGET_SPACEMIT_K1=y
+ CONFIG_ARCH_RV64I=y
++CONFIG_RISCV_ISA_ZICBOM=y
+ CONFIG_RISCV_SMODE=y
+ CONFIG_SPL_RISCV_MMODE=y
+ # CONFIG_SPL_SMP is not set
+@@ -48,6 +49,7 @@ CONFIG_SPL_CMD_TLV_EEPROM=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SPL_REGMAP=y
++CONFIG_SYSCON=y
+ CONFIG_SPL_SYSCON=y
+ CONFIG_CLK=y
+ CONFIG_CLK_CCF=y
+@@ -61,6 +63,7 @@ CONFIG_MISC=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_SPL_I2C_EEPROM=y
+ CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
+ CONFIG_PINCTRL_SPACEMIT_K1=y
+ CONFIG_GPIO=y
+ CONFIG_DM_GPIO=y
+@@ -87,9 +90,28 @@ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_SPI_MEM=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x000a0000
+ CONFIG_CMD_SPI=y
++CONFIG_DM_SEQ_ALIAS=y
++CONFIG_MMC=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SPACEMIT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x4
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
++CONFIG_EFI_PARTITION=y
+ CONFIG_SPL_SPI=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SPL_SPI_FLASH_TINY=y
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
 
 -- 
 2.51.0
