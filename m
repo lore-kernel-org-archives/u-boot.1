@@ -4,79 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC903C5DF6D
-	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 07:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F4D8C5DF6D
+	for <u-boot@archiver.kernel.org>; Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8739440661;
-	Wed, 19 Aug 2026 07:08:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ABA984058C;
+	Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nCZrO7DqXkGu; Wed, 19 Aug 2026 07:08:23 +0000 (UTC)
+ id mark4V3Athav; Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787123303;
-	bh=9kR5aH5UduGLke8hEoV2Z43VVVgiKxNy03va90hrPw4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787129636;
+	bh=aHQWZv5bo1LFPaxWf/ZPdcIi4VT8g3Y+pKJsI/ptfFM=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DqUYfOH2//QCXY6f1FWGzzYRc8HyJrBizkNv8BvdyVc86FzLUUZcuq2ypwuVtn/OV
-	 po8hRjZ0e99o/ngX9N4ccBIG9LtoKWgCB20QjL4pgJMFKHLni8hFrgr+nkmedq7A/W
-	 qhtyh7OAdng3+XaO9BjlLWOXCbMTJ80QhAjUZFlm0m6Kc7mVScPN3/e5KLH4MWW+Vm
-	 TnVqPuHIr58uKP6EatLZJnMwv189dgpe8u8xI3xjH7IJSamqSW74ytU5eQq2RtoSi5
-	 gkcHT/l4KORhys6/6iCgO+2G7JGXiq0K1f/+01P/9U0MAFaoDMk6HnYEpX7w1n9wvb
-	 d84sy4ouD++Dw==
+	b=ZggX/eXzOGuWJNwI3XE/R/X60gbvoctnKFXO/6ycB6hyLVzai+HbE6fCW5KfwEWKU
+	 3MHkc97NBJ1S29dlqk1Cg2Vd/cp6Ax5AUQpQzcNFh0s0HqAvJf2iHS5bKu7qcYxXK8
+	 8fWf9XVX0VGatSLlDbYgh0VwaFg0UWTZMwS56oA6A/KJNQ1Je52UuW8YxeaeWnIg66
+	 1nIdh7oTyQT6TnV3fQnYAVnlXxDwp4HG1PU8N+jSA+H0iLEgapcl0yIqnQqTqmvcD8
+	 Gw+1EqT7E4LHNZYWK5JdDzPkEwsIv+kY4+30DLTNzm90cvzE/JZm5zSVbSd8AYKsg3
+	 +V4xjezgLEelg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 99641406DB;
-	Wed, 19 Aug 2026 07:08:23 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8D7D83AC
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 253E440633;
+	Wed, 19 Aug 2026 08:53:56 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 02FF32FD
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 73BFF80E5D
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E8A4580CBF
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cItHsLCC1r5e for <u-boot@lists.u-boot-project.org>;
- Wed, 19 Aug 2026 07:08:18 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
- helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=fris.de
+ id CrwESSztzf6p for <u-boot@lists.u-boot-project.org>;
+ Wed, 19 Aug 2026 08:53:54 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=linusw@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256
- header.s=mail header.b=SzqzusjG
-Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9A94E80E5C
- for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 07:08:18 +0000 (UTC)
-From: Frieder Schrempf <frieder@fris.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1787123296;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9kR5aH5UduGLke8hEoV2Z43VVVgiKxNy03va90hrPw4=;
- b=SzqzusjGBOE/+CDTg0Lr+X7xSfLogmCor6fj9Ms/snWLqG7IJKwg2iGnP9BPB3o2KVbhaR
- IvRgG+Dag3z7RJPal5I8avOtuVMrYwqigTmBjNAgQW0ZuzhgRCUJXzKopg9y7KtJJkmnZ1
- J7FPlhxJzpnKhM2gAATVPpIdp94OLdiifRinHncS+gSYxD7QFKgjv9Wk8vDYoLqVnm65su
- SqCRaOREgSxhOmNELDBx/M9q6iJW0vvZW5v4bucxvAIcGaeO+ptSQx8cfrl6jo1SkuNAi4
- P7bxpW6MbGDoso1EuY2xgUelGLSHtOMawU1f/i6+zRZwIIuVPzWV0C/cOHWrCw==
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Cc: uboot-imx@nxp.com, Frieder Schrempf <frieder.schrempf@kontron.de>,
- Marek Vasut <marex@nabladev.com>, Simona Toaca <simona.toaca@nxp.com>,
- Viorel Suman <viorel.suman@nxp.com>
-Subject: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
- failure
-Date: Wed, 19 Aug 2026 09:07:54 +0200
-Message-ID: <20260819070758.51350-3-frieder@fris.de>
-In-Reply-To: <20260819070758.51350-1-frieder@fris.de>
-References: <20260819070758.51350-1-frieder@fris.de>
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=Dn0UN71T
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3BE1780C6C
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:53 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 4A92C4372B
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F8671F00A3E
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 08:53:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787129633;
+ bh=aHQWZv5bo1LFPaxWf/ZPdcIi4VT8g3Y+pKJsI/ptfFM=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc;
+ b=Dn0UN71Tr88EWexIgrNjEvFwU8wykZ2NUq/ZZ+sp1nkwlUxnRt/AkjBY2of/duGuA
+ a1uqngZ2+NNf970mgpE7mZmdqlY6zX4b2LFuYGCn1QanVLhsmILjDR//2BsO4SIBtc
+ w8cvmIT+0pGk8R7lfoI2PQ4Ls1DsglspZOUf8zujgD78Pr3ary5nWHJhUmzY7si+is
+ mQZJ+xOL5NZUJFEmwlcgVqV/Jfi2+0wbjp6jGKZtKemKnanYWOf1G79nNPLeXCtgiJ
+ LJI1cuqJL9WU4s2sitmdrSXifLGueNkpmUmc3o03rTyEzhIJifMSuylU7qAqpw3rqx
+ 3qD7dbyVwX6BA==
+Received: by mail-lf1-f44.google.com with SMTP id
+ 2adb3069b0e04-5b015b2d792so904541e87.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 19 Aug 2026 01:53:53 -0700 (PDT)
+X-Gm-Message-State: AOJu0Yz++p645DFcxOSld/0KYx7mQ38Nqn3cYPG8W+8fk5o0P12obUiX
+ QopwBhg2U4BbV24+qKLh+OMBfDguPBOVhD4v8jOkVoDAVINN93vDYB+J2GfjMR615U7iigJmqH2
+ kQUImamUPzIcWcEvzg+SPZYUHmqtN9Nw=
+X-Received: by 2002:a05:6512:3191:b0:5b0:1e16:e60c with SMTP id
+ 2adb3069b0e04-5b478d3018cmr861945e87.25.1787129631954; Wed, 19 Aug 2026
+ 01:53:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260817-ux500-external-sdcard-v2-0-ca9a110bd9c6@kernel.org>
+ <20260817-ux500-external-sdcard-v2-7-ca9a110bd9c6@kernel.org>
+ <aoM6qJ32H35aumPL@linaro.org>
+ <CAD++jLnTaaN9ektt9h5S_jYZ27sezSfuymmjTGiL1_j8NSw6bw@mail.gmail.com>
+ <aoQ2VMH_unoQaQxO@linaro.org>
+In-Reply-To: <aoQ2VMH_unoQaQxO@linaro.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 19 Aug 2026 10:53:39 +0200
+X-Gmail-Original-Message-ID: <CAD++jLn4VB9FK9pkw9d+fdJuDGGTr2=94qyF9JYWhxp3D3JiPQ@mail.gmail.com>
+X-Gm-Features: AcwNN1Urgp4hamOJ-l_y7mTclb4zJPq6r8Wrri3VfP__WopN5hfdNxx1rtwph0c
+Message-ID: <CAD++jLn4VB9FK9pkw9d+fdJuDGGTr2=94qyF9JYWhxp3D3JiPQ@mail.gmail.com>
+Subject: Re: [PATCH v2 7/8] arm: u8500: Switch Stemmy to upstream Janice
+ device tree
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Stefan Hansson <newbyte@postmarketos.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -90,169 +107,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
+On Tue, Aug 18, 2026 at 12:39=E2=80=AFPM Stephan Gerhold
+<stephan.gerhold@linaro.org> wrote:
 
-In some cases we need to call ddr_init() multiple times to try
-different configurations. In this case failures are expected and
-error messages cause confusion. Introduce ddr_init_silent_fail()
-for those cases.
+> I wasn't suggesting to use the same DT for all devices. What I suggested
+> is to bundle all the upstream DTBs for the individual devices into a
+> single U-Boot binary (CONFIG_MULTI_DTB_FIT) and pick the correct one at
+> runtime. :)
+>
+> That should be equivalent to your setup, just more convenient for the
+> user.
 
-Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
----
- arch/arm/include/asm/arch-imx8m/ddr.h |  4 +++-
- arch/arm/include/asm/arch-imx9/ddr.h  |  4 +++-
- drivers/ddr/imx/imx8m/ddr_init.c      | 14 ++++++++++++--
- drivers/ddr/imx/imx9/ddr_init.c       | 14 ++++++++++++--
- drivers/ddr/imx/phy/ddrphy_train.c    |  5 +++--
- 5 files changed, 33 insertions(+), 8 deletions(-)
+Hey it works!
 
-diff --git a/arch/arm/include/asm/arch-imx8m/ddr.h b/arch/arm/include/asm/arch-imx8m/ddr.h
-index 5092ccae188..442c45237f9 100644
---- a/arch/arm/include/asm/arch-imx8m/ddr.h
-+++ b/arch/arm/include/asm/arch-imx8m/ddr.h
-@@ -9,6 +9,7 @@
- #include <asm/io.h>
- #include <asm/types.h>
- #include <asm/arch/imx-regs.h>
-+#include <linux/types.h>
- 
- #define DDRC_DDR_SS_GPR0		0x3d000000
- #define DDRC_IPS_BASE_ADDR_0		0x3f400000
-@@ -705,8 +706,9 @@ struct dram_timing_info {
- extern struct dram_timing_info dram_timing;
- 
- void ddr_load_train_firmware(enum fw_type type);
-+int ddr_init_silent_fail(struct dram_timing_info *timing_info);
- int ddr_init(struct dram_timing_info *timing_info);
--int ddr_cfg_phy(struct dram_timing_info *timing_info);
-+int ddr_cfg_phy(struct dram_timing_info *timing_info, bool log_fail);
- void load_lpddr4_phy_pie(void);
- void ddrphy_trained_csr_save(struct dram_cfg_param *param, unsigned int num);
- void *dram_config_save(struct dram_timing_info *info, unsigned long base);
-diff --git a/arch/arm/include/asm/arch-imx9/ddr.h b/arch/arm/include/asm/arch-imx9/ddr.h
-index b0f90b53f64..c85f4cc7810 100644
---- a/arch/arm/include/asm/arch-imx9/ddr.h
-+++ b/arch/arm/include/asm/arch-imx9/ddr.h
-@@ -8,6 +8,7 @@
- 
- #include <asm/io.h>
- #include <asm/types.h>
-+#include <linux/types.h>
- 
- #define DDR_CTL_BASE			0x4E300000
- #define DDR_PHY_BASE			0x4E100000
-@@ -147,8 +148,9 @@ struct ddrphy_qb_state {
- };
- 
- void ddr_load_train_firmware(enum fw_type type);
-+int ddr_init_silent_fail(struct dram_timing_info *timing_info);
- int ddr_init(struct dram_timing_info *timing_info);
--int ddr_cfg_phy(struct dram_timing_info *timing_info);
-+int ddr_cfg_phy(struct dram_timing_info *timing_info, bool log_fail);
- void load_lpddr4_phy_pie(void);
- void ddrphy_trained_csr_save(struct dram_cfg_param *param, unsigned int num);
- void *dram_config_save(struct dram_timing_info *info, unsigned long base);
-diff --git a/drivers/ddr/imx/imx8m/ddr_init.c b/drivers/ddr/imx/imx8m/ddr_init.c
-index e9209ce8b61..537c36acc8d 100644
---- a/drivers/ddr/imx/imx8m/ddr_init.c
-+++ b/drivers/ddr/imx/imx8m/ddr_init.c
-@@ -310,7 +310,7 @@ void update_umctl2_rank_space_setting(unsigned int pstat_num)
- 	}
- }
- 
--int ddr_init(struct dram_timing_info *dram_timing)
-+static int __ddr_init(struct dram_timing_info *dram_timing, bool log_fail)
- {
- 	unsigned int tmp, initial_drate, target_freq;
- 	int ret;
-@@ -390,7 +390,7 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 	 */
- 	debug("DDRINFO:ddrphy config start\n");
- 
--	ret = ddr_cfg_phy(dram_timing);
-+	ret = ddr_cfg_phy(dram_timing, log_fail);
- 	if (ret)
- 		return ret;
- 
-@@ -470,6 +470,16 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 	return 0;
- }
- 
-+int ddr_init(struct dram_timing_info *dram_timing)
-+{
-+	return __ddr_init(dram_timing, true);
-+}
-+
-+int ddr_init_silent_fail(struct dram_timing_info *dram_timing)
-+{
-+	return __ddr_init(dram_timing, false);
-+}
-+
- ulong ddrphy_addr_remap(uint32_t paddr_apb_from_ctlr)
- {
- 	return 4 * paddr_apb_from_ctlr;
-diff --git a/drivers/ddr/imx/imx9/ddr_init.c b/drivers/ddr/imx/imx9/ddr_init.c
-index 5b0ad773875..f2600c65703 100644
---- a/drivers/ddr/imx/imx9/ddr_init.c
-+++ b/drivers/ddr/imx/imx9/ddr_init.c
-@@ -335,7 +335,7 @@ void save_trained_mr12_14(struct dram_cfg_param *cfg, u32 cfg_num, u32 mr12, u32
- 	}
- }
- 
--int ddr_init(struct dram_timing_info *dram_timing)
-+static int __ddr_init(struct dram_timing_info *dram_timing, bool log_fail)
- {
- 	unsigned int initial_drate;
- 	struct dram_timing_info *saved_timing;
-@@ -361,7 +361,7 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 	 */
- 	debug("DDRINFO:ddrphy config start\n");
- 
--	ret = ddr_cfg_phy(dram_timing);
-+	ret = ddr_cfg_phy(dram_timing, log_fail);
- 	if (ret)
- 		return ret;
- 
-@@ -412,6 +412,16 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 	return 0;
- }
- 
-+int ddr_init(struct dram_timing_info *dram_timing)
-+{
-+	return __ddr_init(dram_timing, true);
-+}
-+
-+int ddr_init_silent_fail(struct dram_timing_info *dram_timing)
-+{
-+	return __ddr_init(dram_timing, false);
-+}
-+
- ulong ddrphy_addr_remap(u32 paddr_apb_from_ctlr)
- {
- 	u32 paddr_apb_qual;
-diff --git a/drivers/ddr/imx/phy/ddrphy_train.c b/drivers/ddr/imx/phy/ddrphy_train.c
-index 68468610fd6..770a568d8f2 100644
---- a/drivers/ddr/imx/phy/ddrphy_train.c
-+++ b/drivers/ddr/imx/phy/ddrphy_train.c
-@@ -8,7 +8,7 @@
- #include <asm/arch/ddr.h>
- #include <asm/arch/sys_proto.h>
- 
--int ddr_cfg_phy(struct dram_timing_info *dram_timing)
-+int ddr_cfg_phy(struct dram_timing_info *dram_timing, bool log_fail)
- {
- 	struct dram_cfg_param *dram_cfg;
- 	struct dram_fsp_msg *fsp_msg;
-@@ -73,7 +73,8 @@ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
- 		/* Wait for the training firmware to complete */
- 		ret = wait_ddrphy_training_complete();
- 		if (ret) {
--			printf("Training FAILED\n");
-+			if (log_fail || _DEBUG)
-+				printf("Training FAILED\n");
- 			return ret;
- 		}
- 
--- 
-2.55.0
+The bootloader crosses over the 512KB limit but we have space enough
+for an entire kernel so it's no big deal.
 
+> The only open question for me is if we can reliably detect codina-tmo
+> based on the mach-type ID, I can't find that in the kernel sources I
+> have.
+
+I brought out and booted the device. It is re-using the Codina
+machine ID.
+
+However we have unique board IDs in another parameter which is
+enough to discern the Codina-TMOs from the Codinas.
+
+Sending a v4 patch series which should contain all you asked
+for. It also works.
+
+Yours,
+Linus Walleij
