@@ -4,137 +4,180 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 076EDC5DF82
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 09:27:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED3FC5DF82
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 09:39:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9ED5480CBA;
-	Thu, 20 Aug 2026 09:27:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C5EA780C5C;
+	Thu, 20 Aug 2026 09:39:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lf00s6I60ipP; Thu, 20 Aug 2026 09:27:44 +0000 (UTC)
+ id YBVeIBiXRWzU; Thu, 20 Aug 2026 09:39:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787218064;
-	bh=RBWgWWZ93WnQWaPyuNUZr0+6IInep0uzkN2LlxyGhOM=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=oeFPd+trTIdGvwxeaqSEnES4TinAUA0YmJEe+uJ5JR932YnwAubY8R9h5ytfAh0hr
-	 yc0DTnvC7HB+2m7LzaTukh62uOAVTYvfF9uX0qASI976rW+dfwd0qAvc8v/PW7xZa/
-	 M7AyUGBcSD5I3B/BSbo+Ga9ffBs3sZ4BQaAbITyFV8afiVD4prt4iHqPgX4Rbls2cC
-	 Jq+EuPdvgIWMhNWjuYaYXNxFNztH+m824y/cAsdaLK6EmODa4rbhI6FCIbsWODU8Td
-	 aAgxOa2CdVQRRqrstUPjSo1hvSGwsuHxnnAtjmXNEwdtVz/dt5vVx4ErUbjK1Tfj0p
-	 +WqSrS95tyagA==
+	d=lists.u-boot-project.org; s=default; t=1787218798;
+	bh=0kLTshydcEGy9c04LWSpB3cpzxqM8CYpsij2+gbfhx8=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=P8jsvyCwzafn2Yi6520LbsG50k3iLdALkpUOL0QMKONSPclHt7aELVzEsrXO3hej1
+	 ajLDvMX6Qwh/WNowghXA7UrFdPmo8H7wOabkHR7Q50G5EwJCaPiVMGdE9yR0TeA4s7
+	 XAN9hgp2BWqOeBb1bztua9Lmukcsmj2A5KgdfhUqJiiwreQDnRrM2lQWZhcp73fUDm
+	 BFrEitxU1sJKNqj1rzC3bMO9dnWBMpa8JBkaX2wo8GzornZYBwwRud0Gs9jY4M4+6J
+	 Df5f2TuLMJsPS4hngFzbCQflNychb3/urib2kcJIXeOJQo8CJkrWl1iX/pvR/O+MUw
+	 0L8Q6ml9h/SsQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8B29780C8D;
-	Thu, 20 Aug 2026 09:27:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7E4D239E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:27:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C4E6E80C49;
+	Thu, 20 Aug 2026 09:39:57 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 860D429D
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:39:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 77E78405B6
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:27:43 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8370060656
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:39:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TOo_VXiLtGau for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 09:27:42 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c000::1;
- helo=byapr05cu005.outbound.protection.outlook.com;
- envelope-from=padmarao.begari@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=qONJmWvo
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D65F4405B3
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:27:41 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yPltgBaKa806gT7WQdPgxMFdiiKigMrS6HyXAVWHJapZbY8IHI6B4vr4YebLO1/Vx++Jtme4R3t8Q714OjWoYnLc5WNMGCvDYJ0cZI4nHKXDp8TxNO0tSMozewydqyruEOvmI2lO4IP3DLnZl1bXEEOGJqvkedoIftY8oCzO4b27WfdNDwSgrBNSSHc8Wotb3IDFiRftZpVJ8Kkf8AQH6TlAl8rF55oQQcUDKwLukybt+Vj+PdRZ1+lnSTX/c0c08yiTQ5SGGOpqmkT2LXmPvXeAw71/ZWfJFOhGtqGdQKOz1f5FE8CbpqT1KTMj9KSvfFO8zDb+JcS/uYKYg9HnSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RBWgWWZ93WnQWaPyuNUZr0+6IInep0uzkN2LlxyGhOM=;
- b=NSBLdIL5usueCGtET3ybT51TZfqi1RQa1HerPJcYLTZYI7x+anKEy/WMB+X6+ICk2bDeLMQuQ0X/Trard2+Z6/dZt6RBcCyG3YYjfm4//9g0JPnc9CpEGKdVpFuBwwgLZZKHwFDPhr3xHlhwc6qddBHzLZJXSk6cQlltboMI54dgc7Qi4nccdmh6Vq9ZbRnJtK/g1RAr26NKyzh8Wmyisi6cKSe9BBYGkThvaIMrQWnHcIfSvDTizbtA8Yis7QbmDvmYD6SOoLBl+z2l1F6Bf6msFInogir3CQkMgX0XvcIuvmCgrTfHBW6tYjBWD+SREmiIfPud3GLpWN8dnYnZrQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RBWgWWZ93WnQWaPyuNUZr0+6IInep0uzkN2LlxyGhOM=;
- b=qONJmWvo9VMk9gsMajf8UYKiir2DtSmccl8lzBTlc30UkU0ACcYPCwwpB4ZjBXqFoEZlMp3NIn8e9j/wZFSxq2/cC4K28j4bgsgSMoDVqQqYt1lWz7G/n5npambn6wBwZcIeJmUJk09NM3JKPapKr2mmKgiJefvD8LLiWVO5iE4=
-Received: from BN0PR04CA0145.namprd04.prod.outlook.com (2603:10b6:408:ed::30)
- by DS0PR12MB6413.namprd12.prod.outlook.com (2603:10b6:8:ce::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Thu, 20 Aug
- 2026 09:27:38 +0000
-Received: from BN2PEPF0000A804.namprd02.prod.outlook.com
- (2603:10b6:408:ed:cafe::6d) by BN0PR04CA0145.outlook.office365.com
- (2603:10b6:408:ed::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.9 via Frontend Transport; Thu, 20
- Aug 2026 09:27:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN2PEPF0000A804.mail.protection.outlook.com (10.167.245.168) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Thu, 20 Aug 2026 09:27:37 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 04:27:35 -0500
-Received: from xhdpabegari40x.xilinx.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45 via Frontend Transport; Thu, 20 Aug 2026 04:27:33 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Jerome Forissier
- <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 8/8] net: mrmac: increase the Rx BD ring
-Date: Thu, 20 Aug 2026 14:55:54 +0530
-Message-ID: <20260820092623.1647844-9-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260820092623.1647844-1-padmarao.begari@amd.com>
-References: <20260820092623.1647844-1-padmarao.begari@amd.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aofkfyGe6agI for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 09:39:55 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=K2XtY3uR; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=WwdEkOJr
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5A3A660619
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:39:54 +0000 (UTC)
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67K6VZVJ1777702
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:39:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=0kLTshydcEGy9c04LWSpB3
+ cpzxqM8CYpsij2+gbfhx8=; b=K2XtY3uR+M8c0Bo13EeVB8nQPMIBuiZ2aN18z3
+ 6XVmi/9vhzisBS59pdcGYtd+kZEEK3lOSSOhqwU8nNJiO/Czdt8x09vF8yClxIA6
+ n9jpGvJra7gw/8un+Jtox8Gpr58ZS6/zte3zKPKiCvGBnTLNf/Z7HIN1KxjOAdoN
+ DKSZXfDrmoq8z+2KzZVJ3vfxO7t0a9IiaugByttxGj/FLZ9ajl8/bCKLB3EVZnNU
+ mbokcBxFXALPFYQgNJ+UEvbSdW4QDuId2bllGQ+BfHQaYPwtmGhxGSwLjxK5f7IK
+ Sr46XbFsVb/yGSBYOz/mwFOkuhP2lG5KoUeOonG1KuTsbQOg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5es3m5ja-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 09:39:53 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-cbb92868263so1358470a12.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 02:39:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1787218793; x=1787823593;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=0kLTshydcEGy9c04LWSpB3cpzxqM8CYpsij2+gbfhx8=;
+ b=WwdEkOJrQ+oOBxL0coJ0eIT/kB/eczZEAVLYBT48vt59SlLcDkbxclPzhXc1l7UHxV
+ Ful1PHwZ3pQruPuFglq4yDdhhDQRp1ZT3GyXAvokeXpLoXVdJxqWBehZ+WeyXTcELZ15
+ eE81KYfWS1uwwOfuIL1kBsoGWatpuZtXVqMEwsINoAtQhhjiDeTzYPhLZordGsgITi5s
+ A2InWG4FwA4SHueXCWrwoEnMYCGsHQVo6od4N7H6yQxCywtgDbphD+V0MYrIh9F/OGiP
+ fk5ZVffOF9ON22oaSnFBzfC1GXRbRcEVD0v3LpxvdVshQn1H2u8UYwWStwqzu8NOLhu2
+ 5UCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787218793; x=1787823593;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=0kLTshydcEGy9c04LWSpB3cpzxqM8CYpsij2+gbfhx8=;
+ b=sFLBMcODqrG4oYWOPzvP99tJiGGJ+Z4uG5m/hxj8Q6pWMH4toVNC9IJgVQYPTBtg6F
+ zhsBEMNmh5ppMIdVekImHLnTmxGuCWQUre5ig5Es+slxwz9+ecy/FgpueuDMtMD4AwQq
+ fFvo52Frnu9HOvoPJCtQxaZ9tgT8rwlvZoRigrjxOtS+YAcEw3cENf7DH07KK8iLTdNX
+ B9rGumtbHFfqfLb9Pry7EMU607MumkV6ghlOCS7ZRA9rX7JLr0YqybU1l4TKn0lfUlhs
+ y1zvSKpmojRVFlmfCMrOERsaxP+F/bIU+pXFpacjl+japeKcD+07iexwR1aRKB0dKE+g
+ 5Srg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpRwAWKklOvFS+xgSmkGOZLN5BwxrzjgKJEn1v/REDixQDcapDqNmnf5cBFVRFpK/YYIzJ0/14=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lfJOLsFJbcuDQQo2g7ay08I/g5ADQyCoc0do1BvguTz5uNIGrD
+ rT7Uldf1ZtT1eWUK0BN/KHmd40aVg/ITU1q4c+Plv++c9Hv8VKbgvJoftDCqCk0rgvzE0nCZF1Y
+ d6ZecP3N4KQthvPduXd+3TkgxVQVmvxPyHgGWV9EyYUab3nQ86AFnIXT/ni/5WeX/9TqYQaY=
+X-Gm-Gg: AR+sD13Jw2JRd8JJre66LDbCrf4l5E1A0Vxi1ud+0wTajRMlvVWjPz783sNq0OOVGyR
+ 0ChrZMSh90lSTcMy4BqnOT3/yYV8wgUAPatoF1ik0AVR05bp4ucBmrq4l8ncLnRpa5J1hdGYSzV
+ 6c7mShz/kNYkXD22T7dH8mBRakeMGbMo6D+WbI97u3VvwE6pA8ylD1Q1Gq5YPMshNSpFrOSG8WT
+ hb2z29vg/P3xjNZ6Gv7YrerqFhttyCmTJt4T9F3txyY84O6Eu7Ik7Yom48juFnKIbKae6EIX1qL
+ uf5PH/YwBNHS99433fdTaiaHcD6oI1frGzsTHO83olK8nu1RV+FkBRcQz+IsGSqavVuXF1y+0Bt
+ phEADciKio8TgftG7FUWbMb//YuB8tiIa5Rw4y1G95NesVT8DI7f+hQHzCNsHgo1A5dr1ntVdEi
+ Yd2iY2JMQIEApOIbU3Gq+CP5z0aO8v
+X-Received: by 2002:a17:903:19f0:b0:2ca:1479:d9dc with SMTP id
+ d9443c01a7336-2d601ea515fmr219444345ad.12.1787218792621; 
+ Thu, 20 Aug 2026 02:39:52 -0700 (PDT)
+X-Received: by 2002:a17:903:19f0:b0:2ca:1479:d9dc with SMTP id
+ d9443c01a7336-2d601ea515fmr219443605ad.12.1787218792134; 
+ Thu, 20 Aug 2026 02:39:52 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-327bf1a1de1sm16140073eec.31.2026.08.20.02.39.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Aug 2026 02:39:51 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Thu, 20 Aug 2026 15:09:46 +0530
+Subject: [PATCH] clk: qcom: sc7280: enable shared RPMH clock driver
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF0000A804:EE_|DS0PR12MB6413:EE_
-X-MS-Office365-Filtering-Correlation-Id: b8dc1df3-53ea-475e-627c-08defe9d466d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|23010399003|56012099006|10067099003|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 3bmxXtZwfWOkTO0vc2Jd0fC5DDon9RLiNggnS2yjGBkOCOSMVYkjqXaSW/XwL2il8y2+IM9BIZm0sSVwq7sy6ovq3yjJN5KyD00jsemd+kHo3dtGoBBnTFttKQyu1JPuseTDXM/gC1COisn0mFtLeUS34Z1vS+HFiW15+9YdKK3A+JUAd7YWQnH7njAGh9at6r+TLvzRxub3lZvuy+xWYyQnnKopx4W660O8suc4gY+YZqLGBTa/1skAC+yqm1ovHxIWxd8GnugWXHY0U5PvN7sLxbcKGoRZwNrSSvmFjs8iGmIG9SetKEUX/nI5W4hgNkeDtj6a/DB+W0bKTQoV/xeaUSiiLMaa3SOHv/cIo26zCh1IigZen4jQ27kn+ycnH8G6VTRROiigt+ZMB8dCJZ6yWW7seUhqhfn5au9slYq+wJlGmTWdD1z/ZbJQD77Q5L6sRL4mePkdL+7NdWxhEh774LCt34AZj272DlWxlMefhuM5iIOPtd7A1XT2OFF8nMFZWH2+sTgCyVWS3QdYOeH3R8J1tIImmYt8TFmKorbboKxa0HVzFZVNgNqY0/vH6J5WG5r9Lsy2hGnvEctV9omLnB1JzFSmsL/+9XyjnYpGZaYv8U47XGfMamgaUT2BoOtn4bkW8xGtdHPD5GPhm+MrAeCOS1pld+g3h5qk85gz8H+wJ9sjbLYP7Br4FCyYLbaMwQlWF79wmQ7mSpONPQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(23010399003)(56012099006)(10067099003)(11063799006)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 6PhziJNS3um/D8U/zAuYT5jj5w1WG6mxxJ5C/gMDm1ijSeo49L1vULL+4lnqgCREi9Md7L/yl+vRkNgsUKBrs6dPVtO3lfUyT+vCoZ75vJSjLnDi9GZ1SowayCQxqHqlWAAsypr04NsEkdDL1qoMfmlw1i9DixWb1hfuf2q87lYfoeHljZ0sbWVG1qAmKLGqxZX4GcS1NSCBYvCMnXN7F19sb7gJpFISb1f1ZQ+qSN9pNbd8q664sGQDj3Lrt30SoHekPNG0EEzxh57IbvRF1k/VYEjpVvgQ30E4Fzlq3taN1D4AFcoCzUgSB3bS9sziA1JzrD1bm1pmm76u7aNeNM1zVrsHD4MQ7AMdPaG6dVOqygj7vWH8FgtzkoPStUHkBYT6b759cwsAS2iCCqPwLPBaLsBn40e9sODSVPmbCSy0/8MaVD4jVKbym5IUobJr
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 09:27:37.7707 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8dc1df3-53ea-475e-627c-08defe9d466d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF0000A804.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6413
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260820-clk-qcom-sc7280-rpmh-v1-1-18100caea7f9@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAGHLhmoC/x3MSwqAMAwA0atI1gZiBC1eRVxIGjX4b0EE8e4Wl
+ 28x80DUYBqhyR4Ielm0fUso8gxk6rdR0XwyMHFFjgllmfGUfcUoNTvCcKwTivjeceWJyhpSegQ
+ d7P63bfe+H2ttVhpmAAAA
+X-Change-ID: 20260820-clk-qcom-sc7280-rpmh-ccda826d0037
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
+ u-boot-qcom@groups.io
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Biswapriyo Nath <nathbappai@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787218788; l=3298;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=EyOT08Sj2k83jXTrqBblRL8ZBt0hw/jcirzrukOZ9cc=;
+ b=68SBHsgzd8Nt6cORO9/KICxkPo9qFoEtS2F7QeHQl/mfqVl+7ms1qMzl4fQpc9GgsrSusD5Pd
+ qD+FSlJYt8CCo3tZPpktL0/6B0/ZKU16KoCSjWe1OUigTaB0lEgA3L2
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Authority-Analysis: v=2.4 cv=UIrt2ify c=1 sm=1 tr=0 ts=6a86cb69 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=OyYgTzNitIwu50K9lJMA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA3MCBTYWx0ZWRfX32vir8SaFcbQ
+ kIDiGUQGUIdf6pITvGSAXW8fJPHhO8FSE8TI3RRLNXPcb5uPo3BcfmToqWrn27P+a+4p+XYo3Dq
+ dTdmFdDJ4nMBGg1CyNaIyye9jDElwNhLm2oVOZOdTbyxzUTl08sUPeBs7G6WSZK8oq8pD8slmYw
+ iCHxLOBfyxJeHwnb3eiwwABJlsp3PsgW7aHLRVqnqgjtLkHAMIisUQHqWVNo5sQimLZurnQOuir
+ jThLlYaJkWZVaqd3qt/QE0VkU55i+9NfkcuuIiTHIXfIFV7fATmbcDYCOVKAYnj45ai5SBb0mJq
+ rfzTki7uFmHU3PQV0hzEC1dgMtanCDJLVsZt95ucAuQlYHPmY6fHYfYKe6dhG+jXA4VhVLFfswG
+ TDoumIvF7y6xOPPicuDCe+sVP8Lcgd32GeYZeRV15jZs3QDCc1t/nfe7fJDIyNZp9nGyWV/GDRq
+ A05jhlldVsFtJL7rWgQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA3MCBTYWx0ZWRfX/s1+SOmqZhQS
+ MELxuosYuNWLHSUgZo9BKXiPbYQod0LWw/mIHIPlrnLYWoCw3Tv6qoFrpsmLrXojI+7WpDyI9Bf
+ gpdX83Pjs1NJDc6pReOuI2XAz0DcXgk=
+X-Proofpoint-ORIG-GUID: duVVy9aXtXbRZCiujMQ6XXOxBdBYP-uG
+X-Proofpoint-GUID: duVVy9aXtXbRZCiujMQ6XXOxBdBYP-uG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-19_06,2026-08-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 suspectscore=0 impostorscore=0 spamscore=0 priorityscore=1501
+ clxscore=1015 phishscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200070
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,60 +191,79 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-With only two Rx descriptors the ring is full as soon as two frames
-arrive before the network stack drains them, and any further frame is
-dropped by hardware until a descriptor is freed.
+The shared RPMH clock driver now covers SM8550, SM8650 and SA8775P.
+SC7280 exposes the same always-on RPMH clocks, so wire it up the same
+way: register the "qcom,sc7280-rpmh-clk" compatible in the shared
+driver, have CLK_QCOM_SC7280 select CLK_QCOM_RPMH, and drop the SC7280
+entry from the clk-stub match table now that the real driver claims it.
 
-eth_rx() processes up to ETH_PACKETS_BATCH_RECV packets in one call, so
-size the Rx ring from that constant. A full call can then be served
-from the ring without hardware running out of descriptors, and the ring
-depth follows if that constant ever changes.
-
-Add static_assert() for the hardware minimum of two descriptors per
-direction, so a smaller value fails the build instead of silently
-making MRMAC drop packets.
-
-This is headroom rather than a speed up. A TFTP transfer sends one
-block at a time and waits for the ACK, so it keeps at most one packet
-in flight and does not benefit from the deeper ring.
-
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- drivers/net/xilinx_axi_mrmac.h | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+This depends on the shared RPMH clock driver introduced in
+"clk: qcom: Add shared RPMH clock driver for SM8550/SM8650/SA8775P"
+(Message-ID: 20260812-b4-monaco-v2-1-865d288c0be6@oss.qualcomm.com).
+https://lore.kernel.org/u-boot/20260812-b4-monaco-v2-1-865d288c0be6@oss.qualcomm.com/
+---
+ drivers/clk/clk-stub.c        | 1 -
+ drivers/clk/qcom/Kconfig      | 7 ++++---
+ drivers/clk/qcom/clock-rpmh.c | 1 +
+ 3 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/xilinx_axi_mrmac.h b/drivers/net/xilinx_axi_mrmac.h
-index 2c5c83421e5..29f7c440238 100644
---- a/drivers/net/xilinx_axi_mrmac.h
-+++ b/drivers/net/xilinx_axi_mrmac.h
-@@ -11,14 +11,26 @@
- #ifndef __XILINX_AXI_MRMAC_H
- #define __XILINX_AXI_MRMAC_H
+diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+index 85e54841386..74825f87580 100644
+--- a/drivers/clk/clk-stub.c
++++ b/drivers/clk/clk-stub.c
+@@ -52,7 +52,6 @@ static const struct udevice_id stub_clk_ids[] = {
+ 	{ .compatible = "qcom,qcs615-rpmh-clk" },
+ 	{ .compatible = "qcom,rpmcc" },
+ 	{ .compatible = "qcom,sc7180-rpmh-clk" },
+-	{ .compatible = "qcom,sc7280-rpmh-clk" },
+ 	{ .compatible = "qcom,sdm670-rpmh-clk" },
+ 	{ .compatible = "qcom,sdm845-rpmh-clk" },
+ 	{ .compatible = "qcom,sm6350-rpmh-clk" },
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 8596b93d4c4..cc4053f4955 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -92,9 +92,9 @@ config CLK_QCOM_RPMH
+ 	depends on CLK
+ 	help
+ 	  Say Y here to enable support for the RPMh-managed clocks found on
+-	  SoCs such as SM8550, SM8650 and SA8775P. These clocks are owned by
+-	  the always-on subsystem; the driver only reports the fixed CXO rate
+-	  (bi_tcxo_div2) and accepts no-op enable/set_rate requests.
++	  SoCs such as SC7280, SM8550, SM8650 and SA8775P. These clocks are
++	  owned by the always-on subsystem; the driver only reports the fixed
++	  CXO rate (bi_tcxo_div2) and accepts no-op enable/set_rate requests.
  
-+#include <net.h>
-+#include <linux/build_bug.h>
-+
- #define MIN_PKT_SIZE	60
+ config CLK_QCOM_SA8775P
+ 	bool "Qualcomm SA8775 GCC"
+@@ -181,6 +181,7 @@ config CLK_QCOM_SM8650
+ config CLK_QCOM_SC7280
+ 	bool "Qualcomm SC7280 GCC"
+ 	select CLK_QCOM
++	select CLK_QCOM_RPMH
+ 	help
+ 	  Say Y here to enable support for the Global Clock Controller
+ 	  on the Snapdragon SC7280 SoC. This driver supports the clocks
+diff --git a/drivers/clk/qcom/clock-rpmh.c b/drivers/clk/qcom/clock-rpmh.c
+index 69f2a751441..5d01b482fc3 100644
+--- a/drivers/clk/qcom/clock-rpmh.c
++++ b/drivers/clk/qcom/clock-rpmh.c
+@@ -47,6 +47,7 @@ static struct clk_ops qcom_rpmh_clk_ops = {
  
- /* MRMAC needs atleast two buffer descriptors for Tx/Rx to work.
-  * Otherwise MRMAC will drop the packets. So, have atleast two Tx and
-  * two Rx bd's.
-+ *
-+ * Tx keeps the minimum because send() waits for the transfer to
-+ * complete, so a deeper Tx ring would never hold more than one frame.
-+ * Rx matches the number of packets eth_rx() retires in one call, so a
-+ * full batch can be taken from the ring without hardware dropping a
-+ * frame for want of a free descriptor.
-  */
- #define TX_DESC		2
--#define RX_DESC		2
-+#define RX_DESC		ETH_PACKETS_BATCH_RECV
-+
-+static_assert(TX_DESC >= 2, "MRMAC needs at least two Tx descriptors");
-+static_assert(RX_DESC >= 2, "MRMAC needs at least two Rx descriptors");
- 
- /* MRMAC platform data structure */
- struct axi_mrmac_plat {
+ static const struct udevice_id qcom_rpmh_clk_ids[] = {
+ 	{ .compatible = "qcom,sa8775p-rpmh-clk", .data = TCXO_DIV2_RATE },
++	{ .compatible = "qcom,sc7280-rpmh-clk", .data = TCXO_DIV2_RATE },
+ 	{ .compatible = "qcom,sm8550-rpmh-clk", .data = TCXO_DIV2_RATE },
+ 	{ .compatible = "qcom,sm8650-rpmh-clk", .data = TCXO_DIV2_RATE },
+ 	{ }
+
+---
+base-commit: 939ca75844af693dde313f279e3210f7c3beace7
+change-id: 20260820-clk-qcom-sc7280-rpmh-ccda826d0037
+
+Best regards,
 -- 
-2.34.1
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
