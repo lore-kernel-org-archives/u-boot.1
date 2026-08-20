@@ -4,142 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07480C5DF81
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA072C5DF85
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:10:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9AFE980DD7;
-	Thu, 20 Aug 2026 15:05:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8D76380DC7;
+	Thu, 20 Aug 2026 15:10:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lL0aiLjQ7nuc; Thu, 20 Aug 2026 15:05:13 +0000 (UTC)
+ id xA9U57cqty49; Thu, 20 Aug 2026 15:10:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787238312;
-	bh=UAL4rV9hVmK67rPumqFIJuYz4uAfoLNm0SjxXTago74=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787238630;
+	bh=zPav01SVtrIgOAE4kOBOlL5TjD8YT+jNEiCrMNb7HgY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YcGWxVB7lzwDxF7mRWoz5jvDtwaKZre0ffTWGTDK/asOLV2M2ZWj7/EPSAczKatnN
-	 BVpzJaJiACvH8mbVc3uiyGHihyzyyc0poZIDDyzU2RL2KCPGUih+KPjwLtjufF7ilT
-	 qvML9qaDhotjdsCQChvgmW6UkavogIi+SUNlATM44zxNDJNr5bNNsd38ZQuDsRv7R9
-	 F+bfqbbS1Q59XzoukcC0gBjIOTML5lgZf121ROo1ErQGryrhHVmWwQDDaGifuf/a9P
-	 r7nzNdXuHFTkiFzgCzgQIUCc4B2WlJngkP+hlAPdTraW8NjrV7l9djZYzG7XMqieGt
-	 i1z66B9L8YpLw==
+	b=Dcp0/9kS2KE+E64Ja0wsmBDCt+mgaLHTpx+41wqZ8WhnZi4xx5cYmX3Rl5JBftx+Q
+	 sHo8CiOMgr9RJ0EqS7xOIQ+6HGi7WfPB+/+tXwzGXK9gj3idneSH1FKByBNlhAH9+1
+	 4DXCEgby1Ykzre+BYGe1Rmk6yz91+DkboZUJKfi0NbSlA2+UEAyHXId2+u4ncmd87z
+	 oAppS1/mfuDaF7MLaRG8/AiZzcFMJBVfSESCkG3zWf98Okh6SPihHnuljyi2ti59d3
+	 CAACeLC0kGWlFRDtjrySPnQir60jp1CtInu7gqPE3kp3tPzWyOwW8p4memTZ7rRK41
+	 EBAW3xmH1xRIQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6263680DE5;
-	Thu, 20 Aug 2026 15:05:12 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 65CC439E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D586380DC9;
+	Thu, 20 Aug 2026 15:10:29 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1701A263
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:10:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4B7B080DB4
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 02ED840329
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:10:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AQWxkm6BLvO3 for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 15:05:09 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tuy2DVLL2Iu7 for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 15:10:26 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c112::7;
- helo=cy3pr05cu001.outbound.protection.outlook.com;
- envelope-from=akshay.belsare@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=cq/Nxu7/
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6C35D80D9E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:09 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lgFtVshPXGxDuC8RQd8e0S6lL8ZDExkQ0h2yCNa92PmdkuNlb3mH+3eGVl3wlMOHWhAduPURDq7QGeB2TUXgJHIttZVOGcda0F9ciHHsOHom0VRYMIR/MTXgSh/02JNU2j2vkQ40oS+SBbqDLKE+mfzk4146MYx9Xu3ZDgwujZFAfvKtDh1EGBBMV+Wij/zp71nHIIJfulmAhgSVaR8OQNF/ge2RWXPoE9vbFFH7/dsYGkLiGdj5LRmliXa6Ot/OddtBGcuK9rE4gGVrsyoAjLcbM0CsvLaknMkMgoc7lnc8XGZRi0xq5ZQ7LKR0Ps0qhJEmlhjd9SWg0GrUjs2oGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UAL4rV9hVmK67rPumqFIJuYz4uAfoLNm0SjxXTago74=;
- b=KTFQCjzjdlGFN0AXADtDH/B+ZeEZ1FEgZQQhRoCARRnlT29r48OdLTzNwYb+Vb4UUQ8t0+ODSXpxGIuQl0EGz3sny9jh96i0nN7se+OT8iUstRI8m3WBSdInHPgi5mZ4Fkou69z+5Q7cvBI//W5SeGgEo2hSh4nRlOQus3VzM8iz+x95j2GXhGj07q0h5qhuuYlv7iPWmvGTym051kC6ts0xHY4PXNETzE95o6fXWfpgHlpYW4v38rBjaOcXAD7IFenJY/Hn3LS6sJFjZUzJfstfmOKYPqDZkxIQNgZcP/1J/+GGqWU/uYbBDdMXINJMz9xqeIzGauPqY+XdCGf7ig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UAL4rV9hVmK67rPumqFIJuYz4uAfoLNm0SjxXTago74=;
- b=cq/Nxu7/SxqYEVoNq/8kUTtTJcdGtwgnaeY3+Vg2fR543aazqCDa4zozi21AwdeM6U1vgn5RfNbq4KK50PQh93vktfTpprQjeFpRuDJ/Pkyg1kWeNq1ORWb7DQ2pF6Uovgv1mJfhqcDK9IlM3Y9L2Pc22kXPzXLh5LKr0oUDCyI=
-Received: from DS7P221CA0037.NAMP221.PROD.OUTLOOK.COM (2603:10b6:8:25e::6) by
- CH3PR12MB9097.namprd12.prod.outlook.com (2603:10b6:610:1a6::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.8; Thu, 20 Aug 2026 15:05:01 +0000
-Received: from DS1PEPF00017098.namprd05.prod.outlook.com
- (2603:10b6:8:25e:cafe::8d) by DS7P221CA0037.outlook.office365.com
- (2603:10b6:8:25e::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.10 via Frontend Transport; Thu,
- 20 Aug 2026 15:05:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DS1PEPF00017098.mail.protection.outlook.com (10.167.18.102) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Thu, 20 Aug 2026 15:05:00 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 10:04:21 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 10:03:30 -0500
-Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Thu, 20 Aug 2026 10:03:28 -0500
-From: Akshay Belsare <akshay.belsare@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Akshay Belsare
- <akshay.belsare@amd.com>, Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: [PATCH 3/3] board: xilinx: decouple PGGS boot index read from firmware
-Date: Thu, 20 Aug 2026 20:24:19 +0530
-Message-ID: <20260820145459.246717-4-akshay.belsare@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260820145459.246717-1-akshay.belsare@amd.com>
-References: <20260820145459.246717-1-akshay.belsare@amd.com>
+ client-ip=2607:f8b0:4864:20::22d; helo=mail-oi1-x22d.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=DPAUkhzz
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 852714031A
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:10:26 +0000 (UTC)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-4a4836dc117so762615b6e.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 08:10:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1787238625; x=1787843425;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=zPav01SVtrIgOAE4kOBOlL5TjD8YT+jNEiCrMNb7HgY=;
+ b=DPAUkhzzVgxsdmXCrzmtXd4gkUdSoXleDg3dTGuD3eTs5FD+BRPWc4a69ETnt5qHvH
+ jTjbOSzCQ3z/+idnzDr3cqlmhyh0XfWlhmQcZ7ZsmhdJ/MmIK74Z0y+MrQrEJmUy9jCl
+ mmQOmwxxI9NGNVJIy4KDZpqYaU+S84tCJhpG4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787238625; x=1787843425;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=zPav01SVtrIgOAE4kOBOlL5TjD8YT+jNEiCrMNb7HgY=;
+ b=sdRDrN91MYb4oWCxNH09XZcFNZYvynV/PFFUBWm/VRnp1sdwYN8BrcbqSaVWiInuCF
+ ZYf9Po4B9tNsnbvZIpvllN5myy0dNAGo0Hlge7hXDo/NZuvJoy+Zcmwe2fejlUZXpmzp
+ 93S8g24B99rZD4wdbe7hDHFdlasRt5Tf8hp3CEYqyvuqHyg8r3OUnj5eQJmzHlO9E743
+ jucNDIt5ZnaYp3ulaBJ2my9ORg5MigPT/qHmc34RJeLvJN4DpnnH07bvquVC20jq+63e
+ fCvespNxkIh6SGbxB3UoiuP+xPn//k3+mDpM5yCokbt9tAuWxR5UwMstV3N37u8xxP1G
+ 1Tvw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp3H6n/h07DSuCGqv8T3BZGGZ1jYoMyYmJWGU5nMf3uITfOQdV064AJ6oSWDiNGjnUvPAwJRYg=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YxapNZokGDQhMIwKjq3D5+0G3PgS3Tz/CvMsB1OfZ5re3muUD6/
+ 1nP7Jm49HHffTA3m525C7/yMQOggfPlorEHZfVutLUPEhe4sNvlu/lI6xy4UPwd5DBc=
+X-Gm-Gg: AR+sD11Lch8XN/uScsUNgHbdLd/+RLIeKopAGmjyNmqRTbJuXuNm66+6LZodrx820/P
+ qrnmOYFZDpBZcd67Vip26Rxyt4DXP+q3g9+Y6K216G0Z6YhBj936asG5TAxNM3HVPaEoC4ZzUXi
+ UrsSa/NLyDeh3zkFHbb9c4XVLeAp1nCX9tz5Nha5wCuB9kHQxsbb/sPArMqGtyRuMUkmuFL5yJD
+ Cw5LOGzFabT6ekpfijOqLQQd9h3Rw08+cyKZKIGUNjvC8E3f3TXJPyW3jJLOHPzO13cIpxDTurq
+ 0NEoUWdlB+SOcSyWqkF8jfzH+gGDLkrM5oGQd1MXicQsTxwwgsoyxMtc8l/P7aHWmsx0xoAgdCj
+ xqCWG8CeQscthTj1Zp3pits2EzZMAnMuEEXb/cdYDUlG7AM+Eq/FRiRldH6pZKRSEhPOsFbcwMo
+ AO3ZBzrqngUGuGm78Kvnf81o20sXy9cHC3xFt/OBrcEEc/Ddua4sGfDJFk4t2grZxgTRgBjjno2
+ LESyTer263poJdTtjFVyKEfnfu2sCXlkvsB+LfopWO6FKilJh/E+QY4tzp/DygIUzzWvWZKCuvH
+ WE6fyIdGKQ==
+X-Received: by 2002:a05:6808:6c96:b0:4b2:67f1:11d7 with SMTP id
+ 5614622812f47-4b2bcb962d1mr11882720b6e.17.1787238625249; 
+ Thu, 20 Aug 2026 08:10:25 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4b2d68509aesm1896093b6e.6.2026.08.20.08.10.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Aug 2026 08:10:24 -0700 (PDT)
+Date: Thu, 20 Aug 2026 09:10:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: valentinliu@icloud.com, u-boot@lists.u-boot-project.org,
+ mkorpershoek@kernel.org, igor.opaniuk@gmail.com,
+ alchark@flipper.net, quentin.schulz@cherry.de,
+ marek.vasut+renesas@mailbox.org, daniel@makrotopia.org, rs@ti.com
+Subject: Re: [PATCH v1 1/2] boot: android: Add Android 13+ bootflow support
+ to bootmeth.
+Message-ID: <20260820151021.GI523975@bill-the-cat>
+References: <20260818175301.818739-1-valentinliu@icloud.com>
+ <CAFLszTj8g4xxzt9A7txOhDMU6hLe2=twZoZPo_sr7Z5m=6BC4A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017098:EE_|CH3PR12MB9097:EE_
-X-MS-Office365-Filtering-Correlation-Id: 67d64d92-df47-492f-ee83-08defecc680e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|376014|82310400026|36860700016|18002099003|22082099003|56012099006|3023799007|10067099003|11063799006;
-X-Microsoft-Antispam-Message-Info: JfXCbB/BWUAwAZdPApVRM5Jmz+kpYXlMcO6XbMZR2rhW5pNPGuqmG4GUKEkjP5RQ0HNg3kgfCvhS3AJokWWjwcNXGkTRaw4nPwj2O/ED4gTDp8VeLj0Y8GOn8E2Wm/yFeWc+EFcoZZibKlBHwM1d/CPEh77eIIpOG8/tca0cWPovXCc0OWYIWq6wKmUgC2ypboFDX8wOJYtkK4ekaAzgoQvG5DV8T7HhZowcj6rEwU8rhHfI5VNYDPb8ul8cnP0fsTHmAtsYv0+SDemiaNE3/67ToN1PWjKQb8sTJvzEZplcaXs2l/vLrx06pfnlptGi5RbfjypZCTszhYgLTFxlBXEwEi4IqTQmNGWr4owaUgr4jMsDj8Usyi3xwew9xK8DCavy09pxt40OCRHvNn/OAcc206EcIDj8Q2vOAw0tjvsmwlwghcW9ELLveEXSq0rSCznslPD5cBFkujUdwSVJ2BtDQZkwt+3axQtTCZ8qg3eWbQOzW8ycjZ++DKDpSViasOr1+EXCHZmOShh8zvTUTcTqoWgPN2qh8W3CvI9XThV4EhMXWhY8ucQJGEu2ZdZnx3WH8tPj4SmaEuvKxfOu8if89AG6edvAO2iYvJh7Afe9udlnQHU9lRkgZsrTEQfIr8jwB0uBMUmKrH0rbrtNwR9auWyjPtSDwU2apbdhSINaUZl5ykwIbcpyPDsiMipMHJ4WQpGhk0DCUBejKh1Z3A==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(376014)(82310400026)(36860700016)(18002099003)(22082099003)(56012099006)(3023799007)(10067099003)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: GYK71ulaNFoHoMYp4qWeZakTjwf4fkIU3TL8vvmbDyFPBng82Kcstw3Doeej/gJ5KFPc2LSPPmJ405uWml7Dt1aHuYmmKKBIuA5havPytgl1tDgIRvdTwsb8D3nr9/kQbnkq6ksgiR68yX0xcGTrZXjOC0UVL4slq8DfxwANH2oBLuZYaK27ek5aw3Iu/HEawPG3pamTrp+aRNbw6TUX6vEdqvVKpQy8ivaDlWTwtJLTi2c6hfVRv93a1YGCZIJVw9eLRgHxYeeFplDCwgnbGfSlVlE24LuRRg6IY3YCmSIuBmkuB8azAOtQhjFGtHcI5R0OAlz7+rzNSN3qUaWddXfrgMTwVqlT+3CdCsYqSQzC8WGPrinFp1VaTMAbpKM0k2WXZoYKzoKDXVbXmL1f/50n5+P+crWT5l3WoTvs74rz8qZ3i6jPuf3iaE6tEabX
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 15:05:00.4978 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67d64d92-df47-492f-ee83-08defecc680e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017098.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9097
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="W4dLkNU0IxZazb1T"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTj8g4xxzt9A7txOhDMU6hLe2=twZoZPo_sr7Z5m=6BC4A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,117 +130,54 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Move PGGS boot index retrieval behind a platform-specific helper
-instead of selecting between firmware and direct register access in
-plat_get_boot_index().
- 
-Add weak default implementations for Versal and Versal Gen 2, and cast
-the register address to (ulong) before readl() to ensure correct
-handling on 64-bit targets.
 
-Signed-off-by: Akshay Belsare <akshay.belsare@amd.com>
----
- arch/arm/mach-versal/cpu.c                     | 5 +++++
- arch/arm/mach-versal/include/mach/sys_proto.h  | 2 ++
- arch/arm/mach-versal2/cpu.c                    | 5 +++++
- arch/arm/mach-versal2/include/mach/sys_proto.h | 2 ++
- board/xilinx/common/board.c                    | 6 ++----
- include/zynqmp_firmware.h                      | 1 -
- 6 files changed, 16 insertions(+), 5 deletions(-)
+--W4dLkNU0IxZazb1T
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/mach-versal/cpu.c b/arch/arm/mach-versal/cpu.c
-index 15b3303bd1c..a4ee51ef0d6 100644
---- a/arch/arm/mach-versal/cpu.c
-+++ b/arch/arm/mach-versal/cpu.c
-@@ -191,6 +191,11 @@ __weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
- 	return 0;
- }
- 
-+__weak u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr)
-+{
-+	return readl((ulong)reg_addr);
-+}
-+
- U_BOOT_DRVINFO(soc_xilinx_versal) = {
- 	.name = "soc_xilinx_versal",
- };
-diff --git a/arch/arm/mach-versal/include/mach/sys_proto.h b/arch/arm/mach-versal/include/mach/sys_proto.h
-index bff4659eb8f..771b8cd8cbc 100644
---- a/arch/arm/mach-versal/include/mach/sys_proto.h
-+++ b/arch/arm/mach-versal/include/mach/sys_proto.h
-@@ -29,5 +29,7 @@ u32 versal_bootmode_reg(void);
- void versal_timer_setup(void);
- /* Overridable chip ID accessor: weak MMIO default, firmware override */
- int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
-+/* Overridable PMC GLOBAL PGGS register accessor: weak MMIO default, firmware override */
-+u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr);
- 
- #endif /* _ASM_ARCH_SYS_PROTO_H */
-diff --git a/arch/arm/mach-versal2/cpu.c b/arch/arm/mach-versal2/cpu.c
-index 24a02c38462..404250f2d44 100644
---- a/arch/arm/mach-versal2/cpu.c
-+++ b/arch/arm/mach-versal2/cpu.c
-@@ -338,6 +338,11 @@ __weak u32 zynqmp_pm_get_pmc_tap_usercode(void)
- 	return readl(PMC_TAP_USERCODE);
- }
- 
-+__weak u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr)
-+{
-+	return readl((ulong)reg_addr);
-+}
-+
- U_BOOT_DRVINFO(soc_amd_versal2) = {
- 	.name = "soc_amd_versal2",
- };
-diff --git a/arch/arm/mach-versal2/include/mach/sys_proto.h b/arch/arm/mach-versal2/include/mach/sys_proto.h
-index fcc2e75c89a..64626bac24e 100644
---- a/arch/arm/mach-versal2/include/mach/sys_proto.h
-+++ b/arch/arm/mach-versal2/include/mach/sys_proto.h
-@@ -27,6 +27,8 @@ int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
- u32 zynqmp_pm_get_pmc_tap_idcode(void);
- u32 zynqmp_pm_get_pmc_tap_version(void);
- u32 zynqmp_pm_get_pmc_tap_usercode(void);
-+/* Overridable PMC GLOBAL PGGS register accessor: weak MMIO default, firmware override */
-+u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr);
- 
- int zynqmp_pm_wait_mphy_tx_rx_config_ready(u32 timeout_us);
- int zynqmp_pm_wait_sram_init_done(u32 timeout_us);
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index f45b879736e..ac309ae7336 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -21,6 +21,7 @@
- #include <asm/sections.h>
- #if defined(CONFIG_ARCH_VERSAL) || defined(CONFIG_ARCH_VERSAL2)
- #include <asm/arch/hardware.h>
-+#include <asm/arch/sys_proto.h>
- #endif
- #include <dm/uclass.h>
- #include <i2c.h>
-@@ -752,10 +753,7 @@ static int plat_get_boot_index(void)
- {
- 	u32 val;
- 
--	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE))
--		val = zynqmp_pm_get_pmc_global_pggs_reg(PMC_GLOBAL_PGGS4_REG);
--	else
--		val = readl(PMC_GLOBAL_PGGS4_REG);
-+	val = zynqmp_pm_get_pmc_global_pggs_reg(PMC_GLOBAL_PGGS4_REG);
- 
- 	if (FIELD_GET(MAGIC_MASK, val) != MAGIC_NUM) {
- 		log_err("FWU requires PMC magic number 0x%x\n", MAGIC_NUM);
-diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
-index 0293bd15a2e..a60d33b02ab 100644
---- a/include/zynqmp_firmware.h
-+++ b/include/zynqmp_firmware.h
-@@ -466,7 +466,6 @@ int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value);
- int zynqmp_pm_feature(const u32 api_id);
- u32 zynqmp_pm_get_bootmode_reg(void);
- u32 zynqmp_pm_get_pmc_multi_boot_reg(void);
--u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr);
- 
- /* Type of Config Object */
- #define PM_CONFIG_OBJECT_TYPE_BASE	0x1U
--- 
-2.34.1
+On Thu, Aug 20, 2026 at 06:31:18AM -0600, Simon Glass wrote:
+> Hi Valentin,
+>=20
+> On 2026-08-18T17:53:00, Valentin Liu <valentinliu@icloud.com> wrote:
+> > boot: android: Add Android 13+ bootflow support to bootmeth.
+>=20
+> Please drop the trailing period and keep the subject under 60 characters.
+>=20
+> >
+> > The devices launching Android 13+ were using a new partition
+> > named init_boot to store generic ramdisk.
+>=20
+> >
+> > In the new bootflow, kernel still be stored in boot image,
+> > however, the First Stage files in ramdisk were moved to
+> > init_boot image. We should load it to memory and verify it
+> > so that the kernel can execute init program to continue booting.
+> >
+> > Currently, we have supported loading the init_boot image by
+> > abootimg command, but we still need bring this ability to
+> > bootmeth, so that booting Android 13+ will be more easily.
+>=20
+> Please use present/imperative tense throughout: 'were using' -> 'use',
+> 'kernel still be stored' -> 'the kernel is still stored', 'were moved'
+> -> 'are moved', 'we still need bring' -> 'we still need to bring',
+> 'more easily' -> 'easier'.
 
+We do not have any sort of grammar rules and requirements like that in
+the project, please stop giving people feedback like this.
+
+--=20
+Tom
+
+--W4dLkNU0IxZazb1T
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaocY2gAKCRAr4qD1Cr/k
+Cln7AP9MDdIjkViv0GFYRFMZqfvn1v6VIh+Kgyxh1hCYXVvEgAEA0kDEv4hj+fJx
+7P0dqBrma4KRflTXLXrbldkL/klfegA=
+=voH7
+-----END PGP SIGNATURE-----
+
+--W4dLkNU0IxZazb1T--
