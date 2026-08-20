@@ -1,129 +1,137 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAECC5DF87
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 10:29:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A264C5DF87
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 10:41:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F192C80C7B;
-	Thu, 20 Aug 2026 10:29:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 47DE760765;
+	Thu, 20 Aug 2026 10:41:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 48e82BpA1bTm; Thu, 20 Aug 2026 10:29:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WKtQkkgEUS2x; Thu, 20 Aug 2026 10:41:09 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787221753;
-	bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
+	d=lists.u-boot-project.org; s=default; t=1787222469;
+	bh=EE9jGj4tRGdJFtBInvCCgsyv3TzhOO5Ul4QR5t8iVss=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fkUgtNRNcSxvfbGW7MRJTFGy3t7fLn/PxkJ6UBdSmgO5TCkSo9akSPxtqATPQ7LqC
-	 LKJykkT4xL+ocyWY5Ur0+KGsg7brbmr1sTO9g3FrC/dYQKpjxUBBseJjvTLJOVF36G
-	 EpA/UjC2ZXg2UJZP60WwoBfOmvnxVsIGQ0hmPVJ6QYbTUa2FmJ/CaAvC6mM3a5JAaa
-	 2SLqj0p75LPC6uHdHJGJMTOzsvpkDjzOajbVHHvl50oMKLBbaxjUo/ekP8ZNMDwhaH
-	 rwVvLByjP+8jDIiIAbrpS9Iyz1XCtD8OFXUGQ9CfbSyfg3+pTVLpej/s1bn48h4F1T
-	 Q/bTztBVWySTQ==
+	b=XFIiBufrecYQ/J3+tSppf1bG8D1OVmHBZf1GQrhoGd4tXUJH3nQSTmDCyTGhkq5B4
+	 ucIru19jdtDfemchJfah8y6Y31Ivhq2iRHzuiZQLZ7l0yN+2xqBSHHDb6iDVYfsbhQ
+	 qlVJ7DSykWRUwnLnbA2sPnA3+hfcVAzMQZHGwMhepSCNO5ST8B1M1Hm3aVFK4ygUkm
+	 7GQJrZhByIUBAnKMJ7x6OAWc52DrjTd/zZFXVBtCuKqxDF9LppdK6LmMRw/prMmKsR
+	 GFcSUSC4HZOsbl8zi30o239qs9CmCBwzZD3XdMywP9/ELf6SgIopFd4ruYlPylQque
+	 tJ8+V1xnMa2lg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5D29C80C84;
-	Thu, 20 Aug 2026 10:29:13 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 59F471460
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:29:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 38B02606E1;
+	Thu, 20 Aug 2026 10:41:09 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0D0EB39E
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:41:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3AA7040281
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:29:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id F2C1F40291
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:41:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sBOKCJyBvQ8f for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 10:29:11 +0000 (UTC)
+ id gxNE89vMVThl for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 10:41:05 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f2a; helo=mail-qv1-xf2a.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ client-ip=2607:f8b0:4864:20::102b; helo=mail-pj1-x102b.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Kczsq8sZ
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7D37F40275
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:29:11 +0000 (UTC)
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-902e4af2d9dso5449396d6.0
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:29:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787221750; cv=none;
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=6AVS5lRs
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D8D5940281
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:41:04 +0000 (UTC)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-3811f512167so2892904a91.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:41:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787222463; cv=none;
  d=google.com; s=arc-20260327;
- b=HdE2mlnsuhzkGKG4coH+Wq7zguI15IQ9NdTxnJL2K5qqN29Zinju9TiPizw3bPW0NS
- +T+6/KublI2XQxRNKYuzYVyokJS3DjFRePZp1yvrRXhkhlbkKOW+k3whwlUf5o66qg3F
- 2WSRfBYgKNMZLApWYn5zjus5gLV9NkDMUQWxMFiko0umf7vM7dQZB71/MXtsDT9QG/bG
- SnK+AyIUsvbKbSloDoAWRZSfRtWmN+WghgRpkqfMa/Amg+V/mmtJZwmX7OUOQoIjO+UA
- XGJKVjFcIreSlBn0/82MQHJJbQdUTf2z0/iTOUwzh3LpI3bD9nWw1PKpyqsZ/l+nXjD+
- hGdw==
+ b=FQ1DkUn99IuP2T0ScCdyM4rNrW/i+jHbsY6T4WPQ6rO19oBamcUymvNyC8HO66sdxS
+ Y1YIz/HXasBlcQi449fQiIxEXSgC/aGOUPpuZ6d9V2VbI09TA9+W+JDJ3mvtCUzKgPCA
+ ccZuJsUAlUxpOrzLsfgOqFeaVPC3EfOh5/LctIKRApvbYHNkbj2ZCUTJtCxPg9c4lcfb
+ Pz1l9U1SWNHhUAKvLSLUcQK6a5r/i8A8YvugQ4jFkkcNd0O4vlXYckqqXtdYgZOU/Ea9
+ jJ5MfRo9HKAhvsZnIMfCRRGCgeP4TBBNRDwC3mAbxa/CxQtKPlARycpcUEtm0OXrdAaP
+ ENdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
- fh=T16Bv44u7Uz0Q1ZW0RAuvVMiv7vHnYmGtVeXn8AIbGw=;
- b=R6oU1tAuVvP832MS/eJE+FEIw6G9/Pboa3loMP5wzL4mkJQGJRikO4qKZPGP6gHM4c
- dBJSBRBFa7wVsTuNXx6KiPo6yZASz8X1ZCCcyderTYLPFQzhx1jBcEya4ca4MMeE9AQx
- PyXYJBCH0RkIGjKV535lua6vJT2HljGB3o7Lb1XoWuA1yVIad7PamIFgbatfBh3O08fv
- xMPNcn2YF8rTbOQ50kqw97okFzmE+XTmVsx18Xgxr0ZeA2p+LPcx0cQ1MIohORbc89HZ
- uZI1khIp3LMTfTorIQmPg/vKhfx/lwgaeVxC2h3J2UWk2dfDdWGi6C8nbbILl6cwhrMO
- tL5g==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=EE9jGj4tRGdJFtBInvCCgsyv3TzhOO5Ul4QR5t8iVss=;
+ fh=oM33lYcqdRTfgwY+ybYfFJOWMaWry38TiftoBASee98=;
+ b=QCDW7xij6NqiqqtN1XNxwtCNOewkf6WtItzqAv745bUzTyRbqAbvrL/o0YhUPeEoSn
+ 2asWBNcfggV3M1CGIfswZPPVxQ2wpTMpKlZj5nD+aBNKBIvsafGE7keZvdSqiyUEzl6y
+ f3xLsBWOmrvM3AcW8VDlx5NaQ7cFIHqD8War+fnHJ2PUfvju7LzlQzPwzObGyzgu/Sbt
+ 632UoVXoBdvS5OqzKa/1ZUFv7N6CwXQQdeJ5HdjWQFhHo+5c2/nlPQLm177O2DWRsupZ
+ IqB8KRRFOKNHpD3cgAnLMV9U25h1me9yj3OJzLUcWKdQhx8AhFYRIEbT3cKgM+C3QDFw
+ uBtQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787221750; x=1787826550;
+ d=flipper.net; s=google; t=1787222463; x=1787827263;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
- b=Kczsq8sZuisx9DagRCU9ubhBP/tuKRC48CtoKQOZ1ZUDjNNkzVmCDYsDiyuGIT1R2Z
- yRZwAi+v7qKKLSlP0B7YtBVEJWLIV1F6OMVcUC1zhDtarLlKcQLFSDvDKflnj4YpifaA
- ZQq3UwAfSftpkFW8x4Fl37JdIPhNmNuUEndJQUqUQRA/HFO0cXU6WxIRspjJeU56btXl
- M/kV+0nYk+yV3L5k/6uKzrwxxvhDxfG/XUvjs6ssmx1qBrTZywA6Q4t5YklSruCUXMlb
- BUXuu89BblZVhrIQM1gp+/JaMyMEouUk/fnrJkW+QW7mHNZtfoie6xX+STKRQNM206hq
- B18Q==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=EE9jGj4tRGdJFtBInvCCgsyv3TzhOO5Ul4QR5t8iVss=;
+ b=6AVS5lRs6W93eNzx/X++5yPHZagKZIb/pmOB/zILJXlgS9K8tdIU7DeIuxvo0B0FhV
+ 2lcaQw7a6mDJAw6v52uDQSbCOVO7aj5GNqMobl5zZMikFeRZvXRrz0DunKCesONlKbnq
+ 4/+e1WOc4UOQ4bBGBTt8IWN1jrpxQRP3V7+UHryMO3Ajn2adNTVDNKZYqZ2ZjyQVW9+S
+ 8s/2IURHzz/CO1aDHHQ0bMTFRugdZuLSCtX+XTa+liHnIXbwQp5VYy2Yrj2XsImjZfEm
+ GCw810A2FpyUeBICdlse2CY4m9rp9eDmDSSUJVQl8OHBfiLoMUiVEiBMeridf6V4iYSh
+ 80LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787221750; x=1787826550;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
- b=M7AA9LMaNtVOSApYYtdBcZ0eFMjcMD60114am37UhlwP5XRXYtDcD7+flsau0UUZPG
- 4jyCQU/ZX0E7O2Zgxc3ZpQPYPRo0Ha9kWCm2T4mzl6cq/JgAGcOyREiTtCSqLnXer/rC
- 4SbIbl6pZKHFUJZGqCwQafBascsd2WmDi+rsFqMdE6cbupwN9IrjpVYkOOTHr8nNfdPh
- Sx4xnp6zgiUVRATsMFJYG4cjUrhVoVFTbEZros4brVllSMBLEZtWTj6rc/khWVg28h4n
- ZwCfHVULBtTX07iyVl8FRR+Uiu5NreQ9hxc3Mar+LhvtXp4ta/3HW/TKF5Zrmy2uKMfa
- TVRw==
-X-Gm-Message-State: AFuF++lFRyh/r3mvKxhDTGzYd38t0g3g3dChMdSWLSNKHp+fJtNqlS8k
- RzNDvSNwfBEZGyvqAKZYNokWQGpBV3fxQmtMFjW07BQjKDEkL7mwrnBg0zwquksrqsBm+6OD2cz
- ixjAQUy2oabCzRXvtNF/sfoyeaiyVtR1vtQ==
-X-Gm-Gg: AR+sD1042Wn/2oYhQSk5MWF6EXf6pKWXn5pemQtIZM6qdmc7rNvW6ybHoIqo1fYsq5/
- +8nmOS3VZxowUm+JuZGFH3Y9vfiMwEflBslbV5WavjJKf5+W2Jkg0WRPEZmfLT8WwPN9JuShpg0
- kv9ND2rFHHTBsYbCMODwP0TZe66eIm++zRneDJlMFGBEiGM7YCFNxh0XpOeFif0FXZdQQcXrtbw
- 3fSBFcvxn9bxSCmZ75jVtpWfy/T5UP9WEtIV/t1z3w3WHPUktnKLbDkfFPyTyxSEs1eY00Kb0C5
- x9k+NsBVWykQ6qkJG/qJhMSJdmPF1NIdfK5otBU2IwBZbvx/ej75aLESBVD9KsAfEvD9ILVHsAe
- 9ck/YbvoYzQXpsyJ6rB+yIMrzn5gt5gE2ZRtCmw58it0pNv/mKAsJOhqwwnmFCBmHxq62AkF987
- liwzVx/6ZRIIy8yWJUPXjoFSkNMxSBjBlj8Vx8ECs8RJjMhE8TEA==
-X-Received: by 2002:a05:6214:4c8d:b0:90a:7cb8:70b3 with SMTP id
- 6a1803df08f44-90c6a7d07a7mr55959306d6.0.1787221750012; Thu, 20 Aug 2026
- 03:29:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787222463; x=1787827263;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=EE9jGj4tRGdJFtBInvCCgsyv3TzhOO5Ul4QR5t8iVss=;
+ b=e6ru9IIa/Z/A2ai6D3GIV5LBxHPlMtBICjxW9wWQTGTS6utojRavA6K3iomZOFJkW2
+ hAPSbhhG06M5GACQK1s5iklOHd2EHOMU/7V0Wdqp/2RwBO5kU2okmNZVkzPGP54sFfMK
+ uZcOGNFXJ5RBhr2IQ0TyUFJwiQCMgY2UafE1zCOoMg80bQxuDWmOh2okD9HLdDQi7vKx
+ lt8iI0ldn4V4vc81Ju+WFTxUIQoIWxSLZvErJwoxQkfWTm4CrHk1iPiWSDf0nZk3Se1z
+ wDXCsoAdbTIKCUcbLWLbuhJjFoW659O8v+wjvh9ZKIpH9/+2sDgNnXCo+PqrjXdrqD/Z
+ 11Xw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrkCA8rBgq9yQ+39RYtC8qNLaK/kKAAc7LbKO4sBxhg32wdYOWcxDazRHvwgK+Fn/WrHeDEbww=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nXRPxBSgRr1fyYRfpQpMJoqIEoNMYc+CgFTtAXyAaC0vIe4RVM
+ eQrZpBuKqdHMR7VIRrguxqdYnRL60y2u7WfEVq0V1qI0iMQ8jaCtac54qQ029QiLyYnFpWisaOV
+ B9QdD8ye6RFnjUpLtQLKM5FJOj+gG0p15b4gLqk9mnQ==
+X-Gm-Gg: AR+sD11ODOUvaTEETDI9mNNMskYeGMvhS7sJwMnHY7QvmG9kI95d6aLveAk0mvRPIuX
+ gJ6jXhegTl2uOPMWgc20ob1L5EGSU9EnfjVEugVwuGMLys39FimxSeYZsoSTOAvLUDx0kiiC0Xj
+ Gs0KUPJUNJ9Pys8OS6FdzpNnZVQECavJ3FbcVnEMJ9/fxMcs1aamDbz1EIjKYQPXEXEWdDtZE0N
+ EyqHQrPywllL4nYmbg5Bi3y7hyGnz/eSJE7xYC1EPNCh8ENskTUD1SBiyovT5U8fXg4UPhji/Uk
+ EOy1CkAjReDyygjcdChyhoWyqPYOtsv+ZIZwPXom/4N7zl0rMtSAmSHxDr4zuZbswHg+2uJAlJf
+ FXw==
+X-Received: by 2002:a17:90b:544f:b0:381:152b:d596 with SMTP id
+ 98e67ed59e1d1-3958108a4b0mr22799748a91.11.1787222463295; Thu, 20 Aug 2026
+ 03:41:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260820092623.1647844-1-padmarao.begari@amd.com>
-In-Reply-To: <20260820092623.1647844-1-padmarao.begari@amd.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 20 Aug 2026 11:28:57 +0100
-X-Gm-Features: AcwNN1WD9I845mY_KyPmb6qP9EHOt4TDKNuTmM14n27gLf1u9RiwdbDcmMSj5WY
-Message-ID: <CALeDE9NAGVvWm4Gt6rK9h__f6o4_TuV0fGjoB1WdWd5=7pQHhA@mail.gmail.com>
-Subject: Re: [PATCH 0/8] net: mrmac: Fix Rx packet loss on back-to-back frames
-To: Padmarao Begari <padmarao.begari@amd.com>
-Cc: u-boot@lists.u-boot-project.org, michal.simek@amd.com, git@amd.com
+References: <5e1799a6-68b3-4535-b56b-f115467e637e@gmail.com>
+ <483e93ba-a427-4ed1-b5f6-8d6cd11c5a42@gmail.com>
+ <c885ef7b-5d2c-4a0f-8681-43f3f87c650f@cherry.de>
+In-Reply-To: <c885ef7b-5d2c-4a0f-8681-43f3f87c650f@cherry.de>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Thu, 20 Aug 2026 14:40:48 +0400
+X-Gm-Features: AcwNN1XtQu6iCI_YyctHCh3E6rmGglirHLt3P2iDkKE0Y09ee7iAinV_FU1KSUU
+Message-ID: <CAKTNdwEaUsQLe1qmn8JUVEXWqyO47ny510XN4K2+j59FGih9YA@mail.gmail.com>
+Subject: Re: [PATCH v7 5/6] rockchip: doc: add back to ROM section
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Johan Jonker <jbx6244@gmail.com>, kever.yang@rock-chips.com,
+ sjg@chromium.org, trini@konsulko.com, u-boot@lists.u-boot-project.org, 
+ eddie.cai.linux@gmail.com, Jonas Karlman <jonas@kwiboo.se>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -137,52 +145,150 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Thu, 20 Aug 2026 at 10:26, Padmarao Begari <padmarao.begari@amd.com> wrote:
->
-> The MRMAC Rx path drops frames when two arrive back to back. recv()
-> always starts at rx_bd[0] and clears the status of both descriptors,
-> and the status field is the only record that a frame arrived, so the
-> second frame is lost without any error being reported. This shows up
-> with multiple boards on a switch, where the extra traffic makes
-> back-to-back arrivals common and network transfers time out.
+Hi Quentin,
 
-Out of interest is this using the legacy IP or LWIP stack?
+On Wed, Aug 19, 2026 at 4:49=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
+>
+> Hi Johan,
+>
+> Please incorporate Jonas's comments made on the v6:
+> https://lore.kernel.org/u-boot/1e47521b-c3f2-4c62-86eb-51866b911968@kwibo=
+o.se/
+>
+> This also applies to patches 2 and 4's content and commit titles/logs. I
+> won't repeat his review here.
+>
+> On 8/15/26 3:08 PM, Johan Jonker wrote:
+> > Add a back to ROM section to rockchip.rst
+> > Correct Kconfig text.
+> >
+> > Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changed V7:
+> > Move under a 'Boot flow' heading
+> > Remove "Some"
+> > ---
+> >   arch/arm/mach-rockchip/Kconfig  | 16 ++++++++--------
+> >   doc/board/rockchip/rockchip.rst | 11 +++++++++++
+> >   2 files changed, 19 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kc=
+onfig
+> > index 1a2e7847c9e7..c1dbcce1e27c 100644
+> > --- a/arch/arm/mach-rockchip/Kconfig
+> > +++ b/arch/arm/mach-rockchip/Kconfig
+> > @@ -600,26 +600,26 @@ config ROCKCHIP_USB_UART
+> >         SoCs will enable this routing as a debug measure.
+> >
+> >   config SPL_ROCKCHIP_BACK_TO_BROM
+> > -     bool "SPL returns to bootrom"
+> > +     bool "SPL returns to boot ROM"
+> >       default y if ROCKCHIP_RK3036
+> >       select ROCKCHIP_BROM_HELPER
+> >       select SPL_BOOTROM_SUPPORT
+> >       depends on SPL
+> >       help
+> > -       Rockchip SoCs have ability to load SPL & U-Boot binary. If enab=
+led,
+> > -       SPL will return to the boot rom, which will then load the U-Boo=
+t
+> > -       binary to keep going on.
+> > +       Rockchip SoCs have the ability to load a second loader binary
+>
+> If I'm not mistaken, it can go back to BROM more than once? I vaguely
+> recall the maximum supported number of images in the rk header to be 4
+> from a discussion we had with Jonas but cannot find a source anymore :/
 
-> Fixing that needs an Rx ring the driver can index, so the series first
-> makes the ring scalable and then fixes the bug:
+That's right, the RKNS image can have up to 4 entries. I've been
+digging into RK3576 boot ROM quirks and can confirm from its behavior
+that it checks for <=3D 4 when loading. I've also written up a separate
+doc [1] on the behavior of the RK3576 specific ROM version, but I
+don't know how well that generalizes to other SoC versions.
+
+Another interesting part that I discovered there is that the ROM looks
+for the image header at multiple offsets into each storage device.
+This can potentially enable failsafe fallbacks to guard against a
+failed write or a corrupted image (e.g. write known-good copies into
+higher-numbered slots, and only then write the fresh idbloader.img at
+sector 64).
+
+[1] https://docs.flipper.net/one/hardware/rk3576/boot-rom#normal-boot-from-=
+persistent-storage
+
+> Maybe we should reword this to "have the ability to go back after SPL to
+> BootROM and have it load and execute the next binary in the image
+> (typically U-Boot proper)"?
 >
->   1-3  Independent cleanups: check memalign() failures, give the
->        driver its own Rx buffer pool instead of borrowing the shared
->        net_rx_packets[], and read the link speed from the standard
->        max-speed property.
+> > +       after the SPL phase. If enabled, SPL will return to the boot RO=
+M,
+> > +       which will then load and execute the U-Boot binary.
+> >
+> >   config TPL_ROCKCHIP_BACK_TO_BROM
+> > -     bool "TPL returns to bootrom"
+> > +     bool "TPL returns to boot ROM"
+> >       default y
+> >       select ROCKCHIP_BROM_HELPER if !ROCKCHIP_RK3066
+> >       select TPL_BOOTROM_SUPPORT
+> >       depends on TPL
+> >       help
+> > -       Rockchip SoCs have ability to load SPL & U-Boot binary. If enab=
+led,
+> > -       SPL will return to the boot rom, which will then load the U-Boo=
+t
+> > -       binary to keep going on.
+> > +       Rockchip SoCs have the ability to load a second loader binary
+> > +       after the TPL phase. If enabled, TPL will return to the boot RO=
+M,
+> > +       which will then load and execute a SPL binary.
 >
->   4-6  Make the descriptor ring scale: index the contiguous BD blocks
->        directly, build the Rx chain in a loop over RX_DESC, and
->        program CURDESC only once the ring is complete in memory.
+> Maybe we should reword this to "have the ability to go back after TPL to
+> BootROM and have it load and execute the next binary in the image
+> (typically U-Boot SPL)"?
 >
->   7    Track the descriptor to consume next in rx_bd_idx and take
->        completion from the per-descriptor COMPLETE bit, so a
->        descriptor goes back to hardware only after the network stack
->        has read it.
+> >
+> >   config ROCKCHIP_COMMON_BOARD
+> >       bool "Rockchip common board file"
+> > diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockc=
+hip.rst
+> > index 5e16e860bfd5..d5945e805ba8 100644
+> > --- a/doc/board/rockchip/rockchip.rst
+> > +++ b/doc/board/rockchip/rockchip.rst
+> > @@ -560,5 +560,16 @@ config-flash.ini:
+> >           PATH=3DRK30xxLoader_uboot.bin
+> >
+> >
+> > +Boot flow
+> > +---------
+> > +
+> > +Back to ROM
+> > +^^^^^^^^^^^
+> > +
+> > +Rockchip SoCs have the ability to load a second loader binary.
+> > +If enabled, the TPL/SPL code will return to the boot ROM, which will t=
+hen
+> > +load and execute a SPL or U-Boot binary.
 >
->   8    Size the Rx ring from ETH_PACKETS_BATCH_RECV, so a full
->        eth_rx() call can be served without hardware running out of
->        descriptors.
->
-> Padmarao Begari (8):
->   net: mrmac: check memalign() return values
->   net: mrmac: use a driver-owned RX buffer pool
->   net: mrmac: switch to max-speed property
->   net: mrmac: use contiguous BD arrays
->   net: mrmac: initialize the Rx BD ring in a loop
->   net: mrmac: write CURDESC after ring setup
->   net: mrmac: fix Rx packet loss on back-to-back frames
->   net: mrmac: increase the Rx BD ring
->
->  drivers/net/xilinx_axi_mrmac.c | 235 +++++++++++++++++----------------
->  drivers/net/xilinx_axi_mrmac.h |  20 ++-
->  2 files changed, 137 insertions(+), 118 deletions(-)
->
-> --
-> 2.34.1
->
+> Maybe we should reword this to "have the ability to go, after a binary's
+> been already loaded and executed, back to BootROM and have it load and
+> execute the next binary in the image (typically SPL/U-Boot proper)".
+
+On RK3576 in particular, both the boost.bin (which fixes SD card boot)
+and the DDR init (the closed-source TPL) return to the boot ROM, and
+then the boot ROM loads the SPL (and optionally its payload) into RAM
+and executes it. So "a second loader binary" sounds too narrow. I
+would say something like:
+
+Rockchip SoCs have the ability to return control to the boot ROM after
+any loaded binary has completed execution. In this case the boot ROM
+loads and executes the next binary in the image, which for different
+SoC versions can be the DRAM trainer, the SPL, or any other payload.
+
+I wouldn't mention the U-Boot proper in the same row, as it normally
+expects an FDT to work with, which the boot ROM won't provide (that's
+the SPL's job).
+
+Best regards,
+Alexey
