@@ -1,169 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB680C5DF81
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A47CCC5DF85
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 16:29:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7A17080C9F;
-	Thu, 20 Aug 2026 15:57:33 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A6lGkqjotKQH; Thu, 20 Aug 2026 15:57:32 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787241452;
-	bh=IoVNW5l/JYbO+A1xe/meCuk9NHdFxAtcb/93FBcmBT0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=rnFXOqZYYNz5wxnof9DXfH+1aLjsimhZjkEVK62Bu3EuJZdtaYZk/VCnxwj6gFj60
-	 rZUz54TitYcLBe4u9RGaMi3Mfy7LHvXGw0iP79Khrx62ifKIU0KvbriScHY3p0xN5k
-	 cQ3cpRXJuv08ZWST7v+0IdP6nkdFLBBRmKTurewCRz2j87/2LzaDWshdU0Ge0G0cwq
-	 tZpl4i7kXyp8AUzgKKb09udwIjW8lAC9gck+1DNHpbsssb2M0rM7wOOvuhdOmUzQFq
-	 Sk1eOr7IAsHmhhGeWNqhpcpfz/nXNKJozo3ix1tdaDfsmQdqdExP9Slb+0b/6Ru1Ft
-	 VDpybuzYWb1Qg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BCDCF80C23;
-	Thu, 20 Aug 2026 15:57:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 74A48323
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:57:31 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 72161607E7
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:57:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 20BDA60648;
+	Thu, 20 Aug 2026 16:29:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ho55nJli1qgF for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 15:57:30 +0000 (UTC)
+ id jsCDUqoffC4x; Thu, 20 Aug 2026 16:29:16 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787243356;
+	bh=+wlqT8w6Vas3uCYo45Mk1fi2YyHznGWscnoyg3SGsFk=;
+	h=To:Cc:From:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IRAdx7KFyLGqupoitUIHZ+PfPjH3PawQ3gbAIyG+VoAYwUoluLF8/+s+PCDn4lbEL
+	 O69H3fhJCZSm9nz/izg2ZsQwz0kQYjUCXKE5gOIUxrtnjZs07PpZ7tN55NYi0BCPW0
+	 gb0HEbrrajc/qfT4qExWRLuMg0N0Gw9yOO32Ig7s61Ii4DBUfijGc0K+5alNhjIzFH
+	 b5V+AqmhIzNTndrTHduxdMaGfwyJ88VmnlCdxT82utsPbvT6lOoh7hz5qxcfn0PnFe
+	 jwwOdV2HO20BpNnH9HiS2+ze3yMzoXHIl0ZdnNIQuBQvY4mihDdIcxODCLxxJwJLMu
+	 Y26iRvF1helWQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1683C606C2;
+	Thu, 20 Aug 2026 16:29:16 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id EA62729D
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 16:29:14 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id DBC5A606C2
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 16:29:14 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ihxaKe5CSNBl for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 16:29:14 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::3;
- helo=du2pr03cu002.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+ client-ip=2a01:b747:3006:206::45; helo=outbound.qs.icloud.com;
+ envelope-from=valentinliu@icloud.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=Bf6wamiU
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 75376607E9
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:57:30 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ScvjSNkiXpNL0a1LSJvz0JEtqrn48iiL4MuNfokhxunwk5WcVPDwEvBaijpPbFC1xmY7HMCUDjmhxkXRwWUiO6O1RsLXojNa+t8JpSfdQFBJzIG2VYs8kjP+CwN03jgHMsHksRPF0Pc1b8+3emPEvT9tPbmELB9hLVqZ3HXxVonDZEfsci2W8VRi0Swyvl8OnsLHj36J3vHY8ZmrNgQI+tJmb+acriDgH9IGb3SRmU1QzCsFgtwu1QT4k4F9r0ehBgFxQdTEfvC29nPEp9AtCEuk1mei2MkE7wl2kII2zhi3EEJ26qO+s5i7vQSHV6ojBtSLjNAcJ8D/zkOWQKLsCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IoVNW5l/JYbO+A1xe/meCuk9NHdFxAtcb/93FBcmBT0=;
- b=AvitimIuhowE/F4RSx65TBMaOKsLHShesR7pJPjdEkJAIlmuvH6Id0GSDo007Y0qq0Lfu89EWK6yDlfLvORh5eb/F9ZRPC2Mq/7HP8LIW2XSlqBu8oV+BroQjjdQT3xWPCWt2eMBUzkZAmDkRfCEgHIBecXvnePH1eWRwMPi4Nyil9BIx2wxexCsfjEmtJ1WeUILcxUNxFHfiiQoEVepoLWJp1SPnBHlgGZjJBUU/9xcKMuzRyyYHRAaCq1o8lxerW4wjznxOKgoGmoTz8UWEP8og0bK6y0e87UmvpXlYob65MoMRouwwcASt7JXZUi2ABIrbplbOxepDez5uVlvwQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IoVNW5l/JYbO+A1xe/meCuk9NHdFxAtcb/93FBcmBT0=;
- b=Bf6wamiU53RP+wzGxofT0ae1ZcNInh4sRocTcCDWozNKG45GCGuW29wsH1UF5aSz0aEbSuY58R+E2V/qdeT67XsnaduAZEgs+avZDXW8+zhqnRcxkHhMDLU78u9BsUiMykWoH2qlQdjac7hrX+/uMkT6vUkvieDan6+V9Ey3YI0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by GVXPR04MB10489.eurprd04.prod.outlook.com (2603:10a6:150:1da::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Thu, 20 Aug
- 2026 15:57:23 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0339.007; Thu, 20 Aug 2026
- 15:57:23 +0000
-Message-ID: <3a8bdd54-3ebc-4659-928b-ea2f88cc22c3@cherry.de>
-Date: Thu, 20 Aug 2026 17:57:21 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] spi: rockchip: skip the unused FIFO direction on a
- one-wire device
-To: Cole Munz <Munzzyy1@proton.me>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <u-boot@0leil.net>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>, Alexey Charkov <alchark@flipper.net>
-References: <cover.1787238071.git.Munzzyy1@proton.me>
- <9ddf5b446d236c42e39aef5c7dae9bc359dff694.1787238071.git.Munzzyy1@proton.me>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <9ddf5b446d236c42e39aef5c7dae9bc359dff694.1787238071.git.Munzzyy1@proton.me>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P189CA0005.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:802:2a::18) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+ header.from=icloud.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=icloud.com header.i=@icloud.com header.a=rsa-sha256
+ header.s=1a1hai header.b=qoOglXTq
+Received: from outbound.qs.icloud.com (qs-2004g-snip6-6.eps.apple.com
+ [IPv6:2a01:b747:3006:206::45])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D686060648
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 16:29:13 +0000 (UTC)
+Received: from outbound.qs.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-east-2d-100-percent-10 (Postfix) with ESMTPS id
+ D85D4180013D; Thu, 20 Aug 2026 16:29:09 +0000 (UTC)
+X-ICL-RepId: 01a02001-4734-775a-85ef-355d854bafce
+X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQ9IHV8FWhxEC1YCXwBLVxQEDlIBUgVGGVcUWhh3AlEcVg1XQ1QEX1BfHA4EVAddBV1WUAJaS0ATBEATBVIHXU1WDUcPWB5cFBcJQENeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVaDlsERxQXG1wAFwZbFAREAQ8AXQQUXxoeDlVYUV0NGVUIGlMHEVpVUVwDDgNCXElQDAUIch1cVlACWlUSBEAIVlBeCF4fTBw=
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
+ t=1787243352; x=1789835352; bh=+wlqT8w6Vas3uCYo45Mk1fi2YyHznGWscnoyg3SGsFk=;
+ h=To:From:Subject:Date:Message-id:Content-Type:MIME-Version:x-icloud-hme;
+ b=qoOglXTqtCRCNqdzmvkfCmGHH1+wX84T5ZYqZJekr7ZUg69J9xyq0wZ0vpIbIIfuRrw/JB5pxlQ3f5xoERaRcincgsVDN1z+1Ass7tqTURjXv4EIE1fr8iZrslqFYgNk3ZVTFHHezyQul1DAO8/Go9wltWdEx6S7nJYfq4wNNdcEO1mqklpAjmKNhV5meQtG0KUEcyICphMTYbLkwRn1h/O+MtOYMUEI7+xTs+ujcGD5osMbZ4OKwPrbME+e6tuJ37TlTdW5n76NGMz9/Hd2wLHO3fvS3P4FwmpcEohbGt90lOIxQqNcpI3a/HtZfnUs+OJM2ST8IonJaYIvPlYQPA==
+Received: from p00-mailws2-7c9f864df-88gsq (unknown [10.112.113.19])
+ by p00-icloudmta-asmtp-us-east-2d-100-percent-10 (Postfix) with ESMTPSA id
+ 315E9180021C; Thu, 20 Aug 2026 16:29:09 +0000 (UTC)
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com,
+ ilias.apalodimas@linaro.org, kever.yang@rock-chips.com, sjg@chromium.org,
+ jbx6244@gmail.com, jonas@kwiboo.se
+From: =?utf-8?B?5YiY5Z6j6L6w?= <valentinliu@icloud.com>
+Subject: =?utf-8?B?UmXvvJpSZTogW1BBVENIIHYzXSBhcm06IHJvY2tjaGlwOiBzcGw6IEFkZCBo?=
+ =?utf-8?B?b3RrZXkgZGV0ZWN0aW9uIHN1cHBvcnQu?=
+Date: Thu, 20 Aug 2026 16:29:09 +0000 (GMT)
+X-Mailer: iCloud MailClient2630Hotfix39 MailServer2612B5.952a5ad53a12
+Message-id: <2b766dfb-cb3c-4afe-85ac-b14e12e1ca2c@me.com>
+Content-Type: multipart/alternative;
+ boundary=Apple-Webmail-42--b3d78300-66bd-465e-904c-9714973bf5e4
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|GVXPR04MB10489:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd5c2461-d41b-4142-0b89-08defed3b937
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|10070799003|366016|1800799024|376014|22082099003|18002099003|56012099006|11063799006|10067099003|4143699003;
-X-Microsoft-Antispam-Message-Info: 1Hbn6U4xqgpbGHUisWZTIoiFUIfQmVCiPDkR66qvPNPHUJdZi6O51gsjrqyJ7INys6fyA5Vu6L7xiJaOQMVxP6rXhOLAf0+rhNEfV1/M98E8ARhSaMmqg9xOo8stUJkT4bK0UaeU/YQLMne5T3/6AQZPKyqO2/8uWmNVyqh/lOUh58i7J+fG+7cS1nC/XYncSuBvWB+9cdB2KHgzC70H+n1Skubg8J7aU47DTFaSog9v/+bcY7R3szkNRv8ECdXpdrtZt0ZlNmB8mIFEvKBKkvuAzo3cFE3Lpflbqj8Il46VrB3ePiIiNq6jkGZU2aIn/VNWwmiRivSu5EtKa/2WwyYccaOOYY2SlLbfEayXX+lDVl9c5JvhovO/bNmkYPg8Ae1RQ9dfdoQEhIx5Kz5Sc7QREKf3Xjz0VziryJsCd9VLvBp8fwvVA00n0QJCO8J9HqXjlWs8NkGBNSHKcBP60gu7iAaOsJByx4NEjLCbjrUARRZtOkDKrp9Oq9SArd9QMjEsJYjWoZ+z77i7bQ8p569ffMCcmhNzua0s1yO1jQT9pWA0ebhrO+dhmRuAQ8CJTZS2/wIkOopr3cADIRd2kY+VRMqnwkhPdgekadYnZYyxRoH97Z7IFAUjKtob7izQy2+zruUMb5TxU5V9DALFI7AGuUSbhY5HbyaJ8531Z1U=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(10070799003)(366016)(1800799024)(376014)(22082099003)(18002099003)(56012099006)(11063799006)(10067099003)(4143699003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YlBpWUx2V1dmenJaT2IwR25sNm92VjEwSktSSFBVcWtabUpVYlN3YkFhajVG?=
- =?utf-8?B?dzFlWC81RkFJQ3llOUxuek1nSWt2cEFCTC9HQ2hSaXBvVjM5Z2hya0kwQkZu?=
- =?utf-8?B?ZjYyWHFIbW0rZ25JcFdWd0hzaUNmWVlwWU55NmlPbS84ZXcwRUc4TDgvczdW?=
- =?utf-8?B?aWhIODYyRER2dXFWQWhBSk5mS1R2Z2xmOWRNSmxXT1lTdm0wdzhWc3E0VCtP?=
- =?utf-8?B?eU9Ic0lQN3M0MFdLSEoyUERBSndLNVNiYnhsQWpsb3RxYWNsNWQ1Umd0V0s0?=
- =?utf-8?B?T3NZRlNSbG5vRkh3L0JZWGU2VVpvNjRSV0xVTWZTZlREb0lNbmtVcDJjT1ZI?=
- =?utf-8?B?VzZPQ2pMNWFwbjhEREtrQWxIQzZYUWJ6UDNPOFdRZWl6QlhxTkdtWHRscURn?=
- =?utf-8?B?cmIyVlQ5S1d6ZllqY3VxcnZ0eUlrN0FMMFd2VDgzajUwWm43c3VROUlTZTJ4?=
- =?utf-8?B?ZXM1cmN6YlhLdEI1bmtsUGNKNG9PVnNFdzF2S3JVSm1pOVBDa01iUjFyc25o?=
- =?utf-8?B?R3ZIZktpRk1CaExRQkRDWCtMUmVWWnRrc3B2SFkxOHd1N3YydHJrR1AyRW5J?=
- =?utf-8?B?VGlWUngvc2ZzaTc2OFBoM3FMRnhXVkdSeks4ZjZWSTdVSHlhb2NDWkNVU25M?=
- =?utf-8?B?WkFPTnBGYVB4M2V3Qnl3OXVXQUxuQVE0dEZsbkd4NFIzM3pXd1ptNTFsbG53?=
- =?utf-8?B?cHR3cys4MmtXWFNPbEFONFBMUHpLSUhJb1gyT1BNTi9NdzFxWlBoRG51ektE?=
- =?utf-8?B?UnN5WGZIWWJMYkpkems1ZTRvL3FvREJjc3BjeVFZSnBhcCs4WVNrMG9USHYr?=
- =?utf-8?B?SlFMU2h0ekh6Z1ZGWnhkVU9Ud3QxZXd3WlJEdW83QnMzSGpwSm0yWDNNVXhL?=
- =?utf-8?B?dHl2UjlwcGxGWFJFVTEzL29EZlNhVHc5WU5lSjhVb2ZObkF5QXZiaUxqOEsz?=
- =?utf-8?B?dFpXNnRPZ0N5dEJodWRBUlFkbzcvcDlCWlVQamw2eVoxRnJKT1VGdUpRY2ov?=
- =?utf-8?B?cHhhbXNBSHgvSWVObUM2bFM4VVJsakJwajQ4N3ZueFFOK1lhdGYzMDUzRGI0?=
- =?utf-8?B?QU5jV0FKL3A0b3hEYmZLb29nZWFYcTY1WEdCV3FGUklmME5qUFNBSUZsM3Nr?=
- =?utf-8?B?OHFWSUFXc3lEeFNoT1RvN2dxaERFc1lJS2ZpeTd2MktYa0FmZEpsRUE0Q2hp?=
- =?utf-8?B?TVJFNkZiSUtJaXFsdmsxTlBFMHpKaFMrOVlTMjRPL0x0VHBvTTB5M1dTdDZx?=
- =?utf-8?B?b1IxajdwZEI4aENwZjEwbXk3R0IyOXA5amFtN3FXNEs0KzFQZVhjU1RURkhE?=
- =?utf-8?B?N1BPMU5YNk1qSlVyT2pib00wdlJmUm9aNmg1ZHpyVkl5N1FMcGxuSk1nTE04?=
- =?utf-8?B?TTB4cGI2WUhITzBnNWlOYW1jK1RTcUNKQnhzYkpLdDIwcEt6Um1FemgwbWV6?=
- =?utf-8?B?ZHpCNlI1NzlweDdjbUhRSENqRW9PbVNnOFlOV2JCbU5BQWhTbDdJeE9PaDVy?=
- =?utf-8?B?ZE9RZmxmaHNCemsybklTNWk4UlN4dTNpcEZ4WjZJZUtCeWM0KzI5T0V5Z05O?=
- =?utf-8?B?NGVSTE0yTHY5TjR6cHJlY252SXpDdkJOTUQ4SEo2dnFYQUwzOVQ0aTRYbWNt?=
- =?utf-8?B?M3RRSjhOQU1idzhBTUhZWXA2akRKM3l0b0MwZTlhS203RFcrTzdYTFlpelov?=
- =?utf-8?B?VnZIYUZHellmdTh3bEQ2MGtiT1crL284VGpqMVZRcVMvM0dsaHJVYTFINktn?=
- =?utf-8?B?MlFKVnQwaTlsTFRTZGFkblpNR2lRWnJ3MjAybDBtb3RjMDBNMkgwZm50WnpB?=
- =?utf-8?B?V1pDdU95YkFoNFJuWWJYc1RQUmN1SXdTcDhCUXQ5SnQrcExhMXRqMFhBckxJ?=
- =?utf-8?B?UDJGK3pJMGo0ZGtGTUhYbUVBZ01COTluRHpyOVFzOC9Ib3JCWnhNY29EUndH?=
- =?utf-8?B?Sy9EMEdNb29Mb3o0NHpMQVRyZmxiMnVpZ3JOY0hseUVnaU96UUZtUmQ1R3Vt?=
- =?utf-8?B?SUtnYzg0YllLRHB3aU9lNC9VcWFEMlhaQnFFTW81eGQzVmg4R1pHTExGdWl3?=
- =?utf-8?B?QVFwZndZUFZibDRweXUyNTdJc1Bka2ZoQ1ptUHptaVFBczJLR1ZuSzBQei9B?=
- =?utf-8?B?U2tsOWxBNXBuRWRiS000M25FQ0hmQ1lqY3lkSHJmVVRIQ1NxUmsxZnhjUW13?=
- =?utf-8?B?aHR5cUdiSGovVXlVcnVNVnVWUWNkVHB3RkYyS2tWbEk5TVE5ZnkrdmxGSG5s?=
- =?utf-8?B?OCtIcDZDV2ErN2dTMVJHNDR6dkMrTDAyTlVyVDE4dG44TmNyc3c5cVVUSkla?=
- =?utf-8?B?aEUrWDczQ0czYzcwYmhPYjVwNFpiWVhHVkg1dm4rSVI2d0ZONkRWWk10QnNT?=
- =?utf-8?Q?BIRGz2llG+6aKYgUk3RXCVP2ALzGu1EURWVAk17+jY9An?=
-X-MS-Exchange-AntiSpam-MessageData-1: 1plcL7dit4DY0A==
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd5c2461-d41b-4142-0b89-08defed3b937
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 15:57:23.3294 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m5lqNMYlIjCAd9EOP5HF1FBVux4pIuD1DWFDdugo/zJEEFOIR++1Xh3coMnJBid+3mX/QSkYPW8auW55b88+vGPR2TCTOmunus9QWrN9djY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10489
+In-Reply-To: <ca2da16f-1c21-4c39-b1da-03ed30e9a0de@0leil.net>
+References: <20260815183437.7387-1-valentinliu@icloud.com>
+ <20260818165526.764686-1-valentinliu@icloud.com>
+ <ca2da16f-1c21-4c39-b1da-03ed30e9a0de@0leil.net>
+X-Proofpoint-ORIG-GUID: qXeBLe5OthTPG4IpbA1F2RjQP_JJqEap
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDEyNCBTYWx0ZWRfX1ske0N/CSDli
+ RWGAMMkSYzk+rHw4IMAT1j1Gu43ELm+xeJi04Rqm3HwLExq0aO1MVGsVVjvWfwaaMUC8YISP60g
+ xv8kKmu09oXWLUle7BqM6P8Joy4gEEy6a7J2SE1ffx5gL5VcBTHCWVPR3eZ13x1ZP4lZoQ0EXHO
+ FT5uGkOv9nUs+OQ8LrKBA1DfLbncCCQ6rxHhTPFsdJOy6oT9wQ6u3QPRejSLDjWU4lXk96kBNRc
+ xXPDw+wPa0Z0LZUF6vbZB03DibTd3Xh0cp7ca519GAXaWtxmQPhOi6Ux9suWGQVWCT7Wh/Oy7dQ
+ r8U4RCVO+vZekgBDP8q3q5EF4mynKxJPUqnOJQkKE7V4XeS7u4LEXjgN44BarE=
+X-Proofpoint-GUID: qXeBLe5OthTPG4IpbA1F2RjQP_JJqEap
+X-Authority-Info-Out: v=2.4 cv=R5sO2NRX c=1 sm=1 tr=0 ts=6a872b56
+ cx=c_apl:c_pps:t_out a=w0vwr1DNSLjGex3smDq1Tg==:117 a=Sv0fKeRqtYgA:10
+ a=5KLPUuaC_9wA:10 a=M51BFTxLslgA:10 a=x7bEGLp0ZPQA:10 a=LQAHsTbMm04A:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=7copsteyAAAA:8 a=v3ZZPjhaAAAA:8
+ a=tqVgM4YWDJBVsEitlzgA:9 a=QEXdDO2ut3YA:10 a=3U6nK4pU1x26c_a5:21
+ a=_W_S_7VecoQA:10 a=np33tI3PdIrD0yRJz6Tq:22
+X-JNJ: AAAAAAABd/i8mlI6IbSuoYKFT7wC+Bz9JQlA7Br/sT5pRwHJfniE+SrKACibz603IkU0zIceNaD8MXZESbWYv4YlmD5pffz/h1VGd/rCTi3rmvt9/i6K1xOkK2bB8PoAvtyq+Kjhrgi1zEq99/mznhRNMxhQ3Q5cTOlONYc0QUWUzxJpzMQXg4u7wODgu0vx70+EkprQFEH1t+KIszT6uC2d5V9sQAv7eQywDJ6LNlIEIhv8UcN4GBWneMBb6FXyr8yGVO28fQdpHQSU0n0iom35aImPXMtVWtAUdI0h1H3+5N5poGO9MmywsdATy5Riq/3fuqw5f3RB5puJuraoBDR7er1+gSuMC2M3Sxeo+znb+kaAIJ9RBNVWtp53+U5+zO3G86yQlLruCaQ2BkaGjY2uCNHHKWYseXLEkBVuyDKHosW9EtKo1488U6Rtvo5p9mBiCq/Hh3BfXyVPnJyW3YaBvYfje7WWPe3yQnO93y7VHPPp0GK5O1QcHWsn2MlkUqavbJrh12FfP+SQ66Lh495MOk0nUYD5JVZBwv0Y+HLh2XhMJpsn2Og72ouz/njY+V4NaoMCM04vvb3+HSNrqqZTbLunBI5QtTC0+vE8sn+DrpkID3W62o2DUI0nMGQLF2PRyICTNyiLg85pX8ofPyoc9v5m5Qudv2mrCQPMW9Jb3xObOeCg2NsZRpWejRV63SZUwL6Ef1676j5znbX4MDCdiaFRsDGYANcWlTyHvjwc5Ki+d4+w9xuAk/Pbc6rc95JFtBT8BMSuq3kNeFRijJc4lFBYyyVDi0gjIU09Mr1CTDrOqGttg5raLYXL3+PFZ+b0SZ49wF/6lYMGPgQ2jR1lJ1fZOfgOHRDFSBgkAhIx6OVvDUgotn37Vs2VjHXAi96gjo9JoOMIztWJWxeOB5pe+vf1IHxInhufqC7lu+ynIrg1SlotiPudw0BmP75DDQf2hPh9wg5t35CBVoEQpMoGibleOi4
+ Y9B7jaclHZuMgRj3toKHSXMMHOHU809tsn1Q5W3rXSsnc9Ab7cNfWN7LZhJWVpJwv8s8HEvzNqKED1swJc3P9d8sXrgTjQNe5n7PYRITfdmT5pWYVP75we1rWS1DM8Dowr7LrzJDG2Vrpo7Jx080H6DPi9fhuZkqYink/kpnHckP60sVwO1kpg2i+Frgz7YCMxz8CwLwFbMEVK8vDmM2gZ1YTkQhbOstg7srFm958ZFua53AwGgRxvkbJaG5RH5X9+C8EsWTLK7NQjeexaY1FyB6MVHO30SscSf7nTZa971Kq7mir+zva/WCKMlYA0aLATdOo4NMx6tz0MZV17nllAg724F/FSQ7+IzPZjuBfyHMMQWk3Iz5iarbqO01M81CHNaEaTKxoHd8/qKnXehlOjn+eMUhFQRfUiokfdvTu1cwdmAx9rQGRn+DSBy3E9p/P
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -177,100 +110,262 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Cole,
 
-On 8/20/26 5:26 PM, Cole Munz wrote:
-> The controller has a transfer-mode field that can run transmit-only or
-> receive-only instead of both, which leaves the unused FIFO out of the
-> transfer entirely. The driver never used it for that: claim_bus always
-> programmed TMOD_TR, and the only other mode came from an opportunistic
-> switch to TMOD_RO for read-only transfers.
-> 
-> A device described with spi-{tx,rx}-bus-width = <0> has no wire in that
-> direction at all, so now that the width reaches plat->mode as
-> SPI_NO_TX/SPI_NO_RX, pick the transfer mode from it. A write-only
-> display stops clocking receive bytes nobody reads.
-> 
-> The transmit-only case needs one more change. The 8-bit loop paces
-> itself on the receive FIFO and sets toread unconditionally, so with no
-> receive path it would wait on a FIFO that stays empty forever. Leave
-> toread at zero there and let the existing wait_till_not_busy() at the
-> end of the chunk handle completion, which is the same thing that
-> already covers a transmit component today.
-> 
-> The restore at the end of a read-only transfer went back to a hardcoded
-> TMOD_TR, which would undo the device's own mode. Restore what the mode
-> asks for instead.
-> 
-> Signed-off-by: Cole Munz <Munzzyy1@proton.me>
-> Tested-by: Alexey Charkov <alchark@flipper.net>
-> ---
-> Changes in v2: reworded the transfer mode comment in claim_bus, picked
-> up the Tested-by. No functional change since v1; compile check rerun:
-> 
->    $ make jaguar-rk3588_defconfig
->    $ make CROSS_COMPILE=aarch64-linux-gnu- drivers/spi/rk_spi.o
->    CC      drivers/spi/rk_spi.o     (exit 0)
-> 
->   drivers/spi/rk_spi.c | 27 +++++++++++++++++++++++----
->   1 file changed, 23 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/spi/rk_spi.c b/drivers/spi/rk_spi.c
-> index 2c3d70ba7159..81785b5e949f 100644
-> --- a/drivers/spi/rk_spi.c
-> +++ b/drivers/spi/rk_spi.c
-> @@ -283,6 +283,20 @@ static int rockchip_spi_probe(struct udevice *bus)
->   	return 0;
->   }
->   
-> +/*
-> + * A device that declares spi-{tx,rx}-bus-width = <0> has no wire in that
-> + * direction, so the controller can drop the matching FIFO entirely instead
-> + * of clocking bytes nobody reads.
-> + */
-> +static u32 rkspi_base_tmod(struct rockchip_spi_priv *priv)
-> +{
-> +	if (priv->mode & SPI_NO_RX)
-> +		return TMOD_TO;
-> +	if (priv->mode & SPI_NO_TX)
-> +		return TMOD_RO;
-> +	return TMOD_TR;
-> +}
-> +
->   static int rockchip_spi_claim_bus(struct udevice *dev)
->   {
->   	struct udevice *bus = dev->parent;
-> @@ -329,8 +343,8 @@ static int rockchip_spi_claim_bus(struct udevice *dev)
->   	/* Frame Format */
->   	ctrlr0 |= FRF_SPI << FRF_SHIFT;
->   
-> -	/* Tx and Rx mode */
-> -	ctrlr0 |= TMOD_TR << TMOD_SHIFT;
-> +	/* Configure RX/TX mode */
-> +	ctrlr0 |= rkspi_base_tmod(priv) << TMOD_SHIFT;
->   
->   	writel(ctrlr0, &regs->ctrlr0);
->   
-> @@ -472,7 +486,12 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
->   		writel(todo - 1, &regs->ctrlr1);
->   		rkspi_enable_chip(regs, true);
->   
-> -		toread = todo;
-> +		/*
-> +		 * In transmit-only mode the RX FIFO never fills, so waiting
-> +		 * on it would hang. Completion is handled by the
-> +		 * wait_till_not_busy() below instead.
-> +		 */
+--Apple-Webmail-42--b3d78300-66bd-465e-904c-9714973bf5e4
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+    charset=utf-8;
+    format=flowed
 
-I got confused by the wording here. Can I suggest:
+Hi Quentin, Thanks for your reviewing and suggestions. I think the config =
+name shouldn't be changed to " SPL_ROCKCHIP_ENTER_MASKROM_ON_KEY ". Becaus=
+e this function is aim to provide a way to enter the MaskROM, Loader and m=
+ore mode (supported by Rockchip chips directly) in SPL by pressing hotkey =
+(like Ctrl+B, Ctrl+D) in serial. This function is dependent on a working s=
+erial port and not dependent a physical button. About merging code to rock=
+chip_dnl_mode_check() and same places: The SPL hotkey support is aim to pr=
+ovide a way to enter MaskROM and more mode without ADC keys support. That'=
+s meaning we didn't need a physical button in board to enter MaskROM. Abou=
+t delay 100ms: I have tested this function on my Mekotronics R58X-4G board=
+, this is the shortest time that the hotkey can be detected. (Even though,=
+ I still need to press Ctrl+B before SPL running) Sorry for my poor Englis=
+h, I'm trying my best to describe the function of this config in Kconfig. =
+The other suggestions have been accepted in v4 patch. Like checking CONFIG=
+_ROCKCHIP_BOOT_MODE_REG, adding a small comment. etc. Best regards, Valent=
+in Liu 2026=E5=B9=B48=E6=9C=8820=E6=97=A5=E4=B8=8B=E5=8D=8811:38=EF=BC=8CQ=
+uentin Schulz <u-boot@0leil.net> =E5=86=99=E9=81=93=EF=BC=9A Hi Valentin, =
+On 8/18/26 6:55 PM, Valentin Liu wrote: Add a configurable Rockchip SPL ho=
+tkey feature that checks the serial console during SPL startup. Ctrl+B can=
+ be used to enter BootROM download (MASKROM) mode and be widely used. We c=
+an add more boot mode support in future. Add CONFIG_SPL_ROCKCHIP_HOTKEY to=
+ enable the feature and wait for the serial port to be ready to receive in=
+put before checking for hotkeys. Signed-off-by: Valentin Liu <valentinliu@=
+icloud.com> --- Changes for v2: - Simplify the dependencies of SPL_ROCKCHI=
+P_HOTKEY. - Remove the conditions for the newly added includes. --- Change=
+s for v3: - Add a dummy spl_hotkey_init() to avoid undefined reference err=
+ors when building without CONFIG_SPL_ROCKCHIP_HOTKEY. arch/arm/mach-rockch=
+ip/Kconfig | 13 ++++++++++ arch/arm/mach-rockchip/spl.c | 44 +++++++++++++=
++++++++++++++++++++++ 2 files changed, 57 insertions(+) diff --git a/arch/=
+arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig index 1a2e7847c=
+9e..f2d2b5520ef 100644 --- a/arch/arm/mach-rockchip/Kconfig +++ b/arch/arm=
+/mach-rockchip/Kconfig @@ -743,6 +743,19 @@ config TPL_ROCKCHIP_EARLYRETUR=
+N_TO_BROM config SPL_MMC default y if !SPL_ROCKCHIP_BACK_TO_BROM +config S=
+PL_ROCKCHIP_HOTKEY + bool "SPL hotkey support" The symbol name and prompt =
+is not clear enough on what it does. config SPL_ROCKCHIP_ENTER_MASKROM_ON_=
+KEY bool "Enter MaskROM on key press during SPL" maybe? + depends on SPL_D=
+M_RESET && SPL_SERIAL + help + Enable hotkey detection during SPL booting =
+stage. + + When enabled, SPL checks the serial console for a control + cha=
+racter and can execute Rockchip-specific hotkey actions, + such as enterin=
+g BootROM download mode (MASKROM) with Ctrl+B. + + The hotkey is checked a=
+fter the SPL console has been + initialized. + Simplify to: """ When enabl=
+ed, the SPL will check whether Ctrl+B is pressed and enter MaskROM in that=
+ case. """ config ROCKCHIP_SPI_IMAGE bool "Build a SPI image for rockchip"=
+ help diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/s=
+pl.c index e989c148079..0bcfb42c306 100644 --- a/arch/arm/mach-rockchip/sp=
+l.c +++ b/arch/arm/mach-rockchip/spl.c @@ -13,11 +13,14 @@ #include <log.h=
+> #include <mapmem.h> #include <ram.h> +#include <serial.h> #include <spl.=
+h> +#include <asm/arch-rockchip/boot_mode.h> #include <asm/arch-rockchip/b=
+ootrom.h> #include <asm/arch-rockchip/timer.h> #include <asm/global_data.h=
+> #include <asm/io.h> +#include <linux/delay.h> #include <linux/bitops.h> =
+DECLARE_GLOBAL_DATA_PTR; @@ -107,6 +110,44 @@ __weak int arch_cpu_init(voi=
+d) return 0; } +#if IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY) Please use CONF=
+IG_IS_ENABLED() instead. +static void rockchip_reset_from_hotkey(const int=
+ code) +{ + switch (code) { + case 0x02: Please add a small comment after =
+0x02: to specify which key combination triggers this code. E.g.: case 0x02=
+: /* Ctrl+B */ + printf("SPL Hotkey: Ctrl+B: BootROM download!\n"); Please=
+ be consistent with what we have in arch/arm/mach-rockchip/boot_mode.c, th=
+at is: "Ctrl+B pressed, entering download mode..." I don't like it, as it'=
+s typically called MaskROM, but it's something we can fix later on and I p=
+refer being consistent with what we currently have. + writel(BOOT_BROM_DOW=
+NLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG); We *really* shouldn't be doing this=
+ if CONFIG_ROCKCHIP_BOOT_MODE_REG is 0 (the case for most boards). + do_re=
+set(NULL, 0, 0, NULL); + /*NOTREACHED*/ + default: + if (code <=3D 0x1a) /=
+* 'z' */ + printf("SPL Hotkey: Ctrl+%c\n", code + 'A' - 1); + else + print=
+f("SPL Hotkey: Unknown code: 0x%x, ignore\n", code);> + }> +} + +static vo=
+id spl_hotkey_init(void) +{ + if (!gd || !(gd->flags & GD_FLG_HAVE_CONSOLE=
+)) + return; + if (gd->flags & GD_FLG_DISABLE_CONSOLE) + return; + + /* Wa=
+it for the serial port to be ready to receive data. */ + mdelay(100); + Is=
+ it not ready by the time we call this function? How did you come up with =
+100ms? + if (serial_tstc()) + rockchip_reset_from_hotkey(serial_getc()); +=
+ else + printf("SPL Hotkey: No key pressed, continue\n"); We don't need to=
+ print on the standard path. If you reaaaaaaally want to have something, t=
+hen use log_debug/debug instead so it isn't printed by default except if y=
+ou build with debug logging enabled. +} +#else +static void spl_hotkey_ini=
+t(void) +{ +} +#endif + void board_init_f(ulong dummy) { int ret; @@ -143,=
+6 +184,9 @@ void board_init_f(ulong dummy) } #endif preloader_console_init=
+(); + + if (IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY)) + spl_hotkey_init(); C=
+an we merge with the very similar logic we have for an ADC button in arch/=
+arm/mach-rockchip/boot_mode.c instead? I believe it makes more sense to ha=
+ve everything capable of entering MaskROM mode in the same place, with the=
+ same logic. I could see an else if() block in rockchip_dnl_mode_check() f=
+or example. Cheers, Quentin
+--Apple-Webmail-42--b3d78300-66bd-465e-904c-9714973bf5e4
+Content-Type: multipart/related;
+    type="text/html";
+    boundary=Apple-Webmail-86--b3d78300-66bd-465e-904c-9714973bf5e4
 
-/* When RX wire is not routed, the RX FIFO can never fill, so waiting on 
-it would hang. */
 
-I don't understand the context for the second sentence though, we are 
-always waiting until not busy, if there's something to transmit, it 
-doesn't have anything to do with the RX path does it? What am I missing 
-here?
+--Apple-Webmail-86--b3d78300-66bd-465e-904c-9714973bf5e4
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+    charset=utf-8;
 
-Cheers,
-Quentin
+<html><body><div><div>Hi Quentin,</div><div style=3D"font-family: &quot;SF Pro Text&qu=
+ot;, system-ui, sans-serif;"><br></div><div style=3D"font-family: &quot;SF=
+ Pro Text&quot;, system-ui, sans-serif;">Thanks for your reviewing and sug=
+gestions.</div><div style=3D"font-family: &quot;SF Pro Text&quot;, system-=
+ui, sans-serif;"><br></div><div style=3D"font-family: &quot;SF Pro Text&qu=
+ot;, system-ui, sans-serif;">I think the config name shouldn't be changed =
+to "<span style=3D"color: rgba(255, 255, 255, 0.98); font-style: normal; f=
+ont-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300=
+; letter-spacing: -0.37px; orphans: 2; text-align: start; text-indent: 0px=
+; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-=
+width: 0px; white-space: normal; background-color: rgb(28, 28, 30); text-d=
+ecoration-thickness: initial; text-decoration-style: initial; text-decorat=
+ion-color: initial; float: none; display: inline !important;"><span class=3D=
+"font" style=3D"font-family:&quot;SF Pro Text&quot;, system-ui, sans-serif=
+"><span class=3D"size" style=3D"font-size:17px">SPL_ROCKCHIP_ENTER_MASKROM=
+_ON_KEY</span></span></span>". Because this function is aim to provide a w=
+ay to enter the MaskROM, Loader and more mode (supported by Rockchip chips=
+ directly) in SPL by pressing hotkey (like Ctrl+B, Ctrl+D) in serial. This=
+ function is dependent on a working serial port and not dependent a physic=
+al button.</div><div style=3D"font-family: &quot;SF Pro Text&quot;, system=
+-ui, sans-serif;"><br></div><div style=3D"font-family: &quot;SF Pro Text&q=
+uot;, system-ui, sans-serif;">About merging code to rockchip_dnl_mode_chec=
+k() and same places:</div><div style=3D"font-family: &quot;SF Pro Text&quo=
+t;, system-ui, sans-serif;">The SPL hotkey support is aim to provide a way=
+ to enter MaskROM and more mode without ADC keys support. That's meaning w=
+e didn't need a physical button in board to enter MaskROM.</div><div style=
+=3D"font-family: &quot;SF Pro Text&quot;, system-ui, sans-serif;"><br></di=
+v><div style=3D"font-family: &quot;SF Pro Text&quot;, system-ui, sans-seri=
+f;">About delay 100ms:</div><div style=3D"font-family: &quot;SF Pro Text&q=
+uot;, system-ui, sans-serif;">I have tested this function on my Mekotronic=
+s R58X-4G board, this is the shortest time that the hotkey can be detected=
+. (Even though, I still need to press Ctrl+B before SPL running)</div><div=
+ style=3D"font-family: &quot;SF Pro Text&quot;, system-ui, sans-serif;"><d=
+iv style=3D"font-family: &quot;SF Pro Text&quot;, system-ui, sans-serif;">=
+<br></div><div style=3D"font-family: &quot;SF Pro Text&quot;, system-ui, s=
+ans-serif;">Sorry for my poor English, I'm trying my best to describe the =
+function of this config in Kconfig.</div><div style=3D"font-family: &quot;=
+SF Pro Text&quot;, system-ui, sans-serif;"><br></div><div>The other sugges=
+tions have been accepted in v4 patch. Like checking&nbsp;<span style=3D"co=
+lor: rgba(255, 255, 255, 0.98); font-style: normal; font-variant-ligatures=
+: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: -0.=
+37px; orphans: 2; text-align: start; text-indent: 0px; text-transform: non=
+e; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-spa=
+ce: normal; background-color: rgb(28, 28, 30); text-decoration-thickness: =
+initial; text-decoration-style: initial; text-decoration-color: initial; f=
+loat: none; display: inline !important;"><span class=3D"font" style=3D"fon=
+t-family:&quot;SF Pro Text&quot;, system-ui, sans-serif"><span class=3D"si=
+ze" style=3D"font-size:17px">CONFIG_ROCKCHIP_BOOT_MODE_REG, adding a small=
+ comment. etc.</span></span></span></div></div><div style=3D"font-family: =
+&quot;SF Pro Text&quot;, system-ui, sans-serif;"><br></div><div style=3D"f=
+ont-family: &quot;SF Pro Text&quot;, system-ui, sans-serif;">Best regards,=
+</div><div style=3D"font-family: &quot;SF Pro Text&quot;, system-ui, sans-=
+serif;">Valentin Liu</div><div style=3D"font-family: &quot;SF Pro Text&quo=
+t;, system-ui, sans-serif;"><br></div><div><br></div><blockquote type=3D"c=
+ite"><div>2026=E5=B9=B48=E6=9C=8820=E6=97=A5=E4=B8=8B=E5=8D=8811:38=EF=BC=8C=
+Quentin Schulz &lt;u-boot@0leil.net&gt; =E5=86=99=E9=81=93=EF=BC=9A</div><=
+div><br></div><div><br></div><div><div><div>Hi Valentin,</div><div><br></d=
+iv><div>On 8/18/26 6:55 PM, Valentin Liu wrote:</div><blockquote type=3D"c=
+ite"><div>Add a configurable Rockchip SPL hotkey feature that checks the</=
+div><div>serial console during SPL startup.</div><div><br></div><div>Ctrl+=
+B can be used to enter BootROM download (MASKROM) mode and</div><div>be wi=
+dely used. We can add more boot mode support in future.</div><div><br></di=
+v><div>Add CONFIG_SPL_ROCKCHIP_HOTKEY to enable the feature and wait for</=
+div><div>the serial port to be ready to receive input before checking for<=
+/div><div>hotkeys.</div><div><br></div><div>Signed-off-by: Valentin Liu &l=
+t;valentinliu@icloud.com&gt;</div><div>---</div><div>Changes for v2:</div>=
+<div>- Simplify the dependencies of SPL_ROCKCHIP_HOTKEY.</div><div>- Remov=
+e the conditions for the newly added includes.</div><div>---</div><div>Cha=
+nges for v3:</div><div>- Add a dummy spl_hotkey_init() to avoid undefined =
+reference errors</div><div> when building without CONFIG_SPL_ROCKCHIP_HOTK=
+EY.</div><div><br></div><div> arch/arm/mach-rockchip/Kconfig | 13 ++++++++=
+++</div><div> arch/arm/mach-rockchip/spl.c   | 44 ++++++++++++++++++++++++=
+++++++++++</div><div> 2 files changed, 57 insertions(+)</div><div><br></di=
+v><div>diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchi=
+p/Kconfig</div><div>index 1a2e7847c9e..f2d2b5520ef 100644</div><div>--- a/=
+arch/arm/mach-rockchip/Kconfig</div><div>+++ b/arch/arm/mach-rockchip/Kcon=
+fig</div><div>@@ -743,6 +743,19 @@ config TPL_ROCKCHIP_EARLYRETURN_TO_BROM=
+</div><div> config SPL_MMC</div><div> default y if !SPL_ROCKCHIP_BACK_TO_B=
+ROM</div><div> <br></div><div>+config SPL_ROCKCHIP_HOTKEY</div><div>+	bool=
+ "SPL hotkey support"</div></blockquote><div><br></div><div>The symbol nam=
+e and prompt is not clear enough on what it does.</div><div><br></div><div=
+>config SPL_ROCKCHIP_ENTER_MASKROM_ON_KEY</div><div> bool "Enter MaskROM o=
+n key press during SPL"</div><div><br></div><div>maybe?</div><div><br></di=
+v><blockquote type=3D"cite"><div>+	depends on SPL_DM_RESET &amp;&amp; SPL_=
+SERIAL</div><div>+	help</div><div>+	  Enable hotkey detection during SPL b=
+ooting stage.</div><div>+</div><div>+	  When enabled, SPL checks the seria=
+l console for a control</div><div>+	  character and can execute Rockchip-s=
+pecific hotkey actions,</div><div>+	  such as entering BootROM download mo=
+de (MASKROM) with Ctrl+B.</div><div>+</div><div>+	  The hotkey is checked =
+after the SPL console has been</div><div>+	  initialized.</div><div>+</div=
+></blockquote><div><br></div><div>Simplify to:</div><div><br></div><div>""=
+"</div><div>When enabled, the SPL will check whether Ctrl+B is pressed and=
+ enter </div><div>MaskROM in that case.</div><div>"""</div><div><br></div>=
+<blockquote type=3D"cite"><div>config ROCKCHIP_SPI_IMAGE</div><div> bool "=
+Build a SPI image for rockchip"</div><div> help</div><div>diff --git a/arc=
+h/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c</div><div>index e=
+989c148079..0bcfb42c306 100644</div><div>--- a/arch/arm/mach-rockchip/spl.=
+c</div><div>+++ b/arch/arm/mach-rockchip/spl.c</div><div>@@ -13,11 +13,14 =
+@@</div><div> #include &lt;log.h&gt;</div><div> #include &lt;mapmem.h&gt;<=
+/div><div> #include &lt;ram.h&gt;</div><div>+#include &lt;serial.h&gt;</di=
+v><div> #include &lt;spl.h&gt;</div><div>+#include &lt;asm/arch-rockchip/b=
+oot_mode.h&gt;</div><div> #include &lt;asm/arch-rockchip/bootrom.h&gt;</di=
+v><div> #include &lt;asm/arch-rockchip/timer.h&gt;</div><div> #include &lt=
+;asm/global_data.h&gt;</div><div> #include &lt;asm/io.h&gt;</div><div>+#in=
+clude &lt;linux/delay.h&gt;</div><div> #include &lt;linux/bitops.h&gt;</di=
+v><div> <br></div><div> DECLARE_GLOBAL_DATA_PTR;</div><div>@@ -107,6 +110,=
+44 @@ __weak int arch_cpu_init(void)</div><div> return 0;</div><div> }</di=
+v><div> <br></div><div>+#if IS_ENABLED(CONFIG_SPL_ROCKCHIP_HOTKEY)</div></=
+blockquote><div><br></div><div>Please use CONFIG_IS_ENABLED() instead.</di=
+v><div><br></div><blockquote type=3D"cite"><div>+static void rockchip_rese=
+t_from_hotkey(const int code)</div><div>+{</div><div>+	switch (code) {</di=
+v><div>+	case 0x02:</div></blockquote><div><br></div><div>Please add a sma=
+ll comment after 0x02: to specify which key combination </div><div>trigger=
+s this code. E.g.:</div><div><br></div><div>case 0x02: /* Ctrl+B */</div><=
+div><br></div><blockquote type=3D"cite">+		printf("SPL Hotkey: Ctrl+B: Boo=
+tROM download!\n");</blockquote><div><br></div><div>Please be consistent w=
+ith what we have in </div><div>arch/arm/mach-rockchip/boot_mode.c, that is=
+:</div><div><br></div><div>"Ctrl+B pressed, entering download mode..."</di=
+v><div><br></div><div>I don't like it, as it's typically called MaskROM, b=
+ut it's something we </div><div>can fix later on and I prefer being consis=
+tent with what we currently have.</div><div><br></div><blockquote type=3D"=
+cite">+		writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);</block=
+quote><div><br></div><div>We *really* shouldn't be doing this if CONFIG_RO=
+CKCHIP_BOOT_MODE_REG is </div><div>0 (the case for most boards).</div><div=
+><br></div><blockquote type=3D"cite"><div>+		do_reset(NULL, 0, 0, NULL);</=
+div><div>+		/*NOTREACHED*/</div><div>+	default:</div><div>+		if (code &lt;=
+=3D 0x1a) /* 'z' */</div><div>+			printf("SPL Hotkey: Ctrl+%c\n", code + '=
+A' - 1);</div><div>+		else</div><div>+			printf("SPL Hotkey: Unknown code:=
+ 0x%x, ignore\n", code);&gt; +	}&gt; +}</div><div>+</div><div>+static void=
+ spl_hotkey_init(void)</div><div>+{</div><div>+	if (!gd || !(gd-&gt;flags =
+&amp; GD_FLG_HAVE_CONSOLE))</div><div>+		return;</div><div>+	if (gd-&gt;fl=
+ags &amp; GD_FLG_DISABLE_CONSOLE)</div><div>+		return;</div><div>+</div><d=
+iv>+	/* Wait for the serial port to be ready to receive data. */</div><div=
+>+	mdelay(100);</div><div>+</div></blockquote><div><br></div><div>Is it no=
+t ready by the time we call this function? How did you come up </div><div>=
+with 100ms?</div><div><br></div><blockquote type=3D"cite"><div>+	if (seria=
+l_tstc())</div><div>+		rockchip_reset_from_hotkey(serial_getc());</div><di=
+v>+	else</div><div>+		printf("SPL Hotkey: No key pressed, continue\n");</d=
+iv></blockquote><div><br></div><div>We don't need to print on the standard=
+ path. If you reaaaaaaally want to </div><div>have something, then use log=
+_debug/debug instead so it isn't printed by </div><div>default except if y=
+ou build with debug logging enabled.</div><div><br></div><blockquote type=3D=
+"cite"><div>+}</div><div>+#else</div><div>+static void spl_hotkey_init(voi=
+d)</div><div>+{</div><div>+}</div><div>+#endif</div><div>+</div><div> void=
+ board_init_f(ulong dummy)</div><div> {</div><div> int ret;</div><div>@@ -=
+143,6 +184,9 @@ void board_init_f(ulong dummy)</div><div> }</div><div> #en=
+dif</div><div> preloader_console_init();</div><div>+</div><div>+	if (IS_EN=
+ABLED(CONFIG_SPL_ROCKCHIP_HOTKEY))</div><div>+		spl_hotkey_init();</div></=
+blockquote><div><br></div><div>Can we merge with the very similar logic we=
+ have for an ADC button in </div><div>arch/arm/mach-rockchip/boot_mode.c i=
+nstead? I believe it makes more </div><div>sense to have everything capabl=
+e of entering MaskROM mode in the same </div><div>place, with the same log=
+ic. I could see an else if() block in </div><div>rockchip_dnl_mode_check()=
+ for example.</div><div><br></div><div>Cheers,</div><div>Quentin</div></di=
+v></div></blockquote></div><div><br></div></body></html>
+--Apple-Webmail-86--b3d78300-66bd-465e-904c-9714973bf5e4--
+
+--Apple-Webmail-42--b3d78300-66bd-465e-904c-9714973bf5e4--
+
