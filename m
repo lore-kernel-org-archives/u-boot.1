@@ -1,113 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E1CAC5DF81
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:15:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDBCC5DF82
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:15:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C4CB940483;
-	Thu, 20 Aug 2026 07:15:20 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eJ3PhEekstR1; Thu, 20 Aug 2026 07:15:20 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787210120;
-	bh=OPvMZAkACVgS7/iPHWInokFAQI4ZjmofjDKUa5S/b/0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=LyDJmFM+cnpDxCzTpf725wtX28ca12t/r3HyClNQF8HR6MjQld3tjBNKjwBA40hUS
-	 g6EW9ps4v8KuJZ0aINKuMnEfd69CL89ap9mFHakap0DCwzqiEB1Af7W3IFn1KFWSjy
-	 SYxRjbgsmq+IzqLrb7I9FgLN5B4euoP3P5HrFIuA0osM71HbO9yYA1l6F3SwlHe9eO
-	 oFskAjpEPZpF8AmBRLgfUF2pbOTPXqea1M/JTbbA6rZ1U4/P1x99fDTS44fFiaLEET
-	 7h2BO3x0puzOBmfaLZTuz6T/vflQ1UBu9fVIQhdf9CPGwDNen+m7+K6DK92oBYBYhG
-	 dwbyQTvy+Eqcw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 31F33404C9;
-	Thu, 20 Aug 2026 07:15:20 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3AD762FD
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:17 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2121D80C10
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 88E4980C79;
+	Thu, 20 Aug 2026 07:15:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RWTvl-ne598s for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 07:15:16 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=pxNFpBi2
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2D68A80BD4
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:15 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-490cf322ed0so17025895e9.1
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:15:15 -0700 (PDT)
+ id DVSKmhNBo2Ac; Thu, 20 Aug 2026 07:15:21 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787210114; x=1787814914;
+	d=lists.u-boot-project.org; s=default; t=1787210121;
+	bh=jsVdct6Rmujqo6LBBzNKNF/S8P4Pp6KkuCyiyRu4rOE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=kh+lJztxu+XXK14DNy+ZPvsGSXlyZQiHK9VbV/0yHy+MYnHxAN3FIefjVidwINw4b
+	 4cX9jBworbUY4uxjKZcWK0X+xwaW+ECvaM9tI9VSi0bQwrXMEbuEdi4fkMI0FFZb29
+	 icAQr//0/Qg3ryndpwCan/iwt8BGkrmjd+grMjTAwGZL7GVf4aNrxflaR/JpgtzTYR
+	 zQ+YbTEJp84V0a0j6WvFOP4L8SnkGQNmuq7aAUg6Z8Pw+bn+YBES1iDh9fx98YJnjD
+	 FHxLncbHpfSTNCXKWdfj1K/26OzIeSL+4OMWb6iW+GshpBW+sruTn3w0Hc1ERC411I
+	 or5Bn9hHuGzxQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6D86180C32;
+	Thu, 20 Aug 2026 07:15:21 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1C086334
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1A1F540262
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:18 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id W8hsAS057RF4 for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 07:15:17 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
+ envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=XMQLtZjh
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DC21240055
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:16 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4996f1ee4a4so16111865e9.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:15:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787210115; x=1787814915;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OPvMZAkACVgS7/iPHWInokFAQI4ZjmofjDKUa5S/b/0=;
- b=pxNFpBi2OZUsqCI9b6yJJwlrL91vuptf0/yZQlPkD0g0BLns0GoUgf+AKi/NQTJKTB
- Rhkz1XK2Ozr3SHfRYMcqzrAVF2e403dd2/MdYEGCEQ0tx9Oi0NwljsN6+0Y7iQV9vEac
- UuCf317Yss+lsCLdSE7IP2IsNJ6wncjvMfEdXOdvX/5vpuSPP8gjI04aKlYe3vrrWrSX
- X73tRxS89NQs075H//sYxrYFL1PrYy5AIyU5TxjwKDBWw4qIzg/JxiQ2JqvOyIqsUYbG
- o15u0qghATLW52V841DXRtiXTX7Tdw1juz/VctsjmOZ6mGG6E0kvHOnnVCHfblUoYDhN
- /nXQ==
+ bh=jsVdct6Rmujqo6LBBzNKNF/S8P4Pp6KkuCyiyRu4rOE=;
+ b=XMQLtZjhbwhMoTBv9flt14rVjS8LyWZ6PwvAHk9HmVDaG2vXVoQSHmE8tDhFxKn0Vz
+ rFAY8/yQTjZH0BaIHyUfpCUto8WtRJ6spJ1Y+w4IzBetFg2wJrUuglOEcybaQWBZ5xCO
+ +A8+/o/w3HgkJ/ZDATDFAaDFjr4ocpbabgrrQwx9urFZl7XpMf3iskrt1rVlMkuGYG24
+ aujKFLQptJRWhtghhCyLCucnH4fV2ddEuyfCDjo4aGiP6deeSndHlr3sGE3ITzgQftZ1
+ jhBjhsUNzIB3eR7SdLfAuoFXOa3GdUXp9ycgSYvmTyLZde1JbOxcPvpsFSHZg46N5e3E
+ M2HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787210114; x=1787814914;
+ d=1e100.net; s=20251104; t=1787210115; x=1787814915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=OPvMZAkACVgS7/iPHWInokFAQI4ZjmofjDKUa5S/b/0=;
- b=sjCZQ72P+HA0CeG17wqopSX0jBErDuF8HUCupnYvjf8Dasn7OCCWQLLRGyGN1QWItJ
- /bMZKLbhARn5+pvteF3GG0J6nmBchsHfH5ecT+QdwLtqGo8fmkp7V98HAVlZNbbHtNcg
- 4u3ruG4oDo2L7VSZvcSpYsDuf4HzZ8MY7Jqk61lG7b5kT2s3qBwbPvCG9Y9kKjgq6Ptm
- nL+gxBaJzD+/6xiswLuj9W+YeT5hsTtb03z/w/jJG5HL6UL0is+0ijsr64+vA/OAXRCv
- XYQs3DJkvdU+2xvyVEDzjW3KBjY8cjmzu6iD+/079APDg02gMf7n+i16aJIgeBquGA67
- BW0w==
+ bh=jsVdct6Rmujqo6LBBzNKNF/S8P4Pp6KkuCyiyRu4rOE=;
+ b=Ov8DPu2PzSd/tR94Wj55fPlD1hXeaJ9WldYB2C5tzQLN+/aUChrWWCNQY6BhevdI4i
+ j95rKi4begUX0/Z/EmZFYdvDUGKiNk49Ek5jjYXVR1jjEOxX0mA3NHDj4rfcLfPruP5u
+ Mus8EJpzNoB0FfcHeJQXCJFdmx+NTwV6mkEX4egx0xpT/HkfPCiewyYBLMEORW66N7Ip
+ 4Pa/yOBPvSmkHpyvwiKwEu5ACBLnq1VNYvmtBaItz7pyZRd1fbOMYvRE39cLp2KX1Yv1
+ 0jH8oNn0YuQoNArdSQzxy61ukectDZJnPDk55JH07SyqJBcUYRIbyjyjVcw3BtCcfpZx
+ xGMA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrqGfpJpvCh3b/9pqt/IYhLgQIPP8Ep4CCWse1WPhTQx74EG5T4lZU6ZqiDBX1BngQd/2MNz8g=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwVsHR8qOn4iGeZo0eF+dRaG5FIkCq2b+zP3cA/a7k5Bb/fpbjB
- F3X0EJ65m2Ie1TjhNbBDTy211aqHk52LYxwn0hRavZMG1Sg66zM5zFbq
-X-Gm-Gg: AR+sD11/91fml9kHvvsXoABzbfteBohZbKjQbEN5sSmw2D0LAYWVRHna3kog3ROKaTB
- 524Ay06ndIBQ+extW6ytr+/nPYjXf/af7c3wscA23KEXqNMLn7hiB0M95uj9kx0ce8U21QAM8TO
- 98Pyxvu1ElSOknFVqQOjbWCij1IF13U4qlKPvZxOL63TArVONS4cVEIMO6NfmF7MZ9KOc7w0Zxc
- wSgrqlB9iEhv1E2WQg3UCcM5huNT7/pBrteiGJ8L4gg5i0pGY4pBYt6vjhFXpSzw7uYpvFvaiJk
- OkvI8v5hHL3M9e+uhGjxCsmdPGs3fv9Ik33y/mT0e7y2NzekA9Eudvjcdrz9R40aykVXfwSBTMv
- jzWmZ0pJKoVb24BEgRYtY813t6h1i+B67bXXDkDUXShqdQlu+tKW+mn8nMS5CH6pAi/aFMIpAHX
- d5yl4eX/ImmWxXEazGSICfg4XYxa37+6QxtcI9VF1qlIDhDD5vgqQ6TAUIywBtun4baw31zp4hZ
- H+nbA==
-X-Received: by 2002:a05:600c:468d:b0:499:4892:d022 with SMTP id
- 5b1f17b1804b1-499aa17d5a2mr170231205e9.8.1787210113667; 
- Thu, 20 Aug 2026 00:15:13 -0700 (PDT)
+ AHgh+RrgFjBO8lmmApLJY38oBvw/w/ly41CuYNWgQoocdhiah8zaFk0h425ZUFndokOsy0oTc2FDyVM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyqSo11DbIAkaWRsI/1hogs/JxLe59L1DI1+1DWdg1p5Y39wVZ4
+ 2BQQooaMuWxyICWEirygQ5d48RM5mLVtC8M/kNDXqlSx9OHbdnjSbidp
+X-Gm-Gg: AR+sD11dunPtYA/mCAyoXqJSvuJQGnqfYAKUWCc7gcvZS8I0ll9wIYxsH+3OO0BFzPK
+ OSZLbCn5UbUxQWF+bItnzx8S7t2ziX/ZEFeKisEOQJ2YSMKjSXuVy3TB0plZ1OIa+DNbeuYoFSo
+ pWE2/Tvi05ElfjZkpYWtNb7uyRPq/D2b+sulRyE1iIKfOW+/oWAXsiCz31Mf1tp2o0OvY+xSITG
+ Du4HkUo85covO9439M5hthTdhboWt2C7M5Mo1f1rgnNgHN9ZiJtxQMpu/o57dvIz0TiwY3Wxb2z
+ nCt9ygzCM3mCTyySx+YHkANh/U8lIwcDcZe88rzqpNYTFEr2Xfg911EiFbNZ23g7mBAM5/veUeM
+ fmCkOGPHT9X3tKPG/cnPQui4IeXEaiqW0glKIQ/lVy1xuoFpZV6bbt2Or8CZDy20jeniCNLDkVo
+ 7xnPrDTPyKBC5hpeIipl92p4tCag0sO8xBRt52FXOB8170H0j9GSKWiVT3YZTg8yRotg==
+X-Received: by 2002:a05:600c:3490:b0:496:bffb:fb7b with SMTP id
+ 5b1f17b1804b1-499aa1d05eamr221588065e9.10.1787210114460; 
+ Thu, 20 Aug 2026 00:15:14 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499aa0d6721sm158151475e9.11.2026.08.20.00.15.12
+ 5b1f17b1804b1-499aa0d6721sm158151475e9.11.2026.08.20.00.15.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 00:15:13 -0700 (PDT)
+ Thu, 20 Aug 2026 00:15:14 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: Marek Vasut <marek.vasut+usb@mailbox.org>, Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
  Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v2 1/4] usb: ehci-vf: remove the code path for a build without
- DM_USB
-Date: Thu, 20 Aug 2026 09:15:08 +0200
-Message-ID: <20260820071511.1036506-2-mehmet.fide@gmail.com>
+Subject: [PATCH v2 2/4] usb: ehci-vf: drop the empty bind hook
+Date: Thu, 20 Aug 2026 09:15:09 +0200
+Message-ID: <20260820071511.1036506-3-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260820071511.1036506-1-mehmet.fide@gmail.com>
 References: <20260820071511.1036506-1-mehmet.fide@gmail.com>
@@ -128,91 +126,51 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-USB_EHCI_HCD selects DM_USB, so the !CONFIG_IS_ENABLED(DM_USB) branch of
-this driver can never be selected. It also cannot compile: ehci_hcd_init()
-calls ehci_vf_common_init() with one argument while the function takes
-two, so the branch has been dead since the controller was added as a
-second parameter.
+vf_usb_bind() only returns 0. Its comment describes a hack that keeps
+the second controller from taking sequence number 0, but no such code
+is there, and an empty .bind cannot influence the numbering the uclass
+does. Remove it.
 
-Remove it, together with the board_usb_phy_mode() hook that no board
-implements and nothing else calls.
-
+Fixes: 0885cdb9d154 ("usb: host: ehci-vf: Migrate Vybrid USB to driver model")
+Fixes: b27347f425f7 ("usb: Update for new sequence numbers")
 Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 ---
- drivers/usb/host/ehci-vf.c | 49 --------------------------------------
- 1 file changed, 49 deletions(-)
+ drivers/usb/host/ehci-vf.c | 15 ---------------
+ 1 file changed, 15 deletions(-)
 
 diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index 32fe05920d0..5d27318de62 100644
+index 5d27318de62..e5f9ec0fdbb 100644
 --- a/drivers/usb/host/ehci-vf.c
 +++ b/drivers/usb/host/ehci-vf.c
-@@ -128,11 +128,6 @@ static void usb_oc_config(int index)
- 	setbits_le32(ctrl, UCTRL_OVER_CUR_DIS);
- }
- 
--int __weak board_usb_phy_mode(int port)
--{
--	return 0;
--}
--
- int __weak board_ehci_hcd_init(int port)
- {
- 	return 0;
-@@ -155,49 +150,6 @@ int ehci_vf_common_init(struct usb_ehci *ehci, int index)
- 	return 0;
- }
- 
--#if !CONFIG_IS_ENABLED(DM_USB)
--int ehci_hcd_init(int index, enum usb_init_type init,
--		struct ehci_hccr **hccr, struct ehci_hcor **hcor)
--{
--	struct usb_ehci *ehci;
--	enum usb_init_type type;
--	int ret;
--
--	if (index >= ARRAY_SIZE(nc_reg_bases))
--		return -EINVAL;
--
--	ehci = (struct usb_ehci *)nc_reg_bases[index];
--
--	ret = ehci_vf_common_init(index);
--	if (ret)
--		return ret;
--
--	*hccr = (struct ehci_hccr *)((uint32_t)&ehci->caplength);
--	*hcor = (struct ehci_hcor *)((uint32_t)*hccr +
--			HC_LENGTH(ehci_readl(&(*hccr)->cr_capbase)));
--
--	type = board_usb_phy_mode(index);
--	if (type != init)
--		return -ENODEV;
--
--	if (init == USB_INIT_DEVICE) {
--		setbits_le32(&ehci->usbmode, CM_DEVICE);
--		writel((PORT_PTS_UTMI | PORT_PTS_PTW), &ehci->portsc);
--		setbits_le32(&ehci->portsc, USB_EN);
--	} else if (init == USB_INIT_HOST) {
--		setbits_le32(&ehci->usbmode, CM_HOST);
--		writel((PORT_PTS_UTMI | PORT_PTS_PTW), &ehci->portsc);
--		setbits_le32(&ehci->portsc, USB_EN);
--	}
--
--	return 0;
--}
--
--int ehci_hcd_stop(int index)
--{
--	return 0;
--}
--#else
- /* Possible port types (dual role mode) */
- enum dr_mode {
- 	DR_MODE_NONE = 0,
-@@ -372,4 +324,3 @@ U_BOOT_DRIVER(ehci_vf) = {
- 	.priv_auto	= sizeof(struct ehci_vf_priv_data),
- 	.flags = DM_FLAG_ALLOC_PRIV_DMA,
+@@ -261,20 +261,6 @@ static const struct ehci_ops vf_ehci_ops = {
+ 	.init_after_reset = vf_init_after_reset
  };
--#endif
+ 
+-static int vf_usb_bind(struct udevice *dev)
+-{
+-	/*
+-	 * Without this hack, if we return ENODEV for USB Controller 0, on
+-	 * probe for the next controller, USB Controller 1 will be given a
+-	 * sequence number of 0. This conflicts with our requirement of
+-	 * sequence numbers while initialising the peripherals.
+-	 *
+-	 * FIXME: Check that this still works OK with the new sequence numbers
+-	 */
+-
+-	return 0;
+-}
+-
+ static int ehci_usb_probe(struct udevice *dev)
+ {
+ 	struct usb_plat *plat = dev_get_plat(dev);
+@@ -315,7 +301,6 @@ U_BOOT_DRIVER(ehci_vf) = {
+ 	.name = "ehci_vf",
+ 	.id = UCLASS_USB,
+ 	.of_match = vf_usb_ids,
+-	.bind = vf_usb_bind,
+ 	.probe = ehci_usb_probe,
+ 	.remove = ehci_deregister,
+ 	.ops = &ehci_usb_ops,
 -- 
 2.54.0
 
