@@ -4,133 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1507C5DF87
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA62C5DF87
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:14:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 94E06607E0;
-	Thu, 20 Aug 2026 12:13:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 73EAC6088B;
+	Thu, 20 Aug 2026 12:14:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Mb-GQ1hJ3FHq; Thu, 20 Aug 2026 12:13:28 +0000 (UTC)
+ id AjaN8mpsjolY; Thu, 20 Aug 2026 12:14:06 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787228008;
-	bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
+	d=lists.u-boot-project.org; s=default; t=1787228046;
+	bh=IjmtFjj9wDDLVusKodWp+tcRAfG+TVpsLAv0golDfD0=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MKQ6GVqW69RioJTnKdx7BclMkKpMiSLkPdRZ44oMy65dpiLljmuSmTYVrICuSyFwU
-	 zgVpjJDD4Iqy5ZUGeq+SvtUrhKDPWbIj0+V/JNYpPOOqttfqZlsHdxKj+WlW79ivfE
-	 4y+GFLd3F+EwiVvND0pbMn9eoLXfTwDmoGG5TScKpspoOsKHHqbGoBx2rGe315M+Mx
-	 TDRYzJx3AxSdOb2EJrw/+IE9La06eWLMceaca3Qq6AH5izeYj+b53cFNhdZ1elrfiv
-	 VGRc6uFIsQrKDdEOHmjKoiV9OleQ5YU3gjWYQU0l9FwKzA+uNoSvILQ6UdDzV1+IPH
-	 Vs7by51RG3+6Q==
+	b=XsRzvSFL4OJg6Wdh0qF0qhMDhMt7pRFpW7d5fO6HuJ1tNsdhE9MCNbFiSi0jyE2m2
+	 9bXQTeiSaz+FZ915tc6bENRztmdrJqDSkB5YDcmG2FCWkbdZ1Cw9OgVKnSQiVoBnY8
+	 7u5KNZh+IRcha200q4KoiWcACmjDrivPylN2lHIS6lh0NLTMUHNi6Mka73S/RetWCD
+	 RJPknCndPKDVsz6UE3p03qT3TD4J5onE356uL7xW5M8oDmJ37B47zJjAEmMhQ70Ofn
+	 G63GJP/rluHreVHzOxWPD0AFnik5o07/aDfgiXopW38S22U4iBa0Oy8KsKGGxpxF8d
+	 3TtQ06gqnRSFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EE8DB60794;
-	Thu, 20 Aug 2026 12:13:27 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3A39139E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BDFBD60873;
+	Thu, 20 Aug 2026 12:14:06 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 486B6323
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:14:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2060B402A8
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:27 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2A854405F9
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:14:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ptu59DFZJKhA for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 12:13:26 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2DzOzCYdhwce for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 12:14:04 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::102f; helo=mail-pj1-x102f.google.com;
+ client-ip=2607:f8b0:4864:20::62d; helo=mail-pl1-x62d.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=Cr6J5iog
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 79E7240291
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:26 +0000 (UTC)
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-384930ca5e2so2589781a91.3
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:13:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787228006; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=i5T8+vsz
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3A315405F5
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:14:03 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2d5655cc850so24623845ad.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:14:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787228043; cv=none;
  d=google.com; s=arc-20260327;
- b=O9b2FzFq7VKu0BCsFDxm9WHSs3SfRLmqJibMMAKyB0EJTnWIPHX7UwKT204sAtNMuW
- RXY6csOVQ61hSDUT3pzChhEejwkQL6Uo6RiVg8i8WDq4j79uRYFNNVOmJCjMo1tVi+iq
- lwGjzoCTChThtS6++PpA3I5LqsQg9BDj0UDAbhYkIfWIL2KwGs6kcyEWb1ZVpr/GmGsz
- AvJZvydYJwtNeEkeI5sYY11gSjzs44F/z7Oexdfhr5kGZKZsl7p7oF2+Uv1AxBlX7geO
- sHpB01O/xrzRck29wLpTp0BBUCm+zxFWWwXT1E2XfhC/g29zlsg86fhseDsxVj+bq3+6
- 1KVw==
+ b=oAPDLfgl13autdVHVB9m4kPEDYcEa8JfHyOZjvv2+J0EtMlKijJVHgymahRQ6igTud
+ t9uxZa6cJ3/mo6Ysj+oa1S1YoZ38qIqv+5iyXWi06gdtXvMFJKTDy53WfWhZvoDC5XR1
+ eAFf+97dayGslf/YPcMT3emSCPccKl8/3EwSZyNp0LWcJTwIAw99a32GZxV5w8BHLgrn
+ NwEhxVXMTE5jL1Coo50BikzfjnTfs2W88ZgWOeQFeFz44MHG4ZUi8PUlU8aaegIktngv
+ FG69bm2Ya9PKZ2q7b64FfabHxRk61PSRPiT/vukv/Wmgh5qM188D48yJ0R9omQJ2eZY+
+ dFSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
- fh=Bwjok4jWsPwFzEPPOJOguv26ANoKPtuv9PCfDq8ap3w=;
- b=eias6n+gRQEPT2j+4q0CKjxo/elvnWJaaTYnVakmlL+FhPxtMi3aaL0zp953YXFZRf
- G9axoXOYPpEdB85/JkErGm/MP+Nf+Shgb9Nb7iDSFpiRPh6uX5ij0BAN/a6ceT0+q3T6
- bh66zUHDbpealVcUKexHkASUq5kcSEnCZDBWptOA4LsGusLckn1sl3wJ1YxZ94ESM5Cu
- x/9r7M4IHqsOkABgLc0k39ZnTvVB5ZtCNK192BRQL8JX+KbzKwXHPlIj9LxHqXLGCUo+
- tC8j62afz3eP55voNUDB7So9QqrK8wdInfXyDAGLusDEifJE4UNzPwLBK5RF3er+tN+z
- LUug==; darn=lists.u-boot-project.org
+ bh=IjmtFjj9wDDLVusKodWp+tcRAfG+TVpsLAv0golDfD0=;
+ fh=hZNzHcNED/Jbka1F5PQ0cvO7ZaeVkq/pwaWi2F+fncM=;
+ b=n/2zjq5EEcHYIp8fKOSd2+RYll6ag6qxSJt9tHK5l8rHvGrTgtVb+/X4UV1beUikLG
+ IgWwrY0vFIt+q7RC3iCTR/tI3JspEzvl/wV6p5GwbPWFO3bphgzJ1XyofFytppzEPj0R
+ E/zoyZukdk0oaDw3Wt/klzt77zdSKj99zx+3Dzn+HneO/YfMK0wHc2wV0KRVY4OlNr4b
+ Tc00zWp45bezXpy5CBHRV307vYkLWaOpHnnBn6eonOL+vHRzDwwsl7kFw1tOk4OCjYfr
+ CdMtmOjipoVRdnpyuIofsk2BUEHio7yH6ReJi7qpNxohy7rkUPziNzoIjsZzl6+EnbBn
+ II/w==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1787228006; x=1787832806;
+ d=chromium.org; s=google; t=1787228043; x=1787832843;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
- b=Cr6J5iogwVHfwhggwO56glhhPDXWYzbGOMzUOdULo4kdUduB3KJVOjwJ4oHKbezAiU
- GttnATVrGqTZprTm0j30t+T/PODrrvZ/TIbEW8SlB0OFtLKRLMr6cgJq9TVZMzJRKw63
- +FoB5p8iFP8hIsnGRjpxEpnBE3mCXB8+/2hsQ=
+ :content-type; bh=IjmtFjj9wDDLVusKodWp+tcRAfG+TVpsLAv0golDfD0=;
+ b=i5T8+vszoQZL0ivq5iqgcAr8Ju4a9ImTdxgIVJPduDIgf2ziNvpCilIrfYm6avHaP0
+ EEK1W/d/RiOq3LQG0akmVOFHkewEmfm8CtQm/OOFqotmvVraSBvVI4xSkIpw77VNlEl/
+ ZM/tozmRcjiO//vbtVS5dZrdSR5v0NuqH7vVc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787228006; x=1787832806;
+ d=1e100.net; s=20251104; t=1787228043; x=1787832843;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
- b=fUuMTyrz1FF7zmOhR2iBJ2NJQyEP0mO1SGt0ZhY9aLc5yPV8bcUSAw4kSyi2wxZu3q
- l3wn4hDeHstGiVIvPW9t60TWAT5sr6jrL2w+GP9OHVVKLkY6aOjgOAZlkGMUfSyOawnA
- 2/Qd4bePgRNuKgOsmA9b34KzTGln49NSbcHfNNv7YFca+WcqlNJCfLoumWX0BPrzwoBj
- lA1QPw0aMVk1EAJtImRLxvCjqF1r6SgYmGC9OdWukFevI5x781Xvl/dNoYsaNW4jSrh0
- FPHsomJPHXyo6eTHsgA6g+pVZJXsRMgqT+0w/GaEr7OIMzZdZCkInnffQ3pedS1X+sa4
- yvDw==
-X-Gm-Message-State: AFuF++nVvpySAJ4wyR6osdnlZdouHds2BoGndoS6kAgWVet5rG1ZlRs1
- cwe80A0n7Pa6fV9sg6vPGxsrvVqBZwvt+MQQgk0VNOFnjD3m3zQW5VRnbsJPMKN41PVA/ttt6EC
- ZLzYjtQStBY0He25orHnsbK9PBya2ryAUAXCIcW+X
-X-Gm-Gg: AR+sD10DeyGaK10J/LVclRVJxnm7Yv0QjUiWQ8LjHHgPQ/RltLZ44jH/zxX3B9TkhmJ
- 8rSus3aQHtRpe4kDOLVZaQk6Sv89V5vrhZoWgbe2azuEfTOe7k8xyfe/l+N3gxqMQ0IdevSH6sH
- 8sQP+FoxcmoEJWZrPmriTlRZS/syTI0+bsv1ibguZKWk7X7Ke2beyryY43JCMqV33VoEy3KdyEk
- JLv0zqAy0NS5AVNR3AgxL9UlwiNXrzb3/Gya7ptscvyiVS9NLD5HWbI0GBC/vwa6II5OqACbDtb
- utDBQ3JhBmoYw5g+fTpzGTDFWzh85tDLBGUuPrCI92I=
-X-Received: by 2002:a17:90b:1a8f:b0:38f:5801:dc0e with SMTP id
- 98e67ed59e1d1-3958125a864mr22460573a91.15.1787228005689; Thu, 20 Aug 2026
- 05:13:25 -0700 (PDT)
+ bh=IjmtFjj9wDDLVusKodWp+tcRAfG+TVpsLAv0golDfD0=;
+ b=kfd9eFAEw/LeStJaajjwrTdMAAdNxB2RDYninbxlgwi8uQwFZGNtiDh2Tm3Z92I51d
+ oUEtAZIcxYT9bQtmocbMyvO34ufBN58of01XpbuA5+YTqROIX/fZNNIwCoLtC7H11WFb
+ b0gtEcUtOKp6QWO5EbyKgNVSNFpVey8grcMMi2UXUpmjWYX14i0VT5YsWBlEqSujLDAh
+ eEV60TolK/FbMflObsFcr3VlqyfZS7uqnArWATKiXbe3smowlOkybZUM5LWk/kcNQ5o4
+ mBRilsjVaybTic0yi+7/weEP7Gw2OSikXHRmpHXmxSeGkYBwwpv/y97IIiqTNvQZDTjU
+ wx0Q==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpJ+LHk4yUpU3XUkuNgOaXq8J4W3DNrZUpQ+lrc0tl6HlXWHKvQk+gAuahd+P9H1MCvACDmWBw=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0Yw8NorPo+EVo0wmsZBlBU8+fC8u+9NGdDP2qXvQztQN/fIYa4n0
+ wEqJkF+k7KE3h5dNRjEPAqc73sW3+JjiVipHq0f23XgEZ+Y2Lorf7qeD9c060qsSRUKWtuo4VzD
+ UtqWqIP6YaNbey3fK10D3Y3lsRo2BZQtf0M567+xT
+X-Gm-Gg: AR+sD10WsUk7x6DAu4GFK92jpIYh+3iickwoNiB0TCQ9BmNV8OWHIF7zBXCAa6dKAGU
+ NZC/DYejvlBWwR0PDVRoc7J5r0dWZ86pOBM3Ty78InG1R0gYoOe2o8AQGlABdCqnFzlbccemo+B
+ 9nD3aG8MFxIgL+5Fg4XnJDAJNp7vJMGPxbp4vt7BCOiP85ehZxzPl7kkyAkcPxNizzSMUqMmEZ5
+ toIFxx2V5UdlxhAl4nRogrWfOBMcYv7S/SnXvmfRaGmBG9bVijIBvkY2LGn3M5WL/PyzmPry5VE
+ 6wUuQkRKELgiRS+lPAq3DRetqG4liCFdiwqMtVPaNbY=
+X-Received: by 2002:a17:902:e74e:b0:2d6:3c2f:69b with SMTP id
+ d9443c01a7336-2d63c2f085dmr22382425ad.8.1787228043196; Thu, 20 Aug 2026
+ 05:14:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260811-b4-reset-edl-rebootmode-v1-0-2e15adc156a3@oss.qualcomm.com>
- <20260811-b4-reset-edl-rebootmode-v1-8-2e15adc156a3@oss.qualcomm.com>
-In-Reply-To: <20260811-b4-reset-edl-rebootmode-v1-8-2e15adc156a3@oss.qualcomm.com>
+References: <20260814171829.384826-1-jayaramudu.desapogu@amd.com>
+In-Reply-To: <20260814171829.384826-1-jayaramudu.desapogu@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Aug 2026 06:12:58 -0600
-X-Gm-Features: AcwNN1V-5h2pnHptyiG6trjOhXf6Uz7WK2fb8RSKk6i50mlKzC4oh_M7_axAnss
-Message-ID: <CAFLszTgf+=CdNcw5Tt9_-sPiqxWT+_gzTOa3xK-6QV_EwWoS5g@mail.gmail.com>
-Subject: Re: [PATCH 8/8] doc: usage: reset: document device-tree-driven reset
- modes
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Johan Jonker <jbx6244@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Biswapriyo Nath <nathbappai@gmail.com>, Simon Glass <sjg@chromium.org>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Aristo Chen <aristo.chen@canonical.com>
+Date: Thu, 20 Aug 2026 06:13:49 -0600
+X-Gm-Features: AcwNN1UzKO4U6dwvAWxcg89noEv1iBdRtjAmQ8xM9oJAPVQsR97bC6CUtKmTVz4
+Message-ID: <CAFLszTiyey8-T_ZVLQt9KqX6E-CgwgOEhoEDCBiMjc4A0sY0XA@mail.gmail.com>
+Subject: Re: [PATCH v2] x86: cpu: x86_64: Detect CPU vendor and device ID
+ using cpuid
+To: jayaramudu.desapogu@amd.com
+Cc: sjg@chromium.org, trini@konsulko.com, bmeng.cn@gmail.com, 
+ u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -145,52 +136,71 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Balaji,
+Hi Desapogu,
 
-On 2026-08-11T05:18:35, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
-> doc: usage: reset: document device-tree-driven reset modes
+On 2026-08-14T17:18:29, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com> wrote:
+> x86: cpu: x86_64: Detect CPU vendor and device ID using cpuid
 >
-> Document the "reset -<mode>" and "reset -l" forms and explain that named
-> reset modes are declared in the device tree (a "reboot-mode" subnode of the
-> psci node) rather than hardcoded per SoC. Describe the 1-to-3 cell
-> mode-<name> encoding and note that U-Boot's 32-bit PSCI cookie means a
-> 3-cell mode with a non-zero cookie_hi is rejected rather than truncated.
+> When U-Boot is configured as a coreboot payload on x86_64, the current
+> code leaves the CPU identity at the default Intel vendor and device ID
+> 0x0, even on non-Intel platforms.
 >
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Read CPUID leaf 0 and build the 12-byte vendor string from EBX:EDX:ECX
+> to identify the CPU vendor at runtime. Set gd->arch.x86_vendor to Intel/AMD
+> when matched, with fallback to X86_VENDOR_ANY for unknown vendors. Also
+> stores cpuid_eax(1) in gd->arch.x86_device so later x86 code can use the
+> detected CPU indentity.
+
+Please use imperative tense - 'Also store' rather than 'Also stores' -
+and fix the typo 'indentity' -> 'identity'. Also missing a space in
+'paths(e.g.'.
+
 >
-> doc/usage/cmd/reset.rst | 42 ++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 42 insertions(+)
+> This avoids relying on a fixed vendor value and keeps vendor-sensitive
+> paths(e.g. TSC calibration) aligned with the actual CPU.
+>
+> Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+>
+> arch/x86/cpu/x86_64/cpu.c | 17 +++++++++++++++--
+>  1 file changed, 15 insertions(+), 2 deletions(-)
 
+> diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86_64/cpu.c
+> @@ -50,8 +50,21 @@ static void setup_sse_features(void)
+>  int x86_cpu_reinit_f(void)
+>  {
+> -     /* set the vendor to Intel so that native_calibrate_tsc() works */
+> -     gd->arch.x86_vendor = X86_VENDOR_INTEL;
+> +     struct cpuid_result res;
+> +     char vendor[13];
+> +
+> +     res = cpuid(0x00000000);
+> +     memcpy(&vendor[0], &res.ebx, 4);
+> +     memcpy(&vendor[4], &res.edx, 4);
+> +     memcpy(&vendor[8], &res.ecx, 4);
+> +     vendor[12] = '\0';
+> +     if (!strcmp(vendor, "GenuineIntel"))
+> +             gd->arch.x86_vendor = X86_VENDOR_INTEL; /* native_calibrate_tsc() works*/
+> +     else if (!strcmp(vendor, "AuthenticAMD"))
+> +             gd->arch.x86_vendor = X86_VENDOR_AMD;
+> +     else
+> +             gd->arch.x86_vendor = X86_VENDOR_ANY;
+> +     gd->arch.x86_device = cpuid_eax(1);
 
-> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
-> @@ -22,6 +24,46 @@ DDR and peripherals, on some boards also resets external PMIC.
-> +Each ``mode-<name>`` property carries 1 to 3 cells describing a PSCI
-> +``SYSTEM_RESET2`` vendor reset: ``<reset_type[, cookie_hi[, cookie_lo]]>``.
-> +``reset_type`` must have bit 31 set (the vendor-reset bit). With two cells the
-> +second is the cookie; with three cells the second is the high half and the
-> +third the low half of a 64-bit cookie.
+This duplicates logic in arch/x86/cpu/i386/cpu.c - see
+x86_cpu_vendor_info() (declared in asm/u-boot-x86.h) and the
+x86_vendors[] table. Please refactor so the vendor table and the
+leaf-0 read live in a shared file built for both i386 and x86_64, and
+call it from here. That way you pick up all the vendors (Cyrix,
+Centaur, Transmeta, etc.) for free and there is only one place to
+maintain the mapping.
 
-'must have bit 31 set' overstates what U-Boot does -
-psci_system_reset2() in arch/arm/cpu/armv8/fwcall.c ORs
-PSCI_RESET2_TYPE_VENDOR in unconditionally, and reboot-mode-psci does
-not check or reject a reset_type with bit 31 clear. Either soften this
-to something like 'is the SYSTEM_RESET2 reset_type from the PSCI spec,
-with bit 31 (vendor-reset) set for the current users', or add a check
-in the PSCI driver so the doc matches the code.
+Note that identify_cpu() in i386/cpu.c uses X86_VENDOR_UNKNOWN as the
+fallback; only the TPL fast-path uses X86_VENDOR_ANY. Please stay
+consistent with that.
 
-> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
-> @@ -22,6 +24,46 @@ DDR and peripherals, on some boards also resets external PMIC.
-> +-<mode>
-> +    Reset into a named mode registered with the reboot-mode framework, for
-> +    example ``reset -edl`` to enter Qualcomm EDL/download mode. The modes are
-> +    described in the device tree, not hardcoded per SoC (see below); an
-> +    unknown mode prints the list of available modes.
-
-Since this patch changes the command's exit behaviour (unknown mode
-returns CMD_RET_USAGE, 'reset -l' can return CMD_RET_FAILURE), please
-also update the 'Return value' section - it still claims '$? is always
-set to 0 (true)', which is no longer true once this series lands.
+The trailing '/* native_calibrate_tsc() works*/' is missing the space
+before '*/' and reads oddly on the Intel branch - either drop it or
+restore the original comment above the block.
 
 Regards,
 Simon
