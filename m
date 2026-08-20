@@ -4,112 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50CCCC5DF85
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53ED1C5DF81
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:15:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BF97080C98;
-	Thu, 20 Aug 2026 07:15:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 185F380982;
+	Thu, 20 Aug 2026 07:15:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GUfqd-_KTpCG; Thu, 20 Aug 2026 07:15:26 +0000 (UTC)
+ id VLbo7935X5Y2; Thu, 20 Aug 2026 07:15:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787210126;
-	bh=0cbfUUV5/q+n0fEe244sOrp8aro+Nky7lUmIZI2gjyQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=CERAyH7T53rrSiC1X2Ox3IRFM+8h/g7oosc1Y0loiKfO2zogP/3SKJNT3Cr6Rl3QS
-	 tiCfmWhTe3iOp/E13EP5LuE2whrHDL7LiDmbyqBUqrkXgjsVP84Q/4W30moPjwqAx4
-	 p84wWmUon/Gmqhi3343UG9+wQeh7seFMCqHj9VlKn7W1BXBc2l7Lfu5d56e2KG6nuV
-	 6EHGJp8c3Ew+Cte78kkfHFZlvVbRN4LCNJos8UmdHKyz1mwIG1w4JtCglhMXUeIcVo
-	 MkHod6pCK/ZEOqF0EsyOB6ZLPEAiCuaBPsPb2dvg0S8Z2sFhrnbaMeySlVcc4GjkcD
-	 gxlwxt5kUoXow==
+	d=lists.u-boot-project.org; s=default; t=1787210143;
+	bh=PQjnLBoUZwUSpRAE3+AtGe2gan7wbp/+fD5Po9gMQ/8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=lBly8C+lELD5agag+Cge00u4BHcD6LIbSUE49w1JJbf2PyaoBwFc1xMH8LcZ3/zLu
+	 g8pJc1Y9XCZUQrB6ycjGB/zGNVXsyQVKUYMrgW6w0URZ5FPzd4H8HqfHn27hG5UEu7
+	 JiXXleabKsq9pIM6IxdZ5Zg6+/uWT3WZbA8Eq5U5ispreoaSf2nhKhjhos4h83HLhM
+	 WXeehtZS60K9V9kOzh82VUsE9olom9do7trmxQleHVOUEPFa/IVzEwoT9ZvfhFojIP
+	 iLkOzp/9dyEADlyx2dTlV+ukmQmDlI6ohqFZUuIcI8vFWnFqmAiYOOAAeVw2jYTYAc
+	 OoZy/40ZyxHfw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A29080C32;
-	Thu, 20 Aug 2026 07:15:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3FB97809A7;
+	Thu, 20 Aug 2026 07:15:43 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 22DB22FD
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:20 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 911552FD
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 12FEA80C50
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:20 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 837F1809A7
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XTnevJUjDYFR for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 07:15:19 +0000 (UTC)
+ id FDKThP9qhWj6 for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 07:15:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=KaMaUQcW
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 778A580C36
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:18 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4996f1ee4a4so16112165e9.2
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:15:18 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=P8z4Xp4y
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7EAC980965
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:40 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-495437bb891so5349325e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787210116; x=1787814916;
+ d=gmail.com; s=20251104; t=1787210138; x=1787814938;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=0cbfUUV5/q+n0fEe244sOrp8aro+Nky7lUmIZI2gjyQ=;
- b=KaMaUQcWigLrXcz/Podz1l/yTzmHIDsOFi7CnYMbEf6l7ot1CXLf/ePEmW0kxIp+QK
- 7t4bOVZ99EQw56Baj5QdhJNjB9hqTQPoTY66XPJauUUk3kBmbFjYYzpH7aa9LAncAQrx
- 0Rd3OajkW/950ZI6DrxC/M24OhHcycHa6uq8cD7sSqECiCvCXS/83II++XIO6YbSSigk
- hTUOFZSQHKJwmCjSRs2H543YsvRZjwZu+1liTTIfPCc4JTMUw0mVtRAlhFwlZQsNfUj+
- q+iNYwLnkGJM5B1YO7QgMzzOAp8zSy+VPOjVudXkBFJFACg2nLQjF29wrq+8zDAZz8HC
- bbcA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=PQjnLBoUZwUSpRAE3+AtGe2gan7wbp/+fD5Po9gMQ/8=;
+ b=P8z4Xp4yUV8/LsP1Lj46CwWqzUq0J6CBqdf/gRx0sr6yai9yUfwlKsRqLiDgYJ7pNP
+ /5Z6DQIQZJZKOb8y/QPW36hr4KzxsBwYW+9fhyPpQcW99VYY5ujgFcsg9iO5AeFvD4k0
+ VR9et/B9BCDTuWU1NEmrLjuNw/butYHC7c7zHFPtWSmpJdoP9nsRCOuqzAsweGWVNomS
+ y5pxo5OPUlT+kpt3z4peL/t9MbiPgtlbEKLyIcQNNozNvSxegP8wiEhQMbSLbJUIiBMK
+ bZnHEXjiapRbj9EPycOdlonwPxLE5BQSyO0F09iIuvxlENDsfLI1cT3J/cQomS/JpZbK
+ BTCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787210116; x=1787814916;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=0cbfUUV5/q+n0fEe244sOrp8aro+Nky7lUmIZI2gjyQ=;
- b=V+GrZFd9MLlNAqqnqpMnpp+F1fphx81tg5UhKNOr6HAnMouX/FOE8yNzwY+IR+/5XY
- fcKs4Rn4E7C+0s3IrpJgzi06ZoHBXO66vA6lpjtaFh2Mpl4UgC+hOXYqzUAS1FYFhAE4
- IgKlb6CxrgNnH4kKjDJqTUdp82LEqVBNAGp2ksagZOX9xozazPINPSm205dLCWUHVZ2g
- 1dcQBpDbVtXlQJVUfJD/SBItC8hCYBepNBaq0ORCud3R1O04vL+j/vBB4Fa0mPtsbLp8
- hloGA2hIwdJM1KiMSO3xbtTGA3s/p+nd+iaaHH8nqMZes61gb0ylvE3oP9PVbWjAeb0t
- aD/Q==
+ d=1e100.net; s=20251104; t=1787210138; x=1787814938;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=PQjnLBoUZwUSpRAE3+AtGe2gan7wbp/+fD5Po9gMQ/8=;
+ b=R8NfaseV4WQPQN3rgNxH0AdgMwAQckz5XJPfanEbRaHFkN4xWxudaruOcWfiVQKsS6
+ htWSAPfYiz/x34G4S4p6ad5AY+lxTsErVxHGeIjZcT1G84yv1xxcmHzWeV1tPSpiHWEE
+ aCQJIL5b+VZMy8eqVFLgWCTP+lINmxkC4YqGF+yv7627PELVaB/udZBJslfehUmXcMY8
+ DT9O/dD/Ye/OGKIQW6vtEuEjqrnezcM1neGHOwS54QoPr4Zy8PkuwbnbYt0ZjASkBFea
+ Nw+Jj2wJyeB/6/ohXf8UcOk4yxQ2Zd4r0kCsaQnUsVAP70tnUp7DY0fSgKIaC6SOfElo
+ epFw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoihhbFVQpVTm3ln1bWmlpsl1DtSO1vS5uilebf96YFbYHlWHPqGldp3CcfLlBMWDMerXkmL30=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YxCy9+ZMJrr0RtxKuIW5mOyPrHb2uiHusm7k0Su03uPZqHa+FWs
- IOCdmPQoDxhIDMW5fH50XvxAwiiWAsUI6dPm0IU70QYqkGN84iavfpxd8/bfGg==
-X-Gm-Gg: AR+sD116tkHxDCrlrRSS6R2vklOsdq33BHUfpR6Xzp4BNq1wn/VjNAPxYy6ONZQ2D2J
- rDhJGv49mZgE2Idz3r7+lbU/u718UBbqkm7UEr8nYLQRev0pf1lRTqhk6Nw8PyvnLs9oSMMJ/9H
- /7fjQj5yb7dwWP0KBDn2gn7sD9HdoLF9UIOh9o6Vno16RMYlWZ//A+6I66SKrjt/smum3NZEThC
- 1oI5Ok1acH7VmhPI81qXWkQzroCpWjdNpmZtfxLwY9S97dnvfsfXtp61Qx0xusj/HlLkQywH4Kb
- vKQxOh7GG1d5WYLFx9ZvpQpgXywmJ24DspxYx3DACVt4Lwb2w47F74Xz0uhwFz4KJ23eah7guzr
- 0yvon8i/7bJjDWONqGoJQxo97YVYo4qPHLUUq+JQOeuqJFNKSA9Ve/bW2fBLoo6GnFIl1uFtd3G
- T7hx8Gv2V45aPg89HbFRXKmbZwuqGlCLe7J+egT6okg+5ojea4BxJUXE1jjQfNl9pWkg==
-X-Received: by 2002:a05:600c:4ec9:b0:495:6e68:5df2 with SMTP id
- 5b1f17b1804b1-499aa1e33femr160414165e9.12.1787210116190; 
- Thu, 20 Aug 2026 00:15:16 -0700 (PDT)
+ AHgh+RqYzsalVNvUuSUuNwZeFXm+esGgR5BRnv9ga5YPbJctjp0y9AjATItgy7H9nbvAUP0xxYAgUdM=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YykjWUyrQ4U3eDj9voJKk6w8/4wXnTGs/8wNdoi7JTrRhPZnWfy
+ Y/sGA0nlMMGn4PswL1a5kYW0uNfDyv67B5j7hdZdXOUcQpyCiFIttFRV
+X-Gm-Gg: AR+sD12h/r3/kvG9ip5yCtlV5ro3uqzhDDMQfMN8nIjnGyJCQ/1zPZNrq/9E5ccciM6
+ 0VQOyI52ZZxRM+DAAP1TBxqY9DxLHUi6pg1z5mtNTLFytjtOn36LshLrnw36cFaDiUlIEPIF7v2
+ EliTT7g+WXQPW/UM+W8Gz7Dkbye4HRh1zqgJ+VIrykHlAO4lA+Om0vCUFUhIcxPxCKJqzbNBciv
+ UkM4NQtet3lUyMy45+tHVk21qK1k0UJ/gy4mgOyrYvs4RgzEcrHYtxfVk7no0NmgdCVIl/dXJ+J
+ ciZtXb8WbGGf4P3X/ch1wkux2Szt3TkZe3toscalCJmeAPM/RqiqTxid+rqGaH4Mvcsih22FFVw
+ H2I/BPEd+yBWNQGopHg/2nWsmViNz8TjxEAf2yTvYHfLn9m7k8SwwwBMXs8BSeCmTdk0bnf6L15
+ KdcqYMNWKXn2KgE+cm3hkWa0N6aBbW9NEClldEEzbhSZAf94rR0VRvu8kAxttUx6Y8IRdYQhMUz
+ Xa/
+X-Received: by 2002:a05:600c:810a:b0:499:59fd:dbfc with SMTP id
+ 5b1f17b1804b1-499b06a5900mr34922775e9.1.1787210138124; 
+ Thu, 20 Aug 2026 00:15:38 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499aa0d6721sm158151475e9.11.2026.08.20.00.15.15
+ 5b1f17b1804b1-499b2b23a00sm19197705e9.3.2026.08.20.00.15.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 00:15:15 -0700 (PDT)
+ Thu, 20 Aug 2026 00:15:37 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Marek Vasut <marek.vasut+usb@mailbox.org>, Simon Glass <sjg@chromium.org>
+To: Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+usb@mailbox.org>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
  Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v2 4/4] usb: ehci-vf: take the register bases from the device
- tree
-Date: Thu, 20 Aug 2026 09:15:11 +0200
-Message-ID: <20260820071511.1036506-5-mehmet.fide@gmail.com>
+Subject: [PATCH v2 0/2] vf610: make the USB host port usable
+Date: Thu, 20 Aug 2026 09:15:34 +0200
+Message-ID: <20260820071536.1036898-1-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260820071511.1036506-1-mehmet.fide@gmail.com>
-References: <20260820071511.1036506-1-mehmet.fide@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -127,259 +123,44 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-The driver keeps its own tables of PHY and controller base addresses and
-indexes them with a port number, and it reaches the anatop block through
-a hardcoded address. The device tree describes all three: the controller
-points at its PHY and its usbmisc block, and the PHY points at the
-anatop it uses.
+A device plugged into the host port of a Colibri VF50 or VF61 carrier is
+never found, for two reasons.
 
-Read them from there and drop the tables. The port number stays for the
-one thing the device tree does not express, the choice between PLL3 and
-PLL7, and it now comes from the alias of the PHY node instead of the
-sequence number of the controller.
+The pin that switches VBUS never becomes an output: device_probe() reads
+the device tree into plat data before it applies the pinctrl state, so
+the fixed regulator asks for its GPIO first and the pinctrl state of the
+same device then rewrites the pad. Harmless on most SoCs, where the
+direction lives in the GPIO block, but on Vybrid the output buffer
+enable is a bit of that pad. Patch 1 moves the call back below the
+pinctrl step, where it was until 2019. Unchanged since v1.
 
-Note that the usbmisc node already starts at the non-core registers, so
-the driver no longer adds an offset of its own to reach them.
+Patch 2 makes the driver enable the vbus-supply of its port. In v1 it
+guarded the regulator calls with CONFIG_IS_ENABLED(DM_REGULATOR) and a
+NULL check; as Marek pointed out both are unnecessary, the calls return
+-ENOSYS themselves, so it now looks like the adc-uclass example he gave.
 
-The previous version of this patch did the same through fdtdec, because
-that is what ehci-mx6 does in mx6_parse_dt_addrs(); this one uses the
-livetree calls instead, as asked in review.
+Patch 2 applies on top of
 
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
----
- drivers/usb/host/ehci-vf.c | 140 ++++++++++++++++++++-----------------
- 1 file changed, 77 insertions(+), 63 deletions(-)
+  https://lore.kernel.org/u-boot/20260820071511.1036506-1-mehmet.fide@gmail.com/
 
-diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index e5f9ec0fdbb..6c9866bfa5f 100644
---- a/drivers/usb/host/ehci-vf.c
-+++ b/drivers/usb/host/ehci-vf.c
-@@ -22,12 +22,9 @@
- #include <linux/delay.h>
- #include <usb/ehci-ci.h>
- #include <linux/libfdt.h>
--#include <fdtdec.h>
- 
- #include "ehci.h"
- 
--#define USB_NC_REG_OFFSET				0x00000800
--
- #define ANADIG_PLL_CTRL_EN_USB_CLKS		(1 << 6)
- 
- #define UCTRL_OVER_CUR_POL	(1 << 8) /* OTG Polarity of Overcurrent */
-@@ -39,28 +36,33 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--static const unsigned phy_bases[] = {
--	USB_PHY0_BASE_ADDR,
--	USB_PHY1_BASE_ADDR,
-+/* Possible port types (dual role mode) */
-+enum dr_mode {
-+	DR_MODE_NONE = 0,
-+	DR_MODE_HOST,		/* supports host operation */
-+	DR_MODE_DEVICE,		/* supports device operation */
-+	DR_MODE_OTG,		/* supports both */
- };
- 
--static const unsigned nc_reg_bases[] = {
--	USBC0_BASE_ADDR,
--	USBC1_BASE_ADDR,
-+struct ehci_vf_priv_data {
-+	struct ehci_ctrl ctrl;
-+	struct usb_ehci *ehci;
-+	struct gpio_desc cdet_gpio;
-+	enum usb_init_type init_type;
-+	enum dr_mode dr_mode;
-+	struct anadig_reg __iomem *anatop_addr;
-+	void __iomem *phy_addr;
-+	void __iomem *misc_addr;
-+	int portnr;
- };
- 
--static void usb_internal_phy_clock_gate(int index)
-+static void usb_internal_phy_clock_gate(void __iomem *phy_reg)
- {
--	void __iomem *phy_reg;
--
--	phy_reg = (void __iomem *)phy_bases[index];
- 	clrbits_le32(phy_reg + USBPHY_CTRL, USBPHY_CTRL_CLKGATE);
- }
- 
--static void usb_power_config(int index)
-+static void usb_power_config(struct anadig_reg __iomem *anadig, int index)
- {
--	struct anadig_reg __iomem *anadig =
--		(struct anadig_reg __iomem *)ANADIG_BASE_ADDR;
- 	void __iomem *pll_ctrl;
- 
- 	switch (index) {
-@@ -83,13 +85,11 @@ static void usb_power_config(int index)
- 	}
- }
- 
--static void usb_phy_enable(int index, struct usb_ehci *ehci)
-+static void usb_phy_enable(void __iomem *phy_reg, struct usb_ehci *ehci)
- {
--	void __iomem *phy_reg;
- 	void __iomem *phy_ctrl;
- 	void __iomem *usb_cmd;
- 
--	phy_reg = (void __iomem *)phy_bases[index];
- 	phy_ctrl = (void __iomem *)(phy_reg + USBPHY_CTRL);
- 	usb_cmd = (void __iomem *)&ehci->usbcmd;
- 
-@@ -118,12 +118,8 @@ static void usb_phy_enable(int index, struct usb_ehci *ehci)
- 		 USBPHY_CTRL_ENUTMILEVEL3);
- }
- 
--static void usb_oc_config(int index)
-+static void usb_oc_config(void __iomem *ctrl)
- {
--	void __iomem *ctrl;
--
--	ctrl = (void __iomem *)(nc_reg_bases[index] + USB_NC_REG_OFFSET);
--
- 	setbits_le32(ctrl, UCTRL_OVER_CUR_POL);
- 	setbits_le32(ctrl, UCTRL_OVER_CUR_DIS);
- }
-@@ -133,63 +129,81 @@ int __weak board_ehci_hcd_init(int port)
- 	return 0;
- }
- 
--int ehci_vf_common_init(struct usb_ehci *ehci, int index)
-+static int ehci_vf_common_init(struct ehci_vf_priv_data *priv)
- {
- 	int ret;
- 
- 	/* Do board specific initialisation */
--	ret = board_ehci_hcd_init(index);
-+	ret = board_ehci_hcd_init(priv->portnr);
- 	if (ret)
- 		return ret;
- 
--	usb_power_config(index);
--	usb_oc_config(index);
--	usb_internal_phy_clock_gate(index);
--	usb_phy_enable(index, ehci);
-+	usb_power_config(priv->anatop_addr, priv->portnr);
-+	usb_oc_config(priv->misc_addr);
-+	usb_internal_phy_clock_gate(priv->phy_addr);
-+	usb_phy_enable(priv->phy_addr, priv->ehci);
- 
- 	return 0;
- }
- 
--/* Possible port types (dual role mode) */
--enum dr_mode {
--	DR_MODE_NONE = 0,
--	DR_MODE_HOST,		/* supports host operation */
--	DR_MODE_DEVICE,		/* supports device operation */
--	DR_MODE_OTG,		/* supports both */
--};
--
--struct ehci_vf_priv_data {
--	struct ehci_ctrl ctrl;
--	struct usb_ehci *ehci;
--	struct gpio_desc cdet_gpio;
--	enum usb_init_type init_type;
--	enum dr_mode dr_mode;
--	u32 portnr;
--};
--
--static int vf_usb_of_to_plat(struct udevice *dev)
-+static int vf_parse_dt_addrs(struct udevice *dev)
- {
- 	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
--	const void *dt_blob = gd->fdt_blob;
--	int node = dev_of_offset(dev);
--	const char *mode;
--	fdt_addr_t phy_addr;
--	ofnode phy_node;
--	int i;
-+	ofnode phy_node, misc_node, anatop_node;
-+	fdt_addr_t addr;
-+	int ret;
- 
- 	phy_node = ofnode_parse_phandle(dev_ofnode(dev), "fsl,usbphy", 0);
- 	if (!ofnode_valid(phy_node))
- 		return -EINVAL;
- 
--	phy_addr = ofnode_get_addr(phy_node);
--	for (i = 0; i < ARRAY_SIZE(phy_bases); i++) {
--		if (phy_addr == phy_bases[i])
--			break;
--	}
--	if (i == ARRAY_SIZE(phy_bases))
-+	misc_node = ofnode_parse_phandle(dev_ofnode(dev), "fsl,usbmisc", 0);
-+	if (!ofnode_valid(misc_node))
-+		return -EINVAL;
-+
-+	/* the anatop the PHY uses holds the PLL that feeds this port */
-+	anatop_node = ofnode_parse_phandle(phy_node, "fsl,anatop", 0);
-+	if (!ofnode_valid(anatop_node))
-+		return -EINVAL;
-+
-+	/*
-+	 * The PHYs are the only USB nodes the device tree gives an alias, and
-+	 * their numbering is the port numbering the PLL selection needs.
-+	 */
-+	ret = ofnode_get_alias_seq(phy_node, dev->uclass->uc_drv->name,
-+				   &priv->portnr);
-+	if (ret)
-+		return ret;
-+
-+	addr = ofnode_get_addr(phy_node);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+	priv->phy_addr = (void __iomem *)addr;
-+
-+	addr = ofnode_get_addr(misc_node);
-+	if (addr == FDT_ADDR_T_NONE)
- 		return -EINVAL;
-+	priv->misc_addr = (void __iomem *)addr;
- 
--	priv->portnr = i;
-+	addr = ofnode_get_addr(anatop_node);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+	priv->anatop_addr = (struct anadig_reg __iomem *)addr;
-+
-+	return 0;
-+}
-+
-+static int vf_usb_of_to_plat(struct udevice *dev)
-+{
-+	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
-+	const void *dt_blob = gd->fdt_blob;
-+	int node = dev_of_offset(dev);
-+	const char *mode;
-+	int ret;
-+
-+	ret = vf_parse_dt_addrs(dev);
-+	if (ret)
-+		return ret;
- 
- 	priv->ehci = dev_read_addr_ptr(dev);
- 	mode = fdt_getprop(dt_blob, node, "dr_mode", NULL);
-@@ -241,7 +255,7 @@ static int vf_init_after_reset(struct ehci_ctrl *dev)
- 	struct usb_ehci *ehci = priv->ehci;
- 	int ret;
- 
--	ret = ehci_vf_common_init(priv->ehci, priv->portnr);
-+	ret = ehci_vf_common_init(priv);
- 	if (ret)
- 		return ret;
- 
-@@ -270,7 +284,7 @@ static int ehci_usb_probe(struct udevice *dev)
- 	struct ehci_hcor *hcor;
- 	int ret;
- 
--	ret = ehci_vf_common_init(ehci, priv->portnr);
-+	ret = ehci_vf_common_init(priv);
- 	if (ret)
- 		return ret;
- 
+Testing. test/py on sandbox, before and after patch 1: 11 failed, 414
+passed, 210 skipped, 1 xfailed, 20 errors, the same failures both times.
+
+On a Colibri VF50 V1.2A on an Iris carrier, U-Boot 2026.07 from NAND:
+"usb start" finds a USB stick, its partition table and blocks read back,
+the pad of the VBUS pin reads 0x22ef instead of 0x22ed, and Linux still
+boots with Ethernet, SD card and USB working.
+
+v1: https://lore.kernel.org/u-boot/20260819143543.427396-1-mehmet.fide@gmail.com/
+
+Mehmet Fide (2):
+  dm: core: read the device tree into plat data after pinctrl
+  usb: ehci-vf: enable the vbus supply of the port
+
+ drivers/core/device.c      |  8 ++++----
+ drivers/usb/host/ehci-vf.c | 25 ++++++++++++++++++++++++-
+ 2 files changed, 28 insertions(+), 5 deletions(-)
+
 -- 
 2.54.0
 
