@@ -1,122 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF31C5DF87
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B93C5DF81
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:31:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 12D074061B;
-	Thu, 20 Aug 2026 12:31:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A3EB3605D5;
+	Thu, 20 Aug 2026 12:31:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0buRVXX2CtAq; Thu, 20 Aug 2026 12:31:38 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QgPqMRyQlBzg; Thu, 20 Aug 2026 12:31:50 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787229098;
-	bh=mnRtRsALa5cYqoktUWgxqw05jYkNozVc9TnEqDfOZWE=;
+	d=lists.u-boot-project.org; s=default; t=1787229110;
+	bh=HPeFywF6LRvsao0mr1MPPLSXFhnV/IcB2v05kGhLCIw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GBoL7x4fLVqcoAjQDywUHiyLYS/jvxboEuHu6xdwH9BCDrteJdtYzNCf2UIpFUYwp
-	 bpSvKNvop1bxccW3pX3vG5R/IGg8Y98jsAE2oHGgir2LkJYPl5QRHnANDO0AN4YLaz
-	 jXNnGGQdFleEqojPGZ/CZIf1M+wKCbJcFWkWq5u0RXEVPjsvFAz5ixp3tavGD6hVZc
-	 9myF9Bv8CxMp5Tl31ajIuARGdtceAujUkgX+FhNGCyYkBhbPi9lXuuiqWqA2gAbHwF
-	 +DCFePBBd+HPQMV7ADeCxZSPiTlx3d5JGMyo7qcGAuLOJ4To4oAy7p/rnkWNR48pT3
-	 d1lNMNBkNDMjA==
+	b=FPy80Xd84nffVEcgC7hxfedg1mAOwrUwIa8t5o8D2i4LTv9PKuhOzi+pMQHAi88c3
+	 IVnrSuOutH1AD4pU9I0gMZj0z14LKXyJsOt9Js0shxQvDVMr0qXy60RenOjiipjJPk
+	 ABaJisZX7CTS/Ypx/j9Hpc8r/zPVO8170cPZ3grPJ252njTOztTJUizNnwFIVvBlD0
+	 +5pqdYzsd00998E0anyFt+v7V7raS1Z5JiRlMDTE6IAaJYdj5mb3A7ZbFomE6oPw7X
+	 ibq5TbOvYdDOXikADXvJvTwLND7g1ZxSmpCaoUV8EEj+QP/DVO0dBEx+7gpzWiD0FB
+	 9L1gCOGgcpb6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 029BC405F6;
-	Thu, 20 Aug 2026 12:31:38 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5A41B323
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:31:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AD892605D7;
+	Thu, 20 Aug 2026 12:31:50 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C4BC03AC
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:31:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 48B1140275
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:31:36 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AA3B340603
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:31:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D5xedAfy11Nm for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 12:31:35 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id n7D4CFzweZTm for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 12:31:48 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::62f; helo=mail-pl1-x62f.google.com;
+ client-ip=2607:f8b0:4864:20::62c; helo=mail-pl1-x62c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=KURnKjji
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 585A340292
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:31:34 +0000 (UTC)
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2cca0c5799eso18156285ad.0
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:31:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787229093; cv=none;
+ header.s=google header.b=LuRbjwDd
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 01DBC40558
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:31:47 +0000 (UTC)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2d5cad1a6baso16985505ad.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:31:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787229107; cv=none;
  d=google.com; s=arc-20260327;
- b=IkcJYS1QIIkt2aD60WxiuzDON4HBCQ30LxbxUd2IHAerqSJtbc0czvya5VuujuRhaK
- MHKrVrod+CWKrQTT5jZcDf1ypd8IEdJWmx8ITanAwgmPvwLyclIaWhSUJIpVV1ZWJFUY
- 1amVV2mXxk+TYUQFwtjGXi7N7kN9CWKArE+HvyruQWcXCd9h9zti4uHDJ8hKXiERkDV8
- dDpgx3HrtmodZQ9KljzWjIIR0pEqwjqXnZi5xWPNN6wB6BJEaW+OGj78oB37rvWm0yiy
- wdQzny3zsSlL1ixVbgW1FNg26iCaJM2hKrhFm/DrHv/kb8U4hOWfYHbeQg3PHN5nzI+F
- pj3Q==
+ b=skQPg6mDGt+dvOgZzoLhbRpU7BCiGim2c4jqO1w7iwCP4WXMYmmAaOlRCJlfDSHAuR
+ xk56/irixMSES77+JMvfx8DMNRXFv41Wxb0tNp0/SPK9dXOzqeW4cDMTsdR2J5OscqdM
+ hIWlcTB4E/qHyJfkPo30BIls7ZAEtrBSwCA/BA5FMb6tMc/2tytiQWgx6cR97/l9O10I
+ PDRl2JVASFbUfHgztYdLoOVmJWgi4KjCODtQuQ7T4Gj6YHGPLywBkdYK/zzEorcvJdfE
+ 2y62NdwDkCFQtVeE/G0X2GSs/UH2kzbcnEIkP4tuk0g2IwLNkxHB3XlI8Hmo22S6evYv
+ iFDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=mnRtRsALa5cYqoktUWgxqw05jYkNozVc9TnEqDfOZWE=;
+ bh=HPeFywF6LRvsao0mr1MPPLSXFhnV/IcB2v05kGhLCIw=;
  fh=dt7UrUXnn871sXXPbwCgP8Qcn2KjxTAP32yeWYOSxNo=;
- b=osDNdN4BPkab2x2G+E6R9stXCVrcwj+HPpDcvYwwpSTPo4qIT/31v5tJXxhaSu8peJ
- kQfF2mjriZK3yS99pG+OwzW71EwSWyNSBqikzRwz2UPIawNI0m/hxg9zqr1LYQ6LCe+B
- C5SxI04nGAdF4lsHtGJtuAZ2jyBQKHo859e5YCcx8DgIWVLT70YJnyJSSROqNAhVRU0H
- SHwPauaMpPa9+LNFr4MR7kDW6q1l2RYwKtXnOGm2H6XBauT5b+BoqlsJx+vgAyg0zRZv
- 6+tv4d0y2ZqCWxhCfUB75y7MJ5eFfoWbAGsDvA7ElR4DMW7OkMwfSvhrAyGF90JLlTkb
- JEgA==; darn=lists.u-boot-project.org
+ b=bwZahqCnU4ikh+qZ3UHiyW+qqJGi9auAt3kWDtCpEPz//b+UCmqDC/zUJn5LcfVY05
+ YBOKfPqRN1hUMCY2M/ezbhc8iU9YTm6XP3uNoQpo7W68OYJZWoVvBBv3ddCzVy3e6hyB
+ e4Tg7QhNzDptujrCDQ/+jd9K5NvBAEnAg1qJ9cy3eysdBdVA5KhXc2FJqmG+y4jo6Ez+
+ Vl5gStxSsOkMS8gp8SwSEih4XhM05u396YKorZFwClULZOycmPw2D38U0sAE4szgB+J3
+ AF66+y8cPMRZAvYp2SaElgWxQR16et/iNdGylUb+ZdbzNbHxflyw4VpVqAYpw6Mg343U
+ S1pA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1787229093; x=1787833893;
+ d=chromium.org; s=google; t=1787229107; x=1787833907;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=mnRtRsALa5cYqoktUWgxqw05jYkNozVc9TnEqDfOZWE=;
- b=KURnKjjijUQ4KiP+ZByOmaUTzDOBtzgymxVLyAOenwOj+CXivX8zK7htO0XItPxEb6
- 2t0mFID5QzkgV7yTxAugbkKBz27BdCEYJzAgciwT7HDin7AlxVxB27sPVYvTYjiZ/SUi
- a0MtK8cXO9hBLYoVOJ59ZFd4IiEI+CDbreAq0=
+ :content-type; bh=HPeFywF6LRvsao0mr1MPPLSXFhnV/IcB2v05kGhLCIw=;
+ b=LuRbjwDdV2pwwP3e46btpdBlNnjTGtG0iPlMhgJ73HOkY++yqeOSIilsqE4gLV4uRd
+ TWutbmOKWUASUXr7fYkrHsEQszk+DEN91fbU30ojQ2pApgHYEMXIyoVFMBWS1aDF6xVh
+ fHNdh0bb4xUfIIodMs6XNxib/uDIVSrUbd7C8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787229093; x=1787833893;
+ d=1e100.net; s=20251104; t=1787229107; x=1787833907;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=mnRtRsALa5cYqoktUWgxqw05jYkNozVc9TnEqDfOZWE=;
- b=KCsCB2ltfUqalOISf98vCqFottGv32RAehj2uKoi1fnhfzLlfJzzT3Y/HnSODBr8PV
- PLyX34u7b0ZdMvhCcYx2DLDhCzkcuT3qUYDcWBNL0MtHTBs18unFYMtg9sQssELAP3bV
- HRLMRa/9RqU87jIdca0xc9U5B3rkUA/yKrnGbbF0+YIIGCYaUKQp+QFB+nyDcqfVi/YJ
- 2dZnE+EBo8H4R65TUxEUKytUPS+no7duaA5OMfYTmNAnjsY7Ekk25ZzCi0ot13sOfDGB
- IJj0gG1rmEZ7Z55SHQ1KIizPmy2fM5wC3gfrs8NNR8mX9UV3kGPKL0jfMjWfy3gvEI9L
- 48fg==
-X-Gm-Message-State: AFuF++mqr6Ry3dNCB4yfWdOPNQlKH+Nl7tU4zCBvUaONP4tXztglPI7h
- 2YxsQbRkpEpM70raS2kC2/IiZdJcW5X/VvwAuLkoLg9xBRjJtxG6Bh/CY7sXbaoDXJgnhXPCsaN
- JKD/uQokQJ9pReqUhfbLwWib4wFNzgqt53YD/d/LLCLNjq5N+hH0=
-X-Gm-Gg: AR+sD10i6PA3Hy4p1F1waonEeAXAgV1pnX/URCMZnxUVm1qwG1qw8yLBgWMt86eVVpG
- SJQk19TvXX3dfA6hjNOwtq562CH7teHhaBA+yRbp1FVKZm2BliX2NOmYVodlhPblm3WsFO2U4A/
- y2R0YDlOwXTTfDdNsHoryXar/IygWpKbHGIuEDraTgPlGfjs4fEhwn3QRDn9BERg4m9vaCM4AIq
- x94A88n9fK9nQYXuQeY/54YHGl4aN2hdeHFr6fVTtW+XaqPwGb/S01C/I050ABzL6ubw1rOhbWo
- mGNeKhzzqOzEJ69HUshmZk3Vz+rChvyD6E0NHFWOI8E=
-X-Received: by 2002:a17:902:d4c6:b0:2c9:c517:d070 with SMTP id
- d9443c01a7336-2d5fd5b0008mr209106815ad.3.1787229093476; Thu, 20 Aug 2026
- 05:31:33 -0700 (PDT)
+ bh=HPeFywF6LRvsao0mr1MPPLSXFhnV/IcB2v05kGhLCIw=;
+ b=VyDDl+/24CcB410LJaE3ZtjOYif2ztlBKeAHUaQxIWDp3DBBtmILVRi/db+aibemmc
+ 4FYIPJVcsRBIZyaKGW+XCZPo2VAgXdL5m0XuyyEjicZ/Ov8VeANC6L//LS+b0uxJ8me5
+ ffqNPPlnIIQB0CGeb5Utw+NHLYkiLZoBRLOu2HCMDnBtG51DBiuRB4Mr5Pgs1qqN1ulv
+ pREPh93lZTVd7bnoouxTujriJDmarMqiH2Ex007U0oJ3jjEfp2n6jJQ7p1g6qLZLvaXp
+ Kv+VuLeexhOFhLt8nhuRzoNx5SXhLB/iKRBOtTdRzEwJkc6eVbilAPjDon3K3cT/jBRk
+ 0Gcg==
+X-Gm-Message-State: AFuF++mFe8qjX83R9+GWWkYzyMweS0Jz1bXT3uXAq9k1g1rIcEmR/ddi
+ XfYgWQu4alG04KsyQRnoV+N1O6RrcORTNIffNK9FM49/0ZDVVWaULD110Pyl9is2FM0DBpqeyEp
+ P6BKPp05x2DMcXnB6dm6JbNrqYp0s7SI9BDb3Khy9
+X-Gm-Gg: AR+sD11P1RkFzqOw2/PDPYegA9yBQx2iuDQV72TaY+eY7OZ5ZRsvTrHDSoC3Xfs45VG
+ 7FC9aw0vju1au1Nqol3VEAnjQdnhPt0T7LX/A6sRcC4SF0U+772c+AqF8+whE0xEfhLk8jLw6Ff
+ Gp+myTt+XjZumsLfURuKwsx/HW0LJltoEZscTWdrfqMAHxaVZwDaYrZEwMCKLl7G4RPNW2AzF6U
+ 2hB5ZzivMR8dH1D47UQMEWbEkFOm8mhhiQIMqmoOgPSiyjjmE3MDUfZu4fXlu2w0e9TQcNIJKeR
+ e+ZZwPsxSUFz3TNKRZStOVvmL8S+qB03LyyJI6sALIY=
+X-Received: by 2002:a17:903:11c7:b0:2cc:864b:539 with SMTP id
+ d9443c01a7336-2d60175df80mr204194495ad.6.1787229107252; Thu, 20 Aug 2026
+ 05:31:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260818175301.818739-1-valentinliu@icloud.com>
-In-Reply-To: <20260818175301.818739-1-valentinliu@icloud.com>
+ <20260818175301.818739-2-valentinliu@icloud.com>
+In-Reply-To: <20260818175301.818739-2-valentinliu@icloud.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Aug 2026 06:31:18 -0600
-X-Gm-Features: AcwNN1Vdicn45QQzey78yK_xxZS44LvYXq84Howd3979g9V9qyq3rWoXgyNueBY
-Message-ID: <CAFLszTj8g4xxzt9A7txOhDMU6hLe2=twZoZPo_sr7Z5m=6BC4A@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] boot: android: Add Android 13+ bootflow support to
- bootmeth.
+Date: Thu, 20 Aug 2026 06:31:29 -0600
+X-Gm-Features: AcwNN1XzwlLFUcvH4ygobU90UB-YO7v1Tx3SIpLN4ePSy0UPphB0tw4moA9G12s
+Message-ID: <CAFLszTiPKoju6E60qq5G8m-Lb4h7r+B2SS8V-DjFOetYjyWi9w@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] boot: android: Add AVB verification support for
+ different bootflow.
 To: valentinliu@icloud.com
 Cc: u-boot@lists.u-boot-project.org, mkorpershoek@kernel.org, sjg@chromium.org,
  trini@konsulko.com, igor.opaniuk@gmail.com, alchark@flipper.net, 
@@ -139,169 +140,132 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Hi Valentin,
 
 On 2026-08-18T17:53:00, Valentin Liu <valentinliu@icloud.com> wrote:
-> boot: android: Add Android 13+ bootflow support to bootmeth.
+> boot: android: Add AVB verification support for different bootflow.
 
-Please drop the trailing period and keep the subject under 60 characters.
-
->
-> The devices launching Android 13+ were using a new partition
-> named init_boot to store generic ramdisk.
+Drop the trailing period from the subject.
 
 >
-> In the new bootflow, kernel still be stored in boot image,
-> however, the First Stage files in ramdisk were moved to
-> init_boot image. We should load it to memory and verify it
-> so that the kernel can execute init program to continue booting.
+> The different Android versions have their own partition layout,
+> so the AVB verification process should be dynamic.
 >
-> Currently, we have supported loading the init_boot image by
-> abootimg command, but we still need bring this ability to
-> bootmeth, so that booting Android 13+ will be more easily.
+> In the new verification process, we need to use the header version
+> fetched from boot partition, so we need to check the boot partition
+> firstly to avoid the downgrade attacking.
+>
+> If we didn't check boot firstly, just use it, the attacker can
+> bypass the AVB verification by flashing a boot image with header
+> version 3 or earlier.
 
-Please use present/imperative tense throughout: 'were using' -> 'use',
-'kernel still be stored' -> 'the kernel is still stored', 'were moved'
--> 'are moved', 'we still need bring' -> 'we still need to bring',
-'more easily' -> 'easier'.
+Please use present tense throughout, 'first' rather than 'firstly',
+and 'downgrade attack' rather than 'downgrade attacking'. I also don't
+follow the security argument: priv->header_version is populated by
+scan_boot_part() from the unverified on-disk image and is not re-read
+after the first AVB pass, so verifying boot on its own does not change
+which partitions the second pass includes - an attacker who can flash
+a signed v3 boot image would still get init_boot skipped. Can you
+explain what the first pass actually protects against, or is the
+intent to re-parse the header from the AVB-verified copy before the
+second call?
 
 >
-> In the new bootflow, kernel still be stored in boot image,
-> however, the First Stage files in ramdisk were moved to
-> init_boot image. We should load it to memory and verify it
-> so that the kernel can execute init program to continue booting.
->
-> Currently, we have supported loading the init_boot image by
-> abootimg command, but we still need bring this ability to
-> bootmeth, so that booting Android 13+ will be more easily.
-> Bootmeth will be able to recognize the new partition layout,
-> and boot Android normally.
->
-> Link: https://source.android.com/docs/core/architecture/partitions/generic-boot
 > Signed-off-by: Valentin Liu <valentinliu@icloud.com>
 >
-> boot/bootmeth_android.c          | 67 ++++++++++++++++++++++++++++++++++++++++
->  boot/image-android.c             | 16 ++++++++++
->  cmd/abootimg.c                   |  5 +++
->  doc/develop/bootstd/overview.rst |  3 ++
->  include/android_image.h          |  1 +
->  include/image.h                  | 35 +++++++++++++++++++++
->  6 files changed, 127 insertions(+)
-
-Please can you look at how to add a test for this addition?
+> boot/bootmeth_android.c | 43 ++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 38 insertions(+), 5 deletions(-)
 
 > diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> @@ -113,6 +115,51 @@ static int scan_boot_part(struct udevice *blk, struct android_priv *priv)
-> +static int scan_init_boot_part(struct udevice *blk, struct android_priv *priv)
-> +{
-> +     struct blk_desc *desc = dev_get_uclass_plat(blk);
-> +     struct disk_partition partition;
-> +     char partname[PART_NAME_LEN];
-> +     ulong num_blks, bufsz;
-> +     char *buf;
-> +     int ret;
+> @@ -479,11 +479,12 @@ static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
+>       return 0;
+>  }
+>
+> -static int run_avb_verification(struct bootflow *bflow)
+> +static int run_avb_verification(struct bootflow *bflow, const bool boot_only)
+
+The const on a by-value parameter has no effect on callers and isn't
+the style used elsewhere in this file - please drop it.
+
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> @@ -493,6 +494,28 @@ static int run_avb_verification(struct bootflow *bflow)
+>       bool unlocked = false;
+>       int ret;
+>
+> +     /*
+> +      * Always verify boot first.
+> +      *
+> +      * When boot_only is true, only verify the boot partition.
+> +      * Otherwise, select additional partitions according to the
+> +      * Android boot image header version.
+> +      */
+> +     requested_partitions[requested_partitions_num++] = "boot";
 > +
-> +     if (priv->slot)
-> +             sprintf(partname, INIT_BOOT_PART_NAME "_%s", priv->slot);
-> +     else
-> +             sprintf(partname, INIT_BOOT_PART_NAME);
-
-This is a near-duplicate of scan_boot_part() and
-scan_vendor_boot_part(). Please factor the common logic (build
-partname, read the header block, check magic, extract size) into a
-helper rather than adding a third copy.
-
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> @@ -291,6 +338,17 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> +     if (priv->header_version >= 4) {
-> +             ret = scan_init_boot_part(bflow->blk, priv);
-> +             if (ret < 0) {
-> +                     /*
-> +                      * Android 12 devices do not have the init_boot partition.
-> +                      * Some devices upgraded to Android 13 or later from
-> +                      * earlier Android versions may also not have one.
-> +                      */
-> +                     log_debug("scan init_boot failed: err=%d\n", ret);
-> +             }
+> +     if (!boot_only) {
+> +             if (priv->header_version >= 3)
+> +                     requested_partitions[requested_partitions_num++] =
+> +                             "vendor_boot";
+> +
+> +             if (priv->header_version >= 4 &&
+> +                 priv->init_boot_img_size > 0)
+> +                     requested_partitions[requested_partitions_num++] =
+> +                             "init_boot";
 > +     }
+> +
+> +     requested_partitions[requested_partitions_num] = NULL;
 
-priv is allocated with plain malloc() above, so it is not zeroed. On
-failure here priv->init_boot_img_size is left uninitialised, then
-boot_android_normal() and (in patch 2) run_avb_verification() read it
-back as 'priv->init_boot_img_size > 0'. Please use calloc()/memset(),
-or explicitly set priv->init_boot_img_size = 0 before the call and on
-the failure path.
+Please use BOOT_PART_NAME / VENDOR_BOOT_PART_NAME /
+INIT_BOOT_PART_NAME instead of open-coded strings. Also 'n' or 'count'
+would read better than requested_partitions_num, and the array bound 4
+would benefit from a named constant or a comment for the boot +
+vendor_boot + init_boot + NULL layout.
 
 > diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> @@ -556,6 +614,7 @@ static int boot_android_normal(struct bootflow *bflow)
->       ulong loadaddr = env_get_hex("loadaddr", 0);
-> +     ulong iloadaddr = env_get_hex("init_boot_comp_addr_r", 0);
+> @@ -562,9 +585,10 @@ static int run_avb_verification(struct bootflow *bflow)
+>       return ret;
+>  }
+>  #else
+> -static int run_avb_verification(struct bootflow *bflow)
+> +static int run_avb_verification(struct bootflow *bflow, const bool boot_only)
+>  {
+>       int ret;
+> +     (void)boot_only;
+
+Can you use __maybe_unused on the parameter rather than a (void) cast?
+That's the U-Boot convention for stubs.
+
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> @@ -617,9 +641,13 @@ static int boot_android_normal(struct bootflow *bflow)
+>       ulong iloadaddr = env_get_hex("init_boot_comp_addr_r", 0);
 >       ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
+>
+> -     ret = run_avb_verification(bflow);
+> +     /*
+> +      * Checking the boot partition firstly because the standard AVB
+> +      * verification is rely on the header version from boot partition.
+> +      */
+> +     ret = run_avb_verification(bflow, true);
 
-If init_boot_comp_addr_r is unset, env_get_hex() returns 0 and you
-silently load init_boot at address 0 and call
-set_ainit_bootimg_addr(0). Please check that iloadaddr is non-zero and
-error out with a clear message before using it - the vendor_boot path
-has the same weakness, but let's not extend the pattern.
+Grammar: 'Check the boot partition first, because the standard AVB
+verification relies on the header version read from the boot
+partition.' See my earlier comment - please clarify in the comment and
+commit message what the first pass buys us, given that
+priv->header_version is not re-read between the two calls.
 
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> @@ -326,6 +326,22 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
-> +bool android_image_get_data_v4(const void *boot_hdr, const void *vendor_boot_hdr,
-> +                            const void *init_boot_hdr, struct andr_image_data *data)
-> +{
-> +     if (!android_image_get_data(boot_hdr, vendor_boot_hdr, data))
-> +             return false;
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> @@ -631,6 +659,11 @@ static int boot_android_normal(struct bootflow *bflow)
+>       if (ret < 0)
+>               return log_msg_ret("read boot", ret);
+>
+> +     /* Standard AVB verification */
+> +     ret = run_avb_verification(bflow, false);
+> +     if (ret < 0)
+> +             return log_msg_ret("avb", ret);
 > +
-> +     if (!is_android_boot_image_header(init_boot_hdr)) {
-> +             printf("Incorrect init boot image header\n");
-> +             return false;
-> +     }
-> +
-> +     android_boot_image_v3_v4_parse_hdr(init_boot_hdr, data);
-> +
-> +     return true;
-> +}
 
-I can't find any caller of android_image_get_data_v4(). Please either
-wire it up to whatever consumes init_boot_img_total_size, or drop it
-(and the new struct field, and the header declaration) until it is
-needed.
-
-> diff --git a/include/image.h b/include/image.h
-> @@ -2167,6 +2184,17 @@ bool android_image_print_dtb_contents(ulong hdr_addr);
-> +/**
-> + * is_android_init_boot_image_header() - Check the magic of init boot image
-> + *
-> + * This checks the header of Android init boot image and verifies the
-> + * magic is "ANDROID!" (same with the boot image)
-> + *
-> + * @init_boot_img: Pointer to boot image
-> + * Return: non-zero if the magic is correct, zero otherwise
-> + */
-> +bool is_android_init_boot_image_header(const void *init_boot_img);
-
-Declared but never defined or called - scan_init_boot_part() uses
-is_android_boot_image_header() directly, which is correct since the
-magic is identical. Please drop the declaration.
-
-> diff --git a/include/image.h b/include/image.h
-> @@ -2199,6 +2227,13 @@ void set_abootimg_addr(ulong addr);
-> +/**
-> + * set_ainit_bootimg_addr() - Set Android init boot image address
-> + *
-> + * Return: no returned results
-> + */
-> +void set_ainit_bootimg_addr(ulong addr);
-
-Missing @addr: description, and a void function does not need a
-Return: line - please drop it.
-
-> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-> @@ -293,6 +293,9 @@ script_offset_f
-> +init_boot_comp_addr_r
-> +    Address to which to load the init_boot Android image, e.g. 0xd0000000
-
-Since this env var is required for Android 13+ to boot, please also
-document it in the relevant board README(s) / sample env, and handle
-the missing case gracefully in the code (see comment on
-boot_android_normal()).
+This re-verifies boot as well as vendor_boot/init_boot, so the boot
+partition (which can be tens of MB) is hashed twice on every boot. Can
+you split run_avb_verification() so the second call verifies only the
+additional partitions? That would also avoid appending the same
+androidboot.vbmeta/verifiedbootstate args twice and relying on
+bootflow_cmdline_set_arg() to dedupe by key.
 
 Regards,
 Simon
