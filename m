@@ -4,120 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE8DC5DF87
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1507C5DF87
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:13:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 169AF60805;
-	Thu, 20 Aug 2026 12:13:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 94E06607E0;
+	Thu, 20 Aug 2026 12:13:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qwCYTDiALGph; Thu, 20 Aug 2026 12:13:20 +0000 (UTC)
+ id Mb-GQ1hJ3FHq; Thu, 20 Aug 2026 12:13:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787228000;
-	bh=plikTJH4U7ZC8Tdq3H32HBek8Nhx3Jw/pgBS12m1dtg=;
+	d=lists.u-boot-project.org; s=default; t=1787228008;
+	bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JnFuzp8lNf8MBW7AauWshRBcCm1St3CkxETY0RuyQbqI/ZeRV1ihIozX0CBY+9ghO
-	 Ofg/MfsLY6hakzblxirsmAcjaQOsb+HOIf1VgKCN8ByXb9Gvynmj285pIX8tuzcLce
-	 WywiG7T68SPs9ykw3Tbfj3QB6RXSkdcERICUbC7oVT/TjJpj6HZU/+RYsJ3WiGqwDn
-	 V4hWZi2au1eqbJt7j7tEyBzBlG6xfV3BZRHCNRgAYzCX7TEr4p1FwgeDCJLaDVQ5i0
-	 OVNeHUNEzzJ/tTVs7nz3gpT0/uJ3a1HWXTJsvqKLzVO5ua0FBrRH8UXGtZDx+pylvz
-	 hJ6n7bjrtd0Uw==
+	b=MKQ6GVqW69RioJTnKdx7BclMkKpMiSLkPdRZ44oMy65dpiLljmuSmTYVrICuSyFwU
+	 zgVpjJDD4Iqy5ZUGeq+SvtUrhKDPWbIj0+V/JNYpPOOqttfqZlsHdxKj+WlW79ivfE
+	 4y+GFLd3F+EwiVvND0pbMn9eoLXfTwDmoGG5TScKpspoOsKHHqbGoBx2rGe315M+Mx
+	 TDRYzJx3AxSdOb2EJrw/+IE9La06eWLMceaca3Qq6AH5izeYj+b53cFNhdZ1elrfiv
+	 VGRc6uFIsQrKDdEOHmjKoiV9OleQ5YU3gjWYQU0l9FwKzA+uNoSvILQ6UdDzV1+IPH
+	 Vs7by51RG3+6Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C14D160794;
-	Thu, 20 Aug 2026 12:13:20 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0410C23F
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EE8DB60794;
+	Thu, 20 Aug 2026 12:13:27 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A39139E
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EAA27405F5
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2060B402A8
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wgrmlGWh_Jl6 for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 12:13:18 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ptu59DFZJKhA for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 12:13:26 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ client-ip=2607:f8b0:4864:20::102f; helo=mail-pj1-x102f.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=IHIiLMJm
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 522EE405F2
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:17 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6a1542cdb53so2625001a12.2
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:13:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787227996; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=Cr6J5iog
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 79E7240291
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:13:26 +0000 (UTC)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-384930ca5e2so2589781a91.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:13:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787228006; cv=none;
  d=google.com; s=arc-20260327;
- b=GsuhjQVfZ6h7B3ypNxhGuoE7xlvd3rzvix+Z1So+F9D1NkcokXk3Cr1mPMdqHtJ4pQ
- c0CeCCys5w4l5F1xbs1GMY02IYZVXeHt3L6ibqPG8LifrjPLWRfBdzJ71PoSsPFTCVV+
- IF5t5mHxSFq2WM+2jemezDQsv3nsDzNWXETVxA4jlR3sFKtCrLZ7Ktb2m94tCuqIfqRg
- owL/rWE9XKotVGIvjMD5FuKax99IIZiLwL4/eKKprRkYfLWk8Dkr7monqepGx8FBVFPU
- jPHxKRWa4iae7o6meA8Q/yb7Z6swb2Kn3favkeAbjRVNVEyzAljCGGx/LVg4HIuySmpe
- zSOQ==
+ b=O9b2FzFq7VKu0BCsFDxm9WHSs3SfRLmqJibMMAKyB0EJTnWIPHX7UwKT204sAtNMuW
+ RXY6csOVQ61hSDUT3pzChhEejwkQL6Uo6RiVg8i8WDq4j79uRYFNNVOmJCjMo1tVi+iq
+ lwGjzoCTChThtS6++PpA3I5LqsQg9BDj0UDAbhYkIfWIL2KwGs6kcyEWb1ZVpr/GmGsz
+ AvJZvydYJwtNeEkeI5sYY11gSjzs44F/z7Oexdfhr5kGZKZsl7p7oF2+Uv1AxBlX7geO
+ sHpB01O/xrzRck29wLpTp0BBUCm+zxFWWwXT1E2XfhC/g29zlsg86fhseDsxVj+bq3+6
+ 1KVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=plikTJH4U7ZC8Tdq3H32HBek8Nhx3Jw/pgBS12m1dtg=;
+ bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
  fh=Bwjok4jWsPwFzEPPOJOguv26ANoKPtuv9PCfDq8ap3w=;
- b=kr8cob5CQryw9DykVJ91KyscjLKumJX+25uA2i52ERnS5XeifH6QbNpuOZMOOvZXml
- HEQdXl7vZbLHaZ0dVV37XvMLWyNhySrRp2faU0j6fqI/Q0B/pu8ff+GhbOgdJGRfreS1
- sIVIsvdZMQg1xQiQ5yZR/YqRUioFk3RTpsFUjrfumgMbDlc5VzlTEODqVlantDro/Zb+
- J1HoiFrUK+YaSK0kTH3Iy/YbIPzsAA4jbvZocQAVrdcCohhlBRoM2e5LGtwZv+5H2+tM
- 50GAnc6WQrTddgb6LjlwjqjWvlJ6IH69/Js0VXj95LyMd5sIQdR4TjK2DJ/2xNM02YJs
- hmsw==; darn=lists.u-boot-project.org
+ b=eias6n+gRQEPT2j+4q0CKjxo/elvnWJaaTYnVakmlL+FhPxtMi3aaL0zp953YXFZRf
+ G9axoXOYPpEdB85/JkErGm/MP+Nf+Shgb9Nb7iDSFpiRPh6uX5ij0BAN/a6ceT0+q3T6
+ bh66zUHDbpealVcUKexHkASUq5kcSEnCZDBWptOA4LsGusLckn1sl3wJ1YxZ94ESM5Cu
+ x/9r7M4IHqsOkABgLc0k39ZnTvVB5ZtCNK192BRQL8JX+KbzKwXHPlIj9LxHqXLGCUo+
+ tC8j62afz3eP55voNUDB7So9QqrK8wdInfXyDAGLusDEifJE4UNzPwLBK5RF3er+tN+z
+ LUug==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1787227996; x=1787832796;
+ d=chromium.org; s=google; t=1787228006; x=1787832806;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=plikTJH4U7ZC8Tdq3H32HBek8Nhx3Jw/pgBS12m1dtg=;
- b=IHIiLMJmMLwbryVWJDy+VN6FMy/WdvwyIMxkbkIyTH3c29sQYOea3Unz2UyB9cJ8ul
- KH8OYfBvVr6d5RX9eeotdZh5knuO4K24nGEWCz5ze32EPe3AYbBhHtK60K5vqc1Q85aX
- UsIhQ5YiesRTbNda1veqt66mtuU4mChei4EEw=
+ :content-type; bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
+ b=Cr6J5iogwVHfwhggwO56glhhPDXWYzbGOMzUOdULo4kdUduB3KJVOjwJ4oHKbezAiU
+ GttnATVrGqTZprTm0j30t+T/PODrrvZ/TIbEW8SlB0OFtLKRLMr6cgJq9TVZMzJRKw63
+ +FoB5p8iFP8hIsnGRjpxEpnBE3mCXB8+/2hsQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787227996; x=1787832796;
+ d=1e100.net; s=20251104; t=1787228006; x=1787832806;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=plikTJH4U7ZC8Tdq3H32HBek8Nhx3Jw/pgBS12m1dtg=;
- b=G5EWgTQhPynOtDJ3yMK+be7c/hP7BqYxX+HnVCGHxJgr/EkusJpPxpQvlVWEkl6Gkb
- 1LOYeCKqzDPIX9RW19WfKuk7ZqlNRECx6FKMEzQLCjQfKyFXBmRG6VVlHWxmmFdCyfc3
- 9VUqXkjdQpgXLSE3j6GUJuWWnMp6U7DsU6VTerXniZcSca1tpvje/IoK6Xl54cpVkoOk
- WY3t1XR7QB4h030SzYbGpNlF6XTppq8A8b4v9saqH5St6ILbz2XDDrwNFbxHBP7orM8V
- WOdzLBPO1DHpz4le3C8DgZJn6Nt/LX6njCz8mEk/TdV/yA9yroH6pirmqJejOVwy5snW
- n6WQ==
-X-Gm-Message-State: AOJu0YwkGoC91vtQtuRgw79m9xaPE3QOFXXr3n1DgjUA+a7Rangd83+C
- W6N2M9yyBHYHUM3kzGSBoyMT+GcRWYZPU7ewJHpKWQlBXEPYm0c5KIX0gtP5zXfEusLC0SvUQs2
- ulcsHM5EL8FhKJj3RTBMnvmOmZrKBz3m3MluxT6LL
-X-Gm-Gg: AR+sD10VM9k/n+pfAurrkmMaBqimPfGfKuIteOWj91aX9ev0/sPHECA1FJbpEDRxTqt
- 2XIbrCtH8X3A38O8UBKeYCWDYw7qd3qO5XlXZ/VfVe2lQhi9t7HBBJfOAbzqI/ZTrE5f3i32pfV
- Fub+yKm+p9KqHcBCsHaOhoHwvJP1mfH06Hc9MHs5LQZSOJgKFedgHftPGvEbGMFue1kE3My5BnZ
- 9TD3WFK1DRwgmpO96bCPc3rGbAICHY9TDvGyq6u+UsG1AA/QrIAaRrWiSWggO1B2jOOCaifcHXX
- /eGUrklEOxKntdFs5u2kdwza6uU2BOi2axmFpS1whwE=
-X-Received: by 2002:a17:906:6a19:b0:c1c:4d59:2b03 with SMTP id
- a640c23a62f3a-c23e81ef391mr829158066b.3.1787227996013; Thu, 20 Aug 2026
- 05:13:16 -0700 (PDT)
+ bh=Mc5ujPfqg9YqNAhXU8rU2v36y3EkXp1PiYikU/5Kno0=;
+ b=fUuMTyrz1FF7zmOhR2iBJ2NJQyEP0mO1SGt0ZhY9aLc5yPV8bcUSAw4kSyi2wxZu3q
+ l3wn4hDeHstGiVIvPW9t60TWAT5sr6jrL2w+GP9OHVVKLkY6aOjgOAZlkGMUfSyOawnA
+ 2/Qd4bePgRNuKgOsmA9b34KzTGln49NSbcHfNNv7YFca+WcqlNJCfLoumWX0BPrzwoBj
+ lA1QPw0aMVk1EAJtImRLxvCjqF1r6SgYmGC9OdWukFevI5x781Xvl/dNoYsaNW4jSrh0
+ FPHsomJPHXyo6eTHsgA6g+pVZJXsRMgqT+0w/GaEr7OIMzZdZCkInnffQ3pedS1X+sa4
+ yvDw==
+X-Gm-Message-State: AFuF++nVvpySAJ4wyR6osdnlZdouHds2BoGndoS6kAgWVet5rG1ZlRs1
+ cwe80A0n7Pa6fV9sg6vPGxsrvVqBZwvt+MQQgk0VNOFnjD3m3zQW5VRnbsJPMKN41PVA/ttt6EC
+ ZLzYjtQStBY0He25orHnsbK9PBya2ryAUAXCIcW+X
+X-Gm-Gg: AR+sD10DeyGaK10J/LVclRVJxnm7Yv0QjUiWQ8LjHHgPQ/RltLZ44jH/zxX3B9TkhmJ
+ 8rSus3aQHtRpe4kDOLVZaQk6Sv89V5vrhZoWgbe2azuEfTOe7k8xyfe/l+N3gxqMQ0IdevSH6sH
+ 8sQP+FoxcmoEJWZrPmriTlRZS/syTI0+bsv1ibguZKWk7X7Ke2beyryY43JCMqV33VoEy3KdyEk
+ JLv0zqAy0NS5AVNR3AgxL9UlwiNXrzb3/Gya7ptscvyiVS9NLD5HWbI0GBC/vwa6II5OqACbDtb
+ utDBQ3JhBmoYw5g+fTpzGTDFWzh85tDLBGUuPrCI92I=
+X-Received: by 2002:a17:90b:1a8f:b0:38f:5801:dc0e with SMTP id
+ 98e67ed59e1d1-3958125a864mr22460573a91.15.1787228005689; Thu, 20 Aug 2026
+ 05:13:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260811-b4-reset-edl-rebootmode-v1-0-2e15adc156a3@oss.qualcomm.com>
- <20260811-b4-reset-edl-rebootmode-v1-7-2e15adc156a3@oss.qualcomm.com>
-In-Reply-To: <20260811-b4-reset-edl-rebootmode-v1-7-2e15adc156a3@oss.qualcomm.com>
+ <20260811-b4-reset-edl-rebootmode-v1-8-2e15adc156a3@oss.qualcomm.com>
+In-Reply-To: <20260811-b4-reset-edl-rebootmode-v1-8-2e15adc156a3@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Aug 2026 06:12:52 -0600
-X-Gm-Features: AcwNN1UL0rxfzeeuwMPilEW0gX2Uw8t3gTPNrlGL0b296E8sAidYofksBwY7IYA
-Message-ID: <CAFLszTj5dD0z0cE7c8-XjfgX5dJw+PNSLG61jDXjkWyABYUJqQ@mail.gmail.com>
-Subject: Re: [PATCH 7/8] test: dm: reboot-mode: test trigger dispatch and mode
- enumeration
+Date: Thu, 20 Aug 2026 06:12:58 -0600
+X-Gm-Features: AcwNN1V-5h2pnHptyiG6trjOhXf6Uz7WK2fb8RSKk6i50mlKzC4oh_M7_axAnss
+Message-ID: <CAFLszTgf+=CdNcw5Tt9_-sPiqxWT+_gzTOa3xK-6QV_EwWoS5g@mail.gmail.com>
+Subject: Re: [PATCH 8/8] doc: usage: reset: document device-tree-driven reset
+ modes
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>, 
@@ -149,82 +149,48 @@ Hi Balaji,
 
 On 2026-08-11T05:18:35, Balaji Selvanathan
 <balaji.selvanathan@oss.qualcomm.com> wrote:
-> test: dm: reboot-mode: test trigger dispatch and mode enumeration
+> doc: usage: reset: document device-tree-driven reset modes
 >
-> Add a trigger-only reboot-mode backend and two device tree modes to the
-> sandbox test tree, then cover the new trigger path:
->
->   - reboot_mode_request() fires the owning device's trigger op with the
->     correct magic cells for both a 2-cell and a 1-cell mode;
->   - an unknown mode, and a backing-store-only mode (gpio/rtc), both return
->     -ENOENT because they are not triggerable;
->   - reboot_mode_list() enumerates only the triggerable modes and hides the
->     backing-store modes.
+> Document the "reset -<mode>" and "reset -l" forms and explain that named
+> reset modes are declared in the device tree (a "reboot-mode" subnode of the
+> psci node) rather than hardcoded per SoC. Describe the 1-to-3 cell
+> mode-<name> encoding and note that U-Boot's 32-bit PSCI cookie means a
+> 3-cell mode with a non-zero cookie_hi is rejected rather than truncated.
 >
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 >
-> arch/sandbox/dts/test.dts |  6 ++++
->  test/dm/reboot-mode.c     | 87 +++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 93 insertions(+)
+> doc/usage/cmd/reset.rst | 42 ++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 42 insertions(+)
 
-> diff --git a/test/dm/reboot-mode.c b/test/dm/reboot-mode.c
-> @@ -5,6 +5,7 @@
->
->  #include <dm.h>
->  #include <reboot-mode/reboot-mode.h>
-> +#include <console.h>
->  #include <env.h>
->  #include <log.h>
 
-Please sort alphabetically - console.h belongs above dm.h (or at least
-above env.h), not tucked in after the subdirectory header (which
-should be at the end).
+> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
+> @@ -22,6 +24,46 @@ DDR and peripherals, on some boards also resets external PMIC.
+> +Each ``mode-<name>`` property carries 1 to 3 cells describing a PSCI
+> +``SYSTEM_RESET2`` vendor reset: ``<reset_type[, cookie_hi[, cookie_lo]]>``.
+> +``reset_type`` must have bit 31 set (the vendor-reset bit). With two cells the
+> +second is the cookie; with three cells the second is the high half and the
+> +third the low half of a 64-bit cookie.
 
-> diff --git a/test/dm/reboot-mode.c b/test/dm/reboot-mode.c
-> @@ -16,6 +17,42 @@
-> +static int test_trigger(struct udevice *dev, const u32 *magic, int count)
-> +{
-> +     int i;
-> +
-> +     test_trigger_count = count;
-> +     for (i = 0; i < count && i < REBOOT_MODE_MAX_MAGIC; i++)
-> +             test_trigger_magic[i] = magic[i];
-> +
-> +     /* A real backend does not return here; the test one does. */
-> +     return -EINPROGRESS;
-> +}
+'must have bit 31 set' overstates what U-Boot does -
+psci_system_reset2() in arch/arm/cpu/armv8/fwcall.c ORs
+PSCI_RESET2_TYPE_VENDOR in unconditionally, and reboot-mode-psci does
+not check or reject a reset_type with bit 31 clear. Either soften this
+to something like 'is the SYSTEM_RESET2 reset_type from the PSCI spec,
+with bit 31 (vendor-reset) set for the current users', or add a check
+in the PSCI driver so the doc matches the code.
 
-Since the framework's contract is that trigger() does not return on
-success, returning -EINPROGRESS here is a bit of a smell - a future
-change that treats any negative return as failure would break this
-test silently. Consider returning 0 and asserting 0, or add a comment
-near the ops declaration reminding readers this is a deliberate
-test-only convention.
+> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
+> @@ -22,6 +24,46 @@ DDR and peripherals, on some boards also resets external PMIC.
+> +-<mode>
+> +    Reset into a named mode registered with the reboot-mode framework, for
+> +    example ``reset -edl`` to enter Qualcomm EDL/download mode. The modes are
+> +    described in the device tree, not hardcoded per SoC (see below); an
+> +    unknown mode prints the list of available modes.
 
-> diff --git a/test/dm/reboot-mode.c b/test/dm/reboot-mode.c
-> @@ -66,3 +103,53 @@ static int dm_test_reboot_mode_rtc(struct unit_test_state *uts)
-> +     test_trigger_count = 0;
-> +     test_trigger_magic[0] = 0;
-> +     test_trigger_magic[1] = 0;
-
-memset(test_trigger_magic, '\0', sizeof(test_trigger_magic)) is safer
-- with REBOOT_MODE_MAX_MAGIC == 3, magic[2] is left uninitialised, and
-if a future mode grows to 3 cells this partial clear will hide state
-leaked across ut runs.
-
-> diff --git a/test/dm/reboot-mode.c b/test/dm/reboot-mode.c
-> @@ -66,3 +103,53 @@ static int dm_test_reboot_mode_rtc(struct unit_test_state *uts)
-> +     ut_assert_nextline("Available reset modes:");
-> +     ut_assert_nextline("  obelisk");
-> +     ut_assert_nextline("  sarcophagus");
-> +     /* Backing-store modes (test/download) have no trigger and are hidden */
-> +     ut_assert_console_end();
-
-This bakes in the property iteration order of dev_for_each_property()
-and the uclass probe order. That happens to be deterministic on
-sandbox today, but please add a brief comment explaining why the order
-is guaranteed, otherwise a future dts reshuffle will look like a test
-regression.
+Since this patch changes the command's exit behaviour (unknown mode
+returns CMD_RET_USAGE, 'reset -l' can return CMD_RET_FAILURE), please
+also update the 'Return value' section - it still claims '$? is always
+set to 0 (true)', which is no longer true once this series lands.
 
 Regards,
 Simon
