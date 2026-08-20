@@ -4,113 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334D9C5DF82
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 10:25:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAECC5DF87
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 10:29:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6B97E80CA6;
-	Thu, 20 Aug 2026 10:25:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F192C80C7B;
+	Thu, 20 Aug 2026 10:29:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mU0K0Es1xLJl; Thu, 20 Aug 2026 10:25:33 +0000 (UTC)
+ id 48e82BpA1bTm; Thu, 20 Aug 2026 10:29:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787221533;
-	bh=3GwnPHvjOLS0V0a6i98x6akFCazp75i1WwUNxtuEXto=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787221753;
+	bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oZ5vr190Y26iBTt7lJw/GbqxELAR4EA3oSutT8Ul2XA1O6dPHSYWpOZm3C2fdpjOW
-	 eqYmBTwDNaDGXmQs9rMptQhhm5g6sRiK8WYychBNxDjbk6d99Xxb9LMsP5No5SLNzB
-	 VsHWQy5dBM55azYaU1oLnTr8n2+f5STj85IiBIir2+iSYHVeeqQ7bebr/oIADAFGPn
-	 44rb3rrDtlwFkgG/bjZexQ/p5ROORArXcLK+Nn6IR12NhAuOXz0tjglkGH2EY3cyP1
-	 cAqRhsSSy6rcbOc3AslN7Nhh9sTat0tTSvI5qISe1Jqkrq1wnJMBlm2cTZh1xHRlHf
-	 21Omi0aWhWmyQ==
+	b=fkUgtNRNcSxvfbGW7MRJTFGy3t7fLn/PxkJ6UBdSmgO5TCkSo9akSPxtqATPQ7LqC
+	 LKJykkT4xL+ocyWY5Ur0+KGsg7brbmr1sTO9g3FrC/dYQKpjxUBBseJjvTLJOVF36G
+	 EpA/UjC2ZXg2UJZP60WwoBfOmvnxVsIGQ0hmPVJ6QYbTUa2FmJ/CaAvC6mM3a5JAaa
+	 2SLqj0p75LPC6uHdHJGJMTOzsvpkDjzOajbVHHvl50oMKLBbaxjUo/ekP8ZNMDwhaH
+	 rwVvLByjP+8jDIiIAbrpS9Iyz1XCtD8OFXUGQ9CfbSyfg3+pTVLpej/s1bn48h4F1T
+	 Q/bTztBVWySTQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F0E0580C9A;
-	Thu, 20 Aug 2026 10:25:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 00AA929D
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:25:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5D29C80C84;
+	Thu, 20 Aug 2026 10:29:13 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 59F471460
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:29:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E678E60739
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:25:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3AA7040281
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:29:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kx00NAcL3Mjr for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 10:25:29 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sBOKCJyBvQ8f for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 10:29:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+ client-ip=2607:f8b0:4864:20::f2a; helo=mail-qv1-xf2a.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=kqBNRQyX
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 00F4960656
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:25:28 +0000 (UTC)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-498028b3d5eso24468575e9.1
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:25:28 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=Kczsq8sZ
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7D37F40275
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 10:29:11 +0000 (UTC)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-902e4af2d9dso5449396d6.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 03:29:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787221750; cv=none;
+ d=google.com; s=arc-20260327;
+ b=HdE2mlnsuhzkGKG4coH+Wq7zguI15IQ9NdTxnJL2K5qqN29Zinju9TiPizw3bPW0NS
+ +T+6/KublI2XQxRNKYuzYVyokJS3DjFRePZp1yvrRXhkhlbkKOW+k3whwlUf5o66qg3F
+ 2WSRfBYgKNMZLApWYn5zjus5gLV9NkDMUQWxMFiko0umf7vM7dQZB71/MXtsDT9QG/bG
+ SnK+AyIUsvbKbSloDoAWRZSfRtWmN+WghgRpkqfMa/Amg+V/mmtJZwmX7OUOQoIjO+UA
+ XGJKVjFcIreSlBn0/82MQHJJbQdUTf2z0/iTOUwzh3LpI3bD9nWw1PKpyqsZ/l+nXjD+
+ hGdw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
+ fh=T16Bv44u7Uz0Q1ZW0RAuvVMiv7vHnYmGtVeXn8AIbGw=;
+ b=R6oU1tAuVvP832MS/eJE+FEIw6G9/Pboa3loMP5wzL4mkJQGJRikO4qKZPGP6gHM4c
+ dBJSBRBFa7wVsTuNXx6KiPo6yZASz8X1ZCCcyderTYLPFQzhx1jBcEya4ca4MMeE9AQx
+ PyXYJBCH0RkIGjKV535lua6vJT2HljGB3o7Lb1XoWuA1yVIad7PamIFgbatfBh3O08fv
+ xMPNcn2YF8rTbOQ50kqw97okFzmE+XTmVsx18Xgxr0ZeA2p+LPcx0cQ1MIohORbc89HZ
+ uZI1khIp3LMTfTorIQmPg/vKhfx/lwgaeVxC2h3J2UWk2dfDdWGi6C8nbbILl6cwhrMO
+ tL5g==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787221527; x=1787826327;
+ d=gmail.com; s=20251104; t=1787221750; x=1787826550;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=3GwnPHvjOLS0V0a6i98x6akFCazp75i1WwUNxtuEXto=;
- b=kqBNRQyXmjav5OTHNpjdCbxmyNstnIRFpF+KTHG9rCAkzDj9uDWEjR5NlvcSaMTUg8
- tcGvWuLo9BW3xgnpn/gEe/FWgxaBKxCnx0PpAsdc9ZjCc0vEFgYevQYga6Wy4h2SKCPp
- UlTdG4QiWy2JQL5jO9mwWsFe9zYIhpXdFsTtz+/CXDxh2NjR/uycVmsQg3d1teSSUvdW
- yDyZYhfo7iTQeIo6HIED8+Fh70uGMcJzkeJYryRobk16v/KF/f1sH+m5c9CSD/rGk0ho
- aMkjOwhDMGV3OOTAu7OnULnEsHSIYSLld4j3gq7LyPitXezDujJuyBqEh9yVM42cdnpQ
- TiWw==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
+ b=Kczsq8sZuisx9DagRCU9ubhBP/tuKRC48CtoKQOZ1ZUDjNNkzVmCDYsDiyuGIT1R2Z
+ yRZwAi+v7qKKLSlP0B7YtBVEJWLIV1F6OMVcUC1zhDtarLlKcQLFSDvDKflnj4YpifaA
+ ZQq3UwAfSftpkFW8x4Fl37JdIPhNmNuUEndJQUqUQRA/HFO0cXU6WxIRspjJeU56btXl
+ M/kV+0nYk+yV3L5k/6uKzrwxxvhDxfG/XUvjs6ssmx1qBrTZywA6Q4t5YklSruCUXMlb
+ BUXuu89BblZVhrIQM1gp+/JaMyMEouUk/fnrJkW+QW7mHNZtfoie6xX+STKRQNM206hq
+ B18Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787221527; x=1787826327;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=3GwnPHvjOLS0V0a6i98x6akFCazp75i1WwUNxtuEXto=;
- b=jICHGiSf+mz6HYvP3e5aVueWBTjIjdVQ/LGZpaUPIK8VpFZdZP8ZIW72J6mlPhcI1y
- IOdbRVsOpGzxPy/kzlgZ0To8TZBjdOKMIBRAFIMe5x7Fthu3H0OqTXTEgOvVhvumCEkE
- GwJp+1CvZAhFXteGSztZOKOomX6Iq83DXM2tN0T3Gswy8qxsT1SBWvR4vt2JJ4ZtYsh2
- bi868UWXAdbE3QFHVZIIvwo3Kt6MQHOSZxeWgp58/jnBf0kT67OGQYNssvqp95ABnm6i
- WTdJvFc2LkBWgM/6l3t1CNzy8tuTHxRFJml+97rGmWPcuDUx22HepXR3Ye70rh2af1nf
- CWCg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Roha9qyTEBwxzMc1Xai78QoH7ine6kzmn3e8t9fpznb9Kh2ngPuALImjP6jpUec5mM4skmbK0U=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YwZsAbzQ4dhcCWLEOayo0MfSv4Dyy7SUcdZKYqrzn1BKGqz3O37
- jaoYbgiK6dHlSn1aFKdhprdhLvlCAoXm3igYDA/rCI3ICP+byDCHFPtW
-X-Gm-Gg: AR+sD11/ul9OenkfSdZwDk1y99rnuB+Z9qGDNdQApoIrfBepPA1Bs4kG0P+2IaNSn5n
- C2yUhW9pMHVA86fSsR9b6U3P4/B2gvDtKvxYGSQofc8UD2Pq6gkHPnVm6Gf5TOe6o/20PpvItzh
- ilwQ4Lp+578GFGLwMnL0KmqNoUs8gzjItv65D4kqOSSk0vGnAgEnnhl8uCasxGPn8mJo+oCZ/VB
- ZJUT2zXuSJwVx+femBlnBaOrZJ7jVkPe0ApOSKpSHpRiWoHC8KYshW3WqZN7A3CrBHMLrOzTMf4
- 80t+Ftqe+MgB8rBC+YSPSjP1rYz5xrmkHLS4XBb785bsLdsEWhzKdJsDLZolVahu5o3YdLAkdnE
- N98Ewp871faoYoF+Vo5A/8ZXFUEZq//8P22vSCjCr3KwLD3gYUxAPIwj5av+YFdATjpyNtd5MdY
- CxqgfM8TmPCfPDcLkxzzb/Sm7VBFAIytgMl6lRgNrrXa0KJX6Xk3our/mEvkGnIoMgHA==
-X-Received: by 2002:a05:600c:540e:b0:495:4689:1e98 with SMTP id
- 5b1f17b1804b1-499aa1d0b23mr216460735e9.10.1787221526486; 
- Thu, 20 Aug 2026 03:25:26 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499a9e8b700sm134803915e9.6.2026.08.20.03.25.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 03:25:25 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Marek Vasut <marek.vasut+usb@mailbox.org>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
- Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v3 2/2] usb: ehci-vf: enable the vbus supply of the port
-Date: Thu, 20 Aug 2026 12:25:23 +0200
-Message-ID: <20260820102523.1076815-3-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260820102523.1076815-1-mehmet.fide@gmail.com>
-References: <20260820102523.1076815-1-mehmet.fide@gmail.com>
+ d=1e100.net; s=20251104; t=1787221750; x=1787826550;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=xQU2ydmok9pS01AjLOaEvCItAbJfLEt3/3SvZnueLeg=;
+ b=M7AA9LMaNtVOSApYYtdBcZ0eFMjcMD60114am37UhlwP5XRXYtDcD7+flsau0UUZPG
+ 4jyCQU/ZX0E7O2Zgxc3ZpQPYPRo0Ha9kWCm2T4mzl6cq/JgAGcOyREiTtCSqLnXer/rC
+ 4SbIbl6pZKHFUJZGqCwQafBascsd2WmDi+rsFqMdE6cbupwN9IrjpVYkOOTHr8nNfdPh
+ Sx4xnp6zgiUVRATsMFJYG4cjUrhVoVFTbEZros4brVllSMBLEZtWTj6rc/khWVg28h4n
+ ZwCfHVULBtTX07iyVl8FRR+Uiu5NreQ9hxc3Mar+LhvtXp4ta/3HW/TKF5Zrmy2uKMfa
+ TVRw==
+X-Gm-Message-State: AFuF++lFRyh/r3mvKxhDTGzYd38t0g3g3dChMdSWLSNKHp+fJtNqlS8k
+ RzNDvSNwfBEZGyvqAKZYNokWQGpBV3fxQmtMFjW07BQjKDEkL7mwrnBg0zwquksrqsBm+6OD2cz
+ ixjAQUy2oabCzRXvtNF/sfoyeaiyVtR1vtQ==
+X-Gm-Gg: AR+sD1042Wn/2oYhQSk5MWF6EXf6pKWXn5pemQtIZM6qdmc7rNvW6ybHoIqo1fYsq5/
+ +8nmOS3VZxowUm+JuZGFH3Y9vfiMwEflBslbV5WavjJKf5+W2Jkg0WRPEZmfLT8WwPN9JuShpg0
+ kv9ND2rFHHTBsYbCMODwP0TZe66eIm++zRneDJlMFGBEiGM7YCFNxh0XpOeFif0FXZdQQcXrtbw
+ 3fSBFcvxn9bxSCmZ75jVtpWfy/T5UP9WEtIV/t1z3w3WHPUktnKLbDkfFPyTyxSEs1eY00Kb0C5
+ x9k+NsBVWykQ6qkJG/qJhMSJdmPF1NIdfK5otBU2IwBZbvx/ej75aLESBVD9KsAfEvD9ILVHsAe
+ 9ck/YbvoYzQXpsyJ6rB+yIMrzn5gt5gE2ZRtCmw58it0pNv/mKAsJOhqwwnmFCBmHxq62AkF987
+ liwzVx/6ZRIIy8yWJUPXjoFSkNMxSBjBlj8Vx8ECs8RJjMhE8TEA==
+X-Received: by 2002:a05:6214:4c8d:b0:90a:7cb8:70b3 with SMTP id
+ 6a1803df08f44-90c6a7d07a7mr55959306d6.0.1787221750012; Thu, 20 Aug 2026
+ 03:29:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260820092623.1647844-1-padmarao.begari@amd.com>
+In-Reply-To: <20260820092623.1647844-1-padmarao.begari@amd.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 20 Aug 2026 11:28:57 +0100
+X-Gm-Features: AcwNN1WD9I845mY_KyPmb6qP9EHOt4TDKNuTmM14n27gLf1u9RiwdbDcmMSj5WY
+Message-ID: <CALeDE9NAGVvWm4Gt6rK9h__f6o4_TuV0fGjoB1WdWd5=7pQHhA@mail.gmail.com>
+Subject: Re: [PATCH 0/8] net: mrmac: Fix Rx packet loss on back-to-back frames
+To: Padmarao Begari <padmarao.begari@amd.com>
+Cc: u-boot@lists.u-boot-project.org, michal.simek@amd.com, git@amd.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -124,100 +137,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+On Thu, 20 Aug 2026 at 10:26, Padmarao Begari <padmarao.begari@amd.com> wrote:
+>
+> The MRMAC Rx path drops frames when two arrive back to back. recv()
+> always starts at rx_bd[0] and clears the status of both descriptors,
+> and the status field is the only record that a frame arrived, so the
+> second frame is lost without any error being reported. This shows up
+> with multiple boards on a switch, where the extra traffic makes
+> back-to-back arrivals common and network transfers time out.
 
-The driver never looks at the vbus-supply of its port, so on a board
-where VBUS is switched by a regulator, as it is on the Colibri VF50 and
-VF61 carriers, the port stays unpowered and no device is ever found.
+Out of interest is this using the legacy IP or LWIP stack?
 
-Take the regulator the way ehci-mx6 does: look it up in probe, enable it
-in host mode and disable it in device mode when the controller comes up,
-and turn it off again when the controller is removed.
-
-A port with no vbus-supply, and a build without DM_REGULATOR, are both
-fine and are the common case here: of the five boards that select
-ARCH_VF610 only the Colibri has DM_REGULATOR at all. Anything else the
-lookup reports is a supply that is described but unusable, and the
-driver gives up on the port instead of leaving it silently unpowered.
-
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
----
- drivers/usb/host/ehci-vf.c | 29 ++++++++++++++++++++++++++++-
- 1 file changed, 28 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index 6c9866bfa5f..39baceaa820 100644
---- a/drivers/usb/host/ehci-vf.c
-+++ b/drivers/usb/host/ehci-vf.c
-@@ -21,6 +21,7 @@
- #include <asm/mach-imx/regs-usbphy.h>
- #include <linux/delay.h>
- #include <usb/ehci-ci.h>
-+#include <power/regulator.h>
- #include <linux/libfdt.h>
- 
- #include "ehci.h"
-@@ -53,6 +54,7 @@ struct ehci_vf_priv_data {
- 	struct anadig_reg __iomem *anatop_addr;
- 	void __iomem *phy_addr;
- 	void __iomem *misc_addr;
-+	struct udevice *vbus_supply;
- 	int portnr;
- };
- 
-@@ -143,6 +145,13 @@ static int ehci_vf_common_init(struct ehci_vf_priv_data *priv)
- 	usb_internal_phy_clock_gate(priv->phy_addr);
- 	usb_phy_enable(priv->phy_addr, priv->ehci);
- 
-+	ret = regulator_set_enable_if_allowed(priv->vbus_supply,
-+					      priv->init_type != USB_INIT_DEVICE);
-+	if (ret && ret != -ENOSYS) {
-+		printf("Error enabling VBUS supply (ret=%i)\n", ret);
-+		return ret;
-+	}
-+
- 	return 0;
- }
- 
-@@ -284,6 +293,15 @@ static int ehci_usb_probe(struct udevice *dev)
- 	struct ehci_hcor *hcor;
- 	int ret;
- 
-+	ret = device_get_supply_regulator(dev, "vbus-supply",
-+					  &priv->vbus_supply);
-+	if (ret == -ENOENT || ret == -ENOSYS) {
-+		debug("%s: no vbus supply\n", dev->name);
-+	} else if (ret) {
-+		printf("Error getting VBUS supply (ret=%i)\n", ret);
-+		return ret;
-+	}
-+
- 	ret = ehci_vf_common_init(priv);
- 	if (ret)
- 		return ret;
-@@ -311,12 +329,21 @@ static const struct udevice_id vf_usb_ids[] = {
- 	{ }
- };
- 
-+static int ehci_usb_remove(struct udevice *dev)
-+{
-+	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
-+
-+	regulator_set_enable_if_allowed(priv->vbus_supply, false);
-+
-+	return ehci_deregister(dev);
-+}
-+
- U_BOOT_DRIVER(ehci_vf) = {
- 	.name = "ehci_vf",
- 	.id = UCLASS_USB,
- 	.of_match = vf_usb_ids,
- 	.probe = ehci_usb_probe,
--	.remove = ehci_deregister,
-+	.remove = ehci_usb_remove,
- 	.ops = &ehci_usb_ops,
- 	.of_to_plat = vf_usb_of_to_plat,
- 	.plat_auto	= sizeof(struct usb_plat),
--- 
-2.54.0
-
+> Fixing that needs an Rx ring the driver can index, so the series first
+> makes the ring scalable and then fixes the bug:
+>
+>   1-3  Independent cleanups: check memalign() failures, give the
+>        driver its own Rx buffer pool instead of borrowing the shared
+>        net_rx_packets[], and read the link speed from the standard
+>        max-speed property.
+>
+>   4-6  Make the descriptor ring scale: index the contiguous BD blocks
+>        directly, build the Rx chain in a loop over RX_DESC, and
+>        program CURDESC only once the ring is complete in memory.
+>
+>   7    Track the descriptor to consume next in rx_bd_idx and take
+>        completion from the per-descriptor COMPLETE bit, so a
+>        descriptor goes back to hardware only after the network stack
+>        has read it.
+>
+>   8    Size the Rx ring from ETH_PACKETS_BATCH_RECV, so a full
+>        eth_rx() call can be served without hardware running out of
+>        descriptors.
+>
+> Padmarao Begari (8):
+>   net: mrmac: check memalign() return values
+>   net: mrmac: use a driver-owned RX buffer pool
+>   net: mrmac: switch to max-speed property
+>   net: mrmac: use contiguous BD arrays
+>   net: mrmac: initialize the Rx BD ring in a loop
+>   net: mrmac: write CURDESC after ring setup
+>   net: mrmac: fix Rx packet loss on back-to-back frames
+>   net: mrmac: increase the Rx BD ring
+>
+>  drivers/net/xilinx_axi_mrmac.c | 235 +++++++++++++++++----------------
+>  drivers/net/xilinx_axi_mrmac.h |  20 ++-
+>  2 files changed, 137 insertions(+), 118 deletions(-)
+>
+> --
+> 2.34.1
+>
