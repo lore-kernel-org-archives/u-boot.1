@@ -1,134 +1,131 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96AF4C5DF81
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 11:52:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 913FBC5DF87
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 11:53:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2899B80CBD;
-	Thu, 20 Aug 2026 11:52:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4C39C60757;
+	Thu, 20 Aug 2026 11:53:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id C4gSizli_YXU; Thu, 20 Aug 2026 11:52:16 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dsLTQoDburVS; Thu, 20 Aug 2026 11:53:26 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787226736;
-	bh=w91h6pLMlXuK7tlD/1+cQCMgnBHcpyn80WxUd81NwXg=;
+	d=lists.u-boot-project.org; s=default; t=1787226806;
+	bh=cSncCZF6L2yFFOw+orBxZrqZMxde5lHphQG3sGKShfQ=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=t3Zg6Kshsd9b3JE/BsKyRZsy6jmJNtML1NYMPl22SnDQVJ1/Hs+0R/kUaGOSkPoDz
-	 MH9SXlcNKRui0ezLw+bL7fCbcKDXDU0Yt2eUVPFE3megKdFzvPyppbKOO9C61IDpzV
-	 D6PbWXqtGTwOxKrU7gwDkCxtSGBxj7cq2MqZO11UVySLkNqGLe/VSIgeobEkygdUh1
-	 oAopGrjl55ImQ1DbNQ9dthrFg99PXMrpfNabsU5T0caSeZFv+RjZRhJLmAjTwUGXHV
-	 TwXYOJa91EDf36tCAivHFTsJIVPPvxWSy7lLeX+GDzlRvXkgKgc5Cr8x7jFuCdBWPB
-	 SF74+yGrC0kLQ==
+	b=MjXdB8/7uW52I9v2NgntLALD3LW3oU5iZ3MOjHAZ2i0hS/z40+lq+13PaNuUNb1Q5
+	 q+bJfZCzaKrMP8SfFKc6byeA5epedNsa6T0xbM69wsTs+n9QaPFLyu9KHISCoyUNoq
+	 bQknn/PPoFwoBm1dS2vFCZC9EnHk5TtXmWzzus8ZGYYEOwWPNqiv2Wl/e2pyyf18Ny
+	 KzvdMP2nYbiy2NBojb9rkFR87fAK2JxXcFIKnNfBFlnZijadHFw95SQe4h1R7KS/wy
+	 AVyONBQ65STnoAQ8xVRdhAG5xTnEwkRr/QoWCU5TE/0OFExqX2DjiXgNPqCOAQcjxL
+	 ctMZC/zpKz+uw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8CCB780BBC;
-	Thu, 20 Aug 2026 11:52:16 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 54B6A1395
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 11:52:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B4B3860769;
+	Thu, 20 Aug 2026 11:53:26 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 410D81460
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 11:53:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 40F29400A1
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 11:52:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 32F32405D1
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 11:53:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wz6zGcXsSRFZ for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 11:52:14 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9UFck6CZkagB for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 11:53:24 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f35; helo=mail-qv1-xf35.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=OwPdv8zL
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3D3C440082
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 11:52:13 +0000 (UTC)
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-902e4af2d9dso5880576d6.0
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 04:52:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787226732; cv=none;
+ client-ip=2a00:1450:4864:20::62d; helo=mail-ej1-x62d.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=VNk8xopY
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 42EB1405CB
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 11:53:23 +0000 (UTC)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-c1c50c1e29bso339187166b.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 04:53:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787226802; cv=none;
  d=google.com; s=arc-20260327;
- b=G/aGCe/mkkd3URKOe6hpvh1lXEnJLdZFDMROO7rdxk3g5VNMdbsIKN0NUQZq1BPsq9
- PLfiOdaI4TTsQ8zconOSnBQJvIwFgE3kqq329l72wP6qfMyIA4W21gNBuZDTFdQEr4QV
- zZ+Y+qOAZ8/Yj7g9+089JZR70xaC6GyFvTgVwwFaS889v+81s2KcvKrF5qE/9ops+/Qx
- 2rgdj8DnJUYxvlGK4k+h9ONUsIttsn+IeDSyX6+qxSBlt7/+RvB7hRp9ciniEoN8KtRC
- FoPF7FoieuJ2nxBSUsWWWfJiiDDbZvhCE0LlpsAEL5sFR5ki0Gc3Av1Mr5W6x9VLBA9v
- NyAw==
+ b=gyE0cIaJuayI0FZROBdyVFQUDrNeKyTIPkFD+WAfWuM9LamIqYS2Zz/QrY8zu1yGmV
+ 0zGEWObfmt0IReYsrJkntbGr+LMQXOAoiMFAnZtk2FVESEl+o+lZAfZPO3/9L94xD180
+ IyG9Wt8ee4+TD8iUL6vqvJXAsgTALJOJu5K0tnw9abl87yK9Ni8Kx/bZzgvokvqXRYhM
+ KqHeQxKKsz7NCIWgLRm47BLxnD1Ef2nlFYqe/VVaJHvBARakGyYva95oes/HH+PHCBK4
+ kVIBaN9Xw8t4neNkveIs2Oe87lh6/U4SdbMIkxlnJKzkEKA5+BUwS3kIH7B2ivrQ66lD
+ sv6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=w91h6pLMlXuK7tlD/1+cQCMgnBHcpyn80WxUd81NwXg=;
- fh=WetTzq2xTDX5h60waVCMlF8+Q239zw5nKngPEmXaato=;
- b=FVdi0bOLSs225P2k2DZbnPu9RVR9KBnv2Va4tlPYLfNmBwWrEYH2OZGctULzGCJ3E4
- Av1uws7j01pe6wPPhQ4S7f+XL1Lqh1elJc/6pzkZUo+ptlgPzjMpCA1pzKl3toW/tFXr
- Rm6phjE3EqC99IndJY5yQ1oM0sAgHYLPcqoYClcbcbztRLOU45Uc0uqtiRy/Gm9LTTa4
- Trs7XaChW7/KmAokh/ggmKJeV1lgfzOEacj4QRW8a7OFZpGrG9RAA5HYafSSE9t4CP7s
- djZjVtzcQCTo5TUkXosawjKl/SGXjf6WBOZHJIRQTwKEa7ZDKKXU7pubnxu1yDjYZ8u/
- lyxQ==; darn=lists.u-boot-project.org
+ bh=cSncCZF6L2yFFOw+orBxZrqZMxde5lHphQG3sGKShfQ=;
+ fh=eybldZBXeZ25kcSUWgn0EFj7euTPyUYAWUYWgJkJ5MY=;
+ b=DPK0q76KhxDK5wevvLRp0eCueT1a2zAossQ1ITlp5rdIEOggUvDsU25z+Kv0WjgD+M
+ RyEMS01XIvkRVENAmi+un3P9Bi7bcHprNMZULtwwvL/y7B8fCCeKCYRfK+Ad2gkVAyYd
+ M1ZipUCnez090TBedYBVYpVFKc4MacaulmQUPy1Bo4xEfr8F+jNYwv9LhVtgSF6tyEg8
+ saZPhKNp1jlrbUKBdnbI6fBBFW9g1hTr0X/xKPOYpwQyBvlY8WgecufcpWmVJFmnJ0Fv
+ ckTHub9fftBlV/i73EHY8I6jp3nZZedZZOQjVacOZvQNuLyhFjdGjmLUESlXx518rqU3
+ D8RQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787226732; x=1787831532;
+ d=chromium.org; s=google; t=1787226802; x=1787831602;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=w91h6pLMlXuK7tlD/1+cQCMgnBHcpyn80WxUd81NwXg=;
- b=OwPdv8zLbKGv0IEssbD5sSrB2DfIAK6DA5/sDX9lAF7zyQaybZtV8X+DITd4WFP4cD
- /0OpCuL6I+PHremE1dhGRnpBWb9PaJmBBOGmKlWR6XOIHY/IEfPfxA5UVUsRKAb5UgPX
- IgAAVmVc3uW6qajpgkoR/8kmqia2PHRMXjLZc7WoEAJ9oRYxr5D+G/abHHsldmm8nt2I
- S6Z2vpm9vZ7vCJNtCTK1/1WF35Mo1JPmVLiw1K8uXfyBJtkUH2yXvXKBVreE0qUyi3bw
- wEr7FriW1Jo+tNdCZxQ6vw1iZwrE9W3NnxnJ8BiAcybTlUrMu+eSAR15kdS+1snWJyoC
- I5PA==
+ :content-type; bh=cSncCZF6L2yFFOw+orBxZrqZMxde5lHphQG3sGKShfQ=;
+ b=VNk8xopYcLBva7tpKmXplqhfUzdIufC4kLcAJk9JDktYbPfMthUqTfD28+BrjQaBLm
+ jqDyVO2IvJSAM/V0Nr/1tCxqqAFnqvIXSj4uoZHd9+fPAJtSPUHQDhhdgxInMnKlNW5z
+ Des+Ld5/kp5j4sGVSPIhGWS0Y3Wep8HLP4+38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787226732; x=1787831532;
+ d=1e100.net; s=20251104; t=1787226802; x=1787831602;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=w91h6pLMlXuK7tlD/1+cQCMgnBHcpyn80WxUd81NwXg=;
- b=EIR/dJbQDZe+X5q3zST4IDhWyQ16WbmOpFnibIIdim05ZFucA9PL4WZxsUI6oM1NCY
- ZmMgubznv99GSakVUv9+iSP4p1i2gO8GM2vCqQsgVD+EWNXgBS9ULPM70UaPc9Uny8tp
- fbMPuFOXue/HSP3+IQMBmYtElMABkfj2bDJa8DqRms109BvmRXeU6m6w5LbVGPVd7+Ap
- fYUiL+B9UvPXYMgQcmN3ItRlGEURtHD7lclqqRmwfYhSs++VOEZk23DD/0TTn+vKungW
- IMQf4IOOxFATBswART4yccUo01Ao0uGVSVMqQphyevk35FCajAgWw/WS/Pp6NEN5z+lr
- OyFA==
-X-Gm-Message-State: AFuF++nH5ZFdyAKoQU1rX9uS0kZ0gH8nN8/cEVD/vP9DWPz9IgMR2qjV
- UybCUxrL3P/irNFAy1RJnW7lNF4g9ZBnitG2gpBC4KbWucnIH6ZisguQP7Z2yeIxydjmsT1kxyW
- 1QBc6IaulYadMEO2ZDqigU4IKcAKZztI=
-X-Gm-Gg: AR+sD11yqnPUv24FDqeQO8sXlbDViY0vwk1I9WeOU1RAfqpjKpXaXi2LuHItwsrXIeT
- YKIkYeuju4OZj/Q1yYBvNXh6olRQ2i8rkLvVgqC/5hmKMhup5PH9r+vfYE3TfaafXnUEfP1ofSE
- tZFguOsXmIiRVnICSIMoTupfA6o++HbLHPNCUBbzuZEYenW+cefElRTFh+WsvAsD1tmE+nBr7Ru
- 7psrFccE/mLiaFPlACublF03N1yaodUdJ5FCHpbd/HeJyTfVO7MiwEIbg9yV+3NVw+UMnU1nQLH
- 5132CEzg5Rh9DCxMm3hDLMtxLMvovpuW7cmmy8Dna5lqUcipXy1M++sgkN964WneYGshFJN7+gk
- 0TiCmfAkohfZYqoqgJroXNHxSZPQcL1KNHhdGmWVyhYxcRuP7k6zv5bkUTrHmlhPrtH9pu18Axq
- OhBs+wc2J1lYqJb6av1bbx72bD/3iYZwLM8Nicu5o=
-X-Received: by 2002:a05:6214:2608:b0:90c:6948:9191 with SMTP id
- 6a1803df08f44-90c6abb7db1mr56062476d6.12.1787226732203; Thu, 20 Aug 2026
- 04:52:12 -0700 (PDT)
+ bh=cSncCZF6L2yFFOw+orBxZrqZMxde5lHphQG3sGKShfQ=;
+ b=qX8W+fUiLmYNbLOh1/W8z09vU0DrrRFCvoqVpPx62NSgwkgNAkX1gudmbQ6qO4a8zA
+ d88vcMdtlr5SJVfAGnRPL2mDBy2ngO7O20YSTYe2YgxNS3JkN37olBABZf88G7Mw+mHe
+ PdbLeX8b01pSxaYKcOJVQOxQpHyEjEUJvI0wcFzjCyGM4xcJBDVFFiKUamxKIHOHoyyL
+ 88099QucOob117AaLula1YRkvlLOKPUwcNA0yR4hQPccXyD6Izqy3FLQVjcE5D4i/b2G
+ mpH9+CvEe1mIu33ew/MHtZMBcox5Z/0/4MlXB2V7XUnXEY4CYjVLsQmRX7hQ97nY64Gj
+ Wojg==
+X-Gm-Message-State: AOJu0YxpRoyI1Up7pGKfr7RHxjO8oaryrMw/lEOlyNU+nOLJyow4eqfY
+ EQWFxJ3G9nP5Oyv7kwekShp8GrjUTRcGRNT9Sc6xmAxOEGu1QmPmuHV4Rx8gAV+nFiGKMkoTotO
+ 0DlX0WGtBgB6B/E2YiL1KVTdGTzN5n21rPQK3uocHmaBhymRwNso=
+X-Gm-Gg: AR+sD11u1k7CdSNMhQ1bKLeQXbKMryVYYR60pJHUzt2HkOC50xvR9Mu93wFd2S0Z/2t
+ lkDr+fSQ0sg2E6LMELt11IfAT2IvTBEInogmInMeAm4aXtR0gpbCZ+k1E3HWUZuOIxPDtg9ZMPh
+ 0M1jmCQNF9LlcJKC0mrLRRV7rECDTIfp/KAFFZ481FHCaS2W1Lc/XIkYE0LHla0DMdHf9fx0hpB
+ rwVDhcfAoO8BxuHCVosn3+2w4XGrRBPtIhWnKrwxOozgRy9jUpC6O1gzILeEc5jacZFjt5q04HN
+ 7JKu9QyUmKgBPWRkpX5M9fc5i+I6Mzkgx/LGtQo4BIA=
+X-Received: by 2002:a17:907:9307:b0:c21:74ad:8b11 with SMTP id
+ a640c23a62f3a-c23fa1eea4fmr734229766b.15.1787226801807; Thu, 20 Aug 2026
+ 04:53:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260817153144.1951036-1-vjardin@free.fr>
- <CALeDE9OTtd7Oy7sVKsdukfnwdrV3Sg5d1F34muBQgZdsOaMoKA@mail.gmail.com>
- <aoM6i7TKGcfAydpp@L30177.local>
-In-Reply-To: <aoM6i7TKGcfAydpp@L30177.local>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 20 Aug 2026 12:51:57 +0100
-X-Gm-Features: AcwNN1Xw-ue_eUQSHEsgKbLYFnfHY_Q14oGZ33JmsNxYcmc1yhzzcI3lE8aEdEE
-Message-ID: <CALeDE9OSFs=3WkKFh6tBa0VHdVAvKSL=-XktBQHwbTd-vefwiw@mail.gmail.com>
-Subject: Re: [PATCH v1 00/23] board: nxp: add the Free Mobile Nodebox v3 CPU
- Module (LX2160A)
-To: Vincent Jardin <vjardin@free.fr>
-Cc: u-boot@lists.u-boot-project.org, Wasim Khan <wasim.khan@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Priyanka Jain <priyanka.jain@nxp.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>
+References: <20260810-b4-fit-ext-data-hardening-v3-0-17184cdb87fd@binarly.io>
+ <20260810-b4-fit-ext-data-hardening-v3-3-17184cdb87fd@binarly.io>
+In-Reply-To: <20260810-b4-fit-ext-data-hardening-v3-3-17184cdb87fd@binarly.io>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 20 Aug 2026 05:53:06 -0600
+X-Gm-Features: AcwNN1X0D4jLk4WemxteatTth2J96htFIxt05omfq-mWbZlEveKp3RRf3ZXYiMY
+Message-ID: <CAFLszTh6dfKvMxzaRbq0Y1kAwS7OSuxXMnrg4uOtmv38sgAgvg@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] spl: fit: Harden external-data offset and size
+ arithmetic
+To: Anton Ivanov <anton@binarly.io>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, 
+ Daniel Golle <daniel@makrotopia.org>,
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Aristo Chen <aristo.chen@canonical.com>, Francesco Valla <francesco@valla.it>, 
+ Anshul Dalal <anshuld@ti.com>, Randolph Sapp <rs@ti.com>,
+ Binarly Research <vr@binarly.io>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -143,93 +140,32 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Vincent,
-
-> > > This series adds the Free Mobile Nodebox v3 CPU Module, an NXP
-> > > LX2160A based board (16x Cortex-A72, DPAA2). U-Boot is the BL33
-> > > payload of TF-A: BL2 trains the DDR, BL31 hands over, and U-Boot
-> > > boots a FIT image (kernel + MC firmware + DPC/DPL) from a single
-> > > FlexSPI NOR. The module plugs onto several carrier boards (NBV30,
-> > > NBV32, etc.) that share one kernel image but differ in their device
-> > > tree and DPAA2 data path.
-> >
-> > Why just FIT and not UEFI?
+On 2026-08-10T22:09:53, Anton Ivanov <anton@binarly.io> wrote:
+> spl: fit: Harden external-data offset and size arithmetic
 >
-> Because this layerscape platform shall not support UEFI by design.
-
-Really? I have a clearfog LX2 platform that boots and runs with UEFI
-just fine. Generally this is where the Linux ecosystem is going so for
-a new board going upstream I would expect it to at least be an option.
-
-> > > The port is modelled on the LX2160ARDB / QDS boards and lives next
-> > > to them under board/nxp/lx2160a/, reusing their SoC level code.
-> > > Board specific behaviour is wired through EVENT_SPY hooks rather
-> > > than weak symbol overrides, and the dependencies each hook needs
-> > > are forced on by hidden default-y Kconfig bools under
-> > > `if TARGET_NBXV3`, so a hook cannot silently turn into a no-op.
-> > >
-> > > The series is in three stages:
-> > >
-> > >  1. Base port and documentation (patches 1-2): TARGET_NBXV3, the
-> > >     defconfig, a minimal device tree, the MAINTAINERS entry, the
-> > >     Ethernet wiring file and doc/board/nxp/nbxv3.rst.
-> > >
-> > >  2. Board code (patches 3-9): DPAA2 Ethernet on DPMAC17 through the
-> > >     RTL8211FD PHY; the +0V8_VDD core rail (MPS MPQ8785 PMBus
-> > >     regulator snapshot, PMBus PSU snapshot, VID fuse driven voltage
-> > >     trim through UCLASS_REGULATOR); the ${carrier} selection that
-> > >     lets one FIT carry a DPC/DPL/DTB set per carrier; the ZL30733 /
-> > >     ZL30643 DPLL traces; the +3V3_FAN rail hook.
-> > >
-> > >  3. Build and device tree settings (patches 10-23): one small
-> > >     commit per peripheral or features, each enabling its DT nodes and
-> > >     defconfig symbols.
-> >
-> > The device tree should be sent upstream to the Linux kernel and then I
-> > think most of 10-23 should be compacted to a single patch.
+> The data-offset, data-position and data-size FIT properties are
+> excluded from the configuration signature, so they are attacker
+> controlled even when signature verification succeeds. The offset and
+> size arithmetic in load_simple_fit() can wrap on hostile values:
 >
-> I get your point of Linux first and uboot policy, however, this board
-> follow the legacy support of other NXP's lx2160/layerscape boards. For
-> example,
+>  - adding the external-data base offset to data-offset can wrap past
+>    UINT32_MAX,
+>  - get_aligned_image_size() adds the block-alignment overhead and
+>    rounds up to the block length, which can wrap past ULONG_MAX,
+>  - adding the FIT's device offset to the aligned external-data offset
+>    can wrap past ULONG_MAX.
 >
->  arch/arm/dts/fsl-lx2160a-rdb.dts
->  arch/arm/dts/fsl-lx2160a-qds.dts
->  arch/arm/dts/fsl-lx2162a-qds.dts
-
-There's a number of fsl-lx216x boards with upstream linux DTs.
-
-> and LX2160A defconfigs currently use CONFIG_DEFAULT_DEVICE_TREE without
-> CONFIG_OF_UPSTREAM.
-
-But those boards still have upstream device trees.
-
-> Moreover, per https://docs.u-boot.org/en/latest/develop/devicetree/control.html,
-> "Configuration" section: it says that SoC/board maintainers are encouraged to
-> migrate to dts/upstream/, but also says that when dts/upstream/ has not yet
-> received the device tree for newly added board support, one option is to add it as:
->   arch/<arch>/dts/<name>.dts
-> with CONFIG_OF_UPSTREAM disabled.
-
-Even boards that don't use OF_UPSTREAM because of outlying deltas
-still typically have their DTs upstream and there's syncs between
-them. see the lists archives over the years for numerous examples.
-
-So yes, board maintainers are encouraged to migrate to upstream, but
-you've missed my point generally. Boards are generally required to
-have an upstream DT even if in U-Boot they don't use the OF_UPSTREAM
-infrastructure. That is to ensure that the DT has some level of review
-and sanity and isn't just thrown over the fence. Hence why I asked.
-
-> So how would it be acceptable to have fsl-lx2160a-nbxv3.dts under arch/arm/dts/,
-> consistently with the existing LX2160A boards and the option described in the
-> U-Boot documentation?
-
-No, please get review of the DT upstream even if you end up putting it
-in arch/arm/dts/ to ensure we end up with something that is
-maintainable.
-
-> Should those patches 10-23 be 1 commit, I can squash them too: I wanted to record
-> the logics of each feature sets.
+> Make get_aligned_image_size() return the aligned size through an out
+> parameter and fail with -EOVERFLOW when the computation would wrap,
+> check the two offset additions explicitly, and compare the
+> block-aligned size (the amount info->read() actually transfers)
+> against max_size before reading. Do the same for the FIT header read
+> in spl_simple_fit_read().
 >
-> Best regards,
->   Vincent
+> Signed-off-by: Anton Ivanov <anton@binarly.io>
+>
+> common/spl/spl_fit.c  | 98 +++++++++++++++++++++++++++++----------------------
+>  test/image/spl_load.c | 57 ++++++++++++++++++++++++++++++
+>  2 files changed, 112 insertions(+), 43 deletions(-)
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
