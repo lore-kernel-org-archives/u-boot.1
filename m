@@ -4,126 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B5AC5DF82
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BAD6C5DF81
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:38:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AA06E80ACC;
-	Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B482480C13;
+	Thu, 20 Aug 2026 07:38:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EiYlP-jluFP6; Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
+ id WAYCXelqtNKg; Thu, 20 Aug 2026 07:38:45 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787210822;
-	bh=Ao9PCyD1AxppQGPdSr1oWTAfgXFTcs/mcqU3Ul45TQU=;
+	d=lists.u-boot-project.org; s=default; t=1787211525;
+	bh=g3/+dI5R1LuUcEdJtLO1rxW3idVicyKFtfeOY9fEnNc=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=rGITllzuxYaNHRYEO7kLewI2Z84LRan9Iu8V7IRYKn/NLOqo99omhIxJX8CClPRaX
-	 Jc15sAnQUG4LYflTYzZ7V41Hk6R2oVz9OwrCo0/y/2Qdn86JfGsNW8rIDkoy6HQ3VD
-	 rllqyH/8E2MIDj/1YFTvnDdykmc/C6YKZrSlOpkUxR/CcuZgzkwyLaszO/saf70se7
-	 K5auNMWwC9ywzf20Rd18Rv+zcByrdnHXvZkCo5p9Q35N+4ho0pxeVbLd7drQqi9ip5
-	 f+PV8E000pTryDquqGXZgI9Nl4sL1YrQ2twY8j6gQqWWwC84CCS+2lcY+tD4AH6E4/
-	 wkZkViMZi95Vg==
+	b=yhf0o8Duxcq5NtzWI1ySfDB6ngZVQnAohtCOM3QKXaDocPxJNaQRkAjfVxFtPJhfv
+	 vqZFuTFZF+IQc25MQCbvfqYrvXJ7IjnMaFtEEinfc/NowXuGB2v69gYiuX0QwVwji7
+	 Umloud3fKoWuBilqasECkBGdmZUxi0v2vIfVrWgLAyLueIVy4l+GW9uXK7L+q8ci64
+	 Xw6l897Y3dMirmZeYJoLaSN8/nenaNFGtVoYDO55ft+ziFhxAg6ayVL677tViYi9xB
+	 /hPLgaKVyr9vzAitinkJAxqayh3a6WDnzzxXpGdfj3Vv/C0/adKiUvTyl3SF7JQM1X
+	 DMqIH4OgLEIAg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1FDFB80C0D;
-	Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3173429D
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:27:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EEAD480BFE;
+	Thu, 20 Aug 2026 07:38:44 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 73B511B8
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:38:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 232B64025F
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:27:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5D12140253
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:38:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6OxvQh_C6eyG for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 07:26:59 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=Wnz1CvyW
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B958440253
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:26:58 +0000 (UTC)
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DB4A93FC9A
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:26:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787210815;
- bh=Ao9PCyD1AxppQGPdSr1oWTAfgXFTcs/mcqU3Ul45TQU=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Wnz1CvyWheMU9wDa0MmJFXu/m7PyqqGOV5dF5HyO8fXBFR03rzTAo6KGSmLlf2HA1
- oCzHBCESnMNl57IggRzNHMOCPPec0tnd0N8mQbSrbCBdihIqsL9sMP8NyTdc+s9EN0
- hibiDrrbAyK9FsqEbcDFd4FW167qda+sD1FfC3ywSf17W7epkNbNGX3U9wuxay8WNl
- cXvip6YG7N4SPvBiYLPTVn7Y7K0UPd/+LvuYI9Z64/IcM9LQ//Lj/Vxl3iYj0My4nt
- wA9L9awXC4plJ3IP0q4f5OxxWAbi9HKgOVxlDGAEsHYPZR3SmJv7WnU1yzRSKm9VFE
- +YJzUGHebXnkE+UDZMcrJ/edV72UzLJaX8RJRHJvaVZvZcxwxMSiKKS+hV60snX7qn
- Xep1E/hrHc3l8MnbIVDSGJ1h+fxkWMmve0SBqw1uyHToWU+d/DqsfwBym7SZhPmdx3
- 9ND2RQrRRU7/C8FVTSNacnMRUxYKR22ZgXJuyTMx03ZtiDSwFxMvh708F9i/acQHco
- nmmSyscDAb1Ss+Rofylw/0sqc2qMJS1qOwZ7zhN0nj6sDEprApw/sSYv11rpHC5hJl
- gsmXoKU9IoyxuPziQEQhUDg4cNlPjL1qzDsfAY2OERPzYk0a+F47SaKSwRYo5Eziqz
- C1wfUUoo/TahuWsu7pFfa5Ec=
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4996832e7b4so4650075e9.1
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:26:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787210815; x=1787815615;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Ao9PCyD1AxppQGPdSr1oWTAfgXFTcs/mcqU3Ul45TQU=;
- b=Kyh31p0yZZZgV2a78sq23W0ZjZG42wknfA2A0ZmnVo+r32JRCGU8gObJ2Nh/95dNS2
- SluPPv+gCnQCJtHdzdkze+alQMsB1/AIYxZhnHE85Uhr72/j8CqnR/3pSUeLXc3Z2/XW
- qOYTi22YzOEhsAiJThaX8pr2n5ECizTCAYK5dG4SuvaNmePLXurnrh8NUlptFN7kFyvo
- TbKQDpPOmsGMfICi3ENbDlT9r8pcsnliJhjOBNYQHyeYiWBKTd++W/ijgBM1AWc8ILbM
- 53U7X2U0V/n85jPiYhI5OhENKsd9V5cb+gNR6wbTSrmXSs74Z8ITTOtPBFeTOjse/9b1
- ZbDg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrbpoVZeeA+WAmaZO6kVAgrsNLTXXKzQaLl1zB5+vaxbDdJuKvBavpueyivQBvLJQQ43ocQRPk=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyC6hw7QNcECJDpC9ayj74MS9yGg8FkFx7D+tlC/g0qlj5sVb5A
- PN5Ax4lMCtuybprK42WzaQ6sFoD93LEPjFCXBIYUYECduMmDnZ+yegLM8+1ULKayDIVcRABD0VC
- koqMNoRhdmBBcfEoaPJMveocdGCzwlNrJtgLZdi7Wh5W7hMIVXdDtloVmAuuQiB0R/lWxjL+UgE
- 2mmSVzfhA93Q==
-X-Gm-Gg: AR+sD13B/YqJIRWjQAoKLPoq5u7aFVYalrzLEXfd1LLtEBFgmHFwARayIWJM/3a7xg7
- hgtlT4n+aHSZr7K2Kv0+zjdHH1NmxWj3f3mtt9DcXy2wc9btTpjl0gLqcPeEid1Amvky2wDiOLR
- 4l2cI7l1e23jSDbBj9n5tghpMytyK6dnlBF9O+1k040vIxGDzCQ1+XRWEDlyTU5nWBelT/W4czz
- WwTnbALkHIpUdlX4lGKP7Wo3ijsniYnpA32cHufMq/J3osnIrEg8Q4IKb8IzaBDJpfOxV12O6gI
- CLuIDsKc95klETVtr6D1nySI5hvzhSBoAS4IwMIJX9ZHYEFeLDCkBz6A6B2SoBHMsSRSq3xLU+E
- wImmJS0SlC6QfTKfQGBvAvGQ3tHGDq5H66qYeUVOBGdaMajLoj7urjhc=
-X-Received: by 2002:a05:600c:674a:b0:499:5f80:83ac with SMTP id
- 5b1f17b1804b1-499b06cbaf2mr69636035e9.7.1787210815455; 
- Thu, 20 Aug 2026 00:26:55 -0700 (PDT)
-X-Received: by 2002:a05:600c:674a:b0:499:5f80:83ac with SMTP id
- 5b1f17b1804b1-499b06cbaf2mr69635525e9.7.1787210815096; 
- Thu, 20 Aug 2026 00:26:55 -0700 (PDT)
-Received: from workstation5 ([2a02:908:1242:30e0:cba:879e:28f0:3c57])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499b2ae6c3fsm17014665e9.1.2026.08.20.00.26.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 00:26:53 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Linus Walleij <linusw@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.u-boot-project.org,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] tools: build mkeficapsule for
- CONFIG_EFI_HAVE_CAPSULE_SUPPORT=y
-Date: Thu, 20 Aug 2026 09:26:45 +0200
-Message-ID: <20260820072645.9884-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ id Irx7eRFOkEqU for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 07:38:42 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=HtU+PCw1
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8898D40074
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:38:41 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 569AD43B4D;
+ Thu, 20 Aug 2026 07:38:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0CC81F000E9;
+ Thu, 20 Aug 2026 07:38:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787211521;
+ bh=g3/+dI5R1LuUcEdJtLO1rxW3idVicyKFtfeOY9fEnNc=;
+ h=From:To:Cc:Subject:Date;
+ b=HtU+PCw11F3YIGma1YnBxzEYlBcwyWzq8giXU57jr05dVH+uyeXUBW60YUltf3kQB
+ m5m8almie1oCwfgrZDgVRUxlsLOxESrEJdQTjUbNTWtUKu6h8dttFZRx134a1yIX6w
+ XXglQZ4jw6s687Gzvc5+Xy2LQwZZs5O1Vq/YaW97EbpG7tClRw+lNy7vLU6CkXxn48
+ bmXcTifQV+xEn5kq5S5TaTWw3lRe0wsrEc4P6gUykfFORbquxU7D6dPEBcYgQ+Zcur
+ AJMcYMhqXz3c5N4ap8Ufvnt0zhBrdcTnSBLp1A3m2upvcre+VrXclly1XvBziUr/0L
+ POxnk7rsMzCiA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: Lukasz Majewski <lukma@nabladev.com>, Shahriyar Jalayeri
+ <shahriyar@byteray.co.uk>
+Subject: [GIT PULL] Please pull u-boot-dfu-20260819 into main
+Date: Thu, 20 Aug 2026 09:38:38 +0200
+Message-ID: <87mruhgs1t.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -137,34 +88,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Currently we build mkeficapsule by default even if we don't have EFI
-capsule support enabled. This adds a host GnuTLS build dependency.
+Hi Tom,
 
-Only build mkeficapsule by default if CONFIG_EFI_HAVE_CAPSULE_SUPPORT=y.
+Here is a PR for main with the following:
 
-tools-only_defconfig explicitly selects CONFIG_TOOLS_MKEFICAPSULE=y.
-Hence distro packages like Debian's u-boot-tools will still contain
-mkeficapsule.
+Android:
+* Ensure boot image read is bound by partition size
 
-Reported-by: Linus Walleij <linusw@kernel.org>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- tools/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+CI:
+* https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/pipelines/1015
 
-diff --git a/tools/Kconfig b/tools/Kconfig
-index ef33295b8ec..e151b30217e 100644
---- a/tools/Kconfig
-+++ b/tools/Kconfig
-@@ -108,7 +108,7 @@ config TOOLS_SHA512
- 
- config TOOLS_MKEFICAPSULE
- 	bool "Build efimkcapsule command"
--	default y if EFI_LOADER
-+	default y if EFI_HAVE_CAPSULE_SUPPORT
- 	help
- 	  This command allows users to create a UEFI capsule file and,
- 	  optionally sign that file. If you want to enable UEFI capsule
--- 
-2.53.0
+Thanks,
+Mattijs
+
+The following changes since commit 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5:
+
+  Prepare v2026.10-rc2 (2026-08-10 16:43:34 -0600)
+
+are available in the Git repository at:
+
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20260819
+
+for you to fetch changes up to 35432ef6fe2c79ab72709966e64815a45eb55c76:
+
+  bootstd: android: bound the boot image read by its partition size (2026-08-12 09:46:11 +0200)
+
+----------------------------------------------------------------
+u-boot-dfu-20260819
+
+Android:
+* Ensure boot image read is bound by partition size
+
+----------------------------------------------------------------
+Shahriyar Jalayeri (1):
+      bootstd: android: bound the boot image read by its partition size
+
+ boot/bootmeth_android.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
