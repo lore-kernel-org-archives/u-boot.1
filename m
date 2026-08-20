@@ -4,79 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA1CBC5DF85
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB680C5DF81
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:57:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4D0FB80DCD;
-	Thu, 20 Aug 2026 15:54:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7A17080C9F;
+	Thu, 20 Aug 2026 15:57:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tZm5QdRpXMko; Thu, 20 Aug 2026 15:54:23 +0000 (UTC)
+ id A6lGkqjotKQH; Thu, 20 Aug 2026 15:57:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787241263;
-	bh=JgI4EIr+7wOfJxPivbsPEyD8kSRFnOHbFj3zze7l1ok=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=WtNBvROLpdgrVeI5d12CAY/KOV9bH2C8agqgOHW8p3/maaNdmQ31i6LZkCArXBEXI
-	 XY3Lhza/IAWrBkJRsLaIBEwKdOY8PehzYHsti6WIlZ1/xmRO/uDnm/dR1p/ufvpReQ
-	 te8FR3BUPLomkMvQGWlQ7Cvo6cGYLeRReY+/152oXM9avhzGwVO/e4/bhVz67iCKQw
-	 YRM5D+TwFftQAQzJNc0tYFjQsKRaN1AKAGTPiWTE3ygXYE0kEUsRI7wlx98O0/EPub
-	 pjRIJl1zQABMX2jPHbQwkxnoH2ODQckgDqJ6onPMfUhyWTh5JVqfIhn6UFsNS6JUgx
-	 aj0axetttNmhA==
+	d=lists.u-boot-project.org; s=default; t=1787241452;
+	bh=IoVNW5l/JYbO+A1xe/meCuk9NHdFxAtcb/93FBcmBT0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=rnFXOqZYYNz5wxnof9DXfH+1aLjsimhZjkEVK62Bu3EuJZdtaYZk/VCnxwj6gFj60
+	 rZUz54TitYcLBe4u9RGaMi3Mfy7LHvXGw0iP79Khrx62ifKIU0KvbriScHY3p0xN5k
+	 cQ3cpRXJuv08ZWST7v+0IdP6nkdFLBBRmKTurewCRz2j87/2LzaDWshdU0Ge0G0cwq
+	 tZpl4i7kXyp8AUzgKKb09udwIjW8lAC9gck+1DNHpbsssb2M0rM7wOOvuhdOmUzQFq
+	 Sk1eOr7IAsHmhhGeWNqhpcpfz/nXNKJozo3ix1tdaDfsmQdqdExP9Slb+0b/6Ru1Ft
+	 VDpybuzYWb1Qg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E0C2C80DB4;
-	Thu, 20 Aug 2026 15:54:22 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A4E2839E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:43:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BCDCF80C23;
+	Thu, 20 Aug 2026 15:57:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 74A48323
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:57:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8AAF9407A2
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:43:29 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 72161607E7
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:57:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1bINGMgpItP5 for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 15:43:28 +0000 (UTC)
-X-Greylist: delayed 4076 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 20 Aug 2026 15:43:27 UTC
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=tu-dortmund.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=tu-dortmund.de header.i=@tu-dortmund.de
- header.a=rsa-sha256 header.s=unimail header.b=WUfNXH7I
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=129.217.128.51;
- helo=unimail.uni-dortmund.de; envelope-from=andre.althaus@tu-dortmund.de;
- receiver=<UNKNOWN> 
-Received: from unimail.uni-dortmund.de (mx1.hrz.uni-dortmund.de
- [129.217.128.51])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DAE96405BE
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:43:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tu-dortmund.de;
- s=unimail; t=1787236527;
- bh=JgI4EIr+7wOfJxPivbsPEyD8kSRFnOHbFj3zze7l1ok=;
- h=Date:To:Cc:From:Subject;
- b=WUfNXH7IaE4ffixv5OrCpZSsaddYhLP1pwXnhG1CWnImGgNaFFvOlFHQRwEOCkmAm
- e3BWUIFlBI+4RnRw6WQZCwjsshao3BsXHTbQPJKRHaly4l7b4hyoQhepxpkGBneAK+
- T8hZNk27rq4bz9Vs/AcJURgKKiDfP33dAc2pLPSY=
-Received: from [129.217.164.210] (sysrescue.buero.delta.tu-dortmund.de
- [129.217.164.210]) (authenticated bits=0)
- by unimail.uni-dortmund.de (8.19.0.2/8.19.0.2) with ESMTPSA id 67KEZQEI009158
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 20 Aug 2026 16:35:27 +0200 (CEST)
-Message-ID: <a0ff0888-4c66-47d2-b79d-c27a2421c24e@tu-dortmund.de>
-Date: Thu, 20 Aug 2026 16:35:26 +0200
-MIME-Version: 1.0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ho55nJli1qgF for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 15:57:30 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::3;
+ helo=du2pr03cu002.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=Bf6wamiU
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 75376607E9
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:57:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ScvjSNkiXpNL0a1LSJvz0JEtqrn48iiL4MuNfokhxunwk5WcVPDwEvBaijpPbFC1xmY7HMCUDjmhxkXRwWUiO6O1RsLXojNa+t8JpSfdQFBJzIG2VYs8kjP+CwN03jgHMsHksRPF0Pc1b8+3emPEvT9tPbmELB9hLVqZ3HXxVonDZEfsci2W8VRi0Swyvl8OnsLHj36J3vHY8ZmrNgQI+tJmb+acriDgH9IGb3SRmU1QzCsFgtwu1QT4k4F9r0ehBgFxQdTEfvC29nPEp9AtCEuk1mei2MkE7wl2kII2zhi3EEJ26qO+s5i7vQSHV6ojBtSLjNAcJ8D/zkOWQKLsCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IoVNW5l/JYbO+A1xe/meCuk9NHdFxAtcb/93FBcmBT0=;
+ b=AvitimIuhowE/F4RSx65TBMaOKsLHShesR7pJPjdEkJAIlmuvH6Id0GSDo007Y0qq0Lfu89EWK6yDlfLvORh5eb/F9ZRPC2Mq/7HP8LIW2XSlqBu8oV+BroQjjdQT3xWPCWt2eMBUzkZAmDkRfCEgHIBecXvnePH1eWRwMPi4Nyil9BIx2wxexCsfjEmtJ1WeUILcxUNxFHfiiQoEVepoLWJp1SPnBHlgGZjJBUU/9xcKMuzRyyYHRAaCq1o8lxerW4wjznxOKgoGmoTz8UWEP8og0bK6y0e87UmvpXlYob65MoMRouwwcASt7JXZUi2ABIrbplbOxepDez5uVlvwQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IoVNW5l/JYbO+A1xe/meCuk9NHdFxAtcb/93FBcmBT0=;
+ b=Bf6wamiU53RP+wzGxofT0ae1ZcNInh4sRocTcCDWozNKG45GCGuW29wsH1UF5aSz0aEbSuY58R+E2V/qdeT67XsnaduAZEgs+avZDXW8+zhqnRcxkHhMDLU78u9BsUiMykWoH2qlQdjac7hrX+/uMkT6vUkvieDan6+V9Ey3YI0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by GVXPR04MB10489.eurprd04.prod.outlook.com (2603:10a6:150:1da::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Thu, 20 Aug
+ 2026 15:57:23 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0339.007; Thu, 20 Aug 2026
+ 15:57:23 +0000
+Message-ID: <3a8bdd54-3ebc-4659-928b-ea2f88cc22c3@cherry.de>
+Date: Thu, 20 Aug 2026 17:57:21 +0200
 User-Agent: Mozilla Thunderbird
-To: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-Content-Language: en-US-large, de-DE
-Cc: mbrugger@suse.com, pbrobinson@gmail.com
-From: =?UTF-8?Q?Andr=C3=A9_Althaus?= <andre.althaus@tu-dortmund.de>
-Subject: Network boot of Raspberry Pi 4 leads to unstable network in U-Boot
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms010904090402000403090500"
-X-Mailman-Approved-At: Thu, 20 Aug 2026 15:54:20 +0000
+Subject: Re: [PATCH v2 2/2] spi: rockchip: skip the unused FIFO direction on a
+ one-wire device
+To: Cole Munz <Munzzyy1@proton.me>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <u-boot@0leil.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, Alexey Charkov <alchark@flipper.net>
+References: <cover.1787238071.git.Munzzyy1@proton.me>
+ <9ddf5b446d236c42e39aef5c7dae9bc359dff694.1787238071.git.Munzzyy1@proton.me>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <9ddf5b446d236c42e39aef5c7dae9bc359dff694.1787238071.git.Munzzyy1@proton.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P189CA0005.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:802:2a::18) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|GVXPR04MB10489:EE_
+X-MS-Office365-Filtering-Correlation-Id: fd5c2461-d41b-4142-0b89-08defed3b937
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|10070799003|366016|1800799024|376014|22082099003|18002099003|56012099006|11063799006|10067099003|4143699003;
+X-Microsoft-Antispam-Message-Info: 1Hbn6U4xqgpbGHUisWZTIoiFUIfQmVCiPDkR66qvPNPHUJdZi6O51gsjrqyJ7INys6fyA5Vu6L7xiJaOQMVxP6rXhOLAf0+rhNEfV1/M98E8ARhSaMmqg9xOo8stUJkT4bK0UaeU/YQLMne5T3/6AQZPKyqO2/8uWmNVyqh/lOUh58i7J+fG+7cS1nC/XYncSuBvWB+9cdB2KHgzC70H+n1Skubg8J7aU47DTFaSog9v/+bcY7R3szkNRv8ECdXpdrtZt0ZlNmB8mIFEvKBKkvuAzo3cFE3Lpflbqj8Il46VrB3ePiIiNq6jkGZU2aIn/VNWwmiRivSu5EtKa/2WwyYccaOOYY2SlLbfEayXX+lDVl9c5JvhovO/bNmkYPg8Ae1RQ9dfdoQEhIx5Kz5Sc7QREKf3Xjz0VziryJsCd9VLvBp8fwvVA00n0QJCO8J9HqXjlWs8NkGBNSHKcBP60gu7iAaOsJByx4NEjLCbjrUARRZtOkDKrp9Oq9SArd9QMjEsJYjWoZ+z77i7bQ8p569ffMCcmhNzua0s1yO1jQT9pWA0ebhrO+dhmRuAQ8CJTZS2/wIkOopr3cADIRd2kY+VRMqnwkhPdgekadYnZYyxRoH97Z7IFAUjKtob7izQy2+zruUMb5TxU5V9DALFI7AGuUSbhY5HbyaJ8531Z1U=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(10070799003)(366016)(1800799024)(376014)(22082099003)(18002099003)(56012099006)(11063799006)(10067099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YlBpWUx2V1dmenJaT2IwR25sNm92VjEwSktSSFBVcWtabUpVYlN3YkFhajVG?=
+ =?utf-8?B?dzFlWC81RkFJQ3llOUxuek1nSWt2cEFCTC9HQ2hSaXBvVjM5Z2hya0kwQkZu?=
+ =?utf-8?B?ZjYyWHFIbW0rZ25JcFdWd0hzaUNmWVlwWU55NmlPbS84ZXcwRUc4TDgvczdW?=
+ =?utf-8?B?aWhIODYyRER2dXFWQWhBSk5mS1R2Z2xmOWRNSmxXT1lTdm0wdzhWc3E0VCtP?=
+ =?utf-8?B?eU9Ic0lQN3M0MFdLSEoyUERBSndLNVNiYnhsQWpsb3RxYWNsNWQ1Umd0V0s0?=
+ =?utf-8?B?T3NZRlNSbG5vRkh3L0JZWGU2VVpvNjRSV0xVTWZTZlREb0lNbmtVcDJjT1ZI?=
+ =?utf-8?B?VzZPQ2pMNWFwbjhEREtrQWxIQzZYUWJ6UDNPOFdRZWl6QlhxTkdtWHRscURn?=
+ =?utf-8?B?cmIyVlQ5S1d6ZllqY3VxcnZ0eUlrN0FMMFd2VDgzajUwWm43c3VROUlTZTJ4?=
+ =?utf-8?B?ZXM1cmN6YlhLdEI1bmtsUGNKNG9PVnNFdzF2S3JVSm1pOVBDa01iUjFyc25o?=
+ =?utf-8?B?R3ZIZktpRk1CaExRQkRDWCtMUmVWWnRrc3B2SFkxOHd1N3YydHJrR1AyRW5J?=
+ =?utf-8?B?VGlWUngvc2ZzaTc2OFBoM3FMRnhXVkdSeks4ZjZWSTdVSHlhb2NDWkNVU25M?=
+ =?utf-8?B?WkFPTnBGYVB4M2V3Qnl3OXVXQUxuQVE0dEZsbkd4NFIzM3pXd1ptNTFsbG53?=
+ =?utf-8?B?cHR3cys4MmtXWFNPbEFONFBMUHpLSUhJb1gyT1BNTi9NdzFxWlBoRG51ektE?=
+ =?utf-8?B?UnN5WGZIWWJMYkpkems1ZTRvL3FvREJjc3BjeVFZSnBhcCs4WVNrMG9USHYr?=
+ =?utf-8?B?SlFMU2h0ekh6Z1ZGWnhkVU9Ud3QxZXd3WlJEdW83QnMzSGpwSm0yWDNNVXhL?=
+ =?utf-8?B?dHl2UjlwcGxGWFJFVTEzL29EZlNhVHc5WU5lSjhVb2ZObkF5QXZiaUxqOEsz?=
+ =?utf-8?B?dFpXNnRPZ0N5dEJodWRBUlFkbzcvcDlCWlVQamw2eVoxRnJKT1VGdUpRY2ov?=
+ =?utf-8?B?cHhhbXNBSHgvSWVObUM2bFM4VVJsakJwajQ4N3ZueFFOK1lhdGYzMDUzRGI0?=
+ =?utf-8?B?QU5jV0FKL3A0b3hEYmZLb29nZWFYcTY1WEdCV3FGUklmME5qUFNBSUZsM3Nr?=
+ =?utf-8?B?OHFWSUFXc3lEeFNoT1RvN2dxaERFc1lJS2ZpeTd2MktYa0FmZEpsRUE0Q2hp?=
+ =?utf-8?B?TVJFNkZiSUtJaXFsdmsxTlBFMHpKaFMrOVlTMjRPL0x0VHBvTTB5M1dTdDZx?=
+ =?utf-8?B?b1IxajdwZEI4aENwZjEwbXk3R0IyOXA5amFtN3FXNEs0KzFQZVhjU1RURkhE?=
+ =?utf-8?B?N1BPMU5YNk1qSlVyT2pib00wdlJmUm9aNmg1ZHpyVkl5N1FMcGxuSk1nTE04?=
+ =?utf-8?B?TTB4cGI2WUhITzBnNWlOYW1jK1RTcUNKQnhzYkpLdDIwcEt6Um1FemgwbWV6?=
+ =?utf-8?B?ZHpCNlI1NzlweDdjbUhRSENqRW9PbVNnOFlOV2JCbU5BQWhTbDdJeE9PaDVy?=
+ =?utf-8?B?ZE9RZmxmaHNCemsybklTNWk4UlN4dTNpcEZ4WjZJZUtCeWM0KzI5T0V5Z05O?=
+ =?utf-8?B?NGVSTE0yTHY5TjR6cHJlY252SXpDdkJOTUQ4SEo2dnFYQUwzOVQ0aTRYbWNt?=
+ =?utf-8?B?M3RRSjhOQU1idzhBTUhZWXA2akRKM3l0b0MwZTlhS203RFcrTzdYTFlpelov?=
+ =?utf-8?B?VnZIYUZHellmdTh3bEQ2MGtiT1crL284VGpqMVZRcVMvM0dsaHJVYTFINktn?=
+ =?utf-8?B?MlFKVnQwaTlsTFRTZGFkblpNR2lRWnJ3MjAybDBtb3RjMDBNMkgwZm50WnpB?=
+ =?utf-8?B?V1pDdU95YkFoNFJuWWJYc1RQUmN1SXdTcDhCUXQ5SnQrcExhMXRqMFhBckxJ?=
+ =?utf-8?B?UDJGK3pJMGo0ZGtGTUhYbUVBZ01COTluRHpyOVFzOC9Ib3JCWnhNY29EUndH?=
+ =?utf-8?B?Sy9EMEdNb29Mb3o0NHpMQVRyZmxiMnVpZ3JOY0hseUVnaU96UUZtUmQ1R3Vt?=
+ =?utf-8?B?SUtnYzg0YllLRHB3aU9lNC9VcWFEMlhaQnFFTW81eGQzVmg4R1pHTExGdWl3?=
+ =?utf-8?B?QVFwZndZUFZibDRweXUyNTdJc1Bka2ZoQ1ptUHptaVFBczJLR1ZuSzBQei9B?=
+ =?utf-8?B?U2tsOWxBNXBuRWRiS000M25FQ0hmQ1lqY3lkSHJmVVRIQ1NxUmsxZnhjUW13?=
+ =?utf-8?B?aHR5cUdiSGovVXlVcnVNVnVWUWNkVHB3RkYyS2tWbEk5TVE5ZnkrdmxGSG5s?=
+ =?utf-8?B?OCtIcDZDV2ErN2dTMVJHNDR6dkMrTDAyTlVyVDE4dG44TmNyc3c5cVVUSkla?=
+ =?utf-8?B?aEUrWDczQ0czYzcwYmhPYjVwNFpiWVhHVkg1dm4rSVI2d0ZONkRWWk10QnNT?=
+ =?utf-8?Q?BIRGz2llG+6aKYgUk3RXCVP2ALzGu1EURWVAk17+jY9An?=
+X-MS-Exchange-AntiSpam-MessageData-1: 1plcL7dit4DY0A==
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: fd5c2461-d41b-4142-0b89-08defed3b937
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 15:57:23.3294 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: m5lqNMYlIjCAd9EOP5HF1FBVux4pIuD1DWFDdugo/zJEEFOIR++1Xh3coMnJBid+3mX/QSkYPW8auW55b88+vGPR2TCTOmunus9QWrN9djY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10489
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -90,193 +177,100 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This is a cryptographically signed message in MIME format.
+Hi Cole,
 
---------------ms010904090402000403090500
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On 8/20/26 5:26 PM, Cole Munz wrote:
+> The controller has a transfer-mode field that can run transmit-only or
+> receive-only instead of both, which leaves the unused FIFO out of the
+> transfer entirely. The driver never used it for that: claim_bus always
+> programmed TMOD_TR, and the only other mode came from an opportunistic
+> switch to TMOD_RO for read-only transfers.
+> 
+> A device described with spi-{tx,rx}-bus-width = <0> has no wire in that
+> direction at all, so now that the width reaches plat->mode as
+> SPI_NO_TX/SPI_NO_RX, pick the transfer mode from it. A write-only
+> display stops clocking receive bytes nobody reads.
+> 
+> The transmit-only case needs one more change. The 8-bit loop paces
+> itself on the receive FIFO and sets toread unconditionally, so with no
+> receive path it would wait on a FIFO that stays empty forever. Leave
+> toread at zero there and let the existing wait_till_not_busy() at the
+> end of the chunk handle completion, which is the same thing that
+> already covers a transmit component today.
+> 
+> The restore at the end of a read-only transfer went back to a hardcoded
+> TMOD_TR, which would undo the device's own mode. Restore what the mode
+> asks for instead.
+> 
+> Signed-off-by: Cole Munz <Munzzyy1@proton.me>
+> Tested-by: Alexey Charkov <alchark@flipper.net>
+> ---
+> Changes in v2: reworded the transfer mode comment in claim_bus, picked
+> up the Tested-by. No functional change since v1; compile check rerun:
+> 
+>    $ make jaguar-rk3588_defconfig
+>    $ make CROSS_COMPILE=aarch64-linux-gnu- drivers/spi/rk_spi.o
+>    CC      drivers/spi/rk_spi.o     (exit 0)
+> 
+>   drivers/spi/rk_spi.c | 27 +++++++++++++++++++++++----
+>   1 file changed, 23 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/spi/rk_spi.c b/drivers/spi/rk_spi.c
+> index 2c3d70ba7159..81785b5e949f 100644
+> --- a/drivers/spi/rk_spi.c
+> +++ b/drivers/spi/rk_spi.c
+> @@ -283,6 +283,20 @@ static int rockchip_spi_probe(struct udevice *bus)
+>   	return 0;
+>   }
+>   
+> +/*
+> + * A device that declares spi-{tx,rx}-bus-width = <0> has no wire in that
+> + * direction, so the controller can drop the matching FIFO entirely instead
+> + * of clocking bytes nobody reads.
+> + */
+> +static u32 rkspi_base_tmod(struct rockchip_spi_priv *priv)
+> +{
+> +	if (priv->mode & SPI_NO_RX)
+> +		return TMOD_TO;
+> +	if (priv->mode & SPI_NO_TX)
+> +		return TMOD_RO;
+> +	return TMOD_TR;
+> +}
+> +
+>   static int rockchip_spi_claim_bus(struct udevice *dev)
+>   {
+>   	struct udevice *bus = dev->parent;
+> @@ -329,8 +343,8 @@ static int rockchip_spi_claim_bus(struct udevice *dev)
+>   	/* Frame Format */
+>   	ctrlr0 |= FRF_SPI << FRF_SHIFT;
+>   
+> -	/* Tx and Rx mode */
+> -	ctrlr0 |= TMOD_TR << TMOD_SHIFT;
+> +	/* Configure RX/TX mode */
+> +	ctrlr0 |= rkspi_base_tmod(priv) << TMOD_SHIFT;
+>   
+>   	writel(ctrlr0, &regs->ctrlr0);
+>   
+> @@ -472,7 +486,12 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
+>   		writel(todo - 1, &regs->ctrlr1);
+>   		rkspi_enable_chip(regs, true);
+>   
+> -		toread = todo;
+> +		/*
+> +		 * In transmit-only mode the RX FIFO never fills, so waiting
+> +		 * on it would hang. Completion is handled by the
+> +		 * wait_till_not_busy() below instead.
+> +		 */
 
-SSdtIHRyeWluZyB0byBuZXRib290IGEgUmFzcGJlcnJ5IFBpIDQgQiBhbmQgdXNlIHRoZSBV
-LUJvb3QgcHhlIGJvb3RmbG93IA0KdG8gYnJpbmcgdXAgYSBOaXhPUyBzeXN0ZW0gKHVzaW5n
-IHRoZSBleHRsaW51eC5jb25mIGZpbGUgY3JlYXRlZCBieSBOaXhPUykuDQpXaGVuIEkgZG8g
-dGhhdCB0aGUgVS1Cb290IERIQ1AgcHJvY2VzcyByZXRyaWVzIG11bHRpcGxlIHRpbWVzIHRv
-IGdldCBhbiANCklQIGFuZCBzb21ldGltZXMgcnVubmluZyBvdXQgb2YgcmV0cmllcy4gVGhl
-IFRGVFAgdHJhbnNmZXJzIGFmdGVyd2FyZHMgDQpzaG93IG1hbnkgdGltZW91dHMgKFQpLg0K
-SSB0cmllZCB0byBib290IHRoZSBzYW1lIGZpcm13YXJlIGZpbGVzIGFuZCBVLUJvb3QgYmlu
-YXJ5IGZyb20gdGhlIFNEIA0KY2FyZCBhbmQgdGhlbiB0aGUgcHhlIGJvb3RmbG93IHdvcmtz
-IHdpdGhvdXQgcHJvYmxlbXMuDQpFdmVyeSB0aW1lIHRoZSBkaGNwIGZhaWxzIG9yIHRoZSB0
-ZnRwIHRpbWVvdXQgb2NjdXJzLCBJIGNhbiBzZWUgdGhlIGNyYyANCmVycm9yIGNvdW50ZXIg
-b24gdGhlIHN3aXRjaCBwb3J0IGluY3JlYXNlLg0KDQpJIHN1c3BlY3QsIHRoYXQgdGhlIGZp
-cm13YXJlIGxlYXZlcyB0aGUgbmV0d29yayBwZXJpcGhlcmFscyBpbiBzb21lIA0Kc3RhdGUg
-dGhhdCBpcyBub3QgY29tcGxldGVseSByZXNldC9pbml0aWFsaXplZCBieSB1LWJvb3QuDQoN
-CkkgdHJpZWQgdG8gZGVidWcgaXQgd2l0aCBRd2VuIEFJIDMuOCBhbmQgYWN0dWFsbHkgZ290
-IGEgc2VlbWluZ2x5IA0Kd29ya2luZyBwYXRjaC4gT2J2aW91c2x5IEknbSBub3QgY29uZmlk
-ZW50IHRoaXMgaXMgdGhlIGNvcnJlY3QgZml4Lg0KDQovcHJvYy9jcHVpbmZvOg0KUmV2aXNp
-b27CoCDCoCA6IGMwMzExNA0KU2VyaWFswqAgwqAgwqAgwqAgOiAxMDAwMDAwMDU3YzkwYzFk
-DQpNb2RlbMKgIMKgIMKgIMKgIDogUmFzcGJlcnJ5IFBpIDQgTW9kZWwgQiBSZXYgMS40DQoN
-CnZjZ2VuY21kIHZlcnNpb246DQpNYXkgMjEgMjAyNiAxMToyMDoyNQ0KQ29weXJpZ2h0IChj
-KSAyMDEyIEJyb2FkY29tDQp2ZXJzaW9uIDI4ODkzMGFiNDcxMmI5OTU5NmYzMjczMjY2NGFh
-YWViODgxZWYxZTAgKGNsZWFuKSAocmVsZWFzZSkgKHN0YXJ0KQ0KDQpycGktZWVwcm9tLXVw
-ZGF0ZToNCkJPT1RMT0FERVI6IHVwIHRvIGRhdGUNCiDCoCDCoENVUlJFTlQ6IFNvIDE3LiBN
-YWkgMTk6MTM6MTggVVRDIDIwMjYgKDE3NzkwNDUxOTgpDQogwqAgwqAgTEFURVNUOiBGciA5
-LiBKYW4gMTY6MTI6MTMgVVRDIDIwMjYgKDE3Njc5NzUxMzMpDQogwqAgwqBSRUxFQVNFOiBk
-ZWZhdWx0IA0KKC9uaXgvc3RvcmUvMGE2djh3MzhwbjZnZmFneWM1ZjBjenowamhocXB6NDAt
-cmFzcGJlcnJ5cGktZWVwcm9tLTIwMjYuMDUuMTEtMjcxMi9saWIvZmlybXdhcmUvcmFzcGJl
-cnJ5cGkvYm9vdGxvYWRlci0yNzExL2RlZmF1bHQpDQogwqAgwqAgwqAgwqAgwqAgwqAgVXNl
-IHJhc3BpLWNvbmZpZyB0byBjaGFuZ2UgdGhlIHJlbGVhc2UuDQoNCiDCoCBWTDgwNV9GVzog
-VXNpbmcgYm9vdGxvYWRlciBFRVBST00NCiDCoCDCoCDCoFZMODA1OiB1cCB0byBkYXRlDQog
-wqAgwqBDVVJSRU5UOiAwMDAxMzhjMA0KIMKgIMKgIExBVEVTVDogMDAwMTM4YzANCg0KcnBp
-LWVlcHJvbS1jb25maWc6DQpbYWxsXQ0KQk9PVF9VQVJUPTANCldBS0VfT05fR1BJTz0xDQpF
-TkFCTEVfU0VMRl9VUERBVEU9MQ0KQk9PVF9PUkRFUj0weGYyMQ0KTkVUX0lOU1RBTExfQVRf
-UE9XRVJfT049MQ0KDQp1LWJvb3QgbWFzdGVyIChlY2UzNDlhZGUyOTczZTIyMGY1MjRjZTU5
-ZTU5NzExY2M5MTkyNjNmKToNCm1ha2UgcnBpX2FybTY0X2RlZmNvbmZpZw0KDQpBZGRpdGlv
-bmFsIGNvbmZpZ3M6DQpDT05GSUdfQ01EX01JST15DQpDT05GSUdfQk9PVFNURF9GVUxMPXkN
-Cg0KQ09ORklHX1VTRV9CT09UQ09NTUFORD15DQpDT05GSUdfQk9PVENPTU1BTkQ9ImJvb3Rm
-bG93IHNjYW4gLWxiIHB4ZSINCg0KQ09ORklHX0xPRz15DQpDT05GSUdfTE9HX01BWF9MRVZF
-TD03DQpDT05GSUdfTE9HX0NPTlNPTEU9eQ0KDQoNCkR1cmluZyB0aGUgZGVidWdnaW5nLCBR
-d2VuIHRvbGQgbWUgdG8gdHJ5IHRoZSBmb2xsb3dpbmcgbWFudWFsIHJlc2V0IG9mIA0KdGhl
-IFBIWSBhZnRlciB0aGUgZmlybXdhcmUgc3RhcnRlZCB1LWJvb3QgYW5kIGJlZm9yZSBydW5u
-aW5nIHRoZSBib290ZmxvdzoNCm1paSB3cml0ZSAxIDAgMHg4MDAwwqAgwqAgwqAgwqAgIyBQ
-SFkgc29mdCByZXNldA0KbWlpIHJlYWTCoCAxIDDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCAjIHJlcGVhdCB1bnRpbCBiaXQxNSBjbGVhcnMgKFBIWSANCnJlc2V0IGRvbmUp
-DQoxMTQwDQptaWkgd3JpdGUgMSA0IDB4MDFFMcKgIMKgIMKgIMKgICMgYWR2ZXJ0aXNlIDEw
-LzEwMCBGK0gsIHBhdXNlIChrbm93bi1nb29kIHZhbHVlKQ0KbWlpIHdyaXRlIDEgOSAweDAz
-MDDCoCDCoCDCoCDCoCAjIDEwMDBUIGNhcA0KbWlpIHdyaXRlIDEgMCAweDEyMDDCoCDCoCDC
-oCDCoCAjIEFOIGVuYWJsZSArIEFOIHJlc3RhcnQNCm1paSByZWFkwqAgMSAxwqAgwqAgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgIyBleHBlY3QgMHg3OTZEIChsaW5rIHVwKSBhZnRl
-ciB+MiBzDQo3OTQ5DQoNCkFmdGVyd2FyZHMgdGhlIGJvb3RmbG93IHdvcmtlZCB3aXRob3V0
-IHByb2JsZW1zLg0KDQpJdCBhZGRlZCB0aGUgZm9sbG93aW5nIHBhdGNoIHdoaWNoIHNlZW1z
-IHRvIGZpeCB0aGUgcHJvYmxlbXM6DQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvYmNtZ2Vu
-ZXQuYyBiL2RyaXZlcnMvbmV0L2JjbWdlbmV0LmMNCmluZGV4IGEwMjY0ZGMzODZkLi4xYzg2
-N2U2MWRkMiAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvbmV0L2JjbWdlbmV0LmMNCisrKyBiL2Ry
-aXZlcnMvbmV0L2JjbWdlbmV0LmMNCkBAIC02MDEsNiArNjAxLDMwIEBAIHN0YXRpYyBpbnQg
-YmNtZ2VuZXRfbWRpb19pbml0KGNvbnN0IGNoYXIgKm5hbWUsIA0Kc3RydWN0IHVkZXZpY2Ug
-KnByaXYpDQogwqAgwqAgwqByZXR1cm4gbWRpb19yZWdpc3RlcihidXMpOw0KIMKgfQ0KDQor
-c3RhdGljIGludCBiY21nZW5ldF9waHlfc29mdF9yZXNldChzdHJ1Y3QgYmNtZ2VuZXRfZXRo
-X3ByaXYgKnByaXYpDQorew0KK8KgIMKgIGludCB2YWw7DQorwqAgwqAgaW50IHRpbWVvdXQg
-PSAxMDA7IC8qIG1zICovDQorDQorwqAgwqAgLyogRmlybXdhcmUgbWF5IGxlYXZlIHRoZSBp
-bnRlcm5hbCBHUEhZIGluIGEgc3RhdGUgd2hlcmUgTURJTw0KK8KgIMKgIMKgKiBhdXRvLW5l
-Z290aWF0aW9uIHdvcmtzIGJ1dCB0aGUgUkdNSUkgZGF0YSBwYXRoIGNvcnJ1cHRzIGZyYW1l
-cywNCivCoCDCoCDCoCogc28gZm9yY2UgdGhlIFBIWSBiYWNrIHRvIGl0cyBkZWZhdWx0cyBi
-ZWZvcmUgYXR0YWNoaW5nIHRvIGl0LiAqLw0KK8KgIMKgIGlmIChiY21nZW5ldF9tZGlvX3dy
-aXRlKHByaXYtPmJ1cywgcHJpdi0+cGh5YWRkciwgMCwgTUlJX0JNQ1IsIA0KQklUKDE1KSkp
-DQorwqAgwqAgwqAgwqAgcmV0dXJuIC1FSU87DQorDQorwqAgwqAgZG8gew0KK8KgIMKgIMKg
-IMKgIHVkZWxheSgxMDAwKTsNCivCoCDCoCDCoCDCoCB2YWwgPSBiY21nZW5ldF9tZGlvX3Jl
-YWQocHJpdi0+YnVzLCBwcml2LT5waHlhZGRyLCAwLCBNSUlfQk1DUik7DQorwqAgwqAgwqAg
-wqAgaWYgKHZhbCA8IDApDQorwqAgwqAgwqAgwqAgwqAgwqAgcmV0dXJuIHZhbDsNCivCoCDC
-oCB9IHdoaWxlICgodmFsICYgQklUKDE1KSkgJiYgLS10aW1lb3V0KTsNCisNCivCoCDCoCBp
-ZiAoIXRpbWVvdXQpDQorwqAgwqAgwqAgwqAgcmV0dXJuIC1FVElNRURPVVQ7DQorDQorwqAg
-wqAgcmV0dXJuIDA7DQorfQ0KKw0KIMKgLyogV2Ugb25seSBzdXBwb3J0IFJHTUlJIChhcyB1
-c2VkIG9uIHRoZSBSUGk0KS4gKi8NCiDCoHN0YXRpYyBpbnQgYmNtZ2VuZXRfaW50ZXJmYWNl
-X3NldChzdHJ1Y3QgYmNtZ2VuZXRfZXRoX3ByaXYgKnByaXYpDQogwqB7DQpAQCAtNjY1LDYg
-KzY4OSwxMiBAQCBzdGF0aWMgaW50IGJjbWdlbmV0X2V0aF9wcm9iZShzdHJ1Y3QgdWRldmlj
-ZSAqZGV2KQ0KIMKgIMKgIMKgIMKgIMKgcmV0dXJuIHJldDsNCg0KIMKgIMKgIMKgcHJpdi0+
-YnVzID0gbWlpcGh5X2dldF9kZXZfYnlfbmFtZShuYW1lKTsNCivCoCDCoCBpZiAoIXByaXYt
-PmJ1cykNCivCoCDCoCDCoCDCoCByZXR1cm4gLUVOT0RFVjsNCisNCivCoCDCoCByZXQgPSBi
-Y21nZW5ldF9waHlfc29mdF9yZXNldChwcml2KTsNCivCoCDCoCBpZiAocmV0KQ0KK8KgIMKg
-IMKgIMKgIHJldHVybiByZXQ7DQoNCiDCoCDCoCDCoHJldHVybiBiY21nZW5ldF9waHlfaW5p
-dChwcml2LCBkZXYpOw0KIMKgfQ0KDQpJdHMgZXhwbGFuYXRpb246DQpUaGUgQnJvYWRjb20g
-bGVnYWN5IGZpcm13YXJlIHBlcmZvcm1zIGl0cyBvd24gREhDUC9URlRQIG92ZXIgdGhlIHNh
-bWUgDQpHRU5FVCBiZWZvcmUgbG9hZGluZyBVLUJvb3QsIHRoZW4gc2h1dHMgdGhlIE1BQy9Q
-RCBkb3duIGFuZCBoYW5kcyBvZmYgDQp3aXRob3V0IHJlLWluaXRpYWxpc2luZyB0aGUgZW1i
-ZWRkZWQgR1BIWS4gQXQgaGFuZC1vZmYgdGhlDQpHUEhZJ3MgTURJTyByZWdpc3RlciBmaWxl
-IGFuZCBJRUVFIGF1dG8tbmVnb3RpYXRpb24gc3RpbGwgZnVuY3Rpb24sIHNvIA0KVS1Cb290
-J3MgZ2VuZXJpYyBQSFkgbWFjaGluZXJ5IGJyaW5ncyB0aGUgbGluayB1cCBjbGVhbmx5IOKA
-lCBidXQgdGhlIA0KUkdNSUkvUE1BIGRhdGEgcGF0aCBpcyBsZWZ0IGluIGEgZmlybXdhcmUt
-ZXJhIHN0YXRlIHRoYXQgY29ycnVwdHMNCmZyYW1lcyBvbiB0aGUgd2lyZSAoYmFkIEZDUywg
-dmlzaWJsZSBvbmx5IGFzIHRoZSBzd2l0Y2gncyByZWNlaXZlIENSQyANCmVycm9ycyB1bmRl
-ciBsb2FkKS4NCg0KVHdvIGZhY3RzIHN1cHBvcnQgdGhpcyBiZWluZyBhbiBpbml0aWFsaXNh
-dGlvbi1taXNzaW5nIHByb2JsZW0gcmF0aGVyIA0KdGhhbiBhIGRyaXZlciBidWcgaW4gdGhl
-IG5vcm1hbCBwYXRoOg0KDQotIFRoZSBpZGVudGljYWwgYmluYXJ5IGlzIHN0YWJsZSB3aGVu
-IGJvb3RpbmcgZnJvbSBTRCwgaS5lLiB3aGVuIHRoZSANCmZpcm13YXJlIG5ldmVyIHVzZWQg
-dGhlIG5ldHdvcmsgKGEgY2xlYW4sIGRlZmF1bHQtbGlrZSBHUEhZIHN0YXRlIA0KcmVhY2hl
-cyBVLUJvb3QpLg0KLSBBIHNpbmdsZSBQSFkgc29mdC1yZXNldCBhdCBmaXJzdCB1c2UgZnVs
-bHkgY3VyZXMgaXQ7IHRoZXJlIGlzIG5vIG90aGVyIA0Kc3RhdGUgZGlmZmVyZW5jZSBiZXR3
-ZWVuIHRoZSB0d28gcGF0aHMgdGhhdCB3YXMgZm91bmQgDQooc3BlZWQvZHVwbGV4L2FkdmVy
-dGlzZSBzZXR0aW5ncyBhcmUgaWRlbnRpY2FsIG9uY2UgbGluayBpcyB1cCkuDQoNCg0KDQpJ
-ZiB5b3UgbmVlZCBtb3JlIGluZm9ybWF0aW9uIG9yIHNvbWUgcmVnaXN0ZXIgdmFsdWVzLCBJ
-IGNhbiBwcm92aWRlIHRoZW0uDQoNCi0tIA0KQW5kcsOpIEFsdGhhdXMNClRVIERvcnRtdW5k
-L0RFTFRBL0Jlc2NobGV1bmlnZXJwaHlzaWsNCk1hcmlhLUdvZXBwZXJ0LU1heWVyLVN0ci4g
-MmENCkQtNDQyMjEgRG9ydG11bmQNClRlbC46IDAyMzEgNzU1IDU0ODgNCg0K
+I got confused by the wording here. Can I suggest:
 
---------------ms010904090402000403090500
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
+/* When RX wire is not routed, the RX FIFO can never fill, so waiting on 
+it would hang. */
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-C6wwggVgMIIDyKADAgECAhAyEt9rKOAjKH3jCZM+23iLMA0GCSqGSIb3DQEBCwUAMGMxCzAJ
-BgNVBAYTAkdSMTcwNQYDVQQKDC5IZWxsZW5pYyBBY2FkZW1pYyBhbmQgUmVzZWFyY2ggSW5z
-dGl0dXRpb25zIENBMRswGQYDVQQDDBJHRUFOVCBTL01JTUUgUlNBIDEwHhcNMjUwNjEwMDgx
-NzU5WhcNMjcwNjEwMDgxNzU5WjAtMSswKQYJKoZIhvcNAQkBFhxhbmRyZS5hbHRoYXVzQHR1
-LWRvcnRtdW5kLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4pqo43YSc3ty
-XKupACKwwbUB/zT6+5OczW6WCRayC8ygrIjaNULC2C7ZZpCiwGQxSPeOfoXoZOZEaqhND139
-H0f/9Knt5nfTK6LKYcVw0nEu0FAKyScKj+tZnTPzSDO2EP7+H93LHKfTSzJSR2Xq1zGcHfyG
-lmKN/hnKK1xko1CBgIbi4YmqBZbO8JNQQ2FUFcoV35IGu4/HkROzcby9YecnT37lGMGnXsDV
-7hwyrTz2RBdWWrizyZqpLm9WhJgJLWQPp5uYTaUs6UEO6ByihmH5D4zrDIO6ZxTkajD4Uk3q
-LbP0NTTxUzeDrOzkIB8PguQbpcmGcyTH5zrtC69SVwIDAQABo4IBxDCCAcAwHwYDVR0jBBgw
-FoAU67IvO/2uAswqRAZdJc0dEiJosEcwSgYIKwYBBQUHAQEEPjA8MDoGCCsGAQUFBzAChi5o
-dHRwOi8vY3J0LmhhcmljYS5nci9IQVJJQ0EtR0VBTlQtU01JTUUtUjEuY2VyMF0GA1UdEQRW
-MFSBHGFuZHJlLmFsdGhhdXNAdHUtZG9ydG11bmQuZGWBHWFuZHJlLmFsdGhhdXNAdW5pLWRv
-cnRtdW5kLmRlgRVhbmRyZS5hbHRoYXVzQHVkby5lZHUwYwYDVR0gBFwwWjAJBgdngQwBBQEC
-MAgGBgQAj3oBAzBDBg0rBgEEAYHPEQEBAgECMDIwMAYIKwYBBQUHAgEWJGh0dHBzOi8vcmVw
-by5oYXJpY2EuZ3IvZG9jdW1lbnRzL0NQUzAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUH
-AwQwPwYDVR0fBDgwNjA0oDKgMIYuaHR0cDovL2NybC5oYXJpY2EuZ3IvSEFSSUNBLUdFQU5U
-LVNNSU1FLVIxLmNybDAdBgNVHQ4EFgQUPCv1Yq79w7k5oLSorLTkLojYBm4wDgYDVR0PAQH/
-BAQDAgWgMA0GCSqGSIb3DQEBCwUAA4IBgQBOjBEj+JDtxq9fN9uMpY6wGiW5dgctp84AKhPs
-lWO4yZW/r9+IFKlDpNINbnZDtHmQNNn+tCh3ncndwKE3FMAuKdvZ5SWYSoYl45ImaYfn+WpR
-my/F1WhiLvhTQ5zVW04Jf+lfQlEa2rY/pUM57SGpX+/JTnfQGf3ldQywS8r+PSBU3jEKeMc8
-eYFh2khEDS/9DCX6o0SL878GNqtP3UMX+mGkcWj1BR7wMgMhxcAvTJ09HJQJb6rZKADAkuiZ
-KcKdGfREe17uXywUFiHR2DhZH6zDvzdjk3FYKHYPuIcoTQBsb9se9a7jfoxF8+/WFaa6NIhZ
-z1PIPcpEY5azOFaf/UoM+6owTyIyORSdw/8taS7JuHkk+W/wK1kZb8Z+dsS2QwK4lGpjSyxV
-/2mePUrHIFTHMVftTuSny/sucGVgVwCGf3S7lZ4iQZ39ylv45abvBRPXTgDYR+80RnqDE0TZ
-fbXQWMAQRvRf2A5yavNhWAhzJVA7pKIuC/EVmkms4uUwggZEMIIELKADAgECAhAV+a5sqo0u
-1NNveH8e3HsBMA0GCSqGSIb3DQEBCwUAMG8xCzAJBgNVBAYTAkdSMTcwNQYDVQQKDC5IZWxs
-ZW5pYyBBY2FkZW1pYyBhbmQgUmVzZWFyY2ggSW5zdGl0dXRpb25zIENBMScwJQYDVQQDDB5I
-QVJJQ0EgQ2xpZW50IFJTQSBSb290IENBIDIwMjEwHhcNMjUwMTAzMTExMzA4WhcNMzkxMjMx
-MTExMzA3WjBjMQswCQYDVQQGEwJHUjE3MDUGA1UECgwuSGVsbGVuaWMgQWNhZGVtaWMgYW5k
-IFJlc2VhcmNoIEluc3RpdHV0aW9ucyBDQTEbMBkGA1UEAwwSR0VBTlQgUy9NSU1FIFJTQSAx
-MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAq7hur/5vIqMejblfPfZgGY75auSZ
-z5SZ9x1dIIjvJrDBT0lIwQcAAoABJomkuv0kDK362UH+uf9JrOdLBjiKkEh99HQPmT+d1+Ij
-nnd1aAjiL+2Q4aU16P/snITYJL2ROU46zqmDkdoOnCqMCEKSN74gHKDmApYfqXO8wmjmNA62
-wYHarp7lxgrBr0sk4BxHyKq52z0sWyxsdIy5V1K5OOkCNwYupZ9b74LRhelYP5SieNDqU0S6
-IpQOasVz5IS0vDnqVi2ni67Gbgtb8dBKzH6gbAwGppHoeEFDcvJ042Oxtxt6BGolkUmguyfA
-geisRqDjhQi+NfNgkDH81OLBV0eV07twS9axwNvJAtH2SgGiWKrYeuBgVCzs1DFT7sws1KHy
-LrOdZU0hJQSDfoz/8jwFmXhWoPvQQuWEoo3uvH6LsHAo53aDF1aAUmGQ/JC72j7zZH16leJF
-uWj+t2TK/7YEVHtWluA9TOdx2Lz/SHh0/+pAVicD4N/QUWPuBhzPAgMBAAGjggFmMIIBYjAS
-BgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFKDWBz1eJPd7oEQuJFINGaorBJGnMFAG
-CCsGAQUFBwEBBEQwQjBABggrBgEFBQcwAoY0aHR0cDovL2NydC5oYXJpY2EuZ3IvSEFSSUNB
-LUNsaWVudC1Sb290LTIwMjEtUlNBLmNlcjBEBgNVHSAEPTA7MDkGBFUdIAAwMTAvBggrBgEF
-BQcCARYjaHR0cDovL3JlcG8uaGFyaWNhLmdyL2RvY3VtZW50cy9DUFMwHQYDVR0lBBYwFAYI
-KwYBBQUHAwIGCCsGAQUFBwMEMEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwuaGFyaWNh
-LmdyL0hBUklDQS1DbGllbnQtUm9vdC0yMDIxLVJTQS5jcmwwHQYDVR0OBBYEFOuyLzv9rgLM
-KkQGXSXNHRIiaLBHMA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAgEAO964Rfbc
-PCuTKAq2wXsOZxMaaLxITbSOYkt7RMxPw3CzU2qmkTQALKbVqC1jUiNQWbkxZpsb8hy9FOHy
-wH1xFmANAypks0Iuh+ovhqP90oFcfhvAfYxV2M0cGga9mTKFHP+QET7HW9pZdyWFZAw5fmdW
-9Ex+IQmJii0w/sozzwhpVn0OQYkkRV+2ydRa68JZS2NqAPpdaWoseM2X4u5+Jn+H2UO9paob
-X+ht91K2Ch8xzfREv4RLqBgpHBmkIDVygXNdXsKfDHy2hOXxtF6oI1d7ErPGWoBxFc86aUqQ
-lC6pEjb3ug24w+eg1kJj7IufHJ3iRm67Rdw5M1OlWMzxu+DwAKqFJhqes0OL/NOJOTuDCb0b
-IfVfjl8U0Y0QWCkhoCmNPZQQu6QM6Y/XxnALgRB4drA8kip98wSZQmbqptE8oac2ZzLKCHiJ
-lTdBuREsundnpBXdahMSrJ/mYv2pMZLpYkbrkvyhorDVeH9t0a5UgPIFqGl8/ZzakJ3RQfr7
-HvdGur0YWU6KNWvY5BK8qHMRM0b3XtK9xREIGEychAVReodDIhjrR4fWmjpa006r/UrmSk4b
-pKrVFVzTYsSK3jy4ri1ExVQp6RI6Ou4ZdbfwOYCuI9wweMjpVBuqNzRKrVU/Pvp57gUzm4u+
-JJRkdioMOoxZrwsUiYr2KIojwTcxggORMIIDjQIBATB3MGMxCzAJBgNVBAYTAkdSMTcwNQYD
-VQQKDC5IZWxsZW5pYyBBY2FkZW1pYyBhbmQgUmVzZWFyY2ggSW5zdGl0dXRpb25zIENBMRsw
-GQYDVQQDDBJHRUFOVCBTL01JTUUgUlNBIDECEDIS32so4CMofeMJkz7beIswDQYJYIZIAWUD
-BAIBBQCgggHrMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2
-MDgyMDE0MzUyNlowLwYJKoZIhvcNAQkEMSIEICxsjlcuhvmoAPVrxVUVL7VNhLRxOsyOMcKi
-8ZYp/+8KMIIBfgYJKoZIhvcNAQkPMYIBbzCCAWswCwYJYIZIAWUDBAEuMAsGCWCGSAFlAwQB
-GjALBglghkgBZQMEAQYwCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzAN
-BggqhkiG9w0DAgIBBTANBggqhkiG9w0DAgIBBTAHBgUrDgMCBzANBggqhkiG9w0DAgIBBTAH
-BgUrDgMCGjALBglghkgBZQMEAgEwCwYJYIZIAWUDBAICMAsGCWCGSAFlAwQCAzALBglghkgB
-ZQMEAgQwCwYJYIZIAWUDBAIHMAsGCWCGSAFlAwQCCDALBglghkgBZQMEAgkwCwYJYIZIAWUD
-BAIKMAsGCSqGSIb3DQEBATALBgkrgQUQhkg/AAIwCAYGK4EEAQsAMAgGBiuBBAELATAIBgYr
-gQQBCwIwCAYGK4EEAQsDMAsGCSuBBRCGSD8AAzAIBgYrgQQBDgAwCAYGK4EEAQ4BMAgGBiuB
-BAEOAjAIBgYrgQQBDgMwDQYJKoZIhvcNAQEBBQAEggEA1GMx+/3furQb0V1QCqzVL79B1Hcr
-y1H47NHkobTbOiDlFkNm5OSaNPdZGu6JL+J0dPpuvUlzGsIRJ/o4VzfGvK3H2bd+WKREs96N
-Bbii8Lxt8BKo4lESJ0lxeZ2BJwWUvG/0xwich+Pjw/u1nx2T/40DeR6s/X0NH2VnJilwXlF4
-GGwWeks+OPUur93Q80kgvbcy2550Am+Tp9Zu3qitcmRrBwrOIDiQeJMixsTxx0kWtL9JcPtP
-GfTuzuMtuABOrNRmtMkptA4Wy9ilf3dAQPi8BgVptIm7SLYxI4qdSA+lPV1Je3GE406fOu5g
-kPKTa3zTC6wYQgRgN5KRgp7ZqAAAAAAAAA==
---------------ms010904090402000403090500--
+I don't understand the context for the second sentence though, we are 
+always waiting until not busy, if there's something to transmit, it 
+doesn't have anything to do with the RX path does it? What am I missing 
+here?
+
+Cheers,
+Quentin
