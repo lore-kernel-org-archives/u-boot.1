@@ -4,119 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A86D0C5DF81
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6166EC5DF81
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 12:12:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C12306078D;
-	Thu, 20 Aug 2026 12:12:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1F97360782;
+	Thu, 20 Aug 2026 12:12:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bd-SGL203p8j; Thu, 20 Aug 2026 12:12:27 +0000 (UTC)
+ id jvwitRv9mXu7; Thu, 20 Aug 2026 12:12:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787227947;
-	bh=9dwpj23bS9OuT0ux/TqLqzYQdlBtRS2mAyOTSnmw8MY=;
+	d=lists.u-boot-project.org; s=default; t=1787227956;
+	bh=/FcQic8K9lRBPBgyBEE25Ogb8V8F7dKR4nmNenHdfL4=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vLAdbExV9DxKo6eS/kdkZogX/kjkbVti3JQyvY9H6QGjJphPkrxOPxDsSDsXGx2ZI
-	 RLmkBs082UNugHAtkyjYEM1HrwCdatEuTP7C6W1/iSmhxIEMt2POu5NBDnkQeJW8ez
-	 rnTuhp2ag07U4HCREZRZ1qLf54IMq4c+vCyZV2GDI16+gyc2y5DDqJU8Eum/rQ8ynz
-	 0BeDrejyaRtxeBDKJxW2S/D/TNQWBzbhxafzVWQx0IzMiibFelTokmdFTUnjRItwYA
-	 QwcJU0ESZttyMHxtoFc4O4DmskVo0aZT1I1dRyRxSTCYs5vFGGroLrhb8zDTotSTKy
-	 DGAxxtOLhr6iA==
+	b=MPbSRClZb2EEsjruZJzwRZh7KKODYRD4VzSlppqaS6q6WxkjILPXAP4b3rbMg6Kfc
+	 kOT6bmfXKQ/l5Wqs4QOSjhp0gQxbAXWaxWZ3QwNbxXfsvWtMYECfGeaKE1vwAkyua2
+	 zUfNeM6ejYqSQ63C2harNv04TANo3RayND7nJw0s9MJZpEndxu3/rasE+98c6p9oVG
+	 NAB7ZRvAMw97agJz/2i+xDAg9C+/MDdAZrcPic9q2cmVtWJKxP4oYICrHJMsKayUWy
+	 jpOUxvrBtD9d1r9pBaa6xQqRIyWmeyi+edarXfJRifu116ojmMFsnf/5ngFm0Bhfzi
+	 OB0St1n0aNJQA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 37EAE6076A;
-	Thu, 20 Aug 2026 12:12:27 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2242129D
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:12:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4D9616077C;
+	Thu, 20 Aug 2026 12:12:36 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 714D023F
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:12:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 07C6180CC8
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:12:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 63B3440291
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:12:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oNF0vLbP34Dw for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 12:12:25 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eTmn8GZ8Jpro for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 12:12:34 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62b; helo=mail-ej1-x62b.google.com;
+ client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=HT5eHxoT
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 09CC480CBD
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:12:23 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-c1670dad7a8so363555066b.3
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:12:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787227941; cv=none;
+ header.s=google header.b=NomiJw4B
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 646DF402A8
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:12:33 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c2074710751so367574866b.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:12:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787227952; cv=none;
  d=google.com; s=arc-20260327;
- b=kBplxpEP2dgMfi6WMXVj7Fa3XFWL6b8uGq5Sy7Fpe0/mofsaYJL3aykdv0X4DJoVXQ
- +xtWP3N6MCpnhwi8sAQfItP+FLoIbfHXXJBnQIwhE9oXxjSXRw0amEFyuXgqQMk9+tP0
- I+DBxlVQC3G9I6GdJMFOOMRTc5OmDMKtqE9OZae+Nxxaz+FkCBVs2w+WSwnhGfBqlbwx
- waggQxATNGHHksvzYNHVyizOdc5/qZzg1PRhivEjx+KDVZGaso9xBPwNIRGtEaKPRRHq
- DTatnWq53kHF6PO/6D+Mns9jyDguJ79NHDpBSdoqig7nbxz2HLJ0hvFTKsVgdjjicH3d
- Y8xA==
+ b=Nw7gDJ9vKvAMQme023yfTlre16zh0jQbsWIdq0W1kxGaQaf4VeDvO2R9xL6QTdBMfQ
+ /kLQXH9YdOqkhcssCQUvIVMErt8k+n8spXXPNYAr9BDpLAxUm35LQ07MHCqZOsV87v+c
+ WfCAQOH/zZhRALBKhOjFwN6OvNNnF2jdNKtrGmBbJRd0DwjVFa0pBUZVyY7IkLiIX9CE
+ zylXSpbdY/SaLAHSAmXJAwbfln/ZrqUXlIBvHJBqcTwidR5zzPxbZjSj0eChgANvBKG4
+ hjtfb26ruBPNl3w3/isCUzqI0mbxoOju9PwIk+d4lOG9teTST5Aa32+CjXjWc40DrRmS
+ 4Wjg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9dwpj23bS9OuT0ux/TqLqzYQdlBtRS2mAyOTSnmw8MY=;
+ bh=/FcQic8K9lRBPBgyBEE25Ogb8V8F7dKR4nmNenHdfL4=;
  fh=Bwjok4jWsPwFzEPPOJOguv26ANoKPtuv9PCfDq8ap3w=;
- b=WDgGssZ3ZBGvB4xJFVv27xO49pigEaBXsnTDN9qW5HmPypsFdigVAhFwTKB1dAQ9aV
- jvpHK1FborZF/YWMPhCjDdGvewZ7zFGuSRzchDJJpjSHJB94xbAOBnCsCL/JaaJEuCXk
- F120my6i2KnbCjFm3tIKo7rqFSP1XMbK42KBdx2xDTYrA9J3GA8kx/pO0Asf/mODfEdA
- YOrIjjdIV2nflxUatZKqCkYgh5SZ7JoX9SLnsjbREkDZtd7RgAjacxJ6aqOn7EZtvarX
- PD0R6G1ljh3nqgOqGBTaDihJZlIR1gjAR+yI/w9ZXJBiogK+XEeTJlHc3m97aGQVmi8X
- r/6A==; darn=lists.u-boot-project.org
+ b=BhyvaO8oQgjadhVOPSX6XnDKoO+U+Yb8oTzGKPv0utAD0cwZaMxHcFzm6qJclWjk3t
+ bvXXxzDfEIvdSUs3N9AoGBeQDcTZQF2VFTlyu7JgZckLAK4ta3hPrT5TFkuNmQFGPac4
+ 2Tc9aZb2/BxQhVHuYP6w41DclEfq8e/y+AEtHlNBQeoCTWAMRtQeGEtL4Ty1Jx9KwE4g
+ lviEsiuWA1/jR3H1M1SVxseg2Yd++601LDxM6E2GZ17Qg2tnKuG1QxBET4uo7OVGvkuj
+ AKcrSsMB6zVbDGIFxdcxe/eU6Z9YFjWDf9MXbw1Nk87nXlVdpTeYuju3kzzNoFkHpu8S
+ ASWw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1787227941; x=1787832741;
+ d=chromium.org; s=google; t=1787227952; x=1787832752;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=9dwpj23bS9OuT0ux/TqLqzYQdlBtRS2mAyOTSnmw8MY=;
- b=HT5eHxoTkoOeg9TGEWEUlgrJbtGzHXfPexlBuK1dI6Az/UMUeuKO3JOOXlWPAVbN9b
- r4gJl5MGEcCIFwuKCkcQr+fXWcBFSJobSnWHTtcdU3fcK7tTVRI7EERvzLj5Mjq8lSwc
- J18WPqKWVaAUygto77CiOVmQDBE5ASlSBkdT0=
+ :content-type; bh=/FcQic8K9lRBPBgyBEE25Ogb8V8F7dKR4nmNenHdfL4=;
+ b=NomiJw4BIzBZZKzkYU0NL3p4ve7j9IUp0ZTTPNBdWzOHZo6tqb2LdGUqgTApoho9AI
+ g37vvhoEi54gRf3LuCeRQsBeOJKBNuuGQqZQNOtQ/37xrLBtO45jtDlFFo71Bfp3GDGk
+ kk42x5W9W8frUbdut3BKuQUKBtTMHU+sG+Q9A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787227941; x=1787832741;
+ d=1e100.net; s=20251104; t=1787227952; x=1787832752;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=9dwpj23bS9OuT0ux/TqLqzYQdlBtRS2mAyOTSnmw8MY=;
- b=V7MIrXduLd9QVlTIYZ0foLKBdyBLjQpSXbtl45BV4XWQWyx7xgUcBPh6g0CbaJjCMK
- ShPaQ82P7uECyq8jn25LW5ZHz817oVrorUxxvoXQb4aRT91MIrGhVFRjvTuKkmtzSKKI
- WiqlKO/d92JTD+3GO2YIhyQsV+lIkbMMd/Ay8g4M951ABEHQn8kXT9fBsRJUpMJMznkn
- hWBr7Q2qO8Qb6kYEV47naW2BP/ez8n2x/a7xwbNiYbG8bsIB9qwCNCGZaWFl+yLkZQuK
- HFtkcE7mmdzr9CaNbiXc+uM/Qqp80ahd0O9cae6MZAPrYh9YJGr0YocV66IH5YWvoT+k
- 5dgQ==
-X-Gm-Message-State: AOJu0YyZak3ON2KjuqYmXqRsb2Tbtp/zMHiyMnTxoNwxEQ5sYplMJ23e
- lmQHRg90iVfeEMdPX5EGwWR5Fns3Mij/+u+a8TUoron7n64RhmcwHW3iFBt2hWZAfpQBgAGUQjl
- trVTYvLgi+O1UHODx4BnTRyzl2b3iFdOfp7ajLsjv
-X-Gm-Gg: AR+sD10zn7v/RJseBpz5vRXaUTEp+zcc1OzPh2rIUZWscfioNMPlCE4IhdgPH7DO5ox
- NzkPBkhyuhAfKyb20uBJiab4tg62yKzmOOCeV6LUD5frTpwxBlEYZ0j9AwZ+/LTsB9Af3yj39U/
- mT7b7eVjx7ADBhQctBwXDD4jHh7DxtNb0tUdYZgLaWXy403TEX3bxAlQgjiQwvmX9ec9Uz5pj1C
- CRX0TEWAhczV6lhbG1McNfAR9bSkRwZS6eRYz06Ws3DtI5/23XgndQaKswZKd/kcK2n/NoTMYjH
- 6s/4LtzoceFh9oS6woX6G4gomf0+aKgyt6q+fOI/wgA=
-X-Received: by 2002:a17:907:d21:b0:c16:8931:245c with SMTP id
- a640c23a62f3a-c242e367ed4mr812954566b.21.1787227941216; Thu, 20 Aug 2026
- 05:12:21 -0700 (PDT)
+ bh=/FcQic8K9lRBPBgyBEE25Ogb8V8F7dKR4nmNenHdfL4=;
+ b=UiE28MOvSY9Bi9w71wbbDGU0lwu/rrx4dyLEaljTEV4RGloCazXtsYzJwm+IIYZhcW
+ nv8zXnsFEHGwNbuiCSheQz+tt6U4lACMGnU3JgNi1JMLd1YZioYd/SiheLNyNZ2dGLrS
+ LptWcuzyNcTi1CJWrxjZkrrK8mo24ZchFenNZZUvceFIIuoGvJXXH5kwTcy5qqGCtIWE
+ B3N5rHNUZogp2LlD1QSWpQB/UcIBankYEJi0ydm2CrpHSKGUdP9dfg2NwIBkEJ6qERwi
+ 2lSYI1HWDGwwNz4YrJDBSGf1d9utnhyWU7LdMyBwWQXSngnZ1AS77Dz7aZwCHHpfUX1L
+ Bc5w==
+X-Gm-Message-State: AOJu0YyxZg1uvoynFJyNEbzrdu+yO6spRKDWuKi/HCjObr5F9Xj+UtTn
+ X7JFlODccM+5dr/L3p5DTOzBNrggdl8Oppev1nDmtP+JJvYLnGPviIxr5hQ4PjB244fXoIaj22V
+ UShP0bG7Tk677j2FeGMgIlYSqOBtWnQV85UKmV9iP
+X-Gm-Gg: AR+sD124r11KeHz1XC2XsgZai5MYhCr021Ibiyi1OmQhblXsdgGo0hdVGVIfViDdaTl
+ BKyko/7VDn8jGIp6pMcwkXZ+6GClrcT0S3lkwoXPW1CEHUotAoefUjEbpNabJVhpgmPZuf2lcHK
+ mIxlqNg4itWcQrwFN7afLyjIiNVtEijQi64usq+iu08jEVPLW0+4t/lGVkPyFyVMPK0jLtojZA8
+ iqQeh4nqfxwOOI8qzYR3I1/7q4IWgKnSY8n/XecQrtgCGb+WVLalKjlMj3/Z0DgO/ZD3LUlWGq4
+ m0LEbiAuKY71YPhqrzeKxdFTRJyBlipT1qQ8Z6oKCB4=
+X-Received: by 2002:a17:907:c78c:b0:c12:83c9:d41 with SMTP id
+ a640c23a62f3a-c242e22dbffmr961250666b.12.1787227951947; Thu, 20 Aug 2026
+ 05:12:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260811-b4-reset-edl-rebootmode-v1-0-2e15adc156a3@oss.qualcomm.com>
- <20260811-b4-reset-edl-rebootmode-v1-1-2e15adc156a3@oss.qualcomm.com>
-In-Reply-To: <20260811-b4-reset-edl-rebootmode-v1-1-2e15adc156a3@oss.qualcomm.com>
+ <20260811-b4-reset-edl-rebootmode-v1-2-2e15adc156a3@oss.qualcomm.com>
+In-Reply-To: <20260811-b4-reset-edl-rebootmode-v1-2-2e15adc156a3@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Aug 2026 06:12:08 -0600
-X-Gm-Features: AcwNN1UJLmwNa2xiLixabsGRE44ePj2uJC5JH1P4pgwDieN9eMjiY6KgSsTQ8xU
-Message-ID: <CAFLszThSHebH8gxG8Gk6pwC4u4zRGUrRAJyX=63LrBDBg-wvfA@mail.gmail.com>
-Subject: Re: [PATCH 1/8] reboot-mode: parse up to 3 magic cells per mode
+Date: Thu, 20 Aug 2026 06:12:17 -0600
+X-Gm-Features: AcwNN1UMszJf_cSaYBKcjJEaO2b8pwAem4zwQ38W47t6_gBvkJaZq9PuWNktDM4
+Message-ID: <CAFLszTh7HTabSZvFZWnQArLmW_SDQAR2AdDfB=F5LjY_+BVEBA@mail.gmail.com>
+Subject: Re: [PATCH 2/8] reboot-mode: add trigger op and request/list helpers
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>, 
@@ -144,31 +144,102 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Balaji,
+
 On 2026-08-11T05:18:35, Balaji Selvanathan
 <balaji.selvanathan@oss.qualcomm.com> wrote:
-> reboot-mode: parse up to 3 magic cells per mode
+> reboot-mode: add trigger op and request/list helpers
 >
-> The reboot-mode framework currently stores a single u32 magic value per
-> mode and parses exactly one cell from each "mode-*" device tree property.
-> That is sufficient for the existing backing-store users (nvmem, gpio,
-> rtc), but a PSCI SYSTEM_RESET2 vendor reset is described by up to three
-> 32-bit cells: <reset_type[, cookie_hi[, cookie_lo]]>, matching the
-> reboot-mode binding for the psci "reboot-mode" subnode.
+> The reboot-mode framework so far only reads a value from a backing store
+> on boot (get/set) and maps it to an environment variable. Triggering a
+> reset into a specific mode on demand - e.g. rebooting a Qualcomm SoC into
+> EDL via a PSCI SYSTEM_RESET2 vendor reset - needs a different approach.
 >
-> Restructure struct reboot_mode_mode to hold an array of up to
-> REBOOT_MODE_MAX_MAGIC (3) cells plus a cell count, and make
-> dm_reboot_mode_pre_probe() length-aware so it reads 1 to 3 cells from
-> each property. dm_reboot_mode_update() now matches the backing-store
-> value against magic[0].
->
-> Existing single-cell modes (e.g. nvmem "mode-bootloader = <0x02>") parse
-> to magic[0] = 0x02, count = 1 and keep matching exactly as before, so
-> there is no functional change for current users.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->
-> drivers/reboot-mode/reboot-mode-uclass.c | 28 ++++++++++++++++++++++------
->  include/reboot-mode/reboot-mode.h        |  8 +++++++-
->  2 files changed, 29 insertions(+), 7 deletions(-)
+> Add an trigger() op to struct reboot_mode_ops. It takes the
+> decoded magic cells for a mode and resets the system immediately; on
+> success it does not return. Backing-store drivers (nvmem, gpio, rtc)
+> leave it NULL and are unaffected.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Nit: 'Add a trigger() op'.
+
+>
+> Add two uclass helpers built on top of it:
+>
+>   - reboot_mode_request(name) looks up a mode by name across all
+>     UCLASS_REBOOT_MODE devices and, if the owning device can trigger,
+>     resets into it. Returns -ENOENT if no triggerable mode matches.
+>
+>   - reboot_mode_list() enumerates every triggerable mode registered with
+>     the framework, so a command can present the available modes to the
+> [...]
+>
+> drivers/reboot-mode/reboot-mode-uclass.c | 48 ++++++++++++++++++++++++++++++++
+>  include/reboot-mode/reboot-mode.h        | 40 ++++++++++++++++++++++++++
+>  2 files changed, 88 insertions(+)
+
+> diff --git a/drivers/reboot-mode/reboot-mode-uclass.c b/drivers/reboot-mode/reboot-mode-uclass.c
+> @@ -54,6 +54,54 @@ int dm_reboot_mode_update(struct udevice *dev)
+> +int reboot_mode_list(void)
+> +{
+> +     const struct reboot_mode_uclass_platdata *plat_data;
+> +     struct reboot_mode_ops *ops;
+> +     struct udevice *dev;
+> +     int i;
+> +
+> +     printf("Available reset modes:\n");
+> +
+> +     uclass_foreach_dev_probe(UCLASS_REBOOT_MODE, dev) {
+> +             ops = reboot_mode_get_ops(dev);
+> +             if (!ops || !ops->trigger)
+> +                     continue;
+> +
+> +             plat_data = dev_get_uclass_plat(dev);
+> +             for (i = 0; i < plat_data->count; i++)
+> +                     printf("  %s\n", plat_data->modes[i].mode_name);
+> +     }
+> +
+> +     return 0;
+> +}
+
+We normally try to keep printing out of the uclass, unless it needs to
+be in a shared place and called from other places (e.g. multiple
+commands need it). Also 'reset -l' on a board with no triggerable
+modes prints only the header, which looks odd. So can you move to cmd/
+if possible?
+
+> diff --git a/drivers/reboot-mode/reboot-mode-uclass.c b/drivers/reboot-mode/reboot-mode-uclass.c
+> @@ -54,6 +54,54 @@ int dm_reboot_mode_update(struct udevice *dev)
+> +             plat_data = dev_get_uclass_plat(dev);
+> +             for (i = 0; i < plat_data->count; i++) {
+> +                     if (strcmp(plat_data->modes[i].mode_name, name))
+> +                             continue;
+> +
+> +                     /* Does not return on success. */
+> +                     return ops->trigger(dev, plat_data->modes[i].magic,
+> +                                         plat_data->modes[i].count);
+> +             }
+
+If trigger() ever does return 0 (buggy driver, or a future async
+path), reboot_mode_request() hands 0 back to the caller and 'reset
+-edl' silently falls through with no reset and no diagnostic. Please
+either treat a 0 return as an error here, or document in the ops
+kernel-doc that trigger() must return a -ve value if it fails to
+reset. Also worth stating in the header what happens when two devices
+declare the same mode name - first hit wins, I assume.
+
+> diff --git a/include/reboot-mode/reboot-mode.h b/include/reboot-mode/reboot-mode.h
+> @@ -46,6 +46,22 @@ struct reboot_mode_ops {
+> +      * @dev:        Device to trigger
+> +      * @magic:      Array of @count 32-bit magic cells describing the mode
+> +      * @count:      Number of valid cells in @magic (1 to
+> +      *              REBOOT_MODE_MAX_MAGIC)
+> +      * Return: does not return on success; -ve on error
+> +      */
+> +     int (*trigger)(struct udevice *dev, const u32 *magic, int count);
+
+count is stored as u8 in struct reboot_mode_mode but passed here as
+int. Please make the op prototype uint to match, so a caller cannot
+pass a negative value that the driver then has to defend against.
+
+Regards,
+Simon
