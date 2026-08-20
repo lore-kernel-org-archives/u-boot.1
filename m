@@ -1,115 +1,127 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C76CC5DF85
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B5AC5DF82
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E6C4140483;
-	Thu, 20 Aug 2026 07:15:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AA06E80ACC;
+	Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nnAPwjRozLz7; Thu, 20 Aug 2026 07:15:46 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EiYlP-jluFP6; Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787210146;
-	bh=xlD1tIPgIc7p/UsRFuMa47n7/Nuxh/KKC/pIEJvFxWw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=te5tFAnbuuyv9tQEsPObnRNh2Kk91dkBNwChPiTlyKWYW8M1KkabYx3OnUfHwO3yd
-	 1BVwBzmtmJC5lWZtSuchETtRuMnHTUwKU5vzgbJ2Iu0OcWlrz+o+RHzKC0TG4wsFFD
-	 flipoi9GURasDxAijm3lAXZGfnTUEynUHDTtAwGbXFw+E53S9YBT6KxRgwdO7GW3O9
-	 NSiEUIu8E5N09MRrBZiDqMSAAHOEoEPKqHJA39+hifiHfuY6GGivZCVkmhqCSUhiug
-	 tICD++OFghmczUnavvlJ1JGrHlB7od7GE0u8BYnT0Wq1R1PW3bmebPMpk+P8t1jpdU
-	 FuWlylIMrgdHw==
+	d=lists.u-boot-project.org; s=default; t=1787210822;
+	bh=Ao9PCyD1AxppQGPdSr1oWTAfgXFTcs/mcqU3Ul45TQU=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=rGITllzuxYaNHRYEO7kLewI2Z84LRan9Iu8V7IRYKn/NLOqo99omhIxJX8CClPRaX
+	 Jc15sAnQUG4LYflTYzZ7V41Hk6R2oVz9OwrCo0/y/2Qdn86JfGsNW8rIDkoy6HQ3VD
+	 rllqyH/8E2MIDj/1YFTvnDdykmc/C6YKZrSlOpkUxR/CcuZgzkwyLaszO/saf70se7
+	 K5auNMWwC9ywzf20Rd18Rv+zcByrdnHXvZkCo5p9Q35N+4ho0pxeVbLd7drQqi9ip5
+	 f+PV8E000pTryDquqGXZgI9Nl4sL1YrQ2twY8j6gQqWWwC84CCS+2lcY+tD4AH6E4/
+	 wkZkViMZi95Vg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 442D74054E;
-	Thu, 20 Aug 2026 07:15:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EB3582FD
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1FDFB80C0D;
+	Thu, 20 Aug 2026 07:27:02 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3173429D
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:27:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DD3EB60683
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 232B64025F
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:27:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W4nniGJYl_VM for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 07:15:42 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=NS/t1TmR
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E0B8A60671
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:15:41 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-47de0093c42so1772979f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:15:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787210140; x=1787814940;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=xlD1tIPgIc7p/UsRFuMa47n7/Nuxh/KKC/pIEJvFxWw=;
- b=NS/t1TmRzVMsVyunxitZY4YwDu/bLEb5nBQ8uRE5bck1q/Rh3WdnZjyNzmjSbQxg1a
- KoEZgDq7iXZ0j70cocdtDT8iGxnlVnGtvhybOYdJ1CK3qzDsPAwISCsnqBEqNWi+2104
- JdW3P7k7wSR78k9FiEQPYD+zk3R3/H5JJzabiuZMh8Hz5HUmHcG3Me+2fNJ9FLVFGBKD
- YkOZtXbeOZYOIBcsQed6Ss8eA08Of2xHhgvff1KqDhTyGSH6EiEzWbNZV1DjnIpK4MBJ
- 7Q8Cbg3SrcSaorrvHt6pBw1N3XhwTsFvR8dRRVx0JBnCqyiEyCae9FbzF8wULEM77Cly
- 9fMg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6OxvQh_C6eyG for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 07:26:59 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=Wnz1CvyW
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B958440253
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:26:58 +0000 (UTC)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DB4A93FC9A
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 07:26:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1787210815;
+ bh=Ao9PCyD1AxppQGPdSr1oWTAfgXFTcs/mcqU3Ul45TQU=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Wnz1CvyWheMU9wDa0MmJFXu/m7PyqqGOV5dF5HyO8fXBFR03rzTAo6KGSmLlf2HA1
+ oCzHBCESnMNl57IggRzNHMOCPPec0tnd0N8mQbSrbCBdihIqsL9sMP8NyTdc+s9EN0
+ hibiDrrbAyK9FsqEbcDFd4FW167qda+sD1FfC3ywSf17W7epkNbNGX3U9wuxay8WNl
+ cXvip6YG7N4SPvBiYLPTVn7Y7K0UPd/+LvuYI9Z64/IcM9LQ//Lj/Vxl3iYj0My4nt
+ wA9L9awXC4plJ3IP0q4f5OxxWAbi9HKgOVxlDGAEsHYPZR3SmJv7WnU1yzRSKm9VFE
+ +YJzUGHebXnkE+UDZMcrJ/edV72UzLJaX8RJRHJvaVZvZcxwxMSiKKS+hV60snX7qn
+ Xep1E/hrHc3l8MnbIVDSGJ1h+fxkWMmve0SBqw1uyHToWU+d/DqsfwBym7SZhPmdx3
+ 9ND2RQrRRU7/C8FVTSNacnMRUxYKR22ZgXJuyTMx03ZtiDSwFxMvh708F9i/acQHco
+ nmmSyscDAb1Ss+Rofylw/0sqc2qMJS1qOwZ7zhN0nj6sDEprApw/sSYv11rpHC5hJl
+ gsmXoKU9IoyxuPziQEQhUDg4cNlPjL1qzDsfAY2OERPzYk0a+F47SaKSwRYo5Eziqz
+ C1wfUUoo/TahuWsu7pFfa5Ec=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4996832e7b4so4650075e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 00:26:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787210140; x=1787814940;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=xlD1tIPgIc7p/UsRFuMa47n7/Nuxh/KKC/pIEJvFxWw=;
- b=Sf7OxbDDiEGH+vo/IHT3dWj9P+R88yddX051VozfezCSgkdFlyNdYVJWn69/Q18f+t
- I0Bs1AxXxYo8o1WewcsXE/DvVhugcqmFLkKJpH+R98GBZKHLERXTanPECMfbrR56VDmy
- ybAVy+Wl9F+jBV27K/lrdoZ80TMR39SXTk2HSACTmBjcpRKQu4qmRSiNDo/o9UNThsB/
- Psxpq0B4fLLpLzYNdoRognZyc9gr1yWf/5712AfXb/QwLrUM6GkYBnpeBPVOBdXW3q92
- sXo9lh1zsFu2ROS4a/40fy63XAZrZ+3YOJdvlCa9X416MH/9bhGneJ/hqWa48fe8fGe1
- ADdA==
+ d=1e100.net; s=20251104; t=1787210815; x=1787815615;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Ao9PCyD1AxppQGPdSr1oWTAfgXFTcs/mcqU3Ul45TQU=;
+ b=Kyh31p0yZZZgV2a78sq23W0ZjZG42wknfA2A0ZmnVo+r32JRCGU8gObJ2Nh/95dNS2
+ SluPPv+gCnQCJtHdzdkze+alQMsB1/AIYxZhnHE85Uhr72/j8CqnR/3pSUeLXc3Z2/XW
+ qOYTi22YzOEhsAiJThaX8pr2n5ECizTCAYK5dG4SuvaNmePLXurnrh8NUlptFN7kFyvo
+ TbKQDpPOmsGMfICi3ENbDlT9r8pcsnliJhjOBNYQHyeYiWBKTd++W/ijgBM1AWc8ILbM
+ 53U7X2U0V/n85jPiYhI5OhENKsd9V5cb+gNR6wbTSrmXSs74Z8ITTOtPBFeTOjse/9b1
+ ZbDg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoJgYx6cWMHV5WdL9f7ovasf7lD/00Eg55tEUNGvbA3mZCEuQgSNQ+pIAUrGB8cLT1llEDP9Tg=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0Yw6ma+HgFPQBMLZbnzv95qo91HkAyQORPStrVIg4tWvOQb2276f
- Z3qDWspEpc0PuUz0rxSDTO1NdFGxEpxY0s0z2xR7q0boBitEStCqVud7
-X-Gm-Gg: AR+sD11npQ9wLfaegeDaTckiLWIoHSHY6F/R4M/NY4azx4/GPvr2N4oMSGL+n/cKvP1
- ry1QjUFulunM4V5Dlj8sxLSmPS+TucAMOL9oiNREPFWZ7ETfpFCCBiZvAIrE3u34FdnJcbgSXb9
- hco93s1IUXFKQld3JZjA0r3gwtwrtJXsjfIGPtwJANhw4Tt02nmB6N+vjxLqsUQ+kDywN4cAXVo
- oaXaL2r91dEZKlHlDDG/Vx8ggU4vjggI2nGJ917E2yKEDk9DXytr5JIMvy16TaCmRPBwfGKoh5Q
- kDcid7LcnuPGeLlH+hwOdIv80kzTj1TT/UmFLGRc5wp7ARGBoJih9YV/NUgjHuQY7KtD8sRNimQ
- vRVWKozfL/ZP5Kt0D1vpq7ekxuAds0NbB3rym52KDsGC05+Fh4Qz5wTlONVt3bBdNcD6PAjUHbd
- ez2d/msJ6xoWqnOhqHnkXk/ueyip7vcOnSWcilT63+JuOi1Ruy9ZO+ZCUj2N2XafPOKGNP/UBSy
- 6di
-X-Received: by 2002:a05:600c:c493:b0:493:cefc:d113 with SMTP id
- 5b1f17b1804b1-499aa15df47mr173166285e9.5.1787210139732; 
- Thu, 20 Aug 2026 00:15:39 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
+ AHgh+RrbpoVZeeA+WAmaZO6kVAgrsNLTXXKzQaLl1zB5+vaxbDdJuKvBavpueyivQBvLJQQ43ocQRPk=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YyC6hw7QNcECJDpC9ayj74MS9yGg8FkFx7D+tlC/g0qlj5sVb5A
+ PN5Ax4lMCtuybprK42WzaQ6sFoD93LEPjFCXBIYUYECduMmDnZ+yegLM8+1ULKayDIVcRABD0VC
+ koqMNoRhdmBBcfEoaPJMveocdGCzwlNrJtgLZdi7Wh5W7hMIVXdDtloVmAuuQiB0R/lWxjL+UgE
+ 2mmSVzfhA93Q==
+X-Gm-Gg: AR+sD13B/YqJIRWjQAoKLPoq5u7aFVYalrzLEXfd1LLtEBFgmHFwARayIWJM/3a7xg7
+ hgtlT4n+aHSZr7K2Kv0+zjdHH1NmxWj3f3mtt9DcXy2wc9btTpjl0gLqcPeEid1Amvky2wDiOLR
+ 4l2cI7l1e23jSDbBj9n5tghpMytyK6dnlBF9O+1k040vIxGDzCQ1+XRWEDlyTU5nWBelT/W4czz
+ WwTnbALkHIpUdlX4lGKP7Wo3ijsniYnpA32cHufMq/J3osnIrEg8Q4IKb8IzaBDJpfOxV12O6gI
+ CLuIDsKc95klETVtr6D1nySI5hvzhSBoAS4IwMIJX9ZHYEFeLDCkBz6A6B2SoBHMsSRSq3xLU+E
+ wImmJS0SlC6QfTKfQGBvAvGQ3tHGDq5H66qYeUVOBGdaMajLoj7urjhc=
+X-Received: by 2002:a05:600c:674a:b0:499:5f80:83ac with SMTP id
+ 5b1f17b1804b1-499b06cbaf2mr69636035e9.7.1787210815455; 
+ Thu, 20 Aug 2026 00:26:55 -0700 (PDT)
+X-Received: by 2002:a05:600c:674a:b0:499:5f80:83ac with SMTP id
+ 5b1f17b1804b1-499b06cbaf2mr69635525e9.7.1787210815096; 
+ Thu, 20 Aug 2026 00:26:55 -0700 (PDT)
+Received: from workstation5 ([2a02:908:1242:30e0:cba:879e:28f0:3c57])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499b2b23a00sm19197705e9.3.2026.08.20.00.15.39
+ 5b1f17b1804b1-499b2ae6c3fsm17014665e9.1.2026.08.20.00.26.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 00:15:39 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
- Mehmet Fide <mehmet.fide@screeningeagle.com>
-Subject: [PATCH v2 2/2] usb: ehci-vf: enable the vbus supply of the port
-Date: Thu, 20 Aug 2026 09:15:36 +0200
-Message-ID: <20260820071536.1036898-3-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260820071536.1036898-1-mehmet.fide@gmail.com>
-References: <20260820071536.1036898-1-mehmet.fide@gmail.com>
+ Thu, 20 Aug 2026 00:26:53 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Linus Walleij <linusw@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.u-boot-project.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] tools: build mkeficapsule for
+ CONFIG_EFI_HAVE_CAPSULE_SUPPORT=y
+Date: Thu, 20 Aug 2026 09:26:45 +0200
+Message-ID: <20260820072645.9884-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -125,93 +137,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+Currently we build mkeficapsule by default even if we don't have EFI
+capsule support enabled. This adds a host GnuTLS build dependency.
 
-The driver never looks at the vbus-supply of its port, so on a board
-where VBUS is switched by a regulator, as it is on the Colibri VF50 and
-VF61 carriers, the port stays unpowered and no device is ever found.
+Only build mkeficapsule by default if CONFIG_EFI_HAVE_CAPSULE_SUPPORT=y.
 
-Take the regulator the way ehci-mx6 does: look it up in probe, enable it
-in host mode and disable it in device mode when the controller comes up,
-and turn it off again when the controller is removed. The regulator
-calls handle a missing supply and a build without DM_REGULATOR
-themselves, both return -ENOSYS, so the driver only has to look at what
-they return.
+tools-only_defconfig explicitly selects CONFIG_TOOLS_MKEFICAPSULE=y.
+Hence distro packages like Debian's u-boot-tools will still contain
+mkeficapsule.
 
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+Reported-by: Linus Walleij <linusw@kernel.org>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/usb/host/ehci-vf.c | 25 ++++++++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
+ tools/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index 6c9866bfa5f..f7c10e183d0 100644
---- a/drivers/usb/host/ehci-vf.c
-+++ b/drivers/usb/host/ehci-vf.c
-@@ -21,6 +21,7 @@
- #include <asm/mach-imx/regs-usbphy.h>
- #include <linux/delay.h>
- #include <usb/ehci-ci.h>
-+#include <power/regulator.h>
- #include <linux/libfdt.h>
+diff --git a/tools/Kconfig b/tools/Kconfig
+index ef33295b8ec..e151b30217e 100644
+--- a/tools/Kconfig
++++ b/tools/Kconfig
+@@ -108,7 +108,7 @@ config TOOLS_SHA512
  
- #include "ehci.h"
-@@ -53,6 +54,7 @@ struct ehci_vf_priv_data {
- 	struct anadig_reg __iomem *anatop_addr;
- 	void __iomem *phy_addr;
- 	void __iomem *misc_addr;
-+	struct udevice *vbus_supply;
- 	int portnr;
- };
- 
-@@ -143,6 +145,13 @@ static int ehci_vf_common_init(struct ehci_vf_priv_data *priv)
- 	usb_internal_phy_clock_gate(priv->phy_addr);
- 	usb_phy_enable(priv->phy_addr, priv->ehci);
- 
-+	ret = regulator_set_enable_if_allowed(priv->vbus_supply,
-+					      priv->init_type != USB_INIT_DEVICE);
-+	if (ret && ret != -ENOSYS) {
-+		printf("Error enabling VBUS supply (ret=%i)\n", ret);
-+		return ret;
-+	}
-+
- 	return 0;
- }
- 
-@@ -284,6 +293,11 @@ static int ehci_usb_probe(struct udevice *dev)
- 	struct ehci_hcor *hcor;
- 	int ret;
- 
-+	ret = device_get_supply_regulator(dev, "vbus-supply",
-+					  &priv->vbus_supply);
-+	if (ret)
-+		debug("%s: no vbus supply\n", dev->name);
-+
- 	ret = ehci_vf_common_init(priv);
- 	if (ret)
- 		return ret;
-@@ -311,12 +325,21 @@ static const struct udevice_id vf_usb_ids[] = {
- 	{ }
- };
- 
-+static int ehci_usb_remove(struct udevice *dev)
-+{
-+	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
-+
-+	regulator_set_enable_if_allowed(priv->vbus_supply, false);
-+
-+	return ehci_deregister(dev);
-+}
-+
- U_BOOT_DRIVER(ehci_vf) = {
- 	.name = "ehci_vf",
- 	.id = UCLASS_USB,
- 	.of_match = vf_usb_ids,
- 	.probe = ehci_usb_probe,
--	.remove = ehci_deregister,
-+	.remove = ehci_usb_remove,
- 	.ops = &ehci_usb_ops,
- 	.of_to_plat = vf_usb_of_to_plat,
- 	.plat_auto	= sizeof(struct usb_plat),
+ config TOOLS_MKEFICAPSULE
+ 	bool "Build efimkcapsule command"
+-	default y if EFI_LOADER
++	default y if EFI_HAVE_CAPSULE_SUPPORT
+ 	help
+ 	  This command allows users to create a UEFI capsule file and,
+ 	  optionally sign that file. If you want to enable UEFI capsule
 -- 
-2.54.0
+2.53.0
 
