@@ -1,130 +1,106 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FBE1C5DF81
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 13:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B36C5DF81
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 13:07:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1B9CA80C7B;
-	Thu, 20 Aug 2026 13:07:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9E9B9405BE;
+	Thu, 20 Aug 2026 13:07:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kPNvqpjuMS3y; Thu, 20 Aug 2026 13:07:07 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1zFhsiKWd2l5; Thu, 20 Aug 2026 13:07:10 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787231227;
-	bh=GsKWhyhiuvzGlWyXiRh3Q/6PlC8+9mdYDoX3cn9nCng=;
-	h=References:In-Reply-To:From:Date:Subject:To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787231230;
+	bh=RUqv2v2hNO07ZgRjAxWaAjLOvYwCQSxa9bQ1tDc07A4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yAJN5WT820duoqWfdRDBjoaWmFySKMpG2Mc02GLR9xrK0gKJoCDsqrWkHrA0GCvEs
-	 WKEO3H7VOfMWB1OU5emoXxWqR+F3HgCtEgy55eG876qhGJ4+FfHn0argPeetqQIaMp
-	 xga75o4Hg4a/xAK//0AF5oUMD6llS7MG7DAYiS3OIatDcQNXlL1IIpy+Od/sYLRV9z
-	 OWf2SVQVmEexzTyBmMmuzAwM+I4BxLpyHLL4o98DPv4BXYvB3aaUC/m8fHlDJDwaP4
-	 Kzw77AhG2BGKqfdnRBamCuYowPJ5qS4G3PjzrcBLBP4wfBOrSvvRmsxIz8TdHIzAIb
-	 +Txrj4OEKqj0A==
+	b=HAQubG2DTjuwgrEj0auTb5+fsSqGHYcNA0tLoCJjsF3YfdwTidalcfsuxz1D7H61r
+	 W2xU/82LZOnviPt6qyOW3a8MGxRuxnQ26HNTyKcv/UMzKrraf8v9sfD0T08qcgOb2E
+	 8eTYdRGLfYjj1baDcmvQSYTyVBSr31ElxRj36O0R5i+B2yger/yX/NNxcZe51o65A+
+	 ibmUWoESl32HGj2zXtSStaZaR1m9p0obiaiuFhpQZc6go+VD5B/4btrf+D2eO0/uOo
+	 UdyRGU1ejl+YkilKTKX/0YBwXlwe76XMU6kgtBJEmHL4V0A/WjbKbjI+VKMD/MJVVM
+	 lsstogUyZBxqA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2174780C9D;
-	Thu, 20 Aug 2026 13:07:07 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 02F8139E
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:48:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B2CD2405C2;
+	Thu, 20 Aug 2026 13:07:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7FF4D40B
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 13:02:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DD12C402BB
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:48:39 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7180460739
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 13:02:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nLiBVq3eKW56 for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 12:48:39 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zwIEor5TjLov for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 13:02:04 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e30; helo=mail-vs1-xe30.google.com;
- envelope-from=pranavkasthuri@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=bxcE5rvT
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D5A8A402A8
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 12:48:38 +0000 (UTC)
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-74dce749cc5so526615137.3
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 05:48:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787230117; cv=none;
- d=google.com; s=arc-20260327;
- b=spFYPRmqg/lw/mTR21qkzq9Ujm6H8fpj1TVddIIMYFtHh+U6Wk2ZATLQB7s3RtMmJH
- IzV8EU7Y5Rs+O1IGgneceqYpRySv8TSdOEheq9hefkxWAkD2tABBUZ4sjHuQ4k2ZOpWW
- U7BAkIH5+jj0tROvD5JxstPIk7de9Jrxf8UefKi87ieEQNmU7A5w7ClmvfEODtimvh9R
- cf5y/kFwPR3gBv07e3/Q/2jqY23AX/KAFHd9bQ9meBZo85RDrbEa38AAJkeO83FwGk0Z
- 0pE2Le5IuL5t5Wx4LNWFSG1/49Vd6PPOX4Or9cG21wexnsjc2uEpJ1J7HLPOozwqtSEg
- e5tw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :dkim-signature;
- bh=GsKWhyhiuvzGlWyXiRh3Q/6PlC8+9mdYDoX3cn9nCng=;
- fh=UPNS4HXYeIypNL+s9tL6UKBnRLDlxVjvSkHwqhb8LsE=;
- b=eX1+Zc7ZTNYM8yh3/+EgwZac6LI+SwauZSXvmrPvqom8qcAIK6AqwHy2857iQxm0lF
- 0h46OBmjcCzjppFGdlbhQzQPobcMOXhqu9SDpFlbHg8HMcADW7dwGu72vkj/pWGFW3tB
- 3yW+qrhGlWDt8E7OV4lU6wepxMoTp8Vj6S2RxCtYXkOau34dLHuScU/2PA1AyWrks5al
- mDiSv8jPcznvbqUSjbxxpDDsuWj3a41VEdeHW8UruXx4aPHfOt6PqtdeWBt2k39h4kJ9
- +jlK5vOKYm1vKurUGRAA3grBa+LexZZ/DMwNmcGkpcodAw8K6TWAEGJr+eNggiUr8txq
- X6iQ==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787230117; x=1787834917;
- darn=lists.u-boot-project.org; 
- h=content-type:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=GsKWhyhiuvzGlWyXiRh3Q/6PlC8+9mdYDoX3cn9nCng=;
- b=bxcE5rvTtkjCFfCqSyUH/bNhssV81YruStS9SXpJcFOQGS4FWsLPq5MS0+ITLbcPCM
- 13sAQelDHM3TqCb1zBLChN0C699TUrtZ1tg5g8F0pQyrE0j5sHAZgtOYHRQpVQRZfM7t
- PguP7SxGBCFr6dpsDRXqj+n8hyidsYNtxjg/NfIdqYGWaBEBB6GGRIwU5I9K+itAT+tQ
- rnluyB9P6CDSIlLFIO8yR3nxkbr8gxpk6ZkPx4VFf3Q5BgUiakKsBlQ8JFdJ+LFqKq/X
- Mg66bcaYh7QTNnTz0NdEx3lNLUeM6GoRH1n9pkFHLZ8sVHNww/oaxikvFC28IbdOr0I8
- +dAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787230117; x=1787834917;
- h=content-type:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=GsKWhyhiuvzGlWyXiRh3Q/6PlC8+9mdYDoX3cn9nCng=;
- b=das5PaeiQ1RNMOXlwuNjnojmNhzg9msmMCsqMtyB+0c+Xvf1TIl1pPxtajYiIfzJ4S
- xEvS6FZpc/G6l3Mdxyk5NnmsebKDoRfNggpykL0mie1vPupodlqBt1+Iq2bX7FEGi9DW
- bsFPc3xFaE4zJeutRZ6+CNkilTfuonRtZp8GiM5ZTM3Q2O0BBTI3mbqT8yfUuCzq4O1L
- /DvUkxkNIaoMqm2Tr+yPfp4Tr7Ywy0ZRnw4wpvlABoqhyb19KbZOMTYcHEc8hNEqjOm3
- RDldQmPD7S/VQHuUtVdVkVDLhiXOaXyfhxigLEVTKlYke07zucEYnNAbnxNmaUKM8Xkq
- NP1A==
-X-Gm-Message-State: AOJu0YwjI8wf3CQczh1uHitLX4V/CA7o5syb9QTAP8CaAr9wJ7MRuIMZ
- QhVuJ05EHSSNK9qbsqwOfmK4XvtuJLiYQzpi60og1XMEb5y7sEKACYG6OJ2xH74HoDdGz8u5DJm
- gswDmTaFFC6mi5iNcHxG1UNjr6Hdy/F7vRtYtSos=
-X-Gm-Gg: AR+sD12xlgljHZ3aoXCRvwBVHeKjQHZqbkdIdt8Qy3i0wzuHbkb2YGr42zWdvaCiocI
- fuzQXQjM/eCSVvrbbuOmXhULdk9NAqvsXTp5hc422QHWNqEuAyfTb2nW8a0MRSmqxUgsuWNGaUU
- qua0wDfSuxqMYsQeiZ0cRB6TardsITnhDEr/uEll46/SW1zLdjyMYGtFwPnNR+mb1TvT5YcPZNZ
- 4l9pxHpxC5D6qvhg7gxIxOaP+l0rj0eDkgP9sS/6lNzbzsWiZlooICnq6SJFggbMISVOcdkp4DN
- mphJFLLGErfrug5RZK8AK2nYMNn6QzK3ysahE/0XaEA9g50mpQxAkqsgX9fxH0RtYpJYaKqq8rc
- 2Vzzv9/Mu9t7yg0eRYaEkKtwNoBAk
-X-Received: by 2002:a05:6102:1499:b0:778:9b9f:f434 with SMTP id
- ada2fe7eead31-7789b9ff98bmr3615147137.11.1787230117046; Thu, 20 Aug 2026
- 05:48:37 -0700 (PDT)
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=DnGw6Fi4
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8E900605DB
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 13:02:02 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 2D09660A58;
+ Thu, 20 Aug 2026 13:02:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C4551F000E9;
+ Thu, 20 Aug 2026 13:01:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787230919;
+ bh=RUqv2v2hNO07ZgRjAxWaAjLOvYwCQSxa9bQ1tDc07A4=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=DnGw6Fi4AeGXkpVWcp/NdKrBMu39ryyh94ymWHYB0XTklGpdqlwW1bzbnFpZTC9xK
+ +5nhtXhbTgBJiYsdE4sS8t0COsQ4zjGUDKL+2dlDJp+jX5GOlZDAJCCuaw/JiI2W9j
+ 0gwyOvOH0TjN/idKaZZhVM5o3MqF4AuO9pn/4Up0XcUZBs5gmU4Bsqg8cFFO60Tngw
+ MmbMUIwOoZTohnq3u/gFiRSY0tikQcMI2hXi9k6NCXqzmNnR9b5BSS9WyjIVcvbIDj
+ rVrtQnEUzxNLZvq9Fmn/DkZDUEt4mULZkbHflQztI/RiFbUpTkGOMf5GmBKzAtl/u7
+ Cs+G7HL8wieVA==
+From: Yixun Lan <dlan@kernel.org>
+Date: Thu, 20 Aug 2026 13:01:38 +0000
+Subject: [PATCH 1/2] pinctrl: spacemit: configure drive strength based on
+ power source
 MIME-Version: 1.0
-References: <20260815220817.11754-1-pranavkasthuri@gmail.com>
- <20260820123315.9272-1-pranavkasthuri@gmail.com>
- <20260820123315.9272-3-pranavkasthuri@gmail.com>
-In-Reply-To: <20260820123315.9272-3-pranavkasthuri@gmail.com>
-From: Pranav R <pranavkasthuri@gmail.com>
-Date: Thu, 20 Aug 2026 13:48:25 +0100
-X-Gm-Features: AcwNN1UM3aAgEB8xQmYYOrN_rMUFqstbFVItnJngCbilLwpjcfcFxXWtB7Yu4Xw
-Message-ID: <CANMPf=NLDUV=8o8e47kkYozRuVoJoROJU6hTC4GeO7c67uAfmA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] net: bootp: bound DHCP option parsing by the
- received packet length
-To: u-boot@lists.u-boot-project.org
-Content-Type: multipart/alternative; boundary="000000000000422eeb065979f0ff"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260820-01-k3-pinctrl-support-v1-1-b54a2450c895@kernel.org>
+References: <20260820-01-k3-pinctrl-support-v1-0-b54a2450c895@kernel.org>
+In-Reply-To: <20260820-01-k3-pinctrl-support-v1-0-b54a2450c895@kernel.org>
+To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org
+Cc: Eric Chung <eric.chung@riscstar.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Junhui Liu <junhui.liu@pigmoral.tech>, Tom Rini <trini@konsulko.com>, 
+ Yixun Lan <dlan@kernel.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7073; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=Ea9C2lLTXyMHI0FQTLfaOyDrnWHvcpRe2Skf5TSQcjA=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqhvq9rhxJRM+sgHh+U85zZEWlkyCzslxC622rG
+ tnJAd8wsOCJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaob6vRsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
+ maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
+ QACgkQMarqR1lNu+04pQ//fMPnyl3MrjrGWh62QFG1rYyZj0LPhRDpYuRgdP/eWIoAoxgC/VVSZ
+ bAaNMZLwKiKQBnw3C/rBYGZjnwjKSB7ELa2/cE+Px7CVeos/OxsYVCINmQ4/ikNp4wkTGlYt4eV
+ 5xD2DxnqOxtH0kjnjUWziXXejYxd4bxTiyDLvfIN/p5yKt7a65FoSd7rwyLmIpel6Wa2lcGMp15
+ gSKGQs5sy8/S4O66LC6xamlA0pJpQcBwf81PtWFIrFTEbOBvSyS/J0V1gz5cPon2e68QSrC9t+D
+ bvUwRIU+hMzErGqsXOXyEOvuSADr1e7uDtz0+i0Ix7GO9NPfrTqDN64cHp/DE/tkgqaPDQSHGuy
+ qMlT4ZEBF1pa9NiUe6xu7KHFf0IPofGpyARhMJoPQkV5QIJt7vtKfzzdWHp9GMaONv6NKla6prr
+ c37+BccHfgxyYmI2SC5doQkdtht1H0tuf5/LmNBTAMdoz913UjBQwosXZ4MNac7OPNKEb5IAhs/
+ g0wWtRUB/xecN/EhfI0LziQMfrn6UiJZGFLNAlB+4EGUaVo2TBwBCIF3N3K61t4t017jhjwYjG+
+ O1yYVxsnk/BSIdUfKtf52WKCEPKxRf2uevKQhZnqBKDEWUki54EPZjXw1cpkKCYa5IYsJcO6Xaz
+ RjkVW5rVkPx+WZ0H3rA5pu/Se1Us7w=
+X-Developer-Key: i=dlan@kernel.org; a=openpgp;
+ fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-Mailman-Approved-At: Thu, 20 Aug 2026 13:07:05 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -139,335 +115,237 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
---000000000000422eeb065979f0ff
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+SpacemiT external-voltage pins use different drive strength tables for
+1.8V and 3.3V. The selected power source therefore needs to be known
+before programming the drive strength. But pinctrl_generic_set_state()
+applies pin configuration properties according device tree order, which
+lead to configure drive-strength before power-source.
 
-Hi Jerome,
+Add a vendor specific set_state() callback that applies the supported
+properties in a fixed order, ensuring that power-source is configured
+before setting drive strength.
 
-Good catch =E2=80=94 you're right, the outer bound alone doesn't cover it.
-dhcp_process_options() trusted `popt < end` to mean the whole option
-(code + length + payload) was safe, but that only guarantees the code
-byte is readable. oplen =3D *(popt + 1) and the payload dereferences in
-the switch had no bound check of their own, so a packet truncated
-right after an option code byte, or with a declared length that
-overruns the buffer, still walked off the end even with the outer fix
-applied.
+Signed-off-by: Yixun Lan <dlan@kernel.org>
+---
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 166 +++++++++++++++++++++++++++-------
+ 1 file changed, 131 insertions(+), 35 deletions(-)
 
-Sent as v2 with a prerequisite patch (1/2) that fixes this: the pad
-option is now handled before touching a second byte, a length byte is
-required to exist before it's read, and the full declared option
-(header + payload) is required to fit before the switch runs on it =E2=80=
-=94
-otherwise parsing stops instead of reading past the buffer. Your
-original outer-bound fix is 2/2, unchanged, rebased on top.
+diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+index 9c0fa4badc2..469c41c40c8 100644
+--- a/drivers/pinctrl/spacemit/pinctrl-k1.c
++++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+@@ -439,8 +439,8 @@ static const struct pinconf_param spacemit_pinconf_params[] = {
+ 	{ "bias-disable",	PIN_CONFIG_BIAS_DISABLE,	0 },
+ 	{ "bias-pull-down",	PIN_CONFIG_BIAS_PULL_DOWN,	1 },
+ 	{ "bias-pull-up",	PIN_CONFIG_BIAS_PULL_UP,	1 },
+-	{ "drive-strength",	PIN_CONFIG_DRIVE_STRENGTH,	U32_MAX },
+ 	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	U32_MAX },
++	{ "drive-strength",	PIN_CONFIG_DRIVE_STRENGTH,	U32_MAX },
+ };
+ 
+ static void spacemit_set_io_power_domain(struct udevice *dev,
+@@ -472,16 +472,59 @@ static void spacemit_set_io_power_domain(struct udevice *dev,
+ 	writel(val, priv->regs + IO_PWR_DOMAIN_OFFSET + offset);
+ }
+ 
++static enum spacemit_pin_io_type spacemit_get_pin_io_type(struct spacemit_pinctrl_priv *priv,
++							  unsigned int pin)
++{
++	int i;
++
++	for (i = 0; i < priv->nr_io_pins; i++)
++		if (priv->io_pins[i].pin == pin &&
++		    priv->io_pins[i].io_type != IO_TYPE_EXTERNAL)
++			return priv->io_pins[i].io_type;
++
++	return IO_TYPE_1V8;
++}
++
++static int spacemit_set_pin_power_source(struct udevice *dev, unsigned int pin,
++					 unsigned int power_source)
++{
++	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	enum spacemit_pin_io_type io_type;
++	int i;
++
++	switch (power_source) {
++	case PIN_POWER_STATE_1V8:
++		io_type = IO_TYPE_1V8;
++		break;
++	case PIN_POWER_STATE_3V3:
++		io_type = IO_TYPE_3V3;
++		break;
++	default:
++		dev_err(dev, "Invalid power source (%d)\n", power_source);
++		return -EINVAL;
++	}
++
++	for (i = 0; i < priv->nr_io_pins; i++) {
++		if (priv->io_pins[i].pin != pin)
++			continue;
++
++		priv->io_pins[i].io_type = io_type;
++		spacemit_set_io_power_domain(dev, pin, io_type);
++
++		return 0;
++	}
++
++	return 0;
++}
++
+ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 				unsigned int param, unsigned int argument)
+ {
+-	struct spacemit_pinctrl_data *data;
+ 	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	struct spacemit_pinctrl_data *data;
++	enum spacemit_pin_io_type io_type;
+ 	void __iomem *addr;
+-	unsigned int io_type;
+ 	u8 ds;
+-	bool found;
+-	int i;
+ 
+ 	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
+ 	if (!data || !data->pin_to_reg)
+@@ -501,14 +544,7 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 				argument ? PAD_PULLUP | PAD_PULL_EN : 0);
+ 		break;
+ 	case PIN_CONFIG_DRIVE_STRENGTH:
+-		io_type = IO_TYPE_1V8;
+-		for (i = 0; i < priv->nr_io_pins; i++) {
+-			if (priv->io_pins[i].pin != pin_selector)
+-				continue;
+-			if (priv->io_pins[i].io_type != IO_TYPE_EXTERNAL)
+-				io_type = priv->io_pins[i].io_type;
+-			break;
+-		}
++		io_type = spacemit_get_pin_io_type(priv, pin_selector);
+ 		if (io_type != IO_TYPE_3V3 && io_type != IO_TYPE_1V8) {
+ 			dev_err(dev, "Invalid IO type (%d)\n", io_type);
+ 			return -EINVAL;
+@@ -517,30 +553,90 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 		clrsetbits_le32(addr, PAD_DRIVE, FIELD_PREP(PAD_DRIVE, ds));
+ 		break;
+ 	case PIN_CONFIG_POWER_SOURCE:
+-		for (i = 0, found = false; i < priv->nr_io_pins; i++) {
+-			if (priv->io_pins[i].pin != pin_selector)
+-				continue;
+-			if (argument == PIN_POWER_STATE_3V3) {
+-				priv->io_pins[i].io_type = IO_TYPE_3V3;
+-				found = true;
+-			} else if (argument == PIN_POWER_STATE_1V8) {
+-				priv->io_pins[i].io_type = IO_TYPE_1V8;
+-				found = true;
+-			}
+-			break;
+-		}
+-		if (!found && argument != PIN_POWER_STATE_1V8 &&
+-		    argument != PIN_POWER_STATE_3V3) {
+-			dev_err(dev, "Invalid power source (%d)\n", argument);
+-			return -EINVAL;
+-		}
+-		if (found)
+-			spacemit_set_io_power_domain(dev, pin_selector,
+-						     priv->io_pins[i].io_type);
+-		break;
++		return spacemit_set_pin_power_source(dev, pin_selector, argument);
+ 	default:
+ 		return -EOPNOTSUPP;
+ 	}
++
++	return 0;
++}
++
++static int spacemit_pinctrl_apply_group(struct udevice *dev,
++					struct udevice *config)
++{
++	const struct pinconf_param *param;
++	const void *value;
++	u32 argument;
++	u32 pinmux;
++	int npins;
++	int len;
++	int ret;
++	int i, j;
++
++	ret = dev_read_size(config, "pinmux");
++	if (ret == -EINVAL)
++		return 0;
++	if (ret < 0 || ret % sizeof(pinmux))
++		return -EINVAL;
++	npins = ret / sizeof(pinmux);
++
++	for (i = 0; i < npins; i++) {
++		ret = dev_read_u32_index(config, "pinmux", i, &pinmux);
++		if (ret)
++			return ret;
++
++		ret = spacemit_pinmux_set(dev, spacemit_dt_get_pin(pinmux),
++					  spacemit_dt_get_pin_mux(pinmux));
++		if (ret)
++			return ret;
++	}
++
++	for (i = 0; i < ARRAY_SIZE(spacemit_pinconf_params); i++) {
++		param = &spacemit_pinconf_params[i];
++		value = dev_read_prop(config, param->property, &len);
++		if (!value)
++			continue;
++
++		if (len >= sizeof(fdt32_t))
++			argument = fdt32_to_cpu(*(const fdt32_t *)value);
++		else
++			argument = param->default_value;
++
++		for (j = 0; j < npins; j++) {
++			ret = dev_read_u32_index(config, "pinmux", j,
++						 &pinmux);
++			if (ret)
++				return ret;
++
++			ret = spacemit_pinconf_set(dev,
++						   spacemit_dt_get_pin(pinmux),
++						   param->param, argument);
++			if (ret)
++				return ret;
++		}
++	}
++
++	return 0;
++}
++
++static int spacemit_pinctrl_set_state(struct udevice *dev,
++				      struct udevice *config)
++{
++	struct udevice *child;
++	int ret;
++
++	ret = spacemit_pinctrl_apply_group(dev, config);
++	if (ret)
++		return ret;
++
++	for (device_find_first_child(config, &child);
++	     child;
++	     device_find_next_child(&child)) {
++		ret = spacemit_pinctrl_apply_group(dev, child);
++		if (ret)
++			return ret;
++	}
++
+ 	return 0;
+ }
+ 
+@@ -622,7 +718,7 @@ static const struct pinctrl_ops spacemit_pinctrl_ops = {
+ 	.get_pin_name		= spacemit_get_pin_name,
+ 	.get_functions_count	= spacemit_get_functions_count,
+ 	.get_pin_muxing		= spacemit_get_pin_muxing,
+-	.set_state		= pinctrl_generic_set_state,
++	.set_state		= spacemit_pinctrl_set_state,
+ 	.gpio_request_enable	= spacemit_pinctrl_request_gpio,
+ 	.gpio_disable_free	= spacemit_pinctrl_free_gpio,
+ 	.pinmux_set		= spacemit_pinmux_set,
 
-Both commits are checkpatch --strict clean and build warning-free at
-W=3D1; a full sandbox build also passes.
+-- 
+2.55.0
 
-Thanks,
-Pranav
-
-On Thu, Aug 20, 2026 at 1:33=E2=80=AFPM Pranav Rajendran <pranavkasthuri@gm=
-ail.com>
-wrote:
-
-> dhcp_packet_process_options() derives the end of the option area from
-> BOOTP_HDR_SIZE, a compile-time constant, rather than from the length of
-> the packet that was actually received:
->
->         uchar *popt =3D (uchar *)&bp->bp_vend[4];
->         uchar *end =3D popt + BOOTP_HDR_SIZE;
->
-> Since popt already starts near the end of the header, 'end' lands
-> sizeof(struct bootp_hdr) bytes beyond it, so a short reply leaves
-> dhcp_process_options() walking off the end of the received data and
-> into whatever the receive buffer held before - typically the remains of
-> earlier packets.
->
-> That is not only a disclosure: the options found there are acted on
-> like any others, so stale bytes that happen to parse as an option can
-> influence the boot file name, the DNS server or the root path.
->
-> The BOOTP path already gets this right and passes the real length to
-> bootp_process_vendor(), and both callers here have the length in scope
-> - they hand it to dhcp_message_type() on the lines above. Pass it in
-> and use it as the limit. The overloaded 'file' and 'sname' areas are
-> clamped the same way, as a truncated packet need not contain them
-> either.
->
-> Fixes: 774c3e05ec0a ("net: parse DHCP options from overloaded file/sname
-> fields")
-> Signed-off-by: Pranav Rajendran <pranavkasthuri@gmail.com>
-> ---
-> v2: No change, rebased on top of the new patch 1/2 which fixes the
->     inner option-length validation gap Jerome raised against v1.
->
->  net/bootp.c | 27 +++++++++++++++++++--------
->  1 file changed, 19 insertions(+), 8 deletions(-)
->
-> diff --git a/net/bootp.c b/net/bootp.c
-> index eafbe9e3bb4..06083092875 100644
-> --- a/net/bootp.c
-> +++ b/net/bootp.c
-> @@ -977,32 +977,43 @@ static void dhcp_process_options(uchar *popt, uchar
-> *end)
->         }
->  }
->
-> -static void dhcp_packet_process_options(struct bootp_hdr *bp)
-> +static void dhcp_packet_process_options(struct bootp_hdr *bp, unsigned
-> int len)
->  {
-> -       uchar *popt =3D (uchar *)&bp->bp_vend[4];
-> -       uchar *end =3D popt + BOOTP_HDR_SIZE;
-> +       uchar *pkt_end =3D (uchar *)bp + len;
-> +       uchar *popt, *end;
-> +
-> +       if (len < offsetof(struct bootp_hdr, bp_vend) + 4)
-> +               return;
->
->         if (net_read_u32((u32 *)&bp->bp_vend[0]) !=3D
-> htonl(BOOTP_VENDOR_MAGIC))
->                 return;
->
-> +       popt =3D (uchar *)&bp->bp_vend[4];
-> +
->         dhcp_option_overload =3D 0;
->
->         /*
->          * The 'options' field MUST be interpreted first, 'file' next,
->          * 'sname' last.
->          */
-> -       dhcp_process_options(popt, end);
-> +       dhcp_process_options(popt, pkt_end);
->
->         if (dhcp_option_overload & OVERLOAD_FILE) {
->                 popt =3D (uchar *)bp->bp_file;
->                 end =3D popt + sizeof(bp->bp_file);
-> -               dhcp_process_options(popt, end);
-> +               if (end > pkt_end)
-> +                       end =3D pkt_end;
-> +               if (popt < end)
-> +                       dhcp_process_options(popt, end);
->         }
->
->         if (dhcp_option_overload & OVERLOAD_SNAME) {
->                 popt =3D (uchar *)bp->bp_sname;
->                 end =3D popt + sizeof(bp->bp_sname);
-> -               dhcp_process_options(popt, end);
-> +               if (end > pkt_end)
-> +                       end =3D pkt_end;
-> +               if (popt < end)
-> +                       dhcp_process_options(popt, end);
->         }
->  }
->
-> @@ -1133,7 +1144,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest,
-> struct in_addr sip,
->                                 debug("got BOOTP response; transitioning
-> to BOUND\n");
->                                 goto dhcp_got_bootp;
->                         }
-> -                       dhcp_packet_process_options(bp);
-> +                       dhcp_packet_process_options(bp, len);
->                         if (CONFIG_IS_ENABLED(EFI_LOADER) &&
->                             IS_ENABLED(CONFIG_NETDEVICES))
->                                 efi_net_set_dhcp_ack(pkt, len);
-> @@ -1160,7 +1171,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest,
-> struct in_addr sip,
->
->                 if (dhcp_message_type((u8 *)bp->bp_vend, (u8 *)pkt + len)
-> =3D=3D DHCP_ACK) {
->  dhcp_got_bootp:
-> -                       dhcp_packet_process_options(bp);
-> +                       dhcp_packet_process_options(bp, len);
->                         /* Store net params from reply */
->                         store_net_params(bp);
->                         dhcp_state =3D BOUND;
-> --
-> 2.50.1 (Apple Git-155)
->
->
-
---000000000000422eeb065979f0ff
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br>Hi Jerome,<br><br>Good catch =E2=80=94 you&#39;re righ=
-t, the outer bound alone doesn&#39;t cover it.<br>dhcp_process_options() tr=
-usted `popt &lt; end` to mean the whole option<br>(code + length + payload)=
- was safe, but that only guarantees the code<br>byte is readable. oplen =3D=
- *(popt + 1) and the payload dereferences in<br>the switch had no bound che=
-ck of their own, so a packet truncated<br>right after an option code byte, =
-or with a declared length that<br>overruns the buffer, still walked off the=
- end even with the outer fix<br>applied.<br><br>Sent as v2 with a prerequis=
-ite patch (1/2) that fixes this: the pad<br>option is now handled before to=
-uching a second byte, a length byte is<br>required to exist before it&#39;s=
- read, and the full declared option<br>(header + payload) is required to fi=
-t before the switch runs on it =E2=80=94<br>otherwise parsing stops instead=
- of reading past the buffer. Your<br>original outer-bound fix is 2/2, uncha=
-nged, rebased on top.<br><br>Both commits are checkpatch --strict clean and=
- build warning-free at<br>W=3D1; a full sandbox build also passes.<br><br>T=
-hanks,<br>Pranav<br></div><br><div class=3D"gmail_quote gmail_quote_contain=
-er"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 20, 2026 at 1:33=E2=
-=80=AFPM Pranav Rajendran &lt;<a href=3D"mailto:pranavkasthuri@gmail.com">p=
-ranavkasthuri@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">dhcp_packet_process_options() derives the end of the=
- option area from<br>
-BOOTP_HDR_SIZE, a compile-time constant, rather than from the length of<br>
-the packet that was actually received:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 uchar *popt =3D (uchar *)&amp;bp-&gt;bp_vend[4]=
-;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 uchar *end =3D popt + BOOTP_HDR_SIZE;<br>
-<br>
-Since popt already starts near the end of the header, &#39;end&#39; lands<b=
-r>
-sizeof(struct bootp_hdr) bytes beyond it, so a short reply leaves<br>
-dhcp_process_options() walking off the end of the received data and<br>
-into whatever the receive buffer held before - typically the remains of<br>
-earlier packets.<br>
-<br>
-That is not only a disclosure: the options found there are acted on<br>
-like any others, so stale bytes that happen to parse as an option can<br>
-influence the boot file name, the DNS server or the root path.<br>
-<br>
-The BOOTP path already gets this right and passes the real length to<br>
-bootp_process_vendor(), and both callers here have the length in scope<br>
-- they hand it to dhcp_message_type() on the lines above. Pass it in<br>
-and use it as the limit. The overloaded &#39;file&#39; and &#39;sname&#39; =
-areas are<br>
-clamped the same way, as a truncated packet need not contain them<br>
-either.<br>
-<br>
-Fixes: 774c3e05ec0a (&quot;net: parse DHCP options from overloaded file/sna=
-me fields&quot;)<br>
-Signed-off-by: Pranav Rajendran &lt;<a href=3D"mailto:pranavkasthuri@gmail.=
-com" target=3D"_blank">pranavkasthuri@gmail.com</a>&gt;<br>
----<br>
-v2: No change, rebased on top of the new patch 1/2 which fixes the<br>
-=C2=A0 =C2=A0 inner option-length validation gap Jerome raised against v1.<=
-br>
-<br>
-=C2=A0net/bootp.c | 27 +++++++++++++++++++--------<br>
-=C2=A01 file changed, 19 insertions(+), 8 deletions(-)<br>
-<br>
-diff --git a/net/bootp.c b/net/bootp.c<br>
-index eafbe9e3bb4..06083092875 100644<br>
---- a/net/bootp.c<br>
-+++ b/net/bootp.c<br>
-@@ -977,32 +977,43 @@ static void dhcp_process_options(uchar *popt, uchar *=
-end)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-=C2=A0}<br>
-<br>
--static void dhcp_packet_process_options(struct bootp_hdr *bp)<br>
-+static void dhcp_packet_process_options(struct bootp_hdr *bp, unsigned int=
- len)<br>
-=C2=A0{<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0uchar *popt =3D (uchar *)&amp;bp-&gt;bp_vend[4]=
-;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0uchar *end =3D popt + BOOTP_HDR_SIZE;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0uchar *pkt_end =3D (uchar *)bp + len;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0uchar *popt, *end;<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0if (len &lt; offsetof(struct bootp_hdr, bp_vend=
-) + 4)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (net_read_u32((u32 *)&amp;bp-&gt;bp_vend[0])=
- !=3D htonl(BOOTP_VENDOR_MAGIC))<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0popt =3D (uchar *)&amp;bp-&gt;bp_vend[4];<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 dhcp_option_overload =3D 0;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* The &#39;options&#39; field MUST be int=
-erpreted first, &#39;file&#39; next,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* &#39;sname&#39; last.<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0dhcp_process_options(popt, end);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0dhcp_process_options(popt, pkt_end);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (dhcp_option_overload &amp; OVERLOAD_FILE) {=
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 popt =3D (uchar *)b=
-p-&gt;bp_file;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 end =3D popt + size=
-of(bp-&gt;bp_file);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dhcp_process_option=
-s(popt, end);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (end &gt; pkt_en=
-d)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0end =3D pkt_end;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (popt &lt; end)<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0dhcp_process_options(popt, end);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (dhcp_option_overload &amp; OVERLOAD_SNAME) =
-{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 popt =3D (uchar *)b=
-p-&gt;bp_sname;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 end =3D popt + size=
-of(bp-&gt;bp_sname);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dhcp_process_option=
-s(popt, end);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (end &gt; pkt_en=
-d)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0end =3D pkt_end;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (popt &lt; end)<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0dhcp_process_options(popt, end);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-=C2=A0}<br>
-<br>
-@@ -1133,7 +1144,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest, s=
-truct in_addr sip,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 debug(&quot;got BOOTP response; tran=
-sitioning to BOUND\n&quot;);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto dhcp_got_bootp;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 }<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0dhcp_packet_process_options(bp);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0dhcp_packet_process_options(bp, len);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 if (CONFIG_IS_ENABLED(EFI_LOADER) &amp;&amp;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 IS_ENABLED(CONFIG_NETDEVICES))<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 efi_net_set_dhcp_ack(pkt, len);<br>
-@@ -1160,7 +1171,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest, s=
-truct in_addr sip,<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (dhcp_message_ty=
-pe((u8 *)bp-&gt;bp_vend, (u8 *)pkt + len) =3D=3D DHCP_ACK) {<br>
-=C2=A0dhcp_got_bootp:<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0dhcp_packet_process_options(bp);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0dhcp_packet_process_options(bp, len);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 /* Store net params from reply */<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 store_net_params(bp);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 dhcp_state =3D BOUND;<br>
--- <br>
-2.50.1 (Apple Git-155)<br>
-<br>
-</blockquote></div>
-
---000000000000422eeb065979f0ff--
