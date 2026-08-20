@@ -1,84 +1,84 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68728C5DF85
-	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD7D4C5DF85
+	for <u-boot@archiver.kernel.org>; Thu, 20 Aug 2026 15:05:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0EB0E6076A;
-	Thu, 20 Aug 2026 15:05:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3D2AB80DD9;
+	Thu, 20 Aug 2026 15:05:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r3nO8ABqmnm3; Thu, 20 Aug 2026 15:05:05 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tdVLFTGstgZr; Thu, 20 Aug 2026 15:05:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787238305;
-	bh=wfboa9wfCYc5ab5W6EO+b9JVnLuX6067v+piEyDDefA=;
+	d=lists.u-boot-project.org; s=default; t=1787238311;
+	bh=TVeSUpAYgr+E2BuWNYm5B1ha6BEHd7qpxKdFlzkMr80=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HtmN6YVI9tk+125d0DWMquyGHZZqajhsjzL+3Vz6vvHoG6dzf4UqxRQhYSaA6fUfa
-	 f1exv0dxwUL1Y449O+cjuI8EAzvDzTg3y5Cc7nUP5uuWGjH6eLYJFvsQw5Jkj5FBIi
-	 TOVESzn1KhrLV00tz94oX6baQx/L8KUyJ+57h1DqmVRNWhAPp/VI5VJwDMtLGWqPsK
-	 CQwZ8vnPotPXmcsdc7hLGaFICVz3lE7CDQVb1UmqkGKDqQ41TbMZiaMO3FN9t2o/z5
-	 K2PA8JWNKzIMuhImY8iYXhP531szB4Qs1LM7n3RySSak1yGA+325cpdZAV1//dGZdQ
-	 JpfqKrXU1am8A==
+	b=mxXJQek+y793t8xlsf233T/gRx1s/cklLLlfXFAOgbvRs3L9QLgi+VKjmaofxsZhn
+	 NtKFVntlZyCV3yKngEdo7JhSl/OZIhjHa/9dHMrnPD1Kf3NMUtMr8NjPwvf+cmzVpQ
+	 mOxXsOLQHJ0qsMAF/PqiEstCd4waiQbGdjd2wFfdI1D7QNBcLcCDEvxupgIh2QqEr6
+	 G6v+DCDFLUYDG7QayCqSlZzeoI/OpG9R/Cdv+oegj5lGz1I/OvVM/xE+7sQ4xncwPd
+	 ofFhoHNUhKZQknp2pdmrW1HJG2I3TIZ0OPLHCwWFY9/OxLe51Mri21QdCJYxVq5bBP
+	 Ii25R/PfbWmYQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1DDB8607D5;
-	Thu, 20 Aug 2026 15:05:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 36ECB80DC9;
+	Thu, 20 Aug 2026 15:05:11 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7AD05263
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:04 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D768639E
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 611F140329
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:04 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C96D140329
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ycs56YTv8Kfg for <u-boot@lists.u-boot-project.org>;
- Thu, 20 Aug 2026 15:05:03 +0000 (UTC)
+ id RQBmzN3sbFnb for <u-boot@lists.u-boot-project.org>;
+ Thu, 20 Aug 2026 15:05:09 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c107::3;
- helo=ph0pr06cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c105::1;
+ helo=ch1pr05cu001.outbound.protection.outlook.com;
  envelope-from=akshay.belsare@amd.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=NEx7aPXP
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 548F24031A
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:02 +0000 (UTC)
+ header.s=selector1 header.b=1XmXufnm
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BB8C64031A
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 15:05:08 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fURhXEJ/z89NoJ8qISYtKR69DAlN7elY5ZlzjLUDS2QPvu3ur3B7eMw1PiPXgvJ/IkbHF8Gusky5ZVYskxSWyVXX18vtVdd5BbKEs2nKbhiSIZL4bl3ZjTBGMpvOTSO6ldDVInzo4VoCFofXCZZhgZAfzFkedIuf5MOwbgDrlyTFiQj0AHywxPyvDk6GpcmBkrz0d2PD1pEXkou3vxamif2UlpPUBm1a2vYMQUGsUTHoW81bIbar4wgvy3qDd0iLEIFErPKYcGff7WoUNjZhyWrISnRfGlw1PT/LydUhmYQkU+J2Q9LmCBwtWAW58GZMiv5uvonLUUOMETrgIkJ/zg==
+ b=xMN27+oRMJ//znrQfpGyYcZXfug6BRGWx2gHOoGSeOOHjT+cB6VjKtnHTfHa1h5cmEv9VXrG3RtTMmqDsVEtiIP3r/ezuPOtkq6aN5+7y2saIiCFdgUG/ONOamE+mO7w2CCynn3L95zgLHORE5JzMMSxxxPdodfnc1MSKQA2jwd1NTypiFWDsYGBvq5jAh1vYEuW0HK/zxFwm+f6+V8310TC2vaf9jGYwPESFIv2h08kwDnXRrVjGSBCNRZ2+hV8EUVAiu5vEeVLTyqqLH/0zsX09lSa3R6J12XJ1iNtCkr3C7GA5zLwcMH4JcLjeyuqHQuwv8YrHC45+7mRs+ovrg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wfboa9wfCYc5ab5W6EO+b9JVnLuX6067v+piEyDDefA=;
- b=Dz5t30oM0m805gtbIfnhm1l/BB189eGzx8fMcYxktqzlUllEZG0M5XxSEL9P4WtcAkdOzlRI7eD4Z8qj3kHGEawBAK98OLxACyAz/H/dINWwHX0uBtmUvjJfjhspUoxPMVN90AtOEZ8VClkndWZiKjWCaRhCCjqUYGfLefDBzOmGSOSoSzHqo9C4zjrTRFsacz2hgc2JDFGdJ2Ff4F9Qs0jwVKdYoriYCOtIYDk2vc663aVu/lSoqwt02BCPNxEF9oSQcJwbYOu4bXKAHDVU6M4UIv34oy0UinPUCko45fAsMb7bOLuPybkFiqyqM/lI8NRBxFV3iegWatdx/aWosA==
+ bh=TVeSUpAYgr+E2BuWNYm5B1ha6BEHd7qpxKdFlzkMr80=;
+ b=ggC7RXkxmhIludr6uWyT3ikhf1TG1f1laI4TfLfDRKYuGH6nAw82ffM+tQP/fZCnythbOvC5jTRqesMlqFyxmHH97RhXO98j/pgtuMSq5KjWMgsHRziyJ6dRf7NIfXei6UCZh3QqbE2C55wVJ08aOrUrgQz/D/36hYmPgZpCywQUem2o8nwEY344kF0kjmF6heU2MRZImVoZyAKOS7EJ5kkDNbZNHtM/K4Sb86QC7ckobIUBY7Ha2z5qKlxCMLkffaEJABhgZnOaJOnbn4enBfB45C6O+3/PHJ9Hk5IYs+ivB+QQDP/wr0D+n3T7XnU0vqytDojDxXojUGLEqqARxQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wfboa9wfCYc5ab5W6EO+b9JVnLuX6067v+piEyDDefA=;
- b=NEx7aPXPmCh/co9yx3sXLCgh2B8E2lG/AhGqnp02oAHpyciD/4bKQpKTEqrkqD5c9/IB5YDjixfpl2i16MLgZrfNAlM0m0hwPCmjTobBNAjf2LQQmpvcPoaGWBPJgvwj/keUeAtOqFm2bND6HwpKb7UKWxC2WV61FiLAg1FYyVo=
-Received: from DM6PR02CA0163.namprd02.prod.outlook.com (2603:10b6:5:332::30)
- by BY5PR12MB4306.namprd12.prod.outlook.com (2603:10b6:a03:206::17) with
+ bh=TVeSUpAYgr+E2BuWNYm5B1ha6BEHd7qpxKdFlzkMr80=;
+ b=1XmXufnm42BMJQuqXFaP76Ct4SNxjHJoLCDRgIshYQavXLZkayO8+RYScK1/NwxfEu3L0UWfziV196tS3o9oZuEadhTOwfEuMb/uQmnL+8Z4Ch1ghs9Lzkqx3tPnH+brISSwNcL+Yta1+sRdYD2rZi5CFYUVm06R6STD4T4bviQ=
+Received: from DS7PR03CA0278.namprd03.prod.outlook.com (2603:10b6:5:3ad::13)
+ by SA1PR12MB6972.namprd12.prod.outlook.com (2603:10b6:806:24f::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.9; Thu, 20 Aug
- 2026 15:04:57 +0000
-Received: from DS1PEPF00017099.namprd05.prod.outlook.com
- (2603:10b6:5:332:cafe::6b) by DM6PR02CA0163.outlook.office365.com
- (2603:10b6:5:332::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.10 via Frontend Transport; Thu,
- 20 Aug 2026 15:04:57 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Thu, 20 Aug
+ 2026 15:04:59 +0000
+Received: from DS1PEPF00017097.namprd05.prod.outlook.com
+ (2603:10b6:5:3ad:cafe::30) by DS7PR03CA0278.outlook.office365.com
+ (2603:10b6:5:3ad::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.9 via Frontend Transport; Thu, 20
+ Aug 2026 15:04:59 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,61 +86,61 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 Received: from satlexmb08.amd.com (165.204.84.17) by
- DS1PEPF00017099.mail.protection.outlook.com (10.167.18.103) with Microsoft
+ DS1PEPF00017097.mail.protection.outlook.com (10.167.18.101) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Thu, 20 Aug 2026 15:04:57 +0000
+ 15.21.339.3 via Frontend Transport; Thu, 20 Aug 2026 15:04:59 +0000
 Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 10:04:20 -0500
+ 2026 10:04:21 -0500
 Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
  (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 20 Aug
- 2026 10:03:11 -0500
+ 2026 10:03:22 -0500
 Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Thu, 20 Aug 2026 10:03:09 -0500
+ Transport; Thu, 20 Aug 2026 10:03:20 -0500
 From: Akshay Belsare <akshay.belsare@amd.com>
 To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
 CC: <git@amd.com>, <padmarao.begari@amd.com>, Akshay Belsare
  <akshay.belsare@amd.com>, Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/3] soc: xilinx: decouple chip ID retrieval from direct
- firmware calls
-Date: Thu, 20 Aug 2026 20:24:17 +0530
-Message-ID: <20260820145459.246717-2-akshay.belsare@amd.com>
+ <ilias.apalodimas@linaro.org>
+Subject: [PATCH 2/3] soc: xilinx: route PMC TAP register access through
+ firmware
+Date: Thu, 20 Aug 2026 20:24:18 +0530
+Message-ID: <20260820145459.246717-3-akshay.belsare@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260820145459.246717-1-akshay.belsare@amd.com>
 References: <20260820145459.246717-1-akshay.belsare@amd.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017099:EE_|BY5PR12MB4306:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3929c75-9a24-49da-04d3-08defecc6621
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017097:EE_|SA1PR12MB6972:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8694af77-acd6-4961-400c-08defecc6751
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|82310400026|1800799024|36860700016|18002099003|22082099003|11063799006|56012099006|10067099003|3023799007;
-X-Microsoft-Antispam-Message-Info: /EE9YtMISZtn3H53rpayWv018+pV4GpcfG7DDR66jyIsss7/h68Ha3ana5WE4CLZRas0R7bXsyw9BEtP93V/eQ5D5L1apq2j47ZxdC84a421fETjU71UVNi2/wXCCT6i0RHBWce2oZWLbahk2xWVl7D0tMVfx6n7tkkXlo8liNp1Dy9C5V+/nCqOn5DSgvy8CFOYA2KqJ8/sw6g19ATyD5RyMjG7dTuio4YZGD2ddKh2fQIG9cAHsL3ec49atfGnD4gzShd/D4fD3UL1ElAl2P6bTXItLBfgY3Kju8K+RlNOCZvrrKxCgYBJXJ/6TBmV+UPLTDdVtH6BnnIyFPOAtPoBjMvPihxmyuDp8sx9KuSgC0IEipKq7v2mV79TpUjLY+vL7h+bIVLDCBY0TCOI5HvmomnkX/n7m4qKwnMrpKx0CNd4RsiX+9qc42AwPT3mpv1xmAKUpRTmIcm7kC0Dgd5k50PByTFkkhG7X1DVbic4KMggxZ3+1Omgh2/x0q0KWVN+/HfonEmF4SGdbkkZAKYdzVH6Djm7bPXv7Wf3Rz7ePZaDRPiiXOc+ZlsVqfyv07UenRPlunGFTU108sgf0VVla1QRTMZZ2w7vcWG8S3+vmLoQHz0czcQ/3f+/aD1cgVGO8ebAJ1qJ3XpjlItVrHZKgaKJOj3fbJ3nYvmcf+ayWAh6dp6x1eN2pbYHF6c9TT2XVTovF0UPza2In9tIGA==
+ ARA:13230040|23010399003|376014|1800799024|82310400026|36860700016|18002099003|22082099003|56012099006|3023799007|11063799006|10067099003|5023799004;
+X-Microsoft-Antispam-Message-Info: k3YzDESTSrIOpDS6qCeDo+SndrQG2mSYqKiSmjZ16bWHs5TEBlgVIPH4RjZhTwnqEPWLqN0eQg7Gsw/C1rKyUwSwkaFnqojhPKSZnYr9YR6VeV1vnUrJ6cAU/mzVKR8MVqd5Ub1GUXbaHtx/kzXxWHq+SfoO84ruErDmN5Fo18VcCnV9nNYge0On/lOosxENoXlTZKJOBwFsSxwr9eF5PM+k/z8G4qLJB143/4G/tgA6ehSBIFlN04oy7WzYDUb94nIxpK/8MjeYDCGtGiC3k1StUJbedNSj63jWopFAfGCWRPqn1RcWpFAw0siqvz1r7m5jTm/8VzRmMNduSzTouGSY96zLrey8W7bt08BcZNkfQrupvoDHnkegi+mvR7XIViOkwnc1LKUaryhhSaP9SIYTCvF0IwntvuyF9oa1ALj+LzfhEJ5UjFL2QoBM1y9GFn1IWeld5j4AZfn5LgWLvh4cR0/RjVIif5bihHil2rvB9U/cykomYgdbjywjfew/M3tF7ee5Mui3o/Iz2gryWDn74cY4/FFyvzqJ625cj8Adl/VLIAw1YxgSCxoY+pvAqJxVgpxiOStzhTGwP1peWhlCZYAG7KdxJuseAYRElR2WCm4qurGogcDGuY0qRTWuB6epvhrmeFzhMGaGjbdChS8gO/YdD3a0htd9yc6m2VNCc01Dy6QcbfxASdYX5VCk7JS3H1o6P69QuaWpV/Ve1w==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(82310400026)(1800799024)(36860700016)(18002099003)(22082099003)(11063799006)(56012099006)(10067099003)(3023799007);
+ SFS:(13230040)(23010399003)(376014)(1800799024)(82310400026)(36860700016)(18002099003)(22082099003)(56012099006)(3023799007)(11063799006)(10067099003)(5023799004);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: d/9RQmTgGGD01sbkzLY+Kv9xmUonMtl6tFAesjWKbH8uEea1HufTA+6hOj5DrFf4HTU1dIONI9sA64xs63CZgh3peCChkT+iTfbeV5/PwkbUXg1zQJ+qP7AtfqeLh9e3aKs5nRXI7SIoA1pbakuU6q41OMnlQf1av4wv+W437FQFQBHtI872wvNym8fBqcSkxnyC4HUoboUdaVaXAF5HhDbYAzXuSmDOYYslmJORZBSyjVE89mHLSETp5gmVjHkvbylt6B+12ovrsfZ8nqfmWcu2z9ITeRNSRO3uRoFprhE/0VcjXJ+fNAnnLOfxE2t0kOmDcJmETgUE80a+aWf4AN7mAvoZQ37NvAc5y0yhqohOZMJ1w/xx/3hFQX9qjMT2J8eMy7jOmWhwoGahKZAqATs9+VD0D+LZ9FqAX8W34WkqqruGZkoRV1+atLUaXQuP
+X-MS-Exchange-AntiSpam-MessageData-0: AO8dgcPO36psvNKEA3msIubJ8ZG/gn/2W3pFT/oVRgke6KoRxCBDYsrFkLfzisA3ZxjzvsS1Mc5A0NjwvHAljri2VmxhYLvV53Q7xdIc0JP5Zh4tOJp+EoN2GsSOK574A6oJafoBSwgF/d7PKRBiQuluVOWbpDw9b6msrRa6f502kEjz0XwI9FIwhYjPxBFABDt/+ZkBBPVCBO+xc8k2lW6y8GSTfx5IRfZDKawVWI5wLmQpN7F0Yp3mtVCAkM6nlfNYdHIiaakboEYTdsAZ8CXS51Pg9MTYGQdZfnk8HyyVSD6VVcbx6a+sfT132G8TTl4bXSkg+i6ONt/0FYnCpLUBLsUAv8op5kOn92I6rqADqC0DXEK/8urxU2OrhPOUH7+ac1DvzPjjEBwbXI5zk1NG/wM8xlcV9ed18wRBGi4IarkUHEE78LXeObQSrmgI
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 15:04:57.2998 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3929c75-9a24-49da-04d3-08defecc6621
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 15:04:59.2925 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8694af77-acd6-4961-400c-08defecc6751
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017099.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017097.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4306
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6972
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -154,408 +154,218 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-All four Xilinx SoC drivers contain identical
-IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE) conditionals to retrieve the
-chip ID. Move this logic behind xilinx_pm_get_chipid(), using a
-weak default implementation for each platform and a common override
-in firmware-zynqmp.c.
-
-As part of this refactoring, move the ZynqMP weak default
-implementation to mach-zynqmp/cpu.c to align with the other supported
-platforms. Also declare xilinx_pm_get_chipid() in sys_proto.h instead
-of zynqmp_firmware.h, as the SoC drivers no longer require direct
-dependencies on firmware-specific definitions.
+The Versal Net and Versal Gen 2 implementations of soc_detection()
+currently access the PMC TAP IDCODE, VERSION, and USERCODE registers
+directly without any firmware abstraction.
+ 
+Introduce dedicated helpers for each register access:
+zynqmp_pm_get_pmc_tap_idcode(),
+zynqmp_pm_get_pmc_tap_version(), and
+zynqmp_pm_get_pmc_tap_usercode().
+ 
+Implement these helpers as weak platform defaults, with a common
+firmware-backed override in firmware-zynqmp.c. The firmware
+implementation accesses the registers through IOCTL_READ_REG using the
+new PM_REGNODE_PMC_TAP register node, following the same mechanism used
+by zynqmp_pm_get_pmc_multi_boot_reg() for PMC_GLOBAL register access.
+ 
+This change removes direct PMC TAP register accesses from the SoC
+detection path and provides a consistent firmware abstraction across
+supported platforms.
 
 Signed-off-by: Akshay Belsare <akshay.belsare@amd.com>
 ---
- arch/arm/mach-versal-net/cpu.c                | 13 +++++++++++
- .../mach-versal-net/include/mach/sys_proto.h  |  2 ++
- arch/arm/mach-versal/cpu.c                    | 13 +++++++++++
- arch/arm/mach-versal/include/mach/sys_proto.h |  2 ++
- arch/arm/mach-versal2/cpu.c                   | 13 +++++++++++
- .../arm/mach-versal2/include/mach/sys_proto.h |  2 ++
- arch/arm/mach-zynqmp/cpu.c                    |  8 +++++++
- arch/arm/mach-zynqmp/include/mach/sys_proto.h |  2 ++
- drivers/firmware/firmware-zynqmp.c            | 17 ++++++++++++++
- drivers/soc/soc_amd_versal2.c                 | 23 ++++++-------------
- drivers/soc/soc_xilinx_versal.c               | 23 ++++++-------------
- drivers/soc/soc_xilinx_versal_net.c           | 23 ++++++-------------
- drivers/soc/soc_xilinx_zynqmp.c               | 21 ++++++-----------
- 13 files changed, 100 insertions(+), 62 deletions(-)
+ arch/arm/mach-versal-net/cpu.c                | 21 ++++++++--
+ .../mach-versal-net/include/mach/sys_proto.h  |  4 ++
+ arch/arm/mach-versal2/cpu.c                   | 21 ++++++++--
+ .../arm/mach-versal2/include/mach/sys_proto.h |  4 ++
+ drivers/firmware/firmware-zynqmp.c            | 40 +++++++++++++++++++
+ include/zynqmp_firmware.h                     |  4 ++
+ 6 files changed, 88 insertions(+), 6 deletions(-)
 
 diff --git a/arch/arm/mach-versal-net/cpu.c b/arch/arm/mach-versal-net/cpu.c
-index 7df7c49ac71..54d8496a5e8 100644
+index 54d8496a5e8..5ba2295e4f8 100644
 --- a/arch/arm/mach-versal-net/cpu.c
 +++ b/arch/arm/mach-versal-net/cpu.c
-@@ -11,6 +11,7 @@
- #include <malloc.h>
- #include <time.h>
- #include <vsprintf.h>
-+#include <linux/errno.h>
- #include <asm/armv8/mmu.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-@@ -237,6 +238,18 @@ bool soc_detection(void)
- 	return true;
+@@ -193,13 +193,13 @@ bool soc_detection(void)
+ {
+ 	u32 version, ps_version;
+ 
+-	version = readl(PMC_TAP_VERSION);
++	version = zynqmp_pm_get_pmc_tap_version();
+ 	platform_id = FIELD_GET(PLATFORM_MASK, version);
+ 	ps_version = FIELD_GET(PS_VERSION_MASK, version);
+ 
+ 	debug("idcode %x, version %x, usercode %x\n",
+-	      readl(PMC_TAP_IDCODE), version,
+-	      readl(PMC_TAP_USERCODE));
++	      zynqmp_pm_get_pmc_tap_idcode(), version,
++	      zynqmp_pm_get_pmc_tap_usercode());
+ 
+ 	debug("pmc_ver %lx, ps version %x, rtl version %lx\n",
+ 	      FIELD_GET(PMC_VERSION_MASK, version),
+@@ -250,6 +250,21 @@ __weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
+ 	return 0;
  }
  
-+__weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
++__weak u32 zynqmp_pm_get_pmc_tap_idcode(void)
 +{
-+	if (idcode)
-+		*idcode = 0;
++	return readl(PMC_TAP_IDCODE);
++}
 +
-+	*version = readl(PMC_TAP_VERSION);
-+	if (!*version)
-+		return -EINVAL;
++__weak u32 zynqmp_pm_get_pmc_tap_version(void)
++{
++	return readl(PMC_TAP_VERSION);
++}
 +
-+	return 0;
++__weak u32 zynqmp_pm_get_pmc_tap_usercode(void)
++{
++	return readl(PMC_TAP_USERCODE);
 +}
 +
  U_BOOT_DRVINFO(soc_xilinx_versal_net) = {
  	.name = "soc_xilinx_versal_net",
  };
 diff --git a/arch/arm/mach-versal-net/include/mach/sys_proto.h b/arch/arm/mach-versal-net/include/mach/sys_proto.h
-index 4907dae1108..bfe9df76b0b 100644
+index bfe9df76b0b..877a7e6a0c3 100644
 --- a/arch/arm/mach-versal-net/include/mach/sys_proto.h
 +++ b/arch/arm/mach-versal-net/include/mach/sys_proto.h
-@@ -13,3 +13,5 @@ void versal_net_timer_setup(void);
- u8 versal_net_get_bootmode(void);
- /* Direct MMIO read of the bootmode register (EL3 / no-firmware path) */
+@@ -15,3 +15,7 @@ u8 versal_net_get_bootmode(void);
  u32 versal_net_bootmode_reg(void);
-+/* Overridable chip ID accessor: weak MMIO default, firmware override */
-+int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
-diff --git a/arch/arm/mach-versal/cpu.c b/arch/arm/mach-versal/cpu.c
-index 7521d45bc1a..15b3303bd1c 100644
---- a/arch/arm/mach-versal/cpu.c
-+++ b/arch/arm/mach-versal/cpu.c
-@@ -9,6 +9,7 @@
- #include <init.h>
- #include <log.h>
- #include <time.h>
-+#include <linux/errno.h>
- #include <asm/armv8/mmu.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-@@ -178,6 +179,18 @@ u8 __weak versal_get_bootmode(void)
- 	return reg & BOOT_MODES_MASK;
- }
- 
-+__weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
-+{
-+	if (idcode)
-+		*idcode = 0;
-+
-+	*version = readl(VERSAL_PS_PMC_VERSION);
-+	if (!*version)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
- U_BOOT_DRVINFO(soc_xilinx_versal) = {
- 	.name = "soc_xilinx_versal",
- };
-diff --git a/arch/arm/mach-versal/include/mach/sys_proto.h b/arch/arm/mach-versal/include/mach/sys_proto.h
-index cb373e6fad9..bff4659eb8f 100644
---- a/arch/arm/mach-versal/include/mach/sys_proto.h
-+++ b/arch/arm/mach-versal/include/mach/sys_proto.h
-@@ -27,5 +27,7 @@ u8 versal_get_bootmode(void);
- u32 versal_bootmode_reg(void);
- /* EL3 clock/timer register setup, called from board_early_init_r() */
- void versal_timer_setup(void);
-+/* Overridable chip ID accessor: weak MMIO default, firmware override */
-+int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
- 
- #endif /* _ASM_ARCH_SYS_PROTO_H */
+ /* Overridable chip ID accessor: weak MMIO default, firmware override */
+ int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
++/* Overridable PMC TAP register accessors: weak MMIO default, firmware override */
++u32 zynqmp_pm_get_pmc_tap_idcode(void);
++u32 zynqmp_pm_get_pmc_tap_version(void);
++u32 zynqmp_pm_get_pmc_tap_usercode(void);
 diff --git a/arch/arm/mach-versal2/cpu.c b/arch/arm/mach-versal2/cpu.c
-index d72f66f4fba..fc7cdbaaa65 100644
+index fc7cdbaaa65..24a02c38462 100644
 --- a/arch/arm/mach-versal2/cpu.c
 +++ b/arch/arm/mach-versal2/cpu.c
-@@ -12,6 +12,7 @@
- #include <time.h>
- #include <vsprintf.h>
- #include <wait_bit.h>
-+#include <linux/errno.h>
- #include <asm/armv8/mmu.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-@@ -310,6 +311,18 @@ bool soc_detection(void)
- 	return true;
+@@ -290,13 +290,13 @@ bool soc_detection(void)
+ {
+ 	u32 version, ps_version;
+ 
+-	version = readl(PMC_TAP_VERSION);
++	version = zynqmp_pm_get_pmc_tap_version();
+ 	platform_id = FIELD_GET(PLATFORM_MASK, version);
+ 	ps_version = FIELD_GET(PS_VERSION_MASK, version);
+ 
+ 	debug("idcode %x, version %x, usercode %x\n",
+-	      readl(PMC_TAP_IDCODE), version,
+-	      readl(PMC_TAP_USERCODE));
++	      zynqmp_pm_get_pmc_tap_idcode(), version,
++	      zynqmp_pm_get_pmc_tap_usercode());
+ 
+ 	debug("pmc_ver %lx, ps version %x, rtl version %lx\n",
+ 	      FIELD_GET(PMC_VERSION_MASK, version),
+@@ -323,6 +323,21 @@ __weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
+ 	return 0;
  }
  
-+__weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
++__weak u32 zynqmp_pm_get_pmc_tap_idcode(void)
 +{
-+	if (idcode)
-+		*idcode = 0;
++	return readl(PMC_TAP_IDCODE);
++}
 +
-+	*version = readl(PMC_TAP_VERSION);
-+	if (!*version)
-+		return -EINVAL;
++__weak u32 zynqmp_pm_get_pmc_tap_version(void)
++{
++	return readl(PMC_TAP_VERSION);
++}
 +
-+	return 0;
++__weak u32 zynqmp_pm_get_pmc_tap_usercode(void)
++{
++	return readl(PMC_TAP_USERCODE);
 +}
 +
  U_BOOT_DRVINFO(soc_amd_versal2) = {
  	.name = "soc_amd_versal2",
  };
 diff --git a/arch/arm/mach-versal2/include/mach/sys_proto.h b/arch/arm/mach-versal2/include/mach/sys_proto.h
-index d678adf9c26..1a23f8dd425 100644
+index 1a23f8dd425..fcc2e75c89a 100644
 --- a/arch/arm/mach-versal2/include/mach/sys_proto.h
 +++ b/arch/arm/mach-versal2/include/mach/sys_proto.h
-@@ -21,6 +21,8 @@ u32 versal2_multi_boot_reg(void);
- u8 versal2_get_bootmode(void);
- /* EL3 clock/timer register setup, called from board_early_init_r() */
+@@ -23,6 +23,10 @@ u8 versal2_get_bootmode(void);
  void versal2_timer_setup(void);
-+/* Overridable chip ID accessor: weak MMIO default, firmware override */
-+int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
+ /* Overridable chip ID accessor: weak MMIO default, firmware override */
+ int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
++/* Overridable PMC TAP register accessors: weak MMIO default, firmware override */
++u32 zynqmp_pm_get_pmc_tap_idcode(void);
++u32 zynqmp_pm_get_pmc_tap_version(void);
++u32 zynqmp_pm_get_pmc_tap_usercode(void);
  
  int zynqmp_pm_wait_mphy_tx_rx_config_ready(u32 timeout_us);
  int zynqmp_pm_wait_sram_init_done(u32 timeout_us);
-diff --git a/arch/arm/mach-zynqmp/cpu.c b/arch/arm/mach-zynqmp/cpu.c
-index 088cc962189..c7328970fe5 100644
---- a/arch/arm/mach-zynqmp/cpu.c
-+++ b/arch/arm/mach-zynqmp/cpu.c
-@@ -214,6 +214,14 @@ int __weak zynqmp_mmio_read(const u32 address, u32 *value)
- 	return -EINVAL;
- }
- 
-+__weak int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
-+{
-+	if (idcode)
-+		*idcode = 0;
-+
-+	return zynqmp_mmio_read(ZYNQMP_PS_VERSION, version);
-+}
-+
- void zynqmp_timer_setup(void)
- {
- 	u32 val;
-diff --git a/arch/arm/mach-zynqmp/include/mach/sys_proto.h b/arch/arm/mach-zynqmp/include/mach/sys_proto.h
-index d2bb10ffcbb..e791c2da74f 100644
---- a/arch/arm/mach-zynqmp/include/mach/sys_proto.h
-+++ b/arch/arm/mach-zynqmp/include/mach/sys_proto.h
-@@ -59,5 +59,7 @@ void zynqmp_timer_setup(void);
- /* Direct MMIO accessors (EL3/SPL or no-firmware path) */
- int zynqmp_mmio_rawread(const u32 address, u32 *value);
- int zynqmp_mmio_rawwrite(const u32 address, const u32 mask, const u32 value);
-+/* Overridable chip ID accessor: weak MMIO default, firmware override */
-+int xilinx_pm_get_chipid(u32 *idcode, u32 *version);
- 
- #endif /* _ASM_ARCH_SYS_PROTO_H */
 diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-index fae66ccb3d8..ad759849fe4 100644
+index ad759849fe4..7a922fe544b 100644
 --- a/drivers/firmware/firmware-zynqmp.c
 +++ b/drivers/firmware/firmware-zynqmp.c
-@@ -175,6 +175,23 @@ unsigned int zynqmp_firmware_version(void)
- 	return pm_api_version;
- };
+@@ -510,6 +510,46 @@ u32 versal2_pmc_multi_boot(void)
+ }
+ #endif
  
-+int xilinx_pm_get_chipid(u32 *idcode, u32 *version)
++#if defined(CONFIG_ARCH_VERSAL_NET) || defined(CONFIG_ARCH_VERSAL2)
++static u32 zynqmp_pm_get_pmc_tap_reg(u32 offset)
 +{
-+	u32 ret_payload[PAYLOAD_ARG_CNT];
 +	int ret;
++	u32 ret_payload[PAYLOAD_ARG_CNT];
 +
-+	ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0, 0, 0, ret_payload);
-+	if (ret)
-+		return ret;
++	ret = zynqmp_pm_is_function_supported(PM_IOCTL, IOCTL_READ_REG);
++	if (ret) {
++		printf("%s: IOCTL_READ_REG is not supported failed with error code: %d\n"
++		       , __func__, ret);
++		return 0;
++	}
 +
-+	if (idcode)
-+		*idcode = ret_payload[1];
-+	if (version)
-+		*version = ret_payload[2];
++	ret = xilinx_pm_request(PM_IOCTL, PM_REGNODE_PMC_TAP, IOCTL_READ_REG,
++				offset, 0, 0, 0, ret_payload);
++	if (ret) {
++		printf("%s: node 0x%x: pmc_tap offset 0x%x failed\n",
++		       __func__, PM_REGNODE_PMC_TAP, offset);
++		return 0;
++	}
 +
-+	return 0;
++	return ret_payload[1];
 +}
 +
- #if defined(CONFIG_ARCH_VERSAL2)
- /*
-  * Poll the M-PHY TX/RX config-ready status until it settles or @timeout_us
-diff --git a/drivers/soc/soc_amd_versal2.c b/drivers/soc/soc_amd_versal2.c
-index 7f06c1e70bc..d31c6deec45 100644
---- a/drivers/soc/soc_amd_versal2.c
-+++ b/drivers/soc/soc_amd_versal2.c
-@@ -7,9 +7,8 @@
- 
- #include <dm.h>
- #include <soc.h>
--#include <zynqmp_firmware.h>
--#include <asm/io.h>
- #include <asm/arch/hardware.h>
-+#include <asm/arch/sys_proto.h>
- 
- #include <linux/bitfield.h>
- 
-@@ -48,23 +47,15 @@ static const struct soc_ops soc_amd_versal2_ops = {
- static int soc_amd_versal2_probe(struct udevice *dev)
- {
- 	struct soc_amd_versal2_priv *priv = dev_get_priv(dev);
--	u32 ret_payload[PAYLOAD_ARG_CNT];
-+	u32 version;
- 	int ret;
- 
--	priv->family = versal2_family;
--
--	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE)) {
--		ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0,
--					0, 0, ret_payload);
--		if (ret)
--			return ret;
--	} else {
--		ret_payload[2] = readl(PMC_TAP_VERSION);
--		if (!ret_payload[2])
--			return -EINVAL;
--	}
-+	ret = xilinx_pm_get_chipid(NULL, &version);
-+	if (ret)
-+		return ret;
- 
--	priv->revision = FIELD_GET(PS_VERSION_MASK, ret_payload[2]);
-+	priv->family = versal2_family;
-+	priv->revision = FIELD_GET(PS_VERSION_MASK, version);
- 
- 	return 0;
- }
-diff --git a/drivers/soc/soc_xilinx_versal.c b/drivers/soc/soc_xilinx_versal.c
-index c43a80df1fc..ff6eb873d8a 100644
---- a/drivers/soc/soc_xilinx_versal.c
-+++ b/drivers/soc/soc_xilinx_versal.c
-@@ -7,9 +7,8 @@
- 
- #include <dm.h>
- #include <soc.h>
--#include <zynqmp_firmware.h>
--#include <asm/io.h>
- #include <asm/arch/hardware.h>
-+#include <asm/arch/sys_proto.h>
- 
- /*
-  * v1 -> 0x10 - ES1
-@@ -44,23 +43,15 @@ static const struct soc_ops soc_xilinx_versal_ops = {
- static int soc_xilinx_versal_probe(struct udevice *dev)
- {
- 	struct soc_xilinx_versal_priv *priv = dev_get_priv(dev);
--	u32 ret_payload[PAYLOAD_ARG_CNT];
-+	u32 version;
- 	int ret;
- 
--	priv->family = versal_family;
--
--	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE)) {
--		ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0,
--					0, 0, ret_payload);
--		if (ret)
--			return ret;
--	} else {
--		ret_payload[2] = readl(VERSAL_PS_PMC_VERSION);
--		if (!ret_payload[2])
--			return -EINVAL;
--	}
-+	ret = xilinx_pm_get_chipid(NULL, &version);
-+	if (ret)
-+		return ret;
- 
--	priv->revision = ret_payload[2] >> VERSAL_PS_VER_SHIFT;
-+	priv->family = versal_family;
-+	priv->revision = version >> VERSAL_PS_VER_SHIFT;
- 
- 	return 0;
- }
-diff --git a/drivers/soc/soc_xilinx_versal_net.c b/drivers/soc/soc_xilinx_versal_net.c
-index 210f9f8f8fd..3218cc416f7 100644
---- a/drivers/soc/soc_xilinx_versal_net.c
-+++ b/drivers/soc/soc_xilinx_versal_net.c
-@@ -7,9 +7,8 @@
- 
- #include <dm.h>
- #include <soc.h>
--#include <zynqmp_firmware.h>
--#include <asm/io.h>
- #include <asm/arch/hardware.h>
-+#include <asm/arch/sys_proto.h>
- 
- #include <linux/bitfield.h>
- 
-@@ -46,23 +45,15 @@ static const struct soc_ops soc_xilinx_versal_net_ops = {
- static int soc_xilinx_versal_net_probe(struct udevice *dev)
- {
- 	struct soc_xilinx_versal_net_priv *priv = dev_get_priv(dev);
--	u32 ret_payload[PAYLOAD_ARG_CNT];
-+	u32 version;
- 	int ret;
- 
--	priv->family = versal_family;
--
--	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE)) {
--		ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0,
--					0, 0, ret_payload);
--		if (ret)
--			return ret;
--	} else {
--		ret_payload[2] = readl(PMC_TAP_VERSION);
--		if (!ret_payload[2])
--			return -EINVAL;
--	}
-+	ret = xilinx_pm_get_chipid(NULL, &version);
-+	if (ret)
-+		return ret;
- 
--	priv->revision = FIELD_GET(PS_VERSION_MASK, ret_payload[2]);
-+	priv->family = versal_family;
-+	priv->revision = FIELD_GET(PS_VERSION_MASK, version);
- 
- 	return 0;
- }
-diff --git a/drivers/soc/soc_xilinx_zynqmp.c b/drivers/soc/soc_xilinx_zynqmp.c
-index 0e13e230914..1dc0b05a1a3 100644
---- a/drivers/soc/soc_xilinx_zynqmp.c
-+++ b/drivers/soc/soc_xilinx_zynqmp.c
-@@ -13,7 +13,6 @@
- #include <dm/device_compat.h>
- #include <asm/cache.h>
- #include <soc.h>
--#include <zynqmp_firmware.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/arch/hardware.h>
- 
-@@ -400,22 +399,17 @@ static const struct soc_ops soc_xilinx_zynqmp_ops = {
- static int soc_xilinx_zynqmp_probe(struct udevice *dev)
- {
- 	struct soc_xilinx_zynqmp_priv *priv = dev_get_priv(dev);
--	u32 ret_payload[PAYLOAD_ARG_CNT];
-+	u32 idcode = 0, version;
- 	int ret;
- 
--	priv->family = zynqmp_family;
--
--	if (!IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE))
--		ret = zynqmp_mmio_read(ZYNQMP_PS_VERSION, &ret_payload[2]);
--	else
--		ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0,
--					0, 0, ret_payload);
-+	ret = xilinx_pm_get_chipid(&idcode, &version);
- 	if (ret < 0)
- 		return ret;
- 
--	priv->revision = ret_payload[2] & ZYNQMP_PS_VER_MASK;
-+	priv->family = zynqmp_family;
-+	priv->revision = version & ZYNQMP_PS_VER_MASK;
- 
--	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE)) {
-+	if (idcode) {
- 		/*
- 		 * Firmware returns:
- 		 * payload[0][31:0] = status of the operation
-@@ -424,9 +418,8 @@ static int soc_xilinx_zynqmp_probe(struct udevice *dev)
- 		 * payload[2][28:20] = EXTENDED_IDCODE
- 		 * payload[2][29] = PL_INIT
- 		 */
--		u32 idcode = ret_payload[1];
--		u32 idcode2 = ret_payload[2] >>
--				   ZYNQMP_CSU_VERSION_EMPTY_SHIFT;
-+		u32 idcode2 = version >> ZYNQMP_CSU_VERSION_EMPTY_SHIFT;
++u32 zynqmp_pm_get_pmc_tap_idcode(void)
++{
++	return zynqmp_pm_get_pmc_tap_reg(PMC_TAP_IDCODE_OFFSET);
++}
 +
- 		dev_dbg(dev, "IDCODE: 0x%0x, IDCODE2: 0x%0x\n", idcode,
- 			idcode2);
++u32 zynqmp_pm_get_pmc_tap_version(void)
++{
++	return zynqmp_pm_get_pmc_tap_reg(PMC_TAP_VERSION_OFFSET);
++}
++
++u32 zynqmp_pm_get_pmc_tap_usercode(void)
++{
++	return zynqmp_pm_get_pmc_tap_reg(PMC_TAP_USERCODE_OFFSET);
++}
++#endif
++
+ int zynqmp_pm_feature(const u32 api_id)
+ {
+ 	int ret;
+diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
+index f753a67ac27..0293bd15a2e 100644
+--- a/include/zynqmp_firmware.h
++++ b/include/zynqmp_firmware.h
+@@ -533,11 +533,15 @@ extern smc_call_handler_t __data smc_call_handler;
+ 
+ #define PM_REGNODE_PMC_IOU_SLCR		0x30000002
+ #define PM_REGNODE_EFUSE_CACHE		0x30000003
++#define PM_REGNODE_PMC_TAP		0x30000005
+ #define PM_REG_PGGS3			0x30004003
+ 
+ #define SRAM_CSR_OFFSET			0x104C
+ #define TXRX_CFGRDY_OFFSET		0x1054
+ #define UFS_CAL_1_OFFSET		0xBE8
++#define PMC_TAP_IDCODE_OFFSET		0x0
++#define PMC_TAP_VERSION_OFFSET		0x4
++#define PMC_TAP_USERCODE_OFFSET	0x8
+ 
+ #define PMC_GLOBAL_PGGS3_REG_NODE	0x1824C005
  
 -- 
 2.34.1
