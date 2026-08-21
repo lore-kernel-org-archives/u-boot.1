@@ -1,118 +1,132 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0647C5DF7D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 05:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CA78C5DF7D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 06:31:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5E46C60896;
-	Fri, 21 Aug 2026 05:56:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0FDC14095A;
+	Fri, 21 Aug 2026 06:31:57 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UqA21tcbpr80; Fri, 21 Aug 2026 06:31:55 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787293915;
+	bh=bzLvLH0l5k2RuZTBSnlxIfzRS3hExiTrs89rzkF6/gk=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=T+tm2aJBfECxzRJxN53ilNuVDZS0oNhtq7yFNO1eTujexzB4SrL930mudhtpNpmYv
+	 A0s/q+PmJqGOnQfsrwLyhxuqsUIskEheo+my1lVX4bLywtTC6nEKpdNUrNGsjh8LOF
+	 OSHB5kQLJtiFsR6+ES625gtrFyVk1J3v4KIoNa4uLzdL46J5yhmt9k0EeBOOTCDtjh
+	 tfp8u2F3/f8Zzoi+Xyts8ZYmUCBWMer+6hNf+geVLEEkS1cU6EIUHNy7oaQLX11vtE
+	 WaNDAUOqs+mb1e3YsWxH6hBxHjJHOmrf9KecEp74cp9U1RVOieWVcGaOs9sTw5UkCE
+	 16d/9oJ5h90Vw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 40EFD40896;
+	Fri, 21 Aug 2026 06:31:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D60DFEA3
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 06:31:53 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id BBB2460810
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 06:31:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 87NjzSZVwZ_g; Fri, 21 Aug 2026 05:56:51 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787291811;
-	bh=5wvnHJzDaGZ8imVtpoQ6hFBs6WqjFXhKW8jtAiwaN9Q=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uCRKvXvX5yVY/SGElHnm0HA6f8gy3k1RQa/OQcMptZaUeiNmOs/XEvxgnB2mdOdnq
-	 pPVDCQvATe89MsP3l1cjYjabRG92fMVXvAkAZmZ6o7FAD7ant1X2b13JOBdsIoS0Mg
-	 spzNJ1r6gc+8wIubar338yXzOS7l+HXX573+gnSHqPkGoPTIji6CgLiRbctfpfrnim
-	 gNIUu01kmUOX9+IuUhaMDYse6IStYf4ZNQZvvK8uvxZSnSE6miMFMZPE47sDvSKe5Y
-	 HZEsxODHB9qCrsuvsdF17UxNukx4XkeiyYjm/kQTfRBNXncMjPmZGzS95hgtV8Ga35
-	 OLiZmC/7i3tmQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DD667607FB;
-	Fri, 21 Aug 2026 05:56:50 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 76F61336
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 05:56:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6045E400B8
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 05:56:49 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4p6Rxn1WbB0W for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 05:56:48 +0000 (UTC)
+ id 6F0INSP7jbvP for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 06:31:53 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::631; helo=mail-ej1-x631.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=Me/NTtrn
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 73A81400AD
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 05:56:47 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-c214321dc32so125121766b.0
- for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 22:56:46 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=NYrPxlw2
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4BC6660649
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 06:31:50 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6a374bea882so1473919a12.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 20 Aug 2026 23:31:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787291805; x=1787896605;
+ d=baylibre.com; s=google; t=1787293909; x=1787898709;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=5wvnHJzDaGZ8imVtpoQ6hFBs6WqjFXhKW8jtAiwaN9Q=;
- b=Me/NTtrn9CEdiF9N6BdM9Ang1icwseGBRwRJ3DkCtxW+xwefsle4ks7QjZpEd72dOa
- kdCHLpYCZ2kty61TejK6DCtiw1/X2hzKle1pgYl/hMj9cQeXloUx1a8zVi/fL0v4/GpF
- Qb4yjQpYob9q2xjAUTuTJYYzQGNuEEIMxGUtpmBatSqXdGlSNN1YZR6hRdesDRHk+Ho0
- J1sY3eH2RvhAhEBrQCGwUGLopFK449tWV8ZyUQzXvly4adrN5HjDULd80a8ny8AdmH8Z
- NPoIF0qN1mFzoqX47ZMW70JPcb+4YYkFRb9BomFb4usH7WZOIIWIbeiatBt1F2WxIvJt
- gSHA==
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=bzLvLH0l5k2RuZTBSnlxIfzRS3hExiTrs89rzkF6/gk=;
+ b=NYrPxlw21o/Od4Y4Th1Q8tqudSiAuv+tZdA0OJkGtPImCvWz4TvXoWlO9UCXXxj3Lt
+ 9n6wqSqUXF7dVK1/Bc1QBEsvKQWSjquvaF+MH/A6WNmChC4kTVwJoYkhfUPzDSZWRWCq
+ F1nuswUaWxnUd5G2/FCYZvxfb2+0YQktU9McPEir7AOtbp7v0X3/C5wSr3WAyNvajfM2
+ VzPY2atN9HeWbtwi0SvbVOfX/8+sT7nT4cs12VY90vMoTBuCj0lVvz4vxHaFu9ugo4an
+ ecIeOo4tmW00C0E+f+D6rPvR9/zngVUnQjepomU+NDR4hCu4GSazfZG2TM+JOJzX5AUz
+ d4vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787291805; x=1787896605;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=5wvnHJzDaGZ8imVtpoQ6hFBs6WqjFXhKW8jtAiwaN9Q=;
- b=m/wJyYmLxySsExt1mOOFP2OzSn/+lhmA8esNAStcvS9dShpkO22sxKJmYIxAlIq4ZC
- U93TRGiAFJhyqEERuF1ycvOOkRnvS1lgUuIShNVZH4HmM7SLy6+9CtyJ/Ie+rIoVaqle
- JWeqyQlRMZYEhEscvwDG8gTMawQwfrJDZofhCi1BOo++o8nYCdJJ5tIRTkcAuwUExR3D
- x9ji2BjWynJ18O9qjvfvVFyylrDJ0Ia/2zP0EB5VPNeJxuGKeQJ7XM9wWiSfAdNMDWEc
- ftQmBVHhXelsYoLiyCJB726GpnSrrh0iZR31m/KM1Ukzf3B1XyOLcL1B0wGw74YDv2Tm
- 9dfw==
+ d=1e100.net; s=20251104; t=1787293909; x=1787898709;
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=bzLvLH0l5k2RuZTBSnlxIfzRS3hExiTrs89rzkF6/gk=;
+ b=jzcY5QXZQm+9QZtKS8lg8UIRQt1yRKlmVVVxbycVu+w/ZpXdu89vpcbKZYbzEo8TR9
+ UesS1+JrbezPpZx0mGnRdGbaO8zQl8tb7YXurjBsuaEWHpPebeIeRTyQhTj2Z614v5RT
+ 0lFQBJP0Xcd6PxumWN0rOEio2rUVITiBIWlZpRduY1YLF4d3hiEe70q63NPhNnB5flBR
+ k8vHRtKyvg8SDMfTr+Lumg77+YeqoVNEwgmXwl5VHhH/aLSkCWgMnM8gkFfl4XFopCT3
+ EfOywM0m6ul2OPLI4lFvHrAyJtAtRaMGc44AT1LZino5jmbjQXVeZZ2RDFh8rzbT9CjF
+ VK8g==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqe8D5FI3eYmt6FPK/eHsYFO0ePJegRSVnnRavGlyXWh1bellPnphLhFWkheHZ7F2tRepXkG7E=@lists.u-boot-project.org
-X-Gm-Message-State: AOJu0YyW4rxn8ArQvdgUVMDjFka8BlziO4kF3b/zaJn9mD3iXUDpUvPW
- 8qOmxPTLCyPiwk1+MJ60jds2nF8I1Ki7c0Efs/6cAc7R2agPLvLhAZ3M
-X-Gm-Gg: AR+sD13QsgfdthPKD2HFiAvRcogyoJcDUPDIKt0R2cVX7s+F3xFvCfzEPcqQd5vpRS3
- RcUGSvgUh1A7AMr4RRDTA172Jk/WDotv0cou3bIgJnqdYRm78r/NoHJhFWY50CADsQlHibfuF3Z
- VJauVfVSPFwPIKNFdmjjjX60aMmGjlEKai4D6KiLen0KvQrYbeJiSCL57nnmFBAjJ8LBj13HNwy
- LGFtnAco0KrTfavY9B3bQ9xSrjgp109+qJ3Nmv25vVCBGhx62hYHAzV6aMfGR3e+xNUO/ZzzTgC
- RiIxcQVkV5a91RlCdyj2q+n+lnkIKrhegzmMqGvOBzg0UydamSyunEIUNeO4CFSP2IY/FwPQToA
- b06S+/29Ob4UafEaOCPXiY8HJcQUqAUsYGlUaN7nxSiQTE2NJZVCAWVAVaEJXat2N6MLG6MsAws
- Z8sWHtPwrnQo3vBkvW1eiMQt3EgVVoMOaYY1JdEfxWPMiKtPzEswqq8HBbJVcTJ/CgBg==
-X-Received: by 2002:a17:906:4fd6:b0:c21:3fa7:5a6f with SMTP id
- a640c23a62f3a-c246a72cb16mr378309266b.24.1787291804738; 
- Thu, 20 Aug 2026 22:56:44 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c24589d98b0sm299848866b.6.2026.08.20.22.56.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 22:56:43 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Mehmet Fide <mehmet.fide@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v2 0/4] usb: ehci-vf: take the register bases from the
- device tree
-Date: Fri, 21 Aug 2026 07:56:42 +0200
-Message-ID: <20260821055642.1176044-1-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <2cb90777-c31d-43f7-aa6a-b11b7dea9f4f@mailbox.org>
-References: <20260820071511.1036506-1-mehmet.fide@gmail.com>
- <2cb90777-c31d-43f7-aa6a-b11b7dea9f4f@mailbox.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ AHgh+Rooznr/y/+yrxwMVBpFYnRzeRM4RnHQVYaz9cZ+luS3+wrO2SezUQveQRwY904cJYfqwJpeEqM=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lQGua2DAzp7SNKFS8sqK1T3zpNQiXTzuU6nAeeLnXx7if67G5i
+ lyKo4eBXvLX6uasQOKUQIKUZoYtbMgjbDSI060MZJgY1SyItC5kIieQZS5a/itd8b5k=
+X-Gm-Gg: AR+sD12NQoGe8tI/GqqH8XYPCBXz+RyZsPaZHpMtRtABX7qDVQlFuUvGsgouyb4+6VO
+ p56maMBUnIZ1sr7hMYYUVn9FCJB/RcyPvsfYq90gPXpPUx7aINj0ZOrhbuTm8PpQr2N/2RMiS/u
+ fw2b3mBgpD1lFnHHfOtCC+M5KLQLdXch45KJOXaeQ72Lctn6mciUEXFHx/dPxea+t9Zb/q/PGl0
+ vaFz5Kvu43kGyltRcf3BkNrdtSaIVuMWoQLVyeq00ba3v3Bni6wRMHG2xAorejoE5wKyI4nDV6D
+ hMFv2lIgfN2n10xHSPuGiQK/dFBi1TfmbO/jd9LuwJBNGwfB0AyHnQL7kfG/jF0gPDBR4VchsUd
+ 44Mh2RICZOYou3+yJrpUUOeEv04X81QoJdcbOY3gCGiJt+pfEiHVtbQHFQR7E2sBCI3D6YZBL8p
+ uKHiiEkO+jsiAn8EviY1ac2vBPTDKF/iNu1xB1OdE8r5WYDf0KYqgP3v5cby88e/DYf4rh0foPO
+ hOYQKxe/+UdAS4+EJNKjJ2fg0IQXfHfoukIKAIczhcRYhPLv3w=
+X-Received: by 2002:a17:906:eeca:b0:c21:2218:5c7b with SMTP id
+ a640c23a62f3a-c246a2ef56emr376532166b.1.1787293908806; 
+ Thu, 20 Aug 2026 23:31:48 -0700 (PDT)
+Received: from localhost (host-212-171-227-71.retail.telecomitalia.it.
+ [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2459197ce1sm324812066b.37.2026.08.20.23.31.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Aug 2026 23:31:48 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 21 Aug 2026 08:31:46 +0200
+Message-Id: <DKUET9PH8G54.2AVJ0J96R18YN@baylibre.com>
+Subject: Re: [PATCH v7 3/3] usb: mtu3: add SPL support
+Cc: "Tom Rini" <trini@konsulko.com>, "Ryder Lee" <ryder.lee@mediatek.com>,
+ "Weijie Gao" <weijie.gao@mediatek.com>, "Chunfeng Yun"
+ <chunfeng.yun@mediatek.com>, "Igor Belwon"
+ <igor.belwon@mentallysanemainliners.org>, "David Lechner"
+ <dlechner@baylibre.com>, "Julien Stephan" <jstephan@baylibre.com>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, "Peng Fan" <peng.fan@nxp.com>,
+ "Jaehoon Chung" <jh80.chung@samsung.com>, "Neil Armstrong"
+ <neil.armstrong@linaro.org>, "Julien Masson" <jmasson@baylibre.com>,
+ "Alexey Charkov" <alchark@gmail.com>
+To: "Marek Vasut" <marek.vasut@mailbox.org>, "Carlo Caione"
+ <ccaione@baylibre.com>, "GSS_MTK_Uboot_upstream"
+ <GSS_MTK_Uboot_upstream@mediatek.com>, <u-boot@lists.u-boot-project.org>
+From: "Carlo Caione" <ccaione@baylibre.com>
+X-Mailer: aerc 0.22.0
+References: <20260808-ccaione-upstream-mtu3-spl-gadget-v7-0-ed659a79a918@baylibre.com>
+ <20260808-ccaione-upstream-mtu3-spl-gadget-v7-3-ed659a79a918@baylibre.com>
+ <3c8bc13f-be4c-49d4-ba43-65f787d82796@mailbox.org>
+ <DKTVUMXOM1PK.MIFZ75Z7BXI@baylibre.com>
+ <a298f2a3-f9cf-47ee-8133-1d13ed4ea7d3@mailbox.org>
+In-Reply-To: <a298f2a3-f9cf-47ee-8133-1d13ed4ea7d3@mailbox.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,42 +140,24 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello Marek,
+On Fri Aug 21, 2026 at 2:33 AM CEST, Marek Vasut wrote:
+> On 8/20/26 5:40 PM, Carlo Caione wrote:
+>> On Sun Aug 9, 2026 at 8:45 AM CEST, Marek Vasut wrote:
 
-Please forgive my eagerness. Your reviews made valid points, and my way
-of answering them was to fold the answers into the cover letter and
-post fixed patches right away. From now on I will proceed the way you
-describe: reply in the thread first and let the review settle before a
-new version goes out, with per-patch changelogs below the --- line
-rather than in the cover letter.
+[...]=20
 
-To put the answers where they belong:
+>> Thanks Marek. Just to confirm: this patchset should be picked up by you?
+> Isn't this patchset already in u-boot/main branch ?
+>
+> 948c428ff7ea ("doc: usb: remove obsolete MediaTek MTU3 bindings")
+> 0f8cbf3a0d6f ("usb: mtu3: support the upstream devicetree binding")
+> 08b77aac333c ("usb: mtu3: add SPL support")
 
-- SPL without DM_USB (v1 1/3): no build of this driver can take that
-  path. drivers/Makefile builds usb/host/ for SPL only when
-  SPL_USB_HOST is set, and none of the five boards selecting
-  ARCH_VF610 sets it, or CONFIG_SPL at all. The removed branch also
-  does not compile, which is how it went unnoticed.
+Oh yes, you are right. I must have missed the message saying that this
+was picked up.
 
-- The two Fixes tags (v1 2/3): both added in v2 2/4, thank you.
+Thanks,
 
-- fdtdec (v1 3/3): v2 4/4 uses the livetree calls throughout and the
-  driver no longer includes fdtdec.h. The alias of a phandle-referenced
-  node had no livetree accessor, so v2 3/4 moves the body of
-  dev_read_alias_seq() down to the ofnode level; if you would rather
-  see a different shape for that helper, I am happy to adjust.
+--
+Carlo Caione
 
-- -ENOMEM from the regulator lookup (v2 2/2): v3 2/2 tolerates only
-  -ENOENT (no vbus-supply) and -ENOSYS (no DM_REGULATOR, which is the
-  case for four of the five vf610 boards) and fails the probe on
-  anything else.
-
-On applying the feedback throughout: I checked every return value the
-series handles. The five DT parse failures all fail the probe, and the
-enable path fails it on anything but -ENOSYS. The one place a return
-value is ignored is the regulator disable in ehci_usb_remove(), left
-best-effort on teardown as in ehci-mx6 - say the word if you would
-rather have it logged.
-
-Best regards,
-Mehmet
