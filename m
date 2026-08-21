@@ -4,118 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2049DC5DF7D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 16:21:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0CBC5DF8C
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 16:54:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BC07B60A86;
-	Fri, 21 Aug 2026 16:21:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B572D60AC2;
+	Fri, 21 Aug 2026 16:54:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uOWgDzIVpph8; Fri, 21 Aug 2026 16:21:17 +0000 (UTC)
+ id FV9n7KTrAGln; Fri, 21 Aug 2026 16:54:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787329277;
-	bh=KiNoooYkX63C9cqAMwM+2fHuU52F2R8FttxhDmM6Bdg=;
+	d=lists.u-boot-project.org; s=default; t=1787331264;
+	bh=G10yJynuG/TONieejz4v6VkohSemcMDls86qRpsUN+Y=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OO0Albh9bwy93kdilmN/ondQRdpr6QfRwBwZHw2kUH9ORUuKVNrik/eWLJGZezxYZ
-	 o1xt5ubJzJX4PBonwZxGdKwDuVcVLkz2uGDJ7s96jCGaXArvWwA3si8Buh1mAvynIF
-	 /2Fri+AmUAq0TctzlpH0ye5XsixatFJcN7GDnv4s1MLQ3IamB4JlPcbZSbKvfzDi5U
-	 QCuu9JtZn0hpeY2yXOnMgIbxqeoG8oO938WjIip87vpzD/prCjjKtoPjuuIMGOVOvy
-	 Gg3ujpZbKjumE8zqGI6BcE02JEQqt7TQXGldcMwP/lwF4yUXQjnBJk2ttcX4QgpxcN
-	 /KZgfuJmjHB0A==
+	b=Gc8mhBAcmz6VXN5l4RXaGU+MKeEB3Qruol0HsnHZKy/I5GvirSXwW99Qrjr8I33aD
+	 QVv5F2OA1LjUBnRlM51vbqbjL7iP0kgQXt5rwkORSeJkguZ+TUuz9Qp+nmyME/Bvzx
+	 Ab0mqyJLlS7OK+oeq32PJM4p/1jnldOKKL5DY9cSqKplIhFtN/9RuqsE/sjYWXJpBZ
+	 oCHD/vjhuiBeYtNqh9DftiZsXK0ed5etlggpxTzjVxZ1p66KJeyVI7LvoBgHF2m3js
+	 H1XSBMIpe14aV28kGEruF/mu6ipkzLoyFfGd3ThPgWyrC++rT5XIlym2sLdp/GxG8r
+	 NI82YiIt4kDJA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8F0FE60A77;
-	Fri, 21 Aug 2026 16:21:17 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id EF118263
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 16:21:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8B09F60A8A;
+	Fri, 21 Aug 2026 16:54:24 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 24599263
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 16:54:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A5C5F40A10
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 16:21:11 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0D9EF80C33
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 16:54:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YZg3fcAGjHk0 for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 16:21:10 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112f; helo=mail-yw1-x112f.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=Qk8cb+zz
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 800BC40A14
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 16:21:09 +0000 (UTC)
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-8200b55dc47so18407687b3.3
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:21:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787329268; x=1787934068;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=KiNoooYkX63C9cqAMwM+2fHuU52F2R8FttxhDmM6Bdg=;
- b=Qk8cb+zzUNvdU0qUsfbNdeubRfSeWs41UnUbFBGslhoR1ftw/tfHEtZoNpvd6Ix4x/
- OOVvoWXIpjKhSv3MDxuBcSoxPKC1lM2L7VX43jKMV2pPAWzg0+iF9rDMswkj9v9RX8Vr
- nASv3YQuq7qfFJJ+UhJofVcn01mmg/BWYPpDg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787329268; x=1787934068;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=KiNoooYkX63C9cqAMwM+2fHuU52F2R8FttxhDmM6Bdg=;
- b=TskkIVgsBKoJcvlDNuuUqurfbhwQTwq7qa9C9lc+MN+EJ9F16KmAcARqIuMaMLU5mh
- zS9QmniA4+0LH1dkjbYK2CqUbVrqcs2668BQhOmRESqzsgK6JuiBO2QcAvfha+FRBdAs
- GJv0rb6Ebs1E1oYCyqVEEWFZfEnTALmImnFO5Bm0K1nZwGlul6tx6Ob/gB0B1CcDvXJn
- 09dzCc0yxaEJsgZPtqFw1AszcxFYL8Ub9YEcf/jPo0JUmzATOxR9RbbdQqRywU+J5YLD
- pS2NT05NRLMl1NlcFt5QXNm7O/JsGEMu6DLEi3TI1xB+p2ajrdHQ9MuiSIT2K1MJ/AaO
- 6h2A==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqVKg16L8otkXCZ9D1vDyYP/DPQe77HrsaSsZEcPEwAJ6shmVoQ3omqstlYN9O3/Raz3wORIbc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++m5rAAp+A11yoI4U1ep0qD9+j+SkRYslIxCN9aGnB3MLXFM5kus
- 3d8EPla5u6KQ4f9rX4z/BR0kjjduMa0UiG0mu+XBqOgIvTIDtSQfZyOf+sZuomEewGw=
-X-Gm-Gg: AR+sD11p5yAfmqB0EJjiII78uUhg8OuXrdG3+cAphGpKb/3xDIylRwprPN2GdiYu9IY
- pSYypNivq+DM4VoGy70u1HwZ3Q8vSuiqbeD3eFP+W2SDIhLt08cbc0YKpXa8xEQW3uOKWNDen14
- gR8odZXKlw4YH25qsGUiMISUYMnY48XK2yoliygTdKsprS+xRt0GBx+njR129GOVANEfJ7wsr8s
- qqwSsCH3dJ3NaeSRM82X7XTkl+z/aC+CSsMQjQCjAoKbdi2C5DyXBLX0WDYKH+AqllQ+SNUh1k6
- JjK+C6g9PDaVP3wj6rZ5WzwJ/yf7VnmhnT8iBkPJMy4gXDBT8zNwM5xiFAjXhPtQdJV+05fe6tf
- xM2laaENl1tD3z+7LWQHhM5xbrtmRHEEP/JKqpMt7bntJB04S2rcsCk2E19N+pRzI3r2nPtWFM9
- iCrOZVeqIMS58y18sbkh+KATjK5JMe4aUbCkzx1D9R5kcpc4fj5zOhGqDEKyQz56efJsvzxZiRd
- dClKfjrY98iVE4rzxqYsVhQLuULXWANE9VG2bRFfJYSLJ7QFZyx6nW5NszDE8DsiC7dqrB5TaVI
- Vdalyd9RjA==
-X-Received: by 2002:a05:690c:dc8:b0:80b:a1c7:9fa4 with SMTP id
- 00721157ae682-849efb60bd7mr27203087b3.1.1787329267930; 
- Fri, 21 Aug 2026 09:21:07 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-84511abc153sm43466417b3.4.2026.08.21.09.21.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2026 09:21:07 -0700 (PDT)
-Date: Fri, 21 Aug 2026 10:21:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v3 19/19] CI: Wire up qemu-loongarch64
-Message-ID: <20260821162105.GP523975@bill-the-cat>
-References: <20260821084219.1703743-1-me@ziyao.cc>
- <20260821084219.1703743-20-me@ziyao.cc>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cRifSE85nHjl for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 16:54:22 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=cQiAwSWz
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2C81D809C4
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 16:54:21 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 883B540A6D;
+ Fri, 21 Aug 2026 16:54:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59DAB1F00A3A;
+ Fri, 21 Aug 2026 16:54:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787331261;
+ bh=G10yJynuG/TONieejz4v6VkohSemcMDls86qRpsUN+Y=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=cQiAwSWzczeVKGhwWoEB/0pteGrGj1qfi947xkbcVPa8fx6l1iMefju7iYZgOHg1H
+ TSahmXG4BFYkv95OjQuTsPdon41s3Uyhsf7Y8iKl6sxhg4l0AcOJ1fujdkgWJ4grmt
+ 8uSdevEvZBcvqvzz4fyUNWFBmGVE6/15yT/S4o8j8RplnppougbJMgHR1kkUm7k/eY
+ 6ymP9mwlFdG3Lu17gOqsW/UV+BP1YYVkqVi28K9olN360JAO5Ffbuomc8hp9OdaMLz
+ IdNbvKiWGd83CQT3FSdKJtSc0V3nFkyzDuIQHbUmAg8SP5m0C8PFE65iIoyKtCWWKj
+ hwWMKcP+tqwCA==
+Date: Fri, 21 Aug 2026 16:54:18 +0000
+From: Yixun Lan <dlan@kernel.org>
+To: Eric Chung <eric.chung@riscstar.com>
+Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
+ Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>,
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Guodong Xu <guodong@riscstar.com>, Yao Zi <me@ziyao.cc>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Yixun Lan <dlan@kenrel.org>
+Subject: Re: [PATCH v9 02/19] pinctrl: k1: fix pull-up/pull-down configuration
+Message-ID: <20260821165418-GKB579897@kernel.org>
+References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
+ <20260819-m4-v9-2-6e66016392b9@riscstar.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8mKt+4kMBEVtXCfx"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260821084219.1703743-20-me@ziyao.cc>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20260819-m4-v9-2-6e66016392b9@riscstar.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -129,32 +108,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Eirc,
 
---8mKt+4kMBEVtXCfx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 11:54 Wed 19 Aug     , Eric Chung wrote:
+> Fix pull-up/pull-down configuration to honor the argument parameter:
+> when argument is non-zero, enable the requested pull direction;
+> when argument is zero, clear all pull bits to disable.
+> 
+> Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+..
+> Reviewed-by: Yixun Lan <dlan@kenrel.org>
+No, I never gave R-B to this patch, and below you still not addressed
+my previous concern
 
-On Fri, Aug 21, 2026 at 08:42:19AM +0000, Yao Zi wrote:
+Also, I suggest to use tool "b4 trailers" to collect tags instead of
+ doing it manually which easily lead to problem..
+> 
+> ---
+> v9:
+> - Rebase since drop patch "fix drive strength configuration".
+> v7:
+> - Simplify pull-up/pull-down configuration by using a single
+>   clrsetbits_le32() call.
+> v6:
+> - Fix pull-up/pull-down configuration.
+> ---
+>  drivers/pinctrl/spacemit/pinctrl-k1.c | 9 ++++-----
+>  1 file changed, 4 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+> index a6a22eacac7b..9ca4ef7c771e 100644
+> --- a/drivers/pinctrl/spacemit/pinctrl-k1.c
+> +++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
 
-> Enable qemu-loongarch64 in CI so it could be automatically tested.
->=20
-> Signed-off-by: Yao Zi <me@ziyao.cc>
+..
+>  	case PIN_CONFIG_BIAS_PULL_UP:
+> -		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
+> -		clrsetbits_le32(addr, mask, PAD_PULLUP | PAD_PULL_EN);
+> +		clrsetbits_le32(addr, PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN,
+> +				argument ? PAD_PULLUP | PAD_PULL_EN : 0);
+No, this is still same problem as previous version, please take
+a look at the DT documentation from upstream linux kernel
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Documentation/devicetree/bindings/pinctrl/spacemit,k1-pinctrl.yaml
 
---=20
-Tom
+1) to disable bias
+          bias-disable: true
 
---8mKt+4kMBEVtXCfx
-Content-Type: application/pgp-signature; name="signature.asc"
+2) to set as pull down
+          bias-pull-down: true
 
------BEGIN PGP SIGNATURE-----
+3) to set normal pull up or strong pull up
+          bias-pull-up:
+              0: normal bias pull up
+              1: strong bias pull up
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoh68AAKCRAr4qD1Cr/k
-Ck2MAP9ywpTBC4zT98SccxUDeZCn6+2beWAXMgUNdBhOMigWlAEAoO5aee8C1F7D
-6Ud4obxfGinUhrbIlEhDI024wiV63wA=
-=cASn
------END PGP SIGNATURE-----
-
---8mKt+4kMBEVtXCfx--
+-- 
+Yixun Lan (dlan)
