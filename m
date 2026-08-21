@@ -4,102 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8A59C5DF89
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B87E5C5DF94
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:16:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6E5B540EB7;
-	Fri, 21 Aug 2026 13:16:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BF00F40F1F;
+	Fri, 21 Aug 2026 13:16:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0YKC_JHnZThV; Fri, 21 Aug 2026 13:16:34 +0000 (UTC)
+ id P8RTZDzsso6G; Fri, 21 Aug 2026 13:16:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787318160;
-	bh=Uuxr0c86ovzf/ZM+5leNXnR6OcA4HwH1GNRMh//aGp4=;
+	d=lists.u-boot-project.org; s=default; t=1787318165;
+	bh=oT2FuHTTPF3pecCQrjUIO1WAZjJoahpan0cHNIYr/YM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ldr3OLe2xf6ZNrlz5+d5EWcm81fOw99fKQtC24yrU7TPvq+4egLaMtkuBlDipzuCJ
-	 PBEMI8zW3Pk+PlPaaAGjbMO9pN+irHZekXOSFwPRpEUPRYSmg/zB7codLC42e995DM
-	 sBPrOI8ULIAR1cP/2y62porpQQ1ZPD1DH3Kkt2X3dsw/Z1sZ4lnSa8RRCPvwxEEdLn
-	 e0OJVFoXi5afXQM+4Mw2R2M8WJdWLIpaMfc/90nYZFzcvA2D4r+ndyoT8jCGWWGeJY
-	 j/ErHkNnHck6aZypyO5fL9aKzxcvJfippR0anUhNxyuVjMOU1zJODwHkY6wYza7BSR
-	 itN4PAvNDP4jw==
+	b=n8c/R0vl2CsnrMuDjqRZkRSnlEq7UxGwdwkR3DoREdEdSF1qYK64gTxGF+M62CGXT
+	 C0eXxag4Ij5VlGXqnTO9U4LQwTSrgtEx/3owZA58x7d9Qp6U32o8VFSXKMX+GY9RIr
+	 mi8WvEja/iifHlre69xhSvZM7Z1j86HSTdxHd7hTKF7UsowZlaqQkIwXxsDIrm3qYn
+	 UfNOIPueCFmO/ts3+2FlE9C5ea5X55FmI0uJLiJQCUgpQSF9Ej3Yq5obXRGum4A4+3
+	 YfLzODKf6AQSNtWtxpueNk2fH935/AEnma1u+Vzgs9VpXrvxME30d0M0f7cL39Cd0X
+	 s/HjNdUeE4byg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C3AAA40E1C;
-	Fri, 21 Aug 2026 13:15:59 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id EC1811B8
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0287040E2C;
+	Fri, 21 Aug 2026 13:16:05 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id CB5FEEA3
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D2CA5810A3
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C805F40073
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pvFyoqQQEGRv for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 08:52:46 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Gj5eE-fkbTWF for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 08:52:47 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
+ client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=QcNwCbGa
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9C114810A1
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:45 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c15df0c154dso6922766b.1
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 01:52:45 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=dZhvctVc
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0761040071
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:46 +0000 (UTC)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6a1541ea780so146651a12.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 01:52:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787302364; x=1787907164;
+ d=linaro.org; s=google; t=1787302365; x=1787907165;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Uuxr0c86ovzf/ZM+5leNXnR6OcA4HwH1GNRMh//aGp4=;
- b=QcNwCbGaqwf2Sde0t6abdt1KQxAUFE4xtAOID+FJzgoxsel3AkyvEnAUFS+CREYWAV
- sA3x3xhKyhFtHi1eoDVSt5SZDTnTp2fZcVm9QrIBnEWwEY2kT11G31uaS8seEWk/isb2
- 2TCyk7gg2EZzUkm/lbbq6q6/8E6/WCCIMFMBybDD26lufqM/u4Vh7ydEhKR2DdTi4JAD
- 0bgSqzuGz/Z18wIPY9OH47IIDpzo2IjbKpOVQ54FNaOU9x4Z89TBeLLMQosQsPU9YN7j
- hrG7iXEFMyJfRn3Ne4lrCM4Yec778nNJp0jJ19scQg2emY+MLou7Z2ieEjEKRI8UoNad
- 2SNQ==
+ bh=oT2FuHTTPF3pecCQrjUIO1WAZjJoahpan0cHNIYr/YM=;
+ b=dZhvctVcVx881fVfNS5STXiYuOfEbx4nEA+XRuXK0AgPukxCerdIuNDHHkhihVKEcl
+ 7a2ywk14DyFKSqBxFd1KD3ihhnCPyuPuSXUAPJe21wIBTM6inLtfYxPwj2nU/RH0Numu
+ RqHMIUpl3AshFEcbTrSipwF4ndi3YEKSiMvinDYv0ylOXkeJkjBWiylgpfNEW61wRe/0
+ ZGS344McrgJ4vE5vmFADHcYZi2W7AnNQvMUFPNmUzzST6YczClmJdQwJgDcMQSHj6JF5
+ vX7L4uQqvxiZ8ur0QuD5noYfc971TDfIpiGJj7Ucn3LO3EyqPzpMJUOc2+haBSVUfCp+
+ cAxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787302364; x=1787907164;
+ d=1e100.net; s=20251104; t=1787302365; x=1787907165;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Uuxr0c86ovzf/ZM+5leNXnR6OcA4HwH1GNRMh//aGp4=;
- b=FzyuHdDinedvUOnehPgO+WLWFeedJQ+ybKwu/osBeptYTg7fnokv0/U2aP2aXjl1mK
- yexNP8xgLZsSxpk+TqUVwshtwSmPXh1dIb+YbD+EgPa2D1Q1PcLBf67QwffVJP2iU/Vw
- t/vhiJIGjy9iw+hq/lZC9yzwd4LVwVRp26UFMqz1Ee2EWi7ug72hJoP9cvke2Ac/wkw2
- Ws99EJ8A42yA9/P6b/iZy8BP44Kw+8jm74DJgLOE0o1doZbuTY1tWro5S6UQaovuUSAU
- PhdAmISbALpDewHMR1W38WOpVeib9EYEerhbnANrjBpZaMXALOW8YZ8e3XuxXY+bACXg
- 0lRw==
+ bh=oT2FuHTTPF3pecCQrjUIO1WAZjJoahpan0cHNIYr/YM=;
+ b=bRjAJkQB29hnwyGDiGsQFZ7ouCJGa24rfRG2eQJUZINFUoBLT27lg9xgYi6r33mSQJ
+ b04Mk670cU/+TonAja2UnM6teMXHLLocHVgxYxh2xBo3v9v7f2HJgHlhEWrDS7TusLOU
+ Cjqv8UMaU7Gpkb5++yXSnorBmiYKsse/BiqqoJ3alprn8HyOjVvuvUU7SdxB/xcvjmEc
+ WxRMU53DzwfhOHkVi4EO/s1453paPFwGrP6noFzy86W1BkBI1zslF5U9jA/ZtDWJXCjW
+ eeWCebxJAQn2GZlR/vJ5+kn4+ZxWPgTo5jeYTkAo8ujFNe3jZ+bBysdHdosTRTCwZ9sV
+ 5nPg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RppwQiBy/j78s3nhltFKgvULzehsxcwhwARzhuZPpsgN8IpklxJt0GBvEzuWZVfFobFxVELrzg=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mIdm1PgTaJmzXP4kHwwiWDOsaerdoZYXf0YrRZwnBeWX6gLwLp
- V8NjUT91cYsPnNhgDvfslx+zPYfTYLXJ2nwu6vRhuYfARo2AEZyOXkTD5sb1wNiNFbk=
-X-Gm-Gg: AR+sD12x/yvhi0jBq/B1RC4sxQHxQ7OD56Ro+QhcH4tCU9yqrzwVaAERt5SIAohA/i+
- GEe2Zt5eXXNeimo1eGuHkb6tcG3tgzJYjNBjzfdtvtI1heqE6cdUouerblLfG5ObC9KPJ25uhSQ
- GBVsvCzAIavcQrVpnz8ThYsug1qpNnPJJrvLVGVIVLbK7LaZMvJaklL9HpGFWecxsqU1YGQ5OoP
- Ahax4U8UnvhRj5ntwSMHTD1U4kvDrwJ2ClB8VCJ01YtLk85fH5wwA6O+jb6/eW0S5YSMonFUnXg
- KZkeM/yrBTRvVAYhWp8KrOkgb5w/uI7fjAP3V4FYbULFmSHM9wBM557s6VECwSXEft7Kz94Gzdu
- hFuMsUlOTBEjwTypeuA0CJ7MHHA47Jiy9Aj5VtfjKXq8RRQwyptFuCE14zVw+fAz9ThcXET0GOH
- WxrJvcmTl9Cqqxa8hIJjlVjrvr+vWBB0js4/wdlIQ+Bok0NertO8JBaiXc4Awz2DyR9VdLf9V5A
- OWwYfzttcB4dRa5BQZxkQY5
-X-Received: by 2002:a17:906:4790:b0:c12:6db4:4bf4 with SMTP id
- a640c23a62f3a-c2469f9902fmr269510066b.0.1787302363571; 
- Fri, 21 Aug 2026 01:52:43 -0700 (PDT)
+ AHgh+Rojf2/09cUp0TyE0K17bfjbzfvT1dQ87/WdftDPMac+9+/UYqVcY5AOyS3d/p3plTfu9suNLWk=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kxN7mN44I8QEsDLbI+4Hw7ZSYLsTg6n8LOi2I7Hmd/86Xz3R44
+ 83qVeRYv813m7QaKer8hvDVoOQLneFwEq2mcXdP2lPkO87ekuy6wYpturVcgL4G0KRM=
+X-Gm-Gg: AR+sD11Y1JjzrPOIPdFodAlOU9k/g78tOwNfsCsroxh9vXBDXUlbx8aY1eT2/6lcvvg
+ 0Zd3/4th8duyUK/anh5xgcN10FRGQ6+MZwhvkcV1HUcPoMhOq7pSTv85k90jz2VLJ9P58y7V/lY
+ 6qQ9mkXUYD7cQz8LFWoldyi5G5qHwTf2mCTglLYFelkexwDXrqTJZYtBhq5cKW5vF1iATwxvrMB
+ iKNs6r5aut80kqQwgGS2RVMWouiiVteuzgNsWdLa2zIhOYWD4QY1psivF1PKZZcYnvM9E4jbiZb
+ VFqDDiPvxobzz6thnFGg/S2k9kbAWJF0/+L4MdY2eZ/NFQGpz7q+cyQNmKyO4Lb3x3+0BoQq+ok
+ RFjYO9TN8d9dBDhXrzxxbJar9UIzAF9blGGaeG+yWPExuErUP7Vx+F6ibwTy7EwsWwIXSk2AUhx
+ qUS4nFugXlY4Fz8XzuQJNjtQ8gmHYauB8yy5HLBAhKi41v1gceLFfd44tQhQxV0gRFevDzfaGyP
+ LsHb/r6nvcaUmtmLAIV9JJM
+X-Received: by 2002:a05:6402:5186:b0:6a3:eb13:e74c with SMTP id
+ 4fb4d7f45d1cf-6a42f1a8bfdmr2913429a12.1.1787302364776; 
+ Fri, 21 Aug 2026 01:52:44 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2458b09599sm353957166b.21.2026.08.21.01.52.43
+ 4fb4d7f45d1cf-6a3feeca188sm5594027a12.6.2026.08.21.01.52.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2026 01:52:43 -0700 (PDT)
+ Fri, 21 Aug 2026 01:52:44 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
@@ -108,9 +108,9 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marek.vasut+usb@mailbox.org>,
  Eugen Hristev <ehristev@kernel.org>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v6 80/87] usb: gadget: at91_udc: register with udc-core
-Date: Fri, 21 Aug 2026 10:47:56 +0200
-Message-ID: <20260821084829.2070426-81-anders.roxell@linaro.org>
+Subject: [PATCH v6 81/87] usb: gadget: at91_udc: set endpoint capabilities
+Date: Fri, 21 Aug 2026 10:47:57 +0200
+Message-ID: <20260821084829.2070426-82-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260821084829.2070426-1-anders.roxell@linaro.org>
 References: <20260821084829.2070426-1-anders.roxell@linaro.org>
@@ -130,43 +130,70 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-udc-core provides usb_gadget_register_driver() now, and it only knows
-controllers that called usb_add_gadget_udc(). at91_udc never does, so no
-gadget works there.
+The resynced epautoconf.c matches endpoints on the caps field, not on the
+name. at91_udc never fills caps in, so usb_ep_autoconfig() finds no
+endpoint after the resync. Same problem dwc2 had, fixed in commit
+c5c4cc4c6b98 ("usb: gadget: dwc2: Set endpoint capabilities via .caps
+field").
 
-at91_udc_ops already has udc_start and udc_stop, so only the registration
-is missing.
+Move the endpoint names into a table together with their capabilities,
+the way the kernel driver does it, and copy the caps into the endpoint.
 
-taurus and smartweb call at91_udc_probe() from board code and there is no
-udevice to use as the parent, so pass NULL. udc-core only stores the
-pointer.
+Compile tested only.
 
+Suggested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Link: https://lore.kernel.org/u-boot/87v7az6l03.fsf@kernel.org/
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/gadget/at91_udc.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ drivers/usb/gadget/at91_udc.c | 27 ++++++++++++++++++---------
+ 1 file changed, 18 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/usb/gadget/at91_udc.c b/drivers/usb/gadget/at91_udc.c
-index 5b0c55d59c8d..ee2af2d699ff 100644
+index ee2af2d699ff..a8ca22c906c6 100644
 --- a/drivers/usb/gadget/at91_udc.c
 +++ b/drivers/usb/gadget/at91_udc.c
-@@ -1494,6 +1494,16 @@ int at91_udc_probe(struct at91_udc_data *pdata)
- 	/* Clear all pending interrupts - UDP may be used by bootloader. */
- 	at91_udp_write(udc, AT91_UDP_ICR, 0xffffffff);
+@@ -51,15 +51,23 @@
+ #define	DRIVER_VERSION	"3 May 2006"
  
-+	/*
-+	 * The boards call this from board code, there is no udevice to hang
-+	 * the gadget on, so pass NULL as the parent.
-+	 */
-+	retval = usb_add_gadget_udc(NULL, &udc->gadget);
-+	if (retval) {
-+		pr_err("failed to register udc: %d\n", retval);
-+		return retval;
-+	}
+ static const char driver_name [] = "at91_udc";
+-static const char * const ep_names[] = {
+-	"ep0",
+-	"ep1",
+-	"ep2",
+-	"ep3-int",
+-	"ep4",
+-	"ep5",
++static const struct {
++	const char *name;
++	const struct usb_ep_caps caps;
++} ep_info[] = {
++	{ "ep0", { .type_control = 1, .dir_in = 1, .dir_out = 1 } },
++	{ "ep1", { .type_iso = 1, .type_bulk = 1, .type_int = 1,
++		   .dir_in = 1, .dir_out = 1 } },
++	{ "ep2", { .type_iso = 1, .type_bulk = 1, .type_int = 1,
++		   .dir_in = 1, .dir_out = 1 } },
++	{ "ep3-int", { .type_int = 1, .dir_in = 1, .dir_out = 1 } },
++	{ "ep4", { .type_iso = 1, .type_bulk = 1, .type_int = 1,
++		   .dir_in = 1, .dir_out = 1 } },
++	{ "ep5", { .type_iso = 1, .type_bulk = 1, .type_int = 1,
++		   .dir_in = 1, .dir_out = 1 } },
+ };
+-#define ep0name		ep_names[0]
 +
- 	INFO("%s version %s\n", driver_name, DRIVER_VERSION);
- 	return 0;
- }
++#define ep0name		ep_info[0].name
+ 
+ #define at91_udp_read(udc, reg) \
+ 	__raw_readl((udc)->udp_baseaddr + (reg))
+@@ -1469,7 +1477,8 @@ int at91_udc_probe(struct at91_udc_data *pdata)
+ 
+ 	for (i = 0; i < NUM_ENDPOINTS; i++) {
+ 		ep = &udc->ep[i];
+-		ep->ep.name = ep_names[i];
++		ep->ep.name = ep_info[i].name;
++		ep->ep.caps = ep_info[i].caps;
+ 		ep->ep.ops = &at91_ep_ops;
+ 		ep->udc = udc;
+ 		ep->int_mask = (1 << i);
 -- 
 2.53.0
 
