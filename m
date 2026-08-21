@@ -4,120 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 789CEC5DF93
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:18:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA03C5DF8E
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:18:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3E6CA61088;
-	Fri, 21 Aug 2026 13:18:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B175F60F8B;
+	Fri, 21 Aug 2026 13:18:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UqCMpWYCCf6k; Fri, 21 Aug 2026 13:18:21 +0000 (UTC)
+ id 7EwmYDKSwXqz; Fri, 21 Aug 2026 13:18:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787318109;
-	bh=N08ZBrgMsyjx3ftDO7O7GR689tqBX00t5T5ExBAfNHw=;
+	d=lists.u-boot-project.org; s=default; t=1787318153;
+	bh=xaBqxyC+Jjh9e0kBNOWUOuyumSWEXIk9qbZ6rpBSa7E=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fM1bjgCsQVBE3xhkhp1vi15WSb9rPIVpi66RjMhnJNwvXcqD2fSko6ieh26lc8xOc
-	 Dm6NdM2Ro0kwCP2BuLVSh7PifWx2geNV74oMeezALaJ88evao+Ammc1up9Fse4Te9j
-	 r64iA9RCKplmYz894dK9p8LieFK3I9dkti9jAcf8xj8YBKOqPVL3qdEUV4W3bwG4jy
-	 NePltw+IiY+eiIVWHNlfXBoO3+oft0NWtlOZazXrOUTcgbms/m65UXj3rnQroPyE83
-	 GJDIlrtBSwzdu2AidTTAOCUwBXzNThaNe9MHjNnf5ru7ns9l8D6rlDtu+R9iHLYJJb
-	 Ee4TXUVzecy6A==
+	b=sOHHdOEeaO85/tbLv13WH5tX61okdalJRrrNe2SohZMQ14N5+FJo5bpuWF+vh0o5J
+	 i6cmOYiYQU3p/VZJbg60UTbcd1vGSPLLVUKC9iYYoIL/Uj0Q/K3W8I5Fu93x6EQszv
+	 AL7PAtaFFiWqklcFC1SOHHwtY+YEeSPHwFCqkQtBqDiUcS3t6c+6U84nx2SEOyKSjJ
+	 A5rCF14aG+LLjNbs4tDLhesDf+H6/kAiKHnWrx9usxRKasrHlNB6p5//ofZjUM9PES
+	 2FIpjmp+1YD1+hzY60c1RAdG4A/Y+TKScu8DhqOh0S1FFBUDdEtYKh3yO+FWp4Krh8
+	 4f4wrzNYLYnAA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0669960F0B;
-	Fri, 21 Aug 2026 13:15:09 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 461BA2B2
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 11A5160A81;
+	Fri, 21 Aug 2026 13:15:53 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 24C882B2
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3838640071
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:22 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 12F0981013
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z-swGarudyio for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 08:52:21 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Np06NDWCImAw for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 08:52:42 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
+ client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=ClfXVypC
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9116E4006A
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:20 +0000 (UTC)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6a09571dd5cso133246a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 01:52:20 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=l4UoB/8H
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B68448100F
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:52:41 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c160d8760e0so7687966b.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 01:52:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787302338; x=1787907138;
+ d=linaro.org; s=google; t=1787302360; x=1787907160;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=N08ZBrgMsyjx3ftDO7O7GR689tqBX00t5T5ExBAfNHw=;
- b=ClfXVypCKc+k4yWqcQQft45TOLJZr1robfBjU6/EPJPBHSH95bF0ad5p+k5ttoH9qP
- D2VwGzyJJuJfFwTLAGYbTVFi0cYaTQWvX5AvrpjwAXxkZg9pUCpHP99TzHfVP6el0SXK
- EaveZ45o7D/zvpl0eZ1CEZi5O4KxorauFgapPwv3YirsKSTR7QwK7JTV3xMgrPaVCWPP
- 4sFBvser6pKc/358yZpOlo2YNKT6G+NMSOSPyVum4g42GlvOyNdmZEG5QINdBRfjjQiO
- AsigOH3aUA9HczkFJCUt9s+tuPSz22UcBz8JBT2nCqKXjSXkQzL8v19btWqBKPizQ1gP
- rCMA==
+ bh=xaBqxyC+Jjh9e0kBNOWUOuyumSWEXIk9qbZ6rpBSa7E=;
+ b=l4UoB/8Hyk2grBgeRjmB3LDY9lfHrQFj6gu5BjsEAFEuS13JGzcqKa1LgmrxVIUvni
+ ANkzrMZ3mupOIKur2dltpFSO4pnCl/eyqxCUx1owJMWz5tBX4TuljUDmo/MbSeKTq1UY
+ 8WF8QfN5nw3s80qgLQk3t3qYHBbyAFt000s+8Jhpndb0ekCrbvlGls6jK5mTGY1doqxE
+ khfbuu6MQg5eOQrNhVVSNE2CW43gazmzzGlq52OzINr5aE+v8paSY5AQeKscjvo/Exhw
+ 1XDEjawT/3P6WWJrOD9mvAhZr3hfek0VLcz8XLZ08524Sf3y36uS5Pj4d6kOiiHTHiRC
+ 06XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787302338; x=1787907138;
+ d=1e100.net; s=20251104; t=1787302360; x=1787907160;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=N08ZBrgMsyjx3ftDO7O7GR689tqBX00t5T5ExBAfNHw=;
- b=rsGdnkXgPAQW+Refj1UdjywKF3ZYAhcDMyGsOSNnrYd9HRxNpjI0lQ8Zka9rZEyH7E
- gUUy7Af9E9Ab8YuU/zxT0vGvf2jMYZ1PYuqVFGFhgTQOgoXrIPBYluUHQMWah4/KHDUq
- MY6Ru9/SMVlU92g0f/pWc4clws9PAldhbTEUcyRZwAYSQQrDtJc82ep1aIB4YAzXtVs5
- wkFeb+cHCVt4cLoySWNZ3q93ty7/xi/H/MRYsFT3hr4EJ4aeZ50q2p4PzKJZ9Fj6GsHC
- RUvg84sMrigBNt+ovB853QHZ/R11XEDZTdRK9HAkmhgcjpjKLGVVtZ+k/4fhABIPkHnV
- nyzg==
+ bh=xaBqxyC+Jjh9e0kBNOWUOuyumSWEXIk9qbZ6rpBSa7E=;
+ b=OAoIJEZiolBplCsXzG8UsZSdexiRcdKJTHmI9onIclyZWRJmytJ8SwC4UA9QeavRm1
+ g4yjhaGCKqZyA4AFmddSZgWEosU+HVpOFYs7z3AtLeI2LePKUn3zD7CHidlCgwQ05wO6
+ mlTBYRpAaagi+++P4pw6UDdD0/7h8s6AC0hC4D4W0h1641kNE61IdrunM2pvcSTK6sHU
+ Q5wsspcSmDVP1RpdNmzvK7qQlYrxGhYPS0CuyGT27du13a38rSeYh54y4nN1RaECqgan
+ +NxpSKgS0xBRo5m77prTES60h7ntoefH1YMsm3eLoBmsx+j48ycJI9L10NyvTZQk43iL
+ J2yQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro7ooT/SidfKWt3Z6lg6MdA8VMBELgJwWzGkgNnBYSTkBwJp1LT9DN6B436gAom3YFur39n6y8=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++k6xe/mS8T869B4xorCnrH6GGVLP6j97AiI7sYNT3wuNXdnYvDu
- 30liosGcBgHthNSut0DFCbMxRerfVOUa/BkyF1uV0D8aJuwYkjOS6sC0VJDmxMzgu5A=
-X-Gm-Gg: AR+sD10w1SWSEUVr5TmwuDELwPvZWWKelFM22VnJa4mSU+k8OtSus7Bwk30Ue9ZYhO2
- cgf15dbaAB2uYSISuo2liPoVDtRGgg/HMjmdqkrG6BWCrP63RuKTOv6Oq6cDBg+Sn0Z9sd/8Xye
- wn+6H9RkoGX3NcoyrlBLmYmZWkXUHKU1m8tl3i2iGIqHd83IjsdxRdYstIaehCI/W55iGxhkdjK
- soEErexSq/hXwLWxkCvOEIDZLEgO/9ChEedkED9w8G6bBRmAZrB2oEV0y9a9sxqlsmMluG33Qsf
- 6HxDjvCg0MTCgqbT2BbelvsBR8NgVQDsVjuujJAstwBaGBvg+o+Wu47S0V+jNmhBgyCQ863fCX2
- skUuezINQRQwwQ6qwOH31cL3mLRakKPO4hNpb47Oh+K24J15lmx9ZCINRxdh4T2OvqrrbVg7cuj
- ar1TKkYp+COXgyfPBoWIRn43oEHanUNYJZnj3z/DQ5QpZ8wBZd8VapHqAeC29CBEqkzXoNEvTrl
- jcBrhIP/sh3o/mn4ypC98Ob
-X-Received: by 2002:a05:6402:d0e:b0:6a3:fee5:adc8 with SMTP id
- 4fb4d7f45d1cf-6a42eeb84dcmr2855407a12.0.1787302338333; 
- Fri, 21 Aug 2026 01:52:18 -0700 (PDT)
+ AHgh+RpJ7DR78eS1dVYLs5LU3gtfor3RLSpbaQsxqqyHFaiEhNVgWl6W6nK80m+6eIK63QjneEaJtZ4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lNgHygSIAaiSMxkhD+t+XwkN7m3P0tBd6ANjc/SjV/M421i/eD
+ R4z07UI1LSUX467CVQsT/zi04RKnZHVWIurEiPi2AXdbhK/pDI+kNVQ/Q8s3RoLKm38=
+X-Gm-Gg: AR+sD10fVAs7f/+eCqNG8VdBmg9mGteP6FGg+IO1dUWFGO3FG3t70g8lGw3hvrLxZkv
+ 3Nuu1oET/5/CgCZ757JJnQknIAIQj8X/RcdK9rfnMyg8RGl+DiOJ4EUT7s3rJ5kTkEd9YpCSMzI
+ I/svKmWcpQzxZi+dcjP/FyJB+K4yVbLzQq4GAsZNaDjJIfmilE88mKrJFlK0EtfJSVxi/LVERgx
+ qiS3Xt8QxrZUAtvz3is8Ricqxn+wJSfkKfZ670Voc5ivH5siiedUvymmBvgSLqCcUtm4eKVhUgK
+ yAlTBypn90S8h+kGGND1usNHfkuQtsEYRPyYhPNiajkzU9bumr89dsIwTJg+nSDTGXRNocQtWo4
+ oq1a8AuN744zpUdFu5Hat1FmCK7rX4b1XI7aWXAiHw641wDzZmgY26j8QhO7u9YXxeUg6ERYeX0
+ Otmtxu0l91SWFFybZTdRaQj0cpGIAI6MdsgZENATwmQI8gNujugC5y5pipvc4frynwzlDjX+9P2
+ FH7iH1GsmQ4TUmzxz2lqqi8
+X-Received: by 2002:a17:907:d0c:b0:c20:38e2:b355 with SMTP id
+ a640c23a62f3a-c246a6c97c1mr232540466b.4.1787302359548; 
+ Fri, 21 Aug 2026 01:52:39 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a3ff0c315dsm5319073a12.9.2026.08.21.01.52.17
+ a640c23a62f3a-c24589e1ac0sm348878766b.11.2026.08.21.01.52.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2026 01:52:17 -0700 (PDT)
+ Fri, 21 Aug 2026 01:52:39 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
 Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
+ Anders Roxell <anders.roxell@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+usb@mailbox.org>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v6 62/87] usb: gadget: re-import epautoconf.c from kernel v6.16
-Date: Fri, 21 Aug 2026 10:47:38 +0200
-Message-ID: <20260821084829.2070426-63-anders.roxell@linaro.org>
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Eddie Cai <eddie.cai.linux@gmail.com>, Quentin Schulz <u-boot@0leil.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v6 77/87] usb: gadget: fix up the function drivers after the
+ resync
+Date: Fri, 21 Aug 2026 10:47:53 +0200
+Message-ID: <20260821084829.2070426-78-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260821084829.2070426-1-anders.roxell@linaro.org>
 References: <20260821084829.2070426-1-anders.roxell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 21 Aug 2026 13:11:40 +0000
+X-Mailman-Approved-At: Fri, 21 Aug 2026 13:11:41 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,384 +135,344 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Jerome Forissier <jerome.forissier@linaro.org>
+Adapt the gadget function drivers (acm, fastboot, mass_storage, rockusb,
+sdp, thor, ether and composite) to the new gadget API.
 
-Replace drivers/usb/gadget/epautoconf.c with the one from the Linux
-kernel. Fixes will come later.
-
+Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/gadget/epautoconf.c | 292 +++++++++++++++-----------------
- 1 file changed, 133 insertions(+), 159 deletions(-)
+ drivers/usb/gadget/composite.c      |  2 +-
+ drivers/usb/gadget/ether.c          | 21 ++++++++++++++-------
+ drivers/usb/gadget/f_acm.c          | 20 +++++++++++---------
+ drivers/usb/gadget/f_fastboot.c     | 10 +++++-----
+ drivers/usb/gadget/f_mass_storage.c |  5 ++++-
+ drivers/usb/gadget/f_rockusb.c      | 11 ++++++-----
+ drivers/usb/gadget/f_sdp.c          | 12 ++++++++----
+ drivers/usb/gadget/f_thor.c         | 19 +++++++++----------
+ 8 files changed, 58 insertions(+), 42 deletions(-)
 
-diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoconf.c
-index 495460473e9a..4fbea9137240 100644
---- a/drivers/usb/gadget/epautoconf.c
-+++ b/drivers/usb/gadget/epautoconf.c
-@@ -1,172 +1,123 @@
- // SPDX-License-Identifier: GPL-2.0+
-+/* Imported from Linux v6.16 */
- /*
-  * epautoconf.c -- endpoint autoconfiguration for usb gadget drivers
-  *
-  * Copyright (C) 2004 David Brownell
-- *
-- * Ported to U-Boot by: Thomas Smits <ts.smits@gmail.com> and
-- *                      Remy Bohmer <linux@bohmer.net>
-  */
+diff --git a/drivers/usb/gadget/composite.c b/drivers/usb/gadget/composite.c
+index 04b85419931e..060788419553 100644
+--- a/drivers/usb/gadget/composite.c
++++ b/drivers/usb/gadget/composite.c
+@@ -833,7 +833,7 @@ static int bos_desc(struct usb_composite_dev *cdev)
  
--#include <linux/usb/ch9.h>
--#include <linux/errno.h>
--#include <linux/usb/gadget.h>
--#include <asm/unaligned.h>
--
--#define isdigit(c)      ('0' <= (c) && (c) <= '9')
-+#include <linux/kernel.h>
-+#include <linux/module.h>
-+#include <linux/types.h>
-+#include <linux/device.h>
+ 		/* Get Controller configuration */
+ 		if (cdev->gadget->ops->get_config_params) {
+-			cdev->gadget->ops->get_config_params(
++			cdev->gadget->ops->get_config_params(cdev->gadget,
+ 				&dcd_config_params);
+ 		} else {
+ 			dcd_config_params.bU1devExitLat =
+diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+index 7973927e8a7f..13a20441419d 100644
+--- a/drivers/usb/gadget/ether.c
++++ b/drivers/usb/gadget/ether.c
+@@ -925,8 +925,9 @@ set_ether_config(struct eth_dev *dev, gfp_t gfp_flags)
+ 		dev->status = ep_desc(gadget, &hs_status_desc,
+ 						&fs_status_desc);
+ 		dev->status_ep->driver_data = dev;
++		dev->status_ep->desc = dev->status;
  
--/* we must assign addresses for configurable endpoints (like net2280) */
--static unsigned epnum;
-+#include <linux/ctype.h>
-+#include <linux/string.h>
+-		result = usb_ep_enable(dev->status_ep, dev->status);
++		result = usb_ep_enable(dev->status_ep);
+ 		if (result != 0) {
+ 			debug("enable %s --> %d\n",
+ 				dev->status_ep->name, result);
+@@ -951,14 +952,16 @@ set_ether_config(struct eth_dev *dev, gfp_t gfp_flags)
+ 	 * from REMOTE_NDIS_HALT_MSG, reset from REMOTE_NDIS_RESET_MSG.
+ 	 */
+ 	if (!cdc_active(dev)) {
+-		result = usb_ep_enable(dev->in_ep, dev->in);
++		dev->in_ep->desc = dev->in;
++		result = usb_ep_enable(dev->in_ep);
+ 		if (result != 0) {
+ 			debug("enable %s --> %d\n",
+ 				dev->in_ep->name, result);
+ 			goto done;
+ 		}
  
--/* #define MANY_ENDPOINTS */
--#ifdef MANY_ENDPOINTS
--/* more than 15 configurable endpoints */
--static unsigned in_epnum;
--#endif
-+#include <linux/usb/ch9.h>
-+#include <linux/usb/gadget.h>
+-		result = usb_ep_enable(dev->out_ep, dev->out);
++		dev->out_ep->desc = dev->out;
++		result = usb_ep_enable(dev->out_ep);
+ 		if (result != 0) {
+ 			debug("enable %s --> %d\n",
+ 				dev->out_ep->name, result);
+@@ -1156,7 +1159,8 @@ static void issue_start_status(struct eth_dev *dev)
+ 	 * FIXME iff req->context != null just dequeue it
+ 	 */
+ 	usb_ep_disable(dev->status_ep);
+-	usb_ep_enable(dev->status_ep, dev->status);
++	dev->status_ep->desc = dev->status;
++	usb_ep_enable(dev->status_ep);
  
--/*
-- * This should work with endpoints from controller drivers sharing the
-- * same endpoint naming convention.  By example:
-+/**
-+ * usb_ep_autoconfig_ss() - choose an endpoint matching the ep
-+ * descriptor and ep companion descriptor
-+ * @gadget: The device to which the endpoint must belong.
-+ * @desc: Endpoint descriptor, with endpoint direction and transfer mode
-+ *    initialized.  For periodic transfers, the maximum packet
-+ *    size must also be initialized.  This is modified on
-+ *    success.
-+ * @ep_comp: Endpoint companion descriptor, with the required
-+ *    number of streams. Will be modified when the chosen EP
-+ *    supports a different number of streams.
-+ *
-+ * This routine replaces the usb_ep_autoconfig when needed
-+ * superspeed enhancments. If such enhancemnets are required,
-+ * the FD should call usb_ep_autoconfig_ss directly and provide
-+ * the additional ep_comp parameter.
-+ *
-+ * By choosing an endpoint to use with the specified descriptor,
-+ * this routine simplifies writing gadget drivers that work with
-+ * multiple USB device controllers.  The endpoint would be
-+ * passed later to usb_ep_enable(), along with some descriptor.
-+ *
-+ * That second descriptor won't always be the same as the first one.
-+ * For example, isochronous endpoints can be autoconfigured for high
-+ * bandwidth, and then used in several lower bandwidth altsettings.
-+ * Also, high and full speed descriptors will be different.
-  *
-- *	- ep1, ep2, ... address is fixed, not direction or type
-- *	- ep1in, ep2out, ... address and direction are fixed, not type
-- *	- ep1-bulk, ep2-bulk, ... address and type are fixed, not direction
-- *	- ep1in-bulk, ep2out-iso, ... all three are fixed
-- *	- ep-* ... no functionality restrictions
-+ * Be sure to examine and test the results of autoconfiguration
-+ * on your hardware.  This code may not make the best choices
-+ * about how to use the USB controller, and it can't know all
-+ * the restrictions that may apply. Some combinations of driver
-+ * and hardware won't be able to autoconfigure.
-  *
-- * Type suffixes are "-bulk", "-iso", or "-int".  Numbers are decimal.
-- * Less common restrictions are implied by gadget_is_*().
-+ * On success, this returns an claimed usb_ep, and modifies the endpoint
-+ * descriptor bEndpointAddress.  For bulk endpoints, the wMaxPacket value
-+ * is initialized as if the endpoint were used at full speed and
-+ * the bmAttribute field in the ep companion descriptor is
-+ * updated with the assigned number of streams if it is
-+ * different from the original value. To prevent the endpoint
-+ * from being returned by a later autoconfig call, claims it by
-+ * assigning ep->claimed to true.
-  *
-- * NOTE:  each endpoint is unidirectional, as specified by its USB
-- * descriptor; and isn't specific to a configuration or altsetting.
-+ * On failure, this returns a null endpoint descriptor.
-  */
--static int ep_matches(
-+struct usb_ep *usb_ep_autoconfig_ss(
- 	struct usb_gadget		*gadget,
--	struct usb_ep			*ep,
--	struct usb_endpoint_descriptor	*desc
-+	struct usb_endpoint_descriptor	*desc,
-+	struct usb_ss_ep_comp_descriptor *ep_comp
- )
+ 	/*
+ 	 * 3.8.1 says to issue first NETWORK_CONNECTION, then
+@@ -1314,7 +1318,8 @@ eth_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
+ 				break;
+ 			if (dev->status) {
+ 				usb_ep_disable(dev->status_ep);
+-				usb_ep_enable(dev->status_ep, dev->status);
++				dev->status_ep->desc = dev->status;
++				usb_ep_enable(dev->status_ep);
+ 			}
+ 
+ 			value = 0;
+@@ -1333,8 +1338,10 @@ eth_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
+ 			if (wValue == 1) {
+ 				if (!cdc_active(dev))
+ 					break;
+-				usb_ep_enable(dev->in_ep, dev->in);
+-				usb_ep_enable(dev->out_ep, dev->out);
++				dev->in_ep->desc = dev->in;
++				usb_ep_enable(dev->in_ep);
++				dev->out_ep->desc = dev->out;
++				usb_ep_enable(dev->out_ep);
+ 				dev->cdc_filter = DEFAULT_FILTER;
+ 				if (dev->status)
+ 					issue_start_status(dev);
+diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
+index b6c11d97a62d..5f5400bab7ec 100644
+--- a/drivers/usb/gadget/f_acm.c
++++ b/drivers/usb/gadget/f_acm.c
+@@ -325,20 +325,20 @@ static struct usb_request *acm_start_ep(struct usb_ep *ep, void *complete_cb,
+ 
+ static int acm_start_data(struct f_acm *f_acm, struct usb_gadget *gadget)
  {
--	u8		type;
--	const char	*tmp;
--	u16		max;
--
--	/* endpoint already claimed? */
--	if (NULL != ep->driver_data)
--		return 0;
--
--	/* only support ep0 for portable CONTROL traffic */
--	type = desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK;
--	if (USB_ENDPOINT_XFER_CONTROL == type)
--		return 0;
--
--	/* some other naming convention */
--	if ('e' != ep->name[0])
--		return 0;
-+	struct usb_ep	*ep;
+-	const struct usb_endpoint_descriptor *d;
+ 	int ret;
  
--	/* type-restriction:  "-iso", "-bulk", or "-int".
--	 * direction-restriction:  "in", "out".
--	 */
--	if ('-' != ep->name[2]) {
--		tmp = strrchr(ep->name, '-');
--		if (tmp) {
--			switch (type) {
--			case USB_ENDPOINT_XFER_INT:
--				/* bulk endpoints handle interrupt transfers,
--				 * except the toggle-quirky iso-synch kind
--				 */
--				if ('s' == tmp[2])	/* == "-iso" */
--					return 0;
--				break;
--			case USB_ENDPOINT_XFER_BULK:
--				if ('b' != tmp[1])	/* != "-bulk" */
--					return 0;
--				break;
--			case USB_ENDPOINT_XFER_ISOC:
--				if ('s' != tmp[2])	/* != "-iso" */
--					return 0;
--			}
--		} else {
--			tmp = ep->name + strlen(ep->name);
--		}
+ 	/* EP IN */
+-	d = ep_desc(gadget, &acm_hs_in_desc, &acm_fs_in_desc);
+-	ret = usb_ep_enable(f_acm->ep_in, d);
++	f_acm->ep_in->desc = ep_desc(gadget, &acm_hs_in_desc, &acm_fs_in_desc);
++	ret = usb_ep_enable(f_acm->ep_in);
+ 	if (ret)
+ 		return ret;
+ 
+ 	f_acm->req_in = acm_start_ep(f_acm->ep_in, acm_tx_complete, f_acm);
+ 
+ 	/* EP OUT */
+-	d = ep_desc(gadget, &acm_hs_out_desc, &acm_fs_out_desc);
+-	ret = usb_ep_enable(f_acm->ep_out, d);
++	f_acm->ep_out->desc = ep_desc(gadget, &acm_hs_out_desc,
++				      &acm_fs_out_desc);
++	ret = usb_ep_enable(f_acm->ep_out);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -354,12 +354,11 @@ static int acm_start_data(struct f_acm *f_acm, struct usb_gadget *gadget)
+ 
+ static int acm_start_ctrl(struct f_acm *f_acm, struct usb_gadget *gadget)
+ {
+-	const struct usb_endpoint_descriptor *d;
 -
--		/* direction-restriction:  "..in-..", "out-.." */
--		tmp--;
--		if (!isdigit(*tmp)) {
--			if (desc->bEndpointAddress & USB_DIR_IN) {
--				if ('n' != *tmp)
--					return 0;
--			} else {
--				if ('t' != *tmp)
--					return 0;
--			}
--		}
-+	if (gadget->ops->match_ep) {
-+		ep = gadget->ops->match_ep(gadget, desc, ep_comp);
-+		if (ep)
-+			goto found_ep;
+ 	usb_ep_disable(f_acm->ep_notify);
+ 
+-	d = ep_desc(gadget, &acm_hs_notify_desc, &acm_fs_notify_desc);
+-	usb_ep_enable(f_acm->ep_notify, d);
++	f_acm->ep_notify->desc = ep_desc(gadget, &acm_hs_notify_desc,
++					 &acm_fs_notify_desc);
++	usb_ep_enable(f_acm->ep_notify);
+ 
+ 	acm_start_ep(f_acm->ep_notify, acm_notify_complete, f_acm);
+ 
+@@ -454,6 +453,9 @@ static void acm_disable(struct usb_function *f)
+ 	usb_ep_disable(f_acm->ep_out);
+ 	usb_ep_disable(f_acm->ep_in);
+ 	usb_ep_disable(f_acm->ep_notify);
++	f_acm->ep_out->desc = NULL;
++	f_acm->ep_in->desc = NULL;
++	f_acm->ep_notify->desc = NULL;
+ 
+ 	if (f_acm->req_out) {
+ 		free(f_acm->req_out->buf);
+diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
+index 8df0e3f331d1..e1eed5fa4cb4 100644
+--- a/drivers/usb/gadget/f_fastboot.c
++++ b/drivers/usb/gadget/f_fastboot.c
+@@ -320,13 +320,13 @@ static int fastboot_set_alt(struct usb_function *f,
+ 	struct usb_composite_dev *cdev = f->config->cdev;
+ 	struct usb_gadget *gadget = cdev->gadget;
+ 	struct f_fastboot *f_fb = func_to_fastboot(f);
+-	const struct usb_endpoint_descriptor *d;
+ 
+ 	debug("%s: func: %s intf: %d alt: %d\n",
+ 	      __func__, f->name, interface, alt);
+ 
+-	d = fb_ep_desc(gadget, &fs_ep_out, &hs_ep_out, &ss_ep_out);
+-	ret = usb_ep_enable(f_fb->out_ep, d);
++	f_fb->out_ep->desc = fb_ep_desc(gadget, &fs_ep_out, &hs_ep_out,
++					&ss_ep_out);
++	ret = usb_ep_enable(f_fb->out_ep);
+ 	if (ret) {
+ 		puts("failed to enable out ep\n");
+ 		return ret;
+@@ -340,8 +340,8 @@ static int fastboot_set_alt(struct usb_function *f,
  	}
+ 	f_fb->out_req->complete = rx_handler_command;
  
--	/* endpoint maxpacket size is an input parameter, except for bulk
--	 * where it's an output parameter representing the full speed limit.
--	 * the usb spec fixes high speed bulk maxpacket at 512 bytes.
--	 */
--	max = 0x7ff & le16_to_cpu(get_unaligned(&desc->wMaxPacketSize));
--	switch (type) {
--	case USB_ENDPOINT_XFER_INT:
--		/* INT:  limit 64 bytes full speed, 1024 high speed */
--		if (!gadget->is_dualspeed && max > 64)
--			return 0;
--		/* FALLTHROUGH */
--
--	case USB_ENDPOINT_XFER_ISOC:
--		/* ISO:  limit 1023 bytes full speed, 1024 high speed */
--		if (ep->maxpacket < max)
--			return 0;
--		if (!gadget->is_dualspeed && max > 1023)
--			return 0;
--
--		/* BOTH:  "high bandwidth" works only at high speed */
--		if ((get_unaligned(&desc->wMaxPacketSize) &
--					__constant_cpu_to_le16(3<<11))) {
--			if (!gadget->is_dualspeed)
--				return 0;
--			/* configure your hardware with enough buffering!! */
--		}
--		break;
-+	/* Second, look at endpoints until an unclaimed one looks usable */
-+	list_for_each_entry (ep, &gadget->ep_list, ep_list) {
-+		if (usb_gadget_ep_match_desc(gadget, ep, desc, ep_comp))
-+			goto found_ep;
+-	d = fb_ep_desc(gadget, &fs_ep_in, &hs_ep_in, &ss_ep_in);
+-	ret = usb_ep_enable(f_fb->in_ep, d);
++	f_fb->in_ep->desc = fb_ep_desc(gadget, &fs_ep_in, &hs_ep_in, &ss_ep_in);
++	ret = usb_ep_enable(f_fb->in_ep);
+ 	if (ret) {
+ 		puts("failed to enable in ep\n");
+ 		goto err;
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index 7eb667c130d2..22a1352b6d2b 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -2159,7 +2159,8 @@ static int enable_endpoint(struct fsg_common *common, struct usb_ep *ep,
+ 	int	rc;
+ 
+ 	ep->driver_data = common;
+-	rc = usb_ep_enable(ep, d);
++	ep->desc = d;
++	rc = usb_ep_enable(ep);
+ 	if (rc)
+ 		ERROR(common, "can't enable %s, result %d\n", ep->name, rc);
+ 	return rc;
+@@ -2206,10 +2207,12 @@ reset:
+ 		/* Disable the endpoints */
+ 		if (fsg->bulk_in_enabled) {
+ 			usb_ep_disable(fsg->bulk_in);
++			fsg->bulk_in->desc = NULL;
+ 			fsg->bulk_in_enabled = 0;
+ 		}
+ 		if (fsg->bulk_out_enabled) {
+ 			usb_ep_disable(fsg->bulk_out);
++			fsg->bulk_out->desc = NULL;
+ 			fsg->bulk_out_enabled = 0;
+ 		}
+ 
+diff --git a/drivers/usb/gadget/f_rockusb.c b/drivers/usb/gadget/f_rockusb.c
+index d679cdae97c8..37957b202f8c 100644
+--- a/drivers/usb/gadget/f_rockusb.c
++++ b/drivers/usb/gadget/f_rockusb.c
+@@ -202,6 +202,8 @@ static void rockusb_disable(struct usb_function *f)
+ 
+ 	usb_ep_disable(f_rkusb->out_ep);
+ 	usb_ep_disable(f_rkusb->in_ep);
++	f_rkusb->out_ep->desc = NULL;
++	f_rkusb->in_ep->desc = NULL;
+ 
+ 	if (f_rkusb->out_req) {
+ 		free(f_rkusb->out_req->buf);
+@@ -246,13 +248,12 @@ static int rockusb_set_alt(struct usb_function *f, unsigned int interface,
+ 	struct usb_composite_dev *cdev = f->config->cdev;
+ 	struct usb_gadget *gadget = cdev->gadget;
+ 	struct f_rockusb *f_rkusb = func_to_rockusb(f);
+-	const struct usb_endpoint_descriptor *d;
+ 
+ 	debug("%s: func: %s intf: %d alt: %d\n",
+ 	      __func__, f->name, interface, alt);
+ 
+-	d = rkusb_ep_desc(gadget, &fs_ep_out, &hs_ep_out);
+-	ret = usb_ep_enable(f_rkusb->out_ep, d);
++	f_rkusb->out_ep->desc = rkusb_ep_desc(gadget, &fs_ep_out, &hs_ep_out);
++	ret = usb_ep_enable(f_rkusb->out_ep);
+ 	if (ret) {
+ 		printf("failed to enable out ep\n");
+ 		return ret;
+@@ -266,8 +267,8 @@ static int rockusb_set_alt(struct usb_function *f, unsigned int interface,
  	}
+ 	f_rkusb->out_req->complete = rx_handler_command;
  
--	/* MATCH!! */
-+	/* Fail */
-+	return NULL;
-+found_ep:
-+
-+	/*
-+	 * If the protocol driver hasn't yet decided on wMaxPacketSize
-+	 * and wants to know the maximum possible, provide the info.
-+	 */
-+	if (desc->wMaxPacketSize == 0)
-+		desc->wMaxPacketSize = cpu_to_le16(ep->maxpacket_limit);
+-	d = rkusb_ep_desc(gadget, &fs_ep_in, &hs_ep_in);
+-	ret = usb_ep_enable(f_rkusb->in_ep, d);
++	f_rkusb->in_ep->desc = rkusb_ep_desc(gadget, &fs_ep_in, &hs_ep_in);
++	ret = usb_ep_enable(f_rkusb->in_ep);
+ 	if (ret) {
+ 		printf("failed to enable in ep\n");
+ 		goto err;
+diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
+index cd2c282247ac..0bb386053258 100644
+--- a/drivers/usb/gadget/f_sdp.c
++++ b/drivers/usb/gadget/f_sdp.c
+@@ -625,12 +625,14 @@ static int sdp_set_alt(struct usb_function *f, unsigned intf, unsigned alt)
+ 	debug("%s: intf: %d alt: %d\n", __func__, intf, alt);
  
- 	/* report address */
-+	desc->bEndpointAddress &= USB_DIR_IN;
- 	if (isdigit(ep->name[2])) {
--		u8	num = dectoul(&ep->name[2], NULL);
-+		u8 num = simple_strtoul(&ep->name[2], NULL, 10);
- 		desc->bEndpointAddress |= num;
--#ifdef	MANY_ENDPOINTS
- 	} else if (desc->bEndpointAddress & USB_DIR_IN) {
--		if (++in_epnum > 15)
--			return 0;
--		desc->bEndpointAddress = USB_DIR_IN | in_epnum;
--#endif
-+		if (++gadget->in_epnum > 15)
-+			return NULL;
-+		desc->bEndpointAddress = USB_DIR_IN | gadget->in_epnum;
+ 	if (gadget_is_dualspeed(gadget) && gadget->speed == USB_SPEED_HIGH) {
+-		result = usb_ep_enable(sdp->in_ep, &in_hs_desc);
+-		result |= usb_ep_enable(sdp->out_ep, &out_hs_desc);
++		sdp->in_ep->desc = &in_hs_desc;
++		sdp->out_ep->desc = &out_hs_desc;
  	} else {
--		if (++epnum > 15)
--			return 0;
--		desc->bEndpointAddress |= epnum;
-+		if (++gadget->out_epnum > 15)
-+			return NULL;
-+		desc->bEndpointAddress |= gadget->out_epnum;
+-		result = usb_ep_enable(sdp->in_ep, &in_desc);
+-		result |= usb_ep_enable(sdp->out_ep, &out_desc);
++		sdp->in_ep->desc = &in_hs_desc;
++		sdp->out_ep->desc = &out_hs_desc;
  	}
++	result = usb_ep_enable(sdp->in_ep);
++	result |= usb_ep_enable(sdp->out_ep);
+ 	if (result)
+ 		return result;
  
--	/* report (variable) full speed bulk maxpacket */
--	if (USB_ENDPOINT_XFER_BULK == type) {
--		int size = ep->maxpacket;
--
--		/* min() doesn't work on bitfields with gcc-3.5 */
--		if (size > 64)
--			size = 64;
--		put_unaligned(cpu_to_le16(size), &desc->wMaxPacketSize);
--	}
--
--	if (gadget->ops->ep_conf)
--		return gadget->ops->ep_conf(gadget, ep, desc);
--
--	return 1;
-+	ep->address = desc->bEndpointAddress;
-+	ep->desc = NULL;
-+	ep->comp_desc = NULL;
-+	ep->claimed = true;
-+	return ep;
- }
-+EXPORT_SYMBOL_GPL(usb_ep_autoconfig_ss);
+@@ -662,6 +664,8 @@ static void sdp_disable(struct usb_function *f)
  
- /**
-- * usb_ep_autoconfig - choose an endpoint matching the descriptor
-+ * usb_ep_autoconfig() - choose an endpoint matching the
-+ * descriptor
-  * @gadget: The device to which the endpoint must belong.
-  * @desc: Endpoint descriptor, with endpoint direction and transfer mode
-  *	initialized.  For periodic transfers, the maximum packet
-@@ -187,11 +138,12 @@ static int ep_matches(
-  * USB controller, and it can't know all the restrictions that may apply.
-  * Some combinations of driver and hardware won't be able to autoconfigure.
-  *
-- * On success, this returns an un-claimed usb_ep, and modifies the endpoint
-+ * On success, this returns an claimed usb_ep, and modifies the endpoint
-  * descriptor bEndpointAddress.  For bulk endpoints, the wMaxPacket value
-- * is initialized as if the endpoint were used at full speed.  To prevent
-- * the endpoint from being returned by a later autoconfig call, claim it
-- * by assigning ep->driver_data to some non-null value.
-+ * is initialized as if the endpoint were used at full speed. Because of
-+ * that the users must consider adjusting the autoconfigured descriptor.
-+ * To prevent the endpoint from being returned by a later autoconfig call,
-+ * claims it by assigning ep->claimed to true.
-  *
-  * On failure, this returns a null endpoint descriptor.
-  */
-@@ -200,23 +152,45 @@ struct usb_ep *usb_ep_autoconfig(
- 	struct usb_endpoint_descriptor	*desc
- )
- {
--	struct usb_ep *ep;
-+	struct usb_ep	*ep;
-+	u8		type;
+ 	usb_ep_disable(sdp->in_ep);
+ 	usb_ep_disable(sdp->out_ep);
++	sdp->in_ep->desc = NULL;
++	sdp->out_ep->desc = NULL;
  
--	if (gadget->ops->match_ep) {
--		ep = gadget->ops->match_ep(gadget, desc, NULL);
--		if (ep && ep_matches(gadget, ep, desc))
--			return ep;
--	}
-+	ep = usb_ep_autoconfig_ss(gadget, desc, NULL);
-+	if (!ep)
-+		return NULL;
+ 	if (sdp->in_req) {
+ 		free(sdp->in_req->buf);
+diff --git a/drivers/usb/gadget/f_thor.c b/drivers/usb/gadget/f_thor.c
+index 540b9f882378..210537d51e92 100644
+--- a/drivers/usb/gadget/f_thor.c
++++ b/drivers/usb/gadget/f_thor.c
+@@ -909,16 +909,15 @@ static int thor_eps_setup(struct usb_function *f)
+ 	struct usb_composite_dev *cdev = f->config->cdev;
+ 	struct usb_gadget *gadget = cdev->gadget;
+ 	struct thor_dev *dev = thor_func->dev;
+-	struct usb_endpoint_descriptor *d;
+ 	struct usb_request *req;
+ 	struct usb_ep *ep;
+ 	int result;
  
--	/* Second, look at endpoints until an unclaimed one looks usable */
--	list_for_each_entry(ep, &gadget->ep_list, ep_list) {
--		if (ep_matches(gadget, ep, desc))
--			return ep;
-+	type = usb_endpoint_type(desc);
-+
-+	/* report (variable) full speed bulk maxpacket */
-+	if (type == USB_ENDPOINT_XFER_BULK) {
-+		int size = ep->maxpacket_limit;
-+
-+		/* min() doesn't work on bitfields with gcc-3.5 */
-+		if (size > 64)
-+			size = 64;
-+		desc->wMaxPacketSize = cpu_to_le16(size);
- 	}
+ 	ep = dev->in_ep;
+-	d = ep_desc(gadget, &hs_in_desc, &fs_in_desc);
+-	debug("(d)bEndpointAddress: 0x%x\n", d->bEndpointAddress);
++	ep->desc = ep_desc(gadget, &hs_in_desc, &fs_in_desc);
++	debug("(d)bEndpointAddress: 0x%x\n", ep->desc->bEndpointAddress);
  
--	/* Fail */
--	return NULL;
-+	return ep;
-+}
-+EXPORT_SYMBOL_GPL(usb_ep_autoconfig);
-+
-+/**
-+ * usb_ep_autoconfig_release - releases endpoint and set it to initial state
-+ * @ep: endpoint which should be released
-+ *
-+ * This function can be used during function bind for endpoints obtained
-+ * from usb_ep_autoconfig(). It unclaims endpoint claimed by
-+ * usb_ep_autoconfig() to make it available for other functions. Endpoint
-+ * which was released is no longer valid and shouldn't be used in
-+ * context of function which released it.
-+ */
-+void usb_ep_autoconfig_release(struct usb_ep *ep)
-+{
-+	ep->claimed = false;
-+	ep->driver_data = NULL;
- }
-+EXPORT_SYMBOL_GPL(usb_ep_autoconfig_release);
+-	result = usb_ep_enable(ep, d);
++	result = usb_ep_enable(ep);
+ 	if (result)
+ 		goto err;
  
- /**
-  * usb_ep_autoconfig_reset - reset endpoint autoconfig state
-@@ -224,18 +198,18 @@ struct usb_ep *usb_ep_autoconfig(
-  *
-  * Use this for devices where one configuration may need to assign
-  * endpoint resources very differently from the next one.  It clears
-- * state such as ep->driver_data and the record of assigned endpoints
-+ * state such as ep->claimed and the record of assigned endpoints
-  * used by usb_ep_autoconfig().
-  */
--void usb_ep_autoconfig_reset(struct usb_gadget *gadget)
-+void usb_ep_autoconfig_reset (struct usb_gadget *gadget)
- {
- 	struct usb_ep	*ep;
+@@ -933,10 +932,10 @@ static int thor_eps_setup(struct usb_function *f)
+ 	req->complete = thor_rx_tx_complete;
+ 	dev->in_req = req;
+ 	ep = dev->out_ep;
+-	d = ep_desc(gadget, &hs_out_desc, &fs_out_desc);
+-	debug("(d)bEndpointAddress: 0x%x\n", d->bEndpointAddress);
++	ep->desc = ep_desc(gadget, &hs_out_desc, &fs_out_desc);
++	debug("(d)bEndpointAddress: 0x%x\n", ep->desc->bEndpointAddress);
  
--	list_for_each_entry(ep, &gadget->ep_list, ep_list) {
-+	list_for_each_entry (ep, &gadget->ep_list, ep_list) {
-+		ep->claimed = false;
- 		ep->driver_data = NULL;
- 	}
--#ifdef	MANY_ENDPOINTS
--	in_epnum = 0;
--#endif
--	epnum = 0;
-+	gadget->in_epnum = 0;
-+	gadget->out_epnum = 0;
- }
-+EXPORT_SYMBOL_GPL(usb_ep_autoconfig_reset);
+-	result = usb_ep_enable(ep, d);
++	result = usb_ep_enable(ep);
+ 	if (result)
+ 		goto err_free_in_req;
+ 
+@@ -951,10 +950,10 @@ static int thor_eps_setup(struct usb_function *f)
+ 	dev->out_req = req;
+ 	/* ACM control EP */
+ 	ep = dev->int_ep;
+-	d = ep_desc(gadget, &hs_int_desc, &fs_int_desc);
+-	debug("(d)bEndpointAddress: 0x%x\n", d->bEndpointAddress);
++	ep->desc = ep_desc(gadget, &hs_int_desc, &fs_int_desc);
++	debug("(d)bEndpointAddress: 0x%x\n", ep->desc->bEndpointAddress);
+ 
+-	result = usb_ep_enable(ep, d);
++	result = usb_ep_enable(ep);
+ 	if (result)
+ 		goto err;
+ 
 -- 
 2.53.0
 
