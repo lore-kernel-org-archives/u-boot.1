@@ -1,85 +1,85 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2D4C5DF7D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 08:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93702C5DF7D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 08:43:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1403C4098A;
-	Fri, 21 Aug 2026 08:43:43 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V_QOk06-vAot; Fri, 21 Aug 2026 08:43:41 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787301821;
-	bh=X1IuKOzUMqKfC0P52WsJ7DBvHzPBkwQ2iAeYlGh9UyQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=W6BjRhWBPY430wlXn3LmVQPuDsU8EOEC6yFmqWeFWPprB5pSwg6GY+iZw/Xz24Wgz
-	 vIi4vab+05UeWo3u+msA761nmcxcr03N+XeHLIJgSlkks9Azck6YKMEhb+1TEXyqW5
-	 r8CIEM2aaBoNKHdq1COYWGZPl3ZTXyKLlBNLwKOw4h/HevBN6nReXRZlqmF8MbdSWW
-	 clnuf82c1QvwhsRZ9ybLMTbZrWKzWYd99MNbBDjLT+dKlzF/zUCqca0zh0yFp6zPOF
-	 S7re40rXhRMC0HDJSs1cw98iRMkqsQ3oukOCxyhZ2dx6V2ixvU3MAqIP8jwphhXa7J
-	 TagMDumkA+BhA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DE6C040908;
-	Fri, 21 Aug 2026 08:43:40 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 57FE71B8
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:39 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 498728109F
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 59AD98104B;
+	Fri, 21 Aug 2026 08:43:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bwc1lNaZENXP for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 08:43:38 +0000 (UTC)
+ id 0MIxHLgwAkb0; Fri, 21 Aug 2026 08:43:48 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787301824;
+	bh=dXGUsBMRMgapZcY0nR6IPD6rv6ygkxaQraLxsxWwCUU=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=HSM09Rzp+K8AwWdjh709CInUqHBcENiMPuzZv6fCZmOCM/qL1w+sOgqaf1jxrYuUK
+	 Ff9N/hm0+roKqSP1sxMSogdq06pG++GqW+YXtkImcOvc0W/zPYA3BS6wiwXc/hL8aN
+	 WQhXmRd1g25IRs+u+D6H0xRUQ/+/u6Lh8lys0nxhACFX2dOkBw5AgufIj3Hsq2xxZb
+	 1fUdANChLuUwo8EgVfzjMQDsihnf7qoYwKjSxN0tRTD34vXObR/EV3zbcbs/oYE9qJ
+	 7FYCXzAFTG87uJKNkNMELbIaggSy6ns/0ROzL62ZBe3u/Byu9b37iq/PnxF4AOS78v
+	 kMgF35RGy/WQA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 03EF481138;
+	Fri, 21 Aug 2026 08:43:44 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 190E0476
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:41 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id F113D6067B
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:40 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SwnY8MxXSvyj for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 08:43:40 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=gu59KRoe
+ header.a=rsa-sha256 header.s=zmail header.b=LE5rn/B+
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6BB7580F8B
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:37 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1787301811; cv=none; 
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E3AF160661
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1787301813; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=CoG4Jzd3v7RmY36vNddNzA2/wkT6tZcmzI7Ux4MW69lD+z8r4QKzElpmeEXIvQUjutwXF9ZZJDo1fs5+tYuf6oirmkOf+v4PuISqvc3TSWt1tMlYJyUINSiugRQE1R8McolGTx+1yG4f7Jf3L8SlMr618fleZbQIYEN1OEd8qmc=
+ b=l1YTKeiIrCuAGTRmZke4SEpMwDQnMwnomzsXvL0x6jWP5QnwexwXnhE5Mu8oJuwRaYHGO9AnYQ57CdjBs3wrg9Mv0sD5TTz6d1eKof+WhDF5qr8RltQizIvHw/uPD7+1G8rZX30/ddA+qSG397d2wUWyQE1tXCMUD4Uu0tkj3bs=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1787301811;
+ s=zohoarc; t=1787301813;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=X1IuKOzUMqKfC0P52WsJ7DBvHzPBkwQ2iAeYlGh9UyQ=; 
- b=EChZpzk7bsp4EoK45h8U+4kPuEZSdnpI2+/OU4lOpzS3lD8Hd78OSp03qQhzxmdzrYCSFzJFJ9hToXYaVHGQZW68DDOTfACTR5ce68TzJ+CjcNLI55buyf1oKXkgHMdzcipVy2bzy5fEpUQBeuZbl578HvHz8oiXBAxoEeBcYiM=
+ bh=dXGUsBMRMgapZcY0nR6IPD6rv6ygkxaQraLxsxWwCUU=; 
+ b=Bz4yF89CxvFrsUF7GygyZqQUqXQn2ZX+GlwflvSs52ji0Ulcr5iBbuoc0bp83ojUG35oIvQnE8N6Ih2nybfKgYl4WyCzfDp4tpipAfxTUhqd7Iseg0joF8FzqvcjoCRWtjmnqrozt+LGCz4FSOPWAIy2NYGPZ9ZxAZbpUheSNl4=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787301811; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787301813; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=X1IuKOzUMqKfC0P52WsJ7DBvHzPBkwQ2iAeYlGh9UyQ=;
- b=gu59KRoeDOMtxF+R5Ybxiu5obIgNrjB/8Vc6h1KxCZ6Xp4U26Sxt/QbeZl5FXNqn
- taBexhpsmyrKAYJOWSkKfTkswr12GpcQH58By/bS2bpmuhXkzC2zEqxaS5E5gQEWD34
- IqEUv/IgJVuY8CRuUztQy18VRPzeCBPKx+b6TGwE=
-Received: by mx.zohomail.com with SMTPS id 1787301809114166.27415676072928;
- Fri, 21 Aug 2026 01:43:29 -0700 (PDT)
+ bh=dXGUsBMRMgapZcY0nR6IPD6rv6ygkxaQraLxsxWwCUU=;
+ b=LE5rn/B+tbUP9kgOzEbELZ7K0QOc9rQfZPB5KLKwEHkW/Gfr6T2M2xAu86LY7kN3
+ tOPVqeJGY4pUkA/HcERMXkk4ByxS3QRO9uaYWF/T1NXYUQJTdsuc752vWk5iU/0uz2d
+ G40b0rFr/3WfwdUiudpKKlUR2XLMH5fMGWa/wOwg=
+Received: by mx.zohomail.com with SMTPS id 1787301811534939.701462113309;
+ Fri, 21 Aug 2026 01:43:31 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v3 08/19] LoongArch: CPU assembly routines
-Date: Fri, 21 Aug 2026 08:42:08 +0000
-Message-ID: <20260821084219.1703743-9-me@ziyao.cc>
+Subject: [PATCH v3 09/19] LoongArch: Exception handling
+Date: Fri, 21 Aug 2026 08:42:09 +0000
+Message-ID: <20260821084219.1703743-10-me@ziyao.cc>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260821084219.1703743-1-me@ziyao.cc>
 References: <20260821084219.1703743-1-me@ziyao.cc>
@@ -101,79 +101,79 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-start.S for initialisation, smp_secondary routine for
-a spin-table like interface for secondary cpus.
+Add exception entry assembly code, import stackframe.h
+from Linux, provide debug prints when exception happens.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
 Changed from v2
-- Add copyright to cpu/cpu.c
-- Drop unnecessary includes from cpu/cpu.c
-- Drop "resetting..." message from reset_cpu()
-- Fix misleading comment about t1 in start.S
-- Remove "move sp, s0" after board_init_f_alloc_reserve from start.S
-- Clean up whitespaces in start.S
+- Guard show_regs at the callsite
+- Provide a macro for $fp offset in pt_regs.regs
+- Add help text for SHOW_REGS, make it enabled by default
 
-Changed from v1
-- Replace t6, which is volatile across C function boundaries, with s5
-  to hold relocation offset in start.S
-- Fix typo "CLear" in smp_secondary.S
+No functional changes since v1
 
- arch/loongarch/cpu/Makefile        |   4 +
- arch/loongarch/cpu/cpu.c           |  17 +++
- arch/loongarch/cpu/smp_secondary.S |  55 ++++++++++
- arch/loongarch/cpu/start.S         | 168 +++++++++++++++++++++++++++++
- 4 files changed, 244 insertions(+)
- create mode 100644 arch/loongarch/cpu/cpu.c
- create mode 100644 arch/loongarch/cpu/smp_secondary.S
- create mode 100644 arch/loongarch/cpu/start.S
+ arch/loongarch/Kconfig                  |  19 +++
+ arch/loongarch/cpu/Makefile             |   2 +-
+ arch/loongarch/cpu/genex.S              |  21 +++
+ arch/loongarch/include/asm/stackframe.h | 175 +++++++++++++++++++++
+ arch/loongarch/lib/interrupts.c         | 192 ++++++++++++++++++++++++
+ 5 files changed, 408 insertions(+), 1 deletion(-)
+ create mode 100644 arch/loongarch/cpu/genex.S
+ create mode 100644 arch/loongarch/include/asm/stackframe.h
+ create mode 100644 arch/loongarch/lib/interrupts.c
 
+diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+index 4e8e9d4ee88b..ac4be2c837c0 100644
+--- a/arch/loongarch/Kconfig
++++ b/arch/loongarch/Kconfig
+@@ -30,6 +30,25 @@ config DMA_ADDR_T_64BIT
+ 	bool
+ 	default y if 64BIT
+ 
++config SHOW_REGS
++	bool "Show registers on unhandled exception"
++	default y
++	help
++	  By default only the program counter and the return address register
++	  are shown in crash dumps. Enable this symbol to show all registers
++	  in main U-Boot.
++
++config FRAMEPOINTER
++	bool "Build with frame pointer for stack unwinding"
++	default y
++	help
++	  Choose this option to use the framepointer so the stack can be
++	  unwound if needed. This is useful for tracing where faults came
++	  from as the source may be several functions back.
++
++	  If you say Y here, the code size will increase due to having to
++	  store the fp.
++
+ config STACK_SIZE_SHIFT
+ 	int
+ 	default 14
 diff --git a/arch/loongarch/cpu/Makefile b/arch/loongarch/cpu/Makefile
-index 3dbed94cc624..d3c38a16d057 100644
+index d3c38a16d057..6b3dd7ad7d69 100644
 --- a/arch/loongarch/cpu/Makefile
 +++ b/arch/loongarch/cpu/Makefile
-@@ -3,3 +3,7 @@
- # Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
- #
+@@ -6,4 +6,4 @@
+ extra-y = start.o
  
-+extra-y = start.o
-+
-+obj-y += cpu.o
-+obj-y += smp_secondary.o
-diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
+ obj-y += cpu.o
+-obj-y += smp_secondary.o
++obj-y += smp_secondary.o genex.o
+diff --git a/arch/loongarch/cpu/genex.S b/arch/loongarch/cpu/genex.S
 new file mode 100644
-index 000000000000..38005d576458
+index 000000000000..18d183a352b9
 --- /dev/null
-+++ b/arch/loongarch/cpu/cpu.c
-@@ -0,0 +1,17 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ * Copyright (C) 2026 Yao Zi <me@ziyao.cc>
-+ */
-+
-+#include <hang.h>
-+#include <stdio.h>
-+
-+#if !CONFIG_IS_ENABLED(SYSRESET)
-+void reset_cpu(void)
-+{
-+	printf("reset not supported yet\n");
-+	hang();
-+}
-+#endif
-diff --git a/arch/loongarch/cpu/smp_secondary.S b/arch/loongarch/cpu/smp_secondary.S
-new file mode 100644
-index 000000000000..4ef4b16a3fb6
---- /dev/null
-+++ b/arch/loongarch/cpu/smp_secondary.S
-@@ -0,0 +1,55 @@
++++ b/arch/loongarch/cpu/genex.S
+@@ -0,0 +1,21 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Loop to run on secondary cores for LoongArch CPU
++ * Exception entry for LoongArch CPU
 + *
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
@@ -181,225 +181,396 @@ index 000000000000..4ef4b16a3fb6
 +#include <linux/linkage.h>
 +#include <asm/asm.h>
 +#include <asm/loongarch.h>
-+#include <asm/arch/entry-init.h>
++#include <asm/stackframe.h>
 +
-+ENTRY(secondary_core_loop)
-+	smp_secondary_setup
-+
-+	PTR_LI		t0, LOONGARCH_IOCSR_MBUF0
-+	LONG_IOCSRWR	zero, t0
-+
-+	/* Enable IPI interrupt for wakeup */
-+	LONG_LI		t0, ECFGF_IPI
-+	csrxchg		t0, t0, LOONGARCH_CSR_ECFG
-+
-+	LONG_LI		t0, 0xffffffff
-+	li.w		t1, LOONGARCH_IOCSR_IPI_CLEAR
-+	iocsrwr.w	t0, t1
-+	li.w		t1, LOONGARCH_IOCSR_IPI_EN
-+	iocsrwr.w	t0, t1
-+
-+	/* t1 for spin table */
-+	PTR_LI		t1, LOONGARCH_IOCSR_MBUF0
-+
-+1:
-+	/* Query spin table */
-+	idle 0
-+	nop
-+	iocsrrd.w	t0, t1
-+	beqz		t0, 1b
-+
-+	/* Clear IPI interrupt */
-+	PTR_LI		t1, LOONGARCH_IOCSR_IPI_STATUS
-+	iocsrrd.w	t0, t1
-+	PTR_LI		t1, LOONGARCH_IOCSR_IPI_CLEAR
-+	iocsrwr.w	t0, t1
-+
-+	/* Mask all interrupts */
-+	LONG_LI		t0, ECFG0_IM
-+	csrxchg		zero, t0, LOONGARCH_CSR_ECFG
-+
-+	/* Jump to secondary core */
-+	PTR_LI		t1, LOONGARCH_IOCSR_MBUF0
-+	LONG_IOCSRRD	t0, t1
-+	/* If we ever return, put us back to the loop */
-+	la.pcrel	ra, secondary_core_loop
-+	jirl		zero, t0, 0
-+END(secondary_core_loop)
-diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
++.align 12
++ENTRY(exception_entry)
++	BACKUP_T0T1
++	SAVE_ALL
++	move		a0, sp
++	la.pcrel	t0, do_exceptions
++	jirl		ra, t0, 0
++	RESTORE_ALL_AND_RET
++END(exception_entry)
+diff --git a/arch/loongarch/include/asm/stackframe.h b/arch/loongarch/include/asm/stackframe.h
 new file mode 100644
-index 000000000000..fdf3697834f7
+index 000000000000..932150afdfaf
 --- /dev/null
-+++ b/arch/loongarch/cpu/start.S
-@@ -0,0 +1,168 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/loongarch/include/asm/stackframe.h
+@@ -0,0 +1,175 @@
++/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * Startup Code for LoongArch CPU
-+ *
++ * Copyright (C) 2020-2022 Loongson Technology Corporation Limited
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
++#ifndef _ASM_STACKFRAME_H
++#define _ASM_STACKFRAME_H
++
++#include <asm/addrspace.h>
++#include <asm/asm.h>
++#include <generated/asm-offsets.h>
++#include <asm/loongarch.h>
++
++/* Make the addition of cfi info a little easier. */
++	.macro cfi_rel_offset reg offset=0 docfi=0
++	.if \docfi
++	.cfi_rel_offset \reg, \offset
++	.endif
++	.endm
++
++	.macro cfi_st reg offset=0 docfi=0
++	cfi_rel_offset \reg, \offset, \docfi
++	LONG_S	\reg, sp, \offset
++	.endm
++
++	.macro cfi_restore reg offset=0 docfi=0
++	.if \docfi
++	.cfi_restore \reg
++	.endif
++	.endm
++
++	.macro cfi_ld reg offset=0 docfi=0
++	LONG_L	\reg, sp, \offset
++	cfi_restore \reg \offset \docfi
++	.endm
++
++	.macro BACKUP_T0T1
++	csrwr	t0, EXCEPTION_KS0
++	csrwr	t1, EXCEPTION_KS1
++	.endm
++
++	.macro RELOAD_T0T1
++	csrrd   t0, EXCEPTION_KS0
++	csrrd   t1, EXCEPTION_KS1
++	.endm
++
++	.macro	SAVE_TEMP docfi=0
++	RELOAD_T0T1
++	cfi_st	t0, PT_R12, \docfi
++	cfi_st	t1, PT_R13, \docfi
++	cfi_st	t2, PT_R14, \docfi
++	cfi_st	t3, PT_R15, \docfi
++	cfi_st	t4, PT_R16, \docfi
++	cfi_st	t5, PT_R17, \docfi
++	cfi_st	t6, PT_R18, \docfi
++	cfi_st	t7, PT_R19, \docfi
++	cfi_st	t8, PT_R20, \docfi
++	.endm
++
++	.macro	SAVE_STATIC docfi=0
++	cfi_st	s0, PT_R23, \docfi
++	cfi_st	s1, PT_R24, \docfi
++	cfi_st	s2, PT_R25, \docfi
++	cfi_st	s3, PT_R26, \docfi
++	cfi_st	s4, PT_R27, \docfi
++	cfi_st	s5, PT_R28, \docfi
++	cfi_st	s6, PT_R29, \docfi
++	cfi_st	s7, PT_R30, \docfi
++	cfi_st	s8, PT_R31, \docfi
++	.endm
++
++	.macro	SAVE_SOME docfi=0
++	PTR_ADDI sp, sp, -PT_SIZE
++	.if \docfi
++	.cfi_def_cfa sp, 0
++	.endif
++	cfi_st	t0, PT_R3, \docfi
++	cfi_rel_offset  sp, PT_R3, \docfi
++	LONG_S	zero, sp, PT_R0
++	csrrd	t0, LOONGARCH_CSR_PRMD
++	LONG_S	t0, sp, PT_PRMD
++	csrrd	t0, LOONGARCH_CSR_CRMD
++	LONG_S	t0, sp, PT_CRMD
++	csrrd	t0, LOONGARCH_CSR_EUEN
++	LONG_S  t0, sp, PT_EUEN
++	csrrd	t0, LOONGARCH_CSR_ECFG
++	LONG_S	t0, sp, PT_ECFG
++	csrrd	t0, LOONGARCH_CSR_ESTAT
++	PTR_S	t0, sp, PT_ESTAT
++	cfi_st	ra, PT_R1, \docfi
++	cfi_st	a0, PT_R4, \docfi
++	cfi_st	a1, PT_R5, \docfi
++	cfi_st	a2, PT_R6, \docfi
++	cfi_st	a3, PT_R7, \docfi
++	cfi_st	a4, PT_R8, \docfi
++	cfi_st	a5, PT_R9, \docfi
++	cfi_st	a6, PT_R10, \docfi
++	cfi_st	a7, PT_R11, \docfi
++	csrrd	ra, LOONGARCH_CSR_ERA
++	LONG_S	ra, sp, PT_ERA
++	.if \docfi
++	.cfi_rel_offset ra, PT_ERA
++	.endif
++	cfi_st	tp, PT_R2, \docfi
++	cfi_st	fp, PT_R22, \docfi
++	/* Save U0 for sanity */
++	cfi_st  u0, PT_R21, \docfi
++	.endm
++
++	.macro	SAVE_ALL docfi=0
++	SAVE_SOME \docfi
++	SAVE_TEMP \docfi
++	SAVE_STATIC \docfi
++	.endm
++
++	.macro	RESTORE_TEMP docfi=0
++	cfi_ld	t0, PT_R12, \docfi
++	cfi_ld	t1, PT_R13, \docfi
++	cfi_ld	t2, PT_R14, \docfi
++	cfi_ld	t3, PT_R15, \docfi
++	cfi_ld	t4, PT_R16, \docfi
++	cfi_ld	t5, PT_R17, \docfi
++	cfi_ld	t6, PT_R18, \docfi
++	cfi_ld	t7, PT_R19, \docfi
++	cfi_ld	t8, PT_R20, \docfi
++	.endm
++
++	.macro	RESTORE_STATIC docfi=0
++	cfi_ld	s0, PT_R23, \docfi
++	cfi_ld	s1, PT_R24, \docfi
++	cfi_ld	s2, PT_R25, \docfi
++	cfi_ld	s3, PT_R26, \docfi
++	cfi_ld	s4, PT_R27, \docfi
++	cfi_ld	s5, PT_R28, \docfi
++	cfi_ld	s6, PT_R29, \docfi
++	cfi_ld	s7, PT_R30, \docfi
++	cfi_ld	s8, PT_R31, \docfi
++	.endm
++
++	.macro	RESTORE_SOME docfi=0
++	LONG_L	a0, sp, PT_PRMD
++	andi    a0, a0, 0x3	/* extract pplv bit */
++	beqz    a0, 8f
++	cfi_ld  u0, PT_R21, \docfi
++8:
++	LONG_L	a0, sp, PT_ERA
++	csrwr	a0, LOONGARCH_CSR_ERA
++	LONG_L	a0, sp, PT_PRMD
++	csrwr	a0, LOONGARCH_CSR_PRMD
++	cfi_ld	ra, PT_R1, \docfi
++	cfi_ld	a0, PT_R4, \docfi
++	cfi_ld	a1, PT_R5, \docfi
++	cfi_ld	a2, PT_R6, \docfi
++	cfi_ld	a3, PT_R7, \docfi
++	cfi_ld	a4, PT_R8, \docfi
++	cfi_ld	a5, PT_R9, \docfi
++	cfi_ld	a6, PT_R10, \docfi
++	cfi_ld	a7, PT_R11, \docfi
++	cfi_ld	tp, PT_R2, \docfi
++	cfi_ld	fp, PT_R22, \docfi
++	.endm
++
++	.macro	RESTORE_SP_AND_RET docfi=0
++	cfi_ld	sp, PT_R3, \docfi
++	ertn
++	.endm
++
++	.macro	RESTORE_ALL_AND_RET docfi=0
++	RESTORE_STATIC \docfi
++	RESTORE_TEMP \docfi
++	RESTORE_SOME \docfi
++	RESTORE_SP_AND_RET \docfi
++	.endm
++
++#endif /* _ASM_STACKFRAME_H */
+diff --git a/arch/loongarch/lib/interrupts.c b/arch/loongarch/lib/interrupts.c
+new file mode 100644
+index 000000000000..5688e957604c
+--- /dev/null
++++ b/arch/loongarch/lib/interrupts.c
+@@ -0,0 +1,192 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <asm-offsets.h>
-+#include <config.h>
-+#include <elf.h>
-+#include <system-constants.h>
-+#include <asm/addrspace.h>
-+#include <asm/asm.h>
++#include <linux/compat.h>
++#include <linux/bitfield.h>
++#include <linux/linkage.h>
++#include <hang.h>
++#include <interrupt.h>
++#include <irq_func.h>
++#include <asm/global_data.h>
++#include <asm/ptrace.h>
++#include <asm/system.h>
++#include <asm/regdef.h>
 +#include <asm/loongarch.h>
-+#include <asm/arch/entry-init.h>
 +
-+#define BOOTCORE_ID		0
++DECLARE_GLOBAL_DATA_PTR;
 +
-+.section .text
-+.globl _start
-+_start:
-+	/* Allow arch specific setup code for MCSR stuff */
-+	entry_setup
++#define REG_FP 22
 +
-+	/* Disable interrupt */
-+	LONG_LI		t0, CSR_CRMD_IE
-+	csrxchg		zero, t0, LOONGARCH_CSR_CRMD
++static struct resume_data *resume;
 +
-+	/* Configure reset ebase */
-+	la.pcrel	t0, exception_entry
-+	csrwr		t0, LOONGARCH_CSR_EENTRY
++void set_resume(struct resume_data *data)
++{
++	resume = data;
++}
 +
-+	/* Setup direct map window for later use */
-+	PTR_LI		t0, CSR_DMW0_INIT
-+	csrwr		t0, LOONGARCH_CSR_DMWIN0
-+	PTR_LI		t0, CSR_DMW1_INIT
-+	csrwr		t0, LOONGARCH_CSR_DMWIN1
++static void __maybe_unused show_regs(struct pt_regs *regs)
++{
++	const int field = 2 * sizeof(unsigned long);
 +
-+	/* Branch out for nonboot core */
-+	csrrd		t0, LOONGARCH_CSR_CPUID
-+	andi		t0, t0, CSR_CPUID_COREID
-+	LONG_LI		t1, BOOTCORE_ID
-+	bne		t1, t0, secondary_core_loop
++#define GPR_FIELD(x) field, regs->regs[x]
++	printf("pc %0*lx ra %0*lx tp %0*lx sp %0*lx\n",
++	       field, regs->csr_era, GPR_FIELD(1), GPR_FIELD(2), GPR_FIELD(3));
++	printf("a0 %0*lx a1 %0*lx a2 %0*lx a3 %0*lx\n",
++	       GPR_FIELD(4), GPR_FIELD(5), GPR_FIELD(6), GPR_FIELD(7));
++	printf("a4 %0*lx a5 %0*lx a6 %0*lx a7 %0*lx\n",
++	       GPR_FIELD(8), GPR_FIELD(9), GPR_FIELD(10), GPR_FIELD(11));
++	printf("t0 %0*lx t1 %0*lx t2 %0*lx t3 %0*lx\n",
++	       GPR_FIELD(12), GPR_FIELD(13), GPR_FIELD(14), GPR_FIELD(15));
++	printf("t4 %0*lx t5 %0*lx t6 %0*lx t7 %0*lx\n",
++	       GPR_FIELD(16), GPR_FIELD(17), GPR_FIELD(18), GPR_FIELD(19));
++	printf("t8 %0*lx u0 %0*lx s9 %0*lx s0 %0*lx\n",
++	       GPR_FIELD(20), GPR_FIELD(21), GPR_FIELD(22), GPR_FIELD(23));
++	printf("s1 %0*lx s2 %0*lx s3 %0*lx s4 %0*lx\n",
++	       GPR_FIELD(24), GPR_FIELD(25), GPR_FIELD(26), GPR_FIELD(27));
++	printf("s5 %0*lx s6 %0*lx s7 %0*lx s8 %0*lx\n",
++	       GPR_FIELD(28), GPR_FIELD(29), GPR_FIELD(30), GPR_FIELD(31));
++}
 +
-+/*
-+ * Set stackpointer in internal/ex RAM to call board_init_f
-+ */
-+call_board_init_f:
-+	PTR_LI		t0, (SYS_INIT_SP_ADDR & STACK_ALIGN)
-+	move		sp, t0			/* save stack pointer */
-+/*
-+ * Now sp points to the right stack belonging to current CPU.
-+ * It's essential before any function call, otherwise, we get data-race.
-+ */
++static void __maybe_unused show_backtrace(struct pt_regs *regs)
++{
++	uintptr_t *fp = (uintptr_t *)regs->regs[REG_FP];
++	unsigned int count = 0;
++	ulong ra;
 +
-+call_board_init_f_0:
-+	/* find top of reserve space */
-+	PTR_LI		t1, 1
-+	PTR_SLL		t1, t1, CONFIG_STACK_SIZE_SHIFT
-+	PTR_SUB		a0, t0, t1		/* t1 -> size of one CPU stack */
-+	bl		board_init_f_alloc_reserve
++	printf("\nbacktrace:\n");
 +
-+	/* Set global pointer to u0 ($r21) */
-+	move		u0, a0
-+	bl		board_init_f_init_reserve
++	/*
++	 * there are a few entry points where the s0 register is
++	 * set to gd, so to avoid changing those, just abort if
++	 * the value is the same.
++	 */
++	while (fp && fp != (uintptr_t *)gd) {
++		ra = fp[-1];
++		printf("%3d: fp: " REG_FMT " ra: " REG_FMT,
++		       count, (ulong)fp, ra);
 +
-+	/* Probe and enable cache */
-+	bl		probe_caches
-+	bl		enable_caches
++		if (gd && gd->flags & GD_FLG_RELOC)
++			printf(" - ra: " REG_FMT " reloc adjusted\n",
++			       ra - gd->reloc_off);
++		else
++			printf("\n");
 +
-+#ifdef CONFIG_DEBUG_UART
-+	bl		debug_uart_init
++		fp = (uintptr_t *)fp[-2];
++		count++;
++	}
++}
++
++static const char *humanize_exc_name(unsigned int ecode, unsigned int esubcode)
++{
++	/*
++	 * LoongArch users and developers are probably more familiar with
++	 * those names found in the ISA manual, so we are going to print out
++	 * the latter. This will require some mapping.
++	 */
++	switch (ecode) {
++	case EXCCODE_RSV: return "INT";
++	case EXCCODE_TLBL: return "PIL";
++	case EXCCODE_TLBS: return "PIS";
++	case EXCCODE_TLBI: return "PIF";
++	case EXCCODE_TLBM: return "PME";
++	case EXCCODE_TLBNR: return "PNR";
++	case EXCCODE_TLBNX: return "PNX";
++	case EXCCODE_TLBPE: return "PPI";
++	case EXCCODE_ADE:
++		switch (esubcode) {
++		case EXSUBCODE_ADEF: return "ADEF";
++		case EXSUBCODE_ADEM: return "ADEM";
++		}
++		break;
++	case EXCCODE_ALE: return "ALE";
++	case EXCCODE_BCE: return "BCE";
++	case EXCCODE_SYS: return "SYS";
++	case EXCCODE_BP: return "BRK";
++	case EXCCODE_INE: return "INE";
++	case EXCCODE_IPE: return "IPE";
++	case EXCCODE_FPDIS: return "FPD";
++	case EXCCODE_LSXDIS: return "SXD";
++	case EXCCODE_LASXDIS: return "ASXD";
++	case EXCCODE_FPE:
++		switch (esubcode) {
++		case EXCSUBCODE_FPE: return "FPE";
++		case EXCSUBCODE_VFPE: return "VFPE";
++		}
++		break;
++	case EXCCODE_WATCH:
++		switch (esubcode) {
++		case EXCSUBCODE_WPEF: return "WPEF";
++		case EXCSUBCODE_WPEM: return "WPEM";
++		}
++		break;
++	case EXCCODE_BTDIS: return "BTD";
++	case EXCCODE_BTE: return "BTE";
++	case EXCCODE_GSPR: return "GSPR";
++	case EXCCODE_HVC: return "HVC";
++	case EXCCODE_GCM:
++		switch (esubcode) {
++		case EXCSUBCODE_GCSC: return "GCSC";
++		case EXCSUBCODE_GCHC: return "GCHC";
++		}
++		break;
++	/*
++	 * The manual did not mention the EXCCODE_SE case, but print out it
++	 * nevertheless.
++	 */
++	case EXCCODE_SE: return "SE";
++	}
++
++	return "???";
++}
++
++asmlinkage void do_exceptions(struct pt_regs *regs)
++{
++	unsigned int ecode = FIELD_GET(CSR_ESTAT_EXC, regs->csr_estat);
++	unsigned int esubcode = FIELD_GET(CSR_ESTAT_ESUBCODE, regs->csr_estat);
++
++	printf("Unhandled exception: %s\n", humanize_exc_name(ecode, esubcode));
++
++	printf("ERA: " REG_FMT " ra: " REG_FMT "\n",
++	       regs->csr_era, regs->regs[1]);
++	/* Print relocation adjustments, but only if gd is initialized */
++	if (gd && gd->flags & GD_FLG_RELOC)
++		printf("ERA: " REG_FMT " ra: " REG_FMT " reloc adjusted\n",
++		       regs->csr_era - gd->reloc_off, regs->regs[1] - gd->reloc_off);
++
++	printf("CRMD: " REG_FMT "\n", regs->csr_crmd);
++	if (ecode >= EXCCODE_TLBL && ecode <= EXCCODE_ALE)
++		printf("BADV: " REG_FMT "\n", regs->csr_badvaddr);
++
++	printf("\n");
++
++#if IS_ENABLED(CONFIG_SHOW_REGS)
++	show_regs(regs);
 +#endif
 +
-+	move		a0, zero		/* a0 <-- boot_flags = 0 */
-+	la.pcrel	t5, board_init_f
-+	jirl		ra, t5, 0		/* jump to board_init_f() */
++	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
++		show_backtrace(regs);
++
++	panic("\n");
++}
++
++int interrupt_init(void)
++{
++	return 0;
++}
 +
 +/*
-+ * void relocate_code(addr_sp, gd, addr_moni)
-+ *
-+ * This "function" does not return, instead it continues in RAM
-+ * after relocating the monitor code.
-+ *
++ * enable interrupts
 + */
-+.globl relocate_code
-+relocate_code:
-+	move		s2, a0			/* save addr_sp */
-+	move		s3, a1			/* save addr of gd */
-+	move		s4, a2			/* save addr of destination */
++void enable_interrupts(void)
++{
++}
 +
 +/*
-+ *Set up the stack
++ * disable interrupts
 + */
-+stack_setup:
-+	move		sp, s2
-+	la.pcrel	t0, _start
-+	PTR_SUB		s5, s4, t0		/* s5 <- relocation offset */
-+	beq		t0, s4, clear_bss	/* skip relocation */
-+
-+	move		t1, s4			/* t1 <- scratch for copy_loop */
-+	la.pcrel	t2, __bss_start		/* t2 <- source end address */
-+
-+copy_loop:
-+	LONG_L		t5, t0, 0
-+	PTR_ADDI	t0, t0, LONGSIZE
-+	LONG_S		t5, t1, 0
-+	PTR_ADDI	t1, t1, LONGSIZE
-+	blt		t0, t2, copy_loop
-+
-+/*
-+ * Update dynamic relocations after board_init_f
-+ */
-+fix_rela_dyn:
-+	la.pcrel	t1, __rel_dyn_start
-+	la.pcrel	t2, __rel_dyn_end
-+	beq		t1, t2, clear_bss
-+	PTR_ADD		t1, t1, s5		/* t1 <- rela_dyn_start in RAM */
-+	PTR_ADD		t2, t2, s5		/* t2 <- rela_dyn_end in RAM */
-+
-+6:
-+	PTR_L		t5, t1, PTRSIZE		/* t5 <-- relocation info:type */
-+	PTR_LI		t3, R_LARCH_RELATIVE	/* reloc type R_LARCH_RELATIVE */
-+	bne		t5, t3, 8f		/* skip non-RELATIVE entries */
-+	PTR_L		t3, t1, 0
-+	PTR_L		t5, t1, (PTRSIZE * 2)	/* t5 <-- addend */
-+	PTR_ADD		t5, t5, s5		/* t5 <-- location to fix up in RAM */
-+	PTR_ADD		t3, t3, s5		/* t3 <-- location to fix up in RAM */
-+	PTR_S		t5, t3, 0
-+8:
-+	PTR_ADDI	t1, t1, (PTRSIZE * 3)
-+	blt		t1, t2, 6b
-+
-+
-+	/* Update exception entry */
-+	la.pcrel	t0, exception_entry
-+	PTR_ADD		t0, t0, s5
-+	csrwr		t0, LOONGARCH_CSR_EENTRY
-+
-+clear_bss:
-+	la.pcrel	t0, __bss_start		/* t0 <- rel __bss_start in FLASH */
-+	PTR_ADD		t0, t0, s5		/* t0 <- rel __bss_start in RAM */
-+	la.pcrel	t1, __bss_end		/* t1 <- rel __bss_end in FLASH */
-+	PTR_ADD		t1, t1, s5		/* t1 <- rel __bss_end in RAM */
-+
-+clbss_l:
-+	LONG_S		zero, t0, 0		/* clear loop... */
-+	PTR_ADDI	t0, t0, LONGSIZE
-+	blt		t0, t1, clbss_l
-+
-+
-+/*
-+ * We are done. Do not return, instead branch to second part of board
-+ * initialization, now running from RAM.
-+ */
-+call_board_init_r:
-+	bl		invalidate_icache_all
-+	bl		flush_dcache_all
-+	la.pcrel	t0, board_init_r        /* offset of board_init_r() */
-+	PTR_ADD		t4, t0, s5		/* real address of board_init_r() */
-+/*
-+ * setup parameters for board_init_r
-+ */
-+	move		a0, s3			/* gd_t */
-+	move		a1, s4			/* dest_addr */
-+	move		s0, zero		/* fp == NULL */
-+	jirl		ra, t4, 0		/* jump to board_init_r() */
-+
++int disable_interrupts(void)
++{
++	return 0;
++}
 -- 
 2.55.0
 
