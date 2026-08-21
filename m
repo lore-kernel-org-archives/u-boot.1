@@ -1,138 +1,99 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF35C5DF89
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 14:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E68C5DF89
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 14:13:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 631F240C58;
-	Fri, 21 Aug 2026 14:01:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 72263811A7;
+	Fri, 21 Aug 2026 14:13:50 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sPtZOMIWkEOe; Fri, 21 Aug 2026 14:13:48 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787321628;
+	bh=GknP3OpHXBykakHT5HAmpWkybfxBoxwR8cmnSqRUzpA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xvG6DkFzibiDkQKMOX9W/1tbTkhoBRRThigYlgnKUrobEPkoVPKZklC/sIFaMC6M4
+	 mZyyL5WrthK9cXPzsta4102BCpytfFbqU7SlRCODB/+wbDDTLCutyF0AF9fQUGTPWc
+	 CkImhADu80yW92z9y8qEQH4g1LDOcMouaMzmof2wg97JxXkfBSydIbuty2BmvN9xrs
+	 gY0snRdWdXIDo15J36AMClpoTwuLEP9mAE3zFj7GX7ds499f7CqCguD+wMQgIYvStt
+	 Sj4f1IsnwX4vBtf2VOx/cE8Jlz9KqNSfMiSw5rd30klH+SCoM8N9XhRNU2fM1qdThS
+	 l4cKCZCGPJNxQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7DA0881193;
+	Fri, 21 Aug 2026 14:13:48 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 88CAF336
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 14:13:47 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6E76D40CA2
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 14:13:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dlVFFHCrEqXe; Fri, 21 Aug 2026 14:01:03 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787320863;
-	bh=QoO+sty2DOmW7f5NYryEg4WO7CtsixBk2Wl4m3viq5Q=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=X/9BWWL3nSxdutKiyjfC5kXSlQuPb/3g4wBgrbKTGqNGn+W2zj/+qF2kxPD19vXzA
-	 zIZbmcci5ODNm1rsWSzAKDs+/qjxqAlzjnggRqtXgNaEflb2Xfnh1/6mN5OYBReDFt
-	 bW2q9pEWisbhvaDYaS6jyYaNH9puns7VIlUOJGwqNYJfi+hRZmW3STRqnEfiUBNa97
-	 vX3PtUsyI4g2hibGIO6MiNihOFpNafRYaMKttN16wvxfyayS8/6D1jBJxKe2e1Uqnw
-	 KJY3uRjEbfaNi6OkU9R8SidXf2NVjImGMDHYewGG4dUAcWLahkXYQa0nkane+TmApP
-	 nauMIMWHr+gKw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1540E40C11;
-	Fri, 21 Aug 2026 14:01:03 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D25654B8
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 14:01:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B805260649
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 14:01:01 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dDXySFyxk0Xm for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 14:01:00 +0000 (UTC)
-X-Greylist: delayed 515 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 21 Aug 2026 14:01:00 UTC
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=os-cillation.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=os-cillation.de header.i=@os-cillation.de
- header.a=rsa-sha256 header.s=202409 header.b=bTU4haWm
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=213.165.83.196;
- helo=os-cillation.de; envelope-from=hd@os-cillation.de; receiver=<UNKNOWN> 
-Received: from os-cillation.de (mx.os-c.de [213.165.83.196])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2314760648
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 14:00:59 +0000 (UTC)
-Received: from core2024.osc.gmbh (ip-094-079-177-042.um30.pools.vodafone-ip.de
- [94.79.177.42])
- by os-cillation.de (Postfix) with ESMTPSA id 24ABEC0064
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 15:52:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=os-cillation.de;
- s=202409; t=1787320343;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=QoO+sty2DOmW7f5NYryEg4WO7CtsixBk2Wl4m3viq5Q=;
- b=bTU4haWmnOvtJ2Z2RnC9rN2YtwPI9oDQKpPpuzOa6m/Xh8U/rwNn5CPl6AIP8TXOnT3085
- 4BWTMpqlYEEMgtw80vsgpMYcTGu6phwwtwajO7iQnsBuZSX8KSP/GY6hqQr+a5Edhaqs42
- mJ9l7jfFPHBwOd2aNFO/WhEZ8rcjyx23wE6e1FltfHa67NQ/PEFqig8luUjfcWnN7K7pyi
- 7aUMTAz2AlxtfZIaRM1Guw/VF5CiQ7GWjzOd09FGnL5uttZWN4vLBQ8P45K/aA6hFNdd0w
- kM6axZoruE9mQE2Xuuzu9q8xA66scm0j9eSgu/NWcw84ppUklMOynBM2BYgsVA==
-Authentication-Results: os-cillation.de;
- auth=pass smtp.auth=os-c@schweissgut.net smtp.mailfrom=hd@os-cillation.de
-Received: from [192.168.3.45] (hd2022.osc.gmbh [192.168.3.45])
- by core2024.osc.gmbh (Postfix) with ESMTPSA id CA8E220110A
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 15:52:22 +0200 (CEST)
-Message-ID: <60b9e928-e2c7-47a0-9e87-0e30d2c09fbb@os-cillation.de>
-Date: Fri, 21 Aug 2026 15:52:22 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] env: Fix compile error for envtools
+ id cL5ZsQFgYb8p for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 14:13:46 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:b747:3000:204::34; helo=outbound.mr.icloud.com;
+ envelope-from=valentinliu@icloud.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=icloud.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=icloud.com header.i=@icloud.com header.a=rsa-sha256
+ header.s=1a1hai header.b=OmvnSL/W
+Received: from outbound.mr.icloud.com (mr-2006e-snip6-2.eps.apple.com
+ [IPv6:2a01:b747:3000:204::34])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BE60440CA0
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 14:13:46 +0000 (UTC)
+Received: from outbound.mr.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-2a-10-percent-2 (Postfix) with ESMTPS id
+ A1D3618001EF; Fri, 21 Aug 2026 14:06:44 +0000 (UTC)
+X-ICL-RepId: 01a024a5-3f7b-7129-9074-3f9f76d0c262
+X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQ9IHV8FWhxEC1YCXwBLVxQEDlIBUgVGGVcUWhh3AlEcVg1XQ1QEX1BfHA4EVAddBV1WUAJaS0ATBEETBVIHXU1WDUcPWB5cFBcVQUNeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVaDlsERxQXG1wAFwZbFAREAV0FXQJIC0kCWQddAEkXSwZVAlsCXQhVRQxbDlwEUBZfBEIrWxNVF0YJGQhdHQdYRxRHDg8ZWhRcGFM=
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
+ t=1787321208; x=1789913208; bh=GknP3OpHXBykakHT5HAmpWkybfxBoxwR8cmnSqRUzpA=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
+ b=OmvnSL/WTIAoGBjzMRi0NljBH5eSrFqhtWZgDvyfZCRuqMfd1uV6OuxMjrj9C3hu5GG4fPaB8gzE7CLPOLR8Hrlm4gRCOarGSjvCylX/Z5PrNos/XiJlyYC/WQGoAYN+DcVKcEd9YwpDh2qSuk/nB/vWyRvAdN/lLV9d+5VJkujaYOI6OUK/Bty1nqBmW/mLJhhewGdA7fmkjhiHLfgXeG+s9DYQftGEpmp9urpyKS64x+Iceax52v4tZ3qK162twdO8j0iDXqOj+PhjiRKDidH2gzkvF66EPRAyjSK8ws0qcRZejBLCMOSEmZdgKRWylj9wKCygCyayDl08Ax8dlw==
+Received: from DESKTOP-GUOEOAE.lan (unknown [17.156.200.36])
+ by p00-icloudmta-asmtp-us-west-2a-10-percent-2 (Postfix) with ESMTPSA id
+ 2844E1800ACB; Fri, 21 Aug 2026 14:06:40 +0000 (UTC)
+From: Valentin Liu <valentinliu@icloud.com>
 To: u-boot@lists.u-boot-project.org
-References: <20260713083141.2772971-1-Jacky.Cao@sony.com>
- <MRWPR04MB1233021A0AF8D2117DBE5984888FA2@MRWPR04MB12330.eurprd04.prod.outlook.com>
- <KL1PR04MB6734F919E17C467C8B29DBD787F92@KL1PR04MB6734.apcprd04.prod.outlook.com>
- <20260714015324.GZ749385@bill-the-cat>
- <KL1PR04MB6734A43A5179C30DA1F9B9A887F92@KL1PR04MB6734.apcprd04.prod.outlook.com>
- <20260714213802.GF749385@bill-the-cat> <87wltjvct9.fsf@prevas.dk>
-Content-Language: en-US
-From: Hendrik Donner <hd@os-cillation.de>
-Autocrypt: addr=hd@os-cillation.de; keydata=
- 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 li+2
-In-Reply-To: <87wltjvct9.fsf@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Johan Jonker <jbx6244@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Valentin Liu <valentinliu@icloud.com>
+Subject: [PATCH v5] arm: rockchip: spl: Add hotkey detection support.
+Date: Fri, 21 Aug 2026 22:06:29 +0800
+Message-ID: <20260821140629.358500-1-valentinliu@icloud.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260820162757.665777-1-valentinliu@icloud.com>
+References: <20260820162757.665777-1-valentinliu@icloud.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Authority-Info-Out: v=2.4 cv=VKDQXtPX c=1 sm=1 tr=0 ts=6a885b75
+ cx=c_apl:c_pps:t_out a=9mRn2PO/+PIrVdEbaIuMPg==:117
+ a=9mRn2PO/+PIrVdEbaIuMPg==:17 a=Sv0fKeRqtYgA:10 a=x7bEGLp0ZPQA:10
+ a=LQAHsTbMm04A:10 a=VkNPw1HP01LnGYTKEx00:22 a=v3ZZPjhaAAAA:8
+ a=Zvh_IqAvKHogKX7maQ0A:9
+X-Proofpoint-GUID: SlO5HJaOaGykga8XWfoQ2ydMrJhQnJBf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDEwOSBTYWx0ZWRfX7abJlU3t3rdp
+ pYIFa4ZOa58g+EW6xaY4cNgZpbht83yTC3WuJKXnQPXG38zaOzDi+sKSlrTjAhxy7aiSSBVzr13
+ Psdn1k+KzkPf653skvMFXRywm57kGAa418FtkK0NvHP1fpmM56qpAZF9bw8/8xobcnXhLaSUV6H
+ IDLY3aHzkxqFhmTQupY0RSQMactVkS84yKNFrMpf2yOC/ExekdQmQmvlDBVlBHuDtZURa+tjyrz
+ wLK7HqBPA1qAZytkaGU7HyhQv+SGJamUKcxDFMj+6f+A221ldWEcEOBZ8k7CQzGvUVZHbaTecPA
+ xtWJrNR5nrLkxujrap8VPm/FJkiout6r5mfDpIZ/ohM6AymAJ/NtaIgXH1Yv5s=
+X-Proofpoint-ORIG-GUID: SlO5HJaOaGykga8XWfoQ2ydMrJhQnJBf
+X-JNJ: AAAAAAABtCvHvxt4ddJNVQ0Pj6jGjeSyQea+U1h86p2Nv1XMwyixOPxam+foHO/XFwf8wXWfmqrJOUgjXU2v+bud2NoEaVunaJuAVu3k7/Zz5tJ58ZX/peVUflsAVa0yH0qLEsXw4ANAAX7X0kiXGaCD0qTkBsHF6hMXAbWxjjZJqWGt+UxKnq40YQHHxAhi1W6yKAYdDixzSkz7T8qLSQ9gXFB7jvNLc0j7Ab6LcJBOrUEVl5cpTR0wfp0RrghSn0gBLixyW2Wy5vPYRRYE1Mk726W40TkA9uI71f6cfRAL7Qu/rHWUbTnms3bUCoSvE0MXsw7TDIqUFKmptn8tEOOz8n6XEC+KY/MWLPgSJPasSc8lZW5rGPcUWsDxVWl68qKmqj71NUCa4l5BTOXiu1CYSC1hA96i/i/csDc642JdZj1/TOtOZFucYXU7mKWTv1vtdQSvmFlU5POKLV1PBuj/HEVozcSSlaTzDXzasvE4Ns5hakrZa7Ww7EewpKSP2l+BF1VoLKr/JIQpfO3GUBjco8r82ZQB0BdEPrbRmfCqtrM3sjM/qe3nnJFRdobBsbpZLf9r//ol10DKS8d6RWg+k8QFII3P3sJRMvmxlHQGEuh3Gh64rowbtOME3APhOdNO0Ux7+XXdzK2OxPm2GSOHmA+GAoU6vWOpcN+k3CAsd/KsQpC1hdK76zavj9HFWNAQGAKgu9MvY1HPEs9+KOXI53u1Cg+FmevCjHdmqV28IDUBjDMC0PMM9S8NTNwJbDhHudE7WY5I94dSKJ/xAfw6SyZ+ei5ghdCC11zIVRSVKok0cQeq4+GEenv61qRN25yna4gXVQ+UTHFurWeIYbatibmNAizlurzdYsZU1/Lr7mIQy7jW83SRkiFNFnv+e2MXjKEyvjKKrGz6ZGeMjhlROwdDOuAxfUcYqZ6aBIij1kBaWyJTw0Pdo+xGvlJmEWUMR8FTYbRWOZBNpjIZNkP8d1kWX0K
+ 5fp3Ah+J277wW2Dwq3GhOAMSOFUUXXGSclaJPxiEL2JXNFXWm1K4czvNOOyx/Nl3Zad1eOV+9WnFMVd9BxZRrWn9gW1kNrsCj6TcKShkCoquhjNRk4Jt/LKUK1u1Axi636gOU9Bwj8zKUox3paGTp0y4uFwp15I3Pw7+va99x7pD5uP1Sfiqloz5n9jfYn9GtHGnK8RPWxvC0tg3+KNn55EL3wjIkty/zEwf+LJhemX7zpvRZ7saTzza9+gW/5pGOZjTNyJO4N7wPYc2dLhS6Iarh/dITY1MsSD6nToblw3GqrjPnJXXis/xIKe1erjRpCmFFavAKAMByXstjPkeS
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,51 +107,150 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Add a configurable Rockchip SPL hotkey feature that checks the
+serial console during SPL startup.
 
-Hello,
+Ctrl+B can be used to enter MaskROM mode and be widely used.
+Ctrl+D can be used to enter Loader mode, Ctrl+F for Fastboot mode.
+We can add more boot mode support in future.
 
-On 8/21/26 15:10, Rasmus Villemoes wrote:
-> On Tue, Jul 14 2026, Tom Rini <trini@konsulko.com> wrote:
-> 
->> On Tue, Jul 14, 2026 at 03:04:42AM +0000, Jacky.Cao@sony.com wrote:
->>>>> I use master branch of OSS u-boot repo and meet the issue with below
->>>>> commands:
->>>>>
->>>>> make mx6qsabrelite_defconfig
->>>>> make -j8
->>>>> make tools envtools
->>>>
->>>> What host distribution are you building on? And, <config.h> *must* come first
->>>> in the include list, for it to function correctly.
->>>
->>> Host OS is Ubuntu 22.04.3 LTS.
->>> Toolchain is Arm GNU Toolchain 11.3.Rel1(arm-none-linux-gnueabihf-).
->>> Also tried Ubuntu 24.04.4 LTS and Arm GNU Toolchain 15.3.Rel1,
->>> the issue still happens.
->>
->> So, are you on an ARM host too? You aren't specifying where you are /
->> aren't using the ARM toolchain in the above. Thanks.
-> 
-> It doesn't matter what toolchain one uses. The mentioned commit does
-> break "make envtools" for all our boards, building through Yocto. And
-> when I build manually using my distro's cross-compiler, the same thing
-> happens.
-> 
-> Note, it's not the board build itself that breaks, only the "make
-> envtools", which I assume few people do these days.
-> 
+Add CONFIG_SPL_ROCKCHIP_HOTKEY to enable the feature and wait for
+the serial port to be ready to receive input before checking for
+hotkeys.
 
-i have seen this issue too and now build without a board specific config
-as a workaround:
+Signed-off-by: Valentin Liu <valentinliu@icloud.com>
+---
+Changes for v2:
+- Simplify the dependencies of SPL_ROCKCHIP_HOTKEY.
+- Remove the conditions for the newly added includes.
+---
+Changes for v3:
+- Add a dummy spl_hotkey_init() to avoid undefined reference errors
+  when building without CONFIG_SPL_ROCKCHIP_HOTKEY.
+---
+Changes for v4:
+- Add condition of CONFIG_ROCKCHIP_BOOT_MODE_REG != 0 to prevent
+  SPL hotkey be compiled and used on unsupported platforms.
+- Add more hotkey support (Ctrl+D and Ctrl+F).
+- Remove prints on the standard path.
+- Add some code comment.
+---
+Changes for v5:
+- Fixup the CONFIG_IS_ENABLED() call.
 
-make tools-only_defconfig
-make envtools
+ arch/arm/mach-rockchip/Kconfig | 14 +++++++++
+ arch/arm/mach-rockchip/spl.c   | 54 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 68 insertions(+)
 
-Before the mentioned commit for the userspace tools relevant code
-config.h was never included but env.h is shared code as far as i can tell.
-
-Regards,
-Hendrik
-
-> Rasmus
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 1a2e7847c9e..0e485e8caf6 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -743,6 +743,20 @@ config TPL_ROCKCHIP_EARLYRETURN_TO_BROM
+ config SPL_MMC
+ 	default y if !SPL_ROCKCHIP_BACK_TO_BROM
+ 
++config SPL_ROCKCHIP_HOTKEY
++	bool "SPL hotkey support"
++	depends on SPL_DM_RESET && SPL_SERIAL
++	help
++	  Enable hotkey detection during SPL booting stage.
++
++	  When enabled, SPL checks the serial console for a control
++	  character and can execute Rockchip-specific hotkey actions,
++	  such as entering MaskROM mode with Ctrl+B, entering Loader
++	  mode with Ctrl+D, entering Fastboot mode with Ctrl+F.
++
++	  The hotkey is checked after the SPL console has been
++	  initialized.
++
+ config ROCKCHIP_SPI_IMAGE
+ 	bool "Build a SPI image for rockchip"
+ 	help
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index e989c148079..b61ccc30a22 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -13,11 +13,14 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <ram.h>
++#include <serial.h>
+ #include <spl.h>
++#include <asm/arch-rockchip/boot_mode.h>
+ #include <asm/arch-rockchip/bootrom.h>
+ #include <asm/arch-rockchip/timer.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
++#include <linux/delay.h>
+ #include <linux/bitops.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -107,6 +110,54 @@ __weak int arch_cpu_init(void)
+ 	return 0;
+ }
+ 
++#if CONFIG_IS_ENABLED(ROCKCHIP_HOTKEY) && (CONFIG_ROCKCHIP_BOOT_MODE_REG != 0)
++static void rockchip_reset_from_hotkey(const int code)
++{
++	switch (code) {
++	case 0x02: /* Ctrl+B */
++		printf("Ctrl+B pressed, entering download mode...\n");
++		writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);
++		do_reset(NULL, 0, 0, NULL);
++		/* NOTREACHED */
++	case 0x04: /* Ctrl+D */
++		printf("Ctrl+D pressed, entering loader mode...\n");
++		writel(BOOT_LOADER, CONFIG_ROCKCHIP_BOOT_MODE_REG);
++		do_reset(NULL, 0, 0, NULL);
++		/* NOTREACHED */
++	case 0x06: /* Ctrl+F */
++		printf("Ctrl+F pressed, entering fastboot mode...\n");
++		writel(BOOT_FASTBOOT, CONFIG_ROCKCHIP_BOOT_MODE_REG);
++		do_reset(NULL, 0, 0, NULL);
++		/* NOTREACHED */
++	default:
++		if (code <= 0x1a) /* 'z' */
++			log_debug("SPL Hotkey: Ctrl+%c\n", code + 'A' - 1);
++		else
++			log_debug("SPL Hotkey: Unknown code: 0x%x, ignore\n", code);
++	}
++}
++
++static void spl_hotkey_init(void)
++{
++	if (!gd || !(gd->flags & GD_FLG_HAVE_CONSOLE))
++		return;
++	if (gd->flags & GD_FLG_DISABLE_CONSOLE)
++		return;
++
++	/* Wait for the serial port to be ready to receive data. */
++	mdelay(100);
++
++	if (serial_tstc())
++		rockchip_reset_from_hotkey(serial_getc());
++	else
++		log_debug("SPL Hotkey: No key pressed, continue\n");
++}
++#else
++static void spl_hotkey_init(void)
++{
++}
++#endif
++
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+@@ -143,6 +194,9 @@ void board_init_f(ulong dummy)
+ 	}
+ #endif
+ 	preloader_console_init();
++
++	if (CONFIG_IS_ENABLED(ROCKCHIP_HOTKEY))
++		spl_hotkey_init();
+ }
+ 
+ void spl_board_prepare_for_boot(void)
+-- 
+2.53.0
 
