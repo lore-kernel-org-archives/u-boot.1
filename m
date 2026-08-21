@@ -1,91 +1,87 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B5ADC5DF87
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:16:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012A4C5DF87
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:17:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 84EF040F6C;
-	Fri, 21 Aug 2026 13:16:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9B1F360DD0;
+	Fri, 21 Aug 2026 13:17:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G1mqgsItIIMW; Fri, 21 Aug 2026 13:16:47 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gtqotwv-sz4r; Fri, 21 Aug 2026 13:17:20 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787318180;
-	bh=oUX8Qa5GaaBPrcF+48PW/F9FY0sCMoVfogaoHl0KhGY=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787318064;
+	bh=lGf+IT7u3vx13i87XGmPTr4Jo/HB5/02CLT8YVW8kTQ=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zpAadZ0oXAM9WB1LxT6fRrGifP1jiU7RYTOK/SbYhnCOuXpd6Nu1a60VeHZjQ2BTP
-	 cMVzFRMEAhawJDbuo2izfoUwJVP8IRKRm+VYOkD+Vb0GR26jn7n5VRlAQDsUv0j9at
-	 WMe2js7RErjiAtrkPzMRbmjeCdZDBigbsevrwxfNPcl/tGXH4bwntWuB3sliSDOHzA
-	 Y/x7EtBtj/xnCMvqWoXby7jVl1a7w5TOENxqKakX4M/5AO++McVbRZxXma2WCe/EGX
-	 KgmmSQwJpKGd2AeluHN1n/OQvrnApDR7Aa8Sx6823A7Shli0YurJeP6In4yXK3383G
-	 FkkC7E4q3RLrw==
+	b=P9eornugmRN9JOQZXFLko7HyZYXF6T9oYo7OhAeorivuCXvfc/K5qk0VI/qTzTfBl
+	 FRzMbUwzBioEuZa3vDCzgmuOW5uo+kHMXreP5qkRs2d4rNbB2n08vSDJlJKdxk1MPk
+	 pQONDTVSBh3pb8b2H9GyC+z9qY9jKKqPELW35Ufpk/L3JWIK7SC1I56N9mvUnw/GZn
+	 kh3UOIDtznZfxPujkkxj32OvE2gbn0J93w4GwaIZ4xEdw2sjpeBkoxcFStB4ocqEQC
+	 GeTmS70f+GleOyOLrj26eN9rtaKjdkPA2m1NHwXm1K2lBwZFNxSPIEnHD/DId2pNik
+	 1mv8aVm/3CGzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 614B340E6D;
-	Fri, 21 Aug 2026 13:16:19 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id BC63D29B
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 12:21:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 21EA660EB7;
+	Fri, 21 Aug 2026 13:14:24 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 61EE81B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 04:11:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AE2C1408AD
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 12:21:45 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5431D60A3F
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 04:11:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HNofLknzrF9M for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 12:21:45 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=132.204.25.50;
- helo=mailscanner.iro.umontreal.ca; envelope-from=monnier@iro.umontreal.ca;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=iro.umontreal.ca
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=iro.umontreal.ca header.i=@iro.umontreal.ca
- header.a=rsa-sha256 header.s=mail header.b=E3scE2xt
-Received: from mailscanner.iro.umontreal.ca (mailscanner.iro.umontreal.ca
- [132.204.25.50])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C1E0B408BC
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 12:21:43 +0000 (UTC)
-Received: from pmg2.iro.umontreal.ca (localhost.localdomain [127.0.0.1])
- by pmg2.iro.umontreal.ca (Proxmox) with ESMTP id 60E80802F9;
- Fri, 21 Aug 2026 08:21:39 -0400 (EDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=iro.umontreal.ca;
- s=mail; t=1787314898;
- bh=zbNiTbctDElauB8o5NY7kJL+Ea8qtMywar2VczjbajY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=E3scE2xt1XCxZ0WxoVcG7Io9u90KhyB0bEx6iicnWbPflC5KhhaXGWZdqisrkLuIm
- ZhjLkF4r28SV1ctEpkcY/ZKwgaquIBPhaPUFf5kkMxUYvcqJPfk8+zZ5CfUmSfNHmY
- qwAr+3oSn7sTYIIGkjHlCXMrLoHLOX3HwHJU+/24W0I5VkEr8AoXTKvlk5sAB05j12
- 51/dXlU2wnpc7NmyiDzRZyJoCKNE4VjTe/eIHikes8jwPBEY7AgNsiuXi3QojUvA+D
- xuOfRyY3xLXIpsQ1ZyUUQ+qfX0gpIcXrxRxeFQh3iHnRUNmqycq34ZjBUluELEW/Nn
- Ju3E3yMrYed4Q==
-Received: from mail01.iro.umontreal.ca (unknown [172.31.2.1])
- by pmg2.iro.umontreal.ca (Proxmox) with ESMTP id B002780216;
- Fri, 21 Aug 2026 08:21:38 -0400 (EDT)
-Received: from pastel (104-195-211-127.cpe.teksavvy.com [104.195.211.127])
- by mail01.iro.umontreal.ca (Postfix) with ESMTPSA id 6AD0E120497;
- Fri, 21 Aug 2026 08:21:38 -0400 (EDT)
-From: Stefan Monnier <monnier@iro.umontreal.ca>
-To: "Carlo Caione" <ccaione@baylibre.com>
-Cc: <u-boot@lists.u-boot-project.org>,  "Jonas Karlman" <jonas@kwiboo.se>,
- "E Shattow" <e@freeshell.de>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8q4cjEPlp2WB for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 04:11:48 +0000 (UTC)
+X-Greylist: delayed 351 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 21 Aug 2026 04:11:47 UTC
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=FTDmHL6D
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B7677608CA
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 04:11:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1787285128;
+ bh=lGf+IT7u3vx13i87XGmPTr4Jo/HB5/02CLT8YVW8kTQ=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=FTDmHL6DFtqVMxyp8lXHgDmYS6Cv4wY3feE9cVkDoZq4g9VIOyZV/Uc/4QuluVk1/
+ oYqAZ1G1wD9sQOD/Iol4NajPHJRBhnF6hVrygyeE1HpjLCj08VmGIo1ET2hT82FdmZ
+ hXa95mFRoBBR3HK03IiNRnE63oYxMc9xU/rApcSZlwsIxK10teernUC9e4z3inmmtm
+ jrdTa4RGKD3h+hq8q9hyXc+0lcIdzMCP2fQs7tb7gABndrl9ILi8LNgOmM/8dDfvB0
+ T81V0D9b8z122wZONx4+JrwKmaMTS238G0jGG8x0hE+52bqbTjjcQhUOH2WIxnXqUh
+ PSdVN2ucIbTbw==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id EF932B225C39;
+ Fri, 21 Aug 2026 06:05:27 +0200 (CEST)
+Message-ID: <3164cc59-695c-459b-af4e-840836573036@freeshell.de>
+Date: Thu, 20 Aug 2026 21:05:19 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 0/5] Add fastboot to SPL
-In-Reply-To: <DKUFJ6TTK7AW.2VKPRV8CRQ70V@baylibre.com>
-Message-ID: <jwva4qf7kuq.fsf-monnier+Inbox@gnu.org>
+To: Stefan Monnier <monnier@iro.umontreal.ca>,
+ u-boot@lists.u-boot-project.org, Carlo Caione <ccaione@baylibre.com>,
+ Jonas Karlman <jonas@kwiboo.se>
 References: <20260820-ccaione-upstream-spl-fastboot-v4-0-57e5ef71c74d__17726.0234997206$1787249364$gmane$org@baylibre.com>
  <jwv8q60y6nj.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
- <DKUFJ6TTK7AW.2VKPRV8CRQ70V@baylibre.com>
-Date: Fri, 21 Aug 2026 08:21:30 -0400
-User-Agent: Gnus/5.13 (Gnus v5.13)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <jwv8q60y6nj.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 21 Aug 2026 13:12:32 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -100,32 +96,59 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Carlo Caione [2026-08-21 09:05:37] wrote:
-> It is possible to include U-Boot proper in the host-loaded bootstrap
-> and use its existing fastboot implementation. That is a valid approach
-> and is preferable where the Boot ROM download limit and memory budget
-> allow it.
+Hi Stefan,
 
-Right, that's the situation I'm familiar with.
+On 8/20/26 11:50, Stefan Monnier wrote:
+> Carlo Caione [2026-08-20 20:08:24] wrote:
+>> Some recovery and initial-provisioning flows need a standard host protocol
+>> before usable firmware is available in persistent storage. U-Boot already
+>> provides fastboot, but the implementation can currently be started only
+>> from the U-Boot-proper command line.
+> 
+> I'm curious.  In my limited exposure to U-Boot, I got the impression that
+> the split between SPL and U-Boot proper is mostly a "technical detail",
+> usually mostly hidden from those who install it onto a device: you just
+> take the combined U-Boot + SPL image and write it at the appropriate
+> offset on the relevant device.  And usually if SPL works, U-Boot
+> also works.
+> 
+> So a bit like Jonas in the recent "hotkey in SPL" patch for rockchip
+> SoCs, I'm curious why/when we'd want to add to SPL functionality already
+> supported from U-Boot.
+> 
+> 
+> === Stefan
+> 
 
-> But it is not always possible: some platforms (like the one we are
-> enabling) impose a strict size limit on the bootstrap, or only provide
-> enough early memory for the DDR initialization code and (small)
-> SPL-sized payload.
+The purpose of SPL is to have small codesize so that it may run in SoC
+on-die memory in the most permissive operational mode, select for
+hardware configuration settings (devicetree model), load U-Boot main app
+to more plentiful off-die memory (DRAM), and then either jump execution
+to U-Boot main app itself or pass execution to a system supervisor that
+would run U-Boot main app in some different operational mode.
 
-I associate "fastboot" with the Android nebula, so I find it hard to
-imagine a machine with enough resources to run Android yet with a small
-enough boot memory for U-Boot not to fit into it.  I assume the SPL is
-pre-installed in some dedicated boot memory (SPI NOR?) whereas the main
-storage is left uninitialized during production.  And the NOR flash is
-so small that it can't even accommodate a proper U-Boot?
+This requires that U-Boot main app exists somewhere that may be loaded
+from (UART serial, SPI flash, MMC storage...) and further complicates
+the use of U-Boot SPL as a fast and efficient recovery tool.
 
-I wonder how many cents it saves the manufacturer (e.g. compared to
-having a slightly bigger NOR, or not having the NOR at all and
-pre-installing U-Boot on the main storage) =F0=9F=99=81
+If adding fastboot feature to SPL does not balloon the codesize beyond
+hardware limits then it is a very interesting feature to enable, indeed.
 
-Anyway, this is clearly getting offtopic.  Thanks for the answer.
+Sometimes the SPL is not something we control or have insight into. The
+vendor may have provided some proprietary SPL via code obscurity or
+cryptographic signing or it will be the functionality of some
+proprietary on-die firmware IP block. More typically though the on-die
+boot ROM has functionality that may include fastboot-alike
+functionality, UART loading, and MMC loading capability for transferring
+SPL and jumping code execution to that but without initializing DRAM.
 
+Additionally there may be additional firmware for some SoC cores that
+require initializing with e.g. realtime operating system for power
+management or DSP functions, and that must be done before changing the
+operational mode (so before U-Boot main app).
 
-=3D=3D=3D Stefan
+I'm no expert on this but if I get some detail wrong it is not
+intentional, much of this confusion was the same for me when I begin to
+look at the situation for RISC-V.
 
+-E
