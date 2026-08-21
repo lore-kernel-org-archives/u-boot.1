@@ -1,120 +1,135 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385CBC5DF7D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 18:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58BD8C5DF7D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 19:33:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C2BE140A09;
-	Fri, 21 Aug 2026 18:55:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 03CFC80D56;
+	Fri, 21 Aug 2026 19:33:39 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0FKWYErBHUO4; Fri, 21 Aug 2026 19:33:38 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787340818;
+	bh=OnrykrbC97N3nPwSFPn9B8ApBTW1nccS9ZvfhsK9yBY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=K7taa3z0BUQgVJAT1e7UiTYBIlG4zh44UdF705NVQCmZscx9t3cT6U+v93LqvvGzX
+	 jwerSYN4HKnjnb90ov4SYom4P3v1tf35bj8j3jex1clJDllJ4c5LLTWhm1XSMe5YAk
+	 VKn36wSJnHw1BBacJhieMNPAFprBMfFMOX1ncA8p1IDQ0iU6183qYUSRXjMxOyRDie
+	 +sbH+yVfe0bK5XvWHACjBrSZPXCzmQUnalegJSN8l9arLaIdEv45Xj3hzns7DR5TTn
+	 gm/AiBeKn+Q87iX5n/a3HoVXY7ZofC8AtYGf0aMdIo+f4x0jYW1vulPuXMfiezfvUF
+	 hKf7jlQIan2DQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 27123809CA;
+	Fri, 21 Aug 2026 19:33:38 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1C4284B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 19:33:37 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id ED9CD409AC
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 19:33:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sRegShUvnThj; Fri, 21 Aug 2026 18:55:21 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+ id cNXV56cHPbyV for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 19:33:36 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::22a; helo=mail-lj1-x22a.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=iBKZ3Iu1
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B8833409AB
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 19:33:35 +0000 (UTC)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-3a1981228f8so14184101fa.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 12:33:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787340813; cv=none;
+ d=google.com; s=arc-20260327;
+ b=AXu4XLxeT9n+UdUxIvfxVGvCK3yhGXKrMI7uTumDMylg4kOtf/XmywtoYjJ+Gjrua9
+ 51EHoWqFXv6S8A3Wd69Cl9yB8z6Ri/Rpqm872SkoOlw70V9QL8QL2buskeZjDEcNlCiA
+ cGPlDwohhjEBFVWPfZF8+DSRMvk+OLvFbPBqUVlHV6y6pF/w8kcGYNW/iJtK4SnfeSxA
+ cBW4PW1gtyAH0q14SK1rDbWjbP+p4q9VzTlShlnX46IOXeuj0sWUNmmRVYsiNRD18wJw
+ szrOgiq0WnXow1cbWIunhhD36wJKXrbg0/K0TSi9n6+xIsbSP1YJNhtAaAwLdUBTvU+y
+ lzoA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=OnrykrbC97N3nPwSFPn9B8ApBTW1nccS9ZvfhsK9yBY=;
+ fh=a18eQ1RVpL1aWxYl4TszqN0SID7gWhf6FQKUqgWycWs=;
+ b=H1vuikTXd27A91SdEX7ksaRW1FJYMp/V3GktnJAlL8VnqE3YaVUceBj2+HKXVsZKRM
+ cUKYNnOTL65Xn7v/Ru6siZCVjXCTCEmtsvM6ne1NWO1mUuJHQRraqydjz73lOmyPzBJE
+ y09PL4XtV7gQMRlS0q0iElsgXEK3od1ducuajaSI6DzOAx7nZnM5Jr6s6flA1f2tjVtH
+ qsGVyY1kKPnUrpT7agxTSv1AovBZJYlNVnlemZ2BolgD0ZAtz0Kqx/ZTp445044yW8fY
+ fJL06Hq9n5Lp3YxBY5ol1kQQbr/UoQMA+AfSsUi9YyrHtgBJ2tbPGV7/CopK56hEhhZe
+ /Mtg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787338521;
-	bh=U/GMGczohtHjqG0p9Io1Go//HM4H/6Lv4F31m8BwqPg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=vt3xnNWDd7WROzu+/PrpOTAwtKhEh6+MmFPad/CV4CEj9czHi4JQr86GnKOqFXslx
-	 VcEI4BNrB6TsR1WhiEzSEDRWILVnFw8kwbBYY8o1jvQBe2bn2paPD8maLf9AM54tU4
-	 oMCcYEciK0t5YdBAreEeDlC8R1TRWi4ja4f2SQq1p0cQUHkQlH9XTMokTvhWsO06UU
-	 JdefOug24MQeguGk234Zs1+/XYmNDtbmQZYAekQQKweSJb9PMFVLKCaI0IzboIPVtx
-	 EDkFOIyLBjqv38npTwhW/SyiM/ZcAtVX8sOcyK4vtRFMGN1QX4Oehs6IKt5zrL7bnN
-	 Eo8quwlzTY4Lw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BF42440A0B;
-	Fri, 21 Aug 2026 18:55:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 38C944C4
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:55:20 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 164C540447
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:55:20 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aW5T582jaIni for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 18:55:19 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::4;
- helo=mail-oi2-x04.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=dX+bvh6a
-Received: from mail-oi2-x04.google.com (mail-oi2-x04.google.com
- [IPv6:2607:f8b0:4864:32::4])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E276A4011F
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:55:16 +0000 (UTC)
-Received: by mail-oi2-x04.google.com with SMTP id
- 5614622812f47-4960cd51443so109403b6e.1
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 11:55:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787338515; x=1787943315;
+ d=gmail.com; s=20251104; t=1787340813; x=1787945613;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=U/GMGczohtHjqG0p9Io1Go//HM4H/6Lv4F31m8BwqPg=;
- b=dX+bvh6aW/w7HWcq+TCg4+yB3VPpGuaMWh4fROTETjzcycNX5catY3jy+iECJNDDiJ
- 7WV8iZLXak+l5bx60fk/wgYj5OP4NIpN9ddumiwGeUwmA4vVqeQ0+CUwXXjstQbzUiBs
- TeHWu7olNvKvvpAvfNJ3aDnryFJ9Pmvw7sEaA=
+ bh=OnrykrbC97N3nPwSFPn9B8ApBTW1nccS9ZvfhsK9yBY=;
+ b=iBKZ3Iu17yBwUFyOqjiLDp852ozpnLUl3CHrOzALcEBl8u6CJpTE2nZS2DFws2+Eok
+ 9DTFKqd5t37e0mfPBd045Eh77YLjYsxUMfDRfO6kOCXP9NrIvr6ilK6/DYaI7UmGCrdG
+ k7cWJl570TIv25HnBwva3RAB3wO9bf1mB6ZPOxBgPqBtv5TfJ156in/y76jFDIOZrXrI
+ UpqedyJMVAnCWa8ynSc5F4sEtBYgVFmeZ11v9993izVv4G/b30GMX0/04HuBX8rDNZgs
+ +O66RuA0EuUePSdCBAZNpdMqL7lLG7F0TBAwkiAR/hWoA9gHcbWT5h6uwj/4hZWwMqiQ
+ y3IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787338515; x=1787943315;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
+ d=1e100.net; s=20251104; t=1787340813; x=1787945613;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=U/GMGczohtHjqG0p9Io1Go//HM4H/6Lv4F31m8BwqPg=;
- b=HaBdXRDxxtlORg9DVYunA22tIJEB19H++ZmGGg0MbJjkEV3U99Wg2Bi3mrH7aZ3KeF
- QdhOt2TbK7Ta0irWnwK0dJzaeKItpOVP69bHxJEoQUDX+8L7Dp6iDHuNnc2Qq9buawBO
- YSV+OEOs6PGx+GgDkc2/FoPX+wbU0GSy0fo3zG5uketZdE2ljSCEKcPlECQLLfeEmwO1
- t9t0GUtRZoh/wC9vnOiuN5LsxJ28j2Q4VqRbq6c6q/mBDy14/l+Q2Zwbgz6Z40cOfmqF
- znxTTRnRH1dmWNBpEXh1Qh2jhd3DYJZ3GMTlTwqEv9dYGsagAM2+/IFEDd8bJl8yZ1Z0
- ouXg==
-X-Gm-Message-State: AOJu0YwqcSGj5aQ3KyJdvuth/NclvLxhINfW9TffD8AvIX/1GQj85wLh
- Zm6cf02wZ/Fv2Vw768TQDBPn4DqTo6xv5enrMcVDJxOQ0p23bauWQ3zh5AdLF2ipnYg=
-X-Gm-Gg: AR+sD10XVvRjNUVPda2ZEHK/f8UcBwKVBGgmu3aujCc3mGYeIW+iuaR3e5SOXcvY7mS
- rAqvfV7swagImbMXVoHfZRpYUtH9Qj7fg1PDoVfzs11nHBVR8p5IggEWqzxt0Ky1TbBAIwfYo8S
- mS40EvRqItYSivzSYvOopgLsXJQ9Do6B+SAIDtm4HUEOG9pU/6VJb9Jt5ZPJ0D7etA4Sl7fXI8U
- ycbZN015j1F3W3cGoturI73ElOgIVk92SJUVQYrcYJv4ax4ctByaKLJgO+891nIK5z8TBF04sYb
- vNJBanWAVHmdYzPeJwGpZjfS9qUK3uytEv66W3wXD5KnC2VvahPts+CovYsTcnkfM0OKrhzysVO
- G/nxQXBwsM6jFbLL8NAHL8ZZqe8J/MrlF0OQf9JlBNjjvZRT3mfR8qNgM07mJz0Y0V09fsZb695
- vA4qADW8QuCxMVGLxd0n4AjNe11LeNHh7EyncJsZEA+8LM2LztMWLyolU84cnWmj3aYBRacmTr4
- 8aCZ3DwvfMApQ/nJ5W16rNyXU2R3PczJBkv942+zDa02NQZtLBMW0z5ZaJG95dveIZFkTChJamI
- OAc1tgzmgeygK94MlF0R
-X-Received: by 2002:a05:6808:bc9:b0:496:2b3:ae71 with SMTP id
- 5614622812f47-4b309bc09e2mr1193078b6e.18.1787338515578; 
- Fri, 21 Aug 2026 11:55:15 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b2d68769e1sm5421329b6e.8.2026.08.21.11.55.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2026 11:55:14 -0700 (PDT)
-Date: Fri, 21 Aug 2026 12:55:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Aristo Chen <aristo.chen@canonical.com>
-Cc: u-boot@lists.u-boot-project.org, sjg@chromium.org,
- nora.schiffer@ew.tq-group.com
-Subject: Re: [PATCH v2 0/8] bootm: size the noload buffer from the compressor
- header
-Message-ID: <20260821185512.GQ523975@bill-the-cat>
-References: <20260809042338.63397-1-aristo.chen@canonical.com>
- <20260818132332.324173-1-aristo.chen@canonical.com>
- <20260818221019.GE523975@bill-the-cat>
- <CAA=k7==gD0A2Ri=-=4ogTf=yJH5s6mOUMF7k5LGYGRR-Sommfg@mail.gmail.com>
+ bh=OnrykrbC97N3nPwSFPn9B8ApBTW1nccS9ZvfhsK9yBY=;
+ b=TrNAqgRUsS1RPZ9YAZuOU/S8nsgVBO+p9XgC5zk7XoNzF0KvBzcblicfYMe+FT9hIA
+ 4zYMiI5toQR7U0UFoSZecj5MGbp1pBv1fwlDrhmrLq7T3+hc9naC3f8PHfJYgUy8mXz8
+ U/Y01QLCnOjxWlRy7XK2nlHhAgMa3sAmNvyZuGQSgp4T+Hk6F+W9BD8c9Go2mgYHbwvC
+ B33LcWZrn9cpyrGVB8b698pJajHu0kR2GVbU5VpUy0yuoM4P/x+9AQAAFZbbb0gSSXy6
+ 9vMPx5lNEF/RpW70oSkN1U/OljHtSPXvsTYeu0R6tm7BE7Kcq2D5Edd+nKkm4EfzW7rj
+ RUXQ==
+X-Gm-Message-State: AFuF++my46Jb+1vSv5xxkHwR9hDzxIX6gK4q3OFwjhZANzUBHdGLY5Qa
+ JCv7Z7yG4KW1vgjXDx0pQriQ0Wnhr+ITwkNErcnZ7i56EFjjBYtVmsUzIvY89nc3t9I61szRmqF
+ ebyxC7jKMQ0bQhLWuxvYR+Y247LWWcVo=
+X-Gm-Gg: AR+sD10rXATejyznf9IpxC9Xu4i9c3BDmBvchcHET9IO0pcFOWZvApZ4FnfJ5dzlnRG
+ +l6prkjLMPu0ILcaL4pmmc4jNQGpMJf/QJKR3Iq1MbNJ87MmpvnyIrbt9Hl/g3+GwhVcg2fwtFg
+ 6UPcp1LoqBjC6pCfnwd0dI979cr5pTEjbU/D9pBq1FG3QjtPFx3WpwOfv9ktiiZph+s8xxTigp/
+ EsqSV5dBaFOmL7do+PmtfIQFr9jP6hCpliji1CIaKkCiyuf+cJwkO1L40cYm9fK983gqnG72Ggy
+ v7kVEOyCmtwRMJizcXlEpA1TBRWzSWnUb3lgfqf5IUJsgIfgGPbemKd43XWat6kc8GR0tnlj36S
+ wl5qLLykMZGM/P7XgcfsIfAvfsmPt1R14eg==
+X-Received: by 2002:a05:651c:198a:b0:39c:7922:b446 with SMTP id
+ 38308e7fff4ca-3a1c1ee1c25mr2304121fa.14.1787340812658; Fri, 21 Aug 2026
+ 12:33:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iKtsM+GJNOQ1pd0E"
-Content-Disposition: inline
-In-Reply-To: <CAA=k7==gD0A2Ri=-=4ogTf=yJH5s6mOUMF7k5LGYGRR-Sommfg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260819153014.834228-1-petko.manolov@konsulko.com>
+ <20260819153014.834228-2-petko.manolov@konsulko.com>
+ <CAOMZO5B-Q6R652_wp=AWXURBSP8Npr_AwJUvaw=CYSL7=bJKKg@mail.gmail.com>
+ <20260820061912.GD24421@carbon.k.g>
+In-Reply-To: <20260820061912.GD24421@carbon.k.g>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 21 Aug 2026 16:33:20 -0300
+X-Gm-Features: AcwNN1WUZcmCHXXhGJL5e6hiBc9Y2DsD4kO9tKp9Y5MIvEEC_tobiNq2Q38EX18
+Message-ID: <CAOMZO5AfFXrpN3RMPuYw4vM=AHOWBj6hnaXdG8W=KhSsWj5big@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v1_1=2F1=5D_arm=3A_draeger=3A_Dr=C3=A4ger_M48_on_NXP_?=
+ =?UTF-8?Q?i=2EMX6=28Q=29_and_Intel=2FAltera_SoCFPGA_Cyclone_V_devicetree=2E?=
+To: Petko Manolov <petko.manolov@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, uboot-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,150 +143,45 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Petko,
 
---iKtsM+GJNOQ1pd0E
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Aug 20, 2026 at 3:19=E2=80=AFAM Petko Manolov
+<petko.manolov@konsulko.com> wrote:
 
-On Wed, Aug 19, 2026 at 10:53:57PM +0800, Aristo Chen wrote:
-> Hi Tom,
->=20
-> On Wed, Aug 19, 2026 at 6:10=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Tue, Aug 18, 2026 at 01:23:14PM +0000, Aristo Chen wrote:
-> >
-> > > This is v2 of "bootm: size the noload decompression buffer from the
-> > > compressor header". Tom pushed back on v1
-> > > (https://patchwork.ozlabs.org/project/uboot/patch/20260809042338.6339=
-7-2-aristo.chen@canonical.com/)
-> > > on two grounds:
-> > >
-> > >   1. No concrete problem report driving the change.
-> > >   2. ~1297 platforms grew by ~170-400 bytes; the change is not
-> > >      opt-in, so the size cost falls on everyone.
-> >
-> > So, the first example that pops up in my builds is imx8mn_beacon_2g.
-> > And for v1 of the series:
-> >    aarch64: (for 1/1 boards) all +16384.0 data +14336.0 text +2048.0
-> >             imx8mn_beacon_2g: all +16384 data +14336 text +2048
-> >                u-boot: add: 0/0, grow: 1/0 bytes: 328/0 (328)
-> >                  function                                   old     new=
-   delta
-> >                  bootm_run_states                          3316    3644=
-    +328
-> >
-> > And now for v2:
-> >    aarch64: (for 1/1 boards) all +16384.0 data +14336.0 text +2048.0
-> >             imx8mn_beacon_2g: all +16384 data +14336 text +2048
-> >                u-boot: add: 0/0, grow: 1/0 bytes: 368/0 (368)
-> >                  function                                   old     new=
-   delta
-> >                  bootm_run_states                          3316    3684=
-    +368
-> >
-> > Next, picking turris_mox as it enables ZSTD:
-> > v1:
-> >    aarch64: (for 1/1 boards) all +472.0 text +472.0
-> >             turris_mox     : all +472 text +472
-> >                u-boot: add: 2/0, grow: 1/0 bytes: 472/0 (472)
-> >                  function                                   old     new=
-   delta
-> >                  image_decomp_get_uncompressed_size           -     416=
-    +416
-> >                  bootm_run_states                          2360    2412=
-     +52
-> >                  zstd_get_frame_header                        -       4=
-      +4
-> > v2:
-> >    aarch64: (for 1/1 boards) all +428.0 text +428.0
-> >             turris_mox     : all +428 text +428
-> >                u-boot: add: 1/0, grow: 1/0 bytes: 428/0 (428)
-> >                  function                                   old     new=
-   delta
-> >                  bootm_run_states                          2360    2784=
-    +424
-> >                  zstd_get_frame_header                        -       4=
-      +4
-> >
-> > So, that is better. Looking at smartweb, both iterations are the same:
-> >        arm: (for 1/1 boards) all +96.0 text +96.0
-> >             smartweb       : all +96 text +96
-> >                u-boot: add: 0/0, grow: 1/0 bytes: 76/0 (76)
-> >                  function                                   old     new=
-   delta
-> >                  bootm_run_states                          3592    3668=
-     +76
-> >
-> > What's honestly concerning is chromebook_coral where v2 *shrinks*:
-> >                u-boot: add: 0/0, grow: 0/-1 bytes: 0/-2 (-2)
-> >                  function                                   old     new=
-   delta
-> >                  bootm_load_os                              520     518=
-      -2
-> > but v1 grows:
-> >                u-boot: add: 1/0, grow: 1/0 bytes: 110/0 (110)
-> >                  function                                   old     new=
-   delta
-> >                  bootm_load_os                              520     587=
-     +67
-> >                  image_decomp_get_uncompressed_size           -      43=
-     +43
-> >
->=20
-> That one is working as intended: chromebook_coral enables none of
-> GZIP/LZMA/LZ4/ZSTD, so it is one of the "bootm with no decompressor
-> at all" boards from the cover letter. In v2 every helper and its
-> switch case sit behind CONFIG_IS_ENABLED(<format>), so on that board
-> they all compile away and only the unchanged 8x fallback remains.
-> The -2 bytes is codegen noise from the restructure; I diffed the
-> disassembly and the function is otherwise unchanged. v1 grew there
-> because its helper in image.c was built unconditionally. Behaviour is
-> unchanged either way: with no decompressor enabled, a compressed
-> kernel_noload image already fails in image_decomp().
->=20
-> The imx8mn_beacon_2g result has a similar shape to what I measured
-> on am62x_evm_a53: both enable LTO, and on these LTO configurations
-> compiler inlining and layout make v2 a few tens of bytes larger
-> than v1 (+368 vs +328 here, with the growth landing inside
-> bootm_run_states either way). That is the trade of the per-format
-> split, which is what makes the no-decompressor boards free, trims
-> the gzip-only majority, and keeps each format individually
-> droppable.
->=20
-> turris_mox is the non-LTO counterpart and shows the intended
-> direction for the multi-algorithm case: v2 comes in 44 bytes below
-> v1 there (+428 vs +472 in your run).
->=20
-> smartweb is the expected gzip-only LTO case: both versions cost
-> essentially the same (+96 in your run).
->=20
-> Thanks for the u-boot-size-test.sh pointer. I re-ran your four
-> boards with it against this series' base and reproduce your numbers
-> to within a few bytes of toolchain difference, including coral's -2
-> (here: v1 +108 with bootm_load_os +65 plus the unconditional helper
-> +43, v2 -2). I will use the script for the size numbers from now on;
-> if you would like the cover letter regenerated with those numbers, I
-> am happy to respin as v3 with the code unchanged.
+> Unfortunately this board runs QNX, not Linux, so upstreaming them doesn't=
+ make
+> sense.
 
-Thanks for explaining and digging a bit more. At the end of the day, I
-wish we could solve this problem, but have smaller growth, but I don't
-see it. So v2 is fine as-is from my point of view, no need to spin a v3
-unless there's other feedback.
+I don't think the OS running on the board changes this requirement.
 
---=20
-Tom
+Devicetree describes the hardware, not Linux, and DTs from the Linux
+tree are also consumed by other projects, including U-Boot. In U-Boot,
+we have been moving towards using the upstream Linux devicetree
+sources rather than maintaining independent copies of board DTs.
 
---iKtsM+GJNOQ1pd0E
-Content-Type: application/pgp-signature; name="signature.asc"
+There is also an important review aspect here. The Linux devicetree
+maintainers and the subsystem/SoC
+maintainers review the hardware description and its bindings,
+including dt-schema validation. Simply running the
+validation tools locally is useful, but it is not a replacement for that re=
+view.
 
------BEGIN PGP SIGNATURE-----
+For the i.MX6 part in particular, this is a well-supported platform
+upstream, so I don't see a reason why the
+M48 hardware description could not be submitted to the Linux
+devicetree tree even if the product itself boots QNX.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoifDAAKCRAr4qD1Cr/k
-CtCFAP9drWX+Qt4PevEBEUm1HIZMnD7ywMgmL0RWdDrgCmdGJAEA1RPb9VG3on4U
-mxl+VsdST9O+ldZ0MeJRyx/H17bNcAE=
-=aiBP
------END PGP SIGNATURE-----
+My suggestion is still to split this work and submit the i. MX6 and
+SoCFPGA DTs to the respective Linux maintainers first.MX6 and
+SoCFPGA DTs to the respective Linux maintainers first. Once they have
+been accepted upstream, U-Boot can consume those
+DTs from the upstream Linux tree and keep only the U-Boot-specific
+additions in the *-u-boot.dtsi files.
 
---iKtsM+GJNOQ1pd0E--
+> Can i use some sort of DT validation tool that pass kernel's requirements=
+?
+
+Yes, the kernel provides dt_binding_check and dtbs_check targets for
+validating DT bindings and DTs against dt-schema.
+You should run these before submission, but passing them alone does
+not replace upstream DT review.
