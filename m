@@ -1,119 +1,122 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59BDBC5DF88
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 07:04:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD652C5DF87
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 07:11:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DF91860662;
-	Fri, 21 Aug 2026 07:04:03 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vZayA7CuqviX; Fri, 21 Aug 2026 07:04:02 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787295842;
-	bh=/ZdxC2f8caiPsxPPyZqfGP3tyLUIU2UdZKPobFcFA1g=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=T91hnaoYE7xlEEkLpT50ENnTorEWHGqg9Q2PYK4LphNs0E8MjJn93E+MBdTL2MRL/
-	 R5KAUtHoKWJqZEBW5gaI3tjgfgerNviPQo908KQMZG8sA3eE4hjXA97VOCId+l8Dqb
-	 44ijfwC+CjffCvQv+c2YdKqLvSc2SKqCvtSMOFtnJitn6OtsW+SJL0tkj9B5uoU1D1
-	 ehyGORSF+D5dJbbQlEmSNSbMuX5fFmOxL5yCGs1177B+Q9Z24TOnJRRCqgudXNyv/J
-	 NCiCFu1/M0npbud0HVUJk+f/2FeHkgaLWbmuSCJ1PITbJEdjFHJtqeNplAmOOg7Jxi
-	 7Tyqh0YbcfFMQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8831B60668;
-	Fri, 21 Aug 2026 07:04:02 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 41946EA3
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:04:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2AEE1408AD
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:04:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 62B164091E;
+	Fri, 21 Aug 2026 07:11:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y0-cDTtOQf_w for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 07:04:00 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
- envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=R222a5eS
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 81207408A2
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:03:58 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6a144c8eea2so1429105a12.0
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 00:03:58 -0700 (PDT)
+ id P8C2LK6fLwxS; Fri, 21 Aug 2026 07:11:04 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787295836; x=1787900636;
+	d=lists.u-boot-project.org; s=default; t=1787296263;
+	bh=jjeGpMtxykM4DUxDZhumSSH6QQ5rYgxtq/BWDagkA94=;
+	h=Date:From:Subject:Cc:To:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=R9WXxuhE0BMVczc6r/mgFZ3W071j4R57sSTcGBz5xSJ9jUAPHAN4ebDy7A5mUuds2
+	 A1a/Rrhr8Cfb+LMhq9tEmQSxaQ6kOCc9iZc7xyYvra+G3HmEhNpmHEQSibPJcU6cd8
+	 MfPGzibHxMstkg0o8dka59MSUF45L2287olESw251n5C2u3ColBaFsKGvb8TiEuP/k
+	 JIGK9Mb/tYreM0pWLerwfmGGeiNrn+vs5bOWtQvITcbqR5uiDkoW1blgGgYYZm810G
+	 TQiNTVxrQTaX7gc0lpU9BuD+4toBD4ksyMoPBV4WGRCD6+trNU7UvZD4jua6z9fvM+
+	 2Bj/XQ7kRn/4w==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id CBB5F408BE;
+	Fri, 21 Aug 2026 07:11:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0D4F51B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:11:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id F33D860662
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:11:01 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id g8YLhLFWtsYB for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 07:11:01 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::135; helo=mail-lf1-x135.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=ifQKMAow
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3B8D160640
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:10:59 +0000 (UTC)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5b0117dda13so741282e87.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 00:10:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1787296257; x=1787901057;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=/ZdxC2f8caiPsxPPyZqfGP3tyLUIU2UdZKPobFcFA1g=;
- b=R222a5eSTo7wO3mbFRLNoKQlsow8jVM8rgam9PFvaDuWnGrSCuCmjGaXxILksQXOs0
- ryM4aCmDgfALHeWXQJ7GGaeSV092ZKQMrHFISXjdxdCcG8gdiktKSBe8fiWGLrBdEtYY
- GcKqqZcrdJmPb3MBn8mAid8e1l7qpL+WOcVOyHZRecB9Lp39UwNb+3wnrvnxyHXbUMTx
- I1wUd9DwiI2MG6kzXJorm9SmbHl2yV7khqpZZgvGvbFEDeANxer4+MeEPFLblH/LGiKc
- cpg51ohZ+5kxypzD7lB9hUcEhnTnu7Xt2W8IVeffGuRJIWGZIB+vvHZZgNRWsZf+UbKb
- VHug==
+ h=in-reply-to:references:to:cc:subject:from:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=jjeGpMtxykM4DUxDZhumSSH6QQ5rYgxtq/BWDagkA94=;
+ b=ifQKMAowJ0IgXx2JvVfyYY+wfnqsMKbRHFYmBugkP2JUAonlixz0glttjIFRH2/DTC
+ kAkFRZ8YH551rys33jDIhFFHhUhl86jd9nsK03FP7zx2io/Dwr459LSKA7Dk2i6IYOYi
+ 24Rp7+6d5ROM9KmWJqAy4HGEVDrrY8oDzCoGG+cHUMXsqueaRC8aV4WqiI2+eHUpzKvU
+ /sRp0cpu/Lo5DFuj2t5BcOhwtRyUyrxbpSPK6vAmZAq+p8cdEHLrdsz5eq9w2gVxM+S1
+ IzJ++Br+/Rggkvq9Svk3SFG6JmH/IDXB/k0j+Smwzc+jkA84KiebI5zFjry5sS8Ax9qb
+ b82w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787295836; x=1787900636;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=/ZdxC2f8caiPsxPPyZqfGP3tyLUIU2UdZKPobFcFA1g=;
- b=PTDWpDbNLa1lCc4kRzFX4Cii+XLhxJlQ3JcdrDaRjrQbvBLk68ssQI9KjXrKu020Kf
- 9ArgdYzdDPWyEGHUVQ8lo08JDfTuVzECHywyPSvEnF4zs0t0do9k/vTNgE/nh6HBXa4L
- L1uJ7FJQBUIpVUV5GVOfNmeUEQpOZUA0gJQTVvJwvfKzYv4b0OhMQGPsKhCVn25vB6H4
- +TO1boCrnRnYMA8srPevmzyfpoqaVNjnAIw1jvyWaM6bvpoZ7BXpRuZzu/9XcDPInULZ
- au6VIFLeZO6PnnmoI8blzVwrVGuiMaPHhXSpL42W/+Xu82yU2evGEkOGp3rbvwysv07+
- bY9Q==
+ d=1e100.net; s=20251104; t=1787296257; x=1787901057;
+ h=in-reply-to:references:to:cc:subject:from:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=jjeGpMtxykM4DUxDZhumSSH6QQ5rYgxtq/BWDagkA94=;
+ b=TYxz+06xOxmOBqoV5TNPPxrRgJ6gms+URKrm+hQTTq11EspNsG+9pIHd9/DLKY+0Jk
+ ffnkGUHmB6ZDlfKfkGA1KI67gAEysicXw8BlO7U5TZqZJ8nX2EvZNGRM/w0iZWsDzq7u
+ mQbeHHzMyxG5Waf21EOZDPBMcR9GJ6eugcHPCwOn1YaFSAOUgMgRwyBYAe1UOp3Cz7WX
+ Auxt3/0ZOAxBZm/3p+PY3qH+5RwyrWXfIXaU2akAnbWbGi48hBHFES/9tXwxuOPAI0yA
+ 8hZUpHZGm8xnLtQ/MLC3A6jIW2HpYHPA72nUKhSvbCyGjWYvv8M2jsDvjx4walggqmvD
+ 5MoA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrwmdhFQrlCMbAzR7eNNpNnATXZIIUDe/XqzDzKMpQcphJ6w8u89RYOK1SBF0yJ6V7k/PWGxfE=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kljHqqENlRStT+GAMm4OlQ6LmqeAtWet/GawY4pM8ug8Tsqg0N
- Toadli1K16bNFMLG5VlDAfFq0cJb0BLu9c5V9461/H7fSyXUfJGZzjGh
-X-Gm-Gg: AR+sD11LhmYaS3K3rd0yghyN2HsHIIO7o8ubPWf8I+mFxaZldga5si1TZqxO4+l/sGU
- u37qQSwBaSA+W2U0yUEJ604O1Du5D8fnxNSCt2Gn+R2sw6A73ugHUclvQgOn2/7W4Nl8BxDS7St
- FiI9X6wcqXqt2K5szUBUWclDweFiKeF9B0RHs1VxRzwZT72wXLFF6KU5K/Yf8BIPhUgBN33KwOl
- l6u28jEg8g1VatgqNtIhs57wdgVWCbPW6CJeAq+C3ryPLrsUE1ZKA9Bjn1suBgW+1z1Jbufq1aG
- 74cyXfPJY8ApfKF6O3/CYIs+vV/zocMSJAtrhTntiXye5HP1tZLfd8P060i5KjZCSvGNSQB2k7K
- hpgCi8O821DFZbZQWeNUvEBsOwYk6ZpYOXsuw3kGrq1RX3D11X2S1m2gaeVhqDkNPgDSnYex9PU
- hydUW89o0k/L4W9VpXdCNc6onn1qBNixSRkEE3jxCaLLhdnp52qr3bG4XSyPoI4/eBTBs2cZ/ZQ
- pc94g==
-X-Received: by 2002:a05:6402:21cd:b0:6a3:ee60:b13f with SMTP id
- 4fb4d7f45d1cf-6a42f2515cemr4325412a12.14.1787295835757; 
- Fri, 21 Aug 2026 00:03:55 -0700 (PDT)
-Received: from Ansuel-XPS24.localdomain ([95.236.20.157])
- by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a3ff0c3491sm5093572a12.10.2026.08.21.00.03.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2026 00:03:55 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Anshul Dalal <anshuld@ti.com>, Simon Glass <sjg@chromium.org>,
- Julien Masson <jmasson@baylibre.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v2] airoha: add support for Airoha AN7583 SoC
-Date: Fri, 21 Aug 2026 09:03:44 +0200
-Message-ID: <20260821070345.138264-1-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.53.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ AHgh+Rp1LqftseAlCl3IEZdTSPDu3Jlc+fHyirpE2PpxUxJGtBMJHHOhAHLyODN1txPHZ8ovyHycqps=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nW59WqX9OzObSAMzp3lPJtirH8hd9ey8jK1a7QB9v3b9zNq2cF
+ owoTlO6WvETpH3SQceCiF0KHGFSEs8iIJ34+PF/yG2iGCd/3Mhnt9VLuBtutY8lzw9S5It5dUGA
+ L+1oFBRc=
+X-Gm-Gg: AR+sD10yJdlA3gUzy36THmF+groW4DFszW6j5Tr04bzssl1kkSJ/BBKZ3umxm68CxPa
+ t9bK8ABRPvc8vcm3uQ0YYytG4wi0KDFf2ERBnARqkJqs3KfUb5ST4Ra4Kpn/+e0AOeWMGwRScCG
+ 1wgUlQDmFkN30k8LeTRZPNFsip9uaNAUxNm9CZ4dAeJJ8Sjar2aI41oZZLyyK5UKow958MaOiTh
+ CyNsToEpZVHPBbELXDY84AY1CzOAPxhpZcSu4UL36LnU9jVw9UFsNWqSdgUVWb0nzUDVzTfFH8b
+ +7So9eH3ddZJDOvZNFVmvY/GSECYUdg5eWQBcKAKd4+BXyoegrPBNO+9ybVMey9SvUAi5ahVVeD
+ l80QjBDQO7mls2rZ1SKO71AO66vxfO+pFoDgZGbMPsZST4qAz/CtacLK7bQdo71AdrQcJMGCNOl
+ 8S/++F0apD5v/mZy4qxu+6RKXSLTnFKHOowWZXKK2uspMfaaQtGQTELQarYwyiSxSmI9z3ZE9oJ
+ cCvhDfdzYIWQjTK83cVN8FB0jvKs9zVdFEMmGCWRxdiwOEys4m8Zpmx
+X-Received: by 2002:a17:906:ee89:b0:c20:f95c:9088 with SMTP id
+ a640c23a62f3a-c246a30c3b5mr448785966b.4.1787295939421; 
+ Fri, 21 Aug 2026 00:05:39 -0700 (PDT)
+Received: from localhost (host-212-171-227-71.retail.telecomitalia.it.
+ [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c245921e461sm349759266b.54.2026.08.21.00.05.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 21 Aug 2026 00:05:38 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 21 Aug 2026 09:05:37 +0200
+Message-Id: <DKUFJ6TTK7AW.2VKPRV8CRQ70V@baylibre.com>
+From: "Carlo Caione" <ccaione@baylibre.com>
+Subject: Re: [PATCH v4 0/5] Add fastboot to SPL
+Cc: "E Shattow" <e@freeshell.de>
+To: "Stefan Monnier" <monnier@iro.umontreal.ca>,
+ <u-boot@lists.u-boot-project.org>, "Carlo Caione" <ccaione@baylibre.com>,
+ "Jonas Karlman" <jonas@kwiboo.se>
+X-Mailer: aerc 0.22.0
+References: <20260820-ccaione-upstream-spl-fastboot-v4-0-57e5ef71c74d__17726.0234997206$1787249364$gmane$org@baylibre.com>
+ <jwv8q60y6nj.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+In-Reply-To: <jwv8q60y6nj.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -127,785 +130,58 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add support for Airoha AN7583 SoC. This adds the Kconfig and Makefile
-entry for the SoC, DTSI and initial config for it. Also add the code for
-CPU and RAM initialization. Everything is mostly based on AN7581 that
-share lots of common piece.
+On Thu Aug 20, 2026 at 8:50 PM CEST, Stefan Monnier wrote:
+> Carlo Caione [2026-08-20 20:08:24] wrote:
+>> Some recovery and initial-provisioning flows need a standard host protoc=
+ol
+>> before usable firmware is available in persistent storage. U-Boot alread=
+y
+>> provides fastboot, but the implementation can currently be started only
+>> from the U-Boot-proper command line.
+>
+> I'm curious.  In my limited exposure to U-Boot, I got the impression that
+> the split between SPL and U-Boot proper is mostly a "technical detail",
+> usually mostly hidden from those who install it onto a device: you just
+> take the combined U-Boot + SPL image and write it at the appropriate
+> offset on the relevant device.  And usually if SPL works, U-Boot
+> also works.
+>
+> So a bit like Jonas in the recent "hotkey in SPL" patch for rockchip
+> SoCs, I'm curious why/when we'd want to add to SPL functionality already
+> supported from U-Boot.
 
-Acked-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
-Changes v2:
-- Rebase on top of next
+Hi Stefan,
 
- arch/arm/dts/an7583-evb.dts          |  67 +++++
- arch/arm/dts/an7583.dtsi             | 387 +++++++++++++++++++++++++++
- arch/arm/mach-airoha/Kconfig         |  14 +
- arch/arm/mach-airoha/Makefile        |   1 +
- arch/arm/mach-airoha/an7583/Makefile |   3 +
- arch/arm/mach-airoha/an7583/init.c   |  66 +++++
- board/airoha/an7583/MAINTAINERS      |   5 +
- board/airoha/an7583/Makefile         |   3 +
- board/airoha/an7583/an7583_rfb.c     |  16 ++
- configs/an7583_evb_defconfig         |  79 ++++++
- include/configs/an7583.h             |  19 ++
- 11 files changed, 660 insertions(+)
- create mode 100644 arch/arm/dts/an7583-evb.dts
- create mode 100644 arch/arm/dts/an7583.dtsi
- create mode 100644 arch/arm/mach-airoha/an7583/Makefile
- create mode 100644 arch/arm/mach-airoha/an7583/init.c
- create mode 100644 board/airoha/an7583/MAINTAINERS
- create mode 100644 board/airoha/an7583/Makefile
- create mode 100644 board/airoha/an7583/an7583_rfb.c
- create mode 100644 configs/an7583_evb_defconfig
- create mode 100644 include/configs/an7583.h
+Thanks for the question. E Shattow's reply describes the general SPL
+constraints well. The detail specific to this series is that "if SPL
+works, U-Boot proper also works" assumes that U-Boot proper is already
+available from storage that SPL can read and this is not always true.
 
-diff --git a/arch/arm/dts/an7583-evb.dts b/arch/arm/dts/an7583-evb.dts
-new file mode 100644
-index 000000000000..d02cd194e8a3
---- /dev/null
-+++ b/arch/arm/dts/an7583-evb.dts
-@@ -0,0 +1,67 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+/dts-v1/;
-+
-+/* Bootloader installs ATF here */
-+/memreserve/ 0x80000000 0x200000;
-+
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+#include "an7583.dtsi"
-+
-+/ {
-+	model = "Airoha AN7583 Evaluation Board";
-+	compatible = "airoha,an7583-evb", "airoha,an7583", "airoha,en7583";
-+
-+	aliases {
-+		serial0 = &uart1;
-+	};
-+
-+	chosen {
-+		bootargs = "console=ttyS0,115200 earlycon";
-+		stdout-path = "serial0:115200n8";
-+		linux,usable-memory-range = <0x0 0x80200000 0x0 0x1fe00000>;
-+	};
-+
-+	/* When running as a first-stage bootloader this isn't filled in automatically */
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x80000000 0x0 0x20000000>;
-+	};
-+};
-+
-+&an7583_pinctrl {
-+	pcie0_rst_pins: pcie0-rst-pins {
-+		conf {
-+			pins = "pcie_reset0";
-+			drive-open-drain = <1>;
-+		};
-+	};
-+
-+	pcie1_rst_pins: pcie1-rst-pins {
-+		conf {
-+			pins = "pcie_reset1";
-+			drive-open-drain = <1>;
-+		};
-+	};
-+};
-+
-+&pcie0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie0_rst_pins>;
-+	status = "okay";
-+};
-+
-+&pcie1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie1_rst_pins>;
-+	status = "okay";
-+};
-+
-+&i2c0 {
-+	status = "okay";
-+};
-+
-+&snfi {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/an7583.dtsi b/arch/arm/dts/an7583.dtsi
-new file mode 100644
-index 000000000000..9362d2fbedf1
---- /dev/null
-+++ b/arch/arm/dts/an7583.dtsi
-@@ -0,0 +1,387 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/clock/en7523-clk.h>
-+#include <dt-bindings/reset/airoha,an7583-reset.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/thermal/thermal.h>
-+
-+/ {
-+	interrupt-parent = <&gic>;
-+	#address-cells = <2>;
-+	#size-cells = <2>;
-+
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		atf-reserved-memory@80000000 {
-+			no-map;
-+			reg = <0x0 0x80000000 0x0 0x40000>;
-+		};
-+
-+		npu-binary@84000000 {
-+			no-map;
-+			reg = <0x0 0x84000000 0x0 0xa00000>;
-+		};
-+
-+		npu-flag@84b0000 {
-+			no-map;
-+			reg = <0x0 0x84b00000 0x0 0x100000>;
-+		};
-+
-+		npu-pkt@85000000 {
-+			no-map;
-+			reg = <0x0 0x85000000 0x0 0x1a00000>;
-+		};
-+
-+		npu-phyaddr@86b00000 {
-+			no-map;
-+			reg = <0x0 0x86b00000 0x0 0x100000>;
-+		};
-+
-+		npu-rxdesc@86d00000 {
-+			no-map;
-+			reg = <0x0 0x86d00000 0x0 0x100000>;
-+		};
-+	};
-+
-+	psci {
-+		compatible = "arm,psci-1.0";
-+		method = "smc";
-+	};
-+
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		cpu-map {
-+			cluster0 {
-+				core0 {
-+					cpu = <&cpu0>;
-+				};
-+
-+				core1 {
-+					cpu = <&cpu1>;
-+				};
-+			};
-+		};
-+
-+		cpu0: cpu@0 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a53";
-+			reg = <0x0>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2>;
-+			#cooling-cells = <2>;
-+		};
-+
-+		cpu1: cpu@1 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a53";
-+			reg = <0x1>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2>;
-+			#cooling-cells = <2>;
-+		};
-+
-+		l2: l2-cache {
-+			compatible = "cache";
-+			cache-size = <0x80000>;
-+			cache-line-size = <64>;
-+			cache-level = <2>;
-+			cache-unified;
-+		};
-+	};
-+
-+	timer {
-+		compatible = "arm,armv8-timer";
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>,
-+			     <GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>,
-+			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>,
-+			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+
-+	soc {
-+		compatible = "simple-bus";
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		gic: interrupt-controller@9000000 {
-+			compatible = "arm,gic-v3";
-+			interrupt-controller;
-+			#interrupt-cells = <3>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			reg = <0x0 0x09000000 0x0 0x20000>,
-+			      <0x0 0x09080000 0x0 0x80000>,
-+			      <0x0 0x09400000 0x0 0x2000>,
-+			      <0x0 0x09500000 0x0 0x2000>,
-+			      <0x0 0x09600000 0x0 0x20000>;
-+			interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_LOW>;
-+		};
-+
-+		chip_scu: syscon@1fa20000 {
-+			compatible = "airoha,en7581-chip-scu", "syscon";
-+			reg = <0x0 0x1fa20000 0x0 0x388>;
-+		};
-+
-+		syscon@1fbe3400 {
-+			compatible = "airoha,en7581-pbus-csr", "syscon";
-+			reg = <0x0 0x1fbe3400 0x0 0xff>;
-+		};
-+
-+		system-controller@1fb00000 {
-+			compatible = "syscon", "simple-mfd";
-+			reg = <0x0 0x1fb00000 0x0 0x970>;
-+
-+			scuclk: scuclk {
-+				compatible = "airoha,an7583-scu";
-+				#clock-cells = <1>;
-+				#reset-cells = <1>;
-+			};
-+
-+			mdio_0: mdio-0 {
-+				compatible = "airoha,an7583-mdio";
-+				resets = <&scuclk AN7583_MDIO0>;
-+
-+				airoha,bus-id = <0>;
-+			};
-+
-+			mdio_1: mdio-1 {
-+				compatible = "airoha,an7583-mdio";
-+				resets = <&scuclk AN7583_MDIO1>;
-+
-+				airoha,bus-id = <1>;
-+			};
-+		};
-+
-+		system-controller@1fbf0200 {
-+			compatible = "syscon", "simple-mfd";
-+			reg = <0x0 0x1fbf0200 0x0 0xc0>;
-+
-+			an7583_pinctrl: pinctrl {
-+				compatible = "airoha,an7583-pinctrl";
-+
-+				interrupt-parent = <&gic>;
-+				interrupts = <GIC_SPI 26 IRQ_TYPE_LEVEL_HIGH>;
-+
-+				gpio-controller;
-+				#gpio-cells = <2>;
-+
-+				interrupt-controller;
-+				#interrupt-cells = <2>;
-+			};
-+		};
-+
-+		i2cclock: i2cclock@0 {
-+			#clock-cells = <0>;
-+			compatible = "fixed-clock";
-+
-+			/* 20 MHz */
-+			clock-frequency = <20000000>;
-+		};
-+
-+		i2c0: i2c0@1fbf8000 {
-+			compatible = "mediatek,mt7621-i2c";
-+			reg = <0x0 0x1fbf8000 0x0 0x100>;
-+
-+			clocks = <&i2cclock>;
-+
-+			/* 100 kHz */
-+			clock-frequency = <100000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			status = "disable";
-+		};
-+
-+		i2c1: i2c1@1fbf8100 {
-+			compatible = "mediatek,mt7621-i2c";
-+			reg = <0x0 0x1fbf8100 0x0 0x100>;
-+
-+			clocks = <&i2cclock>;
-+
-+			/* 100 kHz */
-+			clock-frequency = <100000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			status = "disable";
-+		};
-+
-+		snfi: spi@1fa10000 {
-+			compatible = "airoha,en7581-snand";
-+			reg = <0x0 0x1fa10000 0x0 0x140>,
-+			      <0x0 0x1fa11000 0x0 0x600>;
-+
-+			clocks = <&scuclk EN7523_CLK_SPI>;
-+			clock-names = "spi";
-+
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			status = "disabled";
-+
-+			spi_nand: nand@0 {
-+				compatible = "spi-nand";
-+				reg = <0>;
-+				spi-max-frequency = <50000000>;
-+				spi-tx-bus-width = <1>;
-+				spi-rx-bus-width = <2>;
-+			};
-+		};
-+
-+		uart1: serial@1fbf0000 {
-+			compatible = "ns16550";
-+			reg = <0x0 0x1fbf0000 0x0 0x30>;
-+			reg-io-width = <4>;
-+			reg-shift = <2>;
-+			interrupts = <GIC_SPI 18 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-frequency = <1843200>;
-+			bootph-all;
-+		};
-+
-+		uart2: serial@1fbf0300 {
-+			compatible = "airoha,en7523-uart";
-+			reg = <0x0 0x1fbf0300 0x0 0x30>;
-+			reg-io-width = <4>;
-+			reg-shift = <2>;
-+			interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-frequency = <7372800>;
-+
-+			status = "disabled";
-+		};
-+
-+		hsuart3: serial@1fbe1000 {
-+			compatible = "airoha,en7523-uart";
-+			reg = <0x0 0x1fbe1000 0x0 0x40>;
-+			reg-io-width = <4>;
-+			reg-shift = <2>;
-+			interrupts = <GIC_SPI 54 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-frequency = <7372800>;
-+
-+			status = "disabled";
-+		};
-+
-+		uart4: serial@1fbf0600 {
-+			compatible = "airoha,en7523-uart";
-+			reg = <0x0 0x1fbf0600 0x0 0x30>;
-+			reg-io-width = <4>;
-+			reg-shift = <2>;
-+			interrupts = <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-frequency = <7372800>;
-+
-+			status = "disabled";
-+		};
-+
-+		uart5: serial@1fbf0700 {
-+			compatible = "airoha,en7523-uart";
-+			reg = <0x0 0x1fbf0700 0x0 0x30>;
-+			reg-io-width = <4>;
-+			reg-shift = <2>;
-+			interrupts = <GIC_SPI 18 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-frequency = <7372800>;
-+
-+			status = "disabled";
-+		};
-+
-+		pciephy: phy@1fa5a000 {
-+			compatible = "airoha,en7581-pcie-phy";
-+			reg = <0x0 0x1fa5a000 0x0 0xfff>,
-+			      <0x0 0x1fa5b000 0x0 0xfff>,
-+			      <0x0 0x1fa5c000 0x0 0xfff>,
-+			      <0x0 0x1fc10044 0x0 0x4>,
-+			      <0x0 0x1fc30044 0x0 0x4>,
-+			      <0x0 0x1fc15030 0x0 0x104>;
-+			reg-names = "csr-2l", "pma0", "pma1",
-+				    "p0-xr-dtime", "p1-xr-dtime",
-+				    "rx-aeq";
-+			#phy-cells = <0>;
-+		};
-+
-+		pcie0: pcie@1fc00000 {
-+			compatible = "airoha,an7583-pcie";
-+			device_type = "pci";
-+			linux,pci-domain = <0>;
-+			#address-cells = <3>;
-+			#size-cells = <2>;
-+
-+			reg = <0x0 0x1fc20000 0x0 0x1670>;
-+			reg-names = "pcie-mac";
-+
-+			clocks = <&scuclk EN7523_CLK_PCIE>;
-+			clock-names = "sys-ck";
-+
-+			phys = <&pciephy>;
-+			phy-names = "pcie-phy";
-+
-+			ranges = <0x02000000 0 0x20000000 0x0 0x20000000 0 0x4000000>;
-+
-+			resets = <&scuclk AN7583_PCIE0_RST>,
-+				 <&scuclk AN7583_PCIE1_RST>;
-+			reset-names = "phy-lane0", "phy-lane1";
-+
-+			interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
-+			bus-range = <0x00 0xff>;
-+			#interrupt-cells = <1>;
-+			interrupt-map-mask = <0 0 0 7>;
-+			interrupt-map = <0 0 0 1 &pcie_intc0 0>,
-+					<0 0 0 2 &pcie_intc0 1>,
-+					<0 0 0 3 &pcie_intc0 2>,
-+					<0 0 0 4 &pcie_intc0 3>;
-+
-+			status = "disabled";
-+
-+			pcie_intc0: interrupt-controller {
-+				interrupt-controller;
-+				#address-cells = <0>;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		pcie1: pcie@1fc20000 {
-+			compatible = "airoha,an7583-pcie";
-+			device_type = "pci";
-+			linux,pci-domain = <1>;
-+			#address-cells = <3>;
-+			#size-cells = <2>;
-+
-+			reg = <0x0 0x1fa92000 0x0 0x1670>;
-+			reg-names = "pcie-mac";
-+
-+			clocks = <&scuclk EN7523_CLK_PCIE>;
-+			clock-names = "sys-ck";
-+
-+			phys = <&pciephy>;
-+			phy-names = "pcie-phy";
-+
-+			ranges = <0x02000000 0 0x24000000 0x0 0x24000000 0 0x4000000>;
-+
-+			resets = <&scuclk AN7583_PCIE0_RST>,
-+				 <&scuclk AN7583_PCIE1_RST>;
-+			reset-names = "phy-lane0", "phy-lane1";
-+
-+			interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
-+			bus-range = <0x00 0xff>;
-+			#interrupt-cells = <1>;
-+			interrupt-map-mask = <0 0 0 7>;
-+			interrupt-map = <0 0 0 1 &pcie_intc1 0>,
-+					<0 0 0 2 &pcie_intc1 1>,
-+					<0 0 0 3 &pcie_intc1 2>,
-+					<0 0 0 4 &pcie_intc1 3>;
-+
-+			status = "disabled";
-+
-+			pcie_intc1: interrupt-controller {
-+				interrupt-controller;
-+				#address-cells = <0>;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+	};
-+};
-diff --git a/arch/arm/mach-airoha/Kconfig b/arch/arm/mach-airoha/Kconfig
-index 4b0374001d0c..72cd14542086 100644
---- a/arch/arm/mach-airoha/Kconfig
-+++ b/arch/arm/mach-airoha/Kconfig
-@@ -29,19 +29,33 @@ config TARGET_AN7581
- 	  Peripherals include Gigabit Ethernet, switch, USB3.0 and OTG, PCIe,
- 	  I2S, PCM, S/PDIF, UART, SPI, I2C, IR TX/RX, and PWM.
- 
-+config TARGET_AN7583
-+	bool "Airoha AN7583 SoC"
-+	select ARM64
-+	help
-+	  The Airoha AN7583 is a ARM-based SoC with a quad-core Cortex-A7
-+	  including NEON and GPU, Mali-450 graphics, several DDR3 options,
-+	  crypto engine, built-in Wi-Fi / Bluetooth combo chip, JPEG decoder,
-+	  video interfaces supporting HDMI and MIPI, and video codec support.
-+	  Peripherals include Gigabit Ethernet, switch, USB3.0 and OTG, PCIe,
-+	  I2S, PCM, S/PDIF, UART, SPI, I2C, IR TX/RX, and PWM.
-+
- endchoice
- 
- config SYS_SOC
- 	default "en7523" if TARGET_EN7523
- 	default "an7581" if TARGET_AN7581
-+	default "an7583" if TARGET_AN7583
- 
- config SYS_BOARD
- 	default "en7523" if TARGET_EN7523
- 	default "an7581" if TARGET_AN7581
-+	default "an7583" if TARGET_AN7583
- 
- config SYS_CONFIG_NAME
- 	default "en7523" if TARGET_EN7523
- 	default "an7581" if TARGET_AN7581
-+	default "an7583" if TARGET_AN7583
- 
- endif
- 
-diff --git a/arch/arm/mach-airoha/Makefile b/arch/arm/mach-airoha/Makefile
-index 91395b8a8503..51d82ea3e217 100644
---- a/arch/arm/mach-airoha/Makefile
-+++ b/arch/arm/mach-airoha/Makefile
-@@ -4,3 +4,4 @@ obj-y	+= cpu.o
- 
- obj-$(CONFIG_TARGET_EN7523) += en7523/
- obj-$(CONFIG_TARGET_AN7581) += an7581/
-+obj-$(CONFIG_TARGET_AN7583) += an7583/
-diff --git a/arch/arm/mach-airoha/an7583/Makefile b/arch/arm/mach-airoha/an7583/Makefile
-new file mode 100644
-index 000000000000..886ab7e4eb9f
---- /dev/null
-+++ b/arch/arm/mach-airoha/an7583/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y += init.o
-diff --git a/arch/arm/mach-airoha/an7583/init.c b/arch/arm/mach-airoha/an7583/init.c
-new file mode 100644
-index 000000000000..4cf7f8caf85c
---- /dev/null
-+++ b/arch/arm/mach-airoha/an7583/init.c
-@@ -0,0 +1,66 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+#include <fdtdec.h>
-+#include <init.h>
-+#include <linux/sizes.h>
-+#include <sysreset.h>
-+#include <asm/armv8/mmu.h>
-+#include <asm/global_data.h>
-+#include <asm/system.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int print_cpuinfo(void)
-+{
-+	printf("CPU:   Airoha AN7583\n");
-+	return 0;
-+}
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	gd->bd->bi_dram[0].start = gd->ram_base;
-+	gd->bd->bi_dram[0].size = get_effective_memsize();
-+
-+	if (gd->ram_size > SZ_2G) {
-+		gd->bd->bi_dram[1].start = gd->ram_base + SZ_2G;
-+		gd->bd->bi_dram[1].size = gd->ram_size - SZ_2G;
-+	}
-+
-+	return 0;
-+}
-+
-+void reset_cpu(void)
-+{
-+	psci_system_reset();
-+}
-+
-+static struct mm_region an7583_mem_map[] = {
-+	{
-+		/* DDR, 32-bit area */
-+		.virt = 0x80000000UL,
-+		.phys = 0x80000000UL,
-+		.size = SZ_2G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
-+	}, {
-+		/* DDR, 64-bit area */
-+		.virt = 0x100000000UL,
-+		.phys = 0x100000000UL,
-+		.size = SZ_4G + SZ_2G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
-+	}, {
-+		.virt = 0x00000000UL,
-+		.phys = 0x00000000UL,
-+		.size = 0x40000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* List terminator */
-+	}
-+};
-+struct mm_region *mem_map = an7583_mem_map;
-diff --git a/board/airoha/an7583/MAINTAINERS b/board/airoha/an7583/MAINTAINERS
-new file mode 100644
-index 000000000000..71ee542a8bcb
---- /dev/null
-+++ b/board/airoha/an7583/MAINTAINERS
-@@ -0,0 +1,5 @@
-+AN7581
-+M:	Christian Marangi <ansuelsmth@gmail.com>
-+S:	Maintained
-+N:      airoha
-+N:      an7583
-diff --git a/board/airoha/an7583/Makefile b/board/airoha/an7583/Makefile
-new file mode 100644
-index 000000000000..d582684d1f7f
---- /dev/null
-+++ b/board/airoha/an7583/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y	+= an7583_rfb.o
-diff --git a/board/airoha/an7583/an7583_rfb.c b/board/airoha/an7583/an7583_rfb.c
-new file mode 100644
-index 000000000000..aa73679d929e
---- /dev/null
-+++ b/board/airoha/an7583/an7583_rfb.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Author: Christian Marangi <ansuelsmth@gmail.com>
-+ */
-+
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int board_init(void)
-+{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
-+
-+	return 0;
-+}
-diff --git a/configs/an7583_evb_defconfig b/configs/an7583_evb_defconfig
-new file mode 100644
-index 000000000000..16466be51b27
---- /dev/null
-+++ b/configs/an7583_evb_defconfig
-@@ -0,0 +1,79 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_AIROHA=y
-+CONFIG_TARGET_AN7583=y
-+CONFIG_TEXT_BASE=0x81E00000
-+CONFIG_SYS_MALLOC_F_LEN=0x4000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_ENV_OFFSET=0x7c000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="an7583-evb"
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_BUILD_TARGET="u-boot.bin"
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DEFAULT_FDT_FILE="an7583-evb"
-+CONFIG_SYS_PBSIZE=1049
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_SYS_MAXARGS=8
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_BOOTMENU=y
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_XIMG is not set
-+CONFIG_CMD_BIND=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_SPI=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_LOG=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SYS_RX_ETH_BUFFER=8
-+CONFIG_SYSCON=y
-+CONFIG_CLK=y
-+CONFIG_DMA=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MMC_MTK=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_EON=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_AIROHA_ETH=y
-+CONFIG_PHY=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_AIROHA_AN7583=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_RAM=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_AIROHA_SNFI_SPI=y
-+CONFIG_SHA512=y
-diff --git a/include/configs/an7583.h b/include/configs/an7583.h
-new file mode 100644
-index 000000000000..c865afea1a2a
---- /dev/null
-+++ b/include/configs/an7583.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Configuration for Airoha AN7583
-+ */
-+
-+#ifndef __AN7583_H
-+#define __AN7583_H
-+
-+#include <linux/sizes.h>
-+
-+#define CFG_SYS_UBOOT_BASE		CONFIG_TEXT_BASE
-+
-+#define CFG_SYS_INIT_RAM_ADDR           CONFIG_TEXT_BASE
-+#define CFG_SYS_INIT_RAM_SIZE           SZ_2M
-+
-+/* DRAM */
-+#define CFG_SYS_SDRAM_BASE		0x80000000
-+
-+#endif
--- 
-2.53.0
+More specifically the use case we are trying to tackle here is initial
+provisioning or recovery of blank or corrupted persistent storage:
 
+Boot ROM -> host-loaded bootstrap -> fastboot -> provision storage
+
+At that point U-Boot proper may not exist on the device yet; it may be
+one of the images that fastboot is expected to write on the storage
+(through SPL indeed).
+
+It is possible to include U-Boot proper in the host-loaded bootstrap and
+use its existing fastboot implementation. That is a valid approach and
+is preferable where the Boot ROM download limit and memory budget allow
+it. But it is not always possible: some platforms (like the one we
+are enabling) impose a strict size limit on the bootstrap, or only
+provide enough early memory for the DDR initialization code and (small)
+SPL-sized payload.
+
+Fastboot in SPL provides the smaller alternative for those platforms.
+It is intended as a provisioning endpoint, not as part of the normal
+installed boot path. Once storage has been provisioned, the usual SPL-
+to-U-Boot-proper flow remains unchanged.
+
+Hope this clarify the background of this work,
+
+Cheers!
+
+--
+Carlo Caione
