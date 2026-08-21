@@ -1,73 +1,73 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF28C5DF7D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 09:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ABEC5DF92
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 09:30:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 011BE80FB3;
-	Fri, 21 Aug 2026 09:30:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 177A6608BA;
+	Fri, 21 Aug 2026 09:30:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z2gA2Ae6DwEx; Fri, 21 Aug 2026 09:30:15 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sdvDkhAit8Wz; Fri, 21 Aug 2026 09:30:18 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787304615;
-	bh=2ER57ajvPDcbB+0bTGny30AjAqDOoN0Qd/rOFf9IHGk=;
+	d=lists.u-boot-project.org; s=default; t=1787304618;
+	bh=L6asGVw1+PnHQu73KRGI8b81kH8oFvnkth5g8A8LHpQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=H/RFKeztetp3wsCfO29q2/r+pIbiZ02CapHMYIN21/Eq+i7cMm5E8tVczhgMkhqEr
-	 ph0J7IIgkI0M8WaQYGLfVCgNdUNzhrqvxuWoMD69iwMwGmruRgGuj3pjZ4/Pmzd/ub
-	 1ZchRkUxTTbTVQpIEQEGUXC9XKqOpI9oPgvBBCq/E2Zo9FF59oEsLY2XkbqpuwBgrG
-	 3v2rxsrEYnPxSHZXI8HjX1BMHDnpasPAwvVbz90UpeSXqV3kYa0GhuNztPG5W4Lbvg
-	 BRI9qHHdcLoJViQNPhWIRGMy5D3jLWeqIbqZRtqWKjEjxrYpsV8snFUGNpgPwQOo64
-	 w5fYUoxt9YJPw==
+	b=hZO8BrwEKVFKbmdNoJKBTWd/WCR2FVgnoDLJB5Er+6m+QbmSyHDoGINJy6Uz9qng0
+	 vxzZFiKnMOrZ9qazHYeJRicoy+yWRO88n1cj81R0C4XyYD68KgpJgyQQRChUzcYaN0
+	 eeBQ+tNOQgvac+GOP7ng/rj7H3De0+Mw723gdObTwxzNbV7SaL3UsopL66YhMJRXfZ
+	 oSWvAQmcAp6r7Cr/NwWAPkz5KrBwpmcjdfTMUNTKidjfhDPPPv08i0Z93yrk1TTGrU
+	 SaruPev3Xfyqdvmg9Wzhkh/WULWpBupbYaMCDSVAND6BdjjKlPfBStgiyTZ0bfOVqB
+	 73OgEX4MOlU8w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F186D80F14;
-	Fri, 21 Aug 2026 09:30:14 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 23234336
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D686960A5A;
+	Fri, 21 Aug 2026 09:30:17 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 036D8263
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 14BAA40931
+ by smtp4.osuosl.org (Postfix) with ESMTP id DDC9140912
  for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VRXIbZuld2Vt for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 09:30:11 +0000 (UTC)
-X-Greylist: delayed 64 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 21 Aug 2026 09:30:10 UTC
+ id N6MxwZyYg7qR for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 09:30:12 +0000 (UTC)
+X-Greylist: delayed 60 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 21 Aug 2026 09:30:11 UTC
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=jan.kiszka@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=G6W6D7DV
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.227;
- helo=mta-64-227.siemens.flowmailer.net;
- envelope-from=fm-294854-202608210929031541e5f58b0002079e-04jfyo@rts-flowmailer.siemens.com;
+ header.a=rsa-sha256 header.s=fm2 header.b=QwPvlSPl
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.226;
+ helo=mta-64-226.siemens.flowmailer.net;
+ envelope-from=fm-294854-20260821092903bcb2b30b71000207c3-htzsfd@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
-Received: from mta-64-227.siemens.flowmailer.net
- (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2789C4091E
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:09 +0000 (UTC)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
- 202608210929031541e5f58b0002079e
+Received: from mta-64-226.siemens.flowmailer.net
+ (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9F31F40930
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:11 +0000 (UTC)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
+ 20260821092903bcb2b30b71000207c3
  for <u-boot@lists.u-boot-project.org>;
  Fri, 21 Aug 2026 11:29:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=jan.kiszka@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=2ER57ajvPDcbB+0bTGny30AjAqDOoN0Qd/rOFf9IHGk=;
- b=G6W6D7DVXAe+Q0ESFkCct6AWML2Jh1HhX9ckNuBKnoRM69gr4M+oEC5p+is1aZbrjrAct5
- uj6VJbqETuwrHxA4HWS6ZmAwDuxPUsiY87/lO+DCuLHBJEQ6FBt7hSuxJ7XXinESpkIL4KcJ
- 2ZALERzPCbjjLWorTOoVH4DEdtdq94k+MMAX3KG8Im9FwDDU44ODvDCVCgsPJOg6aAar3tAL
- 7i1eD9saQgVtE3C3jOMUrvcX7KnCTx1uOd5f0oVxJwS8wjqN+WJnso3h5u/9yuOEqcwHpQNw
- LN3kNzJMmOY7b10hGq6b2WplTUpleLetq8FEojZICyAz6zu6hcrWAf3Q==;
+ bh=L6asGVw1+PnHQu73KRGI8b81kH8oFvnkth5g8A8LHpQ=;
+ b=QwPvlSPl7BtfxlvedBRmvlWhSlpZJgs5ZzSoJEkfAqXuV7K0kC+BME7/e4DQOGQUDVlU6h
+ Ntt7gumT6oV0zCV8VSS6PIE98UJrK7ocsnam3xlThCW4tP+yR8+xsF8Ds+ZarmrA3fl/yDnK
+ HnFBprWSP20hPfupo6YjCQDko4zfEVI9j2D8cxs/87rzKWXcFfVxk93D6FGYqABKhaSS8E/b
+ ry/YK1yAAQb8wkvVNTIkjdXCyQd1BhKbQXv9MpGD5SHquQnsUru/qIH+dkHQp1qHYot39nDc
+ n/NysEEjx/GgeLckVn7aAW6ClWLH65xUtVLUI3vg1gE5FFPnlAZIlwbA==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
@@ -75,9 +75,9 @@ Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
  Sai Sree Kartheek Adivi <s-adivi@ti.com>,
  Alexander Heinisch <alexander.heinisch@siemens.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH 4/4] mmc: Make "MMC Device not found" a debug output
-Date: Fri, 21 Aug 2026 11:29:01 +0200
-Message-ID: <f0eb5e71d6a53ee22c622ecfef8849ace1c12ce2.1787304541.git.jan.kiszka@siemens.com>
+Subject: [PATCH 3/4] mmc: Call back to optee after a successful mmc_init
+Date: Fri, 21 Aug 2026 11:29:00 +0200
+Message-ID: <a95292a0b1dc11096c34916c020173f1671c492b.1787304541.git.jan.kiszka@siemens.com>
 In-Reply-To: <cover.1787304541.git.jan.kiszka@siemens.com>
 References: <cover.1787304541.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
@@ -99,48 +99,39 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jan Kiszka <jan.kiszka@siemens.com>
 
-Callers of find_mmc_device are generally processing and informing about
-errors already, e.g.
-
-=> mmc dev 2
-MMC Device 2 not found
-no mmc device at slot 2
+This is needed to that OP-TEE can re-enumerate services which need RPMB
+access that may have become available now.
 
 Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 ---
 CC: Peng Fan <peng.fan@nxp.com>
 CC: Jaehoon Chung <jh80.chung@samsung.com>
 ---
- drivers/mmc/mmc-uclass.c | 2 +-
- drivers/mmc/mmc_legacy.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/mmc/mmc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index 698530088fe..cd930807802 100644
---- a/drivers/mmc/mmc-uclass.c
-+++ b/drivers/mmc/mmc-uclass.c
-@@ -319,7 +319,7 @@ struct mmc *find_mmc_device(int dev_num)
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 670e92ee12b..2463e50cd3c 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -27,6 +27,7 @@
+ #include <linux/list.h>
+ #include <linux/printk.h>
+ #include <div64.h>
++#include <tee/optee.h>
+ #include "mmc_private.h"
  
- 	if (ret) {
- #if !defined(CONFIG_XPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
--		printf("MMC Device %d not found\n", dev_num);
-+		debug("MMC Device %d not found\n", dev_num);
- #endif
- 		return NULL;
- 	}
-diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
-index 8f8ba34be71..2a4a8a83fb3 100644
---- a/drivers/mmc/mmc_legacy.c
-+++ b/drivers/mmc/mmc_legacy.c
-@@ -45,7 +45,7 @@ struct mmc *find_mmc_device(int dev_num)
+ #define DEFAULT_CMD6_TIMEOUT_MS  500
+@@ -3168,6 +3169,9 @@ int mmc_init(struct mmc *mmc)
+ 				mmc->cfg->name);
  	}
  
- #if !defined(CONFIG_XPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
--	printf("MMC Device %d not found\n", dev_num);
-+	debug("MMC Device %d not found\n", dev_num);
- #endif
++	if (CONFIG_IS_ENABLED(OPTEE) && mmc->capacity_rpmb > 0)
++		optee_rpmb_available();
++
+ 	return err;
+ }
  
- 	return NULL;
 -- 
 2.47.3
 
