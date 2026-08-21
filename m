@@ -4,101 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C73C5DF89
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:14:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD14C5DF89
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 13:14:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C74A840D1A;
-	Fri, 21 Aug 2026 13:14:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6990740C3E;
+	Fri, 21 Aug 2026 13:14:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1AcAmkw7Kj_i; Fri, 21 Aug 2026 13:14:30 +0000 (UTC)
+ id dkEZgmnBhB0k; Fri, 21 Aug 2026 13:14:39 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787318070;
-	bh=uX3hYsmv9qDZKLgbWuC1sGIRyLyTp5NH1TTHhCyiDK8=;
-	h=From:Date:Subject:In-Reply-To:References:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787318079;
+	bh=HrPgnIHeq4cFyK/AEvCe99MeH0e/iWUMnbxmzeRgrQg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=M/QXZxAwBkrRoBjvQFdfkWwjeAaM6qADjqfMoPi450ohM8FtcFXbqG2u66RI4wauT
-	 W8pTh0u7gjl0BFR7qOUlCbG3gUpU1YIcaUXOQLoqaDjodDHUmEf6ZaPZrL+0vanwQO
-	 qHVHgwNxxIVwIJv6uS8GHTGnWZB9eUcdqzZpHlXR8Ob6+RXGyP+XrAiardlqKUux3q
-	 kiX520cDLySYOKf2OBJ3ib4smkd8NuK11KsJ8UsE6LFOb60XgXgWHBX81yXPgFxfS9
-	 QpPGoOfr5oN5E+BSw/u179w7/KlKjGsg7O6myH7Wk/5b8DTuu5Z40OmUdmq8PLEN80
-	 UHPpJhvZDBCww==
+	 From;
+	b=CErbuiJM5PIvz3H3igdbSMLEjPeniPV5kdQoJvE05YA1Qsf37a+iEtoFwlCahz5La
+	 FuX641XgRshAQ/NJO1seudEDTtM+FzpqHwPUgqeXLdoI4sGKXdBwhy4jcJDBmKF1P+
+	 to4jgJncDBsUpZW9bVygxhsDkwUlWSiTyxArWsS+YHd8FYDnKIBtgZ9jHmFYmjOYT7
+	 RZGjiT7qdNFS/GWuNm+n6LH2zcdEknuHJQ6gd4yTy2czndBGm1f1IRYQbUQ/QlR+oJ
+	 /FYaPA/Odm7pCPP77D8S4goDCoermT2EMTX7MKlFHcAXHfC7Fepo8UpJ5hi85siUVB
+	 /OX7vOq69dCAQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B59540D11;
-	Fri, 21 Aug 2026 13:14:30 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3602239E
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:07:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3119840CB7;
+	Fri, 21 Aug 2026 13:14:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id EBC3E4B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:46:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 18B2C80EEB
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:07:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id DDB8160661
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:46:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dQ2RVURVzCfG for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 07:07:46 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org;
- envelope-from=devnull+estebancalba.gmail.com@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=WEIMtNbC
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E240780EE9
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 07:07:45 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 33E2942E14;
- Fri, 21 Aug 2026 07:07:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 162A0C19425;
- Fri, 21 Aug 2026 07:07:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1787296064;
- bh=d81w9N3vV4jdlB8bS4nrtRZEufRk8oBi9aYkm1vTqG8=;
- h=From:Date:Subject:In-Reply-To:References:To:Cc:Reply-To:From;
- b=WEIMtNbCf5j7S+HS2HVADNVDAJWga+MCArWPEApNejHMCWqD603Iw8MsRPcARJFHK
- 8FZgWnScepulm48bE/7cSLoiolA0z8jN2mn0WyrAq9kV2TS819787ARj4KP0Kp2PI0
- vjvbVdkvC1qj+Ix7l3J253Izem3vwV6Xd7vOIlIISb6BeKi3sNA3fFUuS+G55AEllV
- UaYdGcL/dW8pKtSp80cM3jmVP07CC3Dr6hZ5Dy08CabDTCBHkw/BGSnzQWs8k6gGeO
- sqlrrSbXQAWcK3R2obrYGLHWajX6NdFSW5+2S4oIqmoN652LukaPjfj2PUvVBusCXh
- 47fjZxFr0HGWg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E655CC5DF7D;
- Fri, 21 Aug 2026 07:07:43 +0000 (UTC)
-From: Esteban Alba via B4 Relay <devnull+estebancalba.gmail.com@kernel.org>
-Date: Fri, 21 Aug 2026 02:07:43 -0500
-Subject: [PATCH v2] net: net6: validate IPv6 payload and transport lengths
- on receive
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260821-net6-len-validation-v2-1-29bd39f946e0@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAD75h2oC/32NQQ6CMBBFr0Jm7RjaBVVX3sOwKO0UxkAxbWk0h
- LtbcO/yJe+/v0KkwBThVq0QKHPk2ReQpwrMoH1PyLYwyFo29aVW6Ck1OJLHrEe2OhUfjVWCnL0
- 2Wjkoy1cgx++j+mh/HJfuSSbtqd0YOKY5fI7bLHbv/0MWKJCsc1IJ0zlp7v2keTybeYJ227YvT
- hucFMgAAAA=
-X-Change-ID: 20260807-net6-len-validation-cd71efd96a7f
-In-Reply-To: <20260807-net6-len-validation-v1-1-edff271cbf2c@gmail.com>
-References: <20260807-net6-len-validation-v1-1-edff271cbf2c@gmail.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id weQ_x7lwsu3M for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 08:46:11 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=209.85.128.49;
+ helo=mail-wm1-f49.google.com; envelope-from=tanurelinux@gmail.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=fail (p=none dis=none) header.from=linux.com
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+ [209.85.128.49])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CA0826061D
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:46:10 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4955aa106b1so7237315e9.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 01:46:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787301969; x=1787906769;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=HrPgnIHeq4cFyK/AEvCe99MeH0e/iWUMnbxmzeRgrQg=;
+ b=QZxDYmMh7ZwHRbwMMX7hbXtAEjIRai5qTjn7MaGFt3ifCal+FC88y5yYarhie+0q4s
+ 4wOGTnxddT13xRKf5Jh2OzWQ3oiKdfG7njkQIjgJpcmIy1jFCbmZL16fkRXNXsuYkrub
+ o8sOfPM5vHicBMr/VrpT83TPmq7nSrs923zrWK/9KXGDxBRHfAhNiGuFf7/0Jb6Qtw8L
+ roF8FTMY5qg9/LM2ndQMeyuB0OE9w9/amFGvf1iHJlXc1cvVPdD5X8QI6KYN19kPXa8B
+ obKCRekPXi5yqECIM7DqLaKwyp9mEQVk6Enj3qFxmRB998zEMS9/fodmi487Ois7sqGc
+ VHgA==
+X-Gm-Message-State: AOJu0YwnZvRauIf6Mi/AYIKFfFQYfRgS2T6Ni2hCo7YbxK0hHnxVXLH6
+ hhzCG+NKjs1FncJcgBZcnVQqp0iGm5FRxTFqXVKsIa5lFDNHej0qo/oQzH6ARA==
+X-Gm-Gg: AR+sD13t4TlaNwiJiQkeaDNnbHl1xR4fLKK2yLv/oMmO4ZuGDE6h+dFa5y+eEx8mVO/
+ TLvHKetp4RXhMEGS5fBEwYywXp76eZkDn9AauAKshjcTPrtw78agGKDfnXivW1SafQL0q1K/KDs
+ aJPksOUBg7ilzlFPOivXQtpVQCIC0cX4HRzsQrB+D2fSR28G/T1jaLnN7805EkWLv5grO//SjxJ
+ EMu6dFbunQFlHL5oMozG4Fy1IR5Wx5776jJidiOaIxikU0AXBMgC5xaWHQ05niU1slu5Kz5EPn5
+ 2nxjs3b/6r2s9K2/AXkboXQR1h6iIhrbPCiZ5hiYFSDiGF4QmhTPoh++XEDeWbuAt5pjfGoHHCv
+ vMvmQvZptBXNhv0Xep6x3NK8Ap/Wt86wWEplqzPFnkDkTQQH2Xv38kmn6AC+HzHTgyzB2LdbMpu
+ 0Igts+iGllrCHyMG7u/qMhVDs3XpJgKsWodN/KlHXe1VBAynfkUnr2qjoCADBxSsANV/ULTVxQP
+ k7aIl918eRQdi3dKa2W0YluteM=
+X-Received: by 2002:a05:600c:6211:b0:499:621a:2ec2 with SMTP id
+ 5b1f17b1804b1-499b82e8e9dmr74210185e9.3.1787301968300; 
+ Fri, 21 Aug 2026 01:46:08 -0700 (PDT)
+Received: from threads.localdomain ([83.106.158.114])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-499b90e747esm22978115e9.4.2026.08.21.01.46.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Aug 2026 01:46:07 -0700 (PDT)
+From: Lucas Tanure <tanure@linux.com>
 To: u-boot@lists.u-boot-project.org
-Cc: trini@konsulko.com, rfried.dev@gmail.com, v.v.mitrofanov@yadro.com, 
- jerome.forissier@arm.com, sjg@chromium.org
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787296063; l=3321;
- i=estebancalba@gmail.com; s=20260808; h=from:subject:message-id;
- bh=B1o1ST4jOJ2e8Snq5dgcEV+I6sEAaDIE46Qusbt0PFs=;
- b=6sYAvn5Kxrtlk6o/HubL+tUHtLDjcHnP24BTi8BOwCc+cRccUZxFBf0oh4uDTwDY4QR1XAoh2
- Of9Shub8xIQCWmRmXSFuririKiM063yLb3Fq4rVNjcP4+Qap5r+q4EX
-X-Developer-Key: i=estebancalba@gmail.com; a=ed25519;
- pk=1BEuFs3cavGme7UfOyPkuXqt9/3FstTgVwsFSCXGO5o=
-X-Endpoint-Received: by B4 Relay for estebancalba@gmail.com/20260808 with
- auth_id=927
-X-Original-From: Esteban Alba <estebancalba@gmail.com>
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
+ funderscore@postmasteros.org, u-boot-amlogic@groups.io
+Subject: [PATCH v2 1/4] serial: meson: add Amlogic S4 UART support
+Date: Fri, 21 Aug 2026 09:46:00 +0100
+Message-ID: <20260821084603.25974-2-tanure@linux.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260821084603.25974-1-tanure@linux.com>
+References: <20260821084603.25974-1-tanure@linux.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 21 Aug 2026 13:12:32 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -111,98 +106,136 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: estebancalba@gmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Esteban Alba <estebancalba@gmail.com>
+The S4-generation UART (S4, T7, ...) derives its baud rate from the
+24 MHz crystal divided by 2, selected via the XTAL_DIV2 bit in the
+baud rate register, while older SoCs divide the crystal by 3. Add the
+"amlogic,meson-s4-uart" compatible with driver data selecting the
+div-by-2 scheme, matching the Linux driver (meson_s4_uart_data) and
+the configuration the vendor BL2 programs on T7 hardware.
 
-net_ip6_handler() checks the received length only against IP6_HDR_SIZE and
-then uses length fields from the packet without checking them. The checksum
-is computed over payload_len, but the UDP handler length comes from
-udp_len. A sender can keep payload_len correct so the checksum still
-validates and set udp_len larger than the frame. A handler that trusts that
-length then reads or writes past the receive buffer. The DHCPv6 client
-copies the declared number of bytes and can be made to write past the
-packet buffer from a single link-local ADVERTISE.
+Older SoCs keep the existing div-by-3 behaviour: Linux also uses
+div-by-2 on G12A, but both modes work there and switching would risk
+regressing boards that have shipped with div-by-3 for years.
 
-Validate payload_len against the received length and trim len to it before
-protocol dispatch. Validate the ICMPv6 and UDP header sizes before either
-header is dereferenced, and validate udp_len before reading udp_xsum or
-calling the UDP handler.
+Also drain the transmitter before changing the baud rate so in-flight
+characters are not garbled, as the Linux driver does.
 
-Fixes: 1feb697830ce ("net: ipv6: Add implementation of main IPv6 functions")
-Suggested-by: Jerome Forissier <jerome.forissier@arm.com>
-Signed-off-by: Esteban Alba <estebancalba@gmail.com>
+Assisted-by: Claude:claude-fable-5
+Signed-off-by: Lucas Tanure <tanure@linux.com>
 ---
-Validate the IPv6 payload length against the received frame before protocol
-dispatch, then validate the ICMPv6 and UDP transport header sizes and
-udp_len before either header is dereferenced or the UDP handler is called.
----
-Changes in v2:
-- Move payload_len reconciliation before protocol dispatch.
-- Validate ICMPv6 and UDP header sizes before dereferencing their headers.
-- Validate udp_len before reading udp_xsum or dispatching to the UDP handler.
-- Link to v1: https://patch.msgid.link/20260807-net6-len-validation-v1-1-edff271cbf2c@gmail.com
+ drivers/serial/serial_meson.c | 51 ++++++++++++++++++++++++++---------
+ 1 file changed, 38 insertions(+), 13 deletions(-)
 
-To: u-boot@lists.u-boot-project.org
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Jerome Forissier <jerome.forissier@arm.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>
-Cc: Simon Glass <sjg@chromium.org>
----
- net/net6.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
-
-diff --git a/net/net6.c b/net/net6.c
-index 4cff98df15..e1a455748e 100644
---- a/net/net6.c
-+++ b/net/net6.c
-@@ -392,11 +392,19 @@ int net_ip6_handler(struct ethernet_hdr *et, struct ip6_hdr *ip6, int len)
- 	if (ip6->version != 6)
+diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
+index cc71381f87e..d909fedcfc4 100644
+--- a/drivers/serial/serial_meson.c
++++ b/drivers/serial/serial_meson.c
+@@ -62,26 +62,49 @@ struct meson_serial_plat {
+ #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
+ #define AML_UART_REG5_BAUD_MASK		0x7fffff
+ 
++/* Driver data flags */
++#define MESON_UART_XTAL_DIV2	BIT(0)
++
+ #if CONFIG_IS_ENABLED(DM_SERIAL)
+-static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
++static u32 meson_uart_xtal_div(struct udevice *dev)
++{
++	/*
++	 * S4-generation UARTs (S4, T7, ...) derive the baud rate from the
++	 * crystal divided by 2, older ones divide by 3.
++	 */
++	return (dev_get_driver_data(dev) & MESON_UART_XTAL_DIV2) ? 2 : 3;
++}
++
++static u32 meson_calc_baud_divisor(struct udevice *dev, ulong src_rate, u32 baud)
+ {
+ 	/*
+ 	 * Usually src_rate is 24 MHz (from crystal) as clock source for serial
+-	 * device. Since 8 Mb/s is the maximum supported baud rate, use div by 3
+-	 * to derive baud rate. This choice is used also in meson_serial_setbrg.
++	 * device. Since 8 Mb/s is the maximum supported baud rate, use a
++	 * divided crystal to derive the baud rate. This choice is used also in
++	 * meson_serial_setbrg.
+ 	 */
+-	return DIV_ROUND_CLOSEST(src_rate / 3, baud) - 1;
++	return DIV_ROUND_CLOSEST(src_rate / meson_uart_xtal_div(dev), baud) - 1;
+ }
+ 
+-static void meson_serial_set_baud(struct meson_uart *uart, ulong src_rate, u32 baud)
++static void meson_serial_set_baud(struct udevice *dev, struct meson_uart *uart,
++				  ulong src_rate, u32 baud)
+ {
+ 	/*
+-	 * Set crystal divided by 3 (regardless of device tree clock property)
++	 * Set the divided crystal (regardless of device tree clock property)
+ 	 * as clock source and the corresponding divisor to approximate baud
+ 	 */
+-	u32 divisor = meson_calc_baud_divisor(src_rate, baud);
++	u32 divisor = meson_calc_baud_divisor(dev, src_rate, baud);
+ 	u32 val = AML_UART_REG5_USE_XTAL_CLK | AML_UART_REG5_USE_NEW_BAUD |
+ 		(divisor & AML_UART_REG5_BAUD_MASK);
++
++	if (meson_uart_xtal_div(dev) == 2)
++		val |= AML_UART_REG5_XTAL_DIV2;
++
++	/* Drain the transmitter before changing the baud rate */
++	while ((readl(&uart->status) & (AML_UART_TX_EMPTY | AML_UART_XMIT_BUSY))
++	       != AML_UART_TX_EMPTY)
++		;
++
+ 	writel(val, &uart->reg5);
+ }
+ 
+@@ -109,7 +132,7 @@ static int meson_serial_probe(struct udevice *dev)
+ 		return ret;
+ 	ulong rate = clk_get_rate(&per_clk);
+ 
+-	meson_serial_set_baud(uart, rate, CONFIG_BAUDRATE);
++	meson_serial_set_baud(dev, uart, rate, CONFIG_BAUDRATE);
+ 	meson_serial_init(uart);
+ 
+ 	return 0;
+@@ -165,8 +188,9 @@ static int meson_serial_setbrg(struct udevice *dev, const int baud)
+ {
+ 	/*
+ 	 * Change device baud rate if baud is reasonable (considering a 23 bit
+-	 * counter with an 8 MHz clock input) and the actual baud
+-	 * rate is within 2% of the requested value (2% is arbitrary).
++	 * counter with an 8 MHz, or 12 MHz for XTAL_DIV2 devices, clock input)
++	 * and the actual baud rate is within 2% of the requested value (2% is
++	 * arbitrary).
+ 	 */
+ 	if (baud < 1 || baud > 8000000)
+ 		return -EINVAL;
+@@ -179,14 +203,14 @@ static int meson_serial_setbrg(struct udevice *dev, const int baud)
+ 	if (ret)
+ 		return ret;
+ 	ulong rate = clk_get_rate(&per_clk);
+-	u32 divisor = meson_calc_baud_divisor(rate, baud);
+-	u32 calc_baud = (rate / 3) / (divisor + 1);
++	u32 divisor = meson_calc_baud_divisor(dev, rate, baud);
++	u32 calc_baud = (rate / meson_uart_xtal_div(dev)) / (divisor + 1);
+ 	u32 calc_err = baud > calc_baud ? baud - calc_baud : calc_baud - baud;
+ 
+ 	if (((calc_err * 100) / baud) > 2)
  		return -EINVAL;
  
-+	hlen = ntohs(ip6->payload_len);
-+
-+	if (len < IP6_HDR_SIZE + hlen)
-+		return -EINVAL;
-+	len = IP6_HDR_SIZE + hlen;
-+
- 	switch (ip6->nexthdr) {
- 	case PROT_ICMPV6:
-+		if (hlen < sizeof(struct icmp6hdr))
-+			return -EINVAL;
-+
- 		icmp = (struct icmp6hdr *)(((uchar *)ip6) + IP6_HDR_SIZE);
- 		csum = icmp->icmp6_cksum;
--		hlen = ntohs(ip6->payload_len);
- 		icmp->icmp6_cksum = 0;
- 		/* checksum */
- 		csum_p = csum_partial((u8 *)icmp, hlen, 0);
-@@ -421,9 +429,15 @@ int net_ip6_handler(struct ethernet_hdr *et, struct ip6_hdr *ip6, int len)
- 		}
- 		break;
- 	case IPPROTO_UDP:
-+		if (hlen < UDP_HDR_SIZE)
-+			return -EINVAL;
-+
- 		udp = (struct udp_hdr *)(((uchar *)ip6) + IP6_HDR_SIZE);
-+		if (ntohs(udp->udp_len) < UDP_HDR_SIZE ||
-+		    ntohs(udp->udp_len) > hlen)
-+			return -EINVAL;
-+
- 		csum = udp->udp_xsum;
--		hlen = ntohs(ip6->payload_len);
- 		udp->udp_xsum = 0;
- 		/* checksum */
- 		csum_p = csum_partial((u8 *)udp, hlen, 0);
-
----
-base-commit: ece349ade2973e220f524ce59e59711cc919263f
-change-id: 20260807-net6-len-validation-cd71efd96a7f
-
-Best regards,
---  
-Esteban Alba <estebancalba@gmail.com>
-
+-	meson_serial_set_baud(uart, rate, baud);
++	meson_serial_set_baud(dev, uart, rate, baud);
+ 
+ 	return 0;
+ }
+@@ -244,6 +268,7 @@ static const struct udevice_id meson_serial_ids[] = {
+ 	{ .compatible = "amlogic,meson-uart" },
+ 	{ .compatible = "amlogic,meson-gx-uart" },
+ 	{ .compatible = "amlogic,meson-a1-uart" },
++	{ .compatible = "amlogic,meson-s4-uart", .data = MESON_UART_XTAL_DIV2 },
+ 	{ }
+ };
+ 
+-- 
+2.55.0
 
