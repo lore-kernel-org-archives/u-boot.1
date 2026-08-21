@@ -4,114 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD5FC5DF8C
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 20:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48152C5DF7D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 20:07:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5E142812E6;
-	Fri, 21 Aug 2026 20:05:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0EF24812BB;
+	Fri, 21 Aug 2026 20:07:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HujAo-JH0Rud; Fri, 21 Aug 2026 20:05:14 +0000 (UTC)
+ id Ag8qTb5CeMsB; Fri, 21 Aug 2026 20:07:32 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787342714;
-	bh=Mwk7+gKdFjeHfT7wZ6zvLXBiJifW6XwOV7U2l3DSmEs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ifkeG9albkclgFc/d9tlPZRVlEB+3Gs52Gg4BiL/E88nU/CFxDO9if7ihr2Ys7T+6
-	 /nSxBZFXFelDPkTiG2ux3o0/aOBemPCMQgA+WfkenZIKmSs8+zB0/KoB/LhpHVJ2gd
-	 3oirotICS9CJSoucWtxjzR8mtNi3C0tbzXHsar/2WOIssG+YBQxwfgHmFEzM3xhyuZ
-	 8hkWmQKinJl22yscVZ2bqpUzRap0clJL4pxkc51Eb1pDBC69Y4/kZk1aZG/cRSlV2l
-	 RwPxlca0TO84ID/ic2KqbBIpvrdsZ937THQBHY/6YUkZ4uDfxaR98qR92BZqsQcsBo
-	 RzsEIS+NR3CJQ==
+	d=lists.u-boot-project.org; s=default; t=1787342852;
+	bh=RuSffF5Qh8exsRff2z6InZwpWQ7gbMYMDn9S4tFGs+c=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=psHk/QIotzP7DsQNOUW23jG8WokNBuzUMuCeo7xbfC7imv4Wjb3vmKI81HdDp/6Gk
+	 DZEGKYc+XTKoGjopYYM0nvyE4OCxaZwXEqIQEVbof++YsUcyIoWxZejox+C8QiBSN7
+	 3TGScZvS1nNo3SYzn/wD5KLzY8UAB/a18Q5z93kqjBtr4d7AdFqd+5Y3XZOGrrwJzr
+	 Jt/PpO6wsaikGkdYh+sNX6on9j6e/E0svjgrklyzihupNTHSje6A3YuL/scYgNctYO
+	 UTTkgDXXHV/gSwYN3yv56NKeAay0qZ3hXnltLl0sXUlbb6NPrRP19Zc37fN6+KQY/u
+	 5o1pGipCIWMiw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 98FC4812B5;
-	Fri, 21 Aug 2026 20:05:14 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3B1574B8
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 20:05:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F2E9F812B5;
+	Fri, 21 Aug 2026 20:07:31 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9831D4B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 20:07:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 20CD6812B5
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 20:05:13 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8372960A96
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 20:07:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9ycecofu6TDA for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 20:05:12 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GluNAppcr5QS for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 20:07:30 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ client-ip=2001:4860:4864:20::32; helo=mail-oa1-x32.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=YxstCw91
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 56A31812A1
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 20:05:11 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7e6b5737bb2so1786191a34.1
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 13:05:11 -0700 (PDT)
+ header.s=google header.b=Xil9fFYW
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C01AA60A87
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 20:07:29 +0000 (UTC)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-4563ac048f4so1327538fac.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 13:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787342710; x=1787947510;
+ d=konsulko.com; s=google; t=1787342848; x=1787947648;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Mwk7+gKdFjeHfT7wZ6zvLXBiJifW6XwOV7U2l3DSmEs=;
- b=YxstCw91oRux5VLl5PL0a70C9p0UNZM49hh/bvwFYz86DFrE5NX4SUfXD9JjcGvFIg
- h3gwM6FMOYe9ZmIs8Q5NJktsBmBKtwbHH99dIZuMZ59bLwZDO85Uy8biPteNJknXiS9s
- ZdGdJVL57Cur7mQzroFCJyhqPJ5Q4dKEVUGhw=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=RuSffF5Qh8exsRff2z6InZwpWQ7gbMYMDn9S4tFGs+c=;
+ b=Xil9fFYWXuGB/Vh9uQ9SmVmFE7+f0EJ68hlraCfM+RtSBSytpaetQ/SrQsPbwZXgBX
+ 3ElOgzmDIc/8EPYV4EI4CgaBq+/7Fbr0teHO1T3v7JudKXq7HkaChFVXeBKV2jy9HpOO
+ +cUD7a7qpu5EOUAQAa9E+lzbhzpF/GkBnuNG4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787342710; x=1787947510;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Mwk7+gKdFjeHfT7wZ6zvLXBiJifW6XwOV7U2l3DSmEs=;
- b=Qlsb1dlZYaBr/4sMzqWdlD94sr8eTeW/yjP9gMLQ4dmIlYwxtoWNAcRx+8p0T7+xZF
- /o7a7JkwFB0NW4Mq9FlGvUHPDhYcefO4AIOrrOqxkzOyz6RSX0ePNrW3tDw+E0OzVF+Y
- lpRZ6Yi8fRWfJzwHoJmZFXliCztZfig8bcVxJoaVoUZXgsdvwBPt7HiTXS3rTb5CyT8J
- nPH0KaiaM3Ja9+rZ7QOtaIJVI6lS32fPLe8k32mxPeC3RyBQQJ/vPTu3JoihhhNMrvMg
- GB4YWGAsnuga9YffgLgkrI52wLohBWBvzeGpvsslMM8NyBHR1vUIhAaFNN3/DyHckt2/
- 8mLg==
-X-Gm-Message-State: AOJu0YzX9CUnASrZ6dpZrPLP29x1utL5zMtXfVawfP9XWM5rrBX+7R7d
- bQV1vh+DR3lZa9uQuL/RDLOSHcbd0SoE9PDTfLHsOlUsTnBVMl/F+CpYYyRAFHzbD9I=
-X-Gm-Gg: AR+sD13wi1iJNQA0q9vWSv6k2egOt+cXr/zPul12Eg5Kgl69tWBZj7SNvYe6BUkLaEb
- Qg9jeP0eJNNibneQpc1pzPWFDKGhwhvuVk27UoR/yyYJLmUqqPN7+Zy+cUgTzG0Dj9KDE5WaiYT
- e2Rqus1FMBiRBilBAn6+dBgE7Wb52JXFG+pu+0SDi7zcBa5W/vkAXz8xKKjhQID/W8H+9e9h5oL
- SObLeoHfoiJZA2XrILYhqO0fIv1n3ztm+BHFj2T+MqxneACugbWVA0hjIVf5zcsCsRK8O2MbAVn
- WiVvlxJPPc5ZvJJRUW47G28qFK/16oQrYWOR0Livy24DEHM/wYdRe6wZx8KAtVkq9K6Hc26FKmI
- MGH/E5xXkq/TqFyCrhqfzIx1mKdWpGLLMJedJWgasfwd7y0H1tXecmYEPFS5pJGd/EPNDW0qm7N
- 6OlyGa450SR6XlV4mZW15fF7H3tEpwzl10Xfh/n6UZCHSfM/AYkEMTLg7jz2QpISEgG742S++9G
- bBeSrTYcu+Em187g6ynPx0VS6LBj+wPy9ClD10iuVTerJ24KdcWuRde8v9VBtuKA/Tb2axMw9zD
- xqi6VLYjkg==
-X-Received: by 2002:a05:6830:67d5:b0:7d7:d524:bc88 with SMTP id
- 46e09a7af769-7f46195a122mr10674413a34.10.1787342710564; 
- Fri, 21 Aug 2026 13:05:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f46e2722besm1366334a34.17.2026.08.21.13.05.09
+ d=1e100.net; s=20251104; t=1787342848; x=1787947648;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=RuSffF5Qh8exsRff2z6InZwpWQ7gbMYMDn9S4tFGs+c=;
+ b=XhDuDBxOEoKMQgAstj05M1z6Iz7aKFmxV0s7cOSGGDzlH2cMtQ0yKhiJ0JWKfcYAQ8
+ lIAXzjZyf9/BzGlxDEdYPweHiKyzmZSWUbMfTfJ2T4oPsRuqL9HPQB2M4pHQp4YAIIqU
+ mo5A//T9M0xq7GzAkiBrmfPyb2bH/r+Y0OjSsH6CGnOaWb25UU7GmkjvAgwPPf5kSkTt
+ YByv5QOKjfwevMRdegs2j7zt4sXBvewbDaMtuXBj56WSWBEEyRqk2Y3/4G/emPdnPJ9O
+ f7MYYvA3gRwHZMMi/Y2bST041AYX0FcSZzWofp/plhSku5Q0+cOVdQ1FoTXfCheY7u30
+ Iv/w==
+X-Gm-Message-State: AFuF++m8WmvGNUW79gTFeW3i3/51lrv6YQYfsB3wfT4GgPfwRy91ZwI+
+ Ofe52vegwHXB/P1MrqcQTkq/uVtyeITgfhQmPhy1+WzPz2P9gb3/hLMhrKu8CE+mBOF9opbrmhR
+ z0u3ZlfCBLvxy
+X-Gm-Gg: AR+sD12/fMq0b2nPHgc0QTCA4lD5k/ZH/L4DSw836GnQhsMcOQiZ97weS1USpkpiE9O
+ J/JWhoOpkSOr6eOXFzvgUpVSaT+l+Muf2YdjQZyrb9KyN3fhv0ymVElaA6De28p+avtZBCSpRBg
+ xEXtpFT+ao3mkyfKeISjtrMp8J9qoE6K4i2eXMGwpqv+ybTgk5IU5Z6Jp0D5JA85t196HJ6iplF
+ 5u+xPC2EQ98xNxQC9i1aoZic/u3/ETo1ruFdb2nVsHg/NV9MsGJUlJImKVDQ4wpIJlO1Y1otvKd
+ NUNXhlkZNGNoM3EDcmFxyGu51hMZVtDBCTTjyFyeQ+rYlV23xYBoye5SJ+tGMBXesE+ohj8xW4Z
+ ygPd4m86oNOx+MmY4g4K3h+soCNLeZ/i+DxkDDdQqZ/USaajc1aaIbLzijHdsfjkJoz8pJG+vpM
+ UMthceF2nlqnZ/xZWoFESCFswNGcg7/L1HWxhoSLil27oSrv2UbvM1BBJOwTqNlYn0f6J+4iQX0
+ 197vAiJRkmGU18tapNQsz5ww20JxuQPVqqqMrNAclzvm+xUQTWgZAz0F74WqG51jwBf3ap4I0cY
+ ZSygp+0P48aQLfRFRtE3RQgQDI4acemQJQ==
+X-Received: by 2002:a05:6870:46a9:b0:409:5241:8abc with SMTP id
+ 586e51a60fabf-463515d6c1amr9744682fac.20.1787342848481; 
+ Fri, 21 Aug 2026 13:07:28 -0700 (PDT)
+Received: from bill-the-cat.tailc58245.ts.net
+ (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-463831b4f5bsm296436fac.7.2026.08.21.13.07.27
+ for <u-boot@lists.u-boot-project.org>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2026 13:05:09 -0700 (PDT)
-Date: Fri, 21 Aug 2026 14:05:07 -0600
+ Fri, 21 Aug 2026 13:07:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.u-boot-project.org, git@amd.com,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 0/2] MAINTAINERS: Cleanup non existing files
-Message-ID: <20260821200507.GA3894128@bill-the-cat>
-References: <cover.1786605072.git.michal.simek@amd.com>
+To: u-boot@lists.u-boot-project.org
+Subject: [PATCH] MAINTAINERS: Drop reference to non-existent
+ drivers/sysinfo/gxp.h
+Date: Fri, 21 Aug 2026 14:07:26 -0600
+Message-ID: <20260821200726.3903737-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mPBG9JdEynw6MRpD"
-Content-Disposition: inline
-In-Reply-To: <cover.1786605072.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,38 +119,27 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+The file in question was never added when the driver was added, and
+isn't required. Remove this line.
 
---mPBG9JdEynw6MRpD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: d44c3a7bca77 ("sysinfo: add HPE GXP sysinfo driver")
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ MAINTAINERS | 1 -
+ 1 file changed, 1 deletion(-)
 
-On Thu, Aug 13, 2026 at 09:11:15AM +0200, Michal Simek wrote:
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 451958ec1145..f5ec830e4a33 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -340,7 +340,6 @@ F:	configs/gxp_defconfig
+ F:	doc/device-tree-bindings/spi/hpe,gxp-spi.yaml
+ F:	drivers/misc/gxp_eeprom.c
+ F:	drivers/sysinfo/gxp.c
+-F:	drivers/sysinfo/gxp.h
+ F:	drivers/timer/gxp-timer.c
+ F:	drivers/spi/gxp_spi.c
+ 
+-- 
+2.43.0
 
-> Hi,
->=20
-> I found in my Microblaze fragment that cmd_mfsl.c doesn't exist but still
-> it is recorded. That's why I wanted to check all entries and found that
-> there are also other files which doesn't exist.
->=20
-> Tom: maybe good to run it in a CI to make sure that we don't get out of
-> sync.
-
-Sounds like a good idea. I see between your posting and today another
-bad entry has been added, I'll go take care of it.
-
---=20
-Tom
-
---mPBG9JdEynw6MRpD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoivcAAKCRAr4qD1Cr/k
-Cmt0AQD9uT4FZpfHL3/pi9RJ58Z4RHr/HNZUm0GHHOG/NscdUAD+PENWbyKjC4g2
-NbAOLrLeN+U028Z2UKbksU5/iV79fQM=
-=LOgA
------END PGP SIGNATURE-----
-
---mPBG9JdEynw6MRpD--
