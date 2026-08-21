@@ -4,165 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE42C5DF8C
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 18:49:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385CBC5DF7D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 18:55:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7487540A17;
-	Fri, 21 Aug 2026 18:49:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C2BE140A09;
+	Fri, 21 Aug 2026 18:55:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CMQ9rJ052iFS; Fri, 21 Aug 2026 18:49:46 +0000 (UTC)
+ id sRegShUvnThj; Fri, 21 Aug 2026 18:55:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787338186;
-	bh=AIPZrD2r4F5r0DScOItjEJHH89P8sTcGVW8MU0VxYaE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787338521;
+	bh=U/GMGczohtHjqG0p9Io1Go//HM4H/6Lv4F31m8BwqPg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=1CaYkvQ+Qc1s5ad79RI7kIN52y9eMq9650hh0XgO4Y3LhkRMyilWkVmbD9uOcfKSo
-	 L9QIk4oQLw7ao4D3KRW1xi43oDr7hIlvRwPD0ypzwT9VnW4nEuuBsM7U+OoqXG4DCe
-	 iBtLlBJfjb9cCvVaHG2J307RoasmmPt4KXFs1AyV1GSdnI/QmKyGZRj61ylu2nmXUR
-	 KaCms/unMIUihCFiClhvLiWoi7LCNW7463bVagvuGm+l+uAtRw++WBqtihT7y/zoBg
-	 UvqV/N+18UFTf1nDzZXmShgLknv2IlEsJuQbrQ7MHDHxjh8RK/AItrV8k9kqXnxFEJ
-	 67/WNNWahvNXQ==
+	b=vt3xnNWDd7WROzu+/PrpOTAwtKhEh6+MmFPad/CV4CEj9czHi4JQr86GnKOqFXslx
+	 VcEI4BNrB6TsR1WhiEzSEDRWILVnFw8kwbBYY8o1jvQBe2bn2paPD8maLf9AM54tU4
+	 oMCcYEciK0t5YdBAreEeDlC8R1TRWi4ja4f2SQq1p0cQUHkQlH9XTMokTvhWsO06UU
+	 JdefOug24MQeguGk234Zs1+/XYmNDtbmQZYAekQQKweSJb9PMFVLKCaI0IzboIPVtx
+	 EDkFOIyLBjqv38npTwhW/SyiM/ZcAtVX8sOcyK4vtRFMGN1QX4Oehs6IKt5zrL7bnN
+	 Eo8quwlzTY4Lw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9F7114097C;
-	Fri, 21 Aug 2026 18:49:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id BB0F9336
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:49:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BF42440A0B;
+	Fri, 21 Aug 2026 18:55:21 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 38C944C4
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:55:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A96ED60AB9
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:49:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 164C540447
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:55:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qhrMckRiZP-k for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 18:49:43 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::5;
- helo=duzpr83cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=YIpCSet7
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 77B09606BD
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:49:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ql0BUcFfUZ24C45VhLIb9PVtOMMbAg8uwTrAmMLv5Tnk/uKPP4zituQ1/woz7ib/GanErTOcfa38K3d25433wG626NaIK1ceN7kjqkFbrSh7IpcU6XIIgE2oX8Xjr6NgqoaV73WPDpMrZHaJY9wS03fGPrVzUua4ka3YWFA95wwnuSLx3gEh8aCSlgMyel7aNUR+0OH1THnu3j+zbR43a5YyH8x/5lwoLVDwOgPAm9duQPq3bU8bus/+5S9h5h20a3DfIKupUK6pdocps/XIBVcNXb4VlR23X5CrMbS0jnu2dEeiqXZwGFdKOBG0xoIdTe9l4pz6wvm8SJHi0AYc9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AIPZrD2r4F5r0DScOItjEJHH89P8sTcGVW8MU0VxYaE=;
- b=szlrq574bkpn70b/eND8ygk95rm2yVikcgPjfEFh64zJuItIQ7aFLsRpcBONYMcwF1UgBcpzR027k5uEBPUb9cyiwLwHUHNVEP15CbMU9dFvbehheqjuxkIuW+S6iiqG36zUIfsz/Zp/ijBok2Kla61BLEu2LIpOKEkGAZW1nzeC/kXOmdn7SEVzbk0EZNBi36LWmGj93KosXcVtS+26BdqCsXKJ3NLWuiEtba1oduOveTsHiuzbrr+wBpsi2XpCtmwjW8ZB57bg8/zUST5bTVNuGadx0ZhD3sVBP1zLpzPbydqSob7fxc89OpKSdTQTmnk/z0cje3SJCjO+q249uA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AIPZrD2r4F5r0DScOItjEJHH89P8sTcGVW8MU0VxYaE=;
- b=YIpCSet7723XQTZmfMTpZPijNxgOKMYRFOEDqEIh75l3tZDqJSVL92NuSEZUftMmIU32B2NeRTHVOfCk94ICiQnu5EK18/ii7JwuWimKpWA/67ljQZz0+ae7D94kofmZgzhT3nT4lFaSqpYZ0U7UCLTs36rMdSiWRbBvEP7qLgk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from VI2PR04MB11147.eurprd04.prod.outlook.com
- (2603:10a6:800:293::14) by PA4PR04MB8062.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.11; Fri, 21 Aug
- 2026 18:49:39 +0000
-Received: from VI2PR04MB11147.eurprd04.prod.outlook.com
- ([fe80::c859:7e6d:9345:afe1]) by VI2PR04MB11147.eurprd04.prod.outlook.com
- ([fe80::c859:7e6d:9345:afe1%6]) with mapi id 15.21.0339.008; Fri, 21 Aug 2026
- 18:49:39 +0000
-Message-ID: <246f8c07-d77e-41a5-bc67-5f77c1c522b0@cherry.de>
-Date: Fri, 21 Aug 2026 19:18:46 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] watchdog: report effective timeout
-To: Juuso Rinta <juuso.rinta@nokia.com>, u-boot@lists.denx.de,
- u-boot@lists.u-boot-project.org
-Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Aaro Koskinen <aaro.koskinen@nokia.com>
-References: <20260818-rinta-watchdog-gettime-v3-0-423f5caf526d@nokia.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260818-rinta-watchdog-gettime-v3-0-423f5caf526d@nokia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0058.eurprd01.prod.exchangelabs.com
- (2603:10a6:803::35) To VI2PR04MB11147.eurprd04.prod.outlook.com
- (2603:10a6:800:293::14)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aW5T582jaIni for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 18:55:19 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::4;
+ helo=mail-oi2-x04.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=dX+bvh6a
+Received: from mail-oi2-x04.google.com (mail-oi2-x04.google.com
+ [IPv6:2607:f8b0:4864:32::4])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E276A4011F
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:55:16 +0000 (UTC)
+Received: by mail-oi2-x04.google.com with SMTP id
+ 5614622812f47-4960cd51443so109403b6e.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 11:55:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1787338515; x=1787943315;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=U/GMGczohtHjqG0p9Io1Go//HM4H/6Lv4F31m8BwqPg=;
+ b=dX+bvh6aW/w7HWcq+TCg4+yB3VPpGuaMWh4fROTETjzcycNX5catY3jy+iECJNDDiJ
+ 7WV8iZLXak+l5bx60fk/wgYj5OP4NIpN9ddumiwGeUwmA4vVqeQ0+CUwXXjstQbzUiBs
+ TeHWu7olNvKvvpAvfNJ3aDnryFJ9Pmvw7sEaA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787338515; x=1787943315;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=U/GMGczohtHjqG0p9Io1Go//HM4H/6Lv4F31m8BwqPg=;
+ b=HaBdXRDxxtlORg9DVYunA22tIJEB19H++ZmGGg0MbJjkEV3U99Wg2Bi3mrH7aZ3KeF
+ QdhOt2TbK7Ta0irWnwK0dJzaeKItpOVP69bHxJEoQUDX+8L7Dp6iDHuNnc2Qq9buawBO
+ YSV+OEOs6PGx+GgDkc2/FoPX+wbU0GSy0fo3zG5uketZdE2ljSCEKcPlECQLLfeEmwO1
+ t9t0GUtRZoh/wC9vnOiuN5LsxJ28j2Q4VqRbq6c6q/mBDy14/l+Q2Zwbgz6Z40cOfmqF
+ znxTTRnRH1dmWNBpEXh1Qh2jhd3DYJZ3GMTlTwqEv9dYGsagAM2+/IFEDd8bJl8yZ1Z0
+ ouXg==
+X-Gm-Message-State: AOJu0YwqcSGj5aQ3KyJdvuth/NclvLxhINfW9TffD8AvIX/1GQj85wLh
+ Zm6cf02wZ/Fv2Vw768TQDBPn4DqTo6xv5enrMcVDJxOQ0p23bauWQ3zh5AdLF2ipnYg=
+X-Gm-Gg: AR+sD10XVvRjNUVPda2ZEHK/f8UcBwKVBGgmu3aujCc3mGYeIW+iuaR3e5SOXcvY7mS
+ rAqvfV7swagImbMXVoHfZRpYUtH9Qj7fg1PDoVfzs11nHBVR8p5IggEWqzxt0Ky1TbBAIwfYo8S
+ mS40EvRqItYSivzSYvOopgLsXJQ9Do6B+SAIDtm4HUEOG9pU/6VJb9Jt5ZPJ0D7etA4Sl7fXI8U
+ ycbZN015j1F3W3cGoturI73ElOgIVk92SJUVQYrcYJv4ax4ctByaKLJgO+891nIK5z8TBF04sYb
+ vNJBanWAVHmdYzPeJwGpZjfS9qUK3uytEv66W3wXD5KnC2VvahPts+CovYsTcnkfM0OKrhzysVO
+ G/nxQXBwsM6jFbLL8NAHL8ZZqe8J/MrlF0OQf9JlBNjjvZRT3mfR8qNgM07mJz0Y0V09fsZb695
+ vA4qADW8QuCxMVGLxd0n4AjNe11LeNHh7EyncJsZEA+8LM2LztMWLyolU84cnWmj3aYBRacmTr4
+ 8aCZ3DwvfMApQ/nJ5W16rNyXU2R3PczJBkv942+zDa02NQZtLBMW0z5ZaJG95dveIZFkTChJamI
+ OAc1tgzmgeygK94MlF0R
+X-Received: by 2002:a05:6808:bc9:b0:496:2b3:ae71 with SMTP id
+ 5614622812f47-4b309bc09e2mr1193078b6e.18.1787338515578; 
+ Fri, 21 Aug 2026 11:55:15 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4b2d68769e1sm5421329b6e.8.2026.08.21.11.55.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Aug 2026 11:55:14 -0700 (PDT)
+Date: Fri, 21 Aug 2026 12:55:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.u-boot-project.org, sjg@chromium.org,
+ nora.schiffer@ew.tq-group.com
+Subject: Re: [PATCH v2 0/8] bootm: size the noload buffer from the compressor
+ header
+Message-ID: <20260821185512.GQ523975@bill-the-cat>
+References: <20260809042338.63397-1-aristo.chen@canonical.com>
+ <20260818132332.324173-1-aristo.chen@canonical.com>
+ <20260818221019.GE523975@bill-the-cat>
+ <CAA=k7==gD0A2Ri=-=4ogTf=yJH5s6mOUMF7k5LGYGRR-Sommfg@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI2PR04MB11147:EE_|PA4PR04MB8062:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5d4e0ef-f597-4d99-28ef-08deffb4f449
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|10070799003|366016|7416014|376014|23010399003|22082099003|18002099003|56012099006|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info: 5oSKCv+7cISkqtwXn23xI3rbfgB5ugpRuxpLH7OGny9suN5EQO0ksYBmGOCQcRTCdpbLA3FRgUAcVZiKx8Tza43uOLwENR1KHfirKgqbBn4wNDNELRHPSupLb866wvagyKViSO0uTBzuhVNc1AMGU2QdC7m4uLYmALxh+ikiLbN1pNWCBaJZWr3vcn2MbwDk66F/rPBz9JMQax+j0W1MhAM9ooezTC2dlAtpntHzR3Wm+PyG3OdMroRKCQkkQ9qRC8Z3cYipMwz1X7q1oX5tjrQyFp+yy3o3Qlc1rFCuAmiHE3jZ04iWlLutGQeUuO6MlOAY6u6sUqt0PzDcMxAuLqP9hT9gaMmjKXHupajHXfSqdo8wwT4gLVklzGqruekbf5+s+a+fZHnHmZxDJI/CTpkitp+8NlfvYXG0r+NQq7gpP8oyEZymfG0vYMQszSc5WPS1qo9tShxbgYjlPRrEp9l2vHH+lmUyLzS0viKcPHWpMhJtSPy8HLHDf3lgn0pb27YSvpkRFUtKPXFKhKYgKvnN92Qk91XoNtvwYWagIjaDsujkbzemGIacI0bOIlHzcVL4aWQMK48Gn7Di0JhwIf3Q48dyIWb3g5GjsakoULNj32MKhHGSyEJ8Miv58fwZeQZufBzxSypgy6I8YaoRO1LE2A7W7Tm0DaMfEfsC9DQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI2PR04MB11147.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(10070799003)(366016)(7416014)(376014)(23010399003)(22082099003)(18002099003)(56012099006)(11063799006)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YnBoZ01XTGszZVdlb3Q3UkxiOS90ZXJEbHQwN3VzbTBiUUxlTmVKMHlodDBE?=
- =?utf-8?B?Wm1wU3ZFaFU5UXJhZElLaUoxb1R5SVpNZlZJb29oU0tBQkFEMSs3akR4VjRl?=
- =?utf-8?B?S0tkaUY2SjJmN1hOUjJKek15bWJTZDFnVzlWT2RiRnpnSnJxZ1h0MGFvalFh?=
- =?utf-8?B?QzFIVUdnSFM4Qk14Qnh0M29RSUFHa0NZS1lNdXkxV1c2ZjlSek9OY2o2bkRp?=
- =?utf-8?B?Y2x0Z0VNMkFMQkpyQUljWmxUaUVUYjRnUnVyVklyYWRQdERBVEZpc0k3cXN0?=
- =?utf-8?B?RTZwb09lN2svckdXdUxXdFZDeHZDNDE4eGczT1dVRmZ5TjVOWUZMWExxSGNq?=
- =?utf-8?B?SVhtUDRvY0FIMGRTanM0cjlkWTFkdEdIazFLQmsrdjFqRnF2VTJha1NmcVJF?=
- =?utf-8?B?Y3hEcFJpZ01oL29MeENiOHpoeEQ5RTM1MkhZTVpVcEg4TGl5QnVkZEV1L0xO?=
- =?utf-8?B?cENubW1nOEQwWXVLODRJUmVKaHo5U3F5bWFWYlUzUGhQS045YWxBbGlaUzl6?=
- =?utf-8?B?L1lFYlFsak1wTmRRbmdnNFc3RnNFdDF3Q3prU0R2R2lSMlVrbm1zOFJGY3dn?=
- =?utf-8?B?QmxhQjRaUWMvUXhjTW5XVWIvYXh6RTVqdVZCd2pIdWl6aC95K2lPZnFwOEhh?=
- =?utf-8?B?KzVtdDFESnhEZnFNeXk2bkNwZldjWGthbGlkSnVoS09jeGNqZk5FajBBV0Rl?=
- =?utf-8?B?WDZVRXNiTEtBOWQ1YU9SZkVKQTNLanFWRUdmT2hpTHhWQUxyZ3FJL0tBbW1E?=
- =?utf-8?B?MnIzMTVjRDlKdGQvWDNYazRHOFZEWDRwM2pzT1N6ZkxxUWU3VkZvZ2w5S2ox?=
- =?utf-8?B?MVhTeHZPVHR5RWJ3dExJdmYxMWcxTExuQWo4N1ZWQXRVSnRrMm5manJrZ0w5?=
- =?utf-8?B?Nm5wZEs2dW56RDRVd1dGdGQ2VGREVVZFZ2ppZVljbUVVbVNrVUtqOHBTRVA3?=
- =?utf-8?B?M3VEZWlUb0tjSWZheURKZVI1akVJOUFjbjZhQlVoK1daYUEvK0JLakR5N0RR?=
- =?utf-8?B?TGFHTlZ0U0NpMTBRZlgrY0pFaTI2UnpUWUxPWlVEVExhU0xuSWRIaTRTU3lN?=
- =?utf-8?B?SUFlM1U5ajFNaCtVYmxSbFk3ZkRRVm1DZGd4T3BQOXFSNTRoZGNIamZWUmwy?=
- =?utf-8?B?S1h2VGhvN1VwL3dReDNtZnVwbFJ5WnVGM3lZdHB6VHkwdktVWllIcTRJQTEr?=
- =?utf-8?B?UFRtWjd2bnplb1FsV0RJQ2RJQWlVVVJNL0c3K2tsWDFsOTJsc3dMVzZVS2x1?=
- =?utf-8?B?dmRTcTZQcWlrcmRuZWtEVWpxTjhUa1NETC9oSTQ2QmJmM2hxd2VkdmRtakhQ?=
- =?utf-8?B?SlBYQWJwdlBHSjVkeW8rSXJtd0VPbWVtNTBVUitNeUR2YWljVGU0UUlZUmpv?=
- =?utf-8?B?WjRORnJsYmpyZzFmaElLYlc0UkdjUldnYXFmeWU3QVVkbU9nTEg3YW5JbGMz?=
- =?utf-8?B?S1BYMzNzcHBLQWJ1elZhVUZQSlFKaUZ3VjYzdmQzSWlkVE81L2FQcEtXbTk1?=
- =?utf-8?B?d0w2eGN0d1dHSzJjZVYxcWFQbE14STFlYVJoOXFSeXpXdWF3RHp0WW1HczMy?=
- =?utf-8?B?WnZsa3NCNUs4U2kyeHl4S2xaOTBWazRoNDU3M083dXlNeU1ZUFdkbjBCQ1pZ?=
- =?utf-8?B?RlFMODU2cmxZdUtmS1RrekF6eStqV1VkVnF4UElpZ3FvOXhFM2gxNEdVdjlx?=
- =?utf-8?B?N2FQNjMxOUVWS1dGdDgrWnhlbDk3NkRLTTBKM2FldEJGaWdkTHhtZ05MUFJ5?=
- =?utf-8?B?dHMvdnpWQU9QTmhhSThjN0o0SXIxUzdVeGZ5djk4T3pkYVpGWWQ3YXU5ZlNP?=
- =?utf-8?B?MzZVSWRMc2NqQnphV295RGxvQUo2aUJORjltcUxVbE1Rd3VjTmZxVzJtNXBU?=
- =?utf-8?B?ZU1TK0xLTEFqTklxVTZEVEJwWStWa0EwV3EwNk1YWkZSWTlrYnJrL041eWxv?=
- =?utf-8?B?NUZEQklQS2IrWEQyT0U2MkdPTU5rdXBxeWNPY0FENnFlN2ZtT0h1MUlteWFR?=
- =?utf-8?B?NWVCRFVocmVicDY1VlIrRHRkM3llcWh4WmhpbStqMEFGRndTK3VwVW5LRTcy?=
- =?utf-8?B?ZjJsRlBvRGI3YU4zOFVrZ1lITWNGRmYwRTRnRDl4REM0NTVTUWt1disyRUVO?=
- =?utf-8?B?SFN0UnI3Nm9FbCtoNEJ4eVk3aUppYng0ak5nRnpRVlpxQlZJL2ZHa3hDSFVI?=
- =?utf-8?B?VDVaaWJPSVFKY0lOZnFSK21hKzdHZk41eFJ1SnpLc1VnaURkdDJzY1hoR1hh?=
- =?utf-8?B?bmIyMGZkbENZbk9WQXJPQTEvSFQrS2tZRXRBNi9BZHZuWThmeUFybnRFUkY5?=
- =?utf-8?B?YlBJUkcwK0dEdjZHUysxaitHSlE5WjRJM29sY0pvRGJkQ0kxVUhBYmRsbDNW?=
- =?utf-8?Q?+/lLIHV+x0llz8BFyUhwC8N2+Pe5d4V7B4Jck9i1zlhGt?=
-X-MS-Exchange-AntiSpam-MessageData-1: EQEew/bCuwQaaTp2eYCbDORmkvth66HTU5g=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5d4e0ef-f597-4d99-28ef-08deffb4f449
-X-MS-Exchange-CrossTenant-AuthSource: VI2PR04MB11147.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Aug 2026 18:49:39.2663 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0yvheR4qD/7xs4bXbbH4EwGabJ+PRqD9N7serB24Do5UHT0jJrL2xpPUuozP5UdmFUuhClK3mNrKI7k6qMfYplODuesJ3KiqHgGtIADvw04=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB8062
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iKtsM+GJNOQ1pd0E"
+Content-Disposition: inline
+In-Reply-To: <CAA=k7==gD0A2Ri=-=4ogTf=yJH5s6mOUMF7k5LGYGRR-Sommfg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -176,44 +128,150 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Juuso,
 
-On 8/18/26 9:43 AM, Juuso Rinta wrote:
-> This series provides a fix for the wdt_start() function, which can
-> print incorrect timeout values in cases where the function is
-> called with a timeout value greater than the hardware-supported
-> maximum. The current implementation prints the requested value, so,
-> for example, the console may show that the watchdog timeout is set to
-> 60 seconds when it is in practice clamped to 10 seconds by the device.
-> 
-> The series introduces the max_timeout_ms value into the per-device
-> uclass-plat data. By default, this value is initialized to 0, and
-> drivers should write the hardware-limited max_timeout_ms value into
-> the plat-data typically during probing.
-> 
-> If the driver has reported a max_timeout_ms value, wdt_start() clamps
-> the requested timeout_ms value before calling ops->start(). The default
-> value 0 is considered "limitless", i.e. on drivers that do not set the
-> value, the prints and the functionality are unaffected by this series.
-> 
+--iKtsM+GJNOQ1pd0E
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I have two remarks.
+On Wed, Aug 19, 2026 at 10:53:57PM +0800, Aristo Chen wrote:
+> Hi Tom,
+>=20
+> On Wed, Aug 19, 2026 at 6:10=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Tue, Aug 18, 2026 at 01:23:14PM +0000, Aristo Chen wrote:
+> >
+> > > This is v2 of "bootm: size the noload decompression buffer from the
+> > > compressor header". Tom pushed back on v1
+> > > (https://patchwork.ozlabs.org/project/uboot/patch/20260809042338.6339=
+7-2-aristo.chen@canonical.com/)
+> > > on two grounds:
+> > >
+> > >   1. No concrete problem report driving the change.
+> > >   2. ~1297 platforms grew by ~170-400 bytes; the change is not
+> > >      opt-in, so the size cost falls on everyone.
+> >
+> > So, the first example that pops up in my builds is imx8mn_beacon_2g.
+> > And for v1 of the series:
+> >    aarch64: (for 1/1 boards) all +16384.0 data +14336.0 text +2048.0
+> >             imx8mn_beacon_2g: all +16384 data +14336 text +2048
+> >                u-boot: add: 0/0, grow: 1/0 bytes: 328/0 (328)
+> >                  function                                   old     new=
+   delta
+> >                  bootm_run_states                          3316    3644=
+    +328
+> >
+> > And now for v2:
+> >    aarch64: (for 1/1 boards) all +16384.0 data +14336.0 text +2048.0
+> >             imx8mn_beacon_2g: all +16384 data +14336 text +2048
+> >                u-boot: add: 0/0, grow: 1/0 bytes: 368/0 (368)
+> >                  function                                   old     new=
+   delta
+> >                  bootm_run_states                          3316    3684=
+    +368
+> >
+> > Next, picking turris_mox as it enables ZSTD:
+> > v1:
+> >    aarch64: (for 1/1 boards) all +472.0 text +472.0
+> >             turris_mox     : all +472 text +472
+> >                u-boot: add: 2/0, grow: 1/0 bytes: 472/0 (472)
+> >                  function                                   old     new=
+   delta
+> >                  image_decomp_get_uncompressed_size           -     416=
+    +416
+> >                  bootm_run_states                          2360    2412=
+     +52
+> >                  zstd_get_frame_header                        -       4=
+      +4
+> > v2:
+> >    aarch64: (for 1/1 boards) all +428.0 text +428.0
+> >             turris_mox     : all +428 text +428
+> >                u-boot: add: 1/0, grow: 1/0 bytes: 428/0 (428)
+> >                  function                                   old     new=
+   delta
+> >                  bootm_run_states                          2360    2784=
+    +424
+> >                  zstd_get_frame_header                        -       4=
+      +4
+> >
+> > So, that is better. Looking at smartweb, both iterations are the same:
+> >        arm: (for 1/1 boards) all +96.0 text +96.0
+> >             smartweb       : all +96 text +96
+> >                u-boot: add: 0/0, grow: 1/0 bytes: 76/0 (76)
+> >                  function                                   old     new=
+   delta
+> >                  bootm_run_states                          3592    3668=
+     +76
+> >
+> > What's honestly concerning is chromebook_coral where v2 *shrinks*:
+> >                u-boot: add: 0/0, grow: 0/-1 bytes: 0/-2 (-2)
+> >                  function                                   old     new=
+   delta
+> >                  bootm_load_os                              520     518=
+      -2
+> > but v1 grows:
+> >                u-boot: add: 1/0, grow: 1/0 bytes: 110/0 (110)
+> >                  function                                   old     new=
+   delta
+> >                  bootm_load_os                              520     587=
+     +67
+> >                  image_decomp_get_uncompressed_size           -      43=
+     +43
+> >
+>=20
+> That one is working as intended: chromebook_coral enables none of
+> GZIP/LZMA/LZ4/ZSTD, so it is one of the "bootm with no decompressor
+> at all" boards from the cover letter. In v2 every helper and its
+> switch case sit behind CONFIG_IS_ENABLED(<format>), so on that board
+> they all compile away and only the unchanged 8x fallback remains.
+> The -2 bytes is codegen noise from the restructure; I diffed the
+> disassembly and the function is otherwise unchanged. v1 grew there
+> because its helper in image.c was built unconditionally. Behaviour is
+> unchanged either way: with no decompressor enabled, a compressed
+> kernel_noload image already fails in image_decomp().
+>=20
+> The imx8mn_beacon_2g result has a similar shape to what I measured
+> on am62x_evm_a53: both enable LTO, and on these LTO configurations
+> compiler inlining and layout make v2 a few tens of bytes larger
+> than v1 (+368 vs +328 here, with the growth landing inside
+> bootm_run_states either way). That is the trade of the per-format
+> split, which is what makes the no-decompressor boards free, trims
+> the gzip-only majority, and keeps each format individually
+> droppable.
+>=20
+> turris_mox is the non-LTO counterpart and shows the intended
+> direction for the multi-algorithm case: v2 comes in 44 bytes below
+> v1 there (+428 vs +472 in your run).
+>=20
+> smartweb is the expected gzip-only LTO case: both versions cost
+> essentially the same (+96 in your run).
+>=20
+> Thanks for the u-boot-size-test.sh pointer. I re-ran your four
+> boards with it against this series' base and reproduce your numbers
+> to within a few bytes of toolchain difference, including coral's -2
+> (here: v1 +108 with bootm_load_os +65 plus the unconditional helper
+> +43, v2 -2). I will use the script for the size numbers from now on;
+> if you would like the cover letter regenerated with those numbers, I
+> am happy to respin as v3 with the code unchanged.
 
-1. Is it really appropriate to have a timeout smaller than requested? 
-Maybe the answer is that we should fail if the user requests an 
-unsupported timeout?
+Thanks for explaining and digging a bit more. At the end of the day, I
+wish we could solve this problem, but have smaller growth, but I don't
+see it. So v2 is fine as-is from my point of view, no need to spin a v3
+unless there's other feedback.
 
-2. I'm not sure it is enough to clamp the max. The Rockchip RK806 PMIC 
-has a watchdog with only a few possible values as timeout: 50ms, 100ms, 
-500ms, 2s, 10s, 1min and 10min. Experimentally, they are not even that 
-(though I don't remember exactly the actual values I found, and I don't 
-have access to my notes as I'm currently traveling). So, I'm wondering 
-if we shouldn't update the API such that the driver reports what the 
-actual timeout is, as it may differ from the requested timeout (if we do 
-clamping or rounding, even with non-max values). wdt_ops->start() 
-returns 0 on success, but it could return the actual timeout for 
-example. I would wait on Stefan to chime in though, that is a much more 
-involved rework and if Stefan doesn't like it, wasted time and effort ;)
+--=20
+Tom
 
-Cheers,
-Quentin
+--iKtsM+GJNOQ1pd0E
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoifDAAKCRAr4qD1Cr/k
+CtCFAP9drWX+Qt4PevEBEUm1HIZMnD7ywMgmL0RWdDrgCmdGJAEA1RPb9VG3on4U
+mxl+VsdST9O+ldZ0MeJRyx/H17bNcAE=
+=aiBP
+-----END PGP SIGNATURE-----
+
+--iKtsM+GJNOQ1pd0E--
