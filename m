@@ -1,93 +1,89 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39778C5DF7D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 08:45:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D903C5DF87
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 09:30:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CE419409AC;
-	Fri, 21 Aug 2026 08:45:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5DC7460779;
+	Fri, 21 Aug 2026 09:30:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UBtCMCLfATkX; Fri, 21 Aug 2026 08:45:19 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aVS69sEqYRYZ; Fri, 21 Aug 2026 09:30:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787301919;
-	bh=yYL0NtfL4vy4wt/gzi+BmfGDYPoiHYlXXh2DlgMJ5fQ=;
+	d=lists.u-boot-project.org; s=default; t=1787304613;
+	bh=eNZz5g3FHnnlOHGFr4ZQIEajGuVhvGT7+NQG+LOu/c8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=F4DOqyC2tZ9wU2mjvexqt5XbNK0CTmTSwgz686nllW5OAdWGuIJoyV7G1fEE8eoRK
-	 EzItesioW1B4m/Ddqxa/uhyLGPNpAMAbo6SxkPRc0rFNMbtMDjkAE0XqcHZIrJnpiW
-	 lR4Kifi25GymjEow7cXE2/FPlV/bV70BB+gcvjWZIdvGD5chG9T0fGANm2grXxpdN1
-	 MhJmo5EHPqTz4j3KGjMEWmkrauRBPZnqHEoizjjvlSgV5SrHpo2Z6dIoMGpHOOa07J
-	 wnha1HlYm0gAn6uqMlYjsIS+wnnw4nhFO8yVJIHzQ24dwtqDeenzcY7JuAF3QIqd6w
-	 /pUTwgA27QssQ==
+	b=yrpKjRK0LAWvb19Cp/r6hKiB+afMEvR1ah3/t+K6AWfaMxjKupWBRUR447llG7Sut
+	 cypXE67EuZVaTs0gtfGOvQIMw2qyNOQ9UWXbuZzX4sl08r4fe2g+PWkDm5hpr4tnVH
+	 fpXlcmqKx5IPqQfhLRP3LkYPURPud+wsuV5jj9VRnF9aDAhVFkW0hPDmhM2DxQP+sY
+	 MQxf5I6OS79RXQWfAvJY0yiZ63NMZUT4KoKvXv+iuMKb+RUO+m3qcymIbS5jcztsbO
+	 5yfGtDYFbU/QR712tV+Nmueb/qI7B/uFpuoyfPXQLr9Vk+cYsX7HIQMN8065NAzlX6
+	 LwhR7PXgjjUfQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 299B5409A3;
-	Fri, 21 Aug 2026 08:45:19 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9A002263
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:45:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C8B0A6068A;
+	Fri, 21 Aug 2026 09:30:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EDC03263
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8C4EE40071
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:45:16 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D414E40931
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qKxUbadLgBEo for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 08:45:15 +0000 (UTC)
-X-Greylist: delayed 145 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 21 Aug 2026 08:45:15 UTC
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=IJMB9Lna
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C7CB64006A
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:45:15 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1787301909; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=g6E3WKNxw9CLQpirJGSYCMk0L8zxfn/Ohnb0qC55Z4wmmzKCU5lPyya1enug/glAqId+6K1TctJrajnzGpOVeOy3LvJLZ5lLgdPfiOiPApZUz6uP5F7bV9V5mD42gW6nFYMHZETvQVFEXA42O+xu3QWpBwOkHLt6VdkxybJAhSI=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1787301909;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=yYL0NtfL4vy4wt/gzi+BmfGDYPoiHYlXXh2DlgMJ5fQ=; 
- b=AB1fmxCpsq8vtZidj8z5/inwYOZBTwqVFVeUBMkubJp3GFSI9drLKeJX5pRXqA71qzqfTmMh6j9qjCzqPKN2fgMx+lrg33wIHfdo68blHPMCqRTnvCsyMpJ1W73tzQNZvcv8ZGQrHbvhr5Zx65WxPnC3IIQ/dNOURe1o4PYp3Sg=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787301909; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=yYL0NtfL4vy4wt/gzi+BmfGDYPoiHYlXXh2DlgMJ5fQ=;
- b=IJMB9LnaRxhq4lxX7o/FPakdyx+Gl2SEhfWZ68vEttAGXPJJYjouTymFIX/QUCN2
- 8ICH88X7tn61ujQ4m6drZHyYiptSloCX+lZsfBjv7kA4M64yIqHaIIa7e98072VN6Tf
- BDWmix2Ieh4txfeiTJmgWK/fzJyQwaE9gMoA1R18=
-Received: by mx.zohomail.com with SMTPS id 1787301907879375.810344488033;
- Fri, 21 Aug 2026 01:45:07 -0700 (PDT)
-From: Yao Zi <me@ziyao.cc>
-To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.u-boot-project.org,
-	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v3 19/19] CI: Wire up qemu-loongarch64
-Date: Fri, 21 Aug 2026 08:42:19 +0000
-Message-ID: <20260821084219.1703743-20-me@ziyao.cc>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260821084219.1703743-1-me@ziyao.cc>
-References: <20260821084219.1703743-1-me@ziyao.cc>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gFqeGCDD-p5S for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 09:30:11 +0000 (UTC)
+X-Greylist: delayed 64 seconds by postgrey-1.37 at util1.osuosl.org;
+ Fri, 21 Aug 2026 09:30:10 UTC
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=siemens.com header.i=jan.kiszka@siemens.com
+ header.a=rsa-sha256 header.s=fm2 header.b=PDKi1ZqK
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.226;
+ helo=mta-64-226.siemens.flowmailer.net;
+ envelope-from=fm-294854-20260821092902fd52911f410002073f-3px_xf@rts-flowmailer.siemens.com;
+ receiver=<UNKNOWN> 
+Received: from mta-64-226.siemens.flowmailer.net
+ (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2251040912
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 09:30:10 +0000 (UTC)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
+ 20260821092902fd52911f410002073f
+ for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 11:29:02 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=jan.kiszka@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=eNZz5g3FHnnlOHGFr4ZQIEajGuVhvGT7+NQG+LOu/c8=;
+ b=PDKi1ZqKrYUxi4BUsLDAYIe57+cHwtpTJNycoQ4+latbz2VjU3S0Dp6ZJfr1ym9OrOB7av
+ R0oiGYPKI3luIxwWqcL72ZOi203NjEE276CybRScNz/O7+zi/pPYN35fBKReJjE7VzPC+LGH
+ ZLTu0chkLT7wenDshTz6PBz1ZQtMe9cOU/ys448ZZAcoLVsgn8uHGbwRX2htRdONZZEGswIY
+ e1leGJfsaK/fCL5Llp8WzQEk35ItBOCLVLUIoOaX/RYIL8SnONBPYIf7CdhvdfJ/biXR3XZ/
+ L3yEKR9PHihqQt7Y6ZoHLxCD6b3o9Swx6sH38cvuewUsz2OF/5S4tsPw==;
+From: Jan Kiszka <jan.kiszka@siemens.com>
+To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
+Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sai Sree Kartheek Adivi <s-adivi@ti.com>,
+ Alexander Heinisch <alexander.heinisch@siemens.com>
+Subject: [PATCH 1/4] tee: optee: Add support for enumerating services that
+ only need RPMB
+Date: Fri, 21 Aug 2026 11:28:58 +0200
+Message-ID: <bfd9927ca141783a9f73f82a10eca75699222e1d.1787304541.git.jan.kiszka@siemens.com>
+In-Reply-To: <cover.1787304541.git.jan.kiszka@siemens.com>
+References: <cover.1787304541.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-294854:519-21489:flowmailer
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -101,77 +97,124 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Enable qemu-loongarch64 in CI so it could be automatically tested.
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
-Signed-off-by: Yao Zi <me@ziyao.cc>
+Up to OP-TEE 4.4.0, all services that needed a supplicant where returned
+by PTA_CMD_GET_DEVICES_SUPP. Since then, services that only need a
+supplicant for the purpose of accessing the RPMB are only enumerated by
+the new, separate PTA_CMD_GET_DEVICES_RPMB. U-Boot so far lacks support
+for that, thus no longer finds such services, e.g. fTPM.
+
+Perform the separate enumeration during probe but, as that may fail if
+the MMC is not probed yet, also provide a callback to trigger a retry
+when another MMC device becomes available.
+
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 ---
+ drivers/tee/optee/core.c          | 32 +++++++++++++++++++++++++++++++
+ drivers/tee/optee/optee_private.h |  2 ++
+ drivers/tee/optee/rpmb.c          | 11 +++++++++++
+ include/tee/optee.h               |  2 ++
+ 4 files changed, 47 insertions(+)
 
-New patch since v3
-
- .azure-pipelines.yml | 11 +++++++----
- .gitlab-ci.yml       |  6 ++++++
- 2 files changed, 13 insertions(+), 4 deletions(-)
-
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 015fc15d5c29..0c350ae9d46c 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -19,7 +19,7 @@ variables:
-   k3_64b: "k3 -x armv7,phytec,toradex"
-   kirkwood_mvebu: "kirkwood mvebu"
-   layerscape_vf610: "ls1 ls2 lx2 vf610 -x phytec,toradex"
--  m68k_remaining_mx_xtensa: "m68k imxrt mx xtensa -x mx6,aarch64"
-+  loongarch_m68k_remaining_mx_xtensa: "loongarch m68k imxrt mx xtensa -x mx6,aarch64"
-   mips_x86: "mips x86 -x mediatek"
-   mx6: "mx6 -x engicam,phytec,toradex"
-   imx8: "imx8 -x engicam,phytec,toradex"
-@@ -212,7 +212,7 @@ stages:
-           built="$built $(tools/buildman/buildman ${BMANARGS} $(k3_64b) | grep '^   ')"
-           built="$built $(tools/buildman/buildman ${BMANARGS} $(kirkwood_mvebu) | grep '^   ')"
-           built="$built $(tools/buildman/buildman ${BMANARGS} $(layerscape_vf610) | grep '^   ')"
--          built="$built $(tools/buildman/buildman ${BMANARGS} $(m68k_remaining_mx_xtensa) | grep '^   ')"
-+          built="$built $(tools/buildman/buildman ${BMANARGS} $(loongarch_m68k_remaining_mx_xtensa) | grep '^   ')"
-           built="$built $(tools/buildman/buildman ${BMANARGS} $(mips_x86) | grep '^   ')"
-           built="$built $(tools/buildman/buildman ${BMANARGS} $(mx6) | grep '^   ')"
-           built="$built $(tools/buildman/buildman ${BMANARGS} $(imx8) | grep '^   ')"
-@@ -490,6 +490,9 @@ stages:
-         qemu_arm_sbsa_ref:
-           TEST_PY_BD: "qemu-arm-sbsa"
-           TEST_PY_TEST_SPEC: "not sleep"
-+        qemu_loongarch64:
-+          TEST_PY_BD: "qemu-loongarch64"
-+          TEST_PY_TEST_SPEC: "not sleep"
-         qemu_m68k:
-           TEST_PY_BD: "M5208EVBE"
-           TEST_PY_ID: "--id qemu"
-@@ -657,8 +660,8 @@ stages:
-           BUILDMAN: $(kirkwood_mvebu)
-         layerscape_vf610:
-           BUILDMAN: $(layerscape_vf610)
--        m68k_remaining_mx_xtensa:
--          BUILDMAN: $(m68k_remaining_mx_xtensa)
-+        loongarch_m68k_remaining_mx_xtensa:
-+          BUILDMAN: $(loongarch_m68k_remaining_mx_xtensa)
-         mips_x86:
-           BUILDMAN: $(mips_x86)
-         mx6:
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 9831dd61bc18..e7957c581560 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -415,6 +415,12 @@ qemu_arm_sbsa test.py:
-     TEST_PY_TEST_SPEC: "not sleep"
-   <<: *buildman_and_testpy_dfn
+diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+index 4d67c948ec1..5600d5a4c7d 100644
+--- a/drivers/tee/optee/core.c
++++ b/drivers/tee/optee/core.c
+@@ -41,6 +41,13 @@
+  */
+ #define PTA_CMD_GET_DEVICES_SUPP	0x1
  
-+qemu_loongarch64 test.py:
-+  variables:
-+    TEST_PY_BD: "qemu-loongarch64"
-+    TEST_PY_TEST_SPEC: "not sleep"
-+  <<: *buildman_and_testpy_dfn
++/*
++ * PTA_CMD_GET_DEVICES_RPMB - List services only depending on RPMB support
++ *
++ * [out]    memref[0]: List of the UUIDs of service enumerated by OP-TEE
++ */
++#define PTA_CMD_GET_DEVICES_RPMB	0x2
 +
- qemu_m68k test.py:
-   variables:
-     TEST_PY_BD: "M5208EVBE"
+ typedef void (optee_invoke_fn)(unsigned long, unsigned long, unsigned long,
+ 			       unsigned long, unsigned long, unsigned long,
+ 			       unsigned long, unsigned long,
+@@ -210,6 +217,29 @@ static int bind_service_drivers(struct udevice *dev)
+ 	return ret2;
+ }
+ 
++#ifdef CONFIG_SUPPORT_EMMC_RPMB
++void optee_bind_service_drivers_rpmb(struct udevice *dev)
++{
++	struct tee_shm *service_list = NULL;
++	size_t service_count;
++	u32 tee_sess;
++	int ret;
++
++	ret = open_enum_session(dev, &tee_sess);
++	if (ret)
++		return;
++
++	ret = enum_services(dev, &service_list, &service_count, tee_sess,
++			    PTA_CMD_GET_DEVICES_RPMB);
++	if (!ret && service_count)
++		ret = bind_service_list(dev, service_list, service_count);
++
++	tee_shm_free(service_list);
++
++	tee_close_session(dev, tee_sess);
++}
++#endif
++
+ /**
+  * reg_pair_to_ptr() - Make a pointer of 2 32-bit values
+  * @reg0:	High bits of the pointer
+@@ -852,6 +882,8 @@ static int optee_probe(struct udevice *dev)
+ 		ret = bind_service_drivers(dev);
+ 		if (ret)
+ 			dev_warn(dev, "optee service enumeration failed: %d\n", ret);
++		else
++			optee_bind_service_drivers_rpmb(dev);
+ 	} else if (IS_ENABLED(CONFIG_RNG_OPTEE)) {
+ 		/*
+ 		 * Discovery of TAs on the TEE bus is not supported in U-Boot:
+diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+index 1f07a27ee4b..b5a58df5b96 100644
+--- a/drivers/tee/optee/optee_private.h
++++ b/drivers/tee/optee/optee_private.h
+@@ -79,4 +79,6 @@ static inline void optee_suppl_cmd_i2c_transfer(struct optee_msg_arg *arg)
+ 
+ void *optee_alloc_and_init_page_list(void *buf, ulong len, u64 *phys_buf_ptr);
+ 
++void optee_bind_service_drivers_rpmb(struct udevice *dev);
++
+ #endif /* __OPTEE_PRIVATE_H */
+diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
+index bacced6af6c..f4a66641755 100644
+--- a/drivers/tee/optee/rpmb.c
++++ b/drivers/tee/optee/rpmb.c
+@@ -191,3 +191,14 @@ void optee_suppl_rpmb_release(struct udevice *dev)
+ {
+ 	release_mmc(dev_get_priv(dev));
+ }
++
++void optee_rpmb_available(void)
++{
++	struct udevice *dev;
++	struct uclass *uc;
++
++	uclass_id_foreach_dev(UCLASS_TEE, dev, uc) {
++		if (strcmp(dev->driver->name, "optee") == 0)
++			optee_bind_service_drivers_rpmb(dev);
++	}
++}
+diff --git a/include/tee/optee.h b/include/tee/optee.h
+index d1194493780..c12fda3cc73 100644
+--- a/include/tee/optee.h
++++ b/include/tee/optee.h
+@@ -74,4 +74,6 @@ static inline bool is_optee_smc_api(void)
+ }
+ #endif
+ 
++void optee_rpmb_available(void);
++
+ #endif /* _OPTEE_H */
 -- 
-2.55.0
+2.47.3
 
