@@ -1,85 +1,85 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5722C5DF87
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 08:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2D4C5DF7D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 08:43:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A1CA8108F;
-	Fri, 21 Aug 2026 08:43:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1403C4098A;
+	Fri, 21 Aug 2026 08:43:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bL20p5gOQYc9; Fri, 21 Aug 2026 08:43:36 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id V_QOk06-vAot; Fri, 21 Aug 2026 08:43:41 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787301816;
-	bh=uEeyujI4keOPzaASEusZ1eXFC21MpXgAOpS1nYyM1Vk=;
+	d=lists.u-boot-project.org; s=default; t=1787301821;
+	bh=X1IuKOzUMqKfC0P52WsJ7DBvHzPBkwQ2iAeYlGh9UyQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Sf6nuEg2bHWTiS2h6sKid8VzTt4PxMy0hy06sjVMMZEfR5GqLQcNBG5S/uukS4p80
-	 Gk5J/LnRfuWIIQvF7LBwusnvsmqBA6u6+Wk2VF++EaPeuMCTBBHJdD/1BUWiNVVxgo
-	 QsChHRp3juooBqDfNHcnxJ1RdCK+75m3ychA6jatumM6y1MNt0w93/1KcEc33tFiuM
-	 iNVMQj5nzMzunFXynHB4s1injWOlS0KzQOXy/V9oFkFdtJOSv7ktuAmpcAthIEVNY9
-	 7UcKskxjIm81v/nzcf5i4vWnqUZI32p88c4riPQnK5HIfhWzAZccsT6w012FhFI9Zv
-	 6V4itpASihnTQ==
+	b=W6BjRhWBPY430wlXn3LmVQPuDsU8EOEC6yFmqWeFWPprB5pSwg6GY+iZw/Xz24Wgz
+	 vIi4vab+05UeWo3u+msA761nmcxcr03N+XeHLIJgSlkks9Azck6YKMEhb+1TEXyqW5
+	 r8CIEM2aaBoNKHdq1COYWGZPl3ZTXyKLlBNLwKOw4h/HevBN6nReXRZlqmF8MbdSWW
+	 clnuf82c1QvwhsRZ9ybLMTbZrWKzWYd99MNbBDjLT+dKlzF/zUCqca0zh0yFp6zPOF
+	 S7re40rXhRMC0HDJSs1cw98iRMkqsQ3oukOCxyhZ2dx6V2ixvU3MAqIP8jwphhXa7J
+	 TagMDumkA+BhA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7693880F95;
-	Fri, 21 Aug 2026 08:43:36 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7C14A476
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DE6C040908;
+	Fri, 21 Aug 2026 08:43:40 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 57FE71B8
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6270040071
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:35 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 498728109F
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id F5jW8W9oRFuj for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 08:43:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bwc1lNaZENXP for <u-boot@lists.u-boot-project.org>;
+ Fri, 21 Aug 2026 08:43:38 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=keA78vQV
+ header.a=rsa-sha256 header.s=zmail header.b=gu59KRoe
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1B8BC40073
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:32 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1787301807; cv=none; 
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6BB7580F8B
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 08:43:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1787301811; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=a/9FWmsIKYUDxNiyFBRs841qR8pKLSgZqx8Nh7bRShHvi+pWclEsWdbM5fxajRVOYcgiDgN+b8Q8ooLj1E25kKTX1jWMCMMgCZjPme4Ym1YZPQ9FGNjnLGqDhZik8tUdimTJnOafE/GH3fGVg07CcXOv4dY17skzRCTZTePvnFk=
+ b=CoG4Jzd3v7RmY36vNddNzA2/wkT6tZcmzI7Ux4MW69lD+z8r4QKzElpmeEXIvQUjutwXF9ZZJDo1fs5+tYuf6oirmkOf+v4PuISqvc3TSWt1tMlYJyUINSiugRQE1R8McolGTx+1yG4f7Jf3L8SlMr618fleZbQIYEN1OEd8qmc=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1787301807;
+ s=zohoarc; t=1787301811;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=uEeyujI4keOPzaASEusZ1eXFC21MpXgAOpS1nYyM1Vk=; 
- b=S2uxV2Vgows/hCB9gZ8MFOh0kbXPRyOFO5uT32NTxTaUGHHNuC2UsQWuJBzPt76Cb5vnlRuvlLIJpYSiHxL4XeMpXM8ZIyjrQ6VOuPpH4no78Wtwl76vSEBH6ds36S5JcNuC1KOI52fpsun8AnUbv9UTDofBmUjeKTHK4e3ToT4=
+ bh=X1IuKOzUMqKfC0P52WsJ7DBvHzPBkwQ2iAeYlGh9UyQ=; 
+ b=EChZpzk7bsp4EoK45h8U+4kPuEZSdnpI2+/OU4lOpzS3lD8Hd78OSp03qQhzxmdzrYCSFzJFJ9hToXYaVHGQZW68DDOTfACTR5ce68TzJ+CjcNLI55buyf1oKXkgHMdzcipVy2bzy5fEpUQBeuZbl578HvHz8oiXBAxoEeBcYiM=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787301807; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787301811; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=uEeyujI4keOPzaASEusZ1eXFC21MpXgAOpS1nYyM1Vk=;
- b=keA78vQV1D1aWhH4741/A0wVC6gc4y9vp8rUFpaAEyoOyQVmU9oI8+tZ0gSn7WuB
- P12htS0Sv3cLgA7Xbl+FwGGWu6pEK9FuhAP7dfuTdNgbsO8/B3vJssnOUxqNagmFgtu
- AyTOnTFgYKIdA5GSVAeCmZIu3O+7z4NRN3HbR6tw=
-Received: by mx.zohomail.com with SMTPS id 1787301805148475.4487419364716;
- Fri, 21 Aug 2026 01:43:25 -0700 (PDT)
+ bh=X1IuKOzUMqKfC0P52WsJ7DBvHzPBkwQ2iAeYlGh9UyQ=;
+ b=gu59KRoeDOMtxF+R5Ybxiu5obIgNrjB/8Vc6h1KxCZ6Xp4U26Sxt/QbeZl5FXNqn
+ taBexhpsmyrKAYJOWSkKfTkswr12GpcQH58By/bS2bpmuhXkzC2zEqxaS5E5gQEWD34
+ IqEUv/IgJVuY8CRuUztQy18VRPzeCBPKx+b6TGwE=
+Received: by mx.zohomail.com with SMTPS id 1787301809114166.27415676072928;
+ Fri, 21 Aug 2026 01:43:29 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v3 07/19] LoongArch: lib: General routines
-Date: Fri, 21 Aug 2026 08:42:07 +0000
-Message-ID: <20260821084219.1703743-8-me@ziyao.cc>
+Subject: [PATCH v3 08/19] LoongArch: CPU assembly routines
+Date: Fri, 21 Aug 2026 08:42:08 +0000
+Message-ID: <20260821084219.1703743-9-me@ziyao.cc>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260821084219.1703743-1-me@ziyao.cc>
 References: <20260821084219.1703743-1-me@ziyao.cc>
@@ -101,527 +101,305 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Add cache probing through CPUCFG, cache operations, setjmp()/longjump(),
-and etc. for the architecture.
+start.S for initialisation, smp_secondary routine for
+a spin-table like interface for secondary cpus.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
 Changed from v2
-- Improve commit message to list introduced routines, and how
-  cache-probing is implemented
-- Pass through addr in do_flush() macros
-- Use CACHE_MAX_LEVEL instead of hard-coded 3 in probe_caches()
-- Comment on cache behavior and cache probing logic in cache.c
+- Add copyright to cpu/cpu.c
+- Drop unnecessary includes from cpu/cpu.c
+- Drop "resetting..." message from reset_cpu()
+- Fix misleading comment about t1 in start.S
+- Remove "move sp, s0" after board_init_f_alloc_reserve from start.S
+- Clean up whitespaces in start.S
 
 Changed from v1
-- Correctly implement dcache operations
+- Replace t6, which is volatile across C function boundaries, with s5
+  to hold relocation offset in start.S
+- Fix typo "CLear" in smp_secondary.S
 
- arch/loongarch/include/asm/cache.h       |  10 +
- arch/loongarch/include/asm/global_data.h |   7 +
- arch/loongarch/lib/Makefile              |   7 +
- arch/loongarch/lib/asm-offsets.c         |  66 ++++++
- arch/loongarch/lib/boot.c                |  14 ++
- arch/loongarch/lib/cache.c               | 243 +++++++++++++++++++++++
- arch/loongarch/lib/reset.c               |  14 ++
- arch/loongarch/lib/setjmp.S              |  52 +++++
- 8 files changed, 413 insertions(+)
- create mode 100644 arch/loongarch/lib/asm-offsets.c
- create mode 100644 arch/loongarch/lib/boot.c
- create mode 100644 arch/loongarch/lib/cache.c
- create mode 100644 arch/loongarch/lib/reset.c
- create mode 100644 arch/loongarch/lib/setjmp.S
+ arch/loongarch/cpu/Makefile        |   4 +
+ arch/loongarch/cpu/cpu.c           |  17 +++
+ arch/loongarch/cpu/smp_secondary.S |  55 ++++++++++
+ arch/loongarch/cpu/start.S         | 168 +++++++++++++++++++++++++++++
+ 4 files changed, 244 insertions(+)
+ create mode 100644 arch/loongarch/cpu/cpu.c
+ create mode 100644 arch/loongarch/cpu/smp_secondary.S
+ create mode 100644 arch/loongarch/cpu/start.S
 
-diff --git a/arch/loongarch/include/asm/cache.h b/arch/loongarch/include/asm/cache.h
-index 854dd0c0a02e..2dd4e82340bb 100644
---- a/arch/loongarch/include/asm/cache.h
-+++ b/arch/loongarch/include/asm/cache.h
-@@ -6,8 +6,11 @@
- #ifndef _ASM_LOONGARCH_CACHE_H
- #define _ASM_LOONGARCH_CACHE_H
- 
-+#include <linux/bitops.h>
-+
- /* cache */
- void cache_flush(void);
-+void probe_caches(void);
- 
- #define cache_op(op, addr)						\
- 	__asm__ __volatile__(						\
-@@ -15,6 +18,13 @@ void cache_flush(void);
- 	:								\
- 	: "i" (op), "ZC" (*(unsigned char *)(addr)))
- 
-+#define CACHE_MAX_LEVEL		3
-+#define CACHE_MAX_INDEX		6
-+#define CACHE_OP		GENMASK(4, 3)
-+#define  CACHE_INDEX_INVWB	0x1
-+#define  CACHE_HIT_INVWB	0x2
-+#define CACHE_INDEX		GENMASK(2, 0)
-+
- #ifdef CONFIG_SYS_CACHELINE_SIZE
- #define ARCH_DMA_MINALIGN	CONFIG_SYS_CACHELINE_SIZE
- #else
-diff --git a/arch/loongarch/include/asm/global_data.h b/arch/loongarch/include/asm/global_data.h
-index 2a9a525e2f37..7aab802ca04d 100644
---- a/arch/loongarch/include/asm/global_data.h
-+++ b/arch/loongarch/include/asm/global_data.h
-@@ -10,6 +10,7 @@
- #define __ASM_GBL_DATA_H
- 
- #include <linux/types.h>
-+#include <asm/cache.h>
- #include <asm/u-boot.h>
- #include <compiler.h>
- 
-@@ -24,6 +25,12 @@ struct arch_global_data {
- #ifdef CONFIG_SMBIOS
- 	ulong smbios_start;		/* Start address of SMBIOS table */
- #endif
-+	ushort dcache_ways[CACHE_MAX_INDEX];
-+	ushort dcache_sets[CACHE_MAX_INDEX];
-+	ushort dcache_linesizes[CACHE_MAX_INDEX];
-+	ushort dcache_index[CACHE_MAX_INDEX];
-+	ushort dcache_levels;
-+	bool dcache_inclusive;
- };
- 
- #include <asm-generic/global_data.h>
-diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
-index 3dbed94cc624..3c17b9cd85af 100644
---- a/arch/loongarch/lib/Makefile
-+++ b/arch/loongarch/lib/Makefile
-@@ -3,3 +3,10 @@
+diff --git a/arch/loongarch/cpu/Makefile b/arch/loongarch/cpu/Makefile
+index 3dbed94cc624..d3c38a16d057 100644
+--- a/arch/loongarch/cpu/Makefile
++++ b/arch/loongarch/cpu/Makefile
+@@ -3,3 +3,7 @@
  # Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
  #
  
-+obj-$(CONFIG_CMD_GO) += boot.o
-+obj-y	+= cache.o
-+obj-y	+= interrupts.o
-+ifeq ($(CONFIG_$(SPL_)SYSRESET),)
-+obj-y	+= reset.o
-+endif
-+obj-y	+= setjmp.o
-diff --git a/arch/loongarch/lib/asm-offsets.c b/arch/loongarch/lib/asm-offsets.c
++extra-y = start.o
++
++obj-y += cpu.o
++obj-y += smp_secondary.o
+diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
 new file mode 100644
-index 000000000000..e3f4c629b63d
+index 000000000000..38005d576458
 --- /dev/null
-+++ b/arch/loongarch/lib/asm-offsets.c
-@@ -0,0 +1,66 @@
++++ b/arch/loongarch/cpu/cpu.c
+@@ -0,0 +1,17 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ *
-+ * From arch/x86/lib/asm-offsets.c
-+ *
-+ * This program is used to generate definitions needed by
-+ * assembly language modules.
-+ */
-+
-+#include <asm/global_data.h>
-+#include <asm/ptrace.h>
-+#include <linux/kbuild.h>
-+
-+static void __used output_ptreg_defines(void)
-+{
-+	COMMENT("LoongArch pt_regs offsets.");
-+	OFFSET(PT_R0, pt_regs, regs[0]);
-+	OFFSET(PT_R1, pt_regs, regs[1]);
-+	OFFSET(PT_R2, pt_regs, regs[2]);
-+	OFFSET(PT_R3, pt_regs, regs[3]);
-+	OFFSET(PT_R4, pt_regs, regs[4]);
-+	OFFSET(PT_R5, pt_regs, regs[5]);
-+	OFFSET(PT_R6, pt_regs, regs[6]);
-+	OFFSET(PT_R7, pt_regs, regs[7]);
-+	OFFSET(PT_R8, pt_regs, regs[8]);
-+	OFFSET(PT_R9, pt_regs, regs[9]);
-+	OFFSET(PT_R10, pt_regs, regs[10]);
-+	OFFSET(PT_R11, pt_regs, regs[11]);
-+	OFFSET(PT_R12, pt_regs, regs[12]);
-+	OFFSET(PT_R13, pt_regs, regs[13]);
-+	OFFSET(PT_R14, pt_regs, regs[14]);
-+	OFFSET(PT_R15, pt_regs, regs[15]);
-+	OFFSET(PT_R16, pt_regs, regs[16]);
-+	OFFSET(PT_R17, pt_regs, regs[17]);
-+	OFFSET(PT_R18, pt_regs, regs[18]);
-+	OFFSET(PT_R19, pt_regs, regs[19]);
-+	OFFSET(PT_R20, pt_regs, regs[20]);
-+	OFFSET(PT_R21, pt_regs, regs[21]);
-+	OFFSET(PT_R22, pt_regs, regs[22]);
-+	OFFSET(PT_R23, pt_regs, regs[23]);
-+	OFFSET(PT_R24, pt_regs, regs[24]);
-+	OFFSET(PT_R25, pt_regs, regs[25]);
-+	OFFSET(PT_R26, pt_regs, regs[26]);
-+	OFFSET(PT_R27, pt_regs, regs[27]);
-+	OFFSET(PT_R28, pt_regs, regs[28]);
-+	OFFSET(PT_R29, pt_regs, regs[29]);
-+	OFFSET(PT_R30, pt_regs, regs[30]);
-+	OFFSET(PT_R31, pt_regs, regs[31]);
-+	OFFSET(PT_CRMD, pt_regs, csr_crmd);
-+	OFFSET(PT_PRMD, pt_regs, csr_prmd);
-+	OFFSET(PT_EUEN, pt_regs, csr_euen);
-+	OFFSET(PT_ECFG, pt_regs, csr_ecfg);
-+	OFFSET(PT_ESTAT, pt_regs, csr_estat);
-+	OFFSET(PT_ERA, pt_regs, csr_era);
-+	OFFSET(PT_BVADDR, pt_regs, csr_badvaddr);
-+	OFFSET(PT_ORIG_A0, pt_regs, orig_a0);
-+	DEFINE(PT_SIZE, sizeof(struct pt_regs));
-+	BLANK();
-+}
-+
-+int main(void)
-+{
-+	output_ptreg_defines();
-+	return 0;
-+}
-diff --git a/arch/loongarch/lib/boot.c b/arch/loongarch/lib/boot.c
-new file mode 100644
-index 000000000000..327be16bb59f
---- /dev/null
-+++ b/arch/loongarch/lib/boot.c
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <asm/u-boot.h>
-+
-+unsigned long do_go_exec(ulong (*entry)(int, char * const []),
-+			 int argc, char *const argv[])
-+{
-+	cleanup_before_linux();
-+
-+	return entry(argc, argv);
-+}
-diff --git a/arch/loongarch/lib/cache.c b/arch/loongarch/lib/cache.c
-new file mode 100644
-index 000000000000..3d4551527483
---- /dev/null
-+++ b/arch/loongarch/lib/cache.c
-@@ -0,0 +1,243 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
++ * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + * Copyright (C) 2026 Yao Zi <me@ziyao.cc>
 + */
 +
-+#include <asm/cache.h>
-+#include <asm/global_data.h>
-+#include <asm/loongarch.h>
-+#include <cpu_func.h>
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
++#include <hang.h>
++#include <stdio.h>
 +
-+#define CPUCFG_LX_IUPRE		BIT(0)
-+#define CPUCFG_LX_IUUNIFY	BIT(1)
-+#define CPUCFG_LX_IUINCL	BIT(3)
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/*
-+ * Existing LoongArch hardware maintains I-D cache consistency in hardware,
-+ * thus only an ibar instruction is used in operations related to I-cache, in
-+ * order to prevent pipeline hazard.
-+ *
-+ * Cache operations is implemented through CACOP instruction, which has three
-+ * arguments: index of the cache, the operation, and either the cache line
-+ * index, or a virtual address. The first two arguments are combined into an
-+ * immediate operand.
-+ *
-+ * Caches are indexed from L1 to L3. For a level with separate I/D caches, the
-+ * I-cache is ordered before the D-cache.
-+ *
-+ * Currently three cache operations are defined,
-+ *  - initialize a cache line
-+ *  - invalidate (and possibly writeback if it's a D-cache) a cache line, where
-+ *    the cache line is indexed by
-+ *    - cache line index (CACHE_INDEX_INVWB), or
-+ *    - virtual address (CACHE_HIT_INVWB)
-+ *
-+ * Invalidating the leaf cache automatically invalidates other caches if it's
-+ * inclusive.
-+ */
-+
-+static inline void flush_cache_line_index(unsigned int cache_id,
-+					  unsigned long index)
++#if !CONFIG_IS_ENABLED(SYSRESET)
++void reset_cpu(void)
 +{
-+#define do_flush(_cache_id, _index)					\
-+	case _cache_id:							\
-+		cache_op(FIELD_PREP(CACHE_OP, CACHE_INDEX_INVWB) |	\
-+			 FIELD_PREP(CACHE_INDEX, _cache_id),		\
-+			 _index);					\
-+		break;
-+
-+	switch (cache_id) {
-+		do_flush(0, index);
-+		do_flush(1, index);
-+		do_flush(2, index);
-+		do_flush(3, index);
-+		do_flush(4, index);
-+		do_flush(5, index);
-+	}
-+
-+#undef do_flush
++	printf("reset not supported yet\n");
++	hang();
 +}
-+
-+static inline void flush_cache_line_hit(unsigned int cache_id,
-+					unsigned long addr)
-+{
-+#define do_flush(_cache_id, _addr)					\
-+	case _cache_id:							\
-+		cache_op(FIELD_PREP(CACHE_OP, CACHE_HIT_INVWB) |	\
-+			 FIELD_PREP(CACHE_INDEX, _cache_id),		\
-+			 _addr);					\
-+		break;
-+
-+	switch (cache_id) {
-+		do_flush(0, addr);
-+		do_flush(1, addr);
-+		do_flush(2, addr);
-+		do_flush(3, addr);
-+		do_flush(4, addr);
-+		do_flush(5, addr);
-+	}
-+
-+#undef do_flush
-+}
-+
-+void invalidate_icache_all(void)
-+{
-+	asm volatile ("\tibar 0\n"::);
-+}
-+
-+static void flush_dcache_level_all(unsigned int level)
-+{
-+	unsigned int way, set;
-+	unsigned long index = 0;
-+
-+	for (set = 0; set < gd->arch.dcache_sets[level]; set++) {
-+		for (way = 0; way < gd->arch.dcache_ways[level]; way++) {
-+			flush_cache_line_index(gd->arch.dcache_index[level],
-+					       index);
-+			index++;
-+		}
-+
-+		index -= gd->arch.dcache_ways[level];
-+		index += gd->arch.dcache_linesizes[level];
-+	}
-+}
-+
-+__weak void flush_dcache_all(void)
-+{
-+	unsigned int level;
-+
-+	if (gd->arch.dcache_inclusive) {
-+		flush_dcache_level_all(gd->arch.dcache_levels - 1);
-+		return;
-+	}
-+
-+	for (level = 0; level < gd->arch.dcache_levels; level++)
-+		flush_dcache_level_all(level);
-+}
-+
-+static void flush_dcache_level(unsigned int level, unsigned long addr,
-+			       unsigned long end)
-+{
-+	for (; addr < end; addr += gd->arch.dcache_linesizes[level])
-+		flush_cache_line_hit(gd->arch.dcache_index[level], addr);
-+}
-+
-+__weak void flush_dcache_range(unsigned long start, unsigned long end)
-+{
-+	unsigned int level;
-+
-+	if (gd->arch.dcache_inclusive) {
-+		flush_dcache_level(gd->arch.dcache_levels - 1, start, end);
-+		return;
-+	}
-+
-+	for (level = 0; level < gd->arch.dcache_levels; level++)
-+		flush_dcache_level(level, start, end);
-+}
-+
-+__weak void invalidate_icache_range(unsigned long start, unsigned long end)
-+{
-+	/* LoongArch mandatory hardware I-Cache coherence */
-+	invalidate_icache_all();
-+}
-+
-+__weak void invalidate_dcache_range(unsigned long start, unsigned long end)
-+{
-+	flush_dcache_range(start, end);
-+}
-+
-+__weak void cache_flush(void)
-+{
-+	flush_dcache_all();
-+}
-+
-+__weak void cache_invalidate(void)
-+{
-+	flush_dcache_all();
-+}
-+
-+__weak void flush_cache(unsigned long addr, unsigned long size)
-+{
-+	invalidate_icache_range(addr, addr + size);
-+	flush_dcache_range(addr, addr + size);
-+}
-+
-+__weak void dcache_enable(void)
-+{
-+}
-+
-+__weak void dcache_disable(void)
-+{
-+}
-+
-+__weak int dcache_status(void)
-+{
-+	return 0;
-+}
-+
-+static void populate_dcache_properties(u32 cfg0, unsigned int level,
-+				       unsigned int cfgoff)
-+{
-+	u32 cfg1 = read_cpucfg(cfgoff);
-+
-+	if (level != 0)
-+		gd->arch.dcache_inclusive = cfg0 & CPUCFG_LX_IUINCL;
-+
-+	gd->arch.dcache_ways[level] = FIELD_GET(CPUCFG_CACHE_WAYS_M, cfg1) + 1;
-+	gd->arch.dcache_sets[level] = 1 << FIELD_GET(CPUCFG_CACHE_SETS_M, cfg1);
-+	gd->arch.dcache_linesizes[level] = 1 << FIELD_GET(CPUCFG_CACHE_LSIZE_M, cfg1);
-+}
-+
-+void probe_caches(void)
-+{
-+	unsigned int level = 0, index = 0;
-+	u32 cfg = read_cpucfg(LOONGARCH_CPUCFG16);
-+
-+	if (cfg & CPUCFG16_L1_IUPRE) {
-+		if (cfg & CPUCFG16_L1_IUUNIFY) {
-+			gd->arch.dcache_index[level] = index;
-+			populate_dcache_properties(cfg, level++,
-+						   LOONGARCH_CPUCFG17);
-+		}
-+
-+		index++;
-+	}
-+
-+	if (cfg & CPUCFG16_L1_DPRE) {
-+		gd->arch.dcache_index[level] = index++;
-+		populate_dcache_properties(cfg, level++, LOONGARCH_CPUCFG18);
-+	}
-+
-+	cfg >>= 3;
-+
-+	/*
-+	 * Currently no CPUCFG register is defined to hold information for
-+	 * separate L2D and L3D. Assume that L2 and L3, if present, must be
-+	 * unified or instruction-only.
-+	 */
-+	for (; level < CACHE_MAX_LEVEL; level++) {
-+		if (cfg & CPUCFG_LX_IUPRE && cfg & CPUCFG_LX_IUUNIFY) {
-+			gd->arch.dcache_index[level] = index++;
-+			populate_dcache_properties(cfg, level,
-+						   LOONGARCH_CPUCFG17 + level);
-+		} else {
-+			break;
-+		}
-+
-+		cfg >>= 7;
-+	}
-+
-+	gd->arch.dcache_levels = level;
-+}
-+
-+__weak void enable_caches(void)
-+{
-+	cache_invalidate();
-+	/* Enable cache for direct address translation mode */
-+	csr_xchg64(1 << CSR_CRMD_DACM_SHIFT, CSR_CRMD_DACM, LOONGARCH_CSR_CRMD);
-+}
-diff --git a/arch/loongarch/lib/reset.c b/arch/loongarch/lib/reset.c
++#endif
+diff --git a/arch/loongarch/cpu/smp_secondary.S b/arch/loongarch/cpu/smp_secondary.S
 new file mode 100644
-index 000000000000..ddf29ee41d95
+index 000000000000..4ef4b16a3fb6
 --- /dev/null
-+++ b/arch/loongarch/lib/reset.c
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <command.h>
-+#include <cpu_func.h>
-+
-+int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	reset_cpu();
-+
-+	return 0;
-+}
-diff --git a/arch/loongarch/lib/setjmp.S b/arch/loongarch/lib/setjmp.S
-new file mode 100644
-index 000000000000..12981d0013fa
---- /dev/null
-+++ b/arch/loongarch/lib/setjmp.S
-@@ -0,0 +1,52 @@
++++ b/arch/loongarch/cpu/smp_secondary.S
+@@ -0,0 +1,55 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
++ * Loop to run on secondary cores for LoongArch CPU
++ *
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <config.h>
-+#include <asm/asm.h>
 +#include <linux/linkage.h>
++#include <asm/asm.h>
++#include <asm/loongarch.h>
++#include <asm/arch/entry-init.h>
 +
-+.pushsection .text.setjmp, "ax"
-+ENTRY(setjmp)
-+	LONG_S		s0, a0, 0
-+	LONG_S 		s1, a0, (1 * LONGSIZE)
-+	LONG_S		s2, a0, (2 * LONGSIZE)
-+	LONG_S		s3, a0, (3 * LONGSIZE)
-+	LONG_S		s4, a0, (4 * LONGSIZE)
-+	LONG_S		s5, a0, (5 * LONGSIZE)
-+	LONG_S		s6, a0, (6 * LONGSIZE)
-+	LONG_S		s7, a0, (7 * LONGSIZE)
-+	LONG_S		s8, a0, (8 * LONGSIZE)
-+	LONG_S		fp, a0, (9 * LONGSIZE)
-+	LONG_S		sp, a0, (10 * LONGSIZE)
-+	LONG_S		ra, a0, (11 * LONGSIZE)
++ENTRY(secondary_core_loop)
++	smp_secondary_setup
 +
-+	move		a0, zero
-+	ret
-+ENDPROC(setjmp)
-+.popsection
++	PTR_LI		t0, LOONGARCH_IOCSR_MBUF0
++	LONG_IOCSRWR	zero, t0
 +
-+.pushsection .text.longjmp, "ax"
-+ENTRY(longjmp)
-+	LONG_L		s0, a0, 0
-+	LONG_L 		s1, a0, (1 * LONGSIZE)
-+	LONG_L		s2, a0, (2 * LONGSIZE)
-+	LONG_L		s3, a0, (3 * LONGSIZE)
-+	LONG_L		s4, a0, (4 * LONGSIZE)
-+	LONG_L		s5, a0, (5 * LONGSIZE)
-+	LONG_L		s6, a0, (6 * LONGSIZE)
-+	LONG_L		s7, a0, (7 * LONGSIZE)
-+	LONG_L		s8, a0, (8 * LONGSIZE)
-+	LONG_L		fp, a0, (9 * LONGSIZE)
-+	LONG_L		sp, a0, (10 * LONGSIZE)
-+	LONG_L		ra, a0, (11 * LONGSIZE)
++	/* Enable IPI interrupt for wakeup */
++	LONG_LI		t0, ECFGF_IPI
++	csrxchg		t0, t0, LOONGARCH_CSR_ECFG
 +
-+	/* Move the return value in place, but return 1 if passed 0. */
-+	li.w		a0, 1
-+	beqz		a1, 1f
-+	move		a0, a1
++	LONG_LI		t0, 0xffffffff
++	li.w		t1, LOONGARCH_IOCSR_IPI_CLEAR
++	iocsrwr.w	t0, t1
++	li.w		t1, LOONGARCH_IOCSR_IPI_EN
++	iocsrwr.w	t0, t1
++
++	/* t1 for spin table */
++	PTR_LI		t1, LOONGARCH_IOCSR_MBUF0
++
 +1:
-+	jr		ra
-+ENDPROC(longjmp)
-+.popsection
++	/* Query spin table */
++	idle 0
++	nop
++	iocsrrd.w	t0, t1
++	beqz		t0, 1b
++
++	/* Clear IPI interrupt */
++	PTR_LI		t1, LOONGARCH_IOCSR_IPI_STATUS
++	iocsrrd.w	t0, t1
++	PTR_LI		t1, LOONGARCH_IOCSR_IPI_CLEAR
++	iocsrwr.w	t0, t1
++
++	/* Mask all interrupts */
++	LONG_LI		t0, ECFG0_IM
++	csrxchg		zero, t0, LOONGARCH_CSR_ECFG
++
++	/* Jump to secondary core */
++	PTR_LI		t1, LOONGARCH_IOCSR_MBUF0
++	LONG_IOCSRRD	t0, t1
++	/* If we ever return, put us back to the loop */
++	la.pcrel	ra, secondary_core_loop
++	jirl		zero, t0, 0
++END(secondary_core_loop)
+diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
+new file mode 100644
+index 000000000000..fdf3697834f7
+--- /dev/null
++++ b/arch/loongarch/cpu/start.S
+@@ -0,0 +1,168 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Startup Code for LoongArch CPU
++ *
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
++
++#include <asm-offsets.h>
++#include <config.h>
++#include <elf.h>
++#include <system-constants.h>
++#include <asm/addrspace.h>
++#include <asm/asm.h>
++#include <asm/loongarch.h>
++#include <asm/arch/entry-init.h>
++
++#define BOOTCORE_ID		0
++
++.section .text
++.globl _start
++_start:
++	/* Allow arch specific setup code for MCSR stuff */
++	entry_setup
++
++	/* Disable interrupt */
++	LONG_LI		t0, CSR_CRMD_IE
++	csrxchg		zero, t0, LOONGARCH_CSR_CRMD
++
++	/* Configure reset ebase */
++	la.pcrel	t0, exception_entry
++	csrwr		t0, LOONGARCH_CSR_EENTRY
++
++	/* Setup direct map window for later use */
++	PTR_LI		t0, CSR_DMW0_INIT
++	csrwr		t0, LOONGARCH_CSR_DMWIN0
++	PTR_LI		t0, CSR_DMW1_INIT
++	csrwr		t0, LOONGARCH_CSR_DMWIN1
++
++	/* Branch out for nonboot core */
++	csrrd		t0, LOONGARCH_CSR_CPUID
++	andi		t0, t0, CSR_CPUID_COREID
++	LONG_LI		t1, BOOTCORE_ID
++	bne		t1, t0, secondary_core_loop
++
++/*
++ * Set stackpointer in internal/ex RAM to call board_init_f
++ */
++call_board_init_f:
++	PTR_LI		t0, (SYS_INIT_SP_ADDR & STACK_ALIGN)
++	move		sp, t0			/* save stack pointer */
++/*
++ * Now sp points to the right stack belonging to current CPU.
++ * It's essential before any function call, otherwise, we get data-race.
++ */
++
++call_board_init_f_0:
++	/* find top of reserve space */
++	PTR_LI		t1, 1
++	PTR_SLL		t1, t1, CONFIG_STACK_SIZE_SHIFT
++	PTR_SUB		a0, t0, t1		/* t1 -> size of one CPU stack */
++	bl		board_init_f_alloc_reserve
++
++	/* Set global pointer to u0 ($r21) */
++	move		u0, a0
++	bl		board_init_f_init_reserve
++
++	/* Probe and enable cache */
++	bl		probe_caches
++	bl		enable_caches
++
++#ifdef CONFIG_DEBUG_UART
++	bl		debug_uart_init
++#endif
++
++	move		a0, zero		/* a0 <-- boot_flags = 0 */
++	la.pcrel	t5, board_init_f
++	jirl		ra, t5, 0		/* jump to board_init_f() */
++
++/*
++ * void relocate_code(addr_sp, gd, addr_moni)
++ *
++ * This "function" does not return, instead it continues in RAM
++ * after relocating the monitor code.
++ *
++ */
++.globl relocate_code
++relocate_code:
++	move		s2, a0			/* save addr_sp */
++	move		s3, a1			/* save addr of gd */
++	move		s4, a2			/* save addr of destination */
++
++/*
++ *Set up the stack
++ */
++stack_setup:
++	move		sp, s2
++	la.pcrel	t0, _start
++	PTR_SUB		s5, s4, t0		/* s5 <- relocation offset */
++	beq		t0, s4, clear_bss	/* skip relocation */
++
++	move		t1, s4			/* t1 <- scratch for copy_loop */
++	la.pcrel	t2, __bss_start		/* t2 <- source end address */
++
++copy_loop:
++	LONG_L		t5, t0, 0
++	PTR_ADDI	t0, t0, LONGSIZE
++	LONG_S		t5, t1, 0
++	PTR_ADDI	t1, t1, LONGSIZE
++	blt		t0, t2, copy_loop
++
++/*
++ * Update dynamic relocations after board_init_f
++ */
++fix_rela_dyn:
++	la.pcrel	t1, __rel_dyn_start
++	la.pcrel	t2, __rel_dyn_end
++	beq		t1, t2, clear_bss
++	PTR_ADD		t1, t1, s5		/* t1 <- rela_dyn_start in RAM */
++	PTR_ADD		t2, t2, s5		/* t2 <- rela_dyn_end in RAM */
++
++6:
++	PTR_L		t5, t1, PTRSIZE		/* t5 <-- relocation info:type */
++	PTR_LI		t3, R_LARCH_RELATIVE	/* reloc type R_LARCH_RELATIVE */
++	bne		t5, t3, 8f		/* skip non-RELATIVE entries */
++	PTR_L		t3, t1, 0
++	PTR_L		t5, t1, (PTRSIZE * 2)	/* t5 <-- addend */
++	PTR_ADD		t5, t5, s5		/* t5 <-- location to fix up in RAM */
++	PTR_ADD		t3, t3, s5		/* t3 <-- location to fix up in RAM */
++	PTR_S		t5, t3, 0
++8:
++	PTR_ADDI	t1, t1, (PTRSIZE * 3)
++	blt		t1, t2, 6b
++
++
++	/* Update exception entry */
++	la.pcrel	t0, exception_entry
++	PTR_ADD		t0, t0, s5
++	csrwr		t0, LOONGARCH_CSR_EENTRY
++
++clear_bss:
++	la.pcrel	t0, __bss_start		/* t0 <- rel __bss_start in FLASH */
++	PTR_ADD		t0, t0, s5		/* t0 <- rel __bss_start in RAM */
++	la.pcrel	t1, __bss_end		/* t1 <- rel __bss_end in FLASH */
++	PTR_ADD		t1, t1, s5		/* t1 <- rel __bss_end in RAM */
++
++clbss_l:
++	LONG_S		zero, t0, 0		/* clear loop... */
++	PTR_ADDI	t0, t0, LONGSIZE
++	blt		t0, t1, clbss_l
++
++
++/*
++ * We are done. Do not return, instead branch to second part of board
++ * initialization, now running from RAM.
++ */
++call_board_init_r:
++	bl		invalidate_icache_all
++	bl		flush_dcache_all
++	la.pcrel	t0, board_init_r        /* offset of board_init_r() */
++	PTR_ADD		t4, t0, s5		/* real address of board_init_r() */
++/*
++ * setup parameters for board_init_r
++ */
++	move		a0, s3			/* gd_t */
++	move		a1, s4			/* dest_addr */
++	move		s0, zero		/* fp == NULL */
++	jirl		ra, t4, 0		/* jump to board_init_r() */
++
 -- 
 2.55.0
 
