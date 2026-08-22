@@ -1,107 +1,104 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665E0C5DF97
-	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 08:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B02C5B572
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 11:30:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 245F44098E;
-	Sat, 22 Aug 2026 08:58:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B25D606EB;
+	Sat, 22 Aug 2026 11:30:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Y5Xoipc6FBh3; Sat, 22 Aug 2026 08:58:50 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Vb5R6tMR4uBA; Sat, 22 Aug 2026 11:30:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787389130;
-	bh=z4ly39pIcQfpCaRIy+B10T9AQH3pHVh+EW6Cbwjcb8o=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ybRLcwa/gFpVUpALaKRIJ5iOQmgqN1WVxX27auFPnCu9qnW5O/jsSbCE6u7tkiorm
-	 4Pg7OGnocPciF6IJs5zQEDN7OYYW0QpXLJHt9INEHKTnAPTLNdQYAiYtf7GH93HTxF
-	 uElb+KZlSTAnKB5Po7dnAoAkG7TbwFvUCxi27p1zY+h/F8XjXQJw2jbYu4ZRwpbQtb
-	 XCfI3PPfxIg8wkVP6HPUr/HhzjJhY7ftxQ2IXawS5JDG7/96giDSX7zy3ikBh5mk/9
-	 nTButm7i1nA/cqR3Flhq1KqK/KgVzFcwCmekK9YkX4KJlHyN+hA5yoXdgrHNDWj0ox
-	 7EfW4BjYuN6uA==
+	d=lists.u-boot-project.org; s=default; t=1787398243;
+	bh=ugmIi8Zi0Ybfo8gEchGvADWMKcCetyRX6jH3Xu8REXI=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=X7PWip/PMGzdukoLc7BCJdoRhf7VFK9Mv2sgck26bCpeZ6RwwGLQc2ce0fKRRXYsg
+	 hJzLjHMy1rTc2lCVDmcT3Z12WW6yul+uHLffWlV7T1NmbZPC8oh3RJb8BwzpQV4hSj
+	 KnjHkXTHwZ45Brgu5u1H2yRUk8F3LDjXAZQc7vfhblaCw6I2KieAQOj7BmEpTGDvLr
+	 FBEBbI/M+eMNMfvqGuHacMDxQWjZjlPiD4FOAF1tWNDKRXEV1vkKGQ5fZrQAZ8PdWs
+	 dLuHeAYsP8fCRDuopT+KMCUUgMru8l084M93xg7sdI4ub9hElMp4ap12Syd6t1wnVo
+	 GCo63gQyQoWig==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B66B5409A0;
-	Sat, 22 Aug 2026 08:58:49 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id BA30B4C4
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 72FE26069A;
+	Sat, 22 Aug 2026 11:30:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E6FEB476
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 11:30:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B77764005F
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CCB9B6069A
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 11:30:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6RfBDGoTRLJ9 for <u-boot@lists.u-boot-project.org>;
- Sat, 22 Aug 2026 08:58:45 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
- helo=sender4-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=pigmoral.tech
- header.i=junhui.liu@pigmoral.tech header.a=rsa-sha256 header.s=zmail
- header.b=KMwXQmvv
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BA19A4007C
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:44 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1787389093; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=crpdbcQYWFz9PCKmTXxap3/mlU2VotmkCKD1Smwn1H0+2TxsVdPan4HixTJtyapmr6h925fdRilW/cqGjTe9JtuJHVEVSeBP3IaRRVkFjq/Q2aS0jEFS4blpUmL/ZU4EHK6CPKtSfnj00t9OkEMsqg/gZvKB3kA/c1NQD5zfcWc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1787389093;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=z4ly39pIcQfpCaRIy+B10T9AQH3pHVh+EW6Cbwjcb8o=; 
- b=MYq7qeSA2bCfTyhPF55b7V7pUVfsK3UmFSblrvT9Y8ALAeVIUpYrXABl94YSoj/0QCIS6juXOkRmJMmUHS/BnPq5jveBPZHmou617sLXmYxPqRvtFJjI/54UFiNkeg1zvWivFCM86Aq3QELtgFUACsYdIbeVzDyqvNuMSiSBVHs=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787389093; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=z4ly39pIcQfpCaRIy+B10T9AQH3pHVh+EW6Cbwjcb8o=;
- b=KMwXQmvvbmPZozqQNJO888TMVqrvX4O3BQ4GA42FMaRo1pyFqtYzNTWGUZIhvecz
- iZFb9dRHNlyjeA8ltToGXQeh/uJJQldGpfas9ErLq/A07dzIDXeAqthmueHeSH87NRq
- JpuXpK4GZScWKgO00rLuP82y0/Sozuez63JZ8r0k=
-Received: by mx.zohomail.com with SMTPS id 1787389090291438.9463218934003;
- Sat, 22 Aug 2026 01:58:10 -0700 (PDT)
-From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Sat, 22 Aug 2026 16:56:47 +0800
-Subject: [PATCH 1/2] tools: mkimage: add SpacemiT K3 AIHD image support
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id y6rg6ZYhQOqO for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 11:30:41 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=M5evrGu8
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 07F9D6064D
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 11:30:40 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 6F66E41710;
+ Sat, 22 Aug 2026 11:30:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04C071F000E9;
+ Sat, 22 Aug 2026 11:30:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787398239;
+ bh=ugmIi8Zi0Ybfo8gEchGvADWMKcCetyRX6jH3Xu8REXI=;
+ h=From:Date:Subject:To:Cc;
+ b=M5evrGu8f4OgBL+hspxByuqUPNn6y+nCDTU4Z9hxvZbPYjsX1oV7UFcBauNjfMl6t
+ HWITQzfYswZf3jlI5OeU+UKvYR3RsQ3L2bAnrQJBW5ukPflE0R1bn9TyHyOEwnAVXG
+ 1eS+2r0kt2xZXoCDXuyzkhwVcLQY9OHiWxSDWwUkiVSJ+4+DyepRQNI2EAus2A74AQ
+ KvjjOqlb4qfVDx3vLf75p6LqYXXgA5mLK1nRijg0qpwQjyM/yIN0TPoZj0TIYNHjOI
+ MSKsr5zLGKfSY1GgarXl/5EoAykDGf4bCZLRNOJdg+8vgqGr1uVD9klozVGT1Me1Dh
+ uAWeA/ox/ahKQ==
+From: Yixun Lan <dlan@kernel.org>
+Date: Sat, 22 Aug 2026 11:30:28 +0000
+Subject: [PATCH] gpio: spacemit: add support for K3 SoC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260822-spacemit-aihd-v1-1-bf4c41993891@pigmoral.tech>
-References: <20260822-spacemit-aihd-v1-0-bf4c41993891@pigmoral.tech>
-In-Reply-To: <20260822-spacemit-aihd-v1-0-bf4c41993891@pigmoral.tech>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Junhui Liu <junhui.liu@pigmoral.tech>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Daniel Golle <daniel@makrotopia.org>, Randolph Sapp <rs@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Guodong Xu <guodong.xu@oss.qualcomm.com>, Yixun Lan <dlan@kernel.org>, 
- spacemit@lists.linux.dev
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8969;
- i=junhui.liu@pigmoral.tech; h=from:subject:message-id;
- bh=WprfhXQP87Zvs00PODGY6TMF51/uDxKiCUSciP41FxU=;
- b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLI6UzrPPj7g0Vm2/6nVNkeOhjU3Re98YJ//WNHnqMDpl
- /+evTBJ7ChlYRDjYpAVU2Th8hf/Z63D8+2IQOt9mDmsTCBDGLg4BWAivqoM/3SOrd3INMU9OWyX
- lsrUD4kik3TrJUWufzFN187blNbyahbD/+D/GmXMXu5pXBVPUsWPJzxg/5hTGG966H/jliiLy/P
- Z2AE=
-X-Developer-Key: i=junhui.liu@pigmoral.tech; a=openpgp;
- fpr=15B30CC69C4BF0CC3C08F85A2A90CDC122DF37BF
-X-ZohoMailClient: External
+Message-Id: <20260822-01-gpio-pinctrl-support-v1-1-6be2f4c71c5d@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAFOIiWoC/yXMQQrCMBBA0auUWTuQRGqsVxEXJh3riCRhJpVC6
+ d0bdfkW/6+gJEwKl24FoQ8r59RgDx3E5z1NhDw2gzPuZLxzaCxOhTMWTrHKG3UuJUvFsx99sP2
+ xH4YArS5CD15+5+vtb53Di2L97mDbdgt0AIB7AAAA
+X-Change-ID: 20260722-01-gpio-pinctrl-support-87d7b153599b
+To: u-boot@lists.u-boot-project.org, u-boot-spacemit@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Yixun Lan <dlan@kernel.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6976; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=BkX2FFxY3q4UB6+VCChVZR1pOg15+s6hDKUGCuD8I2A=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqiYharm9FmFG4oghdGw9fO5q+0vLYPaA29p+7Z
+ 7cErO/J59yJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaomIWhsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
+ maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
+ QACgkQMarqR1lNu+3KBw//U0dnpEv83Fmg0vRSpzDx2S5E4VgSS8iURgYqQMUzPEtWsjN/xB7Ki
+ skw5OtkTsrJtlq34UJul67pKwT0lnXmJoMaXjx28y6YWSVCh/NwFIsLD6hPVbh9HYj6j27cMZ3G
+ ++i1uRV8RB7sAWtnCjh4dqqCWsm2Tcv0C/ENfW0kT3S0QJeg6yHKWP+8f+FkxU5bxzXzECw9AyQ
+ wRW7jzhwkMQRU1F+7RvBSvZRc1CZeSKVoYZOdXVk+r9LqlgXomvdRtbAk+R4FagXenOEDwAB5Kz
+ f1kRyDfnWvrQEH4MJK3HcXaSkJro/nDQpHXIvFpcJxQxyyhn/BeOVgCO0LtvGHz3yTElTN5shvo
+ jNsrJ5gcJKXvrrHNIFzLBevNQKkvM8EuYe+Qug4gp5+gFWT902qI4eyVy5/f2SIEL5zH9fxBcW7
+ HHigjoeQLPo6TMdkBj5X+WLQRgAs3Z0bod7yugGUxwnCxva5ppMCj6VDB0BlCa06eVFbdc0jUHf
+ ZcKx4pOEB22oGXOsb9hRyfMydRcl5GJEv6GKlW3P4DhcTJ+zJa+/UZwgl1mFuG15WHTnoRb6DFg
+ mFFp64UgA8Cxdqz0yjfJ26Hs4BOeF2bMrx2qUpTCNrou6CnSoHLuF0SEYJyCxQgBj97+dOboP1L
+ A81MilnlBanARsTlVK9DJ5GsUZIDOg=
+X-Developer-Key: i=dlan@kernel.org; a=openpgp;
+ fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -115,282 +112,224 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The SpacemiT BootROM loads the FSBL from an AIHD image: a fixed 4 KiB
-header with two metadata headers and authentication information, followed
-by a 32-byte-aligned SPL payload and a trailing authentication area. K1
-and K3 share the same layout, but use different integrity and
-authentication schemes. K1 requires RSA-signed images, while K3 uses
-CRC32 to verify images in non-secure boot mode.
+Based on upstream Linux:
+  da64eb51595b ("gpio: spacemit: Add GPIO support for K3 SoC")
 
-Add mkimage type "aihdimage" for the K3 CRC32 path. Populate both
-metadata headers, fill their CRC32 values and the payload CRC32, and
-reserve the authentication areas required by the layout. Only "-n k3" is
-wired up so far, but SoC differences already go through a variant table
-so K1 RSA signing can be added later.
+SpacemiT K3 SoC uses different GPIO register and bank layout compared
+to old K1 generation. Refactor the driver by moving hard-coded register
+offsets into per-SoC tables and locating them via driver data.
 
-The AIHD header has no reliable K1/K3 identifier, so the SoC is selected
-with -n. dumpimage is omitted for the same reason: it cannot take -n and
-therefore cannot differentiate between the two variants.
-
-Only support for non-secure boot mode on the K3 SoC is implemented in
-this patch. K1 support and the RSA authentication scheme can be added
-later.
-
-Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+Signed-off-by: Yixun Lan <dlan@kernel.org>
 ---
- boot/image.c      |   1 +
- include/image.h   |   1 +
- tools/Makefile    |   3 +-
- tools/aihdimage.c | 202 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 206 insertions(+), 1 deletion(-)
+ drivers/gpio/Kconfig         | 11 ++---
+ drivers/gpio/spacemit_gpio.c | 97 ++++++++++++++++++++++++++++++--------------
+ 2 files changed, 72 insertions(+), 36 deletions(-)
 
-diff --git a/boot/image.c b/boot/image.c
-index 185d52ba492f..8dbfb677e631 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -179,6 +179,7 @@ static const table_entry_t uimage_type[] = {
- 	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
- 	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
- 	{	IH_TYPE_AMLIMAGE,   "amlimage",   "Amlogic Boot Image" },
-+	{	IH_TYPE_AIHDIMAGE, "aihdimage", "SpacemiT AIHD Boot Image" },
- 	{	-1,		    "",		  "",			},
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index a11f3043670..78b4b45be87 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -450,12 +450,13 @@ config SANDBOX_GPIO_COUNT
+ 	  Select a suitable value depending on your needs.
+ 
+ config SPACEMIT_GPIO
+-	bool "Spacemit K1 GPIO driver"
+-	depends on DM_GPIO && TARGET_SPACEMIT_K1
++	bool "Spacemit K1/K3 GPIO driver"
++	depends on DM_GPIO && (TARGET_SPACEMIT_K1 || TARGET_SPACEMIT_K3)
+ 	help
+-	  Support the GPIO device in Spacemit SoCs. The GPIOs are arranged
+-	  into a number of banks (different for each SoC type) each with 32
+-	  GPIOs.
++	  Support the GPIO device in Spacemit K1 and K3 SoCs. The GPIOs are
++	  arranged into a number of banks (different for each SoC type) each
++	  with 32 GPIOs.
++
+ 
+ config SUNXI_GPIO
+ 	bool "Allwinner GPIO driver"
+diff --git a/drivers/gpio/spacemit_gpio.c b/drivers/gpio/spacemit_gpio.c
+index de71880df15..e0716a84dfc 100644
+--- a/drivers/gpio/spacemit_gpio.c
++++ b/drivers/gpio/spacemit_gpio.c
+@@ -19,37 +19,28 @@
+ #define GPIO_TO_BANK(pin)	((pin) / GPIO_BANK_SIZE)
+ #define GPIO_TO_BIT(pin)	((pin) % GPIO_BANK_SIZE)
+ 
+-static inline int gpio_to_reg_offset(unsigned int pin)
+-{
+-	unsigned int bank = GPIO_TO_BANK(pin);
+-
+-	if (bank == 0)
+-		return 0;
+-	else if (bank == 1)
+-		return 4;
+-	else if (bank == 2)
+-		return 8;
+-	else if (bank == 3)
+-		return 0x100;
+-	log_warning("Use default GPIO bank for an invalid GPIO[%d].\n", pin);
+-	return 0;
+-}
+-
+-#define REG_PLR(pin)		(0x00 + gpio_to_reg_offset(pin))
+-#define REG_PDR(pin)		(0x0c + gpio_to_reg_offset(pin))
+-#define REG_PSR(pin)		(0x18 + gpio_to_reg_offset(pin))
+-#define REG_PCR(pin)		(0x24 + gpio_to_reg_offset(pin))
+-#define REG_SDR(pin)		(0x54 + gpio_to_reg_offset(pin))
+-#define REG_CDR(pin)		(0x60 + gpio_to_reg_offset(pin))
++#define to_spacemit_gpio_regs(priv, reg)	((priv)->data->offsets[reg])
++
++enum spacemit_gpio_registers {
++	SPACEMIT_GPLR,
++	SPACEMIT_GPDR,
++	SPACEMIT_GPSR,
++	SPACEMIT_GPCR,
++	SPACEMIT_GSDR,
++	SPACEMIT_GCDR,
++};
+ 
+ struct spacemit_gpio_data {
+ 	u16	gpio_base;
+ 	u16	gpio_count;
+ 	u8	num_banks;
++	const u16	*bank_offsets;
++	const u16	*offsets;
  };
  
-diff --git a/include/image.h b/include/image.h
-index 6edcb1995bfe..7d101960cac6 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -235,6 +235,7 @@ enum image_type_t {
- 	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
- 	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
- 	IH_TYPE_AMLIMAGE,		/* Amlogic Boot Image */
-+	IH_TYPE_AIHDIMAGE,		/* SpacemiT AIHD Boot Image */
- 
- 	IH_TYPE_COUNT,			/* Number of image types */
+ struct spacemit_gpio_priv {
+ 	void __iomem *regs;
++	const struct spacemit_gpio_data *data;
  };
-diff --git a/tools/Makefile b/tools/Makefile
-index 535a5d51c89e..e838e16e0f05 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -110,7 +110,8 @@ KWB_IMAGE_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := kwbimage.o
- ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
  
- # common objs for dumpimage and mkimage
--dumpimage-mkimage-objs := aisimage.o \
-+dumpimage-mkimage-objs := aihdimage.o \
-+			aisimage.o \
- 			amlimage.o \
- 			atmelimage.o \
- 			$(FIT_OBJS-y) \
-diff --git a/tools/aihdimage.c b/tools/aihdimage.c
-new file mode 100644
-index 000000000000..e4e9ecdd97d9
---- /dev/null
-+++ b/tools/aihdimage.c
-@@ -0,0 +1,202 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (C) 2026 Junhui Liu <junhui.liu@pigmoral.tech>
-+ *
-+ * The SpacemiT AIHD boot image consists of a fixed image header followed by an
-+ * aligned SPL payload and a trailing authentication area. The image header
-+ * contains two metadata headers and areas reserved for authentication data.
-+ *
-+ * The image layout is:
-+ *
-+ *   0x000             root key
-+ *   0x100             header0
-+ *   0x120             key metadata
-+ *   0x300             OEM keys
-+ *   0xb00             signature0
-+ *   0xfe0             header1
-+ *   0x1000            SPL payload, with its end aligned to 32 bytes
-+ *   payload end       signature1 (0x100 bytes)
-+ */
+ static int spacemit_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
+@@ -85,10 +76,12 @@ static int spacemit_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
+ static int spacemit_gpio_get_value(struct udevice *dev, unsigned int offset)
+ {
+ 	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
+-	void __iomem *addr;
++	void __iomem *base, *addr;
+ 	u32 value, mask;
+ 
+-	addr = priv->regs + REG_PLR(offset);
++	base = priv->regs + priv->data->bank_offsets[GPIO_TO_BANK(offset)];
 +
-+#include <image.h>
-+#include <u-boot/crc.h>
-+#include "imagetool.h"
++	addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GPLR);
+ 	value = readl(addr);
+ 	mask = 1 << GPIO_TO_BIT(offset);
+ 	return !!(value & mask);
+@@ -97,10 +90,12 @@ static int spacemit_gpio_get_value(struct udevice *dev, unsigned int offset)
+ static int spacemit_gpio_get_function(struct udevice *dev, unsigned int offset)
+ {
+ 	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
+-	void __iomem *addr;
++	void __iomem *base, *addr;
+ 	u32 value, mask;
+ 
+-	addr = priv->regs + REG_PDR(offset);
++	base = priv->regs + priv->data->bank_offsets[GPIO_TO_BANK(offset)];
 +
-+#define AIHD_MAGIC		"AIHD"
-+#define AIHD_PAYLOAD_ALIGN	32
-+#define AIHD_AUTH_SIZE		0x100
++	addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GPDR);
+ 	value = readl(addr);
+ 	mask = 1 << GPIO_TO_BIT(offset);
+ 	if (value & mask)
+@@ -130,23 +125,25 @@ static int spacemit_gpio_set_flags(struct udevice *dev, unsigned int offset,
+ 				   ulong flags)
+ {
+ 	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
+-	void __iomem *addr;
++	void __iomem *base, *addr;
+ 	int value;
+ 
++	base = priv->regs + priv->data->bank_offsets[GPIO_TO_BANK(offset)];
 +
-+#define AIHD_FLAG_CRC32		(1U << 0)
-+
-+/**
-+ * struct aihdimage_header - metadata header within an AIHD image header
-+ *
-+ * @magic:	Magic (must be AIHD_MAGIC)
-+ * @version:	Image version used when anti-rollback is enabled by eFuse
-+ * @secure:	Version slot used when anti-rollback is enabled by eFuse
-+ * @reserved:	Reserved
-+ * @image_size:	Header0 stores the image header size
-+ *		Header1 stores the aligned payload size
-+ * @load_addr:	Unused
-+ * @header_crc:	Header0 and Header1 store the CRC32 of the preceding 24 bytes on K3
-+ * @image_crc:	Header1 stores the CRC32 of the aligned payload on K3
-+ */
-+struct aihdimage_header {
-+	uint8_t magic[4];
-+	uint8_t version;
-+	uint8_t secure;
-+	uint16_t reserved;
-+	uint64_t image_size;
-+	uint64_t load_addr;
-+	uint32_t header_crc;
-+	uint32_t image_crc;
-+} __packed;
-+
-+/**
-+ * struct aihdimage_image_header - fixed header area of an AIHD image
-+ *
-+ * @root_key:	Root public key
-+ * @header0:	Image layout and load information
-+ * @key_data:	Key metadata
-+ * @oem_keys:	OEM public-key area
-+ * @signature0:	Signature of the image configuration
-+ * @reserved:	Reserved
-+ * @header1:	SPL payload information
-+ */
-+struct aihdimage_image_header {
-+	uint8_t root_key[0x100];
-+	struct aihdimage_header header0;
-+	uint8_t key_data[0x1e0];
-+	uint8_t oem_keys[0x800];
-+	uint8_t signature0[AIHD_AUTH_SIZE];
-+	uint8_t reserved[0x3e0];
-+	struct aihdimage_header header1;
-+} __packed;
-+
-+/**
-+ * struct aihdimage_variant - SoC-specific AIHD properties
-+ *
-+ * @name:	SoC name passed to mkimage with -n
-+ * @flags:	SoC-specific AIHD flags
-+ */
-+struct aihdimage_variant {
-+	const char *name;
-+	unsigned int flags;
+ 	value = (flags & GPIOD_IS_OUT_ACTIVE) ? 1 : 0;
+ 	if (flags & GPIOD_IS_IN) {
+-		addr = priv->regs + REG_CDR(offset);
++		addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GCDR);
+ 		writel(1 << GPIO_TO_BIT(offset), addr);
+ 	}
+ 	if (flags & GPIOD_IS_OUT) {
+ 		if (value) {
+-			addr = priv->regs + REG_PSR(offset);
++			addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GPSR);
+ 			writel(1 << GPIO_TO_BIT(offset), addr);
+ 		} else {
+-			addr = priv->regs + REG_PCR(offset);
++			addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GPCR);
+ 			writel(1 << GPIO_TO_BIT(offset), addr);
+ 		}
+-		addr = priv->regs + REG_SDR(offset);
++		addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GSDR);
+ 		writel(1 << GPIO_TO_BIT(offset), addr);
+ 	}
+ 	return 0;
+@@ -207,6 +204,7 @@ static int spacemit_gpio_probe(struct udevice *dev)
+ 
+ 	data = (struct spacemit_gpio_data *)dev_get_driver_data(dev);
+ 	priv = dev_get_priv(dev);
++	priv->data = data;
+ 	priv->regs = dev_read_addr_ptr(dev);
+ 	if (!priv->regs) {
+ 		dev_err(dev, "Fail to get base address\n");
+@@ -232,14 +230,51 @@ out:
+ 	return ret;
+ }
+ 
++static const u16 spacemit_gpio_k1_offsets[] = {
++	[SPACEMIT_GPLR] = 0x00,
++	[SPACEMIT_GPDR] = 0x0c,
++	[SPACEMIT_GPSR] = 0x18,
++	[SPACEMIT_GPCR] = 0x24,
++	[SPACEMIT_GSDR] = 0x54,
++	[SPACEMIT_GCDR] = 0x60,
 +};
 +
-+static const struct aihdimage_variant aihdimage_variants[] = {
-+	{
-+		.name = "k3",
-+		.flags = AIHD_FLAG_CRC32,
-+	},
++static const u16 spacemit_gpio_k1_bank_offsets[] = {
++	0x0, 0x4, 0x8, 0x100,
 +};
 +
-+static const struct aihdimage_variant *aihdimage_get_variant(const char *name)
-+{
-+	int i;
++static const u16 spacemit_gpio_k3_offsets[] = {
++	[SPACEMIT_GPLR] = 0x00,
++	[SPACEMIT_GPDR] = 0x04,
++	[SPACEMIT_GPSR] = 0x08,
++	[SPACEMIT_GPCR] = 0x0c,
++	[SPACEMIT_GSDR] = 0x1c,
++	[SPACEMIT_GCDR] = 0x20,
++};
 +
-+	if (!name || !*name)
-+		return NULL;
++static const u16 spacemit_gpio_k3_bank_offsets[] = {
++	0x0, 0x40, 0x80, 0x100,
++};
 +
-+	for (i = 0; i < ARRAY_SIZE(aihdimage_variants); i++)
-+		if (!strcmp(name, aihdimage_variants[i].name))
-+			return &aihdimage_variants[i];
+ static const struct spacemit_gpio_data k1_gpio_data = {
+ 	.num_banks	= 4,
+ 	.gpio_count	= 128,
+ 	.gpio_base	= 0,
++	.bank_offsets	= spacemit_gpio_k1_bank_offsets,
++	.offsets	= spacemit_gpio_k1_offsets,
++};
 +
-+	return NULL;
-+}
-+
-+static void aihdimage_init_header(struct aihdimage_header *header, uint64_t image_size,
-+				  const struct aihdimage_variant *variant)
-+{
-+	uint32_t crc;
-+
-+	memcpy(header->magic, AIHD_MAGIC, sizeof(header->magic));
-+
-+	header->image_size = cpu_to_le64(image_size);
-+
-+	if (variant->flags & AIHD_FLAG_CRC32) {
-+		crc = crc32(0, (uint8_t *)header,
-+			    offsetof(struct aihdimage_header, header_crc));
-+		header->header_crc = cpu_to_le32(crc);
-+	}
-+}
-+
-+static int aihdimage_check_params(struct image_tool_params *params)
-+{
-+	if (!aihdimage_get_variant(params->imagename)) {
-+		fprintf(stderr, "%s: SpacemiT SoC must be specified with -n\n",
-+			params->cmdname);
-+		return EXIT_FAILURE;
-+	}
-+
-+	if (!params->dflag)
-+		return EXIT_FAILURE;
-+
-+	return EXIT_SUCCESS;
-+}
-+
-+static void aihdimage_print_header(const void *buf, struct image_tool_params *params)
-+{
-+	const struct aihdimage_image_header *image_header = buf;
-+	const struct aihdimage_header *header1 = &image_header->header1;
-+	uint64_t payload_size = le64_to_cpu(header1->image_size);
-+
-+	printf("SpacemiT AIHD Boot Image (%s)\n", params->imagename);
-+	printf("Total Size: %llu bytes\n",
-+	       (unsigned long long)(sizeof(*image_header) + payload_size + AIHD_AUTH_SIZE));
-+	printf("Payload Size: %llu bytes\n", (unsigned long long)payload_size);
-+}
-+
-+static void aihdimage_set_header(void *buf, struct stat *sbuf, int infd,
-+				 struct image_tool_params *params)
-+{
-+	const struct aihdimage_variant *variant = aihdimage_get_variant(params->imagename);
-+	struct aihdimage_image_header *image_header = buf;
-+	struct aihdimage_header *header0 = &image_header->header0;
-+	struct aihdimage_header *header1 = &image_header->header1;
-+	size_t payload_size;
-+	uint32_t crc;
-+
-+	payload_size = sbuf->st_size - sizeof(*image_header) - AIHD_AUTH_SIZE;
-+
-+	aihdimage_init_header(header0, sizeof(*image_header), variant);
-+	aihdimage_init_header(header1, payload_size, variant);
-+
-+	if (variant->flags & AIHD_FLAG_CRC32) {
-+		crc = crc32(0, (uint8_t *)(image_header + 1), payload_size);
-+		header1->image_crc = cpu_to_le32(crc);
-+	}
-+}
-+
-+static int aihdimage_check_image_type(uint8_t type)
-+{
-+	if (type == IH_TYPE_AIHDIMAGE)
-+		return EXIT_SUCCESS;
-+
-+	return EXIT_FAILURE;
-+}
-+
-+static int aihdimage_vrec_header(struct image_tool_params *params,
-+				 struct image_type_params *tparams)
-+{
-+	size_t payload_size = params->file_size - tparams->header_size;
-+
-+	tparams->hdr = calloc(tparams->header_size, 1);
-+
-+	return ALIGN(payload_size, AIHD_PAYLOAD_ALIGN) - payload_size + AIHD_AUTH_SIZE;
-+}
-+
-+U_BOOT_IMAGE_TYPE(
-+	aihdimage,
-+	"SpacemiT AIHD Boot Image support",
-+	sizeof(struct aihdimage_image_header),
-+	NULL,
-+	aihdimage_check_params,
-+	NULL,
-+	aihdimage_print_header,
-+	aihdimage_set_header,
-+	NULL,
-+	aihdimage_check_image_type,
-+	NULL,
-+	aihdimage_vrec_header
-+);
++static const struct spacemit_gpio_data k3_gpio_data = {
++	.num_banks	= 4,
++	.gpio_count	= 128,
++	.gpio_base	= 0,
++	.bank_offsets	= spacemit_gpio_k3_bank_offsets,
++	.offsets	= spacemit_gpio_k3_offsets,
+ };
+ 
+ static const struct udevice_id spacemit_gpio_ids[] = {
+ 	{ .compatible = "spacemit,k1-gpio", .data = (uintptr_t)&k1_gpio_data, },
++	{ .compatible = "spacemit,k3-gpio", .data = (uintptr_t)&k3_gpio_data, },
+ 	{ /* sentinel */ }
+ };
+ 
 
--- 
-2.55.0
+---
+base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
+change-id: 20260722-01-gpio-pinctrl-support-87d7b153599b
+
+Best regards,
+--  
+Yixun Lan <dlan@kernel.org>
 
