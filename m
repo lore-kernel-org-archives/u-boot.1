@@ -4,78 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40418C5B572
-	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 15:53:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4B0C5DF8C
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 17:52:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B7BC040733;
-	Sat, 22 Aug 2026 15:53:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9094940589;
+	Sat, 22 Aug 2026 17:52:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h-ZFBk81nQnZ; Sat, 22 Aug 2026 15:53:16 +0000 (UTC)
+ id yIqZ3wYP5uYv; Sat, 22 Aug 2026 17:52:45 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787413996;
-	bh=s/spe1q5VnZY4i0Rpr4UiTiHJpu+jZDG9HF/+Z22afU=;
-	h=Date:Subject:From:To:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787421165;
+	bh=U6t2KODDxc9YgU5hJm0HO/jcra2Ze5ZWdAGSqSDhZ+M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=r2BUgqofj7JahFIJBwtNvKEmDjwx9P8nqefmRlQt06Marm2Zy+RdRny6JjSM3RwNz
-	 pfKD7Wr+qsX/n42tJqIDVyAYrgPP3OSMlkRcY/4XXBLXgey9nUSgC6mLUpyCVC0tBS
-	 uI2E5Il/6qwDUvHOu11YHPHu6CM1eWvJNfQwnZ8mw4o+Wj99Vd1kskJiJf7VorZafJ
-	 ZFMKJekZMB3lE9hedzhv4osSPJsNE4QDNZ1nCv6wGe/YpBO41jfVCPHu/7axBACWWC
-	 EdV10HGTrdyGNoI7dmqV0Ejfn6qApKJkBn5sWgyKng+uzbCoYtBbr/u/OL93/FjwI2
-	 F7DAkE6k2noWQ==
+	b=LGZczwyq+x0SYidACRZThIav6IS1VyWmEf6SqXiaOQIJxU397ARw77v42szKw25t9
+	 OKuCcmiLfeA1xzxbd9Cp+ZeFG1o6fWDAzHhAJAYb3rZWCzfbfz2BC34MDoM7Q+A5xN
+	 uSc361Q5iCixdPqrQy2f3+WSPyld2irsPrn6Nl80kWtpj2KZbhcRQu1WMGtBaAPuFd
+	 nkpLbvUJlxXMM0qMVPhijiGnEg265q4WRHtvIO245oHREuhDJHkqFo/Yk+YKirUoMu
+	 4YtuqUeRNViivIy5LEcS1I28JwGTHhmMKGm73LSdYVixaBjyRhN5taKfzNPEI5QH4s
+	 qH8f46J7/ItaQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BA50B4073B;
-	Sat, 22 Aug 2026 15:53:16 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D4946279
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 15:53:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AB71340598;
+	Sat, 22 Aug 2026 17:52:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B706329B
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 17:52:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B71C34073B
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 15:53:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 99D1960639
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 17:52:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E3P0O7mFPxL4 for <u-boot@lists.u-boot-project.org>;
- Sat, 22 Aug 2026 15:53:14 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=129.217.128.51;
- helo=unimail.uni-dortmund.de; envelope-from=andre.althaus@tu-dortmund.de;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=tu-dortmund.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=tu-dortmund.de header.i=@tu-dortmund.de
- header.a=rsa-sha256 header.s=unimail header.b=GV/CgPvK
-Received: from unimail.uni-dortmund.de (mx1.hrz.uni-dortmund.de
- [129.217.128.51])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EF0FF40733
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 15:53:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tu-dortmund.de;
- s=unimail; t=1787413990;
- bh=s/spe1q5VnZY4i0Rpr4UiTiHJpu+jZDG9HF/+Z22afU=;
- h=Date:Subject:From:To:References:In-Reply-To;
- b=GV/CgPvKcsidpvhvSHP3Lzsmy85LF8jgySzapjP9/TBgt6r18+aJKuYO+em2z44Lg
- 1IB4P4EdSBr5IJowfs9Qmxr0s1WFpb4W9Yc0O1WySwapU7s5EAoH3ln40CQAIursK8
- xJscvNKpM8NpL6sBDdxn0QUhVHbDOp8oaHxus3F8=
-Received: from [192.168.42.21] (i6DFAC86B.versanet.de [109.250.200.107])
- (authenticated bits=0)
- by unimail.uni-dortmund.de (8.19.0.2/8.19.0.2) with ESMTPSA id 67MFrA6x003375
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 17:53:10 +0200 (CEST)
-Message-ID: <7a3e524b-fb6c-44dd-a143-d66f9c3be424@tu-dortmund.de>
-Date: Sat, 22 Aug 2026 17:53:10 +0200
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mJFOjEDLJfoQ for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 17:52:42 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
+ helo=sender4-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=hMeukgVf
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4FD9A60635
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 17:52:41 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1787421151; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=KFshAVHXw/uCs9LSsyE/N53tp0peH86dz7Y+/AUyzfQogmR9nrdUW01NAS/PMmG5GyfTgTIArD5kbbgkfXOzi0JuyoLkHFsoLzMa4AptHVPvULlxeNLIVm8BlvEA3zAbMSJxKvISfBIFdO1iz40aXc/yTWOFk+yuVqEQX++c5zQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1787421151;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=U6t2KODDxc9YgU5hJm0HO/jcra2Ze5ZWdAGSqSDhZ+M=; 
+ b=jkhMbFUqvtW3+swv+dzKwWVs//zUD0g9pko9lolq8lCD65odRE6CAkEkCrMhW3fkJgVCXOttlMVWJfdU+jtVX9KWV9xi4gzqHQBabev9V7QFq+uQV6P12YTykOJePRpRzp9+h/nofw5Mqfh4ITXcBX1268jofk2obGdKT80EICw=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787421151; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=U6t2KODDxc9YgU5hJm0HO/jcra2Ze5ZWdAGSqSDhZ+M=;
+ b=hMeukgVfarj4MJ23XPQ0jjT050y973Wg87WilZ9w4nV1kbPnTj0xlijT81mWFPlw
+ UKKvKeXbTPWoC95nXnV7zyjNjhOG1G/DwWkEwuGIOLhOyH9pLiRpDYjltQcTJeJ+qLu
+ KHD5B/NY+BAEmRFWUEkQ31W8OLTSwF0TGIsQEYpY=
+Received: by mx.zohomail.com with SMTPS id 1787421147941590.0563093059571;
+ Sat, 22 Aug 2026 10:52:27 -0700 (PDT)
+Date: Sat, 22 Aug 2026 17:52:14 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v3 10/19] LoongArch: Boot Image bits
+Message-ID: <aonhzngo6A-kZ9pF@pie>
+References: <20260821084219.1703743-1-me@ziyao.cc>
+ <20260821084219.1703743-11-me@ziyao.cc>
+ <20260821162048.GN523975@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Network boot of Raspberry Pi 4 leads to unstable network in U-Boot
-From: =?UTF-8?Q?Andr=C3=A9_Althaus?= <andre.althaus@tu-dortmund.de>
-To: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-References: <a0ff0888-4c66-47d2-b79d-c27a2421c24e@tu-dortmund.de>
-Content-Language: de-DE, en-US-large
-In-Reply-To: <a0ff0888-4c66-47d2-b79d-c27a2421c24e@tu-dortmund.de>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms080109040806070303020609"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260821162048.GN523975@bill-the-cat>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/287.412.46
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -89,212 +103,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This is a cryptographically signed message in MIME format.
+On Fri, Aug 21, 2026 at 10:20:48AM -0600, Tom Rini wrote:
+> On Fri, Aug 21, 2026 at 08:42:10AM +0000, Yao Zi wrote:
+> 
+> > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > 
+> > Implement loading and booting functions for LoongArch
+> > standard kernel image as per spec.
+> > 
+> > LoongArch kernel do expect us to fake a efi systemtable
 
---------------ms080109040806070303020609
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I occasionally noticed this typo ('a' -> 'an'), will fix it.
 
-SSB0cmllZCB0byB1bmRlcnN0YW5kIHdoYXQncyBoYXBwZW5pbmcgaW4gVS1Cb290IHJlZ2Fy
-ZGluZyB0aGUgUEhZLg0KDQpXaGF0IEkgc2VlIGlzIHRoYXQgdGhlIFBIWSBpbiB0aGUgUmFz
-cGJlcnJ5IFBpIDQgbmVlZHMgdG8gYmUgcmVzZXQgd2hlbiANClUtQm9vdCBpcyBydW4gYWZ0
-ZXIgdGhlIGZpcm13YXJlIGxvYWRlZCBpdCB2aWEgbmV0Ym9vdC4NCg0KQXMgZmFyIGFzIEkg
-Y2FuIHRlbGwsIHRoZSBiY21nZW5ldCBkcml2ZXIgd2lsbCB1c2UgdGhlIGdlbmVyaWMgcHlo
-IA0KZHJpdmVyIGluIGRyaXZlcnMvbmV0L3BoeS9waHkuYyBhbmQgdGhpcyBvbmUgaXMgbm90
-IHJlc2V0dGluZyB0aGUgUEhZLiANClNvbWUgb3RoZXIgYnJvYWRjb20gcGh5IGRyaXZlcnMN
-CmluIGRyaXZlcnMvbmV0L3BoeS9icm9hZGNvbS5jIHVzZSBhIGNvbmZpZyBvcCB0aGF0IGFk
-ZHMgYSBwaHlfcmVzZXQoKSANCmNhbGwgKGJjbTU0NjFfY29uZmlnKS4NCg0KSXMgdGhlcmUg
-YSByZWFzb24gdGhlIGdlbmVyaWMgZHJpdmVyIGRvZXMgbm90IHJlc2V0IHRoZSBwaHk/DQpJ
-dCBzZWVtcyB0aGUgYmVzdCB3YXkgd291bGQgYmUgdG8gYWRkIGEgbmV3IHBoeSBkcml2ZXIg
-dG8gYnJvYWRjb20uYyANCnRoYXQgdGFyZ2V0cyB0aGUgUmFzcGJlcnJ5IFBpIDQgYW5kIG92
-ZXJyaWRlcyB0aGUgY29uZmlnIG9wIHdpdGggb25lIA0KdGhhdCBkb2VzIHRoZSByZXNldC4N
-Cg0KSSBkb24ndCBoYXZlIGFjY2VzcyB0byBvdGhlciBSYXNwYmVycnkgUGkgbW9kZWxzLCBi
-dXQgdGhpcyBtaWdodCBhbHNvIGJlIA0KbmVjZXNzYXJ5IGZvciBvdGhlcnMuDQoNCg0KQW0g
-MjAuMDguMjYgdW0gMTY6MzUgc2NocmllYiBBbmRyw6kgQWx0aGF1czoNCj4gSSdtIHRyeWlu
-ZyB0byBuZXRib290IGEgUmFzcGJlcnJ5IFBpIDQgQiBhbmQgdXNlIHRoZSBVLUJvb3QgcHhl
-IA0KPiBib290ZmxvdyB0byBicmluZyB1cCBhIE5peE9TIHN5c3RlbSAodXNpbmcgdGhlIGV4
-dGxpbnV4LmNvbmYgZmlsZSANCj4gY3JlYXRlZCBieSBOaXhPUykuDQo+IFdoZW4gSSBkbyB0
-aGF0IHRoZSBVLUJvb3QgREhDUCBwcm9jZXNzIHJldHJpZXMgbXVsdGlwbGUgdGltZXMgdG8g
-Z2V0IA0KPiBhbiBJUCBhbmQgc29tZXRpbWVzIHJ1bm5pbmcgb3V0IG9mIHJldHJpZXMuIFRo
-ZSBURlRQIHRyYW5zZmVycyANCj4gYWZ0ZXJ3YXJkcyBzaG93IG1hbnkgdGltZW91dHMgKFQp
-Lg0KPiBJIHRyaWVkIHRvIGJvb3QgdGhlIHNhbWUgZmlybXdhcmUgZmlsZXMgYW5kIFUtQm9v
-dCBiaW5hcnkgZnJvbSB0aGUgU0QgDQo+IGNhcmQgYW5kIHRoZW4gdGhlIHB4ZSBib290Zmxv
-dyB3b3JrcyB3aXRob3V0IHByb2JsZW1zLg0KPiBFdmVyeSB0aW1lIHRoZSBkaGNwIGZhaWxz
-IG9yIHRoZSB0ZnRwIHRpbWVvdXQgb2NjdXJzLCBJIGNhbiBzZWUgdGhlIA0KPiBjcmMgZXJy
-b3IgY291bnRlciBvbiB0aGUgc3dpdGNoIHBvcnQgaW5jcmVhc2UuDQo+DQo+IEkgc3VzcGVj
-dCwgdGhhdCB0aGUgZmlybXdhcmUgbGVhdmVzIHRoZSBuZXR3b3JrIHBlcmlwaGVyYWxzIGlu
-IHNvbWUgDQo+IHN0YXRlIHRoYXQgaXMgbm90IGNvbXBsZXRlbHkgcmVzZXQvaW5pdGlhbGl6
-ZWQgYnkgdS1ib290Lg0KPg0KPiBJIHRyaWVkIHRvIGRlYnVnIGl0IHdpdGggUXdlbiBBSSAz
-LjggYW5kIGFjdHVhbGx5IGdvdCBhIHNlZW1pbmdseSANCj4gd29ya2luZyBwYXRjaC4gT2J2
-aW91c2x5IEknbSBub3QgY29uZmlkZW50IHRoaXMgaXMgdGhlIGNvcnJlY3QgZml4Lg0KPg0K
-PiAvcHJvYy9jcHVpbmZvOg0KPiBSZXZpc2lvbsKgIMKgIDogYzAzMTE0DQo+IFNlcmlhbMKg
-IMKgIMKgIMKgIDogMTAwMDAwMDA1N2M5MGMxZA0KPiBNb2RlbMKgIMKgIMKgIMKgIDogUmFz
-cGJlcnJ5IFBpIDQgTW9kZWwgQiBSZXYgMS40DQo+DQo+IHZjZ2VuY21kIHZlcnNpb246DQo+
-IE1heSAyMSAyMDI2IDExOjIwOjI1DQo+IENvcHlyaWdodCAoYykgMjAxMiBCcm9hZGNvbQ0K
-PiB2ZXJzaW9uIDI4ODkzMGFiNDcxMmI5OTU5NmYzMjczMjY2NGFhYWViODgxZWYxZTAgKGNs
-ZWFuKSAocmVsZWFzZSkgDQo+IChzdGFydCkNCj4NCj4gcnBpLWVlcHJvbS11cGRhdGU6DQo+
-IEJPT1RMT0FERVI6IHVwIHRvIGRhdGUNCj4gwqAgwqBDVVJSRU5UOiBTbyAxNy4gTWFpIDE5
-OjEzOjE4IFVUQyAyMDI2ICgxNzc5MDQ1MTk4KQ0KPiDCoCDCoCBMQVRFU1Q6IEZyIDkuIEph
-biAxNjoxMjoxMyBVVEMgMjAyNiAoMTc2Nzk3NTEzMykNCj4gwqAgwqBSRUxFQVNFOiBkZWZh
-dWx0IA0KPiAoL25peC9zdG9yZS8wYTZ2OHczOHBuNmdmYWd5YzVmMGN6ejBqaGhxcHo0MC1y
-YXNwYmVycnlwaS1lZXByb20tMjAyNi4wNS4xMS0yNzEyL2xpYi9maXJtd2FyZS9yYXNwYmVy
-cnlwaS9ib290bG9hZGVyLTI3MTEvZGVmYXVsdCkNCj4gwqAgwqAgwqAgwqAgwqAgwqAgVXNl
-IHJhc3BpLWNvbmZpZyB0byBjaGFuZ2UgdGhlIHJlbGVhc2UuDQo+DQo+IMKgIFZMODA1X0ZX
-OiBVc2luZyBib290bG9hZGVyIEVFUFJPTQ0KPiDCoCDCoCDCoFZMODA1OiB1cCB0byBkYXRl
-DQo+IMKgIMKgQ1VSUkVOVDogMDAwMTM4YzANCj4gwqAgwqAgTEFURVNUOiAwMDAxMzhjMA0K
-Pg0KPiBycGktZWVwcm9tLWNvbmZpZzoNCj4gW2FsbF0NCj4gQk9PVF9VQVJUPTANCj4gV0FL
-RV9PTl9HUElPPTENCj4gRU5BQkxFX1NFTEZfVVBEQVRFPTENCj4gQk9PVF9PUkRFUj0weGYy
-MQ0KPiBORVRfSU5TVEFMTF9BVF9QT1dFUl9PTj0xDQo+DQo+IHUtYm9vdCBtYXN0ZXIgKGVj
-ZTM0OWFkZTI5NzNlMjIwZjUyNGNlNTllNTk3MTFjYzkxOTI2M2YpOg0KPiBtYWtlIHJwaV9h
-cm02NF9kZWZjb25maWcNCj4NCj4gQWRkaXRpb25hbCBjb25maWdzOg0KPiBDT05GSUdfQ01E
-X01JST15DQo+IENPTkZJR19CT09UU1REX0ZVTEw9eQ0KPg0KPiBDT05GSUdfVVNFX0JPT1RD
-T01NQU5EPXkNCj4gQ09ORklHX0JPT1RDT01NQU5EPSJib290ZmxvdyBzY2FuIC1sYiBweGUi
-DQo+DQo+IENPTkZJR19MT0c9eQ0KPiBDT05GSUdfTE9HX01BWF9MRVZFTD03DQo+IENPTkZJ
-R19MT0dfQ09OU09MRT15DQo+DQo+DQo+IER1cmluZyB0aGUgZGVidWdnaW5nLCBRd2VuIHRv
-bGQgbWUgdG8gdHJ5IHRoZSBmb2xsb3dpbmcgbWFudWFsIHJlc2V0IA0KPiBvZiB0aGUgUEhZ
-IGFmdGVyIHRoZSBmaXJtd2FyZSBzdGFydGVkIHUtYm9vdCBhbmQgYmVmb3JlIHJ1bm5pbmcg
-dGhlIA0KPiBib290ZmxvdzoNCj4gbWlpIHdyaXRlIDEgMCAweDgwMDDCoCDCoCDCoCDCoCAj
-IFBIWSBzb2Z0IHJlc2V0DQo+IG1paSByZWFkwqAgMSAwwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgwqAgIyByZXBlYXQgdW50aWwgYml0MTUgY2xlYXJzIChQSFkgDQo+IHJlc2V0
-IGRvbmUpDQo+IDExNDANCj4gbWlpIHdyaXRlIDEgNCAweDAxRTHCoCDCoCDCoCDCoCAjIGFk
-dmVydGlzZSAxMC8xMDAgRitILCBwYXVzZSAoa25vd24tZ29vZCANCj4gdmFsdWUpDQo+IG1p
-aSB3cml0ZSAxIDkgMHgwMzAwwqAgwqAgwqAgwqAgIyAxMDAwVCBjYXANCj4gbWlpIHdyaXRl
-IDEgMCAweDEyMDDCoCDCoCDCoCDCoCAjIEFOIGVuYWJsZSArIEFOIHJlc3RhcnQNCj4gbWlp
-IHJlYWTCoCAxIDHCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAjIGV4cGVjdCAw
-eDc5NkQgKGxpbmsgdXApIGFmdGVyIH4yIHMNCj4gNzk0OQ0KPg0KPiBBZnRlcndhcmRzIHRo
-ZSBib290ZmxvdyB3b3JrZWQgd2l0aG91dCBwcm9ibGVtcy4NCj4NCj4gSXQgYWRkZWQgdGhl
-IGZvbGxvd2luZyBwYXRjaCB3aGljaCBzZWVtcyB0byBmaXggdGhlIHByb2JsZW1zOg0KPiBk
-aWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvYmNtZ2VuZXQuYyBiL2RyaXZlcnMvbmV0L2JjbWdl
-bmV0LmMNCj4gaW5kZXggYTAyNjRkYzM4NmQuLjFjODY3ZTYxZGQyIDEwMDY0NA0KPiAtLS0g
-YS9kcml2ZXJzL25ldC9iY21nZW5ldC5jDQo+ICsrKyBiL2RyaXZlcnMvbmV0L2JjbWdlbmV0
-LmMNCj4gQEAgLTYwMSw2ICs2MDEsMzAgQEAgc3RhdGljIGludCBiY21nZW5ldF9tZGlvX2lu
-aXQoY29uc3QgY2hhciAqbmFtZSwgDQo+IHN0cnVjdCB1ZGV2aWNlICpwcml2KQ0KPiDCoCDC
-oCDCoHJldHVybiBtZGlvX3JlZ2lzdGVyKGJ1cyk7DQo+IMKgfQ0KPg0KPiArc3RhdGljIGlu
-dCBiY21nZW5ldF9waHlfc29mdF9yZXNldChzdHJ1Y3QgYmNtZ2VuZXRfZXRoX3ByaXYgKnBy
-aXYpDQo+ICt7DQo+ICvCoCDCoCBpbnQgdmFsOw0KPiArwqAgwqAgaW50IHRpbWVvdXQgPSAx
-MDA7IC8qIG1zICovDQo+ICsNCj4gK8KgIMKgIC8qIEZpcm13YXJlIG1heSBsZWF2ZSB0aGUg
-aW50ZXJuYWwgR1BIWSBpbiBhIHN0YXRlIHdoZXJlIE1ESU8NCj4gK8KgIMKgIMKgKiBhdXRv
-LW5lZ290aWF0aW9uIHdvcmtzIGJ1dCB0aGUgUkdNSUkgZGF0YSBwYXRoIGNvcnJ1cHRzIGZy
-YW1lcywNCj4gK8KgIMKgIMKgKiBzbyBmb3JjZSB0aGUgUEhZIGJhY2sgdG8gaXRzIGRlZmF1
-bHRzIGJlZm9yZSBhdHRhY2hpbmcgdG8gaXQuICovDQo+ICvCoCDCoCBpZiAoYmNtZ2VuZXRf
-bWRpb193cml0ZShwcml2LT5idXMsIHByaXYtPnBoeWFkZHIsIDAsIE1JSV9CTUNSLCANCj4g
-QklUKDE1KSkpDQo+ICvCoCDCoCDCoCDCoCByZXR1cm4gLUVJTzsNCj4gKw0KPiArwqAgwqAg
-ZG8gew0KPiArwqAgwqAgwqAgwqAgdWRlbGF5KDEwMDApOw0KPiArwqAgwqAgwqAgwqAgdmFs
-ID0gYmNtZ2VuZXRfbWRpb19yZWFkKHByaXYtPmJ1cywgcHJpdi0+cGh5YWRkciwgMCwgTUlJ
-X0JNQ1IpOw0KPiArwqAgwqAgwqAgwqAgaWYgKHZhbCA8IDApDQo+ICvCoCDCoCDCoCDCoCDC
-oCDCoCByZXR1cm4gdmFsOw0KPiArwqAgwqAgfSB3aGlsZSAoKHZhbCAmIEJJVCgxNSkpICYm
-IC0tdGltZW91dCk7DQo+ICsNCj4gK8KgIMKgIGlmICghdGltZW91dCkNCj4gK8KgIMKgIMKg
-IMKgIHJldHVybiAtRVRJTUVET1VUOw0KPiArDQo+ICvCoCDCoCByZXR1cm4gMDsNCj4gK30N
-Cj4gKw0KPiDCoC8qIFdlIG9ubHkgc3VwcG9ydCBSR01JSSAoYXMgdXNlZCBvbiB0aGUgUlBp
-NCkuICovDQo+IMKgc3RhdGljIGludCBiY21nZW5ldF9pbnRlcmZhY2Vfc2V0KHN0cnVjdCBi
-Y21nZW5ldF9ldGhfcHJpdiAqcHJpdikNCj4gwqB7DQo+IEBAIC02NjUsNiArNjg5LDEyIEBA
-IHN0YXRpYyBpbnQgYmNtZ2VuZXRfZXRoX3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYpDQo+
-IMKgIMKgIMKgIMKgIMKgcmV0dXJuIHJldDsNCj4NCj4gwqAgwqAgwqBwcml2LT5idXMgPSBt
-aWlwaHlfZ2V0X2Rldl9ieV9uYW1lKG5hbWUpOw0KPiArwqAgwqAgaWYgKCFwcml2LT5idXMp
-DQo+ICvCoCDCoCDCoCDCoCByZXR1cm4gLUVOT0RFVjsNCj4gKw0KPiArwqAgwqAgcmV0ID0g
-YmNtZ2VuZXRfcGh5X3NvZnRfcmVzZXQocHJpdik7DQo+ICvCoCDCoCBpZiAocmV0KQ0KPiAr
-wqAgwqAgwqAgwqAgcmV0dXJuIHJldDsNCj4NCj4gwqAgwqAgwqByZXR1cm4gYmNtZ2VuZXRf
-cGh5X2luaXQocHJpdiwgZGV2KTsNCj4gwqB9DQo+DQo+IEl0cyBleHBsYW5hdGlvbjoNCj4g
-VGhlIEJyb2FkY29tIGxlZ2FjeSBmaXJtd2FyZSBwZXJmb3JtcyBpdHMgb3duIERIQ1AvVEZU
-UCBvdmVyIHRoZSBzYW1lIA0KPiBHRU5FVCBiZWZvcmUgbG9hZGluZyBVLUJvb3QsIHRoZW4g
-c2h1dHMgdGhlIE1BQy9QRCBkb3duIGFuZCBoYW5kcyBvZmYgDQo+IHdpdGhvdXQgcmUtaW5p
-dGlhbGlzaW5nIHRoZSBlbWJlZGRlZCBHUEhZLiBBdCBoYW5kLW9mZiB0aGUNCj4gR1BIWSdz
-IE1ESU8gcmVnaXN0ZXIgZmlsZSBhbmQgSUVFRSBhdXRvLW5lZ290aWF0aW9uIHN0aWxsIGZ1
-bmN0aW9uLCBzbyANCj4gVS1Cb290J3MgZ2VuZXJpYyBQSFkgbWFjaGluZXJ5IGJyaW5ncyB0
-aGUgbGluayB1cCBjbGVhbmx5IOKAlCBidXQgdGhlIA0KPiBSR01JSS9QTUEgZGF0YSBwYXRo
-IGlzIGxlZnQgaW4gYSBmaXJtd2FyZS1lcmEgc3RhdGUgdGhhdCBjb3JydXB0cw0KPiBmcmFt
-ZXMgb24gdGhlIHdpcmUgKGJhZCBGQ1MsIHZpc2libGUgb25seSBhcyB0aGUgc3dpdGNoJ3Mg
-cmVjZWl2ZSBDUkMgDQo+IGVycm9ycyB1bmRlciBsb2FkKS4NCj4NCj4gVHdvIGZhY3RzIHN1
-cHBvcnQgdGhpcyBiZWluZyBhbiBpbml0aWFsaXNhdGlvbi1taXNzaW5nIHByb2JsZW0gcmF0
-aGVyIA0KPiB0aGFuIGEgZHJpdmVyIGJ1ZyBpbiB0aGUgbm9ybWFsIHBhdGg6DQo+DQo+IC0g
-VGhlIGlkZW50aWNhbCBiaW5hcnkgaXMgc3RhYmxlIHdoZW4gYm9vdGluZyBmcm9tIFNELCBp
-LmUuIHdoZW4gdGhlIA0KPiBmaXJtd2FyZSBuZXZlciB1c2VkIHRoZSBuZXR3b3JrIChhIGNs
-ZWFuLCBkZWZhdWx0LWxpa2UgR1BIWSBzdGF0ZSANCj4gcmVhY2hlcyBVLUJvb3QpLg0KPiAt
-IEEgc2luZ2xlIFBIWSBzb2Z0LXJlc2V0IGF0IGZpcnN0IHVzZSBmdWxseSBjdXJlcyBpdDsg
-dGhlcmUgaXMgbm8gDQo+IG90aGVyIHN0YXRlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgdHdv
-IHBhdGhzIHRoYXQgd2FzIGZvdW5kIA0KPiAoc3BlZWQvZHVwbGV4L2FkdmVydGlzZSBzZXR0
-aW5ncyBhcmUgaWRlbnRpY2FsIG9uY2UgbGluayBpcyB1cCkuDQo+DQo+DQo+DQo+IElmIHlv
-dSBuZWVkIG1vcmUgaW5mb3JtYXRpb24gb3Igc29tZSByZWdpc3RlciB2YWx1ZXMsIEkgY2Fu
-IHByb3ZpZGUgdGhlbS4gDQo=
+> > for passing fdt to kernel, we don't need to implement any
+> > EFI functions for kernel because it won't look into anything
+> > beside devicetree from that table if we tell kernel we are
+> > not efi compatible by setting a0 boot argument to zero.
+> > 
+> > Link: https://docs.kernel.org/arch/loongarch/booting.html
+> > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > Signed-off-by: Yao Zi <me@ziyao.cc>
+> [snip]
+> > diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+> > index ac4be2c837c0..5654de5a58c7 100644
+> > --- a/arch/loongarch/Kconfig
+> > +++ b/arch/loongarch/Kconfig
+> > @@ -56,4 +56,7 @@ config STACK_SIZE_SHIFT
+> >  config OF_BOARD_FIXUP
+> >  	default y if OF_SEPARATE
+> >  
+> > +config LIB_BOOTM
+> > +	select CRC32
+> 
+> If this is needed, it's a generic problem (and to be fixed outside this
+> series) where LIB_BOOTM (and possibly LIB_BOOTI/Z since you know what to
+> look for) need to select CRC32 and SPL_LIB_BOOTM SPL_CRC32. Thanks.
 
---------------ms080109040806070303020609
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
+I think the dependency is specific to LoongArch, since CRC32 is
+necessary only because we need to fake an EFI system table, which is
+CRC32-checksum'ed, to pass FDT to the kernel on LoongArch. AFAIK other
+architectures don't require such treatment, so I keep this
+LoongArch-only.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-C6wwggVgMIIDyKADAgECAhB0Kxk2KLeclTOcUmNyCd3FMA0GCSqGSIb3DQEBCwUAMGMxCzAJ
-BgNVBAYTAkdSMTcwNQYDVQQKDC5IZWxsZW5pYyBBY2FkZW1pYyBhbmQgUmVzZWFyY2ggSW5z
-dGl0dXRpb25zIENBMRswGQYDVQQDDBJHRUFOVCBTL01JTUUgUlNBIDEwHhcNMjUxMTEzMTQ0
-NDE3WhcNMjcxMTEzMTQ0NDE3WjAtMSswKQYJKoZIhvcNAQkBFhxhbmRyZS5hbHRoYXVzQHR1
-LWRvcnRtdW5kLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxCtmZSY+SEJr
-WtUrr6h/yhq3LLZbPmeX8ZzIsHdnXvBtkiaS1BcjpDfygjr8QOxRiiLi1XTSR5DD8ybq6/Xt
-OkMtTsnLeVXr3BgXrMMfbvTeU5HwQKU2q6WpJy9R6GWiu1mdYirYqrDKpNVr4pJlqKf7Cokx
-bmRO4EvbhM2IzvDVZRIRDdvowl+u661zwWQnOXGItj+feuDR/4t4El9nO6bBrL5nAZJglRz+
-xPXYZ+GdCjq7ac5bvK0UfQ1BENnrrDMTiRhAK3bhono3NSGXwbEB2MhlrrE+lYdgpzB+5et9
-if7wF6hzfvNrGPgrrikutshARyj0YUcvka88RLH+zQIDAQABo4IBxDCCAcAwHwYDVR0jBBgw
-FoAU67IvO/2uAswqRAZdJc0dEiJosEcwSgYIKwYBBQUHAQEEPjA8MDoGCCsGAQUFBzAChi5o
-dHRwOi8vY3J0LmhhcmljYS5nci9IQVJJQ0EtR0VBTlQtU01JTUUtUjEuY2VyMF0GA1UdEQRW
-MFSBHGFuZHJlLmFsdGhhdXNAdHUtZG9ydG11bmQuZGWBHWFuZHJlLmFsdGhhdXNAdW5pLWRv
-cnRtdW5kLmRlgRVhbmRyZS5hbHRoYXVzQHVkby5lZHUwYwYDVR0gBFwwWjAJBgdngQwBBQEC
-MAgGBgQAj3oBAzBDBg0rBgEEAYHPEQEBAgECMDIwMAYIKwYBBQUHAgEWJGh0dHBzOi8vcmVw
-by5oYXJpY2EuZ3IvZG9jdW1lbnRzL0NQUzAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUH
-AwQwPwYDVR0fBDgwNjA0oDKgMIYuaHR0cDovL2NybC5oYXJpY2EuZ3IvSEFSSUNBLUdFQU5U
-LVNNSU1FLVIxLmNybDAdBgNVHQ4EFgQU31ZKcbINV9fdYat0fwJPaGkZ10UwDgYDVR0PAQH/
-BAQDAgWgMA0GCSqGSIb3DQEBCwUAA4IBgQAYIzEwRSFD2Igju0K462Uu/Y7tDhgnlYQKi0lU
-r8Tsv1mu7P3M1yTGeJDQ3XN7kkVBq7G8rZAGNiiiMFA3rGqYgVtwhCsaESV//WRYwFB2SdY4
-D/MM/jMdv02vcHL/o3AEePHEunqVnAUi7qdu1EPNYvdVDwM1E+YWCg48tyEjM30DGywcagOY
-TlLSdO4RGcOVu1mFIwsNmaaI/Om4PulVHu8lFQp3lf87/mP7SWy6QhaW5poQKOwGGwuTXd9g
-rZXXSaPlfVT/pBdvFzVClbUSzo1UMYyKMYqE6CZLh2y44uK/ItIkg9RbM3apUqzQnGphLahU
-brwmUAqCwty5nbaaezrkpQXdgbyD/Ye8eXj5LbYZLD6ixqCNnNRVex2dA/MKwyF/P3+BxunX
-7VKhIkirogQWuxZcYmob62iyuxNy6omFgAFRoYsP/tNyogt8/xx5uNldtTugsey6GJUDtpjU
-VIajcodAF2ytAb0DMsCGpT9NRxlL2RcJefEw3REEDc0wggZEMIIELKADAgECAhAV+a5sqo0u
-1NNveH8e3HsBMA0GCSqGSIb3DQEBCwUAMG8xCzAJBgNVBAYTAkdSMTcwNQYDVQQKDC5IZWxs
-ZW5pYyBBY2FkZW1pYyBhbmQgUmVzZWFyY2ggSW5zdGl0dXRpb25zIENBMScwJQYDVQQDDB5I
-QVJJQ0EgQ2xpZW50IFJTQSBSb290IENBIDIwMjEwHhcNMjUwMTAzMTExMzA4WhcNMzkxMjMx
-MTExMzA3WjBjMQswCQYDVQQGEwJHUjE3MDUGA1UECgwuSGVsbGVuaWMgQWNhZGVtaWMgYW5k
-IFJlc2VhcmNoIEluc3RpdHV0aW9ucyBDQTEbMBkGA1UEAwwSR0VBTlQgUy9NSU1FIFJTQSAx
-MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAq7hur/5vIqMejblfPfZgGY75auSZ
-z5SZ9x1dIIjvJrDBT0lIwQcAAoABJomkuv0kDK362UH+uf9JrOdLBjiKkEh99HQPmT+d1+Ij
-nnd1aAjiL+2Q4aU16P/snITYJL2ROU46zqmDkdoOnCqMCEKSN74gHKDmApYfqXO8wmjmNA62
-wYHarp7lxgrBr0sk4BxHyKq52z0sWyxsdIy5V1K5OOkCNwYupZ9b74LRhelYP5SieNDqU0S6
-IpQOasVz5IS0vDnqVi2ni67Gbgtb8dBKzH6gbAwGppHoeEFDcvJ042Oxtxt6BGolkUmguyfA
-geisRqDjhQi+NfNgkDH81OLBV0eV07twS9axwNvJAtH2SgGiWKrYeuBgVCzs1DFT7sws1KHy
-LrOdZU0hJQSDfoz/8jwFmXhWoPvQQuWEoo3uvH6LsHAo53aDF1aAUmGQ/JC72j7zZH16leJF
-uWj+t2TK/7YEVHtWluA9TOdx2Lz/SHh0/+pAVicD4N/QUWPuBhzPAgMBAAGjggFmMIIBYjAS
-BgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFKDWBz1eJPd7oEQuJFINGaorBJGnMFAG
-CCsGAQUFBwEBBEQwQjBABggrBgEFBQcwAoY0aHR0cDovL2NydC5oYXJpY2EuZ3IvSEFSSUNB
-LUNsaWVudC1Sb290LTIwMjEtUlNBLmNlcjBEBgNVHSAEPTA7MDkGBFUdIAAwMTAvBggrBgEF
-BQcCARYjaHR0cDovL3JlcG8uaGFyaWNhLmdyL2RvY3VtZW50cy9DUFMwHQYDVR0lBBYwFAYI
-KwYBBQUHAwIGCCsGAQUFBwMEMEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwuaGFyaWNh
-LmdyL0hBUklDQS1DbGllbnQtUm9vdC0yMDIxLVJTQS5jcmwwHQYDVR0OBBYEFOuyLzv9rgLM
-KkQGXSXNHRIiaLBHMA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAgEAO964Rfbc
-PCuTKAq2wXsOZxMaaLxITbSOYkt7RMxPw3CzU2qmkTQALKbVqC1jUiNQWbkxZpsb8hy9FOHy
-wH1xFmANAypks0Iuh+ovhqP90oFcfhvAfYxV2M0cGga9mTKFHP+QET7HW9pZdyWFZAw5fmdW
-9Ex+IQmJii0w/sozzwhpVn0OQYkkRV+2ydRa68JZS2NqAPpdaWoseM2X4u5+Jn+H2UO9paob
-X+ht91K2Ch8xzfREv4RLqBgpHBmkIDVygXNdXsKfDHy2hOXxtF6oI1d7ErPGWoBxFc86aUqQ
-lC6pEjb3ug24w+eg1kJj7IufHJ3iRm67Rdw5M1OlWMzxu+DwAKqFJhqes0OL/NOJOTuDCb0b
-IfVfjl8U0Y0QWCkhoCmNPZQQu6QM6Y/XxnALgRB4drA8kip98wSZQmbqptE8oac2ZzLKCHiJ
-lTdBuREsundnpBXdahMSrJ/mYv2pMZLpYkbrkvyhorDVeH9t0a5UgPIFqGl8/ZzakJ3RQfr7
-HvdGur0YWU6KNWvY5BK8qHMRM0b3XtK9xREIGEychAVReodDIhjrR4fWmjpa006r/UrmSk4b
-pKrVFVzTYsSK3jy4ri1ExVQp6RI6Ou4ZdbfwOYCuI9wweMjpVBuqNzRKrVU/Pvp57gUzm4u+
-JJRkdioMOoxZrwsUiYr2KIojwTcxggORMIIDjQIBATB3MGMxCzAJBgNVBAYTAkdSMTcwNQYD
-VQQKDC5IZWxsZW5pYyBBY2FkZW1pYyBhbmQgUmVzZWFyY2ggSW5zdGl0dXRpb25zIENBMRsw
-GQYDVQQDDBJHRUFOVCBTL01JTUUgUlNBIDECEHQrGTYot5yVM5xSY3IJ3cUwDQYJYIZIAWUD
-BAIBBQCgggHrMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2
-MDgyMjE1NTMxMFowLwYJKoZIhvcNAQkEMSIEIKiawRjbvnhjPPavhx0PD1ocRTx+g8UaAsTz
-9jtc/IjQMIIBfgYJKoZIhvcNAQkPMYIBbzCCAWswCwYJYIZIAWUDBAEuMAsGCWCGSAFlAwQB
-GjALBglghkgBZQMEAQYwCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzAN
-BggqhkiG9w0DAgIBBTANBggqhkiG9w0DAgIBBTAHBgUrDgMCBzANBggqhkiG9w0DAgIBBTAH
-BgUrDgMCGjALBglghkgBZQMEAgEwCwYJYIZIAWUDBAICMAsGCWCGSAFlAwQCAzALBglghkgB
-ZQMEAgQwCwYJYIZIAWUDBAIHMAsGCWCGSAFlAwQCCDALBglghkgBZQMEAgkwCwYJYIZIAWUD
-BAIKMAsGCSqGSIb3DQEBATALBgkrgQUQhkg/AAIwCAYGK4EEAQsAMAgGBiuBBAELATAIBgYr
-gQQBCwIwCAYGK4EEAQsDMAsGCSuBBRCGSD8AAzAIBgYrgQQBDgAwCAYGK4EEAQ4BMAgGBiuB
-BAEOAjAIBgYrgQQBDgMwDQYJKoZIhvcNAQEBBQAEggEAKacgepANzVsfmFadh4XGHTG2M9C+
-DwOTuETnTCI5yaQzfWXoYFVo1m72rdPXO6rbY6oWXz48COPuI+vJ1DGQYzFtOMrGGagbGc51
-IxQObNuRC7oEyZlelRWm9wewX/TZ+MFBmjlCVP6q6bco2N41YzuV90d1s1CZ/tHoN/GVhuTj
-qzUP8BnlXq3ylQB8/9GxwlpkqQnkPqfM1YTbJiBrquibwqDgQntfEDAmGCh+vQ2IiPOXkFAK
-n6gViu5xtfobVBTOvVoD0RiocGZvIUmQNpaT6wbM5ptKkDOOMpIVeRiyn/kiCUc10A/Y742M
-Ih3j5B/18IRFj1zCm3OA8neizwAAAAAAAA==
---------------ms080109040806070303020609--
+Should I include a comment here to explain the dependency?
+
+> -- 
+> Tom
+
+Regards,
+Yao Zi
