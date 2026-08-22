@@ -1,118 +1,107 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D41C5DF97
-	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 07:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E33C5B572
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 08:58:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AB6D740A0B;
-	Sat, 22 Aug 2026 07:56:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 28CF780EEB;
+	Sat, 22 Aug 2026 08:58:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zL-j4JJfJ9rV; Sat, 22 Aug 2026 07:56:24 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZVXFEC06OPIU; Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787385384;
-	bh=zMhLCS0PEDxeJOzHpqEBFe2emgTipTt2/h3Wh/pgSYc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ME3smTtLdK6l/zcWP1JJMSXsc1WCKeyW9PnBYHdi+OZxwRu5ZN6YzY/tYjsHxQDJp
-	 3qy+ikA0w+zOOU1NkIANBd5UscwSKRU6J0anjdQG5D4QHBhuarKTSzlYTXFGwfNicp
-	 y9Xvu+AphHyiueRxA2HTqAFArUQOdfM1BmlnIn0XcpyTZXK4F7FLbwE3f19H3eJ+Hc
-	 nEC93uuE07vGYD5Ru66yar3OV2k5X/QOOEmrGQ1Flj1jfjf/Uf6enp/7/r2KhCcgAd
-	 thNjZAK8g1k/6hYMtPYh7Kq+8QjMNazHcWwznb8eonWCvRY48NNrpI9hujsOY2uIZb
-	 VuP1rq3frxQ1Q==
+	d=lists.u-boot-project.org; s=default; t=1787389126;
+	bh=EpVsutJ7yw0MJ2DK7FKUnEADtl4Oz0oQwe86Yo8xAhg=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=S8lW8B+PikSJ6VmnKRRphanY+hHuc7FiQmd8J4EMAXx9K9jwD7lS18vjHbySHMykU
+	 Jt3Cw7Sf0cS2IdtsM833YSk/7nD8WWYfTKUFhrODJE96qbkSHm0mYInrnWpPT/nTZW
+	 ojlwrMUb9LolQYf3ZN9aqlWaYGAhf5hRmR2VMl1fNfhmZhRkeGsqM5YlKgkG+63cGi
+	 kA8LIhQtnTfXOlSGO7WzcUImHkhz3m7HZI3rGZ0U+HfWjib4bTD7AJgJfGEtopSZCv
+	 PWAV2YKp1UdqOA5G1vD7401wF5ERGkPYKba2vKc4v/myy6UJLkatZMqwdmJiBAmIXM
+	 qlblcGPHqIAMw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 79C4D409EC;
-	Sat, 22 Aug 2026 07:56:24 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5F1D34B8
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 07:56:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 496EF80EDE;
+	Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E993D4B8
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4F868409EC
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 07:56:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CEF7980EDE
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VrUaHUtrace6 for <u-boot@lists.u-boot-project.org>;
- Sat, 22 Aug 2026 07:56:20 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::103; helo=mout-p-103.mailbox.org;
- envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
- header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
- header.b=vSyDtcpz; 
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=j7X6NFhu
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9FF4F409E9
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 07:56:19 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hRqHj6CKszKmLw;
- Sat, 22 Aug 2026 09:56:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1787385377;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zMhLCS0PEDxeJOzHpqEBFe2emgTipTt2/h3Wh/pgSYc=;
- b=vSyDtcpzxFSKDMQkaRhIquysXNmrknxmf1NYV3oxQBOYuudfnMIJAcXFt7TXtIjAAwchgg
- 7xL+Nhwz7OvSQWuUBGqw3E20Byy9oqX5wVXKlDAwOU4GC8E//IuKnjHIUE3kJFTLS8FQ3n
- ED/Gq7B7eAjtEFiGv29Y4vzd+UvhCYmFAtvU+Kk3UC4bF4zPLokz88AnmNcIAHarnLoGYX
- 1VklfNDkBOUPWdQ+qTRC+1idyefRqY4IidR07jt0Zc2KSJbO9MzpJ3lCGIlxd/nS1t7kSz
- PpJYOgC2c3FUUoxY359NJbJ448Hj0tMyYktgbh/tUGM9cZYcneJ5kpCcGHu3nA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=j7X6NFhu;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <a4ff5d24-9da3-44ad-934c-8a8b0caaad42@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1787385376;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zMhLCS0PEDxeJOzHpqEBFe2emgTipTt2/h3Wh/pgSYc=;
- b=j7X6NFhuRBeVZ7qCOdgPUFCIFwd/krwvrfNxM7eU9407KGJMhAJagbqtpWGi3mC+GyvQqs
- SkwqpriWGZEOAl63JITPhRv429PHydDTNzgY1pjgbeTEOUf+s/Rar3hpskee9FZ6SA1uep
- ePk8WgIKK1H5v/W9yC7v5mC5mdZvmmqN5BYRuk94jOTLtsFTO0a/L+KvLsLJq0CVJrvFH9
- 3nO1DVxxiMwldWCFaaLJbYyXOGaLd486pYyQERSPogAEoPKqfPvG2yJxd915ZklCyZUkcw
- BlcKUB++iKtTwQC38KGphwABccdOQY5ytG7NLGXBeDV9v/9DZSkW7yz8etuK3g==
-Date: Sat, 22 Aug 2026 06:22:27 +0200
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0yjZU_dzv9eG for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 08:58:43 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
+ helo=sender4-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
+ header.a=rsa-sha256 header.s=zmail header.b=i8CX1uaI
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D80FA80EDD
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1787389083; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Mji1j0NZhDXWu+xwYVd3cCzndxc6ooo4ngjINSWdWsY7pl3LYS/Cvw7FHk4j23t6TqN6KJxUY92uK/92kUMbP2Ias9qtl5XK5o30phXu2DRx+KnTDGLeujO3qnQvPEYd8e4RHzHsbXYBUpuG9FC9cWGk71BIpPXoE03zvx+OXCs=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1787389083;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=EpVsutJ7yw0MJ2DK7FKUnEADtl4Oz0oQwe86Yo8xAhg=; 
+ b=M0QH/kS8kbdBUa+NPorrEzUdQJpVTkpqcefH7ZdmdnSCYr78+iJZLG8CeKjPbzHBv/xXfK5+89g8RKeaZO+IqXDQuIyOP8yYfPYPbL1TNMJeTXOfEkRW8eIygaTfOeg4wkXy1TZwlevwKGm0hI6Ee3wADmnwnhnliBivkQ+iSuM=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787389083; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Reply-To;
+ bh=EpVsutJ7yw0MJ2DK7FKUnEADtl4Oz0oQwe86Yo8xAhg=;
+ b=i8CX1uaIdednr6D8ptvyZgt93Ru4DrKZPN6R1d+eoASwQ2sEK07O7ZXltgYDIn0Q
+ s2I3/dhurpHayop51H0k71dkCbF8fMCF6bGmg4/qtGxKp3NL628dq9HOSGHgKOazgyU
+ JlXEk6y5elrocpGqwO+TAOTGl9Shu/xsTBrz98uM=
+Received: by mx.zohomail.com with SMTPS id 1787389081734440.4493253970717;
+ Sat, 22 Aug 2026 01:58:01 -0700 (PDT)
+From: Junhui Liu <junhui.liu@pigmoral.tech>
+Subject: [PATCH 0/2] tools: mkimage: add SpacemiT K3 AIHD image support
+Date: Sat, 22 Aug 2026 16:56:46 +0800
+Message-Id: <20260822-spacemit-aihd-v1-0-bf4c41993891@pigmoral.tech>
 MIME-Version: 1.0
-Subject: Re: [PATCH v6 01/87] usb: host: re-import xhci-ext-caps.h from kernel
- v6.16
-To: Tom Rini <trini@konsulko.com>, Anders Roxell <anders.roxell@linaro.org>
-Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
- michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marek.vasut+usb@mailbox.org>, u-boot@lists.u-boot-project.org
-References: <20260821084829.2070426-1-anders.roxell@linaro.org>
- <20260821084829.2070426-2-anders.roxell@linaro.org>
- <20260821194451.GA3890585@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260821194451.GA3890585@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: escodcxutuxi8esjnr33fzbbatkh9myg
-X-MBO-RS-ID: 45d5eb574dac681748e
-X-Rspamd-Queue-Id: 4hRqHj6CKszKmLw
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBG4avIrA3EoCH0KuJiGn91BK1kbCmId
+ ze2y2/x3kGKJFB6FAclfETltWZUZUFx4nWEkT6bnHXeBmeNbhyxyG5Ypt7YJtaeGSF4UG62hEG
+ +v1/b/a3v54y43xM6zwtyW7iCcQAAAA==
+X-Change-ID: 20260820-spacemit-aihd-05c46aae886e
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Junhui Liu <junhui.liu@pigmoral.tech>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Daniel Golle <daniel@makrotopia.org>, Randolph Sapp <rs@ti.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Guodong Xu <guodong.xu@oss.qualcomm.com>, Yixun Lan <dlan@kernel.org>, 
+ spacemit@lists.linux.dev
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2501;
+ i=junhui.liu@pigmoral.tech; h=from:subject:message-id;
+ bh=kvlWf2zySoabQt8RFJImil2B9f9gs0ZgElenWE+H4t4=;
+ b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLI6UxpnbSw4cO9+wY4Pman539vmZ7vVBT8U/qpXrDBvq
+ 2pYWdSfjlIWBjEuBlkxRRYuf/F/1jo8344ItN6HmcPKBDKEgYtTACZyo42R4c21/cd3MHyZc7/3
+ ZlrU5RsbLv1VWe92M9jrxirxGVN+Frxg+MVsmHGg+8THesP7LDHLzunfO7TkTbSU6KyzsjuPn42
+ 3KuUFAA==
+X-Developer-Key: i=junhui.liu@pigmoral.tech; a=openpgp;
+ fpr=15B30CC69C4BF0CC3C08F85A2A90CDC122DF37BF
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,28 +115,90 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/21/26 9:44 PM, Tom Rini wrote:
-> On Fri, Aug 21, 2026 at 10:46:37AM +0200, Anders Roxell wrote:
-> 
->> From: Jerome Forissier <jerome.forissier@linaro.org>
->>
->> Import drivers/usb/host/xhci-ext-caps.h from Linux v6.16. The file
->> is needed by the updated DWC3 code.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
->> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> 
-> For the current series, the cover letter is missing in lore, and the
-> last 3 patches are missing everywhere. I think at this point we should
-> split this up as:
-> 1. A series that resets the driver, and brings it to v6.16. These
-> haven't changed in a few iterations of the current series, aside from
-> collecting tags, yes?
-> 2. A series that makes it all work again.
-> 
-> When being merged, both will be required, but this split will I think
-> make review and iterations easier for everyone. Also, for the next
-> go-round, please drop some of the old email addresses. Thanks.
-One more thing -- is there a git tree with the current state of the series ?
+The SpacemiT BootROM loads a first-stage bootloader from storage or over
+USB in MaskROM mode. Vendor firmware packages this bootloader as FSBL.bin.
+Its headers use the magic "AIHD".
+
+This series documents the AIHD image format and adds the "aihdimage"
+mkimage type for the CRC32-protected K3 variant used in non-secure boot
+mode. It provides the FSBL packaging needed for future K3 SPL support.
+Select K3 with "-n k3" when creating an image.
+
+K1 and K3 secure boot use RSA authentication and are not supported yet.
+
+How to test
+-----------
+
+Rebuild mkimage, wrap a small UART test payload, and load it through K3
+MaskROM fastboot. The payload is linked at 0xc0801000 because the BootROM
+places the complete image at 0xc0800000 and enters the payload after the
+4 KiB prefix. UART0 should print "Hello SpacemiT K3!" and then loop
+indefinitely.
+
+  $ make tools-only_defconfig
+  $ make tools-only
+
+  $ cat > k3-uart.S << 'EOF'
+  	.equ	UART0_THR, 0xd4017000
+	.equ	UART0_LSR, 0xd4017014
+
+	.section	.text
+	.global	_start
+_start:
+	la	s0, str
+1:
+	lbu	a0, (s0)
+	beqz	a0, exit
+	call	uart_send
+	addi	s0, s0, 1
+	j	1b
+
+exit:
+	j	exit
+
+uart_send:
+	li	t0, UART0_LSR
+	lw	t1, (t0)
+	andi	t1, t1, 0x20
+	beqz	t1, uart_send
+	li	t0, UART0_THR
+	sw	a0, (t0)
+	ret
+
+	.section	.rodata
+str:
+	.asciz	"Hello SpacemiT K3!\n"
+EOF
+
+  $ riscv64-linux-gnu-gcc -nostdlib -fno-builtin -fno-pie -no-pie -static \
+    -march=rv64gc -mabi=lp64 -g -Wall -Wl,--build-id=none \
+    -Ttext=0xc0801000 -o k3-uart.elf k3-uart.S
+  $ riscv64-linux-gnu-objcopy -O binary k3-uart.elf k3-uart.bin
+  $ ./tools/mkimage -T aihdimage -n k3 -d k3-uart.bin k3-uart-aihd.bin
+
+Hold the FDL button, power on the board to enter MaskROM, then run
+fastboot on host:
+
+  $ fastboot stage k3-uart-aihd.bin
+  $ fastboot continue
+
+---
+Junhui Liu (2):
+      tools: mkimage: add SpacemiT K3 AIHD image support
+      doc: board: spacemit: document the AIHD image format
+
+ boot/image.c                 |   1 +
+ doc/board/spacemit/aihd.rst  | 145 +++++++++++++++++++++++++++++++
+ doc/board/spacemit/index.rst |   2 +-
+ include/image.h              |   1 +
+ tools/Makefile               |   3 +-
+ tools/aihdimage.c            | 202 +++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 352 insertions(+), 2 deletions(-)
+---
+base-commit: 6073c36b2c8d39afe3ecc789b281667a3ddebc70
+change-id: 20260820-spacemit-aihd-05c46aae886e
+
+Best regards,
+--  
+Junhui Liu <junhui.liu@pigmoral.tech>
+
