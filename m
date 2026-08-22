@@ -1,123 +1,115 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C183C5DF8C
-	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 20:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B98C5B572
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 23:02:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D4C6D40731;
-	Sat, 22 Aug 2026 20:51:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6F3E680E94;
+	Sat, 22 Aug 2026 23:02:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Le-67wzBDVsO; Sat, 22 Aug 2026 20:51:34 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jQ9c-7T-rUy1; Sat, 22 Aug 2026 23:02:31 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787431894;
-	bh=M9iGLgjkiIquDHPVz2vMYwx4KlCLdPOOZlhYVvAB8es=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=vyI2BwIYlyAaJq4HbE8M6c4MyWrvmcxPyZxGmXjYa9g4OGknLgcEo+VMciO7vqdVQ
-	 bvI00cJP5HNdEwCcqsNg9hsTte2Co4GH9FN4azb2AQbTjzYRU+SEMwRqbzZqeQjVub
-	 cEWw/AdK30DFE3aHWeo20EMjrKJZrQZViQYjSwjLPxJxWoDl4ckFxPknzlllMOjAaZ
-	 y7yTtrIsaZF4vl7i3K0+w8wZoaNRxls/3Reh5Pdxoy47xa3znLqrk2pbHfB+7n0eTd
-	 +X1jL52i9neCjBnYwCysHE19/yWArDRggSBRxvtqX/nUHLJ3yb/X1JTXiVsY4vp3Gr
-	 UAqcn23AheGzg==
+	d=lists.u-boot-project.org; s=default; t=1787439751;
+	bh=uEd6diuJONXaQQoZPIVjcrn5C2CykmrbfoD7qjQoIcY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=JFQsp106Pd0azR76jTMdKqzkN+u8aZf4qe0AEr7xak96qyCqJwGe5FZ5kFAdDCBgT
+	 5gBLVRCe72TSxSoeUYKA9TpvmV7jfVM6OdtiCX/jAkXpXtFlGc7EGLMPQi/2DD7K5y
+	 Nbwz3cxwae8wsm40CN7QztcrkjLkrtWUpr8QdBxnLth9E8bgKDrEUO7oESrl210pDv
+	 spOmx55YZJMiFugOLfKyDVdMQZhljsq452xGr/NCRUZHAkAXbA0Sl+amxtaYkmo6BX
+	 Jrnl0fVWxQx1neouTqJQr5xkB1xQb/SIWbFWoY9/L2U5dKYneoBvDErauDGszd8lq3
+	 H/Z96edLYgHcQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A9DDF4070F;
-	Sat, 22 Aug 2026 20:51:34 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E9E24279
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 20:51:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7961B80E7A;
+	Sat, 22 Aug 2026 23:02:31 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3E0A1476
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 20:55:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DB88240116
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 20:51:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3B5B480DD9
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 20:55:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YbVNZJAJmWTM for <u-boot@lists.u-boot-project.org>;
- Sat, 22 Aug 2026 20:51:33 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:30::;
- helo=mail-oa2-x00.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=ePhLoq4x
-Received: from mail-oa2-x00.google.com (mail-oa2-x00.google.com
- [IPv6:2607:f8b0:4864:30::])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F153C40076
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 20:51:31 +0000 (UTC)
-Received: by mail-oa2-x00.google.com with SMTP id
- 586e51a60fabf-451e8472960so1376746fac.1
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 13:51:31 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nXOWdeZveIUF for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 20:55:46 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ envelope-from=f@lex.la; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=lex.la
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=lex.la header.i=@lex.la header.a=rsa-sha256
+ header.s=google header.b=G882SXYZ
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D07A280DD8
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 20:55:45 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c167aa9500dso334533266b.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 13:55:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787431890; x=1788036690;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=M9iGLgjkiIquDHPVz2vMYwx4KlCLdPOOZlhYVvAB8es=;
- b=ePhLoq4xhAMz/52bRoIKaQbNKEbgWKjTAXnDBq2tBDlqoSrlzUFnZ1xYu2ZYBH3433
- gIpt4KmC492cVsjiVkxYfiUmw2bXDszTBZpGpPyTzf4Kx3aUqOIMn7X3UkAjLiL1rSBh
- weabBckel8OoaW8hT0d/NKa37opKa8Pay2nzE=
+ d=lex.la; s=google; t=1787432143; x=1788036943; darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=uEd6diuJONXaQQoZPIVjcrn5C2CykmrbfoD7qjQoIcY=;
+ b=G882SXYZQsjjzS5EHA2o13/0WWi3rCrw7A8bKDBeceznR/t+w2upiKwrAx/ioqaeiA
+ JQEkqOs3yJ2NjIR0eJD6O7hM/38GEuGpAI5LvRmkBk80eA4k45XQeAykFFuSl7CN0zCR
+ tDouC+Ip+hk6XJcYBJ/8IHcvE5au/aUUqRU2XH4/Uu/TsHbMuA0++oqeehQXL+pBkWvs
+ 77rMBdMLgGE9uxEWPRS8giPfqL3b8142tIQTd2E9utrmribTJxK91av/kIZ5TX5hr2/A
+ xzk/mrdzT8RnUodW7NJpEqeynxFIuYUrBKc23+YywayXUQdKbT3FzYCsHKZ3fB8trOWZ
+ uY7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787431890; x=1788036690;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=M9iGLgjkiIquDHPVz2vMYwx4KlCLdPOOZlhYVvAB8es=;
- b=Mt9fAr9MSatE71t7QpDCNmnT8xzF9pJ6DWsPfOJ6V+iQSKaBFvFaSgTgYYZ33cvg9T
- kpiJhj6XuLOMeBjqeW+X+vcVvRveMtbNNHTcxip07Fe4NRiJCxyUr+8VjqeVMqnIAwDp
- +875YHwNHH4qpjXW5X82Voq8ZkHK+xdnAyWHeP5mQofvQyezJt5/YZdF8jnFpt4x7a6/
- OV/WTi8YipAvJGeKtp1gSwEDfYQcX5qx1pXDh9ds+32tLYMZE6331XNjOaiSsg17vVin
- RlAuJ+45yBbLOhadmZSGht+lEAQY4Nd7HGDuYitHg4ywYb4XKLR1nBwNfWazhp24WoR/
- NLrw==
+ d=1e100.net; s=20251104; t=1787432143; x=1788036943;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=uEd6diuJONXaQQoZPIVjcrn5C2CykmrbfoD7qjQoIcY=;
+ b=aGYyd4MoGhCMUXrEBseNqBf2P2kh9u40wpoU50+w9vm+i+rzmyebLzcAvWUUAHJdh9
+ JMv+ZpOnLz7Zs6VvFfEnagGzX8cfjWybpQLSVDQNdQQcJamQyRfZ6WsoKPxEaEJgI0L9
+ nDyDw4Xosk53kbSdwIGR4gPEDzAPukcYHKka56NuBCTDGO8U8f9Hkt10/VqXRcWbkCdO
+ OJD3tKObtvq79kQqiBx7vhjv7VcrGysmGAA/u/48M56nxCzshZ/t1RbHKZJjr2PsPOjQ
+ R8vOqXqaMEghqUuDf8obPrLhgFgLybfdetZnoox9Ul2PKY2c994BRAi+DehuM1cDGpya
+ llMw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrppVf2Hwdx6G0JU1fnWs9quyp6YiVMsJv5ddpO6UymZPvGOvW1Fohrkn0Tma787YZhO6ljtrc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nws3dNO+jDRRVkRNsvP4KiIBiaGGhRuuBYAC77hXd3d6O4wzC8
- TNGRl6+ox4mgWrIlf+MEzjA8lQGmB86tdxMxkDU3DVJlwn6c3MfSTXH3rGku+j5ZnMrHGTchVdV
- p697ye2xkYOqTUH4=
-X-Gm-Gg: AR+sD12iYSqEWl+fYf7Zfi5JlOywu2rp1f0iBonCrBEq80NWUAVzVnGnrPvxrUjLNTp
- xODLybGQdDgwVINEA9kL6R/S8uLmWnaQLc7lJwdCKOca2r3imOzyJFbL19VgMuJsc26zSslMraA
- eXoKozMUcCZVSD7Z7dhiIbz8robQMtuUoOa88BZDuA1R60AS4PUAA+mckON76L+RnRhfGWse9IW
- uz8F6oYkxd7YGG/5B4FW1/QsjZGmJ/LZhjrqaLMtHeby0VbEmBgOEG5Utr5BSukAzD+zPyzdrmT
- j3w+vDcBk+90JmBz2c19Dq+2am2lroVg5Zf6YqiMVb2zfW1YDfrUJY3x/20IFizBe31q+VlCPzr
- xxTfxcCDSnzE0nm3NKbbNg/ioVXsGTWGV3YHYZRzl5s0urDT8syMjWaBYWds9otWm3XFDOtuOTQ
- 3zDZZpOnE5qfSz915U6ICv9fJd4NAeWQWWEKRAgWAp+zUcbkKP5kMFHtz1E5dts3szt+rckU49h
- B9X2JEDuUJDXN9WbYrf98XBZHqp/oR0XJrQYvW+lMVUm8s8oMI6eYiGj1OzvUqBdQq03W+slIAz
- 4JdRu0Z1Dw==
-X-Received: by 2002:a05:6820:83c6:10b0:6b0:be69:d3cd with SMTP id
- 006d021491bc7-6b1593b2035mr12664834eaf.17.1787431890328; 
- Sat, 22 Aug 2026 13:51:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b13c90d160sm12266604eaf.0.2026.08.22.13.51.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Aug 2026 13:51:29 -0700 (PDT)
-Date: Sat, 22 Aug 2026 14:51:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v3 14/19] board: emulation: Add qemu-loongarch
-Message-ID: <20260822205127.GY523975@bill-the-cat>
-References: <20260821084219.1703743-1-me@ziyao.cc>
- <20260821084219.1703743-15-me@ziyao.cc>
- <20260821162055.GO523975@bill-the-cat> <aooJQpeCbhlWkczO@pie>
+ AHgh+RodUr/1Ko9QdrHwf2/ExZbhKz4LDu519IVrUcW8aOZ0OhZzThg3H6eiQLUNriamPTReZN+sIAg=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lIPdV+l4p2jFXZbVPm7BIoevEbXQgXxrX0skOy8Bm7CBcDaOTw
+ OY5aqi1UThe1TJTLJi5v/jQUYVUmYg/hdBx4emVHrJ3RA34z8kO1dtD9pMbkbyXoBAcinOE6YSQ
+ wBwep8g7tuw==
+X-Gm-Gg: AR+sD10VHKZyvDfLl0fZo3J6Tlzrrrmren+icVjf8rLDyJfDkigt7Wdfvt+81MR0jH9
+ etspB2FJmH6eirH240gZ2J++HDZWNxLRsxogmoaA7j+QhK/TUC63RPxB49SiVhrITURrXtYjrLT
+ FBkcROgT1ZHk0wLEQTBNzsuMz0RIHeAyEGJ/vEgNVfe43a9e96eanx6uzvY+R00gTnia+3Rr69R
+ +wn9Nbz2uuIkeOVkBGsZ9M11JhzhzGWtrKyon2Q3irAZL5YTrZZ5Vjx6VW6JHNXPiWSWqbj7vC8
+ NtgHJ0NVdM+X9MgF4/VI5Yo9XbspzQl/YTI1WcUcm5eitLp6v+KVPtYpclSSakVNTFZ/9mFYPFv
+ qkDCYOxgB/EfvkQfSmJ+LffsMPm4xIDnbLBlCWv4GFT3rD7u7l3WnO/pHGyAHz2Hi5Mbg5oMrkQ
+ 0sssxL9xhZene/jkGUMQHiIyiQCSIfY0H5IdL4wG1KbqEDALR/TBQSdoW38RBlNaizgm7/Rw==
+X-Received: by 2002:a17:907:3f9c:b0:c24:90a3:42a5 with SMTP id
+ a640c23a62f3a-c2490a34342mr958415066b.14.1787432143068; 
+ Sat, 22 Aug 2026 13:55:43 -0700 (PDT)
+Received: from ownbook.home.lex.la ([84.17.55.225])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c24968abf18sm521453166b.61.2026.08.22.13.55.41
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sat, 22 Aug 2026 13:55:42 -0700 (PDT)
+From: Aleksei Sviridkin <f@lex.la>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Tom Rini <trini@konsulko.com>, Tianling Shen <cnsztl@gmail.com>,
+ u-boot@lists.u-boot-project.org, Aleksei Sviridkin <f@lex.la>
+Subject: [PATCH] mtd: spinand: fmsh: add support for FM25G01B and FM25G02B
+Date: Sat, 22 Aug 2026 23:55:40 +0300
+Message-ID: <20260822205540.1223-1-f@lex.la>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HLTQw0D8jS+bXQGo"
-Content-Disposition: inline
-In-Reply-To: <aooJQpeCbhlWkczO@pie>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 22 Aug 2026 23:02:29 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,73 +123,170 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Add the FudanMicro FM25G01B (1Gbit) and FM25G02B (2Gbit) SPI-NAND
+parts. Both have 2048-byte pages with 128 bytes of spare area, 64
+pages per erase block, and on-die ECC with a strength of 8 bits per
+528-byte step. Their ECC status field is 3 bits wide and reports each
+bitflip count from four to eight separately, so it needs a decoder of
+its own instead of the coarse ranges the other parts in this file use.
 
---HLTQw0D8jS+bXQGo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The 0xEB Quad I/O read-from-cache operation takes a single dummy byte
+on these chips rather than the two the shared read_cache_variants set
+uses, hence the separate variant set: with the extra dummy byte the
+data phase is shifted and reads return corrupted data without any ECC
+error being reported.
 
-On Sat, Aug 22, 2026 at 08:40:34PM +0000, Yao Zi wrote:
-> On Fri, Aug 21, 2026 at 10:20:55AM -0600, Tom Rini wrote:
-> > On Fri, Aug 21, 2026 at 08:42:14AM +0000, Yao Zi wrote:
-> >=20
-> > > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > >=20
-> > > Yet another generic QEMU VIRT machine.
-> > >=20
-> > > LoongArch QEMU splits the main RAM into two parts: the first 512M is
-> > > placed at 0x0, and the rest is placed at 0x8000000. FDT locates at
-> > > 0x100000. BIOS is mapped to the first flash mapped to 0x1c000000, whe=
-re
-> > > U-Boot starts execution.
-> > >=20
-> > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> > [snip]
-> > > diff --git a/arch/loongarch/dts/qemu-loongarch64.dts b/arch/loongarch=
-/dts/qemu-loongarch64.dts
-> > > new file mode 100644
-> > > index 000000000000..39d303798fcb
-> > > --- /dev/null
-> > > +++ b/arch/loongarch/dts/qemu-loongarch64.dts
-> > > @@ -0,0 +1,9 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +/*
-> > > + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > + */
-> > > +
-> > > +/dts-v1/;
-> > > +
-> > > +/ {
-> > > +};
-> >=20
-> > I thought I had pushed everything so that we do not need to have fake
-> > empty dts files anymore.
->=20
-> Do you mean OF_OMIT_DTB? Even with it enabled, a devicetree blob,
-> specified by CONFIG_dEFAULT_DEVICE_TREE, is always built, but not
-> integrated in the final u-boot.bin.
->=20
-> qemu_arm_defconfig also ships an empty devicetree. I'm not sure whether
-> there's really a way to avoid building a dtb...
+FM25G01B datasheet: https://www.fmsh.com/nvm/FM25G01B_ds_eng.pdf
+FM25G02B datasheet: https://www.fmsh.com/nvm/FM25G02B_ds_eng.pdf
 
-There is, but, OK, I didn't post a v2 of the series:
-https://lore.kernel.org/u-boot/20260708013019.288985-1-trini@konsulko.com/
-So, this comment doesn't apply as it's not something you can avoid doing
-yet.
+This is a port of linux commits
+d5a5c9eb2ee9 ("mtd: spinand: fmsh: add support for FM25G{01,02}B")
+8211f2d74b35 ("mtd: spinand: fmsh: fix FM25G01B/FM25G02B Quad I/O read
+dummy cycles")
+which are queued in the MTD tree and not in mainline yet.
 
---=20
-Tom
+Tested on a Keenetic KN-1012 (MT7981B) that boots from an FM25G02B.
+FM25G01B is taken over from the Linux table and is untested here.
 
---HLTQw0D8jS+bXQGo
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Aleksei Sviridkin <f@lex.la>
+---
+ drivers/mtd/nand/spi/fmsh.c | 103 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 103 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/drivers/mtd/nand/spi/fmsh.c b/drivers/mtd/nand/spi/fmsh.c
+index 80837b7dd..dc6c3fc35 100644
+--- a/drivers/mtd/nand/spi/fmsh.c
++++ b/drivers/mtd/nand/spi/fmsh.c
+@@ -11,6 +11,16 @@
+ #endif
+ #include <linux/mtd/spinand.h>
+ 
++#define FM25G01B_STATUS_ECC_MASK		(7 << 4)
++	#define FM25G01B_STATUS_ECC_NO_BITFLIPS		(0 << 4)
++	#define FM25G01B_STATUS_ECC_1_3_BITFLIPS	(1 << 4)
++	#define FM25G01B_STATUS_ECC_4_BITFLIPS		(2 << 4)
++	#define FM25G01B_STATUS_ECC_5_BITFLIPS		(3 << 4)
++	#define FM25G01B_STATUS_ECC_6_BITFLIPS		(4 << 4)
++	#define FM25G01B_STATUS_ECC_7_BITFLIPS		(5 << 4)
++	#define FM25G01B_STATUS_ECC_8_BITFLIPS		(6 << 4)
++	#define FM25G01B_STATUS_ECC_UNCOR_ERROR		(7 << 4)
++
+ #define SPINAND_MFR_FMSH		0xA1
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+@@ -29,6 +39,74 @@ static SPINAND_OP_VARIANTS(update_cache_variants,
+ 		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
+ 		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
++static SPINAND_OP_VARIANTS(fm25g_read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
++
++static int fm25g01b_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 64;
++	region->length = 64;
++
++	return 0;
++}
++
++static int fm25g01b_ooblayout_free(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	/* reserve 2 bytes for the BBM */
++	region->offset = 2;
++	region->length = 62;
++
++	return 0;
++}
++
++static int fm25g01b_ecc_get_status(struct spinand_device *spinand,
++				   u8 status)
++{
++	switch (status & FM25G01B_STATUS_ECC_MASK) {
++	case FM25G01B_STATUS_ECC_NO_BITFLIPS:
++		return 0;
++
++	case FM25G01B_STATUS_ECC_1_3_BITFLIPS:
++		return 3;
++
++	case FM25G01B_STATUS_ECC_4_BITFLIPS:
++		return 4;
++
++	case FM25G01B_STATUS_ECC_5_BITFLIPS:
++		return 5;
++
++	case FM25G01B_STATUS_ECC_6_BITFLIPS:
++		return 6;
++
++	case FM25G01B_STATUS_ECC_7_BITFLIPS:
++		return 7;
++
++	case FM25G01B_STATUS_ECC_8_BITFLIPS:
++		return 8;
++
++	case FM25G01B_STATUS_ECC_UNCOR_ERROR:
++		return -EBADMSG;
++
++	default:
++		break;
++	}
++
++	return -EINVAL;
++}
++
+ static int fm25s01a_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				  struct mtd_oob_region *region)
+ {
+@@ -47,12 +125,37 @@ static int fm25s01a_ooblayout_free(struct mtd_info *mtd, int section,
+ 	return 0;
+ }
+ 
++static const struct mtd_ooblayout_ops fm25g01b_ooblayout = {
++	.ecc = fm25g01b_ooblayout_ecc,
++	.rfree = fm25g01b_ooblayout_free,
++};
++
+ static const struct mtd_ooblayout_ops fm25s01a_ooblayout = {
+ 	.ecc = fm25s01a_ooblayout_ecc,
+ 	.rfree = fm25s01a_ooblayout_free,
+ };
+ 
+ static const struct spinand_info fmsh_spinand_table[] = {
++	SPINAND_INFO("FM25G01B",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xd1),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 21, 1, 1, 1),
++		     NAND_ECCREQ(8, 528),
++		     SPINAND_INFO_OP_VARIANTS(&fm25g_read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&fm25g01b_ooblayout,
++				     fm25g01b_ecc_get_status)),
++	SPINAND_INFO("FM25G02B",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xd2),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 41, 1, 1, 1),
++		     NAND_ECCREQ(8, 528),
++		     SPINAND_INFO_OP_VARIANTS(&fm25g_read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&fm25g01b_ooblayout,
++				     fm25g01b_ecc_get_status)),
+ 	SPINAND_INFO("FM25S01A",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xE4),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+-- 
+2.55.0
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaooLywAKCRAr4qD1Cr/k
-ClSwAP96JZFBFM95+3AqtudPFz7rq0wu2XrwFXs/DWTihb8m3gEA8ebivx1ENX1x
-j9gvLee/avhrK14IStnUW/bfT5froQo=
-=xvPW
------END PGP SIGNATURE-----
-
---HLTQw0D8jS+bXQGo--
