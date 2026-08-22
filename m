@@ -1,161 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B3C2C5DF94
-	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 02:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D41C5DF97
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 07:56:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F344B60AB1;
-	Sat, 22 Aug 2026 02:43:28 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cMSEIkCWn0eL; Sat, 22 Aug 2026 02:43:28 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787366608;
-	bh=WRvNi2a0IWOknfnmoCBnjLTN04Vy+SEyN5+mrEEmVZk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=M9dpwPffP0LX0LKp5jGBP3HoVMy26hn5NizAEO3sVv7ugf3pzfhfnjaAnx4E2YxE2
-	 eqRXhNOVmELG3xDPTs9MsQiGXKXlwkTXzUfKTuVeIsyOvRkm0lBVX37omlF1JKw94l
-	 x/y2Sr0T7Kt3upcpqzPBVnatSOHZHeRc1KF5m92ln9nLPjegQt//EfDWgMPase+Vep
-	 t9V8XH+jkcBBsKU8j2qAwHvaRt4LcPg3qV4tyME+zci+2tknEvwaOCplVsiWImxnTK
-	 GTm6fbs5IZHAtlC3NGzgvTjg4Tn050YDUegFmfAycGrMEEtqkkvXpsNn4IsJFPC6CI
-	 QvY0Dkcv/eXGA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 08B3960870;
-	Sat, 22 Aug 2026 02:43:28 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id BD136386
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 01:29:28 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A69CE406EC
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 01:29:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AB6D740A0B;
+	Sat, 22 Aug 2026 07:56:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NyMGP1wFxEKX for <u-boot@lists.u-boot-project.org>;
- Sat, 22 Aug 2026 01:29:28 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::134; helo=mail-lf1-x134.google.com;
- envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
- header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=bKdasMX2
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- by smtp4.osuosl.org (Postfix) with ESMTPS id AE6D4406D9
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 01:29:26 +0000 (UTC)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5b0148201fbso1679986e87.3
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 18:29:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787362164; cv=none;
- d=google.com; s=arc-20260327;
- b=kF5hvmPddHcSoYVhWBSUddvdRChjlkLEEmDj/6H30ZRdRqNd3bBWamsyR2U/Hx3Om2
- GvEzWqp5zMoHI1Dyk5VEKqSVlXYMPNL3ExQkyg+Z+jRDe4Ync53kPu1Y66zHD9+oxT9+
- jR3yO8Rug9GlwHjtVnkjhYOR3ad9wBreH1qeZzPrbNF8XJY7baKf3wQCLm3EOubPWrlV
- +CrcwKiULXaV9b48gwMiVUEFoywSSxTE5ilpLjW0zbLXSyudZZP/Zv3bxsIry1ya5za7
- gpoRoNImBlUcBm+XDGV23tDItfcTUpagm5LFFZ1m5gIlVEXBSqbkvWeqExWEvx4cvCS9
- Kfng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=WRvNi2a0IWOknfnmoCBnjLTN04Vy+SEyN5+mrEEmVZk=;
- fh=Q3oPbH8/Tz+DCgBZeQdFra725ZUISeFhkfoncGQjM04=;
- b=N5kkxXJ8pB0nFL29X9tUR0eH6pKeF7kEVi2Ue5kFmAeBUlwnfh8MR8NkNGm2dxJvW7
- oWa3THXKoeCAKdo6LYUR8g7A2rcD6N9c78CzRnmg3a+xRI32nGnUJ61707DOtWRUFS39
- DuzbGasjdQ3TPSIdCtFWjmkGYnHcpbN1ckjR8Tl2EEc1omNDnSjXllpdWpsLjXEecSXT
- cshPPlA4N95DRNstlIEarZsET55HE1wZKLm8OmszyPs/GIZ4IdGxqqPaz3h/hmLsfJPH
- VVcIGLh1C0Nw5W3GsLywRYuzN+xcQe1cSpS4FlVoLw1f/X5nJBLa0HKKGGdyiUnim/QP
- xb4g==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id zL-j4JJfJ9rV; Sat, 22 Aug 2026 07:56:24 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787362164; x=1787966964;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=WRvNi2a0IWOknfnmoCBnjLTN04Vy+SEyN5+mrEEmVZk=;
- b=bKdasMX2TvBQ9znyRtMy56cslc/ImpTkLQq/DZFFzZSbpECU4N5KDI/ufEr62fY0d/
- fB9MS6825Un1bb9tAcwUBVok/uP2eGjsq7YuNTGVTEzxFTWHuXKVS0YdlXvrdM+kaitI
- vwOv2I8lssFYtm8D2z3aZSzdR7bSbPjymlnqzrpVyfGU0wj7GvY2HGGRwNSPHIl1YIhd
- OL8rvL2/VkeaKKax0kmPZaaeIz8w8uSzbeBdxMpW+EZrunSqlxVkhMx5WeQsr3TDz/5A
- IyPOnNbvELDfZjVSqeMKwmMQ0c5Cxjntg0PIHD43lcC/W0iyQ/W0gnOxDyRPN8J/3VxK
- mz8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787362164; x=1787966964;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=WRvNi2a0IWOknfnmoCBnjLTN04Vy+SEyN5+mrEEmVZk=;
- b=fzfHKC9fObDraf2jdEIzlyMzuPmHv14mr7IbN6CLLGsD3EoI1HBA0E/qJIMFgL2Cd7
- CngWE0rvYVmC3Vju5/u5isPNufiTsgN3JhSW6rj1qqWPfp5T4QhCejPvywtW8dfgPrNK
- GwmVOW9Oza5yKoWvQEPVZx743fLSldNpC6QvzkczWcZOhDSwpDJFgP6dDqNhKa3MqagQ
- 6oXduF54tasI45t7HMydZyK5DMK6nNhYLFRGfqHjKe+TPEKJpS95HEnX2PzUUNreZIP5
- rOf9mgFrMX6jc45AMzSsBDtbudinJXuGHHA2DVINrzcSm7KkFeKdVBgxU8muBq3dOK5C
- HMTQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqdonwIdHXhZyZSsDT6Qwv1/nwBlMFSy6yQ2XzFuKxTaA7TckrStqgLZ1aKa//Cj2b/XuaPA3M=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++n6emRBt5H37oB+Kaq1K0/PYJqlJrbtjmopa2muyjQ0/TrC2rrY
- GPxkcs2K0permkkBiPNiEGh8GxV9dpGGrh+LZVuUGBxHVvk1cBnNmIYlwZiaUQl9et4TyCQ2LX4
- c9QJcM1ABT/Yu5OizbOB7HI4a3iuIO1KY0MYLovUPMA==
-X-Gm-Gg: AR+sD13Ev9nhio2Q/FE171gNfTP4HFkXYbsG8LAFLa3CDShSdx2XRxRf/KWGA5EpOmC
- cD67sn6swmpsH8ChP6Dch3vOLs9geZxUSl2DGXsV6qDPANU8icoDbTWTTduWL9XXjCE9gViIjdw
- UQNmG+QeAy+vhn5KM3rLwUUktqU+7D8LHQcXfQtwTe0rSLpTBeqECWqiLDlQpnnzqDV6o4NJ159
- cU5LSt5vI6/nnBNrKA73FS6OnR5oi26QdLNH5Y9w2sVP6TPcJeKI3rGizlVJBI53OZXKZfy4FoN
- 7La4Vd0w8RCYkVe8Zd5w1+uKqo3xpQ9beu6A5GVE+4u2TDSAD2xV+f2wDvBsRsSWH2paySbXE+P
- elKRIjBSS+TLX4RLXJBVE0OnPisuOaw+runTF/bBlsCK+yL3BBV4m38SqQ866lJvd++RN4abbzQ
- OLPw==
-X-Received: by 2002:ac2:5688:0:b0:5ae:ba8f:f9fd with SMTP id
- 2adb3069b0e04-5b4841fd33emr3588179e87.9.1787362164242; Fri, 21 Aug 2026
- 18:29:24 -0700 (PDT)
+	d=lists.u-boot-project.org; s=default; t=1787385384;
+	bh=zMhLCS0PEDxeJOzHpqEBFe2emgTipTt2/h3Wh/pgSYc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ME3smTtLdK6l/zcWP1JJMSXsc1WCKeyW9PnBYHdi+OZxwRu5ZN6YzY/tYjsHxQDJp
+	 3qy+ikA0w+zOOU1NkIANBd5UscwSKRU6J0anjdQG5D4QHBhuarKTSzlYTXFGwfNicp
+	 y9Xvu+AphHyiueRxA2HTqAFArUQOdfM1BmlnIn0XcpyTZXK4F7FLbwE3f19H3eJ+Hc
+	 nEC93uuE07vGYD5Ru66yar3OV2k5X/QOOEmrGQ1Flj1jfjf/Uf6enp/7/r2KhCcgAd
+	 thNjZAK8g1k/6hYMtPYh7Kq+8QjMNazHcWwznb8eonWCvRY48NNrpI9hujsOY2uIZb
+	 VuP1rq3frxQ1Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 79C4D409EC;
+	Sat, 22 Aug 2026 07:56:24 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5F1D34B8
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 07:56:21 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4F868409EC
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 07:56:21 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VrUaHUtrace6 for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 07:56:20 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::103; helo=mout-p-103.mailbox.org;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mailbox.org
+ header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812
+ header.b=vSyDtcpz; 
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=j7X6NFhu
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9FF4F409E9
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 07:56:19 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4hRqHj6CKszKmLw;
+ Sat, 22 Aug 2026 09:56:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787385377;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zMhLCS0PEDxeJOzHpqEBFe2emgTipTt2/h3Wh/pgSYc=;
+ b=vSyDtcpzxFSKDMQkaRhIquysXNmrknxmf1NYV3oxQBOYuudfnMIJAcXFt7TXtIjAAwchgg
+ 7xL+Nhwz7OvSQWuUBGqw3E20Byy9oqX5wVXKlDAwOU4GC8E//IuKnjHIUE3kJFTLS8FQ3n
+ ED/Gq7B7eAjtEFiGv29Y4vzd+UvhCYmFAtvU+Kk3UC4bF4zPLokz88AnmNcIAHarnLoGYX
+ 1VklfNDkBOUPWdQ+qTRC+1idyefRqY4IidR07jt0Zc2KSJbO9MzpJ3lCGIlxd/nS1t7kSz
+ PpJYOgC2c3FUUoxY359NJbJ448Hj0tMyYktgbh/tUGM9cZYcneJ5kpCcGHu3nA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=j7X6NFhu;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <a4ff5d24-9da3-44ad-934c-8a8b0caaad42@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1787385376;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zMhLCS0PEDxeJOzHpqEBFe2emgTipTt2/h3Wh/pgSYc=;
+ b=j7X6NFhuRBeVZ7qCOdgPUFCIFwd/krwvrfNxM7eU9407KGJMhAJagbqtpWGi3mC+GyvQqs
+ SkwqpriWGZEOAl63JITPhRv429PHydDTNzgY1pjgbeTEOUf+s/Rar3hpskee9FZ6SA1uep
+ ePk8WgIKK1H5v/W9yC7v5mC5mdZvmmqN5BYRuk94jOTLtsFTO0a/L+KvLsLJq0CVJrvFH9
+ 3nO1DVxxiMwldWCFaaLJbYyXOGaLd486pYyQERSPogAEoPKqfPvG2yJxd915ZklCyZUkcw
+ BlcKUB++iKtTwQC38KGphwABccdOQY5ytG7NLGXBeDV9v/9DZSkW7yz8etuK3g==
+Date: Sat, 22 Aug 2026 06:22:27 +0200
 MIME-Version: 1.0
-References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
- <20260821164257-GKA579897@kernel.org>
- <CAH22mJzoRX6n=YgSRMukLOF6-ybPgHS2jmraoQLjB1LvG7jQVQ@mail.gmail.com>
-In-Reply-To: <CAH22mJzoRX6n=YgSRMukLOF6-ybPgHS2jmraoQLjB1LvG7jQVQ@mail.gmail.com>
-From: Eric Chung <eric.chung@riscstar.com>
-Date: Sat, 22 Aug 2026 09:29:12 +0800
-X-Gm-Features: AcwNN1U5_3dId_vK9EWX6-D9Ns9WKwKGOAi98c4N3wMi9AOpdjflmpKz6Q6Dm8Y
-Message-ID: <CAH22mJzYjOuGAj5cNRO60eZ0o01koOuSYVkfKxXNCaeh3tUmdQ@mail.gmail.com>
-Subject: Re: [PATCH v9 00/19] spacemit mmc driver
-To: Yixun Lan <dlan@kernel.org>
-Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
- Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
- Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>, 
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>, 
- Johan Jonker <jbx6244@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Guodong Xu <guodong@riscstar.com>, Yao Zi <me@ziyao.cc>,
- Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Yixun Lan <dlan@kenrel.org>,
- Alex Elder <elder@riscstar.com>, 
- Yixun Lan <dlan@gentoo.org>, Iker Pedrosa <ikerpedrosam@gmail.com>, 
- Anand Moon <linux.amoon@gmail.com>, Trevor Gamblin <tgamblin@baylibre.com>, 
- Vincent Legoll <legoll@online.fr>, Troy Mitchell <troy.mitchell@linux.dev>, 
- Margherita Milani <margherita.milani@amarulasolutions.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Andre Heider <a.heider@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 22 Aug 2026 02:43:27 +0000
+Subject: Re: [PATCH v6 01/87] usb: host: re-import xhci-ext-caps.h from kernel
+ v6.16
+To: Tom Rini <trini@konsulko.com>, Anders Roxell <anders.roxell@linaro.org>
+Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org,
+ michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, u-boot@lists.u-boot-project.org
+References: <20260821084829.2070426-1-anders.roxell@linaro.org>
+ <20260821084829.2070426-2-anders.roxell@linaro.org>
+ <20260821194451.GA3890585@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260821194451.GA3890585@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: escodcxutuxi8esjnr33fzbbatkh9myg
+X-MBO-RS-ID: 45d5eb574dac681748e
+X-Rspamd-Queue-Id: 4hRqHj6CKszKmLw
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -169,47 +126,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, Aug 22, 2026 at 8:47=E2=80=AFAM Eric Chung <eric.chung@riscstar.com=
-> wrote:
->
-> On Sat, Aug 22, 2026 at 12:43=E2=80=AFAM Yixun Lan <dlan@kernel.org> wrot=
-e:
-> >
-> > Hi Eric
-> >
-> > On 11:54 Wed 19 Aug     , Eric Chung wrote:
-> > > This series adds MMC support for the SpacemiT K1: an SDHCI platform
-> > > driver, the SD card device-tree overlay, defconfig options, and SPL
-> > > boot-device selection from the SoC strap/config registers. The SDHCI
-> > > driver is usable in both SPL and U-Boot proper.
-> > >
-> > > A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
-> > > write images to eMMC.
-> > >
-> > > ---
-> > > Changes in v9:
-> > > - spl: Enhance detection on booting from SD.
-> > > - dts: Synched upstream DTS files for K1.
-> > > - doc: Create SD card image from scratch.
-> > > - mmc: Avoid to use CMD18 on SD card in SPL.
-> > ..
-> > > - pinctrl: Drop "fix drive strength configuration".
-> > Could you please explain why this patch is dropped?
-> >
-> > It looks valid to me, also it fix a problem that setting drive strength
-> > actually clear out other pin conf bits which lead to serious bug
->
-> Ah. I should drop "fix pull-up/pull-down configuration" instead. I
-> picked the wrong patch.
->
-
-And too many people are on the CC list automatically. I'll split out
-all pinctrl patches.
-
-> >
-> > -               clrsetbits_le32(addr, PAD_DRIVE, ds);
-> > +               clrsetbits_le32(addr, PAD_DRIVE, FIELD_PREP(PAD_DRIVE, =
-ds));
-> >
-> > --
-> > Yixun Lan (dlan)
+On 8/21/26 9:44 PM, Tom Rini wrote:
+> On Fri, Aug 21, 2026 at 10:46:37AM +0200, Anders Roxell wrote:
+> 
+>> From: Jerome Forissier <jerome.forissier@linaro.org>
+>>
+>> Import drivers/usb/host/xhci-ext-caps.h from Linux v6.16. The file
+>> is needed by the updated DWC3 code.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+>> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> 
+> For the current series, the cover letter is missing in lore, and the
+> last 3 patches are missing everywhere. I think at this point we should
+> split this up as:
+> 1. A series that resets the driver, and brings it to v6.16. These
+> haven't changed in a few iterations of the current series, aside from
+> collecting tags, yes?
+> 2. A series that makes it all work again.
+> 
+> When being merged, both will be required, but this split will I think
+> make review and iterations easier for everyone. Also, for the next
+> go-round, please drop some of the old email addresses. Thanks.
+One more thing -- is there a git tree with the current state of the series ?
