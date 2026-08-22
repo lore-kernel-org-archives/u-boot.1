@@ -1,94 +1,160 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A46C5DF97
-	for <u-boot@archiver.kernel.org>; Fri, 21 Aug 2026 22:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9C2C5DF8C
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 00:51:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AC26281304;
-	Fri, 21 Aug 2026 22:48:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2F2FE60B0A;
+	Sat, 22 Aug 2026 00:51:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DeS3lk0CiQv3; Fri, 21 Aug 2026 22:48:57 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id r9yryNF7kqVB; Sat, 22 Aug 2026 00:51:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787352536;
-	bh=dHOoLek2jlE8CIjvFLAxJR1xaFgqb4sqf6AGJoVq+hI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787359896;
+	bh=chYeRd7KQSXEtFeM+q51+wiYkgqHCcbfPScbRSjVGXg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HKNkJOKkCDQ9+Mq5IYoFKh0UoSngyQ69FQ/o9/gNkuOMXBnMhSt8xeY/4lFWFlH8B
-	 qFs4ABikHUfWhF+3UuVUAkZkia5p0q5ZitTLx+RkapgCZtTao/MvyX/mwaWOXfshRe
-	 3LjfHsPeG6qHyu3mCUP2HMCy9CwMQjbsD6I+kF40e1ojiGAw+6aRY4jbxlv3JU6j8t
-	 OIixr41WitSBayWexf+QKgY0yDNNq+3LQ13+sOyKEg2IFSA43Rleb8x92Uvn1AKGLt
-	 whSxfhhN1RVA/r4KBSeZsEBtafZM8spO4Kidzn5UajRJZtEoNBjJDMIPYuGjTf77gu
-	 YOSNhS5U78e2Q==
+	b=DVm0rCdyVWIqH5jOhweNx3cAoMWiGoEN9CMiNDp1Zj1lt6SfbtDKsCFbETdrg1fA5
+	 tNMjIjMJSkWZj2ydkZgC1SJEh9vPeurMvb86tQH1uDH/gdenBlManUJJGF3q3plZgv
+	 SmmyxSB5SSknoNHrCLOOXv0Fu4wIEo6+7RnXNNYWtrbe3K5xE0SP1ckXJA7nv8IyHb
+	 6nnHu1M8TNLDHxqgnlbicJxp7yuVvfIYVVcrnoE6gmX3py0IfxYCxMPxr24DLRksfA
+	 P4DF1MBynvPCWdMW5mWneDVtg8TmFLf5aavdAj2mv5Bb6qteBzLzVQ62rK2W0VWQ4x
+	 kQupDrADfJwEQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C426781305;
-	Fri, 21 Aug 2026 22:48:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 22A3B60AB2;
+	Sat, 22 Aug 2026 00:51:36 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id EE2DE93F
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 22:48:54 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 71981336
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 00:48:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CB0BA40A17
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 22:48:54 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5E668409DB
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 00:48:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IdCeSAkIyWin for <u-boot@lists.u-boot-project.org>;
- Fri, 21 Aug 2026 22:48:53 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=662c=gp=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
+ id y8JZlQUUORLr for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 00:48:00 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::136; helo=mail-lf1-x136.google.com;
+ envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=riscstar.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=jWQq5Fxa
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp4.osuosl.org (Postfix) with ESMTPS id ADFFD409F6
- for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 22:48:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1787352531;
- bh=dHOoLek2jlE8CIjvFLAxJR1xaFgqb4sqf6AGJoVq+hI=;
- b=jWQq5FxaQsO2PpmMauUkTcXWxo+UtNPfchSzY85hBneSu7FXAxOcLe63BJumJeEQQzzq/XIox
- u8npj9BZXgLCDMz1nf7cFSvxH7bQIImLpP4yeAgBAjTiUiObhlfQs3maZNpi+m3+dUiTONRNjyc
- +kiIkKjOVinfv/tZR21sAtsYH0cUYLmy5tg9x5fpKIHuyw4aUh0dCR/cMcHCYoRzqT7Ibxnp3Db
- WXvek5t6seuwy/xfkIc1yrFLtg6gnvFzVhKlGzUH7TdOCXtrfahjPzwM9Bcahoxyz2aOv7tk+5p
- lKHsseJWs8G0hkZtlyYybJQcKjy2Jl73vlOU2Gvc+62Q==
-X-Forward-Email-ID: 6a88d5d040966528a4e704b4
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.13.16
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <66a3267d-1980-4b86-be3a-791707373554@kwiboo.se>
-Date: Sat, 22 Aug 2026 00:48:42 +0200
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=UPoDHDaf
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 65BAB409D9
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 00:47:57 +0000 (UTC)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5b0231a3e86so1538156e87.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 21 Aug 2026 17:47:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787359675; cv=none;
+ d=google.com; s=arc-20260327;
+ b=c1ADS241GdG1jhQVt5F/dPCsEeQjhki4FpOROgYiRFaaB9FyptwV2SVm8t99mSlamU
+ b4q8slOggJlznWSBJqJw5qNrkEO9lMyPW4fMYdbgk7vWBq+3YVdb7NL1TYvxqnlEA+3C
+ 8EdhEmHaHvMHhtEzqA9B5rtf188tIR7eOP/TOkGdRT5bf004VuPSnBhgkfwNRJ0H5nDM
+ X9R+mp3VXbdpP6R1JBELeDcIlg+gW76FKaEaXK+iMzm+L0scEGOPYeiSHE7VpBBb5Hsb
+ PnWGLKeq23jA0CgizcnsNFYCpdrBG5Kx4ubWmFSGj4kIyqABLLRs6pGbzM6ww77F1rup
+ n9Pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=chYeRd7KQSXEtFeM+q51+wiYkgqHCcbfPScbRSjVGXg=;
+ fh=rcG6JyeqvbmCj47IOpsi8nXcrfuk1VV+lLPiz5L+/bo=;
+ b=OemZINITQp4sPvoNBU0QjUAa3oUKk2c3y5IIJPaP4XMXhVfvltLi7Oj4o01i06b7GF
+ izBfPK0Iauf7cjNHI9hXMRI4xr73WYv+Eb8Nw2k+aQniAGSZ95VH5TkEF2DGi3NDZ/m7
+ nxt3eGP7ZCNWT2P2fI5O/vyMdQQjZbq2dcUPl2LQZgSx54uu3abTPLoDubR7r4R6QX15
+ vbRrHJrnPOvT61n4kYGEpog0m/Xp4jHSkURYaInkwXyd6To7PN7VWEbfGV1UWxQqVNET
+ wU+dsDTM8CkiTekNZdziNp57TQ3rw6A2JMq1tAzkeSAJdJ1JnHzt0GXk5rRIyztBN62i
+ /jkg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787359675; x=1787964475;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=chYeRd7KQSXEtFeM+q51+wiYkgqHCcbfPScbRSjVGXg=;
+ b=UPoDHDafZdP/8yhlj1VV22J/KiOeJa7SSQJBbBAm6q1bQfDBkeZlNqEk3/+F4B1lfW
+ 8e+xy+dNk7xZN44UtZIC8mBCkHcF/CzFY1y7WLea5AbBsKWYBjwCQk9ocoknmwtIbIfN
+ R+M6U0YZIrmEeALm8xuaxq7HRb9JtRtJvh8Lk5J9L1xc3QREoWPFYLR3D67+rkJfSB5p
+ jubMHvFpujsFLR62u5cJoG+bo7lgs3L1SNX1DM96UjcLRBs1zqSq8u890XzM30yvzZzu
+ C4PnxAaDG64z4SetRnTgyit9OEoznhzOKdMgHGrVZ60EBS/dm8fVBSU7qUkX6jdVI8x1
+ CJjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787359675; x=1787964475;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=chYeRd7KQSXEtFeM+q51+wiYkgqHCcbfPScbRSjVGXg=;
+ b=os4HwTEB8FfIYyz+4YZ48amevi/mJH9RRoMU7gExTK0nIC719x96lDshZtKoGREyLH
+ Zr+GZ5z11eTJlWvnLd1YYqG2rPhLsUsP+DJhktf59+Pk+mASm4NnyaBW41KA9Bl+dQuR
+ X507k1AN0ObFg9ntIRQdNeYObcntew27x+mwVzMcfCpQ/GSDtxBGlLi03Pto3HLYas7F
+ Qdxxsgg0fXdIYbB2YSBdaV9zW7XdlfknRb4BhnI40qUhbsFvRs5sET6hewwJSHH/54KD
+ Amhg++CRAldJIrq8jfaoyJ8VizKIohS833jw5PDPGp1I44fQsuRdlOD/KN9S2Kw5L98f
+ jL6w==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpeQuTcK2fAA5usS/s4wbZD8F4SOxUbGOFPrzrnK3FNFtKoNSlRZb5ruR1vz+yki5U52fU95YY=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++lxsPZ1dbaQc0oyxm9539M4VGJIEP5KBw2ARQutOYJZdtfsBB0V
+ lT2XNWttBSSPe6zP7Xm4i0VZcWhRiXEXSb69QPJ188cc2fKTb0xUsNZgls9Z5xY29fk34/Rk3OP
+ 5OFOF+ih/j2tVDWVt319cd9tOwiek4iZVEHwJM3Qbgg==
+X-Gm-Gg: AR+sD11rnaxyBRTXDcH8ri/cfeDPt1thei7ZeNiDKi6Xlbmx7S9ZMGvYPnVGf1y5bH2
+ vmdz+QDr4OxDHhEjVSrUvZY0liG16YeTx7RXbNuJy4R1lmIdXtBLGjFXYc4vUz0vP0RgcGXHi4x
+ Cf8b1BI2eHguA2NhBP2fCZeCPvLYxW1Vce4cgoAklsP4TKgTOoxVRNteg+lrqchpny1AWqyM1pn
+ 8K2qh54lJBa2wwaX4W1U5xf2WXN34j76kwpSSMPpeJrUEmQYBMK63tgJ/EftmUD0/+lYK9JUcYT
+ p5nPhbUAtRDnpkYSuripSRFjfpfjdKhCvVXxB2Rk6zPuigkCmRGtGtm3lIaEz0jg9/y8hALzpp2
+ tmxjzYzpHfzrkGkTX1DmSQn7dFm4hpPX95pjfEoK4dwnziKI5ztR+eq6UWAR/z7JR0ppNOXTMZU
+ RXxyxBD/gKH5Tf
+X-Received: by 2002:a05:6512:31cc:b0:5b0:1516:8799 with SMTP id
+ 2adb3069b0e04-5b48b89e472mr660072e87.17.1787359675468; Fri, 21 Aug 2026
+ 17:47:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 4/8] image-fit-sig: Optionally require signatures
-To: Ludwig Nussel <ludwig.nussel@siemens.com>
-Cc: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-References: <20260813061009.26344-1-ludwig.nussel@siemens.com>
- <20260813080943.v8.4.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260813080943.v8.4.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260819-m4-v9-0-6e66016392b9@riscstar.com>
+ <20260821164257-GKA579897@kernel.org>
+In-Reply-To: <20260821164257-GKA579897@kernel.org>
+From: Eric Chung <eric.chung@riscstar.com>
+Date: Sat, 22 Aug 2026 08:47:44 +0800
+X-Gm-Features: AcwNN1WIjYVP7OVPOotYCEygKlFYRw_KL3uDWxnFKW7LM-R8CoKD4n-DFiNuYBQ
+Message-ID: <CAH22mJzoRX6n=YgSRMukLOF6-ybPgHS2jmraoQLjB1LvG7jQVQ@mail.gmail.com>
+Subject: Re: [PATCH v9 00/19] spacemit mmc driver
+To: Yixun Lan <dlan@kernel.org>
+Cc: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
+ Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guodong Xu <guodong@riscstar.com>, Yao Zi <me@ziyao.cc>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Yixun Lan <dlan@kenrel.org>,
+ Alex Elder <elder@riscstar.com>, 
+ Yixun Lan <dlan@gentoo.org>, Iker Pedrosa <ikerpedrosam@gmail.com>, 
+ Anand Moon <linux.amoon@gmail.com>, Trevor Gamblin <tgamblin@baylibre.com>, 
+ Vincent Legoll <legoll@online.fr>, Troy Mitchell <troy.mitchell@linux.dev>, 
+ Margherita Milani <margherita.milani@amarulasolutions.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Andre Heider <a.heider@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 22 Aug 2026 00:51:34 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -102,201 +168,39 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Ludwig,
+On Sat, Aug 22, 2026 at 12:43=E2=80=AFAM Yixun Lan <dlan@kernel.org> wrote:
+>
+> Hi Eric
+>
+> On 11:54 Wed 19 Aug     , Eric Chung wrote:
+> > This series adds MMC support for the SpacemiT K1: an SDHCI platform
+> > driver, the SD card device-tree overlay, defconfig options, and SPL
+> > boot-device selection from the SoC strap/config registers. The SDHCI
+> > driver is usable in both SPL and U-Boot proper.
+> >
+> > A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
+> > write images to eMMC.
+> >
+> > ---
+> > Changes in v9:
+> > - spl: Enhance detection on booting from SD.
+> > - dts: Synched upstream DTS files for K1.
+> > - doc: Create SD card image from scratch.
+> > - mmc: Avoid to use CMD18 on SD card in SPL.
+> ..
+> > - pinctrl: Drop "fix drive strength configuration".
+> Could you please explain why this patch is dropped?
+>
+> It looks valid to me, also it fix a problem that setting drive strength
+> actually clear out other pin conf bits which lead to serious bug
 
-On 8/13/2026 8:09 AM, Ludwig Nussel via U-Boot wrote:
-> If U-Boot is built with signature verification but no keys are
-> included in the device tree, the boot would still continue.
-> Introduce FIT_SIGNATURE_REQUIRED to avoid a fail-open setup.
-> Defaults to off so existing setups are not affected; boards wanting
-> fail-closed behaviour must enable it explicitly.
-> 
-> Consistently use log_err for errors in fit_config_verify_required_keys()
-> while at it
-> 
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Series-Changes: 7
-> - mention CONFIG_FIT_REQUIRE_CONFIG_SIGS in documentation
-> 
-> ---
-> 
-> (no changes since v4)
-> 
-> Changes in v4:
-> - reword Kconfig help text
-> - rename option to FIT_REQUIRE_CONFIG_SIGS
-> - introduce SPL_FIT_REQUIRE_CONFIG_SIGS
-> 
-> Changes in v3:
-> - clarify error message when no keys were found
-> - change printfs to log_err
-> - reword Kconfig
-> - keep FIT_SIGNATURE_REQUIRED off by default
-> 
-> Changes in v2:
-> - introduce FIT_SIGNATURE_REQUIRED
-> 
->  boot/Kconfig                | 22 ++++++++++++++++++++++
->  boot/image-fit-sig.c        | 22 ++++++++++++++--------
->  doc/usage/fit/signature.rst | 13 ++++++++++---
->  3 files changed, 46 insertions(+), 11 deletions(-)
-> 
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index ae6f09a6ede..c36a403063e 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -124,6 +124,23 @@ config FIT_SIGNATURE
->  	  format support in this case, enable it using
->  	  CONFIG_LEGACY_IMAGE_FORMAT.
->  
-> +config FIT_REQUIRE_CONFIG_SIGS
-> +	bool "Require configuration signature verification of FIT uImages"
-> +	depends on FIT_SIGNATURE
-> +	help
-> +	  This option requires that FIT uImages have configuration
-> +	  nodes that are signed or boot will fail.
-> +	  That means the U-Boot device tree must contain a
-> +	  "/signature" node and at least one public key with
-> +	  required="conf".
-> +	  All configuration sections of a FIT file must be signed
-> +	  using those keys based on "required-mode" policy.
-> +	  The option is useful to avoid fail-open situations so it
-> +	  is recommended to enable. The option currently defaults to
-> +	  off to avoid breaking existing setups. Keep it off if you
-> +	  need to reuse the same u-boot binary in setups without
-> +	  keys or rely on image node only signatures.
-> +
->  config FIT_SIGNATURE_MAX_SIZE
->  	hex "Max size of signed FIT structures"
->  	depends on FIT_SIGNATURE
-> @@ -224,6 +241,11 @@ config SPL_FIT_SIGNATURE_MAX_SIZE
->  	  device memory. Assure this size does not extend past expected storage
->  	  space.
->  
-> +config SPL_FIT_REQUIRE_CONFIG_SIGS
-> +	bool "Require signature verification of FIT firmware within SPL"
-> +	depends on SPL_FIT_SIGNATURE
-> +	select FIT_REQUIRE_CONFIG_SIGS
-> +
->  config SPL_LOAD_FIT
->  	bool "Enable SPL loading U-Boot as a FIT (basic fitImage features)"
->  	depends on SPL
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> index 433df20281f..dc38a2413b0 100644
-> --- a/boot/image-fit-sig.c
-> +++ b/boot/image-fit-sig.c
-> @@ -632,15 +632,16 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
->  	 * name root but different @ suffix to be equal
->  	 */
->  	if (strchr(name, '@')) {
-> -		printf("Configuration node '%s' contains '@'\n", name);
-> +		log_err("Configuration node '%s' contains '@'\n", name);
->  		return -EPERM;
->  	}
->  
->  	/* Work out what we need to verify */
->  	key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
->  	if (key_node < 0) {
-> -		debug("%s: No signature node found: %s\n", __func__,
-> -		      fdt_strerror(key_node));
-> +		log_err("No signature node found: %s\n", fdt_strerror(key_node));
+Ah. I should drop "fix pull-up/pull-down configuration" instead. I
+picked the wrong patch.
 
-This change is causing a verbose error messages on Rockchip where the
-FIT_SIGNATURE feature it used to check image integrity during boot. The
-config nodes is not expected to contain any signature, only hash(es) of
-images.
-
-With this series I now get following output, with a verbose error
-message related to FDT_ERR_NOTFOUND:
-
-  U-Boot SPL 2026.10-rc2-00527-g4110a512ca17 (Aug 21 2026 - 22:33:02 +0000)
-  Trying to boot from RAM
-  ## Checking hash(es) for config config-1 ... No signature node found: FDT_ERR_NOTFOUND
-  OK
-  ## Checking hash(es) for Image atf-1 ... sha256+ OK
-  ## Checking hash(es) for Image u-boot ... sha256+ OK
-  ## Checking hash(es) for Image fdt-1 ... sha256+ OK
-  ## Checking hash(es) for Image atf-2 ... sha256+ OK
-  ## Checking hash(es) for Image atf-3 ... sha256+ OK
-  ## Checking hash(es) for Image atf-4 ... sha256+ OK
-
-Prior to this series the output never printed any error message:
-
-  Trying to boot from RAM
-  ## Checking hash(es) for config config-1 ... OK
-  ## Checking hash(es) for Image atf-1 ... sha256+ OK
-  [...]
-
-Regards,
-Jonas
-
-> +		if (CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))
-> +			return -EPERM;
->  		return 0;
->  	}
->  
-> @@ -674,8 +675,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
->  					    noffset);
->  		if (ret) {
->  			if (reqd_policy_all) {
-> -				printf("Failed to verify required signature '%s'\n",
-> -				       fit_get_name(key_blob, noffset, NULL));
-> +				log_err("Failed to verify required signature '%s'\n",
-> +					fit_get_name(key_blob, noffset, NULL));
->  				return ret;
->  			}
->  		} else {
-> @@ -685,9 +686,14 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
->  		}
->  	}
->  
-> -	if (reqd_sigs && !verified) {
-> -		printf("Failed to verify 'any' of the required signature(s)\n");
-> -		return -EPERM;
-> +	if (!verified) {
-> +		if (reqd_sigs) {
-> +			log_err("Failed to verify 'any' of the required signature(s)\n");
-> +			return -EPERM;
-> +		} else if (CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS)) {
-> +			log_err("No suitable keys found for configuration verification\n");
-> +			return -EPERM;
-> +		}
->  	}
->  
->  	return 0;
-> diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-> index da08cc75c3a..73153c97367 100644
-> --- a/doc/usage/fit/signature.rst
-> +++ b/doc/usage/fit/signature.rst
-> @@ -420,11 +420,14 @@ below examples::
->  
->  Enabling FIT Verification
->  -------------------------
-> -In addition to the options to enable FIT itself, the following CONFIGs must
-> -be enabled:
-> +In addition to the options to enable FIT itself, the following
-> +settings configure signature verification support:
->  
->  CONFIG_FIT_SIGNATURE
-> -    enable signing and verification in FITs
-> +    required to enable signing and verification in FITs
-> +
-> +CONFIG_FIT_REQUIRE_CONFIG_SIGS
-> +    make signature verification mandatory
->  
->  CONFIG_RSA
->      enable RSA algorithm for signing
-> @@ -436,6 +439,10 @@ WARNING: When relying on signed FIT images with required signature check
->  the legacy image format is default disabled by not defining
->  CONFIG_LEGACY_IMAGE_FORMAT
->  
-> +WARNING: CONFIG_FIT_REQUIRE_CONFIG_SIGS is not set by default for
-> +backwards compatibility. It is recommended to be turned on whenever
-> +configuration signatures are used to avoid fail-open behavior
-> +
->  
->  Testing
->  -------
-
+>
+> -               clrsetbits_le32(addr, PAD_DRIVE, ds);
+> +               clrsetbits_le32(addr, PAD_DRIVE, FIELD_PREP(PAD_DRIVE, ds=
+));
+>
+> --
+> Yixun Lan (dlan)
