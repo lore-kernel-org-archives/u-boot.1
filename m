@@ -1,88 +1,87 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E33C5B572
-	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 08:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACD6C5DF97
+	for <u-boot@archiver.kernel.org>; Sat, 22 Aug 2026 08:58:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 28CF780EEB;
-	Sat, 22 Aug 2026 08:58:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4FB0A4099D;
+	Sat, 22 Aug 2026 08:58:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZVXFEC06OPIU; Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AQYZ1NchC8sR; Sat, 22 Aug 2026 08:58:48 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787389126;
-	bh=EpVsutJ7yw0MJ2DK7FKUnEADtl4Oz0oQwe86Yo8xAhg=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=S8lW8B+PikSJ6VmnKRRphanY+hHuc7FiQmd8J4EMAXx9K9jwD7lS18vjHbySHMykU
-	 Jt3Cw7Sf0cS2IdtsM833YSk/7nD8WWYfTKUFhrODJE96qbkSHm0mYInrnWpPT/nTZW
-	 ojlwrMUb9LolQYf3ZN9aqlWaYGAhf5hRmR2VMl1fNfhmZhRkeGsqM5YlKgkG+63cGi
-	 kA8LIhQtnTfXOlSGO7WzcUImHkhz3m7HZI3rGZ0U+HfWjib4bTD7AJgJfGEtopSZCv
-	 PWAV2YKp1UdqOA5G1vD7401wF5ERGkPYKba2vKc4v/myy6UJLkatZMqwdmJiBAmIXM
-	 qlblcGPHqIAMw==
+	d=lists.u-boot-project.org; s=default; t=1787389128;
+	bh=iGm5cbthMDAruPSQfe9X1qbKRCgrGUM7Xwf1XWX2lhI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qYETOMePcNqRRFO1fYBbRTFy7bpEM0aBEwSE6J3ArREeTVcVSts6IquHNI5KcKlm4
+	 quvctRgR4PUq63YgLfWlvpq8q2wwq7nHzGLm1qERgZvHHpyApFryymvlgXn57Vd/JL
+	 wD5YNv+K/gDFgfCeC1ed0PRyTl0uqRukfBbSIc2qSE8Nr05CZSLq9CCE2D90389RR0
+	 IeDR4GG3kxGQf0WRpnqEzVBO+I2hVZKp9237hVoLCwjRt4zsLVbtii/Sb3lL893yWu
+	 dGGxRYXY8wqY7oj5iz2YjELFd7/ZdRmnOyF9n2vLNg0BMGszi3qBn9XXW1B25dDWoM
+	 LqQx+NcZ6wNpw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 496EF80EDE;
-	Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E993D4B8
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 629AF4098E;
+	Sat, 22 Aug 2026 08:58:48 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0554439E
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id CEF7980EDE
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DD7624011D
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0yjZU_dzv9eG for <u-boot@lists.u-boot-project.org>;
- Sat, 22 Aug 2026 08:58:43 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yp5PL0Drgx0W for <u-boot@lists.u-boot-project.org>;
+ Sat, 22 Aug 2026 08:58:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
  helo=sender4-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=i8CX1uaI
+ header.a=rsa-sha256 header.s=zmail header.b=lLF1XasM
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D80FA80EDD
- for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1787389083; cv=none; 
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1D6844005F
+ for <u-boot@lists.u-boot-project.org>; Sat, 22 Aug 2026 08:58:43 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1787389099; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=Mji1j0NZhDXWu+xwYVd3cCzndxc6ooo4ngjINSWdWsY7pl3LYS/Cvw7FHk4j23t6TqN6KJxUY92uK/92kUMbP2Ias9qtl5XK5o30phXu2DRx+KnTDGLeujO3qnQvPEYd8e4RHzHsbXYBUpuG9FC9cWGk71BIpPXoE03zvx+OXCs=
+ b=Da/c68yqYAN3zK+CkS/WQoc0/1d0IDzNVxiB/6rYpj3cAB0NVo/esaTuJ/VUOi/twaK/SJcTQGr8edQ4IAqju9gJ5kSD3dbnoDDruXxLIOnICsnyv95pZaWYkuuTnLZ5HC+eom+TSK1eHFX3XmubRou7go3OauRCfLUlFjK/1b0=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1787389083;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=EpVsutJ7yw0MJ2DK7FKUnEADtl4Oz0oQwe86Yo8xAhg=; 
- b=M0QH/kS8kbdBUa+NPorrEzUdQJpVTkpqcefH7ZdmdnSCYr78+iJZLG8CeKjPbzHBv/xXfK5+89g8RKeaZO+IqXDQuIyOP8yYfPYPbL1TNMJeTXOfEkRW8eIygaTfOeg4wkXy1TZwlevwKGm0hI6Ee3wADmnwnhnliBivkQ+iSuM=
+ s=zohoarc; t=1787389099;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=iGm5cbthMDAruPSQfe9X1qbKRCgrGUM7Xwf1XWX2lhI=; 
+ b=SPpVRDt6z/1SZ15ms56WXM6KZMPNBAeY6vp6b43NYwl+X19pbvePV38beJgbZwb/06TSWxP54NeoaFMF3vL+Ax3n1VSnWEyxTXUW0EaOc9dk3fIjJU34tKcEwFzNY3sMAUayXvQEBgdl2SwvrGORA6ZZcPZsBUfzJ2huYBYmqw8=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=pigmoral.tech;
  spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
  dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787389083; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787389099; 
  s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Reply-To;
- bh=EpVsutJ7yw0MJ2DK7FKUnEADtl4Oz0oQwe86Yo8xAhg=;
- b=i8CX1uaIdednr6D8ptvyZgt93Ru4DrKZPN6R1d+eoASwQ2sEK07O7ZXltgYDIn0Q
- s2I3/dhurpHayop51H0k71dkCbF8fMCF6bGmg4/qtGxKp3NL628dq9HOSGHgKOazgyU
- JlXEk6y5elrocpGqwO+TAOTGl9Shu/xsTBrz98uM=
-Received: by mx.zohomail.com with SMTPS id 1787389081734440.4493253970717;
- Sat, 22 Aug 2026 01:58:01 -0700 (PDT)
+ h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:In-Reply-To:To:To:Cc:Cc:Reply-To;
+ bh=iGm5cbthMDAruPSQfe9X1qbKRCgrGUM7Xwf1XWX2lhI=;
+ b=lLF1XasMSlMgvxQsDV2Ok5wd+RnWqma37pUZhIjlzYf9UMlQgVPUHnWgUXeax75/
+ QBxuYBzn+F0iQ9OAcNJ+o92VFxk5HKexgjnWdw/CUR8vupGeporwnU1R9Et4tLciYeT
+ kSckEVyTmOwo96HqDB+fXBda9QUnIcZqFWl4gxLY=
+Received: by mx.zohomail.com with SMTPS id 1787389097887108.69226741373689;
+ Sat, 22 Aug 2026 01:58:17 -0700 (PDT)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Subject: [PATCH 0/2] tools: mkimage: add SpacemiT K3 AIHD image support
-Date: Sat, 22 Aug 2026 16:56:46 +0800
-Message-Id: <20260822-spacemit-aihd-v1-0-bf4c41993891@pigmoral.tech>
+Date: Sat, 22 Aug 2026 16:56:48 +0800
+Subject: [PATCH 2/2] doc: board: spacemit: document the AIHD image format
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBG4avIrA3EoCH0KuJiGn91BK1kbCmId
- ze2y2/x3kGKJFB6FAclfETltWZUZUFx4nWEkT6bnHXeBmeNbhyxyG5Ypt7YJtaeGSF4UG62hEG
- +v1/b/a3v54y43xM6zwtyW7iCcQAAAA==
-X-Change-ID: 20260820-spacemit-aihd-05c46aae886e
+Message-Id: <20260822-spacemit-aihd-v1-2-bf4c41993891@pigmoral.tech>
+References: <20260822-spacemit-aihd-v1-0-bf4c41993891@pigmoral.tech>
+In-Reply-To: <20260822-spacemit-aihd-v1-0-bf4c41993891@pigmoral.tech>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Junhui Liu <junhui.liu@pigmoral.tech>, 
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
@@ -92,13 +91,13 @@ Cc: Tom Rini <trini@konsulko.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
  Guodong Xu <guodong.xu@oss.qualcomm.com>, Yixun Lan <dlan@kernel.org>, 
  spacemit@lists.linux.dev
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2501;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5349;
  i=junhui.liu@pigmoral.tech; h=from:subject:message-id;
- bh=kvlWf2zySoabQt8RFJImil2B9f9gs0ZgElenWE+H4t4=;
- b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLI6UxpnbSw4cO9+wY4Pman539vmZ7vVBT8U/qpXrDBvq
- 2pYWdSfjlIWBjEuBlkxRRYuf/F/1jo8344ItN6HmcPKBDKEgYtTACZyo42R4c21/cd3MHyZc7/3
- ZlrU5RsbLv1VWe92M9jrxirxGVN+Frxg+MVsmHGg+8THesP7LDHLzunfO7TkTbSU6KyzsjuPn42
- 3KuUFAA==
+ bh=TppxxHs8uaplvhWDG+SqdhZj9ud3kHMI/j3HknXjcH4=;
+ b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLI6U3ofemQ9Y/Te/cxVesX0HAuX33lek9p2es+4obvlU
+ 9gE240zOkpZGMS4GGTFFFm4/MX/WevwfDsi0HofZg4rE8gQBi5OAZjIr7uMDIuL/3jvCVt6xC6E
+ 8ypr4sOD2y4lf9hZofqhaqFPh7NCQzTDX4GrG0Obtxaoiha++BJzM5h94f3Ci0v0LU76dTDm5Xr
+ +YAcA
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=openpgp;
  fpr=15B30CC69C4BF0CC3C08F85A2A90CDC122DF37BF
 X-ZohoMailClient: External
@@ -115,90 +114,180 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The SpacemiT BootROM loads a first-stage bootloader from storage or over
-USB in MaskROM mode. Vendor firmware packages this bootloader as FSBL.bin.
-Its headers use the magic "AIHD".
+AIHD is the first-stage boot image format used by the SpacemiT K1 and K3
+BootROMs. Document its layout and the K3 non-secure CRC32 path currently
+supported by mkimage.
 
-This series documents the AIHD image format and adds the "aihdimage"
-mkimage type for the CRC32-protected K3 variant used in non-secure boot
-mode. It provides the FSBL packaging needed for future K3 SPL support.
-Select K3 with "-n k3" when creating an image.
-
-K1 and K3 secure boot use RSA authentication and are not supported yet.
-
-How to test
------------
-
-Rebuild mkimage, wrap a small UART test payload, and load it through K3
-MaskROM fastboot. The payload is linked at 0xc0801000 because the BootROM
-places the complete image at 0xc0800000 and enters the payload after the
-4 KiB prefix. UART0 should print "Hello SpacemiT K3!" and then loop
-indefinitely.
-
-  $ make tools-only_defconfig
-  $ make tools-only
-
-  $ cat > k3-uart.S << 'EOF'
-  	.equ	UART0_THR, 0xd4017000
-	.equ	UART0_LSR, 0xd4017014
-
-	.section	.text
-	.global	_start
-_start:
-	la	s0, str
-1:
-	lbu	a0, (s0)
-	beqz	a0, exit
-	call	uart_send
-	addi	s0, s0, 1
-	j	1b
-
-exit:
-	j	exit
-
-uart_send:
-	li	t0, UART0_LSR
-	lw	t1, (t0)
-	andi	t1, t1, 0x20
-	beqz	t1, uart_send
-	li	t0, UART0_THR
-	sw	a0, (t0)
-	ret
-
-	.section	.rodata
-str:
-	.asciz	"Hello SpacemiT K3!\n"
-EOF
-
-  $ riscv64-linux-gnu-gcc -nostdlib -fno-builtin -fno-pie -no-pie -static \
-    -march=rv64gc -mabi=lp64 -g -Wall -Wl,--build-id=none \
-    -Ttext=0xc0801000 -o k3-uart.elf k3-uart.S
-  $ riscv64-linux-gnu-objcopy -O binary k3-uart.elf k3-uart.bin
-  $ ./tools/mkimage -T aihdimage -n k3 -d k3-uart.bin k3-uart-aihd.bin
-
-Hold the FDL button, power on the board to enter MaskROM, then run
-fastboot on host:
-
-  $ fastboot stage k3-uart-aihd.bin
-  $ fastboot continue
-
+Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 ---
-Junhui Liu (2):
-      tools: mkimage: add SpacemiT K3 AIHD image support
-      doc: board: spacemit: document the AIHD image format
-
- boot/image.c                 |   1 +
- doc/board/spacemit/aihd.rst  | 145 +++++++++++++++++++++++++++++++
+ doc/board/spacemit/aihd.rst  | 145 +++++++++++++++++++++++++++++++++++++++++++
  doc/board/spacemit/index.rst |   2 +-
- include/image.h              |   1 +
- tools/Makefile               |   3 +-
- tools/aihdimage.c            | 202 +++++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 352 insertions(+), 2 deletions(-)
----
-base-commit: 6073c36b2c8d39afe3ecc789b281667a3ddebc70
-change-id: 20260820-spacemit-aihd-05c46aae886e
+ 2 files changed, 146 insertions(+), 1 deletion(-)
 
-Best regards,
---  
-Junhui Liu <junhui.liu@pigmoral.tech>
+diff --git a/doc/board/spacemit/aihd.rst b/doc/board/spacemit/aihd.rst
+new file mode 100644
+index 000000000000..9a14fefc4d75
+--- /dev/null
++++ b/doc/board/spacemit/aihd.rst
+@@ -0,0 +1,145 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++SpacemiT AIHD image format
++==========================
++
++The SpacemiT K1 and K3 BootROMs load an AIHD image as the first-stage
++bootloader (FSBL), either from persistent storage or over USB in MaskROM mode.
++Vendor firmware calls this image ``FSBL.bin``. The format is named after its
++AIHD header magic.
++
++Image layout
++------------
++
++K1 and K3 share the same layout. A fixed 4 KiB prefix contains two 32-byte
++metadata headers, key slots, and signature slots. The aligned SPL payload and
++a trailing authentication area follow::
++
++    offset                                    size
++    0x000  +-------------------------------+
++           | root RSA-2048 modulus         |  0x100
++    0x100  +-------------------------------+
++           | header0                       |  0x020
++    0x120  +-------------------------------+
++           | key-selection metadata        |  0x1e0
++    0x300  +-------------------------------+
++           | OEM public-key slots          |  0x800
++    0xb00  +-------------------------------+
++           | signature0                    |  0x100
++    0xc00  +-------------------------------+
++           | reserved                      |  0x3e0
++    0xfe0  +-------------------------------+
++           | header1                       |  0x020
++    0x1000 +-------------------------------+
++           | SPL payload (32-byte aligned) |
++           +-------------------------------+
++           | signature1                    |  0x100
++           +-------------------------------+
++
++For payload size ``P`` and ``A = ALIGN(P, 32)``, the image size is
++``0x1000 + A + 0x100``.
++
++Metadata header
++---------------
++
++Both header0 and header1 use the following format:
++
++.. list-table::
++   :header-rows: 1
++
++   * - Offset
++     - Size
++     - Field
++     - Description
++   * - 0x00
++     - 4
++     - ``magic``
++     - ``AIHD``
++   * - 0x04
++     - 1
++     - ``version``
++     - Anti-rollback image version
++   * - 0x05
++     - 1
++     - ``secure``
++     - Zero selects anti-rollback bank 0
++
++       Non-zero selects anti-rollback bank 1
++   * - 0x06
++     - 2
++     - ``reserved``
++     - Reserved
++   * - 0x08
++     - 8
++     - ``image_size``
++     - header0: prefix information
++
++       header1: aligned payload size
++   * - 0x10
++     - 8
++     - ``load_addr``
++     - Unused by the common authentication code
++   * - 0x18
++     - 4
++     - ``header_crc``
++     - K3: CRC32 over header bytes ``[0x00, 0x18)``
++   * - 0x1c
++     - 4
++     - ``image_crc``
++     - K3: CRC32 over the payload in header1 only
++
++``header1.image_size`` records the aligned payload size and therefore
++determines the location of signature1.
++
++Authentication
++--------------
++
++K1 and K3 apply different authentication policies:
++
++.. list-table::
++   :header-rows: 1
++
++   * - Area
++     - K1
++     - K3 non-secure boot mode
++     - K3 secure boot mode
++   * - Root and OEM keys
++     - RSA-2048 moduli with an eFuse root-hash check when secure boot is
++       enabled
++     - Unused
++     - RSA-2048 moduli with an eFuse root-hash check
++   * - Header CRC
++     - Not checked separately
++     - header1 verified
++
++       header0 ignored
++     - Both verified and covered by RSA
++   * - Image CRC
++     - Not checked separately
++     - Payload CRC32 in header1
++     - Covered by RSA but not checked separately
++   * - signature0
++     - Verified with the root key over ``[0x100, 0xb00)``
++     - Unused
++     - Verified with the root key over ``[0x100, 0xb00)``
++   * - signature1
++     - Verified with the SPL key over header1 and the aligned payload
++     - Unused
++     - Verified with the SPL key over header1 and the aligned payload
++
++K1 verifies both signatures even without a programmed root-key hash. In this
++case, the root key comes from the image and is not authenticated by hardware,
++so the image, keys, and signatures can be replaced together.
++
++K3 uses CRC32 in non-secure boot mode and hardware-rooted RSA in secure boot
++mode.
++
++Creating an image
++-----------------
++
++U-Boot currently creates only K3 images for non-secure boot mode. Package an
++SPL payload with::
++
++    $ tools/mkimage -T aihdimage -n k3 -d u-boot-spl.bin FSBL.bin
++
++K1 images and RSA-authenticated K3 images are not yet supported.
+diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
+index a5e35ee12ab6..45ef54f1543b 100644
+--- a/doc/board/spacemit/index.rst
++++ b/doc/board/spacemit/index.rst
+@@ -5,6 +5,6 @@ SpacemiT
+ .. toctree::
+    :maxdepth: 1
+ 
++   aihd
+    bananapi-f3
+    k1-spl
+-
+
+-- 
+2.55.0
 
