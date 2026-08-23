@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF5CC5DF81
-	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 19:14:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11670C5DF81
+	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 19:15:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 85EE16061B;
-	Sun, 23 Aug 2026 19:14:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CE7D660751;
+	Sun, 23 Aug 2026 19:15:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BJ8c-o5U2Jnt; Sun, 23 Aug 2026 19:14:27 +0000 (UTC)
+ id 65LSyn3aq8QM; Sun, 23 Aug 2026 19:15:13 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787512467;
-	bh=mReBRhK9NZhsTWaqpMXshO/SRE2CX47BGUUcSQPIoy0=;
+	d=lists.u-boot-project.org; s=default; t=1787512513;
+	bh=N5fUsaWyhFWpV8sFgvVXZ2vTZRRWqCCL/k6g4+8UObc=;
 	h=Date:From:To:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pcxwIII3yRT2ts8LN6dV5EFRfQq2BbGDPHjNnYd5a967hgBxIDi/siHavRh41fqtJ
-	 BOdJrKwH1+qo4TIhOqppTcEGs3c6577A7npi2YZUhzFq6Bzg1AMlgeKArHpAieKEU5
-	 BHj41XRHx7yx2e0PctVUPdLXHWG6yDtc20eSdHOh/I8KzotLpVtB5pfCmdAjy/A7Tv
-	 S/Sj3HH8hjUtF01ANbz5fOB1T6/O7pAsFZElu9sr2SsgJNonJ8nkvJuc4DzhvEecIA
-	 n0U8FH2uP8iHsHHh+MMRhGyccbhb7HZ3O11ZVjnSUO7QSw8PrHINITl8UxaR3hD9Ct
-	 MVI4JJd4WGOog==
+	b=hg8Y0HDItk6KvmLhYuddeT4NDs94ARvSyCkgcQR0nnNdfWSGc56FBeE97GmHKCx/V
+	 6PBXwGqtuwz9UFjauvKO0cHc3FVTKiCxb8rCSGiY7viXsi9nXmOK3E7wWzdF6ak/2i
+	 isJnRTnPNmSvoagOt7RsPLRm06on7od9jLPL6KjPT4KAscFtKaWoJJhVQSKcZ/4Es2
+	 hAgjlmC6Wn3Bml36Rgn6Vwp3vrw0YkxUFVa8vmf9GwPmzuvJkK1DAtweiytsqNlYsQ
+	 Wr35MwyQxzmJpT7Kwefm9QyGZwZatAd02nhhq6BUg4FxnKsiAWG8q7EYXp9z5K7vcD
+	 X6KcPCI4zdvIw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A7C8F6061D;
-	Sun, 23 Aug 2026 19:14:27 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7C10341A
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 423EC6065E;
+	Sun, 23 Aug 2026 19:15:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A360242B
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:15:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6E84C40059
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:26 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8460F40611
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:15:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VC7gt30mS2RS for <u-boot@lists.u-boot-project.org>;
- Sun, 23 Aug 2026 19:14:25 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4BR8bzx0e6Kp for <u-boot@lists.u-boot-project.org>;
+ Sun, 23 Aug 2026 19:15:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5809040057
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:24 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2322A40575
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:15:10 +0000 (UTC)
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wyDe1-000000001ng-3o9O; Sun, 23 Aug 2026 19:14:14 +0000
-Date: Sun, 23 Aug 2026 20:14:10 +0100
+ id 1wyDei-000000001p7-3Pau; Sun, 23 Aug 2026 19:14:56 +0000
+Date: Sun, 23 Aug 2026 20:14:53 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>,
@@ -74,13 +74,12 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org, openwrt-devel@lists.openwrt.org
-Subject: [PATCH 6/9] boot: fit: support on-demand loading in fit_image_load()
-Message-ID: <325760fe2cb587557db49a21b51b85a04c3dc198.1787272661.git.daniel@makrotopia.org>
+Subject: [PATCH 7/9] configs: sandbox: enable imagemap and its storage backends
+Message-ID: <98c5d0524ec9b1064d218babd5a453548c7c317b.1787272661.git.daniel@makrotopia.org>
 References: <cover.1787272661.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1787272661.git.daniel@makrotopia.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -95,339 +94,88 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Integrate storage-backed image loading transparently into the existing
-FIT flow so that all verification, decompression, and copy-to-load-
-address code runs unchanged for both RAM-backed and storage-backed
-images.
+Enable CONFIG_IMAGEMAP and, so the end-to-end unit tests can exercise
+the real block paths, the storage that feeds them: CONFIG_MTD_BLOCK
+and CONFIG_SPI_FLASH_MTD (a bare non-NAND MTD reached via mtd_blk) and
+CONFIG_CMD_UBI / CONFIG_UBI_BLOCK (a UBI volume reached via ubi_blk).
 
-Hook imagemap into fit_image_get_data(): when gd->imagemap is set and
-the sub-image uses external data, call imagemap_map() to bring the
-payload into RAM instead of returning the unmapped fit + offset
-pointer. Every existing caller, including fit_image_verify() called
-from fit_image_select(), transparently gets valid data without any
-changes to the authentication path.
-
-For uncompressed sub-images with a known load address, pre-populate
-the translation table via imagemap_map_to() before verification runs.
-This loads data directly to the final RAM destination; when
-fit_image_get_data() is later called, the translation table hit
-returns the same pointer, achieving zero-copy. Compressed images or
-those without a load address fall through to the lazy imagemap_map()
-path.
-
-Filesystem sub-images protected by dm-verity are returned early and
-stay on storage, as the kernel verifies them at block level.
+Give the sandbox SPI-NOR two device-tree partitions for the mtd_blk
+test and add a clean sandbox NAND chip (nand@2, no injected errors) so
+UBI can format on it for the ubiblock test.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/bootm.c     |  70 +++++++++++++++++++++++++++---
- boot/image-fit.c | 109 ++++++++++++++++++++++++++++++++++++++++++++++-
- include/bootm.h  |   2 +
- include/image.h  |   2 +
- 4 files changed, 174 insertions(+), 9 deletions(-)
+ arch/sandbox/dts/test.dts | 29 +++++++++++++++++++++++++++++
+ configs/sandbox_defconfig |  6 ++++++
+ 2 files changed, 35 insertions(+)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 3bce8586834..6422bdc16f6 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -14,6 +14,7 @@
- #include <env.h>
- #include <errno.h>
- #include <fdt_support.h>
-+#include <imagemap.h>
- #include <irq_func.h>
- #include <lmb.h>
- #include <log.h>
-@@ -147,7 +148,22 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index bed2a4b65ab..b794a44a4e1 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -1623,6 +1623,22 @@
+ 			compatible = "spansion,m25p16", "jedec,spi-nor";
+ 			spi-max-frequency = <40000000>;
+ 			sandbox,filename = "spi.bin";
++
++			partitions {
++				compatible = "fixed-partitions";
++				#address-cells = <1>;
++				#size-cells = <1>;
++
++				partition@0 {
++					label = "nor-fit";
++					reg = <0x0 0x100000>;
++				};
++
++				partition@100000 {
++					label = "nor-spare";
++					reg = <0x100000 0x100000>;
++				};
++			};
+ 		};
+ 		spi.bin@1 {
+ 			reg = <1>;
+@@ -2232,6 +2248,19 @@
+ 			sandbox,err-count = <3>;
+ 			sandbox,err-step-size = <512>;
+ 		};
++
++		/* Clean chip (no injected errors) for UBI/ubiblock tests */
++		nand@2 {
++			reg = <2>;
++			nand-ecc-mode = "soft";
++			sandbox,id = [00 e3];
++			sandbox,erasesize = <(8 * 1024)>;
++			sandbox,oobsize = <16>;
++			sandbox,pagesize = <512>;
++			sandbox,pages = <0x2000>;
++			sandbox,err-count = <0>;
++			sandbox,err-step-size = <512>;
++		};
+ 	};
  
- 	/* check image type, for FIT images get FIT kernel node */
- 	*os_data = *os_len = 0;
--	buf = map_sysmem(img_addr, 0);
-+	if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
-+		/*
-+		 * Storage path: read enough bytes to detect the image
-+		 * format. genimg_get_kernel_addr_fit() above still
-+		 * parsed any #config / :subimage suffix so the FIT
-+		 * selection variables are populated.
-+		 */
-+		buf = imagemap_map(images->imagemap, 0, 64);
-+		if (IS_ERR(buf)) {
-+			puts("Cannot read image header from storage\n");
-+			return PTR_ERR(buf);
-+		}
-+		img_addr = map_to_sysmem(buf);
-+	} else {
-+		buf = map_sysmem(img_addr, 0);
-+	}
- 	switch (genimg_get_format(buf)) {
- #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
- 	case IMAGE_FORMAT_LEGACY:
-@@ -193,6 +209,20 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- #endif
- #if CONFIG_IS_ENABLED(FIT)
- 	case IMAGE_FORMAT_FIT:
-+		if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
-+			/*
-+			 * Extend the mapping to cover the full FIT
-+			 * FDT structure so all metadata is accessible.
-+			 */
-+			size_t fdt_sz = fdt_totalsize(buf);
-+
-+			buf = imagemap_map(images->imagemap, 0, fdt_sz);
-+			if (IS_ERR(buf)) {
-+				puts("Cannot read FIT header from storage\n");
-+				return PTR_ERR(buf);
-+			}
-+			img_addr = map_to_sysmem(buf);
-+		}
- 		os_noffset = fit_image_load(images, img_addr,
- 				&fit_uname_kernel, &fit_uname_config,
- 				IH_ARCH_DEFAULT, IH_TYPE_KERNEL,
-@@ -1033,11 +1063,21 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	 * Work through the states and see how far we get. We stop on
- 	 * any error.
- 	 */
--	if (states & BOOTM_STATE_START)
-+	if (states & BOOTM_STATE_START) {
- 		ret = bootm_start();
-+		/*
-+		 * bootm_start() zeroes the global images struct. Restore
-+		 * the loader pointer so the storage-backed path works.
-+		 */
-+		if (IS_ENABLED(CONFIG_IMAGEMAP) && bmi->imagemap)
-+			images->imagemap = bmi->imagemap;
-+	}
- 
--	if (!ret && (states & BOOTM_STATE_PRE_LOAD))
--		ret = bootm_pre_load(bmi->addr_img);
-+	if (!ret && (states & BOOTM_STATE_PRE_LOAD)) {
-+		/* Pre-load verification is not applicable to storage boot */
-+		if (!IS_ENABLED(CONFIG_IMAGEMAP) || !images->imagemap)
-+			ret = bootm_pre_load(bmi->addr_img);
-+	}
- 
- 	if (!ret && (states & BOOTM_STATE_FINDOS))
- 		ret = bootm_find_os(bmi->cmd_name, bmi->addr_img);
-@@ -1045,8 +1085,11 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	if (!ret && (states & BOOTM_STATE_FINDOTHER)) {
- 		ulong img_addr;
- 
--		img_addr = bmi->addr_img ? hextoul(bmi->addr_img, NULL)
--			: image_load_addr;
-+		if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap)
-+			img_addr = images->os.start;
-+		else
-+			img_addr = bmi->addr_img ? hextoul(bmi->addr_img, NULL)
-+				: image_load_addr;
- 		ret = bootm_find_other(img_addr, bmi->conf_ramdisk,
- 				       bmi->conf_fdt);
- 	}
-@@ -1145,11 +1188,24 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	}
- 
- 	/* Now run the OS! We hope this doesn't return */
--	if (!ret && (states & BOOTM_STATE_OS_GO))
-+	if (!ret && (states & BOOTM_STATE_OS_GO)) {
-+		/* Release storage backend before jumping — no return expected */
-+		if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
-+			imagemap_cleanup(images->imagemap);
-+			images->imagemap = NULL;
-+		}
-+
- 		ret = boot_selected_os(BOOTM_STATE_OS_GO, bmi, boot_fn);
-+	}
- 
- 	/* Deal with any fallout */
- err:
-+	/* Clean up imagemap on error (not reached on successful boot) */
-+	if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
-+		imagemap_cleanup(images->imagemap);
-+		images->imagemap = NULL;
-+	}
-+
- 	if (iflag)
- 		enable_interrupts();
- 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index ef90c5abd18..9b05273d14a 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -26,6 +26,7 @@ extern void *aligned_alloc(size_t alignment, size_t size);
- #include <env.h>
- #include <errno.h>
- #include <hexdump.h>
-+#include <imagemap.h>
- #include <log.h>
- #include <mapmem.h>
- #include <asm/io.h>
-@@ -1140,6 +1141,16 @@ int fit_image_get_data(const void *fit, int noffset, const void **data,
- 				return -EINVAL;
- 			}
- 			*data = fit + offset;
-+#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(IMAGEMAP)
-+			if (images.imagemap) {
-+				void *mapped;
-+
-+				mapped = imagemap_lookup(images.imagemap,
-+							    offset, len);
-+				if (mapped)
-+					*data = mapped;
-+			}
-+#endif
- 			*size = len;
- 		}
- 	} else {
-@@ -2140,6 +2151,84 @@ static const char *fit_get_image_type_property(int ph_type)
- 	return "unknown";
- }
- 
-+#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(IMAGEMAP)
-+/**
-+ * fit_image_load_storage() - Pre-load a sub-image from on-demand storage
-+ *
-+ * Brings an external-data sub-image into RAM through the imagemap loader before
-+ * fit_image_select() runs verification, so the existing verify/copy path sees a
-+ * valid RAM pointer.  Uncompressed sub-images with a load address are read
-+ * straight to their destination (zero-copy); everything else goes to scratch
-+ * RAM.  Filesystem sub-images protected by dm-verity are left on storage and
-+ * verified by the kernel at block level; @early is set for those so the caller
-+ * returns the node without loading the payload.
-+ *
-+ * @early is set to true when the caller should stop and return @noffset with an
-+ * empty payload.
-+ *
-+ * Return: 0 to continue, negative errno on failure
-+ */
-+static int fit_image_load_storage(struct bootm_headers *images, const void *fit,
-+				  int noffset, enum fit_load_op load_op,
-+				  ulong *datap, ulong *lenp, bool *early)
-+{
-+	int data_off = 0, data_sz = 0;
-+	bool external = false;
-+	ulong img_load;
-+	u8 img_comp = IH_COMP_NONE;
-+	void *mapped;
-+
-+	if (CONFIG_IS_ENABLED(FIT_VERITY)) {
-+		u8 img_type;
-+
-+		if (!fit_image_get_type(fit, noffset, &img_type) &&
-+		    img_type == IH_TYPE_FILESYSTEM &&
-+		    fdt_subnode_offset(fit, noffset, "dm-verity") >= 0) {
-+			fit_image_print(fit, noffset, "   ");
-+			*datap = 0;
-+			*lenp = 0;
-+			*early = true;
-+			return 0;
-+		}
-+	}
-+
-+	if (!fit_image_get_data_position(fit, noffset, &data_off)) {
-+		external = true;
-+	} else if (!fit_image_get_data_offset(fit, noffset, &data_off)) {
-+		external = true;
-+		data_off += ALIGN(fdt_totalsize(fit), 4);
-+	}
-+
-+	if (!external || fit_image_get_data_size(fit, noffset, &data_sz))
-+		return 0;
-+
-+	if (data_off < 0 || data_sz < 0)
-+		return -EINVAL;
-+
-+	fit_image_get_comp(fit, noffset, &img_comp);
-+
-+	if (img_comp == IH_COMP_NONE && load_op != FIT_LOAD_IGNORED &&
-+	    !fit_image_get_load(fit, noffset, &img_load)) {
-+		void *dst = map_sysmem(img_load, data_sz);
-+
-+		mapped = imagemap_map_to(images->imagemap, data_off, data_sz,
-+					 dst);
-+	} else {
-+		mapped = imagemap_map(images->imagemap, data_off, data_sz);
-+	}
-+
-+	return IS_ERR(mapped) ? PTR_ERR(mapped) : 0;
-+}
-+#else
-+static inline int fit_image_load_storage(struct bootm_headers *images,
-+					 const void *fit, int noffset,
-+					 enum fit_load_op load_op, ulong *datap,
-+					 ulong *lenp, bool *early)
-+{
-+	return 0;
-+}
-+#endif
-+
- int fit_image_load(struct bootm_headers *images, ulong addr,
- 		   const char **fit_unamep, const char **fit_uname_configp,
- 		   int arch, int ph_type, int bootstage_id,
-@@ -2236,6 +2325,21 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 
- 	printf("   Trying '%s' %s subimage\n", fit_uname, prop_name);
- 
-+	/*
-+	 * On-demand storage: pre-load external-data payloads into RAM (or leave
-+	 * dm-verity filesystems on storage) before fit_image_select() verifies.
-+	 */
-+	if (CONFIG_IS_ENABLED(IMAGEMAP) && !tools_build() && images->imagemap) {
-+		bool early = false;
-+
-+		ret = fit_image_load_storage(images, fit, noffset, load_op,
-+					     datap, lenp, &early);
-+		if (ret)
-+			return ret;
-+		if (early)
-+			return noffset;
-+	}
-+
- 	ret = fit_image_select(fit, noffset, images->verify);
- 	if (ret) {
- 		bootstage_error(bootstage_id + BOOTSTAGE_SUB_HASH);
-@@ -2349,8 +2453,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 			return -EXDEV;
- 		}
- 
--		printf("   Loading %s from 0x%08lx to 0x%08lx\n",
--		       prop_name, data, load);
-+		if (!CONFIG_IS_ENABLED(IMAGEMAP) || data != load)
-+			printf("   Loading %s from 0x%08lx to 0x%08lx\n",
-+			       prop_name, data, load);
- 	} else {
- 		load = data;	/* load address specified but set to 0 */
- 	}
-diff --git a/include/bootm.h b/include/bootm.h
-index f6958be751a..d1aac3d44df 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -40,6 +40,7 @@ struct cmd_tbl;
-  *	boot_get_fdt() for processing, or NULL for none
-  * @boot_progress: true to show boot progress
-  * @images: images information
-+ * @imagemap: imagemap device for storage-backed boot (NULL for in-memory)
-  * @cmd_name: command which invoked this operation, e.g. "bootm"
-  * @argc: Number of arguments to the command (excluding the actual command).
-  *	This is 0 if there are no arguments
-@@ -51,6 +52,7 @@ struct bootm_info {
- 	const char *conf_fdt;
- 	bool boot_progress;
- 	struct bootm_headers *images;
-+	struct udevice *imagemap;
- 	const char *cmd_name;
- 	int argc;
- 	char *const *argv;
-diff --git a/include/image.h b/include/image.h
-index 6edcb1995bf..f5baec9a516 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -412,6 +412,8 @@ struct bootm_headers {
- 
- 	int		verify;		/* env_get("verify")[0] != 'n' */
- 
-+	struct udevice *imagemap;	/* on-demand storage loader, or NULL */
-+
- #define BOOTM_STATE_START	0x00000001
- #define BOOTM_STATE_FINDOS	0x00000002
- #define BOOTM_STATE_FINDOTHER	0x00000004
+ 	graph1 {
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index f65e50590a3..05876cb36ba 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -30,6 +30,7 @@ CONFIG_BOOTMETH_RAUC=y
+ CONFIG_UPL=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_MEASURED_BOOT=y
++CONFIG_IMAGEMAP=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+@@ -399,3 +400,8 @@ CONFIG_UTHREAD=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
++CONFIG_MTD_BLOCK=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_CMD_UBI=y
++CONFIG_MTD_UBI=y
++CONFIG_UBI_BLOCK=y
 -- 
 2.55.0
