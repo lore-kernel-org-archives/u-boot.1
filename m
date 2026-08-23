@@ -1,122 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48247C5DF9A
-	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 14:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B7EC5DF81
+	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 15:00:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 42B4F606BD;
-	Sun, 23 Aug 2026 14:58:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 49A0E406A5;
+	Sun, 23 Aug 2026 15:00:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jW6NedM-RCVv; Sun, 23 Aug 2026 14:57:59 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0MLFGvakqGhc; Sun, 23 Aug 2026 15:00:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787497079;
-	bh=nz6ylwwtevrKYRXXJ81y4D7FpnztqCpcOR2mDMQLPuM=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787497247;
+	bh=VOkXyrlEQziZZcx1wHFhF44FmJ/w1Ece3FTY2wRjFEg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bcZTtrs6JNMrIAbV7vbqzOtYfH2WGcBOES+NKqu2z4KDO5M429RF1zOsJniZbcyvS
-	 tsB97rbW8vrWe0E22hL0uAUvKZTaPU3eqkLc+QKmqq6aqBRnDxvMskVgaQRePw75dP
-	 rtjsMnfVt0Lj0Bf94uKxhZTRz2WnYatNWGut3cdbimIWlRbhnJsaPQ581xCrsFmjCq
-	 ecnjHPYDnZnOznCIvDA3Eyzw56lIB+7pyRwjp4XV8yKNLe0FA8n7JA6tpsRLre+WDH
-	 xRPpsykE0QqSiX42XYSPHsw8f3IdrYh7a07yxRkqfAeZYEYjTSEz8R5LY+IGBg21UG
-	 wQvDdhvGcHI1A==
+	b=wgIT9hiVPKblRo1KMyxGkPHMQ5pwWEioohpeXd0JvSA4+Hlur0jt+V+z/EXg4Ayts
+	 v1jira4uVN0z/+0ovS81G9Dy732js+DpUjBz/Fa5RB8SiQPTKp8PZou4vFPGOZKakt
+	 96fbnEORDDdb8Sodt1HznYHoxJWrDJ+ttTKZ6rQ5WiYXqaNPEy5lOIieY9M73YrAbf
+	 Q0NEqlU5atVXMUS2M8lEO0BB/7uvBn+npgy8fjFsChptJ8SMfpS8+TOYyNmy/zAqNN
+	 Pm9Hp4oiQFpZQ5sWBWZV2CHFuoLRT2aOMOJxDrdQ3H/cefG6ZfuRGjIJp3Pg+lIRoM
+	 Ty3+G1C1wLKvQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 06978606E3;
-	Sun, 23 Aug 2026 14:57:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ADE5340532;
+	Sun, 23 Aug 2026 15:00:47 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 40957336
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 14:57:51 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 464BB336
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 15:00:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 32EDA606C9
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 14:57:51 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 382CB6064C
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 15:00:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4i9QphZLSZL2 for <u-boot@lists.u-boot-project.org>;
- Sun, 23 Aug 2026 14:57:50 +0000 (UTC)
+ id bTuCBpN8h_Gc for <u-boot@lists.u-boot-project.org>;
+ Sun, 23 Aug 2026 15:00:45 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+ client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
+ envelope-from=petko.manolov@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=ksvnRUBn
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 73B206066F
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 14:57:50 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7f3ff92cf4aso2740418a34.1
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 07:57:50 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=Z+65ybAR
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 21C866062D
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 15:00:44 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6a1542cdb53so3182999a12.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 08:00:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787497069; x=1788101869;
+ d=konsulko.com; s=google; t=1787497243; x=1788102043;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=nz6ylwwtevrKYRXXJ81y4D7FpnztqCpcOR2mDMQLPuM=;
- b=ksvnRUBnPRGoqS5l/Z2MVeN9tEBYYPIVcvR22t8YP4VOPjX1Bi1RKab42IdkqCRyD8
- Uk+ISyZfDEbviw+0+a1n33SzQP5D56ehxiHVFgDIht78Xk0Npl3C5LzTeKeFZLM8MaFR
- 47f32cuyfY8RnwavEsOLFWDa1+x8qSXq2A0+8=
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=VOkXyrlEQziZZcx1wHFhF44FmJ/w1Ece3FTY2wRjFEg=;
+ b=Z+65ybARDatO05PZrpxi4YNptKaNjbR/K3YERF3Ywc/NaBz950Y86ea17UGTx8WiG1
+ ZnMxokCGjBizceoNLiH3XIbmIGyPBSkigLVP+zgQSC52quzkmmWoo41sH6eatskHXiMO
+ axlKBhMCnJau3QnCZrLB8aAqyYFzFkEcMEuFo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787497069; x=1788101869;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=nz6ylwwtevrKYRXXJ81y4D7FpnztqCpcOR2mDMQLPuM=;
- b=MP5IVz5P35mHAVEt9Hnjqj86pk8iQKTUtYDI0HrdWXNTzbxmYqSSaUNTiVJgTkGhYr
- fpLIlK+Em5zeHVN5OXiCptBmoSYsDm4km1xvRkFzQuTdm+zR18Lawg/znqbwk+wzThi+
- LbYTUv3FL64jpWYiJ4gaKbaQfP8xz1S8G9rm+9CdCAdyL7qUfE1rZjuek3f8bKXjQm34
- 6JurdtUkcFpNphB0w0VHbn3jUs4Dg3cb6jiaSXB+qhebAuP3p7znFMlibj0aBhEtquUX
- OsB4zRmJvkgdpym4jvIpL+4POQLyf2p2mC6f1TAdQj9EPxEwfXsEPGyghEcE2tlEu8tI
- nvAw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpZKNPTPeJEFxzptvhPP9bdDUcDnF42l9JIiaM3Oko6G1xPdeJqqsuca5j19yXhFhXPMGdWeQ0=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lFI4+x/XEKGe6mY4eTdtLJkR1xxp11nrN6v37KZ8LNZnt+sEyD
- YNfURcX0oiPJNO+a5FVJITrx8jk/R8d6Bkxx3MWLgrEtB2VBoEcf44OhageC+lRj4mY=
-X-Gm-Gg: AR+sD13RY18xFaBAt+6p99P2uupFaPEUuGUTdj9mGEJB9eIvxGzXB2VV+uPtdvzZO7s
- 2qR0C9sU/zgXVXXepTxSNuLBUzDjv66m3dT9G2FOaw/7A/cd4RJEey8MFOu6xfrtVoMOisotjHr
- RKH+8pohGJ7idG4GOpjfb88mUjk6H1hz8GtQtTqzyw6pQZkfuxJbwCQ7ZV1fA3pZ4+yIw5i3Hkd
- /4QnFYLanlGWP6jSJCT1OuwKx+WZAf3UUfrJ2Ch6FmqdOjhF0APJK6Y5WwckhEb9WGofdHTpIzt
- k/lXA5p3oFjfE30oSvbCWEboz9L8Lmsf1nncaNfyLOuWqNwIhuYzQrjeoHgnNfiJBuHPfbqRABI
- zcZRmQxyj5G4FtvkYNHoa+ZDVq3LS6sHyUNKA+d9nJlAWk42dTvPJziwueluEBIGjl8qIu9Nue9
- UcqovqhqOf7U782Ta2pIrb/AW2GcnPSgDJGPY7qik9BUY33pf1XDay8UJeCo1HjGHb3kGjEE/6D
- DPXtphhS8dFMAmV1/bd//rxIsqkMOMg07xHu1VMVDERIrsjCj5bqG5up4t1ADO5U5d+kVXlvE4D
- 362gk0zI
-X-Received: by 2002:a05:6830:3c0c:b0:7dc:c4ae:a689 with SMTP id
- 46e09a7af769-7f461348fadmr24954572a34.2.1787497069206; 
- Sun, 23 Aug 2026 07:57:49 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f48fc89283sm2028583a34.24.2026.08.23.07.57.48
+ d=1e100.net; s=20251104; t=1787497243; x=1788102043;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=VOkXyrlEQziZZcx1wHFhF44FmJ/w1Ece3FTY2wRjFEg=;
+ b=W6dkQEaXNqsvNMraFDdKpgeJbYF9Mfv0y3hMotqvm7GbvYreO/RNbL5/w+9tVUrVgw
+ 3yi+ZwqF+A+h1FRhXAw14bRBA78wy7VWCxOl0tt4qGrKdiqS7h1uiBwYitXKY/voshqa
+ JI/BTQQYsw2GnRDAVjPBmAIyBWgCPYHjmW8et8bKzBSQbltR4XrQgRfKohzNDBpPLsIv
+ bgHJwdHqm/KvfofuspLTWHdx8LJ5/i3a2vkEN+KpJkAjzNkLAdBVtlekxe1ByKC4ayuI
+ mEgJBJj/wAqEUp1GQfiF8rynwXuU/Q8YaXgNdgpuwhMf2iW0vficqSHpDWrGDX1A3pE9
+ jXLw==
+X-Gm-Message-State: AFuF++m5p7ojpXvpxCYmlpMml381Do/WigHKK5wGAPzz28CZaOJVzITa
+ Oja78X2poco7hM3FSVAryvN3Im5qM6A2yWnwU2AY9MbA678JJrphAdUlZsnk5ljo67I=
+X-Gm-Gg: AR+sD10tbgvArW2Yiv1VyB8irrUCAbH68xzJYHdE0pg6g+Ck+gElbHaotzLi+FowYa/
+ ZqQhQ/UV79Qvx/VxFcWO/mNYKSA4a2CiLVrUWYfNNNF1f/WOyUp6+uIGkYxkRS/Imb5eheUynPi
+ PeZ9fpyjXaEBYi9PmS+ZlslIwelOGmM8wuaGa3fUh1VtpomVtsj72Io0TC8s5eTr0idq+J1S/E5
+ JBEY3KFVlKvQvmeIFGtiAwOMGD1a4PiFDFYLybdTSvLvxqQPeWZUrOpG6YUuNuQVztHpleJedye
+ mo/OKHI8J67OIvzjQJAK9jIfjWZGi9vya2DB2EmvZ9C9oeQn8KUhNmdphljvEexA9En9q3yORjv
+ t/lTobdw+/cDL+i7emdvGB1XB51ainOxtFqRmsz2BU3NXy7Y50T41fMljZB9lnA/ERyzsLC07gK
+ OjYix/uqM5UmjjEbaalQiPNmNUs9qIxueveLqdyIvnEmHbZinDBj8M6i3EOE1+8id2aYJf
+X-Received: by 2002:a05:6402:1ecc:b0:6a3:74c2:3cf3 with SMTP id
+ 4fb4d7f45d1cf-6a582b0c826mr14318037a12.6.1787497242662; 
+ Sun, 23 Aug 2026 08:00:42 -0700 (PDT)
+Received: from cabron.k.g ([95.111.117.177]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a59e1cdbe9sm3653842a12.24.2026.08.23.08.00.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 07:57:48 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Christian Marangi <ansuelsmth@gmail.com>, 
- David Lechner <dlechner@baylibre.com>, 
- Markus Gothe <markus.gothe@genexis.eu>, 
- Benjamin Larsson <benjamin.larsson@genexis.eu>, 
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Mikhail Kshevetskiy via U-Boot <u-boot@lists.u-boot-project.org>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20260809232726.2436904-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20260809232726.2436904-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH] pinctrl: airoha: sync with linux-7.3 driver
-Message-Id: <178749706837.206448.895471974507405553.b4-ty@konsulko.com>
-Date: Sun, 23 Aug 2026 08:57:48 -0600
+ Sun, 23 Aug 2026 08:00:42 -0700 (PDT)
+Date: Sun, 23 Aug 2026 18:00:41 +0300
+From: Petko Manolov <petko.manolov@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, uboot-imx@nxp.com
+Subject: Re: [PATCH v1 1/1] arm: =?utf-8?Q?draeger?=
+ =?utf-8?B?OiBEcsOkZ2VyIE00OCBv?= =?utf-8?Q?n?= NXP i.MX6(Q) and Intel/Altera
+ SoCFPGA Cyclone V devicetree.
+Message-ID: <20260823150041.GE17052@cabron.k.g>
+References: <20260819153014.834228-1-petko.manolov@konsulko.com>
+ <20260819153014.834228-2-petko.manolov@konsulko.com>
+ <CAOMZO5B-Q6R652_wp=AWXURBSP8Npr_AwJUvaw=CYSL7=bJKKg@mail.gmail.com>
+ <20260820061912.GD24421@carbon.k.g>
+ <CAOMZO5AfFXrpN3RMPuYw4vM=AHOWBj6hnaXdG8W=KhSsWj5big@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOMZO5AfFXrpN3RMPuYw4vM=AHOWBj6hnaXdG8W=KhSsWj5big@mail.gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,17 +125,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Mon, 10 Aug 2026 02:27:26 +0300, Mikhail Kshevetskiy via U-Boot wrote:
-
-> The code was synced with linux-pinctrl/for-next (future linux-7.3) branch.
+On 26-08-21 16:33:20, Fabio Estevam wrote:
+> Hi Petko,
 > 
+> On Thu, Aug 20, 2026 at 3:19 AM Petko Manolov
+> <petko.manolov@konsulko.com> wrote:
 > 
+> > Unfortunately this board runs QNX, not Linux, so upstreaming them doesn't make
+> > sense.
+> 
+> I don't think the OS running on the board changes this requirement.
+> 
+> Devicetree describes the hardware, not Linux, and DTs from the Linux tree are
+> also consumed by other projects, including U-Boot. In U-Boot, we have been
+> moving towards using the upstream Linux devicetree sources rather than
+> maintaining independent copies of board DTs.
 
-Applied to u-boot/next, thanks!
+I have hard time believing the respective Linux maintainters would like to waste
+time and energy upstreaming the DTs of a board that's never meant to run Linux
+in the first place.  Will see... :)
 
-[1/1] pinctrl: airoha: sync with linux-7.3 driver
-      commit: 2d379a529c257606946831a6dac1c37de6a3f8c0
--- 
-Tom
+> There is also an important review aspect here. The Linux devicetree
+> maintainers and the subsystem/SoC maintainers review the hardware description
+> and its bindings, including dt-schema validation. Simply running the
+> validation tools locally is useful, but it is not a replacement for that
+> review.
+> 
+> For the i.MX6 part in particular, this is a well-supported platform upstream,
+> so I don't see a reason why the M48 hardware description could not be
+> submitted to the Linux devicetree tree even if the product itself boots QNX.
+
+OK
+
+> My suggestion is still to split this work and submit the i. MX6 and SoCFPGA
+> DTs to the respective Linux maintainers first.MX6 and SoCFPGA DTs to the
+> respective Linux maintainers first. Once they have been accepted upstream,
+> U-Boot can consume those DTs from the upstream Linux tree and keep only the
+> U-Boot-specific additions in the *-u-boot.dtsi files.
+
+_If_ these patches get accepted.  Have there been such precedents in the past?
+
+> > Can i use some sort of DT validation tool that pass kernel's requirements?
+> 
+> Yes, the kernel provides dt_binding_check and dtbs_check targets for
+> validating DT bindings and DTs against dt-schema. You should run these before
+> submission, but passing them alone does not replace upstream DT review.
+
+Yeah, these should be run against the DTs anyway.
+
+Does it make sense to start submitting the arch part of the i.MX6 patches to
+u-boot while i'm busy with the DTs?
 
 
+thanks,
+Petko
