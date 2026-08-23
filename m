@@ -1,45 +1,45 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8810C5DF8C
-	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 19:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF5CC5DF81
+	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 19:14:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A1B72405AE;
-	Sun, 23 Aug 2026 19:14:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 85EE16061B;
+	Sun, 23 Aug 2026 19:14:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zN9bMUpnehJs; Sun, 23 Aug 2026 19:14:15 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BJ8c-o5U2Jnt; Sun, 23 Aug 2026 19:14:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787512455;
-	bh=rbarOo1BRM/EFDevL7IKLFqnVv037bmZxbIuFdY6gUs=;
+	d=lists.u-boot-project.org; s=default; t=1787512467;
+	bh=mReBRhK9NZhsTWaqpMXshO/SRE2CX47BGUUcSQPIoy0=;
 	h=Date:From:To:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lsgcjR4sFUlVLu2dwk2SBatCpY0W1i3t43c/UHqawzPlxC4pqIAtWIyu7lIDjL/2j
-	 nvUh1oQwVb8X6fE8BrZkD4L82IQWOusUq294nGtQXJMK/seQH7kaNGpXSqoF9+ITXR
-	 RuDGjffYafoj47ALzptl4whk7eDEHEi3m33D8d1uE3yC+3wz8eMr7wDMrZgleMEnMv
-	 PLY4xwjDa6NjCDR50iSFa4kxek2ZX/G2V7LYvmwAnYQRJOQ5qnjixaWk/lemrMoF6F
-	 A7Dwg7rd8eHMiiJoHGe5Hn3cLn1VcMMNHQBUhhT0UZ1GkKd3/DY/WOnP/00txVk1o8
-	 T6nYU3rvTz2Vw==
+	b=pcxwIII3yRT2ts8LN6dV5EFRfQq2BbGDPHjNnYd5a967hgBxIDi/siHavRh41fqtJ
+	 BOdJrKwH1+qo4TIhOqppTcEGs3c6577A7npi2YZUhzFq6Bzg1AMlgeKArHpAieKEU5
+	 BHj41XRHx7yx2e0PctVUPdLXHWG6yDtc20eSdHOh/I8KzotLpVtB5pfCmdAjy/A7Tv
+	 S/Sj3HH8hjUtF01ANbz5fOB1T6/O7pAsFZElu9sr2SsgJNonJ8nkvJuc4DzhvEecIA
+	 n0U8FH2uP8iHsHHh+MMRhGyccbhb7HZ3O11ZVjnSUO7QSw8PrHINITl8UxaR3hD9Ct
+	 MVI4JJd4WGOog==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8C9BB40575;
-	Sun, 23 Aug 2026 19:14:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A7C8F6061D;
+	Sun, 23 Aug 2026 19:14:27 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1499A336
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:14 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C10341A
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 03B6240059
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:14 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6E84C40059
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uo3OfyLqSxHl for <u-boot@lists.u-boot-project.org>;
- Sun, 23 Aug 2026 19:14:12 +0000 (UTC)
+ id VC7gt30mS2RS for <u-boot@lists.u-boot-project.org>;
+ Sun, 23 Aug 2026 19:14:25 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
@@ -47,13 +47,13 @@ Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 50C3440057
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:11 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5809040057
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:14:24 +0000 (UTC)
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wyDdm-000000001mo-2TMX; Sun, 23 Aug 2026 19:13:58 +0000
-Date: Sun, 23 Aug 2026 20:13:55 +0100
+ id 1wyDe1-000000001ng-3o9O; Sun, 23 Aug 2026 19:14:14 +0000
+Date: Sun, 23 Aug 2026 20:14:10 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>,
@@ -74,8 +74,8 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org, openwrt-devel@lists.openwrt.org
-Subject: [PATCH 5/9] boot: add imagemap on-demand loading from storage
-Message-ID: <0d1a6ae2867fddcefe2c224ed47af14fc41abd2e.1787272661.git.daniel@makrotopia.org>
+Subject: [PATCH 6/9] boot: fit: support on-demand loading in fit_image_load()
+Message-ID: <325760fe2cb587557db49a21b51b85a04c3dc198.1787272661.git.daniel@makrotopia.org>
 References: <cover.1787272661.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
@@ -95,794 +95,339 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Introduce imagemap, a small layer that reads image data from a storage
-device on demand and keeps a translation table of the byte ranges
-already loaded into RAM, instead of copying the whole image up front.
+Integrate storage-backed image loading transparently into the existing
+FIT flow so that all verification, decompression, and copy-to-load-
+address code runs unchanged for both RAM-backed and storage-backed
+images.
 
-An imagemap device (UCLASS_IMAGEMAP) is created over a partition of a
-block device with imagemap_create(); imagemap_map() then returns a RAM
-pointer for any byte range, reading it in on first access and reusing
-it on later accesses -- so a header probe, verification and the final
-load of the same range share a single read. Block devices cover more
-than raw disks: an MTD partition is reached through mtdblock and a UBI
-volume through ubiblock, each exposed as a named block-device
-partition, so imagemap needs no storage-specific code of its own.
+Hook imagemap into fit_image_get_data(): when gd->imagemap is set and
+the sub-image uses external data, call imagemap_map() to bring the
+payload into RAM instead of returning the unmapped fit + offset
+pointer. Every existing caller, including fit_image_verify() called
+from fit_image_select(), transparently gets valid data without any
+changes to the authentication path.
 
-The read path is built on the SPL struct spl_load_info abstraction and
-a new spl_load_region() helper (added to spl.h): the block reader
-reports the device block length and spl_load_region() performs the
-native sector alignment. imagemap_map_to() keeps a payload byte-exact
-at a caller's load address, reading the aligned middle straight to the
-destination and bouncing only the partial head/tail block.
+For uncompressed sub-images with a known load address, pre-populate
+the translation table via imagemap_map_to() before verification runs.
+This loads data directly to the final RAM destination; when
+fit_image_get_data() is later called, the translation table hit
+returns the same pointer, achieving zero-copy. Compressed images or
+those without a load address fall through to the lazy imagemap_map()
+path.
 
-Regions that are not placed at a caller-supplied address are allocated
-through the LMB allocator and released on cleanup; the translation
-table doubles as the registry of those allocations. imagemap is gated
-to the full-U-Boot phase, so SPL and TPL carry no new cost.
+Filesystem sub-images protected by dm-verity are returned early and
+stay on storage, as the kernel verifies them at block level.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- MAINTAINERS            |   7 +
- boot/Kconfig           |  16 ++
- boot/Makefile          |   2 +
- boot/imagemap.c        | 451 +++++++++++++++++++++++++++++++++++++++++
- include/dm/uclass-id.h |   1 +
- include/imagemap.h     | 136 +++++++++++++
- include/spl.h          |  47 ++++-
- 7 files changed, 657 insertions(+), 3 deletions(-)
- create mode 100644 boot/imagemap.c
- create mode 100644 include/imagemap.h
+ boot/bootm.c     |  70 +++++++++++++++++++++++++++---
+ boot/image-fit.c | 109 ++++++++++++++++++++++++++++++++++++++++++++++-
+ include/bootm.h  |   2 +
+ include/image.h  |   2 +
+ 4 files changed, 174 insertions(+), 9 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index acaba95ed03..48ee01e033d 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1186,6 +1186,13 @@ S:	Maintained
- F:	drivers/timer/goldfish_timer.c
- F:	include/goldfish_timer.h
- 
-+IMAGEMAP
-+M:	Daniel Golle <daniel@makrotopia.org>
-+L:	openwrt-devel@lists.openwrt.org
-+S:	Maintained
-+F:	boot/imagemap.c
-+F:	include/imagemap.h
-+
- INTERCONNECT
- M:	Neil Armstrong <neil.armstrong@linaro.org>
- S:	Maintained
-diff --git a/boot/Kconfig b/boot/Kconfig
-index c67dc0ba493..0d060aa25e4 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1205,6 +1205,22 @@ config SYS_BOOT_RAMDISK_HIGH
- 
- endmenu		# Boot images
- 
-+config IMAGEMAP
-+	bool "On-demand image loading from storage"
-+	depends on DM && LMB && BLK && PARTITIONS
-+	help
-+	  Read image data from a storage device on demand instead of
-+	  copying the whole image into RAM first. A translation table maps
-+	  already-loaded byte ranges to their RAM addresses to avoid
-+	  redundant reads, and scratch allocations are managed through the
-+	  LMB allocator.
-+
-+	  Images are read from a partition on a block device, identified by
-+	  number or name. MTD partitions (via mtdblock) and UBI volumes
-+	  (via ubiblock) are reached as block-device partitions too. Used
-+	  by bootm when a storage device is specified instead of a RAM
-+	  address.
-+
- config DISTRO_DEFAULTS
- 	bool "(deprecated) Script-based booting of Linux distributions"
- 	select CMDLINE
-diff --git a/boot/Makefile b/boot/Makefile
-index 7fb56e7ef37..b4200ebab3d 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -73,6 +73,8 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
- 
- obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
- 
-+obj-$(CONFIG_$(PHASE_)IMAGEMAP) += imagemap.o
-+
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_OS) += vbe_abrec_os.o
-diff --git a/boot/imagemap.c b/boot/imagemap.c
-new file mode 100644
-index 00000000000..4bdfa6109f8
---- /dev/null
-+++ b/boot/imagemap.c
-@@ -0,0 +1,451 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * On-demand image loading from storage (UCLASS_IMAGEMAP)
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
-+
-+#define LOG_CATEGORY UCLASS_IMAGEMAP
-+
-+#include <blk.h>
-+#include <dm.h>
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 3bce8586834..6422bdc16f6 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -14,6 +14,7 @@
+ #include <env.h>
+ #include <errno.h>
+ #include <fdt_support.h>
 +#include <imagemap.h>
-+#include <lmb.h>
-+#include <mapmem.h>
-+#include <memalign.h>
-+#include <part.h>
-+#include <spl.h>
-+#include <asm/cache.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
-+#include <linux/string.h>
-+#include <log.h>
-+
-+/**
-+ * struct imagemap_plat - Platform data set before probe
-+ *
-+ * @part_start:	Partition start LBA
-+ * @part_size:	Partition size in blocks
-+ * @hwpart:	Hardware partition to select before each read
-+ */
-+struct imagemap_plat {
-+	lbaint_t part_start;
-+	lbaint_t part_size;
-+	int hwpart;
-+};
-+
-+/**
-+ * struct imagemap_blk - Runtime block-read state (the spl_load_info priv)
-+ *
-+ * @desc:	Block device descriptor
-+ * @part_start:	Partition start LBA
-+ * @part_size:	Partition size in blocks
-+ * @hwpart:	Hardware partition to (re-)select before each read.  For a UBI
-+ *		block device this selects the UBI volume (encoded in
-+ *		blk_desc->hwpart by the "ubi" partition driver); for normal
-+ *		media it is the hardware partition (0 for the user area).
-+ */
-+struct imagemap_blk {
-+	struct blk_desc *desc;
-+	lbaint_t part_start;
-+	lbaint_t part_size;
-+	int hwpart;
-+};
-+
-+void *imagemap_lookup(struct udevice *dev, loff_t img_offset, ulong size)
-+{
-+	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
-+	const struct imagemap_region *r;
-+
-+	alist_for_each(r, &priv->regions) {
+ #include <irq_func.h>
+ #include <lmb.h>
+ #include <log.h>
+@@ -147,7 +148,22 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+ 
+ 	/* check image type, for FIT images get FIT kernel node */
+ 	*os_data = *os_len = 0;
+-	buf = map_sysmem(img_addr, 0);
++	if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
 +		/*
-+		 * Check whether [img_offset, img_offset + size) is fully
-+		 * contained within [r->img_offset, r->img_offset + r->size).
-+		 *
-+		 * The three conditions are ordered to avoid unsigned
-+		 * underflow in the subtraction on the third line:
-+		 *
-+		 *  1) img_offset >= r->img_offset
-+		 *     The requested start is at or past the region start.
-+		 *
-+		 *  2) img_offset - r->img_offset <= r->size
-+		 *     The offset into the region does not exceed the
-+		 *     region size.  This guard is essential: without it,
-+		 *     the subtraction in (3) wraps to a huge value on
-+		 *     LP64 where ulong and loff_t have the same rank
-+		 *     and the arithmetic is performed as unsigned.
-+		 *
-+		 *  3) size <= r->size - (img_offset - r->img_offset)
-+		 *     The requested range fits in the remaining space.
-+		 *     Safe because (2) guarantees the subtraction does
-+		 *     not underflow.
++		 * Storage path: read enough bytes to detect the image
++		 * format. genimg_get_kernel_addr_fit() above still
++		 * parsed any #config / :subimage suffix so the FIT
++		 * selection variables are populated.
 +		 */
-+		if (img_offset >= r->img_offset &&
-+		    img_offset - r->img_offset <= r->size &&
-+		    size <= r->size - (img_offset - r->img_offset))
-+			return (char *)r->ram + (img_offset - r->img_offset);
-+	}
-+
-+	return NULL;
-+}
-+
-+/**
-+ * imagemap_record() - Record a region in the translation table
-+ *
-+ * If an entry with the same img_offset already exists and the new size
-+ * is larger, update the existing entry. Otherwise add a new entry.
-+ *
-+ * @dev:		The imagemap device
-+ * @img_offset:		Byte offset within the source image
-+ * @size:		Region size
-+ * @ram:		RAM pointer where the region was loaded
-+ * @lmb_reserved:	true if this region was allocated via LMB
-+ * Return: pointer to the region entry, or NULL if the table is full
-+ */
-+static struct imagemap_region *
-+imagemap_record(struct udevice *dev, loff_t img_offset, ulong size,
-+		void *ram, bool lmb_reserved)
-+{
-+	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
-+	struct imagemap_region *r;
-+	struct imagemap_region entry;
-+
-+	/* Check for an existing entry at the same base that we can extend */
-+	alist_for_each(r, &priv->regions) {
-+		if (r->img_offset == img_offset) {
-+			r->size = size;
-+			r->ram = ram;
-+			r->lmb_reserved = lmb_reserved;
-+			return r;
++		buf = imagemap_map(images->imagemap, 0, 64);
++		if (IS_ERR(buf)) {
++			puts("Cannot read image header from storage\n");
++			return PTR_ERR(buf);
 +		}
++		img_addr = map_to_sysmem(buf);
++	} else {
++		buf = map_sysmem(img_addr, 0);
 +	}
-+
-+	/* Append new region */
-+	entry.img_offset = img_offset;
-+	entry.size = size;
-+	entry.ram = ram;
-+	entry.lmb_reserved = lmb_reserved;
-+
-+	r = alist_add(&priv->regions, entry);
-+	if (!r) {
-+		log_err("imagemap: cannot add region (out of memory)\n");
-+		return NULL;
-+	}
-+
-+	return r;
-+}
-+
-+/**
-+ * imagemap_read_exact() - Read [off, off+size) byte-exact into @dst
-+ *
-+ * For byte-addressed sources (bl_len == 1) this is a straight
-+ * spl_load_region().  For block sources it reads the fully-contained
-+ * middle blocks straight into @dst (zero-copy) and bounces only the
-+ * partial head/tail block, so the wanted bytes land exactly at @dst
-+ * without over-reading the destination buffer.
-+ *
-+ * Return: 0 on success, negative errno on failure
-+ */
-+static int imagemap_read_exact(struct spl_load_info *info, loff_t off,
-+			       ulong size, void *dst)
-+{
-+	ulong bl_len = spl_get_bl_len(info);
-+	ulong overhead = off & (bl_len - 1);
-+	u8 *out = dst;
-+	loff_t cur = off;
-+	ulong left = size;
-+
-+	if (bl_len == 1)
-+		return spl_load_region(info, off, size, dst) < 0 ? -EIO : 0;
-+
-+	/* Partial head block: bounce and copy the wanted tail of the block */
-+	if (overhead) {
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, blk, bl_len);
-+		ulong chunk = min(left, bl_len - overhead);
-+
-+		if (info->read(info, cur - overhead, bl_len, blk) < bl_len)
-+			return -EIO;
-+		memcpy(out, blk + overhead, chunk);
-+		out += chunk;
-+		cur += chunk;
-+		left -= chunk;
-+	}
-+
-+	/* Aligned middle: whole blocks straight into @dst (zero-copy) */
-+	if (left >= bl_len) {
-+		ulong nbytes = left & ~(bl_len - 1);
-+
-+		if (info->read(info, cur, nbytes, out) < nbytes)
-+			return -EIO;
-+		out += nbytes;
-+		cur += nbytes;
-+		left -= nbytes;
-+	}
-+
-+	/* Partial tail block: bounce and copy the wanted head of the block */
-+	if (left) {
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, blk, bl_len);
-+
-+		if (info->read(info, cur, bl_len, blk) < bl_len)
-+			return -EIO;
-+		memcpy(out, blk, left);
-+	}
-+
-+	return 0;
-+}
-+
-+void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
-+{
-+	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
-+	ulong bl_len = spl_get_bl_len(&priv->info);
-+	ulong overhead = img_offset & (bl_len - 1);
-+	loff_t base_off = img_offset - overhead;
-+	ulong read_size = ALIGN(size + overhead, bl_len);
-+	phys_addr_t addr;
-+	phys_size_t alloc_size;
-+	void *base;
-+	int ret;
-+	struct imagemap_region *r;
-+	void *p;
-+
-+	/* Return existing mapping if the range is already covered */
-+	p = imagemap_lookup(dev, img_offset, size);
-+	if (p)
-+		return p;
-+
-+	alloc_size = ALIGN(read_size, ARCH_DMA_MINALIGN);
-+
-+	/*
-+	 * Extend a block-aligned region at the same base offset to the
-+	 * larger size, re-reading the full range from storage.
-+	 */
-+	alist_for_each(r, &priv->regions) {
-+		if (r->img_offset == base_off && r->size < read_size) {
-+			addr = map_to_sysmem(r->ram);
-+
-+			/* Free old LMB reservation if we own it */
-+			if (r->lmb_reserved)
-+				lmb_free(addr,
-+					 ALIGN(r->size, ARCH_DMA_MINALIGN),
-+					 LMB_NONE);
-+
-+			/* Try to re-reserve at the same address with new size */
-+			if (lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
-+					  alloc_size, LMB_NONE)) {
-+				/* In-place extend failed, allocate elsewhere */
-+				if (lmb_alloc_mem(LMB_MEM_ALLOC_ANY,
-+						  ARCH_DMA_MINALIGN,
-+						  &addr, alloc_size,
-+						  LMB_NONE)) {
-+					log_err("imagemap: LMB alloc failed (0x%lx bytes)\n",
-+						(ulong)alloc_size);
-+					return ERR_PTR(-ENOMEM);
-+				}
-+			}
-+			base = map_sysmem(addr, alloc_size);
-+
-+			ret = spl_load_region(&priv->info, img_offset, size,
-+					      base);
-+			if (ret < 0) {
-+				log_err("imagemap: read failed at offset 0x%llx (size 0x%lx): %d\n",
-+					(unsigned long long)img_offset, size, ret);
-+				lmb_free(addr, alloc_size, LMB_NONE);
-+				return ERR_PTR(ret);
-+			}
-+			r->size = read_size;
-+			r->ram = base;
-+			r->lmb_reserved = true;
-+
-+			return base + overhead;
-+		}
-+	}
-+
-+	/* New region — allocate from LMB */
-+	if (lmb_alloc_mem(LMB_MEM_ALLOC_ANY, ARCH_DMA_MINALIGN,
-+			  &addr, alloc_size, LMB_NONE)) {
-+		log_err("imagemap: LMB alloc failed (0x%lx bytes)\n",
-+			(ulong)alloc_size);
-+		return ERR_PTR(-ENOMEM);
-+	}
-+
-+	base = map_sysmem(addr, alloc_size);
-+
-+	ret = spl_load_region(&priv->info, img_offset, size, base);
-+	if (ret < 0) {
-+		log_err("imagemap: read failed at offset 0x%llx (size 0x%lx): %d\n",
-+			(unsigned long long)img_offset, size, ret);
-+		lmb_free(addr, alloc_size, LMB_NONE);
-+		return ERR_PTR(ret);
-+	}
-+
-+	if (!imagemap_record(dev, base_off, read_size, base, true)) {
-+		lmb_free(addr, alloc_size, LMB_NONE);
-+		return ERR_PTR(-ENOMEM);
-+	}
-+
-+	return base + overhead;
-+}
-+
-+void *imagemap_map_to(struct udevice *dev, loff_t img_offset,
-+		      ulong size, void *dst)
-+{
-+	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
-+	void *p;
-+	int ret;
-+
-+	/* If already mapped to this exact destination, return it */
-+	p = imagemap_lookup(dev, img_offset, size);
-+	if (p && p == dst)
-+		return p;
-+
-+	ret = imagemap_read_exact(&priv->info, img_offset, size, dst);
-+	if (ret) {
-+		log_err("imagemap: read failed at offset 0x%llx (size 0x%lx): %d\n",
-+			(unsigned long long)img_offset, size, ret);
-+		return ERR_PTR(ret);
-+	}
-+
-+	if (!imagemap_record(dev, img_offset, size, dst, false))
-+		return ERR_PTR(-ENOMEM);
-+
-+	return dst;
-+}
-+
-+void imagemap_cleanup(struct udevice *dev)
-+{
-+	struct imagemap_priv *priv;
-+	struct imagemap_region *r;
-+
-+	if (!dev)
-+		return;
-+
-+	priv = dev_get_uclass_priv(dev);
-+
-+	alist_for_each(r, &priv->regions) {
-+		if (r->lmb_reserved)
-+			lmb_free(map_to_sysmem(r->ram),
-+				 ALIGN(r->size, ARCH_DMA_MINALIGN),
-+				 LMB_NONE);
-+	}
-+
-+	alist_uninit(&priv->regions);
-+
-+	device_remove(dev, DM_REMOVE_NORMAL);
-+	device_unbind(dev);
-+}
-+
-+static int imagemap_post_probe(struct udevice *dev)
-+{
-+	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
-+
-+	alist_init_struct(&priv->regions, struct imagemap_region);
-+
-+	return 0;
-+}
-+
-+UCLASS_DRIVER(imagemap) = {
-+	.id		= UCLASS_IMAGEMAP,
-+	.name		= "imagemap",
-+	.post_probe	= imagemap_post_probe,
-+	.per_device_auto	= sizeof(struct imagemap_priv),
-+};
-+
-+/*
-+ * Block-addressed reader (bl_len == blksz): @off/@size are byte quantities
-+ * pre-aligned to the block length by spl_load_region()/imagemap, so this is
-+ * a plain whole-sector transfer.  Returns bytes read, 0 on failure.
-+ */
-+static ulong imagemap_blk_reader(struct spl_load_info *info, ulong off,
-+				 ulong size, void *buf)
-+{
-+	struct imagemap_blk *bp = info->priv;
-+	struct blk_desc *desc = bp->desc;
-+	lbaint_t blk_off = off >> desc->log2blksz;
-+	lbaint_t count = size >> desc->log2blksz;
-+
-+	if (blk_off + count > bp->part_size) {
-+		log_err("imagemap: read at 0x%lx+0x%lx exceeds partition size\n",
-+			off, size);
-+		return 0;
-+	}
-+
-+	/*
-+	 * Re-select our hardware partition / UBI volume in case another
-+	 * blk access changed it since we were created.  ubi_blk provides no
-+	 * select_hwpart op, so drive blk_desc->hwpart directly as well.
-+	 */
-+	if (desc->hwpart != bp->hwpart) {
-+		blk_dselect_hwpart(desc, bp->hwpart);
-+		desc->hwpart = bp->hwpart;
-+	}
-+
-+	return blk_dread(desc, bp->part_start + blk_off, count, buf)
-+	       << desc->log2blksz;
-+}
-+
-+static int imagemap_probe(struct udevice *dev)
-+{
-+	struct imagemap_plat *plat = dev_get_plat(dev);
-+	struct imagemap_blk *bp = dev_get_priv(dev);
-+	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
-+
-+	bp->desc = dev_get_uclass_plat(dev_get_parent(dev));
-+	bp->part_start = plat->part_start;
-+	bp->part_size = plat->part_size;
-+	bp->hwpart = plat->hwpart;
-+
-+	spl_load_init(&priv->info, imagemap_blk_reader, bp, bp->desc->blksz);
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(imagemap) = {
-+	.name		= "imagemap",
-+	.id		= UCLASS_IMAGEMAP,
-+	.probe		= imagemap_probe,
-+	.plat_auto	= sizeof(struct imagemap_plat),
-+	.priv_auto	= sizeof(struct imagemap_blk),
-+};
-+
-+int imagemap_create(struct udevice *dev, const char *name,
-+		    int part, struct udevice **devp)
-+{
-+	struct blk_desc *desc = dev_get_uclass_plat(dev);
-+	struct imagemap_plat *plat;
-+	struct disk_partition info;
-+	struct udevice *imdev;
-+	int ret;
-+
-+	if (name && *name)
-+		ret = part_get_info_by_name(desc, name, &info);
-+	else
-+		ret = part_get_info(desc, part, &info);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = device_bind_driver(desc->bdev, "imagemap",
-+				 name && *name ? name : "imagemap", &imdev);
-+	if (ret)
-+		return ret;
-+
-+	plat = dev_get_plat(imdev);
-+	plat->part_start = info.start;
-+	plat->part_size = info.size;
-+	/*
-+	 * part_get_info_by_name() records the target in blk_desc->hwpart for
-+	 * ubi_blk (the UBI volume id); capture it so reads re-select it.
-+	 */
-+	plat->hwpart = desc->hwpart;
-+
-+	ret = device_probe(imdev);
-+	if (ret) {
-+		device_unbind(imdev);
-+		return ret;
-+	}
-+
-+	*devp = imdev;
-+
-+	return 0;
-+}
-diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index fe0aae2720c..7de9312cde7 100644
---- a/include/dm/uclass-id.h
-+++ b/include/dm/uclass-id.h
-@@ -75,6 +75,7 @@ enum uclass_id {
- 	UCLASS_HASH,		/* Hash device */
- 	UCLASS_HWSPINLOCK,	/* Hardware semaphores */
- 	UCLASS_HOST,		/* Sandbox host device */
-+	UCLASS_IMAGEMAP,	/* On-demand image loading from storage */
- 	UCLASS_I2C,		/* I2C bus */
- 	UCLASS_I2C_EEPROM,	/* I2C EEPROM device */
- 	UCLASS_I2C_GENERIC,	/* Generic I2C device */
-diff --git a/include/imagemap.h b/include/imagemap.h
-new file mode 100644
-index 00000000000..984a2fa8934
---- /dev/null
-+++ b/include/imagemap.h
-@@ -0,0 +1,136 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * On-demand image loading from storage (UCLASS_IMAGEMAP)
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
-+
-+#ifndef __IMAGEMAP_H
-+#define __IMAGEMAP_H
-+
-+#include <alist.h>
-+#include <spl.h>
-+#include <linux/err.h>
-+#include <linux/types.h>
-+
-+struct udevice;
-+
-+/**
-+ * struct imagemap_region - One mapped region of the image
-+ *
-+ * Records the fact that image bytes [img_offset, img_offset + size)
-+ * have been loaded into RAM at address @ram.
-+ *
-+ * @img_offset:	Start offset within the source image (bytes)
-+ * @size:	Region size (bytes)
-+ * @ram:	RAM pointer where this region was loaded
-+ * @lmb_reserved: true if this region was allocated via LMB and should
-+ *		be freed on cleanup
-+ */
-+struct imagemap_region {
-+	loff_t img_offset;
-+	ulong size;
-+	void *ram;
-+	bool lmb_reserved;
-+};
-+
-+/**
-+ * struct imagemap_priv - Per-device uclass data for imagemap
-+ *
-+ * Managed by the UCLASS_IMAGEMAP uclass via per_device_auto.
-+ *
-+ * @info:	Shared load-to-mem abstraction (the same one SPL uses); the
-+ *		device's probe points its spl_load_reader at the storage,
-+ *		and all reads go through spl_load_region().
-+ * @regions:	Translation table of already-loaded regions, used both as
-+ *		the reuse cache and as the LMB allocation registry (freed on
-+ *		cleanup).
-+ */
-+struct imagemap_priv {
-+	struct spl_load_info info;
-+	struct alist regions;
-+};
-+
-+/**
-+ * imagemap_lookup() - Look up an already-mapped region
-+ *
-+ * Checks the translation table to see if the requested range
-+ * [img_offset, img_offset + size) is fully contained within a
-+ * previously loaded region.
-+ *
-+ * @dev:	The imagemap device
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Number of bytes needed
-+ * Return: RAM pointer on hit, NULL on miss (does not trigger a read)
-+ */
-+void *imagemap_lookup(struct udevice *dev, loff_t img_offset, ulong size);
-+
-+/**
-+ * imagemap_map() - Ensure an image region is accessible in RAM
-+ *
-+ * If the region is already in the translation table, returns the
-+ * existing RAM pointer. Otherwise allocates RAM via the LMB allocator,
-+ * reads the data from storage, records the mapping, and returns the
-+ * new pointer.
-+ *
-+ * If the requested range starts at the same offset as an existing
-+ * region but is larger, the existing region is extended (LMB
-+ * reservation adjusted, data re-read).
-+ *
-+ * @dev:	The imagemap device
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Number of bytes needed
-+ * Return: RAM pointer on success, ERR_PTR on failure
-+ */
-+void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size);
-+
-+/**
-+ * imagemap_map_to() - Load an image region to a specific RAM address
-+ *
-+ * Like imagemap_map() but reads into a caller-specified address
-+ * instead of allocating from the scratch area. Used when the sub-image
-+ * has a known load address for a zero-copy path.
-+ *
-+ * @dev:	The imagemap device
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Number of bytes to load
-+ * @dst:	Destination address in RAM
-+ * Return: @dst on success, ERR_PTR on failure
-+ */
-+void *imagemap_map_to(struct udevice *dev, loff_t img_offset,
-+		      ulong size, void *dst);
-+
-+/**
-+ * imagemap_cleanup() - Release all resources and unbind the device
-+ *
-+ * Frees all LMB reservations from the translation table, removes the
-+ * driver, and unbinds the device. The device pointer is invalid after
-+ * this call.
-+ *
-+ * Safe to call with a NULL @dev pointer.
-+ *
-+ * @dev:	The imagemap device, or NULL
-+ */
-+void imagemap_cleanup(struct udevice *dev);
-+
-+/**
-+ * imagemap_create() - Create an imagemap device over a block device
-+ *
-+ * Resolves a partition on @dev (by name if @name is given, otherwise by
-+ * index @part), binds an imagemap device as a child of the block device
-+ * and probes it, pointing its reader at that partition.
-+ *
-+ * MTD partitions and UBI volumes are reached the same way: with
-+ * CONFIG_MTD_BLOCK / CONFIG_UBI_BLOCK they are exposed as named
-+ * partitions on the mtd_blk / ubi_blk block devices.
-+ *
-+ * @dev:	Block device (UCLASS_BLK)
-+ * @name:	Partition/volume name, or NULL to select by index
-+ * @part:	Partition index (used when @name is NULL)
-+ * @devp:	On success, the new imagemap device
-+ * Return: 0 on success, negative errno on failure
-+ */
-+int imagemap_create(struct udevice *dev, const char *name,
-+		    int part, struct udevice **devp);
-+
-+#endif /* __IMAGEMAP_H */
-diff --git a/include/spl.h b/include/spl.h
-index 5078d7525ab..24df44d23e1 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -350,10 +350,21 @@ typedef ulong (*spl_load_reader)(struct spl_load_info *load, ulong sector,
-  * @phase: Image phase to load
-  * @no_fdt_update: true to update the FDT with any loadables that are loaded
-  */
-+/*
-+ * struct spl_load_info carries a device block length for the SPL block
-+ * loaders (CONFIG_SPL_LOAD_BLOCK) and, in full U-Boot, for the imagemap
-+ * on-demand loader (CONFIG_IMAGEMAP); imagemap is gated out of the xpl
-+ * phases so SPL and TPL carry no new cost.
-+ */
-+#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK) || \
-+	(IS_ENABLED(CONFIG_IMAGEMAP) && !defined(CONFIG_XPL_BUILD))
-+#define SPL_LOAD_INFO_HAS_BL_LEN
-+#endif
-+
- struct spl_load_info {
- 	spl_load_reader read;
- 	void *priv;
--#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
-+#ifdef SPL_LOAD_INFO_HAS_BL_LEN
- 	u16 bl_len;
+ 	switch (genimg_get_format(buf)) {
+ #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
+ 	case IMAGE_FORMAT_LEGACY:
+@@ -193,6 +209,20 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
  #endif
- #if CONFIG_IS_ENABLED(BOOTMETH_VBE)
-@@ -364,7 +375,7 @@ struct spl_load_info {
+ #if CONFIG_IS_ENABLED(FIT)
+ 	case IMAGE_FORMAT_FIT:
++		if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
++			/*
++			 * Extend the mapping to cover the full FIT
++			 * FDT structure so all metadata is accessible.
++			 */
++			size_t fdt_sz = fdt_totalsize(buf);
++
++			buf = imagemap_map(images->imagemap, 0, fdt_sz);
++			if (IS_ERR(buf)) {
++				puts("Cannot read FIT header from storage\n");
++				return PTR_ERR(buf);
++			}
++			img_addr = map_to_sysmem(buf);
++		}
+ 		os_noffset = fit_image_load(images, img_addr,
+ 				&fit_uname_kernel, &fit_uname_config,
+ 				IH_ARCH_DEFAULT, IH_TYPE_KERNEL,
+@@ -1033,11 +1063,21 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 	 * Work through the states and see how far we get. We stop on
+ 	 * any error.
+ 	 */
+-	if (states & BOOTM_STATE_START)
++	if (states & BOOTM_STATE_START) {
+ 		ret = bootm_start();
++		/*
++		 * bootm_start() zeroes the global images struct. Restore
++		 * the loader pointer so the storage-backed path works.
++		 */
++		if (IS_ENABLED(CONFIG_IMAGEMAP) && bmi->imagemap)
++			images->imagemap = bmi->imagemap;
++	}
  
- static inline int spl_get_bl_len(struct spl_load_info *info)
- {
--#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
-+#ifdef SPL_LOAD_INFO_HAS_BL_LEN
- 	return info->bl_len;
- #else
- 	return 1;
-@@ -373,7 +384,7 @@ static inline int spl_get_bl_len(struct spl_load_info *info)
+-	if (!ret && (states & BOOTM_STATE_PRE_LOAD))
+-		ret = bootm_pre_load(bmi->addr_img);
++	if (!ret && (states & BOOTM_STATE_PRE_LOAD)) {
++		/* Pre-load verification is not applicable to storage boot */
++		if (!IS_ENABLED(CONFIG_IMAGEMAP) || !images->imagemap)
++			ret = bootm_pre_load(bmi->addr_img);
++	}
  
- static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
- {
--#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
-+#ifdef SPL_LOAD_INFO_HAS_BL_LEN
- 	info->bl_len = bl_len;
- #else
- 	if (bl_len != 1)
-@@ -429,6 +440,36 @@ static inline void spl_load_init(struct spl_load_info *load,
- 	xpl_set_fdt_update(load, true);
+ 	if (!ret && (states & BOOTM_STATE_FINDOS))
+ 		ret = bootm_find_os(bmi->cmd_name, bmi->addr_img);
+@@ -1045,8 +1085,11 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 	if (!ret && (states & BOOTM_STATE_FINDOTHER)) {
+ 		ulong img_addr;
+ 
+-		img_addr = bmi->addr_img ? hextoul(bmi->addr_img, NULL)
+-			: image_load_addr;
++		if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap)
++			img_addr = images->os.start;
++		else
++			img_addr = bmi->addr_img ? hextoul(bmi->addr_img, NULL)
++				: image_load_addr;
+ 		ret = bootm_find_other(img_addr, bmi->conf_ramdisk,
+ 				       bmi->conf_fdt);
+ 	}
+@@ -1145,11 +1188,24 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 	}
+ 
+ 	/* Now run the OS! We hope this doesn't return */
+-	if (!ret && (states & BOOTM_STATE_OS_GO))
++	if (!ret && (states & BOOTM_STATE_OS_GO)) {
++		/* Release storage backend before jumping — no return expected */
++		if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
++			imagemap_cleanup(images->imagemap);
++			images->imagemap = NULL;
++		}
++
+ 		ret = boot_selected_os(BOOTM_STATE_OS_GO, bmi, boot_fn);
++	}
+ 
+ 	/* Deal with any fallout */
+ err:
++	/* Clean up imagemap on error (not reached on successful boot) */
++	if (IS_ENABLED(CONFIG_IMAGEMAP) && images->imagemap) {
++		imagemap_cleanup(images->imagemap);
++		images->imagemap = NULL;
++	}
++
+ 	if (iflag)
+ 		enable_interrupts();
+ 
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index ef90c5abd18..9b05273d14a 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -26,6 +26,7 @@ extern void *aligned_alloc(size_t alignment, size_t size);
+ #include <env.h>
+ #include <errno.h>
+ #include <hexdump.h>
++#include <imagemap.h>
+ #include <log.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
+@@ -1140,6 +1141,16 @@ int fit_image_get_data(const void *fit, int noffset, const void **data,
+ 				return -EINVAL;
+ 			}
+ 			*data = fit + offset;
++#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(IMAGEMAP)
++			if (images.imagemap) {
++				void *mapped;
++
++				mapped = imagemap_lookup(images.imagemap,
++							    offset, len);
++				if (mapped)
++					*data = mapped;
++			}
++#endif
+ 			*size = len;
+ 		}
+ 	} else {
+@@ -2140,6 +2151,84 @@ static const char *fit_get_image_type_property(int ph_type)
+ 	return "unknown";
  }
  
++#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(IMAGEMAP)
 +/**
-+ * spl_load_region() - Read a block-aligned region into a buffer
++ * fit_image_load_storage() - Pre-load a sub-image from on-demand storage
 + *
-+ * Reads @size bytes starting at @offset from the device described by @info
-+ * into @dst, rounding the read down/up to the device block length so that
-+ * block media are read on their native boundaries. On byte-addressed media
-+ * (bl_len == 1) every alignment folds to identity.
++ * Brings an external-data sub-image into RAM through the imagemap loader before
++ * fit_image_select() runs verification, so the existing verify/copy path sees a
++ * valid RAM pointer.  Uncompressed sub-images with a load address are read
++ * straight to their destination (zero-copy); everything else goes to scratch
++ * RAM.  Filesystem sub-images protected by dm-verity are left on storage and
++ * verified by the kernel at block level; @early is set for those so the caller
++ * returns the node without loading the payload.
 + *
-+ * @info:	information about the device to read from
-+ * @offset:	byte offset on the device of the first wanted byte
-+ * @size:	number of wanted bytes
-+ * @dst:	buffer to read the block-aligned region into
-+ * Return:	on success, the number of leading padding bytes in @dst that
-+ *		precede the wanted data (0 on byte media); a negative error
-+ *		number on failure.
++ * @early is set to true when the caller should stop and return @noffset with an
++ * empty payload.
++ *
++ * Return: 0 to continue, negative errno on failure
 + */
-+static inline long spl_load_region(struct spl_load_info *info, loff_t offset,
-+				   ulong size, void *dst)
++static int fit_image_load_storage(struct bootm_headers *images, const void *fit,
++				  int noffset, enum fit_load_op load_op,
++				  ulong *datap, ulong *lenp, bool *early)
 +{
-+	ulong bl_len = spl_get_bl_len(info);
-+	ulong overhead = offset & (bl_len - 1);
-+	loff_t roff = ALIGN_DOWN(offset, bl_len);
-+	ulong rsize = ALIGN(size + overhead, bl_len);
++	int data_off = 0, data_sz = 0;
++	bool external = false;
++	ulong img_load;
++	u8 img_comp = IH_COMP_NONE;
++	void *mapped;
 +
-+	if (info->read(info, roff, rsize, dst) < rsize)
-+		return -EIO;
++	if (CONFIG_IS_ENABLED(FIT_VERITY)) {
++		u8 img_type;
 +
-+	return overhead;
++		if (!fit_image_get_type(fit, noffset, &img_type) &&
++		    img_type == IH_TYPE_FILESYSTEM &&
++		    fdt_subnode_offset(fit, noffset, "dm-verity") >= 0) {
++			fit_image_print(fit, noffset, "   ");
++			*datap = 0;
++			*lenp = 0;
++			*early = true;
++			return 0;
++		}
++	}
++
++	if (!fit_image_get_data_position(fit, noffset, &data_off)) {
++		external = true;
++	} else if (!fit_image_get_data_offset(fit, noffset, &data_off)) {
++		external = true;
++		data_off += ALIGN(fdt_totalsize(fit), 4);
++	}
++
++	if (!external || fit_image_get_data_size(fit, noffset, &data_sz))
++		return 0;
++
++	if (data_off < 0 || data_sz < 0)
++		return -EINVAL;
++
++	fit_image_get_comp(fit, noffset, &img_comp);
++
++	if (img_comp == IH_COMP_NONE && load_op != FIT_LOAD_IGNORED &&
++	    !fit_image_get_load(fit, noffset, &img_load)) {
++		void *dst = map_sysmem(img_load, data_sz);
++
++		mapped = imagemap_map_to(images->imagemap, data_off, data_sz,
++					 dst);
++	} else {
++		mapped = imagemap_map(images->imagemap, data_off, data_sz);
++	}
++
++	return IS_ERR(mapped) ? PTR_ERR(mapped) : 0;
 +}
++#else
++static inline int fit_image_load_storage(struct bootm_headers *images,
++					 const void *fit, int noffset,
++					 enum fit_load_op load_op, ulong *datap,
++					 ulong *lenp, bool *early)
++{
++	return 0;
++}
++#endif
 +
- /*
-  * We need to know the position of U-Boot in memory so we can jump to it. We
-  * allow any U-Boot binary to be used (u-boot.bin, u-boot-nodtb.bin,
+ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		   const char **fit_unamep, const char **fit_uname_configp,
+ 		   int arch, int ph_type, int bootstage_id,
+@@ -2236,6 +2325,21 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 
+ 	printf("   Trying '%s' %s subimage\n", fit_uname, prop_name);
+ 
++	/*
++	 * On-demand storage: pre-load external-data payloads into RAM (or leave
++	 * dm-verity filesystems on storage) before fit_image_select() verifies.
++	 */
++	if (CONFIG_IS_ENABLED(IMAGEMAP) && !tools_build() && images->imagemap) {
++		bool early = false;
++
++		ret = fit_image_load_storage(images, fit, noffset, load_op,
++					     datap, lenp, &early);
++		if (ret)
++			return ret;
++		if (early)
++			return noffset;
++	}
++
+ 	ret = fit_image_select(fit, noffset, images->verify);
+ 	if (ret) {
+ 		bootstage_error(bootstage_id + BOOTSTAGE_SUB_HASH);
+@@ -2349,8 +2453,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 			return -EXDEV;
+ 		}
+ 
+-		printf("   Loading %s from 0x%08lx to 0x%08lx\n",
+-		       prop_name, data, load);
++		if (!CONFIG_IS_ENABLED(IMAGEMAP) || data != load)
++			printf("   Loading %s from 0x%08lx to 0x%08lx\n",
++			       prop_name, data, load);
+ 	} else {
+ 		load = data;	/* load address specified but set to 0 */
+ 	}
+diff --git a/include/bootm.h b/include/bootm.h
+index f6958be751a..d1aac3d44df 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -40,6 +40,7 @@ struct cmd_tbl;
+  *	boot_get_fdt() for processing, or NULL for none
+  * @boot_progress: true to show boot progress
+  * @images: images information
++ * @imagemap: imagemap device for storage-backed boot (NULL for in-memory)
+  * @cmd_name: command which invoked this operation, e.g. "bootm"
+  * @argc: Number of arguments to the command (excluding the actual command).
+  *	This is 0 if there are no arguments
+@@ -51,6 +52,7 @@ struct bootm_info {
+ 	const char *conf_fdt;
+ 	bool boot_progress;
+ 	struct bootm_headers *images;
++	struct udevice *imagemap;
+ 	const char *cmd_name;
+ 	int argc;
+ 	char *const *argv;
+diff --git a/include/image.h b/include/image.h
+index 6edcb1995bf..f5baec9a516 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -412,6 +412,8 @@ struct bootm_headers {
+ 
+ 	int		verify;		/* env_get("verify")[0] != 'n' */
+ 
++	struct udevice *imagemap;	/* on-demand storage loader, or NULL */
++
+ #define BOOTM_STATE_START	0x00000001
+ #define BOOTM_STATE_FINDOS	0x00000002
+ #define BOOTM_STATE_FINDOTHER	0x00000004
 -- 
 2.55.0
