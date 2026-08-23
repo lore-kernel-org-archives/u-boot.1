@@ -1,44 +1,43 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA82C5DF81
-	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 19:48:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F6AC5DF8C
+	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 19:48:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B832680B1B;
-	Sun, 23 Aug 2026 19:48:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E1CFB60730;
+	Sun, 23 Aug 2026 19:48:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UemeXiTt0_Az; Sun, 23 Aug 2026 19:48:38 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xqyc-BL0hxL9; Sun, 23 Aug 2026 19:48:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787514518;
-	bh=rQY3YjXi3UZBFtZlILW/l17NG27nqmdz7PxuJI6OYm0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=UJ6Fa/M0jzkaKqfjc59t3caYuNMTMNCA9Pi+lXKwBSyGwNOIBzq2uhqR246N3Pbtd
-	 4KswpxPC2cPPZSpVg1kXhi06cyF5M9acBbrZSdQnKv/Qj+URiU1XUhqV6lGNp6wToa
-	 kNA9qzgI6BcpWKDU2oHwGV6j8pxnVa+3Q5ylu+VDXgK9zHT9yDSazMGsnqKrEOB5Sd
-	 HKpwk+WG7D88HB1uwAmku5jl7SPFj9UywxCAlk9jN25Zd12H6mhuCLVQL5IzDAR7YW
-	 TRzAIInNzZc8oKM6XhQhzJa/+mAM0ivmQqPNCVuhfPe7PCN8w1WnAi7HgihZuvMfvK
-	 D3adGqkleSpow==
+	d=lists.u-boot-project.org; s=default; t=1787514520;
+	bh=n+1nq5EYNwde/mq26xxjyhU9S+w3/31+op5eW+QSKBI=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=wiysUhqeOVUaDV+A4w1ksKeTBy67j5Rcvn9xSO01wb3/WUSEnwvlDDbDu2pL1FX9i
+	 UvBm7ghff3lzRXf6G8Om/DYQpz23bl8UuAnRtj/qHaWmnqMyT2xyPhcYaHRwFIUENL
+	 mDuAnEIU5So6hMpGhwwBO4yZ2dazTMziqPIS3t4zE9vcpOkLElfmaSBRlwwpqQv57u
+	 xbCmeNVHAhaNHS8zk5E+kOyITJP0pwDEaTxiaWSPEfPbpiXlj98xvRT/vOcXoBotGr
+	 NWRaYLv7KJAWiuWoxa+1eiX77j7qw/EQjjJqM49Sg7fkdZaVKoXt+vOhinLH0279O4
+	 Dybb/s97TZXkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3480480B2E;
-	Sun, 23 Aug 2026 19:48:38 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id DC204435
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:48:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0CB6660639;
+	Sun, 23 Aug 2026 19:48:40 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 24390279
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:48:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CEAE64055B
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:48:35 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1693540528
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:48:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KBQ68B56fJ_w for <u-boot@lists.u-boot-project.org>;
+ id QSHw75c9nzj4 for <u-boot@lists.u-boot-project.org>;
  Sun, 23 Aug 2026 19:48:35 +0000 (UTC)
 X-Greylist: delayed 63 seconds by postgrey-1.37 at util1.osuosl.org;
  Sun, 23 Aug 2026 19:48:34 UTC
@@ -46,28 +45,28 @@ Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=jan.kiszka@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=Gl+FLOD3
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.227;
- helo=mta-64-227.siemens.flowmailer.net;
- envelope-from=fm-294854-2026082319472828096396b70002072b-cd2l3h@rts-flowmailer.siemens.com;
+ header.a=rsa-sha256 header.s=fm2 header.b=ZiQ1nPG4
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.228;
+ helo=mta-64-228.siemens.flowmailer.net;
+ envelope-from=fm-294854-2026082319472748c2c5ce9f000207c5-uymz6i@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
-Received: from mta-64-227.siemens.flowmailer.net
- (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 45C294052A
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:48:34 +0000 (UTC)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
- 2026082319472828096396b70002072b
+Received: from mta-64-228.siemens.flowmailer.net
+ (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 426D14052E
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 19:48:33 +0000 (UTC)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
+ 2026082319472748c2c5ce9f000207c5
  for <u-boot@lists.u-boot-project.org>;
- Sun, 23 Aug 2026 21:47:28 +0200
+ Sun, 23 Aug 2026 21:47:27 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=jan.kiszka@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=rQY3YjXi3UZBFtZlILW/l17NG27nqmdz7PxuJI6OYm0=;
- b=Gl+FLOD38CTyi6EI4jiLR6w6DDt6hL5G0Hn3CBYabTahyzC+cOPW5svjnz3dTGu9az7P+Q
- rmXda8wHtFJJlSCuX39AopOvK/i7iQ4LCEIu2N1eFYdu54lEmXmmUyNw9zWTBCno6JhlCL0J
- E+VZuBDS+PPcPBQbFhw2TNEvVz+vLKGUbyYPEzSHZjU/bzXVDjdJXgal5Ti6VxxY/1koO+kT
- 2O4eGo8MLbNDJ62+mWQIkHeFASkCIBJYuQzLVNzr0KTQ8cv4NyJ52nhP1ktkkRaz2J8CZu43
- Tz52Cu5auJta+aTcXiXRCeP5uo301uuIPkVVPT+F0mk2e9DXbPgWYdtw==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=n+1nq5EYNwde/mq26xxjyhU9S+w3/31+op5eW+QSKBI=;
+ b=ZiQ1nPG40sDjyrlj851MEiZv6UMLUaO4sivh9JuR9RMD5v5H7xlGZXxo6bcJxFIM/OJC/I
+ LZAKY/jkSkE2eSA2LcHoBfUBaQiLlBMMoPDDS9srd/jY6fQCtXNo/R/RMITOJchPgCDFlGv+
+ K7/jOp4/BaBY7kwQp7o0Dy502fkbq3HgaDmtcyeCKtvPKMDc8DNvj9yqChp7Z0aqYTREPAU7
+ 8JF+aJAmFm2JDavSqVYh9Ymzif4doMUKWygZ+1GhDScqadYzT77StKpuBwvL0o6FFUY1Ao+M
+ Ph06gELErW9kd5PpsuqN0RCOsltzXT/erBtUnlYk5GRUPeofGJIdtwbQ==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
@@ -75,12 +74,10 @@ Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
  Sai Sree Kartheek Adivi <s-adivi@ti.com>,
  Alexander Heinisch <alexander.heinisch@siemens.com>,
  Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Subject: [PATCH v2 3/5] tee: optee: Do not warn about
- TEE_ERROR_STORAGE_NOT_AVAILABLE
-Date: Sun, 23 Aug 2026 21:47:24 +0200
-Message-ID: <13fc430cf440cdbc490bce630031ca49e81e1e13.1787514446.git.jan.kiszka@siemens.com>
-In-Reply-To: <cover.1787514446.git.jan.kiszka@siemens.com>
-References: <cover.1787514446.git.jan.kiszka@siemens.com>
+Subject: [PATCH v2 0/5] optee: Add support for enumerating RPMB-dependent
+ services
+Date: Sun, 23 Aug 2026 21:47:21 +0200
+Message-ID: <cover.1787514446.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -98,32 +95,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
+This allows to find firmware TPM again with recent OP-TEE versions,
+possibly also other services. The StMM service was not affected because
+it is directly invoked by efi_variable_tee when needed, and that is late
+enough so that all dependencies are available by then.
 
-This is a transitional error that is resolved once an RPMB becomes
-available. Keep it as debug output only.
+See patches for further details.
 
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
- drivers/tee/optee/core.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Changes in v2:
+ - fix build breakages with disabled CONFIGs
+ - structure code differently between optee core and rpmb
+ - debug() -> dev_dbg()
 
-diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-index ed8f2b6ec74..d3b5811afb8 100644
---- a/drivers/tee/optee/core.c
-+++ b/drivers/tee/optee/core.c
-@@ -106,7 +106,10 @@ static int __enum_services(struct udevice *dev, struct tee_shm *shm, size_t *shm
- 
- 	ret = tee_invoke_func(dev, &arg, 1, &param);
- 	if (ret || (arg.ret && arg.ret != TEE_ERROR_SHORT_BUFFER)) {
--		dev_err(dev, "Enumeration command 0x%x failed: 0x%x\n", pta_cmd, arg.ret);
-+		if (arg.ret != TEE_ERROR_STORAGE_NOT_AVAILABLE)
-+			dev_err(dev, "Enumeration command 0x%x failed: 0x%x\n", pta_cmd, arg.ret);
-+		else
-+			dev_dbg(dev, "Enumeration command 0x%x failed due to unavailable storage\n", pta_cmd);
- 		return -EINVAL;
- 	}
- 
+Jan
+
+Jan Kiszka (5):
+  tee: optee: Factor out service enumeration and binding functions
+  tee: optee: Add support for enumerating services that only need RPMB
+  tee: optee: Do not warn about TEE_ERROR_STORAGE_NOT_AVAILABLE
+  mmc: Call back to optee after a successful mmc_init
+  mmc: Make "MMC Device not found" a debug output
+
+ drivers/mmc/mmc-uclass.c          |  2 +-
+ drivers/mmc/mmc.c                 |  4 +++
+ drivers/mmc/mmc_legacy.c          |  2 +-
+ drivers/tee/optee/core.c          | 58 +++++++++++++++----------------
+ drivers/tee/optee/optee_private.h | 24 +++++++++++++
+ drivers/tee/optee/rpmb.c          | 19 ++++++++++
+ include/tee/optee.h               |  6 ++++
+ 7 files changed, 83 insertions(+), 32 deletions(-)
+
 -- 
 2.47.3
 
