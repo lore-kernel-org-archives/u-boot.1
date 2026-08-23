@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5352C5DF8C
-	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 20:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C20C5DF8C
+	for <u-boot@archiver.kernel.org>; Sun, 23 Aug 2026 20:39:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9F05F80D13;
-	Sun, 23 Aug 2026 20:39:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B22BF80839;
+	Sun, 23 Aug 2026 20:39:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iG7uPXQSUXaW; Sun, 23 Aug 2026 20:39:38 +0000 (UTC)
+ id 5d2XWq3Zr4cd; Sun, 23 Aug 2026 20:39:40 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787517578;
-	bh=gl99Qp2Z8KTvwANJtGhic34Apg6/cIG4YARx9Ri6ahQ=;
+	d=lists.u-boot-project.org; s=default; t=1787517580;
+	bh=yVWFNoYUv/LUXW8daukjhuxvCqRcsvNZS0Qo3XjbWOU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fN9kShUWkLAh9Wz6jLjqu2GXmj9vxUNopDH17Sd/MuA+LxWTGRIvS6mKIVgoDDP06
-	 FUhL8686n3l+0WWpbFahlF/PcSk81v5J6v4oEZb8qFxJHe7Kc5d3Uo2spVP9Yo2UYu
-	 5CbHv0k11bfRNXA4rlSdEPw7Leyb5kR76yke9Khlug9m+Zer46r3nHUlUUE5qypCRM
-	 j2fZf6jaCstRyITm8402MuQ5VltSbj75pyM3a584COsghuWXg7LEkwKOH2F38oNg1X
-	 FvslszC2cFA9uOAaSjQN0Aphszfwk/td4vPy1PIvvST61tb7HRZsrePb3rlbc9ifvQ
-	 U2i3iXz4vWSEw==
+	b=ME4zmLKBo/U0yTyRo2tc8vJskyPODnmLYIbeF5mCnRSEaOA2pHvYXaidfZG4k0bVa
+	 KW1pddyDz1qS0Ta1XpAMpAk2m55BV6cH9iCx+Gnh7EsHgl9XDfnoYozbKtAcYKO39W
+	 DGZ1V1Uy9wImium2eufFLNgyIexP8jXv99a8xypKfB2MRF9oeZ4eFkpr4GPwh1ymH2
+	 TVTtQvclVd75VFpPO/CO0fccsOifDoOx9CI89w09aN94Nc9dBJF1zOHNEfFiDtC3h3
+	 zP/ZGlmTvWO1+i9jspNFvdmDmBdYTb/HwqkoQYMtb4OZR0JY3OPhjj2cnGNnqxaKTV
+	 OeUCeVYBUT9WQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E731480D15;
-	Sun, 23 Aug 2026 20:39:37 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id F0D5C41A
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 20:39:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CF96180D3E;
+	Sun, 23 Aug 2026 20:39:39 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 269E23DA
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 20:39:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E34F040056
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 20:39:34 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0BDCC8082F
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 20:39:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lz4LLL3Ogww7 for <u-boot@lists.u-boot-project.org>;
- Sun, 23 Aug 2026 20:39:34 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MOBwVr5XNOor for <u-boot@lists.u-boot-project.org>;
+ Sun, 23 Aug 2026 20:39:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
  envelope-from=linusw@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=X/NT2DMq
+ header.a=rsa-sha256 header.s=k20260515 header.b=jXBXweiV
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 47A6D40057
- for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 20:39:32 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 17DDE8083B
+ for <u-boot@lists.u-boot-project.org>; Sun, 23 Aug 2026 20:39:34 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 9D4E543ACB;
+ by sea.source.kernel.org (Postfix) with ESMTP id 459C44064C;
+ Sun, 23 Aug 2026 20:39:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F059F1F000E9;
  Sun, 23 Aug 2026 20:39:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53CBA1F000E9;
- Sun, 23 Aug 2026 20:39:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787517572;
- bh=gl99Qp2Z8KTvwANJtGhic34Apg6/cIG4YARx9Ri6ahQ=;
+ s=k20260515; t=1787517574;
+ bh=yVWFNoYUv/LUXW8daukjhuxvCqRcsvNZS0Qo3XjbWOU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=X/NT2DMqftlWWPAt/zZQPPWnLIOxnRD808ozWasBCD6EdDwHk4C1vU8d+U2MZJKZU
- oXfLyQugsEQElnMY0mSMjPHpbeAa7QNbVzEjHv/YZ6EwI2gLpmkQmZ65kGYo35FMAw
- hYXqlhw2YyoJPUJeFG473+doZvV7CtOAvsVSy1qfXlKlUYwlaik9zFENLndpuh086L
- RWmaJVPAnlbk4VjEQTCp5GciWD7Mym0K2C6U2aw+MIW7OOAae15v8rq9YRhaEGLF55
- gUIUziO4xW8tYOBsBZ4SiieWEqr9ztS3Qu6U9EYAp+08C7XjorZ8kcdjI4JeYN2qKT
- gVF34+INDe4cA==
+ b=jXBXweiVUhFAYRcUxetEtN2HH6ZrSKiRYum1ouO0I9INRJHP8O8IU9X2sAeyOA9y9
+ fj1zZgWCN+LwD8EHv8Lhf8LDXJqU4DkABdURB0eo/o/4P7Pvvq6IyypFzAj8gFTfZ/
+ l36PL8JhE1LU9tuLAVfPBKdzqjXJhUaovFllunjCv+pYfGYuw7fx8C3T85yW4Uc0we
+ 5H4etWKurWjN+PbeLActnI6FBDvCLG+p7VW9+XGl/O4fH74FqWJcO7laGJCM+E831H
+ H/HnGymRqdO4GxvpEuH/oUC8ukaq9sKpeypMA7Dc2FHoFu+MGBg+jzyF8kxFNQWtGG
+ zMF5yjHaffIXQ==
 From: Linus Walleij <linusw@kernel.org>
-Date: Sun, 23 Aug 2026 22:39:21 +0200
-Subject: [PATCH v5 02/13] mmc: arm_pl180: Configure Ux500 signal direction
+Date: Sun, 23 Aug 2026 22:39:22 +0200
+Subject: [PATCH v5 03/13] mmc: arm_pl180: Gate idle card clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260823-ux500-external-sdcard-v5-2-07ca794e2b94@kernel.org>
+Message-Id: <20260823-ux500-external-sdcard-v5-3-07ca794e2b94@kernel.org>
 References: <20260823-ux500-external-sdcard-v5-0-07ca794e2b94@kernel.org>
 In-Reply-To: <20260823-ux500-external-sdcard-v5-0-07ca794e2b94@kernel.org>
 To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -94,44 +94,53 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The Ux500 MMCI variant can control external level-shifter signal
-directions through the power register. Parse the standard ST MMCI
-device tree properties and set the corresponding direction and
-feedback-clock bits.
+The MMC core uses mmc->clk_disable to request that the card clock is
+stopped, but the PL180 driver leaves SDI_CLKCR_CLKEN unchanged. This can
+leave inactive hosts driving their card clocks.
 
-This is required by the external SD card slot on Samsung Janice, where
-commands cannot reach the card unless the direction controls are set.
+Honor clk_disable when programming the clock control register. Also enable
+the PL180 power-save mode so the clock stops automatically while the bus is
+idle.
 
-Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 Signed-off-by: Linus Walleij <linusw@kernel.org>
 ---
- drivers/mmc/arm_pl180_mmci.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ drivers/mmc/arm_pl180_mmci.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
-index f00b0ff0dc95..af21b814641e 100644
+index af21b814641e..528612359789 100644
 --- a/drivers/mmc/arm_pl180_mmci.c
 +++ b/drivers/mmc/arm_pl180_mmci.c
-@@ -427,6 +427,19 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
- 		host->version2 = false; /* ARM variant */
- 	}
+@@ -294,6 +294,11 @@ static int  host_set_ios(struct mmc *dev)
+ 	u32 sdi_clkcr;
  
-+	if (dev_read_bool(dev, "st,sig-dir-dat0"))
-+		host->pwr_init |= SDI_PWR_DAT0DIREN;
-+	if (dev_read_bool(dev, "st,sig-dir-dat2"))
-+		host->pwr_init |= SDI_PWR_DAT2DIREN;
-+	if (dev_read_bool(dev, "st,sig-dir-dat31"))
-+		host->pwr_init |= SDI_PWR_DAT31DIREN;
-+	if (dev_read_bool(dev, "st,sig-dir-dat74"))
-+		host->pwr_init |= SDI_PWR_DAT74DIREN;
-+	if (dev_read_bool(dev, "st,sig-dir-cmd"))
-+		host->pwr_init |= SDI_PWR_CMDDIREN;
-+	if (dev_read_bool(dev, "st,sig-pin-fbclk"))
-+		host->pwr_init |= SDI_PWR_FBCLKEN;
-+
- 	gpio_request_by_name(dev, "cd-gpios", 0, &host->cd_gpio, GPIOD_IS_IN);
+ 	sdi_clkcr = readl(&host->base->clock);
++	sdi_clkcr |= SDI_CLKCR_PWRSAV;
++	if (dev->clk_disable)
++		sdi_clkcr &= ~SDI_CLKCR_CLKEN;
++	else
++		sdi_clkcr |= SDI_CLKCR_CLKEN;
  
- 	ret = mmc_of_parse(dev, cfg);
+ 	/* Ramp up the clock rate */
+ 	if (dev->clock) {
+@@ -400,7 +405,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
+ 
+ 	host->pwr_init = INIT_PWR;
+ 	host->clkdiv_init = SDI_CLKCR_CLKDIV_INIT_V1 | SDI_CLKCR_CLKEN |
+-			    SDI_CLKCR_HWFC_EN;
++			    SDI_CLKCR_PWRSAV | SDI_CLKCR_HWFC_EN;
+ 	host->clock_in = clk_get_rate(&clk);
+ 
+ 	cfg->name = dev->name;
+@@ -418,7 +423,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
+ 	case UX500V2_MMCI_ID:
+ 		host->pwr_init = SDI_PWR_OPD | SDI_PWR_PWRCTRL_ON;
+ 		host->clkdiv_init = SDI_CLKCR_CLKDIV_INIT_V2 | SDI_CLKCR_CLKEN |
+-				    SDI_CLKCR_HWFC_EN;
++				    SDI_CLKCR_PWRSAV | SDI_CLKCR_HWFC_EN;
+ 		cfg->voltages = VOLTAGE_WINDOW_MMC;
+ 		cfg->f_min = host->clock_in / (2 + SDI_CLKCR_CLKDIV_INIT_V2);
+ 		host->version2 = true;
 
 -- 
 2.55.0
