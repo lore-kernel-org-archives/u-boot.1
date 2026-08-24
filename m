@@ -1,117 +1,92 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69F9DC5DF9B
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:23:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2891FC5DF9B
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:31:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2EF4A60665;
-	Mon, 24 Aug 2026 14:23:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4EF9E80C9C;
+	Mon, 24 Aug 2026 14:31:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id F_fjV3WsYy5T; Mon, 24 Aug 2026 14:23:31 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Rbdu8kICM688; Mon, 24 Aug 2026 14:31:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787581411;
-	bh=8JmbNzSZbrw/wnUkJu4zINjiAdG14iC6NsV8hs+Mm9s=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787581904;
+	bh=6xqbtojtOq7Z2V8qUubG/YUELIURnCXtnek4YKVFHmA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GHHlY4gPtaGgNSQrXBavBKRwBLNznlVFxLC/S9KztlhJGn93YfruJqlAJikDSdLoj
-	 PpuqEK0nWFIaEjB/YyqQp7s2QfA7l4MqOElAZSGirEwvZwWaRlsZpz97+hqAoRAMSA
-	 gFlU1h5bpQuHlDU252nNuEtBahJBwKCUqdWIG3nJcXQOD8dYI4WyEofROR43zlFmYF
-	 5hvxkWqUpJmZy7TdYBFWjUA4Xlk8Y/uRUP2wu+dfunSRQlnhFJsFQnMvh02cw1aem1
-	 djBNkhy1RAIJEbei5r7+5ght2ZLiClAbynabsNooSOyqYaPzOF1kqCCzkc67jwaATN
-	 5CZV684VVZy/A==
+	b=hLCgsOQNJWr1wjVriYCbnj2O4o0u26awCAqoeiPcTqe99QLrgGUDIcJCtWpEskEcy
+	 lt8riuxTq8OfYdyKcXyA3pUNJg8jhnjjcL+kQ/P6WE3Ozp/C8yJ1XpFzVkARecz75Q
+	 jMv2CVkAelZzpHQn/H7lg8N7erUy1+IeGIbeDAQsC8yRWlTbwkZvXJ/u6jzVNrhjet
+	 OuMrvcLAbOrJa1SwXjL2axwJXc2hKsoVPmInO1l048BzEFoGcMhPgkhyYFjWG2xHzU
+	 yQOIblBQg/evfkikQElak04qhtiCEHmCKa/oac3i1sqYG+vFPdlQHpb9KC1wtD1Cw0
+	 3w/xFn22yhOKg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AF24E6060B;
-	Mon, 24 Aug 2026 14:23:31 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 45C18279
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:34:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 04F3D80B42;
+	Mon, 24 Aug 2026 14:31:44 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5B83941A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:31:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2BD10405D6
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:34:03 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 41ECA80B42
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:31:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KeTXrMvPD5De for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 13:34:01 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IhCrS2bnSLhE for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 14:31:41 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::72f; helo=mail-qk1-x72f.google.com;
- envelope-from=sanderson@brivo.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=brivo.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
- header.s=google header.b=Th37yOWU
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DD711405AE
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:34:00 +0000 (UTC)
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-936ea476db3so231186085a.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:34:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brivo.com; s=google; t=1787578439; x=1788183239;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8JmbNzSZbrw/wnUkJu4zINjiAdG14iC6NsV8hs+Mm9s=;
- b=Th37yOWU+DgNEvevxpyrwco26PcSCoNRVo4CxQXqAtxsRCxqlF3pDqpGnMRLjkvNTI
- F3YqZDq62H88tbesipkTQNw36UYYNpSyJqHUFAPLRQ6LqSKrsU+JovQ9wdtF+tBtYhlp
- tzifXlWyPszInh14+8Dpr8yKiZeoY+DQ97ZfFMLSfN+oZQ9oooRQ87nyBVJ9/j3g21dH
- 3NNyfJQPa00MQGdjMg1XacoyQ7Eyf9BnJ6ARPUI965UkCa3maaL+OPwNFm9qWKKkeVyf
- 3buHZ2PRj9XnVWbY0dr8qMtx4Y0ao1QuKaV/SwPBZfv+7IPgDE3JdKyOv3RzTYFr7gln
- 1LWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787578439; x=1788183239;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=8JmbNzSZbrw/wnUkJu4zINjiAdG14iC6NsV8hs+Mm9s=;
- b=byvG2bSWIC3Smc5zOfjsfi0KbNblffO1aUtIN6u0yY0n/UfOSMjaJo50IF7RVYsi/T
- dMh9klDH0E2H3WnYHNhxEQJN9LuI0vo57SocA6Uw0y7nZLfjE/mWKD+xV9KsNi/6y8V3
- ZmNIkJpRbYnwZONxM7YqIyFmjVqQ1xRFo4XpHyay4RcB1URi2bLsTRWuAxODxP1FoBnL
- 6CGOltjaUYOabXxzBztjwUQQLDk/8LJDAYyv+//YSxgBRykWKB6SY1/R7eV0YNVjnL99
- Emb0JRCGVV+8BP6t6f2q5DZB2S5kET2J7GF9CD4WRyTE4LCzPICvbd9PEP4621ZPqyR1
- IUzw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rp3yHDqKJ/enrl2EW2flhPblhhL8/Ga7fqp4QTCYgiLZTDUwB8VZTf2Y87WRxw+TxOTpVuUsyc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kHpZTwLv5EuCtR/NVJsBk0IhUnh9wANpADSV9vteo4eHWWGNJq
- IHvO2Dz87hL3qlpmfI6zq5Xb2B2xcJiSx7kcwc+rbisL0NeTdVaXoEE6Gly0rDf4pKPNZtQUerL
- 3QWvAp4C2q54oYQBcf/KlZNCc40NUaSulTOacdj+ywcczphfDQLc+af8bEVfxGmg=
-X-Gm-Gg: AR+sD13bhmygTRIgsg47pE7HpH6XkgIRgYb1m2GrfSniq8E62qCvffcRdKLyA0UstEi
- 8kg47zTe6W8s/8qTAYVCcOjk2SeeFlP9PEXQfvr7LQGO/F6lkjI8d6Eeaw0iNMZXigEL75fqPsc
- HJ51TGf3wFp1jOTUQAH1AXjij9i+AwQgAvrAASA5170PtQgJ1N5ZFibJEE2f6yV0Vu4dwLMcPBY
- aaxRbl4LgplljAjl1ZsgE/l9Bmomc4G7Q34RfM47vWdnBMeFkOLgdZDc4TImP4CoBVFo37Ya+0J
- zaT/AeviTSNG4BnaGqarHtac9OBSZ/LbHCIW1htYXsDIg32jFvktNM260bfAxP+eoeU+jplNI2d
- a01B4WRpjb0sw+x6LSTkdp/VikQTDuKxfdb4mSde74XOBWTWvR1VVNm3A5xmaPPH/y238bGvyyz
- NBal0oGod7LllfbdiHzHuq2i2odBcsE9YNgZeMw8KQinTi9hy7nlqVgQBmn9aRO9oH
-X-Received: by 2002:a05:620a:4014:b0:936:bbb5:330f with SMTP id
- af79cd13be357-9374699c523mr1474356685a.40.1787578438326; 
- Mon, 24 Aug 2026 06:33:58 -0700 (PDT)
-Received: from strozzi ([66.193.28.125]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93749eb4240sm500319685a.47.2026.08.24.06.33.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 06:33:58 -0700 (PDT)
-From: Sean Anderson <sanderson@brivo.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.u-boot-project.org
-Cc: u-boot-amlogic@groups.io, Tom Rini <trini@konsulko.com>,
- Sean Anderson <sanderson@brivo.com>
-Subject: [PATCH v2 2/2] pinctrl: meson: Add s4 pin controller
-Date: Mon, 24 Aug 2026 09:33:50 -0400
-Message-ID: <20260824133355.524575-2-sanderson@brivo.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260824133355.524575-1-sanderson@brivo.com>
-References: <20260824133355.524575-1-sanderson@brivo.com>
+ client-ip=2001:1600:19:d548::8fad; helo=smtp-8fad.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=D/0NXZ+i
+Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
+ [IPv6:2001:1600:19:d548::8fad])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3618380B34
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:31:39 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hTCyw41xVzsx4;
+ Mon, 24 Aug 2026 16:31:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1787581896;
+ bh=6xqbtojtOq7Z2V8qUubG/YUELIURnCXtnek4YKVFHmA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=D/0NXZ+iOuC5HGechue6Kek5nVKKu1LejrZ4LpWmGcSw4E9u96iiPhWxqQazxoFkt
+ UdOtI6Wo52yOOGcFnur73rQPIje0opTS9pxw2on4xu2DqV/GKaUiQQ0G48Ah6v81FC
+ 1KD/U4aPgfFFs8uyJCfgas7NtmPvoO2CRctGw25faG97OzEqAplDyhwdk1Ajl9zUcV
+ QpT1xFKZzER0Lxv98elbXMSVXpDGbQqvOosZA4ZeHbLhDHuQybVri82qnLts6UBXBF
+ YOqCzbvBclvnBZyQil9E2LE5a5OBnwBcHEMMvWFiE/DnYmPXAxjnwtqLQiKwAm6JRL
+ c2jY08v/7H4wg==
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4hTCyv2KZJzhsC; Mon, 24 Aug 2026 16:31:35 +0200 (CEST)
+Message-ID: <19ba2ba9-57d9-40a5-b75b-69f3a63261d7@0leil.net>
+Date: Mon, 24 Aug 2026 16:31:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 24 Aug 2026 14:23:26 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] rockchip: rk3506: Update ENV_MEM_LAYOUT_SETTINGS
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+References: <20260803190946.2259514-1-jonas@kwiboo.se>
+ <20260803190946.2259514-3-jonas@kwiboo.se>
+ <574bc6fa-8469-417c-9418-023d1bd0eb29@0leil.net>
+ <363bae8f-de1b-4e74-b6f9-de35efc7e119@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <363bae8f-de1b-4e74-b6f9-de35efc7e119@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,1282 +100,224 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add pinctrl support for the s4. This is a direct adaptation of Linux
-commit 775214d389c25 ("pinctrl: meson: add pinctrl driver support for
-Meson-S4 Soc") with fixes through 7.2.
+Hi Jonas,
 
-=> pinmux status -a
---------------------------
-pinctrl@4000:
-GPIOE_0   : emmc_nand_d0 (1)
-GPIOE_1   : emmc_nand_d1 (1)
-GPIOB_0   : emmc_nand_d2 (1)
-GPIOB_1   : emmc_nand_d3 (1)
-GPIOB_2   : emmc_nand_d4 (1)
-GPIOB_3   : emmc_nand_d5 (1)
-GPIOB_4   : emmc_nand_d6 (1)
-GPIOB_5   : emmc_nand_d7 (1)
-GPIOB_6   : emmc_clk (1)
-GPIOB_7   : GPIOB_9 (0)
-GPIOB_8   : emmc_cmd (1)
-GPIOB_9   : emmc_nand_ds (1)
-GPIOB_10  : nand_ce0 (2)
-GPIOB_11  : spif_cs (3)
-GPIOB_12  : sdcard_d0_c (1)
-GPIOB_13  : sdcard_d1_c (1)
-GPIOC_0   : sdcard_d2_c (1)
-GPIOC_1   : sdcard_d3_c (1)
-GPIOC_2   : sdcard_clk_c (1)
-GPIOC_3   : sdcard_cmd_c (1)
-GPIOC_4   : GPIOC_6 (0)
-GPIOC_5   : GPIOC_7 (0)
-GPIOC_6   : pwm_h (3)
-GPIOC_7   : pwm_j (3)
-GPIOD_0   : uart_b_tx_d (1)
-GPIOD_1   : uart_b_rx_d (1)
-GPIOD_2   : GPIOD_2 (0)
-GPIOD_3   : GPIOD_3 (0)
-GPIOD_4   : GPIOD_4 (0)
-GPIOD_5   : GPIOD_5 (0)
-GPIOD_6   : jtag_1_clk (1)
-GPIOD_7   : jtag_1_tms (1)
-GPIOD_8   : jtag_1_tdi (1)
-GPIOD_9   : jtag_1_tdo (1)
-GPIOD_10  : GPIOD_10 (0)
-GPIOD_11  : GPIOD_11 (0)
-GPIOH_0   : GPIOH_0 (0)
-GPIOH_1   : GPIOH_1 (0)
-GPIOH_2   : GPIOH_2 (0)
-GPIOH_3   : GPIOH_3 (0)
-GPIOH_4   : GPIOH_4 (0)
-GPIOH_5   : GPIOH_5 (0)
-GPIOH_6   : GPIOH_6 (0)
-GPIOH_7   : GPIOH_7 (0)
-GPIOH_8   : GPIOH_8 (0)
-GPIOH_9   : GPIOH_9 (0)
-GPIOH_10  : eth_link_led (1)
-GPIOH_11  : eth_act_led (1)
-GPIOX_0   : sdio_d0 (1)
-GPIOX_1   : sdio_d1 (1)
-GPIOX_2   : sdio_d2 (1)
-GPIOX_3   : sdio_d3 (1)
-GPIOX_4   : sdio_clk (1)
-GPIOX_5   : sdio_cmd (1)
-GPIOX_6   : GPIOX_6 (0)
-GPIOX_7   : GPIOX_7 (0)
-GPIOX_8   : GPIOX_8 (0)
-GPIOX_9   : GPIOX_9 (0)
-GPIOX_10  : GPIOX_10 (0)
-GPIOX_11  : GPIOX_11 (0)
-GPIOX_12  : GPIOX_12 (0)
-GPIOX_13  : GPIOX_13 (0)
-GPIOX_14  : GPIOX_14 (0)
-GPIOX_15  : GPIOX_15 (0)
-GPIOX_16  : GPIOX_16 (0)
-GPIOX_17  : GPIOX_17 (0)
-GPIOX_18  : GPIOX_18 (0)
-GPIOX_19  : GPIOX_19 (0)
-GPIOZ_0   : GPIOZ_0 (0)
-GPIOZ_1   : GPIOZ_1 (0)
-GPIOZ_2   : GPIOZ_2 (0)
-GPIOZ_3   : GPIOZ_3 (0)
-GPIOZ_4   : GPIOZ_4 (0)
-GPIOZ_5   : GPIOZ_5 (0)
-GPIOZ_6   : GPIOZ_6 (0)
-GPIOZ_7   : GPIOZ_7 (0)
-GPIOZ_8   : GPIOZ_8 (0)
-GPIOZ_9   : GPIOZ_9 (0)
-GPIOZ_10  : GPIOZ_10 (0)
-GPIOZ_11  : GPIOZ_11 (0)
-GPIOZ_12  : GPIOZ_12 (0)
-GPIO_TEST : GPIO_TEST_N (0)
+On 8/13/26 11:09 AM, Jonas Karlman wrote:
+> Hi Quentin,
+> 
+> On 8/12/2026 11:49 AM, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 8/3/26 9:09 PM, Jonas Karlman wrote:
+>>> The RK3506G1 has 64 MiB integrated DDR2, the RK3506G2 has 128 MiB
+>>> integrated DDR3 and the RK3506B support external memory up to 1 GiB.
+>>>
+>>> Current memory layout cause issues using compressed kernels or ramdisk
+>>> due to the default load addresses being used.
+>>>
+>>
+>> RK3506 is an Aarch32 SoC, and Linux kernels on that architecture are
+>> self-decompressing, U-Boot doesn't do anything with compressed kernels.
+>> You can see that kernel_comp_addr_r is only ever used in cmd/booti.c
+>> which depends on ARM64 to be actually built.
+>>
+>> I simply recommend getting rid of this variable as it's quite
+>> misleading. All other Aarch32 Rockchip SoCs we support don't seem to be
+>> setting this variable, so no additional cleanup to do.
+>> Same for kernel_comp_size.
+> 
+> Thanks for looking deeper, I will drop these two in v2.
+> 
+>>
+>>> Change the default load addresses to also work on SoC variants with
+>>> limited memory, keep all default addresses in the 0-64 MiB range.
+>>>
+>>> 			 old		 new
+>>>     scriptaddr		5 MiB		2 MiB
+>>>     pxefile_addr_r	6 MiB		1 MiB
+>>>     kernel_addr_r		32.5 MiB	8 MiB
+>>>     kernel_comp_addr_r	128 MiB		48 MiB
+>>>     fdt_addr_r		30.5 MiB	4 MiB
+>>>     fdtoverlay_addr_r	31.5 MiB	6 MiB
+>>>     ramdisk_addr_r	96 MiB		48 MiB
+>>
+>> That leaves less than 18MiB for an initramfs (don't forget U-Boot proper
+>> is located at the end of the DRAM as far as I remember), which is very
+>> little.
+>>
+>> Do we really need 2MiB for the DTB and DTBO? 1MiB ought to be enough for
+>> the DTB and I'm sure less than 1MiB ought to be enough per overlay
+>> (overlay are loaded and applied one after the other). This should free
+>> an additional 2MiB for either the kernel or initramfs.
+> 
+> Agree, I thought I had seen DTB may need to use a 4 MiB aligned address,
+> e.g. for RISC-V, but ARM seem to only need it to be any 64-bit aligned
+> address.
+> 
 
-Signed-off-by: Sean Anderson <sanderson@brivo.com>
----
+8-byte alignment is required by the Device Tree spec, c.f. 
+https://devicetree-specification.readthedocs.io/en/latest/chapter5-flattened-format.html#alignment
 
-Changes in v2:
-- Add comment to probe on why we're overriding reg_ds
+>>
+>> The multi_v5_defconfig and multi_v7_defconfig zImage kernels as built by
+>> KernelCI are respectively 7.5 and 11.6MiB as of yesterday, c.f.
+>> https://dashboard.kernelci.org/build/maestro%3A6a7b3f4762f33761c0aedc06
+>> https://dashboard.kernelci.org/build/maestro%3A6a7b3f6562f33761c0aedc2f
+>> So maybe we can reserve a bit less than 40MiB for the kernel? But maybe
+>> kernel_addr_r is also used for FIT images which may be much bigger than
+>> the size of the kernel alone? The load/entry properties are required for
+>> images of type kernel according to the FIT spec so that part isn't
+>> something we need to deal with.
+> 
+> My local Rockchip ARMv7 kernel without loadable module support is now
+> around 26M for Image and 9.9M for zImage, it used to be just below 32M
+> for Image when I also enabled more debugging options and partial support
+> for other SoCs. So support for up to 32M uncompressed would be nice :-)
+> 
 
- drivers/pinctrl/meson/Kconfig            |    4 +
- drivers/pinctrl/meson/Makefile           |    1 +
- drivers/pinctrl/meson/pinctrl-meson-s4.c | 1142 ++++++++++++++++++++++
- 3 files changed, 1147 insertions(+)
- create mode 100644 drivers/pinctrl/meson/pinctrl-meson-s4.c
+What's the benefit of using an uncompressed image in your workflow?
 
-diff --git a/drivers/pinctrl/meson/Kconfig b/drivers/pinctrl/meson/Kconfig
-index 97e574330fb..2e076c3cd80 100644
---- a/drivers/pinctrl/meson/Kconfig
-+++ b/drivers/pinctrl/meson/Kconfig
-@@ -33,4 +33,8 @@ config PINCTRL_MESON_A1
- 	bool "Amlogic Meson A1 SoC pinctrl driver"
- 	select PINCTRL_MESON_AXG_PMX
- 
-+config PINCTRL_MESON_S4
-+	bool "Amlogic Meson S4 SoC pinctrl driver"
-+	select PINCTRL_MESON_AXG_PMX
-+
- endif
-diff --git a/drivers/pinctrl/meson/Makefile b/drivers/pinctrl/meson/Makefile
-index 8d10d027ac6..ce7cbc3f36d 100644
---- a/drivers/pinctrl/meson/Makefile
-+++ b/drivers/pinctrl/meson/Makefile
-@@ -8,3 +8,4 @@ obj-$(CONFIG_PINCTRL_MESON_GXL)		+= pinctrl-meson-gxl.o
- obj-$(CONFIG_PINCTRL_MESON_AXG)		+= pinctrl-meson-axg.o
- obj-$(CONFIG_PINCTRL_MESON_G12A)	+= pinctrl-meson-g12a.o
- obj-$(CONFIG_PINCTRL_MESON_A1)		+= pinctrl-meson-a1.o
-+obj-$(CONFIG_PINCTRL_MESON_S4)		+= pinctrl-meson-s4.o
-diff --git a/drivers/pinctrl/meson/pinctrl-meson-s4.c b/drivers/pinctrl/meson/pinctrl-meson-s4.c
-new file mode 100644
-index 00000000000..86039192590
---- /dev/null
-+++ b/drivers/pinctrl/meson/pinctrl-meson-s4.c
-@@ -0,0 +1,1142 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Pin controller and GPIO driver for Amlogic Meson S4 SoC.
-+ *
-+ * Copyright (c) 2021 Amlogic, Inc. All rights reserved.
-+ * Author: Qianggui Song <qianggui.song@amlogic.com>
-+ */
-+
-+#include <dm.h>
-+#include <dm/pinctrl.h>
-+#include <dt-bindings/gpio/meson-s4-gpio.h>
-+
-+#include "pinctrl-meson-axg.h"
-+
-+/* BANK E func1 */
-+static const unsigned int i2c0_sda_pins[]		= { GPIOE_0 };
-+static const unsigned int i2c0_scl_pins[]		= { GPIOE_1 };
-+
-+/* BANK E func2 */
-+static const unsigned int uart_b_tx_e_pins[]		= { GPIOE_0 };
-+static const unsigned int uart_b_rx_e_pins[]		= { GPIOE_1 };
-+
-+/* BANK E func3 */
-+static const unsigned int pwm_h_pins[]			= { GPIOE_0 };
-+static const unsigned int pwm_j_pins[]			= { GPIOE_1 };
-+
-+/* BANK B func1 */
-+static const unsigned int emmc_nand_d0_pins[]		= { GPIOB_0 };
-+static const unsigned int emmc_nand_d1_pins[]		= { GPIOB_1 };
-+static const unsigned int emmc_nand_d2_pins[]		= { GPIOB_2 };
-+static const unsigned int emmc_nand_d3_pins[]		= { GPIOB_3 };
-+static const unsigned int emmc_nand_d4_pins[]		= { GPIOB_4 };
-+static const unsigned int emmc_nand_d5_pins[]		= { GPIOB_5 };
-+static const unsigned int emmc_nand_d6_pins[]		= { GPIOB_6 };
-+static const unsigned int emmc_nand_d7_pins[]		= { GPIOB_7 };
-+static const unsigned int emmc_clk_pins[]		= { GPIOB_8 };
-+static const unsigned int emmc_rst_pins[]		= { GPIOB_9 };
-+static const unsigned int emmc_cmd_pins[]		= { GPIOB_10 };
-+static const unsigned int emmc_nand_ds_pins[]		= { GPIOB_11 };
-+
-+/* Bank B func2 */
-+static const unsigned int nand_wen_clk_pins[]		= { GPIOB_8 };
-+static const unsigned int nand_ale_pins[]		= { GPIOB_9 };
-+static const unsigned int nand_ren_wr_pins[]		= { GPIOB_10 };
-+static const unsigned int nand_cle_pins[]		= { GPIOB_11 };
-+static const unsigned int nand_ce0_pins[]		= { GPIOB_12 };
-+
-+/* Bank B func3 */
-+static const unsigned int spif_hold_pins[]		= { GPIOB_3 };
-+static const unsigned int spif_mo_pins[]		= { GPIOB_4 };
-+static const unsigned int spif_mi_pins[]		= { GPIOB_5 };
-+static const unsigned int spif_clk_pins[]		= { GPIOB_6 };
-+static const unsigned int spif_wp_pins[]		= { GPIOB_7 };
-+static const unsigned int spif_cs_pins[]		= { GPIOB_13 };
-+
-+/* Bank C func1 */
-+static const unsigned int sdcard_d0_c_pins[]		= { GPIOC_0 };
-+static const unsigned int sdcard_d1_c_pins[]		= { GPIOC_1 };
-+static const unsigned int sdcard_d2_c_pins[]		= { GPIOC_2 };
-+static const unsigned int sdcard_d3_c_pins[]		= { GPIOC_3 };
-+static const unsigned int sdcard_clk_c_pins[]		= { GPIOC_4 };
-+static const unsigned int sdcard_cmd_c_pins[]		= { GPIOC_5 };
-+static const unsigned int sdcard_cd_pins[]		= { GPIOC_6 };
-+
-+/* Bank C func2 */
-+static const unsigned int jtag_2_tdo_pins[]		= { GPIOC_0 };
-+static const unsigned int jtag_2_tdi_pins[]		= { GPIOC_1 };
-+static const unsigned int uart_b_rx_c_pins[]		= { GPIOC_2 };
-+static const unsigned int uart_b_tx_c_pins[]		= { GPIOC_3 };
-+static const unsigned int jtag_2_clk_pins[]		= { GPIOC_4 };
-+static const unsigned int jtag_2_tms_pins[]		= { GPIOC_5 };
-+static const unsigned int i2c1_sda_c_pins[]		= { GPIOC_6 };
-+static const unsigned int i2c1_scl_c_pins[]		= { GPIOC_7 };
-+
-+/* Bank C func3 */
-+static const unsigned int pdm_din1_c_pins[]		= { GPIOC_0 };
-+static const unsigned int pdm_din0_c_pins[]		= { GPIOC_1 };
-+static const unsigned int i2c4_sda_c_pins[]		= { GPIOC_2 };
-+static const unsigned int i2c4_scl_c_pins[]		= { GPIOC_3 };
-+static const unsigned int pdm_dclk_c_pins[]		= { GPIOC_4 };
-+static const unsigned int iso7816_clk_c_pins[]		= { GPIOC_5 };
-+static const unsigned int iso7816_data_c_pins[]		= { GPIOC_6 };
-+
-+/* Bank C func4 */
-+static const unsigned int tdm_d2_c_pins[]		= { GPIOC_0 };
-+static const unsigned int tdm_d3_c_pins[]		= { GPIOC_1 };
-+static const unsigned int tdm_fs1_c_pins[]		= { GPIOC_2 };
-+static const unsigned int tdm_sclk1_c_pins[]		= { GPIOC_3 };
-+static const unsigned int mclk_1_c_pins[]		= { GPIOC_4 };
-+static const unsigned int tdm_d4_c_pins[]		= { GPIOC_5 };
-+static const unsigned int tdm_d5_c_pins[]		= { GPIOC_6 };
-+
-+/* Bank D func1 */
-+static const unsigned int uart_b_tx_d_pins[]		= { GPIOD_0 };
-+static const unsigned int uart_b_rx_d_pins[]		= { GPIOD_1 };
-+static const unsigned int uart_b_cts_d_pins[]		= { GPIOD_2 };
-+static const unsigned int uart_b_rts_d_pins[]		= { GPIOD_3 };
-+static const unsigned int remote_out_pins[]		= { GPIOD_4 };
-+static const unsigned int remote_in_pins[]		= { GPIOD_5 };
-+static const unsigned int jtag_1_clk_pins[]		= { GPIOD_6 };
-+static const unsigned int jtag_1_tms_pins[]		= { GPIOD_7 };
-+static const unsigned int jtag_1_tdi_pins[]		= { GPIOD_8 };
-+static const unsigned int jtag_1_tdo_pins[]		= { GPIOD_9 };
-+static const unsigned int clk12_24_pins[]		= { GPIOD_10 };
-+static const unsigned int pwm_g_hiz_pins[]		= { GPIOD_11 };
-+
-+/* Bank D func2 */
-+static const unsigned int i2c4_sda_d_pins[]		= { GPIOD_2 };
-+static const unsigned int i2c4_scl_d_pins[]		= { GPIOD_3 };
-+static const unsigned int mclk_1_d_pins[]		= { GPIOD_4 };
-+static const unsigned int tdm_sclk1_d_pins[]		= { GPIOD_6 };
-+static const unsigned int tdm_fs1_d_pins[]		= { GPIOD_7 };
-+static const unsigned int tdm_d4_d_pins[]		= { GPIOD_8 };
-+static const unsigned int tdm_d3_d_pins[]		= { GPIOD_9 };
-+static const unsigned int tdm_d2_d_pins[]		= { GPIOD_10 };
-+static const unsigned int pwm_g_d_pins[]		= { GPIOD_11 };
-+
-+/* Bank D func3 */
-+static const unsigned int uart_c_tx_pins[]		= { GPIOD_2 };
-+static const unsigned int uart_c_rx_pins[]		= { GPIOD_3 };
-+static const unsigned int pwm_b_d_pins[]		= { GPIOD_4 };
-+static const unsigned int pwm_a_d_pins[]		= { GPIOD_6 };
-+static const unsigned int pwm_c_d_pins[]		= { GPIOD_7 };
-+static const unsigned int pwm_d_d_pins[]		= { GPIOD_8 };
-+static const unsigned int pwm_i_d_pins[]		= { GPIOD_9 };
-+
-+/* Bank D func4 */
-+static const unsigned int clk_32k_in_pins[]		= { GPIOD_2 };
-+static const unsigned int pwm_b_hiz_pins[]		= { GPIOD_4 };
-+static const unsigned int pwm_a_hiz_pins[]		= { GPIOD_6 };
-+static const unsigned int pwm_c_hiz_pins[]		= { GPIOD_7 };
-+static const unsigned int pdm_dclk_d_pins[]		= { GPIOD_8 };
-+static const unsigned int pdm_din0_d_pins[]		= { GPIOD_9 };
-+static const unsigned int pdm_din1_d_pins[]		= { GPIOD_10 };
-+
-+/* Bank D func5 */
-+static const unsigned int mic_mute_en_pins[]		= { GPIOD_2 };
-+static const unsigned int mic_mute_key_pins[]		= { GPIOD_3 };
-+static const unsigned int i2c1_sda_d_pins[]		= { GPIOD_6 };
-+static const unsigned int i2c1_scl_d_pins[]		= { GPIOD_7 };
-+static const unsigned int i2c2_sda_d_pins[]		= { GPIOD_10 };
-+static const unsigned int i2c2_scl_d_pins[]		= { GPIOD_11 };
-+
-+/* Bank D func6 */
-+static const unsigned int gen_clk_d_pins[]		= { GPIOD_10 };
-+static const unsigned int tsin_b_clk_c_pins[]		= { GPIOD_6 };
-+static const unsigned int tsin_b_sop_c_pins[]		= { GPIOD_7 };
-+static const unsigned int tsin_b_valid_c_pins[]		= { GPIOD_8 };
-+static const unsigned int tsin_b_d0_c_pins[]		= { GPIOD_9 };
-+
-+/* Bank H func1 */
-+static const unsigned int hdmitx_sda_pins[]		= { GPIOH_0 };
-+static const unsigned int hdmitx_sck_pins[]		= { GPIOH_1 };
-+static const unsigned int hdmitx_hpd_in_pins[]		= { GPIOH_2 };
-+static const unsigned int ao_cec_a_pins[]		= { GPIOH_3 };
-+static const unsigned int spdif_out_h_pins[]		= { GPIOH_4 };
-+static const unsigned int spdif_in_pins[]		= { GPIOH_5 };
-+static const unsigned int i2c1_sda_h_pins[]		= { GPIOH_6 };
-+static const unsigned int i2c1_scl_h_pins[]		= { GPIOH_7 };
-+static const unsigned int i2c2_sda_h8_pins[]		= { GPIOH_8 };
-+static const unsigned int i2c2_scl_h9_pins[]		= { GPIOH_9 };
-+static const unsigned int eth_link_led_pins[]		= { GPIOH_10 };
-+static const unsigned int eth_act_led_pins[]		= { GPIOH_11 };
-+
-+/* Bank H func2 */
-+static const unsigned int i2c2_sda_h0_pins[]		= { GPIOH_0 };
-+static const unsigned int i2c2_scl_h1_pins[]		= { GPIOH_1 };
-+static const unsigned int ao_cec_b_pins[]		= { GPIOH_3 };
-+static const unsigned int uart_d_tx_h_pins[]		= { GPIOH_4 };
-+static const unsigned int uart_d_rx_h_pins[]		= { GPIOH_5 };
-+static const unsigned int uart_d_cts_h_pins[]		= { GPIOH_6 };
-+static const unsigned int uart_d_rts_h_pins[]		= { GPIOH_7 };
-+static const unsigned int iso7816_clk_h_pins[]		= { GPIOH_8 };
-+static const unsigned int iso7816_data_h_pins[]		= { GPIOH_9 };
-+static const unsigned int uart_e_tx_h_pins[]		= { GPIOH_10 };
-+static const unsigned int uart_e_rx_h_pins[]		= { GPIOH_11 };
-+
-+/* Bank H func3 */
-+static const unsigned int pwm_d_h_pins[]		= { GPIOH_6 };
-+static const unsigned int pwm_i_h_pins[]		= { GPIOH_7 };
-+static const unsigned int pdm_dclk_h_pins[]		= { GPIOH_8 };
-+static const unsigned int pdm_din0_h_pins[]		= { GPIOH_9 };
-+static const unsigned int pdm_din1_h_pins[]		= { GPIOH_10 };
-+
-+/* Bank H func4 */
-+static const unsigned int mclk_1_h_pins[]		= { GPIOH_4 };
-+static const unsigned int tdm_sclk1_h_pins[]		= { GPIOH_5 };
-+static const unsigned int tdm_fs1_h_pins[]		= { GPIOH_6 };
-+static const unsigned int tdm_d2_h_pins[]		= { GPIOH_7 };
-+static const unsigned int tdm_d3_h_pins[]		= { GPIOH_8 };
-+static const unsigned int tdm_d4_h_pins[]		= { GPIOH_9 };
-+
-+/* Bank H func5 */
-+static const unsigned int spi_a_miso_h_pins[]		= { GPIOH_4 };
-+static const unsigned int spi_a_mosi_h_pins[]		= { GPIOH_5 };
-+static const unsigned int spi_a_clk_h_pins[]		= { GPIOH_6 };
-+static const unsigned int spi_a_ss0_h_pins[]		= { GPIOH_7 };
-+
-+/* Bank H func6 */
-+static const unsigned int gen_clk_h_pins[]		= { GPIOH_11 };
-+static const unsigned int tsin_b1_clk_pins[]		= { GPIOH_4 };
-+static const unsigned int tsin_b1_sop_pins[]		= { GPIOH_5 };
-+static const unsigned int tsin_b1_valid_pins[]		= { GPIOH_6 };
-+static const unsigned int tsin_b1_d0_pins[]		= { GPIOH_7 };
-+
-+/* Bank X func1 */
-+static const unsigned int sdio_d0_pins[]		= { GPIOX_0 };
-+static const unsigned int sdio_d1_pins[]		= { GPIOX_1 };
-+static const unsigned int sdio_d2_pins[]		= { GPIOX_2 };
-+static const unsigned int sdio_d3_pins[]		= { GPIOX_3 };
-+static const unsigned int sdio_clk_pins[]		= { GPIOX_4 };
-+static const unsigned int sdio_cmd_pins[]		= { GPIOX_5 };
-+static const unsigned int pwm_a_x_pins[]		= { GPIOX_6 };
-+static const unsigned int pwm_f_x_pins[]		= { GPIOX_7 };
-+static const unsigned int tdm_d1_pins[]			= { GPIOX_8 };
-+static const unsigned int tdm_d0_pins[]			= { GPIOX_9 };
-+static const unsigned int tdm_fs0_pins[]		= { GPIOX_10 };
-+static const unsigned int tdm_sclk0_pins[]		= { GPIOX_11 };
-+static const unsigned int uart_a_tx_pins[]		= { GPIOX_12 };
-+static const unsigned int uart_a_rx_pins[]		= { GPIOX_13 };
-+static const unsigned int uart_a_cts_pins[]		= { GPIOX_14 };
-+static const unsigned int uart_a_rts_pins[]		= { GPIOX_15 };
-+static const unsigned int pwm_e_x_pins[]		= { GPIOX_16 };
-+static const unsigned int i2c1_sda_x_pins[]		= { GPIOX_17 };
-+static const unsigned int i2c1_scl_x_pins[]		= { GPIOX_18 };
-+static const unsigned int pwm_b_x_pins[]		= { GPIOX_19 };
-+
-+/* Bank X func2 */
-+static const unsigned int pdm_din0_x_pins[]		= { GPIOX_8 };
-+static const unsigned int pdm_din1_x_pins[]		= { GPIOX_9 };
-+static const unsigned int pdm_dclk_x_pins[]		= { GPIOX_11 };
-+
-+/* Bank X func3 */
-+static const unsigned int spi_a_mosi_x_pins[]		= { GPIOX_8 };
-+static const unsigned int spi_a_miso_x_pins[]		= { GPIOX_9 };
-+static const unsigned int spi_a_ss0_x_pins[]		= { GPIOX_10 };
-+static const unsigned int spi_a_clk_x_pins[]		= { GPIOX_11 };
-+
-+/* Bank X func4 */
-+static const unsigned int pwm_c_x_pins[]		= { GPIOX_8 };
-+static const unsigned int i2c_slave_scl_pins[]		= { GPIOX_10 };
-+static const unsigned int i2c_slave_sda_pins[]		= { GPIOX_11 };
-+
-+/* Bank X func5 */
-+static const unsigned int i2c3_sda_x_pins[]		= { GPIOX_10 };
-+static const unsigned int i2c3_scl_x_pins[]		= { GPIOX_11 };
-+
-+/* Bank Z func1 */
-+static const unsigned int tdm_fs2_pins[]		= { GPIOZ_0 };
-+static const unsigned int tdm_sclk2_pins[]		= { GPIOZ_1 };
-+static const unsigned int tdm_d4_z_pins[]		= { GPIOZ_2 };
-+static const unsigned int tdm_d5_z_pins[]		= { GPIOZ_3 };
-+static const unsigned int tdm_d6_pins[]			= { GPIOZ_4 };
-+static const unsigned int tdm_d7_pins[]			= { GPIOZ_5 };
-+static const unsigned int mclk_2_pins[]			= { GPIOZ_6 };
-+static const unsigned int spdif_out_z_pins[]		= { GPIOZ_9 };
-+static const unsigned int dtv_a_if_agc_z10_pins[]	= { GPIOZ_10 };
-+static const unsigned int uart_e_tx_z11_pins[]		= { GPIOZ_11 };
-+static const unsigned int uart_e_rx_z12_pins[]		= { GPIOZ_12 };
-+
-+/* Bank Z func2 */
-+static const unsigned int tsin_a_clk_pins[]		= { GPIOZ_0 };
-+static const unsigned int tsin_a_sop_pins[]		= { GPIOZ_1 };
-+static const unsigned int tsin_a_valid_pins[]		= { GPIOZ_2 };
-+static const unsigned int tsin_a_din0_pins[]		= { GPIOZ_3 };
-+static const unsigned int dtv_a_if_agc_z6_pins[]	= { GPIOZ_6 };
-+static const unsigned int dtv_b_if_agc_pins[]		= { GPIOZ_7 };
-+static const unsigned int i2c3_sda_z_pins[]		= { GPIOZ_8 };
-+static const unsigned int i2c3_scl_z_pins[]		= { GPIOZ_9 };
-+static const unsigned int dtv_a_rf_agc_pins[]		= { GPIOZ_10 };
-+static const unsigned int dtv_b_rf_agc_pins[]		= { GPIOZ_11 };
-+
-+/* Bank Z func3 */
-+static const unsigned int sdcard_d0_z_pins[]		= { GPIOZ_0 };
-+static const unsigned int sdcard_d1_z_pins[]		= { GPIOZ_1 };
-+static const unsigned int sdcard_d2_z_pins[]		= { GPIOZ_2 };
-+static const unsigned int sdcard_d3_z_pins[]		= { GPIOZ_3 };
-+static const unsigned int sdcard_clk_z_pins[]		= { GPIOZ_4 };
-+static const unsigned int sdcard_cmd_z_pins[]		= { GPIOZ_5 };
-+static const unsigned int uart_e_tx_z8_pins[]		= { GPIOZ_8 };
-+static const unsigned int uart_e_rx_z9_pins[]		= { GPIOZ_9 };
-+static const unsigned int pdm_din1_z_pins[]		= { GPIOZ_10 };
-+static const unsigned int pdm_din0_z_pins[]		= { GPIOZ_11 };
-+static const unsigned int pdm_dclk_z_pins[]		= { GPIOZ_12 };
-+
-+/* Bank Z func4 */
-+static const unsigned int spi_a_miso_z_pins[]		= { GPIOZ_0 };
-+static const unsigned int spi_a_mosi_z_pins[]		= { GPIOZ_1 };
-+static const unsigned int spi_a_clk_z_pins[]		= { GPIOZ_2 };
-+static const unsigned int spi_a_ss0_z_pins[]		= { GPIOZ_3 };
-+static const unsigned int spi_a_ss1_z_pins[]		= { GPIOZ_4 };
-+static const unsigned int spi_a_ss2_z_pins[]		= { GPIOZ_5 };
-+static const unsigned int i2c4_scl_z_pins[]		= { GPIOZ_11 };
-+static const unsigned int i2c4_sda_z_pins[]		= { GPIOZ_12 };
-+
-+/* Bank Z func5 */
-+static const unsigned int uart_d_tx_z_pins[]		= { GPIOZ_0 };
-+static const unsigned int uart_d_rx_z_pins[]		= { GPIOZ_1 };
-+static const unsigned int uart_d_cts_z_pins[]		= { GPIOZ_2 };
-+static const unsigned int uart_d_rts_z_pins[]		= { GPIOZ_3 };
-+static const unsigned int pwm_g_z_pins[]		= { GPIOZ_4 };
-+static const unsigned int pwm_f_z_pins[]		= { GPIOZ_5 };
-+static const unsigned int pwm_e_z_pins[]		= { GPIOZ_6 };
-+static const unsigned int tsin_b_clk_z_pins[]		= { GPIOZ_7 };
-+static const unsigned int tsin_b_sop_z_pins[]		= { GPIOZ_10 };
-+static const unsigned int tsin_b_valid_z_pins[]		= { GPIOZ_11 };
-+static const unsigned int tsin_b_d0_z_pins[]		= { GPIOZ_12 };
-+
-+/* Bank Z func6 */
-+static const unsigned int s2_demod_gpio7_pins[]		= { GPIOZ_0 };
-+static const unsigned int s2_demod_gpio6_pins[]		= { GPIOZ_1 };
-+static const unsigned int s2_demod_gpio5_pins[]		= { GPIOZ_2 };
-+static const unsigned int s2_demod_gpio4_pins[]		= { GPIOZ_3 };
-+static const unsigned int s2_demod_gpio3_pins[]		= { GPIOZ_4 };
-+static const unsigned int s2_demod_gpio2_pins[]		= { GPIOZ_5 };
-+static const unsigned int diseqc_out_pins[]		= { GPIOZ_7 };
-+static const unsigned int s2_demod_gpio1_pins[]		= { GPIOZ_8 };
-+static const unsigned int s2_demod_gpio0_pins[]		= { GPIOZ_12 };
-+
-+/* Bank Z func7 */
-+static const unsigned int gen_clk_z9_pins[]		= { GPIOZ_9 };
-+static const unsigned int gen_clk_z12_pins[]		= { GPIOZ_12 };
-+
-+static struct meson_pmx_group meson_s4_periphs_groups[] = {
-+	GPIO_GROUP(GPIOE_0, 0),
-+	GPIO_GROUP(GPIOE_1, 0),
-+
-+	GPIO_GROUP(GPIOB_0, 0),
-+	GPIO_GROUP(GPIOB_1, 0),
-+	GPIO_GROUP(GPIOB_2, 0),
-+	GPIO_GROUP(GPIOB_3, 0),
-+	GPIO_GROUP(GPIOB_4, 0),
-+	GPIO_GROUP(GPIOB_5, 0),
-+	GPIO_GROUP(GPIOB_6, 0),
-+	GPIO_GROUP(GPIOB_7, 0),
-+	GPIO_GROUP(GPIOB_8, 0),
-+	GPIO_GROUP(GPIOB_9, 0),
-+	GPIO_GROUP(GPIOB_10, 0),
-+	GPIO_GROUP(GPIOB_11, 0),
-+	GPIO_GROUP(GPIOB_12, 0),
-+	GPIO_GROUP(GPIOB_13, 0),
-+
-+	GPIO_GROUP(GPIOC_0, 0),
-+	GPIO_GROUP(GPIOC_1, 0),
-+	GPIO_GROUP(GPIOC_2, 0),
-+	GPIO_GROUP(GPIOC_3, 0),
-+	GPIO_GROUP(GPIOC_4, 0),
-+	GPIO_GROUP(GPIOC_5, 0),
-+	GPIO_GROUP(GPIOC_6, 0),
-+	GPIO_GROUP(GPIOC_7, 0),
-+
-+	GPIO_GROUP(GPIOD_0, 0),
-+	GPIO_GROUP(GPIOD_1, 0),
-+	GPIO_GROUP(GPIOD_2, 0),
-+	GPIO_GROUP(GPIOD_3, 0),
-+	GPIO_GROUP(GPIOD_4, 0),
-+	GPIO_GROUP(GPIOD_5, 0),
-+	GPIO_GROUP(GPIOD_6, 0),
-+	GPIO_GROUP(GPIOD_7, 0),
-+	GPIO_GROUP(GPIOD_8, 0),
-+	GPIO_GROUP(GPIOD_9, 0),
-+	GPIO_GROUP(GPIOD_10, 0),
-+	GPIO_GROUP(GPIOD_11, 0),
-+
-+	GPIO_GROUP(GPIOH_0, 0),
-+	GPIO_GROUP(GPIOH_1, 0),
-+	GPIO_GROUP(GPIOH_2, 0),
-+	GPIO_GROUP(GPIOH_3, 0),
-+	GPIO_GROUP(GPIOH_4, 0),
-+	GPIO_GROUP(GPIOH_5, 0),
-+	GPIO_GROUP(GPIOH_6, 0),
-+	GPIO_GROUP(GPIOH_7, 0),
-+	GPIO_GROUP(GPIOH_8, 0),
-+	GPIO_GROUP(GPIOH_9, 0),
-+	GPIO_GROUP(GPIOH_10, 0),
-+	GPIO_GROUP(GPIOH_11, 0),
-+
-+	GPIO_GROUP(GPIOX_0, 0),
-+	GPIO_GROUP(GPIOX_1, 0),
-+	GPIO_GROUP(GPIOX_2, 0),
-+	GPIO_GROUP(GPIOX_3, 0),
-+	GPIO_GROUP(GPIOX_4, 0),
-+	GPIO_GROUP(GPIOX_5, 0),
-+	GPIO_GROUP(GPIOX_6, 0),
-+	GPIO_GROUP(GPIOX_7, 0),
-+	GPIO_GROUP(GPIOX_8, 0),
-+	GPIO_GROUP(GPIOX_9, 0),
-+	GPIO_GROUP(GPIOX_10, 0),
-+	GPIO_GROUP(GPIOX_11, 0),
-+	GPIO_GROUP(GPIOX_12, 0),
-+	GPIO_GROUP(GPIOX_13, 0),
-+	GPIO_GROUP(GPIOX_14, 0),
-+	GPIO_GROUP(GPIOX_15, 0),
-+	GPIO_GROUP(GPIOX_16, 0),
-+	GPIO_GROUP(GPIOX_17, 0),
-+	GPIO_GROUP(GPIOX_18, 0),
-+	GPIO_GROUP(GPIOX_19, 0),
-+
-+	GPIO_GROUP(GPIOZ_0, 0),
-+	GPIO_GROUP(GPIOZ_1, 0),
-+	GPIO_GROUP(GPIOZ_2, 0),
-+	GPIO_GROUP(GPIOZ_3, 0),
-+	GPIO_GROUP(GPIOZ_4, 0),
-+	GPIO_GROUP(GPIOZ_5, 0),
-+	GPIO_GROUP(GPIOZ_6, 0),
-+	GPIO_GROUP(GPIOZ_7, 0),
-+	GPIO_GROUP(GPIOZ_8, 0),
-+	GPIO_GROUP(GPIOZ_9, 0),
-+	GPIO_GROUP(GPIOZ_10, 0),
-+	GPIO_GROUP(GPIOZ_11, 0),
-+	GPIO_GROUP(GPIOZ_12, 0),
-+
-+	GPIO_GROUP(GPIO_TEST_N, 0),
-+
-+	/* BANK E func1 */
-+	GROUP(i2c0_sda,			1),
-+	GROUP(i2c0_scl,			1),
-+
-+	/* BANK E func2 */
-+	GROUP(uart_b_tx_e,		2),
-+	GROUP(uart_b_rx_e,		2),
-+
-+	/* BANK E func3 */
-+	GROUP(pwm_h,			3),
-+	GROUP(pwm_j,			3),
-+
-+	/* BANK B func1 */
-+	GROUP(emmc_nand_d0,		1),
-+	GROUP(emmc_nand_d1,		1),
-+	GROUP(emmc_nand_d2,		1),
-+	GROUP(emmc_nand_d3,		1),
-+	GROUP(emmc_nand_d4,		1),
-+	GROUP(emmc_nand_d5,		1),
-+	GROUP(emmc_nand_d6,		1),
-+	GROUP(emmc_nand_d7,		1),
-+	GROUP(emmc_clk,			1),
-+	GROUP(emmc_rst,			1),
-+	GROUP(emmc_cmd,			1),
-+	GROUP(emmc_nand_ds,		1),
-+
-+	/* Bank B func2 */
-+	GROUP(nand_wen_clk,		2),
-+	GROUP(nand_ale,			2),
-+	GROUP(nand_ren_wr,		2),
-+	GROUP(nand_cle,			2),
-+	GROUP(nand_ce0,			2),
-+
-+	/* Bank B func3 */
-+	GROUP(spif_hold,		3),
-+	GROUP(spif_mo,			3),
-+	GROUP(spif_mi,			3),
-+	GROUP(spif_clk,			3),
-+	GROUP(spif_wp,			3),
-+	GROUP(spif_cs,			3),
-+
-+	/* Bank C func1 */
-+	GROUP(sdcard_d0_c,		1),
-+	GROUP(sdcard_d1_c,		1),
-+	GROUP(sdcard_d2_c,		1),
-+	GROUP(sdcard_d3_c,		1),
-+	GROUP(sdcard_clk_c,		1),
-+	GROUP(sdcard_cmd_c,		1),
-+	GROUP(sdcard_cd,		1),
-+
-+	/* Bank C func2 */
-+	GROUP(jtag_2_tdo,		2),
-+	GROUP(jtag_2_tdi,		2),
-+	GROUP(uart_b_rx_c,		2),
-+	GROUP(uart_b_tx_c,		2),
-+	GROUP(jtag_2_clk,		2),
-+	GROUP(jtag_2_tms,		2),
-+	GROUP(i2c1_sda_c,		2),
-+	GROUP(i2c1_scl_c,		2),
-+
-+	/* Bank C func3 */
-+	GROUP(pdm_din1_c,		3),
-+	GROUP(pdm_din0_c,		3),
-+	GROUP(i2c4_sda_c,		3),
-+	GROUP(i2c4_scl_c,		3),
-+	GROUP(pdm_dclk_c,		3),
-+	GROUP(iso7816_clk_c,		3),
-+	GROUP(iso7816_data_c,		3),
-+
-+	/* Bank C func4 */
-+	GROUP(tdm_d2_c,			4),
-+	GROUP(tdm_d3_c,			4),
-+	GROUP(tdm_fs1_c,		4),
-+	GROUP(tdm_sclk1_c,		4),
-+	GROUP(mclk_1_c,			4),
-+	GROUP(tdm_d4_c,			4),
-+	GROUP(tdm_d5_c,			4),
-+
-+	/* Bank D func1 */
-+	GROUP(uart_b_tx_d,		1),
-+	GROUP(uart_b_rx_d,		1),
-+	GROUP(uart_b_cts_d,		1),
-+	GROUP(uart_b_rts_d,		1),
-+	GROUP(remote_out,		1),
-+	GROUP(remote_in,		1),
-+	GROUP(jtag_1_clk,		1),
-+	GROUP(jtag_1_tms,		1),
-+	GROUP(jtag_1_tdi,		1),
-+	GROUP(jtag_1_tdo,		1),
-+	GROUP(clk12_24,			1),
-+	GROUP(pwm_g_hiz,		1),
-+
-+	/* Bank D func2 */
-+	GROUP(i2c4_sda_d,		2),
-+	GROUP(i2c4_scl_d,		2),
-+	GROUP(mclk_1_d,			2),
-+	GROUP(tdm_sclk1_d,		2),
-+	GROUP(tdm_fs1_d,		2),
-+	GROUP(tdm_d4_d,			2),
-+	GROUP(tdm_d3_d,			2),
-+	GROUP(tdm_d2_d,			2),
-+	GROUP(pwm_g_d,			2),
-+
-+	/* Bank D func3 */
-+	GROUP(uart_c_tx,		3),
-+	GROUP(uart_c_rx,		3),
-+	GROUP(pwm_b_d,			3),
-+	GROUP(pwm_a_d,			3),
-+	GROUP(pwm_c_d,			3),
-+	GROUP(pwm_d_d,			3),
-+	GROUP(pwm_i_d,			3),
-+
-+	/* Bank D func4 */
-+	GROUP(clk_32k_in,		4),
-+	GROUP(pwm_b_hiz,		4),
-+	GROUP(pwm_a_hiz,		4),
-+	GROUP(pwm_c_hiz,		4),
-+	GROUP(pdm_dclk_d,		4),
-+	GROUP(pdm_din0_d,		4),
-+	GROUP(pdm_din1_d,		4),
-+
-+	/* Bank D func5 */
-+	GROUP(mic_mute_en,		5),
-+	GROUP(mic_mute_key,		5),
-+	GROUP(i2c1_sda_d,		5),
-+	GROUP(i2c1_scl_d,		5),
-+	GROUP(i2c2_sda_d,		5),
-+	GROUP(i2c2_scl_d,		5),
-+
-+	/* Bank D func6 */
-+	GROUP(gen_clk_d,		6),
-+	GROUP(tsin_b_clk_c,		6),
-+	GROUP(tsin_b_sop_c,		6),
-+	GROUP(tsin_b_valid_c,		6),
-+	GROUP(tsin_b_d0_c,		6),
-+
-+	/* Bank H func1 */
-+	GROUP(hdmitx_sda,		1),
-+	GROUP(hdmitx_sck,		1),
-+	GROUP(hdmitx_hpd_in,		1),
-+	GROUP(ao_cec_a,			1),
-+	GROUP(spdif_out_h,		1),
-+	GROUP(spdif_in,			1),
-+	GROUP(i2c1_sda_h,		1),
-+	GROUP(i2c1_scl_h,		1),
-+	GROUP(i2c2_sda_h8,		1),
-+	GROUP(i2c2_scl_h9,		1),
-+	GROUP(eth_link_led,		1),
-+	GROUP(eth_act_led,		1),
-+
-+	/* Bank H func2 */
-+	GROUP(i2c2_sda_h0,		2),
-+	GROUP(i2c2_scl_h1,		2),
-+	GROUP(ao_cec_b,			2),
-+	GROUP(uart_d_tx_h,		2),
-+	GROUP(uart_d_rx_h,		2),
-+	GROUP(uart_d_cts_h,		2),
-+	GROUP(uart_d_rts_h,		2),
-+	GROUP(iso7816_clk_h,		2),
-+	GROUP(iso7816_data_h,		2),
-+	GROUP(uart_e_tx_h,		2),
-+	GROUP(uart_e_rx_h,		2),
-+
-+	/* Bank H func3 */
-+	GROUP(pwm_d_h,			3),
-+	GROUP(pwm_i_h,			3),
-+	GROUP(pdm_dclk_h,		3),
-+	GROUP(pdm_din0_h,		3),
-+	GROUP(pdm_din1_h,		3),
-+
-+	/* Bank H func4 */
-+	GROUP(mclk_1_h,			4),
-+	GROUP(tdm_sclk1_h,		4),
-+	GROUP(tdm_fs1_h,		4),
-+	GROUP(tdm_d2_h,			4),
-+	GROUP(tdm_d3_h,			4),
-+	GROUP(tdm_d4_h,			4),
-+
-+	/* Bank H func5 */
-+	GROUP(spi_a_miso_h,		5),
-+	GROUP(spi_a_mosi_h,		5),
-+	GROUP(spi_a_clk_h,		5),
-+	GROUP(spi_a_ss0_h,		5),
-+
-+	/* Bank H func6 */
-+	GROUP(gen_clk_h,		6),
-+	GROUP(tsin_b1_clk,		6),
-+	GROUP(tsin_b1_sop,		6),
-+	GROUP(tsin_b1_valid,		6),
-+	GROUP(tsin_b1_d0,		6),
-+
-+	/* Bank X func1 */
-+	GROUP(sdio_d0,			1),
-+	GROUP(sdio_d1,			1),
-+	GROUP(sdio_d2,			1),
-+	GROUP(sdio_d3,			1),
-+	GROUP(sdio_clk,			1),
-+	GROUP(sdio_cmd,			1),
-+	GROUP(pwm_a_x,			1),
-+	GROUP(pwm_f_x,			1),
-+	GROUP(tdm_d1,			1),
-+	GROUP(tdm_d0,			1),
-+	GROUP(tdm_fs0,			1),
-+	GROUP(tdm_sclk0,		1),
-+	GROUP(uart_a_tx,		1),
-+	GROUP(uart_a_rx,		1),
-+	GROUP(uart_a_cts,		1),
-+	GROUP(uart_a_rts,		1),
-+	GROUP(pwm_e_x,			1),
-+	GROUP(i2c1_sda_x,		1),
-+	GROUP(i2c1_scl_x,		1),
-+	GROUP(pwm_b_x,			1),
-+
-+	/* Bank X func2 */
-+	GROUP(pdm_din0_x,		2),
-+	GROUP(pdm_din1_x,		2),
-+	GROUP(pdm_dclk_x,		2),
-+
-+	/* Bank X func3 */
-+	GROUP(spi_a_mosi_x,		3),
-+	GROUP(spi_a_miso_x,		3),
-+	GROUP(spi_a_ss0_x,		3),
-+	GROUP(spi_a_clk_x,		3),
-+
-+	/* Bank X func4 */
-+	GROUP(pwm_c_x,			4),
-+	GROUP(i2c_slave_scl,		4),
-+	GROUP(i2c_slave_sda,		4),
-+
-+	/* Bank X func5 */
-+	GROUP(i2c3_sda_x,		5),
-+	GROUP(i2c3_scl_x,		5),
-+
-+	/* Bank Z func1 */
-+	GROUP(tdm_fs2,			1),
-+	GROUP(tdm_sclk2,		1),
-+	GROUP(tdm_d4_z,			1),
-+	GROUP(tdm_d5_z,			1),
-+	GROUP(tdm_d6,			1),
-+	GROUP(tdm_d7,			1),
-+	GROUP(mclk_2,			1),
-+	GROUP(spdif_out_z,		1),
-+	GROUP(dtv_a_if_agc_z10,		1),
-+	GROUP(uart_e_tx_z11,		1),
-+	GROUP(uart_e_rx_z12,		1),
-+
-+	/* Bank Z func2 */
-+	GROUP(tsin_a_clk,		2),
-+	GROUP(tsin_a_sop,		2),
-+	GROUP(tsin_a_valid,		2),
-+	GROUP(tsin_a_din0,		2),
-+	GROUP(dtv_a_if_agc_z6,		2),
-+	GROUP(dtv_b_if_agc,		2),
-+	GROUP(i2c3_sda_z,		2),
-+	GROUP(i2c3_scl_z,		2),
-+	GROUP(dtv_a_rf_agc,		2),
-+	GROUP(dtv_b_rf_agc,		2),
-+
-+	/* Bank Z func3 */
-+	GROUP(sdcard_d0_z,		3),
-+	GROUP(sdcard_d1_z,		3),
-+	GROUP(sdcard_d2_z,		3),
-+	GROUP(sdcard_d3_z,		3),
-+	GROUP(sdcard_clk_z,		3),
-+	GROUP(sdcard_cmd_z,		3),
-+	GROUP(uart_e_tx_z8,		3),
-+	GROUP(uart_e_rx_z9,		3),
-+	GROUP(pdm_din1_z,		3),
-+	GROUP(pdm_din0_z,		3),
-+	GROUP(pdm_dclk_z,		3),
-+
-+	/* Bank Z func4 */
-+	GROUP(spi_a_miso_z,		4),
-+	GROUP(spi_a_mosi_z,		4),
-+	GROUP(spi_a_clk_z,		4),
-+	GROUP(spi_a_ss0_z,		4),
-+	GROUP(spi_a_ss1_z,		4),
-+	GROUP(spi_a_ss2_z,		4),
-+	GROUP(i2c4_scl_z,		4),
-+	GROUP(i2c4_sda_z,		4),
-+
-+	/* Bank Z func5 */
-+	GROUP(uart_d_tx_z,		5),
-+	GROUP(uart_d_rx_z,		5),
-+	GROUP(uart_d_cts_z,		5),
-+	GROUP(uart_d_rts_z,		5),
-+	GROUP(pwm_g_z,			5),
-+	GROUP(pwm_f_z,			5),
-+	GROUP(pwm_e_z,			5),
-+	GROUP(tsin_b_clk_z,		5),
-+	GROUP(tsin_b_sop_z,		5),
-+	GROUP(tsin_b_valid_z,		5),
-+	GROUP(tsin_b_d0_z,		5),
-+
-+	/* Bank Z func6 */
-+	GROUP(s2_demod_gpio7,		6),
-+	GROUP(s2_demod_gpio6,		6),
-+	GROUP(s2_demod_gpio5,		6),
-+	GROUP(s2_demod_gpio4,		6),
-+	GROUP(s2_demod_gpio3,		6),
-+	GROUP(s2_demod_gpio2,		6),
-+	GROUP(diseqc_out,		6),
-+	GROUP(s2_demod_gpio1,		6),
-+	GROUP(s2_demod_gpio0,		6),
-+
-+	/* Bank Z func7 */
-+	GROUP(gen_clk_z9,		7),
-+	GROUP(gen_clk_z12,		7),
-+};
-+
-+static const char * const gpio_periphs_groups[] = {
-+	"GPIOE_0", "GPIOE_1",
-+
-+	"GPIOB_0", "GPIOB_1", "GPIOB_2", "GPIOB_3", "GPIOB_4", "GPIOB_5",
-+	"GPIOB_6", "GPIOB_7", "GPIOB_8", "GPIOB_9", "GPIOB_10", "GPIOB_11",
-+	"GPIOB_12", "GPIOB_13",
-+
-+	"GPIOC_0", "GPIOC_1", "GPIOC_2", "GPIOC_3", "GPIOC_4", "GPIOC_5",
-+	"GPIOC_6", "GPIOC_7",
-+
-+	"GPIOD_0", "GPIOD_1", "GPIOD_2", "GPIOD_3", "GPIOD_4", "GPIOD_5",
-+	"GPIOD_6", "GPIOD_7", "GPIOD_8", "GPIOD_9", "GPIOD_10", "GPIOD_11",
-+
-+	"GPIOH_0", "GPIOH_1", "GPIOH_2", "GPIOH_3", "GPIOH_4", "GPIOH_5",
-+	"GPIOH_6", "GPIOH_7", "GPIOH_8", "GPIOH_9", "GPIOH_10", "GPIOH_11",
-+
-+	"GPIOX_0", "GPIOX_1", "GPIOX_2", "GPIOX_3", "GPIOX_4", "GPIOX_5",
-+	"GPIOX_6", "GPIOX_7", "GPIOX_8", "GPIOX_9", "GPIOX_10", "GPIOX_11",
-+	"GPIOX_12", "GPIOX_13", "GPIOX_14", "GPIOX_15", "GPIOX_16", "GPIOX_17",
-+	"GPIOX_18", "GPIOX_19",
-+
-+	"GPIOZ_0", "GPIOZ_1", "GPIOZ_2", "GPIOZ_3", "GPIOZ_4", "GPIOZ_5",
-+	"GPIOZ_6", "GPIOZ_7", "GPIOZ_8", "GPIOZ_9", "GPIOZ_10",
-+	"GPIOZ_11", "GPIOZ_12",
-+
-+	"GPIO_TEST_N",
-+};
-+
-+static const char * const i2c0_groups[] = {
-+	"i2c0_sda", "i2c0_scl",
-+};
-+
-+static const char * const i2c1_groups[] = {
-+	"i2c1_sda_c", "i2c1_scl_c",
-+	"i2c1_sda_d", "i2c1_scl_d",
-+	"i2c1_sda_h", "i2c1_scl_h",
-+	"i2c1_sda_x", "i2c1_scl_x",
-+};
-+
-+static const char * const i2c2_groups[] = {
-+	"i2c2_sda_d", "i2c2_scl_d",
-+	"i2c2_sda_h8", "i2c2_scl_h9",
-+	"i2c2_sda_h0", "i2c2_scl_h1",
-+};
-+
-+static const char * const i2c3_groups[] = {
-+	"i2c3_sda_x", "i2c3_scl_x",
-+	"i2c3_sda_z", "i2c3_scl_z",
-+};
-+
-+static const char * const i2c4_groups[] = {
-+	"i2c4_sda_c", "i2c4_scl_c",
-+	"i2c4_sda_d", "i2c4_scl_d",
-+	"i2c4_scl_z", "i2c4_sda_z",
-+};
-+
-+static const char * const uart_a_groups[] = {
-+	"uart_a_tx", "uart_a_rx", "uart_a_cts", "uart_a_rts",
-+};
-+
-+static const char * const uart_b_groups[] = {
-+	"uart_b_tx_e", "uart_b_rx_e", "uart_b_rx_c", "uart_b_tx_c",
-+	"uart_b_tx_d", "uart_b_rx_d", "uart_b_cts_d", "uart_b_rts_d",
-+};
-+
-+static const char * const uart_c_groups[] = {
-+	"uart_c_tx", "uart_c_rx",
-+};
-+
-+static const char * const uart_d_groups[] = {
-+	"uart_d_tx_h", "uart_d_rx_h", "uart_d_cts_h", "uart_d_rts_h",
-+	"uart_d_tx_z", "uart_d_rx_z", "uart_d_cts_z", "uart_d_rts_z",
-+};
-+
-+static const char * const uart_e_groups[] = {
-+	"uart_e_tx_h", "uart_e_rx_h", "uart_e_tx_z11", "uart_e_rx_z12",
-+	"uart_e_tx_z8", "uart_e_rx_z9",
-+};
-+
-+static const char * const emmc_groups[] = {
-+	"emmc_nand_d0", "emmc_nand_d1", "emmc_nand_d2", "emmc_nand_d3",
-+	"emmc_nand_d4", "emmc_nand_d5", "emmc_nand_d6", "emmc_nand_d7",
-+	"emmc_clk", "emmc_rst", "emmc_cmd", "emmc_nand_ds",
-+};
-+
-+static const char * const nand_groups[] = {
-+	"emmc_nand_d0", "emmc_nand_d1", "emmc_nand_d2", "emmc_nand_d3",
-+	"emmc_nand_d4", "emmc_nand_d5", "emmc_nand_d6", "emmc_nand_d7",
-+	"nand_wen_clk", "nand_ale", "nand_ren_wr", "nand_cle", "nand_ce0",
-+};
-+
-+static const char * const spif_groups[] = {
-+	"spif_hold", "spif_mo", "spif_mi", "spif_clk", "spif_wp",
-+	"spif_cs",
-+};
-+
-+static const char * const sdcard_groups[] = {
-+	"sdcard_d0_c", "sdcard_d1_c", "sdcard_d2_c", "sdcard_d3_c",
-+	"sdcard_clk_c", "sdcard_cmd_c", "sdcard_cd",
-+	"sdcard_d0_z", "sdcard_d1_z", "sdcard_d2_z", "sdcard_d3_z",
-+	"sdcard_clk_z", "sdcard_cmd_z",
-+};
-+
-+static const char * const jtag_1_groups[] = {
-+	"jtag_1_clk", "jtag_1_tms", "jtag_1_tdi", "jtag_1_tdo",
-+};
-+
-+static const char * const jtag_2_groups[] = {
-+	"jtag_2_tdo", "jtag_2_tdi", "jtag_2_clk", "jtag_2_tms",
-+};
-+
-+static const char * const pdm_groups[] = {
-+	"pdm_din1_c", "pdm_din0_c", "pdm_dclk_c",
-+	"pdm_dclk_d", "pdm_din0_d", "pdm_din1_d",
-+	"pdm_dclk_h", "pdm_din0_h", "pdm_din1_h",
-+	"pdm_din0_x", "pdm_din1_x", "pdm_dclk_x",
-+	"pdm_din1_z", "pdm_din0_z", "pdm_dclk_z",
-+};
-+
-+static const char * const iso7816_groups[] = {
-+	"iso7816_clk_c", "iso7816_data_c",
-+	"iso7816_clk_h", "iso7816_data_h",
-+};
-+
-+static const char * const tdm_groups[] = {
-+	"tdm_d2_c", "tdm_d3_c", "tdm_fs1_c", "tdm_d4_c", "tdm_d5_c", "tdm_sclk1_c",
-+	"tdm_fs1_d", "tdm_d4_d", "tdm_d3_d", "tdm_d2_d", "tdm_sclk1_d",
-+	"tdm_sclk1_h", "tdm_fs1_h", "tdm_d2_h", "tdm_d3_h", "tdm_d4_h",
-+	"tdm_d1", "tdm_d0", "tdm_fs0", "tdm_sclk0", "tdm_fs2", "tdm_sclk2",
-+	"tdm_d4_z", "tdm_d5_z", "tdm_d6", "tdm_d7",
-+};
-+
-+static const char * const mclk_1_groups[] = {
-+	"mclk_1_c", "mclk_1_d", "mclk_1_h", "mclk_2",
-+};
-+
-+static const char * const mclk_2_groups[] = {
-+	"mclk_2",
-+};
-+
-+static const char * const remote_out_groups[] = {
-+	"remote_out",
-+};
-+
-+static const char * const remote_in_groups[] = {
-+	"remote_in",
-+};
-+
-+static const char * const clk12_24_groups[] = {
-+	"clk12_24",
-+};
-+
-+static const char * const clk_32k_in_groups[] = {
-+	"clk_32k_in",
-+};
-+
-+static const char * const pwm_a_hiz_groups[] = {
-+	"pwm_a_hiz",
-+};
-+
-+static const char * const pwm_b_hiz_groups[] = {
-+	"pwm_b_hiz",
-+};
-+
-+static const char * const pwm_c_hiz_groups[] = {
-+	"pwm_c_hiz",
-+};
-+
-+static const char * const pwm_g_hiz_groups[] = {
-+	"pwm_g_hiz",
-+};
-+
-+static const char * const pwm_a_groups[] = {
-+	"pwm_a_d",
-+};
-+
-+static const char * const pwm_b_groups[] = {
-+	"pwm_b_d", "pwm_b_x",
-+};
-+
-+static const char * const pwm_c_groups[] = {
-+	"pwm_c_d", "pwm_c_x",
-+};
-+
-+static const char * const pwm_d_groups[] = {
-+	"pwm_d_d", "pwm_d_h",
-+};
-+
-+static const char * const pwm_e_groups[] = {
-+	"pwm_e_x", "pwm_e_z",
-+};
-+
-+static const char * const pwm_f_groups[] = {
-+	"pwm_f_x", "pwm_f_z",
-+};
-+
-+static const char * const pwm_g_groups[] = {
-+	"pwm_g_d", "pwm_g_z",
-+};
-+
-+static const char * const pwm_h_groups[] = {
-+	"pwm_h",
-+};
-+
-+static const char * const pwm_i_groups[] = {
-+	"pwm_i_d", "pwm_i_h"
-+};
-+
-+static const char * const pwm_j_groups[] = {
-+	"pwm_j",
-+};
-+
-+static const char * const mic_mute_groups[] = {
-+	"mic_mute_en", "mic_mute_key",
-+};
-+
-+static const char * const hdmitx_groups[] = {
-+	"hdmitx_sda", "hdmitx_sck", "hdmitx_hpd_in",
-+};
-+
-+static const char * const ao_cec_a_groups[] = {
-+	"ao_cec_a",
-+};
-+
-+static const char * const ao_cec_b_groups[] = {
-+	"ao_cec_b",
-+};
-+
-+static const char * const spdif_out_groups[] = {
-+	"spdif_out_h", "spdif_out_z",
-+};
-+
-+static const char * const spdif_in_groups[] = {
-+	"spdif_in",
-+};
-+
-+static const char * const eth_groups[] = {
-+	"eth_link_led", "eth_act_led",
-+};
-+
-+static const char * const spi_a_groups[] = {
-+	"spi_a_miso_h", "spi_a_mosi_h", "spi_a_clk_h", "spi_a_ss0_h",
-+
-+	"spi_a_mosi_x", "spi_a_miso_x", "spi_a_ss0_x", "spi_a_clk_x",
-+
-+	"spi_a_miso_z", "spi_a_mosi_z", "spi_a_clk_z", "spi_a_ss0_z",
-+	"spi_a_ss1_z", "spi_a_ss2_z",
-+};
-+
-+static const char * const gen_clk_groups[] = {
-+	"gen_clk_h", "gen_clk_z9", "gen_clk_z12",
-+};
-+
-+static const char * const sdio_groups[] = {
-+	"sdio_d0", "sdio_d1", "sdio_d2", "sdio_d3", "sdio_clk", "sdio_cmd",
-+};
-+
-+static const char * const i2c_slave_groups[] = {
-+	"i2c_slave_scl", "i2c_slave_sda",
-+};
-+
-+static const char * const dtv_groups[] = {
-+	"dtv_a_if_agc_z10", "dtv_a_if_agc_z6", "dtv_b_if_agc",
-+	"dtv_a_rf_agc", "dtv_b_rf_agc",
-+};
-+
-+static const char * const tsin_a_groups[] = {
-+	"tsin_a_clk", "tsin_a_sop", "tsin_a_valid", "tsin_a_din0",
-+};
-+
-+static const char * const tsin_b_groups[] = {
-+	"tsin_b_clk_c", "tsin_b_sop_c", "tsin_b_valid_c", "tsin_b_d0_c",
-+	"tsin_b_clk_z", "tsin_b_sop_z", "tsin_b_valid_z", "tsin_b_d0_z",
-+};
-+
-+static const char * const tsin_b1_groups[] = {
-+	"tsin_b1_clk", "tsin_b1_sop", "tsin_b1_valid", "tsin_b1_d0",
-+};
-+
-+static const char * const diseqc_out_groups[] = {
-+	"diseqc_out",
-+};
-+
-+static const char * const s2_demod_groups[] = {
-+	"s2_demod_gpio7", "s2_demod_gpio6", "s2_demod_gpio5", "s2_demod_gpio4",
-+	"s2_demod_gpio3", "s2_demod_gpio2", "s2_demod_gpio1", "s2_demod_gpio0",
-+};
-+
-+static struct meson_pmx_func meson_s4_periphs_functions[] = {
-+	FUNCTION(gpio_periphs),
-+	FUNCTION(i2c0),
-+	FUNCTION(i2c1),
-+	FUNCTION(i2c2),
-+	FUNCTION(i2c3),
-+	FUNCTION(i2c4),
-+	FUNCTION(uart_a),
-+	FUNCTION(uart_b),
-+	FUNCTION(uart_c),
-+	FUNCTION(uart_d),
-+	FUNCTION(uart_e),
-+	FUNCTION(emmc),
-+	FUNCTION(nand),
-+	FUNCTION(spif),
-+	FUNCTION(sdcard),
-+	FUNCTION(jtag_1),
-+	FUNCTION(jtag_2),
-+	FUNCTION(pdm),
-+	FUNCTION(iso7816),
-+	FUNCTION(tdm),
-+	FUNCTION(mclk_1),
-+	FUNCTION(mclk_2),
-+	FUNCTION(remote_out),
-+	FUNCTION(remote_in),
-+	FUNCTION(clk12_24),
-+	FUNCTION(clk_32k_in),
-+	FUNCTION(pwm_a_hiz),
-+	FUNCTION(pwm_b_hiz),
-+	FUNCTION(pwm_c_hiz),
-+	FUNCTION(pwm_g_hiz),
-+	FUNCTION(pwm_a),
-+	FUNCTION(pwm_b),
-+	FUNCTION(pwm_c),
-+	FUNCTION(pwm_d),
-+	FUNCTION(pwm_e),
-+	FUNCTION(pwm_f),
-+	FUNCTION(pwm_g),
-+	FUNCTION(pwm_h),
-+	FUNCTION(pwm_i),
-+	FUNCTION(pwm_j),
-+	FUNCTION(mic_mute),
-+	FUNCTION(hdmitx),
-+	FUNCTION(ao_cec_a),
-+	FUNCTION(ao_cec_b),
-+	FUNCTION(spdif_out),
-+	FUNCTION(spdif_in),
-+	FUNCTION(eth),
-+	FUNCTION(spi_a),
-+	FUNCTION(gen_clk),
-+	FUNCTION(sdio),
-+	FUNCTION(i2c_slave),
-+	FUNCTION(dtv),
-+	FUNCTION(tsin_a),
-+	FUNCTION(tsin_b),
-+	FUNCTION(tsin_b1),
-+	FUNCTION(diseqc_out),
-+	FUNCTION(s2_demod),
-+};
-+
-+static struct meson_bank meson_s4_periphs_banks[] = {
-+	/*      name first    last      pullen   pull     dir      out      in       ds */
-+	BANK_DS("B", GPIOB_0, GPIOB_13, 0x63, 0, 0x64, 0, 0x62, 0, 0x61, 0, 0x60, 0, 0x67, 0),
-+	BANK_DS("C", GPIOC_0, GPIOC_7,  0x53, 0, 0x54, 0, 0x52, 0, 0x51, 0, 0x50, 0, 0x57, 0),
-+	BANK_DS("E", GPIOE_0, GPIOE_1,  0x43, 0, 0x44, 0, 0x42, 0, 0x41, 0, 0x40, 0, 0x47, 0),
-+	BANK_DS("D", GPIOD_0, GPIOD_11, 0x33, 0, 0x34, 0, 0x32, 0, 0x31, 0, 0x30, 0, 0x37, 0),
-+	BANK_DS("H", GPIOH_0, GPIOH_11, 0x23, 0, 0x24, 0, 0x22, 0, 0x21, 0, 0x20, 0, 0x27, 0),
-+	BANK_DS("X", GPIOX_0, GPIOX_19, 0x13, 0, 0x14, 0, 0x12, 0, 0x11, 0, 0x10, 0, 0x17, 0),
-+	BANK_DS("Z", GPIOZ_0, GPIOZ_12, 0x03, 0, 0x04, 0, 0x02, 0, 0x01, 0, 0x00, 0, 0x07, 0),
-+	BANK_DS("TEST_N", GPIO_TEST_N, GPIO_TEST_N,
-+					0x83, 0, 0x84, 0, 0x82, 0, 0x81, 0, 0x80, 0, 0x87, 0),
-+};
-+
-+static struct meson_pmx_bank meson_s4_periphs_pmx_banks[] = {
-+	/*       name      first        last         reg   offset */
-+	BANK_PMX("B",      GPIOB_0,     GPIOB_13,    0x00, 0),
-+	BANK_PMX("C",      GPIOC_0,     GPIOC_7,     0x9,  0),
-+	BANK_PMX("E",      GPIOE_0,     GPIOE_1,     0x12, 0),
-+	BANK_PMX("D",      GPIOD_0,     GPIOD_11,    0x10, 0),
-+	BANK_PMX("H",      GPIOH_0,     GPIOH_11,    0xb,  0),
-+	BANK_PMX("X",      GPIOX_0,     GPIOX_19,    0x3,  0),
-+	BANK_PMX("Z",      GPIOZ_0,     GPIOZ_12,    0x6,  0),
-+	BANK_PMX("TEST_N", GPIO_TEST_N, GPIO_TEST_N, 0xf,  0)
-+};
-+
-+static struct meson_axg_pmx_data meson_s4_periphs_pmx_banks_data = {
-+	.pmx_banks	= meson_s4_periphs_pmx_banks,
-+	.num_pmx_banks	= ARRAY_SIZE(meson_s4_periphs_pmx_banks),
-+};
-+
-+struct meson_pinctrl_data meson_s4_periphs_pinctrl_data = {
-+	.name		= "periphs-banks",
-+	.groups		= meson_s4_periphs_groups,
-+	.funcs		= meson_s4_periphs_functions,
-+	.banks		= meson_s4_periphs_banks,
-+	.num_pins	= 82,
-+	.num_groups	= ARRAY_SIZE(meson_s4_periphs_groups),
-+	.num_funcs	= ARRAY_SIZE(meson_s4_periphs_functions),
-+	.num_banks	= ARRAY_SIZE(meson_s4_periphs_banks),
-+	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
-+	.pmx_data	= &meson_s4_periphs_pmx_banks_data,
-+};
-+
-+static const struct udevice_id meson_s4_pinctrl_match[] = {
-+	{
-+		.compatible = "amlogic,meson-s4-periphs-pinctrl",
-+		.data = (ulong)&meson_s4_periphs_pinctrl_data,
-+	},
-+	{ /* sentinel */ }
-+};
-+
-+static int meson_s4_pinctrl_probe(struct udevice *dev)
-+{
-+	struct meson_pinctrl *priv = dev_get_priv(dev);
-+	int ret = meson_pinctrl_probe(dev);
-+
-+	/* Drive-strength registers are combined with GPIO registers */
-+	if (!ret)
-+		priv->reg_ds = priv->reg_gpio;
-+	return ret;
-+}
-+
-+U_BOOT_DRIVER(meson_s4_pinctrl) = {
-+	.name = "meson-s4-pinctrl",
-+	.id = UCLASS_PINCTRL,
-+	.of_match = of_match_ptr(meson_s4_pinctrl_match),
-+	.probe = meson_s4_pinctrl_probe,
-+	.priv_auto = sizeof(struct meson_pinctrl),
-+	.ops = &meson_axg_pinctrl_ops,
-+};
----
-base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
-branch: s4_pinctrl
+> I have made some minor adjustments, see below, that seem to work to boot
+> into a minimal initramfs busybox rootfs in my lab.
+> 
+> Looking closer at ARM kernel booting, I can see that during
+> decompression the kernel will be decompressed to close to start of DRAM,
+> and if the compressed and decompressed images overlaps the compressed
+> image will be copied to end of the target uncompressed image before it
+> continues.
+> 
 
--- 
-2.53.0
+See 
+https://people.kernel.org/linusw/how-the-arm32-linux-kernel-decompresses. 
+"Close to start of DRAM" depends on TEXT_OFFSET of the kernel I think.
 
+> U-Boot also tries to move ramdisk and FDT to end of memory to reduce the
+> chance of the kernel decompression to overwrite FDT or ramdisk.
+> 
+
+Unless initrd_high and fdt_high are set I believe?
+
+> For my simple zImage + FDT + initramfs.cpio.gz pxe boot setup following
+> seem to work.
+> 
+>    U-Boot 2026.10-rc2-00243-g77aab9b3d743-dirty (Aug 13 2026 - 08:08:37 +0000)
+> 
+>    Model: Luckfox Lyra Plus
+>    SoC:   RK3506
+>    DRAM:  64 MiB  (board has 128M, code limits to 64M to emulate)
+> 
+>    => printenv
+>    fdt_addr_r=0x00200000			2 MiB
+>    fdtcontroladdr=3d39fa0
+>    fdtfile=rockchip/rk3506-luckfox-lyra-plus.dtb
+>    fdtoverlay_addr_r=0x00300000		3 MiB
+>    kernel_addr_r=0x00400000		4 MiB
+>    loadaddr=0x200000			2 MiB
+>    pxefile_addr_r=0x00100000		1 MiB
+>    ramdisk_addr_r=0x02400000		36 MiB
+>    scriptaddr=0x00180000			1.5 MiB
+>    
+>    CONFIG_SYS_MALLOC_LEN=0x200000	2 MiB
+>    CONFIG_SYS_BOOTM_LEN=0x2000000	32 MiB
+>    CONFIG_SYS_LOAD_ADDR=0x200000		2 MiB
+>    CONFIG_STACK_SIZE=0x100000		1 MiB
+> 
+>    => meminfo
+>    DRAM:  64 MiB
+> 
+>    Region                Base          Size           End           Gap
+>    --------------------------------------------------------------------
+>    code               3f63000         8c6fc       3fef6fc
+>    malloc             3d44000        21f000       3f63000             0
+>    board_info         3d43fc0            34       3d43ff4             c
+>    global_data        3d43e80           138       3d43fb8             8
+>    devicetree         3d39fa0          9ec8       3d43e68            18
+>    stack              3c39f80        100000       3d39f80            20
+>    lmb                3c39f80             0       3c39f80             0
+>    lmb                3c36000          3f80       3c39f80             0
+>    free                     0       3c36000       3c36000             0
+> 
+>    Retrieving file: pxelinux.cfg/default-arm-rk3506
+>    Load address: 0x100000
+>    Bytes transferred = 192 (c0 hex)
+>    
+>    Retrieving file: /armhf/zImage
+>    Load address: 0x400000
+>    Bytes transferred = 10318920 (9d7448 hex)
+>    
+>    Retrieving file: /armhf/initramfs.cpio.gz
+>    Load address: 0x2400000
+>    Bytes transferred = 1756164 (1acc04 hex)
+>    
+>    Retrieving file: /armhf/rockchip/rk3506-luckfox-lyra-plus.dtb
+>    Load address: 0x200000
+>    Bytes transferred = 31752 (7c08 hex)
+>    
+>    Kernel image @ 0x400000 [ 0x000000 - 0x9d7448 ]
+>    ## Flattened Device Tree blob at 00200000
+>       Booting using the fdt blob at 0x200000
+>    Working FDT set to 200000
+>       Loading Ramdisk to 03a53000, end 03bffc04 ... OK
+>       Loading Device Tree to 03c03000, end 03c0dc07 ... OK
+>    Working FDT set to 3c03000
+>    
+>    Starting kernel ...
+>    
+>    [    0.000000] Booting Linux on physical CPU 0xf00
+>    [    0.000000] Linux version 7.2.0-rc6-next-20260803 ...
+>    [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
+>    [    0.000000] CPU: div instructions available: patching division code
+>    [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+>    [    0.000000] OF: fdt: Machine model: Luckfox Lyra Plus
+>    [    0.000000] earlycon: uart8250 MMIO32:0xff0a0000 (options '')
+>    [    0.000000] printk: legacy bootconsole [uart8250] enabled
+>    [    0.000000] printk: debug: ignoring loglevel setting.
+>    [    0.000000] Memory policy: Data cache writealloc
+>    [    0.000000] cma: Reserved 4 MiB at 0x03000000
+>    [    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+>    [    0.000000] Zone ranges:
+>    [    0.000000]   Normal   [mem 0x0000000000000000-0x0000000003ffffff]
+>    [    0.000000]   HighMem  empty
+>    [    0.000000] Movable zone start for each node
+>    [    0.000000] Early memory node ranges
+>    [    0.000000]   node   0: [mem 0x0000000000000000-0x0000000003ffffff]
+>    [    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000003ffffff]
+> 
+>    ~ # free -m
+>                total        used        free      shared  buff/cache   available
+>    Mem:             39          17          16           4           7          16
+>    Swap:             0           0           0
+> 
+> There is likely other optimizations that can be done, e.g. reduce malloc
+> and stack size. I have tried to keep following in mind when choosing above
+> load addresses:
+> 
+> - Avoid first 1 MiB of DRAM for future OPTEE-OS or TF-A use
+> - Allow for use of 32 MiB uncompressed kernel image
+> - Keep scripts/pxe/fdt/overlays before kernel and ramdisk to allow for
+>    a larger ramdisk on boards with more memory
+> - Keep kernel load address as close to start of DRAM as possible
+> 
+>>
+>> Have you figured out how to identify the variant of the RK3506 already?
+>> Another option is to dynamically modify those variables (if they aren't
+>> already part of the environment) based on the size of available DRAM
+>> (and/or SoC variant). I don't like the idea too much but that could be a
+>> way to stretch the available memory for each binary loaded by U-Boot as
+>> much as possible.
+> 
+> Agree, we correctly identify amount of DRAM so should be possible to add
+> code that dynamically adjusts addresses, but I also want to avoid this
+> if possible, hence not putting any other address after ramdisk, to allow
+> for larger ramdisk on devices with more memory.
+> 
+
+Yeah, don't know what to do here. Another option is to have config 
+fragments for variants of the SoC and increase/reduce them in that config.
+
+Can you add a comment in the file just above ENV_MEM_LAYOUT_SETTINGS 
+that the addresses are chosen to work with <insert name of SoC variants> 
+with x MiB of DRAM already packaged in the silicon.
+
+Cheers,
+Quentin
