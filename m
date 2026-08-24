@@ -1,141 +1,90 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACE4C5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:15:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA34C5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:22:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C335F80E0B;
-	Mon, 24 Aug 2026 08:15:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AA6F4406AE;
+	Mon, 24 Aug 2026 08:22:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xlMDPamYflbg; Mon, 24 Aug 2026 08:15:54 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kxratDU2Xp5K; Mon, 24 Aug 2026 08:22:49 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787559354;
-	bh=Vu7+0EybG9RwlUAQ6G3BZLJ5rI1XhwYuT10BChU22qY=;
-	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=eqt0Ftyagmb3NaIw8VgdCEQWRgzkBSt0JNiHXpaaQHJLO7RvR4qXmEHJMCBhYGQV/
-	 viqyXPnMZLilGHWEhdJ6u63uxYmYOHn+dH5Sy5l0fBwIYtxvoZxHMfxGyBKmG+9Qor
-	 MseRVi1QS1IS82YpE2hrO1YdyVJKhra2jbuSwKZ5zUw9ixEEfyeKNmbBx4mLXMNLK1
-	 3CmD8KAtsut68bFHUlMRJExmqYkth79b4ihAM00vjEV2A3PckP1sCXRjtnUfFY8AP2
-	 +vnBzUyWSBqEEhtDdIEHGRIHV4aNx/sXWGabgMPtjookWnjjOhekyrSHa20Q1nkDF3
-	 S3ab+eWo2E80Q==
+	d=lists.u-boot-project.org; s=default; t=1787559769;
+	bh=E0zFX/11JqFYF+bWrZ2LEzhY/v8kzLOrZwjvJo5Y3VI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZxqDb5HpsOYmmw5z1/ki5ToAKdQD9Pfh2IdJRa0PdrTHXB6fRirmiKmVho+BWb3BB
+	 v4vuvAC5H250l5GQgjaISl/rbKTvOZJHY+x0zfZpb/bvKnQX0g7RuXPrH1xdaWZNjt
+	 OVIZ+2Fc04kCcGubPsKXDMYwvVEk/tEuRemgQwu2OGH+L7Vg7rJV7BG95jiYxO+yRy
+	 ravApyMAaFZZSbI3k1A2P87OIVYa77epoXDIN0KE42aNSEC/Fy8BPfORl0eYqCqXl4
+	 8hREnozFA9M4ERCnPMvhxrALssRSJ5vnwUqORFSylQB2zmr15wbzUpiHlmhjwAJzpX
+	 aEi1hLxfAorsQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A4C2880DF8;
-	Mon, 24 Aug 2026 08:15:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6EF6F396
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:15:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 08D8440565;
+	Mon, 24 Aug 2026 08:22:49 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AFCF029B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:22:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 54B3360608
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:15:53 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 96842400AE
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:22:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QY6N-_FGkOdX for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 08:15:52 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id byuj4vXGrBoi for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 08:22:46 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c110::1;
- helo=bn1pr04cu002.outbound.protection.outlook.com;
- envelope-from=pranav.sanwal@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=R2xGR9Aa
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EB25F605EB
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:15:49 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SynCJhnHPpYKEBiOXuSyi96tWyV2hOxgyz7HJv840PXUZ12xfxmjDQrpuMRPTlsEFBiXR6ZbYb/Dp9Ej8zbEqVr4D1wSZtIigNikxNaN5XiLlpD3/IdaCp0+5VBCsgj4DNGThqdHQpFdBb8JAsNVNC5T9REyBmVoESYgaGLizLzxmgiMg5fBromqDFKtpO3XAJ1E5boeRqxPTp30G4+1eQmurjGcbyeyn4zlgBGVhL9XJgt+pgZOC8OX76lr9APBPR5w9pteE8JG7SR9I8O2zEbTnls5ciaJMs9JHNT2pxcRVNd7qyTkOd8VVOO2Zs4bi98yuuLLHHoKYSfpkJw43A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Vu7+0EybG9RwlUAQ6G3BZLJ5rI1XhwYuT10BChU22qY=;
- b=c57+EgXPd3opOCko8BbOs2YbgMwxzLVL3XFQF+tl5pTJQY39R1Tt50l4wfFXjQnipT/Slf1GRKF/EIwN9wL0cC/hp7rvCBLK0slY7gQvHchuYUtZaIhn/y7il2V8oxBYxuv3v7aE3uzXCzxU4kOjWyJgAXO8eBg8Y6v+3z492pK4RqvzLaFP0Yqs3vqfbT/pOmtxF1piqcl4T9zMwEAVlbee4Z9N9vfmQdOdklUYE75KpiMysCSH98Pk8GdalSe5fObvAkRlC85010s853vk2O5CEov2wcZgk71iuOoG/coV6eRsU8RO3Onz0jHlkh7YM7Fo6MwJBC4BUA+DapJ6hg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Vu7+0EybG9RwlUAQ6G3BZLJ5rI1XhwYuT10BChU22qY=;
- b=R2xGR9AafW1fJmgPPBBTdnakiMBaE9xTFjoDw3cV/3bzVhTcV0t091sklau17In8+4btR1yH1pf1s44RqfGUlQyVUvcxFWHZrKf60UJgGlRXOwg5JcpvL43/sq3x6U8lvLQUcYx2rPainmZxNPTaoFpP+wwknZoPGYUqu8jGMIY=
-Received: from BL1PR13CA0374.namprd13.prod.outlook.com (2603:10b6:208:2c0::19)
- by BL4PR12MB9508.namprd12.prod.outlook.com (2603:10b6:208:58e::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 08:15:45 +0000
-Received: from BL6PEPF0002256F.namprd02.prod.outlook.com
- (2603:10b6:208:2c0:cafe::94) by BL1PR13CA0374.outlook.office365.com
- (2603:10b6:208:2c0::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.6 via Frontend Transport; Mon, 24
- Aug 2026 08:15:45 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL6PEPF0002256F.mail.protection.outlook.com (10.167.249.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 08:15:45 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 03:15:34 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 03:15:34 -0500
-Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 24 Aug 2026 03:15:32 -0500
-From: Pranav Sanwal <pranav.sanwal@amd.com>
-To: <u-boot@lists.u-boot-project.org>
-CC: <git@amd.com>, <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] configs: versal: Add amd_versal_premium_2 config fragment
-Date: Mon, 24 Aug 2026 13:44:46 +0530
-Message-ID: <72ffdb382f929e9d07e6ebf4e697ea473567b136.1787558907.git.pranav.sanwal@amd.com>
-X-Mailer: git-send-email 2.34.1
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=AzUhbbPj
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7B6D94005C
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:22:45 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6F0F811A644; Mon, 24 Aug 2026 10:22:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1787559757;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=E0zFX/11JqFYF+bWrZ2LEzhY/v8kzLOrZwjvJo5Y3VI=;
+ b=AzUhbbPjDlhYYulMA2HIQMxtm8C2q4MrMe/V22kopKon7ozgMepkUmerHhT5U4ypRCbNWE
+ L8JDp0mQLn14SksKITBnqS5KAx/9esXotN8fCXs9KMCscM+5p16WjoIE5OFaZVRnSPIwmw
+ 4iC3+4+KpjGxNh4HUOyl6Z+wTn9RSoPkcFjyu1vxTZhhm0Ptx5hTI8I912WvCKKNrhs/To
+ n/4I4Vn5WThrS09R87N9/ulBDKPrPWCtQh5jgz9zjfgRH9eZd2QCzNNXv9bzGZDudukLOA
+ 7AcI3JRO3V+xOoUUnbqEiwd6ZWjlI+qmhv30Faxnx/+LJVLeuhAfdlwvVYlc+Q==
+Message-ID: <e4ad1d7a-ad9e-3cb1-e1ed-ad95f22b5b14@nabladev.com>
+Date: Mon, 24 Aug 2026 10:21:58 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 0/4] i2c/clk: spacemit: k1: fix I2C bus configuration
+ and clock handling
+Content-Language: en-US
+To: Yao Zi <me@ziyao.cc>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org
+Cc: Huan Zhou <pericycle.cc@gmail.com>,
+ Guodong Xu <guodong.xu@oss.qualcomm.com>, Tom Rini <trini@konsulko.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, Lukasz Majewski <lukma@denx.de>,
+ Yixun Lan <dlan@kernel.org>, Troy Mitchell <troy.mitchell@linux.spacemit.com>
+References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
+ <aoQBacTKiBXUDddj@pie>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <aoQBacTKiBXUDddj@pie>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0002256F:EE_|BL4PR12MB9508:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7d7cf5f3-3f07-4c52-54da-08df01b7e594
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|23010399003|82310400026|13003099007|10067099003|56012099006|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info: XcRXquUIXaYhUDquF8OA5z6nyARiblrVuOqvwHYPVsiWNuhnJQhPMrwj5BGebPRgsarEJeUCKUi1goyeG6GgguWfVaVI0Fmp1twZv/1kVonx9+m2SWRusU+vT5XNX6zpjhsF6VcNaXOpUeY2de6l5qfAeZsUP2xRjHPu+36SKTzQcrDr+V/MJHCT3CAD+6ehFkcoCpkqabHhBWNWBh4r2SDSObLav0r/oX+KUVC6ateZWdd5YM1KTDbsrqMv9SHATibTFbdWpLtcnTJ8BXByzoP9UiI7CBqAocAsSU0Ct6w4RIXDiZQllyD/QFtgJRnFxbzmxY3Y6XOzUiqZ/i7iYHpzaMu9BSCamF+kCPDi6R0Q7iNnlixidsCOjpQEFimaLQ9Kw0x9sFE26Htt6P6Ywec/x2j02DVyQbanPwM052ynF8vDAAVVGX+N8FW6l4IhzAoMjGflDcEGej9R2G5oIwxbZhttoDcBRQoGxry2eT0Qh7foFHuz62JhnVW7zx+Klh2blbqre9PZtaagtTqRRZ6fH6IZnT4QMP1s+mmhnD8/nZCRAdt1+mQeAiExyuR5tYHQkiHFkXNMvhvpuWDQxLgbETxK5hwYXky4JCMduQWFGr6oGQ7YrVf+FZHGE4hmSjbagDLUwlAK5mTp3/xvGg1DvkGb0RouQQzQ66oxE1c=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(23010399003)(82310400026)(13003099007)(10067099003)(56012099006)(11063799006)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: W6kt0LWfdden4FfiO8Ykwv52yKLjbFLFlvbNmGWEIBTTw/rb6vBF6qZeRHxX8m+mgsponuBBOksOg1ZXzvD98yUHLChd5tfOS4jvcDcsr4yWGsPBrvmyFge/S+Dk/ZstKq2H/d92vYKRFKNeGaQyDPWJzNL5zIjru0PX1TpworqGFnbtLHxa2d2eeVjOq8qdMKcL0zJgeQt/z5lUuzg7XyXsK2rnHLFBf3UbQyXxvTnkRyyk4EgEN22/Oxau13QYiZOXZFFxKjUOaaKrTRAxnfaQCjdKAuQmJLiXs+jFoB+kvqFtBNoS2vcC5tK8ZZvH2ufCabf0YvqnRWCT5DvlbM4I/hncm/dpuovrQdKNcG2TDfXenLUbFEsQV8k8M7JT6mEiUazrkNGSNJd1ZdHJLsobRIvQIXpd5TsacHqKbyO2fdy+V8bV+4LJBk0hJQHw
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 08:15:45.1826 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d7cf5f3-3f07-4c52-54da-08df01b7e594
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0002256F.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR12MB9508
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,43 +98,59 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Introduce a Kconfig fragment for the AMD Versal Premium Gen 2 platform.
-Premium Gen 2 uses a different memory map than the base Versal virt
-config: CONFIG_TEXT_BASE is 0x40000000 instead of 0x8000000, and the
-incoming device tree is placed at 0x1000000 via
-CONFIG_XILINX_OF_BOARD_DTB_ADDR instead of the ARCH_VERSAL default of
-0x1000.
+Hello Yao Zi, Junhui Liu,
 
-Build with:
+On 18.08.26 08:53, Yao Zi wrote:
+> On Sat, Aug 15, 2026 at 11:40:20AM +0800, Junhui Liu wrote:
+>> Fix two issues in the SpacemiT K1 I2C driver and clock provider.
+>>
+>> The first issue is that the controller bus mode is selected using the
+>> functional clock rate instead of the requested I2C bus speed from the
+>> device tree.
+>>
+>> The second issue is that the TWSI functional clocks incorrectly include
+>> the bus clock enable bit in their gate masks. As a result the I2C driver
+>> can operate with only the functional clock enabled, which diverges from
+>> the device tree description and the Linux driver (both expect separate
+>> "func" and "bus" clocks).
+>>
+>> To fix the second issue without breaking intermediate states, the
+>> patches are ordered as follows:
+>>
+>> - First add the missing bus clocks (and their parent chain) to the SPL
+>>    clock tree.
+>> - Then update the I2C driver to acquire and enable both the functional
+>>    and bus clocks by name.
+>> - Finally remove the bus gate bit from the functional clock definitions
+>>    (except TWSI8, whose write-only register requires the combined gate).
+> 
+> Personally I think it's okay to break booting in this case as long as
+> you explicitly point it out. Merging the conceptually related PATCH 2
+> and PATCH 4 which together fix description of TWSI controller clocks
+> would make the commit description shorter and clearer. But it depends on
+> you.
 
-  make xilinx_versal_virt_defconfig amd_versal_premium_2.config
+For me the series is okay now, if you (Junhui Liu) have not prepared a
+v3 with the merge Yao Zi explained already ... I will pick v2 up for next...
 
-Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
----
- board/xilinx/versal/MAINTAINERS     | 1 +
- configs/amd_versal_premium_2.config | 3 +++
- 2 files changed, 4 insertions(+)
- create mode 100644 configs/amd_versal_premium_2.config
+Please give me feedback, what you plan, thanks!
 
-diff --git a/board/xilinx/versal/MAINTAINERS b/board/xilinx/versal/MAINTAINERS
-index 07173ee916f..9113249de8d 100644
---- a/board/xilinx/versal/MAINTAINERS
-+++ b/board/xilinx/versal/MAINTAINERS
-@@ -5,4 +5,5 @@ T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-microblaze.git
- F:	arch/arm/dts/versal*
- F:	board/xilinx/versal/
- F:	include/configs/xilinx_versal*
-+F:	configs/amd_versal_premium_2*
- F:	configs/xilinx_versal*
-diff --git a/configs/amd_versal_premium_2.config b/configs/amd_versal_premium_2.config
-new file mode 100644
-index 00000000000..26c5cfa536c
---- /dev/null
-+++ b/configs/amd_versal_premium_2.config
-@@ -0,0 +1,3 @@
-+CONFIG_SYS_PROMPT="versalpremium2> "
-+CONFIG_TEXT_BASE=0x40000000
-+CONFIG_XILINX_OF_BOARD_DTB_ADDR=0x1000000
+> For the whole series,
+> 
+> Reviewed-by: Yao Zi <me@ziyao.cc>
+
+Thanks!
+
+bye,
+Heiko
+> 
+> Regards,
+> Yao Zi
+> 
+
 -- 
-2.43.7
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
