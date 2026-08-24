@@ -4,127 +4,207 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F202DC5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 734FCC5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:14:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C2E52406EB;
-	Mon, 24 Aug 2026 13:14:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 407F34058C;
+	Mon, 24 Aug 2026 13:14:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9640XR1o_bfi; Mon, 24 Aug 2026 13:14:02 +0000 (UTC)
+ id Ym1WZwxlk2cC; Mon, 24 Aug 2026 13:14:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787577241;
-	bh=D1t3oJsrUy1bHDMMkHs057oJ+NcmFNamKai0q0hIL5o=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=x0T9EbTzyjYIa3KTSIEYyrDU8XHd1ZeQqad+eSSYmAHTP11u53fBnndrOVjlYZ60C
-	 B4qkPT7OSI+yaxThGFvEkoq97axKQ3M8kQJhCNROwK05ek9F4B6213aqIPd3NJ1J5a
-	 IGn481Cdr+ID2PkO4WpsEv5umY86MCLosF5Hj94ekOLum6FI9FOHd0bu+ZAJIG8DbQ
-	 VHTdq0iThs7R9ra+limq9ELpFJKpCX0fo1BsC/tSyDKamyM5dRQ0f8lIUx3ZnVQmDA
-	 UPmdDIB9qR1EjZgfwaueIU4dfovjs6g6Uz/1H4a0XzHcdwGPkmIGanNbi5fe1S5OpM
-	 L082qh6xICnXA==
+	d=lists.u-boot-project.org; s=default; t=1787577296;
+	bh=Aq20E+XRwwhHZtZCfW90z0Hzst6NLxjuzCmeBFMAsyk=;
+	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=oxUlzxi1PaeMipf7oYcAXSeoIukNnQB5+Jk+6ZA3zMi92Z4tvqtzlB+YwEj1V2fac
+	 e9gRxh37eYvQxSJKR77SwkdE3iNQ6VMKsGEksi3KfI+lb0lbZhaD0dtEXiF6vXQYA1
+	 4X1Zo9ZI4EvCs0n+qyw4yUkaw3+8UpC2vXllJsTwT5v2/ZfLmakj+QabA92XP0vbLX
+	 DugjybuGEGDowemfQj+aLGhImx6upkU9zdRRKGRKdWqq8FLIQ6YAGveH3eTSts0fWw
+	 7ltXehGjMaZlyFKMD4jNS2bHlbcRipK+sr4YLzYwap9c8PVzYkb/8kq3IeWN5s9DY0
+	 uBobetOg6JCnw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5838406C6;
-	Mon, 24 Aug 2026 13:14:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2FA94386
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 56ECA405B7;
+	Mon, 24 Aug 2026 13:14:56 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E6F0341A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 16239406F2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CD0C160629
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pg4L83yXDcuN for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 13:13:58 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AyiFYxqlANjN for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=FeIDOXsR
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C9DA24067A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:57 +0000 (UTC)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4956869750eso19730675e9.2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:13:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787577235; x=1788182035;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=D1t3oJsrUy1bHDMMkHs057oJ+NcmFNamKai0q0hIL5o=;
- b=FeIDOXsRkpaycQTicFqf0PS0c0DoU9LUSR1jzvSKKJrA+LUh1G3BsUtnwIFEuHtfD6
- 1G3/MkvKo3Ts+8FGbf0GZQFHLlyJj/O9A9jNIvDY9BBfZqf5usHylaObOgxZKRwr0FEV
- jfod4cFkc7znIoSFx8aZvN6a1VS54fquxrkZTPj6xz73BZMpSyNjWHBlmQR6h6OZpYwd
- SybS2gGybfRvU6eoQdXPRlrwN7UFG1GlA3oe8DWzQ0dd3PlNgrTe1aC8aSJanvM7Fnxt
- Ja8/la3PKHGJG1pF61+6uRDnDp2r3cvZkYxWBa0DFS7PvJVBBTbHKSI2RVdxJmyHQn2b
- rQTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787577235; x=1788182035;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=D1t3oJsrUy1bHDMMkHs057oJ+NcmFNamKai0q0hIL5o=;
- b=ONvgOHrseInlFNOkFL7TJFUYZE/J+sDivQcXEA92PYtkZZG8r6GmaHsz7z4++t6FnE
- LOsFS3PK/VW8B3GgH6sb21QE6S27Q24sYjSq5DLCegi3ZuRLLLzk0MeLhN4D9WldGOlW
- vCRpuTq+Y+E7f2e20fJAQnTdQ89CBCQvcdB6Z+oZrDxPugkrsMP/tCLzsEyf3ccsbWzd
- ND6SeSq72jktO4HvJNLuHg3PFx+FytOBr2QLc/4mGhT2dROWEPF40ZSDQiXaE7JtdL26
- jre+HyeVFg3s0COl1AqiEm9cICOOF8mFPj04JRoPYa76awKO75k54j/8auQzjzGYxvtX
- 9JxA==
-X-Gm-Message-State: AFuF++lAkoQeQN/gt7tpwdV597A7mXvKubTXT3UJPjavF4xt3L7EtRck
- /TDMd4yV9KXXtfEfeL7hgx/6E9tOFPYEQ+Bp9FkeSwrF+SdvLq+xhUxFU9a8UWosVaM=
-X-Gm-Gg: AR+sD10OrKNdUsejuIDZJGa6unIDHgxuJL5On9etr6RdZ7fuuf3hJt00OpUIL9sgfIo
- RFj7uNpp1PHaENM7ncAu9nLsgO9h7qDMSm+mR9/UQJxzxOf+xIwaoJzKQlqJ5l+y7wEHKYNAQ+v
- vthzpYvBIdOrXUXOmf3FyytEGFvU5jgj6wU8+B8RUw3d1dnYVuUfqMEfdbBSmO10Wc68af0pBm8
- NGb617EVbAP1fr6uYL6XTeTf6SBwBwYyYvwSuWeg6nNTwB4X+gprWQxPg/i0q2K0Uu2LvcHLJ4a
- GZ4FQ/B4sULB+ramwl+9l9dVRUujVy17rxbdvM3KaHTwzZZnPFVRI5mkb+VQc0OtTIt7/ZejMpA
- TaIj2l/6CsqjPMTu4Ox0vCzdO/odFhbGtIjg61DfSzbIhCPLBY61DQUMiyMDMR4Ak/xrdZz/egL
- qGuYxew5ajOFt3mcRsvJnhksRzUUKSu1zNTyPnWlTZBmBIWET1LV4kuUXmtj3ktswp2zpHP2hiy
- wo1iuMxCcUIQhleun6op6+GqAPAbamJQGMLHDeJwg==
-X-Received: by 2002:a05:600c:64c6:b0:498:1595:be7b with SMTP id
- 5b1f17b1804b1-499c19c707amr203258365e9.4.1787577235569; 
- Mon, 24 Aug 2026 06:13:55 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-86-98-192-94.alshamil.net.ae.
- [86.98.192.94]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482c9b85412sm8144059f8f.14.2026.08.24.06.13.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 06:13:55 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 24 Aug 2026 17:13:14 +0400
-Subject: [PATCH 17/17] dtoc: Add tests for the pylibfdt bindings dtoc does
- not use
+ client-ip=2a01:111:f403:c000::1;
+ helo=byapr05cu005.outbound.protection.outlook.com;
+ envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=WjR911rE
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CF88260612
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:21 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Zc7afIvOn0wy46LkTq3PWNPDy+A53Fsf1yECoX+hF0K8vgLnlWrcZmUeC3yXBskh0IpvYR8aYBqzQQW8DomMbGmiQwdYuw7yuJBgFjbJqUAQWVyQFSBHR4x9Ju0mr35qgTg+ObkPTweC1Q++xjbJzdqEqHmsZ3fMn9ganvRw+tMtMPfr7PExegIIrXtEqDmASuY8qgSlv8IVpDkZ6L4ZzlsYhsyF40NzdEs+yMlU36HmirqmtUMFq4cCe3C8yTA/Zs28A6/9duaOi1IWEmxQKtrib9EUsVKOoRgwC+fIDlUJNuXqD7DZ7XNKq7jNaXRLetP48CEAE3k34KDgK0pfXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Aq20E+XRwwhHZtZCfW90z0Hzst6NLxjuzCmeBFMAsyk=;
+ b=TMfZqSoWh+qfV5+9sE3c+INueH6ehRIbhCMIgzCB5vAui0g8aU6FyGX0JNTgj08liMHv7/Xby/xYmZUs4AQyYjqJE/hwHsSuaXYWbHshFzeTx9wCUQxa8jH3nmxhIMHzaJUS9NhUFe/dMC8XGtxWZQlWGaBqjyJnjN1XEoHkQQWNtb8oJgzU/Vg6c/i9KDwknYODmuIuVXLc6knW0t99p0mKmrwxJ6nR5svGEznkw2oLAocAASVpq49zgsEher7RUurVebJIbBb3+sgXYQVJqrK/XMUvVZdjy/af0xbOuvwC5Y4pAhKE7J2PFLrpJs3MgpaDF0K6rGuRLKiuN6qmMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
+ smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Aq20E+XRwwhHZtZCfW90z0Hzst6NLxjuzCmeBFMAsyk=;
+ b=WjR911rEaDfhOQhrjqtI/Tyrs+GJkFYg5limT8eg1eXSSnqMQ1TcPH7uJ+AueI9GzZqalY2y9+dkZDDw4UDrmPpQjK2tgzDoc0LIomwg2XTcouvR5LYpG/bwbMfedPqcnWvr4kx+4ziD0jqWDTUh8dcRJqfWb53zBMf9odud9ug=
+Received: from SJ0PR03CA0125.namprd03.prod.outlook.com (2603:10b6:a03:33c::10)
+ by SN7PR12MB8433.namprd12.prod.outlook.com (2603:10b6:806:2e5::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
+ 2026 07:19:16 +0000
+Received: from SJ1PEPF00001CDD.namprd05.prod.outlook.com
+ (2603:10b6:a03:33c:cafe::73) by SJ0PR03CA0125.outlook.office365.com
+ (2603:10b6:a03:33c::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.11 via Frontend Transport; Mon,
+ 24 Aug 2026 07:19:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SJ1PEPF00001CDD.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 07:19:12 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
+ 2026 02:19:11 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
+ 2026 02:19:10 -0500
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
+ Transport; Mon, 24 Aug 2026 02:19:09 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.u-boot-project.org>, <git@amd.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Aaron Williams <awilliams@marvell.com>, Adam Ford <aford173@gmail.com>,
+ Alban Bedel <alban.bedel@avionic-design.de>, Alif Zakuan Yuslaimi
+ <alif.zakuan.yuslaimi@altera.com>, Allen Martin <amartin@nvidia.com>, "Andre
+ Przywara" <andre.przywara@arm.com>, Ashish Kumar <Ashish.Kumar@nxp.com>,
+ "Bryan Brattlof" <bb@ti.com>, Casey Connolly <casey.connolly@linaro.org>,
+ "Chee Hong Ang" <chee.hong.ang@intel.com>, Chee Tien Fong
+ <tien.fong.chee@intel.com>, Chin-Liang See <chin.liang.see@intel.com>, Chris
+ Packham <chris.packham@alliedtelesis.co.nz>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, "Cogent Embedded, Inc."
+ <source@cogentembedded.com>, David Lechner <dlechner@baylibre.com>, "Dinh
+ Nguyen" <dinh.nguyen@intel.com>, Dominik Haller <d.haller@phytec.de>,
+ "Dzmitry Sankouski" <dsankouski@gmail.com>, =?UTF-8?q?Eric=20B=C3=A9nard?=
+ <eric@eukrea.com>, Eugen Hristev <ehristev@kernel.org>, Fabio Estevam
+ <festevam@gmail.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Garrett Giordano
+ <ggiordano@phytec.com>, Gilles Talis <gilles.talis@gmail.com>, Green Wan
+ <green.wan@sifive.com>, Hans de Goede <hdegoede@redhat.com>, Heiko Schocher
+ <hs@nabladev.com>, Holger Brunck <holger.brunck@hitachienergy.com>, Ian Ray
+ <ian.ray@gehealthcare.com>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>, "Jan
+ Kiszka" <jan.kiszka@siemens.com>, Johan Jonker <jbx6244@gmail.com>, "Jonas
+ Karlman" <jonas@kwiboo.se>, =?UTF-8?q?Jonas=20Schw=C3=B6bel?=
+ <jonasschwoebel@yahoo.de>, Jorge Ramirez-Ortiz
+ <jorge.ramirez.ortiz@gmail.com>, Julien Stephan <jstephan@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Le Jin <le.jin@siemens.com>, "Ley
+ Foon Tan" <ley.foon.tan@intel.com>, Lim Siew Chin
+ <elly.siew.chin.lim@intel.com>, =?UTF-8?q?Marek=20Beh=C3=BAn?=
+ <kabel@kernel.org>, Marek Vasut <marek.vasut+socfpga@mailbox.org>, Martyn
+ Welch <martyn.welch@collabora.com>, Masakazu Mochizuki
+ <masakazu.mochizuki.wd@hitachi.com>, Mathew McBride <matt@traverse.com.au>,
+ Matthias Winker <matthias.winker@de.bosch.com>, "Matwey V. Kornilov"
+ <matwey.kornilov@gmail.com>, Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>, 
+ Mingkai Hu <mingkai.hu@nxp.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Oliver Graute <oliver.graute@kococonnector.com>,
+ Parthiban Nallathambi <parthiban@linumiz.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>, Peter Geis
+ <pgwipeout@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "maintainer:TK1-SOM BOARD" <Peter.Chubb@data61.csiro.au>, Philip Oberfichtner
+ <pro@denx.de>, "Pramod Kumar" <pramod.kumar_1@nxp.com>, Priyanka Jain
+ <priyanka.jain@nxp.com>, Quentin Schulz <u-boot@0leil.net>, Randolph
+ <randolph@andestech.com>, "Ryder Lee" <ryder.lee@mediatek.com>, Sam Day
+ <me@samcday.com>, Sam Shih <sam.shih@mediatek.com>, Shengzhou Liu
+ <Shengzhou.Liu@nxp.com>, Simon Glass <sjg@chromium.org>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Simon Guinot <simon.guinot@sequanux.org>,
+ Sinan Akman <sinan@writeme.com>, Stefan Bosch <stefan_b@posteo.net>, Stefan
+ Roese <sr@denx.de>, Stefano Babic <sbabic@nabladev.com>, Stelian Pop
+ <stelian@popies.net>, Stephan Gerhold <stephan@gerhold.net>, Sumit Garg
+ <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Teresa Remmet
+ <t.remmet@phytec.de>, Tien Fong Chee <tien.fong.chee@altera.com>, Tim Harvey
+ <tharvey@gateworks.com>, Tom Warren <twarren@nvidia.com>, Tony Dinh
+ <mibodhi@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov
+ <w.egorov@phytec.de>, Wasim Khan <wasim.khan@nxp.com>, Weijie Gao
+ <weijie.gao@mediatek.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>, "open list:P212"
+ <u-boot-amlogic@groups.io>, "open list:ARM SNAPDRAGON"
+ <u-boot-qcom@groups.io>, "open list:phyCORE-AM62ax"
+ <upstream@lists.phytec.de>, =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?=
+ <noltari@gmail.com>
+Subject: [PATCH 0/3] MAINTAINERS: Cleanup non existing files arch/board
+Date: Mon, 24 Aug 2026 09:18:45 +0200
+Message-ID: <cover.1787555916.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-pylibfdt-sync-v1-17-a42be6fa4872@flipper.net>
-References: <20260824-pylibfdt-sync-v1-0-a42be6fa4872@flipper.net>
-In-Reply-To: <20260824-pylibfdt-sync-v1-0-a42be6fa4872@flipper.net>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
- David Gibson <david@gibson.dropbear.id.au>, Luca Weiss <luca@z3ntu.xyz>, 
- Brandon Maier <brandon.maier@gmail.com>, 
- Francesco Valla <francesco@valla.it>, Simon Glass <sjg@chromium.org>, 
- Rob Herring <robh@kernel.org>, Jaipaul Cheernam <jaipaul.cheernam@est.tech>, 
- Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8994; i=alchark@flipper.net;
- h=from:subject:message-id; bh=U7d66TaAoHh6o6aDlZ91Rbaj1zU+tWL0uzQdnuJpUx0=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT1OGdbpJ7l+Ne8W15jyvqVvvnM3FwLFRbUMqUZsR5gE
- PvUkBvQMZGFQYyLwVJMkWXutyW2U434Zu3y8PgKM4eVCWSItEgDAxCwMPDlJuaVGukY6ZlqG+oZ
- GukY6xgxcHEKwFRrVjD84Tc9uCVr/zVx65dJxz7Wun+er/R/2oYGhWrvAF2OS3Oun2X4H+Cl9vF
- ofWCfm+LTt1qL1tTwMDX4O8aFavE++SS4LMGAGwA=
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8252; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=ZgT8W+YsPzCpCyW3yE+2h6wzaev4dD7cnNGUStKLE1c=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWR1f0hgq399pCmqnX8rY8Zuo1/6MSxPJkmfjJfvPPBja
+ 6bxrwfxHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRl7cYGe5bnBL/+b952x9h
+ 6XUeO+ad4WCNU09oWxUemd+tH/ecx5rhr9zWGyvXpqgbfTY0P2CTu3qqSOrVf99VRL+wb9mTu/+
+ HHTMA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDD:EE_|SN7PR12MB8433:EE_
+X-MS-Office365-Filtering-Correlation-Id: df68ac5a-56c3-4679-0ac3-08df01afff50
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|376014|7416014|1800799024|23010399003|10067099003|56012099006|18002099003|11063799006;
+X-Microsoft-Antispam-Message-Info: /Nntx1lHCvP/DZbmxjYSTC3tjkQVMiBG+UhKEl9iCaZrPqdoCZG/b14u6fbKudyXIaahNLZ7KUj+VeEmKg+REP/HQeedZUuGBsc9H430NVMgWYZMrYdNaGvIb8f2hvJQgWFylRR7RNz5Z5GM8a2i4hQhXXxHk7P1G9aiFWDPBlYSuFlqd/5gW3BwCOGruiCEm1CwMX/oDFd/ELdKgBmCw64NPPjwtEU7GVv1hfZ5f9OI8l35rC/9GouE/v6uFcS3lvS7RHbc1S0vRi+1YxXlV/v46D58+rZpSgPHJZLfG0RAmCewVpH/le6qWZHpmekUijuVN+QPQhtXVKSJN6t8tV87/te1C85odefXvnUbu3SSnK0/iFQIapcmIq3qt1Gr4+F9JSeo8pcOvwcMEPxP86zYN1AlgsZNSeRy7EDM0ddLkje53gRElix4uEE4XowqCmi+JnkUCTUyIjOuefyjaC+N9oZiZWQVRiddHMaCnKXwb8ih56L0T9pbXzPVe56XvnYpgeRcjwrlMQEG1D8O2WW9ZBNGHIsUkqBEoDCKc+enJrhuRDvB7RdaSgDbpefWrjGfy9lJsGf6QAGMlTVa4mUMzAJ6E4mKT/gBNtFjtYz+k155kssFENsIoe4CdxIlkTAxmO1DtB2x2wXEHo1iOlTYmAtRjjMehJ4gioQ0RxGA43SP6bSYj/f7IsIvgg3qjGBwODg8cAzkJUkeWaY3jQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(7416014)(1800799024)(23010399003)(10067099003)(56012099006)(18002099003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: eEe+txFmVnpF1O9hoJRrZR4hMvKKlh+smQgYjnsaqt1JtGlchxW1VnRtRqiBcrLKGPKqR7w6oXhCXiRtUvepF0gV6DHtpUFzmZHtrccvktuJdfvxwyJMzRzj5e5msa4iuex5zutaSyduEwMfZET2a1g6JCX1icAgEnMqGUJRNhN/HaDMZQt2zWvo+0E2dShqk+ctTE5I+/zIXFJJlzfyQspKlnp1WxifEzF6/YMV4DQFdwBe30HWFbVqBvt+eK/pzXabq6P6d3UW6z/ZbW5jfYFlecNc6xePeYtMUQzywaF7vPqUirKaYLJdUFVDdQTjl1yM2hetwKSuSBTcCTx24uFDKk7Im2aJGiqpEp5DiupzpZDBJURhnDIARen9wWnz0a7tblKGZDAWOHes6XV9dyvbvnnMI+qFYD67So1I7cQDsnGoaK1uPmcL7qq+/FnX
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 07:19:12.3218 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: df68ac5a-56c3-4679-0ac3-08df01afff50
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CDD.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8433
+X-Mailman-Approved-At: Mon, 24 Aug 2026 13:14:54 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,221 +218,166 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Exercise additional pylibfdt bindings imported from upstream against the
-existing dtoc test tree, which already carries a boolean property, a
-string list, integer arrays and a bus node that overrides #address-cells
-and #size-cells.
+Hi,
 
-The FdtSw cases cover both halves of the geometric growth change: that an
-out-of-space result at least doubles the buffer, and that a tree needing
-several expansions still comes out intact.
+based on ask from Tom here is script extension to cover all MAINTAINERS
+files in the repository. Small fix for one of my fragment and one patch to
+remove references in other files. A lot these changes are related to
+configs files and device trees (likely because of using kernel one).
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
+A lot of these files are also in utf-8 which likely should be converted to
+plain text. But Tom up2you.
+
+Thanks,
+Michal
+
+
+Michal Simek (3):
+  xilinx: Correct zynqmp_r5 MAINTAINERS fragment
+  scripts: Check F: entries in all MAINTAINERS files
+  MAINTAINERS: Remove references to not existing files
+
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  1 -
+ board/CZ.NIC/turris_omnia/MAINTAINERS         |  1 -
+ board/LaCie/net2big_v2/MAINTAINERS            |  4 -
+ board/LaCie/netspace_v2/MAINTAINERS           |  6 --
+ board/Marvell/octeontx/MAINTAINERS            |  2 -
+ board/Marvell/octeontx2/MAINTAINERS           |  2 -
+ board/Synology/ds116/MAINTAINERS              |  1 -
+ board/acer/picasso/MAINTAINERS                |  1 -
+ board/advantech/imx8mp_rsb3720a1/MAINTAINERS  |  1 -
+ board/advantech/imx8qm_dmsse20_a1/MAINTAINERS |  1 -
+ board/alliedtelesis/SBx81LIFKW/MAINTAINERS    |  1 -
+ board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS  |  1 -
+ board/altera/stratix10-socdk/MAINTAINERS      |  1 -
+ board/amlogic/p212/MAINTAINERS                |  1 -
+ board/amlogic/q200/MAINTAINERS                |  1 -
+ board/amlogic/s400/MAINTAINERS                |  1 -
+ board/andestech/voyager/MAINTAINERS           |  1 -
+ board/asus/grouper/MAINTAINERS                |  1 -
+ board/asus/transformer-t114/MAINTAINERS       |  1 -
+ board/asus/transformer-t20/MAINTAINERS        |  1 -
+ board/asus/transformer-t30/MAINTAINERS        |  1 -
+ board/atmel/at91sam9260ek/MAINTAINERS         |  1 -
+ board/atmel/sama5d29_curiosity/MAINTAINERS    |  1 -
+ board/atmel/sama7d65_curiosity/MAINTAINERS    |  1 -
+ board/atmel/sama7g54_curiosity/MAINTAINERS    |  1 -
+ board/atmel/sama7g5ek/MAINTAINERS             |  1 -
+ board/avionic-design/medcom-wide/MAINTAINERS  |  1 -
+ board/avionic-design/plutux/MAINTAINERS       |  1 -
+ board/avionic-design/tec-ng/MAINTAINERS       |  1 -
+ board/avionic-design/tec/MAINTAINERS          |  1 -
+ board/beacon/beacon-rzg2m/MAINTAINERS         |  3 -
+ board/bosch/acc/MAINTAINERS                   |  1 -
+ board/cei/cei-tk1-som/MAINTAINERS             |  1 -
+ board/compal/paz00/MAINTAINERS                |  1 -
+ board/compulab/trimslice/MAINTAINERS          |  1 -
+ board/comtrend/vr3032u/MAINTAINERS            |  1 -
+ board/comtrend/wap5813n/MAINTAINERS           |  1 -
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |  1 -
+ board/davinci/da8xxevm/MAINTAINERS            |  1 -
+ board/embest/mx6boards/MAINTAINERS            |  1 -
+ board/engicam/imx6ul/MAINTAINERS              |  3 -
+ board/friendlyarm/nanopi2/MAINTAINERS         |  1 -
+ .../gardena/smart-gateway-at91sam/MAINTAINERS |  1 -
+ .../gardena/smart-gateway-mt7688/MAINTAINERS  |  1 -
+ board/gateworks/gw_ventana/MAINTAINERS        |  6 --
+ board/ge/bx50v3/MAINTAINERS                   |  3 -
+ board/htc/endeavoru/MAINTAINERS               |  1 -
+ board/imgtec/xilfpga/MAINTAINERS              |  1 -
+ board/intel/agilex-socdk/MAINTAINERS          |  1 -
+ board/intel/agilex7m-socdk/MAINTAINERS        |  2 -
+ board/intel/n5x-socdk/MAINTAINERS             |  1 -
+ board/keymile/km83xx/MAINTAINERS              |  2 -
+ board/khadas/khadas-edge2-rk3588s/MAINTAINERS |  1 -
+ board/kontron/sl-mx6ul/MAINTAINERS            |  2 -
+ board/lenovo/ideapad-yoga-11/MAINTAINERS      |  1 -
+ board/lg/x3-t30/MAINTAINERS                   |  1 -
+ board/libre-computer/aml-a311d-cc/MAINTAINERS |  1 -
+ board/libre-computer/aml-s805x-ac/MAINTAINERS |  1 -
+ .../libre-computer/aml-s905d3-cc/MAINTAINERS  |  1 -
+ board/mediatek/mt7981/MAINTAINERS             |  2 -
+ board/mediatek/mt7986/MAINTAINERS             |  4 -
+ board/microsoft/surface-rt/MAINTAINERS        |  1 -
+ board/myir/mys_6ulx/MAINTAINERS               |  1 -
+ board/nvidia/beaver/MAINTAINERS               |  1 -
+ board/nvidia/cardhu/MAINTAINERS               |  1 -
+ board/nvidia/dalmore/MAINTAINERS              |  1 -
+ board/nvidia/harmony/MAINTAINERS              |  1 -
+ board/nvidia/jetson-tk1/MAINTAINERS           |  1 -
+ board/nvidia/nyan-big/MAINTAINERS             |  1 -
+ board/nvidia/p2371-0000/MAINTAINERS           |  1 -
+ board/nvidia/p2371-2180/MAINTAINERS           |  1 -
+ board/nvidia/p2571/MAINTAINERS                |  1 -
+ board/nvidia/p2771-0000/MAINTAINERS           |  1 -
+ board/nvidia/p3450-0000/MAINTAINERS           |  1 -
+ board/nvidia/seaboard/MAINTAINERS             |  1 -
+ board/nvidia/tegratab/MAINTAINERS             |  1 -
+ board/nvidia/venice2/MAINTAINERS              |  1 -
+ board/nvidia/ventana/MAINTAINERS              |  1 -
+ board/nxp/imx93_evk/MAINTAINERS               |  1 -
+ board/nxp/ls1012afrdm/MAINTAINERS             |  4 -
+ board/nxp/ls1012aqds/MAINTAINERS              |  1 -
+ board/nxp/ls1012ardb/MAINTAINERS              |  3 -
+ board/nxp/ls1043aqds/MAINTAINERS              |  7 --
+ board/nxp/ls1043ardb/MAINTAINERS              |  6 --
+ board/nxp/ls1046aqds/MAINTAINERS              |  7 --
+ board/nxp/ls1046ardb/MAINTAINERS              |  7 --
+ board/nxp/ls1088a/MAINTAINERS                 |  9 ---
+ board/nxp/ls2080aqds/MAINTAINERS              |  4 -
+ board/nxp/ls2080ardb/MAINTAINERS              |  6 --
+ board/nxp/lx2160a/MAINTAINERS                 |  2 -
+ board/nxp/mpc837xerdb/MAINTAINERS             |  1 -
+ board/nxp/mx6slevk/MAINTAINERS                |  2 -
+ board/nxp/p2041rdb/MAINTAINERS                |  3 -
+ board/nxp/t104xrdb/MAINTAINERS                | 13 ---
+ board/nxp/t208xqds/MAINTAINERS                |  5 --
+ board/nxp/t208xrdb/MAINTAINERS                |  1 -
+ board/ouya/ouya/MAINTAINERS                   |  1 -
+ board/phytec/phycore_am62ax/MAINTAINERS       |  1 -
+ board/phytec/phycore_am68x/MAINTAINERS        |  1 -
+ board/phytec/phycore_imx8mm/MAINTAINERS       |  1 -
+ .../polyhex/imx8mp_debix_model_a/MAINTAINERS  |  1 -
+ board/qualcomm/dragonboard410c/MAINTAINERS    |  1 -
+ board/qualcomm/dragonboard820c/MAINTAINERS    |  1 -
+ board/qualcomm/dragonboard845c/MAINTAINERS    |  2 -
+ board/qualcomm/qcs404-evb/MAINTAINERS         |  2 -
+ board/renesas/blanche/MAINTAINERS             |  1 -
+ board/renesas/eagle/MAINTAINERS               |  1 -
+ board/renesas/grpeach/MAINTAINERS             |  1 -
+ board/renesas/v3msk/MAINTAINERS               |  1 -
+ board/samsung/starqltechn/MAINTAINERS         |  2 -
+ board/seeed/linkit-smart-7688/MAINTAINERS     |  1 -
+ board/siemens/iot2050/MAINTAINERS             |  1 -
+ board/sifive/unmatched/MAINTAINERS            |  1 -
+ board/sunxi/MAINTAINERS                       |  2 -
+ board/ti/am62ax/MAINTAINERS                   |  1 -
+ board/ti/am62dx/MAINTAINERS                   |  1 -
+ board/ti/am62px/MAINTAINERS                   |  1 -
+ board/ti/j7200/MAINTAINERS                    |  1 -
+ board/toradex/apalis-tk1/MAINTAINERS          |  1 -
+ board/toradex/apalis_t30/MAINTAINERS          |  2 -
+ board/toradex/colibri-imx6ull/MAINTAINERS     |  1 -
+ board/toradex/colibri-imx8x/MAINTAINERS       |  2 -
+ board/toradex/colibri_imx7/MAINTAINERS        |  6 --
+ board/toradex/colibri_t20/MAINTAINERS         |  2 -
+ board/toradex/colibri_t30/MAINTAINERS         |  2 -
+ board/toradex/colibri_vf/MAINTAINERS          |  1 -
+ board/toradex/smarc-imx8mp/MAINTAINERS        |  1 -
+ board/traverse/ten64/MAINTAINERS              |  1 -
+ board/wandboard/MAINTAINERS                   |  1 -
+ board/wexler/qc750/MAINTAINERS                |  1 -
+ board/xiaomi/mocha/MAINTAINERS                |  1 -
+ board/xilinx/zynqmp/MAINTAINERS               |  1 -
+ board/xilinx/zynqmp_r5/MAINTAINERS            |  2 +-
+ .../orangepi-5-ultra-rk3588/MAINTAINERS       |  1 -
+ board/zyxel/nsa325/MAINTAINERS                |  3 -
+ scripts/check_maintainers_files.sh            | 80 ++++++++++++-------
+ 136 files changed, 54 insertions(+), 269 deletions(-)
+
 ---
- tools/dtoc/test_fdt.py | 175 ++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 174 insertions(+), 1 deletion(-)
-
-diff --git a/tools/dtoc/test_fdt.py b/tools/dtoc/test_fdt.py
-index f141f931a949..4ab1365d5318 100755
---- a/tools/dtoc/test_fdt.py
-+++ b/tools/dtoc/test_fdt.py
-@@ -10,6 +10,7 @@ Written by Simon Glass <sjg@chromium.org>
- from argparse import ArgumentParser
- import os
- import shutil
-+import struct
- import sys
- import tempfile
- import unittest
-@@ -754,6 +755,178 @@ class TestProp(unittest.TestCase):
-                          self.dtb.GetFilename())
- 
- 
-+class TestPylibfdt(unittest.TestCase):
-+    """Tests for the parts of pylibfdt that dtoc does not itself use
-+
-+    These bindings come from upstream dtc and have no coverage elsewhere in
-+    U-Boot, so exercise them directly rather than through the Fdt wrapper.
-+    """
-+
-+    @classmethod
-+    def setUpClass(cls):
-+        tools.prepare_output_dir(None)
-+
-+    @classmethod
-+    def tearDownClass(cls):
-+        tools.finalise_output_dir()
-+
-+    def setUp(self):
-+        self.dtb = fdt.FdtScan(find_dtb_file('dtoc_test_simple.dts'))
-+        self.fdt = self.dtb.GetFdtObj()
-+        self.node = self.fdt.path_offset('/spl-test')
-+
-+    def test_hasprop(self):
-+        """Test checking for the presence of a property"""
-+        self.assertTrue(self.fdt.hasprop(self.node, 'boolval'))
-+        self.assertTrue(self.fdt.hasprop(self.node, 'intval'))
-+        self.assertFalse(self.fdt.hasprop(self.node, 'missing'))
-+
-+    def test_hasprop_bad_node(self):
-+        """Test that hasprop() still reports errors other than NOTFOUND"""
-+        with self.assertRaises(libfdt.FdtException) as exc:
-+            self.fdt.hasprop(-1, 'boolval')
-+        self.assertEqual(-libfdt.BADOFFSET, exc.exception.err)
-+
-+    def test_setprop_bool(self):
-+        """Test creating and deleting a boolean property"""
-+        # Leave room for the new property
-+        self.fdt.resize(self.fdt.totalsize() + 1024)
-+        node = self.fdt.path_offset('/spl-test')
-+
-+        self.fdt.setprop_bool(node, 'newbool', True)
-+        self.assertTrue(self.fdt.hasprop(node, 'newbool'))
-+        self.assertEqual(b'', self.fdt.getprop(node, 'newbool'))
-+
-+        # Setting it again should be a no-op
-+        self.fdt.setprop_bool(node, 'newbool', True)
-+        self.assertTrue(self.fdt.hasprop(node, 'newbool'))
-+
-+        self.fdt.setprop_bool(node, 'newbool', False)
-+        self.assertFalse(self.fdt.hasprop(node, 'newbool'))
-+
-+        # Deleting it again should also be a no-op
-+        self.fdt.setprop_bool(node, 'newbool', False)
-+        self.assertFalse(self.fdt.hasprop(node, 'newbool'))
-+
-+    def test_get_path(self):
-+        """Test reading back the full path of a node"""
-+        node = self.fdt.path_offset('/i2c@0/pmic@9')
-+        self.assertEqual('/i2c@0/pmic@9', self.fdt.get_path(node))
-+        self.assertEqual('/', self.fdt.get_path(0))
-+
-+    def test_get_path_no_space(self):
-+        """Test that get_path() retries with a larger buffer as needed"""
-+        node = self.fdt.path_offset('/i2c@0/pmic@9')
-+        self.assertEqual('/i2c@0/pmic@9', self.fdt.get_path(node, size_hint=1))
-+
-+    def test_get_path_bad_node(self):
-+        """Test get_path() on an invalid node offset"""
-+        with self.assertRaises(libfdt.FdtException) as exc:
-+            self.fdt.get_path(-1)
-+        self.assertEqual(-libfdt.BADOFFSET, exc.exception.err)
-+
-+    def test_as_stringlist(self):
-+        """Test decoding a string-list property"""
-+        prop = self.fdt.getprop(self.node, 'stringarray')
-+        self.assertEqual(['multi-word', 'message'], prop.as_stringlist())
-+
-+        prop = self.fdt.getprop(self.node, 'stringval')
-+        self.assertEqual(['message'], prop.as_stringlist())
-+
-+    def test_as_int_lists(self):
-+        """Test decoding integer-array properties"""
-+        prop = self.fdt.getprop(self.node, 'intarray')
-+        self.assertEqual([2, 3, 4], prop.as_uint32_list())
-+        self.assertEqual([2, 3, 4], prop.as_int32_list())
-+
-+        prop = self.fdt.getprop(self.node, 'int64val')
-+        self.assertEqual([0x123456789abcdef0], prop.as_uint64_list())
-+        self.assertEqual([0x123456789abcdef0], prop.as_int64_list())
-+
-+    def test_as_int_lists_negative(self):
-+        """Test that the signed accessors differ from the unsigned ones"""
-+        self.fdt.resize(self.fdt.totalsize() + 1024)
-+        node = self.fdt.path_offset('/spl-test')
-+
-+        self.fdt.setprop(node, 'negs32', struct.pack('>ll', -1, -2))
-+        prop = self.fdt.getprop(node, 'negs32')
-+        self.assertEqual([-1, -2], prop.as_int32_list())
-+        self.assertEqual([0xffffffff, 0xfffffffe], prop.as_uint32_list())
-+
-+        self.fdt.setprop(node, 'negs64', struct.pack('>qq', -1, -2))
-+        prop = self.fdt.getprop(node, 'negs64')
-+        self.assertEqual([-1, -2], prop.as_int64_list())
-+        self.assertEqual([0xffffffffffffffff, 0xfffffffffffffffe],
-+                         prop.as_uint64_list())
-+
-+    def test_address_and_size_cells(self):
-+        """Test reading the cell counts a node uses for its children"""
-+        self.assertEqual(1, self.fdt.address_cells(0))
-+        self.assertEqual(1, self.fdt.size_cells(0))
-+
-+        # i2c@0 overrides both
-+        i2c = self.fdt.path_offset('/i2c@0')
-+        self.assertEqual(1, self.fdt.address_cells(i2c))
-+        self.assertEqual(0, self.fdt.size_cells(i2c))
-+
-+    def test_mem_rsv(self):
-+        """Test adding, reading back and deleting reserve-map records"""
-+        self.assertEqual(0, self.fdt.num_mem_rsv())
-+
-+        # Leave room for the new records
-+        self.fdt.resize(self.fdt.totalsize() + 1024)
-+        self.fdt.add_mem_rsv(0xdeadbeef00000000, 0x100000)
-+        self.fdt.add_mem_rsv(0x1000, 0x2000)
-+        self.assertEqual(2, self.fdt.num_mem_rsv())
-+        self.assertEqual([0xdeadbeef00000000, 0x100000],
-+                         list(self.fdt.get_mem_rsv(0)))
-+        self.assertEqual([0x1000, 0x2000], list(self.fdt.get_mem_rsv(1)))
-+
-+        self.fdt.del_mem_rsv(0)
-+        self.assertEqual(1, self.fdt.num_mem_rsv())
-+        self.assertEqual([0x1000, 0x2000], list(self.fdt.get_mem_rsv(0)))
-+
-+    def test_del_mem_rsv_missing(self):
-+        """Test deleting a reserve-map record which is not there"""
-+        with self.assertRaises(libfdt.FdtException) as exc:
-+            self.fdt.del_mem_rsv(0)
-+        self.assertEqual(-libfdt.NOTFOUND, exc.exception.err)
-+
-+    def test_fdtsw_growth(self):
-+        """Test that running out of space at least doubles the buffer"""
-+        fdtsw = libfdt.FdtSw()
-+        size = len(fdtsw._fdt)
-+        self.assertEqual(fdtsw.INC_SIZE, size)
-+
-+        self.assertTrue(fdtsw.check_space(-libfdt.NOSPACE))
-+        self.assertEqual(size * 2, len(fdtsw._fdt))
-+
-+        self.assertTrue(fdtsw.check_space(-libfdt.NOSPACE))
-+        self.assertEqual(size * 4, len(fdtsw._fdt))
-+
-+        # Anything that is not an out-of-space error leaves the buffer alone
-+        self.assertFalse(fdtsw.check_space(0))
-+        self.assertEqual(size * 4, len(fdtsw._fdt))
-+
-+    def test_fdtsw_build(self):
-+        """Test building a tree large enough to need several expansions"""
-+        fdtsw = libfdt.FdtSw()
-+        fdtsw.finish_reservemap()
-+        fdtsw.begin_node('')
-+        for i in range(50):
-+            fdtsw.begin_node(f'node{i}')
-+            fdtsw.property('data', b'x' * 200)
-+            fdtsw.end_node()
-+        fdtsw.end_node()
-+
-+        out = fdtsw.as_fdt()
-+        self.assertGreater(out.totalsize(), fdtsw.INC_SIZE * 4)
-+        for i in range(50):
-+            node = out.path_offset(f'/node{i}')
-+            self.assertEqual(f'/node{i}', out.get_path(node))
-+            self.assertEqual(b'x' * 200, out.getprop(node, 'data'))
-+
-+
- class TestFdtUtil(unittest.TestCase):
-     """Tests for the fdt_util module
- 
-@@ -970,7 +1143,7 @@ def run_tests(names, processes):
-     test_name = names[0] if names else None
-     result = test_util.run_test_suites(
-         'test_fdt', False, False, False, False, processes, test_name, None,
--        [TestFdt, TestNode, TestProp, TestFdtUtil])
-+        [TestFdt, TestNode, TestProp, TestPylibfdt, TestFdtUtil])
- 
-     return (0 if result.wasSuccessful() else 1)
- 
+base-commit: 2d379a529c257606946831a6dac1c37de6a3f8c0
 
 -- 
-2.54.0
+2.43.0
 
