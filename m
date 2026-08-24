@@ -1,118 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A54BBC5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 12:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A16D9C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 12:59:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1AFCC403F4;
-	Mon, 24 Aug 2026 12:59:31 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2v4tA0Ubak7r; Mon, 24 Aug 2026 12:59:29 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787576369;
-	bh=Ynp3uKxwvh4vNZ+6+UdCIWBJLz+gdvZ5Owh6ad2YRsc=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=OWQ2Zzbx/n6SQsrTN4ou8HL4T/jdb5orrZ6eN3prYO6gHhMQxlOQLNP+85nh2hWTf
-	 M0Mio+3876EIMLXJ9X4E3ovHdRWrKTC8GVON9ERYc80FiSgnuUyNmCu0D2xi0XBxwM
-	 Ey2FC5pBLsdDMP7EwBl5JdBZknv48bNxH3ZXOzR9BO6XbDUHAJ07IG+MIWUeaCGogW
-	 h7WBRuleXpZMggH9yszM4ZcRMRqTBDL7p5vfSzYiOhChn3ON51eExbeBFuB26CwxaY
-	 PyEZ95UwJ9CYUp/cc+sL1YmoCGoubzfc7PjLlmH2f21Xcy7WY0oiq+gVQ78zFq/3Bl
-	 Hp3MUzEWnLTlQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 10FA4402E7;
-	Mon, 24 Aug 2026 12:59:29 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id C304A386
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:59:27 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C0F9680796
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:59:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ED7A4807A6;
+	Mon, 24 Aug 2026 12:59:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aWhRv78R-PeT for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 12:59:27 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=eW8mhvih
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8F71C80766
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:59:26 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-499b2981a7bso18498375e9.3
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 05:59:25 -0700 (PDT)
+ id aaJbDn3w9FcS; Mon, 24 Aug 2026 12:59:45 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787576364; x=1788181164;
+	d=lists.u-boot-project.org; s=default; t=1787576385;
+	bh=OqhocBqwzfKdgepumpLVo9xZbFiI+hYcuMic5h4V7zU=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=nJekZ6w+/VM4OlrbELRET9BSkqKo4xpRK6koTAfxa88GBB52qqjS+xoq+BUvMTQsZ
+	 G7pJLVgGsTBqFvzRjsb3W1O60I2SS8vsoMbrVCtdSdBfVEtRY3CWT3EW7xEdMmiPWv
+	 Djr2RguTZ6H/482rYi9+9cN1LJ2VIOH0DFprDusVDT0SXhJyYz6tSB97Ls5YRiMXXo
+	 AZqr/pDM6QfuQTxs/BW5fGKLxEt2HN5YFv36WBIGI8MhKs40Wx/wLO4tIyUBViISXR
+	 O7C77l3jhh75JxY9grJGTv9yD5wCBaPHv7m8ZPl/iBitYEY7uC+9sUTP4HtDK45OR4
+	 eYP9bhy5PXL7Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 36B4780796;
+	Mon, 24 Aug 2026 12:59:45 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9266641A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:59:44 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8455340340
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:59:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1u8aHH6WhjE2 for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 12:59:44 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=HhcdoTz0
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6253C40330
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:59:43 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-47de0093c42so2718759f8f.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 05:59:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1787576381; x=1788181181;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Ynp3uKxwvh4vNZ+6+UdCIWBJLz+gdvZ5Owh6ad2YRsc=;
- b=eW8mhvihEOLKM/e0lngw/jst7uFhOuLSVH5SKkRdeliDRk+Q7fc/4Cyactbo/18Fs4
- 9IhgXvDKGwSBbgRpreeE/FhSrXSLNqY7mh819MBtSdspP0e11IBT+VzH9pza246+zzHs
- DPS6F7w0tqlEAva1NfvH9KB+SDD6zWDhdtjld2n0lvNegjywEZE/azhSl+kV70YrG+ic
- A0fWVtot5x87uBfXLh946dAUjp8n+18cLxMmPUsXvP1x7uZifMKnWQbsvrY4jun8629E
- FVG8z7DuUEiukPIwTGOB+4UTstUDSeYHSJcs5r71e3fm4i6LWSomaQcCIGHEDeGQkUct
- h2DQ==
+ bh=OqhocBqwzfKdgepumpLVo9xZbFiI+hYcuMic5h4V7zU=;
+ b=HhcdoTz0LM9p3m0uh8U0YcJDTU8RNopFGiITTHCYTKaM1vN+2TciBaHB15nLm4huNq
+ dFsG1Qzazncj9cVoLCRDuzvHRrTjOJCHalTjJvlt1qvkzALij6lrJp4IEhUtJAzds3JN
+ JIHGOBIOHU0MYU/l3uSB6h5BcqF+xJ/2MYT4FF8TWwY3hoX1wyt1a4F1HougsXAFJRYA
+ ewW/G33uMQrLbCF24cYJ0cq+peIv9Tk3hI5TwRRGg5q+Zjk2orem1bGC6NnUNrXiQQte
+ o0JGzvp4JAngLPvmfmdHcPLDM4WrE6bJr2OyLngOAxr37/EIbisYmGTFlhIJk2vRatv4
+ LFLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787576364; x=1788181164;
+ d=1e100.net; s=20251104; t=1787576381; x=1788181181;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Ynp3uKxwvh4vNZ+6+UdCIWBJLz+gdvZ5Owh6ad2YRsc=;
- b=roVRrqiRQSgc+jK+b7LVDDHDzPrhj1xd7vR/CFIrM0s3j4lcSYpKFgMjykK3v63KH1
- JnXUYloYu+3AIvLqbReoRg9JrM4XXCXXt33rfOMIvuemfWbAkPYLtz5bSF7PL0vmEi2V
- vUFfjhC9vCXqlw9gPEApfTijt35hFlRKZ5tNIrU+mqQ6UIGlI+rBJjY2rCT71ji3bH3B
- OzKuAMuIKXyOYf/EvdnRN03fHmfgvDYu3hFPsDf8prqqKdrXqSbr2v/AwwTwlmoOwhcp
- zSXi78EmM77QtWeQ0K8WHiC8gxaUIbHhF/qTSsnD29PkWEJGdF/ht1SAnNp5UC84xe5x
- X/fA==
+ bh=OqhocBqwzfKdgepumpLVo9xZbFiI+hYcuMic5h4V7zU=;
+ b=IZb2pMI9uo9kNOkdw4cj8PF9BPFFgeVckchU+N0425aK1cL3dyVoR5zWICGT5ijKir
+ L320Mhqwtz7Lsb/crGz511lCJ+ZlLEllC+65GcDcNc/NAA2eAt88bnjHiFKhTiRQiiNq
+ SDBZW/fWF4oKEWCHC+1Gg7AoufnnbIOe+aOVHg5YI5K4DZ2RSkOCCvXQ2SZBaRc9DYU/
+ XepkPBG+XOwMah4ovX+FsS/JfviZspyjm/rZK9VdLTCRfmrb0CXXxn84SgcSlAUQyP02
+ mlbkRrjIOCt540NnjOh7k8n/IWVCJwxiiO5tbJU7GVDKdJqvJ7TDSdJXW6XpklP9xMxh
+ ZL8w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrZUQNDbJgmlxAyQF9pZ+ISCaucvicRLhuRldnGROsVaW7T2dF5aurodcbWF4h4jwbA6KatqTc=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mpI+LAcA4CAKpy1ZtO3uyBzTpf1bUrpwdN7WS4yzfpSRhT/S+N
- 0a3o9IEqZzFH6L3yuBpBOW9qmtSrJ9CTrUBTuEkW5Vhuoeg0p/9uj1aPLme7l3a7lsU=
-X-Gm-Gg: AR+sD11yI3fgJL7KT59mSQXHbjFo+RzIcfMGkjjZET5XIlXFG/Lb+1UTQG6bY8kQnnW
- evzvpUgWGLUiJRetHpEmzfpxB34r6vPsmgYF98HAvufOyjGu3n9B0IdoSdxw1DLfzmM129GG+aw
- mZCro4QV1YhZX0aatJ6dnpEmp4J+9WdnZVntyIroqm95TxtzDTsG4iQ/GbuV5fk4IcBSMyHUliR
- e2U0oy5V7EOlOMZC3i/B6F1hdte67ocICZMf9DOT9oM6eJIVuJBN5EFovU9L4ootOd/sL+BHrDP
- 7W0GaPFshhMom6MsgBHZB9yW/NynhFdNY7JtYDFBt38wGhFcYe/dHt9fbq2k13xoTeNQrX7RIa5
- 2NgeWPBNBoyTKQ1rBZBnOBYN50+pJdEHxbgyTfSVU9aRBjGWvQDBkl76MXMsGSPnR4VqsgwI+cY
- RQ+C8f4GgHxPjy0T8pBqGlbH1QEBKdSaR5nczvjb+nl666D2AZWu4fvN8nIbgbpHr2d5u4/Yhar
- 9YRGc3iiTgoyouhVUIfzz1T+yJj9iFb3lsyLG16yg==
-X-Received: by 2002:a05:600c:3e1b:b0:499:a685:c10 with SMTP id
- 5b1f17b1804b1-499b82e5427mr343146935e9.4.1787576363857; 
- Mon, 24 Aug 2026 05:59:23 -0700 (PDT)
+ AHgh+RqavtyJf8N84C85gzEUZC5H4zZIzNptF90s0FHSNuuMXMztc05k8l3C6T02pAVCQYT4PBnUvDM=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kotAhR7B6ru3g8gFXnBj0EAbuYAwHKL4mPSr34slitRXYOF0g1
+ 0X1QlhLjSmRsJNzcxc4/dv87Ic0O2UADy0VDyyEDlXcr+vNGdiz8icCUF3C3zCBJjhc=
+X-Gm-Gg: AR+sD10ppfV32yDW1YILlqRZmnThq3ANqV90CgJsuG6/WoCfKhVtOV1O5OIGH9YbW7L
+ ISxnOg5+BfhO1uyUKofTU7YB0yezTL0StPw3moG1p2sRnx/hjdHXcMeOcNP7biwktjDgRo/3yWE
+ bfNyeFZSJS/POC1fOk7Qy+44JW4W+6N/LMGLdATzSEh6h/DCJIcj78FRz7IFfrGtjWxkNKSONHy
+ C+1usmNQ+baoCtMu1pCKhMdyb8pdwKX/9eYMr2xAJA3Uxwlb8zjCSTG+GGfoHAbFCA/4ymc1L1u
+ VwI+LvKZS0keFvEwoyfGq9O3gUnG1XVFYtyzypIWVBM2C2JMoSzBw8FJ9xM9z+O9iA3RAbl6K17
+ eafSIWMAKDrBkAwT7RmkhviLX2flqHoaYVA+3fa4hriIsRSZOowbZPpREGNTY1uLOZ3hCssdJaW
+ OTt5VXKdkdvEcZTPe9ffNcYQpi98SO4RW+mWTg6T4O5IM1cZEVG5U9S9Ouoa3ju/Tk871IcyTft
+ 8AMDMb26KguqqmMLcP4FjFrRMYjYPGg7g4Z/Kx1lQ==
+X-Received: by 2002:a05:6000:2212:b0:47f:81c4:36a5 with SMTP id
+ ffacd0b85a97d-482c0ba3389mr33399727f8f.15.1787576380945; 
+ Mon, 24 Aug 2026 05:59:40 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:a2ce:e3d3:a5a2:273?
  ([2a01:e0a:106d:1080:a2ce:e3d3:a5a2:273])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499d560f66csm241245e9.1.2026.08.24.05.59.23
+ ffacd0b85a97d-482c9b69a49sm8106788f8f.7.2026.08.24.05.59.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 05:59:23 -0700 (PDT)
-Message-ID: <082abc17-d8bf-4083-80b4-8caae9c5bad1@linaro.org>
-Date: Mon, 24 Aug 2026 14:59:22 +0200
+ Mon, 24 Aug 2026 05:59:40 -0700 (PDT)
+Message-ID: <a5c38878-4233-4df3-871d-09ad511c7260@linaro.org>
+Date: Mon, 24 Aug 2026 14:59:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] watchdog: meson_gxbb: Add support for s4/t7 SoCs
+Subject: Re: [PATCH] reset: meson: Add s4 support
 To: u-boot-amlogic@groups.io, sanderson@brivo.com,
  u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <stefan.roese@mailbox.org>
-References: <20260817163048.1892107-1-sanderson@brivo.com>
+Cc: Tom Rini <trini@konsulko.com>
+References: <20260817163604.1893382-1-sanderson@brivo.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -139,7 +139,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260817163048.1892107-1-sanderson@brivo.com>
+In-Reply-To: <20260817163604.1893382-1-sanderson@brivo.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -157,90 +157,45 @@ Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 8/24/26 14:53, Sean Anderson via groups.io wrote:
-> These SoCs have an almost identical watchdog to other meson SoCs, except
-> the reset bit has moved. Add a new compatible and driver data.
-> 
-> This commit is based off of Linux commits 55908e388b5da ("watchdog: Add
-> a new struct for Amlogic-GXBB driver") and 8c776a0401f1d ("watchdog: Add
-> support for Amlogic-T7 SoCs")
+> Add s4 support. There are no new features, so just define the layout
+> info.
 > 
 > Signed-off-by: Sean Anderson <sanderson@brivo.com>
 > ---
 > 
->   drivers/watchdog/meson_gxbb_wdt.c | 22 +++++++++++++++++-----
->   1 file changed, 17 insertions(+), 5 deletions(-)
+>   drivers/reset/reset-meson.c | 9 +++++++++
+>   1 file changed, 9 insertions(+)
 > 
-> diff --git a/drivers/watchdog/meson_gxbb_wdt.c b/drivers/watchdog/meson_gxbb_wdt.c
-> index fced8f3686b..30694936c93 100644
-> --- a/drivers/watchdog/meson_gxbb_wdt.c
-> +++ b/drivers/watchdog/meson_gxbb_wdt.c
-> @@ -18,7 +18,6 @@
->   #define GXBB_WDT_CTRL_SYS_RESET_NOW		BIT(26)
->   #define GXBB_WDT_CTRL_CLKDIV_EN			BIT(25)
->   #define GXBB_WDT_CTRL_CLK_EN			BIT(24)
-> -#define GXBB_WDT_CTRL_EE_RESET			BIT(21)
->   #define GXBB_WDT_CTRL_EN			BIT(18)
->   
->   #define GXBB_WDT_CTRL_DIV_MASK			GENMASK(17, 0)
-> @@ -28,6 +27,10 @@ struct amlogic_wdt_priv {
->   	void __iomem *reg_base;
+> diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
+> index 8c27563ce23..16d2dc19898 100644
+> --- a/drivers/reset/reset-meson.c
+> +++ b/drivers/reset/reset-meson.c
+> @@ -82,6 +82,11 @@ static const struct meson_reset_drvdata meson_a1_data = {
+>   	.level_offset = 0x40,
 >   };
 >   
-> +struct wdt_params {
-> +	u32 rst;
+> +static const struct meson_reset_drvdata meson_s4_data = {
+> +	.reg_count = 6,
+> +	.level_offset = 0x40,
 > +};
 > +
->   static int amlogic_wdt_set_timeout(struct udevice *dev, u64 timeout_ms)
->   {
->   	struct amlogic_wdt_priv *data = dev_get_priv(dev);
-> @@ -84,14 +87,14 @@ static int amlogic_wdt_expire_now(struct udevice *dev, ulong flags)
->   static int amlogic_wdt_probe(struct udevice *dev)
->   {
->   	struct amlogic_wdt_priv *data = dev_get_priv(dev);
-> +	struct wdt_params *params = (void *)dev_get_driver_data(dev);
-> +	struct clk clk;
->   	int ret;
->   
->   	data->reg_base = dev_remap_addr(dev);
->   	if (!data->reg_base)
->   		return -EINVAL;
->   
-> -	struct clk clk;
-> -
->   	ret = clk_get_by_index(dev, 0, &clk);
->   	if (ret)
->   		return ret;
-> @@ -102,7 +105,7 @@ static int amlogic_wdt_probe(struct udevice *dev)
->   
->   	/* Setup with 1ms timebase */
->   	writel(((clk_get_rate(&clk) / 1000) & GXBB_WDT_CTRL_DIV_MASK) |
-> -	       GXBB_WDT_CTRL_EE_RESET |
-> +	       params->rst |
->   	       GXBB_WDT_CTRL_CLK_EN |
->   	       GXBB_WDT_CTRL_CLKDIV_EN,
->   	       data->reg_base + GXBB_WDT_CTRL_REG);
-> @@ -117,8 +120,17 @@ static const struct wdt_ops amlogic_wdt_ops = {
->   	.expire_now = amlogic_wdt_expire_now,
->   };
->   
-> +static const struct wdt_params gxbb_params = {
-> +	.rst = BIT(21),
-> +};
-> +
-> +static const struct wdt_params t7_params = {
-> +	.rst = BIT(22),
-> +};
-> +
->   static const struct udevice_id amlogic_wdt_ids[] = {
-> -	{ .compatible = "amlogic,meson-gxbb-wdt" },
-> +	{ .compatible = "amlogic,meson-gxbb-wdt", .data = (ulong)&gxbb_params, },
-> +	{ .compatible = "amlogic,t7-wdt", .data = (ulong)&t7_params, },
->   	{}
+>   static const struct udevice_id meson_reset_ids[] = {
+>   	{
+>   		.compatible = "amlogic,meson-gxbb-reset",
+> @@ -95,6 +100,10 @@ static const struct udevice_id meson_reset_ids[] = {
+>   		.compatible = "amlogic,meson-a1-reset",
+>   		.data = (ulong)&meson_a1_data,
+>   	},
+> +	{
+> +		.compatible = "amlogic,meson-s4-reset",
+> +		.data = (ulong)&meson_s4_data,
+> +	},
+>   	{ }
 >   };
 >   
 > ---
 > base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
-> branch: s4_wdt
+> branch: s4_reset
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
