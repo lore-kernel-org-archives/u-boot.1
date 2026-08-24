@@ -1,119 +1,119 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE5CC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 07:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0BBC5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 07:24:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0A30580E03;
-	Mon, 24 Aug 2026 07:23:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6343A60629;
+	Mon, 24 Aug 2026 07:24:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k7t4eet3zW13; Mon, 24 Aug 2026 07:23:02 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MKRjT5UmMGJB; Mon, 24 Aug 2026 07:24:14 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787556182;
-	bh=Q8sKI/hODL3A39Cl0rna+fMJ1kbmVYATQRiuhbtpPTc=;
+	d=lists.u-boot-project.org; s=default; t=1787556254;
+	bh=a80eX9Ll+syPmTijlGYAUrIIn+p8X2WAo6kzyfjl3Lo=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Tg8gM3gD294JvpVsMIVsDW0lF/3SJ+Pi57RC1mIgK7VTunaqLNaKuyYhcMI+uyubq
-	 ZI8+vUkRB/5qFg5Oe5y4+11Wo48vM2B3/yMjh2yqFNm+chByxQ+kN8zmc9YZj3FZyh
-	 6z3NRVS2C7smKGz8sciYvraXISnckngYdaAnvyNK2+IitbhL6YgQdpSspUQXE5oTfm
-	 Xs3D+228T31RbpWHUb5PlIw43CYnhubm7cDlpztdGBF9XofCAXlYDwmzSDVtMDoYt3
-	 rIb1+naK8/yp3wU+HVYAVYNT7wq6IcvxTL7ft0EjZ0QpdMszc0nMHE0vcdYL3RVHdQ
-	 w/19X9dh4AY5Q==
+	b=0GdmzW+AGl2Y7EgTR1iXex6m6Xa7/ZyMGhKLIT9cTnKZ/6f8Dm56kmHiqQOU5P4eD
+	 OxbYka0cw0IBy5s0NOF4/MS3ng51fRd04B2EzPstnJgrpnuBrs2kXOxpuuHODaaGrr
+	 e7u+VMLQvC4NVpT/r/YfACt3hPg8/wprvfBXdgTHYyZhB/SXYurv0zrm4m+CJwTvgf
+	 6tpNMfWSj1DAYMhntHeVzHztPan1ZAQTICirAnRELV9lCskbws9m7rWWUhUhEkHFEo
+	 7nEgnnyWtvEN0hxSKMCa67G7ZW4IONZsA5Ss31UW86HW6wpRM6nXEzUoG0sMOlZq0b
+	 KB2buMgH69Q/Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 08EE280DD2;
-	Mon, 24 Aug 2026 07:23:02 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id B5BE2336
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:23:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 469A960631;
+	Mon, 24 Aug 2026 07:24:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A45E4396
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:24:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A7BD380CBA
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:23:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 9636160631
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:24:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NavhNbchkkyC for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 07:22:59 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9VayyrDAYto7 for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 07:24:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c105::7;
- helo=ch4pr04cu002.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c111::9;
+ helo=dm5pr21cu001.outbound.protection.outlook.com;
  envelope-from=pranav.sanwal@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=4UWyFVJc
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9088580DD2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:22:58 +0000 (UTC)
+ header.s=selector1 header.b=1JZE5oku
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7259760629
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:24:10 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B1C5nVbNLW9942cU/pTuUuoLwU7NVH1y9BzvhkDtd2soSX5FHc4H10qZmQZ1D6GMsonOsObOZjVIznZjoy2rVyg3ecCqJ7zjI10UsthKpcGyVkuYrTFuMf14eQNLU9sfKWSPVWFDglaCG59yY896Sel4pl3F84oGpMhj0N98NRu4xAFCSE2xwjgm95wjzHjQyNwt3k5V2pRv4KqEQsamTjcR9/QAygONzsVCFUESv7LBM7FVc6Ts2+2GRY9Dj9thZDIW1OOqg0oxB0i33lweGx3MGSVD8+hYLa6RP9ZX8vWlrxiqvMIv/g3ZbKDo7hdjDmKO3SH5kwxwzuS/z5tYFA==
+ b=iwlt+GjiDmJP1ioXDTcDR/kZPp9C1DGIcSkOFZNQuJx9h02RWppvZrgPM5ST7f0boaMIirgYQKvOQ+Qfze0sACESiInWWOUFsrALjfh4/JC1zVWcMy4OYL8OuaJ7W64g3zxmGv4hJlqSzRO5//vog3OzACjTDyXBCqiRyFyRs+zFG8pu4HS79bEBGldcMRIpyh+hAP0R8lUIlum+O5g3fx68BOs7klseacEfntewNSTcLJ7FWr0vR+SkqLUa6xofOrLAcvxW115UU96frx2V0TMI7xMJiB4fg3Xwj3kD1fcHspE51yIdSvfgXGj6Ex0OPSvFBVkxybeNcTdpkFWVjQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q8sKI/hODL3A39Cl0rna+fMJ1kbmVYATQRiuhbtpPTc=;
- b=FNeYI5mWFg6MDlIBV/CM6widZ8XeG0q2DRrkKOv11Oc+6CAgfD7BkMxSIQOLwDDGQByxAVqWC1AIGB8Z1YitlP6eZhzy2dEbvmkTk27KA2OLr+RB4GAd9gWgeDIWrRsyeGOhVbPSNBbLQVYwm0fU2ihIl8C+2x4Iq+7WO5YHzsOhTitxMqBZ4WxrBg4CVdgKmpyhUJfbw3/Zw533E7FDMxll7XLH42GrwddJyyWht2FOGWHf++u7DsZlu2qrW4soI448NiOZPoRGJ06X+ekiqI0zPL2cVjxQIVwJKHJR8c2Ff0hEWP7AakI7v8vmC05p9mlnTmTIzP+3s3y+16i4kw==
+ bh=a80eX9Ll+syPmTijlGYAUrIIn+p8X2WAo6kzyfjl3Lo=;
+ b=OC8/Xo1R9GHX+FVqXt9UshHAkOvsBNI75X2tSWc9DhkIZiMMDvK34xDcuxywjFz63YJfI7Xm4Pv5jye5HNEOOHgqJJ6owIRBtyUZLbqiIR0HH1WjRRrNCm5byEfb7UYubML5KKnuADF4Wbte5gDObn10DVsNIDWmRVhNzthb3FqbyovgS32tymdrpVmF1g5e924CuAdC8a8KEoznpTS9XPGQcVV4g9pMb5YQNCbRDfjztU5pCHol8XY985isL6tKWR05F3ZtP8Njb72azPRgJf5QFJCclrd54e1nby3GEsXUArio3j9qgShdcEjPfL8ytKeo46/lg2WtunVfZnOEJQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
  action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q8sKI/hODL3A39Cl0rna+fMJ1kbmVYATQRiuhbtpPTc=;
- b=4UWyFVJciTc1lJCZgJUO/5vlaKv1biQEbTXKRQ4WatJEj2HqeBDiP8lJ4F87gjQwzUyHR4Gy7fxuZD9MynPOJKdJCSWJqVqiPAhAvqhxC3aevMerAi0IvknuxEh4Zm2q+bXMLOB7+dsFbFo0cIKdfmGgHcY5mkR7056BrO3JL4Q=
-Received: from SJ0PR05CA0126.namprd05.prod.outlook.com (2603:10b6:a03:33d::11)
- by SJ1PR12MB6362.namprd12.prod.outlook.com (2603:10b6:a03:454::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 07:22:53 +0000
-Received: from SJ1PEPF00001CDD.namprd05.prod.outlook.com
- (2603:10b6:a03:33d:cafe::12) by SJ0PR05CA0126.outlook.office365.com
- (2603:10b6:a03:33d::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.6 via Frontend Transport; Mon, 24
- Aug 2026 07:22:53 +0000
+ bh=a80eX9Ll+syPmTijlGYAUrIIn+p8X2WAo6kzyfjl3Lo=;
+ b=1JZE5okuu2Ka0AlVS8+YOUcxAMU8y9f6tPDBXPCPYgjCH+lmVG5WTsPTuGo8WPnqJCy6xRq0LCiOoYNdhQX5ZdN+SIOBsknkrB2ubwDeAzGuCWtH+LTQYdq6aJpuCWMESEiH3jE/Iju6xa8srPUXwL2s3RibDFvzQKZc5chFpNg=
+Received: from DS1P222CA0004.NAMP222.PROD.OUTLOOK.COM (2603:10b6:8:454::6) by
+ DM4PR12MB5890.namprd12.prod.outlook.com (2603:10b6:8:66::20) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.339.12; Mon, 24 Aug 2026 07:24:04 +0000
+Received: from SA2PEPF000015CB.namprd03.prod.outlook.com
+ (2603:10b6:8:454:cafe::28) by DS1P222CA0004.outlook.office365.com
+ (2603:10b6:8:454::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.12 via Frontend Transport; Mon,
+ 24 Aug 2026 07:24:04 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF00001CDD.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SA2PEPF000015CB.mail.protection.outlook.com (10.167.241.201) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 07:22:52 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 07:24:03 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 02:22:52 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 02:24:02 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 02:22:51 -0500
+ 2026 02:24:01 -0500
 Received: from xhdamitn41.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 24 Aug 2026 02:22:47 -0500
+ Transport; Mon, 24 Aug 2026 02:23:57 -0500
 From: Pranav Sanwal <pranav.sanwal@amd.com>
 To: <u-boot@lists.u-boot-project.org>
 CC: <git@amd.com>, <michal.simek@amd.com>, Uday Hegde <udayh@amd.com>, "Tom
- Rini" <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Padmarao Begari <padmarao.begari@amd.com>, "Kory Maincent (TI.com)"
- <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>, Raymond Mao
- <raymondmaoca@gmail.com>, Jerome Forissier <jerome@forissier.org>, Weijie Gao
- <weijie.gao@mediatek.com>, Linus Walleij <linusw@kernel.org>, Yao Zi
- <me@ziyao.cc>, Sean Anderson <seanga2@gmail.com>, Ye Li <ye.li@nxp.com>,
+ Rini" <trini@konsulko.com>, "Kory Maincent (TI.com)"
+ <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Padmarao Begari <padmarao.begari@amd.com>,
+ Raymond Mao <raymondmaoca@gmail.com>, Jerome Forissier
+ <jerome@forissier.org>, Linus Walleij <linusw@kernel.org>, Weijie Gao
+ <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>, Ye Li <ye.li@nxp.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 2/5] pci: Add support for AMD QDMA PL PCIe root port
-Date: Mon, 24 Aug 2026 12:51:46 +0530
-Message-ID: <24e0671496322ea483c359d586107c00d7006ce6.1787554549.git.pranav.sanwal@amd.com>
+Subject: [PATCH 3/5] pci: Add support for CPM4 and CPM5 PCIe controllers
+Date: Mon, 24 Aug 2026 12:51:47 +0530
+Message-ID: <529f1b16b05ee843cb89045798631cae6361db6b.1787554549.git.pranav.sanwal@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1787554549.git.pranav.sanwal@amd.com>
 References: <cover.1787554549.git.pranav.sanwal@amd.com>
@@ -122,29 +122,29 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDD:EE_|SJ1PR12MB6362:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5e666ad6-645a-4731-037c-08df01b082d0
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015CB:EE_|DM4PR12MB5890:EE_
+X-MS-Office365-Filtering-Correlation-Id: 58aef095-8758-4f86-1653-08df01b0ad04
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|23010399003|30052699003|36860700016|82310400026|1800799024|6133799003|10067099003|11063799006|56012099006|18002099003|22082099003|3023799007;
-X-Microsoft-Antispam-Message-Info: 3OeKaGal+0GrasF/sFm3DFcHddRlpjWr8I2dv7fk09ZP62fG48FJRCgivay5udDyxWpUFGVZPhWYIkV7A1LYxe6M09DZ4gHGOEi9MOyU6BnjwardSK0uIp59I8EO3oBq9dBD5wqXFOdPpVQEGu7K2teuWAi9/VDdq+lGEqpSMr2Ys6D+S6CAmu0aqJFFBtmZcwM/kMVT2Pi7m1FiygosXk6TqgtZq7WBimmLj0Htlq1cWv335RQKIiCEw2B7UksrhDu5v6mU5+XTm0avJkmPwWQMcRyHFCDxIHDHwesp6FIApJlEmmDRlPTT5W1KcEOKWv5353hol25q2kndoOoDnceMgvw+XWIFoxZx3eNZNGqwo6IykuN+uwpr+YVzMhbjzntRoTgUZhCxM0JfeOAE307tGLD77kE2nU518CTVFNFuUO7I2DJ1mKA/k3um0glrZPmguI7JNBbOSW0XnqczDFvYgcJ4bYQVgswDYa9x4z+iYS5uvjDDTMdMY+r2dqueKhsDLs5aN/yzC6CSU8PzXc18BWXnAwnpUunDdgOAT7dD1icJusztBIODX2bKiuIAHRQ6UmahGVV/m3gSL9vVG8RH+arcl+0jbVa52oBBBRrD1L6LbtN9lA5YXNjCBp8FNd9EqIPchwEB3wfz+PXZJTmAcg9jmAa3DuKdO5oXnMyAeI+ghtQ7zfTKeQZ7yEZaX4oKH3W8Czo43dOg/fu3Tg==
+ ARA:13230040|36860700016|376014|7416014|1800799024|23010399003|82310400026|6133799003|10067099003|56012099006|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: J/9hF8Rkz/gPRoUB0/xzk4LuPFFSJUyZdLRzPJHiitnA7xPZa1FO73OfqHctiA2KVmEUyEnVSUE28pc5+nkmLWXC7+hvOVi9V5/7emR+DPbr7yh1s0Iy7flPjy1ohTDI/9Pf81wPnG4Lzk9jW8HM9gnJu/A8DlhIrsdQ/1oGVLvlTYw1JTt+qKeLjO7x7hWJEZwKNDVpSIj8napEpJh2qtjTyOMqVfhTIKGDEKCg/x5/45gxFW55OsQcA6tsfwgAXNatPBF34AvT3DCbX+hBiDQsHNJnpxnMq5Km9q8g1Gy+EJ/RMVhCTMwYbzX2WNM/ukcpfGOdSNNH2Z+ASYkkKSvVa+g/f/uQivBXVN12VAzadPef0Y4ve9D7yaBF8XoQ3uc1r2QO9C289UBd4IHNyD8xsE0zXlL/lcJJNWPg5NZhMREhiwB014yald/+K+qAIxlV02f8nIT4AgW8AuUoMBBOR9gT1+l2ETFPeEzwG20EUyle9k6KV/HkMAlWhVUgtn10GW5NK/bUkO5YlgvRSPTckum8FDlAehlR0rNtTpGXLaJptsY2adNY2x4Z/clRtOWKHqCcvUIFCdyB/pvPFEQHzJoNfwroV5lp01IgmViHXYnxgFabxk84L6MyhJJbSZSsrfvapV1lkcJX+yMxSScgI/QdF/bEHhmMK6mzP0INwYyD4J1b57xaMJ9ZvCESaHT4S1PfA64qwzLARsCLQQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(23010399003)(30052699003)(36860700016)(82310400026)(1800799024)(6133799003)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003)(3023799007);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(7416014)(1800799024)(23010399003)(82310400026)(6133799003)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: KIdAGgq3I4FJfFNKUyCup7R9ojw7YW9Vo7CePZxlySfaa+jYCLD8oF/hCWhLsLH6+z4O6lhwMGYasv4CnGEAFZyMDFrnVg1vRPonvbBWJ3FX7aPFkDX7s7w3JlZ3ux7yPWgmSyU5MvoyL7foO+djtOk6H47G6+MnKQm3WSAMSru2uR4VBB6JJqzYGLR4h+w8hOkZefpIwEecSS6uoSYxYbzNov6aEGMQqMMHoK24R3PbAwoSJ7jV4aKiv9VXHWc2ifAor7N3W8KMbJBfgb54IhPZ1hM6Zx8WsFfHg3/zr4NaArvqPNrOER4x3kwwHIPA7hspLCQ6Zj0qCjHOShoNtF780VZNzBpUvJNZ0Y2lOcQUyasbP0dkGJp5UQrvWE2e+WvV76Dd9DzJDQHjj2cu2UQmlaVP0gn6pfwg1oM6qIYSy+lIGZIfVcsUd1YU9Xs6
+X-MS-Exchange-AntiSpam-MessageData-0: dN0Xf5D/vBp1U5KZvmfLR8bhoVqF6xhhKA5mNvdn7mU21ATpIFkw6lhft4aiGz00ohib8vT4zJEBC6Aj+kZSXiARyTJAxiglZAN1qvx/PZFnaI6gYejT//grxjWSt1oEsZpFZW4COjb31PMnujJzWunzQZ5D6Ph1Kt1QhvejKKrPCoDvnUAtcMbnUpvrMZ+jSw8jitQTLI6m7JHmuUwDH4GM81jb9q6rCnIotT+Y1QnAQz/3+0essFtiopoFrD1A3MqJBsSODCWYlI1f4SIhZeKn4hGq9D7vy1iqIz9rRPU2QYr3QknvwlvXrhVt/JH3x7dHxfSVTqBGsptFgdXo39EmLNSCZyq4cRBB8uQ42Cxpqtzc6CwWEYtptWstA4yl+kmM7mGnvoa3OrJ8Fqpdf9YkY2pnJuRrrHeAj1OrMHB2t1rVXzvQzPJuTx9N7aFA
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 07:22:52.9171 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5e666ad6-645a-4731-037c-08df01b082d0
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 07:24:03.7844 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 58aef095-8758-4f86-1653-08df01b0ad04
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CDD.namprd05.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CB.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6362
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5890
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -158,79 +158,82 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add PCIe host bridge driver for AMD QDMA PL (Programmable Logic) soft
-IP PCIe5 controller. This driver enables PCIe root port functionality
-for QDMA IP instantiated in the PL fabric.
+Add a host controller driver for the AMD Versal CPM4 and CPM5 PCIe
+bridges, selected via the DT compatible string and enabled with
+CONFIG_PCIE_AMD_CPM. The driver maps the bridge/ECAM regions,
+services ECAM-based config space accesses, masks off all local
+interrupts, and brings up the root port bridge. CPM5 variants also
+support an optional PERST#-driven IP reset sequence ahead of link
+bring-up.
 
 Co-developed-by: Uday Hegde <udayh@amd.com>
 Signed-off-by: Uday Hegde <udayh@amd.com>
 Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
 ---
- MAINTAINERS                    |   5 +
- drivers/pci/Kconfig            |  10 ++
- drivers/pci/Makefile           |   1 +
- drivers/pci/pcie_amd_qdma_pl.c | 205 +++++++++++++++++++++++++++++++++
- 4 files changed, 221 insertions(+)
- create mode 100644 drivers/pci/pcie_amd_qdma_pl.c
+ MAINTAINERS                |   5 +
+ drivers/pci/Kconfig        |   9 +
+ drivers/pci/Makefile       |   1 +
+ drivers/pci/pcie_amd_cpm.c | 363 +++++++++++++++++++++++++++++++++++++
+ 4 files changed, 378 insertions(+)
+ create mode 100644 drivers/pci/pcie_amd_cpm.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index eb48eea55c5..4f184a39a9d 100644
+index 4f184a39a9d..0cc8670cfe4 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -71,6 +71,11 @@ F:	include/alist.h
  F:	lib/alist.c
  F:	test/lib/alist.c
  
-+AMD QDMA PL PCIE DRIVER
++AMD CPM PCIE DRIVER
 +M:	Pranav Sanwal <pranav.sanwal@amd.com>
 +S:	Maintained
-+F:	drivers/pci/pcie_amd_qdma_pl.c
++F:	drivers/pci/pcie_amd_cpm.c
 +
- AMD VERSAL2 PCIE DRIVER
+ AMD QDMA PL PCIE DRIVER
  M:	Pranav Sanwal <pranav.sanwal@amd.com>
  S:	Maintained
 diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index 2b2ccdf4745..da2bebafe9a 100644
+index da2bebafe9a..64bab2b9dd6 100644
 --- a/drivers/pci/Kconfig
 +++ b/drivers/pci/Kconfig
-@@ -444,6 +444,16 @@ config PCIE_XILINX_NWL
+@@ -444,6 +444,15 @@ config PCIE_XILINX_NWL
  	  Say 'Y' here if you want support for Xilinx / AMD NWL PCIe
  	  controller as Root Port.
  
-+config PCIE_AMD_QDMA_PL
-+	bool "AMD QDMA PL PCIe host bridge support"
++config PCIE_AMD_CPM
++	bool "AMD Versal CPM PCIe host bridge support"
 +	depends on ARCH_VERSAL
++	depends on DM_GPIO
 +	select SYS_PCI_64BIT
 +	help
-+	  Say 'Y' here if you want support for the Xilinx/AMD QDMA
-+	  PL PCIe host bridge. The controller is a Soft IP instantiated
-+	  in the PL fabric which can act as a PCIe Root Port. It provides
-+	  ECAM-based configuration space access for device enumeration.
++	  Say 'Y' here if you want support for the AMD Versal
++	  CPM PCIe host bridge.
 +
- config PCIE_PLDA_COMMON
- 	bool
- 
+ config PCIE_AMD_QDMA_PL
+ 	bool "AMD QDMA PL PCIe host bridge support"
+ 	depends on ARCH_VERSAL
 diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
-index e6d71fd172b..a6891154e9e 100644
+index a6891154e9e..3873f357a45 100644
 --- a/drivers/pci/Makefile
 +++ b/drivers/pci/Makefile
 @@ -54,6 +54,7 @@ obj-$(CONFIG_PCIE_OCTEON) += pcie_octeon.o
  obj-$(CONFIG_PCIE_DW_SIFIVE) += pcie_dw_sifive.o
  obj-$(CONFIG_PCIE_UNIPHIER) += pcie_uniphier.o
  obj-$(CONFIG_PCIE_XILINX_NWL) += pcie-xilinx-nwl.o
-+obj-$(CONFIG_PCIE_AMD_QDMA_PL) += pcie_amd_qdma_pl.o
++obj-$(CONFIG_PCIE_AMD_CPM) += pcie_amd_cpm.o
+ obj-$(CONFIG_PCIE_AMD_QDMA_PL) += pcie_amd_qdma_pl.o
  obj-$(CONFIG_PCIE_PLDA_COMMON) += pcie_plda_common.o
  obj-$(CONFIG_PCIE_STARFIVE_JH7110) += pcie_starfive_jh7110.o
- obj-$(CONFIG_PCIE_DW_AMD) += pcie_dw_amd.o
-diff --git a/drivers/pci/pcie_amd_qdma_pl.c b/drivers/pci/pcie_amd_qdma_pl.c
+diff --git a/drivers/pci/pcie_amd_cpm.c b/drivers/pci/pcie_amd_cpm.c
 new file mode 100644
-index 00000000000..2143b0a1a27
+index 00000000000..8377e772792
 --- /dev/null
-+++ b/drivers/pci/pcie_amd_qdma_pl.c
-@@ -0,0 +1,205 @@
-+// SPDX-License-Identifier: GPL-2.0-only
++++ b/drivers/pci/pcie_amd_cpm.c
+@@ -0,0 +1,363 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * PCIe host bridge driver for AMD QDMA PL PCIe bridge (no XDMA support)
++ * PCIe host controller driver for AMD CPM
 + *
 + * Copyright (C) 2026 Advanced Micro Devices, Inc.
 + */
@@ -240,198 +243,356 @@ index 00000000000..2143b0a1a27
 +#include <dm.h>
 +#include <pci.h>
 +
++#include <asm/gpio.h>
 +#include <dm/device_compat.h>
 +#include <linux/delay.h>
 +#include <linux/io.h>
++#include <linux/ioport.h>
++
++/*
++ * End of conventional reset (PERST# de-asserted) to first configuration
++ * request (device able to respond with a "Request Retry Status" completion),
++ * from PCIe r6.0, sec 6.6.1.
++ */
++#define PCIE_T_RRS_READY_MS	100
++
++/*
++ * "PERST# active time", as per Table 2-10: Power Sequencing and Reset
++ * Signal Timings of the PCIe Electromechanical Specification,
++ * Revision 6.0, symbol "T_PERST".
++ */
++#define PCIE_T_PERST_US		100
 +
 +/* Register definitions */
-+#define AMD_QDMA_REG_IDR			0x138
-+#define AMD_QDMA_REG_IMR			0x13c
-+#define AMD_QDMA_REG_PSCR			0x144
-+#define AMD_QDMA_REG_RPSC			0x148
++#define AMD_CPM_PCIE0_RST		0x00000308
++#define AMD_CPM5_PCIE0_RST		0x00000318
++#define AMD_CPM5_PCIE1_RST		0x0000031C
 +
-+#define AMD_QDMA_IMR_ALL_MASK		0x0ff30fe9
-+#define AMD_QDMA_IDR_ALL_MASK		0xffffffff
++#define AMD_CPM_PCIE_REG_IDR		0x00000E10
++#define AMD_CPM_PCIE_REG_IMR		0x00000E14
++#define AMD_CPM_PCIE_REG_PSCR		0x00000E1C
++#define AMD_CPM_PCIE_REG_RPSC		0x00000E20
 +
-+/* Root Port Status/control Register definitions */
-+#define AMD_QDMA_REG_RPSC_BEN		BIT(0)
++/* Interrupt registers definitions */
++#define AMD_CPM_INTR_LINK_DOWN		0
++#define AMD_CPM_INTR_HOT_RESET		3
++#define AMD_CPM_INTR_CFG_PCIE_TIMEOUT	4
++#define AMD_CPM_INTR_CFG_TIMEOUT	8
++#define AMD_CPM_INTR_CORRECTABLE	9
++#define AMD_CPM_INTR_NONFATAL		10
++#define AMD_CPM_INTR_FATAL		11
++#define AMD_CPM_INTR_CFG_ERR_POISON	12
++#define AMD_CPM_INTR_PME_TO_ACK_RCVD	15
++#define AMD_CPM_INTR_INTX		16
++#define AMD_CPM_INTR_PM_PME_RCVD	17
++#define AMD_CPM_INTR_MSI		17
++#define AMD_CPM_INTR_SLV_UNSUPP		20
++#define AMD_CPM_INTR_SLV_UNEXP		21
++#define AMD_CPM_INTR_SLV_COMPL		22
++#define AMD_CPM_INTR_SLV_ERRP		23
++#define AMD_CPM_INTR_SLV_CMPABT		24
++#define AMD_CPM_INTR_SLV_ILLBUR		25
++#define AMD_CPM_INTR_MST_DECERR		26
++#define AMD_CPM_INTR_MST_SLVERR		27
++#define AMD_CPM_INTR_SLV_PCIE_TIMEOUT	28
 +
-+/* Phy Status/Control Register definitions */
-+#define AMD_QDMA_REG_PSCR_LNKUP		BIT(11)
-+#define QDMA_BRIDGE_BASE_OFF			0xcd8
++#define IMR(x) BIT(AMD_CPM_INTR_ ##x)
 +
-+/* Parameters for the waiting for link up routine */
-+#define LINK_WAIT_MAX_RETRIES			10
-+#define LINK_WAIT_DELAY_US			90000
++#define AMD_CPM_PCIE_IMR_ALL_MASK		\
++	(IMR(LINK_DOWN)		| \
++	 IMR(HOT_RESET)		| \
++	 IMR(CFG_PCIE_TIMEOUT)	| \
++	 IMR(CFG_TIMEOUT)	| \
++	 IMR(CORRECTABLE)	| \
++	 IMR(NONFATAL)		| \
++	 IMR(FATAL)		| \
++	 IMR(CFG_ERR_POISON)	| \
++	 IMR(PME_TO_ACK_RCVD)	| \
++	 IMR(INTX)		| \
++	 IMR(PM_PME_RCVD)	| \
++	 IMR(SLV_UNSUPP)	| \
++	 IMR(SLV_UNEXP)		| \
++	 IMR(SLV_COMPL)		| \
++	 IMR(SLV_ERRP)		| \
++	 IMR(SLV_CMPABT)	| \
++	 IMR(SLV_ILLBUR)	| \
++	 IMR(MST_DECERR)	| \
++	 IMR(MST_SLVERR)	| \
++	 IMR(SLV_PCIE_TIMEOUT))
 +
-+/**
-+ * struct amd_qdma_pcie - AMD QDMA PL PCIe bridge private data
-+ * @dev: PCIe host bridge device
-+ * @breg_base: Bridge register base address
-+ * @ecam_base: ECAM configuration space base address
-+ */
-+struct amd_qdma_pcie {
-+	struct udevice *dev;
-+	void __iomem *breg_base;
-+	void __iomem *ecam_base;
++#define AMD_CPM_PCIE_IDR_ALL_MASK		0xFFFFFFFF
++
++#define AMD_CPM_PCIE_REG_RPSC_BEN		BIT(0)
++
++#define AMD_CPM_PCIE_REG_PSCR_LNKUP		BIT(11)
++
++enum amd_cpm_version {
++	AMD_CPM_VER_1,
++	AMD_CPM_VER_5_HOST0,
++	AMD_CPM_VER_5_HOST1,
 +};
 +
-+static inline u32 amd_qdma_pcie_read(struct amd_qdma_pcie *pcie, u32 reg)
++/**
++ * struct amd_cpm_variant - CPM variant information
++ * @version: CPM version
++ * @cpm_pcie_rst: Offset for the PCIe IP reset
++ */
++struct amd_cpm_variant {
++	enum amd_cpm_version version;
++	u32 cpm_pcie_rst;
++};
++
++/**
++ * struct amd_cpm_pcie - AMD CPM PCIe bridge private data
++ * @dev: PCIe host bridge device
++ * @reg_base: Bridge register base address
++ * @cfg_base: ECAM configuration space base address
++ * @crx_base: CPM5 reset control base address (optional)
++ * @variant: CPM version check pointer
++ */
++struct amd_cpm_pcie {
++	struct udevice *dev;
++	void __iomem *reg_base;
++	void __iomem *cfg_base;
++	void __iomem *crx_base;
++	const struct amd_cpm_variant *variant;
++};
++
++static inline u32 amd_cpm_pcie_read(struct amd_cpm_pcie *pcie, u32 reg)
 +{
-+	u32 val = readl(pcie->breg_base + reg + QDMA_BRIDGE_BASE_OFF);
++	u32 val = readl(pcie->reg_base + reg);
 +
 +	dev_dbg(pcie->dev, "rd reg 0x%03x = 0x%08x\n", reg, val);
 +
 +	return val;
 +}
 +
-+static inline void amd_qdma_pcie_write(struct amd_qdma_pcie *pcie, u32 val,
-+				       u32 reg)
++static inline void amd_cpm_pcie_write(struct amd_cpm_pcie *pcie,
++				      u32 val, u32 reg)
 +{
 +	dev_dbg(pcie->dev, "wr reg 0x%03x = 0x%08x\n", reg, val);
-+	writel(val, pcie->breg_base + reg + QDMA_BRIDGE_BASE_OFF);
++	writel(val, pcie->reg_base + reg);
 +}
 +
-+static bool amd_qdma_pcie_link_up(struct amd_qdma_pcie *pcie)
++static bool amd_cpm_pcie_link_up(struct amd_cpm_pcie *pcie)
 +{
-+	return !!(amd_qdma_pcie_read(pcie, AMD_QDMA_REG_PSCR) &
-+		  AMD_QDMA_REG_PSCR_LNKUP);
++	return !!(amd_cpm_pcie_read(pcie, AMD_CPM_PCIE_REG_PSCR) &
++		  AMD_CPM_PCIE_REG_PSCR_LNKUP);
 +}
 +
-+static int amd_qdma_pcie_config_address(const struct udevice *bus,
-+					pci_dev_t bdf, uint offset,
-+					void **paddress)
++static int amd_cpm_pcie_config_address(const struct udevice *bus,
++				       pci_dev_t bdf, uint offset,
++				       void **paddress)
 +{
-+	struct amd_qdma_pcie *priv = dev_get_priv(bus);
++	struct amd_cpm_pcie *priv = dev_get_priv(bus);
 +	u32 busnum = PCI_BUS(bdf) - dev_seq(bus);
 +	void *addr;
 +
-+	if (busnum == 0) {
-+		if (PCI_DEV(bdf) > 0 || PCI_FUNC(bdf) > 0)
-+			return -ENODEV;
-+	} else {
-+		if (!amd_qdma_pcie_link_up(priv))
-+			return -ENODEV;
-+	}
-+
-+	addr = priv->ecam_base;
++	addr = priv->cfg_base;
 +	addr += PCIE_ECAM_OFFSET(busnum, PCI_DEV(bdf), PCI_FUNC(bdf), offset);
++	dev_dbg(priv->dev, "cfg bdf=%02x:%02x.%x offset=0x%x addr=%p\n",
++		PCI_BUS(bdf), PCI_DEV(bdf), PCI_FUNC(bdf), offset, addr);
 +	*paddress = addr;
 +
 +	return 0;
 +}
 +
-+static int amd_qdma_pcie_read_config(const struct udevice *bus,
-+				     pci_dev_t bdf, uint offset,
-+				     ulong *valuep, enum pci_size_t size)
++/*
++ * The root port's own function (bus 0, device 0, function 0) reports a
++ * bogus 64-bit BAR0 that autoconfig can never place. Mask it off so it
++ * always reads back as not implemented.
++ */
++static bool amd_cpm_pcie_is_own_bar(const struct udevice *bus, pci_dev_t bdf,
++				    uint offset)
 +{
-+	return pci_generic_mmap_read_config(bus, amd_qdma_pcie_config_address,
-+					     bdf, offset, valuep, size);
++	u32 busnum = PCI_BUS(bdf) - dev_seq(bus);
++
++	return busnum == 0 && PCI_DEV(bdf) == 0 && PCI_FUNC(bdf) == 0 &&
++	       offset >= PCI_BASE_ADDRESS_0 && offset < PCI_BASE_ADDRESS_2;
 +}
 +
-+static int amd_qdma_pcie_write_config(struct udevice *bus, pci_dev_t bdf,
-+				      uint offset, ulong value,
-+				      enum pci_size_t size)
++static int amd_cpm_pcie_read_config(const struct udevice *bus,
++				    pci_dev_t bdf, uint offset,
++				    ulong *valuep, enum pci_size_t size)
 +{
-+	/*
-+	 * The QDMA PL bridge's config space only decodes 32-bit accesses;
-+	 * narrower writes must be promoted to a 32-bit read-modify-write.
-+	 */
-+	return pci_generic_mmap_write_config32(bus, amd_qdma_pcie_config_address,
-+						bdf, offset, value, size);
++	if (amd_cpm_pcie_is_own_bar(bus, bdf, offset)) {
++		*valuep = 0;
++		return 0;
++	}
++
++	return pci_generic_mmap_read_config(bus, amd_cpm_pcie_config_address,
++					    bdf, offset, valuep, size);
 +}
 +
-+static const struct dm_pci_ops amd_qdma_pcie_ops = {
-+	.read_config = amd_qdma_pcie_read_config,
-+	.write_config = amd_qdma_pcie_write_config,
++static int amd_cpm_pcie_write_config(struct udevice *bus, pci_dev_t bdf,
++				     uint offset, ulong value,
++				     enum pci_size_t size)
++{
++	if (amd_cpm_pcie_is_own_bar(bus, bdf, offset))
++		return 0;
++
++	return pci_generic_mmap_write_config(bus, amd_cpm_pcie_config_address,
++					     bdf, offset, value, size);
++}
++
++static const struct dm_pci_ops amd_cpm_pcie_ops = {
++	.read_config = amd_cpm_pcie_read_config,
++	.write_config = amd_cpm_pcie_write_config,
 +};
 +
-+static int amd_qdma_pcie_bridge_init(struct amd_qdma_pcie *pcie)
++static int amd_cpm_pcie_host_init(struct amd_cpm_pcie *pcie)
 +{
-+	int retries;
++	const struct amd_cpm_variant *variant = pcie->variant;
++	struct udevice *dev = pcie->dev;
++	struct gpio_desc *reset_gpio;
 +	u32 val;
 +
-+	/* Check if the link is up or not */
-+	for (retries = 0; retries < LINK_WAIT_MAX_RETRIES; retries++) {
-+		if (amd_qdma_pcie_link_up(pcie))
-+			break;
-+		udelay(LINK_WAIT_DELAY_US);
++	if (pcie->crx_base) {
++		reset_gpio = devm_gpiod_get_optional(dev, "reset",
++						     GPIOD_IS_OUT |
++						     GPIOD_IS_OUT_ACTIVE);
++		if (reset_gpio) {
++			/* Assert the PCIe IP reset */
++			writel(BIT(0), pcie->crx_base + variant->cpm_pcie_rst);
++
++			udelay(PCIE_T_PERST_US);
++
++			/* Deassert the PCIe IP reset */
++			writel(0, pcie->crx_base + variant->cpm_pcie_rst);
++
++			/* Deassert the reset signal */
++			dm_gpio_set_value(reset_gpio, 0);
++			mdelay(PCIE_T_RRS_READY_MS);
++		}
 +	}
 +
-+	if (retries >= LINK_WAIT_MAX_RETRIES) {
-+		dev_warn(pcie->dev, "PHY link never came up\n");
-+		return -ETIMEDOUT;
-+	}
-+
-+	dev_dbg(pcie->dev, "PCIe Link is UP\n");
++	dev_dbg(dev, "PCIe link %s\n",
++		amd_cpm_pcie_link_up(pcie) ? "up" : "down");
 +
 +	/* Disable all interrupts */
-+	amd_qdma_pcie_write(pcie, ~AMD_QDMA_IDR_ALL_MASK, AMD_QDMA_REG_IMR);
++	amd_cpm_pcie_write(pcie, ~AMD_CPM_PCIE_IDR_ALL_MASK,
++			   AMD_CPM_PCIE_REG_IMR);
 +
 +	/* Clear pending interrupts */
-+	val = amd_qdma_pcie_read(pcie, AMD_QDMA_REG_IDR) & AMD_QDMA_IMR_ALL_MASK;
-+	amd_qdma_pcie_write(pcie, val, AMD_QDMA_REG_IDR);
++	val = amd_cpm_pcie_read(pcie, AMD_CPM_PCIE_REG_IDR);
++	amd_cpm_pcie_write(pcie, val & AMD_CPM_PCIE_IMR_ALL_MASK,
++			   AMD_CPM_PCIE_REG_IDR);
 +
-+	/* Set the Bridge enable bit */
-+	val = amd_qdma_pcie_read(pcie, AMD_QDMA_REG_RPSC);
-+	amd_qdma_pcie_write(pcie, val | AMD_QDMA_REG_RPSC_BEN, AMD_QDMA_REG_RPSC);
-+
-+	return 0;
-+}
-+
-+static int amd_qdma_pcie_parse_dt(struct amd_qdma_pcie *priv)
-+{
-+	struct udevice *dev = priv->dev;
-+
-+	priv->breg_base = dev_read_addr_name_ptr(dev, "breg");
-+	if (!priv->breg_base) {
-+		dev_err(dev, "failed to get breg address\n");
-+		return -EINVAL;
-+	}
-+
-+	priv->ecam_base = dev_read_addr_name_ptr(dev, "cfg");
-+	if (!priv->ecam_base) {
-+		dev_err(dev, "failed to get cfg address\n");
-+		return -EINVAL;
-+	}
++	/* Enable root port bridge */
++	val = amd_cpm_pcie_read(pcie, AMD_CPM_PCIE_REG_RPSC);
++	amd_cpm_pcie_write(pcie, val | AMD_CPM_PCIE_REG_RPSC_BEN,
++			   AMD_CPM_PCIE_REG_RPSC);
 +
 +	return 0;
 +}
 +
-+static int amd_qdma_pcie_probe(struct udevice *dev)
++static int amd_cpm_pcie_map_res(struct udevice *dev, const char *name,
++				void __iomem **map)
 +{
-+	struct amd_qdma_pcie *priv = dev_get_priv(dev);
++	struct resource res;
++	int ret;
++
++	ret = dev_read_resource_byname(dev, name, &res);
++	if (ret)
++		return ret;
++
++	*map = devm_ioremap(dev, res.start, resource_size(&res));
++	if (!*map)
++		return -ENOMEM;
++
++	return 0;
++}
++
++static int amd_cpm_pcie_parse_dt(struct amd_cpm_pcie *pcie)
++{
++	struct udevice *dev = pcie->dev;
++	int ret;
++
++	ret = amd_cpm_pcie_map_res(dev, "cfg", &pcie->cfg_base);
++	if (ret)
++		return ret;
++
++	if (pcie->variant->version == AMD_CPM_VER_1) {
++		/*
++		 * On original CPM the ECAM and bridge registers share the same
++		 * region; cfg_base and reg_base both point into it.
++		 */
++		pcie->reg_base = pcie->cfg_base;
++	} else {
++		ret = amd_cpm_pcie_map_res(dev, "cpm_csr", &pcie->reg_base);
++		if (ret)
++			return ret;
++	}
++
++	/* cpm_crx is optional; absence means no PCIe IP reset sequence */
++	amd_cpm_pcie_map_res(dev, "cpm_crx", &pcie->crx_base);
++
++	return 0;
++}
++
++static int amd_cpm_pcie_probe(struct udevice *dev)
++{
++	struct amd_cpm_pcie *priv = dev_get_priv(dev);
 +	int err;
 +
 +	priv->dev = dev;
++	priv->variant = (const struct amd_cpm_variant *)dev_get_driver_data(dev);
++	if (!priv->variant)
++		return -EINVAL;
 +
-+	err = amd_qdma_pcie_parse_dt(priv);
++	err = amd_cpm_pcie_parse_dt(priv);
 +	if (err) {
-+		dev_err(dev, "Parsing DT failed\n");
++		dev_err(dev, "failed to parse DT: %d\n", err);
 +		return err;
 +	}
 +
-+	err = amd_qdma_pcie_bridge_init(priv);
++	err = amd_cpm_pcie_host_init(priv);
 +	if (err) {
-+		dev_err(dev, "HW Initialization failed\n");
++		dev_err(dev, "failed to initialize host: %d\n", err);
 +		return err;
 +	}
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id amd_qdma_pcie_of_match[] = {
-+	{ .compatible = "xlnx,qdma-host-3.00", },
++static const struct amd_cpm_variant cpm_host = {
++	.version = AMD_CPM_VER_1,
++	.cpm_pcie_rst = AMD_CPM_PCIE0_RST,
++};
++
++static const struct amd_cpm_variant cpm5_host = {
++	.version = AMD_CPM_VER_5_HOST0,
++	.cpm_pcie_rst = AMD_CPM5_PCIE0_RST,
++};
++
++static const struct amd_cpm_variant cpm5_host1 = {
++	.version = AMD_CPM_VER_5_HOST1,
++	.cpm_pcie_rst = AMD_CPM5_PCIE1_RST,
++};
++
++static const struct udevice_id amd_cpm_pcie_of_match[] = {
++	{
++		.compatible = "xlnx,versal-cpm-host-1.00",
++		.data = (ulong)&cpm_host,
++	},
++	{
++		.compatible = "xlnx,versal-cpm5-host",
++		.data = (ulong)&cpm5_host,
++	},
++	{
++		.compatible = "xlnx,versal-cpm5-host1",
++		.data = (ulong)&cpm5_host1,
++	},
 +	{ /* sentinel */ }
 +};
 +
-+U_BOOT_DRIVER(amd_qdma_pcie) = {
-+	.name = "amd_qdma_pcie",
++U_BOOT_DRIVER(amd_cpm_pcie) = {
++	.name = "amd_cpm_pcie",
 +	.id = UCLASS_PCI,
-+	.of_match = amd_qdma_pcie_of_match,
-+	.probe = amd_qdma_pcie_probe,
-+	.priv_auto = sizeof(struct amd_qdma_pcie),
-+	.ops = &amd_qdma_pcie_ops,
++	.of_match = amd_cpm_pcie_of_match,
++	.probe = amd_cpm_pcie_probe,
++	.priv_auto = sizeof(struct amd_cpm_pcie),
++	.ops = &amd_cpm_pcie_ops,
 +};
 -- 
 2.43.7
