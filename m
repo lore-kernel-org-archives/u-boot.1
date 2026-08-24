@@ -4,97 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDA5C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 19:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6457FC5DF9C
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 19:03:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DE1E2808A9;
-	Mon, 24 Aug 2026 19:03:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AE80C80C5C;
+	Mon, 24 Aug 2026 19:03:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vfrvhgjGlrW8; Mon, 24 Aug 2026 19:03:54 +0000 (UTC)
+ id v6fqn6o_w2vM; Mon, 24 Aug 2026 19:03:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787598234;
-	bh=9kEeGp9V70F32LVDbwR7RFUkC9sPWMUzCWDvpDhjvv0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=nHI1EWoo0seK9qBppcWiGpwj+KaSVTX2xXb6KGhu2BdVNabPiMooIQ+CYDC1dOsSf
-	 9hpFy2IYBefjrG8R71LwUZDvNYPJn0abAzhCTry++ugm6GHN2BkHNE34M3nSKiX+zL
-	 P4CYaMweYKtLsbTAQdV1RK9HS5W9DAZ4EP/Mjtzury0L2nL2LLXQ17RxTpg+DWUyLc
-	 2eVBJ+CDCGWcI3mDOYlWiILbjtOUO1pEH72XfelEuWH8Z5RVlge5xd6WFij2SumvLU
-	 e5yAH/ty6LFSRZ7MKMfDI8Tm1q7jvMYIuupPcCRxCrh/rqC8kKeGHDEoAWg+D2hyQo
-	 pdYq1LiB1s4Ew==
+	d=lists.u-boot-project.org; s=default; t=1787598236;
+	bh=BYLXqULgNkbqYYOmRkQ/K+pcl9pumX9v6taNnGhHMGo=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=nQngQiHQtOWlkwE5RDTDq2E4yTCGtXPh0qeKssRgiwlOgbQbg5SiMcLwMHPMriRYS
+	 ACIYKlY4XFU+hxDnDbojMJ1k87mjq4m791WH2+pOK99GCfL9AUQ6i7Tr2RW4rWdpDZ
+	 0vJKum+3vcQUDWJyI9MPc9Nm39o7Z3N4MWccVeMe1yFUjvVbhSY5VS3xjnW/Eiw+NL
+	 rgm3NQQs3eD/tI0WlW+GEORnTKY1PCNuNHE+V5QrsQPEWXHjuRWbKvmzb3sPsfrVKl
+	 wPmBa+j4nv6Rffyy8VjIZt/LeXKfBHT/dlC8bji13/r2nzZYnkZ5O8j3tAAAPXF03E
+	 VCYZatAlgBTlQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 19063806C0;
-	Mon, 24 Aug 2026 19:03:54 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id D48274B8
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:30:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AA881806C0;
+	Mon, 24 Aug 2026 19:03:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 10328279
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:31:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BA4BB405A4
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:30:54 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 01F5460627
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:31:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m1K2uhQIKNeY for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 18:30:54 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WAnLqAv65YKy for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 18:31:00 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62d; helo=mail-ej1-x62d.google.com;
+ client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
  envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=F5EB3rq0
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B88134059B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:30:52 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c2055573c8cso589852566b.3
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 11:30:52 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=klXZkPOO
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0EE8860618
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:30:58 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-c20ce3c118aso1192066b.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 11:30:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787596251; x=1788201051;
+ d=gmail.com; s=20251104; t=1787596257; x=1788201057;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9kEeGp9V70F32LVDbwR7RFUkC9sPWMUzCWDvpDhjvv0=;
- b=F5EB3rq0CPbr6hKTZL2XkjvWSVwmjQSods5UG1U0VrZLXlQlT0WIb97uL9qI7qS30F
- plqyZfLpJ9im665o5DeA3wl3pCPxpn0IG5wj74l4HLxoOdxTQhuv/ftJqL+PbNasyh/X
- pIbUZnit0wrisB4U126rNR/KDSyBCYe9LvRVXhDTQas7A8OjS+Ajm5OBS1CxgS3L40gf
- X4EEjai4AmOPfY3ya6tKpiPlMpFqzc4zZ6b1bAzJ6NEm3/z9QKh61CXDG8sOoUsXHsFj
- Qh5OvCQylDjnJxOgJqw0/PbnE6YryufAl3hQi5LFYQpnKa8QGXdDnInBxHyWcGzEJU6B
- 6DeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787596251; x=1788201051;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=9kEeGp9V70F32LVDbwR7RFUkC9sPWMUzCWDvpDhjvv0=;
- b=C9ELkidEHH4Lgh5LH5s48goW6ITLpcbp7EHfNDJJZgSJsBYXOdu0QnZ05IA236SM/K
- pH3kg/UmICrW3GJfCLk8/Ej8CGh6Cfu6Vmth8bD2nAj4ZzYEFV7sNQEDb7yL58Yjq+Il
- nLY6+9xHlZZG37QAk2X93trYbM+TeLEkIeYSOWSRXqHQiMd8nbNp07SWdz94IiR8lZAa
- ThvMPS5qGfZe23P33Onn3VTuxqU6MObj3rxuwI9qkXXCEm5tcKh/Lc+CQD6SJhTD2k+x
- h3SdVmfOT5xIiXdZfiAiLCHV4Zccufb7vukM4LW+VeFAMaQGr1meUrB0bPrQpwQaZwbb
- G3GA==
-X-Gm-Message-State: AFuF++mCQfAoi5TsOwKvU/bZCA9oTAJhS6u/E/GTc3jJWOYFudSqEYKu
- XZkn818whNeAQq4FylVTGf9yUkiaRgslvIRu0p1HJiSG8oVyCA1MhKGB
-X-Gm-Gg: AR+sD11fIhVQdbGK68YNExOZi2dRsLbM0KwhQyE68977DXkRn+JNe60bs21Ei68IcAa
- v2Cb5VD8FjuuF1SUtWKYPkUsGNDamncsTgZmmIUSfsboEDdstxRs8bV1lgxwzyncFPq8iyRMwu1
- UT2Ply7R9WNmC1gy8MYrBI9hHMKApI8WpoeOEylIP3AjAO+Fk46gAbVTTZyo+yXIP56mHGX/r0c
- 1pUNz5MggIdCiVG4JzYlxSgWj8ZnlnujYKl+Uy+q6TTHc6aBTOxDOGhMjPbjVLADqp9l26t7dlO
- dF6sYW4kO2TwT5YxkQIoZXj6tvWKYBLovnKrKpbXmHUv0fpqozbLc/4Hevi6YdcwXEjkb6cpzt1
- 10RKJFoBa5w3nzdX83+pwm3diGSg3K/gATnMoRQ7tBShU+uvBGfT2BUJKOHWANQkMs+L/qoNAnO
- yi6CypnC4XLsUhI+k9oQE694MrY3uinJvLjY4GVn2IugVDAW4vFmtye6E=
-X-Received: by 2002:a17:906:209c:b0:c24:cc3c:db11 with SMTP id
- a640c23a62f3a-c24cc3cdcf3mr646060466b.21.1787596250741; 
- Mon, 24 Aug 2026 11:30:50 -0700 (PDT)
+ bh=BYLXqULgNkbqYYOmRkQ/K+pcl9pumX9v6taNnGhHMGo=;
+ b=klXZkPOOyuU+mLkM1J+xxqn0Zb3+o563TZ1l/Q01HdwQfpNraF6GLoFi9LO1wU2vNP
+ AaOJEdK+UUiZMcoKscTgQ8BUxKEZ7BHnuJ5V6CvQbLD7vFOsl3CK8FyoEGT7pJqDlPR3
+ LgcoGk1VbVecGMuEvlrv/5/sTaVy8jdMHzv5GFwP5ZyVRG02+XFhvnyzs0ckEiupnp3T
+ pYAfawV/jVeGMiixaQ8kT88988PPQvNUWffMt349fe0pMlX33h/D35SLAhKBsMhdOZRc
+ sWVXtK4QO1VPp4w6UOy3i4dKhAYCGpKfIGDO9ZWquCwe5dgRecILZpT1uhUjnTgCAHVT
+ 1WYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787596257; x=1788201057;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=BYLXqULgNkbqYYOmRkQ/K+pcl9pumX9v6taNnGhHMGo=;
+ b=AgHeELTwsVBzAd/5TUzSVnhTODBMzir2GFkLZ7BhUngAJt1PYK4yGGUphO/M8HnoSV
+ 09lPRANvBxEBeOytX/S8hapJR8SqM4FnzTZuItVrAdXrfTXyjhPCi/6eQWWmsr1poEfj
+ d5xU1YrpXdbHdVYvuNQV0FO13C30+jtCfJtBmNWMD6ymY20OqZlNDCRzRhKySyRy9OVr
+ P7apfaRlf3gRXmSh/37vaiIL7e8JGM43S6nQ2mb2ns4AERhPDhIBvHhzYTe35NfPhcnX
+ VA0l0/oF5SVYT7jkHd0Onjb17wAr5y1NMf85UlBcHtVrJC3D5nq+IPRQqfFoehqetjf9
+ 8G/Q==
+X-Gm-Message-State: AFuF++lY+qswUAMmBTM5cqXsIBEtV+i8z09fCkiLDQbEFw/g7CUx9yAK
+ 8jvTLZQDUlcK9M61hijLU3XSbQEo3kJtU41Rk34jWEOzf+bqbbAyp9OX
+X-Gm-Gg: AR+sD11EqAMc4meAzgqsGT2JzpbfH5h59AljNMJWksl6hGF/ODIvlXQUt2GN2bMoS9T
+ 5qPmwvnQdud8EScXeCROUajlPEZeqHk9gatxtD5bYi5vBsSXD9sIO47QULZkuJCvCz166ZsQobW
+ 3GAUWVTwo8J815Lh/THpbMyXxlZgoWkVOHNw3CnWp7yWIgrg5nmJm8f1D1WzjEPVJwfP9kdVlmK
+ +Euwmv55Ee9ABdtHZE0qe6bj/y8Doj+CBUVcCFw0tRWcdAafBrFHVdpeqsWlAlvFZ9lMWSA4g3N
+ 85lXjwXK1FO3iTngZtJ5kJHCo2Z0d7KwC+iPzwIOkEzOZuQJHScQ0SzTk36ieiN7o0ek8QsMSNr
+ IbEGbufaa40MX7Eg2fiNJ9C+BeMMtixuA041dMqrV5PaX4TOuL1SnrmJTlBuii+mQblAmWVUOT4
+ /sqFfsUt+yyaJT/Ccld1AeEtSFoURSNVABEwf9S/kklxQ=
+X-Received: by 2002:a17:907:c8c5:b0:c12:3cbf:9f6d with SMTP id
+ a640c23a62f3a-c24e2b10f38mr92211166b.1.1787596256758; 
+ Mon, 24 Aug 2026 11:30:56 -0700 (PDT)
 Received: from eichest-laptop.lan ([2a02:168:af72::cb4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c249606a8edsm1355044366b.6.2026.08.24.11.30.49
+ a640c23a62f3a-c249606a8edsm1355044366b.6.2026.08.24.11.30.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 11:30:50 -0700 (PDT)
+ Mon, 24 Aug 2026 11:30:56 -0700 (PDT)
 From: Stefan Eichenberger <eichest@gmail.com>
 To: francesco.dolcini@toradex.com, trini@konsulko.com,
  ilias.apalodimas@linaro.org, sbabic@nabladev.com, festevam@gmail.com,
@@ -107,11 +109,13 @@ To: francesco.dolcini@toradex.com, trini@konsulko.com,
  hayashi.kunihiko@socionext.com, sean.anderson@linux.dev, sjg@chromium.org,
  ernest.vanhoecke@toradex.com
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 0/6] usb: fix DWC3/gadget issues and enable USB on Toradex
- i.MX95 boards
-Date: Mon, 24 Aug 2026 20:29:08 +0200
-Message-ID: <20260824183048.419198-1-eichest@gmail.com>
+Subject: [PATCH v1 1/6] usb: dwc3: core: only provide legacy gadget IRQ
+ handler when USB_DWC3_GADGET
+Date: Mon, 24 Aug 2026 20:29:09 +0200
+Message-ID: <20260824183048.419198-2-eichest@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260824183048.419198-1-eichest@gmail.com>
+References: <20260824183048.419198-1-eichest@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 24 Aug 2026 19:03:53 +0000
@@ -128,67 +132,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This series fixes a few USB issues that show up on the Toradex i.MX95
-based modules and finally enables USB support for them.
+From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-The i.MX95 has two USB controllers: a host-only DWC3 controller and a
-ChipIdea OTG controller. Getting both of them to work together in
-U-Boot requires a couple of fixes:
+Building a board with USB_DWC3=y (DWC3 used purely as an XHCI host
+controller), USB_DWC3_GADGET unset, and DM_USB_GADGET disabled (e.g.
+to use CONFIG_CI_UDC for a separate ChipIdea gadget/OTG controller)
+fails to link:
 
-- Combining DWC3 (host only) with CI_UDC as the gadget driver, while
-  DM_USB_GADGET is disabled, currently fails to link because DWC3 core
-  provides dm_usb_gadget_handle_interrupts() even when the DWC3 gadget
-  driver is not built (patch 1).
+drivers/usb/gadget/ci_udc.o: in function `dm_usb_gadget_handle_interrupts':
+drivers/usb/gadget/ci_udc.c:983: multiple definition of `dm_usb_gadget_handle_interrupts';
+drivers/usb/dwc3/core.o:drivers/usb/dwc3/core.c:1034: first defined here
+drivers/usb/dwc3/core.o: in function `dm_usb_gadget_handle_interrupts':
+drivers/usb/dwc3/core.c:1044: undefined reference to `dwc3_gadget_uboot_handle_interrupt'
 
-- The DWC3 reference clock lookup added by commit c6583354b7c1 ("usb:
-  dwc3: Look up reference clock DT phandle in both controller DT nodes")
-  resolves an index found in the child node's clock-names against the
-  clk_bulk of the parent glue node. On the Verdin iMX95 the two lists
-  have a different order, so the wrong clock is picked, which shows up
-  as intermittent enumeration failures behind a USB hub (patch 2).
+Add "&& CONFIG_IS_ENABLED(USB_DWC3_GADGET)" to the guard so this code
+is only compiled when the DWC3 gadget driver it depends on is actually
+present, matching the Makefile dependency. Boards that combine DWC3
+(host) with a separate legacy gadget driver like CI_UDC, with
+DM_USB_GADGET disabled, now link correctly. Boards that already use
+DWC3 in gadget mode without DM_USB_GADGET are unaffected since
+USB_DWC3_GADGET is set for them.
 
-- ehci_gadget picks the first USB device it finds, which on the i.MX95
-  is the host-only DWC3 controller instead of the ChipIdea OTG
-  controller, so "ums" never enters device mode. Skip host-only
-  controllers when looking for the gadget controller (patch 3).
+Fixes: 4d1589808970 ("usb: udc: dwc3: Fold board dm_usb_gadget_handle_interrupts() into DWC3 gadget")
+Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+---
+ drivers/usb/dwc3/core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The remaining patches enable CI_UDC on the Verdin iMX95 and turn on the
-DWC3 host controller support for the Verdin iMX95 and the Toradex SMARC
-iMX95.
-
-Testing
--------
-
-USB was tested on a Verdin iMX95, a Toradex SMARC iMX95 and an Apalis
-iMX6 (as a regression test for the ehci_gadget change) with:
-
-  usb start
-
-and with:
-
-  ums 0 mmc 0
-
-All three boards were enumerating a USB stick and appeared as USB
-devices on a PC connected to the USB device port.
-
-Stefan Eichenberger (6):
-  usb: dwc3: core: only provide legacy gadget IRQ handler when
-    USB_DWC3_GADGET
-  usb: dwc3-generic: fix ref clock lookup indexing wrong clk_bulk array
-  usb: skip host-only devices when picking the ehci gadget controller
-  configs: verdin-imx95: enable CI_UDC usb gadget driver
-  toradex: verdin-imx95: enable DWC3 USB controller support
-  toradex: smarc-imx95: enable DWC3 USB controller support
-
- .../dts/imx95-toradex-smarc-dev-u-boot.dtsi   |  8 -------
- .../arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi |  8 -------
- configs/toradex-smarc-imx95_defconfig         |  4 ++++
- configs/verdin-imx95_defconfig                |  3 ++-
- drivers/usb/dwc3/core.c                       |  2 +-
- drivers/usb/dwc3/dwc3-generic.c               | 24 +++++++++++++++++--
- drivers/usb/host/usb-uclass.c                 | 23 ++++++++++++++++--
- 7 files changed, 50 insertions(+), 22 deletions(-)
-
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index be198041f08..9bff5149c5f 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -1016,7 +1016,7 @@ MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
+ MODULE_LICENSE("GPL v2");
+ MODULE_DESCRIPTION("DesignWare USB3 DRD Controller Driver");
+ 
+-#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
++#if !CONFIG_IS_ENABLED(DM_USB_GADGET) && CONFIG_IS_ENABLED(USB_DWC3_GADGET)
+ __weak int dwc3_uboot_interrupt_status(struct udevice *dev)
+ {
+ 	return 1;
 -- 
 2.55.0
 
