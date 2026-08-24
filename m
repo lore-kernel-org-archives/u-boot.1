@@ -4,89 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2891FC5DF9B
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:31:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1319CC5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:48:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4EF9E80C9C;
-	Mon, 24 Aug 2026 14:31:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4601880B5C;
+	Mon, 24 Aug 2026 14:48:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Rbdu8kICM688; Mon, 24 Aug 2026 14:31:44 +0000 (UTC)
+ id fRy6r-lYkrzW; Mon, 24 Aug 2026 14:48:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787581904;
-	bh=6xqbtojtOq7Z2V8qUubG/YUELIURnCXtnek4YKVFHmA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787582923;
+	bh=VSapvP65X7ZcwKYbTL+3APmSLeE6uJ5REPP1oMvZwgk=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hLCgsOQNJWr1wjVriYCbnj2O4o0u26awCAqoeiPcTqe99QLrgGUDIcJCtWpEskEcy
-	 lt8riuxTq8OfYdyKcXyA3pUNJg8jhnjjcL+kQ/P6WE3Ozp/C8yJ1XpFzVkARecz75Q
-	 jMv2CVkAelZzpHQn/H7lg8N7erUy1+IeGIbeDAQsC8yRWlTbwkZvXJ/u6jzVNrhjet
-	 OuMrvcLAbOrJa1SwXjL2axwJXc2hKsoVPmInO1l048BzEFoGcMhPgkhyYFjWG2xHzU
-	 yQOIblBQg/evfkikQElak04qhtiCEHmCKa/oac3i1sqYG+vFPdlQHpb9KC1wtD1Cw0
-	 3w/xFn22yhOKg==
+	b=g5s0fsBb0mYXeLMXFLkXLE8buh0W738jlEbHUVcRHb3vtAC4rIpZzvSQLcgSn19Zv
+	 SoAH8dh3etnmHIx8UD6FS4KEPJD4GZpZ2gUMgBpkOG+bfduSzbxjxPVO8zjd1rs7oZ
+	 mgus2sVBTzY5JMsi2dmJa7F3p6N5ck++KQ8/l6zbKTxECxe+yKrlVhoKZ/s4TLl2aA
+	 +d6fQJuqS3VNOfA0+4z6Zae69lIrPUnDkq/icraeTOnRZr1bzHWV4F8MP7d7larQ1H
+	 1nSNZkhRLxL4Qq3k2EqWxS5V/ykwOW82Q8QbvThEvfz1RLAB2x8VDYKdtgHh+ExMvN
+	 k4S2bXmtlyqfw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 04F3D80B42;
-	Mon, 24 Aug 2026 14:31:44 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 5B83941A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:31:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8251180B42;
+	Mon, 24 Aug 2026 14:48:43 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2A59742B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:48:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 41ECA80B42
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:31:42 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1D2DB80B40
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:48:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IhCrS2bnSLhE for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 14:31:41 +0000 (UTC)
+ id UI7dxPLY9PRR for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 14:48:41 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:d548::8fad; helo=smtp-8fad.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=D/0NXZ+i
-Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
- [IPv6:2001:1600:19:d548::8fad])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3618380B34
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:31:39 +0000 (UTC)
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hTCyw41xVzsx4;
- Mon, 24 Aug 2026 16:31:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1787581896;
- bh=6xqbtojtOq7Z2V8qUubG/YUELIURnCXtnek4YKVFHmA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=D/0NXZ+iOuC5HGechue6Kek5nVKKu1LejrZ4LpWmGcSw4E9u96iiPhWxqQazxoFkt
- UdOtI6Wo52yOOGcFnur73rQPIje0opTS9pxw2on4xu2DqV/GKaUiQQ0G48Ah6v81FC
- 1KD/U4aPgfFFs8uyJCfgas7NtmPvoO2CRctGw25faG97OzEqAplDyhwdk1Ajl9zUcV
- QpT1xFKZzER0Lxv98elbXMSVXpDGbQqvOosZA4ZeHbLhDHuQybVri82qnLts6UBXBF
- YOqCzbvBclvnBZyQil9E2LE5a5OBnwBcHEMMvWFiE/DnYmPXAxjnwtqLQiKwAm6JRL
- c2jY08v/7H4wg==
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hTCyv2KZJzhsC; Mon, 24 Aug 2026 16:31:35 +0200 (CEST)
-Message-ID: <19ba2ba9-57d9-40a5-b75b-69f3a63261d7@0leil.net>
-Date: Mon, 24 Aug 2026 16:31:29 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] rockchip: rk3506: Update ENV_MEM_LAYOUT_SETTINGS
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-References: <20260803190946.2259514-1-jonas@kwiboo.se>
- <20260803190946.2259514-3-jonas@kwiboo.se>
- <574bc6fa-8469-417c-9418-023d1bd0eb29@0leil.net>
- <363bae8f-de1b-4e74-b6f9-de35efc7e119@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <363bae8f-de1b-4e74-b6f9-de35efc7e119@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=mfY7CXKb
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E54E180B42
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:48:39 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c197e7e4e94so636667166b.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:48:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1787582917; x=1788187717;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=VSapvP65X7ZcwKYbTL+3APmSLeE6uJ5REPP1oMvZwgk=;
+ b=mfY7CXKbCY11jXBHHWnSRroSBJF4CdQg4K3ibuOHSjsch0r1GkeESJQ+Leu0Fx61Xe
+ gYQ+oR9RxTVMNV9X9T1qq7S7vfI8BiNL+Z2sIvtDVdQUKCkH2FP1GE3MzGdJUu06++ln
+ MZNCTfyWfTXveypjMGmrp08iZTMdz3YLv4Kmn6bhChu5GNNsYZa+nW+IAqkn9802IW6M
+ HqD0e0b872RDDF3zZgqkrxEzvn1jrrdyTY0hhom0ciImj9yjWyvUiOfas3Dmhf/luKO/
+ 7WZ7bAlytF4mZYAVBVq250y9RT7xXL5bDY1G1xSmUoLVgIBmaliJml5dkNNuRmSLLyyP
+ 8PIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787582917; x=1788187717;
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=VSapvP65X7ZcwKYbTL+3APmSLeE6uJ5REPP1oMvZwgk=;
+ b=ccGFrOdDLw6a0xIA3pd6+U+uouYno1O3ymom629ytLNyWMmjIpZE0/THe25JBhm8u/
+ ULdRG9zMcXdOycSjAXCLunxx8wSQputWqVk6aYD/frksyzE+it/hTXUw0ozrLQ6hAElM
+ qxNcMJS8m+KsUcdM0x/zxQ7k8fQ3KcfapEFlVOx1cEoEq9gyh0wP25ByctrQQgrV3LAG
+ jxPtO9eai+WFWIx9oYGDnmx7KrWi/yTloxvc1j95VjdrRyTnQVoKI2SKHNXBo7OxyzlM
+ 04rGfKHmYEQL4Mf02RTDCuZ1UdTtD57qWVbWIkSoZFq5QVqAErwvgR9vGGE5KhvpPwJJ
+ NKzg==
+X-Gm-Message-State: AFuF++kl0jkd/03N2opJNc21QdTYE5HlhktoV8Aayj9BA5YuPRxBMGDk
+ 14bkrylWPAa4dICbBRvh1uxXnPOXfgU35izfooUAxeuA/tsSgqR8mSSgY/P7x0yyVrgrZrOYTpt
+ QlWGuhZo=
+X-Gm-Gg: AR+sD11bkazhAotf3TImZIoyMugHCN/m/AK8DUc6uVQUyQjga7XpGMUqb9xTM/+VQkx
+ veKddr6wSDGzx3bXjC8JGX1dhi2K0tuaLItI01+JgnmRGsD166+RLWMqyl670gUvg+Hdzs6Q0ie
+ tQ9I6Dev5L0kXZMJ52Jbf8bcSjuLpeQiRAkmQl/TNTmH+UBh6tUZXjhW1S8NiGbXJ0Sin/kYu5s
+ qB0FJ3I1HSubWXRi6vtN7kOZEleUrn7AXcUjuKRob+Vfn6ZMzF4FWHN0Nnv7kcJ/esFFJv0xgty
+ Y2nUGIm8kRQTQxViOcJQzQmsp732LqX0e36/WdcL2bbLkHb+aKe/9GA8WgB5Ntm0MUNyceFbdQi
+ rURb6VDMxp4+JY8BRlrnHBxuHG3e9UviQoCCKV2Q3dhQ+lp1RsZ6rB/2FezJKG5cZkNINoOA50X
+ 5DlVrhRrTSnFBxrzSIlctW2DRqqdE0MAsoMcuTxpYVtavDXQu/hZdnxCnCvmdboxQ4uX1Lx0qrU
+ uDAQ4PWumt2k3QWG72LCs9EWgoRhJ8hRLAv8lXGh+SgBHstCnu7ZS90
+X-Received: by 2002:a17:906:730e:b0:c24:7cb5:d617 with SMTP id
+ a640c23a62f3a-c249238c369mr2094959866b.1.1787582917473; 
+ Mon, 24 Aug 2026 07:48:37 -0700 (PDT)
+Received: from localhost (host-212-171-227-71.pool212171.interbusiness.it.
+ [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2496734bfcsm1409134666b.43.2026.08.24.07.48.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Aug 2026 07:48:36 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 24 Aug 2026 16:48:36 +0200
+Message-Id: <DKX99AW58JTS.8UMKA33XJC4J@baylibre.com>
+Subject: Re: [v2,0/5] firmware-owned devicetree for EBBR / SystemReady IR
+Cc: <u-boot@lists.u-boot-project.org>
+To: "Simon Glass" <sjg@chromium.org>, <ccaione@baylibre.com>
+From: "Carlo Caione" <ccaione@baylibre.com>
+X-Mailer: aerc 0.22.0
+References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
+ <CAFLszTgX08U3GpcvwkvzBinY7X21EC_P2nEZPx3ikVH=vBt_yA@mail.gmail.com>
+In-Reply-To: <CAFLszTgX08U3GpcvwkvzBinY7X21EC_P2nEZPx3ikVH=vBt_yA@mail.gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -100,224 +126,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Jonas,
+On Sat Aug 15, 2026 at 8:45 PM CEST, Simon Glass wrote:
+> Hi Carlo,
+>
+> On 2026-07-28T13:20:42, Carlo Caione <ccaione@baylibre.com> wrote:
+>
+>> Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
+>> as an independent behaviour fix. Patch 2 adds the loader, binding,
+>> documentation and shared EFI staging policy. Patches 3 and 4 integrate
+>> the EFI bootmeth and boot manager. Patch 5 adds sandbox coverage.
+> [..]
+>
+>> - 'fw_fdt_part' can pin an A/B partition and 'fw_fdt_config' can select
+>>   an explicit configuration.
+>
+> Just to check - is exposing these as environment variables really the
+> right long-term interface? U-Boot has been moving configuration into
+> the control devicetree, and both of these look like properties that
+> would sit naturally on the u-boot,firmware-fdt-block node, with the
+> env var overriding for A/B slot selection only. What do you think?
 
-On 8/13/26 11:09 AM, Jonas Karlman wrote:
-> Hi Quentin,
-> 
-> On 8/12/2026 11:49 AM, Quentin Schulz wrote:
->> Hi Jonas,
->>
->> On 8/3/26 9:09 PM, Jonas Karlman wrote:
->>> The RK3506G1 has 64 MiB integrated DDR2, the RK3506G2 has 128 MiB
->>> integrated DDR3 and the RK3506B support external memory up to 1 GiB.
->>>
->>> Current memory layout cause issues using compressed kernels or ramdisk
->>> due to the default load addresses being used.
->>>
->>
->> RK3506 is an Aarch32 SoC, and Linux kernels on that architecture are
->> self-decompressing, U-Boot doesn't do anything with compressed kernels.
->> You can see that kernel_comp_addr_r is only ever used in cmd/booti.c
->> which depends on ARM64 to be actually built.
->>
->> I simply recommend getting rid of this variable as it's quite
->> misleading. All other Aarch32 Rockchip SoCs we support don't seem to be
->> setting this variable, so no additional cleanup to do.
->> Same for kernel_comp_size.
-> 
-> Thanks for looking deeper, I will drop these two in v2.
-> 
->>
->>> Change the default load addresses to also work on SoC variants with
->>> limited memory, keep all default addresses in the 0-64 MiB range.
->>>
->>> 			 old		 new
->>>     scriptaddr		5 MiB		2 MiB
->>>     pxefile_addr_r	6 MiB		1 MiB
->>>     kernel_addr_r		32.5 MiB	8 MiB
->>>     kernel_comp_addr_r	128 MiB		48 MiB
->>>     fdt_addr_r		30.5 MiB	4 MiB
->>>     fdtoverlay_addr_r	31.5 MiB	6 MiB
->>>     ramdisk_addr_r	96 MiB		48 MiB
->>
->> That leaves less than 18MiB for an initramfs (don't forget U-Boot proper
->> is located at the end of the DRAM as far as I remember), which is very
->> little.
->>
->> Do we really need 2MiB for the DTB and DTBO? 1MiB ought to be enough for
->> the DTB and I'm sure less than 1MiB ought to be enough per overlay
->> (overlay are loaded and applied one after the other). This should free
->> an additional 2MiB for either the kernel or initramfs.
-> 
-> Agree, I thought I had seen DTB may need to use a 4 MiB aligned address,
-> e.g. for RISC-V, but ARM seem to only need it to be any 64-bit aligned
-> address.
-> 
+Hi Simon,
+Replying only to this point because all the other comments have my ACK.
 
-8-byte alignment is required by the Device Tree spec, c.f. 
-https://devicetree-specification.readthedocs.io/en/latest/chapter5-flattened-format.html#alignment
+Agreed regarding fw_fdt_part: it is indeed intended as the runtime A/B
+slot override, while the stable storage location remains described by
+the provider phandle and partition UUID/name in the control devicetree.
 
->>
->> The multi_v5_defconfig and multi_v7_defconfig zImage kernels as built by
->> KernelCI are respectively 7.5 and 11.6MiB as of yesterday, c.f.
->> https://dashboard.kernelci.org/build/maestro%3A6a7b3f4762f33761c0aedc06
->> https://dashboard.kernelci.org/build/maestro%3A6a7b3f6562f33761c0aedc2f
->> So maybe we can reserve a bit less than 40MiB for the kernel? But maybe
->> kernel_addr_r is also used for FIT images which may be much bigger than
->> the size of the kernel alone? The load/entry properties are required for
->> images of type kernel according to the FIT spec so that part isn't
->> something we need to deal with.
-> 
-> My local Rockchip ARMv7 kernel without loadable module support is now
-> around 26M for Image and 9.9M for zImage, it used to be just below 32M
-> for Image when I also enabled more debugging options and partial support
-> for other SoCs. So support for up to 32M uncompressed would be nice :-)
-> 
+Now, fw_fdt_config is slightly different though. We need configuration
+selection to depend on the selected boot target. For example in our
+usecase, the same firmware FIT may provide a base-only configuration
+for a generic distribution and an overlay configuration for a platform
+image. The control devicetree is identical in both cases, so a fixed
+property there cannot express that choice.
 
-What's the benefit of using an uncompressed image in your workflow?
-
-> I have made some minor adjustments, see below, that seem to work to boot
-> into a minimal initramfs busybox rootfs in my lab.
-> 
-> Looking closer at ARM kernel booting, I can see that during
-> decompression the kernel will be decompressed to close to start of DRAM,
-> and if the compressed and decompressed images overlaps the compressed
-> image will be copied to end of the target uncompressed image before it
-> continues.
-> 
-
-See 
-https://people.kernel.org/linusw/how-the-arm32-linux-kernel-decompresses. 
-"Close to start of DRAM" depends on TEXT_OFFSET of the kernel I think.
-
-> U-Boot also tries to move ramdisk and FDT to end of memory to reduce the
-> chance of the kernel decompression to overwrite FDT or ramdisk.
-> 
-
-Unless initrd_high and fdt_high are set I believe?
-
-> For my simple zImage + FDT + initramfs.cpio.gz pxe boot setup following
-> seem to work.
-> 
->    U-Boot 2026.10-rc2-00243-g77aab9b3d743-dirty (Aug 13 2026 - 08:08:37 +0000)
-> 
->    Model: Luckfox Lyra Plus
->    SoC:   RK3506
->    DRAM:  64 MiB  (board has 128M, code limits to 64M to emulate)
-> 
->    => printenv
->    fdt_addr_r=0x00200000			2 MiB
->    fdtcontroladdr=3d39fa0
->    fdtfile=rockchip/rk3506-luckfox-lyra-plus.dtb
->    fdtoverlay_addr_r=0x00300000		3 MiB
->    kernel_addr_r=0x00400000		4 MiB
->    loadaddr=0x200000			2 MiB
->    pxefile_addr_r=0x00100000		1 MiB
->    ramdisk_addr_r=0x02400000		36 MiB
->    scriptaddr=0x00180000			1.5 MiB
->    
->    CONFIG_SYS_MALLOC_LEN=0x200000	2 MiB
->    CONFIG_SYS_BOOTM_LEN=0x2000000	32 MiB
->    CONFIG_SYS_LOAD_ADDR=0x200000		2 MiB
->    CONFIG_STACK_SIZE=0x100000		1 MiB
-> 
->    => meminfo
->    DRAM:  64 MiB
-> 
->    Region                Base          Size           End           Gap
->    --------------------------------------------------------------------
->    code               3f63000         8c6fc       3fef6fc
->    malloc             3d44000        21f000       3f63000             0
->    board_info         3d43fc0            34       3d43ff4             c
->    global_data        3d43e80           138       3d43fb8             8
->    devicetree         3d39fa0          9ec8       3d43e68            18
->    stack              3c39f80        100000       3d39f80            20
->    lmb                3c39f80             0       3c39f80             0
->    lmb                3c36000          3f80       3c39f80             0
->    free                     0       3c36000       3c36000             0
-> 
->    Retrieving file: pxelinux.cfg/default-arm-rk3506
->    Load address: 0x100000
->    Bytes transferred = 192 (c0 hex)
->    
->    Retrieving file: /armhf/zImage
->    Load address: 0x400000
->    Bytes transferred = 10318920 (9d7448 hex)
->    
->    Retrieving file: /armhf/initramfs.cpio.gz
->    Load address: 0x2400000
->    Bytes transferred = 1756164 (1acc04 hex)
->    
->    Retrieving file: /armhf/rockchip/rk3506-luckfox-lyra-plus.dtb
->    Load address: 0x200000
->    Bytes transferred = 31752 (7c08 hex)
->    
->    Kernel image @ 0x400000 [ 0x000000 - 0x9d7448 ]
->    ## Flattened Device Tree blob at 00200000
->       Booting using the fdt blob at 0x200000
->    Working FDT set to 200000
->       Loading Ramdisk to 03a53000, end 03bffc04 ... OK
->       Loading Device Tree to 03c03000, end 03c0dc07 ... OK
->    Working FDT set to 3c03000
->    
->    Starting kernel ...
->    
->    [    0.000000] Booting Linux on physical CPU 0xf00
->    [    0.000000] Linux version 7.2.0-rc6-next-20260803 ...
->    [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
->    [    0.000000] CPU: div instructions available: patching division code
->    [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
->    [    0.000000] OF: fdt: Machine model: Luckfox Lyra Plus
->    [    0.000000] earlycon: uart8250 MMIO32:0xff0a0000 (options '')
->    [    0.000000] printk: legacy bootconsole [uart8250] enabled
->    [    0.000000] printk: debug: ignoring loglevel setting.
->    [    0.000000] Memory policy: Data cache writealloc
->    [    0.000000] cma: Reserved 4 MiB at 0x03000000
->    [    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
->    [    0.000000] Zone ranges:
->    [    0.000000]   Normal   [mem 0x0000000000000000-0x0000000003ffffff]
->    [    0.000000]   HighMem  empty
->    [    0.000000] Movable zone start for each node
->    [    0.000000] Early memory node ranges
->    [    0.000000]   node   0: [mem 0x0000000000000000-0x0000000003ffffff]
->    [    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000003ffffff]
-> 
->    ~ # free -m
->                total        used        free      shared  buff/cache   available
->    Mem:             39          17          16           4           7          16
->    Swap:             0           0           0
-> 
-> There is likely other optimizations that can be done, e.g. reduce malloc
-> and stack size. I have tried to keep following in mind when choosing above
-> load addresses:
-> 
-> - Avoid first 1 MiB of DRAM for future OPTEE-OS or TF-A use
-> - Allow for use of 32 MiB uncompressed kernel image
-> - Keep scripts/pxe/fdt/overlays before kernel and ramdisk to allow for
->    a larger ramdisk on boards with more memory
-> - Keep kernel load address as close to start of DRAM as possible
-> 
->>
->> Have you figured out how to identify the variant of the RK3506 already?
->> Another option is to dynamically modify those variables (if they aren't
->> already part of the environment) based on the size of available DRAM
->> (and/or SoC variant). I don't like the idea too much but that could be a
->> way to stretch the available memory for each binary loaded by U-Boot as
->> much as possible.
-> 
-> Agree, we correctly identify amount of DRAM so should be possible to add
-> code that dynamically adjusts addresses, but I also want to avoid this
-> if possible, hence not putting any other address after ramdisk, to allow
-> for larger ramdisk on devices with more memory.
-> 
-
-Yeah, don't know what to do here. Another option is to have config 
-fragments for variants of the SoC and increase/reduce them in that config.
-
-Can you add a comment in the file just above ENV_MEM_LAYOUT_SETTINGS 
-that the addresses are chosen to work with <insert name of SoC variants> 
-with x MiB of DRAM already packaged in the silicon.
+Static selection is already covered by compatible best-match and
+the FIT default. I would retain fw_fdt_config only as an explicit
+runtime override above those mechanisms and clarify that role in the
+documentation if that is ok with you.
 
 Cheers,
-Quentin
+
+--
+Carlo Caione
