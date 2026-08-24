@@ -1,109 +1,109 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B26C61DB6
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 19:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7881C5DF9C
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 19:53:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C39A280D4F;
-	Mon, 24 Aug 2026 19:53:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8664B40611;
+	Mon, 24 Aug 2026 19:53:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id abWNm0sdDGnI; Mon, 24 Aug 2026 19:53:10 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Q6kAEVSX05YK; Mon, 24 Aug 2026 19:53:15 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787601190;
-	bh=vWKJ/cpynkpelQz77szOFrVSjYCgqutDIEelvS//yS0=;
+	d=lists.u-boot-project.org; s=default; t=1787601195;
+	bh=8I+RwIoxwoZlXLkzMb777mM1fQUeYDfh1S6OEyz4RPw=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xRLsPSwZ5IsjsSpB3zhfYnj91kG4a2PbcELb7JrubRPMG64xDI27IoJaBhDai4UFM
-	 XXML+fWCbPGO6MzqBGoWQ4CLn4PVd0GMRTwEGywe6ghtzZdznNP2W5vlPG+4sMFbYN
-	 CdgNvxYQoazw7wiRYKyzNXPGZZnQ9Vz0GQCpHo0KSzgeDEIQmCaYyzBUM+0E0TclU+
-	 bBvUrkDQQtkmv8IjBHDPdRy7LRev15027pzESctOTTX+MfTOrwdIJ0qFQ559e+t/vp
-	 wnq5gL6+6pKA6U3/bEOz11wnXd2/n7lzhkcjNF4XUH3hMAfhwfo2Wusgldz2lxVsgW
-	 sLvJgOkF5mtMQ==
+	b=TaMcJghKHoADgqzfT3mvIlUKGNs3BhYsKxOKiwCGAsodR1+nTcv1SkKwHJyHnT2uB
+	 22SsjAEnLr9/TcOJYAqtveahnnX2SiSe/J8t+1l7Nb7xl+Gt2oOSXWxLnP5935imyP
+	 cQ6ebz+EfDxu+Qr+7GaQxStMPCUYCFk5CfxG49NGT9I2/+PL8uFevzRO+T8zTpBIs/
+	 B+iPM/MqToYeor5GtnZcwCqyiLlUVaw6d2qRs38cZrBWp5utpcGlPtSVB2P4m/K53O
+	 OQCHi4KcQUo/nHIrIcLaTu4WOCTRTyoXuPemGVUQH/P8baRoUP0oqaD1U/kC8t1hCd
+	 ojKbs6aRGFynA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D990480D2C;
-	Mon, 24 Aug 2026 19:53:09 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1C8D0279
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 19:53:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A3D5B40586;
+	Mon, 24 Aug 2026 19:53:15 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4D53029B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 19:53:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0E63080BD3
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 19:53:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 337DB80D2C
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 19:53:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5sED2-pcR8rn for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 19:53:06 +0000 (UTC)
+ id RqdYDwCzBAaB for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 19:53:07 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
- header.a=rsa-sha256 header.s=google header.b=MRANwr0c
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 546D980D43
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 19:53:05 +0000 (UTC)
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7ec1e9d3359so3750731a34.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:53:05 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=mdakAzz0
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8A13880BD3
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 19:53:07 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7eb1dc6bd53so4126159a34.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:53:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787601185; x=1788205985;
+ d=konsulko.com; s=google; t=1787601186; x=1788205986;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=vWKJ/cpynkpelQz77szOFrVSjYCgqutDIEelvS//yS0=;
- b=MRANwr0cQw/ZGVuz5EC/gE5LA/uBysQMRUINLzGTtZUwm5c4D8DaLp1Kvqkvqyq/Zn
- qSFrgNqhrHl1yBb3us3fxHHjJLGutFfMiN1J2DyvD2ONZwx50InJb4+MwR277UBoGD1I
- fHeDBcbrZMu0D3/Dx+EnvhWVltKKO0++vBQp4=
+ bh=8I+RwIoxwoZlXLkzMb777mM1fQUeYDfh1S6OEyz4RPw=;
+ b=mdakAzz0vp72zZ7xwy1wNFW92U+94iZyVrmagZNvbQ02QQTniH2WINPUHn8L6uaE4G
+ RmkqKAZZTezy8VcGkVbe2eBML83cKynS14uOv92LLZ88KqXTKBkmbd4HXUzuq5D7xNNM
+ wh9PrAnNO5Y9UeXOkoZoVtjxcIjAGWdjGPE8s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787601185; x=1788205985;
+ d=1e100.net; s=20251104; t=1787601186; x=1788205986;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=vWKJ/cpynkpelQz77szOFrVSjYCgqutDIEelvS//yS0=;
- b=mQMAH+h+HghWa//Zdnyy60MU1mRaS137nTSmyKis4kvVEATNx0IOqo4fQQFQKUuwSS
- 3F/DIVPY+JeYFb6rXbiCsAYFOex2KcPHE8+xxMdd6ecaygGlday+3dLNzqAx9+s0N1ZE
- SgfE9vkkcOK+mSt+E6HvX2E9kuD5okOCwXkipqglNB63+uFfQgkDFAY2e/5SrsnqbesX
- GY43DjP5TJTKbzPVrQTecFl6YyvC0URWmT0ZRkg03hYu+bxZbJGJP7BTh7kffz8M5P8w
- 4pPJmBuS7rMotPFizTDBGlbcEztM3bJtMBrZtwAGuztAr/ORtFWP82QNz5ZJbrnSskvB
- +oIQ==
-X-Gm-Message-State: AFuF++le1VtaKqB7IkxR6qFelm1HPc9WaenRLqlCFj149BW6pwKQPtSD
- /EOJ0SUkdsfnPRl30/h0iRCbjJO1ChQnHhh3/zbdc17Z81lvp1opfw/xzqVUteWOCplWQkqZXYG
- JI0bQPJM1/HP8
-X-Gm-Gg: AR+sD13/fnzhJemH8qXVa+gsWRYD1kkh/ZYyTIDvFdgY7tWoXw282Gky9tNpgNS/9px
- kcfv3FFNp7lH886NWvvP5RrsI+9MVtm9e+2e0FTtLTdxzCHSoUkoLwyAic6VjtfrTVR4EwJgjFr
- 2ggJ58PlEWyQOH/SZhKOBeQfpPjGcUakL/afAimiWdFdoe/tCTo/w4/JeETq9ay3qz8QOhB3t6l
- cCsFCWf3mfyno78MxfSd3W9rwN3T9fa2D0guLoPDQ0IH5uwpFevZcu9AMnvXCWx4qNCwaqzfcFA
- tEOOHknr0SfDxsVSu1PblzDLM8nSThSjKagl585D9O/JG2u+2NEe+txxQoOvoJoC3DfBVkf0Ig7
- PHuUgzzu6o4xvI0v6jii2E+tfQtB1hWHd1wX3n536sTOy5oqTYZ82XXULPaUAZHnrQUAAQbGAHB
- POYq4KyBp+ApMd8l3SBRm8R27XN5OvaFmNCSr93Gu82zK1br4Gw6KBG7Dfe4xRfDtUDGZr9ENYh
- lcpf2+j5/ZbOqPXp3MmBJyCmzWeXqG8VXJtF+15aO+gE5c8ctRBoAAxBf+OfvcU7yfL/r/xLko6
- kIRYmaxXtr4BiY7YRv8U0A7Qg7c3RfEWdg==
-X-Received: by 2002:a05:6830:3c0c:b0:7e6:fa37:9797 with SMTP id
- 46e09a7af769-7f4613656demr33661266a34.6.1787601184841; 
- Mon, 24 Aug 2026 12:53:04 -0700 (PDT)
+ bh=8I+RwIoxwoZlXLkzMb777mM1fQUeYDfh1S6OEyz4RPw=;
+ b=iX3bVsHs3M8Xeq1cJeHRxAwWh/LWvh9Su8ufQ1yec91e8YfMYryBO2UiIDZhCzNZa5
+ 29uUBWaHmiANAS1aKIeOCKLpWiYKlLQ7zUtZIbt66rGRusFAjWZF6aueuKZnbL6uLO9I
+ NKWFq6HkBamPMZGuZ/tp9fmG9K1MRYXu5yL8D8tnnDsrY7/bu+GY0eo+wnj1XOmAoUdz
+ lBMMwgb+hrMXEaFcl98O+SMfwuw9/ValRlY59TRY3UZ5O6FR7Dffw/cor5ozXBFYZVnQ
+ SbbzDkHx/3BrtylLTXMI0asC/3qIPYg4hUYe+Cvfazgs6QIKO38RDO4IR7ewF78kRbo1
+ APCA==
+X-Gm-Message-State: AFuF++kFuOtBAC6z/EgHUzIAhXpYJ+Tjut1bx3Mt7xuSR46jQbnPihd3
+ rHOiXkKEfYReFR6l3LiZtiSYicQ41PYmP0eu1odZOj/Lzz3Uoz3fpqLKmnKnIEF7XSD9Nn75945
+ hazz1ZiTeQJwx
+X-Gm-Gg: AR+sD11XXln/ZxLbtmZ2WzmMKDLcpWoFKlpccAFPq+Q6HHNOjLvBFBFgw8U2MAvJIXX
+ GidTzGksl4wbGZOb+ElLHi4b+40QZfJGhQXiLFEtREq/rrZ85iSoBBkb7Ixlmuz6lSBklHDSU/G
+ vEAHkFB4vHiWLgQK+OkqOtSLBtlPw4+CP0Ak9A4ofV5hTJkpp2urDtu7xpCvv5p6vxzBDH6ViwU
+ zn1Oh11zDAfqrZHP11snFXbpymN2twMsmhqDaiTColmPX7lF6rK1J9sN8idu1VdhBGzNy79tyQT
+ xZCWHWzY6yUsFJmRlgWm6YusCxfa5yZEiH5a/iwb/XjoTkeEhuNsBZ10MtwQ/mr115Kw+AiABCq
+ nUWkaK2ojpUhHeotr9UTYstwKbK+bUexEuZZwzur9d/7hZcqiwJgpQrbGPn1p2206F3At5mGgeP
+ ZcTF6r6zbDaeiE6Yi3t3rItLl1t/+SY6fusUvVAbbpos06u0jF8MXqAXkYnpQ72jGUmrqQEx9a4
+ fL5jS/x8b0SUZXXXwfg41uyrKzMSGXbz6e+Sk/3QKhZy3UTwa4GFNjh4p8FVVDLd0gb4iiTO/Fh
+ yzg0KFr3BU29/NbFqTxZJ4Tp80Us7GQMWQ==
+X-Received: by 2002:a05:6830:4885:b0:7e6:ef1d:4aeb with SMTP id
+ 46e09a7af769-7f461a1edb7mr32909992a34.15.1787601186061; 
+ Mon, 24 Aug 2026 12:53:06 -0700 (PDT)
 Received: from bill-the-cat.tailc58245.ts.net
  (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f48fc8623esm4975162a34.22.2026.08.24.12.53.04
+ 46e09a7af769-7f48fc8623esm4975162a34.22.2026.08.24.12.53.05
  for <u-boot@lists.u-boot-project.org>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 12:53:04 -0700 (PDT)
+ Mon, 24 Aug 2026 12:53:05 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.u-boot-project.org
-Subject: [PATCH v2 2/5] dts: Make DEFAULT_DEVICE_TREE depend on !OF_OMIT_DTB
-Date: Mon, 24 Aug 2026 13:48:46 -0600
-Message-ID: <20260824195224.556419-4-trini@konsulko.com>
+Subject: [PATCH v2 4/5] powerpc: drop qemu-ppce500 dts
+Date: Mon, 24 Aug 2026 13:48:48 -0600
+Message-ID: <20260824195224.556419-6-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260824195224.556419-2-trini@konsulko.com>
 References: <20260824195224.556419-2-trini@konsulko.com>
@@ -122,28 +122,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-When we have configured the board to not omit a DTB as part of the
-build, we should not have to say that we still need to build a default
-DTB for the board.
+Now that we are not building this device tree, we can drop it from the
+tree.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- dts/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/powerpc/dts/Makefile         |  1 -
+ arch/powerpc/dts/qemu-ppce500.dts | 10 ----------
+ 2 files changed, 11 deletions(-)
+ delete mode 100644 arch/powerpc/dts/qemu-ppce500.dts
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index d56d94679f5d..b7a2d12a73b5 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -224,7 +224,7 @@ config OF_OMIT_DTB
- 
- config DEFAULT_DEVICE_TREE
- 	string "Default Device Tree for DT control"
--	depends on OF_CONTROL
-+	depends on OF_CONTROL && !OF_OMIT_DTB
- 	default "sandbox" if SANDBOX
- 	help
- 	  This option specifies the default Device Tree used for DT control.
+diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
+index 4fd3478ac2fa..a9075c16fefc 100644
+--- a/arch/powerpc/dts/Makefile
++++ b/arch/powerpc/dts/Makefile
+@@ -17,7 +17,6 @@ dtb-$(CONFIG_TARGET_P2020RDB) += p2020rdb-pc.dtb p2020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P3041DS) += p3041ds.dtb
+ dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
+ dtb-$(CONFIG_TARGET_P5040DS) += p5040ds.dtb
+-dtb-$(CONFIG_TARGET_QEMU_PPCE500) += qemu-ppce500.dtb
+ dtb-$(CONFIG_TARGET_SOCRATES) += socrates.dtb
+ dtb-$(CONFIG_TARGET_T1024RDB) += t1024rdb.dtb
+ dtb-$(CONFIG_TARGET_T1042D4RDB) += t1042d4rdb.dtb
+diff --git a/arch/powerpc/dts/qemu-ppce500.dts b/arch/powerpc/dts/qemu-ppce500.dts
+deleted file mode 100644
+index e88e09e17961..000000000000
+--- a/arch/powerpc/dts/qemu-ppce500.dts
++++ /dev/null
+@@ -1,10 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR MIT
+-/*
+- * Empty device tree for qemu-ppce400
+- *
+- * Copyright 2021 Google LLC
+- */
+-/dts-v1/;
+-
+-/ {
+-};
 -- 
 2.43.0
 
