@@ -1,118 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542D8C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:45:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17062C5DF9C
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:45:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1FA4F607C4;
-	Mon, 24 Aug 2026 16:45:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A184880E27;
+	Mon, 24 Aug 2026 16:45:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QWTzXCbVorSa; Mon, 24 Aug 2026 16:45:31 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bFhURAe4umqx; Mon, 24 Aug 2026 16:45:30 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787589931;
-	bh=eXhLm+C6jLG0mgAjKvoFmk6kBGciM/p96LKBLnYgjPw=;
+	d=lists.u-boot-project.org; s=default; t=1787589882;
+	bh=7v2eYIl3JLTa/G6t0MgsUSqfAoDRndrznilmwjCJOJo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=A1HeLhqjtdt0ORjf/mN5fDjC0Mn2kNsYYCDDJmL/CsMa54oE1Wgg5T9GL3Dso0iMB
-	 T/csCaw/B2kUk8/uqSsWxMjopKz7qraQTadehIOXljX2/4XESYtHM4G19we+dAsg7N
-	 BAn0a3qgz3hNM5N5pi6NIWYv1sNbn/7GgDQ0ypLbuM2GVuSZUE7tlwvpkbEwfuEzbw
-	 ACsCOgMulyAnSQcwQ0qHXdPb6tjD2k/3hFM1BeotSE/wx1H+NOfGt3aVYperWEpIsM
-	 NxMC9BHJYCcl49b3S5vIfqiKe42sGYuR1RFrCpJJeVf1osUA7ybtrNdHqQ0bRfe5My
-	 bZ92PIL5+jxtg==
+	b=IaTE/B2gi/IOBTGxCZ6Auwy6mI3KCxaLEZhuK672+vzgDO3kuFwHTkFLAwt7AoXJR
+	 TqTKP/rxLmmcjiOL41lmZLrgKIKpbS3C6h1N8BDRndkbm+5SxXuMb3KvRVr+wOeMmm
+	 essDDs5Xeix56yorV2RHorF78AQueRVnt9E3QIKw1LUJGQWsrnrGehnwmPAueK+kfs
+	 O3U7PEVYYtZHLBPkUOhrrIHtS8Z3ASB1ufK5UamKY6jbqGX+NlQ0vtRpeMOuu5eS/q
+	 Ee6cvHZu8fd/QJQkxWiAZboQT7hcuPJM8KZflEruvYFgLp/LtFUEojuZ+lbVfXWv6f
+	 jHPDEP/LZWhrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3ECA260737;
-	Mon, 24 Aug 2026 16:45:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 00BD680E35;
+	Mon, 24 Aug 2026 16:44:42 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E0C23279
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:42:09 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 38343396
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:30:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D32ED605F0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:42:09 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2A15660627
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:30:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nuBXIpr5Jto4 for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 15:42:09 +0000 (UTC)
+ id XGAzJ5MCNyXt for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 15:30:24 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
+ client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=gggot7lb
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9620360626
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:42:08 +0000 (UTC)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-c2193c18362so46587266b.1
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:42:08 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=NJP0RVaV
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DC749605EC
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:30:23 +0000 (UTC)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6a10d6f455dso582309a12.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:30:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787586126; x=1788190926;
+ d=linaro.org; s=google; t=1787585422; x=1788190222;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eXhLm+C6jLG0mgAjKvoFmk6kBGciM/p96LKBLnYgjPw=;
- b=gggot7lb2IRW3+9RHg+BI3kSUdHuzPU69frX0d0CjyXRDoSNHktd3bs/SMduzmGQXB
- S7q0wFnz8R24ryFIRH/EYGVI19Iy/WljwIic7xIZ9tt8pRA/0rKR6JNDCSmhUGFkzioQ
- BT7PBCvy3zHg7DwDlrnoL3FhCN8Kv9kloKy+6GJ7FsrfRaON81VTyMra0EdebpbqFSwk
- y01+b/jEfKETqQ2WLE2awqVQoigIE78dfyGas6hxSAxflLPxAWR4fGP5pyduzgWaeTCt
- +VJQg7c4c9l1xGvSFgzgP2X2FFJ4NN1jxxnzx/8OJwSWgBqJ0FXKsnnQOYVutYLExSnp
- M9Lw==
+ bh=7v2eYIl3JLTa/G6t0MgsUSqfAoDRndrznilmwjCJOJo=;
+ b=NJP0RVaVhbFxnpaNeaYO4f8vW0rLWQCi/YgLOQ+fDVFLfJRhVc5mnujMivPtpYOvnD
+ CS4tr3nw3Ba9NUT6ezq3Ty9dKlDZXYYxK6eqSdnDEbdlBGR+9DlhRxlIxufJZhVDHtYd
+ 8HeKZ8cVRfqsl44MJGXnFQSXFWWXIIVB35of5zP9zn9QioR6ZSu6tcf/R7ZpEGLEItBU
+ t2+5UgZuhGnsHv9Z4l4KcCmUQyUc4s0RuchteA/5Xc+7IbBPgntz05z8u//dGvX6HeY1
+ cawBq4XGJf7Oq1QCYCrexTcKWWWKOsgjgucdsi0BeKrX5iJHsWn9TuVUU5992uNo1Z86
+ KTmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787586126; x=1788190926;
+ d=1e100.net; s=20251104; t=1787585422; x=1788190222;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=eXhLm+C6jLG0mgAjKvoFmk6kBGciM/p96LKBLnYgjPw=;
- b=F2sSPM3YSK1GWDlfbcN6MZyslOqdqtKf5H+i57WgcADfP6PySKwLbEySD1VTy2gCd3
- QRWL9ZUS00U+ZTfRcG6I0K1TVIV8ZJf6w8tWhyD/6czGiAXzsV1ZHbkXSD8tZBzY/gaO
- U9cyRPeu5wZ8dL9gI2D0RXniZFV1vtklqVgt9YXZKkmve/tPmFRE3B4HWXLxHc2Z2dGV
- WDMZ1PzbHwxaMi1YUcf5tPb/OZ4zUDgQgqTROpbXgW89E9ZJBMqxu9KNx/zBAYjTgZqc
- IYJb1X799zdfifRu1X9ZCqPx3cg/l1fbpWzsRnOwUdRHx9kM9aY7QedYSLzObXqZ7pAn
- OMyw==
-X-Gm-Message-State: AFuF++lolawy+Uy/RxmMXJB5UcJ9o/mJkx+1R2NhWjyWJ/QieuLXG3d3
- HoIZsJfOsWqy/e7rIn8dfAzA7brGLMA97uTsy5WlWXR5YNr7qHfyCEGpBGbefvAchnQ58nfzP8m
- 21s0/
-X-Gm-Gg: AR+sD10aH7NApoGlMv68WwxRjmtgVg0C6eVZBtwhRP4PfWdrmjAzcEC/e3dx1+tV/Jo
- nNZ8ZJSfw6wPgPeA0xDUp3Xd8jSGcatnj4lIXHy7KifdLFZaK/3U3W3WdZnqyO5sTLYDx4ugFc2
- 7v8c6/RzXbzAvpNjDCGHhvqy2qb+24USZSDvIdMnldAQVhvwMrJmOeI7XdxMQRkLjtiLR3hNCAp
- lDh7wgh5RDFmDJB6HQP+h2dD0iD4dZVnOpOBqmoTxFa5Be1NgM+0ulN8ghVumIhNDi3ygUSil5i
- Bi5o4IGrkzhk2cHo3FDICww8hH0ZDcGF3yfi83El8bK/uNzfF+4Nbia2WZf6fuHaGirMFjxxYYo
- 8VZopgwkNC164EOPpZjZQEaW6zEu0cu5nxa8kOJmkg7cSxH1drcAdoVYxqLvR+25IDUpWQu1QgJ
- zqr2QpTElNyHjZvPaNrBnp0EJ1RhAn8du/OrJN3263pToKcqhHrMiaWGNMZau+Ib+gKfxN/hS49
- 45QuBi7TajAkMm1R5S+SrS8KwedOF5O
-X-Received: by 2002:a17:906:f59a:b0:c21:7bf1:2c88 with SMTP id
- a640c23a62f3a-c246a67540dmr1434362366b.2.1787586126544; 
- Mon, 24 Aug 2026 08:42:06 -0700 (PDT)
+ bh=7v2eYIl3JLTa/G6t0MgsUSqfAoDRndrznilmwjCJOJo=;
+ b=CiBgZIkJ3kkOuEkp1e0c6y00cfgk29HYYzqFkZdCAgEe/zyvpjqDP3W6fD9sTs8T49
+ 8wylJx6UCJmGGNAKOjw8C6yF1Z/QsQX3m6Vn/k0Dl5E76Tb56APj6Sa4Coc9HYzEcrhX
+ QZ8zGrMDQuJmmYcIbrls+T8rb8gLIiHBoOvJL/WMWHJBmrtYELDAiwni4p/ZquMeV1UT
+ 3aBkTqmUEXeJ5PiJkPiEK60bWN7bwnoC9PRHY2IWI7RADN/4+jsFvxFa7k6pbLZACuVf
+ k70xCq4GcLVXdD1o1WFLNPLv/5mmjFk3wctLjYSU8gfVSpaPQmIR5ZeQT3B0pT08KDHz
+ /ieg==
+X-Gm-Message-State: AFuF++lNeDVZdhMjllGuM5gv537bbZxE0xuPN+sA8tE0hBwXIozu6JXb
+ 2IUdqjwP3x7xeKTpu7IJljHnxDSX8fmyWokhAEWmGhLpPOYh6FtRxgKJ/LzzIB2vCBhmryZTZ+O
+ jLinu
+X-Gm-Gg: AR+sD10/x77NUIfgugEE4N5RqS7HyNl4WxL/Td7WjeWUfVrrBINoTRRAB2I91+SkOGi
+ tyKIHV0y5QwV+RC3874VOxrHI1Sn+par/gfEFBbDN6dxbi1pOgCNrzbaA8nCzNRPN7bBUVJW0wZ
+ tW4c3qqC6MC2qYytGQhWyb2zlWIv7gcvHkxEqJG1GoFAIg0HGyihhpmJ7jFz6/5LR+muy0kvG1x
+ v3i3rCy8tC9RS/8lC0q6bfpO9xelKV9QCwqr97lLOvUS2MZfLdWNiCUdN2yBzUIcZlhPjnZxzuI
+ LjAIK8FjX872+6cMYba8kPfB89RTt50D97Q/eOkktbetomVkuEKroA9NuXjEolL85khLUzYBwU4
+ ZCNnmJb+reNc1l/CGJf4pfntsK1R+MuFYmMWqwzjGcZhwwp/huA79OcoUv7pxK6q1cwUq32T/w/
+ Vny/bHVLshTIscn4DS3b6D4qMvi+IWVdH67oFUYGYX/qMNpaaBg7DOzLcFeGjtzL3NN2i6yPe6z
+ Z/mXyoIM3+FJ5sfSsPU2CmqF+FoNiTs
+X-Received: by 2002:a17:907:d0e:b0:c20:c5f4:e19f with SMTP id
+ a640c23a62f3a-c246a65fe29mr1684015666b.4.1787585421396; 
+ Mon, 24 Aug 2026 08:30:21 -0700 (PDT)
 Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c24966f58dfsm1278567866b.38.2026.08.24.08.42.05
+ a640c23a62f3a-c2496295632sm1479473666b.18.2026.08.24.08.30.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 08:42:05 -0700 (PDT)
+ Mon, 24 Aug 2026 08:30:19 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
- jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
- sjg@chromium.org, Anders Roxell <anders.roxell@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v7 01/24] dm: add helpers needed by the resynced DWC3 code
-Date: Mon, 24 Aug 2026 17:41:10 +0200
-Message-ID: <20260824154133.217744-2-anders.roxell@linaro.org>
+ jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Anders Roxell <anders.roxell@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: [PATCH v7 30/63] usb: dwc3: import from kernel v5.5
+Date: Mon, 24 Aug 2026 17:27:01 +0200
+Message-ID: <20260824152734.159794-31-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260824154133.217744-1-anders.roxell@linaro.org>
-References: <20260824154133.217744-1-anders.roxell@linaro.org>
+In-Reply-To: <20260824152734.159794-1-anders.roxell@linaro.org>
+References: <20260824152734.159794-1-anders.roxell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 24 Aug 2026 16:43:55 +0000
@@ -129,157 +128,210 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The resynced DWC3 code calls a few helpers that u-boot did not have.
-Add them first so the next commits can use them.
+From: Jens Wiklander <jens.wiklander@linaro.org>
 
-These are not copies of kernel files. They are small u-boot versions of
-the Linux v6.16 API that the DWC3 code expects:
+Sync Linux kernel dwc3 changes from v5.4 to v5.5.
 
-- dev_err_probe() from include/linux/device.h.
-- device_property_*() from include/linux/property.h. They are thin
-  wrappers on the matching dev_read_*() calls.
-- struct device gets an of_node member, so the kernel code that carries
-  it around still compiles.
-- reset_control_assert() and reset_control_deassert() from
-  include/linux/reset.h, as empty stubs. u-boot has no reset_control of
-  that shape. The DWC3 core only calls reset_control_assert() in
-  dwc3_core_exit(), and dwc->reset is never set, because the glue driver
-  handles the reset through the DM reset framework. So doing nothing is
-  correct here.
+The following files are preserved across the import:
+Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+dwc3-layerscape.c ti_usb_phy.c
 
-Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
+Skipping unused files:
+debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+
+Note that this is a raw import and doesn't build.
+A fixup commit at the end of the series fixes that.
+
+List of commits: git log --oneline v5.4..v5.5
+Commits imported:
+ea0d762775e2 usb: dwc3: gadget: Fix request complete check
+2d7b78f59e02 usb: dwc3: ep0: Clear started flag on completion
+d3abda5a98a1 usb: dwc3: gadget: Clear started flag for non-IOC
+8c7d4b7b3d43 usb: dwc3: gadget: Fix logical condition
+038761ce68c2 usb: dwc3: debug: Remove newline printout
+9ba3aca8fe82 usb: dwc3: Disable phy suspend after power-on reset
+
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- include/dm/device_compat.h | 13 ++++++++++
- include/dm/read.h          | 51 ++++++++++++++++++++++++++++++++++++++
- include/linux/compat.h     | 15 +++++++++++
- 3 files changed, 79 insertions(+)
+ drivers/usb/dwc3/core.c   | 37 +++++++++++++++++++++++++++++++++++++
+ drivers/usb/dwc3/debug.h  |  4 ++--
+ drivers/usb/dwc3/ep0.c    |  8 ++++++++
+ drivers/usb/dwc3/gadget.c | 12 +++++++++++-
+ 4 files changed, 58 insertions(+), 3 deletions(-)
 
-diff --git a/include/dm/device_compat.h b/include/dm/device_compat.h
-index aa9a6fbb5e3f..6b31a72768fd 100644
---- a/include/dm/device_compat.h
-+++ b/include/dm/device_compat.h
-@@ -119,4 +119,17 @@
- #define dev_vdbg(dev, fmt, ...) \
- 	__dev_printk(LOGL_DEBUG_CONTENT, dev, fmt, ##__VA_ARGS__)
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index 97d6ae3c4df2..f561c6c9e8a9 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -566,8 +566,11 @@ static int dwc3_core_ulpi_init(struct dwc3 *dwc)
+  */
+ static int dwc3_phy_setup(struct dwc3 *dwc)
+ {
++	unsigned int hw_mode;
+ 	u32 reg;
  
-+#define dev_err_probe(dev, err, fmt, ...) \
-+	({ \
-+		int _err = (err); \
-+		if (_err != -EPROBE_DEFER) { \
-+			dev_err(dev, fmt, ##__VA_ARGS__); \
-+			dev_err(dev, "[err=%d]", _err); \
-+		} else { \
-+			dev_dbg(dev, fmt, ##__VA_ARGS__); \
-+			dev_dbg(dev, "[err=%d]", _err); \
-+		} \
-+		_err; \
-+	 })
++	hw_mode = DWC3_GHWPARAMS0_MODE(dwc->hwparams.hwparams0);
 +
- #endif
-diff --git a/include/dm/read.h b/include/dm/read.h
-index 12dcde6645c7..86c4933fd694 100644
---- a/include/dm/read.h
-+++ b/include/dm/read.h
-@@ -1273,6 +1273,57 @@ static inline phy_interface_t dev_read_phy_mode(const struct udevice *dev)
+ 	reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
  
- #endif /* CONFIG_DM_DEV_READ_INLINE */
+ 	/*
+@@ -585,6 +588,14 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
+ 	if (dwc->revision > DWC3_REVISION_194A)
+ 		reg |= DWC3_GUSB3PIPECTL_SUSPHY;
  
-+static inline int dev_count_u32(const struct udevice *dev,
-+				const char *name)
-+{
-+	return dev_read_u32_array(dev, name, NULL, 0);
-+}
++	/*
++	 * For DRD controllers, GUSB3PIPECTL.SUSPENDENABLE must be cleared after
++	 * power-on reset, and it can be set after core initialization, which is
++	 * after device soft-reset during initialization.
++	 */
++	if (hw_mode == DWC3_GHWPARAMS0_MODE_DRD)
++		reg &= ~DWC3_GUSB3PIPECTL_SUSPHY;
 +
-+/* Linux compatibility */
-+
-+#define device_property_count_u32 dev_count_u32
-+#define device_property_read_bool dev_read_bool
-+#define device_property_read_u16 dev_read_u16
-+#define device_property_read_u32_array dev_read_u32_array
-+#define device_property_read_u32 dev_read_u32
-+#define device_property_read_u8 dev_read_u8
-+
-+static inline int device_property_read_string(const struct udevice *dev,
-+					      const char *propname,
-+					      const char **val)
-+{
-+	*val = dev_read_string(dev, propname);
-+	if (!*val)
-+		return -ENOENT;
-+	return 0;
-+}
-+
-+static inline bool device_property_present(const struct udevice *dev,
-+					   const char *propname)
-+{
-+	return (dev_read_size(dev, propname) > 0);
-+}
-+
-+static inline int device_property_count_u8(const struct udevice *dev,
-+					   const char *propname)
-+{
-+	return dev_read_size(dev, propname);
-+}
-+
-+static inline int device_property_read_u8_array(const struct udevice *dev,
-+						const char *propname,
-+						u8 *out, size_t count)
-+{
-+	const u8 *ptr = dev_read_u8_array_ptr(dev, propname, count);
-+
-+	if (!ptr)
-+		return -EINVAL;
-+
-+	memcpy(out, ptr, count);
-+
-+	return 0;
-+}
-+
- /**
-  * dev_for_each_subnode() - Helper function to iterate through subnodes
-  *
-diff --git a/include/linux/compat.h b/include/linux/compat.h
-index d4ba4d0088a0..16c02260c111 100644
---- a/include/linux/compat.h
-+++ b/include/linux/compat.h
-@@ -297,6 +297,7 @@ struct rw_semaphore { int i; };
- #define up_write(...)			do { } while (0)
- #define down_read(...)			do { } while (0)
- #define up_read(...)			do { } while (0)
-+struct device_node;
- struct device {
- 	struct device		*parent;
- 	struct class		*class;
-@@ -305,6 +306,7 @@ struct device {
- 	/* This is used from drivers/usb/musb-new subsystem only */
- 	void		*driver_data;	/* data private to the driver */
- 	void            *device_data;   /* data private to the device */
-+	struct device_node	*of_node; /* associated device tree node */
- };
- struct mutex { int i; };
- struct kernel_param { int i; };
-@@ -402,4 +404,17 @@ typedef unsigned long dmaaddr_t;
- #define free_irq(irq, data) do {} while (0)
- #define request_irq(nr, f, flags, nm, data) 0
+ 	if (dwc->u2ss_inp3_quirk)
+ 		reg |= DWC3_GUSB3PIPECTL_U2SSINP3OK;
  
-+/* From include/linux/reset.h */
+@@ -668,6 +679,14 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
+ 	if (dwc->revision > DWC3_REVISION_194A)
+ 		reg |= DWC3_GUSB2PHYCFG_SUSPHY;
+ 
++	/*
++	 * For DRD controllers, GUSB2PHYCFG.SUSPHY must be cleared after
++	 * power-on reset, and it can be set after core initialization, which is
++	 * after device soft-reset during initialization.
++	 */
++	if (hw_mode == DWC3_GHWPARAMS0_MODE_DRD)
++		reg &= ~DWC3_GUSB2PHYCFG_SUSPHY;
 +
-+struct reset_control;
+ 	if (dwc->dis_u2_susphy_quirk)
+ 		reg &= ~DWC3_GUSB2PHYCFG_SUSPHY;
+ 
+@@ -902,9 +921,12 @@ static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
+  */
+ static int dwc3_core_init(struct dwc3 *dwc)
+ {
++	unsigned int		hw_mode;
+ 	u32			reg;
+ 	int			ret;
+ 
++	hw_mode = DWC3_GHWPARAMS0_MODE(dwc->hwparams.hwparams0);
 +
-+static inline int reset_control_assert(struct reset_control *rstc)
-+{
-+	return 0;
-+}
+ 	/*
+ 	 * Write Linux Version Code to our GUID register so it's easy to figure
+ 	 * out which kernel version a bug was found.
+@@ -940,6 +962,21 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 	if (ret)
+ 		goto err0a;
+ 
++	if (hw_mode == DWC3_GHWPARAMS0_MODE_DRD &&
++	    dwc->revision > DWC3_REVISION_194A) {
++		if (!dwc->dis_u3_susphy_quirk) {
++			reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
++			reg |= DWC3_GUSB3PIPECTL_SUSPHY;
++			dwc3_writel(dwc->regs, DWC3_GUSB3PIPECTL(0), reg);
++		}
 +
-+static inline int reset_control_deassert(struct reset_control *rstc)
-+{
-+	return 0;
-+}
- #endif
++		if (!dwc->dis_u2_susphy_quirk) {
++			reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
++			reg |= DWC3_GUSB2PHYCFG_SUSPHY;
++			dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
++		}
++	}
++
+ 	dwc3_core_setup_global_control(dwc);
+ 	dwc3_core_num_eps(dwc);
+ 
+diff --git a/drivers/usb/dwc3/debug.h b/drivers/usb/dwc3/debug.h
+index 9baabed87d61..e56beb9d1e36 100644
+--- a/drivers/usb/dwc3/debug.h
++++ b/drivers/usb/dwc3/debug.h
+@@ -112,7 +112,7 @@ dwc3_gadget_link_string(enum dwc3_link_state link_state)
+ 	case DWC3_LINK_STATE_RESUME:
+ 		return "Resume";
+ 	default:
+-		return "UNKNOWN link state\n";
++		return "UNKNOWN link state";
+ 	}
+ }
+ 
+@@ -141,7 +141,7 @@ dwc3_gadget_hs_link_string(enum dwc3_link_state link_state)
+ 	case DWC3_LINK_STATE_RESUME:
+ 		return "Resume";
+ 	default:
+-		return "UNKNOWN link state\n";
++		return "UNKNOWN link state";
+ 	}
+ }
+ 
+diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+index 3996b9c4ff8d..fd1b100d2927 100644
+--- a/drivers/usb/dwc3/ep0.c
++++ b/drivers/usb/dwc3/ep0.c
+@@ -1117,6 +1117,9 @@ static void dwc3_ep0_xfernotready(struct dwc3 *dwc,
+ void dwc3_ep0_interrupt(struct dwc3 *dwc,
+ 		const struct dwc3_event_depevt *event)
+ {
++	struct dwc3_ep	*dep = dwc->eps[event->endpoint_number];
++	u8		cmd;
++
+ 	switch (event->endpoint_event) {
+ 	case DWC3_DEPEVT_XFERCOMPLETE:
+ 		dwc3_ep0_xfer_complete(dwc, event);
+@@ -1129,7 +1132,12 @@ void dwc3_ep0_interrupt(struct dwc3 *dwc,
+ 	case DWC3_DEPEVT_XFERINPROGRESS:
+ 	case DWC3_DEPEVT_RXTXFIFOEVT:
+ 	case DWC3_DEPEVT_STREAMEVT:
++		break;
+ 	case DWC3_DEPEVT_EPCMDCMPLT:
++		cmd = DEPEVT_PARAMETER_CMD(event->parameters);
++
++		if (cmd == DWC3_DEPCMD_ENDTRANSFER)
++			dep->flags &= ~DWC3_EP_TRANSFER_STARTED;
+ 		break;
+ 	}
+ }
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index a9aba716bf80..154f3f3e8cff 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -2467,6 +2467,13 @@ static int dwc3_gadget_ep_reclaim_trb_linear(struct dwc3_ep *dep,
+ 
+ static bool dwc3_gadget_ep_request_completed(struct dwc3_request *req)
+ {
++	/*
++	 * For OUT direction, host may send less than the setup
++	 * length. Return true for all OUT requests.
++	 */
++	if (!req->direction)
++		return true;
++
+ 	return req->request.actual == req->request.length;
+ }
+ 
+@@ -2491,7 +2498,7 @@ static int dwc3_gadget_ep_cleanup_completed_request(struct dwc3_ep *dep,
+ 
+ 	req->request.actual = req->request.length - req->remaining;
+ 
+-	if (!dwc3_gadget_ep_request_completed(req) &&
++	if (!dwc3_gadget_ep_request_completed(req) ||
+ 			req->num_pending_sgs) {
+ 		__dwc3_gadget_kick_transfer(dep);
+ 		goto out;
+@@ -2719,6 +2726,9 @@ static void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
+ 	WARN_ON_ONCE(ret);
+ 	dep->resource_index = 0;
+ 
++	if (!interrupt)
++		dep->flags &= ~DWC3_EP_TRANSFER_STARTED;
++
+ 	if (dwc3_is_usb31(dwc) || dwc->revision < DWC3_REVISION_310A)
+ 		udelay(100);
+ }
 -- 
 2.53.0
 
