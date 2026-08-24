@@ -4,113 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0541BC5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:59:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A24C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:22:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3EBE4606AE;
-	Mon, 24 Aug 2026 13:59:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id ECD6960674;
+	Mon, 24 Aug 2026 14:22:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hjwPiAbQnWJB; Mon, 24 Aug 2026 13:59:49 +0000 (UTC)
+ id PH0fQi_gvg2a; Mon, 24 Aug 2026 14:22:21 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787579989;
-	bh=gkSGIG1jJf7eOM+PfZtB+he6oF7q64hL9alA9sy50Ts=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787581341;
+	bh=fgndoZZ8cXCx2So38+Ml1gqAx/MMmta5FtitmL07d8o=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=F73lJdAFv+6X5W4Xvf+zNIrFCFlBYEbHEXU+NAVWS7pe17fMEfVUhekSga1KKwD2m
-	 uqdbNWH80uRADaIJgrglQyoG2ig+RQvXueInjApONnwGkzte54IKByZzdG7//Qgk7J
-	 1YQ+YFe8iHuS8qDvXBO7K/PvKNi9ec36amE6rjfCY54qWxwNIpnL2XxVeQPH3HK1SA
-	 hcEU3YML6IEfd2oK4+wW1OKI0aBFUaIlEMVfpFYV2oUxQuP0JeRXoASFpMYkF+epQf
-	 Qi6roMRAIdsz7V1L1vpSQSvsx/JnTJmL9R238m2l/793ZmBL+pwSR4kYpOncBKB+nf
-	 hx0HEZUTAAlVg==
+	b=IRCCRIMvnsqZbkABuP4bBr5WI9IdT7Kmfr4UBeVCxECfV/llK+LM68q7hwlSqqHNv
+	 psIoDLR/+ZDGfNy6Exu8smn3fzLkTwr0eZRIQvIcNz2Y1AkbmgzvyFsyv1hEgU7ll/
+	 CkP8LFuKjSII5NYW1HAAq4ZErx18uYh5BcDFeyy/Q0FTd+xrDKC0v4plx+LBItBvxu
+	 4E2YuPLu3z8ikdeT3PKlQNDo66dWAiGhPdmXH2kO7G8vGU7rnLT7kwVOi4Ti2huOnp
+	 fRE4Lgc64hqIpH+ZgQwBe12CHjKXAgBZy3XVWSnX4o5bmo/KQmUZnWhXyBdULfXZGx
+	 c687XVWZyVvkw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 383226063A;
-	Mon, 24 Aug 2026 13:59:49 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 061012FD
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:59:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DA99060624;
+	Mon, 24 Aug 2026 14:22:20 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8EB872FD
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:22:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E08E340050
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:59:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 757936060B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:22:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Qr3oB7EmwC4c for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 13:59:46 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62d; helo=mail-ej1-x62d.google.com;
- envelope-from=stephan.gerhold@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=JioyD+b9
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4409040029
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:59:45 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c15d111ca99so419875766b.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:59:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787579983; x=1788184783;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=gkSGIG1jJf7eOM+PfZtB+he6oF7q64hL9alA9sy50Ts=;
- b=JioyD+b9v/E4RRSzUa/y5acAg1S/po0jxO84+lh5gnzNAO2eVmvNKkAYVvtrTSPCmY
- sjqZ0xHRzuZzf+PfO6op0pRNF6VmsXJmwvsXkt1R/uHBYmnP9l+s4M9Qc3098gSxdZ07
- hU7AYSnJ6srckkT2Wk5dQpI16+LYKFmhsqsYIoMU937oXHiF5VrtuGs+NZboyG1lupMe
- Vbg4IgYGqniMji2jQBhMBKpcMvKXGhRlHBlosvzeMAXiNEEVO0oI7ktFhUnmW2Vd1I57
- hW8W/rKlN63q3UMdDvy/dCK3RX75SmcukBsyP+QQbIke5XC8LTXRiol76aegJA54XMYF
- PryA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787579983; x=1788184783;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=gkSGIG1jJf7eOM+PfZtB+he6oF7q64hL9alA9sy50Ts=;
- b=d/K5rdNk1ASEbc7Nz2L/wt39j4Yx7EtCsbFCl7bJ3wuwXYh6jYZqyM3zVPVUV3msDV
- eR7bU56nC5VdUxR0l0zcOAUYrYoJtpSav4JfVN1bi37l0ts/hZv9f41JnGOXV5kquryB
- Wm94HoV7NggLnkjRKymlwR/iyQEVxZETjNOW+Rla6DB1jRGjuUWSIoFzm1wHItwlmxbl
- 4MiKp0Z/Qqlr8BSZ8XvlDf0KeSkzslHu2wC/nFVE49EDG9KOoU2HTGI+7Cj4bJwK4Qlr
- fWDix8X778jAXZQusevKrPbKjUKpoKJhkN5ie59JzfLueyLE82nErKRowK8FUFToIaQO
- 6MZw==
-X-Gm-Message-State: AFuF++nRSWIUG9KDzWBMeDSaxiFoCZSWhJ49IYVtDq0E96NgePI6x6/b
- WHXQ+qRmuqT4PFrLUNqP96ESMy/GeveQxdPbSvLolqaz0fky8fwB94U7Y/V/R3u95es=
-X-Gm-Gg: AR+sD13RPIpooWJoZWAhc3ufTsqsW2bakJE02pulb+B7UMy4xCMOQmsLef3MEmhLVny
- hI9sdRe3PSWT9TdD2oyp3FgJ7cB1lRCCAXAzAnQKaQDHKCIagu1hxM1H/L2y0X+JW105Wsf/Xz7
- gFeAzwXHyv6YAiIHCx+75aZcf1mq+VSMir4E1RgMMoz+llbQ+HXfd7mI3jWugROZpkxOWbSgVhU
- /RxM/u92RbVJq7ZP1tljSj6HvbCb2pPdMS64cJwV1bdZ7L/bUWMm6q+WWbvvE5MKu1rDdTpK+dQ
- 8YzmBfbfgv/AcGASKQctHqevtkhx8Cy3hqd+Kdo7s+jawf7QQ3mTImo8p1QF2ZV8M0AzyiSYflr
- WnvGuotUCMiwDN6JleGYvqrex8Oyky7Yk91BD8LofqvadquxY7bdOsKo+cczykilEHHSEd/cmhF
- m1Cg8lG23w6uAUo4n5ZWRo/exxPsb9ut/+xjQRgwkvMPRgi83o4LGBs0uZD5W6b6wXmN3konM=
-X-Received: by 2002:a17:906:6312:b0:c24:6445:d19 with SMTP id
- a640c23a62f3a-c24926f3cf9mr2251607566b.17.1787579983432; 
- Mon, 24 Aug 2026 06:59:43 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff24:7210:8b5e:6b33:b439:3e9])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c249672becesm1320261166b.42.2026.08.24.06.59.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 06:59:42 -0700 (PDT)
-Date: Mon, 24 Aug 2026 15:59:41 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Stefan Hansson <newbyte@postmarketos.org>
-Subject: Re: [PATCH v5 13/13] arm: u8500: Package Stemmy device trees in FIT
-Message-ID: <aoxOTWT8r7QX00lL@linaro.org>
-References: <20260823-ux500-external-sdcard-v5-0-07ca794e2b94@kernel.org>
- <20260823-ux500-external-sdcard-v5-13-07ca794e2b94@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260823-ux500-external-sdcard-v5-13-07ca794e2b94@kernel.org>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QD5FS8yz0omK for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 14:22:19 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
+ helo=sender4-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
+ header.a=rsa-sha256 header.s=zmail header.b=W6/9XUo8
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CCECD605D5
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:22:15 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1787581297; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=YcWVaGL90BXrWO6K0kZ1k5xjnliK1gGFWEPIgCzrASDaRnkG9YA/NTWeK2S+xjqW/iFCfwmY842pUyCH0qNMrVCqAfDGGRSwfstnAOyJU0+Bpz7ziaxtAod4OPQxFcSUayRiuhs2N04IggxsVXKrz3LfD1anNWiTP4/JyuP7mrc=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1787581297;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=fgndoZZ8cXCx2So38+Ml1gqAx/MMmta5FtitmL07d8o=; 
+ b=VNJHtxVYWLlS6lT9gXFpcuyRx3zxA8UuNjPE0w/dlOKOp8cvwLMMXFkfBFNN+nn64nimfq+WZktyLoHsYM4Xgsy40Jx+KEf4Z4wPgXGX6xUlay/ECn+oHcWeZr6PKZtOH9X4cqcUCheWCj6AOcO7uZPvTkLe4J0q5eil91U8kK4=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787581297; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:Subject:Subject:From:From:To:To:In-Reply-To:Reply-To;
+ bh=fgndoZZ8cXCx2So38+Ml1gqAx/MMmta5FtitmL07d8o=;
+ b=W6/9XUo8CsxL/6jPVbXTBG59n6oGsChIVEVECRiUDUQt0sq8bt1arPF11ORk1d1z
+ WPnj3hn/NvpHbgIJw5/FpWeexGKw8iMWzvpRdKbn3PRe+51LmFWstSSn1DTWJmoGhzX
+ 5smXEdXeP92dSFefAvrBR4SSAIVhk9pSr3fHQ6Mg=
+Received: by mx.zohomail.com with SMTPS id 1787581292982886.4757022159525;
+ Mon, 24 Aug 2026 07:21:32 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 24 Aug 2026 22:21:17 +0800
+Message-Id: <DKX8OE4FZYCZ.29V2B6GDFTPSY@pigmoral.tech>
+Cc: "Huan Zhou" <pericycle.cc@gmail.com>, "Guodong Xu"
+ <guodong.xu@oss.qualcomm.com>, "Tom Rini" <trini@konsulko.com>, "Raymond
+ Mao" <raymond.mao@riscstar.com>, "Lukasz Majewski" <lukma@denx.de>, "Yixun
+ Lan" <dlan@kernel.org>, "Troy Mitchell" <troy.mitchell@linux.spacemit.com>
+Subject: Re: [PATCH v2 0/4] i2c/clk: spacemit: k1: fix I2C bus configuration
+ and clock handling
+From: "Junhui Liu" <junhui.liu@pigmoral.tech>
+To: "Heiko Schocher" <hs@nabladev.com>, "Yao Zi" <me@ziyao.cc>, "Junhui Liu"
+ <junhui.liu@pigmoral.tech>, <u-boot-spacemit@groups.io>,
+ <u-boot@lists.u-boot-project.org>
+X-Mailer: aerc 0.21.0
+References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
+ <aoQBacTKiBXUDddj@pie> <e4ad1d7a-ad9e-3cb1-e1ed-ad95f22b5b14@nabladev.com>
+In-Reply-To: <e4ad1d7a-ad9e-3cb1-e1ed-ad95f22b5b14@nabladev.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -124,64 +106,69 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sun, Aug 23, 2026 at 10:39:32PM +0200, Linus Walleij wrote:
-> Build all seven supported Samsung Ux500 device trees into the FIT
-> appended to U-Boot. Select the appropriate configuration at runtime
-> from the machine ID passed by the Samsung firmware. Codina and Codina
-> TMO share a machine ID, so distinguish Codina TMO by its board ID.
-> 
-> Keep a Kconfig default for the generic multi-DTB build dependency, but
-> remove it from the defconfig since the board selection is now dynamic.
-> Print the firmware machine and board IDs to aid diagnostics and future
-> machine ID mappings.
-> 
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+Hi Heiko,
+Thanks for checking.
 
-Yes! This is great, thanks :)
+On Mon Aug 24, 2026 at 4:21 PM CST, Heiko Schocher wrote:
+> Hello Yao Zi, Junhui Liu,
+>
+> On 18.08.26 08:53, Yao Zi wrote:
+>> On Sat, Aug 15, 2026 at 11:40:20AM +0800, Junhui Liu wrote:
+>>> Fix two issues in the SpacemiT K1 I2C driver and clock provider.
+>>>
+>>> The first issue is that the controller bus mode is selected using the
+>>> functional clock rate instead of the requested I2C bus speed from the
+>>> device tree.
+>>>
+>>> The second issue is that the TWSI functional clocks incorrectly include
+>>> the bus clock enable bit in their gate masks. As a result the I2C drive=
+r
+>>> can operate with only the functional clock enabled, which diverges from
+>>> the device tree description and the Linux driver (both expect separate
+>>> "func" and "bus" clocks).
+>>>
+>>> To fix the second issue without breaking intermediate states, the
+>>> patches are ordered as follows:
+>>>
+>>> - First add the missing bus clocks (and their parent chain) to the SPL
+>>>    clock tree.
+>>> - Then update the I2C driver to acquire and enable both the functional
+>>>    and bus clocks by name.
+>>> - Finally remove the bus gate bit from the functional clock definitions
+>>>    (except TWSI8, whose write-only register requires the combined gate)=
+.
+>>=20
+>> Personally I think it's okay to break booting in this case as long as
+>> you explicitly point it out. Merging the conceptually related PATCH 2
+>> and PATCH 4 which together fix description of TWSI controller clocks
+>> would make the commit description shorter and clearer. But it depends on
+>> you.
+>
+> For me the series is okay now, if you (Junhui Liu) have not prepared a
+> v3 with the merge Yao Zi explained already ... I will pick v2 up for next=
+...
+>
+> Please give me feedback, what you plan, thanks!
 
-> ---
->  arch/arm/Kconfig          |  1 +
->  board/ste/stemmy/Kconfig  |  6 ++++
->  board/ste/stemmy/stemmy.c | 77 ++++++++++++++++++++++++++++++++++++++++++++---
->  configs/stemmy_defconfig  |  1 -
->  4 files changed, 79 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 2a01ac9b7675..8e697b87d50f 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1278,6 +1278,7 @@ config ARCH_U8500
->  	imply DM_REGULATOR
->  	imply DM_REGULATOR_FIXED
->  	imply DM_RTC
-> +	imply MULTI_DTB_FIT
->  	imply NOMADIK_GPIO
->  	imply NOMADIK_MTU_TIMER
->  	imply PINCTRL
+I don't plan to send a v3. I think the current structure and patch
+ordering in v2 are fine, so please feel free to pick it up.
 
-It's a bit weird to have this in ARCH_U8500 since there may be other
-(non-Samsung) U8500 boards who couldn't use MULTI_DTB_FIT.
+Thanks to you and Yao Zi for the review.
 
-Can you put this into stemmy_defconfig?
+>
+>> For the whole series,
+>>=20
+>> Reviewed-by: Yao Zi <me@ziyao.cc>
+>
+> Thanks!
+>
+> bye,
+> Heiko
+>>=20
+>> Regards,
+>> Yao Zi
+>>=20
 
-> diff --git a/board/ste/stemmy/Kconfig b/board/ste/stemmy/Kconfig
-> index b890ba51cb03..e891ddf9f8b2 100644
-> --- a/board/ste/stemmy/Kconfig
-> +++ b/board/ste/stemmy/Kconfig
-> @@ -9,4 +9,10 @@ config SYS_VENDOR
->  config SYS_CONFIG_NAME
->  	default "stemmy"
->  
-> +config DEFAULT_DEVICE_TREE
-> +	default "st/ste-ux500-samsung-janice"
-> +
-> +config OF_LIST
-> +	default "st/ste-ux500-samsung-codina st/ste-ux500-samsung-codina-tmo st/ste-ux500-samsung-gavini st/ste-ux500-samsung-golden st/ste-ux500-samsung-janice st/ste-ux500-samsung-kyle st/ste-ux500-samsung-skomer"
-> +
->  endif
-
-I don't mind adding this here, but I'm also not sure if there is any
-advantage compared to adding this directly in stemmy_defconfig?
-
-Thanks,
-Stephan
+--=20
+Best regards,
+Junhui Liu
