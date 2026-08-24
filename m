@@ -1,198 +1,151 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7595AC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 07:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC13C5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 07:19:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A9AE80DFB;
-	Mon, 24 Aug 2026 07:07:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A09D44067C;
+	Mon, 24 Aug 2026 07:19:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id d89CUGSqHbfU; Mon, 24 Aug 2026 07:07:22 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U6f1e8yiAW6Q; Mon, 24 Aug 2026 07:19:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787555242;
-	bh=nA6ZgtKw1T5uP4lPhIq+Fsg4jmf+YAR8KmRHOcasKG8=;
-	h=Date:CC:Subject:From:To:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787555965;
+	bh=zFm0v9TQf1PoWWpnmp+S0LJaT/QRGZiBf57yaa6SjIc=;
+	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Vd0mCeDLnHQwcTH/1v2ySvvnVmsAcH3yF6NB1KDFwu2uBJx9Kw/SLqKLlnwTLss8D
-	 JyEjTFGTcp1laHgIbDzyWY6d5HOuK/AG+xcwPGv8SaU8vfhjW3EwT/EKGBGy3J48WR
-	 PEa1K2VeQvP+aC6Sx1eEgqfYZqdHuLrMF9/UlhI+9Qj+V1FiVRlftIKiPbspwDn9dY
-	 TtcQufUDGooW0iYzqJ2OGdfKWsVpDFSYMQbj5Vht6r0lK0VY8UAAbT9klVqc+t3GiV
-	 YQ03zgJsr5uqwwiRfTRrmB0d8laTKFcUmDB5oS+ZUvSgvj7g8mRuVFiBwHH9yKhQ7U
-	 6a8A7qjQodQ3g==
+	b=XimIb5Zxdq5mkLVjCxUh1nTXEAS2E8mtxVoLDoZLUrRhhHDbdTSfokwJ+lU6I6GtN
+	 AcMNn0A3lgLAQPaw+A13teBr0ssEncTP9JmZWMM6FPni0mXmzECaMfiPkl7S7k1Hlx
+	 F7uqjQfq21Ym9zGhqXgKeJR++OeqKvu0Ye24LFW0bsGkGo2CrHLxRVDnrbRspwRBRs
+	 rzXOubivUM6PZtCmUq60N9pB39YTHQf9o/mrP0l08qNKjZa8UyPxzvq26rmBjUeTbs
+	 hobGSROvoY5QLBcj618gZPjpd3Lelt59HhAWVYIsRipOF8nj5026BZ+R9wtYGJpyMT
+	 tZwUvw1SN4VVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1D9A380DF4;
-	Mon, 24 Aug 2026 07:07:22 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E808B336
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:07:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8EAFD403E4;
+	Mon, 24 Aug 2026 07:19:25 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2000441A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CD6E060625
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:07:20 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 11FC960612
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JmDD04TIBYlG for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 07:07:20 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
- helo=mx0b-0002e601.pphosted.com; envelope-from=anshuld@ti.com;
- receiver=<UNKNOWN> 
+ id Ob3Q0bS4b_Jn for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c10c::1;
+ helo=sa9pr02cu001.outbound.protection.outlook.com;
+ envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=grCL8a6+; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=selector1 header.b=mZASqyop
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
- [148.163.154.28])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9B64960622
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:07:18 +0000 (UTC)
-Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
- by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67O5UBA92431069; Mon, 24 Aug 2026 02:07:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=nA6ZgtKw1T5uP4lPhIq+Fsg4jmf+YAR8KmRHOcasK
- G8=; b=grCL8a6+r5yoYQvH+D7FpX6wlHgrPPcOwVrNfQpMWA6WFHsGZEjwrVs1X
- xjEV968tRrOvQ1UCH+5S+ViNbnshynW2/9ioT571rwJpBw1/YlFVs7jNSVgaiCde
- STaDC8nV42ODV+JfSnWiapiKsb32kjcOmf2zhehAL+t4wCT55p7sGg/NPwYXxzrl
- smFRRkBSr8/wWly8z/qGBHuq5D0nhxp35iyIYcxEMFi9y39U5vJNuVhbJ61sW+9i
- M9Q4YMta+vfpcdfa9L/R4CafflN32iIGCsw6vX1TE8KfYL4gyFYA9SA721w+AsIe
- LsT7MhhYoB0v+r//sYZwE+CxZ0ucw==
-Received: from mw6pr02cu001.outbound.protection.outlook.com
- (mail-westus2azon11012001.outbound.protection.outlook.com [52.101.48.1])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4g8d1f96jn-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 24 Aug 2026 02:07:11 -0500 (CDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=IB8S3RHS
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5376A60622
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:22 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=amxBndHmAUKipfQrnDQ5rDtHsKBNO2tuCwXAN3qUNtIPAxRlh1VopxdMtDqwA8PC0AN6Qdt0Njapgyr7UsmIeC12usZDiDTXHO+H4Wty+e5TuvBMjXf3VzAF5xEUSNbgOCy37AVZDDAINtLZbghu8zFjzRgqPN/1lH5bb0u2vq35KPkJxDoHijeP6hLG9BxpzqmLCeAqbgEZl4Id2w/5RufG2sRPGoVSU2VWs2U2B0mYywNQSUc6lnsG62ZwTYCWljmvwBhJoRq+80HembeC6UJvKSVee8qncPNaMUOk5qgS/kJ7rWwRfHpiCWT8aObpS+YhLMYJnHTuaZ1P2WS08A==
+ b=ipEuY0WXk4bXf2E15v6fnZ57FQYzJoq9GNHWeoooTFKK9XkFaaUbgEj0nPKNXAoHL3EmERJAwVCZQOpdhfUpfbIC879XYhYvupKBgLj377+iTmTUvfq8Y7bm+PA1xfzl6wR9RhWhaJ5fDDtOP3qJ5z5FPo9FjCDKkpiuRU6sjK41s7FXTnYvvkHlstYfFufw4ZZE0WJ6b9w1e0Htb8Ljt/ryREBZB18FylWRENYOFyJPKcWH95cDZUVL12JlJGY/Swgq6qJF+LXs6BvdrtUsapAbtoNAN/oVEzFofPN3q8+GMH62QrQQB2TM9ffedgzNYYMpof7TDVZBRvDZ5dzQsA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nA6ZgtKw1T5uP4lPhIq+Fsg4jmf+YAR8KmRHOcasKG8=;
- b=ZFN99FoaGieGvKwlo6N7qXxOYgIKxSDg5YH4j69MuxROflcG6Bh+PtIezRIbikTSq1OMjX8aSClj/KweTU1kW/UUPRtyhcor36kdIa1yvZU2ms6rWwCVDzQn2UlGJ1AGeWsK0diPSdJpfeHN90lGoBSsFvoefiOmF6oQ3Zi/fNU7BVVAhl3PaQ75JB3Tc3Fxov8YEkeG+NLh2kfm/UB/Nn2ahweaG3DQlZz2kfyj5n0QGp+eHcJiqMxjEtkCTBmhuJvdZudKR4Ipni7cJR9/+K+JAMJRvRMhiWgjJPyqNkHJE1t8gY2FjzPsZuXJDee112UYINQMDuDgWvwfp+394A==
+ bh=zFm0v9TQf1PoWWpnmp+S0LJaT/QRGZiBf57yaa6SjIc=;
+ b=lX9ESuo7NuXGBmHV2zBw7GaHC67S+qjGjzBdDM1meT8knJ20nOjMA4qiBcK9Rq3LyY3WbAGQssr8UiNM1fF3IVZW3AJLBtX9Dzw7W3tpVoZvisUNjBkP3P/ySUYLIIwQQzBQThMtlcFhv4YTV7lqxRXIzFQYoWWR/Tqpw08rDr4QenZ0VnlOKJiSyXqqoVlqdUtft7QMnbQoLANSw/rxzEWpFildNH9QMHSAUeR9rhTUWi1HeYeCJ8kqrxpYlClsI8Ioshb8CV8QOalCy92BKG1O+CEz+GXs2T+aoRjJbrymcc6YxMmRI8GowQJcQsY+gucxd/EllYQJ02u8uGWhlw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
+ smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nA6ZgtKw1T5uP4lPhIq+Fsg4jmf+YAR8KmRHOcasKG8=;
- b=mZASqyopU4nijs0Howb+m/Y60STqKRNqqOXLVkzYmh1Lv2+ev5x+y2mmM1UuMMHzufP6ORAK02DV84RWgBiVuaLcNrI1r2KfefpXgENO2ZZIEI/lCQcb7vtzIXhUuWF9kA0yNMgnTcMlnNFanlmAdnEZAu9t4V2GGJth8RBr3Lg=
-Received: from BN0PR04CA0141.namprd04.prod.outlook.com (2603:10b6:408:ed::26)
- by DS3PR10MB997750.namprd10.prod.outlook.com (2603:10b6:8:347::15)
+ bh=zFm0v9TQf1PoWWpnmp+S0LJaT/QRGZiBf57yaa6SjIc=;
+ b=IB8S3RHSV9J6gtDRbMf21ElhLeLBUamdbHLCHIRUmykcGW00a+bu/O9S5uUN1P5Fu9XsYRJqd2m8wKOkfZP1cJydg5sKiZSEOLCx5qoRFC8b+AGQCwpNT9YmCKM1R0i3xzdq+YFPif6Nn09hsOJKCwY9m3OZGTKSa5uYmZTzL4M=
+Received: from SJ0PR03CA0364.namprd03.prod.outlook.com (2603:10b6:a03:3a1::9)
+ by PH7PR12MB8796.namprd12.prod.outlook.com (2603:10b6:510:272::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 07:07:09 +0000
-Received: from BN1PEPF00004681.namprd03.prod.outlook.com
- (2603:10b6:408:ed:cafe::ad) by BN0PR04CA0141.outlook.office365.com
- (2603:10b6:408:ed::26) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 07:19:16 +0000
+Received: from CO1PEPF000066E9.namprd05.prod.outlook.com
+ (2603:10b6:a03:3a1:cafe::9a) by SJ0PR03CA0364.outlook.office365.com
+ (2603:10b6:a03:3a1::9) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.12 via Frontend Transport; Mon,
- 24 Aug 2026 07:07:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN1PEPF00004681.mail.protection.outlook.com (10.167.243.87) with Microsoft
+ 24 Aug 2026 07:19:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CO1PEPF000066E9.mail.protection.outlook.com (10.167.249.11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 07:07:09 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 07:19:15 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 02:06:58 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 02:19:14 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 02:06:58 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 02:19:13 -0500
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 24 Aug 2026 02:06:58 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67O76vw72576749;
- Mon, 24 Aug 2026 02:06:58 -0500
+ Transport; Mon, 24 Aug 2026 02:19:13 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.u-boot-project.org>, <git@amd.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH 1/3] xilinx: Correct zynqmp_r5 MAINTAINERS fragment
+Date: Mon, 24 Aug 2026 09:18:46 +0200
+Message-ID: <cb5da32e93f48ec7c13e3dd1618e711c0359aa17.1787555916.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1787555916.git.michal.simek@amd.com>
+References: <cover.1787555916.git.michal.simek@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 24 Aug 2026 12:36:55 +0530
-Message-ID: <DKWZFTIBMBBL.2XN2NB4O63S6@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Moteen Shah
- <m-shah@ti.com>
-Subject: Re: [PATCH v3] fdt: Fix phandles not copying when using templates
-From: Anshul Dalal <anshuld@ti.com>
-To: Anshul Dalal <anshuld@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- <u-boot@lists.denx.de>, <u-boot@lists.u-boot-project.org>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260729-binman_template_phandle_copy_fix-v3-1-9bf6cbbe1a61@ti.com>
- <37b6996f-f0bf-438a-b96a-1d2d74ec8d9f@cherry.de>
- <DKL91OUU5LDQ.V2B9UQREH116@ti.com>
-In-Reply-To: <DKL91OUU5LDQ.V2B9UQREH116@ti.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=656; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=1rNeQOAC3EMlwI0ACEq97kFu76p7vo1eK2xxHdtT5pM=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWR1f0hxtbgru19OXTBM6ZZi82OF6vQuM5Zoi7MWRzT/r
+ xN4tzq4o5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACYyW4vhr3xx4I+59RKrPC3e
+ pn7hLN/L67y0oWb2sa6Tp92fP+Rgy2Rk6JmavyKkWlv+IVPK9t3HH/6fNXP/lpuprHnrrMWFYj/
+ +YgEA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004681:EE_|DS3PR10MB997750:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95e1a3b8-0ebe-426a-95ef-08df01ae503a
+X-MS-TrafficTypeDiagnostic: CO1PEPF000066E9:EE_|PH7PR12MB8796:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e8bb028-06c0-416c-d46a-08df01b0011f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|23010399003|36860700016|376014|1800799024|56012099006|10067099003|4143699003|3023799007|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: PjtsZ3ghfSZqXZWvVbRki002Q6jlzFGesDutH0/ZdK1E01WoocKNpKOlD3N10Z7rJI1bNbow/R9/j4aMtcegciPfpAYuugSNUu/hhmzvnw8biXNz0zNNIYyASICWuK94IpMb0febT6Essec12+qa6O2L48bpmmmIn3OOw+IXCvnGR7MxaGwXVh/CpovAvG1KW49vRCHrIm9d8szpn+uiL6rYPfgCeSUbbp0QAamB6Eo/ja6nlYczVhAtjuc9nCncROIoAdksznAr0ffnqeGyAVwImron3vZP1KMz+F8rhNBnv9RB68gNcWlgqIlZm8sfkP349CdkGPNAVW0Buxc90ys3STCSVLE6mAjPptL8jQkfMuEjdilccSPi/GTSwx8C0w3We9pPPYbtWU7NcMhhHdYh814qxZ1z68NxtavLHYRMKigup+GoWYzzUwoYNKetPJB/fYtxY3w8VceSU4nT/bcGgeR87l2K0b+yvdnTtGJml/66vUt/omrt+IW1kH0sepG4o+3F8nNhyPCCk5jbBG/uFG/onDD4Jr+nhoAdCPIzMPT8vpJ19eOsDbUQszSpcrL3pm8foeTN51vja2XcBAuIbxUOG+huUx0BGDye37fovJxCS9LwLxOVrB33Kwlcb1YpnQEyXR2YA/AZ1Ivw8g==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(23010399003)(36860700016)(376014)(1800799024)(56012099006)(10067099003)(4143699003)(3023799007)(18002099003)(22082099003);
+ ARA:13230040|376014|1800799024|36860700016|23010399003|82310400026|56012099006|10067099003|11063799006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: xvNMuJJ8uiycWKtvueeKsj25b6Ax7LtoBJvl96aKfxHiy2rprY0WzIqskINI1aVZ4/FnnuYcMFrjRqtcGaQTDgE3whfxdjAn+F9EIFJRrU/cGM4Q/u+aebQkBM7oPBfvpJGDLGoUbbSeNjDMJP5ij8S4fMBxBl4+t3w7uoy+fvB+YIJJ+3PEfJ0XzeR5O5bDmDA23DhrniJHLvTOjAGitOlN7jPhRGuw3cWmffeoY87XA0jyhzC29j8fvyu4ut0I9hyyVdfDRp7pVVIEnNtprJtKv4waRsWmgC9jbvxJdTkRJEAXGCYQVOKYLB9Q88+nbBxjcrDHNoaO1BXg0GRwOrXLgCagHR/aXCEUqrBOnxlzQ4dVDwNz4NCq2hZPZ5YCRUdXkFlZcyAXptIG65S7qT1+ejQhhOPlw0V16A5Z+TG/gJe75eNuDe5IYeJl7OoDufH0MsG5+OddB9+a/C5bfcxGLRxbBN3jGTOMlr4gZtFyMFmJvRRAoVhu/Jq+vPAtheKL9EnsvFbv3rr3t7WsZSSKCiNrllCh133RFJdpzltkTg/5jUQY8GYAvIPdXIABCO0O5bFJ/WEiGocaS3UXVdpGiJB1oLczTRXYaNE4sCvzQaxS3xkFa8V33VVFhCaZ+pK7dMJ8OP+w2k4d+DvIzKL9QkLTUVrCWT2bq1W1fuF3ulnKlQ60K1/hyvWNogejAejn1Cgknac9WQaEahu1lQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(36860700016)(23010399003)(82310400026)(56012099006)(10067099003)(11063799006)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: cjd6gZdLm20pRJzQaqJJQQ0qx9rSKKWculn3I6ypasV4C2J3OHozTDB/E9vheBObm9ltgNQjwZRXIwbwDM8asJEXwiFUWZZi5R1aV0237w1GosR3FRxxqjZH7IL9PNSXHUWmWSmhqx2zvoE2Vnq+FZP6L+GchbFmll7oAUTjLRwn8pNBbHMc0dqVUb2bjRKwURJioF0lSq9Rv2B5tF0EgsYtGZjChpCz0bJ3uqAM3/WjjuSH2JaLFvKe7OKJVY0nzGhkiCgD/w7GE1dRRlUTl+/sMN1tLkQwIUjClbAdc5+8fk8k9vjjFr7pZEYQnsWnLIlIPUtHJ9EyOvOzRNetgz6GOPf9GcVRXd21V/jpBBPW2GdTZLCm/Oi/isu+vr7nUADwLD5h0J4E7+u9Acxb6eMv7+jJTCQFfFJ1oVNyLqb5lAt0AG6bpTjlz3olI6mE
-X-Exchange-RoutingPolicyChecked: K03dsh5fQGEOhB2SMMuSQxavnmyLW4mb/RbbDQnIpGRxngamrh5j5fJwzkie3gjUMaIXJI8UDmTAgFUOKycRVg99JxfLXaG7F7CSzYyb/cFaPj7UX3dRx/y1TdoanFjjQRTRGLpqhlpvSIuyz8CWx4hUQveY9ULlyScj+9BGVhTPZi/aQZUj3+ZjG15wZ7fk0t0usT3SUcx0h+L/pxMWDcrnWaKbMYzlgFKShMPiSkzIXrAxSwlD2KOMqTn3pCELPwom4eRDS5peH/Rw9ZaW2TuyNx9JAI8WdML9VPY3LvQart5f85+wTEM11Jd+SXz4KtUkKgcpUZ8Lja/QUyLA1w==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 07:07:09.0566 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95e1a3b8-0ebe-426a-95ef-08df01ae503a
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004681.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: W4mLtWysyZx7xP/Hk1UMDGHOo2LbTJ2PyxqXE6ZDKtDfiZPyppZ4hKx/eYuhgYHBUBIKJp+Lz6IRvPNzYV5qD3lunaRrlzJK+WIQkuO9h/hPPoBPDsUdfqhHwVtcIGRHUw7/hU/BG7Q/3bzS8IyKdAdIwlXs8vtF4Jm7y1/BO2Es3xlXrCC606w8FGeD2YiUGgK5EQa3/RWv5JZEauUjnQBYqikshZuoLu98ZJ1+f5h0QlYWdK/uPokNg84cLCPh3uuSpsQCYuPxxvE3frS1GP1YdAIJdB75gqadIda9wHh8nO7ErtAXy5wMSF1QvXokH+g2dfkIqksprkC4m5B0dK8N8m1gjw1ZiLI+rPq+mDZaXbno/csWaX1AdPN7ljQuWcB4BfUMsd9MLGDtfMz4WzY2UdGucYzwrhUIkFUlMaCcgRxNZEC1InvE4qQbozPi
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 07:19:15.3196 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e8bb028-06c0-416c-d46a-08df01b0011f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000066E9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS3PR10MB997750
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA2MSBTYWx0ZWRfX2LZxEUWs/Ape
- zf2Myx0EmBKIgbU0EN3CHRguK8zDZuJSZ8GlwTAp0Nk9pTvlpex/S+DAS1kEsY99X4LO/0Wabqh
- 1FQqY+TQvtkXHLYp5/OS8Otu/ijO94/ZyFhJIpcKPlDdKzQpoHf64eDM1ixkGYuoeK/ZYQbpfmV
- 2C5+wXJgd3jk/SBZsHtQA8IovKhvlTQVlU9j5R34rZCg1hbJzRIzdscIEVmTmA9HErkT8VEIhvz
- wfJLtdtmH/ix6Bv+w8TvHOyK5KtQ7vTxLWhGQFNdoW/Rgi6ZLk1rLQ/ZnjKvAzF/NosR3VbUmiV
- eztLCp9NdgA63unouHkMObbM5Lpb9r7KtbO4C4oeuxQbR+5Bn+Qouecfb/VoLABWPePSVJKHTlK
- mQo8kvMR4yPvsxQS2Sk7UXNXdsLLgx1Q1eiLAyln628EnrVUaMlQXrTjJIzYh4aeho4pNk6DTHL
- yd2PzZLhDYU8Dqnccnw==
-X-Proofpoint-ORIG-GUID: mJNStIHwUsoytMhMMp4P_NoT5VG9VnRF
-X-Proofpoint-GUID: mJNStIHwUsoytMhMMp4P_NoT5VG9VnRF
-X-Authority-Analysis: v=2.4 cv=NZ3WEWD4 c=1 sm=1 tr=0 ts=6a8bed9f cx=c_pps
- a=qHyJGWWDR7+eWeZXJqH6eg==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22 a=XpE1AkgCAAAA:8
- a=cvIuWm6pIepFOt1jChcA:9 a=QEXdDO2ut3YA:10 a=dpZMgbseYPk84XhQl7oQ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA2MSBTYWx0ZWRfX5jSgbr3e116w
- OV+0pdBGEqDUsxefpQLUUka+ApJ7px/CT4qF2GdQO0UnV0S6cD0AdpV+h9jupDR4svaIFezDI1u
- d/jKo7WmCO/2eB2le1veC4j4LGomFUs=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-24_02,2026-08-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 bulkscore=0
- spamscore=0 impostorscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240061
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8796
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -206,69 +159,25 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-I guess this reply got dropped due to the list migration, just a gentle
-ping to ask if everyone's okay with this change.
+Point to correct file without '_'.
 
-Thanks!
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-On Mon Aug 10, 2026 at 5:36 PM IST, Anshul Dalal wrote:
-> On Wed Jul 29, 2026 at 4:12 PM IST, Quentin Schulz wrote:
->> Hi Anshul,
->>
->> On 7/29/26 12:24 PM, Anshul Dalal wrote:
->>> The phandles used inside a template are not copied to the node insertin=
-g
->>> the template, leading to a missing phandle error.
->>>=20
->>> The following example can be used to reproduce the issue:
->>>=20
->>> &binman {
->>>    some_template: template-0 {
->>>      ti-secure-rom {
->>>        content =3D <&some_data>;
->>>        keyfile =3D "some_key";
->>>      };
->>>      some_data: blob-ext {
->>>        optional;
->>>      };
->>>    };
->>>    output-bin {
->>>      insert-template =3D <&some_template>;
->>>    };
->>> };
->>>=20
->>
->> What happens if you insert the template *twice*.
->>
->> e.g. have:
->>
->>   &binman {
->>      some_template: template-0 {
->>        ti-secure-rom {
->>          content =3D <&some_data>;
->>          keyfile =3D "some_key";
->>        };
->>        some_data: blob-ext {
->>          optional;
->>        };
->>      };
->>      output-bin {
->>        insert-template =3D <&some_template>;
->>      };
->>      output-bin2 {
->>        insert-template =3D <&some_template>;
->>      };
->>   };
->>
->> ? Gut feeling is that this will fail to build because we now have the=20
->> same label for two different nodes.
->
-> Yes, it will cause a failure due to duplicated phandles. And as per the
-> docs[1], it seems to be an expected qwirk of how templates work.
->
-> [1]: https://docs.u-boot.org/en/v2026.04/develop/package/binman.html#deal=
-ing-with-phandles
->
-> Regards,
-> Anshul
+ board/xilinx/zynqmp_r5/MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/xilinx/zynqmp_r5/MAINTAINERS b/board/xilinx/zynqmp_r5/MAINTAINERS
+index aa50e6dae5f5..0f096d2e71f1 100644
+--- a/board/xilinx/zynqmp_r5/MAINTAINERS
++++ b/board/xilinx/zynqmp_r5/MAINTAINERS
+@@ -3,5 +3,5 @@ M:	Michal Simek <michal.simek@amd.com>
+ S:	Maintained
+ F:	arch/arm/dts/zynqmp-r5*
+ F:	board/xilinx/zynqmp_r5/
+-F:	include/configs/xilinx_zynqmp_r5_*
++F:	include/configs/xilinx_zynqmp_r5*
+ F:	configs/xilinx_zynqmp_r5_*
+-- 
+2.43.0
 
