@@ -4,112 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C15C5DF9C
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 494C4C61CE3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:45:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F22FB606E0;
-	Mon, 24 Aug 2026 16:45:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1DECD606F0;
+	Mon, 24 Aug 2026 16:45:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id g-2MT3fC0VT5; Mon, 24 Aug 2026 16:45:52 +0000 (UTC)
+ id NnfH-cSe9Tvw; Mon, 24 Aug 2026 16:45:55 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787589952;
-	bh=ibjXcSl8e0eFnoe7t7MComfhh/8wURS7SJoiQquFyVc=;
+	d=lists.u-boot-project.org; s=default; t=1787589955;
+	bh=3SFnx7mHEBtVl8L5Ja4985xmjxwacWTdBthYAY7xw2A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ceHytijVpv3aezOHhduToe6Sq4XoxiZaQlfCI3EtiMYZW0D2MD30PlYWgN+kCruhY
-	 nn7JCPR6lXmUdgYk91BbuD2NSuO96CQmO5WPgGPJTYOPh1BEkupTBziKBSvFa6xBAV
-	 5vE2FTRWIRKzwGLk2QiIvY8U9sdTwikHjjXFnD1yzK2uSWqe39RRGhYd3F0yYLp28N
-	 8AMngK9sKGY6Bpt2mO4CrDtDk8sxjKshWo7q0DX+O9K4sGVRFVUNQG/LrDmeLUOX7+
-	 eNrvZanp2jJQ1G2AtGagnese+AAQl0HWhQUnrY1iRHu39+5h63oN3eq++2N1NiufB3
-	 Ad68qAUlERXQA==
+	b=fi63WRqc6UqpKmcHdxopa2DDvErWciEupWBk8MtCEs8CBIgCIPyLMHPNJSYr5yFc8
+	 Xo7+W0dH6kzNeefAXgFZwjxEQeXYTRZ7iTsi+qQpsjr+HhSXDizGkDS8TK95SDXJma
+	 ZHG9h+QR4TdvVb0uzryFn9xz85VCsyryzBux2fZTI5uohsu6DTcmrIr24Q8LhDX1Pz
+	 8oEjoFGLk97EST7nB9VSmXwxOWlJVBs/QX20OHLCH3+WbGs2YImNb8yGzXN4Wvo3JE
+	 9ekEcKtlTJw6DtJURsSL9vT1MBKSdbd2YrDFCq1RBYZt2Gs7AYIldDln3THRwlbnjw
+	 BfHS6A5B30UgA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 08FC8606F6;
-	Mon, 24 Aug 2026 16:45:52 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 68AEB29B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:43:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3602C60791;
+	Mon, 24 Aug 2026 16:45:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id EE44F396
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:43:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4FB3740068
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:43:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D4FAC60626
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:43:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fAX2elirGfrr for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 15:43:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BalaQ9NhX1pA for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 15:43:19 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
+ client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=RdgMvV7U
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2665040029
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:43:12 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-69fdfd98eb8so652609a12.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:43:12 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=YncwbbYA
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D4A02605F0
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:43:18 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6a59ec8f530so207502a12.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:43:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787586191; x=1788190991;
+ d=linaro.org; s=google; t=1787586196; x=1788190996;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ibjXcSl8e0eFnoe7t7MComfhh/8wURS7SJoiQquFyVc=;
- b=RdgMvV7UOJ6tu09KCHBcC6DNtG7ZdS6XdoFjmGR0+NUshj8HiVo7HQj8vo3X2+P7mj
- Gx0ByzZ2j/1MhJ1wf4pQoTr/aUvFQGSDXuq6qOHnS2euy6IULQzJP4e9ufR1OzBm478N
- sz7D6riYyYJg7UNgOVe67WV9YDkX93xrXiOcWqz372Ai4bPUQ1Ng1GVLxkOFhMNvM4Ak
- IQ9/R17lkgBo9OkL7JWyO+yKhUNSVAZYcHpD+fwS7o/TamMrNBCAN9XHO5piFbwTgdaY
- f7krMZYISEARw/QffV0pkOu/VWfBbz64DVNHUwSYLvLO6E1rRsc7dCHs0/vukMPGH3QW
- fluw==
+ bh=3SFnx7mHEBtVl8L5Ja4985xmjxwacWTdBthYAY7xw2A=;
+ b=YncwbbYA447tqYRmlfVe7AWJFgCURqKjvioQ2iLEUa9rynaQO7HTpYip757q2NmavJ
+ Me6dgl8m+KAHlWjQ4rfsG67A/M2lj5KxrsGq1RV9cGDju1K3IYA35Z8yXCIijfoWmeoa
+ SVbb5NNluJxhMknackuMCGNVZ4opzbB7hbMdmwlkNe1Fi6VWGGKKXGi2khgnpXfRweoP
+ Aqw7hp8WfWMFegH+8ys+ptrF5ebdT1jds7wRuK+K7I9UpGFUDU0H9YMOGXz3eqbWvEJw
+ Y99I0aXEPR+bJnXbz8YrZLWdWZIiK7qLrMKCVr0MuL9je0Cz0Mrhlw9Q1gIGB87ck9hD
+ 50ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787586191; x=1788190991;
+ d=1e100.net; s=20251104; t=1787586196; x=1788190996;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ibjXcSl8e0eFnoe7t7MComfhh/8wURS7SJoiQquFyVc=;
- b=btjqsq/WTgSZ0Km5YsZFok1tx6QobVih4LFOFSlvVrogt6t/+h1V5VvhvDLyW9DVRg
- 8WfAnry/BBuIdEflNaN8PeSSTTLdLhdU5LdEpc8ZX/pUlo7+fLjNy7iXLEWX8M0Utw9c
- ImDQjo2Jz+TvwGSPOIVrMwJgkgwCVek4kEf4d/oIdbRqxh9ixCvsJ6GekDuoSUYDonQZ
- +pHX/uM8xfD6inFZR6LMm18mvD5btM2Uk52OIsV193EkwyWd4xoJkHhoiWxI0o9cmloP
- 58uZIxauJJn6pFiXe6L5YaZIYt+pbRBQ4VUex0DN4917n4zZvosognW6GvlApJjc7/cf
- iSKQ==
-X-Gm-Message-State: AFuF++mDvot8mnAAfCKIsncTnOYknsSnqoW7IOC/xWGi238J5IsHuGoM
- XCzHAWd2ohmeUuzw03VhBjStpMTd8rPB41cWtptDJY+v8PM7VELuOARe3uPPVMJggdS0rLWcTmn
- hsEhm
-X-Gm-Gg: AR+sD12sUXEWqZU6GmCkR1vAyBm65YSWyaZVYR/+b7DHmv2KZyO3NKXbg5jO0VjIZte
- 4ViDKvFiY8WWJodnU61T0p9RxR71NIDTIwPV9hPslWo5jBG2V40eJDUXuzsreSLqbmmAHd+HUFH
- s3ksCjWEJqI+z1dyWIhwVeJbZP5sAbAQeGrXc0rvE5V48QVmjf7yA5VFWWzL6eyPQz3HhNXtKSK
- 12VMwevMM8LToF3r3SjLxFBambpZTaEW0h/hKGabelX/LtUbqJj+ZI5KrMWeNgvLKH3rdLwoIH5
- UHs66pHjvGH0izPN3CKAl8N8A79SoT42YzFxUJ7zTHTPwN/wzzwRfk9rXuU+pkLoIvCZAdZgAQQ
- FwxzYlharLyx5UQFIOXSpCa3cEyggzLdTX2X3pAoI6MVJGgX21LiRKlVg60UXI4CZFkxnaImmS0
- LYZO6MkOmvi/rlA4ylw+T8rZIYe4E1KTB1T/AZFwYemYdK8KuQ6T6oqrWDlYEItoxPrpE2nQQRc
- kddsBKzyJd7AkDYW1XpCw==
-X-Received: by 2002:a05:6402:5d0:b0:6a1:de1:f739 with SMTP id
- 4fb4d7f45d1cf-6a42f21945emr15744738a12.2.1787586190732; 
- Mon, 24 Aug 2026 08:43:10 -0700 (PDT)
+ bh=3SFnx7mHEBtVl8L5Ja4985xmjxwacWTdBthYAY7xw2A=;
+ b=Zz04ArOtPA+bNL2p8zsM6GSK4MVC58uQnLQjPI+iItVLFvMLcxyWVoI961vIvCFSq1
+ 4T42R9PknpD2kVN/PKKl6TNzn5bA/EgW7GF6JV/ARdpflcqGVxYaoPllOTkBvSoLUKvK
+ K283XzF69/+OfNjqjWg+TuDVtxTG8+4uIpqj1TKXpR63XE8XbvRaDW68eYSrF8XFyN1d
+ wqdXRzJG7hrWltM+ahNlWN6eVzI2A145d/Wn4BsxBAnB+1OnoRDmNsLcZeK9H580gGfQ
+ 3/L/ojDOfZDDk6cEhRO/eiSJ0UssytuNDGL/ZiR8HogfcRS6HBhNPeohysfSxRbSoqRh
+ 3Q6w==
+X-Gm-Message-State: AFuF++nn5iDyiYeG0BmxRhndM8n++GYjDyX76XG3jN3n7q/3HTKkA3TL
+ 3slFegiz2iTFqKAWRfWPQw38FGAM+L4bCQ+HmXHOOoGoWqqecE3/oRQtMxSKQ5oPOAdXl3/WGnq
+ ehCSB
+X-Gm-Gg: AR+sD11tE8aKBNR5olIqKh9ea8wIORcO2P1BBnqoKWzOLkOk8iWVzt8KGXiLiN3HAY/
+ Ck2i/2+HhzgIvQvTyBR/oI2YGUDOTiWw8j68O7WeO2axCFF8DnE38ihBU6+XksBAc7sg+rIQx0b
+ Cu9Yu62ibIiBE2hQaIziGz5UCcpJpJ3bJ1zJnSubgRFcXZbrG8tMPsqfL2eyXCLaLmLBIdrB56M
+ oD5AKnk0jdQEgKPnAS1X5B5LJ7Rt/TUlGp701F39qPxLjpP97xb7usyYji509AivdQgO199KYqL
+ qJ/pk6sAD+Lz4t3rMfn6tuMtwUA+NxJPj5gTt1uxtStH/iUx5MWMnc2uOVsMdzKJ9LbLA1xG/L+
+ WdfeW+RsykgJQNnNDwI/QPmsxYry9WmsJJcb0PmedAE9xU9e/B2NY83TFW+BTt2vmk4LVyyj1/t
+ B12M4g9cJcCY/OWVQBj9bPkzdxFEfAazV2ZZqiTD34ivI533U4D4aBd7SnNbgZotA9YAM/DnmsS
+ tjiIaK+kaBauSA7nXe65A==
+X-Received: by 2002:a05:6402:5d0:b0:6a1:d68:338a with SMTP id
+ 4fb4d7f45d1cf-6a42eeaf432mr15951543a12.0.1787586196307; 
+ Mon, 24 Aug 2026 08:43:16 -0700 (PDT)
 Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a59e19a05bsm13368763a12.17.2026.08.24.08.43.08
+ 4fb4d7f45d1cf-6a59e19a05bsm13368763a12.17.2026.08.24.08.43.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 08:43:09 -0700 (PDT)
+ Mon, 24 Aug 2026 08:43:15 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
  jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
  sjg@chromium.org, Anders Roxell <anders.roxell@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH v7 16/24] usb: gadget: atmel_usba_udc: set endpoint
- capabilities
-Date: Mon, 24 Aug 2026 17:41:25 +0200
-Message-ID: <20260824154133.217744-17-anders.roxell@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>
+Subject: [PATCH v7 19/24] usb: musb-new: fix up after the resync
+Date: Mon, 24 Aug 2026 17:41:28 +0200
+Message-ID: <20260824154133.217744-20-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260824154133.217744-1-anders.roxell@linaro.org>
 References: <20260824154133.217744-1-anders.roxell@linaro.org>
@@ -129,55 +129,133 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-usb_gadget_ep_match_desc() reads the caps field and compares the wanted
-packet size against maxpacket_limit. atmel_usba_udc sets neither, it only
-sets maxpacket, so no endpoint matches after the dwc3 resync re-imports
-epautoconf.c. Same problem dwc2 had in commit c5c4cc4c6b98 ("usb: gadget:
-dwc2: Set endpoint capabilities via .caps field").
+Adapt the musb-new gadget code to the new gadget API. udc-core has its
+own usb_gadget_register_driver() now, so drop the local ones.
 
-Set the capabilities like the kernel driver does, and use
-usb_ep_set_maxpacket_limit() for the fifo size, like commit 6f9c431a2062
-("usb: gadget: dwc2: Use usb_ep_set_maxpacket_limit() for fifo sizes").
-
-Compile tested only.
-
-Suggested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Link: https://lore.kernel.org/u-boot/87v7az6l03.fsf@kernel.org/
+Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/gadget/atmel_usba_udc.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ drivers/usb/musb-new/musb_gadget_ep0.c | 24 ++++++----------
+ drivers/usb/musb-new/musb_uboot.c      | 39 --------------------------
+ 2 files changed, 8 insertions(+), 55 deletions(-)
 
-diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-index 52900ad654cf..bcbfe5272d5f 100644
---- a/drivers/usb/gadget/atmel_usba_udc.c
-+++ b/drivers/usb/gadget/atmel_usba_udc.c
-@@ -1188,7 +1188,7 @@ static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
- 		ep->fifo = udc->fifo + USBA_FIFO_BASE(i);
- 		ep->ep.ops = &usba_ep_ops;
- 		ep->ep.name = pdata->ep[i].name;
--		ep->ep.maxpacket = pdata->ep[i].fifo_size;
-+		usb_ep_set_maxpacket_limit(&ep->ep, pdata->ep[i].fifo_size);
- 		ep->fifo_size = ep->ep.maxpacket;
- 		ep->udc = udc;
- 		INIT_LIST_HEAD(&ep->queue);
-@@ -1196,6 +1196,16 @@ static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
- 		ep->index = pdata->ep[i].index;
- 		ep->can_dma = pdata->ep[i].can_dma;
- 		ep->can_isoc = pdata->ep[i].can_isoc;
-+
-+		if (i == 0) {
-+			ep->ep.caps.type_control = 1;
-+		} else {
-+			ep->ep.caps.type_iso = ep->can_isoc;
-+			ep->ep.caps.type_bulk = 1;
-+			ep->ep.caps.type_int = 1;
-+		}
-+		ep->ep.caps.dir_in = 1;
-+		ep->ep.caps.dir_out = 1;
- 		if (i)
- 			list_add_tail(&ep->ep.ep_list, &udc->gadget.ep_list);
- 	};
+diff --git a/drivers/usb/musb-new/musb_gadget_ep0.c b/drivers/usb/musb-new/musb_gadget_ep0.c
+index 25b1de6e58f9..726864aa7979 100644
+--- a/drivers/usb/musb-new/musb_gadget_ep0.c
++++ b/drivers/usb/musb-new/musb_gadget_ep0.c
+@@ -320,51 +320,43 @@ __acquires(musb->lock)
+ 						goto stall;
+ 
+ 					switch (ctrlrequest->wIndex >> 8) {
+-					case 1:
+-						pr_debug("TEST_J\n");
+-						/* TEST_J */
++					case USB_TEST_J:
++						pr_debug("USB_TEST_J\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_J;
+ 						break;
+-					case 2:
+-						/* TEST_K */
+-						pr_debug("TEST_K\n");
++					case USB_TEST_K:
++						pr_debug("USB_TEST_K\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_K;
+ 						break;
+-					case 3:
+-						/* TEST_SE0_NAK */
+-						pr_debug("TEST_SE0_NAK\n");
++					case USB_TEST_SE0_NAK:
++						pr_debug("USB_TEST_SE0_NAK\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_SE0_NAK;
+ 						break;
+-					case 4:
+-						/* TEST_PACKET */
+-						pr_debug("TEST_PACKET\n");
++					case USB_TEST_PACKET:
++						pr_debug("USB_TEST_PACKET\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_PACKET;
+ 						break;
+ 
+ 					case 0xc0:
+-						/* TEST_FORCE_HS */
+ 						pr_debug("TEST_FORCE_HS\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FORCE_HS;
+ 						break;
+ 					case 0xc1:
+-						/* TEST_FORCE_FS */
+ 						pr_debug("TEST_FORCE_FS\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FORCE_FS;
+ 						break;
+ 					case 0xc2:
+-						/* TEST_FIFO_ACCESS */
+ 						pr_debug("TEST_FIFO_ACCESS\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FIFO_ACCESS;
+ 						break;
+ 					case 0xc3:
+-						/* TEST_FORCE_HOST */
+ 						pr_debug("TEST_FORCE_HOST\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FORCE_HOST;
+diff --git a/drivers/usb/musb-new/musb_uboot.c b/drivers/usb/musb-new/musb_uboot.c
+index 43ab3245e5c3..16907c4681bc 100644
+--- a/drivers/usb/musb-new/musb_uboot.c
++++ b/drivers/usb/musb-new/musb_uboot.c
+@@ -383,45 +383,6 @@ int dm_usb_gadget_handle_interrupts(struct udevice *dev)
+ 
+ 	return gadget->isr(0, gadget);
+ }
+-
+-int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+-{
+-	int ret;
+-
+-	if (!driver || driver->speed < USB_SPEED_FULL || !driver->bind ||
+-	    !driver->setup) {
+-		printf("bad parameter.\n");
+-		return -EINVAL;
+-	}
+-
+-	if (!gadget) {
+-		printf("Controller uninitialized\n");
+-		return -ENXIO;
+-	}
+-
+-	ret = musb_gadget_start(&gadget->g, driver);
+-	if (ret < 0) {
+-		printf("gadget_start failed with %d\n", ret);
+-		return ret;
+-	}
+-
+-	ret = driver->bind(&gadget->g);
+-	if (ret < 0) {
+-		printf("bind failed with %d\n", ret);
+-		return ret;
+-	}
+-
+-	return 0;
+-}
+-
+-int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+-{
+-	if (driver->disconnect)
+-		driver->disconnect(&gadget->g);
+-	if (driver->unbind)
+-		driver->unbind(&gadget->g);
+-	return 0;
+-}
+ #endif /* CONFIG_USB_MUSB_GADGET */
+ 
+ struct musb *musb_register(struct musb_hdrc_platform_data *plat, void *bdata,
 -- 
 2.53.0
 
