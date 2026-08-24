@@ -1,73 +1,73 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B59BC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 12:28:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199F3C5DF9B
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 12:29:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1F80380DFF;
-	Mon, 24 Aug 2026 12:28:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D752F40659;
+	Mon, 24 Aug 2026 12:29:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZiWbITGOefFf; Mon, 24 Aug 2026 12:28:57 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dKbGo5Po8SwU; Mon, 24 Aug 2026 12:29:00 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787574537;
-	bh=+UifLr87Wfpi3s0QMOb8GxJzWKEWvfI0jI7aoEimuGo=;
+	d=lists.u-boot-project.org; s=default; t=1787574540;
+	bh=tYSIVjK6Yfoc4aVN/GPMbjic+scR22v+FLlzP7BECqs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jgKNqL0QtE7gYjZFo5RgtCkoHIF0jPAw00z4FlnBnahxvTPNJPqwv3Mks/xRcePdG
-	 COFzG1EYmps6w9x8F8tFVmVkL/qV4tWJJPOeRetFeifXHzFGLM93Gy2X1aK2/hvGK+
-	 jT8fj0HInZ5JR2uYM/W9KiFdQoGkc/P7C5wJffhNO9ZgUidzJXTSQo2t/vrm7xuhjz
-	 vJGqeWjJErDCXFa2XVVAC7XGUR6GXLxLJSTc+/29gTT0lUn0T0/dHNWRclqNmP4+SI
-	 ApT2jmFzzV4FXGnILKoCimbBYuLBqOss5okIQgMCXZ8/9GB9CYFbFv0nP6I+qH7C0m
-	 CqmFHQWvHFOSw==
+	b=ltI0LIltpuc6wBJESzAsUl76PSi4XBCRnY84YoivNXerOuW16i/0twO4eXTVyvztl
+	 O8O3ju2Li2Iei0Feick3hD4mpRZm0CQJxloiOXDQonFAnAgU1xfuXgnK5yPEPX9dfA
+	 Fdi7f6xNMo/s3vJ6k4vGfYuCeOEbnzg2OHJOt0UdGQraRuJEFsJtWCZouvySgWPzym
+	 RomcBd1RlH5Wbes655ADwT4WNFLzBJv48RzzaY+DAkjKmQvxFq/KzbTboIaqjVweA5
+	 OE/kIBB/DiD3VZcIYT9H2E0hwOb5ArYPPuuZo5sRN5eskwsjjXKEf64nclIDG5K7Mo
+	 9eAF1NmQgRO7g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E36D780DE4;
-	Mon, 24 Aug 2026 12:28:56 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5BC4C386
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:28:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1D5F84069F;
+	Mon, 24 Aug 2026 12:29:00 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 149A541A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:28:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 422C060659
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:28:52 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id EFCA34069F
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:28:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7q0G7pPG1cJD for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 12:28:51 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1cAX1RIge8Oh for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 12:28:58 +0000 (UTC)
 Received-SPF: Permerror (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c200::5;
  helo=duzpr83cu001.outbound.protection.outlook.com;
  envelope-from=vladimir.oltean@nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=nxp.com header.i=@nxp.com header.a=rsa-sha256
- header.s=selector1 header.b=midJQ6pp
+ header.s=selector1 header.b=DYcHwEPC
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::5])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 65AEB60672
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:28:51 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1CD0540659
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 12:28:57 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t7schB6T011C8dzw5Z+I6JYqcJZT0W1PtZbjqUaePzjatdjppk6P/8wJbE10vgcXGRE/4snt5spIfNw23U71owF06hrQl8OSIig222rGOY+D5yjFUtpbqzAsTDnv1BPP53eFU19Opi/3WJF6MkLHhAjNnwjPlbey8nhFN45CRYFXeRSs1ZIyd5ZfMVsoN+orIKSiwcbZVfuupzDtgSCeOnKy2r8DI1wSxsSR0KzUUtzoKPOsWP6vF3r7tqzCDxhNhRM2bzf5sqZQRBVKGduw0JAC5jH2I5SnYKw/8oW/pttkR5SQFx69kkRte5ZNVDXAcbcmV5KKP8jwkfLFI95bHQ==
+ b=dWwCDj245lq+6GA5x34WI6MZ1wA3WcHL9fO4WPXDoxifkGfZzLSz0eRtO75Gcektx8Hazr7GGJF/GZNJ8WcI4QoMPLATirkTyfhsv3M5VGZZkvFysExqmM6CDYmEqFpUKKiiPlT4j0raLB1zxy4M8LatyKRezxgCZh/jDyd1fz/ns7Kqd8bSXLzRYtP45yMZ+r5BChUzf4vYNIHm1j+nKAXrxdyDkW52aibuQ5yaZT2Q+Cvk3MJgBoJrl7wvYgRu6b9lI7dKtC3hKqTcgh06jd68aKeg2zzvgpRgPFPMGaOKuA4kjgwu84mRNdYJ4NrjotxXgOsIFwkyKtC3TRDLVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+UifLr87Wfpi3s0QMOb8GxJzWKEWvfI0jI7aoEimuGo=;
- b=Z/fvc89L2fX2236C9rlecQpthU/4FCLhdIEJLOSn/TKs0BWQPIQk9D+H70sp6BnPrr94XYGxFDqBAqeZzfHsyLUXZQd3MARCaenJKMwq7YFF1e77HG7OPfgg9wN2cVJ2v5ZP4oA6B49JI5svWSnC9kD0KfxDbEcuLQlg+MV4Sjz/SOaUJTZLZf0zK6t/tClX39SUGW5I+RU6ASvP/pSICrb+iKSw9XZBxd0divATpAa9z9ZALYGeY+fKdPUYiJJoYUj38CmfPZVN5ivnC2Gsj7PW/FQaj6YOe0iZEVpifBRHmlOfF7SNbpxJEtw4ArO1Skz3u4xtd4BjY8y1gOQjhw==
+ bh=tYSIVjK6Yfoc4aVN/GPMbjic+scR22v+FLlzP7BECqs=;
+ b=Q8SiOmQz3LtNQqa/4wJqJnYD2M6GxRnYb75aa+pFe29DzkeH+fRrQIduQXwrbWaDDU8bybSYzHedzekpT6smoBZCRpTgYFuWk0Rc9zfd8OAMfK5ywTJv1N7eMbFFbWOpM7FQ8vUXvYceph+xdAdqBZ4mepsupaidmZ6bzeicgScWU5/RmEIcx5gR+F66muhywVXVKrJusJu1/freJ59RW6oNM+OqSSvv0MHn5ME4lSYcurWCTJViWsbtma983mxeS2t08Q1ozbnW55PNbF35fudbq6/1Yd3vF/Zn2U8RJOKqHs1yU+6l3moAOHwLiiyz3sn9QokMASJnlQ31LQ3EDg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+UifLr87Wfpi3s0QMOb8GxJzWKEWvfI0jI7aoEimuGo=;
- b=midJQ6ppM4w+iSkLSnkxHTC9cSN1ndiua38v1gWqhA0eH8lWwiDkdhWex82MbQfEX1tYGFvgKfYsNYTIm9oFnxVDeLxS80Vd1cQlp/naQqV1ivuyS/JIrL0PTg02S81SNbDLj1tJV7Rqq5SDa1zG+OhtZrtPdSRRtY0pRlwC2Nao58Ws2WuSNiYFinFmIrnO8URmFesJwnKJqAmxEFtPanY8MdWbrVWd0DP6IXZFA9GS01YteVpFTI3Omm9MFyjujP3KyyLm5T1TMJjAEdfgGuCpzQ3SykUuq2anr3+7J+AvtNq2DrfL/pdEQ3E9kcplHVS+XTEGTTU0Ublpb/IaYQ==
+ bh=tYSIVjK6Yfoc4aVN/GPMbjic+scR22v+FLlzP7BECqs=;
+ b=DYcHwEPCQvCI+0XU7DsMvXKF3T19mdY+bwzPNInLoAIHTWtxjV01iawsdsEA+G2JFk+MMmkni9vupz+77t0lkWZTUd+TQRFFJb2cmImfUnpRCR516VRXvMHHJUFzROYyOZkZLxY4ZYSev8WR7+uhbcANx0dUb3g1YnYkAFrmHwwu3rZMtCPuXyHaOiLLM/lFOasLa21QGF0u5+vVw+AKSpR8/p0rXmdcvU2At3tQy5mQhUzpOcrmr6dI9Zu5oAltnEZp1inmVxP8Z8JdKOT9bB5eIN0ZAG9ZMpliHhOMqqpH7l4fUUTxNwWzZsu7n4B1a/l4TDRr1wdXewP2rmo/Pg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AM0PR04MB6900.eurprd04.prod.outlook.com (2603:10a6:208:17d::10)
@@ -78,76 +78,75 @@ Received: from AM0PR04MB6900.eurprd04.prod.outlook.com (2603:10a6:208:17d::10)
 Received: from AM0PR04MB6900.eurprd04.prod.outlook.com
  ([fe80::7fda:8431:ca1b:b023]) by AM0PR04MB6900.eurprd04.prod.outlook.com
  ([fe80::7fda:8431:ca1b:b023%4]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
- 12:28:47 +0000
+ 12:28:49 +0000
 From: Vladimir Oltean <vladimir.oltean@nxp.com>
 To: Peng Fan <peng.fan@nxp.com>,
 	u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/6] common: kconfig: raise SYS_CBSIZE default to 1024 for
- FSL_LSCH2/LSCH3
-Date: Mon, 24 Aug 2026 15:28:24 +0300
-Message-Id: <20260824122825.95712-6-vladimir.oltean@nxp.com>
+Subject: [PATCH 6/6] configs: ls104{3,6}aqds_tfa: enable PCIe Ethernet
+Date: Mon, 24 Aug 2026 15:28:25 +0300
+Message-Id: <20260824122825.95712-7-vladimir.oltean@nxp.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260824122825.95712-1-vladimir.oltean@nxp.com>
 References: <20260824122825.95712-1-vladimir.oltean@nxp.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: FR2P281CA0176.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9f::14) To AM0PR04MB6900.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR2P281CA0175.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9f::12) To AM0PR04MB6900.eurprd04.prod.outlook.com
  (2603:10a6:208:17d::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM0PR04MB6900:EE_|GVXPR04MB9879:EE_
-X-MS-Office365-Filtering-Correlation-Id: afec23d2-b9a4-4fd9-8afc-08df01db3f08
+X-MS-Office365-Filtering-Correlation-Id: 36583551-232f-4023-ac52-08df01db401d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|23010399003|376014|1800799024|10067099003|3023799007|22082099003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: Pym0mI2GIWmeTjpAsjPIOKPI6ULo7szHMsorB5QuMW6SImqRRQBWmvJsJ5uGrCfyLaj01mKkFl+n6bt3jf6WdY1sOT6GNk0oGAfWSGEatBySJ+EROAPHAtTiKbEvW3v56Q/u0Hj6yoiHEMwNkrulRO7ltIDyc6f0EFYzEekZLU6Rr+GQUEA2Ll7wund0YILR6fs4vvSqmkTvoVYbr+b4dQCfwRgUtSow7mg7N2umhmu+UcutQWwS0y9psskChjtulsNVmUW5Xzl9XqyGLizM/Mi1GOfiEWSX1uZoqefnAKCZjMIbx7QUD+sn+7Peq5P3vOXbEMkEniDSy8lsbgHAu7VHb9zRzQUVAUlOiaVMa8+VCnpNeqIYJ74zsi/elaoiR3BagwNLxAGVdeudlX7e+BXX8BpUy5CrPyPZ+jUWYoOrxu8tiz9Ck6XICzBeX0UKxzATzk6Tb0ptXpZNJz+uWZ7GGcJN8qj9zn9pl37V1E2S1x2WS+55B/UBzwp3Z/F0qRkHFK0TAuhZeVLlZ1qYtyVHvgfPcKtkY1WrawXFYaZnuinS86LXtCsJMWCbCf4MUXKXF/HaooWI9dR+cIs7FFWJQBrU/38tz9Po5BpZBeX8b0IRQGOHU6U8vapKQ4B8LWzrlKmyJcvxOdQNUj/RqnxxMJrX321esUwua5mku2U=
+ ARA:13230040|366016|19092799006|23010399003|376014|1800799024|10067099003|22082099003|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: h5YkQVFAtgS3AnANpINc0TOF42VagC0my4p9cFyH9AFJojWtcP2VMk4teSobg9mnxAM8Bb8VWv7hfTJuVVfLbJ+RuLLrFA3PgTVnXkPqS1BM3pjfp8AHA5jazoefK1kIW88ArdVTD260py64duOE8nlWUa2IENVV/toEzPHhAx7fW5VwzFYXvKmgvTIw18s5CW1hRZwXIfJRvXRZGWfB3e99i94eyMGs64SQbzqYZlqaz0Kp+iTZ8LU5TdAmSrW0RvpfPkLFbUzm963XFW7lcrYG9Pl0kkrxuxaunuPlp7Oz9kdd+t6aNwlmwZJTGlJTVpoQ/P7cZwSKgCdGMP8mqHJ8RBqIgdViRz+cV3039938v2sXfq0KStZJlVdmx8d12AKvVF3SgkT0P7fyLo+gqVSbvVukW0lFP1GUbovAWG27MSzgaedPq1FuL45UzC+pENHC2nylcrWvUZqR8lrOZpBUPiZkID0zOU8KCmwiekQgkhxbwwUXVOC7w44HiZfDQ87ueStOKtyk6blmMqYl8f5t4juJ+yGOeS7GdbD9XSnMV1yzHVmqQKClzvg+FJe0fD9lYmBZgyQG7xha7Gtc+QP3KQGLyY4Dkyr4pdK9CpD9XLRdJQZRn3esB5FQ8rEaQIg7fX41rbwU6jqIJGr/011a9Qg0pmO8NMt4nDhW95Y=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR04MB6900.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(23010399003)(376014)(1800799024)(10067099003)(3023799007)(22082099003)(18002099003)(11063799006)(56012099006);
+ SFS:(13230040)(366016)(19092799006)(23010399003)(376014)(1800799024)(10067099003)(22082099003)(18002099003)(11063799006)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gyvLuKgeqR3sE33bnRkAGZ8YLn27JjpFwLVtAlaTsfJcMSJ0AdsPWFDhEX9/?=
- =?us-ascii?Q?MLS/PPtJFveyUPgDefQI9pF5V5ClSZr8iN9ctwJUhF94sPQVUs41ro1Jcxf7?=
- =?us-ascii?Q?33KkjFYy22C/E/RqJlBAUWBIxsXgZUo8v+jgWqXhB4dojFt3oQkW/xCoDs5g?=
- =?us-ascii?Q?fgFv4MW8abIlKPKx4z4+hlnxvmA2cUecIEhri1a6Qj2XqJBpAdxfJclYQ4cA?=
- =?us-ascii?Q?079bZQ+EK+rAgRPTE/uffBm5DI3OcyhtH4B008ZzFCJtRzuo5NmlKVcAJVYM?=
- =?us-ascii?Q?VvNgGNn05P0raVA0j3TCygeZbyiMbuca18ZXSPBtBcY4iDyXSMCiY60joODZ?=
- =?us-ascii?Q?JbyneZnSm6jx3+2T13fXJJpYr9aeSb6Db4Fai/a/Mdt43wCS/yvjhRI9l7fq?=
- =?us-ascii?Q?3iodyy6O/42xIqTYbtQ9CFpZWswBO0UxcCSAZ8dIOSjbcOXdH8i3m5MernD6?=
- =?us-ascii?Q?WyNb/EiJqD8Ca31Fmug+fsXCKFhild/FPgrPRJ6YLDA1GZ/0gz6YXMECgo+W?=
- =?us-ascii?Q?AtMRR/4QnmJorDXAE8ga2wequjfJ4WnLEBwEHPyEuj9DF4OX9DMlYd1gA39g?=
- =?us-ascii?Q?/RRrYEVWChZbvKJi57nMLLQf34F5zUvBtTWMNxCXUv5lDrgwuZIs6ufVnkar?=
- =?us-ascii?Q?SoQScK6j8y2stG/fCh/LJV8lMkrC9PZdRDeh+K85uIEglmNM5kmqHVcRW9Xt?=
- =?us-ascii?Q?JctlW15s228BhNK2BsFeecCuXBvUzYWsQgvaNqtFZGvMSELO8oMj/rVTy56V?=
- =?us-ascii?Q?sfZ48vkUE3gEITXff4MEs+B1ot251eVmG1NbpCK4hFevEqIfQuRONXroWUWK?=
- =?us-ascii?Q?1yCImtAuJEAWBgeIXVa3FCMLMlaAbop/yopPz35U6U6Gy/rCVJ6pGtfySzs5?=
- =?us-ascii?Q?ZcV3B7MwZe7MqpFoGJhfBd/PEVLrpW0680qj4mG5fwP8L64H6XjHsjKSkh+x?=
- =?us-ascii?Q?rldjxM4H425nETGyRZpYzHOC2U5ujss/uqDwW+AmAa8LnsmP5o2Nxo2+yLnI?=
- =?us-ascii?Q?qTFw44VwMa9JAYZPy8HctI5b8e0HvV39MGPcCMKqrqQyFAEb297hQ3M+nzeJ?=
- =?us-ascii?Q?A7PjieM8aPjN3RGTOV180peRptv+mDt8D0ke6ysYC6ESep539qUgEnHb0e11?=
- =?us-ascii?Q?h0OF2oqvlFWVzIPa7wogHlnnJQLXXWMKFQ+DZVPWReRz/44TtjI1Iu+gnp1o?=
- =?us-ascii?Q?cZNAXWVYVPhpn1BUtiANyHgo52OELIgbn/6hnY0p6nEBLbsPMxWHSrX4G7JJ?=
- =?us-ascii?Q?BsVkqc76Ujc9gteSfbbKPS8NccFHsyYHVru21qTnksnQhjDbAUE3cRbKkACG?=
- =?us-ascii?Q?NLYyJsd0E/ErKC1WlVkjqX/rlkh25ZZyp+rjAvydFvaiVRtJlUwQnR7jqDcR?=
- =?us-ascii?Q?ivzuWe/Dwqr1p8Lbf4PO5p/2dlFbFKEqmFmojKoCLTL0spJyXBYOzYJXMjOv?=
- =?us-ascii?Q?QUw6zigh10//cHk5feTzAwNOsgPoOcdN5OXPV0FnI2wfJ1abL/Kzbp7ADRzQ?=
- =?us-ascii?Q?I4DvY1VnhfuZpRVLGsSpp0yOth39llcBvDPRfv1r22uOqD7vvvzUJtSMrBa2?=
- =?us-ascii?Q?OrYSZZukHL1OyEYC3skuopJCPdsNyeS7sdx2X59CQDUuONZgRnLPj2v6jLl1?=
- =?us-ascii?Q?6HVvEDf/FjePp0pgKQx8j6FgQXN1kGnaU8RDaDriqlgrKDJWzJKSYQlR0Zjb?=
- =?us-ascii?Q?30DaQxirBkZ6zuFQGXjyt9swjQu7rE5ORZbzbKSzu0RAA4BVP8vsoJVykLEO?=
- =?us-ascii?Q?/txFmTXv4g=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QR0fmxDTs+5dFWk6MrHXEoqsqPylugvlA6vV82sK6VZfHHwMvaNwlNJhuwME?=
+ =?us-ascii?Q?0JXdNXMwZJw0f7VZ+iiaZnKrMFwSoahl2jVdJldFjarb7meylsRAdVIq2kz/?=
+ =?us-ascii?Q?N6fSHgTg6M3MZ/Jdy4mC+ByfWra82qeCeNlYStRPn1zQ9ZSIm/jGY9KBxNOh?=
+ =?us-ascii?Q?rqMZ0AK/qlPKdU6rhO5Mz96JFV+YjMQXZErxNQXrEmVrkIVIPtXMTFI6ACqV?=
+ =?us-ascii?Q?u7uK7KQ2HYxLMowLca7tRAyPkEHiGgKNButXLDvGg+G/sc7pzGQMeZ/nGPlw?=
+ =?us-ascii?Q?rDjNwkPgDUOm32fviU/atWYdQzjXHkuNZsCLsXIiSAYMoY0gH3RIN9OZJ6Wb?=
+ =?us-ascii?Q?LzVrerp4vF4SHVWE1soLdR7zYPdqQCzifMf6DQXq+UmiRvF1DQMDEV6U1s/I?=
+ =?us-ascii?Q?KVQt/Bqg+1gHodnx2OWWcP3b/TA+9y065Eh0tjf0yw8F6+2QHu5dDnddWrNM?=
+ =?us-ascii?Q?UY6PJ7dIIxfjHKFGVXMJKuyNMQKWJwXDrnqjHdgdl9P86rmtSXdZ0erp2gY0?=
+ =?us-ascii?Q?YFMVRGkFA1ujggG+pI0D/d3KNF4rC9sleRtsQ8hhLHDwcVtNj4zZT2hSh28b?=
+ =?us-ascii?Q?eZpXd91wtouw68pB8BIQI6/ncbeUzYGO9/OB92z0DoeMkYD/zdrd+6Q8OvJr?=
+ =?us-ascii?Q?3opEtouurj1Hk0k9AyM7p8cPzr3SSqzffCtrIj16JdRISMs616xs6svnh9yZ?=
+ =?us-ascii?Q?wbhyMxVRaggc6K+pV4Q6joQAGhWQbNLk6Ax6A6e09h5ViuVdU1H+nu5HQTuA?=
+ =?us-ascii?Q?bgfzjkx9dVDK+v4ctt4AndTRrAUnKw29+vHHcIkIVLUSADeMGuvgT/3j+yGi?=
+ =?us-ascii?Q?0u2BWM/G2L11zIkz1Gg4u+fUcWIs0BOI0bFhfiV4MUWL79JefDo2FVNOITY+?=
+ =?us-ascii?Q?V7JB74A8ziiTX0Yu+9h6YSHeMNVxjan6a01bAc0l4b7FxwqESNS/y+eWnxiv?=
+ =?us-ascii?Q?CDBwpyC8qmWlnbmQhl56TmiwyT/p3z6122Pg9nsGpqeFd5YRjl521fbN/xGA?=
+ =?us-ascii?Q?4Rzl/jnCVm9BeXvyfdIUn8R5E5vjrakHL/jQ65sPHhNNhGCgPWKkB5DqjsOk?=
+ =?us-ascii?Q?f1HZdwZGbAqBe4FAF6JcfkseIQQMLk8L7sCCTHaRPiOhDTOKvfeBcqazV5J1?=
+ =?us-ascii?Q?W5GMZBERxyvEkStTjQbDn43iJKhnx/F/43GYO1zj9nM9xnlcA8eSN0BGkTUV?=
+ =?us-ascii?Q?MAb+NbItrxPjEeTzN03fPUyrB/aqPQYh07KCjlE62/WDBmRtmWJxxihoMg2h?=
+ =?us-ascii?Q?XX40B4zWroi3hzlslru43hvY97qRPHZY+FsichTT3q1E75lI4MEM8zB/Nhmu?=
+ =?us-ascii?Q?XrbYhK1q4agKaTlKoWDfF8oWvgR+9uWvzkxNxi0xeXd0yH1vfJM1Dy8YAkXb?=
+ =?us-ascii?Q?BmuKADuaQPi/YWchdzsY4Iv8pNCXf0DyIy9sm+ORonTyGCdDaTq6QsvxsSuc?=
+ =?us-ascii?Q?3c1tjlVIrG1qisnat4YR/McBomouqe1dPdiK/tbbN4I/d9FCAtZt9Yz6uR4d?=
+ =?us-ascii?Q?hJKMqypseyEBfpVWFav1LPC9gQTN+KvGzTLA1kjAK3FXW5tKYt7WTACTGvj1?=
+ =?us-ascii?Q?ToTHxDUp35IaaX2OtE6+AdmuUNGOEgDx5+IPoOORIZa2CI1TdE1OCEUta1qc?=
+ =?us-ascii?Q?4QrrQAh+SjMFSqiw8rfLPhWFhgvKc7YF4eC0V90QwVET6YAx5hYAX80si4/5?=
+ =?us-ascii?Q?GNfTxvAZUSo0W1ko16Pk0T8VsuKMX51RblMIywVlDgXh4a6X9FTmY4QmOat7?=
+ =?us-ascii?Q?yX6O6yn9DA=3D=3D?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: afec23d2-b9a4-4fd9-8afc-08df01db3f08
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36583551-232f-4023-ac52-08df01db401d
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB6900.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 12:28:47.7880 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 12:28:49.6478 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /BvVX0oryYagx/Onwk1TThT7g8itG/FoduibrhwN6IULq9G09A+GQz5Dp0Xf3BTT8O/7xvDrk8oCbZLoAHHPtA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: PRliWBgIsYi6DOQy7XF2OXAPIDNTDTK9Ovecyxo301tAQKVbI0VQF+F83FhRlg7e0P5PeQR+IGs53jPYEKOshw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB9879
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -162,58 +161,97 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The 512-byte console input buffer limit for Layerscape SoCs originates
-from copy-pasted boilerplate in the original LS2085A board support added
-in commit f749db3a75ec ("ARMv8/ls2085a_emu: Add LS2085A emulator and
-simulator board support"). No rationale was given for the 512-byte
-choice; every subsequent FSL_LSCH2 and FSL_LSCH3 common header
-(ls1043a, ls1046a, ls1088a, lx2160a, ...) inherited it by convention.
+These boards are typically fitted with an Intel PCIe network card.
 
-When CONFIG_SYS_CBSIZE was moved to Kconfig in commit d31466b382dd
-("Convert CONFIG_SYS_CBSIZE to Kconfig"), the existing 512-byte values
-were transcribed mechanically into Kconfig defaults, cementing the
-limit without re-examining its validity.
+Since commit cd9b71c3f629 ("layerscape: Disable CONFIG_FMAN_ENET on
+*aqds* platforms") which disabled on-chip DPAA networking, we can now
+set CONFIG_DM_ETH for the Intel driver.
 
-The practical consequence is that environment variables holding
-multi-step boot scripts are silently truncated at 510 usable characters
-on all Layerscape boards, making it impossible to store commands such
-as combined TFTP+flash sequences in a single variable.
-
-The same problem was already identified and fixed for i.MX6 and i.MX7
-in commit f7b237b81e5a ("MLK-24380 imx6: Enlarge the console I/O buffer
-to 1024"), whose commit message states: "we have some env variables with
-long script string and exceed the 512".  FSL_LSCH2 and FSL_LSCH3 were
-not included in that fix.
-
-Remove FSL_LSCH2 and FSL_LSCH3 from the 512-byte special case, letting
-them fall through to the generic default of 1024.  This is consistent
-with the i.MX6/MX7 precedent and with the majority of other
-architectures.  Boards that need a larger buffer can still override
-CONFIG_SYS_CBSIZE in their defconfig.
-
-The Layerscape defconfigs carrying the now-stale CONFIG_SYS_PBSIZE=532
-override were already cleaned up in commit 82d725c31cbd ("configs:
-layerscape: drop CONFIG_SYS_PBSIZE=532 override").
+We also need to enable PCI bus enumeration during init, to actually make
+use of the DM_ETH driver.
 
 Signed-off-by: Vladimir Oltean <vladimir.oltean@nxp.com>
 ---
- common/Kconfig | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ configs/ls1043aqds_tfa_SECURE_BOOT_defconfig | 2 ++
+ configs/ls1043aqds_tfa_defconfig             | 2 ++
+ configs/ls1046aqds_tfa_SECURE_BOOT_defconfig | 2 ++
+ configs/ls1046aqds_tfa_defconfig             | 2 ++
+ 4 files changed, 8 insertions(+)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 345be4b8ca14..9409a0f4b540 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -56,8 +56,7 @@ config SYS_CBSIZE
- 	int "Console input buffer size"
- 	default 2048 if ARCH_TEGRA || ARCH_VERSAL || ARCH_ZYNQ || ARCH_ZYNQMP || \
- 		RCAR_GEN3 || ARCH_SOCFPGA_SOC64
--	default 512 if ARCH_MX5 || ARCH_MX6 || ARCH_MX7 || FSL_LSCH2 || \
--		FSL_LSCH3 || X86
-+	default 512 if ARCH_MX5 || ARCH_MX6 || ARCH_MX7 || X86
- 	default 256 if M68K || PPC
- 	default 1024
- 	help
+diff --git a/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig
+index 7e8d98c78404..8e10b218fe50 100644
+--- a/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig
++++ b/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig
+@@ -11,11 +11,13 @@ CONFIG_SYS_I2C_MXC_I2C2=y
+ CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_SYS_I2C_MXC_I2C4=y
+ CONFIG_DM_GPIO=y
++CONFIG_DM_ETH=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+ CONFIG_SF_DEFAULT_BUS=1
+ CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=y
+ CONFIG_SEC_FIRMWARE_ARMV8_PSCI=y
+ CONFIG_PCI=y
++CONFIG_PCI_INIT_R=y
+ CONFIG_NXP_ESBC=y
+ CONFIG_SYS_FSL_SEC_MON_BE=y
+ CONFIG_LAYERSCAPE_NS_ACCESS=y
+diff --git a/configs/ls1043aqds_tfa_defconfig b/configs/ls1043aqds_tfa_defconfig
+index e8fc4c9c1b57..236281892fa6 100644
+--- a/configs/ls1043aqds_tfa_defconfig
++++ b/configs/ls1043aqds_tfa_defconfig
+@@ -13,12 +13,14 @@ CONFIG_SYS_I2C_MXC_I2C2=y
+ CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_SYS_I2C_MXC_I2C4=y
+ CONFIG_DM_GPIO=y
++CONFIG_DM_ETH=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+ CONFIG_SF_DEFAULT_BUS=1
+ CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=y
+ CONFIG_SEC_FIRMWARE_ARMV8_PSCI=y
+ CONFIG_ENV_ADDR=0x60500000
+ CONFIG_PCI=y
++CONFIG_PCI_INIT_R=y
+ CONFIG_LAYERSCAPE_NS_ACCESS=y
+ CONFIG_PCIE1=y
+ CONFIG_PCIE2=y
+diff --git a/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig
+index 43699af49a1b..733bde1c3fd5 100644
+--- a/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig
++++ b/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig
+@@ -11,11 +11,13 @@ CONFIG_SYS_I2C_MXC_I2C2=y
+ CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_SYS_I2C_MXC_I2C4=y
+ CONFIG_DM_GPIO=y
++CONFIG_DM_ETH=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
+ CONFIG_SF_DEFAULT_BUS=1
+ CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=y
+ CONFIG_SEC_FIRMWARE_ARMV8_PSCI=y
+ CONFIG_PCI=y
++CONFIG_PCI_INIT_R=y
+ CONFIG_NXP_ESBC=y
+ CONFIG_SYS_FSL_SEC_MON_BE=y
+ CONFIG_LAYERSCAPE_NS_ACCESS=y
+diff --git a/configs/ls1046aqds_tfa_defconfig b/configs/ls1046aqds_tfa_defconfig
+index 31668b74af8e..ab1fdbd2b6a8 100644
+--- a/configs/ls1046aqds_tfa_defconfig
++++ b/configs/ls1046aqds_tfa_defconfig
+@@ -13,12 +13,14 @@ CONFIG_SYS_I2C_MXC_I2C2=y
+ CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_SYS_I2C_MXC_I2C4=y
+ CONFIG_DM_GPIO=y
++CONFIG_DM_ETH=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
+ CONFIG_SF_DEFAULT_BUS=1
+ CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=y
+ CONFIG_SEC_FIRMWARE_ARMV8_PSCI=y
+ CONFIG_ENV_ADDR=0x60500000
+ CONFIG_PCI=y
++CONFIG_PCI_INIT_R=y
+ CONFIG_LAYERSCAPE_NS_ACCESS=y
+ CONFIG_PCIE1=y
+ CONFIG_PCIE2=y
 -- 
 2.34.1
 
