@@ -4,206 +4,234 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 734FCC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:14:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D447CC5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:15:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 407F34058C;
-	Mon, 24 Aug 2026 13:14:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 80C83406C0;
+	Mon, 24 Aug 2026 13:15:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ym1WZwxlk2cC; Mon, 24 Aug 2026 13:14:56 +0000 (UTC)
+ id Xst2l3xSku5r; Mon, 24 Aug 2026 13:14:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787577296;
-	bh=Aq20E+XRwwhHZtZCfW90z0Hzst6NLxjuzCmeBFMAsyk=;
-	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=oxUlzxi1PaeMipf7oYcAXSeoIukNnQB5+Jk+6ZA3zMi92Z4tvqtzlB+YwEj1V2fac
-	 e9gRxh37eYvQxSJKR77SwkdE3iNQ6VMKsGEksi3KfI+lb0lbZhaD0dtEXiF6vXQYA1
-	 4X1Zo9ZI4EvCs0n+qyw4yUkaw3+8UpC2vXllJsTwT5v2/ZfLmakj+QabA92XP0vbLX
-	 DugjybuGEGDowemfQj+aLGhImx6upkU9zdRRKGRKdWqq8FLIQ6YAGveH3eTSts0fWw
-	 7ltXehGjMaZlyFKMD4jNS2bHlbcRipK+sr4YLzYwap9c8PVzYkb/8kq3IeWN5s9DY0
-	 uBobetOg6JCnw==
+	d=lists.u-boot-project.org; s=default; t=1787577298;
+	bh=IJ2K1hq1XVstYeDRnLsFnc6YaCdwJ5xscU5pLfT4yHE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=rGXAccUb3z5e7F5OO2WgZWm/9UoawN2Ox+k9Og4QE1exFsqQiSKHqm9NguDEQwb0d
+	 JhCYYT4caPYL9Ci1WaaStN3+tHlzU4dg/7h6+bI/lATYbmb1qKpw2QBAOxg85FNFkb
+	 PANiCRW6Z+TYgEaQi3LfMPQq4eC4hz4vU4CO1oDL1MEQItXn3/RZHdWiolq3p2Rhf7
+	 O2Vsw7KQS86zwudR3Zy1dS8qfbEsTpxMJU7G3zX0QM1jVdeWdy8IM9WOpj4dLpfOaG
+	 c6UJIt70tOxLRAsBkG09DeASlIcJYdA4gNmqclDX8yZXj8ztZjGQqjr4gF4AdMN/vv
+	 /0YcqKDD+3j3g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 56ECA405B7;
-	Mon, 24 Aug 2026 13:14:56 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E6F0341A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 831E040693;
+	Mon, 24 Aug 2026 13:14:58 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8652834E
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:54:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CD0C160629
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7858F80B28
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:54:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AyiFYxqlANjN for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 07:19:23 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M7olqFr3ploG for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 09:54:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c000::1;
- helo=byapr05cu005.outbound.protection.outlook.com;
- envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=WjR911rE
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CF88260612
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:19:21 +0000 (UTC)
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=m8M+XWEF
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3076C80B1C
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:54:50 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Zc7afIvOn0wy46LkTq3PWNPDy+A53Fsf1yECoX+hF0K8vgLnlWrcZmUeC3yXBskh0IpvYR8aYBqzQQW8DomMbGmiQwdYuw7yuJBgFjbJqUAQWVyQFSBHR4x9Ju0mr35qgTg+ObkPTweC1Q++xjbJzdqEqHmsZ3fMn9ganvRw+tMtMPfr7PExegIIrXtEqDmASuY8qgSlv8IVpDkZ6L4ZzlsYhsyF40NzdEs+yMlU36HmirqmtUMFq4cCe3C8yTA/Zs28A6/9duaOi1IWEmxQKtrib9EUsVKOoRgwC+fIDlUJNuXqD7DZ7XNKq7jNaXRLetP48CEAE3k34KDgK0pfXA==
+ b=MAPwc4f9gNQnO2t3Ke7dGzfCpL52PUx38a+DOHsH4i0Bf3tguDhrkCeePMVYJMjBBoG/KA7qwLyhGgXienDicumbbjp+G87PWcFO4qyIBet0gqP6XFuDa1CUE2UxfSZHLNRHuAVlH7vUSFzhadY9UcZGRPw63e2D4Na1Y6LX1wTkKGo6zM5MpuWucvnpA1Pe+rtFOs02+RmrN3qXWI38SiKJkHNM5il1MogD7nKHzp3Nrr4rq8LV5u8ajHHUFkiBAfA8Zf9eKyZ3ojJGLUKuKryBKoLHo9OraK2yy/xS6oJKtBeN2QIhBij3A8J+ARussNjG6vjhu8bJZeGqU/HrRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Aq20E+XRwwhHZtZCfW90z0Hzst6NLxjuzCmeBFMAsyk=;
- b=TMfZqSoWh+qfV5+9sE3c+INueH6ehRIbhCMIgzCB5vAui0g8aU6FyGX0JNTgj08liMHv7/Xby/xYmZUs4AQyYjqJE/hwHsSuaXYWbHshFzeTx9wCUQxa8jH3nmxhIMHzaJUS9NhUFe/dMC8XGtxWZQlWGaBqjyJnjN1XEoHkQQWNtb8oJgzU/Vg6c/i9KDwknYODmuIuVXLc6knW0t99p0mKmrwxJ6nR5svGEznkw2oLAocAASVpq49zgsEher7RUurVebJIbBb3+sgXYQVJqrK/XMUvVZdjy/af0xbOuvwC5Y4pAhKE7J2PFLrpJs3MgpaDF0K6rGuRLKiuN6qmMg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.u-boot-project.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=IJ2K1hq1XVstYeDRnLsFnc6YaCdwJ5xscU5pLfT4yHE=;
+ b=bsoe8lve8vvrAVtqkT1hUe52N6wgq6hJc4qic0fGIuum6K+ygBdVToLwa87oV+7tJSsFj00LbagQ1YqPzjznjS14CRtslqkn0k8gFin0XS13Uyg5d3Aig7Tu0Xu8p+olyopkADJ0dAWEohECqOpYq6VCqzrL4Uf+kaBZgIt5mjzgvGCLYHN66RVALXmbltIBlIWbphyqv8XcQuqeABssF7IfKvdTZ+tEt/vf30Co6F9yk4UK19rUkwpBg3aBApWrkm5Yz8TF4DfgchpG4klJB7xKFlFD/qqNKhv6qD6nNVFjYxoejVWHSTKWFkHiDiww4XKQXAHgH9FLRvl6MaMJ8Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Aq20E+XRwwhHZtZCfW90z0Hzst6NLxjuzCmeBFMAsyk=;
- b=WjR911rEaDfhOQhrjqtI/Tyrs+GJkFYg5limT8eg1eXSSnqMQ1TcPH7uJ+AueI9GzZqalY2y9+dkZDDw4UDrmPpQjK2tgzDoc0LIomwg2XTcouvR5LYpG/bwbMfedPqcnWvr4kx+4ziD0jqWDTUh8dcRJqfWb53zBMf9odud9ug=
-Received: from SJ0PR03CA0125.namprd03.prod.outlook.com (2603:10b6:a03:33c::10)
- by SN7PR12MB8433.namprd12.prod.outlook.com (2603:10b6:806:2e5::15)
+ bh=IJ2K1hq1XVstYeDRnLsFnc6YaCdwJ5xscU5pLfT4yHE=;
+ b=m8M+XWEFGiyOqpdtvWvdzYOMOT5ePgkBiH4fedQ/ra84Jop1xjiDRAClnRfIBY0teZHOuZhycJGlE1LA4ekValFU5rsqVA2Y+etpQGDWZL8eZ9N9dGhi3qkKY6NZ57SXOJMpsvelgd/JxLWESeAtTX87Jpko2Ien3PL++0y8Xvw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by PA1PR04MB10120.eurprd04.prod.outlook.com (2603:10a6:102:461::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 07:19:16 +0000
-Received: from SJ1PEPF00001CDD.namprd05.prod.outlook.com
- (2603:10b6:a03:33c:cafe::73) by SJ0PR03CA0125.outlook.office365.com
- (2603:10b6:a03:33c::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.11 via Frontend Transport; Mon,
- 24 Aug 2026 07:19:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF00001CDD.mail.protection.outlook.com (10.167.242.5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.360.3 via Frontend Transport; Mon, 24 Aug 2026 07:19:12 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 02:19:11 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 24 Aug
- 2026 02:19:10 -0500
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 24 Aug 2026 02:19:09 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <git@amd.com>, Tom Rini
- <trini@konsulko.com>
-CC: Aaron Williams <awilliams@marvell.com>, Adam Ford <aford173@gmail.com>,
- Alban Bedel <alban.bedel@avionic-design.de>, Alif Zakuan Yuslaimi
- <alif.zakuan.yuslaimi@altera.com>, Allen Martin <amartin@nvidia.com>, "Andre
- Przywara" <andre.przywara@arm.com>, Ashish Kumar <Ashish.Kumar@nxp.com>,
- "Bryan Brattlof" <bb@ti.com>, Casey Connolly <casey.connolly@linaro.org>,
- "Chee Hong Ang" <chee.hong.ang@intel.com>, Chee Tien Fong
- <tien.fong.chee@intel.com>, Chin-Liang See <chin.liang.see@intel.com>, Chris
- Packham <chris.packham@alliedtelesis.co.nz>, Chunfeng Yun
- <chunfeng.yun@mediatek.com>, "Cogent Embedded, Inc."
- <source@cogentembedded.com>, David Lechner <dlechner@baylibre.com>, "Dinh
- Nguyen" <dinh.nguyen@intel.com>, Dominik Haller <d.haller@phytec.de>,
- "Dzmitry Sankouski" <dsankouski@gmail.com>, =?UTF-8?q?Eric=20B=C3=A9nard?=
- <eric@eukrea.com>, Eugen Hristev <ehristev@kernel.org>, Fabio Estevam
- <festevam@gmail.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Garrett Giordano
- <ggiordano@phytec.com>, Gilles Talis <gilles.talis@gmail.com>, Green Wan
- <green.wan@sifive.com>, Hans de Goede <hdegoede@redhat.com>, Heiko Schocher
- <hs@nabladev.com>, Holger Brunck <holger.brunck@hitachienergy.com>, Ian Ray
- <ian.ray@gehealthcare.com>, Igor Belwon
- <igor.belwon@mentallysanemainliners.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>, "Jan
- Kiszka" <jan.kiszka@siemens.com>, Johan Jonker <jbx6244@gmail.com>, "Jonas
- Karlman" <jonas@kwiboo.se>, =?UTF-8?q?Jonas=20Schw=C3=B6bel?=
- <jonasschwoebel@yahoo.de>, Jorge Ramirez-Ortiz
- <jorge.ramirez.ortiz@gmail.com>, Julien Stephan <jstephan@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>, Le Jin <le.jin@siemens.com>, "Ley
- Foon Tan" <ley.foon.tan@intel.com>, Lim Siew Chin
- <elly.siew.chin.lim@intel.com>, =?UTF-8?q?Marek=20Beh=C3=BAn?=
- <kabel@kernel.org>, Marek Vasut <marek.vasut+socfpga@mailbox.org>, Martyn
- Welch <martyn.welch@collabora.com>, Masakazu Mochizuki
- <masakazu.mochizuki.wd@hitachi.com>, Mathew McBride <matt@traverse.com.au>,
- Matthias Winker <matthias.winker@de.bosch.com>, "Matwey V. Kornilov"
- <matwey.kornilov@gmail.com>, Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>, 
+ 2026 09:54:40 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
+ 09:54:40 +0000
+Message-ID: <fa38d1ba-ea87-4e29-905d-f71c04dcd458@cherry.de>
+Date: Mon, 24 Aug 2026 11:54:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] MAINTAINERS: Remove references to not existing files
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.u-boot-project.org,
+ git@amd.com, Tom Rini <trini@konsulko.com>
+Cc: Aaron Williams <awilliams@marvell.com>, Adam Ford <aford173@gmail.com>,
+ Alban Bedel <alban.bedel@avionic-design.de>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Allen Martin <amartin@nvidia.com>, Andre Przywara <andre.przywara@arm.com>,
+ Ashish Kumar <Ashish.Kumar@nxp.com>, Bryan Brattlof <bb@ti.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Chee Hong Ang <chee.hong.ang@intel.com>,
+ Chee Tien Fong <tien.fong.chee@intel.com>,
+ Chin-Liang See <chin.liang.see@intel.com>,
+ Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ "Cogent Embedded, Inc." <source@cogentembedded.com>,
+ David Lechner <dlechner@baylibre.com>, Dinh Nguyen <dinh.nguyen@intel.com>,
+ Dominik Haller <d.haller@phytec.de>, Dzmitry Sankouski
+ <dsankouski@gmail.com>, =?UTF-8?Q?Eric_B=C3=A9nard?= <eric@eukrea.com>,
+ Eugen Hristev <ehristev@kernel.org>, Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Garrett Giordano <ggiordano@phytec.com>,
+ Gilles Talis <gilles.talis@gmail.com>, Green Wan <green.wan@sifive.com>,
+ Hans de Goede <hdegoede@redhat.com>, Heiko Schocher <hs@nabladev.com>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jan Kiszka
+ <jan.kiszka@siemens.com>, Johan Jonker <jbx6244@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, =?UTF-8?Q?Jonas_Schw=C3=B6bel?=
+ <jonasschwoebel@yahoo.de>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Le Jin <le.jin@siemens.com>,
+ Ley Foon Tan <ley.foon.tan@intel.com>,
+ Lim Siew Chin <elly.siew.chin.lim@intel.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Marek Vasut <marek.vasut+socfpga@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
+ Mathew McBride <matt@traverse.com.au>,
+ Matthias Winker <matthias.winker@de.bosch.com>,
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
  Mingkai Hu <mingkai.hu@nxp.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Oliver Graute <oliver.graute@kococonnector.com>,
- Parthiban Nallathambi <parthiban@linumiz.com>, Paul Walmsley
- <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>, Peter Geis
- <pgwipeout@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- "maintainer:TK1-SOM BOARD" <Peter.Chubb@data61.csiro.au>, Philip Oberfichtner
- <pro@denx.de>, "Pramod Kumar" <pramod.kumar_1@nxp.com>, Priyanka Jain
- <priyanka.jain@nxp.com>, Quentin Schulz <u-boot@0leil.net>, Randolph
- <randolph@andestech.com>, "Ryder Lee" <ryder.lee@mediatek.com>, Sam Day
- <me@samcday.com>, Sam Shih <sam.shih@mediatek.com>, Shengzhou Liu
- <Shengzhou.Liu@nxp.com>, Simon Glass <sjg@chromium.org>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Simon Guinot <simon.guinot@sequanux.org>,
- Sinan Akman <sinan@writeme.com>, Stefan Bosch <stefan_b@posteo.net>, Stefan
- Roese <sr@denx.de>, Stefano Babic <sbabic@nabladev.com>, Stelian Pop
- <stelian@popies.net>, Stephan Gerhold <stephan@gerhold.net>, Sumit Garg
- <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Teresa Remmet
- <t.remmet@phytec.de>, Tien Fong Chee <tien.fong.chee@altera.com>, Tim Harvey
- <tharvey@gateworks.com>, Tom Warren <twarren@nvidia.com>, Tony Dinh
- <mibodhi@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov
- <w.egorov@phytec.de>, Wasim Khan <wasim.khan@nxp.com>, Weijie Gao
- <weijie.gao@mediatek.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>, "open list:P212"
- <u-boot-amlogic@groups.io>, "open list:ARM SNAPDRAGON"
- <u-boot-qcom@groups.io>, "open list:phyCORE-AM62ax"
- <upstream@lists.phytec.de>, =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?=
- <noltari@gmail.com>
-Subject: [PATCH 0/3] MAINTAINERS: Cleanup non existing files arch/board
-Date: Mon, 24 Aug 2026 09:18:45 +0200
-Message-ID: <cover.1787555916.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Parthiban Nallathambi <parthiban@linumiz.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Geis <pgwipeout@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "maintainer:TK1-SOM BOARD" <Peter.Chubb@data61.csiro.au>,
+ Philip Oberfichtner <pro@denx.de>, Pramod Kumar <pramod.kumar_1@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Randolph <randolph@andestech.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Sam Day <me@samcday.com>,
+ Sam Shih <sam.shih@mediatek.com>, Shengzhou Liu <Shengzhou.Liu@nxp.com>,
+ Simon Glass <sjg@chromium.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Simon Guinot <simon.guinot@sequanux.org>, Sinan Akman <sinan@writeme.com>,
+ Stefan Bosch <stefan_b@posteo.net>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@nabladev.com>, Stelian Pop <stelian@popies.net>,
+ Stephan Gerhold <stephan@gerhold.net>, Sumit Garg <sumit.garg@kernel.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Teresa Remmet <t.remmet@phytec.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Warren <twarren@nvidia.com>,
+ Tony Dinh <mibodhi@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Wasim Khan <wasim.khan@nxp.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>,
+ "open list:P212" <u-boot-amlogic@groups.io>,
+ "open list:ARM SNAPDRAGON" <u-boot-qcom@groups.io>,
+ "open list:phyCORE-AM62ax" <upstream@lists.phytec.de>,
+ =?UTF-8?Q?=C3=81lvaro_Fern=C3=A1ndez_Rojas?= <noltari@gmail.com>
+References: <cover.1787555916.git.michal.simek@amd.com>
+ <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VE1PR03CA0024.eurprd03.prod.outlook.com
+ (2603:10a6:802:a0::36) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8252; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=ZgT8W+YsPzCpCyW3yE+2h6wzaev4dD7cnNGUStKLE1c=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWR1f0hgq399pCmqnX8rY8Zuo1/6MSxPJkmfjJfvPPBja
- 6bxrwfxHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRl7cYGe5bnBL/+b952x9h
- 6XUeO+ad4WCNU09oWxUemd+tH/ecx5rhr9zWGyvXpqgbfTY0P2CTu3qqSOrVf99VRL+wb9mTu/+
- HHTMA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDD:EE_|SN7PR12MB8433:EE_
-X-MS-Office365-Filtering-Correlation-Id: df68ac5a-56c3-4679-0ac3-08df01afff50
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|PA1PR04MB10120:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30fce293-c5d1-4280-fd10-08df01c5b712
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|7416014|1800799024|23010399003|10067099003|56012099006|18002099003|11063799006;
-X-Microsoft-Antispam-Message-Info: /Nntx1lHCvP/DZbmxjYSTC3tjkQVMiBG+UhKEl9iCaZrPqdoCZG/b14u6fbKudyXIaahNLZ7KUj+VeEmKg+REP/HQeedZUuGBsc9H430NVMgWYZMrYdNaGvIb8f2hvJQgWFylRR7RNz5Z5GM8a2i4hQhXXxHk7P1G9aiFWDPBlYSuFlqd/5gW3BwCOGruiCEm1CwMX/oDFd/ELdKgBmCw64NPPjwtEU7GVv1hfZ5f9OI8l35rC/9GouE/v6uFcS3lvS7RHbc1S0vRi+1YxXlV/v46D58+rZpSgPHJZLfG0RAmCewVpH/le6qWZHpmekUijuVN+QPQhtXVKSJN6t8tV87/te1C85odefXvnUbu3SSnK0/iFQIapcmIq3qt1Gr4+F9JSeo8pcOvwcMEPxP86zYN1AlgsZNSeRy7EDM0ddLkje53gRElix4uEE4XowqCmi+JnkUCTUyIjOuefyjaC+N9oZiZWQVRiddHMaCnKXwb8ih56L0T9pbXzPVe56XvnYpgeRcjwrlMQEG1D8O2WW9ZBNGHIsUkqBEoDCKc+enJrhuRDvB7RdaSgDbpefWrjGfy9lJsGf6QAGMlTVa4mUMzAJ6E4mKT/gBNtFjtYz+k155kssFENsIoe4CdxIlkTAxmO1DtB2x2wXEHo1iOlTYmAtRjjMehJ4gioQ0RxGA43SP6bSYj/f7IsIvgg3qjGBwODg8cAzkJUkeWaY3jQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(7416014)(1800799024)(23010399003)(10067099003)(56012099006)(18002099003)(11063799006);
+ ARA:13230040|366016|1800799024|10070799003|7416014|376014|23010399003|18002099003|22082099003|11063799006|56012099006|4143699003|10067099003;
+X-Microsoft-Antispam-Message-Info: 30R1UclLRT1GTgndd1tWq4KP+T3oBFvS/QnbVAcrANqAs5f4cu2gUMzbX2QyiOSQFUIsBTWAlEMNL869PtwvnfQ3ucJF+O6DI/XxBEIg3jgToBJCoef4pByFHj4YUB2U30yDRchU/hA6mbIOiE44J+zavOfQFcIuWB94QAeTFrsNRWfHx+mqez1HjMeI69fwb21/KOQiYzaJ53xWmVQI3wzbVsXhoSmsU1LKnF8PNaGG5DA/t1q+FO6TQNANN2t8zxqa99JFCggcoJvWt+UcjD10+Q9DrgO1RQ4lWSInPUIl9JOKqDSWfKbMFCxbVnYPX2Dq7z+YMnVaFhC0sRUd90Kgt3sHC81+J4yQtV5kIGLvedwQsLrse6W73hCgJirQ56QDfc6WUOlmtgy/A7gCjP8Dh6UfRmz/1V16p32O/IA9s08Zj9wKE6cB3Aqk6xVD6szw/MKjh6SqeGbCAmTl/9bTyV8tGdtUW39LiVQqQy4hMgSBdlt4B9z3tKnNuf3L5FbxD+ddQX+IMSm/CAiWeYBz0HC0PB2WJi7zgO0SG5/OPMec7/oBh1PO8mQQLPNNkutw7nimsPZ/fHRy8VTsmJxxCaXkV7+OgFv0tyu92DdSs8Gk061SGirhTj60PXFfGHu6s+B2gjVjnLfGQzq/OvPDc0SaLmOZLjzAaNzJvq8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(10070799003)(7416014)(376014)(23010399003)(18002099003)(22082099003)(11063799006)(56012099006)(4143699003)(10067099003);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: eEe+txFmVnpF1O9hoJRrZR4hMvKKlh+smQgYjnsaqt1JtGlchxW1VnRtRqiBcrLKGPKqR7w6oXhCXiRtUvepF0gV6DHtpUFzmZHtrccvktuJdfvxwyJMzRzj5e5msa4iuex5zutaSyduEwMfZET2a1g6JCX1icAgEnMqGUJRNhN/HaDMZQt2zWvo+0E2dShqk+ctTE5I+/zIXFJJlzfyQspKlnp1WxifEzF6/YMV4DQFdwBe30HWFbVqBvt+eK/pzXabq6P6d3UW6z/ZbW5jfYFlecNc6xePeYtMUQzywaF7vPqUirKaYLJdUFVDdQTjl1yM2hetwKSuSBTcCTx24uFDKk7Im2aJGiqpEp5DiupzpZDBJURhnDIARen9wWnz0a7tblKGZDAWOHes6XV9dyvbvnnMI+qFYD67So1I7cQDsnGoaK1uPmcL7qq+/FnX
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 07:19:12.3218 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: df68ac5a-56c3-4679-0ac3-08df01afff50
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CDD.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8433
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3RPTE01VkMwQmRnVnVpLzlYbmxXNVVuY0ROZUNmRUdIeTlyWjhoTGRiRHh0?=
+ =?utf-8?B?bjE0Q0RpSzlEZTZTNHh0MGFMSnJ2elRHWmpBSjdkVHpnOU9jb3FGZEFraFBW?=
+ =?utf-8?B?SzIxMyt6eTRUeHpzeVN4UUYwTkgrakdNd29KVXROTGVUR2l3eUdUSXJCTjUw?=
+ =?utf-8?B?MGpDWUlmS01nUTFFelNoOHBUY0x2U1NvNkY2RHVrblZIaG1pM2dPN2kvVTFm?=
+ =?utf-8?B?MkhEeGRGTVVjRGZ2QTVtVk4vaTgvYzhWOGExa0QzSFRpYis1ZzlEZjJWVVNq?=
+ =?utf-8?B?elJFbHlxVVptdDNuVjdoZUtjL0Q1bFZrWmxCZ0U0N1FxRldNOTdhSXprTGc4?=
+ =?utf-8?B?UFZZZVdwbDQzemZyTWFETWdKNzRHYlRzZUhqaXY2SHNIbmNGd0hmdjJZVlIr?=
+ =?utf-8?B?S3k5Q0J1NjlFM1JmckQwQm9Ud1ROWE96NUo3RFdsWE9mbVdDckhqLzVEbWFy?=
+ =?utf-8?B?TUlDUXYxb2VqczFUaG1RelRibnJqRS8ycnpYWTc0UHd6OHVZcDJCZEcyWkRh?=
+ =?utf-8?B?MWlualdsdDdKWEdhOTdYT3R3ZEFlQ1hBeE8zZmNPSmJCMFhQTE1rY1pIWmRM?=
+ =?utf-8?B?TkRHYm05MXJCeG41THp0M3JOVzQ5L1pDS290VVVhZHI5VnFGVFFraWozV3pm?=
+ =?utf-8?B?V0RsYkEvMit6bG1wU0dMODZENEZtcXcxaUsvMUpMSkJIZDZXalpYcmo4bmhK?=
+ =?utf-8?B?QnA4S1p1ck5vVWRucEQySWEyQW1KYTZRTkFSbW1odE9GZHlFK0V4S1I0TjVE?=
+ =?utf-8?B?SHNZb01GcFJEZ3g0ckRpVHY5elJ1VFkvLzdyZTFqMFdqcllBTkRvVmpocjBm?=
+ =?utf-8?B?cVNmcDFEYzBlOUpyZjFPSEFsUnRjZjhyUnlhRG5obE9IWGN4aFpLdE9FQXJU?=
+ =?utf-8?B?aHlCTWpUdUZPU1RndXNmQkNQUzBsYWU3K05ZaVU3N21TelIybWl5OXZsUUox?=
+ =?utf-8?B?bGNCVVVPWWtzODJzVW5zRHkzdmZBZko4T3ZMa3IxaUJ1QWxuajVveWJZSW1t?=
+ =?utf-8?B?MFpKcFV3ZU9HYXU3dk4xd1lHSnZ5WGlzOGdHMTBqY09MNHZaZm40SHEyRlRZ?=
+ =?utf-8?B?aVhLcllwOExsRFgya0FBZ0dvdy9aQTVSaWhQNDgzOWxkUHduNUF6RHJrdGg0?=
+ =?utf-8?B?c2FKcnVwSVhndzJkZGd2UzRFVnN2UmZMOGNINXlZQi93alRaVjZNOVNOMldJ?=
+ =?utf-8?B?dnJkcnltTmFKejBydklJVHoyMnFqMmtmVmZBNlBNa01RRldJVzZra0pqQ2kr?=
+ =?utf-8?B?R0NMaVRVZGQyak4rc0laMnZJdHVxNlFodVBPcnRTeEVkQTBVTTd6YTFhaWds?=
+ =?utf-8?B?N0U2MVJGTllnZ2dBa0psSVN3dWpMcnE2TmlSRGtsbHhTeDFXS3hoMFB4VjB5?=
+ =?utf-8?B?WEYvYkxFNHFNb2lyaXJ3Uk5hSDVlQllGa1hpcUcrcGNCajFqZXlQSUg5YlhI?=
+ =?utf-8?B?NTBKNHBHL2lCWVBxc3Z1dzd3em9RcC9FMFB6eTlpV2h6OVRycWxUb1p5ZUxZ?=
+ =?utf-8?B?UkRUekcvSTlBK2Uram55L2Uxbm9wd2U4bXlKck55Z0YrYXNkckhFczI3K1NK?=
+ =?utf-8?B?eERJL1dqUTA2bkVxaTRXZTh5a1ZKSDR4YmVISGV6YVRhVFpGUDMzeDU1QTZq?=
+ =?utf-8?B?a2ZYTGJEMmVERGlGSlBseUpIeXFqOWFaR3d6OVVNZW9SWlFBRlNJS3hnT0NB?=
+ =?utf-8?B?eVlDeDVqL1Zoa1I5ZDlwNEdiaStNeUtBVldvTXRVbWQyVWZvU2JFVWdwcGND?=
+ =?utf-8?B?Z25iaXZ4L3dJQnU5MmloZXczNUZUajBEeDNyd0tJSUczbFBLb09oVWI4VDRz?=
+ =?utf-8?B?Y2JrbzBSTW5IOThqeGxNUlVBaDEwMDRPOXBjWTY2WXJJQnR0MW1CTVd3RlRJ?=
+ =?utf-8?B?QStPRkNmRjBMN1RvMXNEcUJGVTc4ME5nUmpETDlKZ2RuVlpWdndZTDhzSjhF?=
+ =?utf-8?B?eXNkUDRIZmREaG9qV3BnRHNFdHR6K2ljZ2lsbU9BbUdRSUQyVVNFSUpHREFH?=
+ =?utf-8?B?b2prM3NRRXJjblJyTm9HUS85NkRRTGNNMTlaSzdIZmd6OEpZbVpXbDdlRFdt?=
+ =?utf-8?B?ZHk3TURxNjJIR0MzWVpYRzZDWXJMV1E0MkEzZFlicFJLc0ZYRFZGREs1WEZO?=
+ =?utf-8?B?dTRYd2NZV1ZoMUdGQWZLNS9BU1I5YTNTZnIrTEtsaTJxaUd0ZlVOT1UzRlVq?=
+ =?utf-8?B?aTZkcVdhTER1S3FCdHRPTElEWThXNURNMlh2WU5sOGMxWEhaN0Z0UFpHektL?=
+ =?utf-8?B?VDhGdnIzWVA4b0VURWVlSmNuL09yOXZ1QmgvZ0RRc3k5dy9lTUJmUWF0Y3VK?=
+ =?utf-8?B?NzNORjVSWFlqblROOXFSZFpEYjYvTlZTT2RQSkQwdVcyeXVGbmtaVHFDZG1I?=
+ =?utf-8?Q?s9jiB/ZzJhfQQjupJDsY2Zm5GcWHLG6HYNonr788kz97q?=
+X-MS-Exchange-AntiSpam-MessageData-1: BAHTcg+/D7+0sseBbFE/pZtnGBOGFZLJxII=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30fce293-c5d1-4280-fd10-08df01c5b712
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 09:54:40.3922 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tgvaPZ4fAIuLTynUx9yjTvSWpaSYzggKhHVHL+b5YoVlUSEK+nwNlNSpL0R35hYMyyFbTKjA7qtkdUOJOpLWRyg2naKAJtsfn3Z46eHeUBw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10120
 X-Mailman-Approved-At: Mon, 24 Aug 2026 13:14:54 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -218,166 +246,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi,
+Hi Michal,
 
-based on ask from Tom here is script extension to cover all MAINTAINERS
-files in the repository. Small fix for one of my fragment and one patch to
-remove references in other files. A lot these changes are related to
-configs files and device trees (likely because of using kernel one).
+On 8/24/26 9:18 AM, Michal Simek wrote:
+> A number of file (F:) entries across the MAINTAINERS files pointed to
+> files or directories which had been renamed or removed over time. Drop
+> these stale references so that every F: entry resolves to an existing
+> path.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+[...]
+> diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+> index 79cf9e97f70b..62c3ce765e0d 100644
+> --- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+> +++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+> @@ -13,7 +13,6 @@ F:	configs/nanopi-m5-rk3576_defconfig
+>   NANOPI-R76S-RK3576
+>   M:	Jonas Karlman <jonas@kwiboo.se>
+>   S:	Maintained
+> -F:	arch/arm/dts/rk3576-nanopi-r76s*
 
-A lot of these files are also in utf-8 which likely should be converted to
-plain text. But Tom up2you.
+This is a leftover from v1 which had a file there, but we merged the v2. 
+See 
+https://lore.kernel.org/u-boot/20260108143551.4017839-3-jonas@kwiboo.se/ 
+and https://lore.kernel.org/u-boot/20260310000610.592998-3-jonas@kwiboo.se/
 
-Thanks,
-Michal
+For now we don't have U-Boot-specific additions to the upstream DTS for 
+the NanoPi R76S but we could in the future, so having a wildcard like 
+that would allow Jonas to be notified if one ever gets added. So it's 
+not completely useless. No strong opinion on still deleting it or not.
 
+[...]
+> diff --git a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+> index c43f469589dd..2e7f43042ba3 100644
+> --- a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+> +++ b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+> @@ -3,4 +3,3 @@ M:	Jacobe Zang <jacobe.zang@wesion.com>
+>   S:	Maintained
+>   F:	configs/khadas-edge2-rk3588s_defconfig
+>   F:	include/configs/khadas-edge2-rk3588s.h
+> -F:	arch/arm/dts/rk3588s-khadas-edge2*
 
-Michal Simek (3):
-  xilinx: Correct zynqmp_r5 MAINTAINERS fragment
-  scripts: Check F: entries in all MAINTAINERS files
-  MAINTAINERS: Remove references to not existing files
+Was never a file matching this path, even in earlier versions of the 
+patch before it got merged. Same remark as for the NanoPi R76S above.
 
- arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  1 -
- board/CZ.NIC/turris_omnia/MAINTAINERS         |  1 -
- board/LaCie/net2big_v2/MAINTAINERS            |  4 -
- board/LaCie/netspace_v2/MAINTAINERS           |  6 --
- board/Marvell/octeontx/MAINTAINERS            |  2 -
- board/Marvell/octeontx2/MAINTAINERS           |  2 -
- board/Synology/ds116/MAINTAINERS              |  1 -
- board/acer/picasso/MAINTAINERS                |  1 -
- board/advantech/imx8mp_rsb3720a1/MAINTAINERS  |  1 -
- board/advantech/imx8qm_dmsse20_a1/MAINTAINERS |  1 -
- board/alliedtelesis/SBx81LIFKW/MAINTAINERS    |  1 -
- board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS  |  1 -
- board/altera/stratix10-socdk/MAINTAINERS      |  1 -
- board/amlogic/p212/MAINTAINERS                |  1 -
- board/amlogic/q200/MAINTAINERS                |  1 -
- board/amlogic/s400/MAINTAINERS                |  1 -
- board/andestech/voyager/MAINTAINERS           |  1 -
- board/asus/grouper/MAINTAINERS                |  1 -
- board/asus/transformer-t114/MAINTAINERS       |  1 -
- board/asus/transformer-t20/MAINTAINERS        |  1 -
- board/asus/transformer-t30/MAINTAINERS        |  1 -
- board/atmel/at91sam9260ek/MAINTAINERS         |  1 -
- board/atmel/sama5d29_curiosity/MAINTAINERS    |  1 -
- board/atmel/sama7d65_curiosity/MAINTAINERS    |  1 -
- board/atmel/sama7g54_curiosity/MAINTAINERS    |  1 -
- board/atmel/sama7g5ek/MAINTAINERS             |  1 -
- board/avionic-design/medcom-wide/MAINTAINERS  |  1 -
- board/avionic-design/plutux/MAINTAINERS       |  1 -
- board/avionic-design/tec-ng/MAINTAINERS       |  1 -
- board/avionic-design/tec/MAINTAINERS          |  1 -
- board/beacon/beacon-rzg2m/MAINTAINERS         |  3 -
- board/bosch/acc/MAINTAINERS                   |  1 -
- board/cei/cei-tk1-som/MAINTAINERS             |  1 -
- board/compal/paz00/MAINTAINERS                |  1 -
- board/compulab/trimslice/MAINTAINERS          |  1 -
- board/comtrend/vr3032u/MAINTAINERS            |  1 -
- board/comtrend/wap5813n/MAINTAINERS           |  1 -
- board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |  1 -
- board/davinci/da8xxevm/MAINTAINERS            |  1 -
- board/embest/mx6boards/MAINTAINERS            |  1 -
- board/engicam/imx6ul/MAINTAINERS              |  3 -
- board/friendlyarm/nanopi2/MAINTAINERS         |  1 -
- .../gardena/smart-gateway-at91sam/MAINTAINERS |  1 -
- .../gardena/smart-gateway-mt7688/MAINTAINERS  |  1 -
- board/gateworks/gw_ventana/MAINTAINERS        |  6 --
- board/ge/bx50v3/MAINTAINERS                   |  3 -
- board/htc/endeavoru/MAINTAINERS               |  1 -
- board/imgtec/xilfpga/MAINTAINERS              |  1 -
- board/intel/agilex-socdk/MAINTAINERS          |  1 -
- board/intel/agilex7m-socdk/MAINTAINERS        |  2 -
- board/intel/n5x-socdk/MAINTAINERS             |  1 -
- board/keymile/km83xx/MAINTAINERS              |  2 -
- board/khadas/khadas-edge2-rk3588s/MAINTAINERS |  1 -
- board/kontron/sl-mx6ul/MAINTAINERS            |  2 -
- board/lenovo/ideapad-yoga-11/MAINTAINERS      |  1 -
- board/lg/x3-t30/MAINTAINERS                   |  1 -
- board/libre-computer/aml-a311d-cc/MAINTAINERS |  1 -
- board/libre-computer/aml-s805x-ac/MAINTAINERS |  1 -
- .../libre-computer/aml-s905d3-cc/MAINTAINERS  |  1 -
- board/mediatek/mt7981/MAINTAINERS             |  2 -
- board/mediatek/mt7986/MAINTAINERS             |  4 -
- board/microsoft/surface-rt/MAINTAINERS        |  1 -
- board/myir/mys_6ulx/MAINTAINERS               |  1 -
- board/nvidia/beaver/MAINTAINERS               |  1 -
- board/nvidia/cardhu/MAINTAINERS               |  1 -
- board/nvidia/dalmore/MAINTAINERS              |  1 -
- board/nvidia/harmony/MAINTAINERS              |  1 -
- board/nvidia/jetson-tk1/MAINTAINERS           |  1 -
- board/nvidia/nyan-big/MAINTAINERS             |  1 -
- board/nvidia/p2371-0000/MAINTAINERS           |  1 -
- board/nvidia/p2371-2180/MAINTAINERS           |  1 -
- board/nvidia/p2571/MAINTAINERS                |  1 -
- board/nvidia/p2771-0000/MAINTAINERS           |  1 -
- board/nvidia/p3450-0000/MAINTAINERS           |  1 -
- board/nvidia/seaboard/MAINTAINERS             |  1 -
- board/nvidia/tegratab/MAINTAINERS             |  1 -
- board/nvidia/venice2/MAINTAINERS              |  1 -
- board/nvidia/ventana/MAINTAINERS              |  1 -
- board/nxp/imx93_evk/MAINTAINERS               |  1 -
- board/nxp/ls1012afrdm/MAINTAINERS             |  4 -
- board/nxp/ls1012aqds/MAINTAINERS              |  1 -
- board/nxp/ls1012ardb/MAINTAINERS              |  3 -
- board/nxp/ls1043aqds/MAINTAINERS              |  7 --
- board/nxp/ls1043ardb/MAINTAINERS              |  6 --
- board/nxp/ls1046aqds/MAINTAINERS              |  7 --
- board/nxp/ls1046ardb/MAINTAINERS              |  7 --
- board/nxp/ls1088a/MAINTAINERS                 |  9 ---
- board/nxp/ls2080aqds/MAINTAINERS              |  4 -
- board/nxp/ls2080ardb/MAINTAINERS              |  6 --
- board/nxp/lx2160a/MAINTAINERS                 |  2 -
- board/nxp/mpc837xerdb/MAINTAINERS             |  1 -
- board/nxp/mx6slevk/MAINTAINERS                |  2 -
- board/nxp/p2041rdb/MAINTAINERS                |  3 -
- board/nxp/t104xrdb/MAINTAINERS                | 13 ---
- board/nxp/t208xqds/MAINTAINERS                |  5 --
- board/nxp/t208xrdb/MAINTAINERS                |  1 -
- board/ouya/ouya/MAINTAINERS                   |  1 -
- board/phytec/phycore_am62ax/MAINTAINERS       |  1 -
- board/phytec/phycore_am68x/MAINTAINERS        |  1 -
- board/phytec/phycore_imx8mm/MAINTAINERS       |  1 -
- .../polyhex/imx8mp_debix_model_a/MAINTAINERS  |  1 -
- board/qualcomm/dragonboard410c/MAINTAINERS    |  1 -
- board/qualcomm/dragonboard820c/MAINTAINERS    |  1 -
- board/qualcomm/dragonboard845c/MAINTAINERS    |  2 -
- board/qualcomm/qcs404-evb/MAINTAINERS         |  2 -
- board/renesas/blanche/MAINTAINERS             |  1 -
- board/renesas/eagle/MAINTAINERS               |  1 -
- board/renesas/grpeach/MAINTAINERS             |  1 -
- board/renesas/v3msk/MAINTAINERS               |  1 -
- board/samsung/starqltechn/MAINTAINERS         |  2 -
- board/seeed/linkit-smart-7688/MAINTAINERS     |  1 -
- board/siemens/iot2050/MAINTAINERS             |  1 -
- board/sifive/unmatched/MAINTAINERS            |  1 -
- board/sunxi/MAINTAINERS                       |  2 -
- board/ti/am62ax/MAINTAINERS                   |  1 -
- board/ti/am62dx/MAINTAINERS                   |  1 -
- board/ti/am62px/MAINTAINERS                   |  1 -
- board/ti/j7200/MAINTAINERS                    |  1 -
- board/toradex/apalis-tk1/MAINTAINERS          |  1 -
- board/toradex/apalis_t30/MAINTAINERS          |  2 -
- board/toradex/colibri-imx6ull/MAINTAINERS     |  1 -
- board/toradex/colibri-imx8x/MAINTAINERS       |  2 -
- board/toradex/colibri_imx7/MAINTAINERS        |  6 --
- board/toradex/colibri_t20/MAINTAINERS         |  2 -
- board/toradex/colibri_t30/MAINTAINERS         |  2 -
- board/toradex/colibri_vf/MAINTAINERS          |  1 -
- board/toradex/smarc-imx8mp/MAINTAINERS        |  1 -
- board/traverse/ten64/MAINTAINERS              |  1 -
- board/wandboard/MAINTAINERS                   |  1 -
- board/wexler/qc750/MAINTAINERS                |  1 -
- board/xiaomi/mocha/MAINTAINERS                |  1 -
- board/xilinx/zynqmp/MAINTAINERS               |  1 -
- board/xilinx/zynqmp_r5/MAINTAINERS            |  2 +-
- .../orangepi-5-ultra-rk3588/MAINTAINERS       |  1 -
- board/zyxel/nsa325/MAINTAINERS                |  3 -
- scripts/check_maintainers_files.sh            | 80 ++++++++++++-------
- 136 files changed, 54 insertions(+), 269 deletions(-)
+So this looks fine for Rockchip boards (+ the changes requested by Johan).
 
----
-base-commit: 2d379a529c257606946831a6dac1c37de6a3f8c0
-
--- 
-2.43.0
-
+Cheers,
+Quentin
