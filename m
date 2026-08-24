@@ -1,98 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A24C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418E4C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:23:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id ECD6960674;
-	Mon, 24 Aug 2026 14:22:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D910E809B5;
+	Mon, 24 Aug 2026 14:23:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PH0fQi_gvg2a; Mon, 24 Aug 2026 14:22:21 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XXZB2Hpl2Wuk; Mon, 24 Aug 2026 14:23:27 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787581341;
-	bh=fgndoZZ8cXCx2So38+Ml1gqAx/MMmta5FtitmL07d8o=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=IRCCRIMvnsqZbkABuP4bBr5WI9IdT7Kmfr4UBeVCxECfV/llK+LM68q7hwlSqqHNv
-	 psIoDLR/+ZDGfNy6Exu8smn3fzLkTwr0eZRIQvIcNz2Y1AkbmgzvyFsyv1hEgU7ll/
-	 CkP8LFuKjSII5NYW1HAAq4ZErx18uYh5BcDFeyy/Q0FTd+xrDKC0v4plx+LBItBvxu
-	 4E2YuPLu3z8ikdeT3PKlQNDo66dWAiGhPdmXH2kO7G8vGU7rnLT7kwVOi4Ti2huOnp
-	 fRE4Lgc64hqIpH+ZgQwBe12CHjKXAgBZy3XVWSnX4o5bmo/KQmUZnWhXyBdULfXZGx
-	 c687XVWZyVvkw==
+	d=lists.u-boot-project.org; s=default; t=1787581407;
+	bh=1XyMCBw3wLNIgBFhyd3ayoFM2ZNp5PJyAsiGH3j0vZw=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=HCaMDBihk/g9CwGKdKTaU5K0kAzL5uqM03+HsDm6QVSgwbr3pLenvG9cav7Z5Vc8y
+	 O04MGhzGlvoVN8lkrpgmEEksbo1ar7Y4xNHr1y+ZtV41OuFc9QckF2GhUtmHPWvNPd
+	 WsaEDBtu7ld/32/yaTkdFlATinwP1CR1Tab8iUjak6FNlkGNYUzphcq2G3q6klXyVB
+	 sppoZBldihlb3ucHXIbD3EgXhun7ADazOgpNmeJ7Vqie+K79/VCNAC8jyAPnHT1GFD
+	 E+5ejSvCebxrgJq2qRA77awFWmby4WB/ITRJYh64hWvUIYSU3rtDiOMDR9QATclmJJ
+	 /zIMOmeixwsQA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DA99060624;
-	Mon, 24 Aug 2026 14:22:20 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8EB872FD
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:22:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0FCBE80994;
+	Mon, 24 Aug 2026 14:23:27 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 41C9B3AD
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:25:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 757936060B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:22:19 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3F93A60600
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:25:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QD5FS8yz0omK for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 14:22:19 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=136.143.188.15;
- helo=sender4-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
- receiver=<UNKNOWN> 
+ id 9cn3C9_5KYCv for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 13:25:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::f32; helo=mail-qv1-xf32.google.com;
+ envelope-from=sanderson@brivo.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=W6/9XUo8
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CCECD605D5
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:22:15 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1787581297; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=YcWVaGL90BXrWO6K0kZ1k5xjnliK1gGFWEPIgCzrASDaRnkG9YA/NTWeK2S+xjqW/iFCfwmY842pUyCH0qNMrVCqAfDGGRSwfstnAOyJU0+Bpz7ziaxtAod4OPQxFcSUayRiuhs2N04IggxsVXKrz3LfD1anNWiTP4/JyuP7mrc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1787581297;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=fgndoZZ8cXCx2So38+Ml1gqAx/MMmta5FtitmL07d8o=; 
- b=VNJHtxVYWLlS6lT9gXFpcuyRx3zxA8UuNjPE0w/dlOKOp8cvwLMMXFkfBFNN+nn64nimfq+WZktyLoHsYM4Xgsy40Jx+KEf4Z4wPgXGX6xUlay/ECn+oHcWeZr6PKZtOH9X4cqcUCheWCj6AOcO7uZPvTkLe4J0q5eil91U8kK4=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1787581297; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:Subject:Subject:From:From:To:To:In-Reply-To:Reply-To;
- bh=fgndoZZ8cXCx2So38+Ml1gqAx/MMmta5FtitmL07d8o=;
- b=W6/9XUo8CsxL/6jPVbXTBG59n6oGsChIVEVECRiUDUQt0sq8bt1arPF11ORk1d1z
- WPnj3hn/NvpHbgIJw5/FpWeexGKw8iMWzvpRdKbn3PRe+51LmFWstSSn1DTWJmoGhzX
- 5smXEdXeP92dSFefAvrBR4SSAIVhk9pSr3fHQ6Mg=
-Received: by mx.zohomail.com with SMTPS id 1787581292982886.4757022159525;
- Mon, 24 Aug 2026 07:21:32 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 24 Aug 2026 22:21:17 +0800
-Message-Id: <DKX8OE4FZYCZ.29V2B6GDFTPSY@pigmoral.tech>
-Cc: "Huan Zhou" <pericycle.cc@gmail.com>, "Guodong Xu"
- <guodong.xu@oss.qualcomm.com>, "Tom Rini" <trini@konsulko.com>, "Raymond
- Mao" <raymond.mao@riscstar.com>, "Lukasz Majewski" <lukma@denx.de>, "Yixun
- Lan" <dlan@kernel.org>, "Troy Mitchell" <troy.mitchell@linux.spacemit.com>
-Subject: Re: [PATCH v2 0/4] i2c/clk: spacemit: k1: fix I2C bus configuration
- and clock handling
-From: "Junhui Liu" <junhui.liu@pigmoral.tech>
-To: "Heiko Schocher" <hs@nabladev.com>, "Yao Zi" <me@ziyao.cc>, "Junhui Liu"
- <junhui.liu@pigmoral.tech>, <u-boot-spacemit@groups.io>,
- <u-boot@lists.u-boot-project.org>
-X-Mailer: aerc 0.21.0
-References: <20260815-k1-i2c-fix-v2-0-7d2a48607233@pigmoral.tech>
- <aoQBacTKiBXUDddj@pie> <e4ad1d7a-ad9e-3cb1-e1ed-ad95f22b5b14@nabladev.com>
-In-Reply-To: <e4ad1d7a-ad9e-3cb1-e1ed-ad95f22b5b14@nabladev.com>
-X-ZohoMailClient: External
+ dmarc=pass (p=reject dis=none) header.from=brivo.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=brivo.com header.i=@brivo.com header.a=rsa-sha256
+ header.s=google header.b=GneLPTZQ
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4BC10605FF
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:25:22 +0000 (UTC)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-90a6b298889so28130186d6.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:25:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brivo.com; s=google; t=1787577921; x=1788182721;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=1XyMCBw3wLNIgBFhyd3ayoFM2ZNp5PJyAsiGH3j0vZw=;
+ b=GneLPTZQCzxFVKUdOD8SCPJSUw2o79GgcpGnJTMpEqNkeGkF5Nls4IlO+8UEosp1qw
+ LaOP1IN7kt3Edafb2ylLRrlwvYErDRnTBG1AfIU0jXUfvFDGN2DvMhNIcPsuhIKtEiEA
+ ZQzqPT042jnfYgJX1BixmOrmmCd1bW7MtA/y5AUvwGUfptCu+6ZFOkCYEhrXNGBgBRt6
+ 7fBsv/NGFVN6YjX6QTfNXTc56DW7axejR/2DjditADcnezfTSWJvDRmQNKblVec+SsoK
+ fV3Z847KLIE5pjO3LpfpKhZLXvqJ1Vz9PI93/VReKVUs3rbK8lSivXRkDemgVysK1HjX
+ aolw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787577921; x=1788182721;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=1XyMCBw3wLNIgBFhyd3ayoFM2ZNp5PJyAsiGH3j0vZw=;
+ b=Fqs6IuGF9NcmTv5VT2mZ6854fPETILhlW/+DMvuAhdhPQZlVbzjkHECRwyacimEgEJ
+ PNpeKC8mU1DTEDfC78a7NJ9bYMyLuwuLbGeatpwQFFsBFC3bQBYsdiBLldowho6E9sYr
+ 052582JId/gXlU1xFt+raToL5/bUn3JC8x5ysVpl8UmTs0s65BeXtbyG8p+q/iZ1aqE7
+ jpTgI2TUpqx2ybWfgdhg9EcWFOQIqhWlOfnfiMbYS9BtTXlkXb58znrNU/9tRGg7FNIZ
+ e9A1KJhDMGqgKZo5abNamIurrZiYKYJlKZenQq8gonqU8vYy8YAz/OOa3CDIwZNFlYZ/
+ R1nw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrDpKdCBpow9ISqjorYrWk90nLQ/ev1Tm1DC+SPhmbb3cwI2JhF85706wjJ9zW3szkfUpsfutQ=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++m+o8NN2Rzv/wFE9zH26uB5Ax9MmeAY4EHZre03LVbSLQMhsJxa
+ M0QPvpSJHmtCSHHBg+Zbdc+gbdNQKITHORTitnWjC63rqnU4ZcHypAjPV6xBTVOKqdzraX4/ZIN
+ fgIKw2qvp6TV0Z37XzYaKMO14dgRoIg77KD1ZRqnw3NIpjQXw1EHc7LpVOQNWngo=
+X-Gm-Gg: AR+sD13RXwnbDCK152AeApljnHCG3WQJOujMQVd/UgCBwDWjauOAEYa8BXUuu+WT01w
+ APruAk/zDmjBhD7osPigbYx83w7zGwzahpTUN2XikwLD7p+ZSwGmSoJJQNyGhaVJ6dqqIeTloM4
+ cfkPO1dOa4CURPK5kupgWQ/XgA6dhUIH1ivNwDgxBHq7KkZ39EOqK91SXYiQnnbtaujh+Fo1qjZ
+ K6px1IiWKt0Gh2Yxi8SAtjSPhY+4YaIqJzsXDyIgZa+O7HrfJsXeaz9RKd45g1+sq50dYARayeG
+ W19GPo9tN+3iR7ME2z2eAclkD7XMYFDbDjdDkq7y5/sbo74XnuQVCZZmFzQ+eUuefMmmQWHhyA1
+ aXHNhjSan7czXeT3mmQh61d4MZDRuTle6O+iv3YqZmmFggI9HGXHxp0Qax4RZEjMuJ/PyVRhQ/a
+ gq/DFKrINi+3Ph78d04luCrm/mOvrJefjNboxFzl2fOEo70PglivY6
+X-Received: by 2002:a05:6214:2c0f:b0:90c:281f:e7cd with SMTP id
+ 6a1803df08f44-90c8f9f6fd8mr182720716d6.21.1787577921246; 
+ Mon, 24 Aug 2026 06:25:21 -0700 (PDT)
+Received: from strozzi ([66.193.28.125]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-90c939314b7sm61980306d6.30.2026.08.24.06.25.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Aug 2026 06:25:20 -0700 (PDT)
+From: Sean Anderson <sanderson@brivo.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io,
+ Sean Anderson <sanderson@brivo.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH v2] mmc: meson: Parse devicetree properties
+Date: Mon, 24 Aug 2026 09:25:05 -0400
+Message-ID: <20260824132518.522252-1-sanderson@brivo.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 24 Aug 2026 14:23:26 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -106,69 +122,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Heiko,
-Thanks for checking.
+Parse devicetree properties so things like max-frequency are respected.
 
-On Mon Aug 24, 2026 at 4:21 PM CST, Heiko Schocher wrote:
-> Hello Yao Zi, Junhui Liu,
->
-> On 18.08.26 08:53, Yao Zi wrote:
->> On Sat, Aug 15, 2026 at 11:40:20AM +0800, Junhui Liu wrote:
->>> Fix two issues in the SpacemiT K1 I2C driver and clock provider.
->>>
->>> The first issue is that the controller bus mode is selected using the
->>> functional clock rate instead of the requested I2C bus speed from the
->>> device tree.
->>>
->>> The second issue is that the TWSI functional clocks incorrectly include
->>> the bus clock enable bit in their gate masks. As a result the I2C drive=
-r
->>> can operate with only the functional clock enabled, which diverges from
->>> the device tree description and the Linux driver (both expect separate
->>> "func" and "bus" clocks).
->>>
->>> To fix the second issue without breaking intermediate states, the
->>> patches are ordered as follows:
->>>
->>> - First add the missing bus clocks (and their parent chain) to the SPL
->>>    clock tree.
->>> - Then update the I2C driver to acquire and enable both the functional
->>>    and bus clocks by name.
->>> - Finally remove the bus gate bit from the functional clock definitions
->>>    (except TWSI8, whose write-only register requires the combined gate)=
-.
->>=20
->> Personally I think it's okay to break booting in this case as long as
->> you explicitly point it out. Merging the conceptually related PATCH 2
->> and PATCH 4 which together fix description of TWSI controller clocks
->> would make the commit description shorter and clearer. But it depends on
->> you.
->
-> For me the series is okay now, if you (Junhui Liu) have not prepared a
-> v3 with the merge Yao Zi explained already ... I will pick v2 up for next=
-...
->
-> Please give me feedback, what you plan, thanks!
+Signed-off-by: Sean Anderson <sanderson@brivo.com>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
 
-I don't plan to send a v3. I think the current structure and patch
-ordering in v2 are fine, so please feel free to pick it up.
+Changes in v2:
+- Remove Upstream-Status tag
 
-Thanks to you and Yao Zi for the review.
+ drivers/mmc/meson_gx_mmc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
->
->> For the whole series,
->>=20
->> Reviewed-by: Yao Zi <me@ziyao.cc>
->
-> Thanks!
->
-> bye,
-> Heiko
->>=20
->> Regards,
->> Yao Zi
->>=20
+diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+index 76af3873e15..b5b4e60d8ec 100644
+--- a/drivers/mmc/meson_gx_mmc.c
++++ b/drivers/mmc/meson_gx_mmc.c
+@@ -351,6 +351,9 @@ static int meson_mmc_probe(struct udevice *dev)
+ 	cfg->f_max = 40000000; /* 40 MHz */
+ 	cfg->b_max = 511; /* max 512 - 1 blocks */
+ 	cfg->name = dev->name;
++	ret = mmc_of_parse(dev, cfg);
++	if (ret)
++		return ret;
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
+ 		cfg->host_caps &= ~(MMC_MODE_HS_52MHz | MMC_MODE_HS);
+---
+base-commit: d3e8597e46b635ec556a057bc42f0b0859654bdf
+branch: meson_mmc_dt
 
---=20
-Best regards,
-Junhui Liu
+-- 
+2.53.0
+
