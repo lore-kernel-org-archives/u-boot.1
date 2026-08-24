@@ -1,123 +1,166 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40255C5DF9D
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FA0C61CE2
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:44:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 91FE440698;
-	Mon, 24 Aug 2026 08:44:34 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8122B60622;
+	Mon, 24 Aug 2026 08:44:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UG_cDk_jv8S7; Mon, 24 Aug 2026 08:44:33 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7YfhGQLgiM9o; Mon, 24 Aug 2026 08:44:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787561073;
-	bh=6GEGIQPkwdyT2naZHzXaQtQLpVz9F1JrUvdeK169cH8=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787561077;
+	bh=cB+GW9eylViFS3DU8QK1qyyy9ick8Ish/z7vBOvUNiQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mpy6oUiAragpx+gTpixyXM71nkOLc/EMEtQOi/wO2xvNSQyywHJzFYb7b5QEJhbck
-	 Ez4wbLk4bs4CgBPShsKJqQYPuOw5ToKSM5HrjSFXaFISmtynwE+ESk8lyx35LDRC24
-	 TTbkt46mAUsrJz1BBs9wTRxoWrRrcyOOVYgxLaedvlvucsAjiFvKMzE0r4mO7Sz4YI
-	 QHHs9rLebFdZnn3nVA/uk4Ihbpvgl7KKrAXr71PuvmKGwh1zxrZZMFj9moBplBJa4Y
-	 phkGvKcBte0C+f6UNFUE+fPHGgMLp3iMNkN8wmvzMnI5VaJxX2lmZPFpiTd5RwT/gL
-	 y11Lrb/WipvKw==
+	b=b0WGE0ArbKcW6X9jbC2jczKweoqdwkidjJ3wtVnD8Z4rXH6Oti/efytR3fmkTmwyq
+	 Sp3AteEyMxga4Jg/6u+nfU1TLYzFEePzK+1rXBur790L2Xu4HjnyBdT7QyeSSIWn1P
+	 yt4Veyyp+tmTEtYDDtQEcu/SBp5Px5+zu69mJMsUmiy6Cai4Q+s8+96cr7dtzBsc5y
+	 C56I/gKNCs5KMxNT9DotwT4XzwBXKXqF+wRI8Ohw/NcxhADnWc5AoUxjPxkDnuj1JA
+	 T/muLLWtF3eUaYzow3O8owsA2jCddTMwEycV+Ex5337utIPRWeQXWiZRtlT0JodEzU
+	 laIBUInzfcVXw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 945BB4068E;
-	Mon, 24 Aug 2026 08:44:33 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A059B230
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AF3966063A;
+	Mon, 24 Aug 2026 08:44:37 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 594CF336
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 86B8C80E01
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4A30960737
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nt4oMFF_EkUg for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 08:44:29 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ONGWJfkKn8Wy for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 08:44:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=kvL4k4b2
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7517580DFE
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:27 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-496bb7cdf51so14541935e9.2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 01:44:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787561066; x=1788165866;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=6GEGIQPkwdyT2naZHzXaQtQLpVz9F1JrUvdeK169cH8=;
- b=kvL4k4b2HM1OfbN51Dqi/Om9qrjxBNGpSn3nafxvbfOXCkJTznoQBzCkhFqx419UDb
- mbFBIavIMDHECN8n5RCCxwZCL9/uJ+DTps5B/A67wVea1NtJrCls2X20RFsd9JCqprL4
- Pmn0aG0N6K8nCSBA9aAK0YfVq/wVbJUCIUuZQ5kiN2iUoijtgZrZ+KbTTC3gKUGTFLlD
- 6p7vO5KCICj8u1m3xNURHpC26uqIY25R/i3seH7dHu5gq6euGYT7ZnG/6TAR/dO84eUd
- UifW4O9U2b+L4yUrY7L6g7Ik1qYuPdi7C8AZcVCmHzNjEpwetjUkKi1BWw1Wfu8DCmH8
- bQ7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787561066; x=1788165866;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=6GEGIQPkwdyT2naZHzXaQtQLpVz9F1JrUvdeK169cH8=;
- b=l4R1kie57ScSjGZhudC3B+tbk0fr0XrSfdc1WioalogJUYJffkbs7RU5SFUVPaxocK
- NbhlSG5jgOR/hMyb1uvjJuA1KWEj2+oGXhs+4GgoMkBRdXB0M8kl/Mu42QhC3cq2FT+/
- U3uOq2f26iferj98EGy+Cbca4t3QlC4XCqamsrX0g7EcmgDtPZOfaZI6zCCYp6QW57xl
- s8vJ7/8yqv3iHawrt19KcDdACQqEsHDe2rSOAJ8zLKukDM1BKtNY0oS83lhH9MCyRjQR
- qdjWn8bGN3SyqX3PpW4+7U8XkFklFOjTZMWqjVSTyy8xvfp0aDMkmPKNU1dwiZH8HL7Y
- wHUA==
-X-Gm-Message-State: AFuF++kL3Zt9n3+VUlKaiogveo63MexkD6rsh57Aqllr68BedA62UFdg
- dkZ34VDzuvGAUQB6PW8UrxWFKpqNdo+4oTh9oSUSBpzQgvn4p/LXMyZ9onyywCO61Qg=
-X-Gm-Gg: AR+sD13o+xUQ7MM+d6MOsrWpM6IVIKvxm+Q4C7DnIOC/vwRgVZgOcbxzDrmlm08zxWT
- XPaOZZdidWyUMgdrhpExqYQQhX41A8mA8Z5Zf9cG+chqgkWVdhI52brif09JKeOdYoD+cHcCedb
- LdGy70lKmYLQ99h2u/Wkq7ISh4aiqYx48dxojFCmqKxLu5rcYuFKByCgljGU+2Lu6rleCxl71+Y
- X6yVN+ljOJAk3hH2mz1Vkm35ImJ/Pv9OQLm0Ol0JSXJnMI3i1yPuHk/qKyJ3QiM/ADweoxiQ7VY
- E9R5SEdA4O9WhVduSYIavV+3saUX2mgkBHSb9FynAhWLPRRwxSoaubxf5nWJGpMmIX5y1sV3vJA
- zClQVRbyD1MFWj+N/KUqNiuNcTt8/GbNahy1qmNZbgYAKPzCe4liwuZ3fHxim39Ue9ugi3XnlZn
- kxCWGybt1+7FQwRe/dXN7e2P3SNH/JaUxrfWA6zP9U1zbMTi8jMqYj4ZdLK4ZQZIZV9w0T/5lZi
- N2sDqSl96p8rivsyDfIw1q0np7jQS1eW9uVgTqUDvq7alfbFMPA5pZJfKbxbjJqmr2tbTfDKFmr
- DtMWhYslbTSlePD7KB9WnDQTpd3eSMbwpDZgrCBn90wBPkplWsm5wUCz
-X-Received: by 2002:a05:600c:4f54:b0:496:bbce:fc with SMTP id
- 5b1f17b1804b1-499b8354a65mr236034575e9.12.1787561065788; 
- Mon, 24 Aug 2026 01:44:25 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
- [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499c35a1aeasm79788475e9.12.2026.08.24.01.44.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 01:44:25 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 24 Aug 2026 10:44:16 +0200
-Subject: [PATCH v2 1/3] dm: add dm_err() and a driver model log verbosity
- choice
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ client-ip=2a01:111:f403:c20a::7;
+ helo=pa4pr04cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=L18rAt4G
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7C75D60622
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:34 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eDYYoAAPNgud2mAnEWo9uIDZUDo/RmBSXBqgcYyJopxHHt9sXIaJY/bRYN0LTTCn3gO5R49fPKyT9ZqRpWYyAyM/3QjAMIMxIfrlhYbLP/dkJPRHvxvD2pTDGe0ET4Os79kGyvCBvUm44m1LWC/JROFKKafZVmVvO8Pg4lwYSl9k3x46niiAQ8faeDTsohqqcPe2JXv7K37p3fv92bomL0QlM8dC0gUmQQ76OTIRqJlWMzfIps0PzeQuFxHCT0uMKe2Oi0UP3FbJ0a5uZncK1TIerBxd2InOPG2oJHaj+6FKaOMobAn1la1AG8FWHuvCU0qg6DYcDJIvvF44i8krSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cB+GW9eylViFS3DU8QK1qyyy9ick8Ish/z7vBOvUNiQ=;
+ b=s8qz1yEb9rzPdTQ9boct9LFH+OENRy+cCPGq6b8L+PWKgcJOHbkpGuHXDVCT9QLIE/oOx/7jWQUymrchXpE044B9yjVdZyJ4SZyE7B8l2fmHIY5bfZp4om2J+W8EMETGtEaN1GMiO8rql427ImGMGcou/Qu4qHiSOFV8nzEAMdS4LZOV0dufWaJafpx4ys8d1fvyWQ6UsDYmPvKQE/dimDeFi5+FWMvnWxWNMXliLq8vCY1SJp7SnJKbDyRZFkL4EGKVAxLIYEqy6JNR3a/JUKBWiF+SEN3zI2xc96inVnfaCdpB+GI+GkU7hPM/H2bPSBE+ffHrnSC48v6PXrWXhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cB+GW9eylViFS3DU8QK1qyyy9ick8Ish/z7vBOvUNiQ=;
+ b=L18rAt4GCd0Z7dCcRYs5uMZ0VIKftBq164qVx7KTmyRmZ8kvlJ5iCeXlXLtyX8x1RXHwj57RwnUO81vDxcJW/krAGMvv9uGOfFnprWySu1j6XjeuPv4T3MzFCxoaKdjwKt67zKadNDDQpbtydc0eVTp2PEUPi4cp5OVm/rP9B1w=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AM8PR04MB7825.eurprd04.prod.outlook.com (2603:10a6:20b:24f::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
+ 2026 08:44:29 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
+ 08:44:28 +0000
+Message-ID: <506600b2-06ad-4a43-b5f6-54a61f7a3879@cherry.de>
+Date: Mon, 24 Aug 2026 10:44:26 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] MAINTAINERS: Use proper Orphan status marking
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.u-boot-project.org,
+ git@amd.com
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-improve-logging-on-missing-uclass-v2-1-4bee2cdff72b@baylibre.com>
-References: <20260824-improve-logging-on-missing-uclass-v2-0-4bee2cdff72b@baylibre.com>
-In-Reply-To: <20260824-improve-logging-on-missing-uclass-v2-0-4bee2cdff72b@baylibre.com>
-To: u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, dlechner@baylibre.com
-X-Mailer: b4 0.15.2
+X-ClientProxiedBy: VI1PR0202CA0035.eurprd02.prod.outlook.com
+ (2603:10a6:803:14::48) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AM8PR04MB7825:EE_
+X-MS-Office365-Filtering-Correlation-Id: c303b037-79a1-43c2-ffc5-08df01bbe8a0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|366016|1800799024|10070799003|376014|56012099006|10067099003|18002099003|22082099003|11063799006;
+X-Microsoft-Antispam-Message-Info: e27+CZglxb8LEFPu5egaHfPr7JMMJNaIot1fSflShFjIvBRwSd9yPb3c0MvmAOEOt7WRK/UeGtleP6RUVnLgp3QA0uGKYqBKW7AVt8O8oL5RRk0JjQrASypLPFA3Q8oBcYaUQVT0l5/6kYiwGUx35inM9et5UbGZ00C3OPAt4CvHG60hw/GVfwaKsOf1jgpEZbXN/dqp3qbFpK1hP+E635kBOwkeLDzrd9zNZLVmG8Re1KBTGOR2I6ZhSjCv+nIiz/gsrVTnyrY6LDVO+TFUnpE836G0ri868qNPkjbKwpVxNDAF8AjxCa9eYo3K1y5Ik9hLeIQXZSVBuZzP2phb+pjQoHrQwlru3EoV4tz3Wa7iZWVt0NhzKu6glEE0+NWlw98NTxTLuYh61cfXqvLmSDwHHfIbUXq1tgaGNPSyNeZriKhk7UnCHUj1mv1BOQKsHiNkLJ5NenAII+l4VdyjXqwq7W3SzCWv55IkcbPBn4L88JCgDV+UMxL0M5h/yOnE6cxoBe7L6jm01kTJqkJYqGEjjmtanE+vxdlrcc51eHT1P1PkQMJ8RzgMQUO2LlwEgi0z8ESZil7KZinkSyl+O+1ffS7zB4oliDJ8g4xsBQ1eP5kcc9r68UuXcFx6GfcE71twEHVml2drHLNLIy0KcFKYrLxGZaI4+tI6VZrEP/w=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(1800799024)(10070799003)(376014)(56012099006)(10067099003)(18002099003)(22082099003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?akJ3dzhFazJBYThYZjFIdmlMeG1RSi9RanhnV25BU3R1Ulc4Sk41emFMN0sv?=
+ =?utf-8?B?OEpEZi9vYUhTUjh5RjVXOEVjMldHaTJPYXlvTGNqSHM5dXZBcTdXZUZuTGdZ?=
+ =?utf-8?B?VitJcXBLTGx4VCtXMEx3cmorK1NEb00rZFJXdWkxYTQwRkZTMmNyQytOaThp?=
+ =?utf-8?B?N29yWlB4WWN4Y0VwamNsTlllcVVhSEw4eExTSEtmc0hlUEpMNW45L3pBSFpU?=
+ =?utf-8?B?T09oNEVKMHUxRk80MWc5SEpQZW0xZ0JWc3lNN3dNTGVJK0twUU5CYndsbU1F?=
+ =?utf-8?B?bTZTemFsaSt0RDFzcWczV3QzZ05UbEVuR05zbVozRkpvS3dTb3cySUVOM0xS?=
+ =?utf-8?B?VmxXZWdRUk1UYzhpdEhSU2J2Y1BJaWhNalBqZk1GWmN6TWpmYy9qcU81d2gr?=
+ =?utf-8?B?QWRZVUVqcGdKeFZocmxQZEdnNUZqU3B0V1NpcUV4d2d1U2Q1andhamlydVZ2?=
+ =?utf-8?B?NzFuZjBacGN5MmIwbC9WYjNRS0hmMEtCbHNhYlExQXVyMVJ1RFJISG92TWtv?=
+ =?utf-8?B?TlJPMUZrYUVMMDgxVzJZa0JZSUVTOEM3VjNoRFpHYXBlTjFxL3hZY3M3T3VI?=
+ =?utf-8?B?NGw4RlB4N0tJNTlqVjJtWWpYNXIyN1daV3JJcVZhS2JGMjgzWFlMbmlNUFdD?=
+ =?utf-8?B?UnYvQ0xtRWlzM2tKVE9RM1ptb2srVm1UVEVTVWpoU215NVd3akhsNlNscUhi?=
+ =?utf-8?B?c1Q4Q1JWTGsvaWRXYVF3dlRjQVBQYytGL25rMVV4K2JrS2ZMWnYwMWpKKzZM?=
+ =?utf-8?B?MWUxTFlKaFZqNm9ROUJwQWtXcTlQUEZMa3RadTh5cjBLWGRneEExeXRGMTFv?=
+ =?utf-8?B?UXZkdjNtb1JQMHlCYWJHZnFIZ3Z1QXdJRzZ6OW1KaGhPSzMvUXowNGl5aGsr?=
+ =?utf-8?B?d3hyVU9DckRVOGR5eVlnNXoyZnZZWFlpUDFJQkdoMTVkUk9QRFdMOFlSM2Zp?=
+ =?utf-8?B?UjVJcWlFSXN6NVA0WmhIcW9icXVKdEJXcUZuSU92RnhGU0crQ0hoWk11bzRl?=
+ =?utf-8?B?aFNxbjlRZXJFeU1hbVVCZVR6bFVaUmlFUFdBZmNhQkJVRll0RTRrUmVROEt0?=
+ =?utf-8?B?TDJTTlkyeHlIL252ZHE0TktFazRqZmd4UGdtR2FtOUdGRFZib3lwTUNuRUpO?=
+ =?utf-8?B?VXNqSXo2ak5aTmVab1FURlQzZkUvSTJRa0pVTy9CNWZxUFZDMU03ZjJkZzlQ?=
+ =?utf-8?B?U0lzekRWMWJ4V2o3L0Z6SmhudWdSU0g5ak5mRjVvMEhIdEZSalVzdWtFWUR5?=
+ =?utf-8?B?WTRvL0k3WFZpWFZiL3NVMmdTc1VUU2RBQ1c0c0o0N2pablI0TzZLNmdUc3VJ?=
+ =?utf-8?B?cTRWbGYvQ2krcGk5RFExUlQwZktVQnA2WjFaM3V0WDRuYldweGNoT0pCM3dG?=
+ =?utf-8?B?aEdRTzZ5TEd2SVE2b2pzMUpxdVpHdTM0TCs5bjNXNWErWXY1RlhueE5aK1Bi?=
+ =?utf-8?B?RDlrQm9CR2JCZzVqNFEzTW5UdmQveFFoV2hXZktrOU1vQmlISnh0TEViM2NZ?=
+ =?utf-8?B?QU15WC95eWh1elh6dmoyUkhRaVNBekFZcThsbFk5T05tZzhyVjUrTEorNmZy?=
+ =?utf-8?B?OTlhWXZYeUlJeFZLV01BOWRxTko3T21kRHhkcUxDcm9sNDFqSU9PS09lUkg0?=
+ =?utf-8?B?MDRoeGlmLzBocC8xNGdrdTNkaUNIbmVJOEY4VHh2SVpMTGwzNW9HQVFPUVR4?=
+ =?utf-8?B?UEJBenljSnVvRWsydmhtZVNhK0c5TGkyMEhSQ3czL1NTckFZeEo2dVM3b253?=
+ =?utf-8?B?YzZxRURzM2lWS0ZmeDBsKzR2TGduL0pPU1FqWHRTQ0FMdzZWSkNKRDUwRUdE?=
+ =?utf-8?B?VlNSQ0o3RU91eEpoZzc1NXlsR0xrNElvL21LajZ1dXJTK2VOVnhVUTdoYUVZ?=
+ =?utf-8?B?VklaMEMxY2RXYVV0S0tUR2VBR1IwYzYyMEl6TU9SbDE4QVkyMGFJZVRJQTMv?=
+ =?utf-8?B?MWtWT3BUTEliaHYvOGN4bGU3UE5mbUZqTmRvcGdINnpVcTd0Rm9nbjVXWWJC?=
+ =?utf-8?B?a1YyOFJkbzlTMFRrbGRMSXVtSW1jemNBY3FBSVlBSEppWHIzZitKOVJnczQr?=
+ =?utf-8?B?TjBSWTFuT1dlcVZQYlJSaDYvZ2Y5Yk1iSEs5YTBzcUxQd2Y3Z1NRVUJpdUVM?=
+ =?utf-8?B?QmRVZjZPejFQRitleVVWcCt4SG1QZzNtVDlHT2tPd3VmMFBYdUxQSFM3bDM5?=
+ =?utf-8?B?aXhLOExMUzZ0bHBNbFhUVkpGS0pET1pPbWJFN3JFdEVrcWlZU0RPRjJLV0JO?=
+ =?utf-8?B?NHcxdEtOcjZabGdGdEQ5VjhYa2lyOWhWb1ZnSStlUVVGYzhSN3gwRFdhcGI5?=
+ =?utf-8?B?V3UybHlVSjNxUG1SNXZ2a2R3dktkRlZsdDhxZHRqWTladnV5RlBHRkFYMEtN?=
+ =?utf-8?Q?/XyJ9bOsLXr1nTePf/q/7mCvq22tbTFjT/dQe8K2eMmPb?=
+X-MS-Exchange-AntiSpam-MessageData-1: Y3rN0kzs6b0OB1uO7aYVJYgbo38rgf36Qz4=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c303b037-79a1-43c2-ffc5-08df01bbe8a0
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 08:44:28.4475 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YY+uMXZ6aF8AtJ+XFBjoJ2m6ODqBgW+Z9pLf03CEF/isWuetoq/S6Wc5/LXEDUnRf1wSRrU1M9rvNleFEfAlZO2Mj0KkxIzK+8gfl8U6Es8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7825
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,174 +174,17 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-When a fatal driver model error occurs the board often cannot boot, yet
-without any extra debug option enabled such errors are not shown: driver
-model only had dm_warn(), emitted at WARNING level (or DEBUG when DM_WARN
-was disabled). A fatal error deserves a message that is visible out of
-the box.
+Hi Michal,
 
-Add a dm_err() helper, logging at ERROR level, and replace the DM_WARN /
-SPL_DM_WARN boolean options with a per-stage verbosity choice:
+On 8/24/26 10:32 AM, Michal Simek wrote:
+> Orphaned is not correct status based on description.
+> s/Orphaned/Orphan/g
+> 
 
-  - DM_NONE: degrade all messages to DEBUG level (smallest size);
-  - DM_ERR:  emit dm_err() at ERROR level only (default);
-  - DM_WARN: emit both dm_warn() and dm_err().
+This has bothered me for a while but I never took the time to put 
+something together, so thanks for fixing this!
 
-Each level includes the ones below it, so selecting warnings never
-silences errors. A disabled level is not removed entirely: it degrades to
-DEBUG level, which is compiled out by default but can still be displayed
-when debug logging is enabled (e.g. DEBUG defined or a high enough log
-level). So even DM_NONE can still show these messages as debug output.
-Production builds can drop the strings by selecting a lower level, while a
-fatal error is shown by default during development, including in SPL/TPL.
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Note this changes the default behaviour: driver model errors are now
-emitted by default (previously nothing was shown unless DM_WARN was
-enabled).
-
-The existing DM_DEBUG option is deliberately left untouched here. It works
-differently: it adds -DDEBUG to drivers/core/ via the Makefile rather than
-selecting a log level, and it is not phase-aware. Unifying it into this
-choice, along with converting the DM core debug() statements to
-log()/dm_dbg() (as recommended in the "To Do" section of
-doc/develop/logging.rst), could be done as a follow-up series.
-
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- drivers/core/Kconfig | 75 +++++++++++++++++++++++++++++++++++++++++++---------
- include/dm/util.h    | 19 +++++++++++--
- 2 files changed, 79 insertions(+), 15 deletions(-)
-
-diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-index ae0c3466772..5e276474b4b 100644
---- a/drivers/core/Kconfig
-+++ b/drivers/core/Kconfig
-@@ -45,28 +45,77 @@ config VPL_DM
- 	  full malloc() enabled by CFG_TPL_SYS_MALLOC_START,
- 	  consider using CONFIG_TPL_SYS_MALLOC_SIMPLE.
- 
--config DM_WARN
--	bool "Enable warnings in driver model"
-+choice
-+	prompt "Driver model log verbosity"
- 	depends on DM
-+	default DM_ERR
-+	help
-+	  Select which driver model messages are compiled into the binary.
-+	  Each level includes the levels below it. Lower verbosity saves code
-+	  size by compiling the message strings out (useful for production
-+	  builds), while higher verbosity helps with debugging.
-+
-+config DM_NONE
-+	bool "No messages"
- 	help
--	  Enable this to see warnings related to driver model.
-+	  Compile out all driver model messages. This gives the smallest code
-+	  size, but a fatal condition gives no hint about its root cause.
-+
-+config DM_ERR
-+	bool "Errors"
-+	help
-+	  Emit driver model error messages via dm_err(), at ERROR level.
-+	  These report fatal conditions that typically prevent the board from
-+	  booting. Warnings are compiled out.
-+
-+config DM_WARN
-+	bool "Warnings and errors"
-+	help
-+	  Emit driver model warnings via dm_warn() (WARNING level) in addition
-+	  to errors. This is the most verbose and uses the most code space.
- 
- 	  Warnings may help with debugging, such as when expected devices do
--	  not bind correctly. If the option is disabled, dm_warn() is compiled
--	  out - it will do nothing when called.
-+	  not bind correctly.
- 
--config SPL_DM_WARN
--	bool "Enable warnings in driver model in SPL"
-+endchoice
-+
-+choice
-+	prompt "Driver model log verbosity in SPL"
- 	depends on SPL_DM
-+	default SPL_DM_ERR
- 	help
--	  Enable this to see warnings related to driver model in SPL
-+	  Select which driver model messages are compiled into the SPL binary.
-+	  See the "Driver model log verbosity" choice for details.
- 
--	  The dm_warn() function can use up quite a bit of space for its
--	  strings. By default this is disabled for SPL builds to save space.
-+config SPL_DM_NONE
-+	bool "No messages"
- 
--	  Warnings may help with debugging, such as when expected devices do
--	  not bind correctly. If the option is disabled, dm_warn() is compiled
--	  out - it will do nothing when called.
-+config SPL_DM_ERR
-+	bool "Errors"
-+
-+config SPL_DM_WARN
-+	bool "Warnings and errors"
-+
-+endchoice
-+
-+choice
-+	prompt "Driver model log verbosity in TPL"
-+	depends on TPL_DM
-+	default TPL_DM_ERR
-+	help
-+	  Select which driver model messages are compiled into the TPL binary.
-+	  See the "Driver model log verbosity" choice for details.
-+
-+config TPL_DM_NONE
-+	bool "No messages"
-+
-+config TPL_DM_ERR
-+	bool "Errors"
-+
-+config TPL_DM_WARN
-+	bool "Warnings and errors"
-+
-+endchoice
- 
- config DM_DEBUG
- 	bool "Enable debug messages in driver model core"
-diff --git a/include/dm/util.h b/include/dm/util.h
-index ec518c51d93..89ffaa467aa 100644
---- a/include/dm/util.h
-+++ b/include/dm/util.h
-@@ -8,12 +8,27 @@
- 
- struct dm_stats;
- 
-+/*
-+ * Pick the log level for each helper based on the DM log verbosity choice.
-+ * A disabled level falls back to LOGL_DEBUG, which is compiled out by
-+ * default. Each level includes the ones below it, so DM_WARN also enables
-+ * errors.
-+ */
- #if CONFIG_IS_ENABLED(DM_WARN)
--#define dm_warn(fmt...) log(LOGC_DM, LOGL_WARNING, ##fmt)
-+#define _DM_WARN_LEVEL	LOGL_WARNING
-+#else
-+#define _DM_WARN_LEVEL	LOGL_DEBUG
-+#endif
-+
-+#if CONFIG_IS_ENABLED(DM_WARN) || CONFIG_IS_ENABLED(DM_ERR)
-+#define _DM_ERR_LEVEL	LOGL_ERR
- #else
--#define dm_warn(fmt...) log(LOGC_DM, LOGL_DEBUG, ##fmt)
-+#define _DM_ERR_LEVEL	LOGL_DEBUG
- #endif
- 
-+#define dm_warn(fmt...) log(LOGC_DM, _DM_WARN_LEVEL, ##fmt)
-+#define dm_err(fmt...) log(LOGC_DM, _DM_ERR_LEVEL, ##fmt)
-+
- struct list_head;
- 
- /**
-
--- 
-2.54.0
-
+Thanks!
+Quentin
