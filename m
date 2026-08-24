@@ -1,209 +1,103 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E5BC5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 09:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8677CC5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 09:55:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 144DC606DF;
-	Mon, 24 Aug 2026 09:03:56 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KPW-DwoXxQPU; Mon, 24 Aug 2026 09:03:55 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787562235;
-	bh=EXhjR63rcvqyjdkDctBoTHXgHBDwDp3YCNrXLzNivaQ=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QwBQwQSRqIu01bvWZ7MY9pSDm+Uj8XbEuaBcTJr7CNta+pN0TZ6DUlAwI9BvUYlwn
-	 O0T+/x48gYO1V2iQSTiQ1o19o7tN9G2SR9RyTHGCCBVgH8Rbh6JFcqotTsCoMb/JQu
-	 0xt7JEm+FsjFUj7Hkm91snCURQLQX0mAVZ6Ho8IeC2bFJmlWN4n44hHHRFUo5/zoMU
-	 wzaNpOUfuEDi4HGc2bWFTN7SbHZJBwgJGbmFR2SOdrDNht3n/RI72FyadFH/2+uwrE
-	 VB1XxbEbOviB0sfmzLrS8LXNYqZmkIHSs6azu2s49qrE31qXbIQUGGxiKBTRUytmW/
-	 mhS4xGyxmDn3g==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 02C8B60622;
-	Mon, 24 Aug 2026 09:03:55 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 60E3D34E
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:03:53 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 55F1A406EA
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:03:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 27B5140522;
+	Mon, 24 Aug 2026 09:55:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cpMHRUJ0UW4k for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 09:03:52 +0000 (UTC)
+ id SDOtzdAT61IJ; Mon, 24 Aug 2026 09:55:31 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787565331;
+	bh=EfzbsLad3n45jLPJNOgtA3CTuCpfUBbRk60Brvwgbcw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=kM8DNhWSZGKZKjtZLtl2ICP8EcwsrWjIMTGq9iE9CEb5ImDdAS/wZCafqhQQB2bl8
+	 FzfTuuUmqGNP35hB6P+LavnIR95hREULm1UwvCZ0dTF3l86DORQ3IK6v+hUQ87pech
+	 vRHTLHYYj66iAyKknHGlJTVCNzrDzuMMS+vx1HoPGwB6qPZxqAY0QDfiWzUxLtDqsw
+	 WcEw6z5tVKBDGRlg7m66TZQidB2jPIjUV/WXY3dR3VTnmWoejeOJhEevEbvdrzqYc5
+	 zDp4CKbcPEIQRJ54IczDYJRs/lzpZxZmlNmJJqy6EVzRu3XPndFCu8qnVljMtoeme9
+	 /+Yk0akn7H5lA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id B58BA405F6;
+	Mon, 24 Aug 2026 09:55:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 069CA41A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:55:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id EBAB7400AA
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:55:29 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id by4qYKP1FMwO for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 09:55:27 +0000 (UTC)
+X-Greylist: delayed 397 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 24 Aug 2026 09:55:26 UTC
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=kernel-space.org header.i=@kernel-space.org
+ header.a=rsa-sha256 header.s=s1 header.b=GkJ9JAqA
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c100::f;
- helo=bl2pr02cu003.outbound.protection.outlook.com;
- envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=q2qdoR5N
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 411424068F
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:03:51 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MKwr9BcV/g6S8m3l8qCbKFEnuOabA7p49yL5g3asAfLa+lfYgnPYZGhhPTVC6M3sQF4zHWE4e3YgEm+hhKoeZRtqmLzVE16kllBkE95HkOiCQaqIW60+Yg7K8TZ3cyH4BRyygG71KLQbTbRC9fFu20S/UNJbyC4m+TeP+rI0wlstxNdLs8oZ0HNuDJ0s62TucPM04F4SndwSzvv+Eo/KvNuchZRsC28Pd0gASNrS9Ggu5WCobRbyLwB1P0Usdg4V5PZNEPJOeDneQLovLxsBspbiOBgggOmkMTg1x6idhQxgR4OIIVU/mOrVAoHoXQXijIGtEIBlWHlM0g277QCzYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EXhjR63rcvqyjdkDctBoTHXgHBDwDp3YCNrXLzNivaQ=;
- b=xBe/50PKyHppNgTsf91g3xfDoAmbb2KcGMmmarQ2HJc9w+7d2WwBZrJevLbKHDuWYtyOywfpF3y852RMpWPMRseQZP/P/5lvhPA+dRBYDDBM1tItD8vtXkcX0Fmvs40q6EMSjYx6VKZDwWzLYqN2Z8+9UYVGGB654nwCtwq9xaFs5YML60zj+mgO+ES7Js6Yj01upMTihgh4ZS326Wp8zx2J6tFwUz4hI1yr/3gXYUCWT969qSGEZdO7HGKydoHI6wPwW0enyvzE8nUYChDjKWLrXQmXvPhmdYZ3e2jEyVyIdaQWHK+cnD2rNwUX07cDWypj967GqVAitqgyA0ogPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EXhjR63rcvqyjdkDctBoTHXgHBDwDp3YCNrXLzNivaQ=;
- b=q2qdoR5NATqPhrqjQ7XKrBUe3Ot9qu6ncA7CPfH2dp8ME/hxf+DE5ftXDCMs2s0DMU0YzJqtVQLjQkZaXII4EvX0i0W8kUr4SKLjcvy5/2m7xMkhsjxdCF2oLJfkHQNcYcxTW37aHpvMfTsRpOoCKUVvPGJLcrMNNumCcXnsn3Y=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 09:03:46 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
- 09:03:46 +0000
-Message-ID: <36abf93c-48a3-4d71-82d9-f0489b8b39e1@amd.com>
-Date: Mon, 24 Aug 2026 11:03:37 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] MAINTAINERS: Remove references to not existing files
-To: Johan Jonker <jbx6244@gmail.com>, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <foss+uboot@0leil.net>
-References: <cover.1787555916.git.michal.simek@amd.com>
- <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
- <6ae0a139-cc0b-4d58-958b-50564f357cfd@gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <6ae0a139-cc0b-4d58-958b-50564f357cfd@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR02CA0065.eurprd02.prod.outlook.com
- (2603:10a6:802:14::36) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+ client-ip=2a03:4000:b:d08:14a9:1bff:fedc:75ad; helo=mail.kernel-space.org;
+ envelope-from=angelo@kernel-space.org; receiver=<UNKNOWN> 
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E880B40052
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:55:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1787564924;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EfzbsLad3n45jLPJNOgtA3CTuCpfUBbRk60Brvwgbcw=;
+ b=GkJ9JAqAl5GjvGMl/Nd+CrkZnS9BB8GH7LRzcMj5IMWts1QDa5E8/Al03iCqfnnJDW0wJK
+ Cfrpk8HL5Wzn6rhsRpWLJRFeNXXlNnt24LHCHoTmqKGyfni6ROMCx3VzSCKln43YeSAO3h
+ wgF6dlfuPB+COWgtgreLQSfmHFFjndA=
+Received: from [192.168.0.2] (host93-7-32-195.dimensionesrl.eu [195.32.7.93])
+ by oreshnik (OpenSMTPD) with ESMTPSA id f08b4b06
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Mon, 24 Aug 2026 09:48:44 +0000 (UTC)
+Message-ID: <839cc8f0-7322-4b46-a4e1-ce168871b37d@kernel-space.org>
+Date: Mon, 24 Aug 2026 11:48:43 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_
-X-MS-Office365-Filtering-Correlation-Id: f370aab4-eece-48d9-ff33-08df01be9ab7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: LbEq92sVftTx3J8HtQBY9Fs/H92BqvB+mEgBHytQh3JHAoMdUcZ9NXSYjBQk1jwEQkDHdIqgxOXSq1ITvACQd9UI4Ht2YHehHnsmNdT5ikdqdKsR/K/hVPCkqBPRjPGm/36PSJ4+krUI2w2sxaknynZCml/zzPQNvbnYDDkAoC9RmaoxlVVlkh6fXTmg3a/8+V1sIF/FzXjXwsVhX/gAev8wJ8MDl1nUJv/MljiCAWvtLeFKyzdfZKk8ihA2sNtxOf1a5X2crt2OlG7Ee3O4FvdWkT5Fz85NEi6IQTwxkxrE0D+OxoAzQ5+YljfYTKyv7/RG1vvsZQZqRNE0BXwJvFSLqv6d2/kZ7KSEEZn/1BEQPPijZIGL+69EUhSp76zUjR3PqHi5s4C2PAifs59q34NRU/VlArlNwi7fDvrBG4NYSAlP1WOwP3dSqS5JdYVGCClVylvlI/jgWEgQCDUTR4pbZwnLnQjxC7GGpSuslhLOFmuxnS5oGzGMqA05577iFxHzogOmZ9vYsXIag0Ov6JAu7lID/5DHuHgE8l2bHcpH6OMJjU6A+gJcnFm+Ld/n0+OFduhfxYsnKahkOYdde0AuC5b8YKTnO6BZl3aiIPAj+ftVIMl15nN94ljEcDFoK1ZlxOZKX96M13cuY8crBSo0sEgLNEULeJY3CPZB8sc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TU42RGJTRCsyNTdYZVVGRWhhYWt5cE1DOEgvUThkZ2hsM3QxTXNNV092T0Ey?=
- =?utf-8?B?STZDbS9VbEhybnpPdHJqdkVQYTkxVVR5T0kxcEFJeEpNalBEZ0I0RCs2S21p?=
- =?utf-8?B?K0d5c2NaWlJTdXVWSmJNcXpBdDRRTGMvTGhDNFdrUW0vUGlMek03QnN0Yi9h?=
- =?utf-8?B?MDAzbjZYeTZ0NmttSHQ4Z3FGT1JkTEZKaWhiUmpCQTd3Y3JHc1RDbVZGOC9s?=
- =?utf-8?B?UDZZWnl1VkFaRWxHRzNtdUZZSlMwUkVwOGlhOTlpbkp2Tkp4bFEzUGR3bFBB?=
- =?utf-8?B?TnBLMThNaldNM04yYXZRbldublBTVnlncGl2Zk5URm9jQzFDWjJqbU5DT2Fx?=
- =?utf-8?B?QnF5K2djcEZ2SmI4dTMxZy9LVW5kSnlJVmg3azVpS2NmN28yTEFhdU00ZENY?=
- =?utf-8?B?L3BQMXNzNDBQRFJXcG5PaG9PSjhMR1JReXY2NDR6MkQwUzFMdFV6UjZ0RWs1?=
- =?utf-8?B?ZU16V3lCOTU1cEgzdGNidWtvbzk4WWN2THhDTkdnQ1RCVFd3WjRQVHQ5S3BV?=
- =?utf-8?B?Sk1EemNYZ0x5bnQ3K1gxYTVwaDhXVFh3QVdxQzFSZW5DUW1xaDFkcjQvVTEw?=
- =?utf-8?B?TUhEUVhUd1RJb09MNXZvLzNBVmZnMW1qcm42K25VWXRxV3hrZVozdVRGNWVw?=
- =?utf-8?B?Q3hINm52UjM5VjNXSVNiNzhoenJFWWV6ZkZKQmcxTFkxZ3JXRjA5L0QrazQx?=
- =?utf-8?B?NGROTk1VVmxyS21NS2hUNHFMSVp2aUFncmtIY2VPY3QzdFlZV0h3SjB4MC9r?=
- =?utf-8?B?UnZjMkVoYm1jendJZlp0L2JaUWh5cWorNEpyKzdncFJRd1JSYldtYVE5Ykk5?=
- =?utf-8?B?YVdkbytXRURvby8wS1B3Si9BQlEzbXZINFFvUkRtU2VMSUtESXF5YmtWT204?=
- =?utf-8?B?Vy8wV1FrZ0NTQ0hVSllQWGFYUTRHMGs2VC96Tmw2Q2Zqa2xJcDczWElGaS85?=
- =?utf-8?B?bUFvWHQ4eFQyYTVocWpNenhJaDhDUFV6UkdaQUl1aEFGcXBCZkFqd0xVRS9r?=
- =?utf-8?B?L2tFdmNOL1lkemlGNEdiZ3VQRHRPQUlXbm41amJWZlExbjBFVlpmb3dBQUhX?=
- =?utf-8?B?MGc1WHFVMGVLbjJocUwyeEhvTURqN2ErYkoxRy90eEdoaVFsdk9UNFh6UlVu?=
- =?utf-8?B?QnJVVjVPQlgxRzVFT2FoYjBzQng1UzVPRHp3cmRDVjJ6M0NVWEtCdG5VeDdt?=
- =?utf-8?B?UW42UmlhQ2RGWXZMb0o3NVZCRm84WHo4NE9QRnJIN1BQaEVpaHJSdHgvYUpP?=
- =?utf-8?B?dDZzUFlKUDhHKy9QSU43VWl0K1BGdkdkQVpHWUlvRDNock5PdmFwcEZSYlhi?=
- =?utf-8?B?OUh4NG1Kd0hlemRzYjZLbEFBU0NWbDViZS8zaGNjUjNTN2NLM0NBbnFHaFp0?=
- =?utf-8?B?WHg2dFFYbkdBMUQwckhESjRyZmFWUkR1Wk9TeXRkVE9FQ0FPcmZ5Rm95OFph?=
- =?utf-8?B?Y1BVMmVVY3J5VlUzczZ2ZTR0c1lmRFJuVkNTc3FaN1pTQjh3Vldia2todUww?=
- =?utf-8?B?RUF6VU50bzByUU5EMWU2VHlMMnNSanpoUWdqdEtVem1PcWlVRUszbHdxVWp4?=
- =?utf-8?B?UkdaS2FSMmJJMGlsTFR4SHBIM2ZzZGphL1NPbWRZbUlWRjE0YnR4QXRYUUxC?=
- =?utf-8?B?QU13QTlVS29PQjA5RnYreTA4aUNHQW1tTTdLZ2RRVWJwSXlNUkRDdmpLcDhS?=
- =?utf-8?B?aFJmdG52ZnRheVNvMHN3K293UkRZVy9LVVQ5SWZyK3JOMS9IT2JqWGNjSWFz?=
- =?utf-8?B?UmdsRjIvZ1pxQncrdENlOTRrQ25GQThDRVJ4Z2RPS1FNaVQrclJTSU1vdDEr?=
- =?utf-8?B?SGlzS0wwc3hmdW5tSmZhdzR6VUdRZlFIcWlrS1J1b0dVcEJmZURIVGpJbXF3?=
- =?utf-8?B?RnBVVVh5QjltclFrNDRhTWp6Q3pQdDVITExzMDdEUCsyWTZkU2pXLzE2NzEw?=
- =?utf-8?B?dnhmWWJtZWlEYUJoWUt0dk5MdUl2bDlwWlVlTnpKM0RmbmMvbkhjcFVUMEcx?=
- =?utf-8?B?SE4zMG5hSENCSzdMTFZpdDh6WUJwRWFaTGpvbEh0QUExOEI5V0o5eFk2d0Ew?=
- =?utf-8?B?ekNGYzZldDVKblJFT0pMYk56UlhlSmZjQm1xZUdSUjQ3RnRaVExtRzZkejVa?=
- =?utf-8?B?Q3FqK3RZa1VFNml1V1VsMWMyZExsWmlsZm9tYUR5OEtZeFJuNHdObEl5eEFa?=
- =?utf-8?B?ZXRkTUZTbys4bkdRTUw0WlRycmpRQ3hsYjdlZHE2aFVGV2lGd0xjZ2ZuSjh0?=
- =?utf-8?B?RVZRVlY2QzQ1UllvbWNkc2czb0JoTitibjZyYXpoUG94WVpnN21kT01IM1ow?=
- =?utf-8?B?WkEzWUVWS1pBSEtNS0xQa0VBTGl2dWZPdkFXL3hDTFlWcnNpTXdndz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f370aab4-eece-48d9-ff33-08df01be9ab7
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 09:03:46.1670 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: iDqwSGj7OOovO2+yXercRUWIqEGDywfEhkbST39mXrr+OUUi6Fa4i+K+Wq30t5qA
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR12MB9779
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] Clean up emails from non-existing domains
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.u-boot-project.org,
+ git@amd.com
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Aristo Chen <aristo.chen@canonical.com>, Daniel Golle
+ <daniel@makrotopia.org>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Heiko Schocher <hs@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>
+References: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
+ <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -217,194 +111,1195 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+Hi Michal,
 
+thanks for this, for m68k stuff should have been my job.
 
-On 8/24/26 10:01, Johan Jonker wrote:
-> Hi,
-> 
-> On 8/24/26 09:18, Michal Simek wrote:
->> A number of file (F:) entries across the MAINTAINERS files pointed to
->> files or directories which had been renamed or removed over time. Drop
->> these stale references so that every F: entry resolves to an existing
->> path.
->>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> ---
->>
->>   arch/arm/mach-rockchip/rk3576/MAINTAINERS         |  1 -
->>   board/CZ.NIC/turris_omnia/MAINTAINERS             |  1 -
->>   board/LaCie/net2big_v2/MAINTAINERS                |  4 ----
->>   board/LaCie/netspace_v2/MAINTAINERS               |  6 ------
->>   board/Marvell/octeontx/MAINTAINERS                |  2 --
->>   board/Marvell/octeontx2/MAINTAINERS               |  2 --
->>   board/Synology/ds116/MAINTAINERS                  |  1 -
->>   board/acer/picasso/MAINTAINERS                    |  1 -
->>   board/advantech/imx8mp_rsb3720a1/MAINTAINERS      |  1 -
->>   board/advantech/imx8qm_dmsse20_a1/MAINTAINERS     |  1 -
->>   board/alliedtelesis/SBx81LIFKW/MAINTAINERS        |  1 -
->>   board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS      |  1 -
->>   board/altera/stratix10-socdk/MAINTAINERS          |  1 -
->>   board/amlogic/p212/MAINTAINERS                    |  1 -
->>   board/amlogic/q200/MAINTAINERS                    |  1 -
->>   board/amlogic/s400/MAINTAINERS                    |  1 -
->>   board/andestech/voyager/MAINTAINERS               |  1 -
->>   board/asus/grouper/MAINTAINERS                    |  1 -
->>   board/asus/transformer-t114/MAINTAINERS           |  1 -
->>   board/asus/transformer-t20/MAINTAINERS            |  1 -
->>   board/asus/transformer-t30/MAINTAINERS            |  1 -
->>   board/atmel/at91sam9260ek/MAINTAINERS             |  1 -
->>   board/atmel/sama5d29_curiosity/MAINTAINERS        |  1 -
->>   board/atmel/sama7d65_curiosity/MAINTAINERS        |  1 -
->>   board/atmel/sama7g54_curiosity/MAINTAINERS        |  1 -
->>   board/atmel/sama7g5ek/MAINTAINERS                 |  1 -
->>   board/avionic-design/medcom-wide/MAINTAINERS      |  1 -
->>   board/avionic-design/plutux/MAINTAINERS           |  1 -
->>   board/avionic-design/tec-ng/MAINTAINERS           |  1 -
->>   board/avionic-design/tec/MAINTAINERS              |  1 -
->>   board/beacon/beacon-rzg2m/MAINTAINERS             |  3 ---
->>   board/bosch/acc/MAINTAINERS                       |  1 -
->>   board/cei/cei-tk1-som/MAINTAINERS                 |  1 -
->>   board/compal/paz00/MAINTAINERS                    |  1 -
->>   board/compulab/trimslice/MAINTAINERS              |  1 -
->>   board/comtrend/vr3032u/MAINTAINERS                |  1 -
->>   board/comtrend/wap5813n/MAINTAINERS               |  1 -
->>   board/coolpi/genbook_cm5_rk3588/MAINTAINERS       |  1 -
->>   board/davinci/da8xxevm/MAINTAINERS                |  1 -
->>   board/embest/mx6boards/MAINTAINERS                |  1 -
->>   board/engicam/imx6ul/MAINTAINERS                  |  3 ---
->>   board/friendlyarm/nanopi2/MAINTAINERS             |  1 -
->>   board/gardena/smart-gateway-at91sam/MAINTAINERS   |  1 -
->>   board/gardena/smart-gateway-mt7688/MAINTAINERS    |  1 -
->>   board/gateworks/gw_ventana/MAINTAINERS            |  6 ------
->>   board/ge/bx50v3/MAINTAINERS                       |  3 ---
->>   board/htc/endeavoru/MAINTAINERS                   |  1 -
->>   board/imgtec/xilfpga/MAINTAINERS                  |  1 -
->>   board/intel/agilex-socdk/MAINTAINERS              |  1 -
->>   board/intel/agilex7m-socdk/MAINTAINERS            |  2 --
->>   board/intel/n5x-socdk/MAINTAINERS                 |  1 -
->>   board/keymile/km83xx/MAINTAINERS                  |  2 --
->>   board/khadas/khadas-edge2-rk3588s/MAINTAINERS     |  1 -
->>   board/kontron/sl-mx6ul/MAINTAINERS                |  2 --
->>   board/lenovo/ideapad-yoga-11/MAINTAINERS          |  1 -
->>   board/lg/x3-t30/MAINTAINERS                       |  1 -
->>   board/libre-computer/aml-a311d-cc/MAINTAINERS     |  1 -
->>   board/libre-computer/aml-s805x-ac/MAINTAINERS     |  1 -
->>   board/libre-computer/aml-s905d3-cc/MAINTAINERS    |  1 -
->>   board/mediatek/mt7981/MAINTAINERS                 |  2 --
->>   board/mediatek/mt7986/MAINTAINERS                 |  4 ----
->>   board/microsoft/surface-rt/MAINTAINERS            |  1 -
->>   board/myir/mys_6ulx/MAINTAINERS                   |  1 -
->>   board/nvidia/beaver/MAINTAINERS                   |  1 -
->>   board/nvidia/cardhu/MAINTAINERS                   |  1 -
->>   board/nvidia/dalmore/MAINTAINERS                  |  1 -
->>   board/nvidia/harmony/MAINTAINERS                  |  1 -
->>   board/nvidia/jetson-tk1/MAINTAINERS               |  1 -
->>   board/nvidia/nyan-big/MAINTAINERS                 |  1 -
->>   board/nvidia/p2371-0000/MAINTAINERS               |  1 -
->>   board/nvidia/p2371-2180/MAINTAINERS               |  1 -
->>   board/nvidia/p2571/MAINTAINERS                    |  1 -
->>   board/nvidia/p2771-0000/MAINTAINERS               |  1 -
->>   board/nvidia/p3450-0000/MAINTAINERS               |  1 -
->>   board/nvidia/seaboard/MAINTAINERS                 |  1 -
->>   board/nvidia/tegratab/MAINTAINERS                 |  1 -
->>   board/nvidia/venice2/MAINTAINERS                  |  1 -
->>   board/nvidia/ventana/MAINTAINERS                  |  1 -
->>   board/nxp/imx93_evk/MAINTAINERS                   |  1 -
->>   board/nxp/ls1012afrdm/MAINTAINERS                 |  4 ----
->>   board/nxp/ls1012aqds/MAINTAINERS                  |  1 -
->>   board/nxp/ls1012ardb/MAINTAINERS                  |  3 ---
->>   board/nxp/ls1043aqds/MAINTAINERS                  |  7 -------
->>   board/nxp/ls1043ardb/MAINTAINERS                  |  6 ------
->>   board/nxp/ls1046aqds/MAINTAINERS                  |  7 -------
->>   board/nxp/ls1046ardb/MAINTAINERS                  |  7 -------
->>   board/nxp/ls1088a/MAINTAINERS                     |  9 ---------
->>   board/nxp/ls2080aqds/MAINTAINERS                  |  4 ----
->>   board/nxp/ls2080ardb/MAINTAINERS                  |  6 ------
->>   board/nxp/lx2160a/MAINTAINERS                     |  2 --
->>   board/nxp/mpc837xerdb/MAINTAINERS                 |  1 -
->>   board/nxp/mx6slevk/MAINTAINERS                    |  2 --
->>   board/nxp/p2041rdb/MAINTAINERS                    |  3 ---
->>   board/nxp/t104xrdb/MAINTAINERS                    | 13 -------------
->>   board/nxp/t208xqds/MAINTAINERS                    |  5 -----
->>   board/nxp/t208xrdb/MAINTAINERS                    |  1 -
->>   board/ouya/ouya/MAINTAINERS                       |  1 -
->>   board/phytec/phycore_am62ax/MAINTAINERS           |  1 -
->>   board/phytec/phycore_am68x/MAINTAINERS            |  1 -
->>   board/phytec/phycore_imx8mm/MAINTAINERS           |  1 -
->>   board/polyhex/imx8mp_debix_model_a/MAINTAINERS    |  1 -
->>   board/qualcomm/dragonboard410c/MAINTAINERS        |  1 -
->>   board/qualcomm/dragonboard820c/MAINTAINERS        |  1 -
->>   board/qualcomm/dragonboard845c/MAINTAINERS        |  2 --
->>   board/qualcomm/qcs404-evb/MAINTAINERS             |  2 --
->>   board/renesas/blanche/MAINTAINERS                 |  1 -
->>   board/renesas/eagle/MAINTAINERS                   |  1 -
->>   board/renesas/grpeach/MAINTAINERS                 |  1 -
->>   board/renesas/v3msk/MAINTAINERS                   |  1 -
->>   board/samsung/starqltechn/MAINTAINERS             |  2 --
->>   board/seeed/linkit-smart-7688/MAINTAINERS         |  1 -
->>   board/siemens/iot2050/MAINTAINERS                 |  1 -
->>   board/sifive/unmatched/MAINTAINERS                |  1 -
->>   board/sunxi/MAINTAINERS                           |  2 --
->>   board/ti/am62ax/MAINTAINERS                       |  1 -
->>   board/ti/am62dx/MAINTAINERS                       |  1 -
->>   board/ti/am62px/MAINTAINERS                       |  1 -
->>   board/ti/j7200/MAINTAINERS                        |  1 -
->>   board/toradex/apalis-tk1/MAINTAINERS              |  1 -
->>   board/toradex/apalis_t30/MAINTAINERS              |  2 --
->>   board/toradex/colibri-imx6ull/MAINTAINERS         |  1 -
->>   board/toradex/colibri-imx8x/MAINTAINERS           |  2 --
->>   board/toradex/colibri_imx7/MAINTAINERS            |  6 ------
->>   board/toradex/colibri_t20/MAINTAINERS             |  2 --
->>   board/toradex/colibri_t30/MAINTAINERS             |  2 --
->>   board/toradex/colibri_vf/MAINTAINERS              |  1 -
->>   board/toradex/smarc-imx8mp/MAINTAINERS            |  1 -
->>   board/traverse/ten64/MAINTAINERS                  |  1 -
->>   board/wandboard/MAINTAINERS                       |  1 -
->>   board/wexler/qc750/MAINTAINERS                    |  1 -
->>   board/xiaomi/mocha/MAINTAINERS                    |  1 -
->>   board/xilinx/zynqmp/MAINTAINERS                   |  1 -
->>   board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS |  1 -
->>   board/zyxel/nsa325/MAINTAINERS                    |  3 ---
->>   134 files changed, 241 deletions(-)
->> [..]
-> 
->> diff --git a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
->> index 0496cc93b599..8f677f3170b2 100644
->> --- a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
->> +++ b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
->> @@ -1,7 +1,6 @@
->>   GENBOOK-CM5-RK3588
->>   M:	Andy Yan <andyshrk@163.com>
->>   S:	Maintained
-> 
->> -F:	board/coolpi/genbook-cm5-rk3588
-> 
-> Change dir name:
-> board/coolpi/genbook_cm5_rk3588/
-> 
->>   F:	include/configs/genbook-cm5-rk3588.h
->>   F:	configs/coolpi-cm5-genbook-rk3588_defconfig
->>   F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
-> 
-> [..]
-> 
->> diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
->> index 79981aa43f13..0c7906acc992 100644
->> --- a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
->> +++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
->> @@ -1,6 +1,5 @@
->>   ORANGEPI-5-RK3588-ULTRA
->>   M:	Niu Zhihong <zhihong@nzhnb.com>
->>   S:	Maintained
-> 
->> -F:	board/xunlong/orangepi-5-rk3588-ultra
-> 
-> Change dir name:
-> board/xunlong/orangepi-5-ultra-rk3588
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 
-Can you please send it as separate patch?
+On 8/24/26 10:32, Michal Simek wrote:
+> There are 5 domains which no longer exist. Remove all email addresses that
+> reference them. Where such an address was the board's only maintainer, mark
+> the board as Orphan.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+> This was the way how to find if domain doesn't exist.
+> 
+> git ls-files '*MAINTAINERS' 'MAINTAINERS' \
+>   | xargs grep -hoE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' \
+>   | sed 's/.*@//' | tr 'A-Z' 'a-z' | sort -u \
+>   | while IFS= read -r dom; do
+>       if [ -z "$(dig +short MX "$dom")" ] && [ -z "$(dig +short A "$dom")" ]; then
+>         echo "$dom"
+>       fi
+>     done
+> 
+> ---
+>  MAINTAINERS                                          | 1 -
+>  arch/arm/dts/sun9i-a80-cx-a99.dts                    | 2 +-
+>  arch/arm/include/asm/arch-lpc32xx/gpio.h             | 2 +-
+>  arch/arm/include/asm/arch-lpc32xx/mux.h              | 2 +-
+>  arch/arm/mach-lpc32xx/dram.c                         | 2 +-
+>  arch/arm/mach-lpc32xx/lowlevel_init.S                | 2 +-
+>  arch/m68k/cpu/mcf530x/Makefile                       | 2 +-
+>  arch/m68k/cpu/mcf530x/cpu.c                          | 2 +-
+>  arch/m68k/cpu/mcf530x/cpu_init.c                     | 2 +-
+>  arch/m68k/cpu/mcf530x/interrupts.c                   | 2 +-
+>  arch/m68k/cpu/mcf530x/speed.c                        | 2 +-
+>  arch/m68k/cpu/mcf530x/start.S                        | 2 +-
+>  arch/m68k/cpu/mcf5445x/dspi.c                        | 2 +-
+>  arch/m68k/cpu/u-boot.lds                             | 2 +-
+>  arch/m68k/dts/M5208EVBE.dts                          | 2 +-
+>  arch/m68k/dts/M5235EVB.dts                           | 2 +-
+>  arch/m68k/dts/M5235EVB_Flash32.dts                   | 2 +-
+>  arch/m68k/dts/M5249EVB.dts                           | 2 +-
+>  arch/m68k/dts/M5253DEMO.dts                          | 2 +-
+>  arch/m68k/dts/M5272C3.dts                            | 2 +-
+>  arch/m68k/dts/M5275EVB.dts                           | 2 +-
+>  arch/m68k/dts/M5282EVB.dts                           | 2 +-
+>  arch/m68k/dts/M53017EVB.dts                          | 2 +-
+>  arch/m68k/dts/M5329AFEE.dts                          | 2 +-
+>  arch/m68k/dts/M5329BFEE.dts                          | 2 +-
+>  arch/m68k/dts/M5373EVB.dts                           | 2 +-
+>  arch/m68k/dts/amcore.dts                             | 2 +-
+>  arch/m68k/dts/cobra5272.dts                          | 2 +-
+>  arch/m68k/dts/eb_cpu5282.dts                         | 2 +-
+>  arch/m68k/dts/eb_cpu5282_internal.dts                | 2 +-
+>  arch/m68k/dts/mcf5208.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf523x.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5249.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5253.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5271.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5272.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5275.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5282.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5301x.dtsi                          | 2 +-
+>  arch/m68k/dts/mcf5307.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5329.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf537x.dtsi                           | 2 +-
+>  arch/m68k/dts/mcf5441x.dtsi                          | 2 +-
+>  arch/m68k/dts/mcf54xx.dtsi                           | 2 +-
+>  arch/m68k/dts/stmark2.dts                            | 2 +-
+>  arch/m68k/include/asm/immap_5307.h                   | 2 +-
+>  arch/m68k/include/asm/m5307.h                        | 2 +-
+>  board/embest/mx6boards/MAINTAINERS                   | 3 +--
+>  board/embest/mx6boards/mx6boards.c                   | 2 +-
+>  board/phytec/pcm052/MAINTAINERS                      | 3 +--
+>  board/sunxi/MAINTAINERS                              | 3 +--
+>  board/sysam/amcore/MAINTAINERS                       | 3 +--
+>  board/sysam/amcore/Makefile                          | 2 +-
+>  board/sysam/amcore/amcore.c                          | 2 +-
+>  board/sysam/stmark2/MAINTAINERS                      | 3 +--
+>  board/sysam/stmark2/Makefile                         | 2 +-
+>  board/sysam/stmark2/sbf_dram_init.S                  | 2 +-
+>  board/sysam/stmark2/stmark2.c                        | 2 +-
+>  board/work-microwave/work_92105/MAINTAINERS          | 3 +--
+>  board/work-microwave/work_92105/Makefile             | 2 +-
+>  board/work-microwave/work_92105/work_92105.c         | 2 +-
+>  board/work-microwave/work_92105/work_92105_display.c | 2 +-
+>  board/work-microwave/work_92105/work_92105_display.h | 2 +-
+>  board/work-microwave/work_92105/work_92105_spl.c     | 2 +-
+>  cmd/dfu.c                                            | 2 +-
+>  cmd/gpt.c                                            | 2 +-
+>  common/dfu.c                                         | 2 +-
+>  doc/README.dfutftp                                   | 2 +-
+>  doc/git-mailrc                                       | 1 -
+>  drivers/dfu/dfu_alt.c                                | 2 +-
+>  drivers/gpio/lpc32xx_gpio.c                          | 2 +-
+>  drivers/i2c/lpc32xx_i2c.c                            | 2 +-
+>  drivers/mtd/nand/raw/lpc32xx_nand_mlc.c              | 2 +-
+>  drivers/serial/serial_mcf.c                          | 4 ++--
+>  drivers/spi/cf_spi.c                                 | 2 +-
+>  drivers/usb/host/ohci-hcd.c                          | 2 +-
+>  include/configs/amcore.h                             | 2 +-
+>  include/configs/bk4r1.h                              | 2 +-
+>  include/configs/embestmx6boards.h                    | 2 +-
+>  include/configs/stmark2.h                            | 2 +-
+>  include/configs/work_92105.h                         | 2 +-
+>  include/dm/platform_data/serial_coldfire.h           | 2 +-
+>  include/dm/platform_data/spi_coldfire.h              | 2 +-
+>  scripts/get_default_envs.sh                          | 2 +-
+>  tools/lpc32xximage.c                                 | 2 +-
+>  tools/vybridimage.c                                  | 2 +-
+>  86 files changed, 85 insertions(+), 93 deletions(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index e655790433ab..06369c6bb593 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1400,7 +1400,6 @@ S:	Maintained
+>  F:	drivers/net/phy/nxp-c45-tja11xx.c
+>  
+>  ONENAND
+> -#M:	Lukasz Majewski <l.majewski@majess.pl>
+>  S:	Orphan (Since 2017-01)
+>  T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-onenand.git
+>  F:	drivers/mtd/onenand/
+> diff --git a/arch/arm/dts/sun9i-a80-cx-a99.dts b/arch/arm/dts/sun9i-a80-cx-a99.dts
+> index cf126bbd2c57..0642161ec969 100644
+> --- a/arch/arm/dts/sun9i-a80-cx-a99.dts
+> +++ b/arch/arm/dts/sun9i-a80-cx-a99.dts
+> @@ -1,7 +1,7 @@
+>  /*
+>   * sun9i-a80-cx-a99.dts - Device Tree file for the Sunchip CX-A99 board.
+>   *
+> - * Copyright (C) 2017 Rask Ingemann Lambertsen <rask@formelder.dk>
+> + * Copyright (C) 2017 Rask Ingemann Lambertsen
+>   *
+>   * This file is dual-licensed: you can use it either under the terms
+>   * of the GPL or the X11 license, at your option. Note that this dual
+> diff --git a/arch/arm/include/asm/arch-lpc32xx/gpio.h b/arch/arm/include/asm/arch-lpc32xx/gpio.h
+> index 93e7a8875215..103c0219c194 100644
+> --- a/arch/arm/include/asm/arch-lpc32xx/gpio.h
+> +++ b/arch/arm/include/asm/arch-lpc32xx/gpio.h
+> @@ -3,7 +3,7 @@
+>   * LPC32xx GPIO interface
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  /**
+> diff --git a/arch/arm/include/asm/arch-lpc32xx/mux.h b/arch/arm/include/asm/arch-lpc32xx/mux.h
+> index d661e8236f32..ec69a5da2feb 100644
+> --- a/arch/arm/include/asm/arch-lpc32xx/mux.h
+> +++ b/arch/arm/include/asm/arch-lpc32xx/mux.h
+> @@ -3,7 +3,7 @@
+>   * LPC32xx MUX interface
+>   *
+>   * (C) Copyright 2015  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  /**
+> diff --git a/arch/arm/mach-lpc32xx/dram.c b/arch/arm/mach-lpc32xx/dram.c
+> index ab7c13512a5a..a311455cd4d7 100644
+> --- a/arch/arm/mach-lpc32xx/dram.c
+> +++ b/arch/arm/mach-lpc32xx/dram.c
+> @@ -3,7 +3,7 @@
+>   * LPC32xx dram init
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   *
+>   * This is called by SPL to gain access to the SDR DRAM.
+>   *
+> diff --git a/arch/arm/mach-lpc32xx/lowlevel_init.S b/arch/arm/mach-lpc32xx/lowlevel_init.S
+> index d42da2bc5672..55c47c5a433b 100644
+> --- a/arch/arm/mach-lpc32xx/lowlevel_init.S
+> +++ b/arch/arm/mach-lpc32xx/lowlevel_init.S
+> @@ -3,7 +3,7 @@
+>   * WORK Microwave work_92105 board low level init
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   *
+>   * Low level init is called from SPL to set up the clocks.
+>   * On entry, the LPC3250 is in Direct Run mode with all clocks
+> diff --git a/arch/m68k/cpu/mcf530x/Makefile b/arch/m68k/cpu/mcf530x/Makefile
+> index 6bd7cd3591dc..4e2f4b1e8409 100644
+> --- a/arch/m68k/cpu/mcf530x/Makefile
+> +++ b/arch/m68k/cpu/mcf530x/Makefile
+> @@ -1,6 +1,6 @@
+>  # SPDX-License-Identifier: GPL-2.0+
+>  #
+> -# (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> +# (C) Copyright 2014  Angelo Dureghello
+>  
+>  extra-y	= start.o
+>  obj-y	= interrupts.o cpu.o speed.o cpu_init.o
+> diff --git a/arch/m68k/cpu/mcf530x/cpu.c b/arch/m68k/cpu/mcf530x/cpu.c
+> index 92a0ef76895c..88ab9726ecd5 100644
+> --- a/arch/m68k/cpu/mcf530x/cpu.c
+> +++ b/arch/m68k/cpu/mcf530x/cpu.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2014  Angelo Dureghello
+>   *
+>   */
+>  
+> diff --git a/arch/m68k/cpu/mcf530x/cpu_init.c b/arch/m68k/cpu/mcf530x/cpu_init.c
+> index 8f6e668d103a..e0f8179815dd 100644
+> --- a/arch/m68k/cpu/mcf530x/cpu_init.c
+> +++ b/arch/m68k/cpu/mcf530x/cpu_init.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2014  Angelo Dureghello
+>   *
+>   */
+>  
+> diff --git a/arch/m68k/cpu/mcf530x/interrupts.c b/arch/m68k/cpu/mcf530x/interrupts.c
+> index 99cf86385037..27196fa0566e 100644
+> --- a/arch/m68k/cpu/mcf530x/interrupts.c
+> +++ b/arch/m68k/cpu/mcf530x/interrupts.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2014  Angelo Dureghello
+>   *
+>   */
+>  
+> diff --git a/arch/m68k/cpu/mcf530x/speed.c b/arch/m68k/cpu/mcf530x/speed.c
+> index 6542fc43ab10..afcc9d2d7f83 100644
+> --- a/arch/m68k/cpu/mcf530x/speed.c
+> +++ b/arch/m68k/cpu/mcf530x/speed.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2014  Angelo Dureghello
+>   *
+>   */
+>  
+> diff --git a/arch/m68k/cpu/mcf530x/start.S b/arch/m68k/cpu/mcf530x/start.S
+> index 552e0204b771..47cf3e7e08e2 100644
+> --- a/arch/m68k/cpu/mcf530x/start.S
+> +++ b/arch/m68k/cpu/mcf530x/start.S
+> @@ -1,6 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * (C) Copyright 2015  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2015  Angelo Dureghello
+>   * Based on code from Bernhard Kuhn <bkuhn@metrowerks.com>
+>   */
+>  
+> diff --git a/arch/m68k/cpu/mcf5445x/dspi.c b/arch/m68k/cpu/mcf5445x/dspi.c
+> index 13eb6ecee101..f45264e5d167 100644
+> --- a/arch/m68k/cpu/mcf5445x/dspi.c
+> +++ b/arch/m68k/cpu/mcf5445x/dspi.c
+> @@ -1,7 +1,7 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * (C) Copyright 2019
+> - * Angelo Dureghello <angleo@sysam.it>
+> + * Angelo Dureghello
+>   *
+>   * CPU specific dspi routines
+>   */
+> diff --git a/arch/m68k/cpu/u-boot.lds b/arch/m68k/cpu/u-boot.lds
+> index 452003ff43cb..5d1cae52afb9 100644
+> --- a/arch/m68k/cpu/u-boot.lds
+> +++ b/arch/m68k/cpu/u-boot.lds
+> @@ -3,7 +3,7 @@
+>   * (C) Copyright 2000
+>   * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>   * (C) Copyright 2015
+> - * Angelo Dureghello, Sysam Firmware, angelo@sysam.it
+> + * Angelo Dureghello, Sysam Firmware
+>   */
+>  
+>  #include <config.h>
+> diff --git a/arch/m68k/dts/M5208EVBE.dts b/arch/m68k/dts/M5208EVBE.dts
+> index ec203e8b698a..d27cacd29adc 100644
+> --- a/arch/m68k/dts/M5208EVBE.dts
+> +++ b/arch/m68k/dts/M5208EVBE.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5235EVB.dts b/arch/m68k/dts/M5235EVB.dts
+> index e8b22c921669..0194a864aef3 100644
+> --- a/arch/m68k/dts/M5235EVB.dts
+> +++ b/arch/m68k/dts/M5235EVB.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5235EVB_Flash32.dts b/arch/m68k/dts/M5235EVB_Flash32.dts
+> index 60b28c07f766..05dc9b08cfe9 100644
+> --- a/arch/m68k/dts/M5235EVB_Flash32.dts
+> +++ b/arch/m68k/dts/M5235EVB_Flash32.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5249EVB.dts b/arch/m68k/dts/M5249EVB.dts
+> index 84ba4f188b47..d26bc751eb5d 100644
+> --- a/arch/m68k/dts/M5249EVB.dts
+> +++ b/arch/m68k/dts/M5249EVB.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5253DEMO.dts b/arch/m68k/dts/M5253DEMO.dts
+> index a3f070661ea9..41d5d165af27 100644
+> --- a/arch/m68k/dts/M5253DEMO.dts
+> +++ b/arch/m68k/dts/M5253DEMO.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5272C3.dts b/arch/m68k/dts/M5272C3.dts
+> index a22893790720..189a61b795ae 100644
+> --- a/arch/m68k/dts/M5272C3.dts
+> +++ b/arch/m68k/dts/M5272C3.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5275EVB.dts b/arch/m68k/dts/M5275EVB.dts
+> index d79f8a788579..9cc3e23c062e 100644
+> --- a/arch/m68k/dts/M5275EVB.dts
+> +++ b/arch/m68k/dts/M5275EVB.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5282EVB.dts b/arch/m68k/dts/M5282EVB.dts
+> index 51788f9654ab..2e3656757b5e 100644
+> --- a/arch/m68k/dts/M5282EVB.dts
+> +++ b/arch/m68k/dts/M5282EVB.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M53017EVB.dts b/arch/m68k/dts/M53017EVB.dts
+> index 90851dd0af43..38d049268226 100644
+> --- a/arch/m68k/dts/M53017EVB.dts
+> +++ b/arch/m68k/dts/M53017EVB.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5329AFEE.dts b/arch/m68k/dts/M5329AFEE.dts
+> index c1cd2845a387..b441c56ec07d 100644
+> --- a/arch/m68k/dts/M5329AFEE.dts
+> +++ b/arch/m68k/dts/M5329AFEE.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5329BFEE.dts b/arch/m68k/dts/M5329BFEE.dts
+> index 51ec4b5d1aa9..eeb89dae1e4f 100644
+> --- a/arch/m68k/dts/M5329BFEE.dts
+> +++ b/arch/m68k/dts/M5329BFEE.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/M5373EVB.dts b/arch/m68k/dts/M5373EVB.dts
+> index 27ce800caeb2..101ddc77f7a1 100644
+> --- a/arch/m68k/dts/M5373EVB.dts
+> +++ b/arch/m68k/dts/M5373EVB.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/amcore.dts b/arch/m68k/dts/amcore.dts
+> index d43202a3ab4b..bfb7f5bbe064 100644
+> --- a/arch/m68k/dts/amcore.dts
+> +++ b/arch/m68k/dts/amcore.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/cobra5272.dts b/arch/m68k/dts/cobra5272.dts
+> index 2b5767d96d1d..cf1b91630560 100644
+> --- a/arch/m68k/dts/cobra5272.dts
+> +++ b/arch/m68k/dts/cobra5272.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/eb_cpu5282.dts b/arch/m68k/dts/eb_cpu5282.dts
+> index 27f33b9f9002..72059dcec426 100644
+> --- a/arch/m68k/dts/eb_cpu5282.dts
+> +++ b/arch/m68k/dts/eb_cpu5282.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/eb_cpu5282_internal.dts b/arch/m68k/dts/eb_cpu5282_internal.dts
+> index 53a94ea7f759..385b2d910105 100644
+> --- a/arch/m68k/dts/eb_cpu5282_internal.dts
+> +++ b/arch/m68k/dts/eb_cpu5282_internal.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/dts/mcf5208.dtsi b/arch/m68k/dts/mcf5208.dtsi
+> index c61dbf355701..3a465d842ca9 100644
+> --- a/arch/m68k/dts/mcf5208.dtsi
+> +++ b/arch/m68k/dts/mcf5208.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf523x.dtsi b/arch/m68k/dts/mcf523x.dtsi
+> index cae7b4f86166..fc7493951504 100644
+> --- a/arch/m68k/dts/mcf523x.dtsi
+> +++ b/arch/m68k/dts/mcf523x.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5249.dtsi b/arch/m68k/dts/mcf5249.dtsi
+> index d45d5532cafa..1900c99de210 100644
+> --- a/arch/m68k/dts/mcf5249.dtsi
+> +++ b/arch/m68k/dts/mcf5249.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5253.dtsi b/arch/m68k/dts/mcf5253.dtsi
+> index b9816f4754be..9df57f9562ed 100644
+> --- a/arch/m68k/dts/mcf5253.dtsi
+> +++ b/arch/m68k/dts/mcf5253.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5271.dtsi b/arch/m68k/dts/mcf5271.dtsi
+> index 5acf6994af36..c9d4ab244cd2 100644
+> --- a/arch/m68k/dts/mcf5271.dtsi
+> +++ b/arch/m68k/dts/mcf5271.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5272.dtsi b/arch/m68k/dts/mcf5272.dtsi
+> index 173baaba3f2b..bba88c43c47b 100644
+> --- a/arch/m68k/dts/mcf5272.dtsi
+> +++ b/arch/m68k/dts/mcf5272.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5275.dtsi b/arch/m68k/dts/mcf5275.dtsi
+> index 3df17b445c4d..4d19db6f75b2 100644
+> --- a/arch/m68k/dts/mcf5275.dtsi
+> +++ b/arch/m68k/dts/mcf5275.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2019 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2019 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5282.dtsi b/arch/m68k/dts/mcf5282.dtsi
+> index 640c1a32e41b..409d796b301e 100644
+> --- a/arch/m68k/dts/mcf5282.dtsi
+> +++ b/arch/m68k/dts/mcf5282.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5301x.dtsi b/arch/m68k/dts/mcf5301x.dtsi
+> index a13afad093ad..f9d7e5ee73a0 100644
+> --- a/arch/m68k/dts/mcf5301x.dtsi
+> +++ b/arch/m68k/dts/mcf5301x.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5307.dtsi b/arch/m68k/dts/mcf5307.dtsi
+> index d6d386b22e13..117eb4f60783 100644
+> --- a/arch/m68k/dts/mcf5307.dtsi
+> +++ b/arch/m68k/dts/mcf5307.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5329.dtsi b/arch/m68k/dts/mcf5329.dtsi
+> index 991985e48cf8..36d35ed5b46d 100644
+> --- a/arch/m68k/dts/mcf5329.dtsi
+> +++ b/arch/m68k/dts/mcf5329.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf537x.dtsi b/arch/m68k/dts/mcf537x.dtsi
+> index 4fa0f4bc3dad..f6bc0debf470 100644
+> --- a/arch/m68k/dts/mcf537x.dtsi
+> +++ b/arch/m68k/dts/mcf537x.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf5441x.dtsi b/arch/m68k/dts/mcf5441x.dtsi
+> index 7cd6072d4a5d..c0aa16939800 100644
+> --- a/arch/m68k/dts/mcf5441x.dtsi
+> +++ b/arch/m68k/dts/mcf5441x.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/mcf54xx.dtsi b/arch/m68k/dts/mcf54xx.dtsi
+> index e9cebb9f742b..f2f5f8531293 100644
+> --- a/arch/m68k/dts/mcf54xx.dtsi
+> +++ b/arch/m68k/dts/mcf54xx.dtsi
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  / {
+> diff --git a/arch/m68k/dts/stmark2.dts b/arch/m68k/dts/stmark2.dts
+> index 8e196fa65ffb..405c1357b377 100644
+> --- a/arch/m68k/dts/stmark2.dts
+> +++ b/arch/m68k/dts/stmark2.dts
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   */
+>  
+>  /dts-v1/;
+> diff --git a/arch/m68k/include/asm/immap_5307.h b/arch/m68k/include/asm/immap_5307.h
+> index d96dd146efb0..8b9cb3aee0d1 100644
+> --- a/arch/m68k/include/asm/immap_5307.h
+> +++ b/arch/m68k/include/asm/immap_5307.h
+> @@ -1,6 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2014  Angelo Dureghello
+>   *
+>   */
+>  
+> diff --git a/arch/m68k/include/asm/m5307.h b/arch/m68k/include/asm/m5307.h
+> index 67547d2dd9d9..b7ca681ec3ec 100644
+> --- a/arch/m68k/include/asm/m5307.h
+> +++ b/arch/m68k/include/asm/m5307.h
+> @@ -1,6 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2014  Angelo Dureghello
+>   *
+>   */
+>  
+> diff --git a/board/embest/mx6boards/MAINTAINERS b/board/embest/mx6boards/MAINTAINERS
+> index 0ffd4668b42d..6c9d590c4b77 100644
+> --- a/board/embest/mx6boards/MAINTAINERS
+> +++ b/board/embest/mx6boards/MAINTAINERS
+> @@ -1,6 +1,5 @@
+>  MX6BOARDS BOARD
+> -M:	Eric Bénard <eric@eukrea.com>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	board/embest/mx6boards/
+>  F:	include/configs/embestmx6boards.h
+>  F:	configs/marsboard_defconfig
+> diff --git a/board/embest/mx6boards/mx6boards.c b/board/embest/mx6boards/mx6boards.c
+> index 5ed41d01d9ba..0269259269e5 100644
+> --- a/board/embest/mx6boards/mx6boards.c
+> +++ b/board/embest/mx6boards/mx6boards.c
+> @@ -1,7 +1,7 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * Copyright (C) 2014 Eukréa Electromatique
+> - * Author: Eric Bénard <eric@eukrea.com>
+> + * Author: Eric Bénard
+>   *         Fabio Estevam <fabio.estevam@freescale.com>
+>   *         Jon Nettleton <jon.nettleton@gmail.com>
+>   *
+> diff --git a/board/phytec/pcm052/MAINTAINERS b/board/phytec/pcm052/MAINTAINERS
+> index 66fe06e49c0b..4883e2ff4d6e 100644
+> --- a/board/phytec/pcm052/MAINTAINERS
+> +++ b/board/phytec/pcm052/MAINTAINERS
+> @@ -1,6 +1,5 @@
+>  PCM052 BOARD
+> -M:	Albert ARIBAUD (3ADEV) <albert.aribaud@3adev.fr>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	board/phytec/pcm052/
+>  F:	include/configs/bk4r1.h
+>  F:	include/configs/pcm052.h
+> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
+> index 91ca165fab97..bce412c5f389 100644
+> --- a/board/sunxi/MAINTAINERS
+> +++ b/board/sunxi/MAINTAINERS
+> @@ -570,8 +570,7 @@ S:	Maintained
+>  F:	configs/sopine_baseboard_defconfig
+>  
+>  SUNCHIP CX-A99 BOARD
+> -M:	Rask Ingemann Lambertsen <rask@formelder.dk>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	configs/Sunchip_CX-A99_defconfig
+>  W:	https://linux-sunxi.org/Sunchip_CX-A99
+>  
+> diff --git a/board/sysam/amcore/MAINTAINERS b/board/sysam/amcore/MAINTAINERS
+> index fe5dd9bf39c7..86ef47080767 100644
+> --- a/board/sysam/amcore/MAINTAINERS
+> +++ b/board/sysam/amcore/MAINTAINERS
+> @@ -1,6 +1,5 @@
+>  AMCORE BOARD
+> -M:	Angelo Dureghello <angelo@sysam.it>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	board/sysam/amcore/
+>  F:	include/configs/amcore.h
+>  F:      configs/amcore_defconfig
+> diff --git a/board/sysam/amcore/Makefile b/board/sysam/amcore/Makefile
+> index 051186f0d5cb..29b9bab12aad 100644
+> --- a/board/sysam/amcore/Makefile
+> +++ b/board/sysam/amcore/Makefile
+> @@ -1,5 +1,5 @@
+>  #
+> -# (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> +# (C) Copyright 2014  Angelo Dureghello
+>  #
+>  # SPDX-License-Identifier:     GPL-2.0+
+>  #
+> diff --git a/board/sysam/amcore/amcore.c b/board/sysam/amcore/amcore.c
+> index d5aa1f0776fd..6800a22ab136 100644
+> --- a/board/sysam/amcore/amcore.c
+> +++ b/board/sysam/amcore/amcore.c
+> @@ -2,7 +2,7 @@
+>  /*
+>   * Board functions for Sysam AMCORE (MCF5307 based) board
+>   *
+> - * (C) Copyright 2016  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2016  Angelo Dureghello
+>   *
+>   * This file copies memory testdram() from sandburst/common/sb_common.c
+>   */
+> diff --git a/board/sysam/stmark2/MAINTAINERS b/board/sysam/stmark2/MAINTAINERS
+> index b87f432bb3f2..afe6d171c5f1 100644
+> --- a/board/sysam/stmark2/MAINTAINERS
+> +++ b/board/sysam/stmark2/MAINTAINERS
+> @@ -1,6 +1,5 @@
+>  STMARK2 BOARD
+> -M:	Angelo Dureghello <angelo@sysam.it>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	board/sysam/stmark2/
+>  F:	include/configs/stmark2.h
+>  F:	configs/stmark2_defconfig
+> diff --git a/board/sysam/stmark2/Makefile b/board/sysam/stmark2/Makefile
+> index 064a57ea05ec..19e4aa266fa4 100644
+> --- a/board/sysam/stmark2/Makefile
+> +++ b/board/sysam/stmark2/Makefile
+> @@ -1,5 +1,5 @@
+>  #
+> -# (C) Copyright 2014  Angelo Dureghello <angelo@sysam.it>
+> +# (C) Copyright 2014  Angelo Dureghello
+>  #
+>  # SPDX-License-Identifier:     GPL-2.0+
+>  #
+> diff --git a/board/sysam/stmark2/sbf_dram_init.S b/board/sysam/stmark2/sbf_dram_init.S
+> index b6f38731f11e..8334e2e3b1d0 100644
+> --- a/board/sysam/stmark2/sbf_dram_init.S
+> +++ b/board/sysam/stmark2/sbf_dram_init.S
+> @@ -2,7 +2,7 @@
+>  /*
+>   * Board-specific early ddr/sdram init.
+>   *
+> - * (C) Copyright 2017 Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2017 Angelo Dureghello
+>   */
+>  
+>  .equ	PPMCR0,		0xfc04002d
+> diff --git a/board/sysam/stmark2/stmark2.c b/board/sysam/stmark2/stmark2.c
+> index 7818f2671d5a..b85907868547 100644
+> --- a/board/sysam/stmark2/stmark2.c
+> +++ b/board/sysam/stmark2/stmark2.c
+> @@ -2,7 +2,7 @@
+>  /*
+>   * Board-specific init.
+>   *
+> - * (C) Copyright 2017 Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2017 Angelo Dureghello
+>   */
+>  
+>  #include <config.h>
+> diff --git a/board/work-microwave/work_92105/MAINTAINERS b/board/work-microwave/work_92105/MAINTAINERS
+> index 29a92c5ffe26..e81a90cb7be9 100644
+> --- a/board/work-microwave/work_92105/MAINTAINERS
+> +++ b/board/work-microwave/work_92105/MAINTAINERS
+> @@ -1,6 +1,5 @@
+>  WORK_92105 BOARD
+> -M:	Albert ARIBAUD <albert.aribaud@3adev.fr>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	board/work-microwave/work_92105/
+>  F:	include/configs/work_92105.h
+>  F:	configs/work_92105_defconfig
+> diff --git a/board/work-microwave/work_92105/Makefile b/board/work-microwave/work_92105/Makefile
+> index a96098d0f2a5..e63901a0c2b1 100644
+> --- a/board/work-microwave/work_92105/Makefile
+> +++ b/board/work-microwave/work_92105/Makefile
+> @@ -1,7 +1,7 @@
+>  # SPDX-License-Identifier: GPL-2.0+
+>  #
+>  # (C) Copyright 2014  DENX Software Engineering GmbH
+> -# Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> +# Written-by: Albert ARIBAUD
+>  
+>  ifdef CONFIG_XPL_BUILD
+>  obj-y	+= work_92105_spl.o
+> diff --git a/board/work-microwave/work_92105/work_92105.c b/board/work-microwave/work_92105/work_92105.c
+> index 9a236880e3cc..641c1cd0e6fa 100644
+> --- a/board/work-microwave/work_92105/work_92105.c
+> +++ b/board/work-microwave/work_92105/work_92105.c
+> @@ -3,7 +3,7 @@
+>   * WORK Microwave work_92105 board support
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  #include <config.h>
+> diff --git a/board/work-microwave/work_92105/work_92105_display.c b/board/work-microwave/work_92105/work_92105_display.c
+> index d4ab2299895d..0cc4272e8841 100644
+> --- a/board/work-microwave/work_92105/work_92105_display.c
+> +++ b/board/work-microwave/work_92105/work_92105_display.c
+> @@ -3,7 +3,7 @@
+>   * work_92105 display support
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   *
+>   * The work_92105 display is a HD44780-compatible module
+>   * controlled through a MAX6957AAX SPI port expander, two
+> diff --git a/board/work-microwave/work_92105/work_92105_display.h b/board/work-microwave/work_92105/work_92105_display.h
+> index 17a9aa04e022..be67d929c750 100644
+> --- a/board/work-microwave/work_92105/work_92105_display.h
+> +++ b/board/work-microwave/work_92105/work_92105_display.h
+> @@ -3,7 +3,7 @@
+>   * work_92105 display support interface
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   *
+>   * The work_92105 display is a HD44780-compatible module
+>   * controlled through a MAX6957AAX SPI port expander, two
+> diff --git a/board/work-microwave/work_92105/work_92105_spl.c b/board/work-microwave/work_92105/work_92105_spl.c
+> index 3f91221ce8b1..bc841e979b18 100644
+> --- a/board/work-microwave/work_92105/work_92105_spl.c
+> +++ b/board/work-microwave/work_92105/work_92105_spl.c
+> @@ -3,7 +3,7 @@
+>   * WORK Microwave work_92105 board support
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  #include <asm/io.h>
+> diff --git a/cmd/dfu.c b/cmd/dfu.c
+> index 46f0190588e0..b571137c1aa9 100644
+> --- a/cmd/dfu.c
+> +++ b/cmd/dfu.c
+> @@ -3,7 +3,7 @@
+>   * cmd_dfu.c -- dfu command
+>   *
+>   * Copyright (C) 2015
+> - * Lukasz Majewski <l.majewski@majess.pl>
+> + * Lukasz Majewski
+>   *
+>   * Copyright (C) 2012 Samsung Electronics
+>   * authors: Andrzej Pietrasiewicz <andrzej.p@samsung.com>
+> diff --git a/cmd/gpt.c b/cmd/gpt.c
+> index 205f696c8072..abbfc0fe46ae 100644
+> --- a/cmd/gpt.c
+> +++ b/cmd/gpt.c
+> @@ -3,7 +3,7 @@
+>   * cmd_gpt.c -- GPT (GUID Partition Table) handling command
+>   *
+>   * Copyright (C) 2015
+> - * Lukasz Majewski <l.majewski@majess.pl>
+> + * Lukasz Majewski
+>   *
+>   * Copyright (C) 2012 Samsung Electronics
+>   * author: Lukasz Majewski <l.majewski@samsung.com>
+> diff --git a/common/dfu.c b/common/dfu.c
+> index 1af8194139c3..341fd7ca7812 100644
+> --- a/common/dfu.c
+> +++ b/common/dfu.c
+> @@ -3,7 +3,7 @@
+>   * dfu.c -- dfu command
+>   *
+>   * Copyright (C) 2015
+> - * Lukasz Majewski <l.majewski@majess.pl>
+> + * Lukasz Majewski
+>   *
+>   * Copyright (C) 2012 Samsung Electronics
+>   * authors: Andrzej Pietrasiewicz <andrzej.p@samsung.com>
+> diff --git a/doc/README.dfutftp b/doc/README.dfutftp
+> index b25f398ee2e0..184dec50f975 100644
+> --- a/doc/README.dfutftp
+> +++ b/doc/README.dfutftp
+> @@ -2,7 +2,7 @@
+>  #
+>  #  Copyright (C) 2015
+>  #
+> -#  Lukasz Majewski <l.majewski@majess.pl>
+> +#  Lukasz Majewski
+>  
+>  Device Firmware Upgrade (DFU) - extension to use TFTP
+>  =====================================================
+> diff --git a/doc/git-mailrc b/doc/git-mailrc
+> index 62d457e6bb35..dc230ee78d5d 100644
+> --- a/doc/git-mailrc
+> +++ b/doc/git-mailrc
+> @@ -17,7 +17,6 @@ alias ag             Anatolij Gustschin <ag.dev.uboot@gmail.com>
+>  alias agraf          Alexander Graf <agraf@csgraf.de>
+>  alias alexnemirovsky Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
+>  alias alisonwang     Alison Wang <alison.wang@nxp.com>
+> -alias angelo_ts      Angelo Dureghello <angelo@sysam.it>
+>  alias apritzel       Andre Przywara <andre.przywara@arm.com>
+>  alias bmeng          Bin Meng <bmeng.cn@gmail.com>
+>  alias danielschwierzeck Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+> diff --git a/drivers/dfu/dfu_alt.c b/drivers/dfu/dfu_alt.c
+> index e9132936a90b..8d2e85856e5d 100644
+> --- a/drivers/dfu/dfu_alt.c
+> +++ b/drivers/dfu/dfu_alt.c
+> @@ -1,7 +1,7 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * (C) Copyright 2015
+> - * Lukasz Majewski <l.majewski@majess.pl>
+> + * Lukasz Majewski
+>   */
+>  
+>  #include <log.h>
+> diff --git a/drivers/gpio/lpc32xx_gpio.c b/drivers/gpio/lpc32xx_gpio.c
+> index 2b537e007ba9..9c35f45d5487 100644
+> --- a/drivers/gpio/lpc32xx_gpio.c
+> +++ b/drivers/gpio/lpc32xx_gpio.c
+> @@ -3,7 +3,7 @@
+>   * LPC32xxGPIO driver
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  #include <asm/io.h>
+> diff --git a/drivers/i2c/lpc32xx_i2c.c b/drivers/i2c/lpc32xx_i2c.c
+> index a4e42e64a9b8..31fdea7c4054 100644
+> --- a/drivers/i2c/lpc32xx_i2c.c
+> +++ b/drivers/i2c/lpc32xx_i2c.c
+> @@ -3,7 +3,7 @@
+>   * LPC32xx I2C interface driver
+>   *
+>   * (C) Copyright 2014-2015  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD - 3ADEV <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD - 3ADEV
+>   */
+>  
+>  #include <config.h>
+> diff --git a/drivers/mtd/nand/raw/lpc32xx_nand_mlc.c b/drivers/mtd/nand/raw/lpc32xx_nand_mlc.c
+> index 7779e63fa5d1..d9b05aa42fbc 100644
+> --- a/drivers/mtd/nand/raw/lpc32xx_nand_mlc.c
+> +++ b/drivers/mtd/nand/raw/lpc32xx_nand_mlc.c
+> @@ -3,7 +3,7 @@
+>   * LPC32xx MLC NAND flash controller driver
+>   *
+>   * (C) Copyright 2014 3ADEV <http://3adev.com>
+> - * Written by Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written by Albert ARIBAUD
+>   *
+>   * NOTE:
+>   *
+> diff --git a/drivers/serial/serial_mcf.c b/drivers/serial/serial_mcf.c
+> index 76143575fa98..94de25fde1e3 100644
+> --- a/drivers/serial/serial_mcf.c
+> +++ b/drivers/serial/serial_mcf.c
+> @@ -4,10 +4,10 @@
+>   * TsiChung Liew, Tsi-Chung.Liew@freescale.com.
+>   *
+>   * Modified to add device model (DM) support
+> - * (C) Copyright 2015  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2015  Angelo Dureghello
+>   *
+>   * Modified to add DM and fdt support, removed non DM code
+> - * (C) Copyright 2018  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2018  Angelo Dureghello
+>   */
+>  
+>  /*
+> diff --git a/drivers/spi/cf_spi.c b/drivers/spi/cf_spi.c
+> index 84077c01d836..03100c0715b8 100644
+> --- a/drivers/spi/cf_spi.c
+> +++ b/drivers/spi/cf_spi.c
+> @@ -8,7 +8,7 @@
+>   * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
+>   *
+>   * Support for DM and DT, non-DM code removed.
+> - * Copyright (C) 2018 Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (C) 2018 Angelo Dureghello
+>   *
+>   * TODO: fsl_dspi.c should work as a driver for the DSPI module.
+>   */
+> diff --git a/drivers/usb/host/ohci-hcd.c b/drivers/usb/host/ohci-hcd.c
+> index 3fcf9d53d598..761da36acb23 100644
+> --- a/drivers/usb/host/ohci-hcd.c
+> +++ b/drivers/usb/host/ohci-hcd.c
+> @@ -16,7 +16,7 @@
+>   * (C) Copyright 2000-2002 David Brownell
+>   *
+>   * Modified for the MP2USB by (C) Copyright 2005 Eric Benard
+> - * ebenard@eukrea.com - based on s3c24x0's driver
+> + * based on s3c24x0's driver
+>   */
+>  /*
+>   * IMPORTANT NOTES
+> diff --git a/include/configs/amcore.h b/include/configs/amcore.h
+> index 4c695fb9df99..4d7ed9a48b13 100644
+> --- a/include/configs/amcore.h
+> +++ b/include/configs/amcore.h
+> @@ -2,7 +2,7 @@
+>  /*
+>   * Sysam AMCORE board configuration
+>   *
+> - * (C) Copyright 2016  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2016  Angelo Dureghello
+>   */
+>  
+>  #ifndef __AMCORE_CONFIG_H
+> diff --git a/include/configs/bk4r1.h b/include/configs/bk4r1.h
+> index 4a0b9edf4579..ba81c04eee55 100644
+> --- a/include/configs/bk4r1.h
+> +++ b/include/configs/bk4r1.h
+> @@ -4,7 +4,7 @@
+>   * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
+>   *
+>   * Copyright 2016 3ADEV <http://3adev.com>
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   *
+>   * Configuration settings for BK4R1.
+>   */
+> diff --git a/include/configs/embestmx6boards.h b/include/configs/embestmx6boards.h
+> index 61c0d755a8d9..1d398a4e4a02 100644
+> --- a/include/configs/embestmx6boards.h
+> +++ b/include/configs/embestmx6boards.h
+> @@ -1,7 +1,7 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+>   * Copyright (C) 2014 Eukréa Electromatique
+> - * Author: Eric Bénard <eric@eukrea.com>
+> + * Author: Eric Bénard
+>   *
+>   * Configuration settings for the Embest RIoTboard
+>   *
+> diff --git a/include/configs/stmark2.h b/include/configs/stmark2.h
+> index c10963983590..98b4b8c2f6ab 100644
+> --- a/include/configs/stmark2.h
+> +++ b/include/configs/stmark2.h
+> @@ -2,7 +2,7 @@
+>  /*
+>   * Sysam stmark2 board configuration
+>   *
+> - * (C) Copyright 2017  Angelo Dureghello <angelo@sysam.it>
+> + * (C) Copyright 2017  Angelo Dureghello
+>   */
+>  
+>  #ifndef __STMARK2_CONFIG_H
+> diff --git a/include/configs/work_92105.h b/include/configs/work_92105.h
+> index f1a7853a80e6..6c4f57f61b5c 100644
+> --- a/include/configs/work_92105.h
+> +++ b/include/configs/work_92105.h
+> @@ -3,7 +3,7 @@
+>   * WORK Microwave work_92105 board configuration file
+>   *
+>   * (C) Copyright 2014  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  #ifndef __CONFIG_WORK_92105_H__
+> diff --git a/include/dm/platform_data/serial_coldfire.h b/include/dm/platform_data/serial_coldfire.h
+> index 5e265e9087d9..ff8afe82dd66 100644
+> --- a/include/dm/platform_data/serial_coldfire.h
+> +++ b/include/dm/platform_data/serial_coldfire.h
+> @@ -1,6 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * Copyright (c) 2015  Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (c) 2015  Angelo Dureghello
+>   */
+>  
+>  #ifndef __serial_coldfire_h
+> diff --git a/include/dm/platform_data/spi_coldfire.h b/include/dm/platform_data/spi_coldfire.h
+> index 0d534b1d6654..152e144419b4 100644
+> --- a/include/dm/platform_data/spi_coldfire.h
+> +++ b/include/dm/platform_data/spi_coldfire.h
+> @@ -1,6 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * Copyright (c) 2018  Angelo Dureghello <angelo@sysam.it>
+> + * Copyright (c) 2018  Angelo Dureghello
+>   */
+>  
+>  #ifndef __spi_coldfire_h
+> diff --git a/scripts/get_default_envs.sh b/scripts/get_default_envs.sh
+> index fedf7206fe12..b2432bb88d28 100755
+> --- a/scripts/get_default_envs.sh
+> +++ b/scripts/get_default_envs.sh
+> @@ -1,7 +1,7 @@
+>  #! /bin/bash
+>  # SPDX-License-Identifier: GPL-2.0+
+>  #
+> -# Copyright (C) 2016, Lukasz Majewski <l.majewski@majess.pl>
+> +# Copyright (C) 2016, Lukasz Majewski
+>  #
+>  
+>  # This file extracts default envs from built u-boot
+> diff --git a/tools/lpc32xximage.c b/tools/lpc32xximage.c
+> index 715a55a5b5b3..52e96bb3df42 100644
+> --- a/tools/lpc32xximage.c
+> +++ b/tools/lpc32xximage.c
+> @@ -3,7 +3,7 @@
+>   * Image manipulator for LPC32XX SoCs
+>   *
+>   * (C) Copyright 2015  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   *
+>   * Derived from omapimage.c:
+>   *
+> diff --git a/tools/vybridimage.c b/tools/vybridimage.c
+> index c38886fa9039..7177e78d74c2 100644
+> --- a/tools/vybridimage.c
+> +++ b/tools/vybridimage.c
+> @@ -5,7 +5,7 @@
+>   * Derived from vybridimage.c
+>   *
+>   * (C) Copyright 2016  DENX Software Engineering GmbH
+> - * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+> + * Written-by: Albert ARIBAUD
+>   */
+>  
+>  #include "imagetool.h"
+> ---
+> base-commit: c8c1345985d4b1a566e1297b62cf6159d0803a68
+> branch: xnext/maintainers-all
+> 
 
-Thanks,
-Michal
-
+-- Angelo
 
