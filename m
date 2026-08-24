@@ -1,139 +1,170 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53619C5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 107DBC5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:54:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 01F3480B95;
-	Mon, 24 Aug 2026 14:49:54 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6pCDch6IlfEs; Mon, 24 Aug 2026 14:49:53 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787582993;
-	bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Y9yDDpf9brB1axbpfYkCnRDehdFpUOaBDQeX3kmSarfyhljACobYl0qvMG8JldraE
-	 UXeUd1GQ+7fAFnR69YDal6a92caF4QjfVjXWuHn2KcxqkJykte3mcSB05rD0BBfbcQ
-	 3G3R31NmS+SFhKNzrSzFpOb2hTWPz3p/qPeiE2DSZQ0RRZXMLiLkJcfcLoVOv9sR1Z
-	 omTMJ8n0S/WeyMJulwlqURMcVbHa3MQuEcfP+gKvMWBB0PegWu3C6tWcfXABE1DZ2o
-	 tQHXqYIYHBaIO1DbGWcwYJ78jDpT+UqyIMiVkBecuOIvVHrbHbhj8duX9i2EYoZDBy
-	 BsFmUGHlpiydw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3870380B42;
-	Mon, 24 Aug 2026 14:49:53 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 22F5741A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:49:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1521D4060C
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:49:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9B330404EE;
+	Mon, 24 Aug 2026 14:54:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gW2T2P2YgKdL for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 14:49:51 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
- envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.tenstorrent.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com
- header.a=rsa-sha256 header.s=google header.b=f4crgqN3
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 762D14060B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:49:49 +0000 (UTC)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-836cde02992so43163037b3.2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:49:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787582988; cv=none;
- d=google.com; s=arc-20260327;
- b=NPkSMXBIQdQvWoCywlt3dtw93VjbsMmgt5XlsBLO30R6aUlROyj0EDMj4h/VUPSCPk
- veSjVp15kLXfngs5nsUuL2/wObA1RFwXu6WrDQXBBBHq0TMw5roQm4cat/dbrqDpHSBh
- 6Xout2h4/IKzjh30wChsqogqSY6HSgIQgY0XY30zlx1Y3Yib9mR8Ebi+RQ5J99k4q1RI
- fJIy6yS2U7AMoQ68pc4En1YWmMPFAZqzP88ENH4NL3eBE8XO2npebXso99U4pdLXZRJK
- RMPaTBJ5c311DEZsrXshfVATkwOpB+AgYijSOPj3fIZqx/CLABn3PfbMTTQveJxqMDcx
- w3vQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
- fh=sYJfyN46Z0IrGku28hCCDJhxumBrnLvm6PyQ6TpnZDo=;
- b=QPpBs+sIf/hW+UWRzv3cFfQInjGMFginaMuH+x2ZPC9Hf44l7E8yy8E3d5WGA6Czrc
- eqQX3wM3S0gusfgRRBxEobjAwweppMayB77daEWV3c8WB3sNzNEco51mdEoJPaiffbIl
- mQfgpqVY1hFv8x/TsQexHyUStZGDs9bhKrorqhJyDdKCFzQH+d95xumyUjtw+j0UyWMd
- ZoX4GOWUSTMfWVwb9QNaUXMLBmAp4LcF27asNYdaG7YiTjpmEyKonW3rWkLuPLIAtJv5
- XAFhxQiqbX92mpKUJ/iGJWkHYxW0JHkPSuwe/xxp9FKcW4JslaOS1C2/pPGOPRBDe19k
- GRig==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id Rbq0VA1gQNqp; Mon, 24 Aug 2026 14:54:12 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1787582988; x=1788187788;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
- b=f4crgqN3WyFQf/woLG3wAi6XtbcIBamszR3CZDBJZzSdqvw1WOMWATHmNoi1itf4Iz
- 4A2HEFf6TRHO1H61+tgWOw+MoJcgd21Hb8JUTZgQCU+IlKCOVhoFlFUt3Qo7IG82V4jH
- wv5PMqgBXnH/mGYCg+7idqKUEU3kCepHe88Ds3UEXKpb1FLNp15I6PBnHOryvI1HznaK
- QO/VJd7mBWkazUbxuwUd06aSmwDlgf/QLvuui0/gm1e9iNtkqEQVvycj2ktbQ50yuqzu
- vp/yfbDlFG7uztBlBdz1VVZOfJ6r6ZTJWy5cjJ7fzSq9ag0IOTlVjZEyfWxST3T4N68I
- 0gjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787582988; x=1788187788;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
- b=aipxNYOjf62xDVjbhw+DL9UUCjD7kulEUV/e6emgyuf2yuF4MIaPswaGjw7NcmJoB9
- 6gSHFbToL+O/HmfKhCNwlu2EcEBtmpTx1noKc/fRtDVWpxsj5v3gNCUgTebiAL56N6Z4
- LXwmfDaUuF+H72n802i8CVqSR7dEj0KicMmQ51oGOg+Zc7yDiwtXQdFxGyPiiWsMlVZN
- tQ+KkqJ/T6AJlNQ6TuY/e6FWjRTzTerUL1YoEzUwKpOYi9mUPMukw70sNmOcvLTpwJgM
- v0eZ00R0mZQffcRJVkLnWNWvnZKJ0sWkos6/RZNdsQufuOSstzNOmzToRRNwodenZ1f1
- lLhA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqX20QP/kk50Tsvo+4Zjdn/4igDien9K/+A7jhvMFnRJ5e5EY/1k5mXUtrioCpUThnRUq69Q1Q=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kVdyR+Y5ION0PyZDpc9Y/PN/w7rZpGhCkjMrBovTxOuIbCqwCp
- I0yZVdQOx0rPpUmNY7KHfw1QFRwtkMi3L+h76Dz9zZbxJrsq6ujpk4FoNJjwywz3uMRglF7Gznz
- yFO0qC4kKMOCPbi32yinHf7Yui0Au/YuiUl6xUvFQ7w==
-X-Gm-Gg: AR+sD13owFcVqkZu8dmbsPaxsIL4pkmORXbBfVHgjqyuIh7nH/VXo4XQQhCr62+1yT9
- XiSbTZ3psIR3eVDoB91NKdNr09VGlTV4ts99a6HaTLHIzQLg0rANhXD57BCev5J1eCp2tdduXmc
- xNYe/ORMxcAYx31USt1sub8/d0Cq4p0mYwPUs/5X2lKTsm+Oh6Y2Gc+C1GyyAoS9KJUPrh14iYi
- 2NM0Sc7K/LpCGjAqUMUFzi3SUrZw93BDZgsY++eI9CSH7iMXI6kwh6dBv1xMsSh740U+cI36vn5
- HmvWuWwe95uWZuWAWt0b0umEtlmPWxUAfTcvTffI0o+P60DeJGe9lh9GoZu4YewzYielOPE3ygf
- r
-X-Received: by 2002:a05:690c:9989:b0:81e:c436:c530 with SMTP id
- 00721157ae682-849f3dc401dmr111984447b3.14.1787582988317; Mon, 24 Aug 2026
- 07:49:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260803-spi_fixes-v1-0-33f36e764104@oss.tenstorrent.com>
- <20260803-spi_fixes-v1-2-33f36e764104@oss.tenstorrent.com>
-In-Reply-To: <20260803-spi_fixes-v1-2-33f36e764104@oss.tenstorrent.com>
-From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Mon, 24 Aug 2026 09:49:35 -0500
-X-Gm-Features: AcwNN1XR3THiIWzn2-nqItNU-HhqJpKpT9wFvA7eat7DEOTMoW_nXxTZz3gg7Qk
-Message-ID: <CAEev2e8_B3EH0A0KuPK5L2b28GDJt6cyRZpuFAZeOM0o9t0bww@mail.gmail.com>
-Subject: Re: [PATCH 2/2] spi: dw: Add supports_op function to reject
- unsupported transfer modes
-To: Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+	d=lists.u-boot-project.org; s=default; t=1787583252;
+	bh=vIhAPThQPpAM0eK1sdDxF3nMWaB729WJpRYt53G/jM0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=maa8A4EvmlF4K4EQseuSiupplo2xHua7rkub2nzQ0DIBo9Q/mymyZmLs8SLcNwBcb
+	 jd+TMfhlu1jxLyxpR3K3AS5yvmd0gs37PC1tWWt95nyjEMXk14ZFAmTlNM+jfV86fe
+	 IxakEV/38NkcLBO4/0F5urNAiivRgAr2pgUj3M0+WZ+dOY/YlJnGf95cAvA6Iqe0EV
+	 IjU0HIXKyZ17Upk3A28Vc9qNbS2mzk2pank2vO2pqydKIbkz/6qaah8QJ/mFg6rvAT
+	 lL+3J6CAH7IKFkvY2zj72o6N1HijOztRKjOI1is8GgbXH46S307TPhyNkx/SlAnZ1H
+	 Bt1vAJ+ZHveTQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id C164D404EF;
+	Mon, 24 Aug 2026 14:54:12 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CC420396
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:54:11 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id C9EAE60624
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:54:11 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h3tLYzrRe0kw for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 14:54:11 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c201::3;
+ helo=as8pr04cu009.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=KtvJVyjZ
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C845C60608
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:54:10 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Qzp059yIBr+M4HPhK9dU5+233M213Kd0RBFKXAKCWqVjPdVpkzQNCYMWh2UdqIuB0l9Kpb79rCowgEXz4BSxHxnA5lu2O29NmizRnXpXQqiEjtPJ1zk4h08YaKt9sUHpPiIaVzGWGkH3JJNjYF9ORww2BXCGDfBPMZXTG2/RMVx2Za7SM+jNA1xwGkthqnmBwrFEuuXrtRSzlrFZSoCpRdOY+QDzKn+RZDW8PxX+zEDxPO+WCwPnMzJY1KVPWZK6n2wwOrt5L+6L5OlQ/KAK6242IezxKrGFEcK8v13jyPW/DEmRTDGJbJn8V9o8z3U/Rn7U/FImzY7uSdSFlUQFaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vIhAPThQPpAM0eK1sdDxF3nMWaB729WJpRYt53G/jM0=;
+ b=ds137XtFgWhA2paJKZCEZqaQPtFZK/RlW/oBrp8ApbOPlsbWLkXSDb+Nv+AqKfQxcYabhyrft6kda8U8Wf+MbaXqZoxnIQJyuCWX64wbmRdBcGalyy6v4aJABTkYZ8u9TXPBZ1WTX+6KKAd62HH0vZrqbzzgFL2SGoCNQx8MA6EKTsdRC+HFYK5XgpTL+rI/BcGYn7sPswo/si0m6Atxn/1yg5UvRn6YQaxh4+yF9p5mMtu7xO4vzRCL42WRUjSLw5dGBNH6HP6gOL0yi2TEIWjN3Bq02+/BPeL4hiLoLRh2upQ7xUfWhR1frHcAUAD3ixkaJo0teGGPAhFQUNFJGw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vIhAPThQPpAM0eK1sdDxF3nMWaB729WJpRYt53G/jM0=;
+ b=KtvJVyjZs021n7tjSkRTTZsUx/WAuOuhqcJnzxgH08SpL3Be/nD+OJeCWkl5Jybd0AudXGFpsvYGR5jaDJrUR88DqmBHxFhSfa72wdk8ZlXgGfofyM3A4Nes24Vs1kWR8ZbhFjuyG+QhIFLx7TXTZyvLQLt5h2HeNC7WJ9V4QxY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by DB9PR04MB8330.eurprd04.prod.outlook.com (2603:10a6:10:241::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
+ 2026 14:54:04 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%4]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
+ 14:54:04 +0000
+Message-ID: <2be8dfb1-517a-4326-949c-6a62bc11060d@cherry.de>
+Date: Mon, 24 Aug 2026 16:54:02 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] clk: rockchip: rk3506: Use FIELD_PREP_WM16 macro
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.u-boot-project.org
-Cc: Vignesh R <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>,
- Ssunk <ssunkkan@gmail.com>, 
- Jeffrey Yu <jeyu@issi.com>, Shiji Yang <yangshiji66@outlook.com>, 
- Boon Khai Ng <boon.khai.ng@altera.com>, Flaviu Nistor <flaviu.nistor@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20260803190946.2259514-1-jonas@kwiboo.se>
+ <20260803190946.2259514-6-jonas@kwiboo.se>
+ <fd9af4e6-17f3-4b3e-99c0-b6bb5a1ca79e@cherry.de>
+ <7cb02287-c541-40d2-8a2e-6ab018f44a91@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <7cb02287-c541-40d2-8a2e-6ab018f44a91@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIVP296CA0105.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:355::19) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|DB9PR04MB8330:EE_
+X-MS-Office365-Filtering-Correlation-Id: c75c1cf4-4fa9-49e0-fa3d-08df01ef8a76
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|10070799003|376014|23010399003|18002099003|22082099003|5023799004|11063799006|56012099006|4143699003|10067099003;
+X-Microsoft-Antispam-Message-Info: QjC3EWPY/ko5eYENdNCa2UXV/aYRGwvsf1+e6OZHPsHYkqE1NEZcv9MgLbiHVD0htIGjOMJgepUj9/Rddf70Fgc9lKRqv60E2Q6ZZBuSoeS2cczAuPUxtMeFyxheEpMiwww128gDTeaAaDi45qcQts0pWZQkILQPt6JrtErbWEGaLq8Ojn+MPUhVQK/3PMjH09HAwvZaO330DKLswowoh16eCmgzM9RZY6DDSRafAEcEWMHuFRCsAp+sFcxXtoFa317I73aMk0KaAQ4ziaz/7cJK/QsYapCZgl1OhtajyTM296Jps4yPdOs3H/JrVuFyeNZSLG4/29llaUNUMpKFEgZnwemjuBMJe2HHreFtPPcdBIebeGMQwqn5izlLsV6LqfbLsXuMMmzBigb0AgUB1zYSc/Stz6tf5LGwEAMSsgbfU5EOiIMn9B1isosz8d4OunRd1yT807N8E94Hgqtnjyp2+SILWqSZu+KDA1Oum+cmUaLHtgT7yS7NeuOeRjQMjn7AkQ5fjumK4RMN7Vmmky2iE6Os5GojqrL0YHJ49bLb5OPDbQHYnOlzKb5m0pg2npxt8z8lFZiiLqAPTyQHlFqEgnas3pmNY5rw3aAmCesdVH4/ZDlcdCKtj3rlgltqp2ErW+omXPVbMWUx50eFY44s6v+B5KtLsrfif9nVfuA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(10070799003)(376014)(23010399003)(18002099003)(22082099003)(5023799004)(11063799006)(56012099006)(4143699003)(10067099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SkFEMVp0Nm91NWdoVW5DMGl1VUNoRVk5S3NGK3lkdTJ2Ym44WUlMdnBMY3Jx?=
+ =?utf-8?B?M1FiSVFTUHRQUXVrSG1hK2pUSUYwKzlTb1l5cm5sejRPMVYzd1Y4YWVSbHJN?=
+ =?utf-8?B?ME9idC9oMkI0bnNVZVZUSmpnRVo5VUVPODAwN2p4SHBWQmRPM1I1ME9ybU9W?=
+ =?utf-8?B?dGIvak02YU9jMkZsZjA4Wmtza1JnTWRiQmtQa2pWclc5UEhoUDhUTHhqTm5Q?=
+ =?utf-8?B?aCtNMGxYbThZdzlZU2RHQzA2NUp0VnRYQnk4THI4RmUxL09YV1lZRVcraHRN?=
+ =?utf-8?B?QVVjS3hWYkd1UG1mdjZNSWZiNHR2S2lDbTZra21SeVNLaUFuS2RaaUIxQ2VT?=
+ =?utf-8?B?SytsU3VDRmNHbjlIRUR6bTNJOE10WUlCdUZ1dVBLUXhJbHJVL1pZbE02cG53?=
+ =?utf-8?B?NXJWVmRxZkpmZ3RDbnJmUGo4aHEvbnhYT3lFeXJVUUdoejRwa2ZVV0hrTXg5?=
+ =?utf-8?B?T0NjVC9YZUNYZkVPNzVQVkxvTk1XenluWERKRFlJMGxGUVd0d2s0Ukw4cm0x?=
+ =?utf-8?B?WmUrbjFtNXBPaWgvdzdSNkJXdU51YkZEdjdaOU8yNHpCZEFQQUZhWGVGb2dt?=
+ =?utf-8?B?Q3ZncXB3TTl4ZEk4UmNsdEpjZnJlemFsa3B3bjhaMkgxTW5zS2E4cGJhdEh0?=
+ =?utf-8?B?K3RuMDB6V0Z3bFlnSnh2T3Uvd1RZWnRwbHpiQ0txOWdVOGxRTkJLWExsK2hD?=
+ =?utf-8?B?QXRycDc5blc2OC9iS3o2OVdEZW52cU5taXhuemQ1NHJET2V0KzhrR1daYmpa?=
+ =?utf-8?B?bDRhQ1o1MkZ0NGNPemQxQkJOK3I4dGlwWGF3QW91NVRYeStsUzZRT3RrK2ZL?=
+ =?utf-8?B?WFBhOWkrcFoyMitOaXJ0a2JWVFhtaTRsQVpPWFJCazJzUkhxUDZDZmlUUGVw?=
+ =?utf-8?B?NC9wQnVQcVBIcmhNZWNwbG0rZ1NiUUc4NHVCNHpPbXNPRDZiOEJxblQ2d0lv?=
+ =?utf-8?B?bGhXYXBZNEQxNEx6T1VwL3pCdDg4UjlRaU1VMld6cTM2ajcyY3paZDRPeWtX?=
+ =?utf-8?B?Z2l4eE1oYTBwaEx3RlJLTlVmR1ROVk41NnpwblNmL3NHbk9oR0RYK1lRN2ZY?=
+ =?utf-8?B?a2VVQ0lGZzFnWDM4SkU5UC9SRTZQNUVlUHA3L2VXV0FjMXQ4OFhTYnBpL28r?=
+ =?utf-8?B?bCtqS1ljZ1JQeDVaby9NR0hvMGJrYkJuT0c4YmZsekN5NGo5SnE5a2ZHc1ZG?=
+ =?utf-8?B?Z0JQZFA0clpsZGxpTVVHdHZyeFJ6THQyUFJraE8rNnlBSWlBQ3hMTWFqdE5n?=
+ =?utf-8?B?LzRzUktPRmdqWWVrZ3ppS1o5N0tvakJ3QzNJSFQzSTh1MXFHcWtwSTFML0ll?=
+ =?utf-8?B?Sk9JZStWQU9peG9YTWpFbU1RSUZhNjhwT2JBMjJ5YlJ0NStKT0EvT0pRYjVX?=
+ =?utf-8?B?K1lURG93ekp1dzZOeWh1aVl6bjA4dlBjZnNRN0ZaSTVQYUhpcUdBZVEyWlJo?=
+ =?utf-8?B?bHVJSVFXeDI1YVNGck05MFNCaXdIUSs2NlFYVkZvcHY5bWl5RkZRWkZIcng2?=
+ =?utf-8?B?UUg5YXovQVRxVFd5enczZ3NwTHZqSlAzQlFBcnBVMC9Hak9yMUtEWGM3RUlU?=
+ =?utf-8?B?N05HcTlnOTV2VUhmRzRxd3hPaWJKeWlXeHZ2YWJ4ckF6SGpXenczNGY4N1NZ?=
+ =?utf-8?B?M2xBMThpRkRWZTZiYkpGN1R4c1ozSUFYdTVSZWJiNy9IczFwMjRxNU1ZN2li?=
+ =?utf-8?B?cGFVUFllUE1vUm82bVBlWlRUQmFBcVp1dHNTNTRwZlF0cFJxV1cxcDZLYStK?=
+ =?utf-8?B?NndmMG1GZTZ1QkZLc1psakZRWXVFMjdjejRETmxOK0pObkFiQnBtM3JYQmpY?=
+ =?utf-8?B?bGhwY2ZyM3NvaVY0S3pNSGxqSWhNVC9EVjJQdGJ4OXNEbzRPOGRLM2hibzI1?=
+ =?utf-8?B?UzhaeUNvY1BjMHptZ2ZBMXloOW5zMnhwWGlPUkR4SmowUm94RlZ0cjRMRWxx?=
+ =?utf-8?B?bGlKSlg5TTFyNzhobWduL2hoYTZ6eEZYQ2crMGdINkpyTE1LczZidno3Q2xn?=
+ =?utf-8?B?OVN0VzkvWjljSjA1cU9qKzlLUDY1RVVYazJhVkt3Rnl6MDd1aExFcHprd2Ex?=
+ =?utf-8?B?dXpjd09EN0dDL2JjZUpMNXNYVCt6bHg3ZVU4YWhOQzZQZGMzZng5RGt2a0l2?=
+ =?utf-8?B?bFhsMi80bDM1cWhGS0xMUFdRdWIrZjhISkhOMHAzdjJ3c2QxNnZIQkxrTkpU?=
+ =?utf-8?B?R0dveHRtVFEwM1o5b2VUN3FabkdEbHcyRmFkSldjVEpFaVVqZVVONmtxS0ti?=
+ =?utf-8?B?RkFnMGdDN290YTAxL3lvbW14cklPVlUwdGtXTGc3a2taaXc0dnVWdzFqK1lq?=
+ =?utf-8?B?MDN5YmxDU3NNelRPb3hpY0MyTTJPUlE1Z08zV3dVMjliVm96MXYvdGVEdzla?=
+ =?utf-8?Q?Ob13mybmt8IRyVfNBvb+ISxI0hgcPSqyDyLsJ+KqCdeZe?=
+X-MS-Exchange-AntiSpam-MessageData-1: oii74I1FEjO+xWJ2lyNvD/53gCZDzsXgMpo=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c75c1cf4-4fa9-49e0-fa3d-08df01ef8a76
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 14:54:04.2818 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rryX9FcVbS5+W/7wUgxUTwlgaUIZ/sISIXTyVjq64aT8Rsqdj0rswxPMZ/yOhU+4HAG2lm96Ni97COqsGfkrD1HTL0EBNleC+bs6NdhVYdY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8330
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,19 +178,167 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi all,
+Hi Jonas,
 
-On Mon, Aug 3, 2026 at 2:01=E2=80=AFPM Anirudh Srinivasan
-<asrinivasan@oss.tenstorrent.com> wrote:
->
-> The designware spi driver doesn't support dual/quad/octal modes, but
-> the driver still tries using these modes when it sees a capable flash
-> chip in the devicetree. Add a supports_op function to this driver to
-> prevent this from happening and force single lane operation.
->
-> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-> ---
->  drivers/spi/designware_spi.c | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
+On 8/14/26 10:16 AM, Jonas Karlman wrote:
+> Hi Quentin,
+> 
+> On 8/12/2026 2:42 PM, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 8/3/26 9:09 PM, Jonas Karlman wrote:
+>>> Change to use writel() together with the FIELD_PREP_WM16() macro
+>>> instead of using the rk_clrsetreg() macro to avoid having to define the
+>>> mask as a parameter to both rk_clrsetreg() and FIELD_PREP(). Also change
+>>> to use u32 variables consistently.
+>>>
+>>> No change in behavior is expected due to this code style change.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>>>    drivers/clk/rockchip/clk_rk3506.c | 195 ++++++++++++++----------------
+>>>    1 file changed, 90 insertions(+), 105 deletions(-)
+>>>
+>>> diff --git a/drivers/clk/rockchip/clk_rk3506.c b/drivers/clk/rockchip/clk_rk3506.c
+>>> index e156bf19a6b4..7ccab313e6ec 100644
+>>> --- a/drivers/clk/rockchip/clk_rk3506.c
+>>> +++ b/drivers/clk/rockchip/clk_rk3506.c
+> 
+> [snip]
+> 
+>>> @@ -770,7 +759,7 @@ static ulong rk3506_fspi_get_rate(struct rk3506_clk_priv *priv)
+>>>    
+>>>    static ulong rk3506_fspi_set_rate(struct rk3506_clk_priv *priv, ulong rate)
+>>>    {
+>>> -	int div, sel;
+>>> +	u32 div, sel;
+>>>    
+>>>    	if (OSC_HZ % rate == 0) {
+>>>    		sel = SCLK_FSPI_SEL_24M;
+>>> @@ -787,10 +776,9 @@ static ulong rk3506_fspi_set_rate(struct rk3506_clk_priv *priv, ulong rate)
+>>>    	}
+>>>    	assert(div - 1 <= 31);
+>>>    
+>>
+>> If somehow div = 0, then this will result in an underflow. Because it's
+>> an unsigned type, it'll wrap around and start at U32_MAX so assert()
+>> should catch it. However, assert() is a noop when DEBUG constant isn't
+>> defined, so this actually does nothing.
+>>
+>> We should switch those assert to something that actually does something
+>> otherwise we could still very well attempt to write a divider that's too
+>> big and have weird behaviors instead of outright fail when we know we
+>> cannot do something that's requested.
+> 
+> I was looking into trying to use assert(FIELD_FIT(...)) to validate, but
+> as you mention this does not help for non-DEBUG builds.
+> 
+> However, I have been playing around with something like following,
+> still not sure I fully like it, please advise.
+> 
+> static inline u32 get_divider(ulong prate, ulong rate, u32 mask, bool divisible)
+> {
+> 	u32 div;
+> 
+> 	if (divisible && prate % rate)
+> 		return 0;
+> 
 
-Gentle ping on this patch.  I was wondering if anyone has comments on this.
+What is "divisible" supposed to represent? I don't understand from 
+reading the code.
+
+> 	div = DIV_ROUND_UP(prate, rate);
+> 	if (!div || ((div - 1) << __ffs(mask)) & ~mask)
+
+I scratch my head looking at this so not sure it would stand the test of 
+time. Would:
+
+((div - 1) & mask) == (div - 1)
+
+work better instead? If your value masked (I'm assuming you want to use 
+the bitfield mask here, so all bits are set in the bitfield) doesn't 
+equal your value, then the mask cannot contain the value.
+
+> 		return 0;
+> 
+> 	return div;
+> }
+> 
+> static ulong rk3506_saradc_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
+> 				    ulong rate)
+> {
+> 	u32 div, sel;
+> 
+> 	if ((div = get_divider(32000, rate, CLK_SARADC_DIV_MASK, 1)))
+> 		sel = CLK_SARADC_SEL_32K;
+> 	else if ((div = get_divider(400000, rate, CLK_SARADC_DIV_MASK, 1)))
+> 		sel = CLK_SARADC_SEL_400K;
+> 	else if ((div = get_divider(OSC_HZ, rate, CLK_SARADC_DIV_MASK, 0)))
+> 		sel = CLK_SARADC_SEL_24M;
+
+Can you really not divide from x24m as a parent?
+
+Also, please do not assign a variable within an if condition, I find it 
+very difficult to remember that checking an if condition can have side 
+effects. I can suggest:
+
+div = get_divider(32000, rate, CLK_SARADC_DIV_MASK, 1);
+if (div) {
+     sel = CLK_SARADC_SEL_32K;
+     goto div_found;
+}
+
+div = get_divider(400000, rate, CLK_SARADC_DIV_MASK, 1);
+if (div) {
+     sel = CLK_SARADC_SEL_400K;
+     goto div_found;
+}
+[...]
+
+return -EINVAL;
+
+div_found:
+writel(FIELD_PREP_WM16(CLK_SARADC_SEL_MASK, sel) |
+[...]
+return rk3506_saradc_get_rate(priv, clk_id);
+
+Or use another function for
+
+the writel+return currently at the end of your function and call that 
+instead of a goto.
+
+> 	else
+> 		return -EINVAL;
+> 
+> 	writel(FIELD_PREP_WM16(CLK_SARADC_SEL_MASK, sel) |
+> 	       FIELD_PREP_WM16(CLK_SARADC_DIV_MASK, div - 1),
+> 	       RK3506_CLKSEL_CON(54));
+> 
+> 	return rk3506_saradc_get_rate(priv, clk_id);
+> }
+> 
+> Here we use a helper function, could possible also be re-made into a
+> macro so we actually can use FIELD_FIT() instead of bitwise ops.
+> 
+> Basic idea is that we assign div and test if the rate is divisible and
+> fit inside mask at the same time, and if not we move on to next possible
+> parent/divider.
+> 
+> With above and using the 1 MHz rate I would get something like following,
+> provided I also added some log_debug() calls.
+> 
+>    => adc list
+>    invalid divider 24 for prate 24000000, rate 1000000, mask f
+>    unsupported clk: id=193 rate=1000000 ret=-22
+>    - adc@ff4e8000 status: -22
+> 
+> In the future I would also like to drop some priv->pll_hz uses and
+
+We should report what's the configured frequency for a PLL from the 
+registers. I don't know if we can reliably cache it though (hopefully 
+TF-A/OP-TEE doesn't change the ones we're interested in :) ). I don't 
+know how much we would spare in boot time by avoiding reading the 
+registers often and used a cache version instead.
+
+Cheers,
+Quentin
