@@ -4,114 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EFEC5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57138C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:47:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9473D81000;
-	Mon, 24 Aug 2026 16:46:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 19BCE80E26;
+	Mon, 24 Aug 2026 16:47:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vuFK44cDQJUz; Mon, 24 Aug 2026 16:46:52 +0000 (UTC)
+ id RSqteGYQkbMf; Mon, 24 Aug 2026 16:47:01 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787589924;
-	bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RUC4c78ZuKZyGKcgXwVsjJcKjcF6CAM25bByhfJmMFY6RR9SDOcS0zIVnurHH/AF4
-	 0cHRtRb635CtCloQ+R8Yyr1flCW8N8qMkjs3senRHOpW0X0EvUr4o2PdOmYitGvfsA
-	 Q+thWe8AkkCoyx2MeNiMpuTLVYv382vhNm1OtJA+WLYAXw+E/dQ669x0nMQODlcHIb
-	 bTh7w/TP4A5o2ePuYwWD8Up7PcYT7oSbvV8SKi13CN2q2WW+j07CA0Go2mCQdoNFLI
-	 v05XoEnXCvO/q5Cvr6TLA7MLoICt5noKUBp1wh6XbTKQPjL/aGs5g8E/WRISzaixGr
-	 NKohDqgWmmLsA==
+	d=lists.u-boot-project.org; s=default; t=1787589929;
+	bh=yDeOTA01iUCFGnOI7//seYzp8jnxHepU9DaKX7kMtjU=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=FHAZRYB6uWUYipX9xJVOK9Q8X66D2zVi/gr2//XO1A4gJGUyTmc6pfqHsFdBLBfQY
+	 o3T18ORaT1vdRkECxjq6GkDLW8699Iw2qjQyeeqnVOfjFV+rlfv3GiWOSaWce2Y9YU
+	 /TSOJiyr7Bi/JtfARU+MoyK1fdsAgACZcvkDg7A+Uf7xI+wlDgZ79oAEZAc7h+4Mz2
+	 Tc8kiSm/H+75npbhEoI+YTt80E99ZkYzLcOq6srCc1xZSK1DUJ7wToztDgpfGOou3d
+	 xcaxh36rNfV0+WibSzuh6OAsIZwPZPj2t7oIs7ZhqM7VzskQnSJ9b7yLguMkiPHg1A
+	 ZhvBCDVZYRl/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6B09580F01;
-	Mon, 24 Aug 2026 16:45:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2B93A80F1E;
+	Mon, 24 Aug 2026 16:45:29 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C32F329B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:32:47 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 8C838279
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:42:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A98726062C
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:32:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7E55660627
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:42:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Tm83ikggBrnz for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 15:32:46 +0000 (UTC)
+ id 0lbRiesDKljM for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 15:42:08 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62d; helo=mail-ej1-x62d.google.com;
+ client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=R/tAXwnX
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0E509605EC
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:32:45 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c16111a9b8dso34930066b.1
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:32:45 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=c41FbcU0
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D4211605F0
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:42:07 +0000 (UTC)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c1676648c1eso26052266b.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:42:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787585564; x=1788190364;
+ d=linaro.org; s=google; t=1787586125; x=1788190925;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
- b=R/tAXwnXxt1iXaifHkKH4tfUhWGGTx2QpCU7eCMjIEP0QA9EU9CfVBPiUdTJhUeeSz
- N9mzKsjfptTYY4SqTmczVKQDCH66RIkXKbb8xa5j5+5b5Jx8vVWNL2M5der/vKuVwdOy
- MSB1fhVduzL/Cthuyskq93vIP8eG9BgQy4FRFVY/5WuKeobRe6leNu8ipBbLcAcLCObI
- G49k1l4fd3F0MPw770MBLsIMXwBV3fmrsXFAouPiAuvq9/+LjV7pl+LzeVTE2mOC4SpJ
- 8dSNeX87KAtz3OEZ06kVCh5nHQO+w5wTVIpljz2QsAzwm4MvclahOlDRKp1IecmBwg8N
- 4eJg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=yDeOTA01iUCFGnOI7//seYzp8jnxHepU9DaKX7kMtjU=;
+ b=c41FbcU0+2fZh5CPW0NpJUxzmqzhYALXq1RJlRprFczYysI1vdGLG86l8DW7YYHYgX
+ oBdy+2BiTMWLHzELuArLIt3VW07Ichdb/wQkgs1eXUxgRAK3t5oUxJfP1/t40KSlYCun
+ 9e2zL/vma91KVwOuZYEvyJ6KBBGF3mroEk/4HU684DRe0Z2I2vYbjiBqxR7w7onfyv8Y
+ 7BjhioVx2uVMfvyuWRpYEJEmvXMEgWb33k+0Y0+8Y3FrwU8bYH8XxvQRGUt7S266r6e7
+ aMx8kmpNT0iSyO7s6+WBQVs5vZHPbIuZKUv1yrFTdvW2CMLO7MWdktbQmxkF0sQYMZPE
+ 0KFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787585564; x=1788190364;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
- b=IF3XBklsuG/LxbSAs8dqEePQsTGclQItsarJtJG3zmeAKwUgyklJQm8X0kogbd59cx
- Mq8Z1aMo0OGr64fTv0CUrNfz3R4KBV4R0trUUy1CFg2+8llgbePmnLZKTJoe9dwQA9JI
- hbdqo68h7J06+VZW0avOfbYNVXqyubwB59lZ+xH34u8S7lDKphq5dCQJmcGCEyLvq0fp
- EBIB2yDERp+PxgG7ETIaCx2irszxRs3gFG07ldHjwMSeGsTmrJ14V+C7hWfSlBeufwkX
- p3RshnXD0xXvBsfunpF12W0HiE+3isfjQCsjJ0+4WdI7AUME3t+Kxo4SwqTpsiCCN4KN
- etzA==
-X-Gm-Message-State: AFuF++kwJIV4oSGpzmjzBYM3LsVyloYgJQcRNZ27vmmRVNvGVFN8KCx1
- Q6JDCiHTo2g0BGgRYKlUj5ImbE9JaudUXp6UDEMQkbRgTZhna8cqgQvo/i1evbg8VvaYhS9YSwg
- XIYHh
-X-Gm-Gg: AR+sD10eWEIJwDliWlHIEISNYXW3WYx9G5OvY6d028Mxr0DpQuV3xK+MKqXkyQb/J3/
- eCzGu+bDSz2uT3x0SmbssBkr/5dt12sJzP4BVsS7y63zspZlVrfs2JKmlv6LE0AbbEquLW7Qsi5
- QhFUE16qAbu4ZufmC4ioarQ8t3cCqIaZKgVdY6WvXN+HrVUNPNcNldgKBACW7cFTsZgAaJomArJ
- B8m2sGUGByjx1WYxGwPgxjpA8ygqHDApXEtfSGOZkJksRZdMbKI4YD0MblAcmJFCK8FNsVSeHc/
- /uTyfymD122/O7b8nPPy6FgJODvjxv7TSz/RqWoAwoLYM4/Z6bkIjJ2pBGmbp4dRIWLJKm7OREs
- HVHSrvQiHWjCVLD99TaZ5ZJiqg6DnZR4LDSmB8OMaBTUffEu4my2UpHfnx5f4cHfC6Ko6dY74Ot
- TbIOST+lcqR+LNp8Epat79LwlOsG/alYlJfzsRz2ToVk8RSy6QoZ1Spz2dyFORbSiUVhUoe2gQU
- MtsZZCkfxHRyQSOQdTHew==
-X-Received: by 2002:a17:907:c19:b0:c21:6f8c:231f with SMTP id
- a640c23a62f3a-c246a2e942emr1716582566b.1.1787585563789; 
- Mon, 24 Aug 2026 08:32:43 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787586125; x=1788190925;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=yDeOTA01iUCFGnOI7//seYzp8jnxHepU9DaKX7kMtjU=;
+ b=G7FTo4q2u3sPXI1xCOUajlA8ngEAtABuB91nZIdmSMwg4kC1wjJ4ER+M7KcgUAIKvX
+ 7iK+G1Pv3fyHqVurLwvEX44t6xaGFQGeOeWPEaQM13MoGC5EPrPvWnsiJjw6JwXoLmEs
+ FxA5Gb5c2htP0lswWBvnxRyzd5E1L3pfAkkoKD+V4UdOky6p8gW6AWdAPfFPFstkzWXA
+ BYkicuGFEf3a2LRuttzXEBU2ivOmgD9WxCpAlVFJalVFxBo/QJ33V3NGZJOTxmpr33Kl
+ San85dfoJ2nNywx0XuwUJDvWC14oqo5KQA+9EIEN8csf/bcMYcrGDRUBkqIlJS79lDYC
+ Cwkg==
+X-Gm-Message-State: AFuF++lz1OEAtwwblC/HKwsJEnD3Saz7aTVHlZjuupHo5zOWbyvnSy9m
+ nA8UJegDsKO6lcFetFcuhhlF0izsePxEe9xE0ksRyB5YKvRHBy+1WsobLFWLkURRnROkgO5jG/b
+ IoDZp
+X-Gm-Gg: AR+sD11g6ADfp573Cu4K8KFJfwhNI9bOnWCg4QoS9oiBy3Ho/SVqdkNaw0uYZ+rfZ7s
+ yVdJIUBgldS5n6lPOb52wv7wbHy0EbEbpAec8jvU3JKtnHLEyYq1nlmywrx9Vx7LwTMDFKEH3ZY
+ sOIlDcDRVgsgzOF9xxAJa8TBxdlP7q1okyjBZS0vkkamZ7FrrJ57fsHKQOMwgjBnZ6wXsOw1y9I
+ 87hidaVmJIHTx8rhYktlGMNJgoEc3Bua/4jrNYstQFFzjd6v0J+VZ00KPrHDSgR5U55LD3WCvvp
+ Azuf6l66RDxJRpug4kQPZ1r6RpqdON8jzFqDJsaEPPlVOFcIpe8q9/xH1md9r/Ia/6uj+3BHazf
+ Mu3qCmrcpkyWrhWwc+K9SReLM3Nreh7uA0sH+xYAAGgk5iAWpJH7ywdnbt3rpxRfuGu6B38DHhE
+ s9B99w+yJ4OT7XYNmgRGjtxzJGJ/wp6Sb7RlWr+vSjBD1L3v+i1EGpnReRHAPFY7FcYgBxeuPaz
+ TLwFZ1Git3hKYQ43/6W8w==
+X-Received: by 2002:a17:907:d17:b0:c1c:4ae9:b935 with SMTP id
+ a640c23a62f3a-c246a6902c5mr1460849166b.3.1787586125374; 
+ Mon, 24 Aug 2026 08:42:05 -0700 (PDT)
 Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2496295627sm1267430166b.15.2026.08.24.08.32.42
+ a640c23a62f3a-c24966f58dfsm1278567866b.38.2026.08.24.08.42.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 08:32:43 -0700 (PDT)
+ Mon, 24 Aug 2026 08:42:04 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
- jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH v7 61/63] usb: dwc3: import from kernel v6.16
-Date: Mon, 24 Aug 2026 17:27:32 +0200
-Message-ID: <20260824152734.159794-62-anders.roxell@linaro.org>
+ jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
+ sjg@chromium.org, Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v7 00/24] usb: dwc3: part 2, make the resynced code work
+Date: Mon, 24 Aug 2026 17:41:09 +0200
+Message-ID: <20260824154133.217744-1-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260824152734.159794-1-anders.roxell@linaro.org>
-References: <20260824152734.159794-1-anders.roxell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 24 Aug 2026 16:43:55 +0000
@@ -128,559 +123,154 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Jens Wiklander <jens.wiklander@linaro.org>
+Hi,
 
-Sync Linux kernel dwc3 changes from v6.15 to v6.16.
+This is part two of two. It applies on top of part one [5], which resets
+the DWC3 driver and imports it up to Linux v6.16. Part one alone breaks
+the build for every board that enables DWC3. This part adds back the
+U-Boot glue, the XHCI and UDC updates and the build fixes, so the tree
+builds and the gadget works again. It builds on Jerome's work [2].
 
-The following files are preserved across the import:
-Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-dwc3-layerscape.c ti_usb_phy.c
+The two parts have to go in together.
 
-Skipping unused files:
-debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+The resynced epautoconf matches endpoints on their caps field instead of
+on their name. Five UDC drivers never filled that in, so each one gets a
+patch next to its other fixup: at91_udc, atmel_usba_udc, ci_udc, musb-new
+and mtu3. With those and dwc2, every UDC driver in the tree sets caps.
 
-Note that this is a raw import and doesn't build.
-A fixup commit at the end of the series fixes that.
+Build tested one board per driver: every DWC3 glue layer in the tree,
+dwc2 with and without DM_USB_GADGET, at91_udc, atmel_usba_udc, ci_udc,
+musb-new and mtu3. 17 boards in total.
 
-List of commits: git log --oneline v6.15..v6.16
-Commits imported:
-80e083943775 usb: dwc3: gadget: Fix TRB reclaim logic for short transfers and ZLPs
-630a1dec3b0e usb: dwc3: Abort suspend on soft disconnect failure
-170940f7e685 usb: dwc3: core: Don't touch resets and clocks
-613a2e655d4d usb: dwc3: core: Expose core driver as library
-850e634006f4 usb: dwc3: core: Avoid redundant system suspend/resume callbacks
-8da7644493b4 usb: dwc3: Specify maximum number of XHCI interrupters
+DFU is tested on hardware on BeagleBoard-X15, and on BeaglePlay by
+Anshul. ci_udc is tested on an i.MX93 board with ums. The rest is build
+tested only.
 
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
----
- drivers/usb/dwc3/core.c   | 206 ++++++++++++++++++++++++++++----------
- drivers/usb/dwc3/core.h   |   2 +
- drivers/usb/dwc3/gadget.c |  24 ++---
- drivers/usb/dwc3/glue.h   |  36 +++++++
- 4 files changed, 199 insertions(+), 69 deletions(-)
- create mode 100644 drivers/usb/dwc3/glue.h
+The branch has both parts [4].
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 66a08b527165..8002c23a5a02 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -26,6 +26,7 @@
- #include <linux/of_graph.h>
- #include <linux/acpi.h>
- #include <linux/pinctrl/consumer.h>
-+#include <linux/pinctrl/devinfo.h>
- #include <linux/reset.h>
- #include <linux/bitfield.h>
- 
-@@ -36,6 +37,7 @@
- 
- #include "core.h"
- #include "gadget.h"
-+#include "glue.h"
- #include "io.h"
- 
- #include "debug.h"
-@@ -1699,6 +1701,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	u8			tx_thr_num_pkt_prd = 0;
- 	u8			tx_max_burst_prd = 0;
- 	u8			tx_fifo_resize_max_num;
-+	u16			num_hc_interrupters;
- 
- 	/* default to highest possible threshold */
- 	lpm_nyet_threshold = 0xf;
-@@ -1719,6 +1722,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	 */
- 	tx_fifo_resize_max_num = 6;
- 
-+	/* default to a single XHCI interrupter */
-+	num_hc_interrupters = 1;
-+
- 	dwc->maximum_speed = usb_get_maximum_speed(dev);
- 	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
- 	dwc->dr_mode = usb_get_dr_mode(dev);
-@@ -1765,6 +1771,12 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 				&tx_thr_num_pkt_prd);
- 	device_property_read_u8(dev, "snps,tx-max-burst-prd",
- 				&tx_max_burst_prd);
-+	device_property_read_u16(dev, "num-hc-interrupters",
-+				 &num_hc_interrupters);
-+	/* DWC3 core allowed to have a max of 8 interrupters */
-+	if (num_hc_interrupters > 8)
-+		num_hc_interrupters = 8;
-+
- 	dwc->do_fifo_resize = device_property_read_bool(dev,
- 							"tx-fifo-resize");
- 	if (dwc->do_fifo_resize)
-@@ -1851,6 +1863,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	dwc->tx_max_burst_prd = tx_max_burst_prd;
- 
- 	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
-+
-+	dwc->num_hc_interrupters = num_hc_interrupters;
- }
- 
- /* check whether the core supports IMOD */
-@@ -2148,27 +2162,16 @@ static struct power_supply *dwc3_get_usb_power_supply(struct dwc3 *dwc)
- 	return usb_psy;
- }
- 
--static int dwc3_probe(struct platform_device *pdev)
-+int dwc3_core_probe(const struct dwc3_probe_data *data)
- {
--	struct device		*dev = &pdev->dev;
--	struct resource		*res, dwc_res;
-+	struct dwc3		*dwc = data->dwc;
-+	struct device		*dev = dwc->dev;
-+	struct resource		dwc_res;
- 	unsigned int		hw_mode;
- 	void __iomem		*regs;
--	struct dwc3		*dwc;
-+	struct resource		*res = data->res;
- 	int			ret;
- 
--	dwc = devm_kzalloc(dev, sizeof(*dwc), GFP_KERNEL);
--	if (!dwc)
--		return -ENOMEM;
--
--	dwc->dev = dev;
--
--	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
--	if (!res) {
--		dev_err(dev, "missing memory resource\n");
--		return -ENODEV;
--	}
--
- 	dwc->xhci_resources[0].start = res->start;
- 	dwc->xhci_resources[0].end = dwc->xhci_resources[0].start +
- 					DWC3_XHCI_REGS_END;
-@@ -2208,15 +2211,17 @@ static int dwc3_probe(struct platform_device *pdev)
- 	if (IS_ERR(dwc->usb_psy))
- 		return dev_err_probe(dev, PTR_ERR(dwc->usb_psy), "couldn't get usb power supply\n");
- 
--	dwc->reset = devm_reset_control_array_get_optional_shared(dev);
--	if (IS_ERR(dwc->reset)) {
--		ret = PTR_ERR(dwc->reset);
--		goto err_put_psy;
--	}
-+	if (!data->ignore_clocks_and_resets) {
-+		dwc->reset = devm_reset_control_array_get_optional_shared(dev);
-+		if (IS_ERR(dwc->reset)) {
-+			ret = PTR_ERR(dwc->reset);
-+			goto err_put_psy;
-+		}
- 
--	ret = dwc3_get_clocks(dwc);
--	if (ret)
--		goto err_put_psy;
-+		ret = dwc3_get_clocks(dwc);
-+		if (ret)
-+			goto err_put_psy;
-+	}
- 
- 	ret = reset_control_deassert(dwc->reset);
- 	if (ret)
-@@ -2232,7 +2237,7 @@ static int dwc3_probe(struct platform_device *pdev)
- 		goto err_disable_clks;
- 	}
- 
--	platform_set_drvdata(pdev, dwc);
-+	dev_set_drvdata(dev, dwc);
- 	dwc3_cache_hwparams(dwc);
- 
- 	if (!dwc->sysdev_is_parent &&
-@@ -2327,12 +2332,35 @@ err_put_psy:
- 
- 	return ret;
- }
-+EXPORT_SYMBOL_GPL(dwc3_core_probe);
- 
--static void dwc3_remove(struct platform_device *pdev)
-+static int dwc3_probe(struct platform_device *pdev)
- {
--	struct dwc3	*dwc = platform_get_drvdata(pdev);
-+	struct dwc3_probe_data probe_data = {};
-+	struct resource *res;
-+	struct dwc3 *dwc;
-+
-+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-+	if (!res) {
-+		dev_err(&pdev->dev, "missing memory resource\n");
-+		return -ENODEV;
-+	}
-+
-+	dwc = devm_kzalloc(&pdev->dev, sizeof(*dwc), GFP_KERNEL);
-+	if (!dwc)
-+		return -ENOMEM;
- 
--	pm_runtime_get_sync(&pdev->dev);
-+	dwc->dev = &pdev->dev;
-+
-+	probe_data.dwc = dwc;
-+	probe_data.res = res;
-+
-+	return dwc3_core_probe(&probe_data);
-+}
-+
-+void dwc3_core_remove(struct dwc3 *dwc)
-+{
-+	pm_runtime_get_sync(dwc->dev);
- 
- 	dwc3_core_exit_mode(dwc);
- 	dwc3_debugfs_exit(dwc);
-@@ -2340,22 +2368,28 @@ static void dwc3_remove(struct platform_device *pdev)
- 	dwc3_core_exit(dwc);
- 	dwc3_ulpi_exit(dwc);
- 
--	pm_runtime_allow(&pdev->dev);
--	pm_runtime_disable(&pdev->dev);
--	pm_runtime_dont_use_autosuspend(&pdev->dev);
--	pm_runtime_put_noidle(&pdev->dev);
-+	pm_runtime_allow(dwc->dev);
-+	pm_runtime_disable(dwc->dev);
-+	pm_runtime_dont_use_autosuspend(dwc->dev);
-+	pm_runtime_put_noidle(dwc->dev);
- 	/*
- 	 * HACK: Clear the driver data, which is currently accessed by parent
- 	 * glue drivers, before allowing the parent to suspend.
- 	 */
--	platform_set_drvdata(pdev, NULL);
--	pm_runtime_set_suspended(&pdev->dev);
-+	dev_set_drvdata(dwc->dev, NULL);
-+	pm_runtime_set_suspended(dwc->dev);
- 
- 	dwc3_free_event_buffers(dwc);
- 
- 	if (dwc->usb_psy)
- 		power_supply_put(dwc->usb_psy);
- }
-+EXPORT_SYMBOL_GPL(dwc3_core_remove);
-+
-+static void dwc3_remove(struct platform_device *pdev)
-+{
-+	dwc3_core_remove(platform_get_drvdata(pdev));
-+}
- 
- #ifdef CONFIG_PM
- static int dwc3_core_init_for_resume(struct dwc3 *dwc)
-@@ -2388,6 +2422,7 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- {
- 	u32 reg;
- 	int i;
-+	int ret;
- 
- 	if (!pm_runtime_suspended(dwc->dev) && !PMSG_IS_AUTO(msg)) {
- 		dwc->susphy_state = (dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0)) &
-@@ -2406,7 +2441,9 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- 	case DWC3_GCTL_PRTCAP_DEVICE:
- 		if (pm_runtime_suspended(dwc->dev))
- 			break;
--		dwc3_gadget_suspend(dwc);
-+		ret = dwc3_gadget_suspend(dwc);
-+		if (ret)
-+			return ret;
- 		synchronize_irq(dwc->irq_gadget);
- 		dwc3_core_exit(dwc);
- 		break;
-@@ -2441,7 +2478,9 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- 			break;
- 
- 		if (dwc->current_otg_role == DWC3_OTG_ROLE_DEVICE) {
--			dwc3_gadget_suspend(dwc);
-+			ret = dwc3_gadget_suspend(dwc);
-+			if (ret)
-+				return ret;
- 			synchronize_irq(dwc->irq_gadget);
- 		}
- 
-@@ -2544,9 +2583,8 @@ static int dwc3_runtime_checks(struct dwc3 *dwc)
- 	return 0;
- }
- 
--static int dwc3_runtime_suspend(struct device *dev)
-+int dwc3_runtime_suspend(struct dwc3 *dwc)
- {
--	struct dwc3     *dwc = dev_get_drvdata(dev);
- 	int		ret;
- 
- 	if (dwc3_runtime_checks(dwc))
-@@ -2558,10 +2596,11 @@ static int dwc3_runtime_suspend(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_runtime_suspend);
- 
--static int dwc3_runtime_resume(struct device *dev)
-+int dwc3_runtime_resume(struct dwc3 *dwc)
- {
--	struct dwc3     *dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 	int		ret;
- 
- 	ret = dwc3_resume_common(dwc, PMSG_AUTO_RESUME);
-@@ -2571,7 +2610,7 @@ static int dwc3_runtime_resume(struct device *dev)
- 	switch (dwc->current_dr_role) {
- 	case DWC3_GCTL_PRTCAP_DEVICE:
- 		if (dwc->pending_events) {
--			pm_runtime_put(dwc->dev);
-+			pm_runtime_put(dev);
- 			dwc->pending_events = false;
- 			enable_irq(dwc->irq_gadget);
- 		}
-@@ -2586,10 +2625,11 @@ static int dwc3_runtime_resume(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_runtime_resume);
- 
--static int dwc3_runtime_idle(struct device *dev)
-+int dwc3_runtime_idle(struct dwc3 *dwc)
- {
--	struct dwc3     *dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 
- 	switch (dwc->current_dr_role) {
- 	case DWC3_GCTL_PRTCAP_DEVICE:
-@@ -2607,12 +2647,28 @@ static int dwc3_runtime_idle(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_runtime_idle);
-+
-+static int dwc3_plat_runtime_suspend(struct device *dev)
-+{
-+	return dwc3_runtime_suspend(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_runtime_resume(struct device *dev)
-+{
-+	return dwc3_runtime_resume(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_runtime_idle(struct device *dev)
-+{
-+	return dwc3_runtime_idle(dev_get_drvdata(dev));
-+}
- #endif /* CONFIG_PM */
- 
- #ifdef CONFIG_PM_SLEEP
--static int dwc3_suspend(struct device *dev)
-+int dwc3_pm_suspend(struct dwc3 *dwc)
- {
--	struct dwc3	*dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 	int		ret;
- 
- 	ret = dwc3_suspend_common(dwc, PMSG_SUSPEND);
-@@ -2623,10 +2679,11 @@ static int dwc3_suspend(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_pm_suspend);
- 
--static int dwc3_resume(struct device *dev)
-+int dwc3_pm_resume(struct dwc3 *dwc)
- {
--	struct dwc3	*dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 	int		ret = 0;
- 
- 	pinctrl_pm_select_default_state(dev);
-@@ -2645,10 +2702,10 @@ out:
- 
- 	return ret;
- }
-+EXPORT_SYMBOL_GPL(dwc3_pm_resume);
- 
--static void dwc3_complete(struct device *dev)
-+void dwc3_pm_complete(struct dwc3 *dwc)
- {
--	struct dwc3	*dwc = dev_get_drvdata(dev);
- 	u32		reg;
- 
- 	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_HOST &&
-@@ -2658,21 +2715,60 @@ static void dwc3_complete(struct device *dev)
- 		dwc3_writel(dwc->regs, DWC3_GUCTL3, reg);
- 	}
- }
-+EXPORT_SYMBOL_GPL(dwc3_pm_complete);
-+
-+int dwc3_pm_prepare(struct dwc3 *dwc)
-+{
-+	struct device *dev = dwc->dev;
-+
-+	/*
-+	 * Indicate to the PM core that it may safely leave the device in
-+	 * runtime suspend if runtime-suspended already in device mode.
-+	 */
-+	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_DEVICE &&
-+	    pm_runtime_suspended(dev) &&
-+	    !dev_pinctrl(dev))
-+		return 1;
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(dwc3_pm_prepare);
-+
-+static int dwc3_plat_suspend(struct device *dev)
-+{
-+	return dwc3_pm_suspend(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_resume(struct device *dev)
-+{
-+	return dwc3_pm_resume(dev_get_drvdata(dev));
-+}
-+
-+static void dwc3_plat_complete(struct device *dev)
-+{
-+	dwc3_pm_complete(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_prepare(struct device *dev)
-+{
-+	return dwc3_pm_prepare(dev_get_drvdata(dev));
-+}
- #else
--#define dwc3_complete NULL
-+#define dwc3_plat_complete NULL
-+#define dwc3_plat_prepare NULL
- #endif /* CONFIG_PM_SLEEP */
- 
- static const struct dev_pm_ops dwc3_dev_pm_ops = {
--	SET_SYSTEM_SLEEP_PM_OPS(dwc3_suspend, dwc3_resume)
--	.complete = dwc3_complete,
--
-+	SET_SYSTEM_SLEEP_PM_OPS(dwc3_plat_suspend, dwc3_plat_resume)
-+	.complete = dwc3_plat_complete,
-+	.prepare = dwc3_plat_prepare,
- 	/*
- 	 * Runtime suspend halts the controller on disconnection. It relies on
- 	 * platforms with custom connection notification to start the controller
- 	 * again.
- 	 */
--	SET_RUNTIME_PM_OPS(dwc3_runtime_suspend, dwc3_runtime_resume,
--			dwc3_runtime_idle)
-+	SET_RUNTIME_PM_OPS(dwc3_plat_runtime_suspend, dwc3_plat_runtime_resume,
-+			   dwc3_plat_runtime_idle)
- };
- 
- #ifdef CONFIG_OF
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 27eae4cf223d..d5b985fa12f4 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -1083,6 +1083,7 @@ struct dwc3_scratchpad_array {
-  * @tx_max_burst_prd: max periodic ESS transmit burst size
-  * @tx_fifo_resize_max_num: max number of fifos allocated during txfifo resize
-  * @clear_stall_protocol: endpoint number that requires a delayed status phase
-+ * @num_hc_interrupters: number of host controller interrupters
-  * @hsphy_interface: "utmi" or "ulpi"
-  * @connected: true when we're connected to a host, false otherwise
-  * @softconnect: true when gadget connect is called, false when disconnect runs
-@@ -1333,6 +1334,7 @@ struct dwc3 {
- 	u8			tx_max_burst_prd;
- 	u8			tx_fifo_resize_max_num;
- 	u8			clear_stall_protocol;
-+	u16			num_hc_interrupters;
- 
- 	const char		*hsphy_interface;
- 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 321361288935..74968f93d4a3 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -3516,7 +3516,7 @@ static int dwc3_gadget_ep_reclaim_completed_trb(struct dwc3_ep *dep,
- 	 * We're going to do that here to avoid problems of HW trying
- 	 * to use bogus TRBs for transfers.
- 	 */
--	if (chain && (trb->ctrl & DWC3_TRB_CTRL_HWO))
-+	if (trb->ctrl & DWC3_TRB_CTRL_HWO)
- 		trb->ctrl &= ~DWC3_TRB_CTRL_HWO;
- 
- 	/*
-@@ -4821,26 +4821,22 @@ int dwc3_gadget_suspend(struct dwc3 *dwc)
- 	int ret;
- 
- 	ret = dwc3_gadget_soft_disconnect(dwc);
--	if (ret)
--		goto err;
--
--	spin_lock_irqsave(&dwc->lock, flags);
--	if (dwc->gadget_driver)
--		dwc3_disconnect_gadget(dwc);
--	spin_unlock_irqrestore(&dwc->lock, flags);
--
--	return 0;
--
--err:
- 	/*
- 	 * Attempt to reset the controller's state. Likely no
- 	 * communication can be established until the host
- 	 * performs a port reset.
- 	 */
--	if (dwc->softconnect)
-+	if (ret && dwc->softconnect) {
- 		dwc3_gadget_soft_connect(dwc);
-+		return -EAGAIN;
-+	}
- 
--	return ret;
-+	spin_lock_irqsave(&dwc->lock, flags);
-+	if (dwc->gadget_driver)
-+		dwc3_disconnect_gadget(dwc);
-+	spin_unlock_irqrestore(&dwc->lock, flags);
-+
-+	return 0;
- }
- 
- int dwc3_gadget_resume(struct dwc3 *dwc)
-diff --git a/drivers/usb/dwc3/glue.h b/drivers/usb/dwc3/glue.h
-new file mode 100644
-index 000000000000..2efd00e763be
---- /dev/null
-+++ b/drivers/usb/dwc3/glue.h
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * glue.h - DesignWare USB3 DRD glue header
-+ */
-+
-+#ifndef __DRIVERS_USB_DWC3_GLUE_H
-+#define __DRIVERS_USB_DWC3_GLUE_H
-+
-+#include <linux/types.h>
-+#include "core.h"
-+
-+/**
-+ * dwc3_probe_data: Initialization parameters passed to dwc3_core_probe()
-+ * @dwc: Reference to dwc3 context structure
-+ * @res: resource for the DWC3 core mmio region
-+ * @ignore_clocks_and_resets: clocks and resets defined for the device should
-+ *		be ignored by the DWC3 core, as they are managed by the glue
-+ */
-+struct dwc3_probe_data {
-+	struct dwc3 *dwc;
-+	struct resource *res;
-+	bool ignore_clocks_and_resets;
-+};
-+
-+int dwc3_core_probe(const struct dwc3_probe_data *data);
-+void dwc3_core_remove(struct dwc3 *dwc);
-+
-+int dwc3_runtime_suspend(struct dwc3 *dwc);
-+int dwc3_runtime_resume(struct dwc3 *dwc);
-+int dwc3_runtime_idle(struct dwc3 *dwc);
-+int dwc3_pm_suspend(struct dwc3 *dwc);
-+int dwc3_pm_resume(struct dwc3 *dwc);
-+void dwc3_pm_complete(struct dwc3 *dwc);
-+int dwc3_pm_prepare(struct dwc3 *dwc);
-+
-+#endif
+[1] v5: https://lore.kernel.org/u-boot/20260716134305.614278-1-anders.roxell@linaro.org/
+[2] Jerome's adaptation work: https://lore.kernel.org/all/20251121153812.2076440-1-jerome.forissier@linaro.org/
+[3] dwc2 prep: https://lore.kernel.org/all/20260703-usb-prep-dwc3-sync-v1-0-1352bc238c9b@kernel.org/
+[4] https://github.com/roxell/u-boot/tree/usb_dwc3_sync_v7
+[5] part one, subject: [PATCH v7 00/63] usb: dwc3: part 1, reset and
+    import from Linux v6.16
+
+v6 -> v7:
+- Split the series in two. Tom asked for this, so review and iteration
+  gets easier. Part one is the reset and the imports, part two makes it
+  work.
+- No code changes in these 24 patches.
+- v6 never reached the list in full. My send died in the middle, so the
+  cover letter and the last patches went missing.
+
+v5 -> v6:
+- Split the "add helpers" patch into a dm patch and a usb phy patch.
+  Mattijs asked for this.
+- Kept the U-Boot dwc3 Makefile instead of the kernel one. This is what
+  Marek meant with glue drivers that are never compiled or used.
+- Brought back samsung_usb_phy.c in an own commit. The restore commit
+  deleted it and nothing added it back, so odroid-xu3 lost its USB 3.0
+  phy setup.
+- Stopped moving functions around in dwc3 gadget.c. Where a function
+  still had to move, the commit message now says why. Mattijs said the
+  last patches were hard to review because of this.
+- Split "fix up musb-new and mtu3" and "fix up xhci and cdns3" into one
+  patch per controller. David asked for this.
+- Set endpoint capabilities in at91_udc, atmel_usba_udc, ci_udc, musb-new
+  and mtu3. Mattijs asked for this on v4, after the VIM3 fastboot
+  regression. Each patch sits next to the other fixup for that driver.
+- at91_udc now calls usb_add_gadget_udc(). Without it udc-core never sees
+  the controller.
+- Enabled async callbacks on bind, and added a cache flush and invalidate
+  around ep0 transfers. Without these no dwc3 gadget enumerates. Anshul
+  found them on BeaglePlay, I hit them on BeagleBoard-X15. DFU works on
+  both now.
+- ci_udc got udc_start() and udc_stop(). udc-core calls udc_start() on
+  bind, ci_udc did not have it, so the board crashed with a synchronous
+  abort when ums started. Found on i.MX93, ums works there now.
+- udc-core got two more fixes while I looked at that. It checks
+  udc_start(), udc_stop() and get_frame() before calling them, they are
+  mandatory in the kernel but not in u-boot. And it reports what
+  usb_gadget_udc_bringup() returned, before it only said "No UDC
+  available".
+- Rebased on current mainline. The ci_udc patch shrank a lot: mainline
+  gained three ci_udc fixes and the old patch deleted the functions they
+  touch.
+- Mattijs' dwc2 endpoint fixes [3] are in mainline now, so this series
+  has no dependencies left.
+
+Older changes are listed in v5 [1].
+
+Cheers,
+Anders
+Anders Roxell (24):
+  dm: add helpers needed by the resynced DWC3 code
+  usb: phy: add the usb_phy helpers needed by the resynced DWC3 code
+  usb: gadget: adapt the gadget API after the resync
+  usb: gadget: udc: make udc-core build in u-boot
+  usb: dwc3: make the core driver build in u-boot
+  usb: dwc3: bring back the samsung usb phy driver
+  usb: dwc3: make gadget and ep0 build in u-boot
+  usb: gadget: udc: enable async callbacks on bind
+  usb: dwc3: ep0: flush and invalidate cache around ep0 transfers
+  usb: dwc3: make the am62 glue build in u-boot
+  usb: gadget: ci_udc: move to the udc-core registration
+  usb: gadget: ci_udc: set endpoint capabilities
+  usb: gadget: dwc2_udc_otg: fix up after the resync
+  usb: gadget: fix up the function drivers after the resync
+  usb: gadget: fix up the last UDC drivers after the resync
+  usb: gadget: atmel_usba_udc: set endpoint capabilities
+  usb: gadget: at91_udc: register with udc-core
+  usb: gadget: at91_udc: set endpoint capabilities
+  usb: musb-new: fix up after the resync
+  usb: musb-new: set endpoint capabilities
+  usb: mtu3: fix up after the resync
+  usb: mtu3: set endpoint capabilities
+  usb: host: xhci: fix up after the resync
+  usb: cdns3: fix up after the resync
+
+ drivers/usb/cdns3/ep0.c                |    8 +-
+ drivers/usb/dwc3/Makefile              |   16 +-
+ drivers/usb/dwc3/core.c                | 1761 ++++++------------------
+ drivers/usb/dwc3/core.h                |   39 +-
+ drivers/usb/dwc3/dwc3-am62.c           |  424 +-----
+ drivers/usb/dwc3/dwc3-omap.c           |    2 -
+ drivers/usb/dwc3/ep0.c                 |  117 +-
+ drivers/usb/dwc3/gadget.c              |  719 ++--------
+ drivers/usb/dwc3/gadget.h              |    4 +-
+ drivers/usb/dwc3/io.h                  |   36 +-
+ drivers/usb/dwc3/samsung_usb_phy.c     |   77 ++
+ drivers/usb/dwc3/ti_usb_phy.c          |    2 -
+ drivers/usb/gadget/at91_udc.c          |   83 +-
+ drivers/usb/gadget/atmel_usba_udc.c    |  114 +-
+ drivers/usb/gadget/ci_udc.c            |   86 +-
+ drivers/usb/gadget/composite.c         |    2 +-
+ drivers/usb/gadget/dwc2_udc_otg.c      |   86 +-
+ drivers/usb/gadget/epautoconf.c        |    2 -
+ drivers/usb/gadget/ether.c             |   21 +-
+ drivers/usb/gadget/f_acm.c             |   20 +-
+ drivers/usb/gadget/f_fastboot.c        |   10 +-
+ drivers/usb/gadget/f_mass_storage.c    |    5 +-
+ drivers/usb/gadget/f_rockusb.c         |   11 +-
+ drivers/usb/gadget/f_sdp.c             |   12 +-
+ drivers/usb/gadget/f_thor.c            |   19 +-
+ drivers/usb/gadget/udc/Makefile        |    1 +
+ drivers/usb/gadget/udc/udc-core.c      |  933 ++-----------
+ drivers/usb/host/xhci-dwc3.c           |    4 +-
+ drivers/usb/mtu3/mtu3_gadget.c         |   10 +
+ drivers/usb/mtu3/mtu3_gadget_ep0.c     |   16 +-
+ drivers/usb/musb-new/musb_gadget.c     |   21 +-
+ drivers/usb/musb-new/musb_gadget_ep0.c |   24 +-
+ drivers/usb/musb-new/musb_uboot.c      |   39 -
+ include/dm/device_compat.h             |   13 +
+ include/dm/read.h                      |   51 +
+ include/linux/compat.h                 |   15 +
+ include/linux/usb/ch9.h                |   25 +-
+ include/linux/usb/gadget.h             |  529 ++-----
+ include/linux/usb/phy.h                |   56 +
+ 39 files changed, 1406 insertions(+), 4007 deletions(-)
+ create mode 100644 drivers/usb/dwc3/samsung_usb_phy.c
+
 -- 
 2.53.0
 
