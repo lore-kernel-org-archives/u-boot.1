@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358D8C5DF9B
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C29C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:15:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EA07B406D2;
-	Mon, 24 Aug 2026 13:15:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 12CC4405FA;
+	Mon, 24 Aug 2026 13:15:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6q7iYGzMYsEr; Mon, 24 Aug 2026 13:15:00 +0000 (UTC)
+ id 7YJb1AmC3-4b; Mon, 24 Aug 2026 13:15:02 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787577299;
-	bh=tA4cnIG8yyx013J3uVrpbTyUYBy4HUHcWyDNmTdHMYo=;
+	d=lists.u-boot-project.org; s=default; t=1787577302;
+	bh=NppZK+oPP+XQR+WB2wkjWiBPQyhl6zSP8nSN511MAbo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bxnY0EgGZ/Ab0T8obxWi6tUy7maJ2SsQqmgCqjodFL6gYWeX2CURveYOV5f+h4//v
-	 M6Ze/GnlDVXPcecoeH6LKAbf/3bcR57FdJHOFHBzoKsSicigi/wdGnFG1CiN/I6i5X
-	 t/ObBsmAUVZYulI5fFAo//leTkICYenBUHB94ulZ6j0TP8pgMs/roN1LGMp7VyD2cV
-	 LNMZYfZYMd24Jh92yHqPC8MOoaZn8QK2L6v9JERCBu0N7o8XC8eYaMrOQqy1rxZ83g
-	 70lUCVLqQdblZ/eGSV6VU3SBZTW3Nq+x0RvtBrskcaSLd0SSeaFmRwvFrH0ZXsuMaC
-	 l5Tue7oQ6ifMQ==
+	b=XyhgwWMsNIifmJ4rP6yVYZeTiB8RNZqUha/jlanHUsFiGDQ/BtQxiueZ+2OpFRVEK
+	 e9zU8lXrBog2UTaEwWxkabMRY9Q8FUiCI8myJZheme944aHh872sc2+47oGUjpTgyD
+	 m+eyIuZVOjXGgdboG7gwaa80jFMJIodLR2YwajQNhMmkeB00lzUUoIu/nzkERGOQXJ
+	 JJFoYSJXSrug0JYdepn6xbwdnhIA+IkEmmiZCoYkHU/4r1DivQQ4hYATCogp4i44eI
+	 b/wQeq/D++dfJc1fOmLkk9+wJar2uwnIm+cZhsjuFE/SoAK2oANvM54GjBbopAbWL2
+	 kLdr5q55ff8/A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A34A9406AB;
-	Mon, 24 Aug 2026 13:14:59 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 83E14336
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 10:08:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 76231406AB;
+	Mon, 24 Aug 2026 13:15:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6DF413AD
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 10:15:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6A64580BCD
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 10:08:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5FC8E60617
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 10:15:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sLSsPKczqtjv for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 10:08:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kVOM1OYLB5gO for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 10:15:42 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c105::1;
- helo=ch1pr05cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c10d::1;
+ helo=sn4pr2101cu001.outbound.protection.outlook.com;
  envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=S9CBNqUq
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 36F8280AAD
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 10:08:12 +0000 (UTC)
+ header.s=selector1 header.b=ADLgWOHD
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CBF726060A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 10:15:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o1YabO8z94Cngrd4HrGEdhlxW0OulyrvdlPpYZ1KzXdFmd1LJP/+fI1FKY/N5LQHgKuhHLRPMdsxAndmN7UZMhog7UabeVBoSKq/1GV9Kmj7AvhrgJ54WLALMosntJ6pE8008uqHoylHCrkBnsvt0cWTa33PTgwXCiAo3Nn6eUNeMuKKVaeD0Qg9urtwdc1Mq4OQzZGKCmgxwmgNrkSBCQ/g4PNsqucwW4vOXEdnl5yW+c3fCwI3K2au6gyk7XDMJJ3DgwcYmqjdp1ume56vPQ7ZNvZd2lsjz1YKEpTIGU4OJ/f/29YVmT5Wlu/pM6VCDkHOb40F9SBEZWLF6r0ByA==
+ b=Jis4lmTMCG/6vVExKNlzVPInPlUKE5K4LDUSPanrTOLxafK8iQltP/aCkPA85oVI9WJlJnF5bkOFsaQhd5swPAoNbyULMzQfgjxDlr8Sm9keMlxWOww6Kd6ms9+tqTQcB9xv1sErR014vjukFBukr3GjZtA8owiaiWl70U9H1K3lUkXY9Wch1i6ym7PI3AWF7G+9rCh2KA83au5y9VVnTtKuot+HfkcVA5UlLQXXmrq1m0jRqHEP4DBdmPsHS9QZxect90M4WrH2Rql0ZJxrziHkrgmIduo8WokcgPDcECcF4XuOvo+j5DgY5YEMOkHJaFuTtYDYe36bywjYdZJ9pw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tA4cnIG8yyx013J3uVrpbTyUYBy4HUHcWyDNmTdHMYo=;
- b=NtJ8UBHQh8cmAbeThTGQdKXyrFydDkB0DDlGtaros9ShN2mMiUmK6PrXGnlO/JuRXXH4U0K6yyRYVwisy/cnep3hluUIMCEWxqmKndYJ4yaOX9nR1cbB2v9hy/wjKuxAIMguPi5ofJiK0wDe0XWS7pupQTtWJVPK0ifIJPfDPfl72ZDeN6hULhe7iRwoCmJedX4XkwdA9xMu2TzavESrJ5QF6u/libvsMt17WkztN7CWtlyb7huCcZIDPJ8TMpLLbqev9GnR0RnlMrfMEhIbDy4C+TO2ZG0snU3iUE93fj7pkZuuSA8Vr/eL2Dl5fX8ejnFT/ADhz5HJoyq1aXFSxg==
+ bh=NppZK+oPP+XQR+WB2wkjWiBPQyhl6zSP8nSN511MAbo=;
+ b=vLbPCj3UeY/b+t7MxvVA/zst+k7J7X8YLOYCxWoFb5NqZFckVcSB3UDs0vMzJqwgExdUnjnj2LrFX3+FWuEkK603bjddd0pQuv5+nU/4m9pvBc8NpYZKcXLO9cF+V0oMHUyFbSnhgseZ//A3dUcxG1KwkNTmYciEOOICvjdx6TBHo0dlbaBFayH+HnpMX/e+OcsddsgibJWW1SBI7V7wWc1OE6CUCyKFyb0xsm173GTWa2xilQeDCpi3kA7U3iqcSTadMd1ct2DTjtJUGxWQRTDIZsDcyWsBegwdqt551inxkH3xYy//KghKkTAX1/y5KfXH4GVSdjpP3XnladKKxA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tA4cnIG8yyx013J3uVrpbTyUYBy4HUHcWyDNmTdHMYo=;
- b=S9CBNqUq1LyLs2SXtZdTIzLbdGwGY8m2FzDJNZz7d81Qpl/JhRYrXNV5EMuoaEhiT+eK+w/6SnM4er1vAxEioHzZpU3DWTo9YZ61C/GJvUOXoDcDZbyrpbNH+dE4B+eegr90KJV1YQE4piauMLo+P1RYpMEr67w0lFo+cWSnddY=
+ bh=NppZK+oPP+XQR+WB2wkjWiBPQyhl6zSP8nSN511MAbo=;
+ b=ADLgWOHDtuIQiUETpctMahSI8X9MQA+zafMap9h47P68YgiB5IAjlAMzDdxIvNpaLSRjppfSGJnis8zDu2EKJJzxC4boV80SfoANen6GoHyd2fsZJQQ5IimS/lidtWhhAgNmKG1bFs/eRSHXR8cJl6u1xsJtIP9PcRBV7tjOQL4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
  by IA0PR12MB8693.namprd12.prod.outlook.com (2603:10b6:208:48e::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
- 2026 10:07:59 +0000
+ 2026 10:15:27 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
- 10:07:59 +0000
-Message-ID: <e14e6b85-97d7-4546-88d5-7d5e3a875ae7@amd.com>
-Date: Mon, 24 Aug 2026 12:07:07 +0200
+ 10:15:27 +0000
+Message-ID: <ad8a8f9d-8fab-4976-9d9b-10e7f5bade9f@amd.com>
+Date: Mon, 24 Aug 2026 12:14:37 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 3/3] MAINTAINERS: Remove references to not existing files
 To: Quentin Schulz <quentin.schulz@cherry.de>,
@@ -160,6 +160,8 @@ Cc: Aaron Williams <awilliams@marvell.com>, Adam Ford <aford173@gmail.com>,
 References: <cover.1787555916.git.michal.simek@amd.com>
  <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
  <fa38d1ba-ea87-4e29-905d-f71c04dcd458@cherry.de>
+ <e14e6b85-97d7-4546-88d5-7d5e3a875ae7@amd.com>
+ <e128ba15-d1aa-4414-9273-8fe999e054d4@cherry.de>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -206,75 +208,75 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <fa38d1ba-ea87-4e29-905d-f71c04dcd458@cherry.de>
+In-Reply-To: <e128ba15-d1aa-4414-9273-8fe999e054d4@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VIVP296CA0101.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:355::18) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1P191CA0007.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:800:1ba::17) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|IA0PR12MB8693:EE_
-X-MS-Office365-Filtering-Correlation-Id: 599096be-4418-4215-627d-08df01c7937c
+X-MS-Office365-Filtering-Correlation-Id: 20377e99-b342-422b-9b01-08df01c89e5b
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|7416014|56012099006|11063799006|10067099003|4143699003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: kUGE+q8uD7AA/jEQh98yuJhYqvgHrEqvUNFpbGNvDf9Ot7f3mAk50GKgmR8Xfk0qE2fxkkkaZVWLFEldXMb139d8yeKDDT9PQ2Mt1iFBMl7LjFpTzPhGDoEPTo8Gj+bpKgrBxGFmtc1Rssdrr8QuN5e76RIfocZHhIeu8EDTmtMNTCaNpW7TZWUV6tgYdPJdJCD24AdZnpEtdOrGkfXYoNgqVDCUR3OmI7zL2Wu4X0dHxSaHq6b7Pv3fCoIZykANcEUxJYyFhCF7WdvDTrhQ+kLYG64FvmdPCGMhKMmwAXFgnMUwoJYCXspfbD2xFYFrBq0P3ALGuooEB4FgrlmEWQkDFKX9zG4ZsqNtCvoeIvtwUCpni6UMC8ecR/aoNcj2ksbeHi6BMNQoAT3UebqCRK4ii/8zDQcAgXJSUCXuKisPOrKIFEKT66rkCZuqVcKqSL6a3r/QLs7CiaNs7fk/a6J/AcwN1zklqq0DFxQI5YhMrCLxMCb194lEIKwCCguKJx42rmXaMvvBELLxdnw57FiB6udGsoQLBWD7/Wd/3ZgckIJ1x65b7ZnPcPswQT0+k9fP4zHNF2TAaej8Wmndv51rk/jyOQUJsaRfKpzWQDCU8zX8pg8fZPG5v1Wq2oLyM+94S/OdD9IBYmMa/Nrj/V2wGddrWNLeSrcFKHaRJjk=
+ ARA:13230040|366016|23010399003|376014|1800799024|7416014|56012099006|11063799006|10067099003|4143699003|4133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: jXH1FFF63KJe8XFrOoaDfH/mYZMIuhFUtftCPBX91bwqcCtgRq1/n8GDdZ6KJJz/VTu5+xC5TR4CsvD8IlUv65Uo15Q+ZWGE+EoVgABf592l6jfGt+wy5tA+cG0OOG14ZBywT3o/pmBbE2zkJ5TUvM3RM0eMVOG5RvpTijBy+F+xpf2SnzeFv9JsclHnmj0MujuRsIMQsvi+GlkptndEoc7b9Ymzp62h26ZD85ZljZTagDmJ5eO7AJUKDCpul76SnQ8dCJ+7BBIw27i9H7pCYKAYcLck51Wo4mXXvc7VfhBUKCvxR+3fgDPs+X2lR+JwitjHrGr/8RUI4NX57HdsVXBSIF5xJUpjW/fb7t4oFbUnR36vX9Zi85FqYpgL4PtpgyBJLigOarxXL9tLPKmPbgWMIfBkLxPdxMZmljmp8QvrKBfFeEumFUIooArF2qseHslJNXEOAB5q7vUzNH0vxrYkEw9v4bl+GalwDFSoJxddg4gfXqxVuc2BAalql808eBX53Ep9Q10BFj+frZX4n3AzXC/C5g2+J/6j8DbmhpRi+fndOsfUpjoHAeLFG5MEL3cQKS/rgoNT/530ddFEezg1nCNLx449R646BvgzihI=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(7416014)(56012099006)(11063799006)(10067099003)(4143699003)(18002099003)(22082099003);
+ SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(7416014)(56012099006)(11063799006)(10067099003)(4143699003)(4133799003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZVFhV05Gc08rbStCYXVPVTBxd1VneUQ0SFhEZ0ZLZk1DcWg1YkV4SFZvcjR5?=
- =?utf-8?B?TXNZNWZPOENPd1dHSHEvOTh5Zi9GSTRDZkxjb3cyZlR3Qk1nUG5DRDB2bjFN?=
- =?utf-8?B?NkNSYityN1lKUnQ5bTBVZmxhYytVeVZTREhpMWtYbisvZzEvU29KcVpSVHBW?=
- =?utf-8?B?ZXNSRWNGYlQ3cDBndGgrTVBvejUvWVVaZVUrdllNWVlxSGNjdXBDR2xJZzYx?=
- =?utf-8?B?UWpPMFp0TlcwQnNMTVJ2ZUhOR3NrVFlIRFBRNEc0RTZlTGRXQlh4Tmp4a2FK?=
- =?utf-8?B?NTV5d3YyanN2OElOUlRUbVJrMkV5TFJGcWFhaXhZSm80by9MUmxpM041M0FM?=
- =?utf-8?B?SHg4S0w1Rk1uak9KSXB1MmtSbXRaNE9rRXV1QW1HcThpMGYwMGdFcDh0OFNF?=
- =?utf-8?B?b1BMUlNEVmI5bndHNFU5NTFnUld4Y21NYm5tMnNpNnhjVlI4ZkU3UHMwWDhV?=
- =?utf-8?B?aWZUbkFJbFppMDliYXcvZ1duUmgxUVd2aWVXQTF5Qmc5L1pKTHhHaVZKYUdh?=
- =?utf-8?B?R2M0Zlh5RlpXTmtGZWh3YXBnYUN5OXEyWXNMNFVYNk1FQko5VkZGaThFbEpz?=
- =?utf-8?B?MHlRSVBkZnBGaWFJd1VqdWF3TjRUeEczN0VKQVBSSEh2UnJpalo3WWJyOXJ3?=
- =?utf-8?B?eUtmSFJpSjlVcWVrL3hPQkF2bUg1c0VMK3FHQnlSMzF6b3hVaXNKVTdwTkM1?=
- =?utf-8?B?Y2tJYVZ1eHh5dzhST0d1SmcrMFlEM3MrT3hENDgwTjNFakNlSnU0VForMi9L?=
- =?utf-8?B?NWkyalpsT0VDdmVQTmZUREoxOHJ3Vis5YzluaVdqSWc2SlR0SDhseHZ3VEdF?=
- =?utf-8?B?cHlOMWhMRXdDOGJmcExEL2RqRStEVDlaaXJYV1A5NTFSTFRkdVpnRWF6QXM4?=
- =?utf-8?B?T1ZrTTZHUy9TeHR1R3MxWk82Y2Fya2hMRW5GK3FSdTdKWTNBVUhZM2JEUmJ0?=
- =?utf-8?B?T3IxbW0wSDVIdzhYeDdHdVE3OEI2aE9ndWNLSXI5VXp6Nk81RjVzcEZKUFdN?=
- =?utf-8?B?SzU2ZjlnVW1lZGJkUDBuS0pJL3BvMWw1UzN6MUhsZ3I4eGcrUFRiMmR1dGlZ?=
- =?utf-8?B?SFg1aDdTWk5YSjFtcnVKc2t3b0NzOGdQNHZhZXhadkZaZkVpTEVhZTZwSlU2?=
- =?utf-8?B?NkRaWW5HKzE5azNlMFNaUDl2NmoxN3dLc0VLbXplWHA3OE9tVE1FWkowQURo?=
- =?utf-8?B?UXNEKzJVSkFFWHBYYU9HS0VzdU1hSWNJelNXaEdNUmRZSm1nSHJXRXZQTENl?=
- =?utf-8?B?V3BSUDZYWFNyZk9vcjhaZmVDK0xsTTBzb2cwUjJaTk95d1FsKzBrczRsK0hv?=
- =?utf-8?B?Q25tdVlyYlhKenNiYWlCcUUzUDBtbFkzcTg1VzQ0Y3lwZ2ZxRzBuckRFNkQx?=
- =?utf-8?B?VjZBOWcvbXVENUxldm55NVRmSmlHeXN0OGpuNGRXdkFva2pNWWxEM0RrY0lx?=
- =?utf-8?B?bXhvUG44YUJJOEJrd3M3VVRlcUpqVUJFT0c4OUF6S2JLZHlWVmljRGxlVWRF?=
- =?utf-8?B?Z1JSZ2Z4WGd2TlVUaE1ZQ0dQS1J0TE5DanA5NUlRVVU1NU1ER1dnTFFSSndy?=
- =?utf-8?B?ZnNDYWJpRHRKYWdPY3U3aC9NMWtHZDBVdytJdHI1SjIwSlczU0YxMmxZS0k0?=
- =?utf-8?B?Tk4xR25uUnhuQUVxT283aDA3dGNodmg5S1hoQXJ1OWd1MHV3NG9SK3VwL2Q1?=
- =?utf-8?B?RHdUWnRXQndPWGdvd3RNT1M0dTFBNnBNYXVIV2drRGNHRzlnNEJjeHN3QUZI?=
- =?utf-8?B?NEl4M253YTlwZlQ4WDJFQ2hjWFhxRGpNa2drNTN3SXROYU1yeTU0Y3ZVNU9p?=
- =?utf-8?B?MDU5ODROdVlIczhqbGhKbzFLSFppamNva1VpeUVVWGhPa2grWnpkb1U0a1hk?=
- =?utf-8?B?cGpodFpGWDJSaDBpcXhhV2h5RU5vS29Qci9MK1phWjQrK0R3MUFoaWE0aFpT?=
- =?utf-8?B?N0I4dHFOVnp2S1JGaW0yNC9WM1kwQU5zVkg3MVRHRTBTaVZDcnAybGJ1SXFH?=
- =?utf-8?B?WmJUR3lqSm5lUFlJZG9heXdTQ2RJazhIVUIvTEQxMGw4aUpOZmN1dHZyeXJa?=
- =?utf-8?B?dXJ3SVFhNFMxR0ZWOUZVNTV1TGswSjN5dURwMXY1a0ozZklFeHVuV2t1Z0Zr?=
- =?utf-8?B?UGora29JeStsdUFkOG1BekFaUVQzSTVDT0cwQXZiTCtFVHhZVGZmTi9oZHJU?=
- =?utf-8?B?bDZ4WE9qeUtoQ2VYOUJyNVZ6alovU2VpcWxjNGlscVRMaEx2Um5naVpBU3hj?=
- =?utf-8?B?MW14MDY1S2dzbnB6ZEtWQUV5dFBsWVJwRnc3R0pudU54Y2ZEcjlOOWc3MjVm?=
- =?utf-8?B?Q29MU3dsYy84MkZ6cVhOQTFlMVhYeGlETzIvWXd2WmF5Vld2TU42UT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eGNmc2haREczWUJQVlViOUFseWJQK0xsUjFISmo1VzlJd29MTWs2RXNRcjlK?=
+ =?utf-8?B?Z2xIWUFIWnpWdlY5ODNoZGhtVXQ0ZUpaOVQ0VGtjeGdZbmtwYUhlMnlMT2Ji?=
+ =?utf-8?B?eUV6dlMwTksxU2w5ZWM5dTJVUGI0REQzeUVQaU9ma3AxdjI2bVphVG9CTWRC?=
+ =?utf-8?B?ODVBN21vOG5JMENuaGd5cHVmRjM2OVBzc2JpQ2QvdXZERW1Pb3hUOEFEN1Rh?=
+ =?utf-8?B?NXFUYVBXbzFvUEZmUXJrQnR0Umg2blVVUlVlWVlpSnNtb3lsN3F4ZDYzUXZE?=
+ =?utf-8?B?VWhOREVjaGUrQXp6Rmg3NENTWlNtSzBaNFViNDYwcUczVXVKdHNpYmFTMXBZ?=
+ =?utf-8?B?bmU4VHB5U2pRcWU3ZG5uNVJVWVIxR3lCaWdUT1BmQmIvcUxOaTJSc0ZuUHI0?=
+ =?utf-8?B?YmN3NnlsOGhKK1J4NzhvdTJHUWk5YXZCUEdnK2ZoamhqTnVIMDB5Mkl2eCtx?=
+ =?utf-8?B?UDJLMGQ2dXA4Y2kyQTBpalpjdWRJNmR5OGJIQkJxM3ZIVmZJaGxFek5oR3p3?=
+ =?utf-8?B?eitITlVaOUxueDZvWXVTNXFoRXA5N3hLNytCL051VlpyelJuMitQWDVHQ2l3?=
+ =?utf-8?B?ZTI2cFlnWTlRaU1hZFpVS0k5RUh6R1BNNVVJSzFCdEZGTnNOWG5qZUR2alEx?=
+ =?utf-8?B?S2F2aW9ja2xoUnhxNlRlNGZMTU4wazBWTUhScldvcVBiL2YzMmNQK0dwRVRW?=
+ =?utf-8?B?L3k4NXl1TDZqRmRLRW5ndVdFZm9WSmFLR3N4Qi8yclJTY2hLNVMyQ2VUNW84?=
+ =?utf-8?B?bFJZbHdBaDhISlBMZW5MSTc3Y0Y4V2FKSnpHTzduNSt4Y0ZlSFRmcDJYanBz?=
+ =?utf-8?B?REM0S1hnekNsdEdnNnZxcGhrVHJEeXYyU3dFeDk5WWZzdkdDQVZic3Bna3Q2?=
+ =?utf-8?B?WlV4VmxXbU9XcWtDZk1Ialo2bUpsMG1ScklhMGZkTXpmWjl4aWwyMU9nVWJ0?=
+ =?utf-8?B?WHZDY3lRSk02YXZKSURlcE9HcHpYbzZhYlFhTjd1RFZYVDNTcGlWdVlSSFJG?=
+ =?utf-8?B?UUlsQzdRQk9BTjBUdW5vSnZ3aWRXZ2NWVTV3dDFqczZxUXc3YWRmaE56M1Zs?=
+ =?utf-8?B?aDA5Z2Y5bkxHWVpLUUorQkNmOWQrdnBSWnRtODk1T2pONXBrWE1yM29JdFdB?=
+ =?utf-8?B?ZitReGpoSUd0dWhDOXNxZnhHMEFwdzI3N0F0cGJBQ2EvU1cvTytiRFdDZ0FH?=
+ =?utf-8?B?by9zZ3FxbDhzOVNHYkJaa3JlRnR5QS8xVjArREY5QzYxbHQ2T2VkNVBQK2dP?=
+ =?utf-8?B?UGdRQmw0WlFIMWN1UWF3RlhJMHlRQWZZNEtoN0tXLzZYcWRyZnlBdVpMd3dW?=
+ =?utf-8?B?dHRyUmxhV3hWOENIdGlTL2pJYWxNT0psYTRQb2pnZ1dEVWFqTiswaWQ5bFZP?=
+ =?utf-8?B?TXlnSzZTYXBjU3NKeExUejdrS0U1d3hOWEVlaTJ5MURCTDR5blBUWDZvNE1S?=
+ =?utf-8?B?ZFlTY0R6d21CYXo1dHlXR1ZSWE9HdFgvclR6dFJRdVBpTXRuS0JybFYzUDhM?=
+ =?utf-8?B?UExjcG9CQUMrYlpkWWZqcURwMmNrMWhDZVVoTDIzYjVHT3M4bnJBOTMxQk5J?=
+ =?utf-8?B?RUwxMll0K2lRS0VNN2NybzJQUFJKVk9zSElKcmVvQ1p4enYyZ3JmdnFPRXdx?=
+ =?utf-8?B?ODdscURkUUdkRXcyV0RocXhCYUpxWUhGbUFzc3QzZkMrdEM1aGZoM1pqdDFt?=
+ =?utf-8?B?USt4MkJ2Sk9tMjhUNkEvdXo3a1lkTTg4M0ZleXkvREVDTFFZL1d0Wmt4eGlw?=
+ =?utf-8?B?NU1xVmd5YzBsTEZlQkszZ3BvQmdKNEExT1ZDK1NHakFaTW9DVjRsbmhWUVhP?=
+ =?utf-8?B?U09xMlhielBualB1TzJ4dVFJZkprdkJ2Umorb0dabzN3eXVEcUVaRkxObkNn?=
+ =?utf-8?B?NWtJdVBGc05UazZ5bjhKMmJ5aDZERE5UbnhDOEwrRHlWL1ZyS1IyUnFDQ1F5?=
+ =?utf-8?B?OEFFQUxycDNaUU5objU5NVpXYUMxY3g3TEpHMDFKaDZDM1o1Z21kS1hJNkFL?=
+ =?utf-8?B?akQwMlMyRHl3VXkySFl6TVc5V3hVbHh6Zi9GMzI1OXl1YmhKdW8zcW1wbFlt?=
+ =?utf-8?B?aXpwV3NzRDBoYUpTRTA4NEU5RU9yamlhQit2bFdtVTQwUVJ1eCtOUVlGZ0ZS?=
+ =?utf-8?B?Q2VWZWh4VGhGRzlhVlArMUw1ZTdaZGZqWVBQaThicUZQNHZzV2cxREttZG9v?=
+ =?utf-8?B?Y3BIQy9ZWmtKaTkyVXE2YjJvS0JpS3RPbGJQZ2hPKzlrTUxnUmVWYWZZbjZY?=
+ =?utf-8?B?N2NrWmUyWjBZbWpQaWhWcmNpYkNCTy9EcDBZRkN2Mi9TSS8wNGF2d01DNkMw?=
+ =?utf-8?Q?FlRBoAfYTyKLqllfhp?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 599096be-4418-4215-627d-08df01c7937c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20377e99-b342-422b-9b01-08df01c89e5b
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 10:07:59.6052 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2026 10:15:27.5469 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2Zc/OVGKWYcuI5/CMSC8zF/72c0SCnRY+SGfkS/QaLtN3ErEzLJR02pEkqY7vzfz
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ox0e/k+Sc5t3pih+nf7QbEbMOAa4kovYKRcnZTV4Cs1/A1jvS+Eb6uMVQZ8YHPmt
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8693
 X-Mailman-Approved-At: Mon, 24 Aug 2026 13:14:54 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -292,41 +294,55 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
 
-On 8/24/26 11:54, Quentin Schulz wrote:
-> Hi Michal,
+On 8/24/26 12:11, Quentin Schulz wrote:
 > 
-> On 8/24/26 9:18 AM, Michal Simek wrote:
->> A number of file (F:) entries across the MAINTAINERS files pointed to
->> files or directories which had been renamed or removed over time. Drop
->> these stale references so that every F: entry resolves to an existing
->> path.
+> 
+> On 8/24/26 12:07 PM, Michal Simek wrote:
 >>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> ---
-> [...]
->> diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach- 
->> rockchip/rk3576/MAINTAINERS
->> index 79cf9e97f70b..62c3ce765e0d 100644
->> --- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
->> +++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
->> @@ -13,7 +13,6 @@ F:    configs/nanopi-m5-rk3576_defconfig
->>   NANOPI-R76S-RK3576
->>   M:    Jonas Karlman <jonas@kwiboo.se>
->>   S:    Maintained
->> -F:    arch/arm/dts/rk3576-nanopi-r76s*
+>>
+>> On 8/24/26 11:54, Quentin Schulz wrote:
+>>> Hi Michal,
+>>>
+>>> On 8/24/26 9:18 AM, Michal Simek wrote:
+>>>> A number of file (F:) entries across the MAINTAINERS files pointed to
+>>>> files or directories which had been renamed or removed over time. Drop
+>>>> these stale references so that every F: entry resolves to an existing
+>>>> path.
+>>>>
+>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>>>> ---
+>>> [...]
+>>>> diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/ mach- 
+>>>> rockchip/rk3576/MAINTAINERS
+>>>> index 79cf9e97f70b..62c3ce765e0d 100644
+>>>> --- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+>>>> +++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+>>>> @@ -13,7 +13,6 @@ F:    configs/nanopi-m5-rk3576_defconfig
+>>>>   NANOPI-R76S-RK3576
+>>>>   M:    Jonas Karlman <jonas@kwiboo.se>
+>>>>   S:    Maintained
+>>>> -F:    arch/arm/dts/rk3576-nanopi-r76s*
+>>>
+>>> This is a leftover from v1 which had a file there, but we merged the v2. See 
+>>> https://eur02.safelinks.protection.outlook.com/? 
+>>> url=https%3A%2F%2Flore.kernel.org%2Fu-boot%2F20260108143551.4017839-3- 
+>>> jonas%40kwiboo.se%2F&data=05%7C02%7Cquentin.schulz%40cherry.de%7C20d22328c2c14b04e70608df01c79b5d%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639231628996802560%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=%2BGNHaQOa3XRWnaRD%2BMBZJDH3t54Q17ZQGynxdQr34e8%3D&reserved=0 and https://lore.kernel.org/u-boot/20260310000610.592998-3-jonas@kwiboo.se/
+>>>
+>>> For now we don't have U-Boot-specific additions to the upstream DTS for the 
+>>> NanoPi R76S but we could in the future, so having a wildcard like that would 
+>>> allow Jonas to be notified if one ever gets added. So it's not completely 
+>>> useless. No strong opinion on still deleting it or not.
+>>
+>> File is there or not. If you add it in future you should extend that fragment 
+>> and that's it.
+>>
 > 
-> This is a leftover from v1 which had a file there, but we merged the v2. See 
-> https://lore.kernel.org/u-boot/20260108143551.4017839-3-jonas@kwiboo.se/ and 
-> https://lore.kernel.org/u-boot/20260310000610.592998-3-jonas@kwiboo.se/
-> 
-> For now we don't have U-Boot-specific additions to the upstream DTS for the 
-> NanoPi R76S but we could in the future, so having a wildcard like that would 
-> allow Jonas to be notified if one ever gets added. So it's not completely 
-> useless. No strong opinion on still deleting it or not.
+> And Jonas won't be Cc'ed on it being added if someone forgets to update 
+> MAINTAINERS (which honestly is very likely), that's my point. He maintains the 
+> board but won't be notified if something directly related to the board he 
+> maintains gets added.
 
-File is there or not. If you add it in future you should extend that fragment 
-and that's it.
+you can use N: regex fragment for it.
 
 Thanks,
 Michal
-
