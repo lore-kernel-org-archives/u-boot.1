@@ -1,114 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3604C5DF9C
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC26C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:44:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CB495606BA;
-	Mon, 24 Aug 2026 16:44:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2574C80E26;
+	Mon, 24 Aug 2026 16:44:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HGSMOKqypsbd; Mon, 24 Aug 2026 16:44:30 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XW_IvcJRzJg9; Mon, 24 Aug 2026 16:44:28 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787589870;
-	bh=eIYH8Qp4+7HtWquJXaPRoZK1lq59woUmNkEcdi2hZLo=;
+	d=lists.u-boot-project.org; s=default; t=1787589857;
+	bh=Px0YYpgfm/0dAxCxKpewhsH4sYEiH5fqX9sF216vj1g=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jjpHRK9hyZjh/FX4wN3vzETdiwOhBLqkcxFHW94rDife7qbT/hE9A5Zqj3OAbYHad
-	 eR611u1NbssuWsUMZlaka07tCwdgSEYdwlFNTty252v7nEFUsn+5t2GYio0RWoggJp
-	 DTgKChNP8T9oCrd69ogXu+eQVhdM6usppq4k5oNAHIGwBad96G5vCCLrPaxfC+w66P
-	 XScACkW6NV73ZWJphwgreieNmGK0pg0aOkLNnP9WHHkpy/9PYu14sGkQEotmwAn+EJ
-	 +40WJfh5xwh0Q6xBBYeAKFHMZqmQicepPLPrciEC5dmUFnnqE3ydPfMCr4B2fiK7Rs
-	 kU/67hQU6aQhg==
+	b=w3jICO6fTzYbphBZSdqa0CQmeDP5tCxzYFYKOHyXz5P4HSkZdNSjX0zsl2e/ez2eu
+	 Xe/CbDgnbczKk8k3tHbcAtwoiIyK8ll/5+nAlA4ysZ5riF5pWbOzuEF7fbXxL+/53H
+	 Ec9df3KGDobTnVy709dlvPI1qwa1B6Jmf8OZ+XLFVmANM42klvItNqU1lcOcyPQ8KE
+	 4ifPs8QK90HEkERsdt0L69YPW5WNhb2W63lJKCy2uCZU3wsm3c5IEvIYL/fCsCPpwB
+	 ZE1DNT3tQscKkJog2Ik3cCEHl5a7tVcfnh2FIJnWDyg3JkaisqWAR3k0QxZb0PlJ+0
+	 6T20RvVBkf32A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4A67860728;
-	Mon, 24 Aug 2026 16:44:30 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C926129B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:29:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BEB0580DC1;
+	Mon, 24 Aug 2026 16:44:16 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 98301396
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:28:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AF175403CE
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:29:35 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7EE0E4032B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:28:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 28F1XZhaQFLL for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 15:29:34 +0000 (UTC)
+ id iKXxGIk4Cbg5 for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 15:28:53 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
+ client-ip=2a00:1450:4864:20::52c; helo=mail-ed1-x52c.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=G0trCPm2
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4D3C7403A9
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:29:33 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c15e62c695cso32977666b.1
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:29:33 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=S8PWdOVQ
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6AE5F4036A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 15:28:51 +0000 (UTC)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-69848c9462aso470968a12.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:28:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787585372; x=1788190172;
+ d=linaro.org; s=google; t=1787585330; x=1788190130;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eIYH8Qp4+7HtWquJXaPRoZK1lq59woUmNkEcdi2hZLo=;
- b=G0trCPm2YNHrdjYsWofZvqYEDdBNNS22OwmL+XDNA7+DiJWwj+21Q73g6vute19rcN
- Z77kBCrXjiH6Mq4eooIdE2pmfvrh5zxKm9WiIg+gNwOrXh6mJVtYzLRxsy0kJaa6XqV0
- vQAhcto58QeHWxqPixBgzkqSIfIVYPVUQWk9wSHvJxNkKLxEd2zvATGCoYWRamaxwQWy
- NYLEiuDUiaU0Tg0b5qYZZxhqpXLjOY+kx1YscoIyqNVodbjC9tKJ6ImCRTPg/sos/uHz
- 3QgyifQV2BDNUASaAiCHCsC1AK5IufZMPULEAZ9Q94LDtsFQsMxOJQtwnOXYhFO7L4h8
- 3hAA==
+ bh=Px0YYpgfm/0dAxCxKpewhsH4sYEiH5fqX9sF216vj1g=;
+ b=S8PWdOVQ5oX3GtU/LFgMtamdbXHYIheyY025m+QFxeDCtQvzHvUPzVUuNmuAzHp4QO
+ BDRZl9WX8sH7fy3qtmLb1YRnpNDeisTdC1r5IcfWP0+GNnEFPLVKitdDp9Q6G2SkAfNf
+ hEzA0CVEVHUVAvxr11OrxtllIGBcjhTMLgE3TZA1Z0lkZrpUsx6KMIOSSCcV4UIX6Obl
+ Aol2xpL2U7LmTzgd+VLRs7nlyG+nepJSs0JbkCC6JD7z6OgxqTf6FvYEKfrX2CdgIU7p
+ t0aX15OAOcTi4L9FhUT5tfg5kuN1CXSz9MAavQAYWr3Zj9flCV9kb/KgtMhtnYC5qbGp
+ C5Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787585372; x=1788190172;
+ d=1e100.net; s=20251104; t=1787585330; x=1788190130;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=eIYH8Qp4+7HtWquJXaPRoZK1lq59woUmNkEcdi2hZLo=;
- b=jnOs2l/RX0k1TbqxuyfAfthvvm6eWqx1SEje7kFcpJjhxDg/x02c0DgEhGqp30Q90b
- xDcT+oAuNsrQL6rZZMX5sHJ8DSvgun5WO/cgxsDaw64PYU45vIFAhz5rOhPI9Y6G0n0D
- WXOwh8MFK3qquK11StBHr30M56UgFczhyz/rzstVO3yzcydkdh22zDdX8TQJynw+79lH
- uWBog9STLdSjnfUnPuqM+X/jl50yVsXUonNGAqBxfh+Sbs6qo5Hy2OFamGOQusDHIGZC
- ub/5GADkEfTGeQuhTPgs4qvBb3kQ4BxLMPakJpxw3hT6Yd+2gDebeEatwSs4Hf7HhN+X
- 9HNw==
-X-Gm-Message-State: AFuF++lBmuv3t/tF+Kv7tOFqYzVtggPQ1K40uVvdW1Yn/yWpd6oUCml1
- eDuQ2FoxVmbSECtPikYc3KlDBW4WBxII3baeN3omQhtmidiVFdt1Rm3qe1ocrfC+h3ssrCiTFIF
- ZQqpw
-X-Gm-Gg: AR+sD11+qja96YMfgWavbc/RhOvbVs3Hga2LjCEAFyJZbfmkZDrr7cFLyI1ikXTGtHe
- bxrpARYsSzYZgi2cR8XbGPjPqEo3RSYRCTZN4aA8T8ce5B4mz5II0iB4tjiN++9Ws63eCCz5Q4H
- XeU+Jyg4RlPnDFGslaAlSJYSXIja7f78/5Guch+p/FXRHrMn2PqadeQvGSnBhuFv+bLooThHb1f
- gxriSi4nNwnovL2D3sWY+xtbys3pawSbm9Itu6RLX1+gjmttwF7O+p9VxP4qUSYQZ8OWFBcu2In
- plhMJsUAykKI94zdY2k+qphLr/2sA6qA1Q0V0SahiNWBTqYKEm7tEKFOKUz70jso6qB4XLmF7Oe
- 9G+dXtK++UqbVSJO02Llvcv1uiR9HyPVyYlivpH5gO3vThKDU6A+A7znc5T/Wyh4ZkrDmoGi3xU
- Gwvxz5vYgLV06mOUPjHaY3pLxjc/sEkmGwdDPmaSqnzv0Eo3zifG61Hqkjl++2NSoND+PZLPN+k
- wQ2hcKuk9RY0qo+YfwMHQ==
-X-Received: by 2002:a17:906:6a25:b0:c16:1290:11a7 with SMTP id
- a640c23a62f3a-c246a396b8amr1735736366b.1.1787585371710; 
- Mon, 24 Aug 2026 08:29:31 -0700 (PDT)
+ bh=Px0YYpgfm/0dAxCxKpewhsH4sYEiH5fqX9sF216vj1g=;
+ b=LZw4+5oVigt2LZsMLik6ujAvGueydZ7daxY9w+8UOWQmnYVvBEKwtqnnx+bD1ySVND
+ Q/EwLvgNJg4vWYBxFt+/xsNd4VLri2m40LHg0oO8Y425/PcGnX7AYEUlUltCBlYgzwZm
+ Jwx28SSwJnd0FjSdRxEq22scKwasRnikXZg5Bmv3rONnTqyKlKU7I9yGkT45evZfyI0/
+ Y99WBjLFLVehMnJhI9J7+lk5uW01Uj1s8sKe51JYczk6nLVKe40tDCZb0oqJmfwoYVZe
+ i90bwJAIVTRbzAlTT+JffHPa6yEyx7DdQik60uUupKqBpme0pmU5cwYdh38JSN74P3h6
+ CdCg==
+X-Gm-Message-State: AFuF++ljNJKIIpLDvgVnU9PBTebltENL1jrp54Bvp5J2SPTguVxK57bS
+ dk6a+03ywnnInKVso08fZRaK8mDM8ZsZF7wVRNwUT91d7zXXzAGYqm32SStacK3JGrW/Ey4jF/Z
+ 1wQP2
+X-Gm-Gg: AR+sD12s5GJZcZFKNv8pOvGVQfap+8Hqq4VWpf5J+leacP7yoW8s3zLOyO64cQJRyfs
+ anZOnvoRCWHXV4ZX9SWqJujbgFv42L04UZRge/Bo+hM8hNoYYKTV22sm0Gd495gdotFRME4/fpK
+ wLScKaAtcm3xGqYWgxvOZwe/6JdBtAAKrQIK6YlwW1u/hXj7rKTqothZZ44m6GFqlYAD6V49RZi
+ 0zpB90VTieVAGn8WS4MWM7T5dphdh9NLgey56ytW88B34bb7353cF3CCtPPk3f8eW8/U7H0c8de
+ Wcq0nxs5hPbptuYjTmmJygkjtM/FZvWiwVwdYGQtWVNX9U1hwa5KFn+7mqXOmtUR1Nxd9ADnn6M
+ DGvcYymhV9VHTtgLUhuR/23d53SVgo3kctYPEFD0+OYqBvhpU5R1r+1OCWJH+p0ATrgeHcoFG/D
+ qOy2wGcp/q3PYtScB0hUY4ZIsi8KPYhRKeFd8/RbYtQ/gmqupIPs9MgfIwrMXky+iEgKP0myG0y
+ o7jR+cJj3db9A7lpUkITotVqe5vPBXe
+X-Received: by 2002:a05:6402:4597:b0:6a0:f1d5:deb8 with SMTP id
+ 4fb4d7f45d1cf-6a42eea451bmr16786473a12.0.1787585329683; 
+ Mon, 24 Aug 2026 08:28:49 -0700 (PDT)
 Received: from monster (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c24962bbea6sm1228499066b.27.2026.08.24.08.29.30
+ 4fb4d7f45d1cf-6a59e1cdbe9sm9209455a12.24.2026.08.24.08.28.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 08:29:31 -0700 (PDT)
+ Mon, 24 Aug 2026 08:28:49 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  michal.simek@amd.com, lukma@denx.de, alchark@flipper.net,
  jerome.forissier@arm.com, Jens Wiklander <jens.wiklander@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Anders Roxell <anders.roxell@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH v7 20/63] usb: dwc3: import from kernel v4.16
-Date: Mon, 24 Aug 2026 17:26:51 +0200
-Message-ID: <20260824152734.159794-21-anders.roxell@linaro.org>
+Subject: [PATCH v7 13/63] usb: dwc3: import from kernel v4.9
+Date: Mon, 24 Aug 2026 17:26:44 +0200
+Message-ID: <20260824152734.159794-14-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260824152734.159794-1-anders.roxell@linaro.org>
 References: <20260824152734.159794-1-anders.roxell@linaro.org>
@@ -130,7 +130,7 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jens Wiklander <jens.wiklander@linaro.org>
 
-Sync Linux kernel dwc3 changes from v4.15 to v4.16.
+Sync Linux kernel dwc3 changes from v4.8 to v4.9.
 
 The following files are preserved across the import:
 Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -145,476 +145,902 @@ dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
 Note that this is a raw import and doesn't build.
 A fixup commit at the end of the series fixes that.
 
-List of commits: git log --oneline v4.15..v4.16
+List of commits: git log --oneline v4.8..v4.9
 Commits imported:
-084a804e0120 usb: dwc3: Fix lock-up on ID change during system suspend/resume
-98112041bcca usb: dwc3: core: Fix ULPI PHYs and prevent phy_get/ulpi_init during suspend/resume
-b16ea8b9492e usb: dwc3: Fix GDBGFIFOSPACE_TYPE values
-c4a5153e87fd usb: dwc3: core: Power-off core/PHYs on system_suspend in host mode
-00b42170c86f usb: dwc3: Undo PHY init if soft reset fails
-f035d139ffec usb: dwc3: ep0: Reset TRB counter for ep0 IN
-6180026341e8 usb: dwc3: gadget: Set maxpacket size for ep0 IN
-d8c80bb3b55b phy: exynos5-usbdrd: Calibrate LOS levels for exynos5420/5800
-42bf02ec6e42 usb: dwc3: Allow disabling of metastability workaround
-19e0b203bfbd usb: dwc3: ep0: use gadget->isoch_delay for isoch_delay value
-0c5d2954f690 usb: dwc3: debug: decode a few more features
+9b9d7cdd0a20 usb: dwc3: Fix error handling for core init
+51fbc7c06c89 usb: dwc3: Fix size used in dma_free_coherent()
+d889c23ce4e3 usb: dwc3: gadget: never pre-start Isochronous endpoints
+a9c3ca5fae6b usb: dwc3: gadget: properly account queued requests
+5e6c88d28ccb usb: dwc3: fix Clear Stall EP command failure
+d6e10bf2ba47 usb: dwc3: avoid -Wmaybe-uninitialized warning
+9d6173e125d9 usb: dwc3: Fix dr_mode validation
+594e121f2568 usb: dwc3: gadget: stop kicking if we run out of space
+7ae7df4982af usb: dwc3: gadget: abolish trbs_left
+06281d460fc5 usb: dwc3: Add ENDXFER command polling
+512e47572f7d usb: dwc3: Add revision numbers for the USB 3.0 IP
+00af62330c39 usb: dwc3: core: Move the mode setting to the right place
+00fe081dc3a3 usb: dwc3: add dis_del_phy_power_chg_quirk
+32f2ed864dd5 usb: dwc3: make usb2 phy utmi interface configurable
+16199f338939 usb: dwc3: add dis_u2_freeclk_exists_quirk
+dc55c67e9c95 usb: dwc3: gadget: improve increment request->actual
+f99f53f24d87 usb: dwc3: gadget: remove condition that never happens
+1f512119a08c usb: dwc3: gadget: add remaining sg entries to ring
+2c78c0295fd8 usb: dwc3: gadget: interrupt on ring full too
+0b3e4af3c740 usb: dwc3: gadget: add sg and num_pending_sgs to dwc3_request
+31162af447d7 usb: dwc3: gadget: avoid while (1) loop on completion
+08a36b543803 usb: dwc3: gadget: simplify __dwc3_gadget_ep_queue()
+45438a0cd9c2 usb: dwc3: gadget: simplify dwc3_ep_prev_trb()
+737f1ae2556a usb: dwc3: gadget: increment dequeue pointer on completion
+4bc48c974708 usb: dwc3: gadget: retire LST bit completely
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/dwc3/core.c   | 93 ++++++++++++++++++++++++++++-----------
- drivers/usb/dwc3/core.h   | 26 +++++++----
- drivers/usb/dwc3/debug.h  |  9 ++++
- drivers/usb/dwc3/ep0.c    | 13 +++---
- drivers/usb/dwc3/gadget.c |  8 +++-
- 5 files changed, 106 insertions(+), 43 deletions(-)
+ drivers/usb/dwc3/core.c   | 127 ++++++++++++++---
+ drivers/usb/dwc3/core.h   |  35 ++++-
+ drivers/usb/dwc3/gadget.c | 292 +++++++++++++++-----------------------
+ 3 files changed, 258 insertions(+), 196 deletions(-)
 
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 07832509584f..e94bf91cc58a 100644
+index 35d092456bec..fea446900cad 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -100,6 +100,8 @@ static void dwc3_set_prtcap(struct dwc3 *dwc, u32 mode)
- 	reg &= ~(DWC3_GCTL_PRTCAPDIR(DWC3_GCTL_PRTCAP_OTG));
- 	reg |= DWC3_GCTL_PRTCAPDIR(mode);
- 	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-+
-+	dwc->current_dr_role = mode;
- }
+@@ -49,6 +49,57 @@
  
- static void __dwc3_set_mode(struct work_struct *work)
-@@ -133,8 +135,6 @@ static void __dwc3_set_mode(struct work_struct *work)
+ #define DWC3_DEFAULT_AUTOSUSPEND_DELAY	5000 /* ms */
  
- 	dwc3_set_prtcap(dwc, dwc->desired_dr_role);
- 
--	dwc->current_dr_role = dwc->desired_dr_role;
--
- 	spin_unlock_irqrestore(&dwc->lock, flags);
- 
- 	switch (dwc->desired_dr_role) {
-@@ -147,6 +147,7 @@ static void __dwc3_set_mode(struct work_struct *work)
- 				otg_set_vbus(dwc->usb2_phy->otg, true);
- 			phy_set_mode(dwc->usb2_generic_phy, PHY_MODE_USB_HOST);
- 			phy_set_mode(dwc->usb3_generic_phy, PHY_MODE_USB_HOST);
-+			phy_calibrate(dwc->usb2_generic_phy);
- 		}
- 		break;
- 	case DWC3_GCTL_PRTCAP_DEVICE:
-@@ -174,7 +175,7 @@ void dwc3_set_mode(struct dwc3 *dwc, u32 mode)
- 	dwc->desired_dr_role = mode;
- 	spin_unlock_irqrestore(&dwc->lock, flags);
- 
--	queue_work(system_power_efficient_wq, &dwc->drd_work);
-+	queue_work(system_freezable_wq, &dwc->drd_work);
- }
- 
- u32 dwc3_core_fifo_space(struct dwc3_ep *dep, u8 type)
-@@ -218,7 +219,7 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
- 	 * XHCI driver will reset the host block. If dwc3 was configured for
- 	 * host-only mode, then we can return early.
- 	 */
--	if (dwc->dr_mode == USB_DR_MODE_HOST)
-+	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_HOST)
- 		return 0;
- 
- 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
-@@ -233,6 +234,9 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
- 		udelay(1);
- 	} while (--retries);
- 
-+	phy_exit(dwc->usb3_generic_phy);
-+	phy_exit(dwc->usb2_generic_phy);
-+
- 	return -ETIMEDOUT;
- }
- 
-@@ -482,6 +486,22 @@ static void dwc3_cache_hwparams(struct dwc3 *dwc)
- 	parms->hwparams8 = dwc3_readl(dwc->regs, DWC3_GHWPARAMS8);
- }
- 
-+static int dwc3_core_ulpi_init(struct dwc3 *dwc)
++/**
++ * dwc3_get_dr_mode - Validates and sets dr_mode
++ * @dwc: pointer to our context structure
++ */
++static int dwc3_get_dr_mode(struct dwc3 *dwc)
 +{
-+	int intf;
-+	int ret = 0;
++	enum usb_dr_mode mode;
++	struct device *dev = dwc->dev;
++	unsigned int hw_mode;
 +
-+	intf = DWC3_GHWPARAMS3_HSPHY_IFC(dwc->hwparams.hwparams3);
++	if (dwc->dr_mode == USB_DR_MODE_UNKNOWN)
++		dwc->dr_mode = USB_DR_MODE_OTG;
 +
-+	if (intf == DWC3_GHWPARAMS3_HSPHY_IFC_ULPI ||
-+	    (intf == DWC3_GHWPARAMS3_HSPHY_IFC_UTMI_ULPI &&
-+	     dwc->hsphy_interface &&
-+	     !strncmp(dwc->hsphy_interface, "ulpi", 4)))
-+		ret = dwc3_ulpi_init(dwc);
++	mode = dwc->dr_mode;
++	hw_mode = DWC3_GHWPARAMS0_MODE(dwc->hwparams.hwparams0);
 +
-+	return ret;
++	switch (hw_mode) {
++	case DWC3_GHWPARAMS0_MODE_GADGET:
++		if (IS_ENABLED(CONFIG_USB_DWC3_HOST)) {
++			dev_err(dev,
++				"Controller does not support host mode.\n");
++			return -EINVAL;
++		}
++		mode = USB_DR_MODE_PERIPHERAL;
++		break;
++	case DWC3_GHWPARAMS0_MODE_HOST:
++		if (IS_ENABLED(CONFIG_USB_DWC3_GADGET)) {
++			dev_err(dev,
++				"Controller does not support device mode.\n");
++			return -EINVAL;
++		}
++		mode = USB_DR_MODE_HOST;
++		break;
++	default:
++		if (IS_ENABLED(CONFIG_USB_DWC3_HOST))
++			mode = USB_DR_MODE_HOST;
++		else if (IS_ENABLED(CONFIG_USB_DWC3_GADGET))
++			mode = USB_DR_MODE_PERIPHERAL;
++	}
++
++	if (mode != dwc->dr_mode) {
++		dev_warn(dev,
++			 "Configuration mismatch. dr_mode forced to %s\n",
++			 mode == USB_DR_MODE_HOST ? "host" : "gadget");
++
++		dwc->dr_mode = mode;
++	}
++
++	return 0;
 +}
 +
- /**
-  * dwc3_phy_setup - Configure USB PHY Interface of DWC3 Core
-  * @dwc: Pointer to our controller context structure
-@@ -493,7 +513,6 @@ static void dwc3_cache_hwparams(struct dwc3 *dwc)
- static int dwc3_phy_setup(struct dwc3 *dwc)
+ void dwc3_set_mode(struct dwc3 *dwc, u32 mode)
  {
  	u32 reg;
--	int ret;
+@@ -448,6 +499,9 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
+ 	if (dwc->dis_u3_susphy_quirk)
+ 		reg &= ~DWC3_GUSB3PIPECTL_SUSPHY;
  
- 	reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
++	if (dwc->dis_del_phy_power_chg_quirk)
++		reg &= ~DWC3_GUSB3PIPECTL_DEPOCHANGE;
++
+ 	dwc3_writel(dwc->regs, DWC3_GUSB3PIPECTL(0), reg);
  
-@@ -564,9 +583,6 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
- 		}
- 		/* FALLTHROUGH */
- 	case DWC3_GHWPARAMS3_HSPHY_IFC_ULPI:
--		ret = dwc3_ulpi_init(dwc);
--		if (ret)
--			return ret;
- 		/* FALLTHROUGH */
- 	default:
+ 	reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
+@@ -485,6 +539,23 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
  		break;
-@@ -723,6 +739,7 @@ static void dwc3_core_setup_global_control(struct dwc3 *dwc)
- }
- 
- static int dwc3_core_get_phy(struct dwc3 *dwc);
-+static int dwc3_core_ulpi_init(struct dwc3 *dwc);
- 
- /**
-  * dwc3_core_init - Low-level initialization of DWC3 Core
-@@ -754,17 +771,27 @@ static int dwc3_core_init(struct dwc3 *dwc)
- 			dwc->maximum_speed = USB_SPEED_HIGH;
  	}
  
--	ret = dwc3_core_get_phy(dwc);
-+	ret = dwc3_phy_setup(dwc);
- 	if (ret)
- 		goto err0;
- 
--	ret = dwc3_core_soft_reset(dwc);
--	if (ret)
--		goto err0;
-+	if (!dwc->ulpi_ready) {
-+		ret = dwc3_core_ulpi_init(dwc);
-+		if (ret)
-+			goto err0;
-+		dwc->ulpi_ready = true;
-+	}
- 
--	ret = dwc3_phy_setup(dwc);
-+	if (!dwc->phys_ready) {
-+		ret = dwc3_core_get_phy(dwc);
-+		if (ret)
-+			goto err0a;
-+		dwc->phys_ready = true;
++	switch (dwc->hsphy_mode) {
++	case USBPHY_INTERFACE_MODE_UTMI:
++		reg &= ~(DWC3_GUSB2PHYCFG_PHYIF_MASK |
++		       DWC3_GUSB2PHYCFG_USBTRDTIM_MASK);
++		reg |= DWC3_GUSB2PHYCFG_PHYIF(UTMI_PHYIF_8_BIT) |
++		       DWC3_GUSB2PHYCFG_USBTRDTIM(USBTRDTIM_UTMI_8_BIT);
++		break;
++	case USBPHY_INTERFACE_MODE_UTMIW:
++		reg &= ~(DWC3_GUSB2PHYCFG_PHYIF_MASK |
++		       DWC3_GUSB2PHYCFG_USBTRDTIM_MASK);
++		reg |= DWC3_GUSB2PHYCFG_PHYIF(UTMI_PHYIF_16_BIT) |
++		       DWC3_GUSB2PHYCFG_USBTRDTIM(USBTRDTIM_UTMI_16_BIT);
++		break;
++	default:
++		break;
 +	}
 +
-+	ret = dwc3_core_soft_reset(dwc);
- 	if (ret)
--		goto err0;
-+		goto err0a;
+ 	/*
+ 	 * Above 1.94a, it is recommended to set DWC3_GUSB2PHYCFG_SUSPHY to
+ 	 * '0' during coreConsultant configuration. So default value will
+@@ -500,6 +571,9 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
+ 	if (dwc->dis_enblslpm_quirk)
+ 		reg &= ~DWC3_GUSB2PHYCFG_ENBLSLPM;
  
- 	dwc3_core_setup_global_control(dwc);
- 	dwc3_core_num_eps(dwc);
-@@ -837,6 +864,9 @@ err1:
- 	phy_exit(dwc->usb2_generic_phy);
- 	phy_exit(dwc->usb3_generic_phy);
- 
-+err0a:
-+	dwc3_ulpi_exit(dwc);
++	if (dwc->dis_u2_freeclk_exists_quirk)
++		reg &= ~DWC3_GUSB2PHYCFG_U2_FREECLK_EXISTS;
 +
- err0:
- 	return ret;
- }
-@@ -915,7 +945,6 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
+ 	dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
+ 
+ 	return 0;
+@@ -666,18 +740,43 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 		goto err4;
+ 	}
+ 
++	switch (dwc->dr_mode) {
++	case USB_DR_MODE_PERIPHERAL:
++		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
++		break;
++	case USB_DR_MODE_HOST:
++		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_HOST);
++		break;
++	case USB_DR_MODE_OTG:
++		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_OTG);
++		break;
++	default:
++		dev_warn(dwc->dev, "Unsupported mode %d\n", dwc->dr_mode);
++		break;
++	}
++
++	/*
++	 * ENDXFER polling is available on version 3.10a and later of
++	 * the DWC_usb3 controller. It is NOT available in the
++	 * DWC_usb31 controller.
++	 */
++	if (!dwc3_is_usb31(dwc) && dwc->revision >= DWC3_REVISION_310A) {
++		reg = dwc3_readl(dwc->regs, DWC3_GUCTL2);
++		reg |= DWC3_GUCTL2_RST_ACTBITLATER;
++		dwc3_writel(dwc->regs, DWC3_GUCTL2, reg);
++	}
++
+ 	return 0;
+ 
+ err4:
+-	phy_power_off(dwc->usb2_generic_phy);
++	phy_power_off(dwc->usb3_generic_phy);
+ 
+ err3:
+-	phy_power_off(dwc->usb3_generic_phy);
++	phy_power_off(dwc->usb2_generic_phy);
+ 
+ err2:
+ 	usb_phy_set_suspend(dwc->usb2_phy, 1);
+ 	usb_phy_set_suspend(dwc->usb3_phy, 1);
+-	dwc3_core_exit(dwc);
+ 
+ err1:
+ 	usb_phy_shutdown(dwc->usb2_phy);
+@@ -763,7 +862,6 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
  
  	switch (dwc->dr_mode) {
  	case USB_DR_MODE_PERIPHERAL:
--		dwc->current_dr_role = DWC3_GCTL_PRTCAP_DEVICE;
- 		dwc3_set_prtcap(dwc, DWC3_GCTL_PRTCAP_DEVICE);
- 
- 		if (dwc->usb2_phy)
-@@ -931,7 +960,6 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
+-		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
+ 		ret = dwc3_gadget_init(dwc);
+ 		if (ret) {
+ 			if (ret != -EPROBE_DEFER)
+@@ -772,7 +870,6 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
  		}
  		break;
  	case USB_DR_MODE_HOST:
--		dwc->current_dr_role = DWC3_GCTL_PRTCAP_HOST;
- 		dwc3_set_prtcap(dwc, DWC3_GCTL_PRTCAP_HOST);
- 
- 		if (dwc->usb2_phy)
-@@ -945,6 +973,7 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
- 				dev_err(dev, "failed to initialize host\n");
- 			return ret;
+-		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_HOST);
+ 		ret = dwc3_host_init(dwc);
+ 		if (ret) {
+ 			if (ret != -EPROBE_DEFER)
+@@ -781,7 +878,6 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
  		}
-+		phy_calibrate(dwc->usb2_generic_phy);
  		break;
  	case USB_DR_MODE_OTG:
- 		INIT_WORK(&dwc->drd_work, __dwc3_set_mode);
-@@ -1062,6 +1091,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	device_property_read_u32(dev, "snps,quirk-frame-length-adjustment",
- 				 &dwc->fladj);
+-		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_OTG);
+ 		ret = dwc3_host_init(dwc);
+ 		if (ret) {
+ 			if (ret != -EPROBE_DEFER)
+@@ -888,6 +984,7 @@ static int dwc3_probe(struct platform_device *pdev)
  
-+	dwc->dis_metastability_quirk = device_property_read_bool(dev,
-+				"snps,dis_metastability_quirk");
-+
- 	dwc->lpm_nyet_threshold = lpm_nyet_threshold;
- 	dwc->tx_de_emphasis = tx_de_emphasis;
+ 	dwc->maximum_speed = usb_get_maximum_speed(dev);
+ 	dwc->dr_mode = usb_get_dr_mode(dev);
++	dwc->hsphy_mode = of_usb_get_phy_mode(dev->of_node);
  
-@@ -1229,7 +1261,6 @@ err4:
+ 	dwc->has_lpm_erratum = device_property_read_bool(dev,
+ 				"snps,has-lpm-erratum");
+@@ -924,6 +1021,10 @@ static int dwc3_probe(struct platform_device *pdev)
+ 				"snps,dis_enblslpm_quirk");
+ 	dwc->dis_rxdet_inp3_quirk = device_property_read_bool(dev,
+ 				"snps,dis_rxdet_inp3_quirk");
++	dwc->dis_u2_freeclk_exists_quirk = device_property_read_bool(dev,
++				"snps,dis-u2-freeclk-exists-quirk");
++	dwc->dis_del_phy_power_chg_quirk = device_property_read_bool(dev,
++				"snps,dis-del-phy-power-chg-quirk");
  
- err3:
- 	dwc3_free_event_buffers(dwc);
--	dwc3_ulpi_exit(dwc);
+ 	dwc->tx_de_emphasis_quirk = device_property_read_bool(dev,
+ 				"snps,tx_de_emphasis_quirk");
+@@ -972,17 +1073,9 @@ static int dwc3_probe(struct platform_device *pdev)
+ 		goto err2;
+ 	}
  
- err2:
- 	pm_runtime_allow(&pdev->dev);
-@@ -1279,7 +1310,7 @@ static int dwc3_remove(struct platform_device *pdev)
- }
+-	if (IS_ENABLED(CONFIG_USB_DWC3_HOST) &&
+-			(dwc->dr_mode == USB_DR_MODE_OTG ||
+-					dwc->dr_mode == USB_DR_MODE_UNKNOWN))
+-		dwc->dr_mode = USB_DR_MODE_HOST;
+-	else if (IS_ENABLED(CONFIG_USB_DWC3_GADGET) &&
+-			(dwc->dr_mode == USB_DR_MODE_OTG ||
+-					dwc->dr_mode == USB_DR_MODE_UNKNOWN))
+-		dwc->dr_mode = USB_DR_MODE_PERIPHERAL;
+-
+-	if (dwc->dr_mode == USB_DR_MODE_UNKNOWN)
+-		dwc->dr_mode = USB_DR_MODE_OTG;
++	ret = dwc3_get_dr_mode(dwc);
++	if (ret)
++		goto err3;
  
- #ifdef CONFIG_PM
--static int dwc3_suspend_common(struct dwc3 *dwc)
-+static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- {
- 	unsigned long	flags;
- 
-@@ -1291,6 +1322,10 @@ static int dwc3_suspend_common(struct dwc3 *dwc)
- 		dwc3_core_exit(dwc);
- 		break;
- 	case DWC3_GCTL_PRTCAP_HOST:
-+		/* do nothing during host runtime_suspend */
-+		if (!PMSG_IS_AUTO(msg))
-+			dwc3_core_exit(dwc);
-+		break;
- 	default:
- 		/* do nothing */
- 		break;
-@@ -1299,7 +1334,7 @@ static int dwc3_suspend_common(struct dwc3 *dwc)
- 	return 0;
- }
- 
--static int dwc3_resume_common(struct dwc3 *dwc)
-+static int dwc3_resume_common(struct dwc3 *dwc, pm_message_t msg)
- {
- 	unsigned long	flags;
- 	int		ret;
-@@ -1315,6 +1350,13 @@ static int dwc3_resume_common(struct dwc3 *dwc)
- 		spin_unlock_irqrestore(&dwc->lock, flags);
- 		break;
- 	case DWC3_GCTL_PRTCAP_HOST:
-+		/* nothing to do on host runtime_resume */
-+		if (!PMSG_IS_AUTO(msg)) {
-+			ret = dwc3_core_init(dwc);
-+			if (ret)
-+				return ret;
-+		}
-+		break;
- 	default:
- 		/* do nothing */
- 		break;
-@@ -1326,12 +1368,11 @@ static int dwc3_resume_common(struct dwc3 *dwc)
- static int dwc3_runtime_checks(struct dwc3 *dwc)
- {
- 	switch (dwc->current_dr_role) {
--	case USB_DR_MODE_PERIPHERAL:
--	case USB_DR_MODE_OTG:
-+	case DWC3_GCTL_PRTCAP_DEVICE:
- 		if (dwc->connected)
- 			return -EBUSY;
- 		break;
--	case USB_DR_MODE_HOST:
-+	case DWC3_GCTL_PRTCAP_HOST:
- 	default:
- 		/* do nothing */
- 		break;
-@@ -1348,7 +1389,7 @@ static int dwc3_runtime_suspend(struct device *dev)
- 	if (dwc3_runtime_checks(dwc))
- 		return -EBUSY;
- 
--	ret = dwc3_suspend_common(dwc);
-+	ret = dwc3_suspend_common(dwc, PMSG_AUTO_SUSPEND);
+ 	ret = dwc3_alloc_scratch_buffers(dwc);
  	if (ret)
- 		return ret;
- 
-@@ -1364,7 +1405,7 @@ static int dwc3_runtime_resume(struct device *dev)
- 
- 	device_init_wakeup(dev, false);
- 
--	ret = dwc3_resume_common(dwc);
-+	ret = dwc3_resume_common(dwc, PMSG_AUTO_RESUME);
- 	if (ret)
- 		return ret;
- 
-@@ -1411,7 +1452,7 @@ static int dwc3_suspend(struct device *dev)
- 	struct dwc3	*dwc = dev_get_drvdata(dev);
- 	int		ret;
- 
--	ret = dwc3_suspend_common(dwc);
-+	ret = dwc3_suspend_common(dwc, PMSG_SUSPEND);
- 	if (ret)
- 		return ret;
- 
-@@ -1427,7 +1468,7 @@ static int dwc3_resume(struct device *dev)
- 
- 	pinctrl_pm_select_default_state(dev);
- 
--	ret = dwc3_resume_common(dwc);
-+	ret = dwc3_resume_common(dwc, PMSG_RESUME);
- 	if (ret)
- 		return ret;
- 
 diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 4a4a4c98508c..860d2bc184d1 100644
+index 45d6de5107c7..6b60e42626a2 100644
 --- a/drivers/usb/dwc3/core.h
 +++ b/drivers/usb/dwc3/core.h
-@@ -158,13 +158,15 @@
- #define DWC3_GDBGFIFOSPACE_TYPE(n)	(((n) << 5) & 0x1e0)
- #define DWC3_GDBGFIFOSPACE_SPACE_AVAILABLE(n) (((n) >> 16) & 0xffff)
+@@ -109,6 +109,7 @@
+ #define DWC3_GPRTBIMAP_HS1	0xc184
+ #define DWC3_GPRTBIMAP_FS0	0xc188
+ #define DWC3_GPRTBIMAP_FS1	0xc18c
++#define DWC3_GUCTL2		0xc19c
  
--#define DWC3_TXFIFOQ		1
--#define DWC3_RXFIFOQ		3
--#define DWC3_TXREQQ		5
--#define DWC3_RXREQQ		7
--#define DWC3_RXINFOQ		9
--#define DWC3_DESCFETCHQ		13
--#define DWC3_EVENTQ		15
-+#define DWC3_TXFIFOQ		0
-+#define DWC3_RXFIFOQ		1
-+#define DWC3_TXREQQ		2
-+#define DWC3_RXREQQ		3
-+#define DWC3_RXINFOQ		4
-+#define DWC3_PSTATQ		5
-+#define DWC3_DESCFETCHQ		6
-+#define DWC3_EVENTQ		7
-+#define DWC3_AUXEVENTQ		8
+ #define DWC3_VER_NUMBER		0xc1a0
+ #define DWC3_VER_TYPE		0xc1a4
+@@ -199,9 +200,18 @@
  
- /* Global RX Threshold Configuration Register */
- #define DWC3_GRXTHRCFG_MAXRXBURSTSIZE(n) (((n) & 0x1f) << 19)
-@@ -795,8 +797,9 @@ struct dwc3_scratchpad_array {
+ /* Global USB2 PHY Configuration Register */
+ #define DWC3_GUSB2PHYCFG_PHYSOFTRST	(1 << 31)
++#define DWC3_GUSB2PHYCFG_U2_FREECLK_EXISTS	(1 << 30)
+ #define DWC3_GUSB2PHYCFG_SUSPHY		(1 << 6)
+ #define DWC3_GUSB2PHYCFG_ULPI_UTMI	(1 << 4)
+ #define DWC3_GUSB2PHYCFG_ENBLSLPM	(1 << 8)
++#define DWC3_GUSB2PHYCFG_PHYIF(n)	(n << 3)
++#define DWC3_GUSB2PHYCFG_PHYIF_MASK	DWC3_GUSB2PHYCFG_PHYIF(1)
++#define DWC3_GUSB2PHYCFG_USBTRDTIM(n)	(n << 10)
++#define DWC3_GUSB2PHYCFG_USBTRDTIM_MASK	DWC3_GUSB2PHYCFG_USBTRDTIM(0xf)
++#define USBTRDTIM_UTMI_8_BIT		9
++#define USBTRDTIM_UTMI_16_BIT		5
++#define UTMI_PHYIF_16_BIT		1
++#define UTMI_PHYIF_8_BIT		0
+ 
+ /* Global USB2 PHY Vendor Control Register */
+ #define DWC3_GUSB2PHYACC_NEWREGREQ	(1 << 25)
+@@ -235,7 +245,10 @@
+ #define DWC3_GEVNTSIZ_SIZE(n)		((n) & 0xffff)
+ 
+ /* Global HWPARAMS0 Register */
+-#define DWC3_GHWPARAMS0_USB3_MODE(n)	((n) & 0x3)
++#define DWC3_GHWPARAMS0_MODE(n)		((n) & 0x3)
++#define DWC3_GHWPARAMS0_MODE_GADGET	0
++#define DWC3_GHWPARAMS0_MODE_HOST	1
++#define DWC3_GHWPARAMS0_MODE_DRD	2
+ #define DWC3_GHWPARAMS0_MBUS_TYPE(n)	(((n) >> 3) & 0x7)
+ #define DWC3_GHWPARAMS0_SBUS_TYPE(n)	(((n) >> 6) & 0x3)
+ #define DWC3_GHWPARAMS0_MDWIDTH(n)	(((n) >> 8) & 0xff)
+@@ -279,6 +292,9 @@
+ #define DWC3_GFLADJ_30MHZ_SDBND_SEL		(1 << 7)
+ #define DWC3_GFLADJ_30MHZ_MASK			0x3f
+ 
++/* Global User Control Register 2 */
++#define DWC3_GUCTL2_RST_ACTBITLATER		(1 << 14)
++
+ /* Device Configuration Register */
+ #define DWC3_DCFG_DEVADDR(addr)	((addr) << 3)
+ #define DWC3_DCFG_DEVADDR_MASK	DWC3_DCFG_DEVADDR(0x7f)
+@@ -685,6 +701,8 @@ struct dwc3_hwparams {
+  * @request: struct usb_request to be transferred
+  * @list: a list_head used for request queueing
+  * @dep: struct dwc3_ep owning this request
++ * @sg: pointer to first incomplete sg
++ * @num_pending_sgs: counter to pending sgs
+  * @first_trb_index: index to first trb used by this request
+  * @epnum: endpoint number to which this request refers
+  * @trb: pointer to struct dwc3_trb
+@@ -697,7 +715,9 @@ struct dwc3_request {
+ 	struct usb_request	request;
+ 	struct list_head	list;
+ 	struct dwc3_ep		*dep;
++	struct scatterlist	*sg;
+ 
++	unsigned		num_pending_sgs;
+ 	u8			first_trb_index;
+ 	u8			epnum;
+ 	struct dwc3_trb		*trb;
+@@ -743,6 +763,9 @@ struct dwc3_scratchpad_array {
+  * @maximum_speed: maximum speed requested (mainly for testing purposes)
+  * @revision: revision register contents
+  * @dr_mode: requested mode of operation
++ * @hsphy_mode: UTMI phy mode, one of following:
++ *		- USBPHY_INTERFACE_MODE_UTMI
++ *		- USBPHY_INTERFACE_MODE_UTMIW
+  * @usb2_phy: pointer to USB2 PHY
   * @usb3_phy: pointer to USB3 PHY
   * @usb2_generic_phy: pointer to USB2 PHY
-  * @usb3_generic_phy: pointer to USB3 PHY
-+ * @phys_ready: flag to indicate that PHYs are ready
-  * @ulpi: pointer to ulpi interface
-- * @isoch_delay: wValue from Set Isochronous Delay request;
-+ * @ulpi_ready: flag to indicate that ULPI is initialized
-  * @u2sel: parameter from Set SEL request.
-  * @u2pel: parameter from Set SEL request.
-  * @u1sel: parameter from Set SEL request.
-@@ -857,6 +860,7 @@ struct dwc3_scratchpad_array {
-  * 	1	- -3.5dB de-emphasis
-  * 	2	- No de-emphasis
-  * 	3	- Reserved
-+ * @dis_metastability_quirk: set to disable metastability quirk.
-  * @imod_interval: set the interrupt moderation interval in 250ns
-  *                 increments or 0 to disable.
-  */
-@@ -893,7 +897,10 @@ struct dwc3 {
- 	struct phy		*usb2_generic_phy;
- 	struct phy		*usb3_generic_phy;
- 
-+	bool			phys_ready;
-+
- 	struct ulpi		*ulpi;
-+	bool			ulpi_ready;
- 
- 	void __iomem		*regs;
+@@ -799,6 +822,11 @@ struct dwc3_scratchpad_array {
+  * @dis_u2_susphy_quirk: set if we disable usb2 suspend phy
+  * @dis_enblslpm_quirk: set if we clear enblslpm in GUSB2PHYCFG,
+  *                      disabling the suspend signal to the PHY.
++ * @dis_u2_freeclk_exists_quirk : set if we clear u2_freeclk_exists
++ *			in GUSB2PHYCFG, specify that USB2 PHY doesn't
++ *			provide a free-running PHY clock.
++ * @dis_del_phy_power_chg_quirk: set if we disable delay phy power
++ *			change quirk.
+  * @tx_de_emphasis_quirk: set if we enable Tx de-emphasis quirk
+  * @tx_de_emphasis: Tx de-emphasis value
+  * 	0	- -6dB de-emphasis
+@@ -845,6 +873,7 @@ struct dwc3 {
  	size_t			regs_size;
-@@ -955,7 +962,6 @@ struct dwc3 {
- 	enum dwc3_ep0_state	ep0state;
- 	enum dwc3_link_state	link_state;
  
--	u16			isoch_delay;
- 	u16			u2sel;
- 	u16			u2pel;
- 	u8			u1sel;
-@@ -1010,6 +1016,8 @@ struct dwc3 {
+ 	enum usb_dr_mode	dr_mode;
++	enum usb_phy_interface	hsphy_mode;
+ 
+ 	u32			fladj;
+ 	u32			irq_gadget;
+@@ -880,6 +909,8 @@ struct dwc3 {
+ #define DWC3_REVISION_260A	0x5533260a
+ #define DWC3_REVISION_270A	0x5533270a
+ #define DWC3_REVISION_280A	0x5533280a
++#define DWC3_REVISION_300A	0x5533300a
++#define DWC3_REVISION_310A	0x5533310a
+ 
+ /*
+  * NOTICE: we're using bit 31 as a "is usb 3.1" flag. This is really
+@@ -942,6 +973,8 @@ struct dwc3 {
+ 	unsigned		dis_u2_susphy_quirk:1;
+ 	unsigned		dis_enblslpm_quirk:1;
+ 	unsigned		dis_rxdet_inp3_quirk:1;
++	unsigned		dis_u2_freeclk_exists_quirk:1;
++	unsigned		dis_del_phy_power_chg_quirk:1;
+ 
  	unsigned		tx_de_emphasis_quirk:1;
  	unsigned		tx_de_emphasis:2;
- 
-+	unsigned		dis_metastability_quirk:1;
-+
- 	u16			imod_interval;
- };
- 
-diff --git a/drivers/usb/dwc3/debug.h b/drivers/usb/dwc3/debug.h
-index 368f8e59219a..bfb90c52d8fc 100644
---- a/drivers/usb/dwc3/debug.h
-+++ b/drivers/usb/dwc3/debug.h
-@@ -247,6 +247,15 @@ static inline void dwc3_decode_set_clear_feature(__u8 t, __u8 b, __u16 v,
- 				case USB_DEVICE_TEST_MODE:
- 					s = "Test Mode";
- 					break;
-+				case USB_DEVICE_U1_ENABLE:
-+					s = "U1 Enable";
-+					break;
-+				case USB_DEVICE_U2_ENABLE:
-+					s = "U2 Enable";
-+					break;
-+				case USB_DEVICE_LTM_ENABLE:
-+					s = "LTM Enable";
-+					break;
- 				default:
- 					s = "UNKNOWN";
- 				} s; }),
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index fd3e7ad2eb0e..18be31d5743a 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -736,11 +736,7 @@ static int dwc3_ep0_set_isoch_delay(struct dwc3 *dwc, struct usb_ctrlrequest *ct
- 	if (wIndex || wLength)
- 		return -EINVAL;
- 
--	/*
--	 * REVISIT It's unclear from Databook what to do with this
--	 * value. For now, just cache it.
--	 */
--	dwc->isoch_delay = wValue;
-+	dwc->gadget.isoch_delay = wValue;
- 
- 	return 0;
- }
-@@ -858,7 +854,12 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
- 		trb++;
- 		trb->ctrl &= ~DWC3_TRB_CTRL_HWO;
- 		trace_dwc3_complete_trb(ep0, trb);
--		ep0->trb_enqueue = 0;
-+
-+		if (r->direction)
-+			dwc->eps[1]->trb_enqueue = 0;
-+		else
-+			dwc->eps[0]->trb_enqueue = 0;
-+
- 		dwc->ep0_bounced = false;
- 	}
- 
 diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 639dd1b163a0..2bda4eb1e9ac 100644
+index 122e64df2f4d..1dfa56a5f1c5 100644
 --- a/drivers/usb/dwc3/gadget.c
 +++ b/drivers/usb/dwc3/gadget.c
-@@ -2005,7 +2005,8 @@ static void dwc3_gadget_set_speed(struct usb_gadget *g,
- 	 * STAR#9000525659: Clock Domain Crossing on DCTL in
- 	 * USB 2.0 Mode
+@@ -174,15 +174,8 @@ void dwc3_gadget_giveback(struct dwc3_ep *dep, struct dwc3_request *req,
+ 		int status)
+ {
+ 	struct dwc3			*dwc = dep->dwc;
+-	int				i;
+ 
+-	if (req->started) {
+-		i = 0;
+-		do {
+-			dwc3_ep_inc_deq(dep);
+-		} while(++i < req->request.num_mapped_sgs);
+-		req->started = false;
+-	}
++	req->started = false;
+ 	list_del(&req->list);
+ 	req->trb = NULL;
+ 
+@@ -348,7 +341,8 @@ static int dwc3_send_clear_stall_ep_cmd(struct dwc3_ep *dep)
+ 	 * IN transfers due to a mishandled error condition. Synopsys
+ 	 * STAR 9000614252.
  	 */
--	if (dwc->revision < DWC3_REVISION_220A) {
-+	if (dwc->revision < DWC3_REVISION_220A &&
-+	    !dwc->dis_metastability_quirk) {
- 		reg |= DWC3_DCFG_SUPERSPEED;
- 	} else {
- 		switch (speed) {
-@@ -2744,6 +2745,8 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
- 		break;
+-	if (dep->direction && (dwc->revision >= DWC3_REVISION_260A))
++	if (dep->direction && (dwc->revision >= DWC3_REVISION_260A) &&
++	    (dwc->gadget.speed >= USB_SPEED_SUPER))
+ 		cmd |= DWC3_DEPCMD_CLEARPENDIN;
+ 
+ 	memset(&params, 0, sizeof(params));
+@@ -490,7 +484,8 @@ static int dwc3_gadget_set_ep_config(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 		params.param0 |= DWC3_DEPCFG_ACTION_INIT;
  	}
  
-+	dwc->eps[1]->endpoint.maxpacket = dwc->gadget.ep0->maxpacket;
+-	params.param1 = DWC3_DEPCFG_XFER_COMPLETE_EN;
++	if (usb_endpoint_xfer_control(desc))
++		params.param1 = DWC3_DEPCFG_XFER_COMPLETE_EN;
+ 
+ 	if (dep->number <= 1 || usb_endpoint_xfer_isoc(desc))
+ 		params.param1 |= DWC3_DEPCFG_XFER_NOT_READY_EN;
+@@ -764,6 +759,8 @@ static void dwc3_gadget_ep_free_request(struct usb_ep *ep,
+ 	kfree(req);
+ }
+ 
++static u32 dwc3_calc_trbs_left(struct dwc3_ep *dep);
 +
- 	/* Enable USB2 LPM Capability */
+ /**
+  * dwc3_prepare_one_trb - setup one TRB from one request
+  * @dep: endpoint for which this request is prepared
+@@ -771,15 +768,13 @@ static void dwc3_gadget_ep_free_request(struct usb_ep *ep,
+  */
+ static void dwc3_prepare_one_trb(struct dwc3_ep *dep,
+ 		struct dwc3_request *req, dma_addr_t dma,
+-		unsigned length, unsigned last, unsigned chain, unsigned node)
++		unsigned length, unsigned chain, unsigned node)
+ {
+ 	struct dwc3_trb		*trb;
  
- 	if ((dwc->revision > DWC3_REVISION_194A) &&
-@@ -3224,7 +3227,8 @@ int dwc3_gadget_init(struct dwc3 *dwc)
- 	 * is less than super speed because we don't have means, yet, to tell
- 	 * composite.c that we are USB 2.0 + LPM ECN.
+-	dwc3_trace(trace_dwc3_gadget, "%s: req %p dma %08llx length %d%s%s",
++	dwc3_trace(trace_dwc3_gadget, "%s: req %p dma %08llx length %d%s",
+ 			dep->name, req, (unsigned long long) dma,
+-			length, last ? " last" : "",
+-			chain ? " chain" : "");
+-
++			length, chain ? " chain" : "");
+ 
+ 	trb = &dep->trb_pool[dep->trb_enqueue];
+ 
+@@ -788,6 +783,7 @@ static void dwc3_prepare_one_trb(struct dwc3_ep *dep,
+ 		req->trb = trb;
+ 		req->trb_dma = dwc3_trb_dma_offset(dep, trb);
+ 		req->first_trb_index = dep->trb_enqueue;
++		dep->queued_requests++;
+ 	}
+ 
+ 	dwc3_ep_inc_enq(dep);
+@@ -826,12 +822,10 @@ static void dwc3_prepare_one_trb(struct dwc3_ep *dep,
+ 	/* always enable Continue on Short Packet */
+ 	trb->ctrl |= DWC3_TRB_CTRL_CSP;
+ 
+-	if (!req->request.no_interrupt && !chain)
++	if ((!req->request.no_interrupt && !chain) ||
++			(dwc3_calc_trbs_left(dep) == 0))
+ 		trb->ctrl |= DWC3_TRB_CTRL_IOC | DWC3_TRB_CTRL_ISP_IMI;
+ 
+-	if (last && !usb_endpoint_xfer_isoc(dep->endpoint.desc))
+-		trb->ctrl |= DWC3_TRB_CTRL_LST;
+-
+ 	if (chain)
+ 		trb->ctrl |= DWC3_TRB_CTRL_CHN;
+ 
+@@ -840,8 +834,6 @@ static void dwc3_prepare_one_trb(struct dwc3_ep *dep,
+ 
+ 	trb->ctrl |= DWC3_TRB_CTRL_HWO;
+ 
+-	dep->queued_requests++;
+-
+ 	trace_dwc3_prepare_trb(dep, trb);
+ }
+ 
+@@ -856,12 +848,12 @@ static void dwc3_prepare_one_trb(struct dwc3_ep *dep,
+  */
+ static struct dwc3_trb *dwc3_ep_prev_trb(struct dwc3_ep *dep, u8 index)
+ {
+-	if (!index)
+-		index = DWC3_TRB_NUM - 2;
+-	else
+-		index = dep->trb_enqueue - 1;
++	u8 tmp = index;
++
++	if (!tmp)
++		tmp = DWC3_TRB_NUM - 1;
+ 
+-	return &dep->trb_pool[index];
++	return &dep->trb_pool[tmp - 1];
+ }
+ 
+ static u32 dwc3_calc_trbs_left(struct dwc3_ep *dep)
+@@ -894,65 +886,42 @@ static u32 dwc3_calc_trbs_left(struct dwc3_ep *dep)
+ }
+ 
+ static void dwc3_prepare_one_trb_sg(struct dwc3_ep *dep,
+-		struct dwc3_request *req, unsigned int trbs_left,
+-		unsigned int more_coming)
++		struct dwc3_request *req)
+ {
+-	struct usb_request *request = &req->request;
+-	struct scatterlist *sg = request->sg;
++	struct scatterlist *sg = req->sg;
+ 	struct scatterlist *s;
+-	unsigned int	last = false;
+ 	unsigned int	length;
+ 	dma_addr_t	dma;
+ 	int		i;
+ 
+-	for_each_sg(sg, s, request->num_mapped_sgs, i) {
++	for_each_sg(sg, s, req->num_pending_sgs, i) {
+ 		unsigned chain = true;
+ 
+ 		length = sg_dma_len(s);
+ 		dma = sg_dma_address(s);
+ 
+-		if (sg_is_last(s)) {
+-			if (usb_endpoint_xfer_int(dep->endpoint.desc) ||
+-				!more_coming)
+-				last = true;
+-
+-			chain = false;
+-		}
+-
+-		if (!trbs_left--)
+-			last = true;
+-
+-		if (last)
++		if (sg_is_last(s))
+ 			chain = false;
+ 
+ 		dwc3_prepare_one_trb(dep, req, dma, length,
+-				last, chain, i);
++				chain, i);
+ 
+-		if (last)
++		if (!dwc3_calc_trbs_left(dep))
+ 			break;
+ 	}
+ }
+ 
+ static void dwc3_prepare_one_trb_linear(struct dwc3_ep *dep,
+-		struct dwc3_request *req, unsigned int trbs_left,
+-		unsigned int more_coming)
++		struct dwc3_request *req)
+ {
+-	unsigned int	last = false;
+ 	unsigned int	length;
+ 	dma_addr_t	dma;
+ 
+ 	dma = req->request.dma;
+ 	length = req->request.length;
+ 
+-	if (!trbs_left)
+-		last = true;
+-
+-	/* Is this the last request? */
+-	if (usb_endpoint_xfer_int(dep->endpoint.desc) || !more_coming)
+-		last = true;
+-
+ 	dwc3_prepare_one_trb(dep, req, dma, length,
+-			last, false, 0);
++			false, 0);
+ }
+ 
+ /*
+@@ -966,26 +935,19 @@ static void dwc3_prepare_one_trb_linear(struct dwc3_ep *dep,
+ static void dwc3_prepare_trbs(struct dwc3_ep *dep)
+ {
+ 	struct dwc3_request	*req, *n;
+-	unsigned int		more_coming;
+-	u32			trbs_left;
+ 
+ 	BUILD_BUG_ON_NOT_POWER_OF_2(DWC3_TRB_NUM);
+ 
+-	trbs_left = dwc3_calc_trbs_left(dep);
+-	if (!trbs_left)
++	if (!dwc3_calc_trbs_left(dep))
+ 		return;
+ 
+-	more_coming = dep->allocated_requests - dep->queued_requests;
+-
+ 	list_for_each_entry_safe(req, n, &dep->pending_list, list) {
+-		if (req->request.num_mapped_sgs > 0)
+-			dwc3_prepare_one_trb_sg(dep, req, trbs_left--,
+-					more_coming);
++		if (req->num_pending_sgs > 0)
++			dwc3_prepare_one_trb_sg(dep, req);
+ 		else
+-			dwc3_prepare_one_trb_linear(dep, req, trbs_left--,
+-					more_coming);
++			dwc3_prepare_one_trb_linear(dep, req);
+ 
+-		if (!trbs_left)
++		if (!dwc3_calc_trbs_left(dep))
+ 			return;
+ 	}
+ }
+@@ -1101,93 +1063,37 @@ static int __dwc3_gadget_ep_queue(struct dwc3_ep *dep, struct dwc3_request *req)
+ 
+ 	trace_dwc3_ep_queue(req);
+ 
+-	/*
+-	 * We only add to our list of requests now and
+-	 * start consuming the list once we get XferNotReady
+-	 * IRQ.
+-	 *
+-	 * That way, we avoid doing anything that we don't need
+-	 * to do now and defer it until the point we receive a
+-	 * particular token from the Host side.
+-	 *
+-	 * This will also avoid Host cancelling URBs due to too
+-	 * many NAKs.
+-	 */
+ 	ret = usb_gadget_map_request(&dwc->gadget, &req->request,
+ 			dep->direction);
+ 	if (ret)
+ 		return ret;
+ 
+-	list_add_tail(&req->list, &dep->pending_list);
++	req->sg			= req->request.sg;
++	req->num_pending_sgs	= req->request.num_mapped_sgs;
+ 
+-	/*
+-	 * If there are no pending requests and the endpoint isn't already
+-	 * busy, we will just start the request straight away.
+-	 *
+-	 * This will save one IRQ (XFER_NOT_READY) and possibly make it a
+-	 * little bit faster.
+-	 */
+-	if (!usb_endpoint_xfer_isoc(dep->endpoint.desc) &&
+-			!usb_endpoint_xfer_int(dep->endpoint.desc)) {
+-		ret = __dwc3_gadget_kick_transfer(dep, 0);
+-		goto out;
+-	}
++	list_add_tail(&req->list, &dep->pending_list);
+ 
+ 	/*
+-	 * There are a few special cases:
+-	 *
+-	 * 1. XferNotReady with empty list of requests. We need to kick the
+-	 *    transfer here in that situation, otherwise we will be NAKing
+-	 *    forever. If we get XferNotReady before gadget driver has a
+-	 *    chance to queue a request, we will ACK the IRQ but won't be
+-	 *    able to receive the data until the next request is queued.
+-	 *    The following code is handling exactly that.
++	 * NOTICE: Isochronous endpoints should NEVER be prestarted. We must
++	 * wait for a XferNotReady event so we will know what's the current
++	 * (micro-)frame number.
+ 	 *
++	 * Without this trick, we are very, very likely gonna get Bus Expiry
++	 * errors which will force us issue EndTransfer command.
  	 */
--	if (dwc->revision < DWC3_REVISION_220A)
-+	if (dwc->revision < DWC3_REVISION_220A &&
-+	    !dwc->dis_metastability_quirk)
- 		dev_info(dwc->dev, "changing max_speed on rev %08x\n",
- 				dwc->revision);
+-	if (dep->flags & DWC3_EP_PENDING_REQUEST) {
+-		/*
+-		 * If xfernotready is already elapsed and it is a case
+-		 * of isoc transfer, then issue END TRANSFER, so that
+-		 * you can receive xfernotready again and can have
+-		 * notion of current microframe.
+-		 */
+-		if (usb_endpoint_xfer_isoc(dep->endpoint.desc)) {
+-			if (list_empty(&dep->started_list)) {
+-				dwc3_stop_active_transfer(dwc, dep->number, true);
+-				dep->flags = DWC3_EP_ENABLED;
+-			}
+-			return 0;
++	if (usb_endpoint_xfer_isoc(dep->endpoint.desc)) {
++		if ((dep->flags & DWC3_EP_PENDING_REQUEST) &&
++				list_empty(&dep->started_list)) {
++			dwc3_stop_active_transfer(dwc, dep->number, true);
++			dep->flags = DWC3_EP_ENABLED;
+ 		}
+-
+-		ret = __dwc3_gadget_kick_transfer(dep, 0);
+-		if (!ret)
+-			dep->flags &= ~DWC3_EP_PENDING_REQUEST;
+-
+-		goto out;
+-	}
+-
+-	/*
+-	 * 2. XferInProgress on Isoc EP with an active transfer. We need to
+-	 *    kick the transfer here after queuing a request, otherwise the
+-	 *    core may not see the modified TRB(s).
+-	 */
+-	if (usb_endpoint_xfer_isoc(dep->endpoint.desc) &&
+-			(dep->flags & DWC3_EP_BUSY) &&
+-			!(dep->flags & DWC3_EP_MISSED_ISOC)) {
+-		WARN_ON_ONCE(!dep->resource_index);
+-		ret = __dwc3_gadget_kick_transfer(dep, dep->resource_index);
+-		goto out;
++		return 0;
+ 	}
  
+-	/*
+-	 * 4. Stream Capable Bulk Endpoints. We need to start the transfer
+-	 * right away, otherwise host will not know we have streams to be
+-	 * handled.
+-	 */
+-	if (dep->stream_capable)
+-		ret = __dwc3_gadget_kick_transfer(dep, 0);
++	if (!dwc3_calc_trbs_left(dep))
++		return 0;
+ 
+-out:
++	ret = __dwc3_gadget_kick_transfer(dep, 0);
+ 	if (ret && ret != -EBUSY)
+ 		dwc3_trace(trace_dwc3_gadget,
+ 				"%s: failed to kick transfers",
+@@ -1962,7 +1868,11 @@ static int __dwc3_cleanup_done_trbs(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 	unsigned int		s_pkt = 0;
+ 	unsigned int		trb_status;
+ 
+-	dep->queued_requests--;
++	dwc3_ep_inc_deq(dep);
++
++	if (req->trb == trb)
++		dep->queued_requests--;
++
+ 	trace_dwc3_complete_trb(dep, trb);
+ 
+ 	/*
+@@ -1982,6 +1892,7 @@ static int __dwc3_cleanup_done_trbs(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 		return 1;
+ 
+ 	count = trb->size & DWC3_TRB_SIZE_MASK;
++	req->request.actual += count;
+ 
+ 	if (dep->direction) {
+ 		if (count) {
+@@ -2021,48 +1932,51 @@ static int __dwc3_cleanup_done_trbs(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 
+ 	if (s_pkt && !chain)
+ 		return 1;
+-	if ((event->status & DEPEVT_STATUS_LST) &&
+-			(trb->ctrl & (DWC3_TRB_CTRL_LST |
+-				DWC3_TRB_CTRL_HWO)))
+-		return 1;
++
+ 	if ((event->status & DEPEVT_STATUS_IOC) &&
+ 			(trb->ctrl & DWC3_TRB_CTRL_IOC))
+ 		return 1;
++
+ 	return 0;
+ }
+ 
+ static int dwc3_cleanup_done_reqs(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 		const struct dwc3_event_depevt *event, int status)
+ {
+-	struct dwc3_request	*req;
++	struct dwc3_request	*req, *n;
+ 	struct dwc3_trb		*trb;
+-	unsigned int		slot;
+-	unsigned int		i;
+-	int			count = 0;
++	bool			ioc = false;
+ 	int			ret;
+ 
+-	do {
++	list_for_each_entry_safe(req, n, &dep->started_list, list) {
++		unsigned length;
++		unsigned actual;
+ 		int chain;
+ 
+-		req = next_request(&dep->started_list);
+-		if (WARN_ON_ONCE(!req))
+-			return 1;
+-
+-		chain = req->request.num_mapped_sgs > 0;
+-		i = 0;
+-		do {
+-			slot = req->first_trb_index + i;
+-			if (slot == DWC3_TRB_NUM - 1)
+-				slot++;
+-			slot %= DWC3_TRB_NUM;
+-			trb = &dep->trb_pool[slot];
+-			count += trb->size & DWC3_TRB_SIZE_MASK;
++		length = req->request.length;
++		chain = req->num_pending_sgs > 0;
++		if (chain) {
++			struct scatterlist *sg = req->sg;
++			struct scatterlist *s;
++			unsigned int pending = req->num_pending_sgs;
++			unsigned int i;
+ 
++			for_each_sg(sg, s, pending, i) {
++				trb = &dep->trb_pool[dep->trb_dequeue];
++
++				req->sg = sg_next(s);
++				req->num_pending_sgs--;
++
++				ret = __dwc3_cleanup_done_trbs(dwc, dep, req, trb,
++						event, status, chain);
++				if (ret)
++					break;
++			}
++		} else {
++			trb = &dep->trb_pool[dep->trb_dequeue];
+ 			ret = __dwc3_cleanup_done_trbs(dwc, dep, req, trb,
+ 					event, status, chain);
+-			if (ret)
+-				break;
+-		} while (++i < req->request.num_mapped_sgs);
++		}
+ 
+ 		/*
+ 		 * We assume here we will always receive the entire data block
+@@ -2071,12 +1985,21 @@ static int dwc3_cleanup_done_reqs(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 		 * should receive and we simply bounce the request back to the
+ 		 * gadget driver for further processing.
+ 		 */
+-		req->request.actual += req->request.length - count;
++		actual = length - req->request.actual;
++		req->request.actual = actual;
++
++		if (ret && chain && (actual < length) && req->num_pending_sgs)
++			return __dwc3_gadget_kick_transfer(dep, 0);
++
+ 		dwc3_gadget_giveback(dep, req, status);
+ 
+-		if (ret)
++		if (ret) {
++			if ((event->status & DEPEVT_STATUS_IOC) &&
++			    (trb->ctrl & DWC3_TRB_CTRL_IOC))
++				ioc = true;
+ 			break;
+-	} while (1);
++		}
++	}
+ 
+ 	/*
+ 	 * Our endpoint might get disabled by another thread during
+@@ -2103,10 +2026,9 @@ static int dwc3_cleanup_done_reqs(struct dwc3 *dwc, struct dwc3_ep *dep,
+ 		return 1;
+ 	}
+ 
+-	if (usb_endpoint_xfer_isoc(dep->endpoint.desc))
+-		if ((event->status & DEPEVT_STATUS_IOC) &&
+-				(trb->ctrl & DWC3_TRB_CTRL_IOC))
+-			return 0;
++	if (usb_endpoint_xfer_isoc(dep->endpoint.desc) && ioc)
++		return 0;
++
+ 	return 1;
+ }
+ 
+@@ -2322,6 +2244,18 @@ static void dwc3_stop_active_transfer(struct dwc3 *dwc, u32 epnum, bool force)
+ 	 *
+ 	 * - Issue EndTransfer WITH CMDIOC bit set
+ 	 * - Wait 100us
++	 *
++	 * As of IP version 3.10a of the DWC_usb3 IP, the controller
++	 * supports a mode to work around the above limitation. The
++	 * software can poll the CMDACT bit in the DEPCMD register
++	 * after issuing a EndTransfer command. This mode is enabled
++	 * by writing GUCTL2[14]. This polling is already done in the
++	 * dwc3_send_gadget_ep_cmd() function so if the mode is
++	 * enabled, the EndTransfer command will have completed upon
++	 * returning from this function and we don't need to delay for
++	 * 100us.
++	 *
++	 * This mode is NOT available on the DWC_usb31 IP.
+ 	 */
+ 
+ 	cmd = DWC3_DEPCMD_ENDTRANSFER;
+@@ -2333,7 +2267,9 @@ static void dwc3_stop_active_transfer(struct dwc3 *dwc, u32 epnum, bool force)
+ 	WARN_ON_ONCE(ret);
+ 	dep->resource_index = 0;
+ 	dep->flags &= ~DWC3_EP_BUSY;
+-	udelay(100);
++
++	if (dwc3_is_usb31(dwc) || dwc->revision < DWC3_REVISION_310A)
++		udelay(100);
+ }
+ 
+ static void dwc3_stop_active_transfers(struct dwc3 *dwc)
+@@ -3054,7 +2990,7 @@ err3:
+ 	kfree(dwc->setup_buf);
+ 
+ err2:
+-	dma_free_coherent(dwc->dev, sizeof(*dwc->ep0_trb),
++	dma_free_coherent(dwc->dev, sizeof(*dwc->ep0_trb) * 2,
+ 			dwc->ep0_trb, dwc->ep0_trb_addr);
+ 
+ err1:
+@@ -3079,7 +3015,7 @@ void dwc3_gadget_exit(struct dwc3 *dwc)
+ 	kfree(dwc->setup_buf);
+ 	kfree(dwc->zlp_buf);
+ 
+-	dma_free_coherent(dwc->dev, sizeof(*dwc->ep0_trb),
++	dma_free_coherent(dwc->dev, sizeof(*dwc->ep0_trb) * 2,
+ 			dwc->ep0_trb, dwc->ep0_trb_addr);
+ 
+ 	dma_free_coherent(dwc->dev, sizeof(*dwc->ctrl_req),
 -- 
 2.53.0
 
