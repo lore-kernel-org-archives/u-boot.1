@@ -4,119 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E9FCC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42BCAC5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:50:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3EF20406C9;
-	Mon, 24 Aug 2026 08:44:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AD9204068C;
+	Mon, 24 Aug 2026 08:50:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SAGxshTYSjC5; Mon, 24 Aug 2026 08:44:36 +0000 (UTC)
+ id XWj6C6uV5sfr; Mon, 24 Aug 2026 08:50:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787561076;
-	bh=NxX/jq5N/7gUFyiyVBPd1k1A4YIOWlYNJjNIgmF990o=;
+	d=lists.u-boot-project.org; s=default; t=1787561453;
+	bh=3GTuROQLwHnRdLA82PtSWcGLAQFSXfGxoBgN60dGZXk=;
 	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=DT3fOh+lTFOQULuBJWplpgnaX60sdaQYt0HFX4Pi+CiFIyQ4/Qxzdym3tNoBnZpY3
-	 Iw/97DUeBQ6VFKXeO1Ebx82wZ+mxD/hGAeubqMBI4iDiYEHLrMfFNdvo1kzl3qLVWD
-	 GbQccVUgpEglyGoGU+LuhzBvL8F+SjZQWtUhPNTb/r9YsylQpXWq39Nb+XUOIAzjdG
-	 UYy/z11ZFjH+NNHx154D0ICtIlVNVcaQagNlufKstzvIIuOKWsezYkFD/iomGxLaoR
-	 nC8Xb/9x1Kxb+zzwuE5xCsElrZp2yxcZvFuinPbkGF/FBFmFz/f3caERU91Kxf+R58
-	 XDj1h1C3xalnw==
+	b=VV6xgXX1Farp5AZaoacPD9uhbllBFnWcR2LHp6uMNaPqELsFqqy2nC/aD9XRxKJ2k
+	 RPClCep86xWOLMrZb0saUYPG317LWDUbI/O0zoZpeKB6i/SoPpYERJm3YY2YZa7HaT
+	 infw2IOA3WaLUwZjG29ArlDKFy3gL7LDMR1LiXODyAYmb6or3e6+nW8uOTwyxHMcQh
+	 A0+d66dv4C0PdScWtUQRXt6zm4j08UbVWPi5mky9kiJLLPAHM5b4+5b66CBiBhhFIY
+	 TteUmdULQx43kJNa1467T9luQujGvA9SfiCU/VjOu1G/bubwSO/I0EJPOlXE+ERj0r
+	 qtmzB7TAuLTWw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0CFF5406BF;
-	Mon, 24 Aug 2026 08:44:36 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C0015230
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9ED5D40604;
+	Mon, 24 Aug 2026 08:50:53 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6D7E229B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:50:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B22F46060A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:30 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5441D400AE
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:50:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XqzuJgCo4jSK for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 08:44:29 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id V6Yq3FqLunPc for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 08:50:50 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=bS3eFJHQ
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 63C87605F9
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:44:27 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-496bb7cdf51so14541855e9.2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 01:44:27 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::534; helo=mail-pg1-x534.google.com;
+ envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=HPbqUAx2
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 56BD64005C
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:50:49 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-cc1469c1b83so4236847a12.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 01:50:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787561065; x=1788165865;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787561449; x=1788166249;
  darn=lists.u-boot-project.org; 
  h=cc:to:content-transfer-encoding:content-type:mime-version
  :message-id:date:subject:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=NxX/jq5N/7gUFyiyVBPd1k1A4YIOWlYNJjNIgmF990o=;
- b=bS3eFJHQ+/CKcf0pBnTN+7CU92kf4Mmb/Z2ssrs1KygxOcW64Cj0yFaW6v3aOG+kGM
- PXs7OfX6N5QQk8oBH0oM7vlOaWWHXl0GOeDj2rhBl464PgMb9COVEfztudfd3RrrxbvF
- G/2kFyb2cg5P7OI0TfhP4lLOKkIZnzr/yWMuPiOMhhi2RRmTJ8RR/mafHLJsrWklW8Y3
- inNFlCEtY0oMdfQGOhxSjditbAy63jaMGY52cWU0JeWhtUSZe0UdlJUwLWpp6IzUe4W3
- hrEocUnUSWf9SIqgmgVbilgaZ8mlHW1A40Xw9F5WdNU6KpqKRTdj17nvKFNRbBvop3AZ
- 6WPg==
+ bh=3GTuROQLwHnRdLA82PtSWcGLAQFSXfGxoBgN60dGZXk=;
+ b=HPbqUAx2KZlUycnCqoZSbpCb57+EzfxnOG6IHTI54BnBMW+0CDZ3ovz9q5B/Ig2taZ
+ IC9ZPNKmJxtnGUreSMhththebCDvlLeKtgn8KDFE/cRkwobfVkNCKQekletk7NRrtZOu
+ ltSP0eWWEpONMqL02jUGx5cKl7XSV2BcnV0DE0H/Isl+GA3a8nAEtCjPnEGgtRNMhqhd
+ MxG6iPjTYJYEaghmwrdEH26Vooo+LYy6WR93WgF5FLxl28BhyI/2qOIT7JPsxIS267ad
+ Y392hV2kXwuS+b46ajxWeZi7qTdB0xhg7BJ9hE4xob76OjPWo4GcBUpAi64zgGHJ67Xz
+ fOGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787561065; x=1788165865;
+ d=1e100.net; s=20251104; t=1787561449; x=1788166249;
  h=cc:to:content-transfer-encoding:content-type:mime-version
  :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=NxX/jq5N/7gUFyiyVBPd1k1A4YIOWlYNJjNIgmF990o=;
- b=aZKDLvh2lITRp1fHH1DRqSkZBuPnUxc6Iwew+kPEh8evyu9HOXhfeXT/76omxJxnqG
- xM0tubGzLCLNfW6u9vTrUzLDWGEqffUCIY1zxloAVlbIp9ZG4emUXGs1nU+tRX6EXm6p
- OV1eJcJ8VAOPK0qO7wx4iRpelFW+51YpKsAuvgoCDxhP+l813wlyoqtIlg8LF7y4cZp2
- LFErIm+NUPu+7J24MYULQOV2KdcQqz3LzIlFoKbMDcg3FPoRMvF/Ok3SWauqPpec9YzZ
- 3mAiEiitD2/QZPQLbZjr0Ij9GrDQy9fyZMlp9JvE98Y1ZmZbMTnZWdEaneLg5J1HuY9H
- COcg==
-X-Gm-Message-State: AFuF++mFjLfsnTsLgRTmIclT5ZdWHJ9UDHC2KUaVYYisyrfhNGHVxiqE
- xPmG9UbzjsPTeAB7ZggTzQ2g9VHq9qaKIs64fVP80szaurNYwnUXRWOqmoSXJrUiHKQ=
-X-Gm-Gg: AR+sD12R3o5gZg0Qr3YQtDpH3NYXI/685tN99EurSHYnwvd4nEI+jnea7uErpuMVAiO
- Ppvdv4awJ7IH5o2piE1eVFFzuZyw+1ekCyw/YmyrElk3jTfpDXcKp3FmqPDax/RiH8eu/CdvbBT
- TyC2tWJ+65S5hM76HtUTNYfLL7BQ14IOP63G4PWdaEe3hJHi6AId2bybEvbLk80V9cNyDmzPj29
- WKcexIAdXJNdahUtTWauchoUfMNRvupTwR3USoy7HW4027nMhyJGmeB8qtl7EpqyHijPJhivojQ
- ToYDIt1Ws/LBgwLUz6SB9aRVusV2vSn7QOUAFaYn8MUM8VnqGf+v/pZjHd/Bgs33bBttW1KDuJi
- 5W/or0megelidPNj6Hn5WoVxO9S2JwTQODo6r4P8uCCQiRfjKrbBS/sSNyjnJtXUnS9G5HwYt55
- eW2ifLkkWbWGFMXAxxNrmiGvfOdFV8BdTkwDKZ46M4QS9wMS8WmnxqcoDdoYkBAlhg1Gjh4UAsF
- t6aOqnZzYk3rOXeX+MXXf6pbyW2HQGv/6id3MuFJ7BzYVZk5PGYMIerEqvO+XpoMETvlzNAxA/0
- e5YNOa+fiyBL6QM1tlQmWVLaekuuV1u0qr+ErNp7kiLPcQ==
-X-Received: by 2002:a05:600c:3544:b0:493:f140:c3fb with SMTP id
- 5b1f17b1804b1-499b8301874mr260465015e9.7.1787561065176; 
- Mon, 24 Aug 2026 01:44:25 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
- [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
+ bh=3GTuROQLwHnRdLA82PtSWcGLAQFSXfGxoBgN60dGZXk=;
+ b=j9kyp+2n3kq9GPDiYdsqGT7APWtift0q4FUaLYzFIRD13yMPX6RRYQnk4gw8mtY0cI
+ uy3IPov2xaGD18URSw3oFwnxUjiAtIpxLUa412U3tHUzK3gLXXo/Yo1/0EA7A7NPIIYH
+ FwvQBaODw+bYqb7mccSKEJ4CdyvNH+85sHSCRUm88ERIWrVXsfivHgBxUcgcHEw3FE07
+ gbj8dPH5tRerT2JP9/GJFCBML0NJAildiyiK0ce3NZ+x5AVGigkuz5ON/t8Ky423aW8e
+ IlAA6SqkGw/wxA8hgAlpiTEEb/wY6Pe+nQbs8pNCfAfDgs+aHd5hSevkaikMLbyJndDk
+ yYQA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrPs6hy91XJWt/pI9GdnlyfIc+A92+t6zDeRpX4rSkWyA8AgpPWNrqY+JQaG7TGu8B5Le4vo7k=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kLIQy9xZ+rieavk48VR3Zd6lhf69hw6xl7DCkUEnyvsFHyNbpD
+ icjPNTiNP8lM3kyPWU/NbJ8Jnk5QT6QkjKxsYy02qeqxE5NEA+dBXkTo8KGo6PPH0eM=
+X-Gm-Gg: AR+sD13nimauO3FUKvULDVv9xSouix0zy38tsaIc/r6vu5KQ85uKwXwzr/EEoXgZCqL
+ Z57jiMsXjzoMlqU9dj+dzJUq6EpsFW2szDVx3eKooINt1CvPGHYPkBz9ADR4fbBNxPWG1+9EoLJ
+ pvoPSy+6jgxpifxHgL6vpU0BzjtyPWV8vG4QzuvXzp4a072p6r4ogKX7JrDTT/qoltF+Ilt5yNp
+ iZdvxiFGQkW2RpAm01NJVypgSIFcmEHPpJk/zHGhxUWvENmYSKrPa8c1RZwCHe7fI2b3LQ9NMnj
+ D4LJt/Veh53CJZgCTF2qlcFgSCJmvYw3oBd6h8QS/t+5yegq0JNWRSzNNLCplLIqAX8EQnHBXZo
+ XxwK5ysQY20h3PCuwzr8rJbN0nJdsaiksW+bdpWtNk5EgnP0kJg3WX0K1yNRleeRiC5umBUvtKK
+ oGpc1WvVJZ6YUNlwvleC2bQCR6bS/81qLPzUL3tBw1Wpq5hNL9tDvQhtvyC94OWZ70xDa38H0EA
+ C86dU94YA3dt/+/i4+xXG/lcjfHFFNG/CzKTshIXMtKOuviqKs159MdZPdNBDW6bLV4gZq1hJ2o
+ uTiZydsJf3NOggpL9ruEDwhTt5Axvpu9DjpT
+X-Received: by 2002:a05:6a21:3511:b0:3bf:6acf:2940 with SMTP id
+ adf61e73a8af0-3cd30060d76mr54677687637.11.1787561449018; 
+ Mon, 24 Aug 2026 01:50:49 -0700 (PDT)
+Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499c35a1aeasm79788475e9.12.2026.08.24.01.44.24
+ 5a478bee46e88-327f91d37d9sm26085522eec.14.2026.08.24.01.50.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 01:44:24 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH v2 0/3] Improve logging on missing uclass
-Date: Mon, 24 Aug 2026 10:44:15 +0200
-Message-Id: <20260824-improve-logging-on-missing-uclass-v2-0-4bee2cdff72b@baylibre.com>
+ Mon, 24 Aug 2026 01:50:48 -0700 (PDT)
+From: Eric Chung <eric.chung@riscstar.com>
+Subject: [PATCH v10 00/17] spacemit mmc driver
+Date: Mon, 24 Aug 2026 16:50:35 +0800
+Message-Id: <20260824-m4-v10-0-5e0adcb1edb9@riscstar.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/5WOQQ6DIBREr2JY9zdoKZqueo/GBSLgb1QMX0mN8
- e4Ve4Lu5iWTN7MxMgENsUe2sWAiEvrxgOKSMd2p0RnA9mBW8ELyikvAYQo+Gui9czg68CMMSJT
- iontFBKqUWkilrcpv7PBMwVj8nBuv+se0NG+j5yROjQ5p9mE9T8Q89f7ZizlwaEVZWs7vworq2
- ai1xyaYq/YDq/d9/wKug/Ry5wAAAA==
-X-Change-ID: 20260806-improve-logging-on-missing-uclass-a76c46acfa13
-To: u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, dlechner@baylibre.com
+X-B4-Tracking: v=1; b=H4sIANsFjGoC/23RS07EMAwG4KuMsiYoTuM0ZsU9EIs8mSDNFCWlA
+ o16d9J2MQW6dOTvd2TfWI0lx8qeTjdW4pRrHq6tAPFwYv5sr2+R59AemBRSCy2JXxQnEwVopBS
+ TY63xo8SUv9aUl9etrp/uPfpxkUvHOddxKN/rmAmWvl+BE3DBLUAyQZGOWj6XXH0dbXn0w4Utm
+ ZP8r2RT3nkCr53pgjlQ3V31AlfVNYWWnO+TxOTxQKm96lelmgouCACDiQAOFO6UlKvC5YcKLCF
+ EBOwPlN6rbZZuSiY0qHVQxtsDRXdlYNsGNdV2p9tpOpKO/qh5nn8AVNiztu4BAAA=
+X-Change-ID: 20260629-m4-98e01659fefb
+To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>, 
+ Wei Fu <wefu@redhat.com>, Huan Zhou <pericycle.cc@gmail.com>, 
+ Guodong Xu <guodong@riscstar.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Yixun Lan <dlan@kernel.org>, Iker Pedrosa <ikerpedrosam@gmail.com>, 
+ Alex Elder <elder@riscstar.com>, Andre Heider <a.heider@gmail.com>, 
+ Trevor Gamblin <tgamblin@baylibre.com>, 
+ Eric Chung <eric.chung@riscstar.com>, Yixun Lan <dlan@gentoo.org>, 
+ Anand Moon <linux.amoon@gmail.com>, Vincent Legoll <legoll@online.fr>, 
+ Troy Mitchell <troy.mitchell@linux.dev>, 
+ Margherita Milani <margherita.milani@amarulasolutions.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>
 X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -131,74 +146,152 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-While writing a MISC driver, I forgot to enable CONFIG_MISC. The only thing
-I got at boot was the following obscure error, with no hint about the root
-cause:
+This series adds MMC support for the SpacemiT K1: an SDHCI platform
+driver, the SD card device-tree overlay, defconfig options, and SPL
+boot-device selection from the SoC strap/config registers. The SDHCI
+driver is usable in both SPL and U-Boot proper.
 
-  initcall_run_r(): initcall initr_dm() failed
-  ### ERROR ### Please RESET the board ###
+A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
+write images to eMMC.
 
-Commit 3346c87625b8 ("dm: Improve handling of a missing uclass") already
-tried to improve this case by returning a strange error code and adding a
-debug message. But since neither the debug message nor the return code are
-displayed by default, it was not very helpful in practice.
-
-This series improves the situation in a few ways:
- - a new dm_err() helper logs driver model errors at ERROR level, and the
-   boolean DM_WARN option becomes a per-stage log verbosity choice
-   (DM_NONE / DM_ERR / DM_WARN) with errors emitted by default. Note that
-   a disabled level is not removed entirely but degraded to DEBUG level,
-   which is compiled out by default, so even DM_NONE can still emit these
-   messages as debug output when debug logging is enabled;
- - the missing-uclass message now uses dm_err(), so it shows up by default,
-   with a shorter string to limit the code-size overhead;
- - the initcall failure now prints the actual error code (and its string
-   when ERRNO_STR is enabled), for both INITCALL() and INITCALL_EVT().
-
-The existing DM_DEBUG option is left as-is for now: it works differently
-(it adds -DDEBUG to drivers/core/ via the Makefile and is not phase-aware).
-Unifying it into the new choice, along with converting the DM core debug()
-statements to log() as suggested in the "To Do" section of
-doc/develop/logging.rst, could be a follow-up series.
-
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
+Changes in v10:
+- pinctrl: Move all pinctrl patches into a new patch set.
+- Link to v9: https://patch.msgid.link/20260819-m4-v9-0-6e66016392b9@riscstar.com
+
+Changes in v9:
+- spl: Enhance detection on booting from SD.
+- dts: Synched upstream DTS files for K1.
+- doc: Create SD card image from scratch.
+- mmc: Avoid to use CMD18 on SD card in SPL.
+- pinctrl: Drop "fix drive strength configuration".
+- Link to v8: https://patch.msgid.link/20260802-m4-v8-4-e916643205f3@riscstar.com
+
+Changes in v8:
+- doc: Remove SD card.
+- Link to v7: https://patch.msgid.link/20260729-m4-v7-8-2cb04b4fe389@riscstar.com
+
+Changes in v7:
+- env: Drop env support on the mmc series.
+- dts: Sync upstream DTS files for spacemit.
+- pinctrl: Simply clrsetbits_le32() on pull-up/pull-down configuration.
+- spl: Fix DTB matching.
+- Link to v6: https://patch.msgid.link/20260727-m4-v6-0-2f58566d48ca@riscstar.com
+
+Changes in v6:
+- pinctrl: Fix drive strength configuration.
+- pinctrl: Fix pull-up/pull-down configuration.
+- pinctrl: Use dev_read_phandle_with_args() to fetch "spacemit,syscon" instead.
+- spacemit: rebase on latest upstream branch.
+- Link to v5: https://patch.msgid.link/20260722-m4-v5-0-c41a951e5157@riscstar.com
+
+Changes in v5:
+- mmc: Split CMD23 support out.
+- mmc: Use read_poll_timeout().
+- mmc: Set pinctrl state based on selected timing mode.
+- mmc: Remove the condition based on quirks.
+- pinctrl: Fix power source argument.
+- dts: Add missing power source on mmc pins.
+- Link to v4: https://patch.msgid.link/20260707-m4-v4-0-dbd01185f911@riscstar.com
+
+Changes in v4:
+- mmc: Add CMD23 for write.
+- mmc: Fix CMD23 only for CMD18.
+- mmc: Update bulk release operations on reset and clocks for spacemit
+  platform driver.
+- MAINTAINER: update the maintainer of Spacemit K1.
+- Link to v3: https://patch.msgid.link/20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com
+
+Changes in v3:
+- pinctrl: Fix "fast" by "uhs".
+- pinctrl: Add syscon dependency.
+- mmc: Fix quick by capability.
+- doc: Add SD boot support.
+- Link to v2: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc
+
 Changes in v2:
-- dm: replace the boolean DM_WARN option with a per-stage log verbosity
-  choice (DM_NONE / DM_ERR / DM_WARN) and add a dm_err() helper, rather
-  than logging the missing-uclass message with a hardcoded log() call
-  (suggested by Simon)
-- dm: de-duplicate the util.h helpers to only select the log level
-  (suggested by Simon)
-- dm: split the change into the generic mechanism and its user in uclass.c
-- dm: shorten the missing-uclass message to limit the SPL/TPL size overhead
-- initcall: use the %dE format so no dangling ": " is printed when
-  ERRNO_STR is disabled, and give INITCALL_EVT() the same treatment
-- Link to v1: https://patch.msgid.link/20260806-improve-logging-on-missing-uclass-v1-0-d477f0054f48@baylibre.com
+- cmd: drop patches on eminfo & tlv_eeprom.
+- configs: Enable ADMA and SYSCON support.
+- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
+- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
+  read/write, correct pinctrl state from "fast" to "uhs".
+- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
+  transfers.
+- pinctrl: k1: Add new IO power domain configuration support for
+  dual-voltage GPIO banks.
+- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
+- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
 
+To: u-boot-spacemit@groups.io
 To: u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Simon Glass <sjg@chromium.org>
+To: Yao Zi <me@ziyao.cc>
+Cc: Huan Zhou <pericycle.cc@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
+Cc: Guodong Xu <guodong@riscstar.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>
+Cc: Yixun Lan <dlan@kernel.org>
+Cc: Iker Pedrosa <ikerpedrosam@gmail.com>
+Cc: Alex Elder <elder@riscstar.com>
+Cc: Andre Heider <a.heider@gmail.com>
+Cc: Trevor Gamblin <tgamblin@baylibre.com>
+Cc: Tim Ouyang <tim609@andestech.com>
+Cc: Leo Liang <leo.liang@sifive.com>
+Signed-off-by: Eric Chung <eric.chung@riscstar.com>
 
 ---
-Julien Stephan (3):
-      dm: add dm_err() and a driver model log verbosity choice
-      dm: uclass: use dm_err() for a missing uclass
-      initcall: initcall_evt: display error code on error
+Alex Elder (1):
+      riscv: dts: spacemit: define a SPI controller node
 
- drivers/core/Kconfig  | 75 ++++++++++++++++++++++++++++++++++++++++++---------
- drivers/core/uclass.c |  3 +--
- include/dm/util.h     | 19 +++++++++++--
- include/initcall.h    | 14 +++++-----
- 4 files changed, 88 insertions(+), 23 deletions(-)
+Andre Heider (6):
+      riscv: dts: spacemit: k1-musepi-pro: add PMIC and power infrastructure
+      riscv: dts: spacemit: k1-musepi-pro: add 24c02 eeprom
+      riscv: dts: spacemit: k1-musepi-pro: enable QSPI and add SPI NOR
+      riscv: dts: spacemit: k1-musepi-pro: enable USB 3 ports
+      riscv: dts: spacemit: k1-musepi-pro: enable PCIe ports
+      riscv: dts: spacemit: k1-musepi-pro: set default console baud rate
+
+Eric Chung (7):
+      spacemit: k1: select boot device via config registers
+      mmc: k1: add sdhci platform driver
+      dts: k1: enable mmc devices in SPL
+      configs: k1: enable SD and eMMC support
+      MAINTAINER: update Spacemit K1 entry
+      doc: spacemit: flash on K1 SoC based boards
+      spacemit: k1: fix product name detection and DTB matching in SPL
+
+Iker Pedrosa (2):
+      riscv: dts: spacemit: k1: add SD card controller and pinctrl support
+      riscv: dts: spacemit: k1-bananapi-f3: add SD card support with UHS modes
+
+Trevor Gamblin (1):
+      riscv: dts: spacemit: k1-musepi-pro: add SD card support with UHS modes
+
+ arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi          |  12 +-
+ arch/riscv/dts/k1-musepi-pro-u-boot.dtsi           | 136 +---
+ board/spacemit/k1/MAINTAINERS                      |   5 +-
+ board/spacemit/k1/spl.c                            | 145 ++++-
+ configs/spacemit_k1_defconfig                      |  22 +
+ doc/board/spacemit/index.rst                       |   1 +
+ doc/board/spacemit/k1-mmc.rst                      | 271 ++++++++
+ drivers/mmc/Kconfig                                |   7 +
+ drivers/mmc/Makefile                               |   1 +
+ drivers/mmc/spacemit_sdhci.c                       | 684 +++++++++++++++++++++
+ dts/upstream/src/riscv/spacemit/k1-bananapi-f3.dts |  31 +-
+ dts/upstream/src/riscv/spacemit/k1-musepi-pro.dts  | 329 +++++++++-
+ dts/upstream/src/riscv/spacemit/k1-pinctrl.dtsi    |  60 ++
+ dts/upstream/src/riscv/spacemit/k1.dtsi            |  28 +
+ 14 files changed, 1581 insertions(+), 151 deletions(-)
 ---
-base-commit: f562ed02aa7ae4dc2775d90d2e6c40bab82e2715
-change-id: 20260806-improve-logging-on-missing-uclass-a76c46acfa13
+base-commit: 6073c36b2c8d39afe3ecc789b281667a3ddebc70
+change-id: 20260629-m4-98e01659fefb
 
 Best regards,
 --  
-Julien Stephan <jstephan@baylibre.com>
+Eric Chung <eric.chung@riscstar.com>
 
