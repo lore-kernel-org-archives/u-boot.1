@@ -1,111 +1,111 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A48C5DF9B
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:13:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DFC2C5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:13:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C554780CC5;
-	Mon, 24 Aug 2026 13:13:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id biwhrYHWiaRI; Mon, 24 Aug 2026 13:13:51 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787577231;
-	bh=NvS7MEJi+5anm/vGQIj9R0Hn70FCBFrUfyAy7wQU3yU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ZKfHejbne6Cpj4WNGKRC/fiwZivfkNr8XdOhI9LgonVdJzpdkALrILyH1/7Cr9CvK
-	 eNS6jYSowhO5YfEpm30QCKq3EaPHpTQbk2sfDY4drD8CdwZikVaQosQP90cZouPOj/
-	 9f7fAVrX61XBNeEDgeq6QNNzXmnvjtj3NPW2i2RPprv7w+Ky9bO20sShGcrsZUS9by
-	 sBXagc7bs+zL+uNttfxGfpAon/t4rUOe5dZgbZR+TelgUyqi7iIe6EEsbc0JsupN8L
-	 guG6qutfFaf265p25WN2TDT3ZwTpTpt71zLVKxzfJsBlJ8DWTyJrZfUEoGB97xcgnG
-	 GHUs8+AcN2Z4A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E0A6F80AF3;
-	Mon, 24 Aug 2026 13:13:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 267C7279
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0B88A40702
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DCBF740702;
+	Mon, 24 Aug 2026 13:13:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TuHhqtymTidn for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 13:13:49 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=sRPKdIe4
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 87108405A9
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:48 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-482c58a8683so1315203f8f.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:13:48 -0700 (PDT)
+ id hVpP8qfZfyzF; Mon, 24 Aug 2026 13:13:54 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1787577226; x=1788182026;
+	d=lists.u-boot-project.org; s=default; t=1787577234;
+	bh=5ahCKEWM4He6M2/MvW12bPz6Vz2fl/hLC2r9JG1MZDg=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=PoseXsfueOihJ6kTDvPpVn4w2Wb58yf90fCXNFhocQIx5NQ5i7qHtPPlAxX9jj8LI
+	 ORI3sbqW6WlZBUvzii5zeZ7DV96NCbVEYSpJCjGQX774aRGba0BNOUMpM3X+LlZmBv
+	 /HHBq0VFDH3JVSziFLvnKfZBHnUxdEBLoKMKMev38e+HX6jpDunchzwEtvDHYkk5iR
+	 qcDOzPej/4fqqzOjvTkpnckCFuQ60Muj9ZY7hQ/pYAYe4Iq5J7PLDxoa30c+YUQ1qA
+	 LvUqWOHSbbvMAEtoCjr9CQf9saIwFfL5jNr6mtobKyL7d0WKqpt5etdLODW3QNHXRZ
+	 QPSqJXVrLDKxw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 11519406E5;
+	Mon, 24 Aug 2026 13:13:54 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id AAA1B41A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 9CADD60600
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:52 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VrX8dJVBmhe2 for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 13:13:51 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::429; helo=mail-wr1-x429.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=M1jpHrSj
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 89A80605AC
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:13:51 +0000 (UTC)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-481412f1828so901509f8f.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:13:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1787577229; x=1788182029;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NvS7MEJi+5anm/vGQIj9R0Hn70FCBFrUfyAy7wQU3yU=;
- b=sRPKdIe47I2ia/yftIzsMIP0xQdSPnG7vK2y+WZ15Hk4HpvbwI5aKQvUpMwuUoAFUE
- G+LdPVeTE7FtfuQeBwTJ0X8C2WcQIrbinMEBC+kxt4meaEsXdgGX+062nxb9LWy787U8
- eDSGcIXMA3iFFTfZUiGYkMh2uWx+n9veMy4SicZ1YIm8xmyMqRo6YPKfgEpWqF77+vNe
- VC8B+LGP/5KbedcS47AlFKzapP9Sl8QujKZnv8zVY3gEuWu88XDjQqMXkZxvkxahDBoc
- EgoyTsjBL1eAhQrt1Q1NNn1AT+DlxGGZgiOvHpKwA5YpfH6iCI0/BO2ew7jN8V5AaULo
- sbbQ==
+ bh=5ahCKEWM4He6M2/MvW12bPz6Vz2fl/hLC2r9JG1MZDg=;
+ b=M1jpHrSju5waau1nNT6B/OuzNh+izZSfQ5jlUdeHulx2rUtWOjTiEiAogziqEMqJM0
+ RZN3Z9xkQJVy0UmO2kdB5dzX1N92T4XtT/KpLa4ug+8l5XsivPf38uMQX8NRhBGGebq/
+ 70MR+nBH40xtP0tpz1DDRnQ5PK96xEYCZMAPGGEWUkvUZ2Fyuhk6laep5WcyEqI3oBlc
+ LIo5lveSYcpz206WCYP+Q9E7VCib5MPdVvXfOn0TYytkiv8oUxQKLM+ezA0cWBk8n1A7
+ vhvUAIjNOPAh64OPTfa9bknvZRwglG4mDfriGraTmTKow/9OvHwdDk6s9YyzTfu6s/z7
+ I3mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787577226; x=1788182026;
+ d=1e100.net; s=20251104; t=1787577229; x=1788182029;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=NvS7MEJi+5anm/vGQIj9R0Hn70FCBFrUfyAy7wQU3yU=;
- b=JAqcyZhs8lMBtM3nU8K2Sk+D7S1rqSEnULM9wGgJbA2DrH3KYsxmRNVzUAnsYNktmY
- 5iaNkqEShsd4/5ACBlqCG5iqY1az7wrceSY72FwI8xHixxcozvxxP+Y2f/hi+y1OA2QM
- JQZ/EMeP957D2xUXDysNC0PpQ0OPFq+uPbhwmPsqvobayySFkJmBBiTMqSXAiX/joZ6h
- y3OD28+9MHDb4kLptNXuL+ebCKwd3sUI4PGoOkpqYpkqyoew1Ae+OnRRRKuQozqmbIx2
- elxY41g4xsRBrrtR2klKSQlYEU9A78FW/Qri5y/623qW2kaQVTnOiKQkkpDJ0qYz6QeI
- 1cWA==
-X-Gm-Message-State: AFuF++n0U7y1pxT6xGkCCHTODiJZbvEAJ7pN/Siy4x7hgRTrPjMW0Z+5
- dbG59WPBEeBlhcpgJAT1M3JIBhZMqmPyyG8y4vSIvcHuChfCCk/mkYF+DZXjTwBn+Hk=
-X-Gm-Gg: AR+sD13AHpegck6qtYUzh53MruyPfNIKxVnj7f/wQhdXxYY6rDCuPONx6tTyC9/8eGj
- MZ8bKDhihLAHNw9F3rzGe7nLbaLoHwA9zLIVFJRApGSIzhr3MvGojdMM/sfaYqgId2ueLj1uRsY
- rRkqpFUL9Lp6KVfg7rncR2YUhPLtd4LbLzyAr2D+7bD35C72xML7L+p8FNwfUe1iy25iTj9KbxW
- ARF9gns5aRAo+9yx8ALnXmpOyAvJfOeu4suC8DqSjGbDs9kC0yI0zl+nM+uLkpy8imAGd6+bNsz
- bpZw5TasWc/0FaEcqGH7XE8o/06gCh/hLMhl4F2Nz9j/H1NCZnJdGfqZ1KBF71iceKmNuGPSvC7
- V+OJLIPxGUilzizIGHRJBpvNC9n3B9Y9F3LappQxqCDxtJzatnrw6LajELkt8pChs7+S9YVIDBn
- HtW0sAQsdNF3vKxiZcUET/zMZpXgnGUnepL5VGV7H6paBSUk9DWwLrCUSP9R+udVEpp/frrrsv6
- dNCvIq/aUTl5xrKVjN9V+bK+ku0MAdsbUpTlNU4yA==
-X-Received: by 2002:a05:6000:26c6:b0:482:a36c:a5e1 with SMTP id
- ffacd0b85a97d-482c0b44b1fmr32160922f8f.1.1787577226318; 
- Mon, 24 Aug 2026 06:13:46 -0700 (PDT)
+ bh=5ahCKEWM4He6M2/MvW12bPz6Vz2fl/hLC2r9JG1MZDg=;
+ b=ZhvqWOzLydPk/lgeVT162ZpR1oHaHFIVFIIpgBZVpBt6pi36Ugb0Vokm+uxuxS3y8J
+ ukeW9a3f+t3khg9sRIr7JjlC90ZM2Ecbu2qk+sM/b1Jisz4vCy5glQbC7+0BoiL7c6HM
+ Cwaz4dmyUv26l60rYxEIT1yiT0Xh6pSseLWNLnHJz/kiTy/ARPDOpgcx4PBmflaKUGMS
+ 9D6h31Ita9iRF0cIaM7P2cVR7Hp+TYanXf1BV+oameK/+I35EajezBx7PVSUBwV9zlc0
+ oKkfjWc3SS+0rtEspmyv7D2Wsw0IvtO5RGtqZjrbjY6d8O+7fX4CUpNeKWmm7YBKbBui
+ Mbiw==
+X-Gm-Message-State: AFuF++nzJj7aGkLyFbmR/s91csxk5GgU1DhMTL4Dwvg6m7a2BPeBAk0Z
+ XOdW4zLr9n7f2wckCSeYQ4yDsdoHo3gLF5i8k5wQ1BGPABeLrh4jGjh5b8Kq4BTQdf8=
+X-Gm-Gg: AR+sD107vZW9IJ2q3gVfUQEop/e+E26oaR5jMc/g8sMmkIm0+n5qDNiNwIhV3Ckrpf+
+ wGGQFLdFqsNmZwbDaDGWsgSNrb2C1GSzoPKgspsn0q7SYHaJuc/1T5ur6t4c0VQsE7pqxME1hMH
+ o00YnJ35KBEOSJduT7tfYgvL2WheeTZZTnw7M+iRCdjX1EgiqeLVosh5jCo5PIFTTH5uitcrMxH
+ fs1BIzVnTpQnBTdtOGV2lYs4BvI1dJmRZeoyR5blIP/bplA7I72cFh7EjlsRprxhp42HVUttZEK
+ WP+c2xbtKlv644BbnnvI8mrYjKPOj58VBzGiVPt3HpgiFaVRctb3niFh1dIBxASq1O0DSVciSS+
+ 6vrJmjUxZjAFLwT/V1DPSNRZR9N5BS61wudJTVr3T5H1/FKXkmQ0FEvjUKlyhFIujN8ZK/oam+/
+ ODw5hW34gQ5u2hlT21il2AiEQiipyttGCRUzM+5Xgm9/oSQFLKymeOcOo72gG6+T4dLTVaTaJPB
+ Ah4KO6GM9+rIT/Rml3HZTWU8RqCJmgsL0RiBU1//w==
+X-Received: by 2002:a05:6000:2307:b0:47f:80d1:be0a with SMTP id
+ ffacd0b85a97d-482c81bd3e5mr19937045f8f.14.1787577228565; 
+ Mon, 24 Aug 2026 06:13:48 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-192-94.alshamil.net.ae.
  [86.98.192.94]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482c9b85412sm8144059f8f.14.2026.08.24.06.13.44
+ ffacd0b85a97d-482c9b85412sm8144059f8f.14.2026.08.24.06.13.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 06:13:46 -0700 (PDT)
+ Mon, 24 Aug 2026 06:13:48 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 24 Aug 2026 17:13:10 +0400
-Subject: [PATCH 13/17] pylibfdt: Grow the FdtSw buffer geometrically
+Date: Mon, 24 Aug 2026 17:13:11 +0400
+Subject: [PATCH 14/17] pylibfdt: Add address_cells() and size_cells()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-pylibfdt-sync-v1-13-a42be6fa4872@flipper.net>
+Message-Id: <20260824-pylibfdt-sync-v1-14-a42be6fa4872@flipper.net>
 References: <20260824-pylibfdt-sync-v1-0-a42be6fa4872@flipper.net>
 In-Reply-To: <20260824-pylibfdt-sync-v1-0-a42be6fa4872@flipper.net>
 To: u-boot@lists.u-boot-project.org
@@ -116,12 +116,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Rob Herring <robh@kernel.org>, Jaipaul Cheernam <jaipaul.cheernam@est.tech>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2600; i=alchark@flipper.net;
- h=from:subject:message-id; bh=z2YBR29qtPIwh1SHJbbXeIQ3F0Wilp7LYXHBf0TwSi4=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT1OGdd3GJnmCuSydf2kbPIIk16uZmneBE7Y83F2AUfD
- /Au28XbMZGFQYyLwVJMkWXutyW2U434Zu3y8PgKM4eVCWSItEgDAxCwMPDlJuaVGukY6ZlqG+oZ
- GukY6xgxcHEKwFSfkWVkmCDrZioW/m5p6onTMQtj+jSmJFvHd6QdSXjmLx4ZrPnOkpHh0+fjy1e
- cv35ARkth9iWlsE16f3Q9O302s7xMXSy3QrSaHwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2309; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=trK7R2T6OYjeXmMYn7AyAboMw/HuQ+AGG7Mbk83TIW8=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT1OGcL9iQfn/nK91ZI9WrNWIb5EZlTHvXc0p90qaLR6
+ Tu7luvbjoksDGJcDJZiiixzvy2xnWrEN2uXh8dXmDmsTCBDpEUaGICAhYEvNzGv1EjHSM9U21DP
+ 0EjHWMeIgYtTAKZ6sScjw2WHKeke2ya1m39V2ea+1euXwI5Qs69HjrMozrp28OTTeH6Gf/Yz+/Z
+ IL+UPE1+gUqD24J5Wm+j20026nFeUZaI6gzbO5AUA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -137,62 +137,65 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Every expansion copies the whole tree into a freshly allocated buffer, so
-growing by a fixed amount makes building a tree cost time quadratic in
-its size. This is especially painful when assembling larger FIT images with
-binman, as it assembles the image with the data inline.
+Finding out how many cells a node's children use for addresses and sizes
+currently requires calling the raw fdt_address_cells()/fdt_size_cells()
+wrappers with the private FdtRo._fdt buffer, as the class exposes no
+methods for them.
 
-Grow by at least as much as the tree already holds, which is what variable
-sized arrays usually do specifically to avoid such excessive copying.
+Add them to FdtRo alongside the other node accessors.
 
-With this change, building a Rockchip TF-A+Falcon image whose FIT carries
-a 31 MiB kernel takes 33.1 s rather than 44.4 s, with binman itself down
-from 25.3 s to 14.0 s, as 7139 reallocations become 187. The images
-produced are byte-identical and the binman and dtoc test results are
-unaffected.
+This is a backport of dtc commit 3750493c8b0f ("pylibfdt: Add
+address_cells() and size_cells()").
 
-This is a backport of dtc commit 0748c384fde6 ("pylibfdt: Grow the FdtSw
-buffer geometrically").
-
-Link: https://github.com/dgibson/dtc/pull/189
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Link: https://github.com/dgibson/dtc/pull/190
+Signed-off-by: David Gibson <david@gibson.dropbear.id.au>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- scripts/dtc/pylibfdt/libfdt.i_shipped | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ scripts/dtc/pylibfdt/libfdt.i_shipped | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
 diff --git a/scripts/dtc/pylibfdt/libfdt.i_shipped b/scripts/dtc/pylibfdt/libfdt.i_shipped
-index 2179515a144b..c00e74a46b76 100644
+index c00e74a46b76..1983ebaee335 100644
 --- a/scripts/dtc/pylibfdt/libfdt.i_shipped
 +++ b/scripts/dtc/pylibfdt/libfdt.i_shipped
-@@ -861,7 +861,7 @@ class FdtSw(FdtRo):
-     device tree. This will be increased automatically as needed as new items
-     are added to the tree.
-     """
--    INC_SIZE = 1024  # Expand size by this much when out of space
-+    INC_SIZE = 1024  # Expand size by at least this much when out of space
+@@ -306,6 +306,38 @@ class FdtRo(object):
+         check_err(val[0], quiet)
+         return val[1:]
  
-     def __init__(self, size_hint=None):
-         """Create a new FdtSw object
-@@ -906,6 +906,10 @@ class FdtSw(FdtRo):
-         -NOSPACE then the FDT will be expanded to have more space, and True will
-         be returned, indicating that the operation needs to be tried again.
- 
-+        Each expansion copies the whole tree into a new buffer, so the size is
-+        at least doubled rather than grown by a fixed amount, to keep the total
-+        amount of copying proportional to the size of the tree.
++    def address_cells(self, nodeoffset, quiet=()):
++        """Return the number of address cells used by a node's children
 +
-         Args:
-             val: Return value from the operation that was attempted
- 
-@@ -913,7 +917,7 @@ class FdtSw(FdtRo):
-             True if the operation must be retried, else False
-         """
-         if check_err(val, QUIET_NOSPACE) < 0:
--            self.resize(len(self._fdt) + self.INC_SIZE)
-+            self.resize(len(self._fdt) + max(len(self._fdt), self.INC_SIZE))
-             return True
-         return False
++        Args:
++            nodeoffset: Offset of the node to check
++            quiet: Errors to ignore (empty to raise on all errors)
++
++        Returns:
++            Number of address cells used by the children of @nodeoffset
++
++        Raises:
++            FdtException if the node has an invalid #address-cells property,
++            or another error occurs
++        """
++        return check_err(fdt_address_cells(self._fdt, nodeoffset), quiet)
++
++    def size_cells(self, nodeoffset, quiet=()):
++        """Return the number of size cells used by a node's children
++
++        Args:
++            nodeoffset: Offset of the node to check
++            quiet: Errors to ignore (empty to raise on all errors)
++
++        Returns:
++            Number of size cells used by the children of @nodeoffset
++
++        Raises:
++            FdtException if the node has an invalid #size-cells property, or
++            another error occurs
++        """
++        return check_err(fdt_size_cells(self._fdt, nodeoffset), quiet)
++
+     def subnode_offset(self, parentoffset, name, quiet=()):
+         """Get the offset of a named subnode
  
 
 -- 
