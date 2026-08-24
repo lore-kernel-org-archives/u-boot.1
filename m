@@ -1,116 +1,115 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07520C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3106DC5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:51:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 80DE6605F9;
-	Mon, 24 Aug 2026 08:50:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EAFB4406AC;
+	Mon, 24 Aug 2026 08:51:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MXH39JzE_hS4; Mon, 24 Aug 2026 08:50:57 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WM0U7-uehfHG; Mon, 24 Aug 2026 08:51:09 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787561457;
-	bh=ZFutmG7XSG5sRixMuMTht3qRA9qAOunxam0ba5/gBXM=;
+	d=lists.u-boot-project.org; s=default; t=1787561469;
+	bh=oAO+qjFzGoBowX3M6MVeCG3Jxm4qW+ErjbeIQEe6IVc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ItC3AjBZp4Eh6ZYlV/NhQbrwag8AXLdcBklLtQBJBb02kqN3GHZZl+hwfMI8UPOmR
-	 qu5uxdBFiCeuFCip+GKnCyjbTPUjXNNlLiMIfFTlgvqGIo1rV5PCJwfArNXF3rMeTc
-	 q6f5ThE7z/+w5e1CL/O+RpSTiMamLfGLlWY0CQR6JNSgOmrFo9WVwfr1mJCp5s2d12
-	 XBDqmAdOa2hfi7xjLyvGGwY4xZSGbOcukWER+YwtcnBkND43wbAxvRh9G1P+6Gifrc
-	 xfoAn/+lADYWkiUk4tKvA06tEIoS2qxjR68RZR82EQbYRiwTvox7yWvBLG1WNQHyOP
-	 ptX/CDtbQqmQg==
+	b=N8vV+xgllvb91krtYfhyn6BZWqo/oQs/hHLQGnZmi1rR45TTRO6Cg8G9aHjM7C9vv
+	 MyM0bVvgvd94LXnbUFtxGFh/i4OHhCNhDVl5+oM1c4kJ7bh3p2VQb9JQP0RyDqh/yk
+	 BxUFx9gzUUlmDNjI6wufwjo60hC4Pii0XwmT8WlTnF1eeE3Qsv6YzSI6L+s3Fzl5nz
+	 H42ar+h13/pg6sCkpoPOZzdf87tAM3pThJWofCxnkXNyZNf/siqbAJf6+6e2FiCgWB
+	 ubY3YKIHg2gHgnljeTxwYUS/sZUZofZxxNKB6es/d7K0U1f9iVqQIlnKayotECIXoz
+	 Gq/Hud/0JbnJQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A91B160617;
-	Mon, 24 Aug 2026 08:50:57 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 004783AD
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:50:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6856A40649;
+	Mon, 24 Aug 2026 08:51:09 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 14337336
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:51:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E67156060A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:50:56 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 063C380E01
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:51:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7tzTUbvGB-KM for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 08:50:56 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 73FH4-jtcFGb for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 08:51:06 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1029; helo=mail-pj1-x1029.google.com;
+ client-ip=2607:f8b0:4864:20::631; helo=mail-pl1-x631.google.com;
  envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
  header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=M/Pd4ryz
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 47E17605F9
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:50:55 +0000 (UTC)
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-38e3efab7e0so2309899a91.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 01:50:55 -0700 (PDT)
+ header.s=20251104 header.b=pP9Jk6Dm
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9D34880DFE
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:51:06 +0000 (UTC)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-2cc891373e0so35207905ad.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 01:51:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787561455; x=1788166255;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787561465; x=1788166265;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ZFutmG7XSG5sRixMuMTht3qRA9qAOunxam0ba5/gBXM=;
- b=M/Pd4ryz0SgFdZkJAv7B5RpZXq5zJ9LsHuRRf6L8ErWy3vDV8ktFgUpxYbE8EzV6Ar
- QDSGLuihHZ7q6DrQNdcx4VNF/p8+yoqCi43eh1z1oibQeZhpDYvnH23Y7jt7mExq7YDn
- XV9dL9IM7uWPpay6ZOnoSi8H+CwieprnwlwRyCtwNk00GkdPqnWUTUJbTvlAQKeEY+Eb
- XZnOPNkBwqGknpqOHWGREj+/MkwSEkkzV1qA6hG+v4VRDuLAMOGjhzgfkU2gWCHIQFpC
- 5EuWS7umbVP7dooTw+uyUiXS5A8VzrJoMtfDYupp8mNI0x/rzXuVgxQaBdPibEV5P7VH
- oWow==
+ bh=oAO+qjFzGoBowX3M6MVeCG3Jxm4qW+ErjbeIQEe6IVc=;
+ b=pP9Jk6DmPi3+hfUsAwVyYnyf6u2mKyKKwaaEcCPolsjKfP65UaaZ/3s0SS0B4vGdeK
+ 0HnqESaBaRO1Du1GNCovA1tDg5cLCmO/Rw0tC0JL2Tl73t+JdmCKm5Z5hRDTGU/MRD7W
+ rxQB9LL4E/ZxZhWdMxLPoFoJ8SnxOL9gUDRlXP+elYzeVe+t1ScCMNawQq30yr5iObzR
+ lavhvlqUcOgZRDaqvOb0pWqvAgDygEALeDR6T0vi2fzVlc6fQ1yXov/POJjObHHHEiN3
+ iiJ9zlOlmi9sf8Gblcf7/v461STUD4rdZZCtTUD1NEXC82CW+yZYO4LdUbef+WbpWsVM
+ h0Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787561455; x=1788166255;
+ d=1e100.net; s=20251104; t=1787561465; x=1788166265;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ZFutmG7XSG5sRixMuMTht3qRA9qAOunxam0ba5/gBXM=;
- b=FxHUsXu/2W0WPuX1juxoBuny9Q4UBJulbfhpnc72nGLE5kmJeGMM2wrBES3WtDtZ+M
- VnffukbBW2RM5nxc4wMiBDmrosJEmKtYd5S5nwPu3ijeCpPYVUoMcrefuKWQSiG9uzLE
- K4UX4rkM3aLrHqLImI/BTyAUA+7xkhcUi6CcBvSMVpTSDNbXAHPQLLY1fDMqYoKSMr99
- td8VcBTbjC1wRKac3kHFhUoK05sD5RzygknXU4uFg3Gw5HBESNgwm21wRzcS70SGz6Yb
- P46ouqQ0TJNT/51UGCgIvzN7V2jQmC954qy6HgMgW+H5RL7GLlIa7hEoXJhhP5hsZCax
- 8M6Q==
+ bh=oAO+qjFzGoBowX3M6MVeCG3Jxm4qW+ErjbeIQEe6IVc=;
+ b=RjH9k3kik+WzGdR7bTW1ejH8IhMRNI0vs7g1br9qIAGfRRDDbHnOkB51GH4Uk/wqEd
+ 69JvEVIGrYUVsyyiw4f9gPSoIn2QkiT9+LVpd4wn4S/YK0RqTQVNQLH4vAdxbhUeKwNv
+ LvG4G4mvB/hhRRmvO3k8f5RiBApOHyn+mKqeX1T3b51QZ4cEVsUeor7LnC3ShkehAast
+ ujXV4OmzU1GlA+ImxraRRwF92QxAx/YPlirTpHMmz2oe6XNuykgY6tcsggJCpe2uWKex
+ q8tCxV/zG/gKqUGMOiSlcXLeTZNkrAqrRLZqygpod1Vm0/xwrjzaxTs3lsdl746mm8v5
+ ACQA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro1221Mo2lvTAUtwxB5oF0R1fMF8ywZI2ShyfgY24+Ujojt+0Jo+L7jWJVgpm05wBvZYD74NgQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++k8JUzLFfAhb/NFzn2sEnp9+gnMmFbStLpHBzq5zHa/Ki16717f
- Y+8QjA35xptF5dKAzQhPX3EzY096RwK6xZp1OIDDXw3uX+wDlWLX13X5mjeFUmMRjLQ=
-X-Gm-Gg: AR+sD12EgXpiKQwf0raLOXioc8uyvdDTZbVjnpCT9M93RVo5sUuOMLTWSYP5Mh5hK/T
- LS89KmRpnESp6dUZhtVjaVf9HRIfjiUkgCg7P+cy3ycanJtVg04Jhg/WvdyHzGMKz8KQ1wP+9gC
- tyTWJdNREi1OGmo3PHeGjru903nXeJ0UZG+OuQ2AjpnIZKzyZwKfym3/GbvlmLHbKQsnzXBvR0Q
- 4XPOUmfyQgVUyPVnL9zgMBoEQwk74ucSxEazI3snrfAT7vT4XnzaGvPCaRC4yTRdxT5oBalxlvT
- zfPAta5gsHcgryhDjEKphe+JUiFJMjsustg+okPc89ezXFjNlequSI6HjATZhwoFE6t35EZ93Hc
- 5z6FCL9JR85vnbw4VDobLBumc2DlsXi25MuSSf7ss1BiC+K+SoB9v7QLMbymo6L+QusDH1qlTwy
- JjQNMY0/YlzP3pMSLzz+w3Faw0BKjcqw6PEnCAJaQDbEaSBWonqRfJ+lbZ5MBB2Sx70BJsNPdZX
- eVVFbRPzSFNKJu812f2uhnSxio9zCmGaGs3SSor7TpM80FXKtd2FeKWwtZMdRyFXEUA6qXgbbwc
- /diIZQoA5V6naPeFQk+HdIaACsPBBqW60uqy/g==
-X-Received: by 2002:a17:90b:2dc2:b0:38e:4f31:8412 with SMTP id
- 98e67ed59e1d1-395a062e5a0mr40319598a91.11.1787561455119; 
- Mon, 24 Aug 2026 01:50:55 -0700 (PDT)
+ AHgh+RpfvHcZL8+Udh4t00wzv1l/CVkxQg0hA0u7sKC0ZkqQh1bovUgCUFVcRYyePWtmlaMypI5FwV8=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mxToT+KlG/5fIi3NTVnG/i+OFS3NHgkix4GXobcXtTbaNsu4is
+ NUWh3Xns1q5WxhdYLggNQUYoOFr+QnAAzu3yYMWZVDt5JD2YmCfsEJTPQ2hDrdmMO10=
+X-Gm-Gg: AR+sD112Z42g/Hln3qZfu8sw8gNPfExdJPgUkV9Mk29h6rfcFsnfm8JIjNLBYKLZDMI
+ 6tYXpBL+U9C4uBJnRw0ssW7YOXPda7pTxdHqIhk3p9qD2WDyrSfc/P3zvjbhsXxS4qOjoW6/gbh
+ VxJQ1cWSutzGEzzOQoYXlA2IPHMrMnbo5BpPcB7rsxXjuaT4lOlNrUnG96yxFIiEBcovrfQW6uC
+ tQ2Z9kGaF3n1LHsxW6rqfHGY/naFRTjfAZ85hIuf/ZuZYGTo9QyYEwAdExmQLYIDQjnwDXs9uyF
+ M4Lz1OTJOVE0Z8TtUkMOEuhHytLjXD2lgoAEqxI+kGwbQO/gxPIuAxsUUvkER0yMCzWlAIqVA23
+ EhuMzKQXh12q6ob/zlNUtStvSfRNPNbKFPbyTQhD8E4PZBVobSfJTmm5BnM2nmkLl7zj7rA5Hh+
+ 8BNt1QWmGmKbJnEMFSBTBK3w1DBUxj/bO2d+yqMYdfOfi8YOzeKDKSfIaW2CWEpcCBEMglGB/jN
+ hTUAW2E26HtcBX/43zqOsZbiRLVRSdNaf3dR0wV0+Ei198BwjXYk5oADIJu8/2wb6zTJcwtiAox
+ 8/i3n4LcMlhp47bsKzDfdSq89g==
+X-Received: by 2002:a17:903:fa6:b0:2d6:5beb:8692 with SMTP id
+ d9443c01a7336-2d670bb5042mr333741515ad.6.1787561461286; 
+ Mon, 24 Aug 2026 01:51:01 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-327f91d37d9sm26085522eec.14.2026.08.24.01.50.49
+ 5a478bee46e88-327f91d37d9sm26085522eec.14.2026.08.24.01.50.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 01:50:54 -0700 (PDT)
+ Mon, 24 Aug 2026 01:51:00 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Mon, 24 Aug 2026 16:50:36 +0800
-Subject: [PATCH v10 01/17] spacemit: k1: select boot device via config
- registers
+Date: Mon, 24 Aug 2026 16:50:37 +0800
+Subject: [PATCH v10 02/17] mmc: k1: add sdhci platform driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-m4-v10-1-5e0adcb1edb9@riscstar.com>
+Message-Id: <20260824-m4-v10-2-5e0adcb1edb9@riscstar.com>
 References: <20260824-m4-v10-0-5e0adcb1edb9@riscstar.com>
 In-Reply-To: <20260824-m4-v10-0-5e0adcb1edb9@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
@@ -141,169 +140,760 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add logic to determine the current boot device by reading the
-SoC's configuration registers, rather than using a hardcoded
-default.
+Add SDHCI platform driver support for SpacemiT K1 SoC. This driver
+implements the necessary platform-specific operations for the SDHCI
+controller, enabling MMC/SD card functionality on K1-based platforms.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-Reviewed-by: Yao Zi <me@ziyao.cc>
+
 ---
 v9:
-- Enhance detection on booting from SD card.
+- Disable CMD18 (multiple-block read) for SD cards in SPL.
+v6:
+- Remove ".data = 0" in spacemit_sdhci_ids[].
 v5:
-- Add blank lines around the switch statement.
+- Remove MMC_CAP_CMD23 as the CMD23 support is now a separate series.
+- Use tabs for macro definition alignment.
+- Use read_poll_timeout().
+- Set pinctrl state based on selected timing mode.
+- Add the definition of SDHC_DLL_REG1_HS400_VAL.
+- Remove the condition based on quirks.
+v4:
+- Add bulk release operations on reset and clock.
+v3:
+- Enable CMD23 in capability.
 v2:
-- Use FIELD_GET() to parse boot strap mode.
-- Remove comments on hacking. Since the sequence between eMMC
-  and SD device is exchanged in the upstream DTS. So it isn't
-  a hacking any more.
+- Enable ADMA mode support.
+- Use CMD23 for multi-block read/write.
+- Move ASR/AIB register into pinctrl driver.
+- Correct pinctrl state from "fast" to "uhs".
+- Migrate tuning support from the spacemit linux driver.
 ---
- board/spacemit/k1/spl.c | 95 ++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 94 insertions(+), 1 deletion(-)
+ drivers/mmc/Kconfig          |   7 +
+ drivers/mmc/Makefile         |   1 +
+ drivers/mmc/spacemit_sdhci.c | 684 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 692 insertions(+)
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index d749e21a2d57..b70eed14e6ed 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -13,6 +13,7 @@
- #include <dm/device.h>
- #include <dm/uclass.h>
- #include <i2c.h>
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index f9f7aa5cf97d..b991a5931c0b 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -722,6 +722,13 @@ config MMC_SDHCI_SNPS
+ 
+ 	  If unsure, say N.
+ 
++config MMC_SDHCI_SPACEMIT
++	bool "Spacemit SDHCI controller"
++	depends on MMC_SDHCI
++	help
++	  Support for Secure Digital Host Controller Interface (SDHCI) on
++	  Spacemit K1 SoC.
++
+ config MMC_SDHCI_STI
+ 	bool "SDHCI support for STMicroelectronics SoC"
+ 	depends on MMC_SDHCI && OF_CONTROL && ARCH_STI
+diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
+index a23336d7d8d7..aa05cec23be7 100644
+--- a/drivers/mmc/Makefile
++++ b/drivers/mmc/Makefile
+@@ -71,6 +71,7 @@ obj-$(CONFIG_MMC_SDHCI_ROCKCHIP)	+= rockchip_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_ADI)		+= adi_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_S5P)		+= s5p_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_SNPS)		+= snps_sdhci.o
++obj-$(CONFIG_MMC_SDHCI_SPACEMIT)	+= spacemit_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_STI)		+= sti_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_TANGIER)		+= tangier_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_TEGRA)		+= tegra_mmc.o
+diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
+new file mode 100644
+index 000000000000..4731c9ca0832
+--- /dev/null
++++ b/drivers/mmc/spacemit_sdhci.c
+@@ -0,0 +1,684 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Driver for Spacemit K1 Mobile Storage Host Controller
++ *
++ * Copyright (C) 2023-2026 Spacemit Inc.
++ * Copyright (C) 2026 RISCstar Ltd.
++ */
++
++#define LOG_CATEGORY UCLASS_MMC
++
++#include <clk.h>
++#include <dm.h>
++#include <fdtdec.h>
++#include <log.h>
++#include <malloc.h>
++#include <sdhci.h>
++#include <reset-uclass.h>
++#include <mapmem.h>
++#include <dm/pinctrl.h>
 +#include <linux/bitfield.h>
- #include <linux/ctype.h>
- #include <linux/delay.h>
- #include <log.h>
-@@ -22,6 +23,20 @@
- #include <tlv_eeprom.h>
- #include "tlv_codes.h"
- 
-+/* boot mode configs */
-+#define BOOT_DEV_FLAG_REG	0xd4282d10
-+#define BOOT_PIN_SEL_REG	0xd4282c20
++#include <linux/iopoll.h>
++#include <linux/libfdt.h>
++#include <linux/delay.h>
++#include <power/regulator.h>
 +
-+#define BOOT_STRAP_MODE_OFFSET	9
-+#define BOOT_STRAP_MODE_MASK	3
-+#define BOOT_STRAP_MODE_EMMC	0
-+#define BOOT_STRAP_MODE_SPI	1
-+#define BOOT_STRAP_MODE_NAND	2
-+#define BOOT_STRAP_MODE_SD	3
++/* SDH register definitions */
++#define SPACEMIT_SDHC_OP_EXT_REG	0x108
++#define  SDHC_OVRRD_CLK_OEN		BIT(11)
++#define  SDHC_FORCE_CLK_ON		BIT(12)
 +
-+#define STORAGE_API_P_ADDR	0xc0838498
-+#define SDCARD_API_ENTRY	0xffe0a548
++#define SPACEMIT_SDHC_LEGACY_CTRL_REG	0x10C
++#define  SDHC_GEN_PAD_CLK_ON		BIT(6)
 +
- #define MUX_MODE4		4
- #define EDGE_NONE		BIT(6)
- #define PULL_UP			(6 << 13)       /* bit[15:13] 110 */
-@@ -46,6 +61,17 @@ typedef void (*puts_func_t)(const char *s);
- typedef int (*ddr_init_func_t)(u64 ddr_base, u32 cs_num, u32 data_rate,
- 			       puts_func_t puts);
- 
-+enum board_boot_mode {
-+	BOOT_MODE_NONE = 0,
-+	BOOT_MODE_USB = 0x55a,
-+	BOOT_MODE_EMMC,
-+	BOOT_MODE_NAND,
-+	BOOT_MODE_SPI,
-+	BOOT_MODE_SD,
-+	BOOT_MODE_SHELL = 0x55f,
-+	BOOT_MODE_BOOTSTRAP,
++#define SPACEMIT_SDHC_MMC_CTRL_REG	0x114
++#define  SDHC_MISC_INT_EN		BIT(1)
++#define  SDHC_MISC_INT			BIT(2)
++#define  SDHC_ENHANCE_STROBE_EN		BIT(8)
++#define  SDHC_MMC_HS400			BIT(9)
++#define  SDHC_MMC_HS200			BIT(10)
++#define  SDHC_MMC_CARD_MODE		BIT(12)
++
++#define SPACEMIT_SDHC_TX_CFG_REG	0x11C
++#define  SDHC_TX_INT_CLK_SEL		BIT(30)
++#define  SDHC_TX_MUX_SEL		BIT(31)
++
++#define SPACEMIT_SDHC_PHY_CTRL_REG	0x160
++#define  SDHC_PHY_FUNC_EN		BIT(0)
++#define  SDHC_PHY_PLL_LOCK		BIT(1)
++#define  SDHC_HOST_LEGACY_MODE		BIT(31)
++
++#define SPACEMIT_SDHC_PHY_FUNC_REG	0x164
++#define  SDHC_PHY_TEST_EN		BIT(7)
++#define  SDHC_HS200_USE_RFIFO		BIT(15)
++
++#define SPACEMIT_SDHC_PHY_DLLCFG	0x168
++#define  SDHC_DLL_PREDLY_NUM		GENMASK(3, 2)
++#define  SDHC_DLL_FULLDLY_RANGE		GENMASK(5, 4)
++#define  SDHC_DLL_VREG_CTRL		GENMASK(7, 6)
++#define  SDHC_DLL_ENABLE		BIT(31)
++
++#define SPACEMIT_SDHC_PHY_DLLCFG1	0x16C
++#define  SDHC_DLL_REG1_CTRL		GENMASK(7, 0)
++#define  SDHC_DLL_REG2_CTRL		GENMASK(15, 8)
++#define  SDHC_DLL_REG3_CTRL		GENMASK(23, 16)
++#define  SDHC_DLL_REG4_CTRL		GENMASK(31, 24)
++#define  SDHC_DLL_REG1_HS400_VAL	0x92
++
++#define SPACEMIT_SDHC_PHY_DLLSTS	0x170
++#define  SDHC_DLL_LOCK_STATE		BIT(0)
++
++#define SPACEMIT_SDHC_PHY_PADCFG_REG	0x178
++#define  SDHC_PHY_DRIVE_SEL		GENMASK(2, 0)
++#define  SDHC_RX_BIAS_CTRL		BIT(5)
++
++#define SPACEMIT_SDHC_RX_CFG_REG	0x118
++#define  SDHC_RX_SDCLK_SEL0_MASK	GENMASK(1, 0)
++#define  SDHC_RX_SDCLK_SEL1_MASK	GENMASK(3, 2)
++#define  SDHC_RX_SDCLK_SEL1		FIELD_PREP(SDHC_RX_SDCLK_SEL1_MASK, 1)
++
++#define SPACEMIT_SDHC_DLINE_CTRL_REG	0x130
++#define  SDHC_DLINE_PU			BIT(0)
++#define  SDHC_RX_DLINE_CODE_MASK	GENMASK(23, 16)
++#define  SDHC_TX_DLINE_CODE_MASK	GENMASK(31, 24)
++
++#define SPACEMIT_SDHC_DLINE_CFG_REG	0x134
++#define  SDHC_RX_DLINE_REG_MASK		GENMASK(7, 0)
++#define  SDHC_RX_DLINE_GAIN		BIT(8)
++#define  SDHC_TX_DLINE_REG_MASK		GENMASK(23, 16)
++
++#define SPACEMIT_RX_DLINE_REG		9
++#define SPACEMIT_RX_TUNE_DELAY_MIN	0x0
++#define SPACEMIT_RX_TUNE_DELAY_MAX	0xFF
++
++#define SPACEMIT_TX_TUNING_DLINE_REG	0x00
++#define SPACEMIT_TX_TUNING_DELAYCODE	127
++
++struct spacemit_sdhci_plat {
++	struct mmc_config cfg;
++	struct mmc mmc;
++	struct reset_ctl_bulk resets;
++	struct clk_bulk clks;
 +};
 +
- struct ddr_cfg {
- 	u32     data_rate;
- 	u32     cs_num;
-@@ -58,6 +84,69 @@ binman_sym_declare(ulong, ddr_fw, size);
- 
- char product_name[I2C_BUF_SIZE] = "k1";
- 
-+u32 read_boot_mode(void)
++struct spacemit_sdhci_priv {
++	struct sdhci_host host;
++};
++
++/* All helper functions will update clr/set while preserve rest bits */
++static inline void spacemit_sdhci_setbits(struct sdhci_host *host, u32 val,
++					  int reg)
 +{
-+	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
-+	void __iomem *boot_strap = (void __iomem *)BOOT_PIN_SEL_REG;
-+	void __iomem *storage_api = (void __iomem *)STORAGE_API_P_ADDR;
-+	u32 mode, sel, ret = 0;
++	sdhci_writel(host, sdhci_readl(host, reg) | val, reg);
++}
 +
-+	mode = readl(storage_api);
-+	if (mode == SDCARD_API_ENTRY)
-+		return BOOT_MODE_SD;
++static inline void spacemit_sdhci_clrbits(struct sdhci_host *host, u32 val,
++					  int reg)
++{
++	sdhci_writel(host, sdhci_readl(host, reg) & ~val, reg);
++}
 +
-+	mode = readl(boot_dev);
-+	if (mode == BOOT_MODE_NONE || mode > BOOT_MODE_SD) {
-+		sel = FIELD_GET(BOOT_STRAP_MODE_MASK << BOOT_STRAP_MODE_OFFSET,
-+				readl(boot_strap));
-+		switch (sel) {
-+		case BOOT_STRAP_MODE_EMMC:
-+			mode = BOOT_MODE_EMMC;
++static inline void spacemit_sdhci_clrsetbits(struct sdhci_host *host, u32 clr,
++					     u32 set, int reg)
++{
++	u32 val = sdhci_readl(host, reg);
++
++	val = (val & ~clr) | set;
++	sdhci_writel(host, val, reg);
++}
++
++#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
++static void spacemit_sdhci_set_rx_delay(struct sdhci_host *host, u8 delay)
++{
++	spacemit_sdhci_clrsetbits(host, SDHC_RX_DLINE_CODE_MASK,
++				  FIELD_PREP(SDHC_RX_DLINE_CODE_MASK, delay),
++				  SPACEMIT_SDHC_DLINE_CTRL_REG);
++}
++
++static void spacemit_sdhci_set_tx_delay(struct sdhci_host *host, u8 delay)
++{
++	spacemit_sdhci_clrsetbits(host, SDHC_TX_DLINE_CODE_MASK,
++				  FIELD_PREP(SDHC_TX_DLINE_CODE_MASK, delay),
++				  SPACEMIT_SDHC_DLINE_CTRL_REG);
++}
++
++static void spacemit_sdhci_set_tx_dline_reg(struct sdhci_host *host,
++					    u8 dline_reg)
++{
++	spacemit_sdhci_clrsetbits(host, SDHC_TX_DLINE_REG_MASK,
++				  FIELD_PREP(SDHC_TX_DLINE_REG_MASK, dline_reg),
++				  SPACEMIT_SDHC_DLINE_CFG_REG);
++}
++
++static void spacemit_sdhci_tx_tuning_prepare(struct sdhci_host *host)
++{
++	spacemit_sdhci_setbits(host, SDHC_TX_MUX_SEL, SPACEMIT_SDHC_TX_CFG_REG);
++	spacemit_sdhci_setbits(host, SDHC_DLINE_PU,
++			       SPACEMIT_SDHC_DLINE_CTRL_REG);
++	udelay(5);
++}
++
++static void spacemit_sdhci_prepare_tuning(struct sdhci_host *host)
++{
++	spacemit_sdhci_clrsetbits(host, SDHC_RX_DLINE_REG_MASK,
++				  FIELD_PREP(SDHC_RX_DLINE_REG_MASK, SPACEMIT_RX_DLINE_REG),
++				  SPACEMIT_SDHC_DLINE_CFG_REG);
++
++	spacemit_sdhci_setbits(host, SDHC_DLINE_PU,
++			       SPACEMIT_SDHC_DLINE_CTRL_REG);
++	udelay(5);
++
++	spacemit_sdhci_clrsetbits(host, SDHC_RX_SDCLK_SEL1_MASK,
++				  SDHC_RX_SDCLK_SEL1,
++				  SPACEMIT_SDHC_RX_CFG_REG);
++
++	if (host->mmc->selected_mode == MMC_HS_200)
++		spacemit_sdhci_setbits(host, SDHC_HS200_USE_RFIFO,
++				       SPACEMIT_SDHC_PHY_FUNC_REG);
++}
++#endif /* MMC_SUPPORTS_TUNING */
++
++/*
++ * Reference: PMU_SDH0_CLK_RES_CTRL (0x054), SDH0_CLK_SEL=0x0,
++ * SDH0_CLK_DIV=0x1. The default clock source is 204.8 MHz
++ * (pll1_d6_409p6Mhz / 2).
++ *
++ * During start-up, use a 200 kHz frequency.
++ */
++#define SDHC_MIN_CLOCK (200 * 1000)
++
++static void spacemit_sdhci_phy_init(struct udevice *dev,
++				    struct sdhci_host *host)
++{
++	u32 reg = 0;
++
++	if (dev_read_bool(dev, "no-sd") && dev_read_bool(dev, "no-sdio")) {
++		/* MMC card mode */
++		reg = sdhci_readl(host, SPACEMIT_SDHC_MMC_CTRL_REG);
++		reg |= SDHC_MMC_CARD_MODE;
++		sdhci_writel(host, reg, SPACEMIT_SDHC_MMC_CTRL_REG);
++
++		/* Use PHY functional mode */
++		reg = sdhci_readl(host, SPACEMIT_SDHC_PHY_CTRL_REG);
++		reg |= (SDHC_PHY_FUNC_EN | SDHC_PHY_PLL_LOCK);
++		sdhci_writel(host, reg, SPACEMIT_SDHC_PHY_CTRL_REG);
++
++		reg = sdhci_readl(host, SPACEMIT_SDHC_PHY_PADCFG_REG);
++		reg |= SDHC_RX_BIAS_CTRL;
++		sdhci_writel(host, reg, SPACEMIT_SDHC_PHY_PADCFG_REG);
++	} else {
++		reg = sdhci_readl(host, SPACEMIT_SDHC_TX_CFG_REG);
++		reg |= SDHC_TX_INT_CLK_SEL;
++		sdhci_writel(host, reg, SPACEMIT_SDHC_TX_CFG_REG);
++	}
++
++	reg = sdhci_readl(host, SPACEMIT_SDHC_MMC_CTRL_REG);
++	reg &= ~SDHC_ENHANCE_STROBE_EN;
++	sdhci_writel(host, reg, SPACEMIT_SDHC_MMC_CTRL_REG);
++}
++
++static int spacemit_sdhci_set_vqmmc_voltage(struct mmc *mmc, int voltage)
++{
++#if CONFIG_IS_ENABLED(DM_REGULATOR)
++	int ret;
++
++	if (!mmc->vqmmc_supply)
++		return 0;
++
++	ret = regulator_set_value(mmc->vqmmc_supply, voltage);
++	if (ret)
++		return ret;
++	ret = regulator_set_enable_if_allowed(mmc->vqmmc_supply, true);
++	if (ret)
++		return ret;
++#endif
++	return 0;
++}
++
++static void spacemit_sdhci_set_voltage(struct sdhci_host *host)
++{
++	if (IS_ENABLED(CONFIG_MMC_IO_VOLTAGE)) {
++		struct mmc *mmc = host->mmc;
++		u32 ctrl;
++
++		ctrl = sdhci_readw(host, SDHCI_HOST_CONTROL2);
++
++		switch (mmc->signal_voltage) {
++		case MMC_SIGNAL_VOLTAGE_330:
++		case MMC_SIGNAL_VOLTAGE_180: {
++			bool to_180 = mmc->signal_voltage ==
++				      MMC_SIGNAL_VOLTAGE_180;
++			bool ok;
++			int voltage_mv = to_180 ? 1800000 : 3300000;
++
++			if (spacemit_sdhci_set_vqmmc_voltage(mmc, voltage_mv))
++				return;
++			if (!IS_SD(mmc))
++				return;
++			if (to_180)
++				ctrl |= SDHCI_CTRL_VDD_180;
++			else
++				ctrl &= ~SDHCI_CTRL_VDD_180;
++			sdhci_writew(host, ctrl, SDHCI_HOST_CONTROL2);
++
++			mdelay(5);
++
++			ctrl = sdhci_readw(host, SDHCI_HOST_CONTROL2);
++			ok = !!(ctrl & SDHCI_CTRL_VDD_180) == to_180;
++			if (ok)
++				return;
++
++			log_err("%d.%dV regulator output not stable\n",
++				voltage_mv / 1000000,
++				(voltage_mv / 100000) % 10);
 +			break;
-+		case BOOT_STRAP_MODE_NAND:
-+			mode = BOOT_MODE_NAND;
-+			break;
-+		case BOOT_STRAP_MODE_SPI:
-+			mode = BOOT_MODE_SPI;
-+			break;
-+		case BOOT_STRAP_MODE_SD:
++		}
 +		default:
-+			mode = BOOT_MODE_SD;
++			/* No signal voltage switch required */
++			return;
++		}
++	}
++}
++
++static void spacemit_sdhci_set_clk_gate(struct sdhci_host *host, int auto_gate)
++{
++	u32 reg;
++
++	reg = sdhci_readl(host, SPACEMIT_SDHC_OP_EXT_REG);
++	if (auto_gate)
++		reg &= ~(SDHC_OVRRD_CLK_OEN | SDHC_FORCE_CLK_ON);
++	else
++		reg |= (SDHC_OVRRD_CLK_OEN | SDHC_FORCE_CLK_ON);
++	sdhci_writel(host, reg, SPACEMIT_SDHC_OP_EXT_REG);
++}
++
++static bool spacemit_sdhci_is_voltage_switch_cmd(struct sdhci_host *host)
++{
++	struct mmc *mmc = host->mmc;
++	u32 cmd;
++
++	if (!IS_SD(mmc))
++		return false;
++
++	cmd = SDHCI_GET_CMD(sdhci_readw(host, SDHCI_COMMAND));
++	return cmd == SD_CMD_SWITCH_UHS18V &&
++	       mmc->signal_voltage == MMC_SIGNAL_VOLTAGE_180;
++}
++
++static int spacemit_sdhci_wait_dat0(struct udevice *dev, int state,
++				    int timeout_us)
++{
++	struct mmc *mmc = mmc_get_mmc_dev(dev);
++	struct sdhci_host *host = mmc->priv;
++	u32 tmp;
++	int ret;
++
++	ret = read_poll_timeout(sdhci_readl, tmp,
++				!!(tmp & SDHCI_DATA_0_LVL_MASK) == !!state,
++				0, timeout_us, host, SDHCI_PRESENT_STATE);
++	if (ret)
++		return ret;
++
++	if (spacemit_sdhci_is_voltage_switch_cmd(host))
++		spacemit_sdhci_set_clk_gate(host, 1);
++	return 0;
++}
++
++static int spacemit_sdhci_get_b_max(struct udevice *dev, void *dst,
++				    lbaint_t blkcnt)
++{
++	struct mmc *mmc = mmc_get_mmc_dev(dev);
++
++	if (IS_ENABLED(CONFIG_SPL_BUILD) && mmc && IS_SD(mmc))
++		return 1;
++	return mmc->cfg->b_max;
++}
++
++static void spacemit_sdhci_set_control_reg(struct sdhci_host *host)
++{
++	struct mmc *mmc = host->mmc;
++	u32 reg;
++
++	spacemit_sdhci_set_voltage(host);
++
++	if (spacemit_sdhci_is_voltage_switch_cmd(host))
++		spacemit_sdhci_set_clk_gate(host, 0);
++
++	/*
++	 * Set TX_INT_CLK_SEL to guarantee hold time at default speed,
++	 * HS, SDR12/SDR25/SDR50 modes. See SDHC_TX_CFG_REG (0x11c).
++	 */
++	reg = sdhci_readl(host, SPACEMIT_SDHC_TX_CFG_REG);
++	if (mmc->selected_mode == MMC_LEGACY ||
++	    mmc->selected_mode == MMC_HS ||
++	    mmc->selected_mode == SD_HS ||
++	    mmc->selected_mode == UHS_SDR12 ||
++	    mmc->selected_mode == UHS_SDR25 ||
++	    mmc->selected_mode == UHS_SDR50) {
++		reg |= SDHC_TX_INT_CLK_SEL;
++	} else {
++		reg &= ~SDHC_TX_INT_CLK_SEL;
++	}
++	sdhci_writel(host, reg, SPACEMIT_SDHC_TX_CFG_REG);
++
++	/* Set pinctrl state based on selected timing mode */
++	if (IS_ENABLED(CONFIG_PINCTRL)) {
++		switch (mmc->selected_mode) {
++		case UHS_SDR12:
++		case UHS_SDR25:
++		case UHS_SDR50:
++		case UHS_SDR104:
++			pinctrl_select_state(mmc->dev, "uhs");
++			break;
++		default:
++			pinctrl_select_state(mmc->dev, "default");
 +			break;
 +		}
 +	}
 +
-+	switch (mode) {
-+	case BOOT_MODE_EMMC:
-+		ret = BOOT_DEVICE_MMC1;
-+		break;
-+	case BOOT_MODE_NAND:
-+		ret = BOOT_DEVICE_NAND;
-+		break;
-+	case BOOT_MODE_SPI:
-+		ret = BOOT_DEVICE_SPI;
-+		break;
-+	case BOOT_MODE_USB:
-+		ret = BOOT_DEVICE_USB;
-+		break;
-+	case BOOT_MODE_SD:
-+		ret = BOOT_DEVICE_MMC2;
-+		break;
-+	default:
-+		ret = BOOT_DEVICE_MMC1;
-+		break;
++	if (mmc->selected_mode == MMC_HS_200 ||
++	    mmc->selected_mode == MMC_HS_400 ||
++	    mmc->selected_mode == MMC_HS_400_ES) {
++		reg = sdhci_readw(host, SPACEMIT_SDHC_MMC_CTRL_REG);
++		if (mmc->selected_mode == MMC_HS_200)
++			reg |= SDHC_MMC_HS200;
++		else
++			reg |= SDHC_MMC_HS400;
++		sdhci_writew(host, reg, SPACEMIT_SDHC_MMC_CTRL_REG);
++	} else {
++		reg = sdhci_readw(host, SPACEMIT_SDHC_MMC_CTRL_REG);
++		reg &= ~(SDHC_MMC_HS200 | SDHC_MMC_HS400 | SDHC_ENHANCE_STROBE_EN);
++		sdhci_writew(host, reg, SPACEMIT_SDHC_MMC_CTRL_REG);
 +	}
++
++	sdhci_set_uhs_timing(host);
++}
++
++#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
++static int spacemit_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
++{
++	struct sdhci_host *host = mmc->priv;
++	int current_len = 0, current_start = 0;
++	int max_pass_len = 0, max_pass_start = 0;
++	u8 final_delay;
++	int ret = 0;
++	int i;
++
++	/*
++	 * Tuning is required for SDR50/SDR104, HS200/HS400 cards and
++	 * if clock frequency is greater than 100MHz in these modes.
++	 */
++	if (host->clock < 100 * 1000 * 1000 ||
++	    !(mmc->selected_mode == MMC_HS_200 ||
++	      mmc->selected_mode == UHS_SDR50 ||
++	      mmc->selected_mode == UHS_SDR104))
++		return 0;
++
++	if (IS_SD(host->mmc)) {
++		spacemit_sdhci_set_tx_dline_reg(host, SPACEMIT_TX_TUNING_DLINE_REG);
++		spacemit_sdhci_set_tx_delay(host, SPACEMIT_TX_TUNING_DELAYCODE);
++		spacemit_sdhci_tx_tuning_prepare(host);
++
++		log_debug("TX tuning: dline_reg=%d, delaycode=%d\n",
++			  SPACEMIT_TX_TUNING_DLINE_REG, SPACEMIT_TX_TUNING_DELAYCODE);
++	}
++
++	spacemit_sdhci_prepare_tuning(host);
++
++	for (i = SPACEMIT_RX_TUNE_DELAY_MIN; i <= SPACEMIT_RX_TUNE_DELAY_MAX; i++) {
++		spacemit_sdhci_set_rx_delay(host, i);
++		ret = mmc_send_tuning(host->mmc, opcode);
++
++		log_debug("RX delay %d: %s\n",
++			  i, ret == 0 ? "pass" : "fail");
++
++		if (ret == 0) {
++			/* Test passed - extend current window */
++			if (current_len == 0)
++				current_start = i;
++			current_len++;
++		} else {
++			/* Test failed - check if current window is best so far */
++			if (current_len > max_pass_len) {
++				max_pass_len = current_len;
++				max_pass_start = current_start;
++			}
++			current_len = 0;
++		}
++	}
++
++	if (current_len > max_pass_len) {
++		max_pass_len = current_len;
++		max_pass_start = current_start;
++	}
++
++	if (max_pass_len < 3) {
++		log_err("Tuning failed: no stable window found\n");
++		return -EIO;
++	}
++
++	final_delay = max_pass_start + max_pass_len / 2;
++	spacemit_sdhci_set_rx_delay(host, final_delay);
++	ret = mmc_send_tuning(host->mmc, opcode);
++	if (ret) {
++		u8 retry_delays[] = {
++			max_pass_start + max_pass_len / 4,
++			max_pass_start + (3 * max_pass_len) / 4,
++			max_pass_start,
++			max_pass_start + max_pass_len - 1
++		};
++		int retry_count = ARRAY_SIZE(retry_delays);
++
++		log_warning("Primary delay %d failed, trying alternatives\n",
++			    final_delay);
++
++		for (i = 0; i < retry_count; i++) {
++			if (retry_delays[i] >= SPACEMIT_RX_TUNE_DELAY_MIN &&
++			    retry_delays[i] <= SPACEMIT_RX_TUNE_DELAY_MAX) {
++				spacemit_sdhci_set_rx_delay(host, retry_delays[i]);
++				ret = mmc_send_tuning(host->mmc, opcode);
++				if (!ret) {
++					final_delay = retry_delays[i];
++					log_info("Retry successful with delay %d\n",
++						 final_delay);
++					break;
++				}
++			}
++		}
++
++		if (ret) {
++			log_err("All retry attempts failed\n");
++			return -EIO;
++		}
++	}
++
++	log_debug("Tuning successful: window %d-%d, using delay %d\n",
++		  max_pass_start, max_pass_start + max_pass_len - 1, final_delay);
++
++	return 0;
++}
++#endif /* MMC_SUPPORTS_TUNING */
++
++#if CONFIG_IS_ENABLED(MMC_HS400_ES_SUPPORT)
++static int spacemit_sdhci_phy_dll_init(struct sdhci_host *host)
++{
++	u32 reg, val;
++	int ret;
++
++	/* Configure DLL predly, fulldly, and vreg */
++	spacemit_sdhci_clrsetbits(host, SDHC_DLL_PREDLY_NUM |
++				  SDHC_DLL_FULLDLY_RANGE |
++				  SDHC_DLL_VREG_CTRL,
++				  FIELD_PREP(SDHC_DLL_PREDLY_NUM, 1) |
++				  FIELD_PREP(SDHC_DLL_FULLDLY_RANGE, 1) |
++				  FIELD_PREP(SDHC_DLL_VREG_CTRL, 1),
++				  SPACEMIT_SDHC_PHY_DLLCFG);
++
++	reg = sdhci_readl(host, SPACEMIT_SDHC_PHY_DLLCFG1);
++	reg |= FIELD_PREP(SDHC_DLL_REG1_CTRL, SDHC_DLL_REG1_HS400_VAL);
++	sdhci_writel(host, reg, SPACEMIT_SDHC_PHY_DLLCFG1);
++
++	/* Enable DLL */
++	reg = sdhci_readl(host, SPACEMIT_SDHC_PHY_DLLCFG);
++	reg |= SDHC_DLL_ENABLE;
++	sdhci_writel(host, reg, SPACEMIT_SDHC_PHY_DLLCFG);
++
++	/* Wait for DLL lock */
++	ret = read_poll_timeout(sdhci_readl, val, val & SDHC_DLL_LOCK_STATE,
++				10, 1000, host, SPACEMIT_SDHC_PHY_DLLSTS);
++	if (ret) {
++		log_err("%s: phy dll lock timeout\n", host->name);
++		return -ETIMEDOUT;
++	}
++
++	return 0;
++}
++
++static int spacemit_sdhci_hs400_enhanced_strobe(struct sdhci_host *host)
++{
++	u32 reg;
++
++	reg = sdhci_readl(host, SPACEMIT_SDHC_MMC_CTRL_REG);
++	reg |= SDHC_ENHANCE_STROBE_EN;
++	sdhci_writel(host, reg, SPACEMIT_SDHC_MMC_CTRL_REG);
++
++	return spacemit_sdhci_phy_dll_init(host);
++}
++#endif
++
++const struct sdhci_ops spacemit_sdhci_ops = {
++	.set_control_reg		= spacemit_sdhci_set_control_reg,
++#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
++	.platform_execute_tuning	= spacemit_sdhci_execute_tuning,
++#endif
++#if CONFIG_IS_ENABLED(MMC_HS400_ES_SUPPORT)
++	.set_enhanced_strobe		= spacemit_sdhci_hs400_enhanced_strobe,
++#endif
++};
++
++static struct dm_mmc_ops spacemit_mmc_ops;
++
++static int spacemit_sdhci_probe(struct udevice *dev)
++{
++	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
++	struct spacemit_sdhci_priv *priv = dev_get_priv(dev);
++	struct spacemit_sdhci_plat *plat = dev_get_plat(dev);
++	struct sdhci_host *host = &priv->host;
++	struct clk clk;
++	int ret = 0;
++
++	host->mmc = &plat->mmc;
++	host->mmc->priv = host;
++	host->mmc->dev = dev;
++	upriv->mmc = host->mmc;
++
++	spacemit_mmc_ops = sdhci_ops;
++	spacemit_mmc_ops.wait_dat0 = spacemit_sdhci_wait_dat0;
++	spacemit_mmc_ops.get_b_max = spacemit_sdhci_get_b_max;
++
++	ret = clk_get_bulk(dev, &plat->clks);
++	if (ret) {
++		log_err("Can't get clk: %d\n", ret);
++		return ret;
++	}
++
++	ret = clk_enable_bulk(&plat->clks);
++	if (ret) {
++		log_err("Failed to enable clk: %d\n", ret);
++		goto err_clk;
++	}
++
++	ret = reset_get_bulk(dev, &plat->resets);
++	if (ret) {
++		log_err("Can't get reset: %d\n", ret);
++		goto err_clk;
++	}
++
++	ret = reset_deassert_bulk(&plat->resets);
++	if (ret) {
++		log_err("Failed to reset: %d\n", ret);
++		goto err_reset;
++	}
++
++	ret = clk_get_by_index(dev, 1, &clk);
++	if (ret) {
++		log_err("Can't get io clk: %d\n", ret);
++		goto err_reset;
++	}
++
++	ret = clk_set_rate(&clk, plat->cfg.f_max);
++	if (ret) {
++		log_err("Failed to set io clk: %d\n", ret);
++		goto err_reset;
++	}
++
++	/* Set quirks */
++	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD |
++		       SDHCI_QUIRK_32BIT_DMA_ADDR;
++	host->host_caps = MMC_MODE_HS | MMC_MODE_HS_52MHz;
++	host->max_clk = plat->cfg.f_max;
++
++	plat->cfg.f_min = SDHC_MIN_CLOCK;
++	host->ops = &spacemit_sdhci_ops;
++
++	ret = sdhci_setup_cfg(&plat->cfg, host, plat->cfg.f_max,
++			      SDHC_MIN_CLOCK);
++	if (ret)
++		goto err_reset;
++
++	ret = sdhci_probe(dev);
++	if (ret)
++		goto err_reset;
++
++	spacemit_sdhci_phy_init(dev, host);
++	return 0;
++
++err_reset:
++	reset_release_bulk(&plat->resets);
++err_clk:
++	clk_release_bulk(&plat->clks);
++	return ret;
++}
++
++static int spacemit_sdhci_of_to_plat(struct udevice *dev)
++{
++	struct spacemit_sdhci_plat *plat = dev_get_plat(dev);
++	struct spacemit_sdhci_priv *priv = dev_get_priv(dev);
++	struct sdhci_host *host = &priv->host;
++	int ret = 0;
++
++	host->name = dev->name;
++	host->ioaddr = (void *)dev_read_addr(dev);
++
++	ret = mmc_of_parse(dev, &plat->cfg);
 +
 +	return ret;
 +}
 +
-+void write_boot_mode(u32 mode)
++static int spacemit_sdhci_bind(struct udevice *dev)
 +{
-+	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
++	struct spacemit_sdhci_plat *drv_data;
++	struct spacemit_sdhci_plat *plat = dev_get_plat(dev);
 +
-+	writel(mode, boot_dev);
++	drv_data = (struct spacemit_sdhci_plat *)dev_get_driver_data(dev);
++	if (drv_data)
++		memcpy(plat, drv_data, sizeof(struct spacemit_sdhci_plat));
++	return sdhci_bind(dev, &plat->mmc, &plat->cfg);
 +}
 +
- static void i2c_early_init(void)
- {
- 	struct udevice *bus;
-@@ -327,8 +416,12 @@ void nor_early_init(void)
- 
- void board_init_f(ulong dummy)
- {
-+	u32 mode;
- 	int ret;
- 
-+	mode = read_boot_mode();
-+	write_boot_mode(mode);
++static const struct udevice_id spacemit_sdhci_ids[] = {
++	{ .compatible = "spacemit,k1-sdhci" },
++	{ }
++};
 +
- 	ret = spl_early_init();
- 	if (ret)
- 		panic("spl_early_init() failed:%d\n", ret);
-@@ -354,7 +447,7 @@ void board_init_f(ulong dummy)
- 
- u32 spl_boot_device(void)
- {
--	return BOOT_DEVICE_SPI;
-+	return read_boot_mode();
- }
- 
- void spl_board_init(void)
++U_BOOT_DRIVER(spacemit_sdhci_drv) = {
++	.name		= "spacemit_sdhci",
++	.id		= UCLASS_MMC,
++	.of_match	= spacemit_sdhci_ids,
++	.of_to_plat	= spacemit_sdhci_of_to_plat,
++	.ops		= &spacemit_mmc_ops,
++	.bind		= spacemit_sdhci_bind,
++	.probe		= spacemit_sdhci_probe,
++	.priv_auto	= sizeof(struct spacemit_sdhci_priv),
++	.plat_auto	= sizeof(struct spacemit_sdhci_plat),
++};
 
 -- 
 2.51.0
