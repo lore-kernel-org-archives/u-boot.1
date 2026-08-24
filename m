@@ -1,117 +1,78 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981BDC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:46:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE440C5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:48:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 15C9280BFB;
-	Mon, 24 Aug 2026 13:46:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2309F606A8;
+	Mon, 24 Aug 2026 13:48:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5Y2XIB5rALEV; Mon, 24 Aug 2026 13:46:37 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TRtYChczBdSZ; Mon, 24 Aug 2026 13:48:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787579197;
-	bh=Tw+VpWSdtJsZRYWZLgsKrfAtjiUuiTlgFiezbyD4hbQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=MyqNPErJRd9FFUaPBGAcJxYD6pRW9XuwkKZsylONYdl2HXb7ZRg3jPGaDMSPz9nBQ
-	 IV+xoJC5cMN3tO6h6+4OhbCkm55ZRDp5Vr9vn2YaPYcwHj8GUm/AwLh1rgkrnR3/Kl
-	 1XXVlvtRtH8RZzACobYZsGB8md5S8zlwgvYyajVTuepNIcxx40TbxFL+/Iae4w+EIt
-	 6xqjPugUNMnXPIR31YqQZAiViW8s5E2+tlEs2tA9BKdjyoSz32ZXgySeHIYEhHF58x
-	 qdqfkojKtwdoovJQcbDo4XGDVwzsTpl7VMhweze6Q6jns1uDrKXj8W0hPRZj7aiZbe
-	 zjALOWLP/5CWA==
+	d=lists.u-boot-project.org; s=default; t=1787579291;
+	bh=DJ2Zy6JHUqB2iE2lb9bjD31sKg8TOmKf9sxHfG5zDFY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=SyYk3G17eFpyypHay2RpVOUV+LPiYFj3c2Cb3eKFGwMgKyHBuIV/B9uEDWb1FBebe
+	 DbYpAM9wjomeYxM3ZpxL4jPYnnhRu52CjQj8EjSV4Yzy5mvcpTMWyMdBpJpDUpP56T
+	 i/EvRSMgsIfee3Qwc7AgMXKfMj4sMz6U+O33hhE6zFhvUYAinW2b0iWwkYbrMFc2eV
+	 T00sd85PG5g3I2KYOeuQfZ9xt14Voo8+6d9h6GEt3v1RlVRvcwfSt+kINytN0WRNYv
+	 5vMDJvoujY6/25eBP0ngB3e5Md97DLNZYaa5x13KBKJsn6YiUhW+sfbYf1t8J0E/mV
+	 r3qL5OAQmxpkA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E6D1180BB5;
-	Mon, 24 Aug 2026 13:46:36 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9FCF041A
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:46:34 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5343260624;
+	Mon, 24 Aug 2026 13:48:11 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4777D2FD
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:48:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9202A40050
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:46:34 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2DBE54063A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:48:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b3y3-iL_E9QS for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 13:46:33 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
- envelope-from=stephan.gerhold@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=tmDs/dRA
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6DB4D40029
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:46:32 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6a157f90752so5894115a12.3
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:46:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787579191; x=1788183991;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Tw+VpWSdtJsZRYWZLgsKrfAtjiUuiTlgFiezbyD4hbQ=;
- b=tmDs/dRABE60sCU2gy16RO54BEx4R4kDVd6aGdlLK+Snv/8CKZ9/QPZ/soVlsAKbKt
- 8ggE3zFEAfXaXSqR8LTsEhrkoeEc+DI0UxFVr3RiLpSaTLf4hiAFZE+81ruUI9qPfcF2
- 0cNiaQPV16SH1NyrlEDTnO0IUcHIpBho3ETXxEk9tSaZYVUUhPP3onqZlbrIid07QKme
- u8XEixEldsv7VXPesLvgyUxmhVBPyDeYdf0Sw24x5oA843LUHdsBxyQgz5F15Jt+1MOi
- gmYtc08zGG/6KiDAqHKDF4FJtGOse9LP0PsGiOZF/a0v/Njrz77pucBpcBPC3NhVpTsj
- O86A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787579191; x=1788183991;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Tw+VpWSdtJsZRYWZLgsKrfAtjiUuiTlgFiezbyD4hbQ=;
- b=gtQkkepyTUaHrCky8gf+v+ML8zjjwVPnnOFTikjCSSM66Lo5EGxNC8Ie5WdmiZ3U7N
- a5GLZacQ1L2VC6dYh3E08SL0VET0ezoFzNQtOgRkdLVx/GWBLkgvDQUlRoKwvSWSTRzP
- kXjAzTQZGNZQfrWKK+PBCC+siPvGTagHjh4Xoievn2YQKE0rPrxVdl2+mjGYwF/KsKX2
- d/nM1PUnx2H/SOeuoQbIos+96FgvhID0bgrRJtH1CVBlYULnMA5FFxFwh5Z+OvYXFr7X
- 35d0s+YLQX7KMH1CuvDyQ5s+JWMkY2MvnqivgXhpoX2nw3bdmNVQyxufTy/W3dbc6kbD
- MjmA==
-X-Gm-Message-State: AFuF++kRswS97wQO30aBPimfiMHSGFjidSDeC7tLiFiy4MQWSuGuqXeP
- vcTQungon3RoTDMngU9F/dQjc27N3dnbzV2E1xMLFh2HRT/cO2blBRO7Ic+ZJo6RDN/Q0Qj/Wte
- PdC28hGg=
-X-Gm-Gg: AR+sD11fsuVMLSlpsnXOVgIFds3dr9QLitSQn9UZ+lcgdkItxfaG2IPqyRwfh5N7SPO
- be5tpZCe/DEjlrMlFxW11UjASLl2lh9YeDHe5G8lilFGlUJu+xy6cAlPS7E0Ntsp67jX6nSfVHX
- +9x1wAE0iJC1m/v7ZG4ZjyVcAkoOjrefq2FuLSz9otB0pA1ZNdVoxDaDRNJAmRMc2uWG/FacK0a
- l8ZpfQPorD5jx9tZB6oIwCXamypdP9/j18skGFjuNm7urNrRyOKEe7MWrq+oxfTjg70wZEGFy0x
- zdRuV4KG4dGgBU0v1CZMnZupTai0VflQrRi/7nYaAlWfuMLwwZtq2hg5qs+9lk2eBZMLmU1U+V0
- MkduPqbI8p6h8iTg3lttiqjmOv1KlKZrqlId3bpXZ/lxPz0WdzyB3ii8YnTY0PLM3c2PfDEK9j+
- s9rFPPkWEOu2Zr7x6mKHUAKq8Np0L9s5B/mVNtpERINOxdRMyKUVg0i0HL/rsHUZhJ/SjCBOk=
-X-Received: by 2002:a05:6402:24c8:b0:6a1:4458:7f2d with SMTP id
- 4fb4d7f45d1cf-6a42f172088mr22405992a12.5.1787579190873; 
- Mon, 24 Aug 2026 06:46:30 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff24:7210:8b5e:6b33:b439:3e9])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a59e2da49bsm9876871a12.29.2026.08.24.06.46.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 06:46:30 -0700 (PDT)
-Date: Mon, 24 Aug 2026 15:46:28 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Stefan Hansson <newbyte@postmarketos.org>
-Subject: Re: [PATCH v5 09/13] configs: stemmy: Boot EFI from external SD card
-Message-ID: <aoxLNKEigLO5EyP5@linaro.org>
-References: <20260823-ux500-external-sdcard-v5-0-07ca794e2b94@kernel.org>
- <20260823-ux500-external-sdcard-v5-9-07ca794e2b94@kernel.org>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hEdt_gbVeEHH for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 13:48:09 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
+ helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=d3l/IHAB
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 270AE40602
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:48:08 +0000 (UTC)
+Received: from localhost.localdomain (unknown [91.160.0.144])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 06E25B00572;
+ Mon, 24 Aug 2026 15:48:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1787579286;
+ bh=R1Y4XWKQMS0iM8VxpJbU4S6cJCrMMEdREvFi7y0LMTs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=d3l/IHABTO2008n7ehHYPMnDYpwSQzDtJ7l2zM6fXOZm3NRZ3xETaht/5+vKQjyZk
+ UX/MgJA1+hOOIym0LY44a5cGwAUf3de2jDPp4Ja+C0Q9P2p9gHzHGLp/j2XE+DOSqH
+ 6Q3Sq+ycsL3nBV3jgBSTKb2WIDlNKG4r1wM5A3y9Ya53QZDLW1utajZkOMmoheLUyt
+ 886RGouKbUx7etZeCUzNHlGTtL0iUDacWN6hS0+keLXsje4YvQOQxGXncVeP8qHGXq
+ 0vGXgVw0mgguPmKDrSKqStM5BvrwkuB3PNg4U2m+D70dJtgd7W/KWyLNVJL0ldTgZ1
+ ZTyYnUYC4yxOw==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
+ Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH v1] net: ldpaa_eth: fix error logics of unconfigured DPMACs
+Date: Mon, 24 Aug 2026 15:47:58 +0200
+Message-ID: <20260824134759.2711989-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260823-ux500-external-sdcard-v5-9-07ca794e2b94@kernel.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,50 +86,53 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sun, Aug 23, 2026 at 10:39:28PM +0200, Linus Walleij wrote:
-> Replace the fastboot-only command with standard bootflow scanning and
-> enable the EFI loader so the removable SD card can provide the default
-> ARM EFI executable. Filesystem probing is handled by the standard boot
-> framework and does not require the FAT command.
-> Skip global boot methods so EFI variables cannot redirect the scan to
-> the internal eMMC.
-> 
-> Disable mkeficapsule because generating capsule tools is unrelated to
-> running EFI payloads and adds a host GnuTLS build dependency.
-> 
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+ldpaa_eth_bind() returned -EINVAL for a DPMAC node without
+phy-connection-type.
 
-Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+That is not "skip this device", it is "the tree is broken":
+the DM core propagates it out of lists_bind_fdt() and
+dm_scan_fdt(), initr_dm() fails, and U-Boot stops before the prompt with
 
-Thanks!
+  ldpaa_eth ethernet@1: incorrect phy mode
+  initcall_run_r(): initcall initr_dm() failed
+  ### ERROR ### Please RESET the board ###
 
-> ---
->  configs/stemmy_defconfig | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/configs/stemmy_defconfig b/configs/stemmy_defconfig
-> index 631ccababf1c..b1a14ab38210 100644
-> --- a/configs/stemmy_defconfig
-> +++ b/configs/stemmy_defconfig
-> @@ -14,10 +14,10 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
->  CONFIG_DEFAULT_DEVICE_TREE="ste-ux500-samsung-stemmy"
->  CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_SYS_LOAD_ADDR=0x100000
-> -# CONFIG_EFI_LOADER is not set
-> +CONFIG_BOOTSTD_FULL=y
->  CONFIG_OF_BOARD_SETUP=y
->  CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="run fastbootcmd"
-> +CONFIG_BOOTCOMMAND="bootflow scan -lbG"
->  CONFIG_SYS_CBSIZE=256
->  CONFIG_SYS_PBSIZE=276
->  CONFIG_SYS_CONSOLE_INFO_QUIET=y
-> @@ -43,3 +43,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x685d
->  CONFIG_VIDEO=y
->  CONFIG_SYS_WHITE_ON_BLACK=y
->  CONFIG_VIDEO_MCDE_SIMPLE=y
-> +# CONFIG_TOOLS_MKEFICAPSULE is not set
-> 
-> -- 
-> 2.55.0
-> 
+for a MAC nobody asked U-Boot to drive.
+
+Why it matters: device trees imported from Linux enable
+every DPMAC and leave the phy description to the board file, because the
+kernel's dpaa2 driver does not need one for an MC-managed MAC. U-Boot's
+own Layerscape .dtsi instead ships all eighteen disabled for the board to
+opt into. So the moment a board takes its SoC description from
+dts/upstream, every DPMAC it does not configure in U-Boot is enabled and
+unconfigured, and one of them is enough to stop the boot.
+
+Signed-off-by: Vincent Jardin <vjardin@free.fr>
+
+---
+
+ drivers/net/ldpaa_eth/ldpaa_eth.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/ldpaa_eth/ldpaa_eth.c b/drivers/net/ldpaa_eth/ldpaa_eth.c
+index 94e62748239..27ae6747464 100644
+--- a/drivers/net/ldpaa_eth/ldpaa_eth.c
++++ b/drivers/net/ldpaa_eth/ldpaa_eth.c
+@@ -970,8 +970,8 @@ static int ldpaa_eth_bind(struct udevice *dev)
+ 
+ 	phy_mode = dev_read_phy_mode(dev);
+ 	if (phy_mode == PHY_INTERFACE_MODE_NA) {
+-		dev_err(dev, "incorrect phy mode\n");
+-		return -EINVAL;
++		dev_dbg(dev, "no phy mode, not binding\n");
++		return -ENODEV;
+ 	}
+ 
+ 	dpmac_id = ldpaa_eth_get_dpmac_id(dev);
+---
+base-commit: 6073c36b2c8d39afe3ecc789b281667a3ddebc70
+branch: for-upstream/net-ldpaa-eth-decline-dpmac-v1
+
+-- 
+2.43.0
+
