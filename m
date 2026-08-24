@@ -1,95 +1,96 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA778C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 20:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87469C5DF9C
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 20:31:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C2FC280D4B;
-	Mon, 24 Aug 2026 20:22:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2A26D405CE;
+	Mon, 24 Aug 2026 20:31:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rrkR0fphKjxP; Mon, 24 Aug 2026 20:22:17 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U-08j13EoTSD; Mon, 24 Aug 2026 20:31:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787602937;
-	bh=unuKznMYZpKW42+wrlv6rbE40RCQBv14BJCCSD2Uq0o=;
+	d=lists.u-boot-project.org; s=default; t=1787603485;
+	bh=sGm/a78syQOUz4HW0xn6LcRATkQZFpMDeUN7nmDA+zI=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ME7f3fxOqi/GKh2i21ox/O2oxvzHw7ljoppHCi7YR4By3aXd1XL8i5wotUqtkn0fo
-	 uCBbAIr85vhgownjZPKkAI7ZMbTb0y9BqKh1eiVZUSMlytE/lXyX7G1ZU1ELXRho/H
-	 PZAmC3eREA2FBUxngWoXBojfV43lbbqkbIkelS0lRHh8pTNMHaLB7HLZTSOWg8pnKX
-	 UYX1qiJ5DU8qN//olxPiX8VinH9/1rVsci+ZJ393AXxLUOZJt4Z7n1c9cgl0u4nYjq
-	 WPJKc+S8/NSQtfusKjAm+vIPTn6lynMHBZHvAse3aa3h0cRxKlncXzm5dE254NFdqh
-	 AXTuDqCS2MVIQ==
+	b=d2VKxlPSKi0OKx71+uNk3Il0qXws44YNoJAuik6vS4ganIYU6a/FG0LviILvHGHlo
+	 FqbsW08NcyW8MRdc3b26szfoMqavaiBsKjR4eLnVNm9efxLmirbrFHy8JLACJFmkMJ
+	 8GISSKxQ5uKj2BK1jtFXRibQOEao76y9ExSPwtZQ4/ZRZ260VKwzYkkxMa4x1OJUUr
+	 FyFiH1hSWQTfenYFnY5RlM4wNUnOsdWN51CDaLBfDzBQ83aip90ZQ3wYORmFKmXoRp
+	 Wwkjc8h666ybelo+Kw8UzsUH/rq6/cnJVVT7Yc1RRW3VMrocwxv65Fp2V5a277m+aU
+	 hKzm0gAI//K3A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DF31480D1B;
-	Mon, 24 Aug 2026 20:22:16 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 92DFF29B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:22:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 668C640557;
+	Mon, 24 Aug 2026 20:31:25 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1ED0D29B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:31:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 849A7400A2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:22:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 106CD40557
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:31:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KIajh67kwpCA for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 20:22:15 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QZ4UAfdE8ffq for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 20:31:22 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
  helo=sea.source.kernel.org; envelope-from=linusw@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=Ml/PtjnB
+ header.s=k20260515 header.b=aGqEvmKj
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E20D840083
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:22:13 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7597540553
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:31:21 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 9127E40635
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:22:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7545A1F000E9
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:22:12 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 84FEA4018F
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:31:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6945E1F00A3D
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 20:31:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787602932;
- bh=unuKznMYZpKW42+wrlv6rbE40RCQBv14BJCCSD2Uq0o=;
+ s=k20260515; t=1787603481;
+ bh=sGm/a78syQOUz4HW0xn6LcRATkQZFpMDeUN7nmDA+zI=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc;
- b=Ml/PtjnBfVlZ9osklYj/Uk9L29zOenFKNnKwBHDA6gCPGnLzdc5ypBtQJSYWqE5cr
- PNb+Vr25Tl1WwPGoDGbCjf1ZElpFlFCCgKST/lM5LlYRnxN4JTr/Kn+zEKgIl8lAdq
- ome9dltu1hKTwWYy/yl98T8l7bjqXtJOsK2XnSiBH8gZcPGK9V20MaUtzmSd4FkGKB
- +7aoOSaRGBK98EnV0o9qvNUDcOGTjYtMVi5H2QJaWPtP8clO6eqwKEZnCr4q+Bks61
- QRfWuLnb4KGLTGxH/pf5D+Q9upkQgp4lmKDHw2dvwlH1Q7he7R0Fq46gMy1Li8jbdj
- 7wZNxyeyp/1bQ==
-Received: by mail-oa1-f52.google.com with SMTP id
- 586e51a60fabf-4563ac048f4so3616710fac.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:22:12 -0700 (PDT)
-X-Gm-Message-State: AFuF++kO9FK8tEWoHIj+2U5jIEpAJfKFQoCSuv9b7sGiKxe7K5hnTJOd
- /baaDWowR26bfoT7piS/4oVLMMVR7uKdhB/143ESnZ65SLSFpRFV/G1TU5qunQpfAfOA4dZtR+r
- SkwOniIHAlORJdJw6pg5rud8ShXk4E6w=
-X-Received: by 2002:a05:6870:46a2:b0:456:8f0d:4fb3 with SMTP id
- 586e51a60fabf-4644a3db326mr1645002fac.12.1787602931785; Mon, 24 Aug 2026
- 13:22:11 -0700 (PDT)
+ b=aGqEvmKjTbemlWETEapWgfoMq6SQ4nqyEGDdXCghJhBR8epxAYQu5mbDR+sUUae3d
+ 4Xq/4zX6jF+JukNOorpNc1hXqIToNRZiCLdVz/KUVAhvi5pSjQOd/VsN5weFa79Tfs
+ Ehxl0+YRVQd+Vat4TEQcZg9OatS+BN3OeYDRSehuGudWCWLhg04omMJMtWkpTlX/Jl
+ 9ajFB3PPrmZ1SKNGy1l2xNqyh2xgooV9RvumzzkuqFJrfkZPqA/T+BTdzdWc2gspNI
+ PqfL4WX7b2/O7esC/BBcQxxWgcrM/c7qS8jdnnpkVUctKN9NVe0UR53TT3m42LM3SO
+ uP5BV3yaoDi3w==
+Received: by mail-oa1-f54.google.com with SMTP id
+ 586e51a60fabf-448b0ff4a57so5437775fac.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:31:21 -0700 (PDT)
+X-Gm-Message-State: AFuF++l1lGcEMBai/Wsmfmw/AfmgwxFJdcaZMwFGudUMXMM7tOPj76UN
+ AFThAjTEy8BPRLrPIWcWqi36lo+XK1ijEz6cQpb9xztpMDHAioGa0nG/pVg3FLfrpg8FSUZohVn
+ cvZxCgd70XxzL3Dn71wVWvx2ANlXOpg4=
+X-Received: by 2002:a05:6870:1436:b0:45e:2de4:95f1 with SMTP id
+ 586e51a60fabf-464485329c3mr1836832fac.2.1787603480792; Mon, 24 Aug 2026
+ 13:31:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260823-ux500-external-sdcard-v5-0-07ca794e2b94@kernel.org>
- <20260823-ux500-external-sdcard-v5-10-07ca794e2b94@kernel.org>
- <aoxNWLhEtchd5Q5X@linaro.org>
-In-Reply-To: <aoxNWLhEtchd5Q5X@linaro.org>
+References: <20260708013019.288985-1-trini@konsulko.com>
+ <20260824194814.555634-1-trini@konsulko.com>
+ <20260824194814.555634-3-trini@konsulko.com>
+In-Reply-To: <20260824194814.555634-3-trini@konsulko.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 24 Aug 2026 22:21:56 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkBbjCvA-YbtTaNVV--GQuY6rtVLbwS+cchAgW+28dvJQ@mail.gmail.com>
-X-Gm-Features: AcwNN1XcT9px5T7Fqzct4kHBVuL2pj-ZJD8CVMmx1GUGKXN9sP8UC_g9f4RfNOw
-Message-ID: <CAD++jLkBbjCvA-YbtTaNVV--GQuY6rtVLbwS+cchAgW+28dvJQ@mail.gmail.com>
-Subject: Re: [PATCH v5 10/13] arm: u8500: Switch Stemmy to upstream Janice
- device tree
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Stefan Hansson <newbyte@postmarketos.org>
+Date: Mon, 24 Aug 2026 22:31:04 +0200
+X-Gmail-Original-Message-ID: <CAD++jLmoThTn4M5FD4_tBPZBs53NCMg2gjhzamMRvaH4bo5wzg@mail.gmail.com>
+X-Gm-Features: AcwNN1X7CG2bFdFqHaIjsiIa54GydZUlNtm1iBV4KLsXXg1fd4j45lSFffBz2HE
+Message-ID: <CAD++jLmoThTn4M5FD4_tBPZBs53NCMg2gjhzamMRvaH4bo5wzg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] vexpress64: Correct CONFIG symbol logic around
+ device tree passage
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, Raymond Mao <raymondmaoca@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ David Feng <fenghua@phytium.com.cn>, Peter Hoyes <Peter.Hoyes@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -105,30 +106,19 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Mon, Aug 24, 2026 at 3:55=E2=80=AFPM Stephan Gerhold
-<stephan.gerhold@linaro.org> wrote:
+On Mon, Aug 24, 2026 at 9:48=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 
-> > +             mmc@80118000 {
-> > +                     status =3D "disabled";
-> > +             };
+> When we don't have BLOBLIST_PASSAGE_MANDATORY enabled, then we're being
+> passed the device tree in some other manner, via OF_HAS_PRIOR_STAGE.
+> Correct our logic around which symbols are used to guard what is
+> generated / used and when.
 >
-> Nitpick: Maybe you can add a comment here to explain this
->
->                         /* Typically SDIO, unneeded in U-Boot */
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-OK!
-
-> Although long-term I think we should try to drop all of these overrides
-> and handle workarounds in the board code or drivers if necessary. With
-> EFI, some people may try to boot generic distro images that don't
-> override the DTB, in that case Linux will boot with the original U-Boot
-> DTB. E.g. arch/arm/mach-snapdragon/of_fixup.c has some DTB workarounds
-> that are applied only to U-Boot and then discarded when booting Linux
-> with the U-Boot DTB.
->
-> But that's something for a future patch series, not this one. :-)
-
-Hm yeah Ux500 ARMv7 is a bit fringe but I guess it could be done.
+Acked-by: Linus Walleij <linusw@kernel.org>
 
 Yours,
 Linus Walleij
