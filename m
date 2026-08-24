@@ -1,117 +1,117 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA64C5DF81
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:45:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981BDC5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 13:46:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 611004067F;
-	Mon, 24 Aug 2026 13:45:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 15C9280BFB;
+	Mon, 24 Aug 2026 13:46:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jHjwHdopXIJf; Mon, 24 Aug 2026 13:45:31 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5Y2XIB5rALEV; Mon, 24 Aug 2026 13:46:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787579131;
-	bh=x73SnFcPBfuK+m/K+EsY32T/bX79IbdwICesITzH/LM=;
+	d=lists.u-boot-project.org; s=default; t=1787579197;
+	bh=Tw+VpWSdtJsZRYWZLgsKrfAtjiUuiTlgFiezbyD4hbQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HxaeGAm7t9J7ESzZEyJ59YM0HQPfLGbZKjKKm4jZVv/m5AYT8z1IWIbcnUhW+mQTd
-	 01g8ggoB4LwK0Awm/CGYMyf5NLKruyC7Ek6SIp8ZYaRNYG5WJjK+iiURpX7u1c74Cl
-	 Mr1lrbqRz8kt+WHyTNlApEn0yxV13HYoSuQHQ6eXZbNCU7wxmO/x+yYKgUHTfo1vJL
-	 /hFCWqvqH81te4YzxdgCJRORvc40vX6KVIcblZuHXCysQ1iGkKMpsQIu+oF0i6n6fD
-	 wNKYgqt4xXxkoocjmvqCBKqsPy2m72yRLHRpMvGatdRW7583dLPOf2fmmBls/WEPhw
-	 0F24lsyOlk5Jw==
+	b=MyqNPErJRd9FFUaPBGAcJxYD6pRW9XuwkKZsylONYdl2HXb7ZRg3jPGaDMSPz9nBQ
+	 IV+xoJC5cMN3tO6h6+4OhbCkm55ZRDp5Vr9vn2YaPYcwHj8GUm/AwLh1rgkrnR3/Kl
+	 1XXVlvtRtH8RZzACobYZsGB8md5S8zlwgvYyajVTuepNIcxx40TbxFL+/Iae4w+EIt
+	 6xqjPugUNMnXPIR31YqQZAiViW8s5E2+tlEs2tA9BKdjyoSz32ZXgySeHIYEhHF58x
+	 qdqfkojKtwdoovJQcbDo4XGDVwzsTpl7VMhweze6Q6jns1uDrKXj8W0hPRZj7aiZbe
+	 zjALOWLP/5CWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AF2C94064C;
-	Mon, 24 Aug 2026 13:45:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 87DFF279
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:45:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E6D1180BB5;
+	Mon, 24 Aug 2026 13:46:36 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9FCF041A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:46:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7981660624
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:45:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9202A40050
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:46:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bs50JMTz80NU for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 13:45:28 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id b3y3-iL_E9QS for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 13:46:33 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
  envelope-from=stephan.gerhold@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Ne6Gx8Q9
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 377A460618
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:45:27 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-c1600d040e4so518551366b.1
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:45:27 -0700 (PDT)
+ header.s=google header.b=tmDs/dRA
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6DB4D40029
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 13:46:32 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6a157f90752so5894115a12.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 06:46:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787579126; x=1788183926;
+ d=linaro.org; s=google; t=1787579191; x=1788183991;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=x73SnFcPBfuK+m/K+EsY32T/bX79IbdwICesITzH/LM=;
- b=Ne6Gx8Q9omGyPo8VKSQtLI+RL+Miwop2OCeGXhwwc1aCh8xtn6axxs4l6L7B/oIOsP
- h/dqtgwvsAcR7wxCBy/0hZuJNlq1aVboCXI4pHMTWIa4IkT3Rv4PhtDIbVmA47sItHx8
- Q0ENK5Th0vsB6NO5tGHvgdZVkoalm0O2aBLesnV70jLKKFlFAPCNQ9kcHRtwk1bioztK
- oWJYDOKy4hI0UlWwCQ0I2RETnCizygTY0H5fEYxMl0esxn5T5eRu0uJAWGUxM8cAi2yJ
- m9ae22WG0ZhKVJfHrXFzZW/gYLdbitNzW4GBBWUgESK6fqHhtAk4Dkb9EXC2HTGOjfSe
- e2LA==
+ bh=Tw+VpWSdtJsZRYWZLgsKrfAtjiUuiTlgFiezbyD4hbQ=;
+ b=tmDs/dRABE60sCU2gy16RO54BEx4R4kDVd6aGdlLK+Snv/8CKZ9/QPZ/soVlsAKbKt
+ 8ggE3zFEAfXaXSqR8LTsEhrkoeEc+DI0UxFVr3RiLpSaTLf4hiAFZE+81ruUI9qPfcF2
+ 0cNiaQPV16SH1NyrlEDTnO0IUcHIpBho3ETXxEk9tSaZYVUUhPP3onqZlbrIid07QKme
+ u8XEixEldsv7VXPesLvgyUxmhVBPyDeYdf0Sw24x5oA843LUHdsBxyQgz5F15Jt+1MOi
+ gmYtc08zGG/6KiDAqHKDF4FJtGOse9LP0PsGiOZF/a0v/Njrz77pucBpcBPC3NhVpTsj
+ O86A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787579126; x=1788183926;
+ d=1e100.net; s=20251104; t=1787579191; x=1788183991;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=x73SnFcPBfuK+m/K+EsY32T/bX79IbdwICesITzH/LM=;
- b=hOzCbxOPy68aHU41WnTJJlzd3eDfVKhq092QkPz8nMxoya4g+Z+hNBPgPzg1VDVnpD
- ta3TApZav/hIKecN4MEyD9WfuHOoqr58Y53pocz7Qdc+cKfO30bpV7MEz12VdFDdh3OE
- a6c6J/KQiPSyalREqMk+YFpL9s6P8J3mwFwz6CPysuFwd8xFXsbdo+Oxia+sBiZn7imb
- 6dfrXQHs5HOiCAOwkjVKqyzOkAYzYuWPQUF58NeuASR87HYaBcAUdrvN4oacHCS5oD3X
- 4MYeGv0biLvEs6lPMIkJyE6xCP3veKmve/H73mYdhTjggVlh1e73Y66PxtAk2OMpBWV5
- pNgQ==
-X-Gm-Message-State: AFuF++lPC3WRlUSV/050Pba7GSy9SN/UWbUC37rPdNM2IfrhmqiAdeuV
- ikACm59QSLsJjyrPexW3Prm5QDUGk3Fn2us0VV0F4ms3xZIn3Kttc+fJYLQnGNLtYbM=
-X-Gm-Gg: AR+sD12mklJYdDD1MzdrYPVUKSG8RCPPGPVRWUTyD/SpxomNpoHZjWmLB1QKDKLKfBq
- n4vV9PnvNSsGOb5AdLtKkvFgj/b3zMcmo0ssa2vE0QE4/Ojls9dGBDCXf+R2zIGK1iL2dSRbjIv
- jbe5QqlwN2hoPmbegLQ2jnyUJbr0Un7PmXai0kwQQDmZsmYGYzkQNOiAeFTkHokYxGRQf3U0z00
- Y1gKJfGGB8Ax68u2Gj8g/OBFuJAuFGKnH2aqxKZuTN+LYnXU7f2BlsZgmujLp+beEuuSNOIRnfj
- B2+bFdXYwl0mti7AvqQRlOCozETcxINzu2A64fjlRFJApOcgZWkn+bA09OOpcIBQ453yCCaKDdR
- n6+coZnAHISPU1iW1VnLoDmWYxvMb2nsM/QmB7knAuns38yIG/+PEY3pC5xmR+Y6LFEpqRmzqNi
- f53sddfPUTMHOjz7CIZ4bSgpmIPZP/Myie3ZF+djPu/t8Zr7yjBsWSDT8pntrpOd2GjSYnSClpf
- Mk93kuIng==
-X-Received: by 2002:a17:906:9c8a:b0:c1c:4c72:e6df with SMTP id
- a640c23a62f3a-c244ceead55mr2996305166b.0.1787579125573; 
- Mon, 24 Aug 2026 06:45:25 -0700 (PDT)
+ bh=Tw+VpWSdtJsZRYWZLgsKrfAtjiUuiTlgFiezbyD4hbQ=;
+ b=gtQkkepyTUaHrCky8gf+v+ML8zjjwVPnnOFTikjCSSM66Lo5EGxNC8Ie5WdmiZ3U7N
+ a5GLZacQ1L2VC6dYh3E08SL0VET0ezoFzNQtOgRkdLVx/GWBLkgvDQUlRoKwvSWSTRzP
+ kXjAzTQZGNZQfrWKK+PBCC+siPvGTagHjh4Xoievn2YQKE0rPrxVdl2+mjGYwF/KsKX2
+ d/nM1PUnx2H/SOeuoQbIos+96FgvhID0bgrRJtH1CVBlYULnMA5FFxFwh5Z+OvYXFr7X
+ 35d0s+YLQX7KMH1CuvDyQ5s+JWMkY2MvnqivgXhpoX2nw3bdmNVQyxufTy/W3dbc6kbD
+ MjmA==
+X-Gm-Message-State: AFuF++kRswS97wQO30aBPimfiMHSGFjidSDeC7tLiFiy4MQWSuGuqXeP
+ vcTQungon3RoTDMngU9F/dQjc27N3dnbzV2E1xMLFh2HRT/cO2blBRO7Ic+ZJo6RDN/Q0Qj/Wte
+ PdC28hGg=
+X-Gm-Gg: AR+sD11fsuVMLSlpsnXOVgIFds3dr9QLitSQn9UZ+lcgdkItxfaG2IPqyRwfh5N7SPO
+ be5tpZCe/DEjlrMlFxW11UjASLl2lh9YeDHe5G8lilFGlUJu+xy6cAlPS7E0Ntsp67jX6nSfVHX
+ +9x1wAE0iJC1m/v7ZG4ZjyVcAkoOjrefq2FuLSz9otB0pA1ZNdVoxDaDRNJAmRMc2uWG/FacK0a
+ l8ZpfQPorD5jx9tZB6oIwCXamypdP9/j18skGFjuNm7urNrRyOKEe7MWrq+oxfTjg70wZEGFy0x
+ zdRuV4KG4dGgBU0v1CZMnZupTai0VflQrRi/7nYaAlWfuMLwwZtq2hg5qs+9lk2eBZMLmU1U+V0
+ MkduPqbI8p6h8iTg3lttiqjmOv1KlKZrqlId3bpXZ/lxPz0WdzyB3ii8YnTY0PLM3c2PfDEK9j+
+ s9rFPPkWEOu2Zr7x6mKHUAKq8Np0L9s5B/mVNtpERINOxdRMyKUVg0i0HL/rsHUZhJ/SjCBOk=
+X-Received: by 2002:a05:6402:24c8:b0:6a1:4458:7f2d with SMTP id
+ 4fb4d7f45d1cf-6a42f172088mr22405992a12.5.1787579190873; 
+ Mon, 24 Aug 2026 06:46:30 -0700 (PDT)
 Received: from linaro.org ([2a02:2454:ff24:7210:8b5e:6b33:b439:3e9])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c249629a901sm1423753766b.25.2026.08.24.06.45.23
+ 4fb4d7f45d1cf-6a59e2da49bsm9876871a12.29.2026.08.24.06.46.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 06:45:24 -0700 (PDT)
-Date: Mon, 24 Aug 2026 15:45:22 +0200
+ Mon, 24 Aug 2026 06:46:30 -0700 (PDT)
+Date: Mon, 24 Aug 2026 15:46:28 +0200
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
 To: Linus Walleij <linusw@kernel.org>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  Stefan Hansson <newbyte@postmarketos.org>
-Subject: Re: [PATCH v5 07/13] power: regulator: Add AB8500 AUX3 support
-Message-ID: <aoxK8lN6OIkBgipH@linaro.org>
+Subject: Re: [PATCH v5 09/13] configs: stemmy: Boot EFI from external SD card
+Message-ID: <aoxLNKEigLO5EyP5@linaro.org>
 References: <20260823-ux500-external-sdcard-v5-0-07ca794e2b94@kernel.org>
- <20260823-ux500-external-sdcard-v5-7-07ca794e2b94@kernel.org>
+ <20260823-ux500-external-sdcard-v5-9-07ca794e2b94@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260823-ux500-external-sdcard-v5-7-07ca794e2b94@kernel.org>
+In-Reply-To: <20260823-ux500-external-sdcard-v5-9-07ca794e2b94@kernel.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,71 +125,50 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sun, Aug 23, 2026 at 10:39:26PM +0200, Linus Walleij wrote:
-> Add regulator support for LDO AUX3 on AB8500 and AB8505 PMICs.
-> AUX3 supplies the removable SD card on the upstream Ux500 Samsung
-> device trees.
+On Sun, Aug 23, 2026 at 10:39:28PM +0200, Linus Walleij wrote:
+> Replace the fastboot-only command with standard bootflow scanning and
+> enable the EFI loader so the removable SD card can provide the default
+> ARM EFI executable. Filesystem probing is handled by the standard boot
+> framework and does not require the FAT command.
+> Skip global boot methods so EFI variables cannot redirect the scan to
+> the internal eMMC.
 > 
-> Support the AB8505-specific 3.05 V selector override and clear it after
-> programming an ordinary voltage. Treat both normal and low-power modes
-> as enabled and select the supported voltage closest to a requested
-> target. AB8500 cut 2.0 or later is assumed.
-> 
-> Imply the regulator core for ARCH_U8500 so the driver can instantiate
-> from the upstream device trees.
+> Disable mkeficapsule because generating capsule tools is unrelated to
+> running EFI payloads and adds a host GnuTLS build dependency.
 > 
 > Signed-off-by: Linus Walleij <linusw@kernel.org>
+
+Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+
+Thanks!
+
 > ---
->  MAINTAINERS                      |   1 +
->  arch/arm/Kconfig                 |   2 +
->  drivers/power/pmic/ab8500.c      |   1 +
->  drivers/power/regulator/Kconfig  |   7 ++
->  drivers/power/regulator/Makefile |   1 +
->  drivers/power/regulator/ab8500.c | 168 +++++++++++++++++++++++++++++++++++++++
->  6 files changed, 180 insertions(+)
+>  configs/stemmy_defconfig | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 > 
-> [...]
-> diff --git a/drivers/power/regulator/ab8500.c b/drivers/power/regulator/ab8500.c
-> new file mode 100644
-> index 000000000000..4eab7fcd0f40
-> --- /dev/null
-> +++ b/drivers/power/regulator/ab8500.c
-> @@ -0,0 +1,168 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* ST-Ericsson AB8500/AB8505 LDO AUX3 regulator */
-> +
-> +#include <dm.h>
-> +#include <dm/lists.h>
-> +#include <linux/errno.h>
-> +#include <power/ab8500.h>
-> +#include <power/pmic.h>
-> +#include <power/regulator.h>
-> +
-> +#define AB8500_VAUX3_REGU	AB8500_REGU_CTRL2(0x0a)
-> +#define AB8500_VAUX3_SEL	AB8500_REGU_CTRL2(0x21)
-> +#define AB8500_VAUX3_EN_MASK	GENMASK(1, 0)
-> +#define AB8500_VAUX3_REGU_EN	BIT(0)
-> +#define AB8500_VAUX3_SEL_MASK	GENMASK(2, 0)
-> +#define AB8505_VAUX3_SEL3	AB8500_REGU_CTRL2(0x01)
-> +#define AB8505_VAUX3_SEL3_MASK	BIT(4)
-> +#define AB8505_VAUX3_SEL3_UV	3050000
-
-I'm a bit confused by this list now, please either have all register
-addresses (AB8500_REGU_CTRL2(...)) at the top, followed by the bitmasks
-or make it interleaved (probably better for readability), i.e.
-
-+#define AB8500_VAUX3_REGU	AB8500_REGU_CTRL2(0x0a)
-+#define AB8500_VAUX3_EN_MASK	GENMASK(1, 0) /* <-- would be also good
-					to rename this for consistency */
-+#define AB8500_VAUX3_REGU_EN	BIT(0)
-+#define AB8500_VAUX3_SEL	AB8500_REGU_CTRL2(0x21)
-+#define AB8500_VAUX3_SEL_MASK	GENMASK(2, 0)
-+#define AB8505_VAUX3_SEL3	AB8500_REGU_CTRL2(0x01)
-+#define AB8505_VAUX3_SEL3_MASK	BIT(4)
-+#define AB8505_VAUX3_SEL3_UV	3050000
-
-Am I blind or do we have no support for the AB8505 3.05V in the Linux
-regulator driver?
-
-Thanks,
-Stephan
+> diff --git a/configs/stemmy_defconfig b/configs/stemmy_defconfig
+> index 631ccababf1c..b1a14ab38210 100644
+> --- a/configs/stemmy_defconfig
+> +++ b/configs/stemmy_defconfig
+> @@ -14,10 +14,10 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
+>  CONFIG_DEFAULT_DEVICE_TREE="ste-ux500-samsung-stemmy"
+>  CONFIG_SYS_BOOTM_LEN=0x4000000
+>  CONFIG_SYS_LOAD_ADDR=0x100000
+> -# CONFIG_EFI_LOADER is not set
+> +CONFIG_BOOTSTD_FULL=y
+>  CONFIG_OF_BOARD_SETUP=y
+>  CONFIG_USE_BOOTCOMMAND=y
+> -CONFIG_BOOTCOMMAND="run fastbootcmd"
+> +CONFIG_BOOTCOMMAND="bootflow scan -lbG"
+>  CONFIG_SYS_CBSIZE=256
+>  CONFIG_SYS_PBSIZE=276
+>  CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> @@ -43,3 +43,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x685d
+>  CONFIG_VIDEO=y
+>  CONFIG_SYS_WHITE_ON_BLACK=y
+>  CONFIG_VIDEO_MCDE_SIMPLE=y
+> +# CONFIG_TOOLS_MKEFICAPSULE is not set
+> 
+> -- 
+> 2.55.0
+> 
