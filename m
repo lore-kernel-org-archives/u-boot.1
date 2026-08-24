@@ -4,130 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE4FC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F754C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 08:54:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F3BF840649;
-	Mon, 24 Aug 2026 08:52:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AD0E8406CD;
+	Mon, 24 Aug 2026 08:54:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RUQ_NaGN42Pp; Mon, 24 Aug 2026 08:52:41 +0000 (UTC)
+ id 8SGEAXKExs8a; Mon, 24 Aug 2026 08:54:38 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787561561;
-	bh=YrzvRp4xOxKY7DYrKuD6rIRUGDbxHz/i0wcYuPuS8g4=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787561678;
+	bh=oogP6udpof+i1qJxpXwKa5RAEy9yRwdzkJixnIFU2JE=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=znFil+wqc5TNWOOFbbqLCKoLPO50lVGv7IGJsrB2cRE5IiGVmitwL5NkWUzI2r/AR
-	 Sba2gyx7yG7xQ5Nop+u5XdeTlTal70qqM5fYqbmKW2mr7Pus8c2+UNnrKaFA6LCOKR
-	 UB8KzMG5Mqx7BRz/HOo48PMPug+r9LvFuQ0inO3P2mOXKhBL1MXHYsWKrHxRh018Y1
-	 Mq3dtgm0OZzkiTNvHKQMg3HjtVcqybkqu+N2Ct+K4gQaKYW54g2cg7Ss7wGT3GAxSO
-	 lBdCoyEUmRlkoaq0C+vOW+1tMu5abGoK0qNS18Wzd57b6VPr64Cja3ru8ZoW2SGr+n
-	 GLYuLG8qyde6Q==
+	b=V/+qFzbZ1gosQ0R9s1zdzF1cZYPD8KRcY1+btnOoja9oYeU+lrtSE/4uIPl7m9dH+
+	 Zedqe6xXHmwpoEHrE32ZsY63NW9vO/jJV1YotMHW0DEq/8XYcjrGQlDyFYDFs9Ml//
+	 TEQZA6vhdn923TspytBrFRdtLgJ/0u9r0PZmOopnu8Jjh7XNt1Qct5v+sVjxWRnzHo
+	 Zq5GsjXJsMJ4LCmLAIjej3e8OEuK+pkH6FIDMhOeJUFqB9en+DiHy6eg93afeS0aQ7
+	 kIosF3dryggGv5r17Vf0+ncPq8kEb/m0J+qtHBx7zv9tgVtP5/t/ifU9/P6uF8SEVv
+	 iddgBmyUn8GvA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3193D4072E;
-	Mon, 24 Aug 2026 08:52:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DE42F3AD
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:52:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7DF8840573;
+	Mon, 24 Aug 2026 08:54:38 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9A6E2230
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:54:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D083A4072E
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:52:39 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 808FA80E01
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:54:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G6MLNkvPd9au for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 08:52:39 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::102d; helo=mail-pj1-x102d.google.com;
- envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com
- header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
- header.s=20251104 header.b=BwPNk9C0
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2572340649
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:52:38 +0000 (UTC)
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-38dc69c74b8so3437508a91.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 01:52:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1787561558; x=1788166358;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=YrzvRp4xOxKY7DYrKuD6rIRUGDbxHz/i0wcYuPuS8g4=;
- b=BwPNk9C0ZlLiV1x1FUrUF2VPqCcYPkiO+LXKvvq5iEd3exxRvkhapSTXxTUzB0EPOI
- AZCDhgyu64jUqe3NrpjebLFRezsbXKjFRl4GLxuZMoBzYNrz/rOx9lTTB7iDPzFSULtc
- 3LiBrazYnGX8YpR/XEHc9S5gIBbvtuc2i0LIosSoNDI7to89SyOXZXQ02+P+7UHnE/A9
- KzBJf4eWC5GSZSOy+GzcgMuxF9J4+Lh57tSscOv+rk+EJXZoj1B5o84GntNOEqNPcP03
- NMRBN9pEJWoDEUo9zsObdThKw+lWg2Cq8f8yDhr9U4MuYsa3+aJpIKSl7Q3ToTnXN7+X
- UvYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787561558; x=1788166358;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YrzvRp4xOxKY7DYrKuD6rIRUGDbxHz/i0wcYuPuS8g4=;
- b=I2V7gO1i0zT7GUkwsI9xuBhaXIuKx3Him+M58WUXUkUlZ7z3nM9w9mgEVYwic6chKE
- BdVF7rREhWZw3fLWPgUXQWJMxQiycF9u8LTJnzXjf9rOA3qifFuxI3rYXtI3s9UO0Ca2
- k472JmIhuqmYB/SI9ygmXxBXStMt72rKyuwVj7S+18OKz86zYlxdoToCfqBDkKaanfDx
- PgJeaqteT7NUqTUwNgI48IQG6pD8RGSpTsuUbjGp8VHSvLdr2AWtx1C33SCjdjjYS8cR
- svp6NLr79UcpnRtAAQRGQXCioR5RdXInBcV4eAjalORwBFxe7pCln2Jc1gwYXQBpGbuD
- c7GQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rpyj6nwGHWerfScTH8y7I+lfsX8CoEbNEUt8srEzfIql/qteYxz8IJPHL66ewMERMKGnU/ye1o=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++l/7bbFeFsbIAD40sEeNFMVPc2PN6uyxlFlxzohcq0Y7E7F2dtK
- LOpRcHoVgDmQYtOBXa4CoimMWm4XBIjeqY6xWGhgS19ZnQ8mWBZhimnRiXjkFoOLJfE=
-X-Gm-Gg: AR+sD11J7K2yZuqjizs2HlRMb1Meepk94VDYkLsX07rZWQwY/Btwjx0wN2A8ft/IDqi
- 1fX0qpxMJzhK6tN1T/gwOj4NcfNF9IWcFuQmbggRsOVlL4udBjS6p0P40LJS6ixoH+6WR3P48+W
- q8B4hk6zR/146ziFK49OAinn2sq5PV324peALVyKHtu7kaUwKQxTRbC81LBxGTCa2l3BndX2511
- CH/vgGMCb9Z1o9Yz+ALHgCJ3zm54LWoPmjdgbkgeC/8nFgQsuyfvDma09RPDELr7yvRZQIBpoX0
- 93QDERnXEFI5S4reWU7M6iRSU/OHVu9zbn79tQ0lqZw6Dog/Y5hHtoc4NL5xMoS2Of0OP8RRPOE
- BWMwFf8L/edqFcyw0j6FvcNy5vjKebj+jA1OfnE2+cF2giO68VvccSJZydSuyD2XGEoll+4FcIq
- GMs8mh70p5w5lCmU+mmR7b/zhzvOL036OOh5a1J2Gi1v6OcZd85+F0NUb4nYrjd8sJk0QKMly91
- cf17+cZ1eoeoLzJ7GbK6rZ5avF5H0Ra3RVE6nL/ZpmzbcekFySvPDVXNy8/SyShCuWVJJS1NAa6
- dWJJoU5St4g3GoE6D1hZeYYSOg==
-X-Received: by 2002:a17:90b:3c50:b0:37c:607b:2cd9 with SMTP id
- 98e67ed59e1d1-395dec98ad3mr28036287a91.0.1787561558306; 
- Mon, 24 Aug 2026 01:52:38 -0700 (PDT)
-Received: from [127.0.1.1] ([209.170.101.129])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-327f91d37d9sm26085522eec.14.2026.08.24.01.52.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 01:52:37 -0700 (PDT)
-From: Eric Chung <eric.chung@riscstar.com>
-Date: Mon, 24 Aug 2026 16:50:52 +0800
-Subject: [PATCH v10 17/17] spacemit: k1: fix product name detection and DTB
- matching in SPL
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5BSO_Br412Rk for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 08:54:37 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=lTK4/Cta
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D03CE80DFE
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 08:54:36 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 48E7641223;
+ Mon, 24 Aug 2026 08:54:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A81AB1F000E9;
+ Mon, 24 Aug 2026 08:54:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787561675;
+ bh=oogP6udpof+i1qJxpXwKa5RAEy9yRwdzkJixnIFU2JE=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=lTK4/CtaYm4CjNPyixclZ1aZR7h6zxD2MFJEB8KAj7SErHBYxvhGdqh6B97n7fKNA
+ Pd8kVrgcvT21JhXBSV8cfX5vrCwU/GaNjvpHQWeG3yQ6BDNXkgM9OCdrw9LPKSJOqj
+ AB8JY43CAaKtNPUz/Gs7IHnxycAkBNlDfUhqi2C7q2v+IxDI9auhs9UE+31QB+7/GR
+ 71pJwVWI+w3Hca3uP15XuLfZ/v6GlWQkv4UTrzujhfGegvAqg/hGiCS9LNOdDv4H0g
+ ChnDZATus4wQGZhBam3EfpmPc/p76IMXKr+VYevRWhGPHmtlhfm2CCMOTedhT4gU85
+ 6R1freAum32Sw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
+ marex@denx.de
+Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, michal.simek@amd.com,
+ alchark@flipper.net, jerome.forissier@arm.com, Jens Wiklander
+ <jens.wiklander@linaro.org>, Anders Roxell <anders.roxell@linaro.org>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH v6 18/87] usb: dwc3: import from kernel v4.14
+In-Reply-To: <20260821084829.2070426-19-anders.roxell@linaro.org>
+References: <20260821084829.2070426-1-anders.roxell@linaro.org>
+ <20260821084829.2070426-19-anders.roxell@linaro.org>
+Date: Mon, 24 Aug 2026 10:54:32 +0200
+Message-ID: <87h5kjoq47.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-m4-v10-17-5e0adcb1edb9@riscstar.com>
-References: <20260824-m4-v10-0-5e0adcb1edb9@riscstar.com>
-In-Reply-To: <20260824-m4-v10-0-5e0adcb1edb9@riscstar.com>
-To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org, 
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
- Leo Liang <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>, 
- Wei Fu <wefu@redhat.com>, Huan Zhou <pericycle.cc@gmail.com>, 
- Guodong Xu <guodong@riscstar.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Anshul Dalal <anshuld@ti.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Johan Jonker <jbx6244@gmail.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Yixun Lan <dlan@kernel.org>, Iker Pedrosa <ikerpedrosam@gmail.com>, 
- Alex Elder <elder@riscstar.com>, Andre Heider <a.heider@gmail.com>, 
- Trevor Gamblin <tgamblin@baylibre.com>, 
- Eric Chung <eric.chung@riscstar.com>
-X-Mailer: b4 0.15.2
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,103 +94,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Use a table to handle DTB matching.
+Hi Anders,
 
-Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+Thank you for the patch.
 
----
-v7:
-- Abandon to load product name from ENV.
-v6:
-- Rebased onto latest upstream. Cleaned up board_fit_config_name_match()
-  to maintain consistentcy with v5.
----
- board/spacemit/k1/spl.c | 50 +++++++++++++++++++++++++++++++------------------
- 1 file changed, 32 insertions(+), 18 deletions(-)
+On Fri, Aug 21, 2026 at 10:46, Anders Roxell <anders.roxell@linaro.org> wrote:
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index b70eed14e6ed..93b0b6518c93 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -163,6 +163,15 @@ static void i2c_early_init(void)
- 	}
- }
- 
-+static const struct {
-+	const char *eeprom_name;
-+	const char *fit_name;
-+} k1_board_map[] = {
-+	{ "k1-x_MUSE-Pi-Pro",   "spacemit/k1-musepi-pro"    },
-+	{ "k1-x_deb1",          "spacemit/k1-bananapi-f3"   },
-+	{ "k1-x_milkv-jupiter", "spacemit/k1-milkv-jupiter" },
-+};
-+
- int read_product_name(char *name, int size)
- {
- 	u8 eeprom_data[TLV_TOTAL_LEN_MAX], *p;
-@@ -196,6 +205,27 @@ int read_product_name(char *name, int size)
- 	return -ENOENT;
- }
- 
-+static void fixup_product_name(void)
-+{
-+	char fdt_name[I2C_BUF_SIZE];
-+	int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(k1_board_map); i++) {
-+		memset(fdt_name, 0, I2C_BUF_SIZE);
-+		if (!strncmp(product_name, k1_board_map[i].eeprom_name,
-+			     strlen(k1_board_map[i].eeprom_name))) {
-+			snprintf(fdt_name, I2C_BUF_SIZE, "%s",
-+				 k1_board_map[i].fit_name);
-+			break;
-+		}
-+	}
-+	if (fdt_name[0] == '\0') {
-+		/* set default board name */
-+		sprintf(fdt_name, CONFIG_DEFAULT_DEVICE_TREE);
-+	}
-+	memcpy(product_name, fdt_name, I2C_BUF_SIZE);
-+}
-+
- static void clk_early_init(void)
- {
- 	struct udevice *dev;
-@@ -439,6 +469,7 @@ void board_init_f(ulong dummy)
- 		log_info("Fail to detect board:%d\n", ret);
- 	else
- 		log_info("Get board name:%s\n", product_name);
-+	fixup_product_name();
- 	pmic_init();
- 
- 	ddr_early_init();
-@@ -456,24 +487,7 @@ void spl_board_init(void)
- 
- int board_fit_config_name_match(const char *name)
- {
--	char fdt_name[I2C_BUF_SIZE];
--	int i;
--
--	memset(fdt_name, 0, I2C_BUF_SIZE);
--	if (!strncmp(product_name, "k1-x_", 5)) {
--		snprintf(fdt_name, I2C_BUF_SIZE, "%s-%s", "k1",
--			 &product_name[5]);
--	}
--	if (fdt_name[0] == '\0') {
--		/* set default board name */
--		sprintf(fdt_name, "k1-musepi-pro");
--	}
--	for (i = 0; i < I2C_BUF_SIZE; i++) {
--		if (fdt_name[i] == '\0')
--			break;
--		fdt_name[i] = tolower(fdt_name[i]);
--	}
--	if (!strcmp(name, fdt_name))
-+	if (!strcmp(name, product_name))
- 		return 0;
- 	return -ENOENT;
- }
+> From: Jens Wiklander <jens.wiklander@linaro.org>
+>
+> Sync Linux kernel dwc3 changes from v4.13 to v4.14.
+>
+> The following files are preserved across the import:
+> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+> dwc3-layerscape.c ti_usb_phy.c
+>
+> Skipping unused files:
+> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+>
+> Note that this is a raw import and doesn't build.
+> A fixup commit at the end of the series fixes that.
+>
+> List of commits: git log --oneline v4.13..v4.14
+> Commits imported:
+> 551684708356 usb: dwc3: ep0: fix DMA starvation by assigning req->trb on ep0
+>
+> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 
--- 
-2.51.0
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
