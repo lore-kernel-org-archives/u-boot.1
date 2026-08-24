@@ -4,89 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 108CAC5DF9D
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C61C5DF81
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 16:24:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7682A80C72;
-	Mon, 24 Aug 2026 16:00:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E475080C66;
+	Mon, 24 Aug 2026 16:24:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id K2hXf7EU3Ajy; Mon, 24 Aug 2026 16:00:07 +0000 (UTC)
+ id LFAKf3yYzHtH; Mon, 24 Aug 2026 16:24:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787587207;
-	bh=lK7JkeMdQPTAWbX+uZQahSjqiKllJMZ8jd2sPBAfb0c=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787588673;
+	bh=KAyVYkVB6eiFCXee60ViG76dr2Bdhrwt2QZvz1EiUko=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=n/K5edB+xxlB75Emaewy2LxZmrxW6HGyQLu/6r/0oBJDI4q4z/b6tSsVBDeHiMHHo
-	 8EXXBsK6X0bns2+mI/vA0xcE/iydk9sXkh2haWwsxs4y+wS3P7nGzQ0cFguBjPmDBD
-	 CB06DK5O66FaMB+2a++MPYoB8p0SGgcue42h6qmSDMopjZkhXB9WT3v1Y7HfetSNeY
-	 oBMt2ZPLgK46UDRnduA6s2TMZd+SFcZmU90NlC+vooh5UszmTY+fymdDzd71ozQZZo
-	 6ikdoQk4j0u1tPdIm/hCT3A5ambWnPKqUuf4/aGvaxW86/8iLeD0yqIHjUCa8U7lbY
-	 THhGovPEizVKA==
+	b=nvdYnix/xgW6pzZWMECOMdSSJr3e+NlnILWOpJf2gr65DQJeVkjOp8EH1JmEg8eN5
+	 ttBsuoejdfi8k2SYGt8PGBHRM/91Wu5JlJQSK2hB5nOTVFCUqUCaGdzIhJPBHWkSOk
+	 VF9VdwlQSBFySyg8NqJ4j+xyJ49lleFNEI9lCGyff6YcZ9BXggWqvMdy4I34lBjWru
+	 zEswoVwxtR8Iu7U3T6p9eX8e2D1pQKSq0PgZ85Gr+q6hYmEcyygDGH1oDXYdbfsK0L
+	 avkS53p/0mnACK92+ewCapNCGqgltEllZxDO+q45VnXXSh3uED21kxQxwcHqGqf1Oc
+	 d/abUkTm4F1kQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E664B80BA8;
-	Mon, 24 Aug 2026 16:00:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id BC838396
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 16:00:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D896480C67;
+	Mon, 24 Aug 2026 16:24:32 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2B924279
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 16:24:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9A23C6060B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 16:00:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1D16A40586
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 16:24:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A0VRPs8WEb7d for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 16:00:03 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=d786=gs=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=f0X7K/te
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0A3A5605ED
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 16:00:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1787587201;
- bh=lK7JkeMdQPTAWbX+uZQahSjqiKllJMZ8jd2sPBAfb0c=;
- b=f0X7K/teLFtpcF74In+Th4SpszQq29cJXS0AY/t7PT5RGz/I5FJlGPoK5ktpAVlsQwCd2ERL9
- 7A16vq42TCpDt9zBXslKJT1g58Y1cDyowguj9iQWViZFOToJc5ugAdMVEV3ZAThuTV7QuQ12VAR
- vg5UWdObYFMztSEoTWkjx/JQc50bORHJfzagUOm82+FIbTFOMRkSua2dhZHFtbNlwQlIxWkMgRM
- KKESOYMyKGbaaxV/PK96qeOuWSw0tyKqT9s4z+JIaeD+kffBX7qX8g3KYW69JFrwm7ZEeThdR1j
- dnZYD3kVzFtV32mIDQ/2FHE+HI6ODN1N8sa0EJA93JqQ==
-X-Forward-Email-ID: 6a8c6a7dc8ed151058ca49ba
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.13.16
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <89b693b4-ac18-4807-8f1d-59e4338bae5a@kwiboo.se>
-Date: Mon, 24 Aug 2026 17:59:52 +0200
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xhDt1-2_N0hs for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 16:24:31 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=l4XhpL4o
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 08F4240575
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 16:24:30 +0000 (UTC)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7f3f52143cdso3555556a34.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 09:24:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1787588669; x=1788193469;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=KAyVYkVB6eiFCXee60ViG76dr2Bdhrwt2QZvz1EiUko=;
+ b=l4XhpL4o3uEhplvQy9RGot/LXBlBADLyBihi1LOqwAVKSwAOgrWP2OuSwiqISHbw/a
+ MVVyLgsjqiZm198rO9XRFc1+BnXnFKHSqRkrXpIkAz1+71cfpSaoOH7e6drK7LLx2aRu
+ rcGKdmBqYYeUHAfaSiwEivn0N5HohpnaEcLws=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787588669; x=1788193469;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=KAyVYkVB6eiFCXee60ViG76dr2Bdhrwt2QZvz1EiUko=;
+ b=qwks8xAeAgOUiAJF6Wrw7nCPl6wOyjKIQW+DoYPLbEqm3UnffgvIiGEsiJvUFRU/Wp
+ PRpTp4EemYLh3e/1AQVjPoR6Pssz5iM/oUBrObIpsW57GD4zcyp/jhcZAiazTqtKoiqV
+ WUMbApK4r/jJ7wZeZ+swj52F1C4FT78w9DwIRju2DvR9t8FDjGXx5hdwW6o/FYMQe1Gk
+ ifSl8Bx5Uxh/0fCxRS3RX8pmS6coTlG1lg1tcw88CvZleWYfSJvD7yOQZ8HGxsMEjGa4
+ yhbxmq8nCvZv9CRjuc/chBe19MBNf3n45kxMtW2fbL4EYX1esGMENkMI06et/T9AG/v8
+ ACbw==
+X-Gm-Message-State: AFuF++mRGcEfwX5jyJPASCz5CbDNjm48CDZ6cEFJuabpGwDrdHCH4QL5
+ iq3N+6KiQdYKohFCpVI9267IcAEtPpdlAyxvE8j5TVUyGbSyrJroBNh7oQAIwSTFd5khssRmKpC
+ ge4TrPB5ukhCn
+X-Gm-Gg: AR+sD13/NwgTxOXChZAPTkZkH8/Z9D5czGlMYADwF4QmqdCGtzAop0JL9/6PWbpLhzN
+ ToFZ/SkyfQiNg+4ujxgTDt7NBL7xGyzmORQVUeevxvgZ5A0p7qz/EWD/mssne7qbSR/2G38W6GS
+ 4b+EF7sFN4twzUSHTBCL3XSiiHUopBtk9NteoetsU6qUhBOy8oOwJxEJZr/uZBH6SUMSI/e2W8s
+ FMWc+Kky+ICnfhxpPvWRcVW74FgNJ51lOEl4lKyv+4pRLPdNuXfFQXhSstLk8YZZD532d2bAAxG
+ W72xbsWK9L7R7eHBnaD4z6vciWyg4+yE/c21brHep8fGnn0cr2CLKQnWXvqoNGBg+8KNAvJfOUU
+ RkhqizmK0iXMnKOr0mw9+0mp2k5xX1C7lxLj7ei9hkOd7cC0AYETY4XX678DB92G65TVtOsHE+D
+ yF26UM9yetSDA7Bo/bTJmtbKLqhfhT0W1TArluLJzee9uzAPBJMFr7hxnZeK3pPbiI+/RPse8k6
+ umhgHwlX6EegfpiO96K+1ZaXDTb6Avr1r6sJ6bwIwHw/ew2GnedWr5CeKgJCaW8MtsFGRJUV/kp
+ 47rBXI387Q==
+X-Received: by 2002:a05:6820:a090:b0:6b1:4806:f218 with SMTP id
+ 006d021491bc7-6b15924b646mr22871028eaf.14.1787588669349; 
+ Mon, 24 Aug 2026 09:24:29 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6b17c813af1sm3904080eaf.3.2026.08.24.09.24.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Aug 2026 09:24:28 -0700 (PDT)
+Date: Mon, 24 Aug 2026 10:24:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH 3/3] MAINTAINERS: Remove references to not existing files
+Message-ID: <20260824162426.GG523975@bill-the-cat>
+References: <cover.1787555916.git.michal.simek@amd.com>
+ <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rockchip: px30: Fix TPL_STACK overflow into BootROM
- reserved region
-To: Quentin Schulz <u-boot@0leil.net>
-Cc: u-boot@lists.u-boot-project.org, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
-References: <20260810211405.2837550-1-jonas@kwiboo.se>
- <a0ac40ac-1716-4451-a585-a1bdec39ce84@0leil.net>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <a0ac40ac-1716-4451-a585-a1bdec39ce84@0leil.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vKJDoOfEgsPVAQ/8"
+Content-Disposition: inline
+In-Reply-To: <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -100,245 +125,225 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Quentin,
 
-On 8/24/2026 3:45 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 8/10/26 11:14 PM, Jonas Karlman wrote:
->> The PX30/RK3326 has 16 KiB SRAM at [0xff0e0000, 0xff0e4000), with the
->> initial 4 KiB at [0xff0e0000, 0xff0e1000) reserved for BootROM at boot.
->>
->> SRAM addressing only seems to use 14 bits, meaning that reading from
->> 0xff0e4000+ wraps around and instead reads back data at 0xff0e0000+.
->>
->> Using a TPL_STACK at 0xff0e4ff0 (16-bytes aligned) means TPL use BootROM
->> reserved region for its global data, malloc area and runtime stack.
->>
-> 
-> This should be its own commit.
+--vKJDoOfEgsPVAQ/8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The main purpose of this patch is to fix the overflow of TPL into lower
-4 KiB of SRAM, i.e. the area used as BootROMs stack and state. Returning
-to BootROM to load next image (SPL) could possible be affected depending
-on TPLs use of malloc and/or its stack usage.
+On Mon, Aug 24, 2026 at 09:18:48AM +0200, Michal Simek wrote:
 
-All changes have been kept in a single patch to make changes safe for
-bisect. If we just change TPL_STACK and keep malloc size, or just change
-malloc size TPL may start to accidentally overwrite areas in the BootROM
-reserved area that affects BootROMs ability to load next image or the
-TPL stack may start to overwrite end of TPL image.
+> A number of file (F:) entries across the MAINTAINERS files pointed to
+> files or directories which had been renamed or removed over time. Drop
+> these stale references so that every F: entry resolves to an existing
+> path.
+>=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>=20
+>  arch/arm/mach-rockchip/rk3576/MAINTAINERS         |  1 -
+>  board/CZ.NIC/turris_omnia/MAINTAINERS             |  1 -
+>  board/LaCie/net2big_v2/MAINTAINERS                |  4 ----
+>  board/LaCie/netspace_v2/MAINTAINERS               |  6 ------
+>  board/Marvell/octeontx/MAINTAINERS                |  2 --
+>  board/Marvell/octeontx2/MAINTAINERS               |  2 --
+>  board/Synology/ds116/MAINTAINERS                  |  1 -
+>  board/acer/picasso/MAINTAINERS                    |  1 -
+>  board/advantech/imx8mp_rsb3720a1/MAINTAINERS      |  1 -
+>  board/advantech/imx8qm_dmsse20_a1/MAINTAINERS     |  1 -
+>  board/alliedtelesis/SBx81LIFKW/MAINTAINERS        |  1 -
+>  board/alliedtelesis/SBx81LIFXCAT/MAINTAINERS      |  1 -
+>  board/altera/stratix10-socdk/MAINTAINERS          |  1 -
+>  board/amlogic/p212/MAINTAINERS                    |  1 -
+>  board/amlogic/q200/MAINTAINERS                    |  1 -
+>  board/amlogic/s400/MAINTAINERS                    |  1 -
+>  board/andestech/voyager/MAINTAINERS               |  1 -
+>  board/asus/grouper/MAINTAINERS                    |  1 -
+>  board/asus/transformer-t114/MAINTAINERS           |  1 -
+>  board/asus/transformer-t20/MAINTAINERS            |  1 -
+>  board/asus/transformer-t30/MAINTAINERS            |  1 -
+>  board/atmel/at91sam9260ek/MAINTAINERS             |  1 -
+>  board/atmel/sama5d29_curiosity/MAINTAINERS        |  1 -
+>  board/atmel/sama7d65_curiosity/MAINTAINERS        |  1 -
+>  board/atmel/sama7g54_curiosity/MAINTAINERS        |  1 -
+>  board/atmel/sama7g5ek/MAINTAINERS                 |  1 -
+>  board/avionic-design/medcom-wide/MAINTAINERS      |  1 -
+>  board/avionic-design/plutux/MAINTAINERS           |  1 -
+>  board/avionic-design/tec-ng/MAINTAINERS           |  1 -
+>  board/avionic-design/tec/MAINTAINERS              |  1 -
+>  board/beacon/beacon-rzg2m/MAINTAINERS             |  3 ---
+>  board/bosch/acc/MAINTAINERS                       |  1 -
+>  board/cei/cei-tk1-som/MAINTAINERS                 |  1 -
+>  board/compal/paz00/MAINTAINERS                    |  1 -
+>  board/compulab/trimslice/MAINTAINERS              |  1 -
+>  board/comtrend/vr3032u/MAINTAINERS                |  1 -
+>  board/comtrend/wap5813n/MAINTAINERS               |  1 -
+>  board/coolpi/genbook_cm5_rk3588/MAINTAINERS       |  1 -
+>  board/davinci/da8xxevm/MAINTAINERS                |  1 -
+>  board/embest/mx6boards/MAINTAINERS                |  1 -
+>  board/engicam/imx6ul/MAINTAINERS                  |  3 ---
+>  board/friendlyarm/nanopi2/MAINTAINERS             |  1 -
+>  board/gardena/smart-gateway-at91sam/MAINTAINERS   |  1 -
+>  board/gardena/smart-gateway-mt7688/MAINTAINERS    |  1 -
+>  board/gateworks/gw_ventana/MAINTAINERS            |  6 ------
+>  board/ge/bx50v3/MAINTAINERS                       |  3 ---
+>  board/htc/endeavoru/MAINTAINERS                   |  1 -
+>  board/imgtec/xilfpga/MAINTAINERS                  |  1 -
+>  board/intel/agilex-socdk/MAINTAINERS              |  1 -
+>  board/intel/agilex7m-socdk/MAINTAINERS            |  2 --
+>  board/intel/n5x-socdk/MAINTAINERS                 |  1 -
+>  board/keymile/km83xx/MAINTAINERS                  |  2 --
+>  board/khadas/khadas-edge2-rk3588s/MAINTAINERS     |  1 -
+>  board/kontron/sl-mx6ul/MAINTAINERS                |  2 --
+>  board/lenovo/ideapad-yoga-11/MAINTAINERS          |  1 -
+>  board/lg/x3-t30/MAINTAINERS                       |  1 -
+>  board/libre-computer/aml-a311d-cc/MAINTAINERS     |  1 -
+>  board/libre-computer/aml-s805x-ac/MAINTAINERS     |  1 -
+>  board/libre-computer/aml-s905d3-cc/MAINTAINERS    |  1 -
+>  board/mediatek/mt7981/MAINTAINERS                 |  2 --
+>  board/mediatek/mt7986/MAINTAINERS                 |  4 ----
+>  board/microsoft/surface-rt/MAINTAINERS            |  1 -
+>  board/myir/mys_6ulx/MAINTAINERS                   |  1 -
+>  board/nvidia/beaver/MAINTAINERS                   |  1 -
+>  board/nvidia/cardhu/MAINTAINERS                   |  1 -
+>  board/nvidia/dalmore/MAINTAINERS                  |  1 -
+>  board/nvidia/harmony/MAINTAINERS                  |  1 -
+>  board/nvidia/jetson-tk1/MAINTAINERS               |  1 -
+>  board/nvidia/nyan-big/MAINTAINERS                 |  1 -
+>  board/nvidia/p2371-0000/MAINTAINERS               |  1 -
+>  board/nvidia/p2371-2180/MAINTAINERS               |  1 -
+>  board/nvidia/p2571/MAINTAINERS                    |  1 -
+>  board/nvidia/p2771-0000/MAINTAINERS               |  1 -
+>  board/nvidia/p3450-0000/MAINTAINERS               |  1 -
+>  board/nvidia/seaboard/MAINTAINERS                 |  1 -
+>  board/nvidia/tegratab/MAINTAINERS                 |  1 -
+>  board/nvidia/venice2/MAINTAINERS                  |  1 -
+>  board/nvidia/ventana/MAINTAINERS                  |  1 -
+>  board/nxp/imx93_evk/MAINTAINERS                   |  1 -
+>  board/nxp/ls1012afrdm/MAINTAINERS                 |  4 ----
+>  board/nxp/ls1012aqds/MAINTAINERS                  |  1 -
+>  board/nxp/ls1012ardb/MAINTAINERS                  |  3 ---
+>  board/nxp/ls1043aqds/MAINTAINERS                  |  7 -------
+>  board/nxp/ls1043ardb/MAINTAINERS                  |  6 ------
+>  board/nxp/ls1046aqds/MAINTAINERS                  |  7 -------
+>  board/nxp/ls1046ardb/MAINTAINERS                  |  7 -------
+>  board/nxp/ls1088a/MAINTAINERS                     |  9 ---------
+>  board/nxp/ls2080aqds/MAINTAINERS                  |  4 ----
+>  board/nxp/ls2080ardb/MAINTAINERS                  |  6 ------
+>  board/nxp/lx2160a/MAINTAINERS                     |  2 --
+>  board/nxp/mpc837xerdb/MAINTAINERS                 |  1 -
+>  board/nxp/mx6slevk/MAINTAINERS                    |  2 --
+>  board/nxp/p2041rdb/MAINTAINERS                    |  3 ---
+>  board/nxp/t104xrdb/MAINTAINERS                    | 13 -------------
+>  board/nxp/t208xqds/MAINTAINERS                    |  5 -----
+>  board/nxp/t208xrdb/MAINTAINERS                    |  1 -
+>  board/ouya/ouya/MAINTAINERS                       |  1 -
+>  board/phytec/phycore_am62ax/MAINTAINERS           |  1 -
+>  board/phytec/phycore_am68x/MAINTAINERS            |  1 -
+>  board/phytec/phycore_imx8mm/MAINTAINERS           |  1 -
+>  board/polyhex/imx8mp_debix_model_a/MAINTAINERS    |  1 -
+>  board/qualcomm/dragonboard410c/MAINTAINERS        |  1 -
+>  board/qualcomm/dragonboard820c/MAINTAINERS        |  1 -
+>  board/qualcomm/dragonboard845c/MAINTAINERS        |  2 --
+>  board/qualcomm/qcs404-evb/MAINTAINERS             |  2 --
+>  board/renesas/blanche/MAINTAINERS                 |  1 -
+>  board/renesas/eagle/MAINTAINERS                   |  1 -
+>  board/renesas/grpeach/MAINTAINERS                 |  1 -
+>  board/renesas/v3msk/MAINTAINERS                   |  1 -
+>  board/samsung/starqltechn/MAINTAINERS             |  2 --
+>  board/seeed/linkit-smart-7688/MAINTAINERS         |  1 -
+>  board/siemens/iot2050/MAINTAINERS                 |  1 -
+>  board/sifive/unmatched/MAINTAINERS                |  1 -
+>  board/sunxi/MAINTAINERS                           |  2 --
+>  board/ti/am62ax/MAINTAINERS                       |  1 -
+>  board/ti/am62dx/MAINTAINERS                       |  1 -
+>  board/ti/am62px/MAINTAINERS                       |  1 -
+>  board/ti/j7200/MAINTAINERS                        |  1 -
+>  board/toradex/apalis-tk1/MAINTAINERS              |  1 -
+>  board/toradex/apalis_t30/MAINTAINERS              |  2 --
+>  board/toradex/colibri-imx6ull/MAINTAINERS         |  1 -
+>  board/toradex/colibri-imx8x/MAINTAINERS           |  2 --
+>  board/toradex/colibri_imx7/MAINTAINERS            |  6 ------
+>  board/toradex/colibri_t20/MAINTAINERS             |  2 --
+>  board/toradex/colibri_t30/MAINTAINERS             |  2 --
+>  board/toradex/colibri_vf/MAINTAINERS              |  1 -
+>  board/toradex/smarc-imx8mp/MAINTAINERS            |  1 -
+>  board/traverse/ten64/MAINTAINERS                  |  1 -
+>  board/wandboard/MAINTAINERS                       |  1 -
+>  board/wexler/qc750/MAINTAINERS                    |  1 -
+>  board/xiaomi/mocha/MAINTAINERS                    |  1 -
+>  board/xilinx/zynqmp/MAINTAINERS                   |  1 -
+>  board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS |  1 -
+>  board/zyxel/nsa325/MAINTAINERS                    |  3 ---
+>  134 files changed, 241 deletions(-)
 
-E.g. if we only change TPL_STACK we end up with 136 byte free for
-stack usage before stack can start to overwrite TPL BSS/code:
+My concern with doing a big change this way is that similar to the
+xilinx platforms, there's a lot of mistakes to correct, rather than
+drop. With some detective work (and, time) I think most of these get
+corrected rather than dropped. For examples:
 
-    [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
-      [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
-      [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
-        [0xff0e1000, 0xff0e3800)      10 KiB    code
-        [0xff0e3800, 0xff0e3848)      72 bytes  BSS
-        [0xff0e38d0]                            stack pointer
-          [0xff0e3848, 0xff0e38d0]   136 bytes  stack area
-        [0xff0e38d0, 0xff0e3ed0)    1536 bytes  malloc area (unused)
-        [0xff0e3ed0, 0xff0e4000)     304 bytes  global data
+[snip]
+> diff --git a/board/CZ.NIC/turris_omnia/MAINTAINERS b/board/CZ.NIC/turris_=
+omnia/MAINTAINERS
+> index effce8a753b4..530ca5b420fc 100644
+> --- a/board/CZ.NIC/turris_omnia/MAINTAINERS
+> +++ b/board/CZ.NIC/turris_omnia/MAINTAINERS
+> @@ -5,5 +5,4 @@ F:	arch/arm/dts/armada-385-turris-omnia*.dts*
+>  F:	board/CZ.NIC/turris_atsha_otp.*
+>  F:	board/CZ.NIC/turris_omnia/
+>  F:	configs/turris_omnia_defconfig
+> -F:	drivers/gpio/turris_omnia_mcu.c
 
-And if we change malloc size the TPL stack likely move closer to
-BootROMs own stack. Current combo of TPL_STACK, GD_SIZE and MALLOC_F_LEN
-seem to not affect BootROM but that could change if any one of them
-changes independently.
+This was committed as drivers/misc/turris_omnia_mcu.c
 
-> 
->> TPL on PX30/RK3326 does not have any use for the malloc area, the
->> generated GD_SIZE is typically around 304 bytes and BSS around 72 bytes.
->>
-> 
-> As far as I understood, this is space/size optimization and not a bug 
-> fix, so should therefore be its own commit.
+[snip]
+> diff --git a/board/Marvell/octeontx/MAINTAINERS b/board/Marvell/octeontx/=
+MAINTAINERS
+> index 1f3b12b1abf2..c66607c01d5a 100644
+> --- a/board/Marvell/octeontx/MAINTAINERS
+> +++ b/board/Marvell/octeontx/MAINTAINERS
+> @@ -2,7 +2,5 @@ OCTEONTX BOARD
+>  M:	Aaron Williams <awilliams@marvell.com>
+>  S:	Maintained
+>  F:	board/Marvell/octeontx/
+> -F:	include/configs/octeontx_81xx.h
+> -F:	include/configs/octeontx_83xx.h
+>  F:	configs/octeontx_81xx_defconfig
+>  F:	configs/octeontx_83xx_defconfig
+> diff --git a/board/Marvell/octeontx2/MAINTAINERS b/board/Marvell/octeontx=
+2/MAINTAINERS
+> index eec1d77dd108..8502c119c352 100644
+> --- a/board/Marvell/octeontx2/MAINTAINERS
+> +++ b/board/Marvell/octeontx2/MAINTAINERS
+> @@ -2,7 +2,5 @@ OCTEONTX2 BOARD
+>  M:	Aaron Williams <awilliams@marvell.com>
+>  S:	Maintained
+>  F:	board/Marvell/octeontx2/
+> -F:	include/configs/octeontx2_96xx.h
+> -F:	include/configs/octeontx2_95xx.h
+>  F:	configs/octeontx2_96xx_defconfig
+>  F:	configs/octeontx2_95xx_defconfig
 
-The only part that possible safely can be moved to its own commit is the
-increase to 11 KiB for code size. Mostly wanted to keep this together
-to help for future references as this patch then have all details on why
-such size change was possible and could be considered safe.
 
-> 
->> Current memory layout possibly looks something like:
->>
->>    [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
->>      [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
->>        [0xff0e09f0, 0xff0e0ff0)    1536 bytes  malloc area (unused)
->>        [0xff0e08c0, 0xff0e09f0)     304 bytes  global data
->>        [0xff0e08c0]                            stack pointer
->>      [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
->>        [0xff0e1000, 0xff0e3800)      10 KiB    code
->>        [0xff0e3800, 0xff0e3848)      72 bytes  BSS
->>
->> Update TPL_STACK to use the top of SRAM address and reduce MALLOC_F_LEN
->> to 0x0 to avoid overflowing global data and stack into BootROM reserved
->> region.
->>
-> 
-> Aren't we then missing a build-time check to make sure this is not possible?
+Looking at board/Marvell/*/MAINTAINERS those files are gone, but=20
+include/configs/octeontx2_common.h include/configs/octeontx_common.h
+exist and should be somewhere, probably one and one.
 
-Not sure how we could build-time check this without a guesstimate on how
-deep runtime stack is needed.
+And so on. So, I'd be happy to take over this part of the series, if it
+looks like a lot of work you'd rather not take on at the moment.
 
-> 
->> After those changes the memory layout looks something like:
->>
->>    [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
->>      [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
->>      [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
->>        [0xff0e1000, 0xff0e3800)      10 KiB    code
->>        [0xff0e3800, 0xff0e3848)      72 bytes  BSS
->>        [0xff0e3ed0, 0xff0e4000)     304 bytes  global data
->>        [0xff0e3ed0]                            stack pointer
->>          [0xff0e3848, 0xff0e3ed0)  1672 bytes  stack area
->>
->> With these changes the TPL_MAX_SIZE can safely be extended to 11 KiB,
->> leaving enough for the stack to grow down around 648 bytes before it
->> starts to overlap into TPL or BSS.
->>
->> And with all changes the memory layout looks something like:
->>
->>    [0xff0e0000, 0xff0e4000)          16 KiB   SRAM
->>      [0xff0e0000, 0xff0e1000)         4 KiB   BROM area
->>      [0xff0e1000, 0xff0e4000)        12 KiB   TPL area
->>        [0xff0e1000, 0xff0e3c00)      11 KiB    code
->>        [0xff0e3c00, 0xff0e3c48)      72 bytes  BSS
->>        [0xff0e3ed0, 0xff0e4000)     304 bytes  global data
->>        [0xff0e3ed0]                            stack pointer
->>          [0xff0e3c48, 0xff0e3ed0)   648 bytes  stack area
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->> ---
->> The overflow/wrapping was runtime validated on a RK3326 ODROID-GO Super
->> by printing out content of [0xff0e0000, 0xff0e5000] and comparing the
->> initial 4 KiB with the 16-20 KiB and the data matched 1:1.
->>
-> 
-> How did you test that? md.l on either address results in a Synchronous 
-> Abort on my PX30 without your patch. We could also just write a random 
-> pattern only at one address, and if it appears at the other address as 
-> well, then you've discovered an address wrap indeed.
+--=20
+Tom
 
-I used something like following to dump content as early as possible
-from TPL. I used something that printed multiple columns, and compared
-the output for 0x0-0x1000 and 0x4000-0x5000. Think I also tried to write
-something and could see the values being reflected in both places.
+--vKJDoOfEgsPVAQ/8
+Content-Type: application/pgp-signature; name="signature.asc"
 
-void tpl_board_init(void)
-{
-	for (int i = 0; i < 0x5000 / sizeof(u32); i++) {
-		ulong addr = SRAM_BASE + i * sizeof(u32);
-		u32 val = readl(addr);
-		if (!val)
-			continue;
-		printascii("SRAM ");
-		printhex8(addr);
-		printascii(": ");
-		printhex8(val);
-		printascii("\n");
-	}
-}
+-----BEGIN PGP SIGNATURE-----
 
-> 
->> Changes in v2:
->> - Mention BSS in commit message
->> - Update spelling in commit message
->> - Collect r-b tag
->>
->> With the patch "global_data: Only include driver model fields when DM is
->> enabled" [1], the stack area can grow down an additional 48 bytes before
->> it starts to overlap into TPL or BSS.
->>
->> [1] https://patch.msgid.link/20260810204828.2836359-1-jonas@kwiboo.se/
->> ---
->>   arch/arm/mach-rockchip/px30/Kconfig | 4 ++--
->>   common/spl/Kconfig.tpl              | 2 +-
->>   tools/rkcommon.c                    | 2 +-
->>   3 files changed, 4 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchip/px30/Kconfig
->> index adba1b49a52b..cc0632cf7b2d 100644
->> --- a/arch/arm/mach-rockchip/px30/Kconfig
->> +++ b/arch/arm/mach-rockchip/px30/Kconfig
->> @@ -81,10 +81,10 @@ config TPL_TEXT_BASE
->>   	default 0xff0e1000
->>   
->>   config TPL_STACK
->> -	default 0xff0e4fff
->> +	default 0xff0e4000
->>   
->>   config TPL_SYS_MALLOC_F_LEN
->> -	default 0x600
->> +	default 0x0
-> 
-> Disable malloc in TPL on PX30 instead, that's actually what you want to 
-> be doing and not "reserve 0 bytes for malloc". That's gated by 
-> TPL_SYS_MALLOC_F.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaoxwNwAKCRAr4qD1Cr/k
+CrYYAP9IHUpljgq5M3eHfBuIds5KKXfrQfxRncjm+2L3UlLUmAEA12mPxNoQh52n
+3beV0Hf323a98I20FB8VUB+C3wmp8Qc=
+=d9tb
+-----END PGP SIGNATURE-----
 
-Ideally we should disable TPL_SYS_MALLOC_F, but I thought it was too
-obtrusive to change the default value for TPL_SYS_MALLOC_F as part of
-this fix, so opted to just use 0x0 as size limit as there was no
-difference in code for the resulting TPL binary. The only benefit of
-TPL_SYS_MALLOC_F being disabled, beside being schematically more correct,
-is that GD_SIZE could be around 24 bytes smaller.
-
-I can set the TPL_SYS_MALLOC_F_LEN to 0x200 and fully drop the 10 to 11
-KiB code change in a v3 if you prefer that over this?
-
-> 
->>   
->>   config DEBUG_UART_CHANNEL
->>   	int "Mux channel to use for debug UART2/UART3"
->> diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
->> index a535b61ecd35..cdb9cb188c7c 100644
->> --- a/common/spl/Kconfig.tpl
->> +++ b/common/spl/Kconfig.tpl
->> @@ -129,7 +129,7 @@ config TPL_MAX_SIZE
->>   	default 0x2e000 if ROCKCHIP_RK3399
->>   	default 0x8000 if ROCKCHIP_RK3288 || ROCKCHIP_RV1126
->>   	default 0x7000 if ROCKCHIP_RK322X || ROCKCHIP_RK3328 || ROCKCHIP_RK3368
->> -	default 0x2800 if ROCKCHIP_PX30
->> +	default 0x2c00 if ROCKCHIP_PX30
->>   	default 0x0
->>   	help
->>   	  The maximum size (in bytes) of the TPL stage.
->> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
->> index b39777fc0607..872fc21c039d 100644
->> --- a/tools/rkcommon.c
->> +++ b/tools/rkcommon.c
->> @@ -137,7 +137,7 @@ struct spl_info {
->>   };
->>   
->>   static struct spl_info spl_infos[] = {
->> -	{ "px30", "RK33", 0x2800, false, RK_HEADER_V1 },
->> +	{ "px30", "RK33", 0x2c00, false, RK_HEADER_V1 },
-> 
-> Downstream actually has 0x3000 there with the justification that SRAM is 
-> 16KiB and BootROM has 4KiB reserved for the stack, c.f. 3bbe0d2f9129 
-> ("tools: rkcommon: add rk3326 and correct spl size for px30"), why are 
-> we still 0x400 below?
-
-I actually tried to change to use 0x3000 value in a prior patch, but
-dropped the change due to a response from Kever [1].
-
-For most RK SoCs mkimage use a hard size limit and only exclude the BROM
-reserved area, and for some reason on PX30 the size limit also likely
-leave room for U-Boot TPL runtime needs, e.g. BSS/malloc/stack use.
-
-In my opinion the mkimage tool should not try to impose any limit on
-what the packaged image does or require during runtime, it should just
-be a simple tool that packages binary images into bootable idblock
-format and only apply hard limits.
-
-[1] https://lore.kernel.org/u-boot/c53380e2-1770-9f38-86b2-1671199e4780@rock-chips.com/
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+--vKJDoOfEgsPVAQ/8--
