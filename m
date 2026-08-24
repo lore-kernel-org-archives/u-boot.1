@@ -4,115 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1319CC5DF94
-	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53619C5DF94
+	for <u-boot@archiver.kernel.org>; Mon, 24 Aug 2026 14:49:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4601880B5C;
-	Mon, 24 Aug 2026 14:48:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 01F3480B95;
+	Mon, 24 Aug 2026 14:49:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fRy6r-lYkrzW; Mon, 24 Aug 2026 14:48:43 +0000 (UTC)
+ id 6pCDch6IlfEs; Mon, 24 Aug 2026 14:49:53 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787582923;
-	bh=VSapvP65X7ZcwKYbTL+3APmSLeE6uJ5REPP1oMvZwgk=;
-	h=Date:Subject:Cc:To:From:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787582993;
+	bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=g5s0fsBb0mYXeLMXFLkXLE8buh0W738jlEbHUVcRHb3vtAC4rIpZzvSQLcgSn19Zv
-	 SoAH8dh3etnmHIx8UD6FS4KEPJD4GZpZ2gUMgBpkOG+bfduSzbxjxPVO8zjd1rs7oZ
-	 mgus2sVBTzY5JMsi2dmJa7F3p6N5ck++KQ8/l6zbKTxECxe+yKrlVhoKZ/s4TLl2aA
-	 +d6fQJuqS3VNOfA0+4z6Zae69lIrPUnDkq/icraeTOnRZr1bzHWV4F8MP7d7larQ1H
-	 1nSNZkhRLxL4Qq3k2EqWxS5V/ykwOW82Q8QbvThEvfz1RLAB2x8VDYKdtgHh+ExMvN
-	 k4S2bXmtlyqfw==
+	b=Y9yDDpf9brB1axbpfYkCnRDehdFpUOaBDQeX3kmSarfyhljACobYl0qvMG8JldraE
+	 UXeUd1GQ+7fAFnR69YDal6a92caF4QjfVjXWuHn2KcxqkJykte3mcSB05rD0BBfbcQ
+	 3G3R31NmS+SFhKNzrSzFpOb2hTWPz3p/qPeiE2DSZQ0RRZXMLiLkJcfcLoVOv9sR1Z
+	 omTMJ8n0S/WeyMJulwlqURMcVbHa3MQuEcfP+gKvMWBB0PegWu3C6tWcfXABE1DZ2o
+	 tQHXqYIYHBaIO1DbGWcwYJ78jDpT+UqyIMiVkBecuOIvVHrbHbhj8duX9i2EYoZDBy
+	 BsFmUGHlpiydw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8251180B42;
-	Mon, 24 Aug 2026 14:48:43 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2A59742B
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:48:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3870380B42;
+	Mon, 24 Aug 2026 14:49:53 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 22F5741A
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:49:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1D2DB80B40
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:48:42 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1521D4060C
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:49:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UI7dxPLY9PRR for <u-boot@lists.u-boot-project.org>;
- Mon, 24 Aug 2026 14:48:41 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gW2T2P2YgKdL for <u-boot@lists.u-boot-project.org>;
+ Mon, 24 Aug 2026 14:49:51 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=mfY7CXKb
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E54E180B42
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:48:39 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c197e7e4e94so636667166b.2
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:48:39 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
+ envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.tenstorrent.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com
+ header.a=rsa-sha256 header.s=google header.b=f4crgqN3
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 762D14060B
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 14:49:49 +0000 (UTC)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-836cde02992so43163037b3.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 07:49:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787582988; cv=none;
+ d=google.com; s=arc-20260327;
+ b=NPkSMXBIQdQvWoCywlt3dtw93VjbsMmgt5XlsBLO30R6aUlROyj0EDMj4h/VUPSCPk
+ veSjVp15kLXfngs5nsUuL2/wObA1RFwXu6WrDQXBBBHq0TMw5roQm4cat/dbrqDpHSBh
+ 6Xout2h4/IKzjh30wChsqogqSY6HSgIQgY0XY30zlx1Y3Yib9mR8Ebi+RQ5J99k4q1RI
+ fJIy6yS2U7AMoQ68pc4En1YWmMPFAZqzP88ENH4NL3eBE8XO2npebXso99U4pdLXZRJK
+ RMPaTBJ5c311DEZsrXshfVATkwOpB+AgYijSOPj3fIZqx/CLABn3PfbMTTQveJxqMDcx
+ w3vQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
+ fh=sYJfyN46Z0IrGku28hCCDJhxumBrnLvm6PyQ6TpnZDo=;
+ b=QPpBs+sIf/hW+UWRzv3cFfQInjGMFginaMuH+x2ZPC9Hf44l7E8yy8E3d5WGA6Czrc
+ eqQX3wM3S0gusfgRRBxEobjAwweppMayB77daEWV3c8WB3sNzNEco51mdEoJPaiffbIl
+ mQfgpqVY1hFv8x/TsQexHyUStZGDs9bhKrorqhJyDdKCFzQH+d95xumyUjtw+j0UyWMd
+ ZoX4GOWUSTMfWVwb9QNaUXMLBmAp4LcF27asNYdaG7YiTjpmEyKonW3rWkLuPLIAtJv5
+ XAFhxQiqbX92mpKUJ/iGJWkHYxW0JHkPSuwe/xxp9FKcW4JslaOS1C2/pPGOPRBDe19k
+ GRig==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787582917; x=1788187717;
+ d=tenstorrent.com; s=google; t=1787582988; x=1788187788;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:references:from:to:cc:subject:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=VSapvP65X7ZcwKYbTL+3APmSLeE6uJ5REPP1oMvZwgk=;
- b=mfY7CXKbCY11jXBHHWnSRroSBJF4CdQg4K3ibuOHSjsch0r1GkeESJQ+Leu0Fx61Xe
- gYQ+oR9RxTVMNV9X9T1qq7S7vfI8BiNL+Z2sIvtDVdQUKCkH2FP1GE3MzGdJUu06++ln
- MZNCTfyWfTXveypjMGmrp08iZTMdz3YLv4Kmn6bhChu5GNNsYZa+nW+IAqkn9802IW6M
- HqD0e0b872RDDF3zZgqkrxEzvn1jrrdyTY0hhom0ciImj9yjWyvUiOfas3Dmhf/luKO/
- 7WZ7bAlytF4mZYAVBVq250y9RT7xXL5bDY1G1xSmUoLVgIBmaliJml5dkNNuRmSLLyyP
- 8PIA==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
+ b=f4crgqN3WyFQf/woLG3wAi6XtbcIBamszR3CZDBJZzSdqvw1WOMWATHmNoi1itf4Iz
+ 4A2HEFf6TRHO1H61+tgWOw+MoJcgd21Hb8JUTZgQCU+IlKCOVhoFlFUt3Qo7IG82V4jH
+ wv5PMqgBXnH/mGYCg+7idqKUEU3kCepHe88Ds3UEXKpb1FLNp15I6PBnHOryvI1HznaK
+ QO/VJd7mBWkazUbxuwUd06aSmwDlgf/QLvuui0/gm1e9iNtkqEQVvycj2ktbQ50yuqzu
+ vp/yfbDlFG7uztBlBdz1VVZOfJ6r6ZTJWy5cjJ7fzSq9ag0IOTlVjZEyfWxST3T4N68I
+ 0gjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787582917; x=1788187717;
- h=in-reply-to:references:from:to:cc:subject:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1787582988; x=1788187788;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=VSapvP65X7ZcwKYbTL+3APmSLeE6uJ5REPP1oMvZwgk=;
- b=ccGFrOdDLw6a0xIA3pd6+U+uouYno1O3ymom629ytLNyWMmjIpZE0/THe25JBhm8u/
- ULdRG9zMcXdOycSjAXCLunxx8wSQputWqVk6aYD/frksyzE+it/hTXUw0ozrLQ6hAElM
- qxNcMJS8m+KsUcdM0x/zxQ7k8fQ3KcfapEFlVOx1cEoEq9gyh0wP25ByctrQQgrV3LAG
- jxPtO9eai+WFWIx9oYGDnmx7KrWi/yTloxvc1j95VjdrRyTnQVoKI2SKHNXBo7OxyzlM
- 04rGfKHmYEQL4Mf02RTDCuZ1UdTtD57qWVbWIkSoZFq5QVqAErwvgR9vGGE5KhvpPwJJ
- NKzg==
-X-Gm-Message-State: AFuF++kl0jkd/03N2opJNc21QdTYE5HlhktoV8Aayj9BA5YuPRxBMGDk
- 14bkrylWPAa4dICbBRvh1uxXnPOXfgU35izfooUAxeuA/tsSgqR8mSSgY/P7x0yyVrgrZrOYTpt
- QlWGuhZo=
-X-Gm-Gg: AR+sD11bkazhAotf3TImZIoyMugHCN/m/AK8DUc6uVQUyQjga7XpGMUqb9xTM/+VQkx
- veKddr6wSDGzx3bXjC8JGX1dhi2K0tuaLItI01+JgnmRGsD166+RLWMqyl670gUvg+Hdzs6Q0ie
- tQ9I6Dev5L0kXZMJ52Jbf8bcSjuLpeQiRAkmQl/TNTmH+UBh6tUZXjhW1S8NiGbXJ0Sin/kYu5s
- qB0FJ3I1HSubWXRi6vtN7kOZEleUrn7AXcUjuKRob+Vfn6ZMzF4FWHN0Nnv7kcJ/esFFJv0xgty
- Y2nUGIm8kRQTQxViOcJQzQmsp732LqX0e36/WdcL2bbLkHb+aKe/9GA8WgB5Ntm0MUNyceFbdQi
- rURb6VDMxp4+JY8BRlrnHBxuHG3e9UviQoCCKV2Q3dhQ+lp1RsZ6rB/2FezJKG5cZkNINoOA50X
- 5DlVrhRrTSnFBxrzSIlctW2DRqqdE0MAsoMcuTxpYVtavDXQu/hZdnxCnCvmdboxQ4uX1Lx0qrU
- uDAQ4PWumt2k3QWG72LCs9EWgoRhJ8hRLAv8lXGh+SgBHstCnu7ZS90
-X-Received: by 2002:a17:906:730e:b0:c24:7cb5:d617 with SMTP id
- a640c23a62f3a-c249238c369mr2094959866b.1.1787582917473; 
- Mon, 24 Aug 2026 07:48:37 -0700 (PDT)
-Received: from localhost (host-212-171-227-71.pool212171.interbusiness.it.
- [212.171.227.71]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2496734bfcsm1409134666b.43.2026.08.24.07.48.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 07:48:36 -0700 (PDT)
-Mime-Version: 1.0
+ bh=07oNjsfBT41jW5cN1JTWMqNHCChA3JjpYE4IFdMvip4=;
+ b=aipxNYOjf62xDVjbhw+DL9UUCjD7kulEUV/e6emgyuf2yuF4MIaPswaGjw7NcmJoB9
+ 6gSHFbToL+O/HmfKhCNwlu2EcEBtmpTx1noKc/fRtDVWpxsj5v3gNCUgTebiAL56N6Z4
+ LXwmfDaUuF+H72n802i8CVqSR7dEj0KicMmQ51oGOg+Zc7yDiwtXQdFxGyPiiWsMlVZN
+ tQ+KkqJ/T6AJlNQ6TuY/e6FWjRTzTerUL1YoEzUwKpOYi9mUPMukw70sNmOcvLTpwJgM
+ v0eZ00R0mZQffcRJVkLnWNWvnZKJ0sWkos6/RZNdsQufuOSstzNOmzToRRNwodenZ1f1
+ lLhA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqX20QP/kk50Tsvo+4Zjdn/4igDien9K/+A7jhvMFnRJ5e5EY/1k5mXUtrioCpUThnRUq69Q1Q=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kVdyR+Y5ION0PyZDpc9Y/PN/w7rZpGhCkjMrBovTxOuIbCqwCp
+ I0yZVdQOx0rPpUmNY7KHfw1QFRwtkMi3L+h76Dz9zZbxJrsq6ujpk4FoNJjwywz3uMRglF7Gznz
+ yFO0qC4kKMOCPbi32yinHf7Yui0Au/YuiUl6xUvFQ7w==
+X-Gm-Gg: AR+sD13owFcVqkZu8dmbsPaxsIL4pkmORXbBfVHgjqyuIh7nH/VXo4XQQhCr62+1yT9
+ XiSbTZ3psIR3eVDoB91NKdNr09VGlTV4ts99a6HaTLHIzQLg0rANhXD57BCev5J1eCp2tdduXmc
+ xNYe/ORMxcAYx31USt1sub8/d0Cq4p0mYwPUs/5X2lKTsm+Oh6Y2Gc+C1GyyAoS9KJUPrh14iYi
+ 2NM0Sc7K/LpCGjAqUMUFzi3SUrZw93BDZgsY++eI9CSH7iMXI6kwh6dBv1xMsSh740U+cI36vn5
+ HmvWuWwe95uWZuWAWt0b0umEtlmPWxUAfTcvTffI0o+P60DeJGe9lh9GoZu4YewzYielOPE3ygf
+ r
+X-Received: by 2002:a05:690c:9989:b0:81e:c436:c530 with SMTP id
+ 00721157ae682-849f3dc401dmr111984447b3.14.1787582988317; Mon, 24 Aug 2026
+ 07:49:48 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260803-spi_fixes-v1-0-33f36e764104@oss.tenstorrent.com>
+ <20260803-spi_fixes-v1-2-33f36e764104@oss.tenstorrent.com>
+In-Reply-To: <20260803-spi_fixes-v1-2-33f36e764104@oss.tenstorrent.com>
+From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Date: Mon, 24 Aug 2026 09:49:35 -0500
+X-Gm-Features: AcwNN1XR3THiIWzn2-nqItNU-HhqJpKpT9wFvA7eat7DEOTMoW_nXxTZz3gg7Qk
+Message-ID: <CAEev2e8_B3EH0A0KuPK5L2b28GDJt6cyRZpuFAZeOM0o9t0bww@mail.gmail.com>
+Subject: Re: [PATCH 2/2] spi: dw: Add supports_op function to reject
+ unsupported transfer modes
+To: Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Vignesh R <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>,
+ Ssunk <ssunkkan@gmail.com>, 
+ Jeffrey Yu <jeyu@issi.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Boon Khai Ng <boon.khai.ng@altera.com>, Flaviu Nistor <flaviu.nistor@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 24 Aug 2026 16:48:36 +0200
-Message-Id: <DKX99AW58JTS.8UMKA33XJC4J@baylibre.com>
-Subject: Re: [v2,0/5] firmware-owned devicetree for EBBR / SystemReady IR
-Cc: <u-boot@lists.u-boot-project.org>
-To: "Simon Glass" <sjg@chromium.org>, <ccaione@baylibre.com>
-From: "Carlo Caione" <ccaione@baylibre.com>
-X-Mailer: aerc 0.22.0
-References: <20260728-ccaione-upstream-ebbr-v2-0-4efb529140d6@baylibre.com>
- <CAFLszTgX08U3GpcvwkvzBinY7X21EC_P2nEZPx3ikVH=vBt_yA@mail.gmail.com>
-In-Reply-To: <CAFLszTgX08U3GpcvwkvzBinY7X21EC_P2nEZPx3ikVH=vBt_yA@mail.gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,46 +147,19 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat Aug 15, 2026 at 8:45 PM CEST, Simon Glass wrote:
-> Hi Carlo,
+Hi all,
+
+On Mon, Aug 3, 2026 at 2:01=E2=80=AFPM Anirudh Srinivasan
+<asrinivasan@oss.tenstorrent.com> wrote:
 >
-> On 2026-07-28T13:20:42, Carlo Caione <ccaione@baylibre.com> wrote:
+> The designware spi driver doesn't support dual/quad/octal modes, but
+> the driver still tries using these modes when it sees a capable flash
+> chip in the devicetree. Add a supports_op function to this driver to
+> prevent this from happening and force single lane operation.
 >
->> Patch 1 makes an FDT passed to efi_bootmgr_run() outrank a Boot#### FDT,
->> as an independent behaviour fix. Patch 2 adds the loader, binding,
->> documentation and shared EFI staging policy. Patches 3 and 4 integrate
->> the EFI bootmeth and boot manager. Patch 5 adds sandbox coverage.
-> [..]
->
->> - 'fw_fdt_part' can pin an A/B partition and 'fw_fdt_config' can select
->>   an explicit configuration.
->
-> Just to check - is exposing these as environment variables really the
-> right long-term interface? U-Boot has been moving configuration into
-> the control devicetree, and both of these look like properties that
-> would sit naturally on the u-boot,firmware-fdt-block node, with the
-> env var overriding for A/B slot selection only. What do you think?
+> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+> ---
+>  drivers/spi/designware_spi.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 
-Hi Simon,
-Replying only to this point because all the other comments have my ACK.
-
-Agreed regarding fw_fdt_part: it is indeed intended as the runtime A/B
-slot override, while the stable storage location remains described by
-the provider phandle and partition UUID/name in the control devicetree.
-
-Now, fw_fdt_config is slightly different though. We need configuration
-selection to depend on the selected boot target. For example in our
-usecase, the same firmware FIT may provide a base-only configuration
-for a generic distribution and an overlay configuration for a platform
-image. The control devicetree is identical in both cases, so a fixed
-property there cannot express that choice.
-
-Static selection is already covered by compatible best-match and
-the FIT default. I would retain fw_fdt_config only as an explicit
-runtime override above those mechanisms and clarify that role in the
-documentation if that is ok with you.
-
-Cheers,
-
---
-Carlo Caione
+Gentle ping on this patch.  I was wondering if anyone has comments on this.
