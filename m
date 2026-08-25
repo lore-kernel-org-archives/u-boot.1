@@ -1,107 +1,107 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5ECBC61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 19:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 960AAC61DBD
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 19:34:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7FA0140648;
-	Tue, 25 Aug 2026 19:34:13 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B7SXsCuzBZnP; Tue, 25 Aug 2026 19:34:11 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787686451;
-	bh=fumGF+2192QXUaAbu3XfcC3oHBNvrHgaWk+v8QPZJbQ=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=LTyKIYxYL+gaAQ9JdSVi0Syl3rukcBlig0eBljCCnAXgvP23sITqFho7Dxbbu0113
-	 fzTQkzvqu31WGuvg20YDJ5i+QRAMT6AGI3N8UwVqDU2qOdjQgQeHkj8SIPqfD93nYj
-	 2hjrXCsYLLbhuMeW6Jmsb2hGwzEhME9OuDY7XDBKHvJmiKD+Fa15jyCWk2FZ4vyMqC
-	 JsHDZGSuX+1RW0FXYLMoQszWsQnjkdG7/ljvrHzgi+IhSYTyDV4Zl2u0U4DE8k26xE
-	 iUpdxyYI6zRlXUj7YNc73qssBY4vhw6nj6tzc1OwXv+1FtCPO3vK+RURL7GF+nDdtV
-	 nbyKyHM1u5lCQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BF23D405CC;
-	Tue, 25 Aug 2026 19:34:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 1AA7339E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:34:10 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F360680984
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:34:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 31F0880C98;
+	Tue, 25 Aug 2026 19:34:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jX5X0uQjUKjo for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 19:34:09 +0000 (UTC)
+ id DEAMD8ux4v4m; Tue, 25 Aug 2026 19:34:14 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787686454;
+	bh=KhyJTSlMpPPKNltasVXRXfr3s5wn5YRiZ3QcNe0VXVA=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ONCbpds1tpA4407A5dtOJNBKMdauj4V0+7fnTulhRe1zOH7zA/OqRyBg2eNmFdahk
+	 ehfFm+oxYvE33KtHz68Ze0VOsdcQnDrWGC1O5oYSa0FSk7cQT0QDqfRN+LVvI9POTB
+	 9eLbAAWbA2hqO1IkUAF4lCfXzuS2Tb/FW+kq73j8VTXeltmuqZoR3U1/lpNk5ymGyh
+	 urbqgRuGGcwpqOdKzG9qLaWhAN/wxV40kvaDqz5SCp9V6L9/OG92tZYPthTtx4juJ/
+	 BYCkKcfkkylMWqQARfOfFJyEt18x8OaaSfBz3PGAPe7Tdxv+sWw+jDoN8biXAxZLFU
+	 Mdz6oHDyeRGOg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id F2BF980994;
+	Tue, 25 Aug 2026 19:34:13 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 111C0396
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:34:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 02170809A7
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:34:12 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NbxtflBuq426 for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 19:34:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
+ client-ip=2607:f8b0:4864:20::22e; helo=mail-oi1-x22e.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=QjwlUZH/
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3C1F48097B
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:34:08 +0000 (UTC)
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7f3faf2b081so173736a34.3
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:34:08 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com
+ header.a=rsa-sha256 header.s=google header.b=NYdDoczO
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3ACB780984
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:34:10 +0000 (UTC)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4b1fcd3b1a9so195174b6e.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:34:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787686448; x=1788291248;
+ d=konsulko.com; s=google; t=1787686449; x=1788291249;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=fumGF+2192QXUaAbu3XfcC3oHBNvrHgaWk+v8QPZJbQ=;
- b=QjwlUZH/1GDl3F0aNjKkLd0CFIlY9p7pI8qEC2qxj1LhZ3X6X2hGrL74P2d6PDaKhc
- V0Pb1oejaDJATtVInnCgdbsrTpBAR6birLFBvMvxK30eF/V7EpL7jYqKZ+/pT1qF4GAw
- 5EojmL8jvmu5IA1ISqUr9ziPd62HEsYenHdbU=
+ bh=KhyJTSlMpPPKNltasVXRXfr3s5wn5YRiZ3QcNe0VXVA=;
+ b=NYdDoczOb7VxEC/knW3VrRTd0HDthNo74fgBhbDwWJbhnVjvwGwezCmMU9f4U1rlnw
+ XgcSZyRSdCRVzAE17oAxLxPdwQ1E9SywY4B6PifRn4CkqlXMIzFyuQr50xMcdTSwMGQ0
+ K4ahWywfRe1yEJZxrBc2dxK8mNyDNKRazKcDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787686448; x=1788291248;
+ d=1e100.net; s=20251104; t=1787686449; x=1788291249;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=fumGF+2192QXUaAbu3XfcC3oHBNvrHgaWk+v8QPZJbQ=;
- b=RWoUJbVFM9D6Xyr5CPThIKo3LljkjhEoOBVXedvWRs1fNGIYsSfZ8lojlN4Kk5ZN2S
- VU7DAjeeFwr3Z5A+H43Tln6fuG4ATHesH9Atq5EXw6EPmZdTzNyXSxH18mcsuq17DwyT
- hwE2Iw3yyCbaB3IikXCM5BrxJgeJO/g1YBkokK26JOEUi9a4gTQMUPy8VzGLAwQrc912
- sfHcprfgYFACURZXCruLphHO/DF2/98C7mCurqG2XXIuizTtz4YE45gva/ZCvS1eA87J
- hUVGwWU491Lwyouv2i565guydRM6L5SOmOJUn1s9Bzs8rS2wEEm+y9OdQyYkytn+GN6o
- 0MIw==
-X-Gm-Message-State: AFuF++lbRicsce5L4YjXf9y5pHTeH4u9ichypY6lvpCqUqCG+OXAOVHk
- 7Nkie8aVaWEHeoTQlq0TCSwrb5Aa94jD/f4fRBEDoLyIbPV687zMn/PncuzS2J+IBL/jYgmcZBe
- iMOzALiC1Tg8j
-X-Gm-Gg: AR+sD111lJn0aPMobLt65T/526RO0yLh2XGLsGMoXGOy7DLWnemfBps0/07/D0rDARM
- tiBwRmbps+qFE4x199MxTuKlNIjSv5Ic7+9/SHjfxtZokoJiCLdaogtlBA06jVTye96MEgHTiRA
- urOAImUiM7lp3XY7yNu+weSOkMt56I+zCFJDVTG29rdn6134lwx7vxfPHa6ldaE98+ThavP2XuD
- Y8E1CuGVZzT9mG9jHzQc7yqs9p5yC8HTwWzdHmXBEwH4d89m5Q8ESRui55V0ulS+QDnLWo7+en1
- rWyK9XxJNEuKuW81IbB5U73PQ+BuwMicqj5tb6VBeDNGOV8O3vesrxYpuFJS5R1gOLIuAQhLrYm
- r9VDl+ot/W0ib4/TpjJV3c5jYB8lgh3GGloNkDBRe1wtUqcpPGnToQQirn8CupXaaYqBtC6uIyq
- uDex04FAcxienEi6/Q/LtkZ2OR21qmvNU4pPH6YrQHMypRbNC00o6r4DCoHwrAx5zepL823foB/
- i4PUDqA66t3i3T+3JwFmaZcdd9V6/kPbE0cxgUyNYMjVueb/+aB33g3nSUsouYh8FdHZiBetxUX
- j+B83sjQaFPqp4EdBe0AZaarMewDwX+FjQ==
-X-Received: by 2002:a05:6830:3883:b0:7dc:3db6:f02 with SMTP id
- 46e09a7af769-7f4c525fcc9mr1283600a34.9.1787686447662; 
- Tue, 25 Aug 2026 12:34:07 -0700 (PDT)
+ bh=KhyJTSlMpPPKNltasVXRXfr3s5wn5YRiZ3QcNe0VXVA=;
+ b=J7u/PbO9egzagXVa0+6iANfOdltIidfj4lnQxVyvIpJCrkX6cOSAeS3dvKfcpQDUG5
+ p8WHGriYzhUsFBsBGssThakKesKzJ+fkmcKJDfy6SQnyS2BsAKwCNWIOWVhcRDahfYtW
+ lbu1JRbUBBulCgOcaskGLO2kScTAyPPCITeLq3rMMvPvgFB9c5vgeLoBRP0xHcs0Z9/t
+ F59ZC2IQ0i94hNOVV4QENybqzo89YmqB38P/ReuvPzd2VHMIXTuR4aBTqvZNAM3LsfQG
+ Ms4AlrGUwa9AILx+OKZ1NZgumkhprCjRVaG9t7MSts69H0gUwkD4wJkgqVt/7mCmb746
+ nxcg==
+X-Gm-Message-State: AFuF++kIkWAD/qxccH3DkvuaeHdN/XHciuXmtxG4dNnwJ8/chefPh3si
+ JuGl3ob+qMXMhiLZC/1ojg2oT3E1i7ow5Pcgtsmy0pCWFveg1yhJWzqLYRbf4D1GNdmqw6F6WKK
+ tObhpreLD1Z1N
+X-Gm-Gg: AR+sD11pULe5TlzPoClIWN+svRXFDfCUb9umob/vUH8ssCmxqPdhnmlQ30hLId2MMEE
+ dFDn/nDcmLaW3GRNi096h8PNA/vhc22nwb9KZmxOoIBOm+HV5DQjQVOZmxpoDw8rOIO22NoE+1y
+ t1DZ7oY6qEobjtWuZuexYzCSR7HNfQMHSRhE8i5Ts0inopbgdZnspM0+3er2n6uXNwVjhetrq5P
+ GXH9QvsNm7OK4iuhFOxIsJOnE5rRIA9DNgIOywdl3HKcPporqnGhsU+MbLJzR+8XJJFtgxdjism
+ k9nq2HOf+nYPWmWbUsHjRmLb9tp8p04UARKpnZcnEsaVCHN8pNNmPETCveKKk3ZvHUH120slAX9
+ Kpvd7S0K0d7n0PU6zkJu4ZivsWO3OJZpgp70UIavECak3wdervH57gL69lTtQv0j9L0YsZjPkpo
+ 0DPxddHaTxQaBmV+uRDq3IDIggg1eMdC/alhjGtTWT+vd5otel84K9bCddXASI1b5IQD+K65yDo
+ fGr4sebpTwft10w4aNih/eefOw9vJjZj2srlDCIKTgKcsgMBfzZpL+PIAJDpWSODvzq/4zHLTU0
+ MknbhL4u31Xkhd3slSt+TxbjPiKkfZE69cXQve4rY2qJ
+X-Received: by 2002:a05:6808:5183:b0:497:df42:1dff with SMTP id
+ 5614622812f47-4b3668b51cfmr2173594b6e.1.1787686449321; 
+ Tue, 25 Aug 2026 12:34:09 -0700 (PDT)
 Received: from bill-the-cat.tailc58245.ts.net
  (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4c4210437sm355667a34.3.2026.08.25.12.34.07
+ 5614622812f47-4b367ccc014sm278654b6e.6.2026.08.25.12.34.08
  for <u-boot@lists.u-boot-project.org>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 12:34:07 -0700 (PDT)
+ Tue, 25 Aug 2026 12:34:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.u-boot-project.org
-Subject: [PATCH] cmd: CMD_PCI depends on PCI
-Date: Tue, 25 Aug 2026 13:34:05 -0600
-Message-ID: <20260825193406.2347139-1-trini@konsulko.com>
+Subject: [PATCH] CI: Sage: Enable CMD_PCI on Raspberry Pi 3 builds
+Date: Tue, 25 Aug 2026 13:34:07 -0600
+Message-ID: <20260825193407.2347155-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -118,27 +118,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The "pci" command depends on PCI being enabled, both in terms of how
-it's gated in cmd/Makefile and the command implementation itself.
-Express this dependency in Kconfig.
+The Raspberry Pi 3 platforms will be tested on all of rpi_3, rpi_3_32b
+and rpi_arm64 build configurations. In the case of rpi_arm64, the
+default environment includes calling the "pci" command in the preboot
+command, to enumerate USB. The problem here is that if we boot in to
+rpi_arm64 and we run a saveenv then later we will run the tests on rpi_3
+and rpi_3_32b. They do not have the PCI command and so the test harness
+marks the platform as failing. It is harmless to call the command (as
+shown by rpi_arm64 doing it safely), so enable it in CI, to cover this
+case.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ .gitlab-ci-sage-lab.yml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 4aa02dc809ad..fc121c7c2968 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1696,6 +1696,7 @@ config CMD_PART_DUPCHECK
+diff --git a/.gitlab-ci-sage-lab.yml b/.gitlab-ci-sage-lab.yml
+index 9e1c2378c6ef..4c5a4062b99d 100644
+--- a/.gitlab-ci-sage-lab.yml
++++ b/.gitlab-ci-sage-lab.yml
+@@ -186,7 +186,7 @@ Raspberry Pi 3:
+     LABGRID_EXPORTER: "sage-exporter-rpi3-1"
+     LG_PLACE: "rpi3-1"
+     TEST_PY_BD: "rpi_3"
+-    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
++    OVERRIDE: "-a PCI -a CMD_PCI -a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
  
- config CMD_PCI
- 	bool "pci - Access PCI devices"
-+	depends on PCI
- 	help
- 	  Provide access to PCI (Peripheral Interconnect Bus), a type of bus
- 	  used on some devices to allow the CPU to communicate with its
+ Raspberry Pi 3 (rpi_arm64):
+   <<: *sage_lab_dfn
+@@ -206,7 +206,7 @@ Raspberry Pi 3 (rpi_3_32b):
+     LABGRID_EXPORTER: "sage-exporter-rpi3-1"
+     LG_PLACE: "rpi3-1"
+     TEST_PY_BD: "rpi_3_32b"
+-    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
++    OVERRIDE: "-a PCI -a CMD_PCI -a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
+ 
+ Raspberry Pi 3 (rpi_3_32b, lwIP):
+   <<: *sage_lab_dfn
+@@ -215,4 +215,4 @@ Raspberry Pi 3 (rpi_3_32b, lwIP):
+     LABGRID_EXPORTER: "sage-exporter-rpi3-1"
+     LG_PLACE: "rpi3-1"
+     TEST_PY_BD: "rpi_3_32b"
+-    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
++    OVERRIDE: "-a PCI -a CMD_PCI -a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
 -- 
 2.43.0
 
