@@ -4,117 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB6DC61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 18:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAD6C61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 18:16:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BACE760604;
-	Tue, 25 Aug 2026 18:11:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C357760706;
+	Tue, 25 Aug 2026 18:16:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id msWpZXkJ4QrT; Tue, 25 Aug 2026 18:11:53 +0000 (UTC)
+ id eNSAu5hrF-nc; Tue, 25 Aug 2026 18:16:36 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787681513;
-	bh=dTjzCboJdfN/DtKVenuwRv/zyDgdrowyGoSuL2+3u0Q=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=AFYgK6RGZhevQst7mz+ClbYq/SG7MAvAfjJnkDupxsEE6V/Pno6o/sQBaDSrUdCs1
-	 xuBhm0tu2NHC69oGkCBIYKVDx7oKacOLLpyf9Hhg8i8HHb/DwJdbVrKFWvEyNS6+vf
-	 j6fkz5nwuzXp0kGtgvJk5zZBD0fXJRcUYEKk1zCaCtsxbfWRFj3kCtiIhtEXlndLlC
-	 l0Xj7F0nIkPJmphtu3HvCVblP90796qwogv9wIEJt1ux5MvADtDQpm0O86uMDE8QZW
-	 I35BujQaO+lp21mi9kvokXZ4ZXgNnQtIQQEJsDCMsvfn0zBsDyvGosORVNnklmaZZo
-	 ITqe+Lvp7ZxrQ==
+	d=lists.u-boot-project.org; s=default; t=1787681796;
+	bh=7T6e1E2PU/XDLuK2EMaC/RR7tSIAVZie1KvJVBW9Y2Y=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JAU/6ndq6j439XN/cqHK0x+5JLdOlWCgEJO0GmUN4j865jO+WxOZHi6LUPWpcqGu5
+	 hNrPYDtT7kgipGVAgHPI4gBsEa6F0+fNe0WFZwgcyKMb0p1T2M9WdE1MDT8mBRVAa+
+	 P/PUdU5a+EE/Plzzk/PHnriYQSNcPY6g0HiMZBx5MmGf9EBrNHjhP/xkivpCh1c1m3
+	 vBLbG0lbkxR4STxeqlfY4YU70IJazfOjhgJeY9sR2gGyLuE73P08QEgo1Gn84P2dWf
+	 mInxPIL8MscJFxicEuLh4SyOP6YTQIjAfVakcClFRc66zKIr0d0xV4MxjehD6d6rsG
+	 N0YAQ4W5PSrgw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EFE2D606E1;
-	Tue, 25 Aug 2026 18:11:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A1E38606F6;
+	Tue, 25 Aug 2026 18:16:36 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id BF3F4118
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:11:51 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A63D105
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:16:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B0EB6606E1
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:11:51 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 201CD606F6
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:16:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YJQTHonst6bQ for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 18:11:51 +0000 (UTC)
+ id A7-2CgMwbv7Q for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 18:16:35 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
- envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
+ client-ip=2607:f8b0:4864:20::62e; helo=mail-pl1-x62e.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=r9KzSzFL
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 047E660604
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:11:48 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7e6b5737bb2so142268a34.1
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 11:11:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=Rujo0Ezh
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 20234606E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:16:34 +0000 (UTC)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2ceaf8a1265so2125225ad.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 11:16:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787681794; cv=none;
+ d=google.com; s=arc-20260327;
+ b=soFzRVb0ZNqFCt4MHngxuh2pR53RBhSnZzU898FLIc2a3Gk2wQ+Sxk1o2Y/GVOqhSt
+ FDL5i0hPcGPbuHIrACMlNyCMFbf96X3Xq1+Ike10Rd9WdWCECE+Q9vnbP/Wj8F8Y5PLk
+ Hz7aw5oB/WRqQdNKLH7HgLBJVHf7FO7q4ZLkazgSxBBiY2e+VKqNSnTVBnR2cUVKHuXv
+ S/SJ25FRHGKGc4XmrHph+3S3qSNddPePhOsCC9K+NfUQ57boGPcbATBG927uPhDnEkuy
+ BvPgZngfiY2XP5+Io/2fs5u1pnS+sbEXgVcJAfvAy6h+kPU0r00tucSq9RJr6nv2BIZT
+ jvWg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=7T6e1E2PU/XDLuK2EMaC/RR7tSIAVZie1KvJVBW9Y2Y=;
+ fh=xfnv/Ak23Gf9bCZfR9PubHxWHEbUheBWJDcNj5Q3J7Y=;
+ b=VmWithGxLsS6Y5yAEgjEc+9kceOqaldySER233SqCApmrMM5jg4+HauFl2sCcEb+le
+ RkZ8G0AsYdZ1YUo5oROm4Mo/eaPSGAhw53pEs0KY3uWVBBHmcld7HJFYYyF+v2SXDVBE
+ +2dzEHAzFuw7RR96L21SoXa553+AaTS6c/tz9x/AQR2FtMYgsaamqpEL1O3ELNn30+VT
+ SfQ0kl0M652MZj38t+63UIJDxMn6E3CXhmqKDSr+TGE3vinfaLM+jUXl16VpcGZA/xZW
+ XR2inYDjUVCEmnlbZ9FqB5tZfFEjxR2jRtgp3bgO/CHPDAJO6eZCB3F5flpQjNMiyZHr
+ j+GQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787681507; x=1788286307;
+ d=chromium.org; s=google; t=1787681794; x=1788286594;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=dTjzCboJdfN/DtKVenuwRv/zyDgdrowyGoSuL2+3u0Q=;
- b=r9KzSzFLT0D8OAydqPlKjH5S1BaawzIVZt3ilDniy8gKiPlzt3jwU9Sl4C808HOyuG
- B852Fs+LbFOJMFmR+p8NjPvK4+wiufvb80AFGLcZXz/bAObLxHt8bJArUjlVNnKe16n6
- O9ns8m2hYutJ0ahlClTC18UU5aZ0arEHHLLGVFIVXDEKjZimm6iJzPSmvDSjv52uoHKi
- Vqv1l9t8T3XsTtKp1J370KUVzcAktdyW7Q6Uz6/cJfOPfOGj56cL5zU+XVe1cFme6v+7
- 6ecn7qVPrkULfa6+HOsJGuhpjFNEzSDPGw87D6ZiJbjuftVM58x+/EwZyTZDGV9d/5jG
- 8shA==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=7T6e1E2PU/XDLuK2EMaC/RR7tSIAVZie1KvJVBW9Y2Y=;
+ b=Rujo0EzhDpLt3t1NqJD2znnq8BrVNIQAgRkM2yRLxCn1pkKJqIGy6IRJDIlzQxuiY2
+ /jn+H2VVzC7AijjUFp66YQ5wZHyE6OkqPKvw1BL0wMDdGkmufK73nBHGQ4ZfNiWcXyRs
+ VKiTkd2CXD74d17Hb5846ApceEhHj55OxVO3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787681507; x=1788286307;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=dTjzCboJdfN/DtKVenuwRv/zyDgdrowyGoSuL2+3u0Q=;
- b=tHKJR350Qznoyon+7c5lBPJ/S6SFPiGDl+qWRsn4VRltu3uE7WHiMKoIIa0l2L8PEv
- 4RTCmYFsfCs4hlAMQIOfWMOMvQG0b4sOikhNt7YHOucg4HKU0CZ4ybjhhvGQswRUVHNT
- KIOxVjYrfzNpcUI2F5nMJ8uFl42bJ1m1dED5+Kg5HsRl4Iehxl6xnfQ4Fooe9sT1c4lE
- dyoSrT377Q4hd5xkKV8DT2afQrNo0GxZJdy2dV+BLnIfzcaUNMCg77iMoUV4G1bFChk5
- AVvHt25INiwpczhCTtGcu8LQeOu94ABDv01pHZcQhfeLaPuAXADE92Q4gVbSKkC9Is3G
- OBOA==
-X-Gm-Message-State: AFuF++ngPnovz9SWMz/ImweYL9qEkVFFRB5AW13cicZ2zZ6esZFpnnIm
- 6/01QuaxiFXO3em8kDoANai9tWBo4joRpwCW14rALhNIXqT0xr9gLJrjX2l+eiDz
-X-Gm-Gg: AR+sD11h7n3vNpcVnIluplfusoxk7hxVjIxyqJ/6j0DTuGmkJPr0sWBdeFoHEzxS3tk
- 5V2hudYdv2p0FVTek7T5o+xxrxHMW82FncjyTMr0SpdyUXE8HKoCKFTQO86oDwRoZp4kXMsH2uV
- h9o/6NdV7MiDq8B247sxL5BwB7F5vNEw8XR5h1383NkudlrgMIQCz2LvIZROqpVlzXUP25lyyIT
- 9RML7oEbEWa4FIpyIGGGoNMG+O51Qc2bwGUI1epvw3tYPJcmO/XnsI/ELV/hZTUbdyLHJ6cn5nj
- CfVq9DLRghsyyeChQAgtL1lqM1s0Ehwz3n55rTOLSWkPQe7VPepClHeh3jB9wy1iHzfjedpLzQR
- Cof7UIKLNQxE3jr0iw1ju9dbPGLJf8yhLaf4j7KJjhbECnZOIdmbB6zBBF6sChOQ0m2yBHFBQgc
- Qk6uQ5XOTIlcEdr0JAvff0X46OznAKiuA/1B373fojuSCzNkCBix8iXqLDjK0AuooHqa47fDk4Y
- 4GcLqNYjR2k6wjmT0Tiar6s8C0fm2QRmtEOiyACR8UxV2X/jEbnG+VMfqhwOXzNThlYsf98Lh8E
- +BJ2rjixUd4MbN9Bng/4W8vc0YkGC9PjPHvPD4Ji82DLs/x1krBYDUOBukWd/wNiQXXjyNUaYlo
- SkMpSdYxr8tqJUQ==
-X-Received: by 2002:a05:6830:7316:b0:7e9:d3aa:e391 with SMTP id
- 46e09a7af769-7f4c4c8368cmr654261a34.6.1787681507471; 
- Tue, 25 Aug 2026 11:11:47 -0700 (PDT)
-Received: from [127.0.1.1] (71-218-10-81.hlrn.qwest.net. [71.218.10.81])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4c426cb7csm216916a34.11.2026.08.25.11.11.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 11:11:47 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 25 Aug 2026 12:11:38 -0600
-Subject: [PATCH] cmd: ethsw: support lwIP
+ d=1e100.net; s=20251104; t=1787681794; x=1788286594;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=7T6e1E2PU/XDLuK2EMaC/RR7tSIAVZie1KvJVBW9Y2Y=;
+ b=dMiLpyDggPUUlfKR3u976/AgOI3643ItDGyvPhsxjeX3w9jdwxABOWwMl84EenmiCD
+ 0WXUaPmM0Pw0tPd6rvns4JPW9miP3XiUPbAWRTxYSpRbkIp/fbyuTioDAnQLHPZ6HoDf
+ d7+5a18aB/1MbQMP3S4npwYDp/egO0RHqgHoWAcfqzue3b2p4kkLbs4PKbIENi19nnY5
+ 65zGceK5bwixzuODwmbm3OW7GGHBkB1oR3bcjRJFUPtOwwexkYVfBMJUNG2zER2Xh5gi
+ rJbH19x5Q6t9ws0rbuN/zXLA8WRK/ltZ3ExsMaQtoXUAllrqbBAo1k7YiKB+ZCoAC5wT
+ QeqQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpdWjwSJr3fC8uoqeYIRE52MF/F+BXFCK8zR7hXWwlTypPodq67MJtxFm3Y2dGQ0v2tgAtF2BI=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++m06mw7Wb1dQ9e7Q7V8Pw6WeCpCmKRfUmKrnqiK6PKcFvb0a8Sx
+ obno+hk4FsF6QrpuqiVBQKSdu5obDNj6yGMgAsGicRUU571LKzecR2hadN8yol3DtmaqqD9LcOO
+ IQByptD9qs27CfqEzo/O6qBFsW6Smh8eqyLEX6noK
+X-Gm-Gg: AR+sD12DcpiCA+I66/f1c/iEc4nu9VAIdOnPstpJimoV8UrXLgrPYiK86ATS3aRUFCV
+ UYbMiOz7/HpZy1UQT1hNzGUWxqbSGFdUJMh7kyJGBA518GXRupieLL6J0Nh8I/G3vd701Ajr2qK
+ rTilh52fUhpbA0AJlTmZGlN1ZzIhPUzxxIHXXJ0v9Ay7P1JUUKq937klBLDLrFHT+HYFLeAj7ce
+ Rm2AJv4uurNMKLEAk2Xy3tLe8Z6IPPqX8QlRXpuqFPP1qX4uFTGnKMerWC+NNPA+LbBWJulrQZJ
+ SV0JWxL3Vw03HWodLRspoLAJ6M3euz4Hhtn7Vdu0FXI=
+X-Received: by 2002:a17:902:f786:b0:2c9:bf82:dd11 with SMTP id
+ d9443c01a7336-2d707a70d9fmr2800165ad.7.1787681793662; Tue, 25 Aug 2026
+ 11:16:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-submit-lwip-ethsw-v1-v1-1-fbe6142e5d92@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMyw7CIBBFf6WZtRMpvlp/xbgAHGWMRcLQ1qTpv
- wu6PDf3nAWEEpPAuVkg0cTC71Cg3TTgvAkPQr4VBq30UXX6gDLagTO+Zo5I2cuMU4v21CutO72
- jfg9FjYnu/PllL9c/F+9JLtdWfVgjhDaZ4Hydxig5kRm2g+EA6/oFQ7W3n5gAAAA=
-X-Change-ID: 20260825-submit-lwip-ethsw-v1-b79022823e94
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Johan Jonker <jbx6244@gmail.com>, 
- James Hilliard <james.hilliard1@gmail.com>
-X-Mailer: b4 0.15.2
+References: <20260820102523.1076815-1-mehmet.fide@gmail.com>
+ <20260820102523.1076815-2-mehmet.fide@gmail.com>
+In-Reply-To: <20260820102523.1076815-2-mehmet.fide@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 25 Aug 2026 12:16:18 -0600
+X-Gm-Features: AcwNN1VrdN2ihfq41mu9LNU82eqW_4lhUsxC6ECReaV3lOhbAot5P9U6wigcUec
+Message-ID: <CAFLszTgoFUjBBPEx8hzYop-2MyJ9O9b=2t8jRQ=4_9AaoCkaCA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] dm: core: read the device tree into plat data
+ after pinctrl
+To: mehmet.fide@gmail.com
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
+ Mehmet Fide <mehmet.fide@screeningeagle.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,58 +138,51 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The ethsw command controls Ethernet switch drivers through the switch
-API and does not use the network protocol stack. Its Kconfig entry is
-inside the NET_LEGACY block, preventing the command from being enabled
-with lwIP.
+Hi Mehmet,
 
-Move CMD_ETHSW outside the legacy-only block.
+On 2026-08-20T10:25:21, Mehmet Fide <mehmet.fide@gmail.com> wrote:
+> dm: core: read the device tree into plat data after pinctrl
+>
+> device_probe() calls device_of_to_plat() before it applies the "default"
+> pinctrl state of the device, so a driver that acquires resources there
+> sees them undone by the pinctrl state that follows.
+>
+> It has not always been that way. When the pinctrl uclass arrived in
+> commit d90a5a30dec1 ("pinctrl: add pin control uclass support") the
+> state was selected before ->ofdata_to_platdata() was called, and it
+> stayed that way for four years. Commit 29f7d05a347a ("dm: core: Move
+> ofdata_to_platdata() call earlier") then moved the call up so that the
+> platform data would be read before the device is probed, which is
+> reasonable in itself, but it also moved it above the pinctrl state,
+> which nothing asked for.
+>
+> GPIOs are where this hurts. On most SoCs the direction of a pin lives in
+> the GPIO block, so a pinctrl state cannot disturb it, but on Vybrid the
+> output buffer enable is a bit of the pad register that pinctrl writes as
+> well. A fixed regulator asks for its enable GPIO in of_to_plat(), so the
+> pin is configured as an output and the pinctrl state of the same device
+> then turns it back into an input. The USB host VBUS regulator of a
+> Colibri VF50 is one of those: its pad reads 0x22ed once the regulator
+> has been probed, the value from the device tree, output buffer disabled,
+> and no USB device is ever powered.
+>
+> Move the call back below the pinctrl step. That is also the order Linux
+> uses, and the order the board code of these boards used before the
+> driver model: set the pin muxing up first, then take the pin. The
+> pinctrl step itself cannot move up instead, because it relies on
+> DM_FLAG_ACTIVATED having been set to break the recursion described above
+> it.
+>
+> Nothing between the two positions needs plat data: the parent probe, the
+> power domain and the pinctrl call all work off the device tree.
+> [...]
+>
+> drivers/core/device.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- cmd/Kconfig | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+Please check my comments on v1 when patchwork is back up:
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index ff90a87024c..2867e65f605 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2195,14 +2195,6 @@ config IPV6_ROUTER_DISCOVERY
- 	  Will automatically perform router solicitation on first IPv6
- 	  network operation
- 
--config CMD_ETHSW
--	bool "ethsw"
--	help
--	  Allow control of L2 Ethernet switch commands. These are supported
--	  by the vsc9953 Ethernet driver at present. Sub-commands allow
--	  operations such as enabling / disabling a port and
--	  viewing/maintaining the filtering database (FDB)
--
- config CMD_WOL
- 	bool "wol"
- 	help
-@@ -2223,6 +2215,14 @@ config CMD_DNS
- 	help
- 	  Lookup the IP of a hostname
- 
-+config CMD_ETHSW
-+	bool "ethsw"
-+	help
-+	  Allow control of L2 Ethernet switch commands. These are supported
-+	  by the vsc9953 Ethernet driver at present. Sub-commands allow
-+	  operations such as enabling / disabling a port and
-+	  viewing/maintaining the filtering database (FDB)
-+
- config CMD_MII
- 	bool "mii"
- 	imply CMD_MDIO
+https://patchwork.ozlabs.org/project/uboot/patch/20260819143543.427396-2-mehmet.fide@gmail.com/
 
----
-base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
-change-id: 20260825-submit-lwip-ethsw-v1-b79022823e94
-
-Best regards,
---  
-James Hilliard <james.hilliard1@gmail.com>
-
+Regards,
+Simon
