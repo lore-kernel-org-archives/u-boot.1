@@ -4,120 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405A0C61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 18:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24565C61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 19:03:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C960260604;
-	Tue, 25 Aug 2026 18:59:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B5F2060703;
+	Tue, 25 Aug 2026 19:03:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2e4qRC5vVOVO; Tue, 25 Aug 2026 18:59:57 +0000 (UTC)
+ id aTEU8RE_CsdE; Tue, 25 Aug 2026 19:03:29 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787684397;
-	bh=YGTaBNrnrfJIE9Fd7c/Xp861ayBq8P1thwGVApYmcS0=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=vrGUKlgcjJ8zLR3mrfV9GMkA4IpRWOiG6H053uAFW7johlXzS7jGvaIlz18HWjY2y
-	 pbw070WXQxKFcpM2ksxDvCfQx09jq7zm0sumTk4uHYeDxuctaQ3fOMYQL+7REN1lnC
-	 oxJc2Miw8vHR0+NNQ3fjLOlXqOTB3CVjyEbzjeY6UqbvbWMcNIBxeTfl5DHutsigub
-	 29jMZjKomO9H7brnRa67tYCKdS4EO3YcYmJYYBlFyF01/7DTbeEG85UzfZorVhN9CP
-	 m6kFgE7n2BTrf7rS6cf5Ngs3sjZqoOzrql0OjTi7SlsUVnJvngXB9qHGe7Z1oCu5q7
-	 UqaZsyPfOgmCg==
+	d=lists.u-boot-project.org; s=default; t=1787684609;
+	bh=iO4Adgl+cZbj+eYwDsqN2Tc3DdAEpMZzcycpk3qOKDw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ks/pcUnL8ODRQx1XBegX1Xolm+kEpdmGSmS6mf/SH2HvCASvWTxOKmcLAFzqAqt8T
+	 B6dMqaCCyNMBH6plTkulr9XSpTe0R+nttHvRe8Xt8xgbTpVoQfwHkmAagKQXQBiHFl
+	 1hqN7BV0Ps807U90IXqoq6K/697q1JjUCdDLou2LZIViGW2O/b0iJpgsf0hZ00mYtG
+	 oH+gzJhN2f8crizCmFAuVVQYN1BoyNGUc0dWEPYvLVm3V2pHA6AYihe8HstJZD3+mb
+	 zmaTi1BxJEmNWfEXx9Hs/3hjHdCEYMdbb3ypwPWVy/s2sI09MkMZbcYpot5QYLbHan
+	 /nWkJWIfKiGDA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0324A606E1;
-	Tue, 25 Aug 2026 18:59:57 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D59A43C3
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:59:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 24AE3606E1;
+	Tue, 25 Aug 2026 19:03:29 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B3CC839E
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:03:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C73D5606E1
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:59:55 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A5BA840085
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:03:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5zWrEKOpKzD6 for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 18:59:55 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2c; helo=mail-oa1-x2c.google.com;
- envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=g9+BFvxE
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D678960604
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:59:54 +0000 (UTC)
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-43b7e186a0cso127650fac.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 11:59:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787684393; x=1788289193;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=YGTaBNrnrfJIE9Fd7c/Xp861ayBq8P1thwGVApYmcS0=;
- b=g9+BFvxEzQ6BgdH/dXRqosEEPMDfTxjzFJQ1FTaFO9rVCTeTj0dlwV9aYPP9gLcqn1
- lPBPYDGQLYxPm2AC4pttl97BjWo7Vdem4uQNIFgRDQ2HWeO62gI2PBeSZo0h5U+r9YvK
- 2JlvS6i1fSG7QyibSTCq5+vUQX0D7idRTsTIw9e2D26OG/uavBj4hwQ2aqu/VG2Q9jqQ
- knir0mXIpsO8NfO8+M4Rt/UKkxpgobLXmWl2TLnwH84wU8TIo691HSikyKkWOnz4psmq
- 1SS/9RYzJT/fwUSk6ZN9g8aDwQu3zI1rwhEBDQGSJIS4dYUjStoab+UP1jL8Gm5YxcwA
- jyXA==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ky60OE69NGsJ for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 19:03:27 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=k2ljrF/p
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 260DB40068
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:03:26 +0000 (UTC)
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 77A153F8B8
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:03:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1787684603;
+ bh=iO4Adgl+cZbj+eYwDsqN2Tc3DdAEpMZzcycpk3qOKDw=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=k2ljrF/piX5sOsf8xgxl8TjFITfjHK1vEdRiVjeHuqmh60UH3XluRFe/dGJE/BOD/
+ b1+lVfimm+HXf9Mgy54ffjIMzDC85A8V/5Ac91BTgL6zI+xX9QUcT/J1A6MziZ6sCp
+ Glz6f/zUrzMGLQSaU0jbYXr5ht5zO5FYBxjpkw6L12rzEvPyLtXglrvb3/VWog/O7M
+ R/S1WRzbpx+J05motyh9b+t+SDF4MEUU99sMtsF9sp9iXxmLlUdJH855AgQdHy0K5x
+ LvhIj/mEDzBGd6L0/a6PwUd6aK17lydfBrWiXHMRSawz5i2IcjxQxYz2wjKWL871T9
+ 8wfUEOC59H4JCen8r7UxpZg59hIN2tUt8hXyrJ9VdAwcxpZbMohhjK6piUlumCCAOB
+ aII7CPrsxPVqpId3kc9ljhKEDA2WgsT+E1IvtgxADV3MSQr3vaSkowto78Jf2M2Fr4
+ W3xksujrQnzC5g7YqR3l8ZXgoTmbQE5pxTwmuYfcEQsKOrQ7xhf1hzOD6J/J8LynoZ
+ 2zaQcC8JXs4G3Gd/hkdskGNZgfjxx1Qa2Rr+Em+XZSOriPZPVzX4/xTS4BOMAxLmyx
+ cVqOu71DgNTuA+QZUUScOxctU9tcJ04k+FLBG7x1IArmbj3wDVkVhOur/PyuQE+Az+
+ MBvFn0JMMzDrvoTSqL6FgVPU=
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-c15cec1ccb6so1367766b.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:03:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787684393; x=1788289193;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=YGTaBNrnrfJIE9Fd7c/Xp861ayBq8P1thwGVApYmcS0=;
- b=df4NoLfTJgu3QuY1R1xho+ricgEguVyvnJjEny2y9d9brSgYh//YwWofCuGDcdOLfa
- C2t3yMyPD06Y2FtGTD8CdDTDRuGPQULUNrYngbGIfP3E2lFscm5Usnp8kXssqgzxxpKw
- rn/EWHohc7PKpRlodZ8zOs+3TDbt/G4JnkoHCcWH8UMGl50SvnsHqIWi6kshUH3oh9gI
- nYhYUpnY2QsJo8gr7IkLX6Zr8q9tl9r3wypRTqfQPf1dAQTASCL3/YRy+cIw/0xI55Uz
- GEHqyQRfJoIjZnmuecAecmkvcSdKXHuazT0k3/6LXEtBiBxpc2BZ1lEk29qheGXTexvK
- yQzg==
-X-Gm-Message-State: AFuF++l3wueyWwSnJJLxOC6mv6EleGY+//oDyuvOgBUKM5XPMtltgfE5
- sKZGjEBKUNG5s1dFu4RSiUBgRacGG/+XiyqEaK9f/ouYrMnSz9IYB1wf
-X-Gm-Gg: AR+sD12FbCPhbsPGTLUN0Kkas2zIB9QKXumzAuN6R6DijcD9YOxktUYFYt7XCxONxvJ
- bfokQbDHUcs+uUY4vPsdDDXMtZrflS7XojNWwt+6VSqs4mDboTK/kF1Me3bozeAb2XFAHlrS2P2
- ev0tY0x1YrRSZjQMIt2K7CUgmPg4d/CGL5bz8QzauM8L0peVejzTmnV4sAez2I5yWFOuGFYxUmi
- 5FASN30M1rEQV76zm/OEWNu7nirVUfA7Ad6DDevdHy8UKMninDFRmbSkOVMHL9/F2TPGZTnxjCq
- 4iqz7dz/wA5J3hTbppBzweEUcdR7bCowxjiFNcZ5Tb0V4loCfVeR6ng6fEKLbZQipNOFdRN5CBb
- o0dNRU50XYTtv5jT53mcv9cjmcdpxFG5FqhVU89lvxwIrjNrLG8Sw3HYsZPlIR/01pM5GJ5Vvnm
- 2Pyzt8FB99lJduTk6rDgDywCgK/O6cYO45Vq9FI3Mky4FKuuX2sA+uY0UppPrpeNMN63WquZLEC
- duBMHv8tQAs71R0DiurjTPJ2jWORgqBOt44KarMPem3bhA3dFPFdRzzC+gO9lQwP1g6lEgoSdCt
- jCPdODQ8uDbf166gBGZZIRGp7Eg7JNU7Q24hRtgAgvik/ewZPGnK3HrSNDtHTuLC1XPAq1eeDnz
- CJLrA326bmpdL
-X-Received: by 2002:a05:6808:144f:b0:4b3:29e5:5512 with SMTP id
- 5614622812f47-4b366b177b3mr1469285b6e.16.1787684393373; 
- Tue, 25 Aug 2026 11:59:53 -0700 (PDT)
-Received: from [127.0.1.1] (71-218-10-81.hlrn.qwest.net. [71.218.10.81])
+ d=1e100.net; s=20251104; t=1787684603; x=1788289403;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=iO4Adgl+cZbj+eYwDsqN2Tc3DdAEpMZzcycpk3qOKDw=;
+ b=UNnKnKjqeTMKQHxt3K/uYHW3hSuvo7MbUussnydCeK21kGJF0Cq5AmfBc9F6TS1LdS
+ EaJbf1nJwZ2sE8/BVygt0rziu+9RW3ac/4WzODTNSr0wxhxEIOICca2YRHRXK+0f7g6m
+ aZxG2Rt5bcQ7dllLYY57o+InKcf0NYEy82vH13hIuaLXhmHSsb9vIMFUnjKB+aY/Jp/j
+ w84tXk7M9IsFxMaiKxAQfQmA7gkmCr/Hs3avE03EQQVEpIw/npLUjgabW0VnhDqufSVJ
+ 4FOMZ5KflCSdoaF7lGuV/2dZdnPxdDNDBQyCNwBcmMwHXpzMsSLPriCbRjP75Pc9OEGv
+ 7ucg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrGDLP5BMHNORFZNTEuXbOnrGQIBxC89KR5K2hT2hOCcpsf68bfm/oVpqJzS9UarVvnDgDDCBU=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nP4CaFaL2g8PLceOGIw+geba4bGO49eX1wi9lcB9R/DegsdDZ1
+ 2YVszMPAw5fKRfid6n8XkfToDNcrTn2cEmVaebG+yvCOu50bdDyVm2dXpEed7bN+a3jXmqWqkTW
+ H1LZMpcoy9SvtgEqT3bfB8iRAQ8VS8Yq2Z81S1hdXsldOHBYrdGcBY4P+HsKFWbBhjDQ1lU52Sv
+ BVdyHJgbevtA==
+X-Gm-Gg: AR+sD13IPkiSyffeM/U+JWIxxrWtLi1ua+xxZ58Xvo/aHrP7EUENx/q3F8U7xVdZHMU
+ InBUZ3x/2K+OZlbU4QKVzZQ8G4bD7vwbF7tb6Od86B7JRQBPFqgGVoaB6paEFJ8A1hlM1GBKgGN
+ xk/cbZsPGX0o4Z0OIUvLGOq/4FETxQHzBtveTPhuLfrxCVmXZJHUSalENZ72PoYmuF7349DjVlH
+ 7Lb2O0OvTp7l4NjiV3fNcLjiIMjsZuaey6e9COdgYy0BrIL7uarvaSDjzlxx13K/le8gmkIkVoS
+ 095VRQspP8xk6xKaAwlvEgw8aMPRRHp8F09lP7OicNVvpTGIhdWB4escmvzA5TyfT2vBsSwGO5/
+ naQr0zO/w5V1DYwhMFwKgjPkpDa7B4NBbOuoo6N+uZqkAKHO+AEZBAIARn3NS+b6KFyrtlWgmd9
+ 7Qt8+q8EDBPRn4lcbe+owb
+X-Received: by 2002:a17:907:e915:b0:c21:6f8c:2335 with SMTP id
+ a640c23a62f3a-c250c391e16mr83719466b.16.1787684602335; 
+ Tue, 25 Aug 2026 12:03:22 -0700 (PDT)
+X-Received: by 2002:a17:907:e915:b0:c21:6f8c:2335 with SMTP id
+ a640c23a62f3a-c250c391e16mr83711666b.16.1787684601886; 
+ Tue, 25 Aug 2026 12:03:21 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:667:9a84:7c86:797a:e54:8957?
+ ([2a02:3035:667:9a84:7c86:797a:e54:8957])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b367eb7eafsm202648b6e.10.2026.08.25.11.59.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 11:59:52 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 25 Aug 2026 12:59:50 -0600
-Subject: [PATCH] net: lwip: support syslog
+ a640c23a62f3a-c250a9b10cesm89250866b.48.2026.08.25.12.03.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Aug 2026 12:03:21 -0700 (PDT)
+Message-ID: <e71a191a-1388-461d-bc87-9131e1a4879f@canonical.com>
+Date: Tue, 25 Aug 2026 21:03:18 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] disk: part_efi: Add missing endianness conversions
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>,
+ Javier Martinez Canillas <javierm@redhat.com>, Simon Glass
+ <sjg@chromium.org>, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>,
+ u-boot@lists.u-boot-project.org,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+ <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260731-gpt-4k-v1-2-a3f1f16b53ae@flipper.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-lwip-syslog-v1-v1-1-53210f44fd76@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMQQ6CMBBFr0Jm7USoKTFexbiY1hHGQGk6gBrC3
- W11+X7+exsoJ2GFS7VB4lVUppChOVTgewodo9wzg6lNW5+NxeElEfWjw9Th2iDZ1lh2ZJhOkKW
- Y+CHvX/B6+7Mu7sl+LpXycKSMLlHwfZmWqHNiGo8jSYB9/wLllwhxkgAAAA==
-X-Change-ID: 20260825-lwip-syslog-v1-a5625eba2ea3
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peter Robinson <pbrobinson@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>, 
- James Hilliard <james.hilliard1@gmail.com>
-X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,170 +155,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-LOG_SYSLOG depends on NET, but the raw Ethernet and UDP header
-builders it uses are only available with the legacy network stack. This
-makes LOG_SYSLOG fail to build with NET_LWIP.
+On 7/31/26 14:40, Alexey Charkov wrote:
+> Several GPT header fields are read without converting from
+> little-endian, which is wrong on big-endian hosts.
+> 
+> gpt_fill_pte() takes my_lba and partition_entry_lba raw when working out
+> the region a partition must not overlap, so on a big-endian host both
+> bounds are byte-swapped garbage and the overlap check does not do
+> anything useful.
+> 
+> gpt_verify_partitions() compares the loop counter against
+> num_partition_entries raw, so its "More partitions than allowed!" guard
+> never triggers.
+> 
+> It also swaps gpt_part_size, which is already in host order, having been
+> computed from two le64_to_cpu() results a few lines above. Drop the
+> conversion rather than adding one.
+> 
+> All of this is a no-op on little-endian targets.
+> 
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
 
-Provide lwIP implementations using the selected Ethernet device and its
-indexed IP address from the environment. Move the shared declarations to
-net-common.h and extend the syslog test to check the source MAC address
-and IPv4 header checksum.
+This change is not covered by the test in patch 6/6 as it runs only on 
+the sandbox.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- include/net-common.h   |  7 ++++++
- include/net-legacy.h   |  4 ----
- net/lwip/net-lwip.c    | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++
- test/log/syslog_test.c |  2 ++
- test/log/syslog_test.h |  4 ++--
- 5 files changed, 69 insertions(+), 6 deletions(-)
+Please, ensure that the GPT tests are also executed on a big-endian 
+systems, e.g malta64_defconfig which run in the CI via QEMU.
 
-diff --git a/include/net-common.h b/include/net-common.h
-index 0c260873c2c..3084a2b2a57 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -362,6 +362,13 @@ struct ethernet_hdr {
- /* Ethernet header size */
- #define ETHER_HDR_SIZE	(sizeof(struct ethernet_hdr))
- 
-+/* Set Ethernet header; returns the size of the header */
-+int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
-+
-+/* Set IPv4 and UDP headers */
-+void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
-+			int sport, int len);
-+
- /**
-  * net_random_ethaddr - Generate software assigned random Ethernet address
-  * @addr: Pointer to a six-byte array containing the Ethernet address
-diff --git a/include/net-legacy.h b/include/net-legacy.h
-index d3b122c9062..d7f55d34a30 100644
---- a/include/net-legacy.h
-+++ b/include/net-legacy.h
-@@ -344,15 +344,11 @@ int net_loop(enum proto_t);
- /* Get size of the ethernet header when we send */
- int net_eth_hdr_size(void);
- 
--/* Set ethernet header; returns the size of the header */
--int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
- int net_update_ether(struct ethernet_hdr *et, uchar *addr, uint prot);
- 
- /* Set IP header */
- void net_set_ip_header(uchar *pkt, struct in_addr dest, struct in_addr source,
- 		       u16 pkt_len, u8 proto);
--void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
--			int sport, int len);
- 
- /* Callbacks */
- rxhand_f *net_get_udp_handler(void);	/* Get UDP RX packet handler */
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 8f8f9d69020..4dd8f0d2ce7 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -159,6 +159,64 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
- 	return 0;
- }
- 
-+int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot)
-+{
-+	struct ethernet_hdr *et = (struct ethernet_hdr *)xet;
-+	const uchar *src = eth_get_ethaddr();
-+
-+	memcpy(et->et_dest, dest_ethaddr, ARP_HLEN);
-+	if (src)
-+		memcpy(et->et_src, src, ARP_HLEN);
-+	else
-+		memset(et->et_src, 0, ARP_HLEN);
-+	et->et_protlen = htons(prot);
-+
-+	return ETHER_HDR_SIZE;
-+}
-+
-+static void net_lwip_set_ip_header(uchar *pkt, struct in_addr dest,
-+				   struct in_addr source, u16 pkt_len,
-+				   u8 proto)
-+{
-+	static u16 ip_id;
-+	struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
-+
-+	ip->ip_hl_v = 0x45;
-+	ip->ip_tos = 0;
-+	ip->ip_len = htons(pkt_len);
-+	ip->ip_p = proto;
-+	ip->ip_id = htons(ip_id++);
-+	ip->ip_off = htons(IP_FLAGS_DFRAG);
-+	ip->ip_ttl = 255;
-+	ip->ip_sum = 0;
-+	memcpy(&ip->ip_src, &source, sizeof(source));
-+	memcpy(&ip->ip_dst, &dest, sizeof(dest));
-+	ip->ip_sum = compute_ip_checksum(ip, IP_HDR_SIZE);
-+}
-+
-+void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport, int sport,
-+			int len)
-+{
-+	struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
-+	struct in_addr source = {};
-+	ip4_addr_t addr, mask, gateway;
-+	struct udevice *dev = eth_get_dev();
-+	u16 pkt_len = IP_UDP_HDR_SIZE + len;
-+
-+	if (len & 1)
-+		pkt[IP_UDP_HDR_SIZE + len] = 0;
-+
-+	if (dev && !get_udev_ipv4_info(dev, &addr, &mask, &gateway))
-+		source.s_addr = addr.addr;
-+
-+	net_lwip_set_ip_header(pkt, dest, source, pkt_len, IPPROTO_UDP);
-+
-+	ip->udp_src = htons(sport);
-+	ip->udp_dst = htons(dport);
-+	ip->udp_len = htons(UDP_HDR_SIZE + len);
-+	ip->udp_xsum = 0;
-+}
-+
- /*
-  * Initialize DNS via env
-  */
-diff --git a/test/log/syslog_test.c b/test/log/syslog_test.c
-index b6c0631aaf6..f848506fb1c 100644
---- a/test/log/syslog_test.c
-+++ b/test/log/syslog_test.c
-@@ -34,11 +34,13 @@ int sb_log_tx_handler(struct udevice *dev, void *packet, unsigned int len)
- 
- 	/* Check Ethernet header */
- 	ut_asserteq_mem(&eth_hdr->et_dest, net_bcast_ethaddr, ARP_HLEN);
-+	ut_asserteq_mem(&eth_hdr->et_src, eth_get_ethaddr(), ARP_HLEN);
- 	ut_asserteq(ntohs(eth_hdr->et_protlen), PROT_IP);
- 
- 	/* Check IP header */
- 	buf += sizeof(struct ethernet_hdr);
- 	ip_udp_hdr = (struct ip_udp_hdr *)buf;
-+	ut_assert(ip_checksum_ok(ip_udp_hdr, IP_HDR_SIZE));
- 	ut_asserteq(ip_udp_hdr->ip_p, IPPROTO_UDP);
- 	ut_asserteq(ip_udp_hdr->ip_dst.s_addr, 0xffffffff);
- 	ut_asserteq(ntohs(ip_udp_hdr->udp_dst), 514);
-diff --git a/test/log/syslog_test.h b/test/log/syslog_test.h
-index 39cce4ed498..89c86541f5e 100644
---- a/test/log/syslog_test.h
-+++ b/test/log/syslog_test.h
-@@ -31,8 +31,8 @@ struct sb_log_env {
-  *
-  * The following checks are executed:
-  *
-- * * the Ethernet packet indicates a IP broadcast message
-- * * the IP header is for a local UDP broadcast message to port 514
-+ * * the Ethernet packet uses the selected interface and broadcast destination
-+ * * the IP header checksum is valid and describes a UDP broadcast to port 514
-  * * the UDP payload matches the expected string
-  *
-  * After testing the pointer to the expected string is set to NULL to signal
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
----
-base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
-change-id: 20260825-lwip-syslog-v1-a5625eba2ea3
-
-Best regards,
---  
-James Hilliard <james.hilliard1@gmail.com>
+> ---
+>   disk/part_efi.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> index af311867a285..062389c3af0c 100644
+> --- a/disk/part_efi.c
+> +++ b/disk/part_efi.c
+> @@ -462,10 +462,10 @@ int gpt_fill_pte(struct blk_desc *desc,
+>   	char *str_type_guid;
+>   	unsigned char *bin_type_guid;
+>   #endif
+> -	size_t hdr_start = gpt_h->my_lba;
+> +	size_t hdr_start = le64_to_cpu(gpt_h->my_lba);
+>   	size_t hdr_end = hdr_start + 1;
+>   
+> -	size_t pte_start = gpt_h->partition_entry_lba;
+> +	size_t pte_start = le64_to_cpu(gpt_h->partition_entry_lba);
+>   	size_t pte_end = pte_start + gpt_pte_blocks(desc, gpt_h);
+>   
+>   	for (i = 0; i < parts; i++) {
+> @@ -851,7 +851,7 @@ int gpt_verify_partitions(struct blk_desc *desc,
+>   	gpt_e = *gpt_pte;
+>   
+>   	for (i = 0; i < parts; i++) {
+> -		if (i == gpt_head->num_partition_entries) {
+> +		if (i == le32_to_cpu(gpt_head->num_partition_entries)) {
+>   			pr_err("More partitions than allowed!\n");
+>   			return -1;
+>   		}
+> @@ -877,7 +877,7 @@ int gpt_verify_partitions(struct blk_desc *desc,
+>   		      (unsigned long long)gpt_part_size,
+>   		      (unsigned long long)partitions[i].size);
+>   
+> -		if (le64_to_cpu(gpt_part_size) != partitions[i].size) {
+> +		if (gpt_part_size != partitions[i].size) {
+>   			/* We do not check the extend partition size */
+>   			if ((i == parts - 1) && (partitions[i].size == 0))
+>   				continue;
+> 
 
