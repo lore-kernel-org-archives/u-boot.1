@@ -1,124 +1,148 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FACC61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 20:14:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25938C61DBD
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 20:37:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B86276070D;
-	Tue, 25 Aug 2026 20:14:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 83E7280CCE;
+	Tue, 25 Aug 2026 20:37:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aPnROqfoVFWL; Tue, 25 Aug 2026 20:14:10 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Cw4s7Elj0sGa; Tue, 25 Aug 2026 20:37:01 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787688850;
-	bh=LIdid3uXewyEdnpw97D7Etxumhtle/W9Zxon1g2cRqo=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=GkDomvvdTORcYkNpRBpvZZ+HGLBxno66jzVbY+w4HoZHVNZYmV/Ym3Xf0lwuifTOm
-	 1oOuBIDSOGN+/z8h7OjVo1SBEvEKE4sz3NgKqnRtJyrGM2kxjI4cyHIZbfe1+gLJqV
-	 RAHC7g0YXEwl/yt5qZ2kGAeAnlQpf1c3ha8+aPh7Ky1O5HrwhehdaZ7duo6wSMcEJt
-	 HSbmNufgVWd82ARJn5FCZMdBlT6vGpYZ4cdpn513QfPMDVlAmLWDh+MTUbwZ16NIxR
-	 k/4foeQatGh64jk844+/UjvEaTiiKvMtfXnPnjWQLu/ogzitb/5kVGkI8JH3K+DU0n
-	 vPBtDgXyCmXPQ==
+	d=lists.u-boot-project.org; s=default; t=1787690221;
+	bh=Sq82lmDnaw+MtpVgu1/8NclJomd5s8f9f6m/P7g+g+o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=QtY64k//TEsiKxjogxfj8GW0gQQ+eNKi5KiQqDkuKd4G8j6xHRgbcAVP4wlPy4poH
+	 7s3q5RdVgLJ6tuDDsp2Zas8ImSScSJ52quY+ptIfc80EXSMTIO5O0WEXXtzvnnVVpi
+	 k4SZp8Q2I6pBYq2TPCkEO8TKZeGjpCCCEoTpGKZwXAKYtfzx7Jz0CxdJoX7r1qdq6q
+	 uMofpscMAh+GaU3hHKU34Nlgm4QuXPSXZD4nO7khTh55biiXpF6+weqxaYhoLqus/F
+	 OsncPI1Vrl4PQ1zby9Hofn8GnVrwHj+QxuOEC/c37Vq1vL7vI3A6Q/OshtBhVeFp6v
+	 Nw507SwpOv5Ng==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 852ED60728;
-	Tue, 25 Aug 2026 20:14:10 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id DAF2D334
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:14:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9C41780C9F;
+	Tue, 25 Aug 2026 20:37:01 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C3F4839E
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:37:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CCD2A4064C
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:14:08 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B5723400A4
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:37:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5pzRH6ByiMxX for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 20:14:08 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22a; helo=mail-oi1-x22a.google.com;
- envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=CYR1AKcj
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C0D0D4064E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:14:07 +0000 (UTC)
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-4b28d7c729fso229400b6e.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:14:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787688846; x=1788293646;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=LIdid3uXewyEdnpw97D7Etxumhtle/W9Zxon1g2cRqo=;
- b=CYR1AKcjhhWisijri55azuLS0DAD9sE97lrhIlnola6Drld+hNlIpRezEkvFo58nKR
- bSymCi6SIvfIH45DPXzhtib9s1gwmK8X835iQBhwSHLivI0Mrp+qqPlWJlPOhs/tI+KF
- Vp3afbIiijz4oItp1SoW9RX0nBir2AARPnIS1IhbWdcdxUaH6aA7EieitvtEgNlvnZmT
- w1AaD8rZe8jBPxQJfHkrHI+7XpUYUuLjAynk2gyUkU2Aw/s3KEh33/xu+97EBtdL0QqC
- HRV/TtGSI+HZXeQc4iB3375Oq9z4TRU1euO1JapT9BeEJ++gVSxQ7gIh7SgQXHox/uO6
- qxbg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bufD0kUDidMi for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 20:36:59 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=aJvCXDXu
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E98E840055
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:36:57 +0000 (UTC)
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6283D3FC11
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 20:36:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1787690215;
+ bh=Sq82lmDnaw+MtpVgu1/8NclJomd5s8f9f6m/P7g+g+o=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=aJvCXDXuzd5jWm4eWZQ+t6oH6MPuH++DMZji1hbi2i+7UT2T97mWaXSL1TtroAJkF
+ jmHGX7ueFdV81AE1UYBr7bJNogHPOrnORuUEtBSt+1BOHFTnq/gUIlU+LdQ0kddW+P
+ cpZuhaB4LQkCmS/w5GmCBLjQ5aZJmN5aNCAAdfEi+iCrc3h/BhCUwMrOypYQW+56Io
+ EjwaCDGGU5QV7/UL8uXBsRZkoy68M//H3euYEU4Cof6btQQ9K3zGWesiDqj2RE9Oo9
+ 6xRNKsiKpBSivHQ35YbUXe4XE8HMtBq8QjQ3SKpVbBJ5GhxqZnVGk3KEOJ5bsL8oir
+ rcoMeHV6ytYzkM2DU9EJuP8pVkludDNHH4TtuIxufIXr0TCUAlH7ntHhKudRmTRwXk
+ e+simwc8rI6vTVdQyUgL9iAgu9gQ4TmsvviZowENzI/3tsWy9FdySf43cEFIorCwsZ
+ zUii64CeVziwJozhr/yrGQjzijdFSu6wv0btnXFZgSJMu9q1rXX9m0f/mkZpIvLvzn
+ KxgK7q5c1PV/ctVkmsTQoZ0fQ1FXtjJkqVra8oFC//uUkIajiOMlT2GMjRQOvq8ZfX
+ k6Up/+lHHUF+Fuq1IiA6XKL2LFOEMYEOvzx8C8uZNj6icr0YgDKTxfVT/r1YXDrneZ
+ zgtpRNURkleg0Js1qdwuyEtk=
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-6a19d668ba3so268652a12.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:36:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787688846; x=1788293646;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=LIdid3uXewyEdnpw97D7Etxumhtle/W9Zxon1g2cRqo=;
- b=Oc3OSdWa84GACPes20Bqziz8/5khPAjSIRQb1HOJbmTOv6KTki71UXEXU8vSAQnySF
- YCjtBNXqJDITKCpjQXJEm8Qct3aNZnomC3enqdxGsHVvrjnYrjKJbd6nJ2vn8aR+rM30
- MJHQBMD1W93G5DSvxdBQLlAenTNvjCLGtXGrV1NayGJNPqEQdKRA8499bHIuFIE4k+Yj
- kCwVzo/5G6l8KSPHVeCrpvokfOgbmRamy64ma/gHA6A3YCqL/zLe1HOgS1XM4p9/zZem
- qgNRCFGCqedXc05qPSvxm/VOBsz6T9GNqsxeuWbJAJ9beh9ercWIxGVWX4GF9gkXvrBb
- TOvA==
-X-Gm-Message-State: AFuF++kqPhZmQsV15LQEE3yMcqeo0arKvwZcPMhe287Dp7i6pSBhxxJ+
- o6D14k1M9qboedRHWdr913YSbi4TShcJ1hhdMI/KysJOX7Nhb2OjQwFT
-X-Gm-Gg: AR+sD10xfywu+IBsYQ6Sy13xQdRyKklfNo1SZmKyHy65NpJBIwyvJrwhigRGVZHQ0TZ
- cqUSa16bxO+PG78E/aV11tk9lrXAvqr6TCtIEXv1tls8LefVxpjfWDqnWZg+F0nTAEkbeUbhroo
- lI4OedsFL54Ff5WtmmAyZd357Re/jGaCDNNDLC9hQo5W0JUUbQzocwEKq0xQ6+tOS4Mux1jRsjM
- ZFzJmwxhmqNBhMGyT5CAp6xs0E7L+5dUeUQfP6RTOuLWQ8gMVKSOUN4s0KgXIjhfXtaAM7FThht
- 9xXGfpgUELlzPs9E6oDvVnYmS2A9Ay5GU6VRx4LHDyuTZahs+jHAQpCVFLFgKD7PvOtdhGTp7/z
- BDfQKW9Rsbx3d8rmmpdW41IxjlVpiPHUrWUVWnJwAgWcKhXrz4S5znnn94MNW1RD023bzvbsFmo
- Gw4Mqcwl1V/Et8wv/cok5i9aUEIaa+xnolCIxSfnzSr0xxNmbgTUi9PepR7TPO/Mq8q6mmjWLgm
- vIynRde0Y37qzQ+Uwg2kCQFnBMcncHoueiblTnR/t7NEPYMcNNgfmpx2vPfZxXhm1y30SSKaT5a
- s/+vBa6sZ8aHkRs+v58s2Lgmt4mMfE66CY/N0M5tMWsvZw3jUPyef4k6AZVDr9vSPU5Imp/DbXm
- 7sRxuZv2ZJPcN
-X-Received: by 2002:a05:6808:4f66:b0:4b1:540a:df99 with SMTP id
- 5614622812f47-4b366d54c1fmr2146419b6e.21.1787688845963; 
- Tue, 25 Aug 2026 13:14:05 -0700 (PDT)
-Received: from [127.0.1.1] (71-218-10-81.hlrn.qwest.net. [71.218.10.81])
+ d=1e100.net; s=20251104; t=1787690215; x=1788295015;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Sq82lmDnaw+MtpVgu1/8NclJomd5s8f9f6m/P7g+g+o=;
+ b=emiKMCGXkuBweKVf2K8oTLsB+skiJsiPbZBrztrKxKq2KD9lpaG87eO915VC4RwBIW
+ VGuf3iY7eiz1o+NCJ7E9p70aoGpDVVQ9tmqgQRUps4qsZBy2im1SueBNXO1fqr34B2n9
+ AbMT60P4ujM8TEtkynBNzIpI0PQZGXmGxAyltytu7aIL2I75yoBfBZlPDZ95NF1nmK1+
+ wMZcGQ+IBS9XhHbAZlrKgWXoWHgE5//PMBRKSdN0bB3t6KGyy9kPsCPxlP0iZqa30elQ
+ MHD5YCJSBvUe//Bq3Q1Zyo7Dpf9+9xtCDVPnqnwiXDTc8/eggBNyQ2pweLi7exjPKavj
+ JVUA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp+LbSBdEu5swP0DvOfDJDumEkZ65JY0uq2cKsrCxcMl+Wn6f17NBdxWuYGuNEnQQj/hw3bfm4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mF2OgugKDJGb+8VcbhOGXolnsFVMprzu0i7KvOCes5E+P0OGzH
+ skpu/xQosZ4n1lM9htWEb0LVwWq2y16MHQse23DI8EutgpWHiflu8Tl8+KZk99Fb/FLgUp5KfoN
+ F5YvX+1DurLEdLKQ9m9IwvZSuerds8MQUcq58K5a6l3I/INnliamWykXeR7IUT0VS7rtSBfUg/O
+ AkKuT9bhjJmQ==
+X-Gm-Gg: AR+sD11OQ/safBBKa7AxPgUS1WnoHqzqSGsPsFI7Y9ZkMTc216d4KBRqBdR3qyRfgUX
+ GjpQAOmnVnX37Vv2bGzGqTeT1fy48KfKNvE7JwlUSXxkXIh2H8hBv85oMlIUt8FjKpztTVyEeC/
+ sshsWFDYSLdoHmzemzu4LKoSBq20wd1E/xHnbE8RvPkS/Bgm1vwXmgQnUD3k/xfW7k94nTJnuS8
+ yIpMiB6xxNiwpvWew2/4qRcwEUxLPCfPdVz2xx29J2ksVc1vNjfiiJJ+wVC5zrLOJjVQSZt32CT
+ 6AroVY5giskcX89FXr7z6om4Fv+V3/2mlkHdijpCWNqBhubLS+l76LOFJ1eH7Ve+b+T1wC9tVPj
+ YEoqMCL3JxT12tB13ue4/6s4RnAjMnIcOqjTrF67WkikeWc8/oLZCgc0FCAw5ybSC025GsUfv4/
+ ysZsXowhrDNkRdqsVOaKx1
+X-Received: by 2002:a05:6402:5043:b0:6a0:dda3:83db with SMTP id
+ 4fb4d7f45d1cf-6a5df31b0f7mr1967765a12.0.1787690214985; 
+ Tue, 25 Aug 2026 13:36:54 -0700 (PDT)
+X-Received: by 2002:a05:6402:5043:b0:6a0:dda3:83db with SMTP id
+ 4fb4d7f45d1cf-6a5df31b0f7mr1967722a12.0.1787690214588; 
+ Tue, 25 Aug 2026 13:36:54 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:667:9a84:7c86:797a:e54:8957?
+ ([2a02:3035:667:9a84:7c86:797a:e54:8957])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b367c77c28sm343156b6e.4.2026.08.25.13.14.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 13:14:05 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 25 Aug 2026 14:14:03 -0600
-Subject: [PATCH] net: sandbox: support raw Ethernet with lwIP
+ 4fb4d7f45d1cf-6a5de8b641fsm1228744a12.3.2026.08.25.13.36.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Aug 2026 13:36:53 -0700 (PDT)
+Message-ID: <33c631d3-70c4-4cfc-a351-c43e5553dba3@canonical.com>
+Date: Tue, 25 Aug 2026 22:36:50 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] test: dm: part: Check the GPT layout for large sector
+ sizes
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>,
+ Javier Martinez Canillas <javierm@redhat.com>, Simon Glass
+ <sjg@chromium.org>, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>,
+ u-boot@lists.u-boot-project.org,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
+ <20260731-gpt-4k-v1-4-a3f1f16b53ae@flipper.net>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260731-gpt-4k-v1-4-a3f1f16b53ae@flipper.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-submit-lwip-sandbox-raw-v1-v1-1-f9558fb4f6d1@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMSw6CQBAFr0J6bUdmBESuYlz0QCttZCDT/BLC3
- R10WS+vagPlIKxQJRsEnkWl9xHMKYG6Jf9ilCYy2NQWaWlz1Ml1MuJnkQGVfOP6FQMtOBu8Zre
- LydPMuLKAGBgCP2X9xe+PP0f7zfV4FI+HI2V0gXzdHtM06BiYunNH4mHfv0rYBeKeAAAA
-X-Change-ID: 20260825-submit-lwip-sandbox-raw-v1-749315041b86
-To: u-boot@lists.u-boot-project.org
-Cc: Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- David Lechner <dlechner@baylibre.com>, 
- James Hilliard <james.hilliard1@gmail.com>
-X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,299 +156,160 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-ETH_SANDBOX_RAW is restricted to NET_LEGACY despite operating through
-the common Ethernet driver API.
+On 7/31/26 14:40, Alexey Charkov wrote:
+> Add a test that runs gpt_fill_header() and gpt_fill_pte() over a range of
+> block sizes and checks that the partition entry array is sized and placed
+> consistently, in particular that the backup array ends exactly where the
+> backup GPT header begins.
+> 
+> Neither function performs any block I/O, so the test builds a synthetic
+> struct blk_desc rather than needing a block device with a configurable
+> block size. The expected array size is taken from the GPT header fields
+> rather than from GPT_ENTRY_NUMBERS, so the test still holds for builds
+> with a non-default CONFIG_EFI_PARTITION_ENTRIES_NUMBERS, such as
+> ARCH_SUNXI with 56 entries.
+> 
+> Without the preceding fixes this fails on the first block size other than
+> 512:
+> 
+>    test/dm/part.c:313, dm_test_part_gpt_blksz():
+>        entry_lba + pte_blks == first_lba: Expected 0x12 (18), got 0x22 (34)
+> 
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
 
-Make the localhost shim stack-neutral: define the ARP layout locally,
-populate lwIP's per-device ipaddr environment variable, and retain the
-legacy address state when that stack is selected.
+Thank you for providing the new test.
 
-Linux loopback can expose UDP checksum-offload seeds through raw sockets
-without the metadata needed to validate them. Normalize these to the valid
-IPv4 no-checksum form. Only update the dummy UDP bind for UDP output so
-lwIP-generated ICMP packets cannot disturb it.
+test/dm/part.c is never tested in the CI on big-endian systems as it is 
+restricted to the sandbox.
 
-This enables both real-interface and localhost raw Ethernet with lwIP.
+The sandbox restriction arises because test/dm/part.c relies on MMC 
+drives emulated on the sandbox. We should instead create memory backed 
+BLKMAP devices. Then we can run the partition table tests on QEMU and on 
+real hardware.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- arch/sandbox/cpu/eth-raw-os.c | 83 +++++++++++++++++++++++++++++--------------
- drivers/net/Kconfig           |  2 +-
- drivers/net/sandbox-raw.c     | 49 +++++++++++++++++--------
- include/net-legacy.h          |  6 ++++
- include/net-lwip.h            |  5 +++
- 5 files changed, 103 insertions(+), 42 deletions(-)
+For your new test I would suggest to simply move it to a new file in 
+test/lib/ as it does not rely on the presence of block devices.
 
-diff --git a/arch/sandbox/cpu/eth-raw-os.c b/arch/sandbox/cpu/eth-raw-os.c
-index 39ea3b3f012..c9c3a561a76 100644
---- a/arch/sandbox/cpu/eth-raw-os.c
-+++ b/arch/sandbox/cpu/eth-raw-os.c
-@@ -208,7 +208,6 @@ int sandbox_eth_raw_os_send(void *packet, int length,
- 			    struct eth_sandbox_raw_priv *priv)
- {
- 	int retval;
--	struct udphdr *udph = packet + sizeof(struct iphdr);
- 
- 	if (priv->sd < 0 || !priv->device)
- 		return -EINVAL;
-@@ -226,38 +225,50 @@ int sandbox_eth_raw_os_send(void *packet, int length,
- 	 * stack from sending that ICMP message claiming that the port has no
- 	 * bound socket.
- 	 */
--	if (priv->local && (priv->local_bind_sd == -1 ||
--			    priv->local_bind_udp_port != udph->source)) {
-+	if (priv->local && length >= sizeof(struct iphdr)) {
- 		struct iphdr *iph = packet;
--		struct sockaddr_in addr;
-+		unsigned int iphdr_len = iph->ihl * 4;
-+		struct udphdr *udph;
- 
--		if (priv->local_bind_sd != -1)
--			os_close(priv->local_bind_sd);
-+		if (iph->protocol != IPPROTO_UDP ||
-+		    iphdr_len < sizeof(*iph) ||
-+		    length < iphdr_len + sizeof(*udph))
-+			goto send;
- 
--		/* A normal UDP socket is required to bind */
--		priv->local_bind_sd = socket(AF_INET, SOCK_DGRAM, 0);
--		if (priv->local_bind_sd < 0) {
--			printf("Failed to open bind sd: %d %s\n", errno,
--			       strerror(errno));
--			return -errno;
-+		udph = packet + iphdr_len;
-+		if (priv->local_bind_sd == -1 ||
-+		    priv->local_bind_udp_port != udph->source) {
-+			struct sockaddr_in addr = {};
-+
-+			if (priv->local_bind_sd != -1)
-+				os_close(priv->local_bind_sd);
-+
-+			/* A normal UDP socket is required to bind */
-+			priv->local_bind_sd = socket(AF_INET, SOCK_DGRAM, 0);
-+			if (priv->local_bind_sd < 0) {
-+				printf("Failed to open bind sd: %d %s\n", errno,
-+				       strerror(errno));
-+				return -errno;
-+			}
-+			priv->local_bind_udp_port = udph->source;
-+
-+			/**
-+			 * Bind the UDP port that we intend to use as our source port
-+			 * so that the kernel will not send an ICMP port unreachable
-+			 * message to the server
-+			 */
-+			addr.sin_family = AF_INET;
-+			addr.sin_port = udph->source;
-+			addr.sin_addr.s_addr = iph->saddr;
-+			retval = bind(priv->local_bind_sd,
-+				      (struct sockaddr *)&addr, sizeof(addr));
-+			if (retval < 0)
-+				printf("Failed to bind: %d %s\n", errno,
-+				       strerror(errno));
- 		}
--		priv->local_bind_udp_port = udph->source;
--
--		/**
--		 * Bind the UDP port that we intend to use as our source port
--		 * so that the kernel will not send an ICMP port unreachable
--		 * message to the server
--		 */
--		addr.sin_family = AF_INET;
--		addr.sin_port = udph->source;
--		addr.sin_addr.s_addr = iph->saddr;
--		retval = bind(priv->local_bind_sd, (struct sockaddr *)&addr,
--			      sizeof(addr));
--		if (retval < 0)
--			printf("Failed to bind: %d %s\n", errno,
--			       strerror(errno));
- 	}
- 
-+send:
- 	retval = sendto(priv->sd, packet, length, 0,
- 			(struct sockaddr *)priv->device,
- 			sizeof(struct sockaddr_ll));
-@@ -283,6 +294,24 @@ int sandbox_eth_raw_os_recv(void *packet, int *length,
- 			  (socklen_t *)&saddr_size);
- 	*length = 0;
- 	if (retval >= 0) {
-+		if (priv->local && retval >= sizeof(struct iphdr)) {
-+			struct iphdr *iph = packet;
-+			unsigned int iphdr_len = iph->ihl * 4;
-+
-+			if (iph->protocol == IPPROTO_UDP &&
-+			    iphdr_len >= sizeof(*iph) &&
-+			    retval >= iphdr_len + sizeof(struct udphdr)) {
-+				struct udphdr *udph = packet + iphdr_len;
-+
-+				/*
-+				 * Loopback packets can retain a checksum-offload seed
-+				 * which a raw socket cannot validate without skb metadata.
-+				 * An IPv4 UDP checksum of zero explicitly disables the
-+				 * checksum, so present that portable form to U-Boot.
-+				 */
-+				udph->check = 0;
-+			}
-+		}
- 		*length = retval;
- 		return 0;
- 	}
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index faa08e9ebba..c057504cf66 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -366,7 +366,7 @@ config ETH_SANDBOX
- 
- config ETH_SANDBOX_RAW
- 	depends on SANDBOX
--	depends on NET_LEGACY
-+	depends on NET
- 	default y
- 	bool "Sandbox: Bridge to Linux Raw Sockets"
- 	help
-diff --git a/drivers/net/sandbox-raw.c b/drivers/net/sandbox-raw.c
-index c3d40f0b59e..c57893c48ce 100644
---- a/drivers/net/sandbox-raw.c
-+++ b/drivers/net/sandbox-raw.c
-@@ -13,6 +13,21 @@
- #include <malloc.h>
- #include <net.h>
- 
-+#define ARP_PROTOCOL_ADDR_LEN	4
-+#define ARP_OP_REPLY		2
-+
-+struct sb_arp_hdr {
-+	u16 hrd;
-+	u16 pro;
-+	u8 hln;
-+	u8 pln;
-+	u16 op;
-+	u8 sha[ARP_HLEN];
-+	struct in_addr spa;
-+	u8 tha[ARP_HLEN];
-+	struct in_addr tpa;
-+} __packed;
-+
- static int reply_arp;
- static struct in_addr arp_ip;
- 
-@@ -20,6 +35,8 @@ static int sb_eth_raw_start(struct udevice *dev)
- {
- 	struct eth_sandbox_raw_priv *priv = dev_get_priv(dev);
- 	struct eth_pdata *pdata = dev_get_plat(dev);
-+	char ipaddr[sizeof("ipaddr99")];
-+	int idx = dev_seq(dev);
- 	int ret;
- 
- 	debug("eth_sandbox_raw: Start\n");
-@@ -27,9 +44,13 @@ static int sb_eth_raw_start(struct udevice *dev)
- 	ret = sandbox_eth_raw_os_start(priv, pdata->enetaddr);
- 	if (priv->local) {
- 		env_set("ipaddr", "127.0.0.1");
-+		if (IS_ENABLED(CONFIG_NET_LWIP) && idx > 0 && idx <= 99) {
-+			snprintf(ipaddr, sizeof(ipaddr), "ipaddr%d", idx);
-+			env_set(ipaddr, "127.0.0.1");
-+		}
- 		env_set("serverip", "127.0.0.1");
- 		net_ip = string_to_ip("127.0.0.1");
--		net_server_ip = net_ip;
-+		net_set_server_ip(net_ip);
- 	}
- 	return ret;
- }
-@@ -44,13 +65,13 @@ static int sb_eth_raw_send(struct udevice *dev, void *packet, int length)
- 		struct ethernet_hdr *eth = packet;
- 
- 		if (ntohs(eth->et_protlen) == PROT_ARP) {
--			struct arp_hdr *arp = packet + ETHER_HDR_SIZE;
-+			struct sb_arp_hdr *arp = packet + ETHER_HDR_SIZE;
- 
- 			/**
- 			 * localhost works on a higher-level API in Linux than
- 			 * ARP packets, so fake it
- 			 */
--			arp_ip = net_read_ip(&arp->ar_tpa);
-+			memcpy(&arp_ip, &arp->tpa, sizeof(arp_ip));
- 			reply_arp = 1;
- 			return 0;
- 		}
-@@ -68,7 +89,7 @@ static int sb_eth_raw_recv(struct udevice *dev, int flags, uchar **packetp)
- 	int length;
- 
- 	if (reply_arp) {
--		struct arp_hdr *arp = (void *)net_rx_packets[0] +
-+		struct sb_arp_hdr *arp = (void *)net_rx_packets[0] +
- 			ETHER_HDR_SIZE;
- 
- 		/*
-@@ -80,18 +101,18 @@ static int sb_eth_raw_recv(struct udevice *dev, int flags, uchar **packetp)
- 		 * to get a response. For this reason we fake the response to
- 		 * make the u-boot network stack happy.
- 		 */
--		arp->ar_hrd = htons(ARP_ETHER);
--		arp->ar_pro = htons(PROT_IP);
--		arp->ar_hln = ARP_HLEN;
--		arp->ar_pln = ARP_PLEN;
--		arp->ar_op = htons(ARPOP_REPLY);
-+		arp->hrd = htons(ARP_ETHER);
-+		arp->pro = htons(PROT_IP);
-+		arp->hln = ARP_HLEN;
-+		arp->pln = ARP_PROTOCOL_ADDR_LEN;
-+		arp->op = htons(ARP_OP_REPLY);
- 		/* Any non-zero MAC address will work */
--		memset(&arp->ar_sha, 0x01, ARP_HLEN);
-+		memset(arp->sha, 0x01, ARP_HLEN);
- 		/* Use whatever IP we were looking for (always 127.0.0.1?) */
--		net_write_ip(&arp->ar_spa, arp_ip);
--		memcpy(&arp->ar_tha, pdata->enetaddr, ARP_HLEN);
--		net_write_ip(&arp->ar_tpa, net_ip);
--		length = ARP_HDR_SIZE;
-+		memcpy(&arp->spa, &arp_ip, sizeof(arp->spa));
-+		memcpy(arp->tha, pdata->enetaddr, ARP_HLEN);
-+		memcpy(&arp->tpa, &net_ip, sizeof(arp->tpa));
-+		length = sizeof(*arp);
- 	} else {
- 		/* If local, the Ethernet header won't be included; skip it */
- 		uchar *pktptr = priv->local ?
-diff --git a/include/net-legacy.h b/include/net-legacy.h
-index d3b122c9062..2737b683cb1 100644
---- a/include/net-legacy.h
-+++ b/include/net-legacy.h
-@@ -288,6 +288,12 @@ extern char	net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN];	/* Our root path */
- extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
- extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
- extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
-+
-+static inline void net_set_server_ip(struct in_addr ip)
-+{
-+	net_server_ip = ip;
-+}
-+
- extern uchar		*net_tx_packet;		/* THE transmit packet */
- extern uchar		*net_rx_packet;		/* Current receive packet */
- extern int		net_rx_packet_len;	/* Current rx packet length */
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index 8e59a2299e0..9b7755e335e 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -26,6 +26,11 @@ enum proto_t {
- 	TFTPGET
- };
- 
-+static inline void net_set_server_ip(struct in_addr ip)
-+{
-+	/* lwIP reads serverip from the environment when starting a command. */
-+}
-+
- static inline int eth_is_on_demand_init(void)
- {
- 	return 1;
+Heinrich
 
----
-base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
-change-id: 20260825-submit-lwip-sandbox-raw-v1-749315041b86
-
-Best regards,
---  
-James Hilliard <james.hilliard1@gmail.com>
+> ---
+>   test/dm/part.c | 100 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 100 insertions(+)
+> 
+> diff --git a/test/dm/part.c b/test/dm/part.c
+> index ad37d7f406f4..4b48322fb807 100644
+> --- a/test/dm/part.c
+> +++ b/test/dm/part.c
+> @@ -5,6 +5,8 @@
+>   
+>   #include <dm.h>
+>   #include <env.h>
+> +#include <malloc.h>
+> +#include <memalign.h>
+>   #include <mmc.h>
+>   #include <part.h>
+>   #include <part_efi.h>
+> @@ -248,3 +250,101 @@ static int dm_test_part_get_info_by_uuid(struct unit_test_state *uts)
+>   	return 0;
+>   }
+>   DM_TEST(dm_test_part_get_info_by_uuid, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+> +
+> +/*
+> + * Check that the GPT layout adapts to the block size of the device. Neither
+> + * gpt_fill_header() nor gpt_fill_pte() does any block I/O, so a synthetic
+> + * descriptor is enough here; partition_entries_offset() reads the device tree
+> + * '/config' node, which is available without scanning for devices.
+> + */
+> +static int dm_test_part_gpt_blksz(struct unit_test_state *uts)
+> +{
+> +	static const struct {
+> +		unsigned long blksz;
+> +		lbaint_t lba;
+> +	} cases[] = {
+> +		{   512, 0x2000 },	/* 4MB, the traditional 34-block layout */
+> +		{  1024, 0x1000 },
+> +		{  2048,  0x800 },
+> +		{  4096,  0x400 },	/* 4K native media, e.g. UFS */
+> +		{  8192,  0x200 },
+> +		{ 16384,  0x100 },	/* the array fits in a single block... */
+> +		{ 32768,   0x40 },	/* ...on a device smaller than 34 blocks */
+> +	};
+> +
+> +	char str_disk_guid[UUID_STR_LEN + 1] =
+> +		"8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
+> +	struct disk_partition part;
+> +	struct blk_desc desc;
+> +	gpt_header gpt_h;
+> +	gpt_entry *gpt_e;
+> +	int i;
+> +
+> +	gpt_e = calloc(GPT_ENTRY_NUMBERS, sizeof(gpt_entry));
+> +	ut_assertnonnull(gpt_e);
+> +
+> +	for (i = 0; i < ARRAY_SIZE(cases); i++) {
+> +		u64 entry_lba, first_lba, last_lba;
+> +		u32 pte_blks;
+> +
+> +		memset(&desc, '\0', sizeof(desc));
+> +		memset(&gpt_h, '\0', sizeof(gpt_h));
+> +		desc.blksz = cases[i].blksz;
+> +		desc.log2blksz = LOG2(desc.blksz);
+> +		desc.lba = cases[i].lba;
+> +
+> +		ut_assertok(gpt_fill_header(&desc, &gpt_h, str_disk_guid, 1));
+> +
+> +		/*
+> +		 * Size the array with BLOCK_CNT() rather than the
+> +		 * DIV_ROUND_UP() that gpt_pte_blocks() uses, so that this
+> +		 * checks the layout instead of restating the implementation.
+> +		 */
+> +		pte_blks = BLOCK_CNT(le32_to_cpu(gpt_h.num_partition_entries) *
+> +				     le32_to_cpu(gpt_h.sizeof_partition_entry),
+> +				     (&desc));
+> +		entry_lba = le64_to_cpu(gpt_h.partition_entry_lba);
+> +		first_lba = le64_to_cpu(gpt_h.first_usable_lba);
+> +		last_lba = le64_to_cpu(gpt_h.last_usable_lba);
+> +
+> +		ut_asserteq_64(1, le64_to_cpu(gpt_h.my_lba));
+> +		ut_asserteq_64(desc.lba - 1, le64_to_cpu(gpt_h.alternate_lba));
+> +
+> +		/* the primary array ends where the usable area begins */
+> +		ut_assert(entry_lba >= 2);
+> +		ut_asserteq_64(entry_lba + pte_blks, first_lba);
+> +		ut_assert(first_lba < last_lba);
+> +
+> +		/*
+> +		 * write_gpt_table() puts the backup array at
+> +		 * last_usable_lba + 1, so it has to end exactly where the
+> +		 * backup header begins
+> +		 */
+> +		ut_asserteq_64(le64_to_cpu(gpt_h.alternate_lba),
+> +			       last_lba + 1 + pte_blks);
+> +
+> +		/* a partition with no start and no size fills the disk */
+> +		memset(&part, '\0', sizeof(part));
+> +		disk_partition_set_uuid(&part, str_disk_guid);
+> +		ut_assertok(gpt_fill_pte(&desc, &gpt_h, gpt_e, &part, 1));
+> +		ut_asserteq_64(first_lba, le64_to_cpu(gpt_e[0].starting_lba));
+> +		ut_asserteq_64(last_lba, le64_to_cpu(gpt_e[0].ending_lba));
+> +
+> +		/* a partition overlapping the entry array is rejected */
+> +		part.start = entry_lba;
+> +		part.size = 1;
+> +		ut_asserteq(-ENOSPC,
+> +			    gpt_fill_pte(&desc, &gpt_h, gpt_e, &part, 1));
+> +
+> +		/* so is one running past the end of the usable area */
+> +		part.start = first_lba;
+> +		part.size = last_lba - first_lba + 2;
+> +		ut_asserteq(-E2BIG,
+> +			    gpt_fill_pte(&desc, &gpt_h, gpt_e, &part, 1));
+> +	}
+> +
+> +	free(gpt_e);
+> +
+> +	return 0;
+> +}
+> +DM_TEST(dm_test_part_gpt_blksz, 0);
+> 
 
