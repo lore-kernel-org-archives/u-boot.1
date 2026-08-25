@@ -1,116 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB70C5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 00:46:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A230C5DF81
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 00:46:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8B3CA80AC8;
-	Tue, 25 Aug 2026 00:46:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 31C2C60674;
+	Tue, 25 Aug 2026 00:46:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jeswQHHaQPOB; Tue, 25 Aug 2026 00:46:05 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mR_w8LACbk2d; Tue, 25 Aug 2026 00:46:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787618765;
-	bh=TqgFpm87jAIRmts7OVHmLJKoMeTfkCHMidfMVVbgH5Q=;
+	d=lists.u-boot-project.org; s=default; t=1787618768;
+	bh=kmjko95FztuRsZxIvTX0v40s5UBrg5wK555A2+5TSO8=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ijpO4DDoOY8OxA/L6tihiZP05fOuPUzIgBMUUBQZZ4uIGqeh7r45JWEpZC5LRKmGH
-	 SjqftpPn7CpLuqO0JMkh1yaWKL0RvjtZLysgQftOznjvGcMkwobKENedF6kjnlXdkM
-	 k8oF+UtIHXjyDRZx2RsEoulMFhTFcK6zsuH0syrnuL2iMgeyIihTkK/j/5LR+zBOit
-	 XsNT1YBjnWMJvSVce3Dt7uS2Tf42sHG5NxNYEzi4/p/cpp4ONPSo1BIDH4caHQkKgB
-	 N8Z76ncSuJB3A6+fJ1GokrNGxspCGlb3ZpH5GOlffZlkiC1sfLEo4+rkVg7hVQyroN
-	 +xp/etpCUcsOg==
+	b=lk38komoir4H+s0T7VpI/0nINrQ4hSeGqgqP8oW6gBLNylez3vq86AUAozhKkYmrO
+	 8w4Drt4xakIDy7eZv+p2xGmgGd36saR9b27VslX3E884G6tEkQOdyqQ/2KDpW3h0Gw
+	 krmfJvn96ww4zrTY9Qkdz54fRZxi8pDW60mRxiH8BNQ9nYID/nSc0WyOVeqcyS5mnM
+	 5gy2IQfXoZFXYYFtpVWgk0RbEFhkjQCIzF4UwAsZ5FXtr4gTaDyN3lpXtLK0K25VE7
+	 h4liHzOTuJuAK3ASYb0RcNuPnbtM85U1S4FVAVIlquyuOGymcxQBQzU/zFswKYIL7Y
+	 43pPWVmsN/XDg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C4A7480ACC;
-	Tue, 25 Aug 2026 00:46:05 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 008DB35E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0667460667;
+	Tue, 25 Aug 2026 00:46:08 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1442529B
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E6A0380ACC
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 068864005F
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5QalctiN1ugR for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oE1vrVJfKPmI for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 00:46:04 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
+ client-ip=2001:4860:4864:20::29; helo=mail-oa1-x29.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Qmt1Aajm
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1AFF980AC8
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:02 +0000 (UTC)
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7eb61bbeb25so5138202a34.1
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 17:46:02 -0700 (PDT)
+ header.s=google header.b=KI1Gx14A
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 50EBC40050
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-4518ad44e83so3604922fac.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 17:46:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787618761; x=1788223561;
+ d=konsulko.com; s=google; t=1787618763; x=1788223563;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=TqgFpm87jAIRmts7OVHmLJKoMeTfkCHMidfMVVbgH5Q=;
- b=Qmt1AajmP9ljoNPdZmCXOqYObFLIH9jy87ZsP10WnEOqS8k4DKxCnjX6712RJsWU4E
- Khqq9jjBvL9zd7E9KM1uskLSHs5pp1/Iy/aktnJpcp0kvX9D4LjRSMJJf67JLy9LVmjr
- IFwXQ7fr+qzV0wAtb8Cr+c+dHwhzeE9pPE3dM=
+ bh=kmjko95FztuRsZxIvTX0v40s5UBrg5wK555A2+5TSO8=;
+ b=KI1Gx14AjNbA5th6Kii8SMFVFAKimIV+vGsZ3TaernqKBXltq6dN9sAnqvZVQRXaz9
+ FwzG95rQny+N+nr9MFl5jPW8n+035gaI9CTbPE/2rSnPiDGIO2Qg1Y3F99QFl8IHfrqt
+ c/S3rc7lYquK7sEdbGqrhob38a9a/sD4is7Q0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787618761; x=1788223561;
+ d=1e100.net; s=20251104; t=1787618763; x=1788223563;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=TqgFpm87jAIRmts7OVHmLJKoMeTfkCHMidfMVVbgH5Q=;
- b=tCxb3cuOKyKaMwInWIOy+qJPNeY1rFw1Pp38zTmLSyo68VJdvFhzxYnjipkjSvX6kQ
- YUaYHpB8N3YBHYZUExqiLOkSf/SR6rAxYkynM6kNtOW/EWGE8jvfYSsi+ppvuMW0EUuF
- 3s+MDK6/DyCfnFykZvVULNc9KcbWTOlUYTPgQbP6s4jOjo3xVaCjK7W1mcI7INfo7RvD
- ypPoUNAAKykDoZjhzVCVPmhoLd0xK7kPPDebkm8nJzCcU503v0MctAVxop2ft8WlSFcn
- g3+JlM7/F36wCqojvKZ0lkeImyjxbpY5F5r8NOU6dg7Be1lPaxRYyaMG4AK9vyOhcm+c
- Obnw==
+ bh=kmjko95FztuRsZxIvTX0v40s5UBrg5wK555A2+5TSO8=;
+ b=PHubXQPaWptAaLCve+XAaPZm7q3EhiLzUMEL0/LNSiE1UZ+bMxMTUkOfn62yHNq/GO
+ nKr49vOU07J6OciV8Wm3JQPBfsmcl1ht26Fr8mBfdHQeTuQrdRRULXPNTIwMyX+NFggK
+ YZytZ/FoSyWuZQYt29zVL2PF68+GGLpkz8WPXjROcEDnVAZFaAklAwjbn2HSrywo4N8I
+ nZzVi70CYu+eHCDg4o5dBmT1d6XNeXztkHuQc8pfSr4GvmrVLDcE7pocf/0yFBOPmZLa
+ 0UwbqMtvTjDtpBvDXnANDqCUE2NkpxDf6ZIBl4TjHVtTP4seBsnkhtEYrcz2YdoXDOEZ
+ aGng==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoI9G91lCXEnuwMv5WuIhZA+4XcSwqISQrIwSOtnHMYFpDmp9MRrx8JxBs0cQ0DalrZLtYQlcA=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kpVgAzE0HpQNdzizfnHITftmZ9GbBVRTmpbMMsQpK/U7U3wAaf
- xbPElIyhKCBgBwKSyyfiP7+dUzzn0nkKjg4xClYOfn3yEOpImDgNqLxVKKqDIQpIXhE=
-X-Gm-Gg: AR+sD11CINYu12KERLoloWm8Uq7gLleHj0h27xEf6ohIHCeAPxiE+TVskfcIAEgGgZC
- +pbHwGKddOeL9lpggodIilru7dsBBeyWLCvEKS7oIaUBRbtkFlh2svrjaXmPLPl//9IlL5WrEsp
- pIeNJ4wYME9ilyO2JCs3BPsDpgAoW7OCBfbppGVkv0Dqz5awKkrCFQpM4hwjWjX/u+wxVNuYkyZ
- 2CdYCrJaMXQNZphLR4dw38Rha08m3DIUzbPLILC4XoMs52NRg71NKyeBfQbFbb8iNgKgsqH7Icm
- /4ZBu59ZPgtTft3AotCkpd2T2r+bZduGOFhtMWs9x3kEyqdfVk8hnhSFFEqg9HcXyphCzxbeneY
- zRW5Eh9kiKxpf1DTIcfhw1Vy3tkXZTLANOCiRud3Qsfb3Ry+f6M2hMy39zHZMyUfrXUZPIlIZUB
- f6/uOqeqL3M/DIwIXHvCfCKuEQgz3CIw7Qg2zUcv3XWWxglIjL5p6zlU3NwA22pPogcl6mlwzXa
- xUFm9oHoYWL0V7MvZW3NEvtqoMDwHNuq1cmLH6Rh1bfQmTBSA2IyPqN7z5NXU9fOQOfiYLDTVTa
- Mygu/M7b
-X-Received: by 2002:a05:6820:810:b0:6b1:4fa4:76c5 with SMTP id
- 006d021491bc7-6b19033d71bmr2267250eaf.4.1787618761624; 
- Mon, 24 Aug 2026 17:46:01 -0700 (PDT)
+ AHgh+RpLLqz2ckBxx5e8CI5JUgFJZwJo2ispMlhRQkZZ6xYlPlHx2deLBMY/Er8PQueTW7nas9E1PXc=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mzU9qgbeaR5ulkCuk/t1yXs3bYSqRLvdSNIfS4DvOpEZ8YphZa
+ jNYBXrCv58YsRR6r28TaEI39uJZTjTdC0Yov6Pj9fU4QSW/oJeWz5bnVc4HS2JfU0uM=
+X-Gm-Gg: AR+sD11xfgmzhME9wfA5iVyGP4CnVXFoAP4mIZjA2IGyUtG64Wu3oT0rB1OOAWVJUwe
+ comL8fhhpzjEJRUHUQhiSJaUETt5n9aC4l5tOuFqY4IXVGGuhCY4LOXOsiOu2Hh9UgbxNDExzfd
+ qp49AsSWURBFHL9CQol6zVUMISPmSWca8GSnwl/irKSikExZZPiILhb0kHIWPRMOijpG8nryNUD
+ diOQXicUBoEh3GK4BDM2uQV5MbzF417n/ihzThQ58TWXT9zBxTvVVTxiGJjlyjtmlTX1OeYkZiU
+ cK86AaFeoR5grhxu8JNhVvxdg5O2BetygflIi7ONI+HUwV1FR6P7oCq7KeHaQ+LCaJ6xFPOqsnP
+ X2C1y7aBmB/KbhzBi16v1U0hPnMNYdROTgQQyKAmaYpuHNf+PqFWTE7krVH05S3K0epgFe+Jq8g
+ tIFNsN4eRnVM+mXH08oeisDcAnZR9XUm6BQeb4BHPxbi91FTiIXPXl9M0jdJPtBszXEEpvbRUbM
+ HLNVUwJvzjh91PoZnEINsFYeDJWsm7Zno01BgyJJUfW+JO/tp7oYYFkeM/3rF5qmItq/C4pLfBM
+ N2L0/bJQ4Vxm+eTnw+8=
+X-Received: by 2002:a05:6870:5486:b0:44a:e7ac:b14 with SMTP id
+ 586e51a60fabf-4644a3f6562mr2567591fac.11.1787618762868; 
+ Mon, 24 Aug 2026 17:46:02 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-463831af959sm6502486fac.5.2026.08.24.17.46.00
+ 586e51a60fabf-463831af959sm6502486fac.5.2026.08.24.17.46.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 17:46:00 -0700 (PDT)
+ Mon, 24 Aug 2026 17:46:02 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@nabladev.com>, Kyungmin Park <kmpark@infradead.org>, 
- Daniel Golle <daniel@makrotopia.org>
-Cc: Alexey Romanov <avromanov@salutedevices.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
+To: Randolph Sapp <rs@ti.com>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Joseph Guo <qijian.guo@nxp.com>, 
+ Emanuele Ghidoli <ghidoliemanuele@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  u-boot@lists.u-boot-project.org
-In-Reply-To: <aoCA_QD7x5-Z7Tpt@makrotopia.org>
-References: <aoCA_QD7x5-Z7Tpt@makrotopia.org>
-Subject: Re: [PATCH] disk: ubi: use a format string when copying the volume
- name
-Message-Id: <178761876023.724197.14977620653929389664.b4-ty@konsulko.com>
-Date: Mon, 24 Aug 2026 18:46:00 -0600
+In-Reply-To: <20260811231650.3150771-1-jonas@kwiboo.se>
+References: <20260811231650.3150771-1-jonas@kwiboo.se>
+Subject: Re: [PATCH v2 0/3] boot: image-fdt: Restore suppression of
+ irrelevant ERROR message
+Message-Id: <178761876177.724197.10127791800130852948.b4-ty@konsulko.com>
+Date: Mon, 24 Aug 2026 18:46:01 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -128,25 +130,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, 15 Aug 2026 16:08:45 +0100, Daniel Golle wrote:
+On Tue, 11 Aug 2026 23:16:46 +0000, Jonas Karlman wrote:
 
-> part_get_info_ubi() passes the UBI volume name straight to snprintf() as
-> its format argument:
+> This series changes the returned error code for lmb_alloc_mem() and
+> lmb_free() may return to help restore suppression of the verbose ERROR
+> messages when FDT memreserve and reserved-memory is being processed.
 > 
-> 	snprintf(info->name, PART_NAME_LEN, vol->name);
-> 
-> A volume name that contains a '%' is then interpreted as a printf
-> conversion specifier, yielding a wrong partition name or reading
-> unintended variadic arguments; a '%n' would be undefined behaviour.
-> Volume names are user-defined and boot methods select images by volume
-> name, so copy the name through a "%s" format instead.
+> Changes in v2:
+> - Change lmb_alloc_mem() to return -EFAULT when region is not part of
+>   the LMB memory map
+> - Change lmb_free() to return -EFAULT when the region is not allocated
+> - Change to use a debug message when -EFAULT is returned
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/1] disk: ubi: use a format string when copying the volume name
-      commit: fb79a4fcb09b49c6d6ef0a9a030e1abef32358e9
+[1/3] lmb: Return -EFAULT when requested region is not part of memory map
+      commit: 93e5e5f4cbefccab206a79f86e98c2c39a9d2440
+[2/3] lmb: Return -EFAULT when freeing unallocated memory regions
+      commit: 480644c06e202abec58543aec502f218939fff1e
+[3/3] boot: image-fdt: Restore suppression of irrelevant ERROR message
+      commit: 94a09715bf4c8dfdefbefcd341d0c9da04c5a6c1
 -- 
 Tom
 
