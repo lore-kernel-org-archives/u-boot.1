@@ -4,134 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F38D8C5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 01:25:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B07DC5B572
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 04:25:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 946C180C9A;
-	Tue, 25 Aug 2026 01:25:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C835380CD9;
+	Tue, 25 Aug 2026 04:25:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jhrkd6P3do1a; Tue, 25 Aug 2026 01:25:01 +0000 (UTC)
+ id VSiDANfwDbxS; Tue, 25 Aug 2026 04:25:11 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787621100;
-	bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TNpp7Qwms3D1SrhFUJktFqtX0mvJhaJigsC+hX0MnZmdFVjOwO+/nNpK3fqIftHog
-	 GT4oq/IrAT1yyo8QR32hzMOIwK10GxtOSK4pFtM3LXVGka1LVzPh0lBJlbuu0OJ5jl
-	 tMhuvTUXy1tz7C0dy9XzkxUym2WYBUGJtLKMq29TVfSuchLRpv718kwXE2R5e5tZNh
-	 /mZvwcoOB3NP/f9L3xZm8aOPlncYIkfs/TeMdyrQ6ENBfyS/8dN5zA6z0/3/gYfOhC
-	 JiKFjqN9KUHSVsdxZu+CaG4Ty1EFVf33kEv5FdeAHeD12OsfzVdipXtP0NCV3Zbvmp
-	 mWHSHKpQzFLWA==
+	d=lists.u-boot-project.org; s=default; t=1787631911;
+	bh=U1DQvrb6q3sugiMe+cSUD0ZgCWCGmLlQbB48pKpZHwI=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=lh/o/NMGUyOSZ2k+N1fa/ssVP42be3AvXgotCSnAsYsERR8l1uJEUmJmEG+YmQXSE
+	 8lV//5AFkYWhR7DmaFeypy9oeZjW4IgmbSs36QcE9BQyLnC/qtzoVVzRc97vFUJprq
+	 0R6ETG278fgcUQRcUuViN32N/kSV9zPguhHV5bogQTm9nYeS9aWZjBKxXYoiQKmcyc
+	 Zx1gixfAa7GY4CvbeURo+5MWz7V39jUCFjyL0knHqs05Y9PECwV+uMWJca4JNvBYXC
+	 sGxoHLRC19It/7nA9aKMcpR7m+/JeIZGOeq+JD7s/FKHj2Wu7qgQK7x/amIgwOAF3t
+	 BY7iWIaz5jujg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CB65C80BCF;
-	Tue, 25 Aug 2026 01:25:00 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A021B3DA
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:24:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F355580C33;
+	Tue, 25 Aug 2026 04:25:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1FCD71465
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8601540557
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:24:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1176F60672
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7zfKffQHJkMh for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 01:24:59 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LJ8EIdOs4Wid for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 04:25:09 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::12a; helo=mail-lf1-x12a.google.com;
- envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=kUhvX0eA
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 946AA40558
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:24:57 +0000 (UTC)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5b15dcaca31so4038459e87.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:24:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787621095; cv=none;
- d=google.com; s=arc-20260327;
- b=oPMlJqJwtZVhK9bhRLjrky2lQl7ZpVNl/x6uWFXnj7EstdbxDSJVCJ9DzmcjxSl1Mw
- yiB9tluV56CHVye6T7KCfBNQzarhuIecS+nfy2PGHpX5vllUFsLjdKvqP+jU1mYRSxiD
- H2Ty3B25PXizZ4eQaru2vshAEMHGVGnpZHRNPrSFCzmuCKIbKKrzs8Q8UAU09YJ8Buyo
- joKIdEGo3A+aDw5AcRAMjpzXDfQcvwcCJ5Ns6iPCeUF51iwwauFYnvTm9+BYp+H7gbuW
- FAmwJEjJTX4K5scaDnXM4dOkY3whWlIHYJfmDe4nEQsOuSAX6TUoCEYr8wwz+WCTDJQR
- FWXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
- fh=AuQ3bIBeU64EwsP1Al2N/FlN5xzoW+fHpS7uviycxow=;
- b=bPBXmGfTreNVa5GqLbuUYYNy0rfq4hmZPEK5bb5A9BbI8/CjBU+LtgiN++/+877lhw
- oRWLymErPhYB/umgaRH7uJK6Bne4Fy+ltrNS0VJnNQ69fg57IYE9n+0j/UkKh+wXFBIr
- 5USM/nKj5Ue3eLjB38TBtDmqJn/JvqWCGxQWOvswvFF+wuNDSEB3Y/33/2gFLpcNqcHY
- DGI4Etk4E+3pQMJP8ghblKZRQ1bumbOuqCHa8vPADhYAWxMw3d9P9E3nN09BFOahOxQC
- OBkBoRAaVlW7pzvWpm/wfn4wy7Bz+dQVwnoL/yS7PtMcem8qq2kuUioTIXDHuaxKckw8
- zmhg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787621095; x=1788225895;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
- b=kUhvX0eAXWp6kwzqP/V4gmbTTHZmrp6u81cfXOFsKfQeoTcEeM7LKXR1t/E05iKUV+
- /wCJ3qsLvVra7y0XZCX/o4PMLERuimoEk4yU4w9gscvImtI3DJ/lMLfUMYV6T94RXRFn
- Qk+KYQjkGJvEipPZtzxCu1msBNl7tKj8Fnyxuc3/i9f86j+RFspa9u64jhI4llqkhE6H
- lx+78mpkgpSNZPH7MHfhP/wI2G+Cile3CrTtPBvFMbdF3FZ8L5WeEnRUnUl8Vs9JmCSD
- axLUi8wBTQyYZmBj0+P/JBeFcIa3SgTT7tfDs88RAFtWeq8qWCyH9cpFAJED8nhKizYC
- KVLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787621095; x=1788225895;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
- b=UAfOpoy0ROSTS5UOyCtolV5ueU6jNnlS70MXcuf3R6eGfpv1xToIv4Cc+A0oqFLjF5
- wWZ/9TlDUsRqoNo/SBrt/v4HjohIkkopyw2SMSdQ5KzguUwid6tx3QNJq6i3KuZmqeCp
- 7YoHj5QjlhsXoxQNxeXqhRgd18Dq3Y21shJQ0nVpPcFQ5xPuuoMQtx74NAbPF7GmDmQk
- 3TG9y/liy0HRvT8UMsRpCQBKj+D+5rh46KA4IJcbY64Pq9NEuvGRpOVoae8sAAdfNJ16
- b3DNIkcAuKCkxbDZeRv8eMW6WN9Hpkvc5JYEc0PbAypDmCwn5V3pm/EsAlGiB5lgMb79
- pYwg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqkQ+4rg9OJ9pHgm0ocS3YIw48DzBOAFppw52ZCeECc2A15b+wxasFRCmtoSSt5ruoIoceR4BM=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kE+qIj9XNi9mP7NeF2079isgEck0EGKMcQaPfW1tUvG3ONB7YU
- HQdaW4dlGXa5uze2Sq7G1viUDimwpH1BtIlJ6Ru2EFzJeUSA6bLPi93j6ydL/srkhwgiFfnBVxq
- nVyl+nfJaofcjy/h2+va+0ceziw2k9xQ=
-X-Gm-Gg: AR+sD13ApFhEzzMgyleI2SSCpIXyVMu+ZyFcd32SVwYRuK1i4u/JIkgA2rA9CcMkcz5
- FXFJOsFpWz/NPivzM6kYlGvVfwTVANhLWjzB64PCdq372prAgyZkVpYx9ileVKiohm4H2P0cTfk
- ZWaV1Sm4SD4gpvfCjCTgCPH60PtUlJ54pyNyjebtpp9TDogiG0ijVNcmcSQyiji0A6GlanebnRY
- uMrFB5Wf3ZZWbawH/1Mn6vWAuvAH8GyhW1NXAY4l3kMvrEtiVPACy8WgJ5enxFV1YGcWKJgVVEu
- q0MXlMpkg//FpnKI9uImiXWO/QVb1iH8byGzTcK08fZlY1H+WB0vqGTit8V6gf+iewkbbXi4yCH
- eu/VcXdLEd1DKgZNu4RMbXHz0G8Csq0Fl
-X-Received: by 2002:ac2:4e0d:0:b0:5ae:bd5e:95f7 with SMTP id
- 2adb3069b0e04-5b4842099b7mr9692314e87.4.1787621094586; Mon, 24 Aug 2026
- 18:24:54 -0700 (PDT)
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=lYTYDRee
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5239460667
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:08 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 1B0966011F;
+ Tue, 25 Aug 2026 04:25:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3778E1F000E9;
+ Tue, 25 Aug 2026 04:25:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787631906;
+ bh=U1DQvrb6q3sugiMe+cSUD0ZgCWCGmLlQbB48pKpZHwI=;
+ h=From:Subject:Date:To:Cc;
+ b=lYTYDReexvSL7J6syuLOWSTAm8HCShbXqj8Vdq4AqqQIzMk8ZGhDu20CWEyvO7oaJ
+ KwvHpP72w8qKAUZNmh6TqErwPKXtIC40J+oJIFfK2bIFuMmEhV3xOatZgc+PKm+Cs8
+ BE9A1hOtT8jf8dU6OnX2rXelEvYtSBFfj1t/9rXDtvxBA3wvw8bXHNaspNdQr5bENd
+ jQuhBaG/x9791gT413qn+sEmeGZEiwO6EhcgkZwG/cjEmj7E/yQ/tKPBVeJF8ipzY9
+ 5nWYH4XGJaKrJb3VoOO1Rq6p9lxHAIpGG8P9XQ8LY/mUF5hDHUek2yP1i6Me8KM6/w
+ FrG3Qtyl8Rnvg==
+From: Yixun Lan <dlan@kernel.org>
+Subject: [PATCH 0/8] spacemit: k3: add clock and reset support
+Date: Tue, 25 Aug 2026 04:24:10 +0000
+Message-Id: <20260825-01-k3-clock-reset-support-v1-0-c430253e759c@kernel.org>
 MIME-Version: 1.0
-References: <20260821070958.6997-1-eichest@gmail.com>
-In-Reply-To: <20260821070958.6997-1-eichest@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 24 Aug 2026 22:24:41 -0300
-X-Gm-Features: AcwNN1XmLTzWd1AGeUan03qFSz82JNYM-Zlscri70Udp8vmrVEMPMm-3d-ERa0k
-Message-ID: <CAOMZO5AY7nkpdyBckixiBTRLK6f1YTL=H14cLnoMLc+Qh5=MvA@mail.gmail.com>
-Subject: Re: [PATCH v1] toradex: {aquila, smarc,
- verdin}-imx95: add board_fix_fdt
-To: Stefan Eichenberger <eichest@gmail.com>
-Cc: francesco.dolcini@toradex.com, sbabic@nabladev.com, uboot-imx@nxp.com, 
- trini@konsulko.com, franz.schnyder@toradex.com, 
- stefan.eichenberger@toradex.com, emanuele.ghidoli@toradex.com, 
- sjg@chromium.org, u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOoYjWoC/yXMwQrCMAyA4VcZORtI6zqGryIeao0aJ2tJOhHG3
+ t2qx+/w/ysYq7DBoVtB+SUmeW5wuw7SPc43Rrk0gyc/0Oh7JIfTHtMzpwmVjSvaUkrWiqMLkag
+ PwQ8RWl+Ur/L+vY+nv205PzjV7xC27QN36amMfQAAAA==
+X-Change-ID: 20260824-01-k3-clock-reset-support-815a0045526a
+To: u-boot@lists.u-boot-project.org
+Cc: spacemit@lists.linux.dev, u-boot-spacemit@groups.io, 
+ Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Junhui Liu <junhui.liu@pigmoral.tech>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Guodong Xu <guodong.xu@oss.qualcomm.com>, Peng Fan <peng.fan@nxp.com>, 
+ Torsten Duwe <duwe@suse.de>, Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Alexey Charkov <alchark@flipper.net>, 
+ Yixun Lan <dlan@kernel.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2208; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=bk8kX0jjYFwIm37q097lkHWQM5iI/j1unEMWDRz0vr8=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqjRkDOicEd/Dp01cIzGTm8nN3F8P/XV98ZeplK
+ I6cHa268CuJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCao0ZAxsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
+ maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
+ QACgkQMarqR1lNu+3plg/8DYsBzSSQNgdGzI73dp0bDT6nl8NOB1HW1+8V+FMM3ddslX8v7D625
+ UJ4bD8n/kR4TTuzXNGWv+nVNvlSBpPGY+kxOtJX/q64IYSzYmgd6WEqp842PBM53nLk60oIDNlO
+ SSR6MfSIuyiWZ1thlJJpWnUBvz96F99fryVsJxe4aWd8M9hUbJJapG1D6PEyZvRxGV9eYfbxv7w
+ ORVGO19R1b6B2B4EC69OzN+o5H6JQryvlVT3z/LTljMVnZoUiSvNPd2Z3Avdg6/y87Uu9LedV/U
+ PRAT3D4s41OwkVufP0FmWrj9AILy42goJ5LyhBM6jS61VsnqEJtliPDtUQG0wlFID/yKlaLbnke
+ rlORxFV6hwBil9GZsddP7SErXc+TF1DA9FvyRp5pLgEbdXQM8IKUaa/1qVzcBIi/kHqD+VtGsrS
+ HD/8amr8hR4yKxfBkN1C2y+onsWbCjYvUN+QQIDvxHVGTDhgEPjxoWg7399dzUbFgrNEt8xzcEd
+ SWzGqNw4UM0NxFaqI5DnT/hDXR0IPfytU6Yww8zXOMi84R0WFmLvLTofklIuN0nESN4afP03J24
+ p0nS/CuLI9SQMa14JvkH1IWaNXWBoTcxRZe9LQiAx84iqC3GSX20USxkBGs7sd9gZSrrAwk/VZP
+ LpCkD6kpqRa9yRsgDO55u/hklnTplk=
+X-Developer-Key: i=dlan@kernel.org; a=openpgp;
+ fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,16 +118,50 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Stefan,
+This series try to add clock and reset driver support for SpacemiT K3 SoC,
+the patches are largely based on upstream linux framework. Patch [6/8]
+truncates the full clock to make it better fit for supporting SPL image.
 
-On Fri, Aug 21, 2026 at 4:10=E2=80=AFAM Stefan Eichenberger <eichest@gmail.=
-com> wrote:
+The reset BITs definition lives in the same register with clock
+controller which make them tight coupled, so I'm also putting reset
+patches in this series.
 
-> +#if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
-> +int board_fix_fdt(void *fdt)
-> +{
-> +       /* Remove nodes based on fuses. */
-> +       return imx9_uboot_fixup_by_fuse(fdt);
+Signed-off-by: Yixun Lan <dlan@kernel.org>
+---
+Yixun Lan (8):
+      clk: spacemit: ccu_mix: fix inverted condition in ccu_mix_trigger_fc()
+      clk: spacemit: ccu_mix: add inverted enable gate clock
+      clk: spacemit: ccu_pll: add plla type clock
+      clk: spacemit: k3: extract common header
+      clk: spacemit: k3: add the clock tree
+      clk: spacemit: k3: reduce clock tree for SPL build
+      reset: spacemit: Extract common K1 reset code
+      reset: spacemit: Add SpacemiT K3 reset driver
 
-Shouldn't this be added to the common i.MX95 SoC file instead of
-adding it per board?
+ drivers/clk/spacemit/Kconfig                   |    9 +
+ drivers/clk/spacemit/Makefile                  |    1 +
+ drivers/clk/spacemit/clk-k3.c                  | 2084 ++++++++++++++++++++++++
+ drivers/clk/spacemit/clk_common.h              |    1 +
+ drivers/clk/spacemit/clk_mix.c                 |    9 +-
+ drivers/clk/spacemit/clk_mix.h                 |   27 +-
+ drivers/clk/spacemit/clk_pll.c                 |  124 +-
+ drivers/clk/spacemit/clk_pll.h                 |   43 +-
+ drivers/reset/Kconfig                          |    1 +
+ drivers/reset/Makefile                         |    2 +-
+ drivers/reset/spacemit/Kconfig                 |   22 +
+ drivers/reset/spacemit/Makefile                |    4 +-
+ drivers/reset/spacemit/reset-spacemit-common.c |   93 ++
+ drivers/reset/spacemit/reset-spacemit-common.h |   40 +
+ drivers/reset/spacemit/reset-spacemit-k1.c     |  128 +-
+ drivers/reset/spacemit/reset-spacemit-k3.c     |  244 +++
+ include/soc/spacemit/k3-reset.h                |   21 +
+ include/soc/spacemit/k3-syscon.h               |  271 +++
+ 18 files changed, 2992 insertions(+), 132 deletions(-)
+---
+base-commit: 36c377b9859ffb53eb1e39ea31e8d96d1e0fe1e5
+change-id: 20260824-01-k3-clock-reset-support-815a0045526a
+
+Best regards,
+--  
+Yixun Lan <dlan@kernel.org>
+
