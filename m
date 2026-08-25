@@ -4,115 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23EDBC61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 12:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBFEC61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 12:38:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CA51A40592;
-	Tue, 25 Aug 2026 12:25:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 873E9405A2;
+	Tue, 25 Aug 2026 12:38:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nx0oRn23NbIR; Tue, 25 Aug 2026 12:25:11 +0000 (UTC)
+ id 1sF9j-QsFKBQ; Tue, 25 Aug 2026 12:38:52 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787660711;
-	bh=80xLsHsjQPYsvkI33brKsojlXpSbMjW5cTPceEWG5EY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787661532;
+	bh=1WCR1R9j1FSsIjJV+B7letwki7aRi5KaiMTADvxDR7c=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=q/9vSvs6DDeprF6EzuePElexX4BKKJMnagOr3fAFm/qSPi0HRHFNmWgDnclXgylYX
-	 OIbo3i4u4QV1vgJ6rUDh1B8Co6ekVAQv0I9LFpOIqcjBNmk9zkEvGfd3R0rhurDqqD
-	 Z7chx0yaYCDuIprxYV4fiSygSO+pcjm4xoD1NSdvU5b6w17s7MEXFhmEZ85J3ppqDj
-	 8o7m6ywZcUFeR85u05EWhmp4KHD7iugHmvjbYyCcjyHszakDXhwN51TFzN2YYVcIHG
-	 F2EWatoO8AvPtZiAXk3Soyn9itsR1xf2T/URn3cokIWvi7GcJXsiLU0FsF8P9RwwKh
-	 kX993sdeHSRCg==
+	b=JKnA8+Xp4mrkxScWYBHgwN63b+S0DJTjucr5VKcPBLkRTOIHUMl0hXZKPaTqo2is3
+	 SRfG01/nQJqpyyZvGmRul0ExZD7tlDO4hw6xymoxDTgpYQtah9xxB1S5z/WD05/ZFn
+	 EMBpwHMp3dd/o6uZ3VG3h/NvUKRDJnnb0S0OA6B3ByCXCrEVd2X6D524i0QDA1pxRN
+	 vIKhmYil1qPaAKZwAzPkM5wLZgrnDvsLfux6WWPum1Fxv76IUgzsc8jBJfjvUVVyKe
+	 lr2F5N3yUcDjslR3OWyqTtUQrBr1KQj3PXdkqS/5R9Rhk8spbLlcvXnEjdL4pge6SU
+	 hmfi4czt6WguA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 16ED440343;
-	Tue, 25 Aug 2026 12:25:11 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7C2D129B
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:25:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 667354051A;
+	Tue, 25 Aug 2026 12:38:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id AC5461465
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:38:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6E0A440343
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:25:09 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 921F36060A
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:38:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8l6eI6kXF8RR for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 12:25:07 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id U_JuO0YzuPUj for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 12:38:49 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::a34; helo=mail-vk1-xa34.google.com;
- envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=WXJOrKkt
-Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
- [IPv6:2607:f8b0:4864:20::a34])
- by smtp4.osuosl.org (Postfix) with ESMTPS id AB649402EC
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:25:04 +0000 (UTC)
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-5c2c96286f0so2082722e0c.3
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:25:04 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=N3CHowHn
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 517D960606
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:38:48 +0000 (UTC)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-c2022323c37so733243766b.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:38:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787661526; cv=none;
+ d=google.com; s=arc-20260327;
+ b=EF8Eg3XDrRssfLrsO3Eobok7IKUD8+DTi2KHADxAKdQE/tZWVT7HAN0n2cm5Dx4rv3
+ To8y7tEDvfBDdemqOroZvgWpUd3wCf7b+h42s7zrAJw8Z/4ze1Up86aaTHXHHu3Yh+Vx
+ xQEHlNkHX5RzZGS57HPI91wG3bX4YaUYpplz+p3P64V2jTiw4TwaEoMiAYvh515jjie4
+ dHvLPnOqnw+CCDplqqFkwWWuK79du67T5KHGvPSYn6/5u9+NYgUPKsC/WMYyGKOGT7zc
+ ukDTo03v/pujdHujcPCftHwuDlgJTRN6mSyNS/kkw4KFOPBmCS0qrHk7LvmSf0IG3SVC
+ ZfwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=1WCR1R9j1FSsIjJV+B7letwki7aRi5KaiMTADvxDR7c=;
+ fh=GIeehlQdLciZCfOgfwMhSyAH/gPgtJ1yl2k1o0vVsK8=;
+ b=kzQekgbf+vOHitRAvt5JyGKp5QyoerEIOjOFI6XESRe8qNeMhnPR8l9LjEcRWoDuhK
+ wBO9CLt6LEt0WFTwj2nfQg6vXm2FD0Lsy48D+4S2Z4AYc/Cjuce5maukWO6111z8FnXx
+ S6aUf9ekPVmJYtNeWxQUbv9H1zkpspKmeJWEAYApfoW2Pje/A61W5XgHcXPrnyhJMOXp
+ bGgO1DC6JxQxv7HcrefJI9FtqVq1G5Vt4a4dAUkI8nHerpkywSTSdODxTB/syAa0DqyB
+ ZgqRbtKzoCs3WpzE5c4Q7NqHNyJTOVwWg4KDE7NJiyaPmwO0amjL7MXd4CM0Ih5GRB3o
+ Lh2g==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787660703; x=1788265503;
+ d=chromium.org; s=google; t=1787661526; x=1788266326;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=80xLsHsjQPYsvkI33brKsojlXpSbMjW5cTPceEWG5EY=;
- b=WXJOrKktROm+PRo+VqZe8IDrwC36oLDXmR7Bx0+p5g9RX2YMRPpP7qsDPzDahoOo3m
- +dseBelTGrOY+XxlSjfA2SUQKXsq0wAk7XVbZeDeenZhnsY24hm7xB6eTiMQp9QJf2pP
- Jl8CQgpqe+1rvWEpv4D8xmNwXJqaLKwc5AhR/mVuSfktsQrjGe0mOg/kn1vWlp+mRM5P
- fVUhhfXGSraZa+E0ct1uRC+EmNKoTTU6Xf+0NjbDV3MiFgJUe/t3QsTpLuLSp0X33cRb
- SnAmS2PXFnQxT2QoupCX8i7IjHc6/2SrZGBNjChuo6uPJ/VBEBiG1wDcqAC/G8WfUJ/u
- ouQw==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=1WCR1R9j1FSsIjJV+B7letwki7aRi5KaiMTADvxDR7c=;
+ b=N3CHowHnf+cv8QRQS2vO0ozNmuL7eVWpZgJWKtpy4ROcxgN3yOnvWEFPxreUXC9VZL
+ A9m0fonufVeEF/Z0RTjlOlN1S45LnBLZ0y/dA8JVl6lgfdBGcwjYEPF35iTRcaPv75hH
+ nKS9kZLXZxQ5u6OdgPdckQTpxb/if5DVahkO0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787660703; x=1788265503;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=80xLsHsjQPYsvkI33brKsojlXpSbMjW5cTPceEWG5EY=;
- b=Aq0XM4iJEe+jjX5b6w8LAvW29k7Jz2eM+lqYwii6SnafL4r36a0vpPsm5eT7RrIlUk
- Qxje+1zTJjnR3feIpDPpfkrM8eA9Qoq1zO+1UWIk+FE17aWvkTjRNHjZWIpI4uKAuxiY
- Fl/bgP7zZtDAzFb+XK5ykJ75o7vwPyb0YZAdf0CHKEWygFhkyup+Qrb5xHiqagGhos3U
- PCXaRVQFGp0ietJeD5kDBxPakDryFKWgSowjT+zG2VrVB/QhQbGPJgUWgDPPD49LNbp7
- AIsvkCWy7jwmKK7IJ6qyWNjUIa0ovXJwLHh7wjnSUi2u2mbyLaV62fvhGl1Fi24MfMYi
- NrdQ==
+ d=1e100.net; s=20251104; t=1787661526; x=1788266326;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=1WCR1R9j1FSsIjJV+B7letwki7aRi5KaiMTADvxDR7c=;
+ b=EUFPvCYwd2dWEqAd3a5eA/py9QC56WLaMGYKChnpO8GtncQwFp+d/mjzzm83/p6nmf
+ 2JHDlcVjldEq0pXG0QoHcgrK5KVm7vI6n17TgWqrjhkJ9up4Q8ez5aDZaA0an4VQ/wsC
+ zPompU045l6Lnjh329z2/YppmvFTRmQdOb+25fFuHg4wgxvm018LBcYPgO/6/zi+TlIi
+ cM7Agcd8o3nsm4xbhICUntKUB7N8pF8JGTdsAU2XszMQOVyjKUmIm64+n7mkl9QoqhUi
+ fiJU2JooUrZgNdnPeOu4snlJEgnkjtwRIg5cuue59TmDTHieaVO9g+1zgQNWFa9FoqE5
+ Ke/w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqwOzceL+NVlxlIHBW7erUmfwqA6lKh3achv7IiEEF7m7Hyglua1P1tREY5U71pCKUUWHwW2E4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++lLgxBfSo8ATCN5hs+l5iK7o88fBEojXfue6LSBgkrwBe2UJUHU
- TD7xM0KV5kBz054+iDu5+cgBNCaQm/9lcCbIXMA+xDtR0htKeNuBRFz3R13p3s3yXbI=
-X-Gm-Gg: AR+sD13zm2amBk352oj3+9zmjmfnTr2ENND7VXgjMtSLm9GSIXycdPsqeY8OOHMER4X
- 4bfZuBxmiMBuiMiFaOWYNRjA12faVGd+BGgdFlWgFmPHCEZARGia6uRQ4bPX40qo9MeqAUy/1pu
- vuuiwuOKA60Y+i/40pYqVd7JhCPxZ69c2RY4M8ZDKa70+Z0yjxop74B49tsvJNZ18kTkMYMWeWp
- bDcI+0IwFoWMvrscJLRbfAQJp5f1Hu9dB3Le+JQpESo191IDoHfYTzf2TSQUgGrcvSCCIOVpofa
- tdriS0YVrVs1il2/rQ7WGX37giSyD10qTl7X4Oi+C5s3WdQa2SQoRiZL3R+P0Y4NI7a0MOmQTG9
- 9rHCFxRPIW4SnSY1p3DPH3dygYGAPV24+NHTNvYoe+S3jN+p32Ws2jQO9n0sLt2cGLRtshrdx0w
- wDigm7/f0UVAw+JeMwuIBdeLAz4nrA3LH2+yCr36HFAqypevifthr4O7sK6cbUzqmObZ6MzmguY
- VKdTpqqvLNXSnTFsC/XJcxV
-X-Received: by 2002:a05:6102:f85:b0:781:4b6c:2d1f with SMTP id
- ada2fe7eead31-7814b6c33f1mr465754137.3.1787660702882; 
- Tue, 25 Aug 2026 05:25:02 -0700 (PDT)
-Received: from hiagonb ([2804:14c:4c5:9534::f35c])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-77d82f70b83sm5130546137.2.2026.08.25.05.25.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 05:25:02 -0700 (PDT)
-Date: Tue, 25 Aug 2026 09:24:59 -0300
-From: Hiago De Franco <hfranco@baylibre.com>
-To: Andrei Lalaev <andrey.lalaev@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v2 0/2] board: sophgo: add support for Milk-V Duo 256M
-Message-ID: <ao2Iqsq-Xp4dQK4c@hiagonb>
-References: <20260723-add-milkv-duo256m-v2-0-2e1373dbcb8d@baylibre.com>
- <20260822091510.3253162-1-andrey.lalaev@gmail.com>
+ AHgh+Rpqma7HdDAuVIPffsf6M3So7aLlWLBXrizS/9wGLfcAEYwTXXIF5qagFYLD90qlxfSbNIYiohs=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mGo8kYTzP8nW1rYJEt70zzepitgzAGlG8StXFZfuuHwVHwLZBE
+ 0eidob+IaWYUyHPCecc1IldrCU4tJTJ6NGbltkZcDl3tffEsl4JqxGw+s2U07T/alsEoyhhD7Yd
+ vJQw3UTabsFmoyTnWPmCFJcajXUAXJlzbMc1E9QaW
+X-Gm-Gg: AR+sD11J1s6FOQeozockGguq1tExyDfI94OOfxF8R2fDy6FTpP+S13MZkVZyZqTirT8
+ kw9wYL59rhunaGBZEF2xv+mauowI2gwX9NKhVBQqJtHTuljW/pBlBl6oSUaDEnaAzxY+WpwhQa4
+ TIOon17sq7nluUfB/re/X0ZRcU7EjWbVi/K9hBabic8JM4Hii3iaa/LApCeou+KOCwIXEh3Nhl3
+ goxxpnJp4h5lhSz/MPYDF8sf/qGmyxnREP+TJqMjUqDQJI1ADSBz7lgI2kd9rXIUGUgXl9/r0Pd
+ t3+S5aQfq8KydHyzytTgRfXh1XF3DjAFknDb00F1T6g=
+X-Received: by 2002:a17:907:8995:b0:c24:4128:c19d with SMTP id
+ a640c23a62f3a-c24e584dc37mr625993766b.4.1787661526220; Tue, 25 Aug 2026
+ 05:38:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260822091510.3253162-1-andrey.lalaev@gmail.com>
+References: <20260823101128.87329-1-xypron.glpk@gmx.de>
+In-Reply-To: <20260823101128.87329-1-xypron.glpk@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 25 Aug 2026 06:38:34 -0600
+X-Gm-Features: AcwNN1V0l0wC3ATuJfiTT_yp8rjhNuDQk94TQhD5-Nr1sIbReBaIpd82K6T_yLc
+Message-ID: <CAFLszTggKtXxv_-5tYXSY1YdbTxwO9XQLbEcGn+HbQ1uwTpNCw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] disk: drop Amiga partition table support
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Aaron Williams <awilliams@marvell.com>, 
+ Mario Six <mario.six@gdsys.cc>, Stefan Roese <sr@denx.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Daniel Golle <daniel@makrotopia.org>, 
+ Pranav Sanwal <pranav.sanwal@amd.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,53 +144,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Andrei,
+Hi Heinrich,
 
-On Sat, Aug 22, 2026 at 11:15:10AM +0200, Andrei Lalaev wrote:
-> Hi Hiago,
-> 
-> Thank you for the patches.
-> 
-> From your cover letter I understood that SD card is supported.
-> However whatever I try, I always get the following error:
-> 
->     U-Boot 2026.07-00002-gbd5e3de2ed6a (Aug 22 2026 - 10:27:48 +0200)milkv_duo_256m
-> 
->     DRAM:  256 MiB
->     Core:  20 devices, 13 uclasses, devicetree: separate
->     MMC:   mmc@4310000: 0
->     Loading Environment from nowhere... OK
->     In:    serial@4140000
->     Out:   serial@4140000
->     Err:   serial@4140000
->     Net:
->     Warning: ethernet@4070000 (eth0) using random MAC address - 16:21:8c:10:cd:96
->     eth0: ethernet@4070000
->     Hit any key to stop autoboot: 0
->     milkv_duo_256m# mmc info
->     Card did not respond to voltage select! : -110
->     milkv_duo_256m# mmc rescan
->     Card did not respond to voltage select! : -110
-> 
-> 
-> I tried 2 different SD cards and got the same result.
-> 
-> Am I doing something wrong, or is there something else I need to configure?
+On Sun, 23 Aug 2026 at 04:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> The AmigaOne is not supported anymore by U-Boot.
+> There seems to be no need to keep support for Amiga partition tables
+> anymore.
+>
+> The usage in sandbox*defconfig has been for compile testing only.
+> theodorable-x86-conga-qa3-e3845-pcie-x4_defconfig and
+> octeon_ebb7304_defconfig support GPT partition tables.
+>
+> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>  configs/octeon_ebb7304_defconfig              |   1 -
+>  configs/sandbox64_defconfig                   |   1 -
+>  configs/sandbox_flattree_defconfig            |   1 -
+>  configs/sandbox_noinst_defconfig              |   1 -
+>  configs/sandbox_spl_defconfig                 |   1 -
+>  ...able-x86-conga-qa3-e3845-pcie-x4_defconfig |   1 -
+>  disk/Kconfig                                  |  13 -
+>  disk/Makefile                                 |   1 -
+>  disk/part.c                                   |   1 -
+>  disk/part_amiga.c                             | 385 ------------------
+>  disk/part_amiga.h                             | 137 -------
+>  doc/usage/cmd/part.rst                        |   2 +-
+>  include/part.h                                |   2 -
+>  13 files changed, 1 insertion(+), 546 deletions(-)
+>  delete mode 100644 disk/part_amiga.c
+>  delete mode 100644 disk/part_amiga.h
+>
 
-You are most likely missing this patch:
+From a brief look I could not find the source code for a real board.
+There is code for the QEMU version here:
 
-https://lore.kernel.org/all/20260507234836.284918-1-hfranco@baylibre.com/
+https://github.com/qemu/u-boot-sam460ex
 
-This is needed in order to make the SD card work. This patch is already
-merged on main branch, as commit 3a4a8963aace ("mmc: cv1800b_sdhci:
-honor 'no-1-8-v' DT property").
+The board was removed in 953b7e62919 ("Remove AmigaOneG3SE board")
+about 15 years ago.
 
-Check this patch and let me know if it works now ;)
-
-> 
-> 
-> Best regards,
-> Andrei Lalaev
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
-Hiago.
+Simon
