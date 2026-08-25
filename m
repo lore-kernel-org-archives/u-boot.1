@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24478C61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:50:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E881DC61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:50:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D5A9240697;
-	Tue, 25 Aug 2026 22:50:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B8F4440648;
+	Tue, 25 Aug 2026 22:50:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id czRnd88fYhnP; Tue, 25 Aug 2026 22:50:46 +0000 (UTC)
+ id 2NqxkRAxImzw; Tue, 25 Aug 2026 22:50:51 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787698226;
-	bh=rsmekge3o4EpnNrND4Cpx6Qk54SN0/ACqgmagJ2fyp0=;
+	d=lists.u-boot-project.org; s=default; t=1787698229;
+	bh=4Y/63duLEmhySOpdaE6c3xfU7RfI3aLttzc633/w7bM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jP5NZPwOiTmAIa1NLWH1FAgLdAp21aosFJ7Ilq5OeX/173/uhlpipaqxB+Yr11Nov
-	 2Wgx8CzRJ3L1KKtk7BiFuDHKhU9fcX1ZtQctvbHCRs1dwEqg1M0kjUS25m2mIXEYEI
-	 xpxbkQQC2U9adPKRs+8ZnKyaQpqj7hNeaDj++IjFWYfwKCfOxda9T6qp4PkrAdxhlq
-	 Pmls3c2k7aq6VdFY8iDmjzzuIVIqvg3o8adSyl6BFOUpUoorcT0Rj1lN3mcg87l+vK
-	 YbapjaFMgkD8ZI+I6yUaRe52wNVg4fPtSXpe+L9T8cOgfTK7Eh8KquzEPyczlMs2oI
-	 PtlDhndBOoADA==
+	b=C/kMDPk0c9KPnLmhtWGAPO3LMOvb4QmhkOO0VY+D0kwO3XlGPFxqHrDbkffpZ62V6
+	 xmF5WtiX7d2pqAt/0h2vzKsQE3H2OHNnKJTpSHnrdTO5c8/jNAoWgULloJFXRhmcbA
+	 8Tj5VCXjoVyHWr28G150+86h9x5bsRpmxFP/FVQXlGPxVCjPRGqJNNbCYIbZolotDj
+	 yKLOLKqa2wFEfayZfTLO8Tz/A+R/QNzISAJnpU4HWYCOv7xithPyNQZe/Cn9cgPpUY
+	 Vq6xpYxtbzYbG0VSXm500NLBOhVLJXlGlrSP1b4k/Vq93Ikb11V3p/Gx8DTiYeN/H9
+	 CeGu2f1ZOOXVg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6D91040731;
-	Tue, 25 Aug 2026 22:50:26 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 83EAF39E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EFCB6406E5;
+	Tue, 25 Aug 2026 22:50:28 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7A97E2FD
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 75C5B606AE
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:07 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6D18E400A4
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H7YSOf3uyS0w for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 22:44:06 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VBVGoLdrgc8z for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 22:44:11 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=34.2.90.19;
  helo=sonic.asd.mail.yahoo.com; envelope-from=maskachoska@yahoo.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com
- header.a=rsa-sha256 header.s=s2048 header.b=SWLYJMuz
+ header.a=rsa-sha256 header.s=s2048 header.b=XaWkwa3X
 Received: from sonic.asd.mail.yahoo.com (sonic-asso1-0020.asd.mail.yahoo.com
- [34.2.90.19]) by smtp3.osuosl.org (Postfix) with ESMTPS id 64320606F6
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:04 +0000 (UTC)
+ [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id 4EEB04008D
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787697842; bh=rsmekge3o4EpnNrND4Cpx6Qk54SN0/ACqgmagJ2fyp0=;
+ t=1787697847; bh=4Y/63duLEmhySOpdaE6c3xfU7RfI3aLttzc633/w7bM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=SWLYJMuztWQXOk2Zex5ibGagdog5wQjV8MTGUv8cY4FNQfYzVh3smxSvf8xnQOGXhK1TrDV3VwGntsS7HI4JcMOnmJNTQOlStCeKBZxa5qybxjX/9EhtXlgxQZATLe00kmbRj7AoU/8cnhumDnA+dj2wf7ukzddgx53l4ClLS0Q8BuYaU8Xqvim+9EEfh19kuV/hCQ8QXoyV0OvYGHR9u6B3/xBqpBLVHABRWxD6Z501sdiEODxSq9JK1ght7hOoSsbJnEu1thbRwwodeE1CT4p7gjNJaXDQlGxSQSl0S3yLEIZ0hRhZUHgBIYC50d7umP+E+6PuEkbeOj0wVZqUzg==
+ b=XaWkwa3XV/iyYUkZTly7uVtw2u/jlQuWRhLy5QyC5i3zqAThjc1UkVUiQaSGtpCEA1+dfcLiAfX2WCM+JoP9jwUCWQ2X4lVu/x3sJBBZbUPF6tINTVbjQoqrjGtcUficKjpgz3Tpii8mV8bPgtQ/cykZ5IWI4uWbGi3Yw61KTMUIm199RqHK+RvjO/lEftydNM5rcpnjFAsgN3PMZD8r6NzjGGN9AXCo8Yvyx25l/CP4mDOCX9gGWUy9JWHF3hqYPAOf1uRYWl7eirOq/Xqik+El/i6Z3q/4D6xNeGMFAtLXx7lNXR+ZDGKwa1rMDca3HC8fRsUSjEPCUaOoHxSV9A==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787697842; bh=Crw968WDKEQdX1H8B1BEE9TXJl/Ee8CZloHvaXBl7Yr=;
+ t=1787697847; bh=N4FHaWwRMcY4cUuGAFns5Bsnmc3q59P0bQ2Glul2eNb=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=J9CHjhaFtTtljVgSCngv7t7gqb7hPqAQXNWnTI6rYmkjE1g1pNuVMN45X72jXNWS80OP7KHrHbA70FuxVg/Ng8PCjs2lX+eUz+vts1dAMZXbJG9u3qxklmBCD7P8qdmN/4DPtiMGAHRBWtDgHMl5eVpZFvQD8jYjn0g4SiXSuLU39jn3t/ODkxviAS1tLZcM7hLvz2TIo2KWgNd+EtXmx28smE6y8H/ZpY92iGK+6pXOxklGm6aC4AaJCARQLkQOLOXzOfGaZAmiyGLjZ9yDHrid1rdw7kw1UPJGtnGsm7jyWgtrnIaXooNv7HLil08LY0gMuf2pOVhM9F061M8tHw==
-X-YMail-OSG: gNWLDQsVM1mh8tuOTE9seqx2I00dLKtmkBY4E_O1olTBCQzUl0LCt0RjfBF4xvb
- L868Q9A.MlhnZtLipE.NH5aFaBD5YHb7xvzIseS2C2BvfqGNprfLoOrI07cKLh8rqsIeUuXbhUSz
- yH5Ofi1vEsJiexnXy4W8shKhlyOsz6kcdpk3b2xV7oC4rOQGr3rAvmcV8pZg178KDuWKPR2V53za
- xblAyfNevTF_IKDkcQjQHGJNZZr8xaF9nSJPpcsq2rJ_YvUqdh18aHeOudglEQTg9s4lJDNITZpt
- MR0A_UOl2Skvdu1HqIB173b0Sm0ysIxBOm8Hb7wexh.I_wcWzPL3Sj4q4qAhWSANd4_DEgG7Wowt
- lxlKo_ycSFCBQs3wPozo2h3yxcwcXcn_2egPUBj1FhSQPEK.miBHjKrqxRivkbfIpIqMXrRUmV8y
- EktDcKcnlzKKF6uHhNl0pgzQqfTg_ONN0EzgrWWjv08_g7aJ6tOU.0FmizWtWnKejuCeVn2..QtA
- 4f0buJ8eBpSS8ED66wlXkz2YcS2zxyeoUesiNudy0wiSCvDP4kr3K7MjY.6bXWbH_QPoi4oE06t4
- TRdslXI.KyioGGz6q5fzWBIwVcMvab53pStVHIDqf6R2LnEvo6kMMEj9s8hpoOvTeUhWqGnoy6Ls
- lJGLFo41eqv.2ifVQl8kkMBigxP.4gxaACY8DBuzmZPrf1VW0.fMPZhVKae068SVhWkoxAcHO32.
- FRQSrnkobXF8trKd1U9pqI6vMvLvW2z1Itj8Wgts6mzYkopdmGBJjRD2xfT40QnqhcgY1ytIwWLO
- lco_i44Z4dA9.dB4c8J7lw9xHIJ4tnsAsTVRdjpOwJdG.sbzySdwMIVTs8f2UDgN3q5YirV2GD35
- ZJJwXuO0IVRDojhudLX8XqhuIekfUKHkUzPYYZEeef_ShK6PpINGdYzauLZl52fTy1FjniM3b6Y8
- ykQ2NZ7ETFeWK94dyvAB2ypS42S1zDCJzjxTiz5FNaTm4TwmGF0SxSX_Vz91aY5TMRg9dL.3iYRy
- vPb0_CNfkqzf2ei9d7Qmd8scOAhRLeaEU8n1pZwSNsFa40UqggU.O2PsrEDNL13BxDZEjT7eRDii
- SWf_LOijinbqHYYJQN61pvG9WzKO9nsjcNIY1vPNPvkR6QWTgCGMpgLxYsV3q3pECJJ3bqsmSHp3
- iIe_yYqyg_MS2yOfKjpG8iSWjFfutRFadHY.N3Sd058Berp2N7vxotiwCs.eZnfTLwBXpQzRnIgm
- AUl9gdl8yNtBMadjC_RBVoIONG7_MBgd8cAhBaWYZq9vEj9KO7R_jJvEMHGjAxvfbfiBP6z82xwD
- 1cB5vz5pLt_vuEUqZQ8WnuPPzVwk8ksvyC7N7CkdLnzwP1JpSbUQqq0eo_3gMT7PNlVSmpazvb71
- J0nQ2TIMvvUPoiH7CqT4hHbiO9w1z8jHBYe9oa2qke_VRODxgPPYed4X77tDVY6j7stGT_qufcJ7
- E_P1NGimA.DcpK3zucUC31mIlp1BAWXsu1hLDUNz.F1Jh_5I07Kq05v2Ai0Oy8TpFu7ezz7UxbUU
- xbOJlySL0l0M5k42dHs4gM51L4ePtAcdsIDPIn3dzBsMwkFd1m1Ac6WRDicBe2mD2MlY9d1KUbS.
- zcPGqLUixW3MNSGJ7xDINv4vHLxqE4dsMqfPwW4pGdeM23QzyS_qcVkg9v_L1SCUx07l71DJFfFE
- Nz5uP0Wyr82ntKk4QT1igz11S7tZfwGnvtkptitUtHVpr002k2_70j8F81zKbV8tFc2hkwEx7Knf
- PcVvIluZU.R_YRpUuVfLAYPrJC1G_9nkJQ1mTaOo2EhEh_lMGa9Of2fCSUz.R._TCTy64v0LMB_v
- A9bwZ4farvBHg0JZQJQW61yfpNSbzq3MRnRoqA7sxIFNBDIxE4mbL.eMnFcrVkWr9najlrP_6ASs
- lpIriyWJJI.luUtALqJ9WJUyOSw_O4EdOAsUn48CgjzlDiiQNblXDAoaJZ_k_RocRRfz03hRp4qh
- Vdl6ZKDAJWWmz4nPgJPHJzUXxky027lAGbSwtxTU9TgVco.zmwUwkoH1HCgj8jvbCq7HRE8KYOES
- fWc0-
+ b=Sdk+tncZjYAQSKqMWITFD3UVx6avFyPYzDOAWNgg6eGxkAWY9rBEd08mP5YkaO8SODKrsS3RXwM9908rC/tx6dGs5LHAc4k57awqDh5UcI2sCNlPAw+NsrmQvR0x8edX5BTW37XkAm5etXX6p6mCUALWBexh9IYAIi3UVMFLGsU6wKB6WDxH2Sn1CcPPed6gkGq1zw26tS10bzrOABH2LskREmU9fglmjz4smwA0JNKfRmeqRQX+GFV4U5Y5pe2eH76rlCFbN5uubgwGPHo01EquWQC35e3YYcZ/is1vchcKjC1Ki6+GAZyanQRehRMX8rGrHTi3f8rhhmppgy6+3g==
+X-YMail-OSG: lRA.l8AVM1kKtJOCiEv94JdYA4RTJQREVbUu0F.XqLrDJ6_bTX8weu3C3qBGIDT
+ ZPGCDe11TpfkboH2uM73s9VnOPkpIZmbFtPiKEOdhwxEc0M4lOuI8l1GIiYWSM2rAL6DBHlrrllt
+ 6gxkz0KW7_zM32aAAaySvUypWUdqb_tqrK6OZ6L2vWgTHTnnmZ0CCy3P6HBQZ0Ija9LOEqra_apW
+ O5qGHryx1f.IjsqLedmSBX97mx1qGLIMF9LkRSw4nKayLIqJxWUV90.5u2raRBpzKQWAq8JyETZG
+ oVK2GkzJ0Zdrlal.u8YCfylGnlGCIhLZDIepNvKD39sctl2Xzola.DWxgJGICzJ5Q6yzrCTA8ZY5
+ wmSpegXS0BPgniVlSv7ybz7lQKuhORX9rnCZ3rKpYZLoaqt87nF_BESW9gR33636UVNI.sgYTdlK
+ s9nECnrt3HmnV2uNrJ2jl_hcjU16RGwnQlsakYmlInt0GG5aR_zB8Q8rorI963MQxOgzfaj4QItv
+ XVQfl1WxZVXO8YoWw7ZvQCT4U.qR9eZg.8ONUTcHVWtRA80Ju1eNRhXAxyvUIlW5M9OX5xFpkYGV
+ PX3IPRRHXdK1rwmbu03_DFv7RBCwlKArRAHTePBKLr5bciL6L4u7YT1xTPgYY_qvZn2N7jEhQxeW
+ SvPXK56nR3D9cP8KnwiLlcMTpOqPoFBHCdFzsrNAr2Sr3ojwlQJs6StBBcDMkkuaY_AbOd3gToCV
+ OQVYx8ohlcpwmiCQUgiqJet.JDaGw.TvEXx78Kf46eujhcduAdg9gloIYy0qpbv.BRUaHcKCpMmS
+ LMIM02Wybyxl6ON.zQijHHoPp9b738QlO1Ohg_lDRoLFEU3HdGGjC1HZL9xb2OgXYw.gCuNZl8UM
+ Vj4ygMcSecHtGMNJvLhF7xFI.7svi.X71r8zPM2MKjeAExg9NVylQ065VckBqU9lE8l98A3WIFxR
+ NnMmt34XkwT09wJ0wFco5IIf.1ilCDceA467kOl1iJZbNbuVFkuF3IbzLUzwnEg89SdugJQp6sEw
+ wVxoeCJdx8pNRrkH9mAlWr_70sCG5tI0sjt8G5TaJMqpOwW4jkJnGzDn85cDw3BOpynOPj98Af2K
+ mtI2zDx80xstHASxnyExy1l5PaBKZ8Bff76suhmW_HXhvYBRDO_LEUtnL_ew1dfNRSVCNZuzCKq.
+ K75EWxuh4D1Ih040c3TLl8EJup91Thoritohb3jtC6MJaRVUkgaCBCd2_AB4WRCLczotMUeJmYky
+ hDMZAzT4AZ_l5cRgRLjFCfNf8dq.g3Xe9gfGNzieAbc7eesK5e2Qz6dU5gCP95AnxmK6yKBrqCEW
+ JFpvbAXqDYneR9neeviXmblR83WtyjUMxsuMiMcKgLooERB_c1FsR4PX_1tsU2rCiVuQeeRMvo6l
+ pmTrtrANskbyPEoiBypHPtRBClBVsIEeoQMwcacJFdu74oon1JMMFl6GE35ZFbgtAM64xDgdFipm
+ ARo4ccg8pRRwB9cTZMbhKSdXdnNuRhMNtVziyr6sUqtK3MhG0k5oe7ou1nbaFrfKn2pVSbSp_uIs
+ OIRS4dlcDivPU1WWRs6B.tXqdeYG5YTIh7mq85s_d40RoYkcGdabFY9tmMRxtNnXfayOpWtmnkD1
+ RqGfxjXgdgzVGck1HaiY1QUHHpclI8wFEQVqXb5vh.wEWwTENUvo2hfOHSbFvvzeXMJ3kW5yqEBg
+ u5CaNPTNsHecDcmzMx4NthIET.x5EcxmZ2d2e2J4R5tOKyJOCv9nRSchrrDCAt3IVAoOiLUrNe90
+ EGV4rXctvShva.nPX.npo53mmtDAcIyqN3y1HbaG6feDkH5tcSbZDODJE3Q_syb567bYx86qWgE6
+ 8AMu6LsVwrC4ETPk1rfKGttB.sVXBDkUEMwYnGk9W0cTwDJODEcQT.QLKXr1N1KWsalO8V6vM3rQ
+ LspfPtZ9iOI2pKYzkxS7JVmjklA5drkwqMrhUcW52gnOgd_RRzF1TuA6ok4XPqLe5ylWFkhNnQ_h
+ HesJ7DxHtUB2bEjldIW9phXBZQ88_jVNwqImCZm.pjKVhW1_4PK2wor5ey9bfZjw3fznNTknMhua
+ mwVe4GD4-
 X-Sonic-MF: <maskachoska@yahoo.com>
-X-Sonic-ID: 1a8516f5-9cf0-4a98-9a8b-9ca078ec8787
+X-Sonic-ID: d33436e6-c0ee-42e5-89de-cfc52af04a3d
 Received: from sonic.gate.mail.ne1.yahoo.com by
  mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-102 with HTTP;
- Tue, 25 Aug 2026 22:44:02 +0000
+ Tue, 25 Aug 2026 22:44:07 +0000
 Received: from dip125.lsn.sg3.yahoo.com ([106.10.223.134])
  by hello (SMTP) with SMTP ID 692ceff9cbf31ebf3ce1df27c5387b11;
- Tue, 25 Aug 2026 22:44:00 +0000 (UTC)
+ Tue, 25 Aug 2026 22:44:03 +0000 (UTC)
 From: AK Sharma <maskachoska@yahoo.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -105,10 +105,10 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, AK Sharma <maskachoska@yahoo.com>
-Subject: [PATCH v1 04/12] spi: airoha-snfi: add EN7528 SPI-NAND controller
+Subject: [PATCH v1 05/12] mtd: spi-nand: add EN75 BMT bad-block management
  support
-Date: Wed, 26 Aug 2026 04:11:59 +0530
-Message-ID: <20260825224330.713151-5-maskachoska@yahoo.com>
+Date: Wed, 26 Aug 2026 04:12:00 +0530
+Message-ID: <20260825224330.713151-6-maskachoska@yahoo.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260825224330.713151-1-maskachoska@yahoo.com>
 References: <20260825224330.713151-1-maskachoska@yahoo.com>
@@ -128,702 +128,785 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Extend the Airoha SNFI driver for the serial-NAND controller on the
-EN7528, including the two-plane column handling required by the
-MT29F2G01 SPI-NAND.
+Add read support for the EcoNet/Airoha BMT/BBT (bad-block management
+table) layout used by the EN75xx vendor bootloaders, so U-Boot maps the
+SPI-NAND logical blocks the same way as the vendor firmware.
 
 Signed-off-by: AK Sharma <maskachoska@yahoo.com>
 ---
- drivers/spi/Kconfig           |   3 +-
- drivers/spi/airoha_snfi_spi.c | 409 ++++++++++++++++++++++++++++------
- 2 files changed, 337 insertions(+), 75 deletions(-)
+ drivers/mtd/nand/spi/Kconfig    |   8 +
+ drivers/mtd/nand/spi/Makefile   |   1 +
+ drivers/mtd/nand/spi/core.c     |   9 +-
+ drivers/mtd/nand/spi/en75_bmt.c | 665 ++++++++++++++++++++++++++++++++
+ drivers/mtd/nand/spi/en75_bmt.h |  24 ++
+ 5 files changed, 706 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/nand/spi/en75_bmt.c
+ create mode 100644 drivers/mtd/nand/spi/en75_bmt.h
 
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index cfbedd64..83a79bee 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -62,7 +62,8 @@ config ADI_SPI3
- 
- config AIROHA_SNFI_SPI
- 	bool "Airoha SPI memory controller driver"
--	depends on ARCH_AIROHA
-+	depends on ARCH_AIROHA || ARCH_EN75XX
-+	select REGMAP
+diff --git a/drivers/mtd/nand/spi/Kconfig b/drivers/mtd/nand/spi/Kconfig
+index 1124dada..09531914 100644
+--- a/drivers/mtd/nand/spi/Kconfig
++++ b/drivers/mtd/nand/spi/Kconfig
+@@ -6,3 +6,11 @@ menuconfig MTD_SPI_NAND
  	select SPI_MEM
  	help
- 	  Enable the Airoha SPI memory controller driver. This driver is
-diff --git a/drivers/spi/airoha_snfi_spi.c b/drivers/spi/airoha_snfi_spi.c
-index 769ec956..738a805d 100644
---- a/drivers/spi/airoha_snfi_spi.c
-+++ b/drivers/spi/airoha_snfi_spi.c
-@@ -9,6 +9,9 @@
-  */
- 
- #include <asm/unaligned.h>
-+#if IS_ENABLED(CONFIG_ARCH_AIROHA)
-+#include <asm/arch/scu-regmap.h>
-+#endif
- #include <clk.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-@@ -16,11 +19,34 @@
- #include <linux/bitfield.h>
- #include <linux/dma-mapping.h>
- #include <linux/mtd/spinand.h>
-+#include <linux/sizes.h>
- #include <linux/time.h>
- #include <regmap.h>
- #include <spi.h>
- #include <spi-mem.h>
- 
-+#if IS_ENABLED(CONFIG_ARCH_EN75XX)
-+#include <asm/addrspace.h>
-+/*
-+ * EN7528 (MIPS 1004Kc) DMA coherency.
-+ *
-+ * This SoC inherits its cache setup from the vendor bootbase and U-Boot runs
-+ * with CONFIG_MIPS_CACHE_SETUP disabled, where the dcache flush/invalidate
-+ * primitives are not reliable.  dma_map_single() therefore cannot make the
-+ * shared buffer coherent: a multi-page read returns the same stale cache line
-+ * for every page.  Use the uncached KSEG1 alias for all CPU accesses to the
-+ * DMA buffer and give the controller the physical address instead.
-+ * (Same remedy as the airoha_eth ring/frame buffers on this SoC.)
-+ */
-+#define snfi_uncached(p)	((void *)CKSEG1ADDR((unsigned long)(p)))
-+#define snfi_dma_addr(p, l, d)	((dma_addr_t)CPHYSADDR((unsigned long)(p)))
-+#define snfi_dma_unmap(a, l, d)	do { } while (0)
-+#else
-+#define snfi_uncached(p)	(p)
-+#define snfi_dma_addr(p, l, d)	dma_map_single((p), (l), (d))
-+#define snfi_dma_unmap(a, l, d)	dma_unmap_single((a), (l), (d))
-+#endif
+ 	  This is the framework for the SPI NAND device drivers.
 +
- /* SPI */
- #define REG_SPI_CTRL_READ_MODE			0x0000
- #define REG_SPI_CTRL_READ_IDLE_EN		0x0004
-@@ -80,12 +106,19 @@
++config MTD_EN75_BMT
++	bool "EcoNet EN75xx vendor BMT/BBT translation (read-only)"
++	depends on MTD_SPI_NAND
++	help
++	  Honour the EcoNet/Airoha factory BBT and BMT so logical NAND
++	  addresses match the bootbase and Linux. Read-only: never rewrite
++	  the tables.
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index a7a0b2cb..20aa718d 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -1,6 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0
  
- #define REG_SPI_CTRL_NFI2SPI_EN			0x0130
- #define SPI_CTRL_NFI2SPI_EN			BIT(0)
-+#define REG_SCUCLK_BOOT_TRP			0x00b8
-+#define SCUCLK_BOOT_TRP_BOOT_FROM_EMMC		BIT(6)
-+#define SPI_NFI_SNF_NFI_CNFG_SPI_MODE			BIT(2)
-+#define SPI_CTRL_SFC_STRAP_BOOT_FROM_SPI_NAND	BIT(1)
+ spinand-objs := core.o otp.o
++spinand-objs += $(if $(CONFIG_MTD_EN75_BMT),en75_bmt.o)
+ spinand-objs += alliancememory.o ato.o esmt.o fmsh.o foresee.o gigadevice.o macronix.o
+ spinand-objs += micron.o paragon.o skyhigh.o toshiba.o winbond.o xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 14af4264..29fdefe2 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -33,6 +33,7 @@
+ #include <linux/mtd/spinand.h>
+ #include <linux/printk.h>
+ #include <linux/delay.h>
++#include "en75_bmt.h"
+ #endif
  
- /* NFI2SPI */
- #define REG_SPI_NFI_CNFG			0x0000
- #define SPI_NFI_DMA_MODE			BIT(0)
- #define SPI_NFI_READ_MODE			BIT(1)
- #define SPI_NFI_DMA_BURST_EN			BIT(2)
-+#define SPI_NFI_DMA_WR_BYTE_SWAP_EN		BIT(3)
-+#define SPI_NFI_DMA_RD_BYTE_SWAP_EN		BIT(4)
-+#define SPI_NFI_ECC_DATA_SOURCE_INV_EN		BIT(5)
- #define SPI_NFI_HW_ECC_EN			BIT(8)
- #define SPI_NFI_AUTO_FDM_EN			BIT(9)
- #define SPI_NFI_OPMODE				GENMASK(14, 12)
-@@ -93,6 +126,8 @@
- #define REG_SPI_NFI_PAGEFMT			0x0004
- #define SPI_NFI_PAGE_SIZE			GENMASK(1, 0)
- #define SPI_NFI_SPARE_SIZE			GENMASK(5, 4)
-+#define SPI_NFI_FDM_NUM				GENMASK(11, 8)
-+#define SPI_NFI_FDM_ECC_NUM			GENMASK(15, 12)
+ struct spinand_plat {
+@@ -1703,15 +1704,21 @@ static int spinand_probe(struct udevice *dev)
+ #ifndef __UBOOT__
+ 	ret = mtd_device_register(mtd, NULL, 0);
+ #else
++	ret = en75_bmt_attach(mtd);
++	if (ret)
++		goto err_spinand_cleanup;
++
+ 	ret = add_mtd_device(mtd);
+ #endif
+ 	if (ret)
+-		goto err_spinand_cleanup;
++		goto err_bmt_detach;
  
- #define REG_SPI_NFI_CON				0x0008
- #define SPI_NFI_FIFO_FLUSH			BIT(0)
-@@ -213,15 +248,89 @@ enum airoha_snand_cs {
- 	SPI_CHIP_SEL_LOW,
- };
+ 	plat->mtd = mtd;
  
-+enum airoha_snand_bootstrap {
-+	AIROHA_SNAND_BOOTSTRAP_UNKNOWN,
-+	AIROHA_SNAND_BOOTSTRAP_NAND,
-+	AIROHA_SNAND_BOOTSTRAP_NOR,
-+	AIROHA_SNAND_BOOTSTRAP_EMMC,
+ 	return 0;
+ 
++err_bmt_detach:
++	en75_bmt_detach(mtd);
+ err_spinand_cleanup:
+ 	spinand_cleanup(spinand);
+ 
+diff --git a/drivers/mtd/nand/spi/en75_bmt.c b/drivers/mtd/nand/spi/en75_bmt.c
+new file mode 100644
+index 00000000..1cb3ca01
+--- /dev/null
++++ b/drivers/mtd/nand/spi/en75_bmt.c
+@@ -0,0 +1,665 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * EcoNet/Airoha EN75xx vendor BMT/BBT translation layer (READ-ONLY).
++ *
++ * The vendor bootbase and the Linux en75_bmt driver do not "skip" bad NAND
++ * blocks the way stock MTD does - they *remap* them into a reserve pool kept at
++ * the top of the chip, so that a logical block keeps a stable address after a
++ * block goes bad. A bootloader that ignores this reads the wrong data on any
++ * device that has ever remapped a block.
++ *
++ * This is a deliberately read-only port of that scheme:
++ *
++ *   - the factory Bad Block Table ("RAWB") and the Block Mapping Table ("BMT")
++ *     are located, checksum-verified and parsed,
++ *   - every MTD access is translated logical -> physical exactly as the vendor
++ *     does (BBT shift-up, then BMT lookup),
++ *   - mtd->size is reduced to the user area so partitions land where Linux and
++ *     the bootbase expect them,
++ *   - *nothing is ever written to the tables*. If a block turns bad we report
++ *     the error upward instead of allocating a replacement; leave repair to
++ *     Linux, which implements the full scheme.
++ *
++ * Deliberately NOT ported: BBT reconstruction / factory-BBT writing. Rewriting
++ * the factory BBT shifts the physical address of every block above the first
++ * bad one, which in a bootloader means bricking the board. Omission is the
++ * safest form of "disabled".
++ *
++ * Derived from the Linux drivers by Caleb James DeLisle:
++ *   target/linux/econet/files/drivers/mtd/nand/en75_bmt.c   (back end)
++ *   target/linux/generic/files/drivers/mtd/nand/mtk_bmt.c   (MTD glue)
++ */
++
++#include <malloc.h>
++#include <asm/cache.h>
++#include <dm/ofnode.h>
++#include <linux/bitops.h>
++#include <linux/bug.h>
++#include <linux/err.h>
++#include <linux/errno.h>
++#include <linux/mtd/mtd.h>
++#include <linux/printk.h>
++#include <linux/sizes.h>
++#include <linux/string.h>
++#include <linux/types.h>
++
++#include "en75_bmt.h"
++
++#define LOG_PFX				"en75_bmt"
++
++/* Vendor firmware calls this POOL_GOOD_BLOCK_PERCENT. Must agree with the
++ * bootbase, which prints the resulting figure as "bmt pool size: N".
++ */
++#define REQUIRED_GOOD_BLOCKS(total)	((total) * 8 / 100)
++
++#define MAX_BMT_SIZE			256
++#define MAX_BBT_SIZE			1000
++#define DEFAULT_BBT_TABLE_SIZE		1000
++#define INITIAL_READ_TRIES		3
++
++/* Marked bad by the Linux driver (the bootbase uses 0x00 for everything). */
++#define BLOCK_WORN_MARK			0x55
++
++/*
++ * On-disk structures. All multi-byte fields are host-order little-endian.
++ */
++
++struct bmt_table_header {
++	char signature[3];	/* "BMT" */
++	u8 version;		/* 1 */
++	u8 bad_count;		/* unused */
++	u8 size;		/* number of mappings */
++	u8 checksum;		/* bmt_checksum() */
++	u8 reserved[13];
 +};
 +
- struct airoha_snand_priv {
-+	struct udevice *dev;
- 	struct regmap *regmap_ctrl;
- 	struct regmap *regmap_nfi;
- 	struct clk *spi_clk;
- 
- 	u8 *txrx_buf;
-+	bool en751221;
- 	int dma;
- };
- 
-+static const char *airoha_snand_bootstrap_name(enum airoha_snand_bootstrap type)
++static_assert(sizeof(struct bmt_table_header) == 20);
++
++struct bmt_entry {
++	u16 from;		/* physical (post-BBT-shift) block being replaced */
++	u16 to;			/* reserve block standing in for it */
++};
++
++struct bmt_table {
++	struct bmt_table_header header;
++	struct bmt_entry table[MAX_BMT_SIZE];
++};
++
++struct bbt_table_header {
++	char signature[4];	/* "RAWB" */
++	u32 checksum;		/* bbt_checksum(), only 16 bits used */
++	u8 version;		/* 1 */
++	u8 size;		/* number of bad blocks */
++	u8 reserved[2];		/* 0xffff */
++};
++
++static_assert(sizeof(struct bbt_table_header) == 12);
++
++struct bbt_table {
++	struct bbt_table_header header;
++	u16 table[MAX_BBT_SIZE];	/* ascending order required */
++};
++
++static_assert(sizeof(struct bbt_table) == 2012);
++
++/*
++ * Runtime state. Single instance: there is one NAND chip on these boards, and
++ * the Linux driver makes the same assumption.
++ */
++struct en75_bmt {
++	struct mtd_info *mtd;
++
++	/* saved raw ops - internal I/O must bypass our own translation */
++	int (*_read_oob)(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops);
++	int (*_write_oob)(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops *ops);
++	int (*_erase)(struct mtd_info *mtd, struct erase_info *instr);
++	int (*_block_isbad)(struct mtd_info *mtd, loff_t ofs);
++	int (*_block_markbad)(struct mtd_info *mtd, loff_t ofs);
++
++	struct bbt_table bbt;
++	struct bmt_table bmt;
++
++	u16 bbt_table_size;
++	u16 total_blks;
++	u16 reserve_area_begin;
++	u32 blk_size;
++	u32 pg_size;
++	u16 blk_shift;
++	u16 pg_shift;
++
++	u8 *data_buf;
++	bool attached;
++};
++
++static struct en75_bmt bmtd;
++
++static inline u32 blk_pg(u16 block)
 +{
-+	switch (type) {
-+	case AIROHA_SNAND_BOOTSTRAP_NAND:
-+		return "NAND";
-+	case AIROHA_SNAND_BOOTSTRAP_NOR:
-+		return "NOR";
-+	case AIROHA_SNAND_BOOTSTRAP_EMMC:
-+		return "eMMC";
-+	case AIROHA_SNAND_BOOTSTRAP_UNKNOWN:
-+	default:
-+		return "unknown";
-+	}
++	return (u32)(block << (bmtd.blk_shift - bmtd.pg_shift));
 +}
 +
-+static enum airoha_snand_bootstrap
-+airoha_snand_get_bootstrap(struct airoha_snand_priv *priv, u32 *boot_trp,
-+				   u32 *snf_nfi_cnfg, u32 *sfc_strap)
++/* Read via the *saved* op: reserve-area offsets sit above the shrunken
++ * mtd->size and would be rejected by the bounds-checked wrappers, and going
++ * through our own translation here would recurse.
++ */
++static int bbt_nand_read(u32 page, u8 *dat, int dat_len, u8 *fdm, int fdm_len)
 +{
-+	int err;
++	struct mtd_oob_ops ops = {
++		.mode = MTD_OPS_PLACE_OOB,
++		.ooboffs = 0,
++		.oobbuf = fdm,
++		.ooblen = fdm_len,
++		.datbuf = dat,
++		.len = dat_len,
++	};
++	int ret;
 +
-+	*boot_trp = 0;
-+	*snf_nfi_cnfg = 0;
-+	*sfc_strap = 0;
-+
-+	if (!priv->en751221) {
-+#if IS_ENABLED(CONFIG_ARCH_AIROHA)
-+		struct regmap *regmap_scu = airoha_get_scu_regmap();
-+
-+		if (!regmap_scu)
-+			return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
-+
-+		err = regmap_read(regmap_scu, REG_SCUCLK_BOOT_TRP, boot_trp);
-+		if (err)
-+			return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
-+
-+		if (*boot_trp & SCUCLK_BOOT_TRP_BOOT_FROM_EMMC)
-+			return AIROHA_SNAND_BOOTSTRAP_EMMC;
-+#else
-+		return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
-+#endif
-+	}
-+
-+	if (priv->regmap_nfi) {
-+		err = regmap_read(priv->regmap_nfi,
-+				  REG_SPI_NFI_SNF_NFI_CNFG,
-+				  snf_nfi_cnfg);
-+		if (err)
-+			return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
-+
-+		/* SNF_NFI_CNFG bit 2 selects SPI-NFI. If it is clear, the
-+		 * boot source is still NAND through the parallel NAND path.
-+		 */
-+		if (!(*snf_nfi_cnfg & SPI_NFI_SNF_NFI_CNFG_SPI_MODE))
-+			return AIROHA_SNAND_BOOTSTRAP_NAND;
-+	}
-+
-+	err = regmap_read(priv->regmap_ctrl, REG_SPI_CTRL_SFC_STRAP, sfc_strap);
-+	if (err)
-+		return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
-+
-+	return (*sfc_strap & SPI_CTRL_SFC_STRAP_BOOT_FROM_SPI_NAND) ?
-+		AIROHA_SNAND_BOOTSTRAP_NAND : AIROHA_SNAND_BOOTSTRAP_NOR;
++	ret = bmtd._read_oob(bmtd.mtd, (loff_t)page << bmtd.pg_shift, &ops);
++	if (ret < 0)
++		return ret;
++	return 0;
 +}
 +
- static int airoha_snand_set_fifo_op(struct airoha_snand_priv *priv,
- 				    u8 op_cmd, int op_len)
- {
-@@ -254,7 +363,19 @@ static int airoha_snand_set_fifo_op(struct airoha_snand_priv *priv,
- 
- static int airoha_snand_set_cs(struct airoha_snand_priv *priv, u8 cs)
- {
--	return airoha_snand_set_fifo_op(priv, cs, sizeof(cs));
-+	int count = priv->en751221 ? 2 : 1;
-+	int err;
++/*
++ * In-memory helpers (no I/O)
++ */
 +
-+	/* EN751221 sporadically drops writes unless the CS operation is sent
-+	 * twice. This mirrors the quirk used by the Linux EcoNet port.
++static u16 bbt_checksum(const struct bbt_table *bbt, u16 table_size)
++{
++	const u8 *data = (const u8 *)bbt->table;
++	u16 checksum = bbt->header.version + bbt->header.size;
++	int i;
++
++	for (i = 0; i < table_size * (int)sizeof(bbt->table[0]); i++)
++		checksum += data[i];
++
++	return checksum;
++}
++
++static u8 bmt_checksum(const struct bmt_table *bmt, int check_entries)
++{
++	const u8 *data = (const u8 *)&bmt->table;
++	u8 checksum = bmt->header.version + bmt->header.size;
++	int length, i;
++
++	if (check_entries > MAX_BMT_SIZE)
++		check_entries = MAX_BMT_SIZE;
++	length = check_entries * (int)sizeof(bmt->table[0]);
++	for (i = 0; i < length; i++)
++		checksum += data[i];
++
++	return checksum;
++}
++
++static void sort_bbt(struct bbt_table *bbt)
++{
++	int i, j;
++
++	/* Insertion sort: at most a few hundred u16s, and it avoids pulling in
++	 * qsort() for something this small. Ascending order is required both by
++	 * the shift algorithm below and by the vendor firmware.
 +	 */
-+	while (count--) {
-+		err = airoha_snand_set_fifo_op(priv, cs, sizeof(cs));
-+		if (err)
-+			return err;
++	for (i = 1; i < bbt->header.size; i++) {
++		u16 key = bbt->table[i];
++
++		for (j = i - 1; j >= 0 && bbt->table[j] > key; j--)
++			bbt->table[j + 1] = bbt->table[j];
++		bbt->table[j + 1] = key;
++	}
++}
++
++/*
++ * Stage 1: each factory-bad block shifts everything above it up by one. This
++ * is a shift, not a skip-list, which is why the BBT must be sorted and why
++ * changing it after the fact moves every block above the change.
++ */
++static int get_mapping_block_bbt(int block)
++{
++	int size = bmtd.bbt.header.size;
++	int i;
++
++	for (i = 0; i < size; i++)
++		if (bmtd.bbt.table[i] <= block)
++			block++;
++
++	if (block >= bmtd.reserve_area_begin || block < 0)
++		return -EINVAL;
++
++	return block;
++}
++
++/* Stage 2: BMT lookup, scanned backwards so a later duplicate 'from' wins. */
++static int get_mapping_block(int block)
++{
++	int i;
++
++	block = get_mapping_block_bbt(block);
++	if (block < 0)
++		return block;
++
++	for (i = bmtd.bmt.header.size - 1; i >= 0; i--)
++		if (bmtd.bmt.table[i].from == block)
++			return bmtd.bmt.table[i].to;
++
++	return block;
++}
++
++enum block_is_bad {
++	BB_GOOD,
++	BB_FACTORY_BAD,
++	BB_WORN,
++	BB_UNKNOWN_BAD,
++};
++
++static enum block_is_bad fdm_is_bad(const u8 fdm[4])
++{
++	if (fdm[0] == 0xff && fdm[1] == 0xff)
++		return BB_GOOD;
++	if (fdm[0] == BLOCK_WORN_MARK)
++		return BB_WORN;
++	if (fdm[0] == 0x00 || fdm[1] == 0x00)
++		return BB_FACTORY_BAD;
++	return BB_UNKNOWN_BAD;
++}
++
++static int try_parse_bbt(struct bbt_table *out, const u8 *buf, int len, u16 table_size)
++{
++	static struct bbt_table workspace;
++	size_t bbt_size = sizeof(workspace.header) +
++			  table_size * sizeof(workspace.table[0]);
++
++	if (len < (int)bbt_size)
++		return -EINVAL;
++
++	memcpy(&workspace, buf, bbt_size);
++
++	if (strncmp(workspace.header.signature, "RAWB", 4))
++		return -EINVAL;
++
++	if ((u16)workspace.header.checksum != bbt_checksum(&workspace, table_size))
++		return -EINVAL;
++
++	sort_bbt(&workspace);
++	memcpy(out, &workspace, bbt_size);
++
++	return 0;
++}
++
++static int try_parse_bmt(struct bmt_table *out, const u8 *buf, int len)
++{
++	static struct bmt_table workspace;
++
++	if (len < (int)sizeof(*out))
++		return -EINVAL;
++
++	memcpy(&workspace, buf, sizeof(workspace));
++
++	if (strncmp(workspace.header.signature, "BMT", 3))
++		return -EINVAL;
++
++	if (workspace.header.checksum !=
++	    bmt_checksum(&workspace, workspace.header.size))
++		return -EINVAL;
++
++	memcpy(out, &workspace, sizeof(workspace));
++
++	return 0;
++}
++
++/*
++ * Walk down from the last block until REQUIRED_GOOD_BLOCKS good ones have been
++ * seen; that boundary is where the reserve pool starts. The BBT and BMT are
++ * found by signature+checksum along the way, not at fixed addresses.
++ */
++static int scan_reserve(void)
++{
++	u16 total_blks = bmtd.total_blks;
++	int required = REQUIRED_GOOD_BLOCKS(total_blks);
++	int good_blocks = 0;
++	bool found_bbt = false, found_bmt = false;
++	int cursor;
++
++	for (cursor = total_blks - 1; cursor > 0; cursor--) {
++		u8 fdm[4] = { 0xff, 0xff, 0xff, 0xff };
++		int ret = -EIO;
++		int i;
++
++		for (i = 0; i < INITIAL_READ_TRIES; i++) {
++			ret = bbt_nand_read(blk_pg(cursor), bmtd.data_buf,
++					    bmtd.pg_size, fdm, sizeof(fdm));
++			if (!ret)
++				break;
++		}
++
++		if (ret || fdm_is_bad(fdm)) {
++			pr_info("%s: skipping bad block %d in reserve area\n",
++				LOG_PFX, cursor);
++		} else {
++			good_blocks++;
++			if (!found_bbt &&
++			    !try_parse_bbt(&bmtd.bbt, bmtd.data_buf,
++					   bmtd.pg_size, bmtd.bbt_table_size)) {
++				printf("%s: found BBT in block %d\n", LOG_PFX, cursor);
++				found_bbt = true;
++			} else if (!found_bmt &&
++				   !try_parse_bmt(&bmtd.bmt, bmtd.data_buf,
++						  bmtd.pg_size)) {
++				printf("%s: found BMT in block %d\n", LOG_PFX, cursor);
++				found_bmt = true;
++			}
++		}
++
++		if (good_blocks >= required)
++			break;
++	}
++
++	if (!cursor) {
++		pr_err("%s: not enough valid blocks found, need %d got %d\n",
++		       LOG_PFX, required, good_blocks);
++		return -ENOSPC;
++	}
++
++	bmtd.reserve_area_begin = cursor;
++
++	/*
++	 * Refuse to run without a valid BBT. The alternative - reconstructing
++	 * it - is exactly the operation that can shift every block on the chip,
++	 * so a bootloader must not attempt it.
++	 */
++	if (!found_bbt) {
++		pr_err("%s: no valid BBT found, refusing to translate\n", LOG_PFX);
++		return -ENOENT;
++	}
++	if (!found_bmt)
++		pr_info("%s: no BMT found, assuming no remapped blocks\n", LOG_PFX);
++
++	return 0;
++}
++
++/*
++ * MTD operation wrappers. Each translates then defers to the saved raw op.
++ * Unlike the Linux driver these never allocate a replacement block: a failure
++ * is reported to the caller instead.
++ */
++
++static int en75_bmt_read(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops)
++{
++	struct mtd_oob_ops cur_ops = *ops;
++	int max_bitflips = 0;
++	int ret = 0;
++
++	ops->retlen = 0;
++	ops->oobretlen = 0;
++
++	while (ops->retlen < ops->len || ops->oobretlen < ops->ooblen) {
++		u32 offset = from & (bmtd.blk_size - 1);
++		u32 block = from >> bmtd.blk_shift;
++		int cur_block, cur_ret;
++		loff_t cur_from;
++
++		cur_block = get_mapping_block(block);
++		if (cur_block < 0)
++			return -EIO;
++
++		cur_from = ((loff_t)cur_block << bmtd.blk_shift) + offset;
++
++		cur_ops.oobretlen = 0;
++		cur_ops.retlen = 0;
++		cur_ops.len = min_t(u32, mtd->erasesize - offset,
++				    ops->len - ops->retlen);
++
++		cur_ret = bmtd._read_oob(mtd, cur_from, &cur_ops);
++		if (cur_ret < 0) {
++			ret = cur_ret;
++			if (!mtd_is_bitflip(cur_ret))
++				goto out;
++		} else {
++			max_bitflips = max_t(int, max_bitflips, cur_ret);
++		}
++
++		ops->retlen += cur_ops.retlen;
++		ops->oobretlen += cur_ops.oobretlen;
++
++		cur_ops.ooboffs = 0;
++		cur_ops.datbuf += cur_ops.retlen;
++		cur_ops.oobbuf += cur_ops.oobretlen;
++		cur_ops.ooblen -= cur_ops.oobretlen;
++
++		if (!cur_ops.len)
++			cur_ops.len = mtd->erasesize - offset;
++
++		from += cur_ops.len;
++	}
++
++out:
++	if (ret < 0 && !mtd_is_bitflip(ret))
++		return ret;
++
++	return max_bitflips;
++}
++
++static int en75_bmt_write(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops *ops)
++{
++	struct mtd_oob_ops cur_ops = *ops;
++	int ret;
++
++	ops->retlen = 0;
++	ops->oobretlen = 0;
++
++	while (ops->retlen < ops->len || ops->oobretlen < ops->ooblen) {
++		u32 offset = to & (bmtd.blk_size - 1);
++		u32 block = to >> bmtd.blk_shift;
++		int cur_block;
++		loff_t cur_to;
++
++		cur_block = get_mapping_block(block);
++		if (cur_block < 0)
++			return -EIO;
++
++		cur_to = ((loff_t)cur_block << bmtd.blk_shift) + offset;
++
++		cur_ops.oobretlen = 0;
++		cur_ops.retlen = 0;
++		cur_ops.len = min_t(u32, bmtd.blk_size - offset,
++				    ops->len - ops->retlen);
++
++		ret = bmtd._write_oob(mtd, cur_to, &cur_ops);
++		if (ret < 0) {
++			/* No remap-on-failure here: the block stays bad and the
++			 * caller finds out. Repairing it is Linux's job.
++			 */
++			pr_err("%s: write failed at block %u (physical %d); "
++			       "not remapping (read-only BMT)\n",
++			       LOG_PFX, block, cur_block);
++			return ret;
++		}
++
++		ops->retlen += cur_ops.retlen;
++		ops->oobretlen += cur_ops.oobretlen;
++
++		cur_ops.ooboffs = 0;
++		cur_ops.datbuf += cur_ops.retlen;
++		cur_ops.oobbuf += cur_ops.oobretlen;
++		cur_ops.ooblen -= cur_ops.oobretlen;
++
++		if (!cur_ops.len)
++			cur_ops.len = mtd->erasesize - offset;
++
++		to += cur_ops.len;
 +	}
 +
 +	return 0;
- }
- 
- static int airoha_snand_write_data_to_fifo(struct airoha_snand_priv *priv,
-@@ -367,7 +488,7 @@ static int airoha_snand_set_mode(struct airoha_snand_priv *priv,
- 	case SPI_MODE_DMA:
- 		err = regmap_write(priv->regmap_ctrl,
- 				   REG_SPI_CTRL_NFI2SPI_EN,
--				   SPI_CTRL_MANUAL_EN);
-+				   SPI_CTRL_NFI2SPI_EN);
- 		if (err < 0)
- 			return err;
- 
-@@ -465,17 +586,81 @@ static int airoha_snand_read_data(struct airoha_snand_priv *priv,
- 	return 0;
- }
- 
-+static int airoha_snand_nfi_reset(struct airoha_snand_priv *priv)
-+{
-+	/* Same reset value used by the vendor driver: reset the NFI state
-+	 * machine and flush its FIFO before a DMA transaction.
-+	 */
-+	return regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
-+			    SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
 +}
 +
-+static int airoha_snand_nfi_clear_intr(struct airoha_snand_priv *priv)
++static int en75_bmt_erase(struct mtd_info *mtd, struct erase_info *instr)
 +{
-+	/* NFI interrupt status bits are write-one-to-clear on this block.
-+	 * Clear stale completion state before arming a new DMA transaction so
-+	 * polling cannot succeed on an old AHB_DONE value.
-+	 */
-+	return regmap_write(priv->regmap_nfi, REG_SPI_NFI_INTR,
-+			    SPI_NFI_ALL_IRQ_EN);
-+}
++	struct erase_info mapped_instr = {
++		.len = bmtd.blk_size,
++	};
++	u64 start_addr, end_addr;
++	int ret = 0;
 +
-+static int airoha_snand_nfi_clear_done(struct airoha_snand_priv *priv)
-+{
-+	/* READ_FROM_CACHE_DONE and LOAD_TO_CACHE_DONE are also sticky W1C bits.
-+	 * Clear them before DMA so polling observes the current transaction only.
-+	 */
-+	return regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
-+			    SPI_NFI_READ_FROM_CACHE_DONE |
-+			    SPI_NFI_LOAD_TO_CACHE_DONE);
-+}
++	start_addr = instr->addr & (~mtd->erasesize_mask);
++	end_addr = instr->addr + instr->len;
 +
- static int airoha_snand_nfi_init(struct airoha_snand_priv *priv)
- {
- 	int err;
- 
--	/* switch to SNFI mode */
-+	/* Switch to SNFI mode. */
- 	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_NFI_CNFG,
- 			   SPI_NFI_SPI_MODE);
- 	if (err)
- 		return err;
- 
--	/* Enable DMA */
-+	err = airoha_snand_nfi_reset(priv);
-+	if (err)
-+		return err;
++	while (start_addr < end_addr) {
++		u16 orig_block = start_addr >> bmtd.blk_shift;
++		int block = get_mapping_block(orig_block);
 +
-+	err = airoha_snand_nfi_clear_intr(priv);
-+	if (err)
-+		return err;
++		if (block < 0)
++			return -EIO;
 +
-+	err = airoha_snand_nfi_clear_done(priv);
-+	if (err)
-+		return err;
-+
-+	/* Mirror the safe vendor configuration used when the SPI NAND uses its
-+	 * internal ECC: disable controller ECC/FDM and byte-swap helpers.  The
-+	 * SPI NAND core still controls on-die ECC, QE, die-select and status
-+	 * handling through normal SPI-MEM commands.
-+	 */
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
-+				 SPI_NFI_DMA_WR_BYTE_SWAP_EN |
-+				 SPI_NFI_DMA_RD_BYTE_SWAP_EN |
-+				 SPI_NFI_ECC_DATA_SOURCE_INV_EN |
-+				 SPI_NFI_HW_ECC_EN |
-+				 SPI_NFI_AUTO_FDM_EN,
-+				 0);
-+	if (err)
-+		return err;
-+
-+	/* FDM is disabled above, but clear its page-format fields as well so a
-+	 * previous boot stage cannot leave stale vendor ECC layout behind.
-+	 */
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_PAGEFMT,
-+				 SPI_NFI_FDM_NUM | SPI_NFI_FDM_ECC_NUM, 0);
-+	if (err)
-+		return err;
-+
-+	/* Enable only the DMA completion interrupt source used by polling. */
- 	return regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_INTR_EN,
- 				  SPI_NFI_ALL_IRQ_EN, SPI_NFI_AHB_DONE_EN);
- }
-@@ -551,6 +736,54 @@ static int airoha_snand_dirmap_create(struct spi_mem_dirmap_desc *desc)
- 	return 0;
- }
- 
-+
-+static ssize_t airoha_snand_no_dirmap_write(struct spi_mem_dirmap_desc *desc,
-+					    u64 offs, size_t len, const void *buf)
-+{
-+	struct spi_mem_op op = desc->info.op_tmpl;
-+	int err;
-+
-+	op.addr.val = desc->info.offset + offs;
-+	op.data.buf.out = buf;
-+	op.data.nbytes = len;
-+
-+	err = spi_mem_exec_op(desc->slave, &op);
-+	if (err)
-+		return err;
-+
-+	return op.data.nbytes;
-+}
-+
-+static bool airoha_snand_dma_write_ok(struct spi_mem_dirmap_desc *desc,
-+					      u64 offs, size_t len)
-+{
-+	/*
-+	 * The NFI DMA path programs a contiguous cache window.  Do not emulate
-+	 * unaligned/short writes by padding the beginning or the end with 0xff:
-+	 * PROGRAM LOAD/RANDOM LOAD operates on the SPI NAND cache, so padding can
-+	 * poison bytes that the caller did not ask us to touch.  This is especially
-+	 * dangerous for boot blocks updated in small chunks.
-+	 *
-+	 * Keep DMA only for exact transfers that the controller can issue without
-+	 * synthetic padding.  Everything else falls back to the manual SPI-MEM path,
-+	 * which sends the exact column address and exact byte count requested by the
-+	 * SPI NAND core.
-+	 */
-+	if (!len)
-+		return false;
-+
-+	if (!IS_ALIGNED(desc->info.offset + offs, 16))
-+		return false;
-+
-+	if (!IS_ALIGNED(len, 64))
-+		return false;
-+
-+	if (len > SPI_NAND_CACHE_SIZE)
-+		return false;
-+
-+	return true;
-+}
-+
- static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 					u64 offs, size_t len, void *buf)
- {
-@@ -609,9 +842,15 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err < 0)
- 		return err;
- 
--	/* NFI reset */
--	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
--			   SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+	err = airoha_snand_nfi_reset(priv);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	err = airoha_snand_nfi_clear_intr(priv);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	err = airoha_snand_nfi_clear_done(priv);
- 	if (err)
- 		goto error_dma_mode_off;
- 
-@@ -653,7 +892,7 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_mode_off;
- 
--	dma_addr = dma_map_single(txrx_buf, SPI_NAND_CACHE_SIZE,
-+	dma_addr = snfi_dma_addr(txrx_buf, SPI_NAND_CACHE_SIZE,
- 				  DMA_FROM_DEVICE);
- 
- 	/* set dma addr */
-@@ -721,9 +960,8 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	 * SPI_NFI_READ_FROM_CACHE_DONE bit must be written at the end
- 	 * of dirmap_read operation even if it is already set.
- 	 */
--	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
--				 SPI_NFI_READ_FROM_CACHE_DONE,
--				 SPI_NFI_READ_FROM_CACHE_DONE);
-+	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
-+			   SPI_NFI_READ_FROM_CACHE_DONE);
- 	if (err)
- 		goto error_dma_unmap;
- 
-@@ -736,7 +974,7 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	/* DMA read need delay for data ready from controller to DRAM */
- 	udelay(1);
- 
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
- 
- 	err = airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	if (err < 0)
-@@ -747,7 +985,7 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	return len;
- 
- error_dma_unmap:
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
- error_dma_mode_off:
- 	airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	return err;
-@@ -765,22 +1003,10 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	size_t bytes;
- 	int err;
- 
--	if (!priv->dma) {
--		/* simplified version of spi_mem_no_dirmap_write() */
--		struct spi_mem_op op = desc->info.op_tmpl;
--
--		op.addr.val = desc->info.offset + offs;
--		op.data.buf.out = buf;
--		op.data.nbytes = len;
--		err = spi_mem_exec_op(desc->slave, &op);
--		if (err)
--			return err;
-+	if (!priv->dma || !airoha_snand_dma_write_ok(desc, offs, len))
-+		return airoha_snand_no_dirmap_write(desc, offs, len, buf);
- 
--		return op.data.nbytes;
--	}
--
--	/* minimum oob size is 64 */
--	bytes = round_up(offs + len, 64);
-+	bytes = len;
- 
- 	opcode = desc->info.op_tmpl.cmd.opcode;
- 	switch (opcode) {
-@@ -797,19 +1023,21 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 		return -EOPNOTSUPP;
- 	}
- 
--	if (offs > 0)
--		memset(txrx_buf, 0xff, offs);
--	memcpy(txrx_buf + offs, buf, len);
--	if (bytes > offs + len)
--		memset(txrx_buf + offs + len, 0xff, bytes - offs - len);
-+	memcpy(txrx_buf, buf, len);
- 
- 	err = airoha_snand_set_mode(priv, SPI_MODE_DMA);
- 	if (err < 0)
- 		return err;
- 
--	/* NFI reset */
--	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
--			   SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+	err = airoha_snand_nfi_reset(priv);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	err = airoha_snand_nfi_clear_intr(priv);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	err = airoha_snand_nfi_clear_done(priv);
- 	if (err)
- 		goto error_dma_mode_off;
- 
-@@ -851,7 +1079,7 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_mode_off;
- 
--	dma_addr = dma_map_single(txrx_buf, SPI_NAND_CACHE_SIZE,
-+	dma_addr = snfi_dma_addr(txrx_buf, SPI_NAND_CACHE_SIZE,
- 				  DMA_TO_DEVICE);
- 
- 	/* set dma addr */
-@@ -887,9 +1115,9 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
--	/* set write addr: zero page offset + descriptor write offset */
-+	/* set write addr: descriptor base column + requested dirmap offset */
- 	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_PG_CTL2,
--			   desc->info.offset);
-+			   desc->info.offset + offs);
- 	if (err)
- 		goto error_dma_unmap;
- 
-@@ -908,6 +1136,9 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
-+	/* Vendor code gives the DMA engine a short settle time after WR_TRIG. */
-+	udelay(1);
-+
- 	err = regmap_read_poll_timeout(priv->regmap_nfi, REG_SPI_NFI_INTR,
- 				       val, (val & SPI_NFI_AHB_DONE), 0,
- 				       1 * MSEC_PER_SEC);
-@@ -925,13 +1156,12 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	 * SPI_NFI_LOAD_TO_CACHE_DONE bit must be written at the end
- 	 * of dirmap_write operation even if it is already set.
- 	 */
--	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
--				 SPI_NFI_LOAD_TO_CACHE_DONE,
--				 SPI_NFI_LOAD_TO_CACHE_DONE);
-+	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
-+			   SPI_NFI_LOAD_TO_CACHE_DONE);
- 	if (err)
- 		goto error_dma_unmap;
- 
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
- 
- 	err = airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	if (err < 0)
-@@ -940,7 +1170,7 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	return len;
- 
- error_dma_unmap:
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
- error_dma_mode_off:
- 	airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	return err;
-@@ -986,7 +1216,7 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 	err = airoha_snand_write_data(priv, data, op_len,
- 				      op->cmd.buswidth);
- 	if (err)
--		return err;
-+		goto out_cs_high;
- 
- 	/* addr part */
- 	data += op_len;
-@@ -994,7 +1224,7 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 		err = airoha_snand_write_data(priv, data, addr_len,
- 					      op->addr.buswidth);
- 		if (err)
--			return err;
-+			goto out_cs_high;
- 	}
- 
- 	/* dummy */
-@@ -1003,7 +1233,7 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 		err = airoha_snand_write_data(priv, data, dummy_len,
- 					      op->dummy.buswidth);
- 		if (err)
--			return err;
-+			goto out_cs_high;
- 	}
- 
- 	/* data */
-@@ -1017,23 +1247,36 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 						      op->data.nbytes,
- 						      op->data.buswidth);
- 		if (err)
--			return err;
-+			goto out_cs_high;
- 	}
- 
--	return airoha_snand_set_cs(priv, SPI_CHIP_SEL_HIGH);
-+out_cs_high:
-+	/* Always release CS.  Leaving CS asserted after a FIFO timeout can lock
-+	 * the shared SPI bus, which is visible on boards using NOR + NAND.
-+	 */
-+	if (airoha_snand_set_cs(priv, SPI_CHIP_SEL_HIGH) && !err)
-+		err = -EIO;
-+
-+	return err;
- }
- 
- static int airoha_snand_probe(struct udevice *dev)
- {
- 	struct airoha_snand_priv *priv = dev_get_priv(dev);
-+	enum airoha_snand_bootstrap type;
-+	u32 boot_trp, snf_nfi_cnfg, sfc_strap;
- 	int ret;
--	u32 sfc_strap;
- 
--	priv->txrx_buf = memalign(ARCH_DMA_MINALIGN, SPI_NAND_CACHE_SIZE);
-+	priv->txrx_buf = snfi_uncached(memalign(ARCH_DMA_MINALIGN,
-+						  SPI_NAND_CACHE_SIZE));
- 	if (!priv->txrx_buf) {
--		dev_err(dev, "failed to alloacate memory for dirmap\n");
-+		dev_err(dev, "failed to allocate memory for dirmap\n");
- 		return -ENOMEM;
- 	}
-+	priv->dev = dev;
-+	priv->en751221 = of_machine_is_compatible("econet,en751221") ||
-+			   of_machine_is_compatible("econet,en7512") ||
-+			   of_machine_is_compatible("econet,en7521");
- 
- 	ret = regmap_init_mem_index(dev_ofnode(dev), &priv->regmap_ctrl, 0);
- 	if (ret) {
-@@ -1043,36 +1286,48 @@ static int airoha_snand_probe(struct udevice *dev)
- 
- 	ret = regmap_init_mem_index(dev_ofnode(dev), &priv->regmap_nfi, 1);
- 	if (ret) {
--		dev_err(dev, "failed to init spi nfi regmap\n");
--		return ret;
-+		if (!priv->en751221) {
-+			dev_err(dev, "failed to init spi nfi regmap\n");
-+			return ret;
++		mapped_instr.addr = (loff_t)block << bmtd.blk_shift;
++		ret = bmtd._erase(mtd, &mapped_instr);
++		if (ret) {
++			pr_err("%s: erase failed at block %u (physical %d); "
++			       "not remapping (read-only BMT)\n",
++			       LOG_PFX, orig_block, block);
++			instr->fail_addr = start_addr;
++			break;
 +		}
-+
-+		/* EN751221 has no separate NFI/SNFI DMA register bank. */
-+		priv->regmap_nfi = NULL;
- 	}
- 
--	priv->spi_clk = devm_clk_get(dev, "spi");
-+	priv->spi_clk = devm_clk_get_optional(dev, "spi");
- 	if (IS_ERR(priv->spi_clk)) {
--		dev_err(dev, "unable to get spi clk\n");
--		return PTR_ERR(priv->regmap_ctrl);
--	}
--	clk_enable(priv->spi_clk);
-+		ret = PTR_ERR(priv->spi_clk);
-+		if (ret != -ENOSYS) {
-+			dev_err(dev, "unable to get spi clk\n");
-+			return ret;
-+		}
- 
--	priv->dma = 1;
--	if (device_is_compatible(dev, "airoha,en7523-snand")){
--		ret = regmap_read(priv->regmap_ctrl, REG_SPI_CTRL_SFC_STRAP, &sfc_strap);
-+		/* EN751221 does not require the U-Boot clock framework. */
-+		priv->spi_clk = NULL;
++		start_addr += mtd->erasesize;
 +	}
-+	if (priv->spi_clk) {
-+		ret = clk_enable(priv->spi_clk);
- 		if (ret)
- 			return ret;
--
--		if (!(sfc_strap & 0x04)) {
--			priv->dma = 0;
--			printf("\n"
--				"=== WARNING ======================================================\n"
--				"Detected booting in RESERVED mode (UART_TXD was short to GND).\n"
--				"This mode is known for incorrect DMA reading of some flashes.\n"
--				"Usage of DMA for flash operations will be disabled to prevent data\n"
--				"damage. Unplug your serial console and power cycle the board\n"
--				"to boot with full performance.\n"
--				"==================================================================\n\n");
--		}
- 	}
- 
-+	type = airoha_snand_get_bootstrap(priv, &boot_trp, &snf_nfi_cnfg,
-+					   &sfc_strap);
 +
-+	dev_dbg(priv->dev,
-+		 "bootstrap: %s (boot_trp=0x%08x, snf_nfi_cnfg=0x%08x, sfc_strap=0x%08x)\n",
-+		 airoha_snand_bootstrap_name(type), boot_trp, snf_nfi_cnfg,
-+		 sfc_strap);
++	return ret;
++}
 +
-+	/* EN751221 uses only the manual FIFO path. EN7523/AN7581 can use
-+	 * the second register bank for SNFI DMA operations.
++static int en75_bmt_block_isbad(struct mtd_info *mtd, loff_t ofs)
++{
++	u16 orig_block = ofs >> bmtd.blk_shift;
++	int block = get_mapping_block(orig_block);
++
++	if (block < 0)
++		return -EIO;
++
++	return bmtd._block_isbad(mtd, (loff_t)block << bmtd.blk_shift);
++}
++
++static int en75_bmt_block_markbad(struct mtd_info *mtd, loff_t ofs)
++{
++	u16 orig_block = ofs >> bmtd.blk_shift;
++	int block = get_mapping_block(orig_block);
++
++	if (block < 0)
++		return -EIO;
++
++	return bmtd._block_markbad(mtd, (loff_t)block << bmtd.blk_shift);
++}
++
++static void en75_bmt_replace_ops(struct mtd_info *mtd)
++{
++	bmtd._read_oob		= mtd->_read_oob;
++	bmtd._write_oob		= mtd->_write_oob;
++	bmtd._erase		= mtd->_erase;
++	bmtd._block_isbad	= mtd->_block_isbad;
++	bmtd._block_markbad	= mtd->_block_markbad;
++
++	mtd->_read_oob		= en75_bmt_read;
++	mtd->_write_oob		= en75_bmt_write;
++	mtd->_erase		= en75_bmt_erase;
++	mtd->_block_isbad	= en75_bmt_block_isbad;
++	mtd->_block_markbad	= en75_bmt_block_markbad;
++}
++
++static void en75_bmt_restore_ops(struct mtd_info *mtd)
++{
++	mtd->_read_oob		= bmtd._read_oob;
++	mtd->_write_oob		= bmtd._write_oob;
++	mtd->_erase		= bmtd._erase;
++	mtd->_block_isbad	= bmtd._block_isbad;
++	mtd->_block_markbad	= bmtd._block_markbad;
++}
++
++int en75_bmt_attach(struct mtd_info *mtd)
++{
++	ofnode node = mtd_get_ofnode(mtd);
++	u32 assert_reserve = 0;
++	u32 val;
++	int ret;
++
++	if (!ofnode_valid(node) || !ofnode_read_bool(node, "econet,bmt"))
++		return 0;
++
++	if (bmtd.attached) {
++		pr_err("%s: already attached to an MTD device\n", LOG_PFX);
++		return -EBUSY;
++	}
++
++	memset(&bmtd, 0, sizeof(bmtd));
++	bmtd.mtd = mtd;
++	bmtd.blk_size = mtd->erasesize;
++	bmtd.pg_size = mtd->writesize;
++	bmtd.blk_shift = ffs(mtd->erasesize) - 1;
++	bmtd.pg_shift = ffs(mtd->writesize) - 1;
++	/* Must be taken before the size is shrunk below. */
++	bmtd.total_blks = mtd->size >> bmtd.blk_shift;
++
++	bmtd.bbt_table_size = DEFAULT_BBT_TABLE_SIZE;
++	if (!ofnode_read_u32(node, "econet,bbt-table-size", &val)) {
++		if (val == 0 || val > MAX_BBT_SIZE) {
++			pr_err("%s: econet,bbt-table-size %u out of range\n",
++			       LOG_PFX, val);
++			return -EINVAL;
++		}
++		bmtd.bbt_table_size = val;
++	}
++	ofnode_read_u32(node, "econet,assert-reserve-size", &assert_reserve);
++
++	bmtd.data_buf = memalign(ARCH_DMA_MINALIGN, bmtd.pg_size);
++	if (!bmtd.data_buf)
++		return -ENOMEM;
++
++	en75_bmt_replace_ops(mtd);
++
++	ret = scan_reserve();
++	if (ret)
++		goto err_restore;
++
++	if (assert_reserve &&
++	    assert_reserve != bmtd.total_blks - bmtd.reserve_area_begin) {
++		/* Mismatch means our idea of the pool boundary differs from the
++		 * bootbase's, so every translation would be wrong.
++		 */
++		pr_err("%s: reserve size %d != asserted %u, refusing\n", LOG_PFX,
++		       bmtd.total_blks - bmtd.reserve_area_begin, assert_reserve);
++		ret = -EINVAL;
++		goto err_restore;
++	}
++
++	/* Hide the reserve area and the factory-bad shift from everything
++	 * above, so DT partitions are validated against the same size Linux
++	 * sees. Must happen before partitions are parsed.
 +	 */
-+	priv->dma = !!priv->regmap_nfi;
++	mtd->size = (loff_t)(bmtd.reserve_area_begin - bmtd.bbt.header.size)
++		    << bmtd.blk_shift;
 +
-+	if (!priv->regmap_nfi)
-+		return 0;
++	bmtd.attached = true;
 +
- 	return airoha_snand_nfi_init(priv);
- }
- 
-@@ -1081,6 +1336,10 @@ static int airoha_snand_nfi_set_speed(struct udevice *bus, uint speed)
- 	struct airoha_snand_priv *priv = dev_get_priv(bus);
- 	int ret;
- 
-+	/* EN751221 leaves the SFC clock configured by the previous stage. */
-+	if (!priv->spi_clk)
-+		return 0;
++	printf("%s: blocks: total: %d, user: %d, factory_bad: %d, worn: %d reserve: %d\n",
++	       LOG_PFX, bmtd.total_blks, bmtd.reserve_area_begin,
++	       bmtd.bbt.header.size, bmtd.bmt.header.size,
++	       bmtd.total_blks - bmtd.reserve_area_begin);
++	printf("%s: %llu MiB usable space (read-only BMT: no remapping)\n",
++	       LOG_PFX, (u64)mtd->size >> 20);
 +
- 	ret = clk_set_rate(priv->spi_clk, speed);
- 	if (ret < 0)
- 		return ret;
-@@ -1108,6 +1367,7 @@ static const struct dm_spi_ops airoha_snfi_spi_ops = {
- };
- 
- static const struct udevice_id airoha_snand_ids[] = {
-+	{ .compatible = "airoha,en7523-spi" },
- 	{ .compatible = "airoha,en7581-snand" },
- 	{ }
- };
-@@ -1120,3 +1380,4 @@ U_BOOT_DRIVER(airoha_snfi_spi) = {
- 	.priv_auto = sizeof(struct airoha_snand_priv),
- 	.probe = airoha_snand_probe,
- };
++	return 0;
 +
++err_restore:
++	en75_bmt_restore_ops(mtd);
++	free(bmtd.data_buf);
++	bmtd.data_buf = NULL;
++	bmtd.mtd = NULL;
++	return ret;
++}
++
++void en75_bmt_detach(struct mtd_info *mtd)
++{
++	if (!bmtd.attached || bmtd.mtd != mtd)
++		return;
++
++	en75_bmt_restore_ops(mtd);
++	free(bmtd.data_buf);
++	bmtd.data_buf = NULL;
++	bmtd.mtd = NULL;
++	bmtd.attached = false;
++}
+diff --git a/drivers/mtd/nand/spi/en75_bmt.h b/drivers/mtd/nand/spi/en75_bmt.h
+new file mode 100644
+index 00000000..e9d50b8d
+--- /dev/null
++++ b/drivers/mtd/nand/spi/en75_bmt.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * EcoNet/Airoha EN75xx vendor BMT/BBT translation layer (read-only).
++ */
++#ifndef __EN75_BMT_H
++#define __EN75_BMT_H
++
++struct mtd_info;
++
++#if CONFIG_IS_ENABLED(MTD_EN75_BMT)
++/*
++ * Install the translation layer on a NAND whose DT node carries "econet,bmt".
++ * Must be called before add_mtd_device(), because it shrinks mtd->size to the
++ * user area and partitions are validated against that.
++ * Returns 0 when attached *or* when the node opts out; negative on error.
++ */
++int en75_bmt_attach(struct mtd_info *mtd);
++void en75_bmt_detach(struct mtd_info *mtd);
++#else
++static inline int en75_bmt_attach(struct mtd_info *mtd) { return 0; }
++static inline void en75_bmt_detach(struct mtd_info *mtd) { }
++#endif
++
++#endif /* __EN75_BMT_H */
 -- 
 2.53.0
 
