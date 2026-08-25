@@ -1,139 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABA3C5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 00:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB70C5DF81
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 00:46:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 90EE6405E2;
-	Tue, 25 Aug 2026 00:26:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8B3CA80AC8;
+	Tue, 25 Aug 2026 00:46:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UmdqoQWyoilg; Tue, 25 Aug 2026 00:26:38 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jeswQHHaQPOB; Tue, 25 Aug 2026 00:46:05 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787617598;
-	bh=+eXY+W3J9B2V5CpbYWUC8504O9HaefvJpqj0/Y6VcCI=;
+	d=lists.u-boot-project.org; s=default; t=1787618765;
+	bh=TqgFpm87jAIRmts7OVHmLJKoMeTfkCHMidfMVVbgH5Q=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rUC6vPvEMu5eY0rQ7XEKhuQ1xQNkSuD2Rl7Zzr6zRW5/HAcd/yLiWIVARlgBgWs33
-	 RWu7Xf+JOUHblnib4osFHC2riMZOeUHiOPx/+jCsh2yxzRw1TeNbSl+iAbD9GhU9O5
-	 ofqD850OlnNzUP+cpq9Z90uppUUyeG7Q2n+x+x/8TuC9X6yXKee/8952I/C7hP08L2
-	 Mb9D+ZI02UZDGw32miqAylSZxdH4/sNmCw6RAckBfqzlHyMVUy3MGT2ctx4hh6DKCg
-	 QxeDRrmUFXG7XF0IJWVBv0cUSDLCEK1nbmB6YkZWYEIbynNIXNNH6L1FbbUc3USiWG
-	 jfs75t5azFdMQ==
+	b=ijpO4DDoOY8OxA/L6tihiZP05fOuPUzIgBMUUBQZZ4uIGqeh7r45JWEpZC5LRKmGH
+	 SjqftpPn7CpLuqO0JMkh1yaWKL0RvjtZLysgQftOznjvGcMkwobKENedF6kjnlXdkM
+	 k8oF+UtIHXjyDRZx2RsEoulMFhTFcK6zsuH0syrnuL2iMgeyIihTkK/j/5LR+zBOit
+	 XsNT1YBjnWMJvSVce3Dt7uS2Tf42sHG5NxNYEzi4/p/cpp4ONPSo1BIDH4caHQkKgB
+	 N8Z76ncSuJB3A6+fJ1GokrNGxspCGlb3ZpH5GOlffZlkiC1sfLEo4+rkVg7hVQyroN
+	 +xp/etpCUcsOg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C012A405E7;
-	Tue, 25 Aug 2026 00:26:38 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 288374B8
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:26:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C4A7480ACC;
+	Tue, 25 Aug 2026 00:46:05 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 008DB35E
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 06399405E7
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:26:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E6A0380ACC
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id haz5XaWmsGnr for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 00:26:36 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5QalctiN1ugR for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 00:46:03 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::329; helo=mail-ot1-x329.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=iVkn4OuX
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B0D09405E2
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:26:34 +0000 (UTC)
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7f434cc1c5eso3922635a34.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 17:26:34 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=Qmt1Aajm
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1AFF980AC8
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 00:46:02 +0000 (UTC)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7eb61bbeb25so5138202a34.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 17:46:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787617594; x=1788222394;
+ d=konsulko.com; s=google; t=1787618761; x=1788223561;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=+eXY+W3J9B2V5CpbYWUC8504O9HaefvJpqj0/Y6VcCI=;
- b=iVkn4OuXxeMj/Ft/o8SbuGGerSRBlojtmfaJV4J0zGdvod6UI49Fr07IsBxsDHFLWs
- LjvOFNGFGKWnhtCwtfou4LAdjo7a2pz3p769hDb+v/31cQZE6Nc2s6zialkrS1VUEge9
- IQbVqtkVUbHaBTgCLQyVVUvBzMPfBfIqCGSPC97CmXSC50S2c8lCx1nNJbOvY3CPo/LM
- TX+Qjycy9bCnY+4CHoeBatMzALTdpL3bboXli2yFViGYhSgeys/m5MBAggL8ikwdxFmv
- o+7rBoOF9ZbdaGsTYjJQluG4y7ugrSz9vPzwYvK+aj9ISRHR4c9tTeZahLZ/5/gCgzZd
- vxog==
+ bh=TqgFpm87jAIRmts7OVHmLJKoMeTfkCHMidfMVVbgH5Q=;
+ b=Qmt1AajmP9ljoNPdZmCXOqYObFLIH9jy87ZsP10WnEOqS8k4DKxCnjX6712RJsWU4E
+ Khqq9jjBvL9zd7E9KM1uskLSHs5pp1/Iy/aktnJpcp0kvX9D4LjRSMJJf67JLy9LVmjr
+ IFwXQ7fr+qzV0wAtb8Cr+c+dHwhzeE9pPE3dM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787617594; x=1788222394;
+ d=1e100.net; s=20251104; t=1787618761; x=1788223561;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+eXY+W3J9B2V5CpbYWUC8504O9HaefvJpqj0/Y6VcCI=;
- b=k4NwNfJk1RYRX0Ak6etB4tmV4FUMUrbxV1oRq/V8GYXV5lJBxa2ZCYr6KLU5qS+hpU
- T9togGL6AFfBlsRNclZNMIDQbexFXsrH2tA4hy9fC4Redm1zAqKyO96NXYF2XrrMizmB
- Kk8kszTtciklw2NfLwDpJVmEx9Um6LB6XzvB9YdJuIYeWA00zFQ8DrLPHY7dHRbk/uAw
- fNwNzKwC9e9UD/BXBwzjUAfa+LMmSiQyvIt12eHXtCZyUxAZnj2V3JLcAvKKhUWokPCj
- RYqGHWxjvO9NPnsjTXPjPXKlh269DJi2ifGWnRD3yvSKDWBKuWc++LgoqtVnYcnmc09P
- dsVQ==
-X-Gm-Message-State: AFuF++lQE4t5aQaPPTWxmsl3dYlpjuAc42AanA5WDibJWWt4RlT1+Mb/
- URud4rnooBsSM4lfyPSwwIRKHNgfSysf9M2devINv/wiOwZRAhYul0Em9tzUz0WZv1Y=
-X-Gm-Gg: AR+sD13WkTnLoKgu1DDPNwkhj2b+tIjlZk9+hb3/0qw4voPlOzWVSTHAIxrTx5Op0Dl
- aU9llAZDHhu9aOwcIWOFagpGbYDhkpFEMjzuSIUEIT/oYtxzzN2WaaVqSyoQmcxutDRRbowADY6
- KnEIeXGxQU9A3azqXBmFSppEkUl8UhKZPwMPBpc5pY/h+P9gnZvgig1vPDqIwlZHTmA0YSrJJuG
- YX+MGq9pJuHUKRlDRcSdxW+49btFBiOigCaVO79/kk4xCwuEciYLyMiwoFBtgX74G/UC34NcBXq
- sKuIcmHUIKcfKA1hCfagUVjoc+6jlf/d7EUiR4pxyDd6qNppqpj4C/nouKerZEYZgsSm1U2ZWwX
- RB3ZEr49WZFO6qc1X8JoRMcR4uJ+9jbhPlqp5F3SPS7Kph8HuB/Z9Cfy/Iqsxh/CJQiLGssBcfG
- A60rE6obFUX9EmN31PnDMQKqw1XCOAeBUgu2wCouCQqiiFm5AUdY0b0MzY4lgG36U2/Q==
-X-Received: by 2002:a05:6830:7102:b0:7e7:8dc0:3951 with SMTP id
- 46e09a7af769-7f46144221bmr35227595a34.8.1787617594021; 
- Mon, 24 Aug 2026 17:26:34 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:29ca:5dba:5fc1:6f13])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f48fb1db63sm6211761a34.12.2026.08.24.17.26.32
+ bh=TqgFpm87jAIRmts7OVHmLJKoMeTfkCHMidfMVVbgH5Q=;
+ b=tCxb3cuOKyKaMwInWIOy+qJPNeY1rFw1Pp38zTmLSyo68VJdvFhzxYnjipkjSvX6kQ
+ YUaYHpB8N3YBHYZUExqiLOkSf/SR6rAxYkynM6kNtOW/EWGE8jvfYSsi+ppvuMW0EUuF
+ 3s+MDK6/DyCfnFykZvVULNc9KcbWTOlUYTPgQbP6s4jOjo3xVaCjK7W1mcI7INfo7RvD
+ ypPoUNAAKykDoZjhzVCVPmhoLd0xK7kPPDebkm8nJzCcU503v0MctAVxop2ft8WlSFcn
+ g3+JlM7/F36wCqojvKZ0lkeImyjxbpY5F5r8NOU6dg7Be1lPaxRYyaMG4AK9vyOhcm+c
+ Obnw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoI9G91lCXEnuwMv5WuIhZA+4XcSwqISQrIwSOtnHMYFpDmp9MRrx8JxBs0cQ0DalrZLtYQlcA=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kpVgAzE0HpQNdzizfnHITftmZ9GbBVRTmpbMMsQpK/U7U3wAaf
+ xbPElIyhKCBgBwKSyyfiP7+dUzzn0nkKjg4xClYOfn3yEOpImDgNqLxVKKqDIQpIXhE=
+X-Gm-Gg: AR+sD11CINYu12KERLoloWm8Uq7gLleHj0h27xEf6ohIHCeAPxiE+TVskfcIAEgGgZC
+ +pbHwGKddOeL9lpggodIilru7dsBBeyWLCvEKS7oIaUBRbtkFlh2svrjaXmPLPl//9IlL5WrEsp
+ pIeNJ4wYME9ilyO2JCs3BPsDpgAoW7OCBfbppGVkv0Dqz5awKkrCFQpM4hwjWjX/u+wxVNuYkyZ
+ 2CdYCrJaMXQNZphLR4dw38Rha08m3DIUzbPLILC4XoMs52NRg71NKyeBfQbFbb8iNgKgsqH7Icm
+ /4ZBu59ZPgtTft3AotCkpd2T2r+bZduGOFhtMWs9x3kEyqdfVk8hnhSFFEqg9HcXyphCzxbeneY
+ zRW5Eh9kiKxpf1DTIcfhw1Vy3tkXZTLANOCiRud3Qsfb3Ry+f6M2hMy39zHZMyUfrXUZPIlIZUB
+ f6/uOqeqL3M/DIwIXHvCfCKuEQgz3CIw7Qg2zUcv3XWWxglIjL5p6zlU3NwA22pPogcl6mlwzXa
+ xUFm9oHoYWL0V7MvZW3NEvtqoMDwHNuq1cmLH6Rh1bfQmTBSA2IyPqN7z5NXU9fOQOfiYLDTVTa
+ Mygu/M7b
+X-Received: by 2002:a05:6820:810:b0:6b1:4fa4:76c5 with SMTP id
+ 006d021491bc7-6b19033d71bmr2267250eaf.4.1787618761624; 
+ Mon, 24 Aug 2026 17:46:01 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-463831af959sm6502486fac.5.2026.08.24.17.46.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 17:26:33 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Sam Shih <sam.shih@mediatek.com>, 
- David Woodhouse <dwmw2@infradead.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, 
- Mingming lee <mingming.lee@mediatek.com>, 
- Fabien Parent <fparent@baylibre.com>, David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260807-mtk-pinctrl-kconfig-cleanup-v2-0-509a8f833181@baylibre.com>
-References: <20260807-mtk-pinctrl-kconfig-cleanup-v2-0-509a8f833181@baylibre.com>
-Subject: Re: [PATCH v2 0/4] pinctrl: mediatek: Kconfig cleanup
-Message-Id: <178761758314.2485046.3222118451188096373.b4-ty@b4>
-Date: Mon, 24 Aug 2026 19:26:23 -0500
+ Mon, 24 Aug 2026 17:46:00 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heiko Schocher <hs@nabladev.com>, Kyungmin Park <kmpark@infradead.org>, 
+ Daniel Golle <daniel@makrotopia.org>
+Cc: Alexey Romanov <avromanov@salutedevices.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ u-boot@lists.u-boot-project.org
+In-Reply-To: <aoCA_QD7x5-Z7Tpt@makrotopia.org>
+References: <aoCA_QD7x5-Z7Tpt@makrotopia.org>
+Subject: Re: [PATCH] disk: ubi: use a format string when copying the volume
+ name
+Message-Id: <178761876023.724197.14977620653929389664.b4-ty@konsulko.com>
+Date: Mon, 24 Aug 2026 18:46:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=766; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=w0/a8QYCsTHtjsYznTlsvPwRe+/dJG2D1zoynsiy/q8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqjOExsQzwbvbxF6QMAXsGSRaH8EUGr0X6baKCy
- A10yuHq4qCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaozhMRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AnnEH/0zZ/n08zUwRytsUgeaaA7wXd8EO/Bijuuo7U0e
- J+FqvfONK/VTs93NB+Rhbs4fyj/LvEQvymApXfBbe6+5kO3kiCnfeoSnPIgdpMQhuriag4gXHRi
- 9wFv4/2zmjUej0k0iPVX2M/q99tDTUqkfs7npxiCLSv2Hc1VWokkHI/hEZ6QgRKrVAYy1yMoFIa
- QgpOBvUAa28kz7cCz4MYjXeowyFZYPD/vE48MMXvxp9XvasoHSlA2pHejSp9/0Bq29PKenD7gX7
- tIpoFizNsCXunZM0hA6GxHfXCb/7cGhNcsnd+uCeJPrQAvEONrLWhtRqTlrV1TfD39/Habsm1GC
- ZQ/o=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -147,24 +128,26 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, 07 Aug 2026 14:16:28 -0500, David Lechner wrote:
-> pinctrl: mediatek: Kconfig cleanup
+On Sat, 15 Aug 2026 16:08:45 +0100, Daniel Golle wrote:
+
+> part_get_info_ubi() passes the UBI volume name straight to snprintf() as
+> its format argument:
 > 
-> This is following up on some suggestions to cleanup the MediaTek pinctrl
-> Kconfig before we add another new SoC driver.
+> 	snprintf(info->name, PART_NAME_LEN, vol->name);
+> 
+> A volume name that contains a '%' is then interpreted as a printf
+> conversion specifier, yielding a wrong partition name or reading
+> unintended variadic arguments; a '%n' would be undefined behaviour.
+> Volume names are user-defined and boot methods select images by volume
+> name, so copy the name through a "%s" format instead.
+> 
+> [...]
 
-Applied to mediatek-for-next, thanks!
+Applied to u-boot/main, thanks!
 
-[1/4] pinctrl: mediatek: select PINCONF
-      commit: 186a142207e7b8c3f559cb91cef19d4b19c71153
-[2/4] pinctrl: mediatek: remove PINCONF conditional compilation
-      commit: fd017c4974ae2313c74bf8aa94a0b7bc4d974134
-[3/4] pinctrl: mediatek: simplify Kconfig
-      commit: 86ae242f246dd6dddeb01588ace0526d2638e962
-[4/4] configs: mediatek: drop no longer needed PINCTRL options
-      commit: f807d57664ae2e6128e9a17dcebfd45b8de3a77b
-
-Best regards,
+[1/1] disk: ubi: use a format string when copying the volume name
+      commit: fb79a4fcb09b49c6d6ef0a9a030e1abef32358e9
 -- 
-David Lechner <dlechner@baylibre.com>
+Tom
+
 
