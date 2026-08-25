@@ -1,133 +1,120 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1066AC61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 19:45:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6ECBC61DBD
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 19:47:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BEE6640665;
-	Tue, 25 Aug 2026 19:45:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6CB8180CD4;
+	Tue, 25 Aug 2026 19:47:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ajoBtJxe0yuH; Tue, 25 Aug 2026 19:45:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id c5Gl0MOZSJW8; Tue, 25 Aug 2026 19:47:47 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787687139;
-	bh=sAlKgwaWd8csqxm+JSJ+Y8Az04o93ztsEXxl94a1EpM=;
+	d=lists.u-boot-project.org; s=default; t=1787687267;
+	bh=vH0GiJAmlf8EcHmN+CJG7vdEQjJSF4VJFF0rYao/FGU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tqEW/Z9uOblzdPzsTKCXQYwQxfy2HEP+E25DQ80xKiW3y394vlJ2BKZvKE51xECF3
-	 OqCZvfnVLuCBkXepF+B3JKoV5XlMbf5/LuTTD2XXUlDfUe1iBwtXQ3XyTbJIfNJjUJ
-	 98p+8PzB4YobIt/9g8QRV2QV/NLCHD3xu8hlafXC3vgXft/rsCtSGErD+1Xrts1Kcq
-	 FRKulSbvhnoGGIxknPvg0u0WTKsyQvzeXgCP5FKAAcGpD7RJvJXkjGmpZDdT+1vB6h
-	 oORGXNWuMCr1gK2RLh8TCghLc3+2jLPrglsJgukZA0H6270vrvcm+ReFdwpdffJJVw
-	 9jUb00VE5td7A==
+	b=KTTTaI/kf4pdFiNu/QVdmXYxPIuZjRTtMIIj6jexpcW8SkY/kJeE718Z3IJkTqkcn
+	 5+kUigJ+qQOOJA8ODEbBKR2wiierhf+8Z7PMiJiLbgaofYAYiJjIcD9g5ywFufcMTA
+	 S5OoanY2wcp3XO0ob0+1acbK1ckqZoG6y4YZddzSq2mN74ZeGzu/f3AyrbzYLYUOZr
+	 MtLjqJQm0dDKY5mtxhWnPJzbzHXtcqW5Guqx0I3XGtvK6qwARWGFNrAB/abUr8vzUc
+	 GYeHqFkTbYMW6mntssu+vJQoBF4L87K2BeA3eD5FOEwzxwTOT/QH3z8xT+BqOrNxT9
+	 UKBBw13kVXgLA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3736A40606;
-	Tue, 25 Aug 2026 19:45:39 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 64B73334
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:45:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4922280C79;
+	Tue, 25 Aug 2026 19:47:47 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B2490334
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:47:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5643960712
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:45:37 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A425C40055
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:47:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AYxA1hxoVJgg for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 19:45:36 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:32::5;
- helo=mail-oi2-x05.google.com; envelope-from=trini@konsulko.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=T2UEebWz
-Received: from mail-oi2-x05.google.com (mail-oi2-x05.google.com
- [IPv6:2607:f8b0:4864:32::5])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 28EE96070A
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:45:33 +0000 (UTC)
-Received: by mail-oi2-x05.google.com with SMTP id
- 46e09a7af769-7e9db59c430so66076a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:45:33 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fPw49ukTXpnr for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 19:47:45 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::82c; helo=mail-qt1-x82c.google.com;
+ envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=lco2+1OZ
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BAD3D400A8
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:47:44 +0000 (UTC)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-51c4436d02cso1372231cf.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:47:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787687132; x=1788291932;
+ d=linaro.org; s=google; t=1787687263; x=1788292063;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=sAlKgwaWd8csqxm+JSJ+Y8Az04o93ztsEXxl94a1EpM=;
- b=T2UEebWzu7pr9akH2M5Wuf4ICU8CEW+YuDDo7EhU4V/6zQjDXHNX1LLd9+N+3GqidM
- ryL8qxR/KKt3KaLLaIrpWy6C+mVWxUfAD3WGDDrWer/sVGIW3qW5qtUu8a1gvA+th0Jd
- LWn7SWgHZ4vDI7QWP7GVFfecXNkfI4xR+8Ki4=
+ bh=vH0GiJAmlf8EcHmN+CJG7vdEQjJSF4VJFF0rYao/FGU=;
+ b=lco2+1OZRVhc+Dsqhqg+7DUJE44Q+ZHHr+QOQVNRnvEcdJiYJGWPMVu+xqmPbFPUkz
+ cceXR/MqK/wzMX+WrQjkkZrYOe19UDEuxEhscdkgkElR3L8TjMlnIBsUQLVjt6RIAw98
+ CBADXAREiwiSgN02aGcZtf0wg/DhiDDJKnHRYLmdkmMkaOcSYBSg2YPG+6l4cBzA91hY
+ LZcyR5Qz073AU0uB3DC9VypQ+UC4ls4oPWbMEQ5Rs/vf9ySV6KF9VcMzJ5Wz1j9UQqUP
+ VQzDObL+W2MCJRMcIPuYaoDrYuug2KD59S0P8ucliWqz2rOe3Jd0SBSz9rrJEVu7Itsx
+ 7/nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787687132; x=1788291932;
+ d=1e100.net; s=20251104; t=1787687263; x=1788292063;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=sAlKgwaWd8csqxm+JSJ+Y8Az04o93ztsEXxl94a1EpM=;
- b=NG3SRuQJEiqr3qIY2Q6Zk/0/SQdmBY1OL/9tWbiR/3p0W87dhvMVRjUnbH/CmaHz5L
- UlToKG6Zq9wJ+9I3BU1vk0wvYAODu8RMLxSctYd4WyQ2w05l0/oS8oSJnrYpUMlPvF+Q
- Jnx0v9xFusPfmDQF6MV3ejPblVpvW6oTfSRNR/dxrQixoEBQzBFkrWtXXXjGxl3qaavk
- qk9Ax0F5aJ6pW2pE+HvC0Cmoj1AVkrKo6FFO8vGRXrs7UdFyZyp7KdncFnvJ++KYkwp4
- gJSgV0SPEVWn1VDxS6dbIJoQ80xzP4ZoNdNHw6QvIw09DUhGGeaSWQDkzefndNXX2UVL
- kz7w==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rp57UW5MYRXIVQgu2wsZR3WvNcoHY51xpGnXU7GQ44wRF56KU4aTIh/wzDILFd5GyNGUvMbgsE=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kTjgrCxkrwqPcH5r1/WJWNwsKkq+lxsdnWnTUsXXXoyLGH1XcB
- eZEny6nXTTWlkS8l3mTdpb3DntFxE/G8gA06O3pfGTXcolCimzESVDb9bS+XNN6p2LE=
-X-Gm-Gg: AR+sD11eVV1tt++poUhqoz1CqeFlq5TW1oxhX+ese3ntjS+P5NYf4EF/2UirpO8xBPT
- Wimag/0am5zELCaAon2uBkpU2Tr5eHywWXf73ONeM3ATRJbmtX8rbOJPmtfyo9QMcCpHuc8/Qje
- n7rqQU7wDCwR8bMkj3PEzALL8TicHFlq8+LZLg3+YZFLO3pj1888qRKmPfKvbojuYVSZHjb2QOH
- 7Q1A5X8GIOE74PxPVy3/d1ylxHJlRG1rQ3HyLx1/HFsgHAKvyeHBZ34kOZjiKwcdk+vBBhvRn/I
- rHnmT0u3NHXQ876jyqhpvKQmhNhNzBOCht6KP1+RXCVHN3zpXnNGyCemlEOUpjifB1/4BVFTrgJ
- XhH3EjhG3I+WzXK82CGYoQU4z/Yy+Khw7dOAbg+UHHx0sK+ZoGmIYbYWASIVpzyCYfjRDM0WKOQ
- 9A9iFCt7f5G1MnTLiXUmFu+tM+qVdz4K4RZA3VmYVD/L/eYt1nTd6L8alXi0Fau2sJ6J3berDNi
- 9OJFpF7JjPKYLxgLpmSixH3eENC5eSP6JABcJm163oJ8fXYRlanL1Hv12kDBmu8dpXmTxr9wE+G
- Cpjd5dxrMA==
-X-Received: by 2002:a05:6830:7195:b0:7de:5bad:ace1 with SMTP id
- 46e09a7af769-7f4c502d4a5mr1087185a34.12.1787687132616; 
- Tue, 25 Aug 2026 12:45:32 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4c42116fasm389131a34.6.2026.08.25.12.45.30
+ bh=vH0GiJAmlf8EcHmN+CJG7vdEQjJSF4VJFF0rYao/FGU=;
+ b=BjdxlhQKwP7GYfhIAGS01PuvskmcJ97RBJIJ2D0Jpmkys1VweAJxsbG192Kf24oODi
+ iGJU7bRpSIs8nM6+nblLQQ86JRS39W0GLdqdRPbUznSt4RHT66HvPPILkk1fgxidrG0/
+ if8FcQ1V4uvMPzoz6BiUJwT13SV+9boavdDS2+0tFKCOi0OgIVXGMA9D0vUm+bu7gY2y
+ IRD0o3+LvvyGo29PK2R1PALT49onplkevKSqxbVQEZ79ZEzlpt4AWlZbHxGtDp8MEcjc
+ wAcV225i/yKFmmHxZq3W7JBbqBveetAsF6fDQBiQZWd6ioVz/qyHEqZZaJzyPnA1ICuk
+ Ot+A==
+X-Gm-Message-State: AFuF++mF+dviPlC2qnfzVxwKv3w2uSBQgH8DPscxTpR/WW2q8XAq3jsb
+ LTyb5YVGR9SLdZgf09fgreFVAIOjnXeAvlQ2QrgpmxlAn6N1eIam1eHDvbXXws/3T2I=
+X-Gm-Gg: AR+sD10s0/IKhTTOrR735Q4Br0RzIB+13+2gka9ngO7eoJD3x4jlhbWYMoSYNApeUKx
+ azGbQL/6G0JuohJFbr6q46p+9X2Xl92TyCqHvQc0PPcCydOgRecMa0lxhJduZy0bW+JGLbA8gFP
+ 7+xUhVsGJ9D4TWN6l5SrhvfoI2tTcVDxpudjJJqgFHx9c/w7zIITrz6leYJzVb6aQONATyAcpJf
+ WLqkSHkcyoB5XWbIsTeVi4aa2hohGuW3NocelAL0IaxdcIlrBsItz/k2p/OHAhmatD0goCxzTM8
+ SWUlRhAFIoKg8NRdC1cWZqzqvs1Pfv7T/yJKHmnSqP5KcBhnWwyvgfMiWVrZ7pk12LLzsH8u9he
+ 3ywyP7pVl28wGXJGkgi1mYv9IsvLBcOA2qsG7caatp/HYaUO2PISlui4dr3UyTTNpqptnYupnVR
+ ZkesBj7kTJKvBaA+Yp/tsupFhvUMRnmpU+kETKt/IsIFqzF586Z/HgNDofUZlEl2TKe/p5mQZLs
+ 8A0mld5eXJeku/sC+Z4UylutVcswuQNaCC4hR5elFE=
+X-Received: by 2002:ac8:7e8d:0:b0:52d:918b:92e2 with SMTP id
+ d75a77b69052e-52e4222c9c4mr15439441cf.6.1787687262783; 
+ Tue, 25 Aug 2026 12:47:42 -0700 (PDT)
+Received: from localhost ([66.129.139.8]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-90cc65448f5sm6175566d6.45.2026.08.25.12.47.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 12:45:31 -0700 (PDT)
-Date: Tue, 25 Aug 2026 13:45:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Alexey Charkov <alchark@flipper.net>, Anton Burticica <mouse@ya.ru>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
- Suniel Mahesh <sunil@amarulasolutions.com>,
- Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>,
- u-boot@lists.u-boot-project.org,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Subject: Re: [PATCH 3/6] disk: part_mac: Fix stack corruption on devices with
- large blocks
-Message-ID: <20260825194528.GB523975@bill-the-cat>
-References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-3-a3f1f16b53ae@flipper.net>
- <cb50976b-917f-4843-8b0d-dc2a32e59d65@canonical.com>
+ Tue, 25 Aug 2026 12:47:42 -0700 (PDT)
+Date: Tue, 25 Aug 2026 15:47:41 -0400
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.u-boot-project.org, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>
+Subject: Re: [PATCH v2] mmc: zynq_sdhci: support Renesas RZ/N1
+Message-ID: <ao3xXc7dNbFmKEha@maple.netwinder.org>
+References: <20260814-rzn1-2026-10-mmc-v2-1-51e4d8a717b8@linaro.org>
+ <4e3a48d8-d971-402f-9542-820f254abc77@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ueMxLOqeJUiH8LuK"
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <cb50976b-917f-4843-8b0d-dc2a32e59d65@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <4e3a48d8-d971-402f-9542-820f254abc77@mailbox.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,75 +128,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+On Sat, Aug 15, 2026 at 12:21:11AM +0200, Marek Vasut wrote:
+>On 8/14/26 8:30 PM, Ralph Siemsen wrote:
+>
+>[...]
+>
+>>+++ b/drivers/mmc/zynq_sdhci.c
+>
+>[...]
+>
+>>@@ -1152,13 +1177,13 @@ static int arasan_sdhci_probe(struct udevice *dev)
+>>  		}
+>>  	}
+>>-	ret = clk_get_by_index(dev, 0, &clk);
+>>+	ret = clk_get_bulk(dev, &clks);
+>>  	if (ret < 0) {
+>>-		dev_err(dev, "failed to get clock\n");
+>>+		dev_err(dev, "failed to get clock(s)\n");
+>
+>"failed to get clock(s) (%d)\n", ret);
+>
+>Please fix globally.
 
---ueMxLOqeJUiH8LuK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Will do in v3. I'll just do the clock-related debug prints, since I am 
+modifying them already.
 
-On Tue, Aug 25, 2026 at 09:37:43PM +0200, Heinrich Schuchardt wrote:
-> On 7/31/26 14:40, Alexey Charkov wrote:
-> > part_test_mac(), part_print_mac() and part_get_info_mac() each declare a
-> > single-block buffer sized after the descriptor struct:
-> >=20
-> > 	ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
-> > 	ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
-> >=20
-> > Both structs are 512 bytes, but every blk_dread() below them asks for o=
-ne
-> > block, which transfers desc->blksz bytes. On a device with 4096-byte
-> > logical blocks that writes 4096 bytes into a 512-byte on-stack buffer a=
-nd
-> > corrupts the stack.
-> >=20
-> > part_test_mac() runs on every block device during partition probing, so=
- on
-> > sandbox with CONFIG_MAC_PARTITION=3Dy this crashes on any access at all=
- to a
-> > device with large blocks, for instance:
-> >=20
-> > 	host bind 0 disk.img 4096
-> > 	part list host 0
-> >=20
-> > Pad the buffers out to the block size with ALLOC_CACHE_ALIGN_BUFFER_PAD=
-(),
-> > which is what part_efi.c already does for its own block buffers.
-> >=20
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
->=20
-> Modern Apple Computers use GPT partition tables.
->=20
-> Gemini claims:
->=20
-> Because APM was functionally obsolete by the time Advanced Format (4Kn)
-> drives emerged in the 2010s, Apple never updated the specification to
-> establish official compatibility guidelines for native 4 KiB sectors.
->=20
-> If Apple has not defined how to treat 4 KiB sectors, we should not try to
-> invent a scheme.
->=20
-> Apple has already deleted the documentation of this outdated partition ta=
-ble
-> format (http://developer.apple.com/techpubs/mac/Devices/Devices-126.html)
->=20
-> My preference would be to remove this driver completely.
+There are other (non-clock) debug prints that could benefit from same 
+treatment, but that would be better done as a separate cleanup patch.
 
-Yes, this is another case where we can just drop the driver and if
-someone *needs* this for something, likely emulated, they can bring it
-back.
+>>  		return ret;
+>>  	}
+>>-	clock = clk_get_rate(&clk);
+>>+	clock = clk_get_rate(&clks.clks[0]);
+>
+>Can the clock ever be non-first clock , i.e. do you need to handle 
+>clock-names DT property somehow ?
 
---=20
-Tom
+It's not clear to me if the DT binding specifies the order. It says 
+there must be either 2 or 3 clocks, as well as clock-names properties.
 
---ueMxLOqeJUiH8LuK
-Content-Type: application/pgp-signature; name="signature.asc"
+Existing DTS files (rzn1 and zynqmp) have it as the first clock.
 
------BEGIN PGP SIGNATURE-----
+We could try using the name ("clk_xin") and if that fails, fall back on 
+using the first clock.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao3w1QAKCRAr4qD1Cr/k
-CqZOAP9MGw7/ykK1xvnrejdbZa14qZsLnTnbDKF3hR9JoTG/yAD/dEgF6Maiisjg
-0Z7gRom9kOTZ5anNHE6pkEUBdsgVwQ0=
-=NCyH
------END PGP SIGNATURE-----
-
---ueMxLOqeJUiH8LuK--
+Regards,
+Ralph
