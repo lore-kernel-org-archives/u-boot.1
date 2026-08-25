@@ -1,80 +1,83 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA98C61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 17:00:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20047C61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 17:00:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B07E640612;
-	Tue, 25 Aug 2026 17:00:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DB57F80B3D;
+	Tue, 25 Aug 2026 17:00:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9WFoE3eFBnE7; Tue, 25 Aug 2026 17:00:22 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M4eev0rtLBMh; Tue, 25 Aug 2026 17:00:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787677222;
-	bh=aemmI//3h55V2YeYRiN3yzp6Vh/LK1tI+++8xZDM2+Q=;
+	d=lists.u-boot-project.org; s=default; t=1787677224;
+	bh=mpmdsyrjSskTfACVedcjXwhpa+LO3vsOVPUkiqn0egs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AgpZozoKJHLt6PqPhTcfQf2fSeMvABgs74QpRz9WefDgQC2CDcY1+Il6geQBV8gVn
-	 yWoVXvZdM2I/l2bIX3YfAgewBzdviu8HFKqt26m4gFA85Y64waL34wfVq9b7pwT8j1
-	 JoODZqmX21qSczvpMtWJF/IqedzP19PumR6HfodzsdMdgXnSUy5n9w+qW2GDD4rbJW
-	 rsmeRbbWvExveF4O8M3J4m4yof2sWfpf9u96gZqrixPR/2Ok0rCTUyAjV1URMhXV1r
-	 gzganajFJalB1VJ2OE+BOl0pPDEGvXRxvu6bsA/UHKqJQnp+aTQFg2jHnGsjp2Q9e+
-	 KXQCBSxiTcjLA==
+	b=V8iBhN4nswZxM+D60ZyRhyPXEHC2gL/NOoLK0D+4CQQkQUjOYbvvLMd3OP6ToJbld
+	 N6PF8eiDhfDtXjQ1Nqp2t42u3763+qGWEW8lboEIE9ozFLUiuXBWBZEqTt7iLxGQZx
+	 kXWYteFrG2Xf+vjjnO3NMWm7+AdhSQYDdL7YIgzBehouUUQ7/KqfcI6Hhu0EVlN2S2
+	 rGPmvemlLnf55WlosA77V5awP2sIkMfgnsIc5x4uWCciBnYTPrrJdoN6QCSyJISYXy
+	 8Op1TbHVU/7JNdjCwtic/XeO4HIxdyyewwfF/L07Q0PGiDYLcPTmcJW/6cdFQ5t+hb
+	 SFeyNvey3USCQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B95DD405ED;
-	Tue, 25 Aug 2026 17:00:22 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id D7EB43DA
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:00:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DB9A980B49;
+	Tue, 25 Aug 2026 17:00:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 00C73396
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:00:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C89DD4004E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:00:16 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id DB60680559
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:00:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sbKoMf81omZ4 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xKMuKF1O5HVQ for <u-boot@lists.u-boot-project.org>;
  Tue, 25 Aug 2026 17:00:16 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.175;
- helo=smtp-42af.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+X-Greylist: delayed 606 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 25 Aug 2026 17:00:15 UTC
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=DRnZkG8N
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [84.16.66.175])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BCE424002B
+ header.a=rsa-sha256 header.s=20231125 header.b=PeQqfmwG
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.8;
+ helo=smtp-bc08.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
+ receiver=<UNKNOWN> 
+Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
+ [45.157.188.8])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E5C8380542
  for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:00:15 +0000 (UTC)
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hTv0V1PPZzjnX;
- Tue, 25 Aug 2026 18:50:18 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hTv0n1cS6zfjn;
+ Tue, 25 Aug 2026 18:50:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1787676617;
- bh=aemmI//3h55V2YeYRiN3yzp6Vh/LK1tI+++8xZDM2+Q=;
+ s=20231125; t=1787676632;
+ bh=mpmdsyrjSskTfACVedcjXwhpa+LO3vsOVPUkiqn0egs=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=DRnZkG8NLzehF90HMekLjb4ttVgq5mxS7VjUAlbw4rJAsJqMYu4Dy4ljNJcl7U0FU
- Wd3fTYPk4ROM2qAY38U9SED7zJK2KHzp8V2eVbAvXy1dZtB2VLb7+7d7NK+QxQE1i+
- SsP1zOkawq8m6ZU86etvftV0GEQuXMMoeYn1oSPALrVngqodF5P8SOPjeI3bW7j4D5
- Z7zewjBNhCNJMfhjNovJLUOP2fL/uibT3z1b8DJXHgc3lhg3ermBJe+xGtLFTKnK4M
- +DRueLD8b87MO7XAf56Sk/79AsdsXqOzV17o2n+Z/GepPuP3ZKx3IMGMbmAaEAh/bO
- C1xYhfnpQZ3gg==
+ b=PeQqfmwGOCIkBTLfGjI7uEZivmpkh9D7aSJ+vesHWAsqfWNzKCFJN0vlC6z1T2Uwd
+ gmOBJWvvyDLYg7sdUgx8XvuW9MqW75MNILkCTxcnnwZdGSA3h+hBqFASxVw6vsvfUC
+ MKK1oAA0kNvm+GjMB0CgwYMgxs1KNK3cxNXFI9IG3cJUBLeUkfmw3otG00rk8Mg+Jk
+ mo0aGX6TvNg2Dzg2qNgJvggcArQGJojPwdaDe/cIFmrp9+JVii0MqNPEK/cNaFW/I+
+ T5Eu7tHWr1BzEmRRc3PTYOcJ96CoMSlANiyxjylgDn5rrqrq+dPHA3RwBjU6RVFHth
+ AIY2C1ljSoztw==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4hTv0S4RLczX4k; Tue, 25 Aug 2026 18:50:16 +0200 (CEST)
+ id 4hTv0l0STLzZVC; Tue, 25 Aug 2026 18:50:31 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 25 Aug 2026 18:49:46 +0200
-Subject: [PATCH next 09/45] doc: arch/x86: update link to ACPI
+Date: Tue, 25 Aug 2026 18:49:57 +0200
+Subject: [PATCH next 20/45] doc: develop/coccinelle: remove dead link in
+ supplemental documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-linkcheck-v1-9-ee7573fe3a4a@cherry.de>
+Message-Id: <20260825-linkcheck-v1-20-ee7573fe3a4a@cherry.de>
 References: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
 In-Reply-To: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
 To: u-boot@lists.u-boot-project.org, u-boot-amlogic@groups.io, 
@@ -110,28 +113,33 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-acpi.info doesn't expose anything anymore.
+It redirects to a fancy 404. From a cursory look at the Wayback
+machine[1], I don't think it has more than what's already in this file
+so simply remove the mention of it.
 
-One of the last archives of that link on the Wayback Machine states[1]
-that the ACPI spec is now hosted on uefi.org, so let's update the link
-to something that actually is interesting to the user.
-
-[1] https://web.archive.org/web/20190522071820/http://www.acpi.info/
+[1] https://web.archive.org/web/20240915073329/https://bottest.wiki.kernel.org/coccicheck
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/arch/x86/x86.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ doc/develop/coccinelle.rst | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/doc/arch/x86/x86.rst b/doc/arch/x86/x86.rst
-index 13d2b2ea9af3..28726f717f6e 100644
---- a/doc/arch/x86/x86.rst
-+++ b/doc/arch/x86/x86.rst
-@@ -486,4 +486,4 @@ TODO List
- .. _SFI: https://en.wikipedia.org/wiki/Simple_Firmware_Interface
- .. _MP: https://en.wikipedia.org/wiki/MultiProcessor_Specification
- .. _SeaBIOS: https://www.seabios.org/
--.. _ACPI: http://www.acpi.info
-+.. _ACPI: https://uefi.org/acpi/specs
+diff --git a/doc/develop/coccinelle.rst b/doc/develop/coccinelle.rst
+index 54ea8eee0e9c..d0ad803fc7b8 100644
+--- a/doc/develop/coccinelle.rst
++++ b/doc/develop/coccinelle.rst
+@@ -58,12 +58,6 @@ https://github.com/coccinelle/coccinelle/blob/master/install.txt
+ Supplemental documentation
+ --------------------------
+ 
+-For supplemental documentation refer to the wiki:
+-
+-https://bottest.wiki.kernel.org/coccicheck
+-
+-The wiki documentation always refers to the linux-next version of the script.
+-
+ For Semantic Patch Language(SmPL) grammar documentation refer to:
+ 
+ https://coccinelle.gitlabpages.inria.fr/website/documentation.html
 
 -- 
 2.55.0
