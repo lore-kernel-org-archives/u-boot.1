@@ -1,136 +1,114 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 718BBC5DF9C
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 01:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F921C5DF81
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 01:10:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9EA2280D1B;
-	Tue, 25 Aug 2026 01:01:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4797D6068B;
+	Tue, 25 Aug 2026 01:10:59 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6_Dj_PpkMGx4; Tue, 25 Aug 2026 01:10:58 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787620258;
+	bh=Ww+c97IYDVd+jRrhx3A1+hNCwjTUypMwgl9w2uodGck=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=SnfSB/0qvPizLafH20twuJxKU1LBqvVB3vVw5w3/1BV6njP37e0RSZ3rgBBEKSGnw
+	 CrtcKhSayBYCoILeb/bkGEEDF6wJPx3osmxThAjVE9bjdJUR+ciA2ttCR0I9oPeaZN
+	 4FP66I2KWpKt86DtUAnq2gkUQENnc5kF6SdKL7dhDCGGshmUvRVIVoKGX5d00x6JWe
+	 BXR7vRNCsi04fkYdE+M+EeomEjL/Ica2ElP126Ye31J918j/K9sq4wkp9vGy5wVFP0
+	 18rqrkrxRoxRbC8zRSz3gP68nP8tFdcobuijB8Tt6eeMeX1jcuRLfNL7P5IVO4LWaD
+	 1+NTrVbWDVToA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1BE7F60667;
+	Tue, 25 Aug 2026 01:10:58 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 56CF4336
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:10:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3D2D880CE9
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:10:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M1Xk_EUkcnOV; Tue, 25 Aug 2026 01:01:56 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787619716;
-	bh=3F7kmsX7pbq/rANSh1KQNmI/FW5fO3RtcHVJN8ElAZc=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=w/ItOWOrWa54gMIzJcmNJhHXvIfYWDSDOJvlEBJ0R0H7e6eTqtTMGs4rleudzOcsM
-	 Ll+s2ArPRo94NLsrrLeV/iVNPXCk9o5zfB8SQL0Mi5oqZnXRfDB2R96Y66jalqqWTB
-	 0zeS3BHRtCSwckG3a5AJTd8n5iw7UVvF6yPmIAFX6IRcVDKPGeDLk/m/NxYGuwR0r6
-	 x9bOLE2y6rgA/4I1t4HqEG7ahgMEu1PkDG7KEhi4ZvFNxFm7fjUcrV3XY4bvkMAw9Z
-	 Q77c2K+hZzXtJKn6QQnQooTws6PWvlt79dZQ2TW28DexKwbqfY9N9MCG3Yr+Oqt6Jr
-	 T2YOGF/WO7ugA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 68F4E80CE9;
-	Tue, 25 Aug 2026 01:01:56 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A914D336
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:01:54 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8F7094005F
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:01:54 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id l35fZCzwbDdy for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 01:01:54 +0000 (UTC)
+ id 3a9cu7amHTry for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 01:10:55 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=fCoLIfRG
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4052B40050
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:01:51 +0000 (UTC)
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-499f6e0bbabso3492543b6e.0
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:01:51 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=f21Sbg0J
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CBBB080C70
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:10:54 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7eb61bbeb25so5165241a34.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:10:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787619711; x=1788224511;
+ d=baylibre.com; s=google; t=1787620253; x=1788225053;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=3F7kmsX7pbq/rANSh1KQNmI/FW5fO3RtcHVJN8ElAZc=;
- b=fCoLIfRGRM0HQKjEGnH8hCQZACuBGO/vixJN4tZASA8ZCjMvuvRX5iUx45H6Iv+qMm
- cpUZoICggl6IcVEKGhon0N1RrvUo7FjKJpvClXntj/JZfBX+ZkM+DEhjbOTl6uoiWE6c
- IzrFINs/w3N0FIWnUAFOvxFM3U32qUjGCm3NWfM+1sajCQrhmAn51l5Ul3V4M0eWob7A
- 5FnTBZnKCjfiByPfL8N5xivJ/7uzWUe53kqfW18gpgWCYyxpvNhBLT2NRW4J+AxsxsE5
- hjUvpVevL6L7mQ4NEVe1gkwXqsAJLnX/aZl2PwBxDaHP8k8ndBHPu/D2RBUWluzAVHQl
- XbJw==
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=Ww+c97IYDVd+jRrhx3A1+hNCwjTUypMwgl9w2uodGck=;
+ b=f21Sbg0JSBqPm9GqF/GdJhBVfC+wuajr0At8bQmQ0BujLQ9M+LrXVXgccFU/zAY/aX
+ NaajN1zGurlb1A/USZIPsaJ1LkIf9mEPDmWwLaCq7SxFRuOJvFF8KYAzd31Coeah72vC
+ PzxywSs5RCGfFN5hooBznWM5aoTd5jCXCn7Mn6cReBT1WImd84uEt6VyD4pACyE6x/oB
+ /P5XhE2J7BFkkZ4Vp9e5lZjfFIlgP+cf//C3Mc2AYOxqFxEazfkmLh+/tbmubh9P8aO7
+ /vx27T2xUhwvJDWfKfJCUmUmgf3wkhjvrNAq9pAgrbeiEzHD5TrXLHfEw3jT3EXNgYuv
+ dDlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787619711; x=1788224511;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=3F7kmsX7pbq/rANSh1KQNmI/FW5fO3RtcHVJN8ElAZc=;
- b=rb4alexuc6fulOSpqaImmUXr+/fAUdtNv2i47tHrurwkHxexHLvi7OmQoQrvLUkBC1
- 78OMYIeDmbuEtzja83sJAdg39pN3FXuhTfQtohBVbWLHto1eBaxIm5Y3o0AOPtpQ6tZy
- R3cfSZ6pOEiWDsYO/5nmqASudrJQfmmqnNT5XHVo3Uddtthtg4gjHTbvVKj59CYcCLsu
- 2ItwcUPaxX1l8sc+ZcNGgmG/AK1ZI0UU35xZabGoHVWEzDzBL7tbR6lZ4Qhur+aw7/UG
- iGm2mSdtMaxbh9kbkG1ZKMj01hxIbDHDF1AR6ebBpm/xrCSQ1o9r9/1p+otlFc7VGeiA
- +j8w==
-X-Gm-Message-State: AFuF++mKRUIYUJmO9JcuHCKE/eq3LZUXTx1ONmF5F3nQj0xmQFADjlSy
- h/bkk8thHeBEsRKwYB/+qDYc8f8xucSkU499jduY6JfZuTKfNLGpH1T1EYmM8y7svliirTwaG37
- TPAfneOY=
-X-Gm-Gg: AR+sD10KgxVsr74qKdh3MdhbUx5SMY2XNDDkioN4oFGn2h2OURR3AC/hGqFg6omRKv8
- urpgo2P+0flEWVxdwvIoScIMJN/FA0fj+IiUC+7SW31Q7jVZ4kvww60AoSebZlbsqFYE3prHSrC
- 1MzfOXc+Sp9oceAblKdfuZguWadIB8/UrP8TH0rOMIXWgyVJJwVcnncc6OGXlsd8FGWw7uY4H1z
- HCxXCst5/u5/QOGBcG1FhfMTDcmvFFGMUfWFVykDd/2HI1G3IpmzfA0CIC2hvTydSW4/8kUSd6v
- aHNMZ7Edyh5QbICDZIBCOvdcAvqRE/Rs8tah6kFe+lxmvC44yzYTr+V1i/Nk0NON6/zsvDOSNjx
- tnI3fKnHBw4yHTTDQr34+lAobQv3rB65RxjK42wsliGaWkN+8npF0Eyc0QcKfGx2ElLRbO8RgjV
- YNpduHE3ytvhWHiMJ3ftsssGaMZQK5k6vlK1u5rWTp9YaGBOuxvmvEsGSHcyIFMrVKV6mMVV0=
-X-Received: by 2002:a05:6808:3093:b0:4b3:17ae:16dc with SMTP id
- 5614622812f47-4b350470e00mr2782890b6e.9.1787619710595; 
- Mon, 24 Aug 2026 18:01:50 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:29ca:5dba:5fc1:6f13])
+ d=1e100.net; s=20251104; t=1787620253; x=1788225053;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Ww+c97IYDVd+jRrhx3A1+hNCwjTUypMwgl9w2uodGck=;
+ b=UMm/v/mer8pO89NUkkpq9ZmR7oDocZIgVNGzl6RIMgI6MsGwW2OMNmJTL7tsN5V0NQ
+ tJH6/vcOBNkmMwaGV0o84TDoB05JE9AKfq+z2IfLblIcId3okDOhb3GrkT+jNS1s75CW
+ 3VMJz7S2yA1JdfBqotn6+yWVAxomq/qKBb5iOlROFTse99HpOdqW3ZvDdI44g4LxE52L
+ fVGKKJSP2FiObGFaQb+XkUuKX5RnvtIEDE/oUsTRpFv9t9LKyZBhlt7fBQLgRBvu/HRk
+ j63tgLVy3ynYdjd3nRYBlWL0eqP+jNyPa3uKwFsYabia3RQFdzNqhgAjUzqS29rsKNM8
+ ZY1w==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrGtDOqTxQ6kHhNo7tOiUdHx1GbnHIpxfJUaYvVve38Vo2jkCq3hYuNkqTdFv7UMwHiHjvHv/4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++nZC6cSUlkDrGj6PzQLw8l7wbHDt1veJrER49f3AqOOma1oPwBh
+ mHDW46PYoan9E2hIl8Kv/CSxkfTAMTxghDRhs6H84g/Q+Ypcx6ap5WJ8V/TitTvGyFE=
+X-Gm-Gg: AR+sD12i3FGck9HH3LaIm775dMaN/6iTUJa0+F7v0nm2FTdZQNOvEanD5lt59jaGAnc
+ zv2qpn52TNQTkIUievAK4352MnhsdRH49RwRXR36HOpmdUMXMqNrE/qVe7nFUlZCS/5jD4YwxJj
+ vBM/tiOiTLpYpegNhzaJyki4oj2PivmNvEcE4R8M+067oW810EUtWHQPkg0c8odelX6htLEYHmd
+ Ww3SLMCsPP6j/Zo0Yb7j71zC+4ZDsYkeXUcYtaGUhmloKOpp7RPKxp8rTi+mdOAaULowD6QWK7r
+ vXPNMJs2Rh13EE88BeeBa7t3qQa3/AiNUQ2AhS/KNdaiEm8w6LtML8dcboqlQmnn0sJI5KrLbX7
+ 74MVZCA55l9erKAq7Xdy2H/UGepdinOc72Sp8+79SnEyYJdxi92IsYT85IqAaD6cCMTiMizqboo
+ fJPoU7+FPpFlxibMRd+j54RlFjHViS7EdappsffNHsvsXShHjxWY5oEPmU10uQZVY=
+X-Received: by 2002:a05:6820:151a:b0:6b1:7ee7:8ea9 with SMTP id
+ 006d021491bc7-6b19049d9d0mr1952822eaf.31.1787620253206; 
+ Mon, 24 Aug 2026 18:10:53 -0700 (PDT)
+Received: from freyr.lan ([2600:8803:e7e4:500:29ca:5dba:5fc1:6f13])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b32c834da6sm4652590b6e.12.2026.08.24.18.01.48
+ 006d021491bc7-6b17cc0c5b5sm5087117eaf.10.2026.08.24.18.10.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 18:01:48 -0700 (PDT)
+ Mon, 24 Aug 2026 18:10:52 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Suhrid Subramaniam <suhrid.subramaniam@mediatek.com>
-In-Reply-To: <20260807-serial-mtk-clock-fixes-v3-0-8cc94d313b57@baylibre.com>
-References: <20260807-serial-mtk-clock-fixes-v3-0-8cc94d313b57@baylibre.com>
-Subject: Re: [PATCH v3 0/4] serial: mtk: clock rate fixes
-Message-Id: <178761964290.2485046.17390999510594404839.b4-ty@b4>
-Date: Mon, 24 Aug 2026 20:00:42 -0500
+To: Tom Rini <trini@konsulko.com>
+Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org,
+ GSS_MTK_Uboot_upstream@mediatek.com,
+ Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
+Subject: [GIT PULL] Please pull mediatek-for-next-2026-08-24 into next
+Date: Mon, 24 Aug 2026 20:10:15 -0500
+Message-ID: <20260825011050.2805858-1-dlechner@baylibre.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=842; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=O1xQEzWKx9zKW7AiJxvTb1HfwKlXDPcduohxkGHHMlQ=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqjOl1AXet2TtIwEZ8ukQAgTuVRgLEZgd2kdrSj
- +kjR8k/mcSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaozpdRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A/BwH/RyPDduwwdhhbcbkvQggJZHUI9wh6pahHnlbK2q
- OD6ZBJV9QK0/2FwUmGa4swdkg/Lw2hAk1hrbt0JYqmITS67JwsxiFhAbmP+2c0zuz0zCDDbD7WR
- bDFkoZ/mONaaMhyOesuRweIsaWDvaBwM/SA/zhY2LUxxRlgCqAbz9L/zQ/E2yo4oRZZIsF5s4JI
- w7cvDixOMhbynoheTraz09DGIp3BlcLRetCdx+fw9mOyW8Pl47yLxcKgvyDQj+6funIwgU0Mpgx
- 6K0CzhLjge3JHTTr1ayg5WRGMU1hi6PM//DLGySbhZKMw428JGfd1s7qrKBZTbxdS5qR0OlqMLW
- +gNY=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,26 +122,128 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, 07 Aug 2026 13:59:38 -0500, David Lechner wrote:
-> serial: mtk: clock rate fixes
-> 
-> While working on SPL support, we noticed a few bugs in the MediaTek
-> serial driver related to clock rate handling. Here are the fixes.
+The following changes since commit 5a92645e1f9020d24d19e03fff2ae63f30080770:
 
-Fixed the clk_is_valid() vs. clk_valid() issue while applying.
+  Merge patch series "Add eMMC support for Axiado SCM3005 board" (2026-08-11 14:55:40 -0600)
 
-Applied to mediatek-for-next, thanks!
+are available in the Git repository at:
 
-[1/4] serial: mtk: use ulong for clk_rate
-      commit: 50c148cfcaa30a584a827a5b54a2864c5dc8a998
-[2/4] serial: mtk: guard clk_get_rate() with clk_valid()
-      commit: 71f33b1834f6850d00d844696495333a733c1856
-[3/4] serial: mtk: return error value from clk_get_rate()
-      commit: be8761822e434d22ea07d3568b16f0ae68619bdb
-[4/4] serial: mtk: drop check before clk_bus enable
-      commit: c42e44689b8c07aee616e7cc03bc92d756b8dfb5
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-08-24
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+for you to fetch changes up to 01834e2273b9a1226105c7566415a6b0ba8c6955:
 
+  serial: mtk: drop check before clk_bus enable (2026-08-24 19:56:02 -0500)
+
+----------------------------------------------------------------
+* New HDMI PHY and I2C DDC drivers, default EDID_ADDR macro
+* MT8189 clock qualifier fix
+* Phase-aware PSCI reset (MT8195/MT8365)
+* dwc_eth_qos MT8366 support
+* MediaTek TPHY v3 hardware support
+* mtk_snor mt8188/mt8189 compatible-string cleanup
+* MT6358/MT6366 PMIC regulator + pwrap support
+* MediaTek pinctrl Kconfig cleanup (per-SoC symbols → single driver + TARGET_*)
+* New MT8366 pinctrl driver + dt-bindings header
+* MediaTek serial driver clock-handling fixes
+
+----------------------------------------------------------------
+David Lechner (19):
+      clk: mediatek: mt8189: add missing qualifiers
+      arm: mediatek: use phase-aware PSCI reset on MT8365
+      arm: mediatek: use phase-aware PSCI reset on MT8195
+      phy: mtk-tphy: add v3 hardware support
+      net: dwc_eth_qos_mtk: support platform-specific PERI_ETH_BASE
+      net: dwc_eth_qos_mtk: add mt8366 support
+      net: dwc_eth_qos: add mt8366 support
+      spi: mtk_snor: combine mt8188 and mt8189 into mediatek,mt8186-nor
+      power: regulator: add MT6358 driver with MT6366 support
+      power: pmic: mtk-pwrap: fix clock names
+      power: pmic: mtk-pwrap: use mt8195 fallback for mt8188/9
+      power: pmic: mtk-pwrap: add mt6358 PMIC
+      arm: dts: add mt6366 PMIC include
+      pinctrl: mediatek: select PINCONF
+      pinctrl: mediatek: remove PINCONF conditional compilation
+      pinctrl: mediatek: simplify Kconfig
+      configs: mediatek: drop no longer needed PINCTRL options
+      serial: mtk: return error value from clk_get_rate()
+      serial: mtk: drop check before clk_bus enable
+
+Deep Pani (2):
+      dt-bindings: pinctrl: add MT8366 pin function header
+      pinctrl: mediatek: add new mt8366 driver
+
+Julien Stephan (3):
+      edid: add default EDID_ADDR macro
+      i2c: mtk_mt8195_i2c_ddc: add new driver
+      phy: phy-mtk-hdmi: add new driver
+
+Suhrid Subramaniam (2):
+      serial: mtk: use ulong for clk_rate
+      serial: mtk: guard clk_get_rate() with clk_valid()
+
+ arch/arm/dts/mt6366.dtsi                           |  168 +++
+ arch/arm/include/asm/arch-rockchip/edp_rk3288.h    |    1 -
+ arch/arm/mach-mediatek/mt8195/init.c               |    2 +-
+ arch/arm/mach-mediatek/mt8365/init.c               |    2 +-
+ configs/mt7622_rfb_defconfig                       |    2 -
+ configs/mt7623a_unielec_u7623_02_defconfig         |    2 -
+ configs/mt7623n_bpir2_defconfig                    |    2 -
+ configs/mt7629_rfb_defconfig                       |    2 -
+ configs/mt7981_emmc_rfb_defconfig                  |    2 -
+ configs/mt7981_rfb_defconfig                       |    2 -
+ configs/mt7981_sd_rfb_defconfig                    |    2 -
+ configs/mt7986_rfb_defconfig                       |    2 -
+ configs/mt7986a_bpir3_emmc_defconfig               |    2 -
+ configs/mt7986a_bpir3_sd_defconfig                 |    2 -
+ configs/mt7987_emmc_rfb_defconfig                  |    2 -
+ configs/mt7987_rfb_defconfig                       |    2 -
+ configs/mt7987_sd_rfb_defconfig                    |    2 -
+ configs/mt7988_rfb_defconfig                       |    2 -
+ configs/mt7988_sd_rfb_defconfig                    |    2 -
+ configs/mt8188.config                              |    2 -
+ configs/mt8189.config                              |    2 -
+ configs/mt8195.config                              |    2 -
+ configs/mt8365_evk_defconfig                       |    2 -
+ configs/mt8512_bm1_emmc_defconfig                  |    2 -
+ configs/mt8516_pumpkin_defconfig                   |    2 -
+ configs/mt8518_ap1_emmc_defconfig                  |    1 -
+ drivers/clk/mediatek/clk-mt8189.c                  |    4 +-
+ drivers/i2c/Kconfig                                |   11 +
+ drivers/i2c/Makefile                               |    1 +
+ drivers/i2c/mtk_mt8195_i2c_ddc.c                   |  394 +++++++
+ drivers/net/dwc_eth_qos.c                          |    4 +
+ drivers/net/dwc_eth_qos_mtk.c                      |   63 +-
+ drivers/phy/Kconfig                                |   11 +
+ drivers/phy/Makefile                               |    1 +
+ drivers/phy/phy-mtk-hdmi-mt8195.c                  |  493 ++++++++
+ drivers/phy/phy-mtk-hdmi-mt8195.h                  |  115 ++
+ drivers/phy/phy-mtk-hdmi.c                         |  106 ++
+ drivers/phy/phy-mtk-hdmi.h                         |   46 +
+ drivers/phy/phy-mtk-io.h                           |   46 +
+ drivers/phy/phy-mtk-tphy.c                         |   19 +-
+ drivers/pinctrl/mediatek/Kconfig                   |   62 +-
+ drivers/pinctrl/mediatek/Makefile                  |   31 +-
+ drivers/pinctrl/mediatek/pinctrl-mt8366.c          | 1243 ++++++++++++++++++++
+ drivers/pinctrl/mediatek/pinctrl-mtk-common.c      |   13 -
+ drivers/pinctrl/mediatek/pinctrl-mtk-common.h      |    6 -
+ drivers/power/pmic/mtk-pwrap.c                     |   97 +-
+ drivers/power/regulator/Kconfig                    |    8 +
+ drivers/power/regulator/Makefile                   |    1 +
+ drivers/power/regulator/mt6358_regulator.c         |  371 ++++++
+ drivers/serial/serial_mtk.c                        |   20 +-
+ drivers/spi/mtk_snor.c                             |    3 +-
+ .../dt-bindings/pinctrl/mediatek,mt8366-pinfunc.h  | 1069 +++++++++++++++++
+ include/edid.h                                     |    3 +
+ include/power/mt6358.h                             |  130 ++
+ 54 files changed, 4378 insertions(+), 209 deletions(-)
+ create mode 100644 arch/arm/dts/mt6366.dtsi
+ create mode 100644 drivers/i2c/mtk_mt8195_i2c_ddc.c
+ create mode 100644 drivers/phy/phy-mtk-hdmi-mt8195.c
+ create mode 100644 drivers/phy/phy-mtk-hdmi-mt8195.h
+ create mode 100644 drivers/phy/phy-mtk-hdmi.c
+ create mode 100644 drivers/phy/phy-mtk-hdmi.h
+ create mode 100644 drivers/phy/phy-mtk-io.h
+ create mode 100644 drivers/pinctrl/mediatek/pinctrl-mt8366.c
+ create mode 100644 drivers/power/regulator/mt6358_regulator.c
+ create mode 100644 include/dt-bindings/pinctrl/mediatek,mt8366-pinfunc.h
+ create mode 100644 include/power/mt6358.h
