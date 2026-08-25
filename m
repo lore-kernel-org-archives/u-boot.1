@@ -1,45 +1,45 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54611C61DBE
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 15:58:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8161BC61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 15:59:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 27A0880D00;
-	Tue, 25 Aug 2026 15:58:45 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lFTXZHsTTKV3; Tue, 25 Aug 2026 15:58:43 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787673523;
-	bh=9L1E393sxTix7BSmHx1zFXpKaSLfFxBvyje+dXO13W4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=eHuCBNWU7QlIRWSc4rwlYQehMUkKPGqIha3dpObPviWVob1om5EBtTVUTlwGPBmYG
-	 BRDFUTo3Yb124iAGED7xLQfcy5SMMBAf6Z9gZdthhbj9W6cFMa+L9YFaJI+vbAZxLi
-	 kvAPtHfABZyQU+VtpyNeWRt/Jb+PHS01OucKiYKO44MRqFE27F9GJZNMujVJnyYeZs
-	 i79RYwrV+s7/pcu3tIw67HCzfPYbHn2PGFs8e2W5LSPqi4CGkPosma1dXlR5tCUYii
-	 U1xFUCcWAO7dHSCCtsiHm1sT/Kc0/x2sg5Er6vwH3oYqhUb0Dde4mrm60XwxOGHc54
-	 EQN+ewwOpgPUw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 41A20806BC;
-	Tue, 25 Aug 2026 15:58:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A89041465
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:58:41 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8EAEE405B6
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:58:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 269AD405CC;
+	Tue, 25 Aug 2026 15:59:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uejwzHxarZhv for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 15:58:40 +0000 (UTC)
+ id QskEI1XPM1tP; Tue, 25 Aug 2026 15:59:08 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787673548;
+	bh=8zS0V79jsyu53Siad2RZFPd1oNSmaTmxaFfmO6NzYzc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=XYOzqJZfNkhDxbdZ6TT7Tn3Gtas83OBPAuzYjwUXnVu9//17ErkS5NA/ePe2m2snH
+	 VRKNQH+B0CARjtd7vpBcCmfSJ9KSHEMPSfnJ1YHdNiG8DSfbfEoa7TK3ONfEd6PNdp
+	 nvKZx2/xEQWZ1BucIR3ieFsjCUdlov/hQA/fCn8rHWPzMmEWiEhcLydRXJI8hoiGP+
+	 8NQS10h2HmKSYNMQDWJR+Ug8VmhV5ldzAMbhCLrfzsFvL1gdzJKEazgjo3gPTLu1UO
+	 dxd87tb0FtJWHOfol8mnrssGSQtNLHlvh/qx7mYuQgjhwhVt6s0E4BQkenqrFsypEf
+	 6agC6QvJIKcAw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6555640497;
+	Tue, 25 Aug 2026 15:59:08 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E67FD3DA
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:59:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id E440140497
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:59:06 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UclkgYDc9a88 for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 15:59:06 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
@@ -47,13 +47,13 @@ Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 69B2E40497
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:58:39 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E5E2B4037B
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:59:05 +0000 (UTC)
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wytXp-000000003td-1TKu; Tue, 25 Aug 2026 15:58:37 +0000
-Date: Tue, 25 Aug 2026 16:58:34 +0100
+ id 1wytYF-000000003uC-2rVE; Tue, 25 Aug 2026 15:59:03 +0000
+Date: Tue, 25 Aug 2026 16:59:01 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -64,8 +64,8 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 04/11] mtd: nand: spi: drop the eager ubi_blk binding
-Message-ID: <6c801ccba6f947c176ee2d4bd3c47322ea345fbd.1787673209.git.daniel@makrotopia.org>
+Subject: [PATCH v2 05/11] mtd: ubi: block: build only with CONFIG_CMD_UBI
+Message-ID: <72719d1e913f6863a1f06992c4ae8deb000df0dd.1787673209.git.daniel@makrotopia.org>
 References: <cover.1787673209.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -84,33 +84,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-spinand_bind() binds a ubi_blk device at bind time. Now that "cmd:
-ubi: create a ubi_blk device when attaching UBI" binds one generically
-when UBI is attached -- with an identical result, only lazily and for
-any flash type -- the SPI-NAND-specific eager call is redundant.
+The UBI block driver calls ubi_volume_read() and ubi_volume_write(),
+which are defined in cmd/ubi.c and thus only built with CONFIG_CMD_UBI.
+Selecting UBI_BLOCK without CMD_UBI, for example in a CONFIG_CMDLINE=n
+build, fails to link:
 
-Drop it to avoid the duplicate code path (a ubi_blk is unusable before
-UBI is attached anyway). The mtd_blk binding is kept: bare mtd_blk
-access to SPI-NAND remains available for users who want it.
+  drivers/mtd/ubi/block.c: undefined reference to `ubi_volume_read'
+  drivers/mtd/ubi/block.c: undefined reference to `ubi_volume_write'
 
+Make the dependency explicit so UBI_BLOCK is only offered when CMD_UBI is
+enabled. The only in-tree user, topic_miami_defconfig, already enables
+CMD_UBI, so no board is affected.
+
+Fixes: 9daad11ad17 ("drivers: introduce UBI block abstraction")
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- drivers/mtd/nand/spi/core.c | 3 ---
- 1 file changed, 3 deletions(-)
+ drivers/mtd/ubi/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 14af4264612..fb8ca0a787d 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -1654,9 +1654,6 @@ static int spinand_bind(struct udevice *dev)
- 			if (ret)
- 				return ret;
- 		}
--
--		if (CONFIG_IS_ENABLED(UBI_BLOCK))
--			return ubi_bind(dev);
- 	}
+diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
+index e523a4c4707..bde8664fe80 100644
+--- a/drivers/mtd/ubi/Kconfig
++++ b/drivers/mtd/ubi/Kconfig
+@@ -116,6 +116,7 @@ config MTD_UBI_FM_DEBUG
  
- 	return 0;
+ config UBI_BLOCK
+ 	bool "Enable UBI block device support"
++	depends on CMD_UBI
+ 	select BLK
+ 	help
+ 	  Enable UBI block device support using blk_ops abstraction.
 -- 
 2.55.0
