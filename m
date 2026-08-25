@@ -4,197 +4,186 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBAEC61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7BE5C61DBD
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:20:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ED9DE80980;
-	Tue, 25 Aug 2026 22:04:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 84B1680C84;
+	Tue, 25 Aug 2026 22:20:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5FAJtrZ5_2al; Tue, 25 Aug 2026 22:04:10 +0000 (UTC)
+ id aZDHQBCcvNIc; Tue, 25 Aug 2026 22:20:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787695450;
-	bh=2qWXRhkLJSSkBLeD9ibrzrbWsDaWqq+Gt0r2iMPu4eU=;
+	d=lists.u-boot-project.org; s=default; t=1787696437;
+	bh=TjBvUBDVMbInjI2itJMYDR4yx91aAe8Dzc+8DYP8VyQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UG2OOOV768j0YynDSmCIpNBrQbqFNLJMd3j5T/tv80RH0Sotx+U+YzOuzGWvSgYj3
-	 Z6BtxrVNWRq5IJTPTNWOSMtMBp5vQY7yqTdA50iuU6EXgRgt9BGCRNWEzi/JMwBK6E
-	 k5N5+fnOGfCil/QGVJdP66ueeG9hwdkPbyJOqt+BwJTWV2R+uvzGHgu7F+9CTbhVbL
-	 I5yUU/SMTOKtlgzl/BggftHhsvvoJy14cUDLXbj6Y0eBuycQhLyZedX8L0tOgudyG5
-	 cGhSCWZB6sSkREE8KprU34rcTsD1g+qbH10xkxcPeyG29eTwT0cYLr+33RSkGzlJpf
-	 pi51Hnqb2v4Qw==
+	b=FEmlB/sLguikhy9t1cWAnuEledmXuVm45mqfav1Tw2AB2PrXYzlYn7HDr2hAaeyid
+	 0QzDAFHH720tQRFzjVDoN6JrG7Swv2mkcWg5+m+uy9CFVQAI11HptzmFsAf8zQKAmO
+	 Ug4b0quvdHU9AvQAAW7pRisA+EcsUn69MqkfMSms6UXUZMZhYXnfIy8dN/DxAzxEK0
+	 uaELz5Z3bhzjQrth97yMb1KjXOQ9qrkuLmyaEDMxQRh/jXMdaSpHkiLJqX4GR7O+Nz
+	 iZbjxqN8S8QysyBPQ2cxZILD2NRmzHdNos1fNnrrWp5XwV0Tk5hBqptsO0LAteJfZc
+	 lttJPPtgfaSmg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0E3B180987;
-	Tue, 25 Aug 2026 22:04:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7442080C68;
+	Tue, 25 Aug 2026 22:20:37 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0C5E1334
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:04:08 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id AAF2A39E
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:20:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E6A014008D
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:04:07 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9CB4E4008D
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:20:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zWb93D9tIzDF for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 22:04:07 +0000 (UTC)
+ id V41U-LfWKzwE for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 22:20:34 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.21;
  helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de
- header.a=rsa-sha256 header.s=s31663417 header.b=pEmwzYEG
+ header.a=rsa-sha256 header.s=s31663417 header.b=DvJzArbI
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7882D40055
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:04:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2DD1D40055
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:20:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1787695438; x=1788300238; i=xypron.glpk@gmx.de;
- bh=2qWXRhkLJSSkBLeD9ibrzrbWsDaWqq+Gt0r2iMPu4eU=;
+ s=s31663417; t=1787696430; x=1788301230; i=xypron.glpk@gmx.de;
+ bh=TjBvUBDVMbInjI2itJMYDR4yx91aAe8Dzc+8DYP8VyQ=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=pEmwzYEGx4/KddKV/aSEIjJcbTzh5J8xi+eNoBhhLMxIj6YvpjAWxJitodzkp5/b
- u89LBfEDO+tUwG0rECXHKdRJSP2s8ZLd6+AHp+ahJbbY4itd45wqbN2oslJN5sZcM
- yUla8Q17kTrwRJnFoTzniG39NyQ2sQ34eudmLRQuii70dUid2ktUtn6ubMZi9/wk1
- tscUu383Lc/KrWdEpTQrxQ5pMWmJd9LLcwhA5mpMUzMDyUO2l8UXDJkqM2/pT1CRx
- 1kFNmTBJ7VCLOqpRR30yJ5d3itFhFWHMDvKoX3H7yScWsUVSWHtmBLOlKNahzI4Jq
- kZhQM26b/hwW7euR7g==
+ b=DvJzArbIWX6e6wsKYYXdqCsaPX8JWqldRTLpDUKQuCkWtjGxoZXAVDMs0AHYdV05
+ n+FqYx0+ikdL2TyVZtX/92AD11xHVirhMpZTfbE7L60ueh+ZCday1V/J2HRBStd7Y
+ eYJNVNOyY9KPe/EPOPwchTQW2/NjZ8h4i0nwkDWkYJ1P+BGjCPZn13BFBZyodHwdF
+ T0Kv+U2rOLqRwR2v7ykdfeJoipLSEq6Y/4SfNAFnGi4yKuH8hwW5VYnPsC+42pReG
+ VEK3nAhQooTRL9siyezliRuKHqG1RT+SXrTzJ9ZmcH4L66t6eVZzW0rFVZuUAY7K2
+ AMZ+2rxOfYbmv1utWQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MyKHc-1wigqo2DqW-00vtIf; Wed, 26
- Aug 2026 00:03:58 +0200
-Message-ID: <fb2519bc-b2cc-43a2-a67a-d9ad4230e9d7@gmx.de>
-Date: Wed, 26 Aug 2026 00:03:53 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MxDou-1wjn4X447s-00wznp; Wed, 26
+ Aug 2026 00:20:30 +0200
+Message-ID: <7d30967a-e33c-404e-9ec7-4bbab6dce415@gmx.de>
+Date: Wed, 26 Aug 2026 00:20:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next 15/45] doc: develop: sending_patches: update link to
- GPL license
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Viacheslav Bocharov <adeep@lexina.in>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Soeren Moch <smoch@web.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Le Jin <le.jin@siemens.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Peter Robinson <pbrobinson@gmail.com>,
- u-boot@lists.u-boot-project.org, u-boot-amlogic@groups.io,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Sean Anderson
- <seanga2@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
- <20260825-linkcheck-v1-15-ee7573fe3a4a@cherry.de>
+Subject: Re: [PATCH v1 2/2] test: boot: Check that efi_mgr boot failures are
+ reported
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Denis Mukhin <dmukhin@ford.com>,
+ Martin Schwan <m.schwan@phytec.de>, u-boot@lists.u-boot-project.org
+References: <20260811155940.17698-1-aristo.chen@canonical.com>
+ <20260811155940.17698-3-aristo.chen@canonical.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260825-linkcheck-v1-15-ee7573fe3a4a@cherry.de>
+In-Reply-To: <20260811155940.17698-3-aristo.chen@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9Xj4++BnuxqZKNpkTBUfRfZYkoRc3fH7e8CcaRRPCBn1MQVhqJJ
- EfVVu1dtk8BVWsY0AJ77OMsAgMtacMzeMtn9WzjYW7INNGefUhe7M1X4QgrGk/ZLxJijWDM
- iRiPZf1L5/FTlj5e2Pv7TAWvpK81UIXiMRBZi3+0U1I7mxNzgcxp7c92qEw5nOkEWsSI8DB
- 7Su/HBWjTFOh8XcQws8CQ==
-UI-OutboundReport: notjunk:1;M01:P0:dGByS1W0oFk=;KS849tz0uKJG8h9iMYZMum8EIv3
- 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
- O/50VwnkoYIZpmEu15Ek=
+X-Provags-ID: V03:K1:wZYv8DmQVb3qzSdS8liIbBur17LYaRbqRojDP23rxLaWe9D5EY/
+ 3lDCbhb0lSvSzEms0mustSxLpUQuvCXHM59JsJsPsbuCJlYQoD1NqLn8LnnLJw/C8tji1ds
+ f0T1M09+KbdgpHmsBWa5gApHQqetgjU6ge7hSSfWo7PG6jY0SckGOzzzHNui7SlrLP6TPiY
+ n6vMMF7GuYsd84xmkd75g==
+UI-OutboundReport: notjunk:1;M01:P0:hvhue/f2xUc=;KbqxDkKuXN3dDp2TtjhUxmrgs2/
+ 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
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -208,37 +197,99 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 8/25/26 18:49, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 8/11/26 17:40, Aristo Chen via U-Boot wrote:
+> Add a bootstd test for the error path of the efi_mgr bootmeth: point
+> BootOrder at a load option that does not exist and check that booting
+> the bootflow returns -EIO rather than the generic -EFAULT that
+> bootflow_boot() reports when a boot() method returns zero.
 >=20
-> The link actually (after a looooooong time) redirects to the GPL-3.0
-> license which isn't the appropriate license. Instead, point at the
-> GPL-2.0 page.
+> Running the real boot manager initialises the EFI subsystem in the
+> sandbox process, which would leak into later tests, so restart U-Boot
+> after this test in test_ut.py as is already done for other
+> session-changing tests.
 >=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 > ---
->   doc/develop/sending_patches.rst | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   test/boot/bootflow.c     | 35 +++++++++++++++++++++++++++++++++++
+>   test/py/tests/test_ut.py |  3 ++-
+>   2 files changed, 37 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patch=
-es.rst
-> index 3944ca4206a0..92c34c0669d0 100644
-> --- a/doc/develop/sending_patches.rst
-> +++ b/doc/develop/sending_patches.rst
-> @@ -361,7 +361,7 @@ Notes
->  =20
->   1. U-Boot is Free Software that can redistributed and/or modified unde=
-r the
->      terms of the `GNU General Public License
-> -   <http://www.fsf.org/licensing/licenses/gpl.html>`_ (GPL). Currently =
-(August
-> +   <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>`_ (GPL). Cu=
-rrently (August
->      2022) version 2 of the GPL applies. Please see :download:`Licensing
->      <../../Licenses/README>` for details. To allow that later versions =
-of U-Boot
->      may be released under a later version of the GPL, all new code that=
- gets
->=20
+> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> index 1cc137c9700..2d80577921f 100644
+> --- a/test/boot/bootflow.c
+> +++ b/test/boot/bootflow.c
+> @@ -470,6 +470,41 @@ static int bootflow_system(struct unit_test_state *=
+uts)
+>   }
+>   BOOTSTD_TEST(bootflow_system, UTF_DM | UTF_SCAN_PDATA | UTF_SCAN_FDT |
+>   	     UTF_CONSOLE);
+> +
+> +/* Check that a failed 'efi_mgr' boot reports the boot manager's error =
+*/
+> +static int bootflow_efi_mgr_err(struct unit_test_state *uts)
+> +{
+> +	struct udevice *bootstd, *dev;
+> +	struct bootflow *bflow;
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_EFI_BOOTMGR) || !IS_ENABLED(CONFIG_CMD_EFIDEBUG=
+))
+> +		return -EAGAIN;
+> +	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
+> +	ut_assertok(device_bind(bootstd, DM_DRIVER_GET(bootmeth_3efi_mgr),
+> +				"efi_mgr", 0, ofnode_null(), &dev));
+> +	ut_assertok(device_probe(dev));
+> +	sandbox_set_fake_efi_mgr_dev(dev, true);
+> +
+> +	bootstd_clear_glob();
+> +	ut_assertok(run_command("bootflow scan -H", 0));
+> +
+> +	/* Point BootOrder at a load option that does not exist */
+> +	ut_assertok(run_command("efidebug boot order 00ff", 0));
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+It should not be possible to add non-existent boot-options to BootOrder.=
+=20
+We should fix this in the efidebug command.
+
+Please, do not rely on this buggy behavior.
+
+Best regards
+
+Heinrich
+
+> +
+> +	for (ret =3D bootflow_first_glob(&bflow); !ret;
+> +	     ret =3D bootflow_next_glob(&bflow)) {
+> +		if (!strcmp("efi_mgr", bflow->method->name))
+> +			break;
+> +	}
+> +	ut_assertok(ret);
+> +
+> +	/* The boot manager cannot load anything; its error must not be lost *=
+/
+> +	ut_asserteq(-EIO, bootflow_boot(bflow));
+> +
+> +	return 0;
+> +}
+> +BOOTSTD_TEST(bootflow_efi_mgr_err, UTF_DM | UTF_SCAN_PDATA | UTF_SCAN_F=
+DT);
+>   #endif
+>  =20
+>   /* Check disabling a bootmethod if it requests it */
+> diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+> index fa50c8008a5..787020e3e0c 100644
+> --- a/test/py/tests/test_ut.py
+> +++ b/test/py/tests/test_ut.py
+> @@ -643,7 +643,8 @@ def ut_ubman_fixture(ubman, ut_subtest):
+>  =20
+>       yield ubman
+>  =20
+> -    if ut_subtest in ("bootstd bootflow_cmd_boot", "bootstd bootflow_sc=
+an_boot"):
+> +    if ut_subtest in ("bootstd bootflow_cmd_boot", "bootstd bootflow_sc=
+an_boot",
+> +                      "bootstd bootflow_efi_mgr_err"):
+>           ubman.restart_uboot()
+>  =20
+>  =20
+
