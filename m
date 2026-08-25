@@ -1,123 +1,129 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D1DC61DBE
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 12:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71590C61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 12:56:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A37C6405CC;
-	Tue, 25 Aug 2026 12:53:36 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rxHtWRgkJLwt; Tue, 25 Aug 2026 12:53:34 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787662414;
-	bh=n/EIaod8WmiYW34DYvNkHGc+KZnkDzHaxe/886NcYf0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=MyMYlIU9lbxRPcR4DUxMME4FGIomGzNDqmo+Pa4hiuauNwUktHNwQWUzqs6ntNvWu
-	 wJrrogNBsEjPb/7LdgMUgbY0x17PKFzjIxCYHYUn6HbtxBmQQK79afybEdEBITf33R
-	 xw3AiEnf5WsS0n6NFzFcnhFrypY/cHB4Frn3b1JNt8XPKTpM92wcuCGa+P8Q8/0Lvd
-	 o6j9hAzRLA/prOwm61OaJB+PExxTUc4UpYVIYHJIeVpzT6BSs/C9t0B1/Wa3J9URqI
-	 k2YuTYti2iQgvQpski5g3cstpSeuunZPrWCpDPFeRA01XYx3em5AjFngpsTBjyqwGM
-	 rgNdkaC8v3Stg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B264540592;
-	Tue, 25 Aug 2026 12:53:34 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 70E03118
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:53:33 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 62D1B606B8
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:53:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 193CF606C1;
+	Tue, 25 Aug 2026 12:56:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WKfAuPbTNAWv for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 12:53:32 +0000 (UTC)
+ id FlicRThML8vP; Tue, 25 Aug 2026 12:56:24 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787662584;
+	bh=L8P93sit8uaJ7c4ns09OL8+9XmlHFbSmpNPNpeiqPKQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=NnnkWvpLSfgkQX10L6dMP3XMaKOwS7p+FGfH43uVrc+NvqdhU9Z0qY/UaqjXTnO48
+	 vvkNrYcOL7Djc6klUucjSMhuAraUjWaqjGr+PF/GaZzrjHj2zjMgdsUBZ7kyLy1msx
+	 FL1QRDf8nJpKGd5tXEAqYuESwBXDi4SFgEBSGq9d1zykx0ILnO9MlH9e2BXrzfGShc
+	 QkgsZZt53UuIPVI/bt8WbxPQR4F3y3/G//MWC9ri74yYGPz1FcxEisihwt/Zai62Yy
+	 ehqwff/LxymFG0qNbnK1YuF8Xs80sns/G+mB2snsFqgsF4e8PRneJRc1UskXIhVR/t
+	 W+z05IuEtHREA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 13895606B3;
+	Tue, 25 Aug 2026 12:56:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 51ABE3DA
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:56:22 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 33F9E4011C
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:56:22 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vqb6X0CAjIdq for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 12:56:21 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::530; helo=mail-ed1-x530.google.com;
+ client-ip=2a00:1450:4864:20::62c; helo=mail-ej1-x62c.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=GPSBEd/j
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4E09460606
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:53:31 +0000 (UTC)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6a0a4a28cbdso8287002a12.3
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:53:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787662410; cv=none;
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=Gy0x/NjV
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DA9F9400F9
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:56:17 +0000 (UTC)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-c1677c91969so573590866b.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:56:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787662576; cv=none;
  d=google.com; s=arc-20260327;
- b=BfLmmiNkFVPn97eDodx93ZLzS/05ll/sb6wEQjCtC9VN1tt5/lMyL+bfhI1QmAtfrs
- g0THfln9y09q5GoMEXtvAsBf11UBwTtZ1p5m7fhoWBYzMjq1lLKVzwpr8HTpfvOnvdWN
- CuKS6on4pC/FK2BL/1ojMfXqtqVDqpH6ehC2rf0UHBD/jzw+2/l+O2DQbjWOMPTv76rh
- C5Rgu0wrw/y00CkbBdrRF0cXIsoNoxsFbRLILGrwS+bGU4e3bajw6hw8sJQEw05sBCi+
- GF91BL91coHX5RrHVCfSdqg+7td+eXLXkRobKLbsZqb4UNk3oA5rpIysjRsU2tGhKn2z
- qFqg==
+ b=RWngSHZAtz6hhrCOlpFnIVQm3k3D31QgMWQQWMW2Vpk4E5QsHS/f3AbN4R17HLZ+Ty
+ 97PcwkMQqOQK9hczw/meKzuq9VdGZGpqHE7Nf4Ery46tQLIlGPFwnFiYGN5dqWWz91QY
+ 8/o5LTkPU4dxXyo271is3A2zsgujsKa/OjCy2m8GQjDKYCcvpHfDJJMZjw5NGedI7slW
+ 1gzvBpOaofWkn951paJhxJxVUiy/ODvVnCepQuzjxYtClCTnWhl5Fh7a3lcxg38tVpeo
+ YOLHDVdXN+seCJrAzhGQcFj4RUNTFFc4i1jdwC7kQNHXkHZas9DlGKmHsfxyQ3RYub5M
+ 4YIw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=n/EIaod8WmiYW34DYvNkHGc+KZnkDzHaxe/886NcYf0=;
- fh=MEog5Fwspqb+EAHauNEE6tSEOa7ozt6oYot3O+UhV3Q=;
- b=CjNku4AJxIIvwXEPR3/7sutrTZ/6OJexC8NiDxwlzB6BTfwltjaXKrN0zTRZA8PcPd
- VElUCYVMni9YKuHC+F+jaByjNadyN0069GDfuo/N2Vx9nv9kr/v7OrP0D6nsNj3WvO7Z
- KbatN3IgQboykHXP5Dlw1+Vc0JFgDN7ZUa2fTSRxOAY5zG84zjvSx8d6hnpG9OP6+XPs
- gdnor7/vl+UToAppeKoyJNdD5rFP0GuTQ856z53a5P09gdmYcJE0ifcoaQLc/KBUx0Bh
- ScKVbD4yT9kY/YsB5Dmn1FMSAEKy7gUcv6Tsc6IyvIFdY4BJ0SXU8ImIeGBVvpxwSkQm
- 2TbA==; darn=lists.u-boot-project.org
+ bh=L8P93sit8uaJ7c4ns09OL8+9XmlHFbSmpNPNpeiqPKQ=;
+ fh=G2t+C+Nky53HEvzEbaXcc7n/qV54JvhyookssTA0Qlw=;
+ b=LR1U19sZI3MzopKsc2Uz08jXFIktY9d6JR5RgryBUod70lvO/4hM0MsIeawr4+wq6Y
+ fHJrn/iZ1Mv9HPdzWXRlqQ38WAxiG6VjjvJlCKRm/kGZriFUpIBB7NCSyRAkU6aLU2hn
+ y5D453QXQ2jSsEWFQqI7WWB7tfCOJPNSXYOuyd1QK9dprWr9PySBVDrSQj7MIws0XD+M
+ AcQuaAn8zFzhacADqqP2fo2TJhaCV50VCy36ioqn1eWTIV4/OL9XxEaXMAWiH6JWCzgc
+ gIdq7J1uewbcQQJPSnZQwt5Z5qBz1WZmSU4CpypJq/5cKvmNPWLHx7Z0S3NyFlP/TRYv
+ ZArw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1787662410; x=1788267210;
+ d=chromium.org; s=google; t=1787662576; x=1788267376;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=n/EIaod8WmiYW34DYvNkHGc+KZnkDzHaxe/886NcYf0=;
- b=GPSBEd/jjWVbWX5oQKdDcWkj4gG4v3ZLv/zyGadTZNf6qUsrYVzYlPDogDgFkBSnm+
- BzU2NS2q/dc4yce2ZVrVXX8lQD+ZKQaajW9Vmfp0hKd7RHZ2kin1QB/66HvxWIkw/P00
- jdhbQS/It4bRHsAFGt7NYfNGndtatGj1FIjgI=
+ :content-type; bh=L8P93sit8uaJ7c4ns09OL8+9XmlHFbSmpNPNpeiqPKQ=;
+ b=Gy0x/NjVoBHiDlZs3lp/cJRPP6PhkKbGNHwAVHV6REl8+K9gIjWy3JW+rnW48ezPWE
+ qZwyvuxHWxHl7W6/Rw6pXO12/LfWND4nW2MjaKfxYfEs0IUjP00ARTc7U5S0l8lmBbE4
+ Dcx2+Vb7ndm/NUYn/bKkzbEDTPqWXiJ6C5WVE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787662410; x=1788267210;
+ d=1e100.net; s=20251104; t=1787662576; x=1788267376;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=n/EIaod8WmiYW34DYvNkHGc+KZnkDzHaxe/886NcYf0=;
- b=GhUOcUIEQ1/g6O/c6CKaCcAcj/aKPELTP1q1FfuhmupPwRHsOm2Z5srNMrU3JRBUwm
- wXlh0CvORkCWS4ucuFqmCtdmEAgYYLmUl9mU6KWijpMYYdUWKAcrhm7LJO5GrDR6Kppj
- eG9RlSPDTG2X6RbdhGlYZsdaWS1wb/BX1G3kBIla4FIYpLGj3ZjjGm8zg7Lk+wQh1Bau
- xioAmZaUAh77+DfJIuAPZlLUbWG4kdMm63lYkG7lUHECLiPzSWmE/qXz+c7bYQH1n9u5
- lN9W+/pkAa1hZlWXju4Dkc+ZO92CILF2917G2xXtz8qx9aDP+8eajhBLaj0N0++uL7Ow
- 30/Q==
-X-Gm-Message-State: AFuF++mpA9OQPVNPn09ph0RSIgCJ8NZAevuBhvikOreCKtCli+mHiXco
- fyppoEJZM8AsS6Kd2Jpc5aqEJzkw/VNz+LcYYMhO3/UsBUHKRtJKjqW4OqKJkAPqevE0HCPH1S5
- hMPeSOpCafKsiCA1NIFWgzE9ShpPtxANX9T6KRtYW
-X-Gm-Gg: AR+sD12zuD+b869aVcjQMWdHhQ4tElukL3j/VudoAzr/8K0O98hEFiAtQfbflesAjfD
- vLWOV45sq5qyoz59CXlsO9fjNeFGOXTPVc7Gv0R8UdZlCQEUnB+wlyiSp3jBdYG3LOKyHAyq7Z2
- meifrxW7xoyzJBd1lPuhGyVX/yLS9lKxm7lWdK0il9A61tJgbpCkRh7lUiDGDZ98JBdG/ZWPKzm
- Id6OLzUJ7qYd86hRDC/ramt0M5eS6uj69/5Lw/wJ9jxb9Lo7uQCJQOdZ4xHqKgTrf4F0t9s7qTd
- 3unU+mRlGzhnKBPFCeqxFcfmuht2zEei2XXRGUjyhew=
-X-Received: by 2002:a17:907:e1c9:10b0:c25:388:4202 with SMTP id
- a640c23a62f3a-c2503885e2amr164536866b.21.1787662409813; Tue, 25 Aug 2026
- 05:53:29 -0700 (PDT)
+ bh=L8P93sit8uaJ7c4ns09OL8+9XmlHFbSmpNPNpeiqPKQ=;
+ b=WoUuZEdg+ek/P/GUx+sCJiLKuz1Luxcnxh39Kt1q0cpO6CB1Bt5yWNFzw+ZZ1j+CIi
+ 1QFF3u1QeybEpw+h3KrBXUFuVg9On0ER73sXXuIx9t9AyEvYDVxXnNicMdDAL5csNFnM
+ Nc49KsaNjf9EKj0F4C/QReSbAYW8kcQvCB5QogmlMF7pmFFnmGuoPS5BMX541mxGQJl6
+ 8UOm67T4s1gCEzLqHQfmopVDHoEubnVJEjpcnf8qtTNVY7IvfPvWnvZAZxl4ozSSnlUr
+ bWXZ8R8dcnmfQ8Tqpz0YwlCKHkX6w33hXh6FJPgcJWz2QkcHcOmh/fD86iazZfcSKajG
+ TA3A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Ro/cmE/onj6t1Amw6Rnomi16/CHkYBPVYo1hoOzP5b1yp+8m1idc7CJZRm8rlFjyPi1Xcw76k4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kvbqWnuUhzuSDB9q7UV0WNiH7U0S0apa1DyyFCnOPVkCBubnZC
+ vY1HCHRf4w/K4mg51Fa6XpO3wOsj9FIRpDxJf8KHHDG614R0/cfZYKxIji5O4ZYwTjL5rD8iOqo
+ SwGYcByhXVP+bUsSjpPOlUXrE3T04CRufAFN9D+AT
+X-Gm-Gg: AR+sD114YhSmx3hMvVTekPgfCRgNfcuyaq+p7pgkCcx6Gmh3xXP4Map3hHw4aQgIGOU
+ 7Xmd3APjzouXxlwfFGb8ZluYKhSL+KUbcwmPAH09VKMB/hMfL3e9DvcspWBHxXVxKU5+wg+f5tm
+ Xe7joQTgPbYFz98G0ZA3Xwe9hcHnq1H/inOX5mxOKZ+c4JnviZDgXwKjRriJ5ZYSEzgXFfe15dQ
+ PnvIjKOa9RqXfTsAvDv3AkHz8AikT4r1sBj+EXUKqQk+4ckE8FTdFM3r0d968k8zoLTZN2b+Usv
+ 19yuYgI6qpYuw7QeGEkX5gjJyC+PsBgT9xPrlzHog6uI/KHB+n8XwQ==
+X-Received: by 2002:a17:906:ba88:b0:c24:670c:b8da with SMTP id
+ a640c23a62f3a-c24926a1b7amr3323890366b.11.1787662575780; Tue, 25 Aug 2026
+ 05:56:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260815220754.11724-1-pranavkasthuri@gmail.com>
-In-Reply-To: <20260815220754.11724-1-pranavkasthuri@gmail.com>
+References: <20260819143543.427396-1-mehmet.fide@gmail.com>
+ <20260819143543.427396-2-mehmet.fide@gmail.com>
+In-Reply-To: <20260819143543.427396-2-mehmet.fide@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Aug 2026 06:53:17 -0600
-X-Gm-Features: AcwNN1WPlcYiBKpi2JJgiUAhXXkzsaHfjhYhhRFp_8xWtFc5LVx9U2-QkKGqZcc
-Message-ID: <CAFLszTiGNt5cmztM-c+irvFF3jnSmbVrh0EAVqio9jM3kL7Ruw@mail.gmail.com>
-Subject: Re: [v1,0/3] fit: cipher: bounds checks on the ciphered image path
-To: pranavkasthuri@gmail.com
-Cc: u-boot@lists.u-boot-project.org
+Date: Tue, 25 Aug 2026 06:56:02 -0600
+X-Gm-Features: AcwNN1X9A8HikdtVj4mvupQ8a2Dxm6c7xfaUUhLJEzhiPIuPmhziCO2ExOF4s-4
+Message-ID: <CAFLszTh924Zt-a7bJAQaSXHhi+MGrT6-0UTsyt-P7s5DD3bw4w@mail.gmail.com>
+Subject: Re: [PATCH 1/2] dm: core: read the device tree into plat data after
+ pinctrl
+To: Mehmet Fide <mehmet.fide@gmail.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.u-boot-project.org,
+ Mehmet Fide <mehmet.fide@screeningeagle.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -132,23 +138,111 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Pranav,
+Hi Mehmet,
 
-On 2026-08-15T22:07:52, Pranav Rajendran <pranavkasthuri@gmail.com> wrote:
+On Wed, 19 Aug 2026 at 08:35, Mehmet Fide <mehmet.fide@gmail.com> wrote:
+>
+> From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+>
+> device_probe() calls device_of_to_plat() before it applies the "default"
+> pinctrl state of the device, so a driver that acquires resources there
+> sees them undone by the pinctrl state that follows.
+>
+> It has not always been that way. When the pinctrl uclass arrived in
+> commit d90a5a30dec1 ("pinctrl: add pin control uclass support") the
+> state was selected before ->ofdata_to_platdata() was called, and it
+> stayed that way for four years. Commit 29f7d05a347a ("dm: core: Move
+> ofdata_to_platdata() call earlier") then moved the call up so that the
+> platform data would be read before the device is probed, which is
+> reasonable in itself, but it also moved it above the pinctrl state,
+> which nothing asked for.
+>
+> GPIOs are where this hurts. On most SoCs the direction of a pin lives in
+> the GPIO block, so a pinctrl state cannot disturb it, but on Vybrid the
+> output buffer enable is a bit of the pad register that pinctrl writes as
+> well. A fixed regulator asks for its enable GPIO in of_to_plat(), so the
+> pin is configured as an output and the pinctrl state of the same device
+> then turns it back into an input. The USB host VBUS regulator of a
+> Colibri VF50 is one of those: its pad reads 0x22ed once the regulator
+> has been probed, the value from the device tree, output buffer disabled,
+> and no USB device is ever powered.
+>
+> Move the call back below the pinctrl step. That is also the order Linux
+> uses, and the order the board code of these boards used before the
+> driver model: set the pin muxing up first, then take the pin. The
+> pinctrl step itself cannot move up instead, because it relies on
+> DM_FLAG_ACTIVATED having been set to break the recursion described above
+> it.
+>
+> Nothing between the two positions needs plat data: the parent probe, the
+> power domain and the pinctrl call all work off the device tree.
+>
+> Tested with test/py on sandbox, before and after: 11 failed, 414 passed,
+> 210 skipped, 1 xfailed, 20 errors, the same failures both times, all of
+> them from tools and images missing in my environment.
+>
+> Tested on a Colibri VF50 V1.2A on an Iris carrier, U-Boot 2026.07 from
+> NAND: the pad of the VBUS pin reads 0x22ef after "usb start" instead of
+> 0x22ed, a USB stick in the host port enumerates, and Linux still boots
+> with Ethernet, SD card and USB working.
+>
+> Fixes: 29f7d05a347a ("dm: core: Move ofdata_to_platdata() call earlier")
+> Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+> ---
+>  drivers/core/device.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/core/device.c b/drivers/core/device.c
+> index 6024534ff93..ccdf0ab9220 100644
+> --- a/drivers/core/device.c
+> +++ b/drivers/core/device.c
+> @@ -500,10 +500,6 @@ int device_probe(struct udevice *dev)
+>         drv = dev->driver;
+>         assert(drv);
+>
+> -       ret = device_of_to_plat(dev);
+> -       if (ret)
+> -               goto fail;
+> -
+>         /* Ensure all parents are probed */
+>         if (dev->parent) {
+>                 ret = device_probe(dev->parent);
+> @@ -552,6 +548,10 @@ int device_probe(struct udevice *dev)
+>                                   dev->name, ret, errno_str(ret));
+>         }
+>
+> +       ret = device_of_to_plat(dev);
+> +       if (ret)
+> +               goto fail;
+> +
+>         if (CONFIG_IS_ENABLED(IOMMU) && dev->parent &&
+>             (device_get_uclass_id(dev) != UCLASS_IOMMU)) {
+>                 ret = dev_iommu_enable(dev);
+> --
+> 2.54.0
+>
 
-> I have kept them as separate patches since they are independent defects
-> with different consequences, but I am happy to squash 1 and 3 if you
-> would rather have one change per function.
+Firstly, we are going to need a sandbox test for this, preferably one
+that gets a GPIO in the regulator, as you mention here (i.e. calls
+regulator_common_of_to_plat()).
 
-Please keep them separate - distinct Fixes: targets, and easier to
-back-port independently.
+The problem is the grey area of what is supposed to be done in
+of_to_plat(). The doc section is at [1] and perhaps it should be more
+explicit. We really should not be probing devices in of_to_plat(). The
+idea is to read from the device tree and store that information in the
+plat data. Then it gets used during probe().
 
-Since these are security fixes, how about adding regression tests?
-test/lib/test_aes.c covers the primitive, but nothing exercises
-image_aes_decrypt() or fit_image_get_data_size_unciphered() against a
-malformed FIT. A small sandbox test constructing a FIT with a
-non-block-aligned 'data', a truncated 'data-size-unciphered', and an
-oversized unciphered size would pin all three down. What do you think?
+As to substance, I believe the 2019 change is correct - of_plat is a
+phase separate to and before probe. There should be no need to probe a
+parent in order to read a child's platdata.
+
+So perhaps what is needed here is clearly documentation about what
+should and should not be done in of_to_plat() and in particular a
+function to read the GPIO info without actually requesting the GPIO,
+so generic functions like regulator_common_of_to_plat() can do the
+right thing.
 
 Regards,
 Simon
+
+[1] https://docs.u-boot-project.org/en/latest/develop/driver-model/design.html#reading-ofdata
