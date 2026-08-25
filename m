@@ -4,120 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32824C61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 12:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A402C61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 12:53:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 91E0560606;
-	Tue, 25 Aug 2026 12:52:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 55A8C606E0;
+	Tue, 25 Aug 2026 12:53:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JXxDWK2XfTLh; Tue, 25 Aug 2026 12:52:52 +0000 (UTC)
+ id HqwR_uqLuDXl; Tue, 25 Aug 2026 12:52:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787662372;
-	bh=vCkEJmrIZD479Yhd5mt0DONZBN7fby0DhdtqaulWzFI=;
+	d=lists.u-boot-project.org; s=default; t=1787662379;
+	bh=OCvV16IwM2byZxhPSWQczEkfoNh3yQI2lrMJXdIAuqE=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=iNClmNcwjeS6jm7HvlH3VeBhpsii2xziafSbpTEwNoB7daPOvtu5D91aiHmUKCEsE
-	 4HfIvHzNHAu1tCmvquGYVPnIZnS1n6mjTv0Lquap3CO0TiU126t39kGGeCt5leCVEp
-	 cn5J0XyLRO56VCgabisM8ymUS+048ypV4cC275Io4Xb13gNKH6ucXDZkJ/ezKkXe7i
-	 JPBNxOxDvzbTiB3ENFob155nQdNsEkrjj+S6mNZ1aN8IarWeCjIVEtaaP0qe//vS5u
-	 YQJN4BJMyOw5FigKM09ucedSO1//7w8kaUmGGpohTTZBXK0KUxhf3MXbifJFqVPNyD
-	 BdNd8kH6b1X8g==
+	b=QuY5gkWXjZMcMwEK8qggZv6rCOsTBzCMvPU05ryFNfPleksQNyDkI9yDzu2eCfuHi
+	 HRLBJ0kgsGZGt7bXXxy7twFqcOSvoLXH09p7pFPEHlVEnCUMNVzecMP9KanOMu9NPg
+	 SGoD1n/rJkdx8acPgaekdAXxGR6HxEjXUD58AznSdjkkSIIx7JggGwlJiuBCuQf4r0
+	 cNbhvo1Bj23xLpzMGCaxwnoi7OuyfHaxkdiCY5YzYltv2b8LvqCkpWIgr8+zTPhEE6
+	 QWZNFEejYfjHojBtHZV4T/FywBw2pqP0pMiFb1mM8oHkgBBBAXMZ38R//SQvGEkeuQ
+	 DjoMOTEOo0XmA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6C2DF6067D;
-	Tue, 25 Aug 2026 12:52:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A4BA63DA
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:52:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 887A5606B4;
+	Tue, 25 Aug 2026 12:52:59 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 039F91CF2
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:52:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 972AD80C6F
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:52:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E99E4400D1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:52:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sNK0agZiGPYx for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 12:52:51 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XjVdHPI3qvMp for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 12:52:57 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
+ client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=WgYjZ/dm
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A4C598082A
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:52:50 +0000 (UTC)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c169ae1cb26so155350566b.1
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:52:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787662368; cv=none;
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=Xuo1hiFM
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CB82B40074
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 12:52:56 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c15cb6f5c12so840301266b.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:52:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787662374; cv=none;
  d=google.com; s=arc-20260327;
- b=jtRf6AiQYrqNciBNhqs1qJxGVYkaLXvtjG7TzlBYf6QPwckSA/iycfxYSdnNo79zHy
- WUIfYku7wpzzgcyilrwV2x2r7oiq2iawfKEVEKvNx1wE+Y2O++HcCN4y8uVbp3Ioe2hc
- r7BfMT36SQzrhdi5SwXfxYLDck8DVnJbLjPZ8eDfVvSk6Cup+EefAy4qCqju8YfgTvsF
- 45bv4JHrnt/ywjHM2hVnY4fvukW93eyOx3hmHXAu8/x6SpCviCTMu4kiD8Vytyqcgp7j
- gJqVDtVjWa26T0ZRMKEVUIra4l0MCq6UuUcZ7WkHoqf1BzCsTqER9GYx1UqBGY5wzf/T
- KTuA==
+ b=Sjh+zGR4lGBasafvt5SFQ9cRqhtKRNSWv5NtQV9zlqs6WQx77E/NwnALv1IC8FtHs1
+ KURQDWgPy/DsqzWttrj2r5Ao2Kd7LqT9oFZ7ZZo6NQ8EBrsnd/S6lyhKuTKyx6dr/5rd
+ F+w6XM2ltI0Ymr9dRUwrlydwcVNbcVv3p2JSvN7Y2Jp1J1f5zBgklGdr7t6TirAFwfCr
+ 40F7pGlGeCSefjMGU9mB8jnZRYWY59dzdNi33cvCZYwj1atMgtwWj5ucpHi4JU+CfiWd
+ f9SUOKRtYcZFGC6aO/n3J/IJeWXABbWL/M/zK6RUC5xOXRnHpmJtA9TwU0T766EWfMod
+ /QzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vCkEJmrIZD479Yhd5mt0DONZBN7fby0DhdtqaulWzFI=;
+ bh=OCvV16IwM2byZxhPSWQczEkfoNh3yQI2lrMJXdIAuqE=;
  fh=XzCxGnlMyhrCeKMYiADjLi/2k0me15Xc3uVw3N77990=;
- b=gVCcmnfG8JyzoKQ0dfNm3qA7IGeHYWdNrfn9aJzIO5FoSgKVtKoJMVs3efxikK5CW6
- t4dF/hDi3uXGa7hRMd9DW9Mvw5sj7sVcUoDYVujKyCasmqU50rRWzcQAqpJVM3gKqYT6
- R0P6n8AWLjCRytJbVNIjctnR4cD8p04pZ8+yfmfqx+I6akI3yuqQ+sfMfIWEbdkBIfVJ
- 3PxwwCAc8VDzhFUmuDRhf52kcw57XrQAmtUywdpVgDMXUjyUdftoMGWu2tVbpKjHX9Z5
- iVMXt7CA+9wVtMfNd4orhjeH/UUi8dP/NFUENq3aZE+y9dmIBog8Qd0pwGr6dIdqhNbT
- UskQ==; darn=lists.u-boot-project.org
+ b=mSQz1Q2ShncMStPdZdB/nzfncsVF8qeKydKu9u4IPZxni3Mo65+k0dP17Vu02EVQqx
+ aOEbVfKRVAW7jcB7fGVIZrUHAljUb62pNadDJJ+4T5wi7QaxrJuY8/CXQ/IJxfKtGq6D
+ 7zlXWvCv2srCmLDrZnQ1k7H1shb2iTLiP6HeSdfCIsB3LMc+9y1X4ZOkB8OWMumhjPf8
+ RGnAlnAm5neVDBvrcK6P+ZBYVwj/GKlAfrZvRP6lFLwaPrFfEDlODDJzZopCV6HnhgOU
+ SC3oMYcvuqYy57h8a1g07aAAXpx7XDrE3S2AbvxzHFH2PacfObclWvWJRZR9SjExpz/c
+ BDVQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1787662368; x=1788267168;
+ d=chromium.org; s=google; t=1787662374; x=1788267174;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=vCkEJmrIZD479Yhd5mt0DONZBN7fby0DhdtqaulWzFI=;
- b=WgYjZ/dmtCBWiJcPFfl7uZqYBESnHROQ0p+awn9TY11i7ne+lwEJlYb8qH8Ckz57Q5
- NyeezdD6LlPYyIKvIU8FoY9ldB9K0zF1XedX2NYFIPfUT1ArpGCY4+DooO39yi3M2ctE
- hupoGT78a8IYxANw4BlMqI3ucPvL4Bo8dSvA0=
+ :content-type; bh=OCvV16IwM2byZxhPSWQczEkfoNh3yQI2lrMJXdIAuqE=;
+ b=Xuo1hiFMRVh1/q35i4VRUUbp4e+PNIsbLq0zoobEJ3Ul91Q3Qc6N2Ls09pTat/vv/j
+ ylJjNZwp7P2wAOuc9yNb+ek1J/ADBtuGL8aTeuKbBwRYQyVgotydjBr3pC6M/PpbkrjZ
+ iTKXxTCLLtpFiW9AYP6d5hGk3AEay3+WDQ5tA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787662368; x=1788267168;
+ d=1e100.net; s=20251104; t=1787662374; x=1788267174;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=vCkEJmrIZD479Yhd5mt0DONZBN7fby0DhdtqaulWzFI=;
- b=Bsi2cTMBClSftHPsLszOdTB50bEV5jIE680YP69TDkB/7IlybaBbESTctIPJkKPaDG
- DPv+FIpD2xe3fzxjVh4XfCAy0UQA2CCEjS63Zsq+jlI3UmukPRTf9ePURD+nOEJG2T75
- n2o+1pI5aCN8g4XKMG4R3zzjKnN5ifGn9SR1HBC/t/U8zq9+lp1sFqB57eUcOePiubG6
- TpO+zq0D2ryx/pJzYceMfh2ThI4sJt8r+nYeELAU2jpvjq9AIfDRMfoc5zkosZ8JwyjG
- NVn4IUFF4NnzE7faDde9PPA67oHgV3Ak2148m6co077YnyBuVU9SWeGC5oLIx413iGpq
- WN9Q==
-X-Gm-Message-State: AFuF++mtWvoU9SpV+bz2ZLqFwsgTgwcVUYKGTFzXqLyIY8OSwNQkQZ7/
- 4z1ganICGbAn+yIrHlEA42nn3WWeqpMrjlE4ATDM6cS6La9/1Tfo5patJ2pQd4YJ0AD6MxWO+Sk
- 7e0TKF5RVZGZyRFPCzl6Hh4E1Ltsx4fYHiZ9gdTsR
-X-Gm-Gg: AR+sD10J8PjF+gMXL0Er5s0zrM46CxnxY6pV1y5BUxcHpzj5DSGnaTFYS4R7SlkDmc5
- A1tGeCalFT31QFvTYZDzP45qjsV+mdy/BwrVND1BTzmqLwFvDgPnX9DjomYGrFABxjjZSUIL5Fh
- J8wrJmQ7euadWpz2YHEMThfHEKyBaS96V58ehK2OHHMMcEp+L37EU7wNdXLI2I+g2aFMnIQH6yp
- L25ivxF8DEmi1V5se2Q8BXSCacrjWjaaRFX/L1KGaRDgo42jcvpmPGFW3glkVk85VLj0YdD9hcp
- ikNSy2P3OVun3WQ2A3jtRD2GOAFdGj7YdYFhXnY8xD1TtrEV85fgkw==
-X-Received: by 2002:a17:907:c8c5:b0:c12:3cbf:9f6d with SMTP id
- a640c23a62f3a-c24e2b10f38mr777183966b.1.1787662368364; Tue, 25 Aug 2026
- 05:52:48 -0700 (PDT)
+ bh=OCvV16IwM2byZxhPSWQczEkfoNh3yQI2lrMJXdIAuqE=;
+ b=HuIA4530MYhXwM7rP4QNRrNQmT9T34/YGi/cVQutwnYoNPiuMKR5yS81Kabc9a2HxE
+ wEnTjnqE1He7BHU00uR+VE+tzzqS0XZfmnuqxog7xTpkJ7xdL7Uf0rDhcz8XN2IjR8WK
+ Z3pwPuqMLIMX6o8tv1JiHT+T712kLaOedfv9YOHmg6o8IkK4vLPJu/7mB3DAkrk/ipK4
+ 3jYF6JDepqz+yUpn4B8NlMMQA+e4Ty9//ORabbhdKLb/zoV1pPl0Pg1wegz/E3ZZyfzr
+ Pzyf7gBMf/fNRACqUSHjF2DXWt1d+amcsZZVJvFCeQkkMtzVeobY7pwvJA75lh4NoN/e
+ 1gvA==
+X-Gm-Message-State: AFuF++meMtdtkQvA9W4/2Cjnlco8lVmXG7kl84dF+53NWAh5KCh8A9b8
+ u77kEWnOxF+TXYwHsdzDrIZ6N84w3qaJ+JpGm3VMZjhijd8Q+rCGjO0iMmLgc/uQJSILxeICPmm
+ vdOoScrhG+2VjjNxio1KGVU0UaAybfc/qISjKDG05
+X-Gm-Gg: AR+sD10Y5OlQsPHGvzwF2lnlpX3OMlaHvHZfhvIvECpZHciwoDbDlr7irYs3bpXzTVh
+ k+FjuEqoj3YAjDQ+V1XbGyMoZZcf23OUAUM34BoEfApbIPY4JvPEFMr7owIuJSPR+lNYs5UvSBX
+ Bq0ya5qRTjZKLCEUE7FqQTLG3m8NzCGtGK0DGF0ElV66kNcbij7zH0xRjXubq8xqCBzFCrhNyBl
+ vobKu0J/GtoJx+Kri12DJi1KKBwP4ElJSMVSba0kM81nrhkgA8w79VGB5fZNkgbKPPYbnn+21IY
+ LGcjdrswDwrYAm/BsmrwZ+scwCGup87HFpXFEACs7SUk
+X-Received: by 2002:a17:906:6a10:b0:c16:2dc0:e1ef with SMTP id
+ a640c23a62f3a-c24925e38femr2652999366b.14.1787662374119; Tue, 25 Aug 2026
+ 05:52:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260815220754.11724-1-pranavkasthuri@gmail.com>
- <20260815220754.11724-3-pranavkasthuri@gmail.com>
-In-Reply-To: <20260815220754.11724-3-pranavkasthuri@gmail.com>
+ <20260815220754.11724-4-pranavkasthuri@gmail.com>
+In-Reply-To: <20260815220754.11724-4-pranavkasthuri@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Aug 2026 06:52:35 -0600
-X-Gm-Features: AcwNN1XkZr2tfRZnWqHrfjGWbivntjioikZPwjtMQo0pocxeCHAVVhGdvHsgPTY
-Message-ID: <CAFLszTiMeD8_6-oW_EkJm=RLECACnc2BNcJAAOL07g+swfgRVw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] image-fit: check the length of the
- data-size-unciphered property
+Date: Tue, 25 Aug 2026 06:52:40 -0600
+X-Gm-Features: AcwNN1Xw-gJpcRBDPdHZ31OqaXRXMOOBRap_lUN13Um7JbByhKB7C_fzg7q6SqM
+Message-ID: <CAFLszTgaj7d_bypF=ihdVxeVo+ZS45dsMx26DBsPKs9=agDA1w@mail.gmail.com>
+Subject: Re: [PATCH v1 3/3] lib: aes: reject an unciphered size larger than
+ the ciphertext
 To: pranavkasthuri@gmail.com
 Cc: u-boot@lists.u-boot-project.org, philippe.reynes@softathome.com, 
  trini@konsulko.com
@@ -135,49 +135,30 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Pranav,
-
 On 2026-08-15T22:07:52, Pranav Rajendran <pranavkasthuri@gmail.com> wrote:
-> image-fit: check the length of the data-size-unciphered property
+> lib: aes: reject an unciphered size larger than the ciphertext
 >
-> fit_image_get_data_size_unciphered() passes NULL as fdt_getprop()'s
-> length argument, so it accepts a 'data-size-unciphered' property of any
-> size and then dereferences the first four bytes of it. A property
-> shorter than that is read past its end, and the bytes that follow it in
-> the FIT are returned to the caller as the unciphered size.
+> image_aes_decrypt() allocates cipher_len bytes, decrypts into them, and
+> then reports the plaintext length to its caller as
+> info->size_unciphered, without relating the two. size_unciphered comes
+> from the image's 'data-size-unciphered' property, so an image can claim
+> a plaintext larger than the buffer that was allocated for it.
 >
-> Ask for the length and require it to be exactly one fdt32_t, as the
-> binding describes.
+> fit_image_uncipher() propagates that length as the image size, and
+> everything downstream - the load, the copy to the entry point - works
+> from it, reading up to 4 GiB past the end of the decrypted buffer.
+>
+> Unlike the image data itself, 'data-size-unciphered' is not covered by
+> the per-image hash or signature, so this is reachable on a signed FIT
+> whose signature still verifies.
+>
+> Decryption produces exactly cipher_len bytes, so require the claimed
+> size to fit within that.
 >
 > Fixes: 4df3578119b0 ("u-boot: fit: add support to decrypt fit with aes")
 > Signed-off-by: Pranav Rajendran <pranavkasthuri@gmail.com>
 >
-> boot/image-fit.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
-
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> @@ -1040,11 +1040,15 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
->                                      size_t *data_size)
->  {
->       const fdt32_t *val;
-> +     int len;
->
-> -     val = fdt_getprop(fit, noffset, "data-size-unciphered", NULL);
-> +     val = fdt_getprop(fit, noffset, "data-size-unciphered", &len);
->       if (!val)
->               return -ENOENT;
->
-> +     if (len != sizeof(*val))
-> +             return -EINVAL;
-> +
->       *data_size = (size_t)fdt32_to_cpu(*val);
-
-Please add -EINVAL to the kernel-doc block above so the contract
-matches the code. Otherwise this looks right.
-
-With that:
+> lib/aes/aes-decrypt.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
