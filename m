@@ -4,116 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAD6C61DC6
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:51:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA04C61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:54:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 197C2406DA;
-	Tue, 25 Aug 2026 22:51:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CF675406E5;
+	Tue, 25 Aug 2026 22:54:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0CxvKeb_YhWo; Tue, 25 Aug 2026 22:51:06 +0000 (UTC)
+ id jl9uLM13ne-e; Tue, 25 Aug 2026 22:54:03 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787698236;
-	bh=59JK/vPFenIlb94WtdH9o+RF0baQqO3Rr2EwqsrtkaY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1787698443;
+	bh=oE0rxuKG4XKsZsEt+EWzeqF6D9ZCFeur8aRvDnmd3Ww=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hy5DS7E4a/7PULnLDynd9gCVYMN/pirR99IDdehFXHs9GsLPuSO7zkiQGAg/wvWK6
-	 vVi4XdgiOts8Ci/N+h2pf35GctsAUR57e+JYChivpZJntn4anefOx05cJ6Ba42ajBT
-	 ol5VB8cqGYUkC3kn59mOexMCxU5YM5mKlKIUC4bJMQQyBYvYBmwblHcsReo0b/qa58
-	 mOFodSZbJS0/jTE/nwVY43v82bwvvB4nbRI9OCTvu+KLi6gl5Mh0JO4i1HalbLC+SL
-	 NPHjT5wNhtm4zbJLS1WzDYDvUh9Gh1Mpokiwq5ErTkc3iDedLRpyY08pvPE9Ep50YF
-	 hDs9/OkkNowhw==
+	b=Nv/r6kNEORu1Kr/H5TnVBTpEuYPGOHKQIRimaSp3ACfPfSIhZmxIvxJP+/okwFdRb
+	 GR2XLSrOh35nu9ZuzfWq5wTukf920y1TC4lbdHPRTEyeqKWIY10pcVPPwJB8s25q6b
+	 2OzL2Ipn9wldKWZGSTL62FY1zyMNPRUX21OL9PSRBfA8tMEptFxXM4Vjow1LyHqdin
+	 TcMjPjAt7IU/iNn1VBAmzJJLVXqICqK0AEy/ig/DCv0lc9K+i2BkUkGEN8sP6Fxsa5
+	 1899bk72HHnk6031WFAB3TIZNnseDMlvvMuiQEaRDFxtD2rlu3gZIzi3Kki906H40P
+	 La5O0ZpU9r/WQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B0824076F;
-	Tue, 25 Aug 2026 22:50:36 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id EDD5B334
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 00EFF406AB;
+	Tue, 25 Aug 2026 22:54:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EC3BE334
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:54:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E01A180BF3
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:26 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D1B2F80698
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:54:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FTV_YbUe_Khw for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 22:44:26 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=34.2.90.19;
- helo=sonic.asd.mail.yahoo.com; envelope-from=maskachoska@yahoo.com;
- receiver=<UNKNOWN> 
+ id 5Iu_kIZsXAVA for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 22:54:01 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::230; helo=mail-oi1-x230.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com
- header.a=rsa-sha256 header.s=s2048 header.b=kvHTGoTU
-Received: from sonic.asd.mail.yahoo.com (sonic-asso1-0020.asd.mail.yahoo.com
- [34.2.90.19]) by smtp1.osuosl.org (Postfix) with ESMTPS id 87EA280BF0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787697862; bh=59JK/vPFenIlb94WtdH9o+RF0baQqO3Rr2EwqsrtkaY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=kvHTGoTUnOsFMbnpaPyikYpkzHzOdjEsx9qrtGYxiBM/gq/kZwwSN+8NGBI27t9P1cqQg1MMdDiIyfOMyIOH27RvFwhvTe9IkCdsQuaqrugCuMWnN7AY3Io1+Q5ikXtnVYK0MhlwhhOwm5AdmbiS52n1uBkd3eKLHxsgYYqP7RmajXUlG53C/vx0BlMIt2HLUadTLPNUSbvT4QovHHWWTQvJdq8YQjTEvaGzV7KNTkAc3rdKpEe+ymPH8O4pAq9E2VQcYvkisB4Vcd81JGwk6KFKvfoPMWmtCRQD0GRvTi3KqqK8Yqv9L07RWrEg/YJl5xPaWPuEh7NP9hId7veABQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787697862; bh=aBp+TVEpR6FUbdCAk6zg6rNtr+Mk6qrhQn/btJO5tBr=;
- h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=V7vUZPp4eqw2encP76GqyPS11JszNucG/A7C6dd4uRBxIxRi6+rxva+vUEOxsTcBKI9Y1GfXjbcOlq7Fzn2+MV3fz0dN3RNhWvwYEsxRqjElMyGf63Yh4INr5TS9TegINQeInANFdyhs4ebzwaOr6+6EXtycX5FHuiWvVY0zt9QbKo31zSn9Mr/jzER8H3sNmCphwV2m+0526iOxMWS1nh+bbkMCI19tBmMb9rfbDlmmkKewZlrr6yLkf3oIx5EmcR9HFjI7/vFwWA5p40WnPgWUKATi6aDC6sWC5IfMH/z4AEn86NG/uNorUEBuhoSDhV9NmrkZQqh0DFYpB3Ey0Q==
-X-YMail-OSG: 5Va7Sh4VM1mq0KLwAjAIa.9TGgYwNcWlxs5NsB4QHB9_Wc1_LQuhAjtSdEIhZ7S
- dFns2rgZ4u8fpK.MiihWrSNoKFv5e0AaWQeIBcUFcBH4yHgsxgTbNjMgDBQ9jawxFDRzm5x40mAg
- 8tEgOCQYenTlxf2jaaafv.o0Zj6K1t7D3B2UGIybMNiUomFjddrcCZivsMEtdKqyBkUxduLUvY0M
- yLbieAUZvPjh4C3NxKLKcsV4VeV4o7IKM8JM4HTeFAJUwBQi2eoBHBfuQoZCt.NjVg5qnsPyVq5w
- ecmmrjXeysfgpHFq5NEe9x5n.iq2IUR700y80EdzpG3Ajt0uF70TlpD2qEtEhwytf4q3tlW7Azyw
- 6ccRCC.HAVhCIYGleERwSu2goyBaiwpEfVnRpn9X7nEIRm5JaR2qi5yLQtv4vFmi9gyax7kv.lV5
- 2VTOAdoliBmdpArVtsoTJxsYaabR1Y8InezOdH.M4Z16Jbj3scjAjzBcSgT06jzXUGET4_MpPHhv
- _cX4bm7M7EkGL1faOEKFtQG6c0_ChbXeRTvS1YuXtkH9Zg0KSkm.M1OBMU7JokImuhS77XUsrcYq
- in6G3wNTNm7dHeormCliRc6RfH7yOrX8IVLJtcHl0CMJ0Dq0OsYLDQ8LjQP.DnUv73d3VNzpFttQ
- ZTVIhbb5cWxycsn00SseJd_sXZclaRh8GP74VJ6YD3jMTJwLKrYoL_FB2CXXrp01aKjFt_BFd3iG
- asUeW6cYmtfN7bcSaf79WlR2gTYf3pb2n5Qz.NZ2ghW97rWi2HC00N8AMPAUIsIpX.72mVdbGP7I
- 3hJkP1VgNSAUUU8G_XSIssE2xXz0CTX9Pvh5dIJceNDvK7DvL4XCp9sVVzQ5IoCoyLtlKJIhKiWS
- u5X.McwWXda_8stjamQfOnFhzItjqlyGmhB8weeODrMPvle.lmjmPLzxUBSqH41_a.BfRvM9jQRM
- c6c7vN5yTH3qAo3.WuGj78BYYvP8d7U7ftP0W9Cw0idfzeWWbhN4eGGGOsdixHbbfcWIxPk3V4Kg
- HHVsGDPq6W9Yr2OdcO0cqhWLkK5mRE1jWa7qIoMiod1gD3MDC1oHOF8bPesim1g10DaneR9LPMnZ
- KSS5hWbgwGP9M7STFeUIoLGg24Hqi2lJvWgMpdQSMi8czo44gIu4tjzRKTwrGrt4lSPXqKG3cgVp
- nhqwAeKXNRfjffoZh2XphYUHiVu_t76_8UIUAgAMAMhb9ds4WxafkmJ2Ja2cU7pQwKQ_RoD9b.pX
- Pei8Ig68SpjrX6XpbpOckrXUGgxk1MYx8I.qBI.RxnW4VWnj1MVCK4AHeKj6y2g0KTyEiC4qJLUG
- 1vGDzTOfmHZkCA7t.QvNnqZh_Z5YmqBULXfb5x7efE7XzgsGObzOigs7sjv4lsfy13_pskVarLF.
- ngI943pTVVkQanE2vxOMoK3ekTIiYCbKUko7bfFgfEMqpGg6663G2wKuZJXbui6d6qJQDeuHrMK4
- Q5R.psqqg_37Vtpo4al8zdjKeQGIDk4NQO5RdyastLcAPajnZuFcQB2LVmkO_fXGRrtHKaHOrh5b
- IwNhLubPUnqGt3YE65x8bBitJGEz8tsn5Dh4k7EA3b4b3iEdFRRVffd2fvHJMw6ICe.tVPPZvbHS
- R8Oc4NNXQWSw2jfZOIvfr1_0EEb5mU1Ey_RW3PtzxboucyEo4CrELXDFBgFKcHmosWF_NYel759f
- oKWB8A_ZMm3TiTZgbFQS44FFh7GmRNHPtB1ttxHyqDR27BaI29Y89cWR1q639DQftyAnGFr9Laqu
- 06lmV7TxGjoTk0ngMzvEEIVridU1VjXfw.AAROOVP6j6j911e6OT216RwmvVp4kzHA85HvcYitfj
- M1QB71f2bIvRkqYWIVCViaBpBVVRzTpcdej5epBCLcbJUDHshL7XzCmybCB0QfmC8U8DRC6xcQ0h
- 1ZMXJNmAdGWUcxjHPpb9GB2K3EHyvLhKl9BwPaVYlHAGIXt2LIdTmbr5RNXcsDEtth.Idii797cO
- Ld6tW4deHRhM13JMUgAFBh48BWhbWaksEx.znlE_OE9WpUfYOFgrY3sQJTizh.i33dSaZ5icfUMp
- 6cSc-
-X-Sonic-MF: <maskachoska@yahoo.com>
-X-Sonic-ID: 259c5be7-a97e-4824-8170-584f1e342fb5
-Received: from sonic.gate.mail.ne1.yahoo.com by
- mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-101 with HTTP;
- Tue, 25 Aug 2026 22:44:22 +0000
-Received: from dip125.lsn.sg3.yahoo.com ([106.10.223.134])
- by hello (SMTP) with SMTP ID 692ceff9cbf31ebf3ce1df27c5387b11;
- Tue, 25 Aug 2026 22:44:19 +0000 (UTC)
-From: AK Sharma <maskachoska@yahoo.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=S2rg+Kti
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1D9258068A
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:54:00 +0000 (UTC)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-4a475409044so229501b6e.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:54:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1787698440; x=1788303240;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=oE0rxuKG4XKsZsEt+EWzeqF6D9ZCFeur8aRvDnmd3Ww=;
+ b=S2rg+KtiUJbnMcvkDVQ+SgQe2kutMJQe5hFJvUQ1w3lnLlSCPJxJL92IXtRMY2vffK
+ PtBuCsMboCtArcPuRXhqLauIui2gPj2XezQpAtYtecs0rfqCshJ8UxXrnD8thv/L4ekl
+ 8hJoP7h8Wdpx7gBXSlsiQv9cvM6PDZMpUESlg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787698440; x=1788303240;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=oE0rxuKG4XKsZsEt+EWzeqF6D9ZCFeur8aRvDnmd3Ww=;
+ b=RnQcq9KDegXLcS4Gef1nYExwU7Exr5vQPHpNCI5pKPIb0ydY/USs+c6cslLQexle/s
+ +tMH3DSIydGvyNGmZ9Htg0d+QeLmb6Fvda7rLf55XORZBmfyVIWVoY+pPlzVVjl/3oKI
+ q0yuQu3f71OxhCwL7P8Lm1WDXqEcFk4NrWUEZv5tbb5WtQy1hThrN7IMI/LDErZY8ISD
+ 9RIlJ/XuiJCOWWdBL5nbLk4IVa7nwe8Eh7PNYk2sUnzwWNjbe7ODbVesk34UeoNG5R1J
+ jrvqE7X4jRnzo6LQEyDfFd3pRukoS0u5rsQ5QDvWksv0u21p8u6fQ6CMuzsL3hjtLJgM
+ 34Ig==
+X-Gm-Message-State: AFuF++kSLQbqKpSVc9IVhyy/NR0OSzoW1+c9V9VRDPsO9fsmvmAPoYl3
+ BvFoLWbhvuwcRFL6sIAVphwW0CkXzyZHHD+vGvgYhVZyucppporCke3DDJSqpuOWerE=
+X-Gm-Gg: AR+sD13pwIKfN4dkDQQ523B0HEzqywTcZtzsFOFG5IyovCr6VF/DQwXa7gcygphyqHZ
+ 8a/CEv5uNfxN315N7x/FE/JMjgXwLyO4vtLFMYIusu1vdo4leHBOPs48ldvSGskvwAyVQVUZUWD
+ 7/ZpUDDQD9pN2ovYiDYkxOAQYsr0Lj9pZC9I4KIc+BhmSY7JPSBGDmIaGROKFsVYckewSX/av4w
+ YQ4VuZkTaj/7gl9EfuYnx9SuXcNZ4fkT/TCRx3BLm7LJ5uSRZG+7jEOW1Tk/QcehfjrkQSvOvlP
+ ZRiSYzV9dQBLsdbyXM/QFsqCjrV0riPd4+mkudqECOPoSfruROvwhaqH0Ltjm9FXPgDr11sTgVT
+ RsszHnRI3jELUCUFqY1qiIRmYoFbZYZnAQ5e5EPxE/51L18HZYYdzz1z0ID7Zq9/1ig2ag6Geab
+ BCsu8oQQp9PvrSQ57lvk0/yW9RSLhp5yEYQMrwjdioQJaDvySmQGlxfJrQHH/oUERhaw/O0jdLg
+ Kn9/dV0oK/vNAyuq4pQ5FbCNo/ii2nnY81I6Tb9ha+Fxo6Egz5grKAsxccNrFY9FWVgdpZNb69s
+ YOdf/HOztA==
+X-Received: by 2002:a05:6808:c235:b0:479:f7e7:4a81 with SMTP id
+ 5614622812f47-4b36635caadmr3178874b6e.0.1787698439725; 
+ Tue, 25 Aug 2026 15:53:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4b36ab734ddsm179670b6e.14.2026.08.25.15.53.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Aug 2026 15:53:58 -0700 (PDT)
+Date: Tue, 25 Aug 2026 16:53:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: AK Sharma <maskachoska@yahoo.com>
+Cc: u-boot@lists.u-boot-project.org, Christian Marangi <ansuelsmth@gmail.com>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, AK Sharma <maskachoska@yahoo.com>
-Subject: [PATCH v1 12/12] doc: board: econet: add EN75xx documentation
-Date: Wed, 26 Aug 2026 04:12:07 +0530
-Message-ID: <20260825224330.713151-13-maskachoska@yahoo.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260825224330.713151-1-maskachoska@yahoo.com>
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: [PATCH v1 02/12] mips: en75xx: add TPL and SPL early boot stages
+Message-ID: <20260825225356.GD523975@bill-the-cat>
 References: <20260825224330.713151-1-maskachoska@yahoo.com>
+ <20260825224330.713151-3-maskachoska@yahoo.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Aug 2026 22:49:58 +0000
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MmCpgRg1EBPOfZSh"
+Content-Disposition: inline
+In-Reply-To: <20260825224330.713151-3-maskachoska@yahoo.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -127,90 +129,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add the EcoNet vendor index and the EN7528 porting notes.
 
-Signed-off-by: AK Sharma <maskachoska@yahoo.com>
----
- doc/board/econet/en7528.rst | 39 +++++++++++++++++++++++++++++++++++++
- doc/board/econet/index.rst  | 10 ++++++++++
- doc/board/index.rst         |  1 +
- 3 files changed, 50 insertions(+)
- create mode 100644 doc/board/econet/en7528.rst
- create mode 100644 doc/board/econet/index.rst
+--MmCpgRg1EBPOfZSh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/board/econet/en7528.rst b/doc/board/econet/en7528.rst
-new file mode 100644
-index 00000000..fc4eaf2e
---- /dev/null
-+++ b/doc/board/econet/en7528.rst
-@@ -0,0 +1,39 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+EN7528 reference board
-+======================
-+
-+This target provides the U-Boot port for the MIPS-based EcoNet/Airoha
-+EN7528 SoC (MIPS 1004Kc, little-endian), used in many GPON/XPON ONT home
-+gateways. It replaces the proprietary multi-stage TCBoot flow with the
-+U-Boot TPL, SPL and U-Boot proper stages.
-+
-+Boot flow
-+---------
-+
-+The boot ROM starts the TPL from the uncached flash window at
-+``0xbfc00000``. The TPL enables the Front-End SRAM, initializes the serial
-+port and reads the DDR calibration image and SPL through the early SFC
-+reader. After DDR initialization, SPL loads ``u-boot.img`` into DRAM.
-+
-+Build
-+-----
-+
-+.. code-block:: bash
-+
-+    make en7528_reference_defconfig
-+    make CROSS_COMPILE=mipsel-linux-
-+
-+Defconfigs
-+----------
-+
-+- ``en7528_reference_defconfig`` - reference board (DASAN H660GM-A)
-+- ``en7528_ram_defconfig`` - RAM / chainloaded build
-+- ``en7528_jcow414_r3hook_defconfig`` - JioFiber JCOW414 R3-hook variant
-+
-+DDR calibration blob
-+--------------------
-+
-+The TPL loads a vendor DDR calibration stage from flash; it is not part of
-+the U-Boot source. See ``arch/mips/mach-en75xx/README.ddr-blob`` for how to
-+extract it from the vendor bootloader and where to flash it.
-diff --git a/doc/board/econet/index.rst b/doc/board/econet/index.rst
-new file mode 100644
-index 00000000..d691db07
---- /dev/null
-+++ b/doc/board/econet/index.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+EcoNet/Airoha
-+=============
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   en7512
-+   en7528
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index fcb4224b..60d75003 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -29,6 +29,7 @@ Board-specific doc
-    coreboot/index
-    emcraft/index
-    emulation/index
-+   econet/index
-    gateworks/index
-    google/index
-    highbank/index
--- 
-2.53.0
+On Wed, Aug 26, 2026 at 04:11:57AM +0530, AK Sharma wrote:
+> Add the TPL and SPL stages for the EN75xx. The TPL brings up the cache
+> and SoC straps, runs the vendor DDR calibration stage from flash via the
+> early SFC (serial-flash controller) reader, then the SPL loads U-Boot
+> proper.
+>=20
+> The DDR calibration stage is a vendor artifact read from flash at boot
+> and is not shipped in-tree; see arch/mips/mach-en75xx/README.ddr-blob for
+> how to obtain it and its checksums.
+>=20
+> Signed-off-by: AK Sharma <maskachoska@yahoo.com>
+> ---
+>  arch/mips/mach-en75xx/README.ddr-blob |  21 ++
 
+Documentation needs to be in rST format and under doc/ (and then make
+KDOC_WERROR=3D1 htmldocs must be clean).
+
+--=20
+Tom
+
+--MmCpgRg1EBPOfZSh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao4dAAAKCRAr4qD1Cr/k
+Chw8AQC9NfkifRoTc0/5B/pXT7GDmHfXIE6HL9m8Y/wCnoSiswD8Clz+7/WF0znh
+w48bgqVyGfJmaiA2F8E+zlUPg5o5GQE=
+=9CkO
+-----END PGP SIGNATURE-----
+
+--MmCpgRg1EBPOfZSh--
