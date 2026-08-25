@@ -1,77 +1,79 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B18B6C5B572
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 04:25:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A716C5DF81
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 04:25:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7A06680D99;
-	Tue, 25 Aug 2026 04:25:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BE01940611;
+	Tue, 25 Aug 2026 04:25:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YxBik0X7LaGf; Tue, 25 Aug 2026 04:25:21 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QLcu0oOXjqGq; Tue, 25 Aug 2026 04:25:24 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787631921;
-	bh=7x35Ic33Aq4gkFACjIzfADU9VYTPmYUU9RwTTXMZvEQ=;
+	d=lists.u-boot-project.org; s=default; t=1787631923;
+	bh=GYc2tWt+Ov8mAiyy7FbG3tIyLMQ1tRP+0GPBkARMSRI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eaZvryc92qcjIJyBBQhnI0i4B27cuyyar7Af7jmAzlg4A1m4bqvYtnsy+Vs/htvCQ
-	 ABxZNx/HU997SFdxqalz2lgZ8TU6qV+PO16Cn9GeppwS6qDP5gYV/J9I3unAl4q/Ch
-	 cK8lqwow1hJIJyS8ppRV82qRDj8S2/H+ZowG0cX9U6Fs+lbv5t1GZUGztgLEnCZ7ju
-	 h80iq+RgcNCHEA4e7gNtMEGRo6XtMhxIStJvRnDOFlJtFmACa1edpfqEUBO3WjRy0C
-	 hpIRTTpLVviC9slb5BB/SJ8zrM/RxvjYj/bZzrwRGm5mtvtpt3bYZGOwDcc4nezpht
-	 ++uVgS8XYr0MQ==
+	b=wEphLDzvPUT4zFQ/PozjQ8FQPE/Y2tl1NlIAjqAveipsG/KDDftU6tphOC+wnBDwW
+	 LNsgxu+kznqwrHdFGRUug3a33vwg+cmVJVFkcD9sRp8ykT44Rszv195fpfAgcKV4Tj
+	 w1HGzsw7T6g+a1r4Lf96knDG/hd+yT9h8MRJSQswfvyx8o7wOibFU5qENLIqRnQGww
+	 sEkrbCB5dmpCUPmVZmMH6AkboJ+CjfPgxzI8VzxqSF0ovZ0ffv+mSecKL3jgevb6iF
+	 7kLlNpEi7bUuW3zq3LAolC4ONNQ/IYofFARQWLGthqxlmKBj6xfhRNSY54qC/UOd5z
+	 i4uNvHnRzDD4A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7503B80D4B;
-	Tue, 25 Aug 2026 04:25:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id DBDD8336
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D409540620;
+	Tue, 25 Aug 2026 04:25:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C7B8D279
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C8A4980DA4
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B92FF40077
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id p9Hkt_HEI307 for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 04:25:18 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PUXyhEnTdE8M for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 04:25:21 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=FYBDtAwz
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6567B80CCA
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:17 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=hRu3UT3F
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BDE394005F
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 04:25:20 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id E5F3B601E0;
+ by sea.source.kernel.org (Postfix) with ESMTP id 17E17419C1;
+ Tue, 25 Aug 2026 04:25:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13BE31F000E9;
  Tue, 25 Aug 2026 04:25:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAED31F00A3A;
- Tue, 25 Aug 2026 04:25:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787631916;
- bh=7x35Ic33Aq4gkFACjIzfADU9VYTPmYUU9RwTTXMZvEQ=;
+ s=k20260515; t=1787631920;
+ bh=GYc2tWt+Ov8mAiyy7FbG3tIyLMQ1tRP+0GPBkARMSRI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=FYBDtAwz85eTFBLfQRPxb/U12Pamb0E7GLTKL8HqXdD5knZlyrNFQ93+qb69/KLT3
- ZTpL6wTW06StLsjaLpytTXL002p4p2jqhBKDg1ZdhLQdVqDvytcNCbu9CfnL9UExQk
- 8EYb7+DwXsCwHLX7rrgzFRYPRBEQdrSiYBLc+EfdnZsLeBYkWl9H6Sx3AhgFciIr4T
- v2uzjouX2S1Sa9kWR0MuA87B6BLyw7WG3b++3plh5wHupZX5nuQV9yiyon8xhSKEg/
- eWb3JE29wi66nMW+mVCrcHvv3fp4rgmTrHNkbW4ILE0XMueslPR3Q5oPC9/Md49lEn
- I0WPcH7N85TAw==
+ b=hRu3UT3FFr4WJtcMlSA6QmDgWTseFHPcZVsATDEktPMegscadBrjEXWuBhK0pcsla
+ ZaAYRRjXR9G0JpxdLQbDjXCFxDsbZB/WwzuSUIMG6j7blxiI8C4Tj6ViLoITyeo1Fp
+ Qst8giq7mSHKltBJFRAIdRU+rlc5i61MAYU+Ww80Luc/5TCP+gSLeVBSxy/qvjkoew
+ tsSZUYdQVNz/dPbgTlltbUGAkWGcvFwQ5Ywmx9BUok2u84IgKQty51fEwyRN3TfKTg
+ maffp7xK53LXEdoUOYFI5oDrktFA3XWPTLU2YY9lkigTNSs49K8yP2kxnHh+jRPLuL
+ UpnrFJ6iFyESg==
 From: Yixun Lan <dlan@kernel.org>
-Date: Tue, 25 Aug 2026 04:24:13 +0000
-Subject: [PATCH 3/8] clk: spacemit: ccu_pll: add plla type clock
+Date: Tue, 25 Aug 2026 04:24:14 +0000
+Subject: [PATCH 4/8] clk: spacemit: k3: extract common header
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-01-k3-clock-reset-support-v1-3-c430253e759c@kernel.org>
+Message-Id: <20260825-01-k3-clock-reset-support-v1-4-c430253e759c@kernel.org>
 References: <20260825-01-k3-clock-reset-support-v1-0-c430253e759c@kernel.org>
 In-Reply-To: <20260825-01-k3-clock-reset-support-v1-0-c430253e759c@kernel.org>
 To: u-boot@lists.u-boot-project.org
@@ -84,22 +86,22 @@ Cc: spacemit@lists.linux.dev, u-boot-spacemit@groups.io,
  Jonas Karlman <jonas@kwiboo.se>, Alexey Charkov <alchark@flipper.net>, 
  Yixun Lan <dlan@kernel.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7457; i=dlan@kernel.org;
- h=from:subject:message-id; bh=JP7DEjP7awEWWLjW9vIGisEhSJhFiA0Totop8y8QqeQ=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqjRkMUeXFWOL6kTlwZ7fqyIPbkEJ9Fvf/n+cFM
- orXYxZOe9CJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCao0ZDBsUgAAAAAAEAA5t
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9806; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=MbTFETMRuSzTIbnTNmxY0A7N/QzVfpbxfSKmVMX8634=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBqjRkP+sGHqAimGNyro+Jq6BX9iJPO/JlBddwbk
+ tfii6xhBEuJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCao0ZDxsUgAAAAAAEAA5t
  YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
  maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+1Q+xAAkRtggFNF0v88eD3QjROlkz5xDeSNqlvXrm2Vw4iWA1btTrAaObzji
- ldbFlNiul6+BSX6Ae0QxcJyyTyJKGYJpoQ8YewJO7+iQZFFLYPP9IINHjQDOBASoimt4oFYy59q
- F+hxg4aFGow9+R2qMxarQy3u6ESI/3pwLKvEyCJdp3hF9YIGX1eYVdzYmxFDLvbZSK+sw4qiSmO
- NJYTIta6NAcRi1bSRzbRhClYcdk9ZqjtYb5mV6cLew772MKHnuVTmMxp+MQ94O+tzH8XFqQm6+u
- EAe6jYqSqF8HOVugfFCPvQ+Ip+b5dK1GMEIc4bHj3ys4ePgiAd0htY4cPsRQJz2QmsEQD0yJPvX
- disg9uEgpT3PKN/L5RH//HTyPFFi8epIJHBHUXrXbr3aNYYvxHMo5oxbx6WP8AwJo5rBS7w3+f1
- 1WC0VCIVRMxyWzk7iJhKNkktNK0QA43WrsxCwcREnPU8L1GCwpR3O3jOIVFl82GSC/N9cz1wize
- TVRiNsogR5ZQ4mjxTLfEDxg6u1FuXJ7U0nzPJfHZe1m0lSFTmkto/fbQY7WyFb4Qvd9BsAHv/Mw
- KISo1UxG4AaoTpdzv8832wNCdAeEJezAud1xQs2ZLxVFHm1ULIhDkXh7g75tU4rJkEsLQO3sKoY
- 2eWW4oQmUnwR5Xrk9KisSljvmBfj1A=
+ QACgkQMarqR1lNu+306BAAkvjVdyFxGP24TRMvHTrQZGCk+LIhYHnSz9Y4y+toN/wvZofnrkaYe
+ uKsxb0TDgp1v5axpc8XTKbPAX9mkF8+7N8Z5CRmiYNqBjZiGLYgZDn6KyEPfAGp651qmO87WJHa
+ QvjWS+huPGEzcUxtZHPpsXzlrQIcq7LEvJYmCjpcfb6gqbEMk15RUTev1RtMxhhOiIHjMHxDob+
+ bpyBM0xjaqRtH5SelC1N9MhVvwlxWyzjCIhKuoNCUnc9oRhJZHk4hkBKOdEXbwr/OWfP0Tyu4fT
+ 2HFZhAytpfU9YwxlumHtQ6DRfkqX/LCfXEqbqerUG5oQpSEZfV736x9sl7TVv5QLy+c3iyTQZCm
+ eI3TP7rY1VVpD9k7Jb/bf6tJH95HCTo3mkclM/5FXe+duJpz3A4t0vBaQZr018AtP7rPNtnaQgV
+ xW/HRnkinyUTFuTOMpZ8GlnoKnvNOFII7VYjLwIb82Vxkewr9UqHeGTJwTYMqvFCw0QuSQSy5hh
+ tti04xituGiicQX5xdtZPPV9eywKlPTMRSEhOl54DTQgrtDQh1E8aPxlyZrU36CQ17pPDg5nuRV
+ 7Z6e6XYAO0kU1bINsei+G18D7u+791Y9XsNFg8YRGMaFBC6OFvq8+0zi9hfVeKw9hvQOw610AqS
+ bmN2vph5Vjs2j7rVz1vZqkvs3tPbBA=
 X-Developer-Key: i=dlan@kernel.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -115,256 +117,294 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Based on upstream Linux:
-  3a086236c600 ("clk: spacemit: ccu_pll: add plla type clock")
+Based on upstream linux:
+  091d19cc2401 ("clk: spacemit: k3: extract common header")
 
-Introduce a new clock PLLA for SpacemiT's K3 SoC which has a different
-register layout comparing to previous PPL type. And, It is configured
-by swcr1, swcr3 and swcr2 BIT[15:8].
+Extracting common header file, which will be shared by clock and reset
+drivers. So will make it easy to add reset driver for K3 SoC later.
 
 Signed-off-by: Yixun Lan <dlan@kernel.org>
 ---
- drivers/clk/spacemit/clk_common.h |   1 +
- drivers/clk/spacemit/clk_pll.c    | 124 +++++++++++++++++++++++++++++++++++++-
- drivers/clk/spacemit/clk_pll.h    |  43 +++++++++++--
- 3 files changed, 163 insertions(+), 5 deletions(-)
+ include/soc/spacemit/k3-syscon.h | 271 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 271 insertions(+)
 
-diff --git a/drivers/clk/spacemit/clk_common.h b/drivers/clk/spacemit/clk_common.h
-index ea5ebf57784..60702414f2b 100644
---- a/drivers/clk/spacemit/clk_common.h
-+++ b/drivers/clk/spacemit/clk_common.h
-@@ -36,6 +36,7 @@ struct ccu_common {
- 		/* For PLL */
- 		struct {
- 			u32 reg_swcr1;
-+			u32 reg_swcr2;
- 			u32 reg_swcr3;
- 		};
- 	};
-diff --git a/drivers/clk/spacemit/clk_pll.c b/drivers/clk/spacemit/clk_pll.c
-index 56da70af58a..36de37c3a25 100644
---- a/drivers/clk/spacemit/clk_pll.c
-+++ b/drivers/clk/spacemit/clk_pll.c
-@@ -13,7 +13,8 @@
- 
- #include "clk_pll.h"
- 
--#define UBOOT_DM_SPACEMIT_CLK_PLL "spacemit_clk_pll"
-+#define UBOOT_DM_SPACEMIT_CLK_PLL	"spacemit_clk_pll"
-+#define UBOOT_DM_SPACEMIT_CLK_PLLA	"spacemit_clk_plla"
- 
- #define PLL_TIMEOUT_US		3000
- #define PLL_DELAY_US		5
-@@ -21,6 +22,9 @@
- #define PLL_SWCR3_EN		((u32)BIT(31))
- #define PLL_SWCR3_MASK		GENMASK(30, 0)
- 
-+#define PLLA_SWCR2_EN		((u32)BIT(16))
-+#define PLLA_SWCR2_MASK		GENMASK(15, 8)
+diff --git a/include/soc/spacemit/k3-syscon.h b/include/soc/spacemit/k3-syscon.h
+new file mode 100644
+index 00000000000..0b91ccf6ec5
+--- /dev/null
++++ b/include/soc/spacemit/k3-syscon.h
+@@ -0,0 +1,271 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +
- static const struct ccu_pll_rate_tbl *ccu_pll_lookup_best_rate(struct ccu_pll *pll,
- 							       unsigned long rate)
- {
-@@ -155,3 +159,121 @@ U_BOOT_DRIVER(spacemit_clk_pll) = {
- 	.ops	= &spacemit_clk_pll_ops,
- 	.flags	= DM_FLAG_PRE_RELOC,
- };
++/* SpacemiT clock and reset driver definitions for the K3 SoC */
 +
-+static const struct ccu_pll_rate_tbl *ccu_plla_lookup_matched_entry(struct ccu_pll *pll)
-+{
-+	struct ccu_pll_config *config = &pll->config;
-+	const struct ccu_pll_rate_tbl *entry;
-+	u32 i, swcr1, swcr2, swcr3;
++#ifndef __SOC_K3_SYSCON_H__
++#define __SOC_K3_SYSCON_H__
 +
-+	swcr1 = ccu_read(&pll->common, swcr1);
-+	swcr2 = ccu_read(&pll->common, swcr2);
-+	swcr2 &= PLLA_SWCR2_MASK;
-+	swcr3 = ccu_read(&pll->common, swcr3);
++/* APBS register offset */
++#define APBS_PLL1_SWCR1			0x100
++#define APBS_PLL1_SWCR2			0x104
++#define APBS_PLL1_SWCR3			0x108
++#define APBS_PLL2_SWCR1			0x118
++#define APBS_PLL2_SWCR2			0x11c
++#define APBS_PLL2_SWCR3			0x120
++#define APBS_PLL3_SWCR1			0x124
++#define APBS_PLL3_SWCR2			0x128
++#define APBS_PLL3_SWCR3			0x12c
++#define APBS_PLL4_SWCR1			0x130
++#define APBS_PLL4_SWCR2			0x134
++#define APBS_PLL4_SWCR3			0x138
++#define APBS_PLL5_SWCR1			0x13c
++#define APBS_PLL5_SWCR2			0x140
++#define APBS_PLL5_SWCR3			0x144
++#define APBS_PLL6_SWCR1			0x148
++#define APBS_PLL6_SWCR2			0x14c
++#define APBS_PLL6_SWCR3			0x150
++#define APBS_PLL7_SWCR1			0x158
++#define APBS_PLL7_SWCR2			0x15c
++#define APBS_PLL7_SWCR3			0x160
++#define APBS_PLL8_SWCR1			0x180
++#define APBS_PLL8_SWCR2			0x184
++#define APBS_PLL8_SWCR3			0x188
 +
-+	for (i = 0; i < config->tbl_num; i++) {
-+		entry = &config->rate_tbl[i];
++/* MPMU register offset */
++#define MPMU_FCCR			0x0008
++#define MPMU_POSR			0x0010
++#define POSR_PLL1_LOCK			BIT(24)
++#define POSR_PLL2_LOCK			BIT(25)
++#define POSR_PLL3_LOCK			BIT(26)
++#define POSR_PLL4_LOCK			BIT(27)
++#define POSR_PLL5_LOCK			BIT(28)
++#define POSR_PLL6_LOCK			BIT(29)
++#define POSR_PLL7_LOCK			BIT(30)
++#define POSR_PLL8_LOCK			BIT(31)
++#define MPMU_SUCCR			0x0014
++#define MPMU_ISCCR			0x0044
++#define MPMU_WDTPCR			0x0200
++#define MPMU_RIPCCR			0x0210
++#define MPMU_ACGR			0x1024
++#define MPMU_APBCSCR			0x1050
++#define MPMU_SUCCR_1			0x10b0
 +
-+		if (swcr1 == entry->swcr1 &&
-+		    swcr2 == entry->swcr2 &&
-+		    swcr3 == entry->swcr3)
-+			return entry;
-+	}
++#define MPMU_I2S0_SYSCLK		0x1100
++#define MPMU_I2S2_SYSCLK		0x1104
++#define MPMU_I2S3_SYSCLK		0x1108
++#define MPMU_I2S4_SYSCLK		0x110c
++#define MPMU_I2S5_SYSCLK		0x1110
++#define MPMU_I2S_SYSCLK_CTRL		0x1114
 +
-+	return NULL;
-+}
++/* APBC register offset */
++#define APBC_UART0_CLK_RST		0x00
++#define APBC_UART2_CLK_RST		0x04
++#define APBC_GPIO_CLK_RST		0x08
++#define APBC_PWM0_CLK_RST		0x0c
++#define APBC_PWM1_CLK_RST		0x10
++#define APBC_PWM2_CLK_RST		0x14
++#define APBC_PWM3_CLK_RST		0x18
++#define APBC_TWSI8_CLK_RST		0x20
++#define APBC_UART3_CLK_RST		0x24
++#define APBC_RTC_CLK_RST		0x28
++#define APBC_TWSI0_CLK_RST		0x2c
++#define APBC_TWSI1_CLK_RST		0x30
++#define APBC_TIMERS0_CLK_RST		0x34
++#define APBC_TWSI2_CLK_RST		0x38
++#define APBC_AIB_CLK_RST		0x3c
++#define APBC_TWSI4_CLK_RST		0x40
++#define APBC_TIMERS1_CLK_RST		0x44
++#define APBC_ONEWIRE_CLK_RST		0x48
++#define APBC_TWSI5_CLK_RST		0x4c
++#define APBC_DRO_CLK_RST		0x58
++#define APBC_IR0_CLK_RST		0x5c
++#define APBC_IR1_CLK_RST		0x1c
++#define APBC_TWSI6_CLK_RST		0x60
++#define APBC_COUNTER_CLK_SEL		0x64
++#define APBC_TSEN_CLK_RST		0x6c
++#define APBC_UART4_CLK_RST		0x70
++#define APBC_UART5_CLK_RST		0x74
++#define APBC_UART6_CLK_RST		0x78
++#define APBC_SSP3_CLK_RST		0x7c
++#define APBC_SSPA0_CLK_RST		0x80
++#define APBC_SSPA1_CLK_RST		0x84
++#define APBC_SSPA2_CLK_RST		0x88
++#define APBC_SSPA3_CLK_RST		0x8c
++#define APBC_IPC_AP2AUD_CLK_RST		0x90
++#define APBC_UART7_CLK_RST		0x94
++#define APBC_UART8_CLK_RST		0x98
++#define APBC_UART9_CLK_RST		0x9c
++#define APBC_CAN0_CLK_RST		0xa0
++#define APBC_CAN1_CLK_RST		0xa4
++#define APBC_PWM4_CLK_RST		0xa8
++#define APBC_PWM5_CLK_RST		0xac
++#define APBC_PWM6_CLK_RST		0xb0
++#define APBC_PWM7_CLK_RST		0xb4
++#define APBC_PWM8_CLK_RST		0xb8
++#define APBC_PWM9_CLK_RST		0xbc
++#define APBC_PWM10_CLK_RST		0xc0
++#define APBC_PWM11_CLK_RST		0xc4
++#define APBC_PWM12_CLK_RST		0xc8
++#define APBC_PWM13_CLK_RST		0xcc
++#define APBC_PWM14_CLK_RST		0xd0
++#define APBC_PWM15_CLK_RST		0xd4
++#define APBC_PWM16_CLK_RST		0xd8
++#define APBC_PWM17_CLK_RST		0xdc
++#define APBC_PWM18_CLK_RST		0xe0
++#define APBC_PWM19_CLK_RST		0xe4
++#define APBC_TIMERS2_CLK_RST		0x11c
++#define APBC_TIMERS3_CLK_RST		0x120
++#define APBC_TIMERS4_CLK_RST		0x124
++#define APBC_TIMERS5_CLK_RST		0x128
++#define APBC_TIMERS6_CLK_RST		0x12c
++#define APBC_TIMERS7_CLK_RST		0x130
 +
-+static void ccu_plla_update_param(struct ccu_pll *pll, const struct ccu_pll_rate_tbl *entry)
-+{
-+	struct ccu_common *common = &pll->common;
++#define APBC_CAN2_CLK_RST		0x148
++#define APBC_CAN3_CLK_RST		0x14c
++#define APBC_CAN4_CLK_RST		0x150
++#define APBC_UART10_CLK_RST		0x154
++#define APBC_SSP0_CLK_RST		0x158
++#define APBC_SSP1_CLK_RST		0x15c
++#define APBC_SSPA4_CLK_RST		0x160
++#define APBC_SSPA5_CLK_RST		0x164
 +
-+	regmap_write(common->regmap, common->reg_swcr1, entry->swcr1);
-+	regmap_write(common->regmap, common->reg_swcr3, entry->swcr3);
-+	ccu_update(common, swcr2, PLLA_SWCR2_MASK, entry->swcr2);
-+}
++/* APMU register offset */
++#define APMU_CSI_CCIC2_CLK_RES_CTRL	0x024
++#define APMU_ISP_CLK_RES_CTRL		0x038
++#define APMU_PMU_CLK_GATE_CTRL		0x040
++#define APMU_LCD_CLK_RES_CTRL1		0x044
++#define APMU_LCD_SPI_CLK_RES_CTRL	0x048
++#define APMU_LCD_CLK_RES_CTRL2		0x04c
++#define APMU_CCIC_CLK_RES_CTRL		0x050
++#define APMU_SDH0_CLK_RES_CTRL		0x054
++#define APMU_SDH1_CLK_RES_CTRL		0x058
++#define APMU_USB_CLK_RES_CTRL		0x05c
++#define APMU_QSPI_CLK_RES_CTRL		0x060
++#define APMU_DMA_CLK_RES_CTRL		0x064
++#define APMU_AES_CLK_RES_CTRL		0x068
++#define APMU_MCB_CLK_RES_CTRL		0x06c
++#define APMU_VPU_CLK_RES_CTRL		0x0a4
++#define APMU_DTC_CLK_RES_CTRL		0x0ac
++#define APMU_GPU_CLK_RES_CTRL		0x0cc
++#define APMU_SDH2_CLK_RES_CTRL		0x0e0
++#define APMU_PMUA_MC_CTRL		0x0e8
++#define APMU_PMU_CC2_AP			0x100
++#define APMU_PMUA_EM_CLK_RES_CTRL	0x104
++#define APMU_UCIE_CTRL			0x11c
++#define APMU_RCPU_CLK_RES_CTRL		0x14c
++#define APMU_TOP_DCLK_CTRL		0x158
++#define APMU_LCD_EDP_CTRL		0x23c
++#define APMU_UFS_CLK_RES_CTRL		0x268
++#define APMU_LCD_CLK_RES_CTRL3		0x26c
++#define APMU_LCD_CLK_RES_CTRL4		0x270
++#define APMU_LCD_CLK_RES_CTRL5		0x274
++#define APMU_CCI550_CLK_CTRL		0x300
++#define APMU_ACLK_CLK_CTRL		0x388
++#define APMU_CPU_C0_CLK_CTRL		0x38C
++#define APMU_CPU_C1_CLK_CTRL		0x390
++#define APMU_CPU_C2_CLK_CTRL		0x394
++#define APMU_CPU_C3_CLK_CTRL		0x208
++#define APMU_PCIE_CLK_RES_CTRL_A	0x1f0
++#define APMU_PCIE_CLK_RES_CTRL_B	0x1d0
++#define APMU_PCIE_CLK_RES_CTRL_C	0x1c8
++#define APMU_PCIE_CLK_RES_CTRL_D	0x1e0
++#define APMU_PCIE_CLK_RES_CTRL_E	0x1e8
++#define APMU_EMAC0_CLK_RES_CTRL		0x3e4
++#define APMU_EMAC1_CLK_RES_CTRL		0x3ec
++#define APMU_EMAC2_CLK_RES_CTRL		0x248
++#define APMU_ESPI_CLK_RES_CTRL		0x240
++#define APMU_SNR_ISIM_VCLK_CTRL		0x3f8
 +
-+static int ccu_plla_enable(struct clk *clk)
-+{
-+	struct ccu_pll *pll = clk_to_ccu_pll(clk);
-+	struct ccu_common *common = &pll->common;
-+	unsigned int tmp;
++/* DCIU register offsets */
++#define DCIU_DMASYS_CLK_EN		0x234
++#define DCIU_DMASYS_SDMA_CLK_EN		0x238
++#define DCIU_C2_TCM_PIPE_CLK		0x244
++#define DCIU_C3_TCM_PIPE_CLK		0x248
 +
-+	ccu_update(common, swcr2, PLLA_SWCR2_EN, PLLA_SWCR2_EN);
++#define DCIU_DMASYS_S0_RSTN		0x204
++#define DCIU_DMASYS_S1_RSTN		0x208
++#define DCIU_DMASYS_A0_RSTN		0x20C
++#define DCIU_DMASYS_A1_RSTN		0x210
++#define DCIU_DMASYS_A2_RSTN		0x214
++#define DCIU_DMASYS_A3_RSTN		0x218
++#define DCIU_DMASYS_A4_RSTN		0x21C
++#define DCIU_DMASYS_A5_RSTN		0x220
++#define DCIU_DMASYS_A6_RSTN		0x224
++#define DCIU_DMASYS_A7_RSTN		0x228
++#define DCIU_DMASYS_RSTN		0x22C
++#define DCIU_DMASYS_SDMA_RSTN		0x230
 +
-+	/* check lock status */
-+	return regmap_read_poll_timeout(common->lock_regmap,
-+					pll->config.reg_lock,
-+					tmp,
-+					tmp & pll->config.mask_lock,
-+					PLL_DELAY_US, PLL_TIMEOUT_US);
-+}
++/* RCPU SYSCTRL register offsets */
++#define RCPU_CAN_CLK_RST		0x4c
++#define RCPU_CAN1_CLK_RST		0xF0
++#define RCPU_CAN2_CLK_RST		0xF4
++#define RCPU_CAN3_CLK_RST		0xF8
++#define RCPU_CAN4_CLK_RST		0xFC
++#define RCPU_IRC_CLK_RST		0x48
++#define RCPU_IRC1_CLK_RST		0xEC
++#define RCPU_GMAC_CLK_RST		0xE4
++#define RCPU_ESPI_CLK_RST		0xDC
++#define RCPU_AUDIO_I2S0_SYS_CLK_CTRL	0x70
++#define RCPU_AUDIO_I2S1_SYS_CLK_CTRL	0x44
 +
-+static int ccu_plla_disable(struct clk *clk)
-+{
-+	struct ccu_common *common = clk_to_ccu_common(clk);
++/* RCPU UARTCTRL register offsets */
++#define RCPU1_UART0_CLK_RST		0x00
++#define RCPU1_UART1_CLK_RST		0x04
++#define RCPU1_UART2_CLK_RST		0x08
++#define RCPU1_UART3_CLK_RST		0x0c
++#define RCPU1_UART4_CLK_RST		0x10
++#define RCPU1_UART5_CLK_RST		0x14
 +
-+	ccu_update(common, swcr2, PLLA_SWCR2_EN, 0);
++/* RCPU I2SCTRL register offsets */
++#define RCPU2_AUDIO_I2S0_TX_RX_CLK_CTRL	0x60
++#define RCPU2_AUDIO_I2S1_TX_RX_CLK_CTRL	0x64
++#define RCPU2_AUDIO_I2S2_TX_RX_CLK_CTRL	0x68
++#define RCPU2_AUDIO_I2S3_TX_RX_CLK_CTRL	0x6C
 +
-+	return 0;
-+}
++#define RCPU2_AUDIO_I2S2_SYS_CLK_CTRL	0x44
++#define RCPU2_AUDIO_I2S3_SYS_CLK_CTRL	0x54
 +
-+/*
-+ * PLLAs must be gated before changing rate, which is ensured by
-+ * flag CLK_SET_RATE_GATE.
-+ */
-+static unsigned long ccu_plla_set_rate(struct clk *clk, unsigned long rate)
-+{
-+	struct ccu_pll *pll = clk_to_ccu_pll(clk);
-+	const struct ccu_pll_rate_tbl *entry;
++/* RCPU SPICTRL register offsets */
++#define RCPU3_SSP0_CLK_RST		0x00
++#define RCPU3_SSP1_CLK_RST		0x04
++#define RCPU3_PWR_SSP_CLK_RST		0x08
 +
-+	entry = ccu_pll_lookup_best_rate(pll, rate);
-+	ccu_plla_update_param(pll, entry);
++/* RCPU I2CCTRL register offsets */
++#define RCPU4_I2C0_CLK_RST		0x00
++#define RCPU4_I2C1_CLK_RST		0x04
++#define RCPU4_PWR_I2C_CLK_RST		0x08
 +
-+	return 0;
-+}
++/* RPMU register offsets */
++#define RCPU5_AON_PER_CLK_RST_CTRL	0x2C
++#define RCPU5_TIMER1_CLK_RST		0x4C
++#define RCPU5_TIMER2_CLK_RST		0x70
++#define RCPU5_TIMER3_CLK_RST		0x78
++#define RCPU5_TIMER4_CLK_RST		0x7C
++#define RCPU5_GPIO_AND_EDGE_CLK_RST	0x74
++#define RCPU5_RCPU_BUS_CLK_CTRL		0xC0
++#define RCPU5_RT24_CORE0_CLK_CTRL	0xC4
++#define RCPU5_RT24_CORE1_CLK_CTRL	0xC8
++#define RCPU5_RT24_CORE0_SW_RESET	0xCC
++#define RCPU5_RT24_CORE1_SW_RESET	0xD0
 +
-+static unsigned long ccu_plla_recalc_rate(struct clk *clk)
-+{
-+	struct ccu_pll *pll = clk_to_ccu_pll(clk);
-+	const struct ccu_pll_rate_tbl *entry;
++/* RCPU PWMCTRL register offsets */
++#define RCPU6_PWM0_CLK_RST		0x00
++#define RCPU6_PWM1_CLK_RST		0x04
++#define RCPU6_PWM2_CLK_RST		0x08
++#define RCPU6_PWM3_CLK_RST		0x0c
++#define RCPU6_PWM4_CLK_RST		0x10
++#define RCPU6_PWM5_CLK_RST		0x14
++#define RCPU6_PWM6_CLK_RST		0x18
++#define RCPU6_PWM7_CLK_RST		0x1c
++#define RCPU6_PWM8_CLK_RST		0x20
++#define RCPU6_PWM9_CLK_RST		0x24
 +
-+	entry = ccu_plla_lookup_matched_entry(pll);
++/* APBC2 SEC register offsets */
++#define APBC2_UART1_CLK_RST		0x00
++#define APBC2_SSP2_CLK_RST		0x04
++#define APBC2_TWSI3_CLK_RST		0x08
++#define APBC2_RTC_CLK_RST		0x0c
++#define APBC2_TIMERS_CLK_RST		0x10
++#define APBC2_GPIO_CLK_RST		0x1c
 +
-+	WARN_ON_ONCE(!entry);
-+
-+	return entry ? entry->rate : 0;
-+}
-+
-+static const struct clk_ops spacemit_clk_plla_ops = {
-+	.enable = ccu_plla_enable,
-+	.disable = ccu_plla_disable,
-+	.set_rate = ccu_plla_set_rate,
-+	.get_rate = ccu_plla_recalc_rate,
-+};
-+
-+int spacemit_plla_init(struct ccu_common *common)
-+{
-+	struct clk *clk = &common->clk;
-+	struct ccu_pll *pll = clk_to_ccu_pll(clk);
-+	int ret;
-+
-+	ret = clk_register(clk, UBOOT_DM_SPACEMIT_CLK_PLLA,
-+			   common->name, common->parents[0]);
-+	if (ret)
-+		return ret;
-+
-+	if (ccu_plla_lookup_matched_entry(pll))
-+		return 0;
-+
-+	ccu_plla_disable(clk);
-+	ccu_plla_update_param(pll, &pll->config.rate_tbl[0]);
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(spacemit_clk_plla) = {
-+	.name	= UBOOT_DM_SPACEMIT_CLK_PLLA,
-+	.id	= UCLASS_CLK,
-+	.ops	= &spacemit_clk_plla_ops,
-+	.flags	= DM_FLAG_PRE_RELOC,
-+};
-diff --git a/drivers/clk/spacemit/clk_pll.h b/drivers/clk/spacemit/clk_pll.h
-index 3987cc1141b..0de027dc7a6 100644
---- a/drivers/clk/spacemit/clk_pll.h
-+++ b/drivers/clk/spacemit/clk_pll.h
-@@ -20,14 +20,28 @@
-  * configuration.
-  *
-  * @rate:	PLL rate
-- * @swcr1:	Register value of PLLX_SW1_CTRL (PLLx_SWCR1).
-- * @swcr3:	Register value of the PLLx_SW3_CTRL's lowest 31 bits of
-- *		PLLx_SW3_CTRL (PLLx_SWCR3). This highest bit is for enabling
-- *		the PLL and not contained in this field.
-+ * @swcr1:	Value of register PLLx_SW1_CTRL.
-+ * @swcr2:	Value of register PLLAx_SW2_CTRL (PLLA only).
-+ * @swcr3:	Value of register PLLx_SW3_CTRL.
-+ *
-+ * Regular PLL type
-+ *  | Enable | swcr3 | PLLx_SW3_CTRL - BIT[31]    |
-+ *  -----------------------------------------------
-+ *  | Config | swcr1 | PLLx_SW1_CTRL - BIT[31:0]  |
-+ *  |        | swcr2 | Not used                   |
-+ *  |        | swcr3 | PLLx_SW3_CTRL - BIT[30:0]  |
-+ *
-+ * Special PLL type A
-+ *  | Enable | swcr2 | PLLAx_SW2_CTRL - BIT[16]   |
-+ *  -----------------------------------------------
-+ *  | Config | swcr1 | PLLAx_SW1_CTRL - BIT[31:0] |
-+ *  |        | swcr2 | PLLAx_SW2_CTRL - BIT[15:8] |
-+ *  |        | swcr3 | PLLAx_SW3_CTRL - BIT[31:0] |
-  */
- struct ccu_pll_rate_tbl {
- 	unsigned long rate;
- 	u32 swcr1;
-+	u32 swcr2;
- 	u32 swcr3;
- };
- 
-@@ -38,6 +52,14 @@ struct ccu_pll_rate_tbl {
- 		.swcr3	= _swcr3,		\
- 	}
- 
-+#define CCU_PLLA_RATE(_rate, _swcr1, _swcr2, _swcr3)	\
-+	{						\
-+		.rate	= _rate,			\
-+		.swcr1	= _swcr1,			\
-+		.swcr2	= _swcr2,			\
-+		.swcr3	= _swcr3,			\
-+	}
-+
- struct ccu_pll_config {
- 	const struct ccu_pll_rate_tbl *rate_tbl;
- 	u32 tbl_num;
-@@ -69,6 +91,18 @@ static struct ccu_pll _var = {							\
- 	}									\
- }
- 
-+#define CCU_PLLA_DEFINE(_id, _var, _name, _parent, _table, _reg_swcr1,		\
-+			_reg_swcr2, _reg_swcr3, _reg_lock, _mask_lock, _flags)	\
-+static struct ccu_pll _var = {							\
-+	.config	= CCU_PLL_CONFIG(_table, _reg_lock, _mask_lock),		\
-+	.common = {								\
-+		.reg_swcr1	= _reg_swcr1,					\
-+		.reg_swcr2	= _reg_swcr2,					\
-+		.reg_swcr3	= _reg_swcr3,					\
-+		CCU_COMMON(_id, _name, _parent, spacemit_plla_init, _flags)	\
-+	}									\
-+}
-+
- static inline struct ccu_pll *clk_to_ccu_pll(struct clk *clk)
- {
- 	struct ccu_common *common = clk_to_ccu_common(clk);
-@@ -77,5 +111,6 @@ static inline struct ccu_pll *clk_to_ccu_pll(struct clk *clk)
- }
- 
- int spacemit_pll_init(struct ccu_common *common);
-+int spacemit_plla_init(struct ccu_common *common);
- 
- #endif /* _CLK_PLL_H_ */
++#endif /* __SOC_K3_SYSCON_H__ */
 
 -- 
 2.55.0
