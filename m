@@ -1,59 +1,59 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E26F9C61DBC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 16:00:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B8DC61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 16:00:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A542380D05;
-	Tue, 25 Aug 2026 16:00:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B946640600;
+	Tue, 25 Aug 2026 16:00:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3ZDTRoQySMZN; Tue, 25 Aug 2026 16:00:02 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id q-J8PM9D6NDV; Tue, 25 Aug 2026 16:00:08 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787673602;
-	bh=GtCvdo3xA3hBil7KX1Ev6luMuzuLgTRQbFUjp82A4mA=;
+	d=lists.u-boot-project.org; s=default; t=1787673608;
+	bh=A2iAHntfd4/4qn+TOmpcKS9mPN/8DRlXeEFREks/HyE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mDOY/Q3BkIrqSZbeGH8PV6cRndQ+N1ZRS4nxCePIPouM+ZWC7FHIKXclYcztX3fMP
-	 p3q/qcFrqckxo/kAwaBgcgrB57rjIdDQJYZcbYnO6+Z07R7bsUozk/SL6KS29vzW2y
-	 mh4626hEcDcRGWjNuumcyHOMje6o3aahChKc9oW8PgSYdl9eELFu8HXDBr/rxcVXWx
-	 jjfxMnW1fkYaoMM0qo6UWgf3q9UXEaemJPb0YI9wc6WhRRsTcjzD5lOdoAo9QevDIr
-	 DTEr37EGFZXKVtpTxmDhDnG5o/aGfFxtVSgzy66k3vJNJdqOH3l72yxnDHjWjGw/hs
-	 3isZSvcV5vKHg==
+	b=BR6s/A9CC2xSLtLwJVhkuua8E3pJatIcjfdvrZ8WrBvfnE7+Oo9c2+jqT4ZR6bpwk
+	 Uqtmu+F5ONoOYnGM25vWKpQUhYUJfJAtcETSMUFj74yYrrOMSh0Lwp7xRZIGWMrXjD
+	 kBb+09dBdZNCVvf6CFYi2WZ0gyEOPRiIe8rncM7GPrgw60lIuTdoIz69MVXurBdgLA
+	 koQ9fohognTXaRuBfeEJjoN7WQsIPkYCH4tlLU/cLOn/DMGvTrdRJSnPKxXMZycYkX
+	 vRtmElP1LiMrOE/uy9XRdWBJfdgv7Yp7imYZpZmdDzBRMlfN4tvQhLeAr59LB3Sgv7
+	 HzgKIxBFkAXVA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3B33580CD4;
-	Tue, 25 Aug 2026 16:00:02 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A86EC1465
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:00:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5EDFC405EB;
+	Tue, 25 Aug 2026 16:00:08 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 56B373DA
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:00:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8F1A940146
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:00:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3D0F4606AE
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:00:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NExkAozuMU27 for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 15:59:59 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id doppub-IZCtX for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 16:00:06 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E7D9540092
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 15:59:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id EB844605EE
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:00:05 +0000 (UTC)
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wytZ6-000000003wC-34ux; Tue, 25 Aug 2026 15:59:56 +0000
-Date: Tue, 25 Aug 2026 16:59:54 +0100
+ id 1wytZD-000000003wk-2NSB; Tue, 25 Aug 2026 16:00:03 +0000
+Date: Tue, 25 Aug 2026 17:00:00 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -64,8 +64,8 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 10/11] test: boot: add imagemap unit tests
-Message-ID: <fea21cdbf185af8f83553bd78b45d51abd6ef9dd.1787673209.git.daniel@makrotopia.org>
+Subject: [PATCH v2 11/11] doc: imagemap: document on-demand loading framework
+Message-ID: <19440d50b243f835660c87e8cd478a5562f9e689.1787673209.git.daniel@makrotopia.org>
 References: <cover.1787673209.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -84,723 +84,149 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a test suite exercising imagemap:
- - the translation-table core (map, lookup, map_to, cleanup, region
-   growth, the block-aligned read path, and edge cases) using a mock
-   RAM-backed reader, so most tests need no real storage;
-
- - a NOR read through mtd_blk: write a known pattern into a
-   device-tree partition of the sandbox SPI-NOR and read it back
-   through imagemap, exercising imagemap -> spl_load_region ->
-   blk_dread -> mtd_blk_read -> mtd_read for real;
-
- - a UBI-volume read through ubiblock: attach UBI on the sandbox NAND,
-   create a volume, write a pattern and read it back through imagemap
-   on the ubi_blk device.
-
-Registered under ut_boot_imagemap in cmd_ut.c.
+Describe the imagemap framework architecture: the translation table
+that tracks mapped regions and its phase-determined caching, reading
+from a block-device partition (including MTD via mtdblock and UBI via
+ubiblock), the integration with bootm for on-demand FIT sub-image
+loading, and the SPL build.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- MAINTAINERS          |   1 +
- test/boot/Makefile   |   2 +
- test/boot/imagemap.c | 645 +++++++++++++++++++++++++++++++++++++++++++
- test/cmd_ut.c        |   2 +
- 4 files changed, 650 insertions(+)
- create mode 100644 test/boot/imagemap.c
+ MAINTAINERS              |   1 +
+ doc/develop/imagemap.rst | 100 +++++++++++++++++++++++++++++++++++++++
+ doc/develop/index.rst    |   1 +
+ 3 files changed, 102 insertions(+)
+ create mode 100644 doc/develop/imagemap.rst
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 48ee01e033d..e8f0e94597f 100644
+index e8f0e94597f..f874443d87c 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1192,6 +1192,7 @@ L:	openwrt-devel@lists.openwrt.org
+@@ -1191,6 +1191,7 @@ M:	Daniel Golle <daniel@makrotopia.org>
+ L:	openwrt-devel@lists.openwrt.org
  S:	Maintained
  F:	boot/imagemap.c
++F:	doc/develop/imagemap.rst
  F:	include/imagemap.h
-+F:	test/boot/imagemap.c
+ F:	test/boot/imagemap.c
  
- INTERCONNECT
- M:	Neil Armstrong <neil.armstrong@linaro.org>
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 59a87028704..8dbecabde79 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -27,3 +27,5 @@ endif
- obj-$(CONFIG_BOOTMETH_VBE) += vbe_fixup.o
- 
- obj-$(CONFIG_UPL) += upl.o
-+
-+obj-$(CONFIG_IMAGEMAP) += imagemap.o
-diff --git a/test/boot/imagemap.c b/test/boot/imagemap.c
+diff --git a/doc/develop/imagemap.rst b/doc/develop/imagemap.rst
 new file mode 100644
-index 00000000000..da038a33243
+index 00000000000..f1fea1bba78
 --- /dev/null
-+++ b/test/boot/imagemap.c
-@@ -0,0 +1,645 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for imagemap framework (UCLASS_IMAGEMAP)
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
-+
-+#include <dm.h>
-+#include <blk.h>
-+#include <imagemap.h>
-+#include <mtd.h>
-+#include <part.h>
-+#include <ubi_uboot.h>
-+#include <linux/err.h>
-+#include <linux/mtd/mtd.h>
-+#include <lmb.h>
-+#include <mapmem.h>
-+#include <malloc.h>
-+#include <asm/cache.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <dm/root.h>
-+#include <dm/uclass-internal.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+#define IMAGEMAP_TEST(_name, _flags) \
-+	UNIT_TEST(_name, _flags, imagemap)
-+
-+/* Synthetic image size used throughout the tests */
-+#define IMAGE_SIZE	4096
-+
-+/**
-+ * struct mock_priv - private data for the mock storage backend
-+ *
-+ * @image:	pointer to synthetic image data in RAM
-+ * @image_size:	size of the synthetic image
-+ * @read_count:	number of times .read() was called
-+ * @last_off:	offset from the most recent .read() call
-+ * @last_size:	size from the most recent .read() call
-+ */
-+struct mock_priv {
-+	const void *image;
-+	size_t image_size;
-+	int read_count;
-+	loff_t last_off;
-+	ulong last_size;
-+};
-+
-+static ulong mock_reader(struct spl_load_info *info, ulong sector,
-+			 ulong count, void *buf)
-+{
-+	struct mock_priv *p = info->priv;
-+
-+	if (sector + count > p->image_size)
-+		return 0;
-+
-+	memcpy(buf, (const char *)p->image + sector, count);
-+	p->read_count++;
-+	p->last_off = sector;
-+	p->last_size = count;
-+
-+	return count;
-+}
-+
-+U_BOOT_DRIVER(imagemap_mock) = {
-+	.name		= "imagemap_mock",
-+	.id		= UCLASS_IMAGEMAP,
-+	.priv_auto	= sizeof(struct mock_priv),
-+};
-+
-+/**
-+ * create_mock_loader() - create a mock imagemap device for testing
-+ *
-+ * @image:	synthetic image buffer
-+ * @image_size:	size of @image
-+ * @devp:	on success, the new imagemap device
-+ * Return: 0 on success, negative errno on failure
-+ */
-+static int create_mock_loader_bl(const void *image, size_t image_size,
-+				 uint bl_len, struct udevice **devp)
-+{
-+	struct udevice *dev;
-+	struct imagemap_priv *im;
-+	struct mock_priv *priv;
-+	int ret;
-+
-+	ret = device_bind_driver(dm_root(), "imagemap_mock",
-+				 "imagemap-test", &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = device_probe(dev);
-+	if (ret) {
-+		device_unbind(dev);
-+		return ret;
-+	}
-+
-+	priv = dev_get_priv(dev);
-+	priv->image = image;
-+	priv->image_size = image_size;
-+	priv->read_count = 0;
-+
-+	/* Point the imagemap's shared load-to-mem reader at the mock image */
-+	im = dev_get_uclass_priv(dev);
-+	spl_load_init(&im->info, mock_reader, priv, bl_len);
-+
-+	*devp = dev;
-+
-+	return 0;
-+}
-+
-+static int create_mock_loader(const void *image, size_t image_size,
-+			      struct udevice **devp)
-+{
-+	return create_mock_loader_bl(image, image_size, 1, devp);
-+}
-+
-+/**
-+ * get_mock_priv() - get mock private data from an imagemap device
-+ */
-+static struct mock_priv *get_mock_priv(struct udevice *dev)
-+{
-+	return dev_get_priv(dev);
-+}
-+
-+/* Test: map() allocates, reads and records a region */
-+static int imagemap_test_map_basic(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct imagemap_priv *priv;
-+	struct mock_priv *mock;
-+	u8 image[IMAGE_SIZE];
-+	void *p;
-+
-+	/* Fill image with a recognisable pattern */
-+	for (int i = 0; i < IMAGE_SIZE; i++)
-+		image[i] = (u8)(i & 0xff);
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+	mock = get_mock_priv(dev);
-+	priv = dev_get_uclass_priv(dev);
-+
-+	/* Map a 64-byte region at offset 0 */
-+	p = imagemap_map(dev, 0, 64);
-+	ut_assert(!IS_ERR(p));
-+	ut_asserteq_mem(image, p, 64);
-+	ut_asserteq(1, mock->read_count);
-+	ut_asserteq(1, priv->regions.count);
-+	ut_asserteq(0, (int)alist_get(&priv->regions, 0, struct imagemap_region)->img_offset);
-+	ut_asserteq(64, (int)alist_get(&priv->regions, 0, struct imagemap_region)->size);
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_map_basic, 0);
-+
-+/* Test: map() returns cached pointer for already-mapped range */
-+static int imagemap_test_map_cached(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct mock_priv *mock;
-+	u8 image[IMAGE_SIZE];
-+	void *p1, *p2;
-+
-+	memset(image, 0xaa, IMAGE_SIZE);
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+	mock = get_mock_priv(dev);
-+
-+	p1 = imagemap_map(dev, 0, 128);
-+	ut_assert(!IS_ERR(p1));
-+	ut_asserteq(1, mock->read_count);
-+
-+	/* Same range - should return same pointer, no new read */
-+	p2 = imagemap_map(dev, 0, 128);
-+	ut_asserteq_ptr(p1, p2);
-+	ut_asserteq(1, mock->read_count);
-+
-+	/* Subset of the already-mapped range - still cached */
-+	p2 = imagemap_map(dev, 0, 64);
-+	ut_asserteq_ptr(p1, p2);
-+	ut_asserteq(1, mock->read_count);
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_map_cached, 0);
-+
-+/* Test: map() returns correct offset within a larger region */
-+static int imagemap_test_map_offset(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct mock_priv *mock;
-+	u8 image[IMAGE_SIZE];
-+	void *p1, *p2;
-+
-+	for (int i = 0; i < IMAGE_SIZE; i++)
-+		image[i] = (u8)(i & 0xff);
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+	mock = get_mock_priv(dev);
-+
-+	/* Map a 256-byte region starting at offset 0 */
-+	p1 = imagemap_map(dev, 0, 256);
-+	ut_assert(!IS_ERR(p1));
-+
-+	/* Request a sub-range within the previously mapped region */
-+	p2 = imagemap_map(dev, 64, 64);
-+	ut_assert(!IS_ERR(p2));
-+	/* p2 should point 64 bytes into p1 */
-+	ut_asserteq_ptr((char *)p1 + 64, p2);
-+	ut_asserteq_mem(image + 64, p2, 64);
-+	/* Only one read should have occurred */
-+	ut_asserteq(1, mock->read_count);
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_map_offset, 0);
-+
-+/* Test: map() re-reads when extending a region to a larger size */
-+static int imagemap_test_map_extend(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct imagemap_priv *priv;
-+	struct mock_priv *mock;
-+	u8 image[IMAGE_SIZE];
-+	void *p1, *p2;
-+
-+	for (int i = 0; i < IMAGE_SIZE; i++)
-+		image[i] = (u8)(i & 0xff);
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+	mock = get_mock_priv(dev);
-+	priv = dev_get_uclass_priv(dev);
-+
-+	/* Initial small mapping */
-+	p1 = imagemap_map(dev, 0, 64);
-+	ut_assert(!IS_ERR(p1));
-+	ut_asserteq(1, mock->read_count);
-+
-+	/* Request larger range at same base - should re-read (extend) */
-+	p2 = imagemap_map(dev, 0, 256);
-+	ut_assert(!IS_ERR(p2));
-+	ut_asserteq(2, mock->read_count);
-+	ut_asserteq_mem(image, p2, 256);
-+
-+	/* Region count should still be 1 (updated, not added) */
-+	ut_asserteq(1, priv->regions.count);
-+	ut_asserteq(256, (int)alist_get(&priv->regions, 0, struct imagemap_region)->size);
-+
-+	/*
-+	 * Map a new region after the extend - it must not overlap the
-+	 * extended first region. This is the exact pattern that bit us
-+	 * on real hardware: FIT header at offset 0 extended from 64 to
-+	 * 4096, then kernel payload at offset 4096 was allocated at
-+	 * an address that overlapped the header, clobbering it.
-+	 * With LMB allocation this cannot happen because each allocation
-+	 * reserves distinct memory.
-+	 */
-+	{
-+		void *p3 = imagemap_map(dev, 256, 128);
-+		ulong p2_end = map_to_sysmem(p2) + 256;
-+
-+		ut_assert(!IS_ERR(p3));
-+		ut_asserteq(2, priv->regions.count);
-+		/* New region must not overlap the extended first region */
-+		ut_assert(map_to_sysmem(p3) >= p2_end ||
-+			  map_to_sysmem(p3) + 128 <= map_to_sysmem(p2));
-+		ut_asserteq_mem(image + 256, p3, 128);
-+	}
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_map_extend, 0);
-+
-+/* Test: map_to() reads to a specified address and records it */
-+static int imagemap_test_map_to(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct imagemap_priv *priv;
-+	struct mock_priv *mock;
-+	u8 image[IMAGE_SIZE];
-+	u8 dst[256];
-+	void *p;
-+
-+	for (int i = 0; i < IMAGE_SIZE; i++)
-+		image[i] = (u8)(i & 0xff);
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+	mock = get_mock_priv(dev);
-+	priv = dev_get_uclass_priv(dev);
-+
-+	p = imagemap_map_to(dev, 128, 256, dst);
-+	ut_assert(!IS_ERR(p));
-+	ut_asserteq_ptr(dst, p);
-+	ut_asserteq_mem(image + 128, dst, 256);
-+	ut_asserteq(1, mock->read_count);
-+	ut_asserteq(1, priv->regions.count);
-+	ut_asserteq(128, (int)alist_get(&priv->regions, 0, struct imagemap_region)->img_offset);
-+	ut_asserteq(256, (int)alist_get(&priv->regions, 0, struct imagemap_region)->size);
-+	ut_asserteq_ptr(dst, alist_get(&priv->regions, 0, struct imagemap_region)->ram);
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_map_to, 0);
-+
-+/* Test: lookup() returns NULL for unmapped ranges */
-+static int imagemap_test_lookup_miss(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 image[IMAGE_SIZE];
-+	void *p;
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+
-+	/* Nothing mapped yet - should return NULL */
-+	p = imagemap_lookup(dev, 0, 64);
-+	ut_assertnull(p);
-+
-+	/* Map a region at offset 0 */
-+	ut_assert(!IS_ERR(imagemap_map(dev, 0, 64)));
-+
-+	/* Lookup within the mapped region - should succeed */
-+	p = imagemap_lookup(dev, 0, 32);
-+	ut_assertnonnull(p);
-+
-+	/* Lookup at a different offset - should miss */
-+	p = imagemap_lookup(dev, 128, 32);
-+	ut_assertnull(p);
-+
-+	/* Lookup extending beyond the mapped region - should miss */
-+	p = imagemap_lookup(dev, 0, 128);
-+	ut_assertnull(p);
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_lookup_miss, 0);
-+
-+/* Test: LMB reservations are made for map() allocations */
-+static int imagemap_test_lmb_reserve(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 image[IMAGE_SIZE];
-+	void *p1, *p2;
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+
-+	/* Map 100 bytes - should be LMB reserved */
-+	p1 = imagemap_map(dev, 0, 100);
-+	ut_assert(!IS_ERR(p1));
-+	ut_assert(lmb_is_reserved_flags(map_to_sysmem(p1), LMB_NONE));
-+
-+	/* Map another 200 bytes at a different offset */
-+	p2 = imagemap_map(dev, 200, 200);
-+	ut_assert(!IS_ERR(p2));
-+	ut_assert(lmb_is_reserved_flags(map_to_sysmem(p2), LMB_NONE));
-+
-+	/* Regions must not overlap */
-+	ut_assert(map_to_sysmem(p2) >= map_to_sysmem(p1) + 100 ||
-+		  map_to_sysmem(p1) >= map_to_sysmem(p2) + 200);
-+
-+	/* Cleanup frees the LMB reservations */
-+	imagemap_cleanup(dev);
-+	ut_assert(!lmb_is_reserved_flags(map_to_sysmem(p1), LMB_NONE));
-+	ut_assert(!lmb_is_reserved_flags(map_to_sysmem(p2), LMB_NONE));
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_lmb_reserve, 0);
-+
-+/* Test: cleanup() removes the device */
-+static int imagemap_test_cleanup(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 image[IMAGE_SIZE];
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+
-+	/* Map something so regions are not empty */
-+	ut_assert(!IS_ERR(imagemap_map(dev, 0, 64)));
-+
-+	/* Cleanup should remove and unbind the device */
-+	imagemap_cleanup(dev);
-+
-+	/* NULL cleanup should be safe */
-+	imagemap_cleanup(NULL);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_cleanup, 0);
-+
-+/* Test: map() with multiple disjoint regions */
-+static int imagemap_test_multi_region(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct imagemap_priv *priv;
-+	struct mock_priv *mock;
-+	u8 image[IMAGE_SIZE];
-+	void *p1, *p2, *p3;
-+
-+	for (int i = 0; i < IMAGE_SIZE; i++)
-+		image[i] = (u8)(i & 0xff);
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+	mock = get_mock_priv(dev);
-+	priv = dev_get_uclass_priv(dev);
-+
-+	p1 = imagemap_map(dev, 0, 64);
-+	ut_assert(!IS_ERR(p1));
-+	p2 = imagemap_map(dev, 512, 128);
-+	ut_assert(!IS_ERR(p2));
-+	p3 = imagemap_map(dev, 1024, 256);
-+	ut_assert(!IS_ERR(p3));
-+
-+	ut_asserteq(3, priv->regions.count);
-+	ut_asserteq(3, mock->read_count);
-+
-+	/* Verify data in each region */
-+	ut_asserteq_mem(image, p1, 64);
-+	ut_asserteq_mem(image + 512, p2, 128);
-+	ut_asserteq_mem(image + 1024, p3, 256);
-+
-+	/* Lookup each region */
-+	ut_asserteq_ptr(p1, imagemap_lookup(dev, 0, 64));
-+	ut_asserteq_ptr(p2, imagemap_lookup(dev, 512, 128));
-+	ut_asserteq_ptr(p3, imagemap_lookup(dev, 1024, 256));
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_multi_region, 0);
-+
-+/* Test: read beyond image size returns error */
-+static int imagemap_test_read_oob(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 image[IMAGE_SIZE];
-+	void *p;
-+
-+	ut_assertok(create_mock_loader(image, IMAGE_SIZE, &dev));
-+
-+	/* Attempt to map beyond the end of the image */
-+	p = imagemap_map(dev, IMAGE_SIZE - 32, 64);
-+	ut_assert(IS_ERR(p));
-+
-+	/* map_to should also fail */
-+	u8 dst[64];
-+
-+	p = imagemap_map_to(dev, IMAGE_SIZE - 32, 64, dst);
-+	ut_assert(IS_ERR(p));
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_read_oob, 0);
-+
-+/*
-+ * Test: block-addressed backend (bl_len > 1) still returns/places the
-+ * wanted bytes byte-exact for unaligned offsets and multi-block ranges.
-+ */
-+static int imagemap_test_blocklen(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 image[IMAGE_SIZE];
-+	u8 dst[1024];
-+	void *p;
-+
-+	for (int i = 0; i < IMAGE_SIZE; i++)
-+		image[i] = (u8)(i & 0xff);
-+
-+	ut_assertok(create_mock_loader_bl(image, IMAGE_SIZE, 512, &dev));
-+
-+	/* map() at an unaligned offset returns byte-exact data */
-+	p = imagemap_map(dev, 100, 200);
-+	ut_assert(!IS_ERR(p));
-+	ut_asserteq_mem(image + 100, p, 200);
-+
-+	/* map_to() places the payload byte-exact at dst (partial head only) */
-+	p = imagemap_map_to(dev, 100, 200, dst);
-+	ut_assert(!IS_ERR(p));
-+	ut_asserteq_ptr(dst, p);
-+	ut_asserteq_mem(image + 100, dst, 200);
-+
-+	/* map_to() spanning partial head + aligned middle + partial tail */
-+	p = imagemap_map_to(dev, 500, 600, dst);
-+	ut_assert(!IS_ERR(p));
-+	ut_asserteq_ptr(dst, p);
-+	ut_asserteq_mem(image + 500, dst, 600);
-+
-+	imagemap_cleanup(dev);
-+
-+	return 0;
-+}
-+
-+IMAGEMAP_TEST(imagemap_test_blocklen, 0);
-+
-+#if CONFIG_IS_ENABLED(MTD_BLOCK)
-+/*
-+ * End-to-end: read a known pattern back from a bare (non-NAND) MTD
-+ * partition through imagemap on the mtd_blk block device. Exercises the
-+ * real path imagemap -> spl_load_region -> blk_dread -> mtd_blk_read ->
-+ * mtd_read on the sandbox SPI-NOR (no mock).
-+ */
-+static int imagemap_test_mtd_blk(struct unit_test_state *uts)
-+{
-+	const ulong blks = 4, len = blks * 512;
-+	struct udevice *blk = NULL, *dev, *imdev;
-+	struct blk_desc *desc = NULL;
-+	struct disk_partition info;
-+	void *mapped;
-+	u8 *wbuf;
-+	int i;
-+
-+	/*
-+	 * Probe the SPI-NOR (add_mtd_device() then binds its mtd_blk) and
-+	 * parse its device-tree partitions.
-+	 */
-+	mtd_probe_devices();
-+
-+	/* Find the bound mtd_blk (a PART_TYPE_MTD block device) */
-+	for (uclass_find_first_device(UCLASS_BLK, &dev); dev;
-+	     uclass_find_next_device(&dev)) {
-+		desc = dev_get_uclass_plat(dev);
-+		if (desc->part_type == PART_TYPE_MTD) {
-+			blk = dev;
-+			break;
-+		}
-+	}
-+	ut_assertnonnull(blk);
-+	ut_assertok(device_probe(blk));
-+	desc = dev_get_uclass_plat(blk);
-+
-+	/* Write a known pattern into the "nor-fit" partition */
-+	ut_assert(part_get_info_by_name(desc, "nor-fit", &info) >= 1);
-+	wbuf = malloc(len);
-+	ut_assertnonnull(wbuf);
-+	for (i = 0; i < len; i++)
-+		wbuf[i] = (u8)(i * 5 + 1);
-+	ut_asserteq(blks, blk_dwrite(desc, info.start, blks, wbuf));
-+
-+	/* Read it back through imagemap on the mtd_blk device */
-+	ut_assertok(imagemap_create(blk, "nor-fit", 0, &imdev));
-+	mapped = imagemap_map(imdev, 0, len);
-+	ut_assert(!IS_ERR(mapped));
-+	ut_asserteq_mem(wbuf, mapped, len);
-+
-+	imagemap_cleanup(imdev);
-+	free(wbuf);
-+
-+	return 0;
-+}
-+IMAGEMAP_TEST(imagemap_test_mtd_blk, 0);
-+#endif /* MTD_BLOCK */
-+
-+#if CONFIG_IS_ENABLED(MTD_UBI) && CONFIG_IS_ENABLED(UBI_BLOCK)
-+/*
-+ * End-to-end: attach UBI on the sandbox NAND, create a volume, write a
-+ * known pattern and read it back through imagemap on the ubi_blk block
-+ * device. Exercises imagemap -> spl_load_region -> blk_dread ->
-+ * ubi_bread -> ubi_volume_read for real (no mock).
-+ */
-+static int imagemap_test_ubiblock(struct unit_test_state *uts)
-+{
-+	const ulong len = 4096;
-+	struct udevice *blk = NULL, *dev, *imdev;
-+	struct erase_info ei;
-+	struct mtd_info *mtd;
-+	void *mapped;
-+	u8 *wbuf;
-+	u64 off;
-+	int i;
-+
-+	mtd_probe_devices();
-+	mtd = get_mtd_device_nm("nand2");
-+	ut_assert(!IS_ERR_OR_NULL(mtd));
-+
-+	/* Erase so UBI can format the (empty) clean chip */
-+	for (off = 0; off < mtd->size; off += mtd->erasesize) {
-+		if (mtd_block_isbad(mtd, off))
-+			continue;
-+		memset(&ei, 0, sizeof(ei));
-+		ei.mtd = mtd;
-+		ei.addr = off;
-+		ei.len = mtd->erasesize;
-+		ut_assertok(mtd_erase(mtd, &ei));
-+	}
-+	put_mtd_device(mtd);
-+
-+	/* Attach UBI by name; this binds the ubi_blk block device */
-+	ut_assertok(ubi_part("nand2", NULL));
-+	ut_assertok(ubi_create_vol("vol0", 0x10000, true, UBI_VOL_NUM_AUTO,
-+				   false));
-+
-+	wbuf = malloc(len);
-+	ut_assertnonnull(wbuf);
-+	for (i = 0; i < len; i++)
-+		wbuf[i] = (u8)(i * 7 + 3);
-+	ut_assertok(ubi_volume_write("vol0", wbuf, 0, len));
-+
-+	/* Find the ubi_blk block device */
-+	for (uclass_find_first_device(UCLASS_BLK, &dev); dev;
-+	     uclass_find_next_device(&dev)) {
-+		if (dev->driver == DM_DRIVER_GET(ubi_blk)) {
-+			blk = dev;
-+			break;
-+		}
-+	}
-+	ut_assertnonnull(blk);
-+	ut_assertok(device_probe(blk));
-+
-+	/* Read the volume back through imagemap and compare */
-+	ut_assertok(imagemap_create(blk, "vol0", 0, &imdev));
-+	mapped = imagemap_map(imdev, 0, len);
-+	ut_assert(!IS_ERR(mapped));
-+	ut_asserteq_mem(wbuf, mapped, len);
-+
-+	imagemap_cleanup(imdev);
-+	free(wbuf);
-+
-+	return 0;
-+}
-+IMAGEMAP_TEST(imagemap_test_ubiblock, 0);
-+#endif /* MTD_UBI && UBI_BLOCK */
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 4328670d0d6..17610cdc2af 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -73,6 +73,7 @@ SUITE_DECL(optee);
- SUITE_DECL(pci_mps);
- SUITE_DECL(seama);
- SUITE_DECL(setexpr);
-+SUITE_DECL(imagemap);
- SUITE_DECL(upl);
++++ b/doc/develop/imagemap.rst
+@@ -0,0 +1,100 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++On-Demand Image Loading from Storage (imagemap)
++================================================
++
++This document describes the ``imagemap`` framework that enables
++loading FIT images directly from storage devices without first
++copying the entire image into RAM.
++
++Architecture Overview
++---------------------
++
++The framework is built around the ``UCLASS_IMAGEMAP`` device class
++(``include/imagemap.h``), which provides:
++
++``imagemap_create(dev, name, part)``
++   Create an imagemap device over a partition of block device *dev*,
++   selected by *name* or by index *part*.
++
++``imagemap_map(dev, offset, size)``
++   Return a pointer to a buffer holding the requested region.
++   Consecutive calls that fall within the same region reuse the
++   existing mapping, so sub-image header look-ups are essentially
++   free.
++
++``imagemap_map_to(dev, offset, size, dst_addr)``
++   Like ``imagemap_map()`` but place the data at a specific physical
++   address (``dst_addr``).  This is used by ``fit_image_load()`` to
++   stream sub-images directly into their final load addresses.
++
++Translation Table
++~~~~~~~~~~~~~~~~~
++
++Every ``imagemap`` device maintains an internal translation
++table that records which byte ranges of the storage image have been
++read into memory and where they reside.  When ``imagemap_map()`` is
++called:
++
++1. The table is checked for an existing mapping that covers the
++   requested range.
++2. If found, the existing buffer pointer (adjusted for the offset
++   within the region) is returned immediately.
++3. If not found, a buffer is allocated via the LMB allocator, the
++   data is read from storage, and a new entry is added to the table.
++
++Reuse of already-loaded regions (steps 1 and 2) is what lets a header
++probe, signature verification and the final load of the same range share
++a single read; the FIT flow relies on it to hand already-read data back
++through ``fit_image_get_data()``.  The table also serves as the registry
++of LMB allocations that ``imagemap_cleanup()`` frees.
++
++``imagemap_cleanup()`` frees all allocated buffers and resets
++the table.
++
++Storage Access
++--------------
++
++``imagemap_create()`` reads from a partition on a block device (MMC,
++SCSI, NVMe, ...), selected by name or by index.  Reads go through the
++same ``struct spl_load_info`` load-to-mem abstraction that SPL uses, so
++a byte range is fetched with native sector alignment via
++``spl_load_region()``.
++
++MTD partitions and UBI volumes are read the same way, by way of the
++existing block layers that expose them:
++
++- with ``CONFIG_MTD_BLOCK`` a non-NAND MTD (parallel NOR, SPI-NOR, ...)
++  is automatically given a ``mtd_blk`` block device, and each of its
++  partitions appears as a partition on it;
++- with ``CONFIG_UBI_BLOCK`` a UBI volume appears as a partition on the
++  ``ubi_blk`` block device (the block descriptor's ``hwpart`` selects
++  the volume).
++
++NAND bad-block handling and wear-levelling therefore stay with UBI, as
++they do for the rest of U-Boot; on NOR a partition is read linearly and
++end-to-end integrity is provided by the FIT hash or signature, so no
++MTD-specific read path is needed in imagemap.
++
++Boot Integration
++----------------
++
++The ``imagemap`` framework integrates with the boot pipeline through
++``bootm_run_states()`` in ``boot/bootm.c``:
++
++1. The imagemap device pointer is stored in ``struct bootm_info``
++   and propagated to the global ``images`` structure.
++
++2. ``boot_get_kernel()`` uses ``imagemap_map()`` to read the image
++   header and FIT metadata without loading the full image into RAM.
++
++3. ``fit_image_load()`` uses the on-demand storage path via
++   ``images->imagemap`` to stream individual sub-images directly to
++   their final load addresses.
++
++4. Before jumping to the OS, ``imagemap_cleanup()`` releases all
++   allocated resources.
++
++The ``bootmeth_openwrt`` boot method is the primary consumer of this
++framework, using it to boot OpenWrt-style FIT firmware images stored
++directly on raw storage.
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 0b757e8601e..3b4cc2e28a7 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -31,6 +31,7 @@ Implementation
  
- static struct suite suites[] = {
-@@ -102,6 +103,7 @@ static struct suite suites[] = {
- 	SUITE(pci_mps, "PCI Express Maximum Payload Size"),
- 	SUITE(seama, "seama command parameters loading and decoding"),
- 	SUITE(setexpr, "setexpr command"),
-+	SUITE(imagemap, "imagemap on-demand storage loading"),
- 	SUITE(upl, "Universal payload support"),
- };
- 
+    directories
+    bloblist
++   imagemap
+    bootstd/index
+    ci_testing
+    commands
 -- 
 2.55.0
