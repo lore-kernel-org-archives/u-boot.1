@@ -1,78 +1,79 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B44CFC61DC2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBFDBC61DC6
 	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 19:04:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 70A504065D;
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8B22760757;
 	Tue, 25 Aug 2026 19:04:31 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 51_W9Da7_rxT; Tue, 25 Aug 2026 19:04:29 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787684669;
-	bh=AmXGctW3Kca8bIrrPZc7tme0Ov9phSsn0+OpX0tQK90=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=VUAVseGhNW8CxccoE7OaPkBlqzx0c4aD/ZF+UhaUIdBrnEKKuZt8ElN0ma5KZFzFx
-	 ovDmRhBkgnSsbrEatftlBj2dpt3oIiwnPrBpBRQog0yJhyxGjOp8NT6jEyeR7hhdPA
-	 MNUfAC3nh2sMKVAf8l1mRK2AGgzRUbM+peev5AAs+bgo5Wz2ni1O474yxo3hzlySm/
-	 Hz4jF+sr+k4iHkLxJKVJggd1y50c/yELNwaDCUOY4k2JjR1JTWvttGeOwHhiCtME7c
-	 iUePAoZXNtAMJfqI/4andIXMWqu2CnwCPfT0muVAt2PV+4mqsuifwZmdZxwi+3qd6c
-	 ZJ76s12BQ1+LA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6A67F40612;
-	Tue, 25 Aug 2026 19:04:29 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 71F26334
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:04:24 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 61C3C60766
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:04:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sFNlkR6COIiP for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 19:04:23 +0000 (UTC)
+ id M7cdltPFUvQL; Tue, 25 Aug 2026 19:04:30 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787684670;
+	bh=pYfHn+Kp6SH1sBVcd1ZfKS+PXR+ilega43i5oy7OPDM=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=zeUvYJPi88GAXpOowXQN8TPTMiKDp2+o1C6uK06ebZ/7KmEbMCGRjzX225RvY7OaH
+	 KLkfvLVrnnvcxszUPGPU7ro7uHSDnlNsEg72q+XUMDZ0aybYgU1d9uznP6VOglhbKB
+	 fnkUjsRnPdKJ3znCfXGA2eqHoVQ3CUCOR9qsKTZ1dTjH+M9rZf1jv5R1p94+Sn3DBk
+	 Gz4aKdowBVP9Dj6Q07CF8y9tCBf4zgBX7BLRvidYHV8buRAkuRgjq7i0htRLldN4y8
+	 dQvHrKJQk1ncNZJUOkvB+KLnNXfmc4XnJwGrgEq0o/LaPJiYkPyR0YGYdTBsKEZXMn
+	 Ccl9qMkJobiwQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7BC1760780;
+	Tue, 25 Aug 2026 19:04:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 024393C3
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:04:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id E7D2C405E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:04:26 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iAKnk5zgJNzY for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 19:04:26 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
  helo=sea.source.kernel.org; envelope-from=linusw@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=KH3+70P3
+ header.a=rsa-sha256 header.s=k20260515 header.b=lhDm6V53
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6DC0660759
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:04:22 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E11E940591
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 19:04:25 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id F03DF407C8;
- Tue, 25 Aug 2026 19:04:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A70551F000E9;
- Tue, 25 Aug 2026 19:04:20 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8B05A40603;
+ Tue, 25 Aug 2026 19:04:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 282CF1F00A3D;
+ Tue, 25 Aug 2026 19:04:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1787684661;
- bh=AmXGctW3Kca8bIrrPZc7tme0Ov9phSsn0+OpX0tQK90=;
+ s=k20260515; t=1787684665;
+ bh=pYfHn+Kp6SH1sBVcd1ZfKS+PXR+ilega43i5oy7OPDM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=KH3+70P38mN4F7hTfM40wPi6GFen2YLIpvhOCAScJfGGRh5ZfKbrIS0O0GA1qHfL7
- s7yCJUBHJcbfNZy/HcGguWXSZZjO+MKEvpCPG9M3JfJT14MTu8qsnSNipFdVwGeNsK
- Q7869wbEFAswokzduM5Xh+p6XEtZrcw/PV8avB2XtLDTcne3hRCTR4DbCM3JxGal1K
- VdHtYKtrw55UZKCPclvCpHu6cGAHk2tCA7aCUUpAq0A5bC+5Ft0Aa3JwsOk/cNYSPw
- K/eYN9d0hoYhuEf3zqOev5PlUIeZntoB7g1/Af91jXSNvNfnoKcym8grupgnw9Brmq
- 41d8CXDQNgHVw==
+ b=lhDm6V53eNzXA4IYmReP5cZiDFO8m2RmfKHsyUj3M7m6aU+YOXzrJuT8hr+mXHpFC
+ 3TC8F8vqnD1A/s78JjICPOcgFV+7yoQYpIJWHiRO253wtShX17GTjjI2FlvE6TGc77
+ IFPFHRwVpyoVrkhA8UC6Il0ADV3sGTzbPEcAMQPVtT/1kIhevsj5WKx1Vwv3wR4f+x
+ O6ofYvrcjX/j/tDDI0CZWyuMiuoHyPRtAg3INivFA7Xq8rWPkbq8G6UFbsy5xqH4Du
+ +N2lze6gJabYXGy6hLC655OQgWMHdW6OmoS2niMQ6iPbqOKNlttPqSmcWFnWsd9dMa
+ PRG+pmKxVaZ7w==
 From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 25 Aug 2026 21:04:09 +0200
-Subject: [PATCH v6 09/13] configs: stemmy: Boot EFI from external SD card
+Date: Tue, 25 Aug 2026 21:04:11 +0200
+Subject: [PATCH v6 11/13] ARM: dts: ux500: Make panel regulators have
+ unique names
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-ux500-external-sdcard-v6-9-61446b6c289e@kernel.org>
+Message-Id: <20260825-ux500-external-sdcard-v6-11-61446b6c289e@kernel.org>
 References: <20260825-ux500-external-sdcard-v6-0-61446b6c289e@kernel.org>
 In-Reply-To: <20260825-ux500-external-sdcard-v6-0-61446b6c289e@kernel.org>
 To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -93,44 +94,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Replace the fastboot-only command with standard bootflow scanning and
-enable the EFI loader so the removable SD card can provide the default
-ARM EFI executable. Filesystem probing is handled by the standard boot
-framework and does not require the FAT command.
-Skip global boot methods so EFI variables cannot redirect the scan to
-the internal eMMC.
+U-Boot is not happy about regulators with the same name though
+Linux can deal with it. Make the names unique, it's more elegant.
 
-Disable mkeficapsule because generating capsule tools is unrelated to
-running EFI payloads and adds a host GnuTLS build dependency.
-
-Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+Link: https://lore.kernel.org/u-boot/20260817-ux500-external-sdcard-v2-8-ca9a110bd9c6@kernel.org/
 Signed-off-by: Linus Walleij <linusw@kernel.org>
----
- configs/stemmy_defconfig | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/configs/stemmy_defconfig b/configs/stemmy_defconfig
-index 631ccababf1c..b1a14ab38210 100644
---- a/configs/stemmy_defconfig
-+++ b/configs/stemmy_defconfig
-@@ -14,10 +14,10 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
- CONFIG_DEFAULT_DEVICE_TREE="ste-ux500-samsung-stemmy"
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
--# CONFIG_EFI_LOADER is not set
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run fastbootcmd"
-+CONFIG_BOOTCOMMAND="bootflow scan -lbG"
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-@@ -43,3 +43,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x685d
- CONFIG_VIDEO=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_VIDEO_MCDE_SIMPLE=y
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
+[ upstream commit: ..... ]
+
+(cherry picked from commit .....)
+---
+ dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts b/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts
+index f736888474e7..d4f364ec8685 100644
+--- a/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts
++++ b/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts
+@@ -510,7 +510,7 @@
+ 	panel_reg_1v8: regulator-panel-1v8 {
+ 		compatible = "regulator-fixed";
+ 
+-		regulator-name = "panel-fixed-supply";
++		regulator-name = "panel-fixed-supply-1v8";
+ 		regulator-min-microvolt = <1800000>;
+ 		regulator-max-microvolt = <1800000>;
+ 		/* GPIO219 */
+@@ -527,7 +527,7 @@
+ 	panel_reg_3v0: regulator-panel-3v0 {
+ 		compatible = "regulator-fixed";
+ 
+-		regulator-name = "panel-fixed-supply";
++		regulator-name = "panel-fixed-supply-3v0";
+ 		regulator-min-microvolt = <3000000>;
+ 		regulator-max-microvolt = <3000000>;
+ 		/* GPIO219 */
 
 -- 
 2.55.0
