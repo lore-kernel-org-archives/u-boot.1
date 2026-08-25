@@ -1,207 +1,262 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 527EEC61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 16:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EFCC61DBC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 16:03:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 14E966070A;
-	Tue, 25 Aug 2026 16:03:40 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H5lN6ksvvdrR; Tue, 25 Aug 2026 16:03:39 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787673819;
-	bh=M0iDncQNXsfnBMlwP36HRTNcxHB7ijq8ZtgtcGgFKNU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nC826lSa/YYlnSREQvdhrVvBnINia9Le0DgP+1YXhRgEudpEB3u2At5PdIBUKkdMC
-	 srFS1ir+v+yF7BE3JKIn5k5ifuLcNu54naFuaVr1BOGDfodK2Rv2tssc8hvefy99rx
-	 N3hjJmrroHa00Z9m16hbk2V6bp/O0CeIRQEwtldoSl2iCVakE0YArrvjjNL7RBf0Nq
-	 aHvg/RIb6dSB3SN1tKGfpzgSKgVdDhs1a3yWUSG5Ml/leRyaSPo5rAS4b0A+CaXOPv
-	 2Z9aUFXx2ZWD6LhN4o+5xZizyMrng3stlU2N8LCAtD9XcRBGWmXGwfN6ZCI9C92wVr
-	 KXAN/X05TsNfg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EA18960712;
-	Tue, 25 Aug 2026 16:03:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 421FE2FD
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:41:11 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2AF9D80BE0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:41:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3D45F80AFA;
+	Tue, 25 Aug 2026 16:03:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NXyks9M5PHpv for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 13:41:10 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2f; helo=mail-oa1-x2f.google.com;
- envelope-from=clamor95@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=mNrKuDgT
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1982880BDF
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:41:09 +0000 (UTC)
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-44cb057311bso4498623fac.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:41:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787665268; cv=none;
- d=google.com; s=arc-20260327;
- b=EC+Juf01NjCrkYk1prLh8Jr+YQpWKq2s9a97E3zBr8C2YpjpaxATbYk8b3HAZC6iLi
- BNFj47K3VKQuhanbQ04acJoTW/jAju0se0+Cypxopac1ZfUwkbrrn/wwNDJ20z61uWXU
- qbh2vKslIA8uMpJf4SBW6RnBdkYvZx5BTzP5lbjeeTUlY1xM8hTU+Gq/9JeU3cuPCkJP
- S/F0k62yE9+3wgybBM8uhKRR/byVmSQyQDm6Ge0iUBz9wesNZAhqpRrTPlYjWIok3Tn2
- owdffbsK9qnDhcwZiPr2b3gd4gfL85W3RYgz8SvMSgvLc/ISWm8rDaGKwar771z+VfE7
- WSgw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=M0iDncQNXsfnBMlwP36HRTNcxHB7ijq8ZtgtcGgFKNU=;
- fh=oQHssyx3ARNn83sUBNHUUEABvHBUveThvj5df995ZR8=;
- b=UiS7d5z13AL4/L784lh9H2tzaBsP5kOy49zhDHrHUqXcsZUPJMA7X0HXfnqaRWSAht
- 7BeAViUA0MnDOgJP25IxkKIlVWyPohrs58ftn+xH0fTZzUU1ExHwqx0kmagsYnDuYmAy
- HVpA5jpBzTLIo5Oq+3YUNu3CsiM1RE7ic1jM3QBC5ESJpKYG7USJGKDTbxoapmjXKRxy
- uBHpnQJOdthMdEmEqkXZ4wr3UKq4dxD007lyejDPFvgJhgZF//L31GZbWNM6r/t9RK7t
- 4i/oPgCI8/Ji4MGGD01Bo6RoT8N5ec/DpYm8EFOEcOKQ5jo4KYbY3SYcN0aTYWQ9FAt3
- 0cow==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id IiGOs1DQ737P; Tue, 25 Aug 2026 16:03:40 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787665268; x=1788270068;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=M0iDncQNXsfnBMlwP36HRTNcxHB7ijq8ZtgtcGgFKNU=;
- b=mNrKuDgTaoHvdNNmwvxuJsKlrgs1QivAuI/UEDiApChQt/1OAbDgfqSi3CHLWhYm2R
- oWAjRbcgjJWOft1by5t9nu6cti5VXqz96txyLnuN+GVtdtJ/GoKKsFlGvhh3p7SfnuJO
- 8nDMPAgiyLlLNcYki2z6gYUa3r1eT0kMVAkfTssbiwI+ts8KpD882hTQxY5TbSZvyRS5
- RWaV3MKK0fHPj0w+AlM1JiYXvnOcDf1vUeX0greMObkdLOeLvNxNvmcF0/4zll6l2NNk
- LmFmPjVJ6ThTjclTMcIlMVpxKX1+ZeNaO+t7EI/ih7kFHF6ojK7EIiTnVVc7HakCedzV
- gaNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787665268; x=1788270068;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=M0iDncQNXsfnBMlwP36HRTNcxHB7ijq8ZtgtcGgFKNU=;
- b=BXrpcYkKPREXKSm6UPhhb6BZYJZs1VMQjB8DbuSjIAZDMcfGO+/2KvgseLF+t/c03P
- 9ztIzynlMXxXabPdKJm6z4XKo5zYJOnRsGsQ/A6oTtu+HR+N3QNRpcgsrxA5gQLupf7o
- avFSgq1dCMxgXGaQnCbApoXFss93hyOh5yFjti1wB9YiYOBwxfkqucnZAn0XtskMtlZo
- b0p+Rq/L5WRab88dmMPTWj52ZP7bUwYH8eQMMCo25Y/+fHPWzM50lf57YLBoQbecKFzr
- yuRzW2kp2e2/72wrksOvUuATZS3UXtFsylyQV9GzkoQJmk0YCJhNaOBWtmPxX3zDKwds
- bg4g==
-X-Gm-Message-State: AFuF++mLmwuu33rZw0Da5V6eh813rXL6BewugJnUtMuZTyCChU6MX0Bg
- UO21oqGaCuCi7f+V19sNmUcaGE9N1wNItdy4wC1KvboN8Qh5Hat5/6yHY82eLebEF7/NCasOACG
- wnI+AeHLr5rbHbvJmF5Lf8oz0iuH6/C0=
-X-Gm-Gg: AR+sD135UWAwemlAtKZuFYYzbxjHNC1zP1JIjR5S4mXZuNu8MldJ/aQPV6Y5nlHeTMs
- waaNI6Dt61/9qaRO8K5mLnGpb6YgujjBF204iTdjMWrZJ//n8+f4r/n+rZLmDyMlwaO1TSHEIKU
- 2uA78NFPKqxvuNLspA7ONpOovmuh3iWyN8HoZ8OCCiYywRXQBkWdScfArEYBopqzqu8o6wIK2tS
- +5tv8zqUdWqkygZZabjRXT9KMcd2BmOlIrjTVCwmZOC4SC7usyseQ2I53/hd61Jh3r48f3OfILN
- Giy1A846ICR/ZMfC0k+YiMhUTOx2ume0XXci7LNbSpEZvx6stLE3hu2yvJ6EeFqSuVt/LHrZY5A
- pEA==
-X-Received: by 2002:a05:6820:1891:b0:6b1:63d8:261d with SMTP id
- 006d021491bc7-6b163d8278cmr29050456eaf.17.1787665268359; Tue, 25 Aug 2026
- 06:41:08 -0700 (PDT)
-MIME-Version: 1.0
+	d=lists.u-boot-project.org; s=default; t=1787673820;
+	bh=4TkEX2sEfvhr4FK28s4hXdV7ME/N+cvtFVnXhvqr9uE=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=h5myUuqdPTZyArMmCqn12nMc1jYID8TJ/au30fmlV2szmwTP37GnnETRcwJ/0NsJ7
+	 BgxQrLGlxsjzjdUY/lpr4/elssw+oOh0pdcH0QObJDUNJ/j1EViLWN48uV5ccfJpwS
+	 ciMBQO+9OnEClZ6jZNKzhPA6X1856s0iSnJXL713QXX2AmEPfmXXwP0QKTgE9qRuLB
+	 FNGkcaQXyFUOZrCiwVcMb7pMCYn0simoBBrJB+p6b44vFiqHdXmk2vRFAltMdu1NRM
+	 T3CZi2RFGXNaVZFd/sBUnGUn3q0bv2a++qWaTGXMnVdO1EmAmEL74ihCP8j6jrbl3k
+	 xUvf+PsPDIVKw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2E02680B0F;
+	Tue, 25 Aug 2026 16:03:40 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1A641230
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:48:47 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0C3A480CA7
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:48:47 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nlM28y6g-d9i for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 13:48:45 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
+ helo=mx0a-0002e601.pphosted.com; envelope-from=bb@ti.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=B3dg27M/; 
+ dkim=pass (1024-bit key,
+ unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=selector1 header.b=r2W0s4li
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6AAE080CB1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:48:44 +0000 (UTC)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+ by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 67PAvYWM765973;
+ Tue, 25 Aug 2026 08:48:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=proofpoint-05-2026; bh=4TkEX2sEfvhr4FK
+ 28s4hXdV7ME/N+cvtFVnXhvqr9uE=; b=B3dg27M/mSM73NYsG2wdIUYrsoAjV3+
+ u45RAdcC9RuxxMKirN07xjYrUc3loLZiZBK1eo8oJNd3r41gHYBQy1fgCxjFYPNC
+ xEYWoOQfYtrhW7w7E56TEDe2q8sfXWbk23Eau9i3CKPVAwmTFwoOPGLszvS2/4Gh
+ 8leJ8zqttzfigPc+JxG5mnwywg30Wy50eLzxozu5TE1IcYjXBZnex4DaGpkElEUY
+ Ua4q3PBlMrkBJz0cRM44PGo//kxhP/FxouJBDY/YdiTn3z/Q6WKuD9ohSTQKMZdq
+ 7u+w++kmyXYgQ1Z7VAFYkkr9WjqvrLQMv9vNGC6TfLbMShaZvqg0mnQ==
+Received: from ch5pr02cu005.outbound.protection.outlook.com
+ (mail-northcentralusazon11012023.outbound.protection.outlook.com
+ [40.107.200.23])
+ by m0384305.ppops.net (PPS) with ESMTPS id 4g91sxkbtw-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 25 Aug 2026 08:48:27 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uj9LEuT+2HWVaTyD5Bk/9tcbXl9ASAAJ8YZ8uFOcdZskYpfr5eb5TU5eqDgMkhlg6OhJICVPE3kEztSRnsZ5+mB0birLFn2eBkJDOWLWNo1EpiOpm7fd2AFhy+l8miCk/NajLzASuIwmE7VaK/rHnAbxtn9F3Pcov9J0vw29SvD2/fRFvOLPeDy3myLgPIxl+8oikLtRQ+0dB3SoCkLhlvfRVjtrLEi3+QjeXtSmzoAF3uPjUhEYtPstjBfICOROMgk5CVmF/cR42UFYUxrXN3/E24uXh2BMBQ6H37W7Cic6C5+o22+lObkRcGFPNgfFNiGdIzuPsQ35uqs0fW/W/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4TkEX2sEfvhr4FK28s4hXdV7ME/N+cvtFVnXhvqr9uE=;
+ b=l3og4tN/s3idEgk37sOO6hVMuu2vq1dlQRBUgBq0jTkN1i2oPb4HdGGQkFJ/w56BFcruiOd8Y3DysCIBccSO/Ac62AbKcAZWsx1RYmE4xRT9kD45x6FBkde3uckmx4sfHNkF+t5RR4lQToxyBmLbph/Svxa2K4C7bgSffeK8CE/AyjxWh+Xz3cbCjKF2qlWBOUsDKyVVnHMYStqEUsIokVv725cBuVdbbyqlZuBSdjQH4h/JVwau9sKz6YiENCvyDPNRGMmWTzc2pv9AAQouIgFdFvl7mPfm2WpSzjV1XG97DWbpDgm6GkwZN+1i5z4CxlRBj3jVMAW92RsaB00C8w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=groups.io smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4TkEX2sEfvhr4FK28s4hXdV7ME/N+cvtFVnXhvqr9uE=;
+ b=r2W0s4liPpBXMnewYLuo8Q+s7fNRnqDACsgUbB74wHGecm05iI68bzivO1RSbM7bczoWBWrW6U4BYMw9MblNcGg578DhTPWo2sXGDq/FHA4ki8JFqBeJBB8HiFIp6vilQ6klgppougwZ6XD6bOleZkigFErkUYD60goZQKgNMOQ=
+Received: from SJ0PR03CA0008.namprd03.prod.outlook.com (2603:10b6:a03:33a::13)
+ by DS0PR10MB7127.namprd10.prod.outlook.com (2603:10b6:8:df::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.7; Tue, 25 Aug
+ 2026 13:48:17 +0000
+Received: from SJ1PEPF00002317.namprd03.prod.outlook.com
+ (2603:10b6:a03:33a:cafe::35) by SJ0PR03CA0008.outlook.office365.com
+ (2603:10b6:a03:33a::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.7 via Frontend Transport; Tue, 25
+ Aug 2026 13:48:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF00002317.mail.protection.outlook.com (10.167.242.171) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.360.3 via Frontend Transport; Tue, 25 Aug 2026 13:48:17 +0000
+Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 25 Aug
+ 2026 08:48:14 -0500
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 25 Aug
+ 2026 08:48:12 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
+ Transport; Tue, 25 Aug 2026 08:48:12 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67PDmCcH2111203;
+ Tue, 25 Aug 2026 08:48:12 -0500
+Date: Tue, 25 Aug 2026 08:48:12 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Michal Simek <michal.simek@amd.com>
+CC: <u-boot@lists.u-boot-project.org>, <git@amd.com>, Tom Rini
+ <trini@konsulko.com>, Aaron Williams <awilliams@marvell.com>, Adam Ford
+ <aford173@gmail.com>, Alban Bedel <alban.bedel@avionic-design.de>, "Alif
+ Zakuan Yuslaimi" <alif.zakuan.yuslaimi@altera.com>, Allen Martin
+ <amartin@nvidia.com>, Andre Przywara <andre.przywara@arm.com>, Ashish Kumar
+ <Ashish.Kumar@nxp.com>, Casey Connolly <casey.connolly@linaro.org>, "Chee
+ Hong Ang" <chee.hong.ang@intel.com>, Chee Tien Fong
+ <tien.fong.chee@intel.com>, Chin-Liang See <chin.liang.see@intel.com>,
+ Chris Packham <chris.packham@alliedtelesis.co.nz>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, "Cogent Embedded, Inc."
+ <source@cogentembedded.com>, David Lechner <dlechner@baylibre.com>, "Dinh
+ Nguyen" <dinh.nguyen@intel.com>, Dominik Haller <d.haller@phytec.de>,
+ "Dzmitry Sankouski" <dsankouski@gmail.com>, Eric =?utf-8?Q?B=C3=A9nard?=
+ <eric@eukrea.com>, Eugen Hristev <ehristev@kernel.org>, Fabio Estevam
+ <festevam@gmail.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Garrett Giordano
+ <ggiordano@phytec.com>, Gilles Talis <gilles.talis@gmail.com>, Green Wan
+ <green.wan@sifive.com>, Hans de Goede <hdegoede@redhat.com>, Heiko Schocher
+ <hs@nabladev.com>, Holger Brunck <holger.brunck@hitachienergy.com>, Ian Ray
+ <ian.ray@gehealthcare.com>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>,
+ "Jan Kiszka" <jan.kiszka@siemens.com>,
+ Johan Jonker <jbx6244@gmail.com>, "Jonas Karlman" <jonas@kwiboo.se>,
+ Jonas =?utf-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Le Jin <le.jin@siemens.com>, "Ley
+ Foon Tan" <ley.foon.tan@intel.com>, Lim Siew Chin
+ <elly.siew.chin.lim@intel.com>, Marek =?utf-8?B?QmVow7pu?=
+ <kabel@kernel.org>, Marek Vasut <marek.vasut+socfpga@mailbox.org>, Martyn
+ Welch <martyn.welch@collabora.com>, Masakazu Mochizuki
+ <masakazu.mochizuki.wd@hitachi.com>, Mathew McBride <matt@traverse.com.au>,
+ Matthias Winker <matthias.winker@de.bosch.com>, "Matwey V. Kornilov"
+ <matwey.kornilov@gmail.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+ Mingkai Hu <mingkai.hu@nxp.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Oliver Graute <oliver.graute@kococonnector.com>,
+ Parthiban Nallathambi <parthiban@linumiz.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>, Peter Geis
+ <pgwipeout@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "maintainer:TK1-SOM BOARD" <Peter.Chubb@data61.csiro.au>,
+ Philip Oberfichtner <pro@denx.de>, "Pramod Kumar" <pramod.kumar_1@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Quentin Schulz <u-boot@0leil.net>, Randolph <randolph@andestech.com>,
+ "Ryder Lee" <ryder.lee@mediatek.com>, Sam Day <me@samcday.com>,
+ Sam Shih <sam.shih@mediatek.com>, Shengzhou Liu
+ <Shengzhou.Liu@nxp.com>, Simon Glass <sjg@chromium.org>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>,
+ Simon Guinot <simon.guinot@sequanux.org>,
+ Sinan Akman <sinan@writeme.com>, Stefan Bosch <stefan_b@posteo.net>, Stefan
+ Roese <sr@denx.de>, Stefano Babic <sbabic@nabladev.com>, Stelian Pop
+ <stelian@popies.net>, Stephan Gerhold <stephan@gerhold.net>, Sumit Garg
+ <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Teresa Remmet <t.remmet@phytec.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tim Harvey
+ <tharvey@gateworks.com>, Tom Warren <twarren@nvidia.com>, Tony Dinh
+ <mibodhi@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov
+ <w.egorov@phytec.de>, Wasim Khan <wasim.khan@nxp.com>, Weijie Gao
+ <weijie.gao@mediatek.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>, "open list:P212"
+ <u-boot-amlogic@groups.io>, "open list:ARM SNAPDRAGON"
+ <u-boot-qcom@groups.io>, "open list:phyCORE-AM62ax"
+ <upstream@lists.phytec.de>, =?utf-8?B?w4FsdmFybyBGZXJuw6FuZGV6?= Rojas
+ <noltari@gmail.com>
+Subject: Re: [PATCH 3/3] MAINTAINERS: Remove references to not existing files
+Message-ID: <20260825134812.nlq25ymj5gsnmdvb@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
 References: <cover.1787555916.git.michal.simek@amd.com>
  <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 In-Reply-To: <fbb28ac69d042b60ab6b27f1cbe52a2d872b4ada.1787555916.git.michal.simek@amd.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 25 Aug 2026 16:40:56 +0300
-X-Gm-Features: AcwNN1UdfeduB0orbaE0RBZahpO5HjMzpaNM-zPZDPVYe4CiSL7Bfv5OQnbb6Xo
-Message-ID: <CAPVz0n1Bxi-zp0X9Jh3D02B2LtQnBV0OHLXWw0fyG4eO+hVegg@mail.gmail.com>
-Subject: Re: [PATCH 3/3] MAINTAINERS: Remove references to not existing files
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.u-boot-project.org, git@amd.com, 
- Tom Rini <trini@konsulko.com>, Aaron Williams <awilliams@marvell.com>, 
- Adam Ford <aford173@gmail.com>, Alban Bedel <alban.bedel@avionic-design.de>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Allen Martin <amartin@nvidia.com>, 
- Andre Przywara <andre.przywara@arm.com>, Ashish Kumar <Ashish.Kumar@nxp.com>, 
- Bryan Brattlof <bb@ti.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Chee Hong Ang <chee.hong.ang@intel.com>,
- Chee Tien Fong <tien.fong.chee@intel.com>, 
- Chin-Liang See <chin.liang.see@intel.com>, 
- Chris Packham <chris.packham@alliedtelesis.co.nz>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- "Cogent Embedded, Inc." <source@cogentembedded.com>,
- David Lechner <dlechner@baylibre.com>, 
- Dinh Nguyen <dinh.nguyen@intel.com>, Dominik Haller <d.haller@phytec.de>, 
- Dzmitry Sankouski <dsankouski@gmail.com>,
- =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>, 
- Eugen Hristev <ehristev@kernel.org>, Fabio Estevam <festevam@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Garrett Giordano <ggiordano@phytec.com>, Gilles Talis <gilles.talis@gmail.com>,
- Green Wan <green.wan@sifive.com>, Hans de Goede <hdegoede@redhat.com>, 
- Heiko Schocher <hs@nabladev.com>,
- Holger Brunck <holger.brunck@hitachienergy.com>, 
- Ian Ray <ian.ray@gehealthcare.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Johan Jonker <jbx6244@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Julien Stephan <jstephan@baylibre.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Le Jin <le.jin@siemens.com>, 
- Ley Foon Tan <ley.foon.tan@intel.com>,
- Lim Siew Chin <elly.siew.chin.lim@intel.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+socfpga@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>, 
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- Mathew McBride <matt@traverse.com.au>, 
- Matthias Winker <matthias.winker@de.bosch.com>, 
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>, 
- Mingkai Hu <mingkai.hu@nxp.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Oliver Graute <oliver.graute@kococonnector.com>, 
- Parthiban Nallathambi <parthiban@linumiz.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Peng Fan <peng.fan@nxp.com>, Peter Geis <pgwipeout@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- "maintainer:TK1-SOM BOARD" <Peter.Chubb@data61.csiro.au>,
- Philip Oberfichtner <pro@denx.de>, 
- Pramod Kumar <pramod.kumar_1@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>, 
- Quentin Schulz <u-boot@0leil.net>, Randolph <randolph@andestech.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Sam Day <me@samcday.com>, 
- Sam Shih <sam.shih@mediatek.com>, Shengzhou Liu <Shengzhou.Liu@nxp.com>, 
- Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Simon Guinot <simon.guinot@sequanux.org>, Sinan Akman <sinan@writeme.com>, 
- Stefan Bosch <stefan_b@posteo.net>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@nabladev.com>, 
- Stelian Pop <stelian@popies.net>, Stephan Gerhold <stephan@gerhold.net>, 
- Sumit Garg <sumit.garg@kernel.org>, Teresa Remmet <t.remmet@phytec.de>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Warren <twarren@nvidia.com>, Tony Dinh <mibodhi@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
- Wasim Khan <wasim.khan@nxp.com>, Weijie Gao <weijie.gao@mediatek.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
- Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>,
- "open list:P212" <u-boot-amlogic@groups.io>, 
- "open list:ARM SNAPDRAGON" <u-boot-qcom@groups.io>, 
- "open list:phyCORE-AM62ax" <upstream@lists.phytec.de>,
- =?UTF-8?B?w4FsdmFybyBGZXJuw6FuZGV6IFJvamFz?= <noltari@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002317:EE_|DS0PR10MB7127:EE_
+X-MS-Office365-Filtering-Correlation-Id: b7b24f38-4094-49d1-2bac-08df02af8473
+X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|1800799024|82310400026|7416014|36860700016|376014|56012099006|10067099003|18002099003|22082099003|4143699003;
+X-Microsoft-Antispam-Message-Info: eieV5PR9GyMYkrgwdRSFoLpkk6KZgx2Ko+UGspVn2DwkDCBhmLtLxFgQUbndHmg/8dLNY8jE0yRF/iKTv0HWV2wNAUA3kCcJxW6QAxd9Giau1Lt/Dbkobbv3n3iRwLenEUIBG2jV9EIE9pZGRE1cJW+TKiFhd3TOkqEO6YCjmVDy7pm0WEKEMDbQV98hWoKgsETEX4ttZ9T2o3CtytaqykLkl2Up+/t4KiWygFQQsEjY0ZchOqWTZk2315SDUMK+hAW887tEW/parZ31bmiEvvPsdn60i9uCg1aY5XdvOmfEyKJi6wQ5Q10kcqN1hp9rkGFdjUJcJaSsiFtq8IYXvsN9laIx/3QBKb2+xU/s5l7tFwWGCXuXQK60KE4apxn1t2rw+eei30VnhFzfYQUgaYL+oJmwl8Icdjm6qQNbJafE6ayItA1l1Gj8MNV8jiZNiIBz2S181Ynnj63ks/r16EOp75h/J4cTR0twOuZdHLN+dhI8eVN7IUQTVTaJSYttxZynoZZStUDcV7HjmaceLNjRQJC79UkD+4w6pv1oQwgFLXBploV6VT3FrpcFIvV1aepZxXL5a9fXC20REscJn+TUOK6RFMwAzcEIi+CLtekW2ANCpsEXzpcEcifUtBnBazKoShB7yEzkzlqKZxm6HOBM2AhZ5loRvwY8dpS5SxGOvh63Vfq6+rILMs0qaDPKuKT7sPiNQpWJQHdE2w5s/Q==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(23010399003)(1800799024)(82310400026)(7416014)(36860700016)(376014)(56012099006)(10067099003)(18002099003)(22082099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: ng4dd3WnyE2Mz4W8qxAhwNcwsTm95g2pMz0sOwxSG0xyuz7DOS4CJT+TgoOakUIhTQnjcz+q1NDZZ/9yrO4Kd/gtXTKDkX9CvNbEHr3/wqhsWc0z98JKo2soEjLNb/V2Hd/X8UVlNaJ9W+4dnWQpy4zutFyBePe0wKOY3luDE94ZTbWqroqHEBJMQw9VJAJOF1Hf8nlJjWGDfxvrkQTaqGko9rQTvp6EDYHDNv+nx+AuAT+0Y/RfJUnjLe7NR83gp9tK8aXT862o2ueCBRVMSBSAvxgXVZWiQ2L/HHgR96XaymrWFj/6xVw+Zbr69mV3qsJcRsZUWz4itH7cSVUpBIw2d9I19sn330YelS3cp8vYTjkuwCB3dd8JNlfVd5cMK30CeCHmCWbBgbA0m+anPjI0untvOIUydceU0TBx9E4e+EdJUsydQyMd3Sk9R7KQ
+X-Exchange-RoutingPolicyChecked: KyUOggAs6TSaWJVbJiZ6QB+WYxju3yAUtSU8X8xAzq076aSiZCp8wMSQi34LsMXX6quIVoqumF6JA7x7pL2z03ekcs+ttuiIoGEDcVnijo/7PL+2heKX6o3BnRyxSRvi00QK10kF2+BD+O70U+j51Xq1wzOdszFwCOK3h3hjg4uhDRqBk4lvTH/xvwaNFjgFoRBfW1ntu9ciIKtk0op+tIkm20Uqm9m+7JEbut6Py8wiDNaIFogKElL8vaz5kvwp646WAr+/WwPgYTH3LB+CzFkcLw9ZylWf1NRgXsawPHbo1AfbKtwAeBycEQD1G3oSk5cs+YmM0GyCoNPUqxjINg==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2026 13:48:17.3467 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b7b24f38-4094-49d1-2bac-08df02af8473
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002317.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB7127
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDExNyBTYWx0ZWRfXwYbk0xKLUv9z
+ rHV2AlocxJ9Zpduzr2sYAuhCrZ6LR2hEoGIxb2BisjduIxWlcQfcu47Yd7LDS86ul5dkrHkC1Y+
+ zD/MoioeZ5ipbzY5rOkXG+DOsoPWBEo=
+X-Authority-Analysis: v=2.4 cv=HackiCE8 c=1 sm=1 tr=0 ts=6a8d9d2b cx=c_pps
+ a=P2JTm3oOj23y55bZWJDDIw==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22 a=zd2uoN0lAAAA:8
+ a=sozttTNsAAAA:8 a=46slFY61AbQ_6GqxMQUA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: jzKHu4FKDW2tJkhdomvOQFpanLwzOHkY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDExNyBTYWx0ZWRfX+9a60bPE0O/X
+ QGri5ri6zNYvmqPo2kgpLZ2ZkGQNMpbIYe5AJ5P+TuTWpDmPNQvQ0LeHYf1beYkub/m5BNNNX4F
+ o7wKXziKiC90/vP7H4UKe8N1NZiJr/JvDG8O6t21TcQCjb6ogm6eU1tNOwU1pQl9Hx2mKa1lIvh
+ kNPPrSJB0eI9Kas8WKx0auu/HhrHvrduXrsvAtB8TepHBmn1heAGnQMg3RPW15TAVzgcCZ0R1HR
+ aw6GAm2/gdx3s+FkrjN8i803YqnY7DmjCn/Vz4Lw6cJsYDXFE9a6ScqQIqWHOEaQvpiiZIfjr+Y
+ x0PWL2Br4jWf+8NhT0bZM2gEWpdYgIDg5nQceVhzY5zMGbH1WZ4ZUedB+oDy0m050efrOevHm3F
+ X8scblPxFbqRm42oykgaa6la+xB1XSh+qzus+CVw+FD9kz6yZ/bijXhZRP2NXSb666T44Ia2cJO
+ z/9kLT00IUNtYIL11Vg==
+X-Proofpoint-ORIG-GUID: jzKHu4FKDW2tJkhdomvOQFpanLwzOHkY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-25_03,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 suspectscore=0 phishscore=0 spamscore=0 lowpriorityscore=0
+ adultscore=0 malwarescore=0 bulkscore=0 priorityscore=1501 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250117
 X-Mailman-Approved-At: Tue, 25 Aug 2026 16:03:37 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -216,17 +271,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-=D0=BF=D0=BD, 24 =D1=81=D0=B5=D1=80=D0=BF. 2026=E2=80=AF=D1=80. =D0=BE 10:1=
-9 Michal Simek <michal.simek@amd.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
+On August 24, 2026 thus sayeth Michal Simek:
 > A number of file (F:) entries across the MAINTAINERS files pointed to
 > files or directories which had been renamed or removed over time. Drop
 > these stale references so that every F: entry resolves to an existing
 > path.
->
+> 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
->
+> 
 >  arch/arm/mach-rockchip/rk3576/MAINTAINERS         |  1 -
 >  board/CZ.NIC/turris_omnia/MAINTAINERS             |  1 -
 >  board/LaCie/net2big_v2/MAINTAINERS                |  4 ----
@@ -362,10 +415,12 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 >  board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS |  1 -
 >  board/zyxel/nsa325/MAINTAINERS                    |  3 ---
 >  134 files changed, 241 deletions(-)
->
+> 
 
-LGTM.
+Thanks for the cleanup!
 
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com> # Tegra
+For the TI boards
 
-Thanks!
+Reviewed-by: Bryan Brattlof <bb@ti.com>
+
+~Bryan
