@@ -4,119 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F230C61DBE
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 14:20:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95050C61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 14:24:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E46A280CC5;
-	Tue, 25 Aug 2026 14:20:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 57DB980B97;
+	Tue, 25 Aug 2026 14:24:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pKZGW1Gds0Oo; Tue, 25 Aug 2026 14:20:17 +0000 (UTC)
+ id LlPoGTewRr4x; Tue, 25 Aug 2026 14:24:39 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787667617;
-	bh=Lqr5ipTwi08WIYcrjYLeL/IIRhA1ZlCaWCooEhTqBtE=;
+	d=lists.u-boot-project.org; s=default; t=1787667879;
+	bh=ZBiiBc/hFUtAm393JsxnqeNQHt5z8PDm7kF4FpbFI6Q=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cecRYv+/VhUjrq7SW6EJTtDLKgbrK5IYru/EHV8NQy6XE+syUvX0BnBtpLTSjeJHf
-	 rw/zIKpJyi9NQwWZ1Dh74gTr59gMWIuPCleka/jMpQa3BMuKf65ymkC+Xey6VErifO
-	 b5oElDgvG4bY2J5BZBveAGZVEGibqIPEK+GcSQEAhMfU7UzQEID+I3mA6Ybgb5ia3Y
-	 ZGcIHM+UbZTLeiuQdJEG75dR+kwlpwoirw+DpW3+ZAeL8BvZc+GWNTXZyIyQsuNTwE
-	 GswXW2xhwSUlUQBSiMzPRpbdMjnv1qUG56HNtyw4fCIM2uK7LdGkfFHz/OWLp7GYFu
-	 9tvM9snBvKAlw==
+	b=xRiwbXaUUAuoGE09lPr4f2U90H/gktNC+nya8rxZOtXK15sXh5aZz3n3JTLJmq0k0
+	 qaXS9rDe2vJB344z4+ru+tDjUYW4l/0mAbKynoGnV8Q90kHjeK+8nARtoYx/zIgojS
+	 IewmC2leQRjadmhLeNzIAo7SuMyfS9TgEPyo6QxDwbmF1fHNEMxEyWb/81yJt9gN+K
+	 weqSel48EK2lu25pkoYycbdbBbmAKg1iZVWpeW8H2uyBAKgmznQ649oY3okhgJ1mtI
+	 POsrSsicd2XavS83OgZfOPv2gyDZRBLyRpBa7fSEdv91xexo8EdabPmmq6ChqQOXlz
+	 +lJfZ3Utbh5mw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DADC680C79;
-	Tue, 25 Aug 2026 14:20:16 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id AF5922FD
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5926080C68;
+	Tue, 25 Aug 2026 14:24:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4525A118
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:24:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 95C4A400F9
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 367E660603
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:24:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2olLL4hHrCCx for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 14:20:15 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4HrXEQdvE5P9 for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 14:24:37 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:30::1;
+ helo=mail-oa2-x01.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=OOQwOsne
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C911240092
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:14 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7f3ece23165so5062391a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 07:20:14 -0700 (PDT)
+ header.s=google header.b=SI03wxFw
+Received: from mail-oa2-x01.google.com (mail-oa2-x01.google.com
+ [IPv6:2607:f8b0:4864:30::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 18919605F7
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:24:35 +0000 (UTC)
+Received: by mail-oa2-x01.google.com with SMTP id
+ 586e51a60fabf-4569f25c19dso1658620fac.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 07:24:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787667613; x=1788272413;
+ d=konsulko.com; s=google; t=1787667874; x=1788272674;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=Lqr5ipTwi08WIYcrjYLeL/IIRhA1ZlCaWCooEhTqBtE=;
- b=OOQwOsneODXO4HRTWMSH2hA6xLO9k35MDNOKmuN7DlQ6FtMBekyp1/SGqPASYhj0J0
- NKQfbdF4wBJ/62E40ccIYSkTYxXBcVc4mVFqvLOMrsHHiuDyRnOkc9+LcZmY1VuWzE/Y
- 8GPaRrMiuCg5fhNn+LD+9iWqxVufU5TjSvoPY=
+ bh=ZBiiBc/hFUtAm393JsxnqeNQHt5z8PDm7kF4FpbFI6Q=;
+ b=SI03wxFwMk+RIr4Ea1FRgfCjDpW92VcqXtyOJftQK6Z4DGAcXaXwpUSzrI8WE9zFHB
+ fyJfsEOQyvOHUSrKof+Fsr1grYaARhFfRJ/nn/SmXIObUfBUywmUjt5G8O7iK6xfzxgK
+ cCjRhPxzavDbXVJBm0jAHsBPOaMTbh9j8dILA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787667613; x=1788272413;
+ d=1e100.net; s=20251104; t=1787667874; x=1788272674;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Lqr5ipTwi08WIYcrjYLeL/IIRhA1ZlCaWCooEhTqBtE=;
- b=GmtpO8EA5cyHDy4CmDYuHnszcbVQw14Ml+Soa78vqYDEJB/ZqfOp4uiHZwhf6OzEj2
- xXWpaV8cEA6QhDE+YZIMGVQkr4tj2oDHRuc01g1OhMCvMONrHdMVqtoV3A4GKJ/i3PNp
- LDc5HmXhWI6/vnW1NkdGrkpK/Whzc2qwhjjKcpMWENmeNPabZbHhNaSrza1uDnozzkAO
- aCP1f8nDfTmtqvmfiwgR4SdB1Y8j+U1GAePyvTVR73uR1GdnpO8qaEOU9YkvHkLsLxjw
- TcfV6BsL0k4wfapl3nIk8nNWKCYW7SVZWJBWmTYg8UOaOq+Zv4mjlUtr7z2GxItKTkUK
- pg+w==
+ bh=ZBiiBc/hFUtAm393JsxnqeNQHt5z8PDm7kF4FpbFI6Q=;
+ b=DnTDfEU1x4VX61rr30DQ2M8aFkjdorJCmOAQJVGnjf7rGixQz71MP1/ZPqF5ACnudz
+ NU+0wOq5OhLdKiFKDImmM8HFAFqPg2FcZYN/0E1vnnYePAGxWXBux4Hi3mTEH8boj1DO
+ bx4hQguJCNKZ/i9c4ehdv8Z3UOlqitrqqshCMQfUZTqiTDcc9MdBGsZYv5cdBBlaubw4
+ fa4dNR390HeZJEbm3G6Vylgf89Fc+42lYHeM/UuDHwA9yMWhKR/+quHWWuvagsL0ng1P
+ tySPLrjYwomBV8V+LRc9GeThoXmDyqVB4BZbrCMYfGtO38sTQq0Mw2QONbbkpSiP46pu
+ d99w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqZjIDLjhLwXnXvXVG9oQs/idkQieRpiYeU48nUInkaNjTOOgDEdLcSGZ4B4T0AwZ8+0i1z7Dg=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++llOGWCK0zf285m8P+LMMkGiQSciFwk2KQtnqZJTO6mGesPLNGf
- 8Sf5si3jSD+IQVlKv+EAR/BIcJvBGi6VJkfXmdlaVZJD6kILYevWaTvAaCQg+8xHR+0=
-X-Gm-Gg: AR+sD13AFFcp7zZySdZYTJykq2OqZUe9BnZe6tXj24cs9LpyJTFKunG0QKZBd82ZoHy
- 9+pDCdNhFk9z/df1B/49bpF0Njt1/kn8EQJJt+6TQvxvsGvZUfsfK6347y7ayGl/UXYvGGAeGuL
- cl5YDccsghO11weN5reMrXa4vQwy0ihOGesiT432QcgpkprriUliccLrkAHGORHZQRdYERN4Owt
- r7dt5GzOoianWu/tbBN+yNcL5VCSk2lTdd8rdVHOKiuJSyEboWYHkbNKRM886xnVNjPpEKxAMT4
- XRUuAgbXKyn97oq45WkTm0Z0lOsrkLv8+qALfElSE+b4axiCGflnW1Q4DhStpzOQmYZSYk8hHZF
- AO3b5wh2tTm2733BmzOdK2YNZLkYe5nnJqqYsJ+d7qCTLiNF7EXvDhaZE/anHe09lUpbvVuEx7t
- cHSdO+FbAqFYOnssjNAHfVlb6nGTuNEHBcUK/XBappIOaGW/PHAqER9eMgQA2ZfUBy6YTtf9l8B
- R2bI/1hTufr+LFH3q0f1tTENREVaeVvOWjwy31Du1AaQD4QTgwp9k2HLjxQ1UX9Ck8i+dkOP6qp
- sZE/KX5S8Q==
-X-Received: by 2002:a05:6830:448f:b0:7eb:3af8:8c1a with SMTP id
- 46e09a7af769-7f4af99833dmr6062825a34.9.1787667613187; 
- Tue, 25 Aug 2026 07:20:13 -0700 (PDT)
+ AHgh+RqsYbmx1+TrZawCRYgH66hvZ8UnxvWX9OnAWzM/nfNatJCLB6szad9Ex7uQvYbhg1uUN0I3Rss=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++mk46nPkWfdvQbMT51yK5ownrESQlBWW5vkkYGGRBodCDHMS+m3
+ NZhwAKtYtZEn32D0oDLHhnUXmm7DfLQRLGrs8gHzB2gFv4THbEExVZoWKV14yWtof3c=
+X-Gm-Gg: AR+sD1183/ALBn/q+iJ1wvMlEbLObhVk5QNYwGdqJiyg6O8q32Flym19MGO8Sbxrvcd
+ ISE0bkLQn78/5PbyH5GpXxf/kXtqMUyyUBWhDza+w/ZOXn649GBxMxhfurO75RSIbEjvXFHtp/K
+ JiO70kZpnMCFePs1Vu4BKiYWFLSsGqYaLyNHgJ2Y/lJ1gGFL8gmYcQXlM/3OPDyqYvwbj24LZru
+ sVSLrYoQFEhlzO6MWFfcZXRHvvksVG7NGsGli19U2y7Z7dnT1kPIowQyTbpTuUs1uxges5UOwmv
+ mlSAq3lbnGcWGItmUnS5KF+5TWlSG7KQjd94D6MktsneyEp5CyuPDzezCmukShlIPVIwmeuv93X
+ qplCMM+MCE1Afzv+TGimuB2HzohQnAAvsZVNC9b0RGl1iG+GNVBTEoBY4KWu7MMJWdrDPdCuidT
+ J36ZfPIS3HYobGRVxCIvLVsIz8sMs4wqHYhki1tJ3aEECcRTdwa6NK/EwZ4WiBhrbC+wBu20CpO
+ gzfNveSw5I+VRKidw9mrHsNWNrw+a92w6B7fd7cvWegGKASbO7P8BHZM/wpXqrR6ptJ9RM+YfTq
+ ejkYlnHJKZ9ZKkhvFJo5
+X-Received: by 2002:a05:6820:4b13:b0:6b1:4806:f218 with SMTP id
+ 006d021491bc7-6b1903d1959mr5842765eaf.14.1787667874480; 
+ Tue, 25 Aug 2026 07:24:34 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f48fae8df0sm7236329a34.5.2026.08.25.07.20.12
+ 006d021491bc7-6b17c703cf8sm6590652eaf.0.2026.08.25.07.24.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 07:20:12 -0700 (PDT)
-Date: Tue, 25 Aug 2026 08:20:10 -0600
+ Tue, 25 Aug 2026 07:24:33 -0700 (PDT)
+Date: Tue, 25 Aug 2026 08:24:31 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Vladimir Oltean <vladimir.oltean@nxp.com>,
- Fabio Estevam <festevam@gmail.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, Peng Fan <peng.fan@nxp.com>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH 5/6] common: kconfig: raise SYS_CBSIZE default to 1024
- for FSL_LSCH2/LSCH3
-Message-ID: <20260825142010.GT523975@bill-the-cat>
-References: <20260824122825.95712-1-vladimir.oltean@nxp.com>
- <20260824122825.95712-6-vladimir.oltean@nxp.com>
- <ao1L1_1E_UAufqWa@nxa18884-linux-1.ap.freescale.net>
- <20260825081938.b74bey6zpuewig7l@skbuf>
+To: Simon Glass <sjg@chromium.org>
+Cc: valentinliu@icloud.com, u-boot@lists.u-boot-project.org,
+ mkorpershoek@kernel.org, igor.opaniuk@gmail.com,
+ alchark@flipper.net, quentin.schulz@cherry.de,
+ marek.vasut+renesas@mailbox.org, daniel@makrotopia.org, rs@ti.com
+Subject: Re: [PATCH v1 1/2] boot: android: Add Android 13+ bootflow support
+ to bootmeth.
+Message-ID: <20260825142431.GU523975@bill-the-cat>
+References: <20260818175301.818739-1-valentinliu@icloud.com>
+ <CAFLszTj8g4xxzt9A7txOhDMU6hLe2=twZoZPo_sr7Z5m=6BC4A@mail.gmail.com>
+ <20260820151021.GI523975@bill-the-cat>
+ <CAFLszTg=e3-bpWB7_Q8UFcB-pL=DJvPXji3yTtF2DFWkzPz0gQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="scuNkhDrzbkhR0ZF"
+ protocol="application/pgp-signature"; boundary="fiPqGDsCKfcijvzU"
 Content-Disposition: inline
-In-Reply-To: <20260825081938.b74bey6zpuewig7l@skbuf>
+In-Reply-To: <CAFLszTg=e3-bpWB7_Q8UFcB-pL=DJvPXji3yTtF2DFWkzPz0gQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -132,61 +133,71 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---scuNkhDrzbkhR0ZF
+--fiPqGDsCKfcijvzU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 25, 2026 at 11:19:38AM +0300, Vladimir Oltean wrote:
-> On Tue, Aug 25, 2026 at 04:01:27PM +0800, Peng Fan wrote:
-> > On Mon, Aug 24, 2026 at 03:28:24PM +0300, Vladimir Oltean wrote:
-> > >The 512-byte console input buffer limit for Layerscape SoCs originates
-> > >from copy-pasted boilerplate in the original LS2085A board support add=
-ed
-> > >in commit f749db3a75ec ("ARMv8/ls2085a_emu: Add LS2085A emulator and
-> > >simulator board support"). No rationale was given for the 512-byte
-> > >choice; every subsequent FSL_LSCH2 and FSL_LSCH3 common header
-> > >(ls1043a, ls1046a, ls1088a, lx2160a, ...) inherited it by convention.
-> > >
-> > >When CONFIG_SYS_CBSIZE was moved to Kconfig in commit d31466b382dd
-> > >("Convert CONFIG_SYS_CBSIZE to Kconfig"), the existing 512-byte values
-> > >were transcribed mechanically into Kconfig defaults, cementing the
-> > >limit without re-examining its validity.
-> > >
-> > >The practical consequence is that environment variables holding
-> > >multi-step boot scripts are silently truncated at 510 usable characters
-> > >on all Layerscape boards, making it impossible to store commands such
-> > >as combined TFTP+flash sequences in a single variable.
-> > >
-> > >The same problem was already identified and fixed for i.MX6 and i.MX7
-> > >in commit f7b237b81e5a ("MLK-24380 imx6: Enlarge the console I/O buffer
-> > nit:
-> >=20
-> > This is a downstream commit.
-> >=20
-> > Regards
-> > Peng
+On Tue, Aug 25, 2026 at 07:16:04AM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
-> Correct, I failed to update the commit message when rebasing.
+> On Thu, 20 Aug 2026 at 09:10, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Aug 20, 2026 at 06:31:18AM -0600, Simon Glass wrote:
+> > > Hi Valentin,
+> > >
+> > > On 2026-08-18T17:53:00, Valentin Liu <valentinliu@icloud.com> wrote:
+> > > > boot: android: Add Android 13+ bootflow support to bootmeth.
+> > >
+> > > Please drop the trailing period and keep the subject under 60 charact=
+ers.
+> > >
+> > > >
+> > > > The devices launching Android 13+ were using a new partition
+> > > > named init_boot to store generic ramdisk.
+> > >
+> > > >
+> > > > In the new bootflow, kernel still be stored in boot image,
+> > > > however, the First Stage files in ramdisk were moved to
+> > > > init_boot image. We should load it to memory and verify it
+> > > > so that the kernel can execute init program to continue booting.
+> > > >
+> > > > Currently, we have supported loading the init_boot image by
+> > > > abootimg command, but we still need bring this ability to
+> > > > bootmeth, so that booting Android 13+ will be more easily.
+> > >
+> > > Please use present/imperative tense throughout: 'were using' -> 'use',
+> > > 'kernel still be stored' -> 'the kernel is still stored', 'were moved'
+> > > -> 'are moved', 'we still need bring' -> 'we still need to bring',
+> > > 'more easily' -> 'easier'.
+> >
+> > We do not have any sort of grammar rules and requirements like that in
+> > the project, please stop giving people feedback like this.
 >=20
-> Would you prefer replacing the commit sha1sum reference with just
-> "downstream", or just remove the justification altogether?
+> As far as I am aware, as a project, we have followed these guidelines
+> for a long time:
+>=20
+> https://www.kernel.org/doc/html/v7.0/process/submitting-patches.html#desc=
+ribe-your-changes
 
-Adding in Fabio since that downstream commit is also applicable to
-mainline too, for iMX6/7.
+Guidelines, sure. We do not have any sort of formal grammar rules and
+requirements and the feedback you've been providing has not been helpful
+but rather causing conflict between contributors and custodians, so stop
+providing it. We should only be telling people to reword things when
+it's truly unclear.
 
 --=20
 Tom
 
---scuNkhDrzbkhR0ZF
+--fiPqGDsCKfcijvzU
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao2klgAKCRAr4qD1Cr/k
-CoFwAQDe4frQy1/b1HBN+aqxk3PITpUEao5jpjYYgVF9gW7+1QD6Az+hdLA6RUnc
-QkddDGheV/g5pyXTuAIMvVG4r69Whwc=
-=rSxt
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao2lnwAKCRAr4qD1Cr/k
+CoTIAQDn6rDuxo8uDImzJhifcv/pBFKdG+sEC2ocoyMyYEjs1wEAjg+r2zNJZD3A
++F5i88hWtR2UQZJAfsDtA2xvcgRiNgI=
+=xDwV
 -----END PGP SIGNATURE-----
 
---scuNkhDrzbkhR0ZF--
+--fiPqGDsCKfcijvzU--
