@@ -1,114 +1,137 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F921C5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 01:10:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F38D8C5DF81
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 01:25:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4797D6068B;
-	Tue, 25 Aug 2026 01:10:59 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6_Dj_PpkMGx4; Tue, 25 Aug 2026 01:10:58 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787620258;
-	bh=Ww+c97IYDVd+jRrhx3A1+hNCwjTUypMwgl9w2uodGck=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=SnfSB/0qvPizLafH20twuJxKU1LBqvVB3vVw5w3/1BV6njP37e0RSZ3rgBBEKSGnw
-	 CrtcKhSayBYCoILeb/bkGEEDF6wJPx3osmxThAjVE9bjdJUR+ciA2ttCR0I9oPeaZN
-	 4FP66I2KWpKt86DtUAnq2gkUQENnc5kF6SdKL7dhDCGGshmUvRVIVoKGX5d00x6JWe
-	 BXR7vRNCsi04fkYdE+M+EeomEjL/Ica2ElP126Ye31J918j/K9sq4wkp9vGy5wVFP0
-	 18rqrkrxRoxRbC8zRSz3gP68nP8tFdcobuijB8Tt6eeMeX1jcuRLfNL7P5IVO4LWaD
-	 1+NTrVbWDVToA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1BE7F60667;
-	Tue, 25 Aug 2026 01:10:58 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 56CF4336
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:10:56 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3D2D880CE9
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:10:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 946C180C9A;
+	Tue, 25 Aug 2026 01:25:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3a9cu7amHTry for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 01:10:55 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=f21Sbg0J
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CBBB080C70
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:10:54 +0000 (UTC)
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7eb61bbeb25so5165241a34.1
- for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:10:54 -0700 (PDT)
+ id jhrkd6P3do1a; Tue, 25 Aug 2026 01:25:01 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787620253; x=1788225053;
+	d=lists.u-boot-project.org; s=default; t=1787621100;
+	bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=TNpp7Qwms3D1SrhFUJktFqtX0mvJhaJigsC+hX0MnZmdFVjOwO+/nNpK3fqIftHog
+	 GT4oq/IrAT1yyo8QR32hzMOIwK10GxtOSK4pFtM3LXVGka1LVzPh0lBJlbuu0OJ5jl
+	 tMhuvTUXy1tz7C0dy9XzkxUym2WYBUGJtLKMq29TVfSuchLRpv718kwXE2R5e5tZNh
+	 /mZvwcoOB3NP/f9L3xZm8aOPlncYIkfs/TeMdyrQ6ENBfyS/8dN5zA6z0/3/gYfOhC
+	 JiKFjqN9KUHSVsdxZu+CaG4Ty1EFVf33kEv5FdeAHeD12OsfzVdipXtP0NCV3Zbvmp
+	 mWHSHKpQzFLWA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id CB65C80BCF;
+	Tue, 25 Aug 2026 01:25:00 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A021B3DA
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:24:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8601540557
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:24:59 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7zfKffQHJkMh for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 01:24:59 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::12a; helo=mail-lf1-x12a.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=kUhvX0eA
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 946AA40558
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 01:24:57 +0000 (UTC)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5b15dcaca31so4038459e87.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 24 Aug 2026 18:24:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787621095; cv=none;
+ d=google.com; s=arc-20260327;
+ b=oPMlJqJwtZVhK9bhRLjrky2lQl7ZpVNl/x6uWFXnj7EstdbxDSJVCJ9DzmcjxSl1Mw
+ yiB9tluV56CHVye6T7KCfBNQzarhuIecS+nfy2PGHpX5vllUFsLjdKvqP+jU1mYRSxiD
+ H2Ty3B25PXizZ4eQaru2vshAEMHGVGnpZHRNPrSFCzmuCKIbKKrzs8Q8UAU09YJ8Buyo
+ joKIdEGo3A+aDw5AcRAMjpzXDfQcvwcCJ5Ns6iPCeUF51iwwauFYnvTm9+BYp+H7gbuW
+ FAmwJEjJTX4K5scaDnXM4dOkY3whWlIHYJfmDe4nEQsOuSAX6TUoCEYr8wwz+WCTDJQR
+ FWXQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
+ fh=AuQ3bIBeU64EwsP1Al2N/FlN5xzoW+fHpS7uviycxow=;
+ b=bPBXmGfTreNVa5GqLbuUYYNy0rfq4hmZPEK5bb5A9BbI8/CjBU+LtgiN++/+877lhw
+ oRWLymErPhYB/umgaRH7uJK6Bne4Fy+ltrNS0VJnNQ69fg57IYE9n+0j/UkKh+wXFBIr
+ 5USM/nKj5Ue3eLjB38TBtDmqJn/JvqWCGxQWOvswvFF+wuNDSEB3Y/33/2gFLpcNqcHY
+ DGI4Etk4E+3pQMJP8ghblKZRQ1bumbOuqCHa8vPADhYAWxMw3d9P9E3nN09BFOahOxQC
+ OBkBoRAaVlW7pzvWpm/wfn4wy7Bz+dQVwnoL/yS7PtMcem8qq2kuUioTIXDHuaxKckw8
+ zmhg==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787621095; x=1788225895;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Ww+c97IYDVd+jRrhx3A1+hNCwjTUypMwgl9w2uodGck=;
- b=f21Sbg0JSBqPm9GqF/GdJhBVfC+wuajr0At8bQmQ0BujLQ9M+LrXVXgccFU/zAY/aX
- NaajN1zGurlb1A/USZIPsaJ1LkIf9mEPDmWwLaCq7SxFRuOJvFF8KYAzd31Coeah72vC
- PzxywSs5RCGfFN5hooBznWM5aoTd5jCXCn7Mn6cReBT1WImd84uEt6VyD4pACyE6x/oB
- /P5XhE2J7BFkkZ4Vp9e5lZjfFIlgP+cf//C3Mc2AYOxqFxEazfkmLh+/tbmubh9P8aO7
- /vx27T2xUhwvJDWfKfJCUmUmgf3wkhjvrNAq9pAgrbeiEzHD5TrXLHfEw3jT3EXNgYuv
- dDlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787620253; x=1788225053;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=Ww+c97IYDVd+jRrhx3A1+hNCwjTUypMwgl9w2uodGck=;
- b=UMm/v/mer8pO89NUkkpq9ZmR7oDocZIgVNGzl6RIMgI6MsGwW2OMNmJTL7tsN5V0NQ
- tJH6/vcOBNkmMwaGV0o84TDoB05JE9AKfq+z2IfLblIcId3okDOhb3GrkT+jNS1s75CW
- 3VMJz7S2yA1JdfBqotn6+yWVAxomq/qKBb5iOlROFTse99HpOdqW3ZvDdI44g4LxE52L
- fVGKKJSP2FiObGFaQb+XkUuKX5RnvtIEDE/oUsTRpFv9t9LKyZBhlt7fBQLgRBvu/HRk
- j63tgLVy3ynYdjd3nRYBlWL0eqP+jNyPa3uKwFsYabia3RQFdzNqhgAjUzqS29rsKNM8
- ZY1w==
+ bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
+ b=kUhvX0eAXWp6kwzqP/V4gmbTTHZmrp6u81cfXOFsKfQeoTcEeM7LKXR1t/E05iKUV+
+ /wCJ3qsLvVra7y0XZCX/o4PMLERuimoEk4yU4w9gscvImtI3DJ/lMLfUMYV6T94RXRFn
+ Qk+KYQjkGJvEipPZtzxCu1msBNl7tKj8Fnyxuc3/i9f86j+RFspa9u64jhI4llqkhE6H
+ lx+78mpkgpSNZPH7MHfhP/wI2G+Cile3CrTtPBvFMbdF3FZ8L5WeEnRUnUl8Vs9JmCSD
+ axLUi8wBTQyYZmBj0+P/JBeFcIa3SgTT7tfDs88RAFtWeq8qWCyH9cpFAJED8nhKizYC
+ KVLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787621095; x=1788225895;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=uzFLY/DpqhslXUW21rfOJT8iipsQ4+0SKSD6PjWcNck=;
+ b=UAfOpoy0ROSTS5UOyCtolV5ueU6jNnlS70MXcuf3R6eGfpv1xToIv4Cc+A0oqFLjF5
+ wWZ/9TlDUsRqoNo/SBrt/v4HjohIkkopyw2SMSdQ5KzguUwid6tx3QNJq6i3KuZmqeCp
+ 7YoHj5QjlhsXoxQNxeXqhRgd18Dq3Y21shJQ0nVpPcFQ5xPuuoMQtx74NAbPF7GmDmQk
+ 3TG9y/liy0HRvT8UMsRpCQBKj+D+5rh46KA4IJcbY64Pq9NEuvGRpOVoae8sAAdfNJ16
+ b3DNIkcAuKCkxbDZeRv8eMW6WN9Hpkvc5JYEc0PbAypDmCwn5V3pm/EsAlGiB5lgMb79
+ pYwg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrGtDOqTxQ6kHhNo7tOiUdHx1GbnHIpxfJUaYvVve38Vo2jkCq3hYuNkqTdFv7UMwHiHjvHv/4=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++nZC6cSUlkDrGj6PzQLw8l7wbHDt1veJrER49f3AqOOma1oPwBh
- mHDW46PYoan9E2hIl8Kv/CSxkfTAMTxghDRhs6H84g/Q+Ypcx6ap5WJ8V/TitTvGyFE=
-X-Gm-Gg: AR+sD12i3FGck9HH3LaIm775dMaN/6iTUJa0+F7v0nm2FTdZQNOvEanD5lt59jaGAnc
- zv2qpn52TNQTkIUievAK4352MnhsdRH49RwRXR36HOpmdUMXMqNrE/qVe7nFUlZCS/5jD4YwxJj
- vBM/tiOiTLpYpegNhzaJyki4oj2PivmNvEcE4R8M+067oW810EUtWHQPkg0c8odelX6htLEYHmd
- Ww3SLMCsPP6j/Zo0Yb7j71zC+4ZDsYkeXUcYtaGUhmloKOpp7RPKxp8rTi+mdOAaULowD6QWK7r
- vXPNMJs2Rh13EE88BeeBa7t3qQa3/AiNUQ2AhS/KNdaiEm8w6LtML8dcboqlQmnn0sJI5KrLbX7
- 74MVZCA55l9erKAq7Xdy2H/UGepdinOc72Sp8+79SnEyYJdxi92IsYT85IqAaD6cCMTiMizqboo
- fJPoU7+FPpFlxibMRd+j54RlFjHViS7EdappsffNHsvsXShHjxWY5oEPmU10uQZVY=
-X-Received: by 2002:a05:6820:151a:b0:6b1:7ee7:8ea9 with SMTP id
- 006d021491bc7-6b19049d9d0mr1952822eaf.31.1787620253206; 
- Mon, 24 Aug 2026 18:10:53 -0700 (PDT)
-Received: from freyr.lan ([2600:8803:e7e4:500:29ca:5dba:5fc1:6f13])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b17cc0c5b5sm5087117eaf.10.2026.08.24.18.10.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 18:10:52 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org,
- GSS_MTK_Uboot_upstream@mediatek.com,
- Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
-Subject: [GIT PULL] Please pull mediatek-for-next-2026-08-24 into next
-Date: Mon, 24 Aug 2026 20:10:15 -0500
-Message-ID: <20260825011050.2805858-1-dlechner@baylibre.com>
-X-Mailer: git-send-email 2.43.0
+ AHgh+RqkQ+4rg9OJ9pHgm0ocS3YIw48DzBOAFppw52ZCeECc2A15b+wxasFRCmtoSSt5ruoIoceR4BM=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++kE+qIj9XNi9mP7NeF2079isgEck0EGKMcQaPfW1tUvG3ONB7YU
+ HQdaW4dlGXa5uze2Sq7G1viUDimwpH1BtIlJ6Ru2EFzJeUSA6bLPi93j6ydL/srkhwgiFfnBVxq
+ nVyl+nfJaofcjy/h2+va+0ceziw2k9xQ=
+X-Gm-Gg: AR+sD13ApFhEzzMgyleI2SSCpIXyVMu+ZyFcd32SVwYRuK1i4u/JIkgA2rA9CcMkcz5
+ FXFJOsFpWz/NPivzM6kYlGvVfwTVANhLWjzB64PCdq372prAgyZkVpYx9ileVKiohm4H2P0cTfk
+ ZWaV1Sm4SD4gpvfCjCTgCPH60PtUlJ54pyNyjebtpp9TDogiG0ijVNcmcSQyiji0A6GlanebnRY
+ uMrFB5Wf3ZZWbawH/1Mn6vWAuvAH8GyhW1NXAY4l3kMvrEtiVPACy8WgJ5enxFV1YGcWKJgVVEu
+ q0MXlMpkg//FpnKI9uImiXWO/QVb1iH8byGzTcK08fZlY1H+WB0vqGTit8V6gf+iewkbbXi4yCH
+ eu/VcXdLEd1DKgZNu4RMbXHz0G8Csq0Fl
+X-Received: by 2002:ac2:4e0d:0:b0:5ae:bd5e:95f7 with SMTP id
+ 2adb3069b0e04-5b4842099b7mr9692314e87.4.1787621094586; Mon, 24 Aug 2026
+ 18:24:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260821070958.6997-1-eichest@gmail.com>
+In-Reply-To: <20260821070958.6997-1-eichest@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 24 Aug 2026 22:24:41 -0300
+X-Gm-Features: AcwNN1XmLTzWd1AGeUan03qFSz82JNYM-Zlscri70Udp8vmrVEMPMm-3d-ERa0k
+Message-ID: <CAOMZO5AY7nkpdyBckixiBTRLK6f1YTL=H14cLnoMLc+Qh5=MvA@mail.gmail.com>
+Subject: Re: [PATCH v1] toradex: {aquila, smarc,
+ verdin}-imx95: add board_fix_fdt
+To: Stefan Eichenberger <eichest@gmail.com>
+Cc: francesco.dolcini@toradex.com, sbabic@nabladev.com, uboot-imx@nxp.com, 
+ trini@konsulko.com, franz.schnyder@toradex.com, 
+ stefan.eichenberger@toradex.com, emanuele.ghidoli@toradex.com, 
+ sjg@chromium.org, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -122,128 +145,16 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The following changes since commit 5a92645e1f9020d24d19e03fff2ae63f30080770:
+Hi Stefan,
 
-  Merge patch series "Add eMMC support for Axiado SCM3005 board" (2026-08-11 14:55:40 -0600)
+On Fri, Aug 21, 2026 at 4:10=E2=80=AFAM Stefan Eichenberger <eichest@gmail.=
+com> wrote:
 
-are available in the Git repository at:
+> +#if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
+> +int board_fix_fdt(void *fdt)
+> +{
+> +       /* Remove nodes based on fuses. */
+> +       return imx9_uboot_fixup_by_fuse(fdt);
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-08-24
-
-for you to fetch changes up to 01834e2273b9a1226105c7566415a6b0ba8c6955:
-
-  serial: mtk: drop check before clk_bus enable (2026-08-24 19:56:02 -0500)
-
-----------------------------------------------------------------
-* New HDMI PHY and I2C DDC drivers, default EDID_ADDR macro
-* MT8189 clock qualifier fix
-* Phase-aware PSCI reset (MT8195/MT8365)
-* dwc_eth_qos MT8366 support
-* MediaTek TPHY v3 hardware support
-* mtk_snor mt8188/mt8189 compatible-string cleanup
-* MT6358/MT6366 PMIC regulator + pwrap support
-* MediaTek pinctrl Kconfig cleanup (per-SoC symbols → single driver + TARGET_*)
-* New MT8366 pinctrl driver + dt-bindings header
-* MediaTek serial driver clock-handling fixes
-
-----------------------------------------------------------------
-David Lechner (19):
-      clk: mediatek: mt8189: add missing qualifiers
-      arm: mediatek: use phase-aware PSCI reset on MT8365
-      arm: mediatek: use phase-aware PSCI reset on MT8195
-      phy: mtk-tphy: add v3 hardware support
-      net: dwc_eth_qos_mtk: support platform-specific PERI_ETH_BASE
-      net: dwc_eth_qos_mtk: add mt8366 support
-      net: dwc_eth_qos: add mt8366 support
-      spi: mtk_snor: combine mt8188 and mt8189 into mediatek,mt8186-nor
-      power: regulator: add MT6358 driver with MT6366 support
-      power: pmic: mtk-pwrap: fix clock names
-      power: pmic: mtk-pwrap: use mt8195 fallback for mt8188/9
-      power: pmic: mtk-pwrap: add mt6358 PMIC
-      arm: dts: add mt6366 PMIC include
-      pinctrl: mediatek: select PINCONF
-      pinctrl: mediatek: remove PINCONF conditional compilation
-      pinctrl: mediatek: simplify Kconfig
-      configs: mediatek: drop no longer needed PINCTRL options
-      serial: mtk: return error value from clk_get_rate()
-      serial: mtk: drop check before clk_bus enable
-
-Deep Pani (2):
-      dt-bindings: pinctrl: add MT8366 pin function header
-      pinctrl: mediatek: add new mt8366 driver
-
-Julien Stephan (3):
-      edid: add default EDID_ADDR macro
-      i2c: mtk_mt8195_i2c_ddc: add new driver
-      phy: phy-mtk-hdmi: add new driver
-
-Suhrid Subramaniam (2):
-      serial: mtk: use ulong for clk_rate
-      serial: mtk: guard clk_get_rate() with clk_valid()
-
- arch/arm/dts/mt6366.dtsi                           |  168 +++
- arch/arm/include/asm/arch-rockchip/edp_rk3288.h    |    1 -
- arch/arm/mach-mediatek/mt8195/init.c               |    2 +-
- arch/arm/mach-mediatek/mt8365/init.c               |    2 +-
- configs/mt7622_rfb_defconfig                       |    2 -
- configs/mt7623a_unielec_u7623_02_defconfig         |    2 -
- configs/mt7623n_bpir2_defconfig                    |    2 -
- configs/mt7629_rfb_defconfig                       |    2 -
- configs/mt7981_emmc_rfb_defconfig                  |    2 -
- configs/mt7981_rfb_defconfig                       |    2 -
- configs/mt7981_sd_rfb_defconfig                    |    2 -
- configs/mt7986_rfb_defconfig                       |    2 -
- configs/mt7986a_bpir3_emmc_defconfig               |    2 -
- configs/mt7986a_bpir3_sd_defconfig                 |    2 -
- configs/mt7987_emmc_rfb_defconfig                  |    2 -
- configs/mt7987_rfb_defconfig                       |    2 -
- configs/mt7987_sd_rfb_defconfig                    |    2 -
- configs/mt7988_rfb_defconfig                       |    2 -
- configs/mt7988_sd_rfb_defconfig                    |    2 -
- configs/mt8188.config                              |    2 -
- configs/mt8189.config                              |    2 -
- configs/mt8195.config                              |    2 -
- configs/mt8365_evk_defconfig                       |    2 -
- configs/mt8512_bm1_emmc_defconfig                  |    2 -
- configs/mt8516_pumpkin_defconfig                   |    2 -
- configs/mt8518_ap1_emmc_defconfig                  |    1 -
- drivers/clk/mediatek/clk-mt8189.c                  |    4 +-
- drivers/i2c/Kconfig                                |   11 +
- drivers/i2c/Makefile                               |    1 +
- drivers/i2c/mtk_mt8195_i2c_ddc.c                   |  394 +++++++
- drivers/net/dwc_eth_qos.c                          |    4 +
- drivers/net/dwc_eth_qos_mtk.c                      |   63 +-
- drivers/phy/Kconfig                                |   11 +
- drivers/phy/Makefile                               |    1 +
- drivers/phy/phy-mtk-hdmi-mt8195.c                  |  493 ++++++++
- drivers/phy/phy-mtk-hdmi-mt8195.h                  |  115 ++
- drivers/phy/phy-mtk-hdmi.c                         |  106 ++
- drivers/phy/phy-mtk-hdmi.h                         |   46 +
- drivers/phy/phy-mtk-io.h                           |   46 +
- drivers/phy/phy-mtk-tphy.c                         |   19 +-
- drivers/pinctrl/mediatek/Kconfig                   |   62 +-
- drivers/pinctrl/mediatek/Makefile                  |   31 +-
- drivers/pinctrl/mediatek/pinctrl-mt8366.c          | 1243 ++++++++++++++++++++
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c      |   13 -
- drivers/pinctrl/mediatek/pinctrl-mtk-common.h      |    6 -
- drivers/power/pmic/mtk-pwrap.c                     |   97 +-
- drivers/power/regulator/Kconfig                    |    8 +
- drivers/power/regulator/Makefile                   |    1 +
- drivers/power/regulator/mt6358_regulator.c         |  371 ++++++
- drivers/serial/serial_mtk.c                        |   20 +-
- drivers/spi/mtk_snor.c                             |    3 +-
- .../dt-bindings/pinctrl/mediatek,mt8366-pinfunc.h  | 1069 +++++++++++++++++
- include/edid.h                                     |    3 +
- include/power/mt6358.h                             |  130 ++
- 54 files changed, 4378 insertions(+), 209 deletions(-)
- create mode 100644 arch/arm/dts/mt6366.dtsi
- create mode 100644 drivers/i2c/mtk_mt8195_i2c_ddc.c
- create mode 100644 drivers/phy/phy-mtk-hdmi-mt8195.c
- create mode 100644 drivers/phy/phy-mtk-hdmi-mt8195.h
- create mode 100644 drivers/phy/phy-mtk-hdmi.c
- create mode 100644 drivers/phy/phy-mtk-hdmi.h
- create mode 100644 drivers/phy/phy-mtk-io.h
- create mode 100644 drivers/pinctrl/mediatek/pinctrl-mt8366.c
- create mode 100644 drivers/power/regulator/mt6358_regulator.c
- create mode 100644 include/dt-bindings/pinctrl/mediatek,mt8366-pinfunc.h
- create mode 100644 include/power/mt6358.h
+Shouldn't this be added to the common i.MX95 SoC file instead of
+adding it per board?
