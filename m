@@ -4,75 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F55EC5DF9C
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 06:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27540C5DF94
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 06:06:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2B4B6405BD;
-	Tue, 25 Aug 2026 06:05:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D51564059E;
+	Tue, 25 Aug 2026 06:06:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RBZ0q4X5eFuP; Tue, 25 Aug 2026 06:05:32 +0000 (UTC)
+ id dQhdSc9A0t2I; Tue, 25 Aug 2026 06:06:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787637932;
-	bh=espoh+WtzvmY2VnwyJqecINyACeBwYtgMNbpUGduwUc=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=vdWnFAqkzNRlQVMn3HCL8fpcX15qYAdBuvGqGXJEd/3/c5yqLfB+CwXI1t+m9gGJ1
-	 Jidmuzns4sAP/IbhuVcUTob3gcy6QMKcBYuB+x1xbHXPtiL+L/rHcvV3xOEp1Xen6d
-	 UCN7XuPpqpcs75bIZBsKLnGYtDz/WsalGekGYaVQtnMLLdQi8Jq0wkhtAeH5jhc6J/
-	 bIAFG4tjEec9hUNImNJU4Ijb4Ls/geCl1BMKji6Ewnk10Y8k1fn87Nov1v2BfdShTz
-	 3D+9VZr6/ZnDx/P6KWF4zfiEXNBeQ/g0HuC3avbJMybgTN3pyh+1EMjK3VRzFao1Zs
-	 csHGixKCYxt4A==
+	d=lists.u-boot-project.org; s=default; t=1787637983;
+	bh=MCu09zz3loXW3Y6fntxJCDZMltRk9+jQ3x7bIzgRckw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=WIONU71LJQyBAz5KvrH4rqjQqyz2D1HtWr4mxznFUGoo0w0IeF8B479/NUtzeXFcy
+	 2QnNr3hjoKutsYKV9ESMzvnGoBIyfRIRtBQde5BRwR9tKW32efhvKHi8WD7DoJtZvJ
+	 yLTV8ZjFktj49ReA5430695KfJwH6gf80bYymY+xDANAJcGKrPg1G91mYbz908hRHP
+	 Tp24GW2hMksHoxvmhbUbaQVRsBmiIvyCQhMl8gtYiINCleAz2bGSvRqHs6cUEgdm5k
+	 CTXZFrBz/9FUJiepdBmdIWQLbB5uwi5cJD3Q4TQOR8Tn2yLdztu71FhZ1Ten80rZy6
+	 4qfR1i6NrR1wQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 58F29405BE;
-	Tue, 25 Aug 2026 06:05:32 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B32F335E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:05:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D7E83405DD;
+	Tue, 25 Aug 2026 06:06:22 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E82CB279
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:06:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A50E2405BD
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:05:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CDAC380C80
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:06:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id At-kypRrFrCY for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 06:05:30 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
- helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=fris.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256
- header.s=mail header.b=jNgrZPrl
-Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 088E34059E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:05:29 +0000 (UTC)
-From: Frieder Schrempf <frieder@fris.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1787637924;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=espoh+WtzvmY2VnwyJqecINyACeBwYtgMNbpUGduwUc=;
- b=jNgrZPrlthALA44nUBZRLzUzeS8WvW4jAS6eg+hvoU4MhrhwCA5Ym24CebAriFTQAUQlbo
- 0kAaVZ1Gx7JF5S1cNBA6NI7SeSKwmuNYJHtRWZ6hVtWJ2tRWM5V9lECZGD8oskwWJ+0xYZ
- 4gkSnlT7z2g9RIJR20hZcQmHJjNdI2LKq7IjJUVyUZVEKnxduhMf+7VEYGeQ+/f+TBJX4Z
- bzX3h6sk/TXF1hJKdDphqhftDxLeQ4VI2uy7dtdpOFKPOjvq9VRNQSZsoKqAiIcv4chcnU
- oakdrR0BQeM2ViCoyqphwTaI5iI0szqX32bBldfnB+OmnwV84mjsT9wEJsYg7Q==
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Shawn Guo <shawn.guo@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-Cc: uboot-imx@nxp.com, Marek Vasut <marex@nabladev.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Fabio Estevam <festevam@denx.de>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v3] ddr: imx: Reload the training firmware for every PHY
- configuration
-Date: Tue, 25 Aug 2026 08:05:03 +0200
-Message-ID: <20260825060504.4974-1-frieder@fris.de>
-MIME-Version: 1.0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TZo_v6Dx_dol for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 06:06:20 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::5;
+ helo=duzpr83cu001.outbound.protection.outlook.com;
+ envelope-from=frieder.schrempf@kontron.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=kontron.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
+ header.s=selector1 header.b=SVDQ0h1A
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 38C7A80BA2
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:06:18 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gEsE5XoQoehjeoR9Tp2gd28/dSqHQsvqH3ETTwvrSidwCX1Mu63MM8Kbrurd7FsM4/vNCK0xpW0mKFgCKyKVEUw3yM3QZVU1xMAeuchIyWHjNurWSCPrgLMdxDjIlaDfeLLMN1dPaDR+9mBjQ8IgCoCnCFJNdDdAuPCaCZM5SJ9qgaxqq3NHoZJ4WUu7NHM0JGcPgHAnbLpkaxjfGDlM2Ks+sdMoF+viv0Ab05vAd1vtoIEjFJFtl0WPPlY0tVin+a+JDMgfFBmRRdKZDQvFqrWGhYgI7e+QM6Zv90HEeqtf29ZkRSOfC1zMz/owrSk/JNB2BpnSHCJvW5BQ2+3Q8w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MCu09zz3loXW3Y6fntxJCDZMltRk9+jQ3x7bIzgRckw=;
+ b=ofQKhtk0ROonVZY/glOUW0hB6oC7HxGOTgp3chwffH0KS9JrrN0G3LAUHDIaB+MPlBlJ0jLH3zhnj1B6uTSdZCSyeEsEUTPs+ijeHv1eS5c2gROTsj0Ya9QS2Youi3QXuaEtrvrbHg8gkWEVtcZgO69zm9xmyzaxnHrPQ/HwsMI54ktP0rmzJBqAzvPOYByDE0Kle0vK9QDGLc9/8rvTKyiHaOaQbb8pYuFxEZfBwNEZgYIiSjWwMAg3PuniJbGg2gZ1dN6yUJBxfEiJgj09TjuOR7CLVzBuYNbDE2UkHWioE8wAErIegBGDHB2aaoc6eMDfayukqqyreXtLuqCI4A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MCu09zz3loXW3Y6fntxJCDZMltRk9+jQ3x7bIzgRckw=;
+ b=SVDQ0h1ALn19FGM8dqKkt4G75y6J7I23nYhxK02Crx+q/o6Cn3eT54mBnc3IeAgGeuxvtXDeV01Znm/c9B/qk+qijLx9B3pvF4lkbseGgQkmGjZKzilt5ClSgaEHlhaSDdNJyWeo8iVdAbSRuW1YOaonFf4G0izjScSGShHy/TltIsPz8Nt07doYoPEZohRT5eWh8aFV8NchNjwvLcwKM4bvLpWQqfjVGnH9xhmYGULXYSSrrri9b4r4LIhiMUlIA8/WhqcDVvrSCy6WwSo6jl8xSa9oLtnoSCSjXDhYC0OsgIUaOSik0B0cnCMSivGUv2pWnOUm3ySBuJcJaQZ1jw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
+ by DU0PR10MB6132.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3e7::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Tue, 25 Aug
+ 2026 06:06:13 +0000
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a276:4ad7:962:da22]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a276:4ad7:962:da22%6]) with mapi id 15.21.0339.012; Tue, 25 Aug 2026
+ 06:06:12 +0000
+Message-ID: <3c3d772a-364d-4346-9503-d2e77d8305a4@kontron.de>
+Date: Tue, 25 Aug 2026 08:06:11 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] ddr: imx: Allow to call ddr init without logging
+ failure
+To: Fabio Estevam <festevam@gmail.com>, Marek Vasut <marex@nabladev.com>
+Cc: Frieder Schrempf <frieder@fris.de>, Stefano Babic <sbabic@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.u-boot-project.org, uboot-imx@nxp.com,
+ Simona Toaca <simona.toaca@nxp.com>, Viorel Suman <viorel.suman@nxp.com>
+References: <20260819070758.51350-1-frieder@fris.de>
+ <20260819070758.51350-3-frieder@fris.de>
+ <b8c844ab-7ea8-4044-95e5-edac173b3c9f@nabladev.com>
+ <a8be2bf7-aafa-4e8e-9685-5fa100941805@kontron.de>
+ <cfe8d0e1-c652-408c-bc47-0ae96dd0a65d@nabladev.com>
+ <c81db5f1-600c-41a1-91d3-7638fc4d3d58@kontron.de>
+ <b528b642-5010-4843-bfe1-d24e8b709876@nabladev.com>
+ <fa652a2f-addc-47a4-b89e-755aba42509d@kontron.de>
+ <83ee9efb-e09f-45d8-ac0a-cd9b2797c513@nabladev.com>
+ <CAOMZO5CbpA0cmFVsSXuGQcYQ7azRXK6XKNYgM4s5b4shGoD7sA@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <CAOMZO5CbpA0cmFVsSXuGQcYQ7azRXK6XKNYgM4s5b4shGoD7sA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0370.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f8::16) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:1fb::23)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|DU0PR10MB6132:EE_
+X-MS-Office365-Filtering-Correlation-Id: 82717739-297a-4434-881c-08df026ef720
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|23010399003|366016|1800799024|10067099003|4143699003|56012099006|11063799006|10063799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: wagnwJytE/3gczHvnXShrjH6YR0ooQg0pGKr+O4Tu6AZ6T69NVdUHSTsjNZGE4A4zJxm/oU4Qb6fpzOZUkzE1r9uo5q5bjTZhFHYyzDTvKfHN3LnUl3cOcYh1T9gfnmmnmHTxkOU1mLEj5NYUbQQFTaZcxc8/DQt0ur65eJsIrB/kHRmLnkKPi1rPGlxqItQgW6O6XWLjkTHZ2Ay9EFTTKE/22vYyrgvyw2zZGv3mef5tUFST52gSgjXZ6NGp7dmbX009xHfHqlnyPr7pXd2/PZuxfG96efBqxq//Zaoc0tpMc+CMrqre7/vsgrnexr8Xf50pWGA+zgNRiw9x/ThG6kJNvg2yH0S793nRGOZJ71qIFSNXh72nxEtyGQs1fPizMbTZjGd248tZmPStrfVUwdG3lTwJGONnzc08WEDCnG6YLfJm5s1kSyFdJdlTdeLH4djoyrCbKtG8eyDfnaN3DNO17XSzMclcM4GVB6Hii6o5KPb5cEMRBkv89KNcT2LNS60eWT2p77N/a0Z4VSWH+1sDnxOEOOj18rbHV4ua2wvmS8VERTV8md51wQzr1NmOgTXgRqGfzYFnsvgJNq8wgOvA2UhLbvAaT+GnQlWOAz9ZGaF/d5J5B6pzhUsenOr
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(23010399003)(366016)(1800799024)(10067099003)(4143699003)(56012099006)(11063799006)(10063799003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QjRVcnZHSDNwZXNMTzNaNmVMMXFsWkFaMU04cWFsb2Q1N2poM29rdlhmbkFO?=
+ =?utf-8?B?K1ZMNS92akV4VnpFTWhBajdpYkxKSFNIeXJnc09JYVhxMmJVU3hEK1R3dFNK?=
+ =?utf-8?B?TDVFZFo0aVoyV3pCZkxLZnRlNTUvODhrclV3NDM1WisvZmFTYlNNdUNYYlpu?=
+ =?utf-8?B?dnE2dnNIaTRsNFVkSmhuM0ZpL1U3b1pmSlJDZjdmNXlnenZjVnhGZDhTK3FC?=
+ =?utf-8?B?YytDbFJRa3ZxVjRjbElXaUtCWWFuckZUQ2U2UzdiWFJHVkZiZ0dGZjhsVXEr?=
+ =?utf-8?B?SFVrYmlmSUtJYjVzcTRMRC9udXpleWNjUyt5aXJOY2tHSjdoM0RhRVJzWmpj?=
+ =?utf-8?B?Z2xuSUNINHhsRy8xWGx5MmVJZDRDbFFDK1VBelkrVmMyMCsreGlZQ1dpNFhP?=
+ =?utf-8?B?Qit1S1liU1RVN09aaVd6czU1TWYrRXYvNm1tdStBOHQra1FnRkJXYWo2aUtT?=
+ =?utf-8?B?ZTRZTk52RWxHaUNyN2NlbjM5NEJYRWc3Y0RtUW1CVVQ2K1plN0dnS1lieWNi?=
+ =?utf-8?B?QktEWnl1QmUxSkVieFY2UmppaHo2QWhSY09HK2Rnd25RY1ZXYVVxdlN6cGFx?=
+ =?utf-8?B?Z2NPYTJsWnp1SEROVXJIN2dqVlpRYVE5MUlHZ3RCZVJqdHdaTVZaTmtJWFVY?=
+ =?utf-8?B?djZEL08wclNDeWJJMmd1V2I0U1VNcEp6d3N0UHJqTnVSMDRCNVdhWktOWUdu?=
+ =?utf-8?B?MXlFamxZRG8rQWxmcWgwcDdIdzF1VDF4OWhCWHVpdm55OXZSeGZsRDAzWVg3?=
+ =?utf-8?B?amNiZ1k5YTNOYXdBOEc5RElPcjgzQmwwNnhraW9pajYyQTg0aEtiTU1PQ0or?=
+ =?utf-8?B?WTFwVERHMUludDhMM0EvR1MwMEZLV05SVHpiSHBWTVVNS3BTMkg2Y2hlTDhI?=
+ =?utf-8?B?c3lybUU0Vk15VStvcEtUd2ZjRER6OWJScVhFcVBFaDVaMGV0cTc0QVpyOHh2?=
+ =?utf-8?B?ZEpHYnRDR05tdlRIQ0xURjVOaFhmVE4ybFk1cE9OVit5b1ZMOUpjYTV6WlRH?=
+ =?utf-8?B?VGpjK1lETktVWG1DbFVwR1NZcStmazRzVFdHT3lxU0FaQmhib2JRZ2V6MG45?=
+ =?utf-8?B?c244NXYycDhTb3dVcFdrYmU0d0JJRWt0SlZIUU5EcllMQXNHVXlEckV2NXVS?=
+ =?utf-8?B?N0dCTmFVcXA0enZlbVl3RjNuc2c0MkVTRkZqYkhMaitPR1lOY21DeHVZbi8z?=
+ =?utf-8?B?UUVaay9rd2hFMEQ2SUprNGlMNE9nTTh5L2V1aDExeERKeVgxbDdMUlh0Y1Y1?=
+ =?utf-8?B?OXZvdnhJcTZjbnpDN3NZSno1SGJlS1VYNTJiK2RDV2FJOW1JS0JyNTdLMURM?=
+ =?utf-8?B?UnFLQk0ya2YrTjM4cFVlYk5kOElISmN4ei9NSFpSY3NmQ3k0QnI3SDBqWmZD?=
+ =?utf-8?B?TTJkd2pKY0RSL0tCckpIa3FaMDhrdDBBU0FLb1JXOWJuU2pqam1selFEK3Y4?=
+ =?utf-8?B?M1pzZXo2U3lQQWRsTGl5VS94MjZaRVhtS2RCOHR2am1iUTdjeVUzRHhpSEht?=
+ =?utf-8?B?SWhTT01SVGtBeHFwZ1ROTkhxKzBhRHRrbE5DbEp2Z09kcXRHYnZqQmliRzV3?=
+ =?utf-8?B?ZDB4WGZLR2E3MU9lUW0zZ2VqQUs5alZEYnB1SVFYYVBMQTRGWThMUm5OV0Vr?=
+ =?utf-8?B?dnlOMDdIVnJtc1BaUHBROE1RckxpUE5EVXlqL3J1NlM4OUk0RExLdXdpTjNH?=
+ =?utf-8?B?Q1ZFaTAxM0swc2wrYXY3SUptTkhuaHFWSUV2ZWR6b3Z4c2pNQWd5S2U5aE9I?=
+ =?utf-8?B?VGRJdnYrdEs4eUhkMC9DSHZ4bTFHR21qcWxKcGExWE1tWnZDVUpaNDFpREVM?=
+ =?utf-8?B?Qm93K1dBTHJxNVlObGpad3MzMXd6VjhURXcyT1NCaTVuRTQxcExsRXcrTHlZ?=
+ =?utf-8?B?Rmh0TkFNWkIvVGcrcVorRUJuTVRuMVpTa2syUU1wdXo5SitVcnROaHNTVjJl?=
+ =?utf-8?B?TFdTVHZSMDJrcWExT2dxcDlwOEU0RkxMN3ZPa3JMS2oyMmI4OC9UUThRbDRi?=
+ =?utf-8?B?ZG9CR2dCNHl0czF3NTFRdVh3MWNiTXM3U0NkazNzeWV2YWh3R1JtM0wvZnhk?=
+ =?utf-8?B?N2t3cmwxL2RNSEdrQ3Mrd0FWT0w2aHFOMFNPT2V6TytFTys2YWt5SHdJWjk1?=
+ =?utf-8?B?dXJvOExQcjRXRHZ0bzI5VVpNZkxTSDdOek5qV09JR0toK2RRSzRmeUUzMlFP?=
+ =?utf-8?B?TWRVdWJPNFY5eFdCanMwRkVuaXAxNnJ0dFR6NGNBNXkwVjhGeUNyU3o5Lytu?=
+ =?utf-8?B?UkZIMFF0MU1yQ3BtR2hmbDJsL1gwaE5rcHY0UGZwS3dJK1E0QndGNDdLNHJa?=
+ =?utf-8?B?VzI3T29GMGRtVW43allwdkRZVTlxQmlycEhwOUVlUmpxSS9wN202d2hjengr?=
+ =?utf-8?Q?W51BXU2BygAAEkzU=3D?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 82717739-297a-4434-881c-08df026ef720
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2026 06:06:12.7410 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: P0AH+V9sBV434M6NX3PanIAB+6sDMcRzlg9QIzms4kNnv2ZGo9+BGLwzAT9n7XvVSApi1Bt2CN4HBhRP+X3kkgQWHtpManR8qy/yebLrvzc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6132
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -86,97 +185,35 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-ddr_load_train_firmware() remembers the type of the last loaded firmware
-image in a static variable and returns early if the same type is
-requested again. That is valid within a single ddr_cfg_phy() call, where
-the 1D image is used for several frequency setpoints in a row, but the
-state also survives across calls.
 
-Boards that probe several DDR configurations call ddr_init() more than
-once. The power up procedure at the beginning of ddr_init() resets the
-DDR PHY, which leaves the image in the PHY memory in an undefined state.
-The second call then skips the loading, starts the PMU on whatever is
-left of it and the training firmware never reports a result. As the PHY
-also stops answering on its APB interface at that point, the boot hangs
-in a register read, which no software timeout can recover from.
+On 25.08.26 01:28, Fabio Estevam wrote:
+> On Thu, Aug 20, 2026 at 11:25 PM Marek Vasut <marex@nabladev.com> wrote:
+> 
+>> Why ? Init the bus in slowest mode with widest bus settings, then try
+>> MRRD on all available DRAM chips, then figure out which ones report
+>> valid IDs and which ones fail the MRd .
+>>
+>>> , so I'm not sure if there is
+>>> any benefit.
+>>
+>> Generic solution that surely works and does not guess the DRAM size.
+>>
+>>> Also I'm not seeing anyone doing this kind of thing. It
+>>> might be worth looking at, but my primary goal now is to land patch 1 of
+>>> this series in order to fix the regression.
+>>
+>> What regression ? (I was not CCed on that)
+> 
+> I think Frieder refers to the regression below (patch 1/4 of the series):
+> 
+> https://patchwork.ozlabs.org/project/uboot/patch/20260819070758.51350-1-frieder@fris.de/
+> 
+>> You can (=should) send bugfixes separately.
+> 
+> I agree.
+> 
+> Frieder, please submit bug fixes targeted at the 'main' branch and
+> cleanup/improvements targeted at the 'next 'branch.
 
-On some specific Kontron SL i.MX8MM with 1GB or 2GB DDR, where the first
-init is expected to fail and the second one uses an adjusted
-configuration, this made the boot hang every few cycles.
-
-Move the check into ddr_cfg_phy(), the only caller, so that the loading
-is still skipped for repeated setpoints of one run, but never across
-runs.
-
-Fixes: b614ddb5d335 ("ddr: imx: Save the FW loading if it hasn't changed")
-Assisted-by: Claude:claude-opus-5
-Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
----
-Changes in v3:
-* Drop patch 2-4 as they need to be sent separately
-
-Changes in v2:
-* Add missing hunk due to rebase gone wrong
----
- drivers/ddr/imx/phy/ddrphy_train.c | 14 ++++++++++++--
- drivers/ddr/imx/phy/helper.c       |  7 -------
- 2 files changed, 12 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/ddr/imx/phy/ddrphy_train.c b/drivers/ddr/imx/phy/ddrphy_train.c
-index 1a2d071d6f1..63a6ca800a3 100644
---- a/drivers/ddr/imx/phy/ddrphy_train.c
-+++ b/drivers/ddr/imx/phy/ddrphy_train.c
-@@ -12,6 +12,7 @@ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
- {
- 	struct dram_cfg_param *dram_cfg;
- 	struct dram_fsp_msg *fsp_msg;
-+	int last_fw_type = -1;
- 	unsigned int num;
- 	int i = 0;
- 	int j = 0;
-@@ -33,9 +34,18 @@ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
- 		/* set dram PHY input clocks to desired frequency */
- 		ddrphy_init_set_dfi_clk(fsp_msg->drate);
- 
--		/* load the dram training firmware image */
-+		/*
-+		 * Load the DRAM training firmware image, unless the same image has
-+		 * already been loaded for an earlier frequency setpoint of this run.
-+		 * It must be loaded again for every ddr_cfg_phy() call as the caller
-+		 * resets the PHY before this, which leaves the image in the PHY memory
-+		 * in an undefined state.
-+		 */
- 		dwc_ddrphy_apb_wr(0xd0000, 0x0);
--		ddr_load_train_firmware(fsp_msg->fw_type);
-+		if (fsp_msg->fw_type != last_fw_type) {
-+			ddr_load_train_firmware(fsp_msg->fw_type);
-+			last_fw_type = fsp_msg->fw_type;
-+		}
- 
- 		/* load the frequency set point message block parameter */
- 		dram_cfg = fsp_msg->fsp_cfg;
-diff --git a/drivers/ddr/imx/phy/helper.c b/drivers/ddr/imx/phy/helper.c
-index 147ec9ab061..3c39c89de19 100644
---- a/drivers/ddr/imx/phy/helper.c
-+++ b/drivers/ddr/imx/phy/helper.c
-@@ -50,15 +50,8 @@ void ddr_load_train_firmware(enum fw_type type)
- 	unsigned long imem_start = (unsigned long)_end + fw_offset;
- 	unsigned long dmem_start;
- 	unsigned long imem_len = IMEM_LEN, dmem_len = DMEM_LEN;
--	static enum fw_type last_type = -1;
- 	unsigned long spl_start = 0;
- 
--	/* If FW doesn't change, we can save the loading. */
--	if (last_type == type)
--		return;
--
--	last_type = type;
--
- #ifdef CONFIG_SPL_OF_CONTROL
- 	if (gd->fdt_blob && !fdt_check_header(gd->fdt_blob)) {
- 		imem_start = roundup((unsigned long)_end +
--- 
-2.55.0
-
+Sure, I sent the fix only as v3 and dropped the other changes for now.
