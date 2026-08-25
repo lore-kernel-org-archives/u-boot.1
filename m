@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A36CC61DB9
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:41:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A87DDC61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 22:44:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 41FA960736;
-	Tue, 25 Aug 2026 22:41:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4D06F6073E;
+	Tue, 25 Aug 2026 22:44:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yn1oIi6eL2yE; Tue, 25 Aug 2026 22:41:54 +0000 (UTC)
+ id uwvu-hW8LnSY; Tue, 25 Aug 2026 22:44:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787697714;
-	bh=K998AM2Wo+6M0O2epP3ts7ZS9AAFpMrkwfvooI2DwQ8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=L4X0rVKDMZLcFiRmlNhrwCIEojvZPc6XPLCBkPyVMfYFJW8uBHJczegTvKq2C6B5g
-	 uMpw+eTttE9Py+aziI87ZZLkbv88aEFMlrHcdupzqjO6CsViT0D6mKM6rsugrsFGBq
-	 A3xF6jnMRzblm7m9NwMzcAGkjiB2CTq3De7PDAR7TYoqoPeB/QE0+AeVlYjhTPb9rN
-	 760Yx5zD1CMzg1oj5VdOZKd/SuLWUKH8AHaR6Z7eWVLHSzUEN3oQ36J/jSFMH213dp
-	 aRS5rXDPovPFc3z3i0HzftDtQxDVQTFyGI69c1lcgASWY15u83Dkqo63hduSBFN9/0
-	 RUhSHTmCC2JeA==
+	d=lists.u-boot-project.org; s=default; t=1787697865;
+	bh=i6r73XDsKJAWJhoPd+zBVK1LNcoM/kJwTDr3I7kjl0E=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=s4qaeH6FAUwNpvLGW9a1KiF5sbIEY9yVkSJDjlQfsVxdyACFuOwqbvZQCGGCz95g3
+	 bg845V7M88tlYL21Odshfz1HAmcAl0GpeEDp260NzZqx3iYmm54pRNGO0leKpTp9Ji
+	 qdPwZhXT8kIPAIJQaFt4i0i/GVFMe/J27rW3ipsF9qTokbjZkP1K+JCPuyVYTISVkO
+	 X01KFCtDko+8jOJJGOGEPtadKlyS/6e3DeY7VRkgq+3jWHxW3PG9S2QXrFEd3kMFjd
+	 fCapD4tSN/8K6qEpMDtQuSAf9oeV8xYC3DR4NTk6XDaA4ZrfrOnLXNUcNuBXZqRC1u
+	 2lIu7VErmearg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 07CB1606F6;
-	Tue, 25 Aug 2026 22:41:54 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3D41C2FD
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:41:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2BB47606F6;
+	Tue, 25 Aug 2026 22:44:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6ABF63C3
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2EBCC40612
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:41:52 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5CB6B80B48
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KkMMj3bFVw5w for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 22:41:51 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.120;
- helo=smtp-relay-canonical-0.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=hoUqBdKD
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DE6E040606
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:41:49 +0000 (UTC)
-Received: from LT2ubnt (dynamic-176-006-060-003.176.6.pool.telefonica.de
- [176.6.60.3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id B6694415D2; 
- Tue, 25 Aug 2026 22:41:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787697706;
- bh=K998AM2Wo+6M0O2epP3ts7ZS9AAFpMrkwfvooI2DwQ8=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=hoUqBdKD4NJcI42Dn+cTPwX4XAz6ivFi0NBbC3654GBejSMDQ4XelwR3CKRtzi2gj
- Uz3JbFVIMamEOYT+ANUdDO/kpNFBAJIbLDl8yyoH/feBQLiTzt85lIj6swf3uyyjQ1
- B3PtnvWOTUrWQdgnnvOzA96jotskHRpi/43m8qvxphS9eDSFb20YUzs2OwqrigkHJ2
- rbyV3LtWBUpDylWtolsDGt7G6d0qU+jqNQDHIMlYrneHPSXPJXjmSZ3V1SJ6S27gX5
- OEaQZ3nKZ0zLjrWwcwzkZ9SmTRMv5SK+pt7h+UimMclf9WkGVVl6AFvqU1uKjZNXoT
- uDQuOUOtLohcbR/bzTNiaLdvWSM1t7c8DGZJZSXLxzYi3CqvYvdQ2dWhPHGxb6hyqh
- rXhY1S/EbeBvCzWhBGyqzAdGs71v96PGQnYh7C71R/fCdY0vWeeAkTXwZurN7w9npC
- fZUvHEJeatmgag5F60Cu4tCT6UpxU/Fh9ZQbSo9r2EuE7JZ0pAtjjTorIZtsmE1fw4
- GQ6C0rq6D7ieqMv3cwzUo+aJydN+serLUpqOHaOA/HmUMDDecU20TIRfzMe1XRDOHp
- kjspQL+HxJOPLSdZJVw8qwRlrHNH4/JulBt6S//Qlh220vGh/lIT07OAEkVAZPINi6
- 9e+iRyXkQ7gnnIIm63wjKSpU=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- u-boot@lists.u-boot-project.org,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd/efidebug: do not allow invalid boot order
-Date: Wed, 26 Aug 2026 00:41:41 +0200
-Message-ID: <20260825224141.141745-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yoOU0VlDAYPp for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 22:44:23 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=XGeXJM6y
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A8F3380AC5
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 22:44:23 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 06A4D60053;
+ Tue, 25 Aug 2026 22:44:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CE791F000E9;
+ Tue, 25 Aug 2026 22:44:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1787697860;
+ bh=i6r73XDsKJAWJhoPd+zBVK1LNcoM/kJwTDr3I7kjl0E=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=XGeXJM6yosz7J5cHB0ccnXKlNb/1vupmnqBWcIFzMT1l8wvk94uvwDCcFGz9YTGWz
+ B/GC3H5BuDNHzFFKNUSW+IY0CqhydTAtvGlcevrjgx0xO7WcDxobJkQiaIAAbqR2jo
+ yXhus/qLMlYEtVliDL7vniUYCo1oPVtLv+DAXMMnH/clYHZoNQflGFngOxxOawv1qq
+ D+SsyhPSXYpXsJmvfZdslBCfN5cSFDuooUwjz6cN6dureHpCQVCy1n5Q6ajeowCPh3
+ ashGXVjJhRVhjjR8Y39S4vgIDHfrDgEgIdt/U9eWp9iXay1s12sXwK7J3E9iCWDekK
+ xpHPomyt3pyfQ==
+Date: Tue, 25 Aug 2026 22:44:18 +0000
+From: Yixun Lan <dlan@kernel.org>
+To: Bruno Banelli <bbanelli@gmail.com>
+Cc: Huan Zhou <pericycle.cc@gmail.com>,
+ Guodong Xu <guodong.xu@oss.qualcomm.com>,
+ Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] board: spacemit: k1: accept the "m1-x_" TLV product name
+ prefix
+Message-ID: <20260825224418-GKC631715@kernel.org>
+References: <20260825065257.69536-1-bbanelli@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260825065257.69536-1-bbanelli@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -98,47 +93,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The `efidebug boot order` command should not allow to create a boot order
-containing non-existent boot options.
+Hi Bruno,
+ Cc Guodong's new mail address
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/efidebug.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+On 08:52 Tue 25 Aug     , Bruno Banelli wrote:
+> board_fit_config_name_match() derives the device tree name from the TLV
+> product name held in the board EEPROM, and only recognises boards whose
+> product name starts with "k1-x_".
+> 
+> Boards fitted with the higher-binned M1 part report an "m1-x_" prefix
+> instead.  On those, fdt_name is left empty and the function silently
+> falls back to "k1-musepi-pro", so an M1 board selects the wrong device
+> tree with no error or warning.
+> 
+> A Milk-V Jupiter fitted with an M1 reads, from the 24c04 at i2c2 0x50:
+> 
+>   00: 54 6c 76 49 6e 66 6f 00 01 00 1a 21 12 6d 31 2d  TlvInfo....!.m1-
+>   10: 78 5f 6d 69 6c 6b 76 2d 6a 75 70 69 74 65 72 fe  x_milkv-jupiter.
+> 
+> i.e. TLV code 0x21 (product name), length 0x12, "m1-x_milkv-jupiter".
+> 
+> The device trees are named for the K1 in both cases, so accept either
+> prefix and keep deriving a "k1-" name.
+> 
+> Signed-off-by: Bruno Banelli <bbanelli@gmail.com>
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index a6faa36b500..e2739b1df04 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -1423,12 +1423,28 @@ static int do_efi_boot_order(struct cmd_tbl *cmdtp, int flag,
- 		return CMD_RET_FAILURE;
- 
- 	for (i = 0; i < argc; i++) {
-+		u16 var_name16[9];
-+		efi_uintn_t size;
-+		efi_status_t ret;
-+
- 		id = (int)hextoul(argv[i], &endp);
- 		if (*endp != '\0' || id > 0xffff) {
- 			printf("invalid value: %s\n", argv[i]);
- 			r = CMD_RET_FAILURE;
- 			goto out;
- 		}
-+		efi_create_indexed_name(var_name16, sizeof(var_name16),
-+					"Boot", id);
-+
-+		size = 0;
-+		ret = efi_get_variable_int(var_name16,
-+					   &efi_global_variable_guid, NULL,
-+					   &size, NULL, NULL);
-+		if (ret != EFI_BUFFER_TOO_SMALL) {
-+			printf("%ls not defined\n", var_name16);
-+			r = CMD_RET_FAILURE;
-+			goto out;
-+		}
- 
- 		bootorder[i] = (u16)id;
- 	}
+Looks good
+Reviewd-by: Yixun Lan <dlan@kernel.org>
+
+
 -- 
-2.53.0
-
+Yixun Lan (dlan)
