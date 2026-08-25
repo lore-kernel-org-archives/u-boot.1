@@ -1,114 +1,116 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD63C61DBE
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 16:03:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F12AAC61DBC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 16:03:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 084C2405F2;
-	Tue, 25 Aug 2026 16:03:42 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZU4FePhxKjSC; Tue, 25 Aug 2026 16:03:41 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787673821;
-	bh=ggEW+WH3IuUR0vldkh5wKoAFHQ19jZMNvos87VMpagY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=qzp37uUFy12MlEyNKaI6EDk+iTwCgps3oc2PL4+dzpkmMLIKtcBtkH0pW39UBpMgM
-	 lnvsgJNkPzTfreTuzZxW3YUhlR9lP5SjsYTreQbzqXGRnP1ESwuy2KYoQLc8iHtG1S
-	 hJcSOziu7Q9IgpPDrBNyo3WP4sFk5b1OnQNbOX0ctehridhavmQZ/zEq4SZGOHiXux
-	 YXWFI8E76AXyjD28SMuryoP4ryH8fV3JfHM1vJln5UggjWoOOKQURou8/Xw5PZEy21
-	 c9kvzb/qWAUE+5i30srLbpo6Bxzj1JqL7P6QZUHMMphiTIpKCVAozqtb4MqLnK0t8I
-	 8IyJGYPtZruMw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4683C405E2;
-	Tue, 25 Aug 2026 16:03:41 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 7BC143DA
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:02 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6D610606F6
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 56E2160733;
+	Tue, 25 Aug 2026 16:03:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UZ-y59nHDaDK for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 14:20:01 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
- envelope-from=pranavkasthuri@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=rZ6LQWa1
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6AC7D60683
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:00 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-47f96c5b722so2136452f8f.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 07:19:59 -0700 (PDT)
+ id TjM_He3t3W93; Tue, 25 Aug 2026 16:03:42 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787667598; x=1788272398;
+	d=lists.u-boot-project.org; s=default; t=1787673822;
+	bh=+L1x+nWBzI01sEG6F9wc7H7Wat2TGhi98WE1KekL8+o=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lKVh3FNh7PpS9oFriIYOle153iSoW2CS1WQRJvyaAv9C1rAWhg7AWap8vIX31zidX
+	 rb4/G1i/yqov3FyYXdskX23oE0EQ6MOM2whKV7iqKf93+zh0BGolUBZSIsVK8sMg3k
+	 UKxttTIElVPipCPfe27EyZOmpQkIA1CI0NXFPH0+7OT9IKTOBmP1JuilaICMGQOQeo
+	 iQMb3UCxnCosXiBukcrWOKKjh5UsiZG8jXm3W4zpfjgiDs/CYsEDJv/hLyQg/WFcrl
+	 rsaS1vP+aJezFno2lhfdvce5utmGRuV90J2N1nRptVAoVQwlwCwys/RJGM0pDUQ1WD
+	 q9CtYydGwQ7Yg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 856CD606F6;
+	Tue, 25 Aug 2026 16:03:42 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D0BA81465
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id B728E400F9
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:03 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NewUVpebYpMu for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 14:20:03 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
+ envelope-from=pranavkasthuri@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=HRwBUQ7L
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BD7D640092
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 14:20:02 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-482dbc9a00bso389656f8f.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 07:20:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787667600; x=1788272400;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ggEW+WH3IuUR0vldkh5wKoAFHQ19jZMNvos87VMpagY=;
- b=rZ6LQWa1URfz0tM5WQ/MZUw83g/hRmYesz5LUlJPfCvzx/B6Nlajshtnsstvihsx+i
- LufcfecmTQangpffGUQkRSIYNsU8ZaXjpBON+jKerIHOsfkwESm9r3DmKruCqOyoRABB
- FhmMdWPyabj6r8uBDhCy6QNToN4gi20vThnNdKPAhvKPD/6Ios9OOD22BvUeeoWgmP5s
- V0qzzMZgbiMceohKJRYSExmIMaV3NbYOgLvrpLeXUtmmMR9OPtyPwoYSe7BGaI3awJB4
- QqgYhxGBjWtWIuwPTgqSAxt7gqt7/v2l/lYxPhpmnINwW3vZbeNcVvyzpJFNLMoqj/Oh
- xL4g==
+ bh=+L1x+nWBzI01sEG6F9wc7H7Wat2TGhi98WE1KekL8+o=;
+ b=HRwBUQ7LlqQonPaabQfwGVxs7dPPTKznAgQfzg9p7bVQiZF4ezpY9ouxJi8nNlWTLz
+ XxQ/cgjawkdnSgnD5VclQwNNwwBpCZk8zMUxgK/b/KTUb06kMf0TAJ0qOgIQ3fu0hDLP
+ 0H6H7EGWvjnY7rVxo3RXinagczhd+weu0go0XmmcRnLdbeWl/IREAhT/nDlSEWWKz/Od
+ ulvXelNon8OQMhKFM3fSyi28Vg9MCZbeALDwbpiR0lhHEqrVB4j/nxwcCvzc9ZVZnKuN
+ IELwdk/vZZeHC0XCL5katL6Q3ldZPOmLfrGhpWb7AkpLnxh0WZIN0Z4W2iw5Gvx75OYM
+ RtMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787667598; x=1788272398;
+ d=1e100.net; s=20251104; t=1787667600; x=1788272400;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ggEW+WH3IuUR0vldkh5wKoAFHQ19jZMNvos87VMpagY=;
- b=UGveX086eQKsN1JLCpe3NjIABOrF9ENdgcKcTHZ9smzSb7p4knS0frlV9lKwr3m66V
- pC28fT8Xx3pVRxhzogqmER3xPP/2faZItecD4TAEF07zB7RSrfdacNJUFwCtmpg8K6JK
- 90iTLmjPzKgw6yMd7EzrEcaf9G07wwyx4/PuDuDbzhIdNk+EJSIpgn7UNd5YWp5W1FsN
- ePq56of0TdKRGhTAZDi5HVfHEcrUmwhDTChApgDvwqGn8F5bfUQJRVGUCayEju2V21kL
- cdCAdwdCVutq7yA/yww4opVw2JYuvlPZc2UaBwZ5Z9sivBZ2DYKS4FrQAnPAnStfiWRY
- WUrw==
-X-Gm-Message-State: AFuF++k1jXn2GdqFHRQP4XpM0sPCZ6uFjd/ylRl/Kts88j/WHMb1Rl4c
- 9plytu5KprsEMbGkemiFv9hi82z2V9pP46AkBa8RxWS0R+R11oWNb5XwbnagP5D++3M=
-X-Gm-Gg: AR+sD12gtGSsW8GeUQ6R8xHY+JvZEAQqYLupPcO9MUiYxUjw1BRrNSxIsP0i3IfzheN
- Duu415qP6au08uZcMFM72gvjGP5RX/Q4tU75KtN6XgbObltvg0XGyfDoDCfuhOURE8uAnlIFCZj
- pA7xPiu38xLIYbECvBMQ//9OJL9OK/9n1s7/PHx586YJ6zkCnfuTUPsE3okWbaiQjaUuYudhXOt
- rIegdOb2iqsjJhjHCFpanFkBroLYaIw2jhS1BY224qsMN7MHTztR8HuHn/wYdcgwEUxIdDC3GMF
- 7i8P8hxl9Hnwh/xbsUjsJaHfUHJsAOULIJo2tMsRjdhwSqQ/4/xKLMr2U0ijGBKFHjv3Ye0pWH6
- R+TgX1Wo+vESYT4SbpecFHYZux31TGQnZwXMUpPeSVVJVwUHe77kGRhw9FniXEth+7l8pGy4EEm
- iZKqxLbm+iOXvUAbg0n6J3GXy003OwUm9F6eSiQb7Udddib1NzqZXxQzuvynFVCzL2/TJTB7JJq
- 0t9cyB/RNEi6LVRjn9OmeGBkKOWoo19wLBdEsMhiwTzHORObTMcGwBR52JvusC+B52r7ef2xJmy
- ASDCL/KwGwT0URYc+b7A91j+
-X-Received: by 2002:a05:6000:2412:b0:47f:9ac6:ca60 with SMTP id
- ffacd0b85a97d-482c0b05a84mr45778655f8f.0.1787667597751; 
- Tue, 25 Aug 2026 07:19:57 -0700 (PDT)
+ bh=+L1x+nWBzI01sEG6F9wc7H7Wat2TGhi98WE1KekL8+o=;
+ b=AqALTUbS2yxe1GQgU/uJS8KpONQpAKM1rz+BuvIEDZdyipYIoj2XJ/hfBCVebsb0oz
+ +QQOU8qoAhoRe7EBMuwbB3QZY5izLgMiEr6ZOSHOpj1AALQiIZTpCm8oB7mDHQv1Ioc6
+ WpvkUSNywB1AhR3ITqX0pTVtuDSQ8tq30dDfVOSSOIHFe+pIXQbb7jNiDkfGVCaRtgpr
+ WN59cao1KBgZKVQsi44gYhsPr3vLmRLrNVxm9bL0hoFEpwa8Af8+J2x4XPE8GtxqdCHN
+ sJy0l0C51po7Vb/W0pDrZ5dx/6Pd4NQU5NV+kXGlulVt3vhWsyA3ijnSflkOFO36r/Dn
+ 3YFQ==
+X-Gm-Message-State: AFuF++kU4gc9j6k0xG+Tp6zpB1mzXTBI8ddif4IMG1og4zV70eF6J0B9
+ nae1b1eBEInUNerdslJh3JD5kmfEuAaioUU+wMcSWqN+IJxWQmbHxdV4+FIL1khuLDo=
+X-Gm-Gg: AR+sD13Gwqhyo9b9t8fTNmvu73IZEV/Aj5yaHEYdU1JCcr+JawvFCJ8daAGlIXOHTVk
+ SerW1bdhnShSr23nLE3qVPWAU/LKO30hRAzl71RY8c+GsL83DISfFlJUtX/mq/1uHGYQLjCXNaF
+ 9J9R038nwbMXpDqHsuZhGyh1SVpSz0JsGWGJeC3fUMMU5sxsLyeSHWoWtf/VdZYK0nr/p5Jetzi
+ 0GCSEvCebot7uG5TyT3fmNwwFtfBYeCTSZUTQ2oY3ZPUzYZSsJ5Sv7iON9aR5IB06r7wrCHoGWR
+ s3nhlfi1qiCCtwVfdGG3hKSKx1FaMlCHNqDM1L7G7b3N/nMf+7+Qpn6EDwi0+yl7ytj4zO0w+NF
+ 6A+Jcj82h1wxlO2TOa12foMa3so7fnvaRxps+quwVZk8J+Ydg5jAlNz41rllcREIBtdqQKwJ+vx
+ yFj4tQ8hkS/RMYTNrt/2HFTZMIXEGIXXB6iKh7GPfMUkBrpugbBeupo6iLQFPFrT3Wel8m+A0lN
+ /w4ca1hr729x64OwoTf1W3h5w3ZjlODXgltVriZ62G5vv/NbJA1xk1mkaz0tC2UVjdJtk1gBQXg
+ 2cN932pSlOc9yiMkWm8bqX6B
+X-Received: by 2002:a05:6000:4183:b0:46b:70db:2113 with SMTP id
+ ffacd0b85a97d-482d98c94d0mr9068599f8f.0.1787667600195; 
+ Tue, 25 Aug 2026 07:20:00 -0700 (PDT)
 Received: from Mac (default-188-240-185-161.interdsl.co.uk. [188.240.185.161])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482c9b69d7dsm11745871f8f.4.2026.08.25.07.19.56
+ ffacd0b85a97d-482c9b69d7dsm11745871f8f.4.2026.08.25.07.19.59
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 25 Aug 2026 07:19:57 -0700 (PDT)
+ Tue, 25 Aug 2026 07:19:59 -0700 (PDT)
 From: Pranav Rajendran <pranavkasthuri@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: trini@konsulko.com, sjg@chromium.org, philippe.reynes@softathome.com,
  Pranav Rajendran <pranavkasthuri@gmail.com>
-Subject: [PATCH v2 0/5] fit: cipher: bounds checks on the ciphered image path
-Date: Tue, 25 Aug 2026 15:19:48 +0100
-Message-ID: <20260825141953.9534-1-pranavkasthuri@gmail.com>
+Subject: [PATCH v2 1/5] lib: aes: reject a ciphertext length that is not a
+ whole number of blocks
+Date: Tue, 25 Aug 2026 15:19:49 +0100
+Message-ID: <20260825141953.9534-2-pranavkasthuri@gmail.com>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260815220754.11724-1-pranavkasthuri@gmail.com>
+In-Reply-To: <20260825141953.9534-1-pranavkasthuri@gmail.com>
 References: <20260815220754.11724-1-pranavkasthuri@gmail.com>
+ <20260825141953.9534-1-pranavkasthuri@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 25 Aug 2026 16:03:37 +0000
@@ -125,44 +127,64 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Changes in v2:
-- Kept patches 1-3 as separate changes per Simon's request (distinct
-  Fixes: targets, easier to back-port independently).
-- Patch 2: documented the new -EINVAL return in the kernel-doc block,
-  per Simon's review comment.
-- Added patch 5: a fit_cipher sandbox test suite covering all three
-  defects (non-block-aligned 'data', a truncated
-  'data-size-unciphered', and an oversized unciphered size), per
-  Simon's request for regression tests since these are security fixes.
-- Added patch 4 as a prerequisite for patch 5: <u-boot/aes.h> defines
-  the disabled-config cipher stubs with external linkage, so a second
-  translation unit including it (the new test file) failed to link
-  until those stubs were made static inline. Found while writing the
-  test, not previously reported.
+image_aes_decrypt() allocates cipher_len bytes for the plaintext but
+then asks aes_cbc_decrypt_blocks() to write
+DIV_ROUND_UP(cipher_len, AES_BLOCK_LENGTH) blocks into it. For a
+cipher_len that is not a multiple of AES_BLOCK_LENGTH the rounding up
+adds one block, so the last block is written up to AES_BLOCK_LENGTH - 1
+bytes past the end of the allocation, and read the same distance past
+the end of the ciphertext.
 
-Patches 1 and 3 are unchanged from v1 and carry Simon's Reviewed-by.
+cipher_len is the size of the image data in the FIT, so an image with a
+'data' property whose length is not block aligned is enough to reach
+this. The overflowing bytes are decryption output, i.e. they depend on
+the key, but the length itself is not covered by anything that would
+stop the image from being parsed this far.
 
-checkpatch-clean, builds for sandbox (CONFIG_FIT_CIPHER=y) with no new
-warnings at W=1, and the new fit_cipher suite plus the existing
-lib_test_aes and fit_verity suites pass under `ut`.
+A CBC ciphertext is a whole number of blocks by construction, so treat
+anything else as a malformed image and reject it before allocating.
+With that established, compute the block count with a plain division so
+the buffer size and the write length cannot drift apart again.
 
-Pranav Rajendran (5):
-  lib: aes: reject a ciphertext length that is not a whole number of
-    blocks
-  image-fit: check the length of the data-size-unciphered property
-  lib: aes: reject an unciphered size larger than the ciphertext
-  include: u-boot: aes: make disabled cipher stubs static inline
-  test: boot: add regression tests for the FIT cipher bounds checks
+Fixes: 4df3578119b0 ("u-boot: fit: add support to decrypt fit with aes")
+Signed-off-by: Pranav Rajendran <pranavkasthuri@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+(no changes since v1)
 
- boot/image-fit.c       |   7 ++-
- include/u-boot/aes.h   |  17 ++++---
- lib/aes/aes-decrypt.c  |  21 +++++++-
- test/boot/Makefile     |   1 +
- test/boot/fit_cipher.c | 113 +++++++++++++++++++++++++++++++++++++++++
- test/cmd_ut.c          |   2 +
- 6 files changed, 151 insertions(+), 10 deletions(-)
- create mode 100644 test/boot/fit_cipher.c
+ lib/aes/aes-decrypt.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
+diff --git a/lib/aes/aes-decrypt.c b/lib/aes/aes-decrypt.c
+index 741102a4723..85773a9c4f6 100644
+--- a/lib/aes/aes-decrypt.c
++++ b/lib/aes/aes-decrypt.c
+@@ -17,6 +17,16 @@ int image_aes_decrypt(struct image_cipher_info *info,
+ 	unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
+ 	unsigned int aes_blocks, key_len = info->cipher->key_len;
+ 
++	/*
++	 * The ciphertext is a whole number of AES blocks by construction, and
++	 * the decryption below writes one full block at a time, so anything
++	 * else would overflow the output buffer.
++	 */
++	if (!cipher_len || cipher_len % AES_BLOCK_LENGTH) {
++		printf("Invalid ciphertext length\n");
++		return -EINVAL;
++	}
++
+ 	*data = malloc(cipher_len);
+ 	if (!*data) {
+ 		printf("Can't allocate memory to decrypt\n");
+@@ -30,7 +40,7 @@ int image_aes_decrypt(struct image_cipher_info *info,
+ 	aes_expand_key((u8 *)info->key, key_len, key_exp);
+ 
+ 	/* Calculate the number of AES blocks to encrypt. */
+-	aes_blocks = DIV_ROUND_UP(cipher_len, AES_BLOCK_LENGTH);
++	aes_blocks = cipher_len / AES_BLOCK_LENGTH;
+ 
+ 	aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
+ 			       (u8 *)cipher, *data, aes_blocks);
 -- 
 2.50.1 (Apple Git-155)
 
