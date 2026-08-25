@@ -1,123 +1,134 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33DEDC61DBE
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 13:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2535AC61DBE
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 13:50:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DD45480CB2;
-	Tue, 25 Aug 2026 13:48:16 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oq3VtqUw7BnJ; Tue, 25 Aug 2026 13:48:15 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787665695;
-	bh=bGaUIYC63b8ec1sjBHp1O1hT8j+iu2eOgvEKJiMTQSY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ODOufTA38ybTm2CJWeozeWV/7uE8wiKBQmFcFLX/U3nitukufkRn0VcrzeSdwP+mr
-	 9NKMYrTw2gtZCFqjcZFnFNUkQ/gjLIYXmgqJZNS1DQrpfxsJfgoS/vKG/uY2mwI3sI
-	 ylWkE3uLfTUNMOh1A4vBCawebCOSl60KAp7sVVzjtE+9q910sfUgZjQCOn5O4hv+6B
-	 1TgLKssz1QMis8fm/dhiKp4olD4Qn1t3Y/g6klj9Eo7VEtsuTy4BBa3f9tYouN3tNg
-	 qw+tjy8b0YlAUCdzWejB1rfvZeVVtYpA7L6X4MEohp4tTLvUy8u/N+RXvz1BYyRj9i
-	 JgFDnvrJnI1GA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 55F2A80CA2;
-	Tue, 25 Aug 2026 13:48:15 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 83C8729B
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:48:13 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7277A40501
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:48:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EDD1C405C4;
+	Tue, 25 Aug 2026 13:50:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id su54twsZPpqa for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 13:48:12 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1134; helo=mail-yw1-x1134.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=lMThril1
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9004C404A8
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:48:12 +0000 (UTC)
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-81ea0b7d137so42932097b3.2
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:48:12 -0700 (PDT)
+ id DXDjkleJoshz; Tue, 25 Aug 2026 13:50:45 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787665691; x=1788270491;
+	d=lists.u-boot-project.org; s=default; t=1787665845;
+	bh=SUu2Rh4IBljJMlI65RlMFKwnJJ+X2VGIRTvbmeTjh9c=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Vw1vey8slLfY2r0nsUwmbLgx8hvy5VurzEJ2HqUIJfSLGVDYVR9185l05hWUOdpKP
+	 dCWZGyVTLUFl7cOD1sc3aSGKaP7hvF0phw8gtHlefLj7ncLdToM9/QNr5OQRqxltti
+	 7B9bNsTJWaSO7Fql+HVkSa/syvHVMoCpGcO4r11orpbV/jXpJcYsJe0pnuwq/rblD+
+	 UGxsizEaqYgNgdhyyxWIJqMmICHdPQjT5knftA/IexOWA2biEtn4Y/UcY2htL7vjsT
+	 nkzUkZ/7pvnbqe/pkPaCvReeyiBkfoSnuNfdz1Nfs6SFULWhYtLmRR3doRHjnw9AbH
+	 A7oqY4Bx2MJ/g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 557584055B;
+	Tue, 25 Aug 2026 13:50:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 86ADA118
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:50:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6CD21606B3
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:50:43 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id g7lrKJDE0D7U for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 13:50:42 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::736; helo=mail-qk1-x736.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=c2NeBbWj
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8F87260603
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 13:50:42 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-9371bcf1f8fso212151785a.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 06:50:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1787665841; x=1788270641;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=bGaUIYC63b8ec1sjBHp1O1hT8j+iu2eOgvEKJiMTQSY=;
- b=lMThril1hOW5eOl5yBAtiM9l2sSldNfh7vu/S/fka+IPdEUke1PoG9i+J6Mk9oqhnF
- iCVHjA26ExYXqBAKSeDGdwMXqTxmJAPyl6EDR/5eEn3svD05HlVDQ52GIVGcU+D505RF
- /4kMBkXytQsYts0tlXsARtG9vcgktY0OYmhpw=
+ bh=SUu2Rh4IBljJMlI65RlMFKwnJJ+X2VGIRTvbmeTjh9c=;
+ b=c2NeBbWjQe3wxFMp9viaJmA365tAwRNyAMkv6m4spsoyTw4L2FpHcbtK1luptYZWpo
+ pTV5s/tG+OeZNr2YgDiYo2unUSRQNVJO+iLMUo7uGMUSRby4+XEEQZhJPGPjlzAZiZlp
+ mZRb0d+xvyubYg/g/if69g6chpapmFkkqyeCg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787665691; x=1788270491;
+ d=1e100.net; s=20251104; t=1787665841; x=1788270641;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=bGaUIYC63b8ec1sjBHp1O1hT8j+iu2eOgvEKJiMTQSY=;
- b=n/WSJhdqRl3dUIEIfr2pH4oK60TLMFcWyMatlDRpLRpc1sb0kZ79aKZ6fy/kIGR3hI
- nynJdhYy+gJ5vhlI3289eEnUxbhWvmipU9Zv3hy5rr0p7p65JXGZEBKCz/rkiEMnUWza
- BKYhngGvGUPqxe8CsSRcsLDZqgwyNMWXuadi1hCam+V5hbxdE+UiuPTB8MF29CaoA6V2
- hNwIuZ7EvhlIVWWfHZMUYcJcnC1G+rzy8ObzhduajDdvzMi0LlDIvkKVJbPlWA8wT6G8
- wsrmRsQGW6aab3Z4oRzKGRVSFuoGoA1RBTnmVGHP76N074c2ao1fC/zin2EPWXOG7Psc
- 5VWQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpX8vKJ5HiSavL4GVOZpNCaqEst9BcHpXWqWwywHHGdimQlvhEHmGB6cVnO7FkNSlXLZPSTRpA=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++kb3hFs0kx7xFnjjsn/7cjHpt713BX21m5/Wz8PPnj7DkzeUlt6
- 0GShS1FBE0GjUZwPaTj4FpO1X1BdoF5jcA19M4N49ClQ4Wu0wkTSXYmpk9UumZzzAsA=
-X-Gm-Gg: AR+sD13ZdB33ZGM6aDBfU56Pwy774mXlvl9+P1kJgjyEx4pXsmYUr2fVgQHI5g7IInn
- RYsk9fqwzFFa06rxTChFOF1qkySKdFGNxCKlDPdIR8B+Pft4ob3qOexgSg1btJGeEo3m0ugzHyP
- tpI9pOMezfPYuDhVetai0tgjIQJHK5hVtZRHJYGMoR/TnZ2WwqVZwC3kI+QYqWM43nK4dlPQDhr
- PEBqxCjZdGsLyAMsgucQqUDiKngmm7mKyNvOIrVwpM/Hc7ggPC17vxlFa3fePb/OSKzqaQVGDkt
- Rssk1v2jgH5ZQhlb/bYtdF4U/GoUAXneyuqKOLoFvUji0a8MmlgItwaPPtPYQWQdRIjjLU4/QMh
- 1wCDULmklK7vbznYpmPrnrHxO/yiqecR0e4xQV6+XdhSEYsAFuJmvU4p2w5ACLNpCHyvkDid0KL
- 6l4DFbjvhUgdS/kRXyWppQ2KvvEbS3ZEzGWb62a+fsBneFuRbXQ/L+T5GGCCzNg/gwFmQj19xvs
- zXM81MXnz5qd2aorWVx/9AjbKErDgNzGuTuw93ptBHK3rat4KcPN91zlQLu3lc1eHrtrC17XH46
- 8R8lHJAxOQ==
-X-Received: by 2002:a05:690c:6004:b0:822:854d:4563 with SMTP id
- 00721157ae682-84c9682009cmr111136687b3.8.1787665690979; 
- Tue, 25 Aug 2026 06:48:10 -0700 (PDT)
+ bh=SUu2Rh4IBljJMlI65RlMFKwnJJ+X2VGIRTvbmeTjh9c=;
+ b=l2VRtJLN0yTUPoQ6Wr+3UU/nKTTJ4FO8L09pXaKGe9o8DvMQX95nvSS2gJcT2End8t
+ pKkhuO6sNNcmuO/EyZ1YvKK6NLY+CVbu9Luc15vuoHaME0Ysa9ciASh1D4mk7X4FauRI
+ KrWYP2ImoPyluyQm1JqRP1+6mpcFdW1Vn8KRpI3iBqRhkfMGLtTpEwhceWT10go7KDzi
+ gmFyFzJkPc2L7A3hcZcBEqFpAIlcTqotTJxp9Kt4IHwE/cacQrkpOpNmnLECzKAUCDr7
+ TPe8DoaUSP7QwBWtG2p5diuqj9ys0xUhCNrrd2wRsIRlFiB1kUdzKjmAbaADfcN0K2FD
+ oQwQ==
+X-Gm-Message-State: AFuF++km2nl0b+uodTp+biNlQCP1/QxbMBwEemuo8M51YGOZWerjnrvT
+ D7bT+A3nTmPbqV84U5lcAzmRnBtCgAkVEi3k8PwMBmAdKv+HNwOvoVA15blI9920tts=
+X-Gm-Gg: AR+sD12Zut9gXYxQQx9tP4lDRta1in+UB3KdHnBOj+IpRrEfKLqvc8GH9rWLPmwl4UM
+ jpiNPHTG4BZZPhU0skjtcvRt/z+9pGUB3k56Ln7ZkAKUfux6JdwLs3pbc7o/sf3HD+LjasVHZOO
+ 2b0ORUx5ZJPQTicSSy+ZPximVlI0AGZaJ8W1WJv3rXjDxFOsxFvXXYi1Wcb87+2ZNZONr69VRqq
+ ZlamsoDc/Z1CHS69r/QHNZkrNhQRCFXF3wcUtR20PigLHCcU68yyDRYMjZVRq/7sjJKXOTa7HLO
+ u+p86HTmjZlMQeVn0cMqH2PIMDjhZl6IPwEFfOq3hJFmboK5Ye1jfl45y+GFQvW9yWSC6N/VRcs
+ MPeYUF2bF2wT/Ie+JrPJthwKyDQU5y7c3fqnNDbViKkAwMmHZFCuhqw2tOjk1CFjNVpDeVSxS+d
+ 5ns1SCSD2rX7V+MVRLPrOA97E4oclSWWOyhZec3ulCn3xVJnbkvPX+jfqVzG3VSWBjqizU8tHHF
+ /U5W1PVIlSDpedjJF7ufwYexTQ5te92BePcidxhWqCVAhnRH9M45Wm78/+cfReruDPAd+A2hGd1
+ jFW3N8BOYA==
+X-Received: by 2002:a05:620a:44c8:b0:92e:6a33:7118 with SMTP id
+ af79cd13be357-93746949565mr2402793785a.30.1787665840881; 
+ Tue, 25 Aug 2026 06:50:40 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-84ca5e19ae8sm49688867b3.15.2026.08.25.06.48.09
+ af79cd13be357-93749e9f940sm731420285a.38.2026.08.25.06.50.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 06:48:10 -0700 (PDT)
-Date: Tue, 25 Aug 2026 07:48:07 -0600
+ Tue, 25 Aug 2026 06:50:40 -0700 (PDT)
+Date: Tue, 25 Aug 2026 07:50:36 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Michal Simek <michal.simek@amd.com>
-Cc: Suraj Kakade <suraj.hanumantkakade@amd.com>,
- u-boot@lists.u-boot-project.org, git@amd.com,
- padmarao.begari@amd.com, Rasmus Villemoes <rv@rasmusvillemoes.dk>,
- Simon Glass <sjg@chromium.org>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: Re: [PATCH RFC] scripts: pass dtc cpp flags via a GCC response file
-Message-ID: <20260825134807.GR523975@bill-the-cat>
-References: <20260824044729.708287-1-suraj.hanumantkakade@amd.com>
- <20260824150937.GD523975@bill-the-cat>
- <2c9ac202-68a7-4017-a8f9-91e9b3579166@amd.com>
- <20260824165125.GI523975@bill-the-cat>
- <a3b4bb78-8a3b-4c88-8bca-a32518e5ec48@amd.com>
+Cc: u-boot@lists.u-boot-project.org, git@amd.com,
+ Andre Przywara <andre.przywara@arm.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Aristo Chen <aristo.chen@canonical.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [PATCH 2/2] Clean up emails from non-existing domains
+Message-ID: <20260825135036.GS523975@bill-the-cat>
+References: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
+ <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
+ <20260824163956.GH523975@bill-the-cat>
+ <c012177e-274e-4c88-bc32-1ec647fad643@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7Ay6OAuUf2dKhtdo"
+ protocol="application/pgp-signature"; boundary="6d5+2rkPm2JZts9G"
 Content-Disposition: inline
-In-Reply-To: <a3b4bb78-8a3b-4c88-8bca-a32518e5ec48@amd.com>
+In-Reply-To: <c012177e-274e-4c88-bc32-1ec647fad643@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -133,122 +144,68 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---7Ay6OAuUf2dKhtdo
+--6d5+2rkPm2JZts9G
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 25, 2026 at 07:53:10AM +0200, Michal Simek wrote:
+On Tue, Aug 25, 2026 at 07:17:36AM +0200, Michal Simek wrote:
 >=20
 >=20
-> On 8/24/26 18:51, Tom Rini wrote:
-> > On Mon, Aug 24, 2026 at 05:29:37PM +0200, Michal Simek wrote:
-> > >=20
-> > >=20
-> > > On 8/24/26 17:09, Tom Rini wrote:
-> > > > On Mon, Aug 24, 2026 at 10:17:18AM +0530, Suraj Kakade wrote:
-> > > >=20
-> > > > > cmd_dtc inlines dtc_cpp_flags (including every upstream dtsi -I
-> > > > > path) in the HOSTCC command. With a long $(srctree) that command =
-is
-> > > > > too large for /bin/sh -c and Make fails with "Argument list too
-> > > > > long" while building a .dtb.
-> > > > >=20
-> > > > > Write the flags to a per-target .dtc.flags.tmp file and pass @fil=
-e to
-> > > > > HOSTCC/CPP so the shell command stays short.
-> > > > >=20
-> > > > > This change requires GNU Make >=3D 4.0, since $(file ...) is not
-> > > > > supported by Make 3.x.
-> > > > >=20
-> > > > > Fixes: d31ff219a833 ("Makefile.lib: find capsule ESL dtsi file wi=
-th CONFIG_OF_UPSTREAM")
-> > > > > Fixes: 1e7883f6325a ("dtbo: Fix dtbo generation rules")
-> > > > > Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
-> > > >=20
-> > > > The linux kernel, and so Kbuild, says that 4.0 is the minimum versi=
-on of
-> > > > GNU make required, so that is true for us as well, so this is fine.
-> > > >=20
-> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > >=20
-> > >=20
-> > > We should likely fix this too.
-> > >=20
-> > >    94 # If the user is running make -s (silent mode), suppress echoin=
-g of
-> > >    95 # commands
-> > >    96 ifneq ($(filter 4.%,$(MAKE_VERSION)),)  # make-4
-> > >    97 ifneq ($(filter %s ,$(firstword x$(MAKEFLAGS))),)
-> > >    98   quiet=3Dsilent_
-> > >    99 endif
-> > >   100 else                                    # make-3.8x
-> > >   101 ifneq ($(filter s% -s%,$(MAKEFLAGS)),)
-> > >   102   quiet=3Dsilent_
-> > >   103 endif
-> > >   104 endif
+> On 8/24/26 18:39, Tom Rini wrote:
+> > On Mon, Aug 24, 2026 at 10:32:52AM +0200, Michal Simek wrote:
 > >=20
-> > I think this means we should pull commit
-> > 5f99665ee8f4335f334a5292b6d5b41a577fc2c0 from the kernel in, to fully
-> > switch to 4.0 as minimum.
+> > > There are 5 domains which no longer exist. Remove all email addresses=
+ that
+> > > reference them. Where such an address was the board's only maintainer=
+, mark
+> > > the board as Orphan.
+> > >=20
+> > > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > >=20
+> > This is generally good idea, however:
+> > > diff --git a/arch/arm/dts/sun9i-a80-cx-a99.dts b/arch/arm/dts/sun9i-a=
+80-cx-a99.dts
+> > > index cf126bbd2c57..0642161ec969 100644
+> > > --- a/arch/arm/dts/sun9i-a80-cx-a99.dts
+> > > +++ b/arch/arm/dts/sun9i-a80-cx-a99.dts
+> > > @@ -1,7 +1,7 @@
+> > >   /*
+> > >    * sun9i-a80-cx-a99.dts - Device Tree file for the Sunchip CX-A99 b=
+oard.
+> > >    *
+> > > - * Copyright (C) 2017 Rask Ingemann Lambertsen <rask@formelder.dk>
+> > > + * Copyright (C) 2017 Rask Ingemann Lambertsen
+> > >    *
+> > >    * This file is dual-licensed: you can use it either under the terms
+> > >    * of the GPL or the X11 license, at your option. Note that this du=
+al
+> >=20
+> > I don't think we should be taking email addresses out of headers. This
+> > kind of information is useful in looking in to history and trying to
+> > track people down.
 >=20
-> something like this?
->=20
-> M
->=20
-> diff --git a/Makefile b/Makefile
-> index 16e3e4dfe5e4..e0ab39200c1b 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -93,15 +93,9 @@ endif
->=20
->  # If the user is running make -s (silent mode), suppress echoing of
->  # commands
-> -ifneq ($(filter 4.%,$(MAKE_VERSION)),) # make-4
-> -ifneq ($(filter %s ,$(firstword x$(MAKEFLAGS))),)
-> +ifneq ($(findstring s,$(firstword -$(MAKEFLAGS))),)
->    quiet=3Dsilent_
->  endif
-> -else                                   # make-3.8x
-> -ifneq ($(filter s% -s%,$(MAKEFLAGS)),)
-> -  quiet=3Dsilent_
-> -endif
-> -endif
->=20
->  export quiet Q KBUILD_VERBOSE
->=20
-> @@ -166,14 +160,6 @@ ifneq ($(abs_srctree),$(abs_objtree))
->  MAKEFLAGS +=3D --include-dir=3D$(abs_srctree)
->  endif
->=20
-> -ifneq ($(filter 3.%,$(MAKE_VERSION)),)
-> -# 'MAKEFLAGS +=3D -rR' does not immediately become effective for GNU Mak=
-e 3.x
-> -# We need to invoke sub-make to avoid implicit rules in the top Makefile.
-> -need-sub-make :=3D 1
-> -# Cancel implicit rules for this Makefile.
-> -$(this-makefile): ;
-> -endif
-> -
->  export abs_srctree abs_objtree
->  export sub_make_done :=3D 1
+> That's why I kept there name. Emails are saved in history anyway.
+> I don't think having emails in headers will help with anything. They don't
+> work and they are not going to work.
+> It means if people ping that author and get nothing back it is IMHO just
+> driving them in wrong direction with unreasonable delay and hope.
 
-And also the version check part (which we didn't add the initial part of
-yet either, which checks for 3.8). Thanks!
+Having the old email at least used to make it easier to search up for a
+new one, but I see that's not so much the case anymore. So yeah, OK.
 
 --=20
 Tom
 
---7Ay6OAuUf2dKhtdo
+--6d5+2rkPm2JZts9G
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao2dEwAKCRAr4qD1Cr/k
-CnPBAQDvGCiWG1ViPKIfsX67V1OIe/QWxkQiQjo3miNYd37FjAEA0wUq4aDnvyKa
-S0lCdEBVjEy1d+ch2fA6PR9V9odZVQY=
-=OVtM
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao2drAAKCRAr4qD1Cr/k
+Cq2iAPwPzJsIHlKqHgJBFL+6CGRZvivgGFdPbPFfnHy5dBQAxQEA3im6xJ7Jgwoo
+Fhsc8vTJioKvjTYQT1YSE8qXqqb77Q8=
+=cVRv
 -----END PGP SIGNATURE-----
 
---7Ay6OAuUf2dKhtdo--
+--6d5+2rkPm2JZts9G--
