@@ -4,106 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23AE0C5DF81
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 05:17:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928A4C5DF94
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 05:53:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A0701402A0;
-	Tue, 25 Aug 2026 05:17:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5186F405F1;
+	Tue, 25 Aug 2026 05:53:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HyCJNY5Uz0C4; Tue, 25 Aug 2026 05:17:56 +0000 (UTC)
+ id D5ptpu9SPiUN; Tue, 25 Aug 2026 05:53:25 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787635075;
-	bh=Rn+lDcKn6nHZshnTxcmIeuvAb/mNR0im+hy6K/sUGRc=;
+	d=lists.u-boot-project.org; s=default; t=1787637205;
+	bh=Ko7lFTimB3hsCzXBB7X1XOR1MeHtZGuZd2sdYluIQ64=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nI4wVx62gOoW5UtHpLMTaOyXCiHoLfLzvCGZsI7EDoVzXZt4mn6zemH634sKsVvst
-	 4/JX+kjpg8t8CsmKkD6afL7uAs3tJ7w1Ux9Vs+HEUq2emH87Rnh1Z1k2L7azAUThuN
-	 t7jzR2iq9CsaLrGnYuEmYgmvGmxtu2p/IfkETfKvc6E7kgFh7LwoqKeueGxv7b/2DI
-	 tQBHbiSIqY0H7HihaDzKhKiIBGus4P5g4pyvhels5gxujU0Jt6prmm2Uiv14il7TB9
-	 wxzetAO992CEOdaMmcP1PUzlSvXSWx26AcRSM7dWItXNAdz4NnQyo+uWyX+b/D6aFc
-	 9loO9TGW8Sfkg==
+	b=chLrX9VE328mf3uDA/jl2cZM3Lp+Q6SMU5lLP4JpxlHYGL2szpNAQK9W3BJau5Jnk
+	 JR/I8BTJbteXBLc9IhRPWguIGx0FhVMDIcj443nForBjr92CdqLHiahRkm/ps5HS60
+	 gSGWu2eBqDyJ7AvSS0j2wn6Ze5BluGGrmjuURmLUEdnIXFEJ29jXt/wK2pEq5re0GD
+	 dkDDTdu8zBivdAaWBjPRtUjvVoqXPmAyoc+N/wkDsPqk1HmXEmipF5VhXZWUIKvoNf
+	 kUTFD5KpJbcYyF/a09nnHlN+oChNSMwLTHuegVjzZ6SbzruzaMBnmHErjjFhL1gDWL
+	 RTe34CqF3x3pg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C970D4027B;
-	Tue, 25 Aug 2026 05:17:55 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3D053336
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:17:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 15EBE4059E;
+	Tue, 25 Aug 2026 05:53:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C00C3AD
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:53:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2BC9060672
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:17:54 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6DBE680C48
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:53:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VDuFN0eAD1ET for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 05:17:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AVCgqeJ8OHu6 for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 05:53:22 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c10d::1;
- helo=sn4pr2101cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c001::2;
+ helo=sj2pr03cu001.outbound.protection.outlook.com;
  envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=sBzwKeMg
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2D71660667
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:17:52 +0000 (UTC)
+ header.s=selector1 header.b=2vuTEqMa
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 674D780C1A
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 05:53:20 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JqOrL9dDAmNUq2u5okjPa0tu75chRZ8TihQFsuDV9yc8YZypvJNH5ub8iPm8wzRBUAIxU7PAI/207dNKzYyGgOhluyDy57Cl96TNo7Nl2mWZn/0NXU/QlW/kEq7IhfoXgXkG9oahN5iTAAsx+qn0FAkYM4G/XKdL/iOzgijFtQE+yytTzbtEfl3qw5I4Bu0huIjUFsSMW9vO4WKfgvaI5wzk0JZAx3UKtFtPkYAEsnkRdMlJqEubTWkvtbH9VyMEZaucngHNuWRnr0fPcTUnnM6/DkBcGnMZkWRMJSq3VazmuEZp4MZfrRmrjWs/HimoM6uvXrTzXW/955pa4Hkb6w==
+ b=oijWrNtOcZ9iKbq1+2aEVoD1pBFuOwfCu8yquI2r4lQM0pLdDk5YWY8lB/GYtaO7+jfJkvwPzLXa1pGb+aVR0+a0n/mjn+UTYAOTVHmovZQGJr9t2k7UdBFPdzvZOV7TGw2bKhdpMq/9Vrf/USLN2lu3/jw7NVL4Pc+wz/mt2SPSdJvjKl5jGJ+4tMwlRoG+X2eyJ7L9CL+1KO67CrrMPzcFGAaLPzo1l4Mx3ZJj3vDpSCNWPXlHAESekUNa/jpnBtlyKMKuaVQ2lnRBJy30ULIe+X/cCK2GY/4RI9wi9Go+JWrH2nqb2XeM5uqmyrqwaP/ExiKkp3PBThkQ6kWDLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Rn+lDcKn6nHZshnTxcmIeuvAb/mNR0im+hy6K/sUGRc=;
- b=yf27Cvlg8IjpwgUF7pQ615sHWV1A7LIvY/rU2af+gxOPWSPEdxPts0FWPN3NyvA9WoAvBjQ7+Q3jRygLUQAlPFn6I8Q7/4c3q/R4GS9IHP1+FMHm3kng4gZx9NgpZklfJacvIJm42sIQpzSF150E1VF4C2nAvCG0ourybqpo0moLM5D6+iWLwN+lSRwb2cSVkZ2s+fP9PiNOJAY7JNESBGZYYYfadwEE6yGAHYbWrN1knL9R8OYHiIjXKvJQbLC/XCF5kU6OMiuNxfEUUBSUMJAQ5TvwPzL7sdpeHCD720Nkfa4eaqRLy6kIERQ1peIrYTigS1z6lx4Kq+UVFkPgYw==
+ bh=Ko7lFTimB3hsCzXBB7X1XOR1MeHtZGuZd2sdYluIQ64=;
+ b=QavPg4AEm74xyRNTeMqkeySF9gUw4fzkK5dc/nzwZdshz/PtVZJs23jR2t9ZuSBTNtWje64uOVbU0q1uSp6PMUeXhEFGsVBs+plLa1OWKVMO2gYkS1vys/PRBRHdJRKe5Wk1ymoRdCkr54ZYMkIzt4F9hda/8UTt4uiEAv4GsxJiufqxmrP+8G3sSAHbnkFeo1cENaSe1CLJeHB2uv4GtBzHvzF/1qlCFtOHKnFXkW0iO/A2ZcAUVGpw4v79oPesM11gpX5+MZ692SGP7OiR15GJVdmJd/LQO917bD42ZfjK+ipD/KGYBizc6BnueaeG+cqk/enlcdNqog2vuTesag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rn+lDcKn6nHZshnTxcmIeuvAb/mNR0im+hy6K/sUGRc=;
- b=sBzwKeMgkJ7qCZNA2X82eCt/lV3BIgZTNUUUthxMAKcyamYd1Tnl9lzPnlJYet9ttk+6bIpZbbyLwy/HGuWF8r5ljQkKDqC7nEqoOahI9npWjx37bR7Ub3JLUbLKgnkVLY+oUnQYFAoWdvkBpQnNSCNvlNtCXQtmC2VB5YJSCaQ=
+ bh=Ko7lFTimB3hsCzXBB7X1XOR1MeHtZGuZd2sdYluIQ64=;
+ b=2vuTEqMaSTiShjs8DaJuu9GButzX6eq6Rs0tgK+gsDZFQHmbOdgtUC5CQADJaBDgfOw2jw5RoexSTjGCrvsJYcIq/a8HYIw8o7qGy6yNYwa6Yzu4SOtytk+G4m+UZUuMq14OVNVA92RvFQpagnIAJWL4sUcWMtxaNYj+G042nOE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by CY5PR12MB6204.namprd12.prod.outlook.com (2603:10b6:930:23::19)
+ by LV2PR12MB999074.namprd12.prod.outlook.com (2603:10b6:408:351::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Tue, 25 Aug
- 2026 05:17:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Tue, 25 Aug
+ 2026 05:53:16 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0360.005; Tue, 25 Aug 2026
- 05:17:45 +0000
-Message-ID: <c012177e-274e-4c88-bc32-1ec647fad643@amd.com>
-Date: Tue, 25 Aug 2026 07:17:36 +0200
+ 05:53:16 +0000
+Message-ID: <a3b4bb78-8a3b-4c88-8bca-a32518e5ec48@amd.com>
+Date: Tue, 25 Aug 2026 07:53:10 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] Clean up emails from non-existing domains
+Subject: Re: [PATCH RFC] scripts: pass dtc cpp flags via a GCC response file
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, git@amd.com,
- Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Aristo Chen <aristo.chen@canonical.com>, Daniel Golle
- <daniel@makrotopia.org>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Heiko Schocher <hs@nabladev.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>
-References: <08f68cd8c514140071090a846839632f8cae071c.1787560364.git.michal.simek@amd.com>
- <1b9532296bffb1918b90cfe61fb7692ea355d02f.1787560364.git.michal.simek@amd.com>
- <20260824163956.GH523975@bill-the-cat>
+Cc: Suraj Kakade <suraj.hanumantkakade@amd.com>,
+ u-boot@lists.u-boot-project.org, git@amd.com, padmarao.begari@amd.com,
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>, Simon Glass <sjg@chromium.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>
+References: <20260824044729.708287-1-suraj.hanumantkakade@amd.com>
+ <20260824150937.GD523975@bill-the-cat>
+ <2c9ac202-68a7-4017-a8f9-91e9b3579166@amd.com>
+ <20260824165125.GI523975@bill-the-cat>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -150,76 +138,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20260824163956.GH523975@bill-the-cat>
+In-Reply-To: <20260824165125.GI523975@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR03CA0095.namprd03.prod.outlook.com
- (2603:10b6:a03:333::10) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR03CA0026.namprd03.prod.outlook.com
+ (2603:10b6:a03:33a::31) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CY5PR12MB6204:EE_
-X-MS-Office365-Filtering-Correlation-Id: 17c38e82-f914-40f7-0c17-08df0268322a
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|LV2PR12MB999074:EE_
+X-MS-Office365-Filtering-Correlation-Id: 14b8f76b-7a0c-4082-b200-08df026d2894
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|366016|376014|7416014|56012099006|10067099003|18002099003|22082099003|5023799004|11063799006|4143699003;
-X-Microsoft-Antispam-Message-Info: UhJa279uZMbjI8YUw2Z/m5UtrsKweP9UwZcG+YpHR5zFPFB5P+8LVPGrrhITjQalfKMpgbCAuGISi5mDOibzBz6o1AIf9XyTX1yMgyQKpcs36mYOv5PtKPg4uqxjOeHkLceDSkItp+M5gPKgcGEFwWFQ76HhwQKG0oizMGDf14GtI1dLZSRbRcirw9roCwDFj/m9aEGDrGUzKscHL4S/DGIdyQsHEkAAOuyr9OrrOjgmkkqJFtkqRFYI9JrX4S/yaipp0JEwdWLgAd0st9Pj0HhDUjb5BoL7ZSmgmKoXUl+n0FfXAnqerIQ6TmJIjjO/L8Dgbp6D69E7U9ri0ydg3PWjNVOPEJBB8O4sFDh3zHZcyxpYlHtmNa+m/Gqge1VTwUyfHergEqPRqcODKXKus25iRFVbSuEZQXyFxevjP2W/lgvOA9Zf8nBDG25NBGerJmn2dWWPIaq/r8z0zSz8SWPz2166zG/U/4KLpCMaFTzK5gylttVCTyglgCZhte5Up5tLLlStQAw9/A9WORldBFniteKP/HP+SEP3/iXZ2pbVs0ylBcuPFQ9DPXbKr+578ACfBEIYWopq7aJ0JyhW0lFYiRs4cTGykh8AGpMuYv8uECuHIyG9dLqL/P8PCp2hbO2EzOupxyw1d3neDEMRmoEVbERsDbWLziJI37Bl/ds=
+ ARA:13230040|366016|1800799024|376014|23010399003|10067099003|56012099006|6133799003|3023799007|22082099003|18002099003|4143699003|11063799006|5023799004;
+X-Microsoft-Antispam-Message-Info: n/kWA5G2eksDvYewCZE5bQqL2uQt7+bdtqu4xmTpektp1HhPOIddnMSarSBx09ZvEpX/aQewxQ0I4IEsoAN5Wj1tEbS5XAEZpudACXdc9J9AGuk+FvwofOBicCWVQfIhtHI4lmjoXHLDgKsH/ihLjU3jgYCKdokfRSwEtUQ1PVp5CVciFWhu6kXRfZj5qT8ALfEHtJriA5p4X/63nLS42fyOjONCFG8i3qBhUmEZZBTcdEN/nVLhOMij9nDhmMr6J/5KrO5Ye89mndK3hRkxhdTdedExWETNKiPIg5HD+BnDAFAnokBALKNzACJCw5ZL6row0QBrF/pVRG5UHNmCglSdBmE2Im4z07fq3uBVTXmmTXdEGsFdAOxaZsvjN631S68hKkmaSayKUB6u7D+wt1qkrrPwYMtEpP5YnBmPtxcl5iHp0MzEqCVxSbfwV3mKMgabOdC1IK7xDAp7/sftzyC6JCc8W2x56JfJbs1AAJTKmCfnE2QvJHkK2gtiCPnKlFIkVc+tDDBYcQvIei8M4CM2FqxrJtifn/cnbAQlojSnEiylcSdEg4tUmWu+4iNCPOX2KjVkvd3zUSR0fRfr/SrH3anA46hhTguulvA4O6+iOtBSHasat4dSwYaueDdyIZY7QFHLdt5GOVE2GvP1fDSgVt2kBAiNBpijHkJC36s=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(7416014)(56012099006)(10067099003)(18002099003)(22082099003)(5023799004)(11063799006)(4143699003);
+ SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(10067099003)(56012099006)(6133799003)(3023799007)(22082099003)(18002099003)(4143699003)(11063799006)(5023799004);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RFJQVTRzQUNxTndqeGFqblM1czBNWDZKdTFnNC8reUpEaTZnZzNPOHRKM29i?=
- =?utf-8?B?SHRudmJTaVRUYUtqQ0JjaDQ0eVN0eVc5UWQxVkpGcGpEbTY3WjBtWVo4eUt0?=
- =?utf-8?B?M1ovYlNEUlNHUTlCb2J4WENTUm5TQUEzZ05EbmZoYTdSTWpZSWpsQ0UyWlBU?=
- =?utf-8?B?ejZuQmhnUmc3bHdERkQyYW9vd3A3bVVWcGUwc3FhQVQ2YWRETVMvWE1tcXdz?=
- =?utf-8?B?elcxcXUzM0pYcCtZWTlmVUdlWEVudVRGZ29lZ0s3RkNzVGNldVVDUllSQVIr?=
- =?utf-8?B?VFN0ZkpGNEtoa3NuQ3JxcGxBeGJUM2c4ZGZGSmFRTUJDdWZtSGxaK1VxcFh3?=
- =?utf-8?B?MWxvR2xNaDZjWlYwaWJ0Y1pYQjIwamR3elRkR1FJNnZCQnZ4ZzNKWmxvOFRL?=
- =?utf-8?B?cE51OTZRSno3WDAyZ0x0aUlkL29XT3ZMazRvMGZhWjhqQ0FwY29tV2ZWR01a?=
- =?utf-8?B?T1lHV0pTdVdyYng4cFJBam9Id2hwL2hjUWNnUmUxNDA2Nml6akFjdGhEZHdM?=
- =?utf-8?B?YVhIeGZCa1VrRnQ5aEY1NnAyS0RnU3BqMWZjVSt6WVh5N3RINUJGZW81N0g3?=
- =?utf-8?B?c0dCemJFS2tlOHRlakEwSVp6K05yU2dGUnN3VlFsSDlIUmhnVGI2RTZiUXlS?=
- =?utf-8?B?ZVdnRCttblRyNktzUTV1bFljMGJ4cTZSVm1zYXFZYUVuYTNJYnFCWWo4dkV6?=
- =?utf-8?B?YXQ4NDZkd1A0akx5azNIWnJCSlZudVpxMHlQWjlzeDIvMHhDYlR6TXlsZWI0?=
- =?utf-8?B?a2R2aXNpMWhFTkRzMExvY3BQVkxsWjhaTkIwNXY3S3RXNXZwZXNWRE8rclFW?=
- =?utf-8?B?N0l2SmNESjZ2bDhjcmtnRTFCZ1U4QjN1SmE4eWc4UmRiKy9mZmZKaXhncTZW?=
- =?utf-8?B?bEVSVVR6RHBWRTlNaHAxTno5SEVhbEF3OG5CSkp6YzBMejdqRWpXY2RJaGs0?=
- =?utf-8?B?eFJOdkpHT3NGMnB5dXN1MGFWWGJUeXFSbmJweFJ0ajI4ZVpQMmVjQUdTUXBL?=
- =?utf-8?B?OVYzNVFyWHFkYmZYazRPYXNvZ3o0OFJmOWJHWjJFYmZpclZJK0thMGJiOE9M?=
- =?utf-8?B?QlJLSzBkeG40bVlrK0dXTngwTDJET0NLeWxMNlJhNmdnZ0ZGeHkrNUE1ZThK?=
- =?utf-8?B?MTBKWmhFbnYrbldDZ3gvQStVMk9lVnhPVXhIQTZXZkJxWlRYUkJlOE8vdzRC?=
- =?utf-8?B?VHlCLzhncHRkQ082SzZJQ3MzUzVWMUQrMmFkNWxTYlZlWDJRT0pDMnE5c09B?=
- =?utf-8?B?eGVkclBMdmU5eHFwSkt5bXcxOXdhVi9OSml2RUR2dXBZR1ZUNnVGR1hhU2kz?=
- =?utf-8?B?SXdHK294alczMkRlSlFpcjhhb21Qa0wybUR0M2NkZmFRcmR3K0N5QzhqZld5?=
- =?utf-8?B?cG91VFNrNG41Q1JEeUtrSlBCVCsxY2xzcUhVaTZaa3R4TlVJZnluNzBYZ1NC?=
- =?utf-8?B?RE1zNHRFUDZrcUVBSXFJOHVQTndlRnk0ZVdUMElUYUFCaWxvR000aE1ES0dZ?=
- =?utf-8?B?ZjdiNlRxMWNVaW8vUktiNlpaNHl6cW4waVZhZmV6aTRQbkJQOWhDNHU3U0FV?=
- =?utf-8?B?WUpxMXVRWGNsblhlb3JudnBaV3I4NkdJOXdDd2x1QmNBQkxDV1BvNlRrUmRU?=
- =?utf-8?B?UFZIeEgwUThkQmE2WWp3ekswRytZN0RZYkJPN00rd1duNUl6b0d2cGVvVGVE?=
- =?utf-8?B?aHpmQ2ZjU1BXNjU2WE9ZZ0I1S2N0eFNoMkVxSWxuU2JKR2JNZncvR1B6dlhG?=
- =?utf-8?B?b0hLcWpJVWE3ODlPK2ZnemhPVFhXY2lNenc1WjVmNkt6Rmp6Nmc0aGRoeEFz?=
- =?utf-8?B?Y3MvMlFHZzBaMGNBa0hyZzRFZFI1cmJBdmxTMkdXdGxkZDVja2htV3ZINjha?=
- =?utf-8?B?Y0NLMDlvWDZkbVgrVHhYbXhWRks0RytsMWpXMWRRdkoyOUxHNSsra28zcXJX?=
- =?utf-8?B?TW1iK1RLdG4zRzRiM3hmTFZ0dERaRTN0REZFYUFPY1gyTFBRUjl6aGZIRVVG?=
- =?utf-8?B?SFlLQ2pBLzV2cng2Y1R5UUU0NGpMbTZUMlNZaG5RbWx2QXZCdndid0NENC93?=
- =?utf-8?B?d1ZKa0h0d3BjVFowdWVRazA0bk5GQXoyUUhucWxnbTBVQ3I1c2FaMmlrR0Ur?=
- =?utf-8?B?SHBkWHhLN0RkVDk3ejZSaWxBWWUwOGNYcHhVUHBZS1diY1FQT0w2UE5KWEp4?=
- =?utf-8?B?b0pmMWs3S2pqL1drMllOTGhPZTNHSm0yRnM1L29sU0N6S1A0UHYzS2hkWWYy?=
- =?utf-8?B?eFFRNDhIZHVXclY0eHRYTk5WbWdOelJGbU82NlVBejN0UkpITjNJU0V3SWNZ?=
- =?utf-8?B?aGh1ZTFRUDZQZDlCZlR1Z3d0ZWFRYndEOEpvL3FPM0lGZEI5dlJSdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SlpHMlpwZEZ1NCsxYkVCQVAybWMvU2pRbEFoRHliZVljUFZwOEVETElhc0VK?=
+ =?utf-8?B?RnlzME5obFJFdDNGZFhrQkZZQnFZUXZNUVphakRVWXhSVXM3alFnQzlDQSsx?=
+ =?utf-8?B?WmY4bGxDdCtMNW1MWXgyVTFXTnZZNUo3RHQzMzBWdVFudUEzcXVORE9qeEVB?=
+ =?utf-8?B?bmovREFqZEFzWmxrUmRYNVNPYkpmc2VwM3psVno1Undyb2pqcFk0UGVDYWpU?=
+ =?utf-8?B?TGd2MHlwZ2E5SUdRNGtyOEg5RWxmc2RldmZnbXVMQi9yUGhCYTRqYWZxOVYv?=
+ =?utf-8?B?OTJSVkVkTGdNdnh4aS95MG9LWEs4VW10YUYrQ1lJSEc4WHI0dnc1eHU5dHBQ?=
+ =?utf-8?B?N1VrUDRkUk1qS3Nvblo0YllCTUxXQUJ6aHl4R3Bid0xmNUlBeFZyb0xvVCtO?=
+ =?utf-8?B?elV5aUp5U3lHcSsvcmhEU2h6S0VzTHNxZk5KT0RVZnpYbUEzWDROdnlpUXM2?=
+ =?utf-8?B?REwySGNNTFJBQUNVSFoxcURHd2hIL3ova2FSUThnc1BQMUtJTG9paFl4UWYx?=
+ =?utf-8?B?NGJ1dmZ4WXMvaWl3NHpzOXlLSzlKMW5NVS8vZTJ4bjd5OExPR3lyWFlyY3A0?=
+ =?utf-8?B?NFA1a2VPbjVYWXN5N0FKU1JsVVpwOUhibG9FdEVZSHo4ZGFRblBRdkxKZm9m?=
+ =?utf-8?B?UnFjSFA5bnlqcTZVU0QwSXMxb29ORFF2ZXpnMG1SOFoweGlMV3RPNmhabzVY?=
+ =?utf-8?B?a2dxclEzZHA1Z1FwS2hJa01HYlFENFZ5SnZrWU1LdlhTVXJvNlUvT3NRQk1l?=
+ =?utf-8?B?cDlhb1k4NjhkWkdUV3hQdDdmZ0JkQnB5enVwUjNYNVdvb0k4UytuOE51dTVF?=
+ =?utf-8?B?UE53NXhlVHJvWUJlYi9ZSW01WFJ4YjZyYVlGallZdld0THl2VlE1SElMREto?=
+ =?utf-8?B?WGJvNGVia3Z0b2dZclgwNWs0MDdoQms3TmhqZzM3MmpoWHhIYW0vR0tSMjBy?=
+ =?utf-8?B?QTc0MlVpKytGWHZRVVowMERXZ3hHREtPRFZPOXEwWjhKbUphS0pXUXhHd2x4?=
+ =?utf-8?B?WmhJSDlhZ25nSVVwSGRCQ1FhK2N5Sk5MVG0wM2hkY2Y2V3JUSFEzSmswZEdU?=
+ =?utf-8?B?ZkxNTWRESGh3RFRGa2VhK3RWQjY2UEthMG9VeEZER0lRRzNrd05JeFJjUXd1?=
+ =?utf-8?B?czlscWNpWGNrM2x5OElXTy9GcCtWaGJCRkZxZHRLMVZaTnJRVUxhd2dWUWR6?=
+ =?utf-8?B?QmdMNW9LaTJGUnBjTVdvSXl1MmFPK1pLUWtSY0hKNk5rRGJjSEFWYVhySGlt?=
+ =?utf-8?B?TTUrWlB0SXFMeEdnaGYzRkNTeGZ6WWRSWFpmZGJudVNTbmVCZ2s5Z2NHUlBY?=
+ =?utf-8?B?UGhYU3UwWkZUVmhnUmh4ZzY3dUpVbXpFM29tOHMydGttMHFYNHAzM2p3UVlN?=
+ =?utf-8?B?Yk9Wa1pQbjF6L3NsRkt3N0N1cUl4MFoxT3ArcDVCeTZ0NytPN0RYampWTC92?=
+ =?utf-8?B?ZzU4MHIyaW5jeVg2ZUdMLzhaWW9Yc1d0cnZhQnlWaWFpWjk3VysyMTV3M1RZ?=
+ =?utf-8?B?N1hTOWorUnI0cDJaQ2xkTEZOejZDLzl1SFpKUEZnRWQvREZPQjFvK2IyTUcv?=
+ =?utf-8?B?Y0dZWUJHM1oyTlF5bFdTbmdJc1VJTForOFQzR3FZK3ZCOEE5MVdDZ015cGhx?=
+ =?utf-8?B?RDA5ZUNXTkx4U3BZN1h4c0dHWXQybTdEWG9PeWx6a0Zoa1JrbXJBOU9udDgr?=
+ =?utf-8?B?d3FMd1JYQWVXTGN4STBPcUg0V3BBZUxtUkdnZUl2SXplQllIZC9YZFMvOTlF?=
+ =?utf-8?B?SDRYL3BzeE9BaEFmRURSdDVCTExpeE9PdkoxRTluanVzdHh4anAwbVc5N2Zu?=
+ =?utf-8?B?U2tZZlU1d2pESDcxMGN4elIyT21kVzZEZVBQYU1PdU1hby8vd2duQjVNalpV?=
+ =?utf-8?B?Mmc4V05la2dCUXozaUUrOFJ1elVzZTRSc0lDYVA3THFIVGg5bzY0aVdPRnpG?=
+ =?utf-8?B?MWQ5Y0RNTjNjQWRhNC9kWU8zOG5ZVmxzQTczSExNNEk0ZHpoMCtJaW51bHIy?=
+ =?utf-8?B?WlV4ZEVob1dMUjkyN05VKy9mT2lBWWlNL05NUkVhMDhpVVptMEhNNk96TUkw?=
+ =?utf-8?B?Yk5LWmVzbEpvMEEvejJPMTA1RlVwL2RIZmJoZXVoT0tDMys4T3pMdmtKU05Z?=
+ =?utf-8?B?YzE2Q1V6dFd1M1dHRVlIWjhvY2VpalBYcmZDcHdicHdIaS93VlZnQndXWmIr?=
+ =?utf-8?B?OUNQS3M4cHptd1lpVW4wOC94R0k0K0ZOc1NtWTZNc3AxaFVmWThjRGR0ZHA1?=
+ =?utf-8?B?dzhLUk5uYjcwUjNRUVFIS0FyMlJ4dGRjaGRoNEFtUmZXRWlITGVxdGgvNE1G?=
+ =?utf-8?B?OHI4WjRrUDFLSnNRV0h1L3hDVWpNVmxtNEhXbTluMmZnS2FyV1BZdz09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 17c38e82-f914-40f7-0c17-08df0268322a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14b8f76b-7a0c-4082-b200-08df026d2894
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2026 05:17:45.2545 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2026 05:53:16.6702 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 32oGYPIitMlGw8rP7H8swo5mSOCz4GU5uyrX6YBahb/ZqkeWic+aaOYZMbysGlG7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6204
+X-MS-Exchange-CrossTenant-UserPrincipalName: dBs+62zvbkrfCAIqNlJ1zOTsEKGLA19mdLnjNgUhS3Eg3vKhJWdo5zP4xpZvBMUG
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB999074
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -235,42 +223,92 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
 
-On 8/24/26 18:39, Tom Rini wrote:
-> On Mon, Aug 24, 2026 at 10:32:52AM +0200, Michal Simek wrote:
-> 
->> There are 5 domains which no longer exist. Remove all email addresses that
->> reference them. Where such an address was the board's only maintainer, mark
->> the board as Orphan.
+On 8/24/26 18:51, Tom Rini wrote:
+> On Mon, Aug 24, 2026 at 05:29:37PM +0200, Michal Simek wrote:
 >>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>>
+>> On 8/24/26 17:09, Tom Rini wrote:
+>>> On Mon, Aug 24, 2026 at 10:17:18AM +0530, Suraj Kakade wrote:
+>>>
+>>>> cmd_dtc inlines dtc_cpp_flags (including every upstream dtsi -I
+>>>> path) in the HOSTCC command. With a long $(srctree) that command is
+>>>> too large for /bin/sh -c and Make fails with "Argument list too
+>>>> long" while building a .dtb.
+>>>>
+>>>> Write the flags to a per-target .dtc.flags.tmp file and pass @file to
+>>>> HOSTCC/CPP so the shell command stays short.
+>>>>
+>>>> This change requires GNU Make >= 4.0, since $(file ...) is not
+>>>> supported by Make 3.x.
+>>>>
+>>>> Fixes: d31ff219a833 ("Makefile.lib: find capsule ESL dtsi file with CONFIG_OF_UPSTREAM")
+>>>> Fixes: 1e7883f6325a ("dtbo: Fix dtbo generation rules")
+>>>> Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
+>>>
+>>> The linux kernel, and so Kbuild, says that 4.0 is the minimum version of
+>>> GNU make required, so that is true for us as well, so this is fine.
+>>>
+>>> Reviewed-by: Tom Rini <trini@konsulko.com>
+>>>
+>>
+>> We should likely fix this too.
+>>
+>>    94 # If the user is running make -s (silent mode), suppress echoing of
+>>    95 # commands
+>>    96 ifneq ($(filter 4.%,$(MAKE_VERSION)),)  # make-4
+>>    97 ifneq ($(filter %s ,$(firstword x$(MAKEFLAGS))),)
+>>    98   quiet=silent_
+>>    99 endif
+>>   100 else                                    # make-3.8x
+>>   101 ifneq ($(filter s% -s%,$(MAKEFLAGS)),)
+>>   102   quiet=silent_
+>>   103 endif
+>>   104 endif
 > 
-> This is generally good idea, however:
->> diff --git a/arch/arm/dts/sun9i-a80-cx-a99.dts b/arch/arm/dts/sun9i-a80-cx-a99.dts
->> index cf126bbd2c57..0642161ec969 100644
->> --- a/arch/arm/dts/sun9i-a80-cx-a99.dts
->> +++ b/arch/arm/dts/sun9i-a80-cx-a99.dts
->> @@ -1,7 +1,7 @@
->>   /*
->>    * sun9i-a80-cx-a99.dts - Device Tree file for the Sunchip CX-A99 board.
->>    *
->> - * Copyright (C) 2017 Rask Ingemann Lambertsen <rask@formelder.dk>
->> + * Copyright (C) 2017 Rask Ingemann Lambertsen
->>    *
->>    * This file is dual-licensed: you can use it either under the terms
->>    * of the GPL or the X11 license, at your option. Note that this dual
+> I think this means we should pull commit
+> 5f99665ee8f4335f334a5292b6d5b41a577fc2c0 from the kernel in, to fully
+> switch to 4.0 as minimum.
 > 
-> I don't think we should be taking email addresses out of headers. This
-> kind of information is useful in looking in to history and trying to
-> track people down.
 
-That's why I kept there name. Emails are saved in history anyway.
-I don't think having emails in headers will help with anything. They don't work 
-and they are not going to work.
-It means if people ping that author and get nothing back it is IMHO just driving 
-them in wrong direction with unreasonable delay and hope.
+something like this?
 
-Thanks,
-Michal
+M
+
+diff --git a/Makefile b/Makefile
+index 16e3e4dfe5e4..e0ab39200c1b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -93,15 +93,9 @@ endif
+
+  # If the user is running make -s (silent mode), suppress echoing of
+  # commands
+-ifneq ($(filter 4.%,$(MAKE_VERSION)),) # make-4
+-ifneq ($(filter %s ,$(firstword x$(MAKEFLAGS))),)
++ifneq ($(findstring s,$(firstword -$(MAKEFLAGS))),)
+    quiet=silent_
+  endif
+-else                                   # make-3.8x
+-ifneq ($(filter s% -s%,$(MAKEFLAGS)),)
+-  quiet=silent_
+-endif
+-endif
+
+  export quiet Q KBUILD_VERBOSE
+
+@@ -166,14 +160,6 @@ ifneq ($(abs_srctree),$(abs_objtree))
+  MAKEFLAGS += --include-dir=$(abs_srctree)
+  endif
+
+-ifneq ($(filter 3.%,$(MAKE_VERSION)),)
+-# 'MAKEFLAGS += -rR' does not immediately become effective for GNU Make 3.x
+-# We need to invoke sub-make to avoid implicit rules in the top Makefile.
+-need-sub-make := 1
+-# Cancel implicit rules for this Makefile.
+-$(this-makefile): ;
+-endif
+-
+  export abs_srctree abs_objtree
+  export sub_make_done := 1
 
 
 
