@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A96C61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 23:05:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE942C61DBD
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 23:06:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 75CA8406F7;
-	Tue, 25 Aug 2026 23:05:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 654C940758;
+	Tue, 25 Aug 2026 23:06:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X0hSUd-SCodM; Tue, 25 Aug 2026 23:05:15 +0000 (UTC)
+ id lfc9UO3AH8yS; Tue, 25 Aug 2026 23:06:38 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787699115;
-	bh=21rlDCUmTJI+2ud/Ec/oKJUnCagcUIqerQsDgER3RdA=;
+	d=lists.u-boot-project.org; s=default; t=1787699198;
+	bh=pElZk7rpuNL4/3w4baRs2PFAi6HXJxBlr5UagthSPus=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gaKfmrPIHWi7yrOO+bd0at+o16p+WTXv+/z5Gw6alM+5TcbgdTGuQuDC5eGQS3/Mx
-	 N6/0K6XywQPZ70Ri7BqLUJ37JdPBlfJMTSkHyDyoBOesPEGb1/unfzQSXCR3OhffQy
-	 hOk7gaUJuILKCIbHi4n2GNuSTIaR89G5BOb3vA3EDzWXT+A9r8W9M0n6cil2vItlw2
-	 1Pzw2nkqwvSbNoc3ZcPKs9efwE6nEyx44yVRf9UMhIOhQRU7kQCN7eHSDXA+u76xzG
-	 bea5abnWvNM/VGgSTVA9kYITHaXTzZLoeL7+AZU8eNhqW9xw0obGI1Ulhc5qE64c0j
-	 sadj1AYxiiSzA==
+	b=Rmr2e2Cf5jYNDP4rhCO29O78qN8ecrsNpSvrr49dr8jqutFRKiWOGEpaQvKJrpgsT
+	 H8qJnKlMiPSMFIN3QNWoUbX3FMAT1CygHr+GuTEH2RPW9GjC7KD+O44boF8KOtk4/j
+	 JlCpBp5/73wU5abekYcItUUEyqwjZDl1CocG7osK+pENoekIQ3n0XxS4x2Vz6dkwbR
+	 /hqjd4dt8D0yXQs+TVypMJd3wlWwHJE0jykeo09huQg2UzAUXa67YYzDkgMB8eTTXx
+	 sc0SnzC8FW4Owr+4xiC4Qlpah44CGLpsDa+zA9ncgo6Jqo5cJLt43Awi4XlouYSaI3
+	 s6ys0d9HMO1lQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 766A4406E8;
-	Tue, 25 Aug 2026 23:05:15 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6FAEE230
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 23:05:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A6221406EB;
+	Tue, 25 Aug 2026 23:06:38 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C6AB1334
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 23:06:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5272C60712
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 23:05:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id ACDFD40055
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 23:06:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FRHraE4h4AB0 for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 23:05:12 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SmCEGFb771dQ for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 23:06:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::32; helo=mail-oa1-x32.google.com;
+ client-ip=2001:4860:4864:20::2b; helo=mail-oa1-x2b.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=oTSbKbKq
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 97BC6606FA
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 23:05:11 +0000 (UTC)
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-4472500e25fso236660fac.1
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:05:11 -0700 (PDT)
+ header.s=google header.b=AYQk/NIy
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F19A74000B
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 23:06:36 +0000 (UTC)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-44caeb973b3so31620fac.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 16:06:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787699110; x=1788303910;
+ d=konsulko.com; s=google; t=1787699195; x=1788303995;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=21rlDCUmTJI+2ud/Ec/oKJUnCagcUIqerQsDgER3RdA=;
- b=oTSbKbKqhEC4ZbescH6CftxsHm/1DwxlkFcFsR7fcJWcOwKg2PuD0pnDPb/z2e03Xl
- QMdlChbIFcHryAzemLtx172JQkuT11Hm2tgs9yDb0UtgwObEXBp26cda7DXazi7yq7oQ
- Of1/TJ6lZwl9D1AdKAJabRWyRB2rJoN4gu7fs=
+ bh=pElZk7rpuNL4/3w4baRs2PFAi6HXJxBlr5UagthSPus=;
+ b=AYQk/NIyCHK0jrFRSGfi7hms7vxtd5PAxAh+uWsKqhNLcOBfAuEcP/HURAjvFg0KWU
+ RraMuzW4DsGy+gLlG0k/X4BNr1c00N+ZY6XOTJMJYGAX65MxBdUQsdh80MwUHdPb+oxH
+ m+9yluL3EgL4a4JK1/PPToN1d2BqvRdeur5Pg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787699110; x=1788303910;
+ d=1e100.net; s=20251104; t=1787699195; x=1788303995;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=21rlDCUmTJI+2ud/Ec/oKJUnCagcUIqerQsDgER3RdA=;
- b=Sh61PuC86hKJzywPXCulwAKgBpPoVBGl9gwBxG7Ji9IhosU5PrcvLckN8lt0VMM1nA
- UbipGmjTxy2lgianuWpJQ/ne7Q2yep8oQbpoSRZXEfT4aAotkTsn1JBhIXNoj37gBcyu
- lFOuZ8GIj9pWLvAUpbcYVFDIVKY+SHDzPZHTBDy4BxntPSzu48BM1aDK4kkW3PwNH2+R
- c1OQ7VzfU3gqk32Ien/xEk8Pfg5ONMuVMFjxfMr57uGMWW1vruZAuX82MH0KoLmmFgxd
- lsGwozrJcv2nJNXrIeV7jmNDykZdWNiMrgHjkM3W+HVl7WnV+LZ0ZlJ+Sl6EG6HcrVMF
- l/+w==
-X-Gm-Message-State: AFuF++nNfZv/lfkw2qhHh8I6VIt0DS3TLhv2XHu+9ORmO+L3fkPONLbR
- 8aVHvJi4MDSdpTXkEIue+cep/3/4SfjwYor07o3QsXNGNh8cgt9H0POMio3Vw/+USiQ=
-X-Gm-Gg: AR+sD12pYChzpIs5MioyCLrHYZsPnRHbLJGZwVugs/CvLFq6Syw0M35/KgHwn4jdABw
- 0OVJ5iE0fRwV0ACNIlOgIrYFVBr2LeZ1F1Str7io5S/1k79EnU+GzfbuRqkqTxFXwo0L6a58nOw
- oJwl3bzMTU/Z4RJ8d9Bon2DNm4c8r01A/8UIIG7nrOK9SNFXOArztM1ioHypeSzMqUjET+aBjss
- JwJI9jgMKhGkaf7u4MSvlA9mbY8SIvVoE6+ZCCUZTNdQEbj/+EmrTS5JLA/B+u/nQymF3x6uAa8
- dzyRv0dCBvqR/M+AP7Z5EyHyDfyJlAO6RjgjQYYMi5bYokV1h7FV3oz84pIdiZ/bl7NOQO6X1PT
- xm/tqPSQ2yR6yik/2Gn+arMtxnp55IMRQsWFUwfULkpteirBT89XLvsdz9TWnWBOZ4EHwzzaTTy
- g5Y94YhjARnUbl0UkSEZQmbOEH2fCWuS5XYpsixlJeHvg13lEC05S6CfPWyiPVZuU40K7w+EerR
- NjjmxxFYVIgwUsuKhKu9/cEM4zT7m+HPOio21TIei9w8ggrl1qSfK0EUAhPwkfCA7t2mcMCQLkL
- 7L0Ujf/uKg==
-X-Received: by 2002:a05:6820:c0cf:20b0:6b1:42ab:d040 with SMTP id
- 006d021491bc7-6b1a051a67fmr1990267eaf.28.1787699110229; 
- Tue, 25 Aug 2026 16:05:10 -0700 (PDT)
+ bh=pElZk7rpuNL4/3w4baRs2PFAi6HXJxBlr5UagthSPus=;
+ b=An11zuJV4Gf1dlX4huzjwnI5zfBRTGXFhUgh0a62n69PKwoU3399ZaRLXODP1lLtE4
+ u0iaIGfUQqS+/Za7cglwy/FBIrHCqtm/YKwbs3cFBQG+Er74dVDhTZIl61fj/szfHemX
+ SwsunGCJ+ihLQ9rVD3lgxaMXIw3PxpJkqJLwHQAbqK0QldFvQ2vS9uublyGH4Jyv3E+7
+ Wumihg8vDQgRyjAHr5JEyP899sHDL5sWnNWaDuLgw6jqTCZIudKjcvR71v1mvF7nGOFo
+ 1ZIUfgGXhsoAMrIdak66p/9HoEvaWeSBwVpCxVPiQHLsxROU/V96PIlWOqyCxTVlvGBP
+ dxlg==
+X-Gm-Message-State: AFuF++lPljstVKdaqQjPrnyMuzlYUZjJTF3ETmV0NwCBM1K3FeTG43yw
+ TFDVmU8j4O+2gpNEyp28PNW07w26ItHc7OjbCmFNqZutIwC2Mn8qQMqoQi1yv5JxwX4=
+X-Gm-Gg: AR+sD10c4LR0XcOhE992WjpHbG/NXCT/6ilAgI6j9Rsy3y9Fyt26vydpqYUq+tWBA8B
+ 0Up08JF5y6UG4DqLemXRi0B2Fa2WOIBA2IKVbaHvKPAPO8eRjj96wp1JoYlXs+xVeKWwIFuIbvk
+ LaaNQ8T5WwQeu9UxmUqh7Wl9TtApMElPjWIyH1hZuP0vxRbYp14tyJfzC2/FQBka7VCdZZgpbl6
+ BdtFG8DXeSOqHf4huGeIxHq2NQzWV8+TNvAueE0CThAoM3bwB5Y5d6D+I+aHBF33BhkuOLD4ccI
+ JIE2kO6nHlf7iTTq+J0TCFa44G44kW0r9ov1XUELl9iuaTMXyTLwWwngn/Tb8MpiJ03xcT4GuX3
+ 4TlvA33YJJU9q2N4x+3A44lcuwjJcvFoiKlkienXRYIiBioYkpb1kEyv4yY4ZPlBzSAXJXHNTZs
+ 5lUETqrRZl80/RQGQOnu/C+rLVgX1ywWgMAn3tRL04KsAKUxeh0hskY+e9X32JdfxzDL6z1hVT9
+ 1eG/SSgIF9NHdmFnw4fJDyxy4wStPBhLFbJPWUAWUqhJsg6pbHO0PBDP/+gQ2QQ5YWJPA041cvk
+ PgYbroFY/7qFW2DH93/6
+X-Received: by 2002:a05:6870:9f81:b0:441:419:1fea with SMTP id
+ 586e51a60fabf-46599a255dcmr3775673fac.11.1787699195416; 
+ Tue, 25 Aug 2026 16:06:35 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6b1a265275fsm218501eaf.10.2026.08.25.16.05.08
+ 586e51a60fabf-465ade707ecsm691540fac.5.2026.08.25.16.06.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 16:05:09 -0700 (PDT)
-Date: Tue, 25 Aug 2026 17:05:06 -0600
+ Tue, 25 Aug 2026 16:06:34 -0700 (PDT)
+Date: Tue, 25 Aug 2026 17:06:32 -0600
 From: Tom Rini <trini@konsulko.com>
 To: AK Sharma <maskachoska@yahoo.com>
 Cc: u-boot@lists.u-boot-project.org, Christian Marangi <ansuelsmth@gmail.com>,
@@ -106,16 +106,15 @@ Cc: u-boot@lists.u-boot-project.org, Christian Marangi <ansuelsmth@gmail.com>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH v1 08/12] boot: image: add weak hooks for the
- decompression buffer and flush
-Message-ID: <20260825230506.GJ523975@bill-the-cat>
+Subject: Re: [PATCH v1 07/12] mtd: env, cmd: add EN75 NAND remap handling
+Message-ID: <20260825230632.GK523975@bill-the-cat>
 References: <20260825224330.713151-1-maskachoska@yahoo.com>
- <20260825224330.713151-9-maskachoska@yahoo.com>
+ <20260825224330.713151-8-maskachoska@yahoo.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iI9MbBjQRd+mhAHC"
+ protocol="application/pgp-signature"; boundary="Fftx1C7MFy90pd1g"
 Content-Disposition: inline
-In-Reply-To: <20260825224330.713151-9-maskachoska@yahoo.com>
+In-Reply-To: <20260825224330.713151-8-maskachoska@yahoo.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -131,42 +130,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 
---iI9MbBjQRd+mhAHC
+--Fftx1C7MFy90pd1g
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 26, 2026 at 04:12:03AM +0530, AK Sharma wrote:
+On Wed, Aug 26, 2026 at 04:12:02AM +0530, AK Sharma wrote:
 
-> Add two weak hooks around the bootm image decompression:
-> image_get_decomp_buf() lets a platform redirect the decompression
-> destination (e.g. to an uncached window), and image_decomp_flush() lets
-> it flush the caches over the decompressed image. Both default to no-ops,
-> so existing platforms are unaffected. The EN75xx uses them to keep the
-> kernel coherent on its cache-coherent CM.
+> Honour the EcoNet/Airoha NAND "remap" region attribute when reading and
+> writing MTD partitions from the env and the mtd command, matching the
+> vendor block layout.
 >=20
 > Signed-off-by: AK Sharma <maskachoska@yahoo.com>
 > ---
->  boot/image.c    | 34 +++++++++++++++++++++++++++-------
->  include/image.h |  5 +++++
->  2 files changed, 32 insertions(+), 7 deletions(-)
+>  cmd/mtd.c   | 30 ++++++++++++++--
+>  env/Kconfig |  2 +-
+>  env/mtd.c   | 98 +++++++++++++++++++++++++++++++++--------------------
 
-This seems like something that should be possible with the normal
-environment-based restrictions documented in doc/usage/environment.rst
-around bootm_size and similar.
+This is another place where I am concerned about a lot of changes to
+generic code to support a specific platform.
 
 --=20
 Tom
 
---iI9MbBjQRd+mhAHC
+--Fftx1C7MFy90pd1g
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao4fogAKCRAr4qD1Cr/k
-Cj2mAP9a2M3ajGN4JcAh9C3rWx7es/huMX4DPMS41evadzk+0gEA1O9F+AHnpGpp
-CwKVc35/iykGHZqT/kq+Et62LKOPpQU=
-=Rcw2
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao4f+AAKCRAr4qD1Cr/k
+Cjk8AQDVVk0DfqaHiLNM4h6vTc5+UtBzAFDcYDo84DJD9/9v8AD/SiZzxzEzTxcq
+A1OPkh6ErV2tuEretsWGk+0ybpG5hws=
+=9Ual
 -----END PGP SIGNATURE-----
 
---iI9MbBjQRd+mhAHC--
+--Fftx1C7MFy90pd1g--
