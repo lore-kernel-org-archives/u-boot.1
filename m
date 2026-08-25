@@ -1,111 +1,88 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 440C1C61DBC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 17:35:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA51C61DBD
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 17:55:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B5546606F8;
-	Tue, 25 Aug 2026 17:35:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E720980C45;
+	Tue, 25 Aug 2026 17:55:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q6jxL4Ss0h9Y; Tue, 25 Aug 2026 17:35:15 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WmrLtVkwAMmU; Tue, 25 Aug 2026 17:55:43 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787679315;
-	bh=6EeroGkQofDJCFcZrJbj7j5pXL4dc/ACvrzvTq3ei1c=;
-	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1787680543;
+	bh=UQKpF+BXg6yPC2CegGMaWVtGpCIxOy82ZCtISGsndAk=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=BaDCNPkeOFyYVyKvStaCoPnmEGsJBQqWQgEbFbxDQDm1+CO6b0PwAAsNd4WgrAuv6
-	 ljq8F8dArX5dI3wHexMLKqJErxsOx/wnClFVRYVXg4m31vjzzWi4r1QutRl5jdB1rL
-	 Z/7Y0v9qLjd9oSoWC893mVYFv9lj4uM78X1zVJfo2iPQ0fldeNc1DOkNAZx6Od41wS
-	 Pw3Dc4OMOTNKLE3pk5UjU/reSEuAQe0k+7lR7QvV4hqjcrcrxMQLMEQ2PjkUi8KXBY
-	 6JG/gPIoZvx3PZ4J4q20Zi6O+oveUAmU8k9YK2NWr4eRIsH8y3GrJoqNVDFEFqxVYx
-	 VEDqHjQrUhF9Q==
+	b=H0o0a1g1eXdZjrwyIhKWmG9pjIJ8QxBY+safAFSoOdooEgZS3wfXDTBcEm041dbzK
+	 qy3eflo5oDYN3Ft3t9Hsai3cqrF0glEI4WsBA09ooyINM/zs5yxzAMWWZpJ1wB1fmY
+	 UwzlGyZXlanGW4A5Mb9P0F9m8tFZw2pEx3QM9V4qAhg5uK15DiOaUUtYMp1uMDNqyy
+	 Plf93fyCzFI82yI9ugi4gQDivN0Ptv7yYD/8ZGMiqNVDuyd8Gm108+46HLmx/xfQlf
+	 mV8Sm25X7eOZHMdbby5oVwr7EdTx7Ll1GyS4RihjH6m6FEFMDEMyZMv8+mHCAncc5f
+	 l7eAgzE/zq9Gw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 91AFB606E5;
-	Tue, 25 Aug 2026 17:35:15 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id CC6AB23E
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:35:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F3DCE80C33;
+	Tue, 25 Aug 2026 17:55:42 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF58E118
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:55:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B2ECE40542
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:35:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C181C40068
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:55:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YEOHUXz_PzWt for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 17:35:13 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=b0hSRpIj
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id F04154054D
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:35:11 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7e9fc3de7ceso37218a34.1
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 10:35:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1787679310; x=1788284110;
- darn=lists.u-boot-project.org; 
- h=content-disposition:content-type:mime-version:message-id:subject:to
- :from:date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=6EeroGkQofDJCFcZrJbj7j5pXL4dc/ACvrzvTq3ei1c=;
- b=b0hSRpIjmiXJO27bYF4MgqE/RqSm8eXE2JVh1j+rG3MPenVctn/scOphVPLH3Xx8Ha
- 8aM+2M9pPUkKZNXvO562vB+AdEhP+qPkU/wZSdu/gF8SsWgsrHs6kSuMtXe8b4dfuiWj
- aGIbVlVaErtgeN3ikgFh4Y+V62Cs8lhKzibeY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787679310; x=1788284110;
- h=content-disposition:content-type:mime-version:message-id:subject:to
- :from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=6EeroGkQofDJCFcZrJbj7j5pXL4dc/ACvrzvTq3ei1c=;
- b=KALkZ5oORF8BIgixqSDFZmpJEH/5cfdVYJUSEndfDTAthArMipfYlzJ/kjAK5iAofs
- Zpm0JprFBBec/Vkj7Px9/EPufZMgu7+dHHMK0MeE7Zq8o8fPViCEI59tjvhvQujwvYYD
- yMQUyNUWjfht3l6HUS+yUl7fVS+cVDHvm8r37qHQkUYrhcCSSYg1RgMkzWN5HAVsgP85
- dh5ifhfRy970YfGWo3aI4qhb9ReMt96+fUwJd4iTnav/SjflMJLRLLtteb0qjvJ46TaC
- XXAlash9ekoMdNywiDF65kZkjPgqYUVv9dsMaPGi0xtdhUMsKYMusF/XQJw8wvT7dbPs
- Luwg==
-X-Gm-Message-State: AFuF++lb/ovk2nxHWFE8/U3QQe/kIGd7d6l81ujnJzovC7kZXFNFiv0T
- B3cF3td35HLdqs+MB2QLhwWig7hO5vFhdJBwgHJlx2FXQwSt2M+Ahly/MVXhbhRWhaTpocHT9eb
- WTpat1cBsWiVZ
-X-Gm-Gg: AR+sD13zAOESHc5vcpl6WSQRQLnAmp4HST8ryvuwFCQQqHXYKhZQ6cLsv3PCMegmILL
- JrrWtW9VFZvRKuHcreC+1s5bUskQwhceRlVKNIvLC4OmzG1xItd9C+wbOe50e+TaP7iKTLyCu0+
- OJHBquaMjF5Jy+HXqHU08mCDWAYlOfeUuVxHq8EDsZgGA3lkTMBXocLyuG9XjwvLnN7ugj+CfBQ
- caf0n1DeNeOyhXErftQjwI1IOOsNSXI4tl0liC0Ao0ao4YakMgYdxYuq8G5gdzSF4J95Bklqh5W
- QPm5kRd328ZXhd8QuL2j5lhauiTYRVlnlSOlAo6g0EODWHA4CiJt8Y1lx+Y99ZWhhKycRpzI9sN
- Ako9THqMO7yaPzpDeuOSFdkjob/3ArPRN49v44O+cE5wlGg0jBm+4F+LXNeagyhuBGJyt6Z5wha
- 0iAdrpNGqP2OaOBiEcX6bEz1+HmpQNKDP/M++aJHXvLhKhttdmqN6wltxBV/qr2NH2DNkfifnFO
- g/1LPPv/omxUxO8ODdgFBA1u40XG81w5BkMvLwGAeEEgliTAIjE8vt0QQV2UNqRaSHch2+GvAzT
- gQilfP7D/g==
-X-Received: by 2002:a05:6830:258c:b0:7f4:c062:7b45 with SMTP id
- 46e09a7af769-7f4c4b41f76mr375663a34.1.1787679310520; 
- Tue, 25 Aug 2026 10:35:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7f4c420c31asm149550a34.1.2026.08.25.10.35.09
- for <u-boot@lists.u-boot-project.org>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 10:35:09 -0700 (PDT)
-Date: Tue, 25 Aug 2026 11:35:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org
-Subject: Updated next branch to v7.2-dts tag
-Message-ID: <20260825173507.GX523975@bill-the-cat>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id va-j-pYsp7Qt for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 17:55:40 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.120;
+ helo=smtp-relay-canonical-0.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=k4fwJ9Gx
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 26F714004E
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 17:55:39 +0000 (UTC)
+Received: from LT2ubnt (dynamic-176-006-060-003.176.6.pool.telefonica.de
+ [176.6.60.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id AFE323FC08; 
+ Tue, 25 Aug 2026 17:55:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1787680536;
+ bh=UQKpF+BXg6yPC2CegGMaWVtGpCIxOy82ZCtISGsndAk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=k4fwJ9GxV4/oAo+XAVaG5iLGOP8Rz34BM24ZfEB+4fZNQBnnDTM3D0XcmWt7BDBXP
+ jHuswZZnuCLc/wFePlmr1BKNFHR7IttAJfGj6yYT+U2N8PL3rfKXwlSzhLime3hX2l
+ t3H4mqOrrWrA8GqHugyjleAQ5AybVq3SL4VAQ+BOoJJIAlPXWX1cxYXDwQzPnb4P6Z
+ FPYaq0fx+c5AJoglRuP9FQAcw91mUNjPl3duuGYUGmmTJ83tGYdmOMKllrr+whbgGK
+ 7jJLaYgppK5Kb1crsBUYtqs5JK6ITGhiRgpIQJYek/vV2JuaUdbxC3pw8YjTgQcAWu
+ GBEBIOuIAZzhx3x0Q1RbuYoU7WtleohVPOTwtvz33OFhg+mmdz5cuX1SIKLE+rO1w+
+ or2AIAOpUW0XMsuSeXJsQ+ck/rU5RoLP1BgKYw5Smev0urVtf+6sRRxzsXe6pT2JMW
+ FqBlrY/rK8zIWtkMVOqqxZe7MHfL2V0MGiLYyvIgwpjXkzzc6wF0uCVpKYRvnum41L
+ jNKfUD0nS0TYQ72rhGEVCux3ngAxiDPtAKH7Q3aqxGi/Pbq+rvn/evlx4PgUTTnz3v
+ /Vlyc3DGP3axHHpeVyFKJHCTtMTKg7ZIQON0lpttQ0YnS5TZsXjsplJ/r2/GaQE/co
+ F3ZT53ZiZ3VcPQtRypYf237w=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] efi: avoid video ghosting in EFI app
+Date: Tue, 25 Aug 2026 19:55:31 +0200
+Message-ID: <20260825175531.27478-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FD4IHsDc6UQH6nWH"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -119,29 +96,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
+When running the EFI app via QEMU with EDK II using
 
---FD4IHsDc6UQH6nWH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+  cp /usr/share/OVMF/OVMF_VARS_4M.fd .
+  qemu-system-x86_64 -enable-kvm -m 2048 \
+    -machine q35,smm=on \
+    -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd \
+    -drive if=pflash,format=raw,file=OVMF_VARS_4M.fd \
+    -hda disk
 
-Hey all,
+every character printed to the console by the U-Boot app appears twice.
+See https://gist.github.com/xypron/7214e785c7d73104f8541bcac363a192 .
 
-As per the subject, I've now updated the next branch to the v7.2-dts
-tag.
+The reason is that environment variable stdout has serial,vidconsole as
+value. This is defined by board/efi/efi-x86_app/efi-x86_app.env including
+include/env/x86.env.
 
---=20
-Tom
+Provide a standalone efi-x86_app.env file which does not use vidconsole.
 
---FD4IHsDc6UQH6nWH
-Content-Type: application/pgp-signature; name="signature.asc"
+Don't copy any lines referring to hardware drivers like PCIe, USB,
+i8042-kbd as direct hardware access would conflict with the EFI
+firmware that was used to start the EFI app.
 
------BEGIN PGP SIGNATURE-----
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Update the commit message to explain why we must not reference
+	any hardware except the one emulated via the EFI API.
+---
+ board/efi/efi-x86_app/efi-x86_app.env | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCao3SRwAKCRAr4qD1Cr/k
-Cj1HAQCzKwdXc7Ag3xC2qhl8xHKPzfZP/thNAnj95kqddAiwQAEAhkB4q03LShHf
-5k2WLUVGZDM7V0t0Ac9Bd/h6u8p/VAk=
-=m/3b
------END PGP SIGNATURE-----
+diff --git a/board/efi/efi-x86_app/efi-x86_app.env b/board/efi/efi-x86_app/efi-x86_app.env
+index 106836af1ff..d2858b9cb93 100644
+--- a/board/efi/efi-x86_app/efi-x86_app.env
++++ b/board/efi/efi-x86_app/efi-x86_app.env
+@@ -1,6 +1,17 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
++
+ /*
+  * Copyright (c) 2015 Google, Inc
+  */
+ 
+-#include <env/x86.env>
++netdev=eth0
++consoledev=ttyS0
++scriptaddr=0x7000000
++kernel_addr_r=0x1000000
++ramdisk_addr_r=0x4000000
++ramdiskfile=initramfs.gz
++
++/* common console settings */
++stdin=serial
++stdout=serial
++stderr=serial
+-- 
+2.53.0
 
---FD4IHsDc6UQH6nWH--
