@@ -1,148 +1,123 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2D52C61DBD
-	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 18:48:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405A0C61DB9
+	for <u-boot@archiver.kernel.org>; Tue, 25 Aug 2026 18:59:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 536A940564;
-	Tue, 25 Aug 2026 18:48:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C960260604;
+	Tue, 25 Aug 2026 18:59:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id akSZbVem6-5y; Tue, 25 Aug 2026 18:48:01 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2e4qRC5vVOVO; Tue, 25 Aug 2026 18:59:57 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787683681;
-	bh=grRKtx8zYClfjklLFNLOhC3YZLEXfWGN3l9a5Mrkels=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=YhVxhIgpsTedGkeNBPN2iVan2+X/ryM5v+rf/9c6dW8dSRRdRvixjHhCl+qkF3TIH
-	 /jJurmAPz6DlJ4XomKbxFZxHi8dewewEdJxnJH3/VYjuQpc1oAx6itxHg9V9j4K63P
-	 0xv4ARyrpSSdklPxioQEV4/4PlVBSYeCzLGmj/asfbS6+TntagKle3e867rpvXdVLl
-	 t33/jDWRGJhR1SYubzGWspaOpd9PCxsEFATlk62sPi5euaJAwRK9K6ZgdoqgR2fkY1
-	 I4amcG3jxX7S37hv8MFysxQpg8PXtR5glep5TO5+Gzl+SxbU0B2AKOILW90A1wjPZ5
-	 Q6PyodCsyz5qQ==
+	d=lists.u-boot-project.org; s=default; t=1787684397;
+	bh=YGTaBNrnrfJIE9Fd7c/Xp861ayBq8P1thwGVApYmcS0=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=vrGUKlgcjJ8zLR3mrfV9GMkA4IpRWOiG6H053uAFW7johlXzS7jGvaIlz18HWjY2y
+	 pbw070WXQxKFcpM2ksxDvCfQx09jq7zm0sumTk4uHYeDxuctaQ3fOMYQL+7REN1lnC
+	 oxJc2Miw8vHR0+NNQ3fjLOlXqOTB3CVjyEbzjeY6UqbvbWMcNIBxeTfl5DHutsigub
+	 29jMZjKomO9H7brnRa67tYCKdS4EO3YcYmJYYBlFyF01/7DTbeEG85UzfZorVhN9CP
+	 m6kFgE7n2BTrf7rS6cf5Ngs3sjZqoOzrql0OjTi7SlsUVnJvngXB9qHGe7Z1oCu5q7
+	 UqaZsyPfOgmCg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 46DB94054C;
-	Tue, 25 Aug 2026 18:48:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3248B334
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:48:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0324A606E1;
+	Tue, 25 Aug 2026 18:59:57 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D59A43C3
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:59:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 211654054C
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:48:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C73D5606E1
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:59:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GAqSrFLOsVAO for <u-boot@lists.u-boot-project.org>;
- Tue, 25 Aug 2026 18:47:59 +0000 (UTC)
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=Yz7zkknL
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8959F40505
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:47:57 +0000 (UTC)
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 319383FC39
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:47:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1787683675;
- bh=grRKtx8zYClfjklLFNLOhC3YZLEXfWGN3l9a5Mrkels=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Yz7zkknL7RgvP1RUXsMvPJqLsJDECuYysdpy67AYOZ3MyBoW//HLaWZfZ0OYprje5
- arw9QZlwn6EzA8qAzQa9xUTsghquRABjf0oQHU/D0Ss2icbCMUQ8xVwZstryzXdKyh
- GAka7Lu3bfNZ+TFCHJ+GBhzyGU42bTP5lk4Pw+oXuzV1DA/AmFiQ/ewf7WvOdB6HN6
- ROeoHserc1tNn6nTVXhaIKGe+g95YbPt3tf8I58rbo0BZibgED0h5h0kA3c8fFiaHd
- 4TaBEv/ZC0wgIkH1iL/OXcYxDs/c1ZAEPWrEvnQDamZohQiyWtUVPRHYjSkGUv9htA
- sQV//JPIoppkWgVnoBjd6xwKt1byQ5XV2uNw4YPK3e0yrb7aBoY6E56ywgrqtsHuFY
- tJnkopSk6T5Vkp28edHm9eq3vBnmfw+vxrUf1dFiYyL56dbSdD/X/Stx9Dm+RYrQbE
- sOzYHs02/N4McyPH/0vV2wOAjqMWZ2HSilzkyng4uqYM7mxtasNgv7LNQpYwf39DBT
- rCi7SprxBihcmdy/yzfVn4Y43MfNCG5bQPJlv4KU9LYsYSFWl4KmnD6UCz+/1a6RXg
- TdzBuawaT1nShCznyXDj5rD963+BMQ6r1MxbyU071lrzwahTyOLStcrL0gT/fWS3Bz
- +pCumcuO4MST9QL6RUCkKm0M=
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-6a3899d74c5so121841a12.0
- for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 11:47:55 -0700 (PDT)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5zWrEKOpKzD6 for <u-boot@lists.u-boot-project.org>;
+ Tue, 25 Aug 2026 18:59:55 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:4860:4864:20::2c; helo=mail-oa1-x2c.google.com;
+ envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=g9+BFvxE
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D678960604
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 18:59:54 +0000 (UTC)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-43b7e186a0cso127650fac.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 25 Aug 2026 11:59:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787684393; x=1788289193;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=YGTaBNrnrfJIE9Fd7c/Xp861ayBq8P1thwGVApYmcS0=;
+ b=g9+BFvxEzQ6BgdH/dXRqosEEPMDfTxjzFJQ1FTaFO9rVCTeTj0dlwV9aYPP9gLcqn1
+ lPBPYDGQLYxPm2AC4pttl97BjWo7Vdem4uQNIFgRDQ2HWeO62gI2PBeSZo0h5U+r9YvK
+ 2JlvS6i1fSG7QyibSTCq5+vUQX0D7idRTsTIw9e2D26OG/uavBj4hwQ2aqu/VG2Q9jqQ
+ knir0mXIpsO8NfO8+M4Rt/UKkxpgobLXmWl2TLnwH84wU8TIo691HSikyKkWOnz4psmq
+ 1SS/9RYzJT/fwUSk6ZN9g8aDwQu3zI1rwhEBDQGSJIS4dYUjStoab+UP1jL8Gm5YxcwA
+ jyXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787683675; x=1788288475;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=grRKtx8zYClfjklLFNLOhC3YZLEXfWGN3l9a5Mrkels=;
- b=pGjl7uari43uU2d3GnQtKFxflQoa/c2Vxf5FbfYwCv5BGkv/fXqCgSlpMH/VWoJ8dt
- HeYts/ILR/6yNIXwuPOv7agB+0pwg7C10Frrf4SLoiM4lhe9fZQMhWwNBQj8sfdb8cO+
- nN9TFbS8/bKVJ9jzCwk9azA2tRAfTusKaEZ4usGjgOSbzrREeU4TH8WdkgoPYyw5YTU5
- AwKjlEP4iCxENchRLFJF3mMLJ4oBYwGRp+yjmvqh9xMZdUA+RS61l2q+etTAcCeWG8Tm
- 39tjUmu5BxsgUT+USBgpcjdaVFfa/jY2SDnTdb0rtZBCCnD1Fg3qQMVwuyRDUk6/HdRd
- sm4Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpMKyp0aSrFOZ5RHisEu3kpVUzNGM5ZjmVaFpLAm2m0+pA62oAsqCFz5wOXKj0IiqVnhhXI75Q=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++k8KasjTVUrG89Cdx3PUPHoo0ufEwYgZoq2qoB+GYx10tAeTkY4
- dipy/O8QNy8PTW4ySbDQx4iHMnrDsir0FulyVAzah6W2UVXIzhkZH2NsXroPwIVipHAKUUP98Ne
- bZajOXRp08PRtdExaHk37lS9k6I3/DNkvCJqkMDUVP40pTksTOwiO+CPXs2vGBfVt21wUwY7fjZ
- tlJWlF2qOeXg==
-X-Gm-Gg: AR+sD11E1EISYdZRa56JD8RpW96Hjl6BybFBZjmydZ/rv3gEMyvMpNG3jyH+3Ti/Lag
- NgtboozKbJSC1tMm5TlZQBKK7kDE9vuGAN4rJVLsVx6UGqMCq6CBjgzDnAbnQ6lu5dGgWbahb4Q
- cLTflBI2KsRRKY4/8I90yH17TDJ7EyFoVHvGsmgMYWy5XOb8eLaI+PRP38wIbIaWzcSYcbsC+CG
- O/XNFrcVnflGxglLmTwZlj9ML2S6ZcMr4LK3wFNCWjiXJ2iGQjWWWO8+ciiR4mlJiAJQ2TVWFUj
- 7IpszRvlTpim5u6gcN05jPlxpzDlOfiri8G9IE9nDEGy23l5HEDM74Y66GjpuYfHfpf6mGv5et1
- m4OOnM/zcMlEHgNpfLpOwsKX4UUcd1YpgFLBzc4BY1sZA+IRxqorP/Yv7wUyTBKoOcr+j1P70hV
- sgadP6+PaXH+BVPPqaco1O
-X-Received: by 2002:a05:6402:208a:b0:6a0:eb:ae41 with SMTP id
- 4fb4d7f45d1cf-6a5df61c0bdmr1213785a12.10.1787683674599; 
- Tue, 25 Aug 2026 11:47:54 -0700 (PDT)
-X-Received: by 2002:a05:6402:208a:b0:6a0:eb:ae41 with SMTP id
- 4fb4d7f45d1cf-6a5df61c0bdmr1213734a12.10.1787683674191; 
- Tue, 25 Aug 2026 11:47:54 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:667:9a84:7c86:797a:e54:8957?
- ([2a02:3035:667:9a84:7c86:797a:e54:8957])
+ d=1e100.net; s=20251104; t=1787684393; x=1788289193;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=YGTaBNrnrfJIE9Fd7c/Xp861ayBq8P1thwGVApYmcS0=;
+ b=df4NoLfTJgu3QuY1R1xho+ricgEguVyvnJjEny2y9d9brSgYh//YwWofCuGDcdOLfa
+ C2t3yMyPD06Y2FtGTD8CdDTDRuGPQULUNrYngbGIfP3E2lFscm5Usnp8kXssqgzxxpKw
+ rn/EWHohc7PKpRlodZ8zOs+3TDbt/G4JnkoHCcWH8UMGl50SvnsHqIWi6kshUH3oh9gI
+ nYhYUpnY2QsJo8gr7IkLX6Zr8q9tl9r3wypRTqfQPf1dAQTASCL3/YRy+cIw/0xI55Uz
+ GEHqyQRfJoIjZnmuecAecmkvcSdKXHuazT0k3/6LXEtBiBxpc2BZ1lEk29qheGXTexvK
+ yQzg==
+X-Gm-Message-State: AFuF++l3wueyWwSnJJLxOC6mv6EleGY+//oDyuvOgBUKM5XPMtltgfE5
+ sKZGjEBKUNG5s1dFu4RSiUBgRacGG/+XiyqEaK9f/ouYrMnSz9IYB1wf
+X-Gm-Gg: AR+sD12FbCPhbsPGTLUN0Kkas2zIB9QKXumzAuN6R6DijcD9YOxktUYFYt7XCxONxvJ
+ bfokQbDHUcs+uUY4vPsdDDXMtZrflS7XojNWwt+6VSqs4mDboTK/kF1Me3bozeAb2XFAHlrS2P2
+ ev0tY0x1YrRSZjQMIt2K7CUgmPg4d/CGL5bz8QzauM8L0peVejzTmnV4sAez2I5yWFOuGFYxUmi
+ 5FASN30M1rEQV76zm/OEWNu7nirVUfA7Ad6DDevdHy8UKMninDFRmbSkOVMHL9/F2TPGZTnxjCq
+ 4iqz7dz/wA5J3hTbppBzweEUcdR7bCowxjiFNcZ5Tb0V4loCfVeR6ng6fEKLbZQipNOFdRN5CBb
+ o0dNRU50XYTtv5jT53mcv9cjmcdpxFG5FqhVU89lvxwIrjNrLG8Sw3HYsZPlIR/01pM5GJ5Vvnm
+ 2Pyzt8FB99lJduTk6rDgDywCgK/O6cYO45Vq9FI3Mky4FKuuX2sA+uY0UppPrpeNMN63WquZLEC
+ duBMHv8tQAs71R0DiurjTPJ2jWORgqBOt44KarMPem3bhA3dFPFdRzzC+gO9lQwP1g6lEgoSdCt
+ jCPdODQ8uDbf166gBGZZIRGp7Eg7JNU7Q24hRtgAgvik/ewZPGnK3HrSNDtHTuLC1XPAq1eeDnz
+ CJLrA326bmpdL
+X-Received: by 2002:a05:6808:144f:b0:4b3:29e5:5512 with SMTP id
+ 5614622812f47-4b366b177b3mr1469285b6e.16.1787684393373; 
+ Tue, 25 Aug 2026 11:59:53 -0700 (PDT)
+Received: from [127.0.1.1] (71-218-10-81.hlrn.qwest.net. [71.218.10.81])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a5dea83a30sm649985a12.15.2026.08.25.11.47.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Aug 2026 11:47:53 -0700 (PDT)
-Message-ID: <73745748-eeb0-4dd8-ba15-6c220037b330@canonical.com>
-Date: Tue, 25 Aug 2026 20:47:51 +0200
+ 5614622812f47-4b367eb7eafsm202648b6e.10.2026.08.25.11.59.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Aug 2026 11:59:52 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Tue, 25 Aug 2026 12:59:50 -0600
+Subject: [PATCH] net: lwip: support syslog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] disk: part_efi: Size the partition entry array from
- the block size
-To: Alexey Charkov <alchark@flipper.net>
-Cc: Tom Rini <trini@konsulko.com>, Anton Burticica <mouse@ya.ru>,
- Javier Martinez Canillas <javierm@redhat.com>, Simon Glass
- <sjg@chromium.org>, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Jacobe Zang <jacobe.zang@wesion.com>, Jagan Teki <jagan@edgeble.ai>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
- Suniel Mahesh <sunil@amarulasolutions.com>,
- Klaus Goger <klaus.goger@cherry.de>, Tim Lunn <tim@feathertop.org>,
- u-boot@lists.u-boot-project.org,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20260731-gpt-4k-v1-0-a3f1f16b53ae@flipper.net>
- <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260731-gpt-4k-v1-1-a3f1f16b53ae@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260825-lwip-syslog-v1-v1-1-53210f44fd76@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMQQ6CMBBFr0Jm7USoKTFexbiY1hHGQGk6gBrC3
+ W11+X7+exsoJ2GFS7VB4lVUppChOVTgewodo9wzg6lNW5+NxeElEfWjw9Th2iDZ1lh2ZJhOkKW
+ Y+CHvX/B6+7Mu7sl+LpXycKSMLlHwfZmWqHNiGo8jSYB9/wLllwhxkgAAAA==
+X-Change-ID: 20260825-lwip-syslog-v1-a5625eba2ea3
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ James Hilliard <james.hilliard1@gmail.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,176 +131,170 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 7/31/26 14:40, Alexey Charkov wrote:
-> gpt_fill_header() computes last_usable_lba and first_usable_lba from
-> hardcoded block counts that silently assumes 512-byte sectors and the
+LOG_SYSLOG depends on NET, but the raw Ethernet and UDP header
+builders it uses are only available with the legacy network stack. This
+makes LOG_SYSLOG fail to build with NET_LWIP.
 
-Hello Alexey,
+Provide lwIP implementations using the selected Ethernet device and its
+indexed IP address from the environment. Move the shared declarations to
+net-common.h and extend the syslog test to check the source MAC address
+and IPv4 header checksum.
 
-Thank you for fixing this issue.
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+ include/net-common.h   |  7 ++++++
+ include/net-legacy.h   |  4 ----
+ net/lwip/net-lwip.c    | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ test/log/syslog_test.c |  2 ++
+ test/log/syslog_test.h |  4 ++--
+ 5 files changed, 69 insertions(+), 6 deletions(-)
 
-Nits:
+diff --git a/include/net-common.h b/include/net-common.h
+index 0c260873c2c..3084a2b2a57 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -362,6 +362,13 @@ struct ethernet_hdr {
+ /* Ethernet header size */
+ #define ETHER_HDR_SIZE	(sizeof(struct ethernet_hdr))
+ 
++/* Set Ethernet header; returns the size of the header */
++int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
++
++/* Set IPv4 and UDP headers */
++void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
++			int sport, int len);
++
+ /**
+  * net_random_ethaddr - Generate software assigned random Ethernet address
+  * @addr: Pointer to a six-byte array containing the Ethernet address
+diff --git a/include/net-legacy.h b/include/net-legacy.h
+index d3b122c9062..d7f55d34a30 100644
+--- a/include/net-legacy.h
++++ b/include/net-legacy.h
+@@ -344,15 +344,11 @@ int net_loop(enum proto_t);
+ /* Get size of the ethernet header when we send */
+ int net_eth_hdr_size(void);
+ 
+-/* Set ethernet header; returns the size of the header */
+-int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot);
+ int net_update_ether(struct ethernet_hdr *et, uchar *addr, uint prot);
+ 
+ /* Set IP header */
+ void net_set_ip_header(uchar *pkt, struct in_addr dest, struct in_addr source,
+ 		       u16 pkt_len, u8 proto);
+-void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport,
+-			int sport, int len);
+ 
+ /* Callbacks */
+ rxhand_f *net_get_udp_handler(void);	/* Get UDP RX packet handler */
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 8f8f9d69020..4dd8f0d2ce7 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -159,6 +159,64 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+ 	return 0;
+ }
+ 
++int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot)
++{
++	struct ethernet_hdr *et = (struct ethernet_hdr *)xet;
++	const uchar *src = eth_get_ethaddr();
++
++	memcpy(et->et_dest, dest_ethaddr, ARP_HLEN);
++	if (src)
++		memcpy(et->et_src, src, ARP_HLEN);
++	else
++		memset(et->et_src, 0, ARP_HLEN);
++	et->et_protlen = htons(prot);
++
++	return ETHER_HDR_SIZE;
++}
++
++static void net_lwip_set_ip_header(uchar *pkt, struct in_addr dest,
++				   struct in_addr source, u16 pkt_len,
++				   u8 proto)
++{
++	static u16 ip_id;
++	struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
++
++	ip->ip_hl_v = 0x45;
++	ip->ip_tos = 0;
++	ip->ip_len = htons(pkt_len);
++	ip->ip_p = proto;
++	ip->ip_id = htons(ip_id++);
++	ip->ip_off = htons(IP_FLAGS_DFRAG);
++	ip->ip_ttl = 255;
++	ip->ip_sum = 0;
++	memcpy(&ip->ip_src, &source, sizeof(source));
++	memcpy(&ip->ip_dst, &dest, sizeof(dest));
++	ip->ip_sum = compute_ip_checksum(ip, IP_HDR_SIZE);
++}
++
++void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport, int sport,
++			int len)
++{
++	struct ip_udp_hdr *ip = (struct ip_udp_hdr *)pkt;
++	struct in_addr source = {};
++	ip4_addr_t addr, mask, gateway;
++	struct udevice *dev = eth_get_dev();
++	u16 pkt_len = IP_UDP_HDR_SIZE + len;
++
++	if (len & 1)
++		pkt[IP_UDP_HDR_SIZE + len] = 0;
++
++	if (dev && !get_udev_ipv4_info(dev, &addr, &mask, &gateway))
++		source.s_addr = addr.addr;
++
++	net_lwip_set_ip_header(pkt, dest, source, pkt_len, IPPROTO_UDP);
++
++	ip->udp_src = htons(sport);
++	ip->udp_dst = htons(dport);
++	ip->udp_len = htons(UDP_HDR_SIZE + len);
++	ip->udp_xsum = 0;
++}
++
+ /*
+  * Initialize DNS via env
+  */
+diff --git a/test/log/syslog_test.c b/test/log/syslog_test.c
+index b6c0631aaf6..f848506fb1c 100644
+--- a/test/log/syslog_test.c
++++ b/test/log/syslog_test.c
+@@ -34,11 +34,13 @@ int sb_log_tx_handler(struct udevice *dev, void *packet, unsigned int len)
+ 
+ 	/* Check Ethernet header */
+ 	ut_asserteq_mem(&eth_hdr->et_dest, net_bcast_ethaddr, ARP_HLEN);
++	ut_asserteq_mem(&eth_hdr->et_src, eth_get_ethaddr(), ARP_HLEN);
+ 	ut_asserteq(ntohs(eth_hdr->et_protlen), PROT_IP);
+ 
+ 	/* Check IP header */
+ 	buf += sizeof(struct ethernet_hdr);
+ 	ip_udp_hdr = (struct ip_udp_hdr *)buf;
++	ut_assert(ip_checksum_ok(ip_udp_hdr, IP_HDR_SIZE));
+ 	ut_asserteq(ip_udp_hdr->ip_p, IPPROTO_UDP);
+ 	ut_asserteq(ip_udp_hdr->ip_dst.s_addr, 0xffffffff);
+ 	ut_asserteq(ntohs(ip_udp_hdr->udp_dst), 514);
+diff --git a/test/log/syslog_test.h b/test/log/syslog_test.h
+index 39cce4ed498..89c86541f5e 100644
+--- a/test/log/syslog_test.h
++++ b/test/log/syslog_test.h
+@@ -31,8 +31,8 @@ struct sb_log_env {
+  *
+  * The following checks are executed:
+  *
+- * * the Ethernet packet indicates a IP broadcast message
+- * * the IP header is for a local UDP broadcast message to port 514
++ * * the Ethernet packet uses the selected interface and broadcast destination
++ * * the IP header checksum is valid and describes a UDP broadcast to port 514
+  * * the UDP payload matches the expected string
+  *
+  * After testing the pointer to the expected string is set to NULL to signal
 
-%s/assumes/assume/
+---
+base-commit: 964ad5b5c91b7be56e443e899d7f873e6aa8c9fc
+change-id: 20260825-lwip-syslog-v1-a5625eba2ea3
 
-> default number of partition entries.
- > > The partition entry array holds GPT_ENTRY_NUMBERS entries of 128 bytes
-> each, so the number of blocks it needs depends on both the entry count
-
-The size of the partition table entries is not fixed to 128 bytes. 
-Instead it is 128 * 2 ** n with n >= 0. The size is stored in field 
-SizeOfPartitionEntry of the partition table header.
-
-You already consider this value in gpt_pte_blocks(). It is just the 
-commit message that is misleading.
-
-> and the block size. write_gpt_table() derives that count correctly and
-> writes the backup array at last_usable_lba + 1, so whenever the two
-> disagree the backup array no longer immediately precedes the backup GPT
-
-It remains unclear which two values might "disagree".
-
-Otherwise the patch looks good to me.
-
-Best regards
-
-Heinrich
-
-> header. Furthermore, on a device with 4096-byte native sectors, such as
-> UFS flash, and the default 128 entries, the array is 4 blocks rather than
-> 32. Current code reserves 34 blocks at each end of the disk for any block
-> size and wastes about 114 KiB at each end.
- > > Add a new helper gpt_pte_blocks() and use it in all four places which
-> currently calculate the number of blocks each in its own way, so the
-> layout written by gpt_fill_header() and the extent written by
-> write_gpt_table() cannot drift apart again. With this, first_usable_lba
-> on 4096-byte sectors is 6, last_usable_lba is lba - 6, and the backup
-> array occupies lba - 5 .. lba - 2, immediately preceding the backup
-> header, as the UEFI specification describes.
-> 
-> Note that this changes the 512-byte layout too for boards that do not use
-> the default entry count. CONFIG_EFI_PARTITION_ENTRIES_NUMBERS is
-> "default 56 if ARCH_SUNXI" and is set to 64 by a number of Rockchip
-> defconfigs:
-> 
->    entries  array blocks  first_usable_lba  last_usable_lba
->         56            14        34 -> 16    lba - 34 -> lba - 16
->         64            16        34 -> 18    lba - 34 -> lba - 18
->        128            32        34 -> 34    lba - 34 -> lba - 34
-> 
-> Existing partition tables stay readable either way, since is_gpt_valid()
-> locates the entry array from the on-disk partition_entry_lba. Only newly
-> written tables change. Partitions given without an explicit start= will
-> now be placed lower on those boards; on sunxi first_usable_lba lands on
-> the 8 KiB SPL offset, so such boards should keep specifying start=
-> explicitly.
-> 
-> While here, report both LBAs when the requested layout does not fit, since
-> the existing "Partitions layout exceeds disk size" debug message gives no
-> clue as to by how much, making it less helpful in debugging.
-> 
-> Co-developed-by: Anton Burticica <mouse@ya.ru>
-> Signed-off-by: Anton Burticica <mouse@ya.ru>
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> ---
->   disk/part_efi.c | 47 +++++++++++++++++++++++++++++++++++------------
->   1 file changed, 35 insertions(+), 12 deletions(-)
-> 
-> diff --git a/disk/part_efi.c b/disk/part_efi.c
-> index d8b17ec2e91a..af311867a285 100644
-> --- a/disk/part_efi.c
-> +++ b/disk/part_efi.c
-> @@ -388,10 +388,23 @@ static int set_protective_mbr(struct blk_desc *desc)
->   	return 0;
->   }
->   
-> +/**
-> + * gpt_pte_blocks() - number of blocks taken up by a partition entry array
-> + *
-> + * @desc:	block device descriptor
-> + * @gpt_h:	GPT header describing the array
-> + * Return: number of blocks the array occupies on @desc
-> + */
-> +static u32 gpt_pte_blocks(struct blk_desc *desc, const gpt_header *gpt_h)
-> +{
-> +	return DIV_ROUND_UP(le32_to_cpu(gpt_h->num_partition_entries) *
-> +			    le32_to_cpu(gpt_h->sizeof_partition_entry),
-> +			    desc->blksz);
-> +}
-> +
->   int write_gpt_table(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
->   {
-> -	const int pte_blk_cnt = BLOCK_CNT((gpt_h->num_partition_entries
-> -					   * sizeof(gpt_entry)), desc);
-> +	const int pte_blk_cnt = gpt_pte_blocks(desc, gpt_h);
->   	u32 calc_crc32;
->   
->   	debug("max lba: %x\n", (u32)desc->lba);
-> @@ -453,9 +466,7 @@ int gpt_fill_pte(struct blk_desc *desc,
->   	size_t hdr_end = hdr_start + 1;
->   
->   	size_t pte_start = gpt_h->partition_entry_lba;
-> -	size_t pte_end = pte_start +
-> -		gpt_h->num_partition_entries * gpt_h->sizeof_partition_entry /
-> -		desc->blksz;
-> +	size_t pte_end = pte_start + gpt_pte_blocks(desc, gpt_h);
->   
->   	for (i = 0; i < parts; i++) {
->   		/* partition starting lba */
-> @@ -482,7 +493,9 @@ int gpt_fill_pte(struct blk_desc *desc,
->   		gpt_e[i].starting_lba = cpu_to_le64(start);
->   
->   		if (offset > (last_usable_lba + 1)) {
-> -			log_debug("Partitions layout exceeds disk size\n");
-> +			log_debug("Partitions layout exceeds disk size: "
-> +				  LBAFU " > " LBAFU "\n",
-> +				  offset, last_usable_lba + 1);
->   			return -E2BIG;
->   		}
->   		/* partition ending lba */
-> @@ -604,18 +617,29 @@ static uint32_t partition_entries_offset(struct blk_desc *desc)
->   int gpt_fill_header(struct blk_desc *desc, gpt_header *gpt_h, char *str_guid,
->   		    int parts_count)
->   {
-> +	u32 pte_sectors;
-> +
->   	gpt_h->signature = cpu_to_le64(GPT_HEADER_SIGNATURE_UBOOT);
->   	gpt_h->revision = cpu_to_le32(GPT_HEADER_REVISION_V1);
->   	gpt_h->header_size = cpu_to_le32(sizeof(gpt_header));
-> +	gpt_h->num_partition_entries = cpu_to_le32(GPT_ENTRY_NUMBERS);
-> +	gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
-> +
-> +	/*
-> +	 * Number of blocks occupied by the partition entry array. For the
-> +	 * default of 128 entries that is 32 blocks on 512-byte sectors, but
-> +	 * only 4 blocks on 4096-byte sectors.
-> +	 */
-> +	pte_sectors = gpt_pte_blocks(desc, gpt_h);
-> +
->   	gpt_h->my_lba = cpu_to_le64(1);
->   	gpt_h->alternate_lba = cpu_to_le64(desc->lba - 1);
-> -	gpt_h->last_usable_lba = cpu_to_le64(desc->lba - 34);
-> +	/* Reserve space for backup GPT header (1) + backup partition entries */
-> +	gpt_h->last_usable_lba = cpu_to_le64(desc->lba - pte_sectors - 2);
->   	gpt_h->partition_entry_lba =
->   		cpu_to_le64(partition_entries_offset(desc));
->   	gpt_h->first_usable_lba =
-> -		cpu_to_le64(le64_to_cpu(gpt_h->partition_entry_lba) + 32);
-> -	gpt_h->num_partition_entries = cpu_to_le32(GPT_ENTRY_NUMBERS);
-> -	gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
-> +		cpu_to_le64(le64_to_cpu(gpt_h->partition_entry_lba) + pte_sectors);
->   	gpt_h->header_crc32 = 0;
->   	gpt_h->partition_entry_array_crc32 = 0;
->   
-> @@ -747,8 +771,7 @@ static void restore_primary_gpt_header(gpt_header *gpt_h, struct blk_desc *desc)
->   static int write_one_gpt_table(struct blk_desc *desc, gpt_header *gpt_h,
->   			       gpt_entry *gpt_e)
->   {
-> -	const int pte_blk_cnt = BLOCK_CNT((gpt_h->num_partition_entries
-> -					   * sizeof(gpt_entry)), desc);
-> +	const int pte_blk_cnt = gpt_pte_blocks(desc, gpt_h);
->   	lbaint_t start;
->   	int ret = 0;
->   
-> 
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
 
