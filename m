@@ -4,109 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A82AC61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEA2C61DC6
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 16:42:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4F02F40564;
-	Wed, 26 Aug 2026 16:38:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 46E86403E8;
+	Wed, 26 Aug 2026 16:42:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jIcaELFk-47K; Wed, 26 Aug 2026 16:38:33 +0000 (UTC)
+ id Xki7T9c07ISX; Wed, 26 Aug 2026 16:42:35 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787762313;
-	bh=UuMi/48cAHbnVh/QP3asa9eAE12hvHO4axx0UASq+Ng=;
+	d=lists.u-boot-project.org; s=default; t=1787762555;
+	bh=qaEIZcEVCTTOiq4MSBxfkUyzgfR70UVkah2CIFM/YM8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JChymGXq+f3rovIrLLcadTTxSH5+ei+MK2rEvPKyPNamfC7/B+yWN5CwVkkOEX4lG
-	 C/mI7bZi509nm7uevVOCB7O9LbkAcl6sQ9B1xw2NW3MXJpJfN5savYfyAPYVXcofEM
-	 znejwCR0YGswDyp2COg9q3olt8YMkV1QS9gfsDPxaevjXZ67W5wanVs5+fGu/VAGUX
-	 QrJ2cub4YKs9Fr1PDlDDuRZxtt/CunPUBpluJKARGEud0oneoEBONpAl3SJUWo6RFX
-	 cmma3w4WNk3y83PfR+B468RH2ktS5P4EFgQOO+SQ67jDut6inUiXzHBNUDs2xI6gKg
-	 O+j/WHff3rmTg==
+	b=i02fdbxIwytncU5UK27/74KkwDfiCOP/gRd1heC2M/1kY92GwIoQ/IWD9Vrpuvued
+	 ZakUNC+nLGXVJEAa2cWDrSUFmcG7ucvVIHmns/SFFPitFZUswTOjoo2Yx8QXS1KHYw
+	 m/a5tjbyh2X31CGob5lnjnJcDlGQRGIFYScAE0HwNfbzsd9WglGEBh2OGpdUxbyQi1
+	 6KMKl18KWaGowlhIwRyBGxKexnNYJex0KHlWwNPnrqePr4i5tN+WphODNIvQfHks2Q
+	 jGU+ZOophZMBXFPMX8RwYtlT0+nvyJSGF1G+GOQ31pqMhRtCbstnSC+pGsLyAcfWvx
+	 mgoK/2d/3pc1Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 428E44052D;
-	Wed, 26 Aug 2026 16:38:33 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DF8D339E
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:38:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 34356404A8;
+	Wed, 26 Aug 2026 16:42:35 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EA46229B
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:42:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D19C340521
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:38:31 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DC7AA40206
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:42:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZYWYq6nvEFir for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 16:38:31 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A7a8aErUvlac for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 16:42:33 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22d; helo=mail-oi1-x22d.google.com;
+ client-ip=2607:f8b0:4864:20::235; helo=mail-oi1-x235.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=OK0MuHa7
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 799DE4052D
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:38:30 +0000 (UTC)
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-4af81963f35so1051198b6e.0
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:38:30 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=iGK994+U
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2AFE7400C2
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 16:42:32 +0000 (UTC)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-49ff971e903so92464b6e.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 09:42:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787762309; x=1788367109;
+ d=baylibre.com; s=google; t=1787762551; x=1788367351;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=UuMi/48cAHbnVh/QP3asa9eAE12hvHO4axx0UASq+Ng=;
- b=OK0MuHa7znmn5cPy5Dhi9HK5hBEoIcOF8i7wss4VWnM/b8QCMIjBggvDox6A7SLrc5
- qYNSc1jMt9xIF/uaGoIfl/LZSdVelN2P81Hj6Y/JEwhNy5bfqZrU4+A5hKiA0jnCCLhL
- vWV1AEkLAf3Jq9DX5RYm8Le2ZlMa7TiuNyz6Y1CMTPRAoKokWHZAo9Cer7YD1zEMcucj
- cZcQ0x4aiuJE9KvNG018UgeVO9eGnap+OIAWuN0CX9IAtjW3/vy7bl2sw0ckw1yQpSDP
- GIojRPvP3SDnOwG+5jqzmn2ivAnpstmUp0nJ4zP/zvGuzrm93Xqm/aYQ95qp0Nz2m86a
- TsBg==
+ :content-type; bh=qaEIZcEVCTTOiq4MSBxfkUyzgfR70UVkah2CIFM/YM8=;
+ b=iGK994+UVxsw7d49lNENxDrrGbOpUGOJocjpEPci38reuew36nG0wcZrvr5pUSzMOz
+ bq6Y58InTq45hayRxFDSsMveaXxHSyVQrQnuSMXrEl5TuvNjBA1M1qDjCnt0K7N310tn
+ PqXNWs4y3SR52YhfP0by56ZSY9mdJ+jf+sG0aWzNLwpxYkw9FesBH0mqX13h94mGw6X9
+ 78ayfLP8kBdmAsPtVuO9Lf6J23SVfgoIdaPc9CjdS94M65IosodUN0yvaL8DsCmMSpMC
+ oJ3L1P8CFuN6kymUhARRnXGaob3PRQNDaA0ZCxsspQhY10gg6Do5nJiQtpAzfQPYb5uw
+ aOyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787762309; x=1788367109;
+ d=1e100.net; s=20251104; t=1787762551; x=1788367351;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=UuMi/48cAHbnVh/QP3asa9eAE12hvHO4axx0UASq+Ng=;
- b=nmlBk+mm2QohvlRRlXWnGq4S9QjcJLenoOnWIMNF/84psamRB+DHk9NmtKJ+d11I7R
- Svb3XSS7qZHYcwUup1S85jFCw1BFoqeOHfjc8Pbui1bzb8439wF9kTYIp7XeM5DBGD6Y
- Wt+C7EC+7LjROxG4GzoQ+qgxvG1pgdjA4Msdq0vEwYutInXV4Y9sg8dsZ+dt6tH1re0k
- TTShjenyzUVjZ/TLoq9mz4kMEfwM4Xdv3slFmt6EDpRq3Lr5sMXrBeJuXdrRlFg4vQnq
- b60KMCBtwVQ9uYP4wEgOsSoDg0fD6tpO3LkDW5zFpSqx+jLY17TVBZZhKRls/mtPGXO2
- 0r9A==
+ bh=qaEIZcEVCTTOiq4MSBxfkUyzgfR70UVkah2CIFM/YM8=;
+ b=tOTL5EadRutVv1pvXedvt9fXyoGojBT5QNFYWVaz0iGw2GF/acDKkd8zLiJF82mkY4
+ kio9U1h6WME6KXDUFvn/x/w40qk9/DcUBJNTtSU5uHV7hMIvS12vu+t5e+rh92D7wzit
+ VSdDd1NoH5RvZ3YbfpNaEdPYeAGkz8Lxv1wB1yQC5nCXcpTjPsrlJcplNKP7STx9Lvlu
+ Ve8x0cOUMpXmmWaTuMpUa2LMR+GqMdM6mvqS5mazlz2t6Z+6uuif2E4QpiaUQAIoSU2/
+ G/eymdDaRXJhrhhoylAUnGEd7MSHYYBTgbooENGGLrp/FzGd+TQfbsPmqV/YSfIKsuKv
+ Xx3A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoMBwYf9fNsvfUVdLyXirw6PFgCI4fzTOQw568bkPBUiQOM5OnX956vipmEQVFpA7iz9i1s1Qw=@lists.u-boot-project.org
-X-Gm-Message-State: AFuF++mWwPhUgongZLVh0FgOAeFt+p8jSN/LXY+KcnCBAJq4D4rXg5Mc
- a0jqS3TGYn7k6HhVkeFm7PCTCE9Sy1EIcChD0CtOkO0/2eEt2c3Mtv6VCF0p9qLXpJU=
-X-Gm-Gg: AR+sD12rroY6K2fnNOw6K2LXqMb+kvArIs4LGi2+HADjLDPvs0v23Qf9YEQBomuvFhN
- FjyjMESrmCZHmYxi/x60j7VlBqcx+6tIYyBytQ4mSStbAsuC2Mw0F6TED/6SczMgs7r3BSDeCzh
- 04zuiyKwZeBFLF2IJeW2rhZNAe+hwbAzMKDhoZQbB2GU2S34NoDqHv8FTfMhoEjYkagBZ3PZpjC
- Y7KWt4nz8GFWLKaZ/7yoBqElmzQd6pcM04hnNh3oiSZ109DbHtZPfyawHEJ9/7mKKGmm3R77KB9
- Fcfha8yuE3dZXViAERCJIGjmSZjoFHKzItVFVhWcQ9c8Ii8rG/w58QjqsWNICkI8U50zg+pEZsC
- bOGk03dx7ceNvV7mBWbZsIdlQI/0+dyHhkS6+oBcHMW8cWybcj6Ze0X7uBLyyH6gufKT22Bc/qj
- 8FqETbUzVIQd40c3qN4+w2z14fov3HdMBl7opdZSi5DH61Er4JmkWwxLPy2Rf0/GPrucOC0ZCIB
- FfYExOPtq1VcT1ynRKdLIfC5yXV05qfXtaGzso=
-X-Received: by 2002:a05:6808:1201:b0:4b1:91e1:6740 with SMTP id
- 5614622812f47-4b366a8db07mr7840609b6e.10.1787762308927; 
- Wed, 26 Aug 2026 09:38:28 -0700 (PDT)
+ AHgh+RoWb/mLgXr+CYDIZa1AKm4JDM7fDEnzw6fiZzXEVMM8zYmeXttoaSDX0lP5wksx2KZMQV2VJV4=@lists.u-boot-project.org
+X-Gm-Message-State: AFuF++knpExUnBtF068I+z8MZsg4xxkklr5pft2TOzkDierRL2SLZMxc
+ RCWXPjv4J9fAUWdQZt3DCRvDyHmD0xLzTEG2rvkc4rZ+CLLX4PzZe/QkwFv+o2aVhBU=
+X-Gm-Gg: AR+sD12Ir9iqOH0snN8lqewuRdD+TJeq7Sipjnyc4IbuPp0EFPTgJmANURTd+NYoGu0
+ mSAuVaAvyH34xTJWNNJgPtpuun1O3aJQKaU1Z2ocSnSwhktEmIhZjTE9vFnQQuig9hpb3Idv27b
+ OVqJU95UxZC0wr5IPXR2qZbki8jX2G5SiIUUPZpsEGBQ9u8yTMhu8RODNUiDpNOjww7kxJUaTVF
+ d92MtJmpAYuhRm5ebyK1EF8PlXskujZMqnap4p555z9DvoDB900SZYxUOUwnbXHe2sWNL2yhFdb
+ Lsv+Epffdb4JEHUbVH8pwUCTI2X7Myy9dXKrsVr4NR966FzTqKaS1AIBwv0pT70taF8VybCRPBx
+ 847ScNk7P1BpVbOwy5Z4IRybArBm2+2zWVGi8GnuNpc7iIcwQkKbO+NE7mDcTsfi4g0lnbZlQ1H
+ 95FTurl3WX06+1+5rE51TFDSjqKzmWhpLghqVQtkjGc3CZhdn/v5Cyc3xMfDXySMDrZUkJ8gYXV
+ cKj6eGoYvNW27KaXIHeKXB/wjpphdt/9V1IotY=
+X-Received: by 2002:a05:6808:508d:b0:4af:9364:b5a9 with SMTP id
+ 5614622812f47-4b37c82dc53mr469813b6e.6.1787762551550; 
+ Wed, 26 Aug 2026 09:42:31 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:162c:81fd:da88:2ea6?
  ([2600:8803:e7e4:500:162c:81fd:da88:2ea6])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4b36a7b06c2sm2040811b6e.7.2026.08.26.09.38.26
+ 5614622812f47-4b36abc0827sm2077520b6e.18.2026.08.26.09.42.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 09:38:27 -0700 (PDT)
-Message-ID: <6b1d40cc-2c90-4c9d-bc4d-c7044e6f6130@baylibre.com>
-Date: Wed, 26 Aug 2026 11:38:25 -0500
+ Wed, 26 Aug 2026 09:42:29 -0700 (PDT)
+Message-ID: <21736156-823e-46ce-bb19-4c0994371b96@baylibre.com>
+Date: Wed, 26 Aug 2026 11:42:28 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/14] video: mediatek: add dpi1 component
+Subject: Re: [PATCH v2 10/14] include: linux/hdmi.h: add HDMI colorspace and
+ colorimetry enums
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.u-boot-project.org
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -124,10 +125,10 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
- <20260826-add-genio-510-and-genio-700-hdmi-v2-8-68ebb1bf17df@baylibre.com>
+ <20260826-add-genio-510-and-genio-700-hdmi-v2-10-68ebb1bf17df@baylibre.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-8-68ebb1bf17df@baylibre.com>
+In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-10-68ebb1bf17df@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -144,253 +145,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 On 8/26/26 8:09 AM, Julien Stephan wrote:
-> DPI is one of the components of the video pipeline on some MediaTek
-> SoCs, such as the MT8188: it is the timing generator interface
-> feeding the HDMI TX. Sync polarities, porches and the interlace mode
-> are taken from the struct display_timing selected from the EDID.
+> Import the hdmi_colorspace and hdmi_colorimetry enumerations from Linux'
+> include/linux/hdmi.h. These describe the AVI InfoFrame colorspace and
+> colorimetry fields defined by the HDMI specification and are identical
+> across HDMI transmitters, so keep them in a generic header rather than
+> duplicating them in each driver.
 > 
-
-...
-
-> +void mtk_dpi_config(struct udevice *dev, const struct display_timing *timing,
-> +		    bool rgb)
-> +{
-> +	struct mtk_dpintf_yc_limit limit;
-> +	struct mtk_dpintf_polarities dpi_pol;
-> +	struct mtk_dpintf_sync_param hsync;
-> +	struct mtk_dpintf_sync_param vsync_lodd = { 0 };
-> +	struct mtk_dpintf_sync_param vsync_leven = { 0 };
-> +	struct mtk_dpintf_sync_param vsync_rodd = { 0 };
-> +	struct mtk_dpintf_sync_param vsync_reven = { 0 };
-
-nit: these can just be `{ }`.
-
-> +	bool interlaced = timing->flags & DISPLAY_FLAGS_INTERLACED;
-> +
-> +	limit.c_bottom = 0x0010;
-> +	limit.c_top = 0x0FE0;
-> +	limit.y_bottom = 0x0010;
-> +	limit.y_top = 0x0FE0;
-> +
-> +	dpi_pol.ck_pol = MTK_DPINTF_POLARITY_FALLING;
-> +	dpi_pol.de_pol = MTK_DPINTF_POLARITY_RISING;
-> +	dpi_pol.hsync_pol = timing->flags & DISPLAY_FLAGS_HSYNC_HIGH ?
-> +			    MTK_DPINTF_POLARITY_RISING :
-> +			    MTK_DPINTF_POLARITY_FALLING;
-> +	dpi_pol.vsync_pol = timing->flags & DISPLAY_FLAGS_VSYNC_HIGH ?
-> +			    MTK_DPINTF_POLARITY_RISING :
-> +			    MTK_DPINTF_POLARITY_FALLING;
-> +
-> +	hsync.sync_width = timing->hsync_len.typ;
-> +	hsync.back_porch = timing->hback_porch.typ;
-> +	hsync.front_porch = timing->hfront_porch.typ;
-> +	hsync.shift_half_line = false;
-> +
-> +	vsync_lodd.sync_width = timing->vsync_len.typ;
-> +	vsync_lodd.back_porch = timing->vback_porch.typ;
-> +	vsync_lodd.front_porch = timing->vfront_porch.typ;
-> +	vsync_lodd.shift_half_line = false;
-> +
-> +	if (interlaced) {
-> +		vsync_leven = vsync_lodd;
-> +		vsync_leven.shift_half_line = true;
-> +	}
-> +
-> +	mtk_dpi_sw_reset(dev, true);
-> +	mtk_dpi_config_pol(dev, &dpi_pol);
-> +
-> +	mtk_dpi_config_hsync(dev, &hsync);
-> +	mtk_dpi_config_vsync_lodd(dev, &vsync_lodd);
-> +	mtk_dpi_config_vsync_rodd(dev, &vsync_rodd);
-> +	mtk_dpi_config_vsync_leven(dev, &vsync_leven);
-> +	mtk_dpi_config_vsync_reven(dev, &vsync_reven);
-> +
-> +	mtk_dpi_config_interface(dev, interlaced);
-> +	if (interlaced)
-> +		mtk_dpi_config_fb_size(dev, timing->hactive.typ,
-> +				       timing->vactive.typ / 2);
-> +	else
-> +		mtk_dpi_config_fb_size(dev, timing->hactive.typ,
-> +				       timing->vactive.typ);
-> +
-> +	mtk_dpi_config_input_2p(dev, true);
-> +	mtk_dpi_config_output_1t1p(dev, true);
-> +	mtk_dpi_config_channel_limit(dev, &limit);
-> +	mtk_dpi_config_bit_num(dev, MTK_DPINTF_OUT_BIT_NUM_8BITS);
-> +	mtk_dpi_config_channel_swap(dev, MTK_DPINTF_OUT_CHANNEL_SWAP_RGB);
-> +	mtk_dpi_internal_matrix_sel(dev, !rgb);
-> +	mtk_dpi_config_yc_map(dev, MTK_DPINTF_OUT_YC_MAP_RGB);
-> +	mtk_dpi_config_swap_input(dev, false);
-> +	mtk_dpi_sw_reset(dev, false);
-> +}
-> +
-> +static const struct udevice_id mtk_dpi_ids[] = {
-> +	{ .compatible = "mediatek,mt8188-dpi" },
-
-Another one where mt8195 fallback should work.
-
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_dpi) = {
-> +	.name	   = "mtk_dpi",
-> +	.id	   = UCLASS_MISC,
-> +	.of_match  = mtk_dpi_ids,
-> +	.probe	   = mtk_disp_comp_probe,
-> +	.priv_auto = sizeof(struct mtk_disp_comp_priv),
-> +};
-> diff --git a/drivers/video/mediatek/mtk_dpi.h b/drivers/video/mediatek/mtk_dpi.h
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  include/linux/hdmi.h | 30 ++++++++++++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+> 
+> diff --git a/include/linux/hdmi.h b/include/linux/hdmi.h
 > new file mode 100644
-> index 00000000000..ccce83ec8d3
+> index 00000000000..dee862d2a63
 > --- /dev/null
-> +++ b/drivers/video/mediatek/mtk_dpi.h
-> @@ -0,0 +1,20 @@
+> +++ b/include/linux/hdmi.h
+> @@ -0,0 +1,30 @@
 > +/* SPDX-License-Identifier: GPL-2.0 */
+
+Looks like original source is MIT licensed, so `MIT AND ...`
+
 > +/*
-> + * Mediatek MT8188 DPI Support
+> + * Partial port of Linux' include/linux/hdmi.h, carrying the pieces of the
+> + * HDMI specification that are common to all HDMI transmitters.
 > + *
-> + * Copyright (c) 2026 BayLibre, SAS.
-> + * Author: Julien Stephan <jstephan@baylibre.com>
+> + * Copyright (C) 2012 Avionic Design GmbH
 > + */
 > +
-> +#ifndef _MTK_DPI_H
-> +#define _MTK_DPI_H
+> +#ifndef __LINUX_HDMI_H_
+> +#define __LINUX_HDMI_H_
 > +
-> +struct display_timing;
-> +struct udevice;
+> +enum hdmi_colorspace {
+> +	HDMI_COLORSPACE_RGB,
+> +	HDMI_COLORSPACE_YUV422,
+> +	HDMI_COLORSPACE_YUV444,
+> +	HDMI_COLORSPACE_YUV420,
+> +	HDMI_COLORSPACE_RESERVED4,
+> +	HDMI_COLORSPACE_RESERVED5,
+> +	HDMI_COLORSPACE_RESERVED6,
+> +	HDMI_COLORSPACE_IDO_DEFINED,
+> +};
 > +
-> +void mtk_dpi_hw_enable(struct udevice *dev);
-> +void mtk_dpi_hw_disable(struct udevice *dev);
-> +void mtk_dpi_config(struct udevice *dev, const struct display_timing *timing,
-> +		    bool rgb);
+> +enum hdmi_colorimetry {
+> +	HDMI_COLORIMETRY_NONE,
+> +	HDMI_COLORIMETRY_ITU_601,
+> +	HDMI_COLORIMETRY_ITU_709,
+> +	HDMI_COLORIMETRY_EXTENDED,
+> +};
 > +
-> +#endif
-> diff --git a/drivers/video/mediatek/mtk_dpi_regs.h b/drivers/video/mediatek/mtk_dpi_regs.h
-> new file mode 100644
-> index 00000000000..54e370460f0
-> --- /dev/null
-> +++ b/drivers/video/mediatek/mtk_dpi_regs.h
-
-
-Does this really need to be a separate header? Seems like we can just put 
-this stuff in the .c file.
-
-> @@ -0,0 +1,113 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (c) 2026 MediaTek Inc.
-> + * Copyright (c) 2026 BayLibre, SAS
-> + */
-> +
-> +#ifndef __MTK_DPI_REGS_H
-> +#define __MTK_DPI_REGS_H
-> +
-> +#define DPI_EN				0x00
-> +#define EN				(0x1 << 0)
-> +
-> +#define DPI_RST				0x04
-> +#define RST				(0x1 << 0)
-> +
-> +#define DPI_INTEN			0x08
-> +#define INT_VSYNC_EN			(0x1 << 0)
-> +
-> +#define DPI_CON				0x10
-> +#define IN_RB_SWAP			(0x1 << 1)
-> +#define INTL_EN				(0x1 << 2)
-> +#define TDFP_EN				(0x1 << 3)
-> +#define YUV422_EN			(0x1 << 5)
-> +#define CSC_ENABLE			(0x1 << 6)
-> +#define OUTPUT_1T1P_EN			(0x1 << 24)
-> +#define INPUT_2P_EN			(0x1 << 25)
-> +
-> +#define DPI_OUTPUT_SETTING		0x14
-> +#define CH_SWAP				0
-> +#define CH_SWAP_MASK			(0x7 << 0)
-> +#define SWAP_RGB			0x00
-> +#define SWAP_GBR			0x01
-> +#define SWAP_BRG			0x02
-> +#define SWAP_RBG			0x03
-> +#define SWAP_GRB			0x04
-> +#define SWAP_BGR			0x05
-> +#define DE_POL				(0x1 << 12)
-> +#define HSYNC_POL			(0x1 << 13)
-> +#define VSYNC_POL			(0x1 << 14)
-> +#define CK_POL				(0x1 << 15)
-> +#define OUT_BIT				18
-> +#define OUT_BIT_MASK			(0x3 << 18)
-> +#define OUT_BIT_8			0x00
-> +#define OUT_BIT_10			0x01
-> +#define OUT_BIT_12			0x02
-> +#define OUT_BIT_16			0x03
-> +#define YC_MAP				20
-> +#define YC_MAP_MASK			(0x7 << 20)
-> +#define YC_MAP_RGB			0x00
-> +#define YC_MAP_CYCY			0x04
-> +#define YC_MAP_YCYC			0x05
-> +#define YC_MAP_CY			0x06
-> +#define YC_MAP_YC			0x07
-> +
-> +#define DPI_SIZE			0x18
-> +#define HSIZE				0
-> +#define HSIZE_MASK			(0x1FFF << 0)
-> +#define VSIZE				16
-> +#define VSIZE_MASK			(0x1FFF << 16)
-> +
-> +#define DPI_DDR_SETTING			0x1C
-> +#define DDR_EN				(0x1 << 0)
-> +#define DDR_4PHASE			(0x1 << 2)
-> +
-> +#define DPI_TGEN_HWIDTH			0x20
-> +#define HPW				0
-> +#define HPW_MASK			(0xFFF << 0)
-> +
-> +#define DPI_TGEN_HPORCH			0x24
-> +#define HBP				0
-> +#define HBP_MASK			(0xFFF << 0)
-> +#define HFP				16
-> +#define HFP_MASK			(0xFFF << 16)
-> +
-> +#define DPI_TGEN_VWIDTH			0x28
-> +#define DPI_TGEN_VPORCH			0x2C
-> +
-> +#define VSYNC_WIDTH_SHIFT		0
-> +#define VSYNC_WIDTH_MASK		(0xFFF << 0)
-> +#define VSYNC_HALF_LINE_SHIFT		16
-> +#define VSYNC_HALF_LINE_MASK		(0xFFF << 16)
-> +#define VSYNC_BACK_PORCH_SHIFT		0
-> +#define VSYNC_BACK_PORCH_MASK		(0xFFF << 0)
-> +#define VSYNC_FRONT_PORCH_SHIFT		16
-> +#define VSYNC_FRONT_PORCH_MASK		(0xFFF << 16)
-> +
-> +#define DPI_TGEN_VWIDTH_LEVEN		0x68
-> +#define DPI_TGEN_VPORCH_LEVEN		0x6C
-> +#define DPI_TGEN_VWIDTH_RODD		0x70
-> +#define DPI_TGEN_VPORCH_RODD		0x74
-> +#define DPI_TGEN_VWIDTH_REVEN		0x78
-> +#define DPI_TGEN_VPORCH_REVEN		0x7C
-> +
-> +#define DPI_Y_LIMIT			0x98
-> +#define Y_LIMINT_BOT			0
-> +#define Y_LIMINT_BOT_MASK		(0xFFF << 0)
-> +#define Y_LIMINT_TOP			16
-> +#define Y_LIMINT_TOP_MASK		(0xFFF << 16)
-> +
-> +#define DPI_C_LIMIT			0x9C
-> +#define C_LIMIT_BOT			0
-> +#define C_LIMIT_BOT_MASK		(0xFFF << 0)
-> +#define C_LIMIT_TOP			16
-> +#define C_LIMIT_TOP_MASK		(0xFFF << 16)
-> +
-> +#define DPI_MATRIX_SET			0xB4
-> +#define INT_MATRIX_SEL_MASK		(0x1F << 0)
-> +#define RGB_TO_BT709			0x03
-> +
-> +#define DPI_PATTERN0			0xF00
-> +#define DPI_PATTERN_EN			BIT(0)
-> +#define DPI_PATTERN_COLOR_BAR		(0x4 << 4)
-> +#endif /* __MTK_DPI_REGS_H */
+> +#endif /* __LINUX_HDMI_H_ */
 > 
-
-
-Also would be nice to use BIT()/GENMASK().
 
