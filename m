@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FC5C61DBD
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E136C61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3A38D80BD7;
-	Wed, 26 Aug 2026 13:42:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5AA9580C38;
+	Wed, 26 Aug 2026 13:42:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4P5sZaHuUGH6; Wed, 26 Aug 2026 13:42:39 +0000 (UTC)
+ id 6_TqJpVSf_P5; Wed, 26 Aug 2026 13:42:44 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787751759;
-	bh=Gb8lh0h4i/FKzPEwtHkAdchxtZ7O0t5JTbUJpcEHFaA=;
+	d=lists.u-boot-project.org; s=default; t=1787751764;
+	bh=z1eMRiIqdFYEQVFMnrl8Kw4UTUZGTyX4542pAGol4pY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=X4Cpo2ovz8Q+3H9izRCn1pRG7nS2FBn9b6v4kXBpQ7druOix+f5ZU/M/MmT7mhNw0
-	 OLKzLbBJBsoEJHOH6PD8B+01GuiGpBhMsTyj6KR9P6OFpeqHTbmeeucti3tej2d9/9
-	 9+aMQZA9FBsCI+7tbZkMdDnjz35XdKcOHa/q3UJLX9VyYFBAynmGWrJUgu4aKRQuIL
-	 3VAL3pnzw8MTAN11MlIAsI4QNa3H8iMfCjnanc7LigrdQi82Z4TTVy2GBdLeHs+otd
-	 0DulrLMSYM5Ssda6yxMhzME0kZqPib8W7V/HvqswaJ5LB+IK4ZQT4iNoD6z4I8HXBi
-	 62rHtQo6WbEgQ==
+	b=PArF0r6CIrJHxrvVRkgjgSAbCXjP735StPSySSWHzNYvUtTA3S04LC/3Lrg+PzwVh
+	 xfac5AYIu58dZoy2VxtmBtUqwIgMEVuDmOb3aO8ykFi/h6oBn7i8IR4cr+eoht3BWL
+	 O6KtkvXiFf293BKvI965+NJu6dypcFen9d9KiFgLw77jMVb35LMDiQ23J2/MDEWB0Y
+	 zS4gJp4Tqm06BfbNIp+gxx3OYp7K2ij4RePtJc9Lh2Cu3OBC/bQOy4G/Dnq3abIwtG
+	 D7eV0l/W9r3QAqBSH4jAlp2g3fjaJ8T2S4UYtbBYwcTE5V9ggPGh38VnuP0G+Lo+W+
+	 34uRNXWmBj2EQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8EB0580BA8;
-	Wed, 26 Aug 2026 13:42:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 28159334
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E28F480C2A;
+	Wed, 26 Aug 2026 13:42:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7E5043C3
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1A82E40108
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:08 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7010E6069D
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rBHbxdca2_pM for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:35:06 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aA0fBsyYYRfa for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:35:12 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=34.2.90.19;
  helo=sonic.asd.mail.yahoo.com; envelope-from=maskachoska@yahoo.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com
- header.a=rsa-sha256 header.s=s2048 header.b=Px8AhQEa
+ header.a=rsa-sha256 header.s=s2048 header.b=WnrBoVaB
 Received: from sonic.asd.mail.yahoo.com (sonic-asso1-0020.asd.mail.yahoo.com
- [34.2.90.19]) by smtp2.osuosl.org (Postfix) with ESMTPS id EB5DE4005F
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:04 +0000 (UTC)
+ [34.2.90.19]) by smtp3.osuosl.org (Postfix) with ESMTPS id 907526068A
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:35:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751302; bh=Gb8lh0h4i/FKzPEwtHkAdchxtZ7O0t5JTbUJpcEHFaA=;
+ t=1787751307; bh=z1eMRiIqdFYEQVFMnrl8Kw4UTUZGTyX4542pAGol4pY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=Px8AhQEazC7aM5Qn1tEiHZ4r419FF3jTCLsnidiMfRDSOiwpur+xDLPiA7X138Yma9ejFHmoQt1/j6zYxZVl1Ylzt7sCvnYjUu2bzqP/k6G9wq3iBIMyRQxPNXTRxLptzO7Ma5uHIFfrW0/gDfDRy65Fy7YB2IHTlY+9HnkDH7HJyDh/2kM0W6I0qZFU4A/UU44fkfMyLCgc84G9Iea0REek7dlK7T8snwwKxxejlJWEDIW7iyR7eEazJ3kzean9GZ58SlS3zrg2nXNrrCdMcHJT7Nqrr47J614uDinymMo/R9pCILQM4weFEPLcMRjBJ2QITJhP8bxt7JBn143D2g==
+ b=WnrBoVaB5BizQS4I72g7oVnR6fud9XGtoJpvqVEOgykNikJwVOg1/t0lZRAfembK2CrT+Ss5nhbKUnYajv8g59JyaERA/2M05t3s9fwR6nVk9xzQy5aMzmzTkgj+m5PO2mNO4+jlCuSsPo3SVkkujKvazvCR3T7tOUW08LvctT5Ic+vxY1o8n6NVfaYeWtvMVO2OXvxh//2+GBqhqYpfR8TWd9mKu9y8iiOjHhDYZscDlOP5NnPLCiySwVjiWiOLUZfsihZI2yyg9tGWzOqOiDiZnfzEv/htOtSoj9gF2kILCnLC9dfdom7m53lsuR79kLDG9Qo/BMf+38EDrT/GFg==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1787751302; bh=xe8Cqc1zeDYK/1Z3Yph9vk0W8tdKWPhoHOpWNzj/19x=;
+ t=1787751307; bh=L7JBV7roo3BPD6y3l68rPnzGf7Yv2/uf9U6mtyzywpd=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=VVmdjYqjerCmSOLmeAYf6n9/wPD6DG98bg3isr9qwzVoX9S5mpPAjngew/WtlKpSEZeDIgOkmtif84g7OlFGmxLKfidoT2FbPCub5wYv1CbqT0piaTq8w8k/glR4PHndJvhNoemiun92Y/eDcXOZ3esTC5ROZqd2dbHCeA7BqlL5iv9ZYpoi/7V3jqQbtBSL8OS1cxoHPRpwzvatr5zWOjoT5fR3JyN6Rt8C6irvosm4hRHOhHNxazEsPdGOTCqHa34ueRchnkxzB92uEiQNIX7UjOv28Sv1PzYGReO681HEE/6qQvdBOrmL3hl1VVhw6LU54efOuv99HP6yy5xeXA==
-X-YMail-OSG: u6plXrwVM1kRLU8aDuAyY2iqQ922_.B2.KbtFIfVxJ6Ox6AKKjhEzQMkDjs_.ER
- t7UJXPfRULN28rfqaBjuaWs1ygWzRelD6mmthqkp7YgWYXbBPmAB.Mh7q3Oh7aSnpu_R5UV_5epg
- sLIgU5QYxVuBd.D5rdH0zApSsFW_SSdNWgxXjEcLqM1sU2dJ23GUUJWDnWGwTTVvhIquNNrsh3zz
- jVq7ggBNfwlQ0EutRUkjKUrWPgQHdvbQxCvdW4psiWnrXVjdkoImA.fC7UK26VYDP6qZyKfrPGlk
- 8mwWWGWaSPZ9UDi2oETx9xSeYKA5PqX7IPkKdkz8hh3ZuO5ewutz9zt5Bqu8bwl58ufLrPZYBYVB
- NPfKWComtpJRk.X.vlwHTue.vBgqT1_PJKGkAuUYYUQ8mvj0pR_O54DNjHz8O9CAup.DGwH3zZhi
- RU6Z8bZXxIek9N.xSVRrC8gwcokHrrlBsiVY9unSmVjhh5LhG.ykebpRRWuOkcnui1HeYT2DakUU
- LkNerC7dpJA8yoy_xzrcrR6eV_f0jjkJRTPPed6VErzwYoq2mmpFsuZdEEaHybTUZYNAvpx7s3Ph
- DpCtapHNBdlwto8ILFOOcdYtAafU80EATi0fd3JaNQaI0UMvR3B6ODBSrg5ZWYMVeGexLNoZiW24
- .6S6EVkAoPG4GkHp.nEnHJOGjs60D6G.qHLoNcZ4Tkfjw0OykcHQMisPYhjbSG_oa7iykhpgC5_R
- jtI19nQS1Jd6dqqymLs97IF5_Blp1KA0uGdpbUfObKzGRpwh3k7vQBNEvkfjOtb1iPv8DIKX9alP
- O9MqXHAKxtGOjoir0sP5dN.fQxpedkkUQtSZ_aymuFOLcnCzKW9edjL3z1GPVtgs2Ex7.weMNesn
- wG8syx6F_DyweJtvTCUslgKoiQ4Ioh4SPY43UDONYb71W6kfxWQlQnguPN3ULgbxyIXDl.x4avAE
- 4DD0kB8RewTF_N7x98MHbRZucSzPdOh14PbZwtqat7sT57wT4uYXRhdc3BfjNpu3aSOnnl80Musg
- 7wE7HFiPVhSCxexER_rmjST6mpFmWWU1rT5ZGxR5bZsvPkSclTe0fQYX1sxoAQA_VomzU0hqUnFT
- 7uLWO9RLa6uUr915aRsdUc0L9MuAoAkHoZ4lD1rSf._JnZQRzB8gZCNZDP_cdQ1XlcZLCNKqgugz
- QnWvrxype_SkZj1Ioq.gsUvL93rRARc_d6AeouY8cxPwxTCl6OYhWUubMUZ9DGDmDOuMIsnX8P6o
- KCZvWORdbVmqQPJ0SoEdbVJq8r_oskYoGujJZPYq850w8xynpMLIE92fQmuIpvPdOXwOH14.iyjg
- tmFlERrsGvSMGOAgPCI.D9wybfFDvTciDpqgs87xK6TjLWOtdyhnTl3Mmcs_Al4_MbQWZDpDWKCr
- o3e0K3Mj9q0HZEzyJooNJkfYI5dxXfUIx915YVyMJx.qzJaHtsfJeN49CdaBjLgQkuNJBrCuNyBE
- znmAUg2EPzokM.GDBAJgKBkMr_a_Moe5n1OkDXnEAOX9qh8VaVEjhFot3e8li3AUOnkWXc0oZozy
- kYZTn51Gmx3cAoDUtyBxrx3QIdLkBrD7RAUCWULwqgEzYNQAqGzHXvQoorHdhP9AzgoMV0oJiD4T
- 6KxwmAZFUStdEfN9Xp84Pih.ue.W4Yj3_yIt1fG4NkQE68vKPTuju5ZDOFaL7XBOErmwbm2KDKoG
- AK.xZvP0YYmRXl.iVh15RWbNSL7U51AYPabkcAvsWHgwbApDfrun837ntQ_qE5PvwpdS8Y72s7kC
- JCny9c4pERs7_ZIRFP1v2HYtq3dgY2qO1_bdIFgI_FnbWtdy1Otc9iKGmBAzLiC7D0pdqfy9BZhi
- NYUY0l702lZq0RLXjKa_x_P.nqZoWMHWgUFxc.WBn3LL8zfQKjtyGsLaplfBa8P7elFBO6Ulwsbh
- BpP2_j9885YsRo_ajj0C_IT9HlyQQL4KhKPKVnCrnwiic71O28U69Qwd9VqGehYihzly2994pZ3X
- stUzwNV3Cc_nAD6ge4YrzdaiMMhiz_URIFKp7Qx8WjkSefGxAQ4M9jFdu5k1XyeXsrdyCPOIVHbl
- aZIw-
+ b=RPTFgH2302kiJmz7qEGHh8fMG9/g5Sy9EAIWmlCf42vjz5AWTA/KPaPLWA9k/CrFhIlKpYbaWTdTI2r+27EDjcYuKTS6DiWH03RdvAjtfTttmf6LqHUdntpt3mkKIW4xwj6lDdmQT5L686TBhkNdzdlOYOkEeQhvkJ7eP8JFVcI3sUde5awK7+QSAlJffqaYRIR3kspjW7GcVYXwO9blfCPAheHadkllQBK92O0NftVpy2nQg1SfQmcyfBJS8/CcfnMLnsd1q2f6f2M5ODHEzQC09Z5mqgn+CXmA0vaSiYt6otpKGAlIsc88v5nc0Y/kfIK1e4XGJnCISEUWob6NVw==
+X-YMail-OSG: 01uJudoVM1nqaEw6hJpBt1KpVxh9x07.8VZ3HIri7aOE5l6FfzypG0FD8vfOwxf
+ snFwm68D2XlMR1YuE2idFs.SiNJjxbUh2fXP4Ccq.62m_x16vZnJRjc6UnTF3LEqjxGHvqapFmkj
+ aaQAwhqVXQeJJT1fgIomqUN9UW7hIDo7GhDCm7Hmj11zAlgicRR9h9fIjgMLN6XWVyi0P5thYIks
+ biZicNQtaOj0nzQSRLjNp44unoSe8mg7eW6xetGv3KvbCWfMRykEJAIaxjuK1d.vpPPtzX4BvA0r
+ mFDh33rc4pxESsEn38.9WmQFWb2IjfAoIH43i3kCo7fyqoVSwYgceHzQs4POVXXMITWBVdO6rIwi
+ NEiscLGCI9rlKqN6Em5FSQBap9BeMVDjjk08FwKYTR1qnPXBe5cYPt71IFqo9iO73DVncAETSFE5
+ nbOZ3jwmfSoRn.R71iJ_LCmpVUJVpYLfUidauSvQtHWeKGoqLb6BucU1Em35442KOaPhKQ0YAI4Z
+ jKObeRPHcnoUBC08AW1FKOkisjlIYK9Dk_E5v5Jd4C_qvLdSR4EBCZd6dqSo84Hk5g3gPltocvgQ
+ 6xUbyiW8syHqBYhuS3NNqYejYAgGzqxNa6yzde2Eqnuhkx7awqCDodnK3XNNCqKuRIQIJiDmIgcl
+ ZEW.D7YW1DVzkjR6aCsbEKs42TG_buKZ4c7i.Go.HgQBQhrm3tx7oI5wrK8kPiOCDyd6SIol8FN7
+ zFHvNYHk3QQlZR9cAnyk7ZV4URpLRLzGDCHq4_V0MSYitcReeyArVg0p0nYxWJq8Kp9C5kK6i7l9
+ ykP3hkj1guLnUDF02V66cTO4BmGToLvjuSclYjq7BpkEoSFlNcVe9Xx8w2xAxZc4Fw3_w_czPQaT
+ fynVGDsJtEN5tq3HxT72ospEXSZIZDTzfQdhsFNClWwubrwN5386U2lx.o.Ru.F5Yx2V.Y9VgtL0
+ 4YE1XchoDnUeHPR.IDM0iKNDw926wOgChzcgv3BARvE4QpYdsWYMwUwv5bjMShszfR.64Fm9TMS6
+ vMWDUHkpN8NvHDPijZJ.8VFRJLG1jblldOSPpNS0TMSRkU5iR32FQr85fKRB9oCD5WjhFpzs5YFa
+ aihO1hme89E550EsEbBHQIGbsmaR31KCwyVcc4B7yL9.gfKu5ectV3p.bsx24PUsPTcW8e2uEnA4
+ hsDeosWXlnYqiy2JkUeKoek4xjVQtHLG8LMfy1oBzgknV0sCJe88z_mgXhgIRNKpkc2hWf5UpOzT
+ NGRQpFaVfUDSBWdHViSpD6bBl8tRexWVm04s2yBglIMIqiDApOLXUiMReY5SMBMcty2g25RlZfbY
+ yjyX6CWSxp4kP_NkdmK3zRQke96jr8cUYconBcVcwv.0r7fROFl_WEVKB6.oy8PxNd49Z0GCKrqz
+ U6xJn0N3.s.2ChNu5XI4j4DEXecksNwrdmBDZ5jk7gS5v_90juQVqyxNqiYSf34BVKvGp7AcOPA.
+ 88YFykO.wkihNu.2kDXOLNf525y_EVyK6W8DDwp_qS4Rj7kWX31aMgr2arqtAf3CmvvkPl1x_v_V
+ rty9uA0BgaFZvQbJWaT8M5h5WRvV73Rd0p6TYt8VPEiQ6fw7l7ovgtnFNMgf3aqZRkjwkIi4ZwNS
+ GrxV_jWq9r5vmFjHeDhMZ4jhB6TCROtl5LdTKMuuJH2wjcFg9goYo6ESP7cJLJrVe4gI02CY.vtj
+ DV.ZiF7n0GuDkZHjYfRL5zu09tXRv_gPvD.1jQpB6c4WQIZ2wX.IlzpcKCIU7.BJE5MVZrqXCIU4
+ xeBSq2rXw_1Xtk7Rj4.zTd6imns1eFAsTby92R4.t8Qt9iur3aBVl5fwbjB1Iy4_Rvg7tsik4eeD
+ NjXWV5xSFJw5xeFz1tXLKKvzXKPyGAcU8tZ44dwhxfCzq54DGO.GAQCTYak77jnzOnts9hsR1G6l
+ UmqLOFUrxGtOKt743owMgRHr7i9sfaDAyFvaBWMxgS5MJJbmCxI6v_V9ZfaEqjoJhwpGG.g9_Cus
+ xuCWHDaQilQ1V72rPYqPXKja44_WdFBZglY94IC89XTrbIrBXuxNoVaZVYjPD2IfmGJg28z_gDy6
+ IVg--
 X-Sonic-MF: <maskachoska@yahoo.com>
-X-Sonic-ID: 60736893-e1a0-4062-a7aa-11046a5cfb3a
+X-Sonic-ID: 6744bb63-b02e-4b07-843a-372d517d2680
 Received: from sonic.gate.mail.ne1.yahoo.com by
  mail-asdoutdeli-p-cin-asso1-prod-sonicconsumer-svc-101 with HTTP;
- Wed, 26 Aug 2026 13:35:02 +0000
+ Wed, 26 Aug 2026 13:35:07 +0000
 Received: from dip100.lsn.sg3.yahoo.com ([106.10.223.109])
  by hello (SMTP) with SMTP ID acc4f7a299298e219e9ccf723c2619d7;
- Wed, 26 Aug 2026 13:34:57 +0000 (UTC)
+ Wed, 26 Aug 2026 13:35:02 +0000 (UTC)
 From: AK Sharma <maskachoska@yahoo.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
@@ -106,15 +106,15 @@ Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Marek Vasut <marex@denx.de>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  AK Sharma <maskachoska@yahoo.com>
-Subject: [PATCH v2 4/9] spi: airoha-snfi: add EN75xx SPI-NAND controller
- support
-Date: Wed, 26 Aug 2026 19:04:38 +0530
-Message-ID: <c96838a0e72cc742ba255b203504116ab17de56d.1787736704.git.maskachoska@yahoo.com>
+Subject: [PATCH v2 6/9] mips: dts: add EcoNet EN75xx device trees
+Date: Wed, 26 Aug 2026 19:04:40 +0530
+Message-ID: <f41977b210c10de6fa742ad1b624df2e2759f65d.1787736704.git.maskachoska@yahoo.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1787736704.git.maskachoska@yahoo.com>
 References: <20260825222211.712836-1-maskachoska@yahoo.com>
  <cover.1787736704.git.maskachoska@yahoo.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 26 Aug 2026 13:42:25 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -130,706 +130,585 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Extend the existing Airoha SNFI serial-NAND controller driver to the
-EN75xx family: the big-endian EN7512/EN7521/EN751221 and the
-little-endian EN7528. This adds the family match, the controller
-bring-up for these parts, and the uncached (CKSEG1) DMA cache-window
-handling the EN7528 needs for the dirmap transfer buffer.
+Add the device trees for the EN7512 and EN7528 reference boards and the
+EN7528 RAM-boot variant.
+These device trees are not yet in the Linux kernel; the bindings and
+device trees will be submitted to the kernel and kept in sync with U-Boot.
 
 Signed-off-by: AK Sharma <maskachoska@yahoo.com>
 ---
- drivers/spi/Kconfig           |   3 +-
- drivers/spi/airoha_snfi_spi.c | 412 +++++++++++++++++++++++++++-------
- 2 files changed, 339 insertions(+), 76 deletions(-)
+ arch/mips/dts/Makefile                        |   2 +
+ .../dts/econet,en7512-reference-u-boot.dtsi   |  58 +++++++
+ arch/mips/dts/econet,en7512-reference.dts     |  27 +++
+ arch/mips/dts/econet,en7512.dtsi              |  88 ++++++++++
+ arch/mips/dts/econet,en7528-ram-u-boot.dtsi   |   6 +
+ arch/mips/dts/econet,en7528-ram.dts           |  72 ++++++++
+ .../dts/econet,en7528-reference-u-boot.dtsi   |  62 +++++++
+ arch/mips/dts/econet,en7528-reference.dts     |  25 +++
+ arch/mips/dts/econet,en7528.dtsi              | 154 ++++++++++++++++++
+ 9 files changed, 494 insertions(+)
+ create mode 100644 arch/mips/dts/econet,en7512-reference-u-boot.dtsi
+ create mode 100644 arch/mips/dts/econet,en7512-reference.dts
+ create mode 100644 arch/mips/dts/econet,en7512.dtsi
+ create mode 100644 arch/mips/dts/econet,en7528-ram-u-boot.dtsi
+ create mode 100644 arch/mips/dts/econet,en7528-ram.dts
+ create mode 100644 arch/mips/dts/econet,en7528-reference-u-boot.dtsi
+ create mode 100644 arch/mips/dts/econet,en7528-reference.dts
+ create mode 100644 arch/mips/dts/econet,en7528.dtsi
 
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index cfbedd64..83a79bee 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -62,7 +62,8 @@ config ADI_SPI3
- 
- config AIROHA_SNFI_SPI
- 	bool "Airoha SPI memory controller driver"
--	depends on ARCH_AIROHA
-+	depends on ARCH_AIROHA || ARCH_EN75XX
-+	select REGMAP
- 	select SPI_MEM
- 	help
- 	  Enable the Airoha SPI memory controller driver. This driver is
-diff --git a/drivers/spi/airoha_snfi_spi.c b/drivers/spi/airoha_snfi_spi.c
-index 769ec956..87472887 100644
---- a/drivers/spi/airoha_snfi_spi.c
-+++ b/drivers/spi/airoha_snfi_spi.c
-@@ -9,6 +9,9 @@
-  */
- 
- #include <asm/unaligned.h>
-+#if IS_ENABLED(CONFIG_ARCH_AIROHA)
-+#include <asm/arch/scu-regmap.h>
-+#endif
- #include <clk.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-@@ -16,11 +19,34 @@
- #include <linux/bitfield.h>
- #include <linux/dma-mapping.h>
- #include <linux/mtd/spinand.h>
-+#include <linux/sizes.h>
- #include <linux/time.h>
- #include <regmap.h>
- #include <spi.h>
- #include <spi-mem.h>
- 
-+#if IS_ENABLED(CONFIG_ARCH_EN75XX)
-+#include <asm/addrspace.h>
-+/*
-+ * EN7528 (MIPS 1004Kc) DMA coherency.
-+ *
-+ * This SoC inherits its cache setup from the vendor bootbase and U-Boot runs
-+ * with CONFIG_MIPS_CACHE_SETUP disabled, where the dcache flush/invalidate
-+ * primitives are not reliable.  dma_map_single() therefore cannot make the
-+ * shared buffer coherent: a multi-page read returns the same stale cache line
-+ * for every page.  Use the uncached KSEG1 alias for all CPU accesses to the
-+ * DMA buffer and give the controller the physical address instead.
-+ * (Same remedy as the airoha_eth ring/frame buffers on this SoC.)
-+ */
-+#define snfi_uncached(p)	((void *)CKSEG1ADDR((unsigned long)(p)))
-+#define snfi_dma_addr(p, l, d)	((dma_addr_t)CPHYSADDR((unsigned long)(p)))
-+#define snfi_dma_unmap(a, l, d)	do { } while (0)
-+#else
-+#define snfi_uncached(p)	(p)
-+#define snfi_dma_addr(p, l, d)	dma_map_single((p), (l), (d))
-+#define snfi_dma_unmap(a, l, d)	dma_unmap_single((a), (l), (d))
-+#endif
+diff --git a/arch/mips/dts/Makefile b/arch/mips/dts/Makefile
+index 7c4ee8b6..3e0347dd 100644
+--- a/arch/mips/dts/Makefile
++++ b/arch/mips/dts/Makefile
+@@ -6,6 +6,8 @@ dtb-$(CONFIG_TARGET_AP152) += ap152.dtb
+ dtb-$(CONFIG_TARGET_MALTA) += mti,malta.dtb
+ dtb-$(CONFIG_TARGET_PIC32MZDASK) += pic32mzda_sk.dtb
+ dtb-$(CONFIG_TARGET_XILFPGA) += nexys4ddr.dtb
++dtb-$(CONFIG_ARCH_EN75XX) += econet,en7512-reference.dtb \
++	econet,en7528-reference.dtb econet,en7528-ram.dtb
+ dtb-$(CONFIG_BOARD_BROADCOM_BCM968380GERG) += brcm,bcm968380gerg.dtb
+ dtb-$(CONFIG_BOARD_COMTREND_AR5315U) += comtrend,ar-5315u.dtb
+ dtb-$(CONFIG_BOARD_COMTREND_AR5387UN) += comtrend,ar-5387un.dtb
+diff --git a/arch/mips/dts/econet,en7512-reference-u-boot.dtsi b/arch/mips/dts/econet,en7512-reference-u-boot.dtsi
+new file mode 100644
+index 00000000..36d97c26
+--- /dev/null
++++ b/arch/mips/dts/econet,en7512-reference-u-boot.dtsi
+@@ -0,0 +1,58 @@
++// SPDX-License-Identifier: GPL-2.0+
++#include <linux/stringify.h>
 +
- /* SPI */
- #define REG_SPI_CTRL_READ_MODE			0x0000
- #define REG_SPI_CTRL_READ_IDLE_EN		0x0004
-@@ -80,12 +106,19 @@
- 
- #define REG_SPI_CTRL_NFI2SPI_EN			0x0130
- #define SPI_CTRL_NFI2SPI_EN			BIT(0)
-+#define REG_SCUCLK_BOOT_TRP			0x00b8
-+#define SCUCLK_BOOT_TRP_BOOT_FROM_EMMC		BIT(6)
-+#define SPI_NFI_SNF_NFI_CNFG_SPI_MODE			BIT(2)
-+#define SPI_CTRL_SFC_STRAP_BOOT_FROM_SPI_NAND	BIT(1)
- 
- /* NFI2SPI */
- #define REG_SPI_NFI_CNFG			0x0000
- #define SPI_NFI_DMA_MODE			BIT(0)
- #define SPI_NFI_READ_MODE			BIT(1)
- #define SPI_NFI_DMA_BURST_EN			BIT(2)
-+#define SPI_NFI_DMA_WR_BYTE_SWAP_EN		BIT(3)
-+#define SPI_NFI_DMA_RD_BYTE_SWAP_EN		BIT(4)
-+#define SPI_NFI_ECC_DATA_SOURCE_INV_EN		BIT(5)
- #define SPI_NFI_HW_ECC_EN			BIT(8)
- #define SPI_NFI_AUTO_FDM_EN			BIT(9)
- #define SPI_NFI_OPMODE				GENMASK(14, 12)
-@@ -93,6 +126,8 @@
- #define REG_SPI_NFI_PAGEFMT			0x0004
- #define SPI_NFI_PAGE_SIZE			GENMASK(1, 0)
- #define SPI_NFI_SPARE_SIZE			GENMASK(5, 4)
-+#define SPI_NFI_FDM_NUM				GENMASK(11, 8)
-+#define SPI_NFI_FDM_ECC_NUM			GENMASK(15, 12)
- 
- #define REG_SPI_NFI_CON				0x0008
- #define SPI_NFI_FIFO_FLUSH			BIT(0)
-@@ -213,15 +248,89 @@ enum airoha_snand_cs {
- 	SPI_CHIP_SEL_LOW,
- };
- 
-+enum airoha_snand_bootstrap {
-+	AIROHA_SNAND_BOOTSTRAP_UNKNOWN,
-+	AIROHA_SNAND_BOOTSTRAP_NAND,
-+	AIROHA_SNAND_BOOTSTRAP_NOR,
-+	AIROHA_SNAND_BOOTSTRAP_EMMC,
++/ {
++	binman: binman {
++		multiple-images;
++	};
 +};
 +
- struct airoha_snand_priv {
-+	struct udevice *dev;
- 	struct regmap *regmap_ctrl;
- 	struct regmap *regmap_nfi;
- 	struct clk *spi_clk;
- 
- 	u8 *txrx_buf;
-+	bool en751221;
- 	int dma;
- };
- 
-+static const char *airoha_snand_bootstrap_name(enum airoha_snand_bootstrap type)
-+{
-+	switch (type) {
-+	case AIROHA_SNAND_BOOTSTRAP_NAND:
-+		return "NAND";
-+	case AIROHA_SNAND_BOOTSTRAP_NOR:
-+		return "NOR";
-+	case AIROHA_SNAND_BOOTSTRAP_EMMC:
-+		return "eMMC";
-+	case AIROHA_SNAND_BOOTSTRAP_UNKNOWN:
-+	default:
-+		return "unknown";
-+	}
-+}
++&uart0 {
++	bootph-all;
++};
 +
-+static enum airoha_snand_bootstrap
-+airoha_snand_get_bootstrap(struct airoha_snand_priv *priv, u32 *boot_trp,
-+				   u32 *snf_nfi_cnfg, u32 *sfc_strap)
-+{
-+	int err;
++&binman {
++	spl-img {
++		filename = "u-boot-spl.img";
 +
-+	*boot_trp = 0;
-+	*snf_nfi_cnfg = 0;
-+	*sfc_strap = 0;
++		mkimage {
++			args = "-A", "mips", "-T", "standalone", "-O", "u-boot",
++			       "-C", "none", "-n", "EN7512 U-Boot SPL",
++			       "-a", __stringify(CONFIG_SPL_TEXT_BASE),
++			       "-e", __stringify(CONFIG_SPL_TEXT_BASE);
 +
-+	if (!priv->en751221) {
-+#if IS_ENABLED(CONFIG_ARCH_AIROHA)
-+		struct regmap *regmap_scu = airoha_get_scu_regmap();
++			u-boot-spl {
++			};
++		};
++	};
 +
-+		if (!regmap_scu)
-+			return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
++	en7512-uboot {
++		filename = "u-boot-en7512.bin";
++		pad-byte = <0xff>;
 +
-+		err = regmap_read(regmap_scu, REG_SCUCLK_BOOT_TRP, boot_trp);
-+		if (err)
-+			return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
++		u-boot-tpl {
++			offset = <0x00000000>;
++			size = <0x00008000>;
++		};
 +
-+		if (*boot_trp & SCUCLK_BOOT_TRP_BOOT_FROM_EMMC)
-+			return AIROHA_SNAND_BOOTSTRAP_EMMC;
-+#else
-+		return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
-+#endif
-+	}
++		ddr-blob {
++			type = "blob-ext";
++			filename = "arch/mips/mach-en75xx/en7512_ddr.bin";
++			offset = <0x00008000>;
++			size = <0x00004f70>;
++		};
 +
-+	if (priv->regmap_nfi) {
-+		err = regmap_read(priv->regmap_nfi,
-+				  REG_SPI_NFI_SNF_NFI_CNFG,
-+				  snf_nfi_cnfg);
-+		if (err)
-+			return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
++		spl {
++			type = "blob";
++			filename = "u-boot-spl.img";
++			offset = <0x00010000>;
++			size = <0x00040000>;
++		};
 +
-+		/* SNF_NFI_CNFG bit 2 selects SPI-NFI. If it is clear, the
-+		 * boot source is still NAND through the parallel NAND path.
++		u-boot {
++			type = "blob";
++			filename = "u-boot.img";
++			offset = <0x00050000>;
++		};
++	};
++};
+diff --git a/arch/mips/dts/econet,en7512-reference.dts b/arch/mips/dts/econet,en7512-reference.dts
+new file mode 100644
+index 00000000..b8a3aba5
+--- /dev/null
++++ b/arch/mips/dts/econet,en7512-reference.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++#include "econet,en7512.dtsi"
++
++/ {
++	model = "EcoNet EN7512/EN7521 reference board";
++	compatible = "econet,en7512-reference", "econet,en751221",
++		     "econet,en7512";
++
++	aliases {
++		serial0 = &uart0;
++		ethernet0 = &gmac0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++};
++
++&uart0 {
++	status = "okay";
++};
++
++&sfc {
++	status = "okay";
++};
+diff --git a/arch/mips/dts/econet,en7512.dtsi b/arch/mips/dts/econet,en7512.dtsi
+new file mode 100644
+index 00000000..0f13159d
+--- /dev/null
++++ b/arch/mips/dts/econet,en7512.dtsi
+@@ -0,0 +1,88 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	cpus {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		cpu@0 {
++			compatible = "mips,mips34Kc";
++			device_type = "cpu";
++			reg = <0>;
++		};
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x00000000 0x08000000>;
++	};
++
++	soc {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		syscon: syscon@1fb00000 {
++			compatible = "econet,en7512-syscon", "syscon";
++			reg = <0x1fb00000 0x1000>;
++		};
++
++		sfc: spi@1fa10000 {
++			compatible = "airoha,en7523-spi";
++			reg = <0x1fa10000 0x140>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++
++			spi_nand: nand@0 {
++				compatible = "spi-nand";
++				reg = <0>;
++				spi-max-frequency = <20000000>;
++				spi-tx-bus-width = <1>;
++				spi-rx-bus-width = <2>;
++			};
++		};
++
++		sram@1fa30000 {
++			compatible = "mmio-sram";
++			reg = <0x1fa30000 0xc000>;
++		};
++
++		dramc: memory-controller@1fb20000 {
++			compatible = "econet,en7512-dramc";
++			reg = <0x1fb20000 0x1000>;
++		};
++
++		ethernet: ethernet@1fb50000 {
++			compatible = "econet,en751221-eth";
++			reg = <0x1fb50000 0x4000>,
++			      <0x1fb54000 0x1000>;
++			reg-names = "fe", "qdma0";
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			gmac0: mac@0 {
++				compatible = "econet,eth-mac";
++				reg = <0>;
++				phy-mode = "trgmii";
++			};
++		};
++
++		switch0: switch@1fb58000 {
++			compatible = "mediatek,mt7530";
++			reg = <0x1fb58000 0x8000>;
++		};
++
++		uart0: serial@1fbf0000 {
++			compatible = "econet,en7512-uart";
++			reg = <0x1fbf0000 0x30>;
++			clock-frequency = <20000000>;
++			current-speed = <115200>;
++			status = "disabled";
++		};
++	};
++};
+diff --git a/arch/mips/dts/econet,en7528-ram-u-boot.dtsi b/arch/mips/dts/econet,en7528-ram-u-boot.dtsi
+new file mode 100644
+index 00000000..94512540
+--- /dev/null
++++ b/arch/mips/dts/econet,en7528-ram-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* RAM-boot: no binman image; just make the console available pre-relocation. */
++
++&uart0 {
++	bootph-all;
++};
+diff --git a/arch/mips/dts/econet,en7528-ram.dts b/arch/mips/dts/econet,en7528-ram.dts
+new file mode 100644
+index 00000000..196f3296
+--- /dev/null
++++ b/arch/mips/dts/econet,en7528-ram.dts
+@@ -0,0 +1,72 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++#include "econet,en7528.dtsi"
++
++/ {
++	model = "EcoNet EN7528 RAM-boot (bootbase-loaded)";
++	compatible = "econet,en7528-ram", "econet,en7528";
++
++	aliases {
++		serial0 = &uart0;
++		ethernet0 = &gmac0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++};
++
++&uart0 {
++	status = "okay";
++};
++
++&sfc {
++	status = "okay";
++};
++
++&ethernet {
++	status = "okay";
++};
++
++&switch0 {
++	status = "okay";
++};
++
++&usb {
++	status = "okay";
++};
++
++/* Flash partition map (labels unused on the RAM-boot path). */
++&spi_nand {
++	partitions {
++		compatible = "fixed-partitions";
++		#address-cells = <1>;
++		#size-cells = <1>;
++
++		partition@0 {
++			label = "bootloader";
++			reg = <0x0 0x40000>;
++		};
++		partition@40000 {
++			label = "uboot";
++			reg = <0x40000 0x80000>;
++		};
++		partition@c0000 {
++			label = "ubootenv";
++			reg = <0xc0000 0x20000>;
++		};
++		partition@e0000 {
++			label = "ubootenv2";
++			reg = <0xe0000 0x20000>;
++		};
++		partition@100000 {
++			label = "kernel";
++			reg = <0x100000 0x1000000>;
++		};
++		partition@1100000 {
++			label = "rootfs";
++			reg = <0x1100000 0xda80000>;
++		};
++	};
++};
+diff --git a/arch/mips/dts/econet,en7528-reference-u-boot.dtsi b/arch/mips/dts/econet,en7528-reference-u-boot.dtsi
+new file mode 100644
+index 00000000..dd0e8d4b
+--- /dev/null
++++ b/arch/mips/dts/econet,en7528-reference-u-boot.dtsi
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+
++#include <linux/stringify.h>
++
++/ {
++	binman: binman {
++		multiple-images;
++	};
++};
++
++&uart0 {
++	bootph-all;
++};
++
++&binman {
++	spl-img {
++		filename = "u-boot-spl.img";
++
++		mkimage {
++			args = "-A", "mips", "-T", "standalone", "-O", "u-boot",
++			       "-C", "none", "-n", "EN7528 U-Boot SPL",
++			       "-a", __stringify(CONFIG_SPL_TEXT_BASE),
++			       "-e", __stringify(CONFIG_SPL_TEXT_BASE);
++
++			u-boot-spl {
++			};
++		};
++	};
++
++	en7528-uboot {
++		filename = "u-boot-en7528.bin";
++		pad-byte = <0xff>;
++
++		u-boot-tpl {
++			offset = <0x00000000>;
++			size = <0x00008000>;
++		};
++
++		/*
++		 * en7528_ddr.bin is the 0x5a70-byte FE-SRAM DDR3 stage extracted from the
++		 * vendor bootloader (see doc/board/econet/en7528.rst).
 +		 */
-+		if (!(*snf_nfi_cnfg & SPI_NFI_SNF_NFI_CNFG_SPI_MODE))
-+			return AIROHA_SNAND_BOOTSTRAP_NAND;
-+	}
++		ddr-blob {
++			type = "blob-ext";
++			filename = "arch/mips/mach-en75xx/en7528_ddr.bin";
++			offset = <0x00008000>;
++			size = <0x00005a70>;
++		};
 +
-+	err = regmap_read(priv->regmap_ctrl, REG_SPI_CTRL_SFC_STRAP, sfc_strap);
-+	if (err)
-+		return AIROHA_SNAND_BOOTSTRAP_UNKNOWN;
++		spl {
++			type = "blob";
++			filename = "u-boot-spl.img";
++			offset = <0x00020000>;
++			size = <0x00030000>;
++		};
 +
-+	return (*sfc_strap & SPI_CTRL_SFC_STRAP_BOOT_FROM_SPI_NAND) ?
-+		AIROHA_SNAND_BOOTSTRAP_NAND : AIROHA_SNAND_BOOTSTRAP_NOR;
-+}
++		u-boot {
++			type = "blob";
++			filename = "u-boot.img";
++			offset = <0x00050000>;
++		};
++	};
++};
+diff --git a/arch/mips/dts/econet,en7528-reference.dts b/arch/mips/dts/econet,en7528-reference.dts
+new file mode 100644
+index 00000000..d029f41c
+--- /dev/null
++++ b/arch/mips/dts/econet,en7528-reference.dts
+@@ -0,0 +1,25 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
 +
- static int airoha_snand_set_fifo_op(struct airoha_snand_priv *priv,
- 				    u8 op_cmd, int op_len)
- {
-@@ -254,7 +363,19 @@ static int airoha_snand_set_fifo_op(struct airoha_snand_priv *priv,
- 
- static int airoha_snand_set_cs(struct airoha_snand_priv *priv, u8 cs)
- {
--	return airoha_snand_set_fifo_op(priv, cs, sizeof(cs));
-+	int count = priv->en751221 ? 2 : 1;
-+	int err;
++#include "econet,en7528.dtsi"
 +
-+	/* EN751221 sporadically drops writes unless the CS operation is sent
-+	 * twice. This mirrors the quirk used by the Linux EcoNet port.
-+	 */
-+	while (count--) {
-+		err = airoha_snand_set_fifo_op(priv, cs, sizeof(cs));
-+		if (err)
-+			return err;
-+	}
++/ {
++	model = "EcoNet EN7528 reference board (DASAN H660GM-A)";
++	compatible = "econet,en7528-reference", "econet,en7528";
 +
-+	return 0;
- }
- 
- static int airoha_snand_write_data_to_fifo(struct airoha_snand_priv *priv,
-@@ -367,7 +488,7 @@ static int airoha_snand_set_mode(struct airoha_snand_priv *priv,
- 	case SPI_MODE_DMA:
- 		err = regmap_write(priv->regmap_ctrl,
- 				   REG_SPI_CTRL_NFI2SPI_EN,
--				   SPI_CTRL_MANUAL_EN);
-+				   SPI_CTRL_NFI2SPI_EN);
- 		if (err < 0)
- 			return err;
- 
-@@ -465,17 +586,81 @@ static int airoha_snand_read_data(struct airoha_snand_priv *priv,
- 	return 0;
- }
- 
-+static int airoha_snand_nfi_reset(struct airoha_snand_priv *priv)
-+{
-+	/* Same reset value used by the vendor driver: reset the NFI state
-+	 * machine and flush its FIFO before a DMA transaction.
-+	 */
-+	return regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
-+			    SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+}
++	aliases {
++		serial0 = &uart0;
++	};
 +
-+static int airoha_snand_nfi_clear_intr(struct airoha_snand_priv *priv)
-+{
-+	/* NFI interrupt status bits are write-one-to-clear on this block.
-+	 * Clear stale completion state before arming a new DMA transaction so
-+	 * polling cannot succeed on an old AHB_DONE value.
-+	 */
-+	return regmap_write(priv->regmap_nfi, REG_SPI_NFI_INTR,
-+			    SPI_NFI_ALL_IRQ_EN);
-+}
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++};
 +
-+static int airoha_snand_nfi_clear_done(struct airoha_snand_priv *priv)
-+{
-+	/* READ_FROM_CACHE_DONE and LOAD_TO_CACHE_DONE are also sticky W1C bits.
-+	 * Clear them before DMA so polling observes the current transaction only.
-+	 */
-+	return regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
-+			    SPI_NFI_READ_FROM_CACHE_DONE |
-+			    SPI_NFI_LOAD_TO_CACHE_DONE);
-+}
++&uart0 {
++	status = "okay";
++};
 +
- static int airoha_snand_nfi_init(struct airoha_snand_priv *priv)
- {
- 	int err;
- 
--	/* switch to SNFI mode */
-+	/* Switch to SNFI mode. */
- 	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_NFI_CNFG,
- 			   SPI_NFI_SPI_MODE);
- 	if (err)
- 		return err;
- 
--	/* Enable DMA */
-+	err = airoha_snand_nfi_reset(priv);
-+	if (err)
-+		return err;
++&sfc {
++	status = "okay";
++};
+diff --git a/arch/mips/dts/econet,en7528.dtsi b/arch/mips/dts/econet,en7528.dtsi
+new file mode 100644
+index 00000000..49d04936
+--- /dev/null
++++ b/arch/mips/dts/econet,en7528.dtsi
+@@ -0,0 +1,154 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* EcoNet/Airoha EN7528 (MIPS 1004Kc, little-endian) */
 +
-+	err = airoha_snand_nfi_clear_intr(priv);
-+	if (err)
-+		return err;
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
 +
-+	err = airoha_snand_nfi_clear_done(priv);
-+	if (err)
-+		return err;
++	cpus {
++		#address-cells = <1>;
++		#size-cells = <0>;
 +
-+	/* Mirror the safe vendor configuration used when the SPI NAND uses its
-+	 * internal ECC: disable controller ECC/FDM and byte-swap helpers.  The
-+	 * SPI NAND core still controls on-die ECC, QE, die-select and status
-+	 * handling through normal SPI-MEM commands.
-+	 */
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
-+				 SPI_NFI_DMA_WR_BYTE_SWAP_EN |
-+				 SPI_NFI_DMA_RD_BYTE_SWAP_EN |
-+				 SPI_NFI_ECC_DATA_SOURCE_INV_EN |
-+				 SPI_NFI_HW_ECC_EN |
-+				 SPI_NFI_AUTO_FDM_EN,
-+				 0);
-+	if (err)
-+		return err;
++		cpu@0 {
++			compatible = "mips,mips1004Kc";
++			device_type = "cpu";
++			reg = <0>;
++		};
 +
-+	/* FDM is disabled above, but clear its page-format fields as well so a
-+	 * previous boot stage cannot leave stale vendor ECC layout behind.
-+	 */
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_PAGEFMT,
-+				 SPI_NFI_FDM_NUM | SPI_NFI_FDM_ECC_NUM, 0);
-+	if (err)
-+		return err;
++		cpu@1 {
++			compatible = "mips,mips1004Kc";
++			device_type = "cpu";
++			reg = <1>;
++		};
++	};
 +
-+	/* Enable only the DMA completion interrupt source used by polling. */
- 	return regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_INTR_EN,
- 				  SPI_NFI_ALL_IRQ_EN, SPI_NFI_AHB_DONE_EN);
- }
-@@ -551,6 +736,54 @@ static int airoha_snand_dirmap_create(struct spi_mem_dirmap_desc *desc)
- 	return 0;
- }
- 
++	memory@0 {
++		device_type = "memory";
++		/* Capped below the 0x1fxxxxxx MMIO island; DDR stage
++		 * publishes the true size at runtime (dram_init). */
++		reg = <0x00000000 0x10000000>;
++	};
 +
-+static ssize_t airoha_snand_no_dirmap_write(struct spi_mem_dirmap_desc *desc,
-+					    u64 offs, size_t len, const void *buf)
-+{
-+	struct spi_mem_op op = desc->info.op_tmpl;
-+	int err;
++	/* Dummy clock/phy so xhci-mtk's mandatory clk_get_bulk()/
++	 * generic_phy_get_bulk() succeed without an en7528 SCU clock or
++	 * T-PHY driver; the real USB clock is left ungated by the bootbase
++	 * and the xHCI IPPC block does the port power-up. */
++	usb_clk: usb-clk {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <24000000>;
++	};
 +
-+	op.addr.val = desc->info.offset + offs;
-+	op.data.buf.out = buf;
-+	op.data.nbytes = len;
++	usb_phy: usb-phy {
++		compatible = "nop-phy";
++		#phy-cells = <0>;
++		clocks = <&usb_clk>;	/* nop_phy_probe() calls clk_get_bulk() */
++	};
 +
-+	err = spi_mem_exec_op(desc->slave, &op);
-+	if (err)
-+		return err;
++	soc {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
 +
-+	return op.data.nbytes;
-+}
++		syscon: syscon@1fb00000 {
++			compatible = "econet,en7528-syscon", "syscon";
++			reg = <0x1fb00000 0x1000>;
++		};
 +
-+static bool airoha_snand_dma_write_ok(struct spi_mem_dirmap_desc *desc,
-+					      u64 offs, size_t len)
-+{
-+	/*
-+	 * The NFI DMA path programs a contiguous cache window.  Do not emulate
-+	 * unaligned/short writes by padding the beginning or the end with 0xff:
-+	 * PROGRAM LOAD/RANDOM LOAD operates on the SPI NAND cache, so padding can
-+	 * poison bytes that the caller did not ask us to touch.  This is especially
-+	 * dangerous for boot blocks updated in small chunks.
-+	 *
-+	 * Keep DMA only for exact transfers that the controller can issue without
-+	 * synthetic padding.  Everything else falls back to the manual SPI-MEM path,
-+	 * which sends the exact column address and exact byte count requested by the
-+	 * SPI NAND core.
-+	 */
-+	if (!len)
-+		return false;
++		sfc: spi@1fa10000 {
++			compatible = "airoha,en7581-snand";
++			reg = <0x1fa10000 0x140>,
++			      <0x1fa11000 0x1000>;	/* NFI: driver uses up to 0x55c;
++							 * U-Boot regmap range-checks (Linux
++							 * gets a full page from ioremap). */
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
 +
-+	if (!IS_ALIGNED(desc->info.offset + offs, 16))
-+		return false;
++			spi_nand: nand@0 {
++				compatible = "spi-nand";
++				reg = <0>;
++				spi-max-frequency = <20000000>;
++				spi-tx-bus-width = <1>;
++				spi-rx-bus-width = <2>;
++			};
++		};
 +
-+	if (!IS_ALIGNED(len, 64))
-+		return false;
++		sram@1fa30000 {
++			compatible = "mmio-sram";
++			reg = <0x1fa30000 0x20000>;
++		};
 +
-+	if (len > SPI_NAND_CACHE_SIZE)
-+		return false;
++		dramc: memory-controller@1fb20000 {
++			compatible = "econet,en7528-dramc";
++			reg = <0x1fb20000 0x1000>;
++		};
 +
-+	return true;
-+}
++		/*
++		 * EN7528 Ethernet = same EN751221-family FE/QDMA as the EN7512,
++		 * feeding an MT7530-family DSA switch (GMAC0 -> switch CPU port).
++		 * The airoha_eth U-Boot driver binds "econet,en751221-eth" and
++		 * self-initializes the "mediatek,mt7530" switch.
++		 */
++		ethernet: ethernet@1fb50000 {
++			compatible = "econet,en751221-eth";
++			reg = <0x1fb50000 0x4000>,
++			      <0x1fb54000 0x1000>;
++			reg-names = "fe", "qdma0";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
 +
- static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 					u64 offs, size_t len, void *buf)
- {
-@@ -609,9 +842,15 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err < 0)
- 		return err;
- 
--	/* NFI reset */
--	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
--			   SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+	err = airoha_snand_nfi_reset(priv);
-+	if (err)
-+		goto error_dma_mode_off;
++			gmac0: mac@0 {
++				compatible = "econet,eth-mac";
++				reg = <0>;
++				phy-mode = "trgmii";
++			};
++		};
 +
-+	err = airoha_snand_nfi_clear_intr(priv);
-+	if (err)
-+		goto error_dma_mode_off;
++		switch0: switch@1fb58000 {
++			compatible = "mediatek,mt7530";
++			reg = <0x1fb58000 0x8000>;
++			status = "disabled";
++		};
 +
-+	err = airoha_snand_nfi_clear_done(priv);
- 	if (err)
- 		goto error_dma_mode_off;
- 
-@@ -653,7 +892,7 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_mode_off;
- 
--	dma_addr = dma_map_single(txrx_buf, SPI_NAND_CACHE_SIZE,
-+	dma_addr = snfi_dma_addr(txrx_buf, SPI_NAND_CACHE_SIZE,
- 				  DMA_FROM_DEVICE);
- 
- 	/* set dma addr */
-@@ -721,9 +960,8 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	 * SPI_NFI_READ_FROM_CACHE_DONE bit must be written at the end
- 	 * of dirmap_read operation even if it is already set.
- 	 */
--	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
--				 SPI_NFI_READ_FROM_CACHE_DONE,
--				 SPI_NFI_READ_FROM_CACHE_DONE);
-+	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
-+			   SPI_NFI_READ_FROM_CACHE_DONE);
- 	if (err)
- 		goto error_dma_unmap;
- 
-@@ -736,7 +974,7 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	/* DMA read need delay for data ready from controller to DRAM */
- 	udelay(1);
- 
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
- 
- 	err = airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	if (err < 0)
-@@ -747,7 +985,7 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	return len;
- 
- error_dma_unmap:
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_FROM_DEVICE);
- error_dma_mode_off:
- 	airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	return err;
-@@ -765,22 +1003,10 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	size_t bytes;
- 	int err;
- 
--	if (!priv->dma) {
--		/* simplified version of spi_mem_no_dirmap_write() */
--		struct spi_mem_op op = desc->info.op_tmpl;
--
--		op.addr.val = desc->info.offset + offs;
--		op.data.buf.out = buf;
--		op.data.nbytes = len;
--		err = spi_mem_exec_op(desc->slave, &op);
--		if (err)
--			return err;
--
--		return op.data.nbytes;
--	}
-+	if (!priv->dma || !airoha_snand_dma_write_ok(desc, offs, len))
-+		return airoha_snand_no_dirmap_write(desc, offs, len, buf);
- 
--	/* minimum oob size is 64 */
--	bytes = round_up(offs + len, 64);
-+	bytes = len;
- 
- 	opcode = desc->info.op_tmpl.cmd.opcode;
- 	switch (opcode) {
-@@ -797,19 +1023,21 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 		return -EOPNOTSUPP;
- 	}
- 
--	if (offs > 0)
--		memset(txrx_buf, 0xff, offs);
--	memcpy(txrx_buf + offs, buf, len);
--	if (bytes > offs + len)
--		memset(txrx_buf + offs + len, 0xff, bytes - offs - len);
-+	memcpy(txrx_buf, buf, len);
- 
- 	err = airoha_snand_set_mode(priv, SPI_MODE_DMA);
- 	if (err < 0)
- 		return err;
- 
--	/* NFI reset */
--	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
--			   SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+	err = airoha_snand_nfi_reset(priv);
-+	if (err)
-+		goto error_dma_mode_off;
++		/*
++		 * USB3 host = MediaTek xHCI (same IP as mt8173), driven by
++		 * U-Boot's xhci-mtk. "mac" is the xHCI MMIO, "ippc" the IP port
++		 * control block (a sub-region of the USB T-PHY window). The
++		 * en7528 USB clock is ungated by the bootbase (the kernel node
++		 * carries no clocks either) so &usb_clk is a dummy fixed-clock
++		 * to satisfy clk_get_bulk(); &usb_phy is a nop-phy (the xHCI
++		 * IPPC block powers the ports up itself). USB reset/PHY-reset are
++		 * released by a direct SCU poke in board_late_init (there is no
++		 * DM reset provider in this port — see board.c).
++		 */
++		usb: usb@1fb90000 {
++			compatible = "mediatek,mtk-xhci";
++			reg = <0x1fb90000 0x4000>,
++			      <0x1fa80700 0x100>;
++			reg-names = "mac", "ippc";
++			clocks = <&usb_clk>;
++			phys = <&usb_phy>;
++			/*
++			 * USB2-only: the U3/SerDes path needs SCU/serdes config
++			 * we don't do, and leaving U3 enabled makes xhci-mtk stall
++			 * on an unstable U3 clock (per the Airoha AN7581 USB PHY
++			 * commit). Disable both U3 ports so only USB2 is brought up.
++			 */
++			mediatek,u3p-dis-msk = <0x3>;
++			status = "disabled";
++		};
 +
-+	err = airoha_snand_nfi_clear_intr(priv);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	err = airoha_snand_nfi_clear_done(priv);
- 	if (err)
- 		goto error_dma_mode_off;
- 
-@@ -851,7 +1079,7 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_mode_off;
- 
--	dma_addr = dma_map_single(txrx_buf, SPI_NAND_CACHE_SIZE,
-+	dma_addr = snfi_dma_addr(txrx_buf, SPI_NAND_CACHE_SIZE,
- 				  DMA_TO_DEVICE);
- 
- 	/* set dma addr */
-@@ -887,9 +1115,9 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
--	/* set write addr: zero page offset + descriptor write offset */
-+	/* set write addr: descriptor base column + requested dirmap offset */
- 	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_PG_CTL2,
--			   desc->info.offset);
-+			   desc->info.offset + offs);
- 	if (err)
- 		goto error_dma_unmap;
- 
-@@ -908,6 +1136,9 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
-+	/* Vendor code gives the DMA engine a short settle time after WR_TRIG. */
-+	udelay(1);
-+
- 	err = regmap_read_poll_timeout(priv->regmap_nfi, REG_SPI_NFI_INTR,
- 				       val, (val & SPI_NFI_AHB_DONE), 0,
- 				       1 * MSEC_PER_SEC);
-@@ -925,13 +1156,12 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	 * SPI_NFI_LOAD_TO_CACHE_DONE bit must be written at the end
- 	 * of dirmap_write operation even if it is already set.
- 	 */
--	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
--				 SPI_NFI_LOAD_TO_CACHE_DONE,
--				 SPI_NFI_LOAD_TO_CACHE_DONE);
-+	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_SNF_STA_CTL1,
-+			   SPI_NFI_LOAD_TO_CACHE_DONE);
- 	if (err)
- 		goto error_dma_unmap;
- 
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
- 
- 	err = airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	if (err < 0)
-@@ -940,7 +1170,7 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	return len;
- 
- error_dma_unmap:
--	dma_unmap_single(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
-+	snfi_dma_unmap(dma_addr, SPI_NAND_CACHE_SIZE, DMA_TO_DEVICE);
- error_dma_mode_off:
- 	airoha_snand_set_mode(priv, SPI_MODE_MANUAL);
- 	return err;
-@@ -986,7 +1216,7 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 	err = airoha_snand_write_data(priv, data, op_len,
- 				      op->cmd.buswidth);
- 	if (err)
--		return err;
-+		goto out_cs_high;
- 
- 	/* addr part */
- 	data += op_len;
-@@ -994,7 +1224,7 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 		err = airoha_snand_write_data(priv, data, addr_len,
- 					      op->addr.buswidth);
- 		if (err)
--			return err;
-+			goto out_cs_high;
- 	}
- 
- 	/* dummy */
-@@ -1003,7 +1233,7 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 		err = airoha_snand_write_data(priv, data, dummy_len,
- 					      op->dummy.buswidth);
- 		if (err)
--			return err;
-+			goto out_cs_high;
- 	}
- 
- 	/* data */
-@@ -1017,23 +1247,37 @@ static int airoha_snand_exec_op(struct spi_slave *slave,
- 						      op->data.nbytes,
- 						      op->data.buswidth);
- 		if (err)
--			return err;
-+			goto out_cs_high;
- 	}
- 
--	return airoha_snand_set_cs(priv, SPI_CHIP_SEL_HIGH);
-+out_cs_high:
-+	/* Always release CS.  Leaving CS asserted after a FIFO timeout can lock
-+	 * the shared SPI bus, which is visible on boards using NOR + NAND.
-+	 */
-+	if (airoha_snand_set_cs(priv, SPI_CHIP_SEL_HIGH) && !err)
-+		err = -EIO;
-+
-+	return err;
- }
- 
- static int airoha_snand_probe(struct udevice *dev)
- {
- 	struct airoha_snand_priv *priv = dev_get_priv(dev);
-+	enum airoha_snand_bootstrap type;
-+	u32 boot_trp, snf_nfi_cnfg, sfc_strap;
- 	int ret;
--	u32 sfc_strap;
- 
--	priv->txrx_buf = memalign(ARCH_DMA_MINALIGN, SPI_NAND_CACHE_SIZE);
--	if (!priv->txrx_buf) {
--		dev_err(dev, "failed to alloacate memory for dirmap\n");
-+	void *txrx_buf = memalign(ARCH_DMA_MINALIGN, SPI_NAND_CACHE_SIZE);
-+
-+	if (!txrx_buf) {
-+		dev_err(dev, "failed to allocate memory for dirmap\n");
- 		return -ENOMEM;
- 	}
-+	priv->txrx_buf = snfi_uncached(txrx_buf);
-+	priv->dev = dev;
-+	priv->en751221 = of_machine_is_compatible("econet,en751221") ||
-+			   of_machine_is_compatible("econet,en7512") ||
-+			   of_machine_is_compatible("econet,en7521");
- 
- 	ret = regmap_init_mem_index(dev_ofnode(dev), &priv->regmap_ctrl, 0);
- 	if (ret) {
-@@ -1043,36 +1287,48 @@ static int airoha_snand_probe(struct udevice *dev)
- 
- 	ret = regmap_init_mem_index(dev_ofnode(dev), &priv->regmap_nfi, 1);
- 	if (ret) {
--		dev_err(dev, "failed to init spi nfi regmap\n");
--		return ret;
-+		if (!priv->en751221) {
-+			dev_err(dev, "failed to init spi nfi regmap\n");
-+			return ret;
-+		}
-+
-+		/* EN751221 has no separate NFI/SNFI DMA register bank. */
-+		priv->regmap_nfi = NULL;
- 	}
- 
--	priv->spi_clk = devm_clk_get(dev, "spi");
-+	priv->spi_clk = devm_clk_get_optional(dev, "spi");
- 	if (IS_ERR(priv->spi_clk)) {
--		dev_err(dev, "unable to get spi clk\n");
--		return PTR_ERR(priv->regmap_ctrl);
--	}
--	clk_enable(priv->spi_clk);
-+		ret = PTR_ERR(priv->spi_clk);
-+		if (ret != -ENOSYS) {
-+			dev_err(dev, "unable to get spi clk\n");
-+			return ret;
-+		}
- 
--	priv->dma = 1;
--	if (device_is_compatible(dev, "airoha,en7523-snand")){
--		ret = regmap_read(priv->regmap_ctrl, REG_SPI_CTRL_SFC_STRAP, &sfc_strap);
-+		/* EN751221 does not require the U-Boot clock framework. */
-+		priv->spi_clk = NULL;
-+	}
-+	if (priv->spi_clk) {
-+		ret = clk_enable(priv->spi_clk);
- 		if (ret)
- 			return ret;
--
--		if (!(sfc_strap & 0x04)) {
--			priv->dma = 0;
--			printf("\n"
--				"=== WARNING ======================================================\n"
--				"Detected booting in RESERVED mode (UART_TXD was short to GND).\n"
--				"This mode is known for incorrect DMA reading of some flashes.\n"
--				"Usage of DMA for flash operations will be disabled to prevent data\n"
--				"damage. Unplug your serial console and power cycle the board\n"
--				"to boot with full performance.\n"
--				"==================================================================\n\n");
--		}
- 	}
- 
-+	type = airoha_snand_get_bootstrap(priv, &boot_trp, &snf_nfi_cnfg,
-+					   &sfc_strap);
-+
-+	dev_dbg(priv->dev,
-+		 "bootstrap: %s (boot_trp=0x%08x, snf_nfi_cnfg=0x%08x, sfc_strap=0x%08x)\n",
-+		 airoha_snand_bootstrap_name(type), boot_trp, snf_nfi_cnfg,
-+		 sfc_strap);
-+
-+	/* EN751221 uses only the manual FIFO path. EN7523/AN7581 can use
-+	 * the second register bank for SNFI DMA operations.
-+	 */
-+	priv->dma = !!priv->regmap_nfi;
-+
-+	if (!priv->regmap_nfi)
-+		return 0;
-+
- 	return airoha_snand_nfi_init(priv);
- }
- 
-@@ -1081,6 +1337,10 @@ static int airoha_snand_nfi_set_speed(struct udevice *bus, uint speed)
- 	struct airoha_snand_priv *priv = dev_get_priv(bus);
- 	int ret;
- 
-+	/* EN751221 leaves the SFC clock configured by the previous stage. */
-+	if (!priv->spi_clk)
-+		return 0;
-+
- 	ret = clk_set_rate(priv->spi_clk, speed);
- 	if (ret < 0)
- 		return ret;
-@@ -1108,6 +1368,7 @@ static const struct dm_spi_ops airoha_snfi_spi_ops = {
- };
- 
- static const struct udevice_id airoha_snand_ids[] = {
-+	{ .compatible = "airoha,en7523-spi" },
- 	{ .compatible = "airoha,en7581-snand" },
- 	{ }
- };
-@@ -1120,3 +1381,4 @@ U_BOOT_DRIVER(airoha_snfi_spi) = {
- 	.priv_auto = sizeof(struct airoha_snand_priv),
- 	.probe = airoha_snand_probe,
- };
-+
++		uart0: serial@1fbf0000 {
++			compatible = "econet,en7528-uart";
++			reg = <0x1fbf0000 0x30>;
++			reg-io-width = <4>;
++			reg-shift = <2>;
++			clock-frequency = <2000000>;
++			current-speed = <115200>;
++			status = "disabled";
++		};
++	};
++};
 -- 
 2.53.0
 
