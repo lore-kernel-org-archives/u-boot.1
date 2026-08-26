@@ -1,134 +1,112 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9DF7C5DF97
-	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:10:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8309CC61DBD
+	for <u-boot@archiver.kernel.org>; Wed, 26 Aug 2026 13:42:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B4DB680D63;
-	Wed, 26 Aug 2026 13:10:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4451A6068A;
+	Wed, 26 Aug 2026 13:42:28 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wG9MqOeqGLLV; Wed, 26 Aug 2026 13:42:27 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1787751747;
+	bh=1+b3JY52qYcFJ2KXVQDwH54tvNgl9Fq+WAhgRq/GU7I=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=nWrMDmYdAPJkwrSkEPCaDVwb8LW6+4gtJ75kIwIE5Z2KhyTKtydDw1Bg8svGiKVU7
+	 9741f1SBQI/kabJWKGfKo+vNTSW8AFA26zdvygEs6e4I6QRPITVwfhn+F+x9rTSRR4
+	 rAVV5DlZquvMU+nOUoRlrsTGYPQbBH+ed6PYcS/+keTYgLea6DPamtgvZgAKK7X1Ch
+	 Ii1uIuuioBtQf8AUxkzAgKvfAPAojyzLmWDQ7l9IZtd2mAtqVqsW8U38VaoqmKiA0P
+	 UZaka76owkubSKBsI3S2bfaRgcOZc/Gy8BIuVbdPLh5JBXJ2LclXJ8qXqYcMc+c2OC
+	 txI8AtEUrh+hw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 21F79605AC;
+	Wed, 26 Aug 2026 13:42:27 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id F0E98396
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:10:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id E296E80B6A
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:10:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fQ078xxBnC4x; Wed, 26 Aug 2026 13:09:59 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1787749799;
-	bh=gFWrGVg22ZPjyPDEPWBOf+8xKpqOh0UDmRU+CruAYZ8=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=JX6+E1ZP9CzKCroiDBBJ/v2zXYqJNKmFzKdOM2UYqQwjxGUSJr3eYy2Dw0EAmrIc6
-	 KO/ECvcuBvL1ZjxzISFf97miIl8PDVbDOd5HRRN837D7Vbz9yaMPj2hIQue8/BI0N3
-	 kBBZVE1nFJZ0VwvtAK5XqDqSY/rEU4RNnQbU3C88t9uzgSGMBTrFcBNOG9w7gYeA60
-	 /AcCnABcAvaWczIjd4qcdXImIJx8orQKh9l1UA33Dlmj36cbNnD0Me76iDht6aSzh4
-	 21WbFlr8LDoxjaP5TULP+aSj3YAGVUOUeVDtXgljp/24uyJj4PcwO8wRWUzzcxnLjQ
-	 5FIV3nxeQP16w==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5AFC680CA7;
-	Wed, 26 Aug 2026 13:09:59 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id D64A53C3
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:51 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BD12C406FD
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0VLDRFdpdBQp for <u-boot@lists.u-boot-project.org>;
- Wed, 26 Aug 2026 13:09:50 +0000 (UTC)
+ id m075pUerOKh7 for <u-boot@lists.u-boot-project.org>;
+ Wed, 26 Aug 2026 13:10:37 +0000 (UTC)
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
- envelope-from=jstephan@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=JgLYqIou
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 893C2406C5
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:09:50 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-47fecbb7000so405257f8f.2
- for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:09:50 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::112d; helo=mail-yw1-x112d.google.com;
+ envelope-from=wpopov@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=SBQ/ylZe
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 99C8C80B63
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 13:10:37 +0000 (UTC)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-7ff05e5d009so11362577b3.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 26 Aug 2026 06:10:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1787749789; x=1788354589;
+ d=gmail.com; s=20251104; t=1787749836; x=1788354636;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=gFWrGVg22ZPjyPDEPWBOf+8xKpqOh0UDmRU+CruAYZ8=;
- b=JgLYqIouIl/nf1C3Zro8X9eFL7pUUsOP+JiLV8YdS3el3EjMCx68x3ShfP6H2pKuBb
- 0Ve2OFCWtwpoPKhfUxlt5kXsfY8SZSBxmM5Nq2AZQGADFoySOk7/v/+bbs04cs6PPoD2
- Zs6n6LhejuutCIIGb80ZCOP0h9QR8iXNFSaIuHaiG74tLX9e8LZc5rhTcRfrPvBhh0Z0
- 43aKnAMpcA0uAKDFSl+ptGsCoX5wUhnnOhEMMAaCjF06zKhqR1cp/ZJi2o1QlIAp8oJl
- llQmgJ9piASj/3OlnqJN9FW4Hsek8Dadbk+ceOeZXiFFqHUsEVaiPSZejLo6BwF2sqyA
- pxgg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=1+b3JY52qYcFJ2KXVQDwH54tvNgl9Fq+WAhgRq/GU7I=;
+ b=SBQ/ylZe8ZZC+o/SwruhTN4AZRBOXzxlON6noUINDTVhESZahGr3gBmBEL8SapquVN
+ eYxt6tJwIaJs4nKvSVe4cQyuDdO057my1sbQzIvJbMpzHeA2kazlU6IYP2uugj+4L1ih
+ Lqm298RnK+teiZx4nOJCdE6tsNxwDGUHOE9t61fZVTso3XS8FZ1OjywG8gyRa68ABkuL
+ 6LIv2ZEeLwU25KEA4B9wo6nobAWr53PsBwydQzNhvH9JcW04aGVBIDQM5GO3fV55ozoQ
+ Am1szzBg3yQj2FxraN3EzktSMMU/HfNMkx51AZqQEYB6xEKsiAekYDKYdX9qadXa18Dc
+ dssg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787749789; x=1788354589;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=gFWrGVg22ZPjyPDEPWBOf+8xKpqOh0UDmRU+CruAYZ8=;
- b=sib/cz1gp3trs44sroo0PBOppiutTvbGEnn4QRbbafSxjuVq/1Q0JxtsmhguW1p09k
- RAEGTK44FteZKqiwoFm2yiqjerVAyRPeDmEiJVrY4p4vHzROzJcrwYOOxl39bcajGno/
- qfVHjru99rUFUva4OqGwtlROucG7sriKdZPOd3vV3JRkSgmW/66emcxBojpM/DpzNVC8
- JN+JgBGJapLGrSe11g392oqyVhGdFucgnUJM6825uqcvX32+5hNUUUvDhutiw+DiEoC5
- 2csGnOrVeDgSogJH8FcJkyxTGi5ucNRheMW3A+UqPU7nLIt4wFy08OFQNJ+vpCC2AyPQ
- qnKA==
-X-Gm-Message-State: AFuF++kOrDGIHQdtGFIa4TqR0Z4hXVK/7fsPTYryvnACejQnpvMQSUxu
- Fl4KiLYU63B+Onu85AP+ccLOztFV+wefa0UwzBY0bO6ouq9f6zxfRbeLbUESg+1Jngw=
-X-Gm-Gg: AR+sD10YKkA9BxebYHv80Zrp2NTP6SKFM/wazEk/RKQkM7nIVbraXHAgP8IHGV1i1ny
- 5ODzt4YfwrfAX+pTEGt1uBCYxawVFVZX0lzsjiwJE4+mq4lRh+KDbAxZHAtkXj2/KbxOL9gOsLN
- 7r5Otpq7oYW+WeMQEzp6LYpWKDZPlM2+qBlbKGyLa4p3lE8NvF00FtisxQ0+GLpIUiGh4AtKxV+
- Gwacwya/sqyS8sdDsE82zRCyv5RjcwTywC8vCTbAcr0h5kVhienZA5CUU3P1AmBhj/8p7XQNvEN
- VGQAsDDb04d3rzk8bh8lwyMz4EV4k0+oiHBJ8Z+hlOcwcV5hHA0fN4ZGlYeyuqb2wIZ5LKjdqWW
- Ztef+zKJRcv7ejNXn7qQJqWXsfhqzb4NspOuO1jxF3Itc4bgOpyub4whmjbZJ2HpvAq1Lm6jxLi
- ZQKFOdwGfeH3j04TlDSgky5vNLlK00Os7534/Y/l+m9tl++lvChqjwUACzThwaUcFfFrmXNAoMY
- xUUFC5xy7Ai8txPkyR6+TxvMokxjzlSH1ziEM9/443ln2vHQbnpQksX+sqqy1jusvKrTfsUCQBG
- 8jlFyivJ5Gm2UUhvzOvbqXKt04NfWBG2CZxtM/pgoVkM9w==
-X-Received: by 2002:a05:6000:71d:b0:47f:8d71:210a with SMTP id
- ffacd0b85a97d-482e26e47a3mr7888366f8f.15.1787749788673; 
- Wed, 26 Aug 2026 06:09:48 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
- [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
+ d=1e100.net; s=20251104; t=1787749836; x=1788354636;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=1+b3JY52qYcFJ2KXVQDwH54tvNgl9Fq+WAhgRq/GU7I=;
+ b=ZXfcM3tWGh+rwzFeIDOP+tzBMa1wyaJPN5wImiVNIgKna9Jzj60YVkkpHyQ9c5QJWi
+ tA5RCAlawbRRj/xcX1XlsSWxPgt7zlxmLVjLhyNoBPW8WwUFS8qS9gn9pQkNAnBCXMbb
+ 8byOjBpvnSopy7C82Ec9l4b8U5wBU2OF23F/lnpQ80ukcpZduek7pkXAepXZV7Ap4U9u
+ dcUjbhHltESdL1Ggun7Vjvjai5Lqgb2hqBrIDTeJijaj1I4p3SeWqMjItHMX5i7bXLqg
+ LEe/pX6Esv//kdse9H6OT3x4SO+U2I3NvW3Jo+fABaeNtxXdU7DWELYJH95rOUucCOU9
+ dFbw==
+X-Gm-Message-State: AFuF++nOUJDjFetdQYXBAsBsSE5+xwcYrc2P3+v6Q1JvuA7Aylp326/u
+ 2xiCzfiReUyzDl6QxaAGISUDFCpmBogFnDw9LcXYZzQj8+5qf+qjTvGwW9PzcA==
+X-Gm-Gg: AR+sD13tIc2uGhB6TJSh1hP+Eub6tj5caVXUqOHvCWyNjbd2ZR4VIvdr/nbCFXpgKXU
+ NJTo0fEaGLhYxuqJQjYOQv3OQoBaUHJnP+KgcsrJL/upqrIoY+ntmMwQ3PlYFybyIHw+HTuh/AF
+ wLtVYre2mwBbMZE5nvbr1jgMdUVIyd1Nmr+5Pu+klB0CuMVzw/xqfQlMX58SsEcLzMD4B+TUxKj
+ JNIuPquZ5HiPwadp98/Ws7e09CLGt68kOGeK5gIi+kr0aILnUsl0azLJGB3PzfQvRQFzfKzEIZa
+ +y+jSMPAdgvgb5tCV6BiC0p8HGmYCmfM7IDXfUWvstcz0PkEw04S/RCKmmPqTsQw1blfsWDHj0p
+ HxzVzMQjsLN0AC2SYvMvDESxDWCnXarHrKpsmtH5Ce3GnoAQfF9gt5ejb0zzobBENkQqtkFkM44
+ HW7gI8+uB0DD+sALwURzazqtI/qWy38/zcF1AisF4yb5RW1k1cR0zfBi+KHePiI0CNwQFhYnw+
+X-Received: by 2002:a05:690c:c6cd:b0:81e:a471:e8b0 with SMTP id
+ 00721157ae682-8573f6e6fe4mr25015627b3.21.1787749835884; 
+ Wed, 26 Aug 2026 06:10:35 -0700 (PDT)
+Received: from Abelha2618.autotrac.corp ([187.32.229.113])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482e28f6917sm2635817f8f.35.2026.08.26.06.09.47
+ 956f58d0204a3-66d245524a8sm1307068d50.1.2026.08.26.06.10.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 06:09:47 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 26 Aug 2026 15:09:41 +0200
-Subject: [PATCH v2 14/14] configs: mediatek: mt8188: enable hdmi pipeline
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260826-add-genio-510-and-genio-700-hdmi-v2-14-68ebb1bf17df@baylibre.com>
-References: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
-In-Reply-To: <20260826-add-genio-510-and-genio-700-hdmi-v2-0-68ebb1bf17df@baylibre.com>
+ Wed, 26 Aug 2026 06:10:35 -0700 (PDT)
+From: Wagner Popov dos Santos <wpopov@gmail.com>
 To: u-boot@lists.u-boot-project.org
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Simon Glass <sjg@chromium.org>, Pavlo Yadvychuk <pyadvychuk@baylibre.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Carlo Caione <ccaione@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, Julien Stephan <jstephan@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-X-Mailer: b4 0.15.2
+Cc: trini@konsulko.com,
+	wpopov@gmail.com
+Subject: [PATCH] jffs2: initialize datacrc for inode/dirent entries built from
+ scan
+Date: Wed, 26 Aug 2026 10:10:30 -0300
+Message-ID: <20260826131030.1372296-1-wpopov@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 26 Aug 2026 13:42:25 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,54 +120,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Enable the configuration required for the HDMI pipeline on MT8188
-based boards such as the Genio 510 EVK (MT8370) and Genio 700 EVK
-(MT8390): video, the MediaTek HDMI driver, DM I2C for the DDC bus,
-the PHY uclass and splash screen support.
+jffs2_1pass_build_lists() initializes inode and dirent list entries from
+raw node scanning, but leaves b->datacrc uninitialized in both paths.
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+Later, jffs2_1pass_read_inode() uses b->datacrc to decide whether to
+compute and validate the node data CRC, or to discard the entry as
+CRC_BAD. With an undefined value, behavior is non-deterministic:
+entries may be incorrectly dropped or CRC verification may be skipped.
+
+Initialize b->datacrc to CRC_UNKNOWN for inode and dirent entries created
+in jffs2_1pass_build_lists(), matching the summary-based path behavior.
+
+Signed-off-by: Wagner Popov dos Santos <wpopov@gmail.com>
 ---
- configs/mt8188.config | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ fs/jffs2/jffs2_1pass.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/configs/mt8188.config b/configs/mt8188.config
-index 29e2b3db878..9d7cf13a191 100644
---- a/configs/mt8188.config
-+++ b/configs/mt8188.config
-@@ -9,13 +9,18 @@ CONFIG_TARGET_MT8188=y
- CONFIG_SYS_LOAD_ADDR=0x4c000000
- CONFIG_FIT=y
- CONFIG_BOOTSTD_FULL=y
-+# CONFIG_EXPO is not set
- # CONFIG_BOARD_INIT is not set
- CONFIG_CMD_CLK=y
- CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_BMP=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_CLK=y
-+CONFIG_DM_I2C=y
- CONFIG_MMC_MTK=y
-+CONFIG_PHY=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT8188=y
-@@ -25,6 +30,13 @@ CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_MEDIATEK_HDMI=y
-+CONFIG_SPLASH_SCREEN=y
-+CONFIG_SPLASH_SCREEN_ALIGN=y
-+CONFIG_SPLASH_SOURCE=y
-+CONFIG_VIDEO_BMP_RLE8=y
-+CONFIG_BMP_24BPP=y
- CONFIG_WDT=y
- CONFIG_WDT_MTK=y
- # CONFIG_RANDOM_UUID is not set
-
+diff --git a/fs/jffs2/jffs2_1pass.c b/fs/jffs2/jffs2_1pass.c
+index 137a9585b0b..eb0554f466f 100644
+--- a/fs/jffs2/jffs2_1pass.c
++++ b/fs/jffs2/jffs2_1pass.c
+@@ -1726,6 +1726,7 @@ jffs2_1pass_build_lists(struct part_info * part)
+ 				b->offset = (u32)part->offset + ofs;
+ 				b->version = node->i.version;
+ 				b->ino = node->i.ino;
++				b->datacrc = CRC_UNKNOWN;
+ 				if (max_totlen < node->u.totlen)
+ 					max_totlen = node->u.totlen;
+ 				break;
+@@ -1764,6 +1765,7 @@ jffs2_1pass_build_lists(struct part_info * part)
+ 				b->offset = (u32)part->offset + ofs;
+ 				b->version = node->d.version;
+ 				b->pino = node->d.pino;
++				b->datacrc = CRC_UNKNOWN;
+ 				if (max_totlen < node->u.totlen)
+ 					max_totlen = node->u.totlen;
+ 				counterN++;
 -- 
-2.54.0
+2.43.0
 
